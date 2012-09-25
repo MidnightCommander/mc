@@ -207,14 +207,12 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
 
     {
         quick_widget_t quick_widgets[] = {
-        /* *INDENT-OFF* */
+            /* *INDENT-OFF* */
             QUICK_LABELED_INPUT (p_text, input_label_above, def_text, flags, histname, &my_str,
                                  NULL),
-            QUICK_START_BUTTONS (TRUE, TRUE),
-                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
-        /* *INDENT-OFF* */
+            /* *INDENT-ON* */
         };
 
         quick_dialog_t qdlg = {

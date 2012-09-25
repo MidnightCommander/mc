@@ -206,9 +206,7 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
                 QUICK_CHECKBOX (N_("&All charsets"), &edit_search_options.all_codepages, NULL),
 #endif
             QUICK_STOP_COLUMNS,
-            QUICK_START_BUTTONS (TRUE, TRUE),
-                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
             /* *INDENT-ON* */
         };

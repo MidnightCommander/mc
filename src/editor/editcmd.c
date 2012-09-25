@@ -467,9 +467,7 @@ edit_get_save_file_as (WEdit * edit)
             QUICK_SEPARATOR (TRUE),
             QUICK_LABEL (N_("Change line breaks to:"), NULL),
             QUICK_RADIO (LB_NAMES, lb_names, (int *) &cur_lb, NULL),
-            QUICK_START_BUTTONS (TRUE, TRUE),
-                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
             /* *INDENT-ON* */
         };
@@ -1608,9 +1606,7 @@ edit_save_mode_cmd (void)
                          &edit_save_mode_input_id),
             QUICK_SEPARATOR (TRUE),
             QUICK_CHECKBOX (N_("Check &POSIX new line"), &option_check_nl_at_eof, NULL),
-            QUICK_START_BUTTONS (TRUE, TRUE),
-                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
             /* *INDENT-ON* */
         };
@@ -3310,9 +3306,7 @@ edit_mail_dialog (WEdit * edit)
         QUICK_LABELED_INPUT (N_("Copies to"), input_label_above,
                              mail_cc_last != NULL ? mail_cc_last  : "", 0,
                              "mail-dlg-input", &tmail_cc, NULL),
-        QUICK_START_BUTTONS (TRUE, TRUE),
-            QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-            QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+        QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
         /* *INDENT-ON* */
     };

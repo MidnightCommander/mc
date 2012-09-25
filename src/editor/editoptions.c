@@ -177,9 +177,7 @@ edit_options_dialog (Dlg_head * h)
                                          wrap_length, 0, "edit-word-wrap", &p, NULL),
                 QUICK_STOP_GROUPBOX,
             QUICK_STOP_COLUMNS,
-            QUICK_START_BUTTONS (TRUE, TRUE),
-                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
             /* *INDENT-ON* */
         };

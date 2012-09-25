@@ -464,9 +464,7 @@ panel_listing_box (WPanel * panel, char **userp, char **minip, int *use_msformat
             QUICK_CHECKBOX (N_("User &mini status"), &mini_user_status, &mini_user_status_id),
             QUICK_INPUT (panel->user_status_format[panel->list_type], INPUT_COMPLETE_DEFAULT,
                          "mini_input", &mini_user_format, &mini_user_format_id),
-            QUICK_START_BUTTONS (TRUE, TRUE),
-                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
             /* *INDENT-ON* */
         };
@@ -544,9 +542,7 @@ sort_box (panel_sort_info_t * info)
                 QUICK_CHECKBOX (N_("Case sensi&tive"), &info->case_sensitive, NULL),
                 QUICK_CHECKBOX (N_("&Reverse"), &info->reverse, NULL),
             QUICK_STOP_COLUMNS,
-            QUICK_START_BUTTONS (TRUE, TRUE),
-                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
             /* *INDENT-ON* */
         };
@@ -585,9 +581,7 @@ confirm_box (void)
                         &confirm_directory_hotlist_delete, NULL),
         QUICK_CHECKBOX (N_("Confirmation|&History cleanup"),
                         &mc_global.widget.confirm_history_cleanup, NULL),
-        QUICK_START_BUTTONS (TRUE, TRUE),
-            QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-            QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+        QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
         /* *INDENT-ON* */
     };
@@ -622,9 +616,7 @@ display_bits_box (void)
         QUICK_RADIO (4, display_bits_str, &current_mode, NULL),
         QUICK_SEPARATOR (TRUE),
         QUICK_CHECKBOX (N_("F&ull 8 bits input"), &new_meta, NULL),
-        QUICK_START_BUTTONS (TRUE, TRUE),
-            QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-            QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+        QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
         /* *INDENT-ON* */
     };
@@ -686,9 +678,7 @@ display_bits_box (void)
             QUICK_STOP_COLUMNS,
             QUICK_SEPARATOR (TRUE),
                 QUICK_CHECKBOX (N_("F&ull 8 bits input"), &new_meta, NULL),
-            QUICK_START_BUTTONS (TRUE, TRUE),
-                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
             /* *INDENT-ON* */
         };
@@ -806,9 +796,7 @@ configure_vfs (void)
             QUICK_CHECKBOX (N_("Use passive mode over pro&xy"),
                             &ftpfs_use_passive_connections_over_proxy, NULL),
 #endif /* ENABLE_VFS_FTP */
-            QUICK_START_BUTTONS (TRUE, TRUE),
-                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
             /* *INDENT-ON* */
         };
@@ -894,9 +882,7 @@ symlink_dialog (const vfs_path_t * existing_vpath, const vfs_path_t * new_vpath,
             QUICK_SEPARATOR (FALSE),
             QUICK_LABELED_INPUT (N_("Symbolic link filename:"), input_label_above,
                                  new, 0, "input-1", ret_new, NULL),
-            QUICK_START_BUTTONS (TRUE, TRUE),
-                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
             /* *INDENT-ON* */
         };
@@ -1012,9 +998,7 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain, c
                 QUICK_SEPARATOR (FALSE),
                 QUICK_INPUT ("", 1, "auth_password", &ret_password, NULL),
             QUICK_STOP_COLUMNS,
-            QUICK_START_BUTTONS (TRUE, TRUE),
-                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
             /* *INDENT-ON* */
         };

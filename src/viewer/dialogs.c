@@ -101,11 +101,9 @@ mcview_dialog_search (mcview_t * view)
                 QUICK_CHECKBOX (N_("&All charsets"), &mcview_search_options.all_codepages, NULL),
 #endif
             QUICK_STOP_COLUMNS,
-            QUICK_START_BUTTONS (TRUE, TRUE),
-                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
-            /* *INDENT-ON* */
+            QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
+            /* *INDENT-ON* */
         };
 
         quick_dialog_t qdlg = {
@@ -202,9 +200,7 @@ mcview_dialog_goto (mcview_t * view, off_t * offset)
             QUICK_INPUT (INPUT_LAST_TEXT, 0, MC_HISTORY_VIEW_GOTO, &exp, NULL),
             QUICK_RADIO (num_of_types, (const char **) mc_view_goto_str, (int *) &current_goto_type,
                          NULL),
-            QUICK_START_BUTTONS (TRUE, TRUE),
-                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
             /* *INDENT-ON* */
         };

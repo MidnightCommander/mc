@@ -2363,9 +2363,7 @@ dview_diff_options (WDiff * dview)
             QUICK_CHECKBOX (N_("Strip &trailing carriage return"), &dview->opt.strip_trailing_cr,
                             NULL),
         QUICK_STOP_GROUPBOX,
-        QUICK_START_BUTTONS (TRUE, TRUE),
-            QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
-            QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+        QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
         /* *INDENT-ON* */
     };

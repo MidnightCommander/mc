@@ -197,6 +197,11 @@
     }                                                                           \
 }
 
+#define QUICK_BUTTONS_OK_CANCEL                                                 \
+    QUICK_START_BUTTONS (TRUE, TRUE),                                           \
+        QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),                          \
+        QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL)
+
 #define QUICK_END                                                               \
 {                                                                               \
     .widget_type = quick_end,                                                   \
