@@ -4069,6 +4069,13 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         if (option_cursor_beyond_eol && edit->over_col > 0)
             edit_insert_over (edit);
         edit_paste_from_X_buf_cmd (edit);
+        if (!option_persistent_selections && edit->mark2 >= 0)
+        {
+            if (edit->column_highlight)
+                edit_push_undo_action (edit, COLUMN_ON);
+            edit->column_highlight = 0;
+            edit_mark_cmd (edit, TRUE);
+        }
         break;
     case CK_History:
         edit_paste_from_history (edit);
