@@ -683,24 +683,28 @@ dlg_set_position (Dlg_head * h, int y1, int x1, int y2, int x2)
             int cols = c->cols;
             int lines = c->lines;
 
-            if ((c->pos_flags & WPOS_KEEP_LEFT) && (c->pos_flags & WPOS_KEEP_RIGHT))
+            if ((c->pos_flags & WPOS_CENTER_HORZ) != 0)
+                x = wh->x + (wh->cols - c->cols) / 2;
+            else if ((c->pos_flags & WPOS_KEEP_LEFT) != 0 && (c->pos_flags & WPOS_KEEP_RIGHT) != 0)
             {
                 x += shift_x;
                 cols += scale_x;
             }
-            else if (c->pos_flags & WPOS_KEEP_LEFT)
+            else if ((c->pos_flags & WPOS_KEEP_LEFT) != 0)
                 x += shift_x;
-            else if (c->pos_flags & WPOS_KEEP_RIGHT)
+            else if ((c->pos_flags & WPOS_KEEP_RIGHT) != 0)
                 x += shift_x + scale_x;
 
-            if ((c->pos_flags & WPOS_KEEP_TOP) && (c->pos_flags & WPOS_KEEP_BOTTOM))
+            if ((c->pos_flags & WPOS_CENTER_VERT) != 0)
+                y = wh->y + (wh->lines - c->lines) / 2;
+            else if ((c->pos_flags & WPOS_KEEP_TOP) != 0 && (c->pos_flags & WPOS_KEEP_BOTTOM) != 0)
             {
                 y += shift_y;
                 lines += scale_y;
             }
-            else if (c->pos_flags & WPOS_KEEP_TOP)
+            else if ((c->pos_flags & WPOS_KEEP_TOP) != 0)
                 y += shift_y;
-            else if (c->pos_flags & WPOS_KEEP_BOTTOM)
+            else if ((c->pos_flags & WPOS_KEEP_BOTTOM) != 0)
                 y += shift_y + scale_y;
 
             widget_set_size (c, y, x, lines, cols);
@@ -865,14 +869,21 @@ set_idle_proc (Dlg_head * d, int enable)
 unsigned long
 add_widget_autopos (Dlg_head * h, void *w, widget_pos_flags_t pos_flags, const void *before)
 {
+    Widget *wh = WIDGET (h);
     Widget *widget = WIDGET (w);
 
     /* Don't accept 0 widgets */
     if (w == NULL)
         abort ();
 
-    widget->x += WIDGET (h)->x;
-    widget->y += WIDGET (h)->y;
+    if ((pos_flags & WPOS_CENTER_HORZ) != 0)
+        widget->x = (wh->cols - widget->cols) / 2;
+    widget->x += wh->x;
+
+    if ((pos_flags & WPOS_CENTER_VERT) != 0)
+        widget->y = (wh->lines - widget->lines) / 2;
+    widget->y += wh->y;
+
     widget->owner = h;
     widget->pos_flags = pos_flags;
     widget->id = h->widget_id++;
@@ -941,7 +952,7 @@ add_widget_autopos (Dlg_head * h, void *w, widget_pos_flags_t pos_flags, const v
 unsigned long
 add_widget (Dlg_head * h, void *w)
 {
-    return add_widget_autopos (h, w, WPOS_KEEP_LEFT | WPOS_KEEP_TOP,
+    return add_widget_autopos (h, w, WPOS_KEEP_DEFAULT,
                                h->current != NULL ? h->current->data : NULL);
 }
 
@@ -950,7 +961,7 @@ add_widget (Dlg_head * h, void *w)
 unsigned long
 add_widget_before (Dlg_head * h, void *w, void *before)
 {
-    return add_widget_autopos (h, w, WPOS_KEEP_LEFT | WPOS_KEEP_TOP, before);
+    return add_widget_autopos (h, w, WPOS_KEEP_DEFAULT, before);
 }
 
 /* --------------------------------------------------------------------------------------------- */
