@@ -8,11 +8,16 @@
 .TH MC 1 "%DATE_OF_MAN_PAGE%" "MC Versión %DISTR_VERSION%" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH "NOMBRE"
-mc \- Entorno visual para sistemas tipo Unix.
+mc \- entorno visual para sistemas tipo Unix.
 .\"SKIP_SECTION"
-.SH "SINTAXIS"
+.SH "SINOPSIS"
 .B mc
-[\-abcCdfhPstuUVx] [\-l reg] [dir1 [dir2]] [\-e [arch]] [\-v arch]
+.RB [ \-abcCdfFhPstuUVx "] [" \-l
+.IR reg "] [" dir1 " [" dir2 ]]
+.RB [ \-e
+.RI [ arch "] " ... ]
+.RB [ \-v
+.IR arch ]
 .\"NODE "DESCRIPTION"
 .SH "DESCRIPCIÓN"
 "Midnight Commander" (Comandante de Medianoche) es
@@ -42,7 +47,7 @@ Usado para especificar un juego de colores diferentes desde la línea de
 Colores\&. 
 .\"Colors"
 .TP
-.I \-S arg
+.I \-S arg, \-\-skin=arg
 Permite elegir un skin o apariencia para mc.  La configuración de las
 características de visualización (colores, líneas, etc.) se explica
 detalladamente en la sección
@@ -61,12 +66,31 @@ página de manual de
 .I \-f, \-\-datadir
 Muestra las rutas de búsqueda compiladas para archivos de Midnight Commander.
 .TP
+.I \-F, \-\-datadir\-info
+Muestra información más extensa sobre las rutas de búsqueda compiladas
+en Midnight Commander.
+.TP
+.I \-\-configure\-options
+Muestra opciones de configuración compiladas.
+.TP
 .I \-k, \-\-resetsoft
-Resetea softkeys a su valor por defecto según la base de datos de termcap/terminfo.
-Sólo útil en terminales HP cuando la función keys no funciona.
+Restablece las softkeys a su valor por defecto según la base de datos de
+termcap/terminfo.  Solo útil en terminales HP cuando las teclas de función
+no funcionan.
+.TP
+.I \-K arch, \-\-keymap=arch
+Carga desde un archivo la configuración de teclas para la línea de órdenes.
+.TP
+.I \-\-nokeymap
+No cargar asociaciones de teclas desde ningún archivo, utilizar las
+teclas nativas del sistema.
 .TP
 .I \-l reg, \-\-ftplog=reg
 Guarda el diálogo FTPfs con el servidor en el archivo.
+.TP
+.I \-D N, \-\-debuglevel=N
+Guarda el nivel de depuración para el istema de archivos virtual SMB.
+N puede estar en el rango 0\-10.
 .TP
 .I \-P arch, \-\-printwd=arch
 Al salir del programa, Midnight Commander registrará el último
@@ -84,20 +108,62 @@ como un alias para el correspondiente guión de shell.
 .I \-s, \-\-slow
 Activa el modo para terminales lentos. En este modo el programa no
 dibuja bordes con líneas de caracteres y desactiva el modo detallado.
+Si no se rellana la sección [Lines] el marco pseudo-gráfico estará
+formado por espacios; en caso contrario el marco se contruye con
+caracteres de texto según los parámetros siguientes:
+.TP
+.B lefttop
+esquina superior izquierda
+.TP
+.B righttop
+esquina superior derecha
+.TP
+.B centertop
+cruz superior central
+.TP
+.B centerbottom
+cruz inferior central
+.TP
+.B leftbottom
+esquina inferior izquierda
+.TP
+.B rightbottom
+esquina inferior derecha
+.TP
+.B leftmiddle
+cruz central izquierda
+.TP
+.B rightmiddle
+cruz central derecha
+.TP
+.B centermiddle
+cruz central
+.TP
+.B horiz
+línea horizontal por defecto
+.TP
+.B vert
+línea vertical por defecto
+.TP
+.B thinhoriz
+línea horizontal fina
+.TP
+.B thinvert
+línea vertical fina
 .TP
 .I \-t, \-\-termcap
-Usado sólo si el código fue compilado con Slang y terminfo: hace que
+Usado solo si el código fue compilado con Slang y terminfo: hace que
 Midnight Commander use el valor de la variable de entorno
 .B TERMCAP
 para obtener la información del terminal, en vez de la base de datos de
 terminales del sistema.
 .TP
 .I \-u, \-\-nosubshell
-Deshabilita el uso de shell concurrente (sólo tiene sentido si este
+Deshabilita el uso de shell concurrente (solo tiene sentido si este
 Midnight Commander fue construido con soporte de shell concurrente).
 .TP
 .I \-U, \-\-subshell
-Habilita el uso de shell concurrente (sólo tiene sentido si este
+Habilita el uso de shell concurrente (solo tiene sentido si este
 Midnight Commander fue construido con soporte de subshell opcional).
 .TP
 .I \-v arch, \-\-view=arch
@@ -190,18 +256,6 @@ se ejecuta el programa especificado.
 Además, es posible ejecutar los comandos asignados a las teclas de función
 pulsando con el ratón sobre las etiquetas de la línea inferior de la pantalla.
 .PP
-Si se pulsa un botón del ratón sobre la línea del borde superior del
-panel de directorio, se sube una página hacia atrás. Asimismo, una pulsación
-sobre la línea inferior baja una página hacia adelante. Éste
-procedimiento vale también para el
-.\"LINK2"
-Visor de Ayuda
-.\"Contents"
-y el
-.\"LINK2"
-Árbol de Directorios\&.
-.\"Directory Tree"
-.PP
 El valor por defecto de auto repetición para los botones del ratón es 400
 milisegundos. Este valor se puede modificar editando el archivo
 .\"LINK2"
@@ -240,6 +294,14 @@ significa mantener pulsada la tecla de Mayúsculas (o Shift) y teclear
 Todas las líneas de entrada en Midnight Commander usan una aproximación
 a las asociaciones de teclas del editor GNU Emacs.
 .PP
+Se pueden redefinir las asociaciones de las teclas. El resto de los
+comportamientos de las teclas que se describen aquí hacen referencia al
+comportamiento original. Para más información,
+véase la sección sobre
+.\"LINK2"
+.IR "redefinición de teclas" .
+.\"Keys_redefine"
+.PP
 Hay bastantes secciones que hablan acerca de las teclas. Las siguientes
 son las más importantes.
 .PP
@@ -274,9 +336,55 @@ Teclas de línea de Entrada
 .\"Input Line Keys"
 Son usadas para editar líneas de entrada. Esto implica la línea de órdenes
 y las líneas de entrada en las ventanas de preguntas.
+.\"NODE "  Keys_redefine"
+.SH "  Redefinición de teclas"
+La función de ciertas teclas se puede alterar a partir de un mapa de teclado
+almacenado en un archivo externo. Inicialmente el programa asigna esas funciones
+según el mapa definido en el código fuente. Posteriormente se cargan siempre
+los archivos
+.B %prefix%/share/mc/mc.keymap
+y
+.BR %sysconfdir%/mc/mc.keymap ,
+reasignando en el orden marcado las definiciones anteriores. Se cargan después
+posibles mapas de teclado creados por el usuario atendiendo por orden de prioridad
+a:
+.IP
+.br
+1) Opción de ejecución en línea de órdenes
+.B \-K \<mapa\>
+o
+.B \-\-keymap=\<mapa\>
+.br
+2) Variable de entorno
+.B MC_KEYMAP
+.br
+3) Parámetro
+.B keymap
+en la sección
+.B [Midnight\-Commander]
+del archivo de configuración.
+.br
+4) Archivo
+.B ~/.config/mc/mc.keymap
+.br
+.PP
+La opción de línea de órdenes, la variable de entorno y el parámetro en el
+archivo de configuración pueden proporcionar la ruta absoluta al archivo
+de mapa de teclado (con o sin la extensión .keymap). En caso contrario
+se procede a realizar una búsqueda por directorios hasta encontrarlo en:
+.IP
+.br
+1)
+.B ~/.config/mc
+.br
+2)
+.B %sysconfdir%/mc/
+.br
+3)
+.B %prefix%/share/mc/
 .\"NODE "  Miscellaneous Keys"
 .SH "  Otras Teclas"
-Tienen cabida aquí algunas teclas que no encajan completamente en ninguna de las anteriores categorías:
+Se incluyen aquí las teclas que no encajan en ninguna categoría concreta:
 .PP
 .B Intro.
 Si hay algún texto en la línea de órdenes (la de la parte inferior de
@@ -298,13 +406,13 @@ redibuja toda la pantalla de Midnight Commander.
 .TP
 .B Ctrl\-x c
 .\"LINK2"
-Cambiar Permisos
+Cambiar permisos
 .\"Chmod"
 de un archivo o un conjunto de archivos marcados.
 .TP
 .B Ctrl\-x o
 .\"LINK2"
-Cambiar Dueño
+Cambiar dueño
 .\"Chown"
 del archivo actual o de los archivos marcados.
 .TP
@@ -312,7 +420,14 @@ del archivo actual o de los archivos marcados.
 crea enlaces.
 .TP
 .B Ctrl\-x s
-crea enlaces simbólicos.
+crea enlaces simbólicos con rutas absolutas.
+.TP
+.B Ctrl\-x v
+crea enlaces simbólicos con rutas relativas. Para más información
+sobre enlaces simbólicos véase la sección
+.\"LINK2"
+Menú de Archivo\&.
+.\"File Menu"
 .TP
 .B Ctrl\-x Ctrl\-s
 edita enlaces simbólicos.
@@ -326,30 +441,30 @@ cambia el panel opuesto al modo de vista rápida.
 .B Ctrl\-x !
 ejecuta
 .\"LINK2"
-Búsquedas Externas\&.
+búsquedas externas\&.
 .\"External panelize"
 .TP
 .B Ctrl\-x h
 añade el sitio actual a la lista de
 .\"LINK2"
-Favoritos\&.
+favoritos\&.
 .\"Hotlist"
 .TP
 .B Alt\-!
 ejecuta una orden del sistema y muestra su salida en el
 .\"LINK2"
-Visor de Archivos Interno\&.
+visor de archivos\&.
 .\"Internal File Viewer"
 .TP
 .B Alt\-?
 .\"LINK2"
-Buscar Archivo\&.
+buscar archivo\&.
 .\"Find File"
 .TP
 .B Alt\-c
 permite
 .\"LINK2"
-Cambiar de Directorio\&.
+cambiar de directorio\&.
 .\"Quick cd"
 .TP
 .B Ctrl\-o
@@ -381,7 +496,7 @@ cambia el panel actual. El panel activo deja de serlo y el no activo
 pasa a ser el nuevo panel activo. La barra de selección se mueve del
 antiguo panel al nuevo, desaparece de aquel y aparece en éste.
 .TP
-.B Insertar, C\-t
+.B Insertar, Ctrl\-t
 para marcar archivos (y/o directorios) como seleccionados podemos usar
 la tecla
 .I insertar
@@ -389,7 +504,7 @@ la tecla
 basta repetir la operación sobre los archivos y/o directorios antes
 marcados.
 .TP
-.B M\-e
+.B Alt\-e
 permite mostrar nombres en el panel con otra codificación de caracteres.
 Los nombres se convierten a la codificación del sistema para mostrarlos.
 Para desactivar esta recodificación basta seleccionar la entrada (..)
@@ -425,7 +540,7 @@ método no funciona directamente.
 .B + \ (más)
 usado para seleccionar (marcar) un grupo de archivos. Midnight Commander
 ofrecerá distintas opciones.  Indicando
-.I Sólo archivos
+.I Solo archivos
 los directorios no se seleccionan.  Con los
 .I Caracteres Comodín
 habilitados, se pueden introducir expresiones regulares del tipo empleado en
@@ -655,7 +770,7 @@ elimina el texto desde el cursor hasta el final de la línea.
 usaremos esas teclas para desplazarnos a través del historial de comandos. Alt\-p nos lleva
 a la última entrada, Alt\-n nos sitúa en la siguiente.
 .TP
-.B Alt\-Ctrl\-h, Alt\-Borrar
+.B Ctrl\-Alt\-h, Alt\-Borrar
 borra la palabra anterior.
 .TP
 .B Alt\-Tab
@@ -719,7 +834,7 @@ y
 En modo completo se muestra el nombre del archivo, su tamaño y la fecha
 y hora de modificación.
 .PP
-Breve muestra sólo los nombres de archivo, en dos columnas. Esto permite
+Breve muestra solo los nombres de archivo, en dos columnas. Esto permite
 ver el doble de entradas que en los otros modos.
 .PP
 El modo largo es similar a la salida de la orden
@@ -1023,7 +1138,7 @@ el otro aún seguirá intacto. Es muy difícil advertir que los archivos
 representan la misma imagen. Usaremos estos enlaces cuando no
 necesitemos saberlo.
 .PP
-Un enlace simbólico es, en cambio, sólo una referencia al nombre del
+Un enlace simbólico es, en cambio, solo una referencia al nombre del
 archivo original.  Si se borra el archivo original, el enlace simbólico
 queda sin utilidad. Es bastante fácil advertir que los archivos
 representan la misma imagen. Midnight Commander muestra un símbolo "@"
@@ -1076,7 +1191,7 @@ si tenemos llena la línea de órdenes y queremos hacer un cd a algún lugar.
 .PP
 Se utiliza para seleccionar (marcar) un grupo de archivos.  Midnight Commander
 ofrecerá distintas opciones.  Indicando
-.I Sólo archivos
+.I Solo archivos
 los directorios no se seleccionan.  Con los
 .I Caracteres Comodín
 habilitados, se pueden introducir expresiones regulares del tipo empleado en
@@ -1131,17 +1246,17 @@ permite buscar un archivo específico. El comando "Intercambiar paneles"
 intercambia los contenidos de los dos paneles de directorios.
 .PP
 El comando "Activa/desactiva paneles" muestra la salida del último
-comando del shell. Esto funciona sólo en xterm y en una consola Linux y
+comando del shell. Esto funciona solo en xterm y en una consola Linux y
 FreeBSD.
 .PP
 El comando Compara directorios (Ctrl\-x d) compara los paneles de directorio
 uno con el otro. Podemos usar el comando Copiar (F5) para hacer ambos
 paneles idénticos. Hay tres métodos de comparación. El método rápido
-compara sólo el tamaño de archivo y la fecha. El método completo realiza
+compara solo el tamaño de archivo y la fecha. El método completo realiza
 una comparación completa octeto a octeto. El método completo no está disponible si
 la máquina no soporta la llamada de sistema mmap(2). El método de comparación
-de sólo tamaño sólo compara los tamaños de archivo y no chequea los
-contenidos o las fechas, sólo chequea los tamaños de los archivos.
+de solo tamaño solo compara los tamaños de archivo y no chequea los
+contenidos o las fechas, solo chequea los tamaños de los archivos.
 .PP
 El comando Histórico de comandos muestra una lista
 de los comandos escritos. El comando seleccionado es copiado a la línea de órdenes.
@@ -1214,7 +1329,7 @@ para seleccionar un directorio. Todos los directorios conocidos serán mostrados
 .PP
 En el modo de navegación dinámico podemos usar las teclas del cursor Arriba y Abajo
 para seleccionar el directorio hermano, la tecla Izquierda para situarnos en el directorio
-padre, y la tecla Derecha para situarnos en el directorio hijo. Sólo los directorios
+padre, y la tecla Derecha para situarnos en el directorio hijo. Solo los directorios
 padre, hijo y hermano son mostrados, el resto son dejados fuera. La figura de árbol cambia
 dinámicamente conforme nos desplazamos sobre ella.
 .PP
@@ -1245,7 +1360,7 @@ activar el modo de búsqueda pulsando
 .IR Ctrl\-s .
 La cadena de búsqueda es mostrada en la línea de mini\-estado.
 .PP
-Las siguientes acciones están disponibles sólo en el árbol de directorios. No
+Las siguientes acciones están disponibles solo en el árbol de directorios. No
 son funcionales en la vista de árbol.
 .PP
 .B F1 (Ayuda).
@@ -1314,7 +1429,7 @@ Debemos valorar la utilización de
 .\"LINK2"
 Búsquedas externas
 .\"External panelize"
-en ciertas situaciones. La utilidad Buscar archivos es sólo para consultas
+en ciertas situaciones. La utilidad Buscar archivos es solo para consultas
 simples, pero con Búsquedas externas se pueden hacer exploraciones tan
 complejas como queramos.
 .\"NODE "    External panelize"
@@ -1428,14 +1543,14 @@ debe incluir todas las acciones.
 .\"NODE "    Background jobs"
 .SH "    Trabajos en Segundo Plano"
 Nos permite controlar el estado de cualquier proceso de Midnight Commander
-en segundo plano (sólo las operaciones de copiar y mover archivos pueden realizarse
+en segundo plano (solo las operaciones de copiar y mover archivos pueden realizarse
 en segundo plano). Podemos parar, reiniciar y eliminar procesos en segundo plano desde
 aquí.
 .\"NODE "    Menu File Edit"
 .SH "    Edición del Archivo de Menú"
 El menú de usuario es un menú de acciones útiles que puede ser personalizado
 por el usuario. Cuando accedemos al menú de usuario se utiliza, si existe,
-el archivo .mc.menu del directorio actual, pero sólo si es propiedad del
+el archivo .mc.menu del directorio actual, pero solo si es propiedad del
 usuario o del superusuario y no es modificable por todos.
 Si no se encuentra allí el archivo, se intenta de la misma manera con ~/.config/mc/menu,
 y si no, mc utiliza el menú por defecto para todo el sistema
@@ -1654,7 +1769,7 @@ Hacer avanzar la barra de selección tras marcar un archivo (con la tecla
 .PP
 .I Menús Desplegables.
 Mostrar el contenido de los menús desplegables inmediatamente al presionar
-F9. Si está desactivada sólo la barra de títulos de los menús está
+F9. Si está desactivada solo la barra de títulos de los menús está
 visible, y será necesario abrir cada menú con las flechas de movimiento
 o con las teclas de acceso rápido.
 .PP
@@ -1667,9 +1782,9 @@ de archivos a continuación.
 .I Recarga Rápida de Directorios.
 Hace que Midnight Commander emplee una pequeña trampa al determinar
 si los contenidos del directorio han cambiado. El truco consiste en
-recargar el directorio sólo si el inodo del directorio ha cambiado. Las
+recargar el directorio solo si el inodo del directorio ha cambiado. Las
 recargas se producen si se crean o borrar archivos, pero si lo que cambia
-es sólo el inodo de un archivo del directorio (cambios en el tamaño,
+es solo el inodo de un archivo del directorio (cambios en el tamaño,
 permisos, propietario, etc.) la pantalla no se actualiza. En esos casos,
 si tenemos la opción activada, será preciso forzar la recarga de forma
 manual (con Ctrl\-r).
@@ -1686,8 +1801,8 @@ utilizando la consola Linux o FreeBSD o un xterm, podremos ver la salida
 del comando pulsando
 .IR Ctrl\-o .
 .PP
-.I Sólo en Terminales Tontas.
-Obtendremos el mensaje de pausa sólo en terminales que no sean capaces
+.I Solo en Terminales Tontas.
+Obtendremos el mensaje de pausa solo en terminales que no sean capaces
 de mostrar la salida del último comando ejecutado (en realidad, cualquier
 terminal que no sea un xterm o una consola de Linux).
 .PP
@@ -1844,7 +1959,7 @@ sobreescritura, ejecución pulsando intro y salir del programa.
 .SH "    Juego de caracteres"
 Esta opción permite configurar el conjunto de caracteres visibles en la
 pantalla.  Éste puede ser 7\-bits si nuestro terminal/curses soporta
-sólo siete bits de salida, alguna de las tablas del estándar ISO\-8859 y
+solo siete bits de salida, alguna de las tablas del estándar ISO\-8859 y
 diversas codificaciones comunes de PC con ocho bits por carácter, o UTF\-8
 para Unicode.
 .PP
@@ -2043,7 +2158,7 @@ Por ejemplo, podríamos asignar a nuestra variable
 .B CDPATH
 el valor ~/src:/usr/src, lo que nos permitiría cambiar de directorio
 a cualquiera de los directorios dentro de ~/src y /usr/src, desde
-cualquier lugar del sistema de archivos, usando sólo su nombre relativo
+cualquier lugar del sistema de archivos, usando solo su nombre relativo
 (por ejemplo cd linux podría llevarnos a /usr/src/linux).
 .\"NODE "  Macro Substitution"
 .SH "  Sustitución de Macro"
@@ -2089,7 +2204,7 @@ y
 .I "%U"
 .IP
 Similar a las macros %t y %T, salvo que los archivos quedan desmarcados.
-Sólo se puede emplear esta macro una vez por cada entrada del archivo de menú
+Solo se puede emplear esta macro una vez por cada entrada del archivo de menú
 o archivo de extensiones, puesto que para la siguiente vez no quedaría ningún
 archivo marcado.
 .PP
@@ -2221,7 +2336,7 @@ caso, los valores previos.
 Podemos también fijar todos los permisos iguales en todos los archivos
 con el botón
 .B [Todos]
-o sólo los permisos marcados con el botón
+o solo los permisos marcados con el botón
 .B [* Todos].
 En estos casos las casillas indican el estado en que queda cada permiso, igual
 que para archivos individuales.
@@ -2230,7 +2345,7 @@ que para archivos individuales.
 actúa sobre todos los permisos de todos los archivos
 .PP
 .B [* Todos]
-actúa sólo sobre los atributos marcados de los archivos
+actúa solo sobre los atributos marcados de los archivos
 .PP
 .B [* Poner]
 activa los permisos marcados en los archivos seleccionados
@@ -2294,10 +2409,10 @@ un directorio no vacío. Pulsaremos Sí para borrar el directorio recursivamente
 No para saltar el directorio, Todo para borrar recursivamente todos los directorios
 marcados no vacíos y Ninguno para saltarlos todos. Podemos abortar toda la
 operación pulsando el botón Abortar. Si seleccionamos el botón Sí o Todo
-se nos pedirá confirmación. Diremos "sí" sólo si estamos realmente seguros
+se nos pedirá confirmación. Diremos "sí" solo si estamos realmente seguros
 de que queremos una eliminación recursiva.
 .PP
-Si hemos marcado archivos y realizamos una operación sobre ellos, sólo
+Si hemos marcado archivos y realizamos una operación sobre ellos, solo
 los archivos sobre los que la operación fue exitosa son desmarcados. Los archivos
 saltados y aquellos en los que la operación falló permanecen marcados.
 .\"NODE "Mask Copy/Rename"
@@ -2306,7 +2421,7 @@ Las operaciones de copiar/mover permiten transformar los nombres de los archivos
 de manera sencilla. Para ello, hay que procurar una máscara correcta para el
 origen y normalmente en la terminación del destino algunos caracteres comodín.
 Todos los archivos que concuerden con la máscara origen son copiados/renombrados
-según la máscara destino. Si hay archivos marcados, sólo aquellos que encajen con
+según la máscara destino. Si hay archivos marcados, solo aquellos que encajen con
 la máscara de origen serán renombrados.
 .PP
 Hay otras opción que podemos seleccionar:
@@ -2336,7 +2451,7 @@ Si esta opción no está activa se aplica el valor actual de umask.
 .PP
 Usando Patrones Shell nos permite usar los caracteres comodín '*' y '?'
 en la máscara de origen. Funcionará igual que en la línea de órdenes. En
-la máscara destino, sólo están permitidos los comodines '*' y '\\<número>'.
+la máscara destino, solo están permitidos los comodines '*' y '\\<número>'.
 El primer '*' en la máscara destino corresponde al primer grupo del comodín
 en la máscara de origen, el segundo '*' al segundo grupo, etcétera.
 El comodín '\\1' corresponde al primer grupo en la máscara de origen,
@@ -2402,7 +2517,7 @@ permite introducir una expresión regular para los nombres de los
 archivos a seleccionar/deseleccionar.
 .PP
 Indicando
-.I Sólo archivos
+.I Solo archivos
 los directorios no se seleccionan.  Con los
 .I Caracteres Comodín
 habilitados, se pueden introducir expresiones regulares del tipo empleado en
@@ -2443,7 +2558,7 @@ Algunos detalles internos del visualizador: En sistemas con acceso a la llamada
 del sistema mmap(2), el programa mapea el archivo en vez de cargarlo;
 si el sistema no provee de la llamada al sistema mmap(2) o el archivo
 realiza una acción que necesita de un filtro, entonces el visor usará
-sus cachés de crecimiento, cargando sólo las partes del archivo
+sus cachés de crecimiento, cargando solo las partes del archivo
 a las que actualmente estamos accediendo (esto incluye a los archivos comprimidos).
 .PP
 He aquí una lista de las acciones asociadas a cada tecla que
@@ -2657,7 +2772,7 @@ que la línea se sigue completando tanto como sea posible y simultáneamente
 la primera entrada coincidente de la lista se va resaltando. Si volvemos
 a pulsar
 .BR Alt\-Tab ,
-sólo las coincidencias permanecen en la lista. Tan pronto
+solo las coincidencias permanecen en la lista. Tan pronto
 como no haya ambigüedad, la lista desaparece; también podemos quitarla
 con las teclas de cancelación
 .BR Esc ", " F10
@@ -2667,7 +2782,7 @@ Completar: Mostrar Todos
 .\"Configuration"
 está desactivado, la lista aparece cuando pulsamos
 .B Alt\-Tab
-por segunda vez; con la primera Midnight Commander sólo emite un pitido.
+por segunda vez; con la primera Midnight Commander solo emite un pitido.
 
 .\"NODE "Virtual File System"
 .SH "Sistemas de Archivos Virtuales (VFS)"
@@ -2686,16 +2801,16 @@ comprimidos;
 .I undelfs
 para recuperar archivos borrados en sistemas de archivos de tipo ext2
 (sistema de archivos habitual en Linux);
-.I FTPfs
+.I ftpfs
 para manipular archivos en sistemas remotos a través de FTP;
-.I FISH
-para manipular archivos a través de conexiones a shell como rsh o ssh
-y finalmente
-.I MCfs
-(Midnight Commander file system), un sistema de archivos para red. Si
-el programa se compiló incluyendo
+.I fish
+para manipular archivos a través de conexiones a shell como rsh o ssh.
+.PP
+Dependiendo de la forma en que fue compilado, puede disponer también de:
+.I sftpfs
+para manipular archivos en sistemas remotos a través de SFTP;
 .I SMBfs
-se pueden manipular archivos en sistemas remotos empleando el protocolo
+para  manipular archivos en sistemas remotos empleando el protocolo
 SMB (CIFS).
 .PP
 Se facilita también un sistema de archivos genérico
@@ -2732,7 +2847,7 @@ Ejemplos:
 En este último se indica la ruta completa hasta el archivo tar.
 
 .\"NODE "  FTP File System"
-.SH "  Sistema de archivos FTP (FTPfs)"
+.SH "  Sistema de archivos FTP"
 FTPfs permite manipular archivos en máquinas remotas. Para utilizarlo
 se puede emplear la opción de menú
 .I Conexión por FTP
@@ -2782,7 +2897,7 @@ Sistema de Archivos Virtual (VFS)\&.
 .\"Virtual FS"
 
 .\"NODE "  FIle transfer over SHell filesystem"
-.SH "  Sistema de archivos a través de SHell (FISH)"
+.SH "  Sistema de archivos a través de SHell"
 El FISH es un sistema de archivos por red que permite manipular archivos
 en una máquina remota como si estuvieran almacenados localmente.  Para
 ello es preciso que el sistema remoto esté ejecutando el servidor FISH
@@ -2805,7 +2920,7 @@ usuario, y si no usará nuestro nombre.
 .PP
 Como
 .I opciones
-se puede poner 'C' para usar compresión y 'rsh' para utilizar una
+se puede poner 'C' para usar compresión y 'r' para utilizar una
 conexión rsh en vez de ssh. Si se indica el
 .IR directorio\-remoto ,
 se buscará éste como primer directorio al conectar con la máquina
@@ -2817,6 +2932,40 @@ Ejemplos:
     sh://solorsh.es:r/linux/local
     sh://pepe@quiero.comprension.edu:C/privado
     sh://pepe@sincomprimir.ssh.edu/privado
+.fi
+.\"NODE "  SFTP (SSH File Transfer Protocol) filesystem"
+.SH "  Sistema de archivos SFTP (FTP sobre SSH)"
+El sistema de archivos SFTP es un sistema de archivos sobre red
+que permite manipular archivos en una máquina remota como si fueran
+locales.
+.PP
+Para conectar con la máquina remota basta cambiar de directorio a un
+directorio virtual cuyo nombre sea de la forma:
+.PP
+.I sftp://[usuario@]maquina:[puerto]/[directorio\-remoto]
+.PP
+Los elementos
+.IR usuario ,
+.I puerto
+y
+.I directorio\-remoto
+son opcionales. Si se especifica el elemento
+.I usuario
+Midnight Commander intentará acceder a la máquina remota como ese
+usuario, y si no usará nuestro nombre. El
+.I puerto
+indica el puerto utilizado por el servidor remoto, por defecto 22.
+El
+.I directorio\-remoto
+será el directorio actual tras la conexión.
+.PP
+Ejemplos:
+.PP
+.nf
+    sftp://solorsh.es/linux/local
+    sftp://pepe:k1abe@quiero.comprension.edu/privado
+    sftp://pepe@sincomprimir.ssh.edu/privado
+    sftp://pepe@maquina.ssh.edu:2222/privado
 .fi
 
 .\"NODE "  SMB File System"
@@ -2855,8 +3004,8 @@ Ejemplos:
 En sistemas Linux, si el programa de configuración nos preguntó si queríamos usar
 las facilidades de recuperación de archivos de ext2fs, tendremos el sistema de archivos
 recuperables accesible.
-La recuperación de archivos borrados está disponible sólo en los sistemas de archivos ext2. El
-sistema de archivos recuperable es sólo un interface de la librería ext2fs con:
+La recuperación de archivos borrados está disponible solo en los sistemas de archivos ext2. El
+sistema de archivos recuperable es solo un interface de la librería ext2fs con:
 restaurar todos los archivos borrados en un ext2fs y proporciona
 la extracción selectiva de archivos en una partición regular.
 .PP
@@ -2873,6 +3022,7 @@ primer disco scsi en Linux, usaríamos el siguiente nombre de ruta:
 .PP
 Esto le llevaría un tiempo a undelfs para cargar la información
 antes de empezar a navegar por los archivos allí contenidos.
+
 .\"NODE "  EXTernal File System"
 .SH "  Sistema de archivos EXTerno (extfs)"
 .B extfs
@@ -3048,11 +3198,32 @@ El formato de la definición de color es:
 .fi
 .PP
 los colores son opcionales, y las palabras claves son: normal, selected,
-marked, markselect, errors, input, reverse menunormal, menusel, menuhot, menuhotsel,
-menuinactive, gauge;  los colores por defecto son: dnormal, dfocus, dhotnormal,
-dhotfocus; los colores de Ayuda son: helpnormal, helpitalic, helpbold, helplink,
-helpslink;  color del visor: viewunderline; colores del editor: editnormal,
-editbold, editmarked.
+disabled, marked, markselect, errors, input, inputmark, inputunchanged,
+commandlinemark, reverse, gauge, header, inputhistory, commandhistory;
+los colores de la barra de botones: bbarhotkey, bbarbutton; los colores
+de la barra de estado: statusbar; los colores de menú: menunormal,
+menusel, menuhot, menuhotsel, menuinactive; los colores de los diálogos:
+dnormal, dfocus, dhotnormal, dhotfocus, dtitle; los colores de los diálogos
+de error: errdfocus, errdhotnormal, errdhotfocus, errdtitle; los colores
+de la ayuda: helpnormal, helpitalic, helpbold, helplink, helpslink,
+helptitle; los colores del visor: viewbold, viewunderline, viewselected;
+loc colores del editor: editnormal, editbold, editmarked, editwhitespace,
+editlinestate; los colores de los menús desplegables: pmenunormal, pmenusel,
+pmenutitle.
+.PP
+.I header
+determina el color del encabezado de los paneles, la línea con los
+títulos de columna y el modo de ordenación.
+.PP
+.I input
+determina el color de las líneas de entrada de texto en los diálogos.
+.PP
+.I gauge (indicador)
+determina el color de la parte completada de la barra de progresión (gauge), que muestra
+qué porcentaje de archivos fueron copiados etc. de modo gráfico.
+.PP
+.I disabled
+detemina el color de los componentes inactivos.
 .PP
 Los cuadros de diálogo usan los siguientes colores:
 .I dnormal
@@ -3080,16 +3251,23 @@ usado para los hiperenlaces no seleccionados y
 .I helpslink
 es utilizado para el hiperenlace seleccionado.
 .PP
-.I gauge (indicador)
-determina el color de la parte completada de la barra de progresión (gauge), que muestra
-qué porcentaje de archivos fueron copiados etc. de modo gráfico.
+En los menús desplegables:
+.I pmenunormal
+se usa como color del fondo y de los elementos no seleccionados,
+.I menusel
+se usa para el elemento seleccionado,
+.I pmenutitle
+se usa para el titulo del menú.
+
 .PP
 Los colores posibles son: negro (black), gris (gray), rojo (red), rojo brillante (brightred), verde (green),
 verde claro (brightgreen), marrón (brown), amarillo (yellow), azul oscuro (blue), azul brillante (brightblue),
 rosa (magenta), rosa claro (brightmagenta),
 azul celeste (cyan), celeste claro (brightcyan), gris claro (lightgray) y blanco (white).
 Hay una palabra clave especial para obtener un fondo transparente. Se trata de 'default'. 'default'
-sólo se puede utilizar como color de fondo. Ejemplo:
+solo se puede utilizar como color de fondo. Otra palabra especial es 'base' que hace referencia a los
+colores generales. Cuando se puede disponer de 256 colores se pueden referir como color16 hasta
+color255. Ejemplo:
 .PP
 .nf
 [Colors]
@@ -3368,7 +3546,7 @@ líneas dobles).
 .I ¡¡¡ATENCIÓN!!!
 Si se compila Midnight Commander empleando la biblioteca de pantalla
 Ncurses, entonces el trazado de líneas está limitado. Es posible que
-sólo se puedan utilizar líneas simples. Para consultas y comentarios
+solo se puedan utilizar líneas simples. Para consultas y comentarios
 contactar con los desarrolladores de Ncurses.
 
 .PP
@@ -3478,36 +3656,25 @@ los menús. Sin embargo, hay un pequeño número de ajustes para los que
 es necesario editar el archivo de configuración.
 .PP
 Estas variables se pueden cambiar en nuestro archivo ~/.config/mc/ini:
-.PP
+.TP
 .I clear_before_exec
-.IP
 Por defecto Midnight Commander limpia la pantalla antes de ejecutar un
 comando. Si preferimos ver la salida del comando en la parte inferior
 de la pantalla, editaremos nuestro archivo ~/mc.ini y cambiaremos el
 valor del campo clear_before_exec a 0.
-.PP
+.TP
 .I confirm_view_dir
-.IP
 Al pulsar F3 en un directorio, normalmente Midnight Commander entra
 en ese directorio.  Si este valor está a 1, entonces el programa
 nos pedirá confirmación antes de cambiar el directorio si tenemos
 archivos marcados.
-.PP
+.TP
 .I ftpfs_retry_seconds
-.IP
 Este valor es el número de segundos que Midnight Commander esperará
 antes de intentar volver a conectar con un servidor de ftp que ha denegado el
 acceso. Si el valor es cero, el programa no reintentará el acceso.
-.PP
-.I ftpfs_use_passive_connections
-.IP
-Esta opción está desactivada por defecto. Hace que el código de FTPfs utilice el
-modo de apertura pasivo para transferir archivos. Esto es usado por aquellos
-que están detrás de un encaminador con filtrado de paquetes. Esta opción sólo funciona si
-estamos utilizando un proxy para ftp.
-.PP
+.TP
 .I max_dirt_limit
-.IP
 Especifica cuántas actualizaciones de pantalla pueden saltarse al menos en el visor
 de archivos interno. Normalmente este valor no es significativo, porque
 el código automáticamente ajusta el número de actualizaciones a saltar de acuerdo
@@ -3517,61 +3684,38 @@ que la pantalla se actualice dando saltos.
 .IP
 Parece ser que poniendo max_dirt_limit a 10 produce el mejor comportamiento,
 y éste es el valor por defecto.
-.PP
-.I mouse_move_pages
-.IP
-Controla cuándo el desplazamiento de pantalla realizado con el ratón se realiza por páginas o línea
-a línea en los paneles.
-.PP
+.TP
 .I mouse_move_pages_viewer
-.IP
 Controla cuándo el desplazamiento de pantalla realizado con el ratón se realiza por páginas o línea
 a línea en el visor de archivos interno.
-.PP
-.I old_esc_mode
-.IP
-Por defecto Midnight Commander trata la tecla 
-.I Esc
-como prefijo de tecla
-(old_esc_mode=0), si activamos esta opción (old_esc_mode=1), entonces
-la tecla 
-.I Esc
-actuará como prefijo de tecla durante un segundo, y si no hay
-pulsaciones, entonces 
-.I Esc
-será interpretado como la tecla de cancelación (
-.IR Esc " " Esc
-).
-.PP
+.TP
 .I only_leading_plus_minus
-.IP
 Produce un tratamiento especial para '+', '\-', '*' en la línea de órdenes (seleccionar,
-deseleccionar, selección inversa) sólo si la línea de órdenes está vacía. No necesitamos
+deseleccionar, selección inversa) solo si la línea de órdenes está vacía. No necesitamos
 entrecomillar estos caracteres en la línea de órdenes. Pero no podremos
 cambiar la selección cuando la línea de órdenes no esté vacía.
 .TP
-.I reverse_files_only
-Permite invertir la selección sólo sobre los archivos, sin afectar a los directorios
-seleccionados.  Esta variable está activa por defecto.  Si se desactiva, la inversión se
-aplica tanto a archivos como a directorios: se seleccionan los no seleccionados y se
-liberan los anteriormente seleccionados.
-.PP
-.I panel_scroll_pages
-.IP
-Si existe (por defecto), el panel se desplazará media pantalla cuando el cursor
-alcance el final o el principio del panel, en otro caso se desplazará un archivo cada vez.
-.PP
 .I show_output_starts_shell
-.IP
-Esta variable sólo funciona si no se utiliza el soporte de subshell.
+Esta variable solo funciona si no se utiliza el soporte de subshell.
 Cuando utilizamos la combinación
 .I Ctrl\-o
 para volver a la pantalla de usuario, si está activada, tendremos un
 nuevo shell. De otro modo, pulsando cualquier tecla nos devolverá a
 Midnight Commander.
-.PP
+.TP
+.I timeformat_recent
+Cambiar el formato de fecha y hora empleado para fechas dentro de los seis
+últimos meses.
+Véase las páginas de manual de strftime o date para la descripción del formato a
+emplear. Sin esta opción se emplea el formato por defecto.
+.TP
+.I timeformat_old
+Cambiar el formato de fecha y hora empleado para fechas más antiguas que seis
+meses.
+Véase las páginas de manual de strftime o date para la descripción del formato a
+emplear. Sin esta opción se emplea el formato por defecto.
+.TP
 .I torben_fj_mode
-.IP
 Si este modificador existe, entonces las teclas Inicio y Fin funcionarán de manera
 diferente en los paneles, en lugar de mover la selección al primer
 o último archivo en los paneles, actuarán como sigue:
@@ -3583,21 +3727,55 @@ irá al primer archivo del panel.
 La tecla Fin tiene un comportamiento similar: Irá a la línea central del panel, si
 está situada en la mitad superior del panel; si no irá a la línea inferior del panel a menos que
 ya estemos ahí, en cuyo caso moverá la selección al último nombre de archivo del panel.
-.PP
+.TP
 .I use_file_to_guess_type
-.IP
 Si esta variable está activada (por defecto lo está) se recurrirá al
 comando "file" para reconocer los tipos de archivo referidos en el archivo
 .\"LINK2"
 mc.ext\&.
 .\"Extension File Edit"
-.PP
+.TP
 .I xtree_mode
-.IP
 Si esta variable está activada (por defecto no) cuando naveguemos
 por el sistema de archivos en un panel en árbol, se irá actualizando
 automáticamente el otro panel con los contenidos del directorio
 seleccionado en cada momento.
+.TP
+.I fish_directory_timeout
+Tiempo de vida por defecto de la caché de directorio. El valor por defecto
+de 900 segundos.
+.TP
+.I clipboard_store
+Ruta de acceso y opciones a una utilidad de portapapeles externa como 'xclip'
+para cargar texto de un archivo como selección en X-Windows.
+Por ejemplo:
+.PP
+.nf
+clipboard_store=xclip \-i
+.fi
+.TP
+.I clipboard_paste
+Ruta de acceso y opciones a una utilidad de portapapeles externa como 'xclip'
+para volcar la selección de X-Windows a la salida estándar.
+Por ejemplo:
+.PP
+.nf
+clipboard_pastee=xclip \-o
+.fi
+.TP
+.I autodetect_codeset
+Esta opción permite emplear la orden 'enca' para autodetectar el juego de
+caracteres de los archivos de texto para el visor y el editor interno. La
+lista de valores posibles se puede obtener con
+`enca \-\-list languages | cut \-d : \-f1'. Esta opción tiene que estar
+dentro de la sección [Misc].
+.PP
+For example:
+.PP
+.nf
+autodetect_codeset=russian
+.fi
+
 .\"NODE "Terminal databases"
 .SH "Ajustes del Terminal"
 Midnight Commander permite hacer ajustes a la base de datos de terminales
@@ -3683,13 +3861,13 @@ está presente prevalece sobre el contenido de los archivos del sistema.
 .PP
 .I %prefix%/share/mc/mc.ini
 .IP
-Archivo de configuración del sistema para Midnight Commander, sólo si
+Archivo de configuración del sistema para Midnight Commander, solo si
 el usuario no dispone de su propio ~/.config/mc/ini.
 .PP
 .I %prefix%/share/mc/mc.lib
 .IP
 Opciones globales de Midnight Commander. Se aplican siempre a todos los
-usuarios, tengan ~/.config/mc/ini o no. Actualmente sólo se emplea para los
+usuarios, tengan ~/.config/mc/ini o no. Actualmente solo se emplea para los
 .\"LINK2"
 ajustes de terminal\&.
 .\"Terminal databases"
@@ -3750,8 +3928,8 @@ La página web de Midnight Commander está en:
 	http://www.midnight\-commander.org/
 .fi
 .PP
-La presente documentación recoge información relativa a la versión 4.7.0
-(Septiembre de 2009).  Esta traducción no está completamente actualizada con
+La presente documentación recoge información relativa a la versión 4.8
+(Septiembre de 2012).  Esta traducción no está completamente actualizada con
 la versión original en inglés.  Para acceder a información sobre
 versiones recientes consultar la página de manual en inglés que contiene
 información más completa y actualizada.  Para ver el susodicho manual
@@ -3778,7 +3956,7 @@ también útil disponer del estado de la pila.
 .\"NODE "TRANSLATION"
 .SH "TRADUCCIÓN"
 Francisco Gabriel Aroca, 1998.  Reformateado y actualizado por David
-Martín, 2002\-2009.
+Martín, 2002\-2012.
 .PP
 Midnight Commander traducido a castellano por David Martín
 <dmartina@excite.com>.
