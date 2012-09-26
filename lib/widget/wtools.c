@@ -309,7 +309,8 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
 
     if (count > 0)
     {
-        add_widget (query_dlg, label_new (2, 3, text));
+        add_widget_autopos (query_dlg, label_new (2, 3, text), WPOS_KEEP_TOP | WPOS_CENTER_HORZ,
+                            NULL);
 
         add_widget (query_dlg, hline_new (lines - 4, -1, -1));
 
@@ -324,7 +325,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
             if (strchr (cur_name, '&') != NULL)
                 xpos--;
 
-            button = button_new (lines - 3, cols, B_USER + i, NORMAL_BUTTON, cur_name, 0);
+            button = button_new (lines - 3, cols, B_USER + i, NORMAL_BUTTON, cur_name, NULL);
             add_widget (query_dlg, button);
             cols += xpos;
             if (i == sel_pos)
@@ -332,11 +333,10 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
         }
         va_end (ap);
 
-
         /* do resize before running and selecting any widget */
         default_query_callback (query_dlg, NULL, DLG_RESIZE, 0, NULL);
 
-        if (defbutton)
+        if (defbutton != NULL)
             dlg_select_widget (defbutton);
 
         /* run dialog and make result */
@@ -353,8 +353,9 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
     }
     else
     {
-        add_widget (query_dlg, label_new (2, 3, text));
-        add_widget (query_dlg, button_new (0, 0, 0, HIDDEN_BUTTON, "-", 0));
+        add_widget_autopos (query_dlg, label_new (2, 3, text), WPOS_KEEP_TOP | WPOS_CENTER_HORZ,
+                            NULL);
+        add_widget (query_dlg, button_new (0, 0, 0, HIDDEN_BUTTON, "-", NULL));
         last_query_dlg = query_dlg;
     }
     sel_pos = 0;
