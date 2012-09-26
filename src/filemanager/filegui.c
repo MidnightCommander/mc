@@ -1073,13 +1073,34 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
         def_text_secure = strutils_regex_escape (tmp);
     g_free (tmp);
 
-    fmd_xlen = max (68, (COLS * 2 / 3));
-
     if (only_one)
-        g_snprintf (fmd_buf, sizeof (fmd_buf), format,
-                    str_trunc ((const char *) text, fmd_xlen - 7));
+    {
+        int format_len, text_len;
+        int max_len;
+
+        format_len = str_term_width1 (format);
+        text_len = str_term_width1 (text);
+        max_len = COLS - 2 - 6;
+
+        if (format_len + text_len <= max_len)
+        {
+            fmd_xlen = format_len + text_len + 6;
+            fmd_xlen = max (fmd_xlen, 68);
+        }
+        else
+        {
+            text = str_trunc ((const char *) text, max_len - format_len);
+            fmd_xlen = max_len + 6;
+        }
+
+        g_snprintf (fmd_buf, sizeof (fmd_buf), format, (const char *) text);
+    }
     else
+    {
+        fmd_xlen = COLS * 2 / 3;
+        fmd_xlen = max (fmd_xlen, 68);
         g_snprintf (fmd_buf, sizeof (fmd_buf), format, *(const int *) text);
+    }
 
     {
         char *source_mask, *orig_mask;
