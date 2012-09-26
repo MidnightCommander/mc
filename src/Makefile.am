@@ -12,7 +12,8 @@ AM_CPPFLAGS = \
 	-DSYSCONFDIR=\""$(sysconfdir)/@PACKAGE@/"\" \
 	-DLIBEXECDIR=\""$(libexecdir)/@PACKAGE@/"\" \
 	-DDATADIR=\""$(pkgdatadir)/"\" \
-	-DLOCALEDIR=\""$(localedir)"\"
+	-DLOCALEDIR=\""$(localedir)"\" \
+	-DEXTHELPERSDIR=\""@EXTHELPERSDIR@/"\"
 
 if CONS_SAVER
 SUBDIRS += consaver
