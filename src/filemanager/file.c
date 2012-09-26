@@ -2617,7 +2617,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     static gboolean i18n_flag = FALSE;
     if (!i18n_flag)
     {
-        for (i = sizeof (op_names1) / sizeof (op_names1[0]); i--;)
+        for (i = sizeof (op_names) / sizeof (op_names[0]); i--;)
             op_names[i] = Q_ (op_names[i]);
         i18n_flag = TRUE;
     }
