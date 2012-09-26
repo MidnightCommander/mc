@@ -1341,8 +1341,18 @@ panel_operate_generate_prompt (const WPanel * panel, FileOperation operation,
             if (cp != NULL)
             {
                 sp += 2;
+
                 while (*cp != '\0')
                     *dp++ = *cp++;
+
+                /* form two-lines query prompt for file deletion */
+                if (operation == OP_DELETE && sp[-1] == 'f')
+                {
+                    *dp++ = '\n';
+
+                    while (isblank (*sp) != 0)
+                        sp++;
+                }
             }
             break;
         default:

@@ -373,16 +373,20 @@ static replace_action_t
 overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
 {
 #define ADD_RD_BUTTON(i, ypos) \
-    add_widget (ui->replace_dlg, \
-            button_new (ypos, rd_widgets [i].xpos, rd_widgets [i].value, \
-                        NORMAL_BUTTON, rd_widgets [i].text, 0))
+    add_widget_autopos (ui->replace_dlg, \
+                        button_new (ypos, rd_widgets [i].xpos, rd_widgets [i].value, \
+                                    NORMAL_BUTTON, rd_widgets [i].text, NULL), \
+                        rd_widgets [i].pos_flags, ui->replace_dlg->current->data)
 
 #define ADD_RD_LABEL(i, p1, p2, ypos) \
     g_snprintf (buffer, sizeof (buffer), rd_widgets [i].text, p1, p2); \
-    add_widget (ui->replace_dlg, label_new (ypos, rd_widgets [i].xpos, buffer))
+    add_widget_autopos (ui->replace_dlg, \
+                        label_new (ypos, rd_widgets [i].xpos, buffer), \
+                        rd_widgets [i].pos_flags, \
+                        ui->replace_dlg->current != NULL ? ui->replace_dlg->current->data : NULL)
 
     /* dialog sizes */
-    const int rd_ylen = 17;
+    const int rd_ylen = 1;
     int rd_xlen = 60;
     int y = 2;
     unsigned long yes_id;
@@ -391,40 +395,41 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
     {
         const char *text;
         int ypos, xpos;
+        widget_pos_flags_t pos_flags;
         int value;              /* 0 for labels */
     } rd_widgets[] =
     {
     /* *INDENT-OFF* */
         /*  0 */
-        { N_("Target file already exists!"), 3, 4, 0 },
+        { N_("Target file already exists!"), 3, 4, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, 0 },
         /*  1 */
-        { "%s", 4, 4, 0 },
+        { "%s", 4, 4, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, 0 },
         /*  2 */        /* cannot use PRIuMAX here; %llu is used instead */
-        { N_("New     : %s, size %llu"), 6, 4, 0 },
+        { N_("New     : %s, size %llu"), 6, 4, WPOS_KEEP_DEFAULT, 0 },
         /*  3 */        /* cannot use PRIuMAX here; %llu is used instead */
-        { N_("Existing: %s, size %llu"), 7, 4, 0 },
+        { N_("Existing: %s, size %llu"), 7, 4, WPOS_KEEP_DEFAULT, 0 },
         /*  4 */
-        { N_("Overwrite this target?"), 9, 4, 0 },
+        { N_("Overwrite this target?"), 9, 4, WPOS_KEEP_DEFAULT, 0 },
         /*  5 */
-        { N_("&Yes"), 9, 28, REPLACE_YES },
+        { N_("&Yes"), 9, 28, WPOS_KEEP_DEFAULT, REPLACE_YES },
         /*  6 */
-        { N_("&No"), 9, 37, REPLACE_NO },
+        { N_("&No"), 9, 37, WPOS_KEEP_DEFAULT, REPLACE_NO },
         /*  7 */
-        { N_("A&ppend"), 9, 45, REPLACE_APPEND },
+        { N_("A&ppend"), 9, 45, WPOS_KEEP_DEFAULT, REPLACE_APPEND },
         /*  8 */
-        { N_("&Reget"), 10, 28, REPLACE_REGET },
+        { N_("&Reget"), 10, 28, WPOS_KEEP_DEFAULT, REPLACE_REGET },
         /*  9 */
-        { N_("Overwrite all targets?"), 11, 4, 0 },
+        { N_("Overwrite all targets?"), 11, 4, WPOS_KEEP_DEFAULT, 0 },
         /* 10 */
-        { N_("A&ll"), 11, 28, REPLACE_ALWAYS },
+        { N_("A&ll"), 11, 28, WPOS_KEEP_DEFAULT, REPLACE_ALWAYS },
         /* 11 */
-        { N_("&Update"), 11, 36, REPLACE_UPDATE },
+        { N_("&Update"), 11, 36, WPOS_KEEP_DEFAULT, REPLACE_UPDATE },
         /* 12 */
-        { N_("Non&e"), 11, 47, REPLACE_NEVER },
+        { N_("Non&e"), 11, 47, WPOS_KEEP_DEFAULT, REPLACE_NEVER },
         /* 13 */
-        { N_("If &size differs"), 12, 28, REPLACE_SIZE },
+        { N_("If &size differs"), 12, 28, WPOS_KEEP_DEFAULT, REPLACE_SIZE },
         /* 14 */
-        { N_("&Abort"), 14, 25, REPLACE_ABORT }
+        { N_("&Abort"), 14, 25, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, REPLACE_ABORT }
     /* *INDENT-ON* */
     };
 
@@ -435,7 +440,6 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
 
     char buffer[BUF_SMALL];
     const char *title;
-    int stripped_name_len;
     vfs_path_t *stripped_vpath;
     const char *stripped_name;
     char *stripped_name_orig;
@@ -452,11 +456,11 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
     stripped_name = stripped_name_orig =
         vfs_path_to_str_flags (stripped_vpath, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
     vfs_path_free (stripped_vpath);
-    stripped_name_len = str_term_width1 (stripped_name);
 
     {
         size_t i;
         int l1, l2, l, row;
+        int stripped_name_len;
 
         for (i = 0; i < num; i++)
         {
@@ -490,7 +494,8 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
 
         l2 = max (l2, l);       /* last row */
         rd_xlen = max (rd_xlen, l1 + l2 + 8);
-        rd_xlen = max (rd_xlen, str_term_width1 (title) + 2);
+        /* rd_xlen = max (rd_xlen, str_term_width1 (title) + 2); */
+        stripped_name_len = str_term_width1 (stripped_name);
         rd_xlen = max (rd_xlen, min (COLS, stripped_name_len + 8));
 
         /* Now place widgets */
@@ -508,9 +513,6 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
                 rd_widgets[i].xpos = l;
                 l += widgets_len[i] + 4;
             }
-
-        /* Abort button is centered */
-        rd_widgets[num - 1].xpos = (rd_xlen - widgets_len[num - 1] - 3) / 2;
     }
 
     /* FIXME - missing help node */
@@ -518,13 +520,10 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
         create_dlg (TRUE, 0, 0, rd_ylen, rd_xlen, alarm_colors, NULL, NULL, "[Replace]", title,
                     DLG_CENTER);
 
-    /* prompt -- centered */
-    add_widget (ui->replace_dlg,
-                label_new (y++, (rd_xlen - widgets_len[0]) / 2, rd_widgets[0].text));
-    /* file name -- centered */
-    stripped_name = str_trunc (stripped_name, rd_xlen - 8);
-    stripped_name_len = str_term_width1 (stripped_name);
-    add_widget (ui->replace_dlg, label_new (y++, (rd_xlen - stripped_name_len) / 2, stripped_name));
+    /* prompt */
+    ADD_RD_LABEL (0, "", "", y++);
+    /* file name */
+    ADD_RD_LABEL (1, str_trunc (stripped_name, rd_xlen - 8), "", y++);
 
     add_widget (ui->replace_dlg, hline_new (y++, -1, -1));
 
