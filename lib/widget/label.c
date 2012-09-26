@@ -75,20 +75,26 @@ label_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         {
             char *p = l->text;
             int y = 0;
-            gboolean disabled = (w->options & W_DISABLED) != 0;
+            gboolean disabled;
+            align_crt_t align;
 
             if (l->text == NULL)
                 return MSG_HANDLED;
+
+            disabled = (w->options & W_DISABLED) != 0;
 
             if (l->transparent)
                 tty_setcolor (disabled ? DISABLED_COLOR : DEFAULT_COLOR);
             else
                 tty_setcolor (disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL]);
 
+            align = (w->pos_flags & WPOS_CENTER_HORZ) != 0 ? J_CENTER_LEFT : J_LEFT;
+
             while (TRUE)
             {
                 char *q;
                 char c = '\0';
+
 
                 q = strchr (p, '\n');
                 if (q != NULL)
@@ -98,7 +104,7 @@ label_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                 }
 
                 widget_move (w, y, 0);
-                tty_print_string (str_fit_to_term (p, w->cols, J_LEFT));
+                tty_print_string (str_fit_to_term (p, w->cols, align));
 
                 if (q == NULL)
                     break;
