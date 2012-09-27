@@ -188,6 +188,8 @@ show_datadirs_extended (void)
     PRINTF_SECTION (_("Config directory:"), mc_global.sysconfig_dir);
     PRINTF_SECTION (_("Data directory:"), mc_global.share_data_dir);
 
+    PRINTF_SECTION (_("File extension handlers:"), EXTHELPERSDIR);
+
 #if defined ENABLE_VFS_EXTFS || defined ENABLE_VFS_FISH
     PRINTF_SECTION (_("VFS plugins and scripts:"), LIBEXECDIR);
 #ifdef ENABLE_VFS_EXTFS

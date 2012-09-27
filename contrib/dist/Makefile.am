@@ -1,4 +1,4 @@
-SUBDIRS = debian gentoo redhat
+SUBDIRS = gentoo redhat
 
 
 AUTOMAKE_OPTIONS = 1.5

@@ -424,11 +424,13 @@ dnl ############################################################################
 
 dnl ${prefix} and ${exec_prefix} are undefined here if --prefix is not used in command line
 dnl Let define ${prefix} and ${exec_prefix}
-test "x$prefix" = "xNONE" && prefix=$ac_default_prefix
-test "x$exec_prefix" = "xNONE" && exec_prefix='${prefix}'
+test "x$prefix" = "xNONE" && prefix="$ac_default_prefix"
+test "x$exec_prefix" = "xNONE" && exec_prefix="${prefix}"
 
 if test x${libexecdir} = x'${exec_prefix}/libexec'; then
     EXTHELPERSDIR=${prefix}/libexec/${PACKAGE}/ext.d
+elif test x${libexecdir} = x'${exec_prefix}/lib'; then
+    EXTHELPERSDIR=${prefix}/lib/${PACKAGE}/ext.d
 else
     EXTHELPERSDIR=${libexecdir}/${PACKAGE}/ext.d
 fi
@@ -513,7 +515,6 @@ Makefile
 
 contrib/Makefile
 contrib/dist/Makefile
-contrib/dist/debian/Makefile
 contrib/dist/gentoo/Makefile
 contrib/dist/redhat/Makefile
 contrib/dist/redhat/mc.spec
