@@ -16,6 +16,7 @@
 /* Sets/clear the specified flag in the options field */
 #define widget_want_cursor(w,i) widget_set_options(w, W_WANT_CURSOR, i)
 #define widget_want_hotkey(w,i) widget_set_options(w, W_WANT_HOTKEY, i)
+#define widget_want_idle(w,i) widget_set_options(w, W_WANT_IDLE, i)
 #define widget_disable(w,i) widget_set_options(w, W_DISABLED, i)
 
 /*** enums ***************************************************************************************/

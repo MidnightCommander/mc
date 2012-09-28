@@ -350,7 +350,7 @@ add_to_list (const char *text, void *data)
 static inline void
 stop_idle (void *data)
 {
-    set_idle_proc (data, 0);
+    widget_want_idle (WIDGET (data), FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1001,7 +1001,7 @@ check_find_events (WDialog * h)
             /* dialog terminated */
             return FIND_ABORT;
         }
-        if (!(h->flags & DLG_WANT_IDLE))
+        if ((WIDGET (h)->options & W_WANT_IDLE) == 0)
         {
             /* searching suspended */
             return FIND_SUSPEND;
@@ -1508,7 +1508,7 @@ start_stop (WButton * button, int action)
     (void) action;
 
     running = is_start;
-    set_idle_proc (find_dlg, running);
+    widget_want_idle (WIDGET (find_dlg), running);
     is_start = !is_start;
 
     status_update (is_start ? _("Stopped") : _("Searching"));
@@ -1640,7 +1640,7 @@ run_process (void)
 
     resuming = 0;
 
-    set_idle_proc (find_dlg, 1);
+    widget_want_idle (WIDGET (find_dlg), TRUE);
     ret = run_dlg (find_dlg);
 
     mc_search_free (search_file_handle);
@@ -1656,7 +1656,7 @@ run_process (void)
 static void
 kill_gui (void)
 {
-    set_idle_proc (find_dlg, 0);
+    widget_want_idle (WIDGET (find_dlg), FALSE);
     destroy_dlg (find_dlg);
 }
 

@@ -551,7 +551,7 @@ frontend_run_dlg (WDialog * h)
             if (idle_hook)
                 execute_hooks (idle_hook);
 
-            while ((h->flags & DLG_WANT_IDLE) && is_idle ())
+            while ((WIDGET (h)->options & W_WANT_IDLE) != 0 && is_idle ())
                 h->callback (h, NULL, DLG_IDLE, 0, NULL);
 
             /* Allow terminating the dialog from the idle handler */
@@ -845,17 +845,6 @@ dlg_erase (WDialog * h)
 
         tty_fill_region (wh->y, wh->x, wh->lines, wh->cols, ' ');
     }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-set_idle_proc (WDialog * d, int enable)
-{
-    if (enable)
-        d->flags |= DLG_WANT_IDLE;
-    else
-        d->flags &= ~DLG_WANT_IDLE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

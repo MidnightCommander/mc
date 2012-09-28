@@ -1428,7 +1428,7 @@ midnight_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *
 
     case DLG_IDLE:
         /* We only need the first idle event to show user menu after start */
-        set_idle_proc (h, 0);
+        widget_want_idle (WIDGET (h), FALSE);
 
         if (boot_current_is_left)
             dlg_select_widget (get_panel_widget (0));
@@ -1757,7 +1757,7 @@ do_nc (void)
 #endif
 
     midnight_dlg = create_dlg (FALSE, 0, 0, LINES, COLS, midnight_colors, midnight_callback,
-                               midnight_event, "[main]", NULL, DLG_WANT_IDLE);
+                               midnight_event, "[main]", NULL, DLG_NONE);
 
     /* Check if we were invoked as an editor or file viewer */
     if (mc_global.mc_run_mode != MC_RUN_FULL)
@@ -1767,6 +1767,9 @@ do_nc (void)
     }
     else
     {
+        /* We only need the first idle event to show user menu after start */
+        widget_want_idle (WIDGET (midnight_dlg), TRUE);
+
         setup_mc ();
         mc_filehighlight = mc_fhl_new (TRUE);
         create_panels_and_run_mc ();

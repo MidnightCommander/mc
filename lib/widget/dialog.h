@@ -51,12 +51,11 @@ typedef enum
 /* Flags for create_dlg */
 typedef enum
 {
-    DLG_WANT_TAB = (1 << 4),    /* Should the tab key be sent to the dialog? */
-    DLG_WANT_IDLE = (1 << 3),   /* Dialog wants idle events */
-    DLG_COMPACT = (1 << 2),     /* Suppress spaces around the frame */
-    DLG_TRYUP = (1 << 1),       /* Try to move two lines up the dialog */
+    DLG_NONE = 0,               /* No options */
     DLG_CENTER = (1 << 0),      /* Center the dialog */
-    DLG_NONE = 0                /* No options */
+    DLG_TRYUP = (1 << 1),       /* Try to move two lines up the dialog */
+    DLG_COMPACT = (1 << 2),     /* Suppress spaces around the frame */
+    DLG_WANT_TAB = (1 << 3)     /* Should the tab key be sent to the dialog? */
 } dlg_flags_t;
 
 /* Dialog state */
@@ -179,9 +178,6 @@ void dlg_save_history (WDialog * h);
 void dlg_process_event (WDialog * h, int key, Gpm_Event * event);
 
 char *dlg_get_title (const WDialog * h, size_t len);
-
-/* To activate/deactivate the idle message generation */
-void set_idle_proc (WDialog * d, int enable);
 
 void dlg_redraw (WDialog * h);
 
