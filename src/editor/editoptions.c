@@ -115,7 +115,7 @@ edit_reload_syntax (void *data, void *user_data)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_options_dialog (Dlg_head * h)
+edit_options_dialog (WDialog * h)
 {
     char wrap_length[16], tab_spacing[16];
     char *p, *q;

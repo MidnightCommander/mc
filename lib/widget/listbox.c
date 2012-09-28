@@ -122,7 +122,7 @@ static void
 listbox_draw (WListbox * l, gboolean focused)
 {
     Widget *w = WIDGET (l);
-    const Dlg_head *h = w->owner;
+    const WDialog *h = w->owner;
     const gboolean disabled = (w->options & W_DISABLED) != 0;
     const int normalc = disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL];
     /* *INDENT-OFF* */
@@ -368,7 +368,7 @@ static cb_ret_t
 listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WListbox *l = (WListbox *) w;
-    Dlg_head *h = w->owner;
+    WDialog *h = w->owner;
     cb_ret_t ret_code;
 
     switch (msg)

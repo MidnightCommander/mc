@@ -163,7 +163,7 @@ struct hotlist
 
 static gboolean hotlist_has_dot_dot = TRUE;
 
-static Dlg_head *hotlist_dlg, *movelist_dlg;
+static WDialog *hotlist_dlg, *movelist_dlg;
 static WGroupbox *hotlist_group, *movelist_group;
 static WListbox *l_hotlist, *l_movelist;
 static WLabel *pname;
@@ -489,7 +489,7 @@ hotlist_button_callback (WButton * button, int action)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline cb_ret_t
-hotlist_handle_key (Dlg_head * h, int key)
+hotlist_handle_key (WDialog * h, int key)
 {
     switch (key)
     {
@@ -552,7 +552,7 @@ hotlist_handle_key (Dlg_head * h, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-hotlist_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+hotlist_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -583,7 +583,7 @@ hotlist_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
 static lcback_ret_t
 hotlist_listbox_callback (WListbox * list)
 {
-    Dlg_head *dlg = WIDGET (list)->owner;
+    WDialog *dlg = WIDGET (list)->owner;
 
     if (list->count != 0)
     {

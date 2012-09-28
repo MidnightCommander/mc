@@ -142,7 +142,7 @@ stop_dialogs (void)
     midnight_dlg->state = DLG_CLOSED;
 
     if ((top_dlg != NULL) && (top_dlg->data != NULL))
-        ((Dlg_head *) top_dlg->data)->state = DLG_CLOSED;
+        DIALOG (top_dlg->data)->state = DLG_CLOSED;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -432,7 +432,7 @@ midnight_get_shortcut (unsigned long command)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-midnight_get_title (const Dlg_head * h, size_t len)
+midnight_get_title (const WDialog * h, size_t len)
 {
     char *path;
     char *login;
@@ -1401,7 +1401,7 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-midnight_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+midnight_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     unsigned long command;
 

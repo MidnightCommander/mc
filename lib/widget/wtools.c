@@ -53,7 +53,7 @@
 
 /*** file scope variables ************************************************************************/
 
-static Dlg_head *last_query_dlg;
+static WDialog *last_query_dlg;
 
 static int sel_pos = 0;
 
@@ -63,7 +63,7 @@ static int sel_pos = 0;
 /** default query callback, used to reposition query */
 
 static cb_ret_t
-query_default_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+query_default_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -71,14 +71,14 @@ query_default_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, 
         if ((h->flags & DLG_CENTER) == 0)
         {
             Widget *wh = WIDGET (h);
-            Dlg_head *prev_dlg = NULL;
+            WDialog *prev_dlg = NULL;
             int ypos, xpos;
 
             /* get dialog under h */
             if (top_dlg != NULL)
             {
                 if (top_dlg->data != (void *) h)
-                    prev_dlg = (Dlg_head *) top_dlg->data;
+                    prev_dlg = DIALOG (top_dlg->data);
                 else
                 {
                     GList *p;
@@ -87,7 +87,7 @@ query_default_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, 
                        Get previous dialog in stack */
                     p = g_list_next (top_dlg);
                     if (p != NULL)
-                        prev_dlg = (Dlg_head *) p->data;
+                        prev_dlg = DIALOG (p->data);
                 }
             }
 
@@ -114,11 +114,11 @@ query_default_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, 
 /* --------------------------------------------------------------------------------------------- */
 /** Create message dialog */
 
-static struct Dlg_head *
+static struct WDialog *
 do_create_message (int flags, const char *title, const char *text)
 {
     char *p;
-    Dlg_head *d;
+    WDialog *d;
 
     /* Add empty lines before and after the message */
     p = g_strconcat ("\n", text, "\n", (char *) NULL);
@@ -143,7 +143,7 @@ do_create_message (int flags, const char *title, const char *text)
 static void
 fg_message (int flags, const char *title, const char *text)
 {
-    Dlg_head *d;
+    WDialog *d;
 
     d = do_create_message (flags, title, text);
     tty_getch ();
@@ -270,7 +270,7 @@ int
 query_dialog (const char *header, const char *text, int flags, int count, ...)
 {
     va_list ap;
-    Dlg_head *query_dlg;
+    WDialog *query_dlg;
     WButton *button;
     WButton *defbutton = NULL;
     int win_len = 0;
@@ -376,11 +376,11 @@ query_set_sel (int new_sel)
  * destroy_dlg() to dismiss it.  Not safe to call from background.
  */
 
-struct Dlg_head *
+struct WDialog *
 create_message (int flags, const char *title, const char *text, ...)
 {
     va_list args;
-    Dlg_head *d;
+    WDialog *d;
     char *p;
 
     va_start (args, text);

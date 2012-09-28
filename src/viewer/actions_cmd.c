@@ -551,7 +551,7 @@ mcview_handle_key (mcview_t * view, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-mcview_adjust_size (Dlg_head * h)
+mcview_adjust_size (WDialog * h)
 {
     mcview_t *view;
     WButtonBar *b;
@@ -633,7 +633,7 @@ mcview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
 /* --------------------------------------------------------------------------------------------- */
 
 cb_ret_t
-mcview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+mcview_dialog_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     mcview_t *view;
 

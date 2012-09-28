@@ -238,7 +238,7 @@ typedef struct
     gboolean showing_bps;
 
     /* Dialog and widgets for the operation progress window */
-    Dlg_head *op_dlg;
+    WDialog *op_dlg;
     WLabel *file_string[2];
     WLabel *file_label[2];
     WGauge *progress_file_gauge;
@@ -251,7 +251,7 @@ typedef struct
     WLabel *total_bytes_label;
 
     /* Query replace dialog */
-    Dlg_head *replace_dlg;
+    WDialog *replace_dlg;
     const char *replace_filename;
     replace_action_t replace_result;
 

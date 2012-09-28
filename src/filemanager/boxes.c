@@ -118,7 +118,7 @@ static WListbox *bg_list = NULL;
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-panel_listing_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+panel_listing_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -262,7 +262,7 @@ sel_charset_button (WButton * button, int action)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-tree_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+tree_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -299,7 +299,7 @@ tree_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *dat
 
 #if defined(ENABLE_VFS) && defined (ENABLE_VFS_FTP)
 static cb_ret_t
-confvfs_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+confvfs_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -711,7 +711,7 @@ char *
 tree_box (const char *current_dir)
 {
     WTree *mytree;
-    Dlg_head *dlg;
+    WDialog *dlg;
     Widget *wd;
     char *val = NULL;
     WButtonBar *bar;
@@ -916,7 +916,7 @@ jobs_cmd (void)
     size_t i;
     const size_t n_but = G_N_ELEMENTS (job_but);
 
-    Dlg_head *jobs_dlg;
+    WDialog *jobs_dlg;
     int cols = 60;
     int lines = 15;
     int x = 0;

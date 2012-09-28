@@ -1048,7 +1048,7 @@ insert_text (WInput * in, char *text, ssize_t size)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+query_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     static char buff[MB_LEN_MAX] = "";
     static int bl = 0;
@@ -1281,7 +1281,7 @@ complete_engine (WInput * in, int what_to_do)
             int x, y, w, h;
             int start_x, start_y;
             char **p, *q;
-            Dlg_head *query_dlg;
+            WDialog *query_dlg;
             WListbox *query_list;
 
             for (p = in->completions + 1; *p != NULL; count++, p++)

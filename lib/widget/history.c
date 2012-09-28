@@ -73,7 +73,7 @@ typedef struct
 /*** file scope functions ************************************************************************/
 
 static cb_ret_t
-history_dlg_reposition (Dlg_head * dlg_head)
+history_dlg_reposition (WDialog * dlg_head)
 {
     history_dlg_data *data;
     int x = 0, y, he, wi;
@@ -117,7 +117,7 @@ history_dlg_reposition (Dlg_head * dlg_head)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-history_dlg_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+history_dlg_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -292,7 +292,7 @@ history_show (GList ** history, Widget * widget, int current)
     GList *z, *hlist = NULL, *hi;
     size_t maxlen, i, count = 0;
     char *r = NULL;
-    Dlg_head *query_dlg;
+    WDialog *query_dlg;
     WListbox *query_list;
     history_dlg_data hist_data;
 

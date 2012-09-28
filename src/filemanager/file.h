@@ -26,7 +26,7 @@ typedef FileProgressStatus (*compute_dir_size_callback) (const void *ui,
 /* status dialog of directory size computing */
 typedef struct
 {
-    Dlg_head *dlg;
+    WDialog *dlg;
     WLabel *dirname;
 } ComputeDirSizeUI;
 

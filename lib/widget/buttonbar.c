@@ -287,7 +287,7 @@ buttonbar_set_label (WButtonBar * bb, int idx, const char *text,
 
 /* Find ButtonBar widget in the dialog */
 WButtonBar *
-find_buttonbar (const Dlg_head * h)
+find_buttonbar (const WDialog * h)
 {
     return (WButtonBar *) find_widget_type (h, buttonbar_callback);
 }

@@ -68,7 +68,7 @@ typedef struct
 
 /*** file scope variables ************************************************************************/
 
-static Dlg_head *learn_dlg;
+static WDialog *learn_dlg;
 static const char *learn_title = N_("Learn keys");
 
 static learnkey_t *learnkeys = NULL;
@@ -82,7 +82,7 @@ static gboolean learnchanged = FALSE;
 static int
 learn_button (WButton * button, int action)
 {
-    Dlg_head *d;
+    WDialog *d;
     char *seq;
 
     (void) button;
@@ -232,7 +232,7 @@ learn_check_key (int c)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-learn_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+learn_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {

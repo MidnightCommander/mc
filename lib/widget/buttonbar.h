@@ -41,7 +41,7 @@ struct global_keymap_t;
 WButtonBar *buttonbar_new (gboolean visible);
 void buttonbar_set_label (WButtonBar * bb, int idx, const char *text,
                           const struct global_keymap_t *keymap, const Widget * receiver);
-WButtonBar *find_buttonbar (const Dlg_head * h);
+WButtonBar *find_buttonbar (const WDialog * h);
 
 /*** inline functions ****************************************************************************/
 

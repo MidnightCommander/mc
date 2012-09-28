@@ -235,7 +235,7 @@ menubar_draw (WMenuBar * menubar)
 static void
 menubar_remove (WMenuBar * menubar)
 {
-    Dlg_head *h;
+    WDialog *h;
 
     if (!menubar->is_dropped)
         return;
@@ -913,7 +913,7 @@ menubar_arrange (WMenuBar * menubar)
 /** Find MenuBar widget in the dialog */
 
 WMenuBar *
-find_menubar (const Dlg_head * h)
+find_menubar (const WDialog * h)
 {
     return (WMenuBar *) find_widget_type (h, menubar_callback);
 }

@@ -16,7 +16,9 @@
 #include "lib/keybind.h"        /* global_keymap_t */
 #include "lib/tty/mouse.h"      /* mouse_h */
 
-/*** defined constants ***************************************************************************/
+/*** typedefs(not structures) and defined constants **********************************************/
+
+#define DIALOG(x) ((WDialog *)(x))
 
 /* Common return values */
 #define B_EXIT          0
@@ -84,19 +86,19 @@ typedef enum
 typedef char *(*dlg_shortcut_str) (unsigned long command);
 
 /* get dialog name to show in dialog list */
-typedef char *(*dlg_title_str) (const Dlg_head * h, size_t len);
+typedef char *(*dlg_title_str) (const WDialog * h, size_t len);
 
 typedef int dlg_colors_t[DLG_COLOR_COUNT];
 
 /* Dialog callback */
-typedef cb_ret_t (*dlg_cb_fn) (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data);
+typedef cb_ret_t (*dlg_cb_fn) (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data);
 
 /* menu command execution */
 typedef cb_ret_t (*menu_exec_fn) (int command);
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-struct Dlg_head
+struct WDialog
 {
     Widget widget;
 
@@ -147,70 +149,70 @@ extern const global_keymap_t *dialog_map;
 /*** declarations of public functions ************************************************************/
 
 /* draw box in window */
-void draw_box (const Dlg_head * h, int y, int x, int ys, int xs, gboolean single);
+void draw_box (const WDialog * h, int y, int x, int ys, int xs, gboolean single);
 
 /* Creates a dialog head  */
-Dlg_head *create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
-                      const int *colors, dlg_cb_fn callback, mouse_h mouse_handler,
-                      const char *help_ctx, const char *title, dlg_flags_t flags);
+WDialog *create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
+                     const int *colors, dlg_cb_fn callback, mouse_h mouse_handler,
+                     const char *help_ctx, const char *title, dlg_flags_t flags);
 
 void dlg_set_default_colors (void);
 
-unsigned long add_widget_autopos (Dlg_head * dest, void *w, widget_pos_flags_t pos_flags,
+unsigned long add_widget_autopos (WDialog * dest, void *w, widget_pos_flags_t pos_flags,
                                   const void *before);
-unsigned long add_widget (Dlg_head * dest, void *w);
-unsigned long add_widget_before (Dlg_head * h, void *w, void *before);
+unsigned long add_widget (WDialog * dest, void *w);
+unsigned long add_widget_before (WDialog * h, void *w, void *before);
 void del_widget (void *w);
 
 /* sets size of dialog, leaving positioning to automatic mehtods
    according to dialog flags */
-void dlg_set_size (Dlg_head * h, int lines, int cols);
+void dlg_set_size (WDialog * h, int lines, int cols);
 /* this function allows to set dialog position */
-void dlg_set_position (Dlg_head * h, int y1, int x1, int y2, int x2);
+void dlg_set_position (WDialog * h, int y1, int x1, int y2, int x2);
 
-void init_dlg (Dlg_head * h);
-int run_dlg (Dlg_head * d);
-void destroy_dlg (Dlg_head * h);
+void init_dlg (WDialog * h);
+int run_dlg (WDialog * d);
+void destroy_dlg (WDialog * h);
 
-void dlg_run_done (Dlg_head * h);
-void dlg_save_history (Dlg_head * h);
-void dlg_process_event (Dlg_head * h, int key, Gpm_Event * event);
+void dlg_run_done (WDialog * h);
+void dlg_save_history (WDialog * h);
+void dlg_process_event (WDialog * h, int key, Gpm_Event * event);
 
-char *dlg_get_title (const Dlg_head * h, size_t len);
+char *dlg_get_title (const WDialog * h, size_t len);
 
 /* To activate/deactivate the idle message generation */
-void set_idle_proc (Dlg_head * d, int enable);
+void set_idle_proc (WDialog * d, int enable);
 
-void dlg_redraw (Dlg_head * h);
+void dlg_redraw (WDialog * h);
 
-void dlg_broadcast_msg (Dlg_head * h, widget_msg_t message);
+void dlg_broadcast_msg (WDialog * h, widget_msg_t message);
 
 /* Default callback for dialogs */
-cb_ret_t dlg_default_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data);
+cb_ret_t dlg_default_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data);
 
 /* Default paint routine for dialogs */
-void dlg_default_repaint (Dlg_head * h);
+void dlg_default_repaint (WDialog * h);
 
 void dlg_replace_widget (Widget * old, Widget * new);
 int dlg_overlap (Widget * a, Widget * b);
-void dlg_erase (Dlg_head * h);
-void dlg_stop (Dlg_head * h);
+void dlg_erase (WDialog * h);
+void dlg_stop (WDialog * h);
 
 /* Widget selection */
 void dlg_select_widget (void *w);
 void dlg_set_top_widget (void *w);
-void dlg_one_up (Dlg_head * h);
-void dlg_one_down (Dlg_head * h);
-gboolean dlg_focus (Dlg_head * h);
-Widget *find_widget_type (const Dlg_head * h, widget_cb_fn callback);
-Widget *dlg_find_by_id (const Dlg_head * h, unsigned long id);
-void dlg_select_by_id (const Dlg_head * h, unsigned long id);
+void dlg_one_up (WDialog * h);
+void dlg_one_down (WDialog * h);
+gboolean dlg_focus (WDialog * h);
+Widget *find_widget_type (const WDialog * h, widget_cb_fn callback);
+Widget *dlg_find_by_id (const WDialog * h, unsigned long id);
+void dlg_select_by_id (const WDialog * h, unsigned long id);
 
 /* Redraw all dialogs */
 void do_refresh (void);
 
 /* Used in load_prompt() */
-void update_cursor (Dlg_head * h);
+void update_cursor (WDialog * h);
 
 /*** inline functions ****************************************************************************/
 
@@ -224,7 +226,7 @@ dlg_widget_active (void *w)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline unsigned long
-dlg_get_current_widget_id (const struct Dlg_head *h)
+dlg_get_current_widget_id (const struct WDialog *h)
 {
     return WIDGET (h->current->data)->id;
 }

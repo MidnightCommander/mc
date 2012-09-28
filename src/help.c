@@ -104,7 +104,7 @@ static const char *currentpoint;
 static const char *selected_item;
 
 /* The widget variables */
-static Dlg_head *whelp;
+static WDialog *whelp;
 
 static struct
 {
@@ -115,7 +115,7 @@ static struct
 static GSList *link_area = NULL;
 static gboolean inside_link_area = FALSE;
 
-static cb_ret_t help_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data);
+static cb_ret_t help_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data);
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -403,7 +403,7 @@ clear_link_areas (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-help_print_word (Dlg_head * h, GString * word, int *col, int *line, gboolean add_space)
+help_print_word (WDialog * h, GString * word, int *col, int *line, gboolean add_space)
 {
     if (*line >= help_lines)
         g_string_set_size (word, 0);
@@ -447,7 +447,7 @@ help_print_word (Dlg_head * h, GString * word, int *col, int *line, gboolean add
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-help_show (Dlg_head * h, const char *paint_start)
+help_show (WDialog * h, const char *paint_start)
 {
     const char *p, *n;
     int col, line, c;
@@ -684,7 +684,7 @@ help_event (Gpm_Event * event, void *vp)
 /** show help */
 
 static void
-help_help (Dlg_head * h)
+help_help (WDialog * h)
 {
     const char *p;
 
@@ -704,7 +704,7 @@ help_help (Dlg_head * h)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-help_index (Dlg_head * h)
+help_index (WDialog * h)
 {
     const char *new_item;
 
@@ -727,7 +727,7 @@ help_index (Dlg_head * h)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-help_back (Dlg_head * h)
+help_back (WDialog * h)
 {
     currentpoint = history[history_ptr].page;
     selected_item = history[history_ptr].link;
@@ -926,7 +926,7 @@ help_execute_cmd (unsigned long command)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-help_handle_key (Dlg_head * h, int c)
+help_handle_key (WDialog * h, int c)
 {
     unsigned long command;
 
@@ -941,7 +941,7 @@ help_handle_key (Dlg_head * h, int c)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-help_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+help_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     WButtonBar *bb;
 

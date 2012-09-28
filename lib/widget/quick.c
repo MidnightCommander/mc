@@ -183,7 +183,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
     size_t i;
     quick_widget_t *quick_widget;
     WGroupbox *g = NULL;
-    Dlg_head *dd;
+    WDialog *dd;
     int return_val;
 
     len = str_term_width1 (I18N (quick_dlg->title)) + 6;

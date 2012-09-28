@@ -62,7 +62,7 @@ unsigned long configure_old_esc_mode_id, configure_time_out_id;
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-configure_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+configure_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {

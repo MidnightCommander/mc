@@ -60,7 +60,7 @@ button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
     WButton *b = (WButton *) w;
     int stop = 0;
     int off = 0;
-    Dlg_head *h = w->owner;
+    WDialog *h = w->owner;
 
     switch (msg)
     {

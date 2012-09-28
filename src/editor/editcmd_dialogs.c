@@ -68,7 +68,7 @@ edit_search_options_t edit_search_options = {
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-editcmd_dialog_raw_key_query_cb (Dlg_head *h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+editcmd_dialog_raw_key_query_cb (WDialog *h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -298,7 +298,7 @@ editcmd_dialog_raw_key_query (const char *heading, const char *query, gboolean c
 {
     int w, wq;
     int y = 2;
-    Dlg_head *raw_dlg;
+    WDialog *raw_dlg;
 
     w = str_term_width1 (heading) + 6;
     wq = str_term_width1 (query);
@@ -335,7 +335,7 @@ editcmd_dialog_completion_show (WEdit * edit, int max_len, int word_len,
 
     int start_x, start_y, offset, i;
     char *curr = NULL;
-    Dlg_head *compl_dlg;
+    WDialog *compl_dlg;
     WListbox *compl_list;
     int compl_dlg_h;            /* completion dialog height */
     int compl_dlg_w;            /* completion dialog width */
@@ -422,7 +422,7 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
     int start_x, start_y, offset, i;
     char *curr = NULL;
     etags_hash_t *curr_def = NULL;
-    Dlg_head *def_dlg;
+    WDialog *def_dlg;
     WListbox *def_list;
     int def_dlg_h;              /* dialog height */
     int def_dlg_w;              /* dialog width */

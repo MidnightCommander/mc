@@ -234,7 +234,7 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
 {
     gboolean succeeded;
     mcview_t *lc_mcview;
-    Dlg_head *view_dlg;
+    WDialog *view_dlg;
 
     /* Create dialog and widgets, put them on the dialog */
     view_dlg = create_dlg (FALSE, 0, 0, LINES, COLS, NULL, mcview_dialog_callback, NULL,

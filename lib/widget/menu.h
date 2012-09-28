@@ -65,7 +65,7 @@ void menubar_set_menu (WMenuBar * menubar, GList * menu);
 void menubar_add_menu (WMenuBar * menubar, Menu * menu);
 void menubar_arrange (WMenuBar * menubar);
 
-WMenuBar *find_menubar (const Dlg_head * h);
+WMenuBar *find_menubar (const WDialog * h);
 
 /*** inline functions ****************************************************************************/
 

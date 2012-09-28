@@ -250,7 +250,7 @@ tree_show_mini_info (WTree * tree, int tree_lines, int tree_cols)
     else
     {
         /* Show full name of selected directory */
-        Dlg_head *h = w->owner;
+        WDialog *h = w->owner;
         char *tmp_path;
 
         tty_setcolor (tree->is_panel ? NORMAL_COLOR : TREE_NORMALC (h));
@@ -268,7 +268,7 @@ static void
 show_tree (WTree * tree)
 {
     Widget *w = WIDGET (tree);
-    Dlg_head *h = w->owner;
+    WDialog *h = w->owner;
     tree_entry *current;
     int i, j, topsublevel;
     int x = 0, y = 0;
@@ -1175,7 +1175,7 @@ tree_key (WTree * tree, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-tree_frame (Dlg_head * h, WTree * tree)
+tree_frame (WDialog * h, WTree * tree)
 {
     Widget *w = WIDGET (tree);
 
@@ -1206,7 +1206,7 @@ static cb_ret_t
 tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WTree *tree = (WTree *) w;
-    Dlg_head *h = w->owner;
+    WDialog *h = w->owner;
     WButtonBar *b = find_buttonbar (h);
 
     switch (msg)
@@ -1333,7 +1333,7 @@ sync_tree (const char *path)
 /* --------------------------------------------------------------------------------------------- */
 
 WTree *
-find_tree (struct Dlg_head *h)
+find_tree (struct WDialog *h)
 {
     return (WTree *) find_widget_type (h, tree_callback);
 }

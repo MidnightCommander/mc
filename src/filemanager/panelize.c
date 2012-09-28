@@ -73,7 +73,7 @@
 /*** file scope variables ************************************************************************/
 
 static WListbox *l_panelize;
-static Dlg_head *panelize_dlg;
+static WDialog *panelize_dlg;
 static int last_listitem;
 static WInput *pname;
 
@@ -109,7 +109,7 @@ update_command (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-panelize_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+panelize_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {

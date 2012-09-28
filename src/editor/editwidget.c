@@ -84,7 +84,7 @@ static unsigned int edit_dlg_init_refcounter = 0;
 
 /*** file scope functions ************************************************************************/
 
-static cb_ret_t edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm,
+static cb_ret_t edit_dialog_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm,
                                       void *data);
 
 /* --------------------------------------------------------------------------------------------- */
@@ -314,7 +314,7 @@ get_hotkey (int n)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-edit_window_list (const Dlg_head * h)
+edit_window_list (const WDialog * h)
 {
     const size_t offset = 2;    /* skip menu and buttonbar */
     const size_t dlg_num = g_list_length (h->widgets) - offset;
@@ -385,7 +385,7 @@ edit_get_shortcut (unsigned long command)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-edit_get_title (const Dlg_head * h, size_t len)
+edit_get_title (const WDialog * h, size_t len)
 {
     const WEdit *edit = find_editor (h);
     const char *modified = edit->modified ? "(*) " : "    ";
@@ -654,7 +654,7 @@ edit_event (Gpm_Event * event, void *data)
 static int
 edit_dialog_event (Gpm_Event * event, void *data)
 {
-    Dlg_head *h = (Dlg_head *) data;
+    WDialog *h = DIALOG (data);
     Widget *w;
     Widget *wh = WIDGET (h);
     int ret = MOU_UNHANDLED;
@@ -709,7 +709,7 @@ edit_dialog_event (Gpm_Event * event, void *data)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-edit_dialog_command_execute (Dlg_head * h, unsigned long command)
+edit_dialog_command_execute (WDialog * h, unsigned long command)
 {
     Widget *wh = WIDGET (h);
     gboolean ret = MSG_HANDLED;
@@ -812,7 +812,7 @@ edit_dialog_command_execute (Dlg_head * h, unsigned long command)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-edit_quit (Dlg_head * h)
+edit_quit (WDialog * h)
 {
     GList *l;
     WEdit *e = NULL;
@@ -865,7 +865,7 @@ edit_set_buttonbar (WEdit * edit, WButtonBar * bb)
 /** Callback for the edit dialog */
 
 static cb_ret_t
-edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+edit_dialog_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     WMenuBar *menubar;
     WButtonBar *buttonbar;
@@ -1062,7 +1062,7 @@ gboolean
 edit_files (const GList * files)
 {
     static gboolean made_directory = FALSE;
-    Dlg_head *edit_dlg;
+    WDialog *edit_dlg;
     WMenuBar *menubar;
     const GList *file;
     gboolean ok = FALSE;
@@ -1130,7 +1130,7 @@ edit_get_file_name (const WEdit * edit)
 /* --------------------------------------------------------------------------------------------- */
 
 WEdit *
-find_editor (const Dlg_head * h)
+find_editor (const WDialog * h)
 {
     if (edit_widget_is_editor (WIDGET (h->current->data)))
         return (WEdit *) h->current->data;
@@ -1156,7 +1156,7 @@ edit_widget_is_editor (const Widget * w)
 void
 edit_update_screen (WEdit * e)
 {
-    Dlg_head *h = WIDGET (e)->owner;
+    WDialog *h = WIDGET (e)->owner;
 
     edit_scroll_screen_over_cursor (e);
     edit_update_curs_col (e);
@@ -1210,7 +1210,7 @@ edit_save_size (WEdit * edit)
  */
 
 gboolean
-edit_add_window (Dlg_head * h, int y, int x, int lines, int cols, const vfs_path_t * f, long fline)
+edit_add_window (WDialog * h, int y, int x, int lines, int cols, const vfs_path_t * f, long fline)
 {
     WEdit *edit;
     Widget *w;

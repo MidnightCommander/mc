@@ -143,7 +143,7 @@ chown_i18n (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chown_refresh (Dlg_head * h)
+chown_refresh (WDialog * h)
 {
     const int y = 3;
     const int x = 7 + GW * 2;
@@ -178,7 +178,7 @@ next_file (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-chown_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+chown_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -193,7 +193,7 @@ chown_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
 
 /* --------------------------------------------------------------------------------------------- */
 
-static Dlg_head *
+static WDialog *
 init_chown (void)
 {
     int lines, cols;
@@ -201,7 +201,7 @@ init_chown (void)
     int y;
     struct passwd *l_pass;
     struct group *l_grp;
-    Dlg_head *ch_dlg;
+    WDialog *ch_dlg;
 
     do_refresh ();
 
@@ -332,7 +332,7 @@ chown_cmd (void)
 {
     char *fname;
     struct stat sf_stat;
-    Dlg_head *ch_dlg;
+    WDialog *ch_dlg;
     uid_t new_user;
     gid_t new_group;
     char buffer[BUF_TINY];

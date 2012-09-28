@@ -233,7 +233,7 @@ widget_set_size (Widget * widget, int y, int x, int lines, int cols)
 void
 widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey)
 {
-    Dlg_head *h = w->owner;
+    WDialog *h = w->owner;
     int color;
 
     if ((w->options & W_DISABLED) != 0)

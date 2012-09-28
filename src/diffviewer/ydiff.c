@@ -2860,7 +2860,7 @@ dview_update (WDiff * dview)
 static void
 dview_edit (WDiff * dview, diff_place_t ord)
 {
-    Dlg_head *h;
+    WDialog *h;
     gboolean h_modal;
     int linenum, lineofs;
 
@@ -2937,7 +2937,7 @@ static void
 dview_labels (WDiff * dview)
 {
     Widget *d;
-    Dlg_head *h;
+    WDialog *h;
     WButtonBar *b;
 
     d = WIDGET (dview);
@@ -3307,7 +3307,7 @@ static cb_ret_t
 dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WDiff *dview = (WDiff *) w;
-    Dlg_head *h = w->owner;
+    WDialog *h = w->owner;
     cb_ret_t i;
 
     switch (msg)
@@ -3352,7 +3352,7 @@ dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dview_adjust_size (Dlg_head * h)
+dview_adjust_size (WDialog * h)
 {
     WDiff *dview;
     WButtonBar *bar;
@@ -3369,7 +3369,7 @@ dview_adjust_size (Dlg_head * h)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-dview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+dview_dialog_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     WDiff *dview = (WDiff *) data;
 
@@ -3409,7 +3409,7 @@ dview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, v
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-dview_get_title (const Dlg_head * h, size_t len)
+dview_get_title (const WDialog * h, size_t len)
 {
     const WDiff *dview;
     const char *modified = " (*) ";
@@ -3439,7 +3439,7 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
     int error;
     WDiff *dview;
     Widget *w;
-    Dlg_head *dview_dlg;
+    WDialog *dview_dlg;
 
     /* Create dialog and widgets, put them on the dialog */
     dview_dlg =

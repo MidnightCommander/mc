@@ -154,7 +154,7 @@ static int last_pos;
 
 static size_t ignore_count = 0;
 
-static Dlg_head *find_dlg;      /* The dialog */
+static WDialog *find_dlg;      /* The dialog */
 static WLabel *status_label;    /* Finished, Searching etc. */
 static WLabel *found_num_label; /* Number of found items */
 
@@ -407,7 +407,7 @@ find_check_regexp (const char *r)
  */
 
 static cb_ret_t
-find_parm_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+find_parm_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -985,7 +985,7 @@ get_line_at (int file_fd, char *buf, int buf_size, int *pos, int *n_read, gboole
 /* --------------------------------------------------------------------------------------------- */
 
 static FindProgressStatus
-check_find_events (Dlg_head * h)
+check_find_events (WDialog * h)
 {
     Gpm_Event event;
     int c;
@@ -1023,7 +1023,7 @@ check_find_events (Dlg_head * h)
  */
 
 static gboolean
-search_content (Dlg_head * h, const char *directory, const char *filename)
+search_content (WDialog * h, const char *directory, const char *filename)
 {
     struct stat s;
     char buffer[BUF_4K];
@@ -1183,7 +1183,7 @@ find_ignore_dir_search (const char *dir)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-find_rotate_dash (const Dlg_head * h, gboolean finish)
+find_rotate_dash (const WDialog * h, gboolean finish)
 {
     static const char rotating_dash[] = "|/-\\";
     static unsigned int pos = 0;
@@ -1203,7 +1203,7 @@ find_rotate_dash (const Dlg_head * h, gboolean finish)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-do_search (Dlg_head * h)
+do_search (WDialog * h)
 {
     static struct dirent *dp = NULL;
     static DIR *dirp = NULL;
@@ -1430,7 +1430,7 @@ view_edit_currently_selected_file (int unparsed_view, int edit)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-find_calc_button_locations (const Dlg_head * h, gboolean all_buttons)
+find_calc_button_locations (const WDialog * h, gboolean all_buttons)
 {
     const int cols = WIDGET (h)->cols;
 
@@ -1456,7 +1456,7 @@ find_calc_button_locations (const Dlg_head * h, gboolean all_buttons)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-find_relocate_buttons (const Dlg_head * h, gboolean all_buttons)
+find_relocate_buttons (const WDialog * h, gboolean all_buttons)
 {
     size_t i;
 
@@ -1469,7 +1469,7 @@ find_relocate_buttons (const Dlg_head * h, gboolean all_buttons)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-find_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+find_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {

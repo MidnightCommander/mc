@@ -70,7 +70,7 @@ spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word
     unsigned int i;
     int res;
     char *curr = NULL;
-    Dlg_head *sug_dlg;
+    WDialog *sug_dlg;
     WListbox *sug_list;
     int max_btn_len = 0;
     int add_len;

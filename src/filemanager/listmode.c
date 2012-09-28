@@ -173,14 +173,14 @@ bremove_cback (int action)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static Dlg_head *
+static WDialog *
 init_listmode (char *oldlistformat)
 {
     int i;
     char *s;
     int format_width = 0;
     int format_columns = 0;
-    Dlg_head *listmode_dlg;
+    WDialog *listmode_dlg;
 
     static struct listmode_label listmode_labels[] = {
         {UY + 13, UX + 22, "Item width:"}
@@ -271,7 +271,7 @@ init_listmode (char *oldlistformat)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-listmode_done (Dlg_head * h)
+listmode_done (WDialog * h)
 {
     destroy_dlg (h);
     if (0)
@@ -321,7 +321,7 @@ listmode_edit (char *oldlistformat)
 {
     char *newformat = NULL;
     char *s;
-    Dlg_head *listmode_dlg;
+    WDialog *listmode_dlg;
 
     s = g_strdup (oldlistformat);
     listmode_dlg = init_listmode (s);

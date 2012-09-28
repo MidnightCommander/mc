@@ -181,7 +181,7 @@ chmod_i18n (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chmod_toggle_select (Dlg_head * h, int Id)
+chmod_toggle_select (WDialog * h, int Id)
 {
     tty_setcolor (COLOR_NORMAL);
     check_perm[Id].selected = !check_perm[Id].selected;
@@ -194,7 +194,7 @@ chmod_toggle_select (Dlg_head * h, int Id)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chmod_refresh (Dlg_head * h)
+chmod_refresh (WDialog * h)
 {
     int y = WIDGET (file_gb)->y + 1;
     int x = WIDGET (file_gb)->x + 2;
@@ -216,7 +216,7 @@ chmod_refresh (Dlg_head * h)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-chmod_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+chmod_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -281,10 +281,10 @@ chmod_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
 
 /* --------------------------------------------------------------------------------------------- */
 
-static Dlg_head *
+static WDialog *
 init_chmod (const char *fname, const struct stat *sf_stat)
 {
-    Dlg_head *ch_dlg;
+    WDialog *ch_dlg;
     int lines, cols;
     int y;
     int perm_gb_len;
@@ -456,7 +456,7 @@ chmod_cmd (void)
     do
     {                           /* do while any files remaining */
         vfs_path_t *vpath;
-        Dlg_head *ch_dlg;
+        WDialog *ch_dlg;
         struct stat sf_stat;
         char *fname;
         int result;

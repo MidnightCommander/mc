@@ -433,7 +433,7 @@ mcview_eol (mcview_t * view, off_t current, off_t limit)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-mcview_get_title (const Dlg_head * h, size_t len)
+mcview_get_title (const WDialog * h, size_t len)
 {
     const mcview_t *view = (const mcview_t *) find_widget_type (h, mcview_callback);
     const char *modified = view->hexedit_mode && (view->change_list != NULL) ? "(*) " : "    ";

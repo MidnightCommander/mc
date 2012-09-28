@@ -75,7 +75,7 @@
 
 /*** file scope variables ************************************************************************/
 
-static struct Dlg_head *ch_dlg;
+static struct WDialog *ch_dlg;
 
 static struct
 {
@@ -279,7 +279,7 @@ chown_info_update (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-update_mode (Dlg_head * h)
+update_mode (WDialog * h)
 {
     print_flags ();
     chown_info_update ();
@@ -289,7 +289,7 @@ update_mode (Dlg_head * h)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-chl_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+chl_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -310,9 +310,9 @@ chl_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-do_enter_key (Dlg_head * h, int f_pos)
+do_enter_key (WDialog * h, int f_pos)
 {
-    Dlg_head *chl_dlg;
+    WDialog *chl_dlg;
     WListbox *chl_list;
     struct passwd *chl_pass;
     struct group *chl_grp;
@@ -458,7 +458,7 @@ b_setpos (int f_pos)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-advanced_chown_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+advanced_chown_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     int i;
     int f_pos;

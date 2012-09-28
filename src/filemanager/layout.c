@@ -222,7 +222,7 @@ check_split (panels_layout_t * layout)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-update_split (const Dlg_head * h)
+update_split (const WDialog * h)
 {
     /* Check split has to be done before testing if it changed, since
        it can change due to calling check_split() as well */
@@ -308,7 +308,7 @@ bminus_cback (WButton * button, int action)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+layout_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -428,10 +428,10 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
 
 /* --------------------------------------------------------------------------------------------- */
 
-static Dlg_head *
+static WDialog *
 init_layout (void)
 {
-    Dlg_head *layout_dlg;
+    WDialog *layout_dlg;
     int l1 = 0, width;
     int b1, b2, b;
     size_t i;
@@ -632,7 +632,7 @@ layout_change (void)
 void
 layout_box (void)
 {
-    Dlg_head *layout_dlg;
+    WDialog *layout_dlg;
     gboolean layout_do_change = FALSE;
 
     layout_dlg = init_layout ();
@@ -1298,7 +1298,7 @@ do_load_prompt (void)
         return ret;
 
     /* Don't actually change the prompt if it's invisible */
-    if (top_dlg != NULL && ((Dlg_head *) top_dlg->data == midnight_dlg) && command_prompt)
+    if (top_dlg != NULL && DIALOG (top_dlg->data) == midnight_dlg && command_prompt)
     {
         setup_cmdline ();
 

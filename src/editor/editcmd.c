@@ -118,7 +118,7 @@ static unsigned long edit_save_mode_radio_id, edit_save_mode_input_id;
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-edit_save_mode_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+edit_save_mode_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -535,7 +535,7 @@ edit_save_cmd (WEdit * edit)
  */
 
 static inline gboolean
-edit_load_file_from_filename (Dlg_head * h, const vfs_path_t * vpath)
+edit_load_file_from_filename (WDialog * h, const vfs_path_t * vpath)
 {
     Widget *w = WIDGET (h);
 
@@ -1521,7 +1521,7 @@ edit_refresh_cmd (void)
  */
 
 void
-edit_syntax_onoff_cmd (Dlg_head * h)
+edit_syntax_onoff_cmd (WDialog * h)
 {
     option_syntax_highlighting = !option_syntax_highlighting;
     g_list_foreach (h->widgets, edit_syntax_onoff_cb, NULL);
@@ -1536,7 +1536,7 @@ edit_syntax_onoff_cmd (Dlg_head * h)
  */
 
 void
-edit_show_tabs_tws_cmd (Dlg_head * h)
+edit_show_tabs_tws_cmd (WDialog * h)
 {
     enable_show_tabs_tws = !enable_show_tabs_tws;
     g_list_foreach (h->widgets, edit_redraw_page_cb, NULL);
@@ -1551,7 +1551,7 @@ edit_show_tabs_tws_cmd (Dlg_head * h)
  */
 
 void
-edit_show_margin_cmd (Dlg_head * h)
+edit_show_margin_cmd (WDialog * h)
 {
     show_right_margin = !show_right_margin;
     g_list_foreach (h->widgets, edit_redraw_page_cb, NULL);
@@ -1566,7 +1566,7 @@ edit_show_margin_cmd (Dlg_head * h)
  */
 
 void
-edit_show_numbers_cmd (Dlg_head * h)
+edit_show_numbers_cmd (WDialog * h)
 {
     option_line_state = !option_line_state;
     option_line_state_width = option_line_state ? LINE_STATE_WIDTH : 0;
@@ -2057,7 +2057,7 @@ edit_save_confirm_cmd (WEdit * edit)
   */
 
 gboolean
-edit_load_cmd (Dlg_head * h)
+edit_load_cmd (WDialog * h)
 {
     char *exp;
     gboolean ret = TRUE;        /* possible cancel */
@@ -2087,7 +2087,7 @@ edit_load_cmd (Dlg_head * h)
   */
 
 gboolean
-edit_load_syntax_file (Dlg_head * h)
+edit_load_syntax_file (WDialog * h)
 {
     vfs_path_t *extdir_vpath;
     int dir = 0;
@@ -2132,7 +2132,7 @@ edit_load_syntax_file (Dlg_head * h)
   */
 
 gboolean
-edit_load_menu_file (Dlg_head * h)
+edit_load_menu_file (WDialog * h)
 {
     vfs_path_t *buffer_vpath;
     vfs_path_t *menufile_vpath;
@@ -2202,7 +2202,7 @@ edit_close_cmd (WEdit * edit)
 
     if (ret)
     {
-        Dlg_head *h = WIDGET (edit)->owner;
+        WDialog *h = WIDGET (edit)->owner;
 
         if (edit->locked != 0)
             unlock_file (edit->filename_vpath);
