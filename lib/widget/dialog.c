@@ -600,7 +600,7 @@ draw_box (const Dlg_head * h, int y, int x, int ys, int xs, gboolean single)
 
 /** Clean the dialog area, draw the frame and the title */
 void
-common_dialog_repaint (Dlg_head * h)
+dlg_default_repaint (Dlg_head * h)
 {
     Widget *wh = WIDGET (h);
 
@@ -734,7 +734,7 @@ dlg_set_size (Dlg_head * h, int lines, int cols)
 /** Default dialog callback */
 
 cb_ret_t
-default_dlg_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+dlg_default_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     (void) sender;
     (void) parm;
@@ -745,7 +745,7 @@ default_dlg_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
     case DLG_DRAW:
         if (h->color != NULL)
         {
-            common_dialog_repaint (h);
+            dlg_default_repaint (h);
             return MSG_HANDLED;
         }
         return MSG_NOT_HANDLED;
@@ -790,7 +790,7 @@ create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
     if (colors != NULL)
         memmove (new_d->color, colors, sizeof (dlg_colors_t));
     new_d->help_ctx = help_ctx;
-    new_d->callback = (callback != NULL) ? callback : default_dlg_callback;
+    new_d->callback = (callback != NULL) ? callback : dlg_default_callback;
     new_d->flags = flags;
     new_d->data = NULL;
 

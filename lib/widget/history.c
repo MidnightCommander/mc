@@ -125,7 +125,7 @@ history_dlg_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
         return history_dlg_reposition (h);
 
     default:
-        return default_dlg_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (h, sender, msg, parm, data);
     }
 }
 

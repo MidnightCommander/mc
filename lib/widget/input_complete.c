@@ -1217,7 +1217,7 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
         break;
 
     default:
-        return default_dlg_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (h, sender, msg, parm, data);
     }
 }
 

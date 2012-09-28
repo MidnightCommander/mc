@@ -127,7 +127,7 @@ void hotkey_draw (struct Widget *w, const hotkey_t hotkey, gboolean focused);
 void init_widget (Widget * w, int y, int x, int lines, int cols,
                   widget_cb_fn callback, mouse_h mouse_handler);
 /* Default callback for widgets */
-cb_ret_t default_widget_callback (Widget * sender, widget_msg_t msg, int parm, void *data);
+cb_ret_t widget_default_callback (Widget * sender, widget_msg_t msg, int parm, void *data);
 void widget_default_set_options_callback (Widget *w, widget_options_t options, gboolean enable);
 void widget_set_options (Widget *w, widget_options_t options, gboolean enable);
 void widget_set_size (Widget * widget, int y, int x, int lines, int cols);

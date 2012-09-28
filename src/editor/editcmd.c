@@ -135,7 +135,7 @@ edit_save_mode_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm,
         return MSG_NOT_HANDLED;
 
     default:
-        return default_dlg_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (h, sender, msg, parm, data);
     }
 }
 

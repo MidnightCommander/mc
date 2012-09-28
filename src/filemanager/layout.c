@@ -315,7 +315,7 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
     case DLG_DRAW:
         /* When repainting the whole dialog (e.g. with C-l) we have to
            update everything */
-        common_dialog_repaint (h);
+        dlg_default_repaint (h);
 
         old_layout.horizontal_split = -1;
         old_layout.left_panel_size = -1;
@@ -422,7 +422,7 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
         return MSG_NOT_HANDLED;
 
     default:
-        return default_dlg_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (h, sender, msg, parm, data);
     }
 }
 

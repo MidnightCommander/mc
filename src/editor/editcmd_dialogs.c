@@ -77,7 +77,7 @@ editcmd_dialog_raw_key_query_cb (Dlg_head *h, Widget * sender, dlg_msg_t msg, in
         dlg_stop (h);
         return MSG_HANDLED;
     default:
-        return default_dlg_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (h, sender, msg, parm, data);
     }
 }
 

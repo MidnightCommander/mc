@@ -186,10 +186,10 @@ void dlg_redraw (Dlg_head * h);
 void dlg_broadcast_msg (Dlg_head * h, widget_msg_t message);
 
 /* Default callback for dialogs */
-cb_ret_t default_dlg_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data);
+cb_ret_t dlg_default_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data);
 
 /* Default paint routine for dialogs */
-void common_dialog_repaint (Dlg_head * h);
+void dlg_default_repaint (Dlg_head * h);
 
 void dlg_replace_widget (Widget * old, Widget * new);
 int dlg_overlap (Widget * a, Widget * b);

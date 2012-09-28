@@ -63,7 +63,7 @@ static int sel_pos = 0;
 /** default query callback, used to reposition query */
 
 static cb_ret_t
-default_query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+query_default_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -107,7 +107,7 @@ default_query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, 
         /* fallthrough */
 
     default:
-        return default_dlg_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (h, sender, msg, parm, data);
     }
 }
 
@@ -126,7 +126,7 @@ do_create_message (int flags, const char *title, const char *text)
     d = last_query_dlg;
 
     /* do resize before initing and running */
-    default_query_callback (d, NULL, DLG_RESIZE, 0, NULL);
+    query_default_callback (d, NULL, DLG_RESIZE, 0, NULL);
 
     init_dlg (d);
     g_free (p);
@@ -304,7 +304,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
 
     /* prepare dialog */
     query_dlg =
-        create_dlg (TRUE, 0, 0, lines, cols, query_colors, default_query_callback, NULL,
+        create_dlg (TRUE, 0, 0, lines, cols, query_colors, query_default_callback, NULL,
                     "[QueryBox]", header, dlg_flags);
 
     if (count > 0)
@@ -334,7 +334,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
         va_end (ap);
 
         /* do resize before running and selecting any widget */
-        default_query_callback (query_dlg, NULL, DLG_RESIZE, 0, NULL);
+        query_default_callback (query_dlg, NULL, DLG_RESIZE, 0, NULL);
 
         if (defbutton != NULL)
             dlg_select_widget (defbutton);

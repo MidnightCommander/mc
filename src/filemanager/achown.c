@@ -303,7 +303,7 @@ chl_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data
         }
 
     default:
-        return default_dlg_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (h, sender, msg, parm, data);
     }
 }
 
@@ -422,7 +422,7 @@ do_enter_key (Dlg_head * h, int f_pos)
 static void
 chown_refresh (void)
 {
-    common_dialog_repaint (ch_dlg);
+    dlg_default_repaint (ch_dlg);
 
     tty_setcolor (COLOR_NORMAL);
 
@@ -610,7 +610,7 @@ advanced_chown_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm,
         return MSG_NOT_HANDLED;
 
     default:
-        return default_dlg_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (h, sender, msg, parm, data);
     }
 }
 

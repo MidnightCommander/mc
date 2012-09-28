@@ -221,7 +221,7 @@ panel_listing_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, 
         return MSG_NOT_HANDLED;
 
     default:
-        return default_dlg_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (h, sender, msg, parm, data);
     }
 }
 
@@ -291,7 +291,7 @@ tree_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *dat
         return send_message (WIDGET (find_tree (h)), NULL, WIDGET_COMMAND, parm, NULL);
 
     default:
-        return default_dlg_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (h, sender, msg, parm, data);
     }
 }
 
@@ -318,7 +318,7 @@ confvfs_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *
         return MSG_NOT_HANDLED;
 
     default:
-        return default_dlg_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (h, sender, msg, parm, data);
     }
 }
 #endif /* ENABLE_VFS && ENABLE_VFS_FTP */

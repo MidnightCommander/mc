@@ -955,7 +955,7 @@ help_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *dat
         return MSG_HANDLED;
 
     case DLG_DRAW:
-        common_dialog_repaint (h);
+        dlg_default_repaint (h);
         help_show (h, currentpoint);
         return MSG_HANDLED;
 
@@ -976,7 +976,7 @@ help_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *dat
         return MSG_NOT_HANDLED;
 
     default:
-        return default_dlg_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (h, sender, msg, parm, data);
     }
 }
 
@@ -1031,7 +1031,7 @@ md_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data
         return MSG_HANDLED;
 
     default:
-        return default_widget_callback (sender, msg, parm, data);
+        return widget_default_callback (sender, msg, parm, data);
     }
 }
 

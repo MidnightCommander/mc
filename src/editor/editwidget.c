@@ -878,7 +878,7 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
         return MSG_HANDLED;
 
     case DLG_DRAW:
-        /* don't use common_dialog_repaint() -- we don't need a frame */
+        /* don't use dlg_default_repaint() -- we don't need a frame */
         tty_setcolor (EDITOR_BACKGROUND);
         dlg_erase (h);
         return MSG_HANDLED;
@@ -956,7 +956,7 @@ edit_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, vo
         return MSG_HANDLED;
 
     default:
-        return default_dlg_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (h, sender, msg, parm, data);
     }
 }
 
@@ -1027,7 +1027,7 @@ edit_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
         return MSG_HANDLED;
 
     default:
-        return default_widget_callback (sender, msg, parm, data);
+        return widget_default_callback (sender, msg, parm, data);
     }
 }
 

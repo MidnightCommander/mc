@@ -148,7 +148,7 @@ chown_refresh (Dlg_head * h)
     const int y = 3;
     const int x = 7 + GW * 2;
 
-    common_dialog_repaint (h);
+    dlg_default_repaint (h);
 
     tty_setcolor (COLOR_NORMAL);
 
@@ -187,7 +187,7 @@ chown_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
         return MSG_HANDLED;
 
     default:
-        return default_dlg_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (h, sender, msg, parm, data);
     }
 }
 

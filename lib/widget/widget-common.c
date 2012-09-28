@@ -158,7 +158,7 @@ init_widget (Widget * w, int y, int x, int lines, int cols,
 
 /* Default callback for widgets */
 cb_ret_t
-default_widget_callback (Widget * sender, widget_msg_t msg, int parm, void *data)
+widget_default_callback (Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     (void) sender;
     (void) parm;

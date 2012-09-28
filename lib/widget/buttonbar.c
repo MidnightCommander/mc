@@ -209,7 +209,7 @@ buttonbar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         return MSG_HANDLED;
 
     default:
-        return default_widget_callback (sender, msg, parm, data);
+        return widget_default_callback (sender, msg, parm, data);
     }
 }
 
