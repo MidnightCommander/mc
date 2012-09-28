@@ -216,11 +216,13 @@ chmod_refresh (WDialog * h)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-chmod_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+chmod_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
+    WDialog *h = DIALOG (w);
+
     switch (msg)
     {
-    case DLG_ACTION:
+    case MSG_ACTION:
         {
             /* handle checkboxes */
             unsigned int i;
@@ -249,7 +251,7 @@ chmod_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *dat
 
         return MSG_NOT_HANDLED;
 
-    case DLG_KEY:
+    case MSG_KEY:
         if (parm == 'T' || parm == 't' || parm == KEY_IC)
         {
             unsigned int i;
@@ -270,12 +272,12 @@ chmod_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *dat
         }
         return MSG_NOT_HANDLED;
 
-    case DLG_DRAW:
+    case MSG_DRAW:
         chmod_refresh (h);
         return MSG_HANDLED;
 
     default:
-        return dlg_default_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 

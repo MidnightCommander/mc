@@ -341,11 +341,11 @@ command_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 
     switch (msg)
     {
-    case WIDGET_FOCUS:
+    case MSG_FOCUS:
         /* Never accept focus, otherwise panels will be unselected */
         return MSG_NOT_HANDLED;
 
-    case WIDGET_KEY:
+    case MSG_KEY:
         /* Special case: we handle the enter key */
         if (parm == '\n')
             return enter (cmd);

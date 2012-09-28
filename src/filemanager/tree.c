@@ -1211,12 +1211,12 @@ tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
 
     switch (msg)
     {
-    case WIDGET_DRAW:
+    case MSG_DRAW:
         tree_frame (h, tree);
         show_tree (tree);
         return MSG_HANDLED;
 
-    case WIDGET_FOCUS:
+    case MSG_FOCUS:
         tree->active = 1;
         buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), tree_map, w);
         buttonbar_set_label (b, 2, Q_ ("ButtonBar|Rescan"), tree_map, w);
@@ -1242,25 +1242,25 @@ tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
         /* FIXME: Should find a better way of changing the color of the
            selected item */
 
-    case WIDGET_UNFOCUS:
+    case MSG_UNFOCUS:
         tree->active = 0;
         tree->searching = 0;
         show_tree (tree);
         return MSG_HANDLED;
 
-    case WIDGET_KEY:
+    case MSG_KEY:
         return tree_key (tree, parm);
 
-    case WIDGET_COMMAND:
+    case MSG_ACTION:
         /* command from buttonbar */
         return tree_execute_cmd (tree, parm);
 
-    case WIDGET_DESTROY:
+    case MSG_DESTROY:
         tree_destroy (tree);
         return MSG_HANDLED;
 
     default:
-        return widget_default_callback (sender, msg, parm, data);
+        return widget_default_callback (w, sender, msg, parm, data);
     }
 }
 

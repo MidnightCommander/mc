@@ -58,13 +58,13 @@ static cb_ret_t
 button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WButton *b = (WButton *) w;
+    WDialog *h = w->owner;
     int stop = 0;
     int off = 0;
-    WDialog *h = w->owner;
 
     switch (msg)
     {
-    case WIDGET_HOTKEY:
+    case MSG_HOTKEY:
         /*
          * Don't let the default button steal Enter from the current
          * button.  This is a workaround for the flawed event model
@@ -73,24 +73,24 @@ button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
          */
         if (parm == '\n' && WIDGET (h->current->data) == WIDGET (b))
         {
-            send_message (w, sender, WIDGET_KEY, ' ', data);
+            send_message (w, sender, MSG_KEY, ' ', data);
             return MSG_HANDLED;
         }
 
         if (parm == '\n' && b->flags == DEFPUSH_BUTTON)
         {
-            send_message (w, sender, WIDGET_KEY, ' ', data);
+            send_message (w, sender, MSG_KEY, ' ', data);
             return MSG_HANDLED;
         }
 
         if (b->text.hotkey != NULL && g_ascii_tolower ((gchar) b->text.hotkey[0]) == parm)
         {
-            send_message (w, sender, WIDGET_KEY, ' ', data);
+            send_message (w, sender, MSG_KEY, ' ', data);
             return MSG_HANDLED;
         }
         return MSG_NOT_HANDLED;
 
-    case WIDGET_KEY:
+    case MSG_KEY:
         if (parm != ' ' && parm != '\n')
             return MSG_NOT_HANDLED;
 
@@ -103,7 +103,7 @@ button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
         }
         return MSG_HANDLED;
 
-    case WIDGET_CURSOR:
+    case MSG_CURSOR:
         switch (b->flags)
         {
         case DEFPUSH_BUTTON:
@@ -123,12 +123,12 @@ button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
         widget_move (w, 0, b->hotpos + off);
         return MSG_HANDLED;
 
-    case WIDGET_UNFOCUS:
-    case WIDGET_FOCUS:
-    case WIDGET_DRAW:
-        if (msg == WIDGET_UNFOCUS)
+    case MSG_UNFOCUS:
+    case MSG_FOCUS:
+    case MSG_DRAW:
+        if (msg == MSG_UNFOCUS)
             b->selected = FALSE;
-        else if (msg == WIDGET_FOCUS)
+        else if (msg == MSG_FOCUS)
             b->selected = TRUE;
 
         widget_selectcolor (w, b->selected, FALSE);
@@ -168,12 +168,12 @@ button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
         }
         return MSG_HANDLED;
 
-    case WIDGET_DESTROY:
+    case MSG_DESTROY:
         release_hotkey (b->text);
         return MSG_HANDLED;
 
     default:
-        return widget_default_callback (sender, msg, parm, data);
+        return widget_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -192,8 +192,8 @@ button_event (Gpm_Event * event, void *data)
         dlg_select_widget (w);
         if ((event->type & GPM_UP) != 0)
         {
-            send_message (w, NULL, WIDGET_KEY, ' ', NULL);
-            w->owner->callback (w->owner, w, DLG_POST_KEY, ' ', NULL);
+            send_message (w, NULL, MSG_KEY, ' ', NULL);
+            send_message (w->owner, w, MSG_POST_KEY, ' ', NULL);
         }
     }
 
@@ -246,7 +246,7 @@ button_set_text (WButton * b, const char *text)
     b->text = parse_hotkey (text);
     w->cols = button_get_len (b);
     if (w->owner != NULL)
-        send_message (w, NULL, WIDGET_DRAW, 0, NULL);
+        send_message (w, NULL, MSG_DRAW, 0, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

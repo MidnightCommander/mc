@@ -151,8 +151,7 @@ buttonbar_call (WButtonBar * bb, int i)
     Widget *w = WIDGET (bb);
 
     if ((bb != NULL) && (bb->labels[i].command != CK_IgnoreKey))
-        ret = w->owner->callback (w->owner, w, DLG_ACTION,
-                                  bb->labels[i].command, bb->labels[i].receiver);
+        ret = send_message (w->owner, w, MSG_ACTION, bb->labels[i].command, bb->labels[i].receiver);
     return ret;
 }
 
@@ -167,16 +166,16 @@ buttonbar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
 
     switch (msg)
     {
-    case WIDGET_FOCUS:
+    case MSG_FOCUS:
         return MSG_NOT_HANDLED;
 
-    case WIDGET_HOTKEY:
+    case MSG_HOTKEY:
         for (i = 0; i < BUTTONBAR_LABELS_NUM; i++)
             if (parm == KEY_F (i + 1) && buttonbar_call (bb, i))
                 return MSG_HANDLED;
         return MSG_NOT_HANDLED;
 
-    case WIDGET_DRAW:
+    case MSG_DRAW:
         if (bb->visible)
         {
             buttonbar_init_button_positions (bb);
@@ -203,13 +202,13 @@ buttonbar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         }
         return MSG_HANDLED;
 
-    case WIDGET_DESTROY:
+    case MSG_DESTROY:
         for (i = 0; i < BUTTONBAR_LABELS_NUM; i++)
             g_free (bb->labels[i].text);
         return MSG_HANDLED;
 
     default:
-        return widget_default_callback (sender, msg, parm, data);
+        return widget_default_callback (w, sender, msg, parm, data);
     }
 }
 

@@ -118,24 +118,24 @@ static unsigned long edit_save_mode_radio_id, edit_save_mode_input_id;
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-edit_save_mode_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+edit_save_mode_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
-    case DLG_ACTION:
+    case MSG_ACTION:
         if (sender != NULL && sender->id == edit_save_mode_radio_id)
         {
-            Widget *w;
+            Widget *ww;
 
-            w = dlg_find_by_id (h, edit_save_mode_input_id);
-            widget_disable (w, ((WRadio *) sender)->sel != 2);
+            ww = dlg_find_by_id (DIALOG (w), edit_save_mode_input_id);
+            widget_disable (ww, ((WRadio *) sender)->sel != 2);
             return MSG_HANDLED;
         }
 
         return MSG_NOT_HANDLED;
 
     default:
-        return dlg_default_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -3406,7 +3406,7 @@ edit_select_codepage_cmd (WEdit * edit)
         edit_set_codeset (edit);
 
     edit->force = REDRAW_PAGE;
-    send_message (WIDGET (edit), NULL, WIDGET_DRAW, 0, NULL);
+    send_message (edit, NULL, MSG_DRAW, 0, NULL);
 }
 #endif
 

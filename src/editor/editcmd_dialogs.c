@@ -68,16 +68,18 @@ edit_search_options_t edit_search_options = {
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-editcmd_dialog_raw_key_query_cb (WDialog *h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+editcmd_dialog_raw_key_query_cb (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
+    WDialog *h = DIALOG (w);
+
     switch (msg)
     {
-    case DLG_KEY:
+    case MSG_KEY:
         h->ret_value = parm;
         dlg_stop (h);
         return MSG_HANDLED;
     default:
-        return dlg_default_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 

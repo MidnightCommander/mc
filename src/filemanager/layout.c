@@ -233,7 +233,7 @@ update_split (const WDialog * h)
         check_options[0].widget->state = _panels_layout.horizontal_equal ? 1 : 0;
     else
         check_options[0].widget->state = _panels_layout.vertical_equal ? 1 : 0;
-    send_message (WIDGET (check_options[0].widget), NULL, WIDGET_DRAW, 0, NULL);
+    send_message (check_options[0].widget, NULL, MSG_DRAW, 0, NULL);
 
     tty_setcolor (check_options[0].widget->state & C_BOOL ? DISABLED_COLOR : COLOR_NORMAL);
 
@@ -308,11 +308,13 @@ bminus_cback (WButton * button, int action)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-layout_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
+    WDialog * h = DIALOG (w);
+
     switch (msg)
     {
-    case DLG_DRAW:
+    case MSG_DRAW:
         /* When repainting the whole dialog (e.g. with C-l) we have to
            update everything */
         dlg_default_repaint (h);
@@ -336,7 +338,7 @@ layout_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *da
         }
         return MSG_HANDLED;
 
-    case DLG_POST_KEY:
+    case MSG_POST_KEY:
         _menubar_visible = check_options[1].widget->state & C_BOOL;
         _command_prompt = (check_options[2].widget->state & C_BOOL) != 0;
         _keybar_visible = check_options[3].widget->state & C_BOOL;
@@ -372,7 +374,7 @@ layout_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *da
         }
         return MSG_HANDLED;
 
-    case DLG_ACTION:
+    case MSG_ACTION:
         if (sender == WIDGET (radio_widget))
         {
             if (_panels_layout.horizontal_split != radio_widget->sel)
@@ -422,7 +424,7 @@ layout_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *da
         return MSG_NOT_HANDLED;
 
     default:
-        return dlg_default_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 

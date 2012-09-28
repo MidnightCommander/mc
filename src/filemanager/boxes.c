@@ -118,11 +118,13 @@ static WListbox *bg_list = NULL;
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-panel_listing_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
+    WDialog *h = DIALOG (w);
+
     switch (msg)
     {
-    case DLG_KEY:
+    case MSG_KEY:
         if (parm == '\n')
         {
             Widget *wi;
@@ -170,14 +172,14 @@ panel_listing_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, v
                     r = (WRadio *) dlg_find_by_id (h, panel_listing_types_id);
                     r->pos = r->sel = panel_listing_user_idx;
                     dlg_select_widget (WIDGET (r));     /* force redraw */
-                    h->callback (h, WIDGET (r), DLG_ACTION, 0, NULL);
+                    send_message (h, r, MSG_ACTION, 0, NULL);
                     return MSG_HANDLED;
                 }
             }
         }
         return MSG_NOT_HANDLED;
 
-    case DLG_ACTION:
+    case MSG_ACTION:
         if (sender != NULL && sender->id == panel_listing_types_id)
         {
             WCheck *ch;
@@ -221,7 +223,7 @@ panel_listing_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, v
         return MSG_NOT_HANDLED;
 
     default:
-        return dlg_default_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -262,11 +264,13 @@ sel_charset_button (WButton * button, int action)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-tree_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
+    WDialog *h = DIALOG (w);
+
     switch (msg)
     {
-    case DLG_POST_KEY:
+    case MSG_POST_KEY:
         /* The enter key will be processed by the tree widget */
         if (parm == '\n')
         {
@@ -275,7 +279,7 @@ tree_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data
         }
         return MSG_HANDLED;
 
-    case DLG_RESIZE:
+    case MSG_RESIZE:
         {
             Widget *bar;
 
@@ -287,11 +291,11 @@ tree_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data
             return MSG_HANDLED;
         }
 
-    case DLG_ACTION:
-        return send_message (WIDGET (find_tree (h)), NULL, WIDGET_COMMAND, parm, NULL);
+    case MSG_ACTION:
+        return send_message (find_tree (h), NULL, MSG_ACTION, parm, NULL);
 
     default:
-        return dlg_default_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -299,26 +303,26 @@ tree_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data
 
 #if defined(ENABLE_VFS) && defined (ENABLE_VFS_FTP)
 static cb_ret_t
-confvfs_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+confvfs_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
-    case DLG_ACTION:
+    case MSG_ACTION:
         /* message from "Always use ftp proxy" checkbutton */
         if (sender != NULL && sender->id == ftpfs_always_use_proxy_id)
         {
             const gboolean not_use = !(((WCheck *) sender)->state & C_BOOL);
-            Widget *w;
+            Widget *wi;
 
             /* input */
-            w = dlg_find_by_id (h, ftpfs_proxy_host_id);
-            widget_disable (w, not_use);
+            wi = dlg_find_by_id (DIALOG (w), ftpfs_proxy_host_id);
+            widget_disable (wi, not_use);
             return MSG_HANDLED;
         }
         return MSG_NOT_HANDLED;
 
     default:
-        return dlg_default_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 #endif /* ENABLE_VFS && ENABLE_VFS_FTP */

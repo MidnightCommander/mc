@@ -1580,7 +1580,7 @@ single_dirsize_cmd (void)
     }
 
     if (panels_options.mark_moves_down)
-        send_message (WIDGET (panel), NULL, WIDGET_COMMAND, CK_Down, NULL);
+        send_message (panel, NULL, MSG_ACTION, CK_Down, NULL);
 
     recalculate_panel_summary (panel);
 

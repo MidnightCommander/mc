@@ -292,31 +292,28 @@ info_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
 {
     struct WInfo *info = (struct WInfo *) w;
 
-    (void) sender;
-    (void) data;
-
     switch (msg)
     {
-    case WIDGET_INIT:
+    case MSG_INIT:
         init_my_statfs ();
         add_hook (&select_file_hook, info_hook, info);
         info->ready = 0;
         return MSG_HANDLED;
 
-    case WIDGET_DRAW:
+    case MSG_DRAW:
         info_hook (info);
         return MSG_HANDLED;
 
-    case WIDGET_FOCUS:
+    case MSG_FOCUS:
         return MSG_NOT_HANDLED;
 
-    case WIDGET_DESTROY:
+    case MSG_DESTROY:
         delete_hook (&select_file_hook, info_hook);
         free_my_statfs ();
         return MSG_HANDLED;
 
     default:
-        return widget_default_callback (sender, msg, parm, data);
+        return widget_default_callback (w, sender, msg, parm, data);
     }
 }
 

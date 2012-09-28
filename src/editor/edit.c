@@ -1807,7 +1807,7 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
 
     edit_cursor_move (edit, curs - edit->curs1);
     edit->force |= REDRAW_PAGE;
-    send_message (WIDGET (edit), NULL, WIDGET_DRAW, 0, NULL);
+    send_message (edit, NULL, MSG_DRAW, 0, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3472,7 +3472,7 @@ edit_find_bracket (WEdit * edit)
 /* --------------------------------------------------------------------------------------------- */
 /**
  * This executes a command as though the user initiated it through a key
- * press.  Callback with WIDGET_KEY as a message calls this after
+ * press.  Callback with MSG_KEY as a message calls this after
  * translating the key press.  This function can be used to pass any
  * command to the editor.  Note that the screen wouldn't update
  * automatically.  Either of command or char_for_insertion must be

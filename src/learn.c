@@ -232,15 +232,15 @@ learn_check_key (int c)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-learn_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+learn_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
-    case DLG_KEY:
+    case MSG_KEY:
         return learn_check_key (parm) ? MSG_HANDLED : MSG_NOT_HANDLED;
 
     default:
-        return dlg_default_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 

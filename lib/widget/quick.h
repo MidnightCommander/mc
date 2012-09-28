@@ -334,7 +334,7 @@ typedef struct
     const char *title;
     const char *help;
     quick_widget_t *widgets;
-    dlg_cb_fn callback;
+    widget_cb_fn callback;
     mouse_h mouse;
 } quick_dialog_t;
 

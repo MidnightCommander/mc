@@ -115,7 +115,7 @@ static struct
 static GSList *link_area = NULL;
 static gboolean inside_link_area = FALSE;
 
-static cb_ret_t help_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data);
+static cb_ret_t help_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data);
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -627,7 +627,7 @@ help_event (Gpm_Event * event, void *vp)
         if (history_ptr < 0)
             history_ptr = HISTORY_SIZE - 1;
 
-        help_callback (w->owner, NULL, DLG_DRAW, 0, NULL);
+        send_message (w->owner, NULL, MSG_DRAW, 0, NULL);
         return MOU_NORMAL;
     }
 
@@ -675,7 +675,7 @@ help_event (Gpm_Event * event, void *vp)
         move_forward (1);
 
     /* Show the new node */
-    help_callback (w->owner, NULL, DLG_DRAW, 0, NULL);
+    send_message (w->owner, NULL, MSG_DRAW, 0, NULL);
 
     return MOU_NORMAL;
 }
@@ -697,7 +697,7 @@ help_help (WDialog * h)
     {
         currentpoint = p + 1;   /* Skip the newline following the start of the node */
         selected_item = NULL;
-        help_callback (h, NULL, DLG_DRAW, 0, NULL);
+        send_message (h, NULL, MSG_DRAW, 0, NULL);
     }
 }
 
@@ -720,7 +720,7 @@ help_index (WDialog * h)
 
         currentpoint = new_item + 1;    /* Skip the newline following the start of the node */
         selected_item = NULL;
-        help_callback (h, NULL, DLG_DRAW, 0, NULL);
+        send_message (h, NULL, MSG_DRAW, 0, NULL);
     }
 }
 
@@ -735,7 +735,7 @@ help_back (WDialog * h)
     if (history_ptr < 0)
         history_ptr = HISTORY_SIZE - 1;
 
-    help_callback (h, NULL, DLG_DRAW, 0, NULL); /* FIXME: unneeded? */
+    send_message (h, NULL, MSG_DRAW, 0, NULL); /* FIXME: unneeded? */
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -934,35 +934,39 @@ help_handle_key (WDialog * h, int c)
     if ((command == CK_IgnoreKey) || (help_execute_cmd (command) == MSG_NOT_HANDLED))
         return MSG_NOT_HANDLED;
 
-    help_callback (h, NULL, DLG_DRAW, 0, NULL);
+    send_message (h, NULL, MSG_DRAW, 0, NULL);
     return MSG_HANDLED;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-help_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+help_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WButtonBar *bb;
+    WDialog *h = DIALOG (w);
 
     switch (msg)
     {
-    case DLG_RESIZE:
-        help_lines = min (LINES - 4, max (2 * LINES / 3, 18));
-        dlg_set_size (h, help_lines + 4, HELP_WINDOW_WIDTH + 4);
-        bb = find_buttonbar (h);
-        widget_set_size (WIDGET (bb), LINES - 1, 0, 1, COLS);
-        return MSG_HANDLED;
+    case MSG_RESIZE:
+        {
+            WButtonBar *bb;
 
-    case DLG_DRAW:
+            help_lines = min (LINES - 4, max (2 * LINES / 3, 18));
+            dlg_set_size (h, help_lines + 4, HELP_WINDOW_WIDTH + 4);
+            bb = find_buttonbar (h);
+            widget_set_size (WIDGET (bb), LINES - 1, 0, 1, COLS);
+            return MSG_HANDLED;
+        }
+
+    case MSG_DRAW:
         dlg_default_repaint (h);
         help_show (h, currentpoint);
         return MSG_HANDLED;
 
-    case DLG_KEY:
+    case MSG_KEY:
         return help_handle_key (h, parm);
 
-    case DLG_ACTION:
+    case MSG_ACTION:
         /* shortcut */
         if (sender == NULL)
             return help_execute_cmd (parm);
@@ -970,13 +974,13 @@ help_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data
         if (sender == WIDGET (find_buttonbar (h)))
         {
             if (data != NULL)
-                return send_message (WIDGET (data), NULL, WIDGET_COMMAND, parm, NULL);
+                return send_message (data, NULL, MSG_ACTION, parm, NULL);
             return help_execute_cmd (parm);
         }
         return MSG_NOT_HANDLED;
 
     default:
-        return dlg_default_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -1026,12 +1030,12 @@ md_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data
 {
     switch (msg)
     {
-    case WIDGET_RESIZED:
+    case MSG_RESIZE:
         w->lines = help_lines;
         return MSG_HANDLED;
 
     default:
-        return widget_default_callback (sender, msg, parm, data);
+        return widget_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -1040,7 +1044,9 @@ md_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data
 static Widget *
 mousedispatch_new (int y, int x, int yl, int xl)
 {
-    Widget *w = g_new (Widget, 1);
+    Widget *w;
+
+    w = g_new (Widget, 1);
     init_widget (w, y, x, yl, xl, md_callback, help_event);
     return w;
 }

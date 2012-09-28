@@ -117,15 +117,15 @@ history_dlg_reposition (WDialog * dlg_head)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-history_dlg_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+history_dlg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
-    case DLG_RESIZE:
-        return history_dlg_reposition (h);
+    case MSG_RESIZE:
+        return history_dlg_reposition (DIALOG (w));
 
     default:
-        return dlg_default_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -336,7 +336,7 @@ history_show (GList ** history, Widget * widget, int current)
        The main idea - create 4x4 dialog and add 2x2 list in
        center of it, and let dialog function resize it to needed
        size. */
-    history_dlg_callback (query_dlg, NULL, DLG_RESIZE, 0, NULL);
+    send_message (query_dlg, NULL, MSG_RESIZE, 0, NULL);
 
     if (WIDGET (query_dlg)->y < widget->y)
     {

@@ -552,29 +552,31 @@ hotlist_handle_key (WDialog * h, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-hotlist_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+hotlist_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
+    WDialog *h = DIALOG (w);
+
     switch (msg)
     {
-    case DLG_UNHANDLED_KEY:
+    case MSG_UNHANDLED_KEY:
         return hotlist_handle_key (h, parm);
 
-    case DLG_POST_KEY:
+    case MSG_POST_KEY:
         dlg_select_widget (h == hotlist_dlg ? l_hotlist : l_movelist);
         /* always stay on hotlist */
         /* fall through */
 
-    case DLG_INIT:
+    case MSG_INIT:
         update_path_name ();
         return MSG_HANDLED;
 
-    case DLG_RESIZE:
+    case MSG_RESIZE:
         /* simply call dlg_set_size() with new size */
         dlg_set_size (h, LINES - (h == hotlist_dlg ? 2 : 6), COLS - 6);
         return MSG_HANDLED;
 
     default:
-        return dlg_default_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -604,7 +606,7 @@ hotlist_listbox_callback (WListbox * list)
             else
             {
                 hotlist_button_callback (NULL, B_ENTER);
-                hotlist_callback (dlg, NULL, DLG_POST_KEY, '\n', NULL);
+                send_message (dlg, NULL, MSG_POST_KEY, '\n', NULL);
                 return LISTBOX_CONT;
             }
         }
@@ -617,7 +619,7 @@ hotlist_listbox_callback (WListbox * list)
     }
 
     hotlist_button_callback (NULL, B_UP_GROUP);
-    hotlist_callback (dlg, NULL, DLG_POST_KEY, 'u', NULL);
+    send_message (dlg, NULL, MSG_POST_KEY, 'u', NULL);
     return LISTBOX_CONT;
 }
 

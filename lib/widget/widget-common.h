@@ -24,25 +24,31 @@
 /* Widget messages */
 typedef enum
 {
-    WIDGET_INIT,                /* Initialize widget */
-    WIDGET_FOCUS,               /* Draw widget in focused state */
-    WIDGET_UNFOCUS,             /* Draw widget in unfocused state */
-    WIDGET_DRAW,                /* Sent to widget to draw themselves */
-    WIDGET_KEY,                 /* Sent to widgets on key press */
-    WIDGET_HOTKEY,              /* Sent to widget to catch preprocess key */
-    WIDGET_COMMAND,             /* Send to widget to handle command */
-    WIDGET_DESTROY,             /* Sent to widget at destruction time */
-    WIDGET_CURSOR,              /* Sent to widget to position the cursor */
-    WIDGET_IDLE,                /* Sent to widgets with options & W_WANT_IDLE */
-    WIDGET_RESIZED              /* Sent after a widget has been resized */
+    MSG_INIT = 0,               /* Initialize widget */
+    MSG_FOCUS,                  /* Draw widget in focused state or widget has got focus */
+    MSG_UNFOCUS,                /* Draw widget in unfocused state or widget has been unfocused */
+    MSG_DRAW,                   /* Draw widget on screen */
+    MSG_KEY,                    /* Sent to widgets on key press */
+    MSG_HOTKEY,                 /* Sent to widget to catch preprocess key */
+    MSG_HOTKEY_HANDLED,         /* A widget has got the hotkey */
+    MSG_UNHANDLED_KEY,          /* Key that no widget handled */
+    MSG_POST_KEY,               /* The key has been handled */
+    MSG_ACTION,                 /* Send to widget to handle command or
+                                 * state of check- and radiobuttons has changed
+                                 * and listbox current entry has changed */
+    MSG_CURSOR,                 /* Sent to widget to position the cursor */
+    MSG_IDLE,                   /* The idle state is active */
+    MSG_RESIZE,                 /* Screen size has changed */
+    MSG_VALIDATE,               /* Dialog is to be closed */
+    MSG_END,                    /* Shut down dialog */
+    MSG_DESTROY                 /* Sent to widget at destruction time */
 } widget_msg_t;
 
 /* Widgets are expected to answer to the following messages:
-
-   WIDGET_FOCUS:   1 if the accept the focus, 0 if they do not.
-   WIDGET_UNFOCUS: 1 if they accept to release the focus, 0 if they don't.
-   WIDGET_KEY:     1 if they actually used the key, 0 if not.
-   WIDGET_HOTKEY:  1 if they actually used the key, 0 if not.
+   MSG_FOCUS:   MSG_HANDLED if the accept the focus, MSG_NOT_HANDLED if they do not.
+   MSG_UNFOCUS: MSG_HANDLED if they accept to release the focus, MSG_NOT_HANDLED if they don't.
+   MSG_KEY:     MSG_HANDLED if they actually used the key, MSG_NOT_HANDLED if not.
+   MSG_HOTKEY:  MSG_HANDLED if they actually used the key, MSG_NOT_HANDLED if not.
  */
 
 typedef enum
@@ -84,7 +90,8 @@ typedef enum
 /*** structures declarations (and typedefs of structures)*****************************************/
 
 /* Widget callback */
-typedef cb_ret_t (*widget_cb_fn) (struct Widget * widget, Widget * sender, widget_msg_t msg, int parm, void *data);
+typedef cb_ret_t (*widget_cb_fn) (Widget * widget, Widget * sender, widget_msg_t msg, int parm,
+                                  void *data);
 
 /* Every Widget must have this as its first element */
 struct Widget
@@ -122,18 +129,18 @@ void release_hotkey (const hotkey_t hotkey);
 /* return width on terminal of hotkey */
 int hotkey_width (const hotkey_t hotkey);
 /* draw hotkey of widget */
-void hotkey_draw (struct Widget *w, const hotkey_t hotkey, gboolean focused);
+void hotkey_draw (Widget *w, const hotkey_t hotkey, gboolean focused);
 
 /* widget initialization */
 void init_widget (Widget * w, int y, int x, int lines, int cols,
                   widget_cb_fn callback, mouse_h mouse_handler);
 /* Default callback for widgets */
-cb_ret_t widget_default_callback (Widget * sender, widget_msg_t msg, int parm, void *data);
+cb_ret_t widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data);
 void widget_default_set_options_callback (Widget *w, widget_options_t options, gboolean enable);
 void widget_set_options (Widget *w, widget_options_t options, gboolean enable);
 void widget_set_size (Widget * widget, int y, int x, int lines, int cols);
 /* select color for widget in dependance of state */
-void widget_selectcolor (struct Widget *w, gboolean focused, gboolean hotkey);
+void widget_selectcolor (Widget *w, gboolean focused, gboolean hotkey);
 void widget_erase (Widget * w);
 
 /* get mouse pointer location within widget */
@@ -143,9 +150,9 @@ gboolean mouse_global_in_widget (const Gpm_Event * event, const Widget * w);
 /*** inline functions ****************************************************************************/
 
 static inline cb_ret_t
-send_message (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+send_message (void *w, void *sender, widget_msg_t msg, int parm, void *data)
 {
-    return w->callback (w, sender, msg, parm, data);
+    return WIDGET (w)->callback (WIDGET (w), WIDGET (sender), msg, parm, data);
 }
 
 #endif /* MC__WIDGET_INTERNAL_H */

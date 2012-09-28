@@ -583,38 +583,38 @@ mcview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
 
     switch (msg)
     {
-    case WIDGET_INIT:
+    case MSG_INIT:
         if (mcview_is_in_panel (view))
             add_hook (&select_file_hook, mcview_hook, view);
         else
             view->dpy_bbar_dirty = TRUE;
         return MSG_HANDLED;
 
-    case WIDGET_DRAW:
+    case MSG_DRAW:
         mcview_display (view);
         return MSG_HANDLED;
 
-    case WIDGET_CURSOR:
+    case MSG_CURSOR:
         if (view->hex_mode)
             mcview_place_cursor (view);
         return MSG_HANDLED;
 
-    case WIDGET_KEY:
+    case MSG_KEY:
         i = mcview_handle_key (view, parm);
         mcview_update (view);
         return i;
 
-    case WIDGET_COMMAND:
+    case MSG_ACTION:
         i = mcview_execute_cmd (view, parm);
         mcview_update (view);
         return i;
 
-    case WIDGET_FOCUS:
+    case MSG_FOCUS:
         view->dpy_bbar_dirty = TRUE;
         mcview_update (view);
         return MSG_HANDLED;
 
-    case WIDGET_DESTROY:
+    case MSG_DESTROY:
         if (mcview_is_in_panel (view))
         {
             delete_hook (&select_file_hook, mcview_hook);
@@ -626,24 +626,25 @@ mcview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
         return MSG_HANDLED;
 
     default:
-        return widget_default_callback (sender, msg, parm, data);
+        return widget_default_callback (w, sender, msg, parm, data);
     }
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 cb_ret_t
-mcview_dialog_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+mcview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
+    WDialog *h = DIALOG (w);
     mcview_t *view;
 
     switch (msg)
     {
-    case DLG_RESIZE:
+    case MSG_RESIZE:
         mcview_adjust_size (h);
         return MSG_HANDLED;
 
-    case DLG_ACTION:
+    case MSG_ACTION:
         /* shortcut */
         if (sender == NULL)
             return mcview_execute_cmd (NULL, parm);
@@ -651,14 +652,14 @@ mcview_dialog_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, v
         if (sender == WIDGET (find_buttonbar (h)))
         {
             if (data != NULL)
-                return send_message (WIDGET (data), NULL, WIDGET_COMMAND, parm, NULL);
+                return send_message (data, NULL, MSG_ACTION, parm, NULL);
 
             view = (mcview_t *) find_widget_type (h, mcview_callback);
             return mcview_execute_cmd (view, parm);
         }
         return MSG_NOT_HANDLED;
 
-    case DLG_VALIDATE:
+    case MSG_VALIDATE:
         view = (mcview_t *) find_widget_type (h, mcview_callback);
         h->state = DLG_ACTIVE;  /* don't stop the dialog before final decision */
         if (mcview_ok_to_quit (view))
@@ -668,7 +669,7 @@ mcview_dialog_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, v
         return MSG_HANDLED;
 
     default:
-        return dlg_default_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 

@@ -283,27 +283,31 @@ update_mode (WDialog * h)
 {
     print_flags ();
     chown_info_update ();
-    send_message (WIDGET (h->current->data), NULL, WIDGET_FOCUS, 0, NULL);
+    send_message (h->current->data, NULL, MSG_FOCUS, 0, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-chl_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+chl_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
-    case DLG_KEY:
+    case MSG_KEY:
         switch (parm)
         {
         case KEY_LEFT:
         case KEY_RIGHT:
-            h->ret_value = parm;
-            dlg_stop (h);
+            {
+                WDialog *h = DIALOG (w);
+
+                h->ret_value = parm;
+                dlg_stop (h);
+            }
         }
 
     default:
-        return dlg_default_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -458,8 +462,9 @@ b_setpos (int f_pos)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-advanced_chown_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
+    WDialog *h = DIALOG (w);
     int i;
     int f_pos;
     unsigned int id;
@@ -475,17 +480,17 @@ advanced_chown_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, 
 
     switch (msg)
     {
-    case DLG_DRAW:
+    case MSG_DRAW:
         chown_refresh ();
         chown_info_update ();
         return MSG_HANDLED;
 
-    case DLG_POST_KEY:
+    case MSG_POST_KEY:
         if (f_pos < 3)
             b_setpos (f_pos);
         return MSG_HANDLED;
 
-    case DLG_FOCUS:
+    case MSG_FOCUS:
         if (f_pos < 3)
         {
             if ((flag_pos / 3) != f_pos)
@@ -496,7 +501,7 @@ advanced_chown_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, 
             flag_pos = f_pos + 6;
         return MSG_HANDLED;
 
-    case DLG_KEY:
+    case MSG_KEY:
         switch (parm)
         {
         case XCTRL ('b'):
@@ -535,8 +540,8 @@ advanced_chown_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, 
                 ch_flags[i * 3 + parm - 3] = (x_toggle & (1 << parm)) ? '-' : '+';
             x_toggle ^= (1 << parm);
             update_mode (h);
-            dlg_broadcast_msg (h, WIDGET_DRAW);
-            send_message (WIDGET (h->current->data), NULL, WIDGET_FOCUS, 0, NULL);
+            dlg_broadcast_msg (h, MSG_DRAW);
+            send_message (h->current->data, NULL, MSG_FOCUS, 0, NULL);
             break;
 
         case XCTRL ('x'):
@@ -551,8 +556,8 @@ advanced_chown_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, 
                 ch_flags[i * 3 + parm] = (x_toggle & (1 << parm)) ? '-' : '+';
             x_toggle ^= (1 << parm);
             update_mode (h);
-            dlg_broadcast_msg (h, WIDGET_DRAW);
-            send_message (WIDGET (h->current->data), NULL, WIDGET_FOCUS, 0, NULL);
+            dlg_broadcast_msg (h, MSG_DRAW);
+            send_message (h->current->data, NULL, MSG_FOCUS, 0, NULL);
             break;
 
         case 'x':
@@ -601,7 +606,7 @@ advanced_chown_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, 
             {
                 ch_flags[flag_pos] = parm;
                 update_mode (h);
-                advanced_chown_callback (h, sender, DLG_KEY, KEY_RIGHT, NULL);
+                send_message (h, sender, MSG_KEY, KEY_RIGHT, NULL);
                 if (flag_pos > 8 || (flag_pos % 3) == 0)
                     dlg_one_down (h);
             }
@@ -610,7 +615,7 @@ advanced_chown_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, 
         return MSG_NOT_HANDLED;
 
     default:
-        return dlg_default_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 

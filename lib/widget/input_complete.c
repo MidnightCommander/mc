@@ -1048,14 +1048,16 @@ insert_text (WInput * in, char *text, ssize_t size)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-query_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     static char buff[MB_LEN_MAX] = "";
     static int bl = 0;
 
+    WDialog *h = DIALOG (w);
+
     switch (msg)
     {
-    case DLG_KEY:
+    case MSG_KEY:
         switch (parm)
         {
         case KEY_LEFT:
@@ -1100,7 +1102,7 @@ query_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *dat
                         listbox_select_entry ((WListbox *) h->current->data, i);
                         end = new_end;
                         input_handle_char (input, parm);
-                        send_message (WIDGET (h->current->data), NULL, WIDGET_DRAW, 0, NULL);
+                        send_message (h->current->data, NULL, MSG_DRAW, 0, NULL);
                         break;
                     }
                 }
@@ -1203,7 +1205,7 @@ query_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *dat
                 if (need_redraw == 2)
                 {
                     insert_text (input, last_text, low);
-                    send_message (WIDGET (h->current->data), NULL, WIDGET_DRAW, 0, NULL);
+                    send_message (h->current->data, NULL, MSG_DRAW, 0, NULL);
                 }
                 else if (need_redraw == 1)
                 {
@@ -1217,7 +1219,7 @@ query_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *dat
         break;
 
     default:
-        return dlg_default_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 

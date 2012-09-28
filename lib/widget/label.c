@@ -64,14 +64,14 @@ label_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
     switch (msg)
     {
-    case WIDGET_INIT:
+    case MSG_INIT:
         return MSG_HANDLED;
 
         /* We don't want to get the focus */
-    case WIDGET_FOCUS:
+    case MSG_FOCUS:
         return MSG_NOT_HANDLED;
 
-    case WIDGET_DRAW:
+    case MSG_DRAW:
         {
             char *p = l->text;
             int y = 0;
@@ -116,12 +116,12 @@ label_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             return MSG_HANDLED;
         }
 
-    case WIDGET_DESTROY:
+    case MSG_DESTROY:
         g_free (l->text);
         return MSG_HANDLED;
 
     default:
-        return widget_default_callback (sender, msg, parm, data);
+        return widget_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -183,7 +183,7 @@ label_set_text (WLabel * label, const char *text)
     }
 
     if (w->owner != NULL)
-        send_message (w, NULL, WIDGET_DRAW, 0, NULL);
+        send_message (w, NULL, MSG_DRAW, 0, NULL);
 
     if (newcols < w->cols)
         w->cols = newcols;

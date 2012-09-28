@@ -62,27 +62,27 @@ unsigned long configure_old_esc_mode_id, configure_time_out_id;
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-configure_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+configure_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
-    case DLG_ACTION:
+    case MSG_ACTION:
         /* message from "Single press" checkbutton */
         if (sender != NULL && sender->id == configure_old_esc_mode_id)
         {
             const gboolean not_single = !(((WCheck *) sender)->state & C_BOOL);
-            Widget *w;
+            Widget *ww;
 
             /* input line */
-            w = dlg_find_by_id (h, configure_time_out_id);
-            widget_disable (w, not_single);
+            ww = dlg_find_by_id (DIALOG (w), configure_time_out_id);
+            widget_disable (ww, not_single);
 
             return MSG_HANDLED;
         }
         return MSG_NOT_HANDLED;
 
     default:
-        return dlg_default_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 

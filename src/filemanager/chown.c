@@ -178,16 +178,16 @@ next_file (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-chown_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
-    case DLG_DRAW:
-        chown_refresh (h);
+    case MSG_DRAW:
+        chown_refresh (DIALOG (w));
         return MSG_HANDLED;
 
     default:
-        return dlg_default_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 

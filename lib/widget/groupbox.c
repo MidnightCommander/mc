@@ -59,13 +59,13 @@ groupbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 
     switch (msg)
     {
-    case WIDGET_INIT:
+    case MSG_INIT:
         return MSG_HANDLED;
 
-    case WIDGET_FOCUS:
+    case MSG_FOCUS:
         return MSG_NOT_HANDLED;
 
-    case WIDGET_DRAW:
+    case MSG_DRAW:
         {
             Widget *wo = WIDGET (w->owner);
 
@@ -82,12 +82,12 @@ groupbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
             return MSG_HANDLED;
         }
 
-    case WIDGET_DESTROY:
+    case MSG_DESTROY:
         g_free (g->title);
         return MSG_HANDLED;
 
     default:
-        return widget_default_callback (sender, msg, parm, data);
+        return widget_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -135,7 +135,7 @@ groupbox_set_title (WGroupbox *g, const char *title)
     }
 
     if (w->owner != NULL)
-        send_message (w, NULL, WIDGET_DRAW, 0, NULL);
+        send_message (w, NULL, MSG_DRAW, 0, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

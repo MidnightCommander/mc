@@ -981,7 +981,7 @@ input_event (Gpm_Event * event, void *data)
  * @param enable  TRUE if specified options should be added, FALSE if options should be removed
  */
 static void
-input_set_options_callback (Widget *w, widget_options_t options, gboolean enable)
+input_set_options_callback (Widget * w, widget_options_t options, gboolean enable)
 {
     WInput *in = (WInput *) w;
 
@@ -1064,14 +1064,14 @@ input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
     switch (msg)
     {
-    case WIDGET_INIT:
+    case MSG_INIT:
         /* subscribe to "history_load" event */
         mc_event_add (w->owner->event_group, MCEVENT_HISTORY_LOAD, input_load_history, w, NULL);
         /* subscribe to "history_save" event */
         mc_event_add (w->owner->event_group, MCEVENT_HISTORY_SAVE, input_save_history, w, NULL);
         return MSG_HANDLED;
 
-    case WIDGET_KEY:
+    case MSG_KEY:
         if (parm == XCTRL ('q'))
         {
             quote = 1;
@@ -1096,21 +1096,21 @@ input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
         return input_handle_char (in, parm);
 
-    case WIDGET_COMMAND:
+    case MSG_ACTION:
         return input_execute_cmd (in, parm);
 
-    case WIDGET_FOCUS:
-    case WIDGET_UNFOCUS:
-    case WIDGET_DRAW:
-    case WIDGET_RESIZED:
+    case MSG_FOCUS:
+    case MSG_UNFOCUS:
+    case MSG_DRAW:
+    case MSG_RESIZE:
         input_update (in, FALSE);
         return MSG_HANDLED;
 
-    case WIDGET_CURSOR:
+    case MSG_CURSOR:
         widget_move (in, 0, str_term_width2 (in->buffer, in->point) - in->term_first_shown);
         return MSG_HANDLED;
 
-    case WIDGET_DESTROY:
+    case MSG_DESTROY:
         /* unsubscribe from "history_load" event */
         mc_event_del (w->owner->event_group, MCEVENT_HISTORY_LOAD, input_load_history, w);
         /* unsubscribe from "history_save" event */
@@ -1119,7 +1119,7 @@ input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         return MSG_HANDLED;
 
     default:
-        return widget_default_callback (sender, msg, parm, data);
+        return widget_default_callback (w, sender, msg, parm, data);
     }
 }
 

@@ -2438,7 +2438,7 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
     ndiff = redo_diff (dview);
     if (ndiff < 0)
     {
-        /* goto WIDGET_DESTROY stage: dview_fini() */
+        /* goto MSG_DESTROY stage: dview_fini() */
         f_close (f[DIFF_LEFT]);
         f_close (f[DIFF_RIGHT]);
         return -1;
@@ -3312,18 +3312,18 @@ dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
     switch (msg)
     {
-    case WIDGET_INIT:
+    case MSG_INIT:
         dview_labels (dview);
         dview_load_options (dview);
         dview_update (dview);
         return MSG_HANDLED;
 
-    case WIDGET_DRAW:
+    case MSG_DRAW:
         dview->new_frame = 1;
         dview_update (dview);
         return MSG_HANDLED;
 
-    case WIDGET_KEY:
+    case MSG_KEY:
         i = dview_handle_key (dview, parm);
         if (dview->view_quit)
             dlg_stop (h);
@@ -3331,7 +3331,7 @@ dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             dview_update (dview);
         return i;
 
-    case WIDGET_COMMAND:
+    case MSG_ACTION:
         i = dview_execute_cmd (dview, parm);
         if (dview->view_quit)
             dlg_stop (h);
@@ -3339,13 +3339,13 @@ dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             dview_update (dview);
         return i;
 
-    case WIDGET_DESTROY:
+    case MSG_DESTROY:
         dview_save_options (dview);
         dview_fini (dview);
         return MSG_HANDLED;
 
     default:
-        return widget_default_callback (sender, msg, parm, data);
+        return widget_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -3369,17 +3369,18 @@ dview_adjust_size (WDialog * h)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-dview_dialog_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+dview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WDiff *dview = (WDiff *) data;
+    WDialog *h = DIALOG (w);
 
     switch (msg)
     {
-    case DLG_RESIZE:
+    case MSG_RESIZE:
         dview_adjust_size (h);
         return MSG_HANDLED;
 
-    case DLG_ACTION:
+    case MSG_ACTION:
         /* shortcut */
         if (sender == NULL)
             return dview_execute_cmd (NULL, parm);
@@ -3387,14 +3388,14 @@ dview_dialog_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, vo
         if (sender == WIDGET (find_buttonbar (h)))
         {
             if (data != NULL)
-                return send_message (WIDGET (data), NULL, WIDGET_COMMAND, parm, NULL);
+                return send_message (data, NULL, MSG_ACTION, parm, NULL);
 
             dview = (WDiff *) find_widget_type (h, dview_callback);
             return dview_execute_cmd (dview, parm);
         }
         return MSG_NOT_HANDLED;
 
-    case DLG_VALIDATE:
+    case MSG_VALIDATE:
         dview = (WDiff *) find_widget_type (h, dview_callback);
         h->state = DLG_ACTIVE;  /* don't stop the dialog before final decision */
         if (dview_ok_to_exit (dview))
@@ -3402,7 +3403,7 @@ dview_dialog_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, vo
         return MSG_HANDLED;
 
     default:
-        return dlg_default_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 

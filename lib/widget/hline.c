@@ -61,8 +61,8 @@ hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
     switch (msg)
     {
-    case WIDGET_INIT:
-    case WIDGET_RESIZED:
+    case MSG_INIT:
+    case MSG_RESIZE:
         if (l->auto_adjust_cols)
         {
             Widget *wo = WIDGET (h);
@@ -79,11 +79,11 @@ hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             }
         }
 
-    case WIDGET_FOCUS:
+    case MSG_FOCUS:
         /* We don't want to get the focus */
         return MSG_NOT_HANDLED;
 
-    case WIDGET_DRAW:
+    case MSG_DRAW:
         if (l->transparent)
             tty_setcolor (DEFAULT_COLOR);
         else
@@ -101,7 +101,7 @@ hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         return MSG_HANDLED;
 
     default:
-        return widget_default_callback (sender, msg, parm, data);
+        return widget_default_callback (w, sender, msg, parm, data);
     }
 }
 

@@ -407,11 +407,13 @@ find_check_regexp (const char *r)
  */
 
 static cb_ret_t
-find_parm_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
+    WDialog *h = DIALOG (w);
+
     switch (msg)
     {
-    case DLG_ACTION:
+    case MSG_ACTION:
         if (sender == WIDGET (content_use_cbox))
         {
             gboolean disable = !(content_use_cbox->state & C_BOOL);
@@ -440,7 +442,7 @@ find_parm_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void 
         return MSG_NOT_HANDLED;
 
 
-    case DLG_VALIDATE:
+    case MSG_VALIDATE:
         if (h->ret_value != B_ENTER)
             return MSG_HANDLED;
 
@@ -467,7 +469,7 @@ find_parm_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void 
         return MSG_HANDLED;
 
     default:
-        return dlg_default_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -920,7 +922,7 @@ find_add_match (const char *dir, const char *file)
     /* Don't scroll */
     if (matches == 0)
         listbox_select_first (find_list);
-    send_message (WIDGET (find_list), NULL, WIDGET_DRAW, 0, NULL);
+    send_message (find_list, NULL, MSG_DRAW, 0, NULL);
 
     matches++;
     found_num_update ();
@@ -1469,11 +1471,13 @@ find_relocate_buttons (const WDialog * h, gboolean all_buttons)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-find_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+find_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
+    WDialog *h = DIALOG (w);
+
     switch (msg)
     {
-    case DLG_KEY:
+    case MSG_KEY:
         if (parm == KEY_F (3) || parm == KEY_F (13))
         {
             int unparsed_view = (parm == KEY_F (13));
@@ -1483,17 +1487,17 @@ find_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data
             return view_edit_currently_selected_file (0, 1);
         return MSG_NOT_HANDLED;
 
-    case DLG_RESIZE:
+    case MSG_RESIZE:
         dlg_set_size (h, LINES - 4, COLS - 16);
         find_relocate_buttons (h, TRUE);
         return MSG_HANDLED;
 
-    case DLG_IDLE:
+    case MSG_IDLE:
         do_search (h);
         return MSG_HANDLED;
 
     default:
-        return dlg_default_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 

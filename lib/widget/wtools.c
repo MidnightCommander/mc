@@ -63,14 +63,15 @@ static int sel_pos = 0;
 /** default query callback, used to reposition query */
 
 static cb_ret_t
-query_default_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+query_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
+    WDialog *h = DIALOG (w);
+
     switch (msg)
     {
-    case DLG_RESIZE:
+    case MSG_RESIZE:
         if ((h->flags & DLG_CENTER) == 0)
         {
-            Widget *wh = WIDGET (h);
             WDialog *prev_dlg = NULL;
             int ypos, xpos;
 
@@ -93,21 +94,21 @@ query_default_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, v
 
             /* if previous dialog is not fullscreen'd -- overlap it */
             if (prev_dlg == NULL || prev_dlg->fullscreen)
-                ypos = LINES / 3 - (wh->lines - 3) / 2;
+                ypos = LINES / 3 - (w->lines - 3) / 2;
             else
                 ypos = WIDGET (prev_dlg)->y + 2;
 
-            xpos = COLS / 2 - wh->cols / 2;
+            xpos = COLS / 2 - w->cols / 2;
 
             /* set position */
-            dlg_set_position (h, ypos, xpos, ypos + wh->lines, xpos + wh->cols);
+            dlg_set_position (h, ypos, xpos, ypos + w->lines, xpos + w->cols);
 
             return MSG_HANDLED;
         }
         /* fallthrough */
 
     default:
-        return dlg_default_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -126,7 +127,7 @@ do_create_message (int flags, const char *title, const char *text)
     d = last_query_dlg;
 
     /* do resize before initing and running */
-    query_default_callback (d, NULL, DLG_RESIZE, 0, NULL);
+    send_message (d, NULL, MSG_RESIZE, 0, NULL);
 
     init_dlg (d);
     g_free (p);
@@ -334,7 +335,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
         va_end (ap);
 
         /* do resize before running and selecting any widget */
-        query_default_callback (query_dlg, NULL, DLG_RESIZE, 0, NULL);
+        send_message (query_dlg, NULL, MSG_RESIZE, 0, NULL);
 
         if (defbutton != NULL)
             dlg_select_widget (defbutton);

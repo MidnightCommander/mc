@@ -109,19 +109,19 @@ update_command (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-panelize_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+panelize_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
-    case DLG_INIT:
-    case DLG_POST_KEY:
-    case DLG_FOCUS:
+    case MSG_INIT:
+    case MSG_POST_KEY:
+    case MSG_FOCUS:
         tty_setcolor (MENU_ENTRY_COLOR);
         update_command ();
         return MSG_HANDLED;
 
     default:
-        return dlg_default_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 

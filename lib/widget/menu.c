@@ -318,7 +318,7 @@ menubar_execute (WMenuBar * menubar)
 
         mc_global.widget.is_right = (menubar->selected != 0);
         menubar_finish (menubar);
-        w->owner->callback (w->owner, w, DLG_ACTION, entry->command, NULL);
+        send_message (w->owner, w, MSG_ACTION, entry->command, NULL);
         do_refresh ();
     }
 }
@@ -549,7 +549,7 @@ menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
     switch (msg)
     {
         /* We do not want the focus unless we have been activated */
-    case WIDGET_FOCUS:
+    case MSG_FOCUS:
         if (!menubar->is_active)
             return MSG_NOT_HANDLED;
 
@@ -562,8 +562,8 @@ menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         return MSG_HANDLED;
 
         /* We don't want the buttonbar to activate while using the menubar */
-    case WIDGET_HOTKEY:
-    case WIDGET_KEY:
+    case MSG_HOTKEY:
+    case MSG_KEY:
         if (menubar->is_active)
         {
             menubar_handle_key (menubar, parm);
@@ -571,14 +571,14 @@ menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         }
         return MSG_NOT_HANDLED;
 
-    case WIDGET_CURSOR:
+    case MSG_CURSOR:
         /* Put the cursor in a suitable place */
         return MSG_NOT_HANDLED;
 
-    case WIDGET_UNFOCUS:
+    case MSG_UNFOCUS:
         return menubar->is_active ? MSG_NOT_HANDLED : MSG_HANDLED;
 
-    case WIDGET_DRAW:
+    case MSG_DRAW:
         if (menubar->is_visible)
         {
             menubar_draw (menubar);
@@ -586,18 +586,18 @@ menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         }
         /* fall through */
 
-    case WIDGET_RESIZED:
+    case MSG_RESIZE:
         /* try show menu after screen resize */
-        send_message (w, sender, WIDGET_FOCUS, 0, data);
+        send_message (w, sender, MSG_FOCUS, 0, data);
         return MSG_HANDLED;
 
 
-    case WIDGET_DESTROY:
+    case MSG_DESTROY:
         menubar_set_menu (menubar, NULL);
         return MSG_HANDLED;
 
     default:
-        return widget_default_callback (sender, msg, parm, data);
+        return widget_default_callback (w, sender, msg, parm, data);
     }
 }
 

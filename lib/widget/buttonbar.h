@@ -49,7 +49,7 @@ static inline void
 buttonbar_redraw (WButtonBar * bb)
 {
     if (bb != NULL)
-        send_message (WIDGET (bb), NULL, WIDGET_DRAW, 0, NULL);
+        send_message (bb, NULL, MSG_DRAW, 0, NULL);
 }
 
 static inline void

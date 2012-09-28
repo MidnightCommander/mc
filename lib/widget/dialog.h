@@ -29,25 +29,6 @@
 
 /*** enums ***************************************************************************************/
 
-/* Dialog messages */
-typedef enum
-{
-    DLG_INIT = 0,               /* Initialize dialog */
-    DLG_IDLE = 1,               /* The idle state is active */
-    DLG_DRAW = 2,               /* Draw dialog on screen */
-    DLG_FOCUS = 3,              /* A widget has got focus */
-    DLG_UNFOCUS = 4,            /* A widget has been unfocused */
-    DLG_RESIZE = 5,             /* Window size has changed */
-    DLG_KEY = 6,                /* Key before sending to widget */
-    DLG_HOTKEY_HANDLED = 7,     /* A widget has got the hotkey */
-    DLG_POST_KEY = 8,           /* The key has been handled */
-    DLG_UNHANDLED_KEY = 9,      /* Key that no widget handled */
-    DLG_ACTION = 10,            /* State of check- and radioboxes has changed
-                                 * and listbox current entry has changed */
-    DLG_VALIDATE = 11,          /* Dialog is to be closed */
-    DLG_END = 12                /* Shut down dialog */
-} dlg_msg_t;
-
 /* Flags for create_dlg */
 typedef enum
 {
@@ -89,9 +70,6 @@ typedef char *(*dlg_title_str) (const WDialog * h, size_t len);
 
 typedef int dlg_colors_t[DLG_COLOR_COUNT];
 
-/* Dialog callback */
-typedef cb_ret_t (*dlg_cb_fn) (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data);
-
 /* menu command execution */
 typedef cb_ret_t (*menu_exec_fn) (int command);
 
@@ -124,7 +102,6 @@ struct WDialog
     void *data;                 /* Data can be passed to dialog */
     char *event_group;          /* Name of event group for this dialog */
 
-    dlg_cb_fn callback;
     dlg_shortcut_str get_shortcut;      /* Shortcut string */
     dlg_title_str get_title;    /* useless for modal dialogs */
 };
@@ -152,7 +129,7 @@ void draw_box (const WDialog * h, int y, int x, int ys, int xs, gboolean single)
 
 /* Creates a dialog head  */
 WDialog *create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
-                     const int *colors, dlg_cb_fn callback, mouse_h mouse_handler,
+                     const int *colors, widget_cb_fn callback, mouse_h mouse_handler,
                      const char *help_ctx, const char *title, dlg_flags_t flags);
 
 void dlg_set_default_colors (void);
@@ -184,7 +161,7 @@ void dlg_redraw (WDialog * h);
 void dlg_broadcast_msg (WDialog * h, widget_msg_t message);
 
 /* Default callback for dialogs */
-cb_ret_t dlg_default_callback (WDialog * h, Widget * sender, dlg_msg_t msg, int parm, void *data);
+cb_ret_t dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data);
 
 /* Default paint routine for dialogs */
 void dlg_default_repaint (WDialog * h);

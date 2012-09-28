@@ -373,10 +373,10 @@ listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 
     switch (msg)
     {
-    case WIDGET_INIT:
+    case MSG_INIT:
         return MSG_HANDLED;
 
-    case WIDGET_HOTKEY:
+    case MSG_HOTKEY:
         {
             int pos, action;
 
@@ -385,7 +385,7 @@ listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
                 return MSG_NOT_HANDLED;
 
             listbox_select_entry (l, pos);
-            h->callback (h, w, DLG_ACTION, l->pos, NULL);
+            send_message (h, w, MSG_ACTION, l->pos, NULL);
 
             if (l->callback != NULL)
                 action = l->callback (l);
@@ -401,38 +401,38 @@ listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
             return MSG_HANDLED;
         }
 
-    case WIDGET_KEY:
+    case MSG_KEY:
         ret_code = listbox_key (l, parm);
         if (ret_code != MSG_NOT_HANDLED)
         {
             listbox_draw (l, TRUE);
-            h->callback (h, w, DLG_ACTION, l->pos, NULL);
+            send_message (h, w, MSG_ACTION, l->pos, NULL);
         }
         return ret_code;
 
-    case WIDGET_COMMAND:
+    case MSG_ACTION:
         return listbox_execute_cmd (l, parm);
 
-    case WIDGET_CURSOR:
+    case MSG_CURSOR:
         widget_move (l, l->cursor_y, 0);
-        h->callback (h, w, DLG_ACTION, l->pos, NULL);
+        send_message (h, w, MSG_ACTION, l->pos, NULL);
         return MSG_HANDLED;
 
-    case WIDGET_FOCUS:
-    case WIDGET_UNFOCUS:
-    case WIDGET_DRAW:
-        listbox_draw (l, msg != WIDGET_UNFOCUS);
+    case MSG_FOCUS:
+    case MSG_UNFOCUS:
+    case MSG_DRAW:
+        listbox_draw (l, msg != MSG_UNFOCUS);
         return MSG_HANDLED;
 
-    case WIDGET_DESTROY:
+    case MSG_DESTROY:
         listbox_destroy (l);
         return MSG_HANDLED;
 
-    case WIDGET_RESIZED:
+    case MSG_RESIZE:
         return MSG_HANDLED;
 
     default:
-        return widget_default_callback (sender, msg, parm, data);
+        return widget_default_callback (w, sender, msg, parm, data);
     }
 }
 

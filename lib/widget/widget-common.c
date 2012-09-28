@@ -158,21 +158,22 @@ init_widget (Widget * w, int y, int x, int lines, int cols,
 
 /* Default callback for widgets */
 cb_ret_t
-widget_default_callback (Widget * sender, widget_msg_t msg, int parm, void *data)
+widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
+    (void) w;
     (void) sender;
     (void) parm;
     (void) data;
 
     switch (msg)
     {
-    case WIDGET_INIT:
-    case WIDGET_FOCUS:
-    case WIDGET_UNFOCUS:
-    case WIDGET_DRAW:
-    case WIDGET_DESTROY:
-    case WIDGET_CURSOR:
-    case WIDGET_IDLE:
+    case MSG_INIT:
+    case MSG_FOCUS:
+    case MSG_UNFOCUS:
+    case MSG_DRAW:
+    case MSG_DESTROY:
+    case MSG_CURSOR:
+    case MSG_IDLE:
         return MSG_HANDLED;
 
     default:
@@ -198,7 +199,7 @@ widget_default_set_options_callback (Widget *w, widget_options_t options, gboole
         w->options &= ~options;
 
     if (w->owner != NULL && (options & W_DISABLED) != 0)
-        send_message (w, NULL, WIDGET_DRAW, 0, NULL);
+        send_message (w, NULL, MSG_DRAW, 0, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -225,7 +226,7 @@ widget_set_size (Widget * widget, int y, int x, int lines, int cols)
     widget->y = y;
     widget->cols = cols;
     widget->lines = lines;
-    send_message (widget, NULL, WIDGET_RESIZED, 0, NULL);
+    send_message (widget, NULL, MSG_RESIZE, 0, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
