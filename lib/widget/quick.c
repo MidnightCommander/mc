@@ -93,6 +93,8 @@ quick_create_labeled_input (GArray * widgets, int *y, int x, quick_widget_t * qu
     label.quick_widget = g_new0 (quick_widget_t, 1);
     label.quick_widget->widget_type = quick_label;
     label.quick_widget->options = quick_widget->options;
+    /* FIXME: this should be turned in depend of label_location */
+    label.quick_widget->pos_flags = quick_widget->pos_flags;
 
     switch (quick_widget->u.input.label_location)
     {
@@ -555,7 +557,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
 
             /* add widget into dialog */
             item->widget->options |= item->quick_widget->options;       /* FIXME: cannot reset flags, setup only */
-            id = add_widget (dd, item->widget);
+            id = add_widget_autopos (dd, item->widget, item->quick_widget->pos_flags, NULL);
             if (item->quick_widget->id != NULL)
                 *item->quick_widget->id = id;
         }

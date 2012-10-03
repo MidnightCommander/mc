@@ -13,6 +13,7 @@
 {                                                                               \
     .widget_type = quick_checkbox,                                              \
     .options = 0,                                                               \
+    .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = id_,                                                                  \
     .u = {                                                                      \
         .checkbox = {                                                           \
@@ -26,6 +27,7 @@
 {                                                                               \
     .widget_type = quick_button,                                                \
     .options = 0,                                                               \
+    .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = id_,                                                                  \
     .u = {                                                                      \
         .button = {                                                             \
@@ -40,6 +42,7 @@
 {                                                                               \
     .widget_type = quick_input,                                                 \
     .options = 0,                                                               \
+    .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = id_,                                                                  \
     .u = {                                                                      \
         .input = {                                                              \
@@ -58,6 +61,7 @@
 {                                                                               \
     .widget_type = quick_input,                                                 \
     .options = 0,                                                               \
+    .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = id_,                                                                  \
     .u = {                                                                      \
         .input = {                                                              \
@@ -76,6 +80,7 @@
 {                                                                               \
     .widget_type = quick_label,                                                 \
     .options = 0,                                                               \
+    .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = id_,                                                                  \
     .u = {                                                                      \
         .label = {                                                              \
@@ -89,6 +94,7 @@
 {                                                                               \
     .widget_type = quick_radio,                                                 \
     .options = 0,                                                               \
+    .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = id_,                                                                  \
     .u = {                                                                      \
         .radio = {                                                              \
@@ -103,6 +109,7 @@
 {                                                                               \
     .widget_type = quick_start_groupbox,                                        \
     .options = 0,                                                               \
+    .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = NULL,                                                                 \
     .u = {                                                                      \
         .groupbox = {                                                           \
@@ -115,6 +122,7 @@
 {                                                                               \
     .widget_type = quick_stop_groupbox,                                         \
     .options = 0,                                                               \
+    .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = NULL,                                                                 \
     .u = {                                                                      \
         .input = {                                                              \
@@ -130,6 +138,7 @@
 {                                                                               \
     .widget_type = quick_separator,                                             \
     .options = 0,                                                               \
+    .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = NULL,                                                                 \
     .u = {                                                                      \
         .separator = {                                                          \
@@ -143,6 +152,7 @@
 {                                                                               \
     .widget_type = quick_start_columns,                                         \
     .options = 0,                                                               \
+    .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = NULL,                                                                 \
     .u = {                                                                      \
         .input = {                                                              \
@@ -158,6 +168,7 @@
 {                                                                               \
     .widget_type = quick_next_column,                                           \
     .options = 0,                                                               \
+    .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = NULL,                                                                 \
     .u = {                                                                      \
         .input = {                                                              \
@@ -173,6 +184,7 @@
 {                                                                               \
     .widget_type = quick_stop_columns,                                          \
     .options = 0,                                                               \
+    .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = NULL,                                                                 \
     .u = {                                                                      \
         .input = {                                                              \
@@ -188,6 +200,7 @@
 {                                                                               \
     .widget_type = quick_buttons,                                               \
     .options = 0,                                                               \
+    .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = NULL,                                                                 \
     .u = {                                                                      \
         .separator = {                                                          \
@@ -206,6 +219,7 @@
 {                                                                               \
     .widget_type = quick_end,                                                   \
     .options = 0,                                                               \
+    .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = NULL,                                                                 \
     .u = {                                                                      \
         .input = {                                                              \
@@ -256,6 +270,7 @@ struct quick_widget_t
     quick_t widget_type;
 
     widget_options_t options;
+    widget_pos_flags_t pos_flags;
     unsigned long *id;
 
     /* widget parameters */
