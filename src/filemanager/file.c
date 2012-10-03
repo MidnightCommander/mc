@@ -2424,14 +2424,14 @@ compute_dir_size_create_ui (void)
 
     ui = g_new (ComputeDirSizeUI, 1);
 
-    ui->dlg = create_dlg (TRUE, 0, 0, 8, COLS / 2, dialog_colors, NULL, NULL,
+    ui->dlg = create_dlg (TRUE, 0, 0, 7, COLS / 2, dialog_colors, NULL, NULL,
                           NULL, _("Directory scanning"), DLG_CENTER);
-    ui->dirname = label_new (3, 3, "");
+    ui->dirname = label_new (2, 3, "");
     add_widget (ui->dlg, ui->dirname);
-
-    add_widget (ui->dlg,
-                button_new (5, (WIDGET (ui->dlg)->cols - strlen (b_name)) / 2,
-                            FILE_ABORT, NORMAL_BUTTON, b_name, NULL));
+    add_widget (ui->dlg, hline_new (3, -1, -1));
+    add_widget_autopos (ui->dlg,
+                        button_new (4, 2, FILE_ABORT, NORMAL_BUTTON, b_name, NULL),
+                        WPOS_KEEP_TOP | WPOS_CENTER_HORZ, NULL);
 
     /* We will manage the dialog without any help,
        that's why we have to call init_dlg */
