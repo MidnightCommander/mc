@@ -109,8 +109,14 @@ spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word
 
     sug_dlg_w += max_btn_len;
     sug_dlg_w = max (sug_dlg_w, word_label_len) + 1;
+
     sug_dlg = create_dlg (TRUE, ypos, xpos, sug_dlg_h, sug_dlg_w,
                           dialog_colors, NULL, NULL, "[ASpell]", _("Check word"), DLG_COMPACT);
+
+    add_widget (sug_dlg, label_new (1, 2, lang_label));
+    add_widget (sug_dlg, label_new (3, 2, word_label));
+
+    add_widget (sug_dlg, groupbox_new (4, 2, sug_dlg_h - 5, 25, _("Suggest")));
 
     sug_list = listbox_new (5, 2, sug_dlg_h - 7, 24, FALSE, NULL);
     for (i = 0; i < suggest->len; i++)
@@ -122,10 +128,6 @@ spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word
     add_widget (sug_dlg, replace_btn);
     add_widget (sug_dlg, skip_btn);
     add_widget (sug_dlg, cancel_button);
-
-    add_widget (sug_dlg, label_new (1, 2, lang_label));
-    add_widget (sug_dlg, label_new (3, 2, word_label));
-    add_widget (sug_dlg, groupbox_new (4, 2, sug_dlg_h - 5, 25, _("Suggest")));
 
     res = run_dlg (sug_dlg);
     if (res == B_ENTER)
