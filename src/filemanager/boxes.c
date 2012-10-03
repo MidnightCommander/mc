@@ -525,7 +525,7 @@ sort_box (panel_sort_info_t * info)
                 QUICK_RADIO (sort_names_num, sort_orders_names, &sort_idx, NULL),
             QUICK_NEXT_COLUMN,
                 QUICK_CHECKBOX (N_("Executable &first"), &info->exec_first, NULL),
-                QUICK_CHECKBOX (N_("Case sensi&tive"), &info->case_sensitive, NULL),
+                QUICK_CHECKBOX (N_("Cas&e sensitive"), &info->case_sensitive, NULL),
                 QUICK_CHECKBOX (N_("&Reverse"), &info->reverse, NULL),
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,

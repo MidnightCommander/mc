@@ -143,7 +143,7 @@ panel_field_t panel_fields[] = {
      /* TRANSLATORS: one single character to represent 'extension' sort mode  */
      /* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
      N_("sort|e"),
-     N_("&Extension"), TRUE, FALSE,
+     N_("E&xtension"), TRUE, FALSE,
      string_file_name,          /* TODO: string_file_ext */
      (sortfn *) sort_ext
     }

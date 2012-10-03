@@ -182,7 +182,7 @@ panel_options_box (void)
 {
     const char *qsearch_options[] = {
         N_("Case &insensitive"),
-        N_("Case s&ensitive"),
+        N_("Cas&e sensitive"),
         N_("Use panel sort mo&de")
     };
 
