@@ -68,8 +68,7 @@ edit_search_options_t edit_search_options = {
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-editcmd_dialog_raw_key_query_cb (struct Dlg_head *h, Widget * sender,
-                                 dlg_msg_t msg, int parm, void *data)
+editcmd_dialog_raw_key_query_cb (Dlg_head *h, Widget * sender, dlg_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
@@ -297,19 +296,29 @@ editcmd_dialog_replace_prompt_show (WEdit * edit, char *from_text, char *to_text
 int
 editcmd_dialog_raw_key_query (const char *heading, const char *query, gboolean cancel)
 {
-    int w;
-    struct Dlg_head *raw_dlg;
+    int w, wq;
+    int y = 2;
+    Dlg_head *raw_dlg;
 
-    w = str_term_width1 (query) + 7;
+    w = str_term_width1 (heading) + 6;
+    wq = str_term_width1 (query);
+    w = max (w, wq + 3 * 2 + 1 + 2);
 
     raw_dlg =
-        create_dlg (TRUE, 0, 0, 7, w, dialog_colors, editcmd_dialog_raw_key_query_cb, NULL,
-                    NULL, heading, DLG_CENTER | DLG_TRYUP | DLG_WANT_TAB);
-    add_widget (raw_dlg, input_new (3 - cancel, w - 5, input_get_default_colors (),
-                                    2, "", 0, INPUT_COMPLETE_DEFAULT));
-    add_widget (raw_dlg, label_new (3 - cancel, 2, query));
+        create_dlg (TRUE, 0, 0, cancel ? 7 : 5, w, dialog_colors, editcmd_dialog_raw_key_query_cb,
+                    NULL, NULL, heading, DLG_CENTER | DLG_TRYUP | DLG_WANT_TAB);
+
+    add_widget (raw_dlg, label_new (y, 3, query));
+    add_widget (raw_dlg, input_new (y++, 3 + wq + 1, input_get_default_colors (),
+                                    w - (6 + wq + 1), "", 0, INPUT_COMPLETE_DEFAULT));
     if (cancel)
-        add_widget (raw_dlg, button_new (4, w / 2 - 5, B_CANCEL, NORMAL_BUTTON, _("Cancel"), 0));
+    {
+        add_widget (raw_dlg, hline_new (y++, -1, -1));
+        /* Button w/o hotkey to allow use any key as raw or macro one */
+        add_widget_autopos (raw_dlg, button_new (y, 1, B_CANCEL, NORMAL_BUTTON, _("Cancel"), NULL),
+                            WPOS_KEEP_TOP | WPOS_CENTER_HORZ, NULL);
+    }
+
     w = run_dlg (raw_dlg);
     destroy_dlg (raw_dlg);
 
