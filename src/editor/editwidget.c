@@ -138,49 +138,31 @@ edit_dlg_deinit (void)
 static void
 edit_about (void)
 {
-    const char *header = N_("About");
-    const char *button_name = N_("&OK");
-    const char *const version = "MCEdit " VERSION;
-    char text[BUF_LARGE];
+    quick_widget_t quick_widgets[] = {
+        /* *INDENT-OFF* */
+        QUICK_LABEL ("MCEdit " VERSION, NULL),
+        QUICK_SEPARATOR (TRUE),
+        QUICK_LABEL (N_("A user friendly text editor\n"
+                        "written for the Midnight Commander."), NULL),
+        QUICK_SEPARATOR (FALSE),
+        QUICK_LABEL (N_("Copyright (C) 1996-2012 the Free Software Foundation"), NULL),
+        QUICK_START_BUTTONS (TRUE, TRUE),
+            QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+        QUICK_END
+        /* *INDENT-ON* */
+    };
 
-    int win_len, version_len, button_len;
-    int cols, lines;
+    quick_dialog_t qdlg = {
+        -1, -1, 40,
+        N_("About"), "[Internal File Editor]",
+        quick_widgets, NULL, NULL
+    };
 
-    Dlg_head *about_dlg;
+    quick_widgets[0].pos_flags = WPOS_KEEP_TOP | WPOS_CENTER_HORZ;
+    quick_widgets[2].pos_flags = WPOS_KEEP_TOP | WPOS_CENTER_HORZ;
+    quick_widgets[4].pos_flags = WPOS_KEEP_TOP | WPOS_CENTER_HORZ;
 
-#ifdef ENABLE_NLS
-    header = _(header);
-    button_name = _(button_name);
-#endif
-
-    button_len = str_term_width1 (button_name) + 5;
-    version_len = str_term_width1 (version);
-
-    g_snprintf (text, sizeof (text),
-                _("Copyright (C) 1996-2012 the Free Software Foundation\n\n"
-                  "            A user friendly text editor\n"
-                  "         written for the Midnight Commander"));
-
-    win_len = str_term_width1 (header);
-    win_len = max (win_len, version_len);
-    win_len = max (win_len, button_len);
-
-    /* count width and height of text */
-    str_msg_term_size (text, &lines, &cols);
-    lines += 9;
-    cols = max (win_len, cols) + 6;
-
-    /* dialog */
-    about_dlg = create_dlg (TRUE, 0, 0, lines, cols, dialog_colors, NULL, NULL,
-                            "[Internal File Editor]", header, DLG_CENTER | DLG_TRYUP);
-
-    add_widget (about_dlg, label_new (3, (cols - version_len) / 2, version));
-    add_widget (about_dlg, label_new (5, 3, text));
-    add_widget (about_dlg, button_new (lines - 3, (cols - button_len) / 2,
-                                       B_ENTER, NORMAL_BUTTON, button_name, NULL));
-
-    run_dlg (about_dlg);
-    destroy_dlg (about_dlg);
+    (void) quick_dialog (&qdlg);
 }
 
 /* --------------------------------------------------------------------------------------------- */
