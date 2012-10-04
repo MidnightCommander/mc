@@ -580,25 +580,28 @@ real_do_file_error (enum OperationMode mode, const char *error)
 static FileProgressStatus
 real_query_recursive (FileOpContext * ctx, enum OperationMode mode, const char *s)
 {
-    gchar *text;
 
     if (ctx->recursive_result < RECURSIVE_ALWAYS)
     {
-        const char *msg = mode == Foreground
-            ? _("\nDirectory not empty.\nDelete it recursively?")
-            : _("\nBackground process: Directory not empty.\nDelete it recursively?");
-        text = g_strconcat (_("Delete:"), " ", path_trunc (s, 30), (char *) NULL);
+
+        const char *msg;
+        char *text;
+
+        msg = mode == Foreground
+            ? _("Directory \"%s\" not empty.\nDelete it recursively?")
+            : _("Background process:\nDirectory \"%s\" not empty.\nDelete it recursively?");
+        text = g_strdup_printf (msg, path_trunc (s, 30));
 
         if (safe_delete)
             query_set_sel (1);
 
         ctx->recursive_result =
-            (FileCopyMode) query_dialog (text, msg, D_ERROR, 5,
+            (FileCopyMode) query_dialog (op_names [OP_DELETE], text, D_ERROR, 5,
                                          _("&Yes"), _("&No"), _("A&ll"), _("Non&e"), _("&Abort"));
+        g_free (text);
 
         if (ctx->recursive_result != RECURSIVE_ABORT)
             do_refresh ();
-        g_free (text);
     }
 
     switch (ctx->recursive_result)
