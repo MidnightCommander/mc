@@ -23,6 +23,12 @@ staroffice_console() {
     rm -rf "$tmp"
 }
 
+get_ooffice_executable() {
+    which libreoffice >/dev/null 2>&1 && \
+        echo "libreoffice" || \
+        echo "ooffice"
+}
+
 do_view_action() {
     filetype=$1
 
@@ -99,9 +105,10 @@ do_open_action() {
         ;;
     ooffice)
         if [ -n "$DISPLAY" ]; then
-            (ooffice "${MC_EXT_FILENAME}" &)
+            OOFFICE=`get_ooffice_executable`
+            (${OOFFICE} "${MC_EXT_FILENAME}" &)
         else
-            if [ ` echo "${MC_EXT_FILENAME}" | grep -c "${STAROFFICE_REGEXP}"` -ne 0 ]; then
+            if [ `echo "${MC_EXT_FILENAME}" | grep -c "${STAROFFICE_REGEXP}"` -ne 0 ]; then
                 staroffice_console "${MC_EXT_FILENAME}"
             else
                 odt2txt "${MC_EXT_FILENAME}" | ${PAGER:-more}
@@ -136,7 +143,8 @@ do_open_action() {
         ;;
     msppt)
         if [ -n "$DISPLAY" ]; then
-            (ooffice %f >/dev/null 2>&1 &)
+            OOFFICE=`get_ooffice_executable`
+            (${OOFFICE} %f >/dev/null 2>&1 &)
         else
             tmp=`mktemp -d ${TMPDIR:-/tmp}/%p.XXXXXX`
             ppthtml %f > "$tmp/page.html"
