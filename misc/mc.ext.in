@@ -278,24 +278,20 @@ type/^ASCII\ mail\ text
 
 ### Sources ###
 
-# C
-shell/.c
+# C/C++
+regex/i/\.(c|cc|cpp)$
+	Include=editor
+
+# C/C++ header
+regex/i/\.(h|hh|hpp)$
 	Include=editor
 
 # Fortran
-shell/.f
+shell/i/.f
 	Include=editor
 
-# Header
-regex/\.(h|hpp)$
-	Include=editor
-
-# Asm
-shell/.s
-	Include=editor
-
-# C++
-regex/\.(C|cc|cpp)$
+# Assembler
+regex/i/\.(s|asm)$
 	Include=editor
 
 include/editor
