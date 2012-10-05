@@ -128,6 +128,9 @@ do_open_action() {
     xz)
         xz -dc "${MC_EXT_FILENAME}" | ${pager}
         ;;
+    par2)
+        par2 r "${MC_EXT_FILENAME}"
+        ;;
     *)
         ;;
     esac
