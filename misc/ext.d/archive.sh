@@ -59,7 +59,8 @@ do_view_action() {
         lha l "${MC_EXT_FILENAME}"
         ;;
     arj)
-        unarj l "${MC_EXT_FILENAME}"
+        arj l "${MC_EXT_FILENAME}" 2>/dev/null || \
+            unarj l "${MC_EXT_FILENAME}"
         ;;
     cab)
         cabextract -l "${MC_EXT_FILENAME}"
