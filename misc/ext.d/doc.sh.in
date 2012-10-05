@@ -97,10 +97,12 @@ do_open_action() {
         fi
         ;;
     pdf)
-        if [ -n "$DISPLAY" ]; then
-            (xpdf "${MC_EXT_FILENAME}" &)
-        else
+        if [ ! -n "$DISPLAY" ]; then
             pdftotext -layout -nopgbrk "${MC_EXT_FILENAME}" - | ${PAGER:-more}
+        elif see > /dev/null 2>&1; then
+            (see "${MC_EXT_FILENAME}" &)
+        else
+            (xpdf "${MC_EXT_FILENAME}" &)
         fi
         #(acroread "${MC_EXT_FILENAME}" &)
         #(ghostview "${MC_EXT_FILENAME}" &)
