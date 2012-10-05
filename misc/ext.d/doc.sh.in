@@ -70,7 +70,9 @@ do_view_action() {
             strings "${MC_EXT_FILENAME}"
         ;;
     dvi)
-        dvi2tty "${MC_EXT_FILENAME}"
+        which dvi2tty >/dev/null 2>&1 && \
+            dvi2tty "${MC_EXT_FILENAME}" || \
+            catdvi "${MC_EXT_FILENAME}"
         ;;
     djvu)
         djvused -e print-pure-txt "${MC_EXT_FILENAME}"
