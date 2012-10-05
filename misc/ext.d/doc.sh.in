@@ -69,6 +69,9 @@ do_view_action() {
     djvu)
         djvused -e print-pure-txt "${MC_EXT_FILENAME}"
         ;;
+    epub)
+        einfo -v "${MC_EXT_FILENAME}"
+        ;;
     *)
         ;;
     esac
@@ -157,6 +160,9 @@ do_open_action() {
         ;;
     comic)
         cbrpager "${MC_EXT_FILENAME}" &
+        ;;
+    epub)
+        lucidor "${MC_EXT_FILENAME}" >/dev/null &
         ;;
     *)
         ;;
