@@ -600,6 +600,10 @@ regex/i/\.djvu?$
 	Open=@EXTHELPERSDIR@/doc.sh open djvu
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view djvu
 
+# Comic Books
+regex/i/\.cb[zr]$
+	Open=@EXTHELPERSDIR@/doc.sh open comic
+
 ### Miscellaneous ###
 
 # Compiled Java classes

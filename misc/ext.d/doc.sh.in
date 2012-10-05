@@ -155,6 +155,9 @@ do_open_action() {
     djvu)
         djview "${MC_EXT_FILENAME}" &
         ;;
+    comic)
+        cbrpager "${MC_EXT_FILENAME}" &
+        ;;
     *)
         ;;
     esac
