@@ -87,7 +87,9 @@ do_view_action() {
         cpio -itv < "${MC_EXT_FILENAME}" 2>/dev/null
         ;;
     7z)
-        7za l "${MC_EXT_FILENAME}" 2>/dev/null
+        7za l "${MC_EXT_FILENAME}" 2>/dev/null ||
+            7z l "${MC_EXT_FILENAME}"
+
         ;;
     ace)
         unace l "${MC_EXT_FILENAME}"
