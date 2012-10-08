@@ -56,6 +56,8 @@ PKG_PROG_PKG_CONFIG
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PATH_PROG([PERL], [perl], [/usr/bin/perl])
+AC_PATH_PROG([PYTHON], [python], [/usr/bin/python])
+AC_PATH_PROG([RUBY], [ruby], [/usr/bin/ruby])
 
 dnl Check nroff and the options it supports
 AC_CHECK_PROG(HAVE_nroff, nroff, true, false)
@@ -564,6 +566,7 @@ src/vfs/extfs/helpers/ualz
 src/vfs/extfs/helpers/uar
 src/vfs/extfs/helpers/uarc
 src/vfs/extfs/helpers/uarj
+src/vfs/extfs/helpers/uc1541
 src/vfs/extfs/helpers/ucab
 src/vfs/extfs/helpers/uha
 src/vfs/extfs/helpers/ulha
@@ -603,6 +606,7 @@ lib/vfs/Makefile
 lib/widget/Makefile
 
 misc/syntax/Makefile
+misc/syntax/Syntax
 
 doc/Makefile
 doc/hints/Makefile
