@@ -626,10 +626,10 @@ tests/src/filemanager/Makefile
 
 fi
 
-
 AC_OUTPUT
 
-echo "
+AC_MSG_NOTICE([
+
 Configuration:
 
   Source code location:       ${srcdir}
@@ -646,4 +646,4 @@ Configuration:
   Diff viewer:                ${diff_msg}
   Support for charset:        ${charset_msg}
   Search type:                ${SEARCH_TYPE}
-"
+])
