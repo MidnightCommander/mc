@@ -1200,7 +1200,7 @@ edit_right_delete_word (WEdit * edit)
     {
         if (edit->curs1 >= edit->last_byte)
             break;
-        c1 = edit_delete (edit, 1);
+        c1 = edit_delete (edit, TRUE);
         c2 = edit_get_byte (edit, edit->curs1);
         if (c1 == '\n' || c2 == '\n')
             break;
@@ -1221,7 +1221,7 @@ edit_left_delete_word (WEdit * edit)
     {
         if (edit->curs1 <= 0)
             break;
-        c1 = edit_backspace (edit, 1);
+        c1 = edit_backspace (edit, TRUE);
         c2 = edit_get_byte (edit, edit->curs1 - 1);
         if (c1 == '\n' || c2 == '\n')
             break;
@@ -1260,11 +1260,11 @@ edit_do_undo (WEdit * edit)
             break;
         case BACKSPACE:
         case BACKSPACE_BR:
-            edit_backspace (edit, 1);
+            edit_backspace (edit, TRUE);
             break;
         case DELCHAR:
         case DELCHAR_BR:
-            edit_delete (edit, 1);
+            edit_delete (edit, TRUE);
             break;
         case COLUMN_ON:
             edit->column_highlight = 1;
@@ -1340,10 +1340,10 @@ edit_do_redo (WEdit * edit)
             edit_cursor_move (edit, -1);
             break;
         case BACKSPACE:
-            edit_backspace (edit, 1);
+            edit_backspace (edit, TRUE);
             break;
         case DELCHAR:
-            edit_delete (edit, 1);
+            edit_delete (edit, TRUE);
             break;
         case COLUMN_ON:
             edit->column_highlight = 1;
@@ -1417,7 +1417,7 @@ static void
 edit_delete_to_line_end (WEdit * edit)
 {
     while (edit_get_byte (edit, edit->curs1) != '\n' && edit->curs2 != 0)
-        edit_delete (edit, 1);
+        edit_delete (edit, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1426,7 +1426,7 @@ static void
 edit_delete_to_line_begin (WEdit * edit)
 {
     while (edit_get_byte (edit, edit->curs1 - 1) != '\n' && edit->curs1 != 0)
-        edit_backspace (edit, 1);
+        edit_backspace (edit, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1535,7 +1535,7 @@ edit_tab_cmd (WEdit * edit)
             int i;
 
             for (i = 1; i <= HALF_TAB_SIZE; i++)
-                edit_backspace (edit, 1);
+                edit_backspace (edit, TRUE);
             edit_insert (edit, '\t');
         }
     }
@@ -1720,12 +1720,12 @@ edit_move_block_to_left (WEdit * edit)
 
         next_char = edit_get_byte (edit, edit->curs1);
         if (next_char == '\t')
-            edit_delete (edit, 1);
+            edit_delete (edit, TRUE);
         else if (next_char == ' ')
             for (i = 1; i <= del_tab_width; i++)
             {
                 if (next_char == ' ')
-                    edit_delete (edit, 1);
+                    edit_delete (edit, TRUE);
                 next_char = edit_get_byte (edit, edit->curs1);
             }
 
@@ -2726,7 +2726,7 @@ edit_insert_ahead (WEdit * edit, int c)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-edit_delete (WEdit * edit, const int byte_delete)
+edit_delete (WEdit * edit, gboolean byte_delete)
 {
     int p = 0;
     int cw = 1;
@@ -2736,8 +2736,8 @@ edit_delete (WEdit * edit, const int byte_delete)
         return 0;
 
 #ifdef HAVE_CHARSET
-    /* if byte_delete = 1 then delete only one byte not multibyte char */
-    if (edit->utf8 && byte_delete == 0)
+    /* if byte_delete == TRUE then delete only one byte not multibyte char */
+    if (edit->utf8 && !byte_delete)
     {
         edit_get_utf (edit, edit->curs1, &cw);
         if (cw < 1)
@@ -2796,7 +2796,7 @@ edit_delete (WEdit * edit, const int byte_delete)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-edit_backspace (WEdit * edit, const int byte_delete)
+edit_backspace (WEdit * edit, gboolean byte_delete)
 {
     int p = 0;
     int cw = 1;
@@ -2809,7 +2809,7 @@ edit_backspace (WEdit * edit, const int byte_delete)
         edit_push_markers (edit);
 
 #ifdef HAVE_CHARSET
-    if (edit->utf8 && byte_delete == 0)
+    if (edit->utf8 && !byte_delete)
     {
         edit_get_prev_utf (edit, edit->curs1, &cw);
         if (cw < 1)
@@ -3399,21 +3399,21 @@ edit_delete_line (WEdit * edit)
      *   beyond EOF.
      */
     while (edit_get_byte (edit, edit->curs1) != '\n')
-        (void) edit_delete (edit, 1);
+        (void) edit_delete (edit, TRUE);
 
     /*
      * Delete '\n' char.
      * Note that edit_delete() will not corrupt anything if called while
      *   cursor position is EOF.
      */
-    (void) edit_delete (edit, 1);
+    (void) edit_delete (edit, TRUE);
 
     /*
      * Delete left part of the line.
      * Note, that edit_get_byte() returns '\n' when byte position is < 0.
      */
     while (edit_get_byte (edit, edit->curs1 - 1) != '\n')
-        (void) edit_backspace (edit, 1);
+        (void) edit_backspace (edit, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3637,7 +3637,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
 #endif
                 if (edit_get_byte (edit, edit->curs1) != '\n')
 
-                    edit_delete (edit, 0);
+                    edit_delete (edit, FALSE);
         }
         if (option_cursor_beyond_eol && edit->over_col > 0)
             edit_insert_over (edit);
@@ -3745,17 +3745,17 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         else if (option_backspace_through_tabs && is_in_indent (edit))
         {
             while (edit_get_byte (edit, edit->curs1 - 1) != '\n' && edit->curs1 > 0)
-                edit_backspace (edit, 1);
+                edit_backspace (edit, TRUE);
         }
         else if (option_fake_half_tabs && is_in_indent (edit) && right_of_four_spaces (edit))
         {
             int i;
 
             for (i = 0; i < HALF_TAB_SIZE; i++)
-                edit_backspace (edit, 1);
+                edit_backspace (edit, TRUE);
         }
         else
-            edit_backspace (edit, 0);
+            edit_backspace (edit, FALSE);
         break;
     case CK_Delete:
         /* if non persistent selection and text selected */
@@ -3771,10 +3771,10 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
                 int i;
 
                 for (i = 1; i <= HALF_TAB_SIZE; i++)
-                    edit_delete (edit, 1);
+                    edit_delete (edit, TRUE);
             }
             else
-                edit_delete (edit, 0);
+                edit_delete (edit, FALSE);
         }
         break;
     case CK_DeleteToWordBegin:

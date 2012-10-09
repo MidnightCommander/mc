@@ -549,7 +549,7 @@ edit_delete_column_of_text (WEdit * edit)
         {
             /* delete line between margins */
             if (edit_get_byte (edit, edit->curs1) != '\n')
-                edit_delete (edit, 1);
+                edit_delete (edit, TRUE);
             q--;
         }
         if (n)
@@ -621,7 +621,7 @@ edit_block_delete (WEdit * edit)
         {
             while (count < end_mark)
             {
-                edit_delete (edit, 1);
+                edit_delete (edit, TRUE);
                 count++;
             }
         }
@@ -2513,7 +2513,7 @@ edit_block_move_cmd (WEdit * edit)
         edit_scroll_screen_over_cursor (edit);
 
         for (count = start_mark; count < end_mark; count++)
-            copy_buf[end_mark - count - 1] = edit_delete (edit, 1);
+            copy_buf[end_mark - count - 1] = edit_delete (edit, TRUE);
 
         edit_scroll_screen_over_cursor (edit);
         edit_cursor_move (edit,
@@ -2721,7 +2721,7 @@ edit_replace_cmd (WEdit * edit, int again)
 
             /* delete then insert new */
             for (i = 0; i < len; i++)
-                edit_delete (edit, 1);
+                edit_delete (edit, TRUE);
 
             for (i = 0; i < repl_str->len; i++)
                 edit_insert (edit, repl_str->str[i]);
@@ -3642,7 +3642,7 @@ edit_suggest_current_word (WEdit * edit)
 #endif
                 cp_word = new_word;
                 for (i = 0; i < word_len; i++)
-                    edit_backspace (edit, 1);
+                    edit_backspace (edit, TRUE);
                 for (; *new_word; new_word++)
                     edit_insert (edit, *new_word);
                 g_free (cp_word);

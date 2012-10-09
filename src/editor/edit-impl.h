@@ -211,8 +211,8 @@ void edit_block_move_cmd (WEdit * edit);
 int edit_block_delete_cmd (WEdit * edit);
 void edit_delete_line (WEdit * edit);
 
-int edit_delete (WEdit * edit, const int byte_delete);
-int edit_backspace (WEdit * edit, const int byte_delete);
+int edit_delete (WEdit * edit, gboolean byte_delete);
+int edit_backspace (WEdit * edit, gboolean byte_delete);
 void edit_insert (WEdit * edit, int c);
 void edit_cursor_move (WEdit * edit, off_t increment);
 void edit_push_undo_action (WEdit * edit, long c);
