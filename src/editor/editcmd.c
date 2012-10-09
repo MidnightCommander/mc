@@ -2378,6 +2378,9 @@ edit_block_move_cmd (WEdit * edit)
     if (eval_marks (edit, &start_mark, &end_mark))
         return;
 
+    if (!edit->column_highlight && edit->curs1 > start_mark && edit->curs1 <  end_mark)
+        return;
+
     line = edit->curs_line;
     if (edit->mark2 < 0)
         edit_mark_cmd (edit, FALSE);
