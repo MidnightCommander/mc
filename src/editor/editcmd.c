@@ -2390,13 +2390,12 @@ edit_block_move_cmd (WEdit * edit)
     {
         off_t mark1, mark2;
         int size;
-        int b_width = 0;
-        int c1, c2;
+        int c1, c2, b_width;
         int x, x2;
 
         c1 = min (edit->column1, edit->column2);
         c2 = max (edit->column1, edit->column2);
-        b_width = (c2 - c1);
+        b_width = c2 - c1;
 
         edit_update_curs_col (edit);
 
@@ -2404,7 +2403,7 @@ edit_block_move_cmd (WEdit * edit)
         x2 = x + edit->over_col;
 
         /* do nothing when cursor inside first line of selected area */
-        if ((edit_eol (edit, edit->curs1) == edit_eol (edit, start_mark)) && (x2 > c1 && x2 <= c2))
+        if ((edit_eol (edit, edit->curs1) == edit_eol (edit, start_mark)) && x2 > c1 && x2 <= c2)
             return;
 
         if (edit->curs1 > start_mark && edit->curs1 < edit_eol (edit, end_mark))
@@ -2441,12 +2440,10 @@ edit_block_move_cmd (WEdit * edit)
         copy_buf = g_malloc0 (end_mark - start_mark);
         edit_cursor_move (edit, start_mark - edit->curs1);
         edit_scroll_screen_over_cursor (edit);
-        count = start_mark;
-        while (count < end_mark)
-        {
+
+        for (count = start_mark; count < end_mark; count++)
             copy_buf[end_mark - count - 1] = edit_delete (edit, 1);
-            count++;
-        }
+
         edit_scroll_screen_over_cursor (edit);
         edit_cursor_move (edit,
                           current - edit->curs1 -
