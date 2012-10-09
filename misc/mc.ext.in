@@ -117,8 +117,8 @@ regex/^\[git\]
 
 ### Archives ###
 
-# .tgz, .tpz, .tar.gz, .tar.z, .tar.Z, .ipk
-regex/\.t([gp]?z|ar\.g?[zZ])$|\.ipk|\.gem$
+# .tgz, .tpz, .tar.gz, .tar.z, .tar.Z, .ipk, .gem, .war
+regex/\.t([gp]?z|ar\.g?[zZ])$|\.ipk$|\.gem$|\.war$
 	Open=%cd %p/utar://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.gz
 
@@ -278,24 +278,20 @@ type/^ASCII\ mail\ text
 
 ### Sources ###
 
-# C
-shell/.c
+# C/C++
+regex/i/\.(c|cc|cpp)$
+	Include=editor
+
+# C/C++ header
+regex/i/\.(h|hh|hpp)$
 	Include=editor
 
 # Fortran
-shell/.f
+shell/i/.f
 	Include=editor
 
-# Header
-regex/\.(h|hpp)$
-	Include=editor
-
-# Asm
-shell/.s
-	Include=editor
-
-# C++
-regex/\.(C|cc|cpp)$
+# Assembler
+regex/i/\.(s|asm)$
 	Include=editor
 
 include/editor
@@ -391,6 +387,12 @@ type/^PC\ bitmap
 type/^PNG
 	Include=image
 
+type/^JNG
+	Include=image
+
+type/^MNG
+	Include=image
+
 type/^TIFF
 	Include=image
 
@@ -419,6 +421,10 @@ shell/.xpm
 shell/.ico
 	Include=image
 
+shell/i/.svg
+	View=%view{ascii} @EXTHELPERSDIR@/image.sh view svg
+	Open=@EXTHELPERSDIR@/image.sh open svg
+
 include/image
 	Open=@EXTHELPERSDIR@/image.sh open ALL_FORMATS
 	View=%view{ascii} @EXTHELPERSDIR@/image.sh view ALL_FORMATS
@@ -426,7 +432,7 @@ include/image
 
 ### Sound files ###
 
-regex/i/\.(wav|snd|voc|au|smp|aiff|snd|m4a)$
+regex/i/\.(wav|snd|voc|au|smp|aiff|snd|m4a|ape|aac|wvm4a)$
 	Open=@EXTHELPERSDIR@/sound.sh open common
 
 regex/i/\.(mod|s3m|xm|it|mtm|669|stm|ult|far)$
@@ -544,6 +550,10 @@ regex/i/\.(odt|ott|sxw|stw|ods|ots|sxc|stc|odp|otp|sxi|sti|odg|otg|sxd|std|odb|o
 shell/.abw
 	Open=@EXTHELPERSDIR@/doc.sh open abw
 
+# Gnumeric
+shell/i/.gnumeric
+	Open=@EXTHELPERSDIR@/doc.sh open gnumeric
+
 # Microsoft Word Document
 regex/i/\.(do[ct]|wri)$
 	Open=@EXTHELPERSDIR@/doc.sh open msdoc
@@ -589,6 +599,16 @@ shell/i/.tex
 regex/i/\.djvu?$
 	Open=@EXTHELPERSDIR@/doc.sh open djvu
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view djvu
+
+# Comic Books
+regex/i/\.cb[zr]$
+	Open=@EXTHELPERSDIR@/doc.sh open comic
+
+# Epub
+shell/i/.epub
+	Open=@EXTHELPERSDIR@/doc.sh open epub
+	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view epub
+
 
 ### Miscellaneous ###
 
@@ -705,6 +725,10 @@ regex/\.lzma$
 regex/\.xz$
 	Open=@EXTHELPERSDIR@/archive.sh view xz %var{PAGER:more}
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view xz
+
+# Parity Archive
+type/^Parity\ Archive\ Volume\ Set
+	Open=@EXTHELPERSDIR@/archive.sh open par2
 
 ### Default ###
 

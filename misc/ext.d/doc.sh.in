@@ -23,6 +23,12 @@ staroffice_console() {
     rm -rf "$tmp"
 }
 
+get_ooffice_executable() {
+    which libreoffice >/dev/null 2>&1 && \
+        echo "libreoffice" || \
+        echo "ooffice"
+}
+
 do_view_action() {
     filetype=$1
 
@@ -64,10 +70,15 @@ do_view_action() {
             strings "${MC_EXT_FILENAME}"
         ;;
     dvi)
-        dvi2tty "${MC_EXT_FILENAME}"
+        which dvi2tty >/dev/null 2>&1 && \
+            dvi2tty "${MC_EXT_FILENAME}" || \
+            catdvi "${MC_EXT_FILENAME}"
         ;;
     djvu)
         djvused -e print-pure-txt "${MC_EXT_FILENAME}"
+        ;;
+    epub)
+        einfo -v "${MC_EXT_FILENAME}"
         ;;
     *)
         ;;
@@ -86,19 +97,22 @@ do_open_action() {
         fi
         ;;
     pdf)
-        if [ -n "$DISPLAY" ]; then
-            (xpdf "${MC_EXT_FILENAME}" &)
-        else
+        if [ ! -n "$DISPLAY" ]; then
             pdftotext -layout -nopgbrk "${MC_EXT_FILENAME}" - | ${PAGER:-more}
+        elif see > /dev/null 2>&1; then
+            (see "${MC_EXT_FILENAME}" &)
+        else
+            (xpdf "${MC_EXT_FILENAME}" &)
         fi
         #(acroread "${MC_EXT_FILENAME}" &)
         #(ghostview "${MC_EXT_FILENAME}" &)
         ;;
     ooffice)
         if [ -n "$DISPLAY" ]; then
-            (ooffice "${MC_EXT_FILENAME}" &)
+            OOFFICE=`get_ooffice_executable`
+            (${OOFFICE} "${MC_EXT_FILENAME}" &)
         else
-            if [ ` echo "${MC_EXT_FILENAME}" | grep -c "${STAROFFICE_REGEXP}"` -ne 0 ]; then
+            if [ `echo "${MC_EXT_FILENAME}" | grep -c "${STAROFFICE_REGEXP}"` -ne 0 ]; then
                 staroffice_console "${MC_EXT_FILENAME}"
             else
                 odt2txt "${MC_EXT_FILENAME}" | ${PAGER:-more}
@@ -107,6 +121,9 @@ do_open_action() {
         ;;
     abw)
         (abiword "${MC_EXT_FILENAME}" &)
+        ;;
+    gnumeric)
+        (gnumeric "${MC_EXT_FILENAME}" &)
         ;;
     msdoc)
         if [ -n "$DISPLAY" ]; then
@@ -130,7 +147,8 @@ do_open_action() {
         ;;
     msppt)
         if [ -n "$DISPLAY" ]; then
-            (ooffice %f >/dev/null 2>&1 &)
+            OOFFICE=`get_ooffice_executable`
+            (${OOFFICE} %f >/dev/null 2>&1 &)
         else
             tmp=`mktemp -d ${TMPDIR:-/tmp}/%p.XXXXXX`
             ppthtml %f > "$tmp/page.html"
@@ -151,6 +169,12 @@ do_open_action() {
         ;;
     djvu)
         djview "${MC_EXT_FILENAME}" &
+        ;;
+    comic)
+        cbrpager "${MC_EXT_FILENAME}" &
+        ;;
+    epub)
+        lucidor "${MC_EXT_FILENAME}" >/dev/null &
         ;;
     *)
         ;;

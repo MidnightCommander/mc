@@ -59,7 +59,8 @@ do_view_action() {
         lha l "${MC_EXT_FILENAME}"
         ;;
     arj)
-        unarj l "${MC_EXT_FILENAME}"
+        arj l "${MC_EXT_FILENAME}" 2>/dev/null || \
+            unarj l "${MC_EXT_FILENAME}"
         ;;
     cab)
         cabextract -l "${MC_EXT_FILENAME}"
@@ -86,7 +87,9 @@ do_view_action() {
         cpio -itv < "${MC_EXT_FILENAME}" 2>/dev/null
         ;;
     7z)
-        7za l "${MC_EXT_FILENAME}" 2>/dev/null
+        7za l "${MC_EXT_FILENAME}" 2>/dev/null ||
+            7z l "${MC_EXT_FILENAME}"
+
         ;;
     ace)
         unace l "${MC_EXT_FILENAME}"
@@ -124,6 +127,9 @@ do_open_action() {
         ;;
     xz)
         xz -dc "${MC_EXT_FILENAME}" | ${pager}
+        ;;
+    par2)
+        par2 r "${MC_EXT_FILENAME}"
         ;;
     *)
         ;;

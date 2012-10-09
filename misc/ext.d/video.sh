@@ -12,7 +12,8 @@ do_view_action() {
 
     case "${filetype}" in
     *)
-        cat "${MC_EXT_FILENAME}"
+        mplayer -identify -vo null -ao null -frames 0 "${MC_EXT_FILENAME}" 2>&1 | \
+            sed -n 's/^ID_//p'
         ;;
     esac
 }
