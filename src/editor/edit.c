@@ -654,7 +654,7 @@ edit_modification (WEdit * edit)
 
 #ifdef HAVE_CHARSET
 static char *
-edit_get_byte_ptr (WEdit * edit, off_t byte_index)
+edit_get_byte_ptr (const WEdit * edit, off_t byte_index)
 {
     if (byte_index >= (edit->curs1 + edit->curs2) || byte_index < 0)
         return NULL;
@@ -677,7 +677,7 @@ edit_get_byte_ptr (WEdit * edit, off_t byte_index)
 
 #ifdef HAVE_CHARSET
 static int
-edit_get_prev_utf (WEdit * edit, off_t byte_index, int *char_width)
+edit_get_prev_utf (const WEdit * edit, off_t byte_index, int *char_width)
 {
     int i, res;
     gchar utf8_buf[3 * UTF8_CHAR_LEN + 1];
@@ -731,7 +731,7 @@ edit_get_prev_utf (WEdit * edit, off_t byte_index, int *char_width)
  */
 
 static gboolean
-is_in_indent (WEdit * edit)
+is_in_indent (const WEdit * edit)
 {
     off_t p;
 
@@ -752,7 +752,7 @@ is_in_indent (WEdit * edit)
  */
 
 static gboolean
-is_blank (WEdit * edit, off_t offset)
+is_blank (const WEdit * edit, off_t offset)
 {
     off_t s, f;
     int c;
@@ -831,16 +831,16 @@ edit_move_up_paragraph (WEdit * edit, gboolean do_scroll)
 
     if (edit->curs_line > 1)
     {
-        if (!line_is_blank (edit, edit->curs_line))
+        if (!edit_line_is_blank (edit, edit->curs_line))
         {
             for (i = edit->curs_line - 1; i != 0; i--)
-                if (line_is_blank (edit, i))
+                if (edit_line_is_blank (edit, i))
                     break;
         }
-        else if (line_is_blank (edit, edit->curs_line - 1))
+        else if (edit_line_is_blank (edit, edit->curs_line - 1))
         {
             for (i = edit->curs_line - 1; i != 0; i--)
-                if (!line_is_blank (edit, i))
+                if (!edit_line_is_blank (edit, i))
                 {
                     i++;
                     break;
@@ -849,7 +849,7 @@ edit_move_up_paragraph (WEdit * edit, gboolean do_scroll)
         else
         {
             for (i = edit->curs_line - 1; i != 0; i--)
-                if (line_is_blank (edit, i))
+                if (edit_line_is_blank (edit, i))
                     break;
         }
     }
@@ -868,16 +868,16 @@ edit_move_down_paragraph (WEdit * edit, gboolean do_scroll)
 
     if (edit->curs_line >= edit->total_lines - 1)
         i = edit->total_lines;
-    else if (!line_is_blank (edit, edit->curs_line))
+    else if (!edit_line_is_blank (edit, edit->curs_line))
     {
         for (i = edit->curs_line + 1; i != 0; i++)
-            if (line_is_blank (edit, i) || i >= edit->total_lines)
+            if (edit_line_is_blank (edit, i) || i >= edit->total_lines)
                 break;
     }
-    else if (line_is_blank (edit, edit->curs_line + 1))
+    else if (edit_line_is_blank (edit, edit->curs_line + 1))
     {
         for (i = edit->curs_line + 1; i != 0; i++)
-            if (!line_is_blank (edit, i) || i > edit->total_lines)
+            if (!edit_line_is_blank (edit, i) || i > edit->total_lines)
             {
                 i--;
                 break;
@@ -886,7 +886,7 @@ edit_move_down_paragraph (WEdit * edit, gboolean do_scroll)
     else
     {
         for (i = edit->curs_line + 1; i != 0; i++)
-            if (line_is_blank (edit, i) || i >= edit->total_lines)
+            if (edit_line_is_blank (edit, i) || i >= edit->total_lines)
                 break;
     }
     edit_move_down (edit, i - edit->curs_line, do_scroll);
@@ -1672,7 +1672,7 @@ edit_move_block_to_right (WEdit * edit)
     do
     {
         edit_cursor_move (edit, cur_bol - edit->curs1);
-        if (!line_is_blank (edit, edit->curs_line))
+        if (!edit_line_is_blank (edit, edit->curs_line))
         {
             if (option_fill_tabs_with_spaces)
                 insert_spaces_tab (edit, option_fake_half_tabs);
@@ -1815,7 +1815,7 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-edit_get_byte (WEdit * edit, off_t byte_index)
+edit_get_byte (const WEdit * edit, off_t byte_index)
 {
     off_t p;
 
@@ -1835,7 +1835,7 @@ edit_get_byte (WEdit * edit, off_t byte_index)
 
 #ifdef HAVE_CHARSET
 int
-edit_get_utf (WEdit * edit, off_t byte_index, int *char_width)
+edit_get_utf (const WEdit * edit, off_t byte_index, int *char_width)
 {
     gchar *str = NULL;
     int res = -1;
@@ -2028,7 +2028,7 @@ is_break_char (char c)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-edit_get_word_from_pos (WEdit * edit, off_t start_pos, off_t * start, gsize * len, gsize * cut)
+edit_get_word_from_pos (const WEdit * edit, off_t start_pos, off_t * start, gsize * len, gsize * cut)
 {
     off_t word_start;
     long cut_len = 0;
@@ -2936,7 +2936,7 @@ edit_cursor_move (WEdit * edit, off_t increment)
 /** returns index of last char on line + 1 */
 
 off_t
-edit_eol (WEdit * edit, off_t current)
+edit_eol (const WEdit * edit, off_t current)
 {
     if (current >= edit->last_byte)
         return edit->last_byte;
@@ -2951,7 +2951,7 @@ edit_eol (WEdit * edit, off_t current)
 /** returns index of first char on line */
 
 off_t
-edit_bol (WEdit * edit, off_t current)
+edit_bol (const WEdit * edit, off_t current)
 {
     if (current <= 0)
         return 0;
@@ -2965,9 +2965,10 @@ edit_bol (WEdit * edit, off_t current)
 /* --------------------------------------------------------------------------------------------- */
 
 long
-edit_count_lines (WEdit * edit, off_t current, off_t upto)
+edit_count_lines (const WEdit * edit, off_t current, off_t upto)
 {
     long lines = 0;
+
     if (upto > edit->last_byte)
         upto = edit->last_byte;
     if (current < 0)
@@ -2983,7 +2984,7 @@ edit_count_lines (WEdit * edit, off_t current, off_t upto)
 /* If upto is zero returns index of lines forward current. */
 
 off_t
-edit_move_forward (WEdit * edit, off_t current, long lines, off_t upto)
+edit_move_forward (const WEdit * edit, off_t current, long lines, off_t upto)
 {
     if (upto != 0)
     {
@@ -3010,7 +3011,7 @@ edit_move_forward (WEdit * edit, off_t current, long lines, off_t upto)
 /** Returns offset of 'lines' lines up from current */
 
 off_t
-edit_move_backward (WEdit * edit, off_t current, long lines)
+edit_move_backward (const WEdit * edit, off_t current, long lines)
 {
     if (lines < 0)
         lines = 0;
@@ -3025,7 +3026,7 @@ edit_move_backward (WEdit * edit, off_t current, long lines)
 /* If upto is zero returns index of cols across from current. */
 
 off_t
-edit_move_forward3 (WEdit * edit, off_t current, long cols, off_t upto)
+edit_move_forward3 (const WEdit * edit, off_t current, long cols, off_t upto)
 {
     off_t p, q;
     long col;
@@ -3095,7 +3096,7 @@ edit_move_forward3 (WEdit * edit, off_t current, long cols, off_t upto)
 /** returns the current column position of the cursor */
 
 long
-edit_get_col (WEdit * edit)
+edit_get_col (const WEdit * edit)
 {
     return (long) edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0, edit->curs1);
 }
@@ -3226,7 +3227,7 @@ edit_move_to_prev_col (WEdit * edit, off_t p)
     else
     {
         edit->over_col = 0;
-        if (is_in_indent (edit) && option_fake_half_tabs)
+        if (option_fake_half_tabs && is_in_indent (edit))
         {
             edit_update_curs_col (edit);
             if (space_width != 0 && edit->curs_col % (HALF_TAB_SIZE * space_width) != 0)
@@ -3255,7 +3256,7 @@ edit_move_to_prev_col (WEdit * edit, off_t p)
  */
 
 gboolean
-line_is_blank (WEdit * edit, long line)
+edit_line_is_blank (WEdit * edit, long line)
 {
     return is_blank (edit, edit_find_line (edit, line));
 }
@@ -3416,7 +3417,7 @@ edit_delete_line (WEdit * edit)
 /* --------------------------------------------------------------------------------------------- */
 
 long
-edit_indent_width (WEdit * edit, off_t p)
+edit_indent_width (const WEdit * edit, off_t p)
 {
     off_t q = p;
 

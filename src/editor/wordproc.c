@@ -126,7 +126,7 @@ begin_paragraph (WEdit * edit, int force)
     long i;
     for (i = edit->curs_line - 1; i >= 0; i--)
     {
-        if (line_is_blank (edit, i))
+        if (edit_line_is_blank (edit, i))
         {
             i++;
             break;
@@ -155,7 +155,7 @@ end_paragraph (WEdit * edit, int force)
     long i;
     for (i = edit->curs_line + 1; i <= edit->total_lines; i++)
     {
-        if (line_is_blank (edit, i))
+        if (edit_line_is_blank (edit, i))
         {
             i--;
             break;
@@ -398,12 +398,14 @@ put_paragraph (WEdit * edit, unsigned char *t, off_t p, int indent, int size)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline int
-test_indent (WEdit * edit, off_t p, off_t q)
+test_indent (const WEdit * edit, off_t p, off_t q)
 {
     int indent;
+
     indent = edit_indent_width (edit, p++);
-    if (!indent)
+    if (indent == 0)
         return 0;
+
     for (; p < q; p++)
         if (edit_get_byte (edit, p - 1) == '\n')
             if (indent != edit_indent_width (edit, p))
@@ -424,7 +426,7 @@ format_paragraph (WEdit * edit, int force)
     int indent = 0;
     if (option_word_wrap_line_length < 2)
         return;
-    if (line_is_blank (edit, edit->curs_line))
+    if (edit_line_is_blank (edit, edit->curs_line))
         return;
     p = begin_paragraph (edit, force);
     q = end_paragraph (edit, force);

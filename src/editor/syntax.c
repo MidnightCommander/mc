@@ -167,7 +167,7 @@ destroy_defines (GTree ** defines)
 
 /** Wrapper for case insensitive mode */
 inline static int
-xx_tolower (WEdit * edit, int c)
+xx_tolower (const WEdit * edit, int c)
 {
     return edit->is_case_insensitive ? tolower (c) : c;
 }
@@ -216,7 +216,7 @@ subst_defines (GTree * defines, char **argv, char **argv_end)
 /* --------------------------------------------------------------------------------------------- */
 
 static long
-compare_word_to_right (WEdit * edit, long i, const char *text,
+compare_word_to_right (const WEdit * edit, long i, const char *text,
                        const char *whole_left, const char *whole_right, int line_start)
 {
     const unsigned char *p, *q;
@@ -341,7 +341,7 @@ compare_word_to_right (WEdit * edit, long i, const char *text,
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
-xx_strchr (WEdit * edit, const unsigned char *s, int char_byte)
+xx_strchr (const WEdit * edit, const unsigned char *s, int char_byte)
 {
     while (*s >= '\005' && xx_tolower (edit, *s) != char_byte)
         s++;
@@ -604,7 +604,7 @@ edit_get_rule (WEdit * edit, off_t byte_index)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline int
-translate_rule_to_color (WEdit * edit, edit_syntax_rule_t rule)
+translate_rule_to_color (const WEdit * edit, edit_syntax_rule_t rule)
 {
     return edit->rules[rule.context]->keyword[rule.keyword]->color;
 }

@@ -182,12 +182,12 @@ void user_menu (WEdit * edit, const char *menu_file, int selected_entry);
 void edit_init_menu (struct WMenuBar *menubar);
 void edit_save_mode_cmd (void);
 gboolean edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch);
-int edit_get_byte (WEdit * edit, off_t byte_index);
-int edit_get_utf (WEdit * edit, off_t byte_index, int *char_width);
-long edit_count_lines (WEdit * edit, off_t current, off_t upto);
-off_t edit_move_forward (WEdit * edit, off_t current, long lines, off_t upto);
-off_t edit_move_forward3 (WEdit * edit, off_t current, long cols, off_t upto);
-off_t edit_move_backward (WEdit * edit, off_t current, long lines);
+int edit_get_byte (const WEdit * edit, off_t byte_index);
+int edit_get_utf (const WEdit * edit, off_t byte_index, int *char_width);
+long edit_count_lines (const WEdit * edit, off_t current, off_t upto);
+off_t edit_move_forward (const WEdit * edit, off_t current, long lines, off_t upto);
+off_t edit_move_forward3 (const WEdit * edit, off_t current, long cols, off_t upto);
+off_t edit_move_backward (const WEdit * edit, off_t current, long lines);
 void edit_scroll_screen_over_cursor (WEdit * edit);
 void edit_render_keypress (WEdit * edit);
 void edit_scroll_upward (WEdit * edit, long i);
@@ -197,9 +197,9 @@ void edit_scroll_left (WEdit * edit, long i);
 void edit_move_up (WEdit * edit, long i, gboolean do_scroll);
 void edit_move_down (WEdit * edit, long i, gboolean do_scroll);
 void edit_move_to_prev_col (WEdit * edit, off_t p);
-long edit_get_col (WEdit * edit);
-off_t edit_bol (WEdit * edit, off_t current);
-off_t edit_eol (WEdit * edit, off_t current);
+long edit_get_col (const WEdit * edit);
+off_t edit_bol (const WEdit * edit, off_t current);
+off_t edit_eol (const WEdit * edit, off_t current);
 void edit_update_curs_row (WEdit * edit);
 void edit_update_curs_col (WEdit * edit);
 void edit_find_bracket (WEdit * edit);
@@ -258,7 +258,7 @@ off_t edit_insert_column_of_text_from_file (WEdit * edit, int file,
                                             off_t * start_pos, off_t * end_pos, long *col1,
                                             long *col2);
 
-char *edit_get_word_from_pos (WEdit * edit, off_t start_pos, off_t * start, gsize * len,
+char *edit_get_word_from_pos (const WEdit * edit, off_t start_pos, off_t * start, gsize * len,
                               gsize * cut);
 long edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath);
 gboolean edit_load_back_cmd (WEdit * edit);
@@ -317,9 +317,9 @@ void book_mark_dec (WEdit * edit, long line);
 void book_mark_serialize (WEdit * edit, int color);
 void book_mark_restore (WEdit * edit, int color);
 
-gboolean line_is_blank (WEdit * edit, long line);
+gboolean edit_line_is_blank (WEdit * edit, long line);
 gboolean is_break_char (char c);
-long edit_indent_width (WEdit * edit, off_t p);
+long edit_indent_width (const WEdit * edit, off_t p);
 void edit_insert_indent (WEdit * edit, int indent);
 void edit_options_dialog (Dlg_head * h);
 void edit_syntax_dialog (WEdit * edit);
