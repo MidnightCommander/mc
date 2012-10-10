@@ -290,7 +290,7 @@ void edit_set_filename (WEdit * edit, const vfs_path_t * name_vpath);
 
 void edit_load_syntax (WEdit * edit, char ***pnames, const char *type);
 void edit_free_syntax_rules (WEdit * edit);
-void edit_get_syntax_color (WEdit * edit, off_t byte_index, int *color);
+int edit_get_syntax_color (WEdit * edit, off_t byte_index);
 
 void book_mark_insert (WEdit * edit, long line, int c);
 int book_mark_query_color (WEdit * edit, long line, int c);

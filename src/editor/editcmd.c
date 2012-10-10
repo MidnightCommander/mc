@@ -1571,9 +1571,7 @@ void
 edit_refresh_cmd (WEdit * edit)
 {
 #ifdef HAVE_SLANG
-    int color;
-
-    edit_get_syntax_color (edit, -1, &color);
+    edit_get_syntax_color (edit, -1);
     tty_touch_screen ();
     mc_refresh ();
 #else
