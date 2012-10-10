@@ -41,7 +41,7 @@ typedef struct edit_syntax_rule_t edit_syntax_rule_t;
 struct edit_syntax_rule_t
 {
     unsigned short keyword;
-    unsigned char end;
+    off_t end;
     unsigned char context;
     unsigned char _context;
     unsigned char border;
@@ -158,7 +158,7 @@ struct WEdit
     /* syntax higlighting */
     struct _syntax_marker *syntax_marker;
     struct context_rule **rules;
-    long last_get_rule;
+    off_t last_get_rule;
     edit_syntax_rule_t rule;
     char *syntax_type;          /* description of syntax highlighting type being used */
     GTree *defines;             /* List of defines */

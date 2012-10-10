@@ -102,7 +102,7 @@ struct key_word
     unsigned char first;
     char *whole_word_chars_left;
     char *whole_word_chars_right;
-    int line_start;
+    long line_start;
     int color;
 };
 
@@ -118,14 +118,14 @@ struct context_rule
     char *whole_word_chars_left;
     char *whole_word_chars_right;
     char *keyword_first_chars;
-    int spelling;
+    gboolean spelling;
     /* first word is word[1] */
     struct key_word **keyword;
 };
 
 struct _syntax_marker
 {
-    long offset;
+    off_t offset;
     edit_syntax_rule_t rule;
     struct _syntax_marker *next;
 };
@@ -215,9 +215,9 @@ subst_defines (GTree * defines, char **argv, char **argv_end)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static long
-compare_word_to_right (const WEdit * edit, long i, const char *text,
-                       const char *whole_left, const char *whole_right, int line_start)
+static off_t
+compare_word_to_right (const WEdit * edit, off_t i, const char *text,
+                       const char *whole_left, const char *whole_right, long line_start)
 {
     const unsigned char *p, *q;
     int c, d, j;
@@ -352,7 +352,7 @@ xx_strchr (const WEdit * edit, const unsigned char *s, int char_byte)
 /* --------------------------------------------------------------------------------------------- */
 
 static edit_syntax_rule_t
-apply_rules_going_right (WEdit * edit, long i, edit_syntax_rule_t rule)
+apply_rules_going_right (WEdit * edit, off_t i, edit_syntax_rule_t rule)
 {
     struct context_rule *r;
     int c;
@@ -360,13 +360,13 @@ apply_rules_going_right (WEdit * edit, long i, edit_syntax_rule_t rule)
     gboolean found_left = FALSE, found_right = FALSE;
     gboolean keyword_foundleft = FALSE, keyword_foundright = FALSE;
     gboolean is_end;
-    long end = 0;
+    off_t end = 0;
     edit_syntax_rule_t _rule = rule;
 
     c = xx_tolower (edit, edit_get_byte (edit, i));
     if (c == 0)
         return rule;
-    is_end = (rule.end == (unsigned char) i);
+    is_end = (rule.end == i);
 
     /* check to turn off a keyword */
     if (_rule.keyword)
@@ -383,7 +383,7 @@ apply_rules_going_right (WEdit * edit, long i, edit_syntax_rule_t rule)
     /* check to turn off a context */
     if (_rule.context && !_rule.keyword)
     {
-        long e;
+        off_t e;
 
         r = edit->rules[_rule.context];
         if (r->first_right == c && !(rule.border & RULE_ON_RIGHT_BORDER)
@@ -426,7 +426,7 @@ apply_rules_going_right (WEdit * edit, long i, edit_syntax_rule_t rule)
             {
                 struct key_word *k;
                 int count;
-                long e;
+                off_t e;
 
                 count = p - r->keyword_first_chars;
                 k = r->keyword[count];
@@ -468,7 +468,7 @@ apply_rules_going_right (WEdit * edit, long i, edit_syntax_rule_t rule)
 
                     if (r->first_right == c)
                     {
-                        long e;
+                        off_t e;
 
                         e = compare_word_to_right (edit, i, r->right, r->whole_word_chars_left,
                                                    r->whole_word_chars_right, r->line_start_right);
@@ -494,7 +494,7 @@ apply_rules_going_right (WEdit * edit, long i, edit_syntax_rule_t rule)
                 r = rules[count];
                 if (r->first_left == c)
                 {
-                    long e;
+                    off_t e;
 
                     e = compare_word_to_right (edit, i, r->left, r->whole_word_chars_left,
                                                r->whole_word_chars_right, r->line_start_left);
@@ -528,7 +528,7 @@ apply_rules_going_right (WEdit * edit, long i, edit_syntax_rule_t rule)
         {
             struct key_word *k;
             int count;
-            long e;
+            off_t e;
 
             count = p - r->keyword_first_chars;
             k = r->keyword[count];
@@ -551,7 +551,7 @@ apply_rules_going_right (WEdit * edit, long i, edit_syntax_rule_t rule)
 static edit_syntax_rule_t
 edit_get_rule (WEdit * edit, off_t byte_index)
 {
-    long i;
+    off_t i;
 
     if (byte_index > edit->last_get_rule)
     {
@@ -1097,7 +1097,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
                 result = line;
                 break;
             }
-            c->spelling = 1;
+            c->spelling = TRUE;
         }
         else if (!strcmp (args[0], "keyword"))
         {
