@@ -126,7 +126,7 @@ struct context_rule
 struct _syntax_marker
 {
     long offset;
-    struct syntax_rule rule;
+    edit_syntax_rule_t rule;
     struct _syntax_marker *next;
 };
 
@@ -351,8 +351,8 @@ xx_strchr (WEdit * edit, const unsigned char *s, int char_byte)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static struct syntax_rule
-apply_rules_going_right (WEdit * edit, long i, struct syntax_rule rule)
+static edit_syntax_rule_t
+apply_rules_going_right (WEdit * edit, long i, edit_syntax_rule_t rule)
 {
     struct context_rule *r;
     int c;
@@ -361,7 +361,7 @@ apply_rules_going_right (WEdit * edit, long i, struct syntax_rule rule)
     gboolean keyword_foundleft = FALSE, keyword_foundright = FALSE;
     gboolean is_end;
     long end = 0;
-    struct syntax_rule _rule = rule;
+    edit_syntax_rule_t _rule = rule;
 
     c = xx_tolower (edit, edit_get_byte (edit, i));
     if (c == 0)
@@ -548,7 +548,7 @@ apply_rules_going_right (WEdit * edit, long i, struct syntax_rule rule)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static struct syntax_rule
+static edit_syntax_rule_t
 edit_get_rule (WEdit * edit, off_t byte_index)
 {
     long i;
@@ -604,7 +604,7 @@ edit_get_rule (WEdit * edit, off_t byte_index)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-translate_rule_to_color (WEdit * edit, struct syntax_rule rule, int *color)
+translate_rule_to_color (WEdit * edit, edit_syntax_rule_t rule, int *color)
 {
     *color = edit->rules[rule.context]->keyword[rule.keyword]->color;
 }

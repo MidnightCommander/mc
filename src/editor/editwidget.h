@@ -37,7 +37,8 @@ struct edit_book_mark_t
     edit_book_mark_t *prev;
 };
 
-struct syntax_rule
+typedef struct edit_syntax_rule_t edit_syntax_rule_t;
+struct edit_syntax_rule_t
 {
     unsigned short keyword;
     unsigned char end;
@@ -158,7 +159,7 @@ struct WEdit
     struct _syntax_marker *syntax_marker;
     struct context_rule **rules;
     long last_get_rule;
-    struct syntax_rule rule;
+    edit_syntax_rule_t rule;
     char *syntax_type;          /* description of syntax highlighting type being used */
     GTree *defines;             /* List of defines */
     gboolean is_case_insensitive;       /* selects language case sensitivity */
