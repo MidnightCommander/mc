@@ -1386,26 +1386,30 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
 
 /* --------------------------------------------------------------------------------------------- */
 
-static char *
+static const char *
 get_first_editor_line (WEdit * edit)
 {
-    size_t i;
     static char s[256];
 
     s[0] = '\0';
-    if (edit == NULL)
-        return s;
 
-    for (i = 0; i < sizeof (s) - 1; i++)
+    if (edit != NULL)
     {
-        s[i] = edit_get_byte (edit, i);
-        if (s[i] == '\n')
+        size_t i;
+
+        for (i = 0; i < sizeof (s) - 1; i++)
         {
-            s[i] = '\0';
-            break;
+            s[i] = edit_get_byte (edit, i);
+            if (s[i] == '\n')
+            {
+                s[i] = '\0';
+                break;
+            }
         }
+
+        s[sizeof (s) - 1] = '\0';
     }
-    s[sizeof (s) - 1] = '\0';
+
     return s;
 }
 
