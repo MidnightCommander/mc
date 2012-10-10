@@ -139,24 +139,32 @@ book_mark_find (WEdit * edit, long line)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/** returns true if a bookmark exists at this line of color c */
+/** 
+ * Check if bookmark bookmark exists at this line of this color
+ *
+ * @param edit editor object
+ * @param line line where book mark is
+ * @param c color of book mark
+ * @returns TRUE if bookmark exists at this line of color c, FALSE otherwise
+ */
 
-int
+gboolean
 book_mark_query_color (WEdit * edit, long line, int c)
 {
-    edit_book_mark_t *p;
-
-    if (edit->book_mark == NULL)
-        return 0;
-
-    for (p = book_mark_find (edit, line); p != NULL; p = p->prev)
+    if (edit->book_mark != NULL)
     {
-        if (p->line != line)
-            return 0;
-        if (p->c == c)
-            return 1;
+        edit_book_mark_t *p;
+
+        for (p = book_mark_find (edit, line); p != NULL; p = p->prev)
+        {
+            if (p->line != line)
+                return FALSE;
+            if (p->c == c)
+                return TRUE;
+        }
     }
-    return 0;
+
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -195,15 +203,20 @@ book_mark_insert (WEdit * edit, long line, int c)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** remove a bookmark if there is one at this line matching this color - c of -1 clear all
- * @returns non-zero on not-found
+/** 
+ * Remove a bookmark if there is one at this line matching this color - c of -1 clear all
+ *
+ * @param edit editor object
+ * @param line line where book mark is
+ * @param c color of book mark or -1 to clear all book marks on this line
+ * @returns FALSE if not found, TRUE otherwise
  */
 
-int
+gboolean
 book_mark_clear (WEdit * edit, long line, int c)
 {
     edit_book_mark_t *p, *q;
-    int r = 1;
+    gboolean r = FALSE;
 
     if (edit->book_mark == NULL)
         return r;
@@ -213,7 +226,7 @@ book_mark_clear (WEdit * edit, long line, int c)
         q = p->prev;
         if (p->line == line && (p->c == c || c == -1))
         {
-            r = 0;
+            r = TRUE;
             edit->book_mark = p->prev;
             p->prev->next = p->next;
             if (p->next != NULL)
@@ -224,7 +237,7 @@ book_mark_clear (WEdit * edit, long line, int c)
         }
     }
     /* if there is only our dummy book mark left, clear it for speed */
-    if (edit->book_mark->line == -1 && !edit->book_mark->next)
+    if (edit->book_mark->line == -1 && edit->book_mark->next == NULL)
     {
         g_free (edit->book_mark);
         edit->book_mark = NULL;
