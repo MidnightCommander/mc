@@ -62,8 +62,8 @@
    appended after each other and the last one is always the one found
    by book_mark_found() i.e. last in is the one seen */
 
-static struct _book_mark *
-double_marks (WEdit * edit, struct _book_mark *p)
+static edit_book_mark_t *
+double_marks (WEdit * edit, edit_book_mark_t *p)
 {
     (void) edit;
 
@@ -76,15 +76,15 @@ double_marks (WEdit * edit, struct _book_mark *p)
 /* --------------------------------------------------------------------------------------------- */
 /** returns the first bookmark on or before this line */
 
-struct _book_mark *
+edit_book_mark_t *
 book_mark_find (WEdit * edit, long line)
 {
-    struct _book_mark *p;
+    edit_book_mark_t *p;
 
     if (edit->book_mark == NULL)
     {
         /* must have an imaginary top bookmark at line -1 to make things less complicated  */
-        edit->book_mark = g_malloc0 (sizeof (struct _book_mark));
+        edit->book_mark = g_new0 (edit_book_mark_t, 1);
         edit->book_mark->line = -1;
         return edit->book_mark;
     }
@@ -144,7 +144,7 @@ book_mark_find (WEdit * edit, long line)
 int
 book_mark_query_color (WEdit * edit, long line, int c)
 {
-    struct _book_mark *p;
+    edit_book_mark_t *p;
 
     if (edit->book_mark == NULL)
         return 0;
@@ -165,7 +165,7 @@ book_mark_query_color (WEdit * edit, long line, int c)
 void
 book_mark_insert (WEdit * edit, long line, int c)
 {
-    struct _book_mark *p, *q;
+    edit_book_mark_t *p, *q;
 
     p = book_mark_find (edit, line);
 #if 0
@@ -181,7 +181,7 @@ book_mark_insert (WEdit * edit, long line, int c)
     }
 #endif
     /* create list entry */
-    q = g_malloc0 (sizeof (struct _book_mark));
+    q = g_new (edit_book_mark_t, 1);
     q->line = line;
     q->c = c;
     q->next = p->next;
@@ -202,7 +202,7 @@ book_mark_insert (WEdit * edit, long line, int c)
 int
 book_mark_clear (WEdit * edit, long line, int c)
 {
-    struct _book_mark *p, *q;
+    edit_book_mark_t *p, *q;
     int r = 1;
 
     if (edit->book_mark == NULL)
@@ -238,7 +238,7 @@ book_mark_clear (WEdit * edit, long line, int c)
 void
 book_mark_flush (WEdit * edit, int c)
 {
-    struct _book_mark *p, *q;
+    edit_book_mark_t *p, *q;
 
     if (edit->book_mark == NULL)
         return;
@@ -274,7 +274,7 @@ book_mark_inc (WEdit * edit, long line)
 {
     if (edit->book_mark != NULL)
     {
-        struct _book_mark *p;
+        edit_book_mark_t *p;
 
         p = book_mark_find (edit, line);
         for (p = p->next; p != NULL; p = p->next)
@@ -290,7 +290,7 @@ book_mark_dec (WEdit * edit, long line)
 {
     if (edit->book_mark != NULL)
     {
-        struct _book_mark *p;
+        edit_book_mark_t *p;
 
         p = book_mark_find (edit, line);
         for (p = p->next; p != NULL; p = p->next)
@@ -304,13 +304,13 @@ book_mark_dec (WEdit * edit, long line)
 void
 book_mark_serialize (WEdit * edit, int color)
 {
-    struct _book_mark *p;
-
     if (edit->serialized_bookmarks != NULL)
         g_array_set_size (edit->serialized_bookmarks, 0);
 
     if (edit->book_mark != NULL)
     {
+        edit_book_mark_t *p;
+
         if (edit->serialized_bookmarks == NULL)
             edit->serialized_bookmarks = g_array_sized_new (FALSE, FALSE, sizeof (size_t),
                                                             MAX_SAVED_BOOKMARKS);

@@ -310,7 +310,7 @@ void edit_get_syntax_color (WEdit * edit, off_t byte_index, int *color);
 void book_mark_insert (WEdit * edit, long line, int c);
 int book_mark_query_color (WEdit * edit, long line, int c);
 int book_mark_query_all (WEdit * edit, long line, int *c);
-struct _book_mark *book_mark_find (WEdit * edit, long line);
+struct edit_book_mark_t *book_mark_find (WEdit * edit, long line);
 int book_mark_clear (WEdit * edit, long line, int c);
 void book_mark_flush (WEdit * edit, int c);
 void book_mark_inc (WEdit * edit, long line);

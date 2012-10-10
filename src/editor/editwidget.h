@@ -28,12 +28,13 @@ typedef enum
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-struct _book_mark
+typedef struct edit_book_mark_t edit_book_mark_t;
+struct edit_book_mark_t
 {
     long line;                  /* line number */
     int c;                      /* color */
-    struct _book_mark *next;
-    struct _book_mark *prev;
+    edit_book_mark_t *next;
+    edit_book_mark_t *prev;
 };
 
 struct syntax_rule
@@ -132,7 +133,7 @@ struct WEdit
     long line_numbers[N_LINE_CACHES];
     off_t line_offsets[N_LINE_CACHES];
 
-    struct _book_mark *book_mark;
+    edit_book_mark_t *book_mark;
     GArray *serialized_bookmarks;
 
     /* undo stack and pointers */
