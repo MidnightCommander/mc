@@ -226,9 +226,7 @@ compare_word_to_right (const WEdit * edit, off_t i, const char *text,
         return -1;
 
     c = xx_tolower (edit, edit_get_byte (edit, i - 1));
-    if (line_start != 0 && c != '\n')
-        return -1;
-    if (whole_left != NULL && strchr (whole_left, c) != NULL)
+    if ((line_start != 0 && c != '\n') || (whole_left != NULL && strchr (whole_left, c) != NULL))
         return -1;
 
     for (p = (unsigned char *) text, q = p + str_term_width1 ((char *) p); p < q; p++, i++)
@@ -238,7 +236,7 @@ compare_word_to_right (const WEdit * edit, off_t i, const char *text,
         case SYNTAX_TOKEN_STAR:
             if (++p > q)
                 return -1;
-            for (;;)
+            while (TRUE)
             {
                 c = xx_tolower (edit, edit_get_byte (edit, i));
                 if (*p == '\0' && whole_right != NULL && strchr (whole_right, c) == NULL)
@@ -254,7 +252,7 @@ compare_word_to_right (const WEdit * edit, off_t i, const char *text,
             if (++p > q)
                 return -1;
             j = 0;
-            for (;;)
+            while (TRUE)
             {
                 c = xx_tolower (edit, edit_get_byte (edit, i));
                 if (c == *p)
@@ -263,21 +261,10 @@ compare_word_to_right (const WEdit * edit, off_t i, const char *text,
                     if (*p == *text && p[1] == '\0')    /* handle eg '+' and @+@ keywords properly */
                         break;
                 }
-                if (j && strchr ((char *) p + 1, c))    /* c exists further down, so it will get matched later */
+                if (j != 0 && strchr ((char *) p + 1, c) != NULL)    /* c exists further down, so it will get matched later */
                     break;
-                if (c == '\n' || c == '\t' || c == ' ')
-                {
-                    if (!*p)
-                    {
-                        i--;
-                        break;
-                    }
-                    if (j == 0)
-                        return -1;
-                    i = j;
-                    break;
-                }
-                if (whole_right != NULL && (strchr (whole_right, c) == NULL))
+                if (c == '\n' || c == '\t' || c == ' ' ||
+                    (whole_right != NULL && strchr (whole_right, c) == NULL))
                 {
                     if (*p == '\0')
                     {
@@ -296,7 +283,7 @@ compare_word_to_right (const WEdit * edit, off_t i, const char *text,
             if (++p > q)
                 return -1;
             c = -1;
-            for (;; i++)
+            while (TRUE)
             {
                 d = c;
                 c = xx_tolower (edit, edit_get_byte (edit, i));
@@ -305,7 +292,7 @@ compare_word_to_right (const WEdit * edit, off_t i, const char *text,
                         goto found_char2;
                 break;
               found_char2:
-                ;               /* dummy command */
+                i++;
             }
             i--;
             while (*p != SYNTAX_TOKEN_BRACKET && p <= q)
@@ -332,10 +319,8 @@ compare_word_to_right (const WEdit * edit, off_t i, const char *text,
                 return -1;
         }
     }
-    if (whole_right != NULL
-        && strchr (whole_right, xx_tolower (edit, edit_get_byte (edit, i))) != NULL)
-        return -1;
-    return i;
+    return (whole_right != NULL &&
+            strchr (whole_right, xx_tolower (edit, edit_get_byte (edit, i))) != NULL) ? -1 : i;
 }
 
 /* --------------------------------------------------------------------------------------------- */
