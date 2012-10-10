@@ -2273,10 +2273,7 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
     edit->modified = 0;
     edit->locked = 0;
     edit_load_syntax (edit, NULL, NULL);
-    {
-        int color;
-        edit_get_syntax_color (edit, -1, &color);
-    }
+    edit_get_syntax_color (edit, -1);
 
     /* load saved cursor position */
     if ((line == 0) && option_save_position)
