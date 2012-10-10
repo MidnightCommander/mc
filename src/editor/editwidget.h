@@ -156,7 +156,7 @@ struct WEdit
     unsigned int skip_detach_prompt:1;  /* Do not prompt whether to detach a file anymore */
 
     /* syntax higlighting */
-    struct _syntax_marker *syntax_marker;
+    GSList *syntax_marker;
     struct context_rule **rules;
     off_t last_get_rule;
     edit_syntax_rule_t rule;

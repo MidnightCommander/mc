@@ -123,12 +123,11 @@ struct context_rule
     struct key_word **keyword;
 };
 
-struct _syntax_marker
+typedef struct
 {
     off_t offset;
     edit_syntax_rule_t rule;
-    struct _syntax_marker *next;
-};
+} syntax_marker_t;
 
 /*** file scope variables ************************************************************************/
 
@@ -542,44 +541,50 @@ edit_get_rule (WEdit * edit, off_t byte_index)
     {
         for (i = edit->last_get_rule + 1; i <= byte_index; i++)
         {
-            edit->rule = apply_rules_going_right (edit, i, edit->rule);
-            if (i >
-                (edit->syntax_marker ? edit->syntax_marker->offset +
-                 SYNTAX_MARKER_DENSITY : SYNTAX_MARKER_DENSITY))
-            {
-                struct _syntax_marker *s;
+            off_t d = SYNTAX_MARKER_DENSITY;
 
-                s = edit->syntax_marker;
-                edit->syntax_marker = g_malloc (sizeof (struct _syntax_marker));
-                edit->syntax_marker->next = s;
-                edit->syntax_marker->offset = i;
-                edit->syntax_marker->rule = edit->rule;
+            edit->rule = apply_rules_going_right (edit, i, edit->rule);
+
+            if (edit->syntax_marker != NULL)
+                d += ((syntax_marker_t *) edit->syntax_marker->data)->offset;
+
+            if (i > d)
+            {
+                syntax_marker_t *s;
+
+                s = g_new (syntax_marker_t, 1);
+                s->offset = i;
+                s->rule = edit->rule;
+                edit->syntax_marker = g_slist_prepend (edit->syntax_marker, s);
             }
         }
     }
     else if (byte_index < edit->last_get_rule)
     {
-        struct _syntax_marker *s;
-
-        for (;;)
+        while (TRUE)
         {
-            if (!edit->syntax_marker)
+            syntax_marker_t *s;
+
+            if (edit->syntax_marker == NULL)
             {
                 memset (&edit->rule, 0, sizeof (edit->rule));
                 for (i = -1; i <= byte_index; i++)
                     edit->rule = apply_rules_going_right (edit, i, edit->rule);
                 break;
             }
-            if (byte_index >= edit->syntax_marker->offset)
+
+            s = (syntax_marker_t *) edit->syntax_marker->data;
+
+            if (byte_index >= s->offset)
             {
-                edit->rule = edit->syntax_marker->rule;
-                for (i = edit->syntax_marker->offset + 1; i <= byte_index; i++)
+                edit->rule = s->rule;
+                for (i = s->offset + 1; i <= byte_index; i++)
                     edit->rule = apply_rules_going_right (edit, i, edit->rule);
                 break;
             }
-            s = edit->syntax_marker->next;
-            g_free (edit->syntax_marker);
-            edit->syntax_marker = s;
+
+            g_free (s);
+            edit->syntax_marker = g_slist_delete_link (edit->syntax_marker, edit->syntax_marker);
         }
     }
     edit->last_get_rule = byte_index;
@@ -1452,13 +1457,9 @@ edit_free_syntax_rules (WEdit * edit)
         MC_PTR_FREE (edit->rules[i]);
     }
 
-    while (edit->syntax_marker)
-    {
-        struct _syntax_marker *s = edit->syntax_marker->next;
-        g_free (edit->syntax_marker);
-        edit->syntax_marker = s;
-    }
-
+    g_slist_foreach (edit->syntax_marker, (GFunc) g_free, NULL);
+    g_slist_free (edit->syntax_marker);
+    edit->syntax_marker = NULL;
     MC_PTR_FREE (edit->rules);
     tty_color_free_all_tmp ();
 }
