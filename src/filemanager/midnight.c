@@ -128,7 +128,7 @@ WButtonBar *the_bar;
 
 /*** file scope variables ************************************************************************/
 
-static Menu *left_menu, *right_menu;
+static menu_t *left_menu, *right_menu;
 
 static gboolean ctl_x_map_enabled = FALSE;
 
