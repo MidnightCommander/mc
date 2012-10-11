@@ -56,7 +56,7 @@
 static cb_ret_t
 radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WRadio *r = (WRadio *) w;
+    WRadio *r = RADIO (w);
     int i;
 
     switch (msg)
@@ -153,7 +153,7 @@ radio_event (Gpm_Event * event, void *data)
 
     if ((event->type & (GPM_DOWN | GPM_UP)) != 0)
     {
-        WRadio *r = (WRadio *) data;
+        WRadio *r = RADIO (data);
         Gpm_Event local;
 
         local = mouse_get_local (event, w);

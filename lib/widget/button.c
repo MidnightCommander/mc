@@ -57,7 +57,7 @@
 static cb_ret_t
 button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WButton *b = (WButton *) w;
+    WButton *b = BUTTON (w);
     WDialog *h = w->owner;
     int stop = 0;
     int off = 0;

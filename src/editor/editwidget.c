@@ -661,7 +661,7 @@ edit_dialog_event (Gpm_Event * event, void *data)
 
     w = WIDGET (find_menubar (h));
 
-    if (event->y == wh->y + 1 && (event->type & GPM_DOWN) != 0 && !((WMenuBar *) w)->is_active)
+    if (event->y == wh->y + 1 && (event->type & GPM_DOWN) != 0 && !MENUBAR (w)->is_active)
     {
         /* menubar */
 

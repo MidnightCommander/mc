@@ -10,6 +10,9 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+#define LISTBOX(x) ((WListbox *)(x))
+#define LENTRY(x) ((WLEntry *)(x))
+
 /*** enums ***************************************************************************************/
 
 /* callback should return one of the following values */

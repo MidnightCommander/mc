@@ -337,8 +337,6 @@ enter (WInput * lc_cmdline)
 static cb_ret_t
 command_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WInput *cmd = (WInput *) w;
-
     switch (msg)
     {
     case MSG_FOCUS:
@@ -348,7 +346,7 @@ command_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
     case MSG_KEY:
         /* Special case: we handle the enter key */
         if (parm == '\n')
-            return enter (cmd);
+            return enter (INPUT (w));
         /* fall through */
 
     default:

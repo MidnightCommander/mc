@@ -59,7 +59,7 @@
 static cb_ret_t
 label_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WLabel *l = (WLabel *) w;
+    WLabel *l = LABEL (w);
     WDialog *h = w->owner;
 
     switch (msg)

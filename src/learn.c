@@ -181,7 +181,7 @@ learn_check_key (int c)
 
         dlg_select_widget (learnkeys[i].button);
         /* TRANSLATORS: This label appears near learned keys.  Keep it short.  */
-        label_set_text ((WLabel *) learnkeys[i].label, _("OK"));
+        label_set_text (LABEL (learnkeys[i].label), _("OK"));
         learnkeys[i].ok = TRUE;
         learnok++;
         if (learnok >= learn_total)

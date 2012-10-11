@@ -544,7 +544,7 @@ menubar_handle_key (WMenuBar * menubar, int key)
 static cb_ret_t
 menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WMenuBar *menubar = (WMenuBar *) w;
+    WMenuBar *menubar = MENUBAR (w);
 
     switch (msg)
     {
@@ -606,7 +606,7 @@ menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 static int
 menubar_event (Gpm_Event * event, void *data)
 {
-    WMenuBar *menubar = (WMenuBar *) data;
+    WMenuBar *menubar = MENUBAR (data);
     Widget *w = WIDGET (data);
     gboolean was_active = TRUE;
     int left_x, right_x, bottom_y;
@@ -915,7 +915,7 @@ menubar_arrange (WMenuBar * menubar)
 WMenuBar *
 find_menubar (const WDialog * h)
 {
-    return (WMenuBar *) find_widget_type (h, menubar_callback);
+    return MENUBAR (find_widget_type (h, menubar_callback));
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -161,7 +161,8 @@ listbox_draw (WListbox * l, gboolean focused)
             text = "";
         else
         {
-            WLEntry *e = (WLEntry *) le->data;
+            WLEntry *e = LENTRY (le->data);
+
             text = e->text;
             le = g_list_next (le);
             pos++;
@@ -189,7 +190,7 @@ listbox_check_hotkey (WListbox * l, int key)
 
     for (i = 0, le = l->list; le != NULL; i++, le = g_list_next (le))
     {
-        WLEntry *e = (WLEntry *) le->data;
+        WLEntry *e = LENTRY (le->data);
 
         if (e->hotkey == key)
             return i;
@@ -367,7 +368,7 @@ listbox_destroy (WListbox * l)
 static cb_ret_t
 listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WListbox *l = (WListbox *) w;
+    WListbox *l = LISTBOX (w);
     WDialog *h = w->owner;
     cb_ret_t ret_code;
 
@@ -441,7 +442,7 @@ listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 static int
 listbox_event (Gpm_Event * event, void *data)
 {
-    WListbox *l = (WListbox *) data;
+    WListbox *l = LISTBOX (data);
     Widget *w = WIDGET (data);
 
     if (!mouse_global_in_widget (event, w))
@@ -553,7 +554,7 @@ listbox_search_text (WListbox * l, const char *text)
 
         for (i = 0, le = l->list; le != NULL; i++, le = g_list_next (le))
         {
-            WLEntry *e = (WLEntry *) le->data;
+            WLEntry *e = LENTRY (le->data);
 
             if (strcmp (e->text, text) == 0)
                 return i;
@@ -632,7 +633,7 @@ listbox_get_current (WListbox * l, char **string, void **extra)
     gboolean ok;
 
     if (l != NULL)
-        e = (WLEntry *) g_list_nth_data (l->list, l->pos);
+        e = LENTRY (g_list_nth_data (l->list, l->pos));
 
     ok = (e != NULL);
 
@@ -654,7 +655,7 @@ listbox_remove_current (WListbox * l)
 
         current = g_list_nth (l->list, l->pos);
         l->list = g_list_remove_link (l->list, current);
-        listbox_entry_free ((WLEntry *) current->data);
+        listbox_entry_free (LENTRY (current->data));
         g_list_free_1 (current);
         l->count--;
 

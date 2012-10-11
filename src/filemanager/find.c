@@ -1714,7 +1714,7 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
         for (i = 0, entry = find_list->list; entry != NULL; i++, entry = g_list_next (entry))
         {
             const char *lc_filename = NULL;
-            WLEntry *le = (WLEntry *) entry->data;
+            WLEntry *le = LENTRY (entry->data);
             char *p;
 
             if ((le->text == NULL) || (le->data == NULL))

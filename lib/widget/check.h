@@ -8,6 +8,8 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+#define CHECK(x) ((WCheck *)(x))
+
 #define C_BOOL   0x0001
 #define C_CHANGE 0x0002
 

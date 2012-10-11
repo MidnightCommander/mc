@@ -70,7 +70,7 @@ configure_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         /* message from "Single press" checkbutton */
         if (sender != NULL && sender->id == configure_old_esc_mode_id)
         {
-            const gboolean not_single = !(((WCheck *) sender)->state & C_BOOL);
+            const gboolean not_single = !(CHECK (sender)->state & C_BOOL);
             Widget *ww;
 
             /* input line */

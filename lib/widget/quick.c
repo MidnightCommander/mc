@@ -150,7 +150,7 @@ quick_create_labeled_input (GArray * widgets, int *y, int x, quick_widget_t * qu
         return;
     }
 
-    ((WInput *) in.widget)->label = (WLabel *) label.widget;
+    INPUT (in.widget)->label = LABEL (label.widget);
     /* cross references */
     label.quick_widget->u.label.input = in.quick_widget;
     in.quick_widget->u.input.label = label.quick_widget;
@@ -465,7 +465,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
 
         case quick_input:
             {
-                Widget *label = WIDGET (((WInput *) item->widget)->label);
+                Widget *label = WIDGET (INPUT (item->widget)->label);
                 int width = column_width;
 
                 if (g != NULL)
@@ -495,12 +495,12 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
                 }
 
                 /* forced update internal variables of inpuit line */
-                input_set_origin ((WInput *) (item->widget), item->widget->x, item->widget->cols);
+                input_set_origin (INPUT (item->widget), item->widget->x, item->widget->cols);
             }
             break;
 
         case quick_start_groupbox:
-            g = (WGroupbox *) item->widget;
+            g = GROUPBOX (item->widget);
             if (item->widget->x != x1)
                 item->widget->x = x2;
             item->widget->cols = column_width;
@@ -517,20 +517,20 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
                 {
                     Widget *wg = WIDGET (g);
 
-                    ((WHLine *) item->widget)->auto_adjust_cols = FALSE;
+                    HLINE (item->widget)->auto_adjust_cols = FALSE;
                     item->widget->x = wg->x + 1 - WIDGET (wg->owner)->x;
                     item->widget->cols = wg->cols;
                 }
                 else if (two_columns)
                 {
-                    ((WHLine *) item->widget)->auto_adjust_cols = FALSE;
+                    HLINE (item->widget)->auto_adjust_cols = FALSE;
                     if (item->widget->x != x1)
                         item->widget->x = x2;
                     item->widget->x--;
                     item->widget->cols = column_width + 2;
                 }
                 else
-                    ((WHLine *) item->widget)->auto_adjust_cols = TRUE;
+                    HLINE (item->widget)->auto_adjust_cols = TRUE;
             }
             break;
 
@@ -583,20 +583,19 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
             switch (item->quick_widget->widget_type)
             {
             case quick_checkbox:
-                *item->quick_widget->u.checkbox.state = ((WCheck *) item->widget)->state & C_BOOL;
+                *item->quick_widget->u.checkbox.state = CHECK (item->widget)->state & C_BOOL;
                 break;
 
             case quick_input:
                 if ((quick_widget->u.input.flags & 2) != 0)
                     *item->quick_widget->u.input.result =
-                        tilde_expand (((WInput *) item->widget)->buffer);
+                        tilde_expand (INPUT (item->widget)->buffer);
                 else
-                    *item->quick_widget->u.input.result =
-                        g_strdup (((WInput *) item->widget)->buffer);
+                    *item->quick_widget->u.input.result = g_strdup (INPUT (item->widget)->buffer);
                 break;
 
             case quick_radio:
-                *item->quick_widget->u.radio.value = ((WRadio *) item->widget)->sel;
+                *item->quick_widget->u.radio.value = RADIO (item->widget)->sel;
                 break;
 
             default:

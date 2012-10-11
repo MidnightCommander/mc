@@ -831,7 +831,7 @@ static gboolean
 input_load_history (const gchar * event_group_name, const gchar * event_name,
                     gpointer init_data, gpointer data)
 {
-    WInput *in = (WInput *) init_data;
+    WInput *in = INPUT (init_data);
     ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
     const char *def_text;
     size_t buffer_len;
@@ -874,7 +874,7 @@ static gboolean
 input_save_history (const gchar * event_group_name, const gchar * event_name,
                     gpointer init_data, gpointer data)
 {
-    WInput *in = (WInput *) init_data;
+    WInput *in = INPUT (init_data);
 
     (void) event_group_name;
     (void) event_name;
@@ -928,7 +928,7 @@ input_destroy (WInput * in)
 static int
 input_event (Gpm_Event * event, void *data)
 {
-    WInput *in = (WInput *) data;
+    WInput *in = INPUT (data);
     Widget *w = WIDGET (data);
 
     if (!mouse_global_in_widget (event, w))
@@ -983,7 +983,7 @@ input_event (Gpm_Event * event, void *data)
 static void
 input_set_options_callback (Widget * w, widget_options_t options, gboolean enable)
 {
-    WInput *in = (WInput *) w;
+    WInput *in = INPUT (w);
 
     widget_default_set_options_callback (w, options, enable);
     if (in->label != NULL)
@@ -1059,7 +1059,7 @@ input_new (int y, int x, const int *input_colors, int width, const char *def_tex
 cb_ret_t
 input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WInput *in = (WInput *) w;
+    WInput *in = INPUT (w);
     cb_ret_t v;
 
     switch (msg)

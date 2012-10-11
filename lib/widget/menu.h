@@ -11,6 +11,8 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+#define MENUBAR(x) ((WMenuBar *)(x))
+
 #define menu_separator_create() NULL
 
 /*** enums ***************************************************************************************/

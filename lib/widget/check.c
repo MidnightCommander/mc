@@ -56,7 +56,7 @@
 static cb_ret_t
 check_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WCheck *c = (WCheck *) w;
+    WCheck *c = CHECK (w);
 
     switch (msg)
     {

@@ -160,7 +160,7 @@ buttonbar_call (WButtonBar * bb, int i)
 static cb_ret_t
 buttonbar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WButtonBar *bb = (WButtonBar *) w;
+    WButtonBar *bb = BUTTONBAR (w);
     int i;
     const char *text;
 
@@ -224,7 +224,7 @@ buttonbar_event (Gpm_Event * event, void *data)
 
     if ((event->type & GPM_UP) != 0)
     {
-        WButtonBar *bb = (WButtonBar *) data;
+        WButtonBar *bb = BUTTONBAR (data);
         Gpm_Event local;
         int button;
 
@@ -288,5 +288,5 @@ buttonbar_set_label (WButtonBar * bb, int idx, const char *text,
 WButtonBar *
 find_buttonbar (const WDialog * h)
 {
-    return (WButtonBar *) find_widget_type (h, buttonbar_callback);
+    return BUTTONBAR (find_widget_type (h, buttonbar_callback));
 }

@@ -8,6 +8,8 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+#define LABEL(x) ((WLabel *)(x))
+
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/

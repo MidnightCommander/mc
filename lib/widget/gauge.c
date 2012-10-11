@@ -61,7 +61,7 @@
 static cb_ret_t
 gauge_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WGauge *g = (WGauge *) w;
+    WGauge *g = GAUGE (w);
     WDialog *h = w->owner;
 
     if (msg == MSG_INIT)

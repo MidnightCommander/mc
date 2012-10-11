@@ -56,7 +56,7 @@
 static cb_ret_t
 hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WHLine *l = (WHLine *) w;
+    WHLine *l = HLINE (w);
     WDialog *h = w->owner;
 
     switch (msg)

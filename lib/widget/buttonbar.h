@@ -8,6 +8,8 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+#define BUTTONBAR(x) ((WButtonBar *)(x))
+
 /* number of bttons in buttonbar */
 #define BUTTONBAR_LABELS_NUM 10
 

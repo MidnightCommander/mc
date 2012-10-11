@@ -369,9 +369,8 @@ history_show (GList ** history, Widget * widget, int current)
     z = NULL;
     for (hi = query_list->list; hi != NULL; hi = g_list_next (hi))
     {
-        WLEntry *entry;
+        WLEntry *entry = LENTRY (hi->data);
 
-        entry = (WLEntry *) hi->data;
         /* history is being reverted here again */
         z = g_list_prepend (z, entry->text);
         entry->text = NULL;

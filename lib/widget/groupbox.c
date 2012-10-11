@@ -55,7 +55,7 @@
 static cb_ret_t
 groupbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WGroupbox *g = (WGroupbox *) w;
+    WGroupbox *g = GROUPBOX (w);
 
     switch (msg)
     {

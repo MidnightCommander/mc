@@ -8,6 +8,7 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+#define BUTTON(x) ((WButton *)(x))
 
 struct WButton;
 

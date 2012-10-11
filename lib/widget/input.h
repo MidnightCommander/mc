@@ -10,6 +10,8 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+#define INPUT(x) ((WInput *)(x))
+
 /* For history load-save functions */
 #define INPUT_LAST_TEXT ((char *) 2)
 

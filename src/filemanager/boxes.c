@@ -134,8 +134,8 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
             {
                 WInput *in;
 
-                in = (WInput *) dlg_find_by_id (h, mini_user_format_id);
-                input_assign_text (in, status_format[((WRadio *) wi)->sel]);
+                in = INPUT (dlg_find_by_id (h, mini_user_format_id));
+                input_assign_text (in, status_format[RADIO (wi)->sel]);
                 dlg_stop (h);
                 return MSG_HANDLED;
             }
@@ -169,7 +169,7 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
                 {
                     WRadio *r;
 
-                    r = (WRadio *) dlg_find_by_id (h, panel_listing_types_id);
+                    r = RADIO (dlg_find_by_id (h, panel_listing_types_id));
                     r->pos = r->sel = panel_listing_user_idx;
                     dlg_select_widget (WIDGET (r));     /* force redraw */
                     send_message (h, r, MSG_ACTION, 0, NULL);
@@ -185,15 +185,15 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
             WCheck *ch;
             WInput *in1, *in2;
 
-            in1 = (WInput *) dlg_find_by_id (h, panel_user_format_id);
-            ch = (WCheck *) dlg_find_by_id (h, mini_user_status_id);
-            in2 = (WInput *) dlg_find_by_id (h, mini_user_format_id);
+            in1 = INPUT (dlg_find_by_id (h, panel_user_format_id));
+            ch = CHECK (dlg_find_by_id (h, mini_user_status_id));
+            in2 = INPUT (dlg_find_by_id (h, mini_user_format_id));
 
             if (!(ch->state & C_BOOL))
-                input_assign_text (in2, status_format[((WRadio *) sender)->sel]);
+                input_assign_text (in2, status_format[RADIO (sender)->sel]);
             input_update (in2, FALSE);
             input_update (in1, FALSE);
-            widget_disable (WIDGET (in1), ((WRadio *) sender)->sel != panel_listing_user_idx);
+            widget_disable (WIDGET (in1), RADIO (sender)->sel != panel_listing_user_idx);
             return MSG_HANDLED;
         }
 
@@ -201,9 +201,9 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
         {
             WInput *in;
 
-            in = (WInput *) dlg_find_by_id (h, mini_user_format_id);
+            in = INPUT (dlg_find_by_id (h, mini_user_format_id));
 
-            if (((WCheck *) sender)->state & C_BOOL)
+            if (CHECK (sender)->state & C_BOOL)
             {
                 widget_disable (WIDGET (in), FALSE);
                 input_assign_text (in, status_format[3]);
@@ -212,7 +212,7 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
             {
                 WRadio *r;
 
-                r = (WRadio *) dlg_find_by_id (h, panel_listing_types_id);
+                r = RADIO (dlg_find_by_id (h, panel_listing_types_id));
                 widget_disable (WIDGET (in), TRUE);
                 input_assign_text (in, status_format[r->sel]);
             }
@@ -254,7 +254,7 @@ sel_charset_button (WButton * button, int action)
         /* avoid strange bug with label repainting */
         g_snprintf (buf, sizeof (buf), "%-27s", cpname);
         w = dlg_find_by_id (WIDGET (button)->owner, disp_bits_name_id);
-        label_set_text ((WLabel *) w, buf);
+        label_set_text (LABEL (w), buf);
     }
 
     return 0;
@@ -311,7 +311,7 @@ confvfs_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         /* message from "Always use ftp proxy" checkbutton */
         if (sender != NULL && sender->id == ftpfs_always_use_proxy_id)
         {
-            const gboolean not_use = !(((WCheck *) sender)->state & C_BOOL);
+            const gboolean not_use = !(CHECK (sender)->state & C_BOOL);
             Widget *wi;
 
             /* input */

@@ -1092,14 +1092,14 @@ query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
                 new_end = str_get_prev_char (&input->buffer[end]) - input->buffer;
 
-                for (i = 0, e = ((WListbox *) h->current->data)->list;
+                for (i = 0, e = LISTBOX (h->current->data)->list;
                      e != NULL; i++, e = g_list_next (e))
                 {
-                    WLEntry *le = (WLEntry *) e->data;
+                    WLEntry *le = LENTRY (e->data);
 
                     if (strncmp (input->buffer + start, le->text, new_end - start) == 0)
                     {
-                        listbox_select_entry ((WListbox *) h->current->data, i);
+                        listbox_select_entry (LISTBOX (h->current->data), i);
                         end = new_end;
                         input_handle_char (input, parm);
                         send_message (h->current->data, NULL, MSG_DRAW, 0, NULL);
@@ -1143,10 +1143,10 @@ query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                     return MSG_HANDLED;
                 }
 
-                for (i = 0, e = ((WListbox *) h->current->data)->list;
+                for (i = 0, e = LISTBOX (h->current->data)->list;
                      e != NULL; i++, e = g_list_next (e))
                 {
-                    WLEntry *le = (WLEntry *) e->data;
+                    WLEntry *le = LENTRY (e->data);
 
                     if (strncmp (input->buffer + start, le->text, end - start) == 0
                         && strncmp (&le->text[end - start], buff, bl) == 0)
@@ -1154,7 +1154,7 @@ query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                         if (need_redraw == 0)
                         {
                             need_redraw = 1;
-                            listbox_select_entry ((WListbox *) h->current->data, i);
+                            listbox_select_entry (LISTBOX (h->current->data), i);
                             last_text = le->text;
                         }
                         else

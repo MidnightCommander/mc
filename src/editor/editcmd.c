@@ -128,7 +128,7 @@ edit_save_mode_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
             Widget *ww;
 
             ww = dlg_find_by_id (DIALOG (w), edit_save_mode_input_id);
-            widget_disable (ww, ((WRadio *) sender)->sel != 2);
+            widget_disable (ww, RADIO (sender)->sel != 2);
             return MSG_HANDLED;
         }
 
