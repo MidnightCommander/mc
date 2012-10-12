@@ -50,14 +50,6 @@ if test $ac_fsusage_space = no; then
   # OpenBSD >= 4.4, AIX, HP-UX, IRIX, Solaris, Cygwin, Interix, BeOS.
   AC_CACHE_CHECK([for statvfs function (SVR4)], [fu_cv_sys_stat_statvfs],
                  [AC_LINK_IFELSE([AC_LANG_PROGRAM([[#include <sys/types.h>
-#if (defined __GLIBC__ || defined __UCLIBC__) && defined __linux__
-Do not use statvfs on systems with GNU libc on Linux, because that function
-stats all preceding entries in /proc/mounts, and that makes df hang if even
-one of the corresponding file systems is hard-mounted, but not available.
-statvfs in GNU libc on Hurd, BeOS, Haiku operates differently: it only makes
-a system call.
-#endif
-
 #ifdef __osf__
 "Do not use Tru64's statvfs implementation"
 #endif
@@ -108,6 +100,38 @@ int check_f_blocks_size[sizeof fsd.f_blocks * CHAR_BIT <= 32 ? -1 : 1];
                 [  Define if there is a function named statvfs.  (SVR4)])
     fi
   fi
+fi
+
+# Check for this unconditionally so we have a
+# good fallback on glibc/Linux > 2.6 < 2.6.36
+AC_MSG_CHECKING([for two-argument statfs with statfs.f_frsize member])
+AC_CACHE_VAL([fu_cv_sys_stat_statfs2_frsize],
+[AC_RUN_IFELSE([AC_LANG_SOURCE([[
+#ifdef HAVE_SYS_PARAM_H
+#include <sys/param.h>
+#endif
+#ifdef HAVE_SYS_MOUNT_H
+#include <sys/mount.h>
+#endif
+#ifdef HAVE_SYS_VFS_H
+#include <sys/vfs.h>
+#endif
+  int
+  main ()
+  {
+  struct statfs fsd;
+  fsd.f_frsize = 0;
+  return statfs (".", &fsd) != 0;
+  }]])],
+  [fu_cv_sys_stat_statfs2_frsize=yes],
+  [fu_cv_sys_stat_statfs2_frsize=no],
+  [fu_cv_sys_stat_statfs2_frsize=no])])
+AC_MSG_RESULT([$fu_cv_sys_stat_statfs2_frsize])
+if test $fu_cv_sys_stat_statfs2_frsize = yes; then
+    ac_fsusage_space=yes
+    AC_DEFINE([STAT_STATFS2_FRSIZE], [1],
+[  Define if statfs takes 2 args and struct statfs has a field named f_frsize.
+   (glibc/Linux > 2.6)])
 fi
 
 if test $ac_fsusage_space = no; then
