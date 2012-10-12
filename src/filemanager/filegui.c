@@ -91,14 +91,43 @@
 #endif
 
 #if USE_STATVFS
-#define STRUCT_STATVFS struct statvfs
 #if ! STAT_STATVFS && STAT_STATVFS64
+#define STRUCT_STATVFS struct statvfs64
 #define STATFS statvfs64
 #else
+#define STRUCT_STATVFS struct statvfs
 #define STATFS statvfs
+/* Return true if statvfs works.  This is false for statvfs on systems
+   with GNU libc on Linux kernels before 2.6.36, which stats all
+   preceding entries in /proc/mounts; that makes df hang if even one
+   of the corresponding file systems is hard-mounted but not available.  */
+#if ! (__linux__ && (__GLIBC__ || __UCLIBC__))
+static int
+statvfs_works (void)
+{
+    return 1;
+}
+#else
+#include <string.h>             /* for strverscmp */
+#include <sys/utsname.h>
+#include <sys/statfs.h>
+#define STAT_STATFS2_BSIZE 1
+
+static int
+statvfs_works (void)
+{
+    static int statvfs_works_cache = -1;
+    struct utsname name;
+
+    if (statvfs_works_cache < 0)
+        statvfs_works_cache = (uname (&name) == 0 && 0 <= strverscmp (name.release, "2.6.36"));
+    return statvfs_works_cache;
+}
+#endif
 #endif
 #else
 #define STATFS statfs
+#define STRUCT_STATVFS struct statfs
 #if HAVE_OS_H                   /* BeOS */
 /* BeOS has a statvfs function, but it does not return sensible values
    for f_files, f_ffree and f_favail, and lacks f_type, f_basetype and
@@ -237,16 +266,21 @@ typedef struct
 static gboolean
 filegui__check_attrs_on_fs (const char *fs_path)
 {
-#ifdef USE_STATVFS
     STRUCT_STATVFS stfs;
 
     if (!setup_copymove_persistent_attr)
         return FALSE;
 
-    if (statfs (fs_path, &stfs) != 0)
+#if USE_STATVFS && defined(STAT_STATVFS)
+    if (statvfs_works () && statvfs (fs_path, &stfs) != 0)
         return TRUE;
+#else
+    if (STATFS (fs_path, &stfs) != 0)
+        return TRUE;
+#endif
 
-#ifdef __linux__
+#if (USE_STATVFS && defined(HAVE_STRUCT_STATVFS_F_TYPE)) || \
+        (!USE_STATVFS && defined(HAVE_STRUCT_STATFS_F_TYPE))
     switch ((filegui_nonattrs_fs_t) stfs.f_type)
     {
     case MSDOS_SUPER_MAGIC:
@@ -259,8 +293,7 @@ filegui__check_attrs_on_fs (const char *fs_path)
     default:
         break;
     }
-#elif defined(HAVE_STRUCT_STATFS_F_FSTYPENAME) \
-      || defined(HAVE_STRUCT_STATVFS_F_FSTYPENAME)
+#elif defined(HAVE_STRUCT_STATVFS_F_FSTYPENAME) || defined(HAVE_STRUCT_STATFS_F_FSTYPENAME)
     if (strcmp (stfs.STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME, "msdos") == 0
         || strcmp (stfs.STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME, "msdosfs") == 0
         || strcmp (stfs.STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME, "ntfs") == 0
@@ -276,7 +309,6 @@ filegui__check_attrs_on_fs (const char *fs_path)
         || strcmp (stfs.STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME, "fuse") == 0)
         return FALSE;
 #endif
-#endif /* USE_STATVFS */
 
     return TRUE;
 }
