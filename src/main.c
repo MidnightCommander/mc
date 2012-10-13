@@ -417,9 +417,11 @@ main (int argc, char *argv[])
     int exit_code = EXIT_FAILURE;
 
     /* We had LC_CTYPE before, LC_ALL includs LC_TYPE as well */
+#ifdef HAVE_SETLOCALE
     (void) setlocale (LC_ALL, "");
-    (void) bindtextdomain ("mc", LOCALEDIR);
-    (void) textdomain ("mc");
+#endif
+    (void) bindtextdomain (PACKAGE, LOCALEDIR);
+    (void) textdomain (PACKAGE);
 
     /* do this before args parsing */
     str_init_strings (NULL);
