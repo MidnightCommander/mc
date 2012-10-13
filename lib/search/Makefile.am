@@ -9,8 +9,4 @@ libsearch_la_SOURCES = \
 	glob.c \
 	hex.c
 
-AM_CPPFLAGS = \
-	-DDATADIR=\""$(pkgdatadir)/"\" \
-	-DLOCALEDIR=\""$(localedir)"\"
-
 AM_CFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS) $(PCRE_CFLAGS)

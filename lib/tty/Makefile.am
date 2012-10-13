@@ -22,10 +22,6 @@ TTY_SRC = \
 
 libmctty_la_SOURCES = $(TTY_SRC) $(TTY_SCREEN_SRC)
 
-AM_CPPFLAGS = \
-	-DDATADIR=\""$(pkgdatadir)/"\" \
-	-DLOCALEDIR=\""$(localedir)"\"
-
 AM_CFLAGS = -I$(top_srcdir)
 
 if HAVE_GMODULE
