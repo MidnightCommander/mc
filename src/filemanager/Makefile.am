@@ -18,8 +18,8 @@ libmcfilemanager_la_SOURCES = \
 	hotlist.c hotlist.h \
 	info.c info.h \
 	layout.c layout.h \
-	listmode.c listmode.h \
 	midnight.h midnight.c \
+	mountlist.c mountlist.h \
 	option.c option.h \
 	panelize.c panelize.h \
 	panel.c panel.h \
@@ -27,9 +27,8 @@ libmcfilemanager_la_SOURCES = \
 	treestore.c treestore.h \
 	usermenu.c usermenu.h
 
-#if USE_MOUNTLIST
-libmcfilemanager_la_SOURCES += mountlist.c mountlist.h
-#endif
+# Unmaintained, unsupported, etc
+#	listmode.c listmode.h
 
 AM_CFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS) $(PCRE_CFLAGS)
 
