@@ -34,10 +34,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <termios.h>
 #include <sys/types.h>          /* size_t */
 #include <unistd.h>
 #include <signal.h>
+#ifdef HAVE_SYS_IOCTL_H
+#include <sys/ioctl.h>
+#endif
+#include <termios.h>
 
 #include "lib/global.h"
 #include "lib/strutil.h"        /* str_term_form */
@@ -153,7 +156,6 @@ sigwinch_handler (int dummy)
 {
     (void) dummy;
 
-    tty_change_screen_size ();
     mc_global.tty.winch_flag = TRUE;
 }
 
@@ -370,6 +372,19 @@ tty_shutdown (void)
         fputs (op_cap, stdout);
         fflush (stdout);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+tty_change_screen_size (void)
+{
+    SLtt_get_screen_size ();
+    SLsmg_reinit_smg ();
+
+    do_enter_ca_mode ();
+    tty_keypad (TRUE);
+    tty_nodelay (FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
