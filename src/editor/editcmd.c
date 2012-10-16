@@ -564,9 +564,8 @@ edit_delete_column_of_text (WEdit * edit)
 static int
 edit_block_delete (WEdit * edit)
 {
-    off_t count;
     off_t start_mark, end_mark;
-    int curs_pos;
+    off_t curs_pos;
     long curs_line, c1, c2;
 
     if (eval_marks (edit, &start_mark, &end_mark))
@@ -599,12 +598,12 @@ edit_block_delete (WEdit * edit)
     /* move cursor to start of selection */
     edit_cursor_move (edit, start_mark - edit->curs1);
     edit_scroll_screen_over_cursor (edit);
-    count = start_mark;
+
     if (start_mark < end_mark)
     {
         if (edit->column_highlight)
         {
-            long line_width;
+            off_t line_width;
 
             if (edit->mark2 < 0)
                 edit_mark_cmd (edit, FALSE);
@@ -612,18 +611,17 @@ edit_block_delete (WEdit * edit)
             /* move cursor to the saved position */
             edit_move_to_line (edit, curs_line);
             /* calculate line width and cursor position before cut */
-            line_width = (long) edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0,
-                                                    edit_eol (edit, edit->curs1));
+            line_width = edit_move_forward3 (edit, edit_bol (edit, edit->curs1), 0,
+                                             edit_eol (edit, edit->curs1));
             if (option_cursor_beyond_eol && curs_pos > line_width)
                 edit->over_col = curs_pos - line_width;
         }
         else
         {
-            while (count < end_mark)
-            {
+            off_t count;
+
+            for (count = start_mark; count < end_mark; count++)
                 edit_delete (edit, TRUE);
-                count++;
-            }
         }
     }
     edit_set_markers (edit, 0, 0, 0, 0);
@@ -1017,9 +1015,10 @@ edit_search (WEdit * edit)
 /** Return a null terminated length of text. Result must be g_free'd */
 
 static unsigned char *
-edit_get_block (WEdit * edit, off_t start, off_t finish, int *l)
+edit_get_block (WEdit * edit, off_t start, off_t finish, off_t *l)
 {
     unsigned char *s, *r;
+
     r = s = g_malloc0 (finish - start + 1);
     if (edit->column_highlight)
     {
@@ -1047,7 +1046,7 @@ edit_get_block (WEdit * edit, off_t start, off_t finish, int *l)
         while (start < finish)
             *s++ = edit_get_byte (edit, start++);
     }
-    *s = 0;
+    *s = '\0';
     return r;
 }
 
@@ -1300,11 +1299,11 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int width,
-                            off_t * start_pos, off_t * end_pos, int *col1, int *col2)
+edit_insert_column_of_text (WEdit * edit, unsigned char *data, off_t size, long width,
+                            off_t * start_pos, off_t * end_pos, long *col1, long *col2)
 {
-    off_t cursor;
-    long i, col;
+    off_t i, cursor;
+    long col;
 
     cursor = edit->curs1;
     col = edit_get_col (edit);
@@ -1315,17 +1314,13 @@ edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int wid
             edit_insert (edit, data[i]);
         else
         {                       /* fill in and move to next line */
-            int l;
+            long l;
             off_t p;
 
             if (edit_get_byte (edit, edit->curs1) != '\n')
             {
-                l = width - (edit_get_col (edit) - col);
-                while (l > 0)
-                {
+                for (l = width - (edit_get_col (edit) - col); l > 0; l -= space_width)
                     edit_insert (edit, ' ');
-                    l -= space_width;
-                }
             }
             for (p = edit->curs1;; p++)
             {
@@ -1343,12 +1338,9 @@ edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int wid
                 }
             }
             edit_cursor_move (edit, edit_move_forward3 (edit, p, col, 0) - edit->curs1);
-            l = col - edit_get_col (edit);
-            while (l >= space_width)
-            {
+
+            for (l = col - edit_get_col (edit); l >= space_width; l -= space_width)
                 edit_insert (edit, ' ');
-                l -= space_width;
-            }
         }
     }
 
@@ -2399,8 +2391,8 @@ edit_block_copy_cmd (WEdit * edit)
     off_t start_mark, end_mark, current = edit->curs1;
     long col_delta = 0;
     off_t mark1, mark2;
-    int c1, c2;
-    int size;
+    long c1, c2;
+    off_t size;
     unsigned char *copy_buf;
 
     edit_update_curs_col (edit);
@@ -2460,9 +2452,9 @@ edit_block_move_cmd (WEdit * edit)
     if (edit->column_highlight)
     {
         off_t mark1, mark2;
-        int size;
-        int c1, c2, b_width;
-        int x, x2;
+        off_t size;
+        long c1, c2, b_width;
+        long x, x2;
 
         c1 = min (edit->column1, edit->column2);
         c2 = max (edit->column1, edit->column2);
@@ -2919,7 +2911,8 @@ edit_ok_to_exit (WEdit * edit)
 gboolean
 edit_save_block (WEdit * edit, const char *filename, off_t start, off_t finish)
 {
-    int len = 1, file;
+    int file;
+    off_t len = 1;
     vfs_path_t *vpath;
 
     vpath = vfs_path_from_str (filename);
