@@ -2,7 +2,7 @@
 AM_CPPFLAGS = -DWORKDIR=\"$(abs_builddir)\"
 AM_CFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS) @CHECK_CFLAGS@
 
-AM_LDFLAGS = -Wl,-z,muldefs
+AM_LDFLAGS = @TESTS_LDFLAGS@
 
 LIBS=@CHECK_LIBS@  $(top_builddir)/lib/libmc.la
 
