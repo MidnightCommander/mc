@@ -182,6 +182,7 @@ void panel_set_lwd (WPanel * panel, const char *path_str);
 
 void panel_init (void);
 void panel_deinit (void);
+gboolean do_cd (const vfs_path_t * new_dir_vpath, enum cd_enum cd_type);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__PANEL_H */

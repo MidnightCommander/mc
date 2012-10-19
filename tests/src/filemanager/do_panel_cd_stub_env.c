@@ -47,15 +47,6 @@ command_new (int y, int x, int cols)
     return cmd;
 }
 
-int
-do_cd (const vfs_path_t *new_dir, enum cd_enum exact)
-{
-    (void) new_dir;
-    (void) exact;
-
-    return 0;
-}
-
 void
 do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt, gboolean reset_prompt)
 {
