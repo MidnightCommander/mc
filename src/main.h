@@ -85,11 +85,6 @@ extern GArray *macros_list;
 
 /*** declarations of public functions ************************************************************/
 
-#ifdef HAVE_SUBSHELL_SUPPORT
-gboolean do_load_prompt (void);
-int load_prompt (int fd, void *unused);
-#endif
-
 void update_xterm_title_path (void);
 
 void title_path_prepare (char **path, char **login);

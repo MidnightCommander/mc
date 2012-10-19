@@ -1287,3 +1287,44 @@ get_panel_dir_for (const WPanel * widget)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+#ifdef HAVE_SUBSHELL_SUPPORT
+gboolean
+do_load_prompt (void)
+{
+    gboolean ret = FALSE;
+
+    if (!read_subshell_prompt ())
+        return ret;
+
+    /* Don't actually change the prompt if it's invisible */
+    if (top_dlg != NULL && ((Dlg_head *) top_dlg->data == midnight_dlg) && command_prompt)
+    {
+        setup_cmdline ();
+
+        /* since the prompt has changed, and we are called from one of the
+         * tty_get_event channels, the prompt updating does not take place
+         * automatically: force a cursor update and a screen refresh
+         */
+        update_cursor (midnight_dlg);
+        mc_refresh ();
+        ret = TRUE;
+    }
+    update_subshell_prompt = TRUE;
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+load_prompt (int fd, void *unused)
+{
+    (void) fd;
+    (void) unused;
+
+    do_load_prompt ();
+    return 0;
+}
+#endif /* HAVE_SUBSHELL_SUPPORT */
+
+/* --------------------------------------------------------------------------------------------- */
