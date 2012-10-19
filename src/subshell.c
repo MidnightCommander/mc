@@ -65,6 +65,7 @@
 #include "filemanager/midnight.h"       /* current_panel */
 
 #include "consaver/cons.saver.h"        /* handle_console() */
+#include "setup.h"
 #include "subshell.h"
 
 /*** global variables ****************************************************************************/

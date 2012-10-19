@@ -16,6 +16,8 @@
 /* TAB length for editor and viewer */
 #define DEFAULT_TAB_SPACING 8
 
+#define MAX_MACRO_LENGTH 1024
+
 /*** enums ***************************************************************************************/
 
 typedef enum
@@ -54,6 +56,20 @@ typedef struct
 
 struct WPanel;
 
+typedef struct macro_action_t
+{
+    unsigned long action;
+    int ch;
+} macro_action_t;
+
+typedef struct macros_t
+{
+    int hotkey;
+    GArray *macro;
+} macros_t;
+
+struct mc_fhl_struct;
+
 /*** global variables defined in .c file *********************************************************/
 
 /* global paremeters */
@@ -88,6 +104,34 @@ extern panels_options_t panels_options;
 extern panel_view_mode_t startup_left_mode;
 extern panel_view_mode_t startup_right_mode;
 extern gboolean boot_current_is_left;
+extern int use_internal_view;
+extern int use_internal_edit;
+
+#ifdef HAVE_CHARSET
+extern int default_source_codepage;
+extern char *autodetect_codeset;
+extern gboolean is_autodetect_codeset_enabled;
+#endif /* !HAVE_CHARSET */
+
+/* If set, then print to the given file the last directory we were at */
+extern char *last_wd_string;
+
+extern int quit;
+/* Set to TRUE to suppress printing the last directory */
+extern gboolean print_last_revert;
+
+extern struct mc_fhl_struct *mc_filehighlight;
+
+extern char *shell;
+extern const char *mc_prompt;
+
+/* index to record_macro_buf[], -1 if not recording a macro */
+extern int macro_index;
+
+/* macro stuff */
+extern struct macro_action_t record_macro_buf[MAX_MACRO_LENGTH];
+
+extern GArray *macros_list;
 
 /*** declarations of public functions ************************************************************/
 

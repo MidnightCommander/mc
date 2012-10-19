@@ -64,7 +64,6 @@
 #include "src/filemanager/usermenu.h"   /* user_menu_cmd() */
 
 #include "src/setup.h"          /* option_tab_spacing */
-#include "src/main.h"           /* macro_index */
 #include "src/learn.h"          /* learn_keys */
 #include "src/keybind-defaults.h"
 

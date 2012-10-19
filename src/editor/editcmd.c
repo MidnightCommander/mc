@@ -68,7 +68,6 @@
 
 #include "src/history.h"
 #include "src/setup.h"          /* option_tab_spacing */
-#include "src/main.h"           /* mactos_t */
 #ifdef HAVE_CHARSET
 #include "src/selcodepage.h"
 #endif

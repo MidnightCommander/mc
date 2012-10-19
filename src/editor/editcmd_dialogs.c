@@ -36,7 +36,6 @@
 #include "lib/charsets.h"
 #endif
 
-#include "src/main.h"
 #include "src/history.h"
 
 #include "src/editor/editwidget.h"

@@ -51,7 +51,6 @@
 
 #include "src/setup.h"          /* verbose */
 #include "src/history.h"        /* MC_HISTORY_SHARED_SEARCH */
-#include "src/main.h"           /* do_cd */
 
 #include "dir.h"
 #include "cmd.h"                /* view_file_at_line */

@@ -49,7 +49,6 @@
 #endif
 
 #include "src/setup.h"          /* panels_options */
-#include "src/main.h"
 #include "src/keybind-defaults.h"
 
 #include "internal.h"

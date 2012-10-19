@@ -69,7 +69,6 @@
 #include "keybind-defaults.h"
 #include "keybind-defaults.h"
 #include "help.h"
-#include "main.h"
 
 /*** global variables ****************************************************************************/
 

@@ -42,7 +42,7 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "src/main.h"           /* do_cd */
+#include "src/setup.h"           /* quit */
 #include "src/subshell.h"       /* SUBSHELL_EXIT */
 #include "src/execute.h"        /* shell_execute */
 

@@ -38,7 +38,6 @@
 #include "src/vfs/smbfs/smbfs.h"        /* smbfs_set_debugf()  */
 #endif
 
-#include "src/main.h"
 #include "src/textconf.h"
 
 #include "src/args.h"
@@ -71,6 +70,9 @@ char *mc_args__keymap_file = NULL;
 
 /* Debug level */
 int mc_args__debug_level = 0;
+
+void *mc_run_param0 = NULL;
+char *mc_run_param1 = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 

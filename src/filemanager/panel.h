@@ -12,8 +12,6 @@
 #include "lib/strutil.h"
 #include "lib/widget.h"         /* Widget */
 
-#include "src/main.h"           /* cd_enum */
-
 #include "dir.h"                /* dir_list */
 
 /*** typedefs(not structures) and defined constants **********************************************/
@@ -47,6 +45,14 @@ typedef enum
     UP_RELOAD = 1,
     UP_ONLY_CURRENT = 2
 } panel_update_flags_t;
+
+/* run mode and params */
+
+enum cd_enum
+{
+    cd_parse_command,
+    cd_exact
+};
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 

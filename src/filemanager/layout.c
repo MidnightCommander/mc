@@ -31,6 +31,7 @@
 
 #include <config.h>
 
+#include <pwd.h>                /* for username in xterm title */
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -52,7 +53,6 @@
 #include "src/viewer/mcviewer.h"        /* The view widget */
 #include "src/setup.h"
 #ifdef HAVE_SUBSHELL_SUPPORT
-#include "src/main.h"           /* do_load_prompt() */
 #include "src/subshell.h"
 #endif
 
@@ -1326,5 +1326,57 @@ load_prompt (int fd, void *unused)
     return 0;
 }
 #endif /* HAVE_SUBSHELL_SUPPORT */
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+title_path_prepare (char **path, char **login)
+{
+    char host[BUF_TINY];
+    struct passwd *pw = NULL;
+    int res = 0;
+
+    *path =
+        vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
+
+    res = gethostname (host, sizeof (host));
+    if (res != 0)
+        host[0] = '\0';
+    else
+        host[sizeof (host) - 1] = '\0';
+
+    pw = getpwuid (getuid ());
+    if (pw != NULL)
+        *login = g_strdup_printf ("%s@%s", pw->pw_name, host);
+    else
+        *login = g_strdup (host);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/** Show current directory in the xterm title */
+void
+update_xterm_title_path (void)
+{
+    if (mc_global.tty.xterm_flag && xterm_title)
+    {
+        char *p;
+        char *path;
+        char *login;
+
+        title_path_prepare (&path, &login);
+
+        p = g_strdup_printf ("mc [%s]:%s", login, path);
+        g_free (login);
+        g_free (path);
+
+        fprintf (stdout, "\33]0;%s\7", str_term_form (p));
+        g_free (p);
+
+        if (!mc_global.tty.alternate_plus_minus)
+            numeric_keypad_mode ();
+        (void) fflush (stdout);
+    }
+}
 
 /* --------------------------------------------------------------------------------------------- */
