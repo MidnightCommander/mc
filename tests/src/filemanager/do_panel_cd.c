@@ -34,7 +34,39 @@
 
 #include "src/filemanager/panel.c"
 
-#include "do_panel_cd_stub_env.c"
+/* --------------------------------------------------------------------------------------------- */
+/* mocked functions */
+void
+do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt, gboolean reset_prompt)
+{
+    (void) vpath;
+    (void) update_prompt;
+    (void) reset_prompt;
+}
+
+int
+do_load_dir (const vfs_path_t *vpath, dir_list * list, sortfn * sort, gboolean reverse,
+                 gboolean case_sensitive, gboolean exec_ff, const char *fltr)
+{
+    (void) vpath;
+    (void) list;
+    (void) sort;
+    (void) reverse;
+    (void) case_sensitive;
+    (void) exec_ff;
+    (void) fltr;
+
+    return 0;
+}
+
+
+void
+load_hint (gboolean force)
+{
+    (void) force;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 setup (void)
