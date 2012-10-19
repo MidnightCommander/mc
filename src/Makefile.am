@@ -60,7 +60,7 @@ mc_SOURCES = \
 	history.h \
 	keybind-defaults.c keybind-defaults.h \
 	learn.c learn.h \
-	main.c main.h \
+	main.c \
 	setup.c setup.h \
 	subshell.c subshell.h \
 	textconf.c textconf.h \

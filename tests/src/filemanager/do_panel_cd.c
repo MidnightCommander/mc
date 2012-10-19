@@ -30,7 +30,6 @@
 #include <check.h>
 
 #include "lib/global.h"
-#include "src/main.h"
 #include "src/vfs/local/local.c"
 
 #include "src/filemanager/panel.c"

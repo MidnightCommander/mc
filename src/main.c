@@ -75,8 +75,6 @@
 
 #include "consaver/cons.saver.h"        /* cons_saver_pid */
 
-#include "main.h"
-
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/
