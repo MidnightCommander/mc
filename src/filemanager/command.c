@@ -43,7 +43,9 @@
 #include "lib/widget.h"
 
 #include "src/setup.h"           /* quit */
-#include "src/subshell.h"       /* SUBSHELL_EXIT */
+#ifdef ENABLE_SUBSHELL
+#include "src/subshell.h"
+#endif
 #include "src/execute.h"        /* shell_execute */
 
 #include "midnight.h"           /* current_panel */
@@ -264,7 +266,7 @@ enter (WInput * lc_cmdline)
             message (D_ERROR, MSG_ERROR, _("Cannot execute commands on non-local filesystems"));
             return MSG_NOT_HANDLED;
         }
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
         /* Check this early before we clean command line
          * (will be checked again by shell_execute) */
         if (mc_global.tty.use_subshell && subshell_state != INACTIVE)
@@ -298,7 +300,7 @@ enter (WInput * lc_cmdline)
         shell_execute (command, 0);
         g_free (command);
 
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
         if ((quit & SUBSHELL_EXIT) != 0)
         {
             if (quiet_quit_cmd ())

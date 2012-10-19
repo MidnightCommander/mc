@@ -65,7 +65,9 @@
 
 #include "events_init.h"
 #include "args.h"
+#ifdef ENABLE_SUBSHELL
 #include "subshell.h"
+#endif
 #include "setup.h"              /* load_setup() */
 
 #ifdef HAVE_CHARSET
@@ -203,9 +205,9 @@ init_sigchld (void)
     struct sigaction sigchld_action;
 
     sigchld_action.sa_handler =
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
         mc_global.tty.use_subshell ? sigchld_handler :
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
         sigchld_handler_no_subshell;
 
     sigemptyset (&sigchld_action.sa_mask);
@@ -218,13 +220,13 @@ init_sigchld (void)
 
     if (sigaction (SIGCHLD, &sigchld_action, NULL) == -1)
     {
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
         /*
          * This may happen on QNX Neutrino 6, where SA_RESTART
          * is defined but not implemented.  Fallback to no subshell.
          */
         mc_global.tty.use_subshell = FALSE;
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
     }
 }
 
@@ -314,14 +316,14 @@ main (int argc, char *argv[])
     /* Must be done before installing the SIGCHLD handler [[FIXME]] */
     handle_console (CONSOLE_INIT);
 
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
     /* Don't use subshell when invoked as viewer or editor */
     if (mc_global.mc_run_mode != MC_RUN_FULL)
         mc_global.tty.use_subshell = FALSE;
 
     if (mc_global.tty.use_subshell)
         subshell_get_console_attributes ();
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
 
     /* Install the SIGCHLD handler; must be done before init_subshell() */
     init_sigchld ();
@@ -358,13 +360,13 @@ main (int argc, char *argv[])
     mc_filehighlight = mc_fhl_new (TRUE);
     dlg_set_default_colors ();
 
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
     /* Done here to ensure that the subshell doesn't  */
     /* inherit the file descriptors opened below, etc */
     if (mc_global.tty.use_subshell)
         init_subshell ();
 
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
 
     /* Also done after init_subshell, to save any shell init file messages */
     if (mc_global.tty.console_flag != '\0')
@@ -373,7 +375,7 @@ main (int argc, char *argv[])
     if (mc_global.tty.alternate_plus_minus)
         application_keypad_mode ();
 
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
     {
         mc_prompt = strip_ctrl_codes (subshell_prompt);
@@ -381,7 +383,7 @@ main (int argc, char *argv[])
             mc_prompt = (geteuid () == 0) ? "# " : "$ ";
     }
     else
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
         mc_prompt = (geteuid () == 0) ? "# " : "$ ";
 
     /* Program main loop */

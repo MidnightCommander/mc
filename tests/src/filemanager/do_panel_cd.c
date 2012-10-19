@@ -36,6 +36,7 @@
 
 /* --------------------------------------------------------------------------------------------- */
 /* mocked functions */
+#ifdef ENABLE_SUBSHELL
 void
 do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt, gboolean reset_prompt)
 {
@@ -43,6 +44,7 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt, gboolean re
     (void) update_prompt;
     (void) reset_prompt;
 }
+#endif
 
 int
 do_load_dir (const vfs_path_t *vpath, dir_list * list, sortfn * sort, gboolean reverse,

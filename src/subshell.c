@@ -27,8 +27,6 @@
 
 #include <config.h>
 
-#ifdef HAVE_SUBSHELL_SUPPORT
-
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE 1
 #endif
@@ -1346,5 +1344,3 @@ sigchld_handler (int sig)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-#endif /* HAVE_SUBSHELL_SUPPORT */

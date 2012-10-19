@@ -52,7 +52,7 @@
 #include "src/consaver/cons.saver.h"
 #include "src/viewer/mcviewer.h"        /* The view widget */
 #include "src/setup.h"
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
 #include "src/subshell.h"
 #endif
 
@@ -718,7 +718,7 @@ setup_panels (void)
 
     if (command_prompt)
     {
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
         if (!mc_global.tty.use_subshell || !do_load_prompt ())
 #endif
             setup_cmdline ();
@@ -812,7 +812,7 @@ setup_cmdline (void)
     int y;
     char *tmp_prompt = NULL;
 
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
         tmp_prompt = strip_ctrl_codes (subshell_prompt);
     if (tmp_prompt == NULL)
@@ -1288,7 +1288,7 @@ get_panel_dir_for (const WPanel * widget)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
 gboolean
 do_load_prompt (void)
 {
@@ -1325,7 +1325,7 @@ load_prompt (int fd, void *unused)
     do_load_prompt ();
     return 0;
 }
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
 
 /* --------------------------------------------------------------------------------------------- */
 

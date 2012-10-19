@@ -33,15 +33,15 @@
 #include "global.h"
 
 /* *INDENT-OFF* */
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
 #  ifdef SUBSHELL_OPTIONAL
 #    define SUBSHELL_USE FALSE
 #  else /* SUBSHELL_OPTIONAL */
 #    define SUBSHELL_USE TRUE
 #  endif /* SUBSHELL_OPTIONAL */
-#else /* !HAVE_SUBSHELL_SUPPORT */
+#else /* !ENABLE_SUBSHELL */
 #    define SUBSHELL_USE FALSE
-#endif /* !HAVE_SUBSHELL_SUPPORT */
+#endif /* !ENABLE_SUBSHELL */
 /* *INDENT-ON* */
 
 /*** global variables ****************************************************************************/
@@ -90,9 +90,9 @@ mc_global_t mc_global = {
 
         .use_subshell = SUBSHELL_USE,
 
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
         .subshell_pty = 0,
-#endif /* !HAVE_SUBSHELL_SUPPORT */
+#endif /* !ENABLE_SUBSHELL */
 
         .xterm_flag = FALSE,
         .disable_x11 = FALSE,

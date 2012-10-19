@@ -62,7 +62,9 @@
 #include "src/selcodepage.h"    /* select_charset (), SELECT_CHARSET_NO_TRANSLATE */
 #endif
 #include "src/keybind-defaults.h"       /* global_keymap_t */
+#ifdef ENABLE_SUBSHELL
 #include "src/subshell.h"       /* do_subshell_chdir() */
+#endif
 
 #include "dir.h"
 #include "boxes.h"
@@ -3012,12 +3014,12 @@ get_parent_dir_name (const char *cwd, const char *lwd)
 static void
 subshell_chdir (const vfs_path_t * vpath)
 {
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell && vfs_current_is_local ())
         do_subshell_chdir (vpath, FALSE, TRUE);
-#else /* HAVE_SUBSHELL_SUPPORT */
+#else /* ENABLE_SUBSHELL */
     (void) vpath;
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -43,7 +43,9 @@
 #include "filemanager/midnight.h"
 #include "filemanager/layout.h" /* use_dash() */
 #include "consaver/cons.saver.h"
+#ifdef ENABLE_SUBSHELL
 #include "subshell.h"
+#endif
 #include "setup.h"              /* clear_before_exec */
 
 #include "execute.h"
@@ -111,7 +113,7 @@ edition_pre_exec (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
 static void
 do_possible_cd (const vfs_path_t * new_dir_vpath)
 {
@@ -122,16 +124,16 @@ do_possible_cd (const vfs_path_t * new_dir_vpath)
                    "deleted your working directory, or given yourself\n"
                    "extra access permissions with the \"su\" command?"));
 }
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
 do_execute (const char *lc_shell, const char *command, int flags)
 {
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
     vfs_path_t *new_dir_vpath = NULL;
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
 
     vfs_path_t *old_vfs_dir_vpath = NULL;
 
@@ -149,7 +151,7 @@ do_execute (const char *lc_shell, const char *command, int flags)
         printf ("%s%s\n", mc_prompt, command);
         fflush (stdout);
     }
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell && !(flags & EXECUTE_INTERNAL))
     {
         do_update_prompt ();
@@ -158,7 +160,7 @@ do_execute (const char *lc_shell, const char *command, int flags)
         invoke_subshell (command, VISIBLY, old_vfs_dir_vpath != NULL ? NULL : &new_dir_vpath);
     }
     else
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
         my_system (flags, lc_shell, command);
 
     if (!(flags & EXECUTE_INTERNAL))
@@ -166,9 +168,9 @@ do_execute (const char *lc_shell, const char *command, int flags)
         if ((pause_after_run == pause_always
              || (pause_after_run == pause_on_dumb_terminals && !mc_global.tty.xterm_flag
                  && mc_global.tty.console_flag == '\0')) && quit == 0
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
             && subshell_state != RUNNING_COMMAND
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
             )
         {
             printf (_("Press any key to continue..."));
@@ -192,14 +194,14 @@ do_execute (const char *lc_shell, const char *command, int flags)
         handle_console (CONSOLE_SAVE);
     edition_post_exec ();
 
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
     if (new_dir_vpath != NULL)
     {
         do_possible_cd (new_dir_vpath);
         vfs_path_free (new_dir_vpath);
     }
 
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
 
     if (old_vfs_dir_vpath != NULL)
     {
@@ -286,14 +288,14 @@ shell_execute (const char *command, int flags)
         flags ^= EXECUTE_HIDE;
     }
 
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
         if (subshell_state == INACTIVE)
             do_execute (shell, cmd ? cmd : command, flags | EXECUTE_AS_SHELL);
         else
             message (D_ERROR, MSG_ERROR, _("The shell is already running a command"));
     else
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
         do_execute (shell, cmd ? cmd : command, flags | EXECUTE_AS_SHELL);
 
     g_free (cmd);
@@ -312,10 +314,10 @@ exec_shell (void)
 void
 toggle_panels (void)
 {
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
     vfs_path_t *new_dir_vpath = NULL;
     vfs_path_t **new_dir_p;
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
 
     channels_down ();
     disable_mouse ();
@@ -337,14 +339,14 @@ toggle_panels (void)
     if (mc_global.tty.console_flag != '\0')
         handle_console (CONSOLE_RESTORE);
 
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
     {
         new_dir_p = vfs_current_is_local ()? &new_dir_vpath : NULL;
         invoke_subshell (NULL, VISIBLY, new_dir_p);
     }
     else
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
     {
         if (output_starts_shell)
         {
@@ -374,11 +376,11 @@ toggle_panels (void)
             return;
 
         quit = 0;
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
         /* restart subshell */
         if (mc_global.tty.use_subshell)
             init_subshell ();
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
     }
 
     enable_mouse ();
@@ -386,7 +388,7 @@ toggle_panels (void)
     if (mc_global.tty.alternate_plus_minus)
         application_keypad_mode ();
 
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
     {
         do_load_prompt ();
@@ -399,7 +401,7 @@ toggle_panels (void)
     }
 
     vfs_path_free (new_dir_vpath);
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
 
     if (mc_global.mc_run_mode == MC_RUN_FULL)
     {

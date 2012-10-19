@@ -69,12 +69,15 @@ libinternal_la_SOURCES = \
 	keybind-defaults.c keybind-defaults.h \
 	learn.c learn.h \
 	setup.c setup.h \
-	subshell.c subshell.h \
 	textconf.c textconf.h \
 	util.c util.h
 
 if CHARSET
     libinternal_la_SOURCES += selcodepage.c selcodepage.h
+endif
+
+if ENABLE_SUBSHELL
+    libinternal_la_SOURCES += subshell.c subshell.h
 endif
 
 if ENABLE_BACKGROUND
