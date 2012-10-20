@@ -19,7 +19,7 @@ SUBDIRS += consaver
 AM_CPPFLAGS += -DSAVERDIR=\""$(pkglibexecdir)"\"
 endif
 
-AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
+AM_CFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS) $(PCRE_CFLAGS)
 
 localedir = $(datadir)/locale
 pkglibexecdir = $(libexecdir)/@PACKAGE@

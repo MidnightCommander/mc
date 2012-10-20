@@ -5,7 +5,7 @@ if ENABLE_MCLIB
 	tr '.' ' '| \
 	while read v1 v2 v3; do echo $$v2':'$$v3':'$$v1; done`
 
-    libmc_la_LDFLAGS=-no-undefined -version-info $(LIB_VERSION) -release $(LIBMC_RELEASE)
+    AM_LDFLAGS=-no-undefined -version-info $(LIB_VERSION) -release $(LIBMC_RELEASE)
 
     lib_LTLIBRARIES = libmc.la
 else
@@ -50,7 +50,7 @@ if CHARSET
 libmc_la_SOURCES += charsets.c charsets.h
 endif
 
-libmc_la_CFLAGS= $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
+AM_CFLAGS= $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
 
 libmc_la_LIBADD = \
 	event/libmcevent.la \
@@ -72,4 +72,3 @@ else
 endif
 
 libmc_la_LIBADD += $(PCRE_LIBS) $(LIBICONV) $(INTLLIBS)
-
