@@ -22,8 +22,4 @@ libmcwidget_la_SOURCES = \
 	widget-common.c widget-common.h \
 	wtools.c wtools.h
 
-AM_CPPFLAGS = \
-	-DDATADIR=\""$(pkgdatadir)/"\" \
-	-DLOCALEDIR=\""$(localedir)"\"
-
 AM_CFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS) $(PCRE_CFLAGS)
