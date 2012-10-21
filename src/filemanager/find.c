@@ -893,7 +893,7 @@ get_line_at (int file_fd, char *buf, int buf_size, int *pos, int *n_read, gboole
     char ch = 0;
     int i = 0;
 
-    for (;;)
+    while (TRUE)
     {
         if (*pos >= *n_read)
         {

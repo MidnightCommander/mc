@@ -377,31 +377,31 @@ ftpfs_get_reply (struct vfs_class *me, int sock, char *string_buf, int string_le
     char answer[BUF_1K];
     int i;
 
-    for (;;)
+    while (TRUE)
     {
         if (!vfs_s_get_line (me, sock, answer, sizeof (answer), '\n'))
         {
-            if (string_buf)
-                *string_buf = 0;
+            if (string_buf != NULL)
+                *string_buf = '\0';
             code = 421;
             return 4;
         }
-        switch (sscanf (answer, "%d", &code))
+        switch (sscanf (answer, "%d", &code) != 0)
         {
         case 0:
-            if (string_buf)
+            if (string_buf != NULL)
                 g_strlcpy (string_buf, answer, string_len);
             code = 500;
             return 5;
         case 1:
             if (answer[3] == '-')
             {
-                while (1)
+                while (TRUE)
                 {
                     if (!vfs_s_get_line (me, sock, answer, sizeof (answer), '\n'))
                     {
-                        if (string_buf)
-                            *string_buf = 0;
+                        if (string_buf != NULL)
+                            *string_buf = '\0';
                         code = 421;
                         return 4;
                     }
@@ -409,7 +409,7 @@ ftpfs_get_reply (struct vfs_class *me, int sock, char *string_buf, int string_le
                         break;
                 }
             }
-            if (string_buf)
+            if (string_buf != NULL)
                 g_strlcpy (string_buf, answer, string_len);
             return code / 100;
         }
@@ -431,7 +431,6 @@ ftpfs_reconnect (struct vfs_class *me, struct vfs_s_super *super)
         close (SUP->sock);
         SUP->sock = sock;
         SUP->current_dir = NULL;
-
 
         if (ftpfs_login_server (me, super, super->path_element->password) != 0)
         {

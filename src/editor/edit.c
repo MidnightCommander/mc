@@ -977,7 +977,7 @@ my_type_of (int c)
     const char option_chars_move_whole_word[] =
         "!=&|<>^~ !:;, !'!`!.?!\"!( !) !{ !} !Aa0 !+-*/= |<> ![ !] !\\#! ";
 
-    if (!c)
+    if (c == 0)
         return 0;
     if (c == '!')
     {
@@ -1014,27 +1014,27 @@ my_type_of (int c)
 static void
 edit_left_word_move (WEdit * edit, int s)
 {
-    for (;;)
+    while (TRUE)
     {
         int c1, c2;
+
         if (edit->column_highlight
             && edit->mark1 != edit->mark2
             && edit->over_col == 0 && edit->curs1 == edit_bol (edit, edit->curs1))
             break;
         edit_cursor_move (edit, -1);
-        if (!edit->curs1)
+        if (edit->curs1 == 0)
             break;
         c1 = edit_get_byte (edit, edit->curs1 - 1);
         c2 = edit_get_byte (edit, edit->curs1);
         if (c1 == '\n' || c2 == '\n')
             break;
-        if (!(my_type_of (c1) & my_type_of (c2)))
+        if ((my_type_of (c1) & my_type_of (c2)) == 0)
             break;
         if (isspace (c1) && !isspace (c2))
             break;
-        if (s)
-            if (!isspace (c1) && isspace (c2))
-                break;
+        if (s != 0 && !isspace (c1) && isspace (c2))
+            break;
     }
 }
 
@@ -1052,9 +1052,10 @@ edit_left_word_move_cmd (WEdit * edit)
 static void
 edit_right_word_move (WEdit * edit, int s)
 {
-    for (;;)
+    while (TRUE)
     {
         int c1, c2;
+
         if (edit->column_highlight
             && edit->mark1 != edit->mark2
             && edit->over_col == 0 && edit->curs1 == edit_eol (edit, edit->curs1))
@@ -1066,13 +1067,12 @@ edit_right_word_move (WEdit * edit, int s)
         c2 = edit_get_byte (edit, edit->curs1);
         if (c1 == '\n' || c2 == '\n')
             break;
-        if (!(my_type_of (c1) & my_type_of (c2)))
+        if ((my_type_of (c1) & my_type_of (c2)) == 0)
             break;
         if (isspace (c1) && !isspace (c2))
             break;
-        if (s)
-            if (!isspace (c1) && isspace (c2))
-                break;
+        if (s != 0 && !isspace (c1) && isspace (c2))
+            break;
     }
 }
 
@@ -1194,18 +1194,17 @@ edit_move_updown (WEdit * edit, long lines, gboolean do_scroll, gboolean directi
 static void
 edit_right_delete_word (WEdit * edit)
 {
-    int c1, c2;
-    for (;;)
+    while (edit->curs1 < edit->last_byte)
     {
-        if (edit->curs1 >= edit->last_byte)
-            break;
+        int c1, c2;
+
         c1 = edit_delete (edit, TRUE);
         c2 = edit_get_byte (edit, edit->curs1);
         if (c1 == '\n' || c2 == '\n')
             break;
         if ((isspace (c1) == 0) != (isspace (c2) == 0))
             break;
-        if (!(my_type_of (c1) & my_type_of (c2)))
+        if ((my_type_of (c1) & my_type_of (c2)) == 0)
             break;
     }
 }
@@ -1215,18 +1214,17 @@ edit_right_delete_word (WEdit * edit)
 static void
 edit_left_delete_word (WEdit * edit)
 {
-    int c1, c2;
-    for (;;)
+    while (edit->curs1 > 0)
     {
-        if (edit->curs1 <= 0)
-            break;
+        int c1, c2;
+
         c1 = edit_backspace (edit, TRUE);
         c2 = edit_get_byte (edit, edit->curs1 - 1);
         if (c1 == '\n' || c2 == '\n')
             break;
         if ((isspace (c1) == 0) != (isspace (c2) == 0))
             break;
-        if (!(my_type_of (c1) & my_type_of (c2)))
+        if ((my_type_of (c1) & my_type_of (c2)) == 0)
             break;
     }
 }
@@ -1473,11 +1471,12 @@ edit_auto_indent (WEdit * edit)
 {
     off_t p;
     char c;
+
     p = edit->curs1;
     /* use the previous line as a template */
     p = edit_move_backward (edit, p, 1);
     /* copy the leading whitespace of the line */
-    for (;;)
+    while (TRUE)
     {                           /* no range check - the line _is_ \n-terminated */
         c = edit_get_byte (edit, p++);
         if (c != ' ' && c != '\t')
@@ -1558,7 +1557,7 @@ check_and_wrap_line (WEdit * edit)
     if (edit->curs_col < option_word_wrap_line_length)
         return;
     curs = edit->curs1;
-    for (;;)
+    while (TRUE)
     {
         curs--;
         c = edit_get_byte (edit, curs);

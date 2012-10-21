@@ -230,7 +230,8 @@ static inline int
 line_pixel_length (unsigned char *t, long b, int l)
 {
     int x = 0, c, xn = 0;
-    for (;;)
+
+    while (TRUE)
     {
         c = t[b];
         switch (c)
@@ -286,12 +287,15 @@ static inline int
 word_start (unsigned char *t, int q, int size)
 {
     int i = q;
+
     if (t[q] == ' ' || t[q] == '\t')
         return next_word_start (t, q, size);
-    for (;;)
+
+    while (TRUE)
     {
         int c;
-        if (!i)
+
+        if (i == 0)
             return -1;
         c = t[i - 1];
         if (c == '\n')
@@ -309,13 +313,15 @@ static inline void
 format_this (unsigned char *t, int size, int indent)
 {
     int q = 0, ww;
+
     strip_newlines (t, size);
     ww = option_word_wrap_line_length * FONT_MEAN_WIDTH - indent;
     if (ww < FONT_MEAN_WIDTH * 2)
         ww = FONT_MEAN_WIDTH * 2;
-    for (;;)
+    while (TRUE)
     {
         int p;
+
         q = line_pixel_length (t, q, ww);
         if (q > size)
             break;
@@ -330,7 +336,7 @@ format_this (unsigned char *t, int size, int indent)
             q = p;
         if (q == -1)            /* end of paragraph */
             break;
-        if (q)
+        if (q != 0)
             t[q - 1] = '\n';
     }
 }
@@ -353,6 +359,7 @@ put_paragraph (WEdit * edit, unsigned char *t, off_t p, int indent, int size)
 {
     long cursor;
     int i, c = 0;
+
     cursor = edit->curs1;
     if (indent)
         while (strchr ("\t ", edit_get_byte (edit, p)))

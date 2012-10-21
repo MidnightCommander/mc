@@ -2227,7 +2227,7 @@ learn_key (void)
         endtime.tv_sec++;
     }
     tty_nodelay (TRUE);
-    for (;;)
+    while (TRUE)
     {
         while ((c = tty_lowlevel_getch ()) == -1)
         {

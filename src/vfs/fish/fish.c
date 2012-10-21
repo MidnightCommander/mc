@@ -192,16 +192,17 @@ fish_load_script_from_file (const char *hostname, const char *script_name, const
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-fish_decode_reply (char *s, int was_garbage)
+fish_decode_reply (char *s, gboolean was_garbage)
 {
     int code;
-    if (!sscanf (s, "%d", &code))
+
+    if (sscanf (s, "%d", &code) == 0)
     {
         code = 500;
         return 5;
     }
     if (code < 100)
-        return was_garbage ? ERROR : (!code ? COMPLETE : PRELIM);
+        return was_garbage ? ERROR : (code == 0 ? COMPLETE : PRELIM);
     return code / 100;
 }
 
@@ -212,25 +213,23 @@ static int
 fish_get_reply (struct vfs_class *me, int sock, char *string_buf, int string_len)
 {
     char answer[BUF_1K];
-    int was_garbage = 0;
+    gboolean was_garbage = FALSE;
 
-    for (;;)
+    while (TRUE)
     {
         if (!vfs_s_get_line (me, sock, answer, sizeof (answer), '\n'))
         {
-            if (string_buf)
-                *string_buf = 0;
+            if (string_buf != NULL)
+                *string_buf = '\0';
             return 4;
         }
 
-        if (strncmp (answer, "### ", 4))
-        {
-            was_garbage = 1;
-            if (string_buf)
-                g_strlcpy (string_buf, answer, string_len);
-        }
-        else
-            return fish_decode_reply (answer + 4, was_garbage);
+        if (strncmp (answer, "### ", 4) == 0)
+            return fish_decode_reply (answer + 4, was_garbage ? 1 : 0);
+
+        was_garbage = TRUE;
+        if (string_buf != NULL)
+            g_strlcpy (string_buf, answer, string_len);
     }
 }
 

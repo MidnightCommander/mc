@@ -1269,9 +1269,11 @@ safe_read (int fd, void *buf, size_t count)
     enum { BUGGY_READ_MAXIMUM = INT_MAX & ~8191 };
     /* *INDENT-ON* */
 
-    for (;;)
+    while (TRUE)
     {
-        ssize_t result = read (fd, buf, count);
+        ssize_t result;
+
+        result = read (fd, buf, count);
 
         if (0 <= result)
             return result;

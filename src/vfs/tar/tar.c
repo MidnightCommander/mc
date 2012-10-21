@@ -765,7 +765,7 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
     if (tard == -1)
         return -1;
 
-    for (;;)
+    while (TRUE)
     {
         size_t h_size;
 
@@ -774,7 +774,6 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
 
         switch (status)
         {
-
         case STATUS_SUCCESS:
             tar_skip_n_records (archive, tard, (h_size + RECORDSIZE - 1) / RECORDSIZE);
             continue;
@@ -788,7 +787,6 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
         case STATUS_BADCHECKSUM:
             switch (prev_status)
             {
-
                 /* Error on first record */
             case STATUS_EOFMARK:
                 {
@@ -818,7 +816,7 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
             break;
         }
         break;
-    };
+    }
     return 0;
 }
 
