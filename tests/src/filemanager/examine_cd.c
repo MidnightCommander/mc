@@ -36,18 +36,18 @@
 #include "src/filemanager/layout.h"
 #include "src/filemanager/midnight.h"
 #include "src/filemanager/tree.h"
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
 #include "src/subshell.h"
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
 
 #include "src/filemanager/command.c"
 
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean command_prompt = FALSE;
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
 enum subshell_state_enum subshell_state = INACTIVE;
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
 int quit = 0;
 WPanel *current_panel = NULL;
 
@@ -82,7 +82,7 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
     return NULL;
 }
 
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
 void
 init_subshell (void)
 {
@@ -93,7 +93,7 @@ do_load_prompt (void)
 {
     return TRUE;
 }
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
 
 void
 shell_execute (const char *command, int flags)

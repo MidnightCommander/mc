@@ -54,6 +54,7 @@
 #include "src/filemanager/layout.h"     /* Needed for get_current_index and get_other_panel */
 
 #include "src/keybind-defaults.h"
+#include "src/setup.h"
 #include "src/history.h"
 #ifdef HAVE_CHARSET
 #include "src/selcodepage.h"

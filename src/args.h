@@ -27,6 +27,21 @@ extern char *mc_args__netfs_logfile;
 extern char *mc_args__keymap_file;
 extern int mc_args__debug_level;
 
+/*
+ * MC_RUN_FULL: dir for left panel
+ * MC_RUN_EDITOR: list of files to edit
+ * MC_RUN_VIEWER: file to view
+ * MC_RUN_DIFFVIEWER: first file to compare
+ */
+extern void *mc_run_param0;
+/*
+ * MC_RUN_FULL: dir for right panel
+ * MC_RUN_EDITOR: unused
+ * MC_RUN_VIEWER: unused
+ * MC_RUN_DIFFVIEWER: second file to compare
+ */
+extern char *mc_run_param1;
+
 /*** declarations of public functions ************************************************************/
 
 gboolean mc_args_parse (int *argc, char ***argv, const char *translation_domain, GError ** error);

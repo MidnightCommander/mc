@@ -53,7 +53,6 @@
 #include "src/setup.h"          /* use_file_to_check_type */
 #include "src/execute.h"
 #include "src/history.h"
-#include "src/main.h"           /* do_cd */
 
 #include "src/consaver/cons.saver.h"
 #include "src/viewer/mcviewer.h"
@@ -62,6 +61,7 @@
 #include "src/selcodepage.h"    /* do_set_codepage */
 #endif
 
+#include "panel.h"           /* do_cd */
 #include "usermenu.h"
 
 #include "ext.h"

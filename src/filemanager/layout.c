@@ -31,6 +31,7 @@
 
 #include <config.h>
 
+#include <pwd.h>                /* for username in xterm title */
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -51,8 +52,7 @@
 #include "src/consaver/cons.saver.h"
 #include "src/viewer/mcviewer.h"        /* The view widget */
 #include "src/setup.h"
-#ifdef HAVE_SUBSHELL_SUPPORT
-#include "src/main.h"           /* do_load_prompt() */
+#ifdef ENABLE_SUBSHELL
 #include "src/subshell.h"
 #endif
 
@@ -718,7 +718,7 @@ setup_panels (void)
 
     if (command_prompt)
     {
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
         if (!mc_global.tty.use_subshell || !do_load_prompt ())
 #endif
             setup_cmdline ();
@@ -812,7 +812,7 @@ setup_cmdline (void)
     int y;
     char *tmp_prompt = NULL;
 
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
         tmp_prompt = strip_ctrl_codes (subshell_prompt);
     if (tmp_prompt == NULL)
@@ -1284,6 +1284,99 @@ get_panel_dir_for (const WPanel * widget)
         return vfs_path_to_str (((WPanel *) get_panel_widget (i))->cwd_vpath);
 
     return g_strdup (panels[i].last_saved_dir);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+#ifdef ENABLE_SUBSHELL
+gboolean
+do_load_prompt (void)
+{
+    gboolean ret = FALSE;
+
+    if (!read_subshell_prompt ())
+        return ret;
+
+    /* Don't actually change the prompt if it's invisible */
+    if (top_dlg != NULL && ((Dlg_head *) top_dlg->data == midnight_dlg) && command_prompt)
+    {
+        setup_cmdline ();
+
+        /* since the prompt has changed, and we are called from one of the
+         * tty_get_event channels, the prompt updating does not take place
+         * automatically: force a cursor update and a screen refresh
+         */
+        update_cursor (midnight_dlg);
+        mc_refresh ();
+        ret = TRUE;
+    }
+    update_subshell_prompt = TRUE;
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+load_prompt (int fd, void *unused)
+{
+    (void) fd;
+    (void) unused;
+
+    do_load_prompt ();
+    return 0;
+}
+#endif /* ENABLE_SUBSHELL */
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+title_path_prepare (char **path, char **login)
+{
+    char host[BUF_TINY];
+    struct passwd *pw = NULL;
+    int res = 0;
+
+    *path =
+        vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
+
+    res = gethostname (host, sizeof (host));
+    if (res != 0)
+        host[0] = '\0';
+    else
+        host[sizeof (host) - 1] = '\0';
+
+    pw = getpwuid (getuid ());
+    if (pw != NULL)
+        *login = g_strdup_printf ("%s@%s", pw->pw_name, host);
+    else
+        *login = g_strdup (host);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/** Show current directory in the xterm title */
+void
+update_xterm_title_path (void)
+{
+    if (mc_global.tty.xterm_flag && xterm_title)
+    {
+        char *p;
+        char *path;
+        char *login;
+
+        title_path_prepare (&path, &login);
+
+        p = g_strdup_printf ("mc [%s]:%s", login, path);
+        g_free (login);
+        g_free (path);
+
+        fprintf (stdout, "\33]0;%s\7", str_term_form (p));
+        g_free (p);
+
+        if (!mc_global.tty.alternate_plus_minus)
+            numeric_keypad_mode ();
+        (void) fflush (stdout);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

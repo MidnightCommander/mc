@@ -48,7 +48,6 @@
 #include "lib/charsets.h"
 #endif
 
-#include "src/main.h"
 #ifdef HAVE_CHARSET
 #include "src/selcodepage.h"
 #endif

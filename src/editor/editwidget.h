@@ -28,18 +28,20 @@ typedef enum
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-struct _book_mark
+typedef struct edit_book_mark_t edit_book_mark_t;
+struct edit_book_mark_t
 {
     long line;                  /* line number */
     int c;                      /* color */
-    struct _book_mark *next;
-    struct _book_mark *prev;
+    edit_book_mark_t *next;
+    edit_book_mark_t *prev;
 };
 
-struct syntax_rule
+typedef struct edit_syntax_rule_t edit_syntax_rule_t;
+struct edit_syntax_rule_t
 {
     unsigned short keyword;
-    unsigned char end;
+    off_t end;
     unsigned char context;
     unsigned char _context;
     unsigned char border;
@@ -132,7 +134,7 @@ struct WEdit
     long line_numbers[N_LINE_CACHES];
     off_t line_offsets[N_LINE_CACHES];
 
-    struct _book_mark *book_mark;
+    edit_book_mark_t *book_mark;
     GArray *serialized_bookmarks;
 
     /* undo stack and pointers */
@@ -154,10 +156,10 @@ struct WEdit
     unsigned int skip_detach_prompt:1;  /* Do not prompt whether to detach a file anymore */
 
     /* syntax higlighting */
-    struct _syntax_marker *syntax_marker;
+    GSList *syntax_marker;
     struct context_rule **rules;
-    long last_get_rule;
-    struct syntax_rule rule;
+    off_t last_get_rule;
+    edit_syntax_rule_t rule;
     char *syntax_type;          /* description of syntax highlighting type being used */
     GTree *defines;             /* List of defines */
     gboolean is_case_insensitive;       /* selects language case sensitivity */

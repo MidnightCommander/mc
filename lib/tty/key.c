@@ -63,12 +63,16 @@
 #else
 #include <termios.h>
 #endif
+#ifdef HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>
+#endif
 #endif /* __linux__ */
 
 #ifdef __CYGWIN__
 #include <termios.h>
+#ifdef HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>
+#endif
 #endif /* __CYGWIN__ */
 
 #ifdef __QNXNTO__
@@ -2223,7 +2227,7 @@ learn_key (void)
         endtime.tv_sec++;
     }
     tty_nodelay (TRUE);
-    for (;;)
+    while (TRUE)
     {
         while ((c = tty_lowlevel_getch ()) == -1)
         {

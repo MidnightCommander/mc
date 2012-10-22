@@ -38,7 +38,6 @@
 #include "src/vfs/smbfs/smbfs.h"        /* smbfs_set_debugf()  */
 #endif
 
-#include "src/main.h"
 #include "src/textconf.h"
 
 #include "src/args.h"
@@ -72,6 +71,9 @@ char *mc_args__keymap_file = NULL;
 /* Debug level */
 int mc_args__debug_level = 0;
 
+void *mc_run_param0 = NULL;
+char *mc_run_param1 = NULL;
+
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
@@ -86,9 +88,9 @@ static gboolean parse_mc_v_argument (const gchar * option_name, const gchar * va
 
 static GOptionContext *context;
 
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
 static gboolean mc_args__nouse_subshell = FALSE;
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
 static gboolean mc_args__show_datadirs = FALSE;
 static gboolean mc_args__show_datadirs_extended = FALSE;
 static gboolean mc_args__show_configure_opts = FALSE;
@@ -136,7 +138,7 @@ static const GOptionEntry argument_main_table[] = {
      "<file>"
     },
 
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
     {
      "subshell", 'U', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE,
      &mc_global.tty.use_subshell,
@@ -704,10 +706,10 @@ mc_setup_by_args (int argc, char **argv, GError ** error)
     if (mc_args__force_colors)
         mc_global.tty.disable_colors = FALSE;
 
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
     if (mc_args__nouse_subshell)
         mc_global.tty.use_subshell = FALSE;
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
 
 #ifdef ENABLE_VFS_SMB
     if (mc_args__debug_level != 0)

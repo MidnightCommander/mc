@@ -3,7 +3,14 @@ AM_CFLAGS = -I$(top_srcdir)/lib/vfs $(GLIB_CFLAGS) -I$(top_srcdir) @CHECK_CFLAGS
 AM_LDFLAGS = -Wl,-z,muldefs
 
 LIBS=@CHECK_LIBS@  \
-    $(top_builddir)/lib/libmc.la
+	$(top_builddir)/src/libinternal.la \
+	$(top_builddir)/lib/libmc.la
+
+if ENABLE_VFS_SMB
+# this is a hack for linking with own samba library in simple way
+LIBS += $(top_builddir)/src/vfs/smbfs/helpers/libsamba.a
+endif
+
 
 TESTS = \
 	do_panel_cd \
@@ -16,5 +23,3 @@ do_panel_cd_SOURCES = \
 
 examine_cd_SOURCES = \
 	examine_cd.c
-
-EXTRA_DIST = do_panel_cd_stub_env.c

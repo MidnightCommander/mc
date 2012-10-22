@@ -7,12 +7,6 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-/* Used to distinguish between a normal MC termination and */
-/* one caused by typing `exit' or `logout' in the subshell */
-#define SUBSHELL_EXIT 128
-
-#ifdef HAVE_SUBSHELL_SUPPORT
-
 /*** enums ***************************************************************************************/
 
 /* State of the subshell; see subshell.c for an explanation */
@@ -52,8 +46,6 @@ int exit_subshell (void);
 void do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt, gboolean reset_prompt);
 void subshell_get_console_attributes (void);
 void sigchld_handler (int sig);
-
-#endif /* HAVE_SUBSHELL_SUPPORT */
 
 /*** inline functions ****************************************************************************/
 

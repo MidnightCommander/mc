@@ -35,11 +35,11 @@
 #include <ctype.h>
 #include <errno.h>
 #include <locale.h>
+#include <pwd.h>                /* for username in xterm title */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/wait.h>
-#include <pwd.h>                /* for username in xterm title */
 #include <signal.h>
 
 #include "lib/global.h"
@@ -65,7 +65,9 @@
 
 #include "events_init.h"
 #include "args.h"
+#ifdef ENABLE_SUBSHELL
 #include "subshell.h"
+#endif
 #include "setup.h"              /* load_setup() */
 
 #ifdef HAVE_CHARSET
@@ -75,49 +77,7 @@
 
 #include "consaver/cons.saver.h"        /* cons_saver_pid */
 
-#include "main.h"
-
 /*** global variables ****************************************************************************/
-
-mc_fhl_t *mc_filehighlight;
-
-/* Set when main loop should be terminated */
-int quit = 0;
-
-#ifdef HAVE_CHARSET
-/* Numbers of (file I/O) and (input/display) codepages. -1 if not selected */
-int default_source_codepage = -1;
-char *autodetect_codeset = NULL;
-gboolean is_autodetect_codeset_enabled = FALSE;
-#endif /* !HAVE_CHARSET */
-
-/* If true use the internal viewer */
-int use_internal_view = 1;
-/* If set, use the builtin editor */
-int use_internal_edit = 1;
-
-void *mc_run_param0 = NULL;
-char *mc_run_param1 = NULL;
-
-/* The user's shell */
-char *shell = NULL;
-
-/* The prompt */
-const char *mc_prompt = NULL;
-
-/* Set to TRUE to suppress printing the last directory */
-int print_last_revert = FALSE;
-
-/* If set, then print to the given file the last directory we were at */
-char *last_wd_string = NULL;
-
-/* index to record_macro_buf[], -1 if not recording a macro */
-int macro_index = -1;
-
-/* macro stuff */
-struct macro_action_t record_macro_buf[MAX_MACRO_LENGTH];
-
-GArray *macros_list;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -245,9 +205,9 @@ init_sigchld (void)
     struct sigaction sigchld_action;
 
     sigchld_action.sa_handler =
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
         mc_global.tty.use_subshell ? sigchld_handler :
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
         sigchld_handler_no_subshell;
 
     sigemptyset (&sigchld_action.sa_mask);
@@ -260,154 +220,18 @@ init_sigchld (void)
 
     if (sigaction (SIGCHLD, &sigchld_action, NULL) == -1)
     {
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
         /*
          * This may happen on QNX Neutrino 6, where SA_RESTART
          * is defined but not implemented.  Fallback to no subshell.
          */
         mc_global.tty.use_subshell = FALSE;
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
     }
 }
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-gboolean
-do_cd (const vfs_path_t * new_dir_vpath, enum cd_enum exact)
-{
-    gboolean res;
-    const vfs_path_t *_new_dir_vpath = new_dir_vpath;
-
-    if (current_panel->is_panelized)
-    {
-        size_t new_vpath_len;
-
-        new_vpath_len = vfs_path_len (new_dir_vpath);
-        if (vfs_path_ncmp (new_dir_vpath, panelized_panel.root_vpath, new_vpath_len) == 0)
-            _new_dir_vpath = panelized_panel.root_vpath;
-    }
-
-    res = do_panel_cd (current_panel, _new_dir_vpath, exact);
-
-#ifdef HAVE_CHARSET
-    if (res)
-    {
-        const vfs_path_element_t *path_element;
-
-        path_element = vfs_path_get_by_index (current_panel->cwd_vpath, -1);
-        if (path_element->encoding != NULL)
-            current_panel->codepage = get_codepage_index (path_element->encoding);
-        else
-            current_panel->codepage = SELECT_CHARSET_NO_TRANSLATE;
-    }
-#endif /* HAVE_CHARSET */
-
-    return res;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-#ifdef HAVE_SUBSHELL_SUPPORT
-gboolean
-do_load_prompt (void)
-{
-    gboolean ret = FALSE;
-
-    if (!read_subshell_prompt ())
-        return ret;
-
-    /* Don't actually change the prompt if it's invisible */
-    if (top_dlg != NULL && ((Dlg_head *) top_dlg->data == midnight_dlg) && command_prompt)
-    {
-        setup_cmdline ();
-
-        /* since the prompt has changed, and we are called from one of the
-         * tty_get_event channels, the prompt updating does not take place
-         * automatically: force a cursor update and a screen refresh
-         */
-        update_cursor (midnight_dlg);
-        mc_refresh ();
-        ret = TRUE;
-    }
-    update_subshell_prompt = TRUE;
-    return ret;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-int
-load_prompt (int fd, void *unused)
-{
-    (void) fd;
-    (void) unused;
-
-    do_load_prompt ();
-    return 0;
-}
-#endif /* HAVE_SUBSHELL_SUPPORT */
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-title_path_prepare (char **path, char **login)
-{
-
-    char host[BUF_TINY];
-    struct passwd *pw = NULL;
-    int res = 0;
-
-    *login = NULL;
-
-
-    *path =
-        vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
-    res = gethostname (host, sizeof (host));
-    if (res)
-    {                           /* On success, res = 0 */
-        host[0] = '\0';
-    }
-    else
-    {
-        host[sizeof (host) - 1] = '\0';
-    }
-    pw = getpwuid (getuid ());
-    if (pw)
-    {
-        *login = g_strdup_printf ("%s@%s", pw->pw_name, host);
-    }
-    else
-    {
-        *login = g_strdup (host);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/** Show current directory in the xterm title */
-void
-update_xterm_title_path (void)
-{
-    char *p;
-    char *path;
-    char *login;
-
-    if (!(mc_global.tty.xterm_flag && xterm_title))
-        return;
-
-    title_path_prepare (&path, &login);
-
-    p = g_strdup_printf ("mc [%s]:%s", login, path);
-    fprintf (stdout, "\33]0;%s\7", str_term_form (p));
-    g_free (login);
-    g_free (p);
-    if (!mc_global.tty.alternate_plus_minus)
-        numeric_keypad_mode ();
-    (void) fflush (stdout);
-    g_free (path);
-}
-
 /* --------------------------------------------------------------------------------------------- */
 
 int
@@ -417,9 +241,11 @@ main (int argc, char *argv[])
     int exit_code = EXIT_FAILURE;
 
     /* We had LC_CTYPE before, LC_ALL includs LC_TYPE as well */
+#ifdef HAVE_SETLOCALE
     (void) setlocale (LC_ALL, "");
-    (void) bindtextdomain ("mc", LOCALEDIR);
-    (void) textdomain ("mc");
+#endif
+    (void) bindtextdomain (PACKAGE, LOCALEDIR);
+    (void) textdomain (PACKAGE);
 
     /* do this before args parsing */
     str_init_strings (NULL);
@@ -490,14 +316,14 @@ main (int argc, char *argv[])
     /* Must be done before installing the SIGCHLD handler [[FIXME]] */
     handle_console (CONSOLE_INIT);
 
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
     /* Don't use subshell when invoked as viewer or editor */
     if (mc_global.mc_run_mode != MC_RUN_FULL)
         mc_global.tty.use_subshell = FALSE;
 
     if (mc_global.tty.use_subshell)
         subshell_get_console_attributes ();
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
 
     /* Install the SIGCHLD handler; must be done before init_subshell() */
     init_sigchld ();
@@ -534,13 +360,13 @@ main (int argc, char *argv[])
     mc_filehighlight = mc_fhl_new (TRUE);
     dlg_set_default_colors ();
 
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
     /* Done here to ensure that the subshell doesn't  */
     /* inherit the file descriptors opened below, etc */
     if (mc_global.tty.use_subshell)
         init_subshell ();
 
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
 
     /* Also done after init_subshell, to save any shell init file messages */
     if (mc_global.tty.console_flag != '\0')
@@ -549,7 +375,7 @@ main (int argc, char *argv[])
     if (mc_global.tty.alternate_plus_minus)
         application_keypad_mode ();
 
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
     {
         mc_prompt = strip_ctrl_codes (subshell_prompt);
@@ -557,7 +383,7 @@ main (int argc, char *argv[])
             mc_prompt = (geteuid () == 0) ? "# " : "$ ";
     }
     else
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
         mc_prompt = (geteuid () == 0) ? "# " : "$ ";
 
     /* Program main loop */

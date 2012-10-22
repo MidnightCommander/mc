@@ -27,8 +27,6 @@
 
 #include <config.h>
 
-#ifdef HAVE_SUBSHELL_SUPPORT
-
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE 1
 #endif
@@ -65,6 +63,7 @@
 #include "filemanager/midnight.h"       /* current_panel */
 
 #include "consaver/cons.saver.h"        /* handle_console() */
+#include "setup.h"
 #include "subshell.h"
 
 /*** global variables ****************************************************************************/
@@ -1345,5 +1344,3 @@ sigchld_handler (int sig)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-#endif /* HAVE_SUBSHELL_SUPPORT */

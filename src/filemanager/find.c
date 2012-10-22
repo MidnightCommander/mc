@@ -51,7 +51,6 @@
 
 #include "src/setup.h"          /* verbose */
 #include "src/history.h"        /* MC_HISTORY_SHARED_SEARCH */
-#include "src/main.h"           /* do_cd */
 
 #include "dir.h"
 #include "cmd.h"                /* view_file_at_line */
@@ -894,7 +893,7 @@ get_line_at (int file_fd, char *buf, int buf_size, int *pos, int *n_read, gboole
     char ch = 0;
     int i = 0;
 
-    for (;;)
+    while (TRUE)
     {
         if (*pos >= *n_read)
         {

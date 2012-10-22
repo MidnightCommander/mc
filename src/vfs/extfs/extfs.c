@@ -58,7 +58,7 @@
 #include "lib/util.h"
 #include "lib/widget.h"         /* message() */
 
-#include "src/main.h"           /* shell */
+#include "src/setup.h"           /* shell */
 #include "src/execute.h"        /* For shell_execute */
 
 #include "lib/vfs/vfs.h"

@@ -46,8 +46,6 @@
 #include "lib/util.h"           /* load_file_position() */
 #include "lib/widget.h"
 
-#include "src/main.h"
-
 #include "src/filemanager/layout.h"     /* menubar_visible */
 #include "src/filemanager/midnight.h"   /* the_menubar */
 

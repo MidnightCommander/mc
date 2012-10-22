@@ -38,7 +38,7 @@
 #include "lib/widget.h"
 #include "lib/charsets.h"
 
-#include "main.h"
+#include "setup.h"
 
 #include "selcodepage.h"
 

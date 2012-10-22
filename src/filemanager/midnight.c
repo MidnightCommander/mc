@@ -55,7 +55,9 @@
 #include "lib/vfs/vfs.h"
 
 #include "src/args.h"
+#ifdef ENABLE_SUBSHELL
 #include "src/subshell.h"
+#endif
 #include "src/setup.h"          /* variables */
 #include "src/learn.h"          /* learn_keys() */
 #include "src/keybind-defaults.h"
@@ -872,10 +874,10 @@ setup_mc (void)
 #endif /* HAVE_CHARSET */
 #endif /* HAVE_SLANG */
 
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
         add_select_channel (mc_global.tty.subshell_pty, load_prompt, 0);
-#endif /* !HAVE_SUBSHELL_SUPPORT */
+#endif /* !ENABLE_SUBSHELL */
 
     if ((tty_baudrate () < 9600) || mc_global.tty.slow_terminal)
         verbose = 0;
@@ -1049,7 +1051,7 @@ quit_cmd_internal (int quiet)
 
     if (q != 0)
     {
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
         if (!mc_global.tty.use_subshell)
             stop_dialogs ();
         else if ((q = exit_subshell ()))

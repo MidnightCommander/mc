@@ -35,6 +35,7 @@
 
 #include "lib/global.h"
 
+#include "lib/filehighlight.h"
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
 #include "lib/mcconfig.h"
@@ -174,6 +175,43 @@ int verbose = 1;
  * at the expense of some speed
  */
 int file_op_compute_totals = 1;
+
+/* If true use the internal viewer */
+int use_internal_view = 1;
+/* If set, use the builtin editor */
+int use_internal_edit = 1;
+
+#ifdef HAVE_CHARSET
+/* Numbers of (file I/O) and (input/display) codepages. -1 if not selected */
+int default_source_codepage = -1;
+char *autodetect_codeset = NULL;
+gboolean is_autodetect_codeset_enabled = FALSE;
+#endif /* !HAVE_CHARSET */
+
+/* If set, then print to the given file the last directory we were at */
+char *last_wd_string = NULL;
+
+mc_fhl_t *mc_filehighlight;
+
+/* Set when main loop should be terminated */
+int quit = 0;
+
+/* The user's shell */
+char *shell = NULL;
+
+/* The prompt */
+const char *mc_prompt = NULL;
+
+/* Set to TRUE to suppress printing the last directory */
+int print_last_revert = FALSE;
+
+/* index to record_macro_buf[], -1 if not recording a macro */
+int macro_index = -1;
+
+/* macro stuff */
+struct macro_action_t record_macro_buf[MAX_MACRO_LENGTH];
+
+GArray *macros_list;
 
 /*** file scope macro definitions ****************************************************************/
 

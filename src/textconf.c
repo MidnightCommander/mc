@@ -92,13 +92,13 @@ static const char *const features[] = {
     N_("With builtin Editor\n"),
 #endif
 
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
 #ifdef SUBSHELL_OPTIONAL
     N_("With optional subshell support\n"),
 #else
     N_("With subshell support as default\n"),
 #endif
-#endif /* !HAVE_SUBSHELL_SUPPORT */
+#endif /* !ENABLE_SUBSHELL */
 
 #ifdef ENABLE_BACKGROUND
     N_("With support for background operations\n"),

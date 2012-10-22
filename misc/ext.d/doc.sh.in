@@ -24,8 +24,8 @@ staroffice_console() {
 }
 
 get_ooffice_executable() {
-    which libreoffice >/dev/null 2>&1 && \
-        echo "libreoffice" || \
+    which loffice >/dev/null 2>&1 && \
+        echo "loffice" || \
         echo "ooffice"
 }
 

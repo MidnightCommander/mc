@@ -62,7 +62,9 @@
 #include "src/selcodepage.h"    /* select_charset (), SELECT_CHARSET_NO_TRANSLATE */
 #endif
 #include "src/keybind-defaults.h"       /* global_keymap_t */
+#ifdef ENABLE_SUBSHELL
 #include "src/subshell.h"       /* do_subshell_chdir() */
+#endif
 
 #include "dir.h"
 #include "boxes.h"
@@ -3012,12 +3014,12 @@ get_parent_dir_name (const char *cwd, const char *lwd)
 static void
 subshell_chdir (const vfs_path_t * vpath)
 {
-#ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell && vfs_current_is_local ())
         do_subshell_chdir (vpath, FALSE, TRUE);
-#else /* HAVE_SUBSHELL_SUPPORT */
+#else /* ENABLE_SUBSHELL */
     (void) vpath;
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#endif /* ENABLE_SUBSHELL */
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -4785,6 +4787,41 @@ panel_deinit (void)
     g_free (panel_filename_scroll_left_char);
     g_free (panel_filename_scroll_right_char);
 
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+do_cd (const vfs_path_t * new_dir_vpath, enum cd_enum exact)
+{
+    gboolean res;
+    const vfs_path_t *_new_dir_vpath = new_dir_vpath;
+
+    if (current_panel->is_panelized)
+    {
+        size_t new_vpath_len;
+
+        new_vpath_len = vfs_path_len (new_dir_vpath);
+        if (vfs_path_ncmp (new_dir_vpath, panelized_panel.root_vpath, new_vpath_len) == 0)
+            _new_dir_vpath = panelized_panel.root_vpath;
+    }
+
+    res = do_panel_cd (current_panel, _new_dir_vpath, exact);
+
+#ifdef HAVE_CHARSET
+    if (res)
+    {
+        const vfs_path_element_t *path_element;
+
+        path_element = vfs_path_get_by_index (current_panel->cwd_vpath, -1);
+        if (path_element->encoding != NULL)
+            current_panel->codepage = get_codepage_index (path_element->encoding);
+        else
+            current_panel->codepage = SELECT_CHARSET_NO_TRANSLATE;
+    }
+#endif /* HAVE_CHARSET */
+
+    return res;
 }
 
 /* --------------------------------------------------------------------------------------------- */

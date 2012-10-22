@@ -432,7 +432,7 @@ include/image
 
 ### Sound files ###
 
-regex/i/\.(wav|snd|voc|au|smp|aiff|snd|m4a|ape|aac|wvm4a)$
+regex/i/\.(wav|snd|voc|au|smp|aiff|snd|m4a|ape|aac|wv)$
 	Open=@EXTHELPERSDIR@/sound.sh open common
 
 regex/i/\.(mod|s3m|xm|it|mtm|669|stm|ult|far)$

@@ -36,7 +36,7 @@
 
 #include "lib/vfs/vfs.h"
 
-#include "main.h"
+#include "setup.h"
 #include "src/execute.h"
 
 #include "clipboard.h"
