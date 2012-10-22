@@ -56,7 +56,7 @@
 #include "lib/event.h"          /* mc_event_raise() */
 
 #include "src/keybind-defaults.h"
-#include "src/setup.h"           /* home_dir */
+#include "src/setup.h"          /* home_dir */
 #include "src/filemanager/cmd.h"        /* view_other_cmd(), save_setup_cmd()  */
 #include "src/learn.h"          /* learn_keys() */
 #include "src/args.h"           /* mcedit_arg_t */

@@ -63,7 +63,7 @@
    by book_mark_found() i.e. last in is the one seen */
 
 static edit_book_mark_t *
-double_marks (WEdit * edit, edit_book_mark_t *p)
+double_marks (WEdit * edit, edit_book_mark_t * p)
 {
     (void) edit;
 

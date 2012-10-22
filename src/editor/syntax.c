@@ -260,7 +260,7 @@ compare_word_to_right (const WEdit * edit, off_t i, const char *text,
                     if (*p == *text && p[1] == '\0')    /* handle eg '+' and @+@ keywords properly */
                         break;
                 }
-                if (j != 0 && strchr ((char *) p + 1, c) != NULL)    /* c exists further down, so it will get matched later */
+                if (j != 0 && strchr ((char *) p + 1, c) != NULL)       /* c exists further down, so it will get matched later */
                     break;
                 if (c == '\n' || c == '\t' || c == ' ' ||
                     (whole_right != NULL && strchr (whole_right, c) == NULL))

@@ -61,7 +61,7 @@
 #include "src/selcodepage.h"    /* do_set_codepage */
 #endif
 
-#include "panel.h"           /* do_cd */
+#include "panel.h"              /* do_cd */
 #include "usermenu.h"
 
 #include "ext.h"

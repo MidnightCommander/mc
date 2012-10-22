@@ -1014,7 +1014,7 @@ edit_search (WEdit * edit)
 /** Return a null terminated length of text. Result must be g_free'd */
 
 static unsigned char *
-edit_get_block (WEdit * edit, off_t start, off_t finish, off_t *l)
+edit_get_block (WEdit * edit, off_t start, off_t finish, off_t * l)
 {
     unsigned char *s, *r;
 
@@ -2440,7 +2440,7 @@ edit_block_move_cmd (WEdit * edit)
     if (eval_marks (edit, &start_mark, &end_mark))
         return;
 
-    if (!edit->column_highlight && edit->curs1 > start_mark && edit->curs1 <  end_mark)
+    if (!edit->column_highlight && edit->curs1 > start_mark && edit->curs1 < end_mark)
         return;
 
     line = edit->curs_line;

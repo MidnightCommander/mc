@@ -2026,7 +2026,8 @@ is_break_char (char c)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-edit_get_word_from_pos (const WEdit * edit, off_t start_pos, off_t * start, gsize * len, gsize * cut)
+edit_get_word_from_pos (const WEdit * edit, off_t start_pos, off_t * start, gsize * len,
+                        gsize * cut)
 {
     off_t word_start;
     long cut_len = 0;

@@ -42,7 +42,7 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "src/setup.h"           /* quit */
+#include "src/setup.h"          /* quit */
 #ifdef ENABLE_SUBSHELL
 #include "src/subshell.h"
 #endif
