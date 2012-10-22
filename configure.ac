@@ -30,6 +30,8 @@ AC_DEFINE_UNQUOTED([MC_CONFIGURE_ARGS],["$ac_configure_args"],[MC configure argu
 AC_PROG_LIBTOOL
 PKG_PROG_PKG_CONFIG
 AC_PATH_PROG([PERL], [perl], [/usr/bin/perl])
+AC_PATH_PROG([PYTHON], [python], [/usr/bin/python])
+AC_PATH_PROG([RUBY], [ruby], [/usr/bin/ruby])
 
 AC_ISC_POSIX
 
@@ -550,6 +552,7 @@ src/vfs/extfs/helpers/ualz
 src/vfs/extfs/helpers/uar
 src/vfs/extfs/helpers/uarc
 src/vfs/extfs/helpers/uarj
+src/vfs/extfs/helpers/uc1541
 src/vfs/extfs/helpers/ucab
 src/vfs/extfs/helpers/uha
 src/vfs/extfs/helpers/ulha
@@ -586,6 +589,7 @@ lib/vfs/Makefile
 lib/widget/Makefile
 
 misc/syntax/Makefile
+misc/syntax/Syntax
 
 doc/Makefile
 doc/hints/Makefile
