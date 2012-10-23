@@ -386,7 +386,7 @@ ftpfs_get_reply (struct vfs_class *me, int sock, char *string_buf, int string_le
             code = 421;
             return 4;
         }
-        switch (sscanf (answer, "%d", &code) != 0)
+        switch (sscanf (answer, "%d", &code))
         {
         case 0:
             if (string_buf != NULL)
