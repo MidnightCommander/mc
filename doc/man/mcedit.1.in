@@ -587,7 +587,14 @@ deleting, navigating, typing)
 .I editor_wordcompletion_collect_entire_file
 Search autocomplete candidates in entire of file or just from
 begin of file to cursor position (0)
-
+.TP
+.I spell_language
+Spelling language (en, en-variant_0, ru, etc) installed with aspell
+package (a full list can be get using 'aspell' utility).
+Use
+.B spell_language = NONE
+to disable aspell support. Default value is 'en'. Option must located
+in the [Misc] section.
 .SH MISCELLANEOUS
 You can use scanf search and replace to search and replace a C format
 string.  First take a look at the
