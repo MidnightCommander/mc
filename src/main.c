@@ -357,7 +357,6 @@ main (int argc, char *argv[])
         error = NULL;
     }
 
-    mc_filehighlight = mc_fhl_new (TRUE);
     dlg_set_default_colors ();
 
 #ifdef ENABLE_SUBSHELL
@@ -402,7 +401,6 @@ main (int argc, char *argv[])
 
     flush_extension_file ();    /* does only free memory */
 
-    mc_fhl_free (&mc_filehighlight);
     mc_skin_deinit ();
     tty_colors_done ();
 

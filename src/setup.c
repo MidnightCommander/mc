@@ -35,7 +35,6 @@
 
 #include "lib/global.h"
 
-#include "lib/filehighlight.h"
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
 #include "lib/mcconfig.h"
@@ -190,8 +189,6 @@ gboolean is_autodetect_codeset_enabled = FALSE;
 
 /* If set, then print to the given file the last directory we were at */
 char *last_wd_string = NULL;
-
-mc_fhl_t *mc_filehighlight;
 
 /* Set when main loop should be terminated */
 int quit = 0;
