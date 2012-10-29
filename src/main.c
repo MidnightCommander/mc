@@ -48,7 +48,6 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"        /* For init_key() */
 #include "lib/skin.h"
-#include "lib/filehighlight.h"
 #include "lib/fileloc.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
@@ -78,8 +77,6 @@
 #include "main.h"
 
 /*** global variables ****************************************************************************/
-
-mc_fhl_t *mc_filehighlight;
 
 /* Set when main loop should be terminated */
 int quit = 0;
@@ -533,7 +530,6 @@ main (int argc, char *argv[])
         error = NULL;
     }
 
-    mc_filehighlight = mc_fhl_new (TRUE);
     dlg_set_default_colors ();
 
 #ifdef HAVE_SUBSHELL_SUPPORT
@@ -578,7 +574,6 @@ main (int argc, char *argv[])
 
     flush_extension_file ();    /* does only free memory */
 
-    mc_fhl_free (&mc_filehighlight);
     mc_skin_deinit ();
     tty_colors_done ();
 

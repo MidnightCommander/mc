@@ -61,8 +61,6 @@ extern gboolean print_last_revert;
 /* If set, then print to the given file the last directory we were at */
 extern char *last_wd_string;
 
-extern struct mc_fhl_struct *mc_filehighlight;
-
 extern int use_internal_view;
 extern int use_internal_edit;
 
