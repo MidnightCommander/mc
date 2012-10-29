@@ -1031,13 +1031,13 @@ fish_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
     fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
     struct vfs_s_super *super = FH_SUPER;
     char buffer[BUF_8K];
-    int n;
+    ssize_t n;
 
     vfs_print_message (_("Aborting transfer..."));
 
     do
     {
-        n = MIN (sizeof (buffer), (size_t) (fish->total - fish->got));
+        n = MIN ((off_t) sizeof (buffer), (fish->total - fish->got));
         if (n != 0)
         {
             n = read (SUP->sockr, buffer, n);
