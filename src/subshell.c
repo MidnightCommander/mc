@@ -1051,16 +1051,16 @@ do_update_prompt (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 exit_subshell (void)
 {
-    int subshell_quit = TRUE;
+    gboolean subshell_quit = TRUE;
 
     if (subshell_state != INACTIVE && subshell_alive)
         subshell_quit =
-            !query_dialog (_("Warning"),
-                           _("The shell is still active. Quit anyway?"),
-                           D_NORMAL, 2, _("&Yes"), _("&No"));
+            query_dialog (_("Warning"),
+                          _("The shell is still active. Quit anyway?"),
+                          D_NORMAL, 2, _("&Yes"), _("&No")) == 0;
 
     if (subshell_quit)
     {
