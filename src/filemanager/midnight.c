@@ -1054,7 +1054,7 @@ quit_cmd_internal (int quiet)
 #ifdef ENABLE_SUBSHELL
         if (!mc_global.tty.use_subshell)
             stop_dialogs ();
-        else if ((q = exit_subshell ()))
+        else if ((q = exit_subshell () ? 1 : 0) != 0)
 #endif
             stop_dialogs ();
     }
