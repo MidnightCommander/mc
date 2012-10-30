@@ -36,7 +36,6 @@
 #include <string.h>
 #include <sys/types.h>          /* size_t */
 #include <unistd.h>
-#include <signal.h>
 #ifdef HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>
 #endif
@@ -131,22 +130,14 @@ static const struct
     /* *INDENT-ON* */
 };
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 static void
 tty_setup_sigwinch (void (*handler) (int))
 {
-#ifdef SIGWINCH
-    struct sigaction act, oact;
-    act.sa_handler = handler;
-    sigemptyset (&act.sa_mask);
-    act.sa_flags = 0;
-#ifdef SA_RESTART
-    act.sa_flags |= SA_RESTART;
-#endif /* SA_RESTART */
-    sigaction (SIGWINCH, &act, &oact);
-#endif /* SIGWINCH */
+    (void) SLsignal (SIGWINCH, handler);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -157,6 +148,7 @@ sigwinch_handler (int dummy)
     (void) dummy;
 
     mc_global.tty.winch_flag = TRUE;
+    (void) SLsignal (SIGWINCH, sigwinch_handler);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -382,9 +374,10 @@ tty_change_screen_size (void)
     SLtt_get_screen_size ();
     SLsmg_reinit_smg ();
 
-    do_enter_ca_mode ();
-    tty_keypad (TRUE);
-    tty_nodelay (FALSE);
+#ifdef ENABLE_SUBSHELL
+    if (mc_global.tty.use_subshell)
+        tty_resize (mc_global.tty.subshell_pty);
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
