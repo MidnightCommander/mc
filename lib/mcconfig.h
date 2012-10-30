@@ -100,9 +100,7 @@ void mc_config_init_config_paths (GError ** error);
 
 void mc_config_deinit_config_paths (void);
 
-gboolean mc_config_deprecated_dir_present (void);
-
-void mc_config_migrate_from_old_place (GError ** error);
+gboolean mc_config_migrate_from_old_place (GError ** error, char **msg);
 
 const char *mc_config_get_data_path (void);
 
