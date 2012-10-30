@@ -31,10 +31,6 @@
 
 #include <config.h>
 
-#ifndef HAVE_TEXTMODE_X11_SUPPORT
-typedef int dummy;              /* C99 forbids empty compilation unit */
-#else
-
 #include <setjmp.h>
 #include <X11/Xlib.h>
 #ifdef HAVE_GMODULE
@@ -250,5 +246,3 @@ mc_XQueryPointer (Display * display, Window win, Window * root_return,
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-#endif /* HAVE_TEXTMODE_X11_SUPPORT */

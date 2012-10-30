@@ -668,10 +668,10 @@ define_sequences (const key_define_t * kd)
 
 /* --------------------------------------------------------------------------------------------- */
 
+#ifdef HAVE_TEXTMODE_X11_SUPPORT
 static void
 init_key_x11 (void)
 {
-#ifdef HAVE_TEXTMODE_X11_SUPPORT
     if (getenv ("DISPLAY") != NULL && !mc_global.tty.disable_x11)
     {
         x11_display = mc_XOpenDisplay (0);
@@ -679,8 +679,8 @@ init_key_x11 (void)
         if (x11_display != NULL)
             x11_window = DefaultRootWindow (x11_display);
     }
-#endif /* HAVE_TEXTMODE_X11_SUPPORT */
 }
+#endif /* HAVE_TEXTMODE_X11_SUPPORT */
 
 /* --------------------------------------------------------------------------------------------- */
 /* Workaround for System V Curses vt100 bug */
@@ -1437,7 +1437,9 @@ init_key (void)
     }
 #endif /* __QNX__ */
 
+#ifdef HAVE_TEXTMODE_X11_SUPPORT
     init_key_x11 ();
+#endif
 
     /* Load the qansi-m key definitions
        if we are running under the qansi-m terminal */
