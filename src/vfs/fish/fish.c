@@ -857,7 +857,6 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
     off_t total;
     char buffer[BUF_8K];
     struct stat s;
-    gboolean was_error = FALSE;
     int h;
     char *quoted_name;
 
@@ -957,14 +956,13 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
         }
         tty_disable_interrupt_key ();
         total += n;
-        vfs_print_message ("%s: %" PRIuMAX "/%" PRIuMAX,
-                           was_error ? _("fish: storing zeros") : _("fish: storing file"),
+        vfs_print_message ("%s: %" PRIuMAX "/%" PRIuMAX, _("fish: storing file"),
                            (uintmax_t) total, (uintmax_t) s.st_size);
     }
     close (h);
     g_free (quoted_name);
 
-    if ((fish_get_reply (me, SUP->sockr, NULL, 0) != COMPLETE) || was_error)
+    if (fish_get_reply (me, SUP->sockr, NULL, 0) != COMPLETE)
         ERRNOR (E_REMOTE, -1);
     return 0;
 
