@@ -154,7 +154,7 @@ sigwinch_handler (int dummy)
     (void) dummy;
 
     tty_change_screen_size ();
-    mc_global.tty.winch_flag = TRUE;
+    mc_global.tty.winch_flag = 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
