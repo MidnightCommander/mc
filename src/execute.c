@@ -319,7 +319,7 @@ toggle_panels (void)
     vfs_path_t **new_dir_p;
 #endif /* ENABLE_SUBSHELL */
 
-    volatile sig_atomic_t was_sigwinch = 0;
+    SIG_ATOMIC_VOLATILE_T was_sigwinch = 0;
 
     channels_down ();
     disable_mouse ();
