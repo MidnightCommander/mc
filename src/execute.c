@@ -319,7 +319,7 @@ toggle_panels (void)
     vfs_path_t **new_dir_p;
 #endif /* ENABLE_SUBSHELL */
 
-    gboolean was_sigwinch = FALSE;
+    volatile sig_atomic_t was_sigwinch = 0;
 
     channels_down ();
     disable_mouse ();
@@ -395,7 +395,7 @@ toggle_panels (void)
      * There is some problem with screen redraw in ncurses-based mc in this situation.
      */
     was_sigwinch = mc_global.tty.winch_flag;
-    mc_global.tty.winch_flag = FALSE;
+    mc_global.tty.winch_flag = 0;
 
 #ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
@@ -418,7 +418,7 @@ toggle_panels (void)
         update_xterm_title_path ();
     }
 
-    if (was_sigwinch || mc_global.tty.winch_flag)
+    if (was_sigwinch != 0 || mc_global.tty.winch_flag != 0)
         dialog_change_screen_size ();
     else
         repaint_screen ();

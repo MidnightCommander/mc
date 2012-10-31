@@ -21,6 +21,9 @@
 #include <sys/param.h>
 #endif
 
+/* for sig_atomic_t */
+#include <signal.h>
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /* The O_BINARY definition was taken from gettext */
@@ -262,7 +265,7 @@ typedef struct
         gboolean alternate_plus_minus;
 
         /* Set if the window has changed it's size */
-        gboolean winch_flag;
+        volatile sig_atomic_t winch_flag;
     } tty;
 
     struct

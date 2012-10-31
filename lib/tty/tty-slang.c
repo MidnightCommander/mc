@@ -147,7 +147,7 @@ sigwinch_handler (int dummy)
 {
     (void) dummy;
 
-    mc_global.tty.winch_flag = TRUE;
+    mc_global.tty.winch_flag = 1;
     (void) SLsignal (SIGWINCH, sigwinch_handler);
 }
 

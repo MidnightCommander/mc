@@ -194,7 +194,7 @@ write_all (int fd, const void *buf, size_t count)
         {
             if (errno == EINTR)
             {
-                if (mc_global.tty.winch_flag)
+                if (mc_global.tty.winch_flag != 0)
                     tty_change_screen_size ();
 
                 continue;
@@ -505,7 +505,7 @@ feed_subshell (int how, int fail_on_error)
             /* Despite using SA_RESTART, we still have to check for this */
             if (errno == EINTR)
             {
-                if (mc_global.tty.winch_flag)
+                if (mc_global.tty.winch_flag != 0)
                     tty_change_screen_size ();
 
                 continue;       /* try all over again */
@@ -1007,7 +1007,7 @@ read_subshell_prompt (void)
         {
             if (errno == EINTR)
             {
-                if (mc_global.tty.winch_flag)
+                if (mc_global.tty.winch_flag != 0)
                     tty_change_screen_size ();
 
                 continue;
