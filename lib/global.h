@@ -261,7 +261,7 @@ typedef struct
         gboolean alternate_plus_minus;
 
         /* Set if the window has changed it's size */
-        volatile sig_atomic_t winch_flag;
+        SIG_ATOMIC_VOLATILE_T winch_flag;
     } tty;
 
     struct

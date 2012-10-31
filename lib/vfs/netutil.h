@@ -16,7 +16,7 @@
 
 /*** global variables defined in .c file *********************************************************/
 
-extern volatile sig_atomic_t got_sigpipe;
+extern SIG_ATOMIC_VOLATILE_T got_sigpipe;
 
 /*** declarations of public functions ************************************************************/
 

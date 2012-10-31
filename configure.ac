@@ -208,6 +208,40 @@ AC_TYPE_MODE_T
 AC_TYPE_PID_T
 AC_TYPE_UID_T
 
+AH_TEMPLATE([sig_atomic_t],
+            [/* Define to `int' if <signal.h> doesn't define.])
+AH_TEMPLATE([SIG_ATOMIC_VOLATILE_T],
+            [Some systems declare sig_atomic_t as volatile, some others -- no.
+             This define will have value `sig_atomic_t' or
+             `volatile sig_atomic_t' accordingly.])
+
+AC_MSG_CHECKING(for sig_atomic_t in signal.h)
+AC_EGREP_HEADER(sig_atomic_t,signal.h,
+  [
+    ac_cv_type_sig_atomic_t=yes;
+    AC_EGREP_HEADER(volatile.*sig_atomic_t,
+                    signal.h,
+                    [
+                        is_sig_atomic_t_volatile=yes;
+                        AC_MSG_RESULT([yes, volatile])
+                    ],
+                    [
+                        is_sig_atomic_t_volatile=no;
+                        AC_MSG_RESULT([yes, non volatile])
+                    ])
+  ],
+  [
+    AC_MSG_RESULT(no)
+    AC_CHECK_TYPE(sig_atomic_t, int)
+    is_sig_atomic_t_volatile=no
+  ])
+if test $is_sig_atomic_t_volatile = 'yes'
+then
+    AC_DEFINE(SIG_ATOMIC_VOLATILE_T, sig_atomic_t)
+else
+    AC_DEFINE(SIG_ATOMIC_VOLATILE_T, [volatile sig_atomic_t])
+fi
+
 AC_FUNC_STRCOLL
 
 mc_AC_GET_FS_INFO

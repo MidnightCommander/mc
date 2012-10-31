@@ -62,7 +62,7 @@ int mc_tty_frm[MC_TTY_FRM_MAX];
 
 /*** file scope variables ************************************************************************/
 
-static volatile sig_atomic_t got_interrupt = 0;
+static SIG_ATOMIC_VOLATILE_T got_interrupt = 0;
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
