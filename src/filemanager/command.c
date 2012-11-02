@@ -256,8 +256,8 @@ enter (WInput * lc_cmdline)
     }
     else
     {
-        char *command, *s;
-        size_t i, j, cmd_len;
+        GString *command;
+        size_t i;
 
         if (!vfs_current_is_local ())
         {
@@ -273,30 +273,25 @@ enter (WInput * lc_cmdline)
             return MSG_NOT_HANDLED;
         }
 #endif
-        cmd_len = strlen (cmd);
-        command = g_malloc (cmd_len + 1);
-        command[0] = 0;
-        for (i = j = 0; i < cmd_len; i++)
+        command = g_string_sized_new (32);
+
+        for (i = 0; cmd[i] != '\0'; i++)
         {
-            if (cmd[i] == '%')
-            {
-                i++;
-                s = expand_format (NULL, cmd[i], TRUE);
-                command = g_realloc (command, j + strlen (s) + cmd_len - i + 1);
-                strcpy (command + j, s);
-                g_free (s);
-                j = strlen (command);
-            }
+            if (cmd[i] != '%')
+                g_string_append_c (command, cmd[i]);
             else
             {
-                command[j] = cmd[i];
-                j++;
+                char *s;
+
+                s = expand_format (NULL, cmd[++i], TRUE);
+                g_string_append (command, s);
+                g_free (s);
             }
-            command[j] = 0;
         }
+
         input_clean (lc_cmdline);
-        shell_execute (command, 0);
-        g_free (command);
+        shell_execute (command->str, 0);
+        g_string_free (command, TRUE);
 
 #ifdef HAVE_SUBSHELL_SUPPORT
         if ((quit & SUBSHELL_EXIT) != 0)
