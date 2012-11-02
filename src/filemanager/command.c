@@ -80,6 +80,9 @@ WInput *cmdline;
  * substituted.  Wildcards are not supported either.
  * Advanced users should be encouraged to use "\cd" instead of "cd" if
  * they want the behavior they are used to in the shell.
+ *
+ * @param _path string to examine
+ * @return newly allocated string
  */
 
 static char *
@@ -227,7 +230,12 @@ handle_cdpath (const char *path)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Handle Enter on the command line */
+
+/** Handle Enter on the command line
+ *
+ * @param lc_cmdline string for handling
+ * @return MSG_HANDLED on sucsess else MSG_NOT_HANDLED
+ */
 
 static cb_ret_t
 enter (WInput * lc_cmdline)
@@ -316,6 +324,16 @@ enter (WInput * lc_cmdline)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Default command line callback
+ *
+ * @param w Widget object
+ * @param msg message for handling
+ * @param parm extra parameter such as key code
+ *
+ * @return MSG_NOT_HANDLED on fail else MSG_HANDLED
+ */
+
 static cb_ret_t
 command_callback (Widget * w, widget_msg_t msg, int parm)
 {
@@ -330,9 +348,7 @@ command_callback (Widget * w, widget_msg_t msg, int parm)
     case WIDGET_KEY:
         /* Special case: we handle the enter key */
         if (parm == '\n')
-        {
             return enter (cmd);
-        }
         /* fall through */
 
     default:
@@ -344,8 +360,11 @@ command_callback (Widget * w, widget_msg_t msg, int parm)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/* --------------------------------------------------------------------------------------------- */
-/** Execute the cd command on the command line */
+/** Execute the cd command on the command line
+ *
+ * @param orig_cmd command for execution
+ */
+
 void
 do_cd_command (char *orig_cmd)
 {
@@ -472,6 +491,10 @@ command_new (int y, int x, int cols)
 /**
  * Insert quoted text in input line.  The function is meant for the
  * command line, so the percent sign is quoted as well.
+ *
+ * @param in WInput object
+ * @param text string for insertion
+ * @param insert_extra_space add extra space
  */
 
 void
