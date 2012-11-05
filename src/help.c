@@ -161,7 +161,7 @@ search_string (const char *start, const char *text)
 /* --------------------------------------------------------------------------------------------- */
 /** Searches text in the buffer pointed by start.  Search ends
  * if the CHAR_NODE_END is found in the text.
- * @returns 0 on failure
+ * @return NULL on failure
  */
 
 static const char *

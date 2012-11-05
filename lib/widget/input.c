@@ -984,7 +984,7 @@ input_event (Gpm_Event * event, void *data)
   * @param def_text             Default text filled in widget
   * @param histname             Name of history
   * @param completion_flags     Flags for specify type of completions
-  * @returns                    WInput object
+  * @return                     WInput object
   */
 WInput *
 input_new (int y, int x, const int *input_colors, int width, const char *def_text,
@@ -1104,7 +1104,7 @@ input_callback (Widget * w, widget_msg_t msg, int parm)
 /* --------------------------------------------------------------------------------------------- */
 
 /** Get default colors for WInput widget.
-  * @returns default colors
+  * @return default colors
   */
 const int *
 input_get_default_colors (void)

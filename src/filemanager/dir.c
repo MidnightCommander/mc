@@ -138,7 +138,7 @@ clean_sort_keys (dir_list * list, int start, int count)
  * Increase directory list by RESIZE_STEPS
  *
  * @param list directory list
- * @returns FALSE = failure, TRUE = success
+ * @return FALSE on failure, TRUE on success
  */
 
 static gboolean
@@ -160,7 +160,7 @@ grow_list (dir_list * list)
 /* --------------------------------------------------------------------------------------------- */
 /**
  * If you change handle_dirent then check also handle_path.
- * @returns -1 = failure, 0 = don't add, 1 = add to the list
+ * @return -1 = failure, 0 = don't add, 1 = add to the list
  */
 
 static int

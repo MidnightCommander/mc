@@ -3998,7 +3998,7 @@ panel_set_lwd (WPanel * panel, const char *path_str)
 /* --------------------------------------------------------------------------------------------- */
 /** Panel creation.
  * @param panel_name the name of the panel for setup retieving
- * @returns new instance of WPanel
+ * @return new instance of WPanel
  */
 
 WPanel *
@@ -4015,7 +4015,7 @@ panel_new (const char *panel_name)
  * @param wpath the path of working panel directory. If path is NULL then panel will be created
  * for current directory
  *
- * @returns new instance of WPanel
+ * @return new instance of WPanel
  */
 
 WPanel *

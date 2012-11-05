@@ -533,7 +533,7 @@ void str_msg_term_size (const char *text, int *lines, int *columns);
  * @param needle pointer to string
  * @param skip_count skip first bytes
  *
- * @returns pointer to skip_count+1 needle (or NULL if not found).
+ * @return pointer to skip_count+1 needle (or NULL if not found).
  */
 
 char *strrstr_skip_count (const char *haystack, const char *needle, size_t skip_count);
@@ -564,7 +564,7 @@ str_replace (char *s, char from, char to)
  * @param dest pointer to string
  * @param src pointer to string
  *
- * @returns a newly allocated string
+ * @return newly allocated string
  *
  */
 

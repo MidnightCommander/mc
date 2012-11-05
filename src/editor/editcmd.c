@@ -2055,7 +2055,7 @@ edit_save_confirm_cmd (WEdit * edit)
 /**
   * Ask file to edit and load it.
   *
-  * @returns TRUE on success or cancel of ask.
+  * @return TRUE on success or cancel of ask.
   */
 
 gboolean
@@ -2085,7 +2085,7 @@ edit_load_cmd (Dlg_head * h)
 /**
   * Load syntax file to edit.
   *
-  * @returns TRUE on success
+  * @return TRUE on success
   */
 
 gboolean
@@ -2130,7 +2130,7 @@ edit_load_syntax_file (Dlg_head * h)
 /**
   * Load menu file to edit.
   *
-  * @returns TRUE on success
+  * @return TRUE on success
   */
 
 gboolean
@@ -2192,7 +2192,7 @@ edit_load_menu_file (Dlg_head * h)
 /**
   * Close window with opened file.
   *
-  * @returns TRUE if file was closed.
+  * @return TRUE if file was closed.
   */
 
 gboolean
@@ -2836,7 +2836,7 @@ edit_search_cmd (WEdit * edit, gboolean again)
 /**
   * Check if it's OK to close the file. If there are unsaved changes, ask user.
   *
-  * @returns TRUE if it's OK to exit, FALSE to continue editing.
+  * @return TRUE if it's OK to exit, FALSE to continue editing.
   */
 
 gboolean

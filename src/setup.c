@@ -409,7 +409,7 @@ static const struct
  * @param subdir If not NULL, config is also searched in specified subdir.
  * @param config_file_name If relative, file if searched in standard paths.
  *
- * @returns Newly allocated string with config name or NULL if file is not found.
+ * @return newly allocated string with config name or NULL if file is not found.
  */
 
 static char *

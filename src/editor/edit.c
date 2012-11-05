@@ -194,7 +194,7 @@ edit_init_buffers (WEdit * edit)
 /**
  * Load file OR text into buffers.  Set cursor to the beginning of file.
  *
- * @returns FALSE on error.
+ * @return FALSE on error.
  */
 
 static gboolean
@@ -326,7 +326,7 @@ edit_insert_stream (WEdit * edit, FILE * f)
   * @param edit           editor object
   * @param filename_vpath file name
   * @param st             buffer for store stat info
-  * @returns TRUE for success, FALSE for error.
+  * @return TRUE for success, FALSE for error.
   */
 
 static gboolean
@@ -1740,7 +1740,7 @@ edit_move_block_to_left (WEdit * edit)
 /* --------------------------------------------------------------------------------------------- */
 /**
  * prints at the cursor
- * @returns the number of chars printed
+ * @return number of chars printed
  */
 
 static size_t
@@ -1918,7 +1918,7 @@ edit_get_write_filter (const vfs_path_t * write_name_vpath, const vfs_path_t * f
 /**
  * @param edit   editor object
  * @param f      value of stream file
- * @returns      the length of the file
+ * @return       the length of the file
  */
 
 off_t
@@ -2347,7 +2347,7 @@ edit_clean (WEdit * edit)
  * To do it, allocate a new widget, initialize it and, if the new file
  * was loaded, copy the data to the old widget.
  *
- * @returns TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  */
 gboolean
 edit_reload_line (WEdit * edit, const vfs_path_t * filename_vpath, long line)

@@ -225,7 +225,7 @@ sftpfs_fstat (void *data, struct stat *buf, GError ** error)
  * @param count data size
  * @param error pointer to the error handler
  *
- * @returns 0 on sucess, negative value otherwise
+ * @return 0 on sucess, negative value otherwise
  */
 
 ssize_t
@@ -277,7 +277,7 @@ sftpfs_read_file (vfs_file_handler_t * file_handler, char *buffer, size_t count,
  * @param count        data size
  * @param error        pointer to the error handler
  *
- * @returns 0 on sucess, negative value otherwise
+ * @return 0 on sucess, negative value otherwise
  */
 
 ssize_t
@@ -322,7 +322,7 @@ sftpfs_write_file (vfs_file_handler_t * file_handler, const char *buffer, size_t
  * @param file_handler    file data handler
  * @param error           pointer to the error handler
  *
- * @returns 0 on sucess, negative value otherwise
+ * @return 0 on sucess, negative value otherwise
  */
 
 int
@@ -352,7 +352,7 @@ sftpfs_close_file (vfs_file_handler_t * file_handler, GError ** error)
  * @param whence         method of seek (at begin, at current, at end)
  * @param error          pointer to the error handler
  *
- * @returns 0 on sucess, negative value otherwise
+ * @return 0 on sucess, negative value otherwise
  */
 
 off_t
