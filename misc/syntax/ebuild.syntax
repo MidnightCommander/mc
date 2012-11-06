@@ -88,6 +88,7 @@ context default
     keyword whole elog yellow
     keyword whole emake yellow
     keyword whole epatch yellow
+    keyword whole epatch_user yellow
     keyword whole ewarn yellow
     keyword whole exeinto yellow
     keyword whole exeopts yellow
