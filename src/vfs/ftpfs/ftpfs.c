@@ -1785,7 +1785,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
 static int
 ftpfs_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char *localname)
 {
-    int h, sock, n_read, n_written;
+    int h, sock;
     off_t n_stored;
 #ifdef HAVE_STRUCT_LINGER_L_LINGER
     struct linger li;
@@ -1821,20 +1821,20 @@ ftpfs_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, cha
     tty_enable_interrupt_key ();
     while (TRUE)
     {
+        ssize_t n_read, n_written;
+
         while ((n_read = read (h, lc_buffer, sizeof (lc_buffer))) == -1)
         {
-            if (errno == EINTR)
+            if (errno != EINTR)
             {
-                if (tty_got_interrupt ())
-                {
-                    ftpfs_errno = EINTR;
-                    goto error_return;
-                }
-                else
-                    continue;
+                ftpfs_errno = errno;
+                goto error_return;
             }
-            ftpfs_errno = errno;
-            goto error_return;
+            if (tty_got_interrupt ())
+            {
+                ftpfs_errno = EINTR;
+                goto error_return;
+            }
         }
         if (n_read == 0)
             break;
@@ -1845,9 +1845,8 @@ ftpfs_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, cha
             if (n_written == -1)
             {
                 if (errno == EINTR && !tty_got_interrupt ())
-                {
                     continue;
-                }
+
                 ftpfs_errno = errno;
                 goto error_return;
             }

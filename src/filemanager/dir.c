@@ -115,7 +115,9 @@ key_collate (const char *t1, const char *t2)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** clear keys, should be call after sorting is finished */
+/**
+ * clear keys, should be call after sorting is finished.
+ */
 
 static void
 clean_sort_keys (dir_list * list, int start, int count)
@@ -133,8 +135,32 @@ clean_sort_keys (dir_list * list, int start, int count)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
+ * Increase directory list by RESIZE_STEPS
+ *
+ * @param list directory list
+ * @return FALSE on failure, TRUE on success
+ */
+
+static gboolean
+grow_list (dir_list * list)
+{
+    if (list == NULL)
+        return FALSE;
+
+    list->list = g_try_realloc (list->list, sizeof (file_entry) * (list->size + RESIZE_STEPS));
+
+    if (list->list == NULL)
+        return FALSE;
+
+    list->size += RESIZE_STEPS;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
  * If you change handle_dirent then check also handle_path.
- * @returns -1 = failure, 0 = don't add, 1 = add to the list
+ * @return -1 = failure, 0 = don't add, 1 = add to the list
  */
 
 static int
@@ -183,13 +209,9 @@ handle_dirent (dir_list * list, const char *fltr, struct dirent *dp,
         return 0;
 
     /* Need to grow the *list? */
-    if (next_free == list->size)
-    {
-        list->list = g_try_realloc (list->list, sizeof (file_entry) * (list->size + RESIZE_STEPS));
-        if (list->list == NULL)
-            return -1;
-        list->size += RESIZE_STEPS;
-    }
+    if (next_free == list->size && !grow_list (list))
+        return -1;
+
     return 1;
 }
 
@@ -456,14 +478,8 @@ gboolean
 set_zero_dir (dir_list * list)
 {
     /* Need to grow the *list? */
-    if (list->size == 0)
-    {
-        list->list = g_try_realloc (list->list, sizeof (file_entry) * (list->size + RESIZE_STEPS));
-        if (list->list == NULL)
-            return FALSE;
-
-        list->size += RESIZE_STEPS;
-    }
+    if (list->size == 0 && !grow_list (list))
+        return FALSE;
 
     memset (&(list->list)[0], 0, sizeof (file_entry));
     list->list[0].fnamelen = 2;
@@ -521,13 +537,9 @@ handle_path (dir_list * list, const char *path,
     vfs_path_free (vpath);
 
     /* Need to grow the *list? */
-    if (next_free == list->size)
-    {
-        list->list = g_try_realloc (list->list, sizeof (file_entry) * (list->size + RESIZE_STEPS));
-        if (list->list == NULL)
-            return -1;
-        list->size += RESIZE_STEPS;
-    }
+    if (next_free == list->size && !grow_list (list))
+        return -1;
+
     return 1;
 }
 

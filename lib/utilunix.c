@@ -286,7 +286,7 @@ my_system (int flags, const char *shell, const char *command)
  *
  * @param directory pointer to the path
  *
- * @returns a newly allocated string, even if it's unchanged.
+ * @return newly allocated string, even if it's unchanged.
  */
 
 char *
@@ -385,7 +385,7 @@ open_error_pipe (void)
  * @param error '-1' - ignore errors, '0' - display warning, '1' - display error
  * @param text is prepended to the error message from the pipe
  *
- * @returns not 0 if an error was displayed
+ * @return not 0 if an error was displayed
  */
 
 int

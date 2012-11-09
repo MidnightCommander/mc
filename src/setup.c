@@ -35,7 +35,6 @@
 
 #include "lib/global.h"
 
-#include "lib/filehighlight.h"
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
 #include "lib/mcconfig.h"
@@ -190,8 +189,6 @@ gboolean is_autodetect_codeset_enabled = FALSE;
 
 /* If set, then print to the given file the last directory we were at */
 char *last_wd_string = NULL;
-
-mc_fhl_t *mc_filehighlight;
 
 /* Set when main loop should be terminated */
 int quit = 0;
@@ -412,7 +409,7 @@ static const struct
  * @param subdir If not NULL, config is also searched in specified subdir.
  * @param config_file_name If relative, file if searched in standard paths.
  *
- * @returns Newly allocated string with config name or NULL if file is not found.
+ * @return newly allocated string with config name or NULL if file is not found.
  */
 
 static char *

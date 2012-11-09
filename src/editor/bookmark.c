@@ -145,7 +145,7 @@ book_mark_find (WEdit * edit, long line)
  * @param edit editor object
  * @param line line where book mark is
  * @param c color of book mark
- * @returns TRUE if bookmark exists at this line of color c, FALSE otherwise
+ * @return TRUE if bookmark exists at this line of color c, FALSE otherwise
  */
 
 gboolean
@@ -209,7 +209,7 @@ book_mark_insert (WEdit * edit, long line, int c)
  * @param edit editor object
  * @param line line where book mark is
  * @param c color of book mark or -1 to clear all book marks on this line
- * @returns FALSE if not found, TRUE otherwise
+ * @return FALSE if not found, TRUE otherwise
  */
 
 gboolean

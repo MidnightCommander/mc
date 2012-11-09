@@ -120,8 +120,6 @@ extern int quit;
 /* Set to TRUE to suppress printing the last directory */
 extern gboolean print_last_revert;
 
-extern struct mc_fhl_struct *mc_filehighlight;
-
 extern char *shell;
 extern const char *mc_prompt;
 

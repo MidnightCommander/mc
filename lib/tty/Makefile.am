@@ -17,8 +17,11 @@ TTY_SRC = \
 	key.c key.h keyxdef.c \
 	mouse.c mouse.h \
 	tty.c tty.h tty-internal.h \
-	win.c win.h \
-	x11conn.c x11conn.h
+	win.c win.h
+
+if HAVE_TEXTMODE_X11_SUPPORT
+TTY_SRC += x11conn.c x11conn.h
+endif
 
 libmctty_la_SOURCES = $(TTY_SRC) $(TTY_SCREEN_SRC)
 

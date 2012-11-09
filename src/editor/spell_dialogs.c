@@ -55,7 +55,7 @@
  * @param word Word for spell check
  * @param new_word Word to replace the incorrect word
  * @param suggest Array of suggests for current word
- * @returns code of pressed button
+ * @return code of pressed button
  */
 
 int
@@ -150,7 +150,7 @@ spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word
  * Show dialog to select language for spell check.
  *
  * @param languages Array of available languages
- * @returns name of choosed language
+ * @return name of choosed language
  */
 
 char *

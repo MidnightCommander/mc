@@ -166,7 +166,7 @@ strutils_unescape (const char *src, gsize src_len, const char *unescaped_chars,
  *
  * @param src string for escaping
  *
- * @returns escaped string (which needs to be freed later) or NULL when NULL string is passed.
+ * @return escaped string (which needs to be freed later) or NULL when NULL string is passed.
  */
 
 char *
@@ -199,7 +199,7 @@ strutils_regex_escape (const char *src)
  *
  * @param text string for unescaping
  *
- * @returns unescaped string (which needs to be freed)
+ * @return unescaped string (which needs to be freed)
  */
 
 char *
@@ -231,7 +231,7 @@ strutils_regex_unescape (const char *text)
  * @param start string for checking
  * @param current pointer to checked character
  *
- * @returns TRUE if string contain escaped chars otherwise return FALSE
+ * @return TRUE if string contain escaped chars otherwise return FALSE
  */
 
 gboolean

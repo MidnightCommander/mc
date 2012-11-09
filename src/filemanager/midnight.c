@@ -1054,7 +1054,7 @@ quit_cmd_internal (int quiet)
 #ifdef ENABLE_SUBSHELL
         if (!mc_global.tty.use_subshell)
             stop_dialogs ();
-        else if ((q = exit_subshell ()))
+        else if ((q = exit_subshell () ? 1 : 0) != 0)
 #endif
             stop_dialogs ();
     }
@@ -1759,17 +1759,19 @@ do_nc (void)
     midnight_dlg = create_dlg (FALSE, 0, 0, LINES, COLS, midnight_colors, midnight_callback,
                                midnight_event, "[main]", NULL, DLG_WANT_IDLE);
 
-    if (mc_global.mc_run_mode == MC_RUN_FULL)
-        setup_mc ();
-    else
-        setup_dummy_mc ();
-
     /* Check if we were invoked as an editor or file viewer */
     if (mc_global.mc_run_mode != MC_RUN_FULL)
+    {
+        setup_dummy_mc ();
         ret = mc_maybe_editor_or_viewer ();
+    }
     else
     {
+        setup_mc ();
+        mc_filehighlight = mc_fhl_new (TRUE);
         create_panels_and_run_mc ();
+        mc_fhl_free (&mc_filehighlight);
+
         ret = TRUE;
 
         /* destroy_dlg destroys even current_panel->cwd_vpath, so we have to save a copy :) */

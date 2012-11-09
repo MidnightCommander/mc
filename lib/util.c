@@ -918,7 +918,7 @@ wipe_password (char *passwd)
  *
  * @param p pointer to string
  *
- * @returns a newly allocated string
+ * @return newly allocated string
  */
 
 char *

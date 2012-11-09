@@ -35,6 +35,9 @@
 #include "lib/global.h"
 #include "lib/tty/tty.h"        /* LINES, COLS */
 #include "lib/tty/color.h"      /* tty_set_normal_attrs() */
+#ifdef HAVE_SLANG
+#include "lib/tty/win.h"        /* do_enter_ca_mode() */
+#endif
 #include "lib/widget.h"
 #include "lib/event.h"
 
@@ -348,7 +351,7 @@ mc_refresh (void)
     if (mc_global.we_are_background)
         return;
 #endif /* ENABLE_BACKGROUND */
-    if (!mc_global.tty.winch_flag)
+    if (mc_global.tty.winch_flag == 0)
         tty_refresh ();
     else
     {
@@ -363,13 +366,14 @@ mc_refresh (void)
 void
 dialog_change_screen_size (void)
 {
-    mc_global.tty.winch_flag = FALSE;
+    mc_global.tty.winch_flag = 0;
 
     tty_change_screen_size ();
 
-#ifdef ENABLE_SUBSHELL
-    if (mc_global.tty.use_subshell)
-        tty_resize (mc_global.tty.subshell_pty);
+#ifdef HAVE_SLANG
+    do_enter_ca_mode ();
+    tty_keypad (TRUE);
+    tty_nodelay (FALSE);
 #endif
 
     /* Inform all suspending dialogs */

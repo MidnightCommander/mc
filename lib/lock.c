@@ -266,7 +266,7 @@ lock_file (const vfs_path_t * fname_vpath)
 /* --------------------------------------------------------------------------------------------- */
 /**
  * Lowers file lock if possible
- * @returns  Always 0
+ * @return  Always 0
  */
 
 int

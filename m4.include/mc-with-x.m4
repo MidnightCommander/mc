@@ -19,4 +19,5 @@ AC_DEFUN([MC_WITH_X], [
         fi
     fi
 
+    AM_CONDITIONAL([HAVE_TEXTMODE_X11_SUPPORT], [test x"$textmode_x11_support" = x"yes"])
 ])

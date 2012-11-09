@@ -1058,7 +1058,7 @@ vfs_path_element_need_cleanup_converter (const vfs_path_element_t * element)
  * @param vpath data for serialization
  * @param error contain pointer to object for handle error code and message
  *
- * @returns serialized vpath as newly allocated string
+ * @return serialized vpath as newly allocated string
  */
 
 char *
@@ -1452,7 +1452,7 @@ vfs_path_vtokens_get (const vfs_path_t * vpath, ssize_t start_position, ssize_t 
  * @param element path element
  * @param keep_password TRUE or FALSE
  *
- * @returns newly allocated string
+ * @return newly allocated string
  */
 
 char *

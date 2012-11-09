@@ -109,7 +109,7 @@ sigwinch_handler (int dummy)
 {
     (void) dummy;
 
-    mc_global.tty.winch_flag = TRUE;
+    mc_global.tty.winch_flag = 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -254,6 +254,11 @@ tty_change_screen_size (void)
 #endif
     }
 #endif /* defined(TIOCGWINSZ) || NCURSES_VERSION_MAJOR >= 4 */
+
+#ifdef ENABLE_SUBSHELL
+    if (mc_global.tty.use_subshell)
+        tty_resize (mc_global.tty.subshell_pty);
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */

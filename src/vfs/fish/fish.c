@@ -852,10 +852,10 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
     fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
     gchar *shell_commands = NULL;
     struct vfs_s_super *super = FH_SUPER;
-    int n, total;
-    char buffer[8192];
+    int code;
+    off_t total;
+    char buffer[BUF_8K];
     struct stat s;
-    int was_error = 0;
     int h;
     char *quoted_name;
 
@@ -907,8 +907,8 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
             g_strconcat (SUP->scr_env, "FISH_FILENAME=%s FISH_FILESIZE=%" PRIuMAX ";\n",
                          SUP->scr_append, (char *) NULL);
 
-        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name,
-                          (uintmax_t) s.st_size);
+        code = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name,
+                             (uintmax_t) s.st_size);
         g_free (shell_commands);
     }
     else
@@ -916,11 +916,11 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
         shell_commands =
             g_strconcat (SUP->scr_env, "FISH_FILENAME=%s FISH_FILESIZE=%" PRIuMAX ";\n",
                          SUP->scr_send, (char *) NULL);
-        n = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name,
-                          (uintmax_t) s.st_size);
+        code = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name,
+                             (uintmax_t) s.st_size);
         g_free (shell_commands);
     }
-    if (n != PRELIM)
+    if (code != PRELIM)
     {
         close (h);
         ERRNOR (E_REMOTE, -1);
@@ -930,7 +930,8 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
 
     while (TRUE)
     {
-        int t;
+        ssize_t n, t;
+
         while ((n = read (h, buffer, sizeof (buffer))) < 0)
         {
             if ((errno == EINTR) && tty_got_interrupt ())
@@ -954,14 +955,13 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
         }
         tty_disable_interrupt_key ();
         total += n;
-        vfs_print_message ("%s: %d/%" PRIuMAX,
-                           was_error ? _("fish: storing zeros") : _("fish: storing file"),
-                           total, (uintmax_t) s.st_size);
+        vfs_print_message ("%s: %" PRIuMAX "/%" PRIuMAX, _("fish: storing file"),
+                           (uintmax_t) total, (uintmax_t) s.st_size);
     }
     close (h);
     g_free (quoted_name);
 
-    if ((fish_get_reply (me, SUP->sockr, NULL, 0) != COMPLETE) || was_error)
+    if (fish_get_reply (me, SUP->sockr, NULL, 0) != COMPLETE)
         ERRNOR (E_REMOTE, -1);
     return 0;
 
@@ -1031,13 +1031,13 @@ fish_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
     fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
     struct vfs_s_super *super = FH_SUPER;
     char buffer[BUF_8K];
-    int n;
+    ssize_t n;
 
     vfs_print_message (_("Aborting transfer..."));
 
     do
     {
-        n = MIN (sizeof (buffer), (size_t) (fish->total - fish->got));
+        n = MIN ((off_t) sizeof (buffer), (fish->total - fish->got));
         if (n != 0)
         {
             n = read (SUP->sockr, buffer, n);

@@ -159,7 +159,7 @@ rewrite_backup_content (const vfs_path_t * from_file_name_vpath, const char *to_
  * @note the name is not altered if this function fails
  *
  * @param[out] name address of a pointer to store the temporary name
- * @returns file descriptor on success, negative on error
+ * @return file descriptor on success, negative on error
  */
 
 static int
@@ -186,7 +186,7 @@ open_temp (void **name)
  * Alocate file structure and associate file descriptor to it.
  *
  * @param fd file descriptor
- * @returns file structure
+ * @return file structure
  */
 
 static FBUF *
@@ -222,7 +222,7 @@ f_dopen (int fd)
  * Free file structure without closing the file.
  *
  * @param fs file structure
- * @returns 0 on success, non-zero on error
+ * @return 0 on success, non-zero on error
  */
 
 static int
@@ -246,8 +246,7 @@ f_free (FBUF * fs)
  * Open a binary temporary file in R/W mode.
  * @note the file will be deleted when closed
  *
- * @returns file structure
- *
+ * @return file structure
  */
 static FBUF *
 f_temp (void)
@@ -279,7 +278,7 @@ f_temp (void)
  * @param filename file name
  * @param flags open mode, a combination of O_RDONLY, O_WRONLY, O_RDWR
  *
- * @returns file structure
+ * @return file structure
  */
 
 static FBUF *
@@ -314,8 +313,7 @@ f_open (const char *filename, int flags)
  * @param size size of buffer
  * @param fs file structure
  *
- * @returns number of bytes read
- *
+ * @return number of bytes read
  */
 
 static size_t
@@ -357,8 +355,7 @@ f_gets (char *buf, size_t size, FBUF * fs)
  * @param off offset
  * @param whence seek directive: SEEK_SET, SEEK_CUR or SEEK_END
  *
- * @returns position in file, starting from begginning
- *
+ * @return position in file, starting from begginning
  */
 
 static off_t
@@ -397,7 +394,7 @@ f_seek (FBUF * fs, off_t off, int whence)
  *
  * @param fs file structure
  *
- * @returns 0 if success, non-zero on error
+ * @return 0 if success, non-zero on error
  */
 
 static off_t
@@ -421,8 +418,7 @@ f_reset (FBUF * fs)
  * @param buf source buffer
  * @param size size of buffer
  *
- * @returns number of written bytes, -1 on error
- *
+ * @return number of written bytes, -1 on error
  */
 
 static ssize_t
@@ -444,8 +440,7 @@ f_write (FBUF * fs, const char *buf, size_t size)
  *
  * @param fs file structure
  *
- * @returns current file size on success, negative on error
- *
+ * @return current file size on success, negative on error
  */
 
 static off_t
@@ -474,8 +469,7 @@ f_trunc (FBUF * fs)
  * @note if this is temporary file, it is deleted
  *
  * @param fs file structure
- * @returns 0 on success, non-zero on error
- *
+ * @return 0 on success, non-zero on error
  */
 
 static int
@@ -500,7 +494,7 @@ f_close (FBUF * fs)
  * @param cmd shell command line
  * @param flags open mode, either O_RDONLY or O_WRONLY
  *
- * @returns file structure
+ * @return file structure
  */
 
 static FBUF *
@@ -540,7 +534,7 @@ p_open (const char *cmd, int flags)
  * Close pipe stream.
  *
  * @param fs structure
- * @returns 0 on success, non-zero on error
+ * @return 0 on success, non-zero on error
  */
 
 static int
@@ -563,7 +557,7 @@ p_close (FBUF * fs)
  * Get one char (byte) from string
  *
  * @param char * str, gboolean * result
- * @returns int as character or 0 and result == FALSE if fail
+ * @return int as character or 0 and result == FALSE if fail
  */
 
 static int
@@ -584,8 +578,7 @@ dview_get_byte (char *str, gboolean * result)
  * Get utf multibyte char from string
  *
  * @param char * str, int * char_width, gboolean * result
- * @returns int as utf character or 0 and result == FALSE if fail
- *
+ * @return int as utf character or 0 and result == FALSE if fail
  */
 
 static int
@@ -666,7 +659,7 @@ dview_str_utf8_offset_to_pos (const char *text, size_t length)
  *
  * @param[in,out] str string to parse
  * @param[out] n extracted number
- * @returns 0 if success, otherwise non-zero
+ * @return 0 if success, otherwise non-zero
  */
 
 static int
@@ -690,7 +683,7 @@ scan_deci (const char **str, int *n)
  *
  * @param p string to parse
  * @param ops list of diff statements
- * @returns 0 if success, otherwise non-zero
+ * @return 0 if success, otherwise non-zero
  */
 
 static int
@@ -766,7 +759,7 @@ scan_line (const char *p, GArray * ops)
  *
  * @param f stream to read from
  * @param ops list of diff statements to fill
- * @returns positive number indicating number of hunks, otherwise negative
+ * @return positive number indicating number of hunks, otherwise negative
  */
 
 static int
@@ -807,7 +800,7 @@ scan_diff (FBUF * f, GArray * ops)
  * @param file2 second file to compare
  * @param ops list of diff statements to fill
  *
- * @returns positive number indicating number of hunks, otherwise negative
+ * @return positive number indicating number of hunks, otherwise negative
  */
 
 static int
@@ -862,7 +855,7 @@ dff_execute (const char *args, const char *extra, const char *file1, const char 
  * @param printer printf-like function to be used for displaying
  * @param ctx printer context
  *
- * @returns 0 if success, otherwise non-zero
+ * @return 0 if success, otherwise non-zero
  */
 
 static int
@@ -1039,7 +1032,7 @@ dff_reparse (diff_place_t ord, const char *filename, const GArray * ops, DFUNC p
  * @param ret list of offsets for longest common substrings inside each string
  * @param min minimum length of common substrings
  *
- * @returns 0 if success, nonzero otherwise
+ * @return 0 if success, nonzero otherwise
  */
 
 static int
@@ -1136,7 +1129,7 @@ lcsubstr (const char *s, int m, const char *t, int n, GArray * ret, int min)
  * @param hdiff list of horizontal diff ranges to fill
  * @param depth recursion depth
  *
- * @returns 0 if success, nonzero otherwise
+ * @return 0 if success, nonzero otherwise
  */
 
 static gboolean
@@ -1216,7 +1209,7 @@ hdiff_multi (const char *s, const char *t, const BRACKET bracket, int min, GArra
  * @param hdiff list of horizontal diff ranges to fill
  * @param depth recursion depth
  *
- * @returns 0 if success, nonzero otherwise
+ * @return 0 if success, nonzero otherwise
  */
 
 static gboolean
@@ -1251,7 +1244,7 @@ hdiff_scan (const char *s, int m, const char *t, int n, int min, GArray * hdiff,
  * @param hdiff horizontal diff structure
  * @param ord DIFF_LEFT if reading from first file, DIFF_RIGHT if reading from 2nd file
  *
- * @returns TRUE if inside hdiff limits, FALSE otherwise
+ * @return TRUE if inside hdiff limits, FALSE otherwise
  */
 
 static gboolean
@@ -1285,7 +1278,7 @@ is_inside (int k, GArray * hdiff, diff_place_t ord)
  * @param base virtual base of this string, needed to calculate tabs
  * @param ts tab size
  *
- * @returns new virtual base
+ * @return new virtual base
  */
 
 static int
@@ -1322,7 +1315,7 @@ cvt_cpy (char *dst, const char *src, size_t srcsize, int base, int ts)
  * @param base virtual base of this string, needed to calculate tabs
  * @param ts tab size
  *
- * @returns new virtual base
+ * @return new virtual base
  *
  * @note The procedure returns when all bytes are consumed from 'src'
  *       or 'dstsize' bytes are written to 'dst'
@@ -1368,7 +1361,7 @@ cvt_ncpy (char *dst, int dstsize, const char **_src, size_t srcsize, int base, i
  * @param ts tab size
  * @param show_cr show trailing carriage return as ^M
  *
- * @returns negative on error, otherwise number of bytes except padding
+ * @return negative on error, otherwise number of bytes except padding
  */
 
 static int
@@ -1465,7 +1458,7 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
  * @param ord DIFF_LEFT if reading from first file, DIFF_RIGHT if reading from 2nd file
  * @param att buffer of attributes
  *
- * @returns negative on error, otherwise number of bytes except padding
+ * @return negative on error, otherwise number of bytes except padding
  */
 
 static int
@@ -1566,7 +1559,7 @@ cvt_mgeta (const char *src, size_t srcsize, char *dst, int dstsize, int skip, in
  * @param ts tab size
  * @param show_cr show trailing carriage return as ^M
  *
- * @returns negative on error, otherwise number of bytes except padding
+ * @return negative on error, otherwise number of bytes except padding
  */
 
 static int
@@ -1976,7 +1969,7 @@ find_next_hunk (const GArray * a, size_t pos)
  * Find start and end lines of the current hunk.
  *
  * @param dview WDiff widget
- * @returns boolean and
+ * @return boolean and
  * start_line1 first line of current hunk (file[0])
  * end_line1 last line of current hunk (file[0])
  * start_line1 first line of current hunk (file[0])

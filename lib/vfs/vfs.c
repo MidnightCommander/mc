@@ -626,7 +626,7 @@ vfs_change_encoding (vfs_path_t * vpath, const char *encoding)
  * @param src_fsize source file size
  * @param dest_fsize destination file size (if destination exists, otherwise should be 0)
  *
- * @returns 0 if success and non-zero otherwise.
+ * @return 0 if success and non-zero otherwise.
  * Note: function doesn't touch errno global variable.
  */
 

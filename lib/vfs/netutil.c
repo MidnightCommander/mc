@@ -36,7 +36,7 @@
 
 /*** global variables ****************************************************************************/
 
-volatile sig_atomic_t got_sigpipe = 0;
+SIG_ATOMIC_VOLATILE_T got_sigpipe = 0;
 
 /*** file scope macro definitions ****************************************************************/
 

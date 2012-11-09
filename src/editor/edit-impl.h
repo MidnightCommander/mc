@@ -336,7 +336,7 @@ void edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_inserti
  * To do it, allocate a new widget, initialize it and, if the new file
  * was loaded, copy the data to the old widget.
  *
- * @returns TRUE on success, FALSE on failure.
+ * @return TRUE on success, FALSE on failure.
  */
 static inline gboolean
 edit_reload (WEdit * edit, const vfs_path_t * filename_vpath)
