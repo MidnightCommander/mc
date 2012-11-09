@@ -485,7 +485,7 @@ mc_config_migrate_from_old_place (GError ** error, char **msg)
                               "to Freedesktop recommended dirs.\n"
                               "To get more info, please visit\n"
                               "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"),
-                              old_dir);
+                            old_dir);
 #else /* MC_HOMEDIR_XDG */
     *msg = g_strdup_printf (_("Your old settings were migrated from %s\n"
                               "to %s\n"), old_dir, mc_config_str);
