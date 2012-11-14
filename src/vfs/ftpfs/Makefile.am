@@ -1,4 +1,5 @@
-AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir)
+
+AM_CPPFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir)
 
 noinst_LTLIBRARIES = libvfs-ftpfs.la
 
