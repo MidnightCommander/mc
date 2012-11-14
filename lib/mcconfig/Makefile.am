@@ -7,4 +7,4 @@ libmcconfig_la_SOURCES = \
 	set.c \
 	paths.c
 
-AM_CFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS)
+AM_CPPFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS)

@@ -1,5 +1,11 @@
-AM_CFLAGS = -I$(top_srcdir)/lib/search $(GLIB_CFLAGS) -I$(top_srcdir) @CHECK_CFLAGS@
-LIBS=@CHECK_LIBS@  $(top_builddir)/lib/libmc.la
+
+AM_CPPFLAGS = \
+	$(GLIB_CFLAGS) \
+	-I$(top_srcdir) \
+	-I$(top_srcdir)/lib/search \
+	@CHECK_CFLAGS@
+
+LIBS = @CHECK_LIBS@ $(top_builddir)/lib/libmc.la
 
 TESTS = \
 	regex_replace_esc_seq \
