@@ -34,12 +34,11 @@ AC_DEFUN([MC_CHECK_SLANG_BY_PATH], [
         ac_slang_lib_path="-L"$param_slang_lib_path
     fi
 
-    saved_CFLAGS="$CFLAGS"
     saved_CPPFLAGS="$CPPFLAGS"
     saved_LDFLAGS="$LDFLAGS"
 
-    CFLAGS="$CFLAGS $ac_slang_inc_path $ac_slang_lib_path"
-    CPPFLAGS="$saved_CPPFLAGS $ac_slang_inc_path $ac_slang_lib_path"
+    CPPFLAGS="$saved_CPPFLAGS $ac_slang_inc_path"
+    LDFLAGS="$saved_LDFLAGS $ac_slang_lib_path"
 
     AC_MSG_CHECKING([for slang.h])
     AC_PREPROC_IFELSE(
@@ -71,7 +70,7 @@ AC_DEFUN([MC_CHECK_SLANG_BY_PATH], [
 		if test x"$ac_slang_lib_path" = x; then
 		    ac_slang_lib_path="-L/usr/lib"
 		fi
-		CFLAGS="-DHAVE_SLANG_SLANG_H $CFLAGS"
+		CPPFLAGS="-DHAVE_SLANG_SLANG_H $CPPFLAGS"
 	    fi
 	],
     )
@@ -120,7 +119,7 @@ int main (void)
     if test x"$found_slang" = x"yes"; then
         MC_SLANG_TERMCAP
         if test x"$mc_cv_slang_termcap"  = x"yes"; then
-	    saved_CPPFLAGS="-ltermcap $saved_CPPFLAGS "
+	    saved_CPPFLAGS="$saved_CPPFLAGS "
 	    saved_LDFLAGS="-ltermcap $saved_LDFLAGS"
         fi
 
@@ -142,12 +141,11 @@ int main (void)
         screen_msg="S-Lang library"
 
         MCLIBS="$ac_slang_lib_path -lslang $MCLIBS"
-        CFLAGS="$ac_slang_inc_path $saved_CFLAGS"
         dnl do not reset CPPFLAGS
-        dnl - if CPPFLAGS are reset then cpp does not find the specified header
+        dnl if CPPFLAGS are reset then cpp does not find the specified header
+        CPPFLAGS="$ac_slang_inc_path $saved_CPPFLAGS"
         LDFLAGS="$saved_LDFLAGS"
     else
-        CFLAGS="$saved_CFLAGS"
         CPPFLAGS="$saved_CPPFLAGS"
         LDFLAGS="$saved_LDFLAGS"
     fi
@@ -184,7 +182,7 @@ AC_DEFUN([MC_WITH_SLANG], [
         PKG_CHECK_MODULES(SLANG, [slang >= 2.0], [found_slang=yes], [:])
         if test x"$found_slang" = "xyes"; then
             MCLIBS="$pkg_cv_SLANG_LIBS $MCLIBS"
-            CFLAGS="$pkg_cv_SLANG_CFLAGS $CFLAGS"
+            CPPFLAGS="$pkg_cv_SLANG_CFLAGS $CPPFLAGS"
         fi
     fi
 
