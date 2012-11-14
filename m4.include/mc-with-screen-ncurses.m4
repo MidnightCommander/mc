@@ -13,7 +13,9 @@ AC_DEFUN([MC_CHECK_NCURSES_BY_PATH], [
     fi
 
     saved_CPPFLAGS="$CPPFLAGS"
+    saved_LDFLAGS="$LDFLAGS"
     CPPFLAGS="$CPPFLAGS $ac_ncurses_inc_path"
+    LDFLAGS="$LDFLAGS $ac_ncurses_lib_path"
 
     dnl Check for the headers
     dnl Both headers should be in the same directory
@@ -56,6 +58,7 @@ AC_DEFUN([MC_CHECK_NCURSES_BY_PATH], [
         MCLIBS="$MCLIBS $ac_ncurses_lib_path"
     else
         CPPFLAGS="$saved_CPPFLAGS"
+        LDFLAGS="$saved_LDPFLAGS"
         AC_MSG_ERROR([$error_msg_ncurses])
     fi
 ])
