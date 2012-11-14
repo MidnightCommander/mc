@@ -1,6 +1,6 @@
 AM_CFLAGS = -I$(top_srcdir)/lib/vfs $(GLIB_CFLAGS) -I$(top_srcdir) @CHECK_CFLAGS@
 
-AM_LDFLAGS = -Wl,-z,muldefs
+AM_LDFLAGS = @TESTS_LDFLAGS@
 
 LIBS=@CHECK_LIBS@  \
     $(top_builddir)/lib/libmc.la
