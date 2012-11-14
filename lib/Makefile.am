@@ -50,7 +50,7 @@ if CHARSET
 libmc_la_SOURCES += charsets.c charsets.h
 endif
 
-AM_CFLAGS= $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CFLAGS)
+AM_CPPFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(PCRE_CPPFLAGS)
 
 libmc_la_LIBADD = \
 	event/libmcevent.la \

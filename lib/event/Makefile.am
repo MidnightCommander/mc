@@ -7,4 +7,4 @@ libmcevent_la_SOURCES = \
 	manage.c \
 	raise.c
 
-AM_CFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS) $(PCRE_CFLAGS)
+AM_CPPFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS) $(PCRE_CPPFLAGS)

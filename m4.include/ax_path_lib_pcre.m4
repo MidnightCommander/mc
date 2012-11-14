@@ -1,6 +1,6 @@
 dnl @synopsis AX_PATH_LIB_PCRE [(A/NA)]
 dnl
-dnl check for pcre lib and set PCRE_LIBS and PCRE_CFLAGS accordingly.
+dnl check for pcre lib and set PCRE_LIBS and PCRE_CPPFLAGS accordingly.
 dnl
 dnl also provide --with-pcre option that may point to the $prefix of
 dnl the pcre installation - the macro will check $pcre/include and
@@ -29,14 +29,14 @@ else
   AC_MSG_RESULT([(testing)])
 
   if test "x$with_pcre" = "xyes" ; then
-    PCRE_CFLAGS="`pcre-config --cflags`"
+    PCRE_CPPFLAGS="`pcre-config --cflags`"
     PCRE_LIBS="`pcre-config --libs`"
   else
     test_PCRE_LIBS="-L$with_pcre/lib"
-    test_PCRE_CFLAGS="-I$with_pcre/include"
+    test_PCRE_CPPFLAGS="-I$with_pcre/include"
 
      OLDLDFLAGS="$LDFLAGS" ; LDFLAGS="$LDFLAGS $test_PCRE_LIBS"
-     OLDCFLAGS="$CFLAGS" ; CFLAGS="$CFLAGS $test_PCRE_CFLAGS"
+     OLDCPPFLAGS="$CPPFLAGS" ; CPPFLAGS="$CPPFLAGS $test_PCRE_CPPFLAGS"
 
      AC_CHECK_LIB(pcre, pcre_compile)
 
@@ -44,7 +44,7 @@ else
         AC_MSG_RESULT(setting PCRE_LIBS -L$with_pcre/lib -lpcre)
 
         PCRE_LIBS=$test_PCRE_LIBS
-        test_PCRE_CFLAGS=$test_PCRE_CFLAGS
+        PCRE_CPPFLAGS=$test_PCRE_CPPFLAGS
 
         AC_MSG_CHECKING([lib pcre])
         AC_MSG_RESULT([$PCRE_LIBS])
@@ -55,13 +55,13 @@ else
         m4_ifval($2,$2)
      fi
 
-     CFLAGS="$OLDCFLAGS"
+     CPPFLAGS="$OLDCFPPLAGS"
      LDFLAGS="$OLDLDFLAGS"
 
   fi
 fi
 
 AC_SUBST([PCRE_LIBS])
-AC_SUBST([PCRE_CFLAGS])
+AC_SUBST([PCRE_CPPFLAGS])
 
 ])
