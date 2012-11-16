@@ -2,6 +2,7 @@ AM_CFLAGS = -I$(top_srcdir)/lib/search $(GLIB_CFLAGS) -I$(top_srcdir) @CHECK_CFL
 LIBS=@CHECK_LIBS@  $(top_builddir)/lib/libmc.la
 
 TESTS = \
+	regex_search \
 	regex_replace_esc_seq \
 	regex_process_escape_sequence
 
@@ -12,3 +13,6 @@ regex_replace_esc_seq_SOURCES = \
 
 regex_process_escape_sequence_SOURCES = \
 	regex_process_escape_sequence.c
+
+regex_search_SOURCES = \
+	regex_search.c
