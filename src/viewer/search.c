@@ -75,9 +75,9 @@ mcview_search_update_steps (mcview_t * view)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-mcview_find (mcview_t * view, gsize search_start, gsize * len)
+mcview_find (mcview_t * view, off_t search_start, gsize * len)
 {
-    gsize search_end;
+    off_t search_end;
 
     view->search_numNeedSkipChar = 0;
     search_cb_char_curr_index = -1;
@@ -85,17 +85,17 @@ mcview_find (mcview_t * view, gsize search_start, gsize * len)
     if (mcview_search_options.backwards)
     {
         search_end = mcview_get_filesize (view);
-        while ((int) search_start >= 0)
+        while (search_start >= 0)
         {
             view->search_nroff_seq->index = search_start;
             mcview_nroff_seq_info (view->search_nroff_seq);
 
-            if (search_end > search_start + view->search->original_len
+            if (search_end > search_start + (off_t) view->search->original_len
                 && mc_search_is_fixed_search_str (view->search))
                 search_end = search_start + view->search->original_len;
 
             if (mc_search_run (view->search, (void *) view, search_start, search_end, len)
-                && view->search->normal_offset == (off_t) search_start)
+                && view->search->normal_offset == search_start)
             {
                 if (view->text_nroff_mode)
                     view->search->normal_offset++;
