@@ -1127,7 +1127,7 @@ static gboolean
 edit_find_word_start (WEdit * edit, off_t * word_start, gsize * word_len)
 {
     int c, last;
-    gsize i;
+    off_t i;
 
     /* return if at begin of file */
     if (edit->curs1 <= 0)
@@ -1142,7 +1142,7 @@ edit_find_word_start (WEdit * edit, off_t * word_start, gsize * word_len)
     for (i = 2;; i++)
     {
         /* return if at begin of file */
-        if ((gsize) edit->curs1 < i)
+        if (edit->curs1 < i)
             return FALSE;
 
         last = c;
@@ -1155,7 +1155,7 @@ edit_find_word_start (WEdit * edit, off_t * word_start, gsize * word_len)
                 return FALSE;
 
             *word_start = edit->curs1 - (i - 1);        /* start found */
-            *word_len = i - 1;
+            *word_len = (gsize) (i - 1);
             break;
         }
     }
