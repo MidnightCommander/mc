@@ -107,7 +107,7 @@ struct str_class
       /*I*/ int (*isalnum) (const char *);
       /*I*/ int (*isdigit) (const char *);
       /*I*/ int (*isprint) (const char *);
-      /*I*/ int (*iscombiningmark) (const char *);
+      /*I*/ gboolean (*iscombiningmark) (const char *);
       /*I*/ int (*length) (const char *);
       /*I*/ int (*length2) (const char *, int);
       /*I*/ int (*length_noncomb) (const char *);
@@ -334,7 +334,7 @@ int str_isprint (const char *ch);
  * combining makrs are assumed to be zero width 
  * I
  */
-int str_iscombiningmark (const char *ch);
+gboolean str_iscombiningmark (const char *ch);
 
 /* write lower from of fisrt characters in ch into out
  * decrase remain by size of returned characters

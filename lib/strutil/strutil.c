@@ -668,7 +668,7 @@ str_isprint (const char *ch)
     return used_class.isprint (ch);
 }
 
-int
+gboolean
 str_iscombiningmark (const char *ch)
 {
     return used_class.iscombiningmark (ch);

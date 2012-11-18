@@ -127,11 +127,11 @@ str_ascii_isprint (const char *text)
     return g_ascii_isprint ((gchar) text[0]);
 }
 
-static int
+static gboolean
 str_ascii_iscombiningmark (const char *text)
 {
     (void) text;
-    return 0;
+    return FALSE;
 }
 
 static int
