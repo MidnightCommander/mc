@@ -161,11 +161,11 @@ str_8bit_isprint (const char *text)
     return char_isprint (text[0]);
 }
 
-static int
+static gboolean
 str_8bit_iscombiningmark (const char *text)
 {
     (void) text;
-    return 0;
+    return FALSE;
 }
 
 static int
