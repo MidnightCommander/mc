@@ -1895,7 +1895,7 @@ ftpfs_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static ssize_t
 ftpfs_linear_read (struct vfs_class *me, vfs_file_handler_t * fh, void *buf, size_t len)
 {
     ssize_t n;

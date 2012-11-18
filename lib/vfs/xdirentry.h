@@ -147,7 +147,7 @@ struct vfs_s_subclass
     int (*file_store) (struct vfs_class * me, vfs_file_handler_t * fh, char *path, char *localname);
 
     int (*linear_start) (struct vfs_class * me, vfs_file_handler_t * fh, off_t from);
-    int (*linear_read) (struct vfs_class * me, vfs_file_handler_t * fh, void *buf, size_t len);
+    ssize_t (*linear_read) (struct vfs_class * me, vfs_file_handler_t * fh, void *buf, size_t len);
     void (*linear_close) (struct vfs_class * me, vfs_file_handler_t * fh);
 };
 
