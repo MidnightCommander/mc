@@ -876,7 +876,7 @@ editcmd_find (WEdit * edit, gsize * len)
             search_start =
                 edit_calculate_start_of_current_line (edit, search_start, end_string_symbol);
 
-        while ((int) search_start >= start_mark)
+        while (search_start >= start_mark)
         {
             if (search_end > (off_t) (search_start + edit->search->original_len)
                 && mc_search_is_fixed_search_str (edit->search))
