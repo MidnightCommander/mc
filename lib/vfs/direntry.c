@@ -561,7 +561,6 @@ vfs_s_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 static ssize_t
 vfs_s_read (void *fh, char *buffer, size_t count)
 {
-    int n;
     struct vfs_class *me = FH_SUPER->me;
 
     if (FH->linear == LS_LINEAR_PREOPEN)
@@ -578,6 +577,8 @@ vfs_s_read (void *fh, char *buffer, size_t count)
 
     if (FH->handle != -1)
     {
+        ssize_t n;
+
         n = read (FH->handle, buffer, count);
         if (n < 0)
             me->verrno = errno;
@@ -592,7 +593,6 @@ vfs_s_read (void *fh, char *buffer, size_t count)
 static ssize_t
 vfs_s_write (void *fh, const char *buffer, size_t count)
 {
-    int n;
     struct vfs_class *me = FH_SUPER->me;
 
     if (FH->linear)
@@ -601,6 +601,8 @@ vfs_s_write (void *fh, const char *buffer, size_t count)
     FH->changed = 1;
     if (FH->handle != -1)
     {
+        ssize_t n;
+
         n = write (FH->handle, buffer, count);
         if (n < 0)
             me->verrno = errno;
