@@ -83,7 +83,7 @@ static void
 tty_color_free_all (gboolean is_temp_color)
 {
     g_hash_table_foreach_remove (mc_tty_color__hashtable, tty_color_free_condition_cb,
-                                 is_temp_color ? GINT_TO_POINTER (1) : NULL);
+                                 is_temp_color ? GSIZE_TO_POINTER (1) : NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -95,7 +95,7 @@ tty_color_get_next_cpn_cb (gpointer key, gpointer value, gpointer user_data)
     tty_color_pair_t *mc_color_pair;
     (void) key;
 
-    cp = GPOINTER_TO_INT (user_data);
+    cp = GPOINTER_TO_SIZE (user_data);
     mc_color_pair = (tty_color_pair_t *) value;
 
     return (cp == mc_color_pair->pair_index);
@@ -106,12 +106,12 @@ tty_color_get_next_cpn_cb (gpointer key, gpointer value, gpointer user_data)
 static size_t
 tty_color_get_next__color_pair_number (void)
 {
-    const size_t cp_count = g_hash_table_size (mc_tty_color__hashtable);
-    size_t cp;
+    size_t cp_count, cp;
 
+    cp_count = g_hash_table_size (mc_tty_color__hashtable);
     for (cp = 0; cp < cp_count; cp++)
         if (g_hash_table_find (mc_tty_color__hashtable, tty_color_get_next_cpn_cb,
-                               GINT_TO_POINTER (cp)) == NULL)
+                               GSIZE_TO_POINTER (cp)) == NULL)
             break;
 
     return cp;
