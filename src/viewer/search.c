@@ -218,7 +218,7 @@ mcview_search_update_cmd_callback (const void *user_data, gsize char_offset)
 {
     mcview_t *view = (mcview_t *) user_data;
 
-    if (char_offset >= (gsize) view->update_activate)
+    if ((off_t) char_offset >= view->update_activate)
     {
         view->update_activate += view->update_steps;
         if (verbose)
