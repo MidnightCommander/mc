@@ -1057,13 +1057,12 @@ fish_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static ssize_t
 fish_linear_read (struct vfs_class *me, vfs_file_handler_t * fh, void *buf, size_t len)
 {
     fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
     struct vfs_s_super *super = FH_SUPER;
     ssize_t n = 0;
-
 
     len = MIN ((size_t) (fish->total - fish->got), len);
     tty_disable_interrupt_key ();
