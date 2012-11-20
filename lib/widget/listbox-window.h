@@ -16,7 +16,7 @@
 
 typedef struct
 {
-    struct Dlg_head *dlg;
+    struct WDialog *dlg;
     struct WListbox *list;
 } Listbox;
 

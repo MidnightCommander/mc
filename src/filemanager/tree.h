@@ -20,7 +20,7 @@ typedef struct WTree WTree;
 extern WTree *the_tree;
 extern int xtree_mode;
 
-struct Dlg_head;
+struct WDialog;
 
 /*** declarations of public functions ************************************************************/
 
@@ -31,7 +31,7 @@ vfs_path_t *tree_selected_name (const WTree * tree);
 
 void sync_tree (const char *pathname);
 
-WTree *find_tree (struct Dlg_head *h);
+WTree *find_tree (struct WDialog *h);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__TREE_H */

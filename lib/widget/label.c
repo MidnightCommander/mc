@@ -57,38 +57,44 @@
 /*** file scope functions ************************************************************************/
 
 static cb_ret_t
-label_callback (Widget * w, widget_msg_t msg, int parm)
+label_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WLabel *l = (WLabel *) w;
-    Dlg_head *h = l->widget.owner;
+    WLabel *l = LABEL (w);
+    WDialog *h = w->owner;
 
     switch (msg)
     {
-    case WIDGET_INIT:
+    case MSG_INIT:
         return MSG_HANDLED;
 
         /* We don't want to get the focus */
-    case WIDGET_FOCUS:
+    case MSG_FOCUS:
         return MSG_NOT_HANDLED;
 
-    case WIDGET_DRAW:
+    case MSG_DRAW:
         {
             char *p = l->text;
             int y = 0;
-            gboolean disabled = (w->options & W_DISABLED) != 0;
+            gboolean disabled;
+            align_crt_t align;
 
             if (l->text == NULL)
                 return MSG_HANDLED;
+
+            disabled = (w->options & W_DISABLED) != 0;
 
             if (l->transparent)
                 tty_setcolor (disabled ? DISABLED_COLOR : DEFAULT_COLOR);
             else
                 tty_setcolor (disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL]);
 
+            align = (w->pos_flags & WPOS_CENTER_HORZ) != 0 ? J_CENTER_LEFT : J_LEFT;
+
             while (TRUE)
             {
                 char *q;
                 char c = '\0';
+
 
                 q = strchr (p, '\n');
                 if (q != NULL)
@@ -97,8 +103,8 @@ label_callback (Widget * w, widget_msg_t msg, int parm)
                     q[0] = '\0';
                 }
 
-                widget_move (&l->widget, y, 0);
-                tty_print_string (str_fit_to_term (p, l->widget.cols, J_LEFT));
+                widget_move (w, y, 0);
+                tty_print_string (str_fit_to_term (p, w->cols, align));
 
                 if (q == NULL)
                     break;
@@ -110,12 +116,12 @@ label_callback (Widget * w, widget_msg_t msg, int parm)
             return MSG_HANDLED;
         }
 
-    case WIDGET_DESTROY:
+    case MSG_DESTROY:
         g_free (l->text);
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return widget_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -127,6 +133,7 @@ WLabel *
 label_new (int y, int x, const char *text)
 {
     WLabel *l;
+    Widget *w;
     int cols = 1;
     int lines = 1;
 
@@ -134,12 +141,14 @@ label_new (int y, int x, const char *text)
         str_msg_term_size (text, &lines, &cols);
 
     l = g_new (WLabel, 1);
-    init_widget (&l->widget, y, x, lines, cols, label_callback, NULL);
+    w = WIDGET (l);
+    init_widget (w, y, x, lines, cols, label_callback, NULL);
+
     l->text = g_strdup (text);
     l->auto_adjust_cols = TRUE;
     l->transparent = FALSE;
-    widget_want_cursor (l->widget, FALSE);
-    widget_want_hotkey (l->widget, FALSE);
+    widget_want_cursor (w, FALSE);
+    widget_want_hotkey (w, FALSE);
 
     return l;
 }
@@ -149,7 +158,8 @@ label_new (int y, int x, const char *text)
 void
 label_set_text (WLabel * label, const char *text)
 {
-    int newcols = label->widget.cols;
+    Widget *w = WIDGET (label);
+    int newcols = w->cols;
     int newlines;
 
     if (label->text != NULL && text != NULL && strcmp (label->text, text) == 0)
@@ -165,18 +175,18 @@ label_set_text (WLabel * label, const char *text)
         if (label->auto_adjust_cols)
         {
             str_msg_term_size (text, &newlines, &newcols);
-            if (newcols > label->widget.cols)
-                label->widget.cols = newcols;
-            if (newlines > label->widget.lines)
-                label->widget.lines = newlines;
+            if (newcols > w->cols)
+                w->cols = newcols;
+            if (newlines > w->lines)
+                w->lines = newlines;
         }
     }
 
-    if (label->widget.owner != NULL)
-        label_callback ((Widget *) label, WIDGET_DRAW, 0);
+    if (w->owner != NULL)
+        send_message (w, NULL, MSG_DRAW, 0, NULL);
 
-    if (newcols < label->widget.cols)
-        label->widget.cols = newcols;
+    if (newcols < w->cols)
+        w->cols = newcols;
 }
 
 /* --------------------------------------------------------------------------------------------- */

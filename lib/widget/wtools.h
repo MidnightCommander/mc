@@ -41,8 +41,8 @@ int query_dialog (const char *header, const char *text, int flags, int count, ..
 void query_set_sel (int new_sel);
 
 /* Create message box but don't dismiss it yet, not background safe */
-struct Dlg_head *create_message (int flags, const char *title,
-                                 const char *text, ...) __attribute__ ((format (__printf__, 3, 4)));
+struct WDialog *create_message (int flags, const char *title,
+                                const char *text, ...) __attribute__ ((format (__printf__, 3, 4)));
 
 /* Show message box, background safe */
 void message (int flags, const char *title, const char *text, ...)

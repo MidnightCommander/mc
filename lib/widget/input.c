@@ -73,7 +73,7 @@ const global_keymap_t *input_map = NULL;
 
 #define should_show_history_button(in) \
     (in->history != NULL && in->field_width > HISTORY_BUTTON_WIDTH * 2 + 1 \
-         && in->widget.owner != NULL)
+         && WIDGET (in)->owner != NULL)
 
 /*** file scope type declarations ****************************************************************/
 
@@ -103,7 +103,7 @@ static void
 draw_history_button (WInput * in)
 {
     char c;
-    gboolean disabled = (((Widget *) in)->options & W_DISABLED) != 0;
+    gboolean disabled = (WIDGET (in)->options & W_DISABLED) != 0;
 
     if (g_list_next (in->history_current) == NULL)
         c = '^';
@@ -112,12 +112,12 @@ draw_history_button (WInput * in)
     else
         c = '|';
 
-    widget_move (&in->widget, 0, in->field_width - HISTORY_BUTTON_WIDTH);
+    widget_move (in, 0, in->field_width - HISTORY_BUTTON_WIDTH);
     tty_setcolor (disabled ? DISABLED_COLOR : in->color[WINPUTC_HISTORY]);
 
 #ifdef LARGE_HISTORY_BUTTON
     tty_print_string ("[ ]");
-    widget_move (&in->widget, 0, in->field_width - HISTORY_BUTTON_WIDTH + 1);
+    widget_move (in, 0, in->field_width - HISTORY_BUTTON_WIDTH + 1);
 #endif
 
     tty_print_char (c);
@@ -195,8 +195,7 @@ do_show_hist (WInput * in)
 
     len = get_history_length (in->history);
 
-    r = history_show (&in->history, &in->widget,
-                      g_list_position (in->history_current, in->history));
+    r = history_show (&in->history, WIDGET (in), g_list_position (in->history_current, in->history));
     if (r != NULL)
     {
         input_assign_text (in, r);
@@ -832,7 +831,7 @@ static gboolean
 input_load_history (const gchar * event_group_name, const gchar * event_name,
                     gpointer init_data, gpointer data)
 {
-    WInput *in = (WInput *) init_data;
+    WInput *in = INPUT (init_data);
     ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
     const char *def_text;
     size_t buffer_len;
@@ -875,12 +874,12 @@ static gboolean
 input_save_history (const gchar * event_group_name, const gchar * event_name,
                     gpointer init_data, gpointer data)
 {
-    WInput *in = (WInput *) init_data;
+    WInput *in = INPUT (init_data);
 
     (void) event_group_name;
     (void) event_name;
 
-    if (!in->is_password && (((Widget *) in)->owner->ret_value != B_CANCEL))
+    if (!in->is_password && (WIDGET (in)->owner->ret_value != B_CANCEL))
     {
         ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
 
@@ -929,8 +928,8 @@ input_destroy (WInput * in)
 static int
 input_event (Gpm_Event * event, void *data)
 {
-    WInput *in = (WInput *) data;
-    Widget *w = (Widget *) data;
+    WInput *in = INPUT (data);
+    Widget *w = WIDGET (data);
 
     if (!mouse_global_in_widget (event, w))
         return MOU_UNHANDLED;
@@ -973,6 +972,25 @@ input_event (Gpm_Event * event, void *data)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Callback for applying new options to input widget.
+ *
+ * @param w       widget
+ * @param options options set
+ * @param enable  TRUE if specified options should be added, FALSE if options should be removed
+ */
+static void
+input_set_options_callback (Widget * w, widget_options_t options, gboolean enable)
+{
+    WInput *in = INPUT (w);
+
+    widget_default_set_options_callback (w, options, enable);
+    if (in->label != NULL)
+        widget_set_options (WIDGET (in->label), options, enable);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -991,10 +1009,13 @@ input_new (int y, int x, const int *input_colors, int width, const char *def_tex
            const char *histname, input_complete_t completion_flags)
 {
     WInput *in;
+    Widget *w;
 
     in = g_new (WInput, 1);
-    init_widget (&in->widget, y, x, 1, width, input_callback, input_event);
-    in->widget.options |= W_IS_INPUT;
+    w = WIDGET (in);
+    init_widget (w, y, x, 1, width, input_callback, input_event);
+    w->options |= W_IS_INPUT;
+    w->set_options = input_set_options_callback;
 
     memmove (in->color, input_colors, sizeof (input_colors_t));
 
@@ -1026,8 +1047,9 @@ input_new (int y, int x, const int *input_colors, int width, const char *def_tex
     in->history_name = NULL;
     if ((histname != NULL) && (*histname != '\0'))
         in->history_name = g_strdup (histname);
-
     /* history will be loaded later */
+
+    in->label = NULL;
 
     return in;
 }
@@ -1035,21 +1057,21 @@ input_new (int y, int x, const int *input_colors, int width, const char *def_tex
 /* --------------------------------------------------------------------------------------------- */
 
 cb_ret_t
-input_callback (Widget * w, widget_msg_t msg, int parm)
+input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WInput *in = (WInput *) w;
+    WInput *in = INPUT (w);
     cb_ret_t v;
 
     switch (msg)
     {
-    case WIDGET_INIT:
+    case MSG_INIT:
         /* subscribe to "history_load" event */
         mc_event_add (w->owner->event_group, MCEVENT_HISTORY_LOAD, input_load_history, w, NULL);
         /* subscribe to "history_save" event */
         mc_event_add (w->owner->event_group, MCEVENT_HISTORY_SAVE, input_save_history, w, NULL);
         return MSG_HANDLED;
 
-    case WIDGET_KEY:
+    case MSG_KEY:
         if (parm == XCTRL ('q'))
         {
             quote = 1;
@@ -1074,21 +1096,21 @@ input_callback (Widget * w, widget_msg_t msg, int parm)
 
         return input_handle_char (in, parm);
 
-    case WIDGET_COMMAND:
+    case MSG_ACTION:
         return input_execute_cmd (in, parm);
 
-    case WIDGET_FOCUS:
-    case WIDGET_UNFOCUS:
-    case WIDGET_DRAW:
+    case MSG_FOCUS:
+    case MSG_UNFOCUS:
+    case MSG_DRAW:
+    case MSG_RESIZE:
         input_update (in, FALSE);
         return MSG_HANDLED;
 
-    case WIDGET_CURSOR:
-        widget_move (&in->widget, 0, str_term_width2 (in->buffer, in->point)
-                     - in->term_first_shown);
+    case MSG_CURSOR:
+        widget_move (in, 0, str_term_width2 (in->buffer, in->point) - in->term_first_shown);
         return MSG_HANDLED;
 
-    case WIDGET_DESTROY:
+    case MSG_DESTROY:
         /* unsubscribe from "history_load" event */
         mc_event_del (w->owner->event_group, MCEVENT_HISTORY_LOAD, input_load_history, w);
         /* unsubscribe from "history_save" event */
@@ -1097,7 +1119,7 @@ input_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return widget_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -1124,8 +1146,8 @@ input_get_default_colors (void)
 void
 input_set_origin (WInput * in, int x, int field_width)
 {
-    in->widget.x = x;
-    in->field_width = in->widget.cols = field_width;
+    WIDGET (in)->x = x;
+    in->field_width = WIDGET (in)->cols = field_width;
     input_update (in, FALSE);
 }
 
@@ -1268,17 +1290,21 @@ input_update (WInput * in, gboolean clear_first)
     /* Adjust the mark */
     in->mark = min (in->mark, buf_len);
 
+    /* don't draw widget not put into dialog */
+    if (WIDGET(in)->owner == NULL)
+        return;
+
     if (has_history != 0)
         draw_history_button (in);
 
-    if ((((Widget *) in)->options & W_DISABLED) != 0)
+    if ((WIDGET (in)->options & W_DISABLED) != 0)
         tty_setcolor (DISABLED_COLOR);
     else if (in->first)
         tty_setcolor (in->color[WINPUTC_UNCHANGED]);
     else
         tty_setcolor (in->color[WINPUTC_MAIN]);
 
-    widget_move (&in->widget, 0, 0);
+    widget_move (in, 0, 0);
 
     if (!in->is_password)
     {
@@ -1298,7 +1324,7 @@ input_update (WInput * in, gboolean clear_first)
                 tty_setcolor (in->color[WINPUTC_MARK]);
                 if (m1 < in->term_first_shown)
                 {
-                    widget_move (&in->widget, 0, 0);
+                    widget_move (in, 0, 0);
                     tty_print_string (str_term_substring
                                       (in->buffer, in->term_first_shown,
                                        m2 - in->term_first_shown));
@@ -1307,7 +1333,7 @@ input_update (WInput * in, gboolean clear_first)
                 {
                     int sel_width;
 
-                    widget_move (&in->widget, 0, m1 - in->term_first_shown);
+                    widget_move (in, 0, m1 - in->term_first_shown);
                     sel_width =
                         min (m2 - m1,
                              (in->field_width - has_history) - (str_term_width2 (in->buffer, m1) -

@@ -497,7 +497,7 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
         break;
     case CK_Quit:
         if (!mcview_is_in_panel (view))
-            dlg_stop (view->widget.owner);
+            dlg_stop (WIDGET (view)->owner);
         break;
     case CK_Cancel:
         /* don't close viewer due to SIGINT */
@@ -551,7 +551,7 @@ mcview_handle_key (mcview_t * view, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-mcview_adjust_size (Dlg_head * h)
+mcview_adjust_size (WDialog * h)
 {
     mcview_t *view;
     WButtonBar *b;
@@ -560,8 +560,8 @@ mcview_adjust_size (Dlg_head * h)
     view = (mcview_t *) find_widget_type (h, mcview_callback);
     b = find_buttonbar (h);
 
-    widget_set_size (&view->widget, 0, 0, LINES - 1, COLS);
-    widget_set_size (&b->widget, LINES - 1, 0, 1, COLS);
+    widget_set_size (WIDGET (view), 0, 0, LINES - 1, COLS);
+    widget_set_size (WIDGET (b), LINES - 1, 0, 1, COLS);
 
     mcview_compute_areas (view);
     mcview_update_bytes_per_line (view);
@@ -573,7 +573,7 @@ mcview_adjust_size (Dlg_head * h)
 /* --------------------------------------------------------------------------------------------- */
 
 cb_ret_t
-mcview_callback (Widget * w, widget_msg_t msg, int parm)
+mcview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     mcview_t *view = (mcview_t *) w;
     cb_ret_t i;
@@ -583,38 +583,38 @@ mcview_callback (Widget * w, widget_msg_t msg, int parm)
 
     switch (msg)
     {
-    case WIDGET_INIT:
+    case MSG_INIT:
         if (mcview_is_in_panel (view))
             add_hook (&select_file_hook, mcview_hook, view);
         else
             view->dpy_bbar_dirty = TRUE;
         return MSG_HANDLED;
 
-    case WIDGET_DRAW:
+    case MSG_DRAW:
         mcview_display (view);
         return MSG_HANDLED;
 
-    case WIDGET_CURSOR:
+    case MSG_CURSOR:
         if (view->hex_mode)
             mcview_place_cursor (view);
         return MSG_HANDLED;
 
-    case WIDGET_KEY:
+    case MSG_KEY:
         i = mcview_handle_key (view, parm);
         mcview_update (view);
         return i;
 
-    case WIDGET_COMMAND:
+    case MSG_ACTION:
         i = mcview_execute_cmd (view, parm);
         mcview_update (view);
         return i;
 
-    case WIDGET_FOCUS:
+    case MSG_FOCUS:
         view->dpy_bbar_dirty = TRUE;
         mcview_update (view);
         return MSG_HANDLED;
 
-    case WIDGET_DESTROY:
+    case MSG_DESTROY:
         if (mcview_is_in_panel (view))
         {
             delete_hook (&select_file_hook, mcview_hook);
@@ -626,39 +626,40 @@ mcview_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return widget_default_callback (w, sender, msg, parm, data);
     }
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 cb_ret_t
-mcview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+mcview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
+    WDialog *h = DIALOG (w);
     mcview_t *view;
 
     switch (msg)
     {
-    case DLG_RESIZE:
+    case MSG_RESIZE:
         mcview_adjust_size (h);
         return MSG_HANDLED;
 
-    case DLG_ACTION:
+    case MSG_ACTION:
         /* shortcut */
         if (sender == NULL)
             return mcview_execute_cmd (NULL, parm);
         /* message from buttonbar */
-        if (sender == (Widget *) find_buttonbar (h))
+        if (sender == WIDGET (find_buttonbar (h)))
         {
             if (data != NULL)
-                return send_message ((Widget *) data, WIDGET_COMMAND, parm);
+                return send_message (data, NULL, MSG_ACTION, parm, NULL);
 
             view = (mcview_t *) find_widget_type (h, mcview_callback);
             return mcview_execute_cmd (view, parm);
         }
         return MSG_NOT_HANDLED;
 
-    case DLG_VALIDATE:
+    case MSG_VALIDATE:
         view = (mcview_t *) find_widget_type (h, mcview_callback);
         h->state = DLG_ACTIVE;  /* don't stop the dialog before final decision */
         if (mcview_ok_to_quit (view))
@@ -668,7 +669,7 @@ mcview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, 
         return MSG_HANDLED;
 
     default:
-        return default_dlg_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 

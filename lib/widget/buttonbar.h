@@ -8,6 +8,8 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+#define BUTTONBAR(x) ((WButtonBar *)(x))
+
 /* number of bttons in buttonbar */
 #define BUTTONBAR_LABELS_NUM 10
 
@@ -41,7 +43,7 @@ struct global_keymap_t;
 WButtonBar *buttonbar_new (gboolean visible);
 void buttonbar_set_label (WButtonBar * bb, int idx, const char *text,
                           const struct global_keymap_t *keymap, const Widget * receiver);
-WButtonBar *find_buttonbar (const Dlg_head * h);
+WButtonBar *find_buttonbar (const WDialog * h);
 
 /*** inline functions ****************************************************************************/
 
@@ -49,7 +51,7 @@ static inline void
 buttonbar_redraw (WButtonBar * bb)
 {
     if (bb != NULL)
-        send_message ((Widget *) bb, WIDGET_DRAW, 0);
+        send_message (bb, NULL, MSG_DRAW, 0, NULL);
 }
 
 static inline void

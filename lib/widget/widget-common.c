@@ -139,7 +139,7 @@ hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused)
 
 void
 init_widget (Widget * w, int y, int x, int lines, int cols,
-             callback_fn callback, mouse_h mouse_handler)
+             widget_cb_fn callback, mouse_h mouse_handler)
 {
     w->x = x;
     w->y = y;
@@ -147,6 +147,7 @@ init_widget (Widget * w, int y, int x, int lines, int cols,
     w->lines = lines;
     w->callback = callback;
     w->mouse = mouse_handler;
+    w->set_options = widget_default_set_options_callback;
     w->owner = NULL;
 
     /* Almost all widgets want to put the cursor in a suitable place */
@@ -157,24 +158,63 @@ init_widget (Widget * w, int y, int x, int lines, int cols,
 
 /* Default callback for widgets */
 cb_ret_t
-default_proc (widget_msg_t msg, int parm)
+widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
+    (void) w;
+    (void) sender;
     (void) parm;
+    (void) data;
 
     switch (msg)
     {
-    case WIDGET_INIT:
-    case WIDGET_FOCUS:
-    case WIDGET_UNFOCUS:
-    case WIDGET_DRAW:
-    case WIDGET_DESTROY:
-    case WIDGET_CURSOR:
-    case WIDGET_IDLE:
+    case MSG_INIT:
+    case MSG_FOCUS:
+    case MSG_UNFOCUS:
+    case MSG_DRAW:
+    case MSG_DESTROY:
+    case MSG_CURSOR:
+    case MSG_IDLE:
         return MSG_HANDLED;
 
     default:
         return MSG_NOT_HANDLED;
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Callback for applying new options to widget.
+ *
+ * @param w       widget
+ * @param options options set
+ * @param enable  TRUE if specified options should be added, FALSE if options should be removed
+ */
+void
+widget_default_set_options_callback (Widget *w, widget_options_t options, gboolean enable)
+{
+    if (enable)
+        w->options |= options;
+    else
+        w->options &= ~options;
+
+    if (w->owner != NULL && (options & W_DISABLED) != 0)
+        send_message (w, NULL, MSG_DRAW, 0, NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Apply new options to widget.
+ *
+ * @param w       widget
+ * @param options options set
+ * @param enable  TRUE if specified options should be added, FALSE if options should be removed
+ */
+void
+widget_set_options (Widget *w, widget_options_t options, gboolean enable)
+{
+    w->set_options (w, options, enable);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -186,7 +226,7 @@ widget_set_size (Widget * widget, int y, int x, int lines, int cols)
     widget->y = y;
     widget->cols = cols;
     widget->lines = lines;
-    send_message (widget, WIDGET_RESIZED, 0 /* unused */ );
+    send_message (widget, NULL, MSG_RESIZE, 0, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -194,7 +234,7 @@ widget_set_size (Widget * widget, int y, int x, int lines, int cols)
 void
 widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey)
 {
-    Dlg_head *h = w->owner;
+    WDialog *h = w->owner;
     int color;
 
     if ((w->options & W_DISABLED) != 0)

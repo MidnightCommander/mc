@@ -7,8 +7,8 @@
 
    Written by:
    Paul Sheer, 1996, 1997
-   Andrew Borodin <aborodin@vmail.ru> 2012
-   Ilia Maslakov <il.smind@gmail.com> 2012
+   Andrew Borodin <aborodin@vmail.ru>, 2012
+   Ilia Maslakov <il.smind@gmail.com>, 2012
 
    This file is part of the Midnight Commander.
 
@@ -105,15 +105,40 @@ int edit_confirm_save = 1;
 
 #define is_digit(x) ((x) >= '0' && (x) <= '9')
 
-#define MAIL_DLG_HEIGHT 12
-
 #define MAX_WORD_COMPLETIONS 100        /* in listbox */
 
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
 
+static unsigned long edit_save_mode_radio_id, edit_save_mode_input_id;
+
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
+edit_save_mode_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+{
+    switch (msg)
+    {
+    case MSG_ACTION:
+        if (sender != NULL && sender->id == edit_save_mode_radio_id)
+        {
+            Widget *ww;
+
+            ww = dlg_find_by_id (DIALOG (w), edit_save_mode_input_id);
+            widget_disable (ww, RADIO (sender)->sel != 2);
+            return MSG_HANDLED;
+        }
+
+        return MSG_NOT_HANDLED;
+
+    default:
+        return dlg_default_callback (w, sender, msg, parm, data);
+    }
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 /*  If 0 (quick save) then  a) create/truncate <filename> file,
@@ -420,13 +445,10 @@ edit_check_newline (WEdit * edit)
 static vfs_path_t *
 edit_get_save_file_as (WEdit * edit)
 {
-#define DLG_WIDTH 64
-#define DLG_HEIGHT 14
-
     static LineBreaks cur_lb = LB_ASIS;
-
-    char *filename = vfs_path_to_str (edit->filename_vpath);
+    char *filename;
     char *filename_res;
+    vfs_path_t *ret_vpath = NULL;
 
     const char *lb_names[LB_NAMES] = {
         N_("&Do not change"),
@@ -435,41 +457,42 @@ edit_get_save_file_as (WEdit * edit)
         N_("&Macintosh format (CR)")
     };
 
-    QuickWidget quick_widgets[] = {
-        QUICK_BUTTON (6, 10, DLG_HEIGHT - 3, DLG_HEIGHT, N_("&Cancel"), B_CANCEL, NULL),
-        QUICK_BUTTON (2, 10, DLG_HEIGHT - 3, DLG_HEIGHT, N_("&OK"), B_ENTER, NULL),
-        QUICK_RADIO (5, DLG_WIDTH, DLG_HEIGHT - 8, DLG_HEIGHT, LB_NAMES, lb_names, (int *) &cur_lb),
-        QUICK_LABEL (3, DLG_WIDTH, DLG_HEIGHT - 9, DLG_HEIGHT, N_("Change line breaks to:")),
-        QUICK_INPUT (3, DLG_WIDTH, DLG_HEIGHT - 11, DLG_HEIGHT, filename, DLG_WIDTH - 6, 0,
-                     "save-as", &filename_res),
-        QUICK_LABEL (3, DLG_WIDTH, DLG_HEIGHT - 12, DLG_HEIGHT, N_("Enter file name:")),
-        QUICK_END
-    };
+    filename = vfs_path_to_str (edit->filename_vpath);
 
-    QuickDialog Quick_options = {
-        DLG_WIDTH, DLG_HEIGHT, -1, -1,
-        N_("Save As"), "[Save File As]",
-        quick_widgets, NULL, NULL, FALSE
-    };
-
-    if (quick_dialog (&Quick_options) != B_CANCEL)
     {
-        char *fname;
-        vfs_path_t *ret_vpath;
+        quick_widget_t quick_widgets[] = {
+            /* *INDENT-OFF* */
+            QUICK_LABELED_INPUT (N_("Enter file name:"), input_label_above,  filename, 0, "save-as",
+                                 &filename_res, NULL),
+            QUICK_SEPARATOR (TRUE),
+            QUICK_LABEL (N_("Change line breaks to:"), NULL),
+            QUICK_RADIO (LB_NAMES, lb_names, (int *) &cur_lb, NULL),
+            QUICK_BUTTONS_OK_CANCEL,
+            QUICK_END
+            /* *INDENT-ON* */
+        };
 
-        edit->lb = cur_lb;
-        fname = tilde_expand (filename_res);
-        g_free (filename_res);
-        ret_vpath = vfs_path_from_str (fname);
-        g_free (fname);
-        return ret_vpath;
+        quick_dialog_t qdlg = {
+            -1, -1, 64,
+            N_("Save As"), "[Save File As]",
+            quick_widgets, NULL, NULL
+        };
+
+        if (quick_dialog (&qdlg) != B_CANCEL)
+        {
+            char *fname;
+
+            edit->lb = cur_lb;
+            fname = tilde_expand (filename_res);
+            g_free (filename_res);
+            ret_vpath = vfs_path_from_str (fname);
+            g_free (fname);
+        }
     }
+
     g_free (filename);
 
-    return NULL;
-
-#undef DLG_WIDTH
-#undef DLG_HEIGHT
+    return ret_vpath;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -512,9 +535,11 @@ edit_save_cmd (WEdit * edit)
  */
 
 static inline gboolean
-edit_load_file_from_filename (Dlg_head * h, const vfs_path_t * vpath)
+edit_load_file_from_filename (WDialog * h, const vfs_path_t * vpath)
 {
-    return edit_add_window (h, h->y + 1, h->x, h->lines - 2, h->cols, vpath, 0);
+    Widget *w = WIDGET (h);
+
+    return edit_add_window (h, w->y + 1, w->x, w->lines - 2, w->cols, vpath, 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1496,7 +1521,7 @@ edit_refresh_cmd (void)
  */
 
 void
-edit_syntax_onoff_cmd (Dlg_head * h)
+edit_syntax_onoff_cmd (WDialog * h)
 {
     option_syntax_highlighting = !option_syntax_highlighting;
     g_list_foreach (h->widgets, edit_syntax_onoff_cb, NULL);
@@ -1511,7 +1536,7 @@ edit_syntax_onoff_cmd (Dlg_head * h)
  */
 
 void
-edit_show_tabs_tws_cmd (Dlg_head * h)
+edit_show_tabs_tws_cmd (WDialog * h)
 {
     enable_show_tabs_tws = !enable_show_tabs_tws;
     g_list_foreach (h->widgets, edit_redraw_page_cb, NULL);
@@ -1526,7 +1551,7 @@ edit_show_tabs_tws_cmd (Dlg_head * h)
  */
 
 void
-edit_show_margin_cmd (Dlg_head * h)
+edit_show_margin_cmd (WDialog * h)
 {
     show_right_margin = !show_right_margin;
     g_list_foreach (h->widgets, edit_redraw_page_cb, NULL);
@@ -1541,7 +1566,7 @@ edit_show_margin_cmd (Dlg_head * h)
  */
 
 void
-edit_show_numbers_cmd (Dlg_head * h)
+edit_show_numbers_cmd (WDialog * h)
 {
     option_line_state = !option_line_state;
     option_line_state_width = option_line_state ? LINE_STATE_WIDTH : 0;
@@ -1554,10 +1579,6 @@ edit_show_numbers_cmd (Dlg_head * h)
 void
 edit_save_mode_cmd (void)
 {
-    /* diaog sizes */
-    const int DLG_X = 38;
-    const int DLG_Y = 13;
-
     char *str_result;
 
     const char *str[] = {
@@ -1566,64 +1587,41 @@ edit_save_mode_cmd (void)
         N_("&Do backups with following extension:")
     };
 
-    QuickWidget widgets[] = {
-        /* 0 */
-        QUICK_BUTTON (18, DLG_X, DLG_Y - 3, DLG_Y, N_("&Cancel"), B_CANCEL, NULL),
-        /* 1 */
-        QUICK_BUTTON (6, DLG_X, DLG_Y - 3, DLG_Y, N_("&OK"), B_ENTER, NULL),
-        /* 2 */
-        QUICK_CHECKBOX (4, DLG_X, 8, DLG_Y, N_("Check &POSIX new line"), &option_check_nl_at_eof),
-        /* 3 */
-        QUICK_INPUT (8, DLG_X, 6, DLG_Y, option_backup_ext, 9, 0, "edit-backup-ext", &str_result),
-        /* 4 */
-        QUICK_RADIO (4, DLG_X, 3, DLG_Y, 3, str, &option_save_mode),
-        QUICK_END
-    };
-
-    QuickDialog dialog = {
-        DLG_X, DLG_Y, -1, -1, N_("Edit Save Mode"),
-        "[Edit Save Mode]", widgets, NULL, NULL, FALSE
-    };
-
-    size_t i;
-    size_t maxlen = 0;
-    size_t w0, w1, b_len, w3;
-
 #ifdef HAVE_ASSERT_H
     assert (option_backup_ext != NULL);
 #endif
 
-    /* OK/Cancel buttons */
-    w0 = str_term_width1 (_(widgets[0].u.button.text)) + 3;
-    w1 = str_term_width1 (_(widgets[1].u.button.text)) + 5;     /* default button */
-    b_len = w0 + w1 + 3;
-
-    maxlen = max (b_len, (size_t) str_term_width1 (_(dialog.title)) + 2);
-
-    w3 = 0;
-    for (i = 0; i < 3; i++)
-    {
 #ifdef ENABLE_NLS
+    size_t i;
+
+    for (i = 0; i < 3; i++)
         str[i] = _(str[i]);
 #endif
-        w3 = max (w3, (size_t) str_term_width1 (str[i]));
-    }
 
-    maxlen = max (maxlen, w3 + 4);
-
-    dialog.xlen = min ((size_t) COLS, maxlen + 8);
-
-    widgets[3].u.input.len = w3;
-    widgets[1].relative_x = (dialog.xlen - b_len) / 2;
-    widgets[0].relative_x = widgets[1].relative_x + w0 + 2;
-
-    for (i = 0; i < sizeof (widgets) / sizeof (widgets[0]); i++)
-        widgets[i].x_divisions = dialog.xlen;
-
-    if (quick_dialog (&dialog) != B_CANCEL)
     {
-        g_free (option_backup_ext);
-        option_backup_ext = str_result;
+        quick_widget_t quick_widgets[] = {
+            /* *INDENT-OFF* */
+            QUICK_RADIO (3, str, &option_save_mode, &edit_save_mode_radio_id),
+            QUICK_INPUT (option_backup_ext, 0, "edit-backup-ext", &str_result,
+                         &edit_save_mode_input_id),
+            QUICK_SEPARATOR (TRUE),
+            QUICK_CHECKBOX (N_("Check &POSIX new line"), &option_check_nl_at_eof, NULL),
+            QUICK_BUTTONS_OK_CANCEL,
+            QUICK_END
+            /* *INDENT-ON* */
+        };
+
+        quick_dialog_t qdlg = {
+            -1, -1, 38,
+            N_("Edit Save Mode"), "[Edit Save Mode]",
+            quick_widgets, edit_save_mode_callback, NULL
+        };
+
+        if (quick_dialog (&qdlg) != B_CANCEL)
+        {
+            g_free (option_backup_ext);
+            option_backup_ext = str_result;
+        }
     }
 }
 
@@ -2059,7 +2057,7 @@ edit_save_confirm_cmd (WEdit * edit)
   */
 
 gboolean
-edit_load_cmd (Dlg_head * h)
+edit_load_cmd (WDialog * h)
 {
     char *exp;
     gboolean ret = TRUE;        /* possible cancel */
@@ -2089,7 +2087,7 @@ edit_load_cmd (Dlg_head * h)
   */
 
 gboolean
-edit_load_syntax_file (Dlg_head * h)
+edit_load_syntax_file (WDialog * h)
 {
     vfs_path_t *extdir_vpath;
     int dir = 0;
@@ -2134,7 +2132,7 @@ edit_load_syntax_file (Dlg_head * h)
   */
 
 gboolean
-edit_load_menu_file (Dlg_head * h)
+edit_load_menu_file (WDialog * h)
 {
     vfs_path_t *buffer_vpath;
     vfs_path_t *menufile_vpath;
@@ -2204,14 +2202,14 @@ edit_close_cmd (WEdit * edit)
 
     if (ret)
     {
-        Dlg_head *h = ((Widget *) edit)->owner;
+        WDialog *h = WIDGET (edit)->owner;
 
         if (edit->locked != 0)
             unlock_file (edit->filename_vpath);
 
         del_widget (edit);
 
-        if (edit_widget_is_editor ((Widget *) h->current->data))
+        if (edit_widget_is_editor (WIDGET (h->current->data)))
             edit = (WEdit *) h->current->data;
         else
         {
@@ -2665,7 +2663,7 @@ edit_replace_cmd (WEdit * edit, int again)
                 long l;
                 int prompt;
 
-                l = (long) (edit->curs_row - edit->widget.lines / 3);
+                l = edit->curs_row - WIDGET (edit)->lines / 3;
                 if (l > 0)
                     edit_scroll_downward (edit, l);
                 if (l < 0)
@@ -3070,7 +3068,7 @@ edit_goto_cmd (WEdit * edit)
     line = l;
     if (l < 0)
         l = edit->total_lines + l + 2;
-    edit_move_display (edit, l - edit->widget.lines / 2 - 1);
+    edit_move_display (edit, l - WIDGET (edit)->lines / 2 - 1);
     edit_move_to_line (edit, l - 1);
     edit->force |= REDRAW_COMPLETELY;
     g_free (f);
@@ -3295,30 +3293,31 @@ edit_mail_dialog (WEdit * edit)
     static char *mail_subject_last = 0;
     static char *mail_to_last = 0;
 
-    QuickWidget quick_widgets[] = {
-        /* 0 */ QUICK_BUTTON (6, 10, 9, MAIL_DLG_HEIGHT, N_("&Cancel"), B_CANCEL, NULL),
-        /* 1 */ QUICK_BUTTON (2, 10, 9, MAIL_DLG_HEIGHT, N_("&OK"), B_ENTER, NULL),
-        /* 2 */ QUICK_INPUT (3, 50, 8, MAIL_DLG_HEIGHT, "", 44, 0, "mail-dlg-input", &tmail_cc),
-        /* 3 */ QUICK_LABEL (3, 50, 7, MAIL_DLG_HEIGHT, N_("Copies to")),
-        /* 4 */ QUICK_INPUT (3, 50, 6, MAIL_DLG_HEIGHT, "", 44, 0, "mail-dlg-input-2",
-                             &tmail_subject),
-        /* 5 */ QUICK_LABEL (3, 50, 5, MAIL_DLG_HEIGHT, N_("Subject")),
-        /* 6 */ QUICK_INPUT (3, 50, 4, MAIL_DLG_HEIGHT, "", 44, 0, "mail-dlg-input-3", &tmail_to),
-        /* 7 */ QUICK_LABEL (3, 50, 3, MAIL_DLG_HEIGHT, N_("To")),
-        /* 8 */ QUICK_LABEL (3, 50, 2, MAIL_DLG_HEIGHT, N_("mail -s <subject> -c <cc> <to>")),
+
+    quick_widget_t quick_widgets[] = {
+        /* *INDENT-OFF* */
+        QUICK_LABEL (N_("mail -s <subject> -c <cc> <to>"), NULL),
+        QUICK_LABELED_INPUT (N_("To"), input_label_above,
+                             mail_to_last != NULL ? mail_to_last : "", 0,
+                             "mail-dlg-input-3", &tmail_to, NULL),
+        QUICK_LABELED_INPUT (N_("Subject"), input_label_above,
+                              mail_subject_last != NULL ? mail_subject_last : "", 0,
+                             "mail-dlg-input-2", &tmail_subject, NULL),
+        QUICK_LABELED_INPUT (N_("Copies to"), input_label_above,
+                             mail_cc_last != NULL ? mail_cc_last  : "", 0,
+                             "mail-dlg-input", &tmail_cc, NULL),
+        QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
+        /* *INDENT-ON* */
     };
 
-    QuickDialog Quick_input = {
-        50, MAIL_DLG_HEIGHT, -1, -1, N_("Mail"),
-        "[Input Line Keys]", quick_widgets, NULL, NULL, FALSE
+    quick_dialog_t qdlg = {
+        -1, -1, 50,
+        N_("Mail"), "[Input Line Keys]",
+        quick_widgets, NULL, NULL
     };
 
-    quick_widgets[2].u.input.text = mail_cc_last ? mail_cc_last : "";
-    quick_widgets[4].u.input.text = mail_subject_last ? mail_subject_last : "";
-    quick_widgets[6].u.input.text = mail_to_last ? mail_to_last : "";
-
-    if (quick_dialog (&Quick_input) != B_CANCEL)
+    if (quick_dialog (&qdlg) != B_CANCEL)
     {
         g_free (mail_cc_last);
         g_free (mail_subject_last);
@@ -3330,12 +3329,12 @@ edit_mail_dialog (WEdit * edit)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
 
 /*******************/
 /* Word Completion */
 /*******************/
 
-/* --------------------------------------------------------------------------------------------- */
 /**
  * Complete current word using regular expression search
  * backwards beginning at the current cursor position.
@@ -3407,7 +3406,7 @@ edit_select_codepage_cmd (WEdit * edit)
         edit_set_codeset (edit);
 
     edit->force = REDRAW_PAGE;
-    send_message ((Widget *) edit, WIDGET_DRAW, 0);
+    send_message (edit, NULL, MSG_DRAW, 0, NULL);
 }
 #endif
 

@@ -208,10 +208,6 @@ set_panel_filter (WPanel * p)
 static void
 select_unselect_cmd (const char *title, const char *history_name, gboolean do_select)
 {
-    /* dialog sizes */
-    const int DX = 50;
-    const int DY = 7;
-
     int files_only = (select_flags & SELECT_FILES_ONLY) != 0;
     int case_sens = (select_flags & SELECT_MATCH_CASE) != 0;
     int shell_patterns = (select_flags & SELECT_SHELL_PATTERNS) != 0;
@@ -220,29 +216,34 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
     mc_search_t *search;
     int i;
 
-    QuickWidget quick_widgets[] = {
-        QUICK_CHECKBOX (3, DX, DY - 3, DY, N_("&Using shell patterns"), &shell_patterns),
-        QUICK_CHECKBOX (DX / 2 + 1, DX, DY - 4, DY, N_("&Case sensitive"), &case_sens),
-        QUICK_CHECKBOX (3, DX, DY - 4, DY, N_("&Files only"), &files_only),
-        QUICK_INPUT (3, DX, DY - 5, DY, INPUT_LAST_TEXT, DX - 6, 0, history_name, &reg_exp),
+    quick_widget_t quick_widgets[] = {
+        /* *INDENT-OFF* */
+        QUICK_INPUT (INPUT_LAST_TEXT, 0, history_name, &reg_exp, NULL),
+        QUICK_START_COLUMNS,
+            QUICK_CHECKBOX (N_("&Files only"), &files_only, NULL),
+            QUICK_CHECKBOX (N_("&Using shell patterns"), &shell_patterns, NULL),
+        QUICK_NEXT_COLUMN,
+            QUICK_CHECKBOX (N_("&Case sensitive"), &case_sens, NULL),
+        QUICK_STOP_COLUMNS,
         QUICK_END
+        /* *INDENT-ON* */
     };
 
-    QuickDialog quick_dlg = {
-        DX, DY, -1, -1, title,
-        "[Select/Unselect Files]", quick_widgets, NULL, NULL, FALSE
+    quick_dialog_t qdlg = {
+        -1, -1, 50,
+        title, "[Select/Unselect Files]",
+        quick_widgets, NULL, NULL
     };
 
-    if (quick_dialog (&quick_dlg) == B_CANCEL)
+    if (quick_dialog (&qdlg) == B_CANCEL)
         return;
 
-    if (reg_exp == NULL)
-        return;
-    if (!*reg_exp)
+    if (reg_exp == NULL || *reg_exp == '\0')
     {
         g_free (reg_exp);
         return;
     }
+
     search = mc_search_new (reg_exp, -1);
     search->search_type = (shell_patterns != 0) ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
     search->is_entire_line = TRUE;
@@ -1579,7 +1580,7 @@ single_dirsize_cmd (void)
     }
 
     if (panels_options.mark_moves_down)
-        send_message ((Widget *) panel, WIDGET_COMMAND, CK_Down);
+        send_message (panel, NULL, MSG_ACTION, CK_Down, NULL);
 
     recalculate_panel_summary (panel);
 
@@ -1698,8 +1699,7 @@ change_listing_cmd (void)
     if (get_display_type (MENU_PANEL_IDX) == view_listing)
         p = MENU_PANEL_IDX == 0 ? left_panel : right_panel;
 
-    list_type = display_box (p, &user, &status, &use_msformat, MENU_PANEL_IDX);
-
+    list_type = panel_listing_box (p, &user, &status, &use_msformat, MENU_PANEL_IDX);
     if (list_type != -1)
     {
         switch_to_listing (MENU_PANEL_IDX);

@@ -193,7 +193,8 @@ status_string (WEdit * edit, char *s, int w)
 static inline void
 edit_status_fullscreen (WEdit * edit, int color)
 {
-    const int w = edit->widget.owner->cols;
+    Widget *h = WIDGET (WIDGET (edit)->owner);
+    const int w = h->cols;
     const size_t status_size = w + 1;
     char *const status = g_malloc (status_size);
     int status_len;
@@ -222,7 +223,7 @@ edit_status_fullscreen (WEdit * edit, int color)
         fname = str_trunc (fname, fname_len);
     }
 
-    dlg_move (edit->widget.owner, 0, 0);
+    widget_move (h, 0, 0);
     tty_setcolor (color);
     printwstr (fname, fname_len + gap);
     printwstr (status, w - (fname_len + gap));
@@ -233,7 +234,7 @@ edit_status_fullscreen (WEdit * edit, int color)
 
         if (edit->total_lines + 1 != 0)
             percent = (edit->curs_line + 1) * 100 / (edit->total_lines + 1);
-        dlg_move (edit->widget.owner, 0, w - 6 - 6);
+        widget_move (h, 0, w - 6 - 6);
         tty_printf (" %3d%%", percent);
     }
 
@@ -250,8 +251,9 @@ edit_status_fullscreen (WEdit * edit, int color)
 static inline void
 edit_status_window (WEdit * edit)
 {
+    Widget *w = WIDGET (edit);
     int y, x;
-    int cols = edit->widget.cols;
+    int cols = w->cols;
 
     tty_setcolor (STATUSBAR_COLOR);
 
@@ -271,12 +273,12 @@ edit_status_window (WEdit * edit)
 #endif
 
         edit_move (2, 0);
-        tty_printf ("[%s]", str_term_trim (fname, edit->widget.cols - 8 - 6));
+        tty_printf ("[%s]", str_term_trim (fname, w->cols - 8 - 6));
         g_free (full_fname);
     }
 
     tty_getyx (&y, &x);
-    x -= edit->widget.x;
+    x -= w->x;
     x += 4;
     if (x + 6 <= cols - 2 - 6)
     {
@@ -289,7 +291,7 @@ edit_status_window (WEdit * edit)
 
     if (cols > 30)
     {
-        edit_move (2, edit->widget.lines - 1);
+        edit_move (2, w->lines - 1);
         tty_printf ("%3ld %5ld/%ld %6ld/%ld",
                     edit->curs_col + edit->over_col,
                     edit->curs_line + 1, edit->total_lines + 1, edit->curs1, edit->last_byte);
@@ -302,7 +304,7 @@ edit_status_window (WEdit * edit)
      */
     if (cols > 46)
     {
-        edit_move (32, edit->widget.lines - 1);
+        edit_move (32, w->lines - 1);
         if (edit->curs1 >= edit->last_byte)
             tty_print_string ("[<EOF>       ]");
 #ifdef HAVE_CHARSET
@@ -365,14 +367,14 @@ edit_draw_frame (const WEdit * edit, int color, gboolean active)
 static inline void
 edit_draw_window_icons (const WEdit * edit, int color)
 {
-    const Widget *w = (const Widget *) edit;
+    const Widget *w = WIDGET (edit);
     char tmp[17];
 
     tty_setcolor (color);
     if (edit->fullscreen)
-        dlg_move (w->owner, 0, w->owner->cols - 6);
+        widget_move (w->owner, 0, WIDGET (w->owner)->cols - 6);
     else
-        widget_move (w, 0, edit->widget.cols - 8);
+        widget_move (w, 0, w->cols - 8);
     g_snprintf (tmp, sizeof (tmp), "[%s][%s]", edit_window_state_char, edit_window_close_char);
     tty_print_string (tmp);
 }
@@ -383,6 +385,8 @@ static inline void
 print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
                  long end_col, struct line_s line[], char *status, int bookmarked)
 {
+    Widget *w = WIDGET (edit);
+
     struct line_s *p;
 
     int x = start_col_real;
@@ -406,25 +410,25 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
     len = end_col + 1 - start_col;
     wrap_start = option_word_wrap_line_length + edit->start_col;
 
-    if (len > 0 && edit->widget.y + y >= 0)
+    if (len > 0 && w->y + y >= 0)
     {
         if (!show_right_margin || wrap_start > end_col)
-            tty_draw_hline (edit->widget.y + y, edit->widget.x + x1, ' ', len);
+            tty_draw_hline (w->y + y, w->x + x1, ' ', len);
         else if (wrap_start < 0)
         {
             tty_setcolor (EDITOR_RIGHT_MARGIN_COLOR);
-            tty_draw_hline (edit->widget.y + y, edit->widget.x + x1, ' ', len);
+            tty_draw_hline (w->y + y, w->x + x1, ' ', len);
         }
         else
         {
             if (wrap_start > 0)
-                tty_draw_hline (edit->widget.y + y, edit->widget.x + x1, ' ', wrap_start);
+                tty_draw_hline (w->y + y, w->x + x1, ' ', wrap_start);
 
             len -= wrap_start;
             if (len > 0)
             {
                 tty_setcolor (EDITOR_RIGHT_MARGIN_COLOR);
-                tty_draw_hline (edit->widget.y + y, edit->widget.x + x1 + wrap_start, ' ', len);
+                tty_draw_hline (w->y + y, w->x + x1 + wrap_start, ' ', len);
             }
         }
     }
@@ -499,6 +503,8 @@ print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
 static void
 edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_col)
 {
+    Widget *w = WIDGET (edit);
+
     struct line_s line[MAX_LINE_LEN];
     struct line_s *p = line;
 
@@ -513,7 +519,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
     int book_mark = 0;
     char line_stat[LINE_STATE_WIDTH + 1] = "\0";
 
-    if (row > edit->widget.lines - 1 - EDIT_TEXT_VERTICAL_OFFSET - 2 * (edit->fullscreen ? 0 : 1))
+    if (row > w->lines - 1 - EDIT_TEXT_VERTICAL_OFFSET - 2 * (edit->fullscreen ? 0 : 1))
         return;
 
     if (book_mark_query_color (edit, edit->start_line + row, BOOK_MARK_COLOR))
@@ -529,10 +535,8 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
     end_col -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
     if (!edit->fullscreen)
     {
-        const Widget *w = (const Widget *) edit;
-
         end_col--;
-        if (w->x + w->cols <= w->owner->cols)
+        if (w->x + w->cols <= WIDGET (w->owner)->cols)
             end_col--;
     }
 
@@ -841,8 +845,8 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
     static long prev_curs_row = 0;
     static off_t prev_curs = 0;
 
-    Widget *w = (Widget *) edit;
-    Dlg_head *h = w->owner;
+    Widget *w = WIDGET (edit);
+    Widget *wh = WIDGET (w->owner);
 
     long row = 0, curs_row;
     int force = edit->force;
@@ -854,24 +858,24 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 
     /* draw only visible region */
 
-    last_line = h->y + h->lines - 1;
+    last_line = wh->y + wh->lines - 1;
 
     y1 = w->y;
     if (y1 > last_line - 1 /* buttonbar */ )
         return;
 
-    last_column = h->x + h->cols - 1;
+    last_column = wh->x + wh->cols - 1;
 
     x1 = w->x;
     if (x1 > last_column)
         return;
 
     y2 = w->y + w->lines - 1;
-    if (y2 < h->y + 1 /* menubar */ )
+    if (y2 < wh->y + 1 /* menubar */ )
         return;
 
     x2 = w->x + w->cols - 1;
-    if (x2 < h->x)
+    if (x2 < wh->x)
         return;
 
     if ((force & REDRAW_IN_BOUNDS) == 0)
@@ -881,17 +885,17 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
 
         if (y2 <= last_line - 1 /* buttonbar */ )
             end_row = w->lines - 1;
-        else if (y1 >= h->y + 1 /* menubar */ )
-            end_row = h->lines - 1 - y1 - 1;
+        else if (y1 >= wh->y + 1 /* menubar */ )
+            end_row = wh->lines - 1 - y1 - 1;
         else
-            end_row = start_row + h->lines - 1 - 1;
+            end_row = start_row + wh->lines - 1 - 1;
 
         if (x2 <= last_column)
             end_column = w->cols - 1;
-        else if (x1 >= h->x)
-            end_column = h->cols - 1 - x1;
+        else if (x1 >= wh->x)
+            end_column = wh->cols - 1 - x1;
         else
-            end_column = start_column + h->cols - 1;
+            end_column = start_column + wh->cols - 1;
     }
 
     /*
@@ -967,7 +971,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
                 }
             }
 
-            if ((force & REDRAW_LINE_BELOW) != 0 && row < edit->widget.lines - 1)
+            if ((force & REDRAW_LINE_BELOW) != 0 && row < w->lines - 1)
             {
                 row = curs_row + 1;
                 b = edit_bol (edit, edit->curs1);
@@ -1049,22 +1053,24 @@ edit_status (WEdit * edit, gboolean active)
 void
 edit_scroll_screen_over_cursor (WEdit * edit)
 {
+    Widget *w = WIDGET (edit);
+
     long p;
     long outby;
     int b_extreme, t_extreme, l_extreme, r_extreme;
 
-    if (edit->widget.lines <= 0 || edit->widget.cols <= 0)
+    if (w->lines <= 0 || w->cols <= 0)
         return;
 
-    edit->widget.lines -= EDIT_TEXT_VERTICAL_OFFSET;
-    edit->widget.cols -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
+    w->lines -= EDIT_TEXT_VERTICAL_OFFSET;
+    w->cols -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
 
     if (!edit->fullscreen)
     {
-        edit->widget.x++;
-        edit->widget.cols -= 2;
-        edit->widget.y++;
-        edit->widget.lines -= 2;
+        w->x++;
+        w->cols -= 2;
+        w->y++;
+        w->lines -= 2;
     }
 
     r_extreme = EDIT_RIGHT_EXTREME;
@@ -1073,39 +1079,39 @@ edit_scroll_screen_over_cursor (WEdit * edit)
     t_extreme = EDIT_TOP_EXTREME;
     if (edit->found_len != 0)
     {
-        b_extreme = max (edit->widget.lines / 4, b_extreme);
-        t_extreme = max (edit->widget.lines / 4, t_extreme);
+        b_extreme = max (w->lines / 4, b_extreme);
+        t_extreme = max (w->lines / 4, t_extreme);
     }
-    if (b_extreme + t_extreme + 1 > edit->widget.lines)
+    if (b_extreme + t_extreme + 1 > w->lines)
     {
         int n;
 
         n = b_extreme + t_extreme;
         if (n == 0)
             n = 1;
-        b_extreme = (b_extreme * (edit->widget.lines - 1)) / n;
-        t_extreme = (t_extreme * (edit->widget.lines - 1)) / n;
+        b_extreme = (b_extreme * (w->lines - 1)) / n;
+        t_extreme = (t_extreme * (w->lines - 1)) / n;
     }
-    if (l_extreme + r_extreme + 1 > edit->widget.cols)
+    if (l_extreme + r_extreme + 1 > w->cols)
     {
         int n;
 
         n = l_extreme + t_extreme;
         if (n == 0)
             n = 1;
-        l_extreme = (l_extreme * (edit->widget.cols - 1)) / n;
-        r_extreme = (r_extreme * (edit->widget.cols - 1)) / n;
+        l_extreme = (l_extreme * (w->cols - 1)) / n;
+        r_extreme = (r_extreme * (w->cols - 1)) / n;
     }
     p = edit_get_col (edit) + edit->over_col;
     edit_update_curs_row (edit);
-    outby = p + edit->start_col - edit->widget.cols + 1 + (r_extreme + edit->found_len);
+    outby = p + edit->start_col - w->cols + 1 + (r_extreme + edit->found_len);
     if (outby > 0)
         edit_scroll_right (edit, outby);
     outby = l_extreme - p - edit->start_col;
     if (outby > 0)
         edit_scroll_left (edit, outby);
     p = edit->curs_row;
-    outby = p - edit->widget.lines + 1 + b_extreme;
+    outby = p - w->lines + 1 + b_extreme;
     if (outby > 0)
         edit_scroll_downward (edit, outby);
     outby = t_extreme - p;
@@ -1113,14 +1119,14 @@ edit_scroll_screen_over_cursor (WEdit * edit)
         edit_scroll_upward (edit, outby);
     edit_update_curs_row (edit);
 
-    edit->widget.lines += EDIT_TEXT_VERTICAL_OFFSET;
-    edit->widget.cols += EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
+    w->lines += EDIT_TEXT_VERTICAL_OFFSET;
+    w->cols += EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
     if (!edit->fullscreen)
     {
-        edit->widget.x--;
-        edit->widget.cols += 2;
-        edit->widget.y--;
-        edit->widget.lines += 2;
+        w->x--;
+        w->cols += 2;
+        w->y--;
+        w->lines += 2;
     }
 }
 

@@ -10,6 +10,8 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+#define INPUT(x) ((WInput *)(x))
+
 /* For history load-save functions */
 #define INPUT_LAST_TEXT ((char *) 2)
 
@@ -68,6 +70,7 @@ typedef struct
     input_complete_t completion_flags;
     char charbuf[MB_LEN_MAX];   /* buffer for multibytes characters */
     size_t charpoint;           /* point to end of mulibyte sequence in charbuf */
+    WLabel *label;              /* label associated with this input line*/
 } WInput;
 
 /*** global variables defined in .c file *********************************************************/
@@ -82,7 +85,7 @@ WInput *input_new (int y, int x, const int *input_colors,
                    int len, const char *text, const char *histname,
                    input_complete_t completion_flags);
 /* callbac is public; needed for command line */
-cb_ret_t input_callback (Widget * w, widget_msg_t msg, int parm);
+cb_ret_t input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data);
 const int *input_get_default_colors (void);
 void input_set_origin (WInput * i, int x, int field_width);
 cb_ret_t input_handle_char (WInput * in, int key);

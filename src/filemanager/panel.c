@@ -143,7 +143,7 @@ panel_field_t panel_fields[] = {
      /* TRANSLATORS: one single character to represent 'extension' sort mode  */
      /* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
      N_("sort|e"),
-     N_("&Extension"), TRUE, FALSE,
+     N_("E&xtension"), TRUE, FALSE,
      string_file_name,          /* TODO: string_file_ext */
      (sortfn *) sort_ext
     }
@@ -322,7 +322,7 @@ extern int saving_setup;
 #define STATUS          5
 
 /* This macro extracts the number of available lines in a panel */
-#define llines(p) (p->widget.lines - 3 - (panels_options.show_mini_info ? 2 : 0))
+#define llines(p) (WIDGET (p)->lines - 3 - (panels_options.show_mini_info ? 2 : 0))
 
 /*** file scope type declarations ****************************************************************/
 
@@ -884,6 +884,8 @@ format_file (char *dest, int limit, WPanel * panel, int file_index, int width, i
 static void
 repaint_file (WPanel * panel, int file_index, int mv, int attr, int isstatus)
 {
+    Widget *w = WIDGET (panel);
+
     int second_column = 0;
     int width;
     int offset = 0;
@@ -893,7 +895,7 @@ repaint_file (WPanel * panel, int file_index, int mv, int attr, int isstatus)
     gboolean panel_is_split = !isstatus && panel->split;
     int fln = 0;
 
-    width = panel->widget.cols - 2;
+    width = w->cols - 2;
 
     if (panel_is_split)
     {
@@ -903,8 +905,7 @@ repaint_file (WPanel * panel, int file_index, int mv, int attr, int isstatus)
         if (second_column != 0)
         {
             offset = 1 + width;
-            /*width = (panel->widget.cols-2) - (panel->widget.cols-2)/2 - 1; */
-            width = panel->widget.cols - offset - 2;
+            width = w->cols - offset - 2;
         }
     }
 
@@ -922,7 +923,7 @@ repaint_file (WPanel * panel, int file_index, int mv, int attr, int isstatus)
             ypos = pos;
 
         ypos += 2;
-        widget_move (&panel->widget, ypos, offset + 1);
+        widget_move (w, ypos, offset + 1);
     }
 
     ret_frm = format_file (buffer, sizeof (buffer), panel, file_index, width, attr, isstatus, &fln);
@@ -951,13 +952,13 @@ repaint_file (WPanel * panel, int file_index, int mv, int attr, int isstatus)
                 width = fln;
             }
         }
-        widget_move (&panel->widget, ypos, offset);
+        widget_move (w, ypos, offset);
         tty_setcolor (NORMAL_COLOR);
         tty_print_string (panel_filename_scroll_left_char);
 
         if ((ret_frm & FILENAME_SCROLL_RIGHT) != 0)
         {
-            widget_move (&panel->widget, ypos, offset + 1 + width);
+            widget_move (w, ypos, offset + 1 + width);
             tty_setcolor (NORMAL_COLOR);
             tty_print_string (panel_filename_scroll_right_char);
         }
@@ -969,16 +970,18 @@ repaint_file (WPanel * panel, int file_index, int mv, int attr, int isstatus)
 static void
 display_mini_info (WPanel * panel)
 {
+    Widget *w = WIDGET (panel);
+
     if (!panels_options.show_mini_info)
         return;
 
-    widget_move (&panel->widget, llines (panel) + 3, 1);
+    widget_move (w, llines (panel) + 3, 1);
 
     if (panel->searching)
     {
         tty_setcolor (INPUT_COLOR);
         tty_print_char ('/');
-        tty_print_string (str_fit_to_term (panel->search_buffer, panel->widget.cols - 3, J_LEFT));
+        tty_print_string (str_fit_to_term (panel->search_buffer, w->cols - 3, J_LEFT));
         return;
     }
 
@@ -999,11 +1002,10 @@ display_mini_info (WPanel * panel)
         {
             link_target[len] = 0;
             tty_print_string ("-> ");
-            tty_print_string (str_fit_to_term (link_target, panel->widget.cols - 5, J_LEFT_FIT));
+            tty_print_string (str_fit_to_term (link_target, w->cols - 5, J_LEFT_FIT));
         }
         else
-            tty_print_string (str_fit_to_term (_("<readlink failed>"),
-                                               panel->widget.cols - 2, J_LEFT));
+            tty_print_string (str_fit_to_term (_("<readlink failed>"), w->cols - 2, J_LEFT));
     }
     else if (strcmp (panel->dir.list[panel->selected].fname, "..") == 0)
     {
@@ -1011,7 +1013,7 @@ display_mini_info (WPanel * panel)
          * while loading directory (do_load_dir() and do_reload_dir()),
          * the actual stat info about ".." directory isn't got;
          * so just don't display incorrect info about ".." directory */
-        tty_print_string (str_fit_to_term (_("UP--DIR"), panel->widget.cols - 2, J_LEFT));
+        tty_print_string (str_fit_to_term (_("UP--DIR"), w->cols - 2, J_LEFT));
     }
     else
         /* Default behavior */
@@ -1050,6 +1052,8 @@ paint_dir (WPanel * panel)
 static void
 display_total_marked_size (WPanel * panel, int y, int x, gboolean size_only)
 {
+    Widget *w = WIDGET (panel);
+
     char buffer[BUF_SMALL], b_bytes[BUF_SMALL], *buf;
     int cols;
 
@@ -1057,7 +1061,7 @@ display_total_marked_size (WPanel * panel, int y, int x, gboolean size_only)
         return;
 
     buf = size_only ? b_bytes : buffer;
-    cols = panel->widget.cols - 2;
+    cols = w->cols - 2;
 
     /*
      * This is a trick to use two ngettext() calls in one sentence.
@@ -1076,13 +1080,13 @@ display_total_marked_size (WPanel * panel, int y, int x, gboolean size_only)
 
     if (x < 0)
         /* center in panel */
-        x = (panel->widget.cols - str_term_width1 (buf)) / 2 - 1;
+        x = (w->cols - str_term_width1 (buf)) / 2 - 1;
 
     /*
-     * y == llines (panel) + 2      for mini_info_separator
-     * y == panel->widget.lines - 1 for panel bottom frame
+     * y == llines (panel) + 2  for mini_info_separator
+     * y == w->lines - 1        for panel bottom frame
      */
-    widget_move (&panel->widget, y, x);
+    widget_move (w, y, x);
     tty_setcolor (MARKED_COLOR);
     tty_printf (" %s ", buf);
 }
@@ -1094,11 +1098,11 @@ mini_info_separator (WPanel * panel)
 {
     if (panels_options.show_mini_info)
     {
+        Widget *w = WIDGET (panel);
         const int y = llines (panel) + 2;
 
         tty_setcolor (NORMAL_COLOR);
-        tty_draw_hline (panel->widget.y + y, panel->widget.x + 1,
-                        ACS_HLINE, panel->widget.cols - 2);
+        tty_draw_hline (w->y + y, w->x + 1, ACS_HLINE, w->cols - 2);
         /* Status displays total marked size.
          * Centered in panel, full format. */
         display_total_marked_size (panel, y, -1, FALSE);
@@ -1139,7 +1143,9 @@ show_free_space (WPanel * panel)
 
     if (myfs_stats.avail != 0 || myfs_stats.total != 0)
     {
+        Widget *w = WIDGET (panel);
         char buffer1[6], buffer2[6], tmp[BUF_SMALL];
+
         size_trunc_len (buffer1, sizeof (buffer1) - 1, myfs_stats.avail, 1,
                         panels_options.kilobyte_si);
         size_trunc_len (buffer2, sizeof (buffer2) - 1, myfs_stats.total, 1,
@@ -1147,8 +1153,7 @@ show_free_space (WPanel * panel)
         g_snprintf (tmp, sizeof (tmp), " %s/%s (%d%%) ", buffer1, buffer2,
                     myfs_stats.total == 0 ? 0 :
                     (int) (100 * (long double) myfs_stats.avail / myfs_stats.total));
-        widget_move (&panel->widget, panel->widget.lines - 1,
-                     panel->widget.cols - 2 - (int) strlen (tmp));
+        widget_move (w, w->lines - 1, w->cols - 2 - (int) strlen (tmp));
         tty_setcolor (NORMAL_COLOR);
         tty_print_string (tmp);
     }
@@ -1242,32 +1247,34 @@ panel_get_encoding_info_str (WPanel * panel)
 static void
 show_dir (WPanel * panel)
 {
+    Widget *w = WIDGET (panel);
+
     gchar *tmp;
+
     set_colors (panel);
-    draw_box (panel->widget.owner,
-              panel->widget.y, panel->widget.x, panel->widget.lines, panel->widget.cols, FALSE);
+    draw_box (w->owner, w->y, w->x, w->lines, w->cols, FALSE);
 
     if (panels_options.show_mini_info)
     {
-        widget_move (&panel->widget, llines (panel) + 2, 0);
+        widget_move (w, llines (panel) + 2, 0);
         tty_print_alt_char (ACS_LTEE, FALSE);
-        widget_move (&panel->widget, llines (panel) + 2, panel->widget.cols - 1);
+        widget_move (w, llines (panel) + 2, w->cols - 1);
         tty_print_alt_char (ACS_RTEE, FALSE);
     }
 
-    widget_move (&panel->widget, 0, 1);
+    widget_move (w, 0, 1);
     tty_print_string (panel_history_prev_item_sign);
 
     tmp = panels_options.show_dot_files ? panel_hiddenfiles_sign_show : panel_hiddenfiles_sign_hide;
     tmp = g_strdup_printf ("%s[%s]%s", tmp, panel_history_show_list_sign,
                            panel_history_next_item_sign);
 
-    widget_move (&panel->widget, 0, panel->widget.cols - 6);
+    widget_move (w, 0, w->cols - 6);
     tty_print_string (tmp);
 
     g_free (tmp);
 
-    widget_move (&panel->widget, 0, 3);
+    widget_move (w, 0, 3);
 
     if (panel->is_panelized)
         tty_printf (" %s ", _("Panelize"));
@@ -1278,7 +1285,7 @@ show_dir (WPanel * panel)
         if (tmp != NULL)
         {
             tty_printf ("%s", tmp);
-            widget_move (&panel->widget, 0, 3 + strlen (tmp));
+            widget_move (w, 0, 3 + strlen (tmp));
             g_free (tmp);
         }
     }
@@ -1289,7 +1296,7 @@ show_dir (WPanel * panel)
 
     tmp = panel_correct_path_to_show (panel);
     tty_printf (" %s ",
-                str_term_trim (tmp, min (max (panel->widget.cols - 12, 0), panel->widget.cols)));
+                str_term_trim (tmp, min (max (w->cols - 12, 0), w->cols)));
     g_free (tmp);
 
     if (!panels_options.show_mini_info)
@@ -1305,7 +1312,7 @@ show_dir (WPanel * panel)
                             size_trunc_sep (panel->dir.list[panel->selected].st.st_size,
                                             panels_options.kilobyte_si));
                 tty_setcolor (NORMAL_COLOR);
-                widget_move (&panel->widget, panel->widget.lines - 1, 4);
+                widget_move (w, w->lines - 1, 4);
                 tty_print_string (buffer);
             }
         }
@@ -1313,7 +1320,7 @@ show_dir (WPanel * panel)
         {
             /* Show total size of marked files
              * In the bottom of panel, display size only. */
-            display_total_marked_size (panel, panel->widget.lines - 1, 2, TRUE);
+            display_total_marked_size (panel, w->lines - 1, 2, TRUE);
         }
     }
 
@@ -1415,7 +1422,7 @@ panel_load_history (const gchar * event_group_name, const gchar * event_name,
     (void) event_group_name;
     (void) event_name;
 
-    if (ev->receiver == NULL || ev->receiver == (Widget *) p)
+    if (ev->receiver == NULL || ev->receiver == WIDGET (p))
     {
         if (ev->cfg != NULL)
             p->dir_history = history_load (ev->cfg, p->hist_name);
@@ -1512,7 +1519,7 @@ panel_paint_sort_info (WPanel * panel)
         char *str;
 
         str = g_strdup_printf ("%s%s", sort_sign, Q_ (panel->sort_info.sort_field->hotkey));
-        widget_move (&panel->widget, 1, 1);
+        widget_move (panel, 1, 1);
         tty_print_string (str);
         g_free (str);
     }
@@ -1545,15 +1552,17 @@ panel_get_title_without_hotkey (const char *title)
 static void
 paint_frame (WPanel * panel)
 {
+    Widget *w = WIDGET (panel);
+
     int side, width;
     GString *format_txt;
 
     adjust_top_file (panel);
 
-    widget_erase (&panel->widget);
+    widget_erase (w);
     show_dir (panel);
 
-    widget_move (&panel->widget, 1, 1);
+    widget_move (w, 1, 1);
 
     for (side = 0; side <= panel->split; side++)
     {
@@ -1563,12 +1572,12 @@ paint_frame (WPanel * panel)
         {
             tty_setcolor (NORMAL_COLOR);
             tty_print_one_vline (TRUE);
-            width = panel->widget.cols - panel->widget.cols / 2 - 1;
+            width = w->cols - w->cols / 2 - 1;
         }
         else if (panel->split)
-            width = panel->widget.cols / 2 - 3;
+            width = w->cols / 2 - 3;
         else
-            width = panel->widget.cols - 2;
+            width = w->cols - 2;
 
         format_txt = g_string_new ("");
         for (format = panel->format; format; format = format->next)
@@ -1654,7 +1663,7 @@ parse_panel_size (WPanel * panel, const char *format, int isstatus)
     }
 
     if (!isstatus)
-        panel_update_cols (&(panel->widget), panel->frame_size);
+        panel_update_cols (WIDGET (panel), panel->frame_size);
 
     return skip_separators (format);
 }
@@ -1838,7 +1847,7 @@ use_display_format (WPanel * panel, const char *format, char **error, int isstat
     panel->dirty = 1;
 
     /* Status needn't to be split */
-    usable_columns = ((panel->widget.cols - 2) / ((isstatus)
+    usable_columns = ((WIDGET (panel)->cols - 2) / ((isstatus)
                                                   ? 1
                                                   : (panel->split + 1))) - (!isstatus
                                                                             && panel->split);
@@ -2489,7 +2498,7 @@ do_search (WPanel * panel, int c_code)
         unselect_item (panel);
         panel->selected = sel;
         select_item (panel);
-        send_message ((Widget *) panel, WIDGET_DRAW, 0);
+        send_message (panel, NULL, MSG_DRAW, 0, NULL);
     }
     else if (c_code != KEY_BACKSPACE)
     {
@@ -3154,7 +3163,7 @@ directory_history_list (WPanel * panel)
 
     pos = g_list_position (panel->dir_history_current, panel->dir_history);
 
-    s = history_show (&panel->dir_history, &panel->widget, pos);
+    s = history_show (&panel->dir_history, WIDGET (panel), pos);
     if (s != NULL)
     {
         vfs_path_t *s_vpath;
@@ -3407,21 +3416,21 @@ panel_key (WPanel * panel, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-panel_callback (Widget * w, widget_msg_t msg, int parm)
+panel_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WPanel *panel = (WPanel *) w;
     WButtonBar *bb;
 
     switch (msg)
     {
-    case WIDGET_INIT:
+    case MSG_INIT:
         /* subscribe to "history_load" event */
         mc_event_add (w->owner->event_group, MCEVENT_HISTORY_LOAD, panel_load_history, w, NULL);
         /* subscribe to "history_save" event */
         mc_event_add (w->owner->event_group, MCEVENT_HISTORY_SAVE, panel_save_history, w, NULL);
         return MSG_HANDLED;
 
-    case WIDGET_DRAW:
+    case MSG_DRAW:
         /* Repaint everything, including frame and separator */
         paint_frame (panel);    /* including show_dir */
         paint_dir (panel);
@@ -3430,7 +3439,7 @@ panel_callback (Widget * w, widget_msg_t msg, int parm)
         panel->dirty = 0;
         return MSG_HANDLED;
 
-    case WIDGET_FOCUS:
+    case MSG_FOCUS:
         state_mark = -1;
         current_panel = panel;
         panel->active = 1;
@@ -3452,12 +3461,12 @@ panel_callback (Widget * w, widget_msg_t msg, int parm)
         paint_dir (panel);
         panel->dirty = 0;
 
-        bb = find_buttonbar (panel->widget.owner);
+        bb = find_buttonbar (w->owner);
         midnight_set_buttonbar (bb);
         buttonbar_redraw (bb);
         return MSG_HANDLED;
 
-    case WIDGET_UNFOCUS:
+    case MSG_UNFOCUS:
         /* Janne: look at this for the multiple panel options */
         stop_search (panel);
         panel->active = 0;
@@ -3465,13 +3474,13 @@ panel_callback (Widget * w, widget_msg_t msg, int parm)
         unselect_item (panel);
         return MSG_HANDLED;
 
-    case WIDGET_KEY:
+    case MSG_KEY:
         return panel_key (panel, parm);
 
-    case WIDGET_COMMAND:
+    case MSG_ACTION:
         return panel_execute_cmd (panel, parm);
 
-    case WIDGET_DESTROY:
+    case MSG_DESTROY:
         /* unsubscribe from "history_load" event */
         mc_event_del (w->owner->event_group, MCEVENT_HISTORY_LOAD, panel_load_history, w);
         /* unsubscribe from "history_save" event */
@@ -3481,7 +3490,7 @@ panel_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return widget_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -3595,14 +3604,14 @@ static int
 panel_event (Gpm_Event * event, void *data)
 {
     WPanel *panel = (WPanel *) data;
-    Widget *w = (Widget *) data;
+    Widget *w = WIDGET (data);
 
     const int lines = llines (panel);
     const gboolean is_active = dlg_widget_active (panel);
     const gboolean mouse_down = (event->type & GPM_DOWN) != 0;
     Gpm_Event local;
 
-    if (!mouse_global_in_widget (event, (Widget *) data))
+    if (!mouse_global_in_widget (event, WIDGET (data)))
         return MOU_UNHANDLED;
 
     local = mouse_get_local (event, w);
@@ -3634,7 +3643,7 @@ panel_event (Gpm_Event * event, void *data)
         /* "." button show/hide hidden files */
         if (mouse_down && local.x == w->cols - 5)
         {
-            midnight_dlg->callback (midnight_dlg, NULL, DLG_ACTION, CK_ShowHidden, NULL);
+            send_message (midnight_dlg, NULL, MSG_ACTION, CK_ShowHidden, NULL);
             goto finish;
         }
 
@@ -3710,7 +3719,8 @@ panel_event (Gpm_Event * event, void *data)
 
   finish:
     if (panel->dirty)
-        send_message (w, WIDGET_DRAW, 0);
+        send_message (w, NULL, MSG_DRAW, 0, NULL);
+
     return MOU_NORMAL;
 }
 
@@ -3822,7 +3832,7 @@ do_select (WPanel * panel, int i)
     {
         panel->dirty = 1;
         panel->selected = i;
-        panel->top_file = panel->selected - (panel->widget.lines - 2) / 2;
+        panel->top_file = panel->selected - (WIDGET (panel)->lines - 2) / 2;
         if (panel->top_file < 0)
             panel->top_file = 0;
     }
@@ -4022,17 +4032,17 @@ WPanel *
 panel_new_with_dir (const char *panel_name, const char *wpath)
 {
     WPanel *panel;
+    Widget *w;
     char *section;
     int i, err;
     char *curdir = NULL;
 
     panel = g_new0 (WPanel, 1);
-
+    w = WIDGET (panel);
     /* No know sizes of the panel at startup */
-    init_widget (&panel->widget, 0, 0, 0, 0, panel_callback, panel_event);
-
+    init_widget (w, 0, 0, 0, 0, panel_callback, panel_event);
     /* We do not want the cursor */
-    widget_want_cursor (panel->widget, 0);
+    widget_want_cursor (w, FALSE);
 
     if (wpath != NULL)
     {
@@ -4239,7 +4249,7 @@ set_panel_formats (WPanel * p)
     }
 
     panel_format_modified (p);
-    panel_update_cols (&(p->widget), p->frame_size);
+    panel_update_cols (WIDGET (p), p->frame_size);
 
     if (retcode)
         message (D_ERROR, _("Warning"),

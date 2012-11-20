@@ -238,7 +238,7 @@ typedef struct
     gboolean showing_bps;
 
     /* Dialog and widgets for the operation progress window */
-    Dlg_head *op_dlg;
+    WDialog *op_dlg;
     WLabel *file_string[2];
     WLabel *file_label[2];
     WGauge *progress_file_gauge;
@@ -251,7 +251,7 @@ typedef struct
     WLabel *total_bytes_label;
 
     /* Query replace dialog */
-    Dlg_head *replace_dlg;
+    WDialog *replace_dlg;
     const char *replace_filename;
     replace_action_t replace_result;
 
@@ -372,68 +372,74 @@ file_bps_prepare_for_show (char *buffer, long bps)
 static replace_action_t
 overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
 {
-#define ADD_RD_BUTTON(i) \
-    add_widget (ui->replace_dlg, \
-            button_new (rd_widgets [i].ypos, rd_widgets [i].xpos, rd_widgets [i].value, \
-                        NORMAL_BUTTON, rd_widgets [i].text, 0))
+#define ADD_RD_BUTTON(i, ypos) \
+    add_widget_autopos (ui->replace_dlg, \
+                        button_new (ypos, rd_widgets [i].xpos, rd_widgets [i].value, \
+                                    NORMAL_BUTTON, rd_widgets [i].text, NULL), \
+                        rd_widgets [i].pos_flags, ui->replace_dlg->current->data)
 
-#define ADD_RD_LABEL(i, p1, p2) \
+#define ADD_RD_LABEL(i, p1, p2, ypos) \
     g_snprintf (buffer, sizeof (buffer), rd_widgets [i].text, p1, p2); \
-    add_widget (ui->replace_dlg, label_new (rd_widgets [i].ypos, rd_widgets [i].xpos, buffer))
+    add_widget_autopos (ui->replace_dlg, \
+                        label_new (ypos, rd_widgets [i].xpos, buffer), \
+                        rd_widgets [i].pos_flags, \
+                        ui->replace_dlg->current != NULL ? ui->replace_dlg->current->data : NULL)
 
     /* dialog sizes */
-    const int rd_ylen = 17;
+    const int rd_ylen = 1;
     int rd_xlen = 60;
+    int y = 2;
+    unsigned long yes_id;
 
     struct
     {
         const char *text;
         int ypos, xpos;
+        widget_pos_flags_t pos_flags;
         int value;              /* 0 for labels */
     } rd_widgets[] =
     {
     /* *INDENT-OFF* */
         /*  0 */
-        { N_("Target file already exists!"), 3, 4, 0 },
+        { N_("Target file already exists!"), 3, 4, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, 0 },
         /*  1 */
-        { "%s", 4, 4, 0 },
-        /*  2 */ /* cannot use PRIuMAX here; %llu is used instead */
-        { N_("Source date: %s, size %llu"), 6, 4, 0 },
-        /*  3 */  /* cannot use PRIuMAX here; %llu is used instead */
-        { N_("Target date: %s, size %llu"), 7, 4, 0 },
+        { "%s", 4, 4, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, 0 },
+        /*  2 */        /* cannot use PRIuMAX here; %llu is used instead */
+        { N_("New     : %s, size %llu"), 6, 4, WPOS_KEEP_DEFAULT, 0 },
+        /*  3 */        /* cannot use PRIuMAX here; %llu is used instead */
+        { N_("Existing: %s, size %llu"), 7, 4, WPOS_KEEP_DEFAULT, 0 },
         /*  4 */
-        { N_("&Abort"), 14, 25, REPLACE_ABORT },
+        { N_("Overwrite this target?"), 9, 4, WPOS_KEEP_DEFAULT, 0 },
         /*  5 */
-        { N_("If &size differs"), 12, 28, REPLACE_SIZE },
+        { N_("&Yes"), 9, 28, WPOS_KEEP_DEFAULT, REPLACE_YES },
         /*  6 */
-        { N_("Non&e"), 11, 47, REPLACE_NEVER },
+        { N_("&No"), 9, 37, WPOS_KEEP_DEFAULT, REPLACE_NO },
         /*  7 */
-        { N_("&Update"), 11, 36, REPLACE_UPDATE },
+        { N_("A&ppend"), 9, 45, WPOS_KEEP_DEFAULT, REPLACE_APPEND },
         /*  8 */
-        { N_("A&ll"), 11, 28, REPLACE_ALWAYS },
+        { N_("&Reget"), 10, 28, WPOS_KEEP_DEFAULT, REPLACE_REGET },
         /*  9 */
-        { N_("Overwrite all targets?"), 11, 4, 0 },
+        { N_("Overwrite all targets?"), 11, 4, WPOS_KEEP_DEFAULT, 0 },
         /* 10 */
-        { N_("&Reget"), 10, 28, REPLACE_REGET },
+        { N_("A&ll"), 11, 28, WPOS_KEEP_DEFAULT, REPLACE_ALWAYS },
         /* 11 */
-        { N_("A&ppend"), 9, 45, REPLACE_APPEND },
+        { N_("&Update"), 11, 36, WPOS_KEEP_DEFAULT, REPLACE_UPDATE },
         /* 12 */
-        { N_("&No"), 9, 37, REPLACE_NO },
+        { N_("Non&e"), 11, 47, WPOS_KEEP_DEFAULT, REPLACE_NEVER },
         /* 13 */
-        { N_("&Yes"), 9, 28, REPLACE_YES },
+        { N_("If &size differs"), 12, 28, WPOS_KEEP_DEFAULT, REPLACE_SIZE },
         /* 14 */
-        { N_("Overwrite this target?"), 9, 4, 0 }
+        { N_("&Abort"), 14, 25, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, REPLACE_ABORT }
     /* *INDENT-ON* */
     };
 
-    const int num = sizeof (rd_widgets) / sizeof (rd_widgets[0]);
+    const size_t num = G_N_ELEMENTS (rd_widgets);
     int *widgets_len;
 
     FileOpContextUI *ui = ctx->ui;
 
     char buffer[BUF_SMALL];
     const char *title;
-    int stripped_name_len;
     vfs_path_t *stripped_vpath;
     const char *stripped_name;
     char *stripped_name_orig;
@@ -450,10 +456,11 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
     stripped_name = stripped_name_orig =
         vfs_path_to_str_flags (stripped_vpath, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
     vfs_path_free (stripped_vpath);
-    stripped_name_len = str_term_width1 (stripped_name);
 
     {
-        int i, l1, l2, l, row;
+        size_t i;
+        int l1, l2, l, row;
+        int stripped_name_len;
 
         for (i = 0; i < num; i++)
         {
@@ -468,11 +475,12 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
          * longest of "Overwrite..." labels
          * (assume "Target date..." are short enough)
          */
-        l1 = max (widgets_len[9], widgets_len[14]);
+        l1 = max (widgets_len[9], widgets_len[4]);
 
         /* longest of button rows */
-        i = num;
-        for (row = l = l2 = 0; i--;)
+        l = l2 = 0;
+        row = 0;
+        for (i = 1; i < num - 1; i++)
             if (rd_widgets[i].value != 0)
             {
                 if (row != rd_widgets[i].ypos)
@@ -486,13 +494,15 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
 
         l2 = max (l2, l);       /* last row */
         rd_xlen = max (rd_xlen, l1 + l2 + 8);
-        rd_xlen = max (rd_xlen, str_term_width1 (title) + 2);
+        /* rd_xlen = max (rd_xlen, str_term_width1 (title) + 2); */
+        stripped_name_len = str_term_width1 (stripped_name);
         rd_xlen = max (rd_xlen, min (COLS, stripped_name_len + 8));
 
         /* Now place widgets */
         l1 += 5;                /* start of first button in the row */
-        i = num;
-        for (l = l1, row = 0; --i > 1;)
+        l = l1;
+        row = 0;
+        for (i = 2; i < num - 1; i++)
             if (rd_widgets[i].value != 0)
             {
                 if (row != rd_widgets[i].ypos)
@@ -503,50 +513,57 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
                 rd_widgets[i].xpos = l;
                 l += widgets_len[i] + 4;
             }
-
-        /* Abort button is centered */
-        rd_widgets[4].xpos = (rd_xlen - widgets_len[4] - 3) / 2;
     }
 
     /* FIXME - missing help node */
     ui->replace_dlg =
-        create_dlg (TRUE, 0, 0, rd_ylen, rd_xlen, alarm_colors, NULL, NULL, "[Replace]",
-                    title, DLG_CENTER | DLG_REVERSE);
+        create_dlg (TRUE, 0, 0, rd_ylen, rd_xlen, alarm_colors, NULL, NULL, "[Replace]", title,
+                    DLG_CENTER);
 
-    /* prompt -- centered */
-    add_widget (ui->replace_dlg,
-                label_new (rd_widgets[0].ypos, (rd_xlen - widgets_len[0]) / 2, rd_widgets[0].text));
-    /* file name -- centered */
-    stripped_name = str_trunc (stripped_name, rd_xlen - 8);
-    stripped_name_len = str_term_width1 (stripped_name);
-    add_widget (ui->replace_dlg,
-                label_new (rd_widgets[1].ypos, (rd_xlen - stripped_name_len) / 2, stripped_name));
+    /* prompt */
+    ADD_RD_LABEL (0, "", "", y++);
+    /* file name */
+    ADD_RD_LABEL (1, str_trunc (stripped_name, rd_xlen - 8), "", y++);
+
+    add_widget (ui->replace_dlg, hline_new (y++, -1, -1));
 
     /* source date and size */
-    ADD_RD_LABEL (2, file_date (ui->s_stat->st_mtime), (unsigned long long) ui->s_stat->st_size);
+    ADD_RD_LABEL (2, file_date (ui->s_stat->st_mtime), (unsigned long long) ui->s_stat->st_size,
+                  y++);
     /* destination date and size */
-    ADD_RD_LABEL (3, file_date (ui->d_stat->st_mtime), (unsigned long long) ui->d_stat->st_size);
+    ADD_RD_LABEL (3, file_date (ui->d_stat->st_mtime), (unsigned long long) ui->d_stat->st_size,
+                  y++);
 
-    ADD_RD_BUTTON (4);          /* Abort */
-    ADD_RD_BUTTON (5);          /* If size differs */
-    ADD_RD_BUTTON (6);          /* None */
-    ADD_RD_BUTTON (7);          /* Update */
-    ADD_RD_BUTTON (8);          /* All" */
-    ADD_RD_LABEL (9, 0, 0);     /* Overwrite all targets? */
+    add_widget (ui->replace_dlg, hline_new (y++, -1, -1));
+
+    ADD_RD_LABEL (4, 0, 0, y);  /* Overwrite this target? */
+    yes_id = ADD_RD_BUTTON (5, y);      /* Yes */
+    ADD_RD_BUTTON (6, y);       /* No */
 
     /* "this target..." widgets */
     if (!S_ISDIR (ui->d_stat->st_mode))
     {
+        ADD_RD_BUTTON (7, y++); /* Append */
+
         if ((ctx->operation == OP_COPY) && (ui->d_stat->st_size != 0)
             && (ui->s_stat->st_size > ui->d_stat->st_size))
-            ADD_RD_BUTTON (10); /* Reget */
-
-        ADD_RD_BUTTON (11);     /* Append */
+            ADD_RD_BUTTON (8, y++);     /* Reget */
     }
-    ADD_RD_BUTTON (12);         /* No */
-    ADD_RD_BUTTON (13);         /* Yes */
-    ADD_RD_LABEL (14, 0, 0);    /* Overwrite this target? */
 
+    add_widget (ui->replace_dlg, hline_new (y++, -1, -1));
+
+    ADD_RD_LABEL (9, 0, 0, y);  /* Overwrite all targets? */
+    ADD_RD_BUTTON (10, y);      /* All" */
+    ADD_RD_BUTTON (11, y);      /* Update */
+    ADD_RD_BUTTON (12, y++);    /* None */
+    ADD_RD_BUTTON (13, y++);    /* If size differs */
+
+    add_widget (ui->replace_dlg, hline_new (y++, -1, -1));
+
+    ADD_RD_BUTTON (14, y);      /* Abort */
+
+    dlg_set_size (ui->replace_dlg, y + 3, rd_xlen);
+    dlg_select_by_id (ui->replace_dlg, yes_id);
     result = run_dlg (ui->replace_dlg);
     destroy_dlg (ui->replace_dlg);
 
@@ -623,6 +640,8 @@ file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
     const char *skip_button_label = N_("&Skip");
     int abort_button_width, skip_button_width, buttons_width;
     int dlg_width, dlg_height;
+    int y = 2, x = 3;
+    Widget *skip_button;
 
     g_return_if_fail (ctx != NULL);
     g_return_if_fail (ctx->ui == NULL);
@@ -634,79 +653,78 @@ file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
 
     abort_button_width = str_term_width1 (abort_button_label) + 3;
     skip_button_width = str_term_width1 (skip_button_label) + 3;
-    buttons_width = abort_button_width + skip_button_width + 2;
+    buttons_width = abort_button_width + skip_button_width + 1;
 
     dlg_width = max (58, buttons_width + 6);
-    dlg_height = 17;            /* to make compiler happy :) */
+    dlg_height = 17;            /* will be adjusted later */
 
     ui = g_new0 (FileOpContextUI, 1);
     ctx->ui = ui;
-
     ctx->dialog_type = dialog_type;
-
-    switch (dialog_type)
-    {
-    case FILEGUI_DIALOG_ONE_ITEM:
-        dlg_height = verbose ? 12 : 10;
-        break;
-    case FILEGUI_DIALOG_MULTI_ITEM:
-        dlg_height = !verbose ? 10 : file_op_compute_totals ? 17 : 15;
-        break;
-    case FILEGUI_DIALOG_DELETE_ITEM:
-        dlg_height = 7;
-        break;
-    }
-
     ctx->recursive_result = RECURSIVE_YES;
-
     ui->replace_result = REPLACE_YES;
     ui->showing_eta = with_eta && file_op_compute_totals;
     ui->showing_bps = with_eta;
 
     ui->op_dlg =
-        create_dlg (TRUE, 0, 0, dlg_height, dlg_width,
-                    dialog_colors, NULL, NULL, NULL, op_names[ctx->operation],
-                    DLG_CENTER | DLG_REVERSE);
+        create_dlg (TRUE, 0, 0, dlg_height, dlg_width, dialog_colors, NULL, NULL, NULL,
+                    op_names[ctx->operation], DLG_CENTER);
 
-    add_widget (ui->op_dlg,
-                button_new (dlg_height - 3, dlg_width / 2 + 1, FILE_ABORT,
-                            NORMAL_BUTTON, abort_button_label, NULL));
-    add_widget (ui->op_dlg,
-                button_new (dlg_height - 3, dlg_width / 2 - 1 - skip_button_width, FILE_SKIP,
-                            NORMAL_BUTTON, skip_button_label, NULL));
+    ui->file_label[0] = label_new (y++, x, "");
+    add_widget (ui->op_dlg, ui->file_label[0]);
+
+    ui->file_string[0] = label_new (y++, x, "");
+    add_widget (ui->op_dlg, ui->file_string[0]);
+
+    ui->file_label[1] = label_new (y++, x, "");
+    add_widget (ui->op_dlg, ui->file_label[1]);
+
+    ui->file_string[1] = label_new (y++, x, "");
+    add_widget (ui->op_dlg, ui->file_string[1]);
+
+    ui->progress_file_gauge = gauge_new (y++, x + 3, 0, 100, 0);
+    if (!classic_progressbar && (current_panel == right_panel))
+        ui->progress_file_gauge->from_left_to_right = FALSE;
+    add_widget (ui->op_dlg, ui->progress_file_gauge);
+
+    ui->progress_file_label = label_new (y++, x, "");
+    add_widget (ui->op_dlg, ui->progress_file_label);
 
     if (verbose && dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
     {
-        int dy = file_op_compute_totals ? 2 : 0;
+        add_widget (ui->op_dlg, hline_new (y, -1, -1));
+
+        ui->total_bytes_label = label_new (y++, x + 15, "");
+        add_widget (ui->op_dlg, ui->total_bytes_label);
 
         if (file_op_compute_totals)
-            add_widget (ui->op_dlg, ui->progress_total_gauge =
-                        gauge_new (7 + dy, 3 + 3, 0, 100, 0));
+        {
+            ui->progress_total_gauge = gauge_new (y++, x + 3, 0, 100, 0);
+            if (!classic_progressbar && (current_panel == right_panel))
+                ui->progress_total_gauge->from_left_to_right = FALSE;
+            add_widget (ui->op_dlg, ui->progress_total_gauge);
+        }
 
-        add_widget (ui->op_dlg, ui->total_files_processed_label = label_new (9 + dy, 3, ""));
+        ui->total_files_processed_label = label_new (y++, x, "");
+        add_widget (ui->op_dlg, ui->total_files_processed_label);
 
-        add_widget (ui->op_dlg, ui->time_label = label_new (10 + dy, 3, ""));
-
-        add_widget (ui->op_dlg, ui->total_bytes_label = label_new (8, 3 + 15, ""));
-        add_widget (ui->op_dlg, hline_new (8, 1, dlg_width - 2));
+        ui->time_label = label_new (y++, x, "");
+        add_widget (ui->op_dlg, ui->time_label);
     }
 
-    add_widget (ui->op_dlg, ui->progress_file_label = label_new (7, 3, ""));
+    add_widget (ui->op_dlg, hline_new (y++, -1, -1));
 
-    add_widget (ui->op_dlg, ui->progress_file_gauge = gauge_new (6, 3 + 3, 0, 100, 0));
+    x = (dlg_width - buttons_width) / 2;
+    skip_button = WIDGET (button_new (y, x, FILE_SKIP, NORMAL_BUTTON, skip_button_label, NULL));
+    add_widget (ui->op_dlg, skip_button);
 
-    add_widget (ui->op_dlg, ui->file_string[1] = label_new (5, 3, ""));
+    x += skip_button_width + 1;
+    add_widget (ui->op_dlg, button_new (y, x, FILE_ABORT, NORMAL_BUTTON, abort_button_label, NULL));
 
-    add_widget (ui->op_dlg, ui->file_label[1] = label_new (4, 3, ""));
-    add_widget (ui->op_dlg, ui->file_string[0] = label_new (3, 3, ""));
-    add_widget (ui->op_dlg, ui->file_label[0] = label_new (2, 3, ""));
+    /* adjust dialog height */
+    dlg_set_size (ui->op_dlg, y + 3, dlg_width);
 
-    if ((right_panel == current_panel) && !classic_progressbar)
-    {
-        ui->progress_file_gauge->from_left_to_right = FALSE;
-        if (verbose && file_op_compute_totals && dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
-            ui->progress_total_gauge->from_left_to_right = FALSE;
-    }
+    dlg_select_widget (skip_button);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1029,160 +1047,103 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
                   gboolean only_one,
                   const char *format, const void *text, const char *def_text, gboolean * do_bg)
 {
-    const size_t FMDY = 13;
-    const size_t FMDX = 68;
     size_t fmd_xlen;
-
-    /* buttons */
-    const size_t gap = 1;
-    size_t b0_len, b2_len;
-    size_t b1_len = 0;
-
+    vfs_path_t *vpath;
     int source_easy_patterns = easy_patterns;
-    size_t i, len;
     char fmd_buf[BUF_MEDIUM];
-    char *source_mask, *orig_mask, *dest_dir, *tmp;
+    char *dest_dir, *tmp;
     char *def_text_secure;
-    int val;
-
-    QuickWidget fmd_widgets[] = {
-        /* 0 */ QUICK_BUTTON (42, 64, 10, FMDY, N_("&Cancel"), B_CANCEL, NULL),
-#ifdef ENABLE_BACKGROUND
-        /* 1 */ QUICK_BUTTON (25, 64, 10, FMDY, N_("&Background"), B_USER, NULL),
-#define OFFSET 0
-#else
-#define OFFSET 1
-#endif /* ENABLE_BACKGROUND */
-        /*  2 - OFFSET */
-        QUICK_BUTTON (14, FMDX, 10, FMDY, N_("&OK"), B_ENTER, NULL),
-        /*  3 - OFFSET */
-        QUICK_CHECKBOX (42, FMDX, 8, FMDY, N_("&Stable Symlinks"), &ctx->stable_symlinks),
-        /*  4 - OFFSET */
-        QUICK_CHECKBOX (31, FMDX, 7, FMDY, N_("Di&ve into subdir if exists"),
-                        &ctx->dive_into_subdirs),
-        /*  5 - OFFSET */
-        QUICK_CHECKBOX (3, FMDX, 8, FMDY, N_("Preserve &attributes"), &ctx->op_preserve),
-        /*  6 - OFFSET */
-        QUICK_CHECKBOX (3, FMDX, 7, FMDY, N_("Follow &links"), &ctx->follow_links),
-        /*  7 - OFFSET */
-        QUICK_INPUT (3, FMDX, 6, FMDY, "", 58, 0, "input2", &dest_dir),
-        /*  8 - OFFSET */
-        QUICK_LABEL (3, FMDX, 5, FMDY, N_("to:")),
-        /*  9 - OFFSET */
-        QUICK_CHECKBOX (37, FMDX, 4, FMDY, N_("&Using shell patterns"), &source_easy_patterns),
-        /* 10 - OFFSET */
-        QUICK_INPUT (3, FMDX, 3, FMDY, easy_patterns ? "*" : "^(.*)$", 58, 0, "input-def",
-                     &source_mask),
-        /* 11 - OFFSET */
-        QUICK_LABEL (3, FMDX, 2, FMDY, fmd_buf),
-        QUICK_END
-    };
 
     g_return_val_if_fail (ctx != NULL, NULL);
 
-#ifdef ENABLE_NLS
-    /* buttons */
-    for (i = 0; i <= 2 - OFFSET; i++)
-        fmd_widgets[i].u.button.text = _(fmd_widgets[i].u.button.text);
-
-    /* checkboxes */
-    for (i = 3 - OFFSET; i <= 9 - OFFSET; i++)
-        if (i != 7 - OFFSET)
-            fmd_widgets[i].u.checkbox.text = _(fmd_widgets[i].u.checkbox.text);
-#endif /* !ENABLE_NLS */
-
-    fmd_xlen = max (FMDX, (size_t) COLS * 2 / 3);
-
-    len = str_term_width1 (fmd_widgets[6 - OFFSET].u.checkbox.text)
-        + str_term_width1 (fmd_widgets[4 - OFFSET].u.checkbox.text) + 15;
-    fmd_xlen = max (fmd_xlen, len);
-
-    len = str_term_width1 (fmd_widgets[5 - OFFSET].u.checkbox.text)
-        + str_term_width1 (fmd_widgets[3 - OFFSET].u.checkbox.text) + 15;
-    fmd_xlen = max (fmd_xlen, len);
-
-    /* buttons */
-    b2_len = str_term_width1 (fmd_widgets[2 - OFFSET].u.button.text) + 6 + gap; /* OK */
-#ifdef ENABLE_BACKGROUND
-    b1_len = str_term_width1 (fmd_widgets[1].u.button.text) + 4 + gap;  /* Background */
-#endif
-    b0_len = str_term_width1 (fmd_widgets[0].u.button.text) + 4;        /* Cancel */
-    len = b0_len + b1_len + b2_len;
-    fmd_xlen = min (max (fmd_xlen, len + 6), (size_t) COLS);
-
-    if (only_one)
-    {
-        int flen;
-
-        flen = str_term_width1 (format);
-        i = fmd_xlen - flen - 4;        /* FIXME */
-        g_snprintf (fmd_buf, sizeof (fmd_buf), format, str_trunc ((const char *) text, i));
-    }
-    else
-    {
-        g_snprintf (fmd_buf, sizeof (fmd_buf), format, *(const int *) text);
-        fmd_xlen = max (fmd_xlen, (size_t) str_term_width1 (fmd_buf) + 6);
-    }
-
-    for (i = sizeof (fmd_widgets) / sizeof (fmd_widgets[0]); i > 0;)
-        fmd_widgets[--i].x_divisions = fmd_xlen;
-
-    i = (fmd_xlen - len) / 2;
-    /* OK button */
-    fmd_widgets[2 - OFFSET].relative_x = i;
-    i += b2_len;
-#ifdef ENABLE_BACKGROUND
-    /* Background button */
-    fmd_widgets[1].relative_x = i;
-    i += b1_len;
-#endif
-    /* Cancel button */
-    fmd_widgets[0].relative_x = i;
-
-#define chkbox_xpos(i) \
-    fmd_widgets [i].relative_x = fmd_xlen - str_term_width1 (fmd_widgets [i].u.checkbox.text) - 6
-    chkbox_xpos (3 - OFFSET);
-    chkbox_xpos (4 - OFFSET);
-    chkbox_xpos (9 - OFFSET);
-#undef chkbox_xpos
-
-    /* inputs */
-    fmd_widgets[7 - OFFSET].u.input.len = fmd_widgets[10 - OFFSET].u.input.len = fmd_xlen - 6;
-
     /* unselect checkbox if target filesystem don't support attributes */
     ctx->op_preserve = filegui__check_attrs_on_fs (def_text);
+    ctx->stable_symlinks = FALSE;
+    *do_bg = FALSE;
 
     /* filter out a possible password from def_text */
-    {
-        vfs_path_t *vpath;
+    vpath = vfs_path_from_str_flags (def_text, only_one ? VPF_NO_CANON : VPF_NONE);
+    tmp = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
+    vfs_path_free (vpath);
 
-        vpath = vfs_path_from_str_flags (def_text, (only_one) ? VPF_NO_CANON : VPF_NONE);
-        tmp = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_PASSWORD);
-        vfs_path_free (vpath);
-    }
     if (source_easy_patterns)
         def_text_secure = strutils_glob_escape (tmp);
     else
         def_text_secure = strutils_regex_escape (tmp);
     g_free (tmp);
 
-    /* destination */
-    fmd_widgets[7 - OFFSET].u.input.text = def_text_secure;
+    if (only_one)
+    {
+        int format_len, text_len;
+        int max_len;
 
-    ctx->stable_symlinks = FALSE;
-    *do_bg = FALSE;
+        format_len = str_term_width1 (format);
+        text_len = str_term_width1 (text);
+        max_len = COLS - 2 - 6;
+
+        if (format_len + text_len <= max_len)
+        {
+            fmd_xlen = format_len + text_len + 6;
+            fmd_xlen = max (fmd_xlen, 68);
+        }
+        else
+        {
+            text = str_trunc ((const char *) text, max_len - format_len);
+            fmd_xlen = max_len + 6;
+        }
+
+        g_snprintf (fmd_buf, sizeof (fmd_buf), format, (const char *) text);
+    }
+    else
+    {
+        fmd_xlen = COLS * 2 / 3;
+        fmd_xlen = max (fmd_xlen, 68);
+        g_snprintf (fmd_buf, sizeof (fmd_buf), format, *(const int *) text);
+    }
 
     {
+        char *source_mask, *orig_mask;
+        int val;
         struct stat buf;
-        vfs_path_t *vpath;
 
-        QuickDialog Quick_input = {
-            fmd_xlen, FMDY, -1, -1, op_names[operation],
-            "[Mask Copy/Rename]", fmd_widgets, NULL, NULL, TRUE
+        quick_widget_t quick_widgets[] = {
+            /* *INDENT-OFF* */
+            QUICK_LABELED_INPUT (fmd_buf, input_label_above,
+                                 easy_patterns ? "*" : "^(.*)$", 0, "input-def", &source_mask,
+                                 NULL),
+            QUICK_START_COLUMNS,
+                QUICK_SEPARATOR (FALSE),
+            QUICK_NEXT_COLUMN,
+                QUICK_CHECKBOX (N_("&Using shell patterns"), &source_easy_patterns, NULL),
+            QUICK_STOP_COLUMNS,
+            QUICK_LABELED_INPUT (N_("to:"), input_label_above,
+                                 def_text_secure, 0, "input2", &dest_dir, NULL),
+            QUICK_SEPARATOR (TRUE),
+            QUICK_START_COLUMNS,
+                QUICK_CHECKBOX (N_("Follow &links"), &ctx->follow_links, NULL),
+                QUICK_CHECKBOX (N_("Preserve &attributes"), &ctx->op_preserve, NULL),
+            QUICK_NEXT_COLUMN,
+                QUICK_CHECKBOX (N_("Di&ve into subdir if exists"), &ctx->dive_into_subdirs, NULL),
+                QUICK_CHECKBOX (N_("&Stable symlinks"), &ctx->stable_symlinks, NULL),
+            QUICK_STOP_COLUMNS,
+            QUICK_START_BUTTONS (TRUE, TRUE),
+                QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
+#ifdef ENABLE_BACKGROUND
+                QUICK_BUTTON (N_("&Background"), B_USER, NULL, NULL),
+#endif /* ENABLE_BACKGROUND */
+                QUICK_BUTTON (N_("&Cancel"), B_CANCEL, NULL, NULL),
+            QUICK_END
+            /* *INDENT-ON* */
+        };
+
+        quick_dialog_t qdlg = {
+            -1, -1, fmd_xlen,
+            op_names[operation], "[Mask Copy/Rename]",
+            quick_widgets, NULL, NULL
         };
 
       ask_file_mask:
-        val = quick_dialog_skip (&Quick_input, 4);
+        val = quick_dialog_skip (&qdlg, 4);
 
         if (val == B_CANCEL)
         {
@@ -1204,6 +1165,7 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
         else
         {
             int i2;
+
             ctx->preserve = ctx->preserve_uidgid = FALSE;
             i2 = umask (0);
             umask (i2);
@@ -1260,7 +1222,7 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
             ctx->dest_mask = g_strdup (ctx->dest_mask);
             *orig_mask = '\0';
         }
-        if (!*dest_dir)
+        if (*dest_dir == '\0')
         {
             g_free (dest_dir);
             dest_dir = g_strdup ("./");

@@ -2,11 +2,12 @@
    Learn keys
 
    Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2007, 2009, 2011
+   2007, 2009, 2011, 2012
    The Free Software Foundation, Inc.
 
    Written by:
    Jakub Jelinek, 1995
+   Andrew Borodin <aborodin@vmail.ru>, 2012
 
    This file is part of the Midnight Commander.
 
@@ -30,26 +31,17 @@
 
 #include <config.h>
 
-#include <ctype.h>
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
 
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
-#include "lib/mcconfig.h"       /* Save profile */
+#include "lib/mcconfig.h"
 #include "lib/strescape.h"
 #include "lib/strutil.h"
 #include "lib/util.h"           /* convert_controls() */
 #include "lib/widget.h"
-
-#include "src/filemanager/layout.h"     /* mc_refresh()  */
 
 #include "setup.h"
 #include "learn.h"
@@ -59,14 +51,10 @@
 /*** file scope macro definitions ****************************************************************/
 
 #define UX 4
-#define UY 3
-
-#define BY UY + 17
+#define UY 2
 
 #define ROWS     13
 #define COLSHIFT 23
-
-#define BUTTONS 2
 
 /*** file scope type declarations ****************************************************************/
 
@@ -74,33 +62,19 @@ typedef struct
 {
     Widget *button;
     Widget *label;
-    int ok;
+    gboolean ok;
     char *sequence;
-} learnkey;
+} learnkey_t;
 
 /*** file scope variables ************************************************************************/
 
-static struct
-{
-    int ret_cmd, flags, y, x;
-    const char *text;
-} learn_but[BUTTONS] =
-{
-    /* *INDENT-OFF */
-    {
-    B_CANCEL, NORMAL_BUTTON, 0, 39, N_("&Cancel")},
-    {
-    B_ENTER, DEFPUSH_BUTTON, 0, 25, N_("&Save")}
-    /* *INDENT-ON */
-};
+static WDialog *learn_dlg;
+static const char *learn_title = N_("Learn keys");
 
-static Dlg_head *learn_dlg;
-
-static learnkey *learnkeys = NULL;
+static learnkey_t *learnkeys = NULL;
 static int learn_total;
 static int learnok;
-static int learnchanged;
-static const char *learn_title = N_("Learn keys");
+static gboolean learnchanged = FALSE;
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -108,7 +82,7 @@ static const char *learn_title = N_("Learn keys");
 static int
 learn_button (WButton * button, int action)
 {
-    Dlg_head *d;
+    WDialog *d;
     char *seq;
 
     (void) button;
@@ -126,20 +100,20 @@ learn_button (WButton * button, int action)
         g_free (learnkeys[action - B_USER].sequence);
         learnkeys[action - B_USER].sequence = NULL;
     }
-    seq = learn_key ();
 
-    if (seq)
+    seq = learn_key ();
+    if (seq != NULL)
     {
         /* Esc hides the dialog and do not allow definitions of
          * regular characters
          */
         gboolean seq_ok = FALSE;
 
-        if (*seq && strcmp (seq, "\\e") && strcmp (seq, "\\e\\e")
-            && strcmp (seq, "^m") && strcmp (seq, "^i") && (seq[1] || (*seq < ' ' || *seq > '~')))
+        if (*seq != '\0' && strcmp (seq, "\\e") != 0 && strcmp (seq, "\\e\\e") != 0
+            && strcmp (seq, "^m") != 0 && strcmp (seq, "^i") != 0
+            && (seq[1] != '\0' || *seq < ' ' || *seq > '~'))
         {
-
-            learnchanged = 1;
+            learnchanged = TRUE;
             learnkeys[action - B_USER].sequence = seq;
             seq = convert_controls (seq);
             seq_ok = define_sequence (key_name_conv_tab[action - B_USER].code, seq, MCKEY_NOACTION);
@@ -153,20 +127,22 @@ learn_button (WButton * button, int action)
 
     dlg_run_done (d);
     destroy_dlg (d);
+
     dlg_select_widget (learnkeys[action - B_USER].button);
+
     return 0;                   /* Do not kill learn_dlg */
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-learn_move (int right)
+static gboolean
+learn_move (gboolean right)
 {
     int i, totalcols;
 
     totalcols = (learn_total - 1) / ROWS + 1;
     for (i = 0; i < learn_total; i++)
-        if (learnkeys[i].button == (Widget *) learn_dlg->current->data)
+        if (learnkeys[i].button == WIDGET (learn_dlg->current->data))
         {
             if (right)
             {
@@ -177,7 +153,7 @@ learn_move (int right)
             }
             else
             {
-                if (i / ROWS)
+                if (i / ROWS != 0)
                     i -= ROWS;
                 else if (i + (totalcols - 1) * ROWS >= learn_total)
                     i += (totalcols - 2) * ROWS;
@@ -185,14 +161,15 @@ learn_move (int right)
                     i += (totalcols - 1) * ROWS;
             }
             dlg_select_widget (learnkeys[i].button);
-            return 1;
+            return TRUE;
         }
-    return 0;
+
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 learn_check_key (int c)
 {
     int i;
@@ -204,8 +181,8 @@ learn_check_key (int c)
 
         dlg_select_widget (learnkeys[i].button);
         /* TRANSLATORS: This label appears near learned keys.  Keep it short.  */
-        label_set_text ((WLabel *) learnkeys[i].label, _("OK"));
-        learnkeys[i].ok = 1;
+        label_set_text (LABEL (learnkeys[i].label), _("OK"));
+        learnkeys[i].ok = TRUE;
         learnok++;
         if (learnok >= learn_total)
         {
@@ -228,48 +205,42 @@ learn_check_key (int c)
             }
             dlg_stop (learn_dlg);
         }
-        return 1;
+        return TRUE;
     }
+
     switch (c)
     {
     case KEY_LEFT:
     case 'h':
-        return learn_move (0);
+        return learn_move (FALSE);
     case KEY_RIGHT:
     case 'l':
-        return learn_move (1);
+        return learn_move (TRUE);
     case 'j':
         dlg_one_down (learn_dlg);
-        return 1;
+        return TRUE;
     case 'k':
         dlg_one_up (learn_dlg);
-        return 1;
+        return TRUE;
     }
 
     /* Prevent from disappearing if a non-defined sequence is pressed
        and contains a button hotkey.  Only recognize hotkeys with ALT.  */
-    if (c < 255 && g_ascii_isalnum (c))
-        return 1;
-
-    return 0;
+    return (c < 255 && g_ascii_isalnum (c));
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-learn_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+learn_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
-    case DLG_DRAW:
-        common_dialog_repaint (h);
-        return MSG_HANDLED;
-
-    case DLG_KEY:
-        return learn_check_key (parm);
+    case MSG_KEY:
+        return learn_check_key (parm) ? MSG_HANDLED : MSG_NOT_HANDLED;
 
     default:
-        return default_dlg_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -278,72 +249,85 @@ learn_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
 static void
 init_learn (void)
 {
-    int x, y, i, j;
+    const int dlg_width = 78;
+    const int dlg_height = 23;
+
+    /* buttons */
+    int bx0, bx1;
+    const char *b0 = N_("&Save");
+    const char *b1 = N_("&Cancel");
+    int bl0, bl1;
+
+    int x, y, i;
     const key_code_name_t *key;
-    char buffer[BUF_TINY];
 
 #ifdef ENABLE_NLS
-    static int i18n_flag = 0;
+    static gboolean i18n_flag = FALSE;
     if (!i18n_flag)
     {
-        learn_but[0].text = _(learn_but[0].text);
-        learn_but[0].x = 78 / 2 + 4;
-
-        learn_but[1].text = _(learn_but[1].text);
-        learn_but[1].x = 78 / 2 - (str_term_width1 (learn_but[1].text) + 9);
-
         learn_title = _(learn_title);
-        i18n_flag = 1;
+        i18n_flag = TRUE;
     }
+
+    b0 = _(b0);
+    b1 = _(b1);
 #endif /* ENABLE_NLS */
 
     do_refresh ();
 
     learn_dlg =
-        create_dlg (TRUE, 0, 0, 23, 78, dialog_colors, learn_callback, NULL,
-                    "[Learn keys]", learn_title, DLG_CENTER | DLG_REVERSE);
+        create_dlg (TRUE, 0, 0, dlg_height, dlg_width, dialog_colors, learn_callback, NULL,
+                    "[Learn keys]", learn_title, DLG_CENTER);
 
-    for (i = 0; i < BUTTONS; i++)
-        add_widget (learn_dlg,
-                    button_new (BY + learn_but[i].y, learn_but[i].x,
-                                learn_but[i].ret_cmd, learn_but[i].flags, _(learn_but[i].text), 0));
+    /* find first unshown button */
+    for (key = key_name_conv_tab, learn_total = 0;
+         key->name != NULL && strcmp (key->name, "kpleft") != 0; key++, learn_total++)
+        ;
+
+    learnok = 0;
+    learnchanged = FALSE;
+
+    learnkeys = g_new (learnkey_t, learn_total);
 
     x = UX;
     y = UY;
-    for (key = key_name_conv_tab, j = 0;
-         key->name != NULL && strcmp (key->name, "kpleft"); key++, j++)
-        ;
-    learnkeys = g_new (learnkey, j);
-    x += ((j - 1) / ROWS) * COLSHIFT;
-    y += (j - 1) % ROWS;
-    learn_total = j;
-    learnok = 0;
-    learnchanged = 0;
-    for (i = j - 1, key = key_name_conv_tab + j - 1; i >= 0; i--, key--)
+
+    /* add buttons and "OK" labels */
+    for (i = 0; i < learn_total; i++)
     {
-        learnkeys[i].ok = 0;
+        char buffer[BUF_TINY];
+
+        learnkeys[i].ok = FALSE;
         learnkeys[i].sequence = NULL;
-        g_snprintf (buffer, sizeof (buffer), "%-16s", _(key->longname));
-        add_widget (learn_dlg, learnkeys[i].button = (Widget *)
-                    button_new (y, x, B_USER + i, NARROW_BUTTON, buffer, learn_button));
-        add_widget (learn_dlg, learnkeys[i].label = (Widget *) label_new (y, x + 19, ""));
-        if (i % 13)
-            y--;
-        else
+        g_snprintf (buffer, sizeof (buffer), "%-16s", _(key_name_conv_tab[i].longname));
+        learnkeys[i].button =
+            WIDGET (button_new (y, x, B_USER + i, NARROW_BUTTON, buffer, learn_button));
+        learnkeys[i].label = WIDGET (label_new (y, x + 19, ""));
+        add_widget (learn_dlg, learnkeys[i].button);
+        add_widget (learn_dlg, learnkeys[i].label);
+
+        y++;
+        if (y == UY + ROWS)
         {
-            x -= COLSHIFT;
-            y = UY + ROWS - 1;
+            x += COLSHIFT;
+            y = UY;
         }
     }
+
+    add_widget (learn_dlg, hline_new (dlg_height - 8, -1, -1));
     add_widget (learn_dlg,
-                label_new (UY + 14, 5,
-                           _("Press all the keys mentioned here. After you have done it, check")));
-    add_widget (learn_dlg,
-                label_new (UY + 15, 5,
-                           _("which keys are not marked with OK.  Press space on the missing")));
-    add_widget (learn_dlg,
-                label_new (UY + 16, 5,
-                           _("key, or click with the mouse to define it. Move around with Tab.")));
+                label_new (dlg_height - 7, 5,
+                           _("Press all the keys mentioned here. After you have done it, check\n"
+                             "which keys are not marked with OK. Press space on the missing\n"
+                             "key, or click with the mouse to define it. Move around with Tab.")));
+    add_widget (learn_dlg, hline_new (dlg_height - 4, -1, -1));
+    /* buttons */
+    bl0 = str_term_width1 (b0) + 5; /* default button */
+    bl1 = str_term_width1 (b1) + 3; /* normal button */
+    bx0 = (dlg_width - (bl0 + bl1 + 1)) / 2;
+    bx1 = bx0 + bl0 + 1;
+    add_widget (learn_dlg, button_new (dlg_height - 3, bx0, B_ENTER, DEFPUSH_BUTTON, b0, NULL));
+    add_widget (learn_dlg, button_new (dlg_height - 3, bx1, B_CANCEL, NORMAL_BUTTON, b1, NULL));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -361,24 +345,23 @@ static void
 learn_save (void)
 {
     int i;
-    int profile_changed = 0;
-    char *section = g_strconcat ("terminal:", getenv ("TERM"), (char *) NULL);
-    char *esc_str;
+    char *section;
+    gboolean profile_changed = FALSE;
+
+    section = g_strconcat ("terminal:", getenv ("TERM"), (char *) NULL);
 
     for (i = 0; i < learn_total; i++)
-    {
         if (learnkeys[i].sequence != NULL)
         {
-            profile_changed = 1;
+            char *esc_str;
 
             esc_str = strutils_escape (learnkeys[i].sequence, -1, ";\\", TRUE);
-
             mc_config_set_string_raw_value (mc_main_config, section, key_name_conv_tab[i].name,
                                             esc_str);
-
             g_free (esc_str);
+
+            profile_changed = TRUE;
         }
-    }
 
     /* On the one hand no good idea to save the complete setup but 
      * without 'Auto save setup' the new key-definitions will not be 
@@ -401,6 +384,7 @@ learn_keys (void)
 {
     int save_old_esc_mode = old_esc_mode;
     gboolean save_alternate_plus_minus = mc_global.tty.alternate_plus_minus;
+    int result;
 
     /* old_esc_mode cannot work in learn keys dialog */
     old_esc_mode = 0;
@@ -410,9 +394,9 @@ learn_keys (void)
        correct_key_code */
     mc_global.tty.alternate_plus_minus = TRUE;
     application_keypad_mode ();
-    init_learn ();
 
-    run_dlg (learn_dlg);
+    init_learn ();
+    result = run_dlg (learn_dlg);
 
     old_esc_mode = save_old_esc_mode;
     mc_global.tty.alternate_plus_minus = save_alternate_plus_minus;
@@ -420,12 +404,8 @@ learn_keys (void)
     if (!mc_global.tty.alternate_plus_minus)
         numeric_keypad_mode ();
 
-    switch (learn_dlg->ret_value)
-    {
-    case B_ENTER:
+    if (result == B_ENTER)
         learn_save ();
-        break;
-    }
 
     learn_done ();
 }

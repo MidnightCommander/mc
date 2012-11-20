@@ -1,11 +1,11 @@
 /*
-   Copyright (C) 2007, 2010, 2011
+   Copyright (C) 2007, 2010, 2011, 2012
    The Free Software Foundation, Inc.
 
    Written by:
    Daniel Borca <dborca@yahoo.com>, 2007
    Slava Zanko <slavazanko@gmail.com>, 2010
-   Andrew Borodin <aborodin@vmail.ru>, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2010, 2012
    Ilia Maslakov <il.smind@gmail.com>, 2010
 
    This file is part of the Midnight Commander.
@@ -80,9 +80,6 @@ do { \
 
 #define FILE_READ_BUF 4096
 #define FILE_FLAG_TEMP (1 << 0)
-
-#define OPTX 56
-#define OPTY 17
 
 #define ADD_CH '+'
 #define DEL_CH '-'
@@ -2353,35 +2350,31 @@ dview_diff_options (WDiff * dview)
         N_("&Minimal (Find a smaller set of change)")
     };
 
-    QuickWidget diffopt_widgets[] = {
-        QUICK_BUTTON (6, 10, 14, OPTY, N_("&Cancel"), B_CANCEL, NULL),
-        QUICK_BUTTON (2, 10, 14, OPTY, N_("&OK"), B_ENTER, NULL),
-
-        QUICK_CHECKBOX (3, OPTX, 12, OPTY,
-                        N_("Strip &trailing carriage return"), &dview->opt.strip_trailing_cr),
-        QUICK_CHECKBOX (3, OPTX, 11, OPTY,
-                        N_("Ignore all &whitespace"), &dview->opt.ignore_all_space),
-        QUICK_CHECKBOX (3, OPTX, 10, OPTY,
-                        N_("Ignore &space change"), &dview->opt.ignore_space_change),
-        QUICK_CHECKBOX (3, OPTX, 9, OPTY,
-                        N_("Ignore tab &expansion"), &dview->opt.ignore_tab_expansion),
-        QUICK_CHECKBOX (3, OPTX, 8, OPTY,
-                        N_("&Ignore case"), &dview->opt.ignore_case),
-        QUICK_LABEL (3, OPTX, 7, OPTY, N_("Diff extra options")),
-        QUICK_RADIO (3, OPTX, 3, OPTY,
-                     3, (const char **) quality_str, (int *) &dview->opt.quality),
-        QUICK_LABEL (3, OPTX, 2, OPTY, N_("Diff algorithm")),
-
+    quick_widget_t quick_widgets[] = {
+        /* *INDENT-OFF* */
+        QUICK_START_GROUPBOX (N_("Diff algorithm")),
+            QUICK_RADIO (3, (const char **) quality_str, (int *) &dview->opt.quality, NULL),
+        QUICK_STOP_GROUPBOX,
+        QUICK_START_GROUPBOX (N_("Diff extra options")),
+            QUICK_CHECKBOX (N_("&Ignore case"), &dview->opt.ignore_case, NULL),
+            QUICK_CHECKBOX (N_("Ignore tab &expansion"), &dview->opt.ignore_tab_expansion, NULL),
+            QUICK_CHECKBOX (N_("Ignore &space change"), &dview->opt.ignore_space_change, NULL),
+            QUICK_CHECKBOX (N_("Ignore all &whitespace"), &dview->opt.ignore_all_space, NULL),
+            QUICK_CHECKBOX (N_("Strip &trailing carriage return"), &dview->opt.strip_trailing_cr,
+                            NULL),
+        QUICK_STOP_GROUPBOX,
+        QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
+        /* *INDENT-ON* */
     };
 
-    QuickDialog diffopt = {
-        OPTX, OPTY, -1, -1,
+    quick_dialog_t qdlg = {
+        -1, -1, 56,
         N_("Diff Options"), "[Diff Options]",
-        diffopt_widgets, NULL, NULL, FALSE
+        quick_widgets, NULL, NULL
     };
 
-    if (quick_dialog (&diffopt) != B_CANCEL)
+    if (quick_dialog (&qdlg) != B_CANCEL)
         dview_reread (dview);
 }
 
@@ -2445,7 +2438,7 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
     ndiff = redo_diff (dview);
     if (ndiff < 0)
     {
-        /* goto WIDGET_DESTROY stage: dview_fini() */
+        /* goto MSG_DESTROY stage: dview_fini() */
         f_close (f[DIFF_LEFT]);
         f_close (f[DIFF_RIGHT]);
         return -1;
@@ -2867,7 +2860,7 @@ dview_update (WDiff * dview)
 static void
 dview_edit (WDiff * dview, diff_place_t ord)
 {
-    Dlg_head *h;
+    WDialog *h;
     gboolean h_modal;
     int linenum, lineofs;
 
@@ -2877,7 +2870,7 @@ dview_edit (WDiff * dview, diff_place_t ord)
         return;
     }
 
-    h = ((Widget *) dview)->owner;
+    h = WIDGET (dview)->owner;
     h_modal = h->modal;
 
     get_line_numbers (dview->a[ord], dview->skip_rows, &linenum, &lineofs);
@@ -2943,19 +2936,21 @@ dview_goto_cmd (WDiff * dview, diff_place_t ord)
 static void
 dview_labels (WDiff * dview)
 {
-    Dlg_head *h;
+    Widget *d;
+    WDialog *h;
     WButtonBar *b;
 
-    h = dview->widget.owner;
+    d = WIDGET (dview);
+    h = d->owner;
     b = find_buttonbar (h);
 
-    buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), diff_map, (Widget *) dview);
-    buttonbar_set_label (b, 2, Q_ ("ButtonBar|Save"), diff_map, (Widget *) dview);
-    buttonbar_set_label (b, 4, Q_ ("ButtonBar|Edit"), diff_map, (Widget *) dview);
-    buttonbar_set_label (b, 5, Q_ ("ButtonBar|Merge"), diff_map, (Widget *) dview);
-    buttonbar_set_label (b, 7, Q_ ("ButtonBar|Search"), diff_map, (Widget *) dview);
-    buttonbar_set_label (b, 9, Q_ ("ButtonBar|Options"), diff_map, (Widget *) dview);
-    buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), diff_map, (Widget *) dview);
+    buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), diff_map, d);
+    buttonbar_set_label (b, 2, Q_ ("ButtonBar|Save"), diff_map, d);
+    buttonbar_set_label (b, 4, Q_ ("ButtonBar|Edit"), diff_map, d);
+    buttonbar_set_label (b, 5, Q_ ("ButtonBar|Merge"), diff_map, d);
+    buttonbar_set_label (b, 7, Q_ ("ButtonBar|Search"), diff_map, d);
+    buttonbar_set_label (b, 9, Q_ ("ButtonBar|Options"), diff_map, d);
+    buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), diff_map, d);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3309,26 +3304,26 @@ dview_handle_key (WDiff * dview, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-dview_callback (Widget * w, widget_msg_t msg, int parm)
+dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WDiff *dview = (WDiff *) w;
-    Dlg_head *h = dview->widget.owner;
+    WDialog *h = w->owner;
     cb_ret_t i;
 
     switch (msg)
     {
-    case WIDGET_INIT:
+    case MSG_INIT:
         dview_labels (dview);
         dview_load_options (dview);
         dview_update (dview);
         return MSG_HANDLED;
 
-    case WIDGET_DRAW:
+    case MSG_DRAW:
         dview->new_frame = 1;
         dview_update (dview);
         return MSG_HANDLED;
 
-    case WIDGET_KEY:
+    case MSG_KEY:
         i = dview_handle_key (dview, parm);
         if (dview->view_quit)
             dlg_stop (h);
@@ -3336,7 +3331,7 @@ dview_callback (Widget * w, widget_msg_t msg, int parm)
             dview_update (dview);
         return i;
 
-    case WIDGET_COMMAND:
+    case MSG_ACTION:
         i = dview_execute_cmd (dview, parm);
         if (dview->view_quit)
             dlg_stop (h);
@@ -3344,20 +3339,20 @@ dview_callback (Widget * w, widget_msg_t msg, int parm)
             dview_update (dview);
         return i;
 
-    case WIDGET_DESTROY:
+    case MSG_DESTROY:
         dview_save_options (dview);
         dview_fini (dview);
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return widget_default_callback (w, sender, msg, parm, data);
     }
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dview_adjust_size (Dlg_head * h)
+dview_adjust_size (WDialog * h)
 {
     WDiff *dview;
     WButtonBar *bar;
@@ -3365,8 +3360,8 @@ dview_adjust_size (Dlg_head * h)
     /* Look up the viewer and the buttonbar, we assume only two widgets here */
     dview = (WDiff *) find_widget_type (h, dview_callback);
     bar = find_buttonbar (h);
-    widget_set_size (&dview->widget, 0, 0, LINES - 1, COLS);
-    widget_set_size ((Widget *) bar, LINES - 1, 0, 1, COLS);
+    widget_set_size (WIDGET (dview), 0, 0, LINES - 1, COLS);
+    widget_set_size (WIDGET (bar), LINES - 1, 0, 1, COLS);
 
     dview_compute_areas (dview);
 }
@@ -3374,32 +3369,33 @@ dview_adjust_size (Dlg_head * h)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-dview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+dview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WDiff *dview = (WDiff *) data;
+    WDialog *h = DIALOG (w);
 
     switch (msg)
     {
-    case DLG_RESIZE:
+    case MSG_RESIZE:
         dview_adjust_size (h);
         return MSG_HANDLED;
 
-    case DLG_ACTION:
+    case MSG_ACTION:
         /* shortcut */
         if (sender == NULL)
             return dview_execute_cmd (NULL, parm);
         /* message from buttonbar */
-        if (sender == (Widget *) find_buttonbar (h))
+        if (sender == WIDGET (find_buttonbar (h)))
         {
             if (data != NULL)
-                return send_message ((Widget *) data, WIDGET_COMMAND, parm);
+                return send_message (data, NULL, MSG_ACTION, parm, NULL);
 
             dview = (WDiff *) find_widget_type (h, dview_callback);
             return dview_execute_cmd (dview, parm);
         }
         return MSG_NOT_HANDLED;
 
-    case DLG_VALIDATE:
+    case MSG_VALIDATE:
         dview = (WDiff *) find_widget_type (h, dview_callback);
         h->state = DLG_ACTIVE;  /* don't stop the dialog before final decision */
         if (dview_ok_to_exit (dview))
@@ -3407,14 +3403,14 @@ dview_dialog_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, v
         return MSG_HANDLED;
 
     default:
-        return default_dlg_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-dview_get_title (const Dlg_head * h, size_t len)
+dview_get_title (const WDialog * h, size_t len)
 {
     const WDiff *dview;
     const char *modified = " (*) ";
@@ -3443,7 +3439,8 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
 {
     int error;
     WDiff *dview;
-    Dlg_head *dview_dlg;
+    Widget *w;
+    WDialog *dview_dlg;
 
     /* Create dialog and widgets, put them on the dialog */
     dview_dlg =
@@ -3451,11 +3448,9 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
                     "[Diff Viewer]", NULL, DLG_WANT_TAB);
 
     dview = g_new0 (WDiff, 1);
-
-    init_widget (&dview->widget, 0, 0, LINES - 1, COLS,
-                 (callback_fn) dview_callback, (mouse_h) dview_event);
-
-    widget_want_cursor (dview->widget, 0);
+    w = WIDGET (dview);
+    init_widget (w, 0, 0, LINES - 1, COLS, dview_callback, dview_event);
+    widget_want_cursor (w, FALSE);
 
     add_widget (dview_dlg, dview);
     add_widget (dview_dlg, buttonbar_new (TRUE));

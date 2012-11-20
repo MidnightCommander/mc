@@ -2,7 +2,7 @@
    Widget based utility functions.
 
    Copyright (C) 1994, 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
-   2005, 2006, 2007, 2008, 2009, 2010, 2011
+   2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012
    The Free Software Foundation, Inc.
 
    Authors:
@@ -10,7 +10,7 @@
    Radek Doulik, 1994, 1995
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1995
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2012
 
    This file is part of the Midnight Commander.
 
@@ -53,7 +53,7 @@
 
 /*** file scope variables ************************************************************************/
 
-static Dlg_head *last_query_dlg;
+static WDialog *last_query_dlg;
 
 static int sel_pos = 0;
 
@@ -63,21 +63,23 @@ static int sel_pos = 0;
 /** default query callback, used to reposition query */
 
 static cb_ret_t
-default_query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+query_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
+    WDialog *h = DIALOG (w);
+
     switch (msg)
     {
-    case DLG_RESIZE:
+    case MSG_RESIZE:
         if ((h->flags & DLG_CENTER) == 0)
         {
-            Dlg_head *prev_dlg = NULL;
+            WDialog *prev_dlg = NULL;
             int ypos, xpos;
 
             /* get dialog under h */
             if (top_dlg != NULL)
             {
                 if (top_dlg->data != (void *) h)
-                    prev_dlg = (Dlg_head *) top_dlg->data;
+                    prev_dlg = DIALOG (top_dlg->data);
                 else
                 {
                     GList *p;
@@ -86,38 +88,38 @@ default_query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, 
                        Get previous dialog in stack */
                     p = g_list_next (top_dlg);
                     if (p != NULL)
-                        prev_dlg = (Dlg_head *) p->data;
+                        prev_dlg = DIALOG (p->data);
                 }
             }
 
             /* if previous dialog is not fullscreen'd -- overlap it */
             if (prev_dlg == NULL || prev_dlg->fullscreen)
-                ypos = LINES / 3 - (h->lines - 3) / 2;
+                ypos = LINES / 3 - (w->lines - 3) / 2;
             else
-                ypos = prev_dlg->y + 2;
+                ypos = WIDGET (prev_dlg)->y + 2;
 
-            xpos = COLS / 2 - h->cols / 2;
+            xpos = COLS / 2 - w->cols / 2;
 
             /* set position */
-            dlg_set_position (h, ypos, xpos, ypos + h->lines, xpos + h->cols);
+            dlg_set_position (h, ypos, xpos, ypos + w->lines, xpos + w->cols);
 
             return MSG_HANDLED;
         }
         /* fallthrough */
 
     default:
-        return default_dlg_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 
 /* --------------------------------------------------------------------------------------------- */
 /** Create message dialog */
 
-static struct Dlg_head *
+static struct WDialog *
 do_create_message (int flags, const char *title, const char *text)
 {
     char *p;
-    Dlg_head *d;
+    WDialog *d;
 
     /* Add empty lines before and after the message */
     p = g_strconcat ("\n", text, "\n", (char *) NULL);
@@ -125,7 +127,7 @@ do_create_message (int flags, const char *title, const char *text)
     d = last_query_dlg;
 
     /* do resize before initing and running */
-    default_query_callback (d, NULL, DLG_RESIZE, 0, NULL);
+    send_message (d, NULL, MSG_RESIZE, 0, NULL);
 
     init_dlg (d);
     g_free (p);
@@ -142,7 +144,7 @@ do_create_message (int flags, const char *title, const char *text)
 static void
 fg_message (int flags, const char *title, const char *text)
 {
-    Dlg_head *d;
+    WDialog *d;
 
     d = do_create_message (flags, title, text);
     tty_getch ();
@@ -182,84 +184,44 @@ static char *
 fg_input_dialog_help (const char *header, const char *text, const char *help,
                       const char *history_name, const char *def_text, gboolean strip_password)
 {
-    char *my_str;
-    int flags = (strip_password) ? 4 : 0;
-    QuickWidget quick_widgets[] = {
-        /* 0 */ QUICK_BUTTON (6, 64, 1, 0, N_("&Cancel"), B_CANCEL, NULL),
-        /* 1 */ QUICK_BUTTON (3, 64, 1, 0, N_("&OK"), B_ENTER, NULL),
-        /* 2 */ QUICK_INPUT (3, 64, 0, 0, def_text, 58, flags, NULL, &my_str),
-        /* 3 */ QUICK_LABEL (3, 64, 2, 0, ""),
-        QUICK_END
-    };
-
-    int b0_len, b1_len, b_len, gap;
-    char histname[64] = "inp|";
-    int lines, cols;
-    int len;
-    int i;
     char *p_text;
+    char histname[64] = "inp|";
+    int flags = strip_password ? 4 : 0;
+    char *my_str;
     int ret;
 
-    /* buttons */
-#ifdef ENABLE_NLS
-    quick_widgets[0].u.button.text = _(quick_widgets[0].u.button.text);
-    quick_widgets[1].u.button.text = _(quick_widgets[1].u.button.text);
-#endif /* ENABLE_NLS */
+    /* label text */
+    p_text = g_strstrip (g_strdup (text));
 
-    b0_len = str_term_width1 (quick_widgets[0].u.button.text) + 3;
-    b1_len = str_term_width1 (quick_widgets[1].u.button.text) + 5;      /* default button */
-    b_len = b0_len + b1_len + 2;        /* including gap */
-
-    /* input line */
+    /* input history */
     if (history_name != NULL && *history_name != '\0')
-    {
         g_strlcpy (histname + 3, history_name, sizeof (histname) - 3);
-        quick_widgets[2].u.input.histname = histname;
-    }
 
     /* The special value of def_text is used to identify password boxes
        and hide characters with "*".  Don't save passwords in history! */
     if (def_text == INPUT_PASSWORD)
     {
-        quick_widgets[2].u.input.flags = 1;
+        flags = 1;
         histname[3] = '\0';
-        quick_widgets[2].u.input.text = "";
+        def_text = "";
     }
 
-    /* text */
-    p_text = g_strstrip (g_strdup (text));
-    str_msg_term_size (p_text, &lines, &cols);
-    quick_widgets[3].u.label.text = p_text;
-
-    /* dialog width */
-    len = str_term_width1 (header);
-    len = max (max (len, cols) + 4, 64);
-    len = min (max (len, b_len + 6), COLS);
-
-    /* button locations */
-    gap = (len - 8 - b_len) / 3;
-    quick_widgets[1].relative_x = 3 + gap;
-    quick_widgets[0].relative_x = quick_widgets[1].relative_x + b1_len + gap + 2;
-
     {
-        QuickDialog Quick_input = {
-            len, lines + 6, -1, -1, header,
-            help, quick_widgets, NULL, NULL, TRUE
+        quick_widget_t quick_widgets[] = {
+            /* *INDENT-OFF* */
+            QUICK_LABELED_INPUT (p_text, input_label_above, def_text, flags, histname, &my_str,
+                                 NULL),
+            QUICK_BUTTONS_OK_CANCEL,
+            QUICK_END
+            /* *INDENT-ON* */
         };
 
-        for (i = 0; i < 4; i++)
-        {
-            quick_widgets[i].x_divisions = Quick_input.xlen;
-            quick_widgets[i].y_divisions = Quick_input.ylen;
-        }
+        quick_dialog_t qdlg = {
+            -1, -1, COLS / 2, header,
+            help, quick_widgets, NULL, NULL
+        };
 
-        for (i = 0; i < 3; i++)
-            quick_widgets[i].relative_y += 2 + lines;
-
-        /* input line length */
-        quick_widgets[2].u.input.len = Quick_input.xlen - 6;
-
-        ret = quick_dialog (&Quick_input);
+        ret = quick_dialog (&qdlg);
     }
 
     g_free (p_text);
@@ -309,7 +271,7 @@ int
 query_dialog (const char *header, const char *text, int flags, int count, ...)
 {
     va_list ap;
-    Dlg_head *query_dlg;
+    WDialog *query_dlg;
     WButton *button;
     WButton *defbutton = NULL;
     int win_len = 0;
@@ -343,11 +305,16 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
 
     /* prepare dialog */
     query_dlg =
-        create_dlg (TRUE, 0, 0, lines, cols, query_colors, default_query_callback, NULL,
+        create_dlg (TRUE, 0, 0, lines, cols, query_colors, query_default_callback, NULL,
                     "[QueryBox]", header, dlg_flags);
 
     if (count > 0)
     {
+        add_widget_autopos (query_dlg, label_new (2, 3, text), WPOS_KEEP_TOP | WPOS_CENTER_HORZ,
+                            NULL);
+
+        add_widget (query_dlg, hline_new (lines - 4, -1, -1));
+
         cols = (cols - win_len - 2) / 2 + 2;
         va_start (ap, count);
         for (i = 0; i < count; i++)
@@ -359,7 +326,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
             if (strchr (cur_name, '&') != NULL)
                 xpos--;
 
-            button = button_new (lines - 3, cols, B_USER + i, NORMAL_BUTTON, cur_name, 0);
+            button = button_new (lines - 3, cols, B_USER + i, NORMAL_BUTTON, cur_name, NULL);
             add_widget (query_dlg, button);
             cols += xpos;
             if (i == sel_pos)
@@ -367,12 +334,10 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
         }
         va_end (ap);
 
-        add_widget (query_dlg, label_new (2, 3, text));
-
         /* do resize before running and selecting any widget */
-        default_query_callback (query_dlg, NULL, DLG_RESIZE, 0, NULL);
+        send_message (query_dlg, NULL, MSG_RESIZE, 0, NULL);
 
-        if (defbutton)
+        if (defbutton != NULL)
             dlg_select_widget (defbutton);
 
         /* run dialog and make result */
@@ -389,8 +354,9 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
     }
     else
     {
-        add_widget (query_dlg, label_new (2, 3, text));
-        add_widget (query_dlg, button_new (0, 0, 0, HIDDEN_BUTTON, "-", 0));
+        add_widget_autopos (query_dlg, label_new (2, 3, text), WPOS_KEEP_TOP | WPOS_CENTER_HORZ,
+                            NULL);
+        add_widget (query_dlg, button_new (0, 0, 0, HIDDEN_BUTTON, "-", NULL));
         last_query_dlg = query_dlg;
     }
     sel_pos = 0;
@@ -411,11 +377,11 @@ query_set_sel (int new_sel)
  * destroy_dlg() to dismiss it.  Not safe to call from background.
  */
 
-struct Dlg_head *
+struct WDialog *
 create_message (int flags, const char *title, const char *text, ...)
 {
     va_list args;
-    Dlg_head *d;
+    WDialog *d;
     char *p;
 
     va_start (args, text);

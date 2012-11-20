@@ -1048,14 +1048,16 @@ insert_text (WInput * in, char *text, ssize_t size)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     static char buff[MB_LEN_MAX] = "";
     static int bl = 0;
 
+    WDialog *h = DIALOG (w);
+
     switch (msg)
     {
-    case DLG_KEY:
+    case MSG_KEY:
         switch (parm)
         {
         case KEY_LEFT:
@@ -1090,17 +1092,17 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
 
                 new_end = str_get_prev_char (&input->buffer[end]) - input->buffer;
 
-                for (i = 0, e = ((WListbox *) h->current->data)->list;
+                for (i = 0, e = LISTBOX (h->current->data)->list;
                      e != NULL; i++, e = g_list_next (e))
                 {
-                    WLEntry *le = (WLEntry *) e->data;
+                    WLEntry *le = LENTRY (e->data);
 
                     if (strncmp (input->buffer + start, le->text, new_end - start) == 0)
                     {
-                        listbox_select_entry ((WListbox *) h->current->data, i);
+                        listbox_select_entry (LISTBOX (h->current->data), i);
                         end = new_end;
                         input_handle_char (input, parm);
-                        send_message ((Widget *) h->current->data, WIDGET_DRAW, 0);
+                        send_message (h->current->data, NULL, MSG_DRAW, 0, NULL);
                         break;
                     }
                 }
@@ -1141,10 +1143,10 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
                     return MSG_HANDLED;
                 }
 
-                for (i = 0, e = ((WListbox *) h->current->data)->list;
+                for (i = 0, e = LISTBOX (h->current->data)->list;
                      e != NULL; i++, e = g_list_next (e))
                 {
-                    WLEntry *le = (WLEntry *) e->data;
+                    WLEntry *le = LENTRY (e->data);
 
                     if (strncmp (input->buffer + start, le->text, end - start) == 0
                         && strncmp (&le->text[end - start], buff, bl) == 0)
@@ -1152,7 +1154,7 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
                         if (need_redraw == 0)
                         {
                             need_redraw = 1;
-                            listbox_select_entry ((WListbox *) h->current->data, i);
+                            listbox_select_entry (LISTBOX (h->current->data), i);
                             last_text = le->text;
                         }
                         else
@@ -1203,7 +1205,7 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
                 if (need_redraw == 2)
                 {
                     insert_text (input, last_text, low);
-                    send_message ((Widget *) h->current->data, WIDGET_DRAW, 0);
+                    send_message (h->current->data, NULL, MSG_DRAW, 0, NULL);
                 }
                 else if (need_redraw == 1)
                 {
@@ -1217,7 +1219,7 @@ query_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
         break;
 
     default:
-        return default_dlg_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -1281,7 +1283,7 @@ complete_engine (WInput * in, int what_to_do)
             int x, y, w, h;
             int start_x, start_y;
             char **p, *q;
-            Dlg_head *query_dlg;
+            WDialog *query_dlg;
             WListbox *query_list;
 
             for (p = in->completions + 1; *p != NULL; count++, p++)
@@ -1290,8 +1292,8 @@ complete_engine (WInput * in, int what_to_do)
                 if (i > maxlen)
                     maxlen = i;
             }
-            start_x = in->widget.x;
-            start_y = in->widget.y;
+            start_x = WIDGET (in)->x;
+            start_y = WIDGET (in)->y;
             if (start_y - 2 >= count)
             {
                 y = start_y - 2 - count;

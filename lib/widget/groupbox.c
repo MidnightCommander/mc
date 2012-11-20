@@ -53,41 +53,41 @@
 /*** file scope functions ************************************************************************/
 
 static cb_ret_t
-groupbox_callback (Widget * w, widget_msg_t msg, int parm)
+groupbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WGroupbox *g = (WGroupbox *) w;
+    WGroupbox *g = GROUPBOX (w);
 
     switch (msg)
     {
-    case WIDGET_INIT:
+    case MSG_INIT:
         return MSG_HANDLED;
 
-    case WIDGET_FOCUS:
+    case MSG_FOCUS:
         return MSG_NOT_HANDLED;
 
-    case WIDGET_DRAW:
+    case MSG_DRAW:
         {
+            Widget *wo = WIDGET (w->owner);
+
             gboolean disabled = (w->options & W_DISABLED) != 0;
             tty_setcolor (disabled ? DISABLED_COLOR : COLOR_NORMAL);
-            draw_box (g->widget.owner, g->widget.y - g->widget.owner->y,
-                      g->widget.x - g->widget.owner->x, g->widget.lines, g->widget.cols, TRUE);
+            draw_box (w->owner, w->y - wo->y, w->x - wo->x, w->lines, w->cols, TRUE);
 
             if (g->title != NULL)
             {
                 tty_setcolor (disabled ? DISABLED_COLOR : COLOR_TITLE);
-                dlg_move (g->widget.owner, g->widget.y - g->widget.owner->y,
-                          g->widget.x - g->widget.owner->x + 1);
+                widget_move (w->owner, w->y - wo->y, w->x - wo->x + 1);
                 tty_print_string (g->title);
             }
             return MSG_HANDLED;
         }
 
-    case WIDGET_DESTROY:
+    case MSG_DESTROY:
         g_free (g->title);
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return widget_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -99,15 +99,33 @@ WGroupbox *
 groupbox_new (int y, int x, int height, int width, const char *title)
 {
     WGroupbox *g;
+    Widget *w;
 
     g = g_new (WGroupbox, 1);
-    init_widget (&g->widget, y, x, height, width, groupbox_callback, NULL);
+    w = WIDGET (g);
+    init_widget (w, y, x, height, width, groupbox_callback, NULL);
 
-    widget_want_cursor (g->widget, FALSE);
-    widget_want_hotkey (g->widget, FALSE);
+    widget_want_cursor (w, FALSE);
+    widget_want_hotkey (w, FALSE);
+
+    g->title = NULL;
+    groupbox_set_title (g, title);
+
+    return g;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+groupbox_set_title (WGroupbox *g, const char *title)
+{
+    Widget *w = WIDGET (g);
+
+    g_free (g->title);
+    g->title = NULL;
 
     /* Strip existing spaces, add one space before and after the title */
-    if (title != NULL)
+    if (title != NULL && *title != '\0')
     {
         char *t;
 
@@ -116,7 +134,8 @@ groupbox_new (int y, int x, int height, int width, const char *title)
         g_free (t);
     }
 
-    return g;
+    if (w->owner != NULL)
+        send_message (w, NULL, MSG_DRAW, 0, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

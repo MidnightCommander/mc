@@ -140,13 +140,13 @@ mcview_toggle_hex_mode (mcview_t * view)
     {
         view->hex_cursor = view->dpy_start;
         view->dpy_start = mcview_offset_rounddown (view->dpy_start, view->bytes_per_line);
-        widget_want_cursor (view->widget, 1);
+        widget_want_cursor (WIDGET (view), TRUE);
     }
     else
     {
         view->dpy_start = mcview_bol (view, view->hex_cursor, 0);
         view->hex_cursor = view->dpy_start;
-        widget_want_cursor (view->widget, 0);
+        widget_want_cursor (WIDGET (view), FALSE);
     }
     mcview_altered_hex_mode = 1;
     view->dpy_bbar_dirty = TRUE;
@@ -433,7 +433,7 @@ mcview_eol (mcview_t * view, off_t current, off_t limit)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-mcview_get_title (const Dlg_head * h, size_t len)
+mcview_get_title (const WDialog * h, size_t len)
 {
     const mcview_t *view = (const mcview_t *) find_widget_type (h, mcview_callback);
     const char *modified = view->hexedit_mode && (view->change_list != NULL) ? "(*) " : "    ";

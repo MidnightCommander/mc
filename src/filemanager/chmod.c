@@ -80,18 +80,18 @@ static struct
 } check_perm[] =
 {
     /* *INDENT-OFF* */
-    { S_IXOTH, N_("execute/search by others"), FALSE, NULL },
-    { S_IWOTH, N_("write by others"), FALSE, NULL },
-    { S_IROTH, N_("read by others"), FALSE, NULL },
-    { S_IXGRP, N_("execute/search by group"), FALSE, NULL },
-    { S_IWGRP, N_("write by group"), FALSE, NULL },
-    { S_IRGRP, N_("read by group"), FALSE, NULL },
-    { S_IXUSR, N_("execute/search by owner"), FALSE, NULL },
-    { S_IWUSR, N_("write by owner"), FALSE, NULL },
-    { S_IRUSR, N_("read by owner"), FALSE, NULL },
-    { S_ISVTX, N_("sticky bit"), FALSE, NULL },
-    { S_ISGID, N_("set group ID on execution"), FALSE, NULL },
-    { S_ISUID, N_("set user ID on execution"), FALSE, NULL }
+    { S_ISUID, N_("set &user ID on execution"), FALSE, NULL },
+    { S_ISGID, N_("set &group ID on execution"), FALSE, NULL },
+    { S_ISVTX, N_("stick&y bit"), FALSE, NULL },
+    { S_IRUSR, N_("&read by owner"), FALSE, NULL },
+    { S_IWUSR, N_("&write by owner"), FALSE, NULL },
+    { S_IXUSR, N_("e&xecute/search by owner"), FALSE, NULL },
+    { S_IRGRP, N_("rea&d by group"), FALSE, NULL },
+    { S_IWGRP, N_("write by grou&p"), FALSE, NULL },
+    { S_IXGRP, N_("execu&te/search by group"), FALSE, NULL },
+    { S_IROTH, N_("read &by others"), FALSE, NULL },
+    { S_IWOTH, N_("wr&ite by others"), FALSE, NULL },
+    { S_IXOTH, N_("execute/searc&h by others"), FALSE, NULL }
     /* *INDENT-ON* */
 };
 
@@ -118,17 +118,18 @@ static struct
 } chmod_but[] =
 {
     /* *INDENT-OFF* */
-    { B_CANCEL, NORMAL_BUTTON, 3, 0, N_("&Cancel") },
-    { B_ENTER, DEFPUSH_BUTTON, 3, 0, N_("&Set") },
-    { B_CLRMRK, NORMAL_BUTTON, 5, 0, N_("C&lear marked") },
-    { B_SETMRK, NORMAL_BUTTON, 5, 0, N_("S&et marked") },
+    { B_ALL,    NORMAL_BUTTON, 6, 0, N_("Set &all") },
     { B_MARKED, NORMAL_BUTTON, 6, 0, N_("&Marked all") },
-    { B_ALL,    NORMAL_BUTTON, 6, 0, N_("Set &all") }
+    { B_SETMRK, NORMAL_BUTTON, 5, 0, N_("S&et marked") },
+    { B_CLRMRK, NORMAL_BUTTON, 5, 0, N_("C&lear marked") },
+    { B_ENTER, DEFPUSH_BUTTON, 3, 0, N_("&Set") },
+    { B_CANCEL, NORMAL_BUTTON, 3, 0, N_("&Cancel") }
     /* *INDENT-ON* */
 };
 
 static const unsigned int chmod_but_num = G_N_ELEMENTS (chmod_but);
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -180,25 +181,25 @@ chmod_i18n (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chmod_toggle_select (Dlg_head * h, int Id)
+chmod_toggle_select (WDialog * h, int Id)
 {
     tty_setcolor (COLOR_NORMAL);
     check_perm[Id].selected = !check_perm[Id].selected;
 
-    dlg_move (h, PY + check_perm_num - Id, PX + 1);
+    widget_move (h, PY + Id + 1, PX + 1);
     tty_print_char (check_perm[Id].selected ? '*' : ' ');
-    dlg_move (h, PY + check_perm_num - Id, PX + 3);
+    widget_move (h, PY + Id + 1, PX + 3);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chmod_refresh (Dlg_head * h)
+chmod_refresh (WDialog * h)
 {
-    int y = file_gb->widget.y + 1;
-    int x = file_gb->widget.x + 2;
+    int y = WIDGET (file_gb)->y + 1;
+    int x = WIDGET (file_gb)->x + 2;
 
-    common_dialog_repaint (h);
+    dlg_default_repaint (h);
 
     tty_setcolor (COLOR_NORMAL);
 
@@ -215,40 +216,34 @@ chmod_refresh (Dlg_head * h)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-chmod_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+chmod_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    char buffer[BUF_TINY];
-    int id;
-
-    id = dlg_get_current_widget_id (h) - (chmod_but_num - (single_set ? 4 : 0)) - 1;
+    WDialog *h = DIALOG (w);
 
     switch (msg)
     {
-    case DLG_ACTION:
-        /* close dialog due to SIGINT (ctrl-g) */
-        if (sender == NULL && parm == CK_Cancel)
-            return MSG_NOT_HANDLED;
-
-        /* handle checkboxes */
-        if (id >= 0)
+    case MSG_ACTION:
         {
-            gboolean sender_is_checkbox = FALSE;
+            /* handle checkboxes */
             unsigned int i;
+
+            /* close dialog due to SIGINT (ctrl-g) */
+            if (sender == NULL && parm == CK_Cancel)
+                return MSG_NOT_HANDLED;
 
             /* whether action was sent by checkbox? */
             for (i = 0; i < check_perm_num; i++)
-                if (sender == (Widget *) check_perm[i].check)
-                {
-                    sender_is_checkbox = TRUE;
+                if (sender == WIDGET (check_perm[i].check))
                     break;
-                }
 
-            if (sender_is_checkbox)
+            if (i < check_perm_num)
             {
-                c_stat ^= check_perm[id].mode;
+                char buffer[BUF_TINY];
+
+                c_stat ^= check_perm[i].mode;
                 g_snprintf (buffer, sizeof (buffer), "%o", (unsigned int) c_stat);
                 label_set_text (statl, buffer);
-                chmod_toggle_select (h, id);
+                chmod_toggle_select (h, i);
                 mode_change = TRUE;
                 return MSG_HANDLED;
             }
@@ -256,32 +251,44 @@ chmod_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *da
 
         return MSG_NOT_HANDLED;
 
-    case DLG_KEY:
-        if ((parm == 'T' || parm == 't' || parm == KEY_IC) && id > 0)
+    case MSG_KEY:
+        if (parm == 'T' || parm == 't' || parm == KEY_IC)
         {
-            chmod_toggle_select (h, id);
-            if (parm == KEY_IC)
-                dlg_one_down (h);
-            return MSG_HANDLED;
+            unsigned int i;
+            unsigned long id;
+
+            id = dlg_get_current_widget_id (h);
+            for (i = 0; i < check_perm_num; i++)
+                if (id == WIDGET (check_perm[i].check)->id)
+                    break;
+
+            if (i < check_perm_num)
+            {
+                chmod_toggle_select (h, i);
+                if (parm == KEY_IC)
+                    dlg_one_down (h);
+                return MSG_HANDLED;
+            }
         }
         return MSG_NOT_HANDLED;
 
-    case DLG_DRAW:
+    case MSG_DRAW:
         chmod_refresh (h);
         return MSG_HANDLED;
 
     default:
-        return default_dlg_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static Dlg_head *
+static WDialog *
 init_chmod (const char *fname, const struct stat *sf_stat)
 {
-    Dlg_head *ch_dlg;
+    WDialog *ch_dlg;
     int lines, cols;
+    int y;
     int perm_gb_len;
     int file_gb_len;
     unsigned int i;
@@ -306,50 +313,66 @@ init_chmod (const char *fname, const struct stat *sf_stat)
 
     ch_dlg =
         create_dlg (TRUE, 0, 0, lines, cols, dialog_colors,
-                    chmod_callback, NULL, "[Chmod]", _("Chmod command"), DLG_CENTER | DLG_REVERSE);
+                    chmod_callback, NULL, "[Chmod]", _("Chmod command"), DLG_CENTER);
 
-    for (i = 0; i < chmod_but_num; i++)
-    {
-        add_widget (ch_dlg,
-                    button_new (lines - chmod_but[i].y, ch_dlg->cols / 2 + 1,
-                                chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text, 0));
-
-        i++;
-
-        add_widget (ch_dlg,
-                    button_new (lines - chmod_but[i].y, ch_dlg->cols / 2 - chmod_but[i].len,
-                                chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text, 0));
-
-        if (single_set)
-            break;
-    }
-
-    file_gb = groupbox_new (PY, PX + perm_gb_len + 1, check_perm_num + 2, file_gb_len, _("File"));
-    add_widget (ch_dlg, file_gb);
+    add_widget (ch_dlg, groupbox_new (PY, PX, check_perm_num + 2, perm_gb_len, _("Permission")));
 
     for (i = 0; i < check_perm_num; i++)
     {
-        check_perm[i].check = check_new (PY + (check_perm_num - i), PX + 2,
+        check_perm[i].check = check_new (PY + i + 1, PX + 2,
                                          (c_stat & check_perm[i].mode) != 0 ? 1 : 0,
                                          check_perm[i].text);
         add_widget (ch_dlg, check_perm[i].check);
     }
 
-    add_widget (ch_dlg, groupbox_new (PY, PX, check_perm_num + 2, perm_gb_len, _("Permission")));
+    file_gb = groupbox_new (PY, PX + perm_gb_len + 1, check_perm_num + 2, file_gb_len, _("File"));
+    add_widget (ch_dlg, file_gb);
 
     /* Set the labels */
-    /* Do this at end to have a widget id in a simple way */
-    lines = PY + 2;
+    y = PY + 2;
     cols = PX + perm_gb_len + 3;
     c_fname = str_trunc (fname, file_gb_len - 3);
-    add_widget (ch_dlg, label_new (lines, cols, c_fname));
-    c_fown = str_trunc (get_owner (sf_stat->st_uid), file_gb_len - 3);
-    add_widget (ch_dlg, label_new (lines + 4, cols, c_fown));
-    c_fgrp = str_trunc (get_group (sf_stat->st_gid), file_gb_len - 3);
-    add_widget (ch_dlg, label_new (lines + 6, cols, c_fgrp));
+    add_widget (ch_dlg, label_new (y, cols, c_fname));
     g_snprintf (buffer, sizeof (buffer), "%o", (unsigned int) c_stat);
-    statl = label_new (lines + 2, cols, buffer);
+    statl = label_new (y + 2, cols, buffer);
     add_widget (ch_dlg, statl);
+    c_fown = str_trunc (get_owner (sf_stat->st_uid), file_gb_len - 3);
+    add_widget (ch_dlg, label_new (y + 4, cols, c_fown));
+    c_fgrp = str_trunc (get_group (sf_stat->st_gid), file_gb_len - 3);
+    add_widget (ch_dlg, label_new (y + 6, cols, c_fgrp));
+
+    if (!single_set)
+    {
+        i = 0;
+        add_widget (ch_dlg, hline_new (lines - chmod_but[i].y - 1, -1, -1));
+        for (; i < chmod_but_num - 2; i++)
+        {
+            y = lines - chmod_but[i].y;
+            add_widget (ch_dlg,
+                        button_new (y, WIDGET (ch_dlg)->cols / 2 - chmod_but[i].len,
+                                    chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text,
+                                    NULL));
+            i++;
+            add_widget (ch_dlg,
+                        button_new (y, WIDGET (ch_dlg)->cols / 2 + 1,
+                                    chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text,
+                                    NULL));
+        }
+    }
+
+    i = chmod_but_num - 2;
+    y = lines - chmod_but[i].y;
+    add_widget (ch_dlg, hline_new (y - 1, -1, -1));
+    add_widget (ch_dlg,
+                button_new (y, WIDGET (ch_dlg)->cols / 2 - chmod_but[i].len, chmod_but[i].ret_cmd,
+                            chmod_but[i].flags, chmod_but[i].text, NULL));
+    i++;
+    add_widget (ch_dlg,
+                button_new (y, WIDGET (ch_dlg)->cols / 2 + 1, chmod_but[i].ret_cmd,
+                            chmod_but[i].flags, chmod_but[i].text, NULL));
+
+    /* select first checkbox */
+    dlg_select_widget (check_perm[0].check);
 
     return ch_dlg;
 }
@@ -435,7 +458,7 @@ chmod_cmd (void)
     do
     {                           /* do while any files remaining */
         vfs_path_t *vpath;
-        Dlg_head *ch_dlg;
+        WDialog *ch_dlg;
         struct stat sf_stat;
         char *fname;
         int result;

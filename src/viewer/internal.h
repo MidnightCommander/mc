@@ -214,9 +214,9 @@ extern mcview_search_options_t mcview_search_options;
 /*** declarations of public functions ************************************************************/
 
 /* actions_cmd.c:  */
-cb_ret_t mcview_callback (Widget * w, widget_msg_t msg, int parm);
-cb_ret_t mcview_dialog_callback (Dlg_head * h, Widget * sender,
-                                 dlg_msg_t msg, int parm, void *data);
+cb_ret_t mcview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data);
+cb_ret_t mcview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
+                                 void *data);
 
 /* coord_cache.c: */
 coord_cache_t *coord_cache_new (void);
@@ -288,7 +288,7 @@ void mcview_set_codeset (mcview_t * view);
 void mcview_show_error (mcview_t * view, const char *error);
 off_t mcview_bol (mcview_t * view, off_t current, off_t limit);
 off_t mcview_eol (mcview_t * view, off_t current, off_t limit);
-char *mcview_get_title (const Dlg_head * h, size_t len);
+char *mcview_get_title (const WDialog * h, size_t len);
 
 /* move.c */
 void mcview_move_up (mcview_t *, off_t);

@@ -259,7 +259,7 @@ create_options_menu (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-edit_drop_menu_cmd (Dlg_head * h, int which)
+edit_drop_menu_cmd (WDialog * h, int which)
 {
     WMenuBar *menubar;
 
@@ -306,7 +306,7 @@ edit_init_menu (struct WMenuBar *menubar)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_menu_cmd (Dlg_head * h)
+edit_menu_cmd (WDialog * h)
 {
     edit_drop_menu_cmd (h, -1);
 }
@@ -314,7 +314,7 @@ edit_menu_cmd (Dlg_head * h)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-edit_drop_hotkey_menu (Dlg_head * h, int key)
+edit_drop_hotkey_menu (WDialog * h, int key)
 {
     int m = 0;
     switch (key)

@@ -9,8 +9,8 @@
 /* main forward declarations */
 struct Widget;
 typedef struct Widget Widget;
-struct Dlg_head;
-typedef struct Dlg_head Dlg_head;
+struct WDialog;
+typedef struct WDialog WDialog;
 
 /* Please note that the first element in all the widgets is a     */
 /* widget variable of type Widget.  We abuse this fact everywhere */

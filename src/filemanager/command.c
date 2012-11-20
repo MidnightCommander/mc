@@ -335,24 +335,22 @@ enter (WInput * lc_cmdline)
  */
 
 static cb_ret_t
-command_callback (Widget * w, widget_msg_t msg, int parm)
+command_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WInput *cmd = (WInput *) w;
-
     switch (msg)
     {
-    case WIDGET_FOCUS:
+    case MSG_FOCUS:
         /* Never accept focus, otherwise panels will be unselected */
         return MSG_NOT_HANDLED;
 
-    case WIDGET_KEY:
+    case MSG_KEY:
         /* Special case: we handle the enter key */
         if (parm == '\n')
-            return enter (cmd);
+            return enter (INPUT (w));
         /* fall through */
 
     default:
-        return input_callback (w, msg, parm);
+        return input_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -482,7 +480,7 @@ command_new (int y, int x, int cols)
                      INPUT_COMPLETE_SHELL_ESC);
 
     /* Add our hooks */
-    cmd->widget.callback = command_callback;
+    WIDGET (cmd)->callback = command_callback;
 
     return cmd;
 }

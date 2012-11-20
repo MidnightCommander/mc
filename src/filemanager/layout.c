@@ -2,12 +2,13 @@
    Panel layout module for the Midnight Commander
 
    Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2006, 2007, 2009, 2011
+   2006, 2007, 2009, 2011, 2012
    The Free Software Foundation, Inc.
 
    Written by:
    Janne Kukonlehto, 1995
    Miguel de Icaza, 1995
+   Andrew Borodin <aborodin@vmail.ru>, 2011, 2012
 
    This file is part of the Midnight Commander.
 
@@ -119,7 +120,6 @@ int ok_to_refresh = 1;
 #define B_MINUS (B_USER + 3)
 
 #define LAYOUT_OPTIONS_COUNT  G_N_ELEMENTS (check_options)
-#define OTHER_OPTIONS_COUNT   (LAYOUT_OPTIONS_COUNT - 1)
 
 /*** file scope type declarations ****************************************************************/
 
@@ -167,13 +167,13 @@ static struct
 } check_options[] =
 {
     /* *INDENT-OFF* */
-    { N_("Show free sp&ace"), &free_space, NULL},
-    { N_("&XTerm window title"), &xterm_title, NULL},
-    { N_("H&intbar visible"), &mc_global.message_visible, NULL},
-    { N_("&Keybar visible"), &mc_global.keybar_visible, NULL},
-    { N_("Command &prompt"), &command_prompt, NULL},
-    { N_("Menu&bar visible"), &menubar_visible, NULL},
-    { N_("&Equal split"), &equal_split, NULL}
+    { N_("&Equal split"), &equal_split, NULL },
+    { N_("&Menubar visible"), &menubar_visible, NULL },
+    { N_("Command &prompt"), &command_prompt, NULL },
+    { N_("&Keybar visible"), &mc_global.keybar_visible, NULL },
+    { N_("H&intbar visible"), &mc_global.message_visible, NULL },
+    { N_("&XTerm window title"), &xterm_title, NULL },
+    { N_("&Show free space"), &free_space, NULL }
     /* *INDENT-ON* */
 };
 
@@ -222,7 +222,7 @@ check_split (panels_layout_t * layout)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-update_split (const Dlg_head * h)
+update_split (const WDialog * h)
 {
     /* Check split has to be done before testing if it changed, since
        it can change due to calling check_split() as well */
@@ -230,26 +230,26 @@ update_split (const Dlg_head * h)
     old_layout = _panels_layout;
 
     if (_panels_layout.horizontal_split)
-        check_options[6].widget->state = _panels_layout.horizontal_equal ? 1 : 0;
+        check_options[0].widget->state = _panels_layout.horizontal_equal ? 1 : 0;
     else
-        check_options[6].widget->state = _panels_layout.vertical_equal ? 1 : 0;
-    send_message ((Widget *) check_options[6].widget, WIDGET_DRAW, 0);
+        check_options[0].widget->state = _panels_layout.vertical_equal ? 1 : 0;
+    send_message (check_options[0].widget, NULL, MSG_DRAW, 0, NULL);
 
-    tty_setcolor (check_options[6].widget->state & C_BOOL ? DISABLED_COLOR : COLOR_NORMAL);
+    tty_setcolor (check_options[0].widget->state & C_BOOL ? DISABLED_COLOR : COLOR_NORMAL);
 
-    dlg_move (h, 6, 5);
+    widget_move (h, 6, 5);
     if (_panels_layout.horizontal_split)
         tty_printf ("%03d", _panels_layout.top_panel_size);
     else
         tty_printf ("%03d", _panels_layout.left_panel_size);
 
-    dlg_move (h, 6, 17);
+    widget_move (h, 6, 17);
     if (_panels_layout.horizontal_split)
         tty_printf ("%03d", height - _panels_layout.top_panel_size);
     else
         tty_printf ("%03d", COLS - _panels_layout.left_panel_size);
 
-    dlg_move (h, 6, 12);
+    widget_move (h, 6, 12);
     tty_print_char ('=');
 }
 
@@ -275,7 +275,7 @@ b_left_right_cback (WButton * button, int action)
             _panels_layout.left_panel_size--;
     }
 
-    update_split (button->widget.owner);
+    update_split (WIDGET (button)->owner);
     return 0;
 }
 
@@ -308,14 +308,16 @@ bminus_cback (WButton * button, int action)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
+    WDialog * h = DIALOG (w);
+
     switch (msg)
     {
-    case DLG_DRAW:
+    case MSG_DRAW:
         /* When repainting the whole dialog (e.g. with C-l) we have to
            update everything */
-        common_dialog_repaint (h);
+        dlg_default_repaint (h);
 
         old_layout.horizontal_split = -1;
         old_layout.left_panel_size = -1;
@@ -329,20 +331,20 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
         {
             old_output_lines = _output_lines;
             tty_setcolor (mc_global.tty.console_flag != '\0' ? COLOR_NORMAL : DISABLED_COLOR);
-            dlg_move (h, 9, 5);
+            widget_move (h, 9, 5);
             tty_print_string (output_lines_label);
-            dlg_move (h, 9, 5 + 3 + output_lines_label_len);
+            widget_move (h, 9, 5 + 3 + output_lines_label_len);
             tty_printf ("%02d", _output_lines);
         }
         return MSG_HANDLED;
 
-    case DLG_POST_KEY:
-        _menubar_visible = check_options[5].widget->state & C_BOOL;
-        _command_prompt = (check_options[4].widget->state & C_BOOL) != 0;
+    case MSG_POST_KEY:
+        _menubar_visible = check_options[1].widget->state & C_BOOL;
+        _command_prompt = (check_options[2].widget->state & C_BOOL) != 0;
         _keybar_visible = check_options[3].widget->state & C_BOOL;
-        _message_visible = check_options[2].widget->state & C_BOOL;
-        _xterm_title = (check_options[1].widget->state & C_BOOL) != 0;
-        _free_space = check_options[0].widget->state & C_BOOL;
+        _message_visible = check_options[4].widget->state & C_BOOL;
+        _xterm_title = (check_options[5].widget->state & C_BOOL) != 0;
+        _free_space = check_options[6].widget->state & C_BOOL;
 
         if (mc_global.tty.console_flag != '\0')
         {
@@ -367,13 +369,13 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
         {
             old_output_lines = _output_lines;
             tty_setcolor (mc_global.tty.console_flag != '\0' ? COLOR_NORMAL : DISABLED_COLOR);
-            dlg_move (h, 9, 5 + 3 + output_lines_label_len);
+            widget_move (h, 9, 5 + 3 + output_lines_label_len);
             tty_printf ("%02d", _output_lines);
         }
         return MSG_HANDLED;
 
-    case DLG_ACTION:
-        if (sender == (Widget *) radio_widget)
+    case MSG_ACTION:
+        if (sender == WIDGET (radio_widget))
         {
             if (_panels_layout.horizontal_split != radio_widget->sel)
             {
@@ -396,25 +398,23 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
             return MSG_HANDLED;
         }
 
-        if (sender == (Widget *) check_options[6].widget)
+        if (sender == WIDGET (check_options[0].widget))
         {
             int eq;
 
             if (_panels_layout.horizontal_split)
             {
-                _panels_layout.horizontal_equal = check_options[6].widget->state & C_BOOL;
+                _panels_layout.horizontal_equal = check_options[0].widget->state & C_BOOL;
                 eq = _panels_layout.horizontal_equal;
             }
             else
             {
-                _panels_layout.vertical_equal = check_options[6].widget->state & C_BOOL;
+                _panels_layout.vertical_equal = check_options[0].widget->state & C_BOOL;
                 eq = _panels_layout.vertical_equal;
             }
 
-            widget_disable (bleft_widget->widget, eq);
-            send_message ((Widget *) bleft_widget, WIDGET_DRAW, 0);
-            widget_disable (bright_widget->widget, eq);
-            send_message ((Widget *) bright_widget, WIDGET_DRAW, 0);
+            widget_disable (WIDGET (bleft_widget), eq);
+            widget_disable (WIDGET (bright_widget), eq);
 
             update_split (h);
 
@@ -424,16 +424,16 @@ layout_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *d
         return MSG_NOT_HANDLED;
 
     default:
-        return default_dlg_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static Dlg_head *
+static WDialog *
 init_layout (void)
 {
-    Dlg_head *layout_dlg;
+    WDialog *layout_dlg;
     int l1 = 0, width;
     int b1, b2, b;
     size_t i;
@@ -514,70 +514,72 @@ init_layout (void)
     width = max (l1 * 2 + 7, b);
 
     layout_dlg =
-        create_dlg (TRUE, 0, 0, 14, width,
-                    dialog_colors, layout_callback, NULL, "[Layout]",
-                    _("Layout"), DLG_CENTER | DLG_REVERSE);
-
-    /* buttons */
-    add_widget (layout_dlg,
-                button_new (11, (width - b) / 3 * 2 + b1 + 1, B_CANCEL, NORMAL_BUTTON,
-                            cancel_button, 0));
-    add_widget (layout_dlg,
-                button_new (11, (width - b) / 3, B_ENTER, DEFPUSH_BUTTON, ok_button, 0));
+        create_dlg (TRUE, 0, 0, 15, width, dialog_colors, layout_callback, NULL, "[Layout]",
+                    _("Layout"), DLG_CENTER);
 
 #define XTRACT(i) *check_options[i].variable, check_options[i].text
 
-    /* "Other options" groupbox */
-    for (i = 0; i < (size_t) OTHER_OPTIONS_COUNT; i++)
-    {
-        check_options[i].widget = check_new (OTHER_OPTIONS_COUNT - i + 2, 6 + l1, XTRACT (i));
-        add_widget (layout_dlg, check_options[i].widget);
-    }
+    /* "Panel split" groupbox */
+    add_widget (layout_dlg, groupbox_new (2, 3, 6, l1, title1));
 
-    add_widget (layout_dlg, groupbox_new (2, 4 + l1, 9, l1, title3));
+    radio_widget = radio_new (3, 5, 2, s_split_direction);
+    radio_widget->sel = panels_layout.horizontal_split;
+    add_widget (layout_dlg, radio_widget);
+
+    check_options[0].widget = check_new (5, 5, XTRACT (0));
+    add_widget (layout_dlg, check_options[0].widget);
+
+    equal_split = panels_layout.horizontal_split ?
+        panels_layout.horizontal_equal : panels_layout.vertical_equal;
+
+    bleft_widget = button_new (6, 8, B_2LEFT, NARROW_BUTTON, "&<", b_left_right_cback);
+    widget_disable (WIDGET (bleft_widget), equal_split);
+    add_widget (layout_dlg, bleft_widget);
+
+    bright_widget = button_new (6, 14, B_2RIGHT, NARROW_BUTTON, "&>", b_left_right_cback);
+    widget_disable (WIDGET (bright_widget), equal_split);
+    add_widget (layout_dlg, bright_widget);
 
     /* "Console output" groupbox */
     {
         const int disabled = mc_global.tty.console_flag != '\0' ? 0 : W_DISABLED;
         Widget *w;
 
-        w = (Widget *) button_new (9, output_lines_label_len + 5 + 5, B_MINUS,
-                                   NARROW_BUTTON, "&-", bminus_cback);
+        w = WIDGET (groupbox_new (8, 3, 3, l1, title2));
         w->options |= disabled;
         add_widget (layout_dlg, w);
 
-        w = (Widget *) button_new (9, output_lines_label_len + 5, B_PLUS,
-                                   NARROW_BUTTON, "&+", bplus_cback);
+        w = WIDGET (button_new (9, output_lines_label_len + 5, B_PLUS,
+                                NARROW_BUTTON, "&+", bplus_cback));
         w->options |= disabled;
         add_widget (layout_dlg, w);
 
-        w = (Widget *) groupbox_new (8, 3, 3, l1, title2);
+        w = WIDGET (button_new (9, output_lines_label_len + 5 + 5, B_MINUS,
+                                NARROW_BUTTON, "&-", bminus_cback));
         w->options |= disabled;
         add_widget (layout_dlg, w);
     }
 
-    equal_split = panels_layout.horizontal_split ?
-        panels_layout.horizontal_equal : panels_layout.vertical_equal;
+    /* "Other options" groupbox */
+    add_widget (layout_dlg, groupbox_new (2, 4 + l1, 9, l1, title3));
 
-    /* "Panel split" groupbox */
-    bright_widget = button_new (6, 14, B_2RIGHT, NARROW_BUTTON, "&>", b_left_right_cback);
-    widget_disable (bright_widget->widget, equal_split);
-    add_widget (layout_dlg, bright_widget);
-
-    bleft_widget = button_new (6, 8, B_2LEFT, NARROW_BUTTON, "&<", b_left_right_cback);
-    widget_disable (bleft_widget->widget, equal_split);
-    add_widget (layout_dlg, bleft_widget);
-
-    check_options[6].widget = check_new (5, 5, XTRACT (6));
-    add_widget (layout_dlg, check_options[6].widget);
-
-    radio_widget = radio_new (3, 5, 2, s_split_direction);
-    radio_widget->sel = panels_layout.horizontal_split;
-    add_widget (layout_dlg, radio_widget);
-
-    add_widget (layout_dlg, groupbox_new (2, 3, 6, l1, title1));
+    for (i = 1; i < (size_t) LAYOUT_OPTIONS_COUNT; i++)
+    {
+        check_options[i].widget = check_new (i + 2, 6 + l1, XTRACT (i));
+        add_widget (layout_dlg, check_options[i].widget);
+    }
 
 #undef XTRACT
+
+    add_widget (layout_dlg, hline_new (11, -1, -1));
+    /* buttons */
+    add_widget (layout_dlg,
+                button_new (12, (width - b) / 2, B_ENTER, DEFPUSH_BUTTON, ok_button, 0));
+    add_widget (layout_dlg,
+                button_new (12, (width - b) / 2 + b1 + 1, B_CANCEL, NORMAL_BUTTON,
+                            cancel_button, 0));
+
+    dlg_select_widget (radio_widget);
 
     return layout_dlg;
 }
@@ -599,17 +601,17 @@ panel_do_cols (int idx)
 static Widget *
 restore_into_right_dir_panel (int idx, Widget * from_widget)
 {
-    Widget *new_widget = NULL;
+    WPanel *new_widget;
     const char *saved_dir = panels[idx].last_saved_dir;
     gboolean last_was_panel = (from_widget && get_display_type (idx) != view_listing);
     const char *p_name = get_nth_panel_name (idx);
 
     if (last_was_panel)
-        new_widget = (Widget *) panel_new_with_dir (p_name, saved_dir);
+        new_widget = panel_new_with_dir (p_name, saved_dir);
     else
-        new_widget = (Widget *) panel_new (p_name);
+        new_widget = panel_new (p_name);
 
-    return new_widget;
+    return WIDGET (new_widget);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -632,7 +634,7 @@ layout_change (void)
 void
 layout_box (void)
 {
-    Dlg_head *layout_dlg;
+    WDialog *layout_dlg;
     gboolean layout_do_change = FALSE;
 
     layout_dlg = init_layout ();
@@ -648,12 +650,12 @@ layout_box (void)
         panels_layout.horizontal_split = radio_widget->sel;
         if (panels_layout.horizontal_split)
         {
-            panels_layout.horizontal_equal = *check_options[6].variable;
+            panels_layout.horizontal_equal = *check_options[0].variable;
             panels_layout.top_panel_size = _panels_layout.top_panel_size;
         }
         else
         {
-            panels_layout.vertical_equal = *check_options[6].variable;
+            panels_layout.vertical_equal = *check_options[0].variable;
             panels_layout.left_panel_size = _panels_layout.left_panel_size;
         }
         output_lines = _output_lines;
@@ -714,7 +716,7 @@ setup_panels (void)
     panel_do_cols (0);
     panel_do_cols (1);
 
-    widget_set_size (&the_menubar->widget, 0, 0, 1, COLS);
+    widget_set_size (WIDGET (the_menubar), 0, 0, 1, COLS);
 
     if (command_prompt)
     {
@@ -725,12 +727,12 @@ setup_panels (void)
     }
     else
     {
-        widget_set_size (&cmdline->widget, 0, 0, 0, 0);
+        widget_set_size (WIDGET (cmdline), 0, 0, 0, 0);
         input_set_origin (cmdline, 0, 0);
-        widget_set_size (&the_prompt->widget, LINES, COLS, 0, 0);
+        widget_set_size (WIDGET (the_prompt), LINES, COLS, 0, 0);
     }
 
-    widget_set_size (&the_bar->widget, LINES - 1, 0, mc_global.keybar_visible, COLS);
+    widget_set_size (WIDGET (the_bar), LINES - 1, 0, mc_global.keybar_visible, COLS);
     buttonbar_set_visible (the_bar, mc_global.keybar_visible);
 
     /* Output window */
@@ -743,9 +745,9 @@ setup_panels (void)
     }
 
     if (mc_global.message_visible)
-        widget_set_size (&the_hint->widget, height + start_y, 0, 1, COLS);
+        widget_set_size (WIDGET (the_hint), height + start_y, 0, 1, COLS);
     else
-        widget_set_size (&the_hint->widget, 0, 0, 0, 0);
+        widget_set_size (WIDGET (the_hint), 0, 0, 0, 0);
 
     update_xterm_title_path ();
 }
@@ -831,10 +833,10 @@ setup_cmdline (void)
 
     y = LINES - 1 - mc_global.keybar_visible;
 
-    widget_set_size ((Widget *) the_prompt, y, 0, 1, prompt_len);
+    widget_set_size (WIDGET (the_prompt), y, 0, 1, prompt_len);
     label_set_text (the_prompt, mc_prompt);
-    widget_set_size ((Widget *) cmdline, y, prompt_len, 1, COLS - prompt_len);
-    input_set_origin ((WInput *) cmdline, prompt_len, COLS - prompt_len);
+    widget_set_size (WIDGET (cmdline), y, prompt_len, 1, COLS - prompt_len);
+    input_set_origin (cmdline, prompt_len, COLS - prompt_len);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -982,15 +984,15 @@ set_display_type (int num, panel_view_mode_t type)
         break;
 
     case view_info:
-        new_widget = (Widget *) info_new (y, x, lines, cols);
+        new_widget = WIDGET (info_new (y, x, lines, cols));
         break;
 
     case view_tree:
-        new_widget = (Widget *) tree_new (y, x, lines, cols, TRUE);
+        new_widget = WIDGET (tree_new (y, x, lines, cols, TRUE));
         break;
 
     case view_quick:
-        new_widget = (Widget *) mcview_new (y, x, lines, cols, TRUE);
+        new_widget = WIDGET (mcview_new (y, x, lines, cols, TRUE));
         the_other_panel = (WPanel *) panels[the_other].widget;
         if (the_other_panel != NULL)
             file_name = the_other_panel->dir.list[the_other_panel->selected].fname;
@@ -1199,7 +1201,7 @@ get_panel_widget (int idx)
 int
 get_current_index (void)
 {
-    if (panels[0].widget == ((Widget *) current_panel))
+    if (panels[0].widget == WIDGET (current_panel))
         return 0;
     else
         return 1;
@@ -1227,7 +1229,7 @@ get_other_panel (void)
 panel_view_mode_t
 get_current_type (void)
 {
-    if (panels[0].widget == (Widget *) current_panel)
+    if (panels[0].widget == WIDGET (current_panel))
         return panels[0].type;
     else
         return panels[1].type;
@@ -1239,7 +1241,7 @@ get_current_type (void)
 panel_view_mode_t
 get_other_type (void)
 {
-    if (panels[0].widget == (Widget *) current_panel)
+    if (panels[0].widget == WIDGET (current_panel))
         return panels[1].type;
     else
         return panels[0].type;
@@ -1298,7 +1300,7 @@ do_load_prompt (void)
         return ret;
 
     /* Don't actually change the prompt if it's invisible */
-    if (top_dlg != NULL && ((Dlg_head *) top_dlg->data == midnight_dlg) && command_prompt)
+    if (top_dlg != NULL && DIALOG (top_dlg->data) == midnight_dlg && command_prompt)
     {
         setup_cmdline ();
 

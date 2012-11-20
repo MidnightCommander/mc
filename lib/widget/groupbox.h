@@ -8,6 +8,8 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+#define GROUPBOX(x) ((WGroupbox *)(x))
+
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
@@ -23,6 +25,7 @@ typedef struct WGroupbox
 /*** declarations of public functions ************************************************************/
 
 WGroupbox *groupbox_new (int y, int x, int height, int width, const char *title);
+void groupbox_set_title (WGroupbox *g, const char *title);
 
 /*** inline functions ****************************************************************************/
 

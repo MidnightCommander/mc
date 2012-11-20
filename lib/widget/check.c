@@ -54,52 +54,52 @@
 /*** file scope functions ************************************************************************/
 
 static cb_ret_t
-check_callback (Widget * w, widget_msg_t msg, int parm)
+check_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WCheck *c = (WCheck *) w;
-    Dlg_head *h = c->widget.owner;
+    WCheck *c = CHECK (w);
 
     switch (msg)
     {
-    case WIDGET_HOTKEY:
+    case MSG_HOTKEY:
         if (c->text.hotkey != NULL)
         {
             if (g_ascii_tolower ((gchar) c->text.hotkey[0]) == parm)
             {
-                check_callback (w, WIDGET_KEY, ' ');    /* make action */
+                /* make action */
+                send_message (w, sender, MSG_KEY, ' ', data);
                 return MSG_HANDLED;
             }
         }
         return MSG_NOT_HANDLED;
 
-    case WIDGET_KEY:
+    case MSG_KEY:
         if (parm != ' ')
             return MSG_NOT_HANDLED;
         c->state ^= C_BOOL;
         c->state ^= C_CHANGE;
-        h->callback (h, w, DLG_ACTION, 0, NULL);
-        check_callback (w, WIDGET_FOCUS, ' ');
+        send_message (WIDGET (w)->owner, w, MSG_ACTION, 0, NULL);
+        send_message (w, sender, MSG_FOCUS, ' ', data);
         return MSG_HANDLED;
 
-    case WIDGET_CURSOR:
-        widget_move (&c->widget, 0, 1);
+    case MSG_CURSOR:
+        widget_move (c, 0, 1);
         return MSG_HANDLED;
 
-    case WIDGET_FOCUS:
-    case WIDGET_UNFOCUS:
-    case WIDGET_DRAW:
-        widget_selectcolor (w, msg == WIDGET_FOCUS, FALSE);
-        widget_move (&c->widget, 0, 0);
+    case MSG_FOCUS:
+    case MSG_UNFOCUS:
+    case MSG_DRAW:
+        widget_selectcolor (w, msg == MSG_FOCUS, FALSE);
+        widget_move (c, 0, 0);
         tty_print_string ((c->state & C_BOOL) ? "[x] " : "[ ] ");
-        hotkey_draw (w, c->text, msg == WIDGET_FOCUS);
+        hotkey_draw (w, c->text, msg == MSG_FOCUS);
         return MSG_HANDLED;
 
-    case WIDGET_DESTROY:
+    case MSG_DESTROY:
         release_hotkey (c->text);
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return widget_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -108,7 +108,7 @@ check_callback (Widget * w, widget_msg_t msg, int parm)
 static int
 check_event (Gpm_Event * event, void *data)
 {
-    Widget *w = (Widget *) data;
+    Widget *w = WIDGET (data);
 
     if (!mouse_global_in_widget (event, w))
         return MOU_UNHANDLED;
@@ -118,9 +118,9 @@ check_event (Gpm_Event * event, void *data)
         dlg_select_widget (w);
         if ((event->type & GPM_UP) != 0)
         {
-            check_callback (w, WIDGET_KEY, ' ');
-            check_callback (w, WIDGET_FOCUS, 0);
-            w->owner->callback (w->owner, w, DLG_POST_KEY, ' ', NULL);
+            send_message (w, NULL, MSG_KEY, ' ', NULL);
+            send_message (w, NULL, MSG_FOCUS, 0, NULL);
+            send_message (w->owner, w, MSG_POST_KEY, ' ', NULL);
         }
     }
 
@@ -135,13 +135,17 @@ WCheck *
 check_new (int y, int x, int state, const char *text)
 {
     WCheck *c;
+    Widget *w;
 
     c = g_new (WCheck, 1);
+    w = WIDGET (c);
     c->text = parse_hotkey (text);
-    init_widget (&c->widget, y, x, 1, 4 + hotkey_width (c->text), check_callback, check_event);
+    init_widget (w, y, x, 1, 4 + hotkey_width (c->text), check_callback, check_event);
     /* 4 is width of "[X] " */
     c->state = state ? C_BOOL : 0;
-    widget_want_hotkey (c->widget, TRUE);
+    widget_want_hotkey (w, TRUE);
 
     return c;
 }
+
+/* --------------------------------------------------------------------------------------------- */

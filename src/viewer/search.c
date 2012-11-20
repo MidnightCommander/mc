@@ -117,7 +117,7 @@ mcview_find (mcview_t * view, gsize search_start, gsize * len)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mcview_search_show_result (mcview_t * view, Dlg_head ** d, size_t match_len)
+mcview_search_show_result (mcview_t * view, WDialog ** d, size_t match_len)
 {
     int nroff_len;
 
@@ -244,7 +244,7 @@ mcview_do_search (mcview_t * view)
     gboolean isFound = FALSE;
     gboolean need_search_again = TRUE;
 
-    Dlg_head *d = NULL;
+    WDialog *d = NULL;
 
     size_t match_len;
 

@@ -580,25 +580,28 @@ real_do_file_error (enum OperationMode mode, const char *error)
 static FileProgressStatus
 real_query_recursive (FileOpContext * ctx, enum OperationMode mode, const char *s)
 {
-    gchar *text;
 
     if (ctx->recursive_result < RECURSIVE_ALWAYS)
     {
-        const char *msg = mode == Foreground
-            ? _("\nDirectory not empty.\nDelete it recursively?")
-            : _("\nBackground process: Directory not empty.\nDelete it recursively?");
-        text = g_strconcat (_("Delete:"), " ", path_trunc (s, 30), (char *) NULL);
+
+        const char *msg;
+        char *text;
+
+        msg = mode == Foreground
+            ? _("Directory \"%s\" not empty.\nDelete it recursively?")
+            : _("Background process:\nDirectory \"%s\" not empty.\nDelete it recursively?");
+        text = g_strdup_printf (msg, path_trunc (s, 30));
 
         if (safe_delete)
             query_set_sel (1);
 
         ctx->recursive_result =
-            (FileCopyMode) query_dialog (text, msg, D_ERROR, 5,
+            (FileCopyMode) query_dialog (op_names [OP_DELETE], text, D_ERROR, 5,
                                          _("&Yes"), _("&No"), _("A&ll"), _("Non&e"), _("&Abort"));
+        g_free (text);
 
         if (ctx->recursive_result != RECURSIVE_ABORT)
             do_refresh ();
-        g_free (text);
     }
 
     switch (ctx->recursive_result)
@@ -1341,8 +1344,18 @@ panel_operate_generate_prompt (const WPanel * panel, FileOperation operation,
             if (cp != NULL)
             {
                 sp += 2;
+
                 while (*cp != '\0')
                     *dp++ = *cp++;
+
+                /* form two-lines query prompt for file deletion */
+                if (operation == OP_DELETE && sp[-1] == 'f')
+                {
+                    *dp++ = '\n';
+
+                    while (isblank (*sp) != 0)
+                        sp++;
+                }
             }
             break;
         default:
@@ -2414,14 +2427,14 @@ compute_dir_size_create_ui (void)
 
     ui = g_new (ComputeDirSizeUI, 1);
 
-    ui->dlg = create_dlg (TRUE, 0, 0, 8, COLS / 2, dialog_colors, NULL, NULL,
+    ui->dlg = create_dlg (TRUE, 0, 0, 7, COLS / 2, dialog_colors, NULL, NULL,
                           NULL, _("Directory scanning"), DLG_CENTER);
-    ui->dirname = label_new (3, 3, "");
+    ui->dirname = label_new (2, 3, "");
     add_widget (ui->dlg, ui->dirname);
-
-    add_widget (ui->dlg,
-                button_new (5, (ui->dlg->cols - strlen (b_name)) / 2,
-                            FILE_ABORT, NORMAL_BUTTON, b_name, NULL));
+    add_widget (ui->dlg, hline_new (3, -1, -1));
+    add_widget_autopos (ui->dlg,
+                        button_new (4, 2, FILE_ABORT, NORMAL_BUTTON, b_name, NULL),
+                        WPOS_KEEP_TOP | WPOS_CENTER_HORZ, NULL);
 
     /* We will manage the dialog without any help,
        that's why we have to call init_dlg */
@@ -2461,7 +2474,7 @@ compute_dir_size_update_ui (const void *ui, const vfs_path_t * dirname_vpath)
         return FILE_CONT;
 
     dirname = vfs_path_to_str (dirname_vpath);
-    label_set_text (this->dirname, str_trunc (dirname, this->dlg->cols - 6));
+    label_set_text (this->dirname, str_trunc (dirname, WIDGET (this->dlg)->cols - 6));
     g_free (dirname);
 
     event.x = -1;               /* Don't show the GPM cursor */

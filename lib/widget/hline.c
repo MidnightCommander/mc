@@ -54,34 +54,36 @@
 /*** file scope functions ************************************************************************/
 
 static cb_ret_t
-hline_callback (Widget * w, widget_msg_t msg, int parm)
+hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WHLine *l = (WHLine *) w;
-    Dlg_head *h = l->widget.owner;
+    WHLine *l = HLINE (w);
+    WDialog *h = w->owner;
 
     switch (msg)
     {
-    case WIDGET_INIT:
-    case WIDGET_RESIZED:
+    case MSG_INIT:
+    case MSG_RESIZE:
         if (l->auto_adjust_cols)
         {
-            if (((w->owner->flags & DLG_COMPACT) != 0))
+            Widget *wo = WIDGET (h);
+
+            if (((h->flags & DLG_COMPACT) != 0))
             {
-                w->x = w->owner->x;
-                w->cols = w->owner->cols;
+                w->x = wo->x;
+                w->cols = wo->cols;
             }
             else
             {
-                w->x = w->owner->x + 1;
-                w->cols = w->owner->cols - 2;
+                w->x = wo->x + 1;
+                w->cols = wo->cols - 2;
             }
         }
 
-    case WIDGET_FOCUS:
+    case MSG_FOCUS:
         /* We don't want to get the focus */
         return MSG_NOT_HANDLED;
 
-    case WIDGET_DRAW:
+    case MSG_DRAW:
         if (l->transparent)
             tty_setcolor (DEFAULT_COLOR);
         else
@@ -99,7 +101,7 @@ hline_callback (Widget * w, widget_msg_t msg, int parm)
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return widget_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -111,14 +113,16 @@ WHLine *
 hline_new (int y, int x, int width)
 {
     WHLine *l;
+    Widget *w;
     int lines = 1;
 
     l = g_new (WHLine, 1);
-    init_widget (&l->widget, y, x, lines, width, hline_callback, NULL);
+    w = WIDGET (l);
+    init_widget (w, y, x, lines, width < 0 ? 1 : width, hline_callback, NULL);
     l->auto_adjust_cols = (width < 0);
     l->transparent = FALSE;
-    widget_want_cursor (l->widget, FALSE);
-    widget_want_hotkey (l->widget, FALSE);
+    widget_want_cursor (w, FALSE);
+    widget_want_hotkey (w, FALSE);
 
     return l;
 }

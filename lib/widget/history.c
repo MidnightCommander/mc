@@ -73,7 +73,7 @@ typedef struct
 /*** file scope functions ************************************************************************/
 
 static cb_ret_t
-history_dlg_reposition (Dlg_head * dlg_head)
+history_dlg_reposition (WDialog * dlg_head)
 {
     history_dlg_data *data;
     int x = 0, y, he, wi;
@@ -117,15 +117,15 @@ history_dlg_reposition (Dlg_head * dlg_head)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-history_dlg_callback (Dlg_head * h, Widget * sender, dlg_msg_t msg, int parm, void *data)
+history_dlg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
-    case DLG_RESIZE:
-        return history_dlg_reposition (h);
+    case MSG_RESIZE:
+        return history_dlg_reposition (DIALOG (w));
 
     default:
-        return default_dlg_callback (h, sender, msg, parm, data);
+        return dlg_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -292,7 +292,7 @@ history_show (GList ** history, Widget * widget, int current)
     GList *z, *hlist = NULL, *hi;
     size_t maxlen, i, count = 0;
     char *r = NULL;
-    Dlg_head *query_dlg;
+    WDialog *query_dlg;
     WListbox *query_list;
     history_dlg_data hist_data;
 
@@ -336,9 +336,9 @@ history_show (GList ** history, Widget * widget, int current)
        The main idea - create 4x4 dialog and add 2x2 list in
        center of it, and let dialog function resize it to needed
        size. */
-    history_dlg_callback (query_dlg, NULL, DLG_RESIZE, 0, NULL);
+    send_message (query_dlg, NULL, MSG_RESIZE, 0, NULL);
 
-    if (query_dlg->y < widget->y)
+    if (WIDGET (query_dlg)->y < widget->y)
     {
         /* draw list entries from bottom upto top */
         listbox_set_list (query_list, hlist);
@@ -369,16 +369,15 @@ history_show (GList ** history, Widget * widget, int current)
     z = NULL;
     for (hi = query_list->list; hi != NULL; hi = g_list_next (hi))
     {
-        WLEntry *entry;
+        WLEntry *entry = LENTRY (hi->data);
 
-        entry = (WLEntry *) hi->data;
         /* history is being reverted here again */
         z = g_list_prepend (z, entry->text);
         entry->text = NULL;
     }
 
     /* restore history direction */
-    if (query_dlg->y < widget->y)
+    if (WIDGET (query_dlg)->y < widget->y)
         z = g_list_reverse (z);
 
     destroy_dlg (query_dlg);

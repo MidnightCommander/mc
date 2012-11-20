@@ -148,42 +148,41 @@ static gboolean
 buttonbar_call (WButtonBar * bb, int i)
 {
     cb_ret_t ret = MSG_NOT_HANDLED;
+    Widget *w = WIDGET (bb);
 
     if ((bb != NULL) && (bb->labels[i].command != CK_IgnoreKey))
-        ret = bb->widget.owner->callback (bb->widget.owner,
-                                          (Widget *) bb, DLG_ACTION,
-                                          bb->labels[i].command, bb->labels[i].receiver);
+        ret = send_message (w->owner, w, MSG_ACTION, bb->labels[i].command, bb->labels[i].receiver);
     return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-buttonbar_callback (Widget * w, widget_msg_t msg, int parm)
+buttonbar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WButtonBar *bb = (WButtonBar *) w;
+    WButtonBar *bb = BUTTONBAR (w);
     int i;
     const char *text;
 
     switch (msg)
     {
-    case WIDGET_FOCUS:
+    case MSG_FOCUS:
         return MSG_NOT_HANDLED;
 
-    case WIDGET_HOTKEY:
+    case MSG_HOTKEY:
         for (i = 0; i < BUTTONBAR_LABELS_NUM; i++)
             if (parm == KEY_F (i + 1) && buttonbar_call (bb, i))
                 return MSG_HANDLED;
         return MSG_NOT_HANDLED;
 
-    case WIDGET_DRAW:
+    case MSG_DRAW:
         if (bb->visible)
         {
             buttonbar_init_button_positions (bb);
-            widget_move (&bb->widget, 0, 0);
+            widget_move (w, 0, 0);
             tty_setcolor (DEFAULT_COLOR);
-            tty_printf ("%-*s", bb->widget.cols, "");
-            widget_move (&bb->widget, 0, 0);
+            tty_printf ("%-*s", w->cols, "");
+            widget_move (w, 0, 0);
 
             for (i = 0; i < BUTTONBAR_LABELS_NUM; i++)
             {
@@ -203,13 +202,13 @@ buttonbar_callback (Widget * w, widget_msg_t msg, int parm)
         }
         return MSG_HANDLED;
 
-    case WIDGET_DESTROY:
+    case MSG_DESTROY:
         for (i = 0; i < BUTTONBAR_LABELS_NUM; i++)
             g_free (bb->labels[i].text);
         return MSG_HANDLED;
 
     default:
-        return default_proc (msg, parm);
+        return widget_default_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -218,14 +217,14 @@ buttonbar_callback (Widget * w, widget_msg_t msg, int parm)
 static int
 buttonbar_event (Gpm_Event * event, void *data)
 {
-    Widget *w = (Widget *) data;
+    Widget *w = WIDGET (data);
 
     if (!mouse_global_in_widget (event, w))
         return MOU_UNHANDLED;
 
     if ((event->type & GPM_UP) != 0)
     {
-        WButtonBar *bb = (WButtonBar *) data;
+        WButtonBar *bb = BUTTONBAR (data);
         Gpm_Event local;
         int button;
 
@@ -246,14 +245,16 @@ WButtonBar *
 buttonbar_new (gboolean visible)
 {
     WButtonBar *bb;
+    Widget *w;
 
     bb = g_new0 (WButtonBar, 1);
+    w = WIDGET (bb);
+    init_widget (w, LINES - 1, 0, 1, COLS, buttonbar_callback, buttonbar_event);
 
-    init_widget (&bb->widget, LINES - 1, 0, 1, COLS, buttonbar_callback, buttonbar_event);
-    bb->widget.pos_flags = WPOS_KEEP_HORZ | WPOS_KEEP_BOTTOM;
+    w->pos_flags = WPOS_KEEP_HORZ | WPOS_KEEP_BOTTOM;
     bb->visible = visible;
-    widget_want_hotkey (bb->widget, 1);
-    widget_want_cursor (bb->widget, 0);
+    widget_want_hotkey (w, TRUE);
+    widget_want_cursor (w, FALSE);
 
     return bb;
 }
@@ -277,7 +278,7 @@ buttonbar_set_label (WButtonBar * bb, int idx, const char *text,
             set_label_text (bb, idx, text);
 
         bb->labels[idx - 1].command = command;
-        bb->labels[idx - 1].receiver = (Widget *) receiver;
+        bb->labels[idx - 1].receiver = WIDGET (receiver);
     }
 }
 
@@ -285,7 +286,7 @@ buttonbar_set_label (WButtonBar * bb, int idx, const char *text,
 
 /* Find ButtonBar widget in the dialog */
 WButtonBar *
-find_buttonbar (const Dlg_head * h)
+find_buttonbar (const WDialog * h)
 {
-    return (WButtonBar *) find_widget_type (h, buttonbar_callback);
+    return BUTTONBAR (find_widget_type (h, buttonbar_callback));
 }

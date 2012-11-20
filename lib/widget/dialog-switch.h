@@ -12,12 +12,12 @@
 
 /*** global variables defined in .c file *********************************************************/
 
-extern Dlg_head *midnight_dlg;
+extern WDialog *midnight_dlg;
 
 /*** declarations of public functions ************************************************************/
 
-void dialog_switch_add (struct Dlg_head *h);
-void dialog_switch_remove (struct Dlg_head *h);
+void dialog_switch_add (struct WDialog *h);
+void dialog_switch_remove (struct WDialog *h);
 size_t dialog_switch_num (void);
 
 void dialog_switch_next (void);
