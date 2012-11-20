@@ -1295,8 +1295,7 @@ show_dir (WPanel * panel)
         tty_setcolor (REVERSE_COLOR);
 
     tmp = panel_correct_path_to_show (panel);
-    tty_printf (" %s ",
-                str_term_trim (tmp, min (max (w->cols - 12, 0), w->cols)));
+    tty_printf (" %s ", str_term_trim (tmp, min (max (w->cols - 12, 0), w->cols)));
     g_free (tmp);
 
     if (!panels_options.show_mini_info)
@@ -1848,9 +1847,9 @@ use_display_format (WPanel * panel, const char *format, char **error, int isstat
 
     /* Status needn't to be split */
     usable_columns = ((WIDGET (panel)->cols - 2) / ((isstatus)
-                                                  ? 1
-                                                  : (panel->split + 1))) - (!isstatus
-                                                                            && panel->split);
+                                                    ? 1
+                                                    : (panel->split + 1))) - (!isstatus
+                                                                              && panel->split);
 
     /* Look for the expandable fields and set field_len based on the requested field len */
     for (darr = home; darr && expand_top < MAX_EXPAND; darr = darr->next)

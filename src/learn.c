@@ -322,8 +322,8 @@ init_learn (void)
                              "key, or click with the mouse to define it. Move around with Tab.")));
     add_widget (learn_dlg, hline_new (dlg_height - 4, -1, -1));
     /* buttons */
-    bl0 = str_term_width1 (b0) + 5; /* default button */
-    bl1 = str_term_width1 (b1) + 3; /* normal button */
+    bl0 = str_term_width1 (b0) + 5;     /* default button */
+    bl1 = str_term_width1 (b1) + 3;     /* normal button */
     bx0 = (dlg_width - (bl0 + bl1 + 1)) / 2;
     bx1 = bx0 + bl0 + 1;
     add_widget (learn_dlg, button_new (dlg_height - 3, bx0, B_ENTER, DEFPUSH_BUTTON, b0, NULL));

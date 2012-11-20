@@ -143,8 +143,8 @@ edit_options_dialog (WDialog * h)
         wrap_mode = 0;
 
     {
-        /* *INDENT-OFF* */
         quick_widget_t quick_widgets[] = {
+            /* *INDENT-OFF* */
             QUICK_START_COLUMNS,
                 QUICK_START_GROUPBOX (N_("Wrap mode")),
                     QUICK_RADIO (3, wrap_str, &wrap_mode, NULL),

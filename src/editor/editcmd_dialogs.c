@@ -68,7 +68,8 @@ edit_search_options_t edit_search_options = {
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-editcmd_dialog_raw_key_query_cb (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+editcmd_dialog_raw_key_query_cb (Widget * w, Widget * sender, widget_msg_t msg, int parm,
+                                 void *data)
 {
     WDialog *h = DIALOG (w);
 
@@ -254,10 +255,10 @@ editcmd_dialog_replace_prompt_show (WEdit * edit, char *from_text, char *to_text
         ypos -= dlg_height;
 
     g_snprintf (tmp, sizeof (tmp), "\"%s\"", from_text);
-    repl_from = g_strdup (str_trunc (tmp,  - 7));
+    repl_from = g_strdup (str_trunc (tmp, -7));
 
     g_snprintf (tmp, sizeof (tmp), "\"%s\"", to_text);
-    repl_to = g_strdup (str_trunc (tmp,  - 7));
+    repl_to = g_strdup (str_trunc (tmp, -7));
 
     {
         quick_widget_t quick_widgets[] = {

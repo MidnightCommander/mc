@@ -310,7 +310,7 @@ bminus_cback (WButton * button, int action)
 static cb_ret_t
 layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WDialog * h = DIALOG (w);
+    WDialog *h = DIALOG (w);
 
     switch (msg)
     {

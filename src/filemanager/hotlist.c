@@ -783,7 +783,7 @@ init_hotlist (hotlist_t list_type)
                                 button_new (y + hotlist_but[i].y, UX + hotlist_but[i].x,
                                             hotlist_but[i].ret_cmd, hotlist_but[i].flags,
                                             hotlist_but[i].text, hotlist_button_callback),
-                                            hotlist_but[i].pos_flags, NULL);
+                                hotlist_but[i].pos_flags, NULL);
 
     dlg_select_widget (l_hotlist);
 }
@@ -791,7 +791,7 @@ init_hotlist (hotlist_t list_type)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-init_movelist ( struct hotlist *item)
+init_movelist (struct hotlist *item)
 {
     size_t i;
     char *hdr;
@@ -834,7 +834,7 @@ init_movelist ( struct hotlist *item)
                                 button_new (y + hotlist_but[i].y, UX + hotlist_but[i].x,
                                             hotlist_but[i].ret_cmd, hotlist_but[i].flags,
                                             hotlist_but[i].text, hotlist_button_callback),
-                                            hotlist_but[i].pos_flags, NULL);
+                                hotlist_but[i].pos_flags, NULL);
 
     dlg_select_widget (l_movelist);
 }

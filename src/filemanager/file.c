@@ -596,7 +596,7 @@ real_query_recursive (FileOpContext * ctx, enum OperationMode mode, const char *
             query_set_sel (1);
 
         ctx->recursive_result =
-            (FileCopyMode) query_dialog (op_names [OP_DELETE], text, D_ERROR, 5,
+            (FileCopyMode) query_dialog (op_names[OP_DELETE], text, D_ERROR, 5,
                                          _("&Yes"), _("&No"), _("A&ll"), _("Non&e"), _("&Abort"));
         g_free (text);
 

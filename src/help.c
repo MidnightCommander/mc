@@ -563,7 +563,8 @@ help_show (WDialog * h, const char *paint_start)
 #ifndef HAVE_SLANG
                             tty_print_char (acs_map[c]);
 #else
-                            SLsmg_draw_object (WIDGET (h)->y + line + 2, WIDGET (h)->x + col + 2, c);
+                            SLsmg_draw_object (WIDGET (h)->y + line + 2, WIDGET (h)->x + col + 2,
+                                               c);
 #endif
                         col++;
                     }
@@ -735,7 +736,7 @@ help_back (WDialog * h)
     if (history_ptr < 0)
         history_ptr = HISTORY_SIZE - 1;
 
-    send_message (h, NULL, MSG_DRAW, 0, NULL); /* FIXME: unneeded? */
+    send_message (h, NULL, MSG_DRAW, 0, NULL);  /* FIXME: unneeded? */
 }
 
 /* --------------------------------------------------------------------------------------------- */

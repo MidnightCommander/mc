@@ -851,7 +851,7 @@ chown_advanced_cmd (void)
 
         file_idx = files_on_begin == 1 ? 1 : (files_on_begin - current_panel->marked + 1);
         g_snprintf (buffer, sizeof (buffer), "%s (%d/%d)",
-                    str_fit_to_term (fname, WIDGET(ch_dlg)->cols - 20, J_LEFT_FIT),
+                    str_fit_to_term (fname, WIDGET (ch_dlg)->cols - 20, J_LEFT_FIT),
                     file_idx, files_on_begin);
         label_set_text (l_filename, buffer);
         chown_refresh ();

@@ -1624,7 +1624,7 @@ edit_get_bracket (WEdit * edit, gboolean in_screen, unsigned long furthest_brack
                 break;
             /* count lines if searching downward */
             if (inc > 0 && a == '\n')
-                if (n++ >= WIDGET (edit)->lines - edit->curs_row) /* out of screen */
+                if (n++ >= WIDGET (edit)->lines - edit->curs_row)       /* out of screen */
                     break;
         }
         /* count bracket depth */

@@ -234,11 +234,11 @@ edit_window_move (WEdit * edit, unsigned long command)
     switch (command)
     {
     case CK_Up:
-        if (w->y > wh->y + 1)    /* menubar */
+        if (w->y > wh->y + 1)   /* menubar */
             w->y--;
         break;
     case CK_Down:
-        if (w->y < wh->y + wh->lines - 2) /* buttonbar */
+        if (w->y < wh->y + wh->lines - 2)       /* buttonbar */
             w->y++;
         break;
     case CK_Left:
@@ -278,7 +278,7 @@ edit_window_resize (WEdit * edit, unsigned long command)
             w->lines--;
         break;
     case CK_Down:
-        if (w->y + w->lines < wh->y + wh->lines - 1)      /* buttonbar */
+        if (w->y + w->lines < wh->y + wh->lines - 1)    /* buttonbar */
             w->lines++;
         break;
     case CK_Left:

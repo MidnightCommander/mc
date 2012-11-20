@@ -154,7 +154,7 @@ static int last_pos;
 
 static size_t ignore_count = 0;
 
-static WDialog *find_dlg;      /* The dialog */
+static WDialog *find_dlg;       /* The dialog */
 static WLabel *status_label;    /* Finished, Searching etc. */
 static WLabel *found_num_label; /* Number of found items */
 

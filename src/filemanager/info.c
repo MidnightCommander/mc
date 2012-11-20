@@ -73,7 +73,7 @@ static struct my_statfs myfs_stats;
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-info_box (WInfo *info)
+info_box (WInfo * info)
 {
     Widget *w = WIDGET (info);
 
@@ -98,7 +98,7 @@ info_box (WInfo *info)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-info_show_info (WInfo *info)
+info_show_info (WInfo * info)
 {
     Widget *w = WIDGET (info);
     static int i18n_adjust = 0;
@@ -185,8 +185,7 @@ info_show_info (WInfo *info)
 
     case 13:
         widget_move (w, 13, 3);
-        str_printf (buff, _("Device:    %s"),
-                    str_trunc (myfs_stats.device, w->cols - i18n_adjust));
+        str_printf (buff, _("Device:    %s"), str_trunc (myfs_stats.device, w->cols - i18n_adjust));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
     case 12:

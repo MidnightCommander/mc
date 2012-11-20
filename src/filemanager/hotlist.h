@@ -9,7 +9,8 @@
 
 /*** enums ***************************************************************************************/
 
-typedef enum {
+typedef enum
+{
     LIST_VFSLIST = 0x01,
     LIST_HOTLIST = 0x02,
     LIST_MOVELIST = 0x04
