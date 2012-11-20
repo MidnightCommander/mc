@@ -103,7 +103,7 @@ struct Widget
     unsigned int id;            /* Number of the widget, starting with 0 */
     widget_cb_fn callback;
     mouse_h mouse;
-    void (*set_options) (Widget *w, widget_options_t options, gboolean enable);
+    void (*set_options) (Widget * w, widget_options_t options, gboolean enable);
     struct WDialog *owner;
 };
 
@@ -129,18 +129,19 @@ void release_hotkey (const hotkey_t hotkey);
 /* return width on terminal of hotkey */
 int hotkey_width (const hotkey_t hotkey);
 /* draw hotkey of widget */
-void hotkey_draw (Widget *w, const hotkey_t hotkey, gboolean focused);
+void hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused);
 
 /* widget initialization */
 void init_widget (Widget * w, int y, int x, int lines, int cols,
                   widget_cb_fn callback, mouse_h mouse_handler);
 /* Default callback for widgets */
-cb_ret_t widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data);
-void widget_default_set_options_callback (Widget *w, widget_options_t options, gboolean enable);
-void widget_set_options (Widget *w, widget_options_t options, gboolean enable);
+cb_ret_t widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
+                                  void *data);
+void widget_default_set_options_callback (Widget * w, widget_options_t options, gboolean enable);
+void widget_set_options (Widget * w, widget_options_t options, gboolean enable);
 void widget_set_size (Widget * widget, int y, int x, int lines, int cols);
 /* select color for widget in dependance of state */
-void widget_selectcolor (Widget *w, gboolean focused, gboolean hotkey);
+void widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey);
 void widget_erase (Widget * w);
 
 /* get mouse pointer location within widget */

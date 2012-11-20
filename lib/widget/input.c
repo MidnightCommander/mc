@@ -195,7 +195,8 @@ do_show_hist (WInput * in)
 
     len = get_history_length (in->history);
 
-    r = history_show (&in->history, WIDGET (in), g_list_position (in->history_current, in->history));
+    r = history_show (&in->history, WIDGET (in),
+                      g_list_position (in->history_current, in->history));
     if (r != NULL)
     {
         input_assign_text (in, r);
@@ -1291,7 +1292,7 @@ input_update (WInput * in, gboolean clear_first)
     in->mark = min (in->mark, buf_len);
 
     /* don't draw widget not put into dialog */
-    if (WIDGET(in)->owner == NULL)
+    if (WIDGET (in)->owner == NULL)
         return;
 
     if (has_history != 0)

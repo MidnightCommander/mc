@@ -191,7 +191,7 @@ widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
  * @param enable  TRUE if specified options should be added, FALSE if options should be removed
  */
 void
-widget_default_set_options_callback (Widget *w, widget_options_t options, gboolean enable)
+widget_default_set_options_callback (Widget * w, widget_options_t options, gboolean enable)
 {
     if (enable)
         w->options |= options;
@@ -212,7 +212,7 @@ widget_default_set_options_callback (Widget *w, widget_options_t options, gboole
  * @param enable  TRUE if specified options should be added, FALSE if options should be removed
  */
 void
-widget_set_options (Widget *w, widget_options_t options, gboolean enable)
+widget_set_options (Widget * w, widget_options_t options, gboolean enable)
 {
     w->set_options (w, options, enable);
 }

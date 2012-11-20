@@ -248,8 +248,7 @@ menubar_draw (WMenuBar * menubar)
     if (menubar->is_dropped)
         menubar_draw_drop (menubar);
     else
-        widget_move (w, 0,
-                     MENU (g_list_nth_data (menubar->menu, menubar->selected))->start_x);
+        widget_move (w, 0, MENU (g_list_nth_data (menubar->menu, menubar->selected))->start_x);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -169,7 +169,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
     int y1 = 0;                 /* bottom of 1st column in case of two columns */
     int y2 = -1;                /* start of two columns */
     int width1 = 0;             /* width of single column */
-    int width2 = 0;             /* width of each of two columns*/
+    int width2 = 0;             /* width of each of two columns */
     gboolean have_groupbox = FALSE;
     gboolean two_columns = FALSE;
     gboolean put_buttons = FALSE;
