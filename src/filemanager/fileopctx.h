@@ -125,7 +125,7 @@ typedef struct FileOpContext
     /* Preserve the original files' owner, group, permissions, and
      * timestamps (owner, group only as root).
      */
-    int preserve;
+    gboolean preserve;
 
     /* If running as root, preserve the original uid/gid (we don't want to
      * try chown for non root) preserve_uidgid = preserve && uid == 0
