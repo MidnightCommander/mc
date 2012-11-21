@@ -142,7 +142,7 @@ typedef struct FileOpContext
     struct mc_search_struct *search_handle;
 
     /* Whether to dive into subdirectories for recursive operations */
-    int dive_into_subdirs;
+    gboolean dive_into_subdirs;
 
     /* When moving directories cross filesystem boundaries delete the
      * successfully copied files when all files below the directory and its
