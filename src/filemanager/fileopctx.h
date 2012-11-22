@@ -58,7 +58,8 @@ typedef enum
     FILE_RETRY = 1,
     FILE_SKIP = 2,
     FILE_ABORT = 3,
-    FILE_SKIPALL = 4
+    FILE_SKIPALL = 4,
+    FILE_SUSPEND = 5
 } FileProgressStatus;
 
 /* First argument passed to real functions */
@@ -159,6 +160,9 @@ typedef struct FileOpContext
 
     /* toggle if all errors should be ignored */
     gboolean skip_all;
+
+    /* Whether the file operation is in pause */
+    gboolean suspended;
 
     /* User interface data goes here */
     void *ui;

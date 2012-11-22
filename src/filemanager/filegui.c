@@ -260,6 +260,24 @@ typedef struct
 
 /*** file scope variables ************************************************************************/
 
+struct
+{
+    Widget *w;
+    FileProgressStatus action;
+    const char *text;
+    button_flags_t flags;
+    int len;
+} progress_buttons[] =
+{
+    /* *INDENT-OFF* */
+    { NULL, FILE_SKIP, N_("&Skip"), NORMAL_BUTTON, -1 },
+    { NULL, FILE_SUSPEND, N_("S&uspend"), NORMAL_BUTTON, -1 },
+    { NULL, FILE_SUSPEND, N_("Con&tinue"), NORMAL_BUTTON, -1 },
+    { NULL, FILE_ABORT, N_("&Abort"), NORMAL_BUTTON, -1 }
+    /* *INDENT-ON* */
+};
+
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -591,6 +609,36 @@ is_wildcarded (char *p)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+place_progress_buttons (WDialog * h, gboolean suspended)
+{
+    const size_t i = suspended ? 2 : 1;
+    Widget *w = WIDGET (h);
+    int buttons_width;
+
+    buttons_width = 2 + progress_buttons[0].len + progress_buttons[3].len;
+    buttons_width += progress_buttons[i].len;
+    button_set_text (BUTTON (progress_buttons[i].w), progress_buttons[i].text);
+
+    progress_buttons[0].w->x = w->x + (w->cols - buttons_width) / 2;
+    progress_buttons[i].w->x = progress_buttons[0].w->x + progress_buttons[0].len + 1;
+    progress_buttons[3].w->x = progress_buttons[i].w->x + progress_buttons[i].len + 1;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+progress_start_stop (WButton * button, int action)
+{
+    (void) button;
+    (void) action;
+
+    /* don't close dialog in any case */
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -605,28 +653,36 @@ check_progress_buttons (FileOpContext * ctx)
 
     ui = ctx->ui;
 
+  get_event:
     event.x = -1;               /* Don't show the GPM cursor */
-    c = tty_get_event (&event, FALSE, FALSE);
+    c = tty_get_event (&event, FALSE, ctx->suspended);
     if (c == EV_NONE)
         return FILE_CONT;
 
-    /* Reinitialize to avoid old values after events other than
-       selecting a button */
+    /* Reinitialize to avoid old values after events other than selecting a button */
     ui->op_dlg->ret_value = FILE_CONT;
 
     dlg_process_event (ui->op_dlg, c, &event);
     switch (ui->op_dlg->ret_value)
     {
     case FILE_SKIP:
+        ctx->suspended = FALSE;
         return FILE_SKIP;
     case B_CANCEL:
     case FILE_ABORT:
+        ctx->suspended = FALSE;
         return FILE_ABORT;
+    case FILE_SUSPEND:
+        ctx->suspended = !ctx->suspended;
+        place_progress_buttons (ui->op_dlg, ctx->suspended);
+        dlg_redraw (ui->op_dlg);
+        /* fallthrough */
     default:
+        if (ctx->suspended)
+            goto get_event;
         return FILE_CONT;
     }
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
 /* {{{ File progress display routines */
@@ -636,28 +692,23 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
                            filegui_dialog_type_t dialog_type)
 {
     FileOpContextUI *ui;
-
-    const char *abort_button_label = N_("&Abort");
-    const char *skip_button_label = N_("&Skip");
-    int abort_button_width, skip_button_width, buttons_width;
-    int dlg_width, dlg_height;
+    int buttons_width;
+    int dlg_width = 58, dlg_height = 17;
     int y = 2, x = 3;
-    Widget *skip_button;
 
     g_return_if_fail (ctx != NULL);
     g_return_if_fail (ctx->ui == NULL);
 
 #ifdef ENABLE_NLS
-    abort_button_label = _(abort_button_label);
-    skip_button_label = _(skip_button_label);
+    if (progress_buttons[0].len == -1)
+    {
+        size_t i;
+
+        for (i = 0; i < G_N_ELEMENTS (progress_buttons); i++)
+            progress_buttons[i].text = _(progress_buttons[i].text);
+    }
 #endif
 
-    abort_button_width = str_term_width1 (abort_button_label) + 3;
-    skip_button_width = str_term_width1 (skip_button_label) + 3;
-    buttons_width = abort_button_width + skip_button_width + 1;
-
-    dlg_width = max (58, buttons_width + 6);
-    dlg_height = 17;            /* will be adjusted later */
 
     ctx->dialog_type = dialog_type;
     ctx->recursive_result = RECURSIVE_YES;
@@ -716,17 +767,50 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
 
     add_widget (ui->op_dlg, hline_new (y++, -1, -1));
 
-    x = (dlg_width - buttons_width) / 2;
-    skip_button = WIDGET (button_new (y, x, FILE_SKIP, NORMAL_BUTTON, skip_button_label, NULL));
-    add_widget (ui->op_dlg, skip_button);
+    progress_buttons[0].w = WIDGET (button_new (y, 0, progress_buttons[0].action,
+                                                progress_buttons[0].flags, progress_buttons[0].text,
+                                                NULL));
+    if (progress_buttons[0].len == -1)
+        progress_buttons[0].len = button_get_len (BUTTON (progress_buttons[0].w));
 
-    x += skip_button_width + 1;
-    add_widget (ui->op_dlg, button_new (y, x, FILE_ABORT, NORMAL_BUTTON, abort_button_label, NULL));
+    progress_buttons[1].w = WIDGET (button_new (y, 0, progress_buttons[1].action,
+                                                progress_buttons[1].flags, progress_buttons[1].text,
+                                                progress_start_stop));
+    if (progress_buttons[1].len == -1)
+        progress_buttons[1].len = button_get_len (BUTTON (progress_buttons[1].w));
 
-    /* adjust dialog height */
+    if (progress_buttons[2].len == -1)
+    {
+        /* create and destroy button to get it length */
+        progress_buttons[2].w = WIDGET (button_new (y, 0, progress_buttons[2].action,
+                                                    progress_buttons[2].flags,
+                                                    progress_buttons[2].text, progress_start_stop));
+        progress_buttons[2].len = button_get_len (BUTTON (progress_buttons[2].w));
+        send_message (progress_buttons[2].w, NULL, MSG_DESTROY, 0, NULL);
+        g_free (progress_buttons[2].w);
+    }
+    progress_buttons[2].w = progress_buttons[1].w;
+
+    progress_buttons[3].w = WIDGET (button_new (y, 0, progress_buttons[3].action,
+                                                progress_buttons[3].flags, progress_buttons[3].text,
+                                                NULL));
+    if (progress_buttons[3].len == -1)
+        progress_buttons[3].len = button_get_len (BUTTON (progress_buttons[3].w));
+
+    add_widget (ui->op_dlg, progress_buttons[0].w);
+    add_widget (ui->op_dlg, progress_buttons[1].w);
+    add_widget (ui->op_dlg, progress_buttons[3].w);
+
+    buttons_width = 2 +
+        progress_buttons[0].len + max (progress_buttons[1].len, progress_buttons[2].len) +
+        progress_buttons[3].len;
+
+    /* adjust dialog sizes  */
     dlg_set_size (ui->op_dlg, y + 3, dlg_width);
 
-    dlg_select_widget (skip_button);
+    place_progress_buttons (ui->op_dlg, FALSE);
+
+    dlg_select_widget (progress_buttons[0].w);
 
     /* We will manage the dialog without any help, that's why
        we have to call init_dlg */
