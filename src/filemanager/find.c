@@ -185,7 +185,7 @@ static struct
 {
     { B_ENTER, DEFPUSH_BUTTON, N_("&Chdir"), 0, 0, NULL, NULL },
     { B_AGAIN, NORMAL_BUTTON, N_("&Again"), 0, 0, NULL, NULL },
-    { B_STOP, NORMAL_BUTTON, N_("&Suspend"), 0, 0, NULL, start_stop },
+    { B_STOP, NORMAL_BUTTON, N_("S&uspend"), 0, 0, NULL, start_stop },
     { B_STOP, NORMAL_BUTTON, N_("Con&tinue"), 0, 0, NULL, NULL },
     { B_CANCEL, NORMAL_BUTTON, N_("&Quit"), 0, 0, NULL, NULL },
 
