@@ -320,8 +320,8 @@ int mc_##name (const vfs_path_t *vpath1, const vfs_path_t *vpath2) \
     if (vpath1 == NULL || vpath2 == NULL) \
         return -1; \
 \
-    path_element1 = vfs_path_get_by_index (vpath1, - 1); \
-    path_element2 = vfs_path_get_by_index (vpath2, - 1); \
+    path_element1 = vfs_path_get_by_index (vpath1, (-1)); \
+    path_element2 = vfs_path_get_by_index (vpath2, (-1)); \
 \
     if (!vfs_path_element_valid (path_element1) || !vfs_path_element_valid (path_element2) || \
         path_element1->class != path_element2->class) \

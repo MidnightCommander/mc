@@ -737,8 +737,8 @@ apply_advanced_chowns (struct stat *sf)
         message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
                  lc_fname, unix_error_string (errno));
     /* call mc_chown only, if mc_chmod didn't fail */
-    else if (mc_chown (vpath, (ch_flags[9] == '+') ? sf->st_uid : (uid_t) - 1,
-                       (ch_flags[10] == '+') ? sf->st_gid : (gid_t) - 1) == -1)
+    else if (mc_chown (vpath, (ch_flags[9] == '+') ? sf->st_uid : (uid_t) (-1),
+                       (ch_flags[10] == '+') ? sf->st_gid : (gid_t) (-1)) == -1)
         message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"),
                  lc_fname, unix_error_string (errno));
     do_file_mark (current_panel, current_file, 0);
@@ -759,8 +759,8 @@ apply_advanced_chowns (struct stat *sf)
             message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
                      lc_fname, unix_error_string (errno));
         /* call mc_chown only, if mc_chmod didn't fail */
-        else if (mc_chown (vpath, (ch_flags[9] == '+') ? a_uid : (uid_t) - 1,
-                           (ch_flags[10] == '+') ? a_gid : (gid_t) - 1) == -1)
+        else if (mc_chown (vpath, (ch_flags[9] == '+') ? a_uid : (uid_t) (-1),
+                           (ch_flags[10] == '+') ? a_gid : (gid_t) (-1)) == -1)
             message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"),
                      lc_fname, unix_error_string (errno));
 
@@ -822,8 +822,8 @@ chown_advanced_cmd (void)
                              fname, unix_error_string (errno));
                 /* call mc_chown only, if mc_chmod didn't fail */
                 else if (mc_chown
-                         (fname_vpath, (ch_flags[9] == '+') ? sf_stat->st_uid : (uid_t) - 1,
-                          (ch_flags[10] == '+') ? sf_stat->st_gid : (gid_t) - 1) == -1)
+                         (fname_vpath, (ch_flags[9] == '+') ? sf_stat->st_uid : (uid_t) (-1),
+                          (ch_flags[10] == '+') ? sf_stat->st_gid : (gid_t) (-1)) == -1)
                     message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"), fname,
                              unix_error_string (errno));
                 vfs_path_free (fname_vpath);

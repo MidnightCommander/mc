@@ -664,7 +664,7 @@ read_file_system_list (int need_fs_type)
             me->me_type_malloced = 0;
             me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
             me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
-            me->me_dev = (dev_t) - 1;   /* Magic; means not known yet. */
+            me->me_dev = (dev_t) (-1);  /* Magic; means not known yet. */
 
             /* Add to the linked list. */
             *mtail = me;
@@ -690,7 +690,7 @@ read_file_system_list (int need_fs_type)
             me->me_type_malloced = 1;
             me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
             me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
-            me->me_dev = (dev_t) - 1;   /* Magic; means not known yet. */
+            me->me_dev = (dev_t) (-1);  /* Magic; means not known yet. */
 
             /* Add to the linked list. */
             *mtail = me;
@@ -859,7 +859,7 @@ read_file_system_list (int need_fs_type)
             me->me_type_malloced = 1;
             me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
             me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
-            me->me_dev = (dev_t) - 1;   /* Magic; means not known yet. */
+            me->me_dev = (dev_t) (-1);  /* Magic; means not known yet. */
 
             /* Add to the linked list. */
             *mtail = me;
@@ -889,7 +889,7 @@ read_file_system_list (int need_fs_type)
             me->me_devname = g_strconcat ("/dev/", mnt.mt_dev, (char *) NULL);
 #endif
             me->me_mountdir = g_strdup (mnt.mt_filsys);
-            me->me_dev = (dev_t) - 1;   /* Magic; means not known yet. */
+            me->me_dev = (dev_t) (-1);  /* Magic; means not known yet. */
             me->me_type = "";
             me->me_type_malloced = 0;
 #ifdef GETFSTYP                 /* SVR3.  */
@@ -940,7 +940,7 @@ read_file_system_list (int need_fs_type)
             me->me_type_malloced = 1;
             me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
             me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
-            me->me_dev = (dev_t) - 1;   /* Magic; means not known yet. */
+            me->me_dev = (dev_t) (-1);  /* Magic; means not known yet. */
 
             /* Add to the linked list. */
             *mtail = me;
@@ -1116,7 +1116,7 @@ read_file_system_list (int need_fs_type)
                 me->me_type_malloced = 1;
                 me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
                 me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
-                me->me_dev = (dev_t) - 1;       /* Magic; means not known yet. */
+                me->me_dev = (dev_t) (-1);      /* Magic; means not known yet. */
 
                 /* Add to the linked list. */
                 *mtail = me;
