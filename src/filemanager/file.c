@@ -2066,6 +2066,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         {
             dest_dir = d;
             d = NULL;
+            dest_dir_vpath = vfs_path_from_str (dest_dir);
             goto dont_mkdir;
         }
     }
@@ -2091,6 +2092,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     lp->dev = buf.st_dev;
     dest_dirs = g_slist_prepend (dest_dirs, lp);
 
+  dont_mkdir:
     if (ctx->preserve_uidgid)
     {
         while (mc_chown (dest_dir_vpath, cbuf.st_uid, cbuf.st_gid) != 0)
@@ -2109,7 +2111,6 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         }
     }
 
-  dont_mkdir:
     /* open the source dir for reading */
     reading = mc_opendir (src_vpath);
     if (reading == NULL)
