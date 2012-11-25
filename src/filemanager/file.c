@@ -1932,6 +1932,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     struct link *lp;
     char *d;
     vfs_path_t *src_vpath, *dst_vpath, *dest_dir_vpath = NULL;
+    gboolean do_mkdir = TRUE;
 
     d = g_strdup (_d);
 
@@ -2046,40 +2047,42 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         }
         /* Dive into subdir if exists */
         if (toplevel && ctx->dive_into_subdirs)
-        {
             dest_dir = mc_build_filename (d, x_basename (s), NULL);
-        }
         else
         {
             dest_dir = d;
             d = NULL;
-            dest_dir_vpath = vfs_path_from_str (dest_dir);
-            goto dont_mkdir;
+            do_mkdir = FALSE;
         }
     }
+
     dest_dir_vpath = vfs_path_from_str (dest_dir);
-    while (my_mkdir (dest_dir_vpath, (cbuf.st_mode & ctx->umask_kill) | S_IRWXU) != 0)
+
+    if (do_mkdir)
     {
-        if (ctx->skip_all)
-            return_status = FILE_SKIPALL;
-        else
+        while (my_mkdir (dest_dir_vpath, (cbuf.st_mode & ctx->umask_kill) | S_IRWXU) != 0)
         {
-            return_status = file_error (_("Cannot create target directory \"%s\"\n%s"), dest_dir);
-            if (return_status == FILE_SKIPALL)
-                ctx->skip_all = TRUE;
+            if (ctx->skip_all)
+                return_status = FILE_SKIPALL;
+            else
+            {
+                return_status =
+                    file_error (_("Cannot create target directory \"%s\"\n%s"), dest_dir);
+                if (return_status == FILE_SKIPALL)
+                    ctx->skip_all = TRUE;
+            }
+            if (return_status != FILE_RETRY)
+                goto ret;
         }
-        if (return_status != FILE_RETRY)
-            goto ret;
+
+        lp = g_new0 (struct link, 1);
+        mc_stat (dest_dir_vpath, &buf);
+        lp->vfs = vfs_path_get_by_index (dest_dir_vpath, -1)->class;
+        lp->ino = buf.st_ino;
+        lp->dev = buf.st_dev;
+        dest_dirs = g_slist_prepend (dest_dirs, lp);
     }
 
-    lp = g_new0 (struct link, 1);
-    mc_stat (dest_dir_vpath, &buf);
-    lp->vfs = vfs_path_get_by_index (dest_dir_vpath, -1)->class;
-    lp->ino = buf.st_ino;
-    lp->dev = buf.st_dev;
-    dest_dirs = g_slist_prepend (dest_dirs, lp);
-
-  dont_mkdir:
     if (ctx->preserve_uidgid)
     {
         while (mc_chown (dest_dir_vpath, cbuf.st_uid, cbuf.st_gid) != 0)
