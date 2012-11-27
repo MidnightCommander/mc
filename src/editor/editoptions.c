@@ -168,6 +168,7 @@ edit_options_dialog (WDialog * h)
                     QUICK_CHECKBOX (N_("&Visible trailing spaces"), &visible_tws, NULL),
                     QUICK_CHECKBOX (N_("Visible &tabs"), &visible_tabs, NULL),
                     QUICK_CHECKBOX (N_("Synta&x highlighting"), &option_syntax_highlighting, NULL),
+                    QUICK_CHECKBOX (N_("C&ursor after inserted block"), &option_cursor_after_inserted_block, NULL),
                     QUICK_CHECKBOX (N_("Pers&istent selection"), &option_persistent_selections,
                                      NULL),
                     QUICK_CHECKBOX (N_("Cursor be&yond end of line"), &option_cursor_beyond_eol,
