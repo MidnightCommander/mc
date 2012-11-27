@@ -2409,8 +2409,14 @@ edit_block_copy_cmd (WEdit * edit)
     }
     else
     {
-        while (size--)
+        int size_orig = size;
+
+        while (size-- != 0)
             edit_insert_ahead (edit, copy_buf[size]);
+
+        /* Place cursor at the end of text selection */
+        if (option_cursor_after_inserted_block)
+            edit_cursor_move (edit, size_orig);
     }
 
     g_free (copy_buf);
