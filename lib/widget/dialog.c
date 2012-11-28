@@ -858,11 +858,13 @@ unsigned long
 add_widget_autopos (WDialog * h, void *w, widget_pos_flags_t pos_flags, const void *before)
 {
     Widget *wh = WIDGET (h);
-    Widget *widget = WIDGET (w);
+    Widget *widget;
 
     /* Don't accept 0 widgets */
     if (w == NULL)
         abort ();
+
+    widget = WIDGET (w);
 
     if ((pos_flags & WPOS_CENTER_HORZ) != 0)
         widget->x = (wh->cols - widget->cols) / 2;
@@ -934,12 +936,14 @@ add_widget_before (WDialog * h, void *w, void *before)
 void
 del_widget (void *w)
 {
-    WDialog *h = WIDGET (w)->owner;
+    WDialog *h;
     GList *d;
 
     /* Don't accept NULL widget. This shouldn't happen */
     if (w == NULL)
         abort ();
+
+    h = WIDGET (w)->owner;
 
     d = g_list_find (h->widgets, w);
     if (d == h->current)
