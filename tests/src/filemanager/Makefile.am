@@ -14,7 +14,8 @@ endif
 
 TESTS = \
 	do_panel_cd \
-	examine_cd
+	examine_cd \
+	exec_get_export_variables_ext
 
 check_PROGRAMS = $(TESTS)
 
@@ -23,3 +24,6 @@ do_panel_cd_SOURCES = \
 
 examine_cd_SOURCES = \
 	examine_cd.c
+
+exec_get_export_variables_ext_SOURCES = \
+	exec_get_export_variables_ext.c
