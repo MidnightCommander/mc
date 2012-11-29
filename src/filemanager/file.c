@@ -1920,7 +1920,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
    function calls */
 
 FileProgressStatus
-copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, const char *_d,
+copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, const char *d,
               gboolean toplevel, gboolean move_over, gboolean do_delete, GSList * parent_dirs)
 {
     struct dirent *next;
@@ -1930,14 +1930,11 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     FileProgressStatus return_status = FILE_CONT;
     struct utimbuf utb;
     struct link *lp;
-    char *d;
     vfs_path_t *src_vpath, *dst_vpath, *dest_dir_vpath = NULL;
     gboolean do_mkdir = TRUE;
 
-    d = g_strdup (_d);
-
     src_vpath = vfs_path_from_str (s);
-    dst_vpath = vfs_path_from_str (_d);
+    dst_vpath = vfs_path_from_str (d);
 
     /* First get the mode of the source dir */
 
@@ -2018,8 +2015,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
                 goto ret;
             }
         }
-        dest_dir = d;
-        d = NULL;
+        dest_dir = g_strdup (d);
     }
     else
     {
@@ -2050,8 +2046,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
             dest_dir = mc_build_filename (d, x_basename (s), NULL);
         else
         {
-            dest_dir = d;
-            d = NULL;
+            dest_dir = g_strdup (d);
             do_mkdir = FALSE;
         }
     }
@@ -2186,7 +2181,6 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     free_link (parent_dirs->data);
     g_slist_free_1 (parent_dirs);
   ret_fast:
-    g_free (d);
     vfs_path_free (src_vpath);
     vfs_path_free (dst_vpath);
     return return_status;
