@@ -2,6 +2,8 @@
 
 LANG=C
 export LANG
+LC_TIME=C
+export LC_TIME
 
 umask 077
 prefix='[git]'

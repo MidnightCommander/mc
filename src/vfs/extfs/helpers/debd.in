@@ -148,7 +148,7 @@ sub list
 
 
 
-       if ( open(PIPEIN, "LANG=C ls -l /var/lib/dpkg/info/$qarchive.* |") ) {
+       if ( open(PIPEIN, "LC_TIME=C LANG=C ls -l /var/lib/dpkg/info/$qarchive.* |") ) {
            while(<PIPEIN>) {
                chop;
                next if /\.list$/;
