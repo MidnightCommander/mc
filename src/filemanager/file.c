@@ -1933,7 +1933,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
    function calls */
 
 FileProgressStatus
-copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, const char *_d,
+copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, const char *d,
               gboolean toplevel, gboolean move_over, gboolean do_delete, GSList * parent_dirs)
 {
     struct dirent *next;
@@ -1943,13 +1943,11 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     FileProgressStatus return_status = FILE_CONT;
     struct utimbuf utb;
     struct link *lp;
-    char *d;
     vfs_path_t *src_vpath, *dst_vpath, *dest_dir_vpath = NULL;
-
-    d = g_strdup (_d);
+    gboolean do_mkdir = TRUE;
 
     src_vpath = vfs_path_from_str (s);
-    dst_vpath = vfs_path_from_str (_d);
+    dst_vpath = vfs_path_from_str (d);
 
     /* First get the mode of the source dir */
 
@@ -2030,8 +2028,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
                 goto ret;
             }
         }
-        dest_dir = d;
-        d = NULL;
+        dest_dir = g_strdup (d);
     }
     else
     {
@@ -2059,37 +2056,40 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         }
         /* Dive into subdir if exists */
         if (toplevel && ctx->dive_into_subdirs)
-        {
             dest_dir = mc_build_filename (d, x_basename (s), NULL);
-        }
         else
         {
-            dest_dir = d;
-            d = NULL;
-            goto dont_mkdir;
+            dest_dir = g_strdup (d);
+            do_mkdir = FALSE;
         }
-    }
-    dest_dir_vpath = vfs_path_from_str (dest_dir);
-    while (my_mkdir (dest_dir_vpath, (cbuf.st_mode & ctx->umask_kill) | S_IRWXU) != 0)
-    {
-        if (ctx->skip_all)
-            return_status = FILE_SKIPALL;
-        else
-        {
-            return_status = file_error (_("Cannot create target directory \"%s\"\n%s"), dest_dir);
-            if (return_status == FILE_SKIPALL)
-                ctx->skip_all = TRUE;
-        }
-        if (return_status != FILE_RETRY)
-            goto ret;
     }
 
-    lp = g_new0 (struct link, 1);
-    mc_stat (dest_dir_vpath, &buf);
-    lp->vfs = vfs_path_get_by_index (dest_dir_vpath, -1)->class;
-    lp->ino = buf.st_ino;
-    lp->dev = buf.st_dev;
-    dest_dirs = g_slist_prepend (dest_dirs, lp);
+    dest_dir_vpath = vfs_path_from_str (dest_dir);
+
+    if (do_mkdir)
+    {
+        while (my_mkdir (dest_dir_vpath, (cbuf.st_mode & ctx->umask_kill) | S_IRWXU) != 0)
+        {
+            if (ctx->skip_all)
+                return_status = FILE_SKIPALL;
+            else
+            {
+                return_status =
+                    file_error (_("Cannot create target directory \"%s\"\n%s"), dest_dir);
+                if (return_status == FILE_SKIPALL)
+                    ctx->skip_all = TRUE;
+            }
+            if (return_status != FILE_RETRY)
+                goto ret;
+        }
+
+        lp = g_new0 (struct link, 1);
+        mc_stat (dest_dir_vpath, &buf);
+        lp->vfs = vfs_path_get_by_index (dest_dir_vpath, -1)->class;
+        lp->ino = buf.st_ino;
+        lp->dev = buf.st_dev;
+        dest_dirs = g_slist_prepend (dest_dirs, lp);
+    }
 
     if (ctx->preserve_uidgid)
     {
@@ -2109,7 +2109,6 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         }
     }
 
-  dont_mkdir:
     /* open the source dir for reading */
     reading = mc_opendir (src_vpath);
     if (reading == NULL)
@@ -2195,7 +2194,6 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     free_link (parent_dirs->data);
     g_slist_free_1 (parent_dirs);
   ret_fast:
-    g_free (d);
     vfs_path_free (src_vpath);
     vfs_path_free (dst_vpath);
     return return_status;
