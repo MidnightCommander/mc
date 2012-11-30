@@ -195,12 +195,13 @@ write_all (int fd, const void *buf, size_t count)
         {
             if (errno == EINTR)
             {
+                if (mc_global.tty.winch_flag)
+                    tty_change_screen_size ();
+
                 continue;
             }
-            else
-            {
-                return written > 0 ? written : ret;
-            }
+
+            return written > 0 ? written : ret;
         }
         count -= ret;
         written += ret;
@@ -502,10 +503,14 @@ feed_subshell (int how, int fail_on_error)
 
         if (select (maxfdp + 1, &read_set, NULL, NULL, wptr) == -1)
         {
-
             /* Despite using SA_RESTART, we still have to check for this */
             if (errno == EINTR)
+            {
+                if (mc_global.tty.winch_flag)
+                    tty_change_screen_size ();
+
                 continue;       /* try all over again */
+            }
             tcsetattr (STDOUT_FILENO, TCSANOW, &shell_mode);
             fprintf (stderr, "select (FD_SETSIZE, &read_set...): %s\r\n",
                      unix_error_string (errno));
@@ -1002,12 +1007,15 @@ read_subshell_prompt (void)
         if (rc == -1)
         {
             if (errno == EINTR)
-                continue;
-            else
             {
-                fprintf (stderr, "select (FD_SETSIZE, &tmp...): %s\r\n", unix_error_string (errno));
-                exit (EXIT_FAILURE);
+                if (mc_global.tty.winch_flag)
+                    tty_change_screen_size ();
+
+                continue;
             }
+
+            fprintf (stderr, "select (FD_SETSIZE, &tmp...): %s\r\n", unix_error_string (errno));
+            exit (EXIT_FAILURE);
         }
 
         bytes = read (mc_global.tty.subshell_pty, pty_buffer, sizeof (pty_buffer));

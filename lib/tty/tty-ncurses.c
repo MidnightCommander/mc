@@ -34,6 +34,10 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <signal.h>
+#ifdef HAVE_SYS_IOCTL_H
+#include <sys/ioctl.h>
+#endif
+#include <termios.h>
 
 #include "lib/global.h"
 #include "lib/strutil.h"        /* str_term_form */
@@ -213,6 +217,41 @@ tty_shutdown (void)
     tty_keypad (FALSE);
     tty_reset_screen ();
     do_exit_ca_mode ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+tty_change_screen_size (void)
+{
+#if defined(TIOCGWINSZ) && NCURSES_VERSION_MAJOR >= 4
+    struct winsize winsz;
+
+    winsz.ws_col = winsz.ws_row = 0;
+
+#ifndef NCURSES_VERSION
+    tty_noraw_mode ();
+    tty_reset_screen ();
+#endif
+
+    /* Ioctl on the STDIN_FILENO */
+    ioctl (fileno (stdout), TIOCGWINSZ, &winsz);
+    if (winsz.ws_col != 0 && winsz.ws_row != 0)
+    {
+#if defined(NCURSES_VERSION) && defined(HAVE_RESIZETERM)
+        resizeterm (winsz.ws_row, winsz.ws_col);
+        clearok (stdscr, TRUE); /* sigwinch's should use a semaphore! */
+#else
+        COLS = winsz.ws_col;
+        LINES = winsz.ws_row;
+#endif
+    }
+#endif /* defined(TIOCGWINSZ) || NCURSES_VERSION_MAJOR >= 4 */
+
+#ifdef HAVE_SUBSHELL_SUPPORT
+    if (mc_global.tty.use_subshell)
+        tty_resize (mc_global.tty.subshell_pty);
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */

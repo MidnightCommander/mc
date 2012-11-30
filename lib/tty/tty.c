@@ -248,38 +248,6 @@ tty_resize (int fd)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tty_change_screen_size (void)
-{
-#if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
-#if defined TIOCGWINSZ
-    struct winsize winsz;
-
-    winsz.ws_col = winsz.ws_row = 0;
-    /* Ioctl on the STDIN_FILENO */
-    ioctl (0, TIOCGWINSZ, &winsz);
-    if (winsz.ws_col && winsz.ws_row)
-    {
-#if defined(NCURSES_VERSION) && defined(HAVE_RESIZETERM)
-        resizeterm (winsz.ws_row, winsz.ws_col);
-        clearok (stdscr, TRUE); /* sigwinch's should use a semaphore! */
-#else
-        COLS = winsz.ws_col;
-        LINES = winsz.ws_row;
-#endif
-#ifdef HAVE_SUBSHELL_SUPPORT
-        if (!mc_global.tty.use_subshell)
-            return;
-
-        tty_resize (mc_global.tty.subshell_pty);
-#endif
-    }
-#endif /* TIOCGWINSZ */
-#endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
 tty_init_xterm_support (gboolean is_xterm)
 {
     const char *termvalue;

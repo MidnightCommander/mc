@@ -32,17 +32,12 @@
 
 #include <config.h>
 
-/* If TIOCGWINSZ supported, make it available here, because window resizing code
- * depends on it... */
-#ifdef HAVE_SYS_IOCTL_H
-#include <sys/ioctl.h>
-#endif
-#include <termios.h>
-
 #include "lib/global.h"
 #include "lib/tty/tty.h"        /* LINES, COLS */
-#include "lib/tty/win.h"        /* do_enter_ca_mode() */
 #include "lib/tty/color.h"      /* tty_set_normal_attrs() */
+#ifdef HAVE_SLANG
+#include "lib/tty/win.h"        /* do_enter_ca_mode() */
+#endif
 #include "lib/widget.h"
 #include "lib/event.h"
 
@@ -121,7 +116,6 @@ dialog_switch_goto (GList * dlg)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#if defined TIOCGWINSZ
 static void
 dlg_resize_cb (void *data, void *user_data)
 {
@@ -133,7 +127,6 @@ dlg_resize_cb (void *data, void *user_data)
     else
         d->winch_pending = TRUE;
 }
-#endif
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -374,22 +367,10 @@ void
 dialog_change_screen_size (void)
 {
     mc_global.tty.winch_flag = 0;
-#if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
-#if defined TIOCGWINSZ
 
-#ifndef NCURSES_VERSION
-    tty_noraw_mode ();
-    tty_reset_screen ();
-#endif
     tty_change_screen_size ();
+
 #ifdef HAVE_SLANG
-    /* XSI Curses spec states that portable applications shall not invoke
-     * initscr() more than once.  This kludge could be done within the scope
-     * of the specification by using endwin followed by a refresh (in fact,
-     * more than one curses implementation does this); it is guaranteed to work
-     * only with slang.
-     */
-    SLsmg_init_smg ();
     do_enter_ca_mode ();
     tty_keypad (TRUE);
     tty_nodelay (FALSE);
@@ -402,9 +383,6 @@ dialog_change_screen_size (void)
 
     /* Now, force the redraw */
     repaint_screen ();
-
-#endif /* TIOCGWINSZ */
-#endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
 }
 
 /* --------------------------------------------------------------------------------------------- */
