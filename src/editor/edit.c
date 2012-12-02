@@ -2200,7 +2200,6 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
            long line)
 {
     gboolean to_free = FALSE;
-    Widget *w;
 
     option_auto_syntax = 1;     /* Resetting to auto on every invokation */
     option_line_state_width = option_line_state ? LINE_STATE_WIDTH : 0;
@@ -2238,12 +2237,12 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
 #endif /* ENABLE_NLS */
         edit = g_malloc0 (sizeof (WEdit));
         to_free = TRUE;
+
+        init_widget (WIDGET (edit), y, x, lines, cols, NULL, NULL);
+        edit->fullscreen = TRUE;
+        edit_save_size (edit);
     }
 
-    w = WIDGET (edit);
-    init_widget (w, y, x, lines, cols, NULL, NULL);
-    edit_save_size (edit);
-    edit->fullscreen = TRUE;
     edit->drag_state = MCEDIT_DRAG_NORMAL;
 
     edit->stat1.st_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
