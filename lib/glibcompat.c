@@ -68,11 +68,3 @@ g_unichar_iszerowidth (gunichar c)
 #endif /* ! GLIB_CHECK_VERSION (2, 13, 0) */
 
 /* --------------------------------------------------------------------------------------------- */
-
-#if ! GLIB_CHECK_VERSION (2, 7, 0)
-gboolean
-g_file_set_contents (const gchar * filename, const gchar * contents, gssize length, GError ** error)
-{
-    return g_file_replace (filename, contents, length, error);
-}
-#endif /* ! GLIB_CHECK_VERSION (2, 7, 0) */
