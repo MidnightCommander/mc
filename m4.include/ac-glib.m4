@@ -8,12 +8,12 @@ AC_DEFUN([AC_G_MODULE_SUPPORTED], [
     g_module_supported=""
 
     found_gmodule=no
-    PKG_CHECK_MODULES(GMODULE, [gmodule-no-export-2.0 >= 2.8], [found_gmodule=yes], [:])
+    PKG_CHECK_MODULES(GMODULE, [gmodule-no-export-2.0 >= 2.12], [found_gmodule=yes], [:])
     if test x"$found_gmodule" = xyes; then
         g_module_supported="gmodule-no-export-2.0"
     else
         dnl try fallback to the generic gmodule
-        PKG_CHECK_MODULES(GMODULE, [gmodule-2.0 >= 2.8], [found_gmodule=yes], [:])
+        PKG_CHECK_MODULES(GMODULE, [gmodule-2.0 >= 2.12], [found_gmodule=yes], [:])
         if test x"$found_gmodule" = xyes; then
             g_module_supported="gmodule-2.0"
         fi
@@ -80,9 +80,9 @@ AC_DEFUN([AC_CHECK_GLIB], [
         AS_HELP_STRING([--with-glib-static], [Link glib statically @<:@no@:>@]))
 
     glib_found=no
-    PKG_CHECK_MODULES(GLIB, [glib-2.0 >= 2.8], [glib_found=yes], [:])
+    PKG_CHECK_MODULES(GLIB, [glib-2.0 >= 2.12], [glib_found=yes], [:])
     if test x"$glib_found" = xno; then
-        AC_MSG_ERROR([glib-2.0 not found or version too old (must be >= 2.8)])
+        AC_MSG_ERROR([glib-2.0 not found or version too old (must be >= 2.12)])
     fi
 
 ])

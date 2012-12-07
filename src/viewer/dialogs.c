@@ -225,7 +225,7 @@ mcview_dialog_goto (mcview_t * view, off_t * offset)
         off_t addr;
         char *error;
 
-        addr = strtoll (exp, &error, base);
+        addr = (off_t) g_ascii_strtoll (exp, &error, base);
         if ((*error == '\0') && (addr >= 0))
         {
             switch (current_goto_type)
