@@ -779,11 +779,7 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
                 break;
             }
         case 'S':
-#ifdef HAVE_ATOLL
-            ST.st_size = (off_t) atoll (buffer + 1);
-#else
-            ST.st_size = (off_t) atof (buffer + 1);
-#endif
+            ST.st_size = (off_t) g_ascii_strtoll (buffer + 1, NULL, 10);
             break;
         case 'P':
             {
@@ -1017,7 +1013,7 @@ fish_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
 #if SIZEOF_OFF_T == SIZEOF_LONG
     fish->total = (off_t) strtol (reply_str, NULL, 10);
 #else
-    fish->total = (off_t) strtoll (reply_str, NULL, 10);
+    fish->total = (off_t) g_ascii_strtoll (reply_str, NULL, 10);
 #endif
     if (errno != 0)
         ERRNOR (E_REMOTE, 0);
