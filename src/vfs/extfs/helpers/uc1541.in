@@ -6,7 +6,58 @@ This extfs provides an access to disk image files for the Commodore
 VIC20/C64/C128. It requires the utility c1541 that comes bundled with Vice,
 the emulator for the VIC20, C64, C128 and other computers made by Commodore.
 
+Remarks
+-------
+
+Due to different way of representing file entries on regular D64 disk images,
+there could be issues with filenames that are transfered from/to the image.
+Following rules was applied to represent a single file entry:
+
+1. An extension is attached to the end of a filename depending on a file type.
+   Possible extensions are: prg, del, seq, usr and rel.
+2. Every non-ASCII character (which could be some of characters specific to
+   PET-ASCII, or be a control character) will be replaced by dot (.), since
+   c1541 program will list them that way.
+3. Every slash character (/) will be replaced by pipe character (|).
+4. Leading space will be replaced by tilda (~).
+
+While copying from D64 image to filesystem, filenames will be stored as they
+are seen on a listing.
+
+While copying from filesystem to D64 image, filename conversion will be done:
+1. Every $ and * characters will be replaced by question mark (?)
+2. Every pipe (|) and backslash (\) characters will be replaced by slash (/)
+3. Every tilda (~) will be replaced by a space
+4. 'prg' extension will be truncated
+
+Representation of a directory can be sometimes confusing - in case when one
+copied file without extension it stays there in such form, till next access
+(after flushing VFS). Also file sizes are not accurate, since D64 directory
+entries have sizes stored as 256 bytes blocks.
+
+Configuration
+-------------
+
+Here are specific for this script variable, which while set, can influence
+script behaviour:
+
+UC1541_DEBUG - if set, uc1541 will produce log in /tmp/uc1541.log file
+
+UC1541_VERBOSE - of set, script will be more verbose, i.e. error messages form
+c1541 program will be passed to Midnight Commander, so that user will be aware
+of error cause if any.
+
+UC1541_HIDE_DEL - if set, no DEL entries will be shown
+
 Changelog:
+    2.5 Fixed bug with filenames started with a '-' sign.
+    2.4 Fixed endless loop bug for reading directory in Python implemented
+        directory reader.
+    2.3 Re added and missing method _correct_fname used for writing files
+        into d64 image.
+    2.2 Fixed bug(?) with unusual sector end (marked as sector 0, not 255),
+        causing endless directory reading on random locations.
+    2.1 Fixed bug with filenames containing slash.
     2.0 Added reading raw D64 image, and mapping for jokers. Now it is
         possible to read files with PET-ASCII/control sequences in filenames.
         Working with d64 images only. Added workaround for space at the
@@ -20,8 +71,8 @@ Changelog:
     1.0 Initial release
 
 Author: Roman 'gryf' Dobosz <gryf73@gmail.com>
-Date: 2012-09-02
-Version: 2.0
+Date: 2012-10-15
+Version: 2.5
 Licence: BSD
 """
 
@@ -70,15 +121,15 @@ class D64(object):
     """
     Implement d64 directory reader
     """
-    CHAR_MAP = {32: ' ', 33: '!', 34: '"', 35: '#', 36: '$', 37: '%', 38: '&',
-                39: "'", 40: '(', 41: ')', 42: '*', 43: '+', 44: ',', 45: '-',
-                46: '.', 47: '/', 48: '0', 49: '1', 50: '2', 51: '3', 52: '4',
-                53: '5', 54: '6', 55: '7', 56: '8', 57: '9', 59: ';', 60: '<',
-                61: '=', 62: '>', 63: '?', 64: '@', 65: 'a', 66: 'b', 67: 'c',
-                68: 'd', 69: 'e', 70: 'f', 71: 'g', 72: 'h', 73: 'i', 74: 'j',
-                75: 'k', 76: 'l', 77: 'm', 78: 'n', 79: 'o', 80: 'p', 81: 'q',
-                82: 'r', 83: 's', 84: 't', 85: 'u', 86: 'v', 87: 'w', 88: 'x',
-                89: 'y', 90: 'z', 91: '[', 93: ']', 97: 'A', 98: 'B', 99: 'C',
+    CHAR_MAP = {32: ' ', 33: '!', 34: '"', 35: '#', 37: '%', 38: '&', 39: "'",
+                40: '(', 41: ')', 42: '*', 43: '+', 44: ',', 45: '-', 46: '.',
+                47: '/', 48: '0', 49: '1', 50: '2', 51: '3', 52: '4', 53: '5',
+                54: '6', 55: '7', 56: '8', 57: '9', 59: ';', 60: '<', 61: '=',
+                62: '>', 63: '?', 64: '@', 65: 'a', 66: 'b', 67: 'c', 68: 'd',
+                69: 'e', 70: 'f', 71: 'g', 72: 'h', 73: 'i', 74: 'j', 75: 'k',
+                76: 'l', 77: 'm', 78: 'n', 79: 'o', 80: 'p', 81: 'q', 82: 'r',
+                83: 's', 84: 't', 85: 'u', 86: 'v', 87: 'w', 88: 'x', 89: 'y',
+                90: 'z', 91: '[', 93: ']', 97: 'A', 98: 'B', 99: 'C',
                 100: 'D', 101: 'E', 102: 'F', 103: 'G', 104: 'H', 105: 'I',
                 106: 'J', 107: 'K', 108: 'L', 109: 'M', 110: 'N', 111: 'O',
                 112: 'P', 113: 'Q', 114: 'R', 115: 'S', 116: 'T', 117: 'U',
@@ -105,10 +156,10 @@ class D64(object):
         dimage.close()
 
         self.current_sector_data = None
-        self._sector_shift = 256
         self.next_sector = 0
         self.next_track = None
-        self._directory_contents = []
+        self._dir_contents = []
+        self._already_done = []
 
     def _map_filename(self, string):
         """
@@ -117,16 +168,17 @@ class D64(object):
         """
 
         filename = list()
-        in_fname = True
 
         for chr_ in string:
-            character = D64.CHAR_MAP.get(ord(chr_), '?')
+            if ord(chr_) == 160:  # shift+space character; $a0
+                break
 
-            if in_fname:
-                if ord(chr_) == 160:
-                    in_fname = False
-                else:
-                    filename.append(character)
+            character = D64.CHAR_MAP.get(ord(chr_), '?')
+            filename.append(character)
+
+        # special cases
+        if filename[0] == "-":
+            filename[0] = "?"
 
         LOG.debug("string: ``%s'' mapped to: ``%s''", string,
                   "".join(filename))
@@ -138,7 +190,11 @@ class D64(object):
         Return False if the chain ends, True otherwise
         """
 
-        if self.next_track == 0 and self.next_sector == 255:
+        # Well, self.next_sector _should_ have value $FF, but apparently there
+        # are the cases where it is not, therefore checking for that will not
+        # be performed and value of $00 on the next track will end the
+        # directory
+        if self.next_track == 0:
             LOG.debug("End of directory")
             return False
 
@@ -150,10 +206,19 @@ class D64(object):
             LOG.debug("Going to the track: %s,%s", self.next_track,
                       self.next_sector)
 
-        self.current_sector_data = self.raw[offset:offset + self._sector_shift]
+        self.current_sector_data = self.raw[offset:offset + 256]
 
         self.next_track = ord(self.current_sector_data[0])
         self.next_sector = ord(self.current_sector_data[1])
+
+        if (self.next_track, self.next_sector) in self._already_done:
+            # Just a failsafe. Endless loop is not what is expected.
+            LOG.debug("Loop in track/sector pointer at %d,%d",
+                      self.next_track, self.next_sector)
+            self._already_done = []
+            return False
+
+        self._already_done.append((self.next_track, self.next_sector))
         LOG.debug("Next track: %s,%s", self.next_track, self.next_sector)
         return True
 
@@ -192,7 +257,7 @@ class D64(object):
 
     def _harvest_entries(self):
         """
-        Traverse through sectors and store entries in _directory_contents
+        Traverse through sectors and store entries in _dir_contents
         """
         sector = self.current_sector_data
         for x in range(8):
@@ -212,10 +277,10 @@ class D64(object):
             else:
                 size = ord(entry[30]) + ord(entry[31]) * 226
 
-            self._directory_contents.append({'fname': self._map_filename(fname),
-                                   'ftype': type_verbose,
-                                   'size': size,
-                                   'protect': protect})
+            self._dir_contents.append({'fname': self._map_filename(fname),
+                                       'ftype': type_verbose,
+                                       'size': size,
+                                       'protect': protect})
             sector = sector[32:]
 
     def list_dir(self):
@@ -226,7 +291,7 @@ class D64(object):
         while self._go_to_next_sector():
             self._harvest_entries()
 
-        return self._directory_contents
+        return self._dir_contents
 
 
 class Uc1541(object):
@@ -249,7 +314,7 @@ class Uc1541(object):
     def list(self):
         """
         Output list contents of D64 image.
-        Convert filenames to be unix filesystem friendly
+        Convert filenames to be Unix filesystem friendly
         Add suffix to show user what kind of file do he dealing with.
         """
         LOG.info("List contents of %s", self.arch)
@@ -295,11 +360,11 @@ class Uc1541(object):
     def copyout(self, src, dst):
         """
         Copy file form the D64 image. Source filename has to be corrected,
-        since it's representaion differ from the real one inside D64 image.
+        since it's representation differ from the real one inside D64 image.
         """
         LOG.info("Copy form D64 %s as %s", src, dst)
         if not src.endswith(".prg"):
-            return "canot read"
+            return "cannot read"
 
         src = self._get_masked_fname(src)
 
@@ -308,15 +373,38 @@ class Uc1541(object):
 
         return 0
 
+    def _correct_fname(self, fname):
+        """
+        Return filename with mapped characters, without .prg extension.
+        Characters like $, *, + in filenames are perfectly legal, but c1541
+        program seem to have issues with it while writing, so it will also be
+        replaced.
+        """
+        char_map = {'|': "/",
+                    "\\": "/",
+                    "~": " ",
+                    "$": "?",
+                    "*": "?"}
+
+        if fname.lower().endswith(".prg"):
+            fname = fname[:-4]
+
+        new_fname = []
+        for char in fname:
+            trans = char_map.get(char)
+            new_fname.append(trans if trans else char)
+
+        return "".join(new_fname)
+
     def _get_masked_fname(self, fname):
         """
         Return masked filename with '?' jokers instead of non ASCII
-        characters, usefull for copying or deleting files with c1541. In case
+        characters, useful for copying or deleting files with c1541. In case
         of several files with same name exists in directory, only first one
         will be operative (first as appeared in directory).
 
-        Warning! If there are two different names but the only differenc is in
-        non-ASCII characters (some PET ASCII or controll characters) there is
+        Warning! If there are two different names but the only difference is in
+        non-ASCII characters (some PET ASCII or control characters) there is
         a risk that one can remove both files.
         """
         directory = self._get_dir()
@@ -348,12 +436,16 @@ class Uc1541(object):
                 display_name = ".".join([fname, ext])
                 pattern_name = self.pyd64[idx]['fname']
 
-                if '/' in fname:
-                    display_name = fname.replace('/', '|')
+                if '/' in display_name:
+                    display_name = display_name.replace('/', '|')
 
-                # workaround for space at the beggining of the filename
-                if fname[0] == ' ':
-                    display_name = '~' + display_name[1:]
+                # workaround for space and dash at the beggining of the
+                # filename
+                char_map = {' ': '~',
+                            '-': '_'}
+                display_name = "".join([char_map.get(display_name[0],
+                                                     display_name[0]),
+                                        display_name[1:]])
 
                 if ext == 'del':
                     perms = "----------"
