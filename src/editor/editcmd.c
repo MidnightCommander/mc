@@ -1944,7 +1944,7 @@ edit_load_macro_cmd (WEdit * edit)
     macros_config = mc_config_init (macros_fname, TRUE);
     g_free (macros_fname);
 
-    if (macros_config == NULL)
+    if (macros_config == NULL || macros_list == NULL || macros_list->len != 0)
         return FALSE;
 
     profile_keys = keys = mc_config_get_keys (macros_config, section_name, &len);
