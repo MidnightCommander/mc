@@ -951,6 +951,7 @@ del_widget (void *w)
 
     h->widgets = g_list_remove_link (h->widgets, d);
     send_message (d->data, NULL, MSG_DESTROY, 0, NULL);
+    g_free (d->data);
     g_list_free_1 (d);
 
     /* widget has been deleted in runtime */
