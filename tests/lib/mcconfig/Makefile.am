@@ -1,6 +1,9 @@
 
-AM_CPPFLAGS = -DWORKDIR=\"$(abs_builddir)\"
-AM_CFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS) @CHECK_CFLAGS@
+AM_CPPFLAGS = \
+	-DWORKDIR=\"$(abs_builddir)\" \
+	$(GLIB_CFLAGS) \
+	-I$(top_srcdir) \
+	@CHECK_CFLAGS@
 
 AM_LDFLAGS = @TESTS_LDFLAGS@
 
