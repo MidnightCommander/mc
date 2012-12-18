@@ -25,11 +25,11 @@ endif
 
 libmctty_la_SOURCES = $(TTY_SRC) $(TTY_SCREEN_SRC)
 
-AM_CFLAGS = -I$(top_srcdir)
+AM_CPPFLAGS = -I$(top_srcdir)
 
 if HAVE_GMODULE
-AM_CFLAGS += $(GMODULE_CFLAGS)
+AM_CPPFLAGS += $(GMODULE_CFLAGS)
 else
-AM_CFLAGS += $(GLIB_CFLAGS)
+AM_CPPFLAGS += $(GLIB_CFLAGS)
 endif
 

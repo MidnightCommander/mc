@@ -1,6 +1,10 @@
 
-AM_CPPFLAGS = -DTEST_SHARE_DIR=\"$(abs_srcdir)\"
-AM_CFLAGS = -I$(top_srcdir) -I$(top_srcdir)/lib/vfs $(GLIB_CFLAGS) @CHECK_CFLAGS@
+AM_CPPFLAGS = \
+	-DTEST_SHARE_DIR=\"$(abs_srcdir)\" \
+	$(GLIB_CFLAGS) \
+	-I$(top_srcdir) \
+	-I$(top_srcdir)/lib/vfs \
+	@CHECK_CFLAGS@
 
 AM_LDFLAGS = @TESTS_LDFLAGS@
 

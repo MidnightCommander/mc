@@ -1,6 +1,6 @@
 noinst_LTLIBRARIES = libmc-vfs.la
 
-AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir)
+AM_CPPFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir)
 libmc_vfs_la_SOURCES = plugins_init.c plugins_init.h
 
 SUBDIRS = local

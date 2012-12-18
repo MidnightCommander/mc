@@ -8,4 +8,4 @@ libmcstrutil_la_SOURCES = \
 	strutilutf8.c \
 	strverscmp.c
 
-AM_CFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS)
+AM_CPPFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir)

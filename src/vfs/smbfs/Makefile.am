@@ -2,8 +2,10 @@ DIST_SUBDIRS =
 
 SUBDIRS = helpers
 
-AM_CPPFLAGS = -DCONFIGDIR=\""@smbconfigdir@"\"
-AM_CFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir)
+AM_CPPFLAGS = \
+	-DCONFIGDIR=\""@smbconfigdir@"\" \
+	$(GLIB_CFLAGS) \
+	-I$(top_srcdir)
 
 noinst_LTLIBRARIES = libvfs-smbfs.la
 

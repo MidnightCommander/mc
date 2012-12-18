@@ -1,4 +1,9 @@
-AM_CFLAGS = -I$(top_srcdir)/lib/vfs $(GLIB_CFLAGS) -I$(top_srcdir) @CHECK_CFLAGS@
+
+AM_CPPFLAGS = \
+	$(GLIB_CFLAGS) \
+	-I$(top_srcdir) \
+	-I$(top_srcdir)/lib/vfs \
+	@CHECK_CFLAGS@
 
 AM_LDFLAGS = @TESTS_LDFLAGS@
 

@@ -5,6 +5,6 @@ libdiffviewer_la_SOURCES = \
 	search.c \
 	ydiff.c ydiff.h
 
-AM_CFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS) $(PCRE_CFLAGS)
+AM_CPPFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS) $(PCRE_CPPFLAGS)
 
 libdiffviewer_la_LIBADD = ../../lib/libmc.la
