@@ -11,15 +11,15 @@ LIBS=@CHECK_LIBS@  \
     $(top_builddir)/lib/libmc.la
 
 TESTS = \
-	do_panel_cd \
+	do_cd_command \
 	examine_cd
 
 check_PROGRAMS = $(TESTS)
 
-do_panel_cd_SOURCES = \
-	do_panel_cd.c
+do_cd_command_SOURCES = \
+	do_cd_command.c
 
 examine_cd_SOURCES = \
 	examine_cd.c
 
-EXTRA_DIST = do_panel_cd_stub_env.c
+EXTRA_DIST = do_cd_command_mock_env.c
