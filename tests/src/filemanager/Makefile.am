@@ -18,14 +18,14 @@ endif
 
 
 TESTS = \
-	do_panel_cd \
+	do_cd_command \
 	examine_cd \
 	exec_get_export_variables_ext
 
 check_PROGRAMS = $(TESTS)
 
-do_panel_cd_SOURCES = \
-	do_panel_cd.c
+do_cd_command_SOURCES = \
+	do_cd_command.c
 
 examine_cd_SOURCES = \
 	examine_cd.c
