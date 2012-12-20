@@ -1,7 +1,6 @@
 #include "src/setup.h"
-
-void init_subshell (void);
-gboolean do_load_prompt (void);
+#include "src/subshell.h"
+#include "src/main.h"
 
 WPanel *current_panel;
 gboolean command_prompt;
