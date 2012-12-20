@@ -59,7 +59,7 @@ strutils_escape (const char *src, gsize src_len, const char *escaped_chars,
 
     ret = g_string_new ("");
 
-    if (src_len == (gsize) - 1)
+    if (src_len == (gsize) (-1))
         src_len = strlen (src);
 
     for (curr_index = 0; curr_index < src_len; curr_index++)

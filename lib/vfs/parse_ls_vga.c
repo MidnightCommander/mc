@@ -778,11 +778,7 @@ vfs_parse_ls_lga (const char *p, struct stat * s, char **filename, char **linkna
         if (!is_num (idx2))
             goto error;
 
-#ifdef HAVE_ATOLL
-        s->st_size = (off_t) atoll (columns[idx2]);
-#else
-        s->st_size = (off_t) atof (columns[idx2]);
-#endif
+        s->st_size = (off_t) g_ascii_strtoll (columns[idx2], NULL, 10);
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
         s->st_rdev = 0;
 #endif

@@ -117,6 +117,10 @@
 #define BUF_SMALL 128
 #define BUF_TINY 64
 
+/* ESC_CHAR is defined in /usr/include/langinfo.h in some systems */
+#ifdef ESC_CHAR
+#undef ESC_CHAR
+#endif
 /* AIX compiler doesn't understand '\e' */
 #define ESC_CHAR '\033'
 #define ESC_STR  "\033"

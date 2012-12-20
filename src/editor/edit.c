@@ -2200,13 +2200,28 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
            long line)
 {
     gboolean to_free = FALSE;
-    Widget *w;
 
     option_auto_syntax = 1;     /* Resetting to auto on every invokation */
     option_line_state_width = option_line_state ? LINE_STATE_WIDTH : 0;
 
     if (edit != NULL)
+    {
+        /* save some widget parameters */
+        gboolean fullscreen = edit->fullscreen;
+        int y_prev = edit->y_prev;
+        int x_prev = edit->x_prev;
+        int lines_prev = edit->lines_prev;
+        int cols_prev = edit->cols_prev;
+
         edit_purge_widget (edit);
+
+        /* restore saved parameters */
+        edit->fullscreen = fullscreen;
+        edit->y_prev = y_prev;
+        edit->x_prev = x_prev;
+        edit->lines_prev = lines_prev;
+        edit->cols_prev = cols_prev;
+    }
     else
     {
 #ifdef ENABLE_NLS
@@ -2238,12 +2253,12 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
 #endif /* ENABLE_NLS */
         edit = g_malloc0 (sizeof (WEdit));
         to_free = TRUE;
+
+        init_widget (WIDGET (edit), y, x, lines, cols, NULL, NULL);
+        edit->fullscreen = TRUE;
+        edit_save_size (edit);
     }
 
-    w = WIDGET (edit);
-    init_widget (w, y, x, lines, cols, NULL, NULL);
-    edit_save_size (edit);
-    edit->fullscreen = TRUE;
     edit->drag_state = MCEDIT_DRAG_NORMAL;
 
     edit->stat1.st_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
@@ -2367,15 +2382,16 @@ edit_reload_line (WEdit * edit, const vfs_path_t * filename_vpath, long line)
     Widget *w = WIDGET (edit);
     WEdit *e;
 
-    int y = w->y;
-    int x = w->x;
-    int lines = w->lines;
-    int columns = w->cols;
-
     e = g_malloc0 (sizeof (WEdit));
     *WIDGET (e) = *w;
+    /* save some widget parameters */
+    e->fullscreen = edit->fullscreen;
+    e->y_prev = edit->y_prev;
+    e->x_prev = edit->x_prev;
+    e->lines_prev = edit->lines_prev;
+    e->cols_prev = edit->cols_prev;
 
-    if (edit_init (e, y, x, lines, columns, filename_vpath, line) == NULL)
+    if (edit_init (e, w->y, w->x, w->lines, w->cols, filename_vpath, line) == NULL)
     {
         g_free (e);
         return FALSE;

@@ -20,8 +20,6 @@
 
 void file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
                                 filegui_dialog_type_t dialog_type);
-void file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
-                                             filegui_dialog_type_t dialog_type);
 void file_op_context_destroy_ui (FileOpContext * ctx);
 
 char *file_mask_dialog (FileOpContext * ctx, FileOperation operation,

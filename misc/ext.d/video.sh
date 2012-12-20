@@ -6,6 +6,7 @@
 action=$1
 filetype=$2
 
+[ -n "${MC_XDG_OPEN}" ] || MC_XDG_OPEN="xdg-open"
 
 do_view_action() {
     filetype=$1
@@ -42,7 +43,7 @@ view)
     do_view_action "${filetype}"
     ;;
 open)
-    xdg-open "${MC_EXT_FILENAME}" 2>/dev/null || \
+    "${MC_XDG_OPEN}" "${MC_EXT_FILENAME}" 2>/dev/null || \
         do_open_action "${filetype}"
     ;;
 *)

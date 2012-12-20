@@ -553,7 +553,7 @@ mc_search_regex__process_append_str (GString * dest_str, const char *from, gsize
     char *tmp_str;
     GString *tmp_string;
 
-    if (len == (gsize) - 1)
+    if (len == (gsize) (-1))
         len = strlen (from);
 
     if (*replace_flags == REPLACE_T_NO_TRANSFORM)

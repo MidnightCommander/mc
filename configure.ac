@@ -226,7 +226,6 @@ dnl Check for functions
 dnl ############################################################################
 
 AC_CHECK_FUNCS([\
-	atoll \
 	isascii \
 	statfs sysconf \
 	tcgetattr tcsetattr \

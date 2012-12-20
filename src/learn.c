@@ -296,10 +296,17 @@ init_learn (void)
     for (i = 0; i < learn_total; i++)
     {
         char buffer[BUF_TINY];
+        char *label;
+        int padding;
 
         learnkeys[i].ok = FALSE;
         learnkeys[i].sequence = NULL;
-        g_snprintf (buffer, sizeof (buffer), "%-16s", _(key_name_conv_tab[i].longname));
+
+        label = _(key_name_conv_tab[i].longname);
+        padding = 16 - str_term_width1 (label);
+        padding = max (0, padding);
+        g_snprintf (buffer, sizeof (buffer), "%s%*s", label, padding, "");
+
         learnkeys[i].button =
             WIDGET (button_new (y, x, B_USER + i, NARROW_BUTTON, buffer, learn_button));
         learnkeys[i].label = WIDGET (label_new (y, x + 19, ""));

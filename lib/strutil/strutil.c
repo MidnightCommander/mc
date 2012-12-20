@@ -629,49 +629,49 @@ str_column_to_pos (const char *text, size_t pos)
 int
 str_isspace (const char *ch)
 {
-    return used_class.isspace (ch);
+    return used_class.char_isspace (ch);
 }
 
 int
 str_ispunct (const char *ch)
 {
-    return used_class.ispunct (ch);
+    return used_class.char_ispunct (ch);
 }
 
 int
 str_isalnum (const char *ch)
 {
-    return used_class.isalnum (ch);
+    return used_class.char_isalnum (ch);
 }
 
 int
 str_isdigit (const char *ch)
 {
-    return used_class.isdigit (ch);
+    return used_class.char_isdigit (ch);
 }
 
 int
 str_toupper (const char *ch, char **out, size_t * remain)
 {
-    return used_class.toupper (ch, out, remain);
+    return used_class.char_toupper (ch, out, remain);
 }
 
 int
 str_tolower (const char *ch, char **out, size_t * remain)
 {
-    return used_class.tolower (ch, out, remain);
+    return used_class.char_tolower (ch, out, remain);
 }
 
 int
 str_isprint (const char *ch)
 {
-    return used_class.isprint (ch);
+    return used_class.char_isprint (ch);
 }
 
-int
+gboolean
 str_iscombiningmark (const char *ch)
 {
-    return used_class.iscombiningmark (ch);
+    return used_class.char_iscombiningmark (ch);
 }
 
 const char *

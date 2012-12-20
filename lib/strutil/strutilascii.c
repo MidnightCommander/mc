@@ -127,11 +127,11 @@ str_ascii_isprint (const char *text)
     return g_ascii_isprint ((gchar) text[0]);
 }
 
-static int
+static gboolean
 str_ascii_iscombiningmark (const char *text)
 {
     (void) text;
-    return 0;
+    return FALSE;
 }
 
 static int
@@ -648,14 +648,14 @@ str_ascii_init (void)
     result.cprev_char_safe = str_ascii_cprev_char;
     result.cnext_noncomb_char = str_ascii_cnext_noncomb_char;
     result.cprev_noncomb_char = str_ascii_cprev_noncomb_char;
-    result.isspace = str_ascii_isspace;
-    result.ispunct = str_ascii_ispunct;
-    result.isalnum = str_ascii_isalnum;
-    result.isdigit = str_ascii_isdigit;
-    result.isprint = str_ascii_isprint;
-    result.iscombiningmark = str_ascii_iscombiningmark;
-    result.toupper = str_ascii_toupper;
-    result.tolower = str_ascii_tolower;
+    result.char_isspace = str_ascii_isspace;
+    result.char_ispunct = str_ascii_ispunct;
+    result.char_isalnum = str_ascii_isalnum;
+    result.char_isdigit = str_ascii_isdigit;
+    result.char_isprint = str_ascii_isprint;
+    result.char_iscombiningmark = str_ascii_iscombiningmark;
+    result.char_toupper = str_ascii_toupper;
+    result.char_tolower = str_ascii_tolower;
     result.length = str_ascii_length;
     result.length2 = str_ascii_length2;
     result.length_noncomb = str_ascii_length;

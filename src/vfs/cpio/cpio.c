@@ -130,7 +130,7 @@ struct new_cpio_header
 typedef struct
 {
     unsigned long inumber;
-    unsigned short device;
+    dev_t device;
     struct vfs_s_inode *inode;
 } defer_inode;
 
@@ -146,13 +146,12 @@ typedef struct
 
 static struct vfs_class vfs_cpiofs_ops;
 
-/* FIXME: should be off_t instead of int. */
-static int cpio_position;
+static off_t cpio_position;
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-static int cpio_find_head (struct vfs_class *me, struct vfs_s_super *super);
+static ssize_t cpio_find_head (struct vfs_class *me, struct vfs_s_super *super);
 static ssize_t cpio_read_bin_head (struct vfs_class *me, struct vfs_s_super *super);
 static ssize_t cpio_read_oldc_head (struct vfs_class *me, struct vfs_s_super *super);
 static ssize_t cpio_read_crc_head (struct vfs_class *me, struct vfs_s_super *super);
@@ -171,7 +170,7 @@ cpio_defer_find (const void *a, const void *b)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static ssize_t
 cpio_skip_padding (struct vfs_s_super *super)
 {
     switch (((cpio_super_data_t *) super->data)->type)
@@ -306,12 +305,12 @@ cpio_read_head (struct vfs_class *me, struct vfs_s_super *super)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static ssize_t
 cpio_find_head (struct vfs_class *me, struct vfs_s_super *super)
 {
     cpio_super_data_t *arch = (cpio_super_data_t *) super->data;
     char buf[BUF_SMALL * 2];
-    int ptr = 0;
+    ssize_t ptr = 0;
     ssize_t top;
     ssize_t tmp;
 
@@ -731,8 +730,6 @@ static int
 cpio_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
                    const vfs_path_element_t * vpath_element)
 {
-    int status = STATUS_START;
-
     (void) vpath_element;
 
     if (cpio_open_cpio_file (vpath_element->class, super, vpath) == -1)
@@ -740,6 +737,8 @@ cpio_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
 
     while (TRUE)
     {
+        ssize_t status;
+
         status = cpio_read_head (vpath_element->class, super);
 
         switch (status)

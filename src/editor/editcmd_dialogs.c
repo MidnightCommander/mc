@@ -241,6 +241,7 @@ editcmd_dialog_replace_prompt_show (WEdit * edit, char *from_text, char *to_text
 
     /* dialog size */
     int dlg_height = 10;
+    int dlg_width;
 
     char tmp[BUF_MEDIUM];
     char *repl_from, *repl_to;
@@ -254,11 +255,13 @@ editcmd_dialog_replace_prompt_show (WEdit * edit, char *from_text, char *to_text
     if ((edit->curs_row >= ypos - 1) && (edit->curs_row <= ypos + dlg_height - 1))
         ypos -= dlg_height;
 
+    dlg_width = WIDGET (w->owner)->cols - xpos - 1;
+
     g_snprintf (tmp, sizeof (tmp), "\"%s\"", from_text);
-    repl_from = g_strdup (str_trunc (tmp, -7));
+    repl_from = g_strdup (str_trunc (tmp, dlg_width - 7));
 
     g_snprintf (tmp, sizeof (tmp), "\"%s\"", to_text);
-    repl_to = g_strdup (str_trunc (tmp, -7));
+    repl_to = g_strdup (str_trunc (tmp, dlg_width - 7));
 
     {
         quick_widget_t quick_widgets[] = {

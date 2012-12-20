@@ -876,7 +876,7 @@ editcmd_find (WEdit * edit, gsize * len)
             search_start =
                 edit_calculate_start_of_current_line (edit, search_start, end_string_symbol);
 
-        while ((int) search_start >= start_mark)
+        while (search_start >= start_mark)
         {
             if (search_end > (off_t) (search_start + edit->search->original_len)
                 && mc_search_is_fixed_search_str (edit->search))
@@ -1127,7 +1127,7 @@ static gboolean
 edit_find_word_start (WEdit * edit, off_t * word_start, gsize * word_len)
 {
     int c, last;
-    gsize i;
+    off_t i;
 
     /* return if at begin of file */
     if (edit->curs1 <= 0)
@@ -1142,7 +1142,7 @@ edit_find_word_start (WEdit * edit, off_t * word_start, gsize * word_len)
     for (i = 2;; i++)
     {
         /* return if at begin of file */
-        if ((gsize) edit->curs1 < i)
+        if (edit->curs1 < i)
             return FALSE;
 
         last = c;
@@ -1155,7 +1155,7 @@ edit_find_word_start (WEdit * edit, off_t * word_start, gsize * word_len)
                 return FALSE;
 
             *word_start = edit->curs1 - (i - 1);        /* start found */
-            *word_len = i - 1;
+            *word_len = (gsize) (i - 1);
             break;
         }
     }
@@ -1944,7 +1944,7 @@ edit_load_macro_cmd (WEdit * edit)
     macros_config = mc_config_init (macros_fname, TRUE);
     g_free (macros_fname);
 
-    if (macros_config == NULL)
+    if (macros_config == NULL || macros_list == NULL || macros_list->len != 0)
         return FALSE;
 
     profile_keys = keys = mc_config_get_keys (macros_config, section_name, &len);
