@@ -54,7 +54,7 @@ setup (void)
     mc_global.mc_run_mode = MC_RUN_FULL;
     current_panel = g_new0(struct WPanel, 1);
     current_panel->cwd_vpath = vfs_path_from_str("/home");
-    current_panel->dir.list = g_new (file_entry, MIN_FILES);
+    current_panel->dir.list = g_new0 (file_entry, MIN_FILES);
     current_panel->dir.size = MIN_FILES;
 }
 
