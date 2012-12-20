@@ -296,7 +296,7 @@ init_learn (void)
     for (i = 0; i < learn_total; i++)
     {
         char buffer[BUF_TINY];
-        char *label;
+        const char *label;
         int padding;
 
         learnkeys[i].ok = FALSE;
