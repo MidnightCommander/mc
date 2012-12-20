@@ -811,7 +811,8 @@ read_file_system_list (int need_fs_type)
                         break;
 
                 me = g_malloc (sizeof (*me));
-                me->me_devname = g_strdup (fi.device_name[0] != '\0' ? fi.device_name : fi.fsh_name);
+                me->me_devname =
+                    g_strdup (fi.device_name[0] != '\0' ? fi.device_name : fi.fsh_name);
                 me->me_mountdir = g_strdup (re != NULL ? re->name : fi.fsh_name);
                 me->me_type = g_strdup (fi.fsh_name);
                 me->me_type_malloced = 1;

@@ -124,6 +124,7 @@ struct vfs_s_subclass
     FILE *logfile;
     int flush;                  /* if set to 1, invalidate directory cache */
 
+    /* *INDENT-OFF* */
     int (*init_inode) (struct vfs_class * me, struct vfs_s_inode * ino);        /* optional */
     void (*free_inode) (struct vfs_class * me, struct vfs_s_inode * ino);       /* optional */
     int (*init_entry) (struct vfs_class * me, struct vfs_s_entry * entry);      /* optional */
@@ -149,6 +150,7 @@ struct vfs_s_subclass
     int (*linear_start) (struct vfs_class * me, vfs_file_handler_t * fh, off_t from);
     ssize_t (*linear_read) (struct vfs_class * me, vfs_file_handler_t * fh, void *buf, size_t len);
     void (*linear_close) (struct vfs_class * me, vfs_file_handler_t * fh);
+    /* *INDENT-ON* */
 };
 
 /*** global variables defined in .c file *********************************************************/
