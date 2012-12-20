@@ -1,5 +1,8 @@
 #include "src/setup.h"
 
+void init_subshell (void);
+gboolean do_load_prompt (void);
+
 WPanel *current_panel;
 gboolean command_prompt;
 enum subshell_state_enum subshell_state;
