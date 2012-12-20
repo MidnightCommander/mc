@@ -357,6 +357,7 @@ if test "x$result" != xno; then
 	AC_DEFINE(HAVE_SUBSHELL_SUPPORT, 1,
 		  [Define to enable subshell support])
 fi
+AM_CONDITIONAL(HAVE_SUBSHELL_SUPPORT, [test "x$result" != xno])
 AC_MSG_RESULT([$result])
 subshell="$result"
 

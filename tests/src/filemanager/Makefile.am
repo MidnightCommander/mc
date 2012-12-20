@@ -11,15 +11,18 @@ LIBS=@CHECK_LIBS@  \
     $(top_builddir)/lib/libmc.la
 
 TESTS = \
-	do_cd_command \
 	examine_cd
 
-check_PROGRAMS = $(TESTS)
-
+if HAVE_SUBSHELL_SUPPORT
+TESTS +=
+	do_cd_command
 do_cd_command_SOURCES = \
 	do_cd_command.c
+endif
 
 examine_cd_SOURCES = \
 	examine_cd.c
+
+check_PROGRAMS = $(TESTS)
 
 EXTRA_DIST = do_cd_command_mock_env.c
