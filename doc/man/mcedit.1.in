@@ -559,6 +559,9 @@ Do not remove block selection after moving the cursor.
 .I editor_cursor_beyond_eol
 Allow moving cursor beyond the end of line.
 .TP
+.I editor_cursor_after_inserted_block
+Allow moving cursor after inserted block.
+.TP
 .I editor_syntax_highlighting
 enable syntax highlighting.
 .TP

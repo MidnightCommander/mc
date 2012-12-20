@@ -346,6 +346,7 @@ static const struct
     { "editor_syntax_highlighting", &option_syntax_highlighting },
     { "editor_persistent_selections", &option_persistent_selections },
     { "editor_cursor_beyond_eol", &option_cursor_beyond_eol },
+    { "editor_cursor_after_inserted_block", &option_cursor_after_inserted_block },
     { "editor_visible_tabs", &visible_tabs },
     { "editor_visible_spaces", &visible_tws },
     { "editor_line_state", &option_line_state },

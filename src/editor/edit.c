@@ -89,6 +89,7 @@ int option_persistent_selections = 1;
 int option_cursor_beyond_eol = 0;
 int option_line_state = 0;
 int option_line_state_width = 0;
+gboolean option_cursor_after_inserted_block = FALSE;
 
 int option_edit_right_extreme = 0;
 int option_edit_left_extreme = 0;
@@ -2069,20 +2070,27 @@ long
 edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
 {
     char *p;
+    off_t current;
     off_t ins_len = 0;
 
     p = edit_get_filter (filename_vpath);
+    current = edit->curs1;
+
     if (p != NULL)
     {
         FILE *f;
-        off_t current = edit->curs1;
 
         f = (FILE *) popen (p, "r");
         if (f != NULL)
         {
             edit_insert_stream (edit, f);
-            ins_len = edit->curs1 - current;
-            edit_cursor_move (edit, -ins_len);
+
+            /* Place cursor at the end of text selection */
+            if (!option_cursor_after_inserted_block)
+            {
+                ins_len = edit->curs1 - current;
+                edit_cursor_move (edit, -ins_len);
+            }
             if (pclose (f) > 0)
             {
                 char *errmsg;
@@ -2108,7 +2116,6 @@ edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
     {
         int file;
         off_t blocklen;
-        off_t current = edit->curs1;
         int vertical_insertion = 0;
         char *buf;
 
@@ -2134,8 +2141,9 @@ edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
 
             blocklen = edit_insert_column_of_text_from_file (edit, file, &mark1, &mark2, &c1, &c2);
             edit_set_markers (edit, edit->curs1, mark2, c1, c2);
+
             /* highlight inserted text then not persistent blocks */
-            if (!option_persistent_selections)
+            if (!option_persistent_selections && edit->modified)
             {
                 if (!edit->column_highlight)
                     edit_push_undo_action (edit, COLUMN_OFF);
@@ -2159,11 +2167,16 @@ edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
                     edit_push_undo_action (edit, COLUMN_ON);
                 edit->column_highlight = 0;
             }
+
+            /* Place cursor at the end of text selection */
+            if (!option_cursor_after_inserted_block)
+            {
+                ins_len = edit->curs1 - current;
+                edit_cursor_move (edit, -ins_len);
+            }
         }
 
         edit->force |= REDRAW_PAGE;
-        ins_len = edit->curs1 - current;
-        edit_cursor_move (edit, -ins_len);
         g_free (buf);
         mc_close (file);
         if (blocklen != 0)

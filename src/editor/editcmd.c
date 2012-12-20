@@ -2409,8 +2409,14 @@ edit_block_copy_cmd (WEdit * edit)
     }
     else
     {
-        while (size--)
+        int size_orig = size;
+
+        while (size-- != 0)
             edit_insert_ahead (edit, copy_buf[size]);
+
+        /* Place cursor at the end of text selection */
+        if (option_cursor_after_inserted_block)
+            edit_cursor_move (edit, size_orig);
     }
 
     g_free (copy_buf);
@@ -2494,7 +2500,7 @@ edit_block_move_cmd (WEdit * edit)
     }
     else
     {
-        off_t count;
+        off_t count, count_orig;
 
         current = edit->curs1;
         copy_buf = g_malloc0 (end_mark - start_mark);
@@ -2509,9 +2515,15 @@ edit_block_move_cmd (WEdit * edit)
                           current - edit->curs1 -
                           (((current - edit->curs1) > 0) ? end_mark - start_mark : 0));
         edit_scroll_screen_over_cursor (edit);
+        count_orig = count;
         while (count-- > start_mark)
             edit_insert_ahead (edit, copy_buf[end_mark - count - 1]);
+
         edit_set_markers (edit, edit->curs1, edit->curs1 + end_mark - start_mark, 0, 0);
+
+        /* Place cursor at the end of text selection */
+        if (option_cursor_after_inserted_block)
+            edit_cursor_move (edit, count_orig - start_mark);
     }
 
     edit_scroll_screen_over_cursor (edit);
