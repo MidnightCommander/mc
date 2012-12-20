@@ -17,7 +17,7 @@ AC_DEFUN([MC_UNIT_TESTS],[
     if test x$enable_tests != xno; then
         PKG_CHECK_MODULES(
             CHECK,
-            [check >= 0.9.0],
+            [check >= 0.9.8],
             [have_check=yes],
             [AC_MSG_WARN(['Check' utility not found. Check your environment])])
     fi
