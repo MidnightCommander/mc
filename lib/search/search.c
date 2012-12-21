@@ -388,7 +388,7 @@ mc_search (const gchar * pattern, const gchar * str, mc_search_type_t type)
         return FALSE;
 
     search = mc_search_new (pattern, -1);
-    if (search == NULL )
+    if (search == NULL)
         return FALSE;
 
     search->search_type = type;

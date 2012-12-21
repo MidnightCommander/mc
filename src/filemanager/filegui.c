@@ -615,7 +615,8 @@ check_progress_buttons (FileOpContext * ctx)
 /* {{{ File progress display routines */
 
 void
-file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta, filegui_dialog_type_t dialog_type)
+file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
+                           filegui_dialog_type_t dialog_type)
 {
     FileOpContextUI *ui;
 

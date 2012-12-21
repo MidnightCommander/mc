@@ -137,6 +137,7 @@ typedef struct vfs_class
     void *data;                 /* this is for filesystem's own use */
     int verrno;                 /* can't use errno because glibc2 might define errno as function */
 
+    /* *INDENT-OFF* */
     int (*init) (struct vfs_class * me);
     void (*done) (struct vfs_class * me);
 
@@ -193,6 +194,7 @@ typedef struct vfs_class
 
     int (*ctl) (void *vfs_info, int ctlop, void *arg);
     int (*setctl) (const vfs_path_t * vpath, int ctlop, void *arg);
+    /* *INDENT-ON* */
 } vfs_class;
 
 /*
