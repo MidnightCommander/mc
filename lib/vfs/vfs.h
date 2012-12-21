@@ -154,8 +154,8 @@ typedef struct vfs_class
 
     void *(*open) (const vfs_path_t * vpath, int flags, mode_t mode);
     int (*close) (void *vfs_info);
-      ssize_t (*read) (void *vfs_info, char *buffer, size_t count);
-      ssize_t (*write) (void *vfs_info, const char *buf, size_t count);
+    ssize_t (*read) (void *vfs_info, char *buffer, size_t count);
+    ssize_t (*write) (void *vfs_info, const char *buf, size_t count);
 
     void *(*opendir) (const vfs_path_t * vpath);
     void *(*readdir) (void *vfs_info);
@@ -176,10 +176,10 @@ typedef struct vfs_class
     int (*rename) (const vfs_path_t * vpath1, const vfs_path_t * vpath2);
     int (*chdir) (const vfs_path_t * vpath);
     int (*ferrno) (struct vfs_class * me);
-      off_t (*lseek) (void *vfs_info, off_t offset, int whence);
+    off_t (*lseek) (void *vfs_info, off_t offset, int whence);
     int (*mknod) (const vfs_path_t * vpath, mode_t mode, dev_t dev);
 
-      vfsid (*getid) (const vfs_path_t * vpath);
+    vfsid (*getid) (const vfs_path_t * vpath);
 
     int (*nothingisopen) (vfsid id);
     void (*free) (vfsid id);

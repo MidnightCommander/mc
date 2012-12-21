@@ -41,10 +41,12 @@
 
 static const char replch[] = "\xEF\xBF\xBD";
 
-static int
+static gboolean
 str_unichar_iscombiningmark (gunichar uni)
 {
-    int type = g_unichar_type (uni);
+    GUnicodeType type;
+
+    type = g_unichar_type (uni);
     return (type == G_UNICODE_COMBINING_MARK)
         || (type == G_UNICODE_ENCLOSING_MARK) || (type == G_UNICODE_NON_SPACING_MARK);
 }
@@ -163,7 +165,7 @@ str_utf8_isprint (const char *ch)
     return g_unichar_isprint (uni);
 }
 
-static int
+static gboolean
 str_utf8_iscombiningmark (const char *ch)
 {
     gunichar uni = g_utf8_get_char_validated (ch, -1);
@@ -363,7 +365,7 @@ struct term_form
 {
     char text[BUF_MEDIUM * 6];
     size_t width;
-    int compose;
+    gboolean compose;
 };
 
 /* utiliti function, that make string valid in utf8 and all characters printable
@@ -378,7 +380,7 @@ str_utf8_make_make_term_form (const char *text, size_t length)
 
     result.text[0] = '\0';
     result.width = 0;
-    result.compose = 0;
+    result.compose = FALSE;
     actual = result.text;
 
     /* check if text start with combining character,
@@ -393,7 +395,7 @@ str_utf8_make_make_term_form (const char *text, size_t length)
                 actual[0] = ' ';
                 actual++;
                 result.width++;
-                result.compose = 1;
+                result.compose = TRUE;
             }
         }
     }
@@ -407,14 +409,14 @@ str_utf8_make_make_term_form (const char *text, size_t length)
             {
                 left = g_unichar_to_utf8 (uni, actual);
                 actual += left;
-                if (!str_unichar_iscombiningmark (uni))
+                if (str_unichar_iscombiningmark (uni))
+                    result.compose = TRUE;
+                else
                 {
                     result.width++;
                     if (g_unichar_iswide (uni))
                         result.width++;
                 }
-                else
-                    result.compose = 1;
             }
             else
             {
@@ -467,43 +469,43 @@ struct utf8_tool
     size_t remain;
     const char *cheked;
     int ident;
-    int compose;
+    gboolean compose;
 };
 
 /* utiliti function, that copy all characters from cheked to actual */
-static int
+static gboolean
 utf8_tool_copy_chars_to_end (struct utf8_tool *tool)
 {
     size_t left;
     gunichar uni;
 
-    tool->compose = 0;
+    tool->compose = FALSE;
 
     while (tool->cheked[0] != '\0')
     {
         uni = g_utf8_get_char (tool->cheked);
-        tool->compose |= str_unichar_iscombiningmark (uni);
+        tool->compose = tool->compose || str_unichar_iscombiningmark (uni);
         left = g_unichar_to_utf8 (uni, NULL);
         if (tool->remain <= left)
-            return 0;
+            return FALSE;
         left = g_unichar_to_utf8 (uni, tool->actual);
         tool->actual += left;
         tool->remain -= left;
         tool->cheked = g_utf8_next_char (tool->cheked);
     }
-    return 1;
+    return TRUE;
 }
 
 /* utiliti function, that copy characters from cheked to actual until ident is
  * smaller than to_ident */
-static int
+static gboolean
 utf8_tool_copy_chars_to (struct utf8_tool *tool, int to_ident)
 {
     size_t left;
     gunichar uni;
     int w;
 
-    tool->compose = 0;
+    tool->compose = FALSE;
 
     while (tool->cheked[0] != '\0')
     {
@@ -514,24 +516,24 @@ utf8_tool_copy_chars_to (struct utf8_tool *tool, int to_ident)
             if (g_unichar_iswide (uni))
                 w++;
             if (tool->ident + w > to_ident)
-                return 1;
+                return TRUE;
         }
         else
         {
             w = 0;
-            tool->compose = 1;
+            tool->compose = TRUE;
         }
 
         left = g_unichar_to_utf8 (uni, NULL);
         if (tool->remain <= left)
-            return 0;
+            return FALSE;
         left = g_unichar_to_utf8 (uni, tool->actual);
         tool->actual += left;
         tool->remain -= left;
         tool->cheked = g_utf8_next_char (tool->cheked);
         tool->ident += w;
     }
-    return 1;
+    return TRUE;
 }
 
 /* utiliti function, add count spaces to actual */
@@ -562,7 +564,7 @@ utf8_tool_insert_char (struct utf8_tool *tool, char ch)
 
 /* utiliti function, thah skip characters from cheked until ident is greater or
  * equal to to_ident */
-static int
+static gboolean
 utf8_tool_skip_chars_to (struct utf8_tool *tool, int to_ident)
 {
     gunichar uni;
@@ -584,7 +586,7 @@ utf8_tool_skip_chars_to (struct utf8_tool *tool, int to_ident)
         tool->cheked = g_utf8_next_char (tool->cheked);
         uni = g_utf8_get_char (tool->cheked);
     }
-    return 1;
+    return TRUE;
 }
 
 static void
@@ -607,7 +609,7 @@ str_utf8_fit_to_term (const char *text, int width, align_crt_t just_mode)
     tool.cheked = pre_form->text;
     tool.actual = result;
     tool.remain = sizeof (result);
-    tool.compose = 0;
+    tool.compose = FALSE;
 
     if (pre_form->width <= (gsize) width)
     {
@@ -684,7 +686,7 @@ str_utf8_term_trim (const char *text, int width)
     tool.cheked = pre_form->text;
     tool.actual = result;
     tool.remain = sizeof (result);
-    tool.compose = 0;
+    tool.compose = FALSE;
 
     if ((gsize) width < pre_form->width)
     {
@@ -750,7 +752,7 @@ str_utf8_term_substring (const char *text, int start, int width)
     tool.cheked = pre_form->text;
     tool.actual = result;
     tool.remain = sizeof (result);
-    tool.compose = 0;
+    tool.compose = FALSE;
 
     tool.ident = -start;
     utf8_tool_skip_chars_to (&tool, 0);
@@ -779,7 +781,7 @@ str_utf8_trunc (const char *text, int width)
     tool.cheked = pre_form->text;
     tool.actual = result;
     tool.remain = sizeof (result);
-    tool.compose = 0;
+    tool.compose = FALSE;
 
     if (pre_form->width > (gsize) width)
     {
@@ -1321,14 +1323,14 @@ str_utf8_init (void)
     result.cprev_char_safe = str_utf8_cprev_char_safe;
     result.cnext_noncomb_char = str_utf8_cnext_noncomb_char;
     result.cprev_noncomb_char = str_utf8_cprev_noncomb_char;
-    result.isspace = str_utf8_isspace;
-    result.ispunct = str_utf8_ispunct;
-    result.isalnum = str_utf8_isalnum;
-    result.isdigit = str_utf8_isdigit;
-    result.isprint = str_utf8_isprint;
-    result.iscombiningmark = str_utf8_iscombiningmark;
-    result.toupper = str_utf8_toupper;
-    result.tolower = str_utf8_tolower;
+    result.char_isspace = str_utf8_isspace;
+    result.char_ispunct = str_utf8_ispunct;
+    result.char_isalnum = str_utf8_isalnum;
+    result.char_isdigit = str_utf8_isdigit;
+    result.char_isprint = str_utf8_isprint;
+    result.char_iscombiningmark = str_utf8_iscombiningmark;
+    result.char_toupper = str_utf8_toupper;
+    result.char_tolower = str_utf8_tolower;
     result.length = str_utf8_length;
     result.length2 = str_utf8_length2;
     result.length_noncomb = str_utf8_length_noncomb;

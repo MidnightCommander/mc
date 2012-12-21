@@ -35,7 +35,9 @@
 #include <sys/types.h>
 #ifdef __FreeBSD__
 #include <sys/consio.h>
+#ifdef HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>
+#endif
 #endif
 #include <unistd.h>
 

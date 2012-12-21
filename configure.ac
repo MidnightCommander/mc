@@ -30,6 +30,8 @@ AC_DEFINE_UNQUOTED([MC_CONFIGURE_ARGS],["$ac_configure_args"],[MC configure argu
 AC_PROG_LIBTOOL
 PKG_PROG_PKG_CONFIG
 AC_PATH_PROG([PERL], [perl], [/usr/bin/perl])
+AC_PATH_PROG([PYTHON], [python], [/usr/bin/python])
+AC_PATH_PROG([RUBY], [ruby], [/usr/bin/ruby])
 
 AC_ISC_POSIX
 
@@ -160,7 +162,6 @@ dnl Check availability of some functions
 dnl
 
 AC_CHECK_FUNCS([\
-	atoll \
 	isascii \
 	statfs sysconf \
 	tcgetattr tcsetattr \
@@ -205,6 +206,40 @@ AC_CHECK_SIZEOF(off_t)
 AC_TYPE_MODE_T
 AC_TYPE_PID_T
 AC_TYPE_UID_T
+
+AH_TEMPLATE([sig_atomic_t],
+            [/* Define to `int' if <signal.h> doesn't define.])
+AH_TEMPLATE([SIG_ATOMIC_VOLATILE_T],
+            [Some systems declare sig_atomic_t as volatile, some others -- no.
+             This define will have value `sig_atomic_t' or
+             `volatile sig_atomic_t' accordingly.])
+
+AC_MSG_CHECKING(for sig_atomic_t in signal.h)
+AC_EGREP_HEADER(sig_atomic_t,signal.h,
+  [
+    ac_cv_type_sig_atomic_t=yes;
+    AC_EGREP_HEADER(volatile.*sig_atomic_t,
+                    signal.h,
+                    [
+                        is_sig_atomic_t_volatile=yes;
+                        AC_MSG_RESULT([yes, volatile])
+                    ],
+                    [
+                        is_sig_atomic_t_volatile=no;
+                        AC_MSG_RESULT([yes, non volatile])
+                    ])
+  ],
+  [
+    AC_MSG_RESULT(no)
+    AC_CHECK_TYPE(sig_atomic_t, int)
+    is_sig_atomic_t_volatile=no
+  ])
+if test $is_sig_atomic_t_volatile = 'yes'
+then
+    AC_DEFINE(SIG_ATOMIC_VOLATILE_T, sig_atomic_t)
+else
+    AC_DEFINE(SIG_ATOMIC_VOLATILE_T, [volatile sig_atomic_t])
+fi
 
 AC_FUNC_STRCOLL
 
@@ -506,7 +541,6 @@ Makefile
 
 contrib/Makefile
 contrib/dist/Makefile
-contrib/dist/debian/Makefile
 contrib/dist/gentoo/Makefile
 contrib/dist/redhat/Makefile
 contrib/dist/redhat/mc.spec
@@ -551,6 +585,7 @@ src/vfs/extfs/helpers/ualz
 src/vfs/extfs/helpers/uar
 src/vfs/extfs/helpers/uarc
 src/vfs/extfs/helpers/uarj
+src/vfs/extfs/helpers/uc1541
 src/vfs/extfs/helpers/ucab
 src/vfs/extfs/helpers/uha
 src/vfs/extfs/helpers/ulha
@@ -587,6 +622,7 @@ lib/vfs/Makefile
 lib/widget/Makefile
 
 misc/syntax/Makefile
+misc/syntax/Syntax
 
 doc/Makefile
 doc/hints/Makefile
@@ -623,10 +659,10 @@ tests/src/filemanager/Makefile
 
 fi
 
-
 AC_OUTPUT
 
-echo "
+AC_MSG_NOTICE([
+
 Configuration:
 
   Source code location:       ${srcdir}
@@ -643,4 +679,4 @@ Configuration:
   Diff viewer:                ${diff_msg}
   Support for charset:        ${charset_msg}
   Search type:                ${SEARCH_TYPE}
-"
+])

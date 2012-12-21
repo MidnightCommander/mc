@@ -161,11 +161,11 @@ str_8bit_isprint (const char *text)
     return char_isprint (text[0]);
 }
 
-static int
+static gboolean
 str_8bit_iscombiningmark (const char *text)
 {
     (void) text;
-    return 0;
+    return FALSE;
 }
 
 static int
@@ -758,14 +758,14 @@ str_8bit_init (void)
     result.cprev_char_safe = str_8bit_cprev_char;
     result.cnext_noncomb_char = str_8bit_cnext_noncomb_char;
     result.cprev_noncomb_char = str_8bit_cprev_noncomb_char;
-    result.isspace = str_8bit_isspace;
-    result.ispunct = str_8bit_ispunct;
-    result.isalnum = str_8bit_isalnum;
-    result.isdigit = str_8bit_isdigit;
-    result.isprint = str_8bit_isprint;
-    result.iscombiningmark = str_8bit_iscombiningmark;
-    result.toupper = str_8bit_toupper;
-    result.tolower = str_8bit_tolower;
+    result.char_isspace = str_8bit_isspace;
+    result.char_ispunct = str_8bit_ispunct;
+    result.char_isalnum = str_8bit_isalnum;
+    result.char_isdigit = str_8bit_isdigit;
+    result.char_isprint = str_8bit_isprint;
+    result.char_iscombiningmark = str_8bit_iscombiningmark;
+    result.char_toupper = str_8bit_toupper;
+    result.char_tolower = str_8bit_tolower;
     result.length = str_8bit_length;
     result.length2 = str_8bit_length2;
     result.length_noncomb = str_8bit_length;

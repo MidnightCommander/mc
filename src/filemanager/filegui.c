@@ -615,10 +615,10 @@ check_progress_buttons (FileOpContext * ctx)
 /* {{{ File progress display routines */
 
 void
-file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
-                                        filegui_dialog_type_t dialog_type)
+file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta, filegui_dialog_type_t dialog_type)
 {
     FileOpContextUI *ui;
+
     const char *abort_button_label = N_("&Abort");
     const char *skip_button_label = N_("&Skip");
     int abort_button_width, skip_button_width, buttons_width;
@@ -639,9 +639,6 @@ file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
     dlg_width = max (58, buttons_width + 6);
     dlg_height = 17;            /* to make compiler happy :) */
 
-    ui = g_new0 (FileOpContextUI, 1);
-    ctx->ui = ui;
-
     ctx->dialog_type = dialog_type;
 
     switch (dialog_type)
@@ -658,7 +655,9 @@ file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
     }
 
     ctx->recursive_result = RECURSIVE_YES;
+    ctx->ui = g_new0 (FileOpContextUI, 1);
 
+    ui = ctx->ui;
     ui->replace_result = REPLACE_YES;
     ui->showing_eta = with_eta && file_op_compute_totals;
     ui->showing_bps = with_eta;
@@ -706,21 +705,6 @@ file_op_context_create_ui_without_init (FileOpContext * ctx, gboolean with_eta,
         if (verbose && file_op_compute_totals && dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
             ui->progress_total_gauge->from_left_to_right = FALSE;
     }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
-                           filegui_dialog_type_t dialog_type)
-{
-    FileOpContextUI *ui;
-
-    g_return_if_fail (ctx != NULL);
-    g_return_if_fail (ctx->ui == NULL);
-
-    file_op_context_create_ui_without_init (ctx, with_eta, dialog_type);
-    ui = ctx->ui;
 
     /* We will manage the dialog without any help, that's why
        we have to call init_dlg */

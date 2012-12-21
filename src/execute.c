@@ -317,6 +317,8 @@ toggle_panels (void)
     vfs_path_t **new_dir_p;
 #endif /* HAVE_SUBSHELL_SUPPORT */
 
+    SIG_ATOMIC_VOLATILE_T was_sigwinch = 0;
+
     channels_down ();
     disable_mouse ();
     if (clear_before_exec)
@@ -386,6 +388,13 @@ toggle_panels (void)
     if (mc_global.tty.alternate_plus_minus)
         application_keypad_mode ();
 
+    /* HACK:
+     * Save sigwinch flag that will be reset in mc_refresh() called via update_panels().
+     * There is some problem with screen redraw in ncurses-based mc in this situation.
+     */
+    was_sigwinch = mc_global.tty.winch_flag;
+    mc_global.tty.winch_flag = 0;
+
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (mc_global.tty.use_subshell)
     {
@@ -406,7 +415,11 @@ toggle_panels (void)
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
         update_xterm_title_path ();
     }
-    repaint_screen ();
+
+    if (was_sigwinch != 0 || mc_global.tty.winch_flag != 0)
+        dialog_change_screen_size ();
+    else
+        repaint_screen ();
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -225,7 +225,7 @@ typedef struct
 static struct vfs_class vfs_tarfs_ops;
 
 /* As we open one archive at a time, it is safe to have this static */
-static int current_tar_position = 0;
+static off_t current_tar_position = 0;
 
 static union record rec_buf;
 
@@ -370,7 +370,7 @@ tar_get_next_record (struct vfs_s_super *archive, int tard)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-tar_skip_n_records (struct vfs_s_super *archive, int tard, int n)
+tar_skip_n_records (struct vfs_s_super *archive, int tard, size_t n)
 {
     (void) archive;
 
@@ -566,7 +566,8 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
     {
         char **longp;
         char *bp, *data;
-        int size, written;
+        off_t size;
+        size_t written;
 
         if (arch->type == TAR_UNKNOWN)
             arch->type = TAR_GNU;
@@ -593,8 +594,8 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
                 return STATUS_BADCHECKSUM;
             }
             written = RECORDSIZE;
-            if (written > size)
-                written = size;
+            if ((off_t) written > size)
+                written = (size_t) size;
 
             memcpy (bp, data, written);
             bp += written;
@@ -615,9 +616,9 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
         struct stat st;
         struct vfs_s_entry *entry;
         struct vfs_s_inode *inode = NULL, *parent;
-        long data_position;
+        off_t data_position;
         char *q;
-        int len;
+        size_t len;
         char *current_file_name, *current_link_name;
 
         current_link_name =

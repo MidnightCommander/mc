@@ -63,12 +63,16 @@
 #else
 #include <termios.h>
 #endif
+#ifdef HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>
+#endif
 #endif /* __linux__ */
 
 #ifdef __CYGWIN__
 #include <termios.h>
+#ifdef HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>
+#endif
 #endif /* __CYGWIN__ */
 
 #ifdef __QNXNTO__
@@ -2102,7 +2106,7 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
             }
         }
 
-        if (!block || mc_global.tty.winch_flag)
+        if (!block || mc_global.tty.winch_flag != 0)
         {
             time_addr = &time_out;
             time_out.tv_sec = 0;
@@ -2122,7 +2126,7 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
         {
             if (redo_event)
                 return EV_MOUSE;
-            if (!block || mc_global.tty.winch_flag)
+            if (!block || mc_global.tty.winch_flag != 0)
                 return EV_NONE;
             vfs_timeout_handler ();
         }

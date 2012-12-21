@@ -603,12 +603,11 @@ edit_get_rule (WEdit * edit, off_t byte_index)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static inline void
-translate_rule_to_color (WEdit * edit, struct syntax_rule rule, int *color)
+static inline int
+translate_rule_to_color (WEdit * edit, struct syntax_rule rule)
 {
-    *color = edit->rules[rule.context]->keyword[rule.keyword]->color;
+    return edit->rules[rule.context]->keyword[rule.keyword]->color;
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -1414,15 +1413,16 @@ get_first_editor_line (WEdit * edit)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-void
-edit_get_syntax_color (WEdit * edit, off_t byte_index, int *color)
+int
+edit_get_syntax_color (WEdit * edit, off_t byte_index)
 {
     if (!tty_use_colors ())
-        *color = 0;
-    else if (edit->rules && byte_index < edit->last_byte && option_syntax_highlighting)
-        translate_rule_to_color (edit, edit_get_rule (edit, byte_index), color);
-    else
-        *color = EDITOR_NORMAL_COLOR;
+        return 0;
+
+    if (edit->rules != NULL && byte_index < edit->last_byte && option_syntax_highlighting)
+        return translate_rule_to_color (edit, edit_get_rule (edit, byte_index));
+
+    return EDITOR_NORMAL_COLOR;
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -332,7 +332,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
 
     end_col -= EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
 
-    edit_get_syntax_color (edit, b - 1, &color);
+    color = edit_get_syntax_color (edit, b - 1);
     q = edit_move_forward3 (edit, b, start_col - edit->start_col, 0);
     start_col_real = (col = (int) edit_move_forward3 (edit, b, 0, q)) + edit->start_col;
 
@@ -412,7 +412,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
                 }
                 else
                 {
-                    edit_get_syntax_color (edit, q, &color);
+                    color = edit_get_syntax_color (edit, q);
                     p->style |= color << 16;
                 }
                 switch (c)

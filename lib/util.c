@@ -1145,7 +1145,7 @@ load_file_position (const vfs_path_t * filename_vpath, long *line, long *column,
                 {
                     size_t i;
 
-                    *offset = strtoll (pos_tokens[2], NULL, 10);
+                    *offset = (off_t) g_ascii_strtoll (pos_tokens[2], NULL, 10);
 
                     for (i = 0; i < MAX_SAVED_BOOKMARKS && pos_tokens[3 + i] != NULL; i++)
                     {

@@ -48,7 +48,6 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"        /* For init_key() */
 #include "lib/skin.h"
-#include "lib/filehighlight.h"
 #include "lib/fileloc.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
@@ -78,8 +77,6 @@
 #include "main.h"
 
 /*** global variables ****************************************************************************/
-
-mc_fhl_t *mc_filehighlight;
 
 /* Set when main loop should be terminated */
 int quit = 0;
@@ -414,12 +411,16 @@ int
 main (int argc, char *argv[])
 {
     GError *error = NULL;
+    gboolean config_migrated = FALSE;
+    char *config_migrate_msg;
     int exit_code = EXIT_FAILURE;
 
     /* We had LC_CTYPE before, LC_ALL includs LC_TYPE as well */
+#ifdef HAVE_SETLOCALE
     (void) setlocale (LC_ALL, "");
-    (void) bindtextdomain ("mc", LOCALEDIR);
-    (void) textdomain ("mc");
+#endif
+    (void) bindtextdomain (PACKAGE, LOCALEDIR);
+    (void) textdomain (PACKAGE);
 
     /* do this before args parsing */
     str_init_strings (NULL);
@@ -456,8 +457,8 @@ main (int argc, char *argv[])
         goto startup_exit_falure;
 
     mc_config_init_config_paths (&error);
-    if (error == NULL && mc_config_deprecated_dir_present ())
-        mc_config_migrate_from_old_place (&error);
+    if (error == NULL)
+        config_migrated = mc_config_migrate_from_old_place (&error, &config_migrate_msg);
     if (error != NULL)
     {
         mc_event_deinit (NULL);
@@ -531,7 +532,6 @@ main (int argc, char *argv[])
         error = NULL;
     }
 
-    mc_filehighlight = mc_fhl_new (TRUE);
     dlg_set_default_colors ();
 
 #ifdef HAVE_SUBSHELL_SUPPORT
@@ -560,11 +560,17 @@ main (int argc, char *argv[])
 #endif /* HAVE_SUBSHELL_SUPPORT */
         mc_prompt = (geteuid () == 0) ? "# " : "$ ";
 
+    if (config_migrated)
+    {
+        message (D_ERROR, _("Warning"), "%s", config_migrate_msg);
+        g_free (config_migrate_msg);
+    }
+
     /* Program main loop */
     if (mc_global.midnight_shutdown)
         exit_code = EXIT_SUCCESS;
     else
-        exit_code = do_nc ()? EXIT_SUCCESS : EXIT_FAILURE;
+        exit_code = do_nc () ? EXIT_SUCCESS : EXIT_FAILURE;
 
     /* Save the tree store */
     (void) tree_store_save ();
@@ -576,7 +582,6 @@ main (int argc, char *argv[])
 
     flush_extension_file ();    /* does only free memory */
 
-    mc_fhl_free (&mc_filehighlight);
     mc_skin_deinit ();
     tty_colors_done ();
 

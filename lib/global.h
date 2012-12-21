@@ -21,6 +21,9 @@
 #include <sys/param.h>
 #endif
 
+/* for sig_atomic_t */
+#include <signal.h>
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /* The O_BINARY definition was taken from gettext */
@@ -114,6 +117,10 @@
 #define BUF_SMALL 128
 #define BUF_TINY 64
 
+/* ESC_CHAR is defined in /usr/include/langinfo.h in some systems */
+#ifdef ESC_CHAR
+#undef ESC_CHAR
+#endif
 /* AIX compiler doesn't understand '\e' */
 #define ESC_CHAR '\033'
 #define ESC_STR  "\033"
@@ -258,7 +265,7 @@ typedef struct
         gboolean alternate_plus_minus;
 
         /* Set if the window has changed it's size */
-        gboolean winch_flag;
+        SIG_ATOMIC_VOLATILE_T winch_flag;
     } tty;
 
     struct

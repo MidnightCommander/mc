@@ -62,7 +62,7 @@ int mc_tty_frm[MC_TTY_FRM_MAX];
 
 /*** file scope variables ************************************************************************/
 
-static volatile sig_atomic_t got_interrupt = 0;
+static SIG_ATOMIC_VOLATILE_T got_interrupt = 0;
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -243,38 +243,6 @@ tty_resize (int fd)
 #else
     return 0;
 #endif
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-tty_change_screen_size (void)
-{
-#if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
-#if defined TIOCGWINSZ
-    struct winsize winsz;
-
-    winsz.ws_col = winsz.ws_row = 0;
-    /* Ioctl on the STDIN_FILENO */
-    ioctl (0, TIOCGWINSZ, &winsz);
-    if (winsz.ws_col && winsz.ws_row)
-    {
-#if defined(NCURSES_VERSION) && defined(HAVE_RESIZETERM)
-        resizeterm (winsz.ws_row, winsz.ws_col);
-        clearok (stdscr, TRUE); /* sigwinch's should use a semaphore! */
-#else
-        COLS = winsz.ws_col;
-        LINES = winsz.ws_row;
-#endif
-#ifdef HAVE_SUBSHELL_SUPPORT
-        if (!mc_global.tty.use_subshell)
-            return;
-
-        tty_resize (mc_global.tty.subshell_pty);
-#endif
-    }
-#endif /* TIOCGWINSZ */
-#endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
 }
 
 /* --------------------------------------------------------------------------------------------- */

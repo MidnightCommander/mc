@@ -101,7 +101,7 @@ mc_global_t mc_global = {
         .ugly_line_drawing = FALSE,
         .old_mouse = FALSE,
         .alternate_plus_minus = FALSE,
-        .winch_flag = FALSE
+        .winch_flag = 0
     },
 
     .vfs =

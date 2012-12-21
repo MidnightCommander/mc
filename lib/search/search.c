@@ -238,7 +238,7 @@ mc_search_run (mc_search_t * lc_mc_search, const void *user_data,
 {
     gboolean ret = FALSE;
 
-    if (!lc_mc_search)
+    if (lc_mc_search == NULL || user_data == NULL)
         return FALSE;
     if (!mc_search_is_type_avail (lc_mc_search->search_type))
     {
@@ -382,9 +382,15 @@ gboolean
 mc_search (const gchar * pattern, const gchar * str, mc_search_type_t type)
 {
     gboolean ret;
-    mc_search_t *search = mc_search_new (pattern, -1);
-    if (search == NULL)
+    mc_search_t *search;
+
+    if (str == NULL)
         return FALSE;
+
+    search = mc_search_new (pattern, -1);
+    if (search == NULL )
+        return FALSE;
+
     search->search_type = type;
     search->is_case_sensitive = TRUE;
 

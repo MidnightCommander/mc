@@ -267,6 +267,21 @@ mc_config_fix_migrated_rules (void)
 #endif /* MC_HOMEDIR_XDG */
 
 /* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+mc_config_deprecated_dir_present (void)
+{
+    char *old_dir;
+    gboolean is_present;
+
+    old_dir = mc_config_get_deprecated_path ();
+    is_present = g_file_test (old_dir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR);
+    g_free (old_dir);
+
+    return is_present && !config_dir_present;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -423,11 +438,14 @@ mc_config_get_path (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
-mc_config_migrate_from_old_place (GError ** error)
+gboolean
+mc_config_migrate_from_old_place (GError ** error, char **msg)
 {
     char *old_dir;
     size_t rule_index;
+
+    if (!mc_config_deprecated_dir_present ())
+        return FALSE;
 
     old_dir = mc_config_get_deprecated_path ();
 
@@ -436,6 +454,9 @@ mc_config_migrate_from_old_place (GError ** error)
     g_free (mc_config_init_one_config_path (mc_cache_str, EDIT_DIR, error));
     g_free (mc_config_init_one_config_path (mc_data_str, EDIT_DIR, error));
 #endif /* MC_HOMEDIR_XDG */
+
+    if (*error != NULL)
+        return FALSE;
 
     for (rule_index = 0; mc_config_files_reference[rule_index].old_filename != NULL; rule_index++)
     {
@@ -460,38 +481,19 @@ mc_config_migrate_from_old_place (GError ** error)
     }
 
 #ifdef MC_HOMEDIR_XDG
-    g_propagate_error (error,
-                       g_error_new (MC_ERROR, 0,
-                                    _
-                                    ("Your old settings were migrated from %s\n"
-                                     "to Freedesktop recommended dirs.\n"
-                                     "To get more info, please visit\n"
-                                     "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"),
-                                    old_dir));
+    *msg = g_strdup_printf (_("Your old settings were migrated from %s\n"
+                              "to Freedesktop recommended dirs.\n"
+                              "To get more info, please visit\n"
+                              "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"),
+                              old_dir);
 #else /* MC_HOMEDIR_XDG */
-    g_propagate_error (error,
-                       g_error_new (MC_ERROR, 0,
-                                    _
-                                    ("Your old settings were migrated from %s\n"
-                                     "to %s\n"), old_dir, mc_config_str));
+    *msg = g_strdup_printf (_("Your old settings were migrated from %s\n"
+                              "to %s\n"), old_dir, mc_config_str);
 #endif /* MC_HOMEDIR_XDG */
 
     g_free (old_dir);
-}
 
-/* --------------------------------------------------------------------------------------------- */
-
-gboolean
-mc_config_deprecated_dir_present (void)
-{
-    char *old_dir;
-    gboolean is_present;
-
-    old_dir = mc_config_get_deprecated_path ();
-    is_present = g_file_test (old_dir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR);
-    g_free (old_dir);
-
-    return is_present && !config_dir_present;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

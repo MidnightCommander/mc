@@ -2615,7 +2615,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     static gboolean i18n_flag = FALSE;
     if (!i18n_flag)
     {
-        for (i = sizeof (op_names1) / sizeof (op_names1[0]); i--;)
+        for (i = sizeof (op_names) / sizeof (op_names[0]); i--;)
             op_names[i] = Q_ (op_names[i]);
         i18n_flag = TRUE;
     }
@@ -2753,26 +2753,6 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     tctx = file_op_total_context_new ();
     gettimeofday (&tctx->transfer_start, (struct timezone *) NULL);
 
-    {
-        filegui_dialog_type_t dialog_type;
-
-        if (operation == OP_DELETE)
-            dialog_type = FILEGUI_DIALOG_DELETE_ITEM;
-        else
-        {
-            dialog_type = !((operation != OP_COPY) || (single_entry) || (force_single))
-                ? FILEGUI_DIALOG_MULTI_ITEM : FILEGUI_DIALOG_ONE_ITEM;
-
-            if ((single_entry) && (operation == OP_COPY) && S_ISDIR (selection (panel)->st.st_mode))
-                dialog_type = FILEGUI_DIALOG_MULTI_ITEM;
-        }
-
-        /* Background also need ctx->ui, but not full */
-        if (do_bg)
-            file_op_context_create_ui_without_init (ctx, TRUE, dialog_type);
-        else
-            file_op_context_create_ui (ctx, TRUE, dialog_type);
-    }
 
 #ifdef ENABLE_BACKGROUND
     /* Did the user select to do a background operation? */
@@ -2799,17 +2779,35 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
             return FALSE;
         }
     }
+    else
 #endif /* ENABLE_BACKGROUND */
+    {
+        filegui_dialog_type_t dialog_type;
+
+        if (operation == OP_DELETE)
+            dialog_type = FILEGUI_DIALOG_DELETE_ITEM;
+        else
+        {
+            dialog_type = ((operation != OP_COPY) || single_entry || force_single)
+                ? FILEGUI_DIALOG_ONE_ITEM : FILEGUI_DIALOG_MULTI_ITEM;
+
+            if (single_entry && (operation == OP_COPY) && S_ISDIR (selection (panel)->st.st_mode))
+                dialog_type = FILEGUI_DIALOG_MULTI_ITEM;
+        }
+
+        file_op_context_create_ui (ctx, TRUE, dialog_type);
+    }
 
     /* Initialize things */
     /* We do not want to trash cache every time file is
        created/touched. However, this will make our cache contain
        invalid data. */
-    if ((dest != NULL) && (mc_setctl (dest_vpath, VFS_SETCTL_STALE_DATA, (void *) 1)))
+    if ((dest != NULL)
+        && (mc_setctl (dest_vpath, VFS_SETCTL_STALE_DATA, GUINT_TO_POINTER (1)) != 0))
         save_dest = g_strdup (dest);
 
     if ((vfs_path_tokens_count (panel->cwd_vpath) != 0)
-        && (mc_setctl (panel->cwd_vpath, VFS_SETCTL_STALE_DATA, (void *) 1)))
+        && (mc_setctl (panel->cwd_vpath, VFS_SETCTL_STALE_DATA, GUINT_TO_POINTER (1)) != 0))
         save_cwd = vfs_path_to_str (panel->cwd_vpath);
 
     /* Now, let's do the job */

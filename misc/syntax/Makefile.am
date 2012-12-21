@@ -1,5 +1,8 @@
+SYNTAX_IN = Syntax.in
+
+SYNTAX_OUT = Syntax
+
 SYNTAXFILES =			\
-	Syntax			\
 	PKGBUILD.syntax		\
 	ada95.syntax		\
 	as.syntax		\
@@ -76,7 +79,9 @@ SYNTAXFILES =			\
 
 if USE_EDIT
 syntaxdir =		$(pkgdatadir)/syntax
-syntax_DATA =		$(SYNTAXFILES)
+syntax_DATA =		$(SYNTAX_OUT) \
+			$(SYNTAXFILES)
 endif
 
-EXTRA_DIST =		$(SYNTAXFILES)
+EXTRA_DIST =		$(SYNTAX_IN) \
+			$(SYNTAXFILES)

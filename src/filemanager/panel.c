@@ -44,7 +44,6 @@
 #include "lib/tty/key.h"        /* XCTRL and ALT macros  */
 #include "lib/skin.h"
 #include "lib/strescape.h"
-#include "lib/filehighlight.h"
 #include "lib/mcconfig.h"
 #include "lib/vfs/vfs.h"
 #include "lib/unixcompat.h"
@@ -305,6 +304,8 @@ panel_field_t panel_fields[] = {
     }
 };
 /* *INDENT-ON* */
+
+mc_fhl_t *mc_filehighlight = NULL;
 
 extern int saving_setup;
 

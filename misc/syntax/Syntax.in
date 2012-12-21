@@ -171,7 +171,7 @@ include po.syntax
 
 file ..\*\\.([Aa][Ss][Mm]|s|S)$ ASM\sProgram
 include assembler.syntax
- 
+
 file ..\*\\.([Pp][Oo][Vv])$ POV\sScript
 include povray.syntax
 
