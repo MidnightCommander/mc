@@ -59,7 +59,6 @@ button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
 {
     WButton *b = BUTTON (w);
     WDialog *h = w->owner;
-    int stop = 0;
     int off = 0;
 
     switch (msg)
@@ -94,13 +93,10 @@ button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
         if (parm != ' ' && parm != '\n')
             return MSG_NOT_HANDLED;
 
-        if (b->callback != NULL)
-            stop = b->callback (b, b->action);
-        if (b->callback == NULL || stop != 0)
-        {
-            h->ret_value = b->action;
+        h->ret_value = b->action;
+        if (b->callback == NULL || b->callback (b, b->action) != 0)
             dlg_stop (h);
-        }
+
         return MSG_HANDLED;
 
     case MSG_CURSOR:
