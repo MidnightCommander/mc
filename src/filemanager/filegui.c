@@ -197,8 +197,8 @@ int classic_progressbar = 1;
 /* Hack: the vfs code should not rely on this */
 #define WITH_FULL_PATHS 1
 
-#define truncFileString(ui, s)       str_trunc (s, 52)
-#define truncFileStringSecure(ui, s) path_trunc (s, 52)
+#define truncFileString(dlg, s)       str_trunc (s, WIDGET (dlg)->cols - 10)
+#define truncFileStringSecure(dlg, s) path_trunc (s, WIDGET (dlg)->cols - 10)
 
 /*** file scope type declarations ****************************************************************/
 
@@ -738,7 +738,7 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
     ui->progress_file_gauge = gauge_new (y++, x + 3, dlg_width - (x + 3) * 2, FALSE, 100, 0);
     if (!classic_progressbar && (current_panel == right_panel))
         ui->progress_file_gauge->from_left_to_right = FALSE;
-    add_widget (ui->op_dlg, ui->progress_file_gauge);
+    add_widget_autopos (ui->op_dlg, ui->progress_file_gauge, WPOS_KEEP_TOP | WPOS_KEEP_HORZ, NULL);
 
     ui->progress_file_label = label_new (y++, x, "");
     add_widget (ui->op_dlg, ui->progress_file_label);
@@ -756,7 +756,8 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
                 gauge_new (y++, x + 3, dlg_width - (x + 3) * 2, FALSE, 100, 0);
             if (!classic_progressbar && (current_panel == right_panel))
                 ui->progress_total_gauge->from_left_to_right = FALSE;
-            add_widget (ui->op_dlg, ui->progress_total_gauge);
+            add_widget_autopos (ui->op_dlg, ui->progress_total_gauge,
+                                WPOS_KEEP_TOP | WPOS_KEEP_HORZ, NULL);
         }
 
         ui->total_files_processed_label = label_new (y++, x, "");
@@ -807,7 +808,7 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
         progress_buttons[3].len;
 
     /* adjust dialog sizes  */
-    dlg_set_size (ui->op_dlg, y + 3, dlg_width);
+    dlg_set_size (ui->op_dlg, y + 3, max (COLS * 2 / 3, buttons_width + 6));
 
     place_progress_buttons (ui->op_dlg, FALSE);
 
@@ -1000,7 +1001,7 @@ file_progress_show_source (FileOpContext * ctx, const vfs_path_t * s_vpath)
 
         s = vfs_path_tokens_get (s_vpath, -1, 1);
         label_set_text (ui->file_label[0], _("Source"));
-        label_set_text (ui->file_string[0], truncFileString (ui, s));
+        label_set_text (ui->file_string[0], truncFileString (ui->op_dlg, s));
         g_free (s);
     }
     else
@@ -1028,7 +1029,7 @@ file_progress_show_target (FileOpContext * ctx, const vfs_path_t * s_vpath)
 
         s = vfs_path_to_str (s_vpath);
         label_set_text (ui->file_label[1], _("Target"));
-        label_set_text (ui->file_string[1], truncFileStringSecure (ui, s));
+        label_set_text (ui->file_string[1], truncFileStringSecure (ui->op_dlg, s));
         g_free (s);
     }
     else
@@ -1050,7 +1051,7 @@ file_progress_show_deleting (FileOpContext * ctx, const char *s)
 
     ui = ctx->ui;
     label_set_text (ui->file_label[0], _("Deleting"));
-    label_set_text (ui->file_label[0], truncFileStringSecure (ui, s));
+    label_set_text (ui->file_label[0], truncFileStringSecure (ui->op_dlg, s));
 }
 
 /* --------------------------------------------------------------------------------------------- */
