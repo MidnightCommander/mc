@@ -41,6 +41,7 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/color.h"
 #include "lib/skin.h"
+#include "lib/strutil.h"
 #include "lib/widget.h"
 
 /*** global variables ****************************************************************************/
@@ -98,6 +99,15 @@ hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             widget_move (w, 0, w->cols - 1);
             tty_print_alt_char (ACS_RTEE, FALSE);
         }
+
+        if (l->text != NULL)
+        {
+            int text_width;
+
+            text_width = str_term_width1 (l->text);
+            widget_move (w, 0, (w->cols - text_width) / 2);
+            tty_print_string (l->text);
+        }
         return MSG_HANDLED;
 
     default:
@@ -119,12 +129,29 @@ hline_new (int y, int x, int width)
     l = g_new (WHLine, 1);
     w = WIDGET (l);
     init_widget (w, y, x, lines, width < 0 ? 1 : width, hline_callback, NULL);
+    l->text = NULL;
     l->auto_adjust_cols = (width < 0);
     l->transparent = FALSE;
     widget_want_cursor (w, FALSE);
     widget_want_hotkey (w, FALSE);
 
     return l;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+hline_set_text (WHLine * l, const char *text)
+{
+    g_free (l->text);
+
+    if (text == NULL || *text == '\0')
+        l->text = NULL;
+    else
+        l->text = g_strdup (text);
+
+    if (WIDGET (l)->owner != NULL)
+        send_message (l, NULL, MSG_DRAW, 0, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

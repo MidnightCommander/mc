@@ -248,7 +248,7 @@ typedef struct
 
     WLabel *total_files_processed_label;
     WLabel *time_label;
-    WLabel *total_bytes_label;
+    WHLine *total_bytes_label;
 
     /* Query replace dialog */
     WDialog *replace_dlg;
@@ -745,9 +745,7 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
 
     if (verbose && dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
     {
-        add_widget (ui->op_dlg, hline_new (y, -1, -1));
-
-        ui->total_bytes_label = label_new (y++, x + 15, "");
+        ui->total_bytes_label = hline_new (y++, -1, -1);
         add_widget (ui->op_dlg, ui->total_bytes_label);
 
         if (file_op_compute_totals)
@@ -978,7 +976,7 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintma
         g_snprintf (buffer, BUF_TINY, _(" Total: %s/%s "), buffer2, buffer3);
     }
 
-    label_set_text (ui->total_bytes_label, buffer);
+    hline_set_text (ui->total_bytes_label, buffer);
 }
 
 /* }}} */
