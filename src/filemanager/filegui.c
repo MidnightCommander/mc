@@ -735,7 +735,7 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
     ui->file_string[1] = label_new (y++, x, "");
     add_widget (ui->op_dlg, ui->file_string[1]);
 
-    ui->progress_file_gauge = gauge_new (y++, x + 3, 0, 100, 0);
+    ui->progress_file_gauge = gauge_new (y++, x + 3, dlg_width - (x + 3) * 2, FALSE, 100, 0);
     if (!classic_progressbar && (current_panel == right_panel))
         ui->progress_file_gauge->from_left_to_right = FALSE;
     add_widget (ui->op_dlg, ui->progress_file_gauge);
@@ -752,7 +752,8 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
 
         if (file_op_compute_totals)
         {
-            ui->progress_total_gauge = gauge_new (y++, x + 3, 0, 100, 0);
+            ui->progress_total_gauge =
+                gauge_new (y++, x + 3, dlg_width - (x + 3) * 2, FALSE, 100, 0);
             if (!classic_progressbar && (current_panel == right_panel))
                 ui->progress_total_gauge->from_left_to_right = FALSE;
             add_widget (ui->op_dlg, ui->progress_total_gauge);

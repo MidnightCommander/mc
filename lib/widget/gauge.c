@@ -49,9 +49,6 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-/* Currently width is hardcoded here for text mode */
-#define gauge_len 47
-
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
@@ -64,21 +61,25 @@ gauge_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     WGauge *g = GAUGE (w);
     WDialog *h = w->owner;
 
-    if (msg == MSG_INIT)
+    switch (msg)
+    {
+    case MSG_INIT:
         return MSG_HANDLED;
 
-    /* We don't want to get the focus */
-    if (msg == MSG_FOCUS)
+        /* We don't want to get the focus */
+    case MSG_FOCUS:
         return MSG_NOT_HANDLED;
 
-    if (msg == MSG_DRAW)
-    {
+    case MSG_DRAW:
         widget_move (w, 0, 0);
-        tty_setcolor (h->color[DLG_COLOR_NORMAL]);
         if (!g->shown)
-            tty_printf ("%*s", gauge_len, "");
+        {
+            tty_setcolor (h->color[DLG_COLOR_NORMAL]);
+            tty_printf ("%*s", w->cols, "");
+        }
         else
         {
+            int gauge_len;
             int percentage, columns;
             long total = g->max;
             long done = g->current;
@@ -95,30 +96,34 @@ gauge_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                 total /= 256;
                 done /= 256;
             }
+
+            gauge_len = w->cols - 7;    /* 7 positions for percentage */
+
             percentage = (200 * done / total + 1) / 2;
-            columns = (2 * (gauge_len - 7) * done / total + 1) / 2;
+            columns = (2 * gauge_len * done / total + 1) / 2;
             tty_print_char ('[');
             if (g->from_left_to_right)
             {
                 tty_setcolor (GAUGE_COLOR);
                 tty_printf ("%*s", (int) columns, "");
                 tty_setcolor (h->color[DLG_COLOR_NORMAL]);
-                tty_printf ("%*s] %3d%%", (int) (gauge_len - 7 - columns), "", (int) percentage);
+                tty_printf ("%*s] %3d%%", gauge_len - columns, "", percentage);
             }
             else
             {
                 tty_setcolor (h->color[DLG_COLOR_NORMAL]);
-                tty_printf ("%*s", gauge_len - columns - 7, "");
+                tty_printf ("%*s", gauge_len - columns, "");
                 tty_setcolor (GAUGE_COLOR);
                 tty_printf ("%*s", columns, "");
                 tty_setcolor (h->color[DLG_COLOR_NORMAL]);
-                tty_printf ("] %3d%%", 100 * columns / (gauge_len - 7), percentage);
+                tty_printf ("] %3d%%", 100 * columns / gauge_len, percentage);
             }
         }
         return MSG_HANDLED;
-    }
 
-    return widget_default_callback (w, sender, msg, parm, data);
+    default:
+        return widget_default_callback (w, sender, msg, parm, data);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -126,14 +131,16 @@ gauge_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 /* --------------------------------------------------------------------------------------------- */
 
 WGauge *
-gauge_new (int y, int x, gboolean shown, int max, int current)
+gauge_new (int y, int x, int cols, gboolean shown, int max, int current)
 {
     WGauge *g;
     Widget *w;
 
     g = g_new (WGauge, 1);
     w = WIDGET (g);
-    init_widget (w, y, x, 1, gauge_len, gauge_callback, NULL);
+    init_widget (w, y, x, 1, cols, gauge_callback, NULL);
+    widget_want_cursor (w, FALSE);
+    widget_want_hotkey (w, FALSE);
 
     g->shown = shown;
     if (max == 0)
@@ -141,9 +148,6 @@ gauge_new (int y, int x, gboolean shown, int max, int current)
     g->max = max;
     g->current = current;
     g->from_left_to_right = TRUE;
-
-    widget_want_cursor (w, FALSE);
-    widget_want_hotkey (w, FALSE);
 
     return g;
 }
