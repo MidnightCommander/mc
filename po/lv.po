@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-11-19 21:47+0400\n"
+"POT-Creation-Date: 2012-12-24 11:20+0400\n"
 "PO-Revision-Date: 2012-09-03 08:41+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1418,6 +1418,9 @@ msgstr ""
 msgid "Synta&x highlighting"
 msgstr "sinta&Kses izgaismošana"
 
+msgid "C&ursor after inserted block"
+msgstr ""
+
 msgid "Pers&istent selection"
 msgstr ""
 
@@ -2320,6 +2323,13 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
+#, fuzzy
+msgid "S&uspend"
+msgstr "At&likt"
+
+msgid "Con&tinue"
+msgstr "Tu&rpināt"
+
 #, c-format
 msgid "%d:%02d.%02d"
 msgstr ""
@@ -2441,12 +2451,6 @@ msgstr "&Chdir"
 
 msgid "&Again"
 msgstr "%Atkal"
-
-msgid "&Suspend"
-msgstr "At&likt"
-
-msgid "Con&tinue"
-msgstr "Tu&rpināt"
 
 msgid "Pane&lize"
 msgstr "Pa&nelēt"

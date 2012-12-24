@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-11-19 21:47+0400\n"
+"POT-Creation-Date: 2012-12-24 11:20+0400\n"
 "PO-Revision-Date: 2012-09-03 08:41+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/projects/p/mc/language/"
@@ -1468,6 +1468,9 @@ msgstr "Бачныя табы"
 msgid "Synta&x highlighting"
 msgstr "Падсветка &сінтаксісу"
 
+msgid "C&ursor after inserted block"
+msgstr ""
+
 msgid "Pers&istent selection"
 msgstr "Паста&янныя блокі"
 
@@ -2468,6 +2471,13 @@ msgstr "Гэтую аперацыю немагчыма выканаць на \".
 msgid "Sorry, I could not put the job in background"
 msgstr "Выбачайце, зрабіць гэта ў фонавым рэжыме немагчыма"
 
+#, fuzzy
+msgid "S&uspend"
+msgstr "Пры&пыніць"
+
+msgid "Con&tinue"
+msgstr "&Працягваць"
+
 #, c-format
 msgid "%d:%02d.%02d"
 msgstr "%d:%02d.%02d"
@@ -2589,12 +2599,6 @@ msgstr "Пера&ход"
 
 msgid "&Again"
 msgstr "Паў&тор"
-
-msgid "&Suspend"
-msgstr "Пры&пыніць"
-
-msgid "Con&tinue"
-msgstr "&Працягваць"
 
 msgid "Pane&lize"
 msgstr "Па&нэлізацыя"

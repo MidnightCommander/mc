@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-11-19 21:47+0400\n"
+"POT-Creation-Date: 2012-12-24 11:20+0400\n"
 "PO-Revision-Date: 2012-09-03 08:41+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/projects/p/mc/language/eu/)\n"
@@ -1468,6 +1468,9 @@ msgstr "Tab ikusgarriak"
 msgid "Synta&x highlighting"
 msgstr "sinta&xia nabarmentzen"
 
+msgid "C&ursor after inserted block"
+msgstr ""
+
 msgid "Pers&istent selection"
 msgstr "&Hautaketa iraunkorra"
 
@@ -2476,6 +2479,13 @@ msgstr "Ezin da \"..\" erabili!"
 msgid "Sorry, I could not put the job in background"
 msgstr "Barkatu, ezin izan dut lana hondoan ipini"
 
+#, fuzzy
+msgid "S&uspend"
+msgstr "E&seki"
+
+msgid "Con&tinue"
+msgstr "&Jarraitu"
+
 #, c-format
 msgid "%d:%02d.%02d"
 msgstr "%d:%02d.%02d"
@@ -2597,12 +2607,6 @@ msgstr "&Aldatu direktorioa"
 
 msgid "&Again"
 msgstr "&Berriro"
-
-msgid "&Suspend"
-msgstr "E&seki"
-
-msgid "Con&tinue"
-msgstr "&Jarraitu"
 
 msgid "Pane&lize"
 msgstr "Pane&lera eraman"

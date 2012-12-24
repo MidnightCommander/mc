@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-11-19 21:47+0400\n"
+"POT-Creation-Date: 2012-12-24 11:20+0400\n"
 "PO-Revision-Date: 2012-09-03 08:41+0000\n"
 "Last-Translator: Stéphane Aulery <lkppo@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/mc/language/fr/)\n"
@@ -1440,6 +1440,9 @@ msgstr "Tabulation visible"
 msgid "Synta&x highlighting"
 msgstr "Coloration synta&xique"
 
+msgid "C&ursor after inserted block"
+msgstr ""
+
 msgid "Pers&istent selection"
 msgstr "sélection pers&istante"
 
@@ -2357,6 +2360,13 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
+#, fuzzy
+msgid "S&uspend"
+msgstr "&Suspendre"
+
+msgid "Con&tinue"
+msgstr "Con&tinuer"
+
 #, c-format
 msgid "%d:%02d.%02d"
 msgstr ""
@@ -2478,12 +2488,6 @@ msgstr "&Changer de répertoire"
 
 msgid "&Again"
 msgstr "e&Ncore"
-
-msgid "&Suspend"
-msgstr "&Suspendre"
-
-msgid "Con&tinue"
-msgstr "Con&tinuer"
 
 msgid "Pane&lize"
 msgstr "Mettre en &panneau"

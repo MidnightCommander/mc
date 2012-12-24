@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-11-19 21:47+0400\n"
+"POT-Creation-Date: 2012-12-24 11:20+0400\n"
 "PO-Revision-Date: 2012-09-03 13:45+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/projects/p/mc/language/pl/)\n"
@@ -1496,6 +1496,9 @@ msgstr "Widoczne tabulacje"
 msgid "Synta&x highlighting"
 msgstr "&Wyróżnianie elementów składni"
 
+msgid "C&ursor after inserted block"
+msgstr ""
+
 msgid "Pers&istent selection"
 msgstr "Trwałe zaznaczen&ie"
 
@@ -2499,6 +2502,13 @@ msgstr "Nie można wykonać działania na \"..\"."
 msgid "Sorry, I could not put the job in background"
 msgstr "Nie można umieścić zadania w tle"
 
+#, fuzzy
+msgid "S&uspend"
+msgstr "W&strzymaj"
+
+msgid "Con&tinue"
+msgstr "Kon&tynuuj"
+
 #, c-format
 msgid "%d:%02d.%02d"
 msgstr "%d:%02d.%02d"
@@ -2620,12 +2630,6 @@ msgstr "&Zmień katalog"
 
 msgid "&Again"
 msgstr "&Ponownie"
-
-msgid "&Suspend"
-msgstr "W&strzymaj"
-
-msgid "Con&tinue"
-msgstr "Kon&tynuuj"
 
 msgid "Pane&lize"
 msgstr "Fi&ltruj"

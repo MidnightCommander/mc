@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-11-19 21:47+0400\n"
+"POT-Creation-Date: 2012-12-24 11:20+0400\n"
 "PO-Revision-Date: 2012-09-03 08:41+0000\n"
 "Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/mc/language/"
@@ -1421,6 +1421,9 @@ msgstr "Видими табулации"
 msgid "Synta&x highlighting"
 msgstr "Осветяване на синтаксиса"
 
+msgid "C&ursor after inserted block"
+msgstr ""
+
 msgid "Pers&istent selection"
 msgstr ""
 
@@ -2331,6 +2334,13 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
+#, fuzzy
+msgid "S&uspend"
+msgstr "Спри"
+
+msgid "Con&tinue"
+msgstr "Продължи"
+
 #, c-format
 msgid "%d:%02d.%02d"
 msgstr ""
@@ -2452,12 +2462,6 @@ msgstr "Смени директорията"
 
 msgid "&Again"
 msgstr "Отново"
-
-msgid "&Suspend"
-msgstr "Спри"
-
-msgid "Con&tinue"
-msgstr "Продължи"
 
 msgid "Pane&lize"
 msgstr "Покажи в панел"

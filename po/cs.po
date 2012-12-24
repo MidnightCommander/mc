@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-11-19 21:47+0400\n"
+"POT-Creation-Date: 2012-12-24 11:20+0400\n"
 "PO-Revision-Date: 2012-09-03 08:41+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/mc/language/cs/)\n"
@@ -1445,6 +1445,9 @@ msgstr "Viditelné tabulátory"
 msgid "Synta&x highlighting"
 msgstr "Zvýraznění synta&xe"
 
+msgid "C&ursor after inserted block"
+msgstr ""
+
 msgid "Pers&istent selection"
 msgstr "&Trvalý výběr"
 
@@ -2444,6 +2447,13 @@ msgstr "Nelze pracovat s „..“!"
 msgid "Sorry, I could not put the job in background"
 msgstr "Bohužel, úlohu nelze přesunout na pozadí"
 
+#, fuzzy
+msgid "S&uspend"
+msgstr "&Pozastavit"
+
+msgid "Con&tinue"
+msgstr "&Pokračovat"
+
 #, c-format
 msgid "%d:%02d.%02d"
 msgstr "%d:%02d.%02d"
@@ -2565,12 +2575,6 @@ msgstr "&Chdir"
 
 msgid "&Again"
 msgstr "&Znovu"
-
-msgid "&Suspend"
-msgstr "&Pozastavit"
-
-msgid "Con&tinue"
-msgstr "&Pokračovat"
 
 msgid "Pane&lize"
 msgstr "Pane&lizace"

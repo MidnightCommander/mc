@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-11-19 21:47+0400\n"
+"POT-Creation-Date: 2012-12-24 11:20+0400\n"
 "PO-Revision-Date: 2012-09-03 08:41+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/projects/p/mc/language/"
@@ -1420,6 +1420,9 @@ msgstr ""
 msgid "Synta&x highlighting"
 msgstr "Sintak&sės ryškinimas"
 
+msgid "C&ursor after inserted block"
+msgstr ""
+
 msgid "Pers&istent selection"
 msgstr ""
 
@@ -2331,6 +2334,13 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
+#, fuzzy
+msgid "S&uspend"
+msgstr "&Stabdyti"
+
+msgid "Con&tinue"
+msgstr "&Tęsti"
+
 #, c-format
 msgid "%d:%02d.%02d"
 msgstr ""
@@ -2452,12 +2462,6 @@ msgstr "&Eiti į katal."
 
 msgid "&Again"
 msgstr "Iš n&aujo"
-
-msgid "&Suspend"
-msgstr "&Stabdyti"
-
-msgid "Con&tinue"
-msgstr "&Tęsti"
 
 msgid "Pane&lize"
 msgstr "Į skyde&lį"

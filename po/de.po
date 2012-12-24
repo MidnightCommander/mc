@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-11-19 21:47+0400\n"
+"POT-Creation-Date: 2012-12-24 11:20+0400\n"
 "PO-Revision-Date: 2012-09-03 08:41+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/mc/language/de/)\n"
@@ -1449,6 +1449,9 @@ msgstr "S&ichtbare Tabs"
 msgid "Synta&x highlighting"
 msgstr "Synta&xhervorhebung"
 
+msgid "C&ursor after inserted block"
+msgstr ""
+
 msgid "Pers&istent selection"
 msgstr "Aus&wahl beibehalten"
 
@@ -2450,6 +2453,13 @@ msgstr "Kann nicht auf \"..\" agieren!"
 msgid "Sorry, I could not put the job in background"
 msgstr "Ich kann den Job nicht in den Hintergrund legen"
 
+#, fuzzy
+msgid "S&uspend"
+msgstr "Anhalten"
+
+msgid "Con&tinue"
+msgstr "Weiter"
+
 #, c-format
 msgid "%d:%02d.%02d"
 msgstr "%d:%02d.%02d"
@@ -2571,12 +2581,6 @@ msgstr "&Chdir"
 
 msgid "&Again"
 msgstr "Wiederholen"
-
-msgid "&Suspend"
-msgstr "Anhalten"
-
-msgid "Con&tinue"
-msgstr "Weiter"
 
 msgid "Pane&lize"
 msgstr "Anordnen"

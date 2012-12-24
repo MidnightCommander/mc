@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-11-19 21:47+0400\n"
+"POT-Creation-Date: 2012-12-24 11:20+0400\n"
 "PO-Revision-Date: 2012-09-03 08:41+0000\n"
 "Last-Translator: Martijn Dekker <mcdutchie@hotmail.com>\n"
 "Language-Team: Interlingua (http://www.transifex.com/projects/p/mc/language/"
@@ -1437,6 +1437,9 @@ msgstr ""
 msgid "Synta&x highlighting"
 msgstr ""
 
+msgid "C&ursor after inserted block"
+msgstr ""
+
 msgid "Pers&istent selection"
 msgstr ""
 
@@ -2328,6 +2331,13 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
+#, fuzzy
+msgid "S&uspend"
+msgstr "&Appender"
+
+msgid "Con&tinue"
+msgstr "Con&tinuar"
+
 #, c-format
 msgid "%d:%02d.%02d"
 msgstr ""
@@ -2448,12 +2458,6 @@ msgstr ""
 
 msgid "&Again"
 msgstr "&De novo"
-
-msgid "&Suspend"
-msgstr ""
-
-msgid "Con&tinue"
-msgstr "Con&tinuar"
 
 msgid "Pane&lize"
 msgstr ""
