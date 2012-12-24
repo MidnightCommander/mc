@@ -176,14 +176,17 @@ create_command_menu (void)
                         menu_entry_create (_("Record/Repeat &actions"), CK_RepeatStartStopRecord));
     entries = g_list_prepend (entries, menu_separator_create ());
 #ifdef HAVE_ASPELL
-    entries = g_list_prepend (entries, menu_entry_create (_("S&pell check"), CK_SpellCheck));
-    entries =
-        g_list_prepend (entries, menu_entry_create (_("C&heck word"), CK_SpellCheckCurrentWord));
-    entries =
-        g_list_prepend (entries,
-                        menu_entry_create (_("Change spelling &language..."),
-                                           CK_SpellCheckSelectLang));
-    entries = g_list_prepend (entries, menu_separator_create ());
+    if (strcmp (spell_language, "NONE") != 0)
+    {
+        entries = g_list_prepend (entries, menu_entry_create (_("S&pell check"), CK_SpellCheck));
+        entries =
+            g_list_prepend (entries, menu_entry_create (_("C&heck word"), CK_SpellCheckCurrentWord));
+        entries =
+            g_list_prepend (entries,
+                            menu_entry_create (_("Change spelling &language..."),
+                                               CK_SpellCheckSelectLang));
+        entries = g_list_prepend (entries, menu_separator_create ());
+    }
 #endif /* HAVE_ASPELL */
     entries = g_list_prepend (entries, menu_entry_create (_("&Mail..."), CK_Mail));
 

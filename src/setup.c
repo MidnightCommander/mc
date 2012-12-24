@@ -187,6 +187,10 @@ char *autodetect_codeset = NULL;
 gboolean is_autodetect_codeset_enabled = FALSE;
 #endif /* !HAVE_CHARSET */
 
+#ifdef HAVE_ASPELL
+char *spell_language = NULL;
+#endif
+
 /* If set, then print to the given file the last directory we were at */
 char *last_wd_string = NULL;
 
@@ -1049,6 +1053,11 @@ load_setup (void)
         mc_global.utf8_display = str_isutf8 (buffer);
 #endif /* HAVE_CHARSET */
 
+#ifdef HAVE_ASPELL
+    spell_language =
+        mc_config_get_string (mc_main_config, CONFIG_MISC_SECTION, "spell_language", "en");
+#endif /* HAVE_ASPELL */
+
     clipboard_store_path =
         mc_config_get_string (mc_main_config, CONFIG_MISC_SECTION, "clipboard_store", "");
     clipboard_paste_path =
@@ -1095,6 +1104,12 @@ save_setup (gboolean save_options, gboolean save_panel_options)
         mc_config_set_string (mc_main_config, CONFIG_MISC_SECTION, "autodetect_codeset",
                               autodetect_codeset);
 #endif /* HAVE_CHARSET */
+
+#ifdef HAVE_ASPELL
+        mc_config_set_string (mc_main_config, CONFIG_MISC_SECTION, "spell_language",
+                              spell_language);
+#endif /* HAVE_ASPELL */
+
         mc_config_set_string (mc_main_config, CONFIG_MISC_SECTION, "clipboard_store",
                               clipboard_store_path);
         mc_config_set_string (mc_main_config, CONFIG_MISC_SECTION, "clipboard_paste",
@@ -1142,6 +1157,10 @@ done_setup (void)
     g_free (autodetect_codeset);
     free_codepages_list ();
 #endif
+
+#ifdef HAVE_ASPELL
+    g_free (spell_language);
+#endif /* HAVE_ASPELL */
 }
 
 /* --------------------------------------------------------------------------------------------- */

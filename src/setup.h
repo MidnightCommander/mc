@@ -113,6 +113,10 @@ extern char *autodetect_codeset;
 extern gboolean is_autodetect_codeset_enabled;
 #endif /* !HAVE_CHARSET */
 
+#ifdef HAVE_ASPELL
+extern char *spell_language;
+#endif
+
 /* If set, then print to the given file the last directory we were at */
 extern char *last_wd_string;
 
