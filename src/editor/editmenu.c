@@ -180,7 +180,8 @@ create_command_menu (void)
     {
         entries = g_list_prepend (entries, menu_entry_create (_("S&pell check"), CK_SpellCheck));
         entries =
-            g_list_prepend (entries, menu_entry_create (_("C&heck word"), CK_SpellCheckCurrentWord));
+            g_list_prepend (entries,
+                            menu_entry_create (_("C&heck word"), CK_SpellCheckCurrentWord));
         entries =
             g_list_prepend (entries,
                             menu_entry_create (_("Change spelling &language..."),
