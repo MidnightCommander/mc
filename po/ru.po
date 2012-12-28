@@ -3,33 +3,30 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-#   <aborodin@vmail.ru>, 2011.
 # Alex Tkachenko <alex@bcs.zp.ua>, 1998.
 # and Alex Tkachenko <alex@bcs.zp.ua>, 1998.
-# Andrew Borodin <aborodin@vmail.ru>, 2009-2012.
 # Andrew V. Samoilov <sav@bcs.zp.ua>, 1999.
-# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005.
 # Evgeny Bulgakov <bgav@netvision.net.il>, 1999.
-# Ilia Maslakov <il.smind@gmail.com>, 2009.
-# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012.
 # Sergey Panov <sipan@mit.edu>, 1999.
-# Slava Zanko <slavazanko@gmail.com>, 2009,2011.
 # Valek Filippov <frob@df.ru>, 2000.
+# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005.
+# Ilia Maslakov <il.smind@gmail.com>, 2009.
+# Slava Zanko <slavazanko@gmail.com>, 2009, 2011.
+# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012.
+# Andrew Borodin <aborodin@vmail.ru>, 2009-2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-28 11:22+0300\n"
-"PO-Revision-Date: 2012-12-26 08:42+0000\n"
-"Last-Translator: aborodin <aborodin@vmail.ru>\n"
-"Language-Team: Russian (http://www.transifex.com/projects/p/mc/language/"
-"ru/)\n"
+"POT-Creation-Date: 2012-12-24 11:20+0400\n"
+"PO-Revision-Date: 2012-12-24 11:23+0300\n"
+"Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/mc/language/ru/)\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr "Внимание: невозможно загрузить список кодировок"
@@ -118,8 +115,7 @@ msgid "Not implemented yet"
 msgstr "Пока не реализовано"
 
 msgid "Num of replace tokens not equal to num of found tokens"
-msgstr ""
-"Количество шаблонных полей не соответствует количеству полей для замены"
+msgstr "Количество шаблонных полей не соответствует количеству полей для замены"
 
 #, c-format
 msgid "Invalid token number %d"
@@ -173,25 +169,25 @@ msgid "Function key 2"
 msgstr "Функциональная 2 "
 
 msgid "Function key 3"
-msgstr "Функциональная 3 "
+msgstr "Функциональная 3"
 
 msgid "Function key 4"
-msgstr "Функциональная 4 "
+msgstr "Функциональная 4"
 
 msgid "Function key 5"
-msgstr "Функциональная 5 "
+msgstr "Функциональная 5"
 
 msgid "Function key 6"
-msgstr "Функциональная 6 "
+msgstr "Функциональная 6"
 
 msgid "Function key 7"
-msgstr "Функциональная 7 "
+msgstr "Функциональная 7"
 
 msgid "Function key 8"
-msgstr "Функциональная 8 "
+msgstr "Функциональная 8"
 
 msgid "Function key 9"
-msgstr "Функциональная 9 "
+msgstr "Функциональная 9"
 
 msgid "Function key 10"
 msgstr "Функциональная 10"
@@ -263,7 +259,7 @@ msgid "Completion/M-tab"
 msgstr "Завершение/M-Tab "
 
 msgid "Back Tabulation S-tab"
-msgstr "Вернуть табуляцию S-tab"
+msgstr "Обратная табуляция S-tab"
 
 msgid "+ on keypad"
 msgstr "+ доп.клавиатуры "
@@ -617,8 +613,7 @@ msgid "Load definitions of key bindings from specified file"
 msgstr "Чтение определений привязок клавиш из указанного файла"
 
 msgid "Don't load definitions of key bindings from file, use defaults"
-msgstr ""
-"Не загружать привязки клавиш из файла, использовать привязки по умолчанию"
+msgstr "Не загружать привязки клавиш из файла, использовать привязки по умолчанию"
 
 msgid "Requests to run in black and white"
 msgstr "Принудительно установить черно-белый режим"
@@ -655,26 +650,22 @@ msgid ""
 msgstr ""
 "--colors КЛЮЧЕВОЕ_СЛОВО={ТЕКСТ},{ФОН},{АТРИБУТ}:КЛЮЧЕВОЕ_СЛОВО2=...\n"
 "\n"
-"{ТЕКСТ}, {ФОН} и {АТРИБУТ} можно опустить, чтобы использовать значения по "
-"умолчанию\n"
+"{ТЕКСТ}, {ФОН} и {АТРИБУТ} можно опустить, чтобы использовать значения по умолчанию\n"
 "\n"
 "Ключевые слова:\n"
 "   Общие:              errors, disabled, reverse, gauge, header\n"
 "                       input, inputmark, inputunchanged, commandlinemark\n"
 "                       bbarhotkey, bbarbutton, statusbar\n"
 "   Отображение файлов: normal, selected, marked, markselect\n"
-"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, "
-"errdhotnormal,\n"
+"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                       errdhotfocus\n"
-"   Меню:               menunormal, menuhot, menusel, menuhotsel, "
-"menuinactive\n"
+"   Меню:               menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Всплывающие меню:   pmenunormal, pmenusel, pmenutitle\n"
 "   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
 "                       editlinestate, editbg, editframe, editframeactive\n"
 "                       editframedrag\n"
 "   Просмотрщик:        viewbold, viewunderline, viewselected\n"
-"   Справка:            helpnormal, helpitalic, helpbold, helplink, "
-"helpslink\n"
+"   Справка:            helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -699,8 +690,7 @@ msgstr ""
 "   от color16 до color255 или от rgb000 до rgb555 и от gray0 до gray23\n"
 "\n"
 "Атрибуты:\n"
-"   bold, underline, reverse, blink; несколько атрибутов объединяются знаком "
-"\"+\"\n"
+"   bold, underline, reverse, blink; несколько атрибутов объединяются знаком \"+\"\n"
 
 msgid "Color options"
 msgstr "Цветовые настройки"
@@ -1504,7 +1494,7 @@ msgid "Synta&x highlighting"
 msgstr "&Цветовыделение синтаксиса"
 
 msgid "C&ursor after inserted block"
-msgstr ""
+msgstr "Курсор &после вставленного блока"
 
 msgid "Pers&istent selection"
 msgstr "Посто&янные блоки"
@@ -1951,7 +1941,7 @@ msgid "Filtered view"
 msgstr "Просмотр вывода команды"
 
 msgid "Filter command and arguments:"
-msgstr "Введите команду и её аргументы:"
+msgstr "Введите команду и ее аргументы:"
 
 msgid "Create a new Directory"
 msgstr "Создать новый каталог"
@@ -2091,25 +2081,16 @@ msgid " %s%s file error"
 msgstr "ошибка файла %s%s"
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0. It seems that "
-"the installation failed. Please fetch a fresh copy from the Midnight "
-"Commander package."
-msgstr ""
-"Формат %smc.ext изменён с версии 3.0. Возможно, произошёл сбой при "
-"установке. Пожалуйста, возьмите свежую копию из пакета Midnight Commander."
+msgid "The format of the %smc.ext file has changed with version 3.0. It seems that the installation failed. Please fetch a fresh copy from the Midnight Commander package."
+msgstr "Формат %smc.ext изменён с версии 3.0. Возможно, произошёл сбой при установке. Пожалуйста, возьмите свежую копию из пакета Midnight Commander."
 
 #, c-format
 msgid "%s file error"
 msgstr "ошибка файла %s"
 
 #, c-format
-msgid ""
-"The format of the %s file has changed with version 3.0. You may either want "
-"to copy it from %smc.ext or use that file as an example of how to write it."
-msgstr ""
-"Формат файла %s изменён с версии 3.0. Вы можете либо скопировать его с %s/mc."
-"ext, либо использовать этот файл как пример и написать свой."
+msgid "The format of the %s file has changed with version 3.0. You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgstr "Формат файла %s изменён с версии 3.0. Вы можете либо скопировать его с %s/mc.ext, либо использовать этот файл как пример и написать свой."
 
 msgid "DialogTitle|Copy"
 msgstr "Копирование"
@@ -2179,8 +2160,7 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Невозможно создать устойчивые симв. ссылки через нелокальные файловые "
-"системы:\n"
+"Невозможно создать устойчивые симв. ссылки через нелокальные файловые системы:\n"
 "\n"
 "Опция \"Устойчивые символические ссылки\" будет отменена"
 
@@ -2488,7 +2468,7 @@ msgid "Sorry, I could not put the job in background"
 msgstr "Извините, сделать это в фоновом режиме невозможно"
 
 msgid "S&uspend"
-msgstr ""
+msgstr "При&остановить"
 
 msgid "Con&tinue"
 msgstr "Продолжить"
@@ -3579,8 +3559,8 @@ msgstr ""
 "Пожалуйста, нажмите клавишу %s\n"
 "и подождите, пока это сообщение пропадет.\n"
 "\n"
-"Затем нажмите её еще раз, чтобы убедиться,\n"
-"что справа от её названия появилось \"OK\".\n"
+"Затем нажмите ее еще раз, чтобы убедиться,\n"
+"что справа от ее названия появилось \"OK\".\n"
 "\n"
 "Если вы хотите прервать обучение, нажмите\n"
 "клавишу Esc и тоже немного подождите."
@@ -3620,7 +3600,7 @@ msgid ""
 msgstr ""
 "Нажмите все перечисленные выше клавиши. После нажатий найдите,\n"
 "какие клавиши не имеют пометки \"OK\". Для обучения клавише выберите\n"
-"её при помощи Tab или мышкой и нажмите пробел."
+"ее при помощи Tab или мышкой и нажмите пробел."
 
 #, c-format
 msgid ""
@@ -4285,3 +4265,6 @@ msgstr "Поиск закончен"
 
 msgid "Continue from beginning?"
 msgstr "Продолжить с начала?"
+
+#~ msgid "fish: storing zeros"
+#~ msgstr "fish: запись нулевых данных"

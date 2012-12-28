@@ -5,15 +5,14 @@
 # Translators:
 # Andreas Troschka <signupbox001@om.it.eu.org>, 2012.
 # Giuliano Natali <diaolin@diaolin.com>, 1998.
-# Marco Ciampa <ciampix@libero.it>, 2012.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-28 11:22+0300\n"
-"PO-Revision-Date: 2012-12-26 08:42+0000\n"
-"Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
+"POT-Creation-Date: 2012-12-24 11:20+0400\n"
+"PO-Revision-Date: 2012-11-13 02:12+0100\n"
+"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
 "it/)\n"
 "Language: it\n"
@@ -877,7 +876,7 @@ msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
-"Midnight Commander si sta chiudendo.\n"
+"Midnight Commander sta per essere chiuso.\n"
 "Salvare i file modificati?"
 
 msgid "Diff:"
@@ -1353,13 +1352,13 @@ msgid "Record/Repeat &actions"
 msgstr "Registra/ripeti le &azioni"
 
 msgid "S&pell check"
-msgstr "Controllo orto&grafico"
+msgstr "Controllo &ortografico"
 
 msgid "C&heck word"
-msgstr "Controllo &parola"
+msgstr "Con&trollo parola"
 
 msgid "Change spelling &language..."
-msgstr "&Lingua controllo ortografico..."
+msgstr "Cambia &lingua del controllo ortografico..."
 
 msgid "&Mail..."
 msgstr "&Posta..."
@@ -1442,20 +1441,24 @@ msgstr "F&inestra"
 msgid "&Options"
 msgstr "&Opzioni"
 
+#, fuzzy
 msgid "&None"
-msgstr ""
+msgstr "Niente"
 
+#, fuzzy
 msgid "&Dynamic paragraphing"
-msgstr ""
+msgstr "Paragrafi dinamici"
 
+#, fuzzy
 msgid "Type &writer wrap"
-msgstr ""
+msgstr "A capo automatico"
 
 msgid "Wrap mode"
 msgstr "Modalità a capo"
 
+#, fuzzy
 msgid "Tabulation"
-msgstr ""
+msgstr "Tabul. indietro S-tab"
 
 msgid "&Fake half tabs"
 msgstr "&Imbroglia i mezzi tab"
@@ -1481,11 +1484,13 @@ msgstr "Confer&ma prima di salvare"
 msgid "Save file &position"
 msgstr "Salva &posizione file"
 
+#, fuzzy
 msgid "&Visible trailing spaces"
-msgstr ""
+msgstr "Spazi finali visibili"
 
+#, fuzzy
 msgid "Visible &tabs"
-msgstr ""
+msgstr "Tab visibili"
 
 msgid "Synta&x highlighting"
 msgstr "Sintassi &evidenziata"
@@ -1496,8 +1501,9 @@ msgstr ""
 msgid "Pers&istent selection"
 msgstr "Selezione pers&istente"
 
+#, fuzzy
 msgid "Cursor be&yond end of line"
-msgstr ""
+msgstr "Cursore oltre la fine riga"
 
 msgid "&Group undo"
 msgstr "Annullamento di &gruppo"
@@ -1508,10 +1514,11 @@ msgstr "Auto a capo colonna: "
 msgid "Editor options"
 msgstr "Opzioni editor"
 
+#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr ""
+msgstr "Vuoi veramente uscire dal Midnight Commander?"
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
 msgstr ""
@@ -1543,23 +1550,26 @@ msgstr "Elimin"
 msgid "ButtonBar|PullDn"
 msgstr "AprMen"
 
+#, fuzzy
 msgid "&Add word"
-msgstr "&Aggiungi parola"
+msgstr "Aggiungi &nuovo"
 
 msgid "Language"
-msgstr "Lingua"
+msgstr ""
 
 msgid "Misspelled"
-msgstr "Errore di ortografia"
+msgstr ""
 
+#, fuzzy
 msgid "Check word"
-msgstr "Controllo parola"
+msgstr "Con&trollo parola"
 
 msgid "Suggest"
-msgstr "Suggerimento"
+msgstr ""
 
+#, fuzzy
 msgid "Select language"
-msgstr "Selezione della lingua"
+msgstr "Seleziona &gruppo"
 
 msgid "Load syntax file"
 msgstr "Carica file sintassi"
@@ -1696,17 +1706,21 @@ msgstr "Cancellazione &cronologia"
 msgid "Confirmation"
 msgstr "Conferma"
 
+#, fuzzy
 msgid "&UTF-8 output"
-msgstr ""
+msgstr "Uscita UTF-8"
 
+#, fuzzy
 msgid "&Full 8 bits output"
-msgstr ""
+msgstr "Uscita a 8 bit completa"
 
+#, fuzzy
 msgid "&ISO 8859-1"
-msgstr ""
+msgstr "ISO 8859-1"
 
+#, fuzzy
 msgid "7 &bits"
-msgstr ""
+msgstr "7 bit"
 
 msgid "F&ull 8 bits input"
 msgstr "&Ingresso a 8 bit completo"
@@ -1723,17 +1737,21 @@ msgstr "&Seleziona"
 msgid "Directory tree"
 msgstr "Albero directory"
 
+#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr ""
+msgstr "Cadenza svuotamento dei VFS:"
 
+#, fuzzy
 msgid "FTP anonymous password:"
-msgstr ""
+msgstr "Password ftp anonimo:"
 
+#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr ""
+msgstr "Scadenza cache directory ftpfs:"
 
+#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr ""
+msgstr "Usa &sempre ftp proxy"
 
 msgid "&Use ~/.netrc"
 msgstr "&Usa ~/.netrc"
@@ -1771,8 +1789,9 @@ msgstr "&Continua"
 msgid "&Kill"
 msgstr "&Ferma"
 
+#, fuzzy
 msgid "Background jobs"
-msgstr ""
+msgstr "Processi in &background"
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1784,44 +1803,57 @@ msgstr "Dominio:"
 msgid "Username:"
 msgstr "Nome utente:"
 
+#, fuzzy
 msgid "SMB authentication"
-msgstr ""
+msgstr "Autenticazione fallita"
 
+#, fuzzy
 msgid "set &user ID on execution"
-msgstr ""
+msgstr "imposta UID"
 
+#, fuzzy
 msgid "set &group ID on execution"
-msgstr ""
+msgstr "imposta GID"
 
+#, fuzzy
 msgid "stick&y bit"
-msgstr ""
+msgstr "bit sticky"
 
+#, fuzzy
 msgid "&read by owner"
-msgstr ""
+msgstr "lettura (propriet.)"
 
+#, fuzzy
 msgid "&write by owner"
-msgstr ""
+msgstr "scrittura (propriet.)"
 
+#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr ""
+msgstr "esecuzione (propriet.)"
 
+#, fuzzy
 msgid "rea&d by group"
-msgstr ""
+msgstr "lettura (gruppo)"
 
+#, fuzzy
 msgid "write by grou&p"
-msgstr ""
+msgstr "scrittura (gruppo)"
 
+#, fuzzy
 msgid "execu&te/search by group"
-msgstr ""
+msgstr "esecuzione (gruppo)"
 
+#, fuzzy
 msgid "read &by others"
-msgstr ""
+msgstr "lettura (altri)"
 
+#, fuzzy
 msgid "wr&ite by others"
-msgstr ""
+msgstr "scrittura (altri)"
 
+#, fuzzy
 msgid "execute/searc&h by others"
-msgstr ""
+msgstr "esecuzione (altri)"
 
 msgid "Name:"
 msgstr "Nome:"
@@ -2186,18 +2218,24 @@ msgstr "Salta tutti"
 msgid "&Retry"
 msgstr "&Riprova"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
+"\n"
+"La directory non è vuota.\n"
+"Eliminarla ricorsivamente?"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "Background process:\n"
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
+"\n"
+"Processo in background: la directory non è vuota. \n"
+"Eliminarla ricorsivamente? "
 
 msgid "Non&e"
 msgstr "Nessun&o"
@@ -2467,8 +2505,9 @@ msgstr "Impossibile operare su \"..\"!"
 msgid "Sorry, I could not put the job in background"
 msgstr "Spiacente, non posso mettere il programma in background"
 
+#, fuzzy
 msgid "S&uspend"
-msgstr ""
+msgstr "&Sospende"
 
 msgid "Con&tinue"
 msgstr "Con&tinua"
@@ -2496,13 +2535,13 @@ msgstr "%ld B/s"
 msgid "Target file already exists!"
 msgstr " Il file obiettivo esiste già!"
 
-#, c-format
+#, fuzzy, c-format
 msgid "New     : %s, size %llu"
-msgstr ""
+msgstr "Data sorgen.: %s, dim. %llu"
 
-#, c-format
+#, fuzzy, c-format
 msgid "Existing: %s, size %llu"
-msgstr ""
+msgstr "Data sorgen.: %s, dim. %llu"
 
 msgid "Overwrite this target?"
 msgstr "Sovrascrivo questo file?"
@@ -2578,8 +2617,9 @@ msgstr "Conserva gli &attributi"
 msgid "Di&ve into subdir if exists"
 msgstr "Entra nella sub&dir se esiste"
 
+#, fuzzy
 msgid "&Stable symlinks"
-msgstr ""
+msgstr "Link simbolici &stabili"
 
 msgid "&Background"
 msgstr "&Background"
@@ -2669,8 +2709,9 @@ msgstr "Cercando"
 msgid "Change &to"
 msgstr "Cambia a"
 
+#, fuzzy
 msgid "&Free VFSs now"
-msgstr ""
+msgstr "Libera i &VFS"
 
 msgid "&Refresh"
 msgstr "&Rinfresco"
@@ -2848,8 +2889,9 @@ msgstr "Posizione:  %Xh:%Xh"
 msgid "&Equal split"
 msgstr "&Divisione schermo uguale"
 
+#, fuzzy
 msgid "&Menubar visible"
-msgstr ""
+msgstr "Mostra &barra menu "
 
 msgid "Command &prompt"
 msgstr "&Riga di comando"
@@ -2863,8 +2905,9 @@ msgstr "Mostra s&uggerimenti"
 msgid "&XTerm window title"
 msgstr "Titolo finestra &xterm"
 
+#, fuzzy
 msgid "&Show free space"
-msgstr ""
+msgstr "Mostra lo spa&zio libero"
 
 msgid "Panel split"
 msgstr "Divisione pannello"
@@ -3103,8 +3146,9 @@ msgstr "Su terminali stupidi (&Q)"
 msgid "Alwa&ys"
 msgstr "Sempre (&W)"
 
+#, fuzzy
 msgid "File operations"
-msgstr ""
+msgstr "Opzioni operazioni sui file"
 
 msgid "&Verbose operation"
 msgstr "Operazioni &prolisse"
@@ -3270,8 +3314,9 @@ msgstr "&Versione"
 msgid "sort|e"
 msgstr "e"
 
+#, fuzzy
 msgid "E&xtension"
-msgstr ""
+msgstr "&Estensione"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3716,7 +3761,7 @@ msgid "Data directory:"
 msgstr "Directory dei dati:"
 
 msgid "File extension handlers:"
-msgstr ""
+msgstr "Gestori estensioni dei file:"
 
 msgid "VFS plugins and scripts:"
 msgstr "Plugin e script VFS:"
@@ -3972,61 +4017,67 @@ msgstr ""
 "Attenzione: flag %c non valida in %s:\n"
 "%s\n"
 
-#, c-format
+#, fuzzy, c-format
 msgid "sftp: an error occured while reading %s: %s"
-msgstr "sftp: si è verificato un errore durante la lettura di %s: %s"
+msgstr ""
+"Si è verificato un errore durante la migrazione delle impostazioni "
+"dell'utente: %s"
 
 msgid "sftp: Unable to get current user name."
-msgstr "sftp: impossibile ottenere il nome utente corrente."
+msgstr ""
 
+#, fuzzy
 msgid "sftp: Invalid host name."
-msgstr "sftp: nome host non valido."
+msgstr "ftpfs: nome host non valido."
 
+#, fuzzy
 msgid "sftp: Invalid port value."
-msgstr "sftp: valore della porta non valido."
+msgstr "ftpfs: nome host non valido."
 
-#, c-format
+#, fuzzy, c-format
 msgid "sftp: %s"
-msgstr "sftp: %s"
+msgstr "ftpfs: %s"
 
-#, c-format
+#, fuzzy, c-format
 msgid "sftp: making connection to %s"
-msgstr "sftp: connessione a %s"
+msgstr "ftpfs: mi sto connettendo a %s"
 
+#, fuzzy
 msgid "sftp: connection interrupted by user"
-msgstr "sftp: connessione interrotta dall'utente"
+msgstr "ftpfs: connessione interrotta dall'utente"
 
-#, c-format
+#, fuzzy, c-format
 msgid "sftp: connection to server failed: %s"
-msgstr "sftp: connessione al server fallita: %s"
+msgstr "ftpfs: connessione al server fallita: %s"
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
-msgstr "sftp: inserire passphrase per %s"
+msgstr ""
 
 msgid "sftp: Passphrase is empty."
-msgstr "sftp: la passphrase è vuota."
+msgstr ""
 
-#, c-format
+#, fuzzy, c-format
 msgid "sftp: Enter password for %s "
-msgstr "sftp: inserire la password per %s"
+msgstr "ftpfs: spedizione password utente"
 
 msgid "sftp: Password is empty."
-msgstr "sftp: la password è vuota."
+msgstr ""
 
 #, c-format
 msgid "sftp: Failure establishing SSH session: (%d)"
-msgstr "sftp: fallita la creazione della sessione SSH: (%d)"
+msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
-msgstr "sftp: non è presente nessun file handler per la lettura del file"
+msgstr ""
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
-msgstr "sftp: (Ctrl-G blocca) elenco... %s"
+msgstr ""
 
+#, fuzzy
 msgid "sftp: Listing done."
-msgstr "sftp: elenco eseguito."
+msgstr "Modalità lista"
 
 #, c-format
 msgid "reconnect to %s failed"
@@ -4258,3 +4309,50 @@ msgstr "Ricerca conclusa"
 
 msgid "Continue from beginning?"
 msgstr "Continuare dall'inizio?"
+
+#~ msgid ""
+#~ "Copyright (C) 1996-2012 the Free Software Foundation\n"
+#~ "\n"
+#~ "            A user friendly text editor\n"
+#~ "         written for the Midnight Commander"
+#~ msgstr ""
+#~ "Copyright (C) 1996-2012 the Free Software Foundation\n"
+#~ "\n"
+#~ "            Un semplice editor di testo\n"
+#~ "         scritto per il Midnight Commander"
+
+#~ msgid "On"
+#~ msgstr "Su"
+
+#~ msgid "Mode"
+#~ msgstr "Modo"
+
+#~ msgid "%6d of %d"
+#~ msgstr "%6d di %d"
+
+#~ msgid "Case sensi&tive"
+#~ msgstr "Dis&tingui le maiuscole"
+
+#~ msgid "sec"
+#~ msgstr "sec"
+
+#~ msgid "Background Jobs"
+#~ msgstr "Processi in background"
+
+#~ msgid "Delete:"
+#~ msgstr "Elimina:"
+
+#~ msgid "Target date: %s, size %llu"
+#~ msgstr "Data destin.: %s, dim. %llu"
+
+#~ msgid "Case s&ensitive"
+#~ msgstr "Distingui le maiuscol&e"
+
+#~ msgid "Press all the keys mentioned here. After you have done it, check"
+#~ msgstr "Premere tutti i tasti riportati. Una volta fatto, controllare"
+
+#~ msgid "which keys are not marked with OK.  Press space on the missing"
+#~ msgstr "quali tasti non sono OK. Premere la barra spazio sui tasti"
+
+#~ msgid "key, or click with the mouse to define it. Move around with Tab."
+#~ msgstr "mancanti, o usare il mouse per ridefinirli. Spostarsi con il Tab."
