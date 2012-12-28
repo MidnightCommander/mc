@@ -1,3 +1,40 @@
+Version 4.8.1.7
+
+- Core
+
+  * Minimal GLib version is 2.12.0
+
+- VFS
+
+  * uc1541 extfs plug-in updated up to version 2.5 (#2935)
+
+- Editor
+
+  * Reset selection after text paste (only in non-persistent selection mode) (#2660)
+  * Don't indent blank lines (#303)
+  * Add .psgi as Perl syntax highlighting (#2912)
+
+- Misc
+
+  * Code cleanup (#2889, #1950) 
+  * Remove the empty contrib/dist/debian/ since it maintained separately in Debian (#2871)
+  * Highlight OGV files as media (#2934)
+  * Added new translations:
+    - Persian (fa)
+    - Croatian (hr)
+
+- Fixes
+
+  * Build failure on Cygwin (#2917)
+  * Fail to check ncurses library if --with-ncurses-inc and --with-ncurses-libs options are used (#2926)
+  * Crash on Solaris while trying to copy a file (#2906)
+  * Attributes of existing directories are never preserved when copying (#2924)
+  * Terminal settings are not changed when window is resized (#2198)
+  * Broken path completion on paths starting with ~/ (#2898)
+  * Enter into symlink to commpressed patch shows empty patch (#2910)
+  * Test failure on Cygwin due to incorrect linkage flag (#2918)
+  * Non-portable test (#2883)
+
 Version 4.8.1.6
 
 - Fixes
