@@ -1,3 +1,65 @@
+Version 4.8.7
+
+- Core
+
+  * Minimal GLib version is 2.12.0
+  * Implementation of suspend/resume in copy/move file operations (#2111)
+  * Start of widget subsystem reimplementation (#2919)
+
+- VFS
+
+  * uc1541 extfs plug-in updated up to version 2.5 (#2935)
+
+- Editor
+
+  * Reset selection after text paste (only in non-persistent selection mode) (#2660)
+  * Don't indent blank lines (#303).
+  * Add .psgi as Perl syntax highlighting (#2912)
+  * Place cursor after inserted chars (#319)
+  * Add option in ini file to save spelling language (spell_language=NONE for disable aspell support) (#2914)
+
+- Misc
+
+  * Code cleanup (#2888, #1950)
+  * Minimal "check" utility version is 0.9.8
+  * Remove the empty contrib/dist/debian/ since it maintained separately in Debian (#2871)
+  * mc.ext updates:
+    - add support of SVG images (#2895)
+    - add support of .asm file extension (#2892)
+    - add support of .hh file extension (#2892)
+    - all file extension for source files now are case insensitive (#2892)
+    - add support of JNG and MNG images (#2893)
+    - add support of Gnumeric's spreadsheets (#2894)
+    - add support of .war archives (#2891)
+    - make a choice between arj and unarj archivers (#2890)
+    - make a choice between 7z and 7za archivers (#2890)
+    - add support of ape, aac and wvm4a media formats (#2767)
+    - add support of cbr and cbz comic books (#2739)
+    - add support of epub e-book format (#2739)
+    - add support of PAR archives (#2739)
+    - use libreoffice instead of ooffice, if found, to open ODT files (#2723)
+    - use dvicat if dvi2tty not found to view DVI files (#1686)
+    - use 'see' utility as default pdf viewer, if found (#1686)
+    - use 'see' utility to view images in console (#1686)
+  * Highlight OGV files as media (#2934)
+  * Added new translations:
+    - Persian (fa)
+    - Croatian (hr)
+
+- Fixes
+
+  * Build failure on Cygwin (#2917)
+  * Fail to check ncurses library if --with-ncurses-inc and --with-ncurses-libs options are used (#2926)
+  * Crash on Solaris while trying to copy a file (#2906)
+  * CVE-2012-4463: Does not sanitize MC_EXT_SELECTED variable properly (#2913)
+  * Attributes of existing directories are never preserved when copying (#2924)
+  * Broken path completion on paths starting with ~/ (#2898)
+  * Terminal settings are not changed when window is resized (#2198)
+  * Enter into symlink to compressed patch shows empty patch (#2910)
+  * Test failure on Cygwin due to incorrect linkage flag (#2918)
+  * Non-portable test (#2883)
+
+
 Version 4.8.6
 
 - Fixes
