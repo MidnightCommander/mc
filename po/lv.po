@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: lv\n"
@@ -1367,17 +1367,14 @@ msgstr ""
 msgid "&Options"
 msgstr ""
 
-#, fuzzy
 msgid "&None"
-msgstr "Nekas"
+msgstr ""
 
-#, fuzzy
 msgid "&Dynamic paragraphing"
-msgstr "Dinamiska paragrāfošana"
+msgstr ""
 
-#, fuzzy
 msgid "Type &writer wrap"
-msgstr "Mašīnrakstīšanas iekļaušana"
+msgstr ""
 
 msgid "Wrap mode"
 msgstr "Iekļaušanas režīms"
@@ -1436,11 +1433,10 @@ msgstr ""
 msgid "Editor options"
 msgstr ""
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr "Ievadiet 'exit', lai atgrieztos Pusnakts Komandierī"
+msgstr ""
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
 msgstr ""
@@ -1618,17 +1614,14 @@ msgstr ""
 msgid "&UTF-8 output"
 msgstr ""
 
-#, fuzzy
 msgid "&Full 8 bits output"
-msgstr "Pilna 8 bitu izvade"
+msgstr ""
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO 8859-1"
+msgstr ""
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "7 biti"
+msgstr ""
 
 msgid "F&ull 8 bits input"
 msgstr "P&ilna 8 bitu ievade"
@@ -1645,21 +1638,17 @@ msgstr "a&tlasīt"
 msgid "Directory tree"
 msgstr ""
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "Taimauts atbrīvojot VFSas:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP anonymous password:"
-msgstr "anonīmā ftp parole:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "ftpfs direktorija keša taimauts:"
+msgstr ""
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "&Vienmēr lietot ftp proxy"
+msgstr ""
 
 msgid "&Use ~/.netrc"
 msgstr ""
@@ -1698,9 +1687,8 @@ msgstr "&Rezumēt"
 msgid "&Kill"
 msgstr "&Nokaut"
 
-#, fuzzy
 msgid "Background jobs"
-msgstr "Fona Darbi"
+msgstr ""
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1715,53 +1703,41 @@ msgstr "Lietotājvārds:"
 msgid "SMB authentication"
 msgstr ""
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "uzstād. liet. ID pie izpildes"
+msgstr ""
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "uzstād. grup. ID pie izpildes"
+msgstr ""
 
-#, fuzzy
 msgid "stick&y bit"
-msgstr "lipīgs"
+msgstr ""
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "lasīt īpašniekam"
+msgstr ""
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "rakstīt īpašniekam"
+msgstr ""
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "palaist/meklēt īpašniekam"
+msgstr ""
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "lasīt grupai"
+msgstr ""
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "rakstīt grupai"
+msgstr ""
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "palaist/meklēt grupai"
+msgstr ""
 
-#, fuzzy
 msgid "read &by others"
-msgstr "lasīt citiem"
+msgstr ""
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "rakstīt citiem"
+msgstr ""
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "palaist/meklēt citiem"
+msgstr ""
 
 msgid "Name:"
 msgstr ""
@@ -2323,9 +2299,8 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "At&likt"
+msgstr ""
 
 msgid "Con&tinue"
 msgstr "Tu&rpināt"
@@ -2435,9 +2410,8 @@ msgstr ""
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
-#, fuzzy
 msgid "&Stable symlinks"
-msgstr "&Stabilas Simbolsaites"
+msgstr ""
 
 msgid "&Background"
 msgstr "&Fonā"
@@ -2528,9 +2502,8 @@ msgstr "Meklēju"
 msgid "Change &to"
 msgstr ""
 
-#, fuzzy
 msgid "&Free VFSs now"
-msgstr "At&brīvot VFS tūlīt"
+msgstr ""
 
 msgid "&Refresh"
 msgstr ""
@@ -2705,9 +2678,8 @@ msgstr "Vieta:  %Xh:%Xh"
 msgid "&Equal split"
 msgstr "&Vienāds sadalījums"
 
-#, fuzzy
 msgid "&Menubar visible"
-msgstr "&Taustiņjosla redzama"
+msgstr ""
 
 msgid "Command &prompt"
 msgstr ""
@@ -2962,9 +2934,8 @@ msgstr ""
 msgid "Alwa&ys"
 msgstr "vien&Mēr"
 
-#, fuzzy
 msgid "File operations"
-msgstr "&Vārdiskas oprerācijās"
+msgstr ""
 
 msgid "&Verbose operation"
 msgstr "&Vārdiskas oprerācijās"
@@ -3125,9 +3096,8 @@ msgstr ""
 msgid "sort|e"
 msgstr ""
 
-#, fuzzy
 msgid "E&xtension"
-msgstr "&Paplašinājums"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3560,9 +3530,8 @@ msgstr ""
 msgid "Data directory:"
 msgstr ""
 
-#, fuzzy
 msgid "File extension handlers:"
-msgstr "&Paplašinājumu faila rediģēšana"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -4088,27 +4057,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "On"
-#~ msgstr "Ieslēgts"
-
-#~ msgid "Mode"
-#~ msgstr "Režīms"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d no %d"
-
-#~ msgid "sec"
-#~ msgstr "sek"
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr "Nospied visus šeit minētos taustiņus. Kad tas ir izdarīts, pārbaudi"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr ""
-#~ "kuri taustiņi nav atzīmēti kā OK. Nospiediet atstarpes taustiņu pie "
-#~ "trūkstošajiem"
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr ""
-#~ "taustiņu, vai klikšķini ar peli, lai to definētu. Kosties apkārt ar Tab."

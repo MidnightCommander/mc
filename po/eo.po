@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-04 05:53+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Keith Bowes <zooplah@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/projects/p/mc/language/"
 "eo/)\n"
@@ -728,7 +728,7 @@ msgid "Unknown error in child"
 msgstr "Nekonata eraro en ido"
 
 msgid "Child died unexpectedly"
-msgstr "Ido mortis neanticipe"
+msgstr "Ido mortis neatendite"
 
 msgid "Background protocol error"
 msgstr "Eraro ĉe fona protokolo"
@@ -1435,24 +1435,20 @@ msgstr "Fe&nestro"
 msgid "&Options"
 msgstr "&Agordo"
 
-#, fuzzy
 msgid "&None"
 msgstr "&Neniu"
 
-#, fuzzy
 msgid "&Dynamic paragraphing"
 msgstr "Dinamika &alineado"
 
-#, fuzzy
 msgid "Type &writer wrap"
 msgstr "&Tajpila linifaldo"
 
 msgid "Wrap mode"
 msgstr "Linifalda reĝimo"
 
-#, fuzzy
 msgid "Tabulation"
-msgstr "Inversa tabado: S-tabo"
+msgstr "Tabado"
 
 msgid "&Fake half tabs"
 msgstr "&Falsaj duontaboj"
@@ -1478,11 +1474,9 @@ msgstr "Konfirmi antaŭ &ol konservado"
 msgid "Save file &position"
 msgstr "Konservi dosieran &pozicion"
 
-#, fuzzy
 msgid "&Visible trailing spaces"
 msgstr "V&ideblaj postaj spacetoj"
 
-#, fuzzy
 msgid "Visible &tabs"
 msgstr "&Videblaj taboj"
 
@@ -1495,7 +1489,6 @@ msgstr ""
 msgid "Pers&istent selection"
 msgstr "&Daŭra elektado"
 
-#, fuzzy
 msgid "Cursor be&yond end of line"
 msgstr "Kursoro preter &linifino"
 
@@ -1508,14 +1501,15 @@ msgstr "Linifalda longo:"
 msgid "Editor options"
 msgstr "Redaktilaj agordaĵoj"
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr "Ĉu vi efektive volas eliri el Midnight Commander?"
+msgstr ""
+"Afabla tekstoredaktilo\n"
+"verkita por la Midnight Commander."
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
-msgstr ""
+msgstr "Kopirajto (C) 1996–2012 la Fondaĵo pri liberaj programoj"
 
 msgid "About"
 msgstr "Pri"
@@ -1697,21 +1691,17 @@ msgstr "Confirmation|&Historia purigado"
 msgid "Confirmation"
 msgstr "Konfirmo"
 
-#, fuzzy
 msgid "&UTF-8 output"
-msgstr "UTF-8-a eligo"
+msgstr "&UTF-8-a eligo"
 
-#, fuzzy
 msgid "&Full 8 bits output"
-msgstr "Plena 8-bita eligo"
+msgstr "&Plena 8-bita eligo"
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO-8859-1"
+msgstr "&ISO-8859-1"
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "7-bitaj"
+msgstr "7-&bitaj"
 
 msgid "F&ull 8 bits input"
 msgstr "&Plena 8-bita enmeto"
@@ -1728,21 +1718,17 @@ msgstr "&Elekti"
 msgid "Directory tree"
 msgstr "Dosieruja arbo"
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "Antaŭliberiga periodo:"
+msgstr "Periodo antaŭ ol liberigi virtualajn dosiersistemojn (sekunde):"
 
-#, fuzzy
 msgid "FTP anonymous password:"
 msgstr "sennoma FTP-pasvorto:"
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "ftpfs-dosierujo tenejo eksvalidiĝis:"
+msgstr "ftpfs-dosierujo tenejo eksvalidiĝos (sekunde):"
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "Ĉiam &uzi FTP-prokurilon"
+msgstr "Ĉiam &uzi FTP-retperanton:"
 
 msgid "&Use ~/.netrc"
 msgstr "Uzi je ~/.&netrc"
@@ -1751,7 +1737,7 @@ msgid "Use &passive mode"
 msgstr "Uzi &pasivan reĝimon"
 
 msgid "Use passive mode over pro&xy"
-msgstr "Uzi pasivan reĝimon &tra prokurilo"
+msgstr "Uzi pasivan reĝimon &tra retperanto"
 
 msgid "Virtual File System Setting"
 msgstr "Agordaĵoj pri virtualaj dosiersistemoj"
@@ -1780,7 +1766,6 @@ msgstr "&Rekomenci"
 msgid "&Kill"
 msgstr "&Mortigi"
 
-#, fuzzy
 msgid "Background jobs"
 msgstr "F&onaj taskoj"
 
@@ -1794,57 +1779,44 @@ msgstr "Domajno"
 msgid "Username:"
 msgstr "Salutnomo:"
 
-#, fuzzy
 msgid "SMB authentication"
-msgstr "Atestado malsukcesis"
+msgstr "SMB-atestado"
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "agordi uzantan identigilon dum plenumigo"
+msgstr "agordi &uzantan identigilon dum plenumigo"
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "agordi grupan identigilon dum plenumigo"
+msgstr "&agordi grupan identigilon dum plenumigo"
 
-#, fuzzy
 msgid "stick&y bit"
-msgstr "gluema bito"
+msgstr "&gluema bito"
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "legi laŭ estro"
+msgstr "&legi laŭ estro"
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "skribi laŭ estro"
+msgstr "&skribi laŭ estro"
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "plenumi/serĉi laŭ estro"
+msgstr "&plenumi/serĉi laŭ estro"
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "legi laŭ grupo"
+msgstr "l&egi laŭ grupo"
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "skribi laŭ grupo"
+msgstr "skribi laŭ g&rupo"
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "plenumi/serĉi laŭ grupo"
+msgstr "ple&numi/serĉi laŭ grupo"
 
-#, fuzzy
 msgid "read &by others"
-msgstr "legi laŭ aliaj"
+msgstr "leg&i laŭ aliaj"
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "skribi laŭ aliaj"
+msgstr "s&kribi laŭ aliaj"
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "plenumi/serĉi laŭ aliaj"
+msgstr "plenu&mi/serĉi laŭ aliaj"
 
 msgid "Name:"
 msgstr "Nomo:"
@@ -1880,7 +1852,7 @@ msgid "Set &groups"
 msgstr "Elekti &grupojn"
 
 msgid "Set &users"
-msgstr "Elekti &uzantojn"
+msgstr "&Elekti uzantojn"
 
 msgid "Name"
 msgstr "Nomo"
@@ -2140,26 +2112,26 @@ msgstr "Dosieroperacio|forigi"
 
 #, no-c-format
 msgid "%o %f \"%s\"%m"
-msgstr "%o %fn \"%s\"%m"
+msgstr "%o %f \"%s\"%m"
 
 #, no-c-format
 msgid "%o %d %f%m"
-msgstr "%o %d %fn%m"
+msgstr "%o %d %f%m"
 
 msgid "file"
-msgstr "dosiero"
+msgstr "dosieron"
 
 msgid "files"
-msgstr "dosieroj"
+msgstr "dosierojn"
 
 msgid "directory"
-msgstr "dosierujo"
+msgstr "dosierujon"
 
 msgid "directories"
-msgstr "dosierujoj"
+msgstr "dosierujojn"
 
 msgid "files/directories"
-msgstr "dosier(uj)oj"
+msgstr "dosier(uj)ojn"
 
 #. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
 msgid " with source mask:"
@@ -2209,23 +2181,22 @@ msgstr "Preter&lasi ĉion"
 msgid "&Retry"
 msgstr "&Reprovi"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\n"
-"Dosierujo ne vakas.\n"
+"Dosierujo \"%s\" ne vaka.\n"
 "Ĉu forigi ĝin funde?"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Background process:\n"
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\n"
-"Fona procezo: Dosierujo ne vakas.\n"
+"Fona procezo:\n"
+"Dosierujo \"%s\" ne vaka.\n"
 "Ĉu forigi ĝin funde?"
 
 msgid "Non&e"
@@ -2496,9 +2467,8 @@ msgstr "Ne eblas operacii je \"..\"!"
 msgid "Sorry, I could not put the job in background"
 msgstr "Bedaŭrinde mi ne povis meti la taskon en la fono"
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "&Paŭzi"
+msgstr ""
 
 msgid "Con&tinue"
 msgstr "&Daŭrigi"
@@ -2526,13 +2496,13 @@ msgstr "%ld B/s"
 msgid "Target file already exists!"
 msgstr "Cela dosiero jam ekzistas!"
 
-#, fuzzy, c-format
+#, c-format
 msgid "New     : %s, size %llu"
-msgstr "Fonta dato: %s, grando: %llu"
+msgstr "Nova    : %s, grando %llu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Existing: %s, size %llu"
-msgstr "Fonta dato: %s, grando: %llu"
+msgstr "Jama: %s, grando %llu"
 
 msgid "Overwrite this target?"
 msgstr "Ĉu anstataŭigi ĉi tiun celon?"
@@ -2608,7 +2578,6 @@ msgstr "Konservi &atributojn"
 msgid "Di&ve into subdir if exists"
 msgstr "Plo&nĝi en subdosierujon se ĝi ekzistas"
 
-#, fuzzy
 msgid "&Stable symlinks"
 msgstr "&Stabilaj molaj ligiloj"
 
@@ -2700,9 +2669,8 @@ msgstr "Serĉanta"
 msgid "Change &to"
 msgstr "Ŝanĝi al"
 
-#, fuzzy
 msgid "&Free VFSs now"
-msgstr "Nun liberigi virtualajn dosiersistemojn"
+msgstr "&Nun liberigi virtualajn dosiersistemojn"
 
 msgid "&Refresh"
 msgstr "&Refreŝigi"
@@ -2880,7 +2848,6 @@ msgstr "Loko:  %Xh:%Xh"
 msgid "&Equal split"
 msgstr "&Same granda"
 
-#, fuzzy
 msgid "&Menubar visible"
 msgstr "Menu&linio videbla"
 
@@ -2896,7 +2863,6 @@ msgstr "Kons&ilstrio videbla"
 msgid "&XTerm window title"
 msgstr "Fenestra titolo en &XTerm"
 
-#, fuzzy
 msgid "&Show free space"
 msgstr "Montri liberan spa&con"
 
@@ -2964,7 +2930,7 @@ msgid "Vie&w file..."
 msgstr "Vidi do&sieron..."
 
 msgid "&Filtered view"
-msgstr "Fil&trita vido"
+msgstr "&Filtrita vido"
 
 msgid "&Copy"
 msgstr "&Kopii"
@@ -2982,7 +2948,7 @@ msgid "Relative symlin&k"
 msgstr "&Relativa mola ligilo"
 
 msgid "Edit s&ymlink"
-msgstr "Redakti m&olan ligilon"
+msgstr "Re&dakti molan ligilon"
 
 msgid "Ch&own"
 msgstr "Ŝanĝi estre&con"
@@ -3006,7 +2972,7 @@ msgid "U&nselect group"
 msgstr "Malelekti gr&upon"
 
 msgid "&Invert selection"
-msgstr "&Inversigi elekton"
+msgstr "Inversigi elek&ton"
 
 msgid "E&xit"
 msgstr "&Eliri"
@@ -3042,13 +3008,13 @@ msgid "Command &history"
 msgstr "Komanda &historio"
 
 msgid "Di&rectory hotlist"
-msgstr "Dosie&ruja rapidolisto"
+msgstr "Dosieru&ja rapidolisto"
 
 msgid "&Active VFS list"
 msgstr "Listo de &aktivaj virtualaj dosiersistemoj"
 
 msgid "&Background jobs"
-msgstr "F&onaj taskoj"
+msgstr "Fo&naj taskoj"
 
 msgid "Screen lis&t"
 msgstr "&Paĝa listo"
@@ -3137,9 +3103,8 @@ msgstr "En sen&cerbaj terminaloj"
 msgid "Alwa&ys"
 msgstr "Ĉ&iam"
 
-#, fuzzy
 msgid "File operations"
-msgstr "Agordaĵoj pri dosiera manipulo"
+msgstr "Dosieraj operacioj"
 
 msgid "&Verbose operation"
 msgstr "&Klariga funkciado"
@@ -3154,7 +3119,7 @@ msgid "Mkdi&r autoname"
 msgstr "&Aŭtomate nomi novan dosierujon"
 
 msgid "Preallocate &space"
-msgstr "Generi &spacon antaŭ ol fari ion"
+msgstr "Generi spacon antaŭ o&l fari ion"
 
 msgid "Esc key mode"
 msgstr "Eskapo-klava reĝimo"
@@ -3190,7 +3155,7 @@ msgid "Rotating d&ash"
 msgstr "Turniĝanta &streko"
 
 msgid "Cd follows lin&ks"
-msgstr "Dosieruja ŝanĝo sekvas &ligilojn"
+msgstr "Dosieruja ŝanĝo sek&vas ligilojn"
 
 msgid "Sa&fe delete"
 msgstr "Sendanĝera &forigo"
@@ -3223,7 +3188,7 @@ msgid "Show &hidden files"
 msgstr "Montri kaŝita&jn dosierojn"
 
 msgid "&Fast dir reload"
-msgstr "&Rapide reŝargi dosierujojn"
+msgstr "Rapide reŝar&gi dosierujojn"
 
 msgid "Ma&rk moves down"
 msgstr "Mar&ko movas suben"
@@ -3304,7 +3269,6 @@ msgstr "&Eldono"
 msgid "sort|e"
 msgstr "sort|a"
 
-#, fuzzy
 msgid "E&xtension"
 msgstr "&Aldonaĵo"
 
@@ -3629,6 +3593,9 @@ msgid ""
 "which keys are not marked with OK. Press space on the missing\n"
 "key, or click with the mouse to define it. Move around with Tab."
 msgstr ""
+"Premu ĉiujn el la klavoj menciitaj supre. Post tiu faro, kontrolu kiujn\n"
+"klavojn estos markitaj per \"Bone\". Premu la spacetklavon por manka\n"
+"klavo aŭ alklaku per muso por difini ĝin. Movi inter la eroj per tabo."
 
 #, c-format
 msgid ""
@@ -3751,9 +3718,8 @@ msgstr "Agorda dosierujo:"
 msgid "Data directory:"
 msgstr "Datuma dosierujo:"
 
-#, fuzzy
 msgid "File extension handlers:"
-msgstr "Redakti &sufikso-dosieron"
+msgstr "Dosiersufiksaj traktiloj:"
 
 msgid "VFS plugins and scripts:"
 msgstr "Kromprogramoj kaj programetoj por VFS:"
@@ -3809,7 +3775,7 @@ msgid ""
 "Unexpected end of file\n"
 "%s"
 msgstr ""
-"Neanticipa dosierfino\n"
+"Neatendita dosierfino\n"
 "%s"
 
 #, c-format
@@ -4104,7 +4070,7 @@ msgid "Inconsistent tar archive"
 msgstr "Malkonsekvenca tar-dosiero"
 
 msgid "Unexpected EOF on archive file"
-msgstr "Neanticipita dosierfino en dosiero"
+msgstr "Neatendita dosierfino en dosiero"
 
 #, c-format
 msgid ""
@@ -4295,55 +4261,3 @@ msgstr "Serĉo finita"
 
 msgid "Continue from beginning?"
 msgstr "Ĉu deiri de la komenco?"
-
-#~ msgid ""
-#~ "Copyright (C) 1996-2012 the Free Software Foundation\n"
-#~ "\n"
-#~ "            A user friendly text editor\n"
-#~ "         written for the Midnight Commander"
-#~ msgstr ""
-#~ "Kopirajto (C) 1996–2012 la Free Software Foundation\n"
-#~ "\n"
-#~ "         Agrabla tekstoredaktilo\n"
-#~ "     verkita por la Midnight Commander"
-
-#~ msgid "On"
-#~ msgstr "ĉe"
-
-#~ msgid "Mode"
-#~ msgstr "Reĝimo"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d el %d"
-
-#~ msgid "Case sensi&tive"
-#~ msgstr "Ne ignori u&sklecon"
-
-#~ msgid "sec"
-#~ msgstr "sek"
-
-#~ msgid "Background Jobs"
-#~ msgstr "Fonaj taskoj"
-
-#~ msgid "Delete:"
-#~ msgstr "Forigi:"
-
-#~ msgid "Target date: %s, size %llu"
-#~ msgstr "Cela dato: %s, grando: %llu"
-
-#~ msgid "Case s&ensitive"
-#~ msgstr "Ne ignori uskl&econ"
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr "Premu ĉiujn la klavojn menciitajn ĉi tie. Post kiam vi faris tion,"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr ""
-#~ "kontrolu kiujn klavojn ne estas markitajn per \"Bone\". Premu spaceton ĉe"
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr ""
-#~ "la manka klavo, aŭ klaku per la muso por difini ĝin. Dismovu per tabo."
-
-#~ msgid "fish: storing zeros"
-#~ msgstr "fish: konservanta nulojn"

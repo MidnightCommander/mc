@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 13:14+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 15:01+0000\n"
 "Last-Translator: Rezső Páder <rezso@rezso.net>\n"
 "Language-Team: Hungarian (http://www.transifex.com/projects/p/mc/language/"
 "hu/)\n"
@@ -1420,24 +1420,20 @@ msgstr "&Ablak"
 msgid "&Options"
 msgstr "Beállítás&ok"
 
-#, fuzzy
 msgid "&None"
-msgstr "Nincs"
+msgstr "&Nincs"
 
-#, fuzzy
 msgid "&Dynamic paragraphing"
-msgstr "Dinamikus bekezdések"
+msgstr ""
 
-#, fuzzy
 msgid "Type &writer wrap"
-msgstr "Sortörés"
+msgstr ""
 
 msgid "Wrap mode"
 msgstr "Tördelés"
 
-#, fuzzy
 msgid "Tabulation"
-msgstr "Navigálás"
+msgstr ""
 
 msgid "&Fake half tabs"
 msgstr "Hamis &fél-tabulátorok"
@@ -1463,13 +1459,11 @@ msgstr "M&entés előtt megerősítés"
 msgid "Save file &position"
 msgstr "Fájlbeli &pozíció mentése"
 
-#, fuzzy
 msgid "&Visible trailing spaces"
-msgstr "Látható sorvégi szóközök"
+msgstr ""
 
-#, fuzzy
 msgid "Visible &tabs"
-msgstr "Látható tabulátorok"
+msgstr ""
 
 msgid "Synta&x highlighting"
 msgstr "&Szintaktikus szövegkiemelés"
@@ -1480,9 +1474,8 @@ msgstr ""
 msgid "Pers&istent selection"
 msgstr "Tartós kijelölés"
 
-#, fuzzy
 msgid "Cursor be&yond end of line"
-msgstr "Kurzor a sor vége mögött"
+msgstr ""
 
 msgid "&Group undo"
 msgstr "C&soportos visszavonás"
@@ -1493,14 +1486,13 @@ msgstr "Sortörési pozíció:"
 msgid "Editor options"
 msgstr "A szövegszerkesztő beállításai"
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr "Valóban ki szeretne lépni a Midnight Commanderből?"
+msgstr ""
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1996-2012 the Free Software Foundation"
 
 msgid "About"
 msgstr "Névjegy"
@@ -1682,21 +1674,17 @@ msgstr "Confirmation|&Történet törlés"
 msgid "Confirmation"
 msgstr "Rákérdezés"
 
-#, fuzzy
 msgid "&UTF-8 output"
-msgstr "UTF-8 kijelzés"
+msgstr "&UTF-8 kimenet"
 
-#, fuzzy
 msgid "&Full 8 bits output"
-msgstr "8 bites kijelzés"
+msgstr "&Teljes 8 bites kimenet"
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO 8859-1"
+msgstr "&ISO 8859-1"
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "7 bites kijelzés"
+msgstr "7 &bit"
 
 msgid "F&ull 8 bits input"
 msgstr "&8 bites bevitel"
@@ -1713,21 +1701,17 @@ msgstr "&Kiválaszt"
 msgid "Directory tree"
 msgstr "Könyvtárfa"
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "VFS-felszabadítási idő:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP anonymous password:"
-msgstr "Anonymous FTP jelszava:"
+msgstr "FTP anonymous jelszó:"
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "Ftpfs-könyvtárgyorstár elévülése:"
+msgstr "FTP könyvtár gyorsítótár lejárata (mp):"
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "FTP-&proxy állandó használata"
+msgstr "FTP proxy használata &mindig "
 
 msgid "&Use ~/.netrc"
 msgstr "~/.&netrc használata"
@@ -1765,7 +1749,6 @@ msgstr "&Folytat"
 msgid "&Kill"
 msgstr "&Töröl"
 
-#, fuzzy
 msgid "Background jobs"
 msgstr "Háttérfolyamatok"
 
@@ -1779,57 +1762,44 @@ msgstr "Tartomány:"
 msgid "Username:"
 msgstr "Felhasználónév:"
 
-#, fuzzy
 msgid "SMB authentication"
-msgstr "Azonosítás sikertelen"
+msgstr "SMB hitelesítés"
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "\"Set-UID\" bit (más UID)"
+msgstr "&felhasználó-azonosító beállítása végrehajtáskor"
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "\"Set-GID\" bit (más GID)"
+msgstr "&csoport-azonosító beállítása végrehajtáskor"
 
-#, fuzzy
 msgid "stick&y bit"
-msgstr "\"Sticky\"  bit (ragadós)"
+msgstr "stick&y bit"
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "tulajdonos: olvas"
+msgstr "tulajdonos &olvashatja"
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "tulajdonos: ír"
+msgstr "tulajdonos í&rhatja"
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "tulajdonos: futtat/belép"
+msgstr "tulajdonos &futtathatja/keresheti"
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "csoport   : olvas"
+msgstr "csoport olvashatja"
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "csoport   : ír"
+msgstr "csoport írhatja"
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "csoport   : futtat/belép"
+msgstr "csoport futtathatja/keresheti"
 
-#, fuzzy
 msgid "read &by others"
-msgstr "mások     : olvas"
+msgstr "mások olvashatják"
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "mások     : ír"
+msgstr "mások írhatják"
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "mások     : futtat/belép"
+msgstr "mások futtathatják/kereshetik"
 
 msgid "Name:"
 msgstr "Név:"
@@ -2194,24 +2164,18 @@ msgstr "Ö&sszes kihagyása"
 msgid "&Retry"
 msgstr "Új&ra"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\n"
-"Nem üres a könyvtár.   \n"
-"Törölni kívánja a tartalmával együtt?"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Background process:\n"
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\n"
-"Háttérfolyamat: nem üres a könyvtár. \n"
-"Törölni kívánja a tartalmával együtt?"
 
 msgid "Non&e"
 msgstr "&Egyiket sem"
@@ -2484,9 +2448,8 @@ msgstr "A \"..\" könyvtárral ez nem lehetséges!"
 msgid "Sorry, I could not put the job in background"
 msgstr "Nem tudtam a feladatot a háttérben végezni"
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "F&elfüggesztés"
+msgstr ""
 
 msgid "Con&tinue"
 msgstr "&Folytatás"
@@ -2514,13 +2477,13 @@ msgstr "%ld B/s"
 msgid "Target file already exists!"
 msgstr "A célfájl már létezik!"
 
-#, fuzzy, c-format
+#, c-format
 msgid "New     : %s, size %llu"
-msgstr "Forrásfájl dátuma: %s, mérete: %llu"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Existing: %s, size %llu"
-msgstr "Forrásfájl dátuma: %s, mérete: %llu"
+msgstr ""
 
 msgid "Overwrite this target?"
 msgstr "Felülírja ezt a fájlt?"
@@ -2596,9 +2559,8 @@ msgstr "&Attribútumok megőrzése"
 msgid "Di&ve into subdir if exists"
 msgstr "Lét&ező könyvtárba lemenni"
 
-#, fuzzy
 msgid "&Stable symlinks"
-msgstr "S&tabil szimbolikus linkek"
+msgstr ""
 
 msgid "&Background"
 msgstr "Háttér&ben"
@@ -2688,9 +2650,8 @@ msgstr "Keresés"
 msgid "Change &to"
 msgstr "&Belépés"
 
-#, fuzzy
 msgid "&Free VFSs now"
-msgstr "VFS fels&zabadítása"
+msgstr ""
 
 msgid "&Refresh"
 msgstr "F&rissítés"
@@ -2868,9 +2829,8 @@ msgstr "Hely:         %Xh:%Xh"
 msgid "&Equal split"
 msgstr "S&zimmetrikus elosztás"
 
-#, fuzzy
 msgid "&Menubar visible"
-msgstr "Főme&nü"
+msgstr "&Menüsor látható"
 
 msgid "Command &prompt"
 msgstr "&Parancssor aktív"
@@ -2884,9 +2844,8 @@ msgstr "&Tippek"
 msgid "&XTerm window title"
 msgstr "&Xterm-ablakcím"
 
-#, fuzzy
 msgid "&Show free space"
-msgstr "&Szabad hely kijelzés"
+msgstr "&Szabad hely mutatása"
 
 msgid "Panel split"
 msgstr "Panelosztás"
@@ -3125,9 +3084,8 @@ msgstr "Gagyi &terminálokon"
 msgid "Alwa&ys"
 msgstr "Min&dig"
 
-#, fuzzy
 msgid "File operations"
-msgstr "Fájl művelet opciók"
+msgstr "Fájlműveletek"
 
 msgid "&Verbose operation"
 msgstr "Részletes ü&zenetek"
@@ -3291,9 +3249,8 @@ msgstr "&Verzió"
 msgid "sort|e"
 msgstr "sort|k"
 
-#, fuzzy
 msgid "E&xtension"
-msgstr "&Kiterjesztés"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3737,9 +3694,8 @@ msgstr "Beállítások könyvtára:"
 msgid "Data directory:"
 msgstr "Adatok könyvtára:"
 
-#, fuzzy
 msgid "File extension handlers:"
-msgstr "Kiter&jesztésfájl szerkesztése"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr "VFS pluginek és scriptek:"
@@ -4281,55 +4237,3 @@ msgstr "Keresés kész"
 
 msgid "Continue from beginning?"
 msgstr "Folytatás az elejéről?"
-
-#~ msgid ""
-#~ "Copyright (C) 1996-2012 the Free Software Foundation\n"
-#~ "\n"
-#~ "            A user friendly text editor\n"
-#~ "         written for the Midnight Commander"
-#~ msgstr ""
-#~ "Copyright (C) 1996-2012 the Free Software Foundation\n"
-#~ "\n"
-#~ "            Felhasználóbarát szövegszerkesztő\n"
-#~ "           a Midnight Commander-hez készítve"
-
-#~ msgid "On"
-#~ msgstr "Be"
-
-#~ msgid "Mode"
-#~ msgstr "Mód"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d / %d"
-
-#~ msgid "Case sensi&tive"
-#~ msgstr "&Kis/nagybetű számít"
-
-#~ msgid "sec"
-#~ msgstr "s"
-
-#~ msgid "Background Jobs"
-#~ msgstr "Háttérfolyamatok"
-
-#~ msgid "Delete:"
-#~ msgstr "Törlés:"
-
-#~ msgid "Target date: %s, size %llu"
-#~ msgstr "Célfájl dátuma:    %s, mérete: %llu"
-
-#~ msgid "Case s&ensitive"
-#~ msgstr "&Kis-/nagybetű számít"
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr "Nyomja meg egyenként a felsorolt billentyűket, majd nézze meg, hogy"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr ""
-#~ "melyek nem lettek \"OK\"-val megjelölve. Ezek beállításához használja"
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr ""
-#~ "a Szóközt vagy kattintson a billentyűnévre. Ugrás: \"Tab\" billentyű."
-
-#~ msgid "fish: storing zeros"
-#~ msgstr "fish: nullák tárolása"

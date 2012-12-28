@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 13:45+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 17:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/projects/p/mc/language/pl/)\n"
 "Language: pl\n"
@@ -1442,24 +1442,20 @@ msgstr "&Okno"
 msgid "&Options"
 msgstr "&Opcje"
 
-#, fuzzy
 msgid "&None"
-msgstr "Brak"
+msgstr "&Brak"
 
-#, fuzzy
 msgid "&Dynamic paragraphing"
-msgstr "Dynamiczne akapity"
+msgstr "&Dynamiczne akapity"
 
-#, fuzzy
 msgid "Type &writer wrap"
-msgstr "Maszyna do pisania"
+msgstr "&Maszyna do pisania"
 
 msgid "Wrap mode"
 msgstr "Tryb zawijania"
 
-#, fuzzy
 msgid "Tabulation"
-msgstr "Wsteczna tabulacja/S-tab"
+msgstr "Tabulacja"
 
 msgid "&Fake half tabs"
 msgstr "&Połówki tabulacji"
@@ -1485,26 +1481,23 @@ msgstr "Potwierdzenie przed zapisanie&m"
 msgid "Save file &position"
 msgstr "Zapisanie po&zycji pliku"
 
-#, fuzzy
 msgid "&Visible trailing spaces"
-msgstr "Widoczne spacje kończące"
+msgstr "&Widoczne spacje kończące"
 
-#, fuzzy
 msgid "Visible &tabs"
-msgstr "Widoczne tabulacje"
+msgstr "Widoczne &tabulacje"
 
 msgid "Synta&x highlighting"
 msgstr "&Wyróżnianie elementów składni"
 
 msgid "C&ursor after inserted block"
-msgstr ""
+msgstr "K&ursor po wstawionym bloku"
 
 msgid "Pers&istent selection"
 msgstr "Trwałe zaznaczen&ie"
 
-#, fuzzy
 msgid "Cursor be&yond end of line"
-msgstr "Kursor poza końcem wiersza"
+msgstr "Kursor &poza końcem wiersza"
 
 msgid "&Group undo"
 msgstr "&Grupowe cofnięcie"
@@ -1515,14 +1508,15 @@ msgstr "Punkt łamania wiersza:"
 msgid "Editor options"
 msgstr "Opcje edytora"
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr "Na pewno zakończyć program Midnight Commander?"
+msgstr ""
+"Przyjazny dla użytkownika edytor tekstu,\n"
+"napisany dla programu Midnight Commander"
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1996-2012 Free Software Foundation"
 
 msgid "About"
 msgstr "O programie"
@@ -1703,21 +1697,17 @@ msgstr "Wyczyszczenie &historii"
 msgid "Confirmation"
 msgstr "Potwierdzenia"
 
-#, fuzzy
 msgid "&UTF-8 output"
-msgstr "Wyjście UTF-8"
+msgstr "Wyjście &UTF-8"
 
-#, fuzzy
 msgid "&Full 8 bits output"
-msgstr "Pełne wyjście 8 bitowe"
+msgstr "&Pełne wyjście 8 bitowe"
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO 8859-1"
+msgstr "&ISO 8859-1"
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "7 bitowe"
+msgstr "7 &bitowe"
 
 msgid "F&ull 8 bits input"
 msgstr "P&ełne wejście 8 bitowe"
@@ -1734,21 +1724,17 @@ msgstr "&Wybierz"
 msgid "Directory tree"
 msgstr "Drzewo katalogów"
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "Opóźnienie zwalniania VFS:"
+msgstr "Opóźnienie zwalniania VFS (w sekundach):"
 
-#, fuzzy
 msgid "FTP anonymous password:"
 msgstr "Hasło anonimowego FTP:"
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "Czas katalogów w pamięci podręcznej:"
+msgstr "Czas oczekiwania pamięci podręcznej katalogu FTP (w sekundach):"
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "Za&wsze używaj pośrednika FTP"
+msgstr "Z&awsze używanie pośrednika FTP:"
 
 msgid "&Use ~/.netrc"
 msgstr "&Użycie pliku ~/.netrc"
@@ -1786,9 +1772,8 @@ msgstr "&Wznów"
 msgid "&Kill"
 msgstr "Za&bij"
 
-#, fuzzy
 msgid "Background jobs"
-msgstr "Zadania w &tle"
+msgstr "Zadania w tle"
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1800,57 +1785,44 @@ msgstr "Domena:"
 msgid "Username:"
 msgstr "Nazwa użytkownika:"
 
-#, fuzzy
 msgid "SMB authentication"
-msgstr "Uwierzytelnienie się nie powiodło"
+msgstr "Uwierzytelnianie SMB"
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "ustaw UID przy wykonaniu"
+msgstr "ustaw &UID przy wykonaniu"
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "ustaw GID przy wykonaniu"
+msgstr "ustaw &GID przy wykonaniu"
 
-#, fuzzy
 msgid "stick&y bit"
-msgstr "bit \"lepkości\""
+msgstr "bit \"&lepkości\""
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "odczytywanie przez właśc."
+msgstr "&odczytywanie przez właśc."
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "zapisywanie przez właśc."
+msgstr "&zapisywanie przez właśc."
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "wykonywanie przez właśc."
+msgstr "w&ykonywanie/przeszukiwanie przez właśc."
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "odczytywanie przez grupę"
+msgstr "o&dczytywanie przez grupę"
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "zapisywanie przez grupę"
+msgstr "za&pisywanie przez grupę"
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "wykonywanie przez grupę"
+msgstr "wy&konywanie/przeszukiwanie przez grupę"
 
-#, fuzzy
 msgid "read &by others"
-msgstr "odczytywanie przez innych"
+msgstr "od&czytywanie przez innych"
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "zapisywanie przez innych"
+msgstr "zap&isywanie przez innych"
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "wykonywanie przez innych"
+msgstr "wyko&nywanie/przeszukiwanie przez innych"
 
 msgid "Name:"
 msgstr "Nazwa:"
@@ -2215,24 +2187,23 @@ msgstr "&Pomiń wszystko"
 msgid "&Retry"
 msgstr "P&onów"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\n"
-"Katalog nie jest pusty.\n"
+"Katalog \"%s\" nie jest pusty.\n"
 "Usunąć go rekurencyjnie?"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Background process:\n"
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\n"
-"Proces w tle: katalog nie jest pusty.\n"
-"Usunąć go rekurencyjnie? "
+"Proces w tle:\n"
+"Katalog \"%s\" nie jest pusty.\n"
+"Usunąć go rekurencyjnie?"
 
 msgid "Non&e"
 msgstr "Br&ak"
@@ -2502,9 +2473,8 @@ msgstr "Nie można wykonać działania na \"..\"."
 msgid "Sorry, I could not put the job in background"
 msgstr "Nie można umieścić zadania w tle"
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "W&strzymaj"
+msgstr "&Uśpij"
 
 msgid "Con&tinue"
 msgstr "Kon&tynuuj"
@@ -2532,13 +2502,13 @@ msgstr "%ld B/s"
 msgid "Target file already exists!"
 msgstr "Plik docelowy już istnieje."
 
-#, fuzzy, c-format
+#, c-format
 msgid "New     : %s, size %llu"
-msgstr "Data źródłowa: %s, rozmiar %llu"
+msgstr "Nowy     : %s, rozmiar %llu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Existing: %s, size %llu"
-msgstr "Data źródłowa: %s, rozmiar %llu"
+msgstr "Istniejący: %s, rozmiar %llu"
 
 msgid "Overwrite this target?"
 msgstr "Zastąpić ten plik docelowy?"
@@ -2614,9 +2584,8 @@ msgstr "&Zachowanie atrybutów"
 msgid "Di&ve into subdir if exists"
 msgstr "&Schodzenie do podkat., jeśli istnieją"
 
-#, fuzzy
 msgid "&Stable symlinks"
-msgstr "Zachowanie dowiązań s&ymbolicznych"
+msgstr "&Stabilne dowiązania symboliczne"
 
 msgid "&Background"
 msgstr "&W tle"
@@ -2707,9 +2676,8 @@ msgstr "Wyszukiwanie"
 msgid "Change &to"
 msgstr "Zmień &na"
 
-#, fuzzy
 msgid "&Free VFSs now"
-msgstr "Zwolnij &VFS"
+msgstr "Z&wolnij VFS"
 
 msgid "&Refresh"
 msgstr "&Odśwież"
@@ -2889,7 +2857,6 @@ msgstr "Położenie:  %Xh:%Xh"
 msgid "&Equal split"
 msgstr "Równy &podział"
 
-#, fuzzy
 msgid "&Menubar visible"
 msgstr "Pasek &menu"
 
@@ -2905,7 +2872,6 @@ msgstr "Pasek &porad"
 msgid "&XTerm window title"
 msgstr "Tytuł okna &Xterm"
 
-#, fuzzy
 msgid "&Show free space"
 msgstr "Wyświetla&nie wolnego miejsca"
 
@@ -3147,9 +3113,8 @@ msgstr "Na prostych &terminalach"
 msgid "Alwa&ys"
 msgstr "&Zawsze"
 
-#, fuzzy
 msgid "File operations"
-msgstr "Opcje działań na plikach"
+msgstr "Działania na plikach"
 
 msgid "&Verbose operation"
 msgstr "&Więcej informacje o działaniu"
@@ -3314,7 +3279,6 @@ msgstr "&Wersja"
 msgid "sort|e"
 msgstr "e"
 
-#, fuzzy
 msgid "E&xtension"
 msgstr "Rozsz&erzenie"
 
@@ -3640,6 +3604,10 @@ msgid ""
 "which keys are not marked with OK. Press space on the missing\n"
 "key, or click with the mouse to define it. Move around with Tab."
 msgstr ""
+"Proszę nacisnąć wszystkie wymienione tutaj klawisze. Po zrobieniu\n"
+"tego proszę sprawdzić, które klawisze nie są oznaczone jako OK.\n"
+"Proszę nacisnąć spację na brakującym klawiszu lub nacisnąć przycisk\n"
+"myszy, aby go określić. Można się przemieszczać za pomocą klawisza Tab."
 
 #, c-format
 msgid ""
@@ -3762,9 +3730,8 @@ msgstr "Katalog konfiguracji:"
 msgid "Data directory:"
 msgstr "Katalog danych:"
 
-#, fuzzy
 msgid "File extension handlers:"
-msgstr "Zmodyfikuj plik rozsz&erzeń"
+msgstr "Obsługa rozszerzeń plików:"
 
 msgid "VFS plugins and scripts:"
 msgstr "Wtyczki i skrypty VFS:"
@@ -4306,56 +4273,3 @@ msgstr "Ukończono wyszukiwanie"
 
 msgid "Continue from beginning?"
 msgstr "Kontynuować od początku?"
-
-#~ msgid ""
-#~ "Copyright (C) 1996-2012 the Free Software Foundation\n"
-#~ "\n"
-#~ "            A user friendly text editor\n"
-#~ "         written for the Midnight Commander"
-#~ msgstr ""
-#~ " Copyright (C) 1996-2012 Free Software Foundation\n"
-#~ "\n"
-#~ "    Przyjazny dla użytkownika edytor tekstu, napisany\n"
-#~ "         dla programu Midnight Commander"
-
-#~ msgid "On"
-#~ msgstr "Na"
-
-#~ msgid "Mode"
-#~ msgstr "Tryb"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d z %d"
-
-#~ msgid "Case sensi&tive"
-#~ msgstr "Rozróżnianie wielkości"
-
-#~ msgid "sec"
-#~ msgstr "sek."
-
-#~ msgid "Background Jobs"
-#~ msgstr "Zadania w tle"
-
-#~ msgid "Delete:"
-#~ msgstr "Usunięcie:"
-
-#~ msgid "Target date: %s, size %llu"
-#~ msgstr "Data docelowa: %s, rozmiar %llu"
-
-#~ msgid "Case s&ensitive"
-#~ msgstr "Rozróżnianie wi&elkości"
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr ""
-#~ "Należy nacisnąć każdy z wypisanych tu klawiszy, a następnie sprawdzić,"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr ""
-#~ "które nie są oznaczone jako \"OK\". Naciśnięcie spacji na brakującym"
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr ""
-#~ "klawiszu lub kliknięcie określi go. Poruszanie za pomocą klawisza Tab."
-
-#~ msgid "fish: storing zeros"
-#~ msgstr "fish: wysyłanie zer"

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/mc/"
 "language/zh_CN/)\n"
@@ -1413,24 +1413,20 @@ msgstr ""
 msgid "&Options"
 msgstr "选项(&O) "
 
-#, fuzzy
 msgid "&None"
-msgstr "无"
+msgstr ""
 
-#, fuzzy
 msgid "&Dynamic paragraphing"
-msgstr "动态划分段落"
+msgstr ""
 
-#, fuzzy
 msgid "Type &writer wrap"
-msgstr "打字机换行"
+msgstr ""
 
 msgid "Wrap mode"
 msgstr "换行模式"
 
-#, fuzzy
 msgid "Tabulation"
-msgstr "后退制表 S-tab "
+msgstr ""
 
 msgid "&Fake half tabs"
 msgstr "模拟半个制表符(&F)"
@@ -1456,13 +1452,11 @@ msgstr "保存前确认(&M)"
 msgid "Save file &position"
 msgstr "保存文件位置(&P)"
 
-#, fuzzy
 msgid "&Visible trailing spaces"
-msgstr "可见的后缀空白"
+msgstr ""
 
-#, fuzzy
 msgid "Visible &tabs"
-msgstr "制表符可见"
+msgstr ""
 
 msgid "Synta&x highlighting"
 msgstr "语法突出显示(&X)"
@@ -1473,9 +1467,8 @@ msgstr ""
 msgid "Pers&istent selection"
 msgstr "永久选择(&I)"
 
-#, fuzzy
 msgid "Cursor be&yond end of line"
-msgstr "光标超出行末尾"
+msgstr ""
 
 msgid "&Group undo"
 msgstr "组撤消 (&G)"
@@ -1486,11 +1479,10 @@ msgstr "换行位置："
 msgid "Editor options"
 msgstr "编辑器选项"
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr "您真的要退出 Midnight Commander吗？"
+msgstr ""
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
 msgstr ""
@@ -1674,21 +1666,17 @@ msgstr "Confirmation|清除历史(&H)"
 msgid "Confirmation"
 msgstr "确认"
 
-#, fuzzy
 msgid "&UTF-8 output"
-msgstr "UTF-8输出"
+msgstr ""
 
-#, fuzzy
 msgid "&Full 8 bits output"
-msgstr "全8位输出"
+msgstr ""
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO 8859-1"
+msgstr ""
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "7 位"
+msgstr ""
 
 msgid "F&ull 8 bits input"
 msgstr "全8位输入(&U)"
@@ -1705,21 +1693,17 @@ msgstr "选择(&S)"
 msgid "Directory tree"
 msgstr "目录树"
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "释放 VFS 的超时值："
+msgstr ""
 
-#, fuzzy
 msgid "FTP anonymous password:"
-msgstr "ftp 匿名登录口令："
+msgstr ""
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "ftpfs 目录缓存超时值："
+msgstr ""
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "总是使用 ftp 代理(&A)"
+msgstr ""
 
 msgid "&Use ~/.netrc"
 msgstr "使用~/.netrc(&U)"
@@ -1757,9 +1741,8 @@ msgstr "恢复(&R)"
 msgid "&Kill"
 msgstr "杀死(&K)"
 
-#, fuzzy
 msgid "Background jobs"
-msgstr "后台任务（——B）"
+msgstr ""
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1771,57 +1754,44 @@ msgstr "域："
 msgid "Username:"
 msgstr "用户名："
 
-#, fuzzy
 msgid "SMB authentication"
-msgstr "验证失败"
+msgstr ""
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "执行时设置用户 ID"
+msgstr ""
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "执行时设置群组 ID"
+msgstr ""
 
-#, fuzzy
 msgid "stick&y bit"
-msgstr "粘附位"
+msgstr ""
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "可被所有者读"
+msgstr ""
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "可被所有者写"
+msgstr ""
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "可被所有者执行/搜索"
+msgstr ""
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "可被群组读"
+msgstr ""
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "可被群组写"
+msgstr ""
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "可被群组执行/搜索"
+msgstr ""
 
-#, fuzzy
 msgid "read &by others"
-msgstr "可被他人读"
+msgstr ""
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "可被他人写"
+msgstr ""
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "可被他人执行/搜索"
+msgstr ""
 
 msgid "Name:"
 msgstr "名字："
@@ -2181,24 +2151,18 @@ msgstr "路过全部 (&I)"
 msgid "&Retry"
 msgstr "重试(&R)"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\n"
-"目录非空。\n"
-"递归删除它？"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Background process:\n"
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\n"
-"后台进程：目录非空 \n"
-"递归删除它？"
 
 msgid "Non&e"
 msgstr "无(&E)"
@@ -2468,9 +2432,8 @@ msgstr "无法操作\"..\"！"
 msgid "Sorry, I could not put the job in background"
 msgstr "抱歉，无法将任务放到后台"
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "挂起(&S)"
+msgstr ""
 
 msgid "Con&tinue"
 msgstr "继续(&T)"
@@ -2498,13 +2461,13 @@ msgstr "%ld B/s"
 msgid "Target file already exists!"
 msgstr "目标文件已存在！"
 
-#, fuzzy, c-format
+#, c-format
 msgid "New     : %s, size %llu"
-msgstr "源日期：%s，大小 %llu"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Existing: %s, size %llu"
-msgstr "源日期：%s，大小 %llu"
+msgstr ""
 
 msgid "Overwrite this target?"
 msgstr "覆盖该目标？"
@@ -2580,9 +2543,8 @@ msgstr "保留属性(&A)"
 msgid "Di&ve into subdir if exists"
 msgstr "如果有子目录则进入(&V)"
 
-#, fuzzy
 msgid "&Stable symlinks"
-msgstr "稳定符号链接(&S)"
+msgstr ""
 
 msgid "&Background"
 msgstr "后台(&B)"
@@ -2671,9 +2633,8 @@ msgstr "正在搜索"
 msgid "Change &to"
 msgstr "切换到(&T)"
 
-#, fuzzy
 msgid "&Free VFSs now"
-msgstr "释放 VFS(&E)"
+msgstr ""
 
 msgid "&Refresh"
 msgstr "刷新(&R)"
@@ -2850,9 +2811,8 @@ msgstr "位置：     %Xh:%Xh"
 msgid "&Equal split"
 msgstr "平分(&E)"
 
-#, fuzzy
 msgid "&Menubar visible"
-msgstr "显示菜单条(&B)"
+msgstr ""
 
 msgid "Command &prompt"
 msgstr "显示命令提示行(&P)"
@@ -2866,9 +2826,8 @@ msgstr "显示提示栏(&I)"
 msgid "&XTerm window title"
 msgstr "Xterm窗口标题(&X)"
 
-#, fuzzy
 msgid "&Show free space"
-msgstr "显示空闲空间(&A)"
+msgstr ""
 
 msgid "Panel split"
 msgstr "分隔面板"
@@ -3106,9 +3065,8 @@ msgstr "在哑终端上(&b)"
 msgid "Alwa&ys"
 msgstr "总是(&Y)"
 
-#, fuzzy
 msgid "File operations"
-msgstr "文件操作选项"
+msgstr ""
 
 msgid "&Verbose operation"
 msgstr "冗余操作(&V)"
@@ -3272,9 +3230,8 @@ msgstr "版本(&V)"
 msgid "sort|e"
 msgstr "sort|e"
 
-#, fuzzy
 msgid "E&xtension"
-msgstr "扩展(&E)"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3716,9 +3673,8 @@ msgstr "配置目录"
 msgid "Data directory:"
 msgstr "数据目录"
 
-#, fuzzy
 msgid "File extension handlers:"
-msgstr "扩展文件编辑(&E)"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr "VFS 插件和脚本："
@@ -4261,42 +4217,3 @@ msgstr "搜索完成"
 
 msgid "Continue from beginning?"
 msgstr "从头继续？"
-
-#~ msgid "On"
-#~ msgstr "开"
-
-#~ msgid "Mode"
-#~ msgstr "模式"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d / %d"
-
-#~ msgid "Case sensi&tive"
-#~ msgstr "大小写敏感(&T)"
-
-#~ msgid "sec"
-#~ msgstr "秒"
-
-#~ msgid "Background Jobs"
-#~ msgstr "后台任务"
-
-#~ msgid "Delete:"
-#~ msgstr "删除："
-
-#~ msgid "Target date: %s, size %llu"
-#~ msgstr "目标日期：%s，大小 %llu"
-
-#~ msgid "Case s&ensitive"
-#~ msgstr "大小写敏感(&E)"
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr "按下这里提到的所有键。在您做完之后，检查"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr "哪些键没有标记上 OK。在缺少的键上按空格"
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr "键，或者用鼠标点击来定义。用 Tab 来移动。"
-
-#~ msgid "fish: storing zeros"
-#~ msgstr "fish: 存贮0字节"

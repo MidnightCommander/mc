@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/projects/p/mc/language/"
 "ro/)\n"
@@ -1368,17 +1368,14 @@ msgstr ""
 msgid "&Options"
 msgstr ""
 
-#, fuzzy
 msgid "&None"
-msgstr "Fără aranjare"
+msgstr ""
 
-#, fuzzy
 msgid "&Dynamic paragraphing"
-msgstr "Paragrafare automată"
+msgstr ""
 
-#, fuzzy
 msgid "Type &writer wrap"
-msgstr "Tip \"maşină de scris\""
+msgstr ""
 
 msgid "Wrap mode"
 msgstr "Mod de aranjare"
@@ -1437,11 +1434,10 @@ msgstr ""
 msgid "Editor options"
 msgstr ""
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr "Tastaţi `exit' pentru a reveni în Midnight Commander"
+msgstr ""
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
 msgstr ""
@@ -1619,17 +1615,14 @@ msgstr ""
 msgid "&UTF-8 output"
 msgstr ""
 
-#, fuzzy
 msgid "&Full 8 bits output"
-msgstr "Ieşire pe 8 biţi"
+msgstr ""
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO 8859-1"
+msgstr ""
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "7 biţi"
+msgstr ""
 
 msgid "F&ull 8 bits input"
 msgstr "&Intrare pe 8 biţi"
@@ -1646,21 +1639,17 @@ msgstr "&Selectează "
 msgid "Directory tree"
 msgstr ""
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "VFS-urile expiră în:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP anonymous password:"
-msgstr "Parola pentru ftp anonim:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "Cache-ul ftpfs expiră în:"
+msgstr ""
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "&Utilizează ftp-ul proxy"
+msgstr ""
 
 msgid "&Use ~/.netrc"
 msgstr "&Utilizează ~/.netrc"
@@ -1698,9 +1687,8 @@ msgstr "&Reia"
 msgid "&Kill"
 msgstr "&Omoară"
 
-#, fuzzy
 msgid "Background jobs"
-msgstr "Sarcini de Fundal"
+msgstr ""
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1715,53 +1703,41 @@ msgstr "Nume proprietar:"
 msgid "SMB authentication"
 msgstr ""
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "setez ID propr. la exec."
+msgstr ""
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "setez ID grup la execuţie"
+msgstr ""
 
-#, fuzzy
 msgid "stick&y bit"
-msgstr "bitul de ţintuire (sticky)"
+msgstr ""
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "citire de proprietar"
+msgstr ""
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "scriere de proprietar"
+msgstr ""
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "execuţie/căutare de propr."
+msgstr ""
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "citire de grup"
+msgstr ""
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "scriere de grup"
+msgstr ""
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "execuţie/căutare de grup"
+msgstr ""
 
-#, fuzzy
 msgid "read &by others"
-msgstr "citire de alţii"
+msgstr ""
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "scriere de alţii"
+msgstr ""
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "execuţie/căutare de alţii"
+msgstr ""
 
 msgid "Name:"
 msgstr ""
@@ -2323,9 +2299,8 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "&Suspendare"
+msgstr ""
 
 msgid "Con&tinue"
 msgstr "Con&tinuă"
@@ -2435,9 +2410,8 @@ msgstr ""
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
-#, fuzzy
 msgid "&Stable symlinks"
-msgstr "Legături simbolice &Stabile"
+msgstr ""
 
 msgid "&Background"
 msgstr "&Fundal"
@@ -2528,9 +2502,8 @@ msgstr "Caut"
 msgid "Change &to"
 msgstr ""
 
-#, fuzzy
 msgid "&Free VFSs now"
-msgstr "&Goleşte VFS-urile"
+msgstr ""
 
 msgid "&Refresh"
 msgstr ""
@@ -2705,9 +2678,8 @@ msgstr "Locaţie:   %Xh:%Xh"
 msgid "&Equal split"
 msgstr "împărţire &Egală"
 
-#, fuzzy
 msgid "&Menubar visible"
-msgstr "bară taste &Vizibilă"
+msgstr ""
 
 msgid "Command &prompt"
 msgstr ""
@@ -2962,9 +2934,8 @@ msgstr ""
 msgid "Alwa&ys"
 msgstr "&Întotdeauna"
 
-#, fuzzy
 msgid "File operations"
-msgstr "operaţii des&Criptive"
+msgstr ""
 
 msgid "&Verbose operation"
 msgstr "operaţii des&Criptive"
@@ -3125,9 +3096,8 @@ msgstr ""
 msgid "sort|e"
 msgstr ""
 
-#, fuzzy
 msgid "E&xtension"
-msgstr "&Extensie"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3559,9 +3529,8 @@ msgstr ""
 msgid "Data directory:"
 msgstr ""
 
-#, fuzzy
 msgid "File extension handlers:"
-msgstr "editare fişier &Extensii"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -4085,24 +4054,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "On"
-#~ msgstr "Pe"
-
-#~ msgid "Mode"
-#~ msgstr "Mod"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d din %d"
-
-#~ msgid "sec"
-#~ msgstr "sec"
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr "Apăsaţi toate tastele menţionate aici. După ce aţi făcut-o, veri-"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr "ficaţi care nu sunt marcate cu OK. Apăsaţi SPAŢIU pe tasta lipsă,"
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr "sau daţi click cu mouse-ul pentru a o defini. Navigaţi cu Tab."

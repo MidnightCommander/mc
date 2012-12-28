@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: mn\n"
@@ -1366,17 +1366,14 @@ msgstr ""
 msgid "&Options"
 msgstr ""
 
-#, fuzzy
 msgid "&None"
-msgstr "Байхгүй"
+msgstr ""
 
-#, fuzzy
 msgid "&Dynamic paragraphing"
-msgstr "Динамик. хэлбэржүүлэлт"
+msgstr ""
 
-#, fuzzy
 msgid "Type &writer wrap"
-msgstr "Бичлэг автомат таслагч"
+msgstr ""
 
 msgid "Wrap mode"
 msgstr "Таслагч горим"
@@ -1435,11 +1432,10 @@ msgstr ""
 msgid "Editor options"
 msgstr ""
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr " \"exit\" гэж бичиж Midnight Commander руу буцна"
+msgstr ""
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
 msgstr ""
@@ -1617,17 +1613,14 @@ msgstr ""
 msgid "&UTF-8 output"
 msgstr ""
 
-#, fuzzy
 msgid "&Full 8 bits output"
-msgstr "Гүйцэт 8-бит гаралт"
+msgstr ""
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO 8859-1"
+msgstr ""
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "7 бит"
+msgstr ""
 
 msgid "F&ull 8 bits input"
 msgstr "Гүйцэт 8-бит &оролт"
@@ -1644,21 +1637,17 @@ msgstr "&Сонгох"
 msgid "Directory tree"
 msgstr ""
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "VFS г чөлөөлөх хугацаа:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP anonymous password:"
-msgstr "FTP зочины нэвтрэх үг:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "FTP лавлахын кэш дуусах хугацаа:"
+msgstr ""
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "&үргэлж FTP-прокси ашиглах"
+msgstr ""
 
 msgid "&Use ~/.netrc"
 msgstr "~/.netrc &ашиглах"
@@ -1696,9 +1685,8 @@ msgstr "&Сэргээх"
 msgid "&Kill"
 msgstr "&Устгах"
 
-#, fuzzy
 msgid "Background jobs"
-msgstr " Арын ажилууд "
+msgstr ""
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1713,53 +1701,41 @@ msgstr "Хэрэглэгчийн нэр:"
 msgid "SMB authentication"
 msgstr ""
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "гүйцэтгэх UID-г оноох"
+msgstr ""
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "гүйцэтгэх GID-г оноох"
+msgstr ""
 
-#, fuzzy
 msgid "stick&y bit"
-msgstr "бэхлэгдсэн бит"
+msgstr ""
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "эзэмшигчээр уншуулах"
+msgstr ""
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "эзэмшигчээр бичүүлэх"
+msgstr ""
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "эзэмшигчээр гүйцэтгэх/хайх"
+msgstr ""
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "бүлэгчилэн уншуулах"
+msgstr ""
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "бүлэгчилэн бичүүлэх"
+msgstr ""
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "бүлэгчилэн гүйцэтгэх/хайх"
+msgstr ""
 
-#, fuzzy
 msgid "read &by others"
-msgstr "бусдаар уншуулах"
+msgstr ""
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "бусдаар бичүүлэх"
+msgstr ""
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "бусдаар гүйцэтгэх/хайх"
+msgstr ""
 
 msgid "Name:"
 msgstr ""
@@ -2321,9 +2297,8 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "Дахин &Сэргээх"
+msgstr ""
 
 msgid "Con&tinue"
 msgstr "&үргэлжлүүл"
@@ -2433,9 +2408,8 @@ msgstr ""
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
-#, fuzzy
 msgid "&Stable symlinks"
-msgstr "&Тэмдэгт холбоосыг хадгалах"
+msgstr ""
 
 msgid "&Background"
 msgstr " &Ар тал"
@@ -2525,9 +2499,8 @@ msgstr "Хайж байна"
 msgid "Change &to"
 msgstr ""
 
-#, fuzzy
 msgid "&Free VFSs now"
-msgstr "&Чөлөөт VFSүүд"
+msgstr ""
 
 msgid "&Refresh"
 msgstr ""
@@ -2701,9 +2674,8 @@ msgstr "Байршил: %Xh:%Xh"
 msgid "&Equal split"
 msgstr "&Адил хэмжээ"
 
-#, fuzzy
 msgid "&Menubar visible"
-msgstr "&Гарыг үзүүлэх"
+msgstr ""
 
 msgid "Command &prompt"
 msgstr ""
@@ -2957,9 +2929,8 @@ msgstr ""
 msgid "Alwa&ys"
 msgstr "&үргэлж"
 
-#, fuzzy
 msgid "File operations"
-msgstr "&Ажиллагааны детали"
+msgstr ""
 
 msgid "&Verbose operation"
 msgstr "&Ажиллагааны детали"
@@ -3120,9 +3091,8 @@ msgstr ""
 msgid "sort|e"
 msgstr ""
 
-#, fuzzy
 msgid "E&xtension"
-msgstr "өргө&тгөл"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3552,9 +3522,8 @@ msgstr ""
 msgid "Data directory:"
 msgstr ""
 
-#, fuzzy
 msgid "File extension handlers:"
-msgstr "Файлын &өргөтгөл"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -4080,26 +4049,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "On"
-#~ msgstr "Дээр"
-
-#~ msgid "Mode"
-#~ msgstr "Горим"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d ийн %d"
-
-#~ msgid "sec"
-#~ msgstr "с"
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr "Бүх товчлууруудаа дарж үзнэ үү. Дараа нь та аль товчлуур"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr ""
-#~ " \"OK\" гэж тэмдэглээдээгүй байгааг шалгаарай. Хоосон зай дарахыг хүлээж "
-#~ "байна"
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr "товчлуур эсвэл хулганаар дарж үүнийг тодорхойлно. Табын хамт зөөнө."

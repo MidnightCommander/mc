@@ -4,15 +4,16 @@
 #
 # Translators:
 #   <danicases@gmail.com>, 2011.
+# Daniel  <danicases@gmail.com>, 2012.
 # el_libre como el chaval <el.libre@gmail.com>, 2011.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
-"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
+"Last-Translator: Daniel <danicases@gmail.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/mc/language/"
 "ca/)\n"
 "Language: ca\n"
@@ -25,7 +26,7 @@ msgid "Warning: cannot load codepages list"
 msgstr ""
 
 msgid "7-bit ASCII"
-msgstr ""
+msgstr "7-bit ASCII"
 
 #, c-format
 msgid "Cannot translate from %s to %s"
@@ -57,6 +58,9 @@ msgid ""
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
+"Arxiu \"%s\" ja s'està editant.\n"
+"Usuari: %s\n"
+"ID del Procés: %d"
 
 msgid "File locked"
 msgstr "Arxiu bloquejat"
@@ -93,7 +97,7 @@ msgid ""
 msgstr ""
 
 msgid "Search string not found"
-msgstr ""
+msgstr "Cadena de cerca no trobada"
 
 msgid "Not implemented yet"
 msgstr "No s'ha implementat encara"
@@ -251,7 +255,7 @@ msgid "* on keypad"
 msgstr "* teclat numèric"
 
 msgid "Escape key"
-msgstr ""
+msgstr "Tecla Escape"
 
 msgid "Left arrow keypad"
 msgstr "Cursor esquerra teclat numèric"
@@ -287,22 +291,22 @@ msgid "Enter on keypad"
 msgstr "Tecla de retorn teclat numèric"
 
 msgid "Function key 21"
-msgstr ""
+msgstr "Tecla de Funció 21"
 
 msgid "Function key 22"
-msgstr ""
+msgstr "Tecla de Funció 22"
 
 msgid "Function key 23"
-msgstr ""
+msgstr "Tecla de Funció 23"
 
 msgid "Function key 24"
-msgstr ""
+msgstr "Tecla de Funció 24"
 
 msgid "A1 key"
-msgstr ""
+msgstr "Tecla A1"
 
 msgid "C1 key"
-msgstr ""
+msgstr "Tecla C1"
 
 msgid "Plus"
 msgstr "Més"
@@ -1369,24 +1373,20 @@ msgstr ""
 msgid "&Options"
 msgstr "&Opcions"
 
-#, fuzzy
 msgid "&None"
-msgstr "Cap"
+msgstr ""
 
-#, fuzzy
 msgid "&Dynamic paragraphing"
-msgstr "Paràgrafs dinàmics"
+msgstr ""
 
-#, fuzzy
 msgid "Type &writer wrap"
-msgstr "Ajustament de màquina d'escriure"
+msgstr ""
 
 msgid "Wrap mode"
 msgstr "Mode d'ajustament"
 
-#, fuzzy
 msgid "Tabulation"
-msgstr "Navegació"
+msgstr ""
 
 msgid "&Fake half tabs"
 msgstr "&Simula les mitges tabulacions"
@@ -1439,11 +1439,10 @@ msgstr ""
 msgid "Editor options"
 msgstr ""
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr "Teclegeu \"exit\" per retornar al Midnight Commander"
+msgstr ""
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
 msgstr ""
@@ -1623,17 +1622,14 @@ msgstr "Confirmació"
 msgid "&UTF-8 output"
 msgstr ""
 
-#, fuzzy
 msgid "&Full 8 bits output"
-msgstr "Mostra una sortida de 8 bits purs"
+msgstr ""
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO 8859-1 (Latin1)"
+msgstr ""
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "7 bits"
+msgstr ""
 
 msgid "F&ull 8 bits input"
 msgstr "ent&Rada de 8 bits"
@@ -1650,21 +1646,17 @@ msgstr "&Seleccioneu"
 msgid "Directory tree"
 msgstr "Arbre de directoris"
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "Temps d'espera per alliberar VFSs:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP anonymous password:"
-msgstr "Contrasenya de l'ftp anònim:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "Temps d'espera de la memòria cau del directori ftpfs:"
+msgstr ""
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "usa sempre un servidor in&Termediari de ftp"
+msgstr ""
 
 msgid "&Use ~/.netrc"
 msgstr ""
@@ -1702,9 +1694,8 @@ msgstr "&Reprèn"
 msgid "&Kill"
 msgstr "A&caba"
 
-#, fuzzy
 msgid "Background jobs"
-msgstr "Tasques de fons"
+msgstr ""
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1716,57 +1707,44 @@ msgstr "Domini:"
 msgid "Username:"
 msgstr "Nom d'usuari:"
 
-#, fuzzy
 msgid "SMB authentication"
-msgstr "Ha fallat l'autenticació"
+msgstr ""
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "executa amb l'ID del propietari"
+msgstr ""
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "executa amb l'ID del grup"
+msgstr ""
 
-#, fuzzy
 msgid "stick&y bit"
-msgstr "bit de permanència"
+msgstr ""
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "llegeix per al propietari"
+msgstr ""
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "escriu per al propietari"
+msgstr ""
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "executa/cerca per al propietari"
+msgstr ""
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "llegeix per al grup"
+msgstr ""
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "escriu per al grup"
+msgstr ""
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "executa/cerca per al grup"
+msgstr ""
 
-#, fuzzy
 msgid "read &by others"
-msgstr "llegeix per a altres"
+msgstr ""
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "escriu per a altres"
+msgstr ""
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "executa/cerca per a altres"
+msgstr ""
 
 msgid "Name:"
 msgstr ""
@@ -2332,9 +2310,8 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "&Suspèn"
+msgstr ""
 
 msgid "Con&tinue"
 msgstr "&Continua"
@@ -2444,9 +2421,8 @@ msgstr ""
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
-#, fuzzy
 msgid "&Stable symlinks"
-msgstr "enllaços simbòlics &Estables"
+msgstr ""
 
 msgid "&Background"
 msgstr "&Segon pla"
@@ -2536,9 +2512,8 @@ msgstr "Cercant"
 msgid "Change &to"
 msgstr "Can&via a"
 
-#, fuzzy
 msgid "&Free VFSs now"
-msgstr "Allib&era els VFSs ara"
+msgstr ""
 
 msgid "&Refresh"
 msgstr "&Actualitza"
@@ -2712,9 +2687,8 @@ msgstr "Ubicació:   %Xh:%Xh"
 msgid "&Equal split"
 msgstr "divisió &Simètrica"
 
-#, fuzzy
 msgid "&Menubar visible"
-msgstr "Barra de &Tecles visible"
+msgstr ""
 
 msgid "Command &prompt"
 msgstr ""
@@ -2968,9 +2942,8 @@ msgstr ""
 msgid "Alwa&ys"
 msgstr "&Sempre"
 
-#, fuzzy
 msgid "File operations"
-msgstr "detalla les &Operacions"
+msgstr ""
 
 msgid "&Verbose operation"
 msgstr "detalla les &Operacions"
@@ -3131,9 +3104,8 @@ msgstr "&Versió"
 msgid "sort|e"
 msgstr "ordena|e"
 
-#, fuzzy
 msgid "E&xtension"
-msgstr "&Extensió"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3570,9 +3542,8 @@ msgstr ""
 msgid "Data directory:"
 msgstr ""
 
-#, fuzzy
 msgid "File extension handlers:"
-msgstr "edita el fitxer d'&Extensions"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -4104,34 +4075,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "On"
-#~ msgstr "Sobre"
-
-#~ msgid "Mode"
-#~ msgstr "Mode"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d de %d"
-
-#~ msgid "Case sensi&tive"
-#~ msgstr "Considera diferen&ts les majúscules i les minúscules"
-
-#~ msgid "sec"
-#~ msgstr "seg"
-
-#~ msgid "Delete:"
-#~ msgstr "Suprimeix:"
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr "Premeu totes les tecles esmentades. Quan ho hagueu fet, comproveu"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr ""
-#~ "a quina tecla no hi ha la marca \"D'acord\".  Per definir-la, premeu-hi"
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr "l'espai o feu-hi clic. Per desplaçar-vos, utilitzeu el tabulador."
-
-#~ msgid "fish: storing zeros"
-#~ msgstr "fish: emmagatzemant zeros"

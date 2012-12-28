@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: wa\n"
@@ -1364,13 +1364,11 @@ msgstr ""
 msgid "&Options"
 msgstr ""
 
-#, fuzzy
 msgid "&None"
-msgstr "Nouk"
+msgstr ""
 
-#, fuzzy
 msgid "&Dynamic paragraphing"
-msgstr "Fé les hagnons al voleye"
+msgstr ""
 
 msgid "Type &writer wrap"
 msgstr ""
@@ -1432,11 +1430,10 @@ msgstr ""
 msgid "Editor options"
 msgstr ""
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr "Tapez «exit» po-z eraler a Midnight Commander"
+msgstr ""
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
 msgstr ""
@@ -1614,17 +1611,14 @@ msgstr ""
 msgid "&UTF-8 output"
 msgstr ""
 
-#, fuzzy
 msgid "&Full 8 bits output"
-msgstr "Sôrteye 8 bits"
+msgstr ""
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO 8859-1"
+msgstr ""
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "7 bits"
+msgstr ""
 
 msgid "F&ull 8 bits input"
 msgstr "I&ntreye 8 bits etire"
@@ -1641,21 +1635,17 @@ msgstr "T&chwezi"
 msgid "Directory tree"
 msgstr ""
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "Tins a ratinde po delîberer les VFS:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP anonymous password:"
-msgstr "secret po ftp anonime:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "Tins a ratinde pol muchete do ridant ftpfs"
+msgstr ""
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "&Tofer eployî on proxy ftp"
+msgstr ""
 
 msgid "&Use ~/.netrc"
 msgstr ""
@@ -1693,9 +1683,8 @@ msgstr "&Rataker"
 msgid "&Kill"
 msgstr "&Touwer"
 
-#, fuzzy
 msgid "Background jobs"
-msgstr "Bezognes di fond"
+msgstr ""
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1710,53 +1699,41 @@ msgstr "No di l' ûzeu:"
 msgid "SMB authentication"
 msgstr ""
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "mete l' ID po l' ûzeu a l' enondaedje"
+msgstr ""
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "mete l' ID pol groupe a l' enondaedje"
+msgstr ""
 
-#, fuzzy
 msgid "stick&y bit"
-msgstr "bit aclapé"
+msgstr ""
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "lére pa prôpietaire"
+msgstr ""
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "sicrire pa prôpietaire"
+msgstr ""
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "enonder/cweri pa prôpietaire"
+msgstr ""
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "sicrire på groupe"
+msgstr ""
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "lére på groupe"
+msgstr ""
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "enonder/cweri på groupe"
+msgstr ""
 
-#, fuzzy
 msgid "read &by others"
-msgstr "lére påzès ôtes"
+msgstr ""
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "sicrire påzès ôtes"
+msgstr ""
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "enonder/cweri påzès ôtes"
+msgstr ""
 
 msgid "Name:"
 msgstr ""
@@ -2318,9 +2295,8 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "Mete a &Djok"
+msgstr ""
 
 msgid "Con&tinue"
 msgstr "&Tcheryî"
@@ -2430,9 +2406,8 @@ msgstr ""
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
-#, fuzzy
 msgid "&Stable symlinks"
-msgstr "&Stocaesse loyéns simbolikes"
+msgstr ""
 
 msgid "&Background"
 msgstr "&Fond"
@@ -2952,9 +2927,8 @@ msgstr ""
 msgid "Alwa&ys"
 msgstr "to&Fer"
 
-#, fuzzy
 msgid "File operations"
-msgstr "Apontyî les tchûzes"
+msgstr ""
 
 msgid "&Verbose operation"
 msgstr ""
@@ -3115,9 +3089,8 @@ msgstr ""
 msgid "sort|e"
 msgstr ""
 
-#, fuzzy
 msgid "E&xtension"
-msgstr "&Cawete"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -4057,27 +4030,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "On"
-#~ msgstr "Metou"
-
-#~ msgid "Mode"
-#~ msgstr "Môde"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d di %d"
-
-#~ msgid "sec"
-#~ msgstr "seg."
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr ""
-#~ "Tchôkîz totes les tapes k' on vs dit vaici. On côp ki c' est fwait, waitîz"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr ""
-#~ "les kénès tapes ni sont nén mårkeyes avou 'I Va'. Tchôkîz sol bår d' "
-#~ "espåce so les mankantès"
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr "tape, ou bén clitchîz avou vosse soris pol defini. Bodjî avou Tab."

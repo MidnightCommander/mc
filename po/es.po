@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# David Martin <david.martin@telefonica.net>, 2011.
+# David Martin <david.martin@telefonica.net>, 2011-2012.
 # David Martín <david.martin@telefonica.net>, 2011, 2012.
 # David Martín <dmartina@excite.com>, 2011.
 # Ismael Olea <olea@hispafuentes.com>, 2000.
@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-27 10:39+0000\n"
 "Last-Translator: David Martin <david.martin@telefonica.net>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/mc/language/"
 "es/)\n"
@@ -158,85 +158,85 @@ msgstr ""
 "Se ha cargado skin por defecto."
 
 msgid "Function key 1"
-msgstr "Tecla F1"
+msgstr "F1"
 
 msgid "Function key 2"
-msgstr "Tecla F2"
+msgstr "F2"
 
 msgid "Function key 3"
-msgstr "Tecla F3"
+msgstr "F3"
 
 msgid "Function key 4"
-msgstr "Tecla F4"
+msgstr "F4"
 
 msgid "Function key 5"
-msgstr "Tecla F5"
+msgstr "F5"
 
 msgid "Function key 6"
-msgstr "Tecla F6"
+msgstr "F6"
 
 msgid "Function key 7"
-msgstr "Tecla F7"
+msgstr "F7"
 
 msgid "Function key 8"
-msgstr "Tecla F8"
+msgstr "F8"
 
 msgid "Function key 9"
-msgstr "Tecla F9"
+msgstr "F9"
 
 msgid "Function key 10"
-msgstr "Tecla F10"
+msgstr "F10"
 
 msgid "Function key 11"
-msgstr "Tecla F11"
+msgstr "F11"
 
 msgid "Function key 12"
-msgstr "Tecla F12"
+msgstr "F12"
 
 msgid "Function key 13"
-msgstr "Tecla F13"
+msgstr "F13"
 
 msgid "Function key 14"
-msgstr "Tecla F14"
+msgstr "F14"
 
 msgid "Function key 15"
-msgstr "Tecla F15"
+msgstr "F15"
 
 msgid "Function key 16"
-msgstr "Tecla F16"
+msgstr "F16"
 
 msgid "Function key 17"
-msgstr "Tecla F17"
+msgstr "F17"
 
 msgid "Function key 18"
-msgstr "Tecla F18"
+msgstr "F18"
 
 msgid "Function key 19"
-msgstr "Tecla F19"
+msgstr "F19"
 
 msgid "Function key 20"
-msgstr "Tecla F20"
+msgstr "F20"
 
 msgid "Backspace key"
-msgstr "Tecla Borrar"
+msgstr "Borrar"
 
 msgid "End key"
-msgstr "Tecla Fin"
+msgstr "Fin"
 
 msgid "Up arrow key"
-msgstr "Flecha arriba"
+msgstr "Arriba"
 
 msgid "Down arrow key"
-msgstr "Flecha abajo"
+msgstr "Abajo"
 
 msgid "Left arrow key"
-msgstr "Flecha izquierda"
+msgstr "Izquierda"
 
 msgid "Right arrow key"
-msgstr "Flecha derecha"
+msgstr "Derecha"
 
 msgid "Home key"
-msgstr "Tecla Inicio"
+msgstr "Inicio"
 
 msgid "Page Down key"
 msgstr "Avanzar Página"
@@ -245,82 +245,82 @@ msgid "Page Up key"
 msgstr "Retrasar Página"
 
 msgid "Insert key"
-msgstr "Tecla Insertar"
+msgstr "Insertar"
 
 msgid "Delete key"
-msgstr "Tecla Eliminar"
+msgstr "Eliminar"
 
 msgid "Completion/M-tab"
-msgstr "Completar/Alt-Tab"
+msgstr "Alt-Tab"
 
 msgid "Back Tabulation S-tab"
-msgstr "Tab atrás/Mayús-Tab"
+msgstr "Mayús-Tab"
 
 msgid "+ on keypad"
-msgstr "+ en el pad"
+msgstr "+ (num.)"
 
 msgid "- on keypad"
-msgstr "- en el pad"
+msgstr "- (num.)"
 
 msgid "Slash on keypad"
-msgstr "Diagonal, pad"
+msgstr "/ (num.)"
 
 msgid "* on keypad"
-msgstr "* en el pad"
+msgstr "* (num.)"
 
 msgid "Escape key"
-msgstr "Tecla Escape"
+msgstr "Escape"
 
 msgid "Left arrow keypad"
-msgstr "Flecha izquierda, pad"
+msgstr "Izquierda (num.)"
 
 msgid "Right arrow keypad"
-msgstr "Flecha derecha, pad"
+msgstr "Derecha (num.)"
 
 msgid "Up arrow keypad"
-msgstr "Flecha arriba, pad"
+msgstr "Arriba (num.)"
 
 msgid "Down arrow keypad"
-msgstr "Flecha abajo, pad"
+msgstr "Abajo (num.)"
 
 msgid "Home on keypad"
-msgstr "Inicio, pad"
+msgstr "Inicio (num.)"
 
 msgid "End on keypad"
-msgstr "Fin, pad"
+msgstr "Fin (num.)"
 
 msgid "Page Down keypad"
-msgstr "Página abajo, pad"
+msgstr "Página Abajo (num.)"
 
 msgid "Page Up keypad"
-msgstr "Página arriba, pad"
+msgstr "Página Arriba (num.)"
 
 msgid "Insert on keypad"
-msgstr "Ins, pad"
+msgstr "Insertar (num.)"
 
 msgid "Delete on keypad"
-msgstr "Eliminar, pad"
+msgstr "Eliminar (num.)"
 
 msgid "Enter on keypad"
-msgstr "Intro, pad"
+msgstr "Intro (num.)"
 
 msgid "Function key 21"
-msgstr "Tecla F21"
+msgstr "F21"
 
 msgid "Function key 22"
-msgstr "Tecla F22"
+msgstr "F22"
 
 msgid "Function key 23"
-msgstr "Tecla F23"
+msgstr "F23"
 
 msgid "Function key 24"
-msgstr "Tecla F24"
+msgstr "F24"
 
 msgid "A1 key"
-msgstr "Tecla A1"
+msgstr "A1"
 
 msgid "C1 key"
-msgstr "Tecla C1"
+msgstr "C1"
 
 msgid "Plus"
 msgstr "Suma"
@@ -871,12 +871,14 @@ msgid "Quit"
 msgstr "Salir"
 
 msgid "File(s) was modified. Save with exit?"
-msgstr ""
+msgstr "Algún archivo fue modificado. ¿Desea guardar al salir?"
 
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file(s)?"
 msgstr ""
+"Saliendo de Midnight Commander.\n"
+"¿Desea guardar los archivos modificados?"
 
 msgid "Diff:"
 msgstr "Diff:"
@@ -1098,7 +1100,7 @@ msgid ""
 "Save modified file %s?"
 msgstr ""
 "Saliendo de Midnight Commander.\n"
-"¿Desea guardar el archivo «%s»?"
+"¿Desea guardar el archivo «%s» modificado?"
 
 msgid "This function is not implemented"
 msgstr "Esa función no está implementada."
@@ -1317,7 +1319,7 @@ msgid "&Flush bookmarks"
 msgstr "borrar &Todas las marcas"
 
 msgid "&Go to line..."
-msgstr "&Ir a la línea..."
+msgstr "ir a la &Línea..."
 
 msgid "&Toggle line state"
 msgstr "&Numeración de líneas"
@@ -1359,7 +1361,7 @@ msgid "C&heck word"
 msgstr "revisar &Palabra"
 
 msgid "Change spelling &language..."
-msgstr ""
+msgstr "elegir &Idioma..."
 
 msgid "&Mail..."
 msgstr "&Correo..."
@@ -1442,24 +1444,20 @@ msgstr "&Ventana"
 msgid "&Options"
 msgstr "&Opciones"
 
-#, fuzzy
 msgid "&None"
-msgstr "Ninguno"
+msgstr "&Ninguno"
 
-#, fuzzy
 msgid "&Dynamic paragraphing"
-msgstr "Párrafos dinámicos"
+msgstr "párrafos &Dinámicos"
 
-#, fuzzy
 msgid "Type &writer wrap"
-msgstr "Máquina de escribir"
+msgstr "má&Quina de escribir"
 
 msgid "Wrap mode"
 msgstr "Autoajuste de párrafo"
 
-#, fuzzy
 msgid "Tabulation"
-msgstr "Tab atrás/Mayús-Tab"
+msgstr "Tabulación"
 
 msgid "&Fake half tabs"
 msgstr "&Fingir medias tabulaciones"
@@ -1485,11 +1483,9 @@ msgstr "confir&Mar al guardar"
 msgid "Save file &position"
 msgstr "recordar &Posiciones"
 
-#, fuzzy
 msgid "&Visible trailing spaces"
 msgstr "&Espacios finales visibles"
 
-#, fuzzy
 msgid "Visible &tabs"
 msgstr "&Tabulaciones visibles"
 
@@ -1497,12 +1493,11 @@ msgid "Synta&x highlighting"
 msgstr "sinta&Xis coloreada"
 
 msgid "C&ursor after inserted block"
-msgstr ""
+msgstr "c&Ursor tras inserción"
 
 msgid "Pers&istent selection"
 msgstr "selecció&N persistente"
 
-#, fuzzy
 msgid "Cursor be&yond end of line"
 msgstr "cursor pasa fin de &Línea"
 
@@ -1515,14 +1510,15 @@ msgstr "Ancho del párrafo auto: "
 msgid "Editor options"
 msgstr "Opciones del editor"
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr "¿Desea realmente salir del Midnight Commander?"
+msgstr ""
+"Un editor de texto amigable\n"
+"para Midnight Commander."
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1996-2012 the Free Software Foundation"
 
 msgid "About"
 msgstr "Acerca de..."
@@ -1552,22 +1548,22 @@ msgid "ButtonBar|PullDn"
 msgstr "Menú"
 
 msgid "&Add word"
-msgstr ""
+msgstr "&Aprender"
 
 msgid "Language"
-msgstr ""
+msgstr "Idioma"
 
 msgid "Misspelled"
-msgstr ""
+msgstr "Mal escrito"
 
 msgid "Check word"
-msgstr ""
+msgstr "Revisar palabra"
 
 msgid "Suggest"
-msgstr ""
+msgstr "Sugerir"
 
 msgid "Select language"
-msgstr ""
+msgstr "Elegir idioma"
 
 msgid "Load syntax file"
 msgstr "Cargar archivo de sintaxis"
@@ -1704,24 +1700,20 @@ msgstr "borrar &Historia"
 msgid "Confirmation"
 msgstr "Confirmación"
 
-#, fuzzy
 msgid "&UTF-8 output"
-msgstr "salida UTF-8"
+msgstr "salida &UTF-8"
 
-#, fuzzy
 msgid "&Full 8 bits output"
-msgstr "mostrar &8 bits"
+msgstr "salida de &8 bits"
 
-#, fuzzy
 msgid "&ISO 8859-1"
 msgstr "&ISO 8859-1"
 
-#, fuzzy
 msgid "7 &bits"
 msgstr "&7 bits"
 
 msgid "F&ull 8 bits input"
-msgstr "Aceptar entrada de 8 bits"
+msgstr "entrada de &8 bits"
 
 msgid "Display bits"
 msgstr "Juego de caracteres"
@@ -1735,21 +1727,17 @@ msgstr "&Seleccionar"
 msgid "Directory tree"
 msgstr "Árbol de directorios"
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "Descartar los VFS tras:"
+msgstr "Descartar los VFS tras (s.):"
 
-#, fuzzy
 msgid "FTP anonymous password:"
 msgstr "Contraseña FTP anónimo:"
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "Descartar el caché de ftpfs tras:"
+msgstr "Descartar el caché de FTP tras (s.):"
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "usar siempre pro&Xy"
+msgstr "usar siempre pro&Xy FTP"
 
 msgid "&Use ~/.netrc"
 msgstr "&Usar ~/.netrc"
@@ -1787,9 +1775,8 @@ msgstr "c&Ontinuar"
 msgid "&Kill"
 msgstr "&Matar"
 
-#, fuzzy
 msgid "Background jobs"
-msgstr "&Procesos en 2º plano..."
+msgstr "Procesos en 2º plano"
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1801,57 +1788,44 @@ msgstr "Dominio:"
 msgid "Username:"
 msgstr "Usuario:"
 
-#, fuzzy
 msgid "SMB authentication"
-msgstr "Autenticación fallida"
+msgstr "Autenticación SMB"
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "ejecutar con ID del dueño"
+msgstr "ejecutar con id. del &Dueño"
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "ejecutar con ID del grupo"
+msgstr "ejecutar con id. del &Grupo"
 
-#, fuzzy
 msgid "stick&y bit"
-msgstr "sticky bit"
+msgstr "stick&Y bit"
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "lectura por dueño"
+msgstr "&Lectura por dueño"
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "escritura por dueño"
+msgstr "&Escritura por dueño"
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "ejecutar/buscar por dueño"
+msgstr "e&Jecutar/buscar por dueño"
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "lectura por grupo"
+msgstr "lect&Ura por grupo"
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "escritura por grupo"
+msgstr "escri&Tura por grupo"
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "ejecutar/buscar por grupo"
+msgstr "ejecutar/busca&R por grupo"
 
-#, fuzzy
 msgid "read &by others"
-msgstr "lectura por otros"
+msgstr "lectura por &Otros"
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "escritura por otros"
+msgstr "escritura por otro&S"
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "ejecutar/buscar por otros"
+msgstr "ejecutar/&Buscar por otros"
 
 msgid "Name:"
 msgstr "Nombre:"
@@ -2218,23 +2192,21 @@ msgstr "saltar &Todos"
 msgid "&Retry"
 msgstr "&Reintentar"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\n"
-"El directorio no está vacío.\n"
+"El directorio «%s» no está vacío.\n"
 "¿Desea borrarlo recursivamente?"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Background process:\n"
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\n"
-"Proceso en 2º plano: El directorio no está vacío.\n"
+"Proceso en 2º plano: El directorio «%s» no está vacío.\n"
 "¿Desea borrarlo recursivamente?"
 
 msgid "Non&e"
@@ -2505,7 +2477,6 @@ msgstr "¡Imposible operar sobre «..»!"
 msgid "Sorry, I could not put the job in background"
 msgstr "Lo siento, no se pudo poner la tarea en 2º plano"
 
-#, fuzzy
 msgid "S&uspend"
 msgstr "&Detener"
 
@@ -2518,7 +2489,7 @@ msgstr "%d:%02d.%02d"
 
 #, c-format
 msgid "ETA %s"
-msgstr "ETA %s"
+msgstr "T.E. %s"
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2526,7 +2497,7 @@ msgstr "%.2f MB/s"
 
 #, c-format
 msgid "%.2f KB/s"
-msgstr "%.2f KB/s"
+msgstr "%.2f kB/s"
 
 #, c-format
 msgid "%ld B/s"
@@ -2535,13 +2506,13 @@ msgstr "%ld B/s"
 msgid "Target file already exists!"
 msgstr "¡El archivo destino ya existe!"
 
-#, fuzzy, c-format
+#, c-format
 msgid "New     : %s, size %llu"
-msgstr "Archivo origen: fecha %s, tamaño %llu"
+msgstr "Nuevo : %s, tamaño %llu"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Existing: %s, size %llu"
-msgstr "Archivo origen: fecha %s, tamaño %llu"
+msgstr "Actual: %s, tamaño %llu"
 
 msgid "Overwrite this target?"
 msgstr "¿Sobrescribir este archivo?"
@@ -2562,7 +2533,7 @@ msgid "If &size differs"
 msgstr "si el ta&Maño difiere"
 
 msgid "File exists"
-msgstr "El archivo ya existe"
+msgstr "Archivo ya existe"
 
 msgid "Background process: File exists"
 msgstr "Proceso en 2º plano: El archivo ya existe"
@@ -2617,7 +2588,6 @@ msgstr "&Preservar atributos"
 msgid "Di&ve into subdir if exists"
 msgstr "entrar en sub&Directorios"
 
-#, fuzzy
 msgid "&Stable symlinks"
 msgstr "enlaces simbólicos &Estables"
 
@@ -2709,7 +2679,6 @@ msgstr "Buscando"
 msgid "Change &to"
 msgstr "camb&Iar a"
 
-#, fuzzy
 msgid "&Free VFSs now"
 msgstr "&Liberar VFS ahora"
 
@@ -2889,7 +2858,6 @@ msgstr "Ubicado:       %Xh:%Xh"
 msgid "&Equal split"
 msgstr "simét&Rico"
 
-#, fuzzy
 msgid "&Menubar visible"
 msgstr "barra de &Menú visible"
 
@@ -2905,7 +2873,6 @@ msgstr "&Sugerencias visibles"
 msgid "&XTerm window title"
 msgstr "titular las ventanas &Xterm"
 
-#, fuzzy
 msgid "&Show free space"
 msgstr "mostrar &Espacio libre"
 
@@ -3146,7 +3113,6 @@ msgstr "sólo en terminales &Tontas"
 msgid "Alwa&ys"
 msgstr "&Siempre"
 
-#, fuzzy
 msgid "File operations"
 msgstr "Operaciones con archivos"
 
@@ -3313,7 +3279,6 @@ msgstr "&Versión"
 msgid "sort|e"
 msgstr "x"
 
-#, fuzzy
 msgid "E&xtension"
 msgstr "e&Xtensión"
 
@@ -3595,14 +3560,14 @@ msgid ""
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
 msgstr ""
-"Por favor, presione la tecla %s\n"
-"y espere hasta que este mensaje desaparezca.\n"
+"Por favor, presione la tecla «%s»\n"
+"y espere a que este mensaje desaparezca.\n"
 "\n"
-"Luego, presione la tecla de nuevo y vea si el mensaje de «OK» aparece\n"
-"junto a su botón \n"
+"A continuación, presione la tecla nuevo y\n"
+"vea si la marca «OK» aparece junto a su botón\n"
 "\n"
-"Si quiere cancelar, presione una vez la tecla «Escape»\n"
-"y espere."
+"Para abortar, presione una vez\n"
+"la tecla «Escape» y espere."
 
 msgid "Cannot accept this key"
 msgstr "Imposible aceptar esta tecla"
@@ -3637,6 +3602,9 @@ msgid ""
 "which keys are not marked with OK. Press space on the missing\n"
 "key, or click with the mouse to define it. Move around with Tab."
 msgstr ""
+"Presione todas las teclas y compruebe si alguna no responde. Para\n"
+"redefinirla, pulse la barra espaciadora o haga clic con el ratón\n"
+"en ella. Use el tabulador para moverse."
 
 #, c-format
 msgid ""
@@ -3759,9 +3727,8 @@ msgstr "Directorio de configuración:"
 msgid "Data directory:"
 msgstr "Directorio de datos:"
 
-#, fuzzy
 msgid "File extension handlers:"
-msgstr "&Editar extensiones..."
+msgstr "Asociaciones de tipo de archivo:"
 
 msgid "VFS plugins and scripts:"
 msgstr "Complementos y guiones VFS"
@@ -4019,59 +3986,59 @@ msgstr ""
 
 #, c-format
 msgid "sftp: an error occured while reading %s: %s"
-msgstr ""
+msgstr "sftp: Ocurrió un error durante la lectura de «%s»: %s"
 
 msgid "sftp: Unable to get current user name."
-msgstr ""
+msgstr "sftp: No se pudo obtener el nombre de usuario actual."
 
 msgid "sftp: Invalid host name."
-msgstr ""
+msgstr "sftp: Nombre de máquina incorrecto"
 
 msgid "sftp: Invalid port value."
-msgstr ""
+msgstr "sftp: Número de puerto no válido"
 
 #, c-format
 msgid "sftp: %s"
-msgstr ""
+msgstr "sftp: %s"
 
 #, c-format
 msgid "sftp: making connection to %s"
-msgstr ""
+msgstr "sftp: Estableciendo conexión con %s"
 
 msgid "sftp: connection interrupted by user"
-msgstr ""
+msgstr "sftp: Conexión abortada por el usuario"
 
 #, c-format
 msgid "sftp: connection to server failed: %s"
-msgstr ""
+msgstr "sftp: Conexión al servidor fracasó: %s"
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
-msgstr ""
+msgstr "sftp: Introduzca la frase de paso para %s"
 
 msgid "sftp: Passphrase is empty."
-msgstr ""
+msgstr "sftp: Frase de paso vacía"
 
 #, c-format
 msgid "sftp: Enter password for %s "
-msgstr ""
+msgstr "sftp: Introduzca la contraseña para %s"
 
 msgid "sftp: Password is empty."
-msgstr ""
+msgstr "sftp: Contraseña vacía."
 
 #, c-format
 msgid "sftp: Failure establishing SSH session: (%d)"
-msgstr ""
+msgstr "sftp: Error al establecer conexión SSH: (%d)"
 
 msgid "sftp: No file handler data present for reading file"
-msgstr ""
+msgstr "sftp: Sin datos del descriptor de archivo al leer"
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
-msgstr ""
+msgstr "sftp: (Ctrl-G para cancelar) Listando... %s"
 
 msgid "sftp: Listing done."
-msgstr ""
+msgstr "sftp: Listado completo."
 
 #, c-format
 msgid "reconnect to %s failed"
@@ -4303,53 +4270,3 @@ msgstr "Búsqueda finalizada"
 
 msgid "Continue from beginning?"
 msgstr "¿Continuar desde el principio?"
-
-#~ msgid ""
-#~ "Copyright (C) 1996-2012 the Free Software Foundation\n"
-#~ "\n"
-#~ "            A user friendly text editor\n"
-#~ "         written for the Midnight Commander"
-#~ msgstr ""
-#~ "Copyright (C) 1996-2012 the Free Software Foundation\n"
-#~ "\n"
-#~ "            Un editor de texto amigable\n"
-#~ "              para Midnight Commander"
-
-#~ msgid "On"
-#~ msgstr "En"
-
-#~ msgid "Mode"
-#~ msgstr "Modo"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d de %d"
-
-#~ msgid "Case sensi&tive"
-#~ msgstr "distinguir &May/min"
-
-#~ msgid "sec"
-#~ msgstr "s."
-
-#~ msgid "Background Jobs"
-#~ msgstr "Procesos en 2º plano"
-
-#~ msgid "Delete:"
-#~ msgstr "Borrar:"
-
-#~ msgid "Target date: %s, size %llu"
-#~ msgstr "Archivo destino: fecha %s, tamaño %llu"
-
-#~ msgid "Case s&ensitive"
-#~ msgstr "distinguir &May/min"
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr "Presione todas las teclas y compruebe si alguna no responde. Para"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr "redefinirla, pulse la barra espaciadora o haga clic con el ratón"
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr "en ella. Use el tabulador para moverse."
-
-#~ msgid "fish: storing zeros"
-#~ msgstr "fish: guardando ceros"

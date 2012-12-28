@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: fi_FI\n"
@@ -1650,9 +1650,8 @@ msgstr ""
 msgid "FTP anonymous password:"
 msgstr ""
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "Hakemiston polku yliajoittui %s"
+msgstr ""
 
 msgid "&Always use ftp proxy:"
 msgstr ""
@@ -1706,9 +1705,8 @@ msgstr ""
 msgid "Username:"
 msgstr ""
 
-#, fuzzy
 msgid "SMB authentication"
-msgstr "Authenkaatio epäonnistui"
+msgstr ""
 
 msgid "set &user ID on execution"
 msgstr ""

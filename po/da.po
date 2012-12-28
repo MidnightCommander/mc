@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/mc/language/da/)\n"
 "Language: da\n"
@@ -1391,24 +1391,20 @@ msgstr ""
 msgid "&Options"
 msgstr "&Indstillinger"
 
-#, fuzzy
 msgid "&None"
-msgstr "Ingen"
+msgstr ""
 
-#, fuzzy
 msgid "&Dynamic paragraphing"
-msgstr "Dynamiske paragraffer"
+msgstr ""
 
-#, fuzzy
 msgid "Type &writer wrap"
-msgstr "Skrivemaskineombrydning"
+msgstr ""
 
 msgid "Wrap mode"
 msgstr "Ombrydningstilstand"
 
-#, fuzzy
 msgid "Tabulation"
-msgstr "Navigation"
+msgstr ""
 
 msgid "&Fake half tabs"
 msgstr "&Falske halve tabulatorer"
@@ -1434,13 +1430,11 @@ msgstr "&Bekræft før gemning"
 msgid "Save file &position"
 msgstr "Gem fil&placering"
 
-#, fuzzy
 msgid "&Visible trailing spaces"
-msgstr "Synlige efterfølgende mellemrum"
+msgstr ""
 
-#, fuzzy
 msgid "Visible &tabs"
-msgstr "Synlige tabulatorer"
+msgstr ""
 
 msgid "Synta&x highlighting"
 msgstr "Synta&ksfremhævelse"
@@ -1451,9 +1445,8 @@ msgstr ""
 msgid "Pers&istent selection"
 msgstr "&Fast markering"
 
-#, fuzzy
 msgid "Cursor be&yond end of line"
-msgstr "Markør bag linjeafslutning"
+msgstr ""
 
 msgid "&Group undo"
 msgstr ""
@@ -1464,11 +1457,10 @@ msgstr "Linjelængde for ordombrydning:"
 msgid "Editor options"
 msgstr "Indstillinger for redigeringsprogram"
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr "Ønsker du virkelig at afslutte Midnight Commander?"
+msgstr ""
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
 msgstr ""
@@ -1653,21 +1645,17 @@ msgstr "Historikoprydning"
 msgid "Confirmation"
 msgstr "Bekræftelse"
 
-#, fuzzy
 msgid "&UTF-8 output"
-msgstr "UTF-8 uddata"
+msgstr ""
 
-#, fuzzy
 msgid "&Full 8 bits output"
-msgstr "Fuld 8-bit uddata"
+msgstr ""
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO 8859-1"
+msgstr ""
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "7-bit"
+msgstr ""
 
 msgid "F&ull 8 bits input"
 msgstr "F&uld 8-bit inddata"
@@ -1684,21 +1672,17 @@ msgstr "&Vælg"
 msgid "Directory tree"
 msgstr "Mappetræ"
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "Tidsudløb for frigørelse af VFS'er:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP anonymous password:"
-msgstr "Anonym ftp-adgangskode"
+msgstr ""
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "Tidsudløb for ftpfs-mappens mellemlager:"
+msgstr ""
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "Brug &altid ftp-proxy"
+msgstr ""
 
 msgid "&Use ~/.netrc"
 msgstr "&Brug ~/.netrc"
@@ -1737,9 +1721,8 @@ msgstr "&Genoptag"
 msgid "&Kill"
 msgstr "&Dræb"
 
-#, fuzzy
 msgid "Background jobs"
-msgstr "&Baggrundsjob"
+msgstr ""
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1751,57 +1734,44 @@ msgstr "Domæne:"
 msgid "Username:"
 msgstr "Brugernavn:"
 
-#, fuzzy
 msgid "SMB authentication"
-msgstr "Godkendelse fejlede"
+msgstr ""
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "sæt bruger-id ved kørsel"
+msgstr ""
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "sæt gruppe-id ved kørsel"
+msgstr ""
 
-#, fuzzy
 msgid "stick&y bit"
-msgstr "sticky bit"
+msgstr ""
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "læse af ejer"
+msgstr ""
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "skrive af ejer"
+msgstr ""
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "køre/søge af ejer"
+msgstr ""
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "læse af gruppen"
+msgstr ""
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "skrive af gruppen"
+msgstr ""
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "køre/søge af gruppen"
+msgstr ""
 
-#, fuzzy
 msgid "read &by others"
-msgstr "læse af andre"
+msgstr ""
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "skrive af andre"
+msgstr ""
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "køre/søge af andre"
+msgstr ""
 
 msgid "Name:"
 msgstr ""
@@ -2164,24 +2134,18 @@ msgstr ""
 msgid "&Retry"
 msgstr "&Prøv igen"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\n"
-"Mappe er ikke tom.\n"
-"Slet den rekursivt?"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Background process:\n"
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\n"
-"Baggrundsproces: Mappe er ikke tom.\n"
-"Slet den rekursivt?"
 
 msgid "Non&e"
 msgstr "Ing&en"
@@ -2449,9 +2413,8 @@ msgstr "Kan ikke fungere med »..«!"
 msgid "Sorry, I could not put the job in background"
 msgstr "Beklager. Jeg kunne ikke placere jobbet i baggrunden"
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "&Dvale"
+msgstr ""
 
 msgid "Con&tinue"
 msgstr "For&tsæt"
@@ -2479,13 +2442,13 @@ msgstr "%ld B/s"
 msgid "Target file already exists!"
 msgstr "Målfil findes allerede!"
 
-#, fuzzy, c-format
+#, c-format
 msgid "New     : %s, size %llu"
-msgstr "Kildedato: %s, størrelse %llu"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Existing: %s, size %llu"
-msgstr "Kildedato: %s, størrelse %llu"
+msgstr ""
 
 msgid "Overwrite this target?"
 msgstr "Overskriv dette mål?"
@@ -2561,9 +2524,8 @@ msgstr "Bevar &attributter"
 msgid "Di&ve into subdir if exists"
 msgstr "D&yk ned i undermappe hvis den findes"
 
-#, fuzzy
 msgid "&Stable symlinks"
-msgstr "&Stabile symbolske henvisninger"
+msgstr ""
 
 msgid "&Background"
 msgstr "&Baggrund"
@@ -2653,9 +2615,8 @@ msgstr "Søger"
 msgid "Change &to"
 msgstr "Ændr &til"
 
-#, fuzzy
 msgid "&Free VFSs now"
-msgstr "L&edig VFS'er nu"
+msgstr ""
 
 msgid "&Refresh"
 msgstr "&Opdater"
@@ -2829,9 +2790,8 @@ msgstr "Sted:      %Xh:%Xh"
 msgid "&Equal split"
 msgstr "&Ens opdeling"
 
-#, fuzzy
 msgid "&Menubar visible"
-msgstr "Menu&bjælke synlig"
+msgstr ""
 
 msgid "Command &prompt"
 msgstr "Kommando&prompt"
@@ -2845,9 +2805,8 @@ msgstr "&Fifbjælke synlig"
 msgid "&XTerm window title"
 msgstr "&XTerm-vinduestitel"
 
-#, fuzzy
 msgid "&Show free space"
-msgstr "Vis ledig &plads"
+msgstr ""
 
 msgid "Panel split"
 msgstr "Panelopdeling"
@@ -3086,9 +3045,8 @@ msgstr "På &dumme terminaler"
 msgid "Alwa&ys"
 msgstr "&Altid"
 
-#, fuzzy
 msgid "File operations"
-msgstr "Indstillinger for filhandling"
+msgstr ""
 
 msgid "&Verbose operation"
 msgstr "&Uddybende handling"
@@ -3253,9 +3211,8 @@ msgstr "&Version"
 msgid "sort|e"
 msgstr "u"
 
-#, fuzzy
 msgid "E&xtension"
-msgstr "&Udvidelse"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3694,9 +3651,8 @@ msgstr ""
 msgid "Data directory:"
 msgstr ""
 
-#, fuzzy
 msgid "File extension handlers:"
-msgstr "Rediger fil&endelse"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -4238,44 +4194,3 @@ msgstr "Søgning færdig"
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "On"
-#~ msgstr "Til"
-
-#~ msgid "Mode"
-#~ msgstr "Tilstand"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d af %d"
-
-#~ msgid "Case sensi&tive"
-#~ msgstr "Store/små &bogstaver"
-
-#~ msgid "sec"
-#~ msgstr "sek"
-
-#~ msgid "Background Jobs"
-#~ msgstr "Baggrundsjob"
-
-#~ msgid "Delete:"
-#~ msgstr "Slet:"
-
-#~ msgid "Target date: %s, size %llu"
-#~ msgstr "Måldato: %s, størrelse %llu"
-
-#~ msgid "Case s&ensitive"
-#~ msgstr "&Store/små bogstaver"
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr "Tryk alle de taster ned som vises her. Tjek siden når du er færdig"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr ""
-#~ "hvilke taster som ikke er markeret med O.k. Tryk mellemrum på den "
-#~ "manglende"
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr "tast, eller klik med musen for at definere den. Flyt med Tab."
-
-#~ msgid "fish: storing zeros"
-#~ msgstr "fisk: gemmer nuller"

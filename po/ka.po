@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: George Machitidze <giomac@gmail.com>\n"
 "Language-Team: Georgian (http://www.transifex.com/projects/p/mc/language/"
 "ka/)\n"
@@ -1684,9 +1684,8 @@ msgstr ""
 msgid "&Kill"
 msgstr ""
 
-#, fuzzy
 msgid "Background jobs"
-msgstr "ფონური პროცესის შეცდომა"
+msgstr ""
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -2926,9 +2925,8 @@ msgstr ""
 msgid "Alwa&ys"
 msgstr ""
 
-#, fuzzy
 msgid "File operations"
-msgstr "ძირითადი პარამეტრები"
+msgstr ""
 
 msgid "&Verbose operation"
 msgstr ""
@@ -4006,6 +4004,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr "თავიდან დავიწყო?"
-
-#~ msgid "fish: storing zeros"
-#~ msgstr "fish: ნულების ჩაწერა"

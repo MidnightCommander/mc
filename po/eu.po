@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/projects/p/mc/language/eu/)\n"
 "Language: eu\n"
@@ -1414,24 +1414,20 @@ msgstr ""
 msgid "&Options"
 msgstr "&Aukerak"
 
-#, fuzzy
 msgid "&None"
-msgstr "Bat ere ez"
+msgstr ""
 
-#, fuzzy
 msgid "&Dynamic paragraphing"
-msgstr "Paragrafo dinamikoa"
+msgstr ""
 
-#, fuzzy
 msgid "Type &writer wrap"
-msgstr "Idatzi idazlearen itzulbira"
+msgstr ""
 
 msgid "Wrap mode"
 msgstr "Doipen-modua"
 
-#, fuzzy
 msgid "Tabulation"
-msgstr "Nabigazioa"
+msgstr ""
 
 msgid "&Fake half tabs"
 msgstr "&Itxuratu tabuladore erdiak "
@@ -1457,13 +1453,11 @@ msgstr "Be&rretsi gorde aurretik"
 msgid "Save file &position"
 msgstr "Gorde fitxategi &kokapena"
 
-#, fuzzy
 msgid "&Visible trailing spaces"
-msgstr "Arraste zuriune ikusgarriak"
+msgstr ""
 
-#, fuzzy
 msgid "Visible &tabs"
-msgstr "Tab ikusgarriak"
+msgstr ""
 
 msgid "Synta&x highlighting"
 msgstr "sinta&xia nabarmentzen"
@@ -1474,9 +1468,8 @@ msgstr ""
 msgid "Pers&istent selection"
 msgstr "&Hautaketa iraunkorra"
 
-#, fuzzy
 msgid "Cursor be&yond end of line"
-msgstr "Kurtsorea lerro amaieratik harantzago"
+msgstr ""
 
 msgid "&Group undo"
 msgstr "&Taldeka desegin"
@@ -1487,11 +1480,10 @@ msgstr "Itzulbiratutako lerroaren luzeera:"
 msgid "Editor options"
 msgstr "Editorearen aukerak"
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr "Benetan utzi nahi duzu Midnight Commander-ra?"
+msgstr ""
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
 msgstr ""
@@ -1676,21 +1668,17 @@ msgstr "&Historia garbitu"
 msgid "Confirmation"
 msgstr "Berrespena"
 
-#, fuzzy
 msgid "&UTF-8 output"
-msgstr "UTF-8 irteera"
+msgstr ""
 
-#, fuzzy
 msgid "&Full 8 bits output"
-msgstr "8 biteko irteera"
+msgstr ""
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO 8859-1"
+msgstr ""
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "7 bit"
+msgstr ""
 
 msgid "F&ull 8 bits input"
 msgstr "8 bit-eko sarrera"
@@ -1707,21 +1695,17 @@ msgstr "&Hautatu"
 msgid "Directory tree"
 msgstr "Direktorio zuhaitza"
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "VFSak askatzeko denbora-muga:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP anonymous password:"
-msgstr "ftp anonimoaren pasahitza:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "ftpfs direktorioen cache-ko denbora-muga:"
+msgstr ""
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "&Erabili beti ftp proxy-a"
+msgstr ""
 
 msgid "&Use ~/.netrc"
 msgstr "&Erabili ~/.netrc"
@@ -1761,9 +1745,8 @@ msgstr "&Berrekin"
 msgid "&Kill"
 msgstr "&Hil"
 
-#, fuzzy
 msgid "Background jobs"
-msgstr "&Hondoko lanak"
+msgstr ""
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1775,57 +1758,44 @@ msgstr "Domeinua:"
 msgid "Username:"
 msgstr "Erabiltzaile izena:"
 
-#, fuzzy
 msgid "SMB authentication"
-msgstr "Autentifikatzeak huts egin du"
+msgstr ""
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "ezarri erabiltzailearen ID-a exekutatzerakoan"
+msgstr ""
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "ezarri taldearen ID-a exekutatzerakoan"
+msgstr ""
 
-#, fuzzy
 msgid "stick&y bit"
-msgstr "bit itsaskorra"
+msgstr ""
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "jabeak irakurri"
+msgstr ""
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "jabeak idatzi"
+msgstr ""
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "jabeak exekutatu/bilatu"
+msgstr ""
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "taldeak irakurri"
+msgstr ""
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "taldeak idatzi"
+msgstr ""
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "taldeak exekutatu/bilatu"
+msgstr ""
 
-#, fuzzy
 msgid "read &by others"
-msgstr "beste batzuek irakurri"
+msgstr ""
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "beste batzuek idatzi"
+msgstr ""
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "beste batzuek exekutatu/bilatu"
+msgstr ""
 
 msgid "Name:"
 msgstr "Izena:"
@@ -2192,24 +2162,18 @@ msgstr "Sa&hiestu guztia"
 msgid "&Retry"
 msgstr "&Saiatu berriz"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\n"
-"Direktorioa ez dago hutsik.\n"
-"Errekurtsiboki ezabatu?"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Background process:\n"
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\n"
-"Hondoko prozesua: Direktorioa ez dago hutsik.\n"
-"Errekurtsiboki ezabatu?"
 
 msgid "Non&e"
 msgstr "&Bat ere ez"
@@ -2479,9 +2443,8 @@ msgstr "Ezin da \"..\" erabili!"
 msgid "Sorry, I could not put the job in background"
 msgstr "Barkatu, ezin izan dut lana hondoan ipini"
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "E&seki"
+msgstr ""
 
 msgid "Con&tinue"
 msgstr "&Jarraitu"
@@ -2509,13 +2472,13 @@ msgstr "%ld B/s"
 msgid "Target file already exists!"
 msgstr "Helburu fitxategia dagoeneko existitzen da!"
 
-#, fuzzy, c-format
+#, c-format
 msgid "New     : %s, size %llu"
-msgstr "Iturburu data: %s, neurria %llu"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Existing: %s, size %llu"
-msgstr "Iturburu data: %s, neurria %llu"
+msgstr ""
 
 msgid "Overwrite this target?"
 msgstr "Helburu guztiak gainidatzi?"
@@ -2591,9 +2554,8 @@ msgstr "Mantendu &atributuak"
 msgid "Di&ve into subdir if exists"
 msgstr "Mur&gildu azpidirektorioan existitzen bada"
 
-#, fuzzy
 msgid "&Stable symlinks"
-msgstr "Esteka sinboliko egon&korrak"
+msgstr ""
 
 msgid "&Background"
 msgstr "&Atzeko planoa"
@@ -2683,9 +2645,8 @@ msgstr "Bilatzen"
 msgid "Change &to"
 msgstr "Aldatu &hontara"
 
-#, fuzzy
 msgid "&Free VFSs now"
-msgstr "Libratu &VFSak orain"
+msgstr ""
 
 msgid "&Refresh"
 msgstr "&Berritu"
@@ -2859,9 +2820,8 @@ msgstr "Kokalekua:  %Xh:%Xh"
 msgid "&Equal split"
 msgstr "&zatiketa berdina"
 
-#, fuzzy
 msgid "&Menubar visible"
-msgstr "Menu-&barra ikusgarri"
+msgstr ""
 
 msgid "Command &prompt"
 msgstr "Komando &gonbita"
@@ -2875,9 +2835,8 @@ msgstr "&Iradokizun-barra ikusgai"
 msgid "&XTerm window title"
 msgstr "&XTerm leihoaren izenburua"
 
-#, fuzzy
 msgid "&Show free space"
-msgstr "Erakutsi leku &askea"
+msgstr ""
 
 msgid "Panel split"
 msgstr "Panel zatiketa"
@@ -3116,9 +3075,8 @@ msgstr "&Terminal tuntunetan"
 msgid "Alwa&ys"
 msgstr "&beti"
 
-#, fuzzy
 msgid "File operations"
-msgstr "Fitxategi eragiketen aukerak"
+msgstr ""
 
 msgid "&Verbose operation"
 msgstr "Eragiketa &xehetua"
@@ -3283,9 +3241,8 @@ msgstr "&Bertsioa"
 msgid "sort|e"
 msgstr "l"
 
-#, fuzzy
 msgid "E&xtension"
-msgstr "&Luzapena"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3730,9 +3687,8 @@ msgstr "Konfiguratu direktorioa:"
 msgid "Data directory:"
 msgstr "Datuen direktorioa:"
 
-#, fuzzy
 msgid "File extension handlers:"
-msgstr "Editatu &luzapen fitxategia"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr "VFS pluginak eta script-ak:"
@@ -4276,44 +4232,3 @@ msgstr "Bilaketa eginda"
 
 msgid "Continue from beginning?"
 msgstr "Hasieratik jarraitu?"
-
-#~ msgid "On"
-#~ msgstr "Non"
-
-#~ msgid "Mode"
-#~ msgstr "Modua"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d %d(e)tik  "
-
-#~ msgid "Case sensi&tive"
-#~ msgstr "Berei&zi maius/minus"
-
-#~ msgid "sec"
-#~ msgstr "seg"
-
-#~ msgid "Background Jobs"
-#~ msgstr "Hondoko lanak"
-
-#~ msgid "Delete:"
-#~ msgstr "Ezabatu:"
-
-#~ msgid "Target date: %s, size %llu"
-#~ msgstr "Helburu data: %s, neurria %llu"
-
-#~ msgid "Case s&ensitive"
-#~ msgstr "Bereizi &maiuskulak/minuskulak"
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr "Sakatu hemen aipatutako tekla guztiak. Ondoren, egiaztatu"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr "zer tekla ez dauden Adosez markatuta. Sakatu zuriune-barra "
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr ""
-#~ "tekla horietan edo egin klik saguaz definitzeko. Tabuladorearekin mugitu "
-#~ "batetik bestera."
-
-#~ msgid "fish: storing zeros"
-#~ msgstr "fish: zeroak biltegiratzen"

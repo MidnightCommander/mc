@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/mc/language/"
 "bg/)\n"
@@ -1368,17 +1368,14 @@ msgstr ""
 msgid "&Options"
 msgstr "&Настройки"
 
-#, fuzzy
 msgid "&None"
-msgstr "Няма"
+msgstr ""
 
-#, fuzzy
 msgid "&Dynamic paragraphing"
-msgstr "Динамични абзаци"
+msgstr ""
 
-#, fuzzy
 msgid "Type &writer wrap"
-msgstr "Пишеща машина"
+msgstr ""
 
 msgid "Wrap mode"
 msgstr "Режим на пренасяне"
@@ -1410,13 +1407,11 @@ msgstr "Питай преди запазване"
 msgid "Save file &position"
 msgstr ""
 
-#, fuzzy
 msgid "&Visible trailing spaces"
-msgstr "Видими интервали в края"
+msgstr ""
 
-#, fuzzy
 msgid "Visible &tabs"
-msgstr "Видими табулации"
+msgstr ""
 
 msgid "Synta&x highlighting"
 msgstr "Осветяване на синтаксиса"
@@ -1439,11 +1434,10 @@ msgstr ""
 msgid "Editor options"
 msgstr "Настройки на редактора"
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr "Напишете `exit', за да се върнете в Midnight Commander"
+msgstr ""
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
 msgstr ""
@@ -1621,17 +1615,14 @@ msgstr "Потвърждение"
 msgid "&UTF-8 output"
 msgstr ""
 
-#, fuzzy
 msgid "&Full 8 bits output"
-msgstr "Показвай 8 бита"
+msgstr ""
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO 8859-1"
+msgstr ""
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "7 бита"
+msgstr ""
 
 msgid "F&ull 8 bits input"
 msgstr "Чети всичките 8 бита"
@@ -1648,21 +1639,17 @@ msgstr "Маркирай"
 msgid "Directory tree"
 msgstr ""
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "Време за освобождаване на ВФС:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP anonymous password:"
-msgstr "Парола за анонимно ftp:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "Живот на кеша на ftpfs:"
+msgstr ""
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "Винаги използвай прокси за ftp"
+msgstr ""
 
 msgid "&Use ~/.netrc"
 msgstr "&Използване на ~/.netrc"
@@ -1700,9 +1687,8 @@ msgstr "Продължи"
 msgid "&Kill"
 msgstr "Убий"
 
-#, fuzzy
 msgid "Background jobs"
-msgstr "Фонови процеси"
+msgstr ""
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1714,57 +1700,44 @@ msgstr "Домейн:"
 msgid "Username:"
 msgstr "Потребителско име:"
 
-#, fuzzy
 msgid "SMB authentication"
-msgstr "Грешка при автентикацията"
+msgstr ""
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "установи UID при изпълн."
+msgstr ""
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "установи GID при изпълн."
+msgstr ""
 
-#, fuzzy
 msgid "stick&y bit"
-msgstr "лепкав бит"
+msgstr ""
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "четене от собственика"
+msgstr ""
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "запис от собственика"
+msgstr ""
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "изплн/трсн от собственика"
+msgstr ""
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "четене от групата"
+msgstr ""
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "запис от групата"
+msgstr ""
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "изпълн/търсене от групата"
+msgstr ""
 
-#, fuzzy
 msgid "read &by others"
-msgstr "четене от други"
+msgstr ""
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "запис от други"
+msgstr ""
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "изпълн/търсене от други"
+msgstr ""
 
 msgid "Name:"
 msgstr "Име:"
@@ -2334,9 +2307,8 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "Спри"
+msgstr ""
 
 msgid "Con&tinue"
 msgstr "Продължи"
@@ -2446,9 +2418,8 @@ msgstr ""
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
-#, fuzzy
 msgid "&Stable symlinks"
-msgstr "Стабилни връзки"
+msgstr ""
 
 msgid "&Background"
 msgstr "Във фон"
@@ -2538,9 +2509,8 @@ msgstr "Търся"
 msgid "Change &to"
 msgstr ""
 
-#, fuzzy
 msgid "&Free VFSs now"
-msgstr "Освободи ВФС-тата"
+msgstr ""
 
 msgid "&Refresh"
 msgstr "&Обновяване"
@@ -2714,9 +2684,8 @@ msgstr "Разположен:   %Xh:%Xh"
 msgid "&Equal split"
 msgstr "По равно"
 
-#, fuzzy
 msgid "&Menubar visible"
-msgstr "Видими F-ове"
+msgstr ""
 
 msgid "Command &prompt"
 msgstr ""
@@ -2970,9 +2939,8 @@ msgstr ""
 msgid "Alwa&ys"
 msgstr "Винаги"
 
-#, fuzzy
 msgid "File operations"
-msgstr "Настройки за действия с файлове"
+msgstr ""
 
 msgid "&Verbose operation"
 msgstr "Детайли при операции"
@@ -3133,9 +3101,8 @@ msgstr "&Версия"
 msgid "sort|e"
 msgstr ""
 
-#, fuzzy
 msgid "E&xtension"
-msgstr "Разширение"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3565,9 +3532,8 @@ msgstr "Папка с настройки:"
 msgid "Data directory:"
 msgstr "Папка с данни:"
 
-#, fuzzy
 msgid "File extension handlers:"
-msgstr "Редактирай файл с разширения"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -4092,31 +4058,3 @@ msgstr "Търсенето приключи"
 
 msgid "Continue from beginning?"
 msgstr "Да се продължи ли от началото?"
-
-#~ msgid "On"
-#~ msgstr "За"
-
-#~ msgid "Mode"
-#~ msgstr "Режим"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d от %d"
-
-#~ msgid "sec"
-#~ msgstr "сек"
-
-#~ msgid "Delete:"
-#~ msgstr "Изтриване:"
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr "Натиснете всички клавиши показани тук. След като го направите"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr ""
-#~ "проверете кои не са маркирани с OK. Натиснете интервал на липсващите"
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr "или ги щракнете с мишката, за да ги дефинирате. Движете се с Tab."
-
-#~ msgid "fish: storing zeros"
-#~ msgstr "fish: запис на нули"

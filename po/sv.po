@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Cybjit <cybjit@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/projects/p/mc/language/"
 "sv/)\n"
@@ -1368,17 +1368,14 @@ msgstr ""
 msgid "&Options"
 msgstr ""
 
-#, fuzzy
 msgid "&None"
-msgstr "Ingen"
+msgstr ""
 
-#, fuzzy
 msgid "&Dynamic paragraphing"
-msgstr "Dynamiska paragrafer"
+msgstr ""
 
-#, fuzzy
 msgid "Type &writer wrap"
-msgstr "Radbrytning som på skrivmaskiner"
+msgstr ""
 
 msgid "Wrap mode"
 msgstr "Automatisk radbrytning"
@@ -1437,11 +1434,10 @@ msgstr ""
 msgid "Editor options"
 msgstr ""
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr "Skriv \"exit\" för att återvända till Midnight Commander"
+msgstr ""
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
 msgstr ""
@@ -1619,17 +1615,14 @@ msgstr ""
 msgid "&UTF-8 output"
 msgstr ""
 
-#, fuzzy
 msgid "&Full 8 bits output"
-msgstr "8 bitars utmatning"
+msgstr ""
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO 8859-1"
+msgstr ""
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "7 bitar"
+msgstr ""
 
 msgid "F&ull 8 bits input"
 msgstr "8 bitars inmatning"
@@ -1646,21 +1639,17 @@ msgstr "&Välj"
 msgid "Directory tree"
 msgstr ""
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "Timeout för frigörande av VFSs:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP anonymous password:"
-msgstr "anonymt FTP-lösenord:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "ftpfs katalogcache timeout:"
+msgstr ""
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "&Använd alltid ftpproxy"
+msgstr ""
 
 msgid "&Use ~/.netrc"
 msgstr "&Använd ~/.netrc"
@@ -1698,9 +1687,8 @@ msgstr "&Återgå"
 msgid "&Kill"
 msgstr "&Döda"
 
-#, fuzzy
 msgid "Background jobs"
-msgstr "Bakgrundsjobb"
+msgstr ""
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1715,53 +1703,41 @@ msgstr "Användarnamn:"
 msgid "SMB authentication"
 msgstr ""
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "sätt användar-ID vid exekvering"
+msgstr ""
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "sätt grupp-ID vid exekvering"
+msgstr ""
 
-#, fuzzy
 msgid "stick&y bit"
-msgstr "orörliga biten"
+msgstr ""
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "läsbar för ägaren"
+msgstr ""
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "skrivbar för ägaren"
+msgstr ""
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "exekverbar/sökbar för ägaren"
+msgstr ""
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "läsbar för grupp"
+msgstr ""
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "skrivbar för grupp"
+msgstr ""
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "exekverbar/sökbar för grupp"
+msgstr ""
 
-#, fuzzy
 msgid "read &by others"
-msgstr "läsbar för andra"
+msgstr ""
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "skrivbar för andra"
+msgstr ""
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "exekverbar/sökbar för andra"
+msgstr ""
 
 msgid "Name:"
 msgstr ""
@@ -2323,9 +2299,8 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "&Suspendera"
+msgstr ""
 
 msgid "Con&tinue"
 msgstr "&Fortsätt"
@@ -2435,9 +2410,8 @@ msgstr ""
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
-#, fuzzy
 msgid "&Stable symlinks"
-msgstr "&Stabila symlänkar"
+msgstr ""
 
 msgid "&Background"
 msgstr "&Bakgrund"
@@ -2527,9 +2501,8 @@ msgstr "Söker"
 msgid "Change &to"
 msgstr ""
 
-#, fuzzy
 msgid "&Free VFSs now"
-msgstr "Frigör VFS:er nu"
+msgstr ""
 
 msgid "&Refresh"
 msgstr ""
@@ -2703,9 +2676,8 @@ msgstr "Placering: %Xh:%Xh"
 msgid "&Equal split"
 msgstr "Dela på mitten"
 
-#, fuzzy
 msgid "&Menubar visible"
-msgstr "visa &Tangentrad"
+msgstr ""
 
 msgid "Command &prompt"
 msgstr ""
@@ -2959,9 +2931,8 @@ msgstr ""
 msgid "Alwa&ys"
 msgstr "&Alltid"
 
-#, fuzzy
 msgid "File operations"
-msgstr "&Utförliga operationer"
+msgstr ""
 
 msgid "&Verbose operation"
 msgstr "&Utförliga operationer"
@@ -3122,9 +3093,8 @@ msgstr ""
 msgid "sort|e"
 msgstr ""
 
-#, fuzzy
 msgid "E&xtension"
-msgstr "&Ändelse"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3553,9 +3523,8 @@ msgstr ""
 msgid "Data directory:"
 msgstr ""
 
-#, fuzzy
 msgid "File extension handlers:"
-msgstr "Redigera &utökningsfil"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -4080,26 +4049,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "On"
-#~ msgstr "På"
-
-#~ msgid "Mode"
-#~ msgstr "Läge"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d av %d"
-
-#~ msgid "sec"
-#~ msgstr "sek"
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr ""
-#~ "Tryck ned de tangenter som nämns här. När du har gjort det, se efter"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr ""
-#~ "vilka tangenter som inte markerats med OK. Tryck på mellanslag eller"
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr "den saknade tangenten för att definiera den. Flytta runt med tab."

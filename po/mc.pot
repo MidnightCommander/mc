@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.8.6-223-ga6b24d8\n"
+"Project-Id-Version: mc 4.8.6-228-g8cf9ba1\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -716,8 +716,8 @@ msgstr ""
 #: lib/widget/wtools.c:286 lib/widget/wtools.c:411 src/editor/edit.c:219
 #: src/editor/edit.c:253 src/editor/edit.c:405 src/editor/edit.c:2099
 #: src/editor/edit.c:2109 src/editor/editcmd.c:294 src/editor/editcmd.c:304
-#: src/editor/editcmd.c:382 src/editor/editcmd.c:2984 src/editor/spell.c:310
-#: src/editor/spell.c:545 src/editor/spell.c:553
+#: src/editor/editcmd.c:382 src/editor/editcmd.c:2984 src/editor/spell.c:322
+#: src/editor/spell.c:560 src/editor/spell.c:568
 msgid "Error"
 msgstr ""
 
@@ -1733,123 +1733,123 @@ msgstr ""
 msgid "Record/Repeat &actions"
 msgstr ""
 
-#: src/editor/editmenu.c:179
+#: src/editor/editmenu.c:181
 msgid "S&pell check"
 msgstr ""
 
-#: src/editor/editmenu.c:181
+#: src/editor/editmenu.c:184
 msgid "C&heck word"
 msgstr ""
 
-#: src/editor/editmenu.c:184
+#: src/editor/editmenu.c:187
 msgid "Change spelling &language..."
 msgstr ""
 
-#: src/editor/editmenu.c:188
+#: src/editor/editmenu.c:192
 msgid "&Mail..."
 msgstr ""
 
-#: src/editor/editmenu.c:202
+#: src/editor/editmenu.c:206
 msgid "Insert &literal..."
 msgstr ""
 
-#: src/editor/editmenu.c:203
+#: src/editor/editmenu.c:207
 msgid "Insert &date/time"
 msgstr ""
 
-#: src/editor/editmenu.c:206
+#: src/editor/editmenu.c:210
 msgid "&Format paragraph"
 msgstr ""
 
-#: src/editor/editmenu.c:207
+#: src/editor/editmenu.c:211
 msgid "&Sort..."
 msgstr ""
 
-#: src/editor/editmenu.c:209
+#: src/editor/editmenu.c:213
 msgid "&Paste output of..."
 msgstr ""
 
-#: src/editor/editmenu.c:211
+#: src/editor/editmenu.c:215
 msgid "&External formatter"
 msgstr ""
 
-#: src/editor/editmenu.c:226 src/filemanager/hotlist.c:204
+#: src/editor/editmenu.c:230 src/filemanager/hotlist.c:204
 msgid "&Move"
 msgstr ""
 
-#: src/editor/editmenu.c:227
+#: src/editor/editmenu.c:231
 msgid "&Resize"
 msgstr ""
 
-#: src/editor/editmenu.c:229
+#: src/editor/editmenu.c:233
 msgid "&Toggle fullscreen"
 msgstr ""
 
-#: src/editor/editmenu.c:231
+#: src/editor/editmenu.c:235
 msgid "&Next"
 msgstr ""
 
-#: src/editor/editmenu.c:232
+#: src/editor/editmenu.c:236
 msgid "&Previous"
 msgstr ""
 
-#: src/editor/editmenu.c:233
+#: src/editor/editmenu.c:237
 msgid "&List..."
 msgstr ""
 
-#: src/editor/editmenu.c:245
+#: src/editor/editmenu.c:249
 msgid "&General..."
 msgstr ""
 
-#: src/editor/editmenu.c:246
+#: src/editor/editmenu.c:250
 msgid "Save &mode..."
 msgstr ""
 
-#: src/editor/editmenu.c:247 src/filemanager/midnight.c:338
+#: src/editor/editmenu.c:251 src/filemanager/midnight.c:338
 msgid "Learn &keys..."
 msgstr ""
 
-#: src/editor/editmenu.c:249
+#: src/editor/editmenu.c:253
 msgid "Syntax &highlighting..."
 msgstr ""
 
-#: src/editor/editmenu.c:251
+#: src/editor/editmenu.c:255
 msgid "S&yntax file"
 msgstr ""
 
-#: src/editor/editmenu.c:252
+#: src/editor/editmenu.c:256
 msgid "&Menu file"
 msgstr ""
 
-#: src/editor/editmenu.c:254 src/filemanager/midnight.c:343
+#: src/editor/editmenu.c:258 src/filemanager/midnight.c:343
 msgid "&Save setup"
 msgstr ""
 
-#: src/editor/editmenu.c:288 src/filemanager/midnight.c:355
+#: src/editor/editmenu.c:292 src/filemanager/midnight.c:355
 msgid "&File"
 msgstr ""
 
-#: src/editor/editmenu.c:290 src/filemanager/midnight.c:240
+#: src/editor/editmenu.c:294 src/filemanager/midnight.c:240
 msgid "&Edit"
 msgstr ""
 
-#: src/editor/editmenu.c:292
+#: src/editor/editmenu.c:296
 msgid "&Search"
 msgstr ""
 
-#: src/editor/editmenu.c:295 src/filemanager/midnight.c:357
+#: src/editor/editmenu.c:299 src/filemanager/midnight.c:357
 msgid "&Command"
 msgstr ""
 
-#: src/editor/editmenu.c:298
+#: src/editor/editmenu.c:302
 msgid "For&mat"
 msgstr ""
 
-#: src/editor/editmenu.c:300
+#: src/editor/editmenu.c:304
 msgid "&Window"
 msgstr ""
 
-#: src/editor/editmenu.c:302 src/filemanager/midnight.c:359
+#: src/editor/editmenu.c:306 src/filemanager/midnight.c:359
 msgid "&Options"
 msgstr ""
 
@@ -4513,15 +4513,15 @@ msgstr ""
 msgid "-  < No translation >"
 msgstr ""
 
-#: src/setup.c:216
+#: src/setup.c:220
 msgid "%b %e  %Y"
 msgstr ""
 
-#: src/setup.c:217
+#: src/setup.c:221
 msgid "%b %e %H:%M"
 msgstr ""
 
-#: src/setup.c:1172
+#: src/setup.c:1191
 #, c-format
 msgid ""
 "Cannot save file %s:\n"

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/projects/p/mc/language/"
 "ja/)\n"
@@ -1377,24 +1377,20 @@ msgstr ""
 msgid "&Options"
 msgstr "オプション(&O)"
 
-#, fuzzy
 msgid "&None"
-msgstr "なし"
+msgstr ""
 
-#, fuzzy
 msgid "&Dynamic paragraphing"
-msgstr "動的段落作成"
+msgstr ""
 
-#, fuzzy
 msgid "Type &writer wrap"
-msgstr "タイプライター風折返し"
+msgstr ""
 
 msgid "Wrap mode"
 msgstr "折り返し方法"
 
-#, fuzzy
 msgid "Tabulation"
-msgstr "ナビゲーション"
+msgstr ""
 
 msgid "&Fake half tabs"
 msgstr "疑似半タブ(&F)"
@@ -1447,11 +1443,10 @@ msgstr ""
 msgid "Editor options"
 msgstr "編集のオプション"
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr "本当に Midnight Commander を終了しますか?"
+msgstr ""
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
 msgstr ""
@@ -1630,21 +1625,17 @@ msgstr ""
 msgid "Confirmation"
 msgstr "確認"
 
-#, fuzzy
 msgid "&UTF-8 output"
-msgstr "UTF-8 出力"
+msgstr ""
 
-#, fuzzy
 msgid "&Full 8 bits output"
-msgstr "8 ビット出力"
+msgstr ""
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO 8850-1"
+msgstr ""
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "7 ビット"
+msgstr ""
 
 msgid "F&ull 8 bits input"
 msgstr "8 ビット入力(&u)"
@@ -1661,21 +1652,17 @@ msgstr "選択(&S)"
 msgid "Directory tree"
 msgstr "ディレクトリーのツリー"
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "VFSを解放するタイムアウト:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP anonymous password:"
-msgstr "ftp anonymous パスワード:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "ftpfs ディレクトリキャッシュの保存時間:"
+msgstr ""
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "常に ftp プロキシを使う(&A)"
+msgstr ""
 
 msgid "&Use ~/.netrc"
 msgstr "~/.netrc を使う(&U)"
@@ -1713,9 +1700,8 @@ msgstr "再開(&R)"
 msgid "&Kill"
 msgstr "強制終了(&K)"
 
-#, fuzzy
 msgid "Background jobs"
-msgstr "バックグラウンドジョブ"
+msgstr ""
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1730,53 +1716,41 @@ msgstr "ユーザ名:"
 msgid "SMB authentication"
 msgstr ""
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "実行時にユーザIDを設定"
+msgstr ""
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "実行時にグループIDを設定"
+msgstr ""
 
-#, fuzzy
 msgid "stick&y bit"
-msgstr "スティッキービット"
+msgstr ""
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "所有者が読める"
+msgstr ""
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "所有者が書ける"
+msgstr ""
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "所有者が実行・検索できる"
+msgstr ""
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "グループで読める"
+msgstr ""
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "グループで書ける"
+msgstr ""
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "グループで実行・検索できる"
+msgstr ""
 
-#, fuzzy
 msgid "read &by others"
-msgstr "他人が読める"
+msgstr ""
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "他人が書ける"
+msgstr ""
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "他人が実行・検索できる"
+msgstr ""
 
 msgid "Name:"
 msgstr "名前:"
@@ -2340,9 +2314,8 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "一時停止(&S)"
+msgstr ""
 
 msgid "Con&tinue"
 msgstr "続行(&t)"
@@ -2452,9 +2425,8 @@ msgstr ""
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
-#, fuzzy
 msgid "&Stable symlinks"
-msgstr "安定シンボリックリンク(&S)"
+msgstr ""
 
 msgid "&Background"
 msgstr "バックグラウンド(&B)"
@@ -2543,9 +2515,8 @@ msgstr "検索"
 msgid "Change &to"
 msgstr "次に変更する(&T):"
 
-#, fuzzy
 msgid "&Free VFSs now"
-msgstr "VFS を解放"
+msgstr ""
 
 msgid "&Refresh"
 msgstr "再表示(&R)"
@@ -2718,9 +2689,8 @@ msgstr "位置:      %Xh:%Xh"
 msgid "&Equal split"
 msgstr "同じ大きさに分割(&E)"
 
-#, fuzzy
 msgid "&Menubar visible"
-msgstr "キーバー表示(&K)"
+msgstr ""
 
 msgid "Command &prompt"
 msgstr "コマンド プロンプト(&P)"
@@ -2734,9 +2704,8 @@ msgstr ""
 msgid "&XTerm window title"
 msgstr "XTerm のウィンドウの名前(&X)"
 
-#, fuzzy
 msgid "&Show free space"
-msgstr "空き容量の表示(&A)"
+msgstr ""
 
 msgid "Panel split"
 msgstr ""
@@ -2974,9 +2943,8 @@ msgstr ""
 msgid "Alwa&ys"
 msgstr "常に停止(&Y)"
 
-#, fuzzy
 msgid "File operations"
-msgstr "ファイル操作のオプション"
+msgstr ""
 
 msgid "&Verbose operation"
 msgstr "やかましく動作"
@@ -3137,9 +3105,8 @@ msgstr "バージョン(&V)"
 msgid "sort|e"
 msgstr ""
 
-#, fuzzy
 msgid "E&xtension"
-msgstr "拡張子(&E)"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3567,9 +3534,8 @@ msgstr "設定のディレクトリー"
 msgid "Data directory:"
 msgstr "データのディレクトリー:"
 
-#, fuzzy
 msgid "File extension handlers:"
-msgstr "拡張ファイルを編集(&E)"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -4095,27 +4061,3 @@ msgstr "検索終了"
 
 msgid "Continue from beginning?"
 msgstr "初めから続けますか?"
-
-#~ msgid "On"
-#~ msgstr "オン"
-
-#~ msgid "Mode"
-#~ msgstr "モード"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d (%d 中)"
-
-#~ msgid "sec"
-#~ msgstr "秒"
-
-#~ msgid "Delete:"
-#~ msgstr "削除:"
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr "ここに表示されているキーをすべて押してください。すべて押したら"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr "「良」のマークのないキーをチェックします。そのキーの上でスペー"
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr "スかマウスを押してキー定義を実行してください。TABで移動できます"

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Stéphane Aulery <lkppo@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/mc/language/fr/)\n"
 "Language: fr\n"
@@ -1386,24 +1386,20 @@ msgstr ""
 msgid "&Options"
 msgstr "&Options"
 
-#, fuzzy
 msgid "&None"
-msgstr "Aucun"
+msgstr ""
 
-#, fuzzy
 msgid "&Dynamic paragraphing"
-msgstr "Paragraphage automatique"
+msgstr ""
 
-#, fuzzy
 msgid "Type &writer wrap"
-msgstr "Césure « machine à écrire »"
+msgstr ""
 
 msgid "Wrap mode"
 msgstr "Mode de césure"
 
-#, fuzzy
 msgid "Tabulation"
-msgstr "Navigation"
+msgstr ""
 
 msgid "&Fake half tabs"
 msgstr "&Fausses demi-tabulations"
@@ -1429,13 +1425,11 @@ msgstr "Confir&Mer avant d'enregistrer"
 msgid "Save file &position"
 msgstr "Enregistrer la position dans le fichier"
 
-#, fuzzy
 msgid "&Visible trailing spaces"
-msgstr "Espace en fin de ligne visible"
+msgstr ""
 
-#, fuzzy
 msgid "Visible &tabs"
-msgstr "Tabulation visible"
+msgstr ""
 
 msgid "Synta&x highlighting"
 msgstr "Coloration synta&xique"
@@ -1446,9 +1440,8 @@ msgstr ""
 msgid "Pers&istent selection"
 msgstr "sélection pers&istante"
 
-#, fuzzy
 msgid "Cursor be&yond end of line"
-msgstr "Curseur au-delà de la fin de la ligne"
+msgstr ""
 
 msgid "&Group undo"
 msgstr "&Annuler un groupe"
@@ -1459,11 +1452,10 @@ msgstr ""
 msgid "Editor options"
 msgstr "Options de l'éditeur"
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr "Souhaitez vous vraiment quitter Midnight Commander ?"
+msgstr ""
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
 msgstr ""
@@ -1644,21 +1636,17 @@ msgstr " Confirmation|Nettoyage de l'&Historique"
 msgid "Confirmation"
 msgstr " Confirmation "
 
-#, fuzzy
 msgid "&UTF-8 output"
-msgstr "Sortie UTF-8"
+msgstr ""
 
-#, fuzzy
 msgid "&Full 8 bits output"
-msgstr "Sortie 8 bits"
+msgstr ""
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO 8859-1"
+msgstr ""
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "7 bits"
+msgstr ""
 
 msgid "F&ull 8 bits input"
 msgstr "Entrée 8 &bits"
@@ -1675,21 +1663,17 @@ msgstr "&Sélectionner"
 msgid "Directory tree"
 msgstr "Arborescence des répertoires"
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "Délai pour libérer les SFVs:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP anonymous password:"
-msgstr "Mot de passe pour FTP anonyme :"
+msgstr ""
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "Durée de garde du cache FTPfs:"
+msgstr ""
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "&Toujours utiliser le proxy FTP"
+msgstr ""
 
 msgid "&Use ~/.netrc"
 msgstr "&Utiliser ~/.netrc"
@@ -1727,9 +1711,8 @@ msgstr "&Reprendre"
 msgid "&Kill"
 msgstr "&Tuer"
 
-#, fuzzy
 msgid "Background jobs"
-msgstr "&Processus en tâche de fond"
+msgstr ""
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1741,57 +1724,44 @@ msgstr "Domaine : "
 msgid "Username:"
 msgstr "Nom d'utilisateur : "
 
-#, fuzzy
 msgid "SMB authentication"
-msgstr " Échec de l'authentification"
+msgstr ""
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "exécuter avec l'ID propr."
+msgstr ""
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "exécuter avec l'ID groupe"
+msgstr ""
 
-#, fuzzy
 msgid "stick&y bit"
-msgstr "bit collant (sticky)"
+msgstr ""
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "lecture par le propr."
+msgstr ""
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "écriture par le propr."
+msgstr ""
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "exéc./rech. par le propr."
+msgstr ""
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "lecture par le groupe"
+msgstr ""
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "écriture par le groupe"
+msgstr ""
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "exécuter/rechercher par le groupe"
+msgstr ""
 
-#, fuzzy
 msgid "read &by others"
-msgstr "lecture par les autres"
+msgstr ""
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "écriture par les autres"
+msgstr ""
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "exéc./rech. par les autres"
+msgstr ""
 
 msgid "Name:"
 msgstr "Nom :"
@@ -2139,13 +2109,11 @@ msgstr "Sauter &tout"
 msgid "&Retry"
 msgstr "&Ré-essayer"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"Le groupe \"%s\" n'est pas vide.\n"
-"Le supprimer ?"
 
 #, c-format
 msgid ""
@@ -2360,9 +2328,8 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "&Suspendre"
+msgstr ""
 
 msgid "Con&tinue"
 msgstr "Con&tinuer"
@@ -2390,13 +2357,13 @@ msgstr "%ld o/s"
 msgid "Target file already exists!"
 msgstr "Le fichier cible existe déjà !"
 
-#, fuzzy, c-format
+#, c-format
 msgid "New     : %s, size %llu"
-msgstr "Date de la source : %s, taille %llu"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Existing: %s, size %llu"
-msgstr "Date de la source : %s, taille %llu"
+msgstr ""
 
 msgid "Overwrite this target?"
 msgstr "Écraser cette cible ?"
@@ -2472,9 +2439,8 @@ msgstr "Préserver les &attributs"
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
-#, fuzzy
 msgid "&Stable symlinks"
-msgstr "Lien symboliques &stables"
+msgstr ""
 
 msgid "&Background"
 msgstr "&Fond"
@@ -2564,9 +2530,8 @@ msgstr "Recherche en cours"
 msgid "Change &to"
 msgstr ""
 
-#, fuzzy
 msgid "&Free VFSs now"
-msgstr "Désalou&er VFSs"
+msgstr ""
 
 msgid "&Refresh"
 msgstr "&Rafraichir"
@@ -2742,9 +2707,8 @@ msgstr "Emplacement : %Xh:%Xh"
 msgid "&Equal split"
 msgstr "Séparer en d&eux parties égales"
 
-#, fuzzy
 msgid "&Menubar visible"
-msgstr "Barre de &touches visibles"
+msgstr ""
 
 msgid "Command &prompt"
 msgstr ""
@@ -2758,9 +2722,8 @@ msgstr ""
 msgid "&XTerm window title"
 msgstr "Titre de la fenêtre &XTerm"
 
-#, fuzzy
 msgid "&Show free space"
-msgstr "Afficher l'esp&ace libre"
+msgstr ""
 
 msgid "Panel split"
 msgstr ""
@@ -2999,9 +2962,8 @@ msgstr ""
 msgid "Alwa&ys"
 msgstr "&Toujours"
 
-#, fuzzy
 msgid "File operations"
-msgstr "FileOperation|Copie"
+msgstr ""
 
 msgid "&Verbose operation"
 msgstr "&Opérations bavardes"
@@ -3162,9 +3124,8 @@ msgstr "&Version"
 msgid "sort|e"
 msgstr "sort|e"
 
-#, fuzzy
 msgid "E&xtension"
-msgstr "&Extension"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3609,9 +3570,8 @@ msgstr "Répertoire de configuration :"
 msgid "Data directory:"
 msgstr "Répertoire des données :"
 
-#, fuzzy
 msgid "File extension handlers:"
-msgstr "Édition des &extensions de fichier"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -4151,36 +4111,3 @@ msgstr "Recherche terminée"
 
 msgid "Continue from beginning?"
 msgstr "Continuer à partir de début ?"
-
-#~ msgid "On"
-#~ msgstr "Activé"
-
-#~ msgid "Mode"
-#~ msgstr "Mode"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d sur %d"
-
-#~ msgid "Case sensi&tive"
-#~ msgstr "Respec&t de la casse "
-
-#~ msgid "sec"
-#~ msgstr "sec"
-
-#~ msgid "Background Jobs"
-#~ msgstr "Processus en tâche de fond"
-
-#~ msgid "Target date: %s, size %llu"
-#~ msgstr "Date de la cible : %s, taille %llu"
-
-#~ msgid "Case s&ensitive"
-#~ msgstr "S&ensible à la casse"
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr "Essayez toutes les touches citées ici. Vérifiez ensuite qu'elles"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr "ont toutes ont été marquées « Vu ».  Appuyez sur « espace » en"
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr "face des touches manquantes, ou cliquez dessus pour la définir."

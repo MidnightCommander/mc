@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: az\n"
@@ -1366,17 +1366,14 @@ msgstr ""
 msgid "&Options"
 msgstr ""
 
-#, fuzzy
 msgid "&None"
-msgstr "Heçbiri"
+msgstr ""
 
-#, fuzzy
 msgid "&Dynamic paragraphing"
-msgstr "Dinamik paraqraf"
+msgstr ""
 
-#, fuzzy
 msgid "Type &writer wrap"
-msgstr "Kəlimə qırılması"
+msgstr ""
 
 msgid "Wrap mode"
 msgstr "Qırma modu"
@@ -1435,11 +1432,10 @@ msgstr ""
 msgid "Editor options"
 msgstr ""
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr "Midnight Commanderə qayıtmaq üçün `exit' yazın"
+msgstr ""
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
 msgstr ""
@@ -1617,17 +1613,14 @@ msgstr ""
 msgid "&UTF-8 output"
 msgstr ""
 
-#, fuzzy
 msgid "&Full 8 bits output"
-msgstr "Tam 8-bitlik göstər"
+msgstr ""
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO 8859-1"
+msgstr ""
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "7 bit"
+msgstr ""
 
 msgid "F&ull 8 bits input"
 msgstr "Tam 8-bitlik giriş"
@@ -1644,21 +1637,17 @@ msgstr "&Seç"
 msgid "Directory tree"
 msgstr ""
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "VFSnin azad edilməsi üçün vaxt dolması:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP anonymous password:"
-msgstr "ftp anonim parolu:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "ftpfs qovluğu vaxt dolması"
+msgstr ""
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "&Həmişə ftp vəkil vericisi istifadə et"
+msgstr ""
 
 msgid "&Use ~/.netrc"
 msgstr ""
@@ -1696,9 +1685,8 @@ msgstr "T&əzədən davam et"
 msgid "&Kill"
 msgstr "&Öldür"
 
-#, fuzzy
 msgid "Background jobs"
-msgstr "Arxaplan vəzifələri"
+msgstr ""
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1713,53 +1701,41 @@ msgstr "İstifadəçi adı: "
 msgid "SMB authentication"
 msgstr ""
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "işə salarkən istifadəçi IDsini daxil et"
+msgstr ""
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "işə salarkən qrup IDsini daxil et"
+msgstr ""
 
-#, fuzzy
 msgid "stick&y bit"
-msgstr "sticky bit"
+msgstr ""
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "yiyəsi tərəfindən oxunan"
+msgstr ""
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "yiyəsi tərəfindən yazılan"
+msgstr ""
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "yiyəsi tərəfindən işə salınan/axtarılan"
+msgstr ""
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "qrup tərəfindən oxunan"
+msgstr ""
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "qrup tərəfindən yazılan"
+msgstr ""
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "qrup tərəfindən işə salınan/axtarılan"
+msgstr ""
 
-#, fuzzy
 msgid "read &by others"
-msgstr "başqaları tərəfindən oxunan"
+msgstr ""
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "başqaları tərəfindən yazılan"
+msgstr ""
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "başqaları tərəfindən işə sal/axtar"
+msgstr ""
 
 msgid "Name:"
 msgstr ""
@@ -2321,9 +2297,8 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "&Gözlə"
+msgstr ""
 
 msgid "Con&tinue"
 msgstr "Davam&Et"
@@ -2433,9 +2408,8 @@ msgstr ""
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
-#, fuzzy
 msgid "&Stable symlinks"
-msgstr "%Sabit yumşaq bağlar"
+msgstr ""
 
 msgid "&Background"
 msgstr "&Arxaplan"
@@ -2524,9 +2498,8 @@ msgstr "Axtarılır"
 msgid "Change &to"
 msgstr ""
 
-#, fuzzy
 msgid "&Free VFSs now"
-msgstr "VFS'i indi &boşalt"
+msgstr ""
 
 msgid "&Refresh"
 msgstr ""
@@ -2699,9 +2672,8 @@ msgstr "Yeri:   %Xh:%Xh"
 msgid "&Equal split"
 msgstr "&Bərabər böl"
 
-#, fuzzy
 msgid "&Menubar visible"
-msgstr "&Düymələr çubuğu görünən"
+msgstr ""
 
 msgid "Command &prompt"
 msgstr ""
@@ -2954,9 +2926,8 @@ msgstr ""
 msgid "Alwa&ys"
 msgstr "hə&mişə"
 
-#, fuzzy
 msgid "File operations"
-msgstr "&Sözlü əməliyyatlar"
+msgstr ""
 
 msgid "&Verbose operation"
 msgstr "&Sözlü əməliyyatlar"
@@ -3117,9 +3088,8 @@ msgstr ""
 msgid "sort|e"
 msgstr ""
 
-#, fuzzy
 msgid "E&xtension"
-msgstr "&Uzantı"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3548,9 +3518,8 @@ msgstr ""
 msgid "Data directory:"
 msgstr ""
 
-#, fuzzy
 msgid "File extension handlers:"
-msgstr "Fayl suf&fikslərini dəyişdir"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -4074,26 +4043,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "On"
-#~ msgstr "Aç"
-
-#~ msgid "Mode"
-#~ msgstr "Mod"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%d nin %6d sı"
-
-#~ msgid "sec"
-#~ msgstr "san."
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr ""
-#~ "Burada bəhs edilən bütün düymələri basın. Qurtardıqdan sonra da yoxlayın"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr ""
-#~ "hansı düymələr OLDU deyə işarətlənməyib. Yox isə Space düyməsinə basın"
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr "düymə ya da siçan ilə basaraq seçin. Tab ilə gəzin."

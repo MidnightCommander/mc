@@ -3,21 +3,24 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Slava Zanko <slavazanko@gmail.com>, 2011.
+#   <aryaz.egh@gmail.com>, 2012.
+#   <monta2009@gmail.com>, 2012.
+# Sina Saharkhiz <sinas1991@gmail.com>, 2012.
+# Slava Zanko <slavazanko@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2012-12-28 11:22+0300\n"
-"PO-Revision-Date: 2012-12-26 08:42+0000\n"
+"PO-Revision-Date: 2012-12-28 08:17+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
-"Language-Team: Finnish (http://www.transifex.com/projects/p/mc/language/"
-"fi/)\n"
-"Language: fi\n"
+"Language-Team: Persian (http://www.transifex.com/projects/p/mc/language/"
+"fa/)\n"
+"Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr ""
@@ -57,7 +60,7 @@ msgid ""
 msgstr ""
 
 msgid "File locked"
-msgstr ""
+msgstr "فایل قفل شده است"
 
 msgid "&Grab lock"
 msgstr ""
@@ -91,10 +94,10 @@ msgid ""
 msgstr ""
 
 msgid "Search string not found"
-msgstr ""
+msgstr "رشته‌ی جستجو شده یافت نشد"
 
 msgid "Not implemented yet"
-msgstr ""
+msgstr "هنوز پیاده‌سازی نشده است"
 
 msgid "Num of replace tokens not equal to num of found tokens"
 msgstr ""
@@ -138,100 +141,100 @@ msgid ""
 msgstr ""
 
 msgid "Function key 1"
-msgstr ""
+msgstr "کلید تابع ۱"
 
 msgid "Function key 2"
-msgstr ""
+msgstr "کلید تابع ۲"
 
 msgid "Function key 3"
-msgstr ""
+msgstr "کلید تابع ۳"
 
 msgid "Function key 4"
-msgstr ""
+msgstr "کلید تابع ۴"
 
 msgid "Function key 5"
-msgstr ""
+msgstr "کلید تابع ۵"
 
 msgid "Function key 6"
-msgstr ""
+msgstr "کلید تابع ۶"
 
 msgid "Function key 7"
-msgstr ""
+msgstr "کلید تابع ۷"
 
 msgid "Function key 8"
-msgstr ""
+msgstr "کلید تابع ۸"
 
 msgid "Function key 9"
-msgstr ""
+msgstr "کلید تابع ۹"
 
 msgid "Function key 10"
-msgstr ""
+msgstr "کلید تابع ۱۰"
 
 msgid "Function key 11"
-msgstr ""
+msgstr "کلید تابع ۱۱"
 
 msgid "Function key 12"
-msgstr ""
+msgstr "کلید تابع ۱۲"
 
 msgid "Function key 13"
-msgstr ""
+msgstr "کلید تابع ۱۳"
 
 msgid "Function key 14"
-msgstr ""
+msgstr "کلید تابع ۱۴"
 
 msgid "Function key 15"
-msgstr ""
+msgstr "کلید تابع ۱۵"
 
 msgid "Function key 16"
-msgstr ""
+msgstr "کلید تابع ۱۶"
 
 msgid "Function key 17"
-msgstr ""
+msgstr "کلید تابع ۱۷"
 
 msgid "Function key 18"
-msgstr ""
+msgstr "کلید تابع ۱۸"
 
 msgid "Function key 19"
-msgstr ""
+msgstr "کلید تابع ۱۹"
 
 msgid "Function key 20"
-msgstr ""
+msgstr "کلید تابع ۲۰"
 
 msgid "Backspace key"
-msgstr ""
+msgstr "کلید پس‌بر"
 
 msgid "End key"
-msgstr ""
+msgstr "کلید پایان"
 
 msgid "Up arrow key"
-msgstr ""
+msgstr "کلید جهت بالا"
 
 msgid "Down arrow key"
-msgstr ""
+msgstr "کلید جهت پایین"
 
 msgid "Left arrow key"
-msgstr ""
+msgstr "کلید جهت چپ"
 
 msgid "Right arrow key"
-msgstr ""
+msgstr "کلید جهت راست"
 
 msgid "Home key"
-msgstr ""
+msgstr "کلید خانه"
 
 msgid "Page Down key"
-msgstr ""
+msgstr "کلید صفحه‌ی پایین"
 
 msgid "Page Up key"
-msgstr ""
+msgstr "کلید صفحه‌ی بالا"
 
 msgid "Insert key"
-msgstr ""
+msgstr "کلید درج"
 
 msgid "Delete key"
-msgstr ""
+msgstr "کلید حذف"
 
 msgid "Completion/M-tab"
-msgstr ""
+msgstr "تکمیل/M-tab"
 
 msgid "Back Tabulation S-tab"
 msgstr ""
@@ -249,7 +252,7 @@ msgid "* on keypad"
 msgstr ""
 
 msgid "Escape key"
-msgstr ""
+msgstr "کلید گریز"
 
 msgid "Left arrow keypad"
 msgstr ""
@@ -285,16 +288,16 @@ msgid "Enter on keypad"
 msgstr ""
 
 msgid "Function key 21"
-msgstr ""
+msgstr "کلید تابع ۲۱"
 
 msgid "Function key 22"
-msgstr ""
+msgstr "کلید تابع ۲۲"
 
 msgid "Function key 23"
-msgstr ""
+msgstr "کلید تابع ۲۳"
 
 msgid "Function key 24"
-msgstr ""
+msgstr "کلید تابع ۲۴"
 
 msgid "A1 key"
 msgstr ""
@@ -303,52 +306,52 @@ msgid "C1 key"
 msgstr ""
 
 msgid "Plus"
-msgstr ""
+msgstr "مثبت"
 
 msgid "Minus"
-msgstr ""
+msgstr "منفی"
 
 msgid "Asterisk"
-msgstr ""
+msgstr "ستاره"
 
 msgid "Dot"
-msgstr ""
+msgstr "نقطه"
 
 msgid "Less than"
-msgstr ""
+msgstr "کوچکتر از"
 
 msgid "Great than"
-msgstr ""
+msgstr "بزرگتر از"
 
 msgid "Equal"
-msgstr ""
+msgstr "برابر"
 
 msgid "Comma"
-msgstr ""
+msgstr "ویرگول"
 
 msgid "Apostrophe"
 msgstr ""
 
 msgid "Colon"
-msgstr ""
+msgstr "دونقطه"
 
 msgid "Exclamation mark"
-msgstr ""
+msgstr "علامت تعجب"
 
 msgid "Question mark"
-msgstr ""
+msgstr "علامت سوال"
 
 msgid "Ampersand"
 msgstr ""
 
 msgid "Dollar sign"
-msgstr ""
+msgstr "علامت دلار"
 
 msgid "Quotation mark"
-msgstr ""
+msgstr "علامت نقل قول"
 
 msgid "Percent sign"
-msgstr ""
+msgstr "علامت درصد"
 
 msgid "Caret"
 msgstr ""
@@ -360,25 +363,25 @@ msgid "Prime"
 msgstr ""
 
 msgid "Underline"
-msgstr ""
+msgstr "زیرخط"
 
 msgid "Understrike"
 msgstr ""
 
 msgid "Pipe"
-msgstr ""
+msgstr "لوله (خط عمودی)"
 
 msgid "Left parenthesis"
-msgstr ""
+msgstr "پرانتز چپ"
 
 msgid "Right parenthesis"
-msgstr ""
+msgstr "پرانتز راست"
 
 msgid "Left bracket"
-msgstr ""
+msgstr "قلاب چپ"
 
 msgid "Right bracket"
-msgstr ""
+msgstr "قلاب راست"
 
 msgid "Left brace"
 msgstr ""
@@ -390,10 +393,10 @@ msgid "Enter"
 msgstr ""
 
 msgid "Tab key"
-msgstr ""
+msgstr "کلید جهش"
 
 msgid "Space key"
-msgstr ""
+msgstr "کلید فاصله"
 
 msgid "Slash key"
 msgstr ""
@@ -427,7 +430,7 @@ msgid ""
 msgstr ""
 
 msgid "Warning"
-msgstr "Varoitus"
+msgstr "اخطار"
 
 msgid "Pipe failed"
 msgstr ""
@@ -449,10 +452,10 @@ msgid "Starting linear transfer..."
 msgstr ""
 
 msgid "Getting file"
-msgstr ""
+msgstr "در حال دریافت فایل"
 
 msgid "Changes to file lost"
-msgstr ""
+msgstr "تغییرات در فایل، از دست رفت"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -476,11 +479,11 @@ msgstr ""
 
 #, c-format
 msgid "Temporary files will not be created\n"
-msgstr ""
+msgstr "فایل‌های موقتی ساخته نخواهند شد\n"
 
 #, c-format
 msgid "Press any key to continue..."
-msgstr ""
+msgstr "برای ادامه کلیدی را فشار دهید..."
 
 msgid "Cannot parse:"
 msgstr ""
@@ -489,44 +492,44 @@ msgid "More parsing errors will be ignored."
 msgstr ""
 
 msgid "Internal error:"
-msgstr ""
+msgstr "خطای داخلی:"
 
 msgid "Password:"
-msgstr "Salasana:"
+msgstr "رمز عبور:"
 
 msgid "Screens"
 msgstr ""
 
 msgid "History"
-msgstr ""
+msgstr "تاریخچه"
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
 msgid "DialogTitle|History cleanup"
 msgstr ""
 
 msgid "Do you want clean this history?"
-msgstr ""
+msgstr "آیا می‌خواهید این تاریخچه را پاک کنید؟"
 
 msgid "&Yes"
-msgstr "&Kyllä"
+msgstr "بله"
 
 msgid "&No"
-msgstr "&Ei"
+msgstr "خیر"
 
 msgid "&OK"
-msgstr "&OK"
+msgstr ""
 
 msgid "&Cancel"
-msgstr "&Peruuta"
+msgstr "لغو"
 
 msgid "Background process:"
-msgstr "Taustaprosessi:"
+msgstr "فرآیند در پس‌زمینه:"
 
 msgid "Error"
-msgstr "Virhe"
+msgstr "خطا"
 
 msgid "Displays the current version"
-msgstr ""
+msgstr "نسخه‌ی فعلی را نشان می‌دهد"
 
 msgid "Print data directory"
 msgstr ""
@@ -535,7 +538,7 @@ msgid "Print extended info about used data directories"
 msgstr ""
 
 msgid "Print configure options"
-msgstr ""
+msgstr "نوشتن تنظیمات پیکربندی"
 
 msgid "Print last working directory to specified file"
 msgstr ""
@@ -550,13 +553,13 @@ msgid "Log ftp dialog to specified file"
 msgstr ""
 
 msgid "Set debug level"
-msgstr ""
+msgstr "تنظیم سطح خطایابی"
 
 msgid "Launches the file viewer on a file"
 msgstr ""
 
 msgid "Edit files"
-msgstr ""
+msgstr "ویرایش فایل‌ها"
 
 msgid "Forces xterm features"
 msgstr ""
@@ -568,13 +571,13 @@ msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
 
 msgid "Disable mouse support in text version"
-msgstr ""
+msgstr "غیرفعال کردن پشتیبانی از موشواره در نسخه‌ی متنی"
 
 msgid "Tries to use termcap instead of terminfo"
 msgstr ""
 
 msgid "To run on slow terminals"
-msgstr ""
+msgstr "برای اجرا در پایانه‌های کند"
 
 msgid "Use stickchars to draw"
 msgstr ""
@@ -589,13 +592,13 @@ msgid "Don't load definitions of key bindings from file, use defaults"
 msgstr ""
 
 msgid "Requests to run in black and white"
-msgstr ""
+msgstr "درخواست برای اجرا در حالت سیاه و سفید"
 
 msgid "Request to run in color mode"
-msgstr ""
+msgstr "درخواست برای اجرا در حالت رنگی"
 
 msgid "Specifies a color configuration"
-msgstr ""
+msgstr "مشخص کردن پیکربندی یک رنگ"
 
 msgid "Show mc with specified skin"
 msgstr ""
@@ -637,7 +640,7 @@ msgid ""
 msgstr ""
 
 msgid "Color options"
-msgstr ""
+msgstr "تنظیمات رنگ"
 
 msgid "+number"
 msgstr ""
@@ -659,10 +662,10 @@ msgid "GNU Midnight Commander %s\n"
 msgstr ""
 
 msgid "Main options"
-msgstr ""
+msgstr "تنظیمات اصلی"
 
 msgid "Terminal options"
-msgstr ""
+msgstr "تنظیمات پایانه"
 
 msgid "Arguments parse error!"
 msgstr ""
@@ -674,13 +677,13 @@ msgid "Two files are required to evoke the diffviewer."
 msgstr ""
 
 msgid "Background process error"
-msgstr ""
+msgstr "خطای فرآیند پس‌زمینه"
 
 msgid "Unknown error in child"
-msgstr ""
+msgstr "خطای نامعلوم در فرزند"
 
 msgid "Child died unexpectedly"
-msgstr ""
+msgstr "بچه به طور غیرمنتظره مرد"
 
 msgid "Background protocol error"
 msgstr ""
@@ -694,7 +697,7 @@ msgid ""
 msgstr ""
 
 msgid "&Dismiss"
-msgstr "&Kuittaa"
+msgstr ""
 
 msgid "Enter search string:"
 msgstr ""
@@ -703,7 +706,7 @@ msgid "Cas&e sensitive"
 msgstr ""
 
 msgid "&Backwards"
-msgstr "&Takaperin"
+msgstr ""
 
 msgid "&Whole words"
 msgstr ""
@@ -712,10 +715,10 @@ msgid "&All charsets"
 msgstr ""
 
 msgid "Search"
-msgstr "Etsi"
+msgstr "جستجو"
 
 msgid "Search is disabled"
-msgstr ""
+msgstr "جستجو غیرفعال است"
 
 #, c-format
 msgid ""
@@ -767,10 +770,10 @@ msgid "Diff Options"
 msgstr ""
 
 msgid "Edit"
-msgstr ""
+msgstr "ویرایش"
 
 msgid "Edit is disabled"
-msgstr ""
+msgstr "ویرایش غیرفعال است"
 
 msgid "Goto line (left)"
 msgstr ""
@@ -803,7 +806,7 @@ msgid "ButtonBar|Quit"
 msgstr ""
 
 msgid "Quit"
-msgstr "Lopeta"
+msgstr "خروج"
 
 msgid "File(s) was modified. Save with exit?"
 msgstr ""
@@ -830,7 +833,7 @@ msgid "Diff viewer: invalid mode"
 msgstr ""
 
 msgid "Two files are needed to compare"
-msgstr ""
+msgstr "دو فایل برای مقایسه لازم است"
 
 msgid "Choose syntax highlighting"
 msgstr ""
@@ -859,7 +862,7 @@ msgstr ""
 
 #, c-format
 msgid "File \"%s\" is too large"
-msgstr ""
+msgstr "فایل \"%s\" بیش از حد بزرگ است"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -888,10 +891,10 @@ msgid "Cannot open file for writing: %s"
 msgstr ""
 
 msgid "The file you are saving is not finished with a newline"
-msgstr ""
+msgstr "فایلی که در حال ذخیره‌اش هستید، با خط خالی به پایان نرسیده است"
 
 msgid "C&ontinue"
-msgstr ""
+msgstr "ادامه"
 
 msgid "&Do not change"
 msgstr ""
@@ -906,22 +909,22 @@ msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Enter file name:"
-msgstr ""
+msgstr "نام فایل را وارد کنید:"
 
 msgid "Change line breaks to:"
 msgstr ""
 
 msgid "Save As"
-msgstr ""
+msgstr "ذخیره به عنوان"
 
 msgid "Block is large, you may not be able to undo this action"
 msgstr ""
 
 msgid "&Quick save"
-msgstr ""
+msgstr "ذخیره‌ی سریع"
 
 msgid "&Safe save"
-msgstr ""
+msgstr "ذخیره‌ی امن"
 
 msgid "&Do backups with following extension:"
 msgstr ""
@@ -930,7 +933,7 @@ msgid "Check &POSIX new line"
 msgstr ""
 
 msgid "Edit Save Mode"
-msgstr ""
+msgstr "ویرایش روش ذخیره"
 
 msgid "Save as"
 msgstr ""
@@ -939,13 +942,13 @@ msgid "Cannot save: destination is not a regular file"
 msgstr ""
 
 msgid "A file already exists with this name"
-msgstr ""
+msgstr "فایلی با این نام وجود دارد"
 
 msgid "&Overwrite"
 msgstr ""
 
 msgid "Cannot save file"
-msgstr ""
+msgstr "نمی‌توان فایل را ذخیره کرد"
 
 msgid "Delete macro"
 msgstr ""
@@ -970,13 +973,13 @@ msgstr ""
 
 #, c-format
 msgid "Confirm save file: \"%s\""
-msgstr ""
+msgstr "ذخیره این فایل را تایید کنید: \"%s\""
 
 msgid "Save file"
-msgstr ""
+msgstr "ذخیره فایل"
 
 msgid "&Save"
-msgstr ""
+msgstr "ذخیره"
 
 msgid "Load"
 msgstr ""
@@ -988,7 +991,7 @@ msgid "Which syntax file you want to edit?"
 msgstr ""
 
 msgid "&User"
-msgstr "&Käyttäjä"
+msgstr ""
 
 msgid "&System wide"
 msgstr ""
@@ -997,20 +1000,20 @@ msgid "Menu edit"
 msgstr ""
 
 msgid "Which menu file do you want to edit?"
-msgstr ""
+msgstr "کدام فایل فهرست را می‌خواهید ویرایش کنید؟"
 
 msgid "&Local"
-msgstr "&Paikallinen"
+msgstr "محلی"
 
 msgid "Replace"
-msgstr ""
+msgstr "جایگزین کردن"
 
 #, c-format
 msgid "%ld replacements made"
 msgstr ""
 
 msgid "[NoName]"
-msgstr ""
+msgstr "]بدون نام["
 
 #, c-format
 msgid ""
@@ -1028,7 +1031,7 @@ msgid ""
 msgstr ""
 
 msgid "This function is not implemented"
-msgstr ""
+msgstr "این قابلیت پیاده‌سازی نشده است"
 
 msgid "Copy to clipboard"
 msgstr ""
@@ -1040,7 +1043,7 @@ msgid "Cut to clipboard"
 msgstr ""
 
 msgid "Goto line"
-msgstr ""
+msgstr "برو به خط"
 
 msgid "Save block"
 msgstr ""
@@ -1058,16 +1061,16 @@ msgid "You must first highlight a block of text"
 msgstr ""
 
 msgid "Run sort"
-msgstr ""
+msgstr "اجرای مرتب‌سازی"
 
 msgid "Enter sort options (see manpage) separated by whitespace:"
 msgstr ""
 
 msgid "Sort"
-msgstr ""
+msgstr "مرتب‌سازی"
 
 msgid "Cannot execute sort command"
-msgstr ""
+msgstr "فرمان مرتب‌سازی قابل اجرا نیست"
 
 #, c-format
 msgid "Sort returned non-zero: %s"
@@ -1080,31 +1083,31 @@ msgid "Enter shell command(s):"
 msgstr ""
 
 msgid "External command"
-msgstr ""
+msgstr "فرمان خارجی"
 
 msgid "Cannot execute command"
-msgstr ""
+msgstr "فرمان قابل اجرا نیست"
 
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr ""
 
 msgid "To"
-msgstr ""
+msgstr "به"
 
 msgid "Subject"
-msgstr ""
+msgstr "موضوع"
 
 msgid "Copies to"
 msgstr ""
 
 msgid "Mail"
-msgstr ""
+msgstr "نامه"
 
 msgid "Insert literal"
 msgstr ""
 
 msgid "Press any key:"
-msgstr ""
+msgstr "کلیدی را فشار دهید"
 
 msgid ""
 "Current text was modified without a file save.\n"
@@ -1115,7 +1118,7 @@ msgid "In se&lection"
 msgstr ""
 
 msgid "&Find all"
-msgstr ""
+msgstr "پیدا کردن همه"
 
 msgid "Enter replacement string:"
 msgstr ""
@@ -1124,19 +1127,19 @@ msgid "Replace with:"
 msgstr ""
 
 msgid "&Replace"
-msgstr "&Korvaa"
+msgstr ""
 
 msgid "A&ll"
-msgstr "K&aikki"
+msgstr "همه"
 
 msgid "&Skip"
-msgstr "&Ohita"
+msgstr "چشم‌پوشی"
 
 msgid "Confirm replace"
 msgstr ""
 
 msgid "Cancel"
-msgstr "Peruuta"
+msgstr "لغو"
 
 msgid ""
 "Current text was modified without a file save.\n"
@@ -1150,7 +1153,7 @@ msgid "&Open file..."
 msgstr ""
 
 msgid "&New"
-msgstr ""
+msgstr "جدید"
 
 msgid "&Close"
 msgstr ""
@@ -1168,10 +1171,10 @@ msgid "&User menu..."
 msgstr ""
 
 msgid "A&bout..."
-msgstr ""
+msgstr "درباره..."
 
 msgid "&Quit"
-msgstr ""
+msgstr "خروج"
 
 msgid "&Undo"
 msgstr ""
@@ -1201,7 +1204,7 @@ msgid "Mo&ve"
 msgstr ""
 
 msgid "&Delete"
-msgstr ""
+msgstr "حذف"
 
 msgid "Co&py to clipfile"
 msgstr ""
@@ -1213,16 +1216,16 @@ msgid "Pa&ste from clipfile"
 msgstr ""
 
 msgid "&Beginning"
-msgstr ""
+msgstr "آغاز"
 
 msgid "&End"
-msgstr ""
+msgstr "پایان"
 
 msgid "&Search..."
-msgstr ""
+msgstr "جستجو..."
 
 msgid "Search &again"
-msgstr ""
+msgstr "جستجوی دوباره"
 
 msgid "&Replace..."
 msgstr ""
@@ -1345,16 +1348,16 @@ msgid "&Save setup"
 msgstr ""
 
 msgid "&File"
-msgstr ""
+msgstr "فایل"
 
 msgid "&Edit"
-msgstr ""
+msgstr "ویرایش"
 
 msgid "&Search"
-msgstr ""
+msgstr "جستجو"
 
 msgid "&Command"
-msgstr ""
+msgstr "دستور"
 
 msgid "For&mat"
 msgstr ""
@@ -1363,7 +1366,7 @@ msgid "&Window"
 msgstr ""
 
 msgid "&Options"
-msgstr ""
+msgstr "تنظیمات"
 
 msgid "&None"
 msgstr ""
@@ -1375,34 +1378,34 @@ msgid "Type &writer wrap"
 msgstr ""
 
 msgid "Wrap mode"
-msgstr "Kieromoodi"
+msgstr "روش شکستن خط‌ها"
 
 msgid "Tabulation"
 msgstr ""
 
 msgid "&Fake half tabs"
-msgstr "valepuolikas&Tabit"
+msgstr "نیم‌جهش‌های غیرواقعی"
 
 msgid "&Backspace through tabs"
-msgstr "&Poisto tuhoaa tabit"
+msgstr "پاک‌کردن جهش‌ها با کلید پس‌بر"
 
 msgid "Fill tabs with &spaces"
-msgstr "täytä tabit &Välilyönnein"
+msgstr "پر کردن جهش‌ها با فاصله"
 
 msgid "Tab spacing:"
-msgstr ""
+msgstr "فاصله‌های هر جهش:"
 
 msgid "Other options"
-msgstr ""
+msgstr "دیگر تنظیمات"
 
 msgid "&Return does autoindent"
-msgstr "&Rivinvaihto sisentää"
+msgstr "تورفتگی خودکار با کلید Return"
 
 msgid "Confir&m before saving"
-msgstr "&Varmista ennen tallennusta"
+msgstr "تایید قبل از ذخیره‌سازی"
 
 msgid "Save file &position"
-msgstr ""
+msgstr "ذخیره‌ی آخرین مکان ویرایش فایل"
 
 msgid "&Visible trailing spaces"
 msgstr ""
@@ -1411,7 +1414,7 @@ msgid "Visible &tabs"
 msgstr ""
 
 msgid "Synta&x highlighting"
-msgstr "syntaks&Ikorostus"
+msgstr ""
 
 msgid "C&ursor after inserted block"
 msgstr ""
@@ -1429,7 +1432,7 @@ msgid "Word wrap line length:"
 msgstr ""
 
 msgid "Editor options"
-msgstr ""
+msgstr "تنظیمات ویرایشگر"
 
 msgid ""
 "A user friendly text editor\n"
@@ -1440,13 +1443,13 @@ msgid "Copyright (C) 1996-2012 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
-msgstr ""
+msgstr "درباره"
 
 msgid "Open files"
 msgstr ""
 
 msgid "Edit: "
-msgstr ""
+msgstr "ویرایش:"
 
 msgid "ButtonBar|Mark"
 msgstr ""
@@ -1505,36 +1508,36 @@ msgid ""
 msgstr ""
 
 msgid "The shell is already running a command"
-msgstr ""
+msgstr "شل در حال اجرای فرمانی دیگر است"
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
-msgstr "Kirjoita 'exit' palataksesi Midnight Commanderiin"
+msgstr "برای برگشتن به فرماندار نیمه‌شب 'exit' را تایپ کنید"
 
 #, c-format
 msgid "Cannot fetch a local copy of %s"
 msgstr ""
 
 msgid "Set &all"
-msgstr "Aseta &kaikki"
+msgstr ""
 
 msgid "S&kip"
-msgstr "&Ohita"
+msgstr ""
 
 msgid "&Set"
-msgstr "&Aseta"
+msgstr ""
 
 msgid "owner"
-msgstr "omistaja"
+msgstr ""
 
 msgid "group"
-msgstr "ryhmä"
+msgstr "گروه"
 
 msgid "other"
-msgstr "muut"
+msgstr "دیگران"
 
 msgid "Flag"
-msgstr "Lippo"
+msgstr "پرچم"
 
 msgid "Chown advanced command"
 msgstr ""
@@ -1555,37 +1558,37 @@ msgid "Other 8 bit"
 msgstr ""
 
 msgid "Running"
-msgstr ""
+msgstr "در حال اجرا"
 
 msgid "Stopped"
-msgstr "Pysäytetty"
+msgstr ""
 
 msgid "&Full file list"
-msgstr "&Täysi tiedostolista"
+msgstr ""
 
 msgid "&Brief file list"
-msgstr "&Lyhyt tiedostolista"
+msgstr ""
 
 msgid "&Long file list"
-msgstr "&Pitkä tiedostolista"
+msgstr ""
 
 msgid "&User defined:"
-msgstr "&Oma tiedostolista:"
+msgstr ""
 
 msgid "User &mini status"
 msgstr ""
 
 msgid "Listing mode"
-msgstr "Listausmoodi"
+msgstr "روش فهرست کردن"
 
 msgid "Executable &first"
 msgstr ""
 
 msgid "&Reverse"
-msgstr "&Käänteinen"
+msgstr ""
 
 msgid "Sort order"
-msgstr "Järjestys"
+msgstr "ترتیب مرتب‌سازی"
 
 #. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 msgid "Confirmation|&Delete"
@@ -1607,7 +1610,7 @@ msgid "Confirmation|&History cleanup"
 msgstr ""
 
 msgid "Confirmation"
-msgstr ""
+msgstr "تایید"
 
 msgid "&UTF-8 output"
 msgstr ""
@@ -1622,10 +1625,10 @@ msgid "7 &bits"
 msgstr ""
 
 msgid "F&ull 8 bits input"
-msgstr "Täysi &8-bittinen syöte"
+msgstr ""
 
 msgid "Display bits"
-msgstr ""
+msgstr "بیت‌های نمایش"
 
 msgid "Input / display codepage:"
 msgstr ""
@@ -1661,28 +1664,28 @@ msgid "Virtual File System Setting"
 msgstr ""
 
 msgid "cd"
-msgstr "Hakemistonvaihto"
+msgstr ""
 
 msgid "Quick cd"
-msgstr "Pikainen hakemistonvaihto"
+msgstr ""
 
 msgid "Existing filename (filename symlink will point to):"
-msgstr "Olemassaoleva tiedostonimi (johon linkki tulee osoittamaan):"
+msgstr ""
 
 msgid "Symbolic link filename:"
-msgstr "Symbolisen linkin tiedostonimi:"
+msgstr ""
 
 msgid "Symbolic link"
-msgstr "Symbolinen linkki"
+msgstr ""
 
 msgid "&Stop"
-msgstr "&Pysäytä"
+msgstr ""
 
 msgid "&Resume"
-msgstr "&Jatka"
+msgstr ""
 
 msgid "&Kill"
-msgstr "&Tapa"
+msgstr ""
 
 msgid "Background jobs"
 msgstr ""
@@ -1695,7 +1698,7 @@ msgid "Domain:"
 msgstr ""
 
 msgid "Username:"
-msgstr ""
+msgstr "نام کاربری:"
 
 msgid "SMB authentication"
 msgstr ""
@@ -1737,7 +1740,7 @@ msgid "execute/searc&h by others"
 msgstr ""
 
 msgid "Name:"
-msgstr ""
+msgstr "نام:"
 
 msgid "Permissions (octal):"
 msgstr ""
@@ -1749,61 +1752,61 @@ msgid "Group name:"
 msgstr ""
 
 msgid "&Marked all"
-msgstr "&Kaikki merkityt"
-
-msgid "S&et marked"
-msgstr "&Aseta merkityt"
-
-msgid "C&lear marked"
-msgstr "&Tyhjennä merkityt"
-
-msgid "Chmod command"
-msgstr "Chmod-komento"
-
-msgid "Permission"
-msgstr "Oikeudet"
-
-msgid "File"
 msgstr ""
 
+msgid "S&et marked"
+msgstr ""
+
+msgid "C&lear marked"
+msgstr ""
+
+msgid "Chmod command"
+msgstr ""
+
+msgid "Permission"
+msgstr "اجازه"
+
+msgid "File"
+msgstr "فایل"
+
 msgid "Set &groups"
-msgstr "Aseta &ryhmät"
+msgstr ""
 
 msgid "Set &users"
-msgstr "Aseta &käyttäjät"
+msgstr ""
 
 msgid "Name"
-msgstr "Nimi"
+msgstr "نام"
 
 msgid "Owner name"
-msgstr "Omistajan nimi"
+msgstr ""
 
 msgid "Group name"
-msgstr "Ryhmän nimi"
+msgstr "نام گروه"
 
 msgid "Size"
-msgstr "Koko"
+msgstr "اندازه"
 
 msgid "Chown command"
 msgstr ""
 
 msgid "User name"
-msgstr ""
+msgstr "نام کاربر"
 
 msgid "<Unknown user>"
-msgstr "<Tuntematon käyttäjä>"
+msgstr ""
 
 msgid "<Unknown group>"
-msgstr "<Tuntematon ryhmä>"
+msgstr ""
 
 msgid "Enter machine name (F1 for details):"
 msgstr ""
 
 msgid "Files tagged, want to cd?"
-msgstr "Tiedostot merkitty, vaihdetaanko hakemisto?"
+msgstr ""
 
 msgid "Cannot change directory"
-msgstr "Ei voitu vaihtaa hakemistoa"
+msgstr ""
 
 msgid "Filter"
 msgstr ""
@@ -1843,7 +1846,7 @@ msgid "View file"
 msgstr ""
 
 msgid "Filename:"
-msgstr ""
+msgstr "نام فایل:"
 
 msgid "Filtered view"
 msgstr ""
@@ -1852,25 +1855,25 @@ msgid "Filter command and arguments:"
 msgstr ""
 
 msgid "Create a new Directory"
-msgstr "Luo uusi hakemisto"
+msgstr ""
 
 msgid "Enter directory name:"
 msgstr ""
 
 msgid "Select"
-msgstr ""
+msgstr "انتخاب"
 
 msgid "Unselect"
 msgstr ""
 
 msgid "Extension file edit"
-msgstr "Laajennustiedoston muokkaus"
+msgstr ""
 
 msgid "Which extension file you want to edit?"
 msgstr ""
 
 msgid "&System Wide"
-msgstr "&Järjestelmän laajuinen"
+msgstr ""
 
 msgid "Highlighting groups file edit"
 msgstr ""
@@ -1879,19 +1882,19 @@ msgid "Which highlighting file you want to edit?"
 msgstr ""
 
 msgid "Compare directories"
-msgstr ""
+msgstr "مقایسه پوشه‌ها"
 
 msgid "Select compare method:"
 msgstr ""
 
 msgid "&Quick"
-msgstr "&Nopea"
+msgstr "سریع"
 
 msgid "&Size only"
-msgstr "&Vain koko"
+msgstr "فقط با اندازه"
 
 msgid "&Thorough"
-msgstr "&Perusteellinen"
+msgstr "دقیق"
 
 msgid ""
 "Both panels should be in the listing mode\n"
@@ -1954,7 +1957,7 @@ msgid "Unable to save setup to %s"
 msgstr ""
 
 msgid "Cannot execute commands on non-local filesystems"
-msgstr ""
+msgstr "در فایل سیستم غیرمحلی نمی‌توان فرمانی اجرا کرد"
 
 #, c-format
 msgid ""
@@ -2022,16 +2025,16 @@ msgid "%o %d %f%m"
 msgstr ""
 
 msgid "file"
-msgstr ""
+msgstr "فایل"
 
 msgid "files"
-msgstr ""
+msgstr "فایل‌ها"
 
 msgid "directory"
-msgstr ""
+msgstr "پوشه"
 
 msgid "directories"
-msgstr ""
+msgstr "پوشه‌ها"
 
 msgid "files/directories"
 msgstr ""
@@ -2352,7 +2355,7 @@ msgid "If &size differs"
 msgstr ""
 
 msgid "File exists"
-msgstr ""
+msgstr "فایل وجود دارد"
 
 msgid "Background process: File exists"
 msgstr ""
@@ -2371,15 +2374,15 @@ msgstr ""
 
 #, c-format
 msgid "Time: %s %s (%s)"
-msgstr ""
+msgstr "زمان: %s %s (%s)"
 
 #, c-format
 msgid "Time: %s"
-msgstr ""
+msgstr "زمان: %s"
 
 #, c-format
 msgid "Time: %s (%s)"
-msgstr ""
+msgstr "زمان: %s (%s)"
 
 #, c-format
 msgid " Total: %s "
@@ -2396,7 +2399,7 @@ msgid "Target"
 msgstr ""
 
 msgid "Deleting"
-msgstr ""
+msgstr "در حال حذف کردن"
 
 msgid "Follow &links"
 msgstr ""
@@ -2440,7 +2443,7 @@ msgid "Malformed regular expression"
 msgstr ""
 
 msgid "File name:"
-msgstr ""
+msgstr "نام فایل:"
 
 msgid "&Find recursively"
 msgstr ""
@@ -2449,7 +2452,7 @@ msgid "S&kip hidden"
 msgstr ""
 
 msgid "Content:"
-msgstr ""
+msgstr "محتوا:"
 
 msgid "Sea&rch for content"
 msgstr ""
@@ -2467,10 +2470,10 @@ msgid "&Tree"
 msgstr ""
 
 msgid "Find File"
-msgstr ""
+msgstr "جستجوی فایل"
 
 msgid "Start at:"
-msgstr ""
+msgstr "شروع از:"
 
 msgid "Ena&ble ignore directories:"
 msgstr ""
@@ -2486,14 +2489,13 @@ msgstr ""
 msgid "Finished (ignored %zd directory)"
 msgid_plural "Finished (ignored %zd directories)"
 msgstr[0] ""
-msgstr[1] ""
 
 #, c-format
 msgid "Searching %s"
-msgstr ""
+msgstr "در حال جستجوی %s"
 
 msgid "Searching"
-msgstr ""
+msgstr "در حال جستجو"
 
 msgid "Change &to"
 msgstr ""
@@ -2532,7 +2534,7 @@ msgid "Directory hotlist"
 msgstr ""
 
 msgid "Top level group"
-msgstr ""
+msgstr "گروه سطح بالا"
 
 msgid "Directory path"
 msgstr ""
@@ -2589,7 +2591,7 @@ msgid "Add to hotlist"
 msgstr ""
 
 msgid "Information"
-msgstr ""
+msgstr "اطلاعات"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2597,16 +2599,16 @@ msgstr ""
 
 #, c-format
 msgid "File: %s"
-msgstr ""
+msgstr "فایل: %s"
 
 msgid "No node information"
-msgstr ""
+msgstr "اطلاعات گره موجود نیست"
 
 msgid "Free nodes:"
-msgstr ""
+msgstr "گره‌های آزاد:"
 
 msgid "No space information"
-msgstr ""
+msgstr "اطلاعات فاصله موجود نیست"
 
 #, c-format
 msgid "Free space: %s/%s (%d%%)"
@@ -2652,7 +2654,6 @@ msgstr ""
 msgid " (%ld block)"
 msgid_plural " (%ld blocks)"
 msgstr[0] ""
-msgstr[1] ""
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2692,10 +2693,10 @@ msgid "&Show free space"
 msgstr ""
 
 msgid "Panel split"
-msgstr ""
+msgstr "جداسازی قاب"
 
 msgid "Console output"
-msgstr ""
+msgstr "خروجی کنسول"
 
 msgid "&Vertical"
 msgstr ""
@@ -2704,10 +2705,10 @@ msgid "&Horizontal"
 msgstr ""
 
 msgid "Output lines:"
-msgstr ""
+msgstr "خط‌های خروجی:"
 
 msgid "Layout"
-msgstr ""
+msgstr "طرح‌بندی"
 
 msgid "File listin&g"
 msgstr ""
@@ -2860,13 +2861,13 @@ msgid "Edit hi&ghlighting group file"
 msgstr ""
 
 msgid "&Configuration..."
-msgstr ""
+msgstr "پیکربندی"
 
 msgid "&Layout..."
-msgstr "&Muotoilu..."
+msgstr ""
 
 msgid "&Panel options..."
-msgstr ""
+msgstr "تنظیمات قاب"
 
 msgid "C&onfirmation..."
 msgstr ""
@@ -2878,19 +2879,18 @@ msgid "&Virtual FS..."
 msgstr ""
 
 msgid "Panels:"
-msgstr ""
+msgstr "قاب‌ها:"
 
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
 msgstr[0] ""
-msgstr[1] ""
 
 msgid "The Midnight Commander"
-msgstr ""
+msgstr "فرماندار نیمه‌شب"
 
 msgid "Do you really want to quit the Midnight Commander?"
-msgstr ""
+msgstr "واقعا می‌خواهید از فرماندار نیمه‌شب خارج شوید؟"
 
 msgid "&Above"
 msgstr ""
@@ -2989,7 +2989,7 @@ msgid "A&uto save setup"
 msgstr ""
 
 msgid "Configure options"
-msgstr ""
+msgstr "تنظیمات پیکربندی"
 
 msgid "Case &insensitive"
 msgstr ""
@@ -3049,10 +3049,10 @@ msgid "&Permissions"
 msgstr ""
 
 msgid "Quick search"
-msgstr ""
+msgstr "جستجوی سریع"
 
 msgid "Panel options"
-msgstr ""
+msgstr "تنظیمات قاب"
 
 msgid ""
 "Using the fast reload option may not reflect the exact\n"
@@ -3067,7 +3067,7 @@ msgid "sort|u"
 msgstr ""
 
 msgid "&Unsorted"
-msgstr "&Järjestämätön"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3075,7 +3075,7 @@ msgid "sort|n"
 msgstr ""
 
 msgid "&Name"
-msgstr "&Nimi"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'version' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3099,7 +3099,7 @@ msgid "sort|s"
 msgstr ""
 
 msgid "&Size"
-msgstr "&Koko"
+msgstr ""
 
 msgid "Block Size"
 msgstr ""
@@ -3110,7 +3110,7 @@ msgid "sort|m"
 msgstr ""
 
 msgid "&Modify time"
-msgstr "&Muutosaika"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3118,7 +3118,7 @@ msgid "sort|a"
 msgstr ""
 
 msgid "&Access time"
-msgstr "&Lukuaika"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3140,7 +3140,7 @@ msgid "sort|i"
 msgstr ""
 
 msgid "&Inode"
-msgstr "&Inode"
+msgstr ""
 
 msgid "UID"
 msgstr ""
@@ -3149,10 +3149,10 @@ msgid "GID"
 msgstr ""
 
 msgid "Owner"
-msgstr "Omistaja"
+msgstr ""
 
 msgid "Group"
-msgstr "Ryhmä"
+msgstr "گروه"
 
 msgid "[dev]"
 msgstr ""
@@ -3167,19 +3167,17 @@ msgid "SUB-DIR"
 msgstr ""
 
 msgid "<readlink failed>"
-msgstr "<linkin luku epäonnistui>"
+msgstr ""
 
 #, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s بایت"
 
 #, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s در %d فایل"
 
 msgid "Panelize"
 msgstr ""
@@ -3200,10 +3198,10 @@ msgid "External panelize"
 msgstr ""
 
 msgid "Other command"
-msgstr ""
+msgstr "فرمان دیگر"
 
 msgid "Command"
-msgstr "Komento"
+msgstr "فرمان"
 
 msgid "Add to external panelize"
 msgstr ""
@@ -3224,7 +3222,7 @@ msgid "Modified git files"
 msgstr ""
 
 msgid "Find rejects after patching"
-msgstr "Etsi hylätyt paikkauksen jäljiltä"
+msgstr ""
 
 msgid "Find *.orig after patching"
 msgstr ""
@@ -3278,16 +3276,16 @@ msgid ""
 msgstr ""
 
 msgid "Debug"
-msgstr ""
+msgstr "خطایابی"
 
 msgid "ERROR:"
-msgstr ""
+msgstr "خطا:"
 
 msgid "True:"
-msgstr ""
+msgstr "درست:"
 
 msgid "False:"
-msgstr ""
+msgstr "نادرست:"
 
 msgid "Error calling program"
 msgstr ""
@@ -3336,7 +3334,7 @@ msgid "Cannot find node %s in help file"
 msgstr ""
 
 msgid "Help"
-msgstr "Ohje"
+msgstr ""
 
 msgid "ButtonBar|Index"
 msgstr ""
@@ -3345,10 +3343,10 @@ msgid "ButtonBar|Prev"
 msgstr ""
 
 msgid "Learn keys"
-msgstr ""
+msgstr "یادگیری کلیدها"
 
 msgid "Teach me a key"
-msgstr ""
+msgstr "یک کلید را به من یاد بده"
 
 #, c-format
 msgid ""
@@ -3367,7 +3365,7 @@ msgstr ""
 
 #, c-format
 msgid "You have entered \"%s\""
-msgstr ""
+msgstr "شما \"%s\" را وارد کرده‌اید"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -3468,10 +3466,10 @@ msgid "With mouse support on xterm and Linux console\n"
 msgstr ""
 
 msgid "With mouse support on xterm\n"
-msgstr ""
+msgstr "با پشتیبانی از ماوس در xterm\n"
 
 msgid "With support for X11 events\n"
-msgstr ""
+msgstr "با پشتیبانی از رویدادهای X11\n"
 
 msgid "With internationalization support\n"
 msgstr ""
@@ -3485,7 +3483,7 @@ msgstr ""
 
 #, c-format
 msgid "Virtual File Systems:"
-msgstr ""
+msgstr "فایل سیستم‌های مجازی:"
 
 #, c-format
 msgid "Data types:"
@@ -3627,13 +3625,13 @@ msgstr ""
 
 #, c-format
 msgid "FTP: Password required for %s"
-msgstr ""
+msgstr "FTP: رمز عبور برای %s لازم است"
 
 msgid "ftpfs: sending login name"
-msgstr ""
+msgstr "ftpfs: ارسال نام ورود"
 
 msgid "ftpfs: sending user password"
-msgstr ""
+msgstr "ftpfs: ارسال رمز عبور کاربر"
 
 #, c-format
 msgid "FTP: Account required for user %s"
@@ -3657,11 +3655,11 @@ msgstr ""
 
 #, c-format
 msgid "ftpfs: %s"
-msgstr ""
+msgstr "ftpfs: %s"
 
 #, c-format
 msgid "ftpfs: making connection to %s"
-msgstr ""
+msgstr "ftpfs: برقراری ارتباط با %s"
 
 msgid "ftpfs: connection interrupted by user"
 msgstr ""
@@ -3675,7 +3673,7 @@ msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr ""
 
 msgid "ftpfs: invalid address family"
-msgstr ""
+msgstr "ftpfs: خانواده آدرس‌های نامعتبر"
 
 #, c-format
 msgid "ftpfs: could not create socket: %s"
@@ -3840,12 +3838,14 @@ msgid ""
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
+"%s\n"
+"یک آرشیو tar به نظر نمی‌رسد."
 
 msgid "undelfs: error"
 msgstr ""
 
 msgid "not enough memory"
-msgstr ""
+msgstr "حافظه کافی نیست"
 
 msgid "while allocating block buffer"
 msgstr ""
@@ -3912,7 +3912,7 @@ msgid "Ext2lib error"
 msgstr ""
 
 msgid "Invalid value"
-msgstr ""
+msgstr "مقدار نامعتبر"
 
 msgid "Cannot spawn child process"
 msgstr ""
@@ -3933,7 +3933,7 @@ msgid "He&xadecimal offset"
 msgstr ""
 
 msgid "Goto"
-msgstr ""
+msgstr "برو"
 
 msgid "ButtonBar|Ascii"
 msgstr ""

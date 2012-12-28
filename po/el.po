@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Panos Bouklis <panos@echidna-band.com>\n"
 "Language-Team: Greek (http://www.transifex.com/projects/p/mc/language/el/)\n"
 "Language: el\n"
@@ -1394,9 +1394,8 @@ msgstr "&Παράθυρο"
 msgid "&Options"
 msgstr "&Επιλογές"
 
-#, fuzzy
 msgid "&None"
-msgstr "Κανένα"
+msgstr ""
 
 msgid "&Dynamic paragraphing"
 msgstr ""
@@ -1407,9 +1406,8 @@ msgstr ""
 msgid "Wrap mode"
 msgstr ""
 
-#, fuzzy
 msgid "Tabulation"
-msgstr "Περιήγηση"
+msgstr ""
 
 msgid "&Fake half tabs"
 msgstr ""
@@ -1435,13 +1433,11 @@ msgstr "Επι&βεβαίωση πριν την έξοδο"
 msgid "Save file &position"
 msgstr "Αποθήκευση &θέσης αρχείου"
 
-#, fuzzy
 msgid "&Visible trailing spaces"
-msgstr "Ορατές καρτέλες"
+msgstr ""
 
-#, fuzzy
 msgid "Visible &tabs"
-msgstr "Ορατές καρτέλες"
+msgstr ""
 
 msgid "Synta&x highlighting"
 msgstr "τονισμός σύντα&ξης"
@@ -1464,11 +1460,10 @@ msgstr ""
 msgid "Editor options"
 msgstr "Επιλογές επεξεργαστή"
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr "Θέλετε στα αλήθεια να τερματίσετε το Midnight Commander?"
+msgstr ""
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
 msgstr ""
@@ -1649,20 +1644,17 @@ msgstr "Επιβεβαίωση|&Καθαρισμός ιστορικού"
 msgid "Confirmation"
 msgstr "Επιβεβαίωση"
 
-#, fuzzy
 msgid "&UTF-8 output"
-msgstr "Έξοδος UTF-8"
+msgstr ""
 
 msgid "&Full 8 bits output"
 msgstr ""
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO 8859-1"
+msgstr ""
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "7 bits"
+msgstr ""
 
 msgid "F&ull 8 bits input"
 msgstr ""
@@ -1679,20 +1671,17 @@ msgstr "&Επιλογή"
 msgid "Directory tree"
 msgstr "Δέντρο καταλόγων"
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "Τέλος χρονικού ορίου για ελευθέρωση VFS:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP anonymous password:"
-msgstr "ανώνυμος κωδικός πρόσβασης ftp:"
+msgstr ""
 
 msgid "FTP directory cache timeout (sec):"
 msgstr ""
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "&Πάντα χρήση διαμεσολαβητή ftp"
+msgstr ""
 
 msgid "&Use ~/.netrc"
 msgstr "&Χρήση ~/.netrc"
@@ -1730,9 +1719,8 @@ msgstr "&Συνέχεια"
 msgid "&Kill"
 msgstr "&Σκότωμα"
 
-#, fuzzy
 msgid "Background jobs"
-msgstr "&Εργασίες παρασκηνίες"
+msgstr ""
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1744,56 +1732,44 @@ msgstr ""
 msgid "Username:"
 msgstr "Όνομα χρήστη:"
 
-#, fuzzy
 msgid "SMB authentication"
-msgstr "η πιστοποίηση απέτυχε"
+msgstr ""
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "ρύθμιση ID χρήστη κατά την εκτέλεση"
+msgstr ""
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "ρύθμιση ID ομάδας κατά την εκτέλεση"
+msgstr ""
 
 msgid "stick&y bit"
 msgstr ""
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "ανάγνωστη από ιδιοκτήτη"
+msgstr ""
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "εγγραφή από ιδιοκτήτη"
+msgstr ""
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "εκτέλεση/αναζήτηση από ιδιοκτήτη"
+msgstr ""
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "ανάγνωση από ομάδα"
+msgstr ""
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "εγγραφή από ομάδα"
+msgstr ""
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "εκτέλεση/αναζήτηση από ομάδα"
+msgstr ""
 
-#, fuzzy
 msgid "read &by others"
-msgstr "ανάγνωση από άλλους"
+msgstr ""
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "εγγραφή από άλλους"
+msgstr ""
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "εκτέλεση/αναζήτηση από άλλους"
+msgstr ""
 
 msgid "Name:"
 msgstr "Όνομα:"
@@ -2148,24 +2124,18 @@ msgstr "&Παράβλεψη όλων"
 msgid "&Retry"
 msgstr "&Επαναπροσπάθεια"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\n"
-"Ο κατάλογος δεν είναι άδειος.\n"
-"Διαγραφή και περιεχομένων;"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Background process:\n"
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\n"
-"Διεργασία παρασκηνίου: Ο κατάλογος δεν είναι άδειος.\n"
-"Διαγραφή και περιεχομένων;"
 
 msgid "Non&e"
 msgstr "&Κανένα"
@@ -2421,9 +2391,8 @@ msgstr "Αδυναμία λειτουργίας σε \"..\"!"
 msgid "Sorry, I could not put the job in background"
 msgstr "Λυπούμαστε, η εργασία δεν μπορεί να μπει στο παρασκήνιο"
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "&Αναστολή"
+msgstr ""
 
 msgid "Con&tinue"
 msgstr "&Συνέχεια"
@@ -2451,13 +2420,13 @@ msgstr "%ld B/s"
 msgid "Target file already exists!"
 msgstr "Το αρχείο στόχος υπάρχει ήδη!"
 
-#, fuzzy, c-format
+#, c-format
 msgid "New     : %s, size %llu"
-msgstr "Πηγαία ημερομηνία: %s, μέγεθος %llu"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Existing: %s, size %llu"
-msgstr "Πηγαία ημερομηνία: %s, μέγεθος %llu"
+msgstr ""
 
 msgid "Overwrite this target?"
 msgstr "Αντικατάσταση αυτού του στόχου;"
@@ -2624,9 +2593,8 @@ msgstr "Αναζήτηση"
 msgid "Change &to"
 msgstr "Αλλαγή &σε"
 
-#, fuzzy
 msgid "&Free VFSs now"
-msgstr "_Ελευθέρωση VFS τώρα"
+msgstr ""
 
 msgid "&Refresh"
 msgstr "&Ανανέωση"
@@ -2802,9 +2770,8 @@ msgstr "Τοποθεσίαα:  %Xh:%Xh"
 msgid "&Equal split"
 msgstr "&Ίσος διαχωρισμός"
 
-#, fuzzy
 msgid "&Menubar visible"
-msgstr "Γραμμή &μενού ορατή"
+msgstr ""
 
 msgid "Command &prompt"
 msgstr "&Γραμμή εντολών"
@@ -2818,9 +2785,8 @@ msgstr ""
 msgid "&XTerm window title"
 msgstr "Τίτλος παραθύρου &XTerm"
 
-#, fuzzy
 msgid "&Show free space"
-msgstr "Εμ&φάνιση ελεύθερου χώρου"
+msgstr ""
 
 msgid "Panel split"
 msgstr ""
@@ -3059,9 +3025,8 @@ msgstr ""
 msgid "Alwa&ys"
 msgstr "&Πάντα"
 
-#, fuzzy
 msgid "File operations"
-msgstr "Επιλογές εργασιών αρχείου"
+msgstr ""
 
 msgid "&Verbose operation"
 msgstr ""
@@ -3222,9 +3187,8 @@ msgstr "&Έκδοση"
 msgid "sort|e"
 msgstr ""
 
-#, fuzzy
 msgid "E&xtension"
-msgstr "&Επέκταση"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3661,9 +3625,8 @@ msgstr ""
 msgid "Data directory:"
 msgstr "Κατάλογος δεδομένων:"
 
-#, fuzzy
 msgid "File extension handlers:"
-msgstr "Επεξεργασία α&ρχείου επέκτασης"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr "Πρόσθετα και σενάρια VFS:"
@@ -4190,43 +4153,3 @@ msgstr "Η αναζήτηση τελείωσε"
 
 msgid "Continue from beginning?"
 msgstr "Συνέχεια από την αρχή;"
-
-#~ msgid ""
-#~ "Copyright (C) 1996-2012 the Free Software Foundation\n"
-#~ "\n"
-#~ "            A user friendly text editor\n"
-#~ "         written for the Midnight Commander"
-#~ msgstr ""
-#~ "Πνευματικά δικαιώματα (C) 1996-2012 the Free Software Foundation\n"
-#~ "\n"
-#~ "            Ένας φιλικός προς τον χρήστη επεξεργαστής κειμένου\n"
-#~ "         γραμμένος για το Midnight Commander"
-
-#~ msgid "Mode"
-#~ msgstr "Λειτουργία"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d από %d"
-
-#~ msgid "Background Jobs"
-#~ msgstr "Εργασίες παρασκηνίου"
-
-#~ msgid "Delete:"
-#~ msgstr "Διαγραφή:"
-
-#~ msgid "Target date: %s, size %llu"
-#~ msgstr "Ημερομηνία στόχος: %s, μέγεθος %llu"
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr "Πατήστε όλα τα πλήκτρα που αναφέρονται. Μόλις το κάνετε, ελέγξτε"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr "ποια πλήκτρα δεν έχουν σημειωθεί με ΟΚ.  Πατήστε το κενό στο"
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr ""
-#~ "πλήκτρο που λείπει, ή κάντε κλικ, για να το καθορίσετε. Μετακινηθείτε με "
-#~ "Tab."
-
-#~ msgid "fish: storing zeros"
-#~ msgstr "fish: αποθηκεύονται μηδενικά"

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: vi\n"
@@ -1366,17 +1366,14 @@ msgstr ""
 msgid "&Options"
 msgstr ""
 
-#, fuzzy
 msgid "&None"
-msgstr "&Không"
+msgstr ""
 
-#, fuzzy
 msgid "&Dynamic paragraphing"
-msgstr "Định &dạng đoạn văn động"
+msgstr ""
 
-#, fuzzy
 msgid "Type &writer wrap"
-msgstr "Tự độ&ng chuyển dòng"
+msgstr ""
 
 msgid "Wrap mode"
 msgstr "Chế độ chuyển dòng"
@@ -1435,11 +1432,10 @@ msgstr ""
 msgid "Editor options"
 msgstr ""
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr "Hãy gõ \"exit\" để quay trở lại Midnight Commander"
+msgstr ""
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
 msgstr ""
@@ -1617,17 +1613,14 @@ msgstr ""
 msgid "&UTF-8 output"
 msgstr ""
 
-#, fuzzy
 msgid "&Full 8 bits output"
-msgstr "Đầu ra 8 bit đầy đủ"
+msgstr ""
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO.8859-1"
+msgstr ""
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "7 bit"
+msgstr ""
 
 msgid "F&ull 8 bits input"
 msgstr "Đầ&u vào 8 bit đầy đủ"
@@ -1644,21 +1637,17 @@ msgstr "&Lựa chọn"
 msgid "Directory tree"
 msgstr ""
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "Thời gian chờ giải phóng VFS:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP anonymous password:"
-msgstr "Mật khẩu ftp nặc danh:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "Thời gian chờ của cache thư mục ftp:"
+msgstr ""
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "&Luôn luôn sử dụng ftp proxy"
+msgstr ""
 
 msgid "&Use ~/.netrc"
 msgstr "&Sử dụng ~/.netrc"
@@ -1696,9 +1685,8 @@ msgstr "&Phục hồi"
 msgid "&Kill"
 msgstr "&Diệt"
 
-#, fuzzy
 msgid "Background jobs"
-msgstr " Công việc nền sau"
+msgstr ""
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1713,53 +1701,41 @@ msgstr "Tên người dùng:"
 msgid "SMB authentication"
 msgstr ""
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "đặt ID người dùng khi chạy"
+msgstr ""
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "đặt ID nhóm khi chạy"
+msgstr ""
 
-#, fuzzy
 msgid "stick&y bit"
-msgstr "bit dính (sticky)"
+msgstr ""
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "chủ sở hữu có quyền đọc"
+msgstr ""
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "chủ sở hữu có quyền ghi nhớ"
+msgstr ""
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "chủ sở hữu có quyền chạy/tìm"
+msgstr ""
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "nhóm có quyền đọc"
+msgstr ""
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "nhóm có quyền ghi nhớ"
+msgstr ""
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "nhóm có quyền chạy/tìm kiếm"
+msgstr ""
 
-#, fuzzy
 msgid "read &by others"
-msgstr "người khác có quyền đọc"
+msgstr ""
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "người khác có quyền ghi nhớ"
+msgstr ""
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "người khác có quyền chạy/tìm"
+msgstr ""
 
 msgid "Name:"
 msgstr ""
@@ -2321,9 +2297,8 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "&Hoãn"
+msgstr ""
 
 msgid "Con&tinue"
 msgstr "&Tiếp tục"
@@ -2351,13 +2326,13 @@ msgstr "%ld B/giây"
 msgid "Target file already exists!"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "New     : %s, size %llu"
-msgstr "Ngày nguồn: %s, kích thước %llu"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Existing: %s, size %llu"
-msgstr "Ngày nguồn: %s, kích thước %llu"
+msgstr ""
 
 msgid "Overwrite this target?"
 msgstr "Khi đè lên tập tin này?"
@@ -2433,9 +2408,8 @@ msgstr ""
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
-#, fuzzy
 msgid "&Stable symlinks"
-msgstr "liên kết &Bền vững"
+msgstr ""
 
 msgid "&Background"
 msgstr "Trong nền sa&u"
@@ -2524,9 +2498,8 @@ msgstr "Tìm"
 msgid "Change &to"
 msgstr ""
 
-#, fuzzy
 msgid "&Free VFSs now"
-msgstr "&Giải phóng"
+msgstr ""
 
 msgid "&Refresh"
 msgstr "&Làm mới"
@@ -2699,9 +2672,8 @@ msgstr "Vị trí:       %Xh:%Xh"
 msgid "&Equal split"
 msgstr "&Kích thước bằng nhau"
 
-#, fuzzy
 msgid "&Menubar visible"
-msgstr "&Hiển thị thanh phím tắt"
+msgstr ""
 
 msgid "Command &prompt"
 msgstr ""
@@ -2954,9 +2926,8 @@ msgstr ""
 msgid "Alwa&ys"
 msgstr "&Luôn luôn"
 
-#, fuzzy
 msgid "File operations"
-msgstr "thao tác với thông báo &Dài dòng"
+msgstr ""
 
 msgid "&Verbose operation"
 msgstr "thao tác với thông báo &Dài dòng"
@@ -3117,9 +3088,8 @@ msgstr ""
 msgid "sort|e"
 msgstr ""
 
-#, fuzzy
 msgid "E&xtension"
-msgstr "&Phần mở rộng"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3551,9 +3521,8 @@ msgstr ""
 msgid "Data directory:"
 msgstr ""
 
-#, fuzzy
 msgid "File extension handlers:"
-msgstr "soạn thảo tập tin phần mở &Rộng"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -4078,29 +4047,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "On"
-#~ msgstr "Trên"
-
-#~ msgid "Mode"
-#~ msgstr "Chếđộ"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d của %d"
-
-#~ msgid "sec"
-#~ msgstr "giây"
-
-#~ msgid "Target date: %s, size %llu"
-#~ msgstr "Ngày đích: %s, kích thước %llu"
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr ""
-#~ "Hãy nhấn tất cả những phím liệt kê ở trên. Sau khi nhấn xong, hãy kiểm tra"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr ""
-#~ "xem những phím nào không có dấu hiệu \"OK\".  Nhấn phím space trên những"
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr "phím bị thiếu, hoặc nhấn chuột để xác định. Di chuyển bằng Tab."

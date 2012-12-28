@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_TW\n"
@@ -1366,17 +1366,14 @@ msgstr ""
 msgid "&Options"
 msgstr ""
 
-#, fuzzy
 msgid "&None"
-msgstr "無"
+msgstr ""
 
-#, fuzzy
 msgid "&Dynamic paragraphing"
-msgstr "動態分段"
+msgstr ""
 
-#, fuzzy
 msgid "Type &writer wrap"
-msgstr "打字輸入換行"
+msgstr ""
 
 msgid "Wrap mode"
 msgstr "換行模式"
@@ -1435,11 +1432,10 @@ msgstr ""
 msgid "Editor options"
 msgstr ""
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr "輸入 `exit' 就可以回到 Midnight Commander"
+msgstr ""
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
 msgstr ""
@@ -1617,17 +1613,14 @@ msgstr ""
 msgid "&UTF-8 output"
 msgstr ""
 
-#, fuzzy
 msgid "&Full 8 bits output"
-msgstr "完整的八位元輸出"
+msgstr ""
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO 8859-1"
+msgstr ""
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "七位元"
+msgstr ""
 
 msgid "F&ull 8 bits input"
 msgstr "完整的八位元輸入"
@@ -1644,21 +1637,17 @@ msgstr "選取(&S)"
 msgid "Directory tree"
 msgstr ""
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "關閉虛擬檔案系統逾時："
+msgstr ""
 
-#, fuzzy
 msgid "FTP anonymous password:"
-msgstr "匿名檔案傳輸密碼："
+msgstr ""
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "檔案傳輸目錄快取逾時："
+msgstr ""
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "永遠使用檔案傳輸代理伺服器"
+msgstr ""
 
 msgid "&Use ~/.netrc"
 msgstr ""
@@ -1696,9 +1685,8 @@ msgstr "繼續"
 msgid "&Kill"
 msgstr "關閉"
 
-#, fuzzy
 msgid "Background jobs"
-msgstr "背景工作"
+msgstr ""
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1713,53 +1701,41 @@ msgstr "使用者名稱: "
 msgid "SMB authentication"
 msgstr ""
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "執行時 sUID"
+msgstr ""
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "執行時 sGID"
+msgstr ""
 
-#, fuzzy
 msgid "stick&y bit"
-msgstr "sticky 位元"
+msgstr ""
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "擁有者可讀取"
+msgstr ""
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "擁有者可寫入"
+msgstr ""
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "擁有者可執行/搜尋"
+msgstr ""
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "同群組的用戶可讀取"
+msgstr ""
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "同群組的用戶可寫入"
+msgstr ""
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "同群組的用戶可執行/搜尋"
+msgstr ""
 
-#, fuzzy
 msgid "read &by others"
-msgstr "不同群組的用戶可讀取"
+msgstr ""
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "不同群組的用戶可寫入"
+msgstr ""
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "不同群組的用戶可執行/搜尋"
+msgstr ""
 
 msgid "Name:"
 msgstr ""
@@ -2321,9 +2297,8 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "暫停"
+msgstr ""
 
 msgid "Con&tinue"
 msgstr "繼續"
@@ -2433,9 +2408,8 @@ msgstr ""
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
-#, fuzzy
 msgid "&Stable symlinks"
-msgstr "穩定符號連結"
+msgstr ""
 
 msgid "&Background"
 msgstr "背景"
@@ -2524,9 +2498,8 @@ msgstr "搜尋中"
 msgid "Change &to"
 msgstr ""
 
-#, fuzzy
 msgid "&Free VFSs now"
-msgstr "立刻釋放虛擬檔案系統"
+msgstr ""
 
 msgid "&Refresh"
 msgstr ""
@@ -2699,9 +2672,8 @@ msgstr "位置：      %Xh:%Xh"
 msgid "&Equal split"
 msgstr "等量分割"
 
-#, fuzzy
 msgid "&Menubar visible"
-msgstr "顯示鍵盤列"
+msgstr ""
 
 msgid "Command &prompt"
 msgstr ""
@@ -2954,9 +2926,8 @@ msgstr ""
 msgid "Alwa&ys"
 msgstr "永遠"
 
-#, fuzzy
 msgid "File operations"
-msgstr "詳細的操作過程"
+msgstr ""
 
 msgid "&Verbose operation"
 msgstr "詳細的操作過程"
@@ -3117,9 +3088,8 @@ msgstr ""
 msgid "sort|e"
 msgstr ""
 
-#, fuzzy
 msgid "E&xtension"
-msgstr "擴充"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3547,9 +3517,8 @@ msgstr ""
 msgid "Data directory:"
 msgstr ""
 
-#, fuzzy
 msgid "File extension handlers:"
-msgstr "編輯擴充檔"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -4074,24 +4043,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "On"
-#~ msgstr "開"
-
-#~ msgid "Mode"
-#~ msgstr "模式"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d 之 %d"
-
-#~ msgid "sec"
-#~ msgstr "秒"
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr "一個個按下這邊顯示的這些按鍵，在您按完以後，檢查一下"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr "哪個按鍵沒有標上 \"好\"，在這些地方按一下空白鍵，或者"
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr "用滑鼠控制來設定這些按鍵。用 Tab 鍵可以在選項之間移動。"

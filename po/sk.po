@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Jose Riha <jose1711@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/projects/p/mc/language/sk/)\n"
 "Language: sk\n"
@@ -1377,17 +1377,14 @@ msgstr ""
 msgid "&Options"
 msgstr "M&Ožnosti"
 
-#, fuzzy
 msgid "&None"
-msgstr "Žiaden"
+msgstr ""
 
-#, fuzzy
 msgid "&Dynamic paragraphing"
-msgstr "Dynamické rob. odstavcov"
+msgstr ""
 
-#, fuzzy
 msgid "Type &writer wrap"
-msgstr "Zalamovanie písacieho stroja"
+msgstr ""
 
 msgid "Wrap mode"
 msgstr "Zalamovanie riadkov"
@@ -1419,13 +1416,11 @@ msgstr "&Potvrdiť pred uložením"
 msgid "Save file &position"
 msgstr "Uložiť &polohu súboru"
 
-#, fuzzy
 msgid "&Visible trailing spaces"
-msgstr "Viditeľné medzery na konci"
+msgstr ""
 
-#, fuzzy
 msgid "Visible &tabs"
-msgstr "Viditeľné tabulátory"
+msgstr ""
 
 msgid "Synta&x highlighting"
 msgstr "Zvýraznenie s&Yntaxe"
@@ -1436,9 +1431,8 @@ msgstr ""
 msgid "Pers&istent selection"
 msgstr "&Trvalý výber"
 
-#, fuzzy
 msgid "Cursor be&yond end of line"
-msgstr "Kurzor za koncom riadka"
+msgstr ""
 
 msgid "&Group undo"
 msgstr ""
@@ -1449,11 +1443,10 @@ msgstr ""
 msgid "Editor options"
 msgstr ""
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr "Naozaj chcete ukončiť Midnight Commander?"
+msgstr ""
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
 msgstr ""
@@ -1628,21 +1621,17 @@ msgstr ""
 msgid "Confirmation"
 msgstr ""
 
-#, fuzzy
 msgid "&UTF-8 output"
-msgstr "Výstup v UTF-8"
+msgstr ""
 
-#, fuzzy
 msgid "&Full 8 bits output"
-msgstr "Plný 8-bitový výstup"
+msgstr ""
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO 8859-1"
+msgstr ""
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "7 bitov"
+msgstr ""
 
 msgid "F&ull 8 bits input"
 msgstr "p&Lný 8 bitový vstup"
@@ -1659,21 +1648,17 @@ msgstr "&Vybrať"
 msgid "Directory tree"
 msgstr ""
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "Časový limit pre uvoľnenie VFS:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP anonymous password:"
-msgstr "ftp anonymné heslo:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "ftpfs časový limit pre cache:"
+msgstr ""
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "&Vždy použiť ftp proxy"
+msgstr ""
 
 msgid "&Use ~/.netrc"
 msgstr "Po&užiť ~/.netrc"
@@ -1711,9 +1696,8 @@ msgstr "&Pokračovať"
 msgid "&Kill"
 msgstr "&Ukončiť"
 
-#, fuzzy
 msgid "Background jobs"
-msgstr "Úlohy v &Pozadí"
+msgstr ""
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1725,57 +1709,44 @@ msgstr "Doména:"
 msgid "Username:"
 msgstr "Meno použivateľa:"
 
-#, fuzzy
 msgid "SMB authentication"
-msgstr "Autentifikácia zlyhala"
+msgstr ""
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "nastav použ. ID pre vykon."
+msgstr ""
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "nastav skup. ID pre vykon."
+msgstr ""
 
-#, fuzzy
 msgid "stick&y bit"
-msgstr "sticky bit"
+msgstr ""
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "čítaný vlastníkom"
+msgstr ""
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "zapisovaný vlastníkom"
+msgstr ""
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "vykonávaný/hľadaný vlast."
+msgstr ""
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "čítaný skupinou"
+msgstr ""
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "zapisovaný skupinou"
+msgstr ""
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "vykonávaný/hľadaný skup."
+msgstr ""
 
-#, fuzzy
 msgid "read &by others"
-msgstr "čítaný ostatnými"
+msgstr ""
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "zapisovaný ostatnými"
+msgstr ""
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "vykonávaný/hľadaný ostat."
+msgstr ""
 
 msgid "Name:"
 msgstr ""
@@ -2337,9 +2308,8 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "z&Astaviť"
+msgstr ""
 
 msgid "Con&tinue"
 msgstr "po&Kračovať"
@@ -2367,13 +2337,13 @@ msgstr "%ld B/s"
 msgid "Target file already exists!"
 msgstr "Cieľový súbor už existuje!"
 
-#, fuzzy, c-format
+#, c-format
 msgid "New     : %s, size %llu"
-msgstr "Dátum zdroja: %s, veľkosť %llu"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Existing: %s, size %llu"
-msgstr "Dátum zdroja: %s, veľkosť %llu"
+msgstr ""
 
 msgid "Overwrite this target?"
 msgstr "Prepísať tento cieľ?"
@@ -2449,9 +2419,8 @@ msgstr ""
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
-#, fuzzy
 msgid "&Stable symlinks"
-msgstr "&Stále Sym. odkazy"
+msgstr ""
 
 msgid "&Background"
 msgstr "&Pozadie"
@@ -2542,9 +2511,8 @@ msgstr "Hľadanie"
 msgid "Change &to"
 msgstr ""
 
-#, fuzzy
 msgid "&Free VFSs now"
-msgstr "&Uvoľniť VFS teraz"
+msgstr ""
 
 msgid "&Refresh"
 msgstr "&Obnoviť"
@@ -2719,9 +2687,8 @@ msgstr "Umiestnenie:  %Xh:%Xh"
 msgid "&Equal split"
 msgstr "&Rovnako rozdeliť"
 
-#, fuzzy
 msgid "&Menubar visible"
-msgstr "vid&Iteľná tabuľka klávesov"
+msgstr ""
 
 msgid "Command &prompt"
 msgstr ""
@@ -2976,9 +2943,8 @@ msgstr ""
 msgid "Alwa&ys"
 msgstr "&Vždy"
 
-#, fuzzy
 msgid "File operations"
-msgstr "FileOperation|Kopírovať"
+msgstr ""
 
 msgid "&Verbose operation"
 msgstr "&Výrečná prevádzka"
@@ -3139,9 +3105,8 @@ msgstr "V&erzia"
 msgid "sort|e"
 msgstr "sort|e"
 
-#, fuzzy
 msgid "E&xtension"
-msgstr "&Prípona súboru"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3578,9 +3543,8 @@ msgstr ""
 msgid "Data directory:"
 msgstr ""
 
-#, fuzzy
 msgid "File extension handlers:"
-msgstr "Upraviť priradenie sú&boru"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -4109,37 +4073,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "On"
-#~ msgstr "na"
-
-#~ msgid "Mode"
-#~ msgstr "Režim"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d z %d"
-
-#~ msgid "Case sensi&tive"
-#~ msgstr "Roz&Lišovať veľkosť"
-
-#~ msgid "sec"
-#~ msgstr "sekúnd"
-
-#~ msgid "Background Jobs"
-#~ msgstr "Úlohy v pozadí"
-
-#~ msgid "Target date: %s, size %llu"
-#~ msgstr "Dátum cieľa: %s, veľkosť %llu"
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr "Stlačte všetky tu spomenuté klávesy a skontrolujte, ktoré klávesy"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr "nie sú označené s Áno. Stlačte medzeru pre vynechanie klávesy,"
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr ""
-#~ "alebo kliknite myšou pre jeho definovanie. Pohybujte sa pomocou Tab."
-
-#~ msgid "fish: storing zeros"
-#~ msgstr "fish: ukladám nuly"

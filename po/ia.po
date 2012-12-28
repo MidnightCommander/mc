@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Martijn Dekker <mcdutchie@hotmail.com>\n"
 "Language-Team: Interlingua (http://www.transifex.com/projects/p/mc/language/"
 "ia/)\n"
@@ -1387,9 +1387,8 @@ msgstr ""
 msgid "&Options"
 msgstr "&Optiones"
 
-#, fuzzy
 msgid "&None"
-msgstr "Nulle"
+msgstr ""
 
 msgid "&Dynamic paragraphing"
 msgstr ""
@@ -1400,9 +1399,8 @@ msgstr ""
 msgid "Wrap mode"
 msgstr ""
 
-#, fuzzy
 msgid "Tabulation"
-msgstr "Navigation"
+msgstr ""
 
 msgid "&Fake half tabs"
 msgstr ""
@@ -1633,20 +1631,17 @@ msgstr ""
 msgid "Confirmation"
 msgstr "Confirmation"
 
-#, fuzzy
 msgid "&UTF-8 output"
-msgstr "Output in UTF-8"
+msgstr ""
 
 msgid "&Full 8 bits output"
 msgstr ""
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO 8859-1"
+msgstr ""
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "7 bits"
+msgstr ""
 
 msgid "F&ull 8 bits input"
 msgstr ""
@@ -1669,9 +1664,8 @@ msgstr ""
 msgid "FTP anonymous password:"
 msgstr ""
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "Cache de directorio explicate pro %s"
+msgstr ""
 
 msgid "&Always use ftp proxy:"
 msgstr ""
@@ -1712,9 +1706,8 @@ msgstr ""
 msgid "&Kill"
 msgstr ""
 
-#, fuzzy
 msgid "Background jobs"
-msgstr "Processo in secunde plano:"
+msgstr ""
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1726,9 +1719,8 @@ msgstr "Dominio:"
 msgid "Username:"
 msgstr "Nomine de usator:"
 
-#, fuzzy
 msgid "SMB authentication"
-msgstr "Authentication fallite"
+msgstr ""
 
 msgid "set &user ID on execution"
 msgstr ""
@@ -1745,9 +1737,8 @@ msgstr ""
 msgid "&write by owner"
 msgstr ""
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "executar/cercar per alteres"
+msgstr ""
 
 msgid "rea&d by group"
 msgstr ""
@@ -1755,21 +1746,17 @@ msgstr ""
 msgid "write by grou&p"
 msgstr ""
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "executar/cercar per alteres"
+msgstr ""
 
-#, fuzzy
 msgid "read &by others"
-msgstr "executar/cercar per alteres"
+msgstr ""
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "executar/cercar per alteres"
+msgstr ""
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "executar/cercar per alteres"
+msgstr ""
 
 msgid "Name:"
 msgstr "Nomine:"
@@ -2331,9 +2318,8 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "&Appender"
+msgstr ""
 
 msgid "Con&tinue"
 msgstr "Con&tinuar"
@@ -2724,9 +2710,8 @@ msgstr ""
 msgid "&XTerm window title"
 msgstr ""
 
-#, fuzzy
 msgid "&Show free space"
-msgstr "Monstrar le sp&atio libere"
+msgstr ""
 
 msgid "Panel split"
 msgstr ""
@@ -2965,9 +2950,8 @@ msgstr ""
 msgid "Alwa&ys"
 msgstr "Se&mpre"
 
-#, fuzzy
 msgid "File operations"
-msgstr "Optiones principal"
+msgstr ""
 
 msgid "&Verbose operation"
 msgstr ""
@@ -3128,9 +3112,8 @@ msgstr "&Version"
 msgid "sort|e"
 msgstr ""
 
-#, fuzzy
 msgid "E&xtension"
-msgstr "&Extension"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -4080,15 +4063,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr "Continuar ab initio?"
-
-#~ msgid "Mode"
-#~ msgstr "Modo"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d de %d"
-
-#~ msgid "Delete:"
-#~ msgstr "Deler:"
-
-#~ msgid "fish: storing zeros"
-#~ msgstr "fish: immagazina zeros"

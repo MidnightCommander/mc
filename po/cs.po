@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/mc/language/cs/)\n"
 "Language: cs\n"
@@ -1391,24 +1391,20 @@ msgstr ""
 msgid "&Options"
 msgstr "&Nastavení"
 
-#, fuzzy
 msgid "&None"
-msgstr "Žádný"
+msgstr ""
 
-#, fuzzy
 msgid "&Dynamic paragraphing"
-msgstr "Dynamické odstavce"
+msgstr ""
 
-#, fuzzy
 msgid "Type &writer wrap"
-msgstr "Zalamování psacího stroje"
+msgstr ""
 
 msgid "Wrap mode"
 msgstr "Režim zalamování"
 
-#, fuzzy
 msgid "Tabulation"
-msgstr "Navigace"
+msgstr ""
 
 msgid "&Fake half tabs"
 msgstr "&Falešné poloviční tabulátory"
@@ -1434,13 +1430,11 @@ msgstr "&Potvrdit před uložením"
 msgid "Save file &position"
 msgstr "&Uložit pozici v souboru"
 
-#, fuzzy
 msgid "&Visible trailing spaces"
-msgstr "Viditelné mezery na konci"
+msgstr ""
 
-#, fuzzy
 msgid "Visible &tabs"
-msgstr "Viditelné tabulátory"
+msgstr ""
 
 msgid "Synta&x highlighting"
 msgstr "Zvýraznění synta&xe"
@@ -1451,9 +1445,8 @@ msgstr ""
 msgid "Pers&istent selection"
 msgstr "&Trvalý výběr"
 
-#, fuzzy
 msgid "Cursor be&yond end of line"
-msgstr "Kurzor za koncem řádku"
+msgstr ""
 
 msgid "&Group undo"
 msgstr ""
@@ -1464,11 +1457,10 @@ msgstr "Šířka řádku pro zlom:"
 msgid "Editor options"
 msgstr "Nastavení editoru"
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr "Opravdu ukončit Midnight Commander?"
+msgstr ""
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
 msgstr ""
@@ -1653,21 +1645,17 @@ msgstr "Confirmation|Smazání &historie"
 msgid "Confirmation"
 msgstr "Potvrzování"
 
-#, fuzzy
 msgid "&UTF-8 output"
-msgstr "UTF-8 výstup"
+msgstr ""
 
-#, fuzzy
 msgid "&Full 8 bits output"
-msgstr "Výstup plných 8 bitů"
+msgstr ""
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO 8859-1"
+msgstr ""
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "7 bitů"
+msgstr ""
 
 msgid "F&ull 8 bits input"
 msgstr "Vstup &plných 8 bitů"
@@ -1684,21 +1672,17 @@ msgstr "&Výběr"
 msgid "Directory tree"
 msgstr "Strom adresářů"
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "Čas pro uvolnění VFS:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP anonymous password:"
-msgstr "Heslo pro anonymní ftp:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "Vypršení obsahu ftpfs keše za:"
+msgstr ""
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "&Vždy použít ftp proxy"
+msgstr ""
 
 msgid "&Use ~/.netrc"
 msgstr "&Používat ~/.netrc"
@@ -1736,9 +1720,8 @@ msgstr "&Pokračovat"
 msgid "&Kill"
 msgstr "&Ukončit"
 
-#, fuzzy
 msgid "Background jobs"
-msgstr "Úlohy na po&zadí"
+msgstr ""
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1750,57 +1733,44 @@ msgstr "Doména:"
 msgid "Username:"
 msgstr "Jméno uživatele:"
 
-#, fuzzy
 msgid "SMB authentication"
-msgstr "Autentizace selhala"
+msgstr ""
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "nastavit UID při spuštění"
+msgstr ""
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "nastavit GID při spuštění"
+msgstr ""
 
-#, fuzzy
 msgid "stick&y bit"
-msgstr "bit „sticky“"
+msgstr ""
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "čtení vlastníkem"
+msgstr ""
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "zápis vlastníkem"
+msgstr ""
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "spouštění vlastníkem"
+msgstr ""
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "čtení skupinou"
+msgstr ""
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "zápis skupinou"
+msgstr ""
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "spouštění skupinou"
+msgstr ""
 
-#, fuzzy
 msgid "read &by others"
-msgstr "čtení ostatními"
+msgstr ""
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "zápis ostatními"
+msgstr ""
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "spouštění ostatními"
+msgstr ""
 
 msgid "Name:"
 msgstr ""
@@ -2162,24 +2132,18 @@ msgstr ""
 msgid "&Retry"
 msgstr "&Zkusit znovu"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\n"
-"Adresář není prázdný.\n"
-"Smazat rekurzivně?"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Background process:\n"
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\n"
-"Proces na pozadí: Adresář není prázdný.\n"
-"Smazat rekurzivně?"
 
 msgid "Non&e"
 msgstr "Žá&dné"
@@ -2447,9 +2411,8 @@ msgstr "Nelze pracovat s „..“!"
 msgid "Sorry, I could not put the job in background"
 msgstr "Bohužel, úlohu nelze přesunout na pozadí"
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "&Pozastavit"
+msgstr ""
 
 msgid "Con&tinue"
 msgstr "&Pokračovat"
@@ -2477,13 +2440,13 @@ msgstr "%ld B/s"
 msgid "Target file already exists!"
 msgstr "Cílový soubor už existuje!"
 
-#, fuzzy, c-format
+#, c-format
 msgid "New     : %s, size %llu"
-msgstr "Zdrojové datum: %s, velikost %llu"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Existing: %s, size %llu"
-msgstr "Zdrojové datum: %s, velikost %llu"
+msgstr ""
 
 msgid "Overwrite this target?"
 msgstr "Přepsat tento soubor?"
@@ -2559,9 +2522,8 @@ msgstr "Zachovat &atributy"
 msgid "Di&ve into subdir if exists"
 msgstr "&Ponořit se do existujících adresářů"
 
-#, fuzzy
 msgid "&Stable symlinks"
-msgstr "&Stabilní symlinky"
+msgstr ""
 
 msgid "&Background"
 msgstr "&Na pozadí"
@@ -2652,9 +2614,8 @@ msgstr "Hledání"
 msgid "Change &to"
 msgstr "Z&měnit na"
 
-#, fuzzy
 msgid "&Free VFSs now"
-msgstr "U&volnit VFS"
+msgstr ""
 
 msgid "&Refresh"
 msgstr "&Obnovit"
@@ -2829,9 +2790,8 @@ msgstr "Poloha:    %Xh:%Xh"
 msgid "&Equal split"
 msgstr "Rozdělení na &poloviny"
 
-#, fuzzy
 msgid "&Menubar visible"
-msgstr "&Menu vždy viditelné"
+msgstr ""
 
 msgid "Command &prompt"
 msgstr "Příkazová řá&dka"
@@ -2845,9 +2805,8 @@ msgstr "Tip&y viditelné"
 msgid "&XTerm window title"
 msgstr "Nadpis okna &xtermu"
 
-#, fuzzy
 msgid "&Show free space"
-msgstr "Zo&braz volné místo"
+msgstr ""
 
 msgid "Panel split"
 msgstr "Rozdělení panelů"
@@ -3087,9 +3046,8 @@ msgstr "Na neinteligentních term&inálech"
 msgid "Alwa&ys"
 msgstr "Vžd&y"
 
-#, fuzzy
 msgid "File operations"
-msgstr "Nastavení souborových operací"
+msgstr ""
 
 msgid "&Verbose operation"
 msgstr "„Upovídaně&jší“ operace"
@@ -3254,9 +3212,8 @@ msgstr "&Verze"
 msgid "sort|e"
 msgstr "sort|e"
 
-#, fuzzy
 msgid "E&xtension"
-msgstr "&Přípona"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3698,9 +3655,8 @@ msgstr ""
 msgid "Data directory:"
 msgstr ""
 
-#, fuzzy
 msgid "File extension handlers:"
-msgstr "Upravit akc&e k příponám"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -4242,43 +4198,3 @@ msgstr "Hledání dokončeno"
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "On"
-#~ msgstr "Na"
-
-#~ msgid "Mode"
-#~ msgstr "Práva"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d z %d"
-
-#~ msgid "Case sensi&tive"
-#~ msgstr "Všímat si velikos&ti písmen"
-
-#~ msgid "sec"
-#~ msgstr "s"
-
-#~ msgid "Background Jobs"
-#~ msgstr "Úlohy na pozadí"
-
-#~ msgid "Delete:"
-#~ msgstr "Smazat:"
-
-#~ msgid "Target date: %s, size %llu"
-#~ msgstr "Cílové datum: %s, velikost %llu"
-
-#~ msgid "Case s&ensitive"
-#~ msgstr "Všímat si velikos&ti písmen"
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr "Stiskněte všechny klávesy zmiňované výše. Až to budete mít hotovo,"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr ""
-#~ "zkontrolujte klávesy, které nejsou označeny OK. Tam stiskněte mezerník"
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr "nebo klikněte myší. Po položkách se pohybujte pomocí tabulátoru."
-
-#~ msgid "fish: storing zeros"
-#~ msgstr "fish: ukládám nuly"

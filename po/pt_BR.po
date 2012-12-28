@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
-"PO-Revision-Date: 2012-09-03 08:41+0000\n"
+"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/mc/"
 "language/pt_BR/)\n"
@@ -1392,17 +1392,14 @@ msgstr ""
 msgid "&Options"
 msgstr ""
 
-#, fuzzy
 msgid "&None"
-msgstr "Nenhum"
+msgstr ""
 
-#, fuzzy
 msgid "&Dynamic paragraphing"
-msgstr "Paragrafos dinâmicos"
+msgstr ""
 
-#, fuzzy
 msgid "Type &writer wrap"
-msgstr "Empacotar texto"
+msgstr ""
 
 msgid "Wrap mode"
 msgstr "Modo Empacotado"
@@ -1434,13 +1431,11 @@ msgstr "confir&Mar antes de Salvar"
 msgid "Save file &position"
 msgstr ""
 
-#, fuzzy
 msgid "&Visible trailing spaces"
-msgstr "Espaços à direita visíveis"
+msgstr ""
 
-#, fuzzy
 msgid "Visible &tabs"
-msgstr "Tabs visíveis"
+msgstr ""
 
 msgid "Synta&x highlighting"
 msgstr "Ressaltar sinta&xe"
@@ -1451,9 +1446,8 @@ msgstr ""
 msgid "Pers&istent selection"
 msgstr ""
 
-#, fuzzy
 msgid "Cursor be&yond end of line"
-msgstr "Cursor além do fim da linha"
+msgstr ""
 
 msgid "&Group undo"
 msgstr ""
@@ -1464,11 +1458,10 @@ msgstr ""
 msgid "Editor options"
 msgstr "Opções do editor"
 
-#, fuzzy
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr "Você deseja realmente sair do Midnight Commander?"
+msgstr ""
 
 msgid "Copyright (C) 1996-2012 the Free Software Foundation"
 msgstr ""
@@ -1653,21 +1646,17 @@ msgstr ""
 msgid "Confirmation"
 msgstr "Confirmação"
 
-#, fuzzy
 msgid "&UTF-8 output"
-msgstr "saída UTF-8"
+msgstr ""
 
-#, fuzzy
 msgid "&Full 8 bits output"
-msgstr " Saída completa de 8 bits "
+msgstr ""
 
-#, fuzzy
 msgid "&ISO 8859-1"
-msgstr "ISO 8859-1"
+msgstr ""
 
-#, fuzzy
 msgid "7 &bits"
-msgstr "7 bits"
+msgstr ""
 
 msgid "F&ull 8 bits input"
 msgstr " Entrada completa de 8 bits "
@@ -1684,21 +1673,17 @@ msgstr ""
 msgid "Directory tree"
 msgstr "Árvore de diretórios"
 
-#, fuzzy
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "Tempo limite para liberar VFS:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP anonymous password:"
-msgstr "Senha de ftp anônimo:"
+msgstr ""
 
-#, fuzzy
 msgid "FTP directory cache timeout (sec):"
-msgstr "tempo limite do cache do diretório ftpfs"
+msgstr ""
 
-#, fuzzy
 msgid "&Always use ftp proxy:"
-msgstr "&Sempre utilizar proxy ftp"
+msgstr ""
 
 msgid "&Use ~/.netrc"
 msgstr ""
@@ -1738,9 +1723,8 @@ msgstr "&Reiniciar"
 msgid "&Kill"
 msgstr "&Finalizar"
 
-#, fuzzy
 msgid "Background jobs"
-msgstr "Processos em segundo plano"
+msgstr ""
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1752,57 +1736,44 @@ msgstr "Domínio:"
 msgid "Username:"
 msgstr " Nome de usuário:"
 
-#, fuzzy
 msgid "SMB authentication"
-msgstr "Falha na autenticação"
+msgstr ""
 
-#, fuzzy
 msgid "set &user ID on execution"
-msgstr "configurar identificação do usuário para execução"
+msgstr ""
 
-#, fuzzy
 msgid "set &group ID on execution"
-msgstr "configurar identificação do grupo para execução"
+msgstr ""
 
-#, fuzzy
 msgid "stick&y bit"
-msgstr "bit de propriedade"
+msgstr ""
 
-#, fuzzy
 msgid "&read by owner"
-msgstr "leitura pelo dono"
+msgstr ""
 
-#, fuzzy
 msgid "&write by owner"
-msgstr "escrita pelo dono"
+msgstr ""
 
-#, fuzzy
 msgid "e&xecute/search by owner"
-msgstr "execução/procura pelo dono"
+msgstr ""
 
-#, fuzzy
 msgid "rea&d by group"
-msgstr "leitura por grupo"
+msgstr ""
 
-#, fuzzy
 msgid "write by grou&p"
-msgstr "escrita por grupo"
+msgstr ""
 
-#, fuzzy
 msgid "execu&te/search by group"
-msgstr "execução/procura por grupo"
+msgstr ""
 
-#, fuzzy
 msgid "read &by others"
-msgstr "leitura por outros"
+msgstr ""
 
-#, fuzzy
 msgid "wr&ite by others"
-msgstr "escrita por outros"
+msgstr ""
 
-#, fuzzy
 msgid "execute/searc&h by others"
-msgstr "execução/procura por outros"
+msgstr ""
 
 msgid "Name:"
 msgstr ""
@@ -2157,24 +2128,18 @@ msgstr ""
 msgid "&Retry"
 msgstr "&Tentar Novamente"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\n"
-"Diretório não está vazio.\n"
-"Deletá-lo recursivamente?"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Background process:\n"
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
-"\n"
-"Processo de plano de fundo: Diretório não está vazio.\n"
-"Deletá-lo recursivamente?"
 
 msgid "Non&e"
 msgstr "&Nenhum"
@@ -2442,9 +2407,8 @@ msgstr "Não foi possível operar em \"..\""
 msgid "Sorry, I could not put the job in background"
 msgstr "Desculpe, não consegui colocar o procesos em plano de fundo"
 
-#, fuzzy
 msgid "S&uspend"
-msgstr "&Suspender"
+msgstr ""
 
 msgid "Con&tinue"
 msgstr "Con&tinuar"
@@ -2472,13 +2436,13 @@ msgstr "%ld B/s"
 msgid "Target file already exists!"
 msgstr "O arquivo alvo já existe!"
 
-#, fuzzy, c-format
+#, c-format
 msgid "New     : %s, size %llu"
-msgstr "Data de origem: %s, tamanho %llu"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Existing: %s, size %llu"
-msgstr "Data de origem: %s, tamanho %llu"
+msgstr ""
 
 msgid "Overwrite this target?"
 msgstr "Sobrescrever o destino ?"
@@ -2556,9 +2520,8 @@ msgstr ""
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
-#, fuzzy
 msgid "&Stable symlinks"
-msgstr "Ligação simbólica &Estável"
+msgstr ""
 
 msgid "&Background"
 msgstr "&Segundo plano"
@@ -2648,9 +2611,8 @@ msgstr "Procurando"
 msgid "Change &to"
 msgstr ""
 
-#, fuzzy
 msgid "&Free VFSs now"
-msgstr "&Limpar VFSs agora"
+msgstr ""
 
 msgid "&Refresh"
 msgstr ""
@@ -2824,9 +2786,8 @@ msgstr "Localização: %Xh:%Xh"
 msgid "&Equal split"
 msgstr "Dividir i&Gualmente"
 
-#, fuzzy
 msgid "&Menubar visible"
-msgstr "Barra de &Teclas visível"
+msgstr ""
 
 msgid "Command &prompt"
 msgstr ""
@@ -3080,9 +3041,8 @@ msgstr ""
 msgid "Alwa&ys"
 msgstr "Sem&pre"
 
-#, fuzzy
 msgid "File operations"
-msgstr "Mostrar P&rogresso"
+msgstr ""
 
 msgid "&Verbose operation"
 msgstr "Mostrar P&rogresso"
@@ -3243,9 +3203,8 @@ msgstr ""
 msgid "sort|e"
 msgstr ""
 
-#, fuzzy
 msgid "E&xtension"
-msgstr "&Extensão"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3677,9 +3636,8 @@ msgstr ""
 msgid "Data directory:"
 msgstr ""
 
-#, fuzzy
 msgid "File extension handlers:"
-msgstr "Editar &extensões de arquivo"
+msgstr ""
 
 msgid "VFS plugins and scripts:"
 msgstr ""
@@ -4214,33 +4172,3 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
-
-#~ msgid "On"
-#~ msgstr "Ligado"
-
-#~ msgid "Mode"
-#~ msgstr "Modo"
-
-#~ msgid "%6d of %d"
-#~ msgstr "%6d de %d"
-
-#~ msgid "sec"
-#~ msgstr "seg"
-
-#~ msgid "Delete:"
-#~ msgstr "Deletar:"
-
-#~ msgid "Target date: %s, size %llu"
-#~ msgstr "Data do alvo: %s, tamanho %llu"
-
-#~ msgid "Press all the keys mentioned here. After you have done it, check"
-#~ msgstr "Pressione todas as teclas mencionadas, após terminar, verifique"
-
-#~ msgid "which keys are not marked with OK.  Press space on the missing"
-#~ msgstr "que teclas não estão marcadas com OK. Pressione espaço na "
-
-#~ msgid "key, or click with the mouse to define it. Move around with Tab."
-#~ msgstr "tecla para definir. Para mover-se entre elas use Tab"
-
-#~ msgid "fish: storing zeros"
-#~ msgstr "fish: armazenando zeros"

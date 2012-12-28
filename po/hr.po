@@ -3,21 +3,21 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2012-12-28 11:22+0300\n"
-"PO-Revision-Date: 2012-12-26 08:42+0000\n"
-"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
-"Language-Team: Finnish (http://www.transifex.com/projects/p/mc/language/"
-"fi/)\n"
-"Language: fi\n"
+"PO-Revision-Date: 2010-12-29 10:19+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Croatian (http://www.transifex.com/projects/p/mc/language/"
+"hr/)\n"
+"Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr ""
@@ -427,7 +427,7 @@ msgid ""
 msgstr ""
 
 msgid "Warning"
-msgstr "Varoitus"
+msgstr ""
 
 msgid "Pipe failed"
 msgstr ""
@@ -492,7 +492,7 @@ msgid "Internal error:"
 msgstr ""
 
 msgid "Password:"
-msgstr "Salasana:"
+msgstr ""
 
 msgid "Screens"
 msgstr ""
@@ -508,22 +508,22 @@ msgid "Do you want clean this history?"
 msgstr ""
 
 msgid "&Yes"
-msgstr "&Kyllä"
+msgstr ""
 
 msgid "&No"
-msgstr "&Ei"
+msgstr ""
 
 msgid "&OK"
-msgstr "&OK"
+msgstr ""
 
 msgid "&Cancel"
-msgstr "&Peruuta"
+msgstr ""
 
 msgid "Background process:"
-msgstr "Taustaprosessi:"
+msgstr ""
 
 msgid "Error"
-msgstr "Virhe"
+msgstr ""
 
 msgid "Displays the current version"
 msgstr ""
@@ -694,7 +694,7 @@ msgid ""
 msgstr ""
 
 msgid "&Dismiss"
-msgstr "&Kuittaa"
+msgstr ""
 
 msgid "Enter search string:"
 msgstr ""
@@ -703,7 +703,7 @@ msgid "Cas&e sensitive"
 msgstr ""
 
 msgid "&Backwards"
-msgstr "&Takaperin"
+msgstr ""
 
 msgid "&Whole words"
 msgstr ""
@@ -712,7 +712,7 @@ msgid "&All charsets"
 msgstr ""
 
 msgid "Search"
-msgstr "Etsi"
+msgstr ""
 
 msgid "Search is disabled"
 msgstr ""
@@ -803,7 +803,7 @@ msgid "ButtonBar|Quit"
 msgstr ""
 
 msgid "Quit"
-msgstr "Lopeta"
+msgstr ""
 
 msgid "File(s) was modified. Save with exit?"
 msgstr ""
@@ -988,7 +988,7 @@ msgid "Which syntax file you want to edit?"
 msgstr ""
 
 msgid "&User"
-msgstr "&Käyttäjä"
+msgstr ""
 
 msgid "&System wide"
 msgstr ""
@@ -1000,7 +1000,7 @@ msgid "Which menu file do you want to edit?"
 msgstr ""
 
 msgid "&Local"
-msgstr "&Paikallinen"
+msgstr ""
 
 msgid "Replace"
 msgstr ""
@@ -1124,19 +1124,19 @@ msgid "Replace with:"
 msgstr ""
 
 msgid "&Replace"
-msgstr "&Korvaa"
+msgstr ""
 
 msgid "A&ll"
-msgstr "K&aikki"
+msgstr ""
 
 msgid "&Skip"
-msgstr "&Ohita"
+msgstr ""
 
 msgid "Confirm replace"
 msgstr ""
 
 msgid "Cancel"
-msgstr "Peruuta"
+msgstr ""
 
 msgid ""
 "Current text was modified without a file save.\n"
@@ -1375,19 +1375,19 @@ msgid "Type &writer wrap"
 msgstr ""
 
 msgid "Wrap mode"
-msgstr "Kieromoodi"
+msgstr ""
 
 msgid "Tabulation"
 msgstr ""
 
 msgid "&Fake half tabs"
-msgstr "valepuolikas&Tabit"
+msgstr ""
 
 msgid "&Backspace through tabs"
-msgstr "&Poisto tuhoaa tabit"
+msgstr ""
 
 msgid "Fill tabs with &spaces"
-msgstr "täytä tabit &Välilyönnein"
+msgstr ""
 
 msgid "Tab spacing:"
 msgstr ""
@@ -1396,10 +1396,10 @@ msgid "Other options"
 msgstr ""
 
 msgid "&Return does autoindent"
-msgstr "&Rivinvaihto sisentää"
+msgstr ""
 
 msgid "Confir&m before saving"
-msgstr "&Varmista ennen tallennusta"
+msgstr ""
 
 msgid "Save file &position"
 msgstr ""
@@ -1411,7 +1411,7 @@ msgid "Visible &tabs"
 msgstr ""
 
 msgid "Synta&x highlighting"
-msgstr "syntaks&Ikorostus"
+msgstr ""
 
 msgid "C&ursor after inserted block"
 msgstr ""
@@ -1509,32 +1509,32 @@ msgstr ""
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
-msgstr "Kirjoita 'exit' palataksesi Midnight Commanderiin"
+msgstr ""
 
 #, c-format
 msgid "Cannot fetch a local copy of %s"
 msgstr ""
 
 msgid "Set &all"
-msgstr "Aseta &kaikki"
+msgstr ""
 
 msgid "S&kip"
-msgstr "&Ohita"
+msgstr ""
 
 msgid "&Set"
-msgstr "&Aseta"
+msgstr ""
 
 msgid "owner"
-msgstr "omistaja"
+msgstr ""
 
 msgid "group"
-msgstr "ryhmä"
+msgstr ""
 
 msgid "other"
-msgstr "muut"
+msgstr ""
 
 msgid "Flag"
-msgstr "Lippo"
+msgstr ""
 
 msgid "Chown advanced command"
 msgstr ""
@@ -1558,34 +1558,34 @@ msgid "Running"
 msgstr ""
 
 msgid "Stopped"
-msgstr "Pysäytetty"
+msgstr ""
 
 msgid "&Full file list"
-msgstr "&Täysi tiedostolista"
+msgstr ""
 
 msgid "&Brief file list"
-msgstr "&Lyhyt tiedostolista"
+msgstr ""
 
 msgid "&Long file list"
-msgstr "&Pitkä tiedostolista"
+msgstr ""
 
 msgid "&User defined:"
-msgstr "&Oma tiedostolista:"
+msgstr ""
 
 msgid "User &mini status"
 msgstr ""
 
 msgid "Listing mode"
-msgstr "Listausmoodi"
+msgstr ""
 
 msgid "Executable &first"
 msgstr ""
 
 msgid "&Reverse"
-msgstr "&Käänteinen"
+msgstr ""
 
 msgid "Sort order"
-msgstr "Järjestys"
+msgstr ""
 
 #. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 msgid "Confirmation|&Delete"
@@ -1622,7 +1622,7 @@ msgid "7 &bits"
 msgstr ""
 
 msgid "F&ull 8 bits input"
-msgstr "Täysi &8-bittinen syöte"
+msgstr ""
 
 msgid "Display bits"
 msgstr ""
@@ -1661,28 +1661,28 @@ msgid "Virtual File System Setting"
 msgstr ""
 
 msgid "cd"
-msgstr "Hakemistonvaihto"
+msgstr ""
 
 msgid "Quick cd"
-msgstr "Pikainen hakemistonvaihto"
+msgstr ""
 
 msgid "Existing filename (filename symlink will point to):"
-msgstr "Olemassaoleva tiedostonimi (johon linkki tulee osoittamaan):"
+msgstr ""
 
 msgid "Symbolic link filename:"
-msgstr "Symbolisen linkin tiedostonimi:"
+msgstr ""
 
 msgid "Symbolic link"
-msgstr "Symbolinen linkki"
+msgstr ""
 
 msgid "&Stop"
-msgstr "&Pysäytä"
+msgstr ""
 
 msgid "&Resume"
-msgstr "&Jatka"
+msgstr ""
 
 msgid "&Kill"
-msgstr "&Tapa"
+msgstr ""
 
 msgid "Background jobs"
 msgstr ""
@@ -1749,40 +1749,40 @@ msgid "Group name:"
 msgstr ""
 
 msgid "&Marked all"
-msgstr "&Kaikki merkityt"
+msgstr ""
 
 msgid "S&et marked"
-msgstr "&Aseta merkityt"
+msgstr ""
 
 msgid "C&lear marked"
-msgstr "&Tyhjennä merkityt"
+msgstr ""
 
 msgid "Chmod command"
-msgstr "Chmod-komento"
+msgstr ""
 
 msgid "Permission"
-msgstr "Oikeudet"
+msgstr ""
 
 msgid "File"
 msgstr ""
 
 msgid "Set &groups"
-msgstr "Aseta &ryhmät"
+msgstr ""
 
 msgid "Set &users"
-msgstr "Aseta &käyttäjät"
+msgstr ""
 
 msgid "Name"
-msgstr "Nimi"
+msgstr ""
 
 msgid "Owner name"
-msgstr "Omistajan nimi"
+msgstr ""
 
 msgid "Group name"
-msgstr "Ryhmän nimi"
+msgstr ""
 
 msgid "Size"
-msgstr "Koko"
+msgstr ""
 
 msgid "Chown command"
 msgstr ""
@@ -1791,19 +1791,19 @@ msgid "User name"
 msgstr ""
 
 msgid "<Unknown user>"
-msgstr "<Tuntematon käyttäjä>"
+msgstr ""
 
 msgid "<Unknown group>"
-msgstr "<Tuntematon ryhmä>"
+msgstr ""
 
 msgid "Enter machine name (F1 for details):"
 msgstr ""
 
 msgid "Files tagged, want to cd?"
-msgstr "Tiedostot merkitty, vaihdetaanko hakemisto?"
+msgstr ""
 
 msgid "Cannot change directory"
-msgstr "Ei voitu vaihtaa hakemistoa"
+msgstr ""
 
 msgid "Filter"
 msgstr ""
@@ -1852,7 +1852,7 @@ msgid "Filter command and arguments:"
 msgstr ""
 
 msgid "Create a new Directory"
-msgstr "Luo uusi hakemisto"
+msgstr ""
 
 msgid "Enter directory name:"
 msgstr ""
@@ -1864,13 +1864,13 @@ msgid "Unselect"
 msgstr ""
 
 msgid "Extension file edit"
-msgstr "Laajennustiedoston muokkaus"
+msgstr ""
 
 msgid "Which extension file you want to edit?"
 msgstr ""
 
 msgid "&System Wide"
-msgstr "&Järjestelmän laajuinen"
+msgstr ""
 
 msgid "Highlighting groups file edit"
 msgstr ""
@@ -1885,13 +1885,13 @@ msgid "Select compare method:"
 msgstr ""
 
 msgid "&Quick"
-msgstr "&Nopea"
+msgstr ""
 
 msgid "&Size only"
-msgstr "&Vain koko"
+msgstr ""
 
 msgid "&Thorough"
-msgstr "&Perusteellinen"
+msgstr ""
 
 msgid ""
 "Both panels should be in the listing mode\n"
@@ -2487,6 +2487,7 @@ msgid "Finished (ignored %zd directory)"
 msgid_plural "Finished (ignored %zd directories)"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #, c-format
 msgid "Searching %s"
@@ -2653,6 +2654,7 @@ msgid " (%ld block)"
 msgid_plural " (%ld blocks)"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -2863,7 +2865,7 @@ msgid "&Configuration..."
 msgstr ""
 
 msgid "&Layout..."
-msgstr "&Muotoilu..."
+msgstr ""
 
 msgid "&Panel options..."
 msgstr ""
@@ -2885,6 +2887,7 @@ msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 msgid "The Midnight Commander"
 msgstr ""
@@ -3067,7 +3070,7 @@ msgid "sort|u"
 msgstr ""
 
 msgid "&Unsorted"
-msgstr "&Järjestämätön"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3075,7 +3078,7 @@ msgid "sort|n"
 msgstr ""
 
 msgid "&Name"
-msgstr "&Nimi"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'version' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3099,7 +3102,7 @@ msgid "sort|s"
 msgstr ""
 
 msgid "&Size"
-msgstr "&Koko"
+msgstr ""
 
 msgid "Block Size"
 msgstr ""
@@ -3110,7 +3113,7 @@ msgid "sort|m"
 msgstr ""
 
 msgid "&Modify time"
-msgstr "&Muutosaika"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3118,7 +3121,7 @@ msgid "sort|a"
 msgstr ""
 
 msgid "&Access time"
-msgstr "&Lukuaika"
+msgstr ""
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3140,7 +3143,7 @@ msgid "sort|i"
 msgstr ""
 
 msgid "&Inode"
-msgstr "&Inode"
+msgstr ""
 
 msgid "UID"
 msgstr ""
@@ -3149,10 +3152,10 @@ msgid "GID"
 msgstr ""
 
 msgid "Owner"
-msgstr "Omistaja"
+msgstr ""
 
 msgid "Group"
-msgstr "Ryhmä"
+msgstr ""
 
 msgid "[dev]"
 msgstr ""
@@ -3167,19 +3170,21 @@ msgid "SUB-DIR"
 msgstr ""
 
 msgid "<readlink failed>"
-msgstr "<linkin luku epäonnistui>"
+msgstr ""
 
 #, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 #, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
 
 msgid "Panelize"
 msgstr ""
@@ -3203,7 +3208,7 @@ msgid "Other command"
 msgstr ""
 
 msgid "Command"
-msgstr "Komento"
+msgstr ""
 
 msgid "Add to external panelize"
 msgstr ""
@@ -3224,7 +3229,7 @@ msgid "Modified git files"
 msgstr ""
 
 msgid "Find rejects after patching"
-msgstr "Etsi hylätyt paikkauksen jäljiltä"
+msgstr ""
 
 msgid "Find *.orig after patching"
 msgstr ""
@@ -3336,7 +3341,7 @@ msgid "Cannot find node %s in help file"
 msgstr ""
 
 msgid "Help"
-msgstr "Ohje"
+msgstr ""
 
 msgid "ButtonBar|Index"
 msgstr ""
