@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-08-30 13:50+0400\n"
-"PO-Revision-Date: 2012-08-31 08:21+0000\n"
+"PO-Revision-Date: 2012-12-26 15:04+0000\n"
 "Last-Translator: Rezső Páder <rezso@rezso.net>\n"
 "Language-Team: Hungarian (http://www.transifex.com/projects/p/mc/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -115,7 +115,7 @@ msgid "Regular expression error"
 msgstr "reguláris kifejezés hiba"
 
 msgid "No&rmal"
-msgstr ""
+msgstr "No&rmál"
 
 msgid "Re&gular expression"
 msgstr "&Reguláris kifejezés"
@@ -825,7 +825,7 @@ msgstr "Diff:"
 
 #, c-format
 msgid "\"%s\" is a directory"
-msgstr ""
+msgstr "\"%s\" egy könyvtár"
 
 #, c-format
 msgid ""
@@ -834,7 +834,7 @@ msgid ""
 msgstr "A(z) \"%s\" adatai nem lekérdezhetők \n%s"
 
 msgid "Diff viewer: invalid mode"
-msgstr ""
+msgstr "diff megjelenítő: érvénytelen mód"
 
 msgid "Two files are needed to compare"
 msgstr "Két fájl kell az összehasonlításhoz"
@@ -974,7 +974,7 @@ msgid "Save as"
 msgstr "Mentés másként"
 
 msgid "Cannot save: destination is not a regular file"
-msgstr ""
+msgstr "Nem menthető: a cél nem reguláris fájl"
 
 msgid "A file already exists with this name"
 msgstr "Már létezik ilyen nevű fájl."
@@ -3437,7 +3437,7 @@ msgid "Data types:"
 msgstr "Adattípusok:"
 
 msgid "Root directory:"
-msgstr ""
+msgstr "Gyökérkönyvtár:"
 
 msgid "System data"
 msgstr "Rendszer adatok"

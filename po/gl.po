@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-#   <mbouzada@gmail.com>, 2011, 2012.
+#   <mbouzada@gmail.com>, 2011-2012.
 # mbouzada <mbouzada@gmail.com>, 2011.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-08-30 13:50+0400\n"
-"PO-Revision-Date: 2012-08-31 08:21+0000\n"
+"PO-Revision-Date: 2012-11-10 16:35+0000\n"
 "Last-Translator: mbouzada <mbouzada@gmail.com>\n"
 "Language-Team: Galician (http://www.transifex.com/projects/p/mc/language/gl/)\n"
 "MIME-Version: 1.0\n"
@@ -108,7 +108,7 @@ msgid "Regular expression error"
 msgstr "Produciuse un erro na expresión regular"
 
 msgid "No&rmal"
-msgstr ""
+msgstr "No&rmal"
 
 msgid "Re&gular expression"
 msgstr "Expresión &Regular"
@@ -818,7 +818,7 @@ msgstr "Diferenza:"
 
 #, c-format
 msgid "\"%s\" is a directory"
-msgstr ""
+msgstr "«%s» é un directorio"
 
 #, c-format
 msgid ""
@@ -827,7 +827,7 @@ msgid ""
 msgstr "Non é posíbel identificar «%s»\n%s"
 
 msgid "Diff viewer: invalid mode"
-msgstr ""
+msgstr "Visor de diferenzas: modo incorrecto"
 
 msgid "Two files are needed to compare"
 msgstr "Son precisos dous ficheiros para comparar"
@@ -967,7 +967,7 @@ msgid "Save as"
 msgstr "Gardar como"
 
 msgid "Cannot save: destination is not a regular file"
-msgstr ""
+msgstr "Non se pode gardar: o destino non é un ficheiro normal"
 
 msgid "A file already exists with this name"
 msgstr "Xa existe un ficheiro con ese nome"
@@ -3430,7 +3430,7 @@ msgid "Data types:"
 msgstr "Tipos de datos:"
 
 msgid "Root directory:"
-msgstr ""
+msgstr "Directorio raíz:"
 
 msgid "System data"
 msgstr "Datos do sistema"

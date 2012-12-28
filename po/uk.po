@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Oleksandr Natalenko <pfactum@gmail.com>, 2011, 2012.
+#   <pingvein@gmail.com>, 2012.
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 # Yevhen Amelin <egghead@fedoraproject.org>, 2011.
 msgid ""
@@ -11,8 +12,8 @@ msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2012-08-30 13:50+0400\n"
-"PO-Revision-Date: 2012-08-31 08:21+0000\n"
-"Last-Translator: Oleksandr Natalenko <pfactum@gmail.com>\n"
+"PO-Revision-Date: 2012-12-01 08:13+0000\n"
+"Last-Translator: peinguin <pingvein@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/mc/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -83,13 +84,13 @@ msgid ""
 "to Freedesktop recommended dirs.\n"
 "To get more info, please visit\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
+msgstr "Ваші старі налаштування були перенесені з %s⏎ до каталогів рекомендованих Freedesktop.⏎ Будь-ласка відвідайте⏎ http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html для більш детальної інформації"
 
 #, c-format
 msgid ""
 "Your old settings were migrated from %s\n"
 "to %s\n"
-msgstr ""
+msgstr "Ваші налаштування перенесено з  %s\n до %s\n"
 
 msgid "Search string not found"
 msgstr "Такий рядок не знайдено"
@@ -105,10 +106,10 @@ msgid "Invalid token number %d"
 msgstr "Неправильний номер %d елементу"
 
 msgid "Regular expression error"
-msgstr ""
+msgstr "Помилка резулярного виразу"
 
 msgid "No&rmal"
-msgstr ""
+msgstr "Нормальний"
 
 msgid "Re&gular expression"
 msgstr "Р&eгулярний вираз"
@@ -136,7 +137,7 @@ msgid ""
 "Unable to use '%s' skin with 256 colors support\n"
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
-msgstr ""
+msgstr "Неможливо використовувати '%s' оболонку з підтримкою 256 кольорів на не 256-кольоровому терміналі.\nБуло завантажено оболонку за замовчуванням."
 
 msgid "Function key 1"
 msgstr "Функціональна 1 "
@@ -349,7 +350,7 @@ msgid "Quotation mark"
 msgstr "Лапки"
 
 msgid "Percent sign"
-msgstr ""
+msgstr "Знак відсотка"
 
 msgid "Caret"
 msgstr "Кришка"
@@ -533,10 +534,10 @@ msgid "Print data directory"
 msgstr "Надрукувати каталог даних"
 
 msgid "Print extended info about used data directories"
-msgstr ""
+msgstr "Надрукувати розширену інформацію про використані каталоги данних"
 
 msgid "Print configure options"
-msgstr ""
+msgstr "Надрукувати параметри налаштування"
 
 msgid "Print last working directory to specified file"
 msgstr "Друкуватиме останній робочий каталог у вказаний файл"
@@ -587,7 +588,7 @@ msgid "Load definitions of key bindings from specified file"
 msgstr "Завантажити визначення прив’язок клавіш із вказаного файлу"
 
 msgid "Don't load definitions of key bindings from file, use defaults"
-msgstr ""
+msgstr "Не завантажувати визначення клавіш з файлу, використовувати значення за замовчуванням"
 
 msgid "Requests to run in black and white"
 msgstr "Запит на запуск у чорно-білому режимі"
@@ -620,7 +621,7 @@ msgid ""
 "                 editlinestate\n"
 "   Viewer:       viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-msgstr ""
+msgstr "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n\n {FORE}, {BACK} і {ATTR} можуть бути опущені,  будуть використані значення за змовчуванням\n\n Ключові слова:\nГлобальні: errors, disabled, reverse, gauge, header\n input, inputmark, inputunchanged, commandlinemark\n bbarhotkey, bbarbutton, statusbar\nВідображення файлу: normal, selected, marked, markselect\nДіалогові вікна: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n errdhotfocus\nМеню: menunormal, menuhot, menusel, menuhotsel, menuinactive\nВиринаючі меню: pmenunormal, pmenusel, pmenutitle\nРедактор: editnormal, editbold, editmarked, editwhitespace,\neditlinestate\nПереглядач: viewbold, viewunderline, viewselected\nдовідка: helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -818,7 +819,7 @@ msgstr "Різниця:"
 
 #, c-format
 msgid "\"%s\" is a directory"
-msgstr ""
+msgstr "\"%s\" це каталог"
 
 #, c-format
 msgid ""
@@ -827,7 +828,7 @@ msgid ""
 msgstr "Не вдається отримати властивості «%s»\n%s "
 
 msgid "Diff viewer: invalid mode"
-msgstr ""
+msgstr "переглядач Diff: неправильний режим"
 
 msgid "Two files are needed to compare"
 msgstr "Для порівняння необхідно два файли"
@@ -967,7 +968,7 @@ msgid "Save as"
 msgstr "Зберегти як"
 
 msgid "Cannot save: destination is not a regular file"
-msgstr ""
+msgstr "Неможливо зберегти: файл призначення не звичаний"
 
 msgid "A file already exists with this name"
 msgstr "Файл із цією назвою вже існує"
@@ -985,7 +986,7 @@ msgid "Press macro hotkey:"
 msgstr "Натисніть гарячу клавішу для макросу:"
 
 msgid "Macro not deleted"
-msgstr ""
+msgstr "Макрос не визначено"
 
 msgid "Save macro"
 msgstr "Зберегти макрос"
@@ -994,10 +995,10 @@ msgid "Press the macro's new hotkey:"
 msgstr "Натисніть нову клавішу макросу:"
 
 msgid "Repeat last commands"
-msgstr ""
+msgstr "Повторити останню команду"
 
 msgid "Repeat times:"
-msgstr ""
+msgstr "Кількість повторень:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
@@ -1166,7 +1167,7 @@ msgid "&Undo"
 msgstr "Відмінити"
 
 msgid "&Redo"
-msgstr ""
+msgstr "&Відмінити"
 
 msgid "&Toggle ins/overw"
 msgstr "&Режим вставки/заміни"
@@ -1917,7 +1918,7 @@ msgstr "Формат файлу %smc.ext було змінено у версіі
 
 #, c-format
 msgid "%s file error"
-msgstr ""
+msgstr "%s помилка файлу"
 
 #, c-format
 msgid ""
@@ -2002,7 +2003,7 @@ msgid "&Abort"
 msgstr "&Перервати"
 
 msgid "Ski&p all"
-msgstr ""
+msgstr "П&ропустити все"
 
 msgid "&Retry"
 msgstr "По&вторити"
@@ -2539,7 +2540,7 @@ msgid "No node information"
 msgstr "Нема інформації про вузол"
 
 msgid "Free nodes:"
-msgstr ""
+msgstr "Вільні ноди:"
 
 msgid "No space information"
 msgstr "Нема інформації про простір"
@@ -3435,7 +3436,7 @@ msgid "Data types:"
 msgstr "Типи даних:"
 
 msgid "Root directory:"
-msgstr ""
+msgstr "Кореневий каталог:"
 
 msgid "System data"
 msgstr ""
