@@ -115,6 +115,9 @@ WLabel *the_hint;
 /* The button bar */
 WButtonBar *the_bar;
 
+/* The prompt */
+const char *mc_prompt = NULL;
+
 /*** file scope macro definitions ****************************************************************/
 
 #ifdef HAVE_CHARSET

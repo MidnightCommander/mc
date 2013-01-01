@@ -200,9 +200,6 @@ int quit = 0;
 /* The user's shell */
 char *shell = NULL;
 
-/* The prompt */
-const char *mc_prompt = NULL;
-
 /* Set to TRUE to suppress printing the last directory */
 int print_last_revert = FALSE;
 
