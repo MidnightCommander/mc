@@ -376,16 +376,8 @@ main (int argc, char *argv[])
     if (mc_global.tty.alternate_plus_minus)
         application_keypad_mode ();
 
-#ifdef ENABLE_SUBSHELL
-    if (mc_global.tty.use_subshell)
-    {
-        mc_prompt = strip_ctrl_codes (subshell_prompt);
-        if (mc_prompt == NULL)
-            mc_prompt = (geteuid () == 0) ? "# " : "$ ";
-    }
-    else
-#endif /* ENABLE_SUBSHELL */
-        mc_prompt = (geteuid () == 0) ? "# " : "$ ";
+    /* subshell_prompt is NULL here */
+    mc_prompt = (geteuid () == 0) ? "# " : "$ ";
 
     if (config_migrated)
     {

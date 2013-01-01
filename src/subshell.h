@@ -32,7 +32,7 @@ enum
 extern enum subshell_state_enum subshell_state;
 
 /* Holds the latest prompt captured from the subshell */
-extern char *subshell_prompt;
+extern GString *subshell_prompt;
 
 extern gboolean update_subshell_prompt;
 

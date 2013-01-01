@@ -816,7 +816,7 @@ setup_cmdline (void)
 
 #ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
-        tmp_prompt = strip_ctrl_codes (subshell_prompt);
+        tmp_prompt = strip_ctrl_codes (subshell_prompt->str);
     if (tmp_prompt == NULL)
 #endif
         tmp_prompt = (char *) mc_prompt;
