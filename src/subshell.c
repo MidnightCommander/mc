@@ -981,7 +981,7 @@ invoke_subshell (const char *command, int how, vfs_path_t ** new_dir_vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 read_subshell_prompt (void)
 {
     static int prompt_size = INITIAL_PROMPT_SIZE;
@@ -1038,9 +1038,8 @@ read_subshell_prompt (void)
 
         subshell_prompt[prompt_pos] = '\0';
     }
-    if (rc == 0 && bytes == 0)
-        return FALSE;
-    return TRUE;
+
+    return (rc != 0 || bytes != 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
