@@ -329,22 +329,22 @@ init_subshell_child (const char *pty_name)
     switch (subshell_type)
     {
     case BASH:
-        execl (shell, "bash", "-rcfile", init_file, (char *) NULL);
+        execl (mc_global.tty.shell, "bash", "-rcfile", init_file, (char *) NULL);
         break;
 
     case TCSH:
-        execl (shell, "tcsh", (char *) NULL);
+        execl (mc_global.tty.shell, "tcsh", (char *) NULL);
         break;
 
     case ZSH:
         /* Use -g to exclude cmds beginning with space from history
          * and -Z to use the line editor on non-interactive term */
-        execl (shell, "zsh", "-Z", "-g", (char *) NULL);
+        execl (mc_global.tty.shell, "zsh", "-Z", "-g", (char *) NULL);
 
         break;
 
     case FISH:
-        execl (shell, "fish", (char *) NULL);
+        execl (mc_global.tty.shell, "fish", (char *) NULL);
         break;
     }
 
@@ -790,15 +790,15 @@ init_subshell (void)
     {                           /* First time through */
         /* Find out what type of shell we have */
 
-        if (strstr (shell, "/zsh") || getenv ("ZSH_VERSION"))
+        if (strstr (mc_global.tty.shell, "/zsh") || getenv ("ZSH_VERSION"))
             subshell_type = ZSH;
-        else if (strstr (shell, "/tcsh"))
+        else if (strstr (mc_global.tty.shell, "/tcsh"))
             subshell_type = TCSH;
-        else if (strstr (shell, "/csh"))
+        else if (strstr (mc_global.tty.shell, "/csh"))
             subshell_type = TCSH;
-        else if (strstr (shell, "/bash") || getenv ("BASH"))
+        else if (strstr (mc_global.tty.shell, "/bash") || getenv ("BASH"))
             subshell_type = BASH;
-        else if (strstr (shell, "/fish"))
+        else if (strstr (mc_global.tty.shell, "/fish"))
             subshell_type = FISH;
         else
         {

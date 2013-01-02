@@ -36,7 +36,6 @@
 
 #include "lib/vfs/vfs.h"
 
-#include "setup.h"
 #include "src/execute.h"
 
 #include "clipboard.h"
@@ -81,7 +80,7 @@ clipboard_file_to_ext_clip (const gchar * event_group_name, const gchar * event_
     cmd = g_strconcat (clipboard_store_path, " ", tmp, " 2>/dev/null", (char *) NULL);
 
     if (cmd != NULL)
-        res = my_system (EXECUTE_AS_SHELL, shell, cmd);
+        res = my_system (EXECUTE_AS_SHELL, mc_global.tty.shell, cmd);
 
     g_free (cmd);
     g_free (tmp);
@@ -111,7 +110,7 @@ clipboard_file_from_ext_clip (const gchar * event_group_name, const gchar * even
     cmd = g_strconcat (clipboard_paste_path, " > ", tmp, " 2>/dev/null", (char *) NULL);
 
     if (cmd != NULL)
-        res = my_system (EXECUTE_AS_SHELL, shell, cmd);
+        res = my_system (EXECUTE_AS_SHELL, mc_global.tty.shell, cmd);
 
     g_free (cmd);
     g_free (tmp);

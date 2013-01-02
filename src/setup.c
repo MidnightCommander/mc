@@ -197,9 +197,6 @@ char *last_wd_string = NULL;
 /* Set when main loop should be terminated */
 int quit = 0;
 
-/* The user's shell */
-char *shell = NULL;
-
 /* Set to TRUE to suppress printing the last directory */
 int print_last_revert = FALSE;
 
