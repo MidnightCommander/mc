@@ -96,6 +96,20 @@ typedef struct
     char *string;
 } int_cache;
 
+typedef enum
+{
+    FORK_ERROR = -1,
+    FORK_CHILD,
+    FORK_PARENT,
+} my_fork_state_t;
+
+typedef struct
+{
+    struct sigaction intr;
+    struct sigaction quit;
+    struct sigaction stop;
+} my_system_sigactions_t;
+
 /*** file scope variables ************************************************************************/
 
 static int_cache uid_cache[UID_CACHE_SIZE];
@@ -127,6 +141,65 @@ i_cache_add (int id, int_cache * cache, int size, char *text, int *last)
     cache[*last].string = g_strdup (text);
     cache[*last].index = id;
     *last = ((*last) + 1) % size;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static my_fork_state_t
+my_fork (void)
+{
+    pid_t pid;
+
+    pid = fork ();
+
+    if (pid < 0)
+    {
+        fprintf (stderr, "\n\nfork () = -1\n");
+        return FORK_ERROR;
+    }
+
+    if (pid == 0)
+        return FORK_CHILD;
+
+    while (TRUE)
+    {
+        int status = 0;
+
+        if (waitpid (pid, &status, 0) > 0)
+            return WEXITSTATUS (status) == 0 ? FORK_PARENT : FORK_ERROR;
+
+        if (errno != EINTR)
+            return FORK_ERROR;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+my_system__save_sigaction_handlers (my_system_sigactions_t * sigactions)
+{
+    struct sigaction ignore;
+
+    ignore.sa_handler = SIG_IGN;
+    sigemptyset (&ignore.sa_mask);
+    ignore.sa_flags = 0;
+
+    sigaction (SIGINT, &ignore, &sigactions->intr);
+    sigaction (SIGQUIT, &ignore, &sigactions->quit);
+
+    /* Restore the original SIGTSTP handler, we don't want ncurses' */
+    /* handler messing the screen after the SIGCONT */
+    sigaction (SIGTSTP, &startup_handler, &sigactions->stop);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+my_system__restore_sigaction_handlers (my_system_sigactions_t * sigactions)
+{
+    sigaction (SIGINT, &sigactions->intr, NULL);
+    sigaction (SIGQUIT, &sigactions->quit, NULL);
+    sigaction (SIGTSTP, &sigactions->stop, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -216,83 +289,58 @@ my_exit (int status)
 int
 my_system (int flags, const char *shell, const char *command)
 {
-    struct sigaction ignore, save_intr, save_quit, save_stop;
-    pid_t pid;
+    my_fork_state_t fork_state;
     int status = 0;
+    my_system_sigactions_t sigactions;
 
-    ignore.sa_handler = SIG_IGN;
-    sigemptyset (&ignore.sa_mask);
-    ignore.sa_flags = 0;
+    my_system__save_sigaction_handlers (&sigactions);
 
-    sigaction (SIGINT, &ignore, &save_intr);
-    sigaction (SIGQUIT, &ignore, &save_quit);
-
-    /* Restore the original SIGTSTP handler, we don't want ncurses' */
-    /* handler messing the screen after the SIGCONT */
-    sigaction (SIGTSTP, &startup_handler, &save_stop);
-
-    pid = fork ();
-    if (pid < 0)
+    fork_state = my_fork ();
+    switch (fork_state)
     {
-        fprintf (stderr, "\n\nfork () = -1\n");
+    case FORK_ERROR:
         status = -1;
-    }
-    else if (pid == 0)
-    {
-        signal (SIGINT, SIG_DFL);
-        signal (SIGQUIT, SIG_DFL);
-        signal (SIGTSTP, SIG_DFL);
-        signal (SIGCHLD, SIG_DFL);
-
-        if (flags & EXECUTE_AS_SHELL)
-            execl (shell, shell, "-c", command, (char *) NULL);
-        else
+        break;
+    case FORK_CHILD:
         {
-            gchar **shell_tokens;
-            const gchar *only_cmd;
+            signal (SIGINT, SIG_DFL);
+            signal (SIGQUIT, SIG_DFL);
+            signal (SIGTSTP, SIG_DFL);
+            signal (SIGCHLD, SIG_DFL);
 
-            shell_tokens = g_strsplit (shell, " ", 2);
-            if (shell_tokens == NULL)
-                only_cmd = shell;
+            if (flags & EXECUTE_AS_SHELL)
+                execl (shell, shell, "-c", command, (char *) NULL);
             else
-                only_cmd = (*shell_tokens != NULL) ? *shell_tokens : shell;
-
-            execlp (only_cmd, shell, command, (char *) NULL);
-
-            /*
-               execlp will replace current process,
-               therefore no sence in call of g_strfreev().
-               But this keeped for estetic reason :)
-             */
-            g_strfreev (shell_tokens);
-
-        }
-
-        my_exit (127);            /* Exec error */
-    }
-    else
-    {
-        while (TRUE)
-        {
-            if (waitpid (pid, &status, 0) > 0)
             {
-                status = WEXITSTATUS (status);
-                break;
+                gchar **shell_tokens;
+                const gchar *only_cmd;
+
+                shell_tokens = g_strsplit (shell, " ", 2);
+                if (shell_tokens == NULL)
+                    only_cmd = shell;
+                else
+                    only_cmd = (*shell_tokens != NULL) ? *shell_tokens : shell;
+
+                execlp (only_cmd, shell, command, (char *) NULL);
+
+                /*
+                   execlp will replace current process,
+                   therefore no sence in call of g_strfreev().
+                   But this keeped for estetic reason :)
+                 */
+                g_strfreev (shell_tokens);
             }
-            if (errno != EINTR)
-            {
-                status = -1;
-                break;
-            }
+            my_exit (127);      /* Exec error */
         }
+        break;
+    default:
+        status = 0;
+        break;
     }
-    sigaction (SIGINT, &save_intr, NULL);
-    sigaction (SIGQUIT, &save_quit, NULL);
-    sigaction (SIGTSTP, &save_stop, NULL);
+    my_system__restore_sigaction_handlers (&sigactions);
 
     return status;
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
 
