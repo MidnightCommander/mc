@@ -2,7 +2,7 @@
    Various utilities - Unix variants
 
    Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
-   2004, 2005, 2007, 2011
+   2004, 2005, 2007, 2011, 2012, 2013
    The Free Software Foundation, Inc.
 
    Written by:
@@ -197,6 +197,21 @@ save_stop_handler (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Wrapper for _exit() system call.
+ * The _exit() function has gcc's attribute 'noreturn', and this is reason why we can't
+ * mock the call.
+ *
+ * @param status exit code
+ */
+
+void
+my_exit (int status)
+{
+    _exit (status);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 int
 my_system (int flags, const char *shell, const char *command)
@@ -253,7 +268,7 @@ my_system (int flags, const char *shell, const char *command)
 
         }
 
-        _exit (127);            /* Exec error */
+        my_exit (127);            /* Exec error */
     }
     else
     {

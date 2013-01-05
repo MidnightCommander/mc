@@ -149,6 +149,7 @@ int close_error_pipe (int error, const char *text);
 
 /* Process spawning */
 int my_system (int flags, const char *shell, const char *command);
+void my_exit (int status);
 void save_stop_handler (void);
 
 /* Tilde expansion */

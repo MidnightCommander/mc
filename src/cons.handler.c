@@ -217,7 +217,7 @@ handle_console_linux (console_action_t action)
             while (0);
             mc_global.tty.console_flag = '\0';
             status = write (1, &mc_global.tty.console_flag, 1);
-            _exit (3);
+            my_exit (3);
         }                       /* if (cons_saver_pid ...) */
         break;
 

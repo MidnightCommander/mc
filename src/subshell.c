@@ -241,7 +241,7 @@ init_subshell_child (const char *pty_name)
     if (tcsetattr (subshell_pty_slave, TCSANOW, &shell_mode))
     {
         fprintf (stderr, "Cannot set pty terminal modes: %s\r\n", unix_error_string (errno));
-        _exit (FORK_FAILURE);
+        my_exit (FORK_FAILURE);
     }
 
     /* Set the pty's size (80x25 by default on Linux) according to the */
@@ -303,7 +303,7 @@ init_subshell_child (const char *pty_name)
 
     default:
         fprintf (stderr, __FILE__ ": unimplemented subshell type %d\r\n", subshell_type);
-        _exit (FORK_FAILURE);
+        my_exit (FORK_FAILURE);
     }
 
     /* Attach all our standard file descriptors to the pty */
@@ -351,7 +351,7 @@ init_subshell_child (const char *pty_name)
 
     /* If we get this far, everything failed miserably */
     g_free (init_file);
-    _exit (FORK_FAILURE);
+    my_exit (FORK_FAILURE);
 }
 
 
