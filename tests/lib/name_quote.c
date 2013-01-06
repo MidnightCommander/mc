@@ -59,14 +59,14 @@ static const struct data_source1_struct
 
 START_TEST (quote_percent_test)
 {
-    // given
+    /* given */
     char *actual_string;
     const struct data_source1_struct test_data = data_source1[_i];
 
-    // when
+    /* when */
     actual_string = name_quote (test_data.input_string, test_data.input_quote_percent);
 
-    // then
+    /* then */
     g_assert_cmpstr (actual_string, ==, test_data.expected_string);
 
     g_free (actual_string);
@@ -95,14 +95,14 @@ static const struct data_source2_struct
 
 START_TEST (name_quote_test)
 {
-    // given
+    /* given */
     char *actual_string;
     const struct data_source2_struct test_data = data_source2[_i];
 
-    // when
+    /* when */
     actual_string = name_quote (test_data.input_string, FALSE);
 
-    // then
+    /* then */
     g_assert_cmpstr (actual_string, ==, test_data.expected_string);
 
     g_free (actual_string);
