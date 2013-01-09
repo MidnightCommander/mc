@@ -191,96 +191,37 @@ my_exit (int status)
 /* --------------------------------------------------------------------------------------------- */
 
 /* @CapturedValue */
-static char *execl__path__captured = NULL;
+static char *execvp__file__captured = NULL;
 /* @CapturedValue */
-static char *execl__arg__captured = NULL;
-/* @CapturedValue */
-static GPtrArray *execl__args__captured;
+static GPtrArray *execvp__args__captured;
 /* @ThenReturnValue */
-static int execl__return_value = 0;
+static int execvp__return_value = 0;
 
 /* @Mock */
 int
-execl (const char *path, const char *arg, ...)
+execvp (const char *file, char *const argv[])
 {
-    char *one_arg;
-    va_list vargs;
+    char **one_arg;
+    execvp__file__captured = g_strdup (file);
 
-    execl__path__captured = g_strdup (path);
-    execl__arg__captured = g_strdup (arg);
+    for (one_arg = (char **) argv; *one_arg != NULL; one_arg++)
+        g_ptr_array_add (execvp__args__captured, g_strdup (*one_arg));
 
-    va_start (vargs, arg);
-
-    while ((one_arg = va_arg (vargs, char *)) != NULL)
-    {
-        g_ptr_array_add (execl__args__captured, g_strdup (one_arg));
-    }
-    va_end (vargs);
-
-    return execl__return_value;
+    return execvp__return_value;
 }
 
 static void
-execl__init (void)
+execvp__init (void)
 {
-    execl__args__captured = g_ptr_array_new ();
+    execvp__args__captured = g_ptr_array_new ();
 }
 
 static void
-execl__deinit (void)
+execvp__deinit (void)
 {
-    g_ptr_array_foreach (execl__args__captured, (GFunc) g_free, NULL);
-    g_ptr_array_free (execl__args__captured, TRUE);
-    g_free (execl__path__captured);
-    g_free (execl__arg__captured);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* @CapturedValue */
-static char *execlp__file__captured = NULL;
-/* @CapturedValue */
-static char *execlp__arg__captured = NULL;
-/* @CapturedValue */
-static GPtrArray *execlp__args__captured;
-/* @ThenReturnValue */
-static int execlp__return_value = 0;
-
-/* @Mock */
-int
-execlp(const char *file, const char *arg, ...)
-{
-    char *one_arg;
-    va_list vargs;
-
-    execlp__file__captured = g_strdup (file);
-    execlp__arg__captured = g_strdup (arg);
-
-    va_start (vargs, arg);
-
-    while ((one_arg = va_arg (vargs, char *)) != NULL)
-    {
-        g_ptr_array_add (execlp__args__captured, g_strdup (one_arg));
-    }
-    va_end (vargs);
-
-    return execlp__return_value;
-}
-
-static void
-execlp__init (void)
-{
-    execlp__args__captured = g_ptr_array_new ();
-}
-
-static void
-execlp__deinit (void)
-{
-    g_ptr_array_foreach (execlp__args__captured, (GFunc) g_free, NULL);
-    g_ptr_array_free (execlp__args__captured, TRUE);
-
-    g_free (execlp__file__captured);
-    g_free (execlp__arg__captured);
+    g_ptr_array_foreach (execvp__args__captured, (GFunc) g_free, NULL);
+    g_ptr_array_free (execvp__args__captured, TRUE);
+    g_free (execvp__file__captured);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -361,8 +302,7 @@ setup (void)
 
     sigaction__init ();
     signal__init ();
-    execl__init ();
-    execlp__init ();
+    execvp__init ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -371,8 +311,7 @@ setup (void)
 static void
 teardown (void)
 {
-    execlp__deinit ();
-    execl__deinit ();
+    execvp__deinit ();
     signal__deinit ();
     sigaction__deinit ();
 }

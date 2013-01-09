@@ -54,11 +54,11 @@ START_TEST (fork_child)
     VERIFY_SIGACTION_CALLS ();
     VERIFY_SIGNAL_CALLS ();
 
-    g_assert_cmpstr (execlp__file__captured, ==, "/bin/some-command");
-    g_assert_cmpstr (execlp__arg__captured, ==, "/bin/some-command");
-    ck_assert_int_eq (execlp__args__captured->len, 1);
+    g_assert_cmpstr (execvp__file__captured, ==, "/bin/some-command");
+    ck_assert_int_eq (execvp__args__captured->len, 2);
 
-    g_assert_cmpstr (g_ptr_array_index(execlp__args__captured, 0), ==, "some parameter");
+    g_assert_cmpstr (g_ptr_array_index (execvp__args__captured, 0), ==, "/bin/some-command");
+    g_assert_cmpstr (g_ptr_array_index (execvp__args__captured, 1), ==, "some parameter");
 
     /* All exec* calls is mocked, so call to _exit() function with 127 status code it's a normal situation */
     ck_assert_int_eq (my_exit__status__captured, 127);

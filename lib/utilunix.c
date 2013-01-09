@@ -285,9 +285,92 @@ my_exit (int status)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Call external programs.
+ *
+ * @parameter flags   addition conditions for running external programs.
+ * @parameter shell   shell (if flags contain EXECUTE_AS_SHELL), command to run otherwise.
+ *                    Shell (or command) will be found in paths described in PATH variable
+ *                    (if shell parameter doesn't begin from path delimiter)
+ * @parameter command Command for shell (or first parameter for command, if flags contain EXECUTE_AS_SHELL)
+ * @return 0 if successfull, -1 otherwise
+ */
 
 int
 my_system (int flags, const char *shell, const char *command)
+{
+    return my_systeml (flags, shell, command, NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Call external programs with various parameters number.
+ *
+ * @parameter flags addition conditions for running external programs.
+ * @parameter shell shell (if flags contain EXECUTE_AS_SHELL), command to run otherwise.
+ *                  Shell (or command) will be found in pathes described in PATH variable
+ *                  (if shell parameter doesn't begin from path delimiter)
+ * @parameter ...   Command for shell with addition parameters for shell
+ *                  (or parameters for command, if flags contain EXECUTE_AS_SHELL).
+ *                  Should be NULL terminated.
+ * @return 0 if successfull, -1 otherwise
+ */
+
+int
+my_systeml (int flags, const char *shell, ...)
+{
+    char *execute_name;
+    GPtrArray *args_array;
+    int status = 0;
+    va_list vargs;
+    char *one_arg;
+
+    args_array = g_ptr_array_new ();
+
+    if ((flags & EXECUTE_AS_SHELL) != 0)
+    {
+        g_ptr_array_add (args_array, g_strdup (shell));
+        g_ptr_array_add (args_array, g_strdup ("-c"));
+        execute_name = g_strdup (shell);
+    }
+    else
+    {
+        gchar *shell_token;
+
+        shell_token = shell != NULL ? strchr (shell, ' ') : NULL;
+        if (shell_token == NULL)
+            *execute_name = g_strdup (shell);
+        else
+            *execute_name = g_strndup (shell, (gsize) (shell_token - shell));
+        g_ptr_array_add (args_array, g_strdup (shell));
+    }
+
+    va_start (vargs, shell);
+    while ((one_arg = va_arg (vargs, char *)) != NULL)
+          g_ptr_array_add (args_array, g_strdup (one_arg));
+    va_end (vargs);
+
+    g_ptr_array_add (args_array, NULL);
+    status = my_systemv (execute_name, (char *const *) args_array->pdata);
+
+    g_free (execute_name);
+    g_ptr_array_free (args_array, TRUE);
+
+    return status;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Call external programs with array of strings as parameters.
+ *
+ * @parameter command command to run. Command will be found in paths described in PATH variable
+ *                    (if command parameter doesn't begin from path delimiter)
+ * @parameter argv    Array of strings (NULL-terminated) with parameters for command
+ * @return 0 if successfull, -1 otherwise
+ */
+
+int
+my_systemv (const char *command, char *const argv[])
 {
     my_fork_state_t fork_state;
     int status = 0;
@@ -308,28 +391,7 @@ my_system (int flags, const char *shell, const char *command)
             signal (SIGTSTP, SIG_DFL);
             signal (SIGCHLD, SIG_DFL);
 
-            if (flags & EXECUTE_AS_SHELL)
-                execl (shell, shell, "-c", command, (char *) NULL);
-            else
-            {
-                gchar **shell_tokens;
-                const gchar *only_cmd;
-
-                shell_tokens = g_strsplit (shell, " ", 2);
-                if (shell_tokens == NULL)
-                    only_cmd = shell;
-                else
-                    only_cmd = (*shell_tokens != NULL) ? *shell_tokens : shell;
-
-                execlp (only_cmd, shell, command, (char *) NULL);
-
-                /*
-                   execlp will replace current process,
-                   therefore no sence in call of g_strfreev().
-                   But this keeped for estetic reason :)
-                 */
-                g_strfreev (shell_tokens);
-            }
+            execvp (command, argv);
             my_exit (127);      /* Exec error */
         }
         break;
