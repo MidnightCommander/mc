@@ -162,6 +162,59 @@ do_suspend_cmd (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+execute_prepare_with_vfs_arg (const vfs_path_t * filename_vpath, vfs_path_t ** localcopy_vpath, time_t *mtime)
+{
+    struct stat st;
+
+    /* Simplest case, this file is local */
+    if ((filename_vpath == NULL && vfs_file_is_local (vfs_get_raw_current_dir ()))
+        || vfs_file_is_local (filename_vpath))
+        return TRUE;
+
+    /* FIXME: Creation of new files on VFS is not supported */
+    if (filename_vpath == NULL)
+        return FALSE;
+
+    *localcopy_vpath = mc_getlocalcopy (filename_vpath);
+    if (*localcopy_vpath == NULL)
+    {
+        char *filename;
+
+        filename = vfs_path_to_str (filename_vpath);
+        message (D_ERROR, MSG_ERROR, _("Cannot fetch a local copy of %s"), filename);
+        g_free (filename);
+        return FALSE;
+    }
+
+    mc_stat (*localcopy_vpath, &st);
+    *mtime = st.st_mtime;
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+execute_cleanup_with_vfs_arg (const vfs_path_t * filename_vpath, vfs_path_t ** localcopy_vpath, time_t *mtime)
+{
+    if (*localcopy_vpath != NULL)
+    {
+        struct stat st;
+
+        /*
+         * filename can be an entry on panel, it can be changed by executing
+         * the command, so make a copy.  Smarter VFS code would make the code
+         * below unnecessary.
+         */
+        mc_stat (*localcopy_vpath, &st);
+        mc_ungetlocalcopy (filename_vpath, *localcopy_vpath, *mtime != st.st_mtime);
+        vfs_path_free (*localcopy_vpath);
+        *localcopy_vpath = NULL;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -450,6 +503,7 @@ execute_suspend (const gchar * event_group_name, const gchar * event_name,
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 /**
  * Execute command on a filename that can be on VFS.
  * Errors are reported to the user.
@@ -458,44 +512,18 @@ execute_suspend (const gchar * event_group_name, const gchar * event_name,
 void
 execute_with_vfs_arg (const char *command, const vfs_path_t * filename_vpath)
 {
-    struct stat st;
+    vfs_path_t *localcopy_vpath = NULL;
+    const vfs_path_t *do_execute_vpath;
     time_t mtime;
-    vfs_path_t *localcopy_vpath;
 
-    /* Simplest case, this file is local */
-    if ((filename_vpath == NULL && vfs_file_is_local (vfs_get_raw_current_dir ()))
-        || vfs_file_is_local (filename_vpath))
-    {
-        do_execute (command, vfs_path_get_last_path_str (filename_vpath), EXECUTE_INTERNAL);
-        return;
-    }
-
-    /* FIXME: Creation of new files on VFS is not supported */
-    if (filename_vpath == NULL)
+    if (!execute_prepare_with_vfs_arg (filename_vpath, &localcopy_vpath, &mtime))
         return;
 
-    localcopy_vpath = mc_getlocalcopy (filename_vpath);
-    if (localcopy_vpath == NULL)
-    {
-        char *filename;
+    do_execute_vpath = (localcopy_vpath == NULL) ? filename_vpath : localcopy_vpath;
 
-        filename = vfs_path_to_str (filename_vpath);
-        message (D_ERROR, MSG_ERROR, _("Cannot fetch a local copy of %s"), filename);
-        g_free (filename);
-        return;
-    }
+    do_execute (command, vfs_path_get_last_path_str (do_execute_vpath), EXECUTE_INTERNAL);
 
-    /*
-     * filename can be an entry on panel, it can be changed by executing
-     * the command, so make a copy.  Smarter VFS code would make the code
-     * below unnecessary.
-     */
-    mc_stat (localcopy_vpath, &st);
-    mtime = st.st_mtime;
-    do_execute (command, vfs_path_get_last_path_str (localcopy_vpath), EXECUTE_INTERNAL);
-    mc_stat (localcopy_vpath, &st);
-    mc_ungetlocalcopy (filename_vpath, localcopy_vpath, mtime != st.st_mtime);
-    vfs_path_free (localcopy_vpath);
+    execute_cleanup_with_vfs_arg (filename_vpath, &localcopy_vpath, &mtime);
 }
 
 /* --------------------------------------------------------------------------------------------- */
