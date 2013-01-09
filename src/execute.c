@@ -61,6 +61,9 @@ int pause_after_run = pause_on_dumb_terminals;
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
+
+void do_execute (const char *shell, const char *command, int flags);
+
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -129,6 +132,40 @@ do_possible_cd (const vfs_path_t * new_dir_vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
+do_suspend_cmd (void)
+{
+    pre_exec ();
+
+    if (mc_global.tty.console_flag != '\0' && !mc_global.tty.use_subshell)
+        handle_console (CONSOLE_RESTORE);
+
+#ifdef SIGTSTP
+    {
+        struct sigaction sigtstp_action;
+
+        /* Make sure that the SIGTSTP below will suspend us directly,
+           without calling ncurses' SIGTSTP handler; we *don't* want
+           ncurses to redraw the screen immediately after the SIGCONT */
+        sigaction (SIGTSTP, &startup_handler, &sigtstp_action);
+
+        kill (getpid (), SIGTSTP);
+
+        /* Restore previous SIGTSTP action */
+        sigaction (SIGTSTP, &sigtstp_action, NULL);
+    }
+#endif /* SIGTSTP */
+
+    if (mc_global.tty.console_flag != '\0' && !mc_global.tty.use_subshell)
+        handle_console (CONSOLE_SAVE);
+
+    edition_post_exec ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+void
 do_execute (const char *shell, const char *command, int flags)
 {
 #ifdef ENABLE_SUBSHELL
@@ -219,40 +256,6 @@ do_execute (const char *shell, const char *command, int flags)
     use_dash (TRUE);
 }
 
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-do_suspend_cmd (void)
-{
-    pre_exec ();
-
-    if (mc_global.tty.console_flag != '\0' && !mc_global.tty.use_subshell)
-        handle_console (CONSOLE_RESTORE);
-
-#ifdef SIGTSTP
-    {
-        struct sigaction sigtstp_action;
-
-        /* Make sure that the SIGTSTP below will suspend us directly,
-           without calling ncurses' SIGTSTP handler; we *don't* want
-           ncurses to redraw the screen immediately after the SIGCONT */
-        sigaction (SIGTSTP, &startup_handler, &sigtstp_action);
-
-        kill (getpid (), SIGTSTP);
-
-        /* Restore previous SIGTSTP action */
-        sigaction (SIGTSTP, &sigtstp_action, NULL);
-    }
-#endif /* SIGTSTP */
-
-    if (mc_global.tty.console_flag != '\0' && !mc_global.tty.use_subshell)
-        handle_console (CONSOLE_SAVE);
-
-    edition_post_exec ();
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 /** Set up the terminal before executing a program */
@@ -460,14 +463,15 @@ execute_with_vfs_arg (const char *command, const vfs_path_t * filename_vpath)
     vfs_path_t *localcopy_vpath;
 
     /* Simplest case, this file is local */
-    if (filename_vpath == NULL || vfs_file_is_local (filename_vpath))
+    if ((filename_vpath == NULL && vfs_file_is_local (vfs_get_raw_current_dir ()))
+        || vfs_file_is_local (filename_vpath))
     {
         do_execute (command, vfs_path_get_last_path_str (filename_vpath), EXECUTE_INTERNAL);
         return;
     }
 
     /* FIXME: Creation of new files on VFS is not supported */
-    if (vfs_path_len (filename_vpath) == 0)
+    if (filename_vpath == NULL)
         return;
 
     localcopy_vpath = mc_getlocalcopy (filename_vpath);
