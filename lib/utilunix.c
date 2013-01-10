@@ -203,6 +203,36 @@ my_system__restore_sigaction_handlers (my_system_sigactions_t * sigactions)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static GPtrArray *
+my_system_make_arg_array (int flags, const char *shell, char **execute_name)
+{
+    GPtrArray *args_array;
+
+    args_array = g_ptr_array_new ();
+
+    if ((flags & EXECUTE_AS_SHELL) != 0)
+    {
+        g_ptr_array_add (args_array, g_strdup (shell));
+        g_ptr_array_add (args_array, g_strdup ("-c"));
+        *execute_name = g_strdup (shell);
+    }
+    else
+    {
+        char *shell_token;
+
+        shell_token = shell != NULL ? strchr (shell, ' ') : NULL;
+        if (shell_token == NULL)
+            *execute_name = g_strdup (shell);
+        else
+            *execute_name = g_strndup (shell, (gsize) (shell_token - shell));
+
+        g_ptr_array_add (args_array, g_strdup (shell));
+    }
+    return args_array;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -316,10 +346,10 @@ my_system (int flags, const char *shell, const char *command)
  * @return 0 if successfull, -1 otherwise
  */
 
+
 int
 my_systeml (int flags, const char *shell, ...)
 {
-    char *execute_name;
     GPtrArray *args_array;
     int status = 0;
     va_list vargs;
@@ -327,33 +357,14 @@ my_systeml (int flags, const char *shell, ...)
 
     args_array = g_ptr_array_new ();
 
-    if ((flags & EXECUTE_AS_SHELL) != 0)
-    {
-        g_ptr_array_add (args_array, g_strdup (shell));
-        g_ptr_array_add (args_array, g_strdup ("-c"));
-        execute_name = g_strdup (shell);
-    }
-    else
-    {
-        gchar *shell_token;
-
-        shell_token = shell != NULL ? strchr (shell, ' ') : NULL;
-        if (shell_token == NULL)
-            *execute_name = g_strdup (shell);
-        else
-            *execute_name = g_strndup (shell, (gsize) (shell_token - shell));
-        g_ptr_array_add (args_array, g_strdup (shell));
-    }
-
     va_start (vargs, shell);
     while ((one_arg = va_arg (vargs, char *)) != NULL)
-          g_ptr_array_add (args_array, g_strdup (one_arg));
+          g_ptr_array_add (args_array, one_arg);
     va_end (vargs);
 
     g_ptr_array_add (args_array, NULL);
-    status = my_systemv (execute_name, (char *const *) args_array->pdata);
+    status = my_systemv_flags (flags, shell, (char *const *) args_array->pdata);
 
-    g_free (execute_name);
     g_ptr_array_free (args_array, TRUE);
 
     return status;
@@ -400,6 +411,39 @@ my_systemv (const char *command, char *const argv[])
         break;
     }
     my_system__restore_sigaction_handlers (&sigactions);
+
+    return status;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Call external programs with flags and with array of strings as parameters.
+ *
+ * @parameter flags   addition conditions for running external programs.
+ * @parameter command shell (if flags contain EXECUTE_AS_SHELL), command to run otherwise.
+ *                    Shell (or command) will be found in paths described in PATH variable
+ *                    (if shell parameter doesn't begin from path delimiter)
+ * @parameter argv    Array of strings (NULL-terminated) with parameters for command
+ * @return 0 if successfull, -1 otherwise
+ */
+
+int
+my_systemv_flags (int flags, const char *command, char *const argv[])
+{
+    char *execute_name = NULL;
+    GPtrArray *args_array;
+    int status = 0;
+
+    args_array = my_system_make_arg_array (flags, command, &execute_name);
+
+    for (; argv != NULL && *argv != NULL; argv++)
+        g_ptr_array_add (args_array, *argv);
+
+    g_ptr_array_add (args_array, NULL);
+    status = my_systemv (execute_name, (char *const *) args_array->pdata);
+
+    g_free (execute_name);
+    g_ptr_array_free (args_array, TRUE);
 
     return status;
 }

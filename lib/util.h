@@ -151,6 +151,7 @@ int close_error_pipe (int error, const char *text);
 int my_system (int flags, const char *shell, const char *command);
 int my_systeml (int flags, const char *shell, ...);
 int my_systemv (const char *command, char *const argv[]);
+int my_systemv_flags (int flags, const char *command, char *const argv[]);
 
 void my_exit (int status);
 void save_stop_handler (void);
