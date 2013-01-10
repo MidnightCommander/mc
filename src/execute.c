@@ -27,6 +27,7 @@
 #include <config.h>
 
 #include <signal.h>
+#include <string.h>
 #include <sys/stat.h>
 #include <sys/time.h>
 
@@ -38,6 +39,7 @@
 #include "lib/vfs/vfs.h"
 #include "lib/mcconfig.h"
 #include "lib/util.h"
+#include "lib/strutil.h"        /* str_replace_all_substrings() */
 #include "lib/widget.h"
 
 #include "filemanager/midnight.h"
@@ -220,6 +222,33 @@ execute_cleanup_with_vfs_arg (const vfs_path_t * filename_vpath, vfs_path_t ** l
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static char *
+execute_get_opts_from_cfg (const char *command, const char *default_str)
+{
+    char *str_from_config;
+
+    str_from_config =
+        mc_config_get_string_raw (mc_main_config, CONFIG_EXT_EDITOR_VIEWER_SECTION, command, NULL);
+
+    if (str_from_config == NULL)
+    {
+        mc_config_t *cfg;
+
+        cfg = mc_config_init (global_profile_name, TRUE);
+        if (cfg == NULL)
+            return g_strdup (default_str);
+
+        str_from_config =
+            mc_config_get_string_raw (cfg, CONFIG_EXT_EDITOR_VIEWER_SECTION, command, default_str);
+
+        mc_config_deinit (cfg);
+    }
+
+    return str_from_config;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -227,13 +256,26 @@ char *
 execute_get_external_cmd_opts_from_config (const char *command, const vfs_path_t * filename_vpath,
                                            int start_line)
 {
-    (void) command;
-    (void) start_line;
+    char *str_from_config, *return_str;
+    char *parameter;
 
     if (filename_vpath == NULL)
         return g_strdup ("");
 
-    return g_strdup (vfs_path_get_last_path_str (filename_vpath));
+    str_from_config = execute_get_opts_from_cfg (command, "%filename");
+
+    parameter = g_shell_quote (vfs_path_get_last_path_str (filename_vpath));
+    return_str = str_replace_all (str_from_config, "%filename", parameter);
+    g_free (parameter);
+    g_free (str_from_config);
+    str_from_config = return_str;
+
+    parameter = g_strdup_printf ("%d", start_line);
+    return_str = str_replace_all (str_from_config, "%lineno", parameter);
+    g_free (parameter);
+    g_free (str_from_config);
+
+    return return_str;
 }
 
 /* --------------------------------------------------------------------------------------------- */
