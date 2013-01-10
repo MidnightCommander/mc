@@ -1,4 +1,4 @@
-SUBDIRS = . mcconfig search vfs widget
+SUBDIRS = . mcconfig search strutil vfs widget
 
 AM_CPPFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) @CHECK_CFLAGS@
 

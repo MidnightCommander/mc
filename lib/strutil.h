@@ -538,6 +538,8 @@ void str_msg_term_size (const char *text, int *lines, int *columns);
 
 char *strrstr_skip_count (const char *haystack, const char *needle, size_t skip_count);
 
+char *str_replace_all (const char *haystack, const char *needle, const char *replacement);
+
 /*** inline functions ****************************************************************************/
 
 static inline void
