@@ -669,7 +669,7 @@ view_file_at_line (const vfs_path_t * filename_vpath, int plain_view, int intern
                 viewer = "view";
         }
 
-        execute_with_vfs_arg (viewer, filename_vpath);
+        execute_external_editor_or_viewer (viewer, filename_vpath, start_line);
     }
 
     return ret;
@@ -769,8 +769,6 @@ do_edit_at_line (const vfs_path_t * what_vpath, gboolean internal, int start_lin
     if (internal)
         edit_file (what_vpath, start_line);
     else
-#else
-    (void) start_line;
 #endif /* USE_INTERNAL_EDIT */
     {
         if (editor == NULL)
@@ -779,7 +777,7 @@ do_edit_at_line (const vfs_path_t * what_vpath, gboolean internal, int start_lin
             if (editor == NULL)
                 editor = get_default_editor ();
         }
-        execute_with_vfs_arg (editor, what_vpath);
+        execute_external_editor_or_viewer (editor, what_vpath, start_line);
     }
 
     if (mc_global.mc_run_mode == MC_RUN_FULL)

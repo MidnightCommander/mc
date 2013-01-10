@@ -110,14 +110,14 @@ mc_getlocalcopy (const vfs_path_t * pathname_vpath)
 }
 
 static void
-mc_getlocalcopy__init ()
+mc_getlocalcopy__init (void)
 {
     mc_getlocalcopy__pathname_vpath__captured = NULL;
     mc_getlocalcopy__return_value = NULL;
 }
 
 static void
-mc_getlocalcopy__deinit ()
+mc_getlocalcopy__deinit (void)
 {
     vfs_path_free (mc_getlocalcopy__pathname_vpath__captured);
 }
@@ -151,7 +151,7 @@ message (int flags, const char *title, const char *text, ...)
 }
 
 static void
-message__init ()
+message__init (void)
 {
     message_flags__captured = 0;
     message_title__captured = NULL;
@@ -159,7 +159,7 @@ message__init ()
 }
 
 static void
-message__deinit ()
+message__deinit (void)
 {
     g_free (message_title__captured);
     g_free (message_text__captured);
@@ -184,13 +184,13 @@ mc_stat (const vfs_path_t * vpath, struct stat *stat_ignored)
 
 
 static void
-mc_stat__init ()
+mc_stat__init (void)
 {
     mc_stat__vpath__captured = g_ptr_array_new ();
 }
 
 static void
-mc_stat__deinit ()
+mc_stat__deinit (void)
 {
     g_ptr_array_foreach (mc_stat__vpath__captured, (GFunc) vfs_path_free, NULL);
     g_ptr_array_free (mc_stat__vpath__captured, TRUE);
@@ -218,14 +218,14 @@ mc_ungetlocalcopy (const vfs_path_t * pathname_vpath, const vfs_path_t * local_v
 }
 
 static void
-mc_ungetlocalcopy__init ()
+mc_ungetlocalcopy__init (void)
 {
     mc_ungetlocalcopy__pathname_vpath__captured = NULL;
     mc_ungetlocalcopy__local_vpath__captured = NULL;
 }
 
 static void
-mc_ungetlocalcopy__deinit ()
+mc_ungetlocalcopy__deinit (void)
 {
     vfs_path_free (mc_ungetlocalcopy__pathname_vpath__captured);
     vfs_path_free (mc_ungetlocalcopy__local_vpath__captured);

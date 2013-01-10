@@ -20,9 +20,14 @@ endif
 EXTRA_DIST = execute__common.c
 
 TESTS = \
-	execute__execute_with_vfs_arg
+	execute__execute_with_vfs_arg \
+	execute__execute_external_editor_or_viewer
 
 check_PROGRAMS = $(TESTS)
 
 execute__execute_with_vfs_arg_SOURCES = \
 	execute__execute_with_vfs_arg.c
+
+
+execute__execute_external_editor_or_viewer_SOURCES = \
+	execute__execute_external_editor_or_viewer.c

@@ -63,6 +63,9 @@ int pause_after_run = pause_on_dumb_terminals;
 /*** file scope functions ************************************************************************/
 
 void do_execute (const char *shell, const char *command, int flags);
+void do_executev (const char *shell, int flags, char *const argv[]);
+char *execute_get_external_cmd_opts_from_config (const char *command,
+                                                 const vfs_path_t * filename_vpath, int start_line);
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -164,7 +167,8 @@ do_suspend_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-execute_prepare_with_vfs_arg (const vfs_path_t * filename_vpath, vfs_path_t ** localcopy_vpath, time_t *mtime)
+execute_prepare_with_vfs_arg (const vfs_path_t * filename_vpath, vfs_path_t ** localcopy_vpath,
+                              time_t * mtime)
 {
     struct stat st;
 
@@ -196,7 +200,8 @@ execute_prepare_with_vfs_arg (const vfs_path_t * filename_vpath, vfs_path_t ** l
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-execute_cleanup_with_vfs_arg (const vfs_path_t * filename_vpath, vfs_path_t ** localcopy_vpath, time_t *mtime)
+execute_cleanup_with_vfs_arg (const vfs_path_t * filename_vpath, vfs_path_t ** localcopy_vpath,
+                              time_t * mtime)
 {
     if (*localcopy_vpath != NULL)
     {
@@ -218,8 +223,23 @@ execute_cleanup_with_vfs_arg (const vfs_path_t * filename_vpath, vfs_path_t ** l
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+char *
+execute_get_external_cmd_opts_from_config (const char *command, const vfs_path_t * filename_vpath,
+                                           int start_line)
+{
+    (void) command;
+    (void) start_line;
+
+    if (filename_vpath == NULL)
+        return g_strdup ("");
+
+    return g_strdup (vfs_path_get_last_path_str (filename_vpath));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 void
-do_execute (const char *shell, const char *command, int flags)
+do_executev (const char *shell, int flags, char *const argv[])
 {
 #ifdef ENABLE_SUBSHELL
     vfs_path_t *new_dir_vpath = NULL;
@@ -236,24 +256,24 @@ do_execute (const char *shell, const char *command, int flags)
     if (mc_global.tty.console_flag != '\0')
         handle_console (CONSOLE_RESTORE);
 
-    if (!mc_global.tty.use_subshell && command && !(flags & EXECUTE_INTERNAL))
+    if (!mc_global.tty.use_subshell && *argv != NULL && (flags & EXECUTE_INTERNAL) == 0)
     {
-        printf ("%s%s\n", mc_prompt, command);
+        printf ("%s%s\n", mc_prompt, *argv);
         fflush (stdout);
     }
 #ifdef ENABLE_SUBSHELL
-    if (mc_global.tty.use_subshell && !(flags & EXECUTE_INTERNAL))
+    if (mc_global.tty.use_subshell && (flags & EXECUTE_INTERNAL) == 0)
     {
         do_update_prompt ();
 
         /* We don't care if it died, higher level takes care of this */
-        invoke_subshell (command, VISIBLY, old_vfs_dir_vpath != NULL ? NULL : &new_dir_vpath);
+        invoke_subshell (*argv, VISIBLY, old_vfs_dir_vpath != NULL ? NULL : &new_dir_vpath);
     }
     else
 #endif /* ENABLE_SUBSHELL */
-        my_system (flags, shell, command);
+        my_systemv_flags (flags, shell, argv);
 
-    if (!(flags & EXECUTE_INTERNAL))
+    if ((flags & EXECUTE_INTERNAL) == 0)
     {
         if ((pause_after_run == pause_always
              || (pause_after_run == pause_on_dumb_terminals && !mc_global.tty.xterm_flag
@@ -270,13 +290,10 @@ do_execute (const char *shell, const char *command, int flags)
             printf ("\r\n");
             fflush (stdout);
         }
-        if (mc_global.tty.console_flag != '\0')
+        if (mc_global.tty.console_flag != '\0' && output_lines != 0 && mc_global.keybar_visible)
         {
-            if (output_lines && mc_global.keybar_visible)
-            {
-                putchar ('\n');
-                fflush (stdout);
-            }
+            putchar ('\n');
+            fflush (stdout);
         }
     }
 
@@ -307,6 +324,22 @@ do_execute (const char *shell, const char *command, int flags)
 
     do_refresh ();
     use_dash (TRUE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+do_execute (const char *shell, const char *command, int flags)
+{
+    GPtrArray *args_array;
+
+    args_array = g_ptr_array_new ();
+    g_ptr_array_add (args_array, (char *) command);
+    g_ptr_array_add (args_array, NULL);
+
+    do_executev (shell, flags, (char *const *) args_array->pdata);
+
+    g_ptr_array_free (args_array, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -522,6 +555,48 @@ execute_with_vfs_arg (const char *command, const vfs_path_t * filename_vpath)
     do_execute_vpath = (localcopy_vpath == NULL) ? filename_vpath : localcopy_vpath;
 
     do_execute (command, vfs_path_get_last_path_str (do_execute_vpath), EXECUTE_INTERNAL);
+
+    execute_cleanup_with_vfs_arg (filename_vpath, &localcopy_vpath, &mtime);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Execute external editor or viewer.
+ *
+ * @param command editor/viewer to run
+ * @param filename_vpath path for edit/view
+ * @param start_line cursor will be placed at the 'start_line' position after opening file
+ */
+
+void
+execute_external_editor_or_viewer (const char *command, const vfs_path_t * filename_vpath,
+                                   int start_line)
+{
+    vfs_path_t *localcopy_vpath = NULL;
+    const vfs_path_t *do_execute_vpath;
+    char *extern_cmd_options;
+    time_t mtime;
+
+    if (!execute_prepare_with_vfs_arg (filename_vpath, &localcopy_vpath, &mtime))
+        return;
+
+    do_execute_vpath = (localcopy_vpath == NULL) ? filename_vpath : localcopy_vpath;
+
+    extern_cmd_options =
+        execute_get_external_cmd_opts_from_config (command, do_execute_vpath, start_line);
+
+    if (extern_cmd_options != NULL)
+    {
+        char **argv_cmd_options;
+        int argv_count;
+
+        g_shell_parse_argv (extern_cmd_options, &argv_count, &argv_cmd_options, NULL);
+        g_free (extern_cmd_options);
+
+        do_executev (command, EXECUTE_INTERNAL, argv_cmd_options);
+
+        g_strfreev (argv_cmd_options);
+    }
 
     execute_cleanup_with_vfs_arg (filename_vpath, &localcopy_vpath, &mtime);
 }
