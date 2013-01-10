@@ -1,3 +1,14 @@
+[External editor or viewer parameters]
+    vi=%filename +%lineno
+    vim=%filename +%lineno
+    view=%filename +%lineno
+    emacs=%filename +%lineno
+    nano=%filename +%lineno
+    joe=%filename +%lineno
+    more=%filename +%lineno
+    less=%filename +%linenog
+    mcedit=%filename:%lineno
+
 [Special dirs]
 list=/afs;/coda;/:;/...;/net;/#smb
 
