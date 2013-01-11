@@ -67,7 +67,7 @@ int pause_after_run = pause_on_dumb_terminals;
 void do_execute (const char *shell, const char *command, int flags);
 void do_executev (const char *shell, int flags, char *const argv[]);
 char *execute_get_external_cmd_opts_from_config (const char *command,
-                                                 const vfs_path_t * filename_vpath, int start_line);
+                                                 const vfs_path_t * filename_vpath, long start_line);
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -254,7 +254,7 @@ execute_get_opts_from_cfg (const char *command, const char *default_str)
 
 char *
 execute_get_external_cmd_opts_from_config (const char *command, const vfs_path_t * filename_vpath,
-                                           int start_line)
+                                           long start_line)
 {
     char *str_from_config, *return_str;
     char *parameter;
@@ -270,7 +270,7 @@ execute_get_external_cmd_opts_from_config (const char *command, const vfs_path_t
     g_free (str_from_config);
     str_from_config = return_str;
 
-    parameter = g_strdup_printf ("%d", start_line);
+    parameter = g_strdup_printf ("%ld", start_line);
     return_str = str_replace_all (str_from_config, "%lineno", parameter);
     g_free (parameter);
     g_free (str_from_config);
@@ -612,7 +612,7 @@ execute_with_vfs_arg (const char *command, const vfs_path_t * filename_vpath)
 
 void
 execute_external_editor_or_viewer (const char *command, const vfs_path_t * filename_vpath,
-                                   int start_line)
+                                   long start_line)
 {
     vfs_path_t *localcopy_vpath = NULL;
     const vfs_path_t *do_execute_vpath;
