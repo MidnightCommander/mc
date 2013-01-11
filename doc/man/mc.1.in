@@ -1038,6 +1038,13 @@ environment variable is tried.  If
 is also undefined, the "view" command is invoked.  If you use F13
 instead, the viewer will be invoked without doing any formatting or
 preprocessing to the file.
+.P
+See
+.\"LINK2"
+parameters for external viewer
+.\"Parameters for external editor or viewer"
+for explain how you may specify an extended command line options
+for external viewers.
 .PP
 .B Filtered View (Alt\-!)
 .PP
@@ -1059,6 +1066,13 @@ environment variable, or the
 Internal File Editor
 .\"Internal File Editor"
 if the use_internal_edit option is on.
+.P
+See
+.\"LINK2"
+parameters for external editor
+.\"Parameters for external editor or viewer"
+for explain how you may specify an extended command line options
+for external editors.
 .PP
 .B Copy (F5, F15)
 .PP
@@ -4093,6 +4107,32 @@ For example:
 .PP
 .nf
 autodetect_codeset=russian
+.fi
+.\"NODE "Parameters for external editor or viewer"
+.SH "Parameters for external editor or viewer"
+The Midnight Commander provides a way for specify an options for external editors
+and viewers. The Midnight Commander tries to search the
+"[External editor or viewer parameters]" section in the system initialization file
+(the mc.lib file located in the Midnight Commander library directory)
+and then in the ~/.config/mc/ini file. The option name should be equal to the name
+(full pathname) of external editor or viewer. The option value can contain following
+variables:
+.PP
+.I %filename
+.IP
+The filename to edit/view.
+.PP
+.I %lineno
+.IP
+The start line in the opening file.
+.PP
+For example:
+.PP
+.nf
+[External editor or viewer parameters]
+    vi=%filename +%lineno
+    joe=%filename +%lineno
+    more=%filename +%lineno
 .fi
 .\"NODE "Terminal databases"
 .SH "Terminal databases"
