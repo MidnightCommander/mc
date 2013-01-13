@@ -7,9 +7,6 @@
    Written by:
    Rostislav Benes, 2007
 
-   The file_date routine is mostly from GNU's fileutils package,
-   written by Richard Stallman and David MacKenzie.
-
    This file is part of the Midnight Commander.
 
    The Midnight Commander is free software: you can redistribute it
