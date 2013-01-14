@@ -502,6 +502,10 @@ configure_box (void)
 
         g_snprintf (time_out, sizeof (time_out), "%d", old_esc_mode_timeout);
 
+#ifndef USE_INTERNAL_EDIT
+        quick_widgets[17].options = W_DISABLED;
+#endif
+
         if (!old_esc_mode)
             quick_widgets[10].options = quick_widgets[11].options = W_DISABLED;
 

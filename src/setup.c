@@ -945,6 +945,10 @@ load_setup (void)
         *int_options[i].opt_addr =
             mc_config_get_int (mc_main_config, CONFIG_APP_SECTION, int_options[i].opt_name,
                                *int_options[i].opt_addr);
+#ifndef USE_INTERNAL_EDIT
+    /* reset forced in case of build without internal editor */
+    use_internal_edit = 0;
+#endif /* USE_INTERNAL_EDIT */
 
     if (option_tab_spacing <= 0)
         option_tab_spacing = DEFAULT_TAB_SPACING;
