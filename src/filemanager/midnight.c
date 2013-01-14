@@ -64,7 +64,6 @@
 #include "lib/keybind.h"
 #include "lib/event.h"
 
-#include "option.h"             /* configure_box() */
 #include "tree.h"
 #include "boxes.h"              /* sort_box(), tree_box() */
 #include "layout.h"
