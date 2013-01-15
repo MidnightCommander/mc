@@ -1239,7 +1239,7 @@ panel_operate_init_totals (FileOperation operation,
     {
         ComputeDirSizeUI *ui;
 
-        ui = compute_dir_size_create_ui ();
+        ui = compute_dir_size_create_ui (TRUE);
 
         if (source == NULL)
             status = panel_compute_totals (panel, ui, compute_dir_size_update_ui,
@@ -2422,26 +2422,45 @@ erase_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_t * s_
 /* {{{ Panel operate routines */
 
 ComputeDirSizeUI *
-compute_dir_size_create_ui (void)
+compute_dir_size_create_ui (gboolean allow_skip)
 {
     ComputeDirSizeUI *ui;
 
-    const char *b_name = N_("&Abort");
+    const char *b1_name = N_("&Abort");
+    const char *b2_name = N_("&Skip");
+    int b1_width, b2_width = 0, b_width = 0;
+    int b1_x;
+    int ui_width;
+    Widget *b;
 
 #ifdef ENABLE_NLS
-    b_name = _(b_name);
+    b1_name = _(b1_name);
+    b2_name = _(b2_name);
 #endif
+
+    b1_width = str_term_width1 (b1_name) + 4;
+    if (allow_skip)
+        b2_width = str_term_width1 (b2_name) + 4 + 1;
+    b_width = b1_width + b2_width;
 
     ui = g_new (ComputeDirSizeUI, 1);
 
-    ui->dlg = create_dlg (TRUE, 0, 0, 7, COLS / 2, dialog_colors, NULL, NULL,
-                          NULL, _("Directory scanning"), DLG_CENTER);
+    ui_width = max (COLS / 2, b_width + 6);
+    ui->dlg = create_dlg (TRUE, 0, 0, 7, ui_width, dialog_colors, NULL, NULL, NULL,
+                          _("Directory scanning"), DLG_CENTER);
+
     ui->dirname = label_new (2, 3, "");
     add_widget (ui->dlg, ui->dirname);
     add_widget (ui->dlg, hline_new (3, -1, -1));
-    add_widget_autopos (ui->dlg,
-                        button_new (4, 2, FILE_ABORT, NORMAL_BUTTON, b_name, NULL),
-                        WPOS_KEEP_TOP | WPOS_CENTER_HORZ, NULL);
+    b1_x = (ui_width - b_width) / 2;
+    b = WIDGET (button_new (4, b1_x, FILE_ABORT, NORMAL_BUTTON, b1_name, NULL));
+    add_widget (ui->dlg, b);
+    if (allow_skip)
+    {
+        add_widget (ui->dlg,
+                    button_new (4, b1_x + 1 + b1_width, FILE_SKIP, NORMAL_BUTTON, b2_name, NULL));
+        dlg_select_widget (b);
+    }
 
     /* We will manage the dialog without any help,
        that's why we have to call init_dlg */
@@ -2500,6 +2519,8 @@ compute_dir_size_update_ui (const void *ui, const vfs_path_t * dirname_vpath)
     case B_CANCEL:
     case FILE_ABORT:
         return FILE_ABORT;
+    case FILE_SKIP:
+        return FILE_SKIP;
     default:
         return FILE_CONT;
     }

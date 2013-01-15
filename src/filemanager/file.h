@@ -58,7 +58,7 @@ FileProgressStatus compute_dir_size (const vfs_path_t * dirname_vpath, const voi
                                      size_t * ret_marked, uintmax_t * ret_total,
                                      gboolean compute_symlinks);
 
-ComputeDirSizeUI *compute_dir_size_create_ui (void);
+ComputeDirSizeUI *compute_dir_size_create_ui (gboolean allow_skip);
 void compute_dir_size_destroy_ui (ComputeDirSizeUI * ui);
 FileProgressStatus compute_dir_size_update_ui (const void *ui, const vfs_path_t * dirname_vpath);
 
