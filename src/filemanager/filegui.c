@@ -11,7 +11,7 @@
    in an interactive program.
 
    Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
-   2004, 2005, 2006, 2007, 2009, 2011, 2012
+   2004, 2005, 2006, 2007, 2009, 2011, 2012, 2013
    The Free Software Foundation, Inc.
 
    Written by:
@@ -22,7 +22,7 @@
    Norbert Warmuth, 1997
    Pavel Machek, 1998
    Slava Zanko, 2009-2012
-   Andrew Borodin, 2009-2012
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2011, 2012, 2013
 
    This file is part of the Midnight Commander.
 
@@ -716,7 +716,7 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
 
     ui = ctx->ui;
     ui->replace_result = REPLACE_YES;
-    ui->showing_eta = with_eta && file_op_compute_totals;
+    ui->showing_eta = with_eta && ctx->progress_totals_computed;
     ui->showing_bps = with_eta;
 
     ui->op_dlg =
@@ -748,7 +748,7 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
         ui->total_bytes_label = hline_new (y++, -1, -1);
         add_widget (ui->op_dlg, ui->total_bytes_label);
 
-        if (file_op_compute_totals)
+        if (ctx->progress_totals_computed)
         {
             ui->progress_total_gauge =
                 gauge_new (y++, x + 3, dlg_width - (x + 3) * 2, FALSE, 100, 0);
@@ -900,7 +900,7 @@ file_progress_show_count (FileOpContext * ctx, size_t done, size_t total)
     g_return_if_fail (ctx->ui != NULL);
 
     ui = ctx->ui;
-    if (file_op_compute_totals)
+    if (ctx->progress_totals_computed)
         g_snprintf (buffer, BUF_TINY, _("Files processed: %zu/%zu"), done, total);
     else
         g_snprintf (buffer, BUF_TINY, _("Files processed: %zu"), done);
@@ -925,7 +925,7 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintma
 
     ui = ctx->ui;
 
-    if (file_op_compute_totals)
+    if (ctx->progress_totals_computed)
     {
         if (ctx->progress_bytes == 0)
             gauge_show (ui->progress_total_gauge, 0);
@@ -943,7 +943,7 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintma
     gettimeofday (&tv_current, NULL);
     file_frmt_time (buffer2, tv_current.tv_sec - tctx->transfer_start.tv_sec);
 
-    if (file_op_compute_totals)
+    if (ctx->progress_totals_computed)
     {
         file_eta_prepare_for_show (buffer3, tctx->eta_secs, TRUE);
         if (tctx->bps == 0)
@@ -968,7 +968,7 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintma
     label_set_text (ui->time_label, buffer);
 
     size_trunc_len (buffer2, 5, tctx->copied_bytes, 0, panels_options.kilobyte_si);
-    if (!file_op_compute_totals)
+    if (!ctx->progress_totals_computed)
         g_snprintf (buffer, BUF_TINY, _(" Total: %s "), buffer2);
     else
     {
