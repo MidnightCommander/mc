@@ -1,9 +1,9 @@
 dnl @synopsis MC_CHECK_CFLAGS
 dnl
-dnl Check flags supported by compilator
+dnl Check flags supported by C compiler
 dnl
 dnl @author Slava Zanko <slavazanko@gmail.com>
-dnl @version 2009-10-29
+dnl @version 2013-01-16
 dnl @license GPL
 dnl @copyright Free Software Foundation, Inc.
 
@@ -14,15 +14,10 @@ AC_DEFUN([MC_CHECK_ONE_CFLAG],[
   safe_CFLAGS=$CFLAGS
   CFLAGS="$1"
 
-  AC_TRY_COMPILE(, [
-  return 0;
-  ],
-  [
-    mc_check_one_cflag=yes
-  ],
-  [
-    mc_check_one_cflag=no
-  ])
+  AC_COMPILE_IFELSE(
+    [AC_LANG_PROGRAM([], [[return 0;]])],
+    [mc_check_one_cflag=yes],
+    [mc_check_one_cflag=no])
 
   CFLAGS=$safe_CFLAGS
   AC_MSG_RESULT([$mc_check_one_cflag])
@@ -30,10 +25,11 @@ AC_DEFUN([MC_CHECK_ONE_CFLAG],[
   if test x$mc_check_one_cflag = xyes; then
     mc_configured_cflags="$mc_configured_cflags $1"
   fi
-
 ])
 
 AC_DEFUN([MC_CHECK_CFLAGS],[
+    AC_LANG_PUSH(C)
+
     mc_configured_cflags=""
 
 dnl Sorted -f options:
@@ -81,4 +77,6 @@ dnl    MC_CHECK_ONE_CFLAG([-Wstrict-aliasing])
     MC_CHECK_ONE_CFLAG([-Wunused-value])
     MC_CHECK_ONE_CFLAG([-Wunused-variable])
     MC_CHECK_ONE_CFLAG([-Wwrite-strings])
+
+    AC_LANG_POP()
 ])
