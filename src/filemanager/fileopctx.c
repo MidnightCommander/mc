@@ -98,12 +98,12 @@ file_op_context_new (FileOperation op)
 void
 file_op_context_destroy (FileOpContext * ctx)
 {
-    g_return_if_fail (ctx != NULL);
-
-    file_op_context_destroy_ui (ctx);
-    mc_search_free (ctx->search_handle);
-    /** \todo FIXME: do we need to free ctx->dest_mask? */
-    g_free (ctx);
+    if (ctx != NULL)
+    {
+        file_op_context_destroy_ui (ctx);
+        mc_search_free (ctx->search_handle);
+        g_free (ctx);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

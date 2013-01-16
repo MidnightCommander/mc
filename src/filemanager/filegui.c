@@ -649,7 +649,8 @@ check_progress_buttons (FileOpContext * ctx)
     Gpm_Event event;
     FileOpContextUI *ui;
 
-    g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
+    if (ctx == NULL || ctx->ui == NULL)
+        return FILE_CONT;
 
     ui = ctx->ui;
 
@@ -702,8 +703,8 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
     int dlg_width = 58, dlg_height = 17;
     int y = 2, x = 3;
 
-    g_return_if_fail (ctx != NULL);
-    g_return_if_fail (ctx->ui == NULL);
+    if (ctx == NULL || ctx->ui != NULL)
+        return;
 
 #ifdef ENABLE_NLS
     if (progress_buttons[0].len == -1)
@@ -714,7 +715,6 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
             progress_buttons[i].text = _(progress_buttons[i].text);
     }
 #endif
-
 
     ctx->dialog_type = dialog_type;
     ctx->recursive_result = RECURSIVE_YES;
@@ -829,9 +829,7 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
 void
 file_op_context_destroy_ui (FileOpContext * ctx)
 {
-    g_return_if_fail (ctx != NULL);
-
-    if (ctx->ui != NULL)
+    if (ctx != NULL && ctx->ui != NULL)
     {
         FileOpContextUI *ui = (FileOpContextUI *) ctx->ui;
 
@@ -856,11 +854,8 @@ file_progress_show (FileOpContext * ctx, off_t done, off_t total,
     char buffer2[BUF_TINY];
     char buffer3[BUF_TINY];
 
-    if (!verbose)
+    if (!verbose || ctx == NULL || ctx->ui == NULL)
         return;
-
-    g_return_if_fail (ctx != NULL);
-    g_return_if_fail (ctx->ui != NULL);
 
     ui = ctx->ui;
 
@@ -903,8 +898,8 @@ file_progress_show_count (FileOpContext * ctx, size_t done, size_t total)
     char buffer[BUF_TINY];
     FileOpContextUI *ui;
 
-    g_return_if_fail (ctx != NULL);
-    g_return_if_fail (ctx->ui != NULL);
+    if (ctx == NULL || ctx->ui == NULL)
+        return;
 
     ui = ctx->ui;
     if (ctx->progress_totals_computed)
@@ -927,8 +922,8 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintma
     struct timeval tv_current;
     FileOpContextUI *ui;
 
-    g_return_if_fail (ctx != NULL);
-    g_return_if_fail (ctx->ui != NULL);
+    if (ctx == NULL || ctx->ui == NULL)
+        return;
 
     ui = ctx->ui;
 
@@ -995,8 +990,8 @@ file_progress_show_source (FileOpContext * ctx, const vfs_path_t * s_vpath)
 {
     FileOpContextUI *ui;
 
-    g_return_if_fail (ctx != NULL);
-    g_return_if_fail (ctx->ui != NULL);
+    if (ctx == NULL || ctx->ui == NULL)
+        return;
 
     ui = ctx->ui;
 
@@ -1023,8 +1018,8 @@ file_progress_show_target (FileOpContext * ctx, const vfs_path_t * s_vpath)
 {
     FileOpContextUI *ui;
 
-    g_return_if_fail (ctx != NULL);
-    g_return_if_fail (ctx->ui != NULL);
+    if (ctx == NULL || ctx->ui == NULL)
+        return;
 
     ui = ctx->ui;
 
@@ -1051,8 +1046,8 @@ file_progress_show_deleting (FileOpContext * ctx, const char *s)
 {
     FileOpContextUI *ui;
 
-    g_return_if_fail (ctx != NULL);
-    g_return_if_fail (ctx->ui != NULL);
+    if (ctx == NULL || ctx->ui == NULL)
+        return;
 
     ui = ctx->ui;
     label_set_text (ui->file_label[0], _("Deleting"));
@@ -1068,8 +1063,8 @@ file_progress_real_query_replace (FileOpContext * ctx,
 {
     FileOpContextUI *ui;
 
-    g_return_val_if_fail (ctx != NULL, FILE_CONT);
-    g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
+    if (ctx == NULL || ctx->ui == NULL)
+        return FILE_CONT;
 
     ui = ctx->ui;
 
@@ -1132,7 +1127,8 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
     char *dest_dir, *tmp;
     char *def_text_secure;
 
-    g_return_val_if_fail (ctx != NULL, NULL);
+    if (ctx == NULL)
+        return NULL;
 
     /* unselect checkbox if target filesystem don't support attributes */
     ctx->op_preserve = filegui__check_attrs_on_fs (def_text);
