@@ -307,11 +307,7 @@ aspell_init (void)
     global_speller->speller = NULL;
 
     if (spell_language != NULL)
-    {
-        int res;
-
-        res = mc_aspell_config_replace (global_speller->config, "lang", spell_language);
-    }
+        mc_aspell_config_replace (global_speller->config, "lang", spell_language);
 
     error = mc_new_aspell_speller (global_speller->config);
 
@@ -443,7 +439,6 @@ aspell_set_lang (const char *lang)
 {
     if (lang != NULL)
     {
-        int res;
         AspellCanHaveError *error;
         const char *spell_codeset;
 
@@ -457,8 +452,8 @@ aspell_set_lang (const char *lang)
 #endif
             spell_codeset = str_detect_termencoding ();
 
-        res = mc_aspell_config_replace (global_speller->config, "lang", lang);
-        res = mc_aspell_config_replace (global_speller->config, "encoding", spell_codeset);
+        mc_aspell_config_replace (global_speller->config, "lang", lang);
+        mc_aspell_config_replace (global_speller->config, "encoding", spell_codeset);
 
         /* the returned pointer should _not_ need to be deleted */
         if (global_speller->speller != NULL)

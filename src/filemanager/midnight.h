@@ -37,6 +37,8 @@ extern WPanel *left_panel;
 extern WPanel *right_panel;
 extern WPanel *current_panel;
 
+extern const char *mc_prompt;
+
 /*** declarations of public functions ************************************************************/
 
 void update_menu (void);

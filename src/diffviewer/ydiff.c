@@ -2184,7 +2184,6 @@ static void
 do_merge_hunk (WDiff * dview, action_direction_t merge_direction)
 {
     int from1, to1, from2, to2;
-    int res;
     int hunk;
     diff_place_t n_merge = (merge_direction == FROM_RIGHT_TO_LEFT) ? DIFF_RIGHT : DIFF_LEFT;
 
@@ -2241,7 +2240,12 @@ do_merge_hunk (WDiff * dview, action_direction_t merge_direction)
         }
         fflush (merge_file);
         fclose (merge_file);
-        res = rewrite_backup_content (merge_file_name_vpath, dview->file[n_merge]);
+        {
+            int res;
+
+            res = rewrite_backup_content (merge_file_name_vpath, dview->file[n_merge]);
+            (void) res;
+        }
         mc_unlink (merge_file_name_vpath);
         vfs_path_free (merge_file_name_vpath);
     }

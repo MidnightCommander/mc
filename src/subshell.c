@@ -75,7 +75,7 @@
 enum subshell_state_enum subshell_state;
 
 /* Holds the latest prompt captured from the subshell */
-char *subshell_prompt = NULL;
+GString *subshell_prompt = NULL;
 
 /* Subshell: if set, then the prompt was not saved on CONSOLE_SAVE */
 /* We need to paint it after CONSOLE_RESTORE, see: load_prompt */
@@ -255,6 +255,7 @@ init_subshell_child (const char *pty_name)
     {
         int ret;
         ret = chdir (mc_config_get_home_dir ());        /* FIXME? What about when we re-run the subshell? */
+        (void) ret;
     }
 
     /* Set MC_SID to prevent running one mc from another */
@@ -329,22 +330,22 @@ init_subshell_child (const char *pty_name)
     switch (subshell_type)
     {
     case BASH:
-        execl (shell, "bash", "-rcfile", init_file, (char *) NULL);
+        execl (mc_global.tty.shell, "bash", "-rcfile", init_file, (char *) NULL);
         break;
 
     case TCSH:
-        execl (shell, "tcsh", (char *) NULL);
+        execl (mc_global.tty.shell, "tcsh", (char *) NULL);
         break;
 
     case ZSH:
         /* Use -g to exclude cmds beginning with space from history
          * and -Z to use the line editor on non-interactive term */
-        execl (shell, "zsh", "-Z", "-g", (char *) NULL);
+        execl (mc_global.tty.shell, "zsh", "-Z", "-g", (char *) NULL);
 
         break;
 
     case FISH:
-        execl (shell, "fish", (char *) NULL);
+        execl (mc_global.tty.shell, "fish", (char *) NULL);
         break;
     }
 
@@ -790,15 +791,15 @@ init_subshell (void)
     {                           /* First time through */
         /* Find out what type of shell we have */
 
-        if (strstr (shell, "/zsh") || getenv ("ZSH_VERSION"))
+        if (strstr (mc_global.tty.shell, "/zsh") || getenv ("ZSH_VERSION"))
             subshell_type = ZSH;
-        else if (strstr (shell, "/tcsh"))
+        else if (strstr (mc_global.tty.shell, "/tcsh"))
             subshell_type = TCSH;
-        else if (strstr (shell, "/csh"))
+        else if (strstr (mc_global.tty.shell, "/csh"))
             subshell_type = TCSH;
-        else if (strstr (shell, "/bash") || getenv ("BASH"))
+        else if (strstr (mc_global.tty.shell, "/bash") || getenv ("BASH"))
             subshell_type = BASH;
-        else if (strstr (shell, "/fish"))
+        else if (strstr (mc_global.tty.shell, "/fish"))
             subshell_type = FISH;
         else
         {
@@ -981,27 +982,26 @@ invoke_subshell (const char *command, int how, vfs_path_t ** new_dir_vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 read_subshell_prompt (void)
 {
-    static int prompt_size = INITIAL_PROMPT_SIZE;
-    int bytes = 0, i, rc = 0;
+    int rc = 0;
+    ssize_t bytes = 0;
     struct timeval timeleft = { 0, 0 };
 
     fd_set tmp;
     FD_ZERO (&tmp);
     FD_SET (mc_global.tty.subshell_pty, &tmp);
 
+    /* First time through */
     if (subshell_prompt == NULL)
-    {                           /* First time through */
-        subshell_prompt = g_malloc (prompt_size);
-        *subshell_prompt = '\0';
-        prompt_pos = 0;
-    }
+        subshell_prompt = g_string_sized_new (INITIAL_PROMPT_SIZE);
 
     while (subshell_alive
-           && (rc = select (mc_global.tty.subshell_pty + 1, &tmp, NULL, NULL, &timeleft)))
+           && (rc = select (mc_global.tty.subshell_pty + 1, &tmp, NULL, NULL, &timeleft)) != 0)
     {
+        ssize_t i;
+
         /* Check for `select' errors */
         if (rc == -1)
         {
@@ -1020,27 +1020,15 @@ read_subshell_prompt (void)
         bytes = read (mc_global.tty.subshell_pty, pty_buffer, sizeof (pty_buffer));
 
         /* Extract the prompt from the shell output */
-
-        for (i = 0; i < bytes; ++i)
+        g_string_set_size (subshell_prompt, 0);
+        for (i = 0; i < bytes; i++)
             if (pty_buffer[i] == '\n' || pty_buffer[i] == '\r')
-            {
-                prompt_pos = 0;
-            }
-            else
-            {
-                if (!pty_buffer[i])
-                    continue;
-
-                subshell_prompt[prompt_pos++] = pty_buffer[i];
-                if (prompt_pos == prompt_size)
-                    subshell_prompt = g_realloc (subshell_prompt, prompt_size *= 2);
-            }
-
-        subshell_prompt[prompt_pos] = '\0';
+                g_string_set_size (subshell_prompt, 0);
+            else if (pty_buffer[i] != '\0')
+                g_string_append_c (subshell_prompt, pty_buffer[i]);
     }
-    if (rc == 0 && bytes == 0)
-        return FALSE;
-    return TRUE;
+
+    return (rc != 0 || bytes != 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1050,7 +1038,7 @@ do_update_prompt (void)
 {
     if (update_subshell_prompt)
     {
-        printf ("\r\n%s", subshell_prompt);
+        printf ("\r\n%s", subshell_prompt->str);
         fflush (stdout);
         update_subshell_prompt = FALSE;
     }
@@ -1078,7 +1066,7 @@ exit_subshell (void)
                          tcsh_fifo, unix_error_string (errno));
         }
 
-        g_free (subshell_prompt);
+        g_string_free (subshell_prompt, TRUE);
         subshell_prompt = NULL;
         pty_buffer[0] = '\0';
     }

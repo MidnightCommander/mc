@@ -124,9 +124,6 @@ extern int quit;
 /* Set to TRUE to suppress printing the last directory */
 extern gboolean print_last_revert;
 
-extern char *shell;
-extern const char *mc_prompt;
-
 /* index to record_macro_buf[], -1 if not recording a macro */
 extern int macro_index;
 

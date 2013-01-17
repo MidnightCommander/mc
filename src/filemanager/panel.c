@@ -47,7 +47,7 @@
 #include "lib/mcconfig.h"
 #include "lib/vfs/vfs.h"
 #include "lib/unixcompat.h"
-#include "lib/timefmt.h"
+#include "lib/timefmt.h"        /* file_date() */
 #include "lib/util.h"
 #include "lib/widget.h"
 #ifdef HAVE_CHARSET

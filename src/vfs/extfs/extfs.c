@@ -58,7 +58,6 @@
 #include "lib/util.h"
 #include "lib/widget.h"         /* message() */
 
-#include "src/setup.h"          /* shell */
 #include "src/execute.h"        /* For shell_execute */
 
 #include "lib/vfs/vfs.h"
@@ -851,7 +850,7 @@ extfs_cmd (const char *str_extfs_cmd, struct archive *archive,
     g_free (quoted_archive_name);
 
     open_error_pipe ();
-    retval = my_system (EXECUTE_AS_SHELL, shell, cmd);
+    retval = my_system (EXECUTE_AS_SHELL, mc_global.tty.shell, cmd);
     g_free (cmd);
     close_error_pipe (D_ERROR, NULL);
     return retval;

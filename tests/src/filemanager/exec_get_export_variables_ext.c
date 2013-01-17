@@ -69,7 +69,7 @@ teardown (void)
 
 START_TEST (sanitize_variables)
 {
-    // given
+    /* given */
     vfs_path_t * filename_vpath;
     char *actual_string;
     const char *expected_string;
@@ -82,12 +82,12 @@ START_TEST (sanitize_variables)
     current_panel->dir.list[2].f.marked = TRUE;
     current_panel->count = 3;
 
-    // when
+    /* when */
     filename_vpath = vfs_path_from_str("/tmp/blabla.txt");
     actual_string = exec_get_export_variables (filename_vpath);
     vfs_path_free (filename_vpath);
 
-    // then
+    /* then */
     expected_string = "\
 MC_EXT_FILENAME=/tmp/blabla.txt\n\
 export MC_EXT_FILENAME\n\

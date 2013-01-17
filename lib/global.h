@@ -244,6 +244,9 @@ typedef struct
         int subshell_pty;
 #endif                          /* !ENABLE_SUBSHELL */
 
+        /* The user's shell */
+        char *shell;
+
         /* This flag is set by xterm detection routine in function main() */
         /* It is used by function view_other_cmd() */
         gboolean xterm_flag;

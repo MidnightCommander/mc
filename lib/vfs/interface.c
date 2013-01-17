@@ -457,9 +457,6 @@ mc_readdir (DIR * dirp)
     struct vfs_class *vfs;
     struct dirent *entry = NULL;
     vfs_path_element_t *vfs_path_element;
-#ifdef HAVE_CHARSET
-    estr_t state;
-#endif
 
     if (!mc_readdir_result)
     {
@@ -496,8 +493,7 @@ mc_readdir (DIR * dirp)
 
         g_string_set_size (vfs_str_buffer, 0);
 #ifdef HAVE_CHARSET
-        state =
-            str_vfs_convert_from (vfs_path_element->dir.converter, entry->d_name, vfs_str_buffer);
+        str_vfs_convert_from (vfs_path_element->dir.converter, entry->d_name, vfs_str_buffer);
 #else
         g_string_assign (vfs_str_buffer, entry->d_name);
 #endif

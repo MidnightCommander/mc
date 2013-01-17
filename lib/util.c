@@ -12,9 +12,6 @@
    Jakub Jelinek, 1994, 1995, 1996
    Mauricio Plaza, 1994, 1995, 1996
 
-   The file_date routine is mostly from GNU's fileutils package,
-   written by Richard Stallman and David MacKenzie.
-
    This file is part of the Midnight Commander.
 
    The Midnight Commander is free software: you can redistribute it
@@ -211,6 +208,7 @@ mc_util_write_backup_content (const char *from_file_name, const char *to_file_na
         int ret2;
         ret2 = fflush (backup_fd);
         ret2 = fclose (backup_fd);
+        (void) ret2;
     }
     g_free (contents);
     return ret1;
@@ -1066,6 +1064,7 @@ list_append_unique (GList * list, char *text)
 
             g_free (lc_link->data);
             tmp = g_list_remove_link (list, lc_link);
+            (void) tmp;
             g_list_free_1 (lc_link);
         }
         lc_link = newlink;

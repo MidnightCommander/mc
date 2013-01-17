@@ -20,7 +20,6 @@ libmcfilemanager_la_SOURCES = \
 	layout.c layout.h \
 	midnight.h midnight.c \
 	mountlist.c mountlist.h \
-	option.c option.h \
 	panelize.c panelize.h \
 	panel.c panel.h \
 	tree.c tree.h \

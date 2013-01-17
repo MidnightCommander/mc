@@ -380,6 +380,7 @@ background_attention (int fd, void *closure)
         g_free (data[i]);
 
     repaint_screen ();
+    (void) ret;
     return 0;
 }
 
@@ -409,6 +410,7 @@ parent_call_header (void *routine, int argc, enum ReturnType type, FileOpContext
 
     if (have_ctx)
         ret = write (parent_fd, ctx, sizeof (FileOpContext));
+    (void) ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -436,6 +438,7 @@ parent_va_call (void *routine, gpointer data, int argc, va_list ap)
     if (ctx)
         ret = read (from_parent_fd, ctx, sizeof (FileOpContext));
 
+    (void) ret;
     return i;
 }
 

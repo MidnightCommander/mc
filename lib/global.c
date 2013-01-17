@@ -94,6 +94,8 @@ mc_global_t mc_global = {
         .subshell_pty = 0,
 #endif /* !ENABLE_SUBSHELL */
 
+        .shell = NULL,
+
         .xterm_flag = FALSE,
         .disable_x11 = FALSE,
         .slow_terminal = FALSE,

@@ -2033,7 +2033,6 @@ edit_get_word_from_pos (const WEdit * edit, off_t start_pos, off_t * start, gsiz
     off_t word_start;
     long cut_len = 0;
     GString *match_expr;
-    unsigned char *bufpos;
     int c1, c2;
 
     for (word_start = start_pos; word_start != 0; word_start--, cut_len++)
@@ -2045,7 +2044,6 @@ edit_get_word_from_pos (const WEdit * edit, off_t start_pos, off_t * start, gsiz
             break;
     }
 
-    bufpos = &edit->buffers1[word_start >> S_EDIT_BUF_SIZE][word_start & M_EDIT_BUF_SIZE];
     match_expr = g_string_sized_new (16);
 
     do
