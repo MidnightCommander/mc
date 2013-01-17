@@ -488,10 +488,12 @@ make_symlink (FileOpContext * ctx, const char *src_path, const char *dst_path)
  */
 
 static FileProgressStatus
-do_compute_dir_size (const vfs_path_t * dirname_vpath, const void *ui,
+do_compute_dir_size (const vfs_path_t * dirname_vpath, void *ui,
                      compute_dir_size_callback cback, size_t * dir_count, size_t * ret_marked,
                      uintmax_t * ret_total, gboolean compute_symlinks)
 {
+    static unsigned short int update_ui_count = 0;
+
     int res;
     struct stat s;
     DIR *dir;
@@ -519,7 +521,7 @@ do_compute_dir_size (const vfs_path_t * dirname_vpath, const void *ui,
     if (dir == NULL)
         return ret;
 
-    while ((dirent = mc_readdir (dir)) != NULL)
+    while (ret == FILE_CONT && (dirent = mc_readdir (dir)) != NULL)
     {
         vfs_path_t *tmp_vpath;
 
@@ -527,10 +529,6 @@ do_compute_dir_size (const vfs_path_t * dirname_vpath, const void *ui,
             continue;
         if (strcmp (dirent->d_name, "..") == 0)
             continue;
-
-        ret = (cback != NULL) ? cback (ui, dirname_vpath) : FILE_CONT;
-        if (ret != FILE_CONT)
-            break;
 
         tmp_vpath = vfs_path_append_new (dirname_vpath, dirent->d_name, NULL);
 
@@ -542,18 +540,23 @@ do_compute_dir_size (const vfs_path_t * dirname_vpath, const void *ui,
                 ret =
                     do_compute_dir_size (tmp_vpath, ui, cback, dir_count, ret_marked, ret_total,
                                          compute_symlinks);
+                if (ret == FILE_CONT)
+                    ret =
+                        (cback == NULL) ? FILE_CONT : cback (ui, tmp_vpath, *dir_count, *ret_total);
             }
             else
             {
                 (*ret_marked)++;
                 *ret_total += (uintmax_t) s.st_size;
+
+                update_ui_count++;
+                if ((update_ui_count & 31) == 0)
+                    ret =
+                        (cback == NULL) ? FILE_CONT : cback (ui, tmp_vpath, *dir_count, *ret_total);
             }
         }
 
         vfs_path_free (tmp_vpath);
-
-        if (ret != FILE_CONT)
-            break;
     }
 
     mc_closedir (dir);
@@ -1260,8 +1263,7 @@ panel_get_file (WPanel * panel)
  */
 
 static FileProgressStatus
-panel_compute_totals (const WPanel * panel, const void *ui,
-                      compute_dir_size_callback cback,
+panel_compute_totals (const WPanel * panel, void *ui, compute_dir_size_callback cback,
                       size_t * ret_marked, uintmax_t * ret_total, gboolean compute_symlinks)
 {
     int i;
@@ -2530,19 +2532,19 @@ compute_dir_size_create_ui (gboolean allow_skip)
     ui = g_new (ComputeDirSizeUI, 1);
 
     ui_width = max (COLS / 2, b_width + 6);
-    ui->dlg = create_dlg (TRUE, 0, 0, 7, ui_width, dialog_colors, NULL, NULL, NULL,
+    ui->dlg = create_dlg (TRUE, 0, 0, 8, ui_width, dialog_colors, NULL, NULL, NULL,
                           _("Directory scanning"), DLG_CENTER);
 
     ui->dirname = label_new (2, 3, "");
     add_widget (ui->dlg, ui->dirname);
-    add_widget (ui->dlg, hline_new (3, -1, -1));
+    add_widget (ui->dlg, hline_new (4, -1, -1));
     b1_x = (ui_width - b_width) / 2;
-    b = WIDGET (button_new (4, b1_x, FILE_ABORT, NORMAL_BUTTON, b1_name, NULL));
+    b = WIDGET (button_new (5, b1_x, FILE_ABORT, NORMAL_BUTTON, b1_name, NULL));
     add_widget (ui->dlg, b);
     if (allow_skip)
     {
         add_widget (ui->dlg,
-                    button_new (4, b1_x + 1 + b1_width, FILE_SKIP, NORMAL_BUTTON, b2_name, NULL));
+                    button_new (5, b1_x + 1 + b1_width, FILE_SKIP, NORMAL_BUTTON, b2_name, NULL));
         dlg_select_widget (b);
     }
 
@@ -2573,19 +2575,24 @@ compute_dir_size_destroy_ui (ComputeDirSizeUI * ui)
 /* --------------------------------------------------------------------------------------------- */
 
 FileProgressStatus
-compute_dir_size_update_ui (const void *ui, const vfs_path_t * dirname_vpath)
+compute_dir_size_update_ui (void *ui, const vfs_path_t * dirname_vpath, size_t dir_count,
+                            uintmax_t total_size)
 {
-    const ComputeDirSizeUI *this = (const ComputeDirSizeUI *) ui;
+    ComputeDirSizeUI *this = (ComputeDirSizeUI *) ui;
     int c;
     Gpm_Event event;
     char *dirname;
+    char buffer[BUF_1K];
 
     if (ui == NULL)
         return FILE_CONT;
 
     dirname = vfs_path_to_str (dirname_vpath);
-    label_set_text (this->dirname, str_trunc (dirname, WIDGET (this->dlg)->cols - 6));
+    g_snprintf (buffer, sizeof (buffer), _("%s\nDirectories: %zd, total size: %s"),
+                str_trunc (dirname, WIDGET (this->dlg)->cols - 6), dir_count,
+                size_trunc_sep (total_size, panels_options.kilobyte_si));
     g_free (dirname);
+    label_set_text (this->dirname, buffer);
 
     event.x = -1;               /* Don't show the GPM cursor */
     c = tty_get_event (&event, FALSE, FALSE);
@@ -2618,7 +2625,7 @@ compute_dir_size_update_ui (const void *ui, const vfs_path_t * dirname_vpath)
  */
 
 FileProgressStatus
-compute_dir_size (const vfs_path_t * dirname_vpath, const void *ui, compute_dir_size_callback cback,
+compute_dir_size (const vfs_path_t * dirname_vpath, void *ui, compute_dir_size_callback cback,
                   size_t * ret_marked, uintmax_t * ret_total, gboolean compute_symlinks)
 {
     size_t dir_count = 0;
