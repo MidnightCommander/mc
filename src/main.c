@@ -432,6 +432,8 @@ main (int argc, char *argv[])
             int ret2;
             ret1 = write (last_wd_fd, last_wd_string, strlen (last_wd_string));
             ret2 = close (last_wd_fd);
+            (void) ret1;
+            (void) ret2;
         }
     }
     g_free (last_wd_string);

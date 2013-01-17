@@ -145,6 +145,7 @@ static void __attribute__ ((noreturn)) die (void)
     unsigned char zero = 0;
     ssize_t ret;
     ret = write (1, &zero, 1);
+    (void) ret;
     exit (3);
 }
 

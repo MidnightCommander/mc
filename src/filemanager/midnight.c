@@ -898,6 +898,7 @@ setup_dummy_mc (void)
     setup_mc ();
     vpath = vfs_path_from_str (d);
     ret = mc_chdir (vpath);
+    (void) ret;
     vfs_path_free (vpath);
     g_free (d);
 }

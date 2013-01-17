@@ -253,6 +253,7 @@ fish_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, c
         size_t ret;
         ret = fwrite (str, strlen (str), 1, logfile);
         ret = fflush (logfile);
+        (void) ret;
     }
 
     tty_enable_interrupt_key ();

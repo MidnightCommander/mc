@@ -373,6 +373,7 @@ do_external_panelize (char *command)
             int ret;
             panel_set_cwd (current_panel, PATH_SEP_STR);
             ret = chdir (PATH_SEP_STR);
+            (void) ret;
         }
     }
     else

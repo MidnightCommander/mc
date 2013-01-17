@@ -243,13 +243,12 @@ vfs_path_url_split (vfs_path_element_t * path_element, const char *path)
 {
     char *pcopy;
     const char *pend;
-    char *dir, *colon, *inner_colon, *at, *rest;
+    char *colon, *inner_colon, *at, *rest;
 
     path_element->port = 0;
 
     pcopy = g_strdup (path);
     pend = pcopy + strlen (pcopy);
-    dir = pcopy;
 
     /* search for any possible user */
     at = strrchr (pcopy, '@');

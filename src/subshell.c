@@ -255,6 +255,7 @@ init_subshell_child (const char *pty_name)
     {
         int ret;
         ret = chdir (mc_config_get_home_dir ());        /* FIXME? What about when we re-run the subshell? */
+        (void) ret;
     }
 
     /* Set MC_SID to prevent running one mc from another */

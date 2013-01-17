@@ -130,6 +130,7 @@ show_console_contents_linux (int starty, unsigned char begin_line, unsigned char
 
     /* Read the value of the mc_global.tty.console_flag */
     ret = read (pipefd2[0], &message, 1);
+    (void) ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -179,6 +180,7 @@ handle_console_linux (console_action_t action)
                 status = close (pipefd1[1]);
                 status = close (pipefd2[0]);
                 ret = waitpid (cons_saver_pid, &status, 0);
+                (void) ret;
             }
         }
         else
@@ -247,6 +249,7 @@ handle_console_linux (console_action_t action)
             close (pipefd2[0]);
             ret = waitpid (cons_saver_pid, &status, 0);
             mc_global.tty.console_flag = '\0';
+            (void) ret;
         }
         break;
     default:

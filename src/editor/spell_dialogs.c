@@ -73,7 +73,6 @@ spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word
     WDialog *sug_dlg;
     WListbox *sug_list;
     int max_btn_len = 0;
-    int add_len;
     int replace_len;
     int skip_len;
     int cancel_len;
@@ -92,7 +91,6 @@ spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word
         ypos -= sug_dlg_h;
 
     add_btn = button_new (5, 28, B_ADD_WORD, NORMAL_BUTTON, _("&Add word"), 0);
-    add_len = button_get_len (add_btn);
     replace_btn = button_new (7, 28, B_ENTER, NORMAL_BUTTON, _("&Replace"), 0);
     replace_len = button_get_len (replace_btn);
     skip_btn = button_new (9, 28, B_SKIP_WORD, NORMAL_BUTTON, _("&Skip"), 0);

@@ -249,12 +249,10 @@ START_TEST (test_vfs_parse_ls_lga_reorder)
 {
     size_t filepos = 0;
     struct vfs_s_entry *ent1, *ent2, *ent3;
-    int i;
 
     vfs_parse_ls_lga_init();
 
     ent1 = vfs_s_generate_entry (&vfs_test_ops1, NULL, vfs_root_inode, 0);
-    i = ent1->ino->st.st_nlink;
     if (! vfs_parse_ls_lga ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09      build_root1",
     &ent1->ino->st, &ent1->name, &ent1->ino->linkname, &filepos))
     {
@@ -266,7 +264,6 @@ START_TEST (test_vfs_parse_ls_lga_reorder)
 
 
     ent2 = vfs_s_generate_entry (&vfs_test_ops1, NULL, vfs_root_inode, 0);
-    i = ent2->ino->st.st_nlink;
     if (! vfs_parse_ls_lga ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09    build_root2",
     &ent2->ino->st, &ent2->name, &ent2->ino->linkname, &filepos))
     {
@@ -277,7 +274,6 @@ START_TEST (test_vfs_parse_ls_lga_reorder)
     vfs_s_insert_entry (&vfs_test_ops1, vfs_root_inode, ent2);
 
     ent3 = vfs_s_generate_entry (&vfs_test_ops1, NULL, vfs_root_inode, 0);
-    i = ent3->ino->st.st_nlink;
     if (! vfs_parse_ls_lga ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09 ..",
     &ent3->ino->st, &ent3->name, &ent3->ino->linkname, &filepos))
     {
