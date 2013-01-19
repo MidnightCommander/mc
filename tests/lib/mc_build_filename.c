@@ -32,61 +32,100 @@
 #include "lib/strutil.h"
 #include "lib/util.h"
 
+/* --------------------------------------------------------------------------------------------- */
 
+/* @Before */
 static void
 setup (void)
 {
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* @After */
 static void
 teardown (void)
 {
 }
 
 /* --------------------------------------------------------------------------------------------- */
-#define check_mc_build_filename( inargs, etalon ) \
-{ \
-    result = mc_build_filename inargs; \
-    fail_unless( strcmp (result, etalon) == 0, \
-    "\nactial  (%s) not equal to\netalon (%s)", result, etalon); \
-    g_free (result); \
+
+static char *
+run_mc_build_filename (int iteration)
+{
+    switch (iteration)
+    {
+    case 0:
+        return mc_build_filename ("test", "path", NULL);
+    case 1:
+        return mc_build_filename ("/test", "path/", NULL);
+    case 2:
+        return mc_build_filename ("/test", "pa/th", NULL);
+    case 3:
+        return mc_build_filename ("/test", "#vfsprefix:", "path  ", NULL);
+    case 4:
+        return mc_build_filename ("/test", "vfsprefix://", "path  ", NULL);
+    case 5:
+        return mc_build_filename ("/test", "vfs/../prefix:///", "p\\///ath", NULL);
+    case 6:
+        return mc_build_filename ("/test", "path", "..", "/test", "path/", NULL);
+    case 7:
+        return mc_build_filename ("", "path", NULL);
+    case 8:
+        return mc_build_filename ("", "/path", NULL);
+    case 9:
+        return mc_build_filename ("path", "", NULL);
+    case 10:
+        return mc_build_filename ("/path", "", NULL);
+    case 11:
+        return mc_build_filename ("pa", "", "th", NULL);
+    case 12:
+        return mc_build_filename ("/pa", "", "/th", NULL);
+    }
+    return NULL;
 }
 
+/* @DataSource("test_mc_build_filename_ds") */
 /* *INDENT-OFF* */
-START_TEST (test_mc_build_filename)
+static const struct test_mc_build_filename_ds
+{
+    const char *expected_result;
+} test_mc_build_filename_ds[] =
+{
+    {"test/path"},
+    {"/test/path"},
+    {"/test/pa/th"},
+    {"/test/#vfsprefix:/path  "},
+    {"/test/vfsprefix://path  "},
+    {"/test/prefix://p\\/ath"},
+    {"/test/test/path"},
+    {"path"},
+    {"path"},
+    {"path"},
+    {"/path"},
+    {"pa/th"},
+    {"/pa/th"},
+};
+/* *INDENT-ON* */
+
+/* @Test(dataSource = "test_mc_build_filename_ds") */
+/* *INDENT-OFF* */
+START_PARAMETRIZED_TEST (test_mc_build_filename, test_mc_build_filename_ds)
 /* *INDENT-ON* */
 {
-    char *result;
+    /* given */
+    char *actual_result;
 
-    check_mc_build_filename (("test", "path", NULL), "test/path");
+    /* when */
+    actual_result = run_mc_build_filename (_i);
 
-    check_mc_build_filename (("/test", "path/", NULL), "/test/path");
+    /* then */
+    mctest_assert_str_eq (actual_result, data->expected_result);
 
-    check_mc_build_filename (("/test", "pa/th", NULL), "/test/pa/th");
-
-    check_mc_build_filename (("/test", "#vfsprefix:", "path  ", NULL), "/test/#vfsprefix:/path  ");
-
-    check_mc_build_filename (("/test", "vfsprefix://", "path  ", NULL), "/test/vfsprefix://path  ");
-
-    check_mc_build_filename (("/test", "vfs/../prefix:///", "p\\///ath", NULL),
-                             "/test/prefix://p\\/ath");
-
-    check_mc_build_filename (("/test", "path", "..", "/test", "path/", NULL), "/test/test/path");
-
-    check_mc_build_filename (("", "path", NULL), "path");
-
-    check_mc_build_filename (("", "/path", NULL), "path");
-
-    check_mc_build_filename (("path", "", NULL), "path");
-
-    check_mc_build_filename (("/path", "", NULL), "/path");
-
-    check_mc_build_filename (("pa", "", "th", NULL), "pa/th");
-
-    check_mc_build_filename (("/pa", "", "/th", NULL), "/pa/th");
+    g_free (actual_result);
 }
 /* *INDENT-OFF* */
-END_TEST
+END_PARAMETRIZED_TEST
 /* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
@@ -103,7 +142,7 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_test (tc_core, test_mc_build_filename);
+    mctest_add_parameterized_test (tc_core, test_mc_build_filename, test_mc_build_filename_ds);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);

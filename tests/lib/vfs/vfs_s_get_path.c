@@ -40,6 +40,8 @@
 struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
 struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 test1_mock_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
                          const vfs_path_element_t * vpath_element)
@@ -47,9 +49,7 @@ test1_mock_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
     struct vfs_s_inode *root;
     char *spath = vfs_path_to_str (vpath);
 
-    fail_unless (strcmp ("/" ETALON_VFS_URL_NAME ARCH_NAME, spath) == 0,
-                 "etalon(%s) doesn't equal to actual(%s)", "/" ETALON_VFS_URL_NAME ARCH_NAME,
-                 spath);
+    mctest_assert_str_eq (spath, "/" ETALON_VFS_URL_NAME ARCH_NAME);
 
     super->name = g_strdup (spath);
     super->data = g_new (char *, 1);
@@ -58,6 +58,8 @@ test1_mock_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
     g_free (spath);
     return 0;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 test1_mock_archive_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *super,
@@ -75,6 +77,9 @@ test1_mock_archive_same (const vfs_path_element_t * vpath_element, struct vfs_s_
     return 1;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* @Before */
 static void
 setup (void)
 {
@@ -108,6 +113,9 @@ setup (void)
     vfs_register_class (&vfs_test_ops3);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* @After */
 static void
 teardown (void)
 {
@@ -124,25 +132,25 @@ vfs_die (const char *m)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* @Test */
 /* *INDENT-OFF* */
 START_TEST (test_vfs_s_get_path)
 /* *INDENT-ON* */
 {
+    /* given */
     struct vfs_s_super *archive;
-
     const char *result;
+
+    /* when */
     vfs_path_t *vpath =
         vfs_path_from_str_flags ("/" ETALON_VFS_NAME ARCH_NAME "#test1:/" ETALON_PATH,
                                  VPF_USE_DEPRECATED_PARSER);
 
     result = vfs_s_get_path (vpath, &archive, 0);
 
-    fail_unless (strcmp (ETALON_PATH, result) == 0,
-                 "expected(%s) doesn't equal to actual(%s)", ETALON_PATH, result);
-
-    fail_unless (strcmp ("/" ETALON_VFS_URL_NAME ARCH_NAME, archive->name) == 0,
-                 "expected(%s) doesn't equal to actual(%s)", "/" ETALON_VFS_URL_NAME ARCH_NAME,
-                 archive->name);
+    /* then */
+    mctest_assert_str_eq (result, ETALON_PATH);
+    mctest_assert_str_eq (archive->name, "/" ETALON_VFS_URL_NAME ARCH_NAME);
 
     g_free (vpath);
 

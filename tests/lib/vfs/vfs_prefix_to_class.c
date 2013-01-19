@@ -36,6 +36,7 @@
 struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
 struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
 
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 test_which (struct vfs_class *me, const char *path)
@@ -49,16 +50,17 @@ test_which (struct vfs_class *me, const char *path)
     return -1;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* @Before */
 static void
 setup (void)
 {
-
     str_init_strings (NULL);
 
     vfs_init ();
     init_localfs ();
     vfs_setup_work_dir ();
-
 
     test_subclass1.flags = VFS_S_REMOTE;
     vfs_s_init_class (&vfs_test_ops1, &test_subclass1);
@@ -80,6 +82,9 @@ setup (void)
 
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* @After */
 static void
 teardown (void)
 {
@@ -89,44 +94,69 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* @DataSource("test_vfs_prefix_to_class_ds") */
 /* *INDENT-OFF* */
-START_TEST (test_vfs_prefix_to_class_valid)
+static const struct test_vfs_prefix_to_class_ds
+{
+    const char *input_string;
+    const struct vfs_class *expected_result;
+} test_vfs_prefix_to_class_ds[] =
+{
+    { /* 0 */
+        "test_1:",
+        &vfs_test_ops1
+    },
+    { /* 1 */
+        "test_2:",
+        &vfs_test_ops1
+    },
+    { /* 2 */
+        "test_3:",
+        &vfs_test_ops1
+    },
+    { /* 3 */
+        "test_4:",
+        &vfs_test_ops1
+    },
+    { /* 4 */
+        "test2:",
+        &vfs_test_ops2
+    },
+    { /* 5 */
+        "test3:",
+        &vfs_test_ops3
+    },
+    {
+        "test1:",
+        NULL
+    },
+    { /* 6 */
+        "test_5:",
+        NULL
+    },
+    { /* 7 */
+        "test4:",
+        NULL
+    },
+};
+/* *INDENT-ON* */
+
+/* @Test(dataSource = "test_vfs_prefix_to_class_ds") */
+/* *INDENT-OFF* */
+START_PARAMETRIZED_TEST (test_vfs_prefix_to_class, test_vfs_prefix_to_class_ds)
 /* *INDENT-ON* */
 {
-    fail_unless (vfs_prefix_to_class ((char *) "test_1:") == &vfs_test_ops1,
-                 "'test_1:' doesn't transform to vfs_test_ops1");
-    fail_unless (vfs_prefix_to_class ((char *) "test_2:") == &vfs_test_ops1,
-                 "'test_2:' doesn't transform to vfs_test_ops1");
-    fail_unless (vfs_prefix_to_class ((char *) "test_3:") == &vfs_test_ops1,
-                 "'test_3:' doesn't transform to vfs_test_ops1");
-    fail_unless (vfs_prefix_to_class ((char *) "test_4:") == &vfs_test_ops1,
-                 "'test_4:' doesn't transform to vfs_test_ops1");
+    /* given */
+    struct vfs_class *actual_result;
 
-    fail_unless (vfs_prefix_to_class ((char *) "test2:") == &vfs_test_ops2,
-                 "'test2:' doesn't transform to vfs_test_ops2");
+    /* when */
+    actual_result = vfs_prefix_to_class ((char *) data->input_string);
 
-    fail_unless (vfs_prefix_to_class ((char *) "test3:") == &vfs_test_ops3,
-                 "'test3:' doesn't transform to vfs_test_ops3");
+    /* then */
+    mctest_assert_ptr_eq (actual_result, data->expected_result);
 }
 /* *INDENT-OFF* */
-END_TEST
-/* *INDENT-ON* */
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* *INDENT-OFF* */
-START_TEST (test_vfs_prefix_to_class_invalid)
-/* *INDENT-ON* */
-{
-    fail_unless (vfs_prefix_to_class ((char *) "test1:") == NULL,
-                 "'test1:' doesn't transform to NULL");
-    fail_unless (vfs_prefix_to_class ((char *) "test_5:") == NULL,
-                 "'test_5:' doesn't transform to NULL");
-    fail_unless (vfs_prefix_to_class ((char *) "test4:") == NULL,
-                 "'test4:' doesn't transform to NULL");
-}
-/* *INDENT-OFF* */
-END_TEST
+END_PARAMETRIZED_TEST
 /* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
@@ -143,8 +173,7 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_test (tc_core, test_vfs_prefix_to_class_valid);
-    tcase_add_test (tc_core, test_vfs_prefix_to_class_invalid);
+    mctest_add_parameterized_test (tc_core, test_vfs_prefix_to_class, test_vfs_prefix_to_class_ds);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);

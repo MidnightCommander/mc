@@ -45,7 +45,9 @@ static struct vfs_s_super *vfs_test_super;
 
 void message (int flags, const char *title, const char *text, ...);
 
+/* --------------------------------------------------------------------------------------------- */
 
+/* @Before */
 static void
 setup (void)
 {
@@ -71,6 +73,9 @@ setup (void)
     vfs_root_entry = vfs_s_new_entry (&vfs_test_ops1, "/", vfs_root_inode);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* @After */
 static void
 teardown (void)
 {
@@ -79,7 +84,9 @@ teardown (void)
     str_uninit_strings ();
 }
 
+/* --------------------------------------------------------------------------------------------- */
 
+/* @Mock */
 void
 message (int flags, const char *title, const char *text, ...)
 {
@@ -98,198 +105,211 @@ message (int flags, const char *title, const char *text, ...)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#define check_one_stat_field(etalon_stat, test_stat, field, format, input_str)\
-{\
-    fail_unless(etalon_stat.field == test_stat.field,\
-    "\ninput string: %s\netalon."#field" = " format "\nactual."#field" = " format "\n",\
-    input_str, etalon_stat.field, test_stat.field);\
-}
-
-#define check_stat_struct(etalon_stat, test_stat, input_str)\
-{\
-    check_one_stat_field(etalon_stat, test_stat, st_dev, "%zu", input_str);\
-    check_one_stat_field(etalon_stat, test_stat, st_ino, "%zu", input_str);\
-    check_one_stat_field(etalon_stat, test_stat, st_ino, "%zu", input_str);\
-    check_one_stat_field(etalon_stat, test_stat, st_mode, "%04x", input_str);\
-    check_one_stat_field(etalon_stat, test_stat, st_uid, "%u", input_str);\
-    check_one_stat_field(etalon_stat, test_stat, st_gid, "%u", input_str);\
-    check_one_stat_field(etalon_stat, test_stat, st_rdev, "%zu", input_str);\
-    check_one_stat_field(etalon_stat, test_stat, st_size, "%zd", input_str);\
-    check_one_stat_field(etalon_stat, test_stat, st_blksize, "%zu", input_str);\
-    check_one_stat_field(etalon_stat, test_stat, st_blocks, "%zd", input_str);\
-\
-/* FIXME: these commented checks are related to time zone! \
-    check_one_stat_field(etalon_stat, test_stat, st_atime, "%zd", input_str);\
-    check_one_stat_field(etalon_stat, test_stat, st_mtime, "%zd", input_str);\
-    check_one_stat_field(etalon_stat, test_stat, st_ctime, "%zd", input_str);\
-*/\
-}
-
 static void
-check_vfs_parse_ls_lga_call (const char *input_data, int etalon_result,
-                             const char *etalon_filename, const char *etalon_linkname,
-                             struct stat etalon_stat, size_t * filepos)
+fill_stat_struct (struct stat *etalon_stat, int iterator)
 {
-    static struct stat test_stat;
-    char *filename = NULL;
-    char *linkname = NULL;
-    gboolean result;
-
-    result = vfs_parse_ls_lga (input_data, &test_stat, &filename, &linkname, filepos);
-
-    fail_if (result != etalon_result,
-             "\nactual result: %d\netalon result: %d\n", result, etalon_result);
-
-    fail_unless ((filename != NULL && etalon_filename != NULL
-                  && strcmp (filename, etalon_filename) == 0) || (filename == NULL
-                                                                  && etalon_filename == filename),
-                 "\nactual filename '%s'\netalon filename '%s'", filename, etalon_filename);
-
-    fail_unless ((linkname != NULL && etalon_linkname != NULL
-                  && strcmp (linkname, etalon_linkname) == 0) || (linkname == NULL
-                                                                  && etalon_linkname == linkname),
-                 "\nactual linkname '%s'\netalon linkname '%s'", linkname, etalon_linkname);
-
-    check_stat_struct (etalon_stat, test_stat, input_data);
+    switch (iterator)
+    {
+    case 0:
+        etalon_stat->st_dev = 0;
+        etalon_stat->st_ino = 0;
+        etalon_stat->st_mode = 0x41fd;
+        etalon_stat->st_nlink = 10;
+        etalon_stat->st_uid = 500;
+        etalon_stat->st_gid = 500;
+        etalon_stat->st_rdev = 0;
+        etalon_stat->st_size = 4096;
+        etalon_stat->st_blksize = 512;
+        etalon_stat->st_blocks = 8;
+        etalon_stat->st_atime = 1308838140;
+        etalon_stat->st_mtime = 1308838140;
+        etalon_stat->st_ctime = 1308838140;
+        break;
+    case 1:
+        etalon_stat->st_dev = 0;
+        etalon_stat->st_ino = 0;
+        etalon_stat->st_mode = 0xa1ff;
+        etalon_stat->st_nlink = 10;
+        etalon_stat->st_uid = 500;
+        etalon_stat->st_gid = 500;
+        etalon_stat->st_rdev = 0;
+        etalon_stat->st_size = 11;
+        etalon_stat->st_blksize = 512;
+        etalon_stat->st_blocks = 1;
+        etalon_stat->st_atime = 1268431200;
+        etalon_stat->st_mtime = 1268431200;
+        etalon_stat->st_ctime = 1268431200;
+        break;
+    case 2:
+        etalon_stat->st_dev = 0;
+        etalon_stat->st_ino = 0;
+        etalon_stat->st_mode = 0x41fd;
+        etalon_stat->st_nlink = 10;
+        etalon_stat->st_uid = 500;
+        etalon_stat->st_gid = 500;
+        etalon_stat->st_rdev = 0;
+        etalon_stat->st_size = 4096;
+        etalon_stat->st_blksize = 512;
+        etalon_stat->st_blocks = 8;
+        etalon_stat->st_atime = 1308838140;
+        etalon_stat->st_mtime = 1308838140;
+        etalon_stat->st_ctime = 1308838140;
+        break;
+    case 3:
+        etalon_stat->st_dev = 0;
+        etalon_stat->st_ino = 0;
+        etalon_stat->st_mode = 0x41fd;
+        etalon_stat->st_nlink = 10;
+        etalon_stat->st_uid = 500;
+        etalon_stat->st_gid = 500;
+        etalon_stat->st_rdev = 0;
+        etalon_stat->st_size = 4096;
+        etalon_stat->st_blksize = 512;
+        etalon_stat->st_blocks = 8;
+        etalon_stat->st_atime = 1308838140;
+        etalon_stat->st_mtime = 1308838140;
+        etalon_stat->st_ctime = 1308838140;
+        break;
+    }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* @DataSource("test_vfs_parse_ls_lga_ds") */
 /* *INDENT-OFF* */
-START_TEST (test_vfs_parse_ls_lga)
+static const struct test_vfs_parse_ls_lga_ds
+{
+    const char *input_string;
+    int expected_result;
+    const char *expected_filename;
+    const char *expected_linkname;
+    const size_t expected_filepos;
+} test_vfs_parse_ls_lga_ds[] =
+{
+    { /* 0. */
+        "drwxrwxr-x   10 500      500          4096 Jun 23 17:09 build_root",
+        1,
+        "build_root",
+        NULL,
+        0
+    },
+    { /* 1. */
+        "lrwxrwxrwx    1 500      500            11 Mar 13  2010 COPYING -> doc/COPYING",
+        1,
+        "COPYING",
+        "doc/COPYING",
+        0
+    },
+    { /* 2. */
+        "drwxrwxr-x   10 500      500          4096 Jun 23 17:09 ..",
+        1,
+        "..",
+        NULL,
+        0
+    },
+    { /* 3. */
+        "drwxrwxr-x   10 500      500          4096 Jun 23 17:09   build_root",
+        1,
+        "build_root",
+        NULL,
+        0
+    },
+};
+/* *INDENT-ON* */
+
+/* @Test(dataSource = "test_vfs_parse_ls_lga_ds") */
+/* *INDENT-OFF* */
+START_PARAMETRIZED_TEST (test_vfs_parse_ls_lga, test_vfs_parse_ls_lga_ds)
 /* *INDENT-ON* */
 
 {
+    /* given */
     size_t filepos = 0;
-
     struct stat etalon_stat;
-
-    etalon_stat.st_dev = 0;
-    etalon_stat.st_ino = 0;
-    etalon_stat.st_mode = 0x41fd;
-    etalon_stat.st_nlink = 10;
-    etalon_stat.st_uid = 500;
-    etalon_stat.st_gid = 500;
-    etalon_stat.st_rdev = 0;
-    etalon_stat.st_size = 4096;
-    etalon_stat.st_blksize = 512;
-    etalon_stat.st_blocks = 8;
-    etalon_stat.st_atime = 1308838140;
-    etalon_stat.st_mtime = 1308838140;
-    etalon_stat.st_ctime = 1308838140;
+    static struct stat test_stat;
+    char *filename = NULL;
+    char *linkname = NULL;
+    gboolean actual_result;
 
     vfs_parse_ls_lga_init ();
 
-    check_vfs_parse_ls_lga_call
-        ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09 build_root", 1, "build_root",
-         NULL, etalon_stat, NULL);
+    etalon_stat.st_blocks = 0;
+    etalon_stat.st_size = 0;
+    etalon_stat.st_mode = 0;
+    fill_stat_struct (&etalon_stat, _i);
 
-    etalon_stat.st_dev = 0;
-    etalon_stat.st_ino = 0;
-    etalon_stat.st_mode = 0xa1ff;
-    etalon_stat.st_nlink = 10;
-    etalon_stat.st_uid = 500;
-    etalon_stat.st_gid = 500;
-    etalon_stat.st_rdev = 0;
-    etalon_stat.st_size = 11;
-    etalon_stat.st_blksize = 512;
-    etalon_stat.st_blocks = 1;
-    etalon_stat.st_atime = 1268431200;
-    etalon_stat.st_mtime = 1268431200;
-    etalon_stat.st_ctime = 1268431200;
+    /* when */
+    actual_result =
+        vfs_parse_ls_lga (data->input_string, &test_stat, &filename, &linkname, &filepos);
 
-    check_vfs_parse_ls_lga_call
-        ("lrwxrwxrwx    1 500      500            11 Mar 13  2010 COPYING -> doc/COPYING", 1,
-         "COPYING", "doc/COPYING", etalon_stat, NULL);
+    /* then */
+    mctest_assert_int_eq (actual_result, data->expected_result);
 
-    etalon_stat.st_dev = 0;
-    etalon_stat.st_ino = 0;
-    etalon_stat.st_mode = 0x41fd;
-    etalon_stat.st_nlink = 10;
-    etalon_stat.st_uid = 500;
-    etalon_stat.st_gid = 500;
-    etalon_stat.st_rdev = 0;
-    etalon_stat.st_size = 4096;
-    etalon_stat.st_blksize = 512;
-    etalon_stat.st_blocks = 8;
-    etalon_stat.st_atime = 1308838140;
-    etalon_stat.st_mtime = 1308838140;
-    etalon_stat.st_ctime = 1308838140;
+    mctest_assert_str_eq (filename, data->expected_filename);
+    mctest_assert_str_eq (linkname, data->expected_linkname);
 
-    check_vfs_parse_ls_lga_call ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09 ..",
-                                 1, "..", NULL, etalon_stat, &filepos);
+    mctest_assert_int_eq (etalon_stat.st_dev, test_stat.st_dev);
+    mctest_assert_int_eq (etalon_stat.st_ino, test_stat.st_ino);
+    mctest_assert_int_eq (etalon_stat.st_mode, test_stat.st_mode);
+    mctest_assert_int_eq (etalon_stat.st_uid, test_stat.st_uid);
+    mctest_assert_int_eq (etalon_stat.st_gid, test_stat.st_gid);
+    mctest_assert_int_eq (etalon_stat.st_rdev, test_stat.st_rdev);
+    mctest_assert_int_eq (etalon_stat.st_size, test_stat.st_size);
+    mctest_assert_int_eq (etalon_stat.st_blksize, test_stat.st_blksize);
+    mctest_assert_int_eq (etalon_stat.st_blocks, test_stat.st_blocks);
 
-
-    etalon_stat.st_dev = 0;
-    etalon_stat.st_ino = 0;
-    etalon_stat.st_mode = 0x41fd;
-    etalon_stat.st_nlink = 10;
-    etalon_stat.st_uid = 500;
-    etalon_stat.st_gid = 500;
-    etalon_stat.st_rdev = 0;
-    etalon_stat.st_size = 4096;
-    etalon_stat.st_blksize = 512;
-    etalon_stat.st_blocks = 8;
-    etalon_stat.st_atime = 1308838140;
-    etalon_stat.st_mtime = 1308838140;
-    etalon_stat.st_ctime = 1308838140;
-
-    check_vfs_parse_ls_lga_call
-        ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09   build_root", 1, "build_root",
-         NULL, etalon_stat, &filepos);
-
+    /* FIXME: these commented checks are related to time zone!
+       mctest_assert_int_eq (etalon_stat.st_atime, test_stat.st_atime);
+       mctest_assert_int_eq (etalon_stat.st_mtime, test_stat.st_mtime);
+       mctest_assert_int_eq (etalon_stat.st_ctime, test_stat.st_ctime);
+     */
 }
 /* *INDENT-OFF* */
-END_TEST
+END_PARAMETRIZED_TEST
 /* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* @Test */
 /* *INDENT-OFF* */
 START_TEST (test_vfs_parse_ls_lga_reorder)
 /* *INDENT-ON* */
 {
+    /* given */
     size_t filepos = 0;
     struct vfs_s_entry *ent1, *ent2, *ent3;
 
     vfs_parse_ls_lga_init ();
 
+    /* init ent1 */
     ent1 = vfs_s_generate_entry (&vfs_test_ops1, NULL, vfs_root_inode, 0);
-    if (!vfs_parse_ls_lga
+    vfs_parse_ls_lga
         ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09      build_root1", &ent1->ino->st,
-         &ent1->name, &ent1->ino->linkname, &filepos))
-    {
-        fail ("An error occured while parse ls output");
-        return;
-    }
+         &ent1->name, &ent1->ino->linkname, &filepos);
     vfs_s_store_filename_leading_spaces (ent1, filepos);
     vfs_s_insert_entry (&vfs_test_ops1, vfs_root_inode, ent1);
 
 
+    /* init ent2 */
     ent2 = vfs_s_generate_entry (&vfs_test_ops1, NULL, vfs_root_inode, 0);
-    if (!vfs_parse_ls_lga ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09    build_root2",
-                           &ent2->ino->st, &ent2->name, &ent2->ino->linkname, &filepos))
-    {
-        fail ("An error occured while parse ls output");
-        return;
-    }
+    vfs_parse_ls_lga ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09    build_root2",
+                      &ent2->ino->st, &ent2->name, &ent2->ino->linkname, &filepos);
     vfs_s_store_filename_leading_spaces (ent2, filepos);
     vfs_s_insert_entry (&vfs_test_ops1, vfs_root_inode, ent2);
 
+    /* init ent3 */
     ent3 = vfs_s_generate_entry (&vfs_test_ops1, NULL, vfs_root_inode, 0);
-    if (!vfs_parse_ls_lga ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09 ..",
-                           &ent3->ino->st, &ent3->name, &ent3->ino->linkname, &filepos))
-    {
-        fail ("An error occured while parse ls output");
-        return;
-    }
+    vfs_parse_ls_lga ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09 ..",
+                      &ent3->ino->st, &ent3->name, &ent3->ino->linkname, &filepos);
     vfs_s_store_filename_leading_spaces (ent3, filepos);
     vfs_s_insert_entry (&vfs_test_ops1, vfs_root_inode, ent3);
 
+    /* when */
     vfs_s_normalize_filename_leading_spaces (vfs_root_inode, vfs_parse_ls_lga_get_final_spaces ());
 
-    fail_unless (strcmp (ent1->name, "     build_root1") == 0, "\nactual '%s'\nnot equal to '%s'\n",
-                 ent1->name, "     build_root1");
-    fail_unless (strcmp (ent2->name, "   build_root2") == 0, "\nactual '%s'\nnot equal to '%s'\n",
-                 ent2->name, "   build_root2");
+    /* then */
+    mctest_assert_str_eq (ent1->name, "     build_root1");
+    mctest_assert_str_eq (ent2->name, "   build_root2");
 }
 /* *INDENT-OFF* */
 END_TEST
@@ -308,17 +328,13 @@ END_TEST
     vfs_s_insert_entry (&vfs_test_ops1, vfs_root_inode, ent[ent_index]);\
     \
 }
-#define fail_unless_ent(ent_index, etalon_str){\
-    fail_unless(\
-        strcmp(ent[ent_index]->name, etalon_str) == 0,\
-        "\nactual '%s'\nnot equal to '%s'\n", ent[ent_index]->name, etalon_str\
-    );\
-}
 
+/* @Test */
 /* *INDENT-OFF* */
 START_TEST (test_vfs_parse_ls_lga_unaligned)
 /* *INDENT-ON* */
 {
+    /* given */
     size_t filepos = 0;
     struct vfs_s_entry *ent[4];
 
@@ -330,12 +346,14 @@ START_TEST (test_vfs_parse_ls_lga_unaligned)
     parce_one_line (3,
                     "drwxrwxr-x      10   500        500             4096   Jun   23   17:09   build_root 0");
 
+    /* when */
     vfs_s_normalize_filename_leading_spaces (vfs_root_inode, vfs_parse_ls_lga_get_final_spaces ());
 
-    fail_unless_ent (0, "build_root1");
-    fail_unless_ent (1, "   build_root2");
-    fail_unless_ent (3, " build_root 0");
-
+    /* then */
+    mctest_assert_str_eq (ent[0]->name, "build_root1");
+    mctest_assert_str_eq (ent[0]->name, "build_root1");
+    mctest_assert_str_eq (ent[1]->name, "   build_root2");
+    mctest_assert_str_eq (ent[3]->name, " build_root 0");
 }
 /* *INDENT-OFF* */
 END_TEST
@@ -355,7 +373,7 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_test (tc_core, test_vfs_parse_ls_lga);
+    mctest_add_parameterized_test (tc_core, test_vfs_parse_ls_lga, test_vfs_parse_ls_lga_ds);
     tcase_add_test (tc_core, test_vfs_parse_ls_lga_reorder);
     tcase_add_test (tc_core, test_vfs_parse_ls_lga_unaligned);
     /* *********************************** */
