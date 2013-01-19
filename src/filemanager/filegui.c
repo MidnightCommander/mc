@@ -666,6 +666,12 @@ check_progress_buttons (FileOpContext * ctx)
     switch (ui->op_dlg->ret_value)
     {
     case FILE_SKIP:
+        if (ctx->suspended)
+        {
+            /* redraw dialog in case of Skip after Suspend */
+            place_progress_buttons (ui->op_dlg, FALSE);
+            dlg_redraw (ui->op_dlg);
+        }
         ctx->suspended = FALSE;
         return FILE_SKIP;
     case B_CANCEL:
