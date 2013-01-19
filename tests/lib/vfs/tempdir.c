@@ -1,11 +1,11 @@
 /*
    lib/vfs - manipulations with temp files and  dirs
 
-   Copyright (C) 2012
+   Copyright (C) 2012, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2012
+   Slava Zanko <slavazanko@gmail.com>, 2012, 2013
 
    This file is part of the Midnight Commander.
 
@@ -25,11 +25,7 @@
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
-#include <config.h>
-
-#include <check.h>
-
-#include "lib/global.c"
+#include "tests/mctest.h"
 
 #ifndef HAVE_CHARSET
 #define HAVE_CHARSET 1

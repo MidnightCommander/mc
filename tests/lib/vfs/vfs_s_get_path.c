@@ -1,11 +1,11 @@
 /*
    lib/vfs - test vfs_s_get_path() function
 
-   Copyright (C) 2011
+   Copyright (C) 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2011
+   Slava Zanko <slavazanko@gmail.com>, 2011, 2013
 
    This file is part of the Midnight Commander.
 
@@ -25,11 +25,8 @@
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
-#include <config.h>
+#include "tests/mctest.h"
 
-#include <check.h>
-
-#include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/vfs/direntry.c"   /* for testing static methods  */
 

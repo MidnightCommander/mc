@@ -1,11 +1,12 @@
 /*
    src/filemanager - examine_cd() function testing
 
-   Copyright (C) 2012
+   Copyright (C) 2012, 2013
    The Free Software Foundation, Inc.
 
    Written by:
    Andrew Borodin <aborodin@vmail.ru>, 2012
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -25,13 +26,10 @@
 
 #define TEST_SUITE_NAME "/src/filemanager"
 
-#include <config.h>
-
-#include <check.h>
+#include "tests/mctest.h"
 
 #include <stdio.h>
 
-#include "lib/global.h"
 #include "lib/vfs/path.h"
 #include "src/filemanager/layout.h"
 #include "src/filemanager/midnight.h"

@@ -1,11 +1,11 @@
 /*
    lib/vfs - test vfs_parse_ls_lga() functionality
 
-   Copyright (C) 2011
+   Copyright (C) 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2011
+   Slava Zanko <slavazanko@gmail.com>, 2011, 2013
 
    This file is part of the Midnight Commander.
 
@@ -25,12 +25,10 @@
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
-#include <config.h>
+#include "tests/mctest.h"
 
-#include <check.h>
 #include <stdio.h>
 
-#include "lib/global.h"
 #include "lib/vfs/utilvfs.h"
 #include "lib/vfs/xdirentry.h"
 #include "lib/strutil.h"

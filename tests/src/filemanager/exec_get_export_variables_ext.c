@@ -1,11 +1,11 @@
 /*
    src/filemanager - filemanager functions
 
-   Copyright (C) 2011
+   Copyright (C) 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2012
+   Slava Zanko <slavazanko@gmail.com>, 2011, 2013
 
    This file is part of the Midnight Commander.
 
@@ -25,11 +25,8 @@
 
 #define TEST_SUITE_NAME "/src/filemanager"
 
-#include <config.h>
+#include "tests/mctest.h"
 
-#include <check.h>
-
-#include "lib/global.h"
 #include "src/vfs/local/local.c"
 
 #include "src/filemanager/midnight.c"
@@ -102,7 +99,7 @@ export MC_EXT_SELECTED\n\
 MC_EXT_ONLYTAGGED=\"tagged\\ file1.txt tagged\\ file2.txt \"\n\
 export MC_EXT_ONLYTAGGED\n";
 
-    g_assert_cmpstr (actual_string, ==, expected_string);
+    mctest_assert_str_eq (actual_string, expected_string);
 
     g_free (actual_string);
 }

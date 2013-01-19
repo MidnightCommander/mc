@@ -1,9 +1,10 @@
 /* lib/vfs - test vfs_path_t manipulation functions
 
-   Copyright (C) 2011 Free Software Foundation, Inc.
+   Copyright (C) 2011, 2013
+   The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2011
+   Slava Zanko <slavazanko@gmail.com>, 2011, 2013
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License
@@ -22,9 +23,7 @@
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
-#include <check.h>
-
-#include "lib/global.c"
+#include "tests/mctest.h"
 
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"

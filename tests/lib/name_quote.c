@@ -1,11 +1,11 @@
 /*
    lib/vfs - Quote file names
 
-   Copyright (C) 2011
+   Copyright (C) 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2011
+   Slava Zanko <slavazanko@gmail.com>, 2011, 2013
 
    This file is part of the Midnight Commander.
 
@@ -25,20 +25,19 @@
 
 #define TEST_SUITE_NAME "/lib/util"
 
-#include <config.h>
+#include "tests/mctest.h"
 
-#include <check.h>
-
-#include "lib/global.h"
 #include "lib/util.h"
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* @Before */
 static void
 setup (void)
 {
 }
 
+/* @After */
 static void
 teardown (void)
 {
@@ -46,8 +45,9 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* @DataSource("data_source1") */
 /* *INDENT-OFF* */
-static const struct data_source1_struct
+static const struct data_source1
 {
     gboolean input_quote_percent;
     const char *input_string;
@@ -60,30 +60,31 @@ static const struct data_source1_struct
 };
 /* *INDENT-ON* */
 
+/* @Test(dataSource = "data_source1") */
 /* *INDENT-OFF* */
-START_TEST (quote_percent_test)
+START_PARAMETRIZED_TEST (quote_percent_test, data_source1)
 /* *INDENT-ON* */
 {
     /* given */
     char *actual_string;
-    const struct data_source1_struct test_data = data_source1[_i];
 
     /* when */
-    actual_string = name_quote (test_data.input_string, test_data.input_quote_percent);
+    actual_string = name_quote (data->input_string, data->input_quote_percent);
 
     /* then */
-    g_assert_cmpstr (actual_string, ==, test_data.expected_string);
+    mctest_assert_str_eq (actual_string, data->expected_string);
 
     g_free (actual_string);
 }
 /* *INDENT-OFF* */
-END_TEST
+END_PARAMETRIZED_TEST
 /* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* @DataSource("data_source2") */
 /* *INDENT-OFF* */
-static const struct data_source2_struct
+static const struct data_source2
 {
     const char *input_string;
 
@@ -102,24 +103,24 @@ static const struct data_source2_struct
 };
 /* *INDENT-ON* */
 
+/* @Test(dataSource = "data_source2") */
 /* *INDENT-OFF* */
-START_TEST (name_quote_test)
+START_PARAMETRIZED_TEST (name_quote_test, data_source2)
 /* *INDENT-ON* */
 {
     /* given */
     char *actual_string;
-    const struct data_source2_struct test_data = data_source2[_i];
 
     /* when */
-    actual_string = name_quote (test_data.input_string, FALSE);
+    actual_string = name_quote (data->input_string, FALSE);
 
     /* then */
-    g_assert_cmpstr (actual_string, ==, test_data.expected_string);
+    mctest_assert_str_eq (actual_string, data->expected_string);
 
     g_free (actual_string);
 }
 /* *INDENT-OFF* */
-END_TEST
+END_PARAMETRIZED_TEST
 /* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
@@ -136,11 +137,8 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_loop_test (tc_core, quote_percent_test, 0,
-                         sizeof (data_source1) / sizeof (data_source1[0]));
-
-    tcase_add_loop_test (tc_core, name_quote_test, 0,
-                         sizeof (data_source2) / sizeof (data_source2[0]));
+    mctest_add_parameterized_test (tc_core, quote_percent_test, data_source1);
+    mctest_add_parameterized_test (tc_core, name_quote_test, data_source2);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);

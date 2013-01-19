@@ -1,11 +1,11 @@
 /*
    libmc - checks for processing esc sequences in replace string
 
-   Copyright (C) 2011
+   Copyright (C) 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2011
+   Slava Zanko <slavazanko@gmail.com>, 2011, 2013
 
    This file is part of the Midnight Commander.
 
@@ -25,9 +25,7 @@
 
 #define TEST_SUITE_NAME "lib/search/regex"
 
-#include <config.h>
-
-#include <check.h>
+#include "tests/mctest.h"
 
 #include "regex.c"              /* for testing static functions */
 

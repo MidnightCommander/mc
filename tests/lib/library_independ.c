@@ -1,11 +1,11 @@
 /*
    libmc - check if library is independ to $(topsrc)/src directory
 
-   Copyright (C) 2011
+   Copyright (C) 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2011
+   Slava Zanko <slavazanko@gmail.com>, 2011, 2013
 
    This file is part of the Midnight Commander.
 
@@ -25,11 +25,7 @@
 
 #define TEST_SUITE_NAME "lib/library_independ"
 
-#include <config.h>
-
-#include <check.h>
-
-#include "lib/global.h"
+#include "tests/mctest.h"
 
 /* --------------------------------------------------------------------------------------------- */
 

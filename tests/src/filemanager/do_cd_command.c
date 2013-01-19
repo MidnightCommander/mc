@@ -1,11 +1,11 @@
 /*
    src/filemanager - tests for do_cd_command() function
 
-   Copyright (C) 2011
+   Copyright (C) 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2011
+   Slava Zanko <slavazanko@gmail.com>, 2011, 2013
 
    This file is part of the Midnight Commander.
 
@@ -25,11 +25,8 @@
 
 #define TEST_SUITE_NAME "/src/filemanager"
 
-#include <config.h>
+#include "tests/mctest.h"
 
-#include <check.h>
-
-#include "lib/global.h"
 #include "src/vfs/local/local.c"
 
 #include "src/filemanager/command.c"
@@ -128,11 +125,10 @@ static const struct test_empty_mean_home_ds
 
 /* @Test(dataSource = "test_empty_mean_home_ds") */
 /* *INDENT-OFF* */
-START_TEST (test_empty_mean_home)
+START_PARAMETRIZED_TEST (test_empty_mean_home, test_empty_mean_home_ds)
 /* *INDENT-ON* */
 {
     /* given */
-
     get_current_type__return_value = view_listing;
     do_cd__return_value = TRUE;
     mc_config_get_home_dir__return_value = "/home/test";
@@ -141,7 +137,7 @@ START_TEST (test_empty_mean_home)
     {
         char *input_command;
 
-        input_command = g_strdup (test_empty_mean_home_ds[_i].command);
+        input_command = g_strdup (data->command);
         do_cd_command (input_command);
         g_free (input_command);
     }
@@ -150,13 +146,13 @@ START_TEST (test_empty_mean_home)
         char *actual_path;
 
         actual_path = vfs_path_to_str (do_cd__new_dir_vpath__captured);
-        g_assert_cmpstr (mc_config_get_home_dir__return_value, ==, actual_path);
+        mctest_assert_str_eq (mc_config_get_home_dir__return_value, actual_path);
         g_free (actual_path);
     }
-    ck_assert_int_eq (do_cd__cd_type__captured, cd_parse_command);
+    mctest_assert_int_eq (do_cd__cd_type__captured, cd_parse_command);
 }
 /* *INDENT-OFF* */
-END_TEST
+END_PARAMETRIZED_TEST
 /* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
@@ -173,8 +169,7 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_loop_test (tc_core, test_empty_mean_home, 0,
-                         sizeof (test_empty_mean_home_ds) / sizeof (test_empty_mean_home_ds[0]));
+    mctest_add_parameterized_test (tc_core, test_empty_mean_home, test_empty_mean_home_ds);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);

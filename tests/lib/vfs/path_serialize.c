@@ -1,11 +1,11 @@
 /*
    lib/vfs - vfs_path_t serialize/deserialize functions
 
-   Copyright (C) 2011
+   Copyright (C) 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2011
+   Slava Zanko <slavazanko@gmail.com>, 2011, 2013
 
    This file is part of the Midnight Commander.
 
@@ -25,11 +25,7 @@
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
-#include <config.h>
-
-#include <check.h>
-
-#include "lib/global.c"
+#include "tests/mctest.h"
 
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
