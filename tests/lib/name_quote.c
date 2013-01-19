@@ -21,7 +21,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "/lib/util"
 
@@ -32,6 +32,7 @@
 #include "lib/global.h"
 #include "lib/util.h"
 
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 setup (void)
@@ -45,6 +46,7 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* *INDENT-OFF* */
 static const struct data_source1_struct
 {
     gboolean input_quote_percent;
@@ -56,8 +58,11 @@ static const struct data_source1_struct
     { TRUE, "%%", "%%%%"},
     { FALSE, "%%", "%%"},
 };
+/* *INDENT-ON* */
 
+/* *INDENT-OFF* */
 START_TEST (quote_percent_test)
+/* *INDENT-ON* */
 {
     /* given */
     char *actual_string;
@@ -71,10 +76,13 @@ START_TEST (quote_percent_test)
 
     g_free (actual_string);
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* *INDENT-OFF* */
 static const struct data_source2_struct
 {
     const char *input_string;
@@ -92,8 +100,11 @@ static const struct data_source2_struct
     {"~", "\\~"},
     {"blabla~", "blabla~"},
 };
+/* *INDENT-ON* */
 
+/* *INDENT-OFF* */
 START_TEST (name_quote_test)
+/* *INDENT-ON* */
 {
     /* given */
     char *actual_string;
@@ -107,7 +118,9 @@ START_TEST (name_quote_test)
 
     g_free (actual_string);
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -123,9 +136,11 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_loop_test (tc_core, quote_percent_test, 0, sizeof(data_source1)/sizeof(data_source1[0]));
+    tcase_add_loop_test (tc_core, quote_percent_test, 0,
+                         sizeof (data_source1) / sizeof (data_source1[0]));
 
-    tcase_add_loop_test (tc_core, name_quote_test, 0, sizeof(data_source2)/sizeof(data_source2[0]));
+    tcase_add_loop_test (tc_core, name_quote_test, 0,
+                         sizeof (data_source2) / sizeof (data_source2[0]));
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);

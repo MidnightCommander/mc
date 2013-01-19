@@ -21,7 +21,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "/lib"
 
@@ -55,37 +55,42 @@ teardown (void)
     g_free (result); \
 }
 
+/* *INDENT-OFF* */
 START_TEST (test_mc_build_filename)
+/* *INDENT-ON* */
 {
     char *result;
 
-    check_mc_build_filename(("test", "path", NULL), "test/path");
+    check_mc_build_filename (("test", "path", NULL), "test/path");
 
-    check_mc_build_filename(("/test", "path/", NULL), "/test/path");
+    check_mc_build_filename (("/test", "path/", NULL), "/test/path");
 
-    check_mc_build_filename(("/test", "pa/th", NULL), "/test/pa/th");
+    check_mc_build_filename (("/test", "pa/th", NULL), "/test/pa/th");
 
-    check_mc_build_filename(("/test", "#vfsprefix:", "path  ", NULL), "/test/#vfsprefix:/path  ");
+    check_mc_build_filename (("/test", "#vfsprefix:", "path  ", NULL), "/test/#vfsprefix:/path  ");
 
-    check_mc_build_filename(("/test", "vfsprefix://", "path  ", NULL), "/test/vfsprefix://path  ");
+    check_mc_build_filename (("/test", "vfsprefix://", "path  ", NULL), "/test/vfsprefix://path  ");
 
-    check_mc_build_filename(("/test", "vfs/../prefix:///", "p\\///ath", NULL), "/test/prefix://p\\/ath");
+    check_mc_build_filename (("/test", "vfs/../prefix:///", "p\\///ath", NULL),
+                             "/test/prefix://p\\/ath");
 
-    check_mc_build_filename(("/test", "path", "..", "/test", "path/", NULL), "/test/test/path");
+    check_mc_build_filename (("/test", "path", "..", "/test", "path/", NULL), "/test/test/path");
 
-    check_mc_build_filename(("", "path", NULL), "path");
+    check_mc_build_filename (("", "path", NULL), "path");
 
-    check_mc_build_filename(("", "/path", NULL), "path");
+    check_mc_build_filename (("", "/path", NULL), "path");
 
-    check_mc_build_filename(("path", "", NULL), "path");
+    check_mc_build_filename (("path", "", NULL), "path");
 
-    check_mc_build_filename(("/path", "", NULL), "/path");
+    check_mc_build_filename (("/path", "", NULL), "/path");
 
-    check_mc_build_filename(("pa", "", "th", NULL), "pa/th");
+    check_mc_build_filename (("pa", "", "th", NULL), "pa/th");
 
-    check_mc_build_filename(("/pa", "", "/th", NULL), "/pa/th");
+    check_mc_build_filename (("/pa", "", "/th", NULL), "/pa/th");
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

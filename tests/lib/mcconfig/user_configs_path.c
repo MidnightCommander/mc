@@ -21,7 +21,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "lib/mcconfig"
 #include <config.h>
@@ -40,13 +40,13 @@
 #define HOME_DIR "/home/testuser"
 
 #ifdef MC_HOMEDIR_XDG
-#    define CONF_MAIN HOME_DIR PATH_SEP_STR ".config"
-#    define CONF_DATA HOME_DIR PATH_SEP_STR ".local" PATH_SEP_STR "share"
-#    define CONF_CACHE HOME_DIR PATH_SEP_STR ".cache"
+#define CONF_MAIN HOME_DIR PATH_SEP_STR ".config"
+#define CONF_DATA HOME_DIR PATH_SEP_STR ".local" PATH_SEP_STR "share"
+#define CONF_CACHE HOME_DIR PATH_SEP_STR ".cache"
 #else
-#    define CONF_MAIN HOME_DIR
-#    define CONF_DATA CONF_MAIN
-#    define CONF_CACHE CONF_MAIN
+#define CONF_MAIN HOME_DIR
+#define CONF_DATA CONF_MAIN
+#define CONF_CACHE CONF_MAIN
 #endif
 
 
@@ -59,7 +59,7 @@ setup (void)
     g_setenv ("XDG_DATA_HOME", CONF_DATA, TRUE);
     g_setenv ("XDG_CACHE_HOME", CONF_CACHE, TRUE);
 #endif
-    str_init_strings("UTF-8");
+    str_init_strings ("UTF-8");
     vfs_init ();
     init_localfs ();
 }
@@ -68,7 +68,7 @@ static void
 teardown (void)
 {
     vfs_shut ();
-    str_uninit_strings();
+    str_uninit_strings ();
 }
 
 #define path_fail_unless(conf_dir, conf_name) {\
@@ -77,7 +77,9 @@ teardown (void)
     g_free (result); \
 }
 /* --------------------------------------------------------------------------------------------- */
+/* *INDENT-OFF* */
 START_TEST (user_configs_path_test)
+/* *INDENT-ON* */
 {
     char *result;
 
@@ -110,7 +112,9 @@ START_TEST (user_configs_path_test)
     path_fail_unless (CONF_CACHE, EDIT_BLOCK_FILE);
 
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

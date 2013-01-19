@@ -21,7 +21,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
@@ -65,26 +65,30 @@ teardown (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* *INDENT-OFF* */
 START_TEST (test_mc_tmpdir)
+/* *INDENT-ON* */
 {
     const char *tmpdir;
     const char *env_tmpdir;
 
-    tmpdir = mc_tmpdir();
-    fail_unless (
-        g_file_test (tmpdir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR),
-        "\nNo such directory: %s\n", tmpdir
-    );
+    tmpdir = mc_tmpdir ();
+    fail_unless (g_file_test (tmpdir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR),
+                 "\nNo such directory: %s\n", tmpdir);
 
     env_tmpdir = g_getenv ("MC_TMPDIR");
-    fail_unless (
-        strcmp (env_tmpdir, tmpdir) == 0,
-        "\nenv_tmpdir=%s\n    tmpdir=%s\n", env_tmpdir, tmpdir
-    );
+    fail_unless (strcmp (env_tmpdir, tmpdir) == 0,
+                 "\nenv_tmpdir=%s\n    tmpdir=%s\n", env_tmpdir, tmpdir);
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* *INDENT-OFF* */
 START_TEST (test_mc_mkstemps)
+/* *INDENT-ON* */
 {
     vfs_path_t *pname_vpath = NULL;
     char *pname;
@@ -100,20 +104,18 @@ START_TEST (test_mc_mkstemps)
     vfs_path_free (pname_vpath);
     close (fd);
 
-    fail_unless (
-        g_file_test (pname, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR),
-        "\nNo such file: %s\n", pname
-    );
-    unlink(pname);
+    fail_unless (g_file_test (pname, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR),
+                 "\nNo such file: %s\n", pname);
+    unlink (pname);
 
-    begin_pname = g_build_filename (mc_tmpdir(), "mctest-", NULL);
-    fail_unless (
-        strncmp(pname, begin_pname, strlen(begin_pname)) == 0,
-        "\nstart of %s should be equal to %s\n", pname, begin_pname
-    );
+    begin_pname = g_build_filename (mc_tmpdir (), "mctest-", NULL);
+    fail_unless (strncmp (pname, begin_pname, strlen (begin_pname)) == 0,
+                 "\nstart of %s should be equal to %s\n", pname, begin_pname);
     g_free (pname);
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

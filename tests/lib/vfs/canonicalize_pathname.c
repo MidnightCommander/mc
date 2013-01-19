@@ -21,7 +21,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
@@ -65,7 +65,9 @@ teardown (void)
     g_free(path); \
 }
 
+/* *INDENT-OFF* */
 START_TEST (test_canonicalize_path)
+/* *INDENT-ON* */
 {
     char *path;
     static struct vfs_s_subclass test_subclass;
@@ -95,10 +97,12 @@ START_TEST (test_canonicalize_path)
     check_canonicalize ("some_server/..", ".");
 
     /* Collapse "/.." with the previous part of path */
-    check_canonicalize ("/some_server/ww/some_server/../ww/../some_server/..//ww/some_server/ww", "/some_server/ww/ww/some_server/ww");
+    check_canonicalize ("/some_server/ww/some_server/../ww/../some_server/..//ww/some_server/ww",
+                        "/some_server/ww/ww/some_server/ww");
 
     /* URI style */
-    check_canonicalize ("/some_server/ww/ftp://user:pass@host.net/path/", "/some_server/ww/ftp://user:pass@host.net/path");
+    check_canonicalize ("/some_server/ww/ftp://user:pass@host.net/path/",
+                        "/some_server/ww/ftp://user:pass@host.net/path");
 
     check_canonicalize ("/some_server/ww/ftp://user:pass@host.net/path/../../", "/some_server/ww");
 
@@ -106,7 +110,9 @@ START_TEST (test_canonicalize_path)
 
     check_canonicalize ("ftp://user/../../", "..");
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

@@ -21,7 +21,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "/lib"
 
@@ -62,47 +62,63 @@ teardown (void)
     } \
 }
 
+/* *INDENT-OFF* */
 START_TEST (test_serialize_deserialize_str)
+/* *INDENT-ON* */
 {
     GError *error = NULL;
     char *actual;
 
 
-    actual = mc_serialize_str('s', "some test string", &error);
+    actual = mc_serialize_str ('s', "some test string", &error);
 
     if (actual == NULL)
     {
-        fail("actual value is NULL!\nError code is '%d'; error message is '%s'", error->code, error->message);
-        g_clear_error(&error);
+        fail ("actual value is NULL!\nError code is '%d'; error message is '%s'", error->code,
+              error->message);
+        g_clear_error (&error);
         return;
     }
-    fail_unless (strcmp(actual,"s16:some test string") == 0, "Actual value(%s) doesn't equal to etalon(s16:some test string)", actual);
-    g_free(actual);
+    fail_unless (strcmp (actual, "s16:some test string") == 0,
+                 "Actual value(%s) doesn't equal to etalon(s16:some test string)", actual);
+    g_free (actual);
 
-    actual = mc_deserialize_str('s', NULL, &error);
-    deserialize_check_incorrect( -1, "mc_serialize_str(): Input data is NULL or empty." );
+    actual = mc_deserialize_str ('s', NULL, &error);
+    deserialize_check_incorrect (-1, "mc_serialize_str(): Input data is NULL or empty.");
 
-    actual = mc_deserialize_str('s', "incorrect string", &error);
-    deserialize_check_incorrect( -2, "mc_serialize_str(): String prefix doesn't equal to 's'" );
+    actual = mc_deserialize_str ('s', "incorrect string", &error);
+    deserialize_check_incorrect (-2, "mc_serialize_str(): String prefix doesn't equal to 's'");
 
-    actual = mc_deserialize_str('s', "s12345string without delimiter", &error);
-    deserialize_check_incorrect( -3, "mc_serialize_str(): Length delimiter ':' doesn't exists" );
+    actual = mc_deserialize_str ('s', "s12345string without delimiter", &error);
+    deserialize_check_incorrect (-3, "mc_serialize_str(): Length delimiter ':' doesn't exists");
 
-    actual = mc_deserialize_str('s', "s1234567890123456789012345678901234567890123456789012345678901234567890:too big number", &error);
-    deserialize_check_incorrect( -3, "mc_serialize_str(): Too big string length" );
+    actual =
+        mc_deserialize_str ('s',
+                            "s1234567890123456789012345678901234567890123456789012345678901234567890:too big number",
+                            &error);
+    deserialize_check_incorrect (-3, "mc_serialize_str(): Too big string length");
 
-    actual = mc_deserialize_str('s', "s500:actual string length less that specified length", &error);
-    deserialize_check_incorrect( -3, "mc_serialize_str(): Specified data length (500) is greater than actual data length (47)" );
+    actual =
+        mc_deserialize_str ('s', "s500:actual string length less that specified length", &error);
+    deserialize_check_incorrect (-3,
+                                 "mc_serialize_str(): Specified data length (500) is greater than actual data length (47)");
 
-    actual = mc_deserialize_str('s', "s10:actual string length great that specified length", &error);
-    fail_unless (actual != NULL && strcmp(actual, "actual str") == 0, "actual (%s) doesn't equal to etalon(actual str)", actual);
-    g_free(actual);
+    actual =
+        mc_deserialize_str ('s', "s10:actual string length great that specified length", &error);
+    fail_unless (actual != NULL
+                 && strcmp (actual, "actual str") == 0,
+                 "actual (%s) doesn't equal to etalon(actual str)", actual);
+    g_free (actual);
 
-    actual = mc_deserialize_str('s', "s21:The right test string", &error);
-    fail_unless (actual != NULL && strcmp(actual, "The right test string") == 0, "actual (%s) doesn't equal to etalon(The right test string)", actual);
-    g_free(actual);
+    actual = mc_deserialize_str ('s', "s21:The right test string", &error);
+    fail_unless (actual != NULL
+                 && strcmp (actual, "The right test string") == 0,
+                 "actual (%s) doesn't equal to etalon(The right test string)", actual);
+    g_free (actual);
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -111,7 +127,9 @@ END_TEST
    "g6:group3p6:param1v11:::bla-bla::p6:param2v31:bla-:p1:w:v2:12:g3:123:bla-bla\n" \
    "g6:group4p6:param1v5:falsep6:param2v6:654321"
 
+/* *INDENT-OFF* */
 START_TEST (test_serialize_config)
+/* *INDENT-ON* */
 {
     mc_config_t *test_data;
     GError *error = NULL;
@@ -136,15 +154,19 @@ START_TEST (test_serialize_config)
 
     if (actual == NULL)
     {
-        fail("actual value is NULL!\nError code is '%d'; error message is '%s'", error->code, error->message);
-        g_clear_error(&error);
+        fail ("actual value is NULL!\nError code is '%d'; error message is '%s'", error->code,
+              error->message);
+        g_clear_error (&error);
         return;
     }
 
-    fail_unless(strcmp(actual, etalon_str) == 0, "Not equal:\nactual (%s)\netalon (%s)", actual, etalon_str);
-    g_free(actual);
+    fail_unless (strcmp (actual, etalon_str) == 0, "Not equal:\nactual (%s)\netalon (%s)", actual,
+                 etalon_str);
+    g_free (actual);
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -164,72 +186,82 @@ END_TEST
     } \
 }
 
+/* *INDENT-OFF* */
 START_TEST (test_deserialize_config)
+/* *INDENT-ON* */
 {
     mc_config_t *actual;
     GError *error = NULL;
     char *actual_value;
 
     actual = mc_deserialize_config ("g123error in group name", &error);
-    deserialize_check_incorrect( -3,
-        "mc_deserialize_config() at 1: mc_serialize_str(): Length delimiter ':' doesn't exists");
+    deserialize_check_incorrect (-3,
+                                 "mc_deserialize_config() at 1: mc_serialize_str(): Length delimiter ':' doesn't exists");
 
     actual = mc_deserialize_config ("p6:param1v10:some valuep6:param2v11:some value ", &error);
-    deserialize_check_incorrect( -2,
-        "mc_deserialize_config() at 1: mc_serialize_str(): String prefix doesn't equal to 'g'");
+    deserialize_check_incorrect (-2,
+                                 "mc_deserialize_config() at 1: mc_serialize_str(): String prefix doesn't equal to 'g'");
 
     actual = mc_deserialize_config ("g6:group1v10:some valuep6:param2v11:some value ", &error);
-    deserialize_check_incorrect( -2,
-        "mc_deserialize_config() at 10: mc_serialize_str(): String prefix doesn't equal to 'p'");
+    deserialize_check_incorrect (-2,
+                                 "mc_deserialize_config() at 10: mc_serialize_str(): String prefix doesn't equal to 'p'");
 
     actual = mc_deserialize_config ("g6:group1p6000:param2v11:some value ", &error);
-    deserialize_check_incorrect( -3,
-        "mc_deserialize_config() at 10: mc_serialize_str(): Specified data length (6000) is greater than actual data length (21)");
+    deserialize_check_incorrect (-3,
+                                 "mc_deserialize_config() at 10: mc_serialize_str(): Specified data length (6000) is greater than actual data length (21)");
 
     actual = mc_deserialize_config (etalon_str, &error);
 
     if (actual == NULL)
     {
-        fail("actual value is NULL!\nError code is '%d'; error message is '%s'", error->code, error->message);
-        g_clear_error(&error);
+        fail ("actual value is NULL!\nError code is '%d'; error message is '%s'", error->code,
+              error->message);
+        g_clear_error (&error);
         return;
     }
 
-    actual_value = mc_config_get_string_raw(actual, "group1", "param1", "");
-    fail_unless( strcmp(actual_value, "some value") == 0,
-        "group1->param1(%s) should be equal to 'some value'", actual_value);
-    g_free(actual_value);
+    actual_value = mc_config_get_string_raw (actual, "group1", "param1", "");
+    fail_unless (strcmp (actual_value, "some value") == 0,
+                 "group1->param1(%s) should be equal to 'some value'", actual_value);
+    g_free (actual_value);
 
-    actual_value = mc_config_get_string(actual, "group1", "param2", "");
-    fail_unless( strcmp(actual_value, "some value ") == 0,
-        "group1->param2(%s) should be equal to 'some value '", actual_value);
-    g_free(actual_value);
+    actual_value = mc_config_get_string (actual, "group1", "param2", "");
+    fail_unless (strcmp (actual_value, "some value ") == 0,
+                 "group1->param2(%s) should be equal to 'some value '", actual_value);
+    g_free (actual_value);
 
-    fail_unless( mc_config_get_bool(actual, "group2", "param1", FALSE) == TRUE,
-        "group2->param1(FALSE) should be equal to TRUE");
+    fail_unless (mc_config_get_bool (actual, "group2", "param1", FALSE) == TRUE,
+                 "group2->param1(FALSE) should be equal to TRUE");
 
-    fail_unless( mc_config_get_int(actual, "group2", "param2", 0) == 123456,
-        "group2->param2(%d) should be equal to 123456", mc_config_get_int(actual, "group2", "param2", 0));
+    fail_unless (mc_config_get_int (actual, "group2", "param2", 0) == 123456,
+                 "group2->param2(%d) should be equal to 123456", mc_config_get_int (actual,
+                                                                                    "group2",
+                                                                                    "param2", 0));
 
-    actual_value = mc_config_get_string_raw(actual, "group3", "param1", "");
-    fail_unless( strcmp(actual_value, "::bla-bla::") == 0,
-        "group3->param1(%s) should be equal to '::bla-bla::'", actual_value);
-    g_free(actual_value);
+    actual_value = mc_config_get_string_raw (actual, "group3", "param1", "");
+    fail_unless (strcmp (actual_value, "::bla-bla::") == 0,
+                 "group3->param1(%s) should be equal to '::bla-bla::'", actual_value);
+    g_free (actual_value);
 
-    actual_value = mc_config_get_string(actual, "group3", "param2", "");
-    fail_unless( strcmp(actual_value, "bla-:p1:w:v2:12:g3:123:bla-bla\n") == 0,
-        "group3->param2(%s) should be equal to 'bla-:p1:w:v2:12:g3:123:bla-bla\n'", actual_value);
-    g_free(actual_value);
+    actual_value = mc_config_get_string (actual, "group3", "param2", "");
+    fail_unless (strcmp (actual_value, "bla-:p1:w:v2:12:g3:123:bla-bla\n") == 0,
+                 "group3->param2(%s) should be equal to 'bla-:p1:w:v2:12:g3:123:bla-bla\n'",
+                 actual_value);
+    g_free (actual_value);
 
-    fail_unless( mc_config_get_bool(actual, "group4", "param1", TRUE) == FALSE,
-        "group4->param1(TRUE) should be equal to FALSE");
+    fail_unless (mc_config_get_bool (actual, "group4", "param1", TRUE) == FALSE,
+                 "group4->param1(TRUE) should be equal to FALSE");
 
-    fail_unless( mc_config_get_int(actual, "group4", "param2", 0) == 654321,
-        "group4->param2(%d) should be equal to 654321", mc_config_get_int(actual, "group4", "param2", 0));
+    fail_unless (mc_config_get_int (actual, "group4", "param2", 0) == 654321,
+                 "group4->param2(%d) should be equal to 654321", mc_config_get_int (actual,
+                                                                                    "group4",
+                                                                                    "param2", 0));
 
     mc_config_deinit (actual);
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

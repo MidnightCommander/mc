@@ -21,7 +21,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
@@ -94,8 +94,8 @@ message (int flags, const char *title, const char *text, ...)
     va_start (ap, text);
     p = g_strdup_vprintf (text, ap);
     va_end (ap);
-    printf("message(): %s\n", p);
-    g_free(p);
+    printf ("message(): %s\n", p);
+    g_free (p);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -127,8 +127,10 @@ message (int flags, const char *title, const char *text, ...)
 */\
 }
 
-static void check_vfs_parse_ls_lga_call(const char *input_data, int etalon_result,
-const char *etalon_filename, const char *etalon_linkname, struct stat etalon_stat, size_t *filepos)
+static void
+check_vfs_parse_ls_lga_call (const char *input_data, int etalon_result,
+                             const char *etalon_filename, const char *etalon_linkname,
+                             struct stat etalon_stat, size_t * filepos)
 {
     static struct stat test_stat;
     char *filename = NULL;
@@ -138,20 +140,25 @@ const char *etalon_filename, const char *etalon_linkname, struct stat etalon_sta
     result = vfs_parse_ls_lga (input_data, &test_stat, &filename, &linkname, filepos);
 
     fail_if (result != etalon_result,
-        "\nactual result: %d\netalon result: %d\n", result, etalon_result);
+             "\nactual result: %d\netalon result: %d\n", result, etalon_result);
 
-    fail_unless((filename != NULL && etalon_filename != NULL && strcmp(filename, etalon_filename) == 0)
-        || (filename == NULL && etalon_filename == filename),
-        "\nactual filename '%s'\netalon filename '%s'", filename, etalon_filename);
+    fail_unless ((filename != NULL && etalon_filename != NULL
+                  && strcmp (filename, etalon_filename) == 0) || (filename == NULL
+                                                                  && etalon_filename == filename),
+                 "\nactual filename '%s'\netalon filename '%s'", filename, etalon_filename);
 
-    fail_unless((linkname != NULL && etalon_linkname != NULL && strcmp(linkname, etalon_linkname) == 0)
-        || (linkname == NULL && etalon_linkname == linkname),
-        "\nactual linkname '%s'\netalon linkname '%s'", linkname, etalon_linkname);
+    fail_unless ((linkname != NULL && etalon_linkname != NULL
+                  && strcmp (linkname, etalon_linkname) == 0) || (linkname == NULL
+                                                                  && etalon_linkname == linkname),
+                 "\nactual linkname '%s'\netalon linkname '%s'", linkname, etalon_linkname);
 
-    check_stat_struct(etalon_stat, test_stat, input_data);
+    check_stat_struct (etalon_stat, test_stat, input_data);
 }
 
+/* *INDENT-OFF* */
 START_TEST (test_vfs_parse_ls_lga)
+/* *INDENT-ON* */
+
 {
     size_t filepos = 0;
 
@@ -171,13 +178,11 @@ START_TEST (test_vfs_parse_ls_lga)
     etalon_stat.st_mtime = 1308838140;
     etalon_stat.st_ctime = 1308838140;
 
-    vfs_parse_ls_lga_init();
+    vfs_parse_ls_lga_init ();
 
-    check_vfs_parse_ls_lga_call(
-        "drwxrwxr-x   10 500      500          4096 Jun 23 17:09 build_root",
-        1, "build_root", NULL, etalon_stat,
-        NULL
-    );
+    check_vfs_parse_ls_lga_call
+        ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09 build_root", 1, "build_root",
+         NULL, etalon_stat, NULL);
 
     etalon_stat.st_dev = 0;
     etalon_stat.st_ino = 0;
@@ -193,11 +198,9 @@ START_TEST (test_vfs_parse_ls_lga)
     etalon_stat.st_mtime = 1268431200;
     etalon_stat.st_ctime = 1268431200;
 
-    check_vfs_parse_ls_lga_call(
-        "lrwxrwxrwx    1 500      500            11 Mar 13  2010 COPYING -> doc/COPYING",
-        1, "COPYING", "doc/COPYING", etalon_stat,
-        NULL
-    );
+    check_vfs_parse_ls_lga_call
+        ("lrwxrwxrwx    1 500      500            11 Mar 13  2010 COPYING -> doc/COPYING", 1,
+         "COPYING", "doc/COPYING", etalon_stat, NULL);
 
     etalon_stat.st_dev = 0;
     etalon_stat.st_ino = 0;
@@ -213,11 +216,8 @@ START_TEST (test_vfs_parse_ls_lga)
     etalon_stat.st_mtime = 1308838140;
     etalon_stat.st_ctime = 1308838140;
 
-    check_vfs_parse_ls_lga_call(
-        "drwxrwxr-x   10 500      500          4096 Jun 23 17:09 ..",
-        1, "..", NULL, etalon_stat,
-        &filepos
-    );
+    check_vfs_parse_ls_lga_call ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09 ..",
+                                 1, "..", NULL, etalon_stat, &filepos);
 
 
     etalon_stat.st_dev = 0;
@@ -234,27 +234,30 @@ START_TEST (test_vfs_parse_ls_lga)
     etalon_stat.st_mtime = 1308838140;
     etalon_stat.st_ctime = 1308838140;
 
-    check_vfs_parse_ls_lga_call(
-        "drwxrwxr-x   10 500      500          4096 Jun 23 17:09   build_root",
-        1, "build_root", NULL, etalon_stat,
-        &filepos
-    );
+    check_vfs_parse_ls_lga_call
+        ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09   build_root", 1, "build_root",
+         NULL, etalon_stat, &filepos);
 
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* *INDENT-OFF* */
 START_TEST (test_vfs_parse_ls_lga_reorder)
+/* *INDENT-ON* */
 {
     size_t filepos = 0;
     struct vfs_s_entry *ent1, *ent2, *ent3;
 
-    vfs_parse_ls_lga_init();
+    vfs_parse_ls_lga_init ();
 
     ent1 = vfs_s_generate_entry (&vfs_test_ops1, NULL, vfs_root_inode, 0);
-    if (! vfs_parse_ls_lga ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09      build_root1",
-    &ent1->ino->st, &ent1->name, &ent1->ino->linkname, &filepos))
+    if (!vfs_parse_ls_lga
+        ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09      build_root1", &ent1->ino->st,
+         &ent1->name, &ent1->ino->linkname, &filepos))
     {
         fail ("An error occured while parse ls output");
         return;
@@ -264,8 +267,8 @@ START_TEST (test_vfs_parse_ls_lga_reorder)
 
 
     ent2 = vfs_s_generate_entry (&vfs_test_ops1, NULL, vfs_root_inode, 0);
-    if (! vfs_parse_ls_lga ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09    build_root2",
-    &ent2->ino->st, &ent2->name, &ent2->ino->linkname, &filepos))
+    if (!vfs_parse_ls_lga ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09    build_root2",
+                           &ent2->ino->st, &ent2->name, &ent2->ino->linkname, &filepos))
     {
         fail ("An error occured while parse ls output");
         return;
@@ -274,8 +277,8 @@ START_TEST (test_vfs_parse_ls_lga_reorder)
     vfs_s_insert_entry (&vfs_test_ops1, vfs_root_inode, ent2);
 
     ent3 = vfs_s_generate_entry (&vfs_test_ops1, NULL, vfs_root_inode, 0);
-    if (! vfs_parse_ls_lga ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09 ..",
-    &ent3->ino->st, &ent3->name, &ent3->ino->linkname, &filepos))
+    if (!vfs_parse_ls_lga ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09 ..",
+                           &ent3->ino->st, &ent3->name, &ent3->ino->linkname, &filepos))
     {
         fail ("An error occured while parse ls output");
         return;
@@ -285,10 +288,14 @@ START_TEST (test_vfs_parse_ls_lga_reorder)
 
     vfs_s_normalize_filename_leading_spaces (vfs_root_inode, vfs_parse_ls_lga_get_final_spaces ());
 
-    fail_unless(strcmp(ent1->name, "     build_root1") == 0, "\nactual '%s'\nnot equal to '%s'\n", ent1->name, "     build_root1");
-    fail_unless(strcmp(ent2->name, "   build_root2") == 0, "\nactual '%s'\nnot equal to '%s'\n", ent2->name, "   build_root2");
+    fail_unless (strcmp (ent1->name, "     build_root1") == 0, "\nactual '%s'\nnot equal to '%s'\n",
+                 ent1->name, "     build_root1");
+    fail_unless (strcmp (ent2->name, "   build_root2") == 0, "\nactual '%s'\nnot equal to '%s'\n",
+                 ent2->name, "   build_root2");
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 #define parce_one_line(ent_index, ls_output) {\
@@ -310,26 +317,31 @@ END_TEST
     );\
 }
 
+/* *INDENT-OFF* */
 START_TEST (test_vfs_parse_ls_lga_unaligned)
+/* *INDENT-ON* */
 {
     size_t filepos = 0;
     struct vfs_s_entry *ent[4];
 
-    vfs_parse_ls_lga_init();
+    vfs_parse_ls_lga_init ();
 
-    parce_one_line(0, "drwxrwxr-x   10 500      500          4096 Jun 23 17:09  build_root1");
-    parce_one_line(1, "drwxrwxr-x   10 500     500         4096 Jun 23 17:09     build_root2");
-    parce_one_line(2, "drwxrwxr-x 10 500 500 4096 Jun 23 17:09  ..");
-    parce_one_line(3, "drwxrwxr-x      10   500        500             4096   Jun   23   17:09   build_root 0");
+    parce_one_line (0, "drwxrwxr-x   10 500      500          4096 Jun 23 17:09  build_root1");
+    parce_one_line (1, "drwxrwxr-x   10 500     500         4096 Jun 23 17:09     build_root2");
+    parce_one_line (2, "drwxrwxr-x 10 500 500 4096 Jun 23 17:09  ..");
+    parce_one_line (3,
+                    "drwxrwxr-x      10   500        500             4096   Jun   23   17:09   build_root 0");
 
     vfs_s_normalize_filename_leading_spaces (vfs_root_inode, vfs_parse_ls_lga_get_final_spaces ());
 
-    fail_unless_ent(0, "build_root1");
-    fail_unless_ent(1, "   build_root2");
-    fail_unless_ent(3, " build_root 0");
+    fail_unless_ent (0, "build_root1");
+    fail_unless_ent (1, "   build_root2");
+    fail_unless_ent (3, " build_root 0");
 
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

@@ -21,7 +21,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
@@ -77,7 +77,9 @@ test_chdir (const vfs_path_t * vpath)
         "\n expected(%s) doesn't equal \nto actual(%s)", etalon, buffer); \
     g_free (buffer);
 
+/* *INDENT-OFF* */
 START_TEST (set_up_current_dir_url)
+/* *INDENT-ON* */
 {
     vfs_path_t *vpath;
     static struct vfs_s_subclass test_subclass;
@@ -113,8 +115,9 @@ START_TEST (set_up_current_dir_url)
     cd_and_check ("..", "/");
 
 }
-
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

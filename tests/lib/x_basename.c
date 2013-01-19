@@ -21,7 +21,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "/lib"
 
@@ -54,7 +54,9 @@ teardown (void)
     "\ninput (%s)\nactial  (%s) not equal to\netalon (%s)", input, result, etalon); \
 }
 
+/* *INDENT-OFF* */
 START_TEST (test_x_basename)
+/* *INDENT-ON* */
 {
     const char *result;
     check_x_basename ("/test/path/test2/path2", "path2");
@@ -72,7 +74,9 @@ START_TEST (test_x_basename)
 
     check_x_basename ("/test/path/test2/path2/vfsprefix:///", "/");
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

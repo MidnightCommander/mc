@@ -21,7 +21,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "lib/search/regex"
 
@@ -29,7 +29,7 @@
 
 #include <check.h>
 
-#include "regex.c" /* for testing static functions*/
+#include "regex.c"              /* for testing static functions */
 
 /* --------------------------------------------------------------------------------------------- */
 #define test_helper_valid_data(from, etalon, dest_str, replace_flags, utf) { \
@@ -41,25 +41,29 @@
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* *INDENT-OFF* */
 START_TEST (test_regex_process_escape_sequence_valid)
+/* *INDENT-ON* */
 {
     GString *dest_str;
     replace_transform_type_t replace_flags = REPLACE_T_NO_TRANSFORM;
 
-    test_helper_valid_data("{101}", "A", dest_str, replace_flags, FALSE);
-    test_helper_valid_data("x42", "B", dest_str, replace_flags, FALSE);
-    test_helper_valid_data("x{444}", "D", dest_str, replace_flags, FALSE);
-    test_helper_valid_data("x{444}", "ф", dest_str, replace_flags, TRUE);
+    test_helper_valid_data ("{101}", "A", dest_str, replace_flags, FALSE);
+    test_helper_valid_data ("x42", "B", dest_str, replace_flags, FALSE);
+    test_helper_valid_data ("x{444}", "D", dest_str, replace_flags, FALSE);
+    test_helper_valid_data ("x{444}", "ф", dest_str, replace_flags, TRUE);
 
-    test_helper_valid_data("n", "\n", dest_str, replace_flags, FALSE);
-    test_helper_valid_data("t", "\t", dest_str, replace_flags, FALSE);
-    test_helper_valid_data("v", "\v", dest_str, replace_flags, FALSE);
-    test_helper_valid_data("b", "\b", dest_str, replace_flags, FALSE);
-    test_helper_valid_data("r", "\r", dest_str, replace_flags, FALSE);
-    test_helper_valid_data("f", "\f", dest_str, replace_flags, FALSE);
-    test_helper_valid_data("a", "\a", dest_str, replace_flags, FALSE);
+    test_helper_valid_data ("n", "\n", dest_str, replace_flags, FALSE);
+    test_helper_valid_data ("t", "\t", dest_str, replace_flags, FALSE);
+    test_helper_valid_data ("v", "\v", dest_str, replace_flags, FALSE);
+    test_helper_valid_data ("b", "\b", dest_str, replace_flags, FALSE);
+    test_helper_valid_data ("r", "\r", dest_str, replace_flags, FALSE);
+    test_helper_valid_data ("f", "\f", dest_str, replace_flags, FALSE);
+    test_helper_valid_data ("a", "\a", dest_str, replace_flags, FALSE);
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

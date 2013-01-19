@@ -21,7 +21,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "lib/library_independ"
 
@@ -33,10 +33,14 @@
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* *INDENT-OFF* */
 START_TEST (test_library_independ)
+/* *INDENT-ON* */
 {
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

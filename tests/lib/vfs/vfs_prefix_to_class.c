@@ -21,7 +21,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
@@ -32,7 +32,7 @@
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
-#include "lib/vfs/vfs.c" /* for testing static methods  */
+#include "lib/vfs/vfs.c"        /* for testing static methods  */
 
 #include "src/vfs/local/local.c"
 
@@ -45,12 +45,9 @@ test_which (struct vfs_class *me, const char *path)
 {
     (void) me;
 
-    if (
-        (strcmp(path, "test_1:") == 0) ||
-        (strcmp(path, "test_2:") == 0) ||
-        (strcmp(path, "test_3:") == 0) ||
-        (strcmp(path, "test_4:") == 0)
-    )
+    if ((strcmp (path, "test_1:") == 0) ||
+        (strcmp (path, "test_2:") == 0) ||
+        (strcmp (path, "test_3:") == 0) || (strcmp (path, "test_4:") == 0))
         return 1;
     return -1;
 }
@@ -95,28 +92,45 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* *INDENT-OFF* */
 START_TEST (test_vfs_prefix_to_class_valid)
+/* *INDENT-ON* */
 {
-    fail_unless(vfs_prefix_to_class((char *) "test_1:") == &vfs_test_ops1, "'test_1:' doesn't transform to vfs_test_ops1");
-    fail_unless(vfs_prefix_to_class((char *) "test_2:") == &vfs_test_ops1, "'test_2:' doesn't transform to vfs_test_ops1");
-    fail_unless(vfs_prefix_to_class((char *) "test_3:") == &vfs_test_ops1, "'test_3:' doesn't transform to vfs_test_ops1");
-    fail_unless(vfs_prefix_to_class((char *) "test_4:") == &vfs_test_ops1, "'test_4:' doesn't transform to vfs_test_ops1");
+    fail_unless (vfs_prefix_to_class ((char *) "test_1:") == &vfs_test_ops1,
+                 "'test_1:' doesn't transform to vfs_test_ops1");
+    fail_unless (vfs_prefix_to_class ((char *) "test_2:") == &vfs_test_ops1,
+                 "'test_2:' doesn't transform to vfs_test_ops1");
+    fail_unless (vfs_prefix_to_class ((char *) "test_3:") == &vfs_test_ops1,
+                 "'test_3:' doesn't transform to vfs_test_ops1");
+    fail_unless (vfs_prefix_to_class ((char *) "test_4:") == &vfs_test_ops1,
+                 "'test_4:' doesn't transform to vfs_test_ops1");
 
-    fail_unless(vfs_prefix_to_class((char *) "test2:") == &vfs_test_ops2, "'test2:' doesn't transform to vfs_test_ops2");
+    fail_unless (vfs_prefix_to_class ((char *) "test2:") == &vfs_test_ops2,
+                 "'test2:' doesn't transform to vfs_test_ops2");
 
-    fail_unless(vfs_prefix_to_class((char *) "test3:") == &vfs_test_ops3, "'test3:' doesn't transform to vfs_test_ops3");
+    fail_unless (vfs_prefix_to_class ((char *) "test3:") == &vfs_test_ops3,
+                 "'test3:' doesn't transform to vfs_test_ops3");
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* *INDENT-OFF* */
 START_TEST (test_vfs_prefix_to_class_invalid)
+/* *INDENT-ON* */
 {
-    fail_unless(vfs_prefix_to_class((char *) "test1:") == NULL, "'test1:' doesn't transform to NULL");
-    fail_unless(vfs_prefix_to_class((char *) "test_5:") == NULL, "'test_5:' doesn't transform to NULL");
-    fail_unless(vfs_prefix_to_class((char *) "test4:") == NULL, "'test4:' doesn't transform to NULL");
+    fail_unless (vfs_prefix_to_class ((char *) "test1:") == NULL,
+                 "'test1:' doesn't transform to NULL");
+    fail_unless (vfs_prefix_to_class ((char *) "test_5:") == NULL,
+                 "'test_5:' doesn't transform to NULL");
+    fail_unless (vfs_prefix_to_class ((char *) "test4:") == NULL,
+                 "'test4:' doesn't transform to NULL");
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

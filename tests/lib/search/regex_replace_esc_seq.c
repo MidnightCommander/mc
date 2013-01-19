@@ -21,7 +21,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "lib/search/regex"
 
@@ -29,7 +29,7 @@
 
 #include <check.h>
 
-#include "regex.c" /* for testing static functions*/
+#include "regex.c"              /* for testing static functions */
 
 /* --------------------------------------------------------------------------------------------- */
 #define test_helper_check_valid_data( a, b, c, d, e, f ) \
@@ -51,50 +51,60 @@
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* *INDENT-OFF* */
 START_TEST (test_regex_replace_esc_seq_prepare_valid)
+/* *INDENT-ON* */
 {
     GString *replace_str;
     gsize skip_len;
     int ret;
 
-    replace_str = g_string_new("bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a");
+    replace_str =
+        g_string_new
+        ("bla-bla\\{123}bla-bla\\xabc234 bla-bla\\x{456abcd}bla-bla\\xtre\\n\\t\\v\\b\\r\\f\\a");
 
-    test_helper_handle_esc_seq( 7,  FALSE, 6, REPLACE_PREPARE_T_ESCAPE_SEQ );       /* \\{123} */
-    test_helper_handle_esc_seq( 20, FALSE, 4, REPLACE_PREPARE_T_ESCAPE_SEQ );       /* \\xab */
-    test_helper_handle_esc_seq( 36, FALSE, 11, REPLACE_PREPARE_T_ESCAPE_SEQ );      /* \\x{456abcd}  */
-    test_helper_handle_esc_seq( 54, FALSE, 2, REPLACE_PREPARE_T_NOTHING_SPECIAL );  /* \\xtre */
-    test_helper_handle_esc_seq( 59, FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ );       /* \\n */
-    test_helper_handle_esc_seq( 61, FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ );       /* \\t */
-    test_helper_handle_esc_seq( 63, FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ );       /* \\v */
-    test_helper_handle_esc_seq( 65, FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ );       /* \\b */
-    test_helper_handle_esc_seq( 67, FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ );       /* \\r */
-    test_helper_handle_esc_seq( 69, FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ );       /* \\f */
-    test_helper_handle_esc_seq( 71, FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ );       /* \\a */
+    test_helper_handle_esc_seq (7, FALSE, 6, REPLACE_PREPARE_T_ESCAPE_SEQ);     /* \\{123} */
+    test_helper_handle_esc_seq (20, FALSE, 4, REPLACE_PREPARE_T_ESCAPE_SEQ);    /* \\xab */
+    test_helper_handle_esc_seq (36, FALSE, 11, REPLACE_PREPARE_T_ESCAPE_SEQ);   /* \\x{456abcd}  */
+    test_helper_handle_esc_seq (54, FALSE, 2, REPLACE_PREPARE_T_NOTHING_SPECIAL);       /* \\xtre */
+    test_helper_handle_esc_seq (59, FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ);    /* \\n */
+    test_helper_handle_esc_seq (61, FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ);    /* \\t */
+    test_helper_handle_esc_seq (63, FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ);    /* \\v */
+    test_helper_handle_esc_seq (65, FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ);    /* \\b */
+    test_helper_handle_esc_seq (67, FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ);    /* \\r */
+    test_helper_handle_esc_seq (69, FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ);    /* \\f */
+    test_helper_handle_esc_seq (71, FALSE, 2, REPLACE_PREPARE_T_ESCAPE_SEQ);    /* \\a */
 
-    g_string_free(replace_str, TRUE);
+    g_string_free (replace_str, TRUE);
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* *INDENT-OFF* */
 START_TEST (test_regex_replace_esc_seq_prepare_invalid)
+/* *INDENT-ON* */
 {
 
     GString *replace_str;
     gsize skip_len;
     int ret;
 
-    replace_str = g_string_new("\\{123 \\x{qwerty} \\12} \\x{456a-bcd}bla-bla\\satre");
+    replace_str = g_string_new ("\\{123 \\x{qwerty} \\12} \\x{456a-bcd}bla-bla\\satre");
 
-    test_helper_handle_esc_seq( 0, TRUE, 5, REPLACE_PREPARE_T_NOTHING_SPECIAL );    /* \\{123 */
-    test_helper_handle_esc_seq( 6, TRUE, 3, REPLACE_PREPARE_T_NOTHING_SPECIAL );    /* \\x{qwerty} */
-    test_helper_handle_esc_seq( 17, TRUE, 0, REPLACE_PREPARE_T_NOTHING_SPECIAL );   /* \\12} */
-    test_helper_handle_esc_seq( 22, TRUE, 7, REPLACE_PREPARE_T_NOTHING_SPECIAL );   /* \\x{456a-bcd} */
-    test_helper_handle_esc_seq( 41, TRUE, 0, REPLACE_PREPARE_T_NOTHING_SPECIAL );   /* \\satre */
+    test_helper_handle_esc_seq (0, TRUE, 5, REPLACE_PREPARE_T_NOTHING_SPECIAL); /* \\{123 */
+    test_helper_handle_esc_seq (6, TRUE, 3, REPLACE_PREPARE_T_NOTHING_SPECIAL); /* \\x{qwerty} */
+    test_helper_handle_esc_seq (17, TRUE, 0, REPLACE_PREPARE_T_NOTHING_SPECIAL);        /* \\12} */
+    test_helper_handle_esc_seq (22, TRUE, 7, REPLACE_PREPARE_T_NOTHING_SPECIAL);        /* \\x{456a-bcd} */
+    test_helper_handle_esc_seq (41, TRUE, 0, REPLACE_PREPARE_T_NOTHING_SPECIAL);        /* \\satre */
 
-    g_string_free(replace_str, TRUE);
+    g_string_free (replace_str, TRUE);
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

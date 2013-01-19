@@ -21,7 +21,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
@@ -31,7 +31,7 @@
 
 #include "lib/global.h"
 #include "lib/strutil.h"
-#include "lib/vfs/direntry.c" /* for testing static methods  */
+#include "lib/vfs/direntry.c"   /* for testing static methods  */
 
 #include "src/vfs/local/local.c"
 
@@ -44,25 +44,27 @@ struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
 struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
 
 static int
-test1_mock_open_archive(struct vfs_s_super *super, const vfs_path_t *vpath, const vfs_path_element_t *vpath_element)
+test1_mock_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
+                         const vfs_path_element_t * vpath_element)
 {
     struct vfs_s_inode *root;
     char *spath = vfs_path_to_str (vpath);
 
-    fail_unless(strcmp("/" ETALON_VFS_URL_NAME ARCH_NAME, spath) == 0,
-        "etalon(%s) doesn't equal to actual(%s)", "/" ETALON_VFS_URL_NAME ARCH_NAME, spath);
+    fail_unless (strcmp ("/" ETALON_VFS_URL_NAME ARCH_NAME, spath) == 0,
+                 "etalon(%s) doesn't equal to actual(%s)", "/" ETALON_VFS_URL_NAME ARCH_NAME,
+                 spath);
 
     super->name = g_strdup (spath);
     super->data = g_new (char *, 1);
     root = vfs_s_new_inode (vpath_element->class, super, NULL);
     super->root = root;
-    g_free(spath);
+    g_free (spath);
     return 0;
 }
 
 static int
-test1_mock_archive_same (const vfs_path_element_t *vpath_element, struct vfs_s_super *super,
-                        const vfs_path_t *vpath, void *cookie)
+test1_mock_archive_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *super,
+                         const vfs_path_t * vpath, void *cookie)
 {
     const vfs_path_element_t *path_element;
 
@@ -70,8 +72,8 @@ test1_mock_archive_same (const vfs_path_element_t *vpath_element, struct vfs_s_s
     (void) super;
     (void) cookie;
 
-    path_element = vfs_path_get_by_index(vpath, -1);
-    if (strcmp(ARCH_NAME, path_element->path) != 0)
+    path_element = vfs_path_get_by_index (vpath, -1);
+    if (strcmp (ARCH_NAME, path_element->path) != 0)
         return 0;
     return 1;
 }
@@ -120,31 +122,37 @@ teardown (void)
 void
 vfs_die (const char *m)
 {
-    printf("VFS_DIE: '%s'\n", m);
+    printf ("VFS_DIE: '%s'\n", m);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* *INDENT-OFF* */
 START_TEST (test_vfs_s_get_path)
+/* *INDENT-ON* */
 {
     struct vfs_s_super *archive;
 
     const char *result;
-    vfs_path_t *vpath = vfs_path_from_str_flags ("/" ETALON_VFS_NAME ARCH_NAME "#test1:/" ETALON_PATH,
-            VPF_USE_DEPRECATED_PARSER);
+    vfs_path_t *vpath =
+        vfs_path_from_str_flags ("/" ETALON_VFS_NAME ARCH_NAME "#test1:/" ETALON_PATH,
+                                 VPF_USE_DEPRECATED_PARSER);
 
     result = vfs_s_get_path (vpath, &archive, 0);
 
-    fail_unless(strcmp(ETALON_PATH, result) == 0,
-        "expected(%s) doesn't equal to actual(%s)", ETALON_PATH, result);
+    fail_unless (strcmp (ETALON_PATH, result) == 0,
+                 "expected(%s) doesn't equal to actual(%s)", ETALON_PATH, result);
 
-    fail_unless(strcmp("/" ETALON_VFS_URL_NAME ARCH_NAME,archive->name) == 0,
-        "expected(%s) doesn't equal to actual(%s)", "/" ETALON_VFS_URL_NAME ARCH_NAME, archive->name);
+    fail_unless (strcmp ("/" ETALON_VFS_URL_NAME ARCH_NAME, archive->name) == 0,
+                 "expected(%s) doesn't equal to actual(%s)", "/" ETALON_VFS_URL_NAME ARCH_NAME,
+                 archive->name);
 
-    g_free(vpath);
+    g_free (vpath);
 
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

@@ -21,7 +21,7 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
@@ -141,7 +141,9 @@ teardown (void)
         "p10:vfs_prefixv5:test3"
 #endif
 
+/* *INDENT-OFF* */
 START_TEST (test_path_serialize_deserialize)
+/* *INDENT-ON* */
 {
     vfs_path_t *vpath;
     char *serialized_vpath;
@@ -153,36 +155,38 @@ START_TEST (test_path_serialize_deserialize)
 
     if (serialized_vpath == NULL)
     {
-        fail ("serialized_vpath is NULL!\nError code is '%d'; error message is '%s'", error->code, error->message);
+        fail ("serialized_vpath is NULL!\nError code is '%d'; error message is '%s'", error->code,
+              error->message);
         g_clear_error (&error);
         return;
     }
 
-    fail_unless (
-        strcmp (serialized_vpath, ETALON_SERIALIZED_PATH ) == 0,
-        "\nserialized_vpath    (%s)\nnot equal to etalon (%s)", serialized_vpath, ETALON_SERIALIZED_PATH
-    );
+    fail_unless (strcmp (serialized_vpath, ETALON_SERIALIZED_PATH) == 0,
+                 "\nserialized_vpath    (%s)\nnot equal to etalon (%s)", serialized_vpath,
+                 ETALON_SERIALIZED_PATH);
 
     vpath = vfs_path_deserialize (serialized_vpath, &error);
     g_free (serialized_vpath);
 
     if (vpath == NULL)
     {
-        fail ("vpath is NULL!\nError code is '%d'; error message is '%s'", error->code, error->message);
+        fail ("vpath is NULL!\nError code is '%d'; error message is '%s'", error->code,
+              error->message);
         g_clear_error (&error);
         return;
     }
 
     serialized_vpath = vfs_path_to_str (vpath);
-    fail_unless (
-        strcmp (serialized_vpath, ETALON_PATH_URL_STR) == 0,
-        "\ndeserialized path   (%s)\nnot equal to etalon (%s)", serialized_vpath, ETALON_PATH_URL_STR
-    );
-    vfs_path_free(vpath);
-    g_free(serialized_vpath);
+    fail_unless (strcmp (serialized_vpath, ETALON_PATH_URL_STR) == 0,
+                 "\ndeserialized path   (%s)\nnot equal to etalon (%s)", serialized_vpath,
+                 ETALON_PATH_URL_STR);
+    vfs_path_free (vpath);
+    g_free (serialized_vpath);
 
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

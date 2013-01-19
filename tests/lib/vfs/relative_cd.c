@@ -3,7 +3,7 @@
    Copyright (C) 2011 Free Software Foundation, Inc.
 
    Written by:
-    Slava Zanko <slavazanko@gmail.com>, 2011
+   Slava Zanko <slavazanko@gmail.com>, 2011
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License
@@ -18,7 +18,7 @@
    You should have received a copy of the GNU Library General Public
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-*/
+ */
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
@@ -81,25 +81,31 @@ test_chdir (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* *INDENT-OFF* */
 START_TEST (test_relative_cd)
+/* *INDENT-ON* */
 {
     vfs_path_t *vpath;
 
     vpath = vfs_path_from_str ("/test1://user:pass@some.host:12345/path/to/dir");
-    fail_if (mc_chdir(vpath) == -1);
+    fail_if (mc_chdir (vpath) == -1);
     vfs_path_free (vpath);
 
     vpath = vfs_path_from_str_flags ("some-non-exists-dir", VPF_NO_CANON);
-    fail_if (mc_chdir(vpath) == -1);
+    fail_if (mc_chdir (vpath) == -1);
     vfs_path_free (vpath);
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
 /* Relative to panel_correct_path_to_show()  */
 
+/* *INDENT-OFF* */
 START_TEST (test_vpath_to_str_filter)
+/* *INDENT-ON* */
 {
     vfs_path_t *vpath, *last_vpath;
     char *filtered_path;
@@ -115,14 +121,16 @@ START_TEST (test_vpath_to_str_filter)
     vfs_path_add_element (last_vpath, path_element);
 
     filtered_path = vfs_path_to_str_flags (last_vpath, 0,
-           VPF_STRIP_HOME | VPF_STRIP_PASSWORD | VPF_HIDE_CHARSET);
+                                           VPF_STRIP_HOME | VPF_STRIP_PASSWORD | VPF_HIDE_CHARSET);
     vfs_path_free (last_vpath);
 
-    fail_unless (strcmp("test1://some.host/dir", filtered_path) == 0, "actual: %s", filtered_path);
+    fail_unless (strcmp ("test1://some.host/dir", filtered_path) == 0, "actual: %s", filtered_path);
     g_free (filtered_path);
 
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

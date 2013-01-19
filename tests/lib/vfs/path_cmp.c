@@ -3,7 +3,7 @@
    Copyright (C) 2011 Free Software Foundation, Inc.
 
    Written by:
-    Slava Zanko <slavazanko@gmail.com>, 2011
+   Slava Zanko <slavazanko@gmail.com>, 2011
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License
@@ -18,7 +18,7 @@
    You should have received a copy of the GNU Library General Public
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-*/
+ */
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
@@ -74,12 +74,14 @@ teardown (void)
         input1, input2, #etalon_condition, result); \
 }
 
+/* *INDENT-OFF* */
 START_TEST (test_path_compare)
+/* *INDENT-ON* */
 {
     vfs_path_t *vpath1, *vpath2;
     int result;
 
-    path_cmp_one_check ("/тестовый/путь", "/тестовый/путь", ==0);
+    path_cmp_one_check ("/тестовый/путь", "/тестовый/путь", == 0);
 
 #ifdef HAVE_CHARSET
     path_cmp_one_check ("/#enc:KOI8-R/тестовый/путь", "/тестовый/путь", <0);
@@ -90,7 +92,9 @@ START_TEST (test_path_compare)
     path_cmp_one_check ("/тестовый/путь", NULL, -1);
     path_cmp_one_check (NULL, NULL, -1);
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 #undef path_cmp_one_check
@@ -105,24 +109,28 @@ END_TEST
         input1, input2, #etalon_condition, result); \
 }
 
+/* *INDENT-OFF* */
 START_TEST (test_path_compare_len)
+/* *INDENT-ON* */
 {
     vfs_path_t *vpath1, *vpath2;
     int result;
 
-    path_cmp_one_check ("/тестовый/путь", "/тестовый/путь", 10, ==0);
+    path_cmp_one_check ("/тестовый/путь", "/тестовый/путь", 10, == 0);
 
     path_cmp_one_check ("/тест/овый/путь", "/тестовый/путь", 10, <0);
 
     path_cmp_one_check ("/тестовый/путь", "/тест/овый/путь", 10, >0);
 
-    path_cmp_one_check ("/тест/овый/путь", "/тестовый/путь", 9, ==0);
+    path_cmp_one_check ("/тест/овый/путь", "/тестовый/путь", 9, == 0);
 
     path_cmp_one_check (NULL, "/тестовый/путь", 0, <0);
     path_cmp_one_check ("/тестовый/путь", NULL, 0, <0);
     path_cmp_one_check (NULL, NULL, 0, <0);
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
