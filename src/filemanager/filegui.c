@@ -629,7 +629,7 @@ place_progress_buttons (WDialog * h, gboolean suspended)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-progress_start_stop (WButton * button, int action)
+progress_button_callback (WButton * button, int action)
 {
     (void) button;
     (void) action;
@@ -769,13 +769,13 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
 
     progress_buttons[0].w = WIDGET (button_new (y, 0, progress_buttons[0].action,
                                                 progress_buttons[0].flags, progress_buttons[0].text,
-                                                NULL));
+                                                progress_button_callback));
     if (progress_buttons[0].len == -1)
         progress_buttons[0].len = button_get_len (BUTTON (progress_buttons[0].w));
 
     progress_buttons[1].w = WIDGET (button_new (y, 0, progress_buttons[1].action,
                                                 progress_buttons[1].flags, progress_buttons[1].text,
-                                                progress_start_stop));
+                                                progress_button_callback));
     if (progress_buttons[1].len == -1)
         progress_buttons[1].len = button_get_len (BUTTON (progress_buttons[1].w));
 
@@ -784,7 +784,8 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
         /* create and destroy button to get it length */
         progress_buttons[2].w = WIDGET (button_new (y, 0, progress_buttons[2].action,
                                                     progress_buttons[2].flags,
-                                                    progress_buttons[2].text, progress_start_stop));
+                                                    progress_buttons[2].text,
+                                                    progress_button_callback));
         progress_buttons[2].len = button_get_len (BUTTON (progress_buttons[2].w));
         send_message (progress_buttons[2].w, NULL, MSG_DESTROY, 0, NULL);
         g_free (progress_buttons[2].w);
