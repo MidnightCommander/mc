@@ -398,9 +398,8 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
 
 #define ADD_RD_LABEL(i, p1, p2, ypos) \
     g_snprintf (buffer, sizeof (buffer), rd_widgets [i].text, p1, p2); \
-    add_widget_autopos (ui->replace_dlg, \
-                        label_new (ypos, rd_widgets [i].xpos, buffer), \
-                        rd_widgets [i].pos_flags, \
+    label2 = WIDGET (label_new (ypos, rd_widgets [i].xpos, buffer)); \
+    add_widget_autopos (ui->replace_dlg, label2, rd_widgets [i].pos_flags, \
                         ui->replace_dlg->current != NULL ? ui->replace_dlg->current->data : NULL)
 
     /* dialog sizes */
@@ -422,10 +421,10 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
         { N_("Target file already exists!"), 3, 4, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, 0 },
         /*  1 */
         { "%s", 4, 4, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, 0 },
-        /*  2 */        /* cannot use PRIuMAX here; %llu is used instead */
-        { N_("New     : %s, size %llu"), 6, 4, WPOS_KEEP_DEFAULT, 0 },
-        /*  3 */        /* cannot use PRIuMAX here; %llu is used instead */
-        { N_("Existing: %s, size %llu"), 7, 4, WPOS_KEEP_DEFAULT, 0 },
+        /*  2 */
+        { N_("New     : %s, size %s"), 6, 4, WPOS_KEEP_DEFAULT, 0 },
+        /*  3 */
+        { N_("Existing: %s, size %s"), 7, 4, WPOS_KEEP_DEFAULT, 0 },
         /*  4 */
         { N_("Overwrite this target?"), 9, 4, WPOS_KEEP_DEFAULT, 0 },
         /*  5 */
@@ -457,6 +456,8 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
     FileOpContextUI *ui = ctx->ui;
 
     char buffer[BUF_SMALL];
+    char fsize_buffer[BUF_SMALL];
+    Widget *label1, *label2;
     const char *title;
     vfs_path_t *stripped_vpath;
     const char *stripped_name;
@@ -541,16 +542,19 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
     /* prompt */
     ADD_RD_LABEL (0, "", "", y++);
     /* file name */
-    ADD_RD_LABEL (1, str_trunc (stripped_name, rd_xlen - 8), "", y++);
+    ADD_RD_LABEL (1, "", "", y++);
+    label1 = label2;
 
     add_widget (ui->replace_dlg, hline_new (y++, -1, -1));
 
     /* source date and size */
-    ADD_RD_LABEL (2, file_date (ui->s_stat->st_mtime), (unsigned long long) ui->s_stat->st_size,
-                  y++);
+    size_trunc_len (fsize_buffer, sizeof (fsize_buffer), ui->s_stat->st_size, -1, panels_options.kilobyte_si);
+    ADD_RD_LABEL (2, file_date (ui->s_stat->st_mtime), fsize_buffer, y++);
+    rd_xlen = max (rd_xlen, label2->cols + 8);
     /* destination date and size */
-    ADD_RD_LABEL (3, file_date (ui->d_stat->st_mtime), (unsigned long long) ui->d_stat->st_size,
-                  y++);
+    size_trunc_len (fsize_buffer, sizeof (fsize_buffer), ui->d_stat->st_size, -1, panels_options.kilobyte_si);
+    ADD_RD_LABEL (3, file_date (ui->d_stat->st_mtime), fsize_buffer, y++);
+    rd_xlen = max (rd_xlen, label2->cols + 8);
 
     add_widget (ui->replace_dlg, hline_new (y++, -1, -1));
 
@@ -580,6 +584,7 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
 
     ADD_RD_BUTTON (14, y);      /* Abort */
 
+    label_set_text (LABEL (label1), str_trunc (stripped_name, rd_xlen - 8));
     dlg_set_size (ui->replace_dlg, y + 3, rd_xlen);
     dlg_select_by_id (ui->replace_dlg, yes_id);
     result = run_dlg (ui->replace_dlg);
