@@ -1039,7 +1039,7 @@ edit_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
  *
  * @param file_vpath file object
  * @param line       line number
- * @return TRUE if no errors was occured, FALSE otherwise
+ * @return TRUE if no errors was occurred, FALSE otherwise
  */
 
 gboolean

@@ -321,7 +321,7 @@ END_TEST
     if (! vfs_parse_ls_lga (ls_output,\
     &ent[ent_index]->ino->st, &ent[ent_index]->name, &ent[ent_index]->ino->linkname, &filepos))\
     {\
-        fail ("An error occured while parse ls output");\
+        fail ("An error occurred while parse ls output");\
         return;\
     }\
     vfs_s_store_filename_leading_spaces (ent[ent_index], filepos);\

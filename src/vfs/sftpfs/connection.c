@@ -60,7 +60,7 @@
  *
  * @param super connection data
  * @param error pointer to the error handler
- * @return socket descriptor number, -1 if any error was occured
+ * @return socket descriptor number, -1 if any error was occurred
  */
 
 static int

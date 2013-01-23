@@ -217,7 +217,7 @@ mc_config_copy (const char *old_name, const char *new_name, GError ** error)
             g_propagate_error (error,
                                g_error_new (MC_ERROR, 0,
                                             _
-                                            ("An error occured while migrating user settings: %s"),
+                                            ("An error occurred while migrating user settings: %s"),
                                             unix_error_string (errno)));
             return;
         }
