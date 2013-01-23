@@ -1509,11 +1509,14 @@ insert_spaces_tab (WEdit * edit, gboolean half)
     i = option_tab_spacing * space_width;
     if (half)
         i /= 2;
-    i = ((edit->curs_col / i) + 1) * i - edit->curs_col;
-    while (i > 0)
+    if (i != 0)
     {
-        edit_insert (edit, ' ');
-        i -= space_width;
+        i = ((edit->curs_col / i) + 1) * i - edit->curs_col;
+        while (i > 0)
+        {
+            edit_insert (edit, ' ');
+            i -= space_width;
+        }
     }
 }
 
