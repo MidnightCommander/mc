@@ -3,7 +3,7 @@
    They normally operate on the current panel.
 
    Copyright (C) 1994, 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
-   2005, 2006, 2007, 2009, 2011
+   2005, 2006, 2007, 2009, 2011, 2013
    The Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -818,10 +818,29 @@ edit_cmd_force_internal (void)
 void
 edit_cmd_new (void)
 {
+    vfs_path_t *fname_vpath = NULL;
+
+    if (editor_ask_filename_before_edit)
+    {
+        char *fname;
+
+        fname = input_expand_dialog (_("Edit file"), _("Enter file name:"),
+                                     MC_HISTORY_EDIT_LOAD, "");
+        if (fname == NULL)
+            return;
+
+        if (*fname != '\0')
+            fname_vpath = vfs_path_from_str (fname);
+
+        g_free (fname);
+    }
+
 #ifdef HAVE_CHARSET
     mc_global.source_codepage = default_source_codepage;
 #endif
-    do_edit (NULL);
+    do_edit (fname_vpath);
+
+    vfs_path_free (fname_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */

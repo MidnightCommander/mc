@@ -98,6 +98,7 @@ extern int auto_fill_mkdir_name;
 extern int output_starts_shell;
 extern int use_file_to_check_type;
 extern int file_op_compute_totals;
+extern int editor_ask_filename_before_edit;
 
 extern panels_options_t panels_options;
 
