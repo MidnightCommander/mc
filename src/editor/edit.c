@@ -1509,11 +1509,14 @@ insert_spaces_tab (WEdit * edit, gboolean half)
     i = option_tab_spacing * space_width;
     if (half)
         i /= 2;
-    i = ((edit->curs_col / i) + 1) * i - edit->curs_col;
-    while (i > 0)
+    if (i != 0)
     {
-        edit_insert (edit, ' ');
-        i -= space_width;
+        i = ((edit->curs_col / i) + 1) * i - edit->curs_col;
+        while (i > 0)
+        {
+            edit_insert (edit, ' ');
+            i -= space_width;
+        }
     }
 }
 
@@ -3256,13 +3259,17 @@ edit_move_to_prev_col (WEdit * edit, off_t p)
         edit->over_col = 0;
         if (option_fake_half_tabs && is_in_indent (edit))
         {
+            long fake_half_tabs;
+
             edit_update_curs_col (edit);
-            if (space_width != 0 && edit->curs_col % (HALF_TAB_SIZE * space_width) != 0)
+
+            fake_half_tabs = HALF_TAB_SIZE * space_width;
+            if (fake_half_tabs != 0 && edit->curs_col % fake_half_tabs != 0)
             {
                 int q;
 
                 q = edit->curs_col;
-                edit->curs_col -= (edit->curs_col % (HALF_TAB_SIZE * space_width));
+                edit->curs_col -= (edit->curs_col % fake_half_tabs);
                 p = edit_bol (edit, edit->curs1);
                 edit_cursor_move (edit,
                                   edit_move_forward3 (edit, p, edit->curs_col, 0) - edit->curs1);
