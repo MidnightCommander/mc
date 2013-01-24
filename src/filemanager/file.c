@@ -481,6 +481,86 @@ make_symlink (FileOpContext * ctx, const char *src_path, const char *dst_path)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * do_compute_dir_size:
+ *
+ * Computes the number of bytes used by the files in a directory
+ */
+
+static FileProgressStatus
+do_compute_dir_size (const vfs_path_t * dirname_vpath, const void *ui,
+                     compute_dir_size_callback cback, size_t * dir_count, size_t * ret_marked,
+                     uintmax_t * ret_total, gboolean compute_symlinks)
+{
+    int res;
+    struct stat s;
+    DIR *dir;
+    struct dirent *dirent;
+    FileProgressStatus ret = FILE_CONT;
+
+    if (!compute_symlinks)
+    {
+        res = mc_lstat (dirname_vpath, &s);
+        if (res != 0)
+            return ret;
+
+        /* don't scan symlink to directory */
+        if (S_ISLNK (s.st_mode))
+        {
+            (*ret_marked)++;
+            *ret_total += (uintmax_t) s.st_size;
+            return ret;
+        }
+    }
+
+    (*dir_count)++;
+
+    dir = mc_opendir (dirname_vpath);
+    if (dir == NULL)
+        return ret;
+
+    while ((dirent = mc_readdir (dir)) != NULL)
+    {
+        vfs_path_t *tmp_vpath;
+
+        if (strcmp (dirent->d_name, ".") == 0)
+            continue;
+        if (strcmp (dirent->d_name, "..") == 0)
+            continue;
+
+        ret = (cback != NULL) ? cback (ui, dirname_vpath) : FILE_CONT;
+        if (ret != FILE_CONT)
+            break;
+
+        tmp_vpath = vfs_path_append_new (dirname_vpath, dirent->d_name, NULL);
+
+        res = mc_lstat (tmp_vpath, &s);
+        if (res == 0)
+        {
+            if (S_ISDIR (s.st_mode))
+            {
+                ret =
+                    do_compute_dir_size (tmp_vpath, ui, cback, dir_count, ret_marked, ret_total,
+                                         compute_symlinks);
+            }
+            else
+            {
+                (*ret_marked)++;
+                *ret_total += (uintmax_t) s.st_size;
+            }
+        }
+
+        vfs_path_free (tmp_vpath);
+
+        if (ret != FILE_CONT)
+            break;
+    }
+
+    mc_closedir (dir);
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static FileProgressStatus
 progress_update_one (FileOpTotalContext * tctx, FileOpContext * ctx, off_t add)
@@ -1186,9 +1266,6 @@ panel_compute_totals (const WPanel * panel, const void *ui,
 {
     int i;
 
-    *ret_marked = 0;
-    *ret_total = 0;
-
     for (i = 0; i < panel->count; i++)
     {
         struct stat *s;
@@ -1201,20 +1278,14 @@ panel_compute_totals (const WPanel * panel, const void *ui,
         if (S_ISDIR (s->st_mode))
         {
             vfs_path_t *p;
-            size_t subdir_count = 0;
-            uintmax_t subdir_bytes = 0;
             FileProgressStatus status;
 
             p = vfs_path_append_new (panel->cwd_vpath, panel->dir.list[i].fname, NULL);
-            status =
-                compute_dir_size (p, ui, cback, &subdir_count, &subdir_bytes, compute_symlinks);
+            status = compute_dir_size (p, ui, cback, ret_marked, ret_total, compute_symlinks);
             vfs_path_free (p);
 
             if (status != FILE_CONT)
                 return status;
-
-            *ret_marked += subdir_count;
-            *ret_total += subdir_bytes;
         }
         else
         {
@@ -1245,6 +1316,9 @@ panel_operate_init_totals (FileOperation operation, const WPanel * panel, const 
         ComputeDirSizeUI *ui;
 
         ui = compute_dir_size_create_ui (TRUE);
+
+        ctx->progress_count = 0;
+        ctx->progress_bytes = 0;
 
         if (source == NULL)
             status = panel_compute_totals (panel, ui, compute_dir_size_update_ui,
@@ -2544,83 +2618,13 @@ compute_dir_size_update_ui (const void *ui, const vfs_path_t * dirname_vpath)
  */
 
 FileProgressStatus
-compute_dir_size (const vfs_path_t * dirname_vpath, const void *ui,
-                  compute_dir_size_callback cback,
+compute_dir_size (const vfs_path_t * dirname_vpath, const void *ui, compute_dir_size_callback cback,
                   size_t * ret_marked, uintmax_t * ret_total, gboolean compute_symlinks)
 {
-    int res;
-    struct stat s;
-    DIR *dir;
-    struct dirent *dirent;
-    FileProgressStatus ret = FILE_CONT;
+    size_t dir_count = 0;
 
-    if (!compute_symlinks)
-    {
-        res = mc_lstat (dirname_vpath, &s);
-        if (res != 0)
-            return ret;
-
-        /* don't scan symlink to directory */
-        if (S_ISLNK (s.st_mode))
-        {
-            (*ret_marked)++;
-            *ret_total += (uintmax_t) s.st_size;
-            return ret;
-        }
-    }
-
-    dir = mc_opendir (dirname_vpath);
-
-    if (dir == NULL)
-        return ret;
-
-    while ((dirent = mc_readdir (dir)) != NULL)
-    {
-        vfs_path_t *tmp_vpath;
-
-        ret = (cback != NULL) ? cback (ui, dirname_vpath) : FILE_CONT;
-
-        if (ret != FILE_CONT)
-            break;
-
-        if (strcmp (dirent->d_name, ".") == 0)
-            continue;
-        if (strcmp (dirent->d_name, "..") == 0)
-            continue;
-
-        tmp_vpath = vfs_path_append_new (dirname_vpath, dirent->d_name, NULL);
-        res = mc_lstat (tmp_vpath, &s);
-        if (res == 0)
-        {
-            if (S_ISDIR (s.st_mode))
-            {
-                size_t subdir_count = 0;
-                uintmax_t subdir_bytes = 0;
-
-                ret =
-                    compute_dir_size (tmp_vpath, ui, cback, &subdir_count, &subdir_bytes,
-                                      compute_symlinks);
-
-                if (ret != FILE_CONT)
-                {
-                    vfs_path_free (tmp_vpath);
-                    break;
-                }
-
-                *ret_marked += subdir_count;
-                *ret_total += subdir_bytes;
-            }
-            else
-            {
-                (*ret_marked)++;
-                *ret_total += (uintmax_t) s.st_size;
-            }
-        }
-        vfs_path_free (tmp_vpath);
-    }
-
-    mc_closedir (dir);
-    return ret;
+    return do_compute_dir_size (dirname_vpath, ui, cback, &dir_count, ret_marked, ret_total,
+                                compute_symlinks);
 }
 
 /* --------------------------------------------------------------------------------------------- */
