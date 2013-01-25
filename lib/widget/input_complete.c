@@ -3,11 +3,12 @@
    (Let mc type for you...)
 
    Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2007, 2011
+   2007, 2011, 2013
    the Free Software Foundation, Inc.
 
    Written by:
    Jakub Jelinek, 1995
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -79,6 +80,17 @@ extern char **environ;
 
 typedef char *CompletionFunction (const char *text, int state, input_complete_t flags);
 
+typedef struct
+{
+    size_t in_command_position;
+    char *word;
+    char *p;
+    char *q;
+    char *r;
+    gboolean is_cd;
+    input_complete_t flags;
+} try_complete_automation_state_t;
+
 /*** file scope variables ************************************************************************/
 
 static char **hosts = NULL;
@@ -93,6 +105,9 @@ static int end = 0;
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
+
+char **try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags);
+void complete_engine_fill_completions (WInput * in);
 
 #ifdef DO_COMPLETION_DEBUG
 /**
@@ -819,155 +834,114 @@ check_is_cd (const char *text, int lc_start, input_complete_t flags)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Returns an array of matches, or NULL if none. */
-static char **
-try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
+
+static void
+try_complete_commands_prepare (try_complete_automation_state_t * state, char *text, int *lc_start)
 {
-    size_t in_command_position = 0;
-    char *word;
-    char **matches = NULL;
-    char *p = NULL, *q = NULL, *r = NULL;
-    gboolean is_cd;
+    const char *command_separator_chars = ";|&{(`";
+    char *ti;
 
-    SHOW_C_CTX ("try_complete");
-    word = g_strndup (text + *lc_start, *lc_end - *lc_start);
-
-    is_cd = check_is_cd (text, *lc_start, flags);
-
-    /* Determine if this could be a command word. It is if it appears at
-       the start of the line (ignoring preceding whitespace), or if it
-       appears after a character that separates commands. And we have to
-       be in a INPUT_COMPLETE_COMMANDS flagged Input line. */
-    if (!is_cd && (flags & INPUT_COMPLETE_COMMANDS))
+    if (*lc_start == 0)
+        ti = text;
+    else
     {
-        const char *command_separator_chars = ";|&{(`";
-        char *ti;
-
-        if (*lc_start == 0)
-            ti = text;
-        else
-        {
-            ti = str_get_prev_char (&text[*lc_start]);
-            while (ti > text && (ti[0] == ' ' || ti[0] == '\t'))
-                str_prev_char (&ti);
-        }
-
-        if (ti == text)
-            in_command_position++;
-        else if (strchr (command_separator_chars, ti[0]) != NULL)
-        {
-            int this_char, prev_char;
-
-            in_command_position++;
-
-            if (ti != text)
-            {
-                /* Handle the two character tokens `>&', `<&', and `>|'.
-                   We are not in a command position after one of these. */
-                this_char = ti[0];
-                prev_char = str_get_prev_char (ti)[0];
-
-                /* Quoted */
-                if ((this_char == '&' && (prev_char == '<' || prev_char == '>'))
-                    || (this_char == '|' && prev_char == '>') || (ti != text
-                                                                  && str_get_prev_char (ti)[0] ==
-                                                                  '\\'))
-                    in_command_position = 0;
-            }
-        }
+        ti = str_get_prev_char (&text[*lc_start]);
+        while (ti > text && (ti[0] == ' ' || ti[0] == '\t'))
+            str_prev_char (&ti);
     }
 
-    if (flags & INPUT_COMPLETE_COMMANDS)
-        p = strrchr (word, '`');
-    if (flags & (INPUT_COMPLETE_COMMANDS | INPUT_COMPLETE_VARIABLES))
+    if (ti == text)
+        state->in_command_position++;
+    else if (strchr (command_separator_chars, ti[0]) != NULL)
     {
-        q = strrchr (word, '$');
+        int this_char, prev_char;
+
+        state->in_command_position++;
+
+        if (ti != text)
+        {
+            /* Handle the two character tokens `>&', `<&', and `>|'.
+               We are not in a command position after one of these. */
+            this_char = ti[0];
+            prev_char = str_get_prev_char (ti)[0];
+
+            /* Quoted */
+            if ((this_char == '&' && (prev_char == '<' || prev_char == '>'))
+                || (this_char == '|' && prev_char == '>') || (ti != text
+                                                              && str_get_prev_char (ti)[0] == '\\'))
+                state->in_command_position = 0;
+        }
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+try_complete_find_start_sign (try_complete_automation_state_t * state)
+{
+    if (state->flags & INPUT_COMPLETE_COMMANDS)
+        state->p = strrchr (state->word, '`');
+    if (state->flags & (INPUT_COMPLETE_COMMANDS | INPUT_COMPLETE_VARIABLES))
+    {
+        state->q = strrchr (state->word, '$');
 
         /* don't substitute variable in \$ case */
-        if (q != NULL && q != word && q[-1] == '\\')
+        if (strutils_is_char_escaped (state->word, state->q))
         {
             size_t qlen;
 
-            qlen = strlen (q);
+            qlen = strlen (state->q);
             /* drop '\\' */
-            memmove (q - 1, q, qlen + 1);
+            memmove (state->q - 1, state->q, qlen + 1);
             /* adjust flags */
-            flags &= ~INPUT_COMPLETE_VARIABLES;
-            q = NULL;
+            state->flags &= ~INPUT_COMPLETE_VARIABLES;
+            state->q = NULL;
         }
     }
-    if (flags & INPUT_COMPLETE_HOSTNAMES)
-        r = strrchr (word, '@');
-    if (q && q[1] == '(' && (flags & INPUT_COMPLETE_COMMANDS))
+    if (state->flags & INPUT_COMPLETE_HOSTNAMES)
+        state->r = strrchr (state->word, '@');
+    if (state->q && state->q[1] == '(' && (state->flags & INPUT_COMPLETE_COMMANDS))
     {
-        if (q > p)
-            p = str_get_next_char (q);
-        q = NULL;
+        if (state->q > state->p)
+            state->p = str_get_next_char (state->q);
+        state->q = NULL;
     }
+}
 
-    /* Command substitution? */
-    if (p > q && p > r)
-    {
-        SHOW_C_CTX ("try_complete:cmd_backq_subst");
-        matches = completion_matches (str_cget_next_char (p),
-                                      command_completion_function,
-                                      flags & (~INPUT_COMPLETE_FILENAMES));
-        if (matches)
-            *lc_start += str_get_next_char (p) - word;
-    }
+/* --------------------------------------------------------------------------------------------- */
 
-    /* Variable name? */
-    else if (q > p && q > r)
-    {
-        SHOW_C_CTX ("try_complete:var_subst");
-        matches = completion_matches (q, variable_completion_function, flags);
-        if (matches)
-            *lc_start += q - word;
-    }
+static char **
+try_complete_all_possible (try_complete_automation_state_t * state, char *text, int *lc_start)
+{
+    char **matches = NULL;
 
-    /* Starts with '@', then look through the known hostnames for 
-       completion first. */
-    else if (r > p && r > q)
-    {
-        SHOW_C_CTX ("try_complete:host_subst");
-        matches = completion_matches (r, hostname_completion_function, flags);
-        if (matches)
-            *lc_start += r - word;
-    }
-
-    /* Starts with `~' and there is no slash in the word, then
-       try completing this word as a username. */
-    if (!matches && *word == '~' && (flags & INPUT_COMPLETE_USERNAMES) && !strchr (word, PATH_SEP))
-    {
-        SHOW_C_CTX ("try_complete:user_subst");
-        matches = completion_matches (word, username_completion_function, flags);
-    }
-
-
-    /* And finally if this word is in a command position, then
-       complete over possible command names, including aliases, functions,
-       and command names. */
-    if (!matches && in_command_position != 0)
+    if (state->in_command_position != 0)
     {
         SHOW_C_CTX ("try_complete:cmd_subst");
         matches =
-            completion_matches (word, command_completion_function,
-                                flags & (~INPUT_COMPLETE_FILENAMES));
+            completion_matches (state->word, command_completion_function,
+                                state->flags & (~INPUT_COMPLETE_FILENAMES));
     }
-
-    else if (!matches && (flags & INPUT_COMPLETE_FILENAMES))
+    else if ((state->flags & INPUT_COMPLETE_FILENAMES) != 0)
     {
-        if (is_cd)
-            flags &= ~(INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_COMMANDS);
+        if (state->is_cd)
+            state->flags &= ~(INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_COMMANDS);
         SHOW_C_CTX ("try_complete:filename_subst_1");
-        matches = completion_matches (word, filename_completion_function, flags);
-        if (!matches && is_cd && *word != PATH_SEP && *word != '~')
+        matches = completion_matches (state->word, filename_completion_function, state->flags);
+
+        if (matches == NULL && state->is_cd && *state->word != PATH_SEP && *state->word != '~')
         {
-            q = text + *lc_start;
-            for (p = text; *p && p < q && (*p == ' ' || *p == '\t'); str_next_char (&p));
-            if (!strncmp (p, "cd", 2))
-                for (p += 2; *p && p < q && (*p == ' ' || *p == '\t'); str_next_char (&p));
-            if (p == q)
+            state->q = text + *lc_start;
+            for (state->p = text;
+                 *state->p && state->p < state->q && (*state->p == ' ' || *state->p == '\t');
+                 str_next_char (&state->p))
+                ;
+            if (!strncmp (state->p, "cd", 2))
+                for (state->p += 2;
+                     *state->p && state->p < state->q && (*state->p == ' ' || *state->p == '\t');
+                     str_next_char (&state->p))
+                ;
+            if (state->p == state->q)
             {
                 char *const cdpath_ref = g_strdup (getenv ("CDPATH"));
                 char *cdpath = cdpath_ref;
@@ -986,10 +960,12 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
                     *s = 0;
                     if (*cdpath)
                     {
-                        r = mc_build_filename (cdpath, word, NULL);
+                        state->r = mc_build_filename (cdpath, state->word, NULL);
                         SHOW_C_CTX ("try_complete:filename_subst_2");
-                        matches = completion_matches (r, filename_completion_function, flags);
-                        g_free (r);
+                        matches =
+                            completion_matches (state->r, filename_completion_function,
+                                                state->flags);
+                        g_free (state->r);
                     }
                     *s = c;
                     cdpath = str_get_next_char (s);
@@ -998,9 +974,6 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
             }
         }
     }
-
-    g_free (word);
-
     return matches;
 }
 
@@ -1224,43 +1197,16 @@ query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Returns 1 if the user would like to see us again */
 
+/** Returns 1 if the user would like to see us again */
 static int
 complete_engine (WInput * in, int what_to_do)
 {
     if (in->completions != NULL && str_offset_to_pos (in->buffer, in->point) != end)
         input_free_completions (in);
+
     if (in->completions == NULL)
-    {
-        char *s;
-
-        end = str_offset_to_pos (in->buffer, in->point);
-
-        s = in->buffer;
-        if (in->point != 0)
-        {
-            /* get symbol before in->point */
-            size_t i;
-            for (i = in->point - 1; i > 0; i--)
-                str_next_char (&s);
-        }
-
-        for (; s >= in->buffer; str_prev_char (&s))
-        {
-            start = s - in->buffer;
-            if (strchr (" \t;|<>", *s) != NULL)
-                break;
-        }
-
-        if (start < end)
-        {
-            str_next_char (&s);
-            start = s - in->buffer;
-        }
-
-        in->completions = try_complete (in->buffer, &start, &end, in->completion_flags);
-    }
+        complete_engine_fill_completions (in);
 
     if (in->completions != NULL)
     {
@@ -1354,6 +1300,117 @@ complete_engine (WInput * in, int what_to_do)
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/** Returns an array of matches, or NULL if none. */
+char **
+try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
+{
+    try_complete_automation_state_t state;
+    char **matches = NULL;
+
+    memset (&state, 0, sizeof (try_complete_automation_state_t));
+    state.flags = flags;
+
+    SHOW_C_CTX ("try_complete");
+    state.word = g_strndup (text + *lc_start, *lc_end - *lc_start);
+
+    state.is_cd = check_is_cd (text, *lc_start, state.flags);
+
+    /* Determine if this could be a command word. It is if it appears at
+       the start of the line (ignoring preceding whitespace), or if it
+       appears after a character that separates commands. And we have to
+       be in a INPUT_COMPLETE_COMMANDS flagged Input line. */
+    if (!state.is_cd && (flags & INPUT_COMPLETE_COMMANDS))
+        try_complete_commands_prepare (&state, text, lc_start);
+
+    try_complete_find_start_sign (&state);
+
+    /* Command substitution? */
+    if (state.p > state.q && state.p > state.r)
+    {
+        SHOW_C_CTX ("try_complete:cmd_backq_subst");
+        matches = completion_matches (str_cget_next_char (state.p),
+                                      command_completion_function,
+                                      state.flags & (~INPUT_COMPLETE_FILENAMES));
+        if (matches)
+            *lc_start += str_get_next_char (state.p) - state.word;
+    }
+
+    /* Variable name? */
+    else if (state.q > state.p && state.q > state.r)
+    {
+        SHOW_C_CTX ("try_complete:var_subst");
+        matches = completion_matches (state.q, variable_completion_function, state.flags);
+        if (matches)
+            *lc_start += state.q - state.word;
+    }
+
+    /* Starts with '@', then look through the known hostnames for 
+       completion first. */
+    else if (state.r > state.p && state.r > state.q)
+    {
+        SHOW_C_CTX ("try_complete:host_subst");
+        matches = completion_matches (state.r, hostname_completion_function, state.flags);
+        if (matches)
+            *lc_start += state.r - state.word;
+    }
+
+    /* Starts with `~' and there is no slash in the word, then
+       try completing this word as a username. */
+    if (!matches && *state.word == '~' && (state.flags & INPUT_COMPLETE_USERNAMES)
+        && !strchr (state.word, PATH_SEP))
+    {
+        SHOW_C_CTX ("try_complete:user_subst");
+        matches = completion_matches (state.word, username_completion_function, state.flags);
+    }
+
+    /* And finally if this word is in a command position, then
+       complete over possible command names, including aliases, functions,
+       and command names. */
+    if (matches == NULL)
+        matches = try_complete_all_possible (&state, text, lc_start);
+
+    g_free (state.word);
+
+    return matches;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+complete_engine_fill_completions (WInput * in)
+{
+    char *s;
+
+    end = str_offset_to_pos (in->buffer, in->point);
+
+    s = in->buffer;
+    if (in->point != 0)
+    {
+        /* get symbol before in->point */
+        size_t i;
+
+        for (i = in->point - 1; i > 0; i--)
+            str_next_char (&s);
+    }
+
+    for (; s >= in->buffer; str_prev_char (&s))
+    {
+        start = s - in->buffer;
+        if (strchr (" \t;|<>", *s) != NULL)
+            break;
+    }
+
+    if (start < end)
+    {
+        str_next_char (&s);
+        start = s - in->buffer;
+    }
+
+    in->completions = try_complete (in->buffer, &start, &end, in->completion_flags);
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 /* declared in lib/widget/input.h */
