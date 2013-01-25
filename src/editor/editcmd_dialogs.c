@@ -101,8 +101,9 @@ editcmd_dialog_search_show (WEdit * edit)
     {
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
-            QUICK_LABELED_INPUT (N_("Enter search string:"), input_label_above,
-                                 INPUT_LAST_TEXT, 0, MC_HISTORY_SHARED_SEARCH, &search_text, NULL),
+            QUICK_LABELED_INPUT (N_("Enter search string:"), input_label_above, INPUT_LAST_TEXT, 
+                                 MC_HISTORY_SHARED_SEARCH, &search_text, NULL, FALSE, FALSE,
+                                 INPUT_COMPLETE_DEFAULT),
             QUICK_SEPARATOR (TRUE),
             QUICK_START_COLUMNS,
                 QUICK_RADIO (num_of_types, (const char **) list_of_types,
@@ -191,10 +192,11 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
     {
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
-            QUICK_LABELED_INPUT (N_("Enter search string:"), input_label_above,
-                                 search_default, 0, MC_HISTORY_SHARED_SEARCH, search_text, NULL),
-            QUICK_LABELED_INPUT (N_("Enter replacement string:"), input_label_above,
-                                 replace_default, 0, "replace", replace_text, NULL),
+            QUICK_LABELED_INPUT (N_("Enter search string:"), input_label_above, search_default,
+                                 MC_HISTORY_SHARED_SEARCH, search_text, NULL, FALSE, FALSE,
+                                 INPUT_COMPLETE_DEFAULT),
+            QUICK_LABELED_INPUT (N_("Enter replacement string:"), input_label_above, replace_default,
+                                 "replace", replace_text, NULL, FALSE, FALSE, INPUT_COMPLETE_DEFAULT),
             QUICK_SEPARATOR (TRUE),
             QUICK_START_COLUMNS,
                 QUICK_RADIO (num_of_types, (const char **) list_of_types,

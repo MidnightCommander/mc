@@ -38,7 +38,7 @@
     }                                                                           \
 }
 
-#define QUICK_INPUT(txt, flags_, hname, res, id_)                               \
+#define QUICK_INPUT(txt, hname, res, id_, is_passwd_, strip_passwd_, completion_flags_) \
 {                                                                               \
     .widget_type = quick_input,                                                 \
     .options = 0,                                                               \
@@ -50,14 +50,16 @@
             .label_location = input_label_none,                                 \
             .label = NULL,                                                      \
             .text = txt,                                                        \
-            .flags = flags_,                                                    \
+            .completion_flags = completion_flags_,                              \
+            .is_passwd = is_passwd_,                                            \
+            .strip_passwd = strip_passwd_,                                      \
             .histname = hname,                                                  \
             .result = res                                                       \
         }                                                                       \
     }                                                                           \
 }
 
-#define QUICK_LABELED_INPUT(label_, label_loc, txt, flags_, hname, res, id_)    \
+#define QUICK_LABELED_INPUT(label_, label_loc, txt, hname, res, id_, is_passwd_, strip_passwd_, completion_flags_) \
 {                                                                               \
     .widget_type = quick_input,                                                 \
     .options = 0,                                                               \
@@ -69,7 +71,9 @@
             .label_location = label_loc,                                        \
             .label = NULL,                                                      \
             .text = txt,                                                        \
-            .flags = flags_,                                                    \
+            .completion_flags = completion_flags_,                              \
+            .is_passwd = is_passwd_,                                            \
+            .strip_passwd = strip_passwd_,                                      \
             .histname = hname,                                                  \
             .result = res                                                       \
         }                                                                       \
@@ -127,7 +131,6 @@
     .u = {                                                                      \
         .input = {                                                              \
             .text = NULL,                                                       \
-            .flags = 0,                                                         \
             .histname = NULL,                                                   \
             .result = NULL                                                      \
         }                                                                       \
@@ -157,7 +160,6 @@
     .u = {                                                                      \
         .input = {                                                              \
             .text = NULL,                                                       \
-            .flags = 0,                                                         \
             .histname = NULL,                                                   \
             .result = NULL                                                      \
         }                                                                       \
@@ -173,7 +175,6 @@
     .u = {                                                                      \
         .input = {                                                              \
             .text = NULL,                                                       \
-            .flags = 0,                                                         \
             .histname = NULL,                                                   \
             .result = NULL                                                      \
         }                                                                       \
@@ -189,7 +190,6 @@
     .u = {                                                                      \
         .input = {                                                              \
             .text = NULL,                                                       \
-            .flags = 0,                                                         \
             .histname = NULL,                                                   \
             .result = NULL                                                      \
         }                                                                       \
@@ -224,7 +224,6 @@
     .u = {                                                                      \
         .input = {                                                              \
             .text = NULL,                                                       \
-            .flags = 0,                                                         \
             .histname = NULL,                                                   \
             .result = NULL                                                      \
         }                                                                       \
@@ -295,10 +294,11 @@ struct quick_widget_t
             quick_input_label_location_t label_location;
             quick_widget_t *label;
             const char *text;
-            int flags;          /* 1 -- is_password, 2 -- INPUT_COMPLETE_CD */
+            input_complete_t completion_flags;
+            gboolean is_passwd; /* TRUE -- is password */
+            gboolean strip_passwd;
             const char *histname;
             char **result;
-            gboolean strip_password;
         } input;
 
         struct

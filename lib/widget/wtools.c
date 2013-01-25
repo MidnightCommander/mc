@@ -182,11 +182,12 @@ bg_message (int dummy, int *flags, char *title, const char *text)
  */
 static char *
 fg_input_dialog_help (const char *header, const char *text, const char *help,
-                      const char *history_name, const char *def_text, gboolean strip_password)
+                      const char *history_name, const char *def_text, gboolean strip_password,
+                      input_complete_t completion_flags)
 {
     char *p_text;
     char histname[64] = "inp|";
-    int flags = strip_password ? 4 : 0;
+    gboolean is_passwd = FALSE;
     char *my_str;
     int ret;
 
@@ -201,7 +202,7 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
        and hide characters with "*".  Don't save passwords in history! */
     if (def_text == INPUT_PASSWORD)
     {
-        flags = 1;
+        is_passwd = TRUE;
         histname[3] = '\0';
         def_text = "";
     }
@@ -209,8 +210,8 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     {
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
-            QUICK_LABELED_INPUT (p_text, input_label_above, def_text, flags, histname, &my_str,
-                                 NULL),
+            QUICK_LABELED_INPUT (p_text, input_label_above, def_text, histname, &my_str,
+                                 NULL, is_passwd, strip_password, completion_flags),
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
             /* *INDENT-ON* */
@@ -440,7 +441,8 @@ message (int flags, const char *title, const char *text, ...)
 
 char *
 input_dialog_help (const char *header, const char *text, const char *help,
-                   const char *history_name, const char *def_text, gboolean strip_password)
+                   const char *history_name, const char *def_text, gboolean strip_password,
+                   input_complete_t completion_flags)
 {
 #ifdef ENABLE_BACKGROUND
     if (mc_global.we_are_background)
@@ -449,40 +451,45 @@ input_dialog_help (const char *header, const char *text, const char *help,
         {
             void *p;
             char *(*f) (const char *, const char *, const char *, const char *, const char *,
-                        gboolean);
+                        gboolean, input_complete_t);
         } func;
         func.f = fg_input_dialog_help;
-        return wtools_parent_call_string (func.p, 6,
+        return wtools_parent_call_string (func.p, 7,
                                           strlen (header), header, strlen (text),
                                           text, strlen (help), help,
                                           strlen (history_name), history_name,
                                           strlen (def_text), def_text,
-                                          sizeof (gboolean), strip_password);
+                                          sizeof (gboolean), strip_password,
+                                          sizeof (input_complete_t), completion_flags);
     }
     else
 #endif /* ENABLE_BACKGROUND */
-        return fg_input_dialog_help (header, text, help, history_name, def_text, strip_password);
+        return fg_input_dialog_help (header, text, help, history_name, def_text, strip_password,
+                                     completion_flags);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 /** Show input dialog with default help, background safe */
 
 char *
-input_dialog (const char *header, const char *text, const char *history_name, const char *def_text)
+input_dialog (const char *header, const char *text, const char *history_name, const char *def_text,
+              input_complete_t completion_flags)
 {
-    return input_dialog_help (header, text, "[Input Line Keys]", history_name, def_text, FALSE);
+    return input_dialog_help (header, text, "[Input Line Keys]", history_name, def_text, FALSE,
+                              completion_flags);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 char *
 input_expand_dialog (const char *header, const char *text,
-                     const char *history_name, const char *def_text)
+                     const char *history_name, const char *def_text,
+                     input_complete_t completion_flags)
 {
     char *result;
     char *expanded;
 
-    result = input_dialog (header, text, history_name, def_text);
+    result = input_dialog (header, text, history_name, def_text, completion_flags);
     if (result)
     {
         expanded = tilde_expand (result);

@@ -258,7 +258,8 @@ add2panelize_cmd (void)
     if (pname->buffer && (*pname->buffer))
     {
         label = input_dialog (_("Add to external panelize"),
-                              _("Enter command label:"), MC_HISTORY_FM_PANELIZE_ADD, "");
+                              _("Enter command label:"), MC_HISTORY_FM_PANELIZE_ADD, "",
+                              INPUT_COMPLETE_DEFAULT);
         if (!label)
             return;
         if (!*label)

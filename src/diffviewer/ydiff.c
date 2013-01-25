@@ -2908,7 +2908,9 @@ dview_goto_cmd (WDiff * dview, diff_place_t ord)
     int newline;
     char *input;
 
-    input = input_dialog (_(title[ord]), _("Enter line:"), MC_HISTORY_YDIFF_GOTO_LINE, prev);
+    input =
+        input_dialog (_(title[ord]), _("Enter line:"), MC_HISTORY_YDIFF_GOTO_LINE, prev,
+                      INPUT_COMPLETE_DEFAULT);
     if (input != NULL)
     {
         const char *s = input;

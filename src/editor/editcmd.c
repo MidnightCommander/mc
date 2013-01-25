@@ -462,8 +462,8 @@ edit_get_save_file_as (WEdit * edit)
     {
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
-            QUICK_LABELED_INPUT (N_("Enter file name:"), input_label_above,  filename, 0, "save-as",
-                                 &filename_res, NULL),
+            QUICK_LABELED_INPUT (N_("Enter file name:"), input_label_above,  filename, "save-as",
+                                 &filename_res, NULL, FALSE, FALSE, INPUT_COMPLETE_DEFAULT),
             QUICK_SEPARATOR (TRUE),
             QUICK_LABEL (N_("Change line breaks to:"), NULL),
             QUICK_RADIO (LB_NAMES, lb_names, (int *) &cur_lb, NULL),
@@ -1602,8 +1602,8 @@ edit_save_mode_cmd (void)
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
             QUICK_RADIO (3, str, &option_save_mode, &edit_save_mode_radio_id),
-            QUICK_INPUT (option_backup_ext, 0, "edit-backup-ext", &str_result,
-                         &edit_save_mode_input_id),
+            QUICK_INPUT (option_backup_ext, "edit-backup-ext", &str_result,
+                         &edit_save_mode_input_id, FALSE, FALSE, INPUT_COMPLETE_DEFAULT),
             QUICK_SEPARATOR (TRUE),
             QUICK_CHECKBOX (N_("Check &POSIX new line"), &option_check_nl_at_eof, NULL),
             QUICK_BUTTONS_OK_CANCEL,
@@ -1897,7 +1897,8 @@ edit_repeat_macro_cmd (WEdit * edit)
     long count_repeat;
     char *error = NULL;
 
-    f = input_dialog (_("Repeat last commands"), _("Repeat times:"), MC_HISTORY_EDIT_REPEAT, NULL);
+    f = input_dialog (_("Repeat last commands"), _("Repeat times:"), MC_HISTORY_EDIT_REPEAT, NULL,
+                      INPUT_COMPLETE_DEFAULT);
     if (f == NULL || *f == '\0')
     {
         g_free (f);
@@ -2063,7 +2064,7 @@ edit_load_cmd (WDialog * h)
     gboolean ret = TRUE;        /* possible cancel */
 
     exp = input_expand_dialog (_("Load"), _("Enter file name:"),
-                               MC_HISTORY_EDIT_LOAD, INPUT_LAST_TEXT);
+                               MC_HISTORY_EDIT_LOAD, INPUT_LAST_TEXT, INPUT_COMPLETE_DEFAULT);
 
     if (exp != NULL && *exp != '\0')
     {
@@ -3058,7 +3059,8 @@ edit_goto_cmd (WEdit * edit)
     char s[32];
 
     g_snprintf (s, sizeof (s), "%ld", line);
-    f = input_dialog (_("Goto line"), _("Enter line:"), MC_HISTORY_EDIT_GOTO_LINE, line ? s : "");
+    f = input_dialog (_("Goto line"), _("Enter line:"), MC_HISTORY_EDIT_GOTO_LINE, line ? s : "",
+                      INPUT_COMPLETE_DEFAULT);
     if (!f)
         return;
 
@@ -3101,7 +3103,7 @@ edit_save_block_cmd (WEdit * edit)
     tmp = mc_config_get_full_path (EDIT_CLIP_FILE);
     exp =
         input_expand_dialog (_("Save block"), _("Enter file name:"),
-                             MC_HISTORY_EDIT_SAVE_BLOCK, tmp);
+                             MC_HISTORY_EDIT_SAVE_BLOCK, tmp, INPUT_COMPLETE_DEFAULT);
     g_free (tmp);
     edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
 
@@ -3133,7 +3135,7 @@ edit_insert_file_cmd (WEdit * edit)
 
     tmp = mc_config_get_full_path (EDIT_CLIP_FILE);
     exp = input_expand_dialog (_("Insert file"), _("Enter file name:"),
-                               MC_HISTORY_EDIT_INSERT_FILE, tmp);
+                               MC_HISTORY_EDIT_INSERT_FILE, tmp, INPUT_COMPLETE_DEFAULT);
     g_free (tmp);
 
     edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
@@ -3179,7 +3181,7 @@ edit_sort_cmd (WEdit * edit)
 
     exp = input_dialog (_("Run sort"),
                         _("Enter sort options (see manpage) separated by whitespace:"),
-                        MC_HISTORY_EDIT_SORT, (old != NULL) ? old : "");
+                        MC_HISTORY_EDIT_SORT, (old != NULL) ? old : "", INPUT_COMPLETE_DEFAULT);
 
     if (!exp)
         return 1;
@@ -3241,7 +3243,8 @@ edit_ext_cmd (WEdit * edit)
 
     exp =
         input_dialog (_("Paste output of external command"),
-                      _("Enter shell command(s):"), MC_HISTORY_EDIT_PASTE_EXTCMD, NULL);
+                      _("Enter shell command(s):"), MC_HISTORY_EDIT_PASTE_EXTCMD, NULL,
+                      INPUT_COMPLETE_DEFAULT);
 
     if (!exp)
         return 1;
@@ -3308,14 +3311,14 @@ edit_mail_dialog (WEdit * edit)
         /* *INDENT-OFF* */
         QUICK_LABEL (N_("mail -s <subject> -c <cc> <to>"), NULL),
         QUICK_LABELED_INPUT (N_("To"), input_label_above,
-                             mail_to_last != NULL ? mail_to_last : "", 0,
-                             "mail-dlg-input-3", &tmail_to, NULL),
+                             mail_to_last != NULL ? mail_to_last : "", "mail-dlg-input-3",
+                             &tmail_to, NULL, FALSE, FALSE, INPUT_COMPLETE_DEFAULT),
         QUICK_LABELED_INPUT (N_("Subject"), input_label_above,
-                              mail_subject_last != NULL ? mail_subject_last : "", 0,
-                             "mail-dlg-input-2", &tmail_subject, NULL),
+                              mail_subject_last != NULL ? mail_subject_last : "", "mail-dlg-input-2",
+                              &tmail_subject, NULL, FALSE, FALSE, INPUT_COMPLETE_DEFAULT),
         QUICK_LABELED_INPUT (N_("Copies to"), input_label_above,
-                             mail_cc_last != NULL ? mail_cc_last  : "", 0,
-                             "mail-dlg-input", &tmail_cc, NULL),
+                             mail_cc_last != NULL ? mail_cc_last  : "", "mail-dlg-input",
+                             &tmail_cc, NULL, FALSE, FALSE, INPUT_COMPLETE_DEFAULT),
         QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
         /* *INDENT-ON* */
