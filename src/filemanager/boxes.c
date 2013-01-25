@@ -466,7 +466,7 @@ configure_box (void)
                     QUICK_LABELED_INPUT (N_("Timeout:"), input_label_left,
                                          (const char *) time_out, MC_HISTORY_ESC_TIMEOUT,
                                          &time_out_new, &configure_time_out_id, FALSE, FALSE,
-                                         INPUT_COMPLETE_DEFAULT),
+                                         INPUT_COMPLETE_NONE),
                 QUICK_STOP_GROUPBOX,
                 QUICK_START_GROUPBOX (N_("Pause after run")),
                     QUICK_RADIO (pause_options_num, pause_options, &pause_after_run, NULL),
@@ -655,11 +655,11 @@ panel_listing_box (WPanel * panel, char **userp, char **minip, int *use_msformat
             /* *INDENT-OFF* */
             QUICK_RADIO (LIST_TYPES, list_types, &result, &panel_listing_types_id),
             QUICK_INPUT (panel->user_format, "user-fmt-input", &panel_user_format,
-                         &panel_user_format_id, FALSE, FALSE, INPUT_COMPLETE_DEFAULT),
+                         &panel_user_format_id, FALSE, FALSE, INPUT_COMPLETE_NONE),
             QUICK_SEPARATOR (TRUE),
             QUICK_CHECKBOX (N_("User &mini status"), &mini_user_status, &mini_user_status_id),
             QUICK_INPUT (panel->user_status_format[panel->list_type], "mini_input",
-                         &mini_user_format, &mini_user_format_id, FALSE, FALSE, INPUT_COMPLETE_DEFAULT),
+                         &mini_user_format, &mini_user_format_id, FALSE, FALSE, INPUT_COMPLETE_NONE),
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
             /* *INDENT-ON* */
@@ -976,19 +976,19 @@ configure_vfs (void)
             /* *INDENT-OFF* */
             QUICK_LABELED_INPUT (N_("Timeout for freeing VFSs (sec):"), input_label_left,
                                  buffer2, "input-timo-vfs", &ret_timeout, NULL, FALSE, FALSE,
-                                 INPUT_COMPLETE_DEFAULT),
+                                 INPUT_COMPLETE_NONE),
 #ifdef ENABLE_VFS_FTP
             QUICK_SEPARATOR (TRUE),
             QUICK_LABELED_INPUT (N_("FTP anonymous password:"), input_label_left,
                                  ftpfs_anonymous_passwd, "input-passwd", &ret_passwd, NULL,
-                                 FALSE, FALSE, INPUT_COMPLETE_DEFAULT),
+                                 FALSE, FALSE, INPUT_COMPLETE_NONE),
             QUICK_LABELED_INPUT (N_("FTP directory cache timeout (sec):"), input_label_left,
                                  buffer3, "input-timeout", &ret_directory_timeout, NULL,
-                                 FALSE, FALSE, INPUT_COMPLETE_DEFAULT),
+                                 FALSE, FALSE, INPUT_COMPLETE_NONE),
             QUICK_CHECKBOX (N_("&Always use ftp proxy:"), &ftpfs_always_use_proxy,
                             &ftpfs_always_use_proxy_id),
             QUICK_INPUT (ftpfs_proxy_host, "input-ftp-proxy", &ret_ftp_proxy,
-                         &ftpfs_proxy_host_id, FALSE, FALSE, INPUT_COMPLETE_DEFAULT),
+                         &ftpfs_proxy_host_id, FALSE, FALSE, INPUT_COMPLETE_HOSTNAMES),
             QUICK_CHECKBOX (N_("&Use ~/.netrc"), &ftpfs_use_netrc, NULL),
             QUICK_CHECKBOX (N_("Use &passive mode"), &ftpfs_use_passive_connections, NULL),
             QUICK_CHECKBOX (N_("Use passive mode over pro&xy"),
@@ -1047,7 +1047,7 @@ cd_dialog (void)
 
     quick_widget_t quick_widgets[] = {
         QUICK_LABELED_INPUT (N_("cd"), input_label_left, "", "input", &my_str, NULL, FALSE, TRUE,
-                             INPUT_COMPLETE_DEFAULT),
+                             INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD),
         QUICK_END
     };
 
@@ -1077,10 +1077,10 @@ symlink_dialog (const vfs_path_t * existing_vpath, const vfs_path_t * new_vpath,
             /* *INDENT-OFF* */
             QUICK_LABELED_INPUT (N_("Existing filename (filename symlink will point to):"),
                                  input_label_above,
-                                 existing, "input-2", ret_existing, NULL, FALSE, FALSE, INPUT_COMPLETE_DEFAULT),
+                                 existing, "input-2", ret_existing, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
             QUICK_SEPARATOR (FALSE),
             QUICK_LABELED_INPUT (N_("Symbolic link filename:"), input_label_above,
-                                 new, "input-1", ret_new, NULL, FALSE, FALSE, INPUT_COMPLETE_DEFAULT),
+                                 new, "input-1", ret_new, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
             /* *INDENT-ON* */
@@ -1203,11 +1203,11 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain, c
                 QUICK_SEPARATOR (FALSE),
                 QUICK_LABEL (N_("Password:"), NULL),
             QUICK_NEXT_COLUMN,
-                QUICK_INPUT (domain, "auth_domain", &ret_domain, NULL, FALSE, FALSE, INPUT_COMPLETE_DEFAULT),
+                QUICK_INPUT (domain, "auth_domain", &ret_domain, NULL, FALSE, FALSE, INPUT_COMPLETE_HOSTNAMES),
                 QUICK_SEPARATOR (FALSE),
-                QUICK_INPUT (user, "auth_name", &ret_user, NULL, FALSE, FALSE, INPUT_COMPLETE_DEFAULT),
+                QUICK_INPUT (user, "auth_name", &ret_user, NULL, FALSE, FALSE, INPUT_COMPLETE_USERNAMES),
                 QUICK_SEPARATOR (FALSE),
-                QUICK_INPUT ("", "auth_password", &ret_password, NULL, TRUE, FALSE, INPUT_COMPLETE_DEFAULT),
+                QUICK_INPUT ("", "auth_password", &ret_password, NULL, TRUE, FALSE, INPUT_COMPLETE_NONE),
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END

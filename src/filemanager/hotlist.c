@@ -961,10 +961,10 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
     quick_widget_t quick_widgets[] = {
         /* *INDENT-OFF* */
         QUICK_LABELED_INPUT (text1, input_label_above, *r1, "input-lbl", r1, NULL,
-                             FALSE, FALSE, INPUT_COMPLETE_DEFAULT),
+                             FALSE, FALSE, INPUT_COMPLETE_NONE),
         QUICK_SEPARATOR (FALSE),
         QUICK_LABELED_INPUT (text2, input_label_above, *r2, "input-lbl", r2, NULL,
-                             FALSE, FALSE, INPUT_COMPLETE_DEFAULT),
+                             FALSE, FALSE, INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD),
         QUICK_START_BUTTONS (TRUE, TRUE),
             QUICK_BUTTON (N_("&Append"), B_APPEND, NULL, NULL),
             QUICK_BUTTON (N_("&Insert"), B_INSERT, NULL, NULL),
@@ -1026,7 +1026,7 @@ add_new_group_input (const char *header, const char *label, char **result)
     quick_widget_t quick_widgets[] = {
         /* *INDENT-OFF* */
         QUICK_LABELED_INPUT (label, input_label_above, "", "input", result, NULL,
-                             FALSE, FALSE, INPUT_COMPLETE_DEFAULT),
+                             FALSE, FALSE, INPUT_COMPLETE_NONE),
         QUICK_START_BUTTONS (TRUE, TRUE),
             QUICK_BUTTON (N_("&Append"), B_APPEND, NULL, NULL),
             QUICK_BUTTON (N_("&Insert"), B_INSERT, NULL, NULL),
@@ -1570,7 +1570,7 @@ add2hotlist_cmd (void)
     lc_prompt = g_strdup_printf (cp, str_trunc (label_string, COLS - 2 * UX - (l + 8)));
     label =
         input_dialog (_("Add to hotlist"), lc_prompt, MC_HISTORY_HOTLIST_ADD, label_string,
-                      INPUT_COMPLETE_DEFAULT);
+                      INPUT_COMPLETE_NONE);
     g_free (lc_prompt);
 
     if (label == NULL || *label == '\0')

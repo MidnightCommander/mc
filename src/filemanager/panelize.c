@@ -186,8 +186,12 @@ init_panelize (void)
     add_widget (panelize_dlg, label_new (y++, UX, _("Command")));
     pname =
         input_new (y++, UX, input_get_default_colors (), panelize_cols - UX * 2, "", "in",
-                   INPUT_COMPLETE_DEFAULT);
+                   INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_HOSTNAMES | INPUT_COMPLETE_COMMANDS |
+                   INPUT_COMPLETE_VARIABLES | INPUT_COMPLETE_USERNAMES | INPUT_COMPLETE_CD |
+                   INPUT_COMPLETE_SHELL_ESC);
     add_widget (panelize_dlg, pname);
+
+
 
     add_widget (panelize_dlg, hline_new (y++, -1, -1));
 
@@ -259,7 +263,7 @@ add2panelize_cmd (void)
     {
         label = input_dialog (_("Add to external panelize"),
                               _("Enter command label:"), MC_HISTORY_FM_PANELIZE_ADD, "",
-                              INPUT_COMPLETE_DEFAULT);
+                              INPUT_COMPLETE_NONE);
         if (!label)
             return;
         if (!*label)

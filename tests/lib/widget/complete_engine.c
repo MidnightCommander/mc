@@ -115,56 +115,56 @@ static const struct test_complete_engine_fill_completions_ds
     {
         "string",
         3,
-        INPUT_COMPLETE_DEFAULT,
+        INPUT_COMPLETE_NONE,
         0,
         3
     },
     {
         "some string",
         7,
-        INPUT_COMPLETE_DEFAULT,
+        INPUT_COMPLETE_NONE,
         5,
         7
     },
     {
         "some\tstring",
         7,
-        INPUT_COMPLETE_DEFAULT,
+        INPUT_COMPLETE_NONE,
         5,
         7
     },
     {
         "some;string",
         7,
-        INPUT_COMPLETE_DEFAULT,
+        INPUT_COMPLETE_NONE,
         5,
         7
     },
     {
         "some|string",
         7,
-        INPUT_COMPLETE_DEFAULT,
+        INPUT_COMPLETE_NONE,
         5,
         7
     },
     {
         "some<string",
         7,
-        INPUT_COMPLETE_DEFAULT,
+        INPUT_COMPLETE_NONE,
         5,
         7
     },
     {
         "some>string",
         7,
-        INPUT_COMPLETE_DEFAULT,
+        INPUT_COMPLETE_NONE,
         5,
         7
     },
     {
         "some!@#$%^&*()_\\+~`\"',./?:string",
         30,
-        INPUT_COMPLETE_DEFAULT,
+        INPUT_COMPLETE_NONE,
         0,
         30
     },
