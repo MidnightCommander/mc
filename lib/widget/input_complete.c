@@ -280,32 +280,25 @@ filename_completion_function (const char *text, int state, input_complete_t flag
         users_dirname = NULL;
         return NULL;
     }
-    else
+
     {
-        char *temp;
+        GString *temp;
 
-        if (users_dirname && (users_dirname[0] != '.' || users_dirname[1]))
+        temp = g_string_sized_new (16);
+
+        if (users_dirname != NULL && (users_dirname[0] != '.' || users_dirname[1] != '\0'))
         {
-            size_t dirlen = strlen (users_dirname);
-            temp = g_malloc (3 + dirlen + NLENGTH (entry));
-            strcpy (temp, users_dirname);
+            g_string_append (temp, users_dirname);
+
             /* We need a `/' at the end. */
-            if (users_dirname[dirlen - 1] != PATH_SEP)
-            {
-                temp[dirlen] = PATH_SEP;
-                temp[dirlen + 1] = '\0';
-            }
-            strcat (temp, entry->d_name);
+            if (temp->str[temp->len - 1] != PATH_SEP)
+                g_string_append_c (temp, PATH_SEP);
         }
-        else
-        {
-            temp = g_malloc (2 + NLENGTH (entry));
-            strcpy (temp, entry->d_name);
-        }
+        g_string_append (temp, entry->d_name);
         if (isdir)
-            strcat (temp, PATH_SEP_STR);
+            g_string_append_c (temp, PATH_SEP);
 
-        return temp;
+        return g_string_free (temp, FALSE);
     }
 }
 
@@ -353,7 +346,8 @@ static char *
 variable_completion_function (const char *text, int state, input_complete_t flags)
 {
     static char **env_p;
-    static int varlen, isbrace;
+    static unsigned int isbrace;
+    static size_t varlen;
     const char *p = NULL;
 
     (void) flags;
@@ -361,7 +355,7 @@ variable_completion_function (const char *text, int state, input_complete_t flag
 
     if (state == 0)
     {                           /* Initialization stuff */
-        isbrace = (text[1] == '{');
+        isbrace = (text[1] == '{') ? 1 : 0;
         varlen = strlen (text + 1 + isbrace);
         env_p = environ;
     }
@@ -369,7 +363,7 @@ variable_completion_function (const char *text, int state, input_complete_t flag
     while (*env_p)
     {
         p = strchr (*env_p, '=');
-        if (p && p - *env_p >= varlen && !strncmp (text + 1 + isbrace, *env_p, varlen))
+        if (p && ((size_t) (p - *env_p) >= varlen) && !strncmp (text + 1 + isbrace, *env_p, varlen))
             break;
         env_p++;
     }
@@ -378,18 +372,20 @@ variable_completion_function (const char *text, int state, input_complete_t flag
         return NULL;
 
     {
-        char *temp = g_malloc (2 + 2 * isbrace + p - *env_p);
+        GString *temp;
 
-        *temp = '$';
-        if (isbrace)
-            temp[1] = '{';
-        memcpy (temp + 1 + isbrace, *env_p, p - *env_p);
-        if (isbrace)
-            strcpy (temp + 2 + (p - *env_p), "}");
-        else
-            temp[1 + p - *env_p] = 0;
+        temp = g_string_new_len (*env_p, p - *env_p);
+
+        if (isbrace != 0)
+        {
+            g_string_prepend_c (temp, '{');
+            g_string_append_c (temp, '}');
+        }
+        g_string_prepend_c (temp, '$');
+
         env_p++;
-        return temp;
+
+        return g_string_free (temp, FALSE);
     }
 }
 
@@ -484,7 +480,8 @@ static char *
 hostname_completion_function (const char *text, int state, input_complete_t flags)
 {
     static char **host_p;
-    static int textstart, textlen;
+    static unsigned int textstart;
+    static size_t textlen;
 
     (void) flags;
     SHOW_C_CTX ("hostname_completion_function");
@@ -525,15 +522,18 @@ hostname_completion_function (const char *text, int state, input_complete_t flag
         hosts = NULL;
         return NULL;
     }
-    else
-    {
-        char *temp = g_malloc (2 + strlen (*host_p));
 
-        if (textstart)
-            *temp = '@';
-        strcpy (temp + textstart, *host_p);
+    {
+        GString *temp;
+
+        temp = g_string_sized_new (8);
+
+        if (textstart != 0)
+            g_string_append_c (temp, '@');
+        g_string_append (temp, *host_p);
         host_p++;
-        return temp;
+
+        return g_string_free (temp, FALSE);
     }
 }
 
@@ -940,7 +940,7 @@ try_complete_all_possible (try_complete_automation_state_t * state, char *text, 
                 for (state->p += 2;
                      *state->p && state->p < state->q && (*state->p == ' ' || *state->p == '\t');
                      str_next_char (&state->p))
-                ;
+                    ;
             if (state->p == state->q)
             {
                 char *const cdpath_ref = g_strdup (getenv ("CDPATH"));
