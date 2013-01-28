@@ -314,13 +314,13 @@ show_tree (WTree * tree)
 
             if (current->sublevel < tree->selected_ptr->sublevel)
             {
-                if (vfs_path_cmp (current->name, tree->selected_ptr->name) == 0)
+                if (vfs_path_equal (current->name, tree->selected_ptr->name))
                     i++;
             }
             else if (current->sublevel == tree->selected_ptr->sublevel)
             {
                 for (j = strlen (current_name) - 1; current_name[j] != PATH_SEP; j--);
-                if (vfs_path_ncmp (current->name, tree->selected_ptr->name, j) == 0)
+                if (vfs_path_equal_len (current->name, tree->selected_ptr->name, j))
                     i++;
             }
             else
@@ -328,8 +328,8 @@ show_tree (WTree * tree)
                 if (current->sublevel == tree->selected_ptr->sublevel + 1
                     && vfs_path_len (tree->selected_ptr->name) > 1)
                 {
-                    if (vfs_path_ncmp (current->name, tree->selected_ptr->name,
-                                       vfs_path_len (tree->selected_ptr->name)) == 0)
+                    if (vfs_path_equal_len (current->name, tree->selected_ptr->name,
+                                            vfs_path_len (tree->selected_ptr->name)))
                         i++;
                 }
             }
@@ -406,8 +406,8 @@ show_tree (WTree * tree)
             {
                 if (current->sublevel < tree->selected_ptr->sublevel)
                 {
-                    if (vfs_path_ncmp (current->name, tree->selected_ptr->name,
-                                       vfs_path_len (current->name)) == 0)
+                    if (vfs_path_equal_len (current->name, tree->selected_ptr->name,
+                                            vfs_path_len (current->name)))
                         break;
                 }
                 else if (current->sublevel == tree->selected_ptr->sublevel)
@@ -418,14 +418,14 @@ show_tree (WTree * tree)
                     for (j = strlen (current_name) - 1; current_name[j] != PATH_SEP; j--)
                         ;
                     g_free (current_name);
-                    if (vfs_path_ncmp (current->name, tree->selected_ptr->name, j) == 0)
+                    if (vfs_path_equal_len (current->name, tree->selected_ptr->name, j))
                         break;
                 }
                 else if (current->sublevel == tree->selected_ptr->sublevel + 1
                          && vfs_path_len (tree->selected_ptr->name) > 1)
                 {
-                    if (vfs_path_ncmp (current->name, tree->selected_ptr->name,
-                                       vfs_path_len (tree->selected_ptr->name)) == 0)
+                    if (vfs_path_equal_len (current->name, tree->selected_ptr->name,
+                                            vfs_path_len (tree->selected_ptr->name)))
                         break;
                 }
                 current = current->next;

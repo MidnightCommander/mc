@@ -92,8 +92,8 @@ char *vfs_path_build_url_params_str (const vfs_path_element_t * element, gboolea
 char *vfs_path_element_build_pretty_path_str (const vfs_path_element_t * element);
 
 size_t vfs_path_len (const vfs_path_t * vpath);
-int vfs_path_cmp (const vfs_path_t * vpath1, const vfs_path_t * vpath2);
-int vfs_path_ncmp (const vfs_path_t * vpath1, const vfs_path_t * vpath2, size_t len);
+gboolean vfs_path_equal (const vfs_path_t * vpath1, const vfs_path_t * vpath2);
+gboolean vfs_path_equal_len (const vfs_path_t * vpath1, const vfs_path_t * vpath2, size_t len);
 vfs_path_t *vfs_path_to_absolute (const vfs_path_t * vpath);
 
 /*** inline functions ****************************************************************************/

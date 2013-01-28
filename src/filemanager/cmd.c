@@ -1044,7 +1044,7 @@ reread_cmd (void)
     panel_update_flags_t flag = UP_ONLY_CURRENT;
 
     if (get_current_type () == view_listing && get_other_type () == view_listing &&
-        vfs_path_cmp (current_panel->cwd_vpath, other_panel->cwd_vpath) == 0)
+        vfs_path_equal (current_panel->cwd_vpath, other_panel->cwd_vpath))
         flag = UP_OPTIMIZE;
 
     update_panels (UP_RELOAD | flag, UP_KEEPSEL);

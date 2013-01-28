@@ -66,10 +66,10 @@ teardown (void)
 #define path_cmp_one_check(input1, input2, etalon_condition) {\
     vpath1 = vfs_path_from_str (input1);\
     vpath2 = vfs_path_from_str (input2);\
-    result = vfs_path_cmp (vpath1, vpath2);\
+    result = vfs_path_equal (vpath1, vpath2);\
     vfs_path_free (vpath1); \
     vfs_path_free (vpath2); \
-    fail_unless ( result etalon_condition, "\ninput1: %s\ninput2: %s\nexpected: %d\nactual: %d\n",\
+    fail_unless ( result  == etalon_condition, "\ninput1: %s\ninput2: %s\nexpected: %d\nactual: %d\n",\
         input1, input2, #etalon_condition, result); \
 }
 
@@ -80,16 +80,18 @@ START_TEST (test_path_compare)
     vfs_path_t *vpath1, *vpath2;
     int result;
 
-    path_cmp_one_check ("/тестовый/путь", "/тестовый/путь", == 0);
+    path_cmp_one_check ("/тестовый/путь", "/тестовый/путь", TRUE);
 
 #ifdef HAVE_CHARSET
-    path_cmp_one_check ("/#enc:KOI8-R/тестовый/путь", "/тестовый/путь", <0);
-    path_cmp_one_check ("/тестовый/путь", "/#enc:KOI8-R/тестовый/путь", >0);
+    path_cmp_one_check ("/#enc:KOI8-R/тестовый/путь", "/тестовый/путь",
+                        FALSE);
+    path_cmp_one_check ("/тестовый/путь", "/#enc:KOI8-R/тестовый/путь",
+                        FALSE);
 #endif
 
-    path_cmp_one_check (NULL, "/тестовый/путь", -1);
-    path_cmp_one_check ("/тестовый/путь", NULL, -1);
-    path_cmp_one_check (NULL, NULL, -1);
+    path_cmp_one_check (NULL, "/тестовый/путь", FALSE);
+    path_cmp_one_check ("/тестовый/путь", NULL, FALSE);
+    path_cmp_one_check (NULL, NULL, FALSE);
 }
 /* *INDENT-OFF* */
 END_TEST
@@ -101,10 +103,10 @@ END_TEST
 #define path_cmp_one_check(input1, input2, len, etalon_condition) {\
     vpath1 = vfs_path_from_str (input1);\
     vpath2 = vfs_path_from_str (input2);\
-    result = vfs_path_ncmp (vpath1, vpath2, len);\
+    result = vfs_path_equal_len (vpath1, vpath2, len);\
     vfs_path_free (vpath1); \
     vfs_path_free (vpath2); \
-    fail_unless ( result etalon_condition, "\ninput1: %s\ninput2: %s\nexpected: %d\nactual: %d\n",\
+    fail_unless ( result == etalon_condition, "\ninput1: %s\ninput2: %s\nexpected: %d\nactual: %d\n",\
         input1, input2, #etalon_condition, result); \
 }
 
@@ -115,17 +117,17 @@ START_TEST (test_path_compare_len)
     vfs_path_t *vpath1, *vpath2;
     int result;
 
-    path_cmp_one_check ("/тестовый/путь", "/тестовый/путь", 10, == 0);
+    path_cmp_one_check ("/тестовый/путь", "/тестовый/путь", 10, TRUE);
 
-    path_cmp_one_check ("/тест/овый/путь", "/тестовый/путь", 10, <0);
+    path_cmp_one_check ("/тест/овый/путь", "/тестовый/путь", 10, FALSE);
 
-    path_cmp_one_check ("/тестовый/путь", "/тест/овый/путь", 10, >0);
+    path_cmp_one_check ("/тестовый/путь", "/тест/овый/путь", 10, FALSE);
 
-    path_cmp_one_check ("/тест/овый/путь", "/тестовый/путь", 9, == 0);
+    path_cmp_one_check ("/тест/овый/путь", "/тестовый/путь", 9, TRUE);
 
-    path_cmp_one_check (NULL, "/тестовый/путь", 0, <0);
-    path_cmp_one_check ("/тестовый/путь", NULL, 0, <0);
-    path_cmp_one_check (NULL, NULL, 0, <0);
+    path_cmp_one_check (NULL, "/тестовый/путь", 0, FALSE);
+    path_cmp_one_check ("/тестовый/путь", NULL, 0, FALSE);
+    path_cmp_one_check (NULL, NULL, 0, FALSE);
 }
 /* *INDENT-OFF* */
 END_TEST

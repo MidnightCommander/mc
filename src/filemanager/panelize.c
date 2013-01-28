@@ -418,7 +418,7 @@ do_panelize_cd (struct WPanel *panel)
     panel->count = panelized_panel.count;
     panel->is_panelized = TRUE;
 
-    panelized_same = (vfs_path_cmp (panelized_panel.root_vpath, panel->cwd_vpath) == 0);
+    panelized_same = (vfs_path_equal (panelized_panel.root_vpath, panel->cwd_vpath));
 
     for (i = 0; i < panelized_panel.count; i++)
     {

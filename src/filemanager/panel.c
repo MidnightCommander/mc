@@ -4812,7 +4812,7 @@ do_cd (const vfs_path_t * new_dir_vpath, enum cd_enum exact)
         size_t new_vpath_len;
 
         new_vpath_len = vfs_path_len (new_dir_vpath);
-        if (vfs_path_ncmp (new_dir_vpath, panelized_panel.root_vpath, new_vpath_len) == 0)
+        if (vfs_path_equal_len (new_dir_vpath, panelized_panel.root_vpath, new_vpath_len))
             _new_dir_vpath = panelized_panel.root_vpath;
     }
 

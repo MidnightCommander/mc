@@ -1663,7 +1663,7 @@ edit_save_as_cmd (WEdit * edit)
         {
             int rv;
 
-            if (vfs_path_cmp (edit->filename_vpath, exp_vpath) != 0)
+            if (!vfs_path_equal (edit->filename_vpath, exp_vpath))
             {
                 int file;
                 struct stat sb;
