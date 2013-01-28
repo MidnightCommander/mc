@@ -30,37 +30,109 @@
 #include "regex.c"              /* for testing static functions */
 
 /* --------------------------------------------------------------------------------------------- */
-#define test_helper_valid_data(from, etalon, dest_str, replace_flags, utf) { \
-    dest_str = g_string_new(""); \
-    mc_search_regex__process_escape_sequence (dest_str, from, -1, &replace_flags, utf); \
-    fail_if (strcmp(dest_str->str, etalon), "dest_str(%s) != %s", dest_str->str, etalon); \
-    g_string_free(dest_str, TRUE); \
-}
 
-/* --------------------------------------------------------------------------------------------- */
-
+/* @DataSource("test_regex_process_escape_sequence_ds") */
 /* *INDENT-OFF* */
-START_TEST (test_regex_process_escape_sequence_valid)
+static const struct test_regex_process_escape_sequence_ds
+{
+    const char *input_from;
+    const replace_transform_type_t input_initial_flags;
+    const gboolean input_use_utf;
+    const char *expected_string;
+} test_regex_process_escape_sequence_ds[] =
+{
+    { /* 0. */
+        "{101}",
+        REPLACE_T_NO_TRANSFORM,
+        FALSE,
+        "A"
+    },
+    { /* 1. */
+        "x42",
+        REPLACE_T_NO_TRANSFORM,
+        FALSE,
+        "B"
+    },
+    { /* 2. */
+        "x{444}",
+        REPLACE_T_NO_TRANSFORM,
+        FALSE,
+        "D"
+    },
+    { /* 3. */
+        "x{444}",
+        REPLACE_T_NO_TRANSFORM,
+        TRUE,
+        "ф"
+    },
+    { /* 4. */
+        "n",
+        REPLACE_T_NO_TRANSFORM,
+        FALSE,
+        "\n"
+    },
+    { /* 5. */
+        "t",
+        REPLACE_T_NO_TRANSFORM,
+        FALSE,
+        "\t"
+    },
+    { /* 6. */
+        "v",
+        REPLACE_T_NO_TRANSFORM,
+        FALSE,
+        "\v"
+    },
+    { /* 7. */
+        "b",
+        REPLACE_T_NO_TRANSFORM,
+        FALSE,
+        "\b"
+    },
+    { /* 8. */
+        "r",
+        REPLACE_T_NO_TRANSFORM,
+        FALSE,
+        "\r"
+    },
+    { /* 9. */
+        "f",
+        REPLACE_T_NO_TRANSFORM,
+        FALSE,
+        "\f"
+    },
+    { /* 10. */
+        "a",
+        REPLACE_T_NO_TRANSFORM,
+        FALSE,
+        "\a"
+    },
+};
+/* *INDENT-ON* */
+
+/* @Test(dataSource = "test_regex_process_escape_sequence_ds") */
+/* *INDENT-OFF* */
+START_PARAMETRIZED_TEST (test_regex_process_escape_sequence, test_regex_process_escape_sequence_ds)
 /* *INDENT-ON* */
 {
-    GString *dest_str;
+    /* given */
+    GString *actual_string;
     replace_transform_type_t replace_flags = REPLACE_T_NO_TRANSFORM;
 
-    test_helper_valid_data ("{101}", "A", dest_str, replace_flags, FALSE);
-    test_helper_valid_data ("x42", "B", dest_str, replace_flags, FALSE);
-    test_helper_valid_data ("x{444}", "D", dest_str, replace_flags, FALSE);
-    test_helper_valid_data ("x{444}", "ф", dest_str, replace_flags, TRUE);
+    replace_flags = data->input_initial_flags;
+    actual_string = g_string_new ("");
 
-    test_helper_valid_data ("n", "\n", dest_str, replace_flags, FALSE);
-    test_helper_valid_data ("t", "\t", dest_str, replace_flags, FALSE);
-    test_helper_valid_data ("v", "\v", dest_str, replace_flags, FALSE);
-    test_helper_valid_data ("b", "\b", dest_str, replace_flags, FALSE);
-    test_helper_valid_data ("r", "\r", dest_str, replace_flags, FALSE);
-    test_helper_valid_data ("f", "\f", dest_str, replace_flags, FALSE);
-    test_helper_valid_data ("a", "\a", dest_str, replace_flags, FALSE);
+    /* when */
+    mc_search_regex__process_escape_sequence (actual_string, data->input_from, -1, &replace_flags,
+                                              data->input_use_utf);
+
+    /* then */
+    mctest_assert_str_eq (actual_string->str, data->expected_string);
+
+    g_string_free (actual_string, TRUE);
 }
 /* *INDENT-OFF* */
-END_TEST
+END_PARAMETRIZED_TEST
 /* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
@@ -75,7 +147,8 @@ main (void)
     SRunner *sr;
 
     /* Add new tests here: *************** */
-    tcase_add_test (tc_core, test_regex_process_escape_sequence_valid);
+    mctest_add_parameterized_test (tc_core, test_regex_process_escape_sequence,
+                                   test_regex_process_escape_sequence_ds);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);

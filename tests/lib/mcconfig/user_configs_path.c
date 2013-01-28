@@ -47,7 +47,9 @@
 #define CONF_CACHE CONF_MAIN
 #endif
 
+/* --------------------------------------------------------------------------------------------- */
 
+/* @Before */
 static void
 setup (void)
 {
@@ -62,6 +64,9 @@ setup (void)
     init_localfs ();
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* @After */
 static void
 teardown (void)
 {
@@ -69,49 +74,139 @@ teardown (void)
     str_uninit_strings ();
 }
 
-#define path_fail_unless(conf_dir, conf_name) {\
-    result = mc_config_get_full_path (conf_name); \
-    fail_unless (strcmp( conf_dir PATH_SEP_STR MC_USERCONF_DIR PATH_SEP_STR conf_name, result) == 0); \
-    g_free (result); \
-}
 /* --------------------------------------------------------------------------------------------- */
+
+/* @DataSource("test_user_config_paths_ds") */
 /* *INDENT-OFF* */
-START_TEST (user_configs_path_test)
+static const struct test_user_config_paths_ds
+{
+    const char *input_base_dir;
+    const char *input_file_name;
+} test_user_config_paths_ds[] =
+{
+    { /* 0. */
+        CONF_MAIN,
+        MC_CONFIG_FILE
+    },
+    { /* 0. */
+        CONF_MAIN,
+        MC_FHL_INI_FILE
+    },
+    { /* 0. */
+        CONF_MAIN,
+        MC_HOTLIST_FILE
+    },
+    { /* 0. */
+        CONF_MAIN,
+        GLOBAL_KEYMAP_FILE
+    },
+    { /* 0. */
+        CONF_MAIN,
+        MC_USERMENU_FILE
+    },
+    { /* 0. */
+        CONF_MAIN,
+        EDIT_SYNTAX_FILE
+    },
+    { /* 0. */
+        CONF_MAIN,
+        EDIT_HOME_MENU
+    },
+    { /* 0. */
+        CONF_MAIN,
+        EDIT_DIR PATH_SEP_STR "edit.indent.rc"
+    },
+    { /* 0. */
+        CONF_MAIN,
+        EDIT_DIR PATH_SEP_STR "edit.spell.rc"
+    },
+    { /* 0. */
+        CONF_MAIN,
+        MC_PANELS_FILE
+    },
+    { /* 0. */
+        CONF_MAIN,
+        MC_FILEBIND_FILE
+    },
+    { /* 0. */
+        CONF_DATA,
+        MC_SKINS_SUBDIR
+    },
+    { /* 0. */
+        CONF_DATA,
+        FISH_PREFIX
+    },
+    { /* 0. */
+        CONF_DATA,
+        "bashrc"
+    },
+    { /* 0. */
+        CONF_DATA,
+        "inputrc"
+    },
+    { /* 0. */
+        CONF_DATA,
+        MC_EXTFS_DIR
+    },
+    { /* 0. */
+        CONF_DATA,
+        MC_HISTORY_FILE
+    },
+    { /* 0. */
+        CONF_DATA,
+        MC_FILEPOS_FILE
+    },
+    { /* 0. */
+        CONF_DATA,
+        EDIT_CLIP_FILE
+    },
+    { /* 0. */
+        CONF_DATA,
+        MC_MACRO_FILE
+    },
+    { /* 0. */
+        CONF_CACHE,
+        "mc.log"
+    },
+    { /* 0. */
+        CONF_CACHE,
+        MC_TREESTORE_FILE
+    },
+    { /* 0. */
+        CONF_CACHE,
+        EDIT_TEMP_FILE
+    },
+    { /* 0. */
+        CONF_CACHE,
+        EDIT_BLOCK_FILE
+    },
+};
+/* *INDENT-ON* */
+
+/* @Test(dataSource = "test_user_config_paths_ds") */
+/* *INDENT-OFF* */
+START_PARAMETRIZED_TEST (test_user_config_paths, test_user_config_paths_ds)
 /* *INDENT-ON* */
 {
-    char *result;
+    /* given */
+    char *actual_result;
 
-    path_fail_unless (CONF_MAIN, MC_CONFIG_FILE);
+    /* when */
+    actual_result = mc_config_get_full_path (data->input_file_name);
 
-    path_fail_unless (CONF_MAIN, MC_FHL_INI_FILE);
-    path_fail_unless (CONF_MAIN, MC_HOTLIST_FILE);
-    path_fail_unless (CONF_MAIN, GLOBAL_KEYMAP_FILE);
-    path_fail_unless (CONF_MAIN, MC_USERMENU_FILE);
-    path_fail_unless (CONF_MAIN, EDIT_SYNTAX_FILE);
-    path_fail_unless (CONF_MAIN, EDIT_HOME_MENU);
-    path_fail_unless (CONF_MAIN, EDIT_DIR PATH_SEP_STR "edit.indent.rc");
-    path_fail_unless (CONF_MAIN, EDIT_DIR PATH_SEP_STR "edit.spell.rc");
-    path_fail_unless (CONF_MAIN, MC_PANELS_FILE);
-    path_fail_unless (CONF_MAIN, MC_FILEBIND_FILE);
+    /* then */
+    {
+        char *expected_file_path;
 
-    path_fail_unless (CONF_DATA, MC_SKINS_SUBDIR);
-    path_fail_unless (CONF_DATA, FISH_PREFIX);
-    path_fail_unless (CONF_DATA, "bashrc");
-    path_fail_unless (CONF_DATA, "inputrc");
-    path_fail_unless (CONF_DATA, MC_EXTFS_DIR);
-    path_fail_unless (CONF_DATA, MC_HISTORY_FILE);
-    path_fail_unless (CONF_DATA, MC_FILEPOS_FILE);
-    path_fail_unless (CONF_DATA, EDIT_CLIP_FILE);
-    path_fail_unless (CONF_DATA, MC_MACRO_FILE);
-
-    path_fail_unless (CONF_CACHE, "mc.log");
-    path_fail_unless (CONF_CACHE, MC_TREESTORE_FILE);
-    path_fail_unless (CONF_CACHE, EDIT_TEMP_FILE);
-    path_fail_unless (CONF_CACHE, EDIT_BLOCK_FILE);
-
+        expected_file_path =
+            g_build_filename (data->input_base_dir, MC_USERCONF_DIR, data->input_file_name, NULL);
+        mctest_assert_str_eq (actual_result, expected_file_path);
+        g_free (expected_file_path);
+    }
+    g_free (actual_result);
 }
 /* *INDENT-OFF* */
-END_TEST
+END_PARAMETRIZED_TEST
 /* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
@@ -128,7 +223,7 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_test (tc_core, user_configs_path_test);
+    mctest_add_parameterized_test (tc_core, test_user_config_paths, test_user_config_paths_ds);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);

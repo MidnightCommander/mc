@@ -33,145 +33,201 @@
 #include "lib/vfs/vfs.h"
 #include "src/vfs/local/local.c"
 
+static mc_config_t *mc_config;
+static char *ini_filename;
 
+/* --------------------------------------------------------------------------------------------- */
 
+static void
+config_object__init (void)
+{
+    ini_filename = g_build_filename (WORKDIR, "config_string.ini", NULL);
+    unlink (ini_filename);
+
+    mc_config = mc_config_init (ini_filename, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+config_object__reopen (void)
+{
+    GError *error = NULL;
+
+    if (!mc_config_save_file (mc_config, &error))
+    {
+        fail ("Unable to save config file: %s", error->message);
+        g_error_free (error);
+    }
+
+    mc_config_deinit (mc_config);
+    mc_config = mc_config_init (ini_filename, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+config_object__deinit (void)
+{
+    mc_config_deinit (mc_config);
+    g_free (ini_filename);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* @Before */
 static void
 setup (void)
 {
     str_init_strings ("KOI8-R");
     vfs_init ();
     init_localfs ();
+
+    config_object__init ();
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* @After */
 static void
 teardown (void)
 {
+    config_object__deinit ();
+
     vfs_shut ();
     str_uninit_strings ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
-#define fail_unless_strcmp( etalon ) \
-    fail_unless( \
-        strcmp(actual_value, etalon) == 0, \
-        "Actial value '%s' doesn't equal to etalon '%s'", actual_value, etalon \
-    )
 
+/* @DataSource("test_create_ini_file_ds") */
 /* *INDENT-OFF* */
-START_TEST (create_ini_file)
+static const struct test_create_ini_file_ds
+{
+    const char *input_group;
+    const char *input_param;
+    const char *input_default_value;
+    const char *expected_value;
+    const char *expected_raw_value;
+} test_create_ini_file_ds[] =
+{
+    { /* 0. */
+        "group-not-exists",
+        "param-not_exists",
+        NULL,
+        NULL,
+        "" /* it's a bug: should be NULL. Will be fixed in another branch */
+    },
+    { /* 1. */
+        "test-group1",
+        "test-param1",
+        "not-exists",
+        " some value ",
+        " some value "
+    },
+    { /* 2. */
+        "test-group1",
+        "test-param2",
+        "not-exists",
+        " \tkoi8-r: Тестовое значение ",
+        " \tkoi8-r: \320\242\320\265\321\201\321\202\320\276\320\262\320\276\320\265 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\320\265 "
+    },
+    { /* 3. */
+        "test-group1",
+        "test-param3",
+        "not-exists",
+        " \tsome value2\n\nf\b\005fff ",
+        " \tsome value2\n\nf\b\005fff "
+    },
+    { /* 4. */
+        "test-group2",
+        "test-param1",
+        "not-exists",
+        " some value ",
+        " some value "
+    },
+    { /* 5. */
+        "test-group2",
+        "test-param2",
+        "not-exists",
+        "not-exists",
+        "not-exists"
+    },
+    { /* 6. */
+        "test-group2",
+        "test-param3",
+        "not-exists",
+        " \tsome value2\n\nf\b\005fff ",
+        " \tsome value2\n\nf\b\005fff "
+    },
+
+};
+/* *INDENT-ON* */
+
+/* @Test(dataSource = "test_create_ini_file_ds") */
+/* *INDENT-OFF* */
+START_PARAMETRIZED_TEST (test_create_ini_file_paths, test_create_ini_file_ds)
 /* *INDENT-ON* */
 {
-    mc_config_t *mc_config;
-    GError *error = NULL;
-    char *actual_value;
-    char *ini_filename = NULL;
-
-    ini_filename = g_build_filename (WORKDIR, "test-create_ini_file.ini", NULL);
-    unlink (ini_filename);
-
-    mc_config = mc_config_init (ini_filename, FALSE);
-    if (mc_config == NULL)
-    {
-        fail ("unable to create mc_congif_t object!");
-        return;
-    }
+    /* given */
+    char *actual_value, *actual_raw_value;
 
     mc_config_set_string (mc_config, "test-group1", "test-param1", " some value ");
     mc_config_set_string (mc_config, "test-group1", "test-param2", " \tkoi8-r: Тестовое значение ");
     mc_config_set_string (mc_config, "test-group1", "test-param3", " \tsome value2\n\nf\b\005fff ");
-
     mc_config_set_string_raw (mc_config, "test-group2", "test-param1", " some value ");
     mc_config_set_string_raw (mc_config, "test-group2", "test-param2",
                               " koi8-r: Тестовое значение");
     mc_config_set_string_raw (mc_config, "test-group2", "test-param3",
                               " \tsome value2\n\nf\b\005fff ");
 
-    if (!mc_config_save_file (mc_config, &error))
-    {
-        fail ("Unable to save config file: %s", error->message);
-        g_error_free (error);
-    }
+    config_object__reopen ();
 
-    mc_config_deinit (mc_config);
-    mc_config = mc_config_init (ini_filename, FALSE);
+    /* when */
+    actual_value =
+        mc_config_get_string (mc_config, data->input_group, data->input_param,
+                              data->input_default_value);
+    actual_raw_value =
+        mc_config_get_string_raw (mc_config, data->input_group, data->input_param,
+                                  data->input_default_value);
 
-    actual_value = mc_config_get_string (mc_config, "group-not-exists", "param-not_exists", NULL);
-    fail_unless (actual_value == NULL,
-                 "return value for nonexistent ini-parameters isn't NULL (default value)!");
+    /* then */
+    mctest_assert_str_eq (actual_value, data->expected_value);
+    mctest_assert_str_eq (actual_raw_value, data->expected_raw_value);
 
-    actual_value = mc_config_get_string (mc_config, "test-group1", "test-param1", "not-exists");
-    fail_unless_strcmp (" some value ");
     g_free (actual_value);
-
-    actual_value = mc_config_get_string (mc_config, "test-group1", "test-param2", "not-exists");
-    fail_unless_strcmp (" \tkoi8-r: Тестовое значение ");
-    g_free (actual_value);
-
-    actual_value = mc_config_get_string (mc_config, "test-group1", "test-param3", "not-exists");
-    fail_unless_strcmp (" \tsome value2\n\nf\b\005fff ");
-    g_free (actual_value);
-
-
-    actual_value = mc_config_get_string_raw (mc_config, "test-group2", "test-param1", "not-exists");
-    fail_unless_strcmp (" some value ");
-    g_free (actual_value);
-
-    actual_value = mc_config_get_string_raw (mc_config, "test-group2", "test-param2", "not-exists");
-    fail_unless_strcmp ("not-exists");
-    g_free (actual_value);
-
-    actual_value = mc_config_get_string_raw (mc_config, "test-group2", "test-param3", "not-exists");
-    fail_unless_strcmp (" \tsome value2\n\nf\b\005fff ");
-    g_free (actual_value);
-
-    mc_config_deinit (mc_config);
-    g_free (ini_filename);
-
+    g_free (actual_raw_value);
 }
 /* *INDENT-OFF* */
-END_TEST
+END_PARAMETRIZED_TEST
 /* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* @Test(group='Integration') */
 /* *INDENT-OFF* */
 START_TEST (emulate__learn_save)
 /* *INDENT-ON* */
 {
-    mc_config_t *mc_config;
-    char *actual_value, *esc_str;
-    char *ini_filename = NULL;
-    GError *error = NULL;
+    /* given */
+    char *actual_value;
 
-    ini_filename = g_build_filename (WORKDIR, "test-emulate__learn_save.ini", NULL);
-    unlink (ini_filename);
-
-    mc_config = mc_config_init (ini_filename, FALSE);
-    if (mc_config == NULL)
     {
-        fail ("unable to create mc_congif_t object!");
-        return;
+        char *esc_str;
+
+        esc_str = strutils_escape ("T;E\\X;T-FOR-\\T;E;S\\TI;N'G", -1, ";", TRUE);
+        mc_config_set_string_raw (mc_config, "test-group1", "test-param1", esc_str);
+        g_free (esc_str);
     }
 
-    esc_str = strutils_escape ("T;E\\X;T-FOR-\\T;E;S\\TI;N'G", -1, ";", TRUE);
-    mc_config_set_string_raw (mc_config, "test-group1", "test-param1", esc_str);
-    g_free (esc_str);
+    config_object__reopen ();
 
-    if (!mc_config_save_file (mc_config, &error))
-    {
-        fail ("Unable to save config file: %s", error->message);
-        g_error_free (error);
-    }
-
-    mc_config_deinit (mc_config);
-    mc_config = mc_config_init (ini_filename, FALSE);
-
+    /* when */
     actual_value = mc_config_get_string_raw (mc_config, "test-group1", "test-param1", "not-exists");
-    fail_unless_strcmp ("T\\;E\\X\\;T-FOR-\\T\\;E\\;S\\TI\\;N'G");
-    g_free (actual_value);
 
-    mc_config_deinit (mc_config);
-    g_free (ini_filename);
+    /* then */
+    mctest_assert_str_eq (actual_value, "T\\;E\\X\\;T-FOR-\\T\\;E\\;S\\TI\\;N'G");
+    g_free (actual_value);
 }
 /* *INDENT-OFF* */
 END_TEST
@@ -191,7 +247,7 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_test (tc_core, create_ini_file);
+    mctest_add_parameterized_test (tc_core, test_create_ini_file_paths, test_create_ini_file_ds);
     tcase_add_test (tc_core, emulate__learn_save);
     /* *********************************** */
 
