@@ -452,10 +452,11 @@ fetch_hosts (const char *filename)
 
                 if (hosts_p - hosts >= hosts_alloclen)
                 {
-                    int j = hosts_p - hosts;
+                    int j;
 
-                    hosts =
-                        g_realloc ((void *) hosts, ((hosts_alloclen += 30) + 1) * sizeof (char *));
+                    j = hosts_p - hosts;
+                    hosts_alloclen += 30;
+                    hosts = g_renew (char *, hosts, hosts_alloclen + 1);
                     hosts_p = hosts + j;
                 }
                 for (host_p = hosts; host_p < hosts_p; host_p++)
@@ -486,39 +487,33 @@ hostname_completion_function (const char *text, int state, input_complete_t flag
     (void) flags;
     SHOW_C_CTX ("hostname_completion_function");
 
-    if (!state)
+    if (state == 0)
     {                           /* Initialization stuff */
         const char *p;
 
-        if (hosts != NULL)
-        {
-            for (host_p = hosts; *host_p; host_p++)
-                g_free (*host_p);
-            g_free (hosts);
-        }
-        hosts = g_new (char *, (hosts_alloclen = 30) + 1);
+        g_strfreev (hosts);
+        hosts_alloclen = 30;
+        hosts = g_new (char *, hosts_alloclen + 1);
         *hosts = NULL;
         hosts_p = hosts;
-        fetch_hosts ((p = getenv ("HOSTFILE")) ? p : "/etc/hosts");
+        p = getenv ("HOSTFILE");
+        fetch_hosts (p != NULL ? p : "/etc/hosts");
         host_p = hosts;
         textstart = (*text == '@') ? 1 : 0;
         textlen = strlen (text + textstart);
     }
 
-    while (*host_p)
+    for (; *host_p != NULL; host_p++)
     {
-        if (!textlen)
+        if (textlen == 0)
             break;              /* Match all of them */
-        else if (!strncmp (text + textstart, *host_p, textlen))
+        if (strncmp (text + textstart, *host_p, textlen) == 0)
             break;
-        host_p++;
     }
 
-    if (!*host_p)
+    if (*host_p == NULL)
     {
-        for (host_p = hosts; *host_p; host_p++)
-            g_free (*host_p);
-        g_free (hosts);
+        g_strfreev (hosts);
         hosts = NULL;
         return NULL;
     }
@@ -613,6 +608,7 @@ command_completion_function (const char *_text, int state, input_complete_t flag
         if (p != NULL)
         {
             char *temp_p = p;
+
             p = strutils_shell_escape (p);
             g_free (temp_p);
         }
@@ -625,27 +621,21 @@ command_completion_function (const char *_text, int state, input_complete_t flag
     switch (phase)
     {
     case 0:                    /* Reserved words */
-        while (*words)
-        {
+        for (; *words != NULL; words++)
             if (strncmp (*words, text, text_len) == 0)
             {
                 g_free (text);
                 return g_strdup (*(words++));
             }
-            words++;
-        }
         phase++;
         words = bash_builtins;
     case 1:                    /* Builtin commands */
-        while (*words)
-        {
+        for (; *words != NULL; words++)
             if (strncmp (*words, text, text_len) == 0)
             {
                 g_free (text);
                 return g_strdup (*(words++));
             }
-            words++;
-        }
         phase++;
         if (!path)
             break;
@@ -717,24 +707,25 @@ static char **
 completion_matches (const char *text, CompletionFunction entry_function, input_complete_t flags)
 {
     /* Number of slots in match_list. */
-    int match_list_size;
-
+    size_t match_list_size = 30;
     /* The list of matches. */
-    char **match_list = g_new (char *, (match_list_size = 30) + 1);
-
+    char **match_list;
     /* Number of matches actually found. */
-    int matches = 0;
+    size_t matches = 0;
 
     /* Temporary string binder. */
     char *string;
 
+    match_list = g_new (char *, match_list_size + 1);
     match_list[1] = NULL;
 
     while ((string = (*entry_function) (text, matches, flags)) != NULL)
     {
         if (matches + 1 == match_list_size)
-            match_list =
-                (char **) g_realloc (match_list, ((match_list_size += 30) + 1) * sizeof (char *));
+        {
+            match_list_size += 30;
+            match_list = (char **) g_renew (char *, match_list, match_list_size + 1);
+        }
         match_list[++matches] = string;
         match_list[matches + 1] = NULL;
     }
@@ -743,7 +734,7 @@ completion_matches (const char *text, CompletionFunction entry_function, input_c
        lowest common denominator.  That then becomes match_list[0]. */
     if (matches)
     {
-        register int i = 1;
+        register size_t i = 1;
         int low = 4096;         /* Count of max-matched characters. */
 
         /* If only one match, just use that. */
@@ -754,7 +745,7 @@ completion_matches (const char *text, CompletionFunction entry_function, input_c
         }
         else
         {
-            int j;
+            size_t j;
 
             qsort (match_list + 1, matches, sizeof (char *), match_compare);
 
@@ -979,16 +970,19 @@ try_complete_all_possible (try_complete_automation_state_t * state, char *text, 
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 insert_text (WInput * in, char *text, ssize_t size)
 {
-    int buff_len = str_length (in->buffer);
+    int buff_len;
 
+    buff_len = str_length (in->buffer);
     size = min (size, (ssize_t) strlen (text)) + start - end;
     if (strlen (in->buffer) + size >= (size_t) in->current_max_size)
     {
         /* Expand the buffer */
-        char *narea = g_try_realloc (in->buffer, in->current_max_size + size + in->field_width);
+        char *narea;
+
+        narea = g_try_realloc (in->buffer, in->current_max_size + size + in->field_width);
         if (narea != NULL)
         {
             in->buffer = narea;
@@ -997,20 +991,9 @@ insert_text (WInput * in, char *text, ssize_t size)
     }
     if (strlen (in->buffer) + 1 < (size_t) in->current_max_size)
     {
-        if (size > 0)
-        {
-            int i = strlen (&in->buffer[end]);
-            for (; i >= 0; i--)
-                in->buffer[end + size + i] = in->buffer[end + i];
-        }
-        else if (size < 0)
-        {
-            char *p = in->buffer + end + size, *q = in->buffer + end;
-            while (*q)
-                *(p++) = *(q++);
-            *p = 0;
-        }
-        memcpy (in->buffer + start, text, size - start + end);
+        if (size != 0)
+            memmove (in->buffer + end + size, in->buffer + end, strlen (&in->buffer[end]) + 1);
+        memmove (in->buffer + start, text, size - (start - end));
         in->point += str_length (in->buffer) - buff_len;
         input_update (in, TRUE);
         end += size;
