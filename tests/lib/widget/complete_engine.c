@@ -123,8 +123,29 @@ static const struct test_complete_engine_fill_completions_ds
         "some string",
         7,
         INPUT_COMPLETE_NONE,
+        0,
+        7
+    },
+    {
+        "some string",
+        7,
+        INPUT_COMPLETE_SHELL_ESC,
         5,
         7
+    },
+    {
+        "some\\ string111",
+        9,
+        INPUT_COMPLETE_SHELL_ESC,
+        0,
+        9
+    },
+    {
+        "some\\\tstring111",
+        9,
+        INPUT_COMPLETE_SHELL_ESC,
+        0,
+        9
     },
     {
         "some\tstring",

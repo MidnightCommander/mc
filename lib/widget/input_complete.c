@@ -1382,6 +1382,9 @@ void
 complete_engine_fill_completions (WInput * in)
 {
     char *s;
+    const char *word_separators;
+
+    word_separators = (in->completion_flags & INPUT_COMPLETE_SHELL_ESC) ? " \t;|<>" : "\t;|<>";
 
     end = str_offset_to_pos (in->buffer, in->point);
 
@@ -1398,7 +1401,7 @@ complete_engine_fill_completions (WInput * in)
     for (; s >= in->buffer; str_prev_char (&s))
     {
         start = s - in->buffer;
-        if (strchr (" \t;|<>", *s) != NULL)
+        if (strchr (word_separators, *s) != NULL && !strutils_is_char_escaped (in->buffer, s))
             break;
     }
 
