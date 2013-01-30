@@ -139,14 +139,10 @@ static char *error_file_name = NULL;
 static gint
 mc_defines_destroy (gpointer key, gpointer value, gpointer data)
 {
-    char **values = value;
-
     (void) data;
 
     g_free (key);
-    while (*values)
-        g_free (*values++);
-    g_free (value);
+    g_strfreev ((char **) value);
 
     return FALSE;
 }
