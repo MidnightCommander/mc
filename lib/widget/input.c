@@ -1332,13 +1332,13 @@ input_update (WInput * in, gboolean clear_first)
                 }
                 else
                 {
-                    int sel_width;
+                    int sel_width, buf_width;
 
                     widget_move (in, 0, m1 - in->term_first_shown);
+                    buf_width = str_term_width2 (in->buffer, m1);
                     sel_width =
                         min (m2 - m1,
-                             (in->field_width - has_history) - (str_term_width2 (in->buffer, m1) -
-                                                                in->term_first_shown));
+                             (in->field_width - has_history) - (buf_width - in->term_first_shown));
                     tty_print_string (str_term_substring (in->buffer, m1, sel_width));
                 }
             }
