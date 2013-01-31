@@ -3,7 +3,7 @@
    Functions for handle cursor movement
 
    Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
-   2004, 2005, 2006, 2007, 2009, 2011
+   2004, 2005, 2006, 2007, 2009, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
@@ -15,7 +15,7 @@
    Pavel Machek, 1998
    Roland Illig <roland.illig@gmx.de>, 2004, 2005
    Slava Zanko <slavazanko@google.com>, 2009
-   Andrew Borodin <aborodin@vmail.ru>, 2009
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2013
    Ilia Maslakov <il.smind@gmail.com>, 2009, 2010
 
    This file is part of the Midnight Commander.
@@ -64,7 +64,29 @@
 
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+mcview_scroll_to_cursor (mcview_t * view)
+{
+    if (view->hex_mode)
+    {
+        off_t bytes = view->bytes_per_line;
+        off_t cursor = view->hex_cursor;
+        off_t topleft = view->dpy_start;
+        off_t displaysize;
+
+        displaysize = view->data_area.height * bytes;
+        if (topleft + displaysize <= cursor)
+            topleft = mcview_offset_rounddown (cursor, bytes) - (displaysize - bytes);
+        if (cursor < topleft)
+            topleft = mcview_offset_rounddown (cursor, bytes);
+        view->dpy_start = topleft;
+    }
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -273,26 +295,6 @@ mcview_move_right (mcview_t * view, off_t columns)
         view->dpy_text_column += columns;
     }
     mcview_movement_fixups (view, FALSE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-mcview_scroll_to_cursor (mcview_t * view)
-{
-    if (view->hex_mode)
-    {
-        const off_t bytes = view->bytes_per_line;
-        const off_t displaysize = view->data_area.height * bytes;
-        const off_t cursor = view->hex_cursor;
-        off_t topleft = view->dpy_start;
-
-        if (topleft + displaysize <= cursor)
-            topleft = mcview_offset_rounddown (cursor, bytes) - (displaysize - bytes);
-        if (cursor < topleft)
-            topleft = mcview_offset_rounddown (cursor, bytes);
-        view->dpy_start = topleft;
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
