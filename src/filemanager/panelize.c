@@ -159,7 +159,9 @@ init_panelize (void)
     blen = i - 1;               /* gaps between buttons */
     while (i-- != 0)
     {
+#ifdef ENABLE_NLS
         panelize_but[i].text = _(panelize_but[i].text);
+#endif
         blen += str_term_width1 (panelize_but[i].text) + 3 + 1;
         if (panelize_but[i].flags == DEFPUSH_BUTTON)
             blen += 2;
