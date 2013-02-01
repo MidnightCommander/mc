@@ -638,14 +638,15 @@ init_i18n_stuff (int list_type, int cols)
 {
     size_t i;
 
-#ifdef ENABLE_NLS
     static gboolean i18n_flag = FALSE;
 
     if (!i18n_flag)
     {
         for (i = 0; i < hotlist_but_num; i++)
         {
+#ifdef ENABLE_NLS
             hotlist_but[i].text = _(hotlist_but[i].text);
+#endif /* ENABLE_NLS */
             hotlist_but[i].len = str_term_width1 (hotlist_but[i].text) + 3;
             if (hotlist_but[i].flags == DEFPUSH_BUTTON)
                 hotlist_but[i].len += 2;
@@ -653,7 +654,6 @@ init_i18n_stuff (int list_type, int cols)
 
         i18n_flag = TRUE;
     }
-#endif /* ENABLE_NLS */
 
     /* Dynamic resizing of buttonbars */
     {
