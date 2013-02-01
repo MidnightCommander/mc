@@ -1752,7 +1752,7 @@ change_listing_cmd (void)
     char *user, *status;
     WPanel *p = NULL;
 
-    if (get_display_type (MENU_PANEL_IDX) == view_listing)
+    if (SELECTED_IS_PANEL)
         p = MENU_PANEL_IDX == 0 ? left_panel : right_panel;
 
     list_type = panel_listing_box (p, &user, &status, &use_msformat, MENU_PANEL_IDX);

@@ -2,7 +2,7 @@
    External panelize
 
    Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2007, 2009, 2011
+   2007, 2009, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
@@ -510,7 +510,7 @@ panelize_save_panel (struct WPanel *panel)
 void
 cd_panelize_cmd (void)
 {
-    if (get_display_type (MENU_PANEL_IDX) != view_listing)
+    if (!SELECTED_IS_PANEL)
         set_display_type (MENU_PANEL_IDX, view_listing);
 
     do_panelize_cd ((struct WPanel *) get_panel_widget (MENU_PANEL_IDX));
