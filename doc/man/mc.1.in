@@ -1874,6 +1874,9 @@ command is used.  See the section on the
 internal file viewer\&.
 .\"Internal File Viewer"
 .PP
+.I Ask new file name
+If this option is enabled, file name is asked before open new file in editor.
+.PP
 .I Auto menus.
 If this option is enabled, the user menu will be invoked at startup.
 Useful for building menus for non\-unixers.
