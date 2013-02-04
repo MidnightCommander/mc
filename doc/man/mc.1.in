@@ -2013,7 +2013,7 @@ and the suffixes are shown in upper case (K, M ...)
 .PP
 .I Mix all files.
 If this option is enabled, all files and directories are shown mixed
-together.  If the option is desabled (default), directories (and links to
+together.  If the option is disabled (default), directories (and links to
 directories) are shown at the beginning of the listing, and other files below.
 .PP
 .I Show backup files.
