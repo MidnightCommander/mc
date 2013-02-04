@@ -25,11 +25,8 @@
 
 #define TEST_SUITE_NAME "/lib/widget"
 
-#include <config.h>
+#include "tests/mctest.h"
 
-#include <check.h>
-
-#include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/widget.h"
 
@@ -191,18 +188,15 @@ static const struct test_complete_engine_fill_completions_ds
     },
 };
 /* *INDENT-ON* */
-// " \t;|<>"
 
 /* @Test(dataSource = "test_complete_engine_fill_completions_ds") */
 /* *INDENT-OFF* */
-START_TEST (test_complete_engine_fill_completions)
+START_PARAMETRIZED_TEST (test_complete_engine_fill_completions,
+                         test_complete_engine_fill_completions_ds)
 /* *INDENT-ON* */
 {
     /* given */
-
     WInput *w_input;
-    const struct test_complete_engine_fill_completions_ds *data =
-        &test_complete_engine_fill_completions_ds[_i];
 
     w_input = g_new (WInput, 1);
     w_input->buffer = g_strdup (data->input_buffer);
@@ -213,14 +207,13 @@ START_TEST (test_complete_engine_fill_completions)
     complete_engine_fill_completions (w_input);
 
     /* then */
-    g_assert_cmpstr (try_complete__text__captured, ==, data->input_buffer);
-    ck_assert_int_eq (try_complete__lc_start__captured, data->expected_start);
-    ck_assert_int_eq (try_complete__lc_end__captured, data->expected_end);
-    ck_assert_int_eq (try_complete__flags__captured, data->input_completion_flags);
-
+    mctest_assert_str_eq (try_complete__text__captured, data->input_buffer);
+    mctest_assert_int_eq (try_complete__lc_start__captured, data->expected_start);
+    mctest_assert_int_eq (try_complete__lc_end__captured, data->expected_end);
+    mctest_assert_int_eq (try_complete__flags__captured, data->input_completion_flags);
 }
 /* *INDENT-OFF* */
-END_TEST
+END_PARAMETRIZED_TEST
 /* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
@@ -237,9 +230,8 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_loop_test (tc_core, test_complete_engine_fill_completions, 0,
-                         sizeof (test_complete_engine_fill_completions_ds) /
-                         sizeof (test_complete_engine_fill_completions_ds[0]));
+    mctest_add_parameterized_test (tc_core, test_complete_engine_fill_completions,
+                                   test_complete_engine_fill_completions_ds);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);
