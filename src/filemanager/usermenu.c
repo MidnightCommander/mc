@@ -474,7 +474,10 @@ execute_menu_command (WEdit * edit_widget, const char *commands, gboolean show_p
                 char *tmp;
                 *parameter = 0;
                 parameter =
-                    input_dialog (_("Parameter"), lc_prompt, MC_HISTORY_FM_MENU_EXEC_PARAM, "");
+                    input_dialog (_("Parameter"), lc_prompt, MC_HISTORY_FM_MENU_EXEC_PARAM, "",
+                                  INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD |
+                                  INPUT_COMPLETE_HOSTNAMES | INPUT_COMPLETE_VARIABLES |
+                                  INPUT_COMPLETE_USERNAMES);
                 if (!parameter || !*parameter)
                 {
                     /* User canceled */

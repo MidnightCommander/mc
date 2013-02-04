@@ -88,7 +88,8 @@ mcview_dialog_search (mcview_t * view)
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
             QUICK_LABELED_INPUT (N_("Enter search string:"), input_label_above,
-                                 INPUT_LAST_TEXT, 0, MC_HISTORY_SHARED_SEARCH, &exp, NULL),
+                                 INPUT_LAST_TEXT, MC_HISTORY_SHARED_SEARCH, &exp,
+                                 NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
             QUICK_SEPARATOR (TRUE),
             QUICK_START_COLUMNS,
                 QUICK_RADIO (num_of_types, (const char **) list_of_types,
@@ -197,7 +198,8 @@ mcview_dialog_goto (mcview_t * view, off_t * offset)
     {
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
-            QUICK_INPUT (INPUT_LAST_TEXT, 0, MC_HISTORY_VIEW_GOTO, &exp, NULL),
+            QUICK_INPUT (INPUT_LAST_TEXT, MC_HISTORY_VIEW_GOTO, &exp, NULL,
+                         FALSE, FALSE, INPUT_COMPLETE_NONE),
             QUICK_RADIO (num_of_types, (const char **) mc_view_goto_str, (int *) &current_goto_type,
                          NULL),
             QUICK_BUTTONS_OK_CANCEL,

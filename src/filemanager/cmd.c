@@ -197,7 +197,8 @@ set_panel_filter (WPanel * p)
 
     reg_exp = input_dialog_help (_("Filter"),
                                  _("Set expression for filtering filenames"),
-                                 "[Filter...]", MC_HISTORY_FM_PANEL_FILTER, x, FALSE);
+                                 "[Filter...]", MC_HISTORY_FM_PANEL_FILTER, x, FALSE,
+                                 INPUT_COMPLETE_FILENAMES);
     if (!reg_exp)
         return;
     set_panel_filter_to (p, reg_exp);
@@ -218,7 +219,8 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
 
     quick_widget_t quick_widgets[] = {
         /* *INDENT-OFF* */
-        QUICK_INPUT (INPUT_LAST_TEXT, 0, history_name, &reg_exp, NULL),
+        QUICK_INPUT (INPUT_LAST_TEXT, history_name, &reg_exp, NULL,
+                     FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
         QUICK_START_COLUMNS,
             QUICK_CHECKBOX (N_("&Files only"), &files_only, NULL),
             QUICK_CHECKBOX (N_("&Using shell patterns"), &shell_patterns, NULL),
@@ -424,7 +426,8 @@ do_link (link_type_t link_type, const char *fname)
     if (link_type == LINK_HARDLINK)
     {
         src = g_strdup_printf (_("Link %s to:"), str_trunc (fname, 46));
-        dest = input_expand_dialog (_("Link"), src, MC_HISTORY_FM_LINK, "");
+        dest =
+            input_expand_dialog (_("Link"), src, MC_HISTORY_FM_LINK, "", INPUT_COMPLETE_FILENAMES);
         if (!dest || !*dest)
             goto cleanup;
         save_cwds_stat ();
@@ -494,7 +497,10 @@ nice_cd (const char *text, const char *xtext, const char *help,
     if (!SELECTED_IS_PANEL)
         return;
 
-    machine = input_dialog_help (text, xtext, help, history_name, "", strip_password);
+    machine =
+        input_dialog_help (text, xtext, help, history_name, "", strip_password,
+                           INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD | INPUT_COMPLETE_HOSTNAMES |
+                           INPUT_COMPLETE_USERNAMES);
     if (machine == NULL)
         return;
 
@@ -706,7 +712,8 @@ view_file_cmd (void)
 
     filename =
         input_expand_dialog (_("View file"), _("Filename:"),
-                             MC_HISTORY_FM_VIEW_FILE, selection (current_panel)->fname);
+                             MC_HISTORY_FM_VIEW_FILE, selection (current_panel)->fname,
+                             INPUT_COMPLETE_FILENAMES);
     if (!filename)
         return;
 
@@ -740,7 +747,8 @@ view_filtered_cmd (void)
     command =
         input_dialog (_("Filtered view"),
                       _("Filter command and arguments:"),
-                      MC_HISTORY_FM_FILTERED_VIEW, initial_command);
+                      MC_HISTORY_FM_FILTERED_VIEW, initial_command,
+                      INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_COMMANDS);
 
     if (command != NULL)
     {
@@ -825,7 +833,7 @@ edit_cmd_new (void)
         char *fname;
 
         fname = input_expand_dialog (_("Edit file"), _("Enter file name:"),
-                                     MC_HISTORY_EDIT_LOAD, "");
+                                     MC_HISTORY_EDIT_LOAD, "", INPUT_COMPLETE_FILENAMES);
         if (fname == NULL)
             return;
 
@@ -913,7 +921,8 @@ mkdir_cmd (void)
 
     dir =
         input_expand_dialog (_("Create a new Directory"),
-                             _("Enter directory name:"), MC_HISTORY_FM_MKDIR, name);
+                             _("Enter directory name:"), MC_HISTORY_FM_MKDIR, name,
+                             INPUT_COMPLETE_FILENAMES);
 
     if (dir != NULL && dir != '\0')
     {
@@ -1349,7 +1358,9 @@ edit_symlink_cmd (void)
         if (i > 0)
         {
             buffer[i] = 0;
-            dest = input_expand_dialog (_("Edit symlink"), q, MC_HISTORY_FM_EDIT_LINK, buffer);
+            dest =
+                input_expand_dialog (_("Edit symlink"), q, MC_HISTORY_FM_EDIT_LINK, buffer,
+                                     INPUT_COMPLETE_FILENAMES);
             if (dest)
             {
                 if (*dest && strcmp (buffer, dest))

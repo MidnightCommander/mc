@@ -72,12 +72,10 @@ quick_create_input (int y, int x, const quick_widget_t * qw)
     WInput *in;
 
     in = input_new (y, x, input_get_default_colors (), 8, qw->u.input.text, qw->u.input.histname,
-                    INPUT_COMPLETE_DEFAULT);
-    in->is_password = (qw->u.input.flags == 1);
-    if ((qw->u.input.flags & 2) != 0)
-        in->completion_flags |= INPUT_COMPLETE_CD;
-    if ((qw->u.input.flags & 4) != 0)
-        in->strip_password = TRUE;
+                    qw->u.input.completion_flags);
+
+    in->is_password = qw->u.input.is_passwd;
+    in->strip_password = qw->u.input.strip_passwd;
 
     return in;
 }
@@ -587,7 +585,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
                 break;
 
             case quick_input:
-                if ((quick_widget->u.input.flags & 2) != 0)
+                if ((quick_widget->u.input.completion_flags & INPUT_COMPLETE_CD) != 0)
                     *item->quick_widget->u.input.result =
                         tilde_expand (INPUT (item->widget)->buffer);
                 else

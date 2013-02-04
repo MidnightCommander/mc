@@ -227,7 +227,9 @@ exec_make_shell_string (const char *lc_data, const vfs_path_t * filename_vpath)
                 char *parameter;
 
                 parameter_found = FALSE;
-                parameter = input_dialog (_("Parameter"), lc_prompt, MC_HISTORY_EXT_PARAMETER, "");
+                parameter =
+                    input_dialog (_("Parameter"), lc_prompt, MC_HISTORY_EXT_PARAMETER, "",
+                                  INPUT_COMPLETE_NONE);
                 if (parameter == NULL)
                 {
                     /* User canceled */

@@ -101,8 +101,9 @@ editcmd_dialog_search_show (WEdit * edit)
     {
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
-            QUICK_LABELED_INPUT (N_("Enter search string:"), input_label_above,
-                                 INPUT_LAST_TEXT, 0, MC_HISTORY_SHARED_SEARCH, &search_text, NULL),
+            QUICK_LABELED_INPUT (N_("Enter search string:"), input_label_above, INPUT_LAST_TEXT, 
+                                 MC_HISTORY_SHARED_SEARCH, &search_text, NULL, FALSE, FALSE,
+                                 INPUT_COMPLETE_NONE),
             QUICK_SEPARATOR (TRUE),
             QUICK_START_COLUMNS,
                 QUICK_RADIO (num_of_types, (const char **) list_of_types,
@@ -191,10 +192,11 @@ editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const cha
     {
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
-            QUICK_LABELED_INPUT (N_("Enter search string:"), input_label_above,
-                                 search_default, 0, MC_HISTORY_SHARED_SEARCH, search_text, NULL),
-            QUICK_LABELED_INPUT (N_("Enter replacement string:"), input_label_above,
-                                 replace_default, 0, "replace", replace_text, NULL),
+            QUICK_LABELED_INPUT (N_("Enter search string:"), input_label_above, search_default,
+                                 MC_HISTORY_SHARED_SEARCH, search_text, NULL, FALSE, FALSE,
+                                 INPUT_COMPLETE_NONE),
+            QUICK_LABELED_INPUT (N_("Enter replacement string:"), input_label_above, replace_default,
+                                 "replace", replace_text, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
             QUICK_SEPARATOR (TRUE),
             QUICK_START_COLUMNS,
                 QUICK_RADIO (num_of_types, (const char **) list_of_types,
@@ -316,7 +318,7 @@ editcmd_dialog_raw_key_query (const char *heading, const char *query, gboolean c
 
     add_widget (raw_dlg, label_new (y, 3, query));
     add_widget (raw_dlg, input_new (y++, 3 + wq + 1, input_get_default_colors (),
-                                    w - (6 + wq + 1), "", 0, INPUT_COMPLETE_DEFAULT));
+                                    w - (6 + wq + 1), "", 0, INPUT_COMPLETE_NONE));
     if (cancel)
     {
         add_widget (raw_dlg, hline_new (y++, -1, -1));

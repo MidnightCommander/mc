@@ -31,11 +31,13 @@ enum
 
 /* The input dialogs */
 char *input_dialog (const char *header, const char *text,
-                    const char *history_name, const char *def_text);
+                    const char *history_name, const char *def_text,
+                    input_complete_t completion_flags);
 char *input_dialog_help (const char *header, const char *text, const char *help,
-                         const char *history_name, const char *def_text, gboolean strip_password);
-char *input_expand_dialog (const char *header, const char *text,
-                           const char *history_name, const char *def_text);
+                         const char *history_name, const char *def_text, gboolean strip_password,
+                         input_complete_t completion_flags);
+char *input_expand_dialog (const char *header, const char *text, const char *history_name,
+                           const char *def_text, input_complete_t completion_flags);
 
 int query_dialog (const char *header, const char *text, int flags, int count, ...);
 void query_set_sel (int new_sel);
