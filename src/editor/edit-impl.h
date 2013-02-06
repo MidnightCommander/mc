@@ -214,6 +214,7 @@ void edit_delete_line (WEdit * edit);
 int edit_delete (WEdit * edit, gboolean byte_delete);
 int edit_backspace (WEdit * edit, gboolean byte_delete);
 void edit_insert (WEdit * edit, int c);
+void edit_insert_over (WEdit * edit);
 void edit_cursor_move (WEdit * edit, off_t increment);
 void edit_push_undo_action (WEdit * edit, long c);
 void edit_push_redo_action (WEdit * edit, long c);
@@ -253,7 +254,6 @@ void edit_set_spell_lang (void);
 gboolean edit_save_block (WEdit * edit, const char *filename, off_t start, off_t finish);
 gboolean edit_save_block_cmd (WEdit * edit);
 gboolean edit_insert_file_cmd (WEdit * edit);
-void edit_insert_over (WEdit * edit);
 
 char *edit_get_word_from_pos (const WEdit * edit, off_t start_pos, off_t * start, gsize * len,
                               gsize * cut);

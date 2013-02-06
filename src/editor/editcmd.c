@@ -2296,20 +2296,6 @@ eval_marks (WEdit * edit, off_t * start_mark, off_t * end_mark)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_insert_over (WEdit * edit)
-{
-    int i;
-
-    for (i = 0; i < edit->over_col; i++)
-    {
-        edit_insert (edit, ' ');
-    }
-    edit->over_col = 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
 edit_block_copy_cmd (WEdit * edit)
 {
     off_t start_mark, end_mark, current = edit->curs1;
