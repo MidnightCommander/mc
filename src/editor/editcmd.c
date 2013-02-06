@@ -2,12 +2,12 @@
    Editor high level editing commands
 
    Copyright (C) 1996, 1997, 1998, 2001, 2002, 2003, 2004, 2005, 2006,
-   2007, 2011, 2012
+   2007, 2011, 2012, 2013
    The Free Software Foundation, Inc.
 
    Written by:
    Paul Sheer, 1996, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2012
+   Andrew Borodin <aborodin@vmail.ru>, 2012, 2013
    Ilia Maslakov <il.smind@gmail.com>, 2012
 
    This file is part of the Midnight Commander.
@@ -2305,81 +2305,6 @@ edit_insert_over (WEdit * edit)
         edit_insert (edit, ' ');
     }
     edit->over_col = 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-off_t
-edit_insert_column_of_text_from_file (WEdit * edit, int file,
-                                      off_t * start_pos, off_t * end_pos, long *col1, long *col2)
-{
-    off_t cursor;
-    int col;
-    off_t blocklen = -1, width = 0;
-    unsigned char *data;
-
-    cursor = edit->curs1;
-    col = edit_get_col (edit);
-    data = g_malloc0 (TEMP_BUF_LEN);
-
-    while ((blocklen = mc_read (file, (char *) data, TEMP_BUF_LEN)) > 0)
-    {
-        off_t i;
-        for (width = 0; width < blocklen; width++)
-        {
-            if (data[width] == '\n')
-                break;
-        }
-        for (i = 0; i < blocklen; i++)
-        {
-            if (data[i] == '\n')
-            {                   /* fill in and move to next line */
-                long l;
-                off_t p;
-                if (edit_get_byte (edit, edit->curs1) != '\n')
-                {
-                    l = width - (edit_get_col (edit) - col);
-                    while (l > 0)
-                    {
-                        edit_insert (edit, ' ');
-                        l -= space_width;
-                    }
-                }
-                for (p = edit->curs1;; p++)
-                {
-                    if (p == edit->last_byte)
-                    {
-                        edit_cursor_move (edit, edit->last_byte - edit->curs1);
-                        edit_insert_ahead (edit, '\n');
-                        p++;
-                        break;
-                    }
-                    if (edit_get_byte (edit, p) == '\n')
-                    {
-                        p++;
-                        break;
-                    }
-                }
-                edit_cursor_move (edit, edit_move_forward3 (edit, p, col, 0) - edit->curs1);
-                l = col - edit_get_col (edit);
-                while (l >= space_width)
-                {
-                    edit_insert (edit, ' ');
-                    l -= space_width;
-                }
-                continue;
-            }
-            edit_insert (edit, data[i]);
-        }
-    }
-    *col1 = col;
-    *col2 = col + width;
-    *start_pos = cursor;
-    *end_pos = edit->curs1;
-    edit_cursor_move (edit, cursor - edit->curs1);
-    g_free (data);
-
-    return blocklen;
 }
 
 /* --------------------------------------------------------------------------------------------- */

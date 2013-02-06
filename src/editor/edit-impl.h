@@ -254,9 +254,6 @@ gboolean edit_save_block (WEdit * edit, const char *filename, off_t start, off_t
 gboolean edit_save_block_cmd (WEdit * edit);
 gboolean edit_insert_file_cmd (WEdit * edit);
 void edit_insert_over (WEdit * edit);
-off_t edit_insert_column_of_text_from_file (WEdit * edit, int file,
-                                            off_t * start_pos, off_t * end_pos, long *col1,
-                                            long *col2);
 
 char *edit_get_word_from_pos (const WEdit * edit, off_t start_pos, off_t * start, gsize * len,
                               gsize * cut);

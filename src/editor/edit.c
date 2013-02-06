@@ -2,13 +2,13 @@
    Editor low level data handling and cursor fundamentals.
 
    Copyright (C) 1996, 1997, 1998, 2001, 2002, 2003, 2004, 2005, 2006,
-   2007, 2008, 2009, 2010, 2011, 2012
+   2007, 2008, 2009, 2010, 2011, 2012, 2013
    The Free Software Foundation, Inc.
 
    Written by:
    Paul Sheer 1996, 1997
    Ilia Maslakov <il.smind@gmail.com> 2009, 2010, 2011
-   Andrew Borodin <aborodin@vmail.ru> 2012.
+   Andrew Borodin <aborodin@vmail.ru> 2012, 2013
 
    This file is part of the Midnight Commander.
 
@@ -1758,6 +1758,75 @@ edit_print_string (WEdit * e, const char *s)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static off_t
+edit_insert_column_from_file (WEdit * edit, int file, off_t * start_pos, off_t * end_pos,
+                              long *col1, long *col2)
+{
+    off_t cursor;
+    int col;
+    off_t blocklen = -1, width = 0;
+    unsigned char *data;
+
+    cursor = edit->curs1;
+    col = edit_get_col (edit);
+    data = g_malloc0 (TEMP_BUF_LEN);
+
+    while ((blocklen = mc_read (file, (char *) data, TEMP_BUF_LEN)) > 0)
+    {
+        off_t i;
+        char *pn;
+
+        pn = strchr ((char *) data, '\n');
+        width = pn == NULL ? blocklen : pn - (char *) data;
+
+        for (i = 0; i < blocklen; i++)
+        {
+            if (data[i] != '\n')
+                edit_insert (edit, data[i]);
+            else
+            {                   /* fill in and move to next line */
+                long l;
+                off_t p;
+
+                if (edit_get_byte (edit, edit->curs1) != '\n')
+                    for (l = width - (edit_get_col (edit) - col); l > 0; l -= space_width)
+                        edit_insert (edit, ' ');
+
+                for (p = edit->curs1; ; p++)
+                {
+                    if (p == edit->last_byte)
+                    {
+                        edit_cursor_move (edit, edit->last_byte - edit->curs1);
+                        edit_insert_ahead (edit, '\n');
+                        p++;
+                        break;
+                    }
+                    if (edit_get_byte (edit, p) == '\n')
+                    {
+                        p++;
+                        break;
+                    }
+                }
+
+                edit_cursor_move (edit, edit_move_forward3 (edit, p, col, 0) - edit->curs1);
+
+                for (l = col - edit_get_col (edit); l >= space_width; l -= space_width)
+                    edit_insert (edit, ' ');
+            }
+        }
+    }
+    *col1 = col;
+    *col2 = col + width;
+    *start_pos = cursor;
+    *end_pos = edit->curs1;
+    edit_cursor_move (edit, cursor - edit->curs1);
+    g_free (data);
+
+    return blocklen;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -2131,7 +2200,7 @@ edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
             off_t mark1, mark2;
             long c1, c2;
 
-            blocklen = edit_insert_column_of_text_from_file (edit, file, &mark1, &mark2, &c1, &c2);
+            blocklen = edit_insert_column_from_file (edit, file, &mark1, &mark2, &c1, &c2);
             edit_set_markers (edit, edit->curs1, mark2, c1, c2);
 
             /* highlight inserted text then not persistent blocks */
