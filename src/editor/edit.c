@@ -652,7 +652,6 @@ edit_modification (WEdit * edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef HAVE_CHARSET
 static char *
 edit_get_byte_ptr (const WEdit * edit, off_t byte_index)
 {
@@ -671,7 +670,6 @@ edit_get_byte_ptr (const WEdit * edit, off_t byte_index)
     return (char *) (edit->buffers1[byte_index >> S_EDIT_BUF_SIZE] +
                      (byte_index & M_EDIT_BUF_SIZE));
 }
-#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1819,18 +1817,11 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
 int
 edit_get_byte (const WEdit * edit, off_t byte_index)
 {
-    off_t p;
+    char *p;
 
-    if (byte_index >= (edit->curs1 + edit->curs2) || byte_index < 0)
-        return '\n';
+    p = edit_get_byte_ptr (edit, byte_index);
 
-    if (byte_index >= edit->curs1)
-    {
-        p = edit->curs1 + edit->curs2 - byte_index - 1;
-        return edit->buffers2[p >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - (p & M_EDIT_BUF_SIZE) - 1];
-    }
-
-    return edit->buffers1[byte_index >> S_EDIT_BUF_SIZE][byte_index & M_EDIT_BUF_SIZE];
+    return (p != NULL) ? *(unsigned char *) p : '\n';
 }
 
 /* --------------------------------------------------------------------------------------------- */
