@@ -202,9 +202,6 @@ edit_load_file_fast (WEdit * edit, const vfs_path_t * filename_vpath)
     int file = -1;
     gboolean ret = FALSE;
 
-    edit->curs2 = edit->last_byte;
-    buf2 = edit->curs2 >> S_EDIT_BUF_SIZE;
-
     file = mc_open (filename_vpath, O_RDONLY | O_BINARY);
     if (file == -1)
     {
@@ -217,28 +214,31 @@ edit_load_file_fast (WEdit * edit, const vfs_path_t * filename_vpath)
         return FALSE;
     }
 
-    if (!edit->buffers2[buf2])
+    edit->curs2 = edit->last_byte;
+    buf2 = edit->curs2 >> S_EDIT_BUF_SIZE;
+
+    if (edit->buffers2[buf2] == NULL)
         edit->buffers2[buf2] = g_malloc0 (EDIT_BUF_SIZE);
 
-    do
+    if (mc_read (file,
+                 (char *) edit->buffers2[buf2] + EDIT_BUF_SIZE -
+                 (edit->curs2 & M_EDIT_BUF_SIZE), edit->curs2 & M_EDIT_BUF_SIZE) < 0)
+        goto done;
+
+    for (buf = buf2 - 1; buf >= 0; buf--)
     {
-        if (mc_read (file,
-                     (char *) edit->buffers2[buf2] + EDIT_BUF_SIZE -
-                     (edit->curs2 & M_EDIT_BUF_SIZE), edit->curs2 & M_EDIT_BUF_SIZE) < 0)
-            break;
-
-        for (buf = buf2 - 1; buf >= 0; buf--)
-        {
-            /* edit->buffers2[0] is already allocated */
-            if (!edit->buffers2[buf])
-                edit->buffers2[buf] = g_malloc0 (EDIT_BUF_SIZE);
-            if (mc_read (file, (char *) edit->buffers2[buf], EDIT_BUF_SIZE) < 0)
-                break;
-        }
-        ret = TRUE;
+        /* edit->buffers2[0] is already allocated */
+        if (edit->buffers2[buf] == NULL)
+            edit->buffers2[buf] = g_malloc0 (EDIT_BUF_SIZE);
+        if (mc_read (file, (char *) edit->buffers2[buf], EDIT_BUF_SIZE) < 0)
+            goto done;
     }
-    while (FALSE);
 
+    edit->total_lines = edit_count_lines (edit, 0, edit->last_byte);
+
+    ret = TRUE;
+
+  done:
     if (!ret)
     {
         gchar *errmsg;
@@ -435,9 +435,11 @@ edit_load_file (WEdit * edit)
     if (fast_load)
     {
         edit->last_byte = edit->stat1.st_size;
-        edit_load_file_fast (edit, edit->filename_vpath);
-        /* If fast load was used, the number of lines wasn't calculated */
-        edit->total_lines = edit_count_lines (edit, 0, edit->last_byte);
+        if (!edit_load_file_fast (edit, edit->filename_vpath))
+        {
+            edit_clean (edit);
+            return FALSE;
+        }
     }
     else
     {
