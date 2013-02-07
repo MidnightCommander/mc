@@ -1151,12 +1151,15 @@ edit_move_updown (WEdit * edit, long lines, gboolean do_scroll, gboolean directi
 
     edit_move_to_prev_col (edit, p);
 
+#ifdef HAVE_CHARSET
     /* search start of current multibyte char (like CJK) */
-    if (edit->curs1 + 1 < edit->last_byte)
+    if (edit->curs1 > 0 && edit->curs1 + 1 < edit->last_byte
+        && edit_get_byte (edit, edit->curs1) >= 256 )
     {
         edit_right_char_move_cmd (edit);
         edit_left_char_move_cmd (edit);
     }
+#endif
 
     edit->search_start = edit->curs1;
     edit->found_len = 0;
