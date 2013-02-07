@@ -59,9 +59,9 @@ helyett a Midnight Commander által utoljára meglátogatott könyvtárra való
 átváltást (köszönet a funkcióért és a funkcióhoz szükséges kódért Torben
 Fjerdingstad\-nek és Sergey\-nek közreműködésükért). Kérlek, ne csinálj
 szó szerinti másolatot a funkció beállításairól. A fájlok forrása a
-.I %prefix%/share/mc/bin/mc.sh
+.I %libexecdir%/mc/mc.sh
 (bash és zsh felhasználóknak), illetőleg a
-.I %prefix%/share/mc/bin/mc.csh
+.I %libexecdir%/mc/mc.csh
 (tcsh felhasználóknak) fájl. Ilyenkor, amikor a funkció beállításokat
 változtatod, a profil értékeket nem szükséges megváltoztatnod, csak
 arról gondoskodj, hogy az MC\-t ne fordítsd eltérő beállításokkal.

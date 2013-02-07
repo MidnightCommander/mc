@@ -98,9 +98,9 @@ directorio de trabajo en el archivo indicado.  Esta opción no debe ser
 usada directamente, sino desde un guión de shell adecuado, para dejar
 como directorio activo el directorio que estaba en uso dentro de
 Midnight Commander.  Consúltese en los archivos
-.B %prefix%/share/mc/bin/mc.sh
+.B %libexecdir%/mc/mc.sh
 (usuarios de bash y zsh) y
-.B %prefix%/share/mc/bin/mc.csh
+.B %libexecdir%/mc/mc.csh
 (usuarios de tcsh) la manera de definir
 .B mc
 como un alias para el correspondiente guión de shell.

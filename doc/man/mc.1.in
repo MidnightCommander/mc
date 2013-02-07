@@ -83,9 +83,9 @@ Print the last working directory to the specified file.  This option is
 not meant to be used directly.  Instead, it's used from a special shell
 script that automatically changes the current directory of the shell to
 the last directory the Midnight Commander was in.  Source the file
-.B %prefix%/share/mc/bin/mc.sh
+.B %libexecdir%/mc/mc.sh
 (bash and zsh users) or
-.B %prefix%/share/mc/bin/mc.csh
+.B %libexecdir%/mc.csh
 (tcsh users) respectively to define
 .B mc
 as an alias to the appropriate shell script.
