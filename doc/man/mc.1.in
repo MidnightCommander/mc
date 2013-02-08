@@ -1142,12 +1142,12 @@ You can change either one.
 Sometimes you may want to change the absolute path of the original into
 a relative path. An absolute path starts from the root directory:
 .PP
-.I /home/frodo/mc/mc -> /home/frodo/new/mc
+.I /home/frodo/mc/mc \-> /home/frodo/new/mc
 .PP
 A relative link describes the original file's location starting from the
 location of the link itself:
 .PP
-.I /home/frodo/mc/mc -> ../new/mc
+.I /home/frodo/mc/mc \-> ../new/mc
 .PP
 You can force Midnight Commander to suggest a relative path by pressing
 "C\-x v" instead of "C\-x s".
@@ -3567,7 +3567,7 @@ is used for selected hyperlink.
 .PP
 Popup menu uses following colors:
 .I pmenunormal
-is used for non-selected menu items and as a main color of popup menu window,
+is used for non\-selected menu items and as a main color of popup menu window,
 .I pmenusel
 is used for selected menu item,
 .I pmenutitle
