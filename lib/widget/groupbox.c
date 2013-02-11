@@ -119,8 +119,6 @@ groupbox_new (int y, int x, int height, int width, const char *title)
 void
 groupbox_set_title (WGroupbox * g, const char *title)
 {
-    Widget *w = WIDGET (g);
-
     g_free (g->title);
     g->title = NULL;
 
@@ -134,8 +132,7 @@ groupbox_set_title (WGroupbox * g, const char *title)
         g_free (t);
     }
 
-    if (w->owner != NULL)
-        send_message (w, NULL, MSG_DRAW, 0, NULL);
+    widget_redraw (WIDGET (g));
 }
 
 /* --------------------------------------------------------------------------------------------- */

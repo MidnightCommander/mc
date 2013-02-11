@@ -1236,7 +1236,7 @@ tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
         buttonbar_clear_label (b, 7, WIDGET (tree));
 #endif
         buttonbar_set_label (b, 8, Q_ ("ButtonBar|Rmdir"), tree_map, w);
-        buttonbar_redraw (b);
+        widget_redraw (WIDGET (b));
 
         /* FIXME: Should find a better way of only displaying the
            currently selected item */

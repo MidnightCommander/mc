@@ -241,8 +241,7 @@ button_set_text (WButton * b, const char *text)
     release_hotkey (b->text);
     b->text = parse_hotkey (text);
     w->cols = button_get_len (b);
-    if (w->owner != NULL)
-        send_message (w, NULL, MSG_DRAW, 0, NULL);
+    widget_redraw (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */

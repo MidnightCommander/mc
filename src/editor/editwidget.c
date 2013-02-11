@@ -1173,7 +1173,7 @@ edit_update_screen (WEdit * e)
         edit_render_keypress (e);
     }
 
-    buttonbar_redraw (find_buttonbar (h));
+    widget_redraw (WIDGET (find_buttonbar (h)));
 }
 
 /* --------------------------------------------------------------------------------------------- */

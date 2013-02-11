@@ -1097,10 +1097,10 @@ static void
 update_dirty_panels (void)
 {
     if (get_current_type () == view_listing && current_panel->dirty)
-        send_message (current_panel, NULL, MSG_DRAW, 0, NULL);
+        widget_redraw (WIDGET (current_panel));
 
     if (get_other_type () == view_listing && other_panel->dirty)
-        send_message (other_panel, NULL, MSG_DRAW, 0, NULL);
+        widget_redraw (WIDGET (other_panel));
 }
 
 /* --------------------------------------------------------------------------------------------- */

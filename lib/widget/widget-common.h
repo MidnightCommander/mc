@@ -142,6 +142,7 @@ void widget_set_options (Widget * w, widget_options_t options, gboolean enable);
 void widget_set_size (Widget * widget, int y, int x, int lines, int cols);
 /* select color for widget in dependance of state */
 void widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey);
+void widget_redraw (Widget * w);
 void widget_erase (Widget * w);
 
 /* get mouse pointer location within widget */

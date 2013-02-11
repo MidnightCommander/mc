@@ -182,11 +182,10 @@ label_set_text (WLabel * label, const char *text)
         }
     }
 
-    if (w->owner != NULL)
-        send_message (w, NULL, MSG_DRAW, 0, NULL);
-
     if (newcols < w->cols)
         w->cols = newcols;
+
+    widget_redraw (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */

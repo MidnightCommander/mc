@@ -3333,7 +3333,7 @@ edit_select_codepage_cmd (WEdit * edit)
         edit_set_codeset (edit);
 
     edit->force = REDRAW_PAGE;
-    send_message (edit, NULL, MSG_DRAW, 0, NULL);
+    widget_redraw (WIDGET (edit));
 }
 #endif
 

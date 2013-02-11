@@ -1265,6 +1265,7 @@ input_set_point (WInput * in, int pos)
 void
 input_update (WInput * in, gboolean clear_first)
 {
+    Widget *w = WIDGET (in);
     int has_history = 0;
     int i;
     int buf_len;
@@ -1292,13 +1293,13 @@ input_update (WInput * in, gboolean clear_first)
     in->mark = min (in->mark, buf_len);
 
     /* don't draw widget not put into dialog */
-    if (WIDGET (in)->owner == NULL)
+    if (w->owner == NULL || w->owner->state != DLG_ACTIVE)
         return;
 
     if (has_history != 0)
         draw_history_button (in);
 
-    if ((WIDGET (in)->options & W_DISABLED) != 0)
+    if ((w->options & W_DISABLED) != 0)
         tty_setcolor (DISABLED_COLOR);
     else if (in->first)
         tty_setcolor (in->color[WINPUTC_UNCHANGED]);
