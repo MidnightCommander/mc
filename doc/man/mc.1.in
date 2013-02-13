@@ -36,16 +36,14 @@ Colors
 .\"Colors"
 section.
 .TP
-.I \-S arg, \-\-skin=arg
-Specify a name of skin in the command line. Technology of skins is
-documented in the
-.\"LINK2"
-Skins
-.\"Skins"
-section.
+.I \-\-configure\-options
+Display configure options.
 .TP
 .I \-d, \-\-nomouse
 Disable mouse support.
+.TP
+.I \-D N, \-\-debuglevel=N
+Save the debug level for SMB VFS. N is in 0\-10 range.
 .TP
 .I \-e [file], \-\-edit[=file]
 Start the internal editor.  If the file is specified, open it on
@@ -59,8 +57,9 @@ Display the compiled\-in search paths for Midnight Commander files.
 Display extended info about compiled\-in paths for
 Midnight Commander.
 .TP
-.I \-\-configure\-options
-Display configure options.
+.I \-g, \-\-oldmouse
+Force a "normal tracking" mouse mode. Used when running on
+xterm\-capable terminals (tmux/screen).
 .TP
 .I \-k, \-\-resetsoft
 Reset softkeys to their default from the termcap/terminfo
@@ -69,14 +68,11 @@ database. Only useful on HP terminals when the function keys don't work.
 .I \-K file, \-\-keymap=file
 Specify a name of keymap file in the command line.
 .TP
-.I \-\-nokeymap
-Don't load key bindings from any file, use default hardcoded keys.
-.TP
 .I \-l file, \-\-ftplog=file
 Save the ftpfs dialog with the server in file.
 .TP
-.I \-D N, \-\-debuglevel=N
-Save the debug level for SMB VFS. N is in 0\-10 range.
+.I \-\-nokeymap
+Don't load key bindings from any file, use default hardcoded keys.
 .TP
 .I \-P file, \-\-printwd=file
 Print the last working directory to the specified file.  This option is
@@ -136,6 +132,14 @@ thin horizontal line
 .B thinvert
 thin vertical line
 .TP
+.I \-S arg, \-\-skin=arg
+Specify a name of skin in the command line. Technology of skins is
+documented in the
+.\"LINK2"
+Skins
+.\"Skins"
+section.
+.TP
 .I \-t, \-\-termcap
 Used only if the code was compiled with Slang and terminfo: it makes
 the Midnight Commander use the value of the
@@ -165,10 +169,6 @@ screen modes, and able to send mouse escape sequences).
 .TP
 .I \-X, \-\-no\-x11
 Do not use X11 to get the state of modifiers Alt, Ctrl, Shift
-.TP
-.I \-g, \-\-oldmouse
-Force a "normal tracking" mouse mode. Used when running on
-xterm\-capable terminals (tmux/screen).
 .PP
 If specified, the first path name is the directory to show in the
 selected panel; the second path name is the directory to be shown in
