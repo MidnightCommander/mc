@@ -1748,7 +1748,7 @@ get_key_code (int no_delay)
 
         d = *pending_keys++;
         while (d == ESC_CHAR && *pending_keys != '\0')
-                d = ALT (*pending_keys++);
+            d = ALT (*pending_keys++);
 
         if (*pending_keys == '\0')
             pending_keys = seq_append = NULL;
