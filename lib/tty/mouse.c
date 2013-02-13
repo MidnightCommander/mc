@@ -48,6 +48,7 @@
 Mouse_Type use_mouse_p = MOUSE_NONE;
 gboolean mouse_enabled = FALSE;
 const char *xmouse_seq;
+const char *xmouse_extended_seq;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -90,6 +91,7 @@ init_mouse (void)
     case MOUSE_XTERM_NORMAL_TRACKING:
     case MOUSE_XTERM_BUTTON_EVENT_TRACKING:
         define_sequence (MCKEY_MOUSE, xmouse_seq, MCKEY_NOACTION);
+        define_sequence (MCKEY_EXTENDED_MOUSE, xmouse_extended_seq, MCKEY_NOACTION);
         break;
 
     default:
@@ -138,8 +140,8 @@ enable_mouse (void)
         /* enable mouse tracking */
         printf (ESC_STR "[?1000h");
 
-        /* enable urxvt extended mouse coordinate reporting */
-        printf (ESC_STR "[?1015h");
+        /* enable SGR extended mouse reporting */
+        printf (ESC_STR "[?1006h");
 
         fflush (stdout);
         mouse_enabled = TRUE;
@@ -152,8 +154,8 @@ enable_mouse (void)
         /* enable mouse tracking */
         printf (ESC_STR "[?1002h");
 
-        /* enable urxvt extended mouse coordinate reporting */
-        printf (ESC_STR "[?1015h");
+        /* enable SGR extended mouse reporting */
+        printf (ESC_STR "[?1006h");
 
         fflush (stdout);
         mouse_enabled = TRUE;
@@ -182,8 +184,8 @@ disable_mouse (void)
         break;
 #endif
     case MOUSE_XTERM_NORMAL_TRACKING:
-        /* disable urxvt extended mouse coordinate reporting */
-        printf (ESC_STR "[?1015l");
+        /* disable SGR extended mouse reporting */
+        printf (ESC_STR "[?1006l");
 
         /* disable mouse tracking */
         printf (ESC_STR "[?1000l");
@@ -194,8 +196,8 @@ disable_mouse (void)
         fflush (stdout);
         break;
     case MOUSE_XTERM_BUTTON_EVENT_TRACKING:
-        /* disable urxvt extended mouse coordinate reporting */
-        printf (ESC_STR "[?1015l");
+        /* disable SGR extended mouse reporting */
+        printf (ESC_STR "[?1006l");
 
         /* disable mouse tracking */
         printf (ESC_STR "[?1002l");

@@ -303,6 +303,10 @@ tty_init_xterm_support (gboolean is_xterm)
             }
         }
     }
+
+    /* No termcap for SGR extended mouse (yet), hardcode it for now */
+    if (xmouse_seq != NULL)
+        xmouse_extended_seq = ESC_STR "[<";
 }
 
 /* --------------------------------------------------------------------------------------------- */
