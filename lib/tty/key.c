@@ -1744,20 +1744,18 @@ get_key_code (int no_delay)
   pend_send:
     if (pending_keys != NULL)
     {
-        int d = *pending_keys++;
-      check_pend:
-        if (*pending_keys == 0)
-        {
-            pending_keys = NULL;
-            seq_append = NULL;
-        }
-        if ((d == ESC_CHAR) && (pending_keys != NULL))
-        {
-            d = ALT (*pending_keys++);
-            goto check_pend;
-        }
-        if ((d > 127 && d < 256) && use_8th_bit_as_meta)
+        int d;
+
+        d = *pending_keys++;
+        while (d == ESC_CHAR && *pending_keys != '\0')
+                d = ALT (*pending_keys++);
+
+        if (*pending_keys == '\0')
+            pending_keys = seq_append = NULL;
+
+        if (d > 127 && d < 256 && use_8th_bit_as_meta)
             d = ALT (d & 0x7f);
+
         this = NULL;
         return correct_key_code (d);
     }
