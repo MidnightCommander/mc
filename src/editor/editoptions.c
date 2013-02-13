@@ -150,6 +150,7 @@ edit_options_dialog (WDialog * h)
                     QUICK_RADIO (3, wrap_str, &wrap_mode, NULL),
                 QUICK_STOP_GROUPBOX,
                 QUICK_SEPARATOR (FALSE),
+                QUICK_SEPARATOR (FALSE),
                 QUICK_START_GROUPBOX (N_("Tabulation")),
                     QUICK_CHECKBOX (N_("&Fake half tabs"), &option_fake_half_tabs, NULL),
                     QUICK_CHECKBOX (N_("&Backspace through tabs"), &option_backspace_through_tabs,
