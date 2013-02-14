@@ -1356,6 +1356,23 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
 
     g_free (state.word);
 
+    if (matches != NULL &&
+        (flags & (INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_SHELL_ESC)) !=
+                 (INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_SHELL_ESC))
+    {
+        /* FIXME: HACK? INPUT_COMPLETE_SHELL_ESC is used only in command line. */
+        char **m;
+
+        for (m = matches; *m != NULL; m++)
+        {
+            char *p;
+
+            p = *m;
+            *m = strutils_shell_escape (*m);
+            g_free (p);
+        }
+    }
+
     return matches;
 }
 

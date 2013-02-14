@@ -3058,7 +3058,9 @@ Filename, username, variable and hostname completion works on all input
 lines, command completion is command line specific.  If the completion
 is ambiguous (there are more different possibilities), MC beeps and the
 following action depends on the setting of the
-.I Complete: show all
+.\"LINK2"
+Complete: show all
+.\"Configuration"
 option in the
 .\"LINK2"
 Configuration
@@ -3083,6 +3085,14 @@ Complete: show all
 is disabled, the dialog pops up only if you press
 .B Alt\-Tab
 for the second time, for the first time MC just beeps.
+.PP
+Apply escaping of
+.BR ? ", " * " and " &
+symbols (as
+.BR \\? ", " \\* ", " \\& )
+in filenames to disallow use them as metasymbols in regular expressions
+when substitution is performed in the input line.
+
 .\"NODE "Virtual File System"
 .SH "Virtual File System"
 The Midnight Commander is provided with a code layer to access the file
