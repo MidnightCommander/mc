@@ -1358,7 +1358,7 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
 
     if (matches != NULL &&
         (flags & (INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_SHELL_ESC)) !=
-                 (INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_SHELL_ESC))
+        (INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_SHELL_ESC))
     {
         /* FIXME: HACK? INPUT_COMPLETE_SHELL_ESC is used only in command line. */
         char **m;
