@@ -203,7 +203,6 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     if (!mouse_enable)
         use_mouse_p = MOUSE_DISABLED;
     tty_init_xterm_support (is_xterm);  /* do it before do_enter_ca_mode() call */
-    init_mouse ();
     do_enter_ca_mode ();
     tty_raw_mode ();
     noecho ();
