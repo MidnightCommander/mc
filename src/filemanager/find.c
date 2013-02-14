@@ -1559,14 +1559,15 @@ setup_gui (void)
     int lines, cols;
     int y;
 
-#ifdef ENABLE_NLS
     static gboolean i18n_flag = FALSE;
 
     if (!i18n_flag)
     {
         for (i = 0; i < fbuts_num; i++)
         {
+#ifdef ENABLE_NLS
             fbuts[i].text = _(fbuts[i].text);
+#endif /* ENABLE_NLS */
             fbuts[i].len = str_term_width1 (fbuts[i].text) + 3;
             if (fbuts[i].flags == DEFPUSH_BUTTON)
                 fbuts[i].len += 2;
@@ -1574,7 +1575,6 @@ setup_gui (void)
 
         i18n_flag = TRUE;
     }
-#endif /* ENABLE_NLS */
 
     lines = LINES - 4;
     cols = COLS - 16;
