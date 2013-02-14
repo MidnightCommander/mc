@@ -316,7 +316,7 @@ static const struct test_vfs_path_append_vpath_ds
 {
     const char *input_path1;
     const char *input_path2;
-    const size_t expected_element_count;
+    const int expected_element_count;
     const char *expected_path;
 } test_vfs_path_append_vpath_ds[] =
 {

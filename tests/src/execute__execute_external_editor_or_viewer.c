@@ -25,11 +25,7 @@
 
 #define TEST_SUITE_NAME "/src"
 
-#include <config.h>
-
-#include <check.h>
-
-#include "lib/global.h"
+#include "tests/mctest.h"
 
 #include "execute__common.c"
 
@@ -158,23 +154,25 @@ START_TEST (do_open_external_editor_or_viewer)
     /* then */
 
     /* check call to execute_get_external_cmd_opts_from_config() */
-    g_assert_cmpstr (execute_external_cmd_opts__command__captured, ==, "editor_or_viewer");
-    ck_assert_int_eq (vfs_path_cmp
-                      (execute_external_cmd_opts__filename_vpath__captured, filename_vpath), 0);
-    ck_assert_int_eq (execute_external_cmd_opts__start_line__captured, 123);
+    mctest_assert_str_eq (execute_external_cmd_opts__command__captured, "editor_or_viewer");
+    mctest_assert_int_eq (vfs_path_equal
+                          (execute_external_cmd_opts__filename_vpath__captured, filename_vpath),
+                          TRUE);
+    mctest_assert_int_eq (execute_external_cmd_opts__start_line__captured, 123);
 
     /* check call to do_executev() */
-    g_assert_cmpstr (do_executev__lc_shell__captured, ==, "editor_or_viewer");
-    ck_assert_int_eq (do_executev__flags__captured, EXECUTE_INTERNAL);
-    ck_assert_int_eq (do_executev__argv__captured->len, 7);
+    mctest_assert_str_eq (do_executev__lc_shell__captured, "editor_or_viewer");
+    mctest_assert_int_eq (do_executev__flags__captured, EXECUTE_INTERNAL);
+    mctest_assert_int_eq (do_executev__argv__captured->len, 7);
 
-    g_assert_cmpstr (g_ptr_array_index (do_executev__argv__captured, 0), ==, "param 1 with spaces");
-    g_assert_cmpstr (g_ptr_array_index (do_executev__argv__captured, 1), ==, "param 2");
-    g_assert_cmpstr (g_ptr_array_index (do_executev__argv__captured, 2), ==, "-a");
-    g_assert_cmpstr (g_ptr_array_index (do_executev__argv__captured, 3), ==, "-b");
-    g_assert_cmpstr (g_ptr_array_index (do_executev__argv__captured, 4), ==, "-cdef");
-    g_assert_cmpstr (g_ptr_array_index (do_executev__argv__captured, 5), ==, "/path/to/file.txt");
-    g_assert_cmpstr (g_ptr_array_index (do_executev__argv__captured, 6), ==, "+123");
+    mctest_assert_str_eq (g_ptr_array_index (do_executev__argv__captured, 0),
+                          "param 1 with spaces");
+    mctest_assert_str_eq (g_ptr_array_index (do_executev__argv__captured, 1), "param 2");
+    mctest_assert_str_eq (g_ptr_array_index (do_executev__argv__captured, 2), "-a");
+    mctest_assert_str_eq (g_ptr_array_index (do_executev__argv__captured, 3), "-b");
+    mctest_assert_str_eq (g_ptr_array_index (do_executev__argv__captured, 4), "-cdef");
+    mctest_assert_str_eq (g_ptr_array_index (do_executev__argv__captured, 5), "/path/to/file.txt");
+    mctest_assert_str_eq (g_ptr_array_index (do_executev__argv__captured, 6), "+123");
 
     vfs_path_free (filename_vpath);
 }

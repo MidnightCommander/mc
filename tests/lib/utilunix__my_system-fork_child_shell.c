@@ -25,10 +25,7 @@
 
 #define TEST_SUITE_NAME "/lib/utilunix"
 
-#include <config.h>
-#include <check.h>
-
-#include "lib/global.h"
+#include "tests/mctest.h"
 
 #include "lib/util.h"
 #include "lib/utilunix.h"
@@ -49,20 +46,20 @@ START_TEST (fork_child_as_shell)
     actual_value = my_system (EXECUTE_AS_SHELL, "/bin/shell", "some command");
 
     /* then */
-    ck_assert_int_eq (actual_value, 0);
+    mctest_assert_int_eq (actual_value, 0);
 
     VERIFY_SIGACTION_CALLS ();
     VERIFY_SIGNAL_CALLS ();
 
-    g_assert_cmpstr (execvp__file__captured, ==, "/bin/shell");
-    ck_assert_int_eq (execvp__args__captured->len, 3);
+    mctest_assert_str_eq (execvp__file__captured, "/bin/shell");
+    mctest_assert_int_eq (execvp__args__captured->len, 3);
 
-    g_assert_cmpstr (g_ptr_array_index (execvp__args__captured, 0), ==, "/bin/shell");
-    g_assert_cmpstr (g_ptr_array_index (execvp__args__captured, 1), ==, "-c");
-    g_assert_cmpstr (g_ptr_array_index (execvp__args__captured, 2), ==, "some command");
+    mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 0), "/bin/shell");
+    mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 1), "-c");
+    mctest_assert_str_eq (g_ptr_array_index (execvp__args__captured, 2), "some command");
 
     /* All exec* calls is mocked, so call to _exit() function with 127 status code it's a normal situation */
-    ck_assert_int_eq (my_exit__status__captured, 127);
+    mctest_assert_int_eq (my_exit__status__captured, 127);
 }
 /* *INDENT-OFF* */
 END_TEST

@@ -1,11 +1,12 @@
 /*
    libmc - checks for processing esc sequences in replace string
 
-   Copyright (C) 2011
+   Copyright (C) 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
    Andrew Borodin <aborodin@vmail.ru>, 2011
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -21,38 +22,60 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "lib/search/glob"
 
-#include <config.h>
+#include "tests/mctest.h"
 
-#include <check.h>
-
-#include "glob.c" /* for testing static functions */
+#include "glob.c"               /* for testing static functions */
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-test_helper_valid_data (const char *from, const char *etalon)
+/* @DataSource("test_translate_replace_glob_to_regex_ds") */
+/* *INDENT-OFF* */
+static const struct test_translate_replace_glob_to_regex_ds
 {
+    const char *input_value;
+    const char *expected_result;
+} test_translate_replace_glob_to_regex_ds[] =
+{
+    {
+        "a&a?a",
+        "a\\&a\\1a"
+    },
+    {
+        "a\\&a?a",
+        "a\\&a\\1a"
+    },
+    {
+        "a&a\\?a",
+        "a\\&a\\?a"
+    },
+    {
+        "a\\&a\\?a",
+        "a\\&a\\?a"
+    },
+};
+/* *INDENT-ON* */
+
+/* @Test(dataSource = "test_translate_replace_glob_to_regex_ds") */
+/* *INDENT-OFF* */
+START_PARAMETRIZED_TEST (test_translate_replace_glob_to_regex, test_translate_replace_glob_to_regex_ds)
+/* *INDENT-ON* */
+{
+    /* given */
     GString *dest_str;
 
-    dest_str = mc_search__translate_replace_glob_to_regex (from);
-    fail_if (strcmp (dest_str->str, etalon), "dest_str(%s) != %s", dest_str->str, etalon);
-    g_string_free (dest_str, TRUE);
-}
+    /* when */
+    dest_str = mc_search__translate_replace_glob_to_regex (data->input_value);
 
-/* --------------------------------------------------------------------------------------------- */
-
-START_TEST (test_translate_replace_glob_to_regex)
-{
-    test_helper_valid_data ("a&a?a", "a\\&a\\1a");
-    test_helper_valid_data ("a\\&a?a", "a\\&a\\1a");
-    test_helper_valid_data ("a&a\\?a", "a\\&a\\?a");
-    test_helper_valid_data ("a\\&a\\?a", "a\\&a\\?a");
+    /* then */
+    mctest_assert_str_eq (dest_str->str, data->expected_result) g_string_free (dest_str, TRUE);
 }
-END_TEST
+/* *INDENT-OFF* */
+END_PARAMETRIZED_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -66,7 +89,8 @@ main (void)
     SRunner *sr;
 
     /* Add new tests here: *************** */
-    tcase_add_test (tc_core, test_translate_replace_glob_to_regex);
+    mctest_add_parameterized_test (tc_core, test_translate_replace_glob_to_regex,
+                                   test_translate_replace_glob_to_regex_ds);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);

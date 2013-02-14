@@ -116,7 +116,7 @@ static const struct test_create_ini_file_ds
         "param-not_exists",
         NULL,
         NULL,
-        "" /* it's a bug: should be NULL. Will be fixed in another branch */
+        NULL
     },
     { /* 1. */
         "test-group1",
