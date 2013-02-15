@@ -9,6 +9,7 @@
 #include "lib/widget.h"         /* Widget */
 
 #include "edit-impl.h"
+#include "editbuffer.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -74,10 +75,7 @@ struct WEdit
     vfs_path_t *dir_vpath;      /* NULL if filename is absolute */
 
     /* dynamic buffers and cursor position for editor: */
-    off_t curs1;                /* position of the cursor from the beginning of the file. */
-    off_t curs2;                /* position from the end of the file */
-    unsigned char *buffers1[MAXBUFF + 1];       /* all data up to curs1 */
-    unsigned char *buffers2[MAXBUFF + 1];       /* all data from end of file down to curs2 */
+    edit_buffer_t buffer;
 
 #ifdef HAVE_CHARSET
     /* multibyte support */

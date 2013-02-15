@@ -2,13 +2,14 @@
    Word-processor mode for the editor: does dynamic
    paragraph formatting.
 
-   Copyright (C) 2011
+   Copyright (C) 2011, 2013
    The Free Software Foundation, Inc.
 
    Copyright (C) 1996 Paul Sheer
 
    Writen by:
    Paul Sheer, 1996
+   Andrew Borodin <aborodin@vmail.ru>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -30,6 +31,8 @@
  *  \brief Source: word-processor mode for the editor: does dynamic paragraph formatting
  *  \author Paul Sheer
  *  \date 1996
+ *  \author Andrew Borodin
+ *  \date 2013
  */
 
 #include <config.h>
@@ -75,7 +78,7 @@ line_start (WEdit * edit, long line)
     long l;
 
     l = edit->curs_line;
-    p = edit->curs1;
+    p = edit->buffer.curs1;
 
     if (line < l)
         p = edit_move_backward (edit, p, l - line);
@@ -140,7 +143,7 @@ begin_paragraph (WEdit * edit, int force)
             }
         }
     }
-    return edit_move_backward (edit, edit_bol (edit, edit->curs1), edit->curs_line - i);
+    return edit_move_backward (edit, edit_bol (edit, edit->buffer.curs1), edit->curs_line - i);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -168,7 +171,7 @@ end_paragraph (WEdit * edit, int force)
             }
     }
     return edit_eol (edit,
-                     edit_move_forward (edit, edit_bol (edit, edit->curs1),
+                     edit_move_forward (edit, edit_bol (edit, edit->buffer.curs1),
                                         i - edit->curs_line, 0));
 }
 
@@ -346,7 +349,7 @@ format_this (unsigned char *t, int size, int indent)
 static inline void
 replace_at (WEdit * edit, long q, int c)
 {
-    edit_cursor_move (edit, q - edit->curs1);
+    edit_cursor_move (edit, q - edit->buffer.curs1);
     edit_delete (edit, TRUE);
     edit_insert_ahead (edit, c);
 }
@@ -360,7 +363,7 @@ put_paragraph (WEdit * edit, unsigned char *t, off_t p, int indent, int size)
     long cursor;
     int i, c = 0;
 
-    cursor = edit->curs1;
+    cursor = edit->buffer.curs1;
     if (indent)
         while (strchr ("\t ", edit_get_byte (edit, p)))
             p++;
@@ -376,30 +379,30 @@ put_paragraph (WEdit * edit, unsigned char *t, off_t p, int indent, int size)
             else if (t[i - 1] == '\n')
             {
                 off_t curs;
-                edit_cursor_move (edit, p - edit->curs1);
-                curs = edit->curs1;
+                edit_cursor_move (edit, p - edit->buffer.curs1);
+                curs = edit->buffer.curs1;
                 edit_insert_indent (edit, indent);
                 if (cursor >= curs)
-                    cursor += edit->curs1 - p;
-                p = edit->curs1;
+                    cursor += edit->buffer.curs1 - p;
+                p = edit->buffer.curs1;
             }
             else if (c == '\n')
             {
-                edit_cursor_move (edit, p - edit->curs1);
+                edit_cursor_move (edit, p - edit->buffer.curs1);
                 while (strchr ("\t ", edit_get_byte (edit, p)))
                 {
                     edit_delete (edit, TRUE);
-                    if (cursor > edit->curs1)
+                    if (cursor > edit->buffer.curs1)
                         cursor--;
                 }
-                p = edit->curs1;
+                p = edit->buffer.curs1;
             }
         }
         c = edit_get_byte (edit, p);
         if (c != t[i])
             replace_at (edit, p, t[i]);
     }
-    edit_cursor_move (edit, cursor - edit->curs1);      /* restore cursor position */
+    edit_cursor_move (edit, cursor - edit->buffer.curs1);      /* restore cursor position */
 }
 
 /* --------------------------------------------------------------------------------------------- */
