@@ -433,7 +433,7 @@ static gboolean
 edit_check_newline (WEdit * edit)
 {
     return !(option_check_nl_at_eof && edit->last_byte > 0
-             && edit_get_byte (edit, edit->last_byte - 1) != '\n'
+             && edit_buffer_get_byte (&edit->buffer, edit->last_byte - 1) != '\n'
              && edit_query_dialog2 (_("Warning"),
                                     _("The file you are saving is not finished with a newline"),
                                     _("C&ontinue"), _("&Cancel")));
@@ -567,7 +567,7 @@ edit_delete_column_of_text (WEdit * edit)
         while (q > p)
         {
             /* delete line between margins */
-            if (edit_get_byte (edit, edit->buffer.curs1) != '\n')
+            if (edit_buffer_get_current_byte (&edit->buffer) != '\n')
                 edit_delete (edit, TRUE);
             q--;
         }
@@ -712,7 +712,7 @@ edit_calculate_start_of_next_line (WEdit * edit, off_t current_pos, off_t max_po
     for (i = current_pos; i < max_pos; i++)
     {
         current_pos++;
-        if (edit_get_byte (edit, i) == end_string_symbol)
+        if (edit_buffer_get_byte (&edit->buffer, i) == end_string_symbol)
             break;
     }
 
@@ -735,7 +735,7 @@ edit_calculate_end_of_previous_line (WEdit * edit, off_t current_pos, char end_s
     off_t i;
 
     for (i = current_pos - 1; i >= 0; i--)
-        if (edit_get_byte (edit, i) == end_string_symbol)
+        if (edit_buffer_get_byte (&edit->buffer, i) == end_string_symbol)
             break;
 
     return i;
@@ -836,7 +836,7 @@ editcmd_find (WEdit * edit, gsize * len)
 
         /* fix the start and the end of search block positions */
         if ((edit->search_line_type & AT_START_LINE) != 0
-            && (start_mark != 0 || edit_get_byte (edit, start_mark - 1) != end_string_symbol))
+            && (start_mark != 0 || edit_buffer_get_byte (&edit->buffer, start_mark - 1) != end_string_symbol))
         {
             start_mark =
                 edit_calculate_start_of_next_line (edit, start_mark, edit->last_byte,
@@ -844,7 +844,7 @@ editcmd_find (WEdit * edit, gsize * len)
         }
         if ((edit->search_line_type & AT_END_LINE) != 0
             && (end_mark - 1 != edit->last_byte
-                || edit_get_byte (edit, end_mark) != end_string_symbol))
+                || edit_buffer_get_byte (&edit->buffer, end_mark) != end_string_symbol))
         {
             end_mark = edit_calculate_end_of_previous_line (edit, end_mark, end_string_symbol);
         }
@@ -1049,7 +1049,7 @@ edit_get_block (WEdit * edit, off_t start, off_t finish, off_t * l)
             off_t x;
 
             x = edit_move_forward3 (edit, edit_bol (edit, start), 0, start);
-            c = edit_get_byte (edit, start);
+            c = edit_buffer_get_byte (&edit->buffer, start);
             if ((x >= edit->column1 && x < edit->column2)
                 || (x >= edit->column2 && x < edit->column1) || c == '\n')
             {
@@ -1063,7 +1063,7 @@ edit_get_block (WEdit * edit, off_t start, off_t finish, off_t * l)
     {
         *l = finish - start;
         while (start < finish)
-            *s++ = edit_get_byte (edit, start++);
+            *s++ = edit_buffer_get_byte (&edit->buffer, start++);
     }
     *s = '\0';
     return r;
@@ -1110,7 +1110,7 @@ pipe_mail (WEdit * edit, char *to, char *subject, char *cc)
     {
         off_t i;
         for (i = 0; i < edit->last_byte; i++)
-            fputc (edit_get_byte (edit, i), p);
+            fputc (edit_buffer_get_byte (&edit->buffer, i), p);
         pclose (p);
     }
 }
@@ -1128,7 +1128,7 @@ edit_find_word_start (WEdit * edit, off_t * word_start, gsize * word_len)
     if (edit->buffer.curs1 <= 0)
         return FALSE;
 
-    c = edit_get_byte (edit, edit->buffer.curs1 - 1);
+    c = edit_buffer_get_previous_byte (&edit->buffer);
     /* return if not at end or in word */
     if (is_break_char (c))
         return FALSE;
@@ -1141,7 +1141,7 @@ edit_find_word_start (WEdit * edit, off_t * word_start, gsize * word_len)
             return FALSE;
 
         last = c;
-        c = edit_get_byte (edit, edit->buffer.curs1 - i);
+        c = edit_buffer_get_byte (&edit->buffer, edit->buffer.curs1 - i);
 
         if (is_break_char (c))
         {
@@ -1185,7 +1185,7 @@ edit_collect_completions_get_current_word (WEdit * edit, mc_search_t * srch, off
     {
         int chr;
 
-        chr = edit_get_byte (edit, word_start + i);
+        chr = edit_buffer_get_byte (&edit->buffer, word_start + i);
         if (!isspace (chr))
             g_string_append_c (temp, chr);
     }
@@ -1240,7 +1240,7 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
         /* add matched completion if not yet added */
         for (i = 0; i < len; i++)
         {
-            skip = edit_get_byte (edit, start + i);
+            skip = edit_buffer_get_byte (&edit->buffer, start + i);
             if (isspace (skip))
                 continue;
 
@@ -1330,7 +1330,7 @@ edit_insert_column_of_text (WEdit * edit, unsigned char *data, off_t size, long 
             long l;
             off_t p;
 
-            if (edit_get_byte (edit, edit->buffer.curs1) != '\n')
+            if (edit_buffer_get_current_byte (&edit->buffer) != '\n')
             {
                 for (l = width - (edit_get_col (edit) - col); l > 0; l -= space_width)
                     edit_insert (edit, ' ');
@@ -1344,7 +1344,7 @@ edit_insert_column_of_text (WEdit * edit, unsigned char *data, off_t size, long 
                     p++;
                     break;
                 }
-                if (edit_get_byte (edit, p) == '\n')
+                if (edit_buffer_get_byte (&edit->buffer, p) == '\n')
                 {
                     p++;
                     break;
@@ -2705,7 +2705,7 @@ edit_replace_cmd (WEdit * edit, int again)
 mc_search_cbret_t
 edit_search_cmd_callback (const void *user_data, gsize char_offset, int *current_char)
 {
-    *current_char = edit_get_byte ((WEdit *) user_data, (off_t) char_offset);
+    *current_char = edit_buffer_get_byte (&((WEdit *) user_data)->buffer, (off_t) char_offset);
     return MC_SEARCH_CB_OK;
 }
 
@@ -2888,7 +2888,7 @@ edit_save_block (WEdit * edit, const char *filename, off_t start, off_t finish)
         {
             end = min (finish, start + TEMP_BUF_LEN);
             for (; i < end; i++)
-                buf[i - start] = edit_get_byte (edit, i);
+                buf[i - start] = edit_buffer_get_byte (&edit->buffer, i);
             len -= mc_write (file, (char *) buf, end - start);
             start = end;
         }
@@ -3296,7 +3296,7 @@ edit_complete_word_cmd (WEdit * edit)
     /* match_expr = g_strdup_printf ("\\b%.*s[a-zA-Z_0-9]+", word_len, bufpos); */
     match_expr = g_string_new ("(^|\\s+|\\b)");
     for (i = 0; i < word_len; i++)
-        g_string_append_c (match_expr, edit_get_byte (edit, word_start + i));
+        g_string_append_c (match_expr, edit_buffer_get_byte (&edit->buffer, word_start + i));
     g_string_append (match_expr,
                      "[^\\s\\.=\\+\\[\\]\\(\\)\\,\\;\\:\\\"\\'\\-\\?\\/\\|\\\\\\{\\}\\*\\&\\^\\%%\\$#@\\!]+");
 
@@ -3475,7 +3475,7 @@ edit_get_match_keyword_cmd (WEdit * edit)
     /* prepare match expression */
     match_expr = g_string_sized_new (word_len);
     for (i = 0; i < word_len; i++)
-        g_string_append_c (match_expr, edit_get_byte (edit, word_start + i));
+        g_string_append_c (match_expr, edit_buffer_get_byte (&edit->buffer, word_start + i));
 
     ptr = g_get_current_dir ();
     path = g_strconcat (ptr, G_DIR_SEPARATOR_S, (char *) NULL);
@@ -3609,7 +3609,7 @@ edit_spellcheck_file (WEdit * edit)
     {
         int c1, c2;
 
-        c2 = edit_get_byte (edit, edit->buffer.curs1);
+        c2 = edit_buffer_get_current_byte (&edit->buffer);
 
         do
         {
@@ -3618,7 +3618,7 @@ edit_spellcheck_file (WEdit * edit)
 
             c1 = c2;
             edit_cursor_move (edit, 1);
-            c2 = edit_get_byte (edit, edit->buffer.curs1);
+            c2 = edit_buffer_get_current_byte (&edit->buffer);
         }
         while (is_break_char (c1) || is_break_char (c2));
     }

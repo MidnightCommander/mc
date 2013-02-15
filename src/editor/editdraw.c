@@ -122,7 +122,7 @@ status_string (WEdit * edit, char *s, int w)
             unsigned int cur_utf = 0;
             int cw = 1;
 
-            cur_utf = edit_get_utf (edit, edit->buffer.curs1, &cw);
+            cur_utf = edit_buffer_get_utf (&edit->buffer, edit->buffer.curs1, &cw);
             if (cw > 0)
             {
                 g_snprintf (byte_str, sizeof (byte_str), "%04d 0x%03X",
@@ -130,7 +130,7 @@ status_string (WEdit * edit, char *s, int w)
             }
             else
             {
-                cur_utf = edit_get_byte (edit, edit->buffer.curs1);
+                cur_utf = edit_buffer_get_current_byte (&edit->buffer);
                 g_snprintf (byte_str, sizeof (byte_str), "%04d 0x%03X",
                             (int) cur_utf, (unsigned) cur_utf);
             }
@@ -140,7 +140,7 @@ status_string (WEdit * edit, char *s, int w)
         {
             unsigned char cur_byte = 0;
 
-            cur_byte = edit_get_byte (edit, edit->buffer.curs1);
+            cur_byte = edit_buffer_get_current_byte (&edit->buffer);
             g_snprintf (byte_str, sizeof (byte_str), "%4d 0x%03X",
                         (int) cur_byte, (unsigned) cur_byte);
         }
@@ -311,9 +311,9 @@ edit_status_window (WEdit * edit)
             unsigned int cur_utf;
             int cw = 1;
 
-            cur_utf = edit_get_utf (edit, edit->buffer.curs1, &cw);
+            cur_utf = edit_buffer_get_utf (&edit->buffer, edit->buffer.curs1, &cw);
             if (cw <= 0)
-                cur_utf = edit_get_byte (edit, edit->buffer.curs1);
+                cur_utf = edit_buffer_get_current_byte (&edit->buffer);
             tty_printf ("[%05d 0x%04X]", cur_utf, cur_utf);
         }
 #endif
@@ -321,7 +321,7 @@ edit_status_window (WEdit * edit)
         {
             unsigned char cur_byte;
 
-            cur_byte = edit_get_byte (edit, edit->buffer.curs1);
+            cur_byte = edit_buffer_get_current_byte (&edit->buffer);
             tty_printf ("[%05d 0x%04X]", (unsigned int) cur_byte, (unsigned int) cur_byte);
         }
     }
@@ -570,7 +570,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
             if (tty_use_colors () && visible_tws)
             {
                 tws = edit_eol (edit, b);
-                while (tws > b && ((c = edit_get_byte (edit, tws - 1)) == ' ' || c == '\t'))
+                while (tws > b && ((c = edit_buffer_get_byte (&edit->buffer, tws - 1)) == ' ' || c == '\t'))
                     tws--;
             }
 
@@ -607,14 +607,11 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
 
 #ifdef HAVE_CHARSET
                 if (edit->utf8)
-                {
-                    c = edit_get_utf (edit, q, &cw);
-                }
+                    c = edit_buffer_get_utf (&edit->buffer, q, &cw);
                 else
 #endif
-                {
-                    c = edit_get_byte (edit, q);
-                }
+                    c = edit_buffer_get_byte (&edit->buffer, q);
+
                 /* we don't use bg for mc - fg contains both */
                 if (book_mark)
                 {

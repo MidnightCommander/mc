@@ -574,74 +574,6 @@ edit_modification (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-static char *
-edit_get_byte_ptr (const WEdit * edit, off_t byte_index)
-{
-    if (byte_index >= (edit->buffer.curs1 + edit->buffer.curs2) || byte_index < 0)
-        return NULL;
-
-    if (byte_index >= edit->buffer.curs1)
-    {
-        off_t p;
-
-        p = edit->buffer.curs1 + edit->buffer.curs2 - byte_index - 1;
-        return (char *) (edit->buffer.buffers2[p >> S_EDIT_BUF_SIZE] +
-                         (EDIT_BUF_SIZE - (p & M_EDIT_BUF_SIZE) - 1));
-    }
-
-    return (char *) (edit->buffer.buffers1[byte_index >> S_EDIT_BUF_SIZE] +
-                     (byte_index & M_EDIT_BUF_SIZE));
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-#ifdef HAVE_CHARSET
-static int
-edit_get_prev_utf (const WEdit * edit, off_t byte_index, int *char_width)
-{
-    int i, res;
-    gchar utf8_buf[3 * UTF8_CHAR_LEN + 1];
-    gchar *str;
-    gchar *cursor_buf_ptr;
-
-    if (byte_index > (edit->buffer.curs1 + edit->buffer.curs2) || byte_index <= 0)
-    {
-        *char_width = 0;
-        return 0;
-    }
-
-    for (i = 0; i < (3 * UTF8_CHAR_LEN); i++)
-        utf8_buf[i] = edit_get_byte (edit, byte_index + i - (2 * UTF8_CHAR_LEN));
-    utf8_buf[3 * UTF8_CHAR_LEN] = '\0';
-
-    cursor_buf_ptr = utf8_buf + (2 * UTF8_CHAR_LEN);
-    str = g_utf8_find_prev_char (utf8_buf, cursor_buf_ptr);
-
-    if (str == NULL || g_utf8_next_char (str) != cursor_buf_ptr)
-    {
-        *char_width = 1;
-        return *(cursor_buf_ptr - 1);
-    }
-    else
-    {
-        res = g_utf8_get_char_validated (str, -1);
-
-        if (res < 0)
-        {
-            *char_width = 1;
-            return *(cursor_buf_ptr - 1);
-        }
-        else
-        {
-            *char_width = cursor_buf_ptr - str;
-            return res;
-        }
-    }
-}
-#endif
-
-/* --------------------------------------------------------------------------------------------- */
 /* high level cursor movement commands */
 /* --------------------------------------------------------------------------------------------- */
 /** check whether cursor is in indent part of line
@@ -657,7 +589,7 @@ is_in_indent (const WEdit * edit)
     off_t p;
 
     for (p = edit_bol (edit, edit->buffer.curs1); p < edit->buffer.curs1; p++)
-        if (strchr (" \t", edit_get_byte (edit, p)) == NULL)
+        if (strchr (" \t", edit_buffer_get_byte (&edit->buffer, p)) == NULL)
             return FALSE;
 
     return TRUE;
@@ -682,7 +614,7 @@ is_blank (const WEdit * edit, off_t offset)
     f = edit_eol (edit, offset) - 1;
     while (s <= f)
     {
-        c = edit_get_byte (edit, s++);
+        c = edit_buffer_get_byte (&edit->buffer, s++);
         if (!isspace (c))
             return FALSE;
     }
@@ -947,8 +879,8 @@ edit_left_word_move (WEdit * edit, int s)
         edit_cursor_move (edit, -1);
         if (edit->buffer.curs1 == 0)
             break;
-        c1 = edit_get_byte (edit, edit->buffer.curs1 - 1);
-        c2 = edit_get_byte (edit, edit->buffer.curs1);
+        c1 = edit_buffer_get_previous_byte (&edit->buffer);
+        c2 = edit_buffer_get_current_byte (&edit->buffer);
         if (c1 == '\n' || c2 == '\n')
             break;
         if ((my_type_of (c1) & my_type_of (c2)) == 0)
@@ -985,8 +917,8 @@ edit_right_word_move (WEdit * edit, int s)
         edit_cursor_move (edit, 1);
         if (edit->buffer.curs1 >= edit->last_byte)
             break;
-        c1 = edit_get_byte (edit, edit->buffer.curs1 - 1);
-        c2 = edit_get_byte (edit, edit->buffer.curs1);
+        c1 = edit_buffer_get_previous_byte (&edit->buffer);
+        c2 = edit_buffer_get_current_byte (&edit->buffer);
         if (c1 == '\n' || c2 == '\n')
             break;
         if ((my_type_of (c1) & my_type_of (c2)) == 0)
@@ -1013,27 +945,23 @@ static void
 edit_right_char_move_cmd (WEdit * edit)
 {
     int cw = 1;
-    int c = 0;
+    int c;
+
 #ifdef HAVE_CHARSET
     if (edit->utf8)
     {
-        c = edit_get_utf (edit, edit->buffer.curs1, &cw);
+        c = edit_buffer_get_utf (&edit->buffer, edit->buffer.curs1, &cw);
         if (cw < 1)
             cw = 1;
     }
     else
 #endif
-    {
-        c = edit_get_byte (edit, edit->buffer.curs1);
-    }
+        c = edit_buffer_get_current_byte (&edit->buffer);
+
     if (option_cursor_beyond_eol && c == '\n')
-    {
         edit->over_col++;
-    }
     else
-    {
         edit_cursor_move (edit, cw);
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1042,6 +970,7 @@ static void
 edit_left_char_move_cmd (WEdit * edit)
 {
     int cw = 1;
+
     if (edit->column_highlight
         && option_cursor_beyond_eol
         && edit->mark1 != edit->mark2
@@ -1050,7 +979,7 @@ edit_left_char_move_cmd (WEdit * edit)
 #ifdef HAVE_CHARSET
     if (edit->utf8)
     {
-        edit_get_prev_utf (edit, edit->buffer.curs1, &cw);
+        edit_buffer_get_prev_utf (&edit->buffer, edit->buffer.curs1, &cw);
         if (cw < 1)
             cw = 1;
     }
@@ -1103,7 +1032,7 @@ edit_move_updown (WEdit * edit, long lines, gboolean do_scroll, gboolean directi
 #ifdef HAVE_CHARSET
     /* search start of current multibyte char (like CJK) */
     if (edit->buffer.curs1 > 0 && edit->buffer.curs1 + 1 < edit->last_byte
-        && edit_get_byte (edit, edit->buffer.curs1) >= 256 )
+        && edit_buffer_get_current_byte (&edit->buffer) >= 256)
     {
         edit_right_char_move_cmd (edit);
         edit_left_char_move_cmd (edit);
@@ -1124,7 +1053,7 @@ edit_right_delete_word (WEdit * edit)
         int c1, c2;
 
         c1 = edit_delete (edit, TRUE);
-        c2 = edit_get_byte (edit, edit->buffer.curs1);
+        c2 = edit_buffer_get_current_byte (&edit->buffer);
         if (c1 == '\n' || c2 == '\n')
             break;
         if ((isspace (c1) == 0) != (isspace (c2) == 0))
@@ -1144,7 +1073,7 @@ edit_left_delete_word (WEdit * edit)
         int c1, c2;
 
         c1 = edit_backspace (edit, TRUE);
-        c2 = edit_get_byte (edit, edit->buffer.curs1 - 1);
+        c2 = edit_buffer_get_previous_byte (&edit->buffer);
         if (c1 == '\n' || c2 == '\n')
             break;
         if ((isspace (c1) == 0) != (isspace (c2) == 0))
@@ -1338,7 +1267,7 @@ edit_group_undo (WEdit * edit)
 static void
 edit_delete_to_line_end (WEdit * edit)
 {
-    while (edit_get_byte (edit, edit->buffer.curs1) != '\n' && edit->buffer.curs2 != 0)
+    while (edit_buffer_get_current_byte (&edit->buffer) != '\n' && edit->buffer.curs2 != 0)
         edit_delete (edit, TRUE);
 }
 
@@ -1347,7 +1276,7 @@ edit_delete_to_line_end (WEdit * edit)
 static void
 edit_delete_to_line_begin (WEdit * edit)
 {
-    while (edit_get_byte (edit, edit->buffer.curs1 - 1) != '\n' && edit->buffer.curs1 != 0)
+    while (edit_buffer_get_previous_byte (&edit->buffer) != '\n' && edit->buffer.curs1 != 0)
         edit_backspace (edit, TRUE);
 }
 
@@ -1371,7 +1300,7 @@ right_of_four_spaces (WEdit * edit)
     int i, ch = 0;
 
     for (i = 1; i <= HALF_TAB_SIZE; i++)
-        ch |= edit_get_byte (edit, edit->buffer.curs1 - i);
+        ch |= edit_buffer_get_byte (&edit->buffer, edit->buffer.curs1 - i);
 
     return (ch == ' ' && is_aligned_on_a_tab (edit));
 }
@@ -1384,7 +1313,7 @@ left_of_four_spaces (WEdit * edit)
     int i, ch = 0;
 
     for (i = 0; i < HALF_TAB_SIZE; i++)
-        ch |= edit_get_byte (edit, edit->buffer.curs1 + i);
+        ch |= edit_buffer_get_byte (&edit->buffer, edit->buffer.curs1 + i);
 
     return (ch == ' ' && is_aligned_on_a_tab (edit));
 }
@@ -1403,7 +1332,7 @@ edit_auto_indent (WEdit * edit)
     /* copy the leading whitespace of the line */
     while (TRUE)
     {                           /* no range check - the line _is_ \n-terminated */
-        c = edit_get_byte (edit, p++);
+        c = edit_buffer_get_byte (&edit->buffer, p++);
         if (c != ' ' && c != '\t')
             break;
         edit_insert (edit, c);
@@ -1416,7 +1345,8 @@ static inline void
 edit_double_newline (WEdit * edit)
 {
     edit_insert (edit, '\n');
-    if (edit_get_byte (edit, edit->buffer.curs1) == '\n' || edit_get_byte (edit, edit->buffer.curs1 - 2) == '\n')
+    if (edit_buffer_get_current_byte (&edit->buffer) == '\n'
+        || edit_buffer_get_byte (&edit->buffer, edit->buffer.curs1 - 2) == '\n')
         return;
     edit->force |= REDRAW_PAGE;
     edit_insert (edit, '\n');
@@ -1488,7 +1418,7 @@ check_and_wrap_line (WEdit * edit)
     while (TRUE)
     {
         curs--;
-        c = edit_get_byte (edit, curs);
+        c = edit_buffer_get_byte (&edit->buffer, curs);
         if (c == '\n' || curs <= 0)
         {
             edit_insert (edit, '\n');
@@ -1522,8 +1452,9 @@ edit_get_bracket (WEdit * edit, gboolean in_screen, unsigned long furthest_brack
     int i = 1, a, inc = -1, c, d, n = 0;
     unsigned long j = 0;
     off_t q;
+
     edit_update_curs_row (edit);
-    c = edit_get_byte (edit, edit->buffer.curs1);
+    c = edit_buffer_get_current_byte (&edit->buffer);
     p = strchr (b, c);
     /* no limit */
     if (!furthest_bracket_search)
@@ -1541,7 +1472,7 @@ edit_get_bracket (WEdit * edit, gboolean in_screen, unsigned long furthest_brack
         /* out of buffer? */
         if (q >= edit->last_byte || q < 0)
             break;
-        a = edit_get_byte (edit, q);
+        a = edit_buffer_get_byte (&edit->buffer, q);
         /* don't want to eat CPU */
         if (j++ > furthest_bracket_search)
             break;
@@ -1644,7 +1575,7 @@ edit_move_block_to_left (WEdit * edit)
         else
             del_tab_width = option_tab_spacing;
 
-        next_char = edit_get_byte (edit, edit->buffer.curs1);
+        next_char = edit_buffer_get_current_byte (&edit->buffer);
         if (next_char == '\t')
             edit_delete (edit, TRUE);
         else if (next_char == ' ')
@@ -1652,7 +1583,7 @@ edit_move_block_to_left (WEdit * edit)
             {
                 if (next_char == ' ')
                     edit_delete (edit, TRUE);
-                next_char = edit_get_byte (edit, edit->buffer.curs1);
+                next_char = edit_buffer_get_current_byte (&edit->buffer);
             }
 
         if (cur_bol == 0)
@@ -1715,7 +1646,7 @@ edit_insert_column_from_file (WEdit * edit, int file, off_t * start_pos, off_t *
                 long l;
                 off_t p;
 
-                if (edit_get_byte (edit, edit->buffer.curs1) != '\n')
+                if (edit_buffer_get_current_byte (&edit->buffer) != '\n')
                     for (l = width - (edit_get_col (edit) - col); l > 0; l -= space_width)
                         edit_insert (edit, ' ');
 
@@ -1728,7 +1659,7 @@ edit_insert_column_from_file (WEdit * edit, int file, off_t * start_pos, off_t *
                         p++;
                         break;
                     }
-                    if (edit_get_byte (edit, p) == '\n')
+                    if (edit_buffer_get_byte (&edit->buffer, p) == '\n')
                     {
                         p++;
                         break;
@@ -1809,83 +1740,6 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
-edit_get_byte (const WEdit * edit, off_t byte_index)
-{
-    char *p;
-
-    p = edit_get_byte_ptr (edit, byte_index);
-
-    return (p != NULL) ? *(unsigned char *) p : '\n';
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-#ifdef HAVE_CHARSET
-int
-edit_get_utf (const WEdit * edit, off_t byte_index, int *char_width)
-{
-    gchar *str = NULL;
-    int res = -1;
-    gunichar ch;
-    gchar *next_ch = NULL;
-    int width = 0;
-    gchar utf8_buf[UTF8_CHAR_LEN + 1];
-
-    if (byte_index >= (edit->buffer.curs1 + edit->buffer.curs2) || byte_index < 0)
-    {
-        *char_width = 0;
-        return '\n';
-    }
-
-    str = edit_get_byte_ptr (edit, byte_index);
-
-    if (str == NULL)
-    {
-        *char_width = 0;
-        return 0;
-    }
-
-    res = g_utf8_get_char_validated (str, -1);
-
-    if (res < 0)
-    {
-        /* Retry with explicit bytes to make sure it's not a buffer boundary */
-        int i;
-        for (i = 0; i < UTF8_CHAR_LEN; i++)
-            utf8_buf[i] = edit_get_byte (edit, byte_index + i);
-        utf8_buf[UTF8_CHAR_LEN] = '\0';
-        str = utf8_buf;
-        res = g_utf8_get_char_validated (str, -1);
-    }
-
-    if (res < 0)
-    {
-        ch = *str;
-        width = 0;
-    }
-    else
-    {
-        ch = res;
-        /* Calculate UTF-8 char width */
-        next_ch = g_utf8_next_char (str);
-        if (next_ch)
-        {
-            width = next_ch - str;
-        }
-        else
-        {
-            ch = 0;
-            width = 0;
-        }
-    }
-    *char_width = width;
-    return ch;
-}
-#endif
-
-/* --------------------------------------------------------------------------------------------- */
-
 char *
 edit_get_write_filter (const vfs_path_t * write_name_vpath, const vfs_path_t * filename_vpath)
 {
@@ -1919,7 +1773,7 @@ edit_write_stream (WEdit * edit, FILE * f)
     if (edit->lb == LB_ASIS)
     {
         for (i = 0; i < edit->last_byte; i++)
-            if (fputc (edit_get_byte (edit, i), f) < 0)
+            if (fputc (edit_buffer_get_byte (&edit->buffer, i), f) < 0)
                 break;
         return i;
     }
@@ -1927,8 +1781,9 @@ edit_write_stream (WEdit * edit, FILE * f)
     /* change line breaks */
     for (i = 0; i < edit->last_byte; i++)
     {
-        unsigned char c = edit_get_byte (edit, i);
+        unsigned char c;
 
+        c = edit_buffer_get_byte (&edit->buffer, i);
         if (!(c == '\n' || c == '\r'))
         {
             /* not line break */
@@ -1937,7 +1792,9 @@ edit_write_stream (WEdit * edit, FILE * f)
         }
         else
         {                       /* (c == '\n' || c == '\r') */
-            unsigned char c1 = edit_get_byte (edit, i + 1);     /* next char */
+            unsigned char c1;
+
+            c1 = edit_buffer_get_byte (&edit->buffer, i + 1);     /* next char */
 
             switch (edit->lb)
             {
@@ -2026,8 +1883,8 @@ edit_get_word_from_pos (const WEdit * edit, off_t start_pos, off_t * start, gsiz
 
     for (word_start = start_pos; word_start != 0; word_start--, cut_len++)
     {
-        c1 = edit_get_byte (edit, word_start);
-        c2 = edit_get_byte (edit, word_start - 1);
+        c1 = edit_buffer_get_byte (&edit->buffer, word_start);
+        c2 = edit_buffer_get_byte (&edit->buffer, word_start - 1);
 
         if (is_break_char (c1) != is_break_char (c2) || c1 == '\n' || c2 == '\n')
             break;
@@ -2037,8 +1894,8 @@ edit_get_word_from_pos (const WEdit * edit, off_t start_pos, off_t * start, gsiz
 
     do
     {
-        c1 = edit_get_byte (edit, word_start + match_expr->len);
-        c2 = edit_get_byte (edit, word_start + match_expr->len + 1);
+        c1 = edit_buffer_get_byte (&edit->buffer, word_start + match_expr->len);
+        c2 = edit_buffer_get_byte (&edit->buffer, word_start + match_expr->len + 1);
         g_string_append_c (match_expr, c1);
     }
     while (!(is_break_char (c1) != is_break_char (c2) || c1 == '\n' || c2 == '\n'));
@@ -2733,7 +2590,7 @@ edit_delete (WEdit * edit, gboolean byte_delete)
     /* if byte_delete == TRUE then delete only one byte not multibyte char */
     if (edit->utf8 && !byte_delete)
     {
-        edit_get_utf (edit, edit->buffer.curs1, &cw);
+        edit_buffer_get_utf (&edit->buffer, edit->buffer.curs1, &cw);
         if (cw < 1)
             cw = 1;
     }
@@ -2805,7 +2662,7 @@ edit_backspace (WEdit * edit, gboolean byte_delete)
 #ifdef HAVE_CHARSET
     if (edit->utf8 && !byte_delete)
     {
-        edit_get_prev_utf (edit, edit->buffer.curs1, &cw);
+        edit_buffer_get_prev_utf (&edit->buffer, edit->buffer.curs1, &cw);
         if (cw < 1)
             cw = 1;
     }
@@ -2873,7 +2730,7 @@ edit_cursor_move (WEdit * edit, off_t increment)
 
             edit_push_undo_action (edit, CURS_RIGHT);
 
-            c = edit_get_byte (edit, edit->buffer.curs1 - 1);
+            c = edit_buffer_get_byte (&edit->buffer, edit->buffer.curs1 - 1);
             if (!((edit->buffer.curs2 + 1) & M_EDIT_BUF_SIZE))
                 edit->buffer.buffers2[(edit->buffer.curs2 + 1) >> S_EDIT_BUF_SIZE] = g_malloc0 (EDIT_BUF_SIZE);
             edit->buffer.buffers2[edit->buffer.curs2 >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE -
@@ -2904,7 +2761,7 @@ edit_cursor_move (WEdit * edit, off_t increment)
 
             edit_push_undo_action (edit, CURS_LEFT);
 
-            c = edit_get_byte (edit, edit->buffer.curs1);
+            c = edit_buffer_get_byte (&edit->buffer, edit->buffer.curs1);
             if (!(edit->buffer.curs1 & M_EDIT_BUF_SIZE))
                 edit->buffer.buffers1[edit->buffer.curs1 >> S_EDIT_BUF_SIZE] = g_malloc0 (EDIT_BUF_SIZE);
             edit->buffer.buffers1[edit->buffer.curs1 >> S_EDIT_BUF_SIZE][edit->buffer.curs1 & M_EDIT_BUF_SIZE] = c;
@@ -2938,7 +2795,7 @@ edit_eol (const WEdit * edit, off_t current)
     if (current >= edit->last_byte)
         return edit->last_byte;
 
-    for (; edit_get_byte (edit, current) != '\n'; current++)
+    for (; edit_buffer_get_byte (&edit->buffer, current) != '\n'; current++)
         ;
 
     return current;
@@ -2953,7 +2810,7 @@ edit_bol (const WEdit * edit, off_t current)
     if (current <= 0)
         return 0;
 
-    for (; edit_get_byte (edit, current - 1) != '\n'; current--)
+    for (; edit_buffer_get_byte (&edit->buffer, current - 1) != '\n'; current--)
         ;
 
     return current;
@@ -2971,7 +2828,7 @@ edit_count_lines (const WEdit * edit, off_t current, off_t upto)
     if (current < 0)
         current = 0;
     while (current < upto)
-        if (edit_get_byte (edit, current++) == '\n')
+        if (edit_buffer_get_byte (&edit->buffer, current++) == '\n')
             lines++;
     return lines;
 }
@@ -3048,7 +2905,7 @@ edit_move_forward3 (const WEdit * edit, off_t current, long cols, off_t upto)
                 return p - 1;
         }
 
-        orig_c = c = edit_get_byte (edit, p);
+        orig_c = c = edit_buffer_get_byte (&edit->buffer, p);
 
 #ifdef HAVE_CHARSET
         if (edit->utf8)
@@ -3056,7 +2913,7 @@ edit_move_forward3 (const WEdit * edit, off_t current, long cols, off_t upto)
             int utf_ch;
             int cw = 1;
 
-            utf_ch = edit_get_utf (edit, p, &cw);
+            utf_ch = edit_buffer_get_utf (&edit->buffer, p, &cw);
             if (mc_global.utf8_display)
             {
                 if (cw > 1)
@@ -3349,8 +3206,8 @@ edit_mark_current_word_cmd (WEdit * edit)
     {
         int c1, c2;
 
-        c1 = edit_get_byte (edit, pos);
-        c2 = edit_get_byte (edit, pos - 1);
+        c1 = edit_buffer_get_byte (&edit->buffer, pos);
+        c2 = edit_buffer_get_byte (&edit->buffer, pos - 1);
         if (!isspace (c1) && isspace (c2))
             break;
         if ((my_type_of (c1) & my_type_of (c2)) == 0)
@@ -3362,8 +3219,8 @@ edit_mark_current_word_cmd (WEdit * edit)
     {
         int c1, c2;
 
-        c1 = edit_get_byte (edit, pos);
-        c2 = edit_get_byte (edit, pos + 1);
+        c1 = edit_buffer_get_byte (&edit->buffer, pos);
+        c2 = edit_buffer_get_byte (&edit->buffer, pos + 1);
         if (!isspace (c1) && isspace (c2))
             break;
         if ((my_type_of (c1) & my_type_of (c2)) == 0)
@@ -3394,10 +3251,10 @@ edit_delete_line (WEdit * edit)
 {
     /*
      * Delete right part of the line.
-     * Note that edit_get_byte() returns '\n' when byte position is
+     * Note that edit_buffer_get_byte() returns '\n' when byte position is
      *   beyond EOF.
      */
-    while (edit_get_byte (edit, edit->buffer.curs1) != '\n')
+    while (edit_buffer_get_current_byte (&edit->buffer) != '\n')
         (void) edit_delete (edit, TRUE);
 
     /*
@@ -3409,9 +3266,9 @@ edit_delete_line (WEdit * edit)
 
     /*
      * Delete left part of the line.
-     * Note, that edit_get_byte() returns '\n' when byte position is < 0.
+     * Note, that edit_buffer_get_byte() returns '\n' when byte position is < 0.
      */
-    while (edit_get_byte (edit, edit->buffer.curs1 - 1) != '\n')
+    while (edit_buffer_get_previous_byte (&edit->buffer) != '\n')
         (void) edit_backspace (edit, TRUE);
 }
 
@@ -3423,7 +3280,7 @@ edit_indent_width (const WEdit * edit, off_t p)
     off_t q = p;
 
     /* move to the end of the leading whitespace of the line */
-    while (strchr ("\t ", edit_get_byte (edit, q)) && q < edit->last_byte - 1)
+    while (strchr ("\t ", edit_buffer_get_byte (&edit->buffer, q)) && q < edit->last_byte - 1)
         q++;
     /* count the number of columns of indentation */
     return (long) edit_move_forward3 (edit, p, 0, q);
@@ -3636,7 +3493,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
 #ifdef HAVE_CHARSET
             if (!mc_global.utf8_display || edit->charpoint == 0)
 #endif
-                if (edit_get_byte (edit, edit->buffer.curs1) != '\n')
+                if (edit_buffer_get_current_byte (&edit->buffer) != '\n')
 
                     edit_delete (edit, FALSE);
         }
@@ -3745,7 +3602,8 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
             edit->over_col--;
         else if (option_backspace_through_tabs && is_in_indent (edit))
         {
-            while (edit_get_byte (edit, edit->buffer.curs1 - 1) != '\n' && edit->buffer.curs1 > 0)
+            while (edit_buffer_get_previous_byte (&edit->buffer) != '\n'
+                && edit->buffer.curs1 > 0)
                 edit_backspace (edit, TRUE);
         }
         else if (option_fake_half_tabs && is_in_indent (edit) && right_of_four_spaces (edit))

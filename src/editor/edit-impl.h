@@ -153,8 +153,6 @@ void edit_menu_cmd (WDialog * h);
 void user_menu (WEdit * edit, const char *menu_file, int selected_entry);
 void edit_init_menu (struct WMenuBar *menubar);
 void edit_save_mode_cmd (void);
-int edit_get_byte (const WEdit * edit, off_t byte_index);
-int edit_get_utf (const WEdit * edit, off_t byte_index, int *char_width);
 long edit_count_lines (const WEdit * edit, off_t current, off_t upto);
 off_t edit_move_forward (const WEdit * edit, off_t current, long lines, off_t upto);
 off_t edit_move_forward3 (const WEdit * edit, off_t current, long cols, off_t upto);

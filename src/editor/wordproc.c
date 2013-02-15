@@ -86,7 +86,7 @@ line_start (WEdit * edit, long line)
         p = edit_move_forward (edit, p, line - l, 0);
 
     p = edit_bol (edit, p);
-    while (strchr ("\t ", edit_get_byte (edit, p)))
+    while (strchr ("\t ", edit_buffer_get_byte (&edit->buffer, p)))
         p++;
     return p;
 }
@@ -97,19 +97,20 @@ static int
 bad_line_start (WEdit * edit, off_t p)
 {
     int c;
-    c = edit_get_byte (edit, p);
+
+    c = edit_buffer_get_byte (&edit->buffer, p);
     if (c == '.')
-    {                           /* '...' is acceptable */
-        if (edit_get_byte (edit, p + 1) == '.')
-            if (edit_get_byte (edit, p + 2) == '.')
-                return 0;
+    {                           /* `...' is acceptable */
+        if (edit_buffer_get_byte (&edit->buffer, p + 1) == '.'
+            && edit_buffer_get_byte (&edit->buffer, p + 2) == '.')
+            return 0;
         return 1;
     }
     if (c == '-')
     {
-        if (edit_get_byte (edit, p + 1) == '-')
-            if (edit_get_byte (edit, p + 2) == '-')
-                return 0;       /* '---' is acceptable */
+        if (edit_buffer_get_byte (&edit->buffer, p + 1) == '-'
+            && edit_buffer_get_byte (&edit->buffer, p + 2) == '-')
+            return 0;       /* `---' is acceptable */
         return 1;
     }
     if (strchr (NO_FORMAT_CHARS_START, c))
@@ -190,11 +191,10 @@ get_paragraph (WEdit * edit, off_t p, off_t q, int indent, int *size)
         return NULL;
     for (s = t; p < q; p++, s++)
     {
-        if (indent)
-            if (edit_get_byte (edit, p - 1) == '\n')
-                while (strchr ("\t ", edit_get_byte (edit, p)))
-                    p++;
-        *s = edit_get_byte (edit, p);
+        if (indent && edit_buffer_get_byte (&edit->buffer, p - 1) == '\n')
+            while (strchr ("\t ", edit_buffer_get_byte (&edit->buffer, p)))
+                p++;
+        *s = edit_buffer_get_byte (&edit->buffer, p);
     }
     *size = (unsigned long) (s - t);
     /* FIXME: all variables related to 'size' should be fixed */
@@ -365,7 +365,7 @@ put_paragraph (WEdit * edit, unsigned char *t, off_t p, int indent, int size)
 
     cursor = edit->buffer.curs1;
     if (indent)
-        while (strchr ("\t ", edit_get_byte (edit, p)))
+        while (strchr ("\t ", edit_buffer_get_byte (&edit->buffer, p)))
             p++;
     for (i = 0; i < size; i++, p++)
     {
@@ -373,7 +373,7 @@ put_paragraph (WEdit * edit, unsigned char *t, off_t p, int indent, int size)
         {
             if (t[i - 1] == '\n' && c == '\n')
             {
-                while (strchr ("\t ", edit_get_byte (edit, p)))
+                while (strchr ("\t ", edit_buffer_get_byte (&edit->buffer, p)))
                     p++;
             }
             else if (t[i - 1] == '\n')
@@ -389,7 +389,7 @@ put_paragraph (WEdit * edit, unsigned char *t, off_t p, int indent, int size)
             else if (c == '\n')
             {
                 edit_cursor_move (edit, p - edit->buffer.curs1);
-                while (strchr ("\t ", edit_get_byte (edit, p)))
+                while (strchr ("\t ", edit_buffer_get_byte (&edit->buffer, p)))
                 {
                     edit_delete (edit, TRUE);
                     if (cursor > edit->buffer.curs1)
@@ -398,7 +398,7 @@ put_paragraph (WEdit * edit, unsigned char *t, off_t p, int indent, int size)
                 p = edit->buffer.curs1;
             }
         }
-        c = edit_get_byte (edit, p);
+        c = edit_buffer_get_byte (&edit->buffer, p);
         if (c != t[i])
             replace_at (edit, p, t[i]);
     }
@@ -417,9 +417,9 @@ test_indent (const WEdit * edit, off_t p, off_t q)
         return 0;
 
     for (; p < q; p++)
-        if (edit_get_byte (edit, p - 1) == '\n')
-            if (indent != edit_indent_width (edit, p))
-                return 0;
+        if (edit_buffer_get_byte (&edit->buffer, p - 1) == '\n'
+            && indent != edit_indent_width (edit, p))
+            return 0;
     return indent;
 }
 

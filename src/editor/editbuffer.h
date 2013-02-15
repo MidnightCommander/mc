@@ -52,6 +52,28 @@ typedef struct edit_buffer_struct {
 void edit_buffer_init (edit_buffer_t * buf);
 void edit_buffer_clean (edit_buffer_t * buf);
 
+int edit_buffer_get_byte (const edit_buffer_t * buf, off_t byte_index);
+#ifdef HAVE_CHARSET
+int edit_buffer_get_utf (const edit_buffer_t * buf, off_t byte_index, int *char_width);
+int edit_buffer_get_prev_utf (const edit_buffer_t * buf, off_t byte_index, int *char_width);
+#endif
+
 /*** inline functions ****************************************************************************/
+
+static inline int
+edit_buffer_get_current_byte (const edit_buffer_t * buf)
+{
+    return edit_buffer_get_byte (buf, buf->curs1);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static inline int
+edit_buffer_get_previous_byte (const edit_buffer_t * buf)
+{
+    return edit_buffer_get_byte (buf, buf->curs1 - 1);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 #endif  /* MC__EDIT_BUFFER_H */
