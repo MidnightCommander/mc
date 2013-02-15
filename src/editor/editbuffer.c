@@ -349,3 +349,60 @@ edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Write editor buffer content to file
+ *
+ * @param buf pointer to editor buffer
+ * @param fd file descriptor
+ *
+ * @return TRUE if file was written successfullly, FALSE otherswise
+ */
+
+gboolean
+edit_buffer_write_file (edit_buffer_t * buf, int fd)
+{
+    gboolean ret = TRUE;
+    off_t i;
+    off_t data_size, sz;
+
+    /* write all fullfilled parts of buffers1 from begin to end */
+    data_size = EDIT_BUF_SIZE;
+    for (i = 0; i < buf->curs1 >> S_EDIT_BUF_SIZE; i++)
+        if (mc_write (fd, (char *) buf->buffers1[i], data_size) != data_size)
+            return FALSE;
+
+    /* write last partially filled part of buffers1 */
+    data_size = buf->curs1 & M_EDIT_BUF_SIZE;
+    if (mc_write (fd, (char *) buf->buffers1[i], data_size) != data_size)
+        return FALSE;
+
+    /* write buffers2 from end to begin, if buffers2 contains some data */
+    if (buf->curs2 != 0)
+    {
+        buf->curs2--;
+
+        /* write last partially filled part of buffers2 */
+        i = buf->curs2 >> S_EDIT_BUF_SIZE;
+        data_size = (buf->curs2 & M_EDIT_BUF_SIZE) + 1;
+        if (mc_write (fd, (char *) buf->buffers2[i] + EDIT_BUF_SIZE - data_size, data_size) != data_size)
+            ret = FALSE;
+        else
+        {
+            data_size = EDIT_BUF_SIZE;
+
+            /* write other fullfilled parts of buffers2 from end to begin */
+            while (--i >= 0)
+                if (mc_write (fd, (char *) buf->buffers2[i], data_size) != data_size)
+                {
+                    ret = FALSE;
+                    break;
+                }
+        }
+
+        buf->curs2++;
+    }
+
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */

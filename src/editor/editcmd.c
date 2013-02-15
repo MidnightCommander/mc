@@ -309,52 +309,18 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
     }
     else if (edit->lb == LB_ASIS)
     {                           /* do not change line breaks */
-        off_t buf;
-        buf = 0;
         filelen = edit->last_byte;
-        while (buf <= (edit->buffer.curs1 >> S_EDIT_BUF_SIZE) - 1)
-        {
-            if (mc_write (fd, (char *) edit->buffer.buffers1[buf], EDIT_BUF_SIZE) != EDIT_BUF_SIZE)
-            {
-                mc_close (fd);
-                goto error_save;
-            }
-            buf++;
-        }
-        if (mc_write
-            (fd, (char *) edit->buffer.buffers1[buf],
-             edit->buffer.curs1 & M_EDIT_BUF_SIZE) != (edit->buffer.curs1 & M_EDIT_BUF_SIZE))
-        {
-            filelen = -1;
-        }
-        else if (edit->buffer.curs2 != 0)
-        {
-            edit->buffer.curs2--;
-            buf = (edit->buffer.curs2 >> S_EDIT_BUF_SIZE);
-            if (mc_write
-                (fd,
-                 (char *) edit->buffer.buffers2[buf] + EDIT_BUF_SIZE -
-                 (edit->buffer.curs2 & M_EDIT_BUF_SIZE) - 1,
-                 1 + (edit->buffer.curs2 & M_EDIT_BUF_SIZE)) != 1 + (edit->buffer.curs2 & M_EDIT_BUF_SIZE))
-            {
-                filelen = -1;
-            }
-            else
-            {
-                while (--buf >= 0)
-                {
-                    if (mc_write (fd, (char *) edit->buffer.buffers2[buf], EDIT_BUF_SIZE) != EDIT_BUF_SIZE)
-                    {
-                        filelen = -1;
-                        break;
-                    }
-                }
-            }
-            edit->buffer.curs2++;
-        }
-        if (mc_close (fd))
-            goto error_save;
 
+        if (!edit_buffer_write_file (&edit->buffer, fd))
+            filelen = -1;
+
+        if (filelen != edit->last_byte)
+        {
+            mc_close (fd);
+            goto error_save;
+        }
+        if (mc_close (fd) != 0)
+            goto error_save;
         /* Update the file information, especially the mtime. */
         if (mc_stat (savename_vpath, &edit->stat1) == -1)
             goto error_save;

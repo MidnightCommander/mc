@@ -59,6 +59,7 @@ int edit_buffer_get_prev_utf (const edit_buffer_t * buf, off_t byte_index, int *
 #endif
 
 off_t edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size);
+gboolean edit_buffer_write_file (edit_buffer_t * buf, int fd);
 
 /*** inline functions ****************************************************************************/
 
