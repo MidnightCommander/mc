@@ -37,6 +37,8 @@
 
 #include "lib/global.h"
 
+#include "lib/vfs/vfs.h"
+
 #include "editbuffer.h"
 
 /* --------------------------------------------------------------------------------------------- */
@@ -296,5 +298,47 @@ edit_buffer_get_prev_utf (const edit_buffer_t * buf, off_t byte_index, int *char
     return (int) res;
 }
 #endif /* HAVE_CHARSET */
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Load file into editor buffer
+ *
+ * @param buf pointer to editor buffer
+ * @param fd file descriptor
+ * @param size file size
+ *
+ * @return TRUE if file was readed successfully, FALSE otherwise
+ */
+
+gboolean
+edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size)
+{
+    off_t i;
+    off_t data_size;
+
+    buf->curs2 = size;
+    i = buf->curs2 >> S_EDIT_BUF_SIZE;
+
+    if (buf->buffers2[i] == NULL)
+        buf->buffers2[i] = g_malloc0 (EDIT_BUF_SIZE);
+
+    /* fill last part of buffers2 */
+    data_size = buf->curs2 & M_EDIT_BUF_SIZE;
+    if (mc_read (fd, (char *) buf->buffers2[i] + EDIT_BUF_SIZE - data_size, data_size) < 0)
+        return FALSE;
+
+    /* fullfill other parts of buffers2 from end to begin */
+    data_size = EDIT_BUF_SIZE;
+    for (--i; i >= 0; i--)
+    {
+        /* edit->buffers2[0] is already allocated */
+        if (buf->buffers2[i] == NULL)
+            buf->buffers2[i] = g_malloc0 (data_size);
+        if (mc_read (fd, (char *) buf->buffers2[i], data_size) < 0)
+            return FALSE;
+    }
+
+    return TRUE;
+}
 
 /* --------------------------------------------------------------------------------------------- */
