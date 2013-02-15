@@ -31,6 +31,9 @@
 
 #include <config.h>
 
+#include <stdlib.h>
+#include <string.h>
+
 #include "lib/global.h"
 
 #include "editbuffer.h"
@@ -84,4 +87,40 @@
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Initialize editor buffers.
+ *
+ * @param buf pointer to editor buffer
+ */
+
+void
+edit_buffer_init (edit_buffer_t * buf)
+{
+    memset (buf->buffers1, 0, sizeof (buf->buffers1));
+    memset (buf->buffers2, 0, sizeof (buf->buffers2));
+    buf->curs1 = 0;
+    buf->curs2 = 0;
+    buf->buffers2[0] = g_malloc0 (EDIT_BUF_SIZE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Clean editor buffers.
+ *
+ * @param buf pointer to editor buffer
+ */
+
+void
+edit_buffer_clean (edit_buffer_t * buf)
+{
+    size_t j;
+
+    for (j = 0; j <= MAXBUFF; j++)
+    {
+        g_free (buf->buffers1[j]);
+        g_free (buf->buffers2[j]);
+    }
+}
+
 /* --------------------------------------------------------------------------------------------- */

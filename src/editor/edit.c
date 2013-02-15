@@ -139,28 +139,6 @@ static const struct edit_filters
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Initialize the buffers for an empty files.
- */
-
-static void
-edit_init_buffers (WEdit * edit)
-{
-    int j;
-
-    for (j = 0; j <= MAXBUFF; j++)
-    {
-        edit->buffer.buffers1[j] = NULL;
-        edit->buffer.buffers2[j] = NULL;
-    }
-
-    edit->buffer.curs1 = 0;
-    edit->buffer.curs2 = 0;
-    edit->buffer.buffers2[0] = g_malloc0 (EDIT_BUF_SIZE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
  * Load file OR text into buffers.  Set cursor to the beginning of file.
  *
  * @return FALSE on error.
@@ -401,7 +379,7 @@ edit_load_file (WEdit * edit)
         fast_load = FALSE;
     }
 
-    edit_init_buffers (edit);
+    edit_buffer_init (&edit->buffer);
 
     if (fast_load)
     {
@@ -2306,8 +2284,6 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
 gboolean
 edit_clean (WEdit * edit)
 {
-    int j = 0;
-
     if (edit == NULL)
         return FALSE;
 
@@ -2327,11 +2303,8 @@ edit_clean (WEdit * edit)
 
     edit_free_syntax_rules (edit);
     book_mark_flush (edit, -1);
-    for (; j <= MAXBUFF; j++)
-    {
-        g_free (edit->buffer.buffers1[j]);
-        g_free (edit->buffer.buffers2[j]);
-    }
+
+    edit_buffer_clean (&edit->buffer);
 
     g_free (edit->undo_stack);
     g_free (edit->redo_stack);

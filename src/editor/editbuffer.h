@@ -49,6 +49,9 @@ typedef struct edit_buffer_struct {
 
 /*** declarations of public functions ************************************************************/
 
+void edit_buffer_init (edit_buffer_t * buf);
+void edit_buffer_clean (edit_buffer_t * buf);
+
 /*** inline functions ****************************************************************************/
 
 #endif  /* MC__EDIT_BUFFER_H */
