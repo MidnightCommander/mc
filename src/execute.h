@@ -43,6 +43,8 @@ gboolean execute_suspend (const gchar * event_group_name, const gchar * event_na
 
 /* Execute command on a filename that can be on VFS */
 void execute_with_vfs_arg (const char *command, const vfs_path_t * filename_vpath);
+void execute_external_editor_or_viewer (const char *command, const vfs_path_t * filename_vpath,
+                                        long start_line);
 
 void post_exec (void);
 void pre_exec (void);

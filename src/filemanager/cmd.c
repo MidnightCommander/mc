@@ -166,7 +166,17 @@ do_view_cmd (gboolean normal)
 static inline void
 do_edit (const vfs_path_t * what_vpath)
 {
-    do_edit_at_line (what_vpath, use_internal_edit, 0);
+    long line = 0;
+
+    if (!use_internal_edit)
+    {
+        long column;
+        off_t offset;
+
+        if (what_vpath != NULL && *(vfs_path_get_by_index (what_vpath, 0)->path) != '\0')
+            load_file_position (what_vpath, &line, &column, &offset, NULL);
+    }
+    do_edit_at_line (what_vpath, use_internal_edit, line);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -607,7 +617,7 @@ set_basic_panel_listing_to (int panel_index, int listing_mode)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-view_file_at_line (const vfs_path_t * filename_vpath, int plain_view, int internal, int start_line)
+view_file_at_line (const vfs_path_t * filename_vpath, int plain_view, int internal, long start_line)
 {
     static const char *viewer = NULL;
     gboolean ret = TRUE;
@@ -647,7 +657,7 @@ view_file_at_line (const vfs_path_t * filename_vpath, int plain_view, int intern
         char view_entry[BUF_TINY];
 
         if (start_line != 0)
-            g_snprintf (view_entry, sizeof (view_entry), "View:%d", start_line);
+            g_snprintf (view_entry, sizeof (view_entry), "View:%ld", start_line);
         else
             strcpy (view_entry, "View");
 
@@ -669,7 +679,7 @@ view_file_at_line (const vfs_path_t * filename_vpath, int plain_view, int intern
                 viewer = "view";
         }
 
-        execute_with_vfs_arg (viewer, filename_vpath);
+        execute_external_editor_or_viewer (viewer, filename_vpath, start_line);
     }
 
     return ret;
@@ -688,7 +698,18 @@ view_file_at_line (const vfs_path_t * filename_vpath, int plain_view, int intern
 gboolean
 view_file (const vfs_path_t * filename_vpath, int plain_view, int internal)
 {
-    return view_file_at_line (filename_vpath, plain_view, internal, 0);
+    long line = 0;
+
+    if (!internal)
+    {
+        long column;
+        off_t offset;
+
+        if (filename_vpath != NULL && *(vfs_path_get_by_index (filename_vpath, 0)->path) != '\0')
+            load_file_position (filename_vpath, &line, &column, &offset, NULL);
+    }
+
+    return view_file_at_line (filename_vpath, plain_view, internal, line);
 }
 
 
@@ -761,7 +782,7 @@ view_filtered_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-do_edit_at_line (const vfs_path_t * what_vpath, gboolean internal, int start_line)
+do_edit_at_line (const vfs_path_t * what_vpath, gboolean internal, long start_line)
 {
     static const char *editor = NULL;
 
@@ -769,8 +790,6 @@ do_edit_at_line (const vfs_path_t * what_vpath, gboolean internal, int start_lin
     if (internal)
         edit_file (what_vpath, start_line);
     else
-#else
-    (void) start_line;
 #endif /* USE_INTERNAL_EDIT */
     {
         if (editor == NULL)
@@ -779,7 +798,11 @@ do_edit_at_line (const vfs_path_t * what_vpath, gboolean internal, int start_lin
             if (editor == NULL)
                 editor = get_default_editor ();
         }
-        execute_with_vfs_arg (editor, what_vpath);
+
+        if (start_line < 1)
+            start_line = 1;
+
+        execute_external_editor_or_viewer (editor, what_vpath, start_line);
     }
 
     if (mc_global.mc_run_mode == MC_RUN_FULL)

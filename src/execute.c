@@ -27,6 +27,7 @@
 #include <config.h>
 
 #include <signal.h>
+#include <string.h>
 #include <sys/stat.h>
 #include <sys/time.h>
 
@@ -38,6 +39,7 @@
 #include "lib/vfs/vfs.h"
 #include "lib/mcconfig.h"
 #include "lib/util.h"
+#include "lib/strutil.h"        /* str_replace_all_substrings() */
 #include "lib/widget.h"
 
 #include "filemanager/midnight.h"
@@ -61,6 +63,12 @@ int pause_after_run = pause_on_dumb_terminals;
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
+
+void do_execute (const char *shell, const char *command, int flags);
+void do_executev (const char *shell, int flags, char *const argv[]);
+char *execute_get_external_cmd_opts_from_config (const char *command,
+                                                 const vfs_path_t * filename_vpath, long start_line);
+
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -129,7 +137,151 @@ do_possible_cd (const vfs_path_t * new_dir_vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-do_execute (const char *shell, const char *command, int flags)
+do_suspend_cmd (void)
+{
+    pre_exec ();
+
+    if (mc_global.tty.console_flag != '\0' && !mc_global.tty.use_subshell)
+        handle_console (CONSOLE_RESTORE);
+
+#ifdef SIGTSTP
+    {
+        struct sigaction sigtstp_action;
+
+        /* Make sure that the SIGTSTP below will suspend us directly,
+           without calling ncurses' SIGTSTP handler; we *don't* want
+           ncurses to redraw the screen immediately after the SIGCONT */
+        sigaction (SIGTSTP, &startup_handler, &sigtstp_action);
+
+        kill (getpid (), SIGTSTP);
+
+        /* Restore previous SIGTSTP action */
+        sigaction (SIGTSTP, &sigtstp_action, NULL);
+    }
+#endif /* SIGTSTP */
+
+    if (mc_global.tty.console_flag != '\0' && !mc_global.tty.use_subshell)
+        handle_console (CONSOLE_SAVE);
+
+    edition_post_exec ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+execute_prepare_with_vfs_arg (const vfs_path_t * filename_vpath, vfs_path_t ** localcopy_vpath,
+                              time_t * mtime)
+{
+    struct stat st;
+
+    /* Simplest case, this file is local */
+    if ((filename_vpath == NULL && vfs_file_is_local (vfs_get_raw_current_dir ()))
+        || vfs_file_is_local (filename_vpath))
+        return TRUE;
+
+    /* FIXME: Creation of new files on VFS is not supported */
+    if (filename_vpath == NULL)
+        return FALSE;
+
+    *localcopy_vpath = mc_getlocalcopy (filename_vpath);
+    if (*localcopy_vpath == NULL)
+    {
+        char *filename;
+
+        filename = vfs_path_to_str (filename_vpath);
+        message (D_ERROR, MSG_ERROR, _("Cannot fetch a local copy of %s"), filename);
+        g_free (filename);
+        return FALSE;
+    }
+
+    mc_stat (*localcopy_vpath, &st);
+    *mtime = st.st_mtime;
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+execute_cleanup_with_vfs_arg (const vfs_path_t * filename_vpath, vfs_path_t ** localcopy_vpath,
+                              time_t * mtime)
+{
+    if (*localcopy_vpath != NULL)
+    {
+        struct stat st;
+
+        /*
+         * filename can be an entry on panel, it can be changed by executing
+         * the command, so make a copy.  Smarter VFS code would make the code
+         * below unnecessary.
+         */
+        mc_stat (*localcopy_vpath, &st);
+        mc_ungetlocalcopy (filename_vpath, *localcopy_vpath, *mtime != st.st_mtime);
+        vfs_path_free (*localcopy_vpath);
+        *localcopy_vpath = NULL;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static char *
+execute_get_opts_from_cfg (const char *command, const char *default_str)
+{
+    char *str_from_config;
+
+    str_from_config =
+        mc_config_get_string_raw (mc_main_config, CONFIG_EXT_EDITOR_VIEWER_SECTION, command, NULL);
+
+    if (str_from_config == NULL)
+    {
+        mc_config_t *cfg;
+
+        cfg = mc_config_init (global_profile_name, TRUE);
+        if (cfg == NULL)
+            return g_strdup (default_str);
+
+        str_from_config =
+            mc_config_get_string_raw (cfg, CONFIG_EXT_EDITOR_VIEWER_SECTION, command, default_str);
+
+        mc_config_deinit (cfg);
+    }
+
+    return str_from_config;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+char *
+execute_get_external_cmd_opts_from_config (const char *command, const vfs_path_t * filename_vpath,
+                                           long start_line)
+{
+    char *str_from_config, *return_str;
+    char *parameter;
+
+    if (filename_vpath == NULL)
+        return g_strdup ("");
+
+    str_from_config = execute_get_opts_from_cfg (command, "%filename");
+
+    parameter = g_shell_quote (vfs_path_get_last_path_str (filename_vpath));
+    return_str = str_replace_all (str_from_config, "%filename", parameter);
+    g_free (parameter);
+    g_free (str_from_config);
+    str_from_config = return_str;
+
+    parameter = g_strdup_printf ("%ld", start_line);
+    return_str = str_replace_all (str_from_config, "%lineno", parameter);
+    g_free (parameter);
+    g_free (str_from_config);
+
+    return return_str;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+do_executev (const char *shell, int flags, char *const argv[])
 {
 #ifdef ENABLE_SUBSHELL
     vfs_path_t *new_dir_vpath = NULL;
@@ -146,24 +298,24 @@ do_execute (const char *shell, const char *command, int flags)
     if (mc_global.tty.console_flag != '\0')
         handle_console (CONSOLE_RESTORE);
 
-    if (!mc_global.tty.use_subshell && command && !(flags & EXECUTE_INTERNAL))
+    if (!mc_global.tty.use_subshell && *argv != NULL && (flags & EXECUTE_INTERNAL) == 0)
     {
-        printf ("%s%s\n", mc_prompt, command);
+        printf ("%s%s\n", mc_prompt, *argv);
         fflush (stdout);
     }
 #ifdef ENABLE_SUBSHELL
-    if (mc_global.tty.use_subshell && !(flags & EXECUTE_INTERNAL))
+    if (mc_global.tty.use_subshell && (flags & EXECUTE_INTERNAL) == 0)
     {
         do_update_prompt ();
 
         /* We don't care if it died, higher level takes care of this */
-        invoke_subshell (command, VISIBLY, old_vfs_dir_vpath != NULL ? NULL : &new_dir_vpath);
+        invoke_subshell (*argv, VISIBLY, old_vfs_dir_vpath != NULL ? NULL : &new_dir_vpath);
     }
     else
 #endif /* ENABLE_SUBSHELL */
-        my_system (flags, shell, command);
+        my_systemv_flags (flags, shell, argv);
 
-    if (!(flags & EXECUTE_INTERNAL))
+    if ((flags & EXECUTE_INTERNAL) == 0)
     {
         if ((pause_after_run == pause_always
              || (pause_after_run == pause_on_dumb_terminals && !mc_global.tty.xterm_flag
@@ -180,13 +332,10 @@ do_execute (const char *shell, const char *command, int flags)
             printf ("\r\n");
             fflush (stdout);
         }
-        if (mc_global.tty.console_flag != '\0')
+        if (mc_global.tty.console_flag != '\0' && output_lines != 0 && mc_global.keybar_visible)
         {
-            if (output_lines && mc_global.keybar_visible)
-            {
-                putchar ('\n');
-                fflush (stdout);
-            }
+            putchar ('\n');
+            fflush (stdout);
         }
     }
 
@@ -221,38 +370,20 @@ do_execute (const char *shell, const char *command, int flags)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-do_suspend_cmd (void)
+void
+do_execute (const char *shell, const char *command, int flags)
 {
-    pre_exec ();
+    GPtrArray *args_array;
 
-    if (mc_global.tty.console_flag != '\0' && !mc_global.tty.use_subshell)
-        handle_console (CONSOLE_RESTORE);
+    args_array = g_ptr_array_new ();
+    g_ptr_array_add (args_array, (char *) command);
+    g_ptr_array_add (args_array, NULL);
 
-#ifdef SIGTSTP
-    {
-        struct sigaction sigtstp_action;
+    do_executev (shell, flags, (char *const *) args_array->pdata);
 
-        /* Make sure that the SIGTSTP below will suspend us directly,
-           without calling ncurses' SIGTSTP handler; we *don't* want
-           ncurses to redraw the screen immediately after the SIGCONT */
-        sigaction (SIGTSTP, &startup_handler, &sigtstp_action);
-
-        kill (getpid (), SIGTSTP);
-
-        /* Restore previous SIGTSTP action */
-        sigaction (SIGTSTP, &sigtstp_action, NULL);
-    }
-#endif /* SIGTSTP */
-
-    if (mc_global.tty.console_flag != '\0' && !mc_global.tty.use_subshell)
-        handle_console (CONSOLE_SAVE);
-
-    edition_post_exec ();
+    g_ptr_array_free (args_array, TRUE);
 }
 
-/* --------------------------------------------------------------------------------------------- */
-/*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 /** Set up the terminal before executing a program */
@@ -447,6 +578,7 @@ execute_suspend (const gchar * event_group_name, const gchar * event_name,
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 /**
  * Execute command on a filename that can be on VFS.
  * Errors are reported to the user.
@@ -455,43 +587,60 @@ execute_suspend (const gchar * event_group_name, const gchar * event_name,
 void
 execute_with_vfs_arg (const char *command, const vfs_path_t * filename_vpath)
 {
-    struct stat st;
+    vfs_path_t *localcopy_vpath = NULL;
+    const vfs_path_t *do_execute_vpath;
     time_t mtime;
-    vfs_path_t *localcopy_vpath;
 
-    /* Simplest case, this file is local */
-    if (filename_vpath == NULL || vfs_file_is_local (filename_vpath))
-    {
-        do_execute (command, vfs_path_get_last_path_str (filename_vpath), EXECUTE_INTERNAL);
+    if (!execute_prepare_with_vfs_arg (filename_vpath, &localcopy_vpath, &mtime))
         return;
+
+    do_execute_vpath = (localcopy_vpath == NULL) ? filename_vpath : localcopy_vpath;
+
+    do_execute (command, vfs_path_get_last_path_str (do_execute_vpath), EXECUTE_INTERNAL);
+
+    execute_cleanup_with_vfs_arg (filename_vpath, &localcopy_vpath, &mtime);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Execute external editor or viewer.
+ *
+ * @param command editor/viewer to run
+ * @param filename_vpath path for edit/view
+ * @param start_line cursor will be placed at the 'start_line' position after opening file
+ */
+
+void
+execute_external_editor_or_viewer (const char *command, const vfs_path_t * filename_vpath,
+                                   long start_line)
+{
+    vfs_path_t *localcopy_vpath = NULL;
+    const vfs_path_t *do_execute_vpath;
+    char *extern_cmd_options;
+    time_t mtime;
+
+    if (!execute_prepare_with_vfs_arg (filename_vpath, &localcopy_vpath, &mtime))
+        return;
+
+    do_execute_vpath = (localcopy_vpath == NULL) ? filename_vpath : localcopy_vpath;
+
+    extern_cmd_options =
+        execute_get_external_cmd_opts_from_config (command, do_execute_vpath, start_line);
+
+    if (extern_cmd_options != NULL)
+    {
+        char **argv_cmd_options;
+        int argv_count;
+
+        g_shell_parse_argv (extern_cmd_options, &argv_count, &argv_cmd_options, NULL);
+        g_free (extern_cmd_options);
+
+        do_executev (command, EXECUTE_INTERNAL, argv_cmd_options);
+
+        g_strfreev (argv_cmd_options);
     }
 
-    /* FIXME: Creation of new files on VFS is not supported */
-    if (vfs_path_len (filename_vpath) == 0)
-        return;
-
-    localcopy_vpath = mc_getlocalcopy (filename_vpath);
-    if (localcopy_vpath == NULL)
-    {
-        char *filename;
-
-        filename = vfs_path_to_str (filename_vpath);
-        message (D_ERROR, MSG_ERROR, _("Cannot fetch a local copy of %s"), filename);
-        g_free (filename);
-        return;
-    }
-
-    /*
-     * filename can be an entry on panel, it can be changed by executing
-     * the command, so make a copy.  Smarter VFS code would make the code
-     * below unnecessary.
-     */
-    mc_stat (localcopy_vpath, &st);
-    mtime = st.st_mtime;
-    do_execute (command, vfs_path_get_last_path_str (localcopy_vpath), EXECUTE_INTERNAL);
-    mc_stat (localcopy_vpath, &st);
-    mc_ungetlocalcopy (filename_vpath, localcopy_vpath, mtime != st.st_mtime);
-    vfs_path_free (localcopy_vpath);
+    execute_cleanup_with_vfs_arg (filename_vpath, &localcopy_vpath, &mtime);
 }
 
 /* --------------------------------------------------------------------------------------------- */

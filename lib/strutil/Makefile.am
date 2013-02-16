@@ -1,6 +1,7 @@
 noinst_LTLIBRARIES = libmcstrutil.la
 
 libmcstrutil_la_SOURCES = \
+	replace.c \
 	strescape.c \
 	strutil8bit.c \
 	strutilascii.c \

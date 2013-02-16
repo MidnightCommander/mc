@@ -1102,7 +1102,8 @@ load_file_position (const vfs_path_t * filename_vpath, long *line, long *column,
         return;
 
     /* prepare array for serialized bookmarks */
-    *bookmarks = g_array_sized_new (FALSE, FALSE, sizeof (size_t), MAX_SAVED_BOOKMARKS);
+    if (bookmarks != NULL)
+        *bookmarks = g_array_sized_new (FALSE, FALSE, sizeof (size_t), MAX_SAVED_BOOKMARKS);
     filename = vfs_path_to_str (filename_vpath);
 
     while (fgets (buf, sizeof (buf), f) != NULL)
@@ -1143,7 +1144,7 @@ load_file_position (const vfs_path_t * filename_vpath, long *line, long *column,
                 *column = strtol (pos_tokens[1], NULL, 10);
                 if (pos_tokens[2] == NULL)
                     *offset = 0;
-                else
+                else if (bookmarks != NULL)
                 {
                     size_t i;
 

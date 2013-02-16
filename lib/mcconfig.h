@@ -9,6 +9,7 @@
 #define CONFIG_PANELS_SECTION "Panels"
 #define CONFIG_LAYOUT_SECTION "Layout"
 #define CONFIG_MISC_SECTION "Misc"
+#define CONFIG_EXT_EDITOR_VIEWER_SECTION "External editor or viewer parameters"
 
 /*** enums ***************************************************************************************/
 

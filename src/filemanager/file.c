@@ -3082,7 +3082,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         parent_call ((void *) end_bg_process, ctx, 0);
 
         vfs_shut ();
-        _exit (0);
+        my_exit (EXIT_SUCCESS);
     }
 #endif /* ENABLE_BACKGROUND */
 
