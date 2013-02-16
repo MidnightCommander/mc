@@ -67,7 +67,8 @@ int pause_after_run = pause_on_dumb_terminals;
 void do_execute (const char *shell, const char *command, int flags);
 void do_executev (const char *shell, int flags, char *const argv[]);
 char *execute_get_external_cmd_opts_from_config (const char *command,
-                                                 const vfs_path_t * filename_vpath, long start_line);
+                                                 const vfs_path_t * filename_vpath,
+                                                 long start_line);
 
 /* --------------------------------------------------------------------------------------------- */
 
