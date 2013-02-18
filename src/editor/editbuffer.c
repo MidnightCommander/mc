@@ -301,6 +301,60 @@ edit_buffer_get_prev_utf (const edit_buffer_t * buf, off_t byte_index, int *char
 
 /* --------------------------------------------------------------------------------------------- */
 /**
+ * Basic low level single character buffer alterations and movements at the cursor: insert character
+ * at the cursor position and move right.
+ *
+ * @param buf pointer to editor buffer
+ * @param c character to insert
+ */
+
+void
+edit_buffer_insert (edit_buffer_t * buf, int c)
+{
+    off_t i;
+
+    i = buf->curs1 & M_EDIT_BUF_SIZE;
+
+    /* add a new buffer if we've reached the end of the last one */
+    if (i == 0)
+        buf->buffers1[buf->curs1 >> S_EDIT_BUF_SIZE] = g_malloc0 (EDIT_BUF_SIZE);
+
+    /* perform the insertion */
+    buf->buffers1[buf->curs1 >> S_EDIT_BUF_SIZE][i] = (unsigned char) c;
+
+    /* update cursor position */
+    buf->curs1++;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Basic low level single character buffer alterations and movements at the cursor: insert character
+ * at the cursor position and move left.
+ *
+ * @param buf pointer to editor buffer
+ * @param c character to insert
+ */
+
+void
+edit_buffer_insert_ahead (edit_buffer_t * buf, int c)
+{
+    off_t i;
+
+    i = buf->curs2 & M_EDIT_BUF_SIZE;
+
+    /* add a new buffer if we've reached the end of the last one */
+    if (((buf->curs2 + 1) & M_EDIT_BUF_SIZE) == 0)
+        buf->buffers2[(buf->curs2 + 1) >> S_EDIT_BUF_SIZE] = g_malloc0 (EDIT_BUF_SIZE);
+
+    /* perform the insertion */
+    buf->buffers2[buf->curs2 >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - 1 - i] = (unsigned char) c;
+
+    /* update cursor position */
+    buf->curs2++;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Load file into editor buffer
  *
  * @param buf pointer to editor buffer

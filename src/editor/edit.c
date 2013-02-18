@@ -2441,7 +2441,6 @@ edit_push_redo_action (WEdit * edit, long c)
 /* --------------------------------------------------------------------------------------------- */
 /**
    Basic low level single character buffer alterations and movements at the cursor.
-   Returns char passed over, inserted or removed.
  */
 
 void
@@ -2479,23 +2478,14 @@ edit_insert (WEdit * edit, int c)
     else
         edit_push_undo_action (edit, BACKSPACE_BR);
     /* update markers */
-    edit->mark1 += (edit->mark1 > edit->buffer.curs1);
-    edit->mark2 += (edit->mark2 > edit->buffer.curs1);
-    edit->last_get_rule += (edit->last_get_rule > edit->buffer.curs1);
+    edit->mark1 += (edit->mark1 > edit->buffer.curs1) ? 1 : 0;
+    edit->mark2 += (edit->mark2 > edit->buffer.curs1) ? 1 : 0;
+    edit->last_get_rule += (edit->last_get_rule > edit->buffer.curs1) ? 1 : 0;
 
-    /* add a new buffer if we've reached the end of the last one */
-    if (!(edit->buffer.curs1 & M_EDIT_BUF_SIZE))
-        edit->buffer.buffers1[edit->buffer.curs1 >> S_EDIT_BUF_SIZE] = g_malloc0 (EDIT_BUF_SIZE);
-
-    /* perform the insertion */
-    edit->buffer.buffers1[edit->buffer.curs1 >> S_EDIT_BUF_SIZE][edit->buffer.curs1 & M_EDIT_BUF_SIZE]
-        = (unsigned char) c;
+    edit_buffer_insert (&edit->buffer, c);
 
     /* update file length */
     edit->last_byte++;
-
-    /* update cursor position */
-    edit->buffer.curs1++;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2526,17 +2516,13 @@ edit_insert_ahead (WEdit * edit, int c)
     else
         edit_push_undo_action (edit, DELCHAR_BR);
 
-    edit->mark1 += (edit->mark1 >= edit->buffer.curs1);
-    edit->mark2 += (edit->mark2 >= edit->buffer.curs1);
-    edit->last_get_rule += (edit->last_get_rule >= edit->buffer.curs1);
+    edit->mark1 += (edit->mark1 >= edit->buffer.curs1) ? 1 : 0;
+    edit->mark2 += (edit->mark2 >= edit->buffer.curs1) ? 1 : 0;
+    edit->last_get_rule += (edit->last_get_rule >= edit->buffer.curs1) ? 1 : 0;
 
-    if (!((edit->buffer.curs2 + 1) & M_EDIT_BUF_SIZE))
-        edit->buffer.buffers2[(edit->buffer.curs2 + 1) >> S_EDIT_BUF_SIZE] = g_malloc0 (EDIT_BUF_SIZE);
-    edit->buffer.buffers2[edit->buffer.curs2 >> S_EDIT_BUF_SIZE]
-        [EDIT_BUF_SIZE - (edit->buffer.curs2 & M_EDIT_BUF_SIZE) - 1] = c;
+    edit_buffer_insert_ahead (&edit->buffer, c);
 
     edit->last_byte++;
-    edit->buffer.curs2++;
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -58,6 +58,9 @@ int edit_buffer_get_utf (const edit_buffer_t * buf, off_t byte_index, int *char_
 int edit_buffer_get_prev_utf (const edit_buffer_t * buf, off_t byte_index, int *char_width);
 #endif
 
+void edit_buffer_insert (edit_buffer_t * buf, int c);
+void edit_buffer_insert_ahead (edit_buffer_t * buf, int c);
+
 off_t edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size);
 off_t edit_buffer_write_file (edit_buffer_t * buf, int fd);
 
