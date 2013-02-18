@@ -2668,63 +2668,35 @@ edit_backspace (WEdit * edit, gboolean byte_delete)
 void
 edit_cursor_move (WEdit * edit, off_t increment)
 {
-    /* this is the same as a combination of two of the above routines, with only one push onto the undo stack */
-    int c;
-
     if (increment < 0)
     {
-        for (; increment < 0; increment++)
+        for (; increment < 0 && edit->buffer.curs1 != 0; increment++)
         {
-            if (edit->buffer.curs1 == 0)
-                return;
+            int c;
 
             edit_push_undo_action (edit, CURS_RIGHT);
 
-            c = edit_buffer_get_byte (&edit->buffer, edit->buffer.curs1 - 1);
-            if (!((edit->buffer.curs2 + 1) & M_EDIT_BUF_SIZE))
-                edit->buffer.buffers2[(edit->buffer.curs2 + 1) >> S_EDIT_BUF_SIZE] = g_malloc0 (EDIT_BUF_SIZE);
-            edit->buffer.buffers2[edit->buffer.curs2 >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE -
-                                                           (edit->buffer.curs2 & M_EDIT_BUF_SIZE) - 1] = c;
-            edit->buffer.curs2++;
-            c = edit->buffer.buffers1[(edit->buffer.curs1 - 1) >> S_EDIT_BUF_SIZE][(edit->buffer.curs1 -
-                                                                      1) & M_EDIT_BUF_SIZE];
-            if (!((edit->buffer.curs1 - 1) & M_EDIT_BUF_SIZE))
-            {
-                g_free (edit->buffer.buffers1[edit->buffer.curs1 >> S_EDIT_BUF_SIZE]);
-                edit->buffer.buffers1[edit->buffer.curs1 >> S_EDIT_BUF_SIZE] = NULL;
-            }
-            edit->buffer.curs1--;
+            c = edit_buffer_get_previous_byte (&edit->buffer);
+            edit_buffer_insert_ahead (&edit->buffer, c);
+            c = edit_buffer_backspace (&edit->buffer);
             if (c == '\n')
             {
                 edit->curs_line--;
                 edit->force |= REDRAW_LINE_BELOW;
             }
         }
-
     }
     else
     {
-        for (; increment > 0; increment--)
+        for (; increment > 0 && edit->buffer.curs2 != 0; increment--)
         {
-            if (edit->buffer.curs2 == 0)
-                return;
+            int c;
 
             edit_push_undo_action (edit, CURS_LEFT);
 
-            c = edit_buffer_get_byte (&edit->buffer, edit->buffer.curs1);
-            if (!(edit->buffer.curs1 & M_EDIT_BUF_SIZE))
-                edit->buffer.buffers1[edit->buffer.curs1 >> S_EDIT_BUF_SIZE] = g_malloc0 (EDIT_BUF_SIZE);
-            edit->buffer.buffers1[edit->buffer.curs1 >> S_EDIT_BUF_SIZE][edit->buffer.curs1 & M_EDIT_BUF_SIZE] = c;
-            edit->buffer.curs1++;
-            c = edit->buffer.buffers2[(edit->buffer.curs2 - 1) >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE -
-                                                                     ((edit->buffer.curs2 -
-                                                                       1) & M_EDIT_BUF_SIZE) - 1];
-            if (!(edit->buffer.curs2 & M_EDIT_BUF_SIZE))
-            {
-                g_free (edit->buffer.buffers2[edit->buffer.curs2 >> S_EDIT_BUF_SIZE]);
-                edit->buffer.buffers2[edit->buffer.curs2 >> S_EDIT_BUF_SIZE] = 0;
-            }
-            edit->buffer.curs2--;
+            c = edit_buffer_get_current_byte (&edit->buffer);
+            edit_buffer_insert (&edit->buffer, c);
+            c = edit_buffer_delete (&edit->buffer);
             if (c == '\n')
             {
                 edit->curs_line++;
