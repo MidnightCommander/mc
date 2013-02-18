@@ -355,6 +355,70 @@ edit_buffer_insert_ahead (edit_buffer_t * buf, int c)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
+ * Basic low level single character buffer alterations and movements at the cursor: delete character
+ * at the cursor position.
+ *
+ * @param buf pointer to editor buffer
+ * @param c character to insert
+ */
+
+int
+edit_buffer_delete (edit_buffer_t * buf)
+{
+    unsigned char c;
+    off_t prev;
+    off_t i;
+
+    prev = buf->curs2 - 1;
+
+    i = prev & M_EDIT_BUF_SIZE;
+    c = buf->buffers2[prev >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - 1 - i];
+
+    if ((buf->curs2 & M_EDIT_BUF_SIZE) == 0)
+    {
+        g_free (buf->buffers2[buf->curs2 >> S_EDIT_BUF_SIZE]);
+        buf->buffers2[buf->curs2 >> S_EDIT_BUF_SIZE] = NULL;
+    }
+
+    buf->curs2 = prev;
+
+    return c;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Basic low level single character buffer alterations and movements at the cursor: delete character
+ * before the cursor position and move left.
+ *
+ * @param buf pointer to editor buffer
+ * @param c character to insert
+ */
+
+int
+edit_buffer_backspace (edit_buffer_t * buf)
+{
+    unsigned char c;
+    off_t prev;
+    off_t i;
+
+    prev = buf->curs1 - 1;
+
+    i = prev & M_EDIT_BUF_SIZE;
+    c = buf->buffers1[prev >> S_EDIT_BUF_SIZE][i];
+
+    if (i == 0)
+    {
+        g_free (buf->buffers1[buf->curs1 >> S_EDIT_BUF_SIZE]);
+        buf->buffers1[buf->curs1 >> S_EDIT_BUF_SIZE] = NULL;
+    }
+
+    buf->curs1 = prev;
+
+    return c;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Load file into editor buffer
  *
  * @param buf pointer to editor buffer

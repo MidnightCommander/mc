@@ -2577,17 +2577,9 @@ edit_delete (WEdit * edit, gboolean byte_delete)
         if (edit->last_get_rule > edit->buffer.curs1)
             edit->last_get_rule--;
 
-        p = edit->buffer.buffers2[(edit->buffer.curs2 - 1) >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE -
-                                                                 ((edit->buffer.curs2 -
-                                                                   1) & M_EDIT_BUF_SIZE) - 1];
+        p = edit_buffer_delete (&edit->buffer);
 
-        if (!(edit->buffer.curs2 & M_EDIT_BUF_SIZE))
-        {
-            g_free (edit->buffer.buffers2[edit->buffer.curs2 >> S_EDIT_BUF_SIZE]);
-            edit->buffer.buffers2[edit->buffer.curs2 >> S_EDIT_BUF_SIZE] = NULL;
-        }
         edit->last_byte--;
-        edit->buffer.curs2--;
         edit_push_undo_action (edit, p + 256);
     }
 
@@ -2646,15 +2638,9 @@ edit_backspace (WEdit * edit, gboolean byte_delete)
         if (edit->last_get_rule >= edit->buffer.curs1)
             edit->last_get_rule--;
 
-        p = *(edit->buffer.buffers1[(edit->buffer.curs1 - 1) >> S_EDIT_BUF_SIZE] +
-              ((edit->buffer.curs1 - 1) & M_EDIT_BUF_SIZE));
-        if (((edit->buffer.curs1 - 1) & M_EDIT_BUF_SIZE) == 0)
-        {
-            g_free (edit->buffer.buffers1[edit->buffer.curs1 >> S_EDIT_BUF_SIZE]);
-            edit->buffer.buffers1[edit->buffer.curs1 >> S_EDIT_BUF_SIZE] = NULL;
-        }
+        p = edit_buffer_backspace (&edit->buffer);
+
         edit->last_byte--;
-        edit->buffer.curs1--;
         edit_push_undo_action (edit, p);
     }
     edit_modification (edit);
