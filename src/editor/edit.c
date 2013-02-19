@@ -162,7 +162,7 @@ edit_load_file_fast (WEdit * edit, const vfs_path_t * filename_vpath)
         return FALSE;
     }
 
-    ret = edit_buffer_read_file (&edit->buffer, file, edit->last_byte);
+    ret = (edit_buffer_read_file (&edit->buffer, file, edit->last_byte) == edit->last_byte);
     if (ret)
         edit->total_lines = edit_count_lines (edit, 0, edit->last_byte);
     else

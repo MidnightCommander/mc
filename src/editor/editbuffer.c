@@ -307,12 +307,13 @@ edit_buffer_get_prev_utf (const edit_buffer_t * buf, off_t byte_index, int *char
  * @param fd file descriptor
  * @param size file size
  *
- * @return TRUE if file was readed successfully, FALSE otherwise
+ * @return number of read bytes
  */
 
-gboolean
+off_t
 edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size)
 {
+    off_t ret;
     off_t i;
     off_t data_size;
 
@@ -324,21 +325,27 @@ edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size)
 
     /* fill last part of buffers2 */
     data_size = buf->curs2 & M_EDIT_BUF_SIZE;
-    if (mc_read (fd, (char *) buf->buffers2[i] + EDIT_BUF_SIZE - data_size, data_size) < 0)
-        return FALSE;
+    ret = mc_read (fd, (char *) buf->buffers2[i] + EDIT_BUF_SIZE - data_size, data_size);
+    if (ret < 0 || ret != data_size)
+        return ret;
 
     /* fullfill other parts of buffers2 from end to begin */
     data_size = EDIT_BUF_SIZE;
     for (--i; i >= 0; i--)
     {
+        off_t sz;
+
         /* edit->buffers2[0] is already allocated */
         if (buf->buffers2[i] == NULL)
             buf->buffers2[i] = g_malloc0 (data_size);
-        if (mc_read (fd, (char *) buf->buffers2[i], data_size) < 0)
-            return FALSE;
+        sz = mc_read (fd, (char *) buf->buffers2[i], data_size);
+        if (sz >= 0)
+            ret += sz;
+        if (sz != data_size)
+            break;
     }
 
-    return TRUE;
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */

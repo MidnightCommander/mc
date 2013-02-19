@@ -58,7 +58,7 @@ int edit_buffer_get_utf (const edit_buffer_t * buf, off_t byte_index, int *char_
 int edit_buffer_get_prev_utf (const edit_buffer_t * buf, off_t byte_index, int *char_width);
 #endif
 
-gboolean edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size);
+off_t edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size);
 
 /*** inline functions ****************************************************************************/
 
