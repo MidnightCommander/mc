@@ -41,8 +41,8 @@
 typedef struct edit_buffer_struct {
     off_t curs1;                /* position of the cursor from the beginning of the file. */
     off_t curs2;                /* position from the end of the file */
-    unsigned char *buffers1[MAXBUFF + 1];       /* all data up to curs1 */
-    unsigned char *buffers2[MAXBUFF + 1];       /* all data from end of file down to curs2 */
+    GPtrArray *buffers1;        /* all data up to curs1 */
+    GPtrArray *buffers2;        /* all data from end of file down to curs2 */
 } edit_buffer_t;
 
 /*** global variables defined in .c file *********************************************************/

@@ -95,11 +95,10 @@
   *
   * @return NULL if byte_index is negative or larger than file size; pointer to byte otherwise.
   */
-
 static char *
 edit_buffer_get_byte_ptr (const edit_buffer_t * buf, off_t byte_index)
 {
-    unsigned char *b;
+    void *b;
 
     if (byte_index >= (buf->curs1 + buf->curs2) || byte_index < 0)
         return NULL;
@@ -109,12 +108,12 @@ edit_buffer_get_byte_ptr (const edit_buffer_t * buf, off_t byte_index)
         off_t p;
 
         p = buf->curs1 + buf->curs2 - byte_index - 1;
-        b = buf->buffers2[p >> S_EDIT_BUF_SIZE];
-        return (char *) &b[EDIT_BUF_SIZE - 1 - (p & M_EDIT_BUF_SIZE)];
+        b = g_ptr_array_index (buf->buffers2, p >> S_EDIT_BUF_SIZE);
+        return (char *) b + EDIT_BUF_SIZE - 1 - (p & M_EDIT_BUF_SIZE);
     }
 
-    b = buf->buffers1[byte_index >> S_EDIT_BUF_SIZE];
-    return (char *) &b[byte_index & M_EDIT_BUF_SIZE];
+    b = g_ptr_array_index (buf->buffers1, byte_index >> S_EDIT_BUF_SIZE);
+    return (char *) b + (byte_index & M_EDIT_BUF_SIZE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -129,11 +128,11 @@ edit_buffer_get_byte_ptr (const edit_buffer_t * buf, off_t byte_index)
 void
 edit_buffer_init (edit_buffer_t * buf)
 {
-    memset (buf->buffers1, 0, sizeof (buf->buffers1));
-    memset (buf->buffers2, 0, sizeof (buf->buffers2));
+    buf->buffers1 = g_ptr_array_sized_new (MAXBUFF + 1);
+    buf->buffers2 = g_ptr_array_sized_new (MAXBUFF + 1);
+
     buf->curs1 = 0;
     buf->curs2 = 0;
-    buf->buffers2[0] = g_malloc0 (EDIT_BUF_SIZE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -146,12 +145,16 @@ edit_buffer_init (edit_buffer_t * buf)
 void
 edit_buffer_clean (edit_buffer_t * buf)
 {
-    size_t j;
-
-    for (j = 0; j <= MAXBUFF; j++)
+    if (buf->buffers1 != NULL)
     {
-        g_free (buf->buffers1[j]);
-        g_free (buf->buffers2[j]);
+        g_ptr_array_foreach (buf->buffers1, (GFunc) g_free, NULL);
+        g_ptr_array_free (buf->buffers1, TRUE);
+    }
+
+    if (buf->buffers2 != NULL)
+    {
+        g_ptr_array_foreach (buf->buffers2, (GFunc) g_free, NULL);
+        g_ptr_array_free (buf->buffers2, TRUE);
     }
 }
 
@@ -311,16 +314,18 @@ edit_buffer_get_prev_utf (const edit_buffer_t * buf, off_t byte_index, int *char
 void
 edit_buffer_insert (edit_buffer_t * buf, int c)
 {
+    void *b;
     off_t i;
 
     i = buf->curs1 & M_EDIT_BUF_SIZE;
 
     /* add a new buffer if we've reached the end of the last one */
     if (i == 0)
-        buf->buffers1[buf->curs1 >> S_EDIT_BUF_SIZE] = g_malloc0 (EDIT_BUF_SIZE);
+        g_ptr_array_add (buf->buffers1, g_malloc0 (EDIT_BUF_SIZE));
 
     /* perform the insertion */
-    buf->buffers1[buf->curs1 >> S_EDIT_BUF_SIZE][i] = (unsigned char) c;
+    b = g_ptr_array_index (buf->buffers1, buf->curs1 >> S_EDIT_BUF_SIZE);
+    *((unsigned char *) b + i) = (unsigned char) c;
 
     /* update cursor position */
     buf->curs1++;
@@ -338,16 +343,18 @@ edit_buffer_insert (edit_buffer_t * buf, int c)
 void
 edit_buffer_insert_ahead (edit_buffer_t * buf, int c)
 {
+    void *b;
     off_t i;
 
     i = buf->curs2 & M_EDIT_BUF_SIZE;
 
     /* add a new buffer if we've reached the end of the last one */
-    if (((buf->curs2 + 1) & M_EDIT_BUF_SIZE) == 0)
-        buf->buffers2[(buf->curs2 + 1) >> S_EDIT_BUF_SIZE] = g_malloc0 (EDIT_BUF_SIZE);
+    if (i == 0)
+        g_ptr_array_add (buf->buffers2, g_malloc0 (EDIT_BUF_SIZE));
 
     /* perform the insertion */
-    buf->buffers2[buf->curs2 >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - 1 - i] = (unsigned char) c;
+    b = g_ptr_array_index (buf->buffers2, buf->curs2 >> S_EDIT_BUF_SIZE);
+    *((unsigned char *) b + EDIT_BUF_SIZE - 1 - i) = (unsigned char) c;
 
     /* update cursor position */
     buf->curs2++;
@@ -365,19 +372,23 @@ edit_buffer_insert_ahead (edit_buffer_t * buf, int c)
 int
 edit_buffer_delete (edit_buffer_t * buf)
 {
+    void *b;
     unsigned char c;
     off_t prev;
     off_t i;
 
     prev = buf->curs2 - 1;
 
+    b = g_ptr_array_index (buf->buffers2, prev >> S_EDIT_BUF_SIZE);
     i = prev & M_EDIT_BUF_SIZE;
-    c = buf->buffers2[prev >> S_EDIT_BUF_SIZE][EDIT_BUF_SIZE - 1 - i];
+    c = *((unsigned char *) b + EDIT_BUF_SIZE - 1 - i);
 
-    if ((buf->curs2 & M_EDIT_BUF_SIZE) == 0)
+    if (i == 0)
     {
-        g_free (buf->buffers2[buf->curs2 >> S_EDIT_BUF_SIZE]);
-        buf->buffers2[buf->curs2 >> S_EDIT_BUF_SIZE] = NULL;
+        i = buf->buffers2->len - 1;
+        b = g_ptr_array_index (buf->buffers2, i);
+        g_ptr_array_remove_index (buf->buffers2, i);
+        g_free (b);
     }
 
     buf->curs2 = prev;
@@ -397,19 +408,23 @@ edit_buffer_delete (edit_buffer_t * buf)
 int
 edit_buffer_backspace (edit_buffer_t * buf)
 {
+    void *b;
     unsigned char c;
     off_t prev;
     off_t i;
 
     prev = buf->curs1 - 1;
 
+    b = g_ptr_array_index (buf->buffers1, prev >> S_EDIT_BUF_SIZE);
     i = prev & M_EDIT_BUF_SIZE;
-    c = buf->buffers1[prev >> S_EDIT_BUF_SIZE][i];
+    c = *((unsigned char *) b + i);
 
     if (i == 0)
     {
-        g_free (buf->buffers1[buf->curs1 >> S_EDIT_BUF_SIZE]);
-        buf->buffers1[buf->curs1 >> S_EDIT_BUF_SIZE] = NULL;
+        i = buf->buffers1->len - 1;
+        b = g_ptr_array_index (buf->buffers1, i);
+        g_ptr_array_remove_index (buf->buffers1, i);
+        g_free (b);
     }
 
     buf->curs1 = prev;
@@ -431,21 +446,25 @@ edit_buffer_backspace (edit_buffer_t * buf)
 off_t
 edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size)
 {
-    off_t ret;
+    off_t ret = 0;
     off_t i;
     off_t data_size;
+    void *b;
 
     buf->curs2 = size;
     i = buf->curs2 >> S_EDIT_BUF_SIZE;
 
-    if (buf->buffers2[i] == NULL)
-        buf->buffers2[i] = g_malloc0 (EDIT_BUF_SIZE);
-
     /* fill last part of buffers2 */
     data_size = buf->curs2 & M_EDIT_BUF_SIZE;
-    ret = mc_read (fd, (char *) buf->buffers2[i] + EDIT_BUF_SIZE - data_size, data_size);
-    if (ret < 0 || ret != data_size)
-        return ret;
+    if (data_size != 0)
+    {
+        b = g_malloc0 (EDIT_BUF_SIZE);
+        g_ptr_array_add (buf->buffers2, b);
+        ret = mc_read (fd, (char *) b + EDIT_BUF_SIZE - data_size, data_size);
+        if (ret < 0 || ret != data_size)
+            return ret;
+
+    }
 
     /* fullfill other parts of buffers2 from end to begin */
     data_size = EDIT_BUF_SIZE;
@@ -453,14 +472,26 @@ edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size)
     {
         off_t sz;
 
-        /* edit->buffers2[0] is already allocated */
-        if (buf->buffers2[i] == NULL)
-            buf->buffers2[i] = g_malloc0 (data_size);
-        sz = mc_read (fd, (char *) buf->buffers2[i], data_size);
+        b = g_malloc0 (data_size);
+        g_ptr_array_add (buf->buffers2, b);
+        sz = mc_read (fd, b, data_size);
         if (sz >= 0)
             ret += sz;
         if (sz != data_size)
             break;
+    }
+
+    /* reverse buffer */
+    for (i = 0; i < buf->buffers2->len / 2; i++)
+    {
+        void **b1, **b2;
+
+        b1 = &g_ptr_array_index (buf->buffers2, i);
+        b2 = &g_ptr_array_index (buf->buffers2, buf->buffers2->len - 1 - i);
+
+        b = *b1;
+        *b1 = *b2;
+        *b2 = b;
     }
 
     return ret;
@@ -482,62 +513,59 @@ edit_buffer_write_file (edit_buffer_t * buf, int fd)
     off_t ret = 0;
     off_t i;
     off_t data_size, sz;
+    void *b;
 
     /* write all fullfilled parts of buffers1 from begin to end */
-    data_size = EDIT_BUF_SIZE;
-    for (i = 0; i < buf->curs1 >> S_EDIT_BUF_SIZE; i++)
+    if (buf->buffers1->len != 0)
     {
-        sz = mc_write (fd, (char *) buf->buffers1[i], data_size);
+        data_size = EDIT_BUF_SIZE;
+        for (i = 0; i < (off_t) buf->buffers1->len - 1; i++)
+        {
+            b = g_ptr_array_index (buf->buffers1, i);
+            sz = mc_write (fd, b, data_size);
+            if (sz >= 0)
+                ret += sz;
+            else if (i == 0)
+                ret = sz;
+            if (sz != data_size)
+                return ret;
+        }
+
+        /* write last partially filled part of buffers1 */
+        data_size = ((buf->curs1 - 1) & M_EDIT_BUF_SIZE) + 1;
+        b = g_ptr_array_index (buf->buffers1, i);
+        sz = mc_write (fd, b, data_size);
         if (sz >= 0)
             ret += sz;
-        else if (i == 0)
-            ret = sz;
-
-        if (sz != data_size)
-            return ret;
-    }
-
-    /* write last partially filled part of buffers1 */
-    data_size = buf->curs1 & M_EDIT_BUF_SIZE;
-    if (data_size != 0)
-    {
-        sz = mc_write (fd, (char *) buf->buffers1[i], data_size);
-        if (sz >= 0)
-            ret += sz;
-
         if (sz != data_size)
             return ret;
     }
 
     /* write buffers2 from end to begin, if buffers2 contains some data */
-    if (buf->curs2 != 0)
+    if (buf->buffers2->len != 0)
     {
-        buf->curs2--;
-
         /* write last partially filled part of buffers2 */
-        i = buf->curs2 >> S_EDIT_BUF_SIZE;
-        data_size = (buf->curs2 & M_EDIT_BUF_SIZE) + 1;
-        sz = mc_write (fd, (char *) buf->buffers2[i] + EDIT_BUF_SIZE - data_size, data_size);
+        i = buf->buffers2->len - 1;
+        b = g_ptr_array_index (buf->buffers2, i);
+        data_size = ((buf->curs2 - 1) & M_EDIT_BUF_SIZE) + 1;
+        sz = mc_write (fd, (char *) b + EDIT_BUF_SIZE - data_size, data_size);
         if (sz >= 0)
             ret += sz;
 
         if (sz == data_size)
         {
-            data_size = EDIT_BUF_SIZE;
-
             /* write other fullfilled parts of buffers2 from end to begin */
+            data_size = EDIT_BUF_SIZE;
             while (--i >= 0)
             {
-                sz = mc_write (fd, (char *) buf->buffers2[i], data_size);
+                b = g_ptr_array_index (buf->buffers2, i);
+                sz = mc_write (fd, b, data_size);
                 if (sz >= 0)
                     ret += sz;
-
                 if (sz != data_size)
                     break;
             }
         }
-
-        buf->curs2++;
     }
 
     return ret;
