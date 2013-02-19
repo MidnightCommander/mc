@@ -355,26 +355,41 @@ edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size)
  * @param buf pointer to editor buffer
  * @param fd file descriptor
  *
- * @return TRUE if file was written successfullly, FALSE otherswise
+ * @return number of written bytes
  */
 
-gboolean
+off_t
 edit_buffer_write_file (edit_buffer_t * buf, int fd)
 {
-    gboolean ret = TRUE;
+    off_t ret = 0;
     off_t i;
     off_t data_size, sz;
 
     /* write all fullfilled parts of buffers1 from begin to end */
     data_size = EDIT_BUF_SIZE;
     for (i = 0; i < buf->curs1 >> S_EDIT_BUF_SIZE; i++)
-        if (mc_write (fd, (char *) buf->buffers1[i], data_size) != data_size)
-            return FALSE;
+    {
+        sz = mc_write (fd, (char *) buf->buffers1[i], data_size);
+        if (sz >= 0)
+            ret += sz;
+        else if (i == 0)
+            ret = sz;
+
+        if (sz != data_size)
+            return ret;
+    }
 
     /* write last partially filled part of buffers1 */
     data_size = buf->curs1 & M_EDIT_BUF_SIZE;
-    if (mc_write (fd, (char *) buf->buffers1[i], data_size) != data_size)
-        return FALSE;
+    if (data_size != 0)
+    {
+        sz = mc_write (fd, (char *) buf->buffers1[i], data_size);
+        if (sz >= 0)
+            ret += sz;
+
+        if (sz != data_size)
+            return ret;
+    }
 
     /* write buffers2 from end to begin, if buffers2 contains some data */
     if (buf->curs2 != 0)
@@ -384,19 +399,24 @@ edit_buffer_write_file (edit_buffer_t * buf, int fd)
         /* write last partially filled part of buffers2 */
         i = buf->curs2 >> S_EDIT_BUF_SIZE;
         data_size = (buf->curs2 & M_EDIT_BUF_SIZE) + 1;
-        if (mc_write (fd, (char *) buf->buffers2[i] + EDIT_BUF_SIZE - data_size, data_size) != data_size)
-            ret = FALSE;
-        else
+        sz = mc_write (fd, (char *) buf->buffers2[i] + EDIT_BUF_SIZE - data_size, data_size);
+        if (sz >= 0)
+            ret += sz;
+
+        if (sz == data_size)
         {
             data_size = EDIT_BUF_SIZE;
 
             /* write other fullfilled parts of buffers2 from end to begin */
             while (--i >= 0)
-                if (mc_write (fd, (char *) buf->buffers2[i], data_size) != data_size)
-                {
-                    ret = FALSE;
+            {
+                sz = mc_write (fd, (char *) buf->buffers2[i], data_size);
+                if (sz >= 0)
+                    ret += sz;
+
+                if (sz != data_size)
                     break;
-                }
+            }
         }
 
         buf->curs2++;

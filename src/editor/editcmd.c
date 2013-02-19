@@ -309,10 +309,7 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
     }
     else if (edit->lb == LB_ASIS)
     {                           /* do not change line breaks */
-        filelen = edit->last_byte;
-
-        if (!edit_buffer_write_file (&edit->buffer, fd))
-            filelen = -1;
+        filelen = edit_buffer_write_file (&edit->buffer, fd);
 
         if (filelen != edit->last_byte)
         {
