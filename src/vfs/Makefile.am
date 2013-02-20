@@ -36,11 +36,6 @@ SUBDIRS += sfs
 libmc_vfs_la_LIBADD += sfs/libvfs-sfs.la
 endif
 
-if ENABLE_VFS_SMB
-SUBDIRS += smbfs
-libmc_vfs_la_LIBADD += smbfs/libvfs-smbfs.la
-endif
-
 if ENABLE_VFS_TAR
 SUBDIRS += tar
 libmc_vfs_la_LIBADD += tar/libvfs-tar.la
