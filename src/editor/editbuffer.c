@@ -79,6 +79,22 @@
 
 /*** file scope macro definitions ****************************************************************/
 
+/*
+ * The editor keeps data in two arrays of buffers.
+ * All buffers have the same size, which must be a power of 2.
+ */
+
+/* Configurable: log2 of the buffer size in bytes */
+#ifndef S_EDIT_BUF_SIZE
+#define S_EDIT_BUF_SIZE 16
+#endif
+
+/* Size of the buffer */
+#define EDIT_BUF_SIZE (((off_t) 1) << S_EDIT_BUF_SIZE)
+
+/* Buffer mask (used to find cursor position relative to the buffer) */
+#define M_EDIT_BUF_SIZE (EDIT_BUF_SIZE - 1)
+
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
@@ -127,8 +143,8 @@ edit_buffer_get_byte_ptr (const edit_buffer_t * buf, off_t byte_index)
 void
 edit_buffer_init (edit_buffer_t * buf, off_t size)
 {
-    buf->b1 = g_ptr_array_sized_new (MAXBUFF + 1);
-    buf->b2 = g_ptr_array_sized_new (MAXBUFF + 1);
+    buf->b1 = g_ptr_array_sized_new (32);
+    buf->b2 = g_ptr_array_sized_new (32);
 
     buf->curs1 = 0;
     buf->curs2 = 0;

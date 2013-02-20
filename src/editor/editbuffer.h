@@ -7,33 +7,6 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-/*
- * The editor keeps data in two arrays of buffers.
- * All buffers have the same size, which must be a power of 2.
- */
-
-/* Configurable: log2 of the buffer size in bytes */
-#ifndef S_EDIT_BUF_SIZE
-#define S_EDIT_BUF_SIZE 16
-#endif
-
-/* Size of the buffer */
-#define EDIT_BUF_SIZE (((off_t) 1) << S_EDIT_BUF_SIZE)
-
-/* Buffer mask (used to find cursor position relative to the buffer) */
-#define M_EDIT_BUF_SIZE (EDIT_BUF_SIZE - 1)
-
-/*
- * Configurable: Maximal allowed number of buffers in each buffer array.
- * This number can be increased for systems with enough physical memory.
- */
-#ifndef MAXBUFF
-#define MAXBUFF 1024
-#endif
-
-/* Maximal length of file that can be opened */
-#define SIZE_LIMIT (EDIT_BUF_SIZE * (MAXBUFF - 2))
-
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
