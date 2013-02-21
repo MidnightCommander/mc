@@ -46,8 +46,6 @@
  *
  * here's a quick sketch of the layout: (don't run this through indent.)
  *
- * (b1 is buffers1 and b2 is buffers2)
- *
  *                                       |
  * \0\0\0\0\0m e _ f i l e . \nf i n . \n|T h i s _ i s _ s o\0\0\0\0\0\0\0\0\0
  * ______________________________________|______________________________________
@@ -108,11 +106,11 @@ edit_buffer_get_byte_ptr (const edit_buffer_t * buf, off_t byte_index)
         off_t p;
 
         p = buf->curs1 + buf->curs2 - byte_index - 1;
-        b = g_ptr_array_index (buf->buffers2, p >> S_EDIT_BUF_SIZE);
+        b = g_ptr_array_index (buf->b2, p >> S_EDIT_BUF_SIZE);
         return (char *) b + EDIT_BUF_SIZE - 1 - (p & M_EDIT_BUF_SIZE);
     }
 
-    b = g_ptr_array_index (buf->buffers1, byte_index >> S_EDIT_BUF_SIZE);
+    b = g_ptr_array_index (buf->b1, byte_index >> S_EDIT_BUF_SIZE);
     return (char *) b + (byte_index & M_EDIT_BUF_SIZE);
 }
 
@@ -128,8 +126,8 @@ edit_buffer_get_byte_ptr (const edit_buffer_t * buf, off_t byte_index)
 void
 edit_buffer_init (edit_buffer_t * buf)
 {
-    buf->buffers1 = g_ptr_array_sized_new (MAXBUFF + 1);
-    buf->buffers2 = g_ptr_array_sized_new (MAXBUFF + 1);
+    buf->b1 = g_ptr_array_sized_new (MAXBUFF + 1);
+    buf->b2 = g_ptr_array_sized_new (MAXBUFF + 1);
 
     buf->curs1 = 0;
     buf->curs2 = 0;
@@ -145,16 +143,16 @@ edit_buffer_init (edit_buffer_t * buf)
 void
 edit_buffer_clean (edit_buffer_t * buf)
 {
-    if (buf->buffers1 != NULL)
+    if (buf->b1 != NULL)
     {
-        g_ptr_array_foreach (buf->buffers1, (GFunc) g_free, NULL);
-        g_ptr_array_free (buf->buffers1, TRUE);
+        g_ptr_array_foreach (buf->b1, (GFunc) g_free, NULL);
+        g_ptr_array_free (buf->b1, TRUE);
     }
 
-    if (buf->buffers2 != NULL)
+    if (buf->b2 != NULL)
     {
-        g_ptr_array_foreach (buf->buffers2, (GFunc) g_free, NULL);
-        g_ptr_array_free (buf->buffers2, TRUE);
+        g_ptr_array_foreach (buf->b2, (GFunc) g_free, NULL);
+        g_ptr_array_free (buf->b2, TRUE);
     }
 }
 
@@ -321,10 +319,10 @@ edit_buffer_insert (edit_buffer_t * buf, int c)
 
     /* add a new buffer if we've reached the end of the last one */
     if (i == 0)
-        g_ptr_array_add (buf->buffers1, g_malloc0 (EDIT_BUF_SIZE));
+        g_ptr_array_add (buf->b1, g_malloc0 (EDIT_BUF_SIZE));
 
     /* perform the insertion */
-    b = g_ptr_array_index (buf->buffers1, buf->curs1 >> S_EDIT_BUF_SIZE);
+    b = g_ptr_array_index (buf->b1, buf->curs1 >> S_EDIT_BUF_SIZE);
     *((unsigned char *) b + i) = (unsigned char) c;
 
     /* update cursor position */
@@ -350,10 +348,10 @@ edit_buffer_insert_ahead (edit_buffer_t * buf, int c)
 
     /* add a new buffer if we've reached the end of the last one */
     if (i == 0)
-        g_ptr_array_add (buf->buffers2, g_malloc0 (EDIT_BUF_SIZE));
+        g_ptr_array_add (buf->b2, g_malloc0 (EDIT_BUF_SIZE));
 
     /* perform the insertion */
-    b = g_ptr_array_index (buf->buffers2, buf->curs2 >> S_EDIT_BUF_SIZE);
+    b = g_ptr_array_index (buf->b2, buf->curs2 >> S_EDIT_BUF_SIZE);
     *((unsigned char *) b + EDIT_BUF_SIZE - 1 - i) = (unsigned char) c;
 
     /* update cursor position */
@@ -379,15 +377,15 @@ edit_buffer_delete (edit_buffer_t * buf)
 
     prev = buf->curs2 - 1;
 
-    b = g_ptr_array_index (buf->buffers2, prev >> S_EDIT_BUF_SIZE);
+    b = g_ptr_array_index (buf->b2, prev >> S_EDIT_BUF_SIZE);
     i = prev & M_EDIT_BUF_SIZE;
     c = *((unsigned char *) b + EDIT_BUF_SIZE - 1 - i);
 
     if (i == 0)
     {
-        i = buf->buffers2->len - 1;
-        b = g_ptr_array_index (buf->buffers2, i);
-        g_ptr_array_remove_index (buf->buffers2, i);
+        i = buf->b2->len - 1;
+        b = g_ptr_array_index (buf->b2, i);
+        g_ptr_array_remove_index (buf->b2, i);
         g_free (b);
     }
 
@@ -415,15 +413,15 @@ edit_buffer_backspace (edit_buffer_t * buf)
 
     prev = buf->curs1 - 1;
 
-    b = g_ptr_array_index (buf->buffers1, prev >> S_EDIT_BUF_SIZE);
+    b = g_ptr_array_index (buf->b1, prev >> S_EDIT_BUF_SIZE);
     i = prev & M_EDIT_BUF_SIZE;
     c = *((unsigned char *) b + i);
 
     if (i == 0)
     {
-        i = buf->buffers1->len - 1;
-        b = g_ptr_array_index (buf->buffers1, i);
-        g_ptr_array_remove_index (buf->buffers1, i);
+        i = buf->b1->len - 1;
+        b = g_ptr_array_index (buf->b1, i);
+        g_ptr_array_remove_index (buf->b1, i);
         g_free (b);
     }
 
@@ -454,26 +452,26 @@ edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size)
     buf->curs2 = size;
     i = buf->curs2 >> S_EDIT_BUF_SIZE;
 
-    /* fill last part of buffers2 */
+    /* fill last part of b2 */
     data_size = buf->curs2 & M_EDIT_BUF_SIZE;
     if (data_size != 0)
     {
         b = g_malloc0 (EDIT_BUF_SIZE);
-        g_ptr_array_add (buf->buffers2, b);
+        g_ptr_array_add (buf->b2, b);
         ret = mc_read (fd, (char *) b + EDIT_BUF_SIZE - data_size, data_size);
         if (ret < 0 || ret != data_size)
             return ret;
 
     }
 
-    /* fullfill other parts of buffers2 from end to begin */
+    /* fullfill other parts of b2 from end to begin */
     data_size = EDIT_BUF_SIZE;
     for (--i; i >= 0; i--)
     {
         off_t sz;
 
         b = g_malloc0 (data_size);
-        g_ptr_array_add (buf->buffers2, b);
+        g_ptr_array_add (buf->b2, b);
         sz = mc_read (fd, b, data_size);
         if (sz >= 0)
             ret += sz;
@@ -482,12 +480,12 @@ edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size)
     }
 
     /* reverse buffer */
-    for (i = 0; i < buf->buffers2->len / 2; i++)
+    for (i = 0; i < buf->b2->len / 2; i++)
     {
         void **b1, **b2;
 
-        b1 = &g_ptr_array_index (buf->buffers2, i);
-        b2 = &g_ptr_array_index (buf->buffers2, buf->buffers2->len - 1 - i);
+        b1 = &g_ptr_array_index (buf->b2, i);
+        b2 = &g_ptr_array_index (buf->b2, buf->b2->len - 1 - i);
 
         b = *b1;
         *b1 = *b2;
@@ -515,13 +513,13 @@ edit_buffer_write_file (edit_buffer_t * buf, int fd)
     off_t data_size, sz;
     void *b;
 
-    /* write all fullfilled parts of buffers1 from begin to end */
-    if (buf->buffers1->len != 0)
+    /* write all fullfilled parts of b1 from begin to end */
+    if (buf->b1->len != 0)
     {
         data_size = EDIT_BUF_SIZE;
-        for (i = 0; i < (off_t) buf->buffers1->len - 1; i++)
+        for (i = 0; i < (off_t) buf->b1->len - 1; i++)
         {
-            b = g_ptr_array_index (buf->buffers1, i);
+            b = g_ptr_array_index (buf->b1, i);
             sz = mc_write (fd, b, data_size);
             if (sz >= 0)
                 ret += sz;
@@ -531,9 +529,9 @@ edit_buffer_write_file (edit_buffer_t * buf, int fd)
                 return ret;
         }
 
-        /* write last partially filled part of buffers1 */
+        /* write last partially filled part of b1 */
         data_size = ((buf->curs1 - 1) & M_EDIT_BUF_SIZE) + 1;
-        b = g_ptr_array_index (buf->buffers1, i);
+        b = g_ptr_array_index (buf->b1, i);
         sz = mc_write (fd, b, data_size);
         if (sz >= 0)
             ret += sz;
@@ -541,12 +539,12 @@ edit_buffer_write_file (edit_buffer_t * buf, int fd)
             return ret;
     }
 
-    /* write buffers2 from end to begin, if buffers2 contains some data */
-    if (buf->buffers2->len != 0)
+    /* write b2 from end to begin, if b2 contains some data */
+    if (buf->b2->len != 0)
     {
-        /* write last partially filled part of buffers2 */
-        i = buf->buffers2->len - 1;
-        b = g_ptr_array_index (buf->buffers2, i);
+        /* write last partially filled part of b2 */
+        i = buf->b2->len - 1;
+        b = g_ptr_array_index (buf->b2, i);
         data_size = ((buf->curs2 - 1) & M_EDIT_BUF_SIZE) + 1;
         sz = mc_write (fd, (char *) b + EDIT_BUF_SIZE - data_size, data_size);
         if (sz >= 0)
@@ -554,11 +552,11 @@ edit_buffer_write_file (edit_buffer_t * buf, int fd)
 
         if (sz == data_size)
         {
-            /* write other fullfilled parts of buffers2 from end to begin */
+            /* write other fullfilled parts of b2 from end to begin */
             data_size = EDIT_BUF_SIZE;
             while (--i >= 0)
             {
-                b = g_ptr_array_index (buf->buffers2, i);
+                b = g_ptr_array_index (buf->b2, i);
                 sz = mc_write (fd, b, data_size);
                 if (sz >= 0)
                     ret += sz;
