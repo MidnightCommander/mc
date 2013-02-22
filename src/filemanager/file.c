@@ -2,7 +2,7 @@
    File management.
 
    Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
-   2004, 2005, 2006, 2007, 2011
+   2004, 2005, 2006, 2007, 2011, 2012, 2013
    The Free Software Foundation, Inc.
 
    Written by:
@@ -12,6 +12,7 @@
    Jakub Jelinek, 1995, 1996
    Norbert Warmuth, 1997
    Pavel Machek, 1998
+   Andrew Borodin <aborodin@vmail.ru>, 2011, 2012, 2013
 
    The copy code was based in GNU's cp, and was written by:
    Torbjorn Granlund, David MacKenzie, and Jim Meyering.
@@ -212,7 +213,15 @@ transform_source (FileOpContext * ctx, const char *source)
     fnsource = (char *) x_basename (s);
 
     if (mc_search_run (ctx->search_handle, fnsource, 0, strlen (fnsource), NULL))
+    {
         q = mc_search_prepare_replace_str2 (ctx->search_handle, ctx->dest_mask);
+        if (ctx->search_handle->error != MC_SEARCH_E_OK)
+        {
+            message (D_ERROR, MSG_ERROR, "%s", ctx->search_handle->error_str);
+            q = NULL;
+            transform_error = FILE_ABORT;
+        }
+    }
     else
     {
         q = NULL;
@@ -2873,6 +2882,13 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                     char *repl_dest, *temp2;
 
                     repl_dest = mc_search_prepare_replace_str2 (ctx->search_handle, dest);
+                    if (ctx->search_handle->error != MC_SEARCH_E_OK)
+                    {
+                        message (D_ERROR, MSG_ERROR, "%s", ctx->search_handle->error_str);
+                        g_free (repl_dest);
+                        goto clean_up;
+                    }
+
                     temp2 = mc_build_filename (repl_dest, temp, NULL);
                     g_free (temp);
                     g_free (repl_dest);
@@ -2966,7 +2982,6 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 else
                 {
                     temp = transform_source (ctx, source_with_path_str);
-
                     if (temp == NULL)
                         value = transform_error;
                     else
@@ -2974,6 +2989,13 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                         char *temp2, *temp3, *repl_dest;
 
                         repl_dest = mc_search_prepare_replace_str2 (ctx->search_handle, dest);
+                        if (ctx->search_handle->error != MC_SEARCH_E_OK)
+                        {
+                            message (D_ERROR, MSG_ERROR, "%s", ctx->search_handle->error_str);
+                            g_free (repl_dest);
+                            goto clean_up;
+                        }
+
                         temp2 = mc_build_filename (repl_dest, temp, NULL);
                         g_free (temp);
                         g_free (repl_dest);
