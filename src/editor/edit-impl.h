@@ -285,8 +285,6 @@ void book_mark_restore (WEdit * edit, int color);
 
 gboolean edit_line_is_blank (WEdit * edit, long line);
 gboolean is_break_char (char c);
-long edit_indent_width (const WEdit * edit, off_t p);
-void edit_insert_indent (WEdit * edit, int indent);
 void edit_options_dialog (WDialog * h);
 void edit_syntax_dialog (WEdit * edit);
 void edit_mail_dialog (WEdit * edit);

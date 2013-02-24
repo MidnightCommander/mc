@@ -3196,37 +3196,6 @@ edit_delete_line (WEdit * edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
-long
-edit_indent_width (const WEdit * edit, off_t p)
-{
-    off_t q = p;
-
-    /* move to the end of the leading whitespace of the line */
-    while (strchr ("\t ", edit_buffer_get_byte (&edit->buffer, q)) && q < edit->last_byte - 1)
-        q++;
-    /* count the number of columns of indentation */
-    return (long) edit_move_forward3 (edit, p, 0, q);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-edit_insert_indent (WEdit * edit, int indent)
-{
-    if (!option_fill_tabs_with_spaces)
-    {
-        while (indent >= TAB_SIZE)
-        {
-            edit_insert (edit, '\t');
-            indent -= TAB_SIZE;
-        }
-    }
-    while (indent-- > 0)
-        edit_insert (edit, ' ');
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 void
 edit_push_key_press (WEdit * edit)
 {
