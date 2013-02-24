@@ -226,7 +226,7 @@ gboolean edit_insert_file_cmd (WEdit * edit);
 
 char *edit_get_word_from_pos (const WEdit * edit, off_t start_pos, off_t * start, gsize * len,
                               gsize * cut);
-long edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath);
+off_t edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath);
 gboolean edit_load_back_cmd (WEdit * edit);
 gboolean edit_load_forward_cmd (WEdit * edit);
 void edit_block_process_cmd (WEdit * edit, int macro_number);
@@ -288,7 +288,7 @@ gboolean is_break_char (char c);
 void edit_options_dialog (WDialog * h);
 void edit_syntax_dialog (WEdit * edit);
 void edit_mail_dialog (WEdit * edit);
-void format_paragraph (WEdit * edit, int force);
+void format_paragraph (WEdit * edit, gboolean force);
 
 /* either command or char_for_insertion must be passed as -1 */
 void edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion);

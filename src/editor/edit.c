@@ -225,6 +225,7 @@ edit_insert_stream (WEdit * edit, FILE * f)
 {
     int c;
     off_t i = 0;
+
     while ((c = fgetc (f)) >= 0)
     {
         edit_insert (edit, c);
@@ -1888,7 +1889,7 @@ edit_get_word_from_pos (const WEdit * edit, off_t start_pos, off_t * start, gsiz
 /* --------------------------------------------------------------------------------------------- */
 /** inserts a file at the cursor, returns count of inserted bytes on success */
 
-long
+off_t
 edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
 {
     char *p;
@@ -3420,7 +3421,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
 
         if (option_auto_para_formatting)
         {
-            format_paragraph (edit, 0);
+            format_paragraph (edit, FALSE);
             edit->force |= REDRAW_PAGE;
         }
         else
@@ -3553,7 +3554,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
             edit_double_newline (edit);
             if (option_return_does_auto_indent)
                 edit_auto_indent (edit);
-            format_paragraph (edit, 0);
+            format_paragraph (edit, FALSE);
         }
         else
         {
@@ -3682,7 +3683,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
             edit_tab_cmd (edit);
             if (option_auto_para_formatting)
             {
-                format_paragraph (edit, 0);
+                format_paragraph (edit, FALSE);
                 edit->force |= REDRAW_PAGE;
             }
             else
@@ -3906,7 +3907,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         edit_goto_cmd (edit);
         break;
     case CK_ParagraphFormat:
-        format_paragraph (edit, 1);
+        format_paragraph (edit, TRUE);
         edit->force |= REDRAW_PAGE;
         break;
     case CK_MacroDelete:
@@ -4010,7 +4011,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         case CK_DeleteToWordEnd:
         case CK_DeleteToHome:
         case CK_DeleteToEnd:
-            format_paragraph (edit, 0);
+            format_paragraph (edit, FALSE);
             edit->force |= REDRAW_PAGE;
         }
     }

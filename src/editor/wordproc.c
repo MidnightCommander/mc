@@ -71,7 +71,7 @@
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-static long
+static off_t
 line_start (WEdit * edit, long line)
 {
     off_t p;
@@ -86,36 +86,33 @@ line_start (WEdit * edit, long line)
         p = edit_move_forward (edit, p, line - l, 0);
 
     p = edit_bol (edit, p);
-    while (strchr ("\t ", edit_buffer_get_byte (&edit->buffer, p)))
+    while (strchr ("\t ", edit_buffer_get_byte (&edit->buffer, p)) != NULL)
         p++;
     return p;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 bad_line_start (WEdit * edit, off_t p)
 {
     int c;
 
     c = edit_buffer_get_byte (&edit->buffer, p);
     if (c == '.')
-    {                           /* `...' is acceptable */
-        if (edit_buffer_get_byte (&edit->buffer, p + 1) == '.'
-            && edit_buffer_get_byte (&edit->buffer, p + 2) == '.')
-            return 0;
-        return 1;
+    {
+        /* `...' is acceptable */
+        return !(edit_buffer_get_byte (&edit->buffer, p + 1) == '.'
+                && edit_buffer_get_byte (&edit->buffer, p + 2) == '.');
     }
     if (c == '-')
     {
-        if (edit_buffer_get_byte (&edit->buffer, p + 1) == '-'
-            && edit_buffer_get_byte (&edit->buffer, p + 2) == '-')
-            return 0;       /* `---' is acceptable */
-        return 1;
+        /* `---' is acceptable */
+        return !(edit_buffer_get_byte (&edit->buffer, p + 1) == '-'
+                && edit_buffer_get_byte (&edit->buffer, p + 2) == '-');
     }
-    if (strchr (NO_FORMAT_CHARS_START, c))
-        return 1;
-    return 0;
+
+    return (strchr (NO_FORMAT_CHARS_START, c) != NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -124,26 +121,19 @@ bad_line_start (WEdit * edit, off_t p)
  * Return position in the file.
  */
 
-static long
-begin_paragraph (WEdit * edit, int force)
+static off_t
+begin_paragraph (WEdit * edit, gboolean force)
 {
     long i;
+
     for (i = edit->curs_line - 1; i >= 0; i--)
-    {
-        if (edit_line_is_blank (edit, i))
+        if (edit_line_is_blank (edit, i) ||
+            (force && bad_line_start (edit, line_start (edit, i))))
         {
             i++;
             break;
         }
-        if (force)
-        {
-            if (bad_line_start (edit, line_start (edit, i)))
-            {
-                i++;
-                break;
-            }
-        }
-    }
+
     return edit_move_backward (edit, edit_bol (edit, edit->buffer.curs1), edit->curs_line - i);
 }
 
@@ -153,24 +143,19 @@ begin_paragraph (WEdit * edit, int force)
  * Return position in the file.
  */
 
-static long
-end_paragraph (WEdit * edit, int force)
+static off_t
+end_paragraph (WEdit * edit, gboolean force)
 {
     long i;
+
     for (i = edit->curs_line + 1; i <= edit->total_lines; i++)
-    {
-        if (edit_line_is_blank (edit, i))
+        if (edit_line_is_blank (edit, i) ||
+            (force && bad_line_start (edit, line_start (edit, i))))
         {
             i--;
             break;
         }
-        if (force)
-            if (bad_line_start (edit, line_start (edit, i)))
-            {
-                i--;
-                break;
-            }
-    }
+
     return edit_eol (edit,
                      edit_move_forward (edit, edit_bol (edit, edit->buffer.curs1),
                                         i - edit->curs_line, 0));
@@ -179,9 +164,10 @@ end_paragraph (WEdit * edit, int force)
 /* --------------------------------------------------------------------------------------------- */
 
 static unsigned char *
-get_paragraph (WEdit * edit, off_t p, off_t q, int indent, int *size)
+get_paragraph (WEdit * edit, off_t p, off_t q, gboolean indent, off_t * size)
 {
     unsigned char *s, *t;
+
 #if 0
     t = g_try_malloc ((q - p) + 2 * (q - p) / option_word_wrap_line_length + 10);
 #else
@@ -192,11 +178,11 @@ get_paragraph (WEdit * edit, off_t p, off_t q, int indent, int *size)
     for (s = t; p < q; p++, s++)
     {
         if (indent && edit_buffer_get_byte (&edit->buffer, p - 1) == '\n')
-            while (strchr ("\t ", edit_buffer_get_byte (&edit->buffer, p)))
+            while (strchr ("\t ", edit_buffer_get_byte (&edit->buffer, p)) != NULL)
                 p++;
         *s = edit_buffer_get_byte (&edit->buffer, p);
     }
-    *size = (unsigned long) (s - t);
+    *size = (off_t) (s - t);
     /* FIXME: all variables related to 'size' should be fixed */
     t[*size] = '\n';
     return t;
@@ -205,15 +191,13 @@ get_paragraph (WEdit * edit, off_t p, off_t q, int indent, int *size)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-strip_newlines (unsigned char *t, int size)
+strip_newlines (unsigned char *t, off_t size)
 {
-    unsigned char *p = t;
-    while (size-- != 0)
-    {
+    unsigned char *p;
+
+    for (p = t; size-- != 0; p++)
         if (*p == '\n')
             *p = ' ';
-        p++;
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -221,23 +205,23 @@ strip_newlines (unsigned char *t, int size)
    This function calculates the number of chars in a line specified to length l in pixels
  */
 
-static inline int
-next_tab_pos (int x)
+static inline off_t
+next_tab_pos (off_t x)
 {
-    return x += tab_width - x % tab_width;
+    x += tab_width - x % tab_width;
+    return x;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static inline int
-line_pixel_length (unsigned char *t, long b, int l)
+static inline off_t
+line_pixel_length (unsigned char *t, off_t b, off_t l)
 {
-    int x = 0, c, xn = 0;
+    off_t x = 0, xn = 0;
 
     while (TRUE)
     {
-        c = t[b];
-        switch (c)
+        switch (t[b])
         {
         case '\n':
             return b;
@@ -258,11 +242,11 @@ line_pixel_length (unsigned char *t, long b, int l)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-next_word_start (unsigned char *t, int q, int size)
+static off_t
+next_word_start (unsigned char *t, off_t q, off_t size)
 {
-    int i;
-    int saw_ws = 0;
+    off_t i;
+    gboolean saw_ws = FALSE;
 
     for (i = q; i < size; i++)
     {
@@ -272,37 +256,37 @@ next_word_start (unsigned char *t, int q, int size)
             return -1;
         case '\t':
         case ' ':
-            saw_ws = 1;
+            saw_ws = TRUE;
             break;
         default:
-            if (saw_ws != 0)
+            if (saw_ws)
                 return i;
             break;
         }
     }
-    return -1;
+    return (-1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 /** find the start of a word */
 
 static inline int
-word_start (unsigned char *t, int q, int size)
+word_start (unsigned char *t, off_t q, off_t size)
 {
-    int i = q;
+    off_t i;
 
     if (t[q] == ' ' || t[q] == '\t')
         return next_word_start (t, q, size);
 
-    while (TRUE)
+    for (i = q;; i--)
     {
-        int c;
+        unsigned char c;
 
         if (i == 0)
-            return -1;
+            return (-1);
         c = t[i - 1];
         if (c == '\n')
-            return -1;
+            return (-1);
         if (c == ' ' || c == '\t')
             return i;
         i--;
@@ -313,17 +297,18 @@ word_start (unsigned char *t, int q, int size)
 /** replaces ' ' with '\n' to properly format a paragraph */
 
 static inline void
-format_this (unsigned char *t, int size, int indent)
+format_this (unsigned char *t, off_t size, long indent)
 {
-    int q = 0, ww;
+    off_t q = 0, ww;
 
     strip_newlines (t, size);
     ww = option_word_wrap_line_length * FONT_MEAN_WIDTH - indent;
     if (ww < FONT_MEAN_WIDTH * 2)
         ww = FONT_MEAN_WIDTH * 2;
+
     while (TRUE)
     {
-        int p;
+        off_t p;
 
         q = line_pixel_length (t, q, ww);
         if (q > size)
@@ -347,7 +332,7 @@ format_this (unsigned char *t, int size, int indent)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-replace_at (WEdit * edit, long q, int c)
+replace_at (WEdit * edit, off_t q, int c)
 {
     edit_cursor_move (edit, q - edit->buffer.curs1);
     edit_delete (edit, TRUE);
@@ -389,27 +374,29 @@ edit_insert_indent (WEdit * edit, long indent)
 /** replaces a block of text */
 
 static inline void
-put_paragraph (WEdit * edit, unsigned char *t, off_t p, int indent, int size)
+put_paragraph (WEdit * edit, unsigned char *t, off_t p, long indent, off_t size)
 {
-    long cursor;
-    int i, c = 0;
+    off_t cursor;
+    off_t i;
+    int c = '\0';
 
     cursor = edit->buffer.curs1;
-    if (indent)
-        while (strchr ("\t ", edit_buffer_get_byte (&edit->buffer, p)))
+    if (indent != 0)
+        while (strchr ("\t ", edit_buffer_get_byte (&edit->buffer, p)) != NULL)
             p++;
     for (i = 0; i < size; i++, p++)
     {
-        if (i && indent)
+        if (i != 0 && indent != 0)
         {
             if (t[i - 1] == '\n' && c == '\n')
             {
-                while (strchr ("\t ", edit_buffer_get_byte (&edit->buffer, p)))
+                while (strchr ("\t ", edit_buffer_get_byte (&edit->buffer, p)) != NULL)
                     p++;
             }
             else if (t[i - 1] == '\n')
             {
                 off_t curs;
+
                 edit_cursor_move (edit, p - edit->buffer.curs1);
                 curs = edit->buffer.curs1;
                 edit_insert_indent (edit, indent);
@@ -420,7 +407,7 @@ put_paragraph (WEdit * edit, unsigned char *t, off_t p, int indent, int size)
             else if (c == '\n')
             {
                 edit_cursor_move (edit, p - edit->buffer.curs1);
-                while (strchr ("\t ", edit_buffer_get_byte (&edit->buffer, p)))
+                while (strchr ("\t ", edit_buffer_get_byte (&edit->buffer, p)) != NULL)
                 {
                     edit_delete (edit, TRUE);
                     if (cursor > edit->buffer.curs1)
@@ -429,6 +416,7 @@ put_paragraph (WEdit * edit, unsigned char *t, off_t p, int indent, int size)
                 p = edit->buffer.curs1;
             }
         }
+
         c = edit_buffer_get_byte (&edit->buffer, p);
         if (c != t[i])
             replace_at (edit, p, t[i]);
@@ -438,10 +426,10 @@ put_paragraph (WEdit * edit, unsigned char *t, off_t p, int indent, int size)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static inline int
+static inline long
 test_indent (const WEdit * edit, off_t p, off_t q)
 {
-    int indent;
+    long indent;
 
     indent = edit_indent_width (edit, p++);
     if (indent == 0)
@@ -459,42 +447,44 @@ test_indent (const WEdit * edit, off_t p, off_t q)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-format_paragraph (WEdit * edit, int force)
+format_paragraph (WEdit * edit, gboolean force)
 {
-    long p, q;
-    int size;
+    off_t p, q;
+    off_t size;
     unsigned char *t;
-    int indent = 0;
+    long indent;
+
     if (option_word_wrap_line_length < 2)
         return;
     if (edit_line_is_blank (edit, edit->curs_line))
         return;
+
     p = begin_paragraph (edit, force);
     q = end_paragraph (edit, force);
     indent = test_indent (edit, p, q);
-    t = get_paragraph (edit, p, q, indent, &size);
-    if (!t)
+
+    t = get_paragraph (edit, p, q, indent != 0, &size);
+    if (t == NULL)
         return;
+
     if (!force)
     {
-        int i;
-        if (strchr (NO_FORMAT_CHARS_START, *t))
+        off_t i;
+
+        if (strchr (NO_FORMAT_CHARS_START, *t) != NULL)
         {
             g_free (t);
             return;
         }
+
         for (i = 0; i < size - 1; i++)
-        {
-            if (t[i] == '\n')
+            if (t[i] == '\n' && strchr (NO_FORMAT_CHARS_START "\t ", t[i + 1]) != NULL)
             {
-                if (strchr (NO_FORMAT_CHARS_START "\t ", t[i + 1]))
-                {
-                    g_free (t);
-                    return;
-                }
+                g_free (t);
+                return;
             }
-        }
     }
+
     format_this (t, q - p, indent);
     put_paragraph (edit, t, p, indent, size);
     g_free (t);
