@@ -163,28 +163,24 @@ end_paragraph (WEdit * edit, gboolean force)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static unsigned char *
-get_paragraph (WEdit * edit, off_t p, off_t q, gboolean indent, off_t * size)
+static GString *
+get_paragraph (const edit_buffer_t * buf, off_t p, off_t q, gboolean indent)
 {
-    unsigned char *s, *t;
+    GString *t;
 
-#if 0
-    t = g_try_malloc ((q - p) + 2 * (q - p) / option_word_wrap_line_length + 10);
-#else
-    t = g_try_malloc (2 * (q - p) + 100);
-#endif
-    if (t == NULL)
-        return NULL;
-    for (s = t; p < q; p++, s++)
+    t = g_string_sized_new (128);
+
+    for (; p < q; p++)
     {
-        if (indent && edit_buffer_get_byte (&edit->buffer, p - 1) == '\n')
-            while (strchr ("\t ", edit_buffer_get_byte (&edit->buffer, p)) != NULL)
+        if (indent && edit_buffer_get_byte (buf, p - 1) == '\n')
+            while (strchr ("\t ", edit_buffer_get_byte (buf, p)) != NULL)
                 p++;
-        *s = edit_buffer_get_byte (&edit->buffer, p);
+
+        g_string_append_c (t, edit_buffer_get_byte (buf, p));
     }
-    *size = (off_t) (s - t);
-    /* FIXME: all variables related to 'size' should be fixed */
-    t[*size] = '\n';
+
+    g_string_append_c (t, '\n');
+
     return t;
 }
 
@@ -451,8 +447,9 @@ format_paragraph (WEdit * edit, gboolean force)
 {
     off_t p, q;
     off_t size;
-    unsigned char *t;
+    GString *t;
     long indent;
+    unsigned char *t2;
 
     if (option_word_wrap_line_length < 2)
         return;
@@ -463,31 +460,26 @@ format_paragraph (WEdit * edit, gboolean force)
     q = end_paragraph (edit, force);
     indent = test_indent (edit, p, q);
 
-    t = get_paragraph (edit, p, q, indent != 0, &size);
-    if (t == NULL)
-        return;
+    t = get_paragraph (&edit->buffer, p, q, indent != 0);
+    size = t->len - 1;
 
     if (!force)
     {
         off_t i;
 
-        if (strchr (NO_FORMAT_CHARS_START, *t) != NULL)
-        {
-            g_free (t);
-            return;
-        }
+        if (strchr (NO_FORMAT_CHARS_START, t->str[0]) == NULL)
+            for (i = 0; i < size - 1; i++)
+                if (t->str[i] == '\n' && strchr (NO_FORMAT_CHARS_START "\t ", t->str[i + 1]) != NULL)
+                    break;
 
-        for (i = 0; i < size - 1; i++)
-            if (t[i] == '\n' && strchr (NO_FORMAT_CHARS_START "\t ", t[i + 1]) != NULL)
-            {
-                g_free (t);
-                return;
-            }
+        g_string_free (t, TRUE);
+        return;
     }
 
-    format_this (t, q - p, indent);
-    put_paragraph (edit, t, p, indent, size);
-    g_free (t);
+    t2 = (unsigned char *) g_string_free (t, FALSE);
+    format_this (t2, q - p, indent);
+    put_paragraph (edit, t2, p, indent, size);
+    g_free (t2);
 
     /* Scroll left as much as possible to show the formatted paragraph */
     edit_scroll_left (edit, -edit->start_col);
