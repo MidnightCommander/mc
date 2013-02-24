@@ -160,8 +160,12 @@
 #include <sys/mntent.h>
 #endif
 
+#ifndef HAVE_HASMNTOPT
+#define hasmntopt(mnt, opt) ((char *) 0)
+#endif
+
 #undef MNT_IGNORE
-#if defined MNTOPT_IGNORE && defined HAVE_HASMNTOPT
+#ifdef MNTOPT_IGNORE
 #define MNT_IGNORE(M) hasmntopt ((M), MNTOPT_IGNORE)
 #else
 #define MNT_IGNORE(M) 0
