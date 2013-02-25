@@ -311,7 +311,7 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
     {                           /* do not change line breaks */
         filelen = edit_buffer_write_file (&edit->buffer, fd);
 
-        if (filelen != edit->last_byte)
+        if (filelen != edit->buffer.size)
         {
             mc_close (fd);
             goto error_save;
@@ -347,7 +347,7 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
         }
     }
 
-    if (filelen != edit->last_byte)
+    if (filelen != edit->buffer.size)
         goto error_save;
 
     if (this_save_mode == EDIT_DO_BACKUP)
@@ -395,8 +395,8 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
 static gboolean
 edit_check_newline (WEdit * edit)
 {
-    return !(option_check_nl_at_eof && edit->last_byte > 0
-             && edit_buffer_get_byte (&edit->buffer, edit->last_byte - 1) != '\n'
+    return !(option_check_nl_at_eof && edit->buffer.size > 0
+             && edit_buffer_get_byte (&edit->buffer, edit->buffer.size - 1) != '\n'
              && edit_query_dialog2 (_("Warning"),
                                     _("The file you are saving is not finished with a newline"),
                                     _("C&ontinue"), _("&Cancel")));
@@ -573,7 +573,7 @@ edit_block_delete (WEdit * edit)
 
     edit_push_markers (edit);
 
-    curs_line = edit->curs_line;
+    curs_line = edit->buffer.curs_line;
 
     curs_pos = edit->curs_col + edit->over_col;
 
@@ -780,7 +780,7 @@ editcmd_find (WEdit * edit, gsize * len)
     off_t search_start = edit->search_start;
     off_t search_end;
     off_t start_mark = 0;
-    off_t end_mark = edit->last_byte;
+    off_t end_mark = edit->buffer.size;
     int mark_res = 0;
     char end_string_symbol;
 
@@ -802,11 +802,11 @@ editcmd_find (WEdit * edit, gsize * len)
             && (start_mark != 0 || edit_buffer_get_byte (&edit->buffer, start_mark - 1) != end_string_symbol))
         {
             start_mark =
-                edit_calculate_start_of_next_line (edit, start_mark, edit->last_byte,
+                edit_calculate_start_of_next_line (edit, start_mark, edit->buffer.size,
                                                    end_string_symbol);
         }
         if ((edit->search_line_type & AT_END_LINE) != 0
-            && (end_mark - 1 != edit->last_byte
+            && (end_mark - 1 != edit->buffer.size
                 || edit_buffer_get_byte (&edit->buffer, end_mark) != end_string_symbol))
         {
             end_mark = edit_calculate_end_of_previous_line (edit, end_mark, end_string_symbol);
@@ -926,12 +926,12 @@ edit_do_search (WEdit * edit)
         search_create_bookmark = FALSE;
         book_mark_flush (edit, -1);
 
-        while (mc_search_run (edit->search, (void *) edit, q, edit->last_byte, &len))
+        while (mc_search_run (edit->search, (void *) edit, q, edit->buffer.size, &len))
         {
             if (found == 0)
                 edit->search_start = edit->search->normal_offset;
             found++;
-            l += edit_count_lines (edit, q, edit->search->normal_offset);
+            l += edit_buffer_count_lines (&edit->buffer, q, edit->search->normal_offset);
             if (l != l_last)
             {
                 book_mark_insert (edit, l, BOOK_MARK_FOUND_COLOR);
@@ -1072,7 +1072,7 @@ pipe_mail (WEdit * edit, char *to, char *subject, char *cc)
     if (p)
     {
         off_t i;
-        for (i = 0; i < edit->last_byte; i++)
+        for (i = 0; i < edit->buffer.size; i++)
             fputc (edit_buffer_get_byte (&edit->buffer, i), p);
         pclose (p);
     }
@@ -1139,7 +1139,7 @@ edit_collect_completions_get_current_word (WEdit * edit, mc_search_t * srch, off
     off_t i;
     GString *temp;
 
-    if (!mc_search_run (srch, (void *) edit, word_start, edit->last_byte, &len))
+    if (!mc_search_run (srch, (void *) edit, word_start, edit->buffer.size, &len))
         return NULL;
 
     temp = g_string_sized_new (len);
@@ -1179,7 +1179,7 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
     if (mc_config_get_bool
         (mc_main_config, CONFIG_APP_SECTION, "editor_wordcompletion_collect_entire_file", 0))
     {
-        last_byte = edit->last_byte;
+        last_byte = edit->buffer.size;
     }
     else
     {
@@ -1300,9 +1300,9 @@ edit_insert_column_of_text (WEdit * edit, unsigned char *data, off_t size, long 
             }
             for (p = edit->buffer.curs1;; p++)
             {
-                if (p == edit->last_byte)
+                if (p == edit->buffer.size)
                 {
-                    edit_cursor_move (edit, edit->last_byte - edit->buffer.curs1);
+                    edit_cursor_move (edit, edit->buffer.size - edit->buffer.curs1);
                     edit_insert_ahead (edit, '\n');
                     p++;
                     break;
@@ -2546,7 +2546,7 @@ edit_replace_cmd (WEdit * edit, int again)
         edit->search_start = edit->search->normal_offset;
         /*returns negative on not found or error in pattern */
 
-        if ((edit->search_start >= 0) && (edit->search_start < edit->last_byte))
+        if ((edit->search_start >= 0) && (edit->search_start < edit->buffer.size))
         {
             gsize i;
             GString *repl_str;
@@ -2627,7 +2627,7 @@ edit_replace_cmd (WEdit * edit, int again)
             {
                 edit->search_start += edit->found_len + (len == 0 ? 1 : 0);
 
-                if (edit->search_start >= edit->last_byte)
+                if (edit->search_start >= edit->buffer.size)
                     break;
             }
 
@@ -2967,7 +2967,7 @@ edit_goto_cmd (WEdit * edit)
 
     line = l;
     if (l < 0)
-        l = edit->total_lines + l + 2;
+        l = edit->buffer.lines + l + 2;
     edit_move_display (edit, l - WIDGET (edit)->lines / 2 - 1);
     edit_move_to_line (edit, l - 1);
     edit->force |= REDRAW_COMPLETELY;
@@ -3561,7 +3561,7 @@ edit_suggest_current_word (WEdit * edit)
 void
 edit_spellcheck_file (WEdit * edit)
 {
-    if (edit->curs_line > 0)
+    if (edit->buffer.curs_line > 0)
     {
         edit_cursor_move (edit, -edit->buffer.curs1);
         edit_move_to_prev_col (edit, 0);
@@ -3576,7 +3576,7 @@ edit_spellcheck_file (WEdit * edit)
 
         do
         {
-            if (edit->buffer.curs1 >= edit->last_byte)
+            if (edit->buffer.curs1 >= edit->buffer.size)
                 return;
 
             c1 = c2;

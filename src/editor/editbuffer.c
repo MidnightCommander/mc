@@ -124,13 +124,16 @@ edit_buffer_get_byte_ptr (const edit_buffer_t * buf, off_t byte_index)
  */
 
 void
-edit_buffer_init (edit_buffer_t * buf)
+edit_buffer_init (edit_buffer_t * buf, off_t size)
 {
     buf->b1 = g_ptr_array_sized_new (MAXBUFF + 1);
     buf->b2 = g_ptr_array_sized_new (MAXBUFF + 1);
 
     buf->curs1 = 0;
     buf->curs2 = 0;
+
+    buf->size = size;
+    buf->lines = 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -299,6 +302,32 @@ edit_buffer_get_prev_utf (const edit_buffer_t * buf, off_t byte_index, int *char
     return (int) res;
 }
 #endif /* HAVE_CHARSET */
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Count lines in editor buffer.
+ *
+ * @param buf editor buffer
+ * @param first start byte offset
+ * @param last finish byte offset
+ *
+ * @return line numbers between "first" and "last" bytes
+ */
+
+long
+edit_buffer_count_lines (const edit_buffer_t * buf, off_t first, off_t last)
+{
+    long lines = 0;
+
+    first = max (first, 0);
+    last = min (last, buf->size);
+
+    while (first < last)
+        if (edit_buffer_get_byte (buf, first++) == '\n')
+            lines++;
+
+    return lines;
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /**

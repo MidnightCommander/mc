@@ -1399,7 +1399,7 @@ edit_get_syntax_color (WEdit * edit, off_t byte_index)
     if (!tty_use_colors ())
         return 0;
 
-    if (edit->rules != NULL && byte_index < edit->last_byte && option_syntax_highlighting)
+    if (edit->rules != NULL && byte_index < edit->buffer.size && option_syntax_highlighting)
     {
         edit_get_rule (edit, byte_index);
         return translate_rule_to_color (edit, &edit->rule);

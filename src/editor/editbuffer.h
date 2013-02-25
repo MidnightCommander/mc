@@ -38,18 +38,22 @@
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-typedef struct edit_buffer_struct {
+typedef struct edit_buffer_struct
+{
     off_t curs1;                /* position of the cursor from the beginning of the file. */
     off_t curs2;                /* position from the end of the file */
     GPtrArray *b1;              /* all data up to curs1 */
     GPtrArray *b2;              /* all data from end of file down to curs2 */
+    off_t size;                 /* file size */
+    long lines;                 /* total lines in the file */
+    long curs_line;             /* line number of the cursor. */
 } edit_buffer_t;
 
 /*** global variables defined in .c file *********************************************************/
 
 /*** declarations of public functions ************************************************************/
 
-void edit_buffer_init (edit_buffer_t * buf);
+void edit_buffer_init (edit_buffer_t * buf, off_t size);
 void edit_buffer_clean (edit_buffer_t * buf);
 
 int edit_buffer_get_byte (const edit_buffer_t * buf, off_t byte_index);
@@ -57,6 +61,7 @@ int edit_buffer_get_byte (const edit_buffer_t * buf, off_t byte_index);
 int edit_buffer_get_utf (const edit_buffer_t * buf, off_t byte_index, int *char_width);
 int edit_buffer_get_prev_utf (const edit_buffer_t * buf, off_t byte_index, int *char_width);
 #endif
+long edit_buffer_count_lines (const edit_buffer_t * buf, off_t first, off_t last);
 
 void edit_buffer_insert (edit_buffer_t * buf, int c);
 void edit_buffer_insert_ahead (edit_buffer_t * buf, int c);

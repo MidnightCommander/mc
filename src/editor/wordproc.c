@@ -77,7 +77,7 @@ line_start (WEdit * edit, long line)
     off_t p;
     long l;
 
-    l = edit->curs_line;
+    l = edit->buffer.curs_line;
     p = edit->buffer.curs1;
 
     if (line < l)
@@ -126,7 +126,7 @@ begin_paragraph (WEdit * edit, gboolean force)
 {
     long i;
 
-    for (i = edit->curs_line - 1; i >= 0; i--)
+    for (i = edit->buffer.curs_line - 1; i >= 0; i--)
         if (edit_line_is_blank (edit, i) ||
             (force && bad_line_start (edit, line_start (edit, i))))
         {
@@ -134,7 +134,7 @@ begin_paragraph (WEdit * edit, gboolean force)
             break;
         }
 
-    return edit_move_backward (edit, edit_bol (edit, edit->buffer.curs1), edit->curs_line - i);
+    return edit_move_backward (edit, edit_bol (edit, edit->buffer.curs1), edit->buffer.curs_line - i);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -148,7 +148,7 @@ end_paragraph (WEdit * edit, gboolean force)
 {
     long i;
 
-    for (i = edit->curs_line + 1; i <= edit->total_lines; i++)
+    for (i = edit->buffer.curs_line + 1; i <= edit->buffer.lines; i++)
         if (edit_line_is_blank (edit, i) ||
             (force && bad_line_start (edit, line_start (edit, i))))
         {
@@ -158,7 +158,7 @@ end_paragraph (WEdit * edit, gboolean force)
 
     return edit_eol (edit,
                      edit_move_forward (edit, edit_bol (edit, edit->buffer.curs1),
-                                        i - edit->curs_line, 0));
+                                        i - edit->buffer.curs_line, 0));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -344,7 +344,7 @@ edit_indent_width (const WEdit * edit, off_t p)
 
     /* move to the end of the leading whitespace of the line */
     while (strchr ("\t ", edit_buffer_get_byte (&edit->buffer, q)) != NULL
-           && q < edit->last_byte - 1)
+           && q < edit->buffer.size - 1)
         q++;
     /* count the number of columns of indentation */
     return (long) edit_move_forward3 (edit, p, 0, q);
@@ -453,7 +453,7 @@ format_paragraph (WEdit * edit, gboolean force)
 
     if (option_word_wrap_line_length < 2)
         return;
-    if (edit_line_is_blank (edit, edit->curs_line))
+    if (edit_line_is_blank (edit, edit->buffer.curs_line))
         return;
 
     p = begin_paragraph (edit, force);

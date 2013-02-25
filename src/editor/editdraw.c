@@ -114,7 +114,7 @@ status_string (WEdit * edit, char *s, int w)
      * otherwise print the current character as is (if printable),
      * as decimal and as hex.
      */
-    if (edit->buffer.curs1 < edit->last_byte)
+    if (edit->buffer.curs1 < edit->buffer.size)
     {
 #ifdef HAVE_CHARSET
         if (edit->utf8)
@@ -159,8 +159,8 @@ status_string (WEdit * edit, char *s, int w)
                     macro_index < 0 ? '-' : 'R',
                     edit->overwrite == 0 ? '-' : 'O',
                     edit->curs_col + edit->over_col,
-                    edit->curs_line + 1,
-                    edit->total_lines + 1, (long) edit->buffer.curs1, (long) edit->last_byte, byte_str,
+                    edit->buffer.curs_line + 1,
+                    edit->buffer.lines + 1, (long) edit->buffer.curs1, (long) edit->buffer.size, byte_str,
 #ifdef HAVE_CHARSET
                     mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage) :
 #endif
@@ -175,8 +175,8 @@ status_string (WEdit * edit, char *s, int w)
                     edit->curs_col + edit->over_col,
                     edit->start_line + 1,
                     edit->curs_row,
-                    edit->curs_line + 1,
-                    edit->total_lines + 1, (long) edit->buffer.curs1, (long) edit->last_byte, byte_str,
+                    edit->buffer.curs_line + 1,
+                    edit->buffer.lines + 1, (long) edit->buffer.curs1, (long) edit->buffer.size, byte_str,
 #ifdef HAVE_CHARSET
                     mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage) :
 #endif
@@ -233,8 +233,8 @@ edit_status_fullscreen (WEdit * edit, int color)
     {
         size_t percent = 100;
 
-        if (edit->total_lines + 1 != 0)
-            percent = (edit->curs_line + 1) * 100 / (edit->total_lines + 1);
+        if (edit->buffer.lines + 1 != 0)
+            percent = (edit->buffer.curs_line + 1) * 100 / (edit->buffer.lines + 1);
         widget_move (h, 0, w - 6 - 6);
         tty_printf (" %3d%%", percent);
     }
@@ -292,7 +292,8 @@ edit_status_window (WEdit * edit)
         edit_move (2, w->lines - 1);
         tty_printf ("%3ld %5ld/%ld %6ld/%ld",
                     edit->curs_col + edit->over_col,
-                    edit->curs_line + 1, edit->total_lines + 1, edit->buffer.curs1, edit->last_byte);
+                    edit->buffer.curs_line + 1, edit->buffer.lines + 1, edit->buffer.curs1,
+                    edit->buffer.size);
     }
 
     /*
@@ -303,7 +304,7 @@ edit_status_window (WEdit * edit)
     if (cols > 46)
     {
         edit_move (32, w->lines - 1);
-        if (edit->buffer.curs1 >= edit->last_byte)
+        if (edit->buffer.curs1 >= edit->buffer.size)
             tty_print_string ("[<EOF>       ]");
 #ifdef HAVE_CHARSET
         else if (edit->utf8)
@@ -545,7 +546,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
     if (option_line_state)
     {
         cur_line = edit->start_line + row;
-        if (cur_line <= (unsigned int) edit->total_lines)
+        if (cur_line <= (unsigned int) edit->buffer.lines)
         {
             g_snprintf (line_stat, LINE_STATE_WIDTH + 1, "%7i ", cur_line + 1);
         }
@@ -564,7 +565,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
     {
         eval_marks (edit, &m1, &m2);
 
-        if (row <= edit->total_lines - edit->start_line)
+        if (row <= edit->buffer.lines - edit->start_line)
         {
             off_t tws = 0;
             if (tty_use_colors () && visible_tws)
