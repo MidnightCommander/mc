@@ -570,7 +570,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
             off_t tws = 0;
             if (tty_use_colors () && visible_tws)
             {
-                tws = edit_eol (edit, b);
+                tws = edit_buffer_get_eol (&edit->buffer, b);
                 while (tws > b && ((c = edit_buffer_get_byte (&edit->buffer, tws - 1)) == ' ' || c == '\t'))
                     tws--;
             }
@@ -827,7 +827,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
 static inline void
 edit_draw_this_char (WEdit * edit, off_t curs, long row, long start_column, long end_column)
 {
-    off_t b = edit_bol (edit, curs);
+    off_t b = edit_buffer_get_bol (&edit->buffer, curs);
 
     edit_draw_this_line (edit, b, row, start_column, end_column);
 }
@@ -933,7 +933,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
             }
 
             /*          if (force & REDRAW_LINE)          ---> default */
-            b = edit_bol (edit, edit->buffer.curs1);
+            b = edit_buffer_get_current_bol (&edit->buffer);
             if (curs_row >= start_row && curs_row <= end_row)
             {
                 if (key_pending (edit))
@@ -958,7 +958,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
             if ((force & REDRAW_LINE_ABOVE) != 0 && curs_row >= 1)
             {
                 row = curs_row - 1;
-                b = edit_move_backward (edit, edit_bol (edit, edit->buffer.curs1), 1);
+                b = edit_move_backward (edit, edit_buffer_get_current_bol (&edit->buffer), 1);
                 if (row >= start_row && row <= end_row)
                 {
                     if (key_pending (edit))
@@ -970,7 +970,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
             if ((force & REDRAW_LINE_BELOW) != 0 && row < w->lines - 1)
             {
                 row = curs_row + 1;
-                b = edit_bol (edit, edit->buffer.curs1);
+                b = edit_buffer_get_current_bol (&edit->buffer);
                 b = edit_move_forward (edit, b, 1, 0);
                 if (row >= start_row && row <= end_row)
                 {

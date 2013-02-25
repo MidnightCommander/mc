@@ -85,7 +85,7 @@ line_start (WEdit * edit, long line)
     else if (line > l)
         p = edit_move_forward (edit, p, line - l, 0);
 
-    p = edit_bol (edit, p);
+    p = edit_buffer_get_bol (&edit->buffer, p);
     while (strchr ("\t ", edit_buffer_get_byte (&edit->buffer, p)) != NULL)
         p++;
     return p;
@@ -134,7 +134,7 @@ begin_paragraph (WEdit * edit, gboolean force)
             break;
         }
 
-    return edit_move_backward (edit, edit_bol (edit, edit->buffer.curs1), edit->buffer.curs_line - i);
+    return edit_move_backward (edit, edit_buffer_get_current_bol (&edit->buffer), edit->buffer.curs_line - i);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -156,8 +156,8 @@ end_paragraph (WEdit * edit, gboolean force)
             break;
         }
 
-    return edit_eol (edit,
-                     edit_move_forward (edit, edit_bol (edit, edit->buffer.curs1),
+    return edit_buffer_get_eol (&edit->buffer,
+                     edit_move_forward (edit, edit_buffer_get_current_bol (&edit->buffer),
                                         i - edit->buffer.curs_line, 0));
 }
 

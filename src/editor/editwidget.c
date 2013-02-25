@@ -529,8 +529,10 @@ edit_event (Gpm_Event * event, void *data)
                 edit->prev_col = local.x - edit->start_col - option_line_state_width - 1;
             else
             {
-                long line_len = edit_move_forward3 (edit, edit_bol (edit, edit->buffer.curs1), 0,
-                                                    edit_eol (edit, edit->buffer.curs1));
+                long line_len;
+
+                line_len = edit_move_forward3 (edit, edit_buffer_get_current_bol (&edit->buffer), 0,
+                                               edit_buffer_get_current_eol (&edit->buffer));
 
                 if (local.x > line_len)
                 {
@@ -552,7 +554,7 @@ edit_event (Gpm_Event * event, void *data)
             else if (local.y < (edit->curs_row + 1))
                 edit_move_up (edit, (edit->curs_row + 1) - local.y, 0);
             else
-                edit_move_to_prev_col (edit, edit_bol (edit, edit->buffer.curs1));
+                edit_move_to_prev_col (edit, edit_buffer_get_current_bol (&edit->buffer));
 
             if ((local.type & GPM_DOWN) != 0)
             {

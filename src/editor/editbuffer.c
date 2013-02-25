@@ -331,6 +331,50 @@ edit_buffer_count_lines (const edit_buffer_t * buf, off_t first, off_t last)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
+ * Get "begin-of-line" offset of line contained specified byte offset
+ *
+ * @param buf editor buffer
+ * @param current byte offset
+ *
+ * @return index of first char of line
+ */
+
+off_t
+edit_buffer_get_bol (const edit_buffer_t * buf, off_t current)
+{
+    if (current <= 0)
+        return 0;
+
+    for (; edit_buffer_get_byte (buf, current - 1) != '\n'; current--)
+        ;
+
+    return current;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Get "end-of-line" offset of line contained specified byte offset
+ *
+ * @param buf editor buffer
+ * @param current byte offset
+ *
+ * @return index of last char of line + 1
+ */
+
+off_t
+edit_buffer_get_eol (const edit_buffer_t * buf, off_t current)
+{
+    if (current >= buf->size)
+        return buf->size;
+
+    for (; edit_buffer_get_byte (buf, current) != '\n'; current++)
+        ;
+
+    return current;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Basic low level single character buffer alterations and movements at the cursor: insert character
  * at the cursor position and move right.
  *

@@ -62,6 +62,8 @@ int edit_buffer_get_utf (const edit_buffer_t * buf, off_t byte_index, int *char_
 int edit_buffer_get_prev_utf (const edit_buffer_t * buf, off_t byte_index, int *char_width);
 #endif
 long edit_buffer_count_lines (const edit_buffer_t * buf, off_t first, off_t last);
+off_t edit_buffer_get_bol (const edit_buffer_t * buf, off_t current);
+off_t edit_buffer_get_eol (const edit_buffer_t * buf, off_t current);
 
 void edit_buffer_insert (edit_buffer_t * buf, int c);
 void edit_buffer_insert_ahead (edit_buffer_t * buf, int c);
@@ -85,6 +87,36 @@ static inline int
 edit_buffer_get_previous_byte (const edit_buffer_t * buf)
 {
     return edit_buffer_get_byte (buf, buf->curs1 - 1);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Get "begin-of-line" offset of current line
+ *
+ * @param buf editor buffer
+ *
+ * @return index of first char of current line
+ */
+
+static inline off_t
+edit_buffer_get_current_bol (const edit_buffer_t * buf)
+{
+    return edit_buffer_get_bol (buf, buf->curs1);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Get "end-of-line" offset of current line
+ *
+ * @param buf editor buffer
+ *
+ * @return index of first char of current line + 1
+ */
+
+static inline off_t
+edit_buffer_get_current_eol (const edit_buffer_t * buf)
+{
+    return edit_buffer_get_eol (buf, buf->curs1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
