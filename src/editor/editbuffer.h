@@ -64,11 +64,16 @@ int edit_buffer_get_prev_utf (const edit_buffer_t * buf, off_t byte_index, int *
 long edit_buffer_count_lines (const edit_buffer_t * buf, off_t first, off_t last);
 off_t edit_buffer_get_bol (const edit_buffer_t * buf, off_t current);
 off_t edit_buffer_get_eol (const edit_buffer_t * buf, off_t current);
+GString *edit_buffer_get_word_from_pos (const edit_buffer_t * buf, off_t start_pos, off_t * start,
+                                        gsize * cut);
 
 void edit_buffer_insert (edit_buffer_t * buf, int c);
 void edit_buffer_insert_ahead (edit_buffer_t * buf, int c);
 int edit_buffer_delete (edit_buffer_t * buf);
 int edit_buffer_backspace (edit_buffer_t * buf);
+
+off_t edit_buffer_move_forward (const edit_buffer_t * buf, off_t current, long lines, off_t upto);
+off_t edit_buffer_move_backward (const edit_buffer_t * buf, off_t current, long lines);
 
 off_t edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size);
 off_t edit_buffer_write_file (edit_buffer_t * buf, int fd);

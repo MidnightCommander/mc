@@ -72,21 +72,21 @@
 /* --------------------------------------------------------------------------------------------- */
 
 static off_t
-line_start (WEdit * edit, long line)
+line_start (const edit_buffer_t * buf, long line)
 {
     off_t p;
     long l;
 
-    l = edit->buffer.curs_line;
-    p = edit->buffer.curs1;
+    l = buf->curs_line;
+    p = buf->curs1;
 
     if (line < l)
-        p = edit_move_backward (edit, p, l - line);
+        p = edit_buffer_move_backward (buf, p, l - line);
     else if (line > l)
-        p = edit_move_forward (edit, p, line - l, 0);
+        p = edit_buffer_move_forward (buf, p, line - l, 0);
 
-    p = edit_buffer_get_bol (&edit->buffer, p);
-    while (strchr ("\t ", edit_buffer_get_byte (&edit->buffer, p)) != NULL)
+    p = edit_buffer_get_bol (buf, p);
+    while (strchr ("\t ", edit_buffer_get_byte (buf, p)) != NULL)
         p++;
     return p;
 }
@@ -94,22 +94,22 @@ line_start (WEdit * edit, long line)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-bad_line_start (WEdit * edit, off_t p)
+bad_line_start (const edit_buffer_t * buf, off_t p)
 {
     int c;
 
-    c = edit_buffer_get_byte (&edit->buffer, p);
+    c = edit_buffer_get_byte (buf, p);
     if (c == '.')
     {
         /* `...' is acceptable */
-        return !(edit_buffer_get_byte (&edit->buffer, p + 1) == '.'
-                && edit_buffer_get_byte (&edit->buffer, p + 2) == '.');
+        return !(edit_buffer_get_byte (buf, p + 1) == '.'
+                && edit_buffer_get_byte (buf, p + 2) == '.');
     }
     if (c == '-')
     {
         /* `---' is acceptable */
-        return !(edit_buffer_get_byte (&edit->buffer, p + 1) == '-'
-                && edit_buffer_get_byte (&edit->buffer, p + 2) == '-');
+        return !(edit_buffer_get_byte (buf, p + 1) == '-'
+                && edit_buffer_get_byte (buf, p + 2) == '-');
     }
 
     return (strchr (NO_FORMAT_CHARS_START, c) != NULL);
@@ -128,13 +128,14 @@ begin_paragraph (WEdit * edit, gboolean force)
 
     for (i = edit->buffer.curs_line - 1; i >= 0; i--)
         if (edit_line_is_blank (edit, i) ||
-            (force && bad_line_start (edit, line_start (edit, i))))
+            (force && bad_line_start (&edit->buffer, line_start (&edit->buffer, i))))
         {
             i++;
             break;
         }
 
-    return edit_move_backward (edit, edit_buffer_get_current_bol (&edit->buffer), edit->buffer.curs_line - i);
+    return edit_buffer_move_backward (&edit->buffer, edit_buffer_get_current_bol (&edit->buffer),
+                                      edit->buffer.curs_line - i);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -150,14 +151,14 @@ end_paragraph (WEdit * edit, gboolean force)
 
     for (i = edit->buffer.curs_line + 1; i <= edit->buffer.lines; i++)
         if (edit_line_is_blank (edit, i) ||
-            (force && bad_line_start (edit, line_start (edit, i))))
+            (force && bad_line_start (&edit->buffer, line_start (&edit->buffer, i))))
         {
             i--;
             break;
         }
 
     return edit_buffer_get_eol (&edit->buffer,
-                     edit_move_forward (edit, edit_buffer_get_current_bol (&edit->buffer),
+                     edit_buffer_move_forward (&edit->buffer, edit_buffer_get_current_bol (&edit->buffer),
                                         i - edit->buffer.curs_line, 0));
 }
 

@@ -39,6 +39,7 @@
 
 #include "lib/vfs/vfs.h"
 
+#include "edit-impl.h"
 #include "editbuffer.h"
 
 /* --------------------------------------------------------------------------------------------- */
@@ -375,6 +376,52 @@ edit_buffer_get_eol (const edit_buffer_t * buf, off_t current)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
+ * Get word from specified offset.
+ *
+ * @param buf editor buffer
+ * @param current start_pos offset
+ * @param start actual start word ofset
+ * @param cut 
+ *
+ * @return word as newly allocated object
+ */
+
+GString *
+edit_buffer_get_word_from_pos (const edit_buffer_t * buf, off_t start_pos, off_t * start,
+                               gsize * cut)
+{
+    off_t word_start;
+    long cut_len = 0;
+    GString *match_expr;
+    int c1, c2;
+
+    for (word_start = start_pos; word_start != 0; word_start--, cut_len++)
+    {
+        c1 = edit_buffer_get_byte (buf, word_start);
+        c2 = edit_buffer_get_byte (buf, word_start - 1);
+
+        if (is_break_char (c1) != is_break_char (c2) || c1 == '\n' || c2 == '\n')
+            break;
+    }
+
+    match_expr = g_string_sized_new (16);
+
+    do
+    {
+        c1 = edit_buffer_get_byte (buf, word_start + match_expr->len);
+        c2 = edit_buffer_get_byte (buf, word_start + match_expr->len + 1);
+        g_string_append_c (match_expr, c1);
+    }
+    while (!(is_break_char (c1) != is_break_char (c2) || c1 == '\n' || c2 == '\n'));
+
+    *start = word_start;
+    *cut = cut_len;
+
+    return match_expr;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Basic low level single character buffer alterations and movements at the cursor: insert character
  * at the cursor position and move right.
  *
@@ -501,6 +548,65 @@ edit_buffer_backspace (edit_buffer_t * buf)
     buf->curs1 = prev;
 
     return c;
+}
+
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Calculate forward offset with specified number of lines.
+ *
+ * @param buf editor buffer
+ * @param current current offset
+ * @param lines number of lines to move forward
+ * @param upto offset to count lines between current and upto.
+ *
+ * @return If lines is zero returns the count of lines from current to upto.
+ *         If upto is zero returns offset of lines forward current.
+ *         Else returns forward offset with specified number of lines
+ */
+
+off_t
+edit_buffer_move_forward (const edit_buffer_t * buf, off_t current, long lines, off_t upto)
+{
+    long next;
+
+    if (upto != 0)
+        return (off_t) edit_buffer_count_lines (buf, current, upto);
+
+    lines = max (lines, 0);
+
+    while (lines-- != 0)
+    {
+        next = edit_buffer_get_eol (buf, current) + 1;
+        if (next > buf->size)
+            break;
+        current = next;
+    }
+
+    return current;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Calculate backward offset with specified number of lines.
+ *
+ * @param buf editor buffer
+ * @param current current offset
+ * @param lines number of lines to move bacward
+ *
+ * @return backward offset with specified number of lines.
+ */
+
+off_t
+edit_buffer_move_backward (const edit_buffer_t * buf, off_t current, long lines)
+{
+    lines = max (lines, 0);
+    current = edit_buffer_get_bol (buf, current);
+
+    while (lines-- != 0 && current != 0)
+        current = edit_buffer_get_bol (buf, current - 1);
+
+    return current;
 }
 
 /* --------------------------------------------------------------------------------------------- */
