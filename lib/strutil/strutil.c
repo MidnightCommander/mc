@@ -832,3 +832,42 @@ strrstr_skip_count (const char *haystack, const char *needle, size_t skip_count)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* Interprete string as a non-negative decimal integer, optionally multiplied by various values.
+ *
+ * @param str input value
+ * @param invalid set to TRUE if "str" does not represent a number in this format
+ *
+ * @return non-integer representation of "str", 0 in case of error.
+ */
+
+uintmax_t
+parse_integer (const char *str, gboolean * invalid)
+{
+    uintmax_t n;
+    char *suffix;
+    strtol_error_t e;
+
+    e = xstrtoumax (str, &suffix, 10, &n, "bcEGkKMPTwYZ0");
+    if (e == LONGINT_INVALID_SUFFIX_CHAR && *suffix == 'x')
+    {
+        uintmax_t multiplier;
+
+        multiplier = parse_integer (suffix + 1, invalid);
+        if (multiplier != 0 && n * multiplier / multiplier != n)
+        {
+            *invalid = TRUE;
+            return 0;
+        }
+
+        n *= multiplier;
+    }
+    else if (e != LONGINT_OK)
+    {
+        *invalid = TRUE;
+        n = 0;
+    }
+
+    return n;
+}
+
+/* --------------------------------------------------------------------------------------------- */
