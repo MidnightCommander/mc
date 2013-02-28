@@ -15,12 +15,6 @@ struct etags_hash_struct;
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-struct selection
-{
-    gchar *text;
-    gsize len;
-};
-
 /*** global variables defined in .c file *********************************************************/
 
 /*** declarations of public functions ************************************************************/
@@ -31,7 +25,7 @@ gboolean editcmd_dialog_search_show (WEdit * edit);
 
 int editcmd_dialog_raw_key_query (const char *heading, const char *query, gboolean cancel);
 
-void editcmd_dialog_completion_show (WEdit *, int, int, struct selection *, int);
+void editcmd_dialog_completion_show (WEdit *, int, int, GString **, int);
 
 void editcmd_dialog_select_definition_show (WEdit *, char *, int, int, struct etags_hash_struct *,
                                             int);

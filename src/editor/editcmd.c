@@ -1203,7 +1203,7 @@ edit_collect_completions_get_current_word (WEdit * edit, mc_search_t * srch, off
 
 static gsize
 edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
-                          char *match_expr, struct selection *compl, gsize * num)
+                          char *match_expr, GString ** compl, gsize * num)
 {
     gsize len = 0;
     gsize max_len = 0;
@@ -1267,14 +1267,12 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
         for (i = 0; i < *num; i++)
         {
             if (strncmp
-                ((char *) &compl[i].text[word_len],
-                 (char *) &temp->str[word_len], max (len, compl[i].len) - word_len) == 0)
+                ((char *) &compl[i]->str[word_len],
+                 (char *) &temp->str[word_len], max (len, compl[i]->len) - word_len) == 0)
             {
-                struct selection this = compl[i];
+                GString *this = compl[i];
                 for (++i; i < *num; i++)
-                {
                     compl[i - 1] = compl[i];
-                }
                 compl[*num - 1] = this;
                 skip = 1;
                 break;          /* skip it, already added */
@@ -1285,11 +1283,9 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
 
         if (*num == MAX_WORD_COMPLETIONS)
         {
-            g_free (compl[0].text);
+            g_string_free (compl[0], TRUE);
             for (i = 1; i < *num; i++)
-            {
                 compl[i - 1] = compl[i];
-            }
             (*num)--;
         }
 #ifdef HAVE_CHARSET
@@ -1303,9 +1299,7 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
             g_string_free (recoded, TRUE);
         }
 #endif
-        compl[*num].text = g_strndup (temp->str, temp->len);
-        compl[*num].len = temp->len;
-        (*num)++;
+        compl[(*num)++] = g_string_new_len (temp->str, temp->len);
         start += len;
 
         /* note the maximal length needed for the completion dialog */
@@ -3274,7 +3268,7 @@ edit_complete_word_cmd (WEdit * edit)
     off_t word_start = 0;
     unsigned char *bufpos;
     char *match_expr;
-    struct selection compl[MAX_WORD_COMPLETIONS];       /* completions */
+    GString *compl[MAX_WORD_COMPLETIONS];       /* completions */
 
     /* search start of word to be completed */
     if (!edit_find_word_start (edit, &word_start, &word_len))
@@ -3292,16 +3286,16 @@ edit_complete_word_cmd (WEdit * edit)
     /* collect the possible completions              */
     /* start search from begin to end of file */
     max_len =
-        edit_collect_completions (edit, word_start, word_len, match_expr,
-                                  (struct selection *) &compl, &num_compl);
+        edit_collect_completions (edit, word_start, word_len, match_expr, (GString **) &compl,
+                                  &num_compl);
 
     if (num_compl > 0)
     {
         /* insert completed word if there is only one match */
         if (num_compl == 1)
         {
-            for (i = word_len; i < compl[0].len; i++)
-                edit_insert (edit, *(compl[0].text + i));
+            for (i = word_len; i < compl[0]->len; i++)
+                edit_insert (edit, *(compl[0]->str + i));
         }
         /* more than one possible completion => ask the user */
         else
@@ -3312,15 +3306,14 @@ edit_complete_word_cmd (WEdit * edit)
             /*tty_beep (); */
 
             /* let the user select the preferred completion */
-            editcmd_dialog_completion_show (edit, max_len, word_len,
-                                            (struct selection *) &compl, num_compl);
+            editcmd_dialog_completion_show (edit, max_len, word_len, (GString **) &compl, num_compl);
         }
     }
 
     g_free (match_expr);
     /* release memory before return */
     for (i = 0; i < num_compl; i++)
-        g_free (compl[i].text);
+        g_string_free (compl[i], TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
