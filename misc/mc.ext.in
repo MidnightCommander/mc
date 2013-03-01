@@ -117,8 +117,8 @@ regex/^\[git\]
 
 ### Archives ###
 
-# .tgz, .tpz, .tar.gz, .tar.z, .tar.Z, .ipk, .gem, .war
-regex/\.t([gp]?z|ar\.g?[zZ])$|\.ipk$|\.gem$|\.war$
+# .tgz, .tpz, .tar.gz, .tar.z, .tar.Z, .ipk, .gem
+regex/\.t([gp]?z|ar\.g?[zZ])$|\.ipk$|\.gem$
 	Open=%cd %p/utar://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.gz
 
