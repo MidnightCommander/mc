@@ -47,6 +47,7 @@ extern int option_save_position;
 extern int option_syntax_highlighting;
 extern int option_group_undo;
 extern char *option_backup_ext;
+extern char *option_filesize_threshold;
 
 extern int edit_confirm_save;
 

@@ -155,6 +155,8 @@ my_setup (void)
     load_codepages_list ();
 #endif /* HAVE_CHARSET */
 
+    option_filesize_threshold = (char *) "64M";
+
     test_edit = edit_init (NULL, 0, 0, 24, 80, vfs_path_from_str ("test-data.txt"), 1);
     editcmd_dialog_completion_show__init ();
 }

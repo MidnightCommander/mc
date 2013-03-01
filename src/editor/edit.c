@@ -41,6 +41,7 @@
 #include <ctype.h>
 #include <errno.h>
 #include <sys/stat.h>
+#include <stdint.h>             /* UINTMAX_MAX */
 #include <stdlib.h>
 #include <fcntl.h>
 
@@ -101,6 +102,7 @@ int option_group_undo = 0;
 int show_right_margin = 0;
 
 char *option_backup_ext = NULL;
+char *option_filesize_threshold = NULL;
 
 unsigned int edit_stack_iterator = 0;
 edit_stack_type edit_history_moveto[MAX_HISTORY_MOVETO];
@@ -134,6 +136,8 @@ static const struct edit_filters
     { "gzip -cd %s 2>&1", "gzip > %s", ".Z" }
     /* *INDENT-ON* */
 };
+
+static const off_t option_filesize_default_threshold = 64 * 1024 * 1024;        /* 64 MB */
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -247,8 +251,10 @@ edit_insert_stream (WEdit * edit, FILE * f)
 static gboolean
 check_file_access (WEdit * edit, const vfs_path_t * filename_vpath, struct stat *st)
 {
+    static uintmax_t threshold = UINTMAX_MAX;
     int file;
     gchar *errmsg = NULL;
+    gboolean ret = TRUE;
 
     /* Try opening an existing file */
     file = mc_open (filename_vpath, O_NONBLOCK | O_RDONLY | O_BINARY, 0666);
@@ -287,6 +293,16 @@ check_file_access (WEdit * edit, const vfs_path_t * filename_vpath, struct stat 
         goto cleanup;
     }
 
+    /* get file size threshold for alarm */
+    if (threshold == UINTMAX_MAX)
+    {
+        gboolean err = FALSE;
+
+        threshold = parse_integer (option_filesize_threshold, &err);
+        if (err)
+            threshold = option_filesize_default_threshold;
+    }
+
     /*
      * Don't delete non-empty files.
      * O_EXCL should prevent it, but let's be on the safe side.
@@ -294,21 +310,32 @@ check_file_access (WEdit * edit, const vfs_path_t * filename_vpath, struct stat 
     if (st->st_size > 0)
         edit->delete_file = 0;
 
-    /* TODO:
-     *  Add ini option of file size alarm threshold.
-     *  Add here the query dialog "The file is too large. Open it anyway?".
-     */
+    if ((uintmax_t) st->st_size > threshold)
+    {
+        int act;
+
+        errmsg = g_strdup_printf (_("File \"%s\" is too large.\nOpen it anyway?"),
+                                  vfs_path_as_str (filename_vpath));
+        act = edit_query_dialog2 (_("Warning"), errmsg, _("&Yes"), _("&No"));
+        g_free (errmsg);
+        errmsg = NULL;
+
+        if (act == 1)
+            ret = FALSE;
+    }
 
   cleanup:
-    (void) mc_close (file);
-
     if (errmsg != NULL)
     {
         edit_error_dialog (_("Error"), errmsg);
         g_free (errmsg);
-        return FALSE;
+        ret = FALSE;
     }
-    return TRUE;
+
+    if (!ret)
+        (void) mc_close (file);
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */

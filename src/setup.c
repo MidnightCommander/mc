@@ -373,6 +373,7 @@ static const struct
 } str_options[] = {
 #ifdef USE_INTERNAL_EDIT
     { "editor_backup_extension", &option_backup_ext, "~" },
+    { "editor_filesize_threshold", &option_filesize_threshold, "64M" },
 #endif
     { "mcview_eof", &mcview_show_eof, "" },
     {  NULL, NULL, NULL }
