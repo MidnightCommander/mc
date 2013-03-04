@@ -16,8 +16,8 @@ LIBFILES_CONST = \
 	mcedit.menu \
 	filehighlight.ini \
 	mc.keymap \
-	mc.keymap.default \
-	mc.keymap.emacs \
+	mc.default.keymap \
+	mc.emacs.keymap \
 	mc.menu \
 	mc.menu.sr
 

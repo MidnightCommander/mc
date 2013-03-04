@@ -1,4 +1,4 @@
-This file describes how keybind names used in mc.keymap.* files
+This file describes how keybind names used in mc.*.keymap files
 are changed in 4.8.* releases.
 
 +---------------------------------+-------------------------+-----------------------------------------+
