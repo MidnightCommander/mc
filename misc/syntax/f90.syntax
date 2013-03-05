@@ -24,12 +24,16 @@ context default
     keyword linestart \{0123456789\} brightred
 
 # structure
-    keyword whole MODULE white black
-    keyword whole SUBROUTINE white black
-    keyword whole PROGRAM white black
-    keyword whole FUNCTION white black
+    keyword whole ASSIGNMENT white black
     keyword whole CONTAINS white black
     keyword whole END white black
+    keyword whole FUNCTION white black
+    keyword whole INTERFACE white black
+    keyword whole INCLUDE white black
+    keyword whole MODULE white black
+    keyword whole OPERATOR white black
+    keyword whole PROGRAM white black
+    keyword whole SUBROUTINE white black
 
 # boolean and logical expressions / operators
     keyword .and. brightred/orange
@@ -59,6 +63,8 @@ context default
     keyword whole DATA brightcyan
     keyword whole DIMENSION brightcyan
     keyword whole DOUBLE brightcyan
+    keyword whole ELEMENTAL brightcyan
+    keyword whole EQUIVALENCE brightcyan
     keyword whole EXTERNAL brightcyan
     keyword whole FORMAT brightcyan
     keyword whole IMPLICIT brightcyan
@@ -66,6 +72,7 @@ context default
     keyword whole INTENT brightcyan
     keyword whole INTRINSIC brightcyan
     keyword whole LOGICAL brightcyan
+    keyword whole NAMELIST brightcyan
     keyword whole NONE brightcyan
     keyword whole ONLY brightcyan
     keyword whole OPTIONAL brightcyan
@@ -74,28 +81,42 @@ context default
     keyword whole PRECISION brightcyan
     keyword whole PRIVATE brightcyan
     keyword whole PUBLIC brightcyan
+    keyword whole PURE brightcyan
     keyword whole REAL brightcyan
+    keyword whole SAVE brightcyan
+    keyword whole TYPE brightcyan
     keyword whole USE brightcyan
 
 # general programming syntax
     keyword whole allocate brightgreen
     keyword whole assign brightgreen
     keyword whole call brightgreen
+    keyword whole case brightgreen
+    keyword whole deallocate brightgreen
+    keyword whole default brightgreen
     keyword whole continue brightgreen
+    keyword whole cycle brightgreen
     keyword whole do brightgreen
     keyword whole else brightgreen
     keyword whole elseif brightgreen
+    keyword whole elsewhere brightgreen
     keyword whole end brightgreen
     keyword whole enddo brightgreen
     keyword whole endif brightgreen
+    keyword whole exit brightgreen
     keyword whole for brightgreen
+    keyword whole forall brightgreen
     keyword whole goto brightgreen
     keyword whole if brightgreen
+    keyword whole nullify brightgreen
     keyword whole pause brightgreen
     keyword whole return brightgreen
+    keyword whole select brightgreen
     keyword whole stop brightgreen
+    keyword whole target brightgreen
     keyword whole then brightgreen
     keyword whole to brightgreen
+    keyword whole where brightgreen
     keyword whole while brightgreen
 
 # headers
@@ -136,6 +157,7 @@ context default
 
 # mathematical functions
     keyword whole abs yellow
+    keyword whole achar yellow
     keyword whole acos yellow
     keyword whole aimag yellow
     keyword whole aint yellow
@@ -153,6 +175,7 @@ context default
     keyword whole atan2 yellow
     keyword whole acos yellow
     keyword whole cabs yellow
+    keyword whole ceiling yellow
     keyword whole cexp yellow
     keyword whole char yellow
     keyword whole clog yellow
@@ -188,10 +211,11 @@ context default
     keyword whole dsqrt yellow
     keyword whole dtan yellow
     keyword whole dtanh yellow
-    keyword whole equivalence yellow
     keyword whole exp yellow
     keyword whole float yellow
+    keyword whole floor yellow
     keyword whole iabs yellow
+    keyword whole iachar yellow
     keyword whole ichar yellow
     keyword whole idim yellow
     keyword whole idint yellow
@@ -202,6 +226,7 @@ context default
     keyword whole len yellow
     keyword whole log yellow
     keyword whole log10 yellow
+    keyword whole matmul yellow
     keyword whole max yellow
     keyword whole max0 yellow
     keyword whole max1 yellow
@@ -209,20 +234,27 @@ context default
     keyword whole min0 yellow
     keyword whole min1 yellow
     keyword whole mod yellow
+    keyword whole nint yellow
+    keyword whole product yellow
     keyword whole rand yellow
+    keyword whole random_number yellow
+    keyword whole random_seed yellow
     keyword whole sign yellow
     keyword whole sin yellow
     keyword whole sinh yellow
     keyword whole sngl yellow
     keyword whole sqrt yellow
+    keyword whole sum yellow
     keyword whole tan yellow
     keyword whole tanh yellow
+    keyword whole transpose yellow
 
 # operators and syntax elements
     keyword ( brightcyan
     keyword ) brightcyan
     keyword : brightcyan
     keyword , brightcyan
+    keyword ; brightcyan
     keyword \+ yellow
     keyword - yellow
     keyword \* yellow
@@ -233,6 +265,7 @@ context default
 
 # comments and quotes
     keyword '*' green
+    keyword "*" green
 
 context &\n & black cyan
 
