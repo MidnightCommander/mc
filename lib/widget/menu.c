@@ -2,11 +2,11 @@
    Pulldown menu code
 
    Copyright (C) 1994, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2007, 2009, 2011, 2012
+   2007, 2009, 2011, 2012, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Andrew Borodin <aborodin@vmail.ru>, 2012
+   Andrew Borodin <aborodin@vmail.ru>, 2012, 2013
 
    This file is part of the Midnight Commander.
 
@@ -652,6 +652,13 @@ menubar_event (Gpm_Event * event, void *data)
 
     if (!menubar->is_dropped)
     {
+        if (local.y > 1)
+        {
+            /* mouse click below menubar -- close menu and send focus to widget under mouse */
+            menubar_finish (menubar);
+            return MOU_UNHANDLED;
+        }
+
         menubar->previous_widget = dlg_get_current_widget_id (w->owner);
         menubar->is_active = TRUE;
         menubar->is_dropped = TRUE;
