@@ -630,6 +630,8 @@ tests/src/Makefile
 tests/src/filemanager/Makefile
 tests/src/editor/Makefile
 tests/src/editor/test-data.txt
+tests/src/vfs/Makefile
+tests/src/vfs/smbfs/Makefile
 ])
 fi
 

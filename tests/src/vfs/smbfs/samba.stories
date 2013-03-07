@@ -1,0 +1,165 @@
+Narrative:
+On order to connect to the Samba's shares
+as user
+I want to enter a SMB-address and get access to Samba's resources
+and Samba addresses should be like: smb://[domain;][username[:password]@][server[/share[/path]]]
+
+Background:
+Given: I have installed and properly configured local (or remote) Samba-server
+   And NetBios name of Samba-server is MCTESTSERVER
+   And Samba group is WORKGROUP
+   And parameter in smb.conf sould be: security = share
+   And I have a shared resource named //MCTESTSERVER/SHARE
+   And the //MCTESTSERVER/SHARE shared resource should be allowed without any credentials
+   And the //MCTESTSERVER/SHARE shared resource should contain zero-length files and directories:
+| type | path                      | rights |
+| dir  | test-dir                  | 0777   |
+| dir  | test-ro-dir               | 0555   |
+| file | test-file.txt             | 0666   |
+| file | test-dir/test-ro-file.txt | 0444   |
+   And I have a shared resource named //MCTESTSERVER/RESTRICTED_SHARE
+   And //MCTESTSERVER/RESTRICTED_SHARE should be allowed only by user: smbUser with password: smbPass
+   And //MCTESTSERVER/RESTRICTED_SHARE should contain zero-length files and directories:
+| type | path                      | rights |
+| dir  | test-dir                  | 0777   |
+| dir  | test-ro-dir               | 0555   |
+| file | test-file.txt             | 0666   |
+| file | test-dir/test-ro-file.txt | 0444   |
+
+#------------------------------------------------------------------------------------------------------
+
+Scenario: 1. No any login/password was specified in SMB-address while accessing to public resource.
+Given: I see a filepanels
+   And I see command line under panels
+When: I type command: cd smb://MCTESTSERVER/SHARE
+Then: Should be visible the content of shared resource:
+| type | path          | rights |
+| dir  | ..            | 0555   |
+| dir  | test-dir      | 0777   |
+| dir  | test-ro-dir   | 0555   |
+| file | test-file.txt | 0666   |
+
+#------------------------------------------------------------------------------------------------------
+
+Scenario: 2. No any login/password was specified in SMB-address while accessing to restricted resource.
+Given: I see a filepanels
+   And I see command line under panels
+When: I type command: cd smb://MCTESTSERVER/RESTRICTED_SHARE
+Then: Should be raised a dialog where I should enter a login and password
+
+#------------------------------------------------------------------------------------------------------
+
+Scenario: 3. SMB-address contain login only.
+Given: I see a filepanels
+   And I see command line under panels
+When: I type command: cd smb://smbUser@MCTESTSERVER/RESTRICTED_SHARE
+Then: Should be raised a dialog where I should enter a login/password
+  And the login field in dialog should contain: smbUser
+
+#------------------------------------------------------------------------------------------------------
+
+Scenario: 4. SMB-address contain login/password.
+Given: I see a filepanels
+   And I see command line under panels
+When: I type command: cd smb://smbUser:smbPass@MCTESTSERVER/RESTRICTED_SHARE
+Then: Should be visible the content of shared resource:
+| type | path          | rights |
+| dir  | ..            | 0555   |
+| dir  | test-dir      | 0777   |
+| dir  | test-ro-dir   | 0555   |
+| file | test-file.txt | 0666   |
+
+#------------------------------------------------------------------------------------------------------
+
+Scenario: 5. SMB-address contain login/password and server name only.
+Given: I see a filepanels
+   And I see command line under panels
+When: I type command: cd smb://MCTESTSERVER
+Then: Should be visible the list of shared resources on the host:
+| type | path             | rights |
+| dir  | ..               | 0555   |
+| dir  | SHARE            | 0555   |
+| dir  | RESTRICTED_SHARE | 0555   |
+
+#------------------------------------------------------------------------------------------------------
+
+Scenario: 6. Show list of Samba servers.
+Given: I see a filepanels
+  And I see command line under panels
+When: I type command: cd smb://
+Then: Should be visible the list of Samba servers. The list should contain:
+| type | path         | rights |
+| dir  | ..           | 0555   |
+| dir  | WORKGROUP    | 0555   |
+| dir  | MCTESTSERVER | 0555   |
+
+#------------------------------------------------------------------------------------------------------
+
+Scenario: 7. Show list of Samba servers in specified domain or group.
+Given: I see a filepanels
+  And I see command line under panels
+When: I type command: cd smb://WORKGROUP;
+Then: Should be visible the list of Samba servers. The list should contain:
+| type | path         | rights |
+| dir  | ..           | 0555   |
+| dir  | MCTESTSERVER | 0555   |
+
+#------------------------------------------------------------------------------------------------------
+
+Scenario: 8. Invalid login or password while accessing to restricted resource.
+Given: I see a filepanels
+   And I see command line under panels
+   And I type command: cd smb://MCTESTSERVER/RESTRICTED_SHARE
+   And A dialog raised with login/password fields
+When: I enter an invalid login: <sambaLogin> and password <sambaPassword>
+Then: Should be raised an error dialog with message: smbfs: Login incorrect for user <sambaLogin>
+
+Example:
+| sambaLogin | sambaPassword |
+| smbbbbUser | smbPass       |
+| smbbUser   | smbbbbPass    |
+
+#------------------------------------------------------------------------------------------------------
+
+Scenario: 9. Good login and password while accessing to restricted resource.
+Given: I see a filepanels
+   And I see command line under panels
+   And I type command: cd smb://MCTESTSERVER/RESTRICTED_SHARE
+   And A dialog raised with login/password fields
+When: I enter an invalid login: smbbUser and password smbPass
+Then: Should be visible the content of shared resource:
+| type | path          | rights |
+| dir  | ..            | 0555   |
+| dir  | test-dir      | 0777   |
+| dir  | test-ro-dir   | 0555   |
+| file | test-file.txt | 0666   |
+
+#------------------------------------------------------------------------------------------------------
+
+Scenario: 10. Open shared resource with path
+Given: I see a filepanels
+   And I see command line under panels
+When: I type command: cd smb://MCTESTSERVER/SHARE/test-dir
+Then: Should be visible the content of shared resource:
+| type | path             | rights |
+| dir  | ..               | 0555   |
+| file | test-ro-file.txt | 0444   |
+
+#------------------------------------------------------------------------------------------------------
+
+Scenario: 11. Copy file to the r/o share
+Given: I see a filepanels
+   And One of panels pointed to the smb://MCTESTSERVER/SHARE/test-ro-dir
+When: I try to copy any file to the share
+Then: Should be raised an error dialog with message: Access denied
+
+#------------------------------------------------------------------------------------------------------
+
+Scenario: 12. Copy file to the r/w share
+Given: I see a filepanels
+   And One of panels pointed to the smb://MCTESTSERVER/SHARE/test-dir
+When: I try to copy any file to the share
+Then: The file should be copied
+
+#------------------------------------------------------------------------------------------------------
+
