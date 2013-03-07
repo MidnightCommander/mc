@@ -1,11 +1,11 @@
-/*
-   Init VFS plugins.
+/* Virtual File System: Samba file system.
+   The VFS subclass functions
 
-   Copyright (C) 2011
+   Copyright (C) 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2011.
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -23,60 +23,15 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-/** \file
- *  \brief This is a template file (here goes brief description).
- *  \author Author1
- *  \author Author2
- *  \date 20xx
- *
- *  Detailed description.
- */
-
 #include <config.h>
 
 #include "lib/global.h"
 
-#include "local/local.h"
-
-#ifdef ENABLE_VFS_CPIO
-#include "cpio/cpio.h"
-#endif
-
-#ifdef ENABLE_VFS_EXTFS
-#include "extfs/extfs.h"
-#endif
-
-#ifdef ENABLE_VFS_FISH
-#include "fish/fish.h"
-#endif
-
-#ifdef ENABLE_VFS_FTP
-#include "ftpfs/ftpfs.h"
-#endif
-
-#ifdef ENABLE_VFS_SFTP
-#include "sftpfs/init.h"
-#endif
-
-#ifdef ENABLE_VFS_SMB
-#include "smbfs/init.h"
-#endif
-
-#ifdef ENABLE_VFS_SFS
-#include "sfs/sfs.h"
-#endif
-
-#ifdef ENABLE_VFS_TAR
-#include "tar/tar.h"
-#endif
-
-#ifdef ENABLE_VFS_UNDELFS
-#include "undelfs/undelfs.h"
-#endif
-
-#include "plugins_init.h"
+#include "internal.h"
 
 /*** global variables ****************************************************************************/
+
+struct vfs_s_subclass smbfs_subclass;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -90,41 +45,27 @@
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Initialization of VFS subclass structure.
+ *
+ * @return VFS subclass structure.
+ */
 
 void
-vfs_plugins_init (void)
+smbfs_init_subclass (void)
 {
-    /* localfs needs to be the first one */
-    init_localfs ();
+    memset (&smbfs_subclass, 0, sizeof (struct vfs_s_subclass));
+    smbfs_subclass.flags = VFS_S_REMOTE;
+}
 
-#ifdef ENABLE_VFS_CPIO
-    init_cpiofs ();
-#endif /* ENABLE_VFS_CPIO */
-#ifdef ENABLE_VFS_TAR
-    init_tarfs ();
-#endif /* ENABLE_VFS_TAR */
-#ifdef ENABLE_VFS_SFS
-    init_sfs ();
-#endif /* ENABLE_VFS_SFS */
-#ifdef ENABLE_VFS_EXTFS
-    init_extfs ();
-#endif /* ENABLE_VFS_EXTFS */
-#ifdef ENABLE_VFS_UNDELFS
-    init_undelfs ();
-#endif /* ENABLE_VFS_UNDELFS */
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Initialization of VFS subclass callbacks.
+ */
 
-#ifdef ENABLE_VFS_FTP
-    init_ftpfs ();
-#endif /* ENABLE_VFS_FTP */
-#ifdef ENABLE_VFS_SFTP
-    init_sftpfs ();
-#endif /* ENABLE_VFS_SFTP */
-#ifdef ENABLE_VFS_SMB
-    init_smbfs ();
-#endif /* ENABLE_VFS_SMB */
-#ifdef ENABLE_VFS_FISH
-    init_fish ();
-#endif /* ENABLE_VFS_FISH */
+void
+smbfs_init_subclass_callbacks (void)
+{
 
 }
 
