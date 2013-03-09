@@ -899,7 +899,7 @@ init_subshell (void)
         break;
     case FISH:
         g_snprintf (precmd, sizeof (precmd),
-                    "function fish_prompt ; pwd>&%d;kill -STOP %%self; end\n",
+                    " function __mc_after_fish_prompt --on-event fish_prompt ; pwd>&%d;kill -STOP %%self; end\n",
                     subshell_pipe[WRITE]);
         break;
 
