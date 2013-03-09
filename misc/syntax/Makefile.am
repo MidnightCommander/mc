@@ -35,10 +35,12 @@ SYNTAXFILES =			\
 	idl.syntax		\
 	ini.syntax		\
 	j.syntax		\
+	jal.syntax		\
 	java.syntax		\
 	js.syntax		\
 	latex.syntax		\
 	lisp.syntax		\
+	lkr.syntax		\
 	lsm.syntax		\
 	lua.syntax		\
 	m4.syntax		\

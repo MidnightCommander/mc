@@ -250,5 +250,11 @@ include yxx.syntax
 file ..\*\\.dlink\\.sw$ D-Link\sSwitch\sCommands
 include dlink.syntax
 
+file ..\*\\.([jJ][aA][lL][tT]?)$ Jal\ssource
+include jal.syntax
+
+file ..\*\\.([lL][kK][rR])$ PIC\slinker\sscript\sfile
+include lkr.syntax
+
 file .\* unknown
 include unknown.syntax

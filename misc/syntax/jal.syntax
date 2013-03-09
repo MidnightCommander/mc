@@ -1,0 +1,240 @@
+#
+# Syntax rules for the JAL programming language.
+#
+
+caseinsensitive
+
+context default
+
+    #=========================
+    # Variable types
+    #
+    keyword whole bit blue white
+    keyword whole byte blue white
+    keyword whole sbyte blue white
+    keyword whole word blue white
+    keyword whole sword blue white
+    keyword whole dword blue white
+    keyword whole sdword blue white
+
+    #=========================
+    # Predefined constants
+    #
+    keyword whole false black green
+    keyword whole true black green
+    keyword whole off black green
+    keyword whole on black green
+    keyword whole low black green
+    keyword whole high black green
+
+    #=========================
+    # Keywords
+    #
+    keyword whole alias yellow
+    keyword whole at yellow
+    keyword whole begin yellow
+    keyword whole const yellow
+    keyword whole count yellow
+    keyword whole defined yellow
+    keyword whole end yellow
+    keyword whole exit yellow
+    keyword whole function yellow
+    keyword whole get yellow
+    keyword whole in yellow
+    keyword whole is yellow
+    keyword whole local yellow
+    keyword whole of yellow
+    keyword whole out yellow
+    keyword whole put yellow
+    keyword whole procedure yellow
+    keyword whole record yellow
+    keyword whole repeat yellow
+    keyword whole return yellow
+    keyword whole then yellow
+    keyword whole until yellow
+    keyword whole var yellow
+
+    keyword whole volatile blue white
+
+    keyword whole asm brightred
+    keyword whole assembler brightred
+    keyword whole assert brightred
+    keyword whole include brightred
+    keyword whole task brightred
+
+    #=========================
+    # Pragma keywords
+    #
+    keyword whole pragma\{\t\s\}\[\t\s\]bootloader\{\t\s\}\[\t\s\]bloader brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]bootloader\{\t\s\}\[\t\s\]long_start brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]bootloader\{\t\s\}\[\t\s\]loader18 brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]bootloader\{\t\s\}\[\t\s\]rickpic brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]clear\{\t\s\}\[\t\s\]no brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]clear\{\t\s\}\[\t\s\]yes brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]code brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]data brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]debug\{\t\s\}\[\t\s\]codegen\{\t\s\}\[\t\s\]no brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]debug\{\t\s\}\[\t\s\]codegen\{\t\s\}\[\t\s\]yes brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]debug\{\t\s\}\[\t\s\]pcode\{\t\s\}\[\t\s\]no brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]debug\{\t\s\}\[\t\s\]pcode\{\t\s\}\[\t\s\]yes brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]eedata brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]eeprom brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]error brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]frame brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]fuse_def brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]id brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]iddata brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]inline brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]interrupt\{\t\s\}\[\t\s\]fast brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]interrupt\{\t\s\}\[\t\s\]normal brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]interrupt\{\t\s\}\[\t\s\]raw brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]interrupt brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]jump_table brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]keep\{\t\s\}\[\t\s\]bank brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]keep\{\t\s\}\[\t\s\]page brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]keep brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]name brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]nostack brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]expr_reduce\{\t\s\}\[\t\s\]no brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]expr_reduce\{\t\s\}\[\t\s\]yes brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]cexpr_reduce\{\t\s\}\[\t\s\]no brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]cexpr_reduce\{\t\s\}\[\t\s\]yes brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]const_detect\{\t\s\}\[\t\s\]no brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]const_detect\{\t\s\}\[\t\s\]yes brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]load_reduce\{\t\s\}\[\t\s\]no brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]load_reduce\{\t\s\}\[\t\s\]yes brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]temp_reduce\{\t\s\}\[\t\s\]no brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]temp_reduce\{\t\s\}\[\t\s\]yes brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]variable_frame\{\t\s\}\[\t\s\]no brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]variable_frame\{\t\s\}\[\t\s\]yes brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]variable_reduce\{\t\s\}\[\t\s\]no brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]opt\{\t\s\}\[\t\s\]variable_reduce\{\t\s\}\[\t\s\]yes brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]shared brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]size brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]speed brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]stack brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]target\{\t\s\}\[\t\s\]bank brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]target\{\t\s\}\[\t\s\]clock brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]target\{\t\s\}\[\t\s\]chip brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]target\{\t\s\}\[\t\s\]cpu brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]target\{\t\s\}\[\t\s\]fuses brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]target\{\t\s\}\[\t\s\]fuses_def brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]target\{\t\s\}\[\t\s\]page brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]target brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]task brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]all\{\t\s\}\[\t\s\]no brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]all\{\t\s\}\[\t\s\]yes brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]backend\{\t\s\}\[\t\s\]no brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]backend\{\t\s\}\[\t\s\]yes brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]conversion\{\t\s\}\[\t\s\]no brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]conversion\{\t\s\}\[\t\s\]yes brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]directives\{\t\s\}\[\t\s\]no brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]directives\{\t\s\}\[\t\s\]yes brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]misc\{\t\s\}\[\t\s\]no brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]misc\{\t\s\}\[\t\s\]yes brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]range\{\t\s\}\[\t\s\]no brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]range\{\t\s\}\[\t\s\]yes brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]stack_overflow\{\t\s\}\[\t\s\]no brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]stack_overflow\{\t\s\}\[\t\s\]yes brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]truncate\{\t\s\}\[\t\s\]no brightred
+    keyword whole pragma\{\t\s\}\[\t\s\]warn\{\t\s\}\[\t\s\]truncate\{\t\s\}\[\t\s\]yes brightred
+
+    keyword whole block brightcyan
+    keyword whole case brightcyan
+    keyword whole else brightcyan
+    keyword whole elsif brightcyan
+    keyword whole for brightcyan
+    keyword whole forever brightcyan
+    keyword whole if brightcyan
+    keyword whole loop brightcyan
+    keyword whole otherwise brightcyan
+    keyword whole start brightcyan
+    keyword whole suspend brightcyan
+    keyword whole using brightcyan
+    keyword whole while brightcyan
+
+    keyword whole _debug yellow
+    keyword whole _error yellow
+    keyword whole _warn yellow
+
+    keyword whole _code_size brightred
+    keyword whole _fuses brightred
+    keyword whole _fuses_base brightred
+    keyword whole target_chip brightred
+    keyword whole target_cpu brightred
+    keyword whole target_clock brightred
+
+    keyword whole _usec_delay yellow
+
+wholechars 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_
+
+    #=========================
+    # Numbers
+    #
+    keyword whole 0b\{01_\}\[01_\] brightgreen
+    keyword whole 0q\{0123456_\}\[0123456_\] brightgreen
+    keyword whole \[-\]\{0123456789_\}\[0123456789_\] brightgreen
+    keyword whole 0x\{0123456789ABCDEFabcdef_\}\[0123456789ABCDEFabcdef_\] brightgreen
+
+    #=========================
+    # Comments
+    #
+    keyword --*\n white magenta
+    keyword ;*\n white magenta
+
+    #=========================
+    # Special symbols
+    #
+    keyword - yellow
+    keyword \* yellow
+    keyword / yellow
+    keyword % yellow
+    keyword \+ yellow
+    keyword << yellow
+    keyword >> yellow
+
+    keyword ~ brightmagenta
+    keyword !! brightmagenta
+    keyword & brightmagenta
+    keyword | brightmagenta
+    keyword ^ brightmagenta
+    keyword ' brightmagenta
+
+    keyword : brightred
+    keyword != brightred
+    keyword == brightred
+    keyword <= brightred
+    keyword >= brightred
+    keyword < brightred
+    keyword > brightred
+
+    keyword = yellow
+    keyword ! brightmagenta
+
+    #=========================
+    # Separators
+    #
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword [ brightcyan
+    keyword ] brightcyan
+    keyword { brightcyan
+    keyword } brightcyan
+    keyword , brightcyan
+    keyword . brightcyan
+
+    #=========================
+    # Assembler lines
+    #
+context exclusive asm\{\t\s\}\[\t\s\] \n blue cyan
+
+    #=========================
+    # Strings
+    #
+context " " black green
+    spellcheck
+    keyword \\" red
+    keyword \\\\ red
+    keyword \\\{abfnrtv?\} red
+    keyword \\0\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\} red
+    keyword \\\x\{0123456789ABCDEFabcdef\}\{0123456789ABCDEFabcdef\} red

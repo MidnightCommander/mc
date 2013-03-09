@@ -1,0 +1,76 @@
+# Syntax rules for the gputils .lkr files.
+
+context default
+
+    #=========================
+    # Predefined constants
+    #
+    keyword whole _CRUNTIME black green
+    keyword whole _DEBUG black green
+    keyword whole _DEBUGCODESTART black green
+    keyword whole _DEBUGCODELEN black green
+    keyword whole _DEBUGDATASTART black green
+    keyword whole _DEBUGDATALEN black green
+    keyword whole _EXTENDEDMODE black green
+
+    #=========================
+    # Keywords
+    #
+    keyword whole LIBPATH brightgreen
+    keyword whole LKRPATH brightgreen
+    keyword whole FILES brightgreen
+
+    keyword whole #DEFINE brightred
+    keyword whole #IFDEF brightred
+    keyword whole #ELSE brightred
+    keyword whole #FI brightred
+
+    keyword whole ACCESSBANK yellow
+    keyword whole CODEPAGE yellow
+    keyword whole DATABANK yellow
+    keyword whole LINEARMEM yellow
+    keyword whole PROTECTED yellow
+    keyword whole RESERVED yellow
+    keyword whole SECTION yellow
+    keyword whole SHAREBANK yellow
+    keyword whole SHADOW yellow
+    keyword whole STACK yellow
+
+    keyword whole END brightmagenta
+    keyword whole NAME brightmagenta
+    keyword whole SIZE brightmagenta
+    keyword whole START brightmagenta
+
+    keyword whole RAM brown
+    keyword whole ROM brown
+
+wholechars 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_
+
+    #=========================
+    # Numbers
+    #
+    keyword whole 0b\{01_\}\[01_\] brightgreen
+    keyword whole 0q\{0123456_\}\[0123456_\] brightgreen
+    keyword whole \[-\]\{0123456789_\}\[0123456789_\] brightgreen
+    keyword whole 0x\{0123456789ABCDEFabcdef_\}\[0123456789ABCDEFabcdef_\] brightgreen
+
+    #=========================
+    # Comments
+    #
+    keyword //*\n white magenta
+
+    #=========================
+    # Special symbols
+    #
+    keyword - brightcyan
+    keyword \* brightcyan
+    keyword / brightcyan
+    keyword % brightcyan
+    keyword \+ brightcyan
+    keyword << brightcyan
+    keyword >> brightcyan
+    keyword = brightcyan
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword . brightcyan
+    keyword : brightcyan
