@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-24 11:20+0400\n"
+"POT-Creation-Date: 2013-03-09 15:45+0400\n"
 "PO-Revision-Date: 2012-11-13 02:12+0100\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -1597,16 +1597,16 @@ msgstr ""
 "eliminata la directory in questione o vi si è entrati \n"
 "usando il comando \"su\"?"
 
+#, c-format
+msgid "Cannot fetch a local copy of %s"
+msgstr "Impossibile ricevere una copia locale di %s"
+
 msgid "The shell is already running a command"
 msgstr "La shell sta già eseguendo un comando"
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Premi `exit' per tornare a Midnight Commander"
-
-#, c-format
-msgid "Cannot fetch a local copy of %s"
-msgstr "Impossibile ricevere una copia locale di %s"
 
 msgid "Set &all"
 msgstr "Im. &tut."
@@ -1656,6 +1656,163 @@ msgstr "Attivo "
 
 msgid "Stopped"
 msgstr "Sospeso "
+
+msgid "&Never"
+msgstr "Mai (&J)"
+
+msgid "On dum&b terminals"
+msgstr "Su terminali stupidi (&Q)"
+
+msgid "Alwa&ys"
+msgstr "Sempre (&W)"
+
+#, fuzzy
+msgid "File operations"
+msgstr "Opzioni operazioni sui file"
+
+msgid "&Verbose operation"
+msgstr "Operazioni &prolisse"
+
+msgid "Compute tota&ls"
+msgstr "Calcola i &totali"
+
+msgid "Classic pro&gressbar"
+msgstr "Barra pro&gressiva classica"
+
+msgid "Mkdi&r autoname"
+msgstr "Nomi automatici m&kdir"
+
+#, fuzzy
+msgid "&Preallocate space"
+msgstr "&Spazio preallocato"
+
+msgid "Esc key mode"
+msgstr "Modalità tasto esc"
+
+msgid "S&ingle press"
+msgstr "Pressione s&ingola"
+
+msgid "Timeout:"
+msgstr "Timeout:"
+
+msgid "Pause after run"
+msgstr " Pausa dopo l'esecuzione"
+
+msgid "Use internal edi&t"
+msgstr "Usa &editor interno"
+
+msgid "Use internal vie&w"
+msgstr "Usa &visualizzatore interno"
+
+#, fuzzy
+msgid "A&sk new file name"
+msgstr "Inserire nome file:"
+
+msgid "Auto m&enus"
+msgstr "&Menu automatici"
+
+msgid "&Drop down menus"
+msgstr "&Rilascia menu a cascata"
+
+#, fuzzy
+msgid "S&hell patterns"
+msgstr "Modelli della s&hell"
+
+msgid "Co&mplete: show all"
+msgstr "Completa: visuali&zza tutto"
+
+msgid "Rotating d&ash"
+msgstr "&Barre che girano"
+
+msgid "Cd follows lin&ks"
+msgstr "Cd seg&ue i collegamenti"
+
+msgid "Sa&fe delete"
+msgstr "Cance&llazione sicura"
+
+msgid "A&uto save setup"
+msgstr "Autosalva &configurazione"
+
+msgid "Configure options"
+msgstr "Configura opzioni"
+
+msgid "Case &insensitive"
+msgstr "Non distinguere le ma&iuscole"
+
+msgid "Use panel sort mo&de"
+msgstr "Mo&dalità ordinamento pannelli "
+
+msgid "Show mi&ni-status"
+msgstr "Mostra mi&ni stato"
+
+msgid "Use SI si&ze units"
+msgstr "Usa le &unità SI"
+
+msgid "Mi&x all files"
+msgstr "Mes&cola tutti i file"
+
+msgid "Show &backup files"
+msgstr "Mostra i file di &backup"
+
+msgid "Show &hidden files"
+msgstr "Mostra i file &nascosti"
+
+msgid "&Fast dir reload"
+msgstr "Aggiornam. rapido director&y"
+
+msgid "Ma&rk moves down"
+msgstr "Cu&rsore in basso selezionando"
+
+msgid "Re&verse files only"
+msgstr "Solo file in&versi"
+
+msgid "Simple s&wap"
+msgstr "Semplica scambio"
+
+msgid "A&uto save panels setup"
+msgstr "Autosalva config. pannel&li"
+
+msgid "Navigation"
+msgstr "Navigazione"
+
+msgid "L&ynx-like motion"
+msgstr "Navigazione stile Lyn&x"
+
+msgid "Pa&ge scrolling"
+msgstr "Scorrimento pa&gine"
+
+msgid "&Mouse page scrolling"
+msgstr "Scorrimento pagine &mouse"
+
+msgid "File highlight"
+msgstr "Evidenziazione file"
+
+msgid "File &types"
+msgstr "&Tipo di file"
+
+msgid "&Permissions"
+msgstr "&Permessi"
+
+msgid "Quick search"
+msgstr "Ricerca rapida"
+
+msgid "Panel options"
+msgstr "Opzioni pannello"
+
+msgid "Information"
+msgstr "Informazioni"
+
+msgid ""
+"Using the fast reload option may not reflect the exact\n"
+"directory contents. In this case you'll need to do a\n"
+"manual reload of the directory. See the man page for\n"
+"the details."
+msgstr ""
+"Usando l'opzione di aggiornamento rapido potrebbe causare\n"
+"la visualizzazione di contenuti della directory non reali.\n"
+"In tal caso, usare il comando di ricarica manuale per\n"
+"forzare l'aggiornamento della visualizzazione.\n"
+"Vedere le pagine man per i dettagli."
 
 msgid "&Full file list"
 msgstr "Lista &completa"
@@ -1969,6 +2126,10 @@ msgstr "Vista filtrata"
 
 msgid "Filter command and arguments:"
 msgstr "Comando e argomenti del filtro:"
+
+#, fuzzy
+msgid "Edit file"
+msgstr "Modifica i file"
 
 msgid "Create a new Directory"
 msgstr "Crea una nuova directory"
@@ -2499,6 +2660,12 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "Scansione directory"
 
+#, c-format
+msgid ""
+"%s\n"
+"Directories: %zd, total size: %s"
+msgstr ""
+
 msgid "Cannot operate on \"..\"!"
 msgstr "Impossibile operare su \"..\"!"
 
@@ -2803,9 +2970,6 @@ msgstr "Etichetta per `%s':"
 
 msgid "Add to hotlist"
 msgstr "Aggiungi alle favorite"
-
-msgid "Information"
-msgstr "Informazioni"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -3136,154 +3300,6 @@ msgstr "CreDir"
 
 msgid "Memory exhausted!"
 msgstr "Memoria esaurita!"
-
-msgid "&Never"
-msgstr "Mai (&J)"
-
-msgid "On dum&b terminals"
-msgstr "Su terminali stupidi (&Q)"
-
-msgid "Alwa&ys"
-msgstr "Sempre (&W)"
-
-#, fuzzy
-msgid "File operations"
-msgstr "Opzioni operazioni sui file"
-
-msgid "&Verbose operation"
-msgstr "Operazioni &prolisse"
-
-msgid "Compute tota&ls"
-msgstr "Calcola i &totali"
-
-msgid "Classic pro&gressbar"
-msgstr "Barra pro&gressiva classica"
-
-msgid "Mkdi&r autoname"
-msgstr "Nomi automatici m&kdir"
-
-msgid "Preallocate &space"
-msgstr "&Spazio preallocato"
-
-msgid "Esc key mode"
-msgstr "Modalità tasto esc"
-
-msgid "S&ingle press"
-msgstr "Pressione s&ingola"
-
-msgid "Timeout:"
-msgstr "Timeout:"
-
-msgid "Pause after run"
-msgstr " Pausa dopo l'esecuzione"
-
-msgid "Use internal edi&t"
-msgstr "Usa &editor interno"
-
-msgid "Use internal vie&w"
-msgstr "Usa &visualizzatore interno"
-
-msgid "Auto m&enus"
-msgstr "&Menu automatici"
-
-msgid "&Drop down menus"
-msgstr "&Rilascia menu a cascata"
-
-msgid "Shell &patterns"
-msgstr "Modelli della s&hell"
-
-msgid "Co&mplete: show all"
-msgstr "Completa: visuali&zza tutto"
-
-msgid "Rotating d&ash"
-msgstr "&Barre che girano"
-
-msgid "Cd follows lin&ks"
-msgstr "Cd seg&ue i collegamenti"
-
-msgid "Sa&fe delete"
-msgstr "Cance&llazione sicura"
-
-msgid "A&uto save setup"
-msgstr "Autosalva &configurazione"
-
-msgid "Configure options"
-msgstr "Configura opzioni"
-
-msgid "Case &insensitive"
-msgstr "Non distinguere le ma&iuscole"
-
-msgid "Use panel sort mo&de"
-msgstr "Mo&dalità ordinamento pannelli "
-
-msgid "Show mi&ni-status"
-msgstr "Mostra mi&ni stato"
-
-msgid "Use SI si&ze units"
-msgstr "Usa le &unità SI"
-
-msgid "Mi&x all files"
-msgstr "Mes&cola tutti i file"
-
-msgid "Show &backup files"
-msgstr "Mostra i file di &backup"
-
-msgid "Show &hidden files"
-msgstr "Mostra i file &nascosti"
-
-msgid "&Fast dir reload"
-msgstr "Aggiornam. rapido director&y"
-
-msgid "Ma&rk moves down"
-msgstr "Cu&rsore in basso selezionando"
-
-msgid "Re&verse files only"
-msgstr "Solo file in&versi"
-
-msgid "Simple s&wap"
-msgstr "Semplica scambio"
-
-msgid "A&uto save panels setup"
-msgstr "Autosalva config. pannel&li"
-
-msgid "Navigation"
-msgstr "Navigazione"
-
-msgid "L&ynx-like motion"
-msgstr "Navigazione stile Lyn&x"
-
-msgid "Pa&ge scrolling"
-msgstr "Scorrimento pa&gine"
-
-msgid "&Mouse page scrolling"
-msgstr "Scorrimento pagine &mouse"
-
-msgid "File highlight"
-msgstr "Evidenziazione file"
-
-msgid "File &types"
-msgstr "&Tipo di file"
-
-msgid "&Permissions"
-msgstr "&Permessi"
-
-msgid "Quick search"
-msgstr "Ricerca rapida"
-
-msgid "Panel options"
-msgstr "Opzioni pannello"
-
-msgid ""
-"Using the fast reload option may not reflect the exact\n"
-"directory contents. In this case you'll need to do a\n"
-"manual reload of the directory. See the man page for\n"
-"the details."
-msgstr ""
-"Usando l'opzione di aggiornamento rapido potrebbe causare\n"
-"la visualizzazione di contenuti della directory non reali.\n"
-"In tal caso, usare il comando di ricarica manuale per\n"
-"forzare l'aggiornamento della visualizzazione.\n"
-"Vedere le pagine man per i dettagli."
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -4309,6 +4325,10 @@ msgstr "Ricerca conclusa"
 
 msgid "Continue from beginning?"
 msgstr "Continuare dall'inizio?"
+
+#, fuzzy
+msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+msgstr "Impossibile ricevere una copia locale di %s"
 
 #~ msgid ""
 #~ "Copyright (C) 1996-2012 the Free Software Foundation\n"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"POT-Creation-Date: 2013-03-09 15:45+0400\n"
 "PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/projects/p/mc/language/ko/)\n"
@@ -1509,16 +1509,16 @@ msgid ""
 "extra access permissions with the \"su\" command?"
 msgstr ""
 
+#, c-format
+msgid "Cannot fetch a local copy of %s"
+msgstr ""
+
 msgid "The shell is already running a command"
 msgstr ""
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "미드나잇 코맨더로 돌아가려면 'exit'을 입력하십시오"
-
-#, c-format
-msgid "Cannot fetch a local copy of %s"
-msgstr ""
 
 msgid "Set &all"
 msgstr "모두 설정(&A)"
@@ -1564,6 +1564,156 @@ msgstr ""
 
 msgid "Stopped"
 msgstr "멈춤"
+
+msgid "&Never"
+msgstr "절대(&N)"
+
+msgid "On dum&b terminals"
+msgstr ""
+
+msgid "Alwa&ys"
+msgstr "항상(&Y)"
+
+msgid "File operations"
+msgstr ""
+
+msgid "&Verbose operation"
+msgstr "동작할 때 말을 많이(&V)"
+
+msgid "Compute tota&ls"
+msgstr ""
+
+msgid "Classic pro&gressbar"
+msgstr ""
+
+msgid "Mkdi&r autoname"
+msgstr ""
+
+#, fuzzy
+msgid "&Preallocate space"
+msgstr "빈공간 모두 무시(&W)"
+
+msgid "Esc key mode"
+msgstr ""
+
+msgid "S&ingle press"
+msgstr ""
+
+msgid "Timeout:"
+msgstr ""
+
+msgid "Pause after run"
+msgstr ""
+
+msgid "Use internal edi&t"
+msgstr ""
+
+msgid "Use internal vie&w"
+msgstr ""
+
+msgid "A&sk new file name"
+msgstr ""
+
+msgid "Auto m&enus"
+msgstr ""
+
+msgid "&Drop down menus"
+msgstr "드롭다운 메뉴(&D)"
+
+#, fuzzy
+msgid "S&hell patterns"
+msgstr "명령해석기 패턴 사용(&U)"
+
+msgid "Co&mplete: show all"
+msgstr ""
+
+msgid "Rotating d&ash"
+msgstr ""
+
+msgid "Cd follows lin&ks"
+msgstr ""
+
+msgid "Sa&fe delete"
+msgstr ""
+
+msgid "A&uto save setup"
+msgstr ""
+
+msgid "Configure options"
+msgstr "환경설정 선택항목"
+
+msgid "Case &insensitive"
+msgstr ""
+
+msgid "Use panel sort mo&de"
+msgstr ""
+
+msgid "Show mi&ni-status"
+msgstr ""
+
+msgid "Use SI si&ze units"
+msgstr "SI 크기 단위 사용(&Z)"
+
+msgid "Mi&x all files"
+msgstr ""
+
+msgid "Show &backup files"
+msgstr ""
+
+msgid "Show &hidden files"
+msgstr ""
+
+msgid "&Fast dir reload"
+msgstr "디렉터리 빨리 다시읽기(&F)"
+
+msgid "Ma&rk moves down"
+msgstr ""
+
+msgid "Re&verse files only"
+msgstr ""
+
+msgid "Simple s&wap"
+msgstr ""
+
+msgid "A&uto save panels setup"
+msgstr ""
+
+msgid "Navigation"
+msgstr ""
+
+msgid "L&ynx-like motion"
+msgstr "Lynx같은 동작(&Y)"
+
+msgid "Pa&ge scrolling"
+msgstr ""
+
+msgid "&Mouse page scrolling"
+msgstr ""
+
+msgid "File highlight"
+msgstr ""
+
+msgid "File &types"
+msgstr ""
+
+msgid "&Permissions"
+msgstr ""
+
+msgid "Quick search"
+msgstr ""
+
+msgid "Panel options"
+msgstr ""
+
+msgid "Information"
+msgstr ""
+
+msgid ""
+"Using the fast reload option may not reflect the exact\n"
+"directory contents. In this case you'll need to do a\n"
+"manual reload of the directory. See the man page for\n"
+"the details."
+msgstr ""
 
 msgid "&Full file list"
 msgstr "전체 보여주기(&F)"
@@ -1855,6 +2005,10 @@ msgstr ""
 
 msgid "Filter command and arguments:"
 msgstr ""
+
+#, fuzzy
+msgid "Edit file"
+msgstr "메뉴 파일 편집(&M)"
 
 msgid "Create a new Directory"
 msgstr "새로운 디렉터리를 만들기"
@@ -2295,6 +2449,12 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "디렉터리 경로"
 
+#, c-format
+msgid ""
+"%s\n"
+"Directories: %zd, total size: %s"
+msgstr ""
+
 msgid "Cannot operate on \"..\"!"
 msgstr ""
 
@@ -2590,9 +2750,6 @@ msgid "Label for \"%s\":"
 msgstr "\"%s\"의 꼬리표:"
 
 msgid "Add to hotlist"
-msgstr ""
-
-msgid "Information"
 msgstr ""
 
 #, c-format
@@ -2919,148 +3076,6 @@ msgid "ButtonBar|Mkdir"
 msgstr "ButtonBar|디렉만들기"
 
 msgid "Memory exhausted!"
-msgstr ""
-
-msgid "&Never"
-msgstr "절대(&N)"
-
-msgid "On dum&b terminals"
-msgstr ""
-
-msgid "Alwa&ys"
-msgstr "항상(&Y)"
-
-msgid "File operations"
-msgstr ""
-
-msgid "&Verbose operation"
-msgstr "동작할 때 말을 많이(&V)"
-
-msgid "Compute tota&ls"
-msgstr ""
-
-msgid "Classic pro&gressbar"
-msgstr ""
-
-msgid "Mkdi&r autoname"
-msgstr ""
-
-msgid "Preallocate &space"
-msgstr ""
-
-msgid "Esc key mode"
-msgstr ""
-
-msgid "S&ingle press"
-msgstr ""
-
-msgid "Timeout:"
-msgstr ""
-
-msgid "Pause after run"
-msgstr ""
-
-msgid "Use internal edi&t"
-msgstr ""
-
-msgid "Use internal vie&w"
-msgstr ""
-
-msgid "Auto m&enus"
-msgstr ""
-
-msgid "&Drop down menus"
-msgstr "드롭다운 메뉴(&D)"
-
-msgid "Shell &patterns"
-msgstr ""
-
-msgid "Co&mplete: show all"
-msgstr ""
-
-msgid "Rotating d&ash"
-msgstr ""
-
-msgid "Cd follows lin&ks"
-msgstr ""
-
-msgid "Sa&fe delete"
-msgstr ""
-
-msgid "A&uto save setup"
-msgstr ""
-
-msgid "Configure options"
-msgstr "환경설정 선택항목"
-
-msgid "Case &insensitive"
-msgstr ""
-
-msgid "Use panel sort mo&de"
-msgstr ""
-
-msgid "Show mi&ni-status"
-msgstr ""
-
-msgid "Use SI si&ze units"
-msgstr "SI 크기 단위 사용(&Z)"
-
-msgid "Mi&x all files"
-msgstr ""
-
-msgid "Show &backup files"
-msgstr ""
-
-msgid "Show &hidden files"
-msgstr ""
-
-msgid "&Fast dir reload"
-msgstr "디렉터리 빨리 다시읽기(&F)"
-
-msgid "Ma&rk moves down"
-msgstr ""
-
-msgid "Re&verse files only"
-msgstr ""
-
-msgid "Simple s&wap"
-msgstr ""
-
-msgid "A&uto save panels setup"
-msgstr ""
-
-msgid "Navigation"
-msgstr ""
-
-msgid "L&ynx-like motion"
-msgstr "Lynx같은 동작(&Y)"
-
-msgid "Pa&ge scrolling"
-msgstr ""
-
-msgid "&Mouse page scrolling"
-msgstr ""
-
-msgid "File highlight"
-msgstr ""
-
-msgid "File &types"
-msgstr ""
-
-msgid "&Permissions"
-msgstr ""
-
-msgid "Quick search"
-msgstr ""
-
-msgid "Panel options"
-msgstr ""
-
-msgid ""
-"Using the fast reload option may not reflect the exact\n"
-"directory contents. In this case you'll need to do a\n"
-"manual reload of the directory. See the man page for\n"
-"the details."
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
@@ -4050,4 +4065,7 @@ msgid "Search done"
 msgstr "검색결과 없음"
 
 msgid "Continue from beginning?"
+msgstr ""
+
+msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""

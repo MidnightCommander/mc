@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"POT-Creation-Date: 2013-03-09 15:45+0400\n"
 "PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/mc/language/da/)\n"
@@ -1536,16 +1536,16 @@ msgstr ""
 "arbejdsmappe, eller givet dig selv ekstra\n"
 "adgangsrettigheder med kommandoen »su«?"
 
+#, c-format
+msgid "Cannot fetch a local copy of %s"
+msgstr "Kan ikke hente en lokal kopi af %s"
+
 msgid "The shell is already running a command"
 msgstr "Skallen kører allerede en kommando"
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Skriv »exit« for at returnere til Midnight Commander"
-
-#, c-format
-msgid "Cannot fetch a local copy of %s"
-msgstr "Kan ikke hente en lokal kopi af %s"
 
 msgid "Set &all"
 msgstr "&Sæt alle"
@@ -1595,6 +1595,161 @@ msgstr "Kører"
 
 msgid "Stopped"
 msgstr "Stoppet"
+
+msgid "&Never"
+msgstr "&Aldrig"
+
+msgid "On dum&b terminals"
+msgstr "På &dumme terminaler"
+
+msgid "Alwa&ys"
+msgstr "&Altid"
+
+msgid "File operations"
+msgstr ""
+
+msgid "&Verbose operation"
+msgstr "&Uddybende handling"
+
+msgid "Compute tota&ls"
+msgstr "Beregn &totaler"
+
+msgid "Classic pro&gressbar"
+msgstr "Klassisk &statuslinje"
+
+msgid "Mkdi&r autoname"
+msgstr "&Mkdir autonavngiving"
+
+#, fuzzy
+msgid "&Preallocate space"
+msgstr "Ignorer alle &blanktegn"
+
+msgid "Esc key mode"
+msgstr "Tilstand for Esc-tast"
+
+msgid "S&ingle press"
+msgstr "&Et tryk"
+
+msgid "Timeout:"
+msgstr "Tidsudløb:"
+
+msgid "Pause after run"
+msgstr "Pause efter kørsel"
+
+msgid "Use internal edi&t"
+msgstr "Brug intern &redigering"
+
+msgid "Use internal vie&w"
+msgstr "Brug intern &visning"
+
+#, fuzzy
+msgid "A&sk new file name"
+msgstr "Indtast filnavn:"
+
+msgid "Auto m&enus"
+msgstr "Automatiske &menuer"
+
+msgid "&Drop down menus"
+msgstr "&Rullegardinmenuer"
+
+#, fuzzy
+msgid "S&hell patterns"
+msgstr "&Skalmønstre"
+
+msgid "Co&mplete: show all"
+msgstr "&Færdig: Vis alle"
+
+msgid "Rotating d&ash"
+msgstr "Roterende &bindestreg"
+
+msgid "Cd follows lin&ks"
+msgstr "Cd følger &henvisninger"
+
+msgid "Sa&fe delete"
+msgstr "&Sikker sletning"
+
+msgid "A&uto save setup"
+msgstr "Opsætning for a&utomatisk gemning"
+
+msgid "Configure options"
+msgstr "Konfigurer indstillinger"
+
+msgid "Case &insensitive"
+msgstr "Er ikke &versalfølsom"
+
+msgid "Use panel sort mo&de"
+msgstr "Brug &panelsorteringstilstand"
+
+msgid "Show mi&ni-status"
+msgstr ""
+
+msgid "Use SI si&ze units"
+msgstr "Brug SI &størrelsesenheder"
+
+msgid "Mi&x all files"
+msgstr "&Miks alle filer"
+
+msgid "Show &backup files"
+msgstr "Vis &sikkerhedskopifiler"
+
+msgid "Show &hidden files"
+msgstr "Vis &skjulte filer"
+
+msgid "&Fast dir reload"
+msgstr "Hurtig &mappe-genindlæsning"
+
+msgid "Ma&rk moves down"
+msgstr "&Marker bevægelser ned"
+
+msgid "Re&verse files only"
+msgstr "Kun &omvendte filer"
+
+msgid "Simple s&wap"
+msgstr ""
+
+msgid "A&uto save panels setup"
+msgstr "&Panelopsætning for automatisk gemning"
+
+msgid "Navigation"
+msgstr "Navigation"
+
+msgid "L&ynx-like motion"
+msgstr "L&ynx-lignende navigation"
+
+msgid "Pa&ge scrolling"
+msgstr "&Siderulning"
+
+msgid "&Mouse page scrolling"
+msgstr "Siderulning med &mus"
+
+msgid "File highlight"
+msgstr "Filfremhævelse"
+
+msgid "File &types"
+msgstr "Fil&typer"
+
+msgid "&Permissions"
+msgstr "%Rettigheder"
+
+msgid "Quick search"
+msgstr "Hurtig søgning"
+
+msgid "Panel options"
+msgstr "Panelindstillinger"
+
+msgid "Information"
+msgstr "Information"
+
+msgid ""
+"Using the fast reload option may not reflect the exact\n"
+"directory contents. In this case you'll need to do a\n"
+"manual reload of the directory. See the man page for\n"
+"the details."
+msgstr ""
+"Brug af indstilligen hurtig genindlæsning vil ikke\n"
+"nødvendigvis afspejle mappeindholdet. Hvis du ønsker\n"
+"dette så foretag en manuel genindlæsning af mappen.\n"
+"Se manualsiden for detaljer."
 
 msgid "&Full file list"
 msgstr "&Fuld filliste"
@@ -1887,6 +2042,10 @@ msgstr "Filtreret visning"
 
 msgid "Filter command and arguments:"
 msgstr "Filterkommando og argumenter:"
+
+#, fuzzy
+msgid "Edit file"
+msgstr "Rediger &menufil"
 
 msgid "Create a new Directory"
 msgstr "Opret en ny mappe"
@@ -2407,6 +2566,12 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "Mappeskanning"
 
+#, c-format
+msgid ""
+"%s\n"
+"Directories: %zd, total size: %s"
+msgstr ""
+
 msgid "Cannot operate on \"..\"!"
 msgstr "Kan ikke fungere med »..«!"
 
@@ -2704,9 +2869,6 @@ msgstr "Etikette for »%s«:"
 
 msgid "Add to hotlist"
 msgstr "Tilføj til hotlist"
-
-msgid "Information"
-msgstr "Information"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -3035,152 +3197,6 @@ msgstr "Mkdir"
 
 msgid "Memory exhausted!"
 msgstr ""
-
-msgid "&Never"
-msgstr "&Aldrig"
-
-msgid "On dum&b terminals"
-msgstr "På &dumme terminaler"
-
-msgid "Alwa&ys"
-msgstr "&Altid"
-
-msgid "File operations"
-msgstr ""
-
-msgid "&Verbose operation"
-msgstr "&Uddybende handling"
-
-msgid "Compute tota&ls"
-msgstr "Beregn &totaler"
-
-msgid "Classic pro&gressbar"
-msgstr "Klassisk &statuslinje"
-
-msgid "Mkdi&r autoname"
-msgstr "&Mkdir autonavngiving"
-
-msgid "Preallocate &space"
-msgstr ""
-
-msgid "Esc key mode"
-msgstr "Tilstand for Esc-tast"
-
-msgid "S&ingle press"
-msgstr "&Et tryk"
-
-msgid "Timeout:"
-msgstr "Tidsudløb:"
-
-msgid "Pause after run"
-msgstr "Pause efter kørsel"
-
-msgid "Use internal edi&t"
-msgstr "Brug intern &redigering"
-
-msgid "Use internal vie&w"
-msgstr "Brug intern &visning"
-
-msgid "Auto m&enus"
-msgstr "Automatiske &menuer"
-
-msgid "&Drop down menus"
-msgstr "&Rullegardinmenuer"
-
-msgid "Shell &patterns"
-msgstr "&Skalmønstre"
-
-msgid "Co&mplete: show all"
-msgstr "&Færdig: Vis alle"
-
-msgid "Rotating d&ash"
-msgstr "Roterende &bindestreg"
-
-msgid "Cd follows lin&ks"
-msgstr "Cd følger &henvisninger"
-
-msgid "Sa&fe delete"
-msgstr "&Sikker sletning"
-
-msgid "A&uto save setup"
-msgstr "Opsætning for a&utomatisk gemning"
-
-msgid "Configure options"
-msgstr "Konfigurer indstillinger"
-
-msgid "Case &insensitive"
-msgstr "Er ikke &versalfølsom"
-
-msgid "Use panel sort mo&de"
-msgstr "Brug &panelsorteringstilstand"
-
-msgid "Show mi&ni-status"
-msgstr ""
-
-msgid "Use SI si&ze units"
-msgstr "Brug SI &størrelsesenheder"
-
-msgid "Mi&x all files"
-msgstr "&Miks alle filer"
-
-msgid "Show &backup files"
-msgstr "Vis &sikkerhedskopifiler"
-
-msgid "Show &hidden files"
-msgstr "Vis &skjulte filer"
-
-msgid "&Fast dir reload"
-msgstr "Hurtig &mappe-genindlæsning"
-
-msgid "Ma&rk moves down"
-msgstr "&Marker bevægelser ned"
-
-msgid "Re&verse files only"
-msgstr "Kun &omvendte filer"
-
-msgid "Simple s&wap"
-msgstr ""
-
-msgid "A&uto save panels setup"
-msgstr "&Panelopsætning for automatisk gemning"
-
-msgid "Navigation"
-msgstr "Navigation"
-
-msgid "L&ynx-like motion"
-msgstr "L&ynx-lignende navigation"
-
-msgid "Pa&ge scrolling"
-msgstr "&Siderulning"
-
-msgid "&Mouse page scrolling"
-msgstr "Siderulning med &mus"
-
-msgid "File highlight"
-msgstr "Filfremhævelse"
-
-msgid "File &types"
-msgstr "Fil&typer"
-
-msgid "&Permissions"
-msgstr "%Rettigheder"
-
-msgid "Quick search"
-msgstr "Hurtig søgning"
-
-msgid "Panel options"
-msgstr "Panelindstillinger"
-
-msgid ""
-"Using the fast reload option may not reflect the exact\n"
-"directory contents. In this case you'll need to do a\n"
-"manual reload of the directory. See the man page for\n"
-"the details."
-msgstr ""
-"Brug af indstilligen hurtig genindlæsning vil ikke\n"
-"nødvendigvis afspejle mappeindholdet. Hvis du ønsker\n"
-"dette så foretag en manuel genindlæsning af mappen.\n"
-"Se manualsiden for detaljer."
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -4194,3 +4210,7 @@ msgstr "Søgning færdig"
 
 msgid "Continue from beginning?"
 msgstr ""
+
+#, fuzzy
+msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+msgstr "Kan ikke hente en lokal kopi af %s"

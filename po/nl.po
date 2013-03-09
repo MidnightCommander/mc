@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"POT-Creation-Date: 2013-03-09 15:45+0400\n"
 "PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: bucovaina78 <wannessmet@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/projects/p/mc/language/nl/)\n"
@@ -1555,16 +1555,16 @@ msgstr ""
 "werkdirectory gewist, of uzelf extra toegangs-\n"
 "rechten geven met het \"su\" commando?"
 
+#, c-format
+msgid "Cannot fetch a local copy of %s"
+msgstr "Er kan geen lokale kopie van %s worden opgehaald"
+
 msgid "The shell is already running a command"
 msgstr "De shell voert al een opdracht uit"
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Type 'exit' om terug te keren naar MC"
-
-#, c-format
-msgid "Cannot fetch a local copy of %s"
-msgstr "Er kan geen lokale kopie van %s worden opgehaald"
 
 msgid "Set &all"
 msgstr "Zet &alles"
@@ -1614,6 +1614,162 @@ msgstr "Aan het draaien"
 
 msgid "Stopped"
 msgstr "Angehalten"
+
+msgid "&Never"
+msgstr "&Nooit"
+
+msgid "On dum&b terminals"
+msgstr "Op d&omme terminals"
+
+msgid "Alwa&ys"
+msgstr "Al&tijd"
+
+msgid "File operations"
+msgstr ""
+
+msgid "&Verbose operation"
+msgstr "Uitvoering met &weergave"
+
+msgid "Compute tota&ls"
+msgstr "Bereken tota&len"
+
+msgid "Classic pro&gressbar"
+msgstr "Klassieke pro&gressbar"
+
+msgid "Mkdi&r autoname"
+msgstr "Mkdi&r autonoemen"
+
+#, fuzzy
+msgid "&Preallocate space"
+msgstr "Prealloceer &ruimte"
+
+msgid "Esc key mode"
+msgstr "Esc-key modus"
+
+msgid "S&ingle press"
+msgstr "S&ingle press"
+
+msgid "Timeout:"
+msgstr "Timeout:"
+
+msgid "Pause after run"
+msgstr " Pauze na uitvoering"
+
+msgid "Use internal edi&t"
+msgstr "In&terne editor gebruiken"
+
+msgid "Use internal vie&w"
+msgstr "Gebruik in&terne weergave"
+
+#, fuzzy
+msgid "A&sk new file name"
+msgstr "Geef bestandsnaam:"
+
+msgid "Auto m&enus"
+msgstr "Autom&enus"
+
+msgid "&Drop down menus"
+msgstr "Neer&Klapmenu's"
+
+#, fuzzy
+msgid "S&hell patterns"
+msgstr "Shell&patronen"
+
+msgid "Co&mplete: show all"
+msgstr "Co&mpleet: Toon alles"
+
+msgid "Rotating d&ash"
+msgstr "Roterend stree&pje"
+
+msgid "Cd follows lin&ks"
+msgstr "cd volgt lin&ks"
+
+msgid "Sa&fe delete"
+msgstr "Veili&g verwijderen"
+
+msgid "A&uto save setup"
+msgstr "A&utomatisch instellingen opslaan"
+
+msgid "Configure options"
+msgstr "Instellingen"
+
+msgid "Case &insensitive"
+msgstr "Hoofdletter&ongevoelig"
+
+msgid "Use panel sort mo&de"
+msgstr "Gebruik venster-sorteermo&dus"
+
+msgid "Show mi&ni-status"
+msgstr "Toon mi&nistatus"
+
+msgid "Use SI si&ze units"
+msgstr "Gebruik SI grootte eenheden"
+
+msgid "Mi&x all files"
+msgstr "Meng alle &bestanden"
+
+msgid "Show &backup files"
+msgstr "Toon r&eservebestanden"
+
+msgid "Show &hidden files"
+msgstr "Toon verbor&gen bestanden"
+
+msgid "&Fast dir reload"
+msgstr "Snel herle&zen"
+
+msgid "Ma&rk moves down"
+msgstr "Ma&rkering naar beneden"
+
+msgid "Re&verse files only"
+msgstr "Alleen Re&verse-bestanden"
+
+msgid "Simple s&wap"
+msgstr "Simpel s&wap"
+
+msgid "A&uto save panels setup"
+msgstr "A&utomatisch opslaan vensterinstellingen"
+
+msgid "Navigation"
+msgstr "Navigatie"
+
+msgid "L&ynx-like motion"
+msgstr "'L&ynx'-achtige bewegingen"
+
+msgid "Pa&ge scrolling"
+msgstr "Pa&ginascrollen"
+
+msgid "&Mouse page scrolling"
+msgstr "&Muis paginascrollen"
+
+msgid "File highlight"
+msgstr "Bestand highlight"
+
+msgid "File &types"
+msgstr "Bestands&soorten"
+
+msgid "&Permissions"
+msgstr "&Toegangsrechten"
+
+msgid "Quick search"
+msgstr "Snel zoeken"
+
+msgid "Panel options"
+msgstr "Vensteropties "
+
+msgid "Information"
+msgstr "Informatie"
+
+msgid ""
+"Using the fast reload option may not reflect the exact\n"
+"directory contents. In this case you'll need to do a\n"
+"manual reload of the directory. See the man page for\n"
+"the details."
+msgstr ""
+"Bij snel-herladen kan het zijn dat de\n"
+"mapinhoud niet exact klopt. In dat\n"
+"geval moet u de map handmatig opnieuw\n"
+"inlezen. Zie de 'man'-pagina voor \n"
+"details."
 
 msgid "&Full file list"
 msgstr "&Complete bestandenlijst"
@@ -1905,6 +2061,10 @@ msgstr "Gefilterde weergave"
 
 msgid "Filter command and arguments:"
 msgstr "Filteropdracht en argumenten:"
+
+#, fuzzy
+msgid "Edit file"
+msgstr "Bewerk bestanden"
 
 msgid "Create a new Directory"
 msgstr "Maak een nieuwe map"
@@ -2431,6 +2591,12 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "Map scannen"
 
+#, c-format
+msgid ""
+"%s\n"
+"Directories: %zd, total size: %s"
+msgstr ""
+
 msgid "Cannot operate on \"..\"!"
 msgstr "Opereren op \"..\" is niet mogelijk! "
 
@@ -2732,9 +2898,6 @@ msgstr "Naam voor \"%s\":"
 
 msgid "Add to hotlist"
 msgstr "Toevoegen aan hotlist"
-
-msgid "Information"
-msgstr "Informatie"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -3063,153 +3226,6 @@ msgstr "Mkdir"
 
 msgid "Memory exhausted!"
 msgstr "Geen geheugenruimte meer!"
-
-msgid "&Never"
-msgstr "&Nooit"
-
-msgid "On dum&b terminals"
-msgstr "Op d&omme terminals"
-
-msgid "Alwa&ys"
-msgstr "Al&tijd"
-
-msgid "File operations"
-msgstr ""
-
-msgid "&Verbose operation"
-msgstr "Uitvoering met &weergave"
-
-msgid "Compute tota&ls"
-msgstr "Bereken tota&len"
-
-msgid "Classic pro&gressbar"
-msgstr "Klassieke pro&gressbar"
-
-msgid "Mkdi&r autoname"
-msgstr "Mkdi&r autonoemen"
-
-msgid "Preallocate &space"
-msgstr "Prealloceer &ruimte"
-
-msgid "Esc key mode"
-msgstr "Esc-key modus"
-
-msgid "S&ingle press"
-msgstr "S&ingle press"
-
-msgid "Timeout:"
-msgstr "Timeout:"
-
-msgid "Pause after run"
-msgstr " Pauze na uitvoering"
-
-msgid "Use internal edi&t"
-msgstr "In&terne editor gebruiken"
-
-msgid "Use internal vie&w"
-msgstr "Gebruik in&terne weergave"
-
-msgid "Auto m&enus"
-msgstr "Autom&enus"
-
-msgid "&Drop down menus"
-msgstr "Neer&Klapmenu's"
-
-msgid "Shell &patterns"
-msgstr "Shell&patronen"
-
-msgid "Co&mplete: show all"
-msgstr "Co&mpleet: Toon alles"
-
-msgid "Rotating d&ash"
-msgstr "Roterend stree&pje"
-
-msgid "Cd follows lin&ks"
-msgstr "cd volgt lin&ks"
-
-msgid "Sa&fe delete"
-msgstr "Veili&g verwijderen"
-
-msgid "A&uto save setup"
-msgstr "A&utomatisch instellingen opslaan"
-
-msgid "Configure options"
-msgstr "Instellingen"
-
-msgid "Case &insensitive"
-msgstr "Hoofdletter&ongevoelig"
-
-msgid "Use panel sort mo&de"
-msgstr "Gebruik venster-sorteermo&dus"
-
-msgid "Show mi&ni-status"
-msgstr "Toon mi&nistatus"
-
-msgid "Use SI si&ze units"
-msgstr "Gebruik SI grootte eenheden"
-
-msgid "Mi&x all files"
-msgstr "Meng alle &bestanden"
-
-msgid "Show &backup files"
-msgstr "Toon r&eservebestanden"
-
-msgid "Show &hidden files"
-msgstr "Toon verbor&gen bestanden"
-
-msgid "&Fast dir reload"
-msgstr "Snel herle&zen"
-
-msgid "Ma&rk moves down"
-msgstr "Ma&rkering naar beneden"
-
-msgid "Re&verse files only"
-msgstr "Alleen Re&verse-bestanden"
-
-msgid "Simple s&wap"
-msgstr "Simpel s&wap"
-
-msgid "A&uto save panels setup"
-msgstr "A&utomatisch opslaan vensterinstellingen"
-
-msgid "Navigation"
-msgstr "Navigatie"
-
-msgid "L&ynx-like motion"
-msgstr "'L&ynx'-achtige bewegingen"
-
-msgid "Pa&ge scrolling"
-msgstr "Pa&ginascrollen"
-
-msgid "&Mouse page scrolling"
-msgstr "&Muis paginascrollen"
-
-msgid "File highlight"
-msgstr "Bestand highlight"
-
-msgid "File &types"
-msgstr "Bestands&soorten"
-
-msgid "&Permissions"
-msgstr "&Toegangsrechten"
-
-msgid "Quick search"
-msgstr "Snel zoeken"
-
-msgid "Panel options"
-msgstr "Vensteropties "
-
-msgid ""
-"Using the fast reload option may not reflect the exact\n"
-"directory contents. In this case you'll need to do a\n"
-"manual reload of the directory. See the man page for\n"
-"the details."
-msgstr ""
-"Bij snel-herladen kan het zijn dat de\n"
-"mapinhoud niet exact klopt. In dat\n"
-"geval moet u de map handmatig opnieuw\n"
-"inlezen. Zie de 'man'-pagina voor \n"
-"details."
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -4220,3 +4236,7 @@ msgstr "Zoeken afgerond"
 
 msgid "Continue from beginning?"
 msgstr "Doorgaan vanaf het begin?"
+
+#, fuzzy
+msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+msgstr "Er kan geen lokale kopie van %s worden opgehaald"

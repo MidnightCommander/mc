@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"POT-Creation-Date: 2013-03-09 15:45+0400\n"
 "PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: peinguin <pingvein@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/mc/language/"
@@ -1583,16 +1583,16 @@ msgstr ""
 "робочий каталог видалено або отримано додаткові дозволи за допомогою команди "
 "«su»."
 
+#, c-format
+msgid "Cannot fetch a local copy of %s"
+msgstr "Не вдалося отримати локальну копію %s"
+
 msgid "The shell is already running a command"
 msgstr "Інтерпретатор вже виконує команду"
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Введіть «exit» для повернення в Midnight Commander"
-
-#, c-format
-msgid "Cannot fetch a local copy of %s"
-msgstr "Не вдалося отримати локальну копію %s"
 
 msgid "Set &all"
 msgstr "Вст. &yсі"
@@ -1642,6 +1642,160 @@ msgstr "Виконується"
 
 msgid "Stopped"
 msgstr "Зупинено"
+
+msgid "&Never"
+msgstr "&Ніколи"
+
+msgid "On dum&b terminals"
+msgstr "На простих &терміналах"
+
+msgid "Alwa&ys"
+msgstr "&Завжди"
+
+msgid "File operations"
+msgstr ""
+
+msgid "&Verbose operation"
+msgstr "Подроби&ці операцій"
+
+msgid "Compute tota&ls"
+msgstr "Підраховувати за&гальний розмір"
+
+msgid "Classic pro&gressbar"
+msgstr "Класична панель прогресу"
+
+msgid "Mkdi&r autoname"
+msgstr "Автоіменування нових каталогів"
+
+#, fuzzy
+msgid "&Preallocate space"
+msgstr "Зарезервувати &простір"
+
+msgid "Esc key mode"
+msgstr "Режим клавіші Escape"
+
+msgid "S&ingle press"
+msgstr "Одиничне натиснення"
+
+msgid "Timeout:"
+msgstr "Час очікування:"
+
+msgid "Pause after run"
+msgstr "Пауза після виконання"
+
+msgid "Use internal edi&t"
+msgstr "Вбудований &редактор"
+
+msgid "Use internal vie&w"
+msgstr "Вбудова&ний переглядач"
+
+#, fuzzy
+msgid "A&sk new file name"
+msgstr "Введіть назву файлу:"
+
+msgid "Auto m&enus"
+msgstr "Автоматичні &меню"
+
+msgid "&Drop down menus"
+msgstr "Випада&ючі підменю"
+
+#, fuzzy
+msgid "S&hell patterns"
+msgstr "Шаблони &oболонки"
+
+msgid "Co&mplete: show all"
+msgstr "Доп&овнення: показувати усі"
+
+msgid "Rotating d&ash"
+msgstr "Обе&pтовий індикатор"
+
+msgid "Cd follows lin&ks"
+msgstr "Зміна &каталогу за посиланнями"
+
+msgid "Sa&fe delete"
+msgstr "Безпечне &видалення"
+
+msgid "A&uto save setup"
+msgstr "&Автозбереження параметрів"
+
+msgid "Configure options"
+msgstr "Параметри конфігурації"
+
+msgid "Case &insensitive"
+msgstr "Не враховувати регістр"
+
+msgid "Use panel sort mo&de"
+msgstr "Використовувати режи&м сортування панелі"
+
+msgid "Show mi&ni-status"
+msgstr "Показати мі&ні-статус"
+
+msgid "Use SI si&ze units"
+msgstr "&Використовувати розміри системи СІ"
+
+msgid "Mi&x all files"
+msgstr "Змішати &усі файли"
+
+msgid "Show &backup files"
+msgstr "Показувати ре&зервні файли"
+
+msgid "Show &hidden files"
+msgstr "Показувати при&ховані файли"
+
+msgid "&Fast dir reload"
+msgstr "&Швидке перевантаження каталога"
+
+msgid "Ma&rk moves down"
+msgstr "&Відмітка рухає курсор униз"
+
+msgid "Re&verse files only"
+msgstr "&Змінити порядок тільки файлів"
+
+msgid "Simple s&wap"
+msgstr "Простий о&бмін"
+
+msgid "A&uto save panels setup"
+msgstr "&Автозбереження параметрів панелей"
+
+msgid "Navigation"
+msgstr "Навігація"
+
+msgid "L&ynx-like motion"
+msgstr "Навігація у стилі l&ynx"
+
+msgid "Pa&ge scrolling"
+msgstr "Гор&тання сторінки"
+
+msgid "&Mouse page scrolling"
+msgstr "&Гортання сторінки мишею"
+
+msgid "File highlight"
+msgstr "Підсвітка файлів…"
+
+msgid "File &types"
+msgstr "Типи &файлів"
+
+msgid "&Permissions"
+msgstr "&Права"
+
+msgid "Quick search"
+msgstr "Швидкий пошук"
+
+msgid "Panel options"
+msgstr "Параметри панелі"
+
+msgid "Information"
+msgstr "Відомості"
+
+msgid ""
+"Using the fast reload option may not reflect the exact\n"
+"directory contents. In this case you'll need to do a\n"
+"manual reload of the directory. See the man page for\n"
+"the details."
+msgstr ""
+"Використання параметру швидкого перезавантаження може не відображати точний "
+"поточний вміст каталога. У такому випадку необхідно вручну перезавантажити "
+"каталог. Щоб отримати докладніші відомості, див. посібник (man mc)."
 
 msgid "&Full file list"
 msgstr "&Повний"
@@ -1933,6 +2087,10 @@ msgstr "Фільтрований перегляд"
 
 msgid "Filter command and arguments:"
 msgstr "Введіть команду та її аргументи:"
+
+#, fuzzy
+msgid "Edit file"
+msgstr "Редагувати файли"
 
 msgid "Create a new Directory"
 msgstr "Створити новий каталог"
@@ -2455,6 +2613,12 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "Сканування каталогу"
 
+#, c-format
+msgid ""
+"%s\n"
+"Directories: %zd, total size: %s"
+msgstr ""
+
 msgid "Cannot operate on \"..\"!"
 msgstr "Не можна виконувати операції з «..»"
 
@@ -2757,9 +2921,6 @@ msgstr "Мітка для «%s»: "
 
 msgid "Add to hotlist"
 msgstr "Додати до списку"
-
-msgid "Information"
-msgstr "Відомості"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -3090,151 +3251,6 @@ msgstr "ButtonBar|СтвКат"
 
 msgid "Memory exhausted!"
 msgstr "Не вистачає пам’яті."
-
-msgid "&Never"
-msgstr "&Ніколи"
-
-msgid "On dum&b terminals"
-msgstr "На простих &терміналах"
-
-msgid "Alwa&ys"
-msgstr "&Завжди"
-
-msgid "File operations"
-msgstr ""
-
-msgid "&Verbose operation"
-msgstr "Подроби&ці операцій"
-
-msgid "Compute tota&ls"
-msgstr "Підраховувати за&гальний розмір"
-
-msgid "Classic pro&gressbar"
-msgstr "Класична панель прогресу"
-
-msgid "Mkdi&r autoname"
-msgstr "Автоіменування нових каталогів"
-
-msgid "Preallocate &space"
-msgstr "Зарезервувати &простір"
-
-msgid "Esc key mode"
-msgstr "Режим клавіші Escape"
-
-msgid "S&ingle press"
-msgstr "Одиничне натиснення"
-
-msgid "Timeout:"
-msgstr "Час очікування:"
-
-msgid "Pause after run"
-msgstr "Пауза після виконання"
-
-msgid "Use internal edi&t"
-msgstr "Вбудований &редактор"
-
-msgid "Use internal vie&w"
-msgstr "Вбудова&ний переглядач"
-
-msgid "Auto m&enus"
-msgstr "Автоматичні &меню"
-
-msgid "&Drop down menus"
-msgstr "Випада&ючі підменю"
-
-msgid "Shell &patterns"
-msgstr "Шаблони &oболонки"
-
-msgid "Co&mplete: show all"
-msgstr "Доп&овнення: показувати усі"
-
-msgid "Rotating d&ash"
-msgstr "Обе&pтовий індикатор"
-
-msgid "Cd follows lin&ks"
-msgstr "Зміна &каталогу за посиланнями"
-
-msgid "Sa&fe delete"
-msgstr "Безпечне &видалення"
-
-msgid "A&uto save setup"
-msgstr "&Автозбереження параметрів"
-
-msgid "Configure options"
-msgstr "Параметри конфігурації"
-
-msgid "Case &insensitive"
-msgstr "Не враховувати регістр"
-
-msgid "Use panel sort mo&de"
-msgstr "Використовувати режи&м сортування панелі"
-
-msgid "Show mi&ni-status"
-msgstr "Показати мі&ні-статус"
-
-msgid "Use SI si&ze units"
-msgstr "&Використовувати розміри системи СІ"
-
-msgid "Mi&x all files"
-msgstr "Змішати &усі файли"
-
-msgid "Show &backup files"
-msgstr "Показувати ре&зервні файли"
-
-msgid "Show &hidden files"
-msgstr "Показувати при&ховані файли"
-
-msgid "&Fast dir reload"
-msgstr "&Швидке перевантаження каталога"
-
-msgid "Ma&rk moves down"
-msgstr "&Відмітка рухає курсор униз"
-
-msgid "Re&verse files only"
-msgstr "&Змінити порядок тільки файлів"
-
-msgid "Simple s&wap"
-msgstr "Простий о&бмін"
-
-msgid "A&uto save panels setup"
-msgstr "&Автозбереження параметрів панелей"
-
-msgid "Navigation"
-msgstr "Навігація"
-
-msgid "L&ynx-like motion"
-msgstr "Навігація у стилі l&ynx"
-
-msgid "Pa&ge scrolling"
-msgstr "Гор&тання сторінки"
-
-msgid "&Mouse page scrolling"
-msgstr "&Гортання сторінки мишею"
-
-msgid "File highlight"
-msgstr "Підсвітка файлів…"
-
-msgid "File &types"
-msgstr "Типи &файлів"
-
-msgid "&Permissions"
-msgstr "&Права"
-
-msgid "Quick search"
-msgstr "Швидкий пошук"
-
-msgid "Panel options"
-msgstr "Параметри панелі"
-
-msgid ""
-"Using the fast reload option may not reflect the exact\n"
-"directory contents. In this case you'll need to do a\n"
-"manual reload of the directory. See the man page for\n"
-"the details."
-msgstr ""
-"Використання параметру швидкого перезавантаження може не відображати точний "
-"поточний вміст каталога. У такому випадку необхідно вручну перезавантажити "
-"каталог. Щоб отримати докладніші відомості, див. посібник (man mc)."
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -4259,3 +4275,7 @@ msgstr "Пошук завершено"
 
 msgid "Continue from beginning?"
 msgstr "Почати спочатку?"
+
+#, fuzzy
+msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+msgstr "Не вдалося отримати локальну копію %s"

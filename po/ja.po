@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"POT-Creation-Date: 2013-03-09 15:45+0400\n"
 "PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/projects/p/mc/language/"
@@ -1518,16 +1518,16 @@ msgid ""
 "extra access permissions with the \"su\" command?"
 msgstr ""
 
+#, c-format
+msgid "Cannot fetch a local copy of %s"
+msgstr ""
+
 msgid "The shell is already running a command"
 msgstr ""
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "`exit' と入力すれば Midnight Commander へ戻ります"
-
-#, c-format
-msgid "Cannot fetch a local copy of %s"
-msgstr ""
 
 msgid "Set &all"
 msgstr "すべて設定(&a)"
@@ -1575,6 +1575,156 @@ msgstr "実行しています"
 
 msgid "Stopped"
 msgstr "停止中"
+
+msgid "&Never"
+msgstr "一時停止しない(&N)"
+
+msgid "On dum&b terminals"
+msgstr ""
+
+msgid "Alwa&ys"
+msgstr "常に停止(&Y)"
+
+msgid "File operations"
+msgstr ""
+
+msgid "&Verbose operation"
+msgstr "やかましく動作"
+
+msgid "Compute tota&ls"
+msgstr ""
+
+msgid "Classic pro&gressbar"
+msgstr ""
+
+msgid "Mkdi&r autoname"
+msgstr ""
+
+msgid "&Preallocate space"
+msgstr ""
+
+msgid "Esc key mode"
+msgstr ""
+
+msgid "S&ingle press"
+msgstr ""
+
+msgid "Timeout:"
+msgstr "タイムアウト:"
+
+msgid "Pause after run"
+msgstr ""
+
+msgid "Use internal edi&t"
+msgstr ""
+
+msgid "Use internal vie&w"
+msgstr ""
+
+#, fuzzy
+msgid "A&sk new file name"
+msgstr "ファイル名の入力:"
+
+msgid "Auto m&enus"
+msgstr ""
+
+msgid "&Drop down menus"
+msgstr "ドロップダウンメニュー(&D)"
+
+#, fuzzy
+msgid "S&hell patterns"
+msgstr "シェルのパターン(&P)"
+
+msgid "Co&mplete: show all"
+msgstr ""
+
+msgid "Rotating d&ash"
+msgstr ""
+
+msgid "Cd follows lin&ks"
+msgstr ""
+
+msgid "Sa&fe delete"
+msgstr ""
+
+msgid "A&uto save setup"
+msgstr "自動保存の設定(&U)"
+
+msgid "Configure options"
+msgstr "設定オプション"
+
+msgid "Case &insensitive"
+msgstr ""
+
+msgid "Use panel sort mo&de"
+msgstr "パネルの並び替えモードを使う(&D)"
+
+msgid "Show mi&ni-status"
+msgstr ""
+
+msgid "Use SI si&ze units"
+msgstr ""
+
+msgid "Mi&x all files"
+msgstr ""
+
+msgid "Show &backup files"
+msgstr ""
+
+msgid "Show &hidden files"
+msgstr "隠しファイルの表示(&H)"
+
+msgid "&Fast dir reload"
+msgstr "高速なディレクトリの再読込"
+
+msgid "Ma&rk moves down"
+msgstr "下にマークを移動する"
+
+msgid "Re&verse files only"
+msgstr ""
+
+msgid "Simple s&wap"
+msgstr ""
+
+msgid "A&uto save panels setup"
+msgstr ""
+
+msgid "Navigation"
+msgstr "ナビゲーション"
+
+msgid "L&ynx-like motion"
+msgstr "lynx 風動作(&Y)"
+
+msgid "Pa&ge scrolling"
+msgstr "ページ スクロール(&G)"
+
+msgid "&Mouse page scrolling"
+msgstr ""
+
+msgid "File highlight"
+msgstr "ファイルのハイライト"
+
+msgid "File &types"
+msgstr "ファイルの種類(&T)"
+
+msgid "&Permissions"
+msgstr "権限(&P)"
+
+msgid "Quick search"
+msgstr "簡易検索"
+
+msgid "Panel options"
+msgstr "パネル オプション"
+
+msgid "Information"
+msgstr "情報"
+
+msgid ""
+"Using the fast reload option may not reflect the exact\n"
+"directory contents. In this case you'll need to do a\n"
+"manual reload of the directory. See the man page for\n"
+"the details."
+msgstr ""
 
 msgid "&Full file list"
 msgstr "詳細なファイル一覧(&F)"
@@ -1866,6 +2016,10 @@ msgstr ""
 
 msgid "Filter command and arguments:"
 msgstr "フィルターのコマンドと引数:"
+
+#, fuzzy
+msgid "Edit file"
+msgstr "メニューファイル編集(&M)"
 
 msgid "Create a new Directory"
 msgstr "新規ディレクトリの作成"
@@ -2308,6 +2462,12 @@ msgstr ""
 msgid "Directory scanning"
 msgstr ""
 
+#, c-format
+msgid ""
+"%s\n"
+"Directories: %zd, total size: %s"
+msgstr ""
+
 msgid "Cannot operate on \"..\"!"
 msgstr ""
 
@@ -2604,9 +2764,6 @@ msgstr "\"%s\" のラベル:"
 
 msgid "Add to hotlist"
 msgstr "ホットリストへ追加"
-
-msgid "Information"
-msgstr "情報"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2932,148 +3089,6 @@ msgid "ButtonBar|Mkdir"
 msgstr ""
 
 msgid "Memory exhausted!"
-msgstr ""
-
-msgid "&Never"
-msgstr "一時停止しない(&N)"
-
-msgid "On dum&b terminals"
-msgstr ""
-
-msgid "Alwa&ys"
-msgstr "常に停止(&Y)"
-
-msgid "File operations"
-msgstr ""
-
-msgid "&Verbose operation"
-msgstr "やかましく動作"
-
-msgid "Compute tota&ls"
-msgstr ""
-
-msgid "Classic pro&gressbar"
-msgstr ""
-
-msgid "Mkdi&r autoname"
-msgstr ""
-
-msgid "Preallocate &space"
-msgstr ""
-
-msgid "Esc key mode"
-msgstr ""
-
-msgid "S&ingle press"
-msgstr ""
-
-msgid "Timeout:"
-msgstr "タイムアウト:"
-
-msgid "Pause after run"
-msgstr ""
-
-msgid "Use internal edi&t"
-msgstr ""
-
-msgid "Use internal vie&w"
-msgstr ""
-
-msgid "Auto m&enus"
-msgstr ""
-
-msgid "&Drop down menus"
-msgstr "ドロップダウンメニュー(&D)"
-
-msgid "Shell &patterns"
-msgstr "シェルのパターン(&P)"
-
-msgid "Co&mplete: show all"
-msgstr ""
-
-msgid "Rotating d&ash"
-msgstr ""
-
-msgid "Cd follows lin&ks"
-msgstr ""
-
-msgid "Sa&fe delete"
-msgstr ""
-
-msgid "A&uto save setup"
-msgstr "自動保存の設定(&U)"
-
-msgid "Configure options"
-msgstr "設定オプション"
-
-msgid "Case &insensitive"
-msgstr ""
-
-msgid "Use panel sort mo&de"
-msgstr "パネルの並び替えモードを使う(&D)"
-
-msgid "Show mi&ni-status"
-msgstr ""
-
-msgid "Use SI si&ze units"
-msgstr ""
-
-msgid "Mi&x all files"
-msgstr ""
-
-msgid "Show &backup files"
-msgstr ""
-
-msgid "Show &hidden files"
-msgstr "隠しファイルの表示(&H)"
-
-msgid "&Fast dir reload"
-msgstr "高速なディレクトリの再読込"
-
-msgid "Ma&rk moves down"
-msgstr "下にマークを移動する"
-
-msgid "Re&verse files only"
-msgstr ""
-
-msgid "Simple s&wap"
-msgstr ""
-
-msgid "A&uto save panels setup"
-msgstr ""
-
-msgid "Navigation"
-msgstr "ナビゲーション"
-
-msgid "L&ynx-like motion"
-msgstr "lynx 風動作(&Y)"
-
-msgid "Pa&ge scrolling"
-msgstr "ページ スクロール(&G)"
-
-msgid "&Mouse page scrolling"
-msgstr ""
-
-msgid "File highlight"
-msgstr "ファイルのハイライト"
-
-msgid "File &types"
-msgstr "ファイルの種類(&T)"
-
-msgid "&Permissions"
-msgstr "権限(&P)"
-
-msgid "Quick search"
-msgstr "簡易検索"
-
-msgid "Panel options"
-msgstr "パネル オプション"
-
-msgid ""
-"Using the fast reload option may not reflect the exact\n"
-"directory contents. In this case you'll need to do a\n"
-"manual reload of the directory. See the man page for\n"
-"the details."
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
@@ -4061,3 +4076,6 @@ msgstr "検索終了"
 
 msgid "Continue from beginning?"
 msgstr "初めから続けますか?"
+
+msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+msgstr ""

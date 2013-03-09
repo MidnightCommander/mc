@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"POT-Creation-Date: 2013-03-09 15:45+0400\n"
 "PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/projects/p/mc/language/eu/)\n"
@@ -1559,16 +1559,16 @@ msgstr ""
 "duzu, edo zeure buruari aparteko baimenak eman dizkiozu\n"
 "\"su\" komandoa erabiliz?"
 
+#, c-format
+msgid "Cannot fetch a local copy of %s"
+msgstr "%s-ren bertako kopia bat ezin eskuratu"
+
 msgid "The shell is already running a command"
 msgstr "Shell-a dagoeneko komando bat exekutate ari da"
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Idatzi `irten' Midnight Commander-era itzultzeko"
-
-#, c-format
-msgid "Cannot fetch a local copy of %s"
-msgstr "%s-ren bertako kopia bat ezin eskuratu"
 
 msgid "Set &all"
 msgstr "&Konfiguratu dena"
@@ -1618,6 +1618,161 @@ msgstr "Martxan"
 
 msgid "Stopped"
 msgstr "Geldituta"
+
+msgid "&Never"
+msgstr "&Inoiz ere ez"
+
+msgid "On dum&b terminals"
+msgstr "&Terminal tuntunetan"
+
+msgid "Alwa&ys"
+msgstr "&beti"
+
+msgid "File operations"
+msgstr ""
+
+msgid "&Verbose operation"
+msgstr "Eragiketa &xehetua"
+
+msgid "Compute tota&ls"
+msgstr "Kalkulatu &guztizkoak"
+
+msgid "Classic pro&gressbar"
+msgstr "Aurrerapen-barra klasikoa"
+
+msgid "Mkdi&r autoname"
+msgstr "Mkdi&r autoizena"
+
+#, fuzzy
+msgid "&Preallocate space"
+msgstr "Baztertu &zurigune guztiak"
+
+msgid "Esc key mode"
+msgstr "Ihes (Esc) tekla modua"
+
+msgid "S&ingle press"
+msgstr "Be&hin sakatu"
+
+msgid "Timeout:"
+msgstr "Denbora-muga:"
+
+msgid "Pause after run"
+msgstr "Eten exekutatu ondoren"
+
+msgid "Use internal edi&t"
+msgstr "Erakutsi barneko edi&torea"
+
+msgid "Use internal vie&w"
+msgstr "Erabili barneko e&rakuslea"
+
+#, fuzzy
+msgid "A&sk new file name"
+msgstr "Sartu fitxategi izena:"
+
+msgid "Auto m&enus"
+msgstr "Auto &menuak"
+
+msgid "&Drop down menus"
+msgstr "&Goitibeherako menuak "
+
+#, fuzzy
+msgid "S&hell patterns"
+msgstr "Shell &ereduak"
+
+msgid "Co&mplete: show all"
+msgstr "&Osoa: erakutsi guztia"
+
+msgid "Rotating d&ash"
+msgstr "Marrat&xo birakaria"
+
+msgid "Cd follows lin&ks"
+msgstr "Cd-k este&kei jarraitzen die"
+
+msgid "Sa&fe delete"
+msgstr "E&zabaketa segurua"
+
+msgid "A&uto save setup"
+msgstr "A&uto gorde ezarpena"
+
+msgid "Configure options"
+msgstr "Konfiguratu aukerak"
+
+msgid "Case &insensitive"
+msgstr "&Ez bereizi maius/minus"
+
+msgid "Use panel sort mo&de"
+msgstr "Erabili panela sailkatzeko mo&dua"
+
+msgid "Show mi&ni-status"
+msgstr "Erakutsi mi&ni-egoera"
+
+msgid "Use SI si&ze units"
+msgstr "Erabili SI ne&urri unitateak"
+
+msgid "Mi&x all files"
+msgstr "Na&hastu fitxategi guztiak"
+
+msgid "Show &backup files"
+msgstr "Erakutsi &babeskopia fitxategiak"
+
+msgid "Show &hidden files"
+msgstr "Erakutsi &ezkutuko fitxategiak"
+
+msgid "&Fast dir reload"
+msgstr "&Direktorio birzamaketa bizkorra"
+
+msgid "Ma&rk moves down"
+msgstr "Ma&rkatzean beheruntz mugitu"
+
+msgid "Re&verse files only"
+msgstr "&Alderantzikatu fitxategiak soilik"
+
+msgid "Simple s&wap"
+msgstr "&Trukaketa erraza"
+
+msgid "A&uto save panels setup"
+msgstr "A&uto gorde panelen ezarpena"
+
+msgid "Navigation"
+msgstr "Nabigazioa"
+
+msgid "L&ynx-like motion"
+msgstr "L&ynx-en moduko mugimendua"
+
+msgid "Pa&ge scrolling"
+msgstr "Orri &labainketa"
+
+msgid "&Mouse page scrolling"
+msgstr "&Saguarekin orri labainketa"
+
+msgid "File highlight"
+msgstr "Fitxategi nabarmentzea"
+
+msgid "File &types"
+msgstr "Fitxategi &motak"
+
+msgid "&Permissions"
+msgstr "&Baimenak"
+
+msgid "Quick search"
+msgstr "Bilaketa azkarra"
+
+msgid "Panel options"
+msgstr "Panelek aukerak"
+
+msgid "Information"
+msgstr "Informazioa"
+
+msgid ""
+"Using the fast reload option may not reflect the exact\n"
+"directory contents. In this case you'll need to do a\n"
+"manual reload of the directory. See the man page for\n"
+"the details."
+msgstr ""
+"Birzamaketa azkarra erabiltzean baliteke direktorioen\n"
+"eduki zehatza ez islatzea. Kasu honetan direktorioaren\n"
+"birzamaketa eskuz egin beharko duzu. Begiratu eskuliburu\n"
+"(\"man\") orrialdea xehetasun bila."
 
 msgid "&Full file list"
 msgstr "Fitxategien zerrenda &osoa"
@@ -1911,6 +2066,10 @@ msgstr "Iragazitako ikuspegia"
 
 msgid "Filter command and arguments:"
 msgstr "Iragazteko komandoa eta argumentuak:"
+
+#, fuzzy
+msgid "Edit file"
+msgstr "Editat&u menu fitxategia"
 
 msgid "Create a new Directory"
 msgstr "Sortu direktorio berria"
@@ -2437,6 +2596,12 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "Direktorio azterketa"
 
+#, c-format
+msgid ""
+"%s\n"
+"Directories: %zd, total size: %s"
+msgstr ""
+
 msgid "Cannot operate on \"..\"!"
 msgstr "Ezin da \"..\" erabili!"
 
@@ -2734,9 +2899,6 @@ msgstr "\"%s\"(r)en etiketa:"
 
 msgid "Add to hotlist"
 msgstr "Erantsi gogokoetara"
-
-msgid "Information"
-msgstr "Informazioa"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -3065,152 +3227,6 @@ msgstr "SortuDir"
 
 msgid "Memory exhausted!"
 msgstr "Memoria agortuta!"
-
-msgid "&Never"
-msgstr "&Inoiz ere ez"
-
-msgid "On dum&b terminals"
-msgstr "&Terminal tuntunetan"
-
-msgid "Alwa&ys"
-msgstr "&beti"
-
-msgid "File operations"
-msgstr ""
-
-msgid "&Verbose operation"
-msgstr "Eragiketa &xehetua"
-
-msgid "Compute tota&ls"
-msgstr "Kalkulatu &guztizkoak"
-
-msgid "Classic pro&gressbar"
-msgstr "Aurrerapen-barra klasikoa"
-
-msgid "Mkdi&r autoname"
-msgstr "Mkdi&r autoizena"
-
-msgid "Preallocate &space"
-msgstr ""
-
-msgid "Esc key mode"
-msgstr "Ihes (Esc) tekla modua"
-
-msgid "S&ingle press"
-msgstr "Be&hin sakatu"
-
-msgid "Timeout:"
-msgstr "Denbora-muga:"
-
-msgid "Pause after run"
-msgstr "Eten exekutatu ondoren"
-
-msgid "Use internal edi&t"
-msgstr "Erakutsi barneko edi&torea"
-
-msgid "Use internal vie&w"
-msgstr "Erabili barneko e&rakuslea"
-
-msgid "Auto m&enus"
-msgstr "Auto &menuak"
-
-msgid "&Drop down menus"
-msgstr "&Goitibeherako menuak "
-
-msgid "Shell &patterns"
-msgstr "Shell &ereduak"
-
-msgid "Co&mplete: show all"
-msgstr "&Osoa: erakutsi guztia"
-
-msgid "Rotating d&ash"
-msgstr "Marrat&xo birakaria"
-
-msgid "Cd follows lin&ks"
-msgstr "Cd-k este&kei jarraitzen die"
-
-msgid "Sa&fe delete"
-msgstr "E&zabaketa segurua"
-
-msgid "A&uto save setup"
-msgstr "A&uto gorde ezarpena"
-
-msgid "Configure options"
-msgstr "Konfiguratu aukerak"
-
-msgid "Case &insensitive"
-msgstr "&Ez bereizi maius/minus"
-
-msgid "Use panel sort mo&de"
-msgstr "Erabili panela sailkatzeko mo&dua"
-
-msgid "Show mi&ni-status"
-msgstr "Erakutsi mi&ni-egoera"
-
-msgid "Use SI si&ze units"
-msgstr "Erabili SI ne&urri unitateak"
-
-msgid "Mi&x all files"
-msgstr "Na&hastu fitxategi guztiak"
-
-msgid "Show &backup files"
-msgstr "Erakutsi &babeskopia fitxategiak"
-
-msgid "Show &hidden files"
-msgstr "Erakutsi &ezkutuko fitxategiak"
-
-msgid "&Fast dir reload"
-msgstr "&Direktorio birzamaketa bizkorra"
-
-msgid "Ma&rk moves down"
-msgstr "Ma&rkatzean beheruntz mugitu"
-
-msgid "Re&verse files only"
-msgstr "&Alderantzikatu fitxategiak soilik"
-
-msgid "Simple s&wap"
-msgstr "&Trukaketa erraza"
-
-msgid "A&uto save panels setup"
-msgstr "A&uto gorde panelen ezarpena"
-
-msgid "Navigation"
-msgstr "Nabigazioa"
-
-msgid "L&ynx-like motion"
-msgstr "L&ynx-en moduko mugimendua"
-
-msgid "Pa&ge scrolling"
-msgstr "Orri &labainketa"
-
-msgid "&Mouse page scrolling"
-msgstr "&Saguarekin orri labainketa"
-
-msgid "File highlight"
-msgstr "Fitxategi nabarmentzea"
-
-msgid "File &types"
-msgstr "Fitxategi &motak"
-
-msgid "&Permissions"
-msgstr "&Baimenak"
-
-msgid "Quick search"
-msgstr "Bilaketa azkarra"
-
-msgid "Panel options"
-msgstr "Panelek aukerak"
-
-msgid ""
-"Using the fast reload option may not reflect the exact\n"
-"directory contents. In this case you'll need to do a\n"
-"manual reload of the directory. See the man page for\n"
-"the details."
-msgstr ""
-"Birzamaketa azkarra erabiltzean baliteke direktorioen\n"
-"eduki zehatza ez islatzea. Kasu honetan direktorioaren\n"
-"birzamaketa eskuz egin beharko duzu. Begiratu eskuliburu\n"
-"(\"man\") orrialdea xehetasun bila."
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -4232,3 +4248,7 @@ msgstr "Bilaketa eginda"
 
 msgid "Continue from beginning?"
 msgstr "Hasieratik jarraitu?"
+
+#, fuzzy
+msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+msgstr "%s-ren bertako kopia bat ezin eskuratu"

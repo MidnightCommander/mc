@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"POT-Creation-Date: 2013-03-09 15:45+0400\n"
 "PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Павал Клёк <yehekim@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/projects/p/mc/language/"
@@ -1584,16 +1584,16 @@ msgstr ""
 "працоўны каталёґ або надалі сабе дадатковыя\n"
 "правы доступу загадам «su»?"
 
+#, c-format
+msgid "Cannot fetch a local copy of %s"
+msgstr "Немагчыма атрымаць лякальны асобнік «%s»"
+
 msgid "The shell is already running a command"
 msgstr "Абалонка ўжо выконвае загад"
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Каб вярнуцца ў «Міднайт Камандэр», надрукуйце «exit»."
-
-#, c-format
-msgid "Cannot fetch a local copy of %s"
-msgstr "Немагчыма атрымаць лякальны асобнік «%s»"
 
 msgid "Set &all"
 msgstr "Усталяваць ус&е"
@@ -1643,6 +1643,161 @@ msgstr "Выконваецца"
 
 msgid "Stopped"
 msgstr "Спынілася"
+
+msgid "&Never"
+msgstr "&Ніколі"
+
+msgid "On dum&b terminals"
+msgstr "На &павольных тэрміналах"
+
+msgid "Alwa&ys"
+msgstr "&Заўжды"
+
+msgid "File operations"
+msgstr ""
+
+msgid "&Verbose operation"
+msgstr "Падрабязнасьці &дзеяньняў"
+
+msgid "Compute tota&ls"
+msgstr "Падлічваць &агульны памер"
+
+msgid "Classic pro&gressbar"
+msgstr "Звычайная сту&жка поступу"
+
+msgid "Mkdi&r autoname"
+msgstr "Прыдумляць назву &каталёґу"
+
+#, fuzzy
+msgid "&Preallocate space"
+msgstr "Папярэдне выдзяляць &прастору"
+
+msgid "Esc key mode"
+msgstr "Націскаць на «Esc»"
+
+msgid "S&ingle press"
+msgstr "&Адзін націск"
+
+msgid "Timeout:"
+msgstr "Затрымка:"
+
+msgid "Pause after run"
+msgstr "Прыпыняць, калі скончылі"
+
+msgid "Use internal edi&t"
+msgstr "Убудаваны &рэдактар"
+
+msgid "Use internal vie&w"
+msgstr "Убудаваны пра&гляднік"
+
+#, fuzzy
+msgid "A&sk new file name"
+msgstr "Упішыце назву файла:"
+
+msgid "Auto m&enus"
+msgstr "Пачынаць з мэню &карыстальніка"
+
+msgid "&Drop down menus"
+msgstr "&Мэню выпадае адразу"
+
+#, fuzzy
+msgid "S&hell patterns"
+msgstr "Узоры як у &абалонцы"
+
+msgid "Co&mplete: show all"
+msgstr "&Дапаўняць: паказваць усё"
+
+msgid "Rotating d&ash"
+msgstr "Круціць &рыску поступу"
+
+msgid "Cd follows lin&ks"
+msgstr "Зьмяняць каталёґ па &спасылцы"
+
+msgid "Sa&fe delete"
+msgstr "Выдаляць &бясьпечна"
+
+msgid "A&uto save setup"
+msgstr "Самарушна захоўваць &налады"
+
+msgid "Configure options"
+msgstr "Наставіць налады"
+
+msgid "Case &insensitive"
+msgstr "&Ня ўлічваць памер"
+
+msgid "Use panel sort mo&de"
+msgstr "Як у наладах &панэлі"
+
+msgid "Show mi&ni-status"
+msgstr "Паказваць &радок стану"
+
+msgid "Use SI si&ze units"
+msgstr "Памер у адзінках &СІ"
+
+msgid "Mi&x all files"
+msgstr "Зь&мешваць файлы і каталёґі"
+
+msgid "Show &backup files"
+msgstr "Паказваць файлы &адноўкі"
+
+msgid "Show &hidden files"
+msgstr "Паказваць с&хаваныя файлы"
+
+msgid "&Fast dir reload"
+msgstr "&Хутка заладоўваць каталёґ"
+
+msgid "Ma&rk moves down"
+msgstr "Пазнака перасоўвае &ўказальнік"
+
+msgid "Re&verse files only"
+msgstr "Перастаўляць толькі &файлы"
+
+msgid "Simple s&wap"
+msgstr "Перастаўляць як &звычайна"
+
+msgid "A&uto save panels setup"
+msgstr "Захоўваць &налады панэляў"
+
+msgid "Navigation"
+msgstr "Рух"
+
+msgid "L&ynx-like motion"
+msgstr "Р&ухацца як у «Lynx»"
+
+msgid "Pa&ge scrolling"
+msgstr "Гартаць &бачыны"
+
+msgid "&Mouse page scrolling"
+msgstr "Гартаць бачыны &мышшу"
+
+msgid "File highlight"
+msgstr "Падсьвечваць"
+
+msgid "File &types"
+msgstr "&Віды файлаў"
+
+msgid "&Permissions"
+msgstr "&Дазволы"
+
+msgid "Quick search"
+msgstr "Хутка шукаць"
+
+msgid "Panel options"
+msgstr "Налады панэляў"
+
+msgid "Information"
+msgstr "Зьвесткі"
+
+msgid ""
+"Using the fast reload option may not reflect the exact\n"
+"directory contents. In this case you'll need to do a\n"
+"manual reload of the directory. See the man page for\n"
+"the details."
+msgstr ""
+"Калі заладоўваць каталёґі хутка, можа не адлюстроўвацца цяперашняе "
+"зьмесьціва каталёґа. У такім разе давядзецца\n"
+"самастойна заладаваць каталёґ. Падрабязьней — у правадніцтве\n"
+"праґрамы («man mc»)."
 
 msgid "&Full file list"
 msgstr "&Звычайны сьпіс"
@@ -1934,6 +2089,10 @@ msgstr "Зірнуць вывад загаду"
 
 msgid "Filter command and arguments:"
 msgstr "Загад і довады:"
+
+#, fuzzy
+msgid "Edit file"
+msgstr "Рэдаґаваць файлы"
 
 msgid "Create a new Directory"
 msgstr "Стварыць каталёґ"
@@ -2455,6 +2614,12 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "Аглядаць каталёґ"
 
+#, c-format
+msgid ""
+"%s\n"
+"Directories: %zd, total size: %s"
+msgstr ""
+
 msgid "Cannot operate on \"..\"!"
 msgstr "Немагчыма выканаць на «..»!"
 
@@ -2758,9 +2923,6 @@ msgstr "Цэтлік на «%s»:"
 
 msgid "Add to hotlist"
 msgstr "Дадаць у сьпіс"
-
-msgid "Information"
-msgstr "Зьвесткі"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -3093,152 +3255,6 @@ msgstr "Новы каталёґ"
 
 msgid "Memory exhausted!"
 msgstr "Вычарпалі памяць!"
-
-msgid "&Never"
-msgstr "&Ніколі"
-
-msgid "On dum&b terminals"
-msgstr "На &павольных тэрміналах"
-
-msgid "Alwa&ys"
-msgstr "&Заўжды"
-
-msgid "File operations"
-msgstr ""
-
-msgid "&Verbose operation"
-msgstr "Падрабязнасьці &дзеяньняў"
-
-msgid "Compute tota&ls"
-msgstr "Падлічваць &агульны памер"
-
-msgid "Classic pro&gressbar"
-msgstr "Звычайная сту&жка поступу"
-
-msgid "Mkdi&r autoname"
-msgstr "Прыдумляць назву &каталёґу"
-
-msgid "Preallocate &space"
-msgstr "Папярэдне выдзяляць &прастору"
-
-msgid "Esc key mode"
-msgstr "Націскаць на «Esc»"
-
-msgid "S&ingle press"
-msgstr "&Адзін націск"
-
-msgid "Timeout:"
-msgstr "Затрымка:"
-
-msgid "Pause after run"
-msgstr "Прыпыняць, калі скончылі"
-
-msgid "Use internal edi&t"
-msgstr "Убудаваны &рэдактар"
-
-msgid "Use internal vie&w"
-msgstr "Убудаваны пра&гляднік"
-
-msgid "Auto m&enus"
-msgstr "Пачынаць з мэню &карыстальніка"
-
-msgid "&Drop down menus"
-msgstr "&Мэню выпадае адразу"
-
-msgid "Shell &patterns"
-msgstr "Узоры як у &абалонцы"
-
-msgid "Co&mplete: show all"
-msgstr "&Дапаўняць: паказваць усё"
-
-msgid "Rotating d&ash"
-msgstr "Круціць &рыску поступу"
-
-msgid "Cd follows lin&ks"
-msgstr "Зьмяняць каталёґ па &спасылцы"
-
-msgid "Sa&fe delete"
-msgstr "Выдаляць &бясьпечна"
-
-msgid "A&uto save setup"
-msgstr "Самарушна захоўваць &налады"
-
-msgid "Configure options"
-msgstr "Наставіць налады"
-
-msgid "Case &insensitive"
-msgstr "&Ня ўлічваць памер"
-
-msgid "Use panel sort mo&de"
-msgstr "Як у наладах &панэлі"
-
-msgid "Show mi&ni-status"
-msgstr "Паказваць &радок стану"
-
-msgid "Use SI si&ze units"
-msgstr "Памер у адзінках &СІ"
-
-msgid "Mi&x all files"
-msgstr "Зь&мешваць файлы і каталёґі"
-
-msgid "Show &backup files"
-msgstr "Паказваць файлы &адноўкі"
-
-msgid "Show &hidden files"
-msgstr "Паказваць с&хаваныя файлы"
-
-msgid "&Fast dir reload"
-msgstr "&Хутка заладоўваць каталёґ"
-
-msgid "Ma&rk moves down"
-msgstr "Пазнака перасоўвае &ўказальнік"
-
-msgid "Re&verse files only"
-msgstr "Перастаўляць толькі &файлы"
-
-msgid "Simple s&wap"
-msgstr "Перастаўляць як &звычайна"
-
-msgid "A&uto save panels setup"
-msgstr "Захоўваць &налады панэляў"
-
-msgid "Navigation"
-msgstr "Рух"
-
-msgid "L&ynx-like motion"
-msgstr "Р&ухацца як у «Lynx»"
-
-msgid "Pa&ge scrolling"
-msgstr "Гартаць &бачыны"
-
-msgid "&Mouse page scrolling"
-msgstr "Гартаць бачыны &мышшу"
-
-msgid "File highlight"
-msgstr "Падсьвечваць"
-
-msgid "File &types"
-msgstr "&Віды файлаў"
-
-msgid "&Permissions"
-msgstr "&Дазволы"
-
-msgid "Quick search"
-msgstr "Хутка шукаць"
-
-msgid "Panel options"
-msgstr "Налады панэляў"
-
-msgid ""
-"Using the fast reload option may not reflect the exact\n"
-"directory contents. In this case you'll need to do a\n"
-"manual reload of the directory. See the man page for\n"
-"the details."
-msgstr ""
-"Калі заладоўваць каталёґі хутка, можа не адлюстроўвацца цяперашняе "
-"зьмесьціва каталёґа. У такім разе давядзецца\n"
-"самастойна заладаваць каталёґ. Падрабязьней — у правадніцтве\n"
-"праґрамы («man mc»)."
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -4261,3 +4277,7 @@ msgstr "Скончылі шукаць"
 
 msgid "Continue from beginning?"
 msgstr "Ці працягваць ад пачатку?"
+
+#, fuzzy
+msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+msgstr "Немагчыма атрымаць лякальны асобнік «%s»"
