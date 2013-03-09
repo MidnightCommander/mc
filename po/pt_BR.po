@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"POT-Creation-Date: 2013-03-09 15:45+0400\n"
 "PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Rafael Ferreira <rafael.f.f1@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/mc/"
@@ -1537,16 +1537,16 @@ msgstr ""
 "diretório de trabalho, ou deu a você mesmo permissões\n"
 "de acesso extras com o comando \"su\"?"
 
+#, c-format
+msgid "Cannot fetch a local copy of %s"
+msgstr "Não foi possível adquirir uma cópia local de %s"
+
 msgid "The shell is already running a command"
 msgstr "A shell já está executando um comando"
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "digite 'exit' para retornar ao Midnight commander "
-
-#, c-format
-msgid "Cannot fetch a local copy of %s"
-msgstr "Não foi possível adquirir uma cópia local de %s"
 
 msgid "Set &all"
 msgstr "Configurar &tudo"
@@ -1596,6 +1596,156 @@ msgstr "Em execução"
 
 msgid "Stopped"
 msgstr "Parado"
+
+msgid "&Never"
+msgstr "&Nunca"
+
+msgid "On dum&b terminals"
+msgstr ""
+
+msgid "Alwa&ys"
+msgstr "Sem&pre"
+
+msgid "File operations"
+msgstr ""
+
+msgid "&Verbose operation"
+msgstr "Mostrar P&rogresso"
+
+msgid "Compute tota&ls"
+msgstr ""
+
+msgid "Classic pro&gressbar"
+msgstr ""
+
+msgid "Mkdi&r autoname"
+msgstr ""
+
+msgid "&Preallocate space"
+msgstr ""
+
+msgid "Esc key mode"
+msgstr ""
+
+msgid "S&ingle press"
+msgstr ""
+
+msgid "Timeout:"
+msgstr ""
+
+msgid "Pause after run"
+msgstr ""
+
+msgid "Use internal edi&t"
+msgstr "Conteúdo:"
+
+msgid "Use internal vie&w"
+msgstr ""
+
+#, fuzzy
+msgid "A&sk new file name"
+msgstr "Insira nome do arquivo:"
+
+msgid "Auto m&enus"
+msgstr ""
+
+msgid "&Drop down menus"
+msgstr "Menus &Suspensos"
+
+#, fuzzy
+msgid "S&hell patterns"
+msgstr "&Usando máscaras de ambiente de trabalho"
+
+msgid "Co&mplete: show all"
+msgstr ""
+
+msgid "Rotating d&ash"
+msgstr ""
+
+msgid "Cd follows lin&ks"
+msgstr ""
+
+msgid "Sa&fe delete"
+msgstr ""
+
+msgid "A&uto save setup"
+msgstr ""
+
+msgid "Configure options"
+msgstr "Configurar Opções"
+
+msgid "Case &insensitive"
+msgstr ""
+
+msgid "Use panel sort mo&de"
+msgstr ""
+
+msgid "Show mi&ni-status"
+msgstr ""
+
+msgid "Use SI si&ze units"
+msgstr ""
+
+msgid "Mi&x all files"
+msgstr ""
+
+msgid "Show &backup files"
+msgstr ""
+
+msgid "Show &hidden files"
+msgstr ""
+
+msgid "&Fast dir reload"
+msgstr "Atualização &Rápida de Diretório"
+
+msgid "Ma&rk moves down"
+msgstr ""
+
+msgid "Re&verse files only"
+msgstr ""
+
+msgid "Simple s&wap"
+msgstr ""
+
+msgid "A&uto save panels setup"
+msgstr ""
+
+msgid "Navigation"
+msgstr ""
+
+msgid "L&ynx-like motion"
+msgstr "Movimentação similar ao L&ynx"
+
+msgid "Pa&ge scrolling"
+msgstr ""
+
+msgid "&Mouse page scrolling"
+msgstr ""
+
+msgid "File highlight"
+msgstr "Realce de arquivo"
+
+msgid "File &types"
+msgstr ""
+
+msgid "&Permissions"
+msgstr ""
+
+msgid "Quick search"
+msgstr "Pesquisa rápida"
+
+msgid "Panel options"
+msgstr ""
+
+msgid "Information"
+msgstr ""
+
+msgid ""
+"Using the fast reload option may not reflect the exact\n"
+"directory contents. In this case you'll need to do a\n"
+"manual reload of the directory. See the man page for\n"
+"the details."
+msgstr ""
 
 msgid "&Full file list"
 msgstr "Lista &Completa"
@@ -1889,6 +2039,10 @@ msgstr "Visualização filtrada"
 
 msgid "Filter command and arguments:"
 msgstr "comando e argumentos filtrados:"
+
+#, fuzzy
+msgid "Edit file"
+msgstr "Editar &Menu de arquivo"
 
 msgid "Create a new Directory"
 msgstr "Criar um novo diretório"
@@ -2401,6 +2555,12 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "Escaneando diretório"
 
+#, c-format
+msgid ""
+"%s\n"
+"Directories: %zd, total size: %s"
+msgstr ""
+
 msgid "Cannot operate on \"..\"!"
 msgstr "Não foi possível operar em \"..\""
 
@@ -2699,9 +2859,6 @@ msgid "Label for \"%s\":"
 msgstr "Descrição para \"%s\": "
 
 msgid "Add to hotlist"
-msgstr ""
-
-msgid "Information"
 msgstr ""
 
 #, c-format
@@ -3030,148 +3187,6 @@ msgid "ButtonBar|Mkdir"
 msgstr "ButtonBar|Mkdir"
 
 msgid "Memory exhausted!"
-msgstr ""
-
-msgid "&Never"
-msgstr "&Nunca"
-
-msgid "On dum&b terminals"
-msgstr ""
-
-msgid "Alwa&ys"
-msgstr "Sem&pre"
-
-msgid "File operations"
-msgstr ""
-
-msgid "&Verbose operation"
-msgstr "Mostrar P&rogresso"
-
-msgid "Compute tota&ls"
-msgstr ""
-
-msgid "Classic pro&gressbar"
-msgstr ""
-
-msgid "Mkdi&r autoname"
-msgstr ""
-
-msgid "Preallocate &space"
-msgstr ""
-
-msgid "Esc key mode"
-msgstr ""
-
-msgid "S&ingle press"
-msgstr ""
-
-msgid "Timeout:"
-msgstr ""
-
-msgid "Pause after run"
-msgstr ""
-
-msgid "Use internal edi&t"
-msgstr "Conteúdo:"
-
-msgid "Use internal vie&w"
-msgstr ""
-
-msgid "Auto m&enus"
-msgstr ""
-
-msgid "&Drop down menus"
-msgstr "Menus &Suspensos"
-
-msgid "Shell &patterns"
-msgstr ""
-
-msgid "Co&mplete: show all"
-msgstr ""
-
-msgid "Rotating d&ash"
-msgstr ""
-
-msgid "Cd follows lin&ks"
-msgstr ""
-
-msgid "Sa&fe delete"
-msgstr ""
-
-msgid "A&uto save setup"
-msgstr ""
-
-msgid "Configure options"
-msgstr "Configurar Opções"
-
-msgid "Case &insensitive"
-msgstr ""
-
-msgid "Use panel sort mo&de"
-msgstr ""
-
-msgid "Show mi&ni-status"
-msgstr ""
-
-msgid "Use SI si&ze units"
-msgstr ""
-
-msgid "Mi&x all files"
-msgstr ""
-
-msgid "Show &backup files"
-msgstr ""
-
-msgid "Show &hidden files"
-msgstr ""
-
-msgid "&Fast dir reload"
-msgstr "Atualização &Rápida de Diretório"
-
-msgid "Ma&rk moves down"
-msgstr ""
-
-msgid "Re&verse files only"
-msgstr ""
-
-msgid "Simple s&wap"
-msgstr ""
-
-msgid "A&uto save panels setup"
-msgstr ""
-
-msgid "Navigation"
-msgstr ""
-
-msgid "L&ynx-like motion"
-msgstr "Movimentação similar ao L&ynx"
-
-msgid "Pa&ge scrolling"
-msgstr ""
-
-msgid "&Mouse page scrolling"
-msgstr ""
-
-msgid "File highlight"
-msgstr "Realce de arquivo"
-
-msgid "File &types"
-msgstr ""
-
-msgid "&Permissions"
-msgstr ""
-
-msgid "Quick search"
-msgstr "Pesquisa rápida"
-
-msgid "Panel options"
-msgstr ""
-
-msgid ""
-"Using the fast reload option may not reflect the exact\n"
-"directory contents. In this case you'll need to do a\n"
-"manual reload of the directory. See the man page for\n"
-"the details."
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
@@ -4172,3 +4187,7 @@ msgstr ""
 
 msgid "Continue from beginning?"
 msgstr ""
+
+#, fuzzy
+msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+msgstr "Não foi possível adquirir uma cópia local de %s"

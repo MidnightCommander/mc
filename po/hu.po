@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"POT-Creation-Date: 2013-03-09 15:45+0400\n"
 "PO-Revision-Date: 2012-12-26 15:01+0000\n"
 "Last-Translator: Rezső Páder <rezso@rezso.net>\n"
 "Language-Team: Hungarian (http://www.transifex.com/projects/p/mc/language/"
@@ -1565,16 +1565,16 @@ msgstr ""
 "Elképzelhető, hogy törölte az aktuális könyvtárat,\n"
 "vagy módosította a jogosultságait a \"su\" programmal?"
 
+#, c-format
+msgid "Cannot fetch a local copy of %s"
+msgstr "Nem sikerült behozni \"%s\" helyi másolatát"
+
 msgid "The shell is already running a command"
 msgstr "A parancsértelmező már futtat egy parancsot."
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Írjon \"exit\"-et a Midnight Commanderbe való visszatéréshez."
-
-#, c-format
-msgid "Cannot fetch a local copy of %s"
-msgstr "Nem sikerült behozni \"%s\" helyi másolatát"
 
 msgid "Set &all"
 msgstr "Min&det"
@@ -1624,6 +1624,160 @@ msgstr "Futtatás:"
 
 msgid "Stopped"
 msgstr "Megállítva"
+
+msgid "&Never"
+msgstr "So&ha"
+
+msgid "On dum&b terminals"
+msgstr "Gagyi &terminálokon"
+
+msgid "Alwa&ys"
+msgstr "Min&dig"
+
+msgid "File operations"
+msgstr "Fájlműveletek"
+
+msgid "&Verbose operation"
+msgstr "Részletes ü&zenetek"
+
+msgid "Compute tota&ls"
+msgstr "Ö&sszesítés"
+
+msgid "Classic pro&gressbar"
+msgstr "Klasszikus pro&gressbar"
+
+msgid "Mkdi&r autoname"
+msgstr "Mkdir auto-név"
+
+#, fuzzy
+msgid "&Preallocate space"
+msgstr "Üre&s hely lefoglalása"
+
+msgid "Esc key mode"
+msgstr "Escape Bill."
+
+msgid "S&ingle press"
+msgstr "Egy&szer nyom"
+
+msgid "Timeout:"
+msgstr "Várakozási idő:"
+
+msgid "Pause after run"
+msgstr "Parancsok utáni várakozás"
+
+msgid "Use internal edi&t"
+msgstr "Saját szövegszerkesz&tő"
+
+msgid "Use internal vie&w"
+msgstr "Saját &fájlmegjelenítő"
+
+#, fuzzy
+msgid "A&sk new file name"
+msgstr "Fájlnév:"
+
+msgid "Auto m&enus"
+msgstr "Men&ü indításkor"
+
+msgid "&Drop down menus"
+msgstr "&Legördülő menük"
+
+#, fuzzy
+msgid "S&hell patterns"
+msgstr "Shell-m&inták"
+
+msgid "Co&mplete: show all"
+msgstr "Kie&gészítésnél teljes lista"
+
+msgid "Rotating d&ash"
+msgstr "Folyamatjelzés &pörgő vonallal"
+
+msgid "Cd follows lin&ks"
+msgstr "Li&nkkövető könyvtárváltás"
+
+msgid "Sa&fe delete"
+msgstr "\"Ó&vatos\" törlés"
+
+msgid "A&uto save setup"
+msgstr "Auto &Beállításmentés"
+
+msgid "Configure options"
+msgstr "Alapbeállítások"
+
+msgid "Case &insensitive"
+msgstr "&Kis-/nagybetű mindegy"
+
+msgid "Use panel sort mo&de"
+msgstr "Panel rendezési mó&d használata"
+
+msgid "Show mi&ni-status"
+msgstr "Extra adat&sor"
+
+msgid "Use SI si&ze units"
+msgstr "SI mértékegységek"
+
+msgid "Mi&x all files"
+msgstr "&Könyvtárak a fájlok között"
+
+msgid "Show &backup files"
+msgstr "Másol&atfájlok mutatása"
+
+msgid "Show &hidden files"
+msgstr "&Rejtett fájlok mutatása"
+
+msgid "&Fast dir reload"
+msgstr "G&yors könyvtár-újraolvasás"
+
+msgid "Ma&rk moves down"
+msgstr "Ki&jelölés lefelé léptet"
+
+msgid "Re&verse files only"
+msgstr "Csak &fájlok fordítva"
+
+msgid "Simple s&wap"
+msgstr "Egyszerű &csere"
+
+msgid "A&uto save panels setup"
+msgstr "Panelek &autom. mentése"
+
+msgid "Navigation"
+msgstr "Navigálás"
+
+msgid "L&ynx-like motion"
+msgstr "Lyn&x-szerű navigálás"
+
+msgid "Pa&ge scrolling"
+msgstr "Oldal&görgetés"
+
+msgid "&Mouse page scrolling"
+msgstr "Oldalgörgetés &egérrel"
+
+msgid "File highlight"
+msgstr "Kiemelés"
+
+msgid "File &types"
+msgstr "Fáj&ltípusok"
+
+msgid "&Permissions"
+msgstr "&Jogok"
+
+msgid "Quick search"
+msgstr "Gyorskeresés"
+
+msgid "Panel options"
+msgstr "Panelbeállítások"
+
+msgid "Information"
+msgstr "Információ"
+
+msgid ""
+"Using the fast reload option may not reflect the exact\n"
+"directory contents. In this case you'll need to do a\n"
+"manual reload of the directory. See the man page for\n"
+"the details."
+msgstr ""
+"Előfordulhat, hogy a \"Gyors könyvtár-újraolvasás\" eredménye \n"
+"nem tükrözi pontosan a könyvtár tartalmát - ilyenkor kézi\n"
+"frissítést kell végezni. Részletek a kézikönyvben (man mc)."
 
 msgid "&Full file list"
 msgstr "&Teljes"
@@ -1915,6 +2069,10 @@ msgstr "Szűrt nézet"
 
 msgid "Filter command and arguments:"
 msgstr "Szűrőprogram és paraméterei:"
+
+#, fuzzy
+msgid "Edit file"
+msgstr "Fájlok szerkesztése"
 
 msgid "Create a new Directory"
 msgstr "Új könyvtár létrehozása"
@@ -2442,6 +2600,12 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "Könyvtárak átfésülése"
 
+#, c-format
+msgid ""
+"%s\n"
+"Directories: %zd, total size: %s"
+msgstr ""
+
 msgid "Cannot operate on \"..\"!"
 msgstr "A \"..\" könyvtárral ez nem lehetséges!"
 
@@ -2743,9 +2907,6 @@ msgstr "\"%s\" címkéje:"
 
 msgid "Add to hotlist"
 msgstr "Felvétel a gyorslistára"
-
-msgid "Information"
-msgstr "Információ"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -3074,151 +3235,6 @@ msgstr "ÚjKvt"
 
 msgid "Memory exhausted!"
 msgstr "Elfogyott a memória!"
-
-msgid "&Never"
-msgstr "So&ha"
-
-msgid "On dum&b terminals"
-msgstr "Gagyi &terminálokon"
-
-msgid "Alwa&ys"
-msgstr "Min&dig"
-
-msgid "File operations"
-msgstr "Fájlműveletek"
-
-msgid "&Verbose operation"
-msgstr "Részletes ü&zenetek"
-
-msgid "Compute tota&ls"
-msgstr "Ö&sszesítés"
-
-msgid "Classic pro&gressbar"
-msgstr "Klasszikus pro&gressbar"
-
-msgid "Mkdi&r autoname"
-msgstr "Mkdir auto-név"
-
-msgid "Preallocate &space"
-msgstr "Üre&s hely lefoglalása"
-
-msgid "Esc key mode"
-msgstr "Escape Bill."
-
-msgid "S&ingle press"
-msgstr "Egy&szer nyom"
-
-msgid "Timeout:"
-msgstr "Várakozási idő:"
-
-msgid "Pause after run"
-msgstr "Parancsok utáni várakozás"
-
-msgid "Use internal edi&t"
-msgstr "Saját szövegszerkesz&tő"
-
-msgid "Use internal vie&w"
-msgstr "Saját &fájlmegjelenítő"
-
-msgid "Auto m&enus"
-msgstr "Men&ü indításkor"
-
-msgid "&Drop down menus"
-msgstr "&Legördülő menük"
-
-msgid "Shell &patterns"
-msgstr "Shell-m&inták"
-
-msgid "Co&mplete: show all"
-msgstr "Kie&gészítésnél teljes lista"
-
-msgid "Rotating d&ash"
-msgstr "Folyamatjelzés &pörgő vonallal"
-
-msgid "Cd follows lin&ks"
-msgstr "Li&nkkövető könyvtárváltás"
-
-msgid "Sa&fe delete"
-msgstr "\"Ó&vatos\" törlés"
-
-msgid "A&uto save setup"
-msgstr "Auto &Beállításmentés"
-
-msgid "Configure options"
-msgstr "Alapbeállítások"
-
-msgid "Case &insensitive"
-msgstr "&Kis-/nagybetű mindegy"
-
-msgid "Use panel sort mo&de"
-msgstr "Panel rendezési mó&d használata"
-
-msgid "Show mi&ni-status"
-msgstr "Extra adat&sor"
-
-msgid "Use SI si&ze units"
-msgstr "SI mértékegységek"
-
-msgid "Mi&x all files"
-msgstr "&Könyvtárak a fájlok között"
-
-msgid "Show &backup files"
-msgstr "Másol&atfájlok mutatása"
-
-msgid "Show &hidden files"
-msgstr "&Rejtett fájlok mutatása"
-
-msgid "&Fast dir reload"
-msgstr "G&yors könyvtár-újraolvasás"
-
-msgid "Ma&rk moves down"
-msgstr "Ki&jelölés lefelé léptet"
-
-msgid "Re&verse files only"
-msgstr "Csak &fájlok fordítva"
-
-msgid "Simple s&wap"
-msgstr "Egyszerű &csere"
-
-msgid "A&uto save panels setup"
-msgstr "Panelek &autom. mentése"
-
-msgid "Navigation"
-msgstr "Navigálás"
-
-msgid "L&ynx-like motion"
-msgstr "Lyn&x-szerű navigálás"
-
-msgid "Pa&ge scrolling"
-msgstr "Oldal&görgetés"
-
-msgid "&Mouse page scrolling"
-msgstr "Oldalgörgetés &egérrel"
-
-msgid "File highlight"
-msgstr "Kiemelés"
-
-msgid "File &types"
-msgstr "Fáj&ltípusok"
-
-msgid "&Permissions"
-msgstr "&Jogok"
-
-msgid "Quick search"
-msgstr "Gyorskeresés"
-
-msgid "Panel options"
-msgstr "Panelbeállítások"
-
-msgid ""
-"Using the fast reload option may not reflect the exact\n"
-"directory contents. In this case you'll need to do a\n"
-"manual reload of the directory. See the man page for\n"
-"the details."
-msgstr ""
-"Előfordulhat, hogy a \"Gyors könyvtár-újraolvasás\" eredménye \n"
-"nem tükrözi pontosan a könyvtár tartalmát - ilyenkor kézi\n"
-"frissítést kell végezni. Részletek a kézikönyvben (man mc)."
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -4237,3 +4253,7 @@ msgstr "Keresés kész"
 
 msgid "Continue from beginning?"
 msgstr "Folytatás az elejéről?"
+
+#, fuzzy
+msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+msgstr "Nem sikerült behozni \"%s\" helyi másolatát"

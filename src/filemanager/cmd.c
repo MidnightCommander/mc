@@ -6,6 +6,9 @@
    2005, 2006, 2007, 2009, 2011, 2013
    The Free Software Foundation, Inc.
 
+   Written by:
+   Andrew Borodin <aborodin@vmail.ru>, 2013
+
    This file is part of the Midnight Commander.
 
    The Midnight Commander is free software: you can redistribute it
@@ -1618,7 +1621,7 @@ single_dirsize_cmd (void)
         ComputeDirSizeUI *ui;
         vfs_path_t *p;
 
-        ui = compute_dir_size_create_ui ();
+        ui = compute_dir_size_create_ui (FALSE);
         p = vfs_path_from_str (entry->fname);
 
         if (compute_dir_size (p, ui, compute_dir_size_update_ui, &marked, &total, TRUE) ==
@@ -1652,7 +1655,7 @@ dirsizes_cmd (void)
     int i;
     ComputeDirSizeUI *ui;
 
-    ui = compute_dir_size_create_ui ();
+    ui = compute_dir_size_create_ui (FALSE);
 
     for (i = 0; i < panel->count; i++)
         if (S_ISDIR (panel->dir.list[i].st.st_mode)

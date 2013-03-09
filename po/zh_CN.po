@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"POT-Creation-Date: 2013-03-09 15:45+0400\n"
 "PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/mc/"
@@ -1557,16 +1557,16 @@ msgstr ""
 "也许您删除了工作目录，或者通过\"su\"命令给您的\n"
 "进程额外的访问权限？"
 
+#, c-format
+msgid "Cannot fetch a local copy of %s"
+msgstr "无法获取 %s 的本地副本"
+
 msgid "The shell is already running a command"
 msgstr "Shell 正在运行一个命令"
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "输入 \"exit\" 以返回 Midnight Commander"
-
-#, c-format
-msgid "Cannot fetch a local copy of %s"
-msgstr "无法获取 %s 的本地副本"
 
 msgid "Set &all"
 msgstr "全部设置(&A)"
@@ -1616,6 +1616,160 @@ msgstr "正在运行"
 
 msgid "Stopped"
 msgstr "已停止"
+
+msgid "&Never"
+msgstr "从不(&N)"
+
+msgid "On dum&b terminals"
+msgstr "在哑终端上(&b)"
+
+msgid "Alwa&ys"
+msgstr "总是(&Y)"
+
+msgid "File operations"
+msgstr ""
+
+msgid "&Verbose operation"
+msgstr "冗余操作(&V)"
+
+msgid "Compute tota&ls"
+msgstr "计算总和(&L)"
+
+msgid "Classic pro&gressbar"
+msgstr "经典进度条(&G)"
+
+msgid "Mkdi&r autoname"
+msgstr "创建目录时自动命名(&R)"
+
+#, fuzzy
+msgid "&Preallocate space"
+msgstr "预分配空间 (&s)"
+
+msgid "Esc key mode"
+msgstr "ESC键模式"
+
+msgid "S&ingle press"
+msgstr "按下单个键(&I)"
+
+msgid "Timeout:"
+msgstr "超时："
+
+msgid "Pause after run"
+msgstr "运行后暂停..."
+
+msgid "Use internal edi&t"
+msgstr "使用内部编辑器(&T)"
+
+msgid "Use internal vie&w"
+msgstr "使用内部查看器(&W)"
+
+#, fuzzy
+msgid "A&sk new file name"
+msgstr "输入文件名："
+
+msgid "Auto m&enus"
+msgstr "自动菜单(&E)"
+
+msgid "&Drop down menus"
+msgstr "下拉菜单(&D)"
+
+#, fuzzy
+msgid "S&hell patterns"
+msgstr "Shell 模式(&P)"
+
+msgid "Co&mplete: show all"
+msgstr "完全：显示全部(&M)"
+
+msgid "Rotating d&ash"
+msgstr "旋转线(&A)"
+
+msgid "Cd follows lin&ks"
+msgstr "切换目录跟随链接(&K)"
+
+msgid "Sa&fe delete"
+msgstr "安全删除(&F)"
+
+msgid "A&uto save setup"
+msgstr "自动保存设置(&U)"
+
+msgid "Configure options"
+msgstr "配置选项"
+
+msgid "Case &insensitive"
+msgstr "大小写不敏感(&I)"
+
+msgid "Use panel sort mo&de"
+msgstr "使用面板排序模式(&D)"
+
+msgid "Show mi&ni-status"
+msgstr "显示最少状态 (&N)"
+
+msgid "Use SI si&ze units"
+msgstr "使用SI大小单位(&Z)"
+
+msgid "Mi&x all files"
+msgstr "混合所有文件(&X)"
+
+msgid "Show &backup files"
+msgstr "显示备份文件(&B)"
+
+msgid "Show &hidden files"
+msgstr "显示隐藏文件(&H)"
+
+msgid "&Fast dir reload"
+msgstr "快速重载入目录(&F)"
+
+msgid "Ma&rk moves down"
+msgstr "标记文件后光标下移(&R)"
+
+msgid "Re&verse files only"
+msgstr "仅反选文件(&V)"
+
+msgid "Simple s&wap"
+msgstr "简单交换 (&W)"
+
+msgid "A&uto save panels setup"
+msgstr "自动保存面板设置(&U)"
+
+msgid "Navigation"
+msgstr "导航"
+
+msgid "L&ynx-like motion"
+msgstr "类似 Lynx 动作(&Y)"
+
+msgid "Pa&ge scrolling"
+msgstr "页面滚动(&G)"
+
+msgid "&Mouse page scrolling"
+msgstr "用鼠标滚动页(&M)"
+
+msgid "File highlight"
+msgstr "文件突出显示"
+
+msgid "File &types"
+msgstr "文件类型(&T)"
+
+msgid "&Permissions"
+msgstr "权限(&P)"
+
+msgid "Quick search"
+msgstr "快速查找"
+
+msgid "Panel options"
+msgstr "面板选项"
+
+msgid "Information"
+msgstr "信息"
+
+msgid ""
+"Using the fast reload option may not reflect the exact\n"
+"directory contents. In this case you'll need to do a\n"
+"manual reload of the directory. See the man page for\n"
+"the details."
+msgstr ""
+"使用快速重载选项可能不能反映目录的真实内容。在这种\n"
+"情况下，您需要手工刷新目录的内容。请参考手册获得详细\n"
+"的信息。                                             "
 
 msgid "&Full file list"
 msgstr "完整文件列表(&F)"
@@ -1907,6 +2061,10 @@ msgstr "过滤视图"
 
 msgid "Filter command and arguments:"
 msgstr "过滤命令和参数："
+
+#, fuzzy
+msgid "Edit file"
+msgstr "菜单文件编辑(&M)"
 
 msgid "Create a new Directory"
 msgstr "创建新目录"
@@ -2426,6 +2584,12 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "扫描目录"
 
+#, c-format
+msgid ""
+"%s\n"
+"Directories: %zd, total size: %s"
+msgstr ""
+
 msgid "Cannot operate on \"..\"!"
 msgstr "无法操作\"..\"！"
 
@@ -2726,9 +2890,6 @@ msgstr "\"%s\"的标签："
 
 msgid "Add to hotlist"
 msgstr "添加到活动表"
-
-msgid "Information"
-msgstr "信息"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -3055,151 +3216,6 @@ msgstr "ButtonBar|建目录"
 
 msgid "Memory exhausted!"
 msgstr "内存耗尽！"
-
-msgid "&Never"
-msgstr "从不(&N)"
-
-msgid "On dum&b terminals"
-msgstr "在哑终端上(&b)"
-
-msgid "Alwa&ys"
-msgstr "总是(&Y)"
-
-msgid "File operations"
-msgstr ""
-
-msgid "&Verbose operation"
-msgstr "冗余操作(&V)"
-
-msgid "Compute tota&ls"
-msgstr "计算总和(&L)"
-
-msgid "Classic pro&gressbar"
-msgstr "经典进度条(&G)"
-
-msgid "Mkdi&r autoname"
-msgstr "创建目录时自动命名(&R)"
-
-msgid "Preallocate &space"
-msgstr "预分配空间 (&s)"
-
-msgid "Esc key mode"
-msgstr "ESC键模式"
-
-msgid "S&ingle press"
-msgstr "按下单个键(&I)"
-
-msgid "Timeout:"
-msgstr "超时："
-
-msgid "Pause after run"
-msgstr "运行后暂停..."
-
-msgid "Use internal edi&t"
-msgstr "使用内部编辑器(&T)"
-
-msgid "Use internal vie&w"
-msgstr "使用内部查看器(&W)"
-
-msgid "Auto m&enus"
-msgstr "自动菜单(&E)"
-
-msgid "&Drop down menus"
-msgstr "下拉菜单(&D)"
-
-msgid "Shell &patterns"
-msgstr "Shell 模式(&P)"
-
-msgid "Co&mplete: show all"
-msgstr "完全：显示全部(&M)"
-
-msgid "Rotating d&ash"
-msgstr "旋转线(&A)"
-
-msgid "Cd follows lin&ks"
-msgstr "切换目录跟随链接(&K)"
-
-msgid "Sa&fe delete"
-msgstr "安全删除(&F)"
-
-msgid "A&uto save setup"
-msgstr "自动保存设置(&U)"
-
-msgid "Configure options"
-msgstr "配置选项"
-
-msgid "Case &insensitive"
-msgstr "大小写不敏感(&I)"
-
-msgid "Use panel sort mo&de"
-msgstr "使用面板排序模式(&D)"
-
-msgid "Show mi&ni-status"
-msgstr "显示最少状态 (&N)"
-
-msgid "Use SI si&ze units"
-msgstr "使用SI大小单位(&Z)"
-
-msgid "Mi&x all files"
-msgstr "混合所有文件(&X)"
-
-msgid "Show &backup files"
-msgstr "显示备份文件(&B)"
-
-msgid "Show &hidden files"
-msgstr "显示隐藏文件(&H)"
-
-msgid "&Fast dir reload"
-msgstr "快速重载入目录(&F)"
-
-msgid "Ma&rk moves down"
-msgstr "标记文件后光标下移(&R)"
-
-msgid "Re&verse files only"
-msgstr "仅反选文件(&V)"
-
-msgid "Simple s&wap"
-msgstr "简单交换 (&W)"
-
-msgid "A&uto save panels setup"
-msgstr "自动保存面板设置(&U)"
-
-msgid "Navigation"
-msgstr "导航"
-
-msgid "L&ynx-like motion"
-msgstr "类似 Lynx 动作(&Y)"
-
-msgid "Pa&ge scrolling"
-msgstr "页面滚动(&G)"
-
-msgid "&Mouse page scrolling"
-msgstr "用鼠标滚动页(&M)"
-
-msgid "File highlight"
-msgstr "文件突出显示"
-
-msgid "File &types"
-msgstr "文件类型(&T)"
-
-msgid "&Permissions"
-msgstr "权限(&P)"
-
-msgid "Quick search"
-msgstr "快速查找"
-
-msgid "Panel options"
-msgstr "面板选项"
-
-msgid ""
-"Using the fast reload option may not reflect the exact\n"
-"directory contents. In this case you'll need to do a\n"
-"manual reload of the directory. See the man page for\n"
-"the details."
-msgstr ""
-"使用快速重载选项可能不能反映目录的真实内容。在这种\n"
-"情况下，您需要手工刷新目录的内容。请参考手册获得详细\n"
-"的信息。                                             "
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -4217,3 +4233,7 @@ msgstr "搜索完成"
 
 msgid "Continue from beginning?"
 msgstr "从头继续？"
+
+#, fuzzy
+msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+msgstr "无法获取 %s 的本地副本"

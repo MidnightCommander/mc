@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"POT-Creation-Date: 2013-03-09 15:45+0400\n"
 "PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/mc/language/"
@@ -1507,16 +1507,16 @@ msgid ""
 "extra access permissions with the \"su\" command?"
 msgstr ""
 
+#, c-format
+msgid "Cannot fetch a local copy of %s"
+msgstr ""
+
 msgid "The shell is already running a command"
 msgstr "Обвивката вече изпълнява команда"
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Напишете `exit', за да се върнете в Midnight Commander"
-
-#, c-format
-msgid "Cannot fetch a local copy of %s"
-msgstr ""
 
 msgid "Set &all"
 msgstr "Прм всич"
@@ -1562,6 +1562,156 @@ msgstr ""
 
 msgid "Stopped"
 msgstr "Спрян"
+
+msgid "&Never"
+msgstr "Никога"
+
+msgid "On dum&b terminals"
+msgstr ""
+
+msgid "Alwa&ys"
+msgstr "Винаги"
+
+msgid "File operations"
+msgstr ""
+
+msgid "&Verbose operation"
+msgstr "Детайли при операции"
+
+msgid "Compute tota&ls"
+msgstr ""
+
+msgid "Classic pro&gressbar"
+msgstr ""
+
+msgid "Mkdi&r autoname"
+msgstr ""
+
+msgid "&Preallocate space"
+msgstr ""
+
+msgid "Esc key mode"
+msgstr ""
+
+msgid "S&ingle press"
+msgstr ""
+
+msgid "Timeout:"
+msgstr "Изчакване:"
+
+msgid "Pause after run"
+msgstr ""
+
+msgid "Use internal edi&t"
+msgstr ""
+
+msgid "Use internal vie&w"
+msgstr ""
+
+#, fuzzy
+msgid "A&sk new file name"
+msgstr "Въведете име на файл:"
+
+msgid "Auto m&enus"
+msgstr ""
+
+msgid "&Drop down menus"
+msgstr "Падащи менюта"
+
+#, fuzzy
+msgid "S&hell patterns"
+msgstr "Mетасимволи на обвивката"
+
+msgid "Co&mplete: show all"
+msgstr ""
+
+msgid "Rotating d&ash"
+msgstr ""
+
+msgid "Cd follows lin&ks"
+msgstr ""
+
+msgid "Sa&fe delete"
+msgstr ""
+
+msgid "A&uto save setup"
+msgstr ""
+
+msgid "Configure options"
+msgstr "Опции на конфигурацията"
+
+msgid "Case &insensitive"
+msgstr ""
+
+msgid "Use panel sort mo&de"
+msgstr ""
+
+msgid "Show mi&ni-status"
+msgstr ""
+
+msgid "Use SI si&ze units"
+msgstr ""
+
+msgid "Mi&x all files"
+msgstr ""
+
+msgid "Show &backup files"
+msgstr ""
+
+msgid "Show &hidden files"
+msgstr ""
+
+msgid "&Fast dir reload"
+msgstr "Бързо опресняване"
+
+msgid "Ma&rk moves down"
+msgstr ""
+
+msgid "Re&verse files only"
+msgstr ""
+
+msgid "Simple s&wap"
+msgstr ""
+
+msgid "A&uto save panels setup"
+msgstr ""
+
+msgid "Navigation"
+msgstr ""
+
+msgid "L&ynx-like motion"
+msgstr "Движение като lynx"
+
+msgid "Pa&ge scrolling"
+msgstr ""
+
+msgid "&Mouse page scrolling"
+msgstr ""
+
+msgid "File highlight"
+msgstr ""
+
+msgid "File &types"
+msgstr ""
+
+msgid "&Permissions"
+msgstr ""
+
+msgid "Quick search"
+msgstr "Бързо търсене"
+
+msgid "Panel options"
+msgstr "Настройки на панел"
+
+msgid "Information"
+msgstr "Данни"
+
+msgid ""
+"Using the fast reload option may not reflect the exact\n"
+"directory contents. In this case you'll need to do a\n"
+"manual reload of the directory. See the man page for\n"
+"the details."
+msgstr ""
 
 msgid "&Full file list"
 msgstr "Пълен файлов списък"
@@ -1853,6 +2003,10 @@ msgstr ""
 
 msgid "Filter command and arguments:"
 msgstr ""
+
+#, fuzzy
+msgid "Edit file"
+msgstr "Редактирай меню-файл"
 
 msgid "Create a new Directory"
 msgstr " Създай нова директория "
@@ -2301,6 +2455,12 @@ msgstr ""
 msgid "Directory scanning"
 msgstr ""
 
+#, c-format
+msgid ""
+"%s\n"
+"Directories: %zd, total size: %s"
+msgstr ""
+
 msgid "Cannot operate on \"..\"!"
 msgstr ""
 
@@ -2598,9 +2758,6 @@ msgstr "Име за \"%s\":"
 
 msgid "Add to hotlist"
 msgstr ""
-
-msgid "Information"
-msgstr "Данни"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2928,148 +3085,6 @@ msgid "ButtonBar|Mkdir"
 msgstr ""
 
 msgid "Memory exhausted!"
-msgstr ""
-
-msgid "&Never"
-msgstr "Никога"
-
-msgid "On dum&b terminals"
-msgstr ""
-
-msgid "Alwa&ys"
-msgstr "Винаги"
-
-msgid "File operations"
-msgstr ""
-
-msgid "&Verbose operation"
-msgstr "Детайли при операции"
-
-msgid "Compute tota&ls"
-msgstr ""
-
-msgid "Classic pro&gressbar"
-msgstr ""
-
-msgid "Mkdi&r autoname"
-msgstr ""
-
-msgid "Preallocate &space"
-msgstr ""
-
-msgid "Esc key mode"
-msgstr ""
-
-msgid "S&ingle press"
-msgstr ""
-
-msgid "Timeout:"
-msgstr "Изчакване:"
-
-msgid "Pause after run"
-msgstr ""
-
-msgid "Use internal edi&t"
-msgstr ""
-
-msgid "Use internal vie&w"
-msgstr ""
-
-msgid "Auto m&enus"
-msgstr ""
-
-msgid "&Drop down menus"
-msgstr "Падащи менюта"
-
-msgid "Shell &patterns"
-msgstr ""
-
-msgid "Co&mplete: show all"
-msgstr ""
-
-msgid "Rotating d&ash"
-msgstr ""
-
-msgid "Cd follows lin&ks"
-msgstr ""
-
-msgid "Sa&fe delete"
-msgstr ""
-
-msgid "A&uto save setup"
-msgstr ""
-
-msgid "Configure options"
-msgstr "Опции на конфигурацията"
-
-msgid "Case &insensitive"
-msgstr ""
-
-msgid "Use panel sort mo&de"
-msgstr ""
-
-msgid "Show mi&ni-status"
-msgstr ""
-
-msgid "Use SI si&ze units"
-msgstr ""
-
-msgid "Mi&x all files"
-msgstr ""
-
-msgid "Show &backup files"
-msgstr ""
-
-msgid "Show &hidden files"
-msgstr ""
-
-msgid "&Fast dir reload"
-msgstr "Бързо опресняване"
-
-msgid "Ma&rk moves down"
-msgstr ""
-
-msgid "Re&verse files only"
-msgstr ""
-
-msgid "Simple s&wap"
-msgstr ""
-
-msgid "A&uto save panels setup"
-msgstr ""
-
-msgid "Navigation"
-msgstr ""
-
-msgid "L&ynx-like motion"
-msgstr "Движение като lynx"
-
-msgid "Pa&ge scrolling"
-msgstr ""
-
-msgid "&Mouse page scrolling"
-msgstr ""
-
-msgid "File highlight"
-msgstr ""
-
-msgid "File &types"
-msgstr ""
-
-msgid "&Permissions"
-msgstr ""
-
-msgid "Quick search"
-msgstr "Бързо търсене"
-
-msgid "Panel options"
-msgstr "Настройки на панел"
-
-msgid ""
-"Using the fast reload option may not reflect the exact\n"
-"directory contents. In this case you'll need to do a\n"
-"manual reload of the directory. See the man page for\n"
-"the details."
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
@@ -4058,3 +4073,6 @@ msgstr "Търсенето приключи"
 
 msgid "Continue from beginning?"
 msgstr "Да се продължи ли от началото?"
+
+msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2012-12-28 11:22+0300\n"
+"POT-Creation-Date: 2013-03-09 15:45+0400\n"
 "PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/mc/language/cs/)\n"
@@ -1536,16 +1536,16 @@ msgstr ""
 "že byl tento adresář smazán nebo také proto, že jste se\n"
 "do tohoto adresáře přepnuli pomocí příkazu „su“."
 
+#, c-format
+msgid "Cannot fetch a local copy of %s"
+msgstr "Nelze vyrobit lokální kopii souboru %s"
+
 msgid "The shell is already running a command"
 msgstr "Shell už provádí příkaz"
 
 #, c-format
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Napište „exit“ pro návrat do Midnight Commanderu"
-
-#, c-format
-msgid "Cannot fetch a local copy of %s"
-msgstr "Nelze vyrobit lokální kopii souboru %s"
 
 msgid "Set &all"
 msgstr "Nastavit &vše"
@@ -1595,6 +1595,161 @@ msgstr "Běží"
 
 msgid "Stopped"
 msgstr "Zastaveno"
+
+msgid "&Never"
+msgstr "&Nikdy"
+
+msgid "On dum&b terminals"
+msgstr "Na neinteligentních term&inálech"
+
+msgid "Alwa&ys"
+msgstr "Vžd&y"
+
+msgid "File operations"
+msgstr ""
+
+msgid "&Verbose operation"
+msgstr "„Upovídaně&jší“ operace"
+
+msgid "Compute tota&ls"
+msgstr "Počíta&t součty"
+
+msgid "Classic pro&gressbar"
+msgstr "Klasický progressbar"
+
+msgid "Mkdi&r autoname"
+msgstr "Mkdir autonázev"
+
+#, fuzzy
+msgid "&Preallocate space"
+msgstr "Ignorovat všechny mezery"
+
+msgid "Esc key mode"
+msgstr "Mód Escape klávesy"
+
+msgid "S&ingle press"
+msgstr "Jediný stisk"
+
+msgid "Timeout:"
+msgstr "Timeout:"
+
+msgid "Pause after run"
+msgstr "Čekat po ukončení"
+
+msgid "Use internal edi&t"
+msgstr "Použít interní e&ditor"
+
+msgid "Use internal vie&w"
+msgstr "Použít interní prohlíž&eč"
+
+#, fuzzy
+msgid "A&sk new file name"
+msgstr "Zadejte jméno souboru:"
+
+msgid "Auto m&enus"
+msgstr "Automatické &menu"
+
+msgid "&Drop down menus"
+msgstr "Rolovat menu dolů"
+
+#, fuzzy
+msgid "S&hell patterns"
+msgstr "Vzory s&hellu"
+
+msgid "Co&mplete: show all"
+msgstr "Doplňování: ukázat vše"
+
+msgid "Rotating d&ash"
+msgstr "Rotující &/"
+
+msgid "Cd follows lin&ks"
+msgstr "&cd následuje odkazy"
+
+msgid "Sa&fe delete"
+msgstr "&Bezpečné mazání"
+
+msgid "A&uto save setup"
+msgstr "&Automatické ukládání parametrů"
+
+msgid "Configure options"
+msgstr "Změna nastavení"
+
+msgid "Case &insensitive"
+msgstr "Nevšímat si velikos&ti písmen"
+
+msgid "Use panel sort mo&de"
+msgstr "Použít režim třídění panelu"
+
+msgid "Show mi&ni-status"
+msgstr ""
+
+msgid "Use SI si&ze units"
+msgstr "Používat &SI jednotky velikosti"
+
+msgid "Mi&x all files"
+msgstr "Míchat &všechny soubory"
+
+msgid "Show &backup files"
+msgstr "Zobrazovat zá&ložní soubory"
+
+msgid "Show &hidden files"
+msgstr "Ukázat s&kryté soubory"
+
+msgid "&Fast dir reload"
+msgstr "&Rychlé načítání adresářů"
+
+msgid "Ma&rk moves down"
+msgstr "Označení &posune dolů"
+
+msgid "Re&verse files only"
+msgstr "&Pozpátku pouze soubory"
+
+msgid "Simple s&wap"
+msgstr ""
+
+msgid "A&uto save panels setup"
+msgstr "&Automatické ukládání nastavení panelů"
+
+msgid "Navigation"
+msgstr "Navigace"
+
+msgid "L&ynx-like motion"
+msgstr "Pohyb jako v lyn&xu"
+
+msgid "Pa&ge scrolling"
+msgstr "Posun stránky"
+
+msgid "&Mouse page scrolling"
+msgstr "Posun stránky myší"
+
+msgid "File highlight"
+msgstr "Zvýraznění"
+
+msgid "File &types"
+msgstr "&Typy souborů"
+
+msgid "&Permissions"
+msgstr "Práva"
+
+msgid "Quick search"
+msgstr "Rychlé hledání"
+
+msgid "Panel options"
+msgstr "Nastavení panelu"
+
+msgid "Information"
+msgstr "Informace"
+
+msgid ""
+"Using the fast reload option may not reflect the exact\n"
+"directory contents. In this case you'll need to do a\n"
+"manual reload of the directory. See the man page for\n"
+"the details."
+msgstr ""
+"Použitím rychlého načítání adresářů nebude někdy obsah\n"
+"adresáře přesně odpovídat obsahu panelu. V tom případě\n"
+"použijte ruční načtení obsahu adresáře (manual reload).\n"
+"Podrobnosti se dozvíte v manuálové stránce."
 
 msgid "&Full file list"
 msgstr "&Plný seznam souborů"
@@ -1886,6 +2041,10 @@ msgstr "Filtrovaný pohled"
 
 msgid "Filter command and arguments:"
 msgstr "Příkaz filtru a jeho argumenty:"
+
+#, fuzzy
+msgid "Edit file"
+msgstr "Upravit uživatelské &menu"
 
 msgid "Create a new Directory"
 msgstr "Vytvořit nový adresář"
@@ -2405,6 +2564,12 @@ msgstr ""
 msgid "Directory scanning"
 msgstr "Prohledávání adresáře"
 
+#, c-format
+msgid ""
+"%s\n"
+"Directories: %zd, total size: %s"
+msgstr ""
+
 msgid "Cannot operate on \"..\"!"
 msgstr "Nelze pracovat s „..“!"
 
@@ -2703,9 +2868,6 @@ msgstr "Popis pro „%s“:"
 
 msgid "Add to hotlist"
 msgstr "Přidání pro rychlý přístup"
-
-msgid "Information"
-msgstr "Informace"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -3036,152 +3198,6 @@ msgstr "TlačítkováLišta|NovAdr"
 
 msgid "Memory exhausted!"
 msgstr ""
-
-msgid "&Never"
-msgstr "&Nikdy"
-
-msgid "On dum&b terminals"
-msgstr "Na neinteligentních term&inálech"
-
-msgid "Alwa&ys"
-msgstr "Vžd&y"
-
-msgid "File operations"
-msgstr ""
-
-msgid "&Verbose operation"
-msgstr "„Upovídaně&jší“ operace"
-
-msgid "Compute tota&ls"
-msgstr "Počíta&t součty"
-
-msgid "Classic pro&gressbar"
-msgstr "Klasický progressbar"
-
-msgid "Mkdi&r autoname"
-msgstr "Mkdir autonázev"
-
-msgid "Preallocate &space"
-msgstr ""
-
-msgid "Esc key mode"
-msgstr "Mód Escape klávesy"
-
-msgid "S&ingle press"
-msgstr "Jediný stisk"
-
-msgid "Timeout:"
-msgstr "Timeout:"
-
-msgid "Pause after run"
-msgstr "Čekat po ukončení"
-
-msgid "Use internal edi&t"
-msgstr "Použít interní e&ditor"
-
-msgid "Use internal vie&w"
-msgstr "Použít interní prohlíž&eč"
-
-msgid "Auto m&enus"
-msgstr "Automatické &menu"
-
-msgid "&Drop down menus"
-msgstr "Rolovat menu dolů"
-
-msgid "Shell &patterns"
-msgstr "Vzory s&hellu"
-
-msgid "Co&mplete: show all"
-msgstr "Doplňování: ukázat vše"
-
-msgid "Rotating d&ash"
-msgstr "Rotující &/"
-
-msgid "Cd follows lin&ks"
-msgstr "&cd následuje odkazy"
-
-msgid "Sa&fe delete"
-msgstr "&Bezpečné mazání"
-
-msgid "A&uto save setup"
-msgstr "&Automatické ukládání parametrů"
-
-msgid "Configure options"
-msgstr "Změna nastavení"
-
-msgid "Case &insensitive"
-msgstr "Nevšímat si velikos&ti písmen"
-
-msgid "Use panel sort mo&de"
-msgstr "Použít režim třídění panelu"
-
-msgid "Show mi&ni-status"
-msgstr ""
-
-msgid "Use SI si&ze units"
-msgstr "Používat &SI jednotky velikosti"
-
-msgid "Mi&x all files"
-msgstr "Míchat &všechny soubory"
-
-msgid "Show &backup files"
-msgstr "Zobrazovat zá&ložní soubory"
-
-msgid "Show &hidden files"
-msgstr "Ukázat s&kryté soubory"
-
-msgid "&Fast dir reload"
-msgstr "&Rychlé načítání adresářů"
-
-msgid "Ma&rk moves down"
-msgstr "Označení &posune dolů"
-
-msgid "Re&verse files only"
-msgstr "&Pozpátku pouze soubory"
-
-msgid "Simple s&wap"
-msgstr ""
-
-msgid "A&uto save panels setup"
-msgstr "&Automatické ukládání nastavení panelů"
-
-msgid "Navigation"
-msgstr "Navigace"
-
-msgid "L&ynx-like motion"
-msgstr "Pohyb jako v lyn&xu"
-
-msgid "Pa&ge scrolling"
-msgstr "Posun stránky"
-
-msgid "&Mouse page scrolling"
-msgstr "Posun stránky myší"
-
-msgid "File highlight"
-msgstr "Zvýraznění"
-
-msgid "File &types"
-msgstr "&Typy souborů"
-
-msgid "&Permissions"
-msgstr "Práva"
-
-msgid "Quick search"
-msgstr "Rychlé hledání"
-
-msgid "Panel options"
-msgstr "Nastavení panelu"
-
-msgid ""
-"Using the fast reload option may not reflect the exact\n"
-"directory contents. In this case you'll need to do a\n"
-"manual reload of the directory. See the man page for\n"
-"the details."
-msgstr ""
-"Použitím rychlého načítání adresářů nebude někdy obsah\n"
-"adresáře přesně odpovídat obsahu panelu. V tom případě\n"
-"použijte ruční načtení obsahu adresáře (manual reload).\n"
-"Podrobnosti se dozvíte v manuálové stránce."
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -4198,3 +4214,7 @@ msgstr "Hledání dokončeno"
 
 msgid "Continue from beginning?"
 msgstr ""
+
+#, fuzzy
+msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
+msgstr "Nelze vyrobit lokální kopii souboru %s"
