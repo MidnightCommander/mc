@@ -40,7 +40,8 @@ libmc_la_SOURCES = \
 	keybind.c keybind.h \
 	lock.c lock.h \
 	serialize.c serialize.h \
-	timefmt.c timefmt.h
+	timefmt.c timefmt.h \
+	timer.c timer.h
 
 if USE_MAINTAINER_MODE
 libmc_la_SOURCES += logging.c logging.h
