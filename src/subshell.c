@@ -769,7 +769,7 @@ init_subshell (void)
 {
     /* This must be remembered across calls to init_subshell() */
     static char pty_name[BUF_SMALL];
-    char precmd[BUF_SMALL];
+    char precmd[BUF_SMALL*2];
 
     switch (check_sid ())
     {
@@ -899,10 +899,9 @@ init_subshell (void)
         break;
     case FISH:
         g_snprintf (precmd, sizeof (precmd),
-                    " function __mc_after_fish_prompt --on-event fish_prompt ; pwd>&%d;kill -STOP %%self; end\n",
+                    " functions -c fish_prompt __mc_saved_fish_prompt; function fish_prompt; while test -z (pwd); cd ..; end; __mc_saved_fish_prompt; pwd>&%d; kill -STOP %%self; end\n",
                     subshell_pipe[WRITE]);
         break;
-
     }
     write_all (mc_global.tty.subshell_pty, precmd, strlen (precmd));
 
