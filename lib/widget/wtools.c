@@ -669,3 +669,38 @@ status_msg_common_update (status_msg_t * sm)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Callback to initialize already created simple status message window object
+ *
+ * @param sm status message window object
+ */
+
+void
+simple_status_msg_init_cb (status_msg_t * sm)
+{
+    simple_status_msg_t *ssm = SIMPLE_STATUS_MSG (sm);
+    Widget *wd = WIDGET (sm->dlg);
+
+    const char *b_name = N_("&Abort");
+    int b_width;
+    int wd_width, y;
+    Widget *b;
+
+#ifdef ENABLE_NLS
+    b_name = _(b_name);
+#endif
+
+    b_width = str_term_width1 (b_name) + 4;
+    wd_width = max (wd->cols, b_width + 6);
+
+    y = 2;
+    ssm->label = label_new (y++, 3, "");
+    add_widget_autopos (sm->dlg, ssm->label, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, NULL);
+    add_widget (sm->dlg, hline_new (y++, -1, -1));
+    b = WIDGET (button_new (y++, 3, B_CANCEL, NORMAL_BUTTON, b_name, NULL));
+    add_widget_autopos (sm->dlg, b, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, NULL);
+
+    widget_set_size (wd, wd->y, wd->x, y + 2, wd_width);
+}
+
+/* --------------------------------------------------------------------------------------------- */

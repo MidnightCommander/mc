@@ -18,6 +18,9 @@
 typedef struct status_msg_t status_msg_t;
 #define STATUS_MSG(x) ((status_msg_t *)(x))
 
+typedef struct simple_status_msg_t simple_status_msg_t;
+#define SIMPLE_STATUS_MSG(x) ((simple_status_msg_t *)(x))
+
 typedef void (*status_msg_cb) (status_msg_t * sm);
 typedef int (*status_msg_update_cb) (status_msg_t * sm);
 
@@ -46,6 +49,14 @@ struct status_msg_t
     status_msg_cb init;         /* callback to init derived classes */
     status_msg_update_cb update;        /* callback to update dlg */
     status_msg_cb deinit;       /* callback to deinit deribed clesses */
+};
+
+/* Simple status message with label and 'Abort' button */
+struct simple_status_msg_t
+{
+    status_msg_t status_msg;    /* base class */
+
+    WLabel *label;
 };
 
 /*** global variables defined in .c file *********************************************************/
@@ -82,6 +93,8 @@ void status_msg_init (status_msg_t * sm, const char *title, double delay, status
                       status_msg_update_cb update_cb, status_msg_cb deinit_cb);
 void status_msg_deinit (status_msg_t * sm);
 int status_msg_common_update (status_msg_t * sm);
+
+void simple_status_msg_init_cb (status_msg_t * sm);
 
 /*** inline functions ****************************************************************************/
 
