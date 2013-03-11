@@ -61,7 +61,6 @@ void sftpfs_init_subclass_callbacks (void);
 void sftpfs_init_config_variables_patterns (void);
 void sftpfs_deinit_config_variables_patterns (void);
 
-gboolean sftpfs_show_error (GError ** error);
 void sftpfs_ssherror_to_gliberror (sftpfs_super_data_t * super_data, int libssh_errno,
                                    GError ** error);
 int sftpfs_waitsocket (sftpfs_super_data_t * super_data, GError ** error);

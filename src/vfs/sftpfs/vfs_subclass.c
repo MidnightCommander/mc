@@ -111,7 +111,7 @@ sftpfs_cb_open_connection (struct vfs_s_super *super,
     if (error != NULL)
     {
         vpath_element->class->verrno = error->code;
-        sftpfs_show_error (&error);
+        vfs_show_gerror (&error);
         return -1;
     }
 
@@ -121,7 +121,7 @@ sftpfs_cb_open_connection (struct vfs_s_super *super,
                          vfs_s_default_stat (vpath_element->class, S_IFDIR | 0755));
 
     ret_value = sftpfs_open_connection (super, &error);
-    sftpfs_show_error (&error);
+    vfs_show_gerror (&error);
     return ret_value;
 }
 
@@ -140,7 +140,7 @@ sftpfs_cb_close_connection (struct vfs_class *me, struct vfs_s_super *super)
 
     (void) me;
     sftpfs_close_connection (super, "Normal Shutdown", &error);
-    sftpfs_show_error (&error);
+    vfs_show_gerror (&error);
     g_free (super->data);
 }
 

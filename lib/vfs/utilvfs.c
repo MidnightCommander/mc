@@ -367,3 +367,23 @@ vfs_get_password (const char *msg)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Show an error message (if error was raised) and cleanup the GError object.
+ *
+ * @param error the pointer to object contains error message
+ * @return TRUE if error message was printed, FALSE otherwise
+ */
+
+gboolean
+vfs_show_gerror (GError ** error)
+{
+    if (error == NULL || *error == NULL)
+        return FALSE;
+
+    vfs_print_message ("(%d) %s", (*error)->code, (*error)->message);
+    g_error_free (*error);
+    *error = NULL;
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */

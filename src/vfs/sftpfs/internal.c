@@ -48,26 +48,6 @@ GString *sftpfs_filename_buffer = NULL;
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Show error message (if error have raised) and cleanup GError object.
- *
- * @param error pointer to object contains error message
- * @return TRUE if error message was printed, FALSE otherwise
- */
-
-gboolean
-sftpfs_show_error (GError ** error)
-{
-    if (error == NULL || *error == NULL)
-        return FALSE;
-
-    vfs_print_message ("(%d) %s", (*error)->code, (*error)->message);
-    g_error_free (*error);
-    *error = NULL;
-    return TRUE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
  * Convert libssh error to GError object.
  *
  * @param super_data   extra data for SFTP connection

@@ -29,6 +29,7 @@
 
 #include "lib/global.h"
 #include "lib/vfs/gc.h"
+#include "lib/vfs/utilvfs.h"
 #include "lib/tty/tty.h"        /* tty_enable_interrupt_key () */
 
 #include "internal.h"
@@ -154,7 +155,7 @@ sftpfs_cb_open (const vfs_path_t * vpath, int flags, mode_t mode)
 
     if (!sftpfs_open_file (file_handler, flags, mode, &error))
     {
-        sftpfs_show_error (&error);
+        vfs_show_gerror (&error);
         g_free (file_handler);
         return NULL;
     }
@@ -183,7 +184,7 @@ sftpfs_cb_opendir (const vfs_path_t * vpath)
     tty_got_interrupt ();
 
     ret_value = sftpfs_opendir (vpath, &error);
-    sftpfs_show_error (&error);
+    vfs_show_gerror (&error);
     return ret_value;
 }
 
@@ -208,7 +209,7 @@ sftpfs_cb_readdir (void *data)
     }
 
     sftpfs_dirent = sftpfs_readdir (data, &error);
-    if (!sftpfs_show_error (&error))
+    if (!vfs_show_gerror (&error))
     {
         if (sftpfs_dirent != NULL)
             vfs_print_message (_("sftp: (Ctrl-G break) Listing... %s"), sftpfs_dirent->dent.d_name);
@@ -234,7 +235,7 @@ sftpfs_cb_closedir (void *data)
     GError *error = NULL;
 
     rc = sftpfs_closedir (data, &error);
-    sftpfs_show_error (&error);
+    vfs_show_gerror (&error);
     return rc;
 }
 
@@ -254,7 +255,7 @@ sftpfs_cb_lstat (const vfs_path_t * vpath, struct stat *buf)
     GError *error = NULL;
 
     rc = sftpfs_lstat (vpath, buf, &error);
-    sftpfs_show_error (&error);
+    vfs_show_gerror (&error);
     return rc;
 }
 
@@ -274,7 +275,7 @@ sftpfs_cb_stat (const vfs_path_t * vpath, struct stat *buf)
     GError *error = NULL;
 
     rc = sftpfs_stat (vpath, buf, &error);
-    sftpfs_show_error (&error);
+    vfs_show_gerror (&error);
     return rc;
 }
 
@@ -294,7 +295,7 @@ sftpfs_cb_fstat (void *data, struct stat *buf)
     GError *error = NULL;
 
     rc = sftpfs_fstat (data, buf, &error);
-    sftpfs_show_error (&error);
+    vfs_show_gerror (&error);
     return rc;
 }
 
@@ -315,7 +316,7 @@ sftpfs_cb_readlink (const vfs_path_t * vpath, char *buf, size_t size)
     GError *error = NULL;
 
     rc = sftpfs_readlink (vpath, buf, size, &error);
-    sftpfs_show_error (&error);
+    vfs_show_gerror (&error);
     return rc;
 }
 
@@ -353,7 +354,7 @@ sftpfs_cb_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
     GError *error = NULL;
 
     rc = sftpfs_symlink (vpath1, vpath2, &error);
-    sftpfs_show_error (&error);
+    vfs_show_gerror (&error);
     return rc;
 }
 
@@ -439,7 +440,7 @@ sftpfs_cb_read (void *data, char *buffer, size_t count)
     }
 
     rc = sftpfs_read_file (fh, buffer, count, &error);
-    sftpfs_show_error (&error);
+    vfs_show_gerror (&error);
     return rc;
 }
 
@@ -461,7 +462,7 @@ sftpfs_cb_write (void *data, const char *buf, size_t nbyte)
     vfs_file_handler_t *fh = (vfs_file_handler_t *) data;
 
     rc = sftpfs_write_file (fh, buf, nbyte, &error);
-    sftpfs_show_error (&error);
+    vfs_show_gerror (&error);
     return rc;
 }
 
@@ -488,7 +489,7 @@ sftpfs_cb_close (void *data)
         vfs_stamp_create (&sftpfs_class, super);
 
     rc = sftpfs_close_file (file_handler, &error);
-    sftpfs_show_error (&error);
+    vfs_show_gerror (&error);
 
     if (file_handler->handle != -1)
         close (file_handler->handle);
@@ -515,7 +516,7 @@ sftpfs_cb_chmod (const vfs_path_t * vpath, mode_t mode)
     GError *error = NULL;
 
     rc = sftpfs_chmod (vpath, mode, &error);
-    sftpfs_show_error (&error);
+    vfs_show_gerror (&error);
     return rc;
 }
 
@@ -535,7 +536,7 @@ sftpfs_cb_mkdir (const vfs_path_t * vpath, mode_t mode)
     GError *error = NULL;
 
     rc = sftpfs_mkdir (vpath, mode, &error);
-    sftpfs_show_error (&error);
+    vfs_show_gerror (&error);
     return rc;
 }
 
@@ -554,7 +555,7 @@ sftpfs_cb_rmdir (const vfs_path_t * vpath)
     GError *error = NULL;
 
     rc = sftpfs_rmdir (vpath, &error);
-    sftpfs_show_error (&error);
+    vfs_show_gerror (&error);
     return rc;
 }
 
@@ -576,7 +577,7 @@ sftpfs_cb_lseek (void *data, off_t offset, int whence)
     GError *error = NULL;
 
     ret_offset = sftpfs_lseek (file_handler, offset, whence, &error);
-    sftpfs_show_error (&error);
+    vfs_show_gerror (&error);
     return ret_offset;
 }
 
@@ -595,7 +596,7 @@ sftpfs_cb_unlink (const vfs_path_t * vpath)
     GError *error = NULL;
 
     rc = sftpfs_unlink (vpath, &error);
-    sftpfs_show_error (&error);
+    vfs_show_gerror (&error);
     return rc;
 }
 
@@ -615,7 +616,7 @@ sftpfs_cb_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
     GError *error = NULL;
 
     rc = sftpfs_rename (vpath1, vpath2, &error);
-    sftpfs_show_error (&error);
+    vfs_show_gerror (&error);
     return rc;
 }
 

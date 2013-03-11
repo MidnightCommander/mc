@@ -45,6 +45,7 @@ int vfs_split_text (char *p);
 int vfs_mkstemps (vfs_path_t ** pname_vpath, const char *prefix, const char *basename);
 void vfs_die (const char *msg);
 char *vfs_get_password (const char *msg);
+gboolean vfs_show_gerror (GError ** error);
 
 char *vfs_get_local_username (void);
 
