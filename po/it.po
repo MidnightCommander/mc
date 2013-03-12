@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-03-09 15:45+0400\n"
+"POT-Creation-Date: 2013-03-12 13:28+0400\n"
 "PO-Revision-Date: 2012-11-13 02:12+0100\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -77,8 +77,8 @@ msgstr "Impossibile creare la directory %s"
 msgid "FATAL: not a directory:"
 msgstr "FATALE: non è una directory:"
 
-#, c-format
-msgid "An error occured while migrating user settings: %s"
+#, fuzzy, c-format
+msgid "An error occurred while migrating user settings: %s"
 msgstr ""
 "Si è verificato un errore durante la migrazione delle impostazioni "
 "dell'utente: %s"
@@ -2703,11 +2703,11 @@ msgid "Target file already exists!"
 msgstr " Il file obiettivo esiste già!"
 
 #, fuzzy, c-format
-msgid "New     : %s, size %llu"
+msgid "New     : %s, size %s"
 msgstr "Data sorgen.: %s, dim. %llu"
 
 #, fuzzy, c-format
-msgid "Existing: %s, size %llu"
+msgid "Existing: %s, size %s"
 msgstr "Data sorgen.: %s, dim. %llu"
 
 msgid "Overwrite this target?"
@@ -4034,7 +4034,7 @@ msgstr ""
 "%s\n"
 
 #, fuzzy, c-format
-msgid "sftp: an error occured while reading %s: %s"
+msgid "sftp: an error occurred while reading %s: %s"
 msgstr ""
 "Si è verificato un errore durante la migrazione delle impostazioni "
 "dell'utente: %s"

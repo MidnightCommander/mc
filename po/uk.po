@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-03-09 15:45+0400\n"
+"POT-Creation-Date: 2013-03-12 13:28+0400\n"
 "PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: peinguin <pingvein@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/mc/language/"
@@ -78,8 +78,8 @@ msgstr "Не вдалося створити каталог %s"
 msgid "FATAL: not a directory:"
 msgstr "Сталася помилка. Не є каталогом:"
 
-#, c-format
-msgid "An error occured while migrating user settings: %s"
+#, fuzzy, c-format
+msgid "An error occurred while migrating user settings: %s"
 msgstr "Сталася помилка під час перенесення користувацьких настройок: %s"
 
 #, c-format
@@ -2655,11 +2655,11 @@ msgid "Target file already exists!"
 msgstr "Цільовий файл вже існує."
 
 #, c-format
-msgid "New     : %s, size %llu"
+msgid "New     : %s, size %s"
 msgstr ""
 
 #, c-format
-msgid "Existing: %s, size %llu"
+msgid "Existing: %s, size %s"
 msgstr ""
 
 msgid "Overwrite this target?"
@@ -3986,8 +3986,8 @@ msgstr ""
 "Попередження: неправильний прапорець %c у %s:\n"
 "%s\n"
 
-#, c-format
-msgid "sftp: an error occured while reading %s: %s"
+#, fuzzy, c-format
+msgid "sftp: an error occurred while reading %s: %s"
 msgstr "sftp: сталася помилка при читанні %s: %s"
 
 msgid "sftp: Unable to get current user name."

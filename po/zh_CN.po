@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-03-09 15:45+0400\n"
+"POT-Creation-Date: 2013-03-12 13:28+0400\n"
 "PO-Revision-Date: 2012-12-26 08:42+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/mc/"
@@ -77,8 +77,8 @@ msgstr "不能建立目录%s"
 msgid "FATAL: not a directory:"
 msgstr "严重错误：不是一个目录："
 
-#, c-format
-msgid "An error occured while migrating user settings: %s"
+#, fuzzy, c-format
+msgid "An error occurred while migrating user settings: %s"
 msgstr "迁移用户设置时发生了错误：%s"
 
 #, c-format
@@ -2626,11 +2626,11 @@ msgid "Target file already exists!"
 msgstr "目标文件已存在！"
 
 #, c-format
-msgid "New     : %s, size %llu"
+msgid "New     : %s, size %s"
 msgstr ""
 
 #, c-format
-msgid "Existing: %s, size %llu"
+msgid "Existing: %s, size %s"
 msgstr ""
 
 msgid "Overwrite this target?"
@@ -3947,9 +3947,9 @@ msgstr ""
 "警告：%2$s 中有无效的标志 %1$c\n"
 "%3$s\n"
 
-#, c-format
-msgid "sftp: an error occured while reading %s: %s"
-msgstr ""
+#, fuzzy, c-format
+msgid "sftp: an error occurred while reading %s: %s"
+msgstr "迁移用户设置时发生了错误：%s"
 
 msgid "sftp: Unable to get current user name."
 msgstr ""
