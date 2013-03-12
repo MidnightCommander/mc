@@ -48,13 +48,6 @@ WButtonBar *find_buttonbar (const WDialog * h);
 /*** inline functions ****************************************************************************/
 
 static inline void
-buttonbar_redraw (WButtonBar * bb)
-{
-    if (bb != NULL)
-        send_message (bb, NULL, MSG_DRAW, 0, NULL);
-}
-
-static inline void
 buttonbar_set_visible (WButtonBar * bb, gboolean visible)
 {
     bb->visible = visible;

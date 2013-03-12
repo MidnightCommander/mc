@@ -295,7 +295,6 @@ void mcview_move_up (mcview_t *, off_t);
 void mcview_move_down (mcview_t *, off_t);
 void mcview_move_left (mcview_t *, off_t);
 void mcview_move_right (mcview_t *, off_t);
-void mcview_scroll_to_cursor (mcview_t *);
 void mcview_moveto_top (mcview_t *);
 void mcview_moveto_bottom (mcview_t *);
 void mcview_moveto_bol (mcview_t *);

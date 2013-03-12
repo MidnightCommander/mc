@@ -1,11 +1,12 @@
 /*
    src/filemanager - examine_cd() function testing
 
-   Copyright (C) 2012
+   Copyright (C) 2012, 2013
    The Free Software Foundation, Inc.
 
    Written by:
    Andrew Borodin <aborodin@vmail.ru>, 2012
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -21,17 +22,14 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "/src/filemanager"
 
-#include <config.h>
-
-#include <check.h>
+#include "tests/mctest.h"
 
 #include <stdio.h>
 
-#include "lib/global.h"
 #include "lib/vfs/path.h"
 #include "src/filemanager/layout.h"
 #include "src/filemanager/midnight.h"
@@ -129,7 +127,9 @@ teardown (void)
     g_free (result); \
 }
 
+/* *INDENT-OFF* */
 START_TEST (test_examine_cd)
+/* *INDENT-ON* */
 {
     char *result;
 
@@ -156,7 +156,9 @@ START_TEST (test_examine_cd)
     check_examine_cd ("/test/path/\\${AAA}test2", "/test/path/${AAA}test2");
     check_examine_cd ("/test/path/test1\\${AAA}test2", "/test/path/test1${AAA}test2");
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

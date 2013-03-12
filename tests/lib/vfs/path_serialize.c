@@ -1,11 +1,11 @@
 /*
    lib/vfs - vfs_path_t serialize/deserialize functions
 
-   Copyright (C) 2011
+   Copyright (C) 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2011
+   Slava Zanko <slavazanko@gmail.com>, 2011, 2013
 
    This file is part of the Midnight Commander.
 
@@ -21,15 +21,11 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
-#include <config.h>
-
-#include <check.h>
-
-#include "lib/global.c"
+#include "tests/mctest.h"
 
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
@@ -41,10 +37,12 @@
 
 #include "src/vfs/local/local.c"
 
-
 struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
 struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* @Before */
 static void
 setup (void)
 {
@@ -80,6 +78,9 @@ setup (void)
 #endif
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* @After */
 static void
 teardown (void)
 {
@@ -92,6 +93,7 @@ teardown (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 #ifdef HAVE_CHARSET
 #define ETALON_PATH_STR "/local/path/#test1:user:pass@some.host:12345/bla-bla/some/path/#test2/#enc:KOI8-R/bla-bla/some/path#test3/111/22/33"
 #define ETALON_PATH_URL_STR "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/test2://#enc:KOI8-R/bla-bla/some/path/test3://111/22/33"
@@ -141,48 +143,54 @@ teardown (void)
         "p10:vfs_prefixv5:test3"
 #endif
 
-START_TEST (test_path_serialize_deserialize)
+/* *INDENT-OFF* */
+START_TEST (test_path_serialize)
+/* *INDENT-ON* */
 {
+    /* given */
     vfs_path_t *vpath;
     char *serialized_vpath;
     GError *error = NULL;
 
+    /* when */
     vpath = vfs_path_from_str_flags (ETALON_PATH_STR, VPF_USE_DEPRECATED_PARSER);
     serialized_vpath = vfs_path_serialize (vpath, &error);
     vfs_path_free (vpath);
 
-    if (serialized_vpath == NULL)
-    {
-        fail ("serialized_vpath is NULL!\nError code is '%d'; error message is '%s'", error->code, error->message);
-        g_clear_error (&error);
-        return;
-    }
+    /* then */
+    mctest_assert_ptr_ne (serialized_vpath, NULL);
+    mctest_assert_str_eq (serialized_vpath, ETALON_SERIALIZED_PATH);
+}
+/* *INDENT-OFF* */
+END_TEST
+/* *INDENT-ON* */
 
-    fail_unless (
-        strcmp (serialized_vpath, ETALON_SERIALIZED_PATH ) == 0,
-        "\nserialized_vpath    (%s)\nnot equal to etalon (%s)", serialized_vpath, ETALON_SERIALIZED_PATH
-    );
+/* --------------------------------------------------------------------------------------------- */
 
-    vpath = vfs_path_deserialize (serialized_vpath, &error);
-    g_free (serialized_vpath);
+/* *INDENT-OFF* */
+START_TEST (test_path_deserialize)
+/* *INDENT-ON* */
+{
+    /* given */
+    vfs_path_t *vpath;
+    char *path;
+    GError *error = NULL;
 
-    if (vpath == NULL)
-    {
-        fail ("vpath is NULL!\nError code is '%d'; error message is '%s'", error->code, error->message);
-        g_clear_error (&error);
-        return;
-    }
+    /* when */
+    vpath = vfs_path_deserialize (ETALON_SERIALIZED_PATH, &error);
+    path = vfs_path_to_str (vpath);
 
-    serialized_vpath = vfs_path_to_str (vpath);
-    fail_unless (
-        strcmp (serialized_vpath, ETALON_PATH_URL_STR) == 0,
-        "\ndeserialized path   (%s)\nnot equal to etalon (%s)", serialized_vpath, ETALON_PATH_URL_STR
-    );
-    vfs_path_free(vpath);
-    g_free(serialized_vpath);
+    /* then */
+    mctest_assert_ptr_ne (vpath, NULL);
+    mctest_assert_str_eq (path, ETALON_PATH_URL_STR);
+
+    vfs_path_free (vpath);
+    g_free (path);
 
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -198,7 +206,8 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_test (tc_core, test_path_serialize_deserialize);
+    tcase_add_test (tc_core, test_path_serialize);
+    tcase_add_test (tc_core, test_path_deserialize);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);

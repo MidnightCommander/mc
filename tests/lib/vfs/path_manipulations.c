@@ -1,9 +1,10 @@
 /* lib/vfs - test vfs_path_t manipulation functions
 
-   Copyright (C) 2011 Free Software Foundation, Inc.
+   Copyright (C) 2011, 2013
+   The Free Software Foundation, Inc.
 
    Written by:
-    Slava Zanko <slavazanko@gmail.com>, 2011
+   Slava Zanko <slavazanko@gmail.com>, 2011, 2013
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License
@@ -18,13 +19,11 @@
    You should have received a copy of the GNU Library General Public
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-*/
+ */
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
-#include <check.h>
-
-#include "lib/global.c"
+#include "tests/mctest.h"
 
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
@@ -40,17 +39,11 @@
 struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
 struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
-setup (void)
+init_test_classes (void)
 {
-
-    str_init_strings (NULL);
-
-    vfs_init ();
-    init_localfs ();
-    vfs_setup_work_dir ();
-
-
     test_subclass1.flags = VFS_S_REMOTE;
     vfs_s_init_class (&vfs_test_ops1, &test_subclass1);
 
@@ -69,6 +62,22 @@ setup (void)
     vfs_test_ops3.prefix = "test3";
     vfs_test_ops3.flags = VFSF_LOCAL;
     vfs_register_class (&vfs_test_ops3);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* @Before */
+static void
+setup (void)
+{
+
+    str_init_strings (NULL);
+
+    vfs_init ();
+    init_localfs ();
+    vfs_setup_work_dir ();
+
+    init_test_classes ();
 
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
 #ifdef HAVE_CHARSET
@@ -76,6 +85,9 @@ setup (void)
 #endif
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* @After */
 static void
 teardown (void)
 {
@@ -89,193 +101,362 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-START_TEST (test_vfs_path_tokens_count)
+/* @DataSource("test_vfs_path_tokens_count_ds") */
+/* *INDENT-OFF* */
+static const struct test_vfs_path_tokens_count_ds
 {
+    const char *input_path;
+    const vfs_path_flag_t input_flags;
+    const size_t expected_token_count;
+} test_vfs_path_tokens_count_ds[] =
+{
+    { /* 0. */
+        "/",
+        VPF_NONE,
+        0
+    },
+    { /* 1. */
+        "/path",
+        VPF_NONE,
+        1
+    },
+    { /* 2. */
+        "/path1/path2/path3",
+        VPF_NONE,
+        3
+    },
+    { /* 3. */
+        "test3://path1/path2/path3/path4",
+        VPF_NO_CANON,
+        4
+    },
+    { /* 4. */
+        "path1/path2/path3",
+        VPF_NO_CANON,
+        3
+    },
+    { /* 5. */
+        "/path1/path2/path3/",
+        VPF_NONE,
+        3
+    },
+    { /* 6. */
+        "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/",
+        VPF_NONE,
+        5
+    },
+#ifdef HAVE_CHARSET
+    { /* 7. */
+        "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/"
+        "test2://#enc:KOI8-R/bla-bla/some/path/test3://111/22/33",
+        VPF_NONE,
+        11
+    },
+#endif
+};
+/* *INDENT-ON* */
+
+/* @Test(dataSource = "test_vfs_path_tokens_count_ds") */
+/* *INDENT-OFF* */
+START_PARAMETRIZED_TEST (test_vfs_path_tokens_count, test_vfs_path_tokens_count_ds)
+/* *INDENT-ON* */
+{
+    /* given */
     size_t tokens_count;
     vfs_path_t *vpath;
 
-    vpath = vfs_path_from_str ("/");
-    tokens_count = vfs_path_tokens_count(vpath);
-    fail_unless (tokens_count == 0, "actual: %zu; expected: 0\n", tokens_count);
-    vfs_path_free (vpath);
+    vpath = vfs_path_from_str_flags (data->input_path, data->input_flags);
 
-    vpath = vfs_path_from_str ("/path");
-    tokens_count = vfs_path_tokens_count(vpath);
-    fail_unless (tokens_count == 1, "actual: %zu; expected: 1\n", tokens_count);
-    vfs_path_free (vpath);
+    /* when */
+    tokens_count = vfs_path_tokens_count (vpath);
 
-    vpath = vfs_path_from_str ("/path1/path2/path3");
-    tokens_count = vfs_path_tokens_count(vpath);
-    fail_unless (tokens_count == 3, "actual: %zu; expected: 3\n", tokens_count);
-    vfs_path_free (vpath);
+    /* then */
+    mctest_assert_int_eq (tokens_count, data->expected_token_count);
 
-    vpath = vfs_path_from_str_flags ("test3://path1/path2/path3/path4", VPF_NO_CANON);
-    tokens_count = vfs_path_tokens_count(vpath);
-    fail_unless (tokens_count == 4, "actual: %zu; expected: 4\n", tokens_count);
     vfs_path_free (vpath);
-
-    vpath = vfs_path_from_str_flags ("path1/path2/path3", VPF_NO_CANON);
-    tokens_count = vfs_path_tokens_count(vpath);
-    fail_unless (tokens_count == 3, "actual: %zu; expected: 3\n", tokens_count);
-    vfs_path_free (vpath);
-
-    vpath = vfs_path_from_str ("/path1/path2/path3/");
-    tokens_count = vfs_path_tokens_count(vpath);
-    fail_unless (tokens_count == 3, "actual: %zu; expected: 3\n", tokens_count);
-    vfs_path_free (vpath);
-
-    vpath = vfs_path_from_str ("/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/");
-    tokens_count = vfs_path_tokens_count(vpath);
-    fail_unless (tokens_count == 5, "actual: %zu; expected: 5\n", tokens_count);
-    vfs_path_free (vpath);
-
-#ifdef HAVE_CHARSET
-    vpath = vfs_path_from_str (
-        "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/test2://#enc:KOI8-R/bla-bla/some/path/test3://111/22/33"
-    );
-    tokens_count = vfs_path_tokens_count(vpath);
-    fail_unless (tokens_count == 11, "actual: %zu; expected: 11\n", tokens_count);
-    vfs_path_free (vpath);
-#endif
 }
-END_TEST
+/* *INDENT-OFF* */
+END_PARAMETRIZED_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
-#define check_invalid_token_str(input, start, length) { \
-    vpath = vfs_path_from_str (input); \
-    path_tokens = vfs_path_tokens_get(vpath, start, length); \
-    fail_unless (path_tokens == NULL, "path_tokens should be NULL!\n"); \
-    g_free (path_tokens); \
-    vfs_path_free (vpath); \
-}
-
-#define check_token_str(input, start, length, etalon) { \
-    vpath = vfs_path_from_str_flags (input, VPF_NO_CANON); \
-    path_tokens = vfs_path_tokens_get(vpath, start, length); \
-    fail_unless (path_tokens != NULL, "path_tokens shouldn't equal to  NULL!\n"); \
-    if (path_tokens != NULL) \
-        fail_unless (strcmp(path_tokens, etalon) == 0, "\nactual: '%s'\netalon: '%s'", path_tokens, etalon); \
-    g_free (path_tokens); \
-    vfs_path_free (vpath); \
-}
-
-START_TEST (test_vfs_path_tokens_get)
+/* @DataSource("test_vfs_path_tokens_get_ds") */
+/* *INDENT-OFF* */
+static const struct test_vfs_path_tokens_get_ds
 {
+    const char *input_path;
+    const ssize_t input_start_position;
+    const ssize_t input_length;
+
+    const char *expected_path;
+} test_vfs_path_tokens_get_ds[] =
+{
+    { /* 0. Invalid start position  */
+        "/",
+        2,
+        1,
+        NULL
+    },
+    { /* 1. Invalid negative position */
+        "/path",
+        -3,
+        1,
+        NULL
+    },
+    { /* 2. Count of tokens is zero. Count should be autocorrected */
+        "/path",
+        0,
+        0,
+        "path"
+    },
+    { /* 3. get 'path2/path3' by 1,2  */
+        "/path1/path2/path3/path4",
+        1,
+        2,
+        "path2/path3"
+    },
+    { /* 4. get 'path2/path3' by 1,2  from LOCAL VFS */
+        "test3://path1/path2/path3/path4",
+        1,
+        2,
+        "path2/path3"
+    },
+    { /* 5. get 'path2/path3' by 1,2  from non-LOCAL VFS */
+        "test2://path1/path2/path3/path4",
+        1,
+        2,
+        "test2://path2/path3"
+    },
+    { /* 6. get 'path2/path3' by 1,2  throught non-LOCAL VFS */
+        "/path1/path2/test1://user:pass@some.host:12345/path3/path4",
+        1,
+        2,
+        "path2/test1://user:pass@some.host:12345/path3"
+    },
+    { /* 7. get 'path2/path3' by 1,2  where path2 it's LOCAL VFS */
+        "test3://path1/path2/test2://path3/path4",
+        1,
+        2,
+        "path2/test2://path3"
+    },
+    { /* 8. get 'path2/path3' by 1,2  where path3 it's LOCAL VFS */
+        "test2://path1/path2/test3://path3/path4",
+        1,
+        2,
+        "test2://path2/test3://path3"
+    },
+    { /* 9. get 'path4' by -1,1  */
+        "/path1/path2/path3/path4",
+        -1,
+        1,
+        "path4"
+    },
+    { /* 10. get 'path2/path3/path4' by -3,0  */
+        "/path1/path2/path3/path4",
+        -3,
+        0,
+        "path2/path3/path4"
+    },
+#ifdef HAVE_CHARSET
+    { /* 11. get 'path2/path3' by 1,2  from LOCAL VFS with encoding */
+        "test3://path1/path2/test3://#enc:KOI8-R/path3/path4",
+        1,
+        2,
+        "path2/test3://#enc:KOI8-R/path3"
+    },
+    { /* 12. get 'path2/path3' by 1,2  with encoding */
+        "#enc:KOI8-R/path1/path2/path3/path4",
+        1,
+        2,
+        "#enc:KOI8-R/path2/path3"
+    },
+#endif
+/* TODO: currently this test don't passed. Probably broken string URI parser
+ { *//* 13. get 'path2/path3' by 1,2  from LOCAL VFS *//*
+
+        "test3://path1/path2/test2://test3://path3/path4",
+        1,
+        2,
+        "path2/path3"
+    },
+*/
+};
+/* *INDENT-ON* */
+
+/* @Test(dataSource = "test_vfs_path_tokens_get_ds") */
+/* *INDENT-OFF* */
+START_PARAMETRIZED_TEST (test_vfs_path_tokens_get, test_vfs_path_tokens_get_ds)
+/* *INDENT-ON* */
+{
+    /* given */
     vfs_path_t *vpath;
-    char *path_tokens;
+    char *actual_path;
 
-    /* Invalid start position */
-    check_invalid_token_str ("/" , 2, 1);
+    vpath = vfs_path_from_str_flags (data->input_path, VPF_NO_CANON);
 
-    /* Invalid negative position */
-    check_invalid_token_str ("/path" , -3, 1);
+    /* when */
+    actual_path = vfs_path_tokens_get (vpath, data->input_start_position, data->input_length);
 
-    /* Count of tokens is zero. Count should be autocorrected */
-    check_token_str ("/path", 0, 0, "path");
+    /* then */
+    mctest_assert_str_eq (actual_path, data->expected_path);
 
-    /* get 'path2/path3' by 1,2  */
-    check_token_str ("/path1/path2/path3/path4", 1, 2, "path2/path3");
-
-    /* get 'path2/path3' by 1,2  from LOCAL VFS */
-    check_token_str ("test3://path1/path2/path3/path4", 1, 2, "path2/path3");
-
-#ifdef HAVE_CHARSET
-    /* get 'path2/path3' by 1,2  from LOCAL VFS with encoding */
-    check_token_str ("test3://path1/path2/test3://#enc:KOI8-R/path3/path4", 1, 2, "path2/test3://#enc:KOI8-R/path3");
-
-    /* get 'path2/path3' by 1,2  with encoding */
-    check_token_str ("#enc:KOI8-R/path1/path2/path3/path4", 1, 2, "#enc:KOI8-R/path2/path3");
-#endif
-
-    /* get 'path2/path3' by 1,2  from non-LOCAL VFS */
-    check_token_str ("test2://path1/path2/path3/path4", 1, 2, "test2://path2/path3");
-
-    /* get 'path2/path3' by 1,2  throught non-LOCAL VFS */
-    check_token_str ("/path1/path2/test1://user:pass@some.host:12345/path3/path4", 1, 2, "path2/test1://user:pass@some.host:12345/path3");
-
-    /* get 'path2/path3' by 1,2  from LOCAL VFS */
-    /* TODO: currently this test don't passed. Probably broken string URI parser */
-/*    check_token_str ("test3://path1/path2/test2://test3://path3/path4", 1, 2, "path2/path3"); */
-
-    /* get 'path2/path3' by 1,2  where path2 it's LOCAL VFS */
-    check_token_str ("test3://path1/path2/test2://path3/path4", 1, 2, "path2/test2://path3");
-
-    /* get 'path2/path3' by 1,2  where path3 it's LOCAL VFS */
-    check_token_str ("test2://path1/path2/test3://path3/path4", 1, 2, "test2://path2/test3://path3");
-
-    /* get 'path4' by -1,1  */
-    check_token_str ("/path1/path2/path3/path4", -1, 1, "path4");
-
-    /* get 'path2/path3/path4' by -3,0  */
-    check_token_str ("/path1/path2/path3/path4", -3, 0, "path2/path3/path4");
-
+    g_free (actual_path);
+    vfs_path_free (vpath);
 }
-END_TEST
+/* *INDENT-OFF* */
+END_PARAMETRIZED_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
-START_TEST (test_vfs_path_append_vpath)
+/* @DataSource("test_vfs_path_append_vpath_ds") */
+/* *INDENT-OFF* */
+static const struct test_vfs_path_append_vpath_ds
 {
+    const char *input_path1;
+    const char *input_path2;
+    const int expected_element_count;
+    const char *expected_path;
+} test_vfs_path_append_vpath_ds[] =
+{
+    { /* 0. */
+        "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/test2://bla-bla/some/path/test3://111/22/33",
+        "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/",
+        6,
+        "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/test2://bla-bla/some/path/test3://111/22/33"
+        "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path",
+    },
+#ifdef HAVE_CHARSET
+    { /* 1. */
+        "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/test2://#enc:KOI8-R/bla-bla/some/path/test3://111/22/33",
+        "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/",
+        6,
+        "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/test2://#enc:KOI8-R/bla-bla/some/path/test3://111/22/33"
+        "/local/path/test1://user:pass@some.host:12345/bla-bla/some/path",
+    },
+#endif /* HAVE_CHARSET */
+};
+/* *INDENT-ON* */
+
+/* @Test(dataSource = "test_vfs_path_append_vpath_ds") */
+/* *INDENT-OFF* */
+START_PARAMETRIZED_TEST (test_vfs_path_append_vpath, test_vfs_path_append_vpath_ds)
+/* *INDENT-ON* */
+{
+    /* given */
     vfs_path_t *vpath1, *vpath2, *vpath3;
 
-#ifdef HAVE_CHARSET
-    vpath1 = vfs_path_from_str("/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/test2://#enc:KOI8-R/bla-bla/some/path/test3://111/22/33");
-#else
-    vpath1 = vfs_path_from_str("/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/test2://bla-bla/some/path/test3://111/22/33");
-#endif
-    vpath2 = vfs_path_from_str("/local/path/test1://user:pass@some.host:12345/bla-bla/some/path/");
+    vpath1 = vfs_path_from_str (data->input_path1);
+    vpath2 = vfs_path_from_str (data->input_path2);
 
+    /* when */
     vpath3 = vfs_path_append_vpath_new (vpath1, vpath2, NULL);
 
-    fail_unless (vfs_path_elements_count(vpath3)  == 6,
-      "\nvpath elements count should be %d, actial is %d\n",
-      6,
-      vfs_path_elements_count(vpath3)
-    );
+    /* then */
+    {
+        char *path;
+        mctest_assert_int_eq (vfs_path_elements_count (vpath3), data->expected_element_count);
+        path = vfs_path_to_str (vpath3);
+        mctest_assert_str_eq (path, data->expected_path);
+        g_free (path);
+    }
+
     vfs_path_free (vpath1);
     vfs_path_free (vpath2);
     vfs_path_free (vpath3);
-
 }
-END_TEST
+/* *INDENT-OFF* */
+END_PARAMETRIZED_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
-START_TEST (test_vfs_path_relative)
+/* @DataSource("test_vfs_path_relative_ds") */
+/* *INDENT-OFF* */
+static const struct test_vfs_path_relative_ds
 {
-    vfs_path_t *vpath, *copy_vpath;
-    char *path_str;
+    const char *input_path;
+    const char *expected_path;
+    const char *expected_last_path_in_element;
+} test_vfs_path_relative_ds[] =
+{
+    { /* 0. */
+        "../bla-bla",
+        "../bla-bla",
+        "../bla-bla"
+    },
+    { /* 1. */
+        "../path/test1://user:pass@some.host:12345/bla-bla/some/path/",
+        "../path/test1://user:pass@some.host:12345/bla-bla/some/path/",
+        "bla-bla/some/path/"
+    },
+};
+/* *INDENT-ON* */
 
-    vpath = vfs_path_from_str_flags("../bla-bla", VPF_NO_CANON);
-    fail_unless (vpath->relative, "relative flag fail!\n");
+/* @Test(dataSource = "test_vfs_path_relative_ds") */
+/* *INDENT-OFF* */
+START_PARAMETRIZED_TEST (test_vfs_path_relative, test_vfs_path_relative_ds)
+/* *INDENT-ON* */
+{
+    /* given */
+    vfs_path_t *vpath;
 
-    path_str = vfs_path_to_str (vpath);
+    /* when */
 
-    fail_unless (strcmp(path_str, "../bla-bla") == 0, "relative fail!\nactual: [%s]\n", path_str);
-    g_free (path_str);
+    vpath = vfs_path_from_str_flags (data->input_path, VPF_NO_CANON);
 
-    path_str = (char *) vfs_path_get_last_path_str (vpath);
-    fail_unless (strcmp(path_str, "../bla-bla") == 0, "relative fail!\nactual: element->path=[%s]\n", path_str);
+    /* then */
+    mctest_assert_int_eq (vpath->relative, TRUE);
+    mctest_assert_str_eq (vfs_path_get_last_path_str (vpath), data->expected_last_path_in_element);
 
-    copy_vpath = vfs_path_clone (vpath);
+    {
+        char *path_str;
 
-    path_str = vfs_path_to_str (copy_vpath);
-
-    fail_unless (strcmp(path_str, "../bla-bla") == 0, "relative fail!\nactual: [%s]\n", path_str);
-    g_free (path_str);
-
-    vfs_path_free (copy_vpath);
+        path_str = vfs_path_to_str (vpath);
+        mctest_assert_str_eq (path_str, data->expected_path);
+        g_free (path_str);
+    }
     vfs_path_free (vpath);
-
-    vpath = vfs_path_from_str_flags ("../path/test1://user:pass@some.host:12345/bla-bla/some/path/", VPF_NO_CANON);
-    path_str = vfs_path_to_str (vpath);
-    fail_unless (strcmp(path_str, "../path/test1://user:pass@some.host:12345/bla-bla/some/path/") == 0, "relative fail!\nactual: [%s]\n", path_str);
-    g_free (path_str);
-    vfs_path_free (vpath);
-
 }
-END_TEST
+/* *INDENT-OFF* */
+END_PARAMETRIZED_TEST
+/* *INDENT-ON* */
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* @Test(dataSource = "test_vfs_path_relative_ds") */
+/* *INDENT-OFF* */
+START_PARAMETRIZED_TEST (test_vfs_path_relative_clone, test_vfs_path_relative_ds)
+/* *INDENT-ON* */
+{
+    /* given */
+    vfs_path_t *vpath, *cloned_vpath;
+
+    vpath = vfs_path_from_str_flags (data->input_path, VPF_NO_CANON);
+
+    /* when */
+
+    cloned_vpath = vfs_path_clone (vpath);
+
+    /* then */
+    mctest_assert_int_eq (cloned_vpath->relative, TRUE);
+    mctest_assert_str_eq (vfs_path_get_last_path_str (cloned_vpath),
+                          data->expected_last_path_in_element);
+
+    {
+        char *path_str;
+
+        path_str = vfs_path_to_str (cloned_vpath);
+        mctest_assert_str_eq (path_str, data->expected_path);
+        g_free (path_str);
+    }
+    vfs_path_free (vpath);
+    vfs_path_free (cloned_vpath);
+}
+/* *INDENT-OFF* */
+END_PARAMETRIZED_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -291,10 +472,14 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_test (tc_core, test_vfs_path_tokens_count);
-    tcase_add_test (tc_core, test_vfs_path_tokens_get);
-    tcase_add_test (tc_core, test_vfs_path_append_vpath);
-    tcase_add_test (tc_core, test_vfs_path_relative);
+    mctest_add_parameterized_test (tc_core, test_vfs_path_tokens_count,
+                                   test_vfs_path_tokens_count_ds);
+    mctest_add_parameterized_test (tc_core, test_vfs_path_tokens_get, test_vfs_path_tokens_get_ds);
+    mctest_add_parameterized_test (tc_core, test_vfs_path_append_vpath,
+                                   test_vfs_path_append_vpath_ds);
+    mctest_add_parameterized_test (tc_core, test_vfs_path_relative, test_vfs_path_relative_ds);
+    mctest_add_parameterized_test (tc_core, test_vfs_path_relative_clone,
+                                   test_vfs_path_relative_ds);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);

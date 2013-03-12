@@ -268,6 +268,20 @@ widget_erase (Widget * w)
 
 /* --------------------------------------------------------------------------------------------- */
 
+void
+widget_redraw (Widget * w)
+{
+    if (w != NULL)
+    {
+        WDialog *h = w->owner;
+
+        if (h != NULL && h->state == DLG_ACTIVE)
+            w->callback (w, NULL, MSG_DRAW, 0, NULL);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /* get mouse pointer location within widget */
 Gpm_Event
 mouse_get_local (const Gpm_Event * global, const Widget * w)

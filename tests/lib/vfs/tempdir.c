@@ -1,11 +1,11 @@
 /*
    lib/vfs - manipulations with temp files and  dirs
 
-   Copyright (C) 2012
+   Copyright (C) 2012, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2012
+   Slava Zanko <slavazanko@gmail.com>, 2012, 2013
 
    This file is part of the Midnight Commander.
 
@@ -21,15 +21,11 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
-#include <config.h>
-
-#include <check.h>
-
-#include "lib/global.c"
+#include "tests/mctest.h"
 
 #ifndef HAVE_CHARSET
 #define HAVE_CHARSET 1
@@ -47,6 +43,9 @@
 struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
 struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* @Before */
 static void
 setup (void)
 {
@@ -57,6 +56,9 @@ setup (void)
     vfs_setup_work_dir ();
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* @After */
 static void
 teardown (void)
 {
@@ -65,55 +67,62 @@ teardown (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/* @Test */
+/* *INDENT-OFF* */
 START_TEST (test_mc_tmpdir)
+/* *INDENT-ON* */
 {
+    /* given */
     const char *tmpdir;
     const char *env_tmpdir;
 
-    tmpdir = mc_tmpdir();
-    fail_unless (
-        g_file_test (tmpdir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR),
-        "\nNo such directory: %s\n", tmpdir
-    );
-
+    /* when */
+    tmpdir = mc_tmpdir ();
     env_tmpdir = g_getenv ("MC_TMPDIR");
-    fail_unless (
-        strcmp (env_tmpdir, tmpdir) == 0,
-        "\nenv_tmpdir=%s\n    tmpdir=%s\n", env_tmpdir, tmpdir
-    );
-}
-END_TEST
 
+    /* then */
+    fail_unless (g_file_test (tmpdir, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR),
+                 "\nNo such directory: %s\n", tmpdir);
+    mctest_assert_str_eq (env_tmpdir, tmpdir);
+}
+/* *INDENT-OFF* */
+END_TEST
+/* *INDENT-ON* */
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* @Test */
+/* *INDENT-OFF* */
 START_TEST (test_mc_mkstemps)
+/* *INDENT-ON* */
 {
+    /* given */
     vfs_path_t *pname_vpath = NULL;
-    char *pname;
+    char *pname = NULL;
     char *begin_pname;
     int fd;
 
+    /* when */
     fd = mc_mkstemps (&pname_vpath, "mctest-", NULL);
-    if (fd == -1)
-    {
-        fail ("\nerror creating temp file!\n");
-    }
-    pname = vfs_path_to_str (pname_vpath);
+    if (fd != -1)
+        pname = vfs_path_to_str (pname_vpath);
+    begin_pname = g_build_filename (mc_tmpdir (), "mctest-", NULL);
+
+    /* then */
     vfs_path_free (pname_vpath);
     close (fd);
-
-    fail_unless (
-        g_file_test (pname, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR),
-        "\nNo such file: %s\n", pname
-    );
-    unlink(pname);
-
-    begin_pname = g_build_filename (mc_tmpdir(), "mctest-", NULL);
-    fail_unless (
-        strncmp(pname, begin_pname, strlen(begin_pname)) == 0,
-        "\nstart of %s should be equal to %s\n", pname, begin_pname
-    );
+    mctest_assert_int_ne (fd, -1);
+    fail_unless (g_file_test (pname, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR),
+                 "\nNo such file: %s\n", pname);
+    unlink (pname);
+    fail_unless (strncmp (pname, begin_pname, strlen (begin_pname)) == 0,
+                 "\nstart of %s should be equal to %s\n", pname, begin_pname);
     g_free (pname);
 }
+/* *INDENT-OFF* */
 END_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

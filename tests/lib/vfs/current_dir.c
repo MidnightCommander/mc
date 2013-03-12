@@ -1,11 +1,11 @@
 /*
    lib/vfs - manipulate with current directory
 
-   Copyright (C) 2011
+   Copyright (C) 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2011
+   Slava Zanko <slavazanko@gmail.com>, 2011, 2013
 
    This file is part of the Midnight Commander.
 
@@ -21,13 +21,11 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
-#include <config.h>
-
-#include <check.h>
+#include "tests/mctest.h"
 
 #include "lib/global.h"
 #include "lib/strutil.h"
@@ -35,6 +33,23 @@
 
 #include "src/vfs/local/local.c"
 
+static struct vfs_s_subclass test_subclass;
+static struct vfs_class vfs_test_ops;
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* @Mock */
+static int
+test_chdir (const vfs_path_t * vpath)
+{
+    (void) vpath;
+
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* @Before */
 static void
 setup (void)
 {
@@ -43,8 +58,18 @@ setup (void)
     vfs_init ();
     init_localfs ();
     vfs_setup_work_dir ();
+
+    vfs_s_init_class (&vfs_test_ops, &test_subclass);
+
+    vfs_test_ops.name = "testfs";
+    vfs_test_ops.prefix = "test";
+    vfs_test_ops.chdir = test_chdir;
+
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* @After */
 static void
 teardown (void)
 {
@@ -52,69 +77,118 @@ teardown (void)
     str_uninit_strings ();
 }
 
-static int
-test_chdir (const vfs_path_t * vpath)
-{
-#if 0
-    char *path = vfs_path_to_str (vpath);
-    printf ("test_chdir: %s\n", path);
-    g_free (path);
-#else
-    (void) vpath;
-#endif
-    return 0;
-}
-
 /* --------------------------------------------------------------------------------------------- */
 
-#define cd_and_check( cd_dir, etalon ) \
-    vpath = vfs_path_from_str (cd_dir); \
-    mc_chdir(vpath); \
-    vfs_path_free (vpath); \
-    buffer = _vfs_get_cwd (); \
-    fail_unless( \
-        strcmp(etalon, buffer) == 0, \
-        "\n expected(%s) doesn't equal \nto actual(%s)", etalon, buffer); \
-    g_free (buffer);
-
-START_TEST (set_up_current_dir_url)
+/* @DataSource("test_cd_ds") */
+/* *INDENT-OFF* */
+static const struct test_cd_ds
 {
+    const char *input_initial_path;
+    const char *input_cd_path;
+    const vfs_class_flags_t input_class_flags;
+    const vfs_subclass_flags_t input_subclass_flags;
+
+    const char *expected_cd_path;
+} test_cd_ds[] =
+{
+    { /* 0. */
+        "/",
+        "/dev/some.file/test://",
+        VFSF_NOLINKS,
+        0,
+        "/dev/some.file/test://"
+    },
+    { /* 1. */
+        "/",
+        "/dev/some.file/test://bla-bla",
+        VFSF_NOLINKS,
+        0,
+        "/dev/some.file/test://bla-bla"
+    },
+    { /* 2. */
+        "/dev/some.file/test://bla-bla",
+        "..",
+        VFSF_NOLINKS,
+        0,
+        "/dev/some.file/test://"
+    },
+    { /* 3. */
+        "/dev/some.file/test://",
+        "..",
+        VFSF_NOLINKS,
+        0,
+        "/dev"
+    },
+    { /* 4. */
+        "/dev",
+        "..",
+        VFSF_NOLINKS,
+        0,
+        "/"
+    },
+    { /* 5. */
+        "/",
+        "..",
+        VFSF_NOLINKS,
+        0,
+        "/"
+    },
+    { /* 6. */
+        "/",
+        "/test://user:pass@host.net/path",
+        VFSF_NOLINKS,
+        VFS_S_REMOTE,
+        "/test://user:pass@host.net/path"
+    },
+    { /* 7. */
+        "/test://user:pass@host.net/path",
+        "..",
+        VFSF_NOLINKS,
+        VFS_S_REMOTE,
+        "/test://user:pass@host.net/"
+    },
+    { /* 8. */
+        "/test://user:pass@host.net/",
+        "..",
+        VFSF_NOLINKS,
+        VFS_S_REMOTE,
+        "/"
+    },
+};
+/* *INDENT-ON* */
+
+/* @Test(dataSource = "test_cd_ds") */
+/* *INDENT-OFF* */
+START_PARAMETRIZED_TEST (test_cd, test_cd_ds)
+/* *INDENT-ON* */
+{
+    /* given */
     vfs_path_t *vpath;
-    static struct vfs_s_subclass test_subclass;
-    static struct vfs_class vfs_test_ops;
-    char *buffer;
 
-    vfs_s_init_class (&vfs_test_ops, &test_subclass);
-
-    vfs_test_ops.name = "testfs";
-    vfs_test_ops.flags = VFSF_NOLINKS;
-    vfs_test_ops.prefix = "test";
-    vfs_test_ops.chdir = test_chdir;
+    vfs_test_ops.flags = data->input_class_flags;
+    test_subclass.flags = data->input_subclass_flags;
 
     vfs_register_class (&vfs_test_ops);
+    vfs_set_raw_current_dir (vfs_path_from_str (data->input_initial_path));
 
-    cd_and_check ("/dev/some.file/test://", "/dev/some.file/test://");
+    vpath = vfs_path_from_str (data->input_cd_path);
 
-    cd_and_check ("/dev/some.file/test://bla-bla", "/dev/some.file/test://bla-bla");
+    /* when */
+    mc_chdir (vpath);
 
-    cd_and_check ("..", "/dev/some.file/test://");
+    /* then */
+    {
+        char *actual_cd_path;
 
-    cd_and_check ("..", "/dev");
-
-    cd_and_check ("..", "/");
-
-    cd_and_check ("..", "/");
-
-    test_subclass.flags = VFS_S_REMOTE;
-
-    cd_and_check ("/test://user:pass@host.net/path", "/test://user:pass@host.net/path");
-    cd_and_check ("..", "/test://user:pass@host.net/");
-
-    cd_and_check ("..", "/");
-
+        actual_cd_path = _vfs_get_cwd ();
+        mctest_assert_str_eq (actual_cd_path, data->expected_cd_path);
+        g_free (actual_cd_path);
+    }
+    vfs_path_free (vpath);
 }
-
-END_TEST
+/* *INDENT-OFF* */
+END_PARAMETRIZED_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -130,7 +204,7 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_test (tc_core, set_up_current_dir_url);
+    mctest_add_parameterized_test (tc_core, test_cd, test_cd_ds);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);

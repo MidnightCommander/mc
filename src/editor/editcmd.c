@@ -2,12 +2,12 @@
    Editor high level editing commands
 
    Copyright (C) 1996, 1997, 1998, 2001, 2002, 2003, 2004, 2005, 2006,
-   2007, 2011, 2012
+   2007, 2011, 2012, 2013
    The Free Software Foundation, Inc.
 
    Written by:
    Paul Sheer, 1996, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2012
+   Andrew Borodin <aborodin@vmail.ru>, 2012, 2013
    Ilia Maslakov <il.smind@gmail.com>, 2012
 
    This file is part of the Midnight Commander.
@@ -1203,7 +1203,7 @@ edit_collect_completions_get_current_word (WEdit * edit, mc_search_t * srch, off
 
 static gsize
 edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
-                          char *match_expr, struct selection *compl, gsize * num)
+                          char *match_expr, GString ** compl, gsize * num)
 {
     gsize len = 0;
     gsize max_len = 0;
@@ -1267,14 +1267,12 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
         for (i = 0; i < *num; i++)
         {
             if (strncmp
-                ((char *) &compl[i].text[word_len],
-                 (char *) &temp->str[word_len], max (len, compl[i].len) - word_len) == 0)
+                ((char *) &compl[i]->str[word_len],
+                 (char *) &temp->str[word_len], max (len, compl[i]->len) - word_len) == 0)
             {
-                struct selection this = compl[i];
+                GString *this = compl[i];
                 for (++i; i < *num; i++)
-                {
                     compl[i - 1] = compl[i];
-                }
                 compl[*num - 1] = this;
                 skip = 1;
                 break;          /* skip it, already added */
@@ -1285,11 +1283,9 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
 
         if (*num == MAX_WORD_COMPLETIONS)
         {
-            g_free (compl[0].text);
+            g_string_free (compl[0], TRUE);
             for (i = 1; i < *num; i++)
-            {
                 compl[i - 1] = compl[i];
-            }
             (*num)--;
         }
 #ifdef HAVE_CHARSET
@@ -1303,9 +1299,7 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
             g_string_free (recoded, TRUE);
         }
 #endif
-        compl[*num].text = g_strndup (temp->str, temp->len);
-        compl[*num].len = temp->len;
-        (*num)++;
+        compl[(*num)++] = g_string_new_len (temp->str, temp->len);
         start += len;
 
         /* note the maximal length needed for the completion dialog */
@@ -1663,7 +1657,7 @@ edit_save_as_cmd (WEdit * edit)
         {
             int rv;
 
-            if (vfs_path_cmp (edit->filename_vpath, exp_vpath) != 0)
+            if (!vfs_path_equal (edit->filename_vpath, exp_vpath))
             {
                 int file;
                 struct stat sb;
@@ -2291,95 +2285,6 @@ eval_marks (WEdit * edit, off_t * start_mark, off_t * end_mark)
         edit->column2 = edit->column1 = 0;
         return 1;
     }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-edit_insert_over (WEdit * edit)
-{
-    int i;
-
-    for (i = 0; i < edit->over_col; i++)
-    {
-        edit_insert (edit, ' ');
-    }
-    edit->over_col = 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-off_t
-edit_insert_column_of_text_from_file (WEdit * edit, int file,
-                                      off_t * start_pos, off_t * end_pos, long *col1, long *col2)
-{
-    off_t cursor;
-    int col;
-    off_t blocklen = -1, width = 0;
-    unsigned char *data;
-
-    cursor = edit->curs1;
-    col = edit_get_col (edit);
-    data = g_malloc0 (TEMP_BUF_LEN);
-
-    while ((blocklen = mc_read (file, (char *) data, TEMP_BUF_LEN)) > 0)
-    {
-        off_t i;
-        for (width = 0; width < blocklen; width++)
-        {
-            if (data[width] == '\n')
-                break;
-        }
-        for (i = 0; i < blocklen; i++)
-        {
-            if (data[i] == '\n')
-            {                   /* fill in and move to next line */
-                long l;
-                off_t p;
-                if (edit_get_byte (edit, edit->curs1) != '\n')
-                {
-                    l = width - (edit_get_col (edit) - col);
-                    while (l > 0)
-                    {
-                        edit_insert (edit, ' ');
-                        l -= space_width;
-                    }
-                }
-                for (p = edit->curs1;; p++)
-                {
-                    if (p == edit->last_byte)
-                    {
-                        edit_cursor_move (edit, edit->last_byte - edit->curs1);
-                        edit_insert_ahead (edit, '\n');
-                        p++;
-                        break;
-                    }
-                    if (edit_get_byte (edit, p) == '\n')
-                    {
-                        p++;
-                        break;
-                    }
-                }
-                edit_cursor_move (edit, edit_move_forward3 (edit, p, col, 0) - edit->curs1);
-                l = col - edit_get_col (edit);
-                while (l >= space_width)
-                {
-                    edit_insert (edit, ' ');
-                    l -= space_width;
-                }
-                continue;
-            }
-            edit_insert (edit, data[i]);
-        }
-    }
-    *col1 = col;
-    *col2 = col + width;
-    *start_pos = cursor;
-    *end_pos = edit->curs1;
-    edit_cursor_move (edit, cursor - edit->curs1);
-    g_free (data);
-
-    return blocklen;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3363,7 +3268,7 @@ edit_complete_word_cmd (WEdit * edit)
     off_t word_start = 0;
     unsigned char *bufpos;
     char *match_expr;
-    struct selection compl[MAX_WORD_COMPLETIONS];       /* completions */
+    GString *compl[MAX_WORD_COMPLETIONS];       /* completions */
 
     /* search start of word to be completed */
     if (!edit_find_word_start (edit, &word_start, &word_len))
@@ -3381,16 +3286,16 @@ edit_complete_word_cmd (WEdit * edit)
     /* collect the possible completions              */
     /* start search from begin to end of file */
     max_len =
-        edit_collect_completions (edit, word_start, word_len, match_expr,
-                                  (struct selection *) &compl, &num_compl);
+        edit_collect_completions (edit, word_start, word_len, match_expr, (GString **) &compl,
+                                  &num_compl);
 
     if (num_compl > 0)
     {
         /* insert completed word if there is only one match */
         if (num_compl == 1)
         {
-            for (i = word_len; i < compl[0].len; i++)
-                edit_insert (edit, *(compl[0].text + i));
+            for (i = word_len; i < compl[0]->len; i++)
+                edit_insert (edit, *(compl[0]->str + i));
         }
         /* more than one possible completion => ask the user */
         else
@@ -3401,15 +3306,14 @@ edit_complete_word_cmd (WEdit * edit)
             /*tty_beep (); */
 
             /* let the user select the preferred completion */
-            editcmd_dialog_completion_show (edit, max_len, word_len,
-                                            (struct selection *) &compl, num_compl);
+            editcmd_dialog_completion_show (edit, max_len, word_len, (GString **) &compl, num_compl);
         }
     }
 
     g_free (match_expr);
     /* release memory before return */
     for (i = 0; i < num_compl; i++)
-        g_free (compl[i].text);
+        g_string_free (compl[i], TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3422,7 +3326,7 @@ edit_select_codepage_cmd (WEdit * edit)
         edit_set_codeset (edit);
 
     edit->force = REDRAW_PAGE;
-    send_message (edit, NULL, MSG_DRAW, 0, NULL);
+    widget_redraw (WIDGET (edit));
 }
 #endif
 

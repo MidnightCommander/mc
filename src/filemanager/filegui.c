@@ -398,9 +398,8 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
 
 #define ADD_RD_LABEL(i, p1, p2, ypos) \
     g_snprintf (buffer, sizeof (buffer), rd_widgets [i].text, p1, p2); \
-    add_widget_autopos (ui->replace_dlg, \
-                        label_new (ypos, rd_widgets [i].xpos, buffer), \
-                        rd_widgets [i].pos_flags, \
+    label2 = WIDGET (label_new (ypos, rd_widgets [i].xpos, buffer)); \
+    add_widget_autopos (ui->replace_dlg, label2, rd_widgets [i].pos_flags, \
                         ui->replace_dlg->current != NULL ? ui->replace_dlg->current->data : NULL)
 
     /* dialog sizes */
@@ -422,10 +421,10 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
         { N_("Target file already exists!"), 3, 4, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, 0 },
         /*  1 */
         { "%s", 4, 4, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, 0 },
-        /*  2 */        /* cannot use PRIuMAX here; %llu is used instead */
-        { N_("New     : %s, size %llu"), 6, 4, WPOS_KEEP_DEFAULT, 0 },
-        /*  3 */        /* cannot use PRIuMAX here; %llu is used instead */
-        { N_("Existing: %s, size %llu"), 7, 4, WPOS_KEEP_DEFAULT, 0 },
+        /*  2 */
+        { N_("New     : %s, size %s"), 6, 4, WPOS_KEEP_DEFAULT, 0 },
+        /*  3 */
+        { N_("Existing: %s, size %s"), 7, 4, WPOS_KEEP_DEFAULT, 0 },
         /*  4 */
         { N_("Overwrite this target?"), 9, 4, WPOS_KEEP_DEFAULT, 0 },
         /*  5 */
@@ -457,6 +456,8 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
     FileOpContextUI *ui = ctx->ui;
 
     char buffer[BUF_SMALL];
+    char fsize_buffer[BUF_SMALL];
+    Widget *label1, *label2;
     const char *title;
     vfs_path_t *stripped_vpath;
     const char *stripped_name;
@@ -541,16 +542,19 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
     /* prompt */
     ADD_RD_LABEL (0, "", "", y++);
     /* file name */
-    ADD_RD_LABEL (1, str_trunc (stripped_name, rd_xlen - 8), "", y++);
+    ADD_RD_LABEL (1, "", "", y++);
+    label1 = label2;
 
     add_widget (ui->replace_dlg, hline_new (y++, -1, -1));
 
     /* source date and size */
-    ADD_RD_LABEL (2, file_date (ui->s_stat->st_mtime), (unsigned long long) ui->s_stat->st_size,
-                  y++);
+    size_trunc_len (fsize_buffer, sizeof (fsize_buffer), ui->s_stat->st_size, -1, panels_options.kilobyte_si);
+    ADD_RD_LABEL (2, file_date (ui->s_stat->st_mtime), fsize_buffer, y++);
+    rd_xlen = max (rd_xlen, label2->cols + 8);
     /* destination date and size */
-    ADD_RD_LABEL (3, file_date (ui->d_stat->st_mtime), (unsigned long long) ui->d_stat->st_size,
-                  y++);
+    size_trunc_len (fsize_buffer, sizeof (fsize_buffer), ui->d_stat->st_size, -1, panels_options.kilobyte_si);
+    ADD_RD_LABEL (3, file_date (ui->d_stat->st_mtime), fsize_buffer, y++);
+    rd_xlen = max (rd_xlen, label2->cols + 8);
 
     add_widget (ui->replace_dlg, hline_new (y++, -1, -1));
 
@@ -580,6 +584,7 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
 
     ADD_RD_BUTTON (14, y);      /* Abort */
 
+    label_set_text (LABEL (label1), str_trunc (stripped_name, rd_xlen - 8));
     dlg_set_size (ui->replace_dlg, y + 3, rd_xlen);
     dlg_select_by_id (ui->replace_dlg, yes_id);
     result = run_dlg (ui->replace_dlg);
@@ -629,7 +634,7 @@ place_progress_buttons (WDialog * h, gboolean suspended)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-progress_start_stop (WButton * button, int action)
+progress_button_callback (WButton * button, int action)
 {
     (void) button;
     (void) action;
@@ -649,7 +654,8 @@ check_progress_buttons (FileOpContext * ctx)
     Gpm_Event event;
     FileOpContextUI *ui;
 
-    g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
+    if (ctx == NULL || ctx->ui == NULL)
+        return FILE_CONT;
 
     ui = ctx->ui;
 
@@ -666,6 +672,12 @@ check_progress_buttons (FileOpContext * ctx)
     switch (ui->op_dlg->ret_value)
     {
     case FILE_SKIP:
+        if (ctx->suspended)
+        {
+            /* redraw dialog in case of Skip after Suspend */
+            place_progress_buttons (ui->op_dlg, FALSE);
+            dlg_redraw (ui->op_dlg);
+        }
         ctx->suspended = FALSE;
         return FILE_SKIP;
     case B_CANCEL:
@@ -696,8 +708,8 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
     int dlg_width = 58, dlg_height = 17;
     int y = 2, x = 3;
 
-    g_return_if_fail (ctx != NULL);
-    g_return_if_fail (ctx->ui == NULL);
+    if (ctx == NULL || ctx->ui != NULL)
+        return;
 
 #ifdef ENABLE_NLS
     if (progress_buttons[0].len == -1)
@@ -708,7 +720,6 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
             progress_buttons[i].text = _(progress_buttons[i].text);
     }
 #endif
-
 
     ctx->dialog_type = dialog_type;
     ctx->recursive_result = RECURSIVE_YES;
@@ -769,13 +780,13 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
 
     progress_buttons[0].w = WIDGET (button_new (y, 0, progress_buttons[0].action,
                                                 progress_buttons[0].flags, progress_buttons[0].text,
-                                                NULL));
+                                                progress_button_callback));
     if (progress_buttons[0].len == -1)
         progress_buttons[0].len = button_get_len (BUTTON (progress_buttons[0].w));
 
     progress_buttons[1].w = WIDGET (button_new (y, 0, progress_buttons[1].action,
                                                 progress_buttons[1].flags, progress_buttons[1].text,
-                                                progress_start_stop));
+                                                progress_button_callback));
     if (progress_buttons[1].len == -1)
         progress_buttons[1].len = button_get_len (BUTTON (progress_buttons[1].w));
 
@@ -784,7 +795,8 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
         /* create and destroy button to get it length */
         progress_buttons[2].w = WIDGET (button_new (y, 0, progress_buttons[2].action,
                                                     progress_buttons[2].flags,
-                                                    progress_buttons[2].text, progress_start_stop));
+                                                    progress_buttons[2].text,
+                                                    progress_button_callback));
         progress_buttons[2].len = button_get_len (BUTTON (progress_buttons[2].w));
         send_message (progress_buttons[2].w, NULL, MSG_DESTROY, 0, NULL);
         g_free (progress_buttons[2].w);
@@ -822,9 +834,7 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
 void
 file_op_context_destroy_ui (FileOpContext * ctx)
 {
-    g_return_if_fail (ctx != NULL);
-
-    if (ctx->ui != NULL)
+    if (ctx != NULL && ctx->ui != NULL)
     {
         FileOpContextUI *ui = (FileOpContextUI *) ctx->ui;
 
@@ -849,11 +859,8 @@ file_progress_show (FileOpContext * ctx, off_t done, off_t total,
     char buffer2[BUF_TINY];
     char buffer3[BUF_TINY];
 
-    if (!verbose)
+    if (!verbose || ctx == NULL || ctx->ui == NULL)
         return;
-
-    g_return_if_fail (ctx != NULL);
-    g_return_if_fail (ctx->ui != NULL);
 
     ui = ctx->ui;
 
@@ -896,8 +903,8 @@ file_progress_show_count (FileOpContext * ctx, size_t done, size_t total)
     char buffer[BUF_TINY];
     FileOpContextUI *ui;
 
-    g_return_if_fail (ctx != NULL);
-    g_return_if_fail (ctx->ui != NULL);
+    if (ctx == NULL || ctx->ui == NULL)
+        return;
 
     ui = ctx->ui;
     if (ctx->progress_totals_computed)
@@ -920,8 +927,8 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintma
     struct timeval tv_current;
     FileOpContextUI *ui;
 
-    g_return_if_fail (ctx != NULL);
-    g_return_if_fail (ctx->ui != NULL);
+    if (ctx == NULL || ctx->ui == NULL)
+        return;
 
     ui = ctx->ui;
 
@@ -988,8 +995,8 @@ file_progress_show_source (FileOpContext * ctx, const vfs_path_t * s_vpath)
 {
     FileOpContextUI *ui;
 
-    g_return_if_fail (ctx != NULL);
-    g_return_if_fail (ctx->ui != NULL);
+    if (ctx == NULL || ctx->ui == NULL)
+        return;
 
     ui = ctx->ui;
 
@@ -1016,8 +1023,8 @@ file_progress_show_target (FileOpContext * ctx, const vfs_path_t * s_vpath)
 {
     FileOpContextUI *ui;
 
-    g_return_if_fail (ctx != NULL);
-    g_return_if_fail (ctx->ui != NULL);
+    if (ctx == NULL || ctx->ui == NULL)
+        return;
 
     ui = ctx->ui;
 
@@ -1044,8 +1051,8 @@ file_progress_show_deleting (FileOpContext * ctx, const char *s)
 {
     FileOpContextUI *ui;
 
-    g_return_if_fail (ctx != NULL);
-    g_return_if_fail (ctx->ui != NULL);
+    if (ctx == NULL || ctx->ui == NULL)
+        return;
 
     ui = ctx->ui;
     label_set_text (ui->file_label[0], _("Deleting"));
@@ -1061,8 +1068,8 @@ file_progress_real_query_replace (FileOpContext * ctx,
 {
     FileOpContextUI *ui;
 
-    g_return_val_if_fail (ctx != NULL, FILE_CONT);
-    g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
+    if (ctx == NULL || ctx->ui == NULL)
+        return FILE_CONT;
 
     ui = ctx->ui;
 
@@ -1125,7 +1132,8 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
     char *dest_dir, *tmp;
     char *def_text_secure;
 
-    g_return_val_if_fail (ctx != NULL, NULL);
+    if (ctx == NULL)
+        return NULL;
 
     /* unselect checkbox if target filesystem don't support attributes */
     ctx->op_preserve = filegui__check_attrs_on_fs (def_text);

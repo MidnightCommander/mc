@@ -1382,8 +1382,7 @@ dlg_replace_widget (Widget * old_w, Widget * new_w)
     if (should_focus)
         dlg_select_widget (new_w);
 
-    if (new_w->owner->state == DLG_ACTIVE)
-        send_message (new_w, NULL, MSG_DRAW, 0, NULL);
+    widget_redraw (new_w);
 }
 
 /* --------------------------------------------------------------------------------------------- */

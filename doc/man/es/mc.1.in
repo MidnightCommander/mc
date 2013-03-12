@@ -98,9 +98,9 @@ directorio de trabajo en el archivo indicado.  Esta opción no debe ser
 usada directamente, sino desde un guión de shell adecuado, para dejar
 como directorio activo el directorio que estaba en uso dentro de
 Midnight Commander.  Consúltese en los archivos
-.B %prefix%/share/mc/bin/mc.sh
+.B %libexecdir%/mc/mc.sh
 (usuarios de bash y zsh) y
-.B %prefix%/share/mc/bin/mc.csh
+.B %libexecdir%/mc/mc.csh
 (usuarios de tcsh) la manera de definir
 .B mc
 como un alias para el correspondiente guión de shell.
@@ -108,7 +108,7 @@ como un alias para el correspondiente guión de shell.
 .I \-s, \-\-slow
 Activa el modo para terminales lentos. En este modo el programa no
 dibuja bordes con líneas de caracteres y desactiva el modo detallado.
-Si no se rellana la sección [Lines] el marco pseudo-gráfico estará
+Si no se rellana la sección [Lines] el marco pseudo\-gráfico estará
 formado por espacios; en caso contrario el marco se contruye con
 caracteres de texto según los parámetros siguientes:
 .TP
@@ -3747,7 +3747,7 @@ de 900 segundos.
 .TP
 .I clipboard_store
 Ruta de acceso y opciones a una utilidad de portapapeles externa como 'xclip'
-para cargar texto de un archivo como selección en X-Windows.
+para cargar texto de un archivo como selección en X Window.
 Por ejemplo:
 .PP
 .nf
@@ -3756,7 +3756,7 @@ clipboard_store=xclip \-i
 .TP
 .I clipboard_paste
 Ruta de acceso y opciones a una utilidad de portapapeles externa como 'xclip'
-para volcar la selección de X-Windows a la salida estándar.
+para volcar la selección de X Window a la salida estándar.
 Por ejemplo:
 .PP
 .nf

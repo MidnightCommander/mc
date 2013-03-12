@@ -727,7 +727,7 @@ tree_store_remove_entry (const vfs_path_t * name_vpath)
 
     len = vfs_path_len (base->name);
     current = base->next;
-    while (current != NULL && vfs_path_ncmp (current->name, base->name, len) == 0)
+    while (current != NULL && vfs_path_equal_len (current->name, base->name, len))
     {
         char *current_name;
         gboolean ok;
@@ -794,7 +794,7 @@ tree_store_mark_checked (const char *subname)
         len = vfs_path_len (base->name);
         base->mark = 0;
         current = base->next;
-        while (current != NULL && vfs_path_ncmp (current->name, base->name, len) == 0)
+        while (current != NULL && vfs_path_equal_len (current->name, base->name, len))
         {
             gboolean ok;
 
@@ -851,7 +851,7 @@ tree_store_start_check (const vfs_path_t * vpath)
     len = vfs_path_len (ts.check_name);
 
     current = ts.check_start;
-    while (current != NULL && vfs_path_ncmp (current->name, ts.check_name, len) == 0)
+    while (current != NULL && vfs_path_equal_len (current->name, ts.check_name, len))
     {
         char *current_name;
         gboolean ok;
@@ -887,7 +887,7 @@ tree_store_end_check (void)
     len = vfs_path_len (ts.check_name);
 
     current = ts.check_start;
-    while (current != NULL && vfs_path_ncmp (current->name, ts.check_name, len) == 0)
+    while (current != NULL && vfs_path_equal_len (current->name, ts.check_name, len))
     {
         char *current_name;
         gboolean ok;

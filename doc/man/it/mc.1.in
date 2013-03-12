@@ -80,9 +80,9 @@ Questa funzione non è fatta per un uso diretto, ma dovrebbe essere
 utilizzata da una speciale funzione shell che imposti automaticamente 
 l'ultima directory corrente della shell come l'ultima directory in cui
 stava il Midnight Commander. Prelevate i file
-.B %prefix%/share/mc/bin/mc.sh
+.B %libexecdir%/mc/mc.sh
 (utenti bash e zsh) o rispettivamente
-.B %prefix%/share/mc/bin/mc.csh
+.B %libexecdir%/mc/mc.csh
 (utenti tcsh) per definire
 .B mc
 come un alias allo script di shell appropriato.

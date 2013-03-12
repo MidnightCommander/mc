@@ -2,7 +2,7 @@
    External panelize
 
    Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2007, 2009, 2011
+   2007, 2009, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
@@ -159,7 +159,9 @@ init_panelize (void)
     blen = i - 1;               /* gaps between buttons */
     while (i-- != 0)
     {
+#ifdef ENABLE_NLS
         panelize_but[i].text = _(panelize_but[i].text);
+#endif
         blen += str_term_width1 (panelize_but[i].text) + 3 + 1;
         if (panelize_but[i].flags == DEFPUSH_BUTTON)
             blen += 2;
@@ -418,7 +420,7 @@ do_panelize_cd (struct WPanel *panel)
     panel->count = panelized_panel.count;
     panel->is_panelized = TRUE;
 
-    panelized_same = (vfs_path_cmp (panelized_panel.root_vpath, panel->cwd_vpath) == 0);
+    panelized_same = (vfs_path_equal (panelized_panel.root_vpath, panel->cwd_vpath));
 
     for (i = 0; i < panelized_panel.count; i++)
     {
@@ -510,7 +512,7 @@ panelize_save_panel (struct WPanel *panel)
 void
 cd_panelize_cmd (void)
 {
-    if (get_display_type (MENU_PANEL_IDX) != view_listing)
+    if (!SELECTED_IS_PANEL)
         set_display_type (MENU_PANEL_IDX, view_listing);
 
     do_panelize_cd ((struct WPanel *) get_panel_widget (MENU_PANEL_IDX));

@@ -150,8 +150,7 @@ hline_set_text (WHLine * l, const char *text)
     else
         l->text = g_strdup (text);
 
-    if (WIDGET (l)->owner != NULL)
-        send_message (l, NULL, MSG_DRAW, 0, NULL);
+    widget_redraw (WIDGET (l));
 }
 
 /* --------------------------------------------------------------------------------------------- */

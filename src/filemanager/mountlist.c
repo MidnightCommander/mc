@@ -160,8 +160,12 @@
 #include <sys/mntent.h>
 #endif
 
+#ifndef HAVE_HASMNTOPT
+#define hasmntopt(mnt, opt) ((char *) 0)
+#endif
+
 #undef MNT_IGNORE
-#if defined MNTOPT_IGNORE && defined HAVE_HASMNTOPT
+#ifdef MNTOPT_IGNORE
 #define MNT_IGNORE(M) hasmntopt ((M), MNTOPT_IGNORE)
 #else
 #define MNT_IGNORE(M) 0
@@ -208,7 +212,6 @@
    /* for Linux 2.6/3.x */                      \
    || strcmp (Fs_type, "debugfs") == 0          \
    || strcmp (Fs_type, "devpts") == 0           \
-   || strcmp (Fs_type, "devtmpfs") == 0         \
    || strcmp (Fs_type, "fusectl") == 0          \
    || strcmp (Fs_type, "mqueue") == 0           \
    || strcmp (Fs_type, "rpc_pipefs") == 0       \

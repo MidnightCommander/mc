@@ -189,7 +189,7 @@ mcview_update (mcview_t * view)
     {
         view->dpy_bbar_dirty = FALSE;
         mcview_set_buttonbar (view);
-        buttonbar_redraw (find_buttonbar (WIDGET (view)->owner));
+        widget_redraw (WIDGET (find_buttonbar (WIDGET (view)->owner)));
     }
 
     if (view->dirty > dirt_limit)

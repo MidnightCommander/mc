@@ -1,11 +1,11 @@
 /*
    lib - canonicalize path
 
-   Copyright (C) 2011
+   Copyright (C) 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2011
+   Slava Zanko <slavazanko@gmail.com>, 2011, 2013
 
    This file is part of the Midnight Commander.
 
@@ -21,21 +21,24 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
-#include <config.h>
+#include "tests/mctest.h"
 
-#include <check.h>
-
-#include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/vfs/xdirentry.h"
 
 #include "src/vfs/local/local.c"
 
+static struct vfs_s_subclass test_subclass;
+static struct vfs_class vfs_test_ops;
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* @Before */
 static void
 setup (void)
 {
@@ -44,8 +47,19 @@ setup (void)
     vfs_init ();
     init_localfs ();
     vfs_setup_work_dir ();
+
+    vfs_s_init_class (&vfs_test_ops, &test_subclass);
+
+    vfs_test_ops.name = "testfs";
+    vfs_test_ops.flags = VFSF_NOLINKS;
+    vfs_test_ops.prefix = "ftp";
+    test_subclass.flags = VFS_S_REMOTE;
+    vfs_register_class (&vfs_test_ops);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* @After */
 static void
 teardown (void)
 {
@@ -55,58 +69,76 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#define check_canonicalize( input, etalon ) { \
-    path = g_strdup(input); \
-    canonicalize_pathname (path); \
-    fail_unless ( \
-        strcmp(path, etalon) == 0, \
-        "\nactual value (%s)\nnot equal to etalon (%s)", path, etalon \
-    ); \
-    g_free(path); \
-}
-
-START_TEST (test_canonicalize_path)
+/* @DataSource("test_canonicalize_path_ds") */
+/* *INDENT-OFF* */
+static const struct test_canonicalize_path_ds
 {
-    char *path;
-    static struct vfs_s_subclass test_subclass;
-    static struct vfs_class vfs_test_ops;
+    const char *input_path;
+    const char *expected_path;
+} test_canonicalize_path_ds[] =
+{
+    { /* 0. UNC path */
+        "//some_server/ww",
+        "//some_server/ww"
+    },
+    { /* 1. join slashes */
+        "///some_server/////////ww",
+        "/some_server/ww"
+    },
+    { /* 2. Collapse "/./" -> "/" */
+        "//some_server//.///////ww/./././.",
+        "//some_server/ww"
+    },
+    {/* 3. Remove leading "./" */
+        "./some_server/ww",
+        "some_server/ww"
+    },
+    { /* 4. some/.. -> . */
+        "some_server/..",
+        "."
+    },
+    { /* 5. Collapse "/.." with the previous part of path */
+        "/some_server/ww/some_server/../ww/../some_server/..//ww/some_server/ww",
+        "/some_server/ww/ww/some_server/ww"
+    },
+    { /* 6. URI style */
+        "/some_server/ww/ftp://user:pass@host.net/path/",
+        "/some_server/ww/ftp://user:pass@host.net/path"
+    },
+    { /* 7. */
+        "/some_server/ww/ftp://user:pass@host.net/path/../../",
+        "/some_server/ww"
+    },
+    { /* 8. */
+        "ftp://user:pass@host.net/path/../../",
+        "."
+    },
+    { /* 9. */
+        "ftp://user/../../",
+        ".."
+    },
+};
+/* *INDENT-ON* */
 
-    vfs_s_init_class (&vfs_test_ops, &test_subclass);
+/* @Test(dataSource = "test_canonicalize_path_ds") */
+/* *INDENT-OFF* */
+START_PARAMETRIZED_TEST (test_canonicalize_path, test_canonicalize_path_ds)
+/* *INDENT-ON* */
+{
+    /* given */
+    char *actual_path;
 
-    vfs_test_ops.name = "testfs";
-    vfs_test_ops.flags = VFSF_NOLINKS;
-    vfs_test_ops.prefix = "ftp";
-    test_subclass.flags = VFS_S_REMOTE;
-    vfs_register_class (&vfs_test_ops);
+    actual_path = g_strdup (data->input_path);
 
-    /* UNC path */
-    check_canonicalize ("//some_server/ww", "//some_server/ww");
+    /* when */
+    canonicalize_pathname (actual_path);
 
-    /* join slashes */
-    check_canonicalize ("///some_server/////////ww", "/some_server/ww");
-
-    /* Collapse "/./" -> "/" */
-    check_canonicalize ("//some_server//.///////ww/./././.", "//some_server/ww");
-
-    /* Remove leading "./" */
-    check_canonicalize ("./some_server/ww", "some_server/ww");
-
-    /* some/.. -> . */
-    check_canonicalize ("some_server/..", ".");
-
-    /* Collapse "/.." with the previous part of path */
-    check_canonicalize ("/some_server/ww/some_server/../ww/../some_server/..//ww/some_server/ww", "/some_server/ww/ww/some_server/ww");
-
-    /* URI style */
-    check_canonicalize ("/some_server/ww/ftp://user:pass@host.net/path/", "/some_server/ww/ftp://user:pass@host.net/path");
-
-    check_canonicalize ("/some_server/ww/ftp://user:pass@host.net/path/../../", "/some_server/ww");
-
-    check_canonicalize ("ftp://user:pass@host.net/path/../../", ".");
-
-    check_canonicalize ("ftp://user/../../", "..");
+    /* then */
+    mctest_assert_str_eq (actual_path, data->expected_path) g_free (actual_path);
 }
-END_TEST
+/* *INDENT-OFF* */
+END_PARAMETRIZED_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -122,7 +154,7 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_test (tc_core, test_canonicalize_path);
+    mctest_add_parameterized_test (tc_core, test_canonicalize_path, test_canonicalize_path_ds);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);

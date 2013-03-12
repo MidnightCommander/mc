@@ -219,7 +219,7 @@ sftpfs_fill_config_entity_from_config (FILE * ssh_config_handler,
             if (errno != 0)
             {
                 g_set_error (error, MC_ERROR, errno,
-                             _("sftp: an error occured while reading %s: %s"), SFTPFS_SSH_CONFIG,
+                             _("sftp: an error occurred while reading %s: %s"), SFTPFS_SSH_CONFIG,
                              strerror (errno));
                 mc_search_free (host_regexp);
                 return FALSE;

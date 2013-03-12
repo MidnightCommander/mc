@@ -338,7 +338,7 @@ editcmd_dialog_raw_key_query (const char *heading, const char *query, gboolean c
 
 void
 editcmd_dialog_completion_show (WEdit * edit, int max_len, int word_len,
-                                struct selection *compl, int num_compl)
+                                GString ** compl, int num_compl)
 {
 
     int start_x, start_y, offset, i;
@@ -382,7 +382,7 @@ editcmd_dialog_completion_show (WEdit * edit, int max_len, int word_len,
 
     /* fill the listbox with the completions */
     for (i = num_compl - 1; i >= 0; i--)        /* reverse order */
-        listbox_add_item (compl_list, LISTBOX_APPEND_AT_END, 0, (char *) compl[i].text, NULL);
+        listbox_add_item (compl_list, LISTBOX_APPEND_AT_END, 0, (char *) compl[i]->str, NULL);
 
     /* pop up the dialog and apply the choosen completion */
     if (run_dlg (compl_dlg) == B_ENTER)

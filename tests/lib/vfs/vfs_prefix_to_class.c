@@ -1,11 +1,11 @@
 /*
    lib/vfs - test vfs_prefix_to_class() functionality
 
-   Copyright (C) 2011
+   Copyright (C) 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2011
+   Slava Zanko <slavazanko@gmail.com>, 2011, 2013
 
    This file is part of the Midnight Commander.
 
@@ -21,50 +21,46 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
-#include <config.h>
+#include "tests/mctest.h"
 
-#include <check.h>
-
-#include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
-#include "lib/vfs/vfs.c" /* for testing static methods  */
+#include "lib/vfs/vfs.c"        /* for testing static methods  */
 
 #include "src/vfs/local/local.c"
 
 struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
 struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
 
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 test_which (struct vfs_class *me, const char *path)
 {
     (void) me;
 
-    if (
-        (strcmp(path, "test_1:") == 0) ||
-        (strcmp(path, "test_2:") == 0) ||
-        (strcmp(path, "test_3:") == 0) ||
-        (strcmp(path, "test_4:") == 0)
-    )
+    if ((strcmp (path, "test_1:") == 0) ||
+        (strcmp (path, "test_2:") == 0) ||
+        (strcmp (path, "test_3:") == 0) || (strcmp (path, "test_4:") == 0))
         return 1;
     return -1;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* @Before */
 static void
 setup (void)
 {
-
     str_init_strings (NULL);
 
     vfs_init ();
     init_localfs ();
     vfs_setup_work_dir ();
-
 
     test_subclass1.flags = VFS_S_REMOTE;
     vfs_s_init_class (&vfs_test_ops1, &test_subclass1);
@@ -86,6 +82,9 @@ setup (void)
 
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* @After */
 static void
 teardown (void)
 {
@@ -95,28 +94,70 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-START_TEST (test_vfs_prefix_to_class_valid)
+/* @DataSource("test_vfs_prefix_to_class_ds") */
+/* *INDENT-OFF* */
+static const struct test_vfs_prefix_to_class_ds
 {
-    fail_unless(vfs_prefix_to_class((char *) "test_1:") == &vfs_test_ops1, "'test_1:' doesn't transform to vfs_test_ops1");
-    fail_unless(vfs_prefix_to_class((char *) "test_2:") == &vfs_test_ops1, "'test_2:' doesn't transform to vfs_test_ops1");
-    fail_unless(vfs_prefix_to_class((char *) "test_3:") == &vfs_test_ops1, "'test_3:' doesn't transform to vfs_test_ops1");
-    fail_unless(vfs_prefix_to_class((char *) "test_4:") == &vfs_test_ops1, "'test_4:' doesn't transform to vfs_test_ops1");
-
-    fail_unless(vfs_prefix_to_class((char *) "test2:") == &vfs_test_ops2, "'test2:' doesn't transform to vfs_test_ops2");
-
-    fail_unless(vfs_prefix_to_class((char *) "test3:") == &vfs_test_ops3, "'test3:' doesn't transform to vfs_test_ops3");
-}
-END_TEST
-
-/* --------------------------------------------------------------------------------------------- */
-
-START_TEST (test_vfs_prefix_to_class_invalid)
+    const char *input_string;
+    const struct vfs_class *expected_result;
+} test_vfs_prefix_to_class_ds[] =
 {
-    fail_unless(vfs_prefix_to_class((char *) "test1:") == NULL, "'test1:' doesn't transform to NULL");
-    fail_unless(vfs_prefix_to_class((char *) "test_5:") == NULL, "'test_5:' doesn't transform to NULL");
-    fail_unless(vfs_prefix_to_class((char *) "test4:") == NULL, "'test4:' doesn't transform to NULL");
+    { /* 0 */
+        "test_1:",
+        &vfs_test_ops1
+    },
+    { /* 1 */
+        "test_2:",
+        &vfs_test_ops1
+    },
+    { /* 2 */
+        "test_3:",
+        &vfs_test_ops1
+    },
+    { /* 3 */
+        "test_4:",
+        &vfs_test_ops1
+    },
+    { /* 4 */
+        "test2:",
+        &vfs_test_ops2
+    },
+    { /* 5 */
+        "test3:",
+        &vfs_test_ops3
+    },
+    {
+        "test1:",
+        NULL
+    },
+    { /* 6 */
+        "test_5:",
+        NULL
+    },
+    { /* 7 */
+        "test4:",
+        NULL
+    },
+};
+/* *INDENT-ON* */
+
+/* @Test(dataSource = "test_vfs_prefix_to_class_ds") */
+/* *INDENT-OFF* */
+START_PARAMETRIZED_TEST (test_vfs_prefix_to_class, test_vfs_prefix_to_class_ds)
+/* *INDENT-ON* */
+{
+    /* given */
+    struct vfs_class *actual_result;
+
+    /* when */
+    actual_result = vfs_prefix_to_class ((char *) data->input_string);
+
+    /* then */
+    mctest_assert_ptr_eq (actual_result, data->expected_result);
 }
-END_TEST
+/* *INDENT-OFF* */
+END_PARAMETRIZED_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -132,8 +173,7 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_test (tc_core, test_vfs_prefix_to_class_valid);
-    tcase_add_test (tc_core, test_vfs_prefix_to_class_invalid);
+    mctest_add_parameterized_test (tc_core, test_vfs_prefix_to_class, test_vfs_prefix_to_class_ds);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);

@@ -181,7 +181,6 @@ void edit_menu_cmd (WDialog * h);
 void user_menu (WEdit * edit, const char *menu_file, int selected_entry);
 void edit_init_menu (struct WMenuBar *menubar);
 void edit_save_mode_cmd (void);
-gboolean edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch);
 int edit_get_byte (const WEdit * edit, off_t byte_index);
 int edit_get_utf (const WEdit * edit, off_t byte_index, int *char_width);
 long edit_count_lines (const WEdit * edit, off_t current, off_t upto);
@@ -214,6 +213,7 @@ void edit_delete_line (WEdit * edit);
 int edit_delete (WEdit * edit, gboolean byte_delete);
 int edit_backspace (WEdit * edit, gboolean byte_delete);
 void edit_insert (WEdit * edit, int c);
+void edit_insert_over (WEdit * edit);
 void edit_cursor_move (WEdit * edit, off_t increment);
 void edit_push_undo_action (WEdit * edit, long c);
 void edit_push_redo_action (WEdit * edit, long c);
@@ -253,10 +253,6 @@ void edit_set_spell_lang (void);
 gboolean edit_save_block (WEdit * edit, const char *filename, off_t start, off_t finish);
 gboolean edit_save_block_cmd (WEdit * edit);
 gboolean edit_insert_file_cmd (WEdit * edit);
-void edit_insert_over (WEdit * edit);
-off_t edit_insert_column_of_text_from_file (WEdit * edit, int file,
-                                            off_t * start_pos, off_t * end_pos, long *col1,
-                                            long *col2);
 
 char *edit_get_word_from_pos (const WEdit * edit, off_t start_pos, off_t * start, gsize * len,
                               gsize * cut);

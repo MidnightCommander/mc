@@ -1,11 +1,11 @@
 /*
    lib/vfs - test vfs_split() functionality
 
-   Copyright (C) 2011
+   Copyright (C) 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2011
+   Slava Zanko <slavazanko@gmail.com>, 2011, 2013
 
    This file is part of the Midnight Commander.
 
@@ -21,28 +21,27 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ */
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
-#include <config.h>
+#include "tests/mctest.h"
 
-#include <check.h>
-
-#include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
-#include "lib/vfs/path.c" /* for testing static methods  */
+#include "lib/vfs/path.c"       /* for testing static methods  */
 
 #include "src/vfs/local/local.c"
 
 struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
 struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* @Before */
 static void
 setup (void)
 {
-
     str_init_strings (NULL);
 
     vfs_init ();
@@ -67,9 +66,11 @@ setup (void)
     vfs_test_ops3.name = "testfs3";
     vfs_test_ops3.prefix = "test3:";
     vfs_register_class (&vfs_test_ops3);
-
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* @After */
 static void
 teardown (void)
 {
@@ -79,164 +80,122 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-START_TEST (test_vfs_split)
+/* @DataSource("test_vfs_split_ds") */
+/* *INDENT-OFF* */
+static const struct test_vfs_split_ds
 {
-    char *path;
-    const char *local, *op, *etalon_path, *etalon_local, *etalon_op;
-    struct vfs_class *result;
-
-    path = g_strdup("#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2/#test3:/qqq/www/eee.rr");
-
-    etalon_path = "#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2/";
-    etalon_local = "qqq/www/eee.rr";
-    etalon_op = "test3:";
-    result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
-    fail_unless(result == &vfs_test_ops3, "Result(%p) doesn't match to vfs_test_ops3(%p)", result, &vfs_test_ops3);
-    fail_unless(strcmp (path, etalon_path) == 0, "path('%s') doesn't match to '%s'", path, etalon_path);
-    fail_unless(strcmp (local, etalon_local) == 0, "parsed local path('%s') doesn't match to '%s'", local, etalon_local);
-    fail_unless(strcmp (op, etalon_op) == 0, "parsed VFS name ('%s') doesn't match to '%s'", op, etalon_op);
-
-    etalon_path = "#test1:/bla-bla/some/path/";
-    etalon_local = "bla-bla/some/path2/";
-    etalon_op = "test2:";
-    result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
-    fail_unless(result == &vfs_test_ops2, "Result(%p) doesn't match to vfs_test_ops2(%p)", result, &vfs_test_ops2);
-    fail_unless(strcmp (path, etalon_path) == 0, "path('%s') doesn't match to '%s'", path, etalon_path);
-    fail_unless(strcmp (local, etalon_local) == 0, "parsed local path('%s') doesn't match to '%s'", local, etalon_local);
-    fail_unless(strcmp (op, etalon_op) == 0, "parsed VFS name ('%s') doesn't match to '%s'", op, etalon_op);
-
-    etalon_path = "";
-    etalon_local = "bla-bla/some/path/";
-    etalon_op = "test1:";
-    result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
-    fail_unless(result == &vfs_test_ops1, "Result(%p) doesn't match to vfs_test_ops1(%p)", result, &vfs_test_ops2);
-    fail_unless(strcmp (path, etalon_path) == 0, "path('%s') doesn't match to '%s'", path, etalon_path);
-    fail_unless(strcmp (local, etalon_local) == 0, "parsed local path('%s') doesn't match to '%s'", local, etalon_local);
-    fail_unless(strcmp (op, etalon_op) == 0, "parsed VFS name ('%s') doesn't match to '%s'", op, etalon_op);
-
-    result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
-    fail_unless(result == NULL, "Result(%p) doesn't match to vfs_test_ops1(NULL)", result);
-    fail_unless(strcmp (path, etalon_path) == 0, "path('%s') doesn't match to '%s'", path, etalon_path);
-    fail_unless(strcmp (local, etalon_local) == 0, "parsed local path('%s') doesn't match to '%s'", local, etalon_local);
-    fail_unless(strcmp (op, etalon_op) == 0, "parsed VFS name ('%s') doesn't match to '%s'", op, etalon_op);
-
-    g_free(path);
-}
-END_TEST
-
-/* --------------------------------------------------------------------------------------------- */
-
-START_TEST (test_vfs_split_with_local)
+    const char *input_string;
+    const char *expected_path;
+    const char *expected_local;
+    const char *expected_op;
+    const struct vfs_class *expected_result;
+} test_vfs_split_ds[] =
 {
-    char *path;
-    const char *local, *op, *etalon_path, *etalon_local, *etalon_op;
-    struct vfs_class *result;
+    { /* 0. */
+        "#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2/#test3:/qqq/www/eee.rr",
+        "#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2/",
+        "qqq/www/eee.rr",
+        "test3:",
+        &vfs_test_ops3
+    },
+    { /* 1. */
+        "#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2/",
+        "#test1:/bla-bla/some/path/",
+        "bla-bla/some/path2/",
+        "test2:",
+        &vfs_test_ops2
+    },
+    { /* 2. */
+        "#test1:/bla-bla/some/path/",
+        "",
+        "bla-bla/some/path/",
+        "test1:",
+        &vfs_test_ops1
+    },
+    { /* 3. */
+        "",
+        "",
+        NULL,
+        NULL,
+        NULL
+    },
+    { /* 4. split with local */
+        "/local/path/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2#test3:/qqq/www/eee.rr",
+        "/local/path/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2",
+        "qqq/www/eee.rr",
+        "test3:",
+        &vfs_test_ops3
+    },
+    { /* 5. split with local */
+        "/local/path/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2",
+        "/local/path/#test1:/bla-bla/some/path/",
+        "bla-bla/some/path2",
+        "test2:",
+        &vfs_test_ops2,
+    },
+    { /* 6. split with local */
+        "/local/path/#test1:/bla-bla/some/path/",
+        "/local/path/",
+        "bla-bla/some/path/",
+        "test1:",
+        &vfs_test_ops1
+    },
+    { /* 7. split with local */
+        "/local/path/",
+        "/local/path/",
+        NULL,
+        NULL,
+        NULL
+    },
+    { /* 8. split with URL */
+        "#test2:username:passwd@somehost.net/bla-bla/some/path2",
+        "",
+        "bla-bla/some/path2",
+        "test2:username:passwd@somehost.net",
+        &vfs_test_ops2
+    },
+    { /* 9. split URL with semi */
+        "/local/path/#test1:/bla-bla/some/path/#test2:username:p!a@s#s$w%d@somehost.net/bla-bla/some/path2",
+        "/local/path/#test1:/bla-bla/some/path/",
+        "bla-bla/some/path2",
+        "test2:username:p!a@s#s$w%d@somehost.net",
+        &vfs_test_ops2
+    },
+    { /* 10. split with semi in path */
+        "#test2:/bl#a-bl#a/so#me/pa#th2",
+        "",
+        "bl#a-bl#a/so#me/pa#th2",
+        "test2:",
+        &vfs_test_ops2
+    },
+};
+/* *INDENT-ON* */
 
-    path = g_strdup("/local/path/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2#test3:/qqq/www/eee.rr");
-
-    etalon_path = "/local/path/#test1:/bla-bla/some/path/#test2:/bla-bla/some/path2";
-    etalon_local = "qqq/www/eee.rr";
-    etalon_op = "test3:";
-    result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
-    fail_unless(result == &vfs_test_ops3, "Result(%p) doesn't match to vfs_test_ops3(%p)", result, &vfs_test_ops3);
-    fail_unless(strcmp (path, etalon_path) == 0, "path('%s') doesn't match to '%s'", path, etalon_path);
-    fail_unless(strcmp (local, etalon_local) == 0, "parsed local path('%s') doesn't match to '%s'", local, etalon_local);
-    fail_unless(strcmp (op, etalon_op) == 0, "parsed VFS name ('%s') doesn't match to '%s'", op, etalon_op);
-
-    etalon_path = "/local/path/#test1:/bla-bla/some/path/";
-    etalon_local = "bla-bla/some/path2";
-    etalon_op = "test2:";
-    result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
-    fail_unless(result == &vfs_test_ops2, "Result(%p) doesn't match to vfs_test_ops2(%p)", result, &vfs_test_ops2);
-    fail_unless(strcmp (path, etalon_path) == 0, "path('%s') doesn't match to '%s'", path, etalon_path);
-    fail_unless(strcmp (local, etalon_local) == 0, "parsed local path('%s') doesn't match to '%s'", local, etalon_local);
-    fail_unless(strcmp (op, etalon_op) == 0, "parsed VFS name ('%s') doesn't match to '%s'", op, etalon_op);
-
-    etalon_path = "/local/path/";
-    etalon_local = "bla-bla/some/path/";
-    etalon_op = "test1:";
-    result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
-    fail_unless(result == &vfs_test_ops1, "Result(%p) doesn't match to vfs_test_ops1(%p)", result, &vfs_test_ops2);
-    fail_unless(strcmp (path, etalon_path) == 0, "path('%s') doesn't match to '%s'", path, etalon_path);
-    fail_unless(strcmp (local, etalon_local) == 0, "parsed local path('%s') doesn't match to '%s'", local, etalon_local);
-    fail_unless(strcmp (op, etalon_op) == 0, "parsed VFS name ('%s') doesn't match to '%s'", op, etalon_op);
-
-    result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
-    fail_unless(result == NULL, "Result(%p) doesn't match to vfs_test_ops1(NULL)", result);
-
-    g_free(path);
-}
-END_TEST
-
-/* --------------------------------------------------------------------------------------------- */
-START_TEST (test_vfs_split_url)
+/* @Test(dataSource = "test_vfs_split_ds") */
+/* *INDENT-OFF* */
+START_PARAMETRIZED_TEST (test_vfs_split, test_vfs_split_ds)
+/* *INDENT-ON* */
 {
+    /* given */
+    const char *local = NULL, *op = NULL;
+    struct vfs_class *actual_result;
     char *path;
-    const char *local, *op, *etalon_path, *etalon_local, *etalon_op;
-    struct vfs_class *result;
 
-    path = g_strdup("#test2:username:passwd@somehost.net/bla-bla/some/path2");
+    path = g_strdup (data->input_string);
 
-    etalon_path = "";
-    etalon_local = "bla-bla/some/path2";
-    etalon_op = "test2:username:passwd@somehost.net";
-    result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
-    fail_unless(result == &vfs_test_ops2, "Result(%p) doesn't match to vfs_test_ops2(%p)", result, &vfs_test_ops2);
-    fail_unless(path != NULL && strcmp (path, etalon_path) == 0, "path('%s') doesn't match to '%s'", path, etalon_path);
-    fail_unless(local != NULL && strcmp (local, etalon_local) == 0, "parsed local path('%s') doesn't match to '%s'", local, etalon_local);
-    fail_unless(op != NULL && strcmp (op, etalon_op) == 0, "parsed VFS name ('%s') doesn't match to '%s'", op, etalon_op);
+    /* when */
+    actual_result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
 
-    g_free(path);
+    /* then */
+    mctest_assert_ptr_eq (actual_result, data->expected_result);
+    mctest_assert_str_eq (path, data->expected_path);
+    mctest_assert_str_eq (local, data->expected_local);
+    mctest_assert_str_eq (op, data->expected_op);
+    g_free (path);
 }
-END_TEST
-
-/* --------------------------------------------------------------------------------------------- */
-
-START_TEST (test_vfs_split_url_with_semi)
-{
-    char *path;
-    const char *local, *op, *etalon_path, *etalon_local, *etalon_op;
-    struct vfs_class *result;
-
-
-    path = g_strdup("/local/path/#test1:/bla-bla/some/path/#test2:username:p!a@s#s$w%d@somehost.net/bla-bla/some/path2");
-
-    etalon_path = "/local/path/#test1:/bla-bla/some/path/";
-    etalon_local = "bla-bla/some/path2";
-    etalon_op = "test2:username:p!a@s#s$w%d@somehost.net";
-    result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
-    fail_unless(result == &vfs_test_ops2, "Result(%p) doesn't match to vfs_test_ops2(%p)", result, &vfs_test_ops2);
-    fail_unless(path != NULL && strcmp (path, etalon_path) == 0, "path('%s') doesn't match to '%s'", path, etalon_path);
-    fail_unless(local != NULL && strcmp (local, etalon_local) == 0, "parsed local path('%s') doesn't match to '%s'", local, etalon_local);
-    fail_unless(op != NULL && strcmp (op, etalon_op) == 0, "parsed VFS name ('%s') doesn't match to '%s'", op, etalon_op);
-
-    g_free(path);
-
-}
-END_TEST
-
-/* --------------------------------------------------------------------------------------------- */
-
-START_TEST (test_vfs_split_with_semi_in_path)
-{
-    char *path;
-    const char *local, *op, *etalon_path, *etalon_local, *etalon_op;
-    struct vfs_class *result;
-
-    path = g_strdup("#test2:/bl#a-bl#a/so#me/pa#th2");
-
-    etalon_path = "";
-    etalon_local = "bl#a-bl#a/so#me/pa#th2";
-    etalon_op = "test2:";
-    result = _vfs_split_with_semi_skip_count (path, &local, &op, 0);
-    fail_unless(result == &vfs_test_ops2, "Result(%p) doesn't match to vfs_test_ops2(%p)", result, &vfs_test_ops2);
-    fail_unless(path != NULL && strcmp (path, etalon_path) == 0, "path('%s') doesn't match to '%s'", path, etalon_path);
-    fail_unless(local != NULL && strcmp (local, etalon_local) == 0, "parsed local path('%s') doesn't match to '%s'", local, etalon_local);
-    fail_unless(op != NULL && strcmp (op, etalon_op) == 0, "parsed VFS name ('%s') doesn't match to '%s'", op, etalon_op);
-
-    g_free(path);
-}
-END_TEST
+/* *INDENT-OFF* */
+END_PARAMETRIZED_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -252,17 +211,13 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_test (tc_core, test_vfs_split);
-    tcase_add_test (tc_core, test_vfs_split_with_local);
-    tcase_add_test (tc_core, test_vfs_split_url);
-    tcase_add_test (tc_core, test_vfs_split_url_with_semi);
-    tcase_add_test (tc_core, test_vfs_split_with_semi_in_path);
+    mctest_add_parameterized_test (tc_core, test_vfs_split, test_vfs_split_ds);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);
     sr = srunner_create (s);
     srunner_set_log (sr, "vfs_split.log");
-    srunner_run_all (sr, CK_NORMAL);
+    srunner_run_all (sr, CK_NOFORK);
     number_failed = srunner_ntests_failed (sr);
     srunner_free (sr);
     return (number_failed == 0) ? 0 : 1;

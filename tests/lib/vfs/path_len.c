@@ -1,9 +1,10 @@
-/* lib/vfs - vfs_path_t compare functions
+/* lib/vfs - tests for vfspath_len() function.
 
-   Copyright (C) 2011 Free Software Foundation, Inc.
+   Copyright (C) 2011, 2013
+   The Free Software Foundation, Inc.
 
    Written by:
-    Slava Zanko <slavazanko@gmail.com>, 2011
+   Slava Zanko <slavazanko@gmail.com>, 2011, 2013
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License
@@ -18,13 +19,11 @@
    You should have received a copy of the GNU Library General Public
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-*/
+ */
 
 #define TEST_SUITE_NAME "/lib/vfs"
 
-#include <check.h>
-
-#include "lib/global.c"
+#include "tests/mctest.h"
 
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
@@ -36,7 +35,9 @@
 
 #include "src/vfs/local/local.c"
 
+/* --------------------------------------------------------------------------------------------- */
 
+/* @Before */
 static void
 setup (void)
 {
@@ -52,6 +53,9 @@ setup (void)
 #endif
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+/* @After */
 static void
 teardown (void)
 {
@@ -64,26 +68,57 @@ teardown (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-#define path_len_one_check(input,etalon) {\
-    vpath = vfs_path_from_str (input);\
-    result = vfs_path_len (vpath);\
-    vfs_path_free (vpath); \
-    fail_unless ( result == etalon, "\ninput: %s\nexpected: %d\nactual: %d\n",\
-        input, etalon, result); \
-}
-
-START_TEST (test_path_length)
+/* @DataSource("test_path_length_ds") */
+/* *INDENT-OFF* */
+static const struct test_path_length_ds
 {
-    vfs_path_t *vpath;
-    size_t result;
-
-    path_len_one_check ("/тестовый/путь", 26);
+    const char *input_path;
+    const size_t expected_length;
+} test_path_length_ds[] =
+{
+    { /* 0. */
+        NULL,
+        0
+    },
+    { /* 1. */
+        "/",
+        1
+    },
+    { /* 2. */
+        "/тестовый/путь",
+        26
+    },
 #ifdef HAVE_CHARSET
-    path_len_one_check ("/#enc:KOI8-R/тестовый/путь",  38);
-#endif
-    path_len_one_check (NULL, 0);
+    { /* 3. */
+        "/#enc:KOI8-R/тестовый/путь",
+        38
+    },
+#endif /* HAVE_CHARSET */
+};
+/* *INDENT-ON* */
+
+/* @Test(dataSource = "test_path_length_ds") */
+/* *INDENT-OFF* */
+START_PARAMETRIZED_TEST (test_path_length, test_path_length_ds)
+/* *INDENT-ON* */
+{
+    /* given */
+    vfs_path_t *vpath;
+    size_t actual_length;
+
+    vpath = vfs_path_from_str (data->input_path);
+
+    /* when */
+    actual_length = vfs_path_len (vpath);
+
+    /* then */
+    mctest_assert_int_eq (actual_length, data->expected_length);
+
+    vfs_path_free (vpath);
 }
-END_TEST
+/* *INDENT-OFF* */
+END_PARAMETRIZED_TEST
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -99,7 +134,7 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_test (tc_core, test_path_length);
+    mctest_add_parameterized_test (tc_core, test_path_length, test_path_length_ds);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);

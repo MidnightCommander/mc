@@ -1532,20 +1532,20 @@ vfs_path_element_build_pretty_path_str (const vfs_path_element_t * element)
  * @return integer value like to strcmp.
  */
 
-int
-vfs_path_cmp (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
+gboolean
+vfs_path_equal (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
     char *path1;
     char *path2;
-    int ret_val;
+    gboolean ret_val;
 
     if (vpath1 == NULL || vpath2 == NULL)
-        return -1;
+        return FALSE;
 
     path1 = vfs_path_to_str (vpath1);
     path2 = vfs_path_to_str (vpath2);
 
-    ret_val = strcmp (path1, path2);
+    ret_val = strcmp (path1, path2) == 0;
 
     g_free (path1);
     g_free (path2);
@@ -1564,20 +1564,20 @@ vfs_path_cmp (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
  * @return integer value like to strcmp.
  */
 
-int
-vfs_path_ncmp (const vfs_path_t * vpath1, const vfs_path_t * vpath2, size_t len)
+gboolean
+vfs_path_equal_len (const vfs_path_t * vpath1, const vfs_path_t * vpath2, size_t len)
 {
     char *path1;
     char *path2;
-    int ret_val;
+    gboolean ret_val;
 
     if (vpath1 == NULL || vpath2 == NULL)
-        return -1;
+        return FALSE;
 
     path1 = vfs_path_to_str (vpath1);
     path2 = vfs_path_to_str (vpath2);
 
-    ret_val = strncmp (path1, path2, len);
+    ret_val = strncmp (path1, path2, len) == 0;
 
     g_free (path1);
     g_free (path2);

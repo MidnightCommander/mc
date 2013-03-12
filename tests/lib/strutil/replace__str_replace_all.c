@@ -25,10 +25,8 @@
 
 #define TEST_SUITE_NAME "/lib/strutil"
 
-#include <config.h>
-#include <check.h>
+#include "tests/mctest.h"
 
-#include "lib/global.h"
 #include "lib/strutil.h"
 
 /* --------------------------------------------------------------------------------------------- */
@@ -62,84 +60,84 @@ static const struct str_replace_all_test_ds
 } str_replace_all_test_ds[] =
 {
     {
-        /*needle not found*/
+        /* 0. needle not found*/
         "needle not found",
         "blablablabla",
         "1234567890",
         "needle not found",
     },
     {
-        /* replacement is less rather that needle */
+        /* 1.  replacement is less rather that needle */
         "some string blablablabla string",
        "blablablabla",
         "1234",
         "some string 1234 string",
     },
     {
-        /* replacement is great rather that needle */
+        /* 2.  replacement is great rather that needle */
         "some string bla string",
         "bla",
         "1234567890",
         "some string 1234567890 string",
     },
     {
-        /* replace few substrings in a start of string */
+        /* 3.  replace few substrings in a start of string */
         "blabla blabla string",
         "blabla",
         "111111111",
         "111111111 111111111 string",
     },
     {
-        /* replace few substrings in a middle of string */
+        /* 4.  replace few substrings in a middle of string */
         "some string blabla str blabla string",
         "blabla",
         "111111111",
         "some string 111111111 str 111111111 string",
     },
     {
-        /* replace few substrings in an end of string */
+        /* 5.  replace few substrings in an end of string */
         "some string blabla str blabla",
         "blabla",
         "111111111",
         "some string 111111111 str 111111111",
     },
     {
-        /* escaped substring */
+        /* 6.  escaped substring */
         "\\blabla blabla",
         "blabla",
         "111111111",
         "blabla 111111111",
     },
     {
-        /* escaped substring */
+        /* 7.  escaped substring */
         "str \\blabla blabla",
         "blabla",
         "111111111",
         "str blabla 111111111",
     },
     {
-        /* escaped substring */
+        /* 8.  escaped substring */
         "str \\\\\\blabla blabla",
         "blabla",
         "111111111",
         "str \\\\blabla 111111111",
     },
     {
-        /* double-escaped substring (actually non-escaped) */
+        /* 9.  double-escaped substring (actually non-escaped) */
         "\\\\blabla blabla",
         "blabla",
         "111111111",
         "\\\\111111111 111111111",
     },
     {
-        /* partial substring */
+        /* 10.  partial substring */
         "blablabla",
         "blabla",
         "111111111",
         "111111111bla",
     },
     {
-        /* special symbols */
+        /* 11.  special symbols */
         "bla bla",
         "bla",
         "111\t1 1\n1111",
@@ -150,12 +148,11 @@ static const struct str_replace_all_test_ds
 
 /* @Test(dataSource = "str_replace_all_test_ds") */
 /* *INDENT-OFF* */
-START_TEST (str_replace_all_test)
+START_PARAMETRIZED_TEST (str_replace_all_test, str_replace_all_test_ds)
 /* *INDENT-ON* */
 {
     /* given */
     char *actual_result;
-    const struct str_replace_all_test_ds *data = &str_replace_all_test_ds[_i];
 
     /* when */
     actual_result = str_replace_all (data->haystack, data->needle, data->replacement);
@@ -163,10 +160,9 @@ START_TEST (str_replace_all_test)
     /* then */
     g_assert_cmpstr (actual_result, ==, data->expected_result);
     g_free (actual_result);
-
 }
 /* *INDENT-OFF* */
-END_TEST
+END_PARAMETRIZED_TEST
 /* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
@@ -183,14 +179,13 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_loop_test (tc_core, str_replace_all_test, 0,
-                         sizeof (str_replace_all_test_ds) / sizeof (str_replace_all_test_ds[0]));
+    mctest_add_parameterized_test (tc_core, str_replace_all_test, str_replace_all_test_ds);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);
     sr = srunner_create (s);
     srunner_set_log (sr, "replace__str_replace_all.log");
-    srunner_run_all (sr, CK_NOFORK);
+    srunner_run_all (sr, CK_NORMAL);
     number_failed = srunner_ntests_failed (sr);
     srunner_free (sr);
     return (number_failed == 0) ? 0 : 1;

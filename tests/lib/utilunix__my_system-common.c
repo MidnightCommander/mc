@@ -26,8 +26,7 @@
 #include <signal.h>
 #include <unistd.h>
 
-#include "lib/global.h"
-
+#include "lib/vfs/vfs.h"
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -228,8 +227,8 @@ execvp__deinit (void)
 
 #define VERIFY_SIGACTION__ACT_IGNORED(_pntr) { \
     struct sigaction *_act = (struct sigaction *) _pntr; \
-    fail_unless (_act->sa_handler == SIG_IGN,  " sa_handler should be equals to SIG_IGN"); \
-    ck_assert_int_eq (_act->sa_flags, 0); \
+    mctest_assert_ptr_eq (_act->sa_handler, SIG_IGN); \
+    mctest_assert_int_eq (_act->sa_flags, 0); \
 }
 
 #define VERIFY_SIGACTION__IS_RESTORED(oldact_idx, act_idx) { \
@@ -241,14 +240,14 @@ execvp__deinit (void)
 
 /* @Verify */
 #define VERIFY_SIGACTION_CALLS() { \
-    ck_assert_int_eq (sigaction_signum__captured->len, 6); \
+    mctest_assert_int_eq (sigaction_signum__captured->len, 6); \
 \
-    ck_assert_int_eq (*((int *) g_ptr_array_index(sigaction_signum__captured, 0)), SIGINT); \
-    ck_assert_int_eq (*((int *) g_ptr_array_index(sigaction_signum__captured, 1)), SIGQUIT); \
-    ck_assert_int_eq (*((int *) g_ptr_array_index(sigaction_signum__captured, 2)), SIGTSTP); \
-    ck_assert_int_eq (*((int *) g_ptr_array_index(sigaction_signum__captured, 3)), SIGINT); \
-    ck_assert_int_eq (*((int *) g_ptr_array_index(sigaction_signum__captured, 4)), SIGQUIT); \
-    ck_assert_int_eq (*((int *) g_ptr_array_index(sigaction_signum__captured, 5)), SIGTSTP); \
+    mctest_assert_int_eq (*((int *) g_ptr_array_index(sigaction_signum__captured, 0)), SIGINT); \
+    mctest_assert_int_eq (*((int *) g_ptr_array_index(sigaction_signum__captured, 1)), SIGQUIT); \
+    mctest_assert_int_eq (*((int *) g_ptr_array_index(sigaction_signum__captured, 2)), SIGTSTP); \
+    mctest_assert_int_eq (*((int *) g_ptr_array_index(sigaction_signum__captured, 3)), SIGINT); \
+    mctest_assert_int_eq (*((int *) g_ptr_array_index(sigaction_signum__captured, 4)), SIGQUIT); \
+    mctest_assert_int_eq (*((int *) g_ptr_array_index(sigaction_signum__captured, 5)), SIGTSTP); \
 \
     VERIFY_SIGACTION__ACT_IGNORED(g_ptr_array_index(sigaction_act__captured, 0)); \
     VERIFY_SIGACTION__ACT_IGNORED(g_ptr_array_index(sigaction_act__captured, 1)); \
@@ -274,17 +273,16 @@ execvp__deinit (void)
 
 #define VERIFY_SIGNAL_HANDLER_IS_SIG_DFL(_idx) { \
     sighandler_t *tmp_handler = (sighandler_t *) g_ptr_array_index(signal_handler__captured, _idx);\
-    fail_unless (tmp_handler == (sighandler_t *) SIG_DFL, \
-        "signal handler should be SIG_DFL"); \
+    mctest_assert_ptr_eq (tmp_handler, (sighandler_t *) SIG_DFL); \
 }
 
 /* @Verify */
 #define VERIFY_SIGNAL_CALLS() { \
-    ck_assert_int_eq (signal_signum__captured->len, 4); \
-    ck_assert_int_eq (*((int *) g_ptr_array_index(signal_signum__captured, 0)), SIGINT); \
-    ck_assert_int_eq (*((int *) g_ptr_array_index(signal_signum__captured, 1)), SIGQUIT); \
-    ck_assert_int_eq (*((int *) g_ptr_array_index(signal_signum__captured, 2)), SIGTSTP); \
-    ck_assert_int_eq (*((int *) g_ptr_array_index(signal_signum__captured, 3)), SIGCHLD); \
+    mctest_assert_int_eq (signal_signum__captured->len, 4); \
+    mctest_assert_int_eq (*((int *) g_ptr_array_index(signal_signum__captured, 0)), SIGINT); \
+    mctest_assert_int_eq (*((int *) g_ptr_array_index(signal_signum__captured, 1)), SIGQUIT); \
+    mctest_assert_int_eq (*((int *) g_ptr_array_index(signal_signum__captured, 2)), SIGTSTP); \
+    mctest_assert_int_eq (*((int *) g_ptr_array_index(signal_signum__captured, 3)), SIGCHLD); \
     \
     VERIFY_SIGNAL_HANDLER_IS_SIG_DFL (0); \
     VERIFY_SIGNAL_HANDLER_IS_SIG_DFL (1); \

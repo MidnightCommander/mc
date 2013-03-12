@@ -25,14 +25,11 @@
 
 #define TEST_SUITE_NAME "/src"
 
-#include <config.h>
+#include "tests/mctest.h"
 
-#include <check.h>
-
-#include "lib/global.h"
 #include "lib/mcconfig.h"
 #include "lib/strutil.h"
-#include "lib/vfs/path.h"
+#include "lib/vfs/vfs.h"
 #include "src/vfs/local/local.c"
 
 char *execute_get_external_cmd_opts_from_config (const char *command,
@@ -150,11 +147,10 @@ static const struct check_subtitute_ds
 
 /* @Test(dataSource = "check_subtitute_ds") */
 /* *INDENT-OFF* */
-START_TEST (check_if_filename_and_lineno_will_be_subtituted)
+START_PARAMETRIZED_TEST (check_if_filename_and_lineno_will_be_subtituted, check_subtitute_ds)
 /* *INDENT-ON* */
 {
     /* given */
-    const struct check_subtitute_ds *data = &check_subtitute_ds[_i];
     char *actual_result;
     vfs_path_t *filename_vpath;
 
@@ -169,21 +165,21 @@ START_TEST (check_if_filename_and_lineno_will_be_subtituted)
     /* then */
 
     /* check returned value */
-    g_assert_cmpstr (actual_result, ==, data->expected_result);
+    mctest_assert_str_eq (actual_result, data->expected_result);
 
     /* check calls to mc_config_get_string() function */
-    g_assert_cmpstr (g_ptr_array_index (mc_config_get_string__group__captured, 0), ==,
-                     CONFIG_EXT_EDITOR_VIEWER_SECTION);
-    g_assert_cmpstr (g_ptr_array_index (mc_config_get_string__param__captured, 0), ==,
-                     data->app_name);
-    g_assert_cmpstr (g_ptr_array_index (mc_config_get_string__default_value__captured, 0), ==,
-                     NULL);
+    mctest_assert_str_eq (g_ptr_array_index (mc_config_get_string__group__captured, 0),
+                          CONFIG_EXT_EDITOR_VIEWER_SECTION);
+    mctest_assert_str_eq (g_ptr_array_index (mc_config_get_string__param__captured, 0),
+                          data->app_name);
+    mctest_assert_str_eq (g_ptr_array_index (mc_config_get_string__default_value__captured, 0),
+                          NULL);
 
     vfs_path_free (filename_vpath);
 
 }
 /* *INDENT-OFF* */
-END_TEST
+END_PARAMETRIZED_TEST
 /* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
@@ -200,8 +196,8 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_loop_test (tc_core, check_if_filename_and_lineno_will_be_subtituted, 0,
-                         sizeof (check_subtitute_ds) / sizeof (check_subtitute_ds[0]));
+    mctest_add_parameterized_test (tc_core, check_if_filename_and_lineno_will_be_subtituted,
+                                   check_subtitute_ds);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);

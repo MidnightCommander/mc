@@ -2,7 +2,8 @@ SED_PARAMETERS = \
 	-e "s/%DATE_OF_MAN_PAGE%/$${MAN_DATE}/g" \
 	-e "s/%DISTR_VERSION%/@DISTR_VERSION@/g" \
 	-e "s{%prefix%{@prefix@{g" \
-	-e "s{%sysconfdir%{@sysconfdir@{g"
+	-e "s{%sysconfdir%{@sysconfdir@{g" \
+	-e "s{%libexecdir%{@libexecdir@{g"
 
 MAN_DATE_CMD = \
 	LC_ALL=$(DATE_LANG) @PERL@ -MPOSIX -e '\

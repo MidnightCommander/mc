@@ -25,12 +25,10 @@
 
 #define TEST_SUITE_NAME "/lib/utilunix"
 
-#include <config.h>
+#include "tests/mctest.h"
+
 #include <signal.h>
 #include <unistd.h>
-#include <check.h>
-
-#include "lib/global.h"
 
 #include "lib/util.h"
 #include "lib/utilunix.h"
@@ -52,11 +50,11 @@ START_TEST (fork_fail)
     actual_value = my_system (0, NULL, NULL);
 
     /* then */
-    ck_assert_int_eq (actual_value, -1);
+    mctest_assert_int_eq (actual_value, -1);
 
     VERIFY_SIGACTION_CALLS ();
 
-    ck_assert_int_eq (signal_signum__captured->len, 0);
+    mctest_assert_int_eq (signal_signum__captured->len, 0);
 }
 /* *INDENT-OFF* */
 END_TEST
