@@ -2661,11 +2661,11 @@ msgstr "Целевой файл уже существует!"
 
 #, c-format
 msgid "New     : %s, size %s"
-msgstr "Новый:        %s, размер: %llu"
+msgstr "Новый:        %s, размер: %s"
 
 #, c-format
 msgid "Existing: %s, size %s"
-msgstr "Существующий: %s, размер: %llu"
+msgstr "Существующий: %s, размер: %s"
 
 msgid "Overwrite this target?"
 msgstr "Переписать этот файл?"
