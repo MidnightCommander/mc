@@ -3286,7 +3286,7 @@ edit_complete_word_cmd (WEdit * edit)
     /* collect the possible completions              */
     /* start search from begin to end of file */
     max_len =
-        edit_collect_completions (edit, word_start, word_len, match_expr, (GString **) &compl,
+        edit_collect_completions (edit, word_start, word_len, match_expr, (GString **) & compl,
                                   &num_compl);
 
     if (num_compl > 0)
@@ -3306,7 +3306,8 @@ edit_complete_word_cmd (WEdit * edit)
             /*tty_beep (); */
 
             /* let the user select the preferred completion */
-            editcmd_dialog_completion_show (edit, max_len, word_len, (GString **) &compl, num_compl);
+            editcmd_dialog_completion_show (edit, max_len, word_len, (GString **) & compl,
+                                            num_compl);
         }
     }
 

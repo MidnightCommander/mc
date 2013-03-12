@@ -548,11 +548,13 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
     add_widget (ui->replace_dlg, hline_new (y++, -1, -1));
 
     /* source date and size */
-    size_trunc_len (fsize_buffer, sizeof (fsize_buffer), ui->s_stat->st_size, -1, panels_options.kilobyte_si);
+    size_trunc_len (fsize_buffer, sizeof (fsize_buffer), ui->s_stat->st_size, -1,
+                    panels_options.kilobyte_si);
     ADD_RD_LABEL (2, file_date (ui->s_stat->st_mtime), fsize_buffer, y++);
     rd_xlen = max (rd_xlen, label2->cols + 8);
     /* destination date and size */
-    size_trunc_len (fsize_buffer, sizeof (fsize_buffer), ui->d_stat->st_size, -1, panels_options.kilobyte_si);
+    size_trunc_len (fsize_buffer, sizeof (fsize_buffer), ui->d_stat->st_size, -1,
+                    panels_options.kilobyte_si);
     ADD_RD_LABEL (3, file_date (ui->d_stat->st_mtime), fsize_buffer, y++);
     rd_xlen = max (rd_xlen, label2->cols + 8);
 
@@ -1064,7 +1066,7 @@ file_progress_show_deleting (FileOpContext * ctx, const char *s)
 FileProgressStatus
 file_progress_real_query_replace (FileOpContext * ctx,
                                   enum OperationMode mode, const char *destname,
-                                  struct stat *_s_stat, struct stat *_d_stat)
+                                  struct stat * _s_stat, struct stat * _d_stat)
 {
     FileOpContextUI *ui;
 

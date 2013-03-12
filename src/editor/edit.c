@@ -1793,7 +1793,7 @@ edit_insert_column_from_file (WEdit * edit, int file, off_t * start_pos, off_t *
                     for (l = width - (edit_get_col (edit) - col); l > 0; l -= space_width)
                         edit_insert (edit, ' ');
 
-                for (p = edit->curs1; ; p++)
+                for (p = edit->curs1;; p++)
                 {
                     if (p == edit->last_byte)
                     {
