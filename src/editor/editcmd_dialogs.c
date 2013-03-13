@@ -336,9 +336,8 @@ editcmd_dialog_raw_key_query (const char *heading, const char *query, gboolean c
 /* --------------------------------------------------------------------------------------------- */
 /* let the user select its preferred completion */
 
-void
-editcmd_dialog_completion_show (WEdit * edit, int max_len, int word_len,
-                                GString ** compl, int num_compl)
+char *
+editcmd_dialog_completion_show (const WEdit * edit, int max_len, GString ** compl, int num_compl)
 {
 
     int start_x, start_y, offset, i;
@@ -388,35 +387,13 @@ editcmd_dialog_completion_show (WEdit * edit, int max_len, int word_len,
     if (run_dlg (compl_dlg) == B_ENTER)
     {
         listbox_get_current (compl_list, &curr, NULL);
-        if (curr)
-        {
-#ifdef HAVE_CHARSET
-            GString *temp, *temp2;
-            temp = g_string_new ("");
-            for (curr += word_len; *curr; curr++)
-                g_string_append_c (temp, *curr);
-
-            temp2 = str_convert_to_input (temp->str);
-
-            if (temp2 && temp2->len)
-            {
-                g_string_free (temp, TRUE);
-                temp = temp2;
-            }
-            else
-                g_string_free (temp2, TRUE);
-            for (curr = temp->str; *curr; curr++)
-                edit_insert (edit, *curr);
-            g_string_free (temp, TRUE);
-#else
-            for (curr += word_len; *curr; curr++)
-                edit_insert (edit, *curr);
-#endif
-        }
+        curr = g_strdup (curr);
     }
 
     /* destroy dialog before return */
     destroy_dlg (compl_dlg);
+
+    return curr;
 }
 
 /* --------------------------------------------------------------------------------------------- */

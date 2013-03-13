@@ -3300,14 +3300,45 @@ edit_complete_word_cmd (WEdit * edit)
         /* more than one possible completion => ask the user */
         else
         {
+            char *curr_compl;
+
             /* !!! usually only a beep is expected and when <ALT-TAB> is !!! */
             /* !!! pressed again the selection dialog pops up, but that  !!! */
             /* !!! seems to require a further internal state             !!! */
             /*tty_beep (); */
 
             /* let the user select the preferred completion */
-            editcmd_dialog_completion_show (edit, max_len, word_len, (GString **) & compl,
-                                            num_compl);
+            curr_compl = editcmd_dialog_completion_show (edit, max_len,
+                                                         (GString **) & compl, num_compl);
+
+            if (curr_compl != NULL)
+            {
+#ifdef HAVE_CHARSET
+                GString *temp, *temp2;
+                char *curr_compl2 = curr_compl;
+
+                temp = g_string_new ("");
+                for (curr_compl += word_len; *curr_compl != '\0'; curr_compl++)
+                    g_string_append_c (temp, *curr_compl);
+
+                temp2 = str_convert_to_input (temp->str);
+
+                if (temp2 != NULL && temp2->len != 0)
+                {
+                    g_string_free (temp, TRUE);
+                    temp = temp2;
+                }
+                else
+                    g_string_free (temp2, TRUE);
+                for (curr_compl = temp->str; *curr_compl != '\0'; curr_compl++)
+                    edit_insert (edit, *curr_compl);
+                g_string_free (temp, TRUE);
+#else
+                for (curr_compl += word_len; *curr_compl != '\0'; curr_compl++)
+                    edit_insert (edit, *curr_compl);
+#endif
+                g_free (curr_compl2);
+            }
         }
     }
 
