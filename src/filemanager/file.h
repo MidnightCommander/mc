@@ -14,21 +14,26 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-/* Compute directory size */
-/* callback to update status dialog */
-typedef FileProgressStatus (*compute_dir_size_callback) (void *ui, const vfs_path_t * dirname_vpath,
-                                                         size_t dir_count, uintmax_t total_size);
+typedef struct dirsize_status_msg_t dirsize_status_msg_t;
 
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
 /* status dialog of directory size computing */
-typedef struct
+struct dirsize_status_msg_t
 {
-    WDialog *dlg;
+    status_msg_t status_msg;    /* base class */
+
+    gboolean allow_skip;
     WLabel *dirname;
-} ComputeDirSizeUI;
+    WLabel *count_size;
+    Widget *abort_button;
+    Widget *skip_button;
+    const vfs_path_t *dirname_vpath;
+    size_t dir_count;
+    uintmax_t total_size;
+};
 
 /*** global variables defined in .c file *********************************************************/
 
@@ -53,15 +58,13 @@ gboolean panel_operate (void *source_panel, FileOperation op, gboolean force_sin
 FileProgressStatus file_error (const char *format, const char *file);
 
 /* return value is FILE_CONT or FILE_ABORT */
-FileProgressStatus compute_dir_size (const vfs_path_t * dirname_vpath, void *ui,
-                                     compute_dir_size_callback cback,
+FileProgressStatus compute_dir_size (const vfs_path_t * dirname_vpath, dirsize_status_msg_t * sm,
                                      size_t * ret_dir_count, size_t * ret_marked_count,
                                      uintmax_t * ret_total, gboolean compute_symlinks);
 
-ComputeDirSizeUI *compute_dir_size_create_ui (gboolean allow_skip);
-void compute_dir_size_destroy_ui (ComputeDirSizeUI * ui);
-FileProgressStatus compute_dir_size_update_ui (void *ui, const vfs_path_t * dirname_vpath,
-                                               size_t dir_count, uintmax_t total_size);
+void dirsize_status_init_cb (status_msg_t * sm);
+int dirsize_status_update_cb (status_msg_t * sm);
+void dirsize_status_deinit_cb (status_msg_t * sm);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__FILE_H */
