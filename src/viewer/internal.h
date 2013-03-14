@@ -259,7 +259,7 @@ void mcview_update_bytes_per_line (mcview_t * view);
 void mcview_display_toggle_ruler (mcview_t * view);
 void mcview_display_clean (mcview_t * view);
 void mcview_display_ruler (mcview_t * view);
-void mcview_percent (mcview_t * view, off_t p);
+void mcview_display_percent (mcview_t * view, off_t p);
 
 /* growbuf.c: */
 void mcview_growbuf_init (mcview_t * view);
@@ -289,6 +289,7 @@ void mcview_show_error (mcview_t * view, const char *error);
 off_t mcview_bol (mcview_t * view, off_t current, off_t limit);
 off_t mcview_eol (mcview_t * view, off_t current, off_t limit);
 char *mcview_get_title (const WDialog * h, size_t len);
+int mcview_calc_percent (mcview_t * view, off_t p);
 
 /* move.c */
 void mcview_move_up (mcview_t *, off_t);

@@ -213,7 +213,7 @@ mcview_search_update_cmd_callback (const void *user_data, gsize char_offset)
         view->update_activate += view->update_steps;
         if (verbose)
         {
-            mcview_percent (view, char_offset);
+            mcview_display_percent (view, char_offset);
             tty_refresh ();
         }
         if (tty_got_interrupt ())
