@@ -259,7 +259,6 @@ void mcview_update_bytes_per_line (mcview_t * view);
 void mcview_display_toggle_ruler (mcview_t * view);
 void mcview_display_clean (mcview_t * view);
 void mcview_display_ruler (mcview_t * view);
-void mcview_display_percent (mcview_t * view, off_t p);
 
 /* growbuf.c: */
 void mcview_growbuf_init (mcview_t * view);

@@ -126,6 +126,26 @@ mcview_set_buttonbar (mcview_t * view)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
+mcview_display_percent (mcview_t * view, off_t p)
+{
+    int percent;
+
+    percent = mcview_calc_percent (view, p);
+    if (percent >= 0)
+    {
+        const screen_dimen top = view->status_area.top;
+        const screen_dimen right = view->status_area.left + view->status_area.width;
+
+        widget_move (view, top, right - 4);
+        tty_printf ("%3d%%", percent);
+        /* avoid cursor wrapping in NCurses-base MC */
+        widget_move (view, top, right - 1);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
 mcview_display_status (mcview_t * view)
 {
     const screen_dimen top = view->status_area.top;
@@ -391,27 +411,6 @@ mcview_display_ruler (mcview_t * view)
         }
     }
     tty_setcolor (VIEW_NORMAL_COLOR);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-mcview_display_percent (mcview_t * view, off_t p)
-{
-    int percent;
-
-    percent = mcview_calc_percent (view, p);
-    if (percent >= 0)
-    {
-        const screen_dimen top = view->status_area.top;
-        const screen_dimen right = view->status_area.left + view->status_area.width;
-
-        widget_move (view, top, right - 4);
-        tty_printf ("%3d%%", percent);
-        /* avoid cursor wrapping in NCurses-base MC */
-        widget_move (view, top, right - 1);
-    }
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
