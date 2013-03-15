@@ -1496,6 +1496,32 @@ edit_redraw_page_cb (void *data, void *user_data)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Insert autocompleted word into editor.
+ *
+ * @param edit       editor object
+ * @param completion word for completion
+ * @param word_len   offset from begining for insert
+ */
+
+static void
+edit_complete_word_insert_recoded_completion (WEdit * edit, char *completion, gsize word_len)
+{
+#ifdef HAVE_CHARSET
+    GString *temp;
+
+    temp = str_convert_to_input (completion);
+
+    for (completion = temp->str + word_len; *completion != '\0'; completion++)
+        edit_insert (edit, *completion);
+    g_string_free (temp, TRUE);
+#else
+    for (completion += word_len; *completion != '\0'; completion++)
+        edit_insert (edit, *completion);
+#endif
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -3293,10 +3319,7 @@ edit_complete_word_cmd (WEdit * edit)
     {
         /* insert completed word if there is only one match */
         if (num_compl == 1)
-        {
-            for (i = word_len; i < compl[0]->len; i++)
-                edit_insert (edit, *(compl[0]->str + i));
-        }
+            edit_complete_word_insert_recoded_completion (edit, compl[0]->str, word_len);
         /* more than one possible completion => ask the user */
         else
         {
@@ -3313,31 +3336,8 @@ edit_complete_word_cmd (WEdit * edit)
 
             if (curr_compl != NULL)
             {
-#ifdef HAVE_CHARSET
-                GString *temp, *temp2;
-                char *curr_compl2 = curr_compl;
-
-                temp = g_string_new ("");
-                for (curr_compl += word_len; *curr_compl != '\0'; curr_compl++)
-                    g_string_append_c (temp, *curr_compl);
-
-                temp2 = str_convert_to_input (temp->str);
-
-                if (temp2 != NULL && temp2->len != 0)
-                {
-                    g_string_free (temp, TRUE);
-                    temp = temp2;
-                }
-                else
-                    g_string_free (temp2, TRUE);
-                for (curr_compl = temp->str; *curr_compl != '\0'; curr_compl++)
-                    edit_insert (edit, *curr_compl);
-                g_string_free (temp, TRUE);
-#else
-                for (curr_compl += word_len; *curr_compl != '\0'; curr_compl++)
-                    edit_insert (edit, *curr_compl);
-#endif
-                g_free (curr_compl2);
+                edit_complete_word_insert_recoded_completion (edit, curr_compl, word_len);
+                g_free (curr_compl);
             }
         }
     }
