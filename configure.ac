@@ -634,6 +634,7 @@ tests/src/editor/Makefile
 tests/src/editor/test-data.txt
 tests/src/vfs/Makefile
 tests/src/vfs/smbfs/Makefile
+tests/src/vfs/smbfs/it/Makefile
 ])
 fi
 

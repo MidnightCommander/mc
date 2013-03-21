@@ -147,7 +147,7 @@ Then: Should be visible the content of shared resource:
 
 #------------------------------------------------------------------------------------------------------
 
-Scenario: 11. Copy file to the r/o share
+Scenario: 11. Copy/move/create file on r/o share
 Given: I see a filepanels
    And One of panels pointed to the smb://MCTESTSERVER/SHARE/test-ro-dir
 When: I try to copy any file to the share
@@ -155,7 +155,7 @@ Then: Should be raised an error dialog with message: Access denied
 
 #------------------------------------------------------------------------------------------------------
 
-Scenario: 12. Copy file to the r/w share
+Scenario: 12. Copy/move/create file on r/w share
 Given: I see a filepanels
    And One of panels pointed to the smb://MCTESTSERVER/SHARE/test-dir
 When: I try to copy any file to the share

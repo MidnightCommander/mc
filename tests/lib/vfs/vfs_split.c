@@ -168,6 +168,20 @@ static const struct test_vfs_split_ds
         "test2:",
         &vfs_test_ops2
     },
+    { /* 11. split with empty path */
+        "#test2:/",
+        "",
+        "",
+        "test2:",
+        &vfs_test_ops2
+    },
+    { /* 12. split with single shash path */
+        "#test2://",
+        "",
+        "/",
+        "test2:",
+        &vfs_test_ops2
+    },
 };
 /* *INDENT-ON* */
 
