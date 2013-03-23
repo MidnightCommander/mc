@@ -95,8 +95,8 @@ mcview_movement_fixups (mcview_t * view, gboolean reset_search)
     mcview_scroll_to_cursor (view);
     if (reset_search)
     {
-        view->search_start = view->dpy_start;
-        view->search_end = view->dpy_start;
+        view->search_start = view->hex_mode ? view->hex_cursor : view->dpy_start;
+        view->search_end = view->search_start;
     }
     view->dirty++;
 }
