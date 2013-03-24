@@ -337,8 +337,7 @@ exec_make_shell_string (const char *lc_data, const vfs_path_t * filename_vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-exec_extension_view (char *cmd, const vfs_path_t * filename_vpath, int start_line,
-                     vfs_path_t * temp_file_name_vpath)
+exec_extension_view (char *cmd, const vfs_path_t * filename_vpath, int start_line)
 {
     int def_hex_mode = mcview_default_hex_mode, changed_hex_mode = 0;
     int def_nroff_flag = mcview_default_nroff_flag, changed_nroff_flag = 0;
@@ -350,16 +349,7 @@ exec_extension_view (char *cmd, const vfs_path_t * filename_vpath, int start_lin
     if (def_nroff_flag != mcview_default_nroff_flag)
         changed_nroff_flag = 1;
 
-    /* If we've written whitespace only, then just load filename
-     * into view
-     */
-    if (written_nonspace)
-    {
-        mcview_viewer (cmd, filename_vpath, start_line);
-        mc_unlink (temp_file_name_vpath);
-    }
-    else
-        mcview_viewer (NULL, filename_vpath, start_line);
+    mcview_viewer (cmd, filename_vpath, start_line);
 
     if (changed_hex_mode && !mcview_altered_hex_mode)
         mcview_default_hex_mode = def_hex_mode;
@@ -493,7 +483,16 @@ exec_extension (const vfs_path_t * filename_vpath, const char *lc_data, int star
     }
 
     if (run_view)
-        exec_extension_view (cmd, filename_vpath, start_line, temp_file_name_vpath);
+    {
+        /* If we've written whitespace only, then just load filename into view */
+        if (!written_nonspace)
+            exec_extension_view (NULL, filename_vpath, start_line);
+        else
+        {
+            exec_extension_view (cmd, filename_vpath, start_line);
+            mc_unlink (temp_file_name_vpath);
+        }
+    }
     else
     {
         shell_execute (cmd, EXECUTE_INTERNAL);
