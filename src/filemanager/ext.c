@@ -98,7 +98,20 @@ static gboolean is_cd = FALSE;
 static gboolean written_nonspace = FALSE;
 static gboolean do_local_copy = FALSE;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+exec_cleanup_script (vfs_path_t * script_vpath)
+{
+    if (script_vpath != NULL)
+    {
+        (void) mc_unlink (script_vpath);
+        vfs_path_free (script_vpath);
+    }
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -142,6 +155,7 @@ exec_get_file_name (const vfs_path_t * filename_vpath)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 static char *
 exec_expand_format (char symbol, gboolean is_result_quoted)
 {
@@ -337,10 +351,12 @@ exec_make_shell_string (const char *lc_data, const vfs_path_t * filename_vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-exec_extension_view (char *cmd, const vfs_path_t * filename_vpath, int start_line)
+exec_extension_view (void *target, char *cmd, const vfs_path_t * filename_vpath, int start_line)
 {
     int def_hex_mode = mcview_default_hex_mode, changed_hex_mode = 0;
     int def_nroff_flag = mcview_default_nroff_flag, changed_nroff_flag = 0;
+
+    (void) target;
 
     mcview_altered_hex_mode = 0;
     mcview_altered_nroff_flag = 0;
@@ -387,8 +403,8 @@ exec_extension_cd (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-exec_extension (const vfs_path_t * filename_vpath, const char *lc_data, int start_line)
+static vfs_path_t *
+exec_extension (void *target, const vfs_path_t * filename_vpath, const char *lc_data, int start_line)
 {
     char *shell_string, *export_variables;
     vfs_path_t *script_vpath = NULL;
@@ -396,7 +412,7 @@ exec_extension (const vfs_path_t * filename_vpath, const char *lc_data, int star
     FILE *cmd_file;
     char *cmd = NULL;
 
-    g_return_if_fail (lc_data != NULL);
+    g_return_val_if_fail (lc_data != NULL, NULL);
 
     pbuffer = NULL;
     localmtime = 0;
@@ -466,8 +482,7 @@ exec_extension (const vfs_path_t * filename_vpath, const char *lc_data, int star
 
     if ((run_view && !written_nonspace) || is_cd)
     {
-        mc_unlink (script_vpath);
-        vfs_path_free (script_vpath);
+        exec_cleanup_script (script_vpath);
         script_vpath = NULL;
     }
     else
@@ -486,12 +501,9 @@ exec_extension (const vfs_path_t * filename_vpath, const char *lc_data, int star
     {
         /* If we've written whitespace only, then just load filename into view */
         if (!written_nonspace)
-            exec_extension_view (NULL, filename_vpath, start_line);
+            exec_extension_view (target, NULL, filename_vpath, start_line);
         else
-        {
-            exec_extension_view (cmd, filename_vpath, start_line);
-            mc_unlink (script_vpath);
-        }
+            exec_extension_view (target, cmd, filename_vpath, start_line);
     }
     else
     {
@@ -510,7 +522,7 @@ exec_extension (const vfs_path_t * filename_vpath, const char *lc_data, int star
 
     exec_cleanup_file_name (filename_vpath, TRUE);
   ret:
-    vfs_path_free (script_vpath);
+    return script_vpath;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -755,6 +767,7 @@ flush_extension_file (void)
 /* --------------------------------------------------------------------------------------------- */
 /**
  * The second argument is action, i.e. Open, View or Edit
+ * Use target object to open file in.
  *
  * This function returns:
  *
@@ -767,7 +780,8 @@ flush_extension_file (void)
  */
 
 int
-regex_command (const vfs_path_t * filename_vpath, const char *action)
+regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *action,
+                   vfs_path_t ** script_vpath)
 {
     char *filename, *p, *q, *r, c;
     size_t file_len;
@@ -782,6 +796,9 @@ regex_command (const vfs_path_t * filename_vpath, const char *action)
 
     if (filename_vpath == NULL)
         return 0;
+
+    if (script_vpath != NULL)
+        *script_vpath = NULL;
 
     /* Check for the special View:%d parameter */
     if (strncmp (action, "View:", 5) == 0)
@@ -1021,7 +1038,14 @@ regex_command (const vfs_path_t * filename_vpath, const char *action)
                          */
                         if (p < q)
                         {
-                            exec_extension (filename_vpath, r + 1, view_at_line_number);
+                            vfs_path_t *sv;
+
+                            sv = exec_extension (target, filename_vpath, r + 1, view_at_line_number);
+                            if (script_vpath != NULL)
+                                *script_vpath = sv;
+                            else
+                                exec_cleanup_script (sv);
+
                             ret = 1;
                         }
                         break;
