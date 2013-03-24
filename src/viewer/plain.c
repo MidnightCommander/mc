@@ -3,7 +3,7 @@
    Function for plain view
 
    Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
-   2004, 2005, 2006, 2007, 2009, 2011
+   2004, 2005, 2006, 2007, 2009, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
@@ -15,7 +15,7 @@
    Pavel Machek, 1998
    Roland Illig <roland.illig@gmx.de>, 2004, 2005
    Slava Zanko <slavazanko@google.com>, 2009
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013
    Ilia Maslakov <il.smind@gmail.com>, 2009
 
    This file is part of the Midnight Commander.
@@ -47,7 +47,6 @@
 #include "src/setup.h"          /* option_tab_spacing */
 
 #include "internal.h"
-#include "mcviewer.h"           /* mcview_show_eof */
 
 /*** global variables ****************************************************************************/
 
