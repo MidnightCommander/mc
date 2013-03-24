@@ -356,8 +356,6 @@ exec_extension_view (void *target, char *cmd, const vfs_path_t * filename_vpath,
     int def_hex_mode = mcview_default_hex_mode, changed_hex_mode = 0;
     int def_nroff_flag = mcview_default_nroff_flag, changed_nroff_flag = 0;
 
-    (void) target;
-
     mcview_altered_hex_mode = 0;
     mcview_altered_nroff_flag = 0;
     if (def_hex_mode != mcview_default_hex_mode)
@@ -365,7 +363,16 @@ exec_extension_view (void *target, char *cmd, const vfs_path_t * filename_vpath,
     if (def_nroff_flag != mcview_default_nroff_flag)
         changed_nroff_flag = 1;
 
-    mcview_viewer (cmd, filename_vpath, start_line);
+    if (target == NULL)
+        mcview_viewer (cmd, filename_vpath, start_line);
+    else
+    {
+        char *file_name;
+
+        file_name = vfs_path_to_str (filename_vpath);
+        mcview_load ((mcview_t *) target, cmd, file_name, start_line);
+        g_free (file_name);
+    }
 
     if (changed_hex_mode && !mcview_altered_hex_mode)
         mcview_default_hex_mode = def_hex_mode;
