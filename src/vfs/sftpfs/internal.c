@@ -139,7 +139,8 @@ sftpfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** error)
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
-    if (vfs_s_get_path (vpath, &super, 0) == NULL)
+    super = vfs_get_super_by_vpath (vpath, TRUE);
+    if (super == NULL)
         return -1;
 
     if (super == NULL)
@@ -215,7 +216,8 @@ sftpfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** error)
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
-    if (vfs_s_get_path (vpath, &super, 0) == NULL)
+    super = vfs_get_super_by_vpath (vpath, TRUE);
+    if (super == NULL)
         return -1;
 
     if (super == NULL)
@@ -293,7 +295,8 @@ sftpfs_readlink (const vfs_path_t * vpath, char *buf, size_t size, GError ** err
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
-    if (vfs_s_get_path (vpath, &super, 0) == NULL)
+    super = vfs_get_super_by_vpath (vpath, TRUE);
+    if (super == NULL)
         return -1;
 
     if (super == NULL)
@@ -350,7 +353,8 @@ sftpfs_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** 
 
     path_element2 = vfs_path_get_by_index (vpath2, -1);
 
-    if (vfs_s_get_path (vpath2, &super, 0) == NULL)
+    super = vfs_get_super_by_vpath (vpath2, TRUE);
+    if (super == NULL)
         return -1;
 
     if (super == NULL)
@@ -418,7 +422,8 @@ sftpfs_chmod (const vfs_path_t * vpath, mode_t mode, GError ** error)
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
-    if (vfs_s_get_path (vpath, &super, 0) == NULL)
+    super = vfs_get_super_by_vpath (vpath, TRUE);
+    if (super == NULL)
         return -1;
 
     if (super == NULL)
@@ -496,7 +501,8 @@ sftpfs_unlink (const vfs_path_t * vpath, GError ** error)
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
-    if (vfs_s_get_path (vpath, &super, 0) == NULL)
+    super = vfs_get_super_by_vpath (vpath, TRUE);
+    if (super == NULL)
         return -1;
 
     if (super == NULL)
@@ -555,7 +561,8 @@ sftpfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** e
 
     path_element2 = vfs_path_get_by_index (vpath2, -1);
 
-    if (vfs_s_get_path (vpath2, &super, 0) == NULL)
+    super = vfs_get_super_by_vpath (vpath2, TRUE);
+    if (super == NULL)
         return -1;
 
     if (super == NULL)

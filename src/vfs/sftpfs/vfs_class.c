@@ -98,18 +98,19 @@ sftpfs_cb_open (const vfs_path_t * vpath, int flags, mode_t mode)
     vfs_file_handler_t *file_handler;
     const vfs_path_element_t *path_element;
     struct vfs_s_super *super;
-    const char *path_super;
     struct vfs_s_inode *path_inode;
     GError *error = NULL;
     gboolean is_changed = FALSE;
 
-    path_element = vfs_path_get_by_index (vpath, -1);
 
-    path_super = vfs_s_get_path (vpath, &super, 0);
-    if (path_super == NULL)
+    super = vfs_get_super_by_vpath (vpath, TRUE);
+    if (super == NULL)
         return NULL;
 
-    path_inode = vfs_s_find_inode (path_element->class, super, path_super, LINK_FOLLOW, FL_NONE);
+    path_element = vfs_path_get_by_index (vpath, -1);
+
+    path_inode =
+        vfs_s_find_inode (path_element->class, super, path_element->path, LINK_FOLLOW, FL_NONE);
     if (path_inode != NULL && ((flags & (O_CREAT | O_EXCL)) == (O_CREAT | O_EXCL)))
     {
         path_element->class->verrno = EEXIST;
@@ -122,8 +123,8 @@ sftpfs_cb_open (const vfs_path_t * vpath, int flags, mode_t mode)
         struct vfs_s_entry *ent;
         struct vfs_s_inode *dir;
 
-        dirname = g_path_get_dirname (path_super);
-        name = g_path_get_basename (path_super);
+        dirname = g_path_get_dirname (path_element->path);
+        name = g_path_get_basename (path_element->path);
         dir = vfs_s_find_inode (path_element->class, super, dirname, LINK_FOLLOW, FL_DIR);
         if (dir == NULL)
         {

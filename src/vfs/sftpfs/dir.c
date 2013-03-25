@@ -72,7 +72,8 @@ sftpfs_opendir (const vfs_path_t * vpath, GError ** error)
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
-    if (vfs_s_get_path (vpath, &super, 0) == NULL)
+    super = vfs_get_super_by_vpath (vpath, TRUE);
+    if (super == NULL)
         return NULL;
 
     super_data = (sftpfs_super_data_t *) super->data;
@@ -191,7 +192,8 @@ sftpfs_mkdir (const vfs_path_t * vpath, mode_t mode, GError ** error)
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
-    if (vfs_s_get_path (vpath, &super, 0) == NULL)
+    super = vfs_get_super_by_vpath (vpath, TRUE);
+    if (super == NULL)
         return -1;
 
     if (super == NULL)
@@ -247,7 +249,8 @@ sftpfs_rmdir (const vfs_path_t * vpath, GError ** error)
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
-    if (vfs_s_get_path (vpath, &super, 0) == NULL)
+    super = vfs_get_super_by_vpath (vpath, TRUE);
+    if (super == NULL)
         return -1;
 
     if (super == NULL)

@@ -374,22 +374,21 @@ vfs_s_inode_from_path (const vfs_path_t * vpath, int flags)
 {
     struct vfs_s_super *super;
     struct vfs_s_inode *ino;
-    const char *q;
     const vfs_path_element_t *path_element;
 
-    q = vfs_s_get_path (vpath, &super, 0);
-    if (q == NULL)
+    super = vfs_get_super_by_vpath (vpath, TRUE);
+    if (super == NULL)
         return NULL;
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
     ino =
-        vfs_s_find_inode (path_element->class, super, q,
+        vfs_s_find_inode (path_element->class, super, path_element->path,
                           flags & FL_FOLLOW ? LINK_FOLLOW : LINK_NO_FOLLOW, flags & ~FL_FOLLOW);
-    if ((!ino) && (!*q))
+    if ((!ino) && (!*path_element->path))
         /* We are asking about / directory of ftp server: assume it exists */
         ino =
-            vfs_s_find_inode (path_element->class, super, q,
+            vfs_s_find_inode (path_element->class, super, path_element->path,
                               flags & FL_FOLLOW ? LINK_FOLLOW :
                               LINK_NO_FOLLOW, FL_DIR | (flags & ~FL_FOLLOW));
     return ino;
@@ -827,14 +826,7 @@ vfs_s_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
 static vfsid
 vfs_s_getid (const vfs_path_t * vpath)
 {
-    struct vfs_s_super *archive = NULL;
-    const char *p;
-
-    p = vfs_s_get_path (vpath, &archive, FL_NO_OPEN);
-    if (p == NULL)
-        return NULL;
-
-    return (vfsid) archive;
+    return (vfsid) vfs_get_super_by_vpath (vpath, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -874,6 +866,59 @@ vfs_s_dir_uptodate (struct vfs_class *me, struct vfs_s_inode *ino)
     return 0;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * get superlock object by vpath
+ *
+ * @param vpath path
+ * @return superlock object or NULL if not found
+ */
+
+static struct vfs_s_super *
+vfs_get_sb_by_vpath (const vfs_path_t * vpath)
+{
+    GList *iter;
+    void *cookie = NULL;
+    const vfs_path_element_t *path_element;
+    struct vfs_s_subclass *subclass;
+    struct vfs_s_super *super = NULL;
+    vfs_path_t *vpath_archive;
+
+    path_element = vfs_path_get_by_index (vpath, -1);
+    subclass = ((struct vfs_s_subclass *) path_element->class->data);
+    if (subclass == NULL)
+        return NULL;
+
+    vpath_archive = vfs_path_clone (vpath);
+    vfs_path_remove_element_by_index (vpath_archive, -1);
+
+    if (subclass->archive_check != NULL)
+    {
+        cookie = subclass->archive_check (vpath_archive);
+        if (cookie == NULL)
+            goto ret;
+    }
+
+    for (iter = subclass->supers; iter != NULL; iter = g_list_next (iter))
+    {
+        int i;
+
+        super = (struct vfs_s_super *) iter->data;
+
+        /* 0 == other, 1 == same, return it, 2 == other but stop scanning */
+        i = subclass->archive_same (path_element, super, vpath_archive, cookie);
+        if (i == 1)
+            goto ret;
+        if (i != 0)
+            break;
+
+        super = NULL;
+    }
+
+  ret:
+    vfs_path_free (vpath_archive);
+    return super;
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -1046,72 +1091,17 @@ vfs_s_find_inode (struct vfs_class *me, const struct vfs_s_super *super,
 /* Ook, these were functions around directory entries / inodes */
 /* -------------------------------- superblock games -------------------------- */
 /**
- * get superlock object by vpath
+ * Get superblock. Create if needed.
  *
- * @param vpath path
- * @return superlock object or NULL if not found
+ * @param vpath source path object
+ * @param is_create_new Should we create new super block if it doesn't exists before
+ *
+ * @return archive pointer to object for store superblock
  */
 
 struct vfs_s_super *
-vfs_get_super_by_vpath (const vfs_path_t * vpath)
+vfs_get_super_by_vpath (const vfs_path_t * vpath, gboolean is_create_new)
 {
-    GList *iter;
-    void *cookie = NULL;
-    const vfs_path_element_t *path_element;
-    struct vfs_s_subclass *subclass;
-    struct vfs_s_super *super = NULL;
-    vfs_path_t *vpath_archive;
-
-    path_element = vfs_path_get_by_index (vpath, -1);
-    subclass = ((struct vfs_s_subclass *) path_element->class->data);
-    if (subclass == NULL)
-        return NULL;
-
-    vpath_archive = vfs_path_clone (vpath);
-    vfs_path_remove_element_by_index (vpath_archive, -1);
-
-    if (subclass->archive_check != NULL)
-    {
-        cookie = subclass->archive_check (vpath_archive);
-        if (cookie == NULL)
-            goto ret;
-    }
-
-    for (iter = subclass->supers; iter != NULL; iter = g_list_next (iter))
-    {
-        int i;
-
-        super = (struct vfs_s_super *) iter->data;
-
-        /* 0 == other, 1 == same, return it, 2 == other but stop scanning */
-        i = subclass->archive_same (path_element, super, vpath_archive, cookie);
-        if (i == 1)
-            goto ret;
-        if (i != 0)
-            break;
-
-        super = NULL;
-    }
-
-  ret:
-    vfs_path_free (vpath_archive);
-    return super;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * get path from last VFS-element and create corresponding superblock
- *
- * @param vpath source path object
- * @param archive pointer to object for store newly created superblock
- * @param flags flags
- *
- * @return path from last VFS-element
- */
-const char *
-vfs_s_get_path (const vfs_path_t * vpath, struct vfs_s_super **archive, int flags)
-{
-    const char *retval = "";
     int result = -1;
     struct vfs_s_super *super;
     const vfs_path_element_t *path_element;
@@ -1119,14 +1109,11 @@ vfs_s_get_path (const vfs_path_t * vpath, struct vfs_s_super **archive, int flag
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
-    if (path_element->path != NULL)
-        retval = path_element->path;
-
-    super = vfs_get_super_by_vpath (vpath);
+    super = vfs_get_sb_by_vpath (vpath);
     if (super != NULL)
         goto return_success;
 
-    if (flags & FL_NO_OPEN)
+    if (!is_create_new)
     {
         path_element->class->verrno = EIO;
         return NULL;
@@ -1160,8 +1147,7 @@ vfs_s_get_path (const vfs_path_t * vpath, struct vfs_s_super **archive, int flag
     vfs_stamp_create (path_element->class, super);
 
   return_success:
-    *archive = super;
-    return retval;
+    return super;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1217,16 +1203,16 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
     int was_changed = 0;
     vfs_file_handler_t *fh;
     struct vfs_s_super *super;
-    const char *q;
     struct vfs_s_inode *ino;
     const vfs_path_element_t *path_element;
 
+    super = vfs_get_super_by_vpath (vpath, TRUE);
+    if (super == NULL)
+        return NULL;
+
     path_element = vfs_path_get_by_index (vpath, -1);
 
-    q = vfs_s_get_path (vpath, &super, 0);
-    if (q == NULL)
-        return NULL;
-    ino = vfs_s_find_inode (path_element->class, super, q, LINK_FOLLOW, FL_NONE);
+    ino = vfs_s_find_inode (path_element->class, super, path_element->path, LINK_FOLLOW, FL_NONE);
     if (ino && ((flags & (O_CREAT | O_EXCL)) == (O_CREAT | O_EXCL)))
     {
         path_element->class->verrno = EEXIST;
@@ -1242,8 +1228,8 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
         if (!(flags & O_CREAT) || !(path_element->class->write))
             return NULL;
 
-        dirname = g_path_get_dirname (q);
-        name = g_path_get_basename (q);
+        dirname = g_path_get_dirname (path_element->path);
+        name = g_path_get_basename (path_element->path);
         dir = vfs_s_find_inode (path_element->class, super, dirname, LINK_FOLLOW, FL_DIR);
         if (dir == NULL)
         {

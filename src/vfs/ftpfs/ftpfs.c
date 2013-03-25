@@ -1973,20 +1973,19 @@ ftpfs_ctl (void *fh, int ctlop, void *arg)
 static int
 ftpfs_send_command (const vfs_path_t * vpath, const char *cmd, int flags)
 {
-    const char *rpath;
     char *p;
     struct vfs_s_super *super;
     int r;
     const vfs_path_element_t *path_element;
     int flush_directory_cache = (flags & OPT_FLUSH);
 
-    path_element = vfs_path_get_by_index (vpath, -1);
-
-    rpath = vfs_s_get_path (vpath, &super, 0);
-    if (rpath == NULL)
+    super = vfs_get_super_by_vpath (vpath, TRUE);
+    if (super == NULL)
         return -1;
 
-    p = ftpfs_translate_path (path_element->class, super, rpath);
+    path_element = vfs_path_get_by_index (vpath, -1);
+
+    p = ftpfs_translate_path (path_element->class, super, path_element->path);
     r = ftpfs_command (path_element->class, super, WAIT_REPLY, cmd, p);
     g_free (p);
     vfs_stamp_create (&vfs_ftpfs_ops, super);

@@ -137,17 +137,16 @@ START_TEST (test_vfs_s_get_path)
 {
     /* given */
     struct vfs_s_super *archive;
-    const char *result;
 
     /* when */
     vfs_path_t *vpath =
         vfs_path_from_str_flags ("/" ETALON_VFS_NAME ARCH_NAME "#test1:/" ETALON_PATH,
                                  VPF_USE_DEPRECATED_PARSER);
 
-    result = vfs_s_get_path (vpath, &archive, 0);
+    archive = vfs_get_super_by_vpath (vpath, TRUE);
 
     /* then */
-    mctest_assert_str_eq (result, ETALON_PATH);
+    mctest_assert_ptr_ne (archive, NULL);
     mctest_assert_str_eq (archive->name, "/" ETALON_VFS_URL_NAME ARCH_NAME);
 
     g_free (vpath);

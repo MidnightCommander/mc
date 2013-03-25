@@ -718,7 +718,7 @@ mc_chdir (const vfs_path_t * vpath)
         {
             struct vfs_s_super *super;
 
-            super = vfs_get_super_by_vpath (vpath);
+            super = vfs_get_super_by_vpath (vpath, FALSE);
             if (super != NULL && super->path_element != NULL)
             {
                 g_free (super->path_element->path);
