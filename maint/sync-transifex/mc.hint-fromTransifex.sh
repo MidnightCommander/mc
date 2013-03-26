@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# Midnight Commander - <one line comment what the file is for>
+# Midnight Commander - fetch doc/hints/mc.hint translations from Transifex
 #
-# Copyright (C) <YEARS>
+# Copyright (C) 2013
 # The Free Software Foundation, Inc.
 #
 # Written by:
-#  Firstname Secondname <your@email.in.net>, <YEARS>
+#  Slava Zanko <slavazanko@gmail.com>, 2013
 #
 # This file is part of the Midnight Commander.
 #
@@ -23,8 +23,28 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+set -e
+
+MC_SOURCE_ROOT_DIR=${MC_SOURCE_ROOT_DIR:-$(dirname $(dirname $(pwd)))}
+
 #*** include section (source functions, for example) *******************
+
+source "${MC_SOURCE_ROOT_DIR}/maint/sync-transifex/functions"
 
 #*** file scope functions **********************************************
 
+removeExtraBackSlash() {
+    sed -i -e 's/\\-/-/g' ${MC_SOURCE_ROOT_DIR}/doc/hints/l10n/mc.hint.*
+}
+
 #*** main code *********************************************************
+
+WORK_DIR=$(initSyncDirIfNeeded "mc.hint")
+
+receiveTranslationsFromTransifex "${WORK_DIR}"
+
+createPo4A "mc.hint"
+
+convertFromPoToText "${WORK_DIR}" "mc.hint"
+
+removeExtraBackSlash

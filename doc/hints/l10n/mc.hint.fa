@@ -1,0 +1,106 @@
+راهنمایی: از ترکیب C-x t برای کپی کردن نام فایل‌های انتخاب شده به خط فرمان
+استفاده کنید.
+
+راهنمایی: از ترکیب C-x p برای کپی کردن مسیر پوشه‌ی فعلی به خط فرمان استفاده
+کنید.
+
+راهنمایی: تکمیل: از ترکیب M-Tab (یا Esc+Tab) استفاده کنید. | دوبار تایپ کنید
+تا فهرستی نشان داده شود.
+
+راهنمایی: برای دسترسی به تاریخچه‌ی فرمان‌ها از M-p و M-n استفاده کنید.
+
+Hint: Need to quote a character? Use Control-q and the character.
+
+راهنمایی: از این راهنمایی‌ها خسته شده‌اید؟ در منوی تنظیمات/طرح‌بندی آن‌ها را
+خاموش کنید.
+
+راهنمایی: برای انتخاب پوشه‌ها در آخر الگوی تطبیق یک کاراکتر خط مورب اضافه
+کنید.
+
+راهنمایی: اگر ترمینال شما از کلید‌های فانکشن پشتیبانی نمی‌کند، از Esc+عدد
+استفاده کنید.
+
+راهنمایی: نشانی وبگاه فرماندار نیمه‌شب:  http://www.midnight-commander.org/
+
+راهنمایی: لطفا هرگونه باگ را به mc-devel@gnome.org گزارش دهید.
+
+راهنمایی: Tab قاب فعلی را عوض می‌کند.
+
+Hint: VFS coolness: tap enter on a tar file to examine its contents.
+
+راهنمایی: ما همچنین یه صفحه‌ی راهنمای Manual داریم.
+
+Hint: Do you want lynx-style navigation? Set it in the Configuration dialog.
+
+Hint: % macros work even on the command line.
+
+Hint: M-! will allow you to execute programs and see the output in the
+viewer.
+
+Hint: The file listing format can be customized; do "man mc" for details.
+
+Hint: %D/%T expands to the tagged files in the opposite directory.
+
+راهنمایی: خط فرمان ساده‌ی خودتان را می‌خواهید؟ با فشردن C-o بین خط فرمان و
+MC جابجا شوید.
+
+Hint: Setting the CDPATH variable can save you keystrokes in cd commands.
+
+راهنمایی: می‌خواهید فایل‌های پنهان را که با . شروع می‌شوند ببینید، به
+پنجره‌ی پیکربندی بروید.
+
+راهنمایی: می‌خواهید فایل‌های پشتیبان را که با ~ به پایان می‌رسند را ببینید؟
+به پنجره‌ی پیکربندی بروید.
+
+Hint: Completion works on all input lines in all dialogs. Just press M-Tab.
+
+Hint: On slow terminals the -s flag may help.
+
+Hint: Find File: you can work on the files found using the Panelize button.
+
+Hint: Want to do complex searches? Use the External Panelize command.
+
+راهنمایی: اگر خواستید در حین تایپ یک دستور پوشه را عوض کنید از ترکیب M-c
+استفاده کنید (quick cd).
+
+راهنمایی: زمانی که در یک فایل سیستم غیر محلی باشید دستورات شل کار نمی‌کنند.
+
+Hint: Bring text back from the dead with C-y.
+
+راهنمایی: برخی از کلیدهای شما کار نمی‌کنند؟ به منوی تنظیمات/یادگیری کلیدها
+بروید.
+
+Hint: To look at the output of a command in the viewer, use M-!
+
+Hint: F13 (or Shift-F3) invokes the viewer in raw mode.
+
+راهنمایی: برای تعیین ویرایشگری که با F4 باز می‌شود متغیر EDITOR را در شل
+مقداردهی کنید.
+
+Hint: You may specify the external viewer with the shell vars VIEWER or
+PAGER.
+
+راهنمایی: شما می‌توانید تمام درخواست‌های تایید را در منوی تنظیمات/تایید
+غیرفعال کنید.
+
+Hint: Leap to frequently used directories in a single bound with C-.
+
+Hint: You can do anonymous FTP with mc by typing 'cd ftp://machine.edu'
+
+راهنمایی: FTP در فرماندار نیمه‌شب گنجانده شده است. منوی فایل/FTP link را
+ببینید.
+
+Hint: M-t changes quickly the listing mode.
+
+Hint: You can specify the username when doing ftps: 'cd
+ftp://user@machine.edu'
+
+Hint: You can browse RPM files by tapping enter on top of an rpm file.
+
+Hint: To mark directories on the select dialog box, append a slash.
+
+راهنمایی: برای بریدن و چسباندن با استفاده از موشواره باید دکمه‌ی shift را
+نگه‌دارید
+
+Hint: Key frequently visited ftp sites in the hotlist: type C-.
+

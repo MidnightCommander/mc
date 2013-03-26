@@ -1,0 +1,111 @@
+Aiuto: Ctrl-x t per copiare i nomi di file selezionati nella linea di
+comando.
+
+Aiuto: Ctrl-x p per copiare il percorso attuale nella linea di comando.
+
+Aiuto: Completamento: M-Tab (o Esc+Tab). Due volte per ottenere la lista.
+
+Aiuto: M-p e M-n per accedere alla storia dei comandi.
+
+Aiuto: Quotare un carattere? Ctrl-q seguito dal carattere.
+
+Aiuto: Disattivare questi messaggi? Opzioni/menu di Layout/
+barra aiuti.
+
+Aiuto: Selezionare cartelle: aggiungere una barra dopo i caratteri di
+confronto.
+
+Aiuto: Se nel terminale mancano i tasti di funzione, utilizzare la sequenza
+ESC+numero.
+
+Aiuto: La pagina principale su Internet di GNU Midnight Commander é:
+http://www.midnight-commander.org/
+
+Aiuto: Inviare i rapporti d'errore a mc-devel@gnome.org
+
+Aiuto: Tab modifica il pannello corrente.
+
+Aiuto: La forza dei VFS: Invio su un tar file permette di esaminarne il
+contenuto.
+
+Aiuto: Abbiamo anche un bel manuale manpage.
+
+Aiuto: Si vuole una navigazione stile Lynx? Basta settarla in
+Opzioni/Configurazione/movimenti tipo Lynx.
+
+Aiuto: le % macro funzionano anche nella linea di comando.
+
+Aiuto: M-! permette l'esecuzione di programmi avendo mostrato l'output nel
+visualizzatore.
+
+Aiuto: Il formato di visualizzazione dei documenti è personalizzabile; "man
+mc" per i dettagli
+
+Aiuto: %D/%T espande i documenti selezionati nella cartella opposta.
+
+Aiuto: Si vuole la shell intera? Ctrl-o, e ancora Ctrl-o per tornare a mc.
+
+Aiuto: Impostare la variabile CDPATH permette di salvare la sequenza di
+tasti premuti nei comandi cd.
+
+Aiuto: Se si vogliono vedere i propri file .*, specificarlo nel menù
+Opzioni/Configurazione.
+
+Aiuto: Se si vogliono vedere i propri file di backup *~, specificarlo nel
+menù Opzioni/Configurazione.
+
+Aiuto: Il completamento funziona su tutte le righe di immissione, in tutti i
+menù. Basta premere M-Tab.
+
+Aiuto: L'opzione -s aiuta con i terminali lenti.
+
+Aiuto: Trovare documento: è possibile lavorare sui documenti trovati tramite
+il pulsante Pannellizza.
+
+Aiuto: Si vogliono eseguire ricerche complicate? Usare il comando
+Pannellizza Esternamente.
+
+Aiuto: Per cambiare la cartella attuale mentre si sta componendo un comando:
+M-c (cd rapido).
+
+Nota: I comandi della shell non sono disponibili in un file-system non
+locale.
+
+Aiuto: Riprendere del testo con Ctrl-y.
+
+Aiuto: Qualche tasto non funziona? Guarda Opzioni/Impara tasti.
+
+Aiuto: Per leggere l'output del comando nel visualizzatore usare M-!.
+
+Aiuto: F13 (o Shift-F13) invoca il visualizzatore in modalità base.
+
+Aiuto: Si può specificare l'editor richiamabile con F4, tramite la variabile
+d'ambiente EDITOR.
+
+Aiuto: Si può specificare il visualizzatore esterno tramite le variabili
+d'ambiente VIEWER o PAGER.
+
+Aiuto: È possibile disabilitare tutte le richieste di conferma
+
+Hint: Leap to frequently used directories in a single bound with C-.
+
+Aiuto: È possibile creare una connessione FTP anonima con mc digitando 'cd
+ftp://host.edu'.
+
+Aiuto: L'FTP è implementato in mc nel menu DESTRO/SINISTRO/FTP Link.
+
+Aiuto: M-t modifica velocemente la modalità di lista.
+
+Aiuto: È possibile specificare il nome utente per una sessione FTP: 'cd
+ftp://utente@host.edu'.
+
+Aiuto: È possibile vedere il contenuto di un file RPM mediante Invio.
+
+Aiuto: Per segnare delle cartelle nel riquadro di selezione, appendere una
+barra.
+
+Aiuto: per utilizzare il mouse per il taglia e incolla premere il tasto
+Shift.
+
+Hint: Key frequently visited ftp sites in the hotlist: type C-.
+

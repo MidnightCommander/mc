@@ -2,13 +2,16 @@ Tip: C-x t vloží na příkazovou řádku označené soubory.
 
 Tip: C-x p vloží na příkazovou řádku jméno aktuálního adresáře.
 
-Tip: Doplňování: použijte M-Tab (nebo Esc+Tab). Dvojitým zadáním získáte seznam.
+Tip: Doplňování: použijte M-Tab (nebo Esc+Tab). Dvojitým zadáním získáte
+seznam.
 
 Tip: Použitím M-p nebo M-n se pohybujete v historii příkazů.
 
-Tip: Chcete zadat speciální znak (např. tabulátor)? Použijte Ctrl-q a daný znak.
+Tip: Chcete zadat speciální znak (např. tabulátor)? Použijte Ctrl-q a daný
+znak.
 
-Tip: Nechcete již vidět tipy? Vypněte je v Nastavení/Zobrazení/Další nastavení.
+Tip: Nechcete již vidět tipy? Vypněte je v Nastavení/Zobrazení/Další
+nastavení.
 
 Tip: Adresáře vyberete přidáním lomítka na konec vzorku.
 
@@ -52,21 +55,24 @@ Tip: Pro opravdu složité operace zkuste příkaz Příkaz/Externí panelizace.
 
 Tip: Pokud chcete změnit adresář při práci na příkazové řádce, zkuste M-c.
 
-Pozn.: Příkazy shellu nefungují, pokud nepracujete na lokálním systému souborů.
+Pozn.: Příkazy shellu nefungují, pokud nepracujete na lokálním systému
+souborů.
 
 Tip: Smazaný text obnovíte C-y.
 
 Tip: Pokud některé klávesy nefungují, použijte menu Nastavení/Učení kláves.
 
+Hint: To look at the output of a command in the viewer, use M-!
+
 Tip: F13 (nebo Shift-F3) vyvolá prohlížení bez zpracování obsahu souboru.
 
 Tip: Editor pro klávesu F4 určíte pomocí proměnné prostředí EDITOR.
 
-Tip: Externí prohlížeč určíte proměnnými VIEWER nebo PAGER.
+Tip: Externí prohlížeč určíte proměnnými VIEWER nebo PAGER
 
 Tip: Všechny žádosti o potvrzení můžete zakázat v Nastavení/Potvrzování.
 
-Tip: K seznamu často používaných adresářů se můžete dostat i přes C-\.
+Hint: Leap to frequently used directories in a single bound with C-.
 
 Tip: Na anonymní FTP se připojíte pomocí „cd ftp://stroj.domena.cz“.
 
@@ -78,7 +84,10 @@ Tip: Při FTP spojení můžete zadat i jméno: „cd ftp://jmeno@stroj.domena.c
 
 Tip: RPM soubory si prohlédnete stiskem Enter.
 
-Tip: Chcete-li použít myš pro zkopírování nebo vložení textu, stiskněte Shift.
+Hint: To mark directories on the select dialog box, append a slash.
 
-Tip: V seznamu adresářů můžete mít i často navštěvované FTP servery. Zkuste C-\.
+Tip: Chcete-li použít myš pro zkopírování nebo vložení textu, stiskněte
+Shift.
+
+Hint: Key frequently visited ftp sites in the hotlist: type C-.
 
