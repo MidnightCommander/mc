@@ -35,6 +35,9 @@
 #include "lib/strutil.h"
 
 #include "src/vfs/local/local.c"
+#ifdef HAVE_CHARSET
+#include "src/selcodepage.h"
+#endif
 #include "src/editor/editwidget.h"
 #include "src/editor/editcmd_dialogs.h"
 
@@ -184,7 +187,9 @@ static const struct test_autocomplete_ds
 {
     off_t input_position;
     const char *input_system_code_page;
+    int input_source_codepage_id;
     const char *input_editor_code_page;
+    int input_display_codepage_id;
     const char *input_completed_word;
 
     int expected_max_len;
@@ -196,7 +201,9 @@ static const struct test_autocomplete_ds
     { /* 0. */
         111,
         "KOI8-R",
+        0,
         "UTF-8",
+        1,
         "ÑÑŠÐ¹Ñ†ÑƒÐºÐµÐ½",
 
         16,
@@ -204,10 +211,12 @@ static const struct test_autocomplete_ds
         107,
         "ÑÑŠÐ¹Ñ†ÑƒÐºÐµÐ½"
     },
-    { /* 0. */
+    { /* 1. */
         147,
-        "KOI8-R",
         "UTF-8",
+        1,
+        "KOI8-R",
+        0,
         "ÜßÊÃÕËÅÎ",
 
         8,
@@ -225,8 +234,15 @@ START_PARAMETRIZED_TEST (test_autocomplete, test_autocomplete_ds)
 {
     /* given */
     editcmd_dialog_completion_show__return_value = g_strdup (data->input_completed_word);
-    cp_display = data->input_system_code_page;
+
+
+    mc_global.source_codepage = data->input_source_codepage_id;
+    mc_global.display_codepage = data->input_display_codepage_id;
     cp_source = data->input_editor_code_page;
+    cp_display = data->input_system_code_page;
+
+    do_set_codepage (0);
+    edit_set_codeset (test_edit);
 
     /* when */
     edit_cursor_move (test_edit, data->input_position);
@@ -260,6 +276,80 @@ START_PARAMETRIZED_TEST (test_autocomplete, test_autocomplete_ds)
 /* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
 /* *INDENT-ON* */
+
+/* --------------------------------------------------------------------------------------------- */
+
+/* @DataSource("test_autocomplete_single_ds") */
+/* *INDENT-OFF* */
+static const struct test_autocomplete_single_ds
+{
+    off_t input_position;
+    const char *input_system_code_page;
+    int input_source_codepage_id;
+    const char *input_editor_code_page;
+    int input_display_codepage_id;
+
+    int input_completed_word_start_pos;
+
+    const char *expected_completed_word;
+} test_autocomplete_single_ds[] =
+{
+    { /* 0. */
+        155,
+        "UTF-8",
+        1,
+        "KOI8-R",
+        0,
+
+        154,
+        "ÆÙ×Á"
+    },
+};
+/* *INDENT-ON* */
+
+/* @Test(dataSource = "test_autocomplete_single_ds") */
+/* *INDENT-OFF* */
+START_PARAMETRIZED_TEST (test_autocomplete_single, test_autocomplete_single_ds)
+/* *INDENT-ON* */
+{
+    /* given */
+    mc_global.source_codepage = data->input_source_codepage_id;
+    mc_global.display_codepage = data->input_display_codepage_id;
+    cp_source = data->input_editor_code_page;
+    cp_display = data->input_system_code_page;
+
+    do_set_codepage (0);
+    edit_set_codeset (test_edit);
+
+    /* when */
+    edit_cursor_move (test_edit, data->input_position);
+    edit_complete_word_cmd (test_edit);
+
+    /* then */
+    {
+        off_t i = 0;
+        GString *actual_completed_str;
+
+        actual_completed_str = g_string_new ("");
+
+        while (TRUE)
+        {
+            int chr;
+
+            chr = edit_get_byte (test_edit, data->input_completed_word_start_pos + i++);
+            if (isspace (chr))
+                break;
+            g_string_append_c (actual_completed_str, chr);
+        }
+        mctest_assert_str_eq (actual_completed_str->str, data->expected_completed_word);
+        g_string_free (actual_completed_str, TRUE);
+    }
+}
+/* *INDENT-OFF* */
+END_PARAMETRIZED_TEST
+/* *INDENT-ON* */
+
+
 #endif /* HAVE_CHARSET */
 
 /* --------------------------------------------------------------------------------------------- */
@@ -278,6 +368,7 @@ main (void)
     /* Add new tests here: *************** */
 #ifdef HAVE_CHARSET
     mctest_add_parameterized_test (tc_core, test_autocomplete, test_autocomplete_ds);
+    mctest_add_parameterized_test (tc_core, test_autocomplete_single, test_autocomplete_single_ds);
 #endif /* HAVE_CHARSET */
     /* *********************************** */
 
