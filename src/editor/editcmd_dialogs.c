@@ -339,7 +339,7 @@ editcmd_dialog_raw_key_query (const char *heading, const char *query, gboolean c
 char *
 editcmd_dialog_completion_show (const WEdit * edit, int max_len, GString ** compl, int num_compl)
 {
-
+    const Widget *we = WIDGET (edit);
     int start_x, start_y, offset, i;
     char *curr = NULL;
     WDialog *compl_dlg;
@@ -350,12 +350,15 @@ editcmd_dialog_completion_show (const WEdit * edit, int max_len, GString ** comp
     /* calculate the dialog metrics */
     compl_dlg_h = num_compl + 2;
     compl_dlg_w = max_len + 4;
-    start_x = edit->curs_col + edit->start_col - (compl_dlg_w / 2) +
-        EDIT_TEXT_HORIZONTAL_OFFSET + (edit->fullscreen ? 0 : 1) + option_line_state_width;
-    start_y = edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET + (edit->fullscreen ? 0 : 1) + 1;
+    start_x = we->x + edit->curs_col + edit->start_col + EDIT_TEXT_HORIZONTAL_OFFSET +
+        (edit->fullscreen ? 0 : 1) + option_line_state_width;
+    start_y = we->y + edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET +
+        (edit->fullscreen ? 0 : 1) + 1;
 
     if (start_x < 0)
         start_x = 0;
+    if (start_x < we->x + 1)
+        start_x = we->x + 1 + option_line_state_width;
     if (compl_dlg_w > COLS)
         compl_dlg_w = COLS;
     if (compl_dlg_h > LINES - 2)
@@ -366,7 +369,7 @@ editcmd_dialog_completion_show (const WEdit * edit, int max_len, GString ** comp
         start_x -= offset;
     offset = start_y + compl_dlg_h - LINES;
     if (offset > 0)
-        start_y -= (offset + 1);
+        start_y -= offset;
 
     /* create the dialog */
     compl_dlg =
