@@ -336,11 +336,10 @@ editcmd_dialog_raw_key_query (const char *heading, const char *query, gboolean c
 /* --------------------------------------------------------------------------------------------- */
 /* let the user select its preferred completion */
 
-void
-editcmd_dialog_completion_show (WEdit * edit, int max_len, int word_len,
-                                GString ** compl, int num_compl)
+char *
+editcmd_dialog_completion_show (const WEdit * edit, int max_len, GString ** compl, int num_compl)
 {
-
+    const Widget *we = WIDGET (edit);
     int start_x, start_y, offset, i;
     char *curr = NULL;
     WDialog *compl_dlg;
@@ -351,12 +350,15 @@ editcmd_dialog_completion_show (WEdit * edit, int max_len, int word_len,
     /* calculate the dialog metrics */
     compl_dlg_h = num_compl + 2;
     compl_dlg_w = max_len + 4;
-    start_x = edit->curs_col + edit->start_col - (compl_dlg_w / 2) +
-        EDIT_TEXT_HORIZONTAL_OFFSET + (edit->fullscreen ? 0 : 1) + option_line_state_width;
-    start_y = edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET + (edit->fullscreen ? 0 : 1) + 1;
+    start_x = we->x + edit->curs_col + edit->start_col + EDIT_TEXT_HORIZONTAL_OFFSET +
+        (edit->fullscreen ? 0 : 1) + option_line_state_width;
+    start_y = we->y + edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET +
+        (edit->fullscreen ? 0 : 1) + 1;
 
     if (start_x < 0)
         start_x = 0;
+    if (start_x < we->x + 1)
+        start_x = we->x + 1 + option_line_state_width;
     if (compl_dlg_w > COLS)
         compl_dlg_w = COLS;
     if (compl_dlg_h > LINES - 2)
@@ -367,7 +369,7 @@ editcmd_dialog_completion_show (WEdit * edit, int max_len, int word_len,
         start_x -= offset;
     offset = start_y + compl_dlg_h - LINES;
     if (offset > 0)
-        start_y -= (offset + 1);
+        start_y -= offset;
 
     /* create the dialog */
     compl_dlg =
@@ -388,35 +390,13 @@ editcmd_dialog_completion_show (WEdit * edit, int max_len, int word_len,
     if (run_dlg (compl_dlg) == B_ENTER)
     {
         listbox_get_current (compl_list, &curr, NULL);
-        if (curr)
-        {
-#ifdef HAVE_CHARSET
-            GString *temp, *temp2;
-            temp = g_string_new ("");
-            for (curr += word_len; *curr; curr++)
-                g_string_append_c (temp, *curr);
-
-            temp2 = str_convert_to_input (temp->str);
-
-            if (temp2 && temp2->len)
-            {
-                g_string_free (temp, TRUE);
-                temp = temp2;
-            }
-            else
-                g_string_free (temp2, TRUE);
-            for (curr = temp->str; *curr; curr++)
-                edit_insert (edit, *curr);
-            g_string_free (temp, TRUE);
-#else
-            for (curr += word_len; *curr; curr++)
-                edit_insert (edit, *curr);
-#endif
-        }
+        curr = g_strdup (curr);
     }
 
     /* destroy dialog before return */
     destroy_dlg (compl_dlg);
+
+    return curr;
 }
 
 /* --------------------------------------------------------------------------------------------- */

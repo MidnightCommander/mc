@@ -1496,6 +1496,32 @@ edit_redraw_page_cb (void *data, void *user_data)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Insert autocompleted word into editor.
+ *
+ * @param edit       editor object
+ * @param completion word for completion
+ * @param word_len   offset from begining for insert
+ */
+
+static void
+edit_complete_word_insert_recoded_completion (WEdit * edit, char *completion, gsize word_len)
+{
+#ifdef HAVE_CHARSET
+    GString *temp;
+
+    temp = str_convert_to_input (completion);
+
+    for (completion = temp->str + word_len; *completion != '\0'; completion++)
+        edit_insert (edit, *completion);
+    g_string_free (temp, TRUE);
+#else
+    for (completion += word_len; *completion != '\0'; completion++)
+        edit_insert (edit, *completion);
+#endif
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -3266,8 +3292,7 @@ edit_complete_word_cmd (WEdit * edit)
 {
     gsize i, max_len, word_len = 0, num_compl = 0;
     off_t word_start = 0;
-    unsigned char *bufpos;
-    char *match_expr;
+    GString *match_expr;
     GString *compl[MAX_WORD_COMPLETIONS];       /* completions */
 
     /* search start of word to be completed */
@@ -3275,43 +3300,46 @@ edit_complete_word_cmd (WEdit * edit)
         return;
 
     /* prepare match expression */
-    bufpos = &edit->buffers1[word_start >> S_EDIT_BUF_SIZE][word_start & M_EDIT_BUF_SIZE];
-
     /* match_expr = g_strdup_printf ("\\b%.*s[a-zA-Z_0-9]+", word_len, bufpos); */
-    match_expr =
-        g_strdup_printf
-        ("(^|\\s+|\\b)%.*s[^\\s\\.=\\+\\[\\]\\(\\)\\,\\;\\:\\\"\\'\\-\\?\\/\\|\\\\\\{\\}\\*\\&\\^\\%%\\$#@\\!]+",
-         (int) word_len, bufpos);
+    match_expr = g_string_new ("(^|\\s+|\\b)");
+    for (i = 0; i < word_len; i++)
+        g_string_append_c (match_expr, edit_get_byte (edit, word_start + i));
+    g_string_append (match_expr, "[^\\s\\.=\\+\\[\\]\\(\\)\\,\\;\\:\\\"\\'\\-\\?\\/\\|\\\\\\{\\}\\*\\&\\^\\%%\\$#@\\!]+");
 
     /* collect the possible completions              */
     /* start search from begin to end of file */
     max_len =
-        edit_collect_completions (edit, word_start, word_len, match_expr, (GString **) & compl,
+        edit_collect_completions (edit, word_start, word_len, match_expr->str, (GString **) & compl,
                                   &num_compl);
 
     if (num_compl > 0)
     {
         /* insert completed word if there is only one match */
         if (num_compl == 1)
-        {
-            for (i = word_len; i < compl[0]->len; i++)
-                edit_insert (edit, *(compl[0]->str + i));
-        }
+            edit_complete_word_insert_recoded_completion (edit, compl[0]->str, word_len);
         /* more than one possible completion => ask the user */
         else
         {
+            char *curr_compl;
+
             /* !!! usually only a beep is expected and when <ALT-TAB> is !!! */
             /* !!! pressed again the selection dialog pops up, but that  !!! */
             /* !!! seems to require a further internal state             !!! */
             /*tty_beep (); */
 
             /* let the user select the preferred completion */
-            editcmd_dialog_completion_show (edit, max_len, word_len, (GString **) & compl,
-                                            num_compl);
+            curr_compl = editcmd_dialog_completion_show (edit, max_len,
+                                                         (GString **) & compl, num_compl);
+
+            if (curr_compl != NULL)
+            {
+                edit_complete_word_insert_recoded_completion (edit, curr_compl, word_len);
+                g_free (curr_compl);
+            }
         }
     }
 
-    g_free (match_expr);
+    g_string_free (match_expr, TRUE);
     /* release memory before return */
     for (i = 0; i < num_compl; i++)
         g_string_free (compl[i], TRUE);
@@ -3432,10 +3460,9 @@ edit_get_match_keyword_cmd (WEdit * edit)
 {
     gsize word_len = 0, max_len = 0;
     int num_def = 0;
-    int i;
+    gsize i;
     off_t word_start = 0;
-    unsigned char *bufpos;
-    char *match_expr;
+    GString *match_expr;
     char *path = NULL;
     char *ptr = NULL;
     char *tagfile = NULL;
@@ -3452,8 +3479,9 @@ edit_get_match_keyword_cmd (WEdit * edit)
         return;
 
     /* prepare match expression */
-    bufpos = &edit->buffers1[word_start >> S_EDIT_BUF_SIZE][word_start & M_EDIT_BUF_SIZE];
-    match_expr = g_strdup_printf ("%.*s", (int) word_len, bufpos);
+    match_expr = g_string_sized_new (word_len);
+    for (i = 0; i < word_len; i++)
+        g_string_append_c (match_expr, edit_get_byte (edit, word_start + i));
 
     ptr = g_get_current_dir ();
     path = g_strconcat (ptr, G_DIR_SEPARATOR_S, (char *) NULL);
@@ -3475,7 +3503,7 @@ edit_get_match_keyword_cmd (WEdit * edit)
     if (tagfile)
     {
         num_def =
-            etags_set_definition_hash (tagfile, path, match_expr, (etags_hash_t *) & def_hash);
+            etags_set_definition_hash (tagfile, path, match_expr->str, (etags_hash_t *) & def_hash);
         g_free (tagfile);
     }
     g_free (path);
@@ -3484,10 +3512,10 @@ edit_get_match_keyword_cmd (WEdit * edit)
     word_len = 0;
     if (num_def > 0)
     {
-        editcmd_dialog_select_definition_show (edit, match_expr, max_len, word_len,
+        editcmd_dialog_select_definition_show (edit, match_expr->str, max_len, word_len,
                                                (etags_hash_t *) & def_hash, num_def);
     }
-    g_free (match_expr);
+    g_string_free (match_expr, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

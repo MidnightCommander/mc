@@ -1,4 +1,4 @@
-SUBDIRS = . filemanager
+SUBDIRS = . editor filemanager
 
 AM_CPPFLAGS = \
 	$(GLIB_CFLAGS) \
