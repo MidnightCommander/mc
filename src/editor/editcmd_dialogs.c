@@ -352,8 +352,7 @@ editcmd_dialog_completion_show (const WEdit * edit, int max_len, GString ** comp
     compl_dlg_w = max_len + 4;
     start_x = we->x + edit->curs_col + edit->start_col + EDIT_TEXT_HORIZONTAL_OFFSET +
         (edit->fullscreen ? 0 : 1) + option_line_state_width;
-    start_y = we->y + edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET +
-        (edit->fullscreen ? 0 : 1) + 1;
+    start_y = we->y + edit->curs_row + EDIT_TEXT_VERTICAL_OFFSET + (edit->fullscreen ? 0 : 1) + 1;
 
     if (start_x < 0)
         start_x = 0;

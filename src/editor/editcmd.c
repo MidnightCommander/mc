@@ -3304,7 +3304,8 @@ edit_complete_word_cmd (WEdit * edit)
     match_expr = g_string_new ("(^|\\s+|\\b)");
     for (i = 0; i < word_len; i++)
         g_string_append_c (match_expr, edit_get_byte (edit, word_start + i));
-    g_string_append (match_expr, "[^\\s\\.=\\+\\[\\]\\(\\)\\,\\;\\:\\\"\\'\\-\\?\\/\\|\\\\\\{\\}\\*\\&\\^\\%%\\$#@\\!]+");
+    g_string_append (match_expr,
+                     "[^\\s\\.=\\+\\[\\]\\(\\)\\,\\;\\:\\\"\\'\\-\\?\\/\\|\\\\\\{\\}\\*\\&\\^\\%%\\$#@\\!]+");
 
     /* collect the possible completions              */
     /* start search from begin to end of file */
