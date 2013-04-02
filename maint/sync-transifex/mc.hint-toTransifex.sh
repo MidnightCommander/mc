@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# Midnight Commander - <one line comment what the file is for>
+# Midnight Commander - push doc/hints/mc.hint file to Transifex
 #
-# Copyright (C) <YEARS>
+# Copyright (C) 2013
 # The Free Software Foundation, Inc.
 #
 # Written by:
-#  Firstname Secondname <your@email.in.net>, <YEARS>
+#  Slava Zanko <slavazanko@gmail.com>, 2013
 #
 # This file is part of the Midnight Commander.
 #
@@ -23,8 +23,21 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+set -e
+
+MC_SOURCE_ROOT_DIR=${MC_SOURCE_ROOT_DIR:-$(dirname $(dirname $(pwd)))}
+
 #*** include section (source functions, for example) *******************
+
+source "${MC_SOURCE_ROOT_DIR}/maint/sync-transifex/functions"
 
 #*** file scope functions **********************************************
 
 #*** main code *********************************************************
+
+WORK_DIR=$(initSyncDirIfNeeded "mc.hint")
+
+convertFromTextToPo "${MC_SOURCE_ROOT_DIR}/doc/hints/mc.hint" "${WORK_DIR}/mc.doc.pot"
+
+sendSourceToTransifex "${WORK_DIR}"
+

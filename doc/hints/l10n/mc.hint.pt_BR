@@ -1,0 +1,110 @@
+Dica: Use C-x para copiar nome de arquivos marcados para linha de comando.
+
+Dica: Use C-x para copiar o nome de caminho atual para a linha de comando
+
+Dica: Completion: use M-Tab (ou Esc+Tab).  Pressione duas vezes para ter uma
+lista.
+
+Dica: Use M-p e M-n para acessar o histórico de comandos.
+
+Dica: Para inserir um caractere especial, use Control-q e o caractere,
+
+Dica: Cansado dessas mensagens? Desabilite-as no menu Opções/Layout.
+
+Dica: Selecionando diretórios: adicione uma barra ao final do padrão
+correspondente.
+
+Dica: Se seu terminal falha teclas de função, use sequências com ESC+número.
+
+Dica: A página web do GNU Midnight Commander:
+http://www.midnight-commander.org/
+
+Dica: Favor enviar quaisquer relatórios de bug para mc-devel@gnome.org
+
+Dica: Tab altera seu painel atual.
+
+Dica: Coisas legais do VFS: pressione enter em um arquivo tar para examinar
+seu conteúdo.
+
+Dica: Nós também temos uma ótima página man.
+
+Dica: Você gostaria de navegação estilo lynx? Defina isso no diálogo de
+Configuração.
+
+Dica: macros % funcionam mesmo na linha de comando.
+
+Dica: M-! vai permitir que você execute programas e veja a saída no
+visualizador.
+
+Dica: O formato de listagem de arquivos pode ser personalizada; execute "man
+mc" para mais detalhes.
+
+Dica: %D/%T expande para os arquivos marcados no diretório oposto.
+
+Dica: Quer sua shell básica? Pressione C-o e volte para o MC com C-o
+novamente.
+
+Dica: Ao definir a variável CDPATH você economizará digitações nos comandos
+cd.
+
+Dica: Se você quer ver seus .* arquivos, avise isso no diálogo de
+Configurações.
+
+Dica: Quer ver seus arquivos backup *~ ? Defina isso no diálogo de
+Configuração.
+
+Dica: Completion funciona em todas as linhas de entrada em todos
+diálogos. Basta pressionar M-Tab.
+
+Dica: Em terminais lentos a opção -s pode ajudar.
+
+Dica: Encontrar Arquivo: você pode trabalhar em arquivos encontrados usando
+o botão de Painelização.
+
+Dica: Você faz pesquisas complexas? Use o comando de Panelização Externa.
+
+Dica: Para alterar o diretório por meio de um comando, use M-c (cd rápido).
+
+Nota: Comandos de shell não vão funcionar quando você está em um sistema de
+arquivos não-local.
+
+Dica: Traga texto de volta dos mortos com C-y
+
+Dica: Algumas de suas teclas não estão funcionando? Dê uma olhada em
+Opções/Aprender teclas.
+
+Dica: Para ver a saída de um comando no visualizador, use M-!
+
+Dica: F13 (ou Shift-F3) chama o visualizador no modo crú.
+
+Dica: você pode especificar o editor para F4 com a variável shell EDITOR.
+
+Dica: Você pode especificar o visualizador externo com as variáveis shell
+VIEWER ou PAGER.
+
+Dica: você pode disabilitar todas requisições por confirmação em
+Opções/Confirmação.
+
+Hint: Leap to frequently used directories in a single bound with C-.
+
+Dica: Você pode usar FTP anonimamente com mc digitando 'cd
+ftp://maquina.edu'
+
+Dica: FTP está embutido no Midight Commander, verifique o menu Arquivo/FTP
+
+Dica: M-t altera rapidamente o modo de listagem.
+
+Dica: Você pode especificar o nome de usuário quando utilizando ftps: 'cd
+ftp://usuario@maquina.edu'
+
+Dica: Você pode acessar arquivos RPM digitando enter em cima de um arquivo
+rpm.
+
+Dica: Para marcar diretórios na caixa de diálogo selecionada,  adicione ao
+final uma barra.
+
+Dica: Para usar o recortar e colar com mouse, pode ser necessário estar
+segurando a tecla shift
+
+Hint: Key frequently visited ftp sites in the hotlist: type C-.
+

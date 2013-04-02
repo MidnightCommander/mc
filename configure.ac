@@ -274,21 +274,7 @@ dnl ############################################################################
 AM_GNU_GETTEXT(no-libtool, need-ngettext)
 AM_GNU_GETTEXT_VERSION(0.14.3)
 
-if test "x$USE_INCLUDED_LIBINTL" = xyes; then
-    CPPFLAGS="$CPPFLAGS -I\$(top_builddir)/intl -I\$(top_srcdir)/intl"
-fi
-
-dnl User visible support for charset conversion.
-AC_ARG_ENABLE([charset],
-    AS_HELP_STRING([--enable-charset], [Support for charset selection and conversion @<:@yes@:>@]))
-have_charset=
-charset_msg="no"
-if test "x$enable_charset" != "xno"; then
-    AC_DEFINE(HAVE_CHARSET, 1, [Define to enable charset selection and conversion])
-    have_charset=yes
-    charset_msg="yes"
-fi
-
+MC_I18N
 
 dnl ############################################################################
 dnl OS specific flags
@@ -616,7 +602,10 @@ misc/syntax/Makefile
 misc/syntax/Syntax
 
 doc/Makefile
+
 doc/hints/Makefile
+doc/hints/l10n/Makefile
+
 doc/man/Makefile
 doc/man/es/Makefile
 doc/man/hu/Makefile

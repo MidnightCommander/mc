@@ -1,0 +1,101 @@
+Consello: C-x t copia os nomes dos ficheiros marcados na liña de ordes.
+
+Consello: C-x p copia a ruta actual na liña de ordes.
+
+Consello: M-Tab (ou ESC+Tab) completa ordes/nomes  Dúas veces devolve unha
+lista.
+
+Consello: M-p e M-n accede ao historial de ordes.
+
+Consello: para introducir un carácter especial: Ctrl-q e o carácter.
+
+Consello: canso desas mensaxes? Desactíveos desde o menú Opcións/Deseño.
+
+Consello: para seleccionar directorios: engada unha barra «/» na fin do
+patrón de busca.
+
+Consello: se o seu terminal non ten teclas de función, use ESC+número.
+
+Consello: a páxina principal de GNU Midnight Commander é:
+http://www.midnight-commander.org/
+
+Consello: informe de calquera erro a mc-devel@gnome.org
+
+Consello: a tecla Tab cambia o seu panel actual.
+
+Consello: o mellor VFS! Prema Intro nun arquivo «tar» para examinar o seu
+contido.
+
+Suxestión: temos tamén unha páxina de manual: «man mc»
+
+Consello: quere navegar ao estilo «Lynx» coas frechas? axústeo no cadro de
+diálogo de configuración.
+
+Consello: as macros con % funcionan incluso na liña de ordes.
+
+Consello: con M-! poderá executar programas e ver a saída no visor.
+
+Consello: pode personalizar o formato de listado de ficheiros; vexa «man.mc»
+para obter máis detalles.
+
+Consello: %D/%T expande os ficheiros marcados no panel oposto.
+
+Consello: quere o shell normal? prema C-o, e para volver a MC prema C-o de
+novo.
+
+Consello: configurar a variable CDPATH pode aforrarlle escritura nas ordes
+«cd».
+
+Consello: para ver os ficheiros «.*» abonda indicalo no dialogo de
+configuración.
+
+Consello: para ver os ficheiros de copia de seguranza tipo *~ fagao no
+dialogo de configuración.
+
+Consello: Tamén se poden auto-completar nomes nos diálogos con lt-Tab.
+
+Consello: en terminais lentos pode ser de axuda a opción -s.
+
+Consello: pode poñer no panel os resultados de «Buscar ficheiro» e usalos.
+
+Consello: pode facer e gardar buscas complexas con «Buscas externas».
+
+Consello: escribindo M-c cambiar de directorio é un chisco máis doado.
+
+Nota: as ordes da consola non funcionan fora do sistema local.
+
+Consello: Con C-y pode recuperar texto eliminado.
+
+Consello: algunha tecla rebelde? Pode educala con «Redefinir teclas».
+
+Consello: para ver a saída dunha orde, use M-!
+
+Consello: F13 (ou Maiús-F3) invoca ao visor en modo «sen formato».
+
+Consello: F4 pode usar calquera editor que lle indiquemos na variábel
+EDITOR.
+
+Consello: pódese empregar un visor externo indicándoo na variábel PAGER.
+
+Consello: Para desactivar as mensaxes de confirmación fagao no menú Opcións.
+
+Hint: Leap to frequently used directories in a single bound with C-.
+
+Consello: para facer un FTP anónimo con mc: «cd ftp://maquina.dominio»
+
+Consello: FTP está integrado en Midnight Commander, en «Conexión por FTP».
+
+Consello: M-t cambia rapidamente entre varios modos de listaxe.
+
+Consello: para especificar o nome de usuario ao facer un FTP: «cd
+ftp://usuario@maquina.dominio»
+
+Consello: pode examinar un ficheiro RPM premendo Intro sobre del.
+
+Consello: para marcar os directorios no cadro de diálogo de selección,
+engada unha barra «/».
+
+Consello: para cortar e pegar co rato manteña premida a tecla Maiús.
+
+Hint: Key frequently visited ftp sites in the hotlist: type C-.
+
