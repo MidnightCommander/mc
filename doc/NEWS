@@ -1,3 +1,42 @@
+Version 4.8.8
+
+- Core
+
+  * Make copy/move progress dialog window wider up to 2/3 of screen width (#2076)
+  * Ask file name before create new file in editor (#2585)
+  * Support newer extended mouse protocol SGR-1006 instead of URXVT-1015 (#2956)
+  * Allow skip directory scanning before file operation. Print directory count and size in addition to directory name (#2101)
+  * Add jump support to target line in some external editors and viewers (#2206) 
+
+- Editor
+
+  * Update syntax highlighting:
+    - Jal programming language (#2855)
+    - gplink configuration files (.lkr extension) (#2855)
+    - Makefile with .mak extension (#2896)
+    - ZSH configuration files (#2950)
+    - Fortran (#2962) 
+
+- Misc
+
+  * Code cleanup (#2944, #2954)
+  * Report real compiler in MC_CHECK_ONE_CFLAG instead of 'gcc'
+  * Hints files now translated via Transifex (#2980) 
+
+- Fixes
+
+  * Segfault in file operation due to unhandled regexp error (#2493)
+  * Tab completion vs. spaces and escaping (#55)\
+  * Special chars are not escaped in autocompletion of filenames (#2626)
+  * Buttons in the 'Directory hotlist' window are placed incorrectly (#2958)
+  * Mouse doesn't select text in subshell in native console (#2964)
+  * Mouse click below non-droppeddown menubar activates menu box (#2971)
+  * Insufficient quoting and wrong message in user menu (#2947)
+  * mcedit: floating point exception (division by zero) (#2953)
+  * mcedit: broken autocompletion (#2957)
+  * mcview: broken magic mode (#2976)
+  * Broken opening of .war archives (#2974) 
+
 Version 4.8.7
 
 - Core
