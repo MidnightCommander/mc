@@ -5,15 +5,15 @@
 # Translators:
 #   <aryaz.egh@gmail.com>, 2012.
 #   <monta2009@gmail.com>, 2012.
-# Sina Saharkhiz <sinas1991@gmail.com>, 2012.
+# Sina Saharkhiz <sinas1991@gmail.com>, 2012-2013.
 # Slava Zanko <slavazanko@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-03-12 13:28+0400\n"
-"PO-Revision-Date: 2012-12-28 08:17+0000\n"
-"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
+"POT-Creation-Date: 2013-04-02 12:37+0300\n"
+"PO-Revision-Date: 2013-03-13 08:51+0000\n"
+"Last-Translator: Sina Saharkhiz <sinas1991@gmail.com>\n"
 "Language-Team: Persian (http://www.transifex.com/projects/p/mc/language/"
 "fa/)\n"
 "Language: fa\n"
@@ -26,11 +26,11 @@ msgid "Warning: cannot load codepages list"
 msgstr ""
 
 msgid "7-bit ASCII"
-msgstr ""
+msgstr "ASCII ۷  بیتی"
 
 #, c-format
 msgid "Cannot translate from %s to %s"
-msgstr ""
+msgstr "امکان ترجمه از %s به %s وجود ندارد"
 
 msgid "Event system already initialized"
 msgstr ""
@@ -300,10 +300,10 @@ msgid "Function key 24"
 msgstr "کلید تابع ۲۴"
 
 msgid "A1 key"
-msgstr ""
+msgstr "کلید A1"
 
 msgid "C1 key"
-msgstr ""
+msgstr "کلید C1"
 
 msgid "Plus"
 msgstr "مثبت"
@@ -390,7 +390,7 @@ msgid "Right brace"
 msgstr ""
 
 msgid "Enter"
-msgstr ""
+msgstr "ورود"
 
 msgid "Tab key"
 msgstr "کلید جهش"
@@ -399,13 +399,13 @@ msgid "Space key"
 msgstr "کلید فاصله"
 
 msgid "Slash key"
-msgstr ""
+msgstr "کلید خط مورب"
 
 msgid "Backslash key"
 msgstr ""
 
 msgid "Number sign #"
-msgstr ""
+msgstr "نشان عدد #"
 
 #. TRANSLATORS: Please translate as in "at sign" (@).
 msgid "At sign"
@@ -449,7 +449,7 @@ msgid "bytes transferred"
 msgstr ""
 
 msgid "Starting linear transfer..."
-msgstr ""
+msgstr "شروع انتقال خطی..."
 
 msgid "Getting file"
 msgstr "در حال دریافت فایل"
@@ -459,19 +459,19 @@ msgstr "تغییرات در فایل، از دست رفت"
 
 #, c-format
 msgid "%s is not a directory\n"
-msgstr ""
+msgstr "%s یک پوشه نیست\n"
 
 #, c-format
 msgid "Directory %s is not owned by you\n"
-msgstr ""
+msgstr "پوشه %s متعلق به شما نیست\n"
 
 #, c-format
 msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
+msgstr "امکان قرار دادن اجازه‌های درست برای پوشه %s وجود ندارد\n"
 
 #, c-format
 msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
+msgstr "امکان ساخت پوشه‌ی موقت %s وجود ندارد: %s\n"
 
 #, c-format
 msgid "Temporary files will be created in %s\n"
@@ -700,7 +700,7 @@ msgid "&Dismiss"
 msgstr ""
 
 msgid "Enter search string:"
-msgstr ""
+msgstr "رشته‌ی جستجو را وارد کنید:"
 
 msgid "Cas&e sensitive"
 msgstr ""
@@ -782,7 +782,7 @@ msgid "Goto line (right)"
 msgstr ""
 
 msgid "Enter line:"
-msgstr ""
+msgstr "خط را وارد کنید:"
 
 msgid "ButtonBar|Help"
 msgstr ""
@@ -888,7 +888,7 @@ msgstr ""
 
 #, c-format
 msgid "Cannot open file for writing: %s"
-msgstr ""
+msgstr "امکان باز کردن فایل برای نوشتن وجود ندارد: %s"
 
 msgid "The file you are saving is not finished with a newline"
 msgstr "فایلی که در حال ذخیره‌اش هستید، با خط خالی به پایان نرسیده است"
@@ -897,7 +897,7 @@ msgid "C&ontinue"
 msgstr "ادامه"
 
 msgid "&Do not change"
-msgstr ""
+msgstr "تغییر ندهید"
 
 msgid "&Unix format (LF)"
 msgstr ""
@@ -982,7 +982,7 @@ msgid "&Save"
 msgstr "ذخیره"
 
 msgid "Load"
-msgstr ""
+msgstr "بارگیری"
 
 msgid "Syntax file edit"
 msgstr ""
@@ -991,7 +991,7 @@ msgid "Which syntax file you want to edit?"
 msgstr ""
 
 msgid "&User"
-msgstr ""
+msgstr "کاربر"
 
 msgid "&System wide"
 msgstr ""
@@ -1049,7 +1049,7 @@ msgid "Save block"
 msgstr ""
 
 msgid "Insert file"
-msgstr ""
+msgstr "درج فایل"
 
 msgid "Cannot insert file"
 msgstr ""
@@ -1150,7 +1150,7 @@ msgid "NoName"
 msgstr ""
 
 msgid "&Open file..."
-msgstr ""
+msgstr "باز کردن فایل..."
 
 msgid "&New"
 msgstr "جدید"
@@ -1162,7 +1162,7 @@ msgid "Save &as..."
 msgstr ""
 
 msgid "&Insert file..."
-msgstr ""
+msgstr "درج فایل..."
 
 msgid "Cop&y to file..."
 msgstr ""
@@ -1288,7 +1288,7 @@ msgid "Change spelling &language..."
 msgstr ""
 
 msgid "&Mail..."
-msgstr ""
+msgstr "نامه..."
 
 msgid "Insert &literal..."
 msgstr ""
@@ -1300,7 +1300,7 @@ msgid "&Format paragraph"
 msgstr ""
 
 msgid "&Sort..."
-msgstr ""
+msgstr "مرتب‌سازی..."
 
 msgid "&Paste output of..."
 msgstr ""
@@ -1327,7 +1327,7 @@ msgid "&List..."
 msgstr ""
 
 msgid "&General..."
-msgstr ""
+msgstr "عمومی..."
 
 msgid "Save &mode..."
 msgstr ""
@@ -1608,9 +1608,8 @@ msgstr ""
 msgid "Use internal vie&w"
 msgstr ""
 
-#, fuzzy
 msgid "A&sk new file name"
-msgstr "نام فایل را وارد کنید:"
+msgstr ""
 
 msgid "Auto m&enus"
 msgstr ""
@@ -1676,7 +1675,7 @@ msgid "A&uto save panels setup"
 msgstr ""
 
 msgid "Navigation"
-msgstr ""
+msgstr "جهت یابی"
 
 msgid "L&ynx-like motion"
 msgstr ""
@@ -1786,7 +1785,7 @@ msgid "&Select"
 msgstr ""
 
 msgid "Directory tree"
-msgstr ""
+msgstr "درخت پوشه‌ها"
 
 msgid "Timeout for freeing VFSs (sec):"
 msgstr ""
@@ -1831,10 +1830,10 @@ msgid "&Stop"
 msgstr ""
 
 msgid "&Resume"
-msgstr ""
+msgstr "ادامه"
 
 msgid "&Kill"
-msgstr ""
+msgstr "کشتن"
 
 msgid "Background jobs"
 msgstr ""
@@ -1943,10 +1942,10 @@ msgid "User name"
 msgstr "نام کاربر"
 
 msgid "<Unknown user>"
-msgstr ""
+msgstr "<کاربر ناشناخته>"
 
 msgid "<Unknown group>"
-msgstr ""
+msgstr "<گروه ناشناخته>"
 
 msgid "Enter machine name (F1 for details):"
 msgstr ""
@@ -1958,7 +1957,7 @@ msgid "Cannot change directory"
 msgstr ""
 
 msgid "Filter"
-msgstr ""
+msgstr "فیلتر"
 
 msgid "Set expression for filtering filenames"
 msgstr ""
@@ -1977,11 +1976,11 @@ msgid "Link %s to:"
 msgstr ""
 
 msgid "Link"
-msgstr ""
+msgstr "پیوند"
 
 #, c-format
 msgid "link: %s"
-msgstr ""
+msgstr "پیوند: %s"
 
 #, c-format
 msgid "symlink: %s"
@@ -1992,7 +1991,7 @@ msgid "Cannot chdir to \"%s\""
 msgstr ""
 
 msgid "View file"
-msgstr ""
+msgstr "مشاهده‌ی فایل"
 
 msgid "Filename:"
 msgstr "نام فایل:"
@@ -2003,15 +2002,14 @@ msgstr ""
 msgid "Filter command and arguments:"
 msgstr ""
 
-#, fuzzy
 msgid "Edit file"
-msgstr "ویرایش فایل‌ها"
+msgstr ""
 
 msgid "Create a new Directory"
-msgstr ""
+msgstr "ساخت پوشه‌ی جدید"
 
 msgid "Enter directory name:"
-msgstr ""
+msgstr "نام پوشه را وارد کنید:"
 
 msgid "Select"
 msgstr "انتخاب"
@@ -2122,7 +2120,7 @@ msgid "Cannot read directory contents"
 msgstr ""
 
 msgid "Parameter"
-msgstr ""
+msgstr "پارامتر"
 
 #, c-format
 msgid ""
@@ -2197,11 +2195,11 @@ msgid " with source mask:"
 msgstr ""
 
 msgid "to:"
-msgstr ""
+msgstr "به:"
 
 #, c-format
 msgid "%s?"
-msgstr ""
+msgstr "%s؟"
 
 msgid "Cannot make the hardlink"
 msgstr ""
@@ -2462,7 +2460,7 @@ msgid "S&uspend"
 msgstr ""
 
 msgid "Con&tinue"
-msgstr ""
+msgstr "ادامه"
 
 #, c-format
 msgid "%d:%02d.%02d"
@@ -2508,7 +2506,7 @@ msgid "Overwrite all targets?"
 msgstr ""
 
 msgid "&Update"
-msgstr ""
+msgstr "به‌روز رسانی"
 
 msgid "If &size differs"
 msgstr ""
@@ -2583,20 +2581,20 @@ msgid "&Chdir"
 msgstr ""
 
 msgid "&Again"
-msgstr ""
+msgstr "دوباره"
 
 msgid "Pane&lize"
 msgstr ""
 
 msgid "&View - F3"
-msgstr ""
+msgstr "مشاهده - F3"
 
 msgid "&Edit - F4"
-msgstr ""
+msgstr "ویرایش - F4"
 
 #, c-format
 msgid "Found: %ld"
-msgstr ""
+msgstr "یافت شد: %ld"
 
 msgid "Malformed regular expression"
 msgstr ""
@@ -2657,7 +2655,7 @@ msgid "Searching"
 msgstr "در حال جستجو"
 
 msgid "Change &to"
-msgstr ""
+msgstr "تغییر به"
 
 msgid "&Free VFSs now"
 msgstr ""
@@ -2669,16 +2667,16 @@ msgid "&Add current"
 msgstr ""
 
 msgid "&Up"
-msgstr ""
+msgstr "بالا"
 
 msgid "New &group"
-msgstr ""
+msgstr "گروه جدید"
 
 msgid "New &entry"
 msgstr ""
 
 msgid "&Insert"
-msgstr ""
+msgstr "درج"
 
 msgid "&Remove"
 msgstr ""
@@ -2855,10 +2853,10 @@ msgid "Console output"
 msgstr "خروجی کنسول"
 
 msgid "&Vertical"
-msgstr ""
+msgstr "عمودی"
 
 msgid "&Horizontal"
-msgstr ""
+msgstr "افقی"
 
 msgid "Output lines:"
 msgstr "خط‌های خروجی:"
@@ -2906,7 +2904,7 @@ msgid "&Rescan"
 msgstr ""
 
 msgid "&View"
-msgstr ""
+msgstr "مشاهده"
 
 msgid "Vie&w file..."
 msgstr ""
@@ -2921,7 +2919,7 @@ msgid "C&hmod"
 msgstr ""
 
 msgid "&Link"
-msgstr ""
+msgstr "پیوند"
 
 msgid "&Symlink"
 msgstr ""
@@ -2957,7 +2955,7 @@ msgid "&Invert selection"
 msgstr ""
 
 msgid "E&xit"
-msgstr ""
+msgstr "خروج"
 
 msgid "&User menu"
 msgstr ""
@@ -3052,13 +3050,13 @@ msgid "&Above"
 msgstr ""
 
 msgid "&Left"
-msgstr ""
+msgstr "چپ"
 
 msgid "&Below"
-msgstr ""
+msgstr "زیر"
 
 msgid "&Right"
-msgstr ""
+msgstr "راست"
 
 msgid "ButtonBar|Menu"
 msgstr ""
@@ -3097,7 +3095,7 @@ msgid "sort|v"
 msgstr ""
 
 msgid "&Version"
-msgstr ""
+msgstr "نسخه"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3221,7 +3219,7 @@ msgid "Add to external panelize"
 msgstr ""
 
 msgid "Enter command label:"
-msgstr ""
+msgstr "برچسب فرمان را وارد کنید:"
 
 msgid "Cannot invoke command."
 msgstr ""
@@ -3348,7 +3346,7 @@ msgid "Cannot find node %s in help file"
 msgstr ""
 
 msgid "Help"
-msgstr ""
+msgstr "کمک"
 
 msgid "ButtonBar|Index"
 msgstr ""
@@ -3574,7 +3572,7 @@ msgstr ""
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr ""
+msgstr "اخطار: پوشه‌ی %s را نمی‌توان باز کرد\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
@@ -3608,7 +3606,7 @@ msgstr ""
 
 #, c-format
 msgid "%s: done."
-msgstr ""
+msgstr "%s: انجام شد."
 
 #, c-format
 msgid "%s: failure"
@@ -3676,7 +3674,7 @@ msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: برقراری ارتباط با %s"
 
 msgid "ftpfs: connection interrupted by user"
-msgstr ""
+msgstr "ftpfs: ارتباط توسط کاربر قطع شد"
 
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
@@ -4013,6 +4011,12 @@ msgid ""
 msgstr ""
 
 msgid "Cannot view: not a regular file"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot open \"%s\" in magic mode\n"
+"%s"
 msgstr ""
 
 msgid "Seeking to search result"
