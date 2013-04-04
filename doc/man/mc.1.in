@@ -338,9 +338,9 @@ User\-defined keymap\-file is searched on the following algorithm (to the first 
 .IP
 .br
 1) command line option
-.B \-K \<keymap\>
+.B \-K <keymap>
 or
-.B \-\-keymap=\<keymap\>
+.B \-\-keymap=<keymap>
 .br
 2) Environment variable
 .B MC_KEYMAP
@@ -2770,13 +2770,13 @@ Toggle show of line numbers.
 .B f
 Maximize left panel.
 .PP
-.B \=
+.B =
 Make panels equal in width.
 .PP
-.B \>
+.B >
 Reduce the size of the right panel.
 .PP
-.B \<
+.B <
 Reduce the size of the left panel.
 .PP
 .B c
@@ -3612,9 +3612,9 @@ A skin\-file is searched on the following algorithm (to the first one found):
 .IP
 .br
 1) command line option
-.B \-S \<skin\>
+.B \-S <skin>
 or
-.B \-\-skin=\<skin\>
+.B \-\-skin=<skin>
 .br
 2) Environment variable
 .B MC_SKIN

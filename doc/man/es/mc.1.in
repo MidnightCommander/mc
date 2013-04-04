@@ -351,9 +351,9 @@ a:
 .IP
 .br
 1) Opción de ejecución en línea de órdenes
-.B \-K \<mapa\>
+.B \-K <mapa>
 o
-.B \-\-keymap=\<mapa\>
+.B \-\-keymap=<mapa>
 .br
 2) Variable de entorno
 .B MC_KEYMAP
@@ -3457,9 +3457,9 @@ El archivo se busca, en orden, de varias maneras:
 .IP
 .br
 1) La opción
-.B \-S \<skin\>
+.B \-S <skin>
 o
-.B \-\-skin=\<skin\>
+.B \-\-skin=<skin>
 al ejecutar mc.
 .br
 2) La variable de entorno
