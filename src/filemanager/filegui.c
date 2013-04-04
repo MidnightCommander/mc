@@ -97,6 +97,7 @@
 #else
 #define STRUCT_STATVFS struct statvfs
 #define STATFS statvfs
+
 /* Return true if statvfs works.  This is false for statvfs on systems
    with GNU libc on Linux kernels before 2.6.36, which stats all
    preceding entries in /proc/mounts; that makes df hang if even one
@@ -108,22 +109,13 @@ statvfs_works (void)
     return 1;
 }
 #else
+
 #include <sys/utsname.h>
 #include <sys/statfs.h>
 #define STAT_STATFS2_BSIZE 1
-
-static int
-statvfs_works (void)
-{
-    static int statvfs_works_cache = -1;
-    struct utsname name;
-
-    if (statvfs_works_cache < 0)
-        statvfs_works_cache = (uname (&name) == 0 && 0 <= strverscmp (name.release, "2.6.36"));
-    return statvfs_works_cache;
-}
 #endif
 #endif
+
 #else
 #define STATFS statfs
 #define STRUCT_STATVFS struct statfs
@@ -280,6 +272,29 @@ struct
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+/* Return true if statvfs works.  This is false for statvfs on systems
+   with GNU libc on Linux kernels before 2.6.36, which stats all
+   preceding entries in /proc/mounts; that makes df hang if even one
+   of the corresponding file systems is hard-mounted but not available.  */
+
+#if USE_STATVFS && ! (! STAT_STATVFS && STAT_STATVFS64)
+static int
+statvfs_works (void)
+{
+#if ! (__linux__ && (__GLIBC__ || __UCLIBC__))
+    return 1;
+#else
+    static int statvfs_works_cache = -1;
+    struct utsname name;
+
+    if (statvfs_works_cache < 0)
+        statvfs_works_cache = (uname (&name) == 0 && 0 <= str_verscmp (name.release, "2.6.36"));
+    return statvfs_works_cache;
+}
+#endif
+#endif
+
+/* --------------------------------------------------------------------------------------------- */
 static gboolean
 filegui__check_attrs_on_fs (const char *fs_path)
 {
