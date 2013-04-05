@@ -391,7 +391,7 @@ static void
 exec_extension (const vfs_path_t * filename_vpath, const char *lc_data, int start_line)
 {
     char *shell_string, *export_variables;
-    vfs_path_t *temp_file_name_vpath = NULL;
+    vfs_path_t *script_vpath = NULL;
     int cmd_file_fd;
     FILE *cmd_file;
     char *cmd = NULL;
@@ -426,7 +426,7 @@ exec_extension (const vfs_path_t * filename_vpath, const char *lc_data, int star
      * Sometimes it's not needed (e.g. for %cd and %view commands),
      * but it's easier to create it anyway.
      */
-    cmd_file_fd = mc_mkstemps (&temp_file_name_vpath, "mcext", SCRIPT_SUFFIX);
+    cmd_file_fd = mc_mkstemps (&script_vpath, "mcext", SCRIPT_SUFFIX);
 
     if (cmd_file_fd == -1)
     {
@@ -457,7 +457,7 @@ exec_extension (const vfs_path_t * filename_vpath, const char *lc_data, int star
     {
         char *file_name;
 
-        file_name = vfs_path_to_str (temp_file_name_vpath);
+        file_name = vfs_path_to_str (script_vpath);
         fprintf (cmd_file, "\n/bin/rm -f %s\n", file_name);
         g_free (file_name);
     }
@@ -466,17 +466,17 @@ exec_extension (const vfs_path_t * filename_vpath, const char *lc_data, int star
 
     if ((run_view && !written_nonspace) || is_cd)
     {
-        mc_unlink (temp_file_name_vpath);
-        vfs_path_free (temp_file_name_vpath);
-        temp_file_name_vpath = NULL;
+        mc_unlink (script_vpath);
+        vfs_path_free (script_vpath);
+        script_vpath = NULL;
     }
     else
     {
         char *file_name;
 
-        file_name = vfs_path_to_str (temp_file_name_vpath);
+        file_name = vfs_path_to_str (script_vpath);
         /* Set executable flag on the command file ... */
-        mc_chmod (temp_file_name_vpath, S_IRWXU);
+        mc_chmod (script_vpath, S_IRWXU);
         /* ... but don't rely on it - run /bin/sh explicitly */
         cmd = g_strconcat ("/bin/sh ", file_name, (char *) NULL);
         g_free (file_name);
@@ -490,7 +490,7 @@ exec_extension (const vfs_path_t * filename_vpath, const char *lc_data, int star
         else
         {
             exec_extension_view (cmd, filename_vpath, start_line);
-            mc_unlink (temp_file_name_vpath);
+            mc_unlink (script_vpath);
         }
     }
     else
@@ -510,7 +510,7 @@ exec_extension (const vfs_path_t * filename_vpath, const char *lc_data, int star
 
     exec_cleanup_file_name (filename_vpath, TRUE);
   ret:
-    vfs_path_free (temp_file_name_vpath);
+    vfs_path_free (script_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
