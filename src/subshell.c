@@ -1092,13 +1092,12 @@ exit_subshell (void)
  *
  */
 
-static char *
+static GString *
 subshell_name_quote (const char *s)
 {
-    char *ret, *d;
+    GString *ret;
     const char *su, *n;
     const char *quote_cmd_start, *quote_cmd_end;
-    int c;
 
     if (subshell_type == FISH)
     {
@@ -1111,49 +1110,36 @@ subshell_name_quote (const char *s)
         quote_cmd_end = "'`\"";
     }
 
-    /* Factor 5 because we need \, 0 and 3 other digits per character. */
-    d = ret = g_try_malloc (1 + (5 * strlen (s)) + (strlen (quote_cmd_start))
-                            + (strlen (quote_cmd_end)));
-    if (d == NULL)
-        return NULL;
+    ret = g_string_sized_new (64);
 
     /* Prevent interpreting leading `-' as a switch for `cd' */
-    if (*s == '-')
-    {
-        *d++ = '.';
-        *d++ = '/';
-    }
+    if (s[0] == '-')
+        g_string_append (ret, "./");
 
     /* Copy the beginning of the command to the buffer */
-    strcpy (d, quote_cmd_start);
-    d += strlen (quote_cmd_start);
+    g_string_append (ret, quote_cmd_start);
 
     /*
      * Print every character except digits and letters as a backslash-escape
      * sequence of the form \0nnn, where "nnn" is the numeric value of the
      * character converted to octal number.
      */
-    su = s;
-    for (; su[0] != '\0';)
+    for (su = s; su[0] != '\0'; su = n)
     {
         n = str_cget_next_char_safe (su);
+
         if (str_isalnum (su))
-        {
-            memcpy (d, su, n - su);
-            d += n - su;
-        }
+            g_string_append_len (ret, su, n - su);
         else
         {
+            int c;
+
             for (c = 0; c < n - su; c++)
-            {
-                sprintf (d, "\\0%03o", (unsigned char) su[c]);
-                d += 5;
-            }
+                g_string_append_printf (ret, "\\0%03o", (unsigned char) su[c]);
         }
-        su = n;
     }
 
-    strcpy (d, quote_cmd_end);
+    g_string_append (ret, quote_cmd_end);
 
     return ret;
 }
@@ -1166,7 +1152,6 @@ void
 do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt, gboolean reset_prompt)
 {
     char *pcwd;
-    char *temp;
     char *directory;
 
     pcwd = vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_RECODE);
@@ -1188,25 +1173,19 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt, gboolean re
     write_all (mc_global.tty.subshell_pty, " cd ", 4);
 
     directory = vfs_path_to_str (vpath);
-    if (directory != '\0')
+    if (directory != NULL)
     {
         char *translate;
 
         translate = vfs_translate_path_n (directory);
         if (translate != NULL)
         {
+            GString *temp;
+
             temp = subshell_name_quote (translate);
-            if (temp)
-            {
-                write_all (mc_global.tty.subshell_pty, temp, strlen (temp));
-                g_free (temp);
-            }
-            else
-            {
-                /* Should not happen unless the directory name is so long
-                   that we don't have memory to quote it.  */
-                write_all (mc_global.tty.subshell_pty, ".", 1);
-            }
+            write_all (mc_global.tty.subshell_pty, temp->str, temp->len);
+            g_string_free (temp, TRUE);
+
             g_free (translate);
         }
         else
