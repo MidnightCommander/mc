@@ -182,10 +182,10 @@ label_set_text (WLabel * label, const char *text)
         }
     }
 
+    widget_redraw (w);
+
     if (newcols < w->cols)
         w->cols = newcols;
-
-    widget_redraw (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */
