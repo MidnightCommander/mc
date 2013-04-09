@@ -1,7 +1,7 @@
 /*
    Functions for escaping and unescaping strings
 
-   Copyright (C) 2009, 2011
+   Copyright (C) 2009, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
@@ -26,6 +26,7 @@
 
 #include <config.h>
 
+#include "lib/global.h"
 #include "lib/strescape.h"
 
 /*** global variables ****************************************************************************/

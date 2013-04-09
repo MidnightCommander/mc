@@ -55,7 +55,6 @@
 #include "panel.h"              /* WPanel */
 
 #include "panelize.h"
-#include "panel.h"
 
 /*** global variables ****************************************************************************/
 

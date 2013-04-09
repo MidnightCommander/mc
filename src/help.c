@@ -67,7 +67,6 @@
 #include "lib/event-types.h"
 
 #include "keybind-defaults.h"
-#include "keybind-defaults.h"
 #include "help.h"
 
 /*** global variables ****************************************************************************/

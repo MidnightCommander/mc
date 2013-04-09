@@ -1,7 +1,7 @@
 /*
    UTF-8 strings utilities
 
-   Copyright (C) 2007, 2011
+   Copyright (C) 2007, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
@@ -24,10 +24,8 @@
  */
 
 #include <config.h>
+
 #include <stdlib.h>
-#include <stdio.h>
-#include <errno.h>
-#include <glib.h>
 #include <langinfo.h>
 #include <string.h>
 

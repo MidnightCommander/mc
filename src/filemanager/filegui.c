@@ -108,7 +108,6 @@ statvfs_works (void)
     return 1;
 }
 #else
-#include <string.h>             /* for strverscmp */
 #include <sys/utsname.h>
 #include <sys/statfs.h>
 #define STAT_STATFS2_BSIZE 1

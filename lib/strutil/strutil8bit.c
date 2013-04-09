@@ -1,7 +1,7 @@
 /*
    8bit strings utilities
 
-   Copyright (C) 2007, 2011
+   Copyright (C) 2007, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
@@ -24,9 +24,9 @@
  */
 
 #include <config.h>
-#include <stdio.h>
+
 #include <ctype.h>
-#include <errno.h>
+#include <stdlib.h>
 
 #include "lib/global.h"
 #include "lib/strutil.h"
