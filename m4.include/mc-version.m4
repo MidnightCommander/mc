@@ -9,7 +9,7 @@ dnl @copyright Free Software Foundation, Inc.
 
 AC_DEFUN([MC_VERSION],[
     if test ! -f ${srcdir}/version.h; then
-        ${srcdir}/maint/version.sh ${srcdir}
+        ${srcdir}/maint/utils/version.sh ${srcdir}
     fi
     if test -f ${srcdir}/version.h; then
         VERSION=$(grep '^#define MC_CURRENT_VERSION' ${srcdir}/version.h | sed 's/.*"\(.*\)"$/\1/')

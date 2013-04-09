@@ -27,7 +27,7 @@
 
 #set -e
 
-MC_SOURCE_ROOT_DIR=${MC_SOURCE_ROOT_DIR:-$(dirname $(pwd))}
+MC_SOURCE_ROOT_DIR=${MC_SOURCE_ROOT_DIR:-$(dirname $(dirname $(pwd)))}
 
 #*** include section (source functions, for example) *******************
 

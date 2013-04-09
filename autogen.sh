@@ -23,7 +23,7 @@ set -e
 
 $AUTOPOINT --version >/dev/null 2>&1
 if test $? -ne 0;  then
-    AUTOPOINT=maint/autopoint
+    AUTOPOINT=maint/utils/autopoint
 fi
 
 cd "$srcdir"
@@ -84,7 +84,7 @@ test -f configure || \
   { echo "autoconf failed to generate src/vfs/smbfs/helpers/configure" >&2; exit 1; }
 ) || exit 1
 
-$srcdir/maint/version.sh "$srcdir"
+$srcdir/maint/utils/version.sh "$srcdir"
 
 if test -x $srcdir/configure.mc; then
   $srcdir/configure.mc "$@"
