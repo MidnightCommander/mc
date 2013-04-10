@@ -985,6 +985,8 @@ read_subshell_prompt (void)
     int rc = 0;
     ssize_t bytes = 0;
     struct timeval timeleft = { 0, 0 };
+    GString *p;
+    gboolean prompt_was_reset = FALSE;
 
     fd_set tmp;
     FD_ZERO (&tmp);
@@ -993,6 +995,8 @@ read_subshell_prompt (void)
     /* First time through */
     if (subshell_prompt == NULL)
         subshell_prompt = g_string_sized_new (INITIAL_PROMPT_SIZE);
+
+    p = g_string_sized_new (INITIAL_PROMPT_SIZE);
 
     while (subshell_alive
            && (rc = select (mc_global.tty.subshell_pty + 1, &tmp, NULL, NULL, &timeleft)) != 0)
@@ -1017,13 +1021,20 @@ read_subshell_prompt (void)
         bytes = read (mc_global.tty.subshell_pty, pty_buffer, sizeof (pty_buffer));
 
         /* Extract the prompt from the shell output */
-        g_string_set_size (subshell_prompt, 0);
         for (i = 0; i < bytes; i++)
             if (pty_buffer[i] == '\n' || pty_buffer[i] == '\r')
-                g_string_set_size (subshell_prompt, 0);
+            {
+                g_string_set_size (p, 0);
+                prompt_was_reset = TRUE;
+            }
             else if (pty_buffer[i] != '\0')
-                g_string_append_c (subshell_prompt, pty_buffer[i]);
+                g_string_append_c (p, pty_buffer[i]);
     }
+
+    if (p->len != 0 || prompt_was_reset)
+        g_string_assign (subshell_prompt, p->str);
+
+    g_string_free (p, TRUE);
 
     return (rc != 0 || bytes != 0);
 }
