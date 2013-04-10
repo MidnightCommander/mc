@@ -729,12 +729,11 @@ strip_ctrl_codes (char *s)
 {
     char *w;                    /* Current position where the stripped data is written */
     char *r;                    /* Current position where the original data is read */
-    char *n;
 
-    if (!s)
-        return 0;
+    if (s == NULL)
+        return NULL;
 
-    for (w = s, r = s; *r;)
+    for (w = s, r = s; *r != '\0';)
     {
         if (*r == ESC_CHAR)
         {
@@ -743,7 +742,8 @@ strip_ctrl_codes (char *s)
             if (*(++r) == '[' || *r == '(')
             {
                 /* strchr() matches trailing binary 0 */
-                while (*(++r) && strchr ("0123456789;?", *r));
+                while (*(++r) != '\0' && strchr ("0123456789;?", *r) != NULL)
+                    ;
             }
             else if (*r == ']')
             {
@@ -755,7 +755,7 @@ strip_ctrl_codes (char *s)
                  */
                 char *new_r = r;
 
-                for (; *new_r; ++new_r)
+                for (; *new_r != '\0'; ++new_r)
                 {
                     switch (*new_r)
                     {
@@ -772,27 +772,32 @@ strip_ctrl_codes (char *s)
                         }
                     }
                 }
-              osc_out:;
+              osc_out:
+                ;
             }
 
             /*
              * Now we are at the last character of the sequence.
              * Skip it unless it's binary 0.
              */
-            if (*r)
+            if (*r != '\0')
                 r++;
-            continue;
         }
-
-        n = str_get_next_char (r);
-        if (str_isprint (r))
+        else
         {
-            memmove (w, r, n - r);
-            w += n - r;
+            char *n;
+
+            n = str_get_next_char (r);
+            if (str_isprint (r))
+            {
+                memmove (w, r, n - r);
+                w += n - r;
+            }
+            r = n;
         }
-        r = n;
     }
-    *w = 0;
+
+    *w = '\0';
     return s;
 }
 
