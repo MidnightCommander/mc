@@ -167,8 +167,6 @@ struct WEdit
     /* line break */
     LineBreaks lb;
     gboolean extmod;
-
-    char *labels[10];
 };
 
 /*** global variables defined in .c file *********************************************************/
