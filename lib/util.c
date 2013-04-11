@@ -407,7 +407,6 @@ size_trunc_sep (uintmax_t size, gboolean use_si)
  *
  * Units: size units (filesystem sizes are 1K blocks)
  *    0=bytes, 1=Kbytes, 2=Mbytes, etc.
- *    -1 means maximum possible unit for specified size
  */
 
 void
@@ -463,16 +462,6 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
     else if (len > 9)
         len = 9;
 #endif
-
-    /* find maximum unit */
-    if (units < 0)
-    {
-        const unsigned int divider = use_si ? 1000 : 1024;
-        uintmax_t size_remain = size;
-
-        for (units = 0; size_remain >= divider; units++)
-            size_remain /= divider;
-    }
 
     /*
      * recalculate from 1024 base to 1000 base if units>0
