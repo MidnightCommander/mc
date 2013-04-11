@@ -174,11 +174,7 @@ static struct termios shell_mode;
 /* are delivered to the shell pty */
 static struct termios raw_mode;
 
-/* This counter indicates how many characters of prompt we have read */
-/* FIXME: try to figure out why this had to become global */
-static int prompt_pos;
-
-
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -935,7 +931,7 @@ invoke_subshell (const char *command, int how, vfs_path_t ** new_dir_vpath)
 
     /* Make the subshell change to MC's working directory */
     if (new_dir_vpath != NULL)
-        do_subshell_chdir (current_panel->cwd_vpath, TRUE, TRUE);
+        do_subshell_chdir (current_panel->cwd_vpath, TRUE);
 
     if (command == NULL)        /* The user has done "C-o" from MC */
     {
@@ -970,8 +966,6 @@ invoke_subshell (const char *command, int how, vfs_path_t ** new_dir_vpath)
     /* Restart the subshell if it has died by SIGHUP, SIGQUIT, etc. */
     while (!subshell_alive && quit == 0 && mc_global.tty.use_subshell)
         init_subshell ();
-
-    prompt_pos = 0;
 
     return quit;
 }
@@ -1157,7 +1151,7 @@ subshell_name_quote (const char *s)
 
 /** If it actually changed the directory it returns true */
 void
-do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt, gboolean reset_prompt)
+do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt)
 {
     char *pcwd;
 
@@ -1237,8 +1231,6 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt, gboolean re
         }
     }
 
-    if (reset_prompt)
-        prompt_pos = 0;
     update_subshell_prompt = FALSE;
 
     g_free (pcwd);
