@@ -45,7 +45,8 @@ extern mcview_t *mcview_new (int y, int x, int lines, int cols, gboolean is_pane
  */
 extern gboolean mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_line);
 
-extern gboolean mcview_load (mcview_t * view, const char *command, const char *file, int start_line);
+extern gboolean mcview_load (mcview_t * view, const char *command, const char *file,
+                             int start_line);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__VIEWER_H */

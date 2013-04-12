@@ -411,7 +411,8 @@ exec_extension_cd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static vfs_path_t *
-exec_extension (void *target, const vfs_path_t * filename_vpath, const char *lc_data, int start_line)
+exec_extension (void *target, const vfs_path_t * filename_vpath, const char *lc_data,
+                int start_line)
 {
     char *shell_string, *export_variables;
     vfs_path_t *script_vpath = NULL;
@@ -1047,7 +1048,8 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
                         {
                             vfs_path_t *sv;
 
-                            sv = exec_extension (target, filename_vpath, r + 1, view_at_line_number);
+                            sv = exec_extension (target, filename_vpath, r + 1,
+                                                 view_at_line_number);
                             if (script_vpath != NULL)
                                 *script_vpath = sv;
                             else
