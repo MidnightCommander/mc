@@ -14,6 +14,8 @@
 #include "src/keybind-defaults.h"       /* global_keymap_t */
 #include "src/filemanager/dir.h"        /* dir_list */
 
+#include "mcviewer.h"
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 typedef unsigned char byte;
@@ -87,7 +89,7 @@ typedef struct
 
 struct mcview_nroff_struct;
 
-typedef struct mcview_struct
+struct mcview_struct
 {
     Widget widget;
 
@@ -186,7 +188,8 @@ typedef struct mcview_struct
                                  * Pointer is used here as reference to WPanel::count */
     int *dir_idx;               /* Index of current file in dir structure.
                                  * Pointer is used here as reference to WPanel::count */
-} mcview_t;
+    vfs_path_t *ext_script;     /* Temporary script file created by regex_command_for() */
+};
 
 typedef struct mcview_nroff_struct
 {

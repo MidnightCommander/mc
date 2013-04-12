@@ -9,11 +9,12 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-struct mcview_struct;
-
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
+
+struct mcview_struct;
+typedef struct mcview_struct mcview_t;
 
 /*** global variables defined in .c file *********************************************************/
 
@@ -36,7 +37,7 @@ extern char *mcview_show_eof;
 
 /* Creates a new mcview_t object with the given properties. Caveat: the
  * origin is in y-x order, while the extent is in x-y order. */
-extern struct mcview_struct *mcview_new (int y, int x, int lines, int cols, gboolean is_panel);
+extern mcview_t *mcview_new (int y, int x, int lines, int cols, gboolean is_panel);
 
 
 /* Shows {file} or the output of {command} in the internal viewer,
@@ -44,7 +45,7 @@ extern struct mcview_struct *mcview_new (int y, int x, int lines, int cols, gboo
  */
 extern gboolean mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_line);
 
-extern gboolean mcview_load (struct mcview_struct *, const char *, const char *, int);
+extern gboolean mcview_load (mcview_t * view, const char *command, const char *file, int start_line);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__VIEWER_H */

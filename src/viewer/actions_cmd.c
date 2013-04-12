@@ -3,7 +3,7 @@
    Callback function for some actions (hotkeys, menu)
 
    Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
-   2004, 2005, 2006, 2007, 2009, 2011
+   2004, 2005, 2006, 2007, 2009, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
@@ -15,7 +15,7 @@
    Pavel Machek, 1998
    Roland Illig <roland.illig@gmx.de>, 2004, 2005
    Slava Zanko <slavazanko@google.com>, 2009
-   Andrew Borodin <aborodin@vmail.ru>, 2009
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2013
    Ilia Maslakov <il.smind@gmail.com>, 2009
 
    This file is part of the Midnight Commander.
@@ -63,13 +63,13 @@
 #include "src/filemanager/layout.h"
 #include "src/filemanager/cmd.h"
 #include "src/filemanager/midnight.h"   /* current_panel */
+#include "src/filemanager/ext.h"        /* regex_command_for() */
 
 #include "src/history.h"
 #include "src/execute.h"
 #include "src/keybind-defaults.h"
 
 #include "internal.h"
-#include "mcviewer.h"
 
 /*** global variables ****************************************************************************/
 
@@ -79,7 +79,21 @@
 
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+mcview_remove_ext_script (mcview_t * view)
+{
+    if (view->ext_script != NULL)
+    {
+        mc_unlink (view->ext_script);
+        vfs_path_free (view->ext_script);
+        view->ext_script = NULL;
+    }
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 /* Both views */
@@ -321,7 +335,7 @@ mcview_load_next_prev (mcview_t * view, int direction)
     dir_list *dir;
     int *dir_count, *dir_idx;
     vfs_path_t *vfile;
-    char *file;
+    vfs_path_t *ext_script = NULL;
 
     mcview_load_next_prev_init (view);
     mcview_scan_for_file (view, direction);
@@ -334,15 +348,22 @@ mcview_load_next_prev (mcview_t * view, int direction)
     view->dir_count = NULL;
     view->dir_idx = NULL;
     vfile = vfs_path_append_new (view->workdir_vpath, dir->list[*dir_idx].fname, (char *) NULL);
-    file = vfs_path_to_str (vfile);
-    vfs_path_free (vfile);
     mcview_done (view);
+    mcview_remove_ext_script (view);
     mcview_init (view);
-    mcview_load (view, NULL, file, 0);
-    g_free (file);
+    if (regex_command_for (view, vfile, "View", &ext_script) == 0)
+    {
+        char *file;
+
+        file = vfs_path_to_str (vfile);
+        mcview_load (view, NULL, file, 0);
+        g_free (file);
+    }
+    vfs_path_free (vfile);
     view->dir = dir;
     view->dir_count = dir_count;
     view->dir_idx = dir_idx;
+    view->ext_script = ext_script;
 
     view->dpy_bbar_dirty = FALSE;       /* FIXME */
     view->dirty++;
@@ -623,6 +644,7 @@ mcview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
                 mcview_ok_to_quit (view);
         }
         mcview_done (view);
+        mcview_remove_ext_script (view);
         return MSG_HANDLED;
 
     default:
