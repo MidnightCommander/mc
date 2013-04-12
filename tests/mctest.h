@@ -9,8 +9,7 @@
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #define mctest_add_parameterized_test(tc_core, test_func, test_data_source) {\
-    tcase_add_loop_test (tc_core, test_func, 0, \
-                         sizeof (test_data_source) / sizeof (test_data_source[0])); \
+    tcase_add_loop_test (tc_core, test_func, 0, G_N_ELEMENTS (test_data_source)); \
 }
 
 #define mctest_assert_str_eq(actual_result, etalon_result) { \

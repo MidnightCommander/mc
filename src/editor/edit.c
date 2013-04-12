@@ -271,7 +271,7 @@ edit_find_filter (const vfs_path_t * filename_vpath)
 
     filename = vfs_path_to_str (filename_vpath);
     l = strlen (filename);
-    for (i = 0; i < sizeof (all_filters) / sizeof (all_filters[0]); i++)
+    for (i = 0; i < G_N_ELEMENTS (all_filters); i++)
     {
         e = strlen (all_filters[i].extension);
         if (l > e)

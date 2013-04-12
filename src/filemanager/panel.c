@@ -313,8 +313,6 @@ extern int saving_setup;
 
 /*** file scope macro definitions ****************************************************************/
 
-#define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
-
 #define NORMAL          0
 #define SELECTED        1
 #define MARKED          2

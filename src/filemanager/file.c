@@ -1379,11 +1379,11 @@ panel_operate_generate_prompt (const WPanel * panel, FileOperation operation,
     {
         size_t i;
 
-        for (i = sizeof (op_names1) / sizeof (op_names1[0]); i--;)
+        for (i = G_N_ELEMENTS (op_names1); i-- != 0;)
             op_names1[i] = Q_ (op_names1[i]);
 
 #ifdef ENABLE_NLS
-        for (i = sizeof (prompt_parts) / sizeof (prompt_parts[0]); i--;)
+        for (i = G_N_ELEMENTS (prompt_parts); i-- != 0;)
             prompt_parts[i] = _(prompt_parts[i]);
 
         one_format = _(one_format);
@@ -2680,7 +2680,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     static gboolean i18n_flag = FALSE;
     if (!i18n_flag)
     {
-        for (i = sizeof (op_names) / sizeof (op_names[0]); i--;)
+        for (i = G_N_ELEMENTS (op_names); i-- != 0;)
             op_names[i] = Q_ (op_names[i]);
         i18n_flag = TRUE;
     }

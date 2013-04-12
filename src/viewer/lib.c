@@ -230,7 +230,7 @@ mcview_init (mcview_t * view)
     view->search_end = 0;
 
     view->marker = 0;
-    for (i = 0; i < sizeof (view->marks) / sizeof (view->marks[0]); i++)
+    for (i = 0; i < G_N_ELEMENTS (view->marks); i++)
         view->marks[i] = 0;
 
     view->update_steps = 0;
