@@ -2,8 +2,11 @@
    Concurrent shell support for the Midnight Commander
 
    Copyright (C) 1994, 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
-   2005, 2006, 2007, 2011
+   2005, 2006, 2007, 2011, 2013
    The Free Software Foundation, Inc.
+
+   Written by:
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -958,13 +961,7 @@ invoke_subshell (const char *command, int how, vfs_path_t ** new_dir_vpath)
 
     feed_subshell (how, FALSE);
 
-    {
-        char *cwd_str;
-
-        cwd_str = vfs_path_to_str (current_panel->cwd_vpath);
-        pcwd = vfs_translate_path_n (cwd_str);
-        g_free (cwd_str);
-    }
+    pcwd = vfs_translate_path_n (vfs_path_as_str (current_panel->cwd_vpath));
 
     if (new_dir_vpath != NULL && subshell_alive && strcmp (subshell_cwd, pcwd))
         *new_dir_vpath = vfs_path_from_str (subshell_cwd);      /* Make MC change to the subshell's CWD */
@@ -1152,7 +1149,6 @@ void
 do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt, gboolean reset_prompt)
 {
     char *pcwd;
-    char *directory;
 
     pcwd = vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_RECODE);
 
@@ -1172,12 +1168,11 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt, gboolean re
        because we set "HISTCONTROL=ignorespace") */
     write_all (mc_global.tty.subshell_pty, " cd ", 4);
 
-    directory = vfs_path_to_str (vpath);
-    if (directory != NULL)
+    if (vpath != NULL)
     {
         char *translate;
 
-        translate = vfs_translate_path_n (directory);
+        translate = vfs_translate_path_n (vfs_path_as_str (vpath));
         if (translate != NULL)
         {
             GString *temp;
@@ -1197,7 +1192,6 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt, gboolean re
     {
         write_all (mc_global.tty.subshell_pty, "/", 1);
     }
-    g_free (directory);
     write_all (mc_global.tty.subshell_pty, "\n", 1);
 
     subshell_state = RUNNING_COMMAND;

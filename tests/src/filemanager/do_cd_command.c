@@ -142,13 +142,8 @@ START_PARAMETRIZED_TEST (test_empty_mean_home, test_empty_mean_home_ds)
         g_free (input_command);
     }
     /* then */
-    {
-        char *actual_path;
-
-        actual_path = vfs_path_to_str (do_cd__new_dir_vpath__captured);
-        mctest_assert_str_eq (mc_config_get_home_dir__return_value, actual_path);
-        g_free (actual_path);
-    }
+    mctest_assert_str_eq (mc_config_get_home_dir__return_value,
+                          vfs_path_as_str (do_cd__new_dir_vpath__captured));
     mctest_assert_int_eq (do_cd__cd_type__captured, cd_parse_command);
 }
 /* *INDENT-OFF* */

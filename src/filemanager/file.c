@@ -1030,15 +1030,11 @@ erase_file (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_t * v
 {
     int return_status;
     struct stat buf;
-    char *s;
 
-    s = vfs_path_to_str (vpath);
-    file_progress_show_deleting (ctx, s);
+    file_progress_show_deleting (ctx, vfs_path_as_str (vpath));
     if (check_progress_buttons (ctx) == FILE_ABORT)
-    {
-        g_free (s);
         return FILE_ABORT;
-    }
+
     mc_refresh ();
 
     if (tctx->progress_count != 0 && mc_lstat (vpath, &buf) != 0)
@@ -1049,19 +1045,15 @@ erase_file (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_t * v
 
     while (mc_unlink (vpath) != 0 && !ctx->skip_all)
     {
-        return_status = file_error (_("Cannot delete file \"%s\"\n%s"), s);
+        return_status = file_error (_("Cannot delete file \"%s\"\n%s"), vfs_path_as_str (vpath));
         if (return_status == FILE_ABORT)
-        {
-            g_free (s);
             return return_status;
-        }
         if (return_status == FILE_RETRY)
             continue;
         if (return_status == FILE_SKIPALL)
             ctx->skip_all = TRUE;
         break;
     }
-    g_free (s);
     if (tctx->progress_count == 0)
         return FILE_CONT;
     return progress_update_one (tctx, ctx, buf.st_size);
@@ -1236,9 +1228,11 @@ panel_get_file (WPanel * panel)
     if (get_current_type () == view_tree)
     {
         WTree *tree;
+        vfs_path_t *selected_name;
 
         tree = (WTree *) get_panel_widget (get_current_index ());
-        return vfs_path_to_str (tree_selected_name (tree));
+        selected_name = tree_selected_name (tree);
+        return g_strdup (vfs_path_as_str (selected_name));
     }
 
     if (panel->marked != 0)
@@ -2416,13 +2410,8 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
             lp = (struct link *) erase_list->data;
 
             if (S_ISDIR (lp->st_mode))
-            {
-                char *src_path;
 
-                src_path = vfs_path_to_str (lp->src_vpath);
-                return_status = erase_dir_iff_empty (ctx, src_path);
-                g_free (src_path);
-            }
+                return_status = erase_dir_iff_empty (ctx, vfs_path_as_str (lp->src_vpath));
             else
                 return_status = erase_file (tctx, ctx, lp->src_vpath);
 
@@ -2451,9 +2440,6 @@ FileProgressStatus
 erase_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_t * s_vpath)
 {
     FileProgressStatus error;
-    char *s;
-
-    s = vfs_path_to_str (s_vpath);
 
     /*
        if (strcmp (s, "..") == 0)
@@ -2463,12 +2449,9 @@ erase_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_t * s_
        return FILE_SKIP;
      */
 
-    file_progress_show_deleting (ctx, s);
-    if (check_progress_buttons (ctx) == FILE_ABORT)
-    {
-        g_free (s);
-        return FILE_ABORT;
-    }
+    file_progress_show_deleting (ctx, vfs_path_as_str (s_vpath));
+    return FILE_ABORT;
+
     mc_refresh ();
 
     /* The old way to detect a non empty directory was:
@@ -2481,24 +2464,19 @@ erase_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_t * s_
     error = check_dir_is_empty (s_vpath);
     if (error == 0)
     {                           /* not empty */
-        error = query_recursive (ctx, s);
+        error = query_recursive (ctx, vfs_path_as_str (s_vpath));
         if (error == FILE_CONT)
-            error = recursive_erase (tctx, ctx, s);
-        g_free (s);
+            error = recursive_erase (tctx, ctx, vfs_path_as_str (s_vpath));
         return error;
     }
 
-    while (my_rmdir (s) == -1 && !ctx->skip_all)
+    while (my_rmdir (vfs_path_as_str (s_vpath)) == -1 && !ctx->skip_all)
     {
-        error = file_error (_("Cannot remove directory \"%s\"\n%s"), s);
+        error = file_error (_("Cannot remove directory \"%s\"\n%s"), vfs_path_as_str (s_vpath));
         if (error != FILE_RETRY)
-        {
-            g_free (s);
             return error;
-        }
     }
 
-    g_free (s);
     return FILE_CONT;
 }
 
@@ -2581,17 +2559,14 @@ compute_dir_size_update_ui (void *ui, const vfs_path_t * dirname_vpath, size_t d
     ComputeDirSizeUI *this = (ComputeDirSizeUI *) ui;
     int c;
     Gpm_Event event;
-    char *dirname;
     char buffer[BUF_1K];
 
     if (ui == NULL)
         return FILE_CONT;
 
-    dirname = vfs_path_to_str (dirname_vpath);
     g_snprintf (buffer, sizeof (buffer), _("%s\nDirectories: %zd, total size: %s"),
-                str_trunc (dirname, WIDGET (this->dlg)->cols - 6), dir_count,
-                size_trunc_sep (total_size, panels_options.kilobyte_si));
-    g_free (dirname);
+                str_trunc (vfs_path_as_str (dirname_vpath), WIDGET (this->dlg)->cols - 6),
+                dir_count, size_trunc_sep (total_size, panels_options.kilobyte_si));
     label_set_text (this->dirname, buffer);
 
     event.x = -1;               /* Don't show the GPM cursor */
@@ -2658,7 +2633,6 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     char *source = NULL;
 #ifdef WITH_FULL_PATHS
     vfs_path_t *source_with_vpath = NULL;
-    char *source_with_path_str = NULL;
 #else
 #define source_with_path source
 #endif /* !WITH_FULL_PATHS */
@@ -2740,9 +2714,9 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         if (force_single)
             tmp_dest_dir = g_strdup (source);
         else if (get_other_type () == view_listing)
-            tmp_dest_dir = vfs_path_to_str (other_panel->cwd_vpath);
+            tmp_dest_dir = g_strdup (vfs_path_as_str (other_panel->cwd_vpath));
         else
-            tmp_dest_dir = vfs_path_to_str (panel->cwd_vpath);
+            tmp_dest_dir = g_strdup (vfs_path_as_str (panel->cwd_vpath));
         /*
          * Add trailing backslash only when do non-local ops.
          * It saves user from occasional file renames (when destination
@@ -2823,11 +2797,10 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     if (do_bg)
     {
         int v;
-        char *cwd_str;
 
-        cwd_str = vfs_path_to_str (panel->cwd_vpath);
-        v = do_background (ctx, g_strconcat (op_names[operation], ": ", cwd_str, (char *) NULL));
-        g_free (cwd_str);
+        v = do_background (ctx,
+                           g_strconcat (op_names[operation], ": ",
+                                        vfs_path_as_str (panel->cwd_vpath), (char *) NULL));
         if (v == -1)
             message (D_ERROR, MSG_ERROR, _("Sorry, I could not put the job in background"));
 
@@ -2868,7 +2841,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 
     if ((vfs_path_tokens_count (panel->cwd_vpath) != 0)
         && (mc_setctl (panel->cwd_vpath, VFS_SETCTL_STALE_DATA, GUINT_TO_POINTER (1)) != 0))
-        save_cwd = vfs_path_to_str (panel->cwd_vpath);
+        save_cwd = g_strdup (vfs_path_as_str (panel->cwd_vpath));
 
     /* Now, let's do the job */
 
@@ -2899,10 +2872,9 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
             source_with_vpath = vfs_path_from_str (source);
         else
             source_with_vpath = vfs_path_append_new (panel->cwd_vpath, source, (char *) NULL);
-        source_with_path_str = vfs_path_to_str (source_with_vpath);
 #endif /* WITH_FULL_PATHS */
-        if (panel_operate_init_totals (operation, panel, source_with_path_str, ctx, dialog_type) ==
-            FILE_CONT)
+        if (panel_operate_init_totals
+            (operation, panel, vfs_path_as_str (source_with_vpath), ctx, dialog_type) == FILE_CONT)
         {
             if (operation == OP_DELETE)
             {
@@ -2913,7 +2885,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
             }
             else
             {
-                temp = transform_source (ctx, source_with_path_str);
+                temp = transform_source (ctx, vfs_path_as_str (source_with_vpath));
                 if (temp == NULL)
                     value = transform_error;
                 else
@@ -2943,17 +2915,23 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                         ctx->stat_func (source_with_vpath, &src_stat);
 
                         if (S_ISDIR (src_stat.st_mode))
-                            value = copy_dir_dir (tctx, ctx, source_with_path_str, dest,
-                                                  TRUE, FALSE, FALSE, NULL);
+                            value =
+                                copy_dir_dir (tctx, ctx, vfs_path_as_str (source_with_vpath),
+                                              dest, TRUE, FALSE, FALSE, NULL);
                         else
-                            value = copy_file_file (tctx, ctx, source_with_path_str, dest);
+                            value =
+                                copy_file_file (tctx, ctx, vfs_path_as_str (source_with_vpath),
+                                                dest);
                         break;
 
                     case OP_MOVE:
                         if (S_ISDIR (src_stat.st_mode))
-                            value = move_dir_dir (tctx, ctx, source_with_path_str, dest);
+                            value =
+                                move_dir_dir (tctx, ctx, vfs_path_as_str (source_with_vpath), dest);
                         else
-                            value = move_file_file (tctx, ctx, source_with_path_str, dest);
+                            value =
+                                move_file_file (tctx, ctx, vfs_path_as_str (source_with_vpath),
+                                                dest);
                         break;
 
                     default:
@@ -3001,14 +2979,12 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 src_stat = panel->dir.list[i].st;
 
 #ifdef WITH_FULL_PATHS
-                g_free (source_with_path_str);
                 vfs_path_free (source_with_vpath);
                 if (g_path_is_absolute (source2))
                     source_with_vpath = vfs_path_from_str (source2);
                 else
                     source_with_vpath =
                         vfs_path_append_new (panel->cwd_vpath, source2, (char *) NULL);
-                source_with_path_str = vfs_path_to_str (source_with_vpath);
 #endif /* WITH_FULL_PATHS */
 
                 if (operation == OP_DELETE)
@@ -3020,12 +2996,12 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 }
                 else
                 {
-                    temp = transform_source (ctx, source_with_path_str);
+                    temp = transform_source (ctx, vfs_path_as_str (source_with_vpath));
                     if (temp == NULL)
                         value = transform_error;
                     else
                     {
-                        char *temp2, *temp3, *repl_dest;
+                        char *temp2, *temp3, *repl_dest, *source_with_path_str;
 
                         repl_dest = mc_search_prepare_replace_str2 (ctx->search_handle, dest);
                         if (ctx->search_handle->error != MC_SEARCH_E_OK)
@@ -3038,9 +3014,8 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                         temp2 = mc_build_filename (repl_dest, temp, NULL);
                         g_free (temp);
                         g_free (repl_dest);
-                        temp3 = source_with_path_str;
-                        source_with_path_str = strutils_shell_unescape (source_with_path_str);
-                        g_free (temp3);
+                        source_with_path_str =
+                            strutils_shell_unescape (vfs_path_as_str (source_with_vpath));
                         temp3 = temp2;
                         temp2 = strutils_shell_unescape (temp2);
                         g_free (temp3);
@@ -3124,7 +3099,6 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     linklist = free_linklist (linklist);
     dest_dirs = free_linklist (dest_dirs);
 #ifdef WITH_FULL_PATHS
-    g_free (source_with_path_str);
     vfs_path_free (source_with_vpath);
 #endif /* WITH_FULL_PATHS */
     g_free (dest);

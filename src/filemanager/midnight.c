@@ -2,7 +2,7 @@
    Main dialog (file panels) of the Midnight Commander
 
    Copyright (C) 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002,
-   2003, 2004, 2005, 2006, 2007, 2009, 2010, 2011
+   2003, 2004, 2005, 2006, 2007, 2009, 2010, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
@@ -10,6 +10,7 @@
    Janne Kukonlehto, 1994, 1995
    Norbert Warmuth, 1997
    Andrew Borodin <aborodin@vmail.ru>, 2009, 2010
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -684,28 +685,22 @@ create_panels (void)
 static void
 put_current_path (void)
 {
-    char *cwd_path;
+    vfs_path_t *cwd_vpath;
 
     if (!command_prompt)
         return;
 
 #ifdef HAVE_CHARSET
-    {
-        vfs_path_t *cwd_vpath;
-
-        cwd_vpath = remove_encoding_from_path (current_panel->cwd_vpath);
-        cwd_path = vfs_path_to_str (cwd_vpath);
-        vfs_path_free (cwd_vpath);
-    }
+    cwd_vpath = remove_encoding_from_path (current_panel->cwd_vpath);
 #else
-    cwd_path = vfs_path_to_str (current_panel->cwd_vpath);
+    cwd_vpath = vfs_path_clone (current_panel->cwd_vpath);
 #endif
 
-    command_insert (cmdline, cwd_path, FALSE);
-    if (cwd_path[strlen (cwd_path) - 1] != PATH_SEP)
+    command_insert (cmdline, vfs_path_as_str (cwd_vpath), FALSE);
+    if (cwd_vpath->str[strlen (vfs_path_as_str (cwd_vpath)) - 1] != PATH_SEP)
         command_insert (cmdline, PATH_SEP_STR, FALSE);
 
-    g_free (cwd_path);
+    vfs_path_free (cwd_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -713,7 +708,7 @@ put_current_path (void)
 static void
 put_other_path (void)
 {
-    char *cwd_path;
+    vfs_path_t *cwd_vpath;
 
     if (get_other_type () != view_listing)
         return;
@@ -722,22 +717,16 @@ put_other_path (void)
         return;
 
 #ifdef HAVE_CHARSET
-    {
-        vfs_path_t *cwd_vpath;
-
-        cwd_vpath = remove_encoding_from_path (other_panel->cwd_vpath);
-        cwd_path = vfs_path_to_str (cwd_vpath);
-        vfs_path_free (cwd_vpath);
-    }
+    cwd_vpath = remove_encoding_from_path (other_panel->cwd_vpath);
 #else
-    cwd_path = vfs_path_to_str (other_panel->cwd_vpath);
+    cwd_vpath = vfs_path_clone (other_panel->cwd_vpath);
 #endif
 
-    command_insert (cmdline, cwd_path, FALSE);
-    if (cwd_path[strlen (cwd_path) - 1] != PATH_SEP)
+    command_insert (cmdline, vfs_path_as_str (cwd_vpath), FALSE);
+    if (cwd_vpath->str[strlen (vfs_path_as_str (cwd_vpath)) - 1] != PATH_SEP)
         command_insert (cmdline, PATH_SEP_STR, FALSE);
 
-    g_free (cwd_path);
+    vfs_path_free (cwd_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -794,9 +783,12 @@ put_prog_name (void)
 
     if (get_current_type () == view_tree)
     {
-        WTree *tree = (WTree *) get_panel_widget (get_current_index ());
+        WTree *tree;
+        vfs_path_t *selected_name;
 
-        tmp = vfs_path_to_str (tree_selected_name (tree));
+        tree = (WTree *) get_panel_widget (get_current_index ());
+        selected_name = tree_selected_name (tree);
+        tmp = g_strdup (vfs_path_as_str (selected_name));
     }
     else
         tmp = g_strdup (selection (current_panel)->fname);
@@ -922,22 +914,10 @@ done_mc (void)
     g_free (curr_dir);
 
     if ((current_panel != NULL) && (get_current_type () == view_listing))
-    {
-        char *tmp_path;
-
-        tmp_path = vfs_path_to_str (current_panel->cwd_vpath);
-        vfs_stamp_path (tmp_path);
-        g_free (tmp_path);
-    }
+        vfs_stamp_path (vfs_path_as_str (current_panel->cwd_vpath));
 
     if ((other_panel != NULL) && (get_other_type () == view_listing))
-    {
-        char *tmp_path;
-
-        tmp_path = vfs_path_to_str (other_panel->cwd_vpath);
-        vfs_stamp_path (tmp_path);
-        g_free (tmp_path);
-    }
+        vfs_stamp_path (vfs_path_as_str (other_panel->cwd_vpath));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1782,7 +1762,7 @@ do_nc (void)
 
         /* destroy_dlg destroys even current_panel->cwd_vpath, so we have to save a copy :) */
         if (mc_args__last_wd_file != NULL && vfs_current_is_local ())
-            last_wd_string = vfs_path_to_str (current_panel->cwd_vpath);
+            last_wd_string = g_strdup (vfs_path_as_str (current_panel->cwd_vpath));
 
         /* don't handle VFS timestamps for dirs opened in panels */
         mc_event_destroy (MCEVENT_GROUP_CORE, "vfs_timestamp");

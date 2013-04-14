@@ -943,7 +943,11 @@ tree_box (const char *current_dir)
     WIDGET (bar)->y = LINES - 1;
 
     if (run_dlg (dlg) == B_ENTER)
-        val = vfs_path_to_str (tree_selected_name (mytree));
+    {
+        const vfs_path_t *selected_name;
+        selected_name = tree_selected_name (mytree);
+        val = g_strdup (vfs_path_as_str (selected_name));
+    }
 
     destroy_dlg (dlg);
     return val;
@@ -1066,41 +1070,30 @@ void
 symlink_dialog (const vfs_path_t * existing_vpath, const vfs_path_t * new_vpath,
                 char **ret_existing, char **ret_new)
 {
-    char *existing;
-    char *new;
-
-    existing = vfs_path_to_str (existing_vpath);
-    new = vfs_path_to_str (new_vpath);
-
-    {
-        quick_widget_t quick_widgets[] = {
+    quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
             QUICK_LABELED_INPUT (N_("Existing filename (filename symlink will point to):"),
                                  input_label_above,
-                                 existing, "input-2", ret_existing, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
+                                 vfs_path_as_str (existing_vpath), "input-2", ret_existing, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
             QUICK_SEPARATOR (FALSE),
             QUICK_LABELED_INPUT (N_("Symbolic link filename:"), input_label_above,
-                                 new, "input-1", ret_new, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
+                                 vfs_path_as_str (new_vpath), "input-1", ret_new, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
             /* *INDENT-ON* */
-        };
+    };
 
-        quick_dialog_t qdlg = {
-            -1, -1, 64,
-            N_("Symbolic link"), "[File Menu]",
-            quick_widgets, NULL, NULL
-        };
+    quick_dialog_t qdlg = {
+        -1, -1, 64,
+        N_("Symbolic link"), "[File Menu]",
+        quick_widgets, NULL, NULL
+    };
 
-        if (quick_dialog (&qdlg) == B_CANCEL)
-        {
-            *ret_new = NULL;
-            *ret_existing = NULL;
-        }
+    if (quick_dialog (&qdlg) == B_CANCEL)
+    {
+        *ret_new = NULL;
+        *ret_existing = NULL;
     }
-
-    g_free (existing);
-    g_free (new);
 }
 
 /* --------------------------------------------------------------------------------------------- */

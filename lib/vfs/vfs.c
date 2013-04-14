@@ -2,12 +2,13 @@
    Virtual File System switch code
 
    Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2007, 2011
+   2007, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by: 1995 Miguel de Icaza
    Jakub Jelinek, 1995
    Pavel Machek, 1998
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -370,7 +371,7 @@ vfs_translate_path_n (const char *path)
 char *
 vfs_get_current_dir (void)
 {
-    return vfs_path_to_str (current_path);
+    return g_strdup (current_path->str);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -579,8 +580,11 @@ vfs_setup_cwd (void)
 char *
 _vfs_get_cwd (void)
 {
+    const vfs_path_t *current_dir_vpath;
+
     vfs_setup_cwd ();
-    return vfs_path_to_str (vfs_get_raw_current_dir ());
+    current_dir_vpath = vfs_get_raw_current_dir ();
+    return g_strdup (vfs_path_as_str (current_dir_vpath));
 }
 
 /* --------------------------------------------------------------------------------------------- */

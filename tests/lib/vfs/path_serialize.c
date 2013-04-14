@@ -173,19 +173,16 @@ START_TEST (test_path_deserialize)
 {
     /* given */
     vfs_path_t *vpath;
-    char *path;
     GError *error = NULL;
 
     /* when */
     vpath = vfs_path_deserialize (ETALON_SERIALIZED_PATH, &error);
-    path = vfs_path_to_str (vpath);
 
     /* then */
     mctest_assert_ptr_ne (vpath, NULL);
-    mctest_assert_str_eq (path, ETALON_PATH_URL_STR);
+    mctest_assert_str_eq (vfs_path_as_str (vpath), ETALON_PATH_URL_STR);
 
     vfs_path_free (vpath);
-    g_free (path);
 
 }
 /* *INDENT-OFF* */

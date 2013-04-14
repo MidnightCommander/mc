@@ -446,7 +446,6 @@ static vfs_path_t *
 edit_get_save_file_as (WEdit * edit)
 {
     static LineBreaks cur_lb = LB_ASIS;
-    char *filename;
     char *filename_res;
     vfs_path_t *ret_vpath = NULL;
 
@@ -457,12 +456,11 @@ edit_get_save_file_as (WEdit * edit)
         N_("&Macintosh format (CR)")
     };
 
-    filename = vfs_path_to_str (edit->filename_vpath);
-
     {
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
-            QUICK_LABELED_INPUT (N_("Enter file name:"), input_label_above,  filename, "save-as",
+            QUICK_LABELED_INPUT (N_("Enter file name:"), input_label_above,
+                                 vfs_path_as_str (edit->filename_vpath), "save-as",
                                  &filename_res, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
             QUICK_SEPARATOR (TRUE),
             QUICK_LABEL (N_("Change line breaks to:"), NULL),
@@ -489,8 +487,6 @@ edit_get_save_file_as (WEdit * edit)
             g_free (fname);
         }
     }
-
-    g_free (filename);
 
     return ret_vpath;
 }
@@ -2056,12 +2052,10 @@ edit_save_confirm_cmd (WEdit * edit)
 
     if (edit_confirm_save)
     {
-        char *filename;
         gboolean ok;
 
-        filename = vfs_path_to_str (edit->filename_vpath);
-        f = g_strdup_printf (_("Confirm save file: \"%s\""), filename);
-        g_free (filename);
+        f = g_strdup_printf (_("Confirm save file: \"%s\""),
+                             vfs_path_as_str (edit->filename_vpath));
         ok = (edit_query_dialog2 (_("Save file"), f, _("&Save"), _("&Cancel")) == 0);
         g_free (f);
         if (!ok)
@@ -2791,7 +2785,7 @@ edit_ok_to_exit (WEdit * edit)
         return TRUE;
 
     if (edit->filename_vpath != NULL)
-        fname = vfs_path_to_str (edit->filename_vpath);
+        fname = g_strdup (vfs_path_as_str (edit->filename_vpath));
 #ifdef ENABLE_NLS
     else
         fname = g_strdup (_(fname));

@@ -2,13 +2,14 @@
    Virtual File System: External file system.
 
    Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2006, 2007, 2009, 2011
+   2006, 2007, 2009, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
    Jakub Jelinek, 1995
    Pavel Machek, 1998
    Andrew T. Veliath, 1999
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -665,7 +666,6 @@ extfs_which (struct vfs_class *me, const char *path)
 static const char *
 extfs_get_path_int (const vfs_path_t * vpath, struct archive **archive, gboolean do_not_open)
 {
-    char *archive_name;
     int result = -1;
     struct archive *parc;
     int fstype;
@@ -677,8 +677,6 @@ extfs_get_path_int (const vfs_path_t * vpath, struct archive **archive, gboolean
     if (fstype == -1)
         return NULL;
 
-    archive_name = vfs_path_to_str_elements_count (vpath, -1);
-
     /*
      * All filesystems should have some local archive, at least
      * it can be PATH_SEP ('/').
@@ -686,24 +684,22 @@ extfs_get_path_int (const vfs_path_t * vpath, struct archive **archive, gboolean
     for (parc = first_archive; parc != NULL; parc = parc->next)
         if (parc->name != NULL)
         {
-            if (strcmp (parc->name, archive_name) == 0)
+            if (strcmp (parc->name, vfs_path_as_str (vpath)) == 0)
             {
                 vfs_stamp (&vfs_extfs_ops, (vfsid) parc);
                 goto return_success;
             }
         }
 
-    result = do_not_open ? -1 : extfs_read_archive (fstype, archive_name, &parc);
+    result = do_not_open ? -1 : extfs_read_archive (fstype, vfs_path_as_str (vpath), &parc);
     if (result == -1)
     {
         path_element->class->verrno = EIO;
-        g_free (archive_name);
         return NULL;
     }
 
   return_success:
     *archive = parc;
-    g_free (archive_name);
     return path_element->path;
 }
 

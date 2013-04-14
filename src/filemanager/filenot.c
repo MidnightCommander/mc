@@ -3,12 +3,13 @@
    tree about the changes made to the directory
    structure.
 
-   Copyright (C) 2011
+   Copyright (C) 2011, 2013
    The Free Software Foundation, Inc.
 
    Author:
    Janne Kukonlehto
    Miguel de Icaza
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -110,7 +111,7 @@ my_mkdir_rec (char *s, mode_t mode)
         vfs_path_t *vpath;
 
         vpath = vfs_path_from_str (p);
-        q = vfs_path_to_str (vpath);
+        q = g_strdup (vfs_path_as_str (vpath));
         vfs_path_free (vpath);
     }
     g_free (p);
@@ -136,13 +137,8 @@ my_mkdir (const vfs_path_t * s_vpath, mode_t mode)
     result = mc_mkdir (s_vpath, mode);
 
     if (result != 0)
-    {
-        char *p;
+        result = my_mkdir_rec (vfs_path_as_str (s_vpath), mode);
 
-        p = vfs_path_to_str (s_vpath);
-        result = my_mkdir_rec (p, mode);
-        g_free (p);
-    }
     if (result == 0)
     {
         vfs_path_t *my_s;

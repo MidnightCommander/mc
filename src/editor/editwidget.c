@@ -338,13 +338,9 @@ edit_window_list (const WDialog * h)
             if (e->filename_vpath == NULL)
                 fname = g_strdup_printf ("%c [%s]", e->modified ? '*' : ' ', _("NoName"));
             else
-            {
-                char *fname2;
-
-                fname2 = vfs_path_to_str (e->filename_vpath);
-                fname = g_strdup_printf ("%c%s", e->modified ? '*' : ' ', fname2);
-                g_free (fname2);
-            }
+                fname =
+                    g_strdup_printf ("%c%s", e->modified ? '*' : ' ',
+                                     vfs_path_as_str (e->filename_vpath));
 
             listbox_add_item (listbox->list, LISTBOX_APPEND_AT_END, get_hotkey (i++),
                               str_term_trim (fname, WIDGET (listbox->list)->cols - 2), NULL);
@@ -394,9 +390,11 @@ edit_get_title (const WDialog * h, size_t len)
 
     len -= 4;
 
-    filename = vfs_path_to_str (edit->filename_vpath);
-    if (filename == NULL)
+    if (edit->filename_vpath == NULL)
         filename = g_strdup (_("[NoName]"));
+    else
+        filename = g_strdup (vfs_path_as_str (edit->filename_vpath));
+
     file_label = str_term_trim (filename, len - str_term_width1 (_("Edit: ")));
     g_free (filename);
 
@@ -1249,7 +1247,7 @@ edit_files (const GList * files)
 char *
 edit_get_file_name (const WEdit * edit)
 {
-    return vfs_path_to_str (edit->filename_vpath);
+    return g_strdup (vfs_path_as_str (edit->filename_vpath));
 }
 
 /* --------------------------------------------------------------------------------------------- */

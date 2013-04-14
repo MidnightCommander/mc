@@ -2,8 +2,11 @@
    Single File fileSystem
 
    Copyright 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007,
-   2011
+   2011, 2013
    The Free Software Foundation, Inc.
+
+   Written by:
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -157,13 +160,8 @@ sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
         vfs_path_free (s);
     }
     else
-    {
-        char *pname_str;
+        pqname = name_quote (vfs_path_as_str (pname), 0);
 
-        pname_str = vfs_path_to_str (pname);
-        pqname = name_quote (pname_str, 0);
-        g_free (pname_str);
-    }
     vfs_path_free (pname);
 
 
@@ -226,12 +224,9 @@ sfs_redirect (const vfs_path_t * vpath)
     vfs_path_t *cache_vpath;
     int handle;
     const vfs_path_element_t *path_element;
-    char *path;
 
-    path = vfs_path_to_str (vpath);
     path_element = vfs_path_get_by_index (vpath, -1);
-    cur = g_slist_find_custom (head, path, cachedfile_compare);
-    g_free (path);
+    cur = g_slist_find_custom (head, vfs_path_as_str (vpath), cachedfile_compare);
 
     if (cur != NULL)
     {
@@ -250,8 +245,8 @@ sfs_redirect (const vfs_path_t * vpath)
     if (sfs_vfmake (vpath, cache_vpath) == 0)
     {
         cf = g_new (cachedfile, 1);
-        cf->name = vfs_path_to_str (vpath);
-        cf->cache = vfs_path_to_str (cache_vpath);
+        cf->name = g_strdup (vfs_path_as_str (vpath));
+        cf->cache = g_strdup (vfs_path_as_str (cache_vpath));
         head = g_slist_prepend (head, cf);
         vfs_path_free (cache_vpath);
 
@@ -341,10 +336,8 @@ static vfsid
 sfs_getid (const vfs_path_t * vpath)
 {
     GSList *cur;
-    char *path = vfs_path_to_str (vpath);
 
-    cur = g_slist_find_custom (head, path, cachedfile_compare);
-    g_free (path);
+    cur = g_slist_find_custom (head, vfs_path_as_str (vpath), cachedfile_compare);
 
     return (vfsid) (cur != NULL ? cur->data : NULL);
 }

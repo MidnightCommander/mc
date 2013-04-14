@@ -1,8 +1,11 @@
 /*
    Execution routines for GNU Midnight Commander
 
-   Copyright (C) 2003, 2004, 2005, 2007, 2011
+   Copyright (C) 2003, 2004, 2005, 2007, 2011, 2013
    The Free Software Foundation, Inc.
+
+   Written by:
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -187,11 +190,8 @@ execute_prepare_with_vfs_arg (const vfs_path_t * filename_vpath, vfs_path_t ** l
     *localcopy_vpath = mc_getlocalcopy (filename_vpath);
     if (*localcopy_vpath == NULL)
     {
-        char *filename;
-
-        filename = vfs_path_to_str (filename_vpath);
-        message (D_ERROR, MSG_ERROR, _("Cannot fetch a local copy of %s"), filename);
-        g_free (filename);
+        message (D_ERROR, MSG_ERROR, _("Cannot fetch a local copy of %s"),
+                 vfs_path_as_str (filename_vpath));
         return FALSE;
     }
 

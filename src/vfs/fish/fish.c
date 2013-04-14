@@ -3,14 +3,14 @@
    shell connections.
 
    Copyright (C) 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006,
-   2007, 2008, 2009, 2010, 2011
+   2007, 2008, 2009, 2010, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
    Pavel Machek, 1998
    Michal Svec, 2000
    Andrew Borodin <aborodin@vmail.ru>, 2010
-   Slava Zanko <slavazanko@gmail.com>, 2010
+   Slava Zanko <slavazanko@gmail.com>, 2010, 2013
    Ilia Maslakov <il.smind@gmail.com>, 2010
 
    Derived from ftpfs.c.
@@ -1521,7 +1521,7 @@ fish_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t m
                 vfs_path_free (vpath);
                 goto fail;
             }
-            fh->ino->localname = vfs_path_to_str (vpath);
+            fh->ino->localname = g_strdup (vfs_path_as_str (vpath));
             vfs_path_free (vpath);
             close (tmp_handle);
         }

@@ -295,20 +295,15 @@ static int
 compare_files (const vfs_path_t * vpath1, const vfs_path_t * vpath2, off_t size)
 {
     int file1, file2;
-    char *name;
     int result = -1;            /* Different by default */
 
     if (size == 0)
         return 0;
 
-    name = vfs_path_to_str (vpath1);
-    file1 = open (name, O_RDONLY);
-    g_free (name);
+    file1 = open (vfs_path_as_str (vpath1), O_RDONLY);
     if (file1 >= 0)
     {
-        name = vfs_path_to_str (vpath2);
-        file2 = open (name, O_RDONLY);
-        g_free (name);
+        file2 = open (vfs_path_as_str (vpath2), O_RDONLY);
         if (file2 >= 0)
         {
 #ifdef HAVE_MMAP
@@ -1235,12 +1230,10 @@ hotlist_cmd (void)
     else
     {
         vfs_path_t *deprecated_vpath;
-        char *cmd, *normalized_target;
+        char *cmd;
 
         deprecated_vpath = vfs_path_from_str_flags (target, VPF_USE_DEPRECATED_PARSER);
-        normalized_target = vfs_path_to_str (deprecated_vpath);
-        cmd = g_strconcat ("cd ", normalized_target, (char *) NULL);
-        g_free (normalized_target);
+        cmd = g_strconcat ("cd ", vfs_path_as_str (deprecated_vpath), (char *) NULL);
         vfs_path_free (deprecated_vpath);
 
         do_cd_command (cmd);

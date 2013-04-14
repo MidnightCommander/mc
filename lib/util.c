@@ -2,7 +2,7 @@
    Various utilities
 
    Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
-   2004, 2005, 2007, 2009, 2011
+   2004, 2005, 2007, 2009, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
@@ -11,6 +11,7 @@
    Dugan Porter, 1994, 1995, 1996
    Jakub Jelinek, 1994, 1995, 1996
    Mauricio Plaza, 1994, 1995, 1996
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -116,7 +117,7 @@ resolve_symlinks (const vfs_path_t * vpath)
     if (vpath->relative)
         return NULL;
 
-    p = p2 = vfs_path_to_str (vpath);
+    p = p2 = g_strdup (vfs_path_as_str (vpath));
     r = buf = g_malloc (MC_MAXPATHLEN);
     buf2 = g_malloc (MC_MAXPATHLEN);
     *r++ = PATH_SEP;
@@ -1098,7 +1099,6 @@ load_file_position (const vfs_path_t * filename_vpath, long *line, long *column,
     FILE *f;
     char buf[MC_MAXPATHLEN + 100];
     const size_t len = vfs_path_len (filename_vpath);
-    char *filename;
 
     /* defaults */
     *line = 1;
@@ -1115,7 +1115,6 @@ load_file_position (const vfs_path_t * filename_vpath, long *line, long *column,
     /* prepare array for serialized bookmarks */
     if (bookmarks != NULL)
         *bookmarks = g_array_sized_new (FALSE, FALSE, sizeof (size_t), MAX_SAVED_BOOKMARKS);
-    filename = vfs_path_to_str (filename_vpath);
 
     while (fgets (buf, sizeof (buf), f) != NULL)
     {
@@ -1123,7 +1122,7 @@ load_file_position (const vfs_path_t * filename_vpath, long *line, long *column,
         gchar **pos_tokens;
 
         /* check if the filename matches the beginning of string */
-        if (strncmp (buf, filename, len) != 0)
+        if (strncmp (buf, vfs_path_as_str (filename_vpath), len) != 0)
             continue;
 
         /* followed by single space */
@@ -1175,7 +1174,6 @@ load_file_position (const vfs_path_t * filename_vpath, long *line, long *column,
         g_strfreev (pos_tokens);
     }
 
-    g_free (filename);
     fclose (f);
 }
 
@@ -1195,7 +1193,6 @@ save_file_position (const vfs_path_t * filename_vpath, long line, long column, o
     size_t i;
     const size_t len = vfs_path_len (filename_vpath);
     gboolean src_error = FALSE;
-    char *filename;
 
     if (filepos_max_saved_entries == 0)
         filepos_max_saved_entries = mc_config_get_int (mc_main_config, CONFIG_APP_SECTION,
@@ -1220,11 +1217,12 @@ save_file_position (const vfs_path_t * filename_vpath, long line, long column, o
         goto open_source_error;
     }
 
-    filename = vfs_path_to_str (filename_vpath);
     /* put the new record */
     if (line != 1 || column != 0 || bookmarks != NULL)
     {
-        if (fprintf (f, "%s %ld;%ld;%" PRIuMAX, filename, line, column, (uintmax_t) offset) < 0)
+        if (fprintf
+            (f, "%s %ld;%ld;%" PRIuMAX, vfs_path_as_str (filename_vpath), line, column,
+             (uintmax_t) offset) < 0)
             goto write_position_error;
         if (bookmarks != NULL)
             for (i = 0; i < bookmarks->len && i < MAX_SAVED_BOOKMARKS; i++)
@@ -1238,7 +1236,7 @@ save_file_position (const vfs_path_t * filename_vpath, long line, long column, o
     i = 1;
     while (fgets (buf, sizeof (buf), tmp_f) != NULL)
     {
-        if (buf[len] == ' ' && strncmp (buf, filename, len) == 0
+        if (buf[len] == ' ' && strncmp (buf, vfs_path_as_str (filename_vpath), len) == 0
             && strchr (&buf[len + 1], ' ') == NULL)
             continue;
 
@@ -1248,7 +1246,6 @@ save_file_position (const vfs_path_t * filename_vpath, long line, long column, o
     }
 
   write_position_error:
-    g_free (filename);
     fclose (tmp_f);
   open_source_error:
     g_free (tmp_fn);

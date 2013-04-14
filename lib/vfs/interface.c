@@ -1,11 +1,11 @@
 /*
    Virtual File System: interface functions
 
-   Copyright (C) 2011
+   Copyright (C) 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2011
+   Slava Zanko <slavazanko@gmail.com>, 2011, 2013
 
    This file is part of the Midnight Commander.
 
@@ -878,16 +878,12 @@ mc_tmpdir (void)
         g_free (fallback_prefix);
         if (test_fd != -1)
         {
-            char *test_fn;
-
-            test_fn = vfs_path_to_str (test_vpath);
             close (test_fd);
-            test_fd = open (test_fn, O_RDONLY);
-            g_free (test_fn);
+            test_fd = open (vfs_path_as_str (test_vpath), O_RDONLY);
             if (test_fd != -1)
             {
                 close (test_fd);
-                unlink (test_fn);
+                unlink (vfs_path_as_str (test_vpath));
                 fallback_ok = TRUE;
             }
         }

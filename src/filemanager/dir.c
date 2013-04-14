@@ -2,8 +2,11 @@
    Directory routines
 
    Copyright (C) 1994, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2006, 2007, 2011
+   2006, 2007, 2011, 2013
    The Free Software Foundation, Inc.
+
+   Written by:
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -554,7 +557,7 @@ do_load_dir (const vfs_path_t * vpath, dir_list * list, sortfn * sort, gboolean 
     int status, link_to_dir, stale_link;
     int next_free = 0;
     struct stat st;
-    char *path;
+    const char *vpath_str;
 
     /* ".." (if any) must be the first entry in the list */
     if (!set_zero_dir (list))
@@ -573,11 +576,10 @@ do_load_dir (const vfs_path_t * vpath, dir_list * list, sortfn * sort, gboolean 
 
     tree_store_start_check (vpath);
 
+    vpath_str = vfs_path_as_str (vpath);
     /* Do not add a ".." entry to the root directory */
-    path = vfs_path_to_str (vpath);
-    if ((path[0] == PATH_SEP) && (path[1] == '\0'))
+    if ((vpath_str[0] == PATH_SEP) && (vpath_str[1] == '\0'))
         next_free--;
-    g_free (path);
 
     while ((dp = mc_readdir (dirp)) != NULL)
     {

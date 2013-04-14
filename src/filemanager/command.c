@@ -5,8 +5,11 @@
    help from the program's callback.
 
    Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2007, 2011
+   2007, 2011, 2013
    The Free Software Foundation, Inc.
+
+   Written by:
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -399,8 +402,6 @@ do_cd_command (char *orig_cmd)
         }
         else if (strcmp (cmd + operand_pos, "..") == 0)
         {
-            char *str_path;
-
             if (vfs_path_elements_count (current_panel->cwd_vpath) != 1 ||
                 strlen (vfs_path_get_by_index (current_panel->cwd_vpath, 0)->path) > 1)
             {
@@ -410,9 +411,7 @@ do_cd_command (char *orig_cmd)
                     vfs_path_vtokens_get (tmp_vpath, 0, vfs_path_tokens_count (tmp_vpath) - 1);
                 vfs_path_free (tmp_vpath);
             }
-            str_path = vfs_path_to_str (current_panel->cwd_vpath);
-            sync_tree (str_path);
-            g_free (str_path);
+            sync_tree (vfs_path_as_str (current_panel->cwd_vpath));
         }
         else if (cmd[operand_pos] == PATH_SEP)
         {
@@ -420,14 +419,11 @@ do_cd_command (char *orig_cmd)
         }
         else
         {
-            char *str_path;
             vfs_path_t *new_vpath;
 
             new_vpath = vfs_path_append_new (current_panel->cwd_vpath, cmd + operand_pos, NULL);
-            str_path = vfs_path_to_str (new_vpath);
+            sync_tree (vfs_path_as_str (new_vpath));
             vfs_path_free (new_vpath);
-            sync_tree (str_path);
-            g_free (str_path);
         }
     }
     else

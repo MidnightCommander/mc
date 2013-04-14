@@ -2,12 +2,13 @@
    Editor syntax highlighting.
 
    Copyright (C) 1996, 1997, 1998, 2001, 2002, 2003, 2004, 2005, 2006,
-   2007, 2010, 2011
+   2007, 2010, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
    Paul Sheer, 1998
    Egmont Koblinger <egmont@gmail.com>, 2010
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -1484,15 +1485,9 @@ edit_load_syntax (WEdit * edit, char ***pnames, const char *type)
 
     f = mc_config_get_full_path (EDIT_SYNTAX_FILE);
     if (edit != NULL)
-    {
-        char *tmp_f;
-
-        tmp_f = vfs_path_to_str (edit->filename_vpath);
-        r = edit_read_syntax_file (edit, pnames, f, tmp_f,
+        r = edit_read_syntax_file (edit, pnames, f, vfs_path_as_str (edit->filename_vpath),
                                    get_first_editor_line (edit),
                                    option_auto_syntax ? NULL : edit->syntax_type);
-        g_free (tmp_f);
-    }
     else
         r = edit_read_syntax_file (NULL, pnames, f, NULL, "", NULL);
     if (r == -1)
