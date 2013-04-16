@@ -1,12 +1,12 @@
 /* Virtual File System: SFTP file system.
    The VFS subclass functions
 
-   Copyright (C) 2011
+   Copyright (C) 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
    Ilia Maslakov <il.smind@gmail.com>, 2011
-   Slava Zanko <slavazanko@gmail.com>, 2011, 2012
+   Slava Zanko <slavazanko@gmail.com>, 2011, 2012, 2013
 
    This file is part of the Midnight Commander.
 
@@ -58,29 +58,17 @@ static gboolean
 sftpfs_cb_is_equal_connection (const vfs_path_element_t * vpath_element, struct vfs_s_super *super,
                                const vfs_path_t * vpath, void *cookie)
 {
-    int port;
-    char *user_name;
     int result;
+    vfs_path_element_t *orig_connect_info;
 
     (void) vpath;
     (void) cookie;
 
-    if (vpath_element->user != NULL)
-        user_name = vpath_element->user;
-    else
-        user_name = vfs_get_local_username ();
+    orig_connect_info = ((sftpfs_super_data_t *) super->data)->original_connection_info;
 
-    if (vpath_element->port != 0)
-        port = vpath_element->port;
-    else
-        port = SFTP_DEFAULT_PORT;
-
-    result = ((strcmp (vpath_element->host, super->path_element->host) == 0)
-              && (strcmp (user_name, super->path_element->user) == 0)
-              && (port == super->path_element->port));
-
-    if (user_name != vpath_element->user)
-        g_free (user_name);
+    result = ((g_strcmp0 (vpath_element->host, orig_connect_info->host) == 0)
+              && (g_strcmp0 (vpath_element->user, orig_connect_info->user) == 0)
+              && (vpath_element->port == orig_connect_info->port));
 
     return result;
 }
@@ -100,6 +88,7 @@ sftpfs_cb_open_connection (struct vfs_s_super *super,
                            const vfs_path_t * vpath, const vfs_path_element_t * vpath_element)
 {
     GError *error = NULL;
+    sftpfs_super_data_t *sftpfs_super_data;
     int ret_value;
 
     (void) vpath;
@@ -111,7 +100,9 @@ sftpfs_cb_open_connection (struct vfs_s_super *super,
         return -1;
     }
 
-    super->data = g_new0 (sftpfs_super_data_t, 1);
+    sftpfs_super_data = g_new0 (sftpfs_super_data_t, 1);
+    sftpfs_super_data->original_connection_info = vfs_path_element_clone (vpath_element);
+    super->data = sftpfs_super_data;
     super->path_element = vfs_path_element_clone (vpath_element);
 
     sftpfs_fill_connection_data_from_config (super, &error);

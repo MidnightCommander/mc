@@ -1,12 +1,12 @@
 /* Virtual File System: SFTP file system.
    The internal functions: connections
 
-   Copyright (C) 2011
+   Copyright (C) 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
    Ilia Maslakov <il.smind@gmail.com>, 2011
-   Slava Zanko <slavazanko@gmail.com>, 2011, 2012
+   Slava Zanko <slavazanko@gmail.com>, 2011, 2012, 2013
 
    This file is part of the Midnight Commander.
 
@@ -437,6 +437,7 @@ sftpfs_close_connection (struct vfs_s_super *super, const char *shutdown_message
     if (super_data == NULL)
         return;
 
+    vfs_path_element_free (super_data->original_connection_info);
     if (super_data->agent != NULL)
     {
         libssh2_agent_disconnect (super_data->agent);
