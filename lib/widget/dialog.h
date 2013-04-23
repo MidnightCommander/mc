@@ -124,9 +124,6 @@ extern const global_keymap_t *dialog_map;
 
 /*** declarations of public functions ************************************************************/
 
-/* draw box in window */
-void draw_box (const WDialog * h, int y, int x, int ys, int xs, gboolean single);
-
 /* Creates a dialog head  */
 WDialog *create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
                      const int *colors, widget_cb_fn callback, mouse_h mouse_handler,

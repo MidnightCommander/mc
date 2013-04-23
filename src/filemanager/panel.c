@@ -9,6 +9,7 @@
    Miguel de Icaza, 1995
    Timur Bakeyev, 1997, 1999
    Slava Zanko <slavazanko@gmail.com>, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -1247,7 +1248,7 @@ show_dir (WPanel * panel)
     gchar *tmp;
 
     set_colors (panel);
-    draw_box (w->owner, w->y, w->x, w->lines, w->cols, FALSE);
+    tty_draw_box (w->y, w->x, w->lines, w->cols, FALSE);
 
     if (panels_options.show_mini_info)
     {

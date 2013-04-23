@@ -15,6 +15,7 @@
    Norbert Warmuth, 1997
    Miguel de Icaza, 1996, 1999
    Slava Zanko <slavazanko@gmail.com>, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -1157,6 +1158,8 @@ tree_frame (WDialog * h, WTree * tree)
 {
     Widget *w = WIDGET (tree);
 
+    (void) h;
+
     tty_setcolor (NORMAL_COLOR);
     widget_erase (w);
     if (tree->is_panel)
@@ -1164,7 +1167,7 @@ tree_frame (WDialog * h, WTree * tree)
         const char *title = _("Directory tree");
         const int len = str_term_width1 (title);
 
-        draw_box (h, w->y, w->x, w->lines, w->cols, FALSE);
+        tty_draw_box (w->y, w->x, w->lines, w->cols, FALSE);
 
         widget_move (w, 0, (w->cols - len - 2) / 2);
         tty_printf (" %s ", title);

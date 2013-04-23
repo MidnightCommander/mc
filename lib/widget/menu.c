@@ -188,7 +188,7 @@ menubar_draw_drop (WMenuBar * menubar)
         column = w->cols - menu->max_entry_len - 5;
 
     tty_setcolor (MENU_ENTRY_COLOR);
-    draw_box (w->owner, w->y + 1, w->x + column, count + 2, menu->max_entry_len + 5, FALSE);
+    tty_draw_box (w->y + 1, w->x + column, count + 2, menu->max_entry_len + 5, FALSE);
 
     for (i = 0; i < count; i++)
         menubar_paint_idx (menubar, i,

@@ -2,7 +2,7 @@
    Dialog box features module for the Midnight Commander
 
    Copyright (C) 1994, 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
-   2005, 2007, 2009, 2010, 2011
+   2005, 2007, 2009, 2010, 2011, 2013
    The Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -587,17 +587,6 @@ dlg_find_widget_by_id (gconstpointer a, gconstpointer b)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/** draw box in window */
-void
-draw_box (const WDialog * h, int y, int x, int ys, int xs, gboolean single)
-{
-    const Widget *wh = WIDGET (h);
-
-    tty_draw_box (wh->y + y, wh->x + x, ys, xs, single);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 /** Clean the dialog area, draw the frame and the title */
 void
 dlg_default_repaint (WDialog * h)
@@ -613,7 +602,7 @@ dlg_default_repaint (WDialog * h)
 
     tty_setcolor (h->color[DLG_COLOR_NORMAL]);
     dlg_erase (h);
-    draw_box (h, space, space, wh->lines - 2 * space, wh->cols - 2 * space, FALSE);
+    tty_draw_box (wh->y + space, wh->x + space, wh->lines - 2 * space, wh->cols - 2 * space, FALSE);
 
     if (h->title != NULL)
     {

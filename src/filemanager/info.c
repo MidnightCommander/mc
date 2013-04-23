@@ -7,6 +7,7 @@
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -86,7 +87,7 @@ info_box (WInfo * info)
     tty_set_normal_attrs ();
     tty_setcolor (NORMAL_COLOR);
     widget_erase (w);
-    draw_box (w->owner, w->y, w->x, w->lines, w->cols, FALSE);
+    tty_draw_box (w->y, w->x, w->lines, w->cols, FALSE);
 
     widget_move (w, 0, (w->cols - len - 2) / 2);
     tty_printf (" %s ", title);
