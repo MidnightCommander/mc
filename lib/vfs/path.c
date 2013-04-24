@@ -6,6 +6,7 @@
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2011, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -181,39 +182,34 @@ vfs_canon (const char *path)
 #ifdef HAVE_CHARSET
 /** get encoding after last #enc: or NULL, if part does not contain #enc:
  *
- * @param path string
+ * @param path null-terminated string
+ * @param len the maximum length of path, where #enc: should be searched
  *
  * @return newly allocated string.
  */
 
 static char *
-vfs_get_encoding (const char *path)
+vfs_get_encoding (const char *path, ssize_t len)
 {
-    char result[16];
-    char *work;
     char *semi;
-    char *slash;
-    work = g_strdup (path);
 
     /* try found #enc: */
-    semi = g_strrstr (work, VFS_ENCODING_PREFIX);
+    semi = g_strrstr_len (path, len, VFS_ENCODING_PREFIX);
+    if (semi == NULL)
+        return NULL;
 
-    if (semi != NULL && (semi == work || *(semi - 1) == PATH_SEP))
+    if (semi == path || *(semi - 1) == PATH_SEP)
     {
+        char *slash;
+
         semi += strlen (VFS_ENCODING_PREFIX);   /* skip "#enc:" */
         slash = strchr (semi, PATH_SEP);
         if (slash != NULL)
-            slash[0] = '\0';
+            return g_strndup (semi, slash - semi);
+        return g_strdup (semi);
+    }
 
-        g_strlcpy (result, semi, sizeof (result));
-        g_free (work);
-        return g_strdup (result);
-    }
-    else
-    {
-        g_free (work);
-        return NULL;
-    }
+    return vfs_get_encoding (path, semi - path);
 }
 #endif
 
@@ -388,7 +384,7 @@ vfs_path_from_str_deprecated_parser (char *path, vfs_path_flag_t flags)
         element->path = vfs_translate_path_n (local);
 
 #ifdef HAVE_CHARSET
-        element->encoding = vfs_get_encoding (local);
+        element->encoding = vfs_get_encoding (local, -1);
         element->dir.converter =
             (element->encoding != NULL) ? str_crt_conv_from (element->encoding) : INVALID_CONV;
 #endif
@@ -413,7 +409,7 @@ vfs_path_from_str_deprecated_parser (char *path, vfs_path_flag_t flags)
         element->path = vfs_translate_path_n (path);
 
 #ifdef HAVE_CHARSET
-        element->encoding = vfs_get_encoding (path);
+        element->encoding = vfs_get_encoding (path, -1);
         element->dir.converter =
             (element->encoding != NULL) ? str_crt_conv_from (element->encoding) : INVALID_CONV;
 #endif
@@ -476,7 +472,7 @@ vfs_path_from_str_uri_parser (char *path, vfs_path_flag_t flags)
             {
                 element->path = vfs_translate_path_n (slash_pointer + 1);
 #ifdef HAVE_CHARSET
-                element->encoding = vfs_get_encoding (slash_pointer);
+                element->encoding = vfs_get_encoding (slash_pointer, -1);
 #endif
                 *slash_pointer = '\0';
             }
@@ -486,7 +482,7 @@ vfs_path_from_str_uri_parser (char *path, vfs_path_flag_t flags)
         {
             element->path = vfs_translate_path_n (url_delimiter);
 #ifdef HAVE_CHARSET
-            element->encoding = vfs_get_encoding (url_delimiter);
+            element->encoding = vfs_get_encoding (url_delimiter, -1);
 #endif
         }
 #ifdef HAVE_CHARSET
@@ -508,7 +504,7 @@ vfs_path_from_str_uri_parser (char *path, vfs_path_flag_t flags)
         element->class = g_ptr_array_index (vfs__classes_list, 0);
         element->path = vfs_translate_path_n (path);
 #ifdef HAVE_CHARSET
-        element->encoding = vfs_get_encoding (path);
+        element->encoding = vfs_get_encoding (path, -1);
         element->dir.converter =
             (element->encoding != NULL) ? str_crt_conv_from (element->encoding) : INVALID_CONV;
 #endif

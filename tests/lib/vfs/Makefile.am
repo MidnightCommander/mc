@@ -29,7 +29,8 @@ TESTS = \
 	vfs_s_get_path
 
 if CHARSET
-TESTS += path_recode
+TESTS += path_recode \
+	vfs_get_encoding
 endif
 
 check_PROGRAMS = $(TESTS)
@@ -60,6 +61,9 @@ relative_cd_SOURCES = \
 
 tempdir_SOURCES = \
 	tempdir.c
+
+vfs_get_encoding_SOURCES = \
+	vfs_get_encoding.c
 
 vfs_split_SOURCES = \
 	vfs_split.c
