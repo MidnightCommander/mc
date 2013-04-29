@@ -237,7 +237,7 @@ Double\-clicking on a file will try to execute the command if it is
 an executable program; and if the
 .\"LINK2"
 extension file
-.\"Extension File Edit"
+.\"Edit Extension File"
 has a program specified for the file's extension, the specified
 program is executed.
 .PP
@@ -386,7 +386,7 @@ if the extension of the selected file name matches one of the
 extensions in the
 .\"LINK2"
 extensions file
-.\"Extension File Edit"
+.\"Edit Extension File"
 then the corresponding command is executed.
 .TP
 .B C\-l
@@ -1017,7 +1017,7 @@ list of accepted keys.
 Invoke the
 .\"LINK2"
 user menu\&.
-.\"Menu File Edit"
+.\"Edit Menu File"
 The user menu provides an easy way to provide users with a menu and
 add extra features to the Midnight Commander.
 .PP
@@ -1294,15 +1294,15 @@ internal editors, viewers and other MC modules that support this mode.
 The
 .\"LINK2"
 "Edit extension file"
-.\"Extension File Edit"
+.\"Edit Extension File"
 command allows you to specify programs to executed when you try to
 execute, view, edit and do a bunch of other thing on files
 with certain extensions (filename endings).
 .PP
 The
 .\"LINK2"
-"Edit menu file"
-.\"Menu File Edit"
+"Edit Menu File"
+.\"Edit Menu File"
 command may be used for editing the user menu (which appears by
 pressing F2).
 .\"NODE "    Directory Tree"
@@ -1492,8 +1492,8 @@ CDPATH variable as described in
 internal cd command
 .\"The cd internal command"
 description.
-.\"NODE "    Extension File Edit"
-.SH "    Extension File Edit"
+.\"NODE "    Edit Extension File"
+.SH "    Edit Extension File"
 This will invoke your editor on the file
 .IR ~/.config/mc/mc.ext .
 The format of this file following:
@@ -1582,8 +1582,8 @@ This lets you control the state of any background Midnight Commander
 process (only copy and move files operations can be done in the
 background).  You can stop, restart and kill a background job from
 here.
-.\"NODE "    Menu File Edit"
-.SH "    Menu File Edit"
+.\"NODE "    Edit Menu File"
+.SH "    Edit Menu File"
 The user menu is a menu of useful actions that can be customized by
 the user. When you access the user menu, the
 file .mc.menu from the current directory is used if it exists,
@@ -2283,7 +2283,7 @@ Commander checks the extension of the selected file against the
 extensions in the
 .\"LINK2"
 Extensions File\&.
-.\"Extension File Edit"
+.\"Edit Extension File"
 If a match is found then the code associated with that extension is
 executed. A very simple
 .\"LINK2"
@@ -2331,11 +2331,11 @@ cd linux could take you to /usr/src/linux).
 When accessing a
 .\"LINK2"
 user menu\&,
-.\"Menu File Edit"
+.\"Edit Menu File"
 or executing an
 .\"LINK2"
 extension dependent command\&,
-.\"Extension File Edit"
+.\"Edit Extension File"
 or running a command from the command line input, a simple macro
 substitution takes place.
 .PP
@@ -2939,8 +2939,8 @@ selection dialog.
 It's possible to instruct the file viewer how to display a file, look
 at the
 .\"LINK2"
-Extension File Edit section
-.\"Extension File Edit"
+Edit Extension File section
+.\"Edit Extension File"
 
 .\"NODE "Internal File Editor"
 .SH "Internal File Editor"
@@ -3203,8 +3203,8 @@ The mc.ext file already provides a shortcut for tar files, this means
 that usually you just point to a tar file and press return to enter
 into the tar file, see the
 .\"LINK2"
-Extension File Edit
-.\"Extension File Edit"
+Edit Extension File
+.\"Edit Extension File"
 section for details on how this is done.
 .PP
 Examples:
@@ -3454,8 +3454,8 @@ where xxxx is one of:
 .PP
 You could bind file type/extension to specified extfs as described in the
 .\"LINK2"
-Extension File Edit
-.\"Extension File Edit"
+Edit Extension File
+.\"Edit Extension File"
 section.  Here is an example entry for Debian packages:
 .PP
 .nf
@@ -4069,7 +4069,7 @@ If this variable is on (the default) it will spawn the file command to
 match the file types listed on the
 .\"LINK2"
 mc.ext file\&.
-.\"Extension File Edit"
+.\"Edit Extension File"
 .TP
 .I xtree_mode
 If this variable is on (default is off) when you browse the file system

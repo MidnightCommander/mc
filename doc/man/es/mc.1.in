@@ -251,7 +251,7 @@ Una doble pulsación sobre un archivo intentará ejecutar el comando si se trata
 un programa ejecutable; y si la extensión del archivo tiene un programa
 .\"LINK2"
 asociado a esa extensión\&,
-.\"Extension File Edit"
+.\"Edit Extension File"
 se ejecuta el programa especificado.
 .PP
 Además, es posible ejecutar los comandos asignados a las teclas de función
@@ -399,7 +399,7 @@ si la extensión del archivo seleccionado coincide con una de las
 extensiones en el
 .\"LINK2"
 archivo de extensiones
-.\"Extension File Edit"
+.\"Edit Extension File"
 entonces se ejecuta la aplicación correspondiente.
 .TP
 .B Ctrl\-l
@@ -1064,7 +1064,7 @@ de nuevo para obtener la lista completa de teclas válidas.
 Invoca el
 .\"LINK2"
 Menú de usuario
-.\"Menu File Edit"
+.\"Edit Menu File"
 El menú de usuario otorga una manera fácil de tener usuarios con un menú
 y añadir asimismo características extra a Midnight Commander.
 .PP
@@ -1301,14 +1301,14 @@ programa al panel actual.
 .PP
 .\"LINK2"
 Editar el archivo de extensiones
-.\"Extension File Edit"
+.\"Edit Extension File"
 nos permite especificar los programas a ejecutar para intentar
 ejecutar, ver, editar y realizar un montón de cosas sobre archivos
 con ciertas extensiones (terminaciones de archivo). Por ejemplo, asociar la extensión
 de los archivos de audio de SUN (.au) con el programa reproductor adecuado.
 .\"LINK2"
 Editar archivo de menú
-.\"Menu File Edit"
+.\"Edit Menu File"
 se puede utilizar para editar el menú de usuario (el que aparece al
 pulsar F2).
 .\"NODE "    Directory Tree"
@@ -1503,7 +1503,7 @@ CDPATH tal y como se describe en
 .\"LINK2"
 comando cd interno\&.
 .\"The cd internal command"
-.\"NODE "    Extension File Edit"
+.\"NODE "    Edit Extension File"
 .SH "    Editar el Archivo de Extensiones"
 Abre el archivo
 .I ~/.config/mc/mc.ext
@@ -1573,7 +1573,7 @@ Nos permite controlar el estado de cualquier proceso de Midnight Commander
 en segundo plano (solo las operaciones de copiar y mover archivos pueden realizarse
 en segundo plano). Podemos parar, reiniciar y eliminar procesos en segundo plano desde
 aquí.
-.\"NODE "    Menu File Edit"
+.\"NODE "    Edit Menu File"
 .SH "    Edición del Archivo de Menú"
 El menú de usuario es un menú de acciones útiles que puede ser personalizado
 por el usuario. Cuando accedemos al menú de usuario se utiliza, si existe,
@@ -2279,7 +2279,7 @@ Commander compara la extensión del archivo seleccionado con las extensiones
 recogidas en el
 .\"LINK2"
 Archivo de Extensiones\&.
-.\"Extension File Edit"
+.\"Edit Extension File"
 Si se produce una coincidencia se ejecutará el código asociado con esa extensión.
 Tendrá lugar una
 .\"LINK2"
@@ -2328,11 +2328,11 @@ cualquier lugar del sistema de archivos, usando solo su nombre relativo
 Cuando se accede al
 .\"LINK2"
 menú de usuario\&,
-.\"Menu File Edit"
+.\"Edit Menu File"
 o se ejecuta un
 .\"LINK2"
 comando dependiente de extensión\&,
-.\"Extension File Edit"
+.\"Edit Extension File"
 o se ejecuta un comando desde la línea de entrada de comandos,
 se realiza una simple sustitución de macro.
 .PP
@@ -2824,7 +2824,7 @@ Es posible adiestrar al visor de archivos sobre cómo mostrar un archivo, míres
 la sección
 .\"LINK2"
 Editar Archivo de Extensiones\&.
-.\"Extension File Edit"
+.\"Edit Extension File"
 .\"NODE "Internal File Editor"
 .SH "Editor de Archivos Interno"
 El editor de archivos interno es un editor a pantalla completa de
@@ -3003,7 +3003,7 @@ que normalmente basta con apuntar a un archivo tar y pulsar Intro para entrar en
 archivo tar.  Véase la sección
 .\"LINK2"
 Edición del Archivo de Extensiones
-.\"Extension File Edit"
+.\"Edit Extension File"
 para obtener más detalles sobre cómo hacer esto.
 .PP
 Ejemplos:
@@ -3306,7 +3306,7 @@ Se pueden asociar extensiones o tipos de archivo a un determinado sistema
 de archivos externo tal como se describe en la sección sobre cómo
 .\"LINK2"
 Editar el Archivo de Extensiones
-.\"Extension File Edit"
+.\"Edit Extension File"
 de Midnight Commander. He aquí, a modo de ejemplo, una entrada para
 paquetes Debian:
 .PP
@@ -3910,7 +3910,7 @@ Si esta variable está activada (por defecto lo está) se recurrirá al
 comando "file" para reconocer los tipos de archivo referidos en el archivo
 .\"LINK2"
 mc.ext\&.
-.\"Extension File Edit"
+.\"Edit Extension File"
 .TP
 .I xtree_mode
 Si esta variable está activada (por defecto no) cuando naveguemos
