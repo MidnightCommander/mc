@@ -73,7 +73,6 @@
 #endif
 #include "src/keybind-defaults.h"
 #include "src/util.h"           /* check_for_default() */
-#include "src/filemanager/layout.h"     /* mc_refresh()  */
 
 #include "edit-impl.h"
 #include "editwidget.h"
