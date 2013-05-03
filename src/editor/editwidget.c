@@ -1283,8 +1283,7 @@ edit_update_screen (WEdit * e)
 
     edit_scroll_screen_over_cursor (e);
     edit_update_curs_col (e);
-
-    edit_status (e, (e->force & REDRAW_COMPLETELY) != 0 && (void *) e == h->current->data);
+    edit_status (e, (void *) e == h->current->data);
 
     /* pop all events for this window for internal handling */
     if (!is_idle ())
