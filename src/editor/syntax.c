@@ -332,8 +332,8 @@ xx_strchr (const WEdit * edit, const unsigned char *s, int char_byte)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static edit_syntax_rule_t
-apply_rules_going_right (WEdit * edit, off_t i, edit_syntax_rule_t rule)
+static void
+apply_rules_going_right (WEdit * edit, off_t i)
 {
     struct context_rule *r;
     int c;
@@ -342,15 +342,16 @@ apply_rules_going_right (WEdit * edit, off_t i, edit_syntax_rule_t rule)
     gboolean keyword_foundleft = FALSE, keyword_foundright = FALSE;
     gboolean is_end;
     off_t end = 0;
-    edit_syntax_rule_t _rule = rule;
+    edit_syntax_rule_t _rule = edit->rule;
 
     c = xx_tolower (edit, edit_get_byte (edit, i));
     if (c == 0)
-        return rule;
-    is_end = (rule.end == i);
+        return;
+
+    is_end = (edit->rule.end == i);
 
     /* check to turn off a keyword */
-    if (_rule.keyword)
+    if (_rule.keyword != 0)
     {
         if (edit_get_byte (edit, i - 1) == '\n')
             _rule.keyword = 0;
@@ -362,12 +363,12 @@ apply_rules_going_right (WEdit * edit, off_t i, edit_syntax_rule_t rule)
     }
 
     /* check to turn off a context */
-    if (_rule.context && !_rule.keyword)
+    if (_rule.context != 0 && _rule.keyword == 0)
     {
         off_t e;
 
         r = edit->rules[_rule.context];
-        if (r->first_right == c && !(rule.border & RULE_ON_RIGHT_BORDER)
+        if (r->first_right == c && (edit->rule.border & RULE_ON_RIGHT_BORDER) == 0
             && (e =
                 compare_word_to_right (edit, i, r->right, r->whole_word_chars_left,
                                        r->whole_word_chars_right, r->line_start_right)) > 0)
@@ -378,7 +379,7 @@ apply_rules_going_right (WEdit * edit, off_t i, edit_syntax_rule_t rule)
             if (r->between_delimiters)
                 _rule.context = 0;
         }
-        else if (is_end && rule.border & RULE_ON_RIGHT_BORDER)
+        else if (is_end && (edit->rule.border & RULE_ON_RIGHT_BORDER) != 0)
         {
             /* always turn off a context at 4 */
             found_left = TRUE;
@@ -386,7 +387,7 @@ apply_rules_going_right (WEdit * edit, off_t i, edit_syntax_rule_t rule)
             if (!keyword_foundleft)
                 _rule.context = 0;
         }
-        else if (is_end && rule.border & RULE_ON_LEFT_BORDER)
+        else if (is_end && (edit->rule.border & RULE_ON_LEFT_BORDER) != 0)
         {
             /* never turn off a context at 2 */
             found_left = TRUE;
@@ -395,7 +396,7 @@ apply_rules_going_right (WEdit * edit, off_t i, edit_syntax_rule_t rule)
     }
 
     /* check to turn on a keyword */
-    if (!_rule.keyword)
+    if (_rule.keyword == 0)
     {
         const char *p;
 
@@ -425,11 +426,11 @@ apply_rules_going_right (WEdit * edit, off_t i, edit_syntax_rule_t rule)
     }
 
     /* check to turn on a context */
-    if (!_rule.context)
+    if (_rule.context == 0)
     {
         if (!found_left && is_end)
         {
-            if (rule.border & RULE_ON_RIGHT_BORDER)
+            if ((edit->rule.border & RULE_ON_RIGHT_BORDER) != 0)
             {
                 _rule.border = 0;
                 _rule.context = 0;
@@ -437,7 +438,7 @@ apply_rules_going_right (WEdit * edit, off_t i, edit_syntax_rule_t rule)
                 _rule.keyword = 0;
 
             }
-            else if (rule.border & RULE_ON_LEFT_BORDER)
+            else if ((edit->rule.border & RULE_ON_LEFT_BORDER) != 0)
             {
                 r = edit->rules[_rule._context];
                 _rule.border = 0;
@@ -470,7 +471,7 @@ apply_rules_going_right (WEdit * edit, off_t i, edit_syntax_rule_t rule)
             int count;
             struct context_rule **rules = edit->rules;
 
-            for (count = 1; rules[count]; count++)
+            for (count = 1; rules[count] != NULL; count++)
             {
                 r = rules[count];
                 if (r->first_left == c)
@@ -479,13 +480,13 @@ apply_rules_going_right (WEdit * edit, off_t i, edit_syntax_rule_t rule)
 
                     e = compare_word_to_right (edit, i, r->left, r->whole_word_chars_left,
                                                r->whole_word_chars_right, r->line_start_left);
-                    if (e >= end && (!_rule.keyword || keyword_foundright))
+                    if (e >= end && (_rule.keyword == 0 || keyword_foundright))
                     {
                         _rule.end = e;
                         found_right = TRUE;
                         _rule.border = RULE_ON_LEFT_BORDER;
                         _rule._context = count;
-                        if (!r->between_delimiters && !_rule.keyword)
+                        if (!r->between_delimiters && _rule.keyword == 0)
                         {
                             _rule.context = count;
                             contextchanged = TRUE;
@@ -498,7 +499,7 @@ apply_rules_going_right (WEdit * edit, off_t i, edit_syntax_rule_t rule)
     }
 
     /* check again to turn on a keyword if the context switched */
-    if (contextchanged && !_rule.keyword)
+    if (contextchanged && _rule.keyword == 0)
     {
         const char *p;
 
@@ -524,12 +525,12 @@ apply_rules_going_right (WEdit * edit, off_t i, edit_syntax_rule_t rule)
         }
     }
 
-    return _rule;
+    edit->rule = _rule;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static edit_syntax_rule_t
+static void
 edit_get_rule (WEdit * edit, off_t byte_index)
 {
     off_t i;
@@ -540,7 +541,7 @@ edit_get_rule (WEdit * edit, off_t byte_index)
         {
             off_t d = SYNTAX_MARKER_DENSITY;
 
-            edit->rule = apply_rules_going_right (edit, i, edit->rule);
+            apply_rules_going_right (edit, i);
 
             if (edit->syntax_marker != NULL)
                 d += ((syntax_marker_t *) edit->syntax_marker->data)->offset;
@@ -566,7 +567,7 @@ edit_get_rule (WEdit * edit, off_t byte_index)
             {
                 memset (&edit->rule, 0, sizeof (edit->rule));
                 for (i = -1; i <= byte_index; i++)
-                    edit->rule = apply_rules_going_right (edit, i, edit->rule);
+                    apply_rules_going_right (edit, i);
                 break;
             }
 
@@ -576,7 +577,7 @@ edit_get_rule (WEdit * edit, off_t byte_index)
             {
                 edit->rule = s->rule;
                 for (i = s->offset + 1; i <= byte_index; i++)
-                    edit->rule = apply_rules_going_right (edit, i, edit->rule);
+                    apply_rules_going_right (edit, i);
                 break;
             }
 
@@ -585,15 +586,14 @@ edit_get_rule (WEdit * edit, off_t byte_index)
         }
     }
     edit->last_get_rule = byte_index;
-    return edit->rule;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static inline int
-translate_rule_to_color (const WEdit * edit, edit_syntax_rule_t rule)
+translate_rule_to_color (const WEdit * edit, const edit_syntax_rule_t * rule)
 {
-    return edit->rules[rule.context]->keyword[rule.keyword]->color;
+    return edit->rules[rule->context]->keyword[rule->keyword]->color;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1399,7 +1399,10 @@ edit_get_syntax_color (WEdit * edit, off_t byte_index)
         return 0;
 
     if (edit->rules != NULL && byte_index < edit->last_byte && option_syntax_highlighting)
-        return translate_rule_to_color (edit, edit_get_rule (edit, byte_index));
+    {
+        edit_get_rule (edit, byte_index);
+        return translate_rule_to_color (edit, &edit->rule);
+    }
 
     return EDITOR_NORMAL_COLOR;
 }
