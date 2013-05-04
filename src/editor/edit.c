@@ -100,7 +100,6 @@ int option_check_nl_at_eof = 0;
 int option_group_undo = 0;
 int show_right_margin = 0;
 
-const char *option_whole_chars_search = "0123456789abcdefghijklmnopqrstuvwxyz_";
 char *option_backup_ext = NULL;
 
 unsigned int edit_stack_iterator = 0;
@@ -2260,33 +2259,6 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
     }
     else
     {
-#ifdef ENABLE_NLS
-        /*
-         * Expand option_whole_chars_search by national letters using
-         * current locale
-         */
-
-        static char option_whole_chars_search_buf[256];
-
-        if (option_whole_chars_search_buf != option_whole_chars_search)
-        {
-            size_t i;
-            size_t len = str_term_width1 (option_whole_chars_search);
-
-            strcpy (option_whole_chars_search_buf, option_whole_chars_search);
-
-            for (i = 1; i <= sizeof (option_whole_chars_search_buf); i++)
-            {
-                if (g_ascii_islower ((gchar) i) && !strchr (option_whole_chars_search, i))
-                {
-                    option_whole_chars_search_buf[len++] = i;
-                }
-            }
-
-            option_whole_chars_search_buf[len] = 0;
-            option_whole_chars_search = option_whole_chars_search_buf;
-        }
-#endif /* ENABLE_NLS */
         edit = g_malloc0 (sizeof (WEdit));
         to_free = TRUE;
 
