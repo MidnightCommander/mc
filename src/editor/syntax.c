@@ -225,7 +225,7 @@ compare_word_to_right (const WEdit * edit, off_t i, const char *text,
     if ((line_start != 0 && c != '\n') || (whole_left != NULL && strchr (whole_left, c) != NULL))
         return -1;
 
-    for (p = (unsigned char *) text, q = p + str_term_width1 ((char *) p); p < q; p++, i++)
+    for (p = (unsigned char *) text, q = p + strlen ((char *) p); p < q; p++, i++)
     {
         switch (*p)
         {
