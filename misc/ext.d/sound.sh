@@ -17,7 +17,7 @@ do_view_action() {
             sed -n '/^Title/,/^Comment/p;/^MPEG/,/^Audio/p'
         ;;
     ogg)
-        ogginfo "${MC_EXT_SELECTED}"
+        ogginfo "${MC_EXT_FILENAME}"
         ;;
     wma)
         mplayer -quiet -slave -frames 0 -vo null -ao null -identify "${MC_EXT_FILENAME}" 2>/dev/null | \
