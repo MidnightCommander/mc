@@ -153,6 +153,9 @@ struct vfs_s_subclass
     /* *INDENT-ON* */
 };
 
+typedef gboolean (cb_conditions_t) (struct vfs_class * me, void *cb_data,
+                                    struct vfs_s_super * super);
+
 /*** global variables defined in .c file *********************************************************/
 
 /*** declarations of public functions ************************************************************/
@@ -178,6 +181,9 @@ struct vfs_s_inode *vfs_s_find_root (struct vfs_class *me, struct vfs_s_entry *e
 /* outside interface */
 void vfs_s_init_class (struct vfs_class *vclass, struct vfs_s_subclass *sub);
 struct vfs_s_super *vfs_get_super_by_vpath (const vfs_path_t * vpath, gboolean is_create_new);
+struct vfs_s_super *vfs_get_super_by_cb_conditions (struct vfs_class *me,
+                                                    cb_conditions_t * cb_conditions, void *cd_data);
+
 
 void vfs_s_invalidate (struct vfs_class *me, struct vfs_s_super *super);
 char *vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino);

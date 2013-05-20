@@ -92,6 +92,13 @@ struct dirhandle
     struct vfs_s_inode *dir;
 };
 
+typedef struct
+{
+    vfs_path_t *vpath_archive;
+    const vfs_path_element_t *path_element;
+    void *cookie;
+} vfs_get_by_vpath_data_t;
+
 /*** file scope variables ************************************************************************/
 
 static volatile int total_inodes = 0, total_entries = 0;
@@ -868,56 +875,29 @@ vfs_s_dir_uptodate (struct vfs_class *me, struct vfs_s_inode *ino)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * get superlock object by vpath
+ * Callback for search superblock via subclass->archive_same() call
  *
- * @param vpath path
- * @return superlock object or NULL if not found
+ * @param me      class for search superblocks
+ * @param cb_data some data for callback
+ * @param super   superblock for comparsion
+ * @return TRUE if superblock is what we need, FALSE otherwise
  */
 
-static struct vfs_s_super *
-vfs_get_sb_by_vpath (const vfs_path_t * vpath)
+static gboolean
+vfs_cb_archive_same (struct vfs_class *me, void *cb_data, struct vfs_s_super *super)
 {
-    GList *iter;
-    void *cookie = NULL;
-    const vfs_path_element_t *path_element;
+    vfs_get_by_vpath_data_t *vfs_get_by_vpath_data;
     struct vfs_s_subclass *subclass;
-    struct vfs_s_super *super = NULL;
-    vfs_path_t *vpath_archive;
+    int ret;
 
-    path_element = vfs_path_get_by_index (vpath, -1);
-    subclass = ((struct vfs_s_subclass *) path_element->class->data);
-    if (subclass == NULL)
-        return NULL;
+    vfs_get_by_vpath_data = (vfs_get_by_vpath_data_t *) cb_data;
+    subclass = (struct vfs_s_subclass *) me->data;
 
-    vpath_archive = vfs_path_clone (vpath);
-    vfs_path_remove_element_by_index (vpath_archive, -1);
+    ret = subclass->archive_same (vfs_get_by_vpath_data->path_element, super,
+                                  vfs_get_by_vpath_data->vpath_archive,
+                                  vfs_get_by_vpath_data->cookie);
 
-    if (subclass->archive_check != NULL)
-    {
-        cookie = subclass->archive_check (vpath_archive);
-        if (cookie == NULL)
-            goto ret;
-    }
-
-    for (iter = subclass->supers; iter != NULL; iter = g_list_next (iter))
-    {
-        int i;
-
-        super = (struct vfs_s_super *) iter->data;
-
-        /* 0 == other, 1 == same, return it, 2 == other but stop scanning */
-        i = subclass->archive_same (path_element, super, vpath_archive, cookie);
-        if (i == 1)
-            goto ret;
-        if (i != 0)
-            break;
-
-        super = NULL;
-    }
-
-  ret:
-    vfs_path_free (vpath_archive);
-    return super;
+    return (ret != 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1103,13 +1083,39 @@ struct vfs_s_super *
 vfs_get_super_by_vpath (const vfs_path_t * vpath, gboolean is_create_new)
 {
     int result = -1;
-    struct vfs_s_super *super;
+    struct vfs_s_super *super = NULL;
     const vfs_path_element_t *path_element;
     struct vfs_s_subclass *subclass;
+    vfs_get_by_vpath_data_t vfs_get_by_vpath_data;
 
     path_element = vfs_path_get_by_index (vpath, -1);
+    subclass = ((struct vfs_s_subclass *) path_element->class->data);
+    if (subclass == NULL)
+        return NULL;
 
-    super = vfs_get_sb_by_vpath (vpath);
+    vfs_get_by_vpath_data.path_element = path_element;
+    vfs_get_by_vpath_data.vpath_archive = vfs_path_clone (vpath);
+    vfs_path_remove_element_by_index (vfs_get_by_vpath_data.vpath_archive, -1);
+
+    {
+        gboolean is_search_called = TRUE;
+        if (subclass->archive_check != NULL)
+        {
+            vfs_get_by_vpath_data.cookie =
+                subclass->archive_check (vfs_get_by_vpath_data.vpath_archive);
+            if (vfs_get_by_vpath_data.cookie == NULL)
+                is_search_called = FALSE;
+        }
+        else
+            vfs_get_by_vpath_data.cookie = NULL;
+
+        if (is_search_called)
+            super =
+                vfs_get_super_by_cb_conditions (path_element->class, vfs_cb_archive_same,
+                                                (void *) &vfs_get_by_vpath_data);
+    }
+    vfs_path_free (vfs_get_by_vpath_data.vpath_archive);
+
     if (super != NULL)
         goto return_success;
 
@@ -1121,7 +1127,6 @@ vfs_get_super_by_vpath (const vfs_path_t * vpath, gboolean is_create_new)
 
     super = vfs_s_new_super (path_element->class);
 
-    subclass = ((struct vfs_s_subclass *) path_element->class->data);
     if (subclass->open_archive != NULL)
     {
         vfs_path_t *vpath_archive;
@@ -1148,6 +1153,40 @@ vfs_get_super_by_vpath (const vfs_path_t * vpath, gboolean is_create_new)
 
   return_success:
     return super;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Get superblock by callback function.
+ *
+ * @param me            class for search superblocks
+ * @param cb_conditions callback function for getting needed superblock
+ * @param cb_data       some data for callback
+ *
+ * @return if found, archive pointer to object for store superblock; NULL otherwise
+ */
+
+struct vfs_s_super *
+vfs_get_super_by_cb_conditions (struct vfs_class *me, cb_conditions_t * cb_conditions,
+                                void *cb_data)
+{
+    GList *iter;
+    struct vfs_s_subclass *subclass;
+
+    subclass = ((struct vfs_s_subclass *) me->data);
+    if (subclass == NULL)
+        return NULL;
+
+    for (iter = subclass->supers; iter != NULL; iter = g_list_next (iter))
+    {
+        struct vfs_s_super *super;
+
+        super = (struct vfs_s_super *) iter->data;
+        if (cb_conditions (me, cb_data, super))
+            return super;
+    }
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
