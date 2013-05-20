@@ -53,14 +53,7 @@ smbfs_cb_authdata_provider (const char *server, const char *share,
                             char *workgroup, int wgmaxlen, char *username, int unmaxlen,
                             char *password, int pwmaxlen)
 {
-    (void) server;
-    (void) share;
-    (void) workgroup;
-    (void) wgmaxlen;
-    (void) username;
-    (void) unmaxlen;
-    (void) password;
-    (void) pwmaxlen;
+    smbfs_auth_dialog (server, share, workgroup, wgmaxlen, username, unmaxlen, password, pwmaxlen);
 }
 
 /* --------------------------------------------------------------------------------------------- */

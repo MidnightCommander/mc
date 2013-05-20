@@ -38,6 +38,11 @@ void
 smbfs_cb_authdata_provider (const char *server, const char *share,
                             char *workgroup, int wgmaxlen, char *username, int unmaxlen,
                             char *password, int pwmaxlen);
+void
+smbfs_auth_dialog (const char *server, const char *share,
+                   char *workgroup, int wgmaxlen, char *username, int unmaxlen,
+                   char *password, int pwmaxlen);
+
 const char *smbfs_strerror (int err_no);
 
 char *smbfs_make_url (const vfs_path_element_t * element, gboolean with_path);
