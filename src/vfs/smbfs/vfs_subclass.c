@@ -59,12 +59,21 @@ smbfs_cb_is_equal_connection (const vfs_path_element_t * vpath_element, struct v
 {
     gboolean result = TRUE;
     char *url1, *url2;
+    vfs_path_element_t *path_element1, *path_element2;
 
     (void) vpath;
     (void) cookie;
 
-    url1 = smbfs_make_url (vpath_element, FALSE);
-    url2 = smbfs_make_url (super->path_element, FALSE);
+    path_element1 = vfs_path_element_clone (vpath_element);
+    smbfs_assign_value_if_not_null (g_strdup ("/"), &path_element1->path);
+    path_element2 = vfs_path_element_clone (super->path_element);
+    smbfs_assign_value_if_not_null (g_strdup ("/"), &path_element2->path);
+
+
+    url1 = smbfs_make_url (path_element1, FALSE);
+    url2 = smbfs_make_url (path_element2, FALSE);
+    vfs_path_element_free (path_element1);
+    vfs_path_element_free (path_element2);
     result = (strcmp (url1, url2) == 0);
     g_free (url2);
     g_free (url1);
@@ -92,8 +101,11 @@ smbfs_cb_open_connection (struct vfs_s_super *super,
 
     smbfs_super_data = g_new0 (smbfs_super_data_t, 1);
 
-    super->data = (void *) smbfs_super_data;
+    smbfs_assign_value_if_not_null (g_strdup (vpath_element->user), &smbfs_super_data->username);
+    smbfs_assign_value_if_not_null (g_strdup (vpath_element->password),
+                                    &smbfs_super_data->password);
 
+    super->data = (void *) smbfs_super_data;
     super->path_element = vfs_path_element_clone (vpath_element);
 
     super->name = g_strdup (PATH_SEP_STR);
@@ -115,11 +127,17 @@ smbfs_cb_open_connection (struct vfs_s_super *super,
 static void
 smbfs_cb_close_connection (struct vfs_class *me, struct vfs_s_super *super)
 {
+    smbfs_super_data_t *smbfs_super_data;
     GError *error = NULL;
 
     (void) me;
+
     vfs_show_gerror (&error);
-    g_free (super->data);
+    smbfs_super_data = (smbfs_super_data_t *) super->data;
+    g_free (smbfs_super_data->username);
+    g_free (smbfs_super_data->password);
+    g_free (smbfs_super_data->workgroup);
+    g_free (smbfs_super_data);
 }
 
 /* --------------------------------------------------------------------------------------------- */

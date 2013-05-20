@@ -43,6 +43,25 @@
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Callback for search superblock by server name
+ *
+ * @param me      class for search superblocks
+ * @param cb_data some data for callback
+ * @param super   superblock for comparsion
+ * @return TRUE if superblock is what we need, FALSE otherwise
+ */
+
+static gboolean
+smbfs_search_by_servername_cb (struct vfs_class *me, void *cb_data, struct vfs_s_super *super)
+{
+    const char *server_name;
+
+    (void) me;
+    server_name = (const char *) cb_data;
+
+    return strcmp (super->path_element->host, server_name) == 0;
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -53,7 +72,39 @@ smbfs_cb_authdata_provider (const char *server, const char *share,
                             char *workgroup, int wgmaxlen, char *username, int unmaxlen,
                             char *password, int pwmaxlen)
 {
-    smbfs_auth_dialog (server, share, workgroup, wgmaxlen, username, unmaxlen, password, pwmaxlen);
+    struct vfs_s_super *super;
+    smbfs_super_data_t *smbfs_super_data;
+
+    super =
+        vfs_get_super_by_cb_conditions (&smbfs_class, smbfs_search_by_servername_cb,
+                                        (void *) server);
+    if (super == NULL)
+        return;
+
+    smbfs_super_data = (smbfs_super_data_t *) super->data;
+    if (smbfs_super_data->username == NULL || smbfs_super_data->password == NULL)
+    {
+        if (smbfs_super_data->workgroup == NULL)
+            smbfs_super_data->workgroup = g_strdup (workgroup);
+
+        if (smbfs_super_data->username == NULL)
+            smbfs_super_data->username = g_strdup (username);
+
+        if (smbfs_super_data->password == NULL)
+            smbfs_super_data->password = g_strdup (password);
+
+        smbfs_auth_dialog (server, share, &smbfs_super_data->workgroup, &smbfs_super_data->username,
+                           &smbfs_super_data->password);
+    }
+
+    if (smbfs_super_data->workgroup != NULL)
+        g_strlcpy (workgroup, smbfs_super_data->workgroup, wgmaxlen);
+
+    if (smbfs_super_data->username != NULL)
+        g_strlcpy (username, smbfs_super_data->username, unmaxlen);
+
+    if (smbfs_super_data->password != NULL)
+        g_strlcpy (password, smbfs_super_data->password, pwmaxlen);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -144,6 +195,23 @@ smbfs_make_url (const vfs_path_element_t * element, gboolean with_path)
     }
 
     return g_string_free (buffer, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Asign value (if not null)
+ * @param value    value to assign
+ * @param assignee a target
+ */
+
+void
+smbfs_assign_value_if_not_null (char *value, char **assignee)
+{
+    if (value != NULL)
+    {
+        g_free (*assignee);
+        *assignee = value;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

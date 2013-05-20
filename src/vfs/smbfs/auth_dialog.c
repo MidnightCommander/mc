@@ -46,8 +46,7 @@
 
 void
 smbfs_auth_dialog (const char *server, const char *share,
-                   char *workgroup, int wgmaxlen, char *username, int unmaxlen,
-                   char *password, int pwmaxlen)
+                   char **workgroup, char **username, char **password)
 {
     char *smb_path;
 
@@ -64,11 +63,11 @@ smbfs_auth_dialog (const char *server, const char *share,
             QUICK_LABEL (smb_path, NULL),
             QUICK_SEPARATOR (TRUE),
             QUICK_LABELED_INPUT (N_("Workgroup:"), input_label_above,
-                                 workgroup, "input-3", &new_workgroup, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
+                                 *workgroup, "input-3", &new_workgroup, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
             QUICK_LABELED_INPUT (N_("User name:"), input_label_above,
-                                 username, "input-2", &new_username, NULL, FALSE, FALSE, INPUT_COMPLETE_USERNAMES),
+                                 *username, "input-2", &new_username, NULL, FALSE, FALSE, INPUT_COMPLETE_USERNAMES),
             QUICK_LABELED_INPUT (N_("Password:"), input_label_above,
-                                 password, "input-1", &new_password, NULL, TRUE, FALSE, INPUT_COMPLETE_NONE),
+                                 *password, "input-1", &new_password, NULL, TRUE, FALSE, INPUT_COMPLETE_NONE),
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
             /* *INDENT-ON* */
@@ -82,18 +81,16 @@ smbfs_auth_dialog (const char *server, const char *share,
 
         if (quick_dialog (&qdlg) != B_CANCEL)
         {
-            if (new_workgroup != NULL)
-                g_strlcpy (workgroup, new_workgroup, wgmaxlen);
-
-            if (new_username != NULL)
-                g_strlcpy (username, new_username, unmaxlen);
-
-            if (new_password != NULL)
-                g_strlcpy (password, new_password, pwmaxlen);
+            smbfs_assign_value_if_not_null (new_workgroup, workgroup);
+            smbfs_assign_value_if_not_null (new_username, username);
+            smbfs_assign_value_if_not_null (new_password, password);
         }
-        g_free (new_password);
-        g_free (new_username);
-        g_free (new_workgroup);
+        else
+        {
+            g_free (new_password);
+            g_free (new_username);
+            g_free (new_workgroup);
+        }
     }
     g_free (smb_path);
 }

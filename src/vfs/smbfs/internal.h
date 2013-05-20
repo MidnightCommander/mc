@@ -19,7 +19,9 @@
 
 typedef struct
 {
-    int socket_handle;
+    char *username;
+    char *password;
+    char *workgroup;
 } smbfs_super_data_t;
 
 /*** global variables defined in .c file *********************************************************/
@@ -40,8 +42,7 @@ smbfs_cb_authdata_provider (const char *server, const char *share,
                             char *password, int pwmaxlen);
 void
 smbfs_auth_dialog (const char *server, const char *share,
-                   char *workgroup, int wgmaxlen, char *username, int unmaxlen,
-                   char *password, int pwmaxlen);
+                   char **workgroup, char **username, char **password);
 
 const char *smbfs_strerror (int err_no);
 
@@ -55,6 +56,7 @@ int smbfs_rmdir (const vfs_path_t * vpath, GError ** error);
 
 int smbfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** error);
 int smbfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** error);
+void smbfs_assign_value_if_not_null (char *value, char **assignee);
 
 
 /*** inline functions ****************************************************************************/
