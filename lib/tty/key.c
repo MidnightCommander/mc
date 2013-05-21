@@ -1747,13 +1747,18 @@ get_key_code (int no_delay)
     if (pending_keys != NULL)
     {
         int d;
+        gboolean bad_seq;
 
         d = *pending_keys++;
         while (d == ESC_CHAR)
             d = ALT (*pending_keys++);
 
-        if (*pending_keys == '\0')
+        bad_seq = (*pending_keys != ESC_CHAR && *pending_keys != 0);
+        if (*pending_keys == '\0' || bad_seq)
             pending_keys = seq_append = NULL;
+
+        if (bad_seq)
+            goto nodelay_try_again;
 
         if (d > 127 && d < 256 && use_8th_bit_as_meta)
             d = ALT (d & 0x7f);
@@ -1835,7 +1840,7 @@ get_key_code (int no_delay)
     {
         if (c == this->ch)
         {
-            if (!this->child)
+            if (this->child == NULL)
             {
                 /* We got a complete match, return and reset search */
                 int code;
