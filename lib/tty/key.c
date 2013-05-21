@@ -1131,14 +1131,14 @@ correct_key_code (int code)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-xgetch_second (void)
+getch_with_timeout (unsigned int delay_us)
 {
     fd_set Read_FD_Set;
     int c;
     struct timeval time_out;
 
-    time_out.tv_sec = old_esc_mode_timeout / 1000000;
-    time_out.tv_usec = old_esc_mode_timeout % 1000000;
+    time_out.tv_sec = delay_us / 1000000u;
+    time_out.tv_usec = delay_us % 1000000u;
     tty_nodelay (TRUE);
     FD_ZERO (&Read_FD_Set);
     FD_SET (input_fd, &Read_FD_Set);
@@ -1758,7 +1758,19 @@ get_key_code (int no_delay)
             pending_keys = seq_append = NULL;
 
         if (bad_seq)
+        {
+            /* This is an unknown ESC sequence.
+             * To prevent interpreting its tail as a random garbage,
+             * eat and discard all buffered and quickly following chars.
+             * Small, but non-zero timeout is needed to reconnect
+             * escape sequence split up by e.g. a serial line.
+             */
+            int paranoia = 20;
+
+            while (getch_with_timeout (old_esc_mode_timeout) >= 0 && --paranoia != 0)
+                ;
             goto nodelay_try_again;
+        }
 
         if (d > 127 && d < 256 && use_8th_bit_as_meta)
             d = ALT (d & 0x7f);
@@ -1866,7 +1878,7 @@ get_key_code (int no_delay)
                     goto nodelay_try_again;
                 }
                 esctime.tv_sec = -1;
-                c = xgetch_second ();
+                c = getch_with_timeout (old_esc_mode_timeout);
                 if (c == -1)
                 {
                     pending_keys = seq_append = NULL;
