@@ -26,6 +26,8 @@
 
 #include <config.h>
 #include <errno.h>
+#include <stdlib.h>
+#include <string.h>     /* memset() */
 
 #include "lib/global.h"
 #include "lib/vfs/utilvfs.h"
