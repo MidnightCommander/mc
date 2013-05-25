@@ -13,8 +13,11 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-typedef int (*mc_search_fn) (const void *user_data, gsize char_offset, int *current_char);
-typedef int (*mc_update_fn) (const void *user_data, gsize char_offset);
+typedef enum mc_search_cbret_t mc_search_cbret_t;
+
+typedef mc_search_cbret_t (*mc_search_fn) (const void *user_data, gsize char_offset,
+                                           int *current_char);
+typedef mc_search_cbret_t (*mc_update_fn) (const void *user_data, gsize char_offset);
 
 #define MC_SEARCH__NUM_REPLACE_ARGS 64
 
@@ -44,14 +47,13 @@ typedef enum
     MC_SEARCH_T_GLOB
 } mc_search_type_t;
 
-typedef enum
+enum mc_search_cbret_t
 {
     MC_SEARCH_CB_OK = 0,
     MC_SEARCH_CB_INVALID = -1,
     MC_SEARCH_CB_ABORT = -2,
     MC_SEARCH_CB_SKIP = -3
-} mc_search_cbret_t;
-
+};
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
