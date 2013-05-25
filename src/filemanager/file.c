@@ -85,6 +85,7 @@
 #include "filenot.h"
 #include "tree.h"
 #include "midnight.h"           /* current_panel */
+#include "layout.h"             /* rotate_dash() */
 
 #include "file.h"
 
@@ -828,7 +829,7 @@ copy_file_file_display_progress (FileOpTotalContext * tctx, FileOpContext * ctx,
     long dt;
 
     /* 1. Update rotating dash after some time */
-    rotate_dash ();
+    rotate_dash (TRUE);
 
     /* 3. Compute ETA */
     dt = (tv_current.tv_sec - tv_transfer_start.tv_sec);
@@ -1916,6 +1917,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
     dst_status = DEST_FULL;     /* copy successful, don't remove target file */
 
   ret:
+    rotate_dash (FALSE);
     while (src_desc != -1 && mc_close (src_desc) < 0 && !ctx->skip_all)
     {
         temp_status = file_error (_("Cannot close source file \"%s\"\n%s"), src_path);

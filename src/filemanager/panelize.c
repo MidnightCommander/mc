@@ -52,6 +52,7 @@
 
 #include "dir.h"
 #include "midnight.h"           /* current_panel */
+#include "layout.h"             /* rotate_dash() */
 #include "panel.h"              /* WPanel */
 
 #include "panelize.h"
@@ -366,8 +367,8 @@ do_external_panelize (char *command)
         list->list[next_free].sort_key = NULL;
         list->list[next_free].second_sort_key = NULL;
         next_free++;
-        if (!(next_free & 32))
-            rotate_dash ();
+        if ((next_free & 32) == 0)
+            rotate_dash (TRUE);
     }
 
     current_panel->is_panelized = TRUE;
@@ -395,6 +396,7 @@ do_external_panelize (char *command)
     close_error_pipe (D_NORMAL, NULL);
     try_to_select (current_panel, NULL);
     panel_re_sort (current_panel);
+    rotate_dash (FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

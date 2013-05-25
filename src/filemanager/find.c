@@ -1766,8 +1766,8 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
             list->list[next_free].second_sort_key = NULL;
             next_free++;
             g_free (name);
-            if (!(next_free & 15))
-                rotate_dash ();
+            if ((next_free & 15) == 0)
+                rotate_dash (TRUE);
         }
 
         if (next_free)
@@ -1793,6 +1793,7 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
     do_search (NULL);           /* force do_search to release resources */
     g_free (old_dir);
     old_dir = NULL;
+    rotate_dash (FALSE);
 
     return return_value;
 }
