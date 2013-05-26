@@ -18,7 +18,7 @@ enum subshell_state_enum
     RUNNING_COMMAND
 };
 
-/* For the `how' argument to various functions */
+/* For the 'how' argument to various functions */
 enum
 {
     QUIETLY,

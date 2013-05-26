@@ -612,10 +612,10 @@ close_error_pipe (int error, const char *text)
 /**
  * Canonicalize path, and return a new path.  Do everything in place.
  * The new path differs from path in:
- *      Multiple `/'s are collapsed to a single `/'.
- *      Leading `./'s and trailing `/.'s are removed.
- *      Trailing `/'s are removed.
- *      Non-leading `../'s and trailing `..'s are handled by removing
+ *      Multiple '/'s are collapsed to a single '/'.
+ *      Leading './'s and trailing '/.'s are removed.
+ *      Trailing '/'s are removed.
+ *      Non-leading '../'s and trailing '..'s are handled by removing
  *      portions of the path.
  * Well formed UNC paths are modified only in the local part.
  */

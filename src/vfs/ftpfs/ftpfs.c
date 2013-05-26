@@ -1746,13 +1746,13 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
     if (num_entries == 0 && cd_first == 0)
     {
         /* The LIST command may produce an empty output. In such scenario
-           it is not clear whether this is caused by  `remote_path' being
+           it is not clear whether this is caused by  'remote_path' being
            a non-existent path or for some other reason (listing emtpy
            directory without the -a option, non-readable directory, etc.).
 
-           Since `dir_load' is a crucial method, when it comes to determine
+           Since 'dir_load' is a crucial method, when it comes to determine
            whether a given path is a _directory_, the code must try its best
-           to determine the type of `remote_path'. The only reliable way to
+           to determine the type of 'remote_path'. The only reliable way to
            achieve this is trough issuing a CWD command. */
 
         cd_first = 1;

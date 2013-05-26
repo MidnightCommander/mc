@@ -96,7 +96,7 @@ bad_line_start (WEdit * edit, off_t p)
     int c;
     c = edit_get_byte (edit, p);
     if (c == '.')
-    {                           /* `...' is acceptable */
+    {                           /* '...' is acceptable */
         if (edit_get_byte (edit, p + 1) == '.')
             if (edit_get_byte (edit, p + 2) == '.')
                 return 0;
@@ -106,7 +106,7 @@ bad_line_start (WEdit * edit, off_t p)
     {
         if (edit_get_byte (edit, p + 1) == '-')
             if (edit_get_byte (edit, p + 2) == '-')
-                return 0;       /* `---' is acceptable */
+                return 0;       /* '---' is acceptable */
         return 1;
     }
     if (strchr (NO_FORMAT_CHARS_START, c))

@@ -706,7 +706,7 @@ msgstr "Задать начальную строку для встроенног
 
 msgid ""
 "\n"
-"Please send any bug reports (including the output of `mc -V')\n"
+"Please send any bug reports (including the output of 'mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
@@ -1600,7 +1600,7 @@ msgid "The shell is already running a command"
 msgstr "Интерпретатор занят выполнением команды"
 
 #, c-format
-msgid "Type `exit' to return to the Midnight Commander"
+msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Введите exit для возврата в Midnight Commander"
 
 msgid "Set &all"
@@ -2157,7 +2157,7 @@ msgstr ""
 "панели не могут быть отключены."
 
 #, c-format
-msgid "Symlink `%s' points to:"
+msgid "Symlink '%s' points to:"
 msgstr "Символическая ссылка %s указывает на:"
 
 msgid "Edit symlink"
@@ -2172,7 +2172,7 @@ msgid "edit symlink: %s"
 msgstr "правка символической ссылки: %s"
 
 #, c-format
-msgid "`%s' is not a symbolic link"
+msgid "'%s' is not a symbolic link"
 msgstr "%s не является символической ссылкой"
 
 msgid "FTP to machine"
@@ -2748,7 +2748,7 @@ msgid "&Background"
 msgstr "В &фоне"
 
 #, c-format
-msgid "Invalid source pattern `%s'"
+msgid "Invalid source pattern '%s'"
 msgstr "Неправильный образец \"%s\""
 
 msgid "&Chdir"

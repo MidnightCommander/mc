@@ -521,7 +521,7 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 
     vfs_print_message (_("fish: Sending initial line..."));
     /*
-     * Run `start_fish_server'. If it doesn't exist - no problem,
+     * Run 'start_fish_server'. If it doesn't exist - no problem,
      * we'll talk directly to the shell.
      */
 
@@ -870,10 +870,10 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
      *
      *     ( head -c number ) | ( cat > file; cat >/dev/null )
      *
-     *  If `head' is not present on the remote system, `dd' will be used.
-     * Unfortunately, we cannot trust most non-GNU `head' implementations
-     * even if `-c' options is supported. Therefore, we separate GNU head
-     * (and other modern heads?) using `-q' and `-' . This causes another
+     *  If 'head' is not present on the remote system, 'dd' will be used.
+     * Unfortunately, we cannot trust most non-GNU 'head' implementations
+     * even if '-c' options is supported. Therefore, we separate GNU head
+     * (and other modern heads?) using '-q' and '-' . This causes another
      * implementations to fail (because of "incorrect options").
      *
      *  Fallback is:
@@ -886,7 +886,7 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
      *        rest=`expr $rest - $n`
      *     done
      *
-     *  `dd' was not designed for full filling of input buffers,
+     *  'dd' was not designed for full filling of input buffers,
      *  and does not report exact number of bytes (not blocks).
      *  Therefore a more complex shell script is needed.
      *
@@ -994,9 +994,9 @@ fish_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
     fish->append = FALSE;
 
     /*
-     * Check whether the remote file is readable by using `dd' to copy 
-     * a single byte from the remote file to /dev/null. If `dd' completes
-     * with exit status of 0 use `cat' to send the file contents to the
+     * Check whether the remote file is readable by using 'dd' to copy 
+     * a single byte from the remote file to /dev/null. If 'dd' completes
+     * with exit status of 0 use 'cat' to send the file contents to the
      * standard output (i.e. over the network).
      */
 

@@ -1371,7 +1371,7 @@ edit_symlink_cmd (void)
         p = selection (current_panel)->fname;
         p_vpath = vfs_path_from_str (p);
 
-        q = g_strdup_printf (_("Symlink `%s\' points to:"), str_trunc (p, 32));
+        q = g_strdup_printf (_("Symlink '%s\' points to:"), str_trunc (p, 32));
 
         i = readlink (p, buffer, MC_MAXPATHLEN - 1);
         if (i > 0)
@@ -1411,7 +1411,7 @@ edit_symlink_cmd (void)
     }
     else
     {
-        message (D_ERROR, MSG_ERROR, _("`%s' is not a symbolic link"),
+        message (D_ERROR, MSG_ERROR, _("'%s' is not a symbolic link"),
                  selection (current_panel)->fname);
     }
 }

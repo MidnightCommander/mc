@@ -73,7 +73,7 @@
 
 /* State of the subshell:
  * INACTIVE: the default state; awaiting a command
- * ACTIVE: remain in the shell until the user hits `subshell_switch_key'
+ * ACTIVE: remain in the shell until the user hits 'subshell_switch_key'
  * RUNNING_COMMAND: return to MC when the current command finishes */
 enum subshell_state_enum subshell_state;
 
@@ -161,7 +161,7 @@ static char subshell_cwd[MC_MAXPATHLEN + 1];
 static int subshell_ready;
 
 /* The following two flags can be changed by the SIGCHLD handler. This is */
-/* OK, because the `int' type is updated atomically on all known machines */
+/* OK, because the 'int' type is updated atomically on all known machines */
 static volatile int subshell_alive, subshell_stopped;
 
 /* We store the terminal's initial mode here so that we can configure
@@ -254,7 +254,7 @@ init_subshell_child (const char *pty_name)
     /* Set up the subshell's environment and init file name */
 
     /* It simplifies things to change to our home directory here, */
-    /* and the user's startup file may do a `cd' command anyway   */
+    /* and the user's startup file may do a 'cd' command anyway   */
     {
         int ret;
         ret = chdir (mc_config_get_home_dir ());        /* FIXME? What about when we re-run the subshell? */
@@ -415,7 +415,7 @@ init_raw_mode ()
     /* pty.  So, instead of changing the code for execute(), pre_exec(),        */
     /* etc, we just set up the modes we need here, before each command.         */
 
-    if (initialized == 0)       /* First time: initialise `raw_mode' */
+    if (initialized == 0)       /* First time: initialise 'raw_mode' */
     {
         tcgetattr (STDOUT_FILENO, &raw_mode);
         raw_mode.c_lflag &= ~ICANON;    /* Disable line-editing chars, etc.   */
@@ -433,7 +433,7 @@ init_raw_mode ()
 /* --------------------------------------------------------------------------------------------- */
 /**
  * Wait until the subshell dies or stops.  If it stops, make it resume.
- * Possibly modifies the globals `subshell_alive' and `subshell_stopped'
+ * Possibly modifies the globals 'subshell_alive' and 'subshell_stopped'
  */
 
 static void
@@ -474,9 +474,9 @@ synchronize (void)
 static gboolean
 feed_subshell (int how, int fail_on_error)
 {
-    fd_set read_set;            /* For `select' */
+    fd_set read_set;            /* For 'select' */
     int maxfdp;
-    int bytes;                  /* For the return value from `read' */
+    int bytes;                  /* For the return value from 'read' */
     int i;                      /* Loop counter */
 
     struct timeval wtime;       /* Maximum time we wait for the subshell */
@@ -492,7 +492,7 @@ feed_subshell (int how, int fail_on_error)
         if (!subshell_alive)
             return FALSE;
 
-        /* Prepare the file-descriptor set and call `select' */
+        /* Prepare the file-descriptor set and call 'select' */
 
         FD_ZERO (&read_set);
         FD_SET (mc_global.tty.subshell_pty, &read_set);
@@ -882,7 +882,7 @@ init_subshell (void)
         init_subshell_child (pty_name);
     }
 
-    /* Set up `precmd' or equivalent for reading the subshell's CWD */
+    /* Set up 'precmd' or equivalent for reading the subshell's CWD */
 
     switch (subshell_type)
     {
@@ -999,7 +999,7 @@ read_subshell_prompt (void)
     {
         ssize_t i;
 
-        /* Check for `select' errors */
+        /* Check for 'select' errors */
         if (rc == -1)
         {
             if (errno == EINTR)
@@ -1109,7 +1109,7 @@ subshell_name_quote (const char *s)
 
     ret = g_string_sized_new (64);
 
-    /* Prevent interpreting leading `-' as a switch for `cd' */
+    /* Prevent interpreting leading '-' as a switch for 'cd' */
     if (s[0] == '-')
         g_string_append (ret, "./");
 
@@ -1252,7 +1252,7 @@ subshell_get_console_attributes (void)
 /* --------------------------------------------------------------------------------------------- */
 /**
  * Figure out whether the subshell has stopped, exited or been killed
- * Possibly modifies: `subshell_alive', `subshell_stopped' and `quit' */
+ * Possibly modifies: 'subshell_alive', 'subshell_stopped' and 'quit' */
 
 void
 sigchld_handler (int sig)

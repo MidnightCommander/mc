@@ -631,12 +631,12 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
         case TAR_POSIX:
             /* The ustar archive format supports pathnames of upto 256
              * characters in length. This is achieved by concatenating
-             * the contents of the `prefix' and `arch_name' fields like
+             * the contents of the 'prefix' and 'arch_name' fields like
              * this:
              *
              *   prefix + path_separator + arch_name
              *
-             * If the `prefix' field contains an empty string i.e. its
+             * If the 'prefix' field contains an empty string i.e. its
              * first characters is '\0' the prefix field is ignored.
              */
             if (header->header.unused.prefix[0] != '\0')

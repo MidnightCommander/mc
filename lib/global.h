@@ -136,7 +136,7 @@
 #define UTF8_CHAR_LEN 6
 
 /* Used to distinguish between a normal MC termination and */
-/* one caused by typing `exit' or `logout' in the subshell */
+/* one caused by typing 'exit' or 'logout' in the subshell */
 #define SUBSHELL_EXIT 128
 
 /* C++ style type casts */

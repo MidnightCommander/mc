@@ -120,7 +120,7 @@ const char VERTICAL_MAGIC[] = { '\1', '\1', '\1', '\1', '\n' };
 /* detecting an error on save is easy: just check if every byte has been written. */
 /* detecting an error on read, is not so easy 'cos there is not way to tell
    whether you read everything or not. */
-/* FIXME: add proper `triple_pipe_open' to read, write and check errors. */
+/* FIXME: add proper 'triple_pipe_open' to read, write and check errors. */
 static const struct edit_filters
 {
     const char *read, *write, *extension;

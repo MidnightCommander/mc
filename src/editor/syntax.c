@@ -1260,7 +1260,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
         if (args[0] == NULL)
             continue;
 
-        /* Looking for `include ...` lines before first `file ...` ones */
+        /* Looking for 'include ...' lines before first 'file ...' ones */
         if (!found && strcmp (args[0], "include") == 0)
         {
             if (g != NULL)
@@ -1274,7 +1274,7 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
             goto found_type;
         }
 
-        /* looking for `file ...' lines only */
+        /* looking for 'file ...' lines only */
         if (strcmp (args[0], "file") != 0)
             continue;
 

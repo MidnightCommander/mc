@@ -290,7 +290,7 @@ filename_completion_function (const char *text, int state, input_complete_t flag
         {
             g_string_append (temp, users_dirname);
 
-            /* We need a `/' at the end. */
+            /* We need a '/' at the end. */
             if (temp->str[temp->len - 1] != PATH_SEP)
                 g_string_append_c (temp, PATH_SEP);
         }
@@ -851,7 +851,7 @@ try_complete_commands_prepare (try_complete_automation_state_t * state, char *te
 
         if (ti != text)
         {
-            /* Handle the two character tokens `>&', `<&', and `>|'.
+            /* Handle the two character tokens '>&', '<&', and '>|'.
                We are not in a command position after one of these. */
             this_char = ti[0];
             prev_char = str_get_prev_char (ti)[0];
@@ -1339,7 +1339,7 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
             *lc_start += state.r - state.word;
     }
 
-    /* Starts with `~' and there is no slash in the word, then
+    /* Starts with '~' and there is no slash in the word, then
        try completing this word as a username. */
     if (!matches && *state.word == '~' && (state.flags & INPUT_COMPLETE_USERNAMES)
         && !strchr (state.word, PATH_SEP))

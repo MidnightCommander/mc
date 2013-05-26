@@ -880,7 +880,7 @@ add2hotlist (char *label, char *directory, enum HotListType type, listbox_append
 
     listbox_get_current (l_hotlist, NULL, (void **) &current);
 
-    /* Make sure `..' stays at the top of the list. */
+    /* Make sure '..' stays at the top of the list. */
     if ((current != NULL) && (current->type == HL_TYPE_DOTDOT))
         pos = LISTBOX_APPEND_AFTER;
 

@@ -484,7 +484,7 @@ toggle_panels (void)
     {
         if (output_starts_shell)
         {
-            fprintf (stderr, _("Type `exit' to return to the Midnight Commander"));
+            fprintf (stderr, _("Type 'exit' to return to the Midnight Commander"));
             fprintf (stderr, "\n\r\n\r");
 
             my_system (EXECUTE_INTERNAL, mc_global.tty.shell, NULL);
@@ -505,7 +505,7 @@ toggle_panels (void)
        subshell */
     if ((quit & SUBSHELL_EXIT) != 0)
     {
-        /* User did `exit' or `logout': quit MC */
+        /* User did 'exit' or 'logout': quit MC */
         if (quiet_quit_cmd ())
             return;
 

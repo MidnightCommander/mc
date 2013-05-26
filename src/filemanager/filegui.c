@@ -1260,7 +1260,7 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
 
         if (ctx->search_handle == NULL)
         {
-            message (D_ERROR, MSG_ERROR, _("Invalid source pattern `%s'"), source_mask);
+            message (D_ERROR, MSG_ERROR, _("Invalid source pattern '%s'"), source_mask);
             g_free (dest_dir);
             g_free (source_mask);
             goto ask_file_mask;
