@@ -135,8 +135,6 @@ static const struct edit_filters
     /* *INDENT-ON* */
 };
 
-static off_t last_bracket = -1;
-
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -2276,6 +2274,7 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
 
     edit->over_col = 0;
     edit->bracket = -1;
+    edit->last_bracket = -1;
     edit->force |= REDRAW_PAGE;
 
     /* set file name before load file */
@@ -3517,9 +3516,9 @@ void
 edit_find_bracket (WEdit * edit)
 {
     edit->bracket = edit_get_bracket (edit, 1, 10000);
-    if (last_bracket != edit->bracket)
+    if (edit->last_bracket != edit->bracket)
         edit->force |= REDRAW_PAGE;
-    last_bracket = edit->bracket;
+    edit->last_bracket = edit->bracket;
 }
 
 /* --------------------------------------------------------------------------------------------- */
