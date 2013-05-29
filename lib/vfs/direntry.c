@@ -1068,6 +1068,81 @@ vfs_s_find_inode (struct vfs_class *me, const struct vfs_s_super *super,
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+vfs_file_handler_t *
+vfs_s_create_file_handler (const struct vfs_s_super * super, const vfs_path_t * vpath, int flags)
+{
+    vfs_file_handler_t *file_handler;
+    struct vfs_s_inode *path_inode;
+    const vfs_path_element_t *path_element;
+    gboolean was_created = FALSE;
+
+    path_element = vfs_path_get_by_index (vpath, -1);
+
+    path_inode =
+        vfs_s_find_inode (path_element->class, super, path_element->path, LINK_FOLLOW, FL_NONE);
+    if (path_inode != NULL && ((flags & (O_CREAT | O_EXCL)) == (O_CREAT | O_EXCL)))
+    {
+        path_element->class->verrno = EEXIST;
+        return NULL;
+    }
+
+    if (path_inode == NULL)
+    {
+        char *dirname, *name;
+        struct vfs_s_entry *ent;
+        struct vfs_s_inode *dir;
+
+        dirname = g_path_get_dirname (path_element->path);
+        name = g_path_get_basename (path_element->path);
+        dir = vfs_s_find_inode (path_element->class, super, dirname, LINK_FOLLOW, FL_DIR);
+        if (dir == NULL)
+        {
+            g_free (dirname);
+            g_free (name);
+            return NULL;
+        }
+        ent = vfs_s_generate_entry (path_element->class, name, dir, 0755);
+        path_inode = ent->ino;
+        vfs_s_insert_entry (path_element->class, dir, ent);
+        g_free (dirname);
+        g_free (name);
+        was_created = TRUE;
+    }
+
+    if (S_ISDIR (path_inode->st.st_mode))
+    {
+        path_element->class->verrno = EISDIR;
+        return NULL;
+    }
+
+    file_handler = g_new0 (vfs_file_handler_t, 1);
+    file_handler->pos = 0;
+    file_handler->ino = path_inode;
+    file_handler->handle = -1;
+    file_handler->changed = was_created;
+    file_handler->linear = 0;
+    file_handler->data = NULL;
+
+    return file_handler;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+vfs_s_open_file_post_action (const vfs_path_t * vpath, struct vfs_s_super *super,
+                             vfs_file_handler_t * file_handler)
+{
+
+    const vfs_path_element_t *path_element;
+
+    path_element = vfs_path_get_by_index (vpath, -1);
+    vfs_rmstamp (path_element->class, (vfsid) super);
+    super->fd_usage++;
+    file_handler->ino->st.st_nlink++;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /* Ook, these were functions around directory entries / inodes */
 /* -------------------------------- superblock games -------------------------- */
 /**

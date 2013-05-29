@@ -176,6 +176,11 @@ struct vfs_s_entry *vfs_s_generate_entry (struct vfs_class *me, const char *name
 struct vfs_s_inode *vfs_s_find_inode (struct vfs_class *me,
                                       const struct vfs_s_super *super,
                                       const char *path, int follow, int flags);
+vfs_file_handler_t *vfs_s_create_file_handler (const struct vfs_s_super *super,
+                                               const vfs_path_t * vpath, int flags);
+void
+vfs_s_open_file_post_action (const vfs_path_t * vpath, struct vfs_s_super *super,
+                             vfs_file_handler_t * file_handler);
 struct vfs_s_inode *vfs_s_find_root (struct vfs_class *me, struct vfs_s_entry *entry);
 
 /* outside interface */
