@@ -47,6 +47,7 @@
 
 Mouse_Type use_mouse_p = MOUSE_NONE;
 gboolean mouse_enabled = FALSE;
+int mouse_fd = -1;              /* for when gpm_fd changes to < 0 and the old one must be cleared from select_set */
 const char *xmouse_seq;
 const char *xmouse_extended_seq;
 
@@ -114,7 +115,6 @@ enable_mouse (void)
 #ifdef HAVE_LIBGPM
     case MOUSE_GPM:
         {
-            int mouse_d;
             Gpm_Connect conn;
 
             conn.eventMask = ~GPM_MOVE;
@@ -122,8 +122,8 @@ enable_mouse (void)
             conn.minMod = 0;
             conn.maxMod = 0;
 
-            mouse_d = Gpm_Open (&conn, 0);
-            if (mouse_d == -1)
+            mouse_fd = Gpm_Open (&conn, 0);
+            if (mouse_fd == -1)
             {
                 use_mouse_p = MOUSE_NONE;
                 return;

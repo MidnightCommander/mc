@@ -97,6 +97,9 @@ typedef int (*mouse_h) (Gpm_Event *, void *);
 /* Type of the currently used mouse */
 extern Mouse_Type use_mouse_p;
 
+/* To be used when gpm_fd were initially >= 0 */
+extern int mouse_fd;
+
 /* String indicating that a mouse event has occurred, usually "\E[M" */
 extern const char *xmouse_seq;
 
