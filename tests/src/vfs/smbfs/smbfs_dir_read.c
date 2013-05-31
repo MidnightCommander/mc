@@ -43,7 +43,7 @@ typedef struct
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int smbfs_readdir__errno;
+static int smbfs_dir_read__errno;
 
 /* @CapturedValue */
 static int smbc_readdir__handle__captured;
@@ -55,7 +55,7 @@ struct smbc_dirent *
 smbc_readdir (unsigned int handle)
 {
     smbc_readdir__handle__captured = handle;
-    errno = smbfs_readdir__errno;
+    errno = smbfs_dir_read__errno;
 
     return smbc_readdir__return_value;
 }
@@ -103,8 +103,8 @@ START_TEST (test_smbfs_read_dir_fail)
     smbc_readdir__return_value = NULL;
 
     /* when */
-    smbfs_readdir__errno = ENODEV;
-    actual_result = smbfs_readdir (&input_smbfs_dir_data, &error);
+    smbfs_dir_read__errno = ENODEV;
+    actual_result = smbfs_dir_read (&input_smbfs_dir_data, &error);
 
     /* then */
 
@@ -144,8 +144,8 @@ START_TEST (test_smbfs_read_dir_success)
 
     /* when */
 
-    smbfs_readdir__errno = 0;
-    actual_result = smbfs_readdir (&input_smbfs_dir_data, &error);
+    smbfs_dir_read__errno = 0;
+    actual_result = smbfs_dir_read (&input_smbfs_dir_data, &error);
 
     /* then */
 
@@ -183,7 +183,7 @@ main (void)
 
     suite_add_tcase (s, tc_core);
     sr = srunner_create (s);
-    srunner_set_log (sr, "smbfs_readdir.log");
+    srunner_set_log (sr, "smbfs_dir_read.log");
     srunner_run_all (sr, CK_NORMAL);
     number_failed = srunner_ntests_failed (sr);
     srunner_free (sr);

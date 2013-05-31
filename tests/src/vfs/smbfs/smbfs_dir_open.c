@@ -150,7 +150,7 @@ START_TEST (test_smbfs_open_dir_fail)
 
     /* when */
 
-    actual_result = smbfs_opendir (input_vpath, &error);
+    actual_result = smbfs_dir_open (input_vpath, &error);
 
     /* then */
 
@@ -196,7 +196,7 @@ START_TEST (test_smbfs_open_dir_success)
 
     /* when */
 
-    actual_result = smbfs_opendir (input_vpath, &error);
+    actual_result = smbfs_dir_open (input_vpath, &error);
 
     /* then */
 
@@ -241,7 +241,7 @@ main (void)
 
     suite_add_tcase (s, tc_core);
     sr = srunner_create (s);
-    srunner_set_log (sr, "smbfs_opendir.log");
+    srunner_set_log (sr, "smbfs_dir_open.log");
     srunner_run_all (sr, CK_NORMAL);
     number_failed = srunner_ntests_failed (sr);
     srunner_free (sr);

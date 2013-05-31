@@ -15,26 +15,25 @@ LIBS=@CHECK_LIBS@  \
 	$(top_builddir)/lib/libmc.la
 
 TESTS = \
-	dir__smbfs_opendir \
-	dir__smbfs_readdir \
+	smbfs_dir_open \
+	smbfs_dir_read \
 	internal__smbfs_make_url \
 	internal__smbfs_strerror \
-	stat__smbfs_lstat
+	smbfs_lstat
 
 check_PROGRAMS = $(TESTS)
 
-dir__smbfs_opendir_SOURCES = \
-	dir__smbfs_opendir.c
+smbfs_dir_open_SOURCES = \
+	smbfs_dir_open.c
 
-dir__smbfs_readdir_SOURCES = \
-	dir__smbfs_readdir.c
+smbfs_dir_read_SOURCES = \
+	smbfs_dir_read.c
 
-
-dir__smbfs_strerror_SOURCES = \
+internal__smbfs_strerror_SOURCES = \
 	internal__smbfs_strerror.c
 
 internal__smbfs_make_url_SOURCES = \
 	internal__smbfs_make_url.c
 
-stat__smbfs_lstat_SOURCES = \
-	stat__smbfs_lstat.c
+smbfs_lstat_SOURCES = \
+	smbfs_lstat.c

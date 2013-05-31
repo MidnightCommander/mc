@@ -60,7 +60,7 @@ typedef struct
  */
 
 void *
-smbfs_opendir (const vfs_path_t * vpath, GError ** error)
+smbfs_dir_open (const vfs_path_t * vpath, GError ** error)
 {
     smbfs_dir_data_t *smbfs_dir = NULL;
     struct vfs_s_super *super;
@@ -104,7 +104,7 @@ smbfs_opendir (const vfs_path_t * vpath, GError ** error)
  */
 
 void *
-smbfs_readdir (void *data, GError ** error)
+smbfs_dir_read (void *data, GError ** error)
 {
     struct smbc_dirent *smb_direntry;
     smbfs_dir_data_t *smbfs_dir = (smbfs_dir_data_t *) data;
@@ -135,7 +135,7 @@ smbfs_readdir (void *data, GError ** error)
  */
 
 int
-smbfs_closedir (void *data, GError ** error)
+smbfs_dir_close (void *data, GError ** error)
 {
     int return_code;
     smbfs_dir_data_t *smbfs_dir = (smbfs_dir_data_t *) data;
@@ -161,7 +161,7 @@ smbfs_closedir (void *data, GError ** error)
  */
 
 int
-smbfs_mkdir (const vfs_path_t * vpath, mode_t mode, GError ** error)
+smbfs_dir_make (const vfs_path_t * vpath, mode_t mode, GError ** error)
 {
     int return_code;
     char *smb_url;
@@ -189,7 +189,7 @@ smbfs_mkdir (const vfs_path_t * vpath, mode_t mode, GError ** error)
  */
 
 int
-smbfs_rmdir (const vfs_path_t * vpath, GError ** error)
+smbfs_dir_remove (const vfs_path_t * vpath, GError ** error)
 {
     int return_code;
     char *smb_url;

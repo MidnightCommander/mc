@@ -48,16 +48,35 @@ const char *smbfs_strerror (int err_no);
 
 char *smbfs_make_url (const vfs_path_element_t * element, gboolean with_path);
 
-void *smbfs_opendir (const vfs_path_t * vpath, GError ** error);
-void *smbfs_readdir (void *data, GError ** error);
-int smbfs_closedir (void *data, GError ** error);
-int smbfs_mkdir (const vfs_path_t * vpath, mode_t mode, GError ** error);
-int smbfs_rmdir (const vfs_path_t * vpath, GError ** error);
+void *smbfs_dir_open (const vfs_path_t * vpath, GError ** error);
+void *smbfs_dir_read (void *data, GError ** error);
+int smbfs_dir_close (void *data, GError ** error);
+int smbfs_dir_make (const vfs_path_t * vpath, mode_t mode, GError ** error);
+int smbfs_dir_remove (const vfs_path_t * vpath, GError ** error);
 
 int smbfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** error);
 int smbfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** error);
+
 void smbfs_assign_value_if_not_null (char *value, char **assignee);
 
+gboolean smbfs_file_open (vfs_file_handler_t * file_handler, const vfs_path_t * vpath, int flags,
+                          mode_t mode, GError ** error);
+int smbfs_file_stat (vfs_file_handler_t * data, struct stat *buf, GError ** error);
+off_t smbfs_file_lseek (vfs_file_handler_t * file_handler, off_t offset, int whence,
+                        GError ** error);
+ssize_t smbfs_file_read (vfs_file_handler_t * file_handler, char *buffer, size_t count,
+                         GError ** error);
+ssize_t smbfs_file_write (vfs_file_handler_t * file_handler, const char *buffer, size_t count,
+                          GError ** error);
+int smbfs_file_close (vfs_file_handler_t * file_handler, GError ** error);
+
+int smbfs_attr_chmod (const vfs_path_t * vpath, mode_t mode, GError ** error);
+
+int smbfs_unlink (const vfs_path_t * vpath, GError ** error);
+int smbfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** error);
+
+int smbfs_file_change_modification_time (const vfs_path_t * vpath, struct utimbuf *tbuf,
+                                         GError ** error);
 
 /*** inline functions ****************************************************************************/
 
