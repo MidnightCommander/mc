@@ -2,7 +2,7 @@
    Widgets for the Midnight Commander
 
    Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
-   2004, 2005, 2006, 2007, 2009, 2010, 2011
+   2004, 2005, 2006, 2007, 2009, 2010, 2011, 2013
    The Free Software Foundation, Inc.
 
    Authors:
@@ -11,7 +11,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013
 
    This file is part of the Midnight Commander.
 
@@ -67,16 +67,18 @@ groupbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 
     case MSG_DRAW:
         {
-            Widget *wo = WIDGET (w->owner);
+            gboolean disabled;
 
-            gboolean disabled = (w->options & W_DISABLED) != 0;
+            disabled = (w->options & W_DISABLED) != 0;
             tty_setcolor (disabled ? DISABLED_COLOR : COLOR_NORMAL);
-            draw_box (w->owner, w->y - wo->y, w->x - wo->x, w->lines, w->cols, TRUE);
+            tty_draw_box (w->y, w->x, w->lines, w->cols, TRUE);
 
             if (g->title != NULL)
             {
+                Widget *wo = WIDGET (w->owner);
+
                 tty_setcolor (disabled ? DISABLED_COLOR : COLOR_TITLE);
-                widget_move (w->owner, w->y - wo->y, w->x - wo->x + 1);
+                widget_move (wo, w->y - wo->y, w->x - wo->x + 1);
                 tty_print_string (g->title);
             }
             return MSG_HANDLED;

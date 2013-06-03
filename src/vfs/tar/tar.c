@@ -2,12 +2,13 @@
    Virtual File System: GNU Tar file system.
 
    Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2006, 2007, 2011
+   2006, 2007, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
    Jakub Jelinek, 1995
    Pavel Machek, 1998
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -291,15 +292,11 @@ tar_open_archive_int (struct vfs_class *me, const vfs_path_t * vpath, struct vfs
     result = mc_open (vpath, O_RDONLY);
     if (result == -1)
     {
-        char *name;
-
-        name = vfs_path_to_str (vpath);
-        message (D_ERROR, MSG_ERROR, _("Cannot open tar archive\n%s"), name);
-        g_free (name);
+        message (D_ERROR, MSG_ERROR, _("Cannot open tar archive\n%s"), vfs_path_as_str (vpath));
         ERRNOR (ENOENT, -1);
     }
 
-    archive->name = vfs_path_to_str (vpath);
+    archive->name = g_strdup (vfs_path_as_str (vpath));
     archive->data = g_new (tar_super_data_t, 1);
     arch = (tar_super_data_t *) archive->data;
     mc_stat (vpath, &arch->st);
@@ -634,12 +631,12 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
         case TAR_POSIX:
             /* The ustar archive format supports pathnames of upto 256
              * characters in length. This is achieved by concatenating
-             * the contents of the `prefix' and `arch_name' fields like
+             * the contents of the 'prefix' and 'arch_name' fields like
              * this:
              *
              *   prefix + path_separator + arch_name
              *
-             * If the `prefix' field contains an empty string i.e. its
+             * If the 'prefix' field contains an empty string i.e. its
              * first characters is '\0' the prefix field is ignored.
              */
             if (header->header.unused.prefix[0] != '\0')
@@ -791,10 +788,8 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
                 /* Error on first record */
             case STATUS_EOFMARK:
                 {
-                    char *archive_name = vfs_path_to_str (vpath);
                     message (D_ERROR, MSG_ERROR, _("%s\ndoesn't look like a tar archive."),
-                             archive_name);
-                    g_free (archive_name);
+                             vfs_path_as_str (vpath));
                     /* FALL THRU */
 
                     /* Error after header rec */
@@ -841,16 +836,11 @@ tar_super_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *pa
                 const vfs_path_t * vpath, void *cookie)
 {
     struct stat *archive_stat = cookie; /* stat of main archive */
-    char *archive_name = vfs_path_to_str (vpath);
 
     (void) vpath_element;
 
-    if (strcmp (parc->name, archive_name) != 0)
-    {
-        g_free (archive_name);
+    if (strcmp (parc->name, vfs_path_as_str (vpath)) != 0)
         return 0;
-    }
-    g_free (archive_name);
 
     /* Has the cached archive been changed on the disk? */
     if (((tar_super_data_t *) parc->data)->st.st_mtime < archive_stat->st_mtime)

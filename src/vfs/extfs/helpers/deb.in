@@ -34,7 +34,7 @@ sub mcdebfs_list
 	local($archivename)=@_;
 	local $qarchivename = quote($archivename);
 	chop($date=`LC_ALL=C date "+%b %d %H:%M"`);
-	chop($info_size=`LC_ALL=C dpkg -I $qarchivename | wc -c`);
+	chop($info_size=`dpkg -I $qarchivename | wc -c`);
 	$install_size=length($pressinstall);
 
 	print "dr-xr-xr-x   1 root     root     0 $date CONTENTS\n";

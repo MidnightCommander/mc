@@ -1,3 +1,4 @@
+.\" -*- mode: troff; coding: utf8 -*-
 .\"TOPICS "Tartalomjegyzék"
 .TH MC 1 "%DATE_OF_MAN_PAGE%" "MC Version %DISTR_VERSION%" "GNU Midnight Commander"
 .\"SKIP_SECTION"
@@ -173,7 +174,7 @@ A fájlra történő dupla kattintásra az MC megpróbálja futtani
 azt, ha futtatható fájlról van szó; ha a
 .\"LINK2"
 fájl kiterjesztését
-.\"Extension File Edit"
+.\"Edit Extension File"
 egy adott programhoz már hozzá rendelted, a fájl kiterjesztéséhez
 hozzárendelt program lefut.
 .PP
@@ -278,7 +279,7 @@ panel információit; ha a kiválasztás egy futtatható fájlon van, akkor
 lefuttatja azt. Végül, ha a kiválasztott fájl kiterjesztése szerepel a
 .\"LINK2"
 társításoknál\&,
-.\"Extension File Edit"
+.\"Edit Extension File"
 akkor a kijelölt parancs fut le.
 .PP
 .B C\-l
@@ -875,7 +876,7 @@ lenyomására egy teljes listát kapsz az elérhető gombokról.
 Ez segítségül hívja a
 .\"LINK2"
 felhasználói menüt\&.
-.\"Menu File Edit"
+.\"Edit Menu File"
 A felhasználói menü könnyű használatot biztosít az új menükkel és az
 extra eszközökkel a Midnight Commander\-hez.
 .PP
@@ -1092,14 +1093,14 @@ tartalmát a jellegi panelbe teszi.
 A
 .\"LINK2"
 Társítások
-.\"Extension File Edit"
+.\"Edit Extension File"
 lehetővé teszik számodra a futtatandó programok meghatározását, a
 kiválasztott fájl kiterjesztésének (fájlnév vége) megfelelően akkor, ha
 futtatod, megtekinted a tartalmát, átszerkeszted vagy más egyéb dolgot
 szeretnél vele csinálni. A
 .\"LINK2"
 Menu editor edit
-.\"Menu File Edit"
+.\"Edit Menu File"
 parancs a felhasználói menü szerkesztésére használható (ami az F2
 lenyomásával elérhető).
 .\"NODE "    Directory Tree"
@@ -1296,7 +1297,7 @@ használatát megtekintheted a
 A cd belső parancs
 .\"The cd internal command"
 leírásánál.
-.\"NODE "    Extension File Edit"
+.\"NODE "    Edit Extension File"
 .SH "    Társítások"
 Ez az ~/.config/mc/mc.ext szerkesztéséhez segítségül fogja hívni a
 szövegszerkesztődet. A fájl formátuma a következő (a formátum a 3.0\-ás
@@ -1364,7 +1365,7 @@ Ezzel szabályozhatod néhány Commander háttérfolyamat állapotát (csak a
 másolás és a mozgatás fájlműveletek tehetők háttérbe). Ezeket a
 háttérmunkákat állíthatod le, indíthatod újra, lőheted ki itt. A
 linuxban futó background processzekre hatástalan.
-.\"NODE "    Menu File Edit"
+.\"NODE "    Edit Menu File"
 .SH "    Menü szerkesztés"
 A felhasználói menüt a felhasználó testre szabhatja. Ez az aktulis
 könyvtár .mc.menu fájlja, ha az létezik, de csak, ha az a felhasználó
@@ -1919,7 +1920,7 @@ Ha az Enter\-t az adott fájl felett lenyomod, nem indul el azonnal, hanem
 a Midnight Commander leellenőrzi a kiválasztott fájl kiterjesztését a
 .\"LINK2"
 Társításokban
-.\"Extension File Edit"
+.\"Edit Extension File"
 találhatónak megfelelően. Ha talál egyezést, akkor a kódnak megfelelő
 bejegyzést futtatja. Egy nagyon egyszerű
 .\"LINK2"
@@ -1966,11 +1967,11 @@ az /usr/src/linux könyvtárba léptet át).
 Amikor belépsz a
 .\"LINK2"
 felhasználói menübe\&,
-.\"Menu File Edit"
+.\"Edit Menu File"
 vagy a
 .\"LINK2"
 társítások parancsot\&,
-.\"Extension File Edit"
+.\"Edit Extension File"
 futtatod, illetve a parancsot a parancssorból futtatod, a Makró
 Helyettesítőt használod.
 .PP
@@ -2439,7 +2440,7 @@ Ez a rész a fájl fájlnézővel történő megjelenítésének leírását
 tartalmazta, lásd még a
 .\"LINK2"
 Társítások
-.\"Extension File Edit"
+.\"Edit Extension File"
 részt.
 .\"NODE "Internal File Editor"
 .SH "Belső fájlszerkesztő"
@@ -2667,7 +2668,7 @@ csak rá kell mutatnod a tar fájlra és le kell nyomnod az entert ahhoz,
 hogy beléphess a tar fájlba, ehhez nézd meg a
 .\"LINK2"
 Társítások
-.\"Extension File Edit"
+.\"Edit Extension File"
 részt, hogy megismerhesd az ezzel kapcsolatos információkat:
 .PP
 Példák:
@@ -2881,8 +2882,8 @@ where xxxx is one of:
 .PP
 You could bind file type/extension to specified extfs as described in the
 .\"LINK2"
-Extension File Edit
-.\"Extension File Edit"
+Edit Extension File
+.\"Edit Extension File"
 section.  Here is an example entry for Debian packages:
 .PP
 .nf
@@ -3118,7 +3119,7 @@ Ha ez a változó be van állítva (alapértelmezésben) meg foja jelölni azt
 a fájl parancsot, amelyhez a
 .\"LINK2"
 Társításokban
-.\"Extension File Edit"
+.\"Edit Extension File"
 a fájl típusnál egyezőt talált.
 .PP
 .I xtree_mode

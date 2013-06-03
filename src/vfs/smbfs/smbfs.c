@@ -1475,20 +1475,22 @@ smbfs_fake_share_stat (const char *server_url, const char *path, struct stat *bu
         /* Make sure there is such share at server */
         smbfs_connection *sc;
         char *p;
-        vfs_path_t *vpath = vfs_path_from_str (path);
+        vfs_path_t *vpath;
 
+        vpath = vfs_path_from_str (path);
         p = smbfs_get_path (&sc, vpath);
         vfs_path_free (vpath);
 
-        g_free (p);
-        if (p)
+        if (p != NULL)
         {
             memset (buf, 0, sizeof (*buf));
             /*      show this as dir        */
             buf->st_mode =
                 (S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH | S_IXUSR | S_IXGRP | S_IXOTH) & myumask;
+            g_free (p);
             return 0;
         }
+        g_free (p);
         return -1;
     }
 

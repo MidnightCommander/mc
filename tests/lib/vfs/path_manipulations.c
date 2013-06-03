@@ -354,13 +354,8 @@ START_PARAMETRIZED_TEST (test_vfs_path_append_vpath, test_vfs_path_append_vpath_
     vpath3 = vfs_path_append_vpath_new (vpath1, vpath2, NULL);
 
     /* then */
-    {
-        char *path;
-        mctest_assert_int_eq (vfs_path_elements_count (vpath3), data->expected_element_count);
-        path = vfs_path_to_str (vpath3);
-        mctest_assert_str_eq (path, data->expected_path);
-        g_free (path);
-    }
+    mctest_assert_int_eq (vfs_path_elements_count (vpath3), data->expected_element_count);
+    mctest_assert_str_eq (vfs_path_as_str (vpath3), data->expected_path);
 
     vfs_path_free (vpath1);
     vfs_path_free (vpath2);
@@ -409,14 +404,8 @@ START_PARAMETRIZED_TEST (test_vfs_path_relative, test_vfs_path_relative_ds)
     /* then */
     mctest_assert_int_eq (vpath->relative, TRUE);
     mctest_assert_str_eq (vfs_path_get_last_path_str (vpath), data->expected_last_path_in_element);
+    mctest_assert_str_eq (vfs_path_as_str (vpath), data->expected_path);
 
-    {
-        char *path_str;
-
-        path_str = vfs_path_to_str (vpath);
-        mctest_assert_str_eq (path_str, data->expected_path);
-        g_free (path_str);
-    }
     vfs_path_free (vpath);
 }
 /* *INDENT-OFF* */
@@ -443,14 +432,8 @@ START_PARAMETRIZED_TEST (test_vfs_path_relative_clone, test_vfs_path_relative_ds
     mctest_assert_int_eq (cloned_vpath->relative, TRUE);
     mctest_assert_str_eq (vfs_path_get_last_path_str (cloned_vpath),
                           data->expected_last_path_in_element);
+    mctest_assert_str_eq (vfs_path_as_str (cloned_vpath), data->expected_path);
 
-    {
-        char *path_str;
-
-        path_str = vfs_path_to_str (cloned_vpath);
-        mctest_assert_str_eq (path_str, data->expected_path);
-        g_free (path_str);
-    }
     vfs_path_free (vpath);
     vfs_path_free (cloned_vpath);
 }

@@ -25,26 +25,43 @@
 
 set -e
 
-MC_SOURCE_ROOT_DIR=${MC_SOURCE_ROOT_DIR:-$(dirname $(dirname $(pwd)))}
+MC_SOURCE_ROOT_DIR=${MC_SOURCE_ROOT_DIR:-$(dirname $(dirname $(dirname $(dirname $(pwd))))}
 
 #*** include section (source functions, for example) *******************
 
-source "${MC_SOURCE_ROOT_DIR}/maint/sync-transifex/functions"
+source "${MC_SOURCE_ROOT_DIR}/maint/utils/sync-transifex/functions"
 
 #*** file scope functions **********************************************
 
-removeExtraBackSlash() {
-    sed -i -e 's/\\-/-/g' ${MC_SOURCE_ROOT_DIR}/doc/hints/l10n/mc.hint.*
+stripLocation() {
+    work_dir=$1; shift
+
+    for i in $(find "${work_dir}" -name '*.po' -print); do
+        sed -i '/^#:/d' "${i}"
+    done
+}
+
+# ----------------------------------------------------------------------
+
+copyFilesToSourceDir() {
+    work_dir=$1; shift
+    source_dir=$1; shift
+
+    exclude_list_file=$(getConfigFile "po" "po-ignore.list")
+
+    for i in $(find "${work_dir}" -name '*.po' -print | sort); do
+        [ $(grep -c "^\s*$(basename ${i})" "${exclude_list_file}") -ne 1 ] && {
+            cp -f "${i}" "${source_dir}"
+        }
+    done
 }
 
 #*** main code *********************************************************
 
-WORK_DIR=$(initSyncDirIfNeeded "mc.hint")
+WORK_DIR=$(initSyncDirIfNeeded "po")
 
 receiveTranslationsFromTransifex "${WORK_DIR}"
 
-createPo4A "mc.hint"
+stripLocation "${WORK_DIR}"
 
-convertFromPoToText "${WORK_DIR}" "mc.hint"
-
-removeExtraBackSlash
+copyFilesToSourceDir "${WORK_DIR}" "${MC_SOURCE_ROOT_DIR}/po"

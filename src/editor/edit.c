@@ -100,7 +100,6 @@ int option_check_nl_at_eof = 0;
 int option_group_undo = 0;
 int show_right_margin = 0;
 
-const char *option_whole_chars_search = "0123456789abcdefghijklmnopqrstuvwxyz_";
 char *option_backup_ext = NULL;
 
 unsigned int edit_stack_iterator = 0;
@@ -121,7 +120,7 @@ const char VERTICAL_MAGIC[] = { '\1', '\1', '\1', '\1', '\n' };
 /* detecting an error on save is easy: just check if every byte has been written. */
 /* detecting an error on read, is not so easy 'cos there is not way to tell
    whether you read everything or not. */
-/* FIXME: add proper `triple_pipe_open' to read, write and check errors. */
+/* FIXME: add proper 'triple_pipe_open' to read, write and check errors. */
 static const struct edit_filters
 {
     const char *read, *write, *extension;
@@ -135,8 +134,6 @@ static const struct edit_filters
     { "gzip -cd %s 2>&1", "gzip > %s", ".Z" }
     /* *INDENT-ON* */
 };
-
-static off_t last_bracket = -1;
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -211,11 +208,10 @@ edit_load_file_fast (WEdit * edit, const vfs_path_t * filename_vpath)
     file = mc_open (filename_vpath, O_RDONLY | O_BINARY);
     if (file == -1)
     {
-        gchar *errmsg, *filename;
+        gchar *errmsg;
 
-        filename = vfs_path_to_str (filename_vpath);
-        errmsg = g_strdup_printf (_("Cannot open %s for reading"), filename);
-        g_free (filename);
+        errmsg =
+            g_strdup_printf (_("Cannot open %s for reading"), vfs_path_as_str (filename_vpath));
         edit_error_dialog (_("Error"), errmsg);
         g_free (errmsg);
         return FALSE;
@@ -245,11 +241,9 @@ edit_load_file_fast (WEdit * edit, const vfs_path_t * filename_vpath)
 
     if (!ret)
     {
-        gchar *errmsg, *filename;
+        gchar *errmsg;
 
-        filename = vfs_path_to_str (filename_vpath);
-        errmsg = g_strdup_printf (_("Error reading %s"), filename);
-        g_free (filename);
+        errmsg = g_strdup_printf (_("Error reading %s"), vfs_path_as_str (filename_vpath));
         edit_error_dialog (_("Error"), errmsg);
         g_free (errmsg);
     }
@@ -264,24 +258,18 @@ static int
 edit_find_filter (const vfs_path_t * filename_vpath)
 {
     size_t i, l, e;
-    char *filename;
 
     if (filename_vpath == NULL)
         return -1;
 
-    filename = vfs_path_to_str (filename_vpath);
-    l = strlen (filename);
-    for (i = 0; i < sizeof (all_filters) / sizeof (all_filters[0]); i++)
+    l = strlen (vfs_path_as_str (filename_vpath));
+    for (i = 0; i < G_N_ELEMENTS (all_filters); i++)
     {
         e = strlen (all_filters[i].extension);
         if (l > e)
-            if (!strcmp (all_filters[i].extension, filename + l - e))
-            {
-                g_free (filename);
+            if (!strcmp (all_filters[i].extension, vfs_path_as_str (filename_vpath) + l - e))
                 return i;
-            }
     }
-    g_free (filename);
     return -1;
 }
 
@@ -291,15 +279,13 @@ static char *
 edit_get_filter (const vfs_path_t * filename_vpath)
 {
     int i;
-    char *p, *quoted_name, *filename;
+    char *p, *quoted_name;
 
     i = edit_find_filter (filename_vpath);
     if (i < 0)
         return NULL;
 
-    filename = vfs_path_to_str (filename_vpath);
-    quoted_name = name_quote (filename, 0);
-    g_free (filename);
+    quoted_name = name_quote (vfs_path_as_str (filename_vpath), 0);
     p = g_strdup_printf (all_filters[i].read, quoted_name);
     g_free (quoted_name);
     return p;
@@ -347,11 +333,8 @@ check_file_access (WEdit * edit, const vfs_path_t * filename_vpath, struct stat 
         file = mc_open (filename_vpath, O_NONBLOCK | O_RDONLY | O_BINARY | O_CREAT | O_EXCL, 0666);
         if (file < 0)
         {
-            char *filename;
-
-            filename = vfs_path_to_str (filename_vpath);
-            errmsg = g_strdup_printf (_("Cannot open %s for reading"), filename);
-            g_free (filename);
+            errmsg =
+                g_strdup_printf (_("Cannot open %s for reading"), vfs_path_as_str (filename_vpath));
             goto cleanup;
         }
 
@@ -362,22 +345,17 @@ check_file_access (WEdit * edit, const vfs_path_t * filename_vpath, struct stat 
     /* Check what we have opened */
     if (mc_fstat (file, st) < 0)
     {
-        char *filename;
-
-        filename = vfs_path_to_str (filename_vpath);
-        errmsg = g_strdup_printf (_("Cannot get size/permissions for %s"), filename);
-        g_free (filename);
+        errmsg =
+            g_strdup_printf (_("Cannot get size/permissions for %s"),
+                             vfs_path_as_str (filename_vpath));
         goto cleanup;
     }
 
     /* We want to open regular files only */
     if (!S_ISREG (st->st_mode))
     {
-        char *filename;
-
-        filename = vfs_path_to_str (filename_vpath);
-        errmsg = g_strdup_printf (_("\"%s\" is not a regular file"), filename);
-        g_free (filename);
+        errmsg =
+            g_strdup_printf (_("\"%s\" is not a regular file"), vfs_path_as_str (filename_vpath));
         goto cleanup;
     }
 
@@ -389,13 +367,7 @@ check_file_access (WEdit * edit, const vfs_path_t * filename_vpath, struct stat 
         edit->delete_file = 0;
 
     if (st->st_size >= SIZE_LIMIT)
-    {
-        char *filename;
-
-        filename = vfs_path_to_str (filename_vpath);
-        errmsg = g_strdup_printf (_("File \"%s\" is too large"), filename);
-        g_free (filename);
-    }
+        errmsg = g_strdup_printf (_("File \"%s\" is too large"), vfs_path_as_str (filename_vpath));
 
   cleanup:
     (void) mc_close (file);
@@ -2285,33 +2257,6 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
     }
     else
     {
-#ifdef ENABLE_NLS
-        /*
-         * Expand option_whole_chars_search by national letters using
-         * current locale
-         */
-
-        static char option_whole_chars_search_buf[256];
-
-        if (option_whole_chars_search_buf != option_whole_chars_search)
-        {
-            size_t i;
-            size_t len = str_term_width1 (option_whole_chars_search);
-
-            strcpy (option_whole_chars_search_buf, option_whole_chars_search);
-
-            for (i = 1; i <= sizeof (option_whole_chars_search_buf); i++)
-            {
-                if (g_ascii_islower ((gchar) i) && !strchr (option_whole_chars_search, i))
-                {
-                    option_whole_chars_search_buf[len++] = i;
-                }
-            }
-
-            option_whole_chars_search_buf[len] = 0;
-            option_whole_chars_search = option_whole_chars_search_buf;
-        }
-#endif /* ENABLE_NLS */
         edit = g_malloc0 (sizeof (WEdit));
         to_free = TRUE;
 
@@ -2329,6 +2274,7 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
 
     edit->over_col = 0;
     edit->bracket = -1;
+    edit->last_bracket = -1;
     edit->force |= REDRAW_PAGE;
 
     /* set file name before load file */
@@ -3570,9 +3516,9 @@ void
 edit_find_bracket (WEdit * edit)
 {
     edit->bracket = edit_get_bracket (edit, 1, 10000);
-    if (last_bracket != edit->bracket)
+    if (edit->last_bracket != edit->bracket)
         edit->force |= REDRAW_PAGE;
-    last_bracket = edit->bracket;
+    edit->last_bracket = edit->bracket;
 }
 
 /* --------------------------------------------------------------------------------------------- */

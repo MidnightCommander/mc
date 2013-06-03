@@ -2,13 +2,14 @@
    Panel layout module for the Midnight Commander
 
    Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2006, 2007, 2009, 2011, 2012
+   2006, 2007, 2009, 2011, 2012, 2013
    The Free Software Foundation, Inc.
 
    Written by:
    Janne Kukonlehto, 1995
    Miguel de Icaza, 1995
    Andrew Borodin <aborodin@vmail.ru>, 2011, 2012
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -1262,7 +1263,7 @@ save_panel_dir (int idx)
 
         g_free (panels[idx].last_saved_dir);    /* last path no needed */
         /* Because path can be nonlocal */
-        panels[idx].last_saved_dir = vfs_path_to_str (w->cwd_vpath);
+        panels[idx].last_saved_dir = g_strdup (vfs_path_as_str (w->cwd_vpath));
     }
 }
 
@@ -1283,7 +1284,12 @@ get_panel_dir_for (const WPanel * widget)
         return g_strdup (".");
 
     if (get_display_type (i) == view_listing)
-        return vfs_path_to_str (((WPanel *) get_panel_widget (i))->cwd_vpath);
+    {
+        vfs_path_t *cwd_vpath;
+
+        cwd_vpath = ((WPanel *) get_panel_widget (i))->cwd_vpath;
+        return g_strdup (vfs_path_as_str (cwd_vpath));
+    }
 
     return g_strdup (panels[i].last_saved_dir);
 }

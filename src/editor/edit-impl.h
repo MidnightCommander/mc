@@ -164,7 +164,6 @@ extern int option_edit_left_extreme;
 extern int option_edit_top_extreme;
 extern int option_edit_bottom_extreme;
 
-extern const char *option_whole_chars_search;
 extern gboolean search_create_bookmark;
 
 extern char *edit_window_state_char;

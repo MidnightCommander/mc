@@ -2,12 +2,13 @@
    Extension dependent execution.
 
    Copyright (C) 1994, 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
-   2005, 2007, 2011
+   2005, 2007, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
    Jakub Jelinek, 1995
    Miguel de Icaza, 1994
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -366,13 +367,7 @@ exec_extension_view (void *target, char *cmd, const vfs_path_t * filename_vpath,
     if (target == NULL)
         mcview_viewer (cmd, filename_vpath, start_line);
     else
-    {
-        char *file_name;
-
-        file_name = vfs_path_to_str (filename_vpath);
-        mcview_load ((mcview_t *) target, cmd, file_name, start_line);
-        g_free (file_name);
-    }
+        mcview_load ((mcview_t *) target, cmd, vfs_path_as_str (filename_vpath), start_line);
 
     if (changed_hex_mode && !mcview_altered_hex_mode)
         mcview_default_hex_mode = def_hex_mode;
@@ -478,13 +473,7 @@ exec_extension (void *target, const vfs_path_t * filename_vpath, const char *lc_
      * so we clean up after calling view().
      */
     if (!run_view)
-    {
-        char *file_name;
-
-        file_name = vfs_path_to_str (script_vpath);
-        fprintf (cmd_file, "\n/bin/rm -f %s\n", file_name);
-        g_free (file_name);
-    }
+        fprintf (cmd_file, "\n/bin/rm -f %s\n", vfs_path_as_str (script_vpath));
 
     fclose (cmd_file);
 
@@ -495,14 +484,10 @@ exec_extension (void *target, const vfs_path_t * filename_vpath, const char *lc_
     }
     else
     {
-        char *file_name;
-
-        file_name = vfs_path_to_str (script_vpath);
         /* Set executable flag on the command file ... */
         mc_chmod (script_vpath, S_IRWXU);
         /* ... but don't rely on it - run /bin/sh explicitly */
-        cmd = g_strconcat ("/bin/sh ", file_name, (char *) NULL);
-        g_free (file_name);
+        cmd = g_strconcat ("/bin/sh ", vfs_path_as_str (script_vpath), (char *) NULL);
     }
 
     if (run_view)
@@ -664,13 +649,10 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, int *have_
         localfile_vpath = mc_getlocalcopy (filename_vpath);
         if (localfile_vpath == NULL)
         {
-            char *filename;
-
-            filename = vfs_path_to_str (filename_vpath);
             g_propagate_error (error,
                                g_error_new (MC_ERROR, -1,
-                                            _("Cannot fetch a local copy of %s"), filename));
-            g_free (filename);
+                                            _("Cannot fetch a local copy of %s"),
+                                            vfs_path_as_str (filename_vpath)));
             return FALSE;
         }
 
@@ -791,7 +773,7 @@ int
 regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *action,
                    vfs_path_t ** script_vpath)
 {
-    char *filename, *p, *q, *r, c;
+    char *p, *q, *r, c;
     size_t file_len;
     gboolean found = FALSE;
     gboolean error_flag = FALSE;
@@ -893,7 +875,6 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
 
     include_target = NULL;
     include_target_len = 0;
-    filename = vfs_path_to_str (filename_vpath);
     file_len = vfs_path_len (filename_vpath);
 
     for (p = data; *p != '\0'; p++)
@@ -941,13 +922,15 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
                 {
                     search->search_type = MC_SEARCH_T_REGEX;
                     search->is_case_sensitive = !case_insense;
-                    found = mc_search_run (search, filename, 0, file_len, NULL);
+                    found =
+                        mc_search_run (search, vfs_path_as_str (filename_vpath), 0, file_len, NULL);
                     mc_search_free (search);
                 }
             }
             else if (strncmp (p, "directory/", 10) == 0)
             {
-                if (S_ISDIR (mystat.st_mode) && mc_search (p + 10, filename, MC_SEARCH_T_REGEX))
+                if (S_ISDIR (mystat.st_mode)
+                    && mc_search (p + 10, vfs_path_as_str (filename_vpath), MC_SEARCH_T_REGEX))
                     found = TRUE;
             }
             else if (strncmp (p, "shell/", 6) == 0)
@@ -964,12 +947,14 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
 
                 if (*p == '.' && file_len >= (size_t) (q - p))
                 {
-                    if (cmp_func (p, filename + file_len - (q - p), q - p) == 0)
+                    if (cmp_func
+                        (p, vfs_path_as_str (filename_vpath) + file_len - (q - p), q - p) == 0)
                         found = TRUE;
                 }
                 else
                 {
-                    if ((size_t) (q - p) == file_len && cmp_func (p, filename, q - p) == 0)
+                    if ((size_t) (q - p) == file_len
+                        && cmp_func (p, vfs_path_as_str (filename_vpath), q - p) == 0)
                         found = TRUE;
                 }
             }
@@ -1066,7 +1051,6 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
                 break;
         }
     }
-    g_free (filename);
     if (error_flag)
         ret = -1;
     return ret;

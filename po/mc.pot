@@ -880,7 +880,7 @@ msgstr ""
 #: src/args.c:409
 msgid ""
 "\n"
-"Please send any bug reports (including the output of `mc -V')\n"
+"Please send any bug reports (including the output of 'mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 
@@ -2051,7 +2051,7 @@ msgstr ""
 
 #: src/execute.c:487
 #, c-format
-msgid "Type `exit' to return to the Midnight Commander"
+msgid "Type 'exit' to return to the Midnight Commander"
 msgstr ""
 
 #: src/filemanager/achown.c:94 src/filemanager/chmod.c:121
@@ -2781,7 +2781,7 @@ msgstr ""
 
 #: src/filemanager/cmd.c:1381
 #, c-format
-msgid "Symlink `%s' points to:"
+msgid "Symlink '%s' points to:"
 msgstr ""
 
 #: src/filemanager/cmd.c:1388
@@ -2800,7 +2800,7 @@ msgstr ""
 
 #: src/filemanager/cmd.c:1421
 #, c-format
-msgid "`%s' is not a symbolic link"
+msgid "'%s' is not a symbolic link"
 msgstr ""
 
 #: src/filemanager/cmd.c:1515
@@ -3425,7 +3425,7 @@ msgstr ""
 
 #: src/filemanager/filegui.c:1265
 #, c-format
-msgid "Invalid source pattern `%s'"
+msgid "Invalid source pattern '%s'"
 msgstr ""
 
 #: src/filemanager/find.c:186

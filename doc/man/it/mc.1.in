@@ -1,3 +1,4 @@
+.\" -*- mode: troff; coding: utf8 -*-
 .\" Tradotto dal 15 agosto 2002 da
 .\"     Marco Ciampa <ciampix@libero.it>
 .\" Chi vuole contribuire aggiunga il nome qui sotto.
@@ -192,7 +193,7 @@ Se il file è un programma eseguibile, il doppio clic su di esso lo eseguirà
 altrimenti se il
 .\"LINK2"
 file estensioni
-.\"Extension File Edit"
+.\"Edit Extension File"
 ha un programma specifico per quell'estensione del file, il suddetto programma
 verrà eseguito.
 .PP
@@ -298,7 +299,7 @@ Per ultimo, se l'estensione del file selezionato corrisponde ad una
 delle estensioni presenti nel
 .\"LINK2"
 file estensioni\&,
-.\"Extension File Edit"
+.\"Edit Extension File"
 il comando corrispondente viene eseguito.
 .TP
 .B C\-l
@@ -898,7 +899,7 @@ nuovamente per ottenere la lista completa dei tasti accettati.
 Invoca il
 .\"LINK2"
 menu utente\&.
-.\"Menu File Edit"
+.\"Edit Menu File"
 Il menu utente fornisce un modo semplice per dare agli utenti un menu ed
 aggiungere nuove funzionalità al Midnight Commander.
 .PP
@@ -1114,14 +1115,14 @@ corrente.
 Il comando
 .\"LINK2"
 modifica file estensioni
-.\"Extension File Edit"
+.\"Edit Extension File"
 permette di specificare i programmi che devono essere eseguiti quando
 si prova ad eseguire, visualizzare, modificare e un mucchio di altre
 cose, file con una specifica estensione (la fine del nome del file).
 Il comando
 .\"LINK2"
 modifica file menu
-.\"Menu File Edit"
+.\"Edit Menu File"
 serve a modificare il menu utente (che appare premendo F2).
 .\"NODE "    Directory Tree"
 .SH "    Albero directory"
@@ -1310,7 +1311,7 @@ variabile CDPATH come descritto in
 .\"LINK2"
 comando cd interno\&.
 .\"The cd internal command"
-.\"NODE "    Extension File Edit"
+.\"NODE "    Edit Extension File"
 .SH "    Modifica file estensioni"
 Questo comando invocherà l'editor sul file 
 .IR ~/.config/mc/mc.ext .
@@ -1373,7 +1374,7 @@ Questo comando permette di controllare lo stato di ogni processo
 in background del Midnight Commander (in background possono essere
 eseguite solo operazioni di copia e rinomina). Da qui si può bloccare, 
 far ripartire e uccidere un lavoro in background.
-.\"NODE "    Menu File Edit"
+.\"NODE "    Edit Menu File"
 .SH "    Modifica file menu"
 Il menu utente è un menu di comandi utili che possono essere 
 personalizzati dall'utente. Quando si accede al menu utente, viene 
@@ -1954,7 +1955,7 @@ Commander confronta l'estensione del file selezionato con ciò
 che trova nel
 .\"LINK2"
 file estensioni\&.
-.\"Extension File Edit"
+.\"Edit Extension File"
 Se viene trovata una corrispondenza, verrà eseguito il codice associato.
 Verrà eseguita una semplice 
 .\"LINK2"
@@ -2002,11 +2003,11 @@ parte nel file system (per esempio cd linux vi porterà in
 Quando si accede ad un
 .\"LINK2"
 menu utente\&,
-.\"Menu File Edit"
+.\"Edit Menu File"
 o si esegue un
 .\"LINK2"
 comando dipendente dall'estensione\&,
-.\"Extension File Edit"
+.\"Edit Extension File"
 o si esegue un comando dalla riga di ingresso,
 viene eseguita una semplice sostituzione di macro.
 .PP
@@ -2476,7 +2477,7 @@ E' anche possibile istruire il visualizzatore su come mostrare un file,
 vedere la sezione
 .\"LINK2"
 modifica file estensioni\&.
-.\"Extension File Edit"
+.\"Edit Extension File"
 .\"NODE "Internal File Editor"
 .SH "Editor di file interno"
 L'editor di file interno fornisce molte delle funzioni dei più
@@ -2678,7 +2679,7 @@ significa che normalmente basta selezionare un file tar e premere invio
 per entrare nel file tar, vedere la sezione
 .\"LINK2"
 modifica file estensioni
-.\"Extension File Edit"
+.\"Edit Extension File"
 per i dettagli su come questo viene fatto.
 .PP
 Esempi:
@@ -2887,8 +2888,8 @@ where xxxx is one of:
 .PP
 You could bind file type/extension to specified extfs as described in the
 .\"LINK2"
-Extension File Edit
-.\"Extension File Edit"
+Edit Extension File
+.\"Edit Extension File"
 section.  Here is an example entry for Debian packages:
 .PP
 .nf
@@ -3113,7 +3114,7 @@ Se questa variabile è abilitata (valore predefinito) userà il comando
 file per trovare delle corrispondenze sui tipi di file elencati nel
 .\"LINK2"
 file mc.ext\&.
-.\"Extension File Edit"
+.\"Edit Extension File"
 .TP
 .I xtree_mode
 Se questa variabile è impostata (il valore predefinito è no) quando

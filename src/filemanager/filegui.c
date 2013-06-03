@@ -21,7 +21,7 @@
    Jakub Jelinek, 1995, 1996
    Norbert Warmuth, 1997
    Pavel Machek, 1998
-   Slava Zanko, 2009-2012
+   Slava Zanko, 2009, 2010, 2011, 2012, 2013
    Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2011, 2012, 2013
 
    This file is part of the Midnight Commander.
@@ -108,7 +108,6 @@ statvfs_works (void)
     return 1;
 }
 #else
-#include <string.h>             /* for strverscmp */
 #include <sys/utsname.h>
 #include <sys/statfs.h>
 #define STAT_STATFS2_BSIZE 1
@@ -1032,12 +1031,9 @@ file_progress_show_target (FileOpContext * ctx, const vfs_path_t * s_vpath)
 
     if (s_vpath != NULL)
     {
-        char *s;
-
-        s = vfs_path_to_str (s_vpath);
         label_set_text (ui->file_label[1], _("Target"));
-        label_set_text (ui->file_string[1], truncFileStringSecure (ui->op_dlg, s));
-        g_free (s);
+        label_set_text (ui->file_string[1],
+                        truncFileStringSecure (ui->op_dlg, vfs_path_as_str (s_vpath)));
     }
     else
     {
@@ -1264,7 +1260,7 @@ file_mask_dialog (FileOpContext * ctx, FileOperation operation,
 
         if (ctx->search_handle == NULL)
         {
-            message (D_ERROR, MSG_ERROR, _("Invalid source pattern `%s'"), source_mask);
+            message (D_ERROR, MSG_ERROR, _("Invalid source pattern '%s'"), source_mask);
             g_free (dest_dir);
             g_free (source_mask);
             goto ask_file_mask;

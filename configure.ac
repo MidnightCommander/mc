@@ -156,13 +156,10 @@ dnl ############################################################################
 dnl Check for header files
 dnl ############################################################################
 
-AC_CHECK_HEADERS([unistd.h string.h memory.h limits.h malloc.h \
-	utime.h fcntl.h sys/statfs.h sys/vfs.h sys/time.h \
+AC_CHECK_HEADERS([string.h memory.h limits.h malloc.h \
+	utime.h sys/statfs.h sys/vfs.h \
 	sys/select.h sys/ioctl.h stropts.h arpa/inet.h \
-	sys/socket.h sys/sysmacros.h sys/types.h sys/mkdev.h])
-AC_HEADER_MAJOR
-AC_HEADER_TIME
-AC_HEADER_DIRENT
+	sys/socket.h sys/sysmacros.h sys/mkdev.h])
 AC_HEADER_ASSERT
 
 
@@ -170,7 +167,6 @@ dnl ############################################################################
 dnl Check for types
 dnl ############################################################################
 
-AC_C_CONST
 dnl Check largefile before type sizeof checks
 AC_SYS_LARGEFILE
 
@@ -226,15 +222,10 @@ dnl Check for functions
 dnl ############################################################################
 
 AC_CHECK_FUNCS([\
-	isascii \
-	statfs sysconf \
-	tcgetattr tcsetattr \
-	ftruncate \
 	strverscmp \
 	strncasecmp \
 	realpath
 ])
-AC_FUNC_STRCOLL
 
 dnl getpt is a GNU Extension (glibc 2.1.x)
 AC_CHECK_FUNCS(posix_openpt, , [AC_CHECK_FUNCS(getpt)])
@@ -279,8 +270,6 @@ MC_I18N
 dnl ############################################################################
 dnl OS specific flags
 dnl ############################################################################
-
-AC_ISC_POSIX
 
 case $host_os in
 aux*)

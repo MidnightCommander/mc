@@ -1,3 +1,4 @@
+.\" -*- mode: troff; coding: utf8 -*-
 .\"Przetłumaczone przez by Macieja Wojciechowskiego    wojciech@staszic.waw.pl
 .TH MC 1 "%DATE_OF_MAN_PAGE%" "MC Version %DISTR_VERSION%" "GNU Midnight Commander"
 .\"SKIP_SECTION"
@@ -910,9 +911,9 @@ Komenda panelu zewnętrznego (External panelize) pozwala na wykonywania program�
 zewnętrznych i ustawienia zawartości paneli na to co zwróciła wywołana
 komenda.
 .PP
-Komenda edycji rozszerzeń plików (Extension file edit) pozwala na własny wybór
+Komenda edycji rozszerzeń plików (Edit Extension File) pozwala na własny wybór
 programów, które mają być używane do wykonywania plików z podanymi
-rozszerzeniami. Komenda edycji pliku menu (Menu file edit) może być używana do
+rozszerzeniami. Komenda edycji pliku menu (Edit Menu File) może być używana do
 edytowania menu użytkownika (tego, które pojawia się po naciśnięciu kombinacji
 F2).
 .PP
@@ -1092,8 +1093,8 @@ Powoduje to przechodzenie do częściej przeglądanych katalogów znacznie szybc
 Możesz używać ciągle wartości CDPATH opisanej w sekcji Wewnętrzne
 przemieszczanie.
 .PP
-.\"NODE "    Extension File Edit"
-.SH "    Edycja rozszerzeń pliów (Extension File Edit)"
+.\"NODE "    Edit Extension File"
+.SH "    Edycja rozszerzeń pliów (Edit Extension File)"
 Ta komenda wywoła twój edytor na plik ~/.config/mc/mc.ext. Format tego pliku jest
 następujący (zmienił się on począwszy od wersji 3.0):
 .PP
@@ -1161,8 +1162,8 @@ przez Midnight Commandera (tylko operacje kopiowania i przenoszenia, mogą
 być wykonywane w tle). Z tego menu możesz zastopować, zresetować i "zabić"
 proces w tle.
 .PP
-.\"NODE "    Menu File Edit"
-.SH "    Edycja menu użytkownika (Menu File Edit)"
+.\"NODE "    Edit Menu File"
+.SH "    Edycja menu użytkownika (Edit Menu File)"
 Menu użytkownika jest bardzo użytecznym menu, które może być tworzone
 w sposób dowolny, przez użytkownika. Kiedy tylko próbujesz coś zrobić
 przy użyciu tego menu, ładowany jest plik .mc.menu z aktualnego katalogu, ale
@@ -2510,8 +2511,8 @@ where xxxx is one of:
 .PP
 You could bind file type/extension to specified extfs as described in the
 .\"LINK2"
-Extension File Edit
-.\"Extension File Edit"
+Edit Extension File
+.\"Edit Extension File"
 section.  Here is an example entry for Debian packages:
 .PP
 .nf

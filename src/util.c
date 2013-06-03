@@ -1,11 +1,12 @@
 /*
    Various non-library utilities
 
-   Copyright (C) 2003, 2004, 2005, 2006, 2007, 2011
+   Copyright (C) 2003, 2004, 2005, 2006, 2007, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
    Adam Byrtek, 2003
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -51,34 +52,22 @@
 gboolean
 check_for_default (const vfs_path_t * default_file_vpath, const vfs_path_t * file_vpath)
 {
-    char *file;
-
-    file = vfs_path_to_str (file_vpath);
-
-    if (!exist_file (file))
+    if (!exist_file (vfs_path_as_str (file_vpath)))
     {
-        char *default_file;
         FileOpContext *ctx;
         FileOpTotalContext *tctx;
 
-        default_file = vfs_path_to_str (default_file_vpath);
-        if (!exist_file (default_file))
-        {
-            g_free (file);
-            g_free (default_file);
+        if (!exist_file (vfs_path_as_str (default_file_vpath)))
             return FALSE;
-        }
 
         ctx = file_op_context_new (OP_COPY);
         tctx = file_op_total_context_new ();
         file_op_context_create_ui (ctx, 0, FALSE);
-        copy_file_file (tctx, ctx, default_file, file);
+        copy_file_file (tctx, ctx, vfs_path_as_str (default_file_vpath),
+                        vfs_path_as_str (file_vpath));
         file_op_total_context_destroy (tctx);
         file_op_context_destroy (ctx);
-        g_free (default_file);
     }
-
-    g_free (file);
 
     return TRUE;
 }

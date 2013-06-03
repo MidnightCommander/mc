@@ -149,10 +149,10 @@ do_open_action() {
     msppt)
         if [ -n "$DISPLAY" ]; then
             OOFFICE=`get_ooffice_executable`
-            (${OOFFICE} %f >/dev/null 2>&1 &)
+            (${OOFFICE} "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
         else
             tmp=`mktemp -d ${TMPDIR:-/tmp}/%p.XXXXXX`
-            ppthtml %f > "$tmp/page.html"
+            ppthtml "${MC_EXT_FILENAME}" > "$tmp/page.html"
             elinks "$tmp/page.html"
             rm -rf "$tmp"
         fi

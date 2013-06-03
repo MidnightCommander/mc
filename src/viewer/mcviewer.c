@@ -14,7 +14,7 @@
    Norbert Warmuth, 1997
    Pavel Machek, 1998
    Roland Illig <roland.illig@gmx.de>, 2004, 2005
-   Slava Zanko <slavazanko@google.com>, 2009
+   Slava Zanko <slavazanko@google.com>, 2009, 2013
    Andrew Borodin <aborodin@vmail.ru>, 2009, 2013
    Ilia Maslakov <il.smind@gmail.com>, 2009
 
@@ -246,13 +246,7 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
 
     view_dlg->get_title = mcview_get_title;
 
-    {
-        char *file;
-
-        file = vfs_path_to_str (file_vpath);
-        succeeded = mcview_load (lc_mcview, command, file, start_line);
-        g_free (file);
-    }
+    succeeded = mcview_load (lc_mcview, command, vfs_path_as_str (file_vpath), start_line);
 
     if (succeeded)
         run_dlg (view_dlg);

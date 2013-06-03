@@ -2,8 +2,11 @@
    User Menu implementation
 
    Copyright (C) 1994, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2006, 2007, 2011
+   2006, 2007, 2011, 2013
    The Free Software Foundation, Inc.
+
+   Written by:
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -266,13 +269,8 @@ test_condition (WEdit * edit_widget, char *p, int *condition)
             break;
         case 'd':
             p = extract_arg (p, arg, sizeof (arg));
-            {
-                char *cwd_str;
-
-                cwd_str = vfs_path_to_str (panel->cwd_vpath);
-                *condition = panel != NULL && mc_search (arg, cwd_str, search_type) ? 1 : 0;
-                g_free (cwd_str);
-            }
+            *condition = panel != NULL
+                && mc_search (arg, vfs_path_as_str (panel->cwd_vpath), search_type) ? 1 : 0;
             break;
         case 't':
             p = extract_arg (p, arg, sizeof (arg));
@@ -547,22 +545,16 @@ execute_menu_command (WEdit * edit_widget, const char *commands, gboolean show_p
     mc_chmod (file_name_vpath, S_IRWXU);
     if (run_view)
     {
-        char *file_name;
-
-        file_name = vfs_path_to_str (file_name_vpath);
-        mcview_viewer (file_name, NULL, 0);
-        g_free (file_name);
+        mcview_viewer (vfs_path_as_str (file_name_vpath), NULL, 0);
         dialog_switch_process_pending ();
     }
     else
     {
         /* execute the command indirectly to allow execution even
          * on no-exec filesystems. */
-        char *file_name, *cmd;
+        char *cmd;
 
-        file_name = vfs_path_to_str (file_name_vpath);
-        cmd = g_strconcat ("/bin/sh ", file_name, (char *) NULL);
-        g_free (file_name);
+        cmd = g_strconcat ("/bin/sh ", vfs_path_as_str (file_name_vpath), (char *) NULL);
         if (!show_prompt)
         {
             if (system (cmd) == -1)
@@ -798,7 +790,7 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
             char *qstr;
 
             if (panel)
-                cwd = vfs_path_to_str (panel->cwd_vpath);
+                cwd = g_strdup (vfs_path_as_str (panel->cwd_vpath));
             else
                 cwd = vfs_get_current_dir ();
 

@@ -2,11 +2,12 @@
    Find file command for the Midnight Commander
 
    Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2006, 2007, 2011
+   2006, 2007, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written  by:
    Miguel de Icaza, 1995
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -716,7 +717,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
 
             temp_dir = in_start->buffer;
             if ((temp_dir[0] == '\0') || ((temp_dir[0] == '.') && (temp_dir[1] == '\0')))
-                temp_dir = vfs_path_to_str (current_panel->cwd_vpath);
+                temp_dir = g_strdup (vfs_path_as_str (current_panel->cwd_vpath));
             else
                 temp_dir = g_strdup (temp_dir);
 
@@ -768,7 +769,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
 
             if (s[0] == '.' && s[1] == '\0')
             {
-                *start_dir = vfs_path_to_str (current_panel->cwd_vpath);
+                *start_dir = g_strdup (vfs_path_as_str (current_panel->cwd_vpath));
                 /* FIXME: is current_panel->cwd_vpath canonicalized? */
                 /* relative paths will be used in panelization */
                 *start_dir_len = (ssize_t) strlen (*start_dir);
@@ -782,12 +783,10 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
             else
             {
                 /* relative paths will be used in panelization */
-                char *cwd_str;
-
-                cwd_str = vfs_path_to_str (current_panel->cwd_vpath);
-                *start_dir = mc_build_filename (cwd_str, s, (char *) NULL);
-                *start_dir_len = (ssize_t) strlen (cwd_str);
-                g_free (cwd_str);
+                *start_dir =
+                    mc_build_filename (vfs_path_as_str (current_panel->cwd_vpath), s,
+                                       (char *) NULL);
+                *start_dir_len = (ssize_t) strlen (vfs_path_as_str (current_panel->cwd_vpath));
                 g_free (s);
             }
 
@@ -1268,12 +1267,9 @@ do_search (WDialog * h)
 
                     /* handle absolute ignore dirs here */
                     {
-                        char *tmp;
                         gboolean ok;
 
-                        tmp = vfs_path_to_str (tmp_vpath);
-                        ok = find_ignore_dir_search (tmp);
-                        g_free (tmp);
+                        ok = find_ignore_dir_search (vfs_path_as_str (tmp_vpath));
                         if (!ok)
                             break;
                     }
@@ -1283,7 +1279,7 @@ do_search (WDialog * h)
                 }
 
                 g_free (directory);
-                directory = vfs_path_to_str (tmp_vpath);
+                directory = g_strdup (vfs_path_as_str (tmp_vpath));
 
                 if (verbose)
                 {

@@ -128,6 +128,7 @@ struct WEdit
     long column1;               /* position of column highlight start */
     long column2;               /* position of column highlight end */
     off_t bracket;              /* position of a matching bracket */
+    off_t last_bracket;         /* previous position of a matching bracket */
 
     /* cache speedup for line lookups */
     gboolean caches_valid;
@@ -167,8 +168,6 @@ struct WEdit
     /* line break */
     LineBreaks lb;
     gboolean extmod;
-
-    char *labels[10];
 };
 
 /*** global variables defined in .c file *********************************************************/

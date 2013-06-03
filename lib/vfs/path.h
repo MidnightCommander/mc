@@ -27,6 +27,7 @@ typedef struct
 {
     gboolean relative;
     GArray *path;
+    char *str;
 } vfs_path_t;
 
 typedef struct
@@ -62,7 +63,6 @@ void vfs_path_remove_element_by_index (vfs_path_t * vpath, int element_index);
 void vfs_path_free (vfs_path_t * path);
 int vfs_path_elements_count (const vfs_path_t * path);
 
-char *vfs_path_to_str (const vfs_path_t * path);
 char *vfs_path_to_str_elements_count (const vfs_path_t * path, int elements_count);
 char *vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_flag_t flags);
 vfs_path_t *vfs_path_from_str (const char *path_str);
@@ -127,5 +127,24 @@ vfs_path_get_last_path_vfs (const vfs_path_t * vpath)
     element = vfs_path_get_by_index (vpath, -1);
     return (element != NULL) ? element->class : NULL;
 }
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Convert vfs_path_t to string representation.
+ *
+ * @param vpath pointer to vfs_path_t object
+ *
+ * @return pointer to newly created string.
+ */
+
+static inline char *
+vfs_path_as_str (const vfs_path_t * vpath)
+{
+    if (vpath == NULL)
+        return NULL;
+    return vpath->str;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 #endif

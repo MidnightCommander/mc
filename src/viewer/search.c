@@ -213,7 +213,7 @@ mcview_search_cmd_callback (const void *user_data, gsize char_offset, int *curre
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+mc_search_cbret_t
 mcview_search_update_cmd_callback (const void *user_data, gsize char_offset)
 {
     mcview_t *view = (mcview_t *) user_data;

@@ -1,0 +1,58 @@
+# ---------------------------------------------------------------------------------------
+
+Scenario #1
+As developer
+I Want To prepare release files for review by developers
+
+Given have latest version from 'git tag' output (saved to ${last_version})
+  and latest version is increased (saved to ${next_version})
+
+When I want To: prepare to release
+
+Then I Should: sync PO translations from Transifex.net
+          and sync mc.hint translations from Transifex.net
+          and create new NEWS wiki page for ${next_version} with empty template
+          and add content of NEWS-${last_version} wiki page to the doc/NEWS file in git repo
+          and create new tag '${next_version}' in git
+          and add new version '${last_version}' in Trac
+          and add new milestone '${next_version}' in Trac
+          and create tar.(bz2|xz) package files
+          and create checksums for archives:
+          and upload source packages and checksums to the special upload area
+
+# ---------------------------------------------------------------------------------------
+
+Scenario #2
+As developer
+I Want To review files prepared for release
+
+Given have prepared files for review
+
+When I Want To: release next version
+
+Then I Should: download archives from special upload area
+           and download checksums for archives from special upload area
+           and verify checksums and archives
+           and unpack arhives
+           and configure with default parameters
+           and run 'make all install DESTDIR=/tmp/mc-release'
+           and if everything is okay, keep vote in release ticket
+
+# ---------------------------------------------------------------------------------------
+
+Scenario #3
+As developer
+I Want To complete the release procedure
+
+Given have votes from developers
+
+When I Want To: complete the release
+
+Then I Should: upload source packages and checksums to http://www.midnight-commander.org/downloads
+           and update Wiki start page with ${next_version} release number
+           and write an announcement in mc-dev and mc-users mailists: list user visible changes (bugs and features)
+           and close  milestone with '${last_version}' version
+           and create new ticket (type=task, component=adm) for the next release
+           and close ticket for release.
+
+# ---------------------------------------------------------------------------------------

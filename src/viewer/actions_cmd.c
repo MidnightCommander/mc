@@ -14,7 +14,7 @@
    Norbert Warmuth, 1997
    Pavel Machek, 1998
    Roland Illig <roland.illig@gmx.de>, 2004, 2005
-   Slava Zanko <slavazanko@google.com>, 2009
+   Slava Zanko <slavazanko@google.com>, 2009, 2013
    Andrew Borodin <aborodin@vmail.ru>, 2009, 2013
    Ilia Maslakov <il.smind@gmail.com>, 2009
 
@@ -275,7 +275,6 @@ mcview_load_next_prev_init (mcview_t * view)
 
         /* TODO: check mtime of directory to reload it */
 
-        char *full_fname;
         const char *fname;
         size_t fname_len;
         int i;
@@ -288,8 +287,7 @@ mcview_load_next_prev_init (mcview_t * view)
         *view->dir_count = do_load_dir (view->workdir_vpath, view->dir, (sortfn *) sort_name, FALSE,
                                         TRUE, FALSE, NULL);
 
-        full_fname = vfs_path_to_str (view->filename_vpath);
-        fname = x_basename (full_fname);
+        fname = x_basename (vfs_path_as_str (view->filename_vpath));
         fname_len = strlen (fname);
 
         /* search current file in the list */
@@ -300,8 +298,6 @@ mcview_load_next_prev_init (mcview_t * view)
             if (fname_len == fe->fnamelen && strncmp (fname, fe->fname, fname_len) == 0)
                 break;
         }
-
-        g_free (full_fname);
 
         *view->dir_idx = i;
     }
@@ -352,13 +348,7 @@ mcview_load_next_prev (mcview_t * view, int direction)
     mcview_remove_ext_script (view);
     mcview_init (view);
     if (regex_command_for (view, vfile, "View", &ext_script) == 0)
-    {
-        char *file;
-
-        file = vfs_path_to_str (vfile);
-        mcview_load (view, NULL, file, 0);
-        g_free (file);
-    }
+        mcview_load (view, NULL, vfs_path_as_str (vfile), 0);
     vfs_path_free (vfile);
     view->dir = dir;
     view->dir_count = dir_count;

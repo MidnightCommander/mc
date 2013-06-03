@@ -70,7 +70,7 @@ AC_FUNC_GETMNTENT
 # with other getmntent implementations.
 
 # NOTE: Normally, I wouldn't use a check for system type as I've done for
-# `CRAY' below since that goes against the whole autoconf philosophy.  But
+# 'CRAY' below since that goes against the whole autoconf philosophy.  But
 # I think there is too great a chance that some non-Cray system has a
 # function named listmntent to risk the false positive.
 
@@ -110,7 +110,7 @@ if test -z "$ac_list_mounted_fs"; then
     AC_DEFINE([MOUNTED_VMOUNT], [1],
         [Define if there is a function named mntctl that can be used to read
          the list of mounted file systems, and there is a system header file
-         that declares `struct vmount.'  (AIX)])
+         that declares 'struct vmount.'  (AIX)])
   fi
 fi
 

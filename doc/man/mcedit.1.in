@@ -137,7 +137,7 @@ where
 .B XXXX
 is the number from 0 to 9999.
 See
-.B Menu File Edit
+.B Edit Menu File
 for more detail about format of the script.
 .PP
 Following macro definition and directives can be used:

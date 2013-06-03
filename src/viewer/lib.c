@@ -14,7 +14,7 @@
    Norbert Warmuth, 1997
    Pavel Machek, 1998
    Roland Illig <roland.illig@gmx.de>, 2004, 2005
-   Slava Zanko <slavazanko@google.com>, 2009
+   Slava Zanko <slavazanko@google.com>, 2009, 2013
    Andrew Borodin <aborodin@vmail.ru>, 2009, 2013
    Ilia Maslakov <il.smind@gmail.com>, 2009
 
@@ -76,7 +76,7 @@ const off_t OFFSETTYPE_MAX = ((off_t) 1 << (OFF_T_BITWIDTH - 1)) - 1;
 void
 mcview_toggle_magic_mode (mcview_t * view)
 {
-    char *filename, *command;
+    char *command;
     dir_list *dir;
     int *dir_count, *dir_idx;
 
@@ -84,7 +84,6 @@ mcview_toggle_magic_mode (mcview_t * view)
     view->magic_mode = !view->magic_mode;
 
     /* reinit view */
-    filename = vfs_path_to_str (view->filename_vpath);
     command = g_strdup (view->command);
     dir = view->dir;
     dir_count = view->dir_count;
@@ -94,11 +93,10 @@ mcview_toggle_magic_mode (mcview_t * view)
     view->dir_idx = NULL;
     mcview_done (view);
     mcview_init (view);
-    mcview_load (view, command, filename, 0);
+    mcview_load (view, command, vfs_path_as_str (view->filename_vpath), 0);
     view->dir = dir;
     view->dir_count = dir_count;
     view->dir_idx = dir_idx;
-    g_free (filename);
     g_free (command);
 
     view->dpy_bbar_dirty = TRUE;
@@ -230,7 +228,7 @@ mcview_init (mcview_t * view)
     view->search_end = 0;
 
     view->marker = 0;
-    for (i = 0; i < sizeof (view->marks) / sizeof (view->marks[0]); i++)
+    for (i = 0; i < G_N_ELEMENTS (view->marks); i++)
         view->marks[i] = 0;
 
     view->update_steps = 0;
@@ -437,10 +435,10 @@ mcview_get_title (const WDialog * h, size_t len)
     const mcview_t *view = (const mcview_t *) find_widget_type (h, mcview_callback);
     const char *modified = view->hexedit_mode && (view->change_list != NULL) ? "(*) " : "    ";
     const char *file_label;
-    char *view_filename;
+    const char *view_filename;
     char *ret_str;
 
-    view_filename = view->filename_vpath != NULL ? vfs_path_to_str (view->filename_vpath) : NULL;
+    view_filename = vfs_path_as_str (view->filename_vpath);
 
     len -= 4;
 
@@ -448,7 +446,6 @@ mcview_get_title (const WDialog * h, size_t len)
     file_label = str_term_trim (file_label, len - str_term_width1 (_("View: ")));
 
     ret_str = g_strconcat (_("View: "), modified, file_label, (char *) NULL);
-    g_free (view_filename);
     return ret_str;
 }
 

@@ -34,18 +34,20 @@ if (!open (FILE, "$filename")) {
 	exit 1;
 }
 
+my $lineno=1;
 foreach (<FILE>) {
 	if (/^\s*#\s*include\s*<(.*)>/) {
 		if (defined $sys_includes{$1}) {
-			print "$filename: duplicate <$1>\n";
+			print "$filename:$lineno: duplicate <$1> (line no ".$sys_includes{$1}.")\n";
 		} else {
-			$sys_includes{$1} = 1;
+			$sys_includes{$1} = $lineno;
 		}
 	} elsif (/^\s*#\s*include\s*"(.*)"/) {
 		if (defined $loc_includes{$1}) {
-			print "$filename: duplicate \"$1\"\n";
+			print "$filename:$lineno: duplicate \"$1\" (line no ".$loc_includes{$1}.")\n";
 		} else {
-			$loc_includes{$1} = 1;
+			$loc_includes{$1} = $lineno;
 		}
 	}
+	$lineno++;
 }

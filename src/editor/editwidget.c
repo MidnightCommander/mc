@@ -145,7 +145,7 @@ edit_about (void)
         QUICK_LABEL (N_("A user friendly text editor\n"
                         "written for the Midnight Commander."), NULL),
         QUICK_SEPARATOR (FALSE),
-        QUICK_LABEL (N_("Copyright (C) 1996-2012 the Free Software Foundation"), NULL),
+        QUICK_LABEL (N_("Copyright (C) 1996-2013 the Free Software Foundation"), NULL),
         QUICK_START_BUTTONS (TRUE, TRUE),
             QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
         QUICK_END
@@ -338,13 +338,9 @@ edit_window_list (const WDialog * h)
             if (e->filename_vpath == NULL)
                 fname = g_strdup_printf ("%c [%s]", e->modified ? '*' : ' ', _("NoName"));
             else
-            {
-                char *fname2;
-
-                fname2 = vfs_path_to_str (e->filename_vpath);
-                fname = g_strdup_printf ("%c%s", e->modified ? '*' : ' ', fname2);
-                g_free (fname2);
-            }
+                fname =
+                    g_strdup_printf ("%c%s", e->modified ? '*' : ' ',
+                                     vfs_path_as_str (e->filename_vpath));
 
             listbox_add_item (listbox->list, LISTBOX_APPEND_AT_END, get_hotkey (i++),
                               str_term_trim (fname, WIDGET (listbox->list)->cols - 2), NULL);
@@ -394,9 +390,11 @@ edit_get_title (const WDialog * h, size_t len)
 
     len -= 4;
 
-    filename = vfs_path_to_str (edit->filename_vpath);
-    if (filename == NULL)
+    if (edit->filename_vpath == NULL)
         filename = g_strdup (_("[NoName]"));
+    else
+        filename = g_strdup (vfs_path_as_str (edit->filename_vpath));
+
     file_label = str_term_trim (filename, len - str_term_width1 (_("Edit: ")));
     g_free (filename);
 
@@ -1249,7 +1247,7 @@ edit_files (const GList * files)
 char *
 edit_get_file_name (const WEdit * edit)
 {
-    return vfs_path_to_str (edit->filename_vpath);
+    return g_strdup (vfs_path_as_str (edit->filename_vpath));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1285,8 +1283,7 @@ edit_update_screen (WEdit * e)
 
     edit_scroll_screen_over_cursor (e);
     edit_update_curs_col (e);
-
-    edit_status (e, (e->force & REDRAW_COMPLETELY) != 0 && (void *) e == h->current->data);
+    edit_status (e, (void *) e == h->current->data);
 
     /* pop all events for this window for internal handling */
     if (!is_idle ())

@@ -306,7 +306,7 @@ mc_search_types_list_get (size_t * num)
 {
     /* don't count last NULL item */
     if (num != NULL)
-        *num = sizeof (mc_search__list_types) / sizeof (mc_search__list_types[0]) - 1;
+        *num = G_N_ELEMENTS (mc_search__list_types) - 1;
 
     return mc_search__list_types;
 }

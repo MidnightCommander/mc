@@ -50,7 +50,7 @@ getConfigFile() {
     sync_file_name=$1; shift
     config_file_name=$1; shift
 
-    echo "${MC_SOURCE_ROOT_DIR}/maint/sync-transifex/config.d/${sync_file_name}/${config_file_name}"
+    echo "${MC_SOURCE_ROOT_DIR}/maint/utils/sync-transifex/config.d/${sync_file_name}/${config_file_name}"
 }
 
 # ----------------------------------------------------------------------

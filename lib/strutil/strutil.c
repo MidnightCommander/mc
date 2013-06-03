@@ -1,7 +1,7 @@
 /*
    Common strings utilities
 
-   Copyright (C) 2007, 2011
+   Copyright (C) 2007, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
@@ -21,16 +21,14 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
  */
 
 #include <config.h>
+
 #include <stdlib.h>
-#include <stdio.h>
 #include <langinfo.h>
 #include <string.h>
 #include <errno.h>
-#include <stdarg.h>
 
 #include "lib/global.h"
 #include "lib/strutil.h"

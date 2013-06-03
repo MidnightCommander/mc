@@ -20,11 +20,11 @@ CONFIG_STATUS_DEPENDENCIES = $(top_srcdir)/version.h
 .PHONY: update-version
 
 update-version:
-	@if test -x $(top_srcdir)/maint/version.sh; then \
-	    $(top_srcdir)/maint/version.sh "$(top_srcdir)" 2>&1 >/dev/null; \
+	@if test -x $(top_srcdir)/maint/utils/version.sh; then \
+	    $(top_srcdir)/maint/utils/version.sh "$(top_srcdir)" 2>&1 >/dev/null; \
 	else \
 	    if test ! -e $(top_srcdir)/version.h; then \
-	        echo "File not found: $(top_srcdir)/maint/version.sh"; \
+	        echo "File not found: $(top_srcdir)/maint/utils/version.sh"; \
 	        exit 1; \
 	    fi; \
 	fi

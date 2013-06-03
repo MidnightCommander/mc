@@ -1,11 +1,12 @@
 /*
    Virtual File System: GNU Tar file system.
 
-   Copyright (C) 2000, 2001, 2002, 2003, 2004, 2005, 2007, 2011
+   Copyright (C) 2000, 2001, 2002, 2003, 2004, 2005, 2007, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
    Jan Hudec, 2000
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -224,15 +225,11 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const vfs_
     fd = mc_open (vpath, O_RDONLY);
     if (fd == -1)
     {
-        char *name;
-
-        name = vfs_path_to_str (vpath);
-        message (D_ERROR, MSG_ERROR, _("Cannot open cpio archive\n%s"), name);
-        g_free (name);
+        message (D_ERROR, MSG_ERROR, _("Cannot open cpio archive\n%s"), vfs_path_as_str (vpath));
         return -1;
     }
 
-    super->name = vfs_path_to_str (vpath);
+    super->name = g_strdup (vfs_path_as_str (vpath));
     super->data = g_new (cpio_super_data_t, 1);
     arch = (cpio_super_data_t *) super->data;
     arch->fd = -1;              /* for now */
@@ -745,11 +742,8 @@ cpio_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
         {
         case STATUS_EOF:
             {
-                char *archive_name;
-
-                archive_name = vfs_path_to_str (vpath);
-                message (D_ERROR, MSG_ERROR, _("Unexpected end of file\n%s"), archive_name);
-                g_free (archive_name);
+                message (D_ERROR, MSG_ERROR, _("Unexpected end of file\n%s"),
+                         vfs_path_as_str (vpath));
                 return 0;
             }
         case STATUS_OK:
@@ -783,16 +777,11 @@ cpio_super_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *p
                  const vfs_path_t * vpath, void *cookie)
 {
     struct stat *archive_stat = cookie; /* stat of main archive */
-    char *archive_name = vfs_path_to_str (vpath);
 
     (void) vpath_element;
 
-    if (strcmp (parc->name, archive_name))
-    {
-        g_free (archive_name);
+    if (strcmp (parc->name, vfs_path_as_str (vpath)))
         return 0;
-    }
-    g_free (archive_name);
 
     /* Has the cached archive been changed on the disk? */
     if (((cpio_super_data_t *) parc->data)->st.st_mtime < archive_stat->st_mtime)

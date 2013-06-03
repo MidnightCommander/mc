@@ -1,11 +1,12 @@
 /*
    Directory cache support
 
-   Copyright (C) 1998, 2011
+   Copyright (C) 1998, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
    Pavel Machek <pavel@ucw.cz>, 1998
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -1260,7 +1261,7 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
             vfs_path_t *tmp_vpath;
 
             tmp_handle = vfs_mkstemps (&tmp_vpath, path_element->class->name, name);
-            ino->localname = vfs_path_to_str (tmp_vpath);
+            ino->localname = g_strdup (vfs_path_as_str (tmp_vpath));
             vfs_path_free (tmp_vpath);
             if (tmp_handle == -1)
             {
@@ -1353,7 +1354,7 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
     fh.handle = -1;
 
     handle = vfs_mkstemps (&tmp_vpath, me->name, ino->ent->name);
-    ino->localname = vfs_path_to_str (tmp_vpath);
+    ino->localname = g_strdup (vfs_path_as_str (tmp_vpath));
     vfs_path_free (tmp_vpath);
     if (handle == -1)
     {

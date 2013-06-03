@@ -407,7 +407,7 @@ mc_args_add_extended_info_to_help (void)
     mc_args__loc__footer_string = g_strdup_printf ("%s",
                                                    _
                                                    ("\n"
-                                                    "Please send any bug reports (including the output of `mc -V')\n"
+                                                    "Please send any bug reports (including the output of 'mc -V')\n"
                                                     "as tickets at www.midnight-commander.org\n"));
     mc_args__loc__header_string = g_strdup_printf (_("GNU Midnight Commander %s\n"), VERSION);
 

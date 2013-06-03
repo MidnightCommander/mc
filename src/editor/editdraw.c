@@ -2,12 +2,13 @@
    Editor text drawing.
 
    Copyright (C) 1996, 1997, 1998, 2001, 2002, 2003, 2004, 2005, 2006,
-   2007, 2011, 2012
+   2007, 2011, 2012, 2013
    The Free Software Foundation, Inc.
 
    Written by:
    Paul Sheer, 1996, 1997
    Andrew Borodin <aborodin@vmail.ru> 2012
+   Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -260,12 +261,10 @@ edit_status_window (WEdit * edit)
     if (cols > 5)
     {
         const char *fname = N_("NoName");
-        char *full_fname = NULL;
 
         if (edit->filename_vpath != NULL)
         {
-            full_fname = vfs_path_to_str (edit->filename_vpath);
-            fname = x_basename (full_fname);
+            fname = x_basename (vfs_path_as_str (edit->filename_vpath));
         }
 #ifdef ENABLE_NLS
         else
@@ -274,7 +273,6 @@ edit_status_window (WEdit * edit)
 
         edit_move (2, 0);
         tty_printf ("[%s]", str_term_trim (fname, w->cols - 8 - 6));
-        g_free (full_fname);
     }
 
     tty_getyx (&y, &x);
