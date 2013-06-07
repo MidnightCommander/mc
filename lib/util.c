@@ -407,7 +407,6 @@ size_trunc_sep (uintmax_t size, gboolean use_si)
  *
  * Units: size units (filesystem sizes are 1K blocks)
  *    0=bytes, 1=Kbytes, 2=Mbytes, etc.
- *    -1 means maximum possible unit for specified size
  */
 
 void
@@ -450,6 +449,8 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
     /* *INDENT-ON* */
     static const char *const suffix[] = { "", "K", "M", "G", "T", "P", "E", "Z", "Y", NULL };
     static const char *const suffix_lc[] = { "", "k", "m", "g", "t", "p", "e", "z", "y", NULL };
+
+    const char *const *sfx = use_si ? suffix_lc : suffix;
     int j = 0;
 
     if (len == 0)
@@ -464,20 +465,10 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
         len = 9;
 #endif
 
-    /* find maximum unit */
-    if (units < 0)
-    {
-        const unsigned int divider = use_si ? 1000 : 1024;
-        uintmax_t size_remain = size;
-
-        for (units = 0; size_remain >= divider; units++)
-            size_remain /= divider;
-    }
-
     /*
      * recalculate from 1024 base to 1000 base if units>0
      * We can't just multiply by 1024 - that might cause overflow
-     * if off_t type is too small
+     * if uintmax_t type is too small
      */
     if (use_si)
         for (j = 0; j < units; j++)
@@ -485,31 +476,31 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
             uintmax_t size_remain;
 
             size_remain = ((size % 125) * 1024) / 1000; /* size mod 125, recalculated */
-            size = size / 125;  /* 128/125 = 1024/1000 */
-            size = size * 128;  /* This will convert size from multiple of 1024 to multiple of 1000 */
+            size /= 125;        /* 128/125 = 1024/1000 */
+            size *= 128;        /* This will convert size from multiple of 1024 to multiple of 1000 */
             size += size_remain;        /* Re-add remainder lost by division/multiplication */
         }
 
-    for (j = units; suffix[j] != NULL; j++)
+    for (j = units; sfx[j] != NULL; j++)
     {
         if (size == 0)
         {
             if (j == units)
             {
                 /* Empty files will print "0" even with minimal width.  */
-                g_snprintf (buffer, len + 1, "0");
-                break;
+                g_snprintf (buffer, len + 1, "%s", "0");
             }
-
-            /* Use "~K" or just "K" if len is 1.  Use "B" for bytes.  */
-            g_snprintf (buffer, len + 1, (len > 1) ? "~%s" : "%s",
-                        (j > 1) ? (use_si ? suffix_lc[j - 1] : suffix[j - 1]) : "B");
+            else
+            {
+                /* Use "~K" or just "K" if len is 1.  Use "B" for bytes.  */
+                g_snprintf (buffer, len + 1, (len > 1) ? "~%s" : "%s", (j > 1) ? sfx[j - 1] : "B");
+            }
             break;
         }
 
         if (size < power10[len - (j > 0 ? 1 : 0)])
         {
-            g_snprintf (buffer, len + 1, "%" PRIuMAX "%s", size, use_si ? suffix_lc[j] : suffix[j]);
+            g_snprintf (buffer, len + 1, "%" PRIuMAX "%s", size, sfx[j]);
             break;
         }
 
