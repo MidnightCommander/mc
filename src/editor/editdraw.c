@@ -160,7 +160,8 @@ status_string (WEdit * edit, char *s, int w)
                     edit->overwrite == 0 ? '-' : 'O',
                     edit->curs_col + edit->over_col,
                     edit->buffer.curs_line + 1,
-                    edit->buffer.lines + 1, (long) edit->buffer.curs1, (long) edit->buffer.size, byte_str,
+                    edit->buffer.lines + 1, (long) edit->buffer.curs1, (long) edit->buffer.size,
+                    byte_str,
 #ifdef HAVE_CHARSET
                     mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage) :
 #endif
@@ -176,7 +177,8 @@ status_string (WEdit * edit, char *s, int w)
                     edit->start_line + 1,
                     edit->curs_row,
                     edit->buffer.curs_line + 1,
-                    edit->buffer.lines + 1, (long) edit->buffer.curs1, (long) edit->buffer.size, byte_str,
+                    edit->buffer.lines + 1, (long) edit->buffer.curs1, (long) edit->buffer.size,
+                    byte_str,
 #ifdef HAVE_CHARSET
                     mc_global.source_codepage >= 0 ? get_codepage_id (mc_global.source_codepage) :
 #endif
@@ -571,7 +573,8 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
             if (tty_use_colors () && visible_tws)
             {
                 tws = edit_buffer_get_eol (&edit->buffer, b);
-                while (tws > b && ((c = edit_buffer_get_byte (&edit->buffer, tws - 1)) == ' ' || c == '\t'))
+                while (tws > b
+                       && ((c = edit_buffer_get_byte (&edit->buffer, tws - 1)) == ' ' || c == '\t'))
                     tws--;
             }
 

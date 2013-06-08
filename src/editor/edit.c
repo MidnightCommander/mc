@@ -461,8 +461,8 @@ edit_save_position (WEdit * edit)
         return;
 
     book_mark_serialize (edit, BOOK_MARK_COLOR);
-    save_file_position (edit->filename_vpath, edit->buffer.curs_line + 1, edit->curs_col, edit->buffer.curs1,
-                        edit->serialized_bookmarks);
+    save_file_position (edit->filename_vpath, edit->buffer.curs_line + 1, edit->curs_col,
+                        edit->buffer.curs1, edit->serialized_bookmarks);
     edit->serialized_bookmarks = NULL;
 }
 
@@ -986,8 +986,7 @@ edit_left_char_move_cmd (WEdit * edit)
     if (edit->column_highlight
         && option_cursor_beyond_eol
         && edit->mark1 != edit->mark2
-        && edit->over_col == 0
-        && edit->buffer.curs1 == edit_buffer_get_current_bol (&edit->buffer))
+        && edit->over_col == 0 && edit->buffer.curs1 == edit_buffer_get_current_bol (&edit->buffer))
         return;
 #ifdef HAVE_CHARSET
     if (edit->utf8)
@@ -1033,7 +1032,7 @@ edit_move_updown (WEdit * edit, long lines, gboolean do_scroll, gboolean directi
     }
     p = edit_buffer_get_current_bol (&edit->buffer);
     p = direction ? edit_buffer_move_backward (&edit->buffer, p, lines) :
-                    edit_buffer_move_forward (&edit->buffer, p, lines, 0);
+        edit_buffer_move_forward (&edit->buffer, p, lines, 0);
     edit_cursor_move (edit, p - edit->buffer.curs1);
     edit_move_to_prev_col (edit, p);
 
@@ -1141,15 +1140,15 @@ edit_do_undo (WEdit * edit)
         {
             edit->mark1 = ac - MARK_1;
             edit->column1 =
-                (long) edit_move_forward3 (edit, edit_buffer_get_bol (&edit->buffer, edit->mark1), 0,
-                                           edit->mark1);
+                (long) edit_move_forward3 (edit, edit_buffer_get_bol (&edit->buffer, edit->mark1),
+                                           0, edit->mark1);
         }
         if (ac >= MARK_2 - 2 && ac < MARK_CURS - 2)
         {
             edit->mark2 = ac - MARK_2;
             edit->column2 =
-                (long) edit_move_forward3 (edit, edit_buffer_get_bol (&edit->buffer, edit->mark2), 0,
-                                           edit->mark2);
+                (long) edit_move_forward3 (edit, edit_buffer_get_bol (&edit->buffer, edit->mark2),
+                                           0, edit->mark2);
         }
         else if (ac >= MARK_CURS - 2 && ac < KEY_PRESS)
         {
@@ -1161,12 +1160,14 @@ edit_do_undo (WEdit * edit)
 
     if (edit->start_display > ac - KEY_PRESS)
     {
-        edit->start_line -= edit_buffer_count_lines (&edit->buffer, ac - KEY_PRESS, edit->start_display);
+        edit->start_line -=
+            edit_buffer_count_lines (&edit->buffer, ac - KEY_PRESS, edit->start_display);
         edit->force |= REDRAW_PAGE;
     }
     else if (edit->start_display < ac - KEY_PRESS)
     {
-        edit->start_line += edit_buffer_count_lines (&edit->buffer, edit->start_display, ac - KEY_PRESS);
+        edit->start_line +=
+            edit_buffer_count_lines (&edit->buffer, edit->start_display, ac - KEY_PRESS);
         edit->force |= REDRAW_PAGE;
     }
     edit->start_display = ac - KEY_PRESS;       /* see push and pop above */
@@ -1222,13 +1223,15 @@ edit_do_redo (WEdit * edit)
         {
             edit->mark1 = ac - MARK_1;
             edit->column1 =
-                (long) edit_move_forward3 (edit, edit_buffer_get_bol (&edit->buffer, edit->mark1), 0, edit->mark1);
+                (long) edit_move_forward3 (edit, edit_buffer_get_bol (&edit->buffer, edit->mark1),
+                                           0, edit->mark1);
         }
         else if (ac >= MARK_2 - 2 && ac < KEY_PRESS)
         {
             edit->mark2 = ac - MARK_2;
             edit->column2 =
-                (long) edit_move_forward3 (edit, edit_buffer_get_bol (&edit->buffer, edit->mark2), 0, edit->mark2);
+                (long) edit_move_forward3 (edit, edit_buffer_get_bol (&edit->buffer, edit->mark2),
+                                           0, edit->mark2);
         }
         /* more than one pop usually means something big */
         if (count++)
@@ -1237,12 +1240,14 @@ edit_do_redo (WEdit * edit)
 
     if (edit->start_display > ac - KEY_PRESS)
     {
-        edit->start_line -= edit_buffer_count_lines (&edit->buffer, ac - KEY_PRESS, edit->start_display);
+        edit->start_line -=
+            edit_buffer_count_lines (&edit->buffer, ac - KEY_PRESS, edit->start_display);
         edit->force |= REDRAW_PAGE;
     }
     else if (edit->start_display < ac - KEY_PRESS)
     {
-        edit->start_line += edit_buffer_count_lines (&edit->buffer, edit->start_display, ac - KEY_PRESS);
+        edit->start_line +=
+            edit_buffer_count_lines (&edit->buffer, edit->start_display, ac - KEY_PRESS);
         edit->force |= REDRAW_PAGE;
     }
     edit->start_display = ac - KEY_PRESS;       /* see push and pop above */
@@ -1545,7 +1550,8 @@ edit_move_block_to_right (WEdit * edit)
                 insert_spaces_tab (edit, option_fake_half_tabs);
             else
                 edit_insert (edit, '\t');
-            edit_cursor_move (edit, edit_buffer_get_bol (&edit->buffer, cur_bol) - edit->buffer.curs1);
+            edit_cursor_move (edit,
+                              edit_buffer_get_bol (&edit->buffer, cur_bol) - edit->buffer.curs1);
         }
 
         if (cur_bol == 0)
@@ -1804,7 +1810,7 @@ edit_write_stream (WEdit * edit, FILE * f)
         {                       /* (c == '\n' || c == '\r') */
             unsigned char c1;
 
-            c1 = edit_buffer_get_byte (&edit->buffer, i + 1);     /* next char */
+            c1 = edit_buffer_get_byte (&edit->buffer, i + 1);   /* next char */
 
             switch (edit->lb)
             {
@@ -2879,7 +2885,8 @@ edit_move_to_prev_col (WEdit * edit, off_t p)
     long prev = edit->prev_col;
     long over = edit->over_col;
 
-    edit_cursor_move (edit, edit_move_forward3 (edit, p, prev + edit->over_col, 0) - edit->buffer.curs1);
+    edit_cursor_move (edit,
+                      edit_move_forward3 (edit, p, prev + edit->over_col, 0) - edit->buffer.curs1);
 
     if (option_cursor_beyond_eol)
     {
@@ -2918,9 +2925,11 @@ edit_move_to_prev_col (WEdit * edit, off_t p)
                 edit->curs_col -= (edit->curs_col % fake_half_tabs);
                 p = edit_buffer_get_current_bol (&edit->buffer);
                 edit_cursor_move (edit,
-                                  edit_move_forward3 (edit, p, edit->curs_col, 0) - edit->buffer.curs1);
+                                  edit_move_forward3 (edit, p, edit->curs_col,
+                                                      0) - edit->buffer.curs1);
                 if (!left_of_four_spaces (edit))
-                    edit_cursor_move (edit, edit_move_forward3 (edit, p, q, 0) - edit->buffer.curs1);
+                    edit_cursor_move (edit,
+                                      edit_move_forward3 (edit, p, q, 0) - edit->buffer.curs1);
             }
         }
     }
@@ -3391,12 +3400,11 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
             edit->over_col--;
         else if (option_backspace_through_tabs && is_in_indent (&edit->buffer))
         {
-            while (edit_buffer_get_previous_byte (&edit->buffer) != '\n'
-                && edit->buffer.curs1 > 0)
+            while (edit_buffer_get_previous_byte (&edit->buffer) != '\n' && edit->buffer.curs1 > 0)
                 edit_backspace (edit, TRUE);
         }
         else if (option_fake_half_tabs && is_in_indent (&edit->buffer)
-            && right_of_four_spaces (edit))
+                 && right_of_four_spaces (edit))
         {
             int i;
 

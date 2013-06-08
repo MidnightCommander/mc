@@ -536,8 +536,9 @@ edit_delete_column_of_text (WEdit * edit)
         }
         if (n)
             /* move to next line except on the last delete */
-            edit_cursor_move (edit, edit_buffer_move_forward (&edit->buffer, edit->buffer.curs1, 1, 0) -
-                              edit->buffer.curs1);
+            edit_cursor_move (edit,
+                              edit_buffer_move_forward (&edit->buffer, edit->buffer.curs1, 1,
+                                                        0) - edit->buffer.curs1);
     }
 }
 
@@ -694,7 +695,8 @@ edit_calculate_start_of_next_line (const edit_buffer_t * buf, off_t current_pos,
  */
 
 static off_t
-edit_calculate_end_of_previous_line (const edit_buffer_t * buf, off_t current_pos, char end_string_symbol)
+edit_calculate_end_of_previous_line (const edit_buffer_t * buf, off_t current_pos,
+                                     char end_string_symbol)
 {
     off_t i;
 
@@ -716,7 +718,8 @@ edit_calculate_end_of_previous_line (const edit_buffer_t * buf, off_t current_po
  */
 
 static inline off_t
-edit_calculate_start_of_previous_line (const edit_buffer_t * buf, off_t current_pos, char end_string_symbol)
+edit_calculate_start_of_previous_line (const edit_buffer_t * buf, off_t current_pos,
+                                       char end_string_symbol)
 {
     current_pos = edit_calculate_end_of_previous_line (buf, current_pos, end_string_symbol);
     current_pos = edit_calculate_end_of_previous_line (buf, current_pos, end_string_symbol);
@@ -735,7 +738,8 @@ edit_calculate_start_of_previous_line (const edit_buffer_t * buf, off_t current_
  */
 
 static inline off_t
-edit_calculate_start_of_current_line (const edit_buffer_t * buf, off_t current_pos, char end_string_symbol)
+edit_calculate_start_of_current_line (const edit_buffer_t * buf, off_t current_pos,
+                                      char end_string_symbol)
 {
     current_pos = edit_calculate_end_of_previous_line (buf, current_pos, end_string_symbol);
 
@@ -800,7 +804,8 @@ editcmd_find (WEdit * edit, gsize * len)
 
         /* fix the start and the end of search block positions */
         if ((edit->search_line_type & AT_START_LINE) != 0
-            && (start_mark != 0 || edit_buffer_get_byte (&edit->buffer, start_mark - 1) != end_string_symbol))
+            && (start_mark != 0
+                || edit_buffer_get_byte (&edit->buffer, start_mark - 1) != end_string_symbol))
         {
             start_mark =
                 edit_calculate_start_of_next_line (&edit->buffer, start_mark, edit->buffer.size,
@@ -809,7 +814,8 @@ editcmd_find (WEdit * edit, gsize * len)
         if ((edit->search_line_type & AT_END_LINE) != 0
             && (end_mark - 1 != edit->buffer.size
                 || edit_buffer_get_byte (&edit->buffer, end_mark) != end_string_symbol))
-            end_mark = edit_calculate_end_of_previous_line (&edit->buffer, end_mark, end_string_symbol);
+            end_mark =
+                edit_calculate_end_of_previous_line (&edit->buffer, end_mark, end_string_symbol);
         if (start_mark >= end_mark)
         {
             edit->search->error = MC_SEARCH_E_NOTFOUND;
@@ -831,7 +837,8 @@ editcmd_find (WEdit * edit, gsize * len)
 
         if ((edit->search_line_type & AT_START_LINE) != 0)
             search_start =
-                edit_calculate_start_of_current_line (&edit->buffer, search_start, end_string_symbol);
+                edit_calculate_start_of_current_line (&edit->buffer, search_start,
+                                                      end_string_symbol);
 
         while (search_start >= start_mark)
         {
@@ -849,7 +856,8 @@ editcmd_find (WEdit * edit, gsize * len)
 
             if ((edit->search_line_type & AT_START_LINE) != 0)
                 search_start =
-                    edit_calculate_start_of_previous_line (&edit->buffer, search_start, end_string_symbol);
+                    edit_calculate_start_of_previous_line (&edit->buffer, search_start,
+                                                           end_string_symbol);
             else
                 search_start--;
         }
@@ -860,7 +868,8 @@ editcmd_find (WEdit * edit, gsize * len)
         /* forward search */
         if ((edit->search_line_type & AT_START_LINE) != 0 && search_start != start_mark)
             search_start =
-                edit_calculate_start_of_next_line (&edit->buffer, search_start, end_mark, end_string_symbol);
+                edit_calculate_start_of_next_line (&edit->buffer, search_start, end_mark,
+                                                   end_string_symbol);
         return mc_search_run (edit->search, (void *) edit, search_start, end_mark, len);
     }
     return FALSE;
@@ -1112,7 +1121,7 @@ edit_find_word_start (const edit_buffer_t * buf, off_t * word_start, gsize * wor
             if (isdigit (last))
                 return FALSE;
 
-            *word_start = buf->curs1 - (i - 1);        /* start found */
+            *word_start = buf->curs1 - (i - 1); /* start found */
             *word_len = (gsize) (i - 1);
             break;
         }
@@ -2356,8 +2365,8 @@ edit_block_move_cmd (WEdit * edit)
         x2 = x + edit->over_col;
 
         /* do nothing when cursor inside first line of selected area */
-        if ((edit_buffer_get_eol (&edit->buffer, edit->buffer.curs1) == edit_buffer_get_eol (&edit->buffer, start_mark))
-            && x2 > c1 && x2 <= c2)
+        if ((edit_buffer_get_eol (&edit->buffer, edit->buffer.curs1) ==
+             edit_buffer_get_eol (&edit->buffer, start_mark)) && x2 > c1 && x2 <= c2)
             return;
 
         if (edit->buffer.curs1 > start_mark
@@ -2408,7 +2417,8 @@ edit_block_move_cmd (WEdit * edit)
         while (count-- > start_mark)
             edit_insert_ahead (edit, copy_buf[end_mark - count - 1]);
 
-        edit_set_markers (edit, edit->buffer.curs1, edit->buffer.curs1 + end_mark - start_mark, 0, 0);
+        edit_set_markers (edit, edit->buffer.curs1, edit->buffer.curs1 + end_mark - start_mark, 0,
+                          0);
 
         /* Place cursor at the end of text selection */
         if (option_cursor_after_inserted_block)

@@ -103,13 +103,13 @@ bad_line_start (const edit_buffer_t * buf, off_t p)
     {
         /* `...' is acceptable */
         return !(edit_buffer_get_byte (buf, p + 1) == '.'
-                && edit_buffer_get_byte (buf, p + 2) == '.');
+                 && edit_buffer_get_byte (buf, p + 2) == '.');
     }
     if (c == '-')
     {
         /* `---' is acceptable */
         return !(edit_buffer_get_byte (buf, p + 1) == '-'
-                && edit_buffer_get_byte (buf, p + 2) == '-');
+                 && edit_buffer_get_byte (buf, p + 2) == '-');
     }
 
     return (strchr (NO_FORMAT_CHARS_START, c) != NULL);
@@ -158,8 +158,10 @@ end_paragraph (WEdit * edit, gboolean force)
         }
 
     return edit_buffer_get_eol (&edit->buffer,
-                     edit_buffer_move_forward (&edit->buffer, edit_buffer_get_current_bol (&edit->buffer),
-                                        i - edit->buffer.curs_line, 0));
+                                edit_buffer_move_forward (&edit->buffer,
+                                                          edit_buffer_get_current_bol
+                                                          (&edit->buffer),
+                                                          i - edit->buffer.curs_line, 0));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -418,7 +420,7 @@ put_paragraph (WEdit * edit, unsigned char *t, off_t p, long indent, off_t size)
         if (c != t[i])
             replace_at (edit, p, t[i]);
     }
-    edit_cursor_move (edit, cursor - edit->buffer.curs1);      /* restore cursor position */
+    edit_cursor_move (edit, cursor - edit->buffer.curs1);       /* restore cursor position */
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -470,7 +472,8 @@ format_paragraph (WEdit * edit, gboolean force)
 
         if (strchr (NO_FORMAT_CHARS_START, t->str[0]) == NULL)
             for (i = 0; i < size - 1; i++)
-                if (t->str[i] == '\n' && strchr (NO_FORMAT_CHARS_START "\t ", t->str[i + 1]) != NULL)
+                if (t->str[i] == '\n'
+                    && strchr (NO_FORMAT_CHARS_START "\t ", t->str[i + 1]) != NULL)
                     break;
 
         g_string_free (t, TRUE);

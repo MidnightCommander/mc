@@ -317,7 +317,8 @@ compare_word_to_right (const WEdit * edit, off_t i, const char *text,
         }
     }
     return (whole_right != NULL &&
-            strchr (whole_right, xx_tolower (edit, edit_buffer_get_byte (&edit->buffer, i))) != NULL) ? -1 : i;
+            strchr (whole_right,
+                    xx_tolower (edit, edit_buffer_get_byte (&edit->buffer, i))) != NULL) ? -1 : i;
 }
 
 /* --------------------------------------------------------------------------------------------- */
