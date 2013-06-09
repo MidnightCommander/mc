@@ -1093,7 +1093,7 @@ pipe_mail (const edit_buffer_t * buf, char *to, char *subject, char *cc)
 static gboolean
 edit_find_word_start (const edit_buffer_t * buf, off_t * word_start, gsize * word_len)
 {
-    int c, last;
+    int c;
     off_t i;
 
     /* return if at begin of file */
@@ -1106,14 +1106,12 @@ edit_find_word_start (const edit_buffer_t * buf, off_t * word_start, gsize * wor
         return FALSE;
 
     /* search start of word to be completed */
-    for (i = 2;; i++)
+    for (i = 1;; i++)
     {
-        /* return if at begin of file */
-        if (buf->curs1 < i)
-            return FALSE;
+        int last;
 
         last = c;
-        c = edit_buffer_get_byte (buf, buf->curs1 - i);
+        c = edit_buffer_get_byte (buf, buf->curs1 - i - 1);
 
         if (is_break_char (c))
         {
@@ -1121,12 +1119,13 @@ edit_find_word_start (const edit_buffer_t * buf, off_t * word_start, gsize * wor
             if (isdigit (last))
                 return FALSE;
 
-            *word_start = buf->curs1 - (i - 1); /* start found */
-            *word_len = (gsize) (i - 1);
             break;
         }
     }
+
     /* success */
+    *word_start = buf->curs1 - i;       /* start found */
+    *word_len = (gsize) i;
     return TRUE;
 }
 
