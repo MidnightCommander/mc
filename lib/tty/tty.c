@@ -90,6 +90,7 @@ gboolean
 tty_check_term (gboolean force_xterm)
 {
     const char *termvalue;
+    const char *xdisplay;
 
     termvalue = getenv ("TERM");
     if (termvalue == NULL || *termvalue == '\0')
@@ -98,10 +99,16 @@ tty_check_term (gboolean force_xterm)
         exit (EXIT_FAILURE);
     }
 
+    xdisplay = getenv ("DISPLAY");
+    if (xdisplay != NULL && *xdisplay == '\0')
+        xdisplay = NULL;
+
     return force_xterm || strncmp (termvalue, "xterm", 5) == 0
         || strncmp (termvalue, "konsole", 7) == 0
         || strncmp (termvalue, "rxvt", 4) == 0
-        || strcmp (termvalue, "Eterm") == 0 || strcmp (termvalue, "dtterm") == 0;
+        || strcmp (termvalue, "Eterm") == 0
+        || strcmp (termvalue, "dtterm") == 0
+        || (strncmp (termvalue, "screen", 6) == 0 && xdisplay != NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
