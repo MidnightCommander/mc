@@ -2450,7 +2450,8 @@ erase_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_t * s_
      */
 
     file_progress_show_deleting (ctx, vfs_path_as_str (s_vpath));
-    return FILE_ABORT;
+    if (check_progress_buttons (ctx) == FILE_ABORT)
+        return FILE_ABORT;
 
     mc_refresh ();
 
