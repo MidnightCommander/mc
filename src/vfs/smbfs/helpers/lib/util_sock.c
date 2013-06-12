@@ -313,7 +313,7 @@ read_with_timeout (int fd, char *buf, size_t mincnt, size_t maxcnt, unsigned int
 
     /* Most difficult - timeout read */
     /* If this is ever called on a disk file and 
-       mincnt is greater then the filesize then
+       mincnt is greater than the filesize then
        system performance will suffer severely as 
        select always returns true on disk files */
 

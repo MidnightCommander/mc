@@ -224,7 +224,7 @@ sftpfs_cb_readdir (void *data)
  * Callback for closing directory.
  *
  * @param data directory data handler
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 static int
@@ -244,7 +244,7 @@ sftpfs_cb_closedir (void *data)
  *
  * @param vpath path to file or directory
  * @param buf   buffer for store stat-info
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 static int
@@ -264,7 +264,7 @@ sftpfs_cb_lstat (const vfs_path_t * vpath, struct stat *buf)
  *
  * @param vpath path to file or directory
  * @param buf   buffer for store stat-info
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 static int
@@ -284,7 +284,7 @@ sftpfs_cb_stat (const vfs_path_t * vpath, struct stat *buf)
  *
  * @param data file data handler
  * @param buf  buffer for store stat-info
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 static int
@@ -305,7 +305,7 @@ sftpfs_cb_fstat (void *data, struct stat *buf)
  * @param vpath path to file or directory
  * @param buf   buffer for store stat-info
  * @param size  buffer size
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 static int
@@ -343,7 +343,7 @@ sftpfs_cb_utime (const vfs_path_t * vpath, struct utimbuf *times)
  *
  * @param vpath1 path to file or directory
  * @param vpath2 path to symlink
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 static int
@@ -422,7 +422,7 @@ sftpfs_cb_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
  * @param data   file data handler
  * @param buffer buffer for data
  * @param count  data size
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 static ssize_t
@@ -450,7 +450,7 @@ sftpfs_cb_read (void *data, char *buffer, size_t count)
  * @param data  file data handler
  * @param buf   buffer for data
  * @param count data size
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 static ssize_t
@@ -470,7 +470,7 @@ sftpfs_cb_write (void *data, const char *buf, size_t nbyte)
  * Callback for close file.
  *
  * @param data file data handler
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 static int
@@ -505,7 +505,7 @@ sftpfs_cb_close (void *data)
  *
  * @param vpath path to file or directory
  * @param mode  mode (see man 2 open)
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 static int
@@ -525,7 +525,7 @@ sftpfs_cb_chmod (const vfs_path_t * vpath, mode_t mode)
  *
  * @param vpath path directory
  * @param mode  mode (see man 2 open)
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 static int
@@ -544,7 +544,7 @@ sftpfs_cb_mkdir (const vfs_path_t * vpath, mode_t mode)
  * Callback for rmdir VFS-function.
  *
  * @param vpath path directory
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 static int
@@ -565,7 +565,7 @@ sftpfs_cb_rmdir (const vfs_path_t * vpath)
  * @param data   file data handler
  * @param offset file offset
  * @param whence method of seek (at begin, at current, at end)
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 static off_t
@@ -585,7 +585,7 @@ sftpfs_cb_lseek (void *data, off_t offset, int whence)
  * Callback for unlink VFS-function.
  *
  * @param vpath path to file or directory
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 static int
@@ -605,7 +605,7 @@ sftpfs_cb_unlink (const vfs_path_t * vpath)
  *
  * @param vpath1 path to source file or directory
  * @param vpath2 path to destination file or directory
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 static int

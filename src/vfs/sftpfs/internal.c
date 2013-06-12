@@ -109,7 +109,7 @@ sftpfs_fix_filename (const char *file_name)
  *
  * @param super_data extra data for SFTP connection
  * @param error      unused
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 int
@@ -145,7 +145,7 @@ sftpfs_waitsocket (sftpfs_super_data_t * super_data, GError ** error)
  * @param vpath path to file, directory or symbolic link
  * @param buf   buffer for store stat-info
  * @param error pointer to error object
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 int
@@ -221,7 +221,7 @@ sftpfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** error)
  * @param vpath path to file or directory
  * @param buf   buffer for store stat-info
  * @param error pointer to error object
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 int
@@ -300,7 +300,7 @@ sftpfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** error)
  * @param buf   buffer for store stat-info
  * @param size  buffer size
  * @param error pointer to error object
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 int
@@ -355,7 +355,7 @@ sftpfs_readlink (const vfs_path_t * vpath, char *buf, size_t size, GError ** err
  * @param vpath1 path to file or directory
  * @param vpath2 path to symlink
  * @param error  pointer to error object
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 int
@@ -424,7 +424,7 @@ sftpfs_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** 
  * @param vpath path to file or directory
  * @param mode  mode (see man 2 open)
  * @param error pointer to error object
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 int
@@ -503,7 +503,7 @@ sftpfs_chmod (const vfs_path_t * vpath, mode_t mode, GError ** error)
  *
  * @param vpath path to file or directory
  * @param error pointer to error object
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 int
@@ -560,7 +560,7 @@ sftpfs_unlink (const vfs_path_t * vpath, GError ** error)
  * @param vpath1 path to source file or directory
  * @param vpath2 path to destination file or directory
  * @param error  pointer to error object
- * @return 0 if sucess, negative value otherwise
+ * @return 0 if success, negative value otherwise
  */
 
 int

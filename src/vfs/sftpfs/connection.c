@@ -196,7 +196,7 @@ sftpfs_recognize_auth_types (struct vfs_s_super *super)
  *
  * @param super connection data
  * @param error pointer to the error handler
- * @return TRUE if connection was sucessfully opened, FALSE otherwise
+ * @return TRUE if connection was successfully opened, FALSE otherwise
  */
 
 static gboolean
@@ -249,7 +249,7 @@ sftpfs_open_connection_ssh_agent (struct vfs_s_super *super, GError ** error)
  *
  * @param super connection data
  * @param error pointer to the error handler
- * @return TRUE if connection was sucessfully opened, FALSE otherwise
+ * @return TRUE if connection was successfully opened, FALSE otherwise
  */
 
 static gboolean
@@ -296,7 +296,7 @@ sftpfs_open_connection_ssh_key (struct vfs_s_super *super, GError ** error)
  *
  * @param super connection data
  * @param error pointer to the error handler
- * @return TRUE if connection was sucessfully opened, FALSE otherwise
+ * @return TRUE if connection was successfully opened, FALSE otherwise
  */
 
 static gboolean

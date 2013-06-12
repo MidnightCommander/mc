@@ -200,7 +200,7 @@ estr_t str_vfs_convert_from (GIConv, const char *, GString *);
  */
 estr_t str_vfs_convert_to (GIConv, const char *, int, GString *);
 
-/* printf functin for str_buffer, append result of printf at the end of buffer
+/* printf function for str_buffer, append result of printf at the end of buffer
  */
 void str_printf (GString *, const char *, ...);
 

@@ -2924,7 +2924,7 @@ cli_establish_connection (struct cli_state * cli,
 
 
 /****************************************************************************
-check for existance of a dir
+check for existence of a dir
 ****************************************************************************/
 BOOL
 cli_chkpath (struct cli_state * cli, char *path)

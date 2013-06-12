@@ -32,7 +32,7 @@
 #include "lib/strutil.h"
 
 /* using g_ascii function from glib
- * on terminal are showed only ascii characters (lower then 0x80) 
+ * on terminal are showed only ascii characters (lower than 0x80) 
  */
 
 static const char replch = '?';

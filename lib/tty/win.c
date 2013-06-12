@@ -58,7 +58,7 @@ static gboolean rxvt_extensions = FALSE;
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/* my own wierd protocol base 16 - paul */
+/* my own weird protocol base 16 - paul */
 static int
 rxvt_getc (void)
 {
@@ -128,7 +128,7 @@ show_rxvt_contents (int starty, unsigned char y1, unsigned char y2)
     while (anything_ready ())
         tty_lowlevel_getch ();
 
-    /* my own wierd protocol base 26 - paul */
+    /* my own weird protocol base 26 - paul */
     printf (ESC_STR "CL%c%c%c%c\n", (y1 / 26) + 'A', (y1 % 26) + 'A', (y2 / 26) + 'A',
             (y2 % 26) + 'A');
 
