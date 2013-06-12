@@ -48,7 +48,7 @@ typedef int BOOL;
  * diffferent prototype declarations), so we must do these by hand.
  */
 /* I know the __attribute__ stuff is ugly, but it does ensure we get the 
-   arguemnts to DEBUG() right. We have got them wrong too often in the 
+   arguments to DEBUG() right. We have got them wrong too often in the 
    past */
 #ifdef HAVE_STDARG_H
 int

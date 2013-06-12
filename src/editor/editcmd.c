@@ -397,7 +397,7 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
 #ifdef HAVE_ASSERT_H
         assert (option_backup_ext != NULL);
 #endif
-        /* add backup extention to the path */
+        /* add backup extension to the path */
         tmp_vpath = vfs_path_clone (real_filename_vpath);
         last_vpath_element = (vfs_path_element_t *) vfs_path_get_by_index (tmp_vpath, -1);
         tmp_store_filename = last_vpath_element->path;
@@ -1496,7 +1496,7 @@ edit_redraw_page_cb (void *data, void *user_data)
  *
  * @param edit       editor object
  * @param completion word for completion
- * @param word_len   offset from begining for insert
+ * @param word_len   offset from beginning for insert
  */
 
 static void
@@ -1730,7 +1730,7 @@ edit_save_as_cmd (WEdit * edit)
             switch (rv)
             {
             case 1:
-                /* Succesful, so unlock both files */
+                /* Successful, so unlock both files */
                 if (different_filename)
                 {
                     if (save_lock)

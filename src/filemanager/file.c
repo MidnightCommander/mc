@@ -281,7 +281,7 @@ is_in_linklist (const GSList * lp, const vfs_path_t * vpath, const struct stat *
  * Check and made hardlink
  *
  * @return FALSE if the inode wasn't found in the cache and TRUE if it was found
- * and a hardlink was succesfully made
+ * and a hardlink was successfully made
  */
 
 static gboolean
@@ -1861,7 +1861,7 @@ copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
                     if (return_status != FILE_RETRY)
                         goto ret;
 
-                    /* User pressed "Retry". Will the next mc_write() call be succesful?
+                    /* User pressed "Retry". Will the next mc_write() call be successful?
                      * Reset error flag to be ready for that. */
                     write_errno_nospace = FALSE;
                 }

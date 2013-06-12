@@ -143,7 +143,7 @@ int ftpfs_directory_timeout = 900;
 /* Proxy host */
 char *ftpfs_proxy_host = NULL;
 
-/* wether we have to use proxy by default? */
+/* whether we have to use proxy by default? */
 int ftpfs_always_use_proxy = 0;
 
 int ftpfs_ignore_chattr_errors = 1;
@@ -259,7 +259,7 @@ static const char *netrcp;
 
    When the remote server is an amiga:
    a) strip leading slash if necesarry
-   b) replace first occurance of ":/" with ":"
+   b) replace first occurrence of ":/" with ":"
    c) strip trailing "/."
  */
 
@@ -303,7 +303,7 @@ ftpfs_translate_path (struct vfs_class *me, struct vfs_s_super *super, const cha
 
         ret = g_strdup (remote_path);
 
-        /* replace first occurance of ":/" with ":" */
+        /* replace first occurrence of ":/" with ":" */
         p = strchr (ret, ':');
         if ((p != NULL) && (*(p + 1) == '/'))
             memmove (p + 1, p + 2, strlen (p + 2) + 1);

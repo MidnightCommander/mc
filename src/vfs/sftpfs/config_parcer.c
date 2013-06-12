@@ -194,7 +194,7 @@ sftpfs_fill_config_entity_from_string (sftpfs_ssh_config_entity_t * config_entit
  * @param config_entity      config entity structure
  * @param vpath_element      path element with host data (hostname, port)
  * @param error              pointer to the error handler
- * @return TRUE if config entity was filled sucessfully, FALSE otherwise
+ * @return TRUE if config entity was filled successfully, FALSE otherwise
  */
 
 static gboolean

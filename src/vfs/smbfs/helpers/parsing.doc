@@ -69,7 +69,7 @@ Lexical Analysis:
 
   Note that there are five spaces following the word 'string',
   representing the one space between 'string' and '\\' in the top
-  line, plus the four preceeding the word 'with' in the second line.
+  line, plus the four preceding the word 'with' in the second line.
   (Yes, I'm counting the indentation.)
 
   Line continuation characters are ignored on blank lines and at the end

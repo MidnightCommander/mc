@@ -699,7 +699,7 @@ Version 4.7.4
     * History can be shown incorrectly due to access to the invalid pointer (#2299)
     * Potential division by zero in Info panel (#2337)
     * Segfault in replace confirmation in editor (#2272)
-    * Regexp replace only transforms the first occurence correctly (#2320)
+    * Regexp replace only transforms the first occurrence correctly (#2320)
     * Broken manually changing syntax definition (#2324)
     * MCEdit version number not centered in about dialog (#2311)
     * Typo in the code and the man section describing X clipboard integration (#30)
@@ -825,7 +825,7 @@ Version 4.7.2
     * Incorrect cursor position after "Cursor beyond end of line" mode switched off (#2094)
     * Incorrect overwrite behavior with UTF-8 codeset in editor (#2081)
     * Incorrect toggling state of ruler in viewer (#2067)
-    * Superfluous "Search done, Continue from begining?" dialog in viewer (#2091)
+    * Superfluous "Search done, Continue from beginning?" dialog in viewer (#2091)
     * Turning on wrap mode does not scroll left/right the file view (#2107)
     * Cannot scroll wrapped long lines in viewer (#2086)
     * Fixed EOL/BOL movements in plain mode (#1734)
@@ -873,7 +873,7 @@ Version 4.7.1
 - Viewer
 
     * Viewer is now very fast (#1585)
-    * Added new confirm box for repeat search from begining of file (#1917)
+    * Added new confirm box for repeat search from beginning of file (#1917)
 
 - Misc
 
@@ -1100,7 +1100,7 @@ Version 4.7.0-pre3
 - VFS
 
     * fixed recognize of tar.xz archives
-    * added recognize of lzma archives by extention
+    * added recognize of lzma archives by extension
 
 - Editor
 

@@ -873,7 +873,7 @@ get_compression_type (int fd, const char *name)
         return COMPRESSION_XZ;
 
     str_len = strlen (name);
-    /* HACK: we must belive to extention of LZMA file :) ... */
+    /* HACK: we must belive to extension of LZMA file :) ... */
     if ((str_len > 5 && strcmp (&name[str_len - 5], ".lzma") == 0) ||
         (str_len > 4 && strcmp (&name[str_len - 4], ".tlz") == 0))
         return COMPRESSION_LZMA;
