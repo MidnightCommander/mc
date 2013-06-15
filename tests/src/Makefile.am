@@ -1,6 +1,6 @@
 SUBDIRS = . filemanager
 
-if USE_EDIT
+if USE_INTERNAL_EDIT
 SUBDIRS += editor
 endif
 

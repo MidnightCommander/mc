@@ -383,7 +383,7 @@ dnl ############################################################################
 dnl MC options
 dnl ############################################################################
 
-MC_WITH_EDIT
+MC_WITH_INTERNAL_EDIT
 
 dnl Diff viewer support.
 AC_ARG_WITH([diff_viewer],
@@ -478,7 +478,7 @@ AC_SUBST(LIBS)
 AM_CONDITIONAL(USE_NLS, [test x"$USE_NLS" = xyes])
 AM_CONDITIONAL(USE_MAINTAINER_MODE, [test x"$USE_MAINTAINER_MODE" = xyes])
 AM_CONDITIONAL(USE_SCREEN_SLANG, [test x"$with_screen" = xslang])
-AM_CONDITIONAL(USE_EDIT, [test x"$use_edit" = xyes ])
+AM_CONDITIONAL(USE_INTERNAL_EDIT, [test x"$use_internal_edit" = xyes ])
 AM_CONDITIONAL(USE_ASPELL, [test x"$enable_aspell" = xyes ])
 AM_CONDITIONAL(USE_DIFF, [test -n "$use_diff"])
 AM_CONDITIONAL(CHARSET, [test -n "$have_charset"])
