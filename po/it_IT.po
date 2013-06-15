@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-03-12 13:28+0400\n"
+"POT-Creation-Date: 2013-06-15 10:56+0400\n"
 "PO-Revision-Date: 2011-12-07 11:21+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Italian (Italy) (http://www.transifex.net/projects/p/mc/team/"
@@ -649,7 +649,7 @@ msgstr ""
 
 msgid ""
 "\n"
-"Please send any bug reports (including the output of `mc -V')\n"
+"Please send any bug reports (including the output of 'mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 
@@ -1435,7 +1435,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2012 the Free Software Foundation"
+msgid "Copyright (C) 1996-2013 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1511,7 +1511,7 @@ msgid "The shell is already running a command"
 msgstr ""
 
 #, c-format
-msgid "Type `exit' to return to the Midnight Commander"
+msgid "Type 'exit' to return to the Midnight Commander"
 msgstr ""
 
 msgid "Set &all"
@@ -2054,7 +2054,7 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid "Symlink `%s' points to:"
+msgid "Symlink '%s' points to:"
 msgstr ""
 
 msgid "Edit symlink"
@@ -2069,7 +2069,7 @@ msgid "edit symlink: %s"
 msgstr ""
 
 #, c-format
-msgid "`%s' is not a symbolic link"
+msgid "'%s' is not a symbolic link"
 msgstr ""
 
 msgid "FTP to machine"
@@ -2570,7 +2570,7 @@ msgid "&Background"
 msgstr ""
 
 #, c-format
-msgid "Invalid source pattern `%s'"
+msgid "Invalid source pattern '%s'"
 msgstr ""
 
 msgid "&Chdir"
@@ -4010,6 +4010,12 @@ msgid ""
 msgstr ""
 
 msgid "Cannot view: not a regular file"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot open \"%s\" in magic mode\n"
+"%s"
 msgstr ""
 
 msgid "Seeking to search result"

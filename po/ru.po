@@ -13,13 +13,13 @@
 # Ilia Maslakov <il.smind@gmail.com>, 2009.
 # Slava Zanko <slavazanko@gmail.com>, 2009, 2011.
 # NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012.
-# Andrew Borodin <aborodin@vmail.ru>, 2009-2012.
+# Andrew Borodin <aborodin@vmail.ru>, 2009-2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-03-12 13:28+0400\n"
-"PO-Revision-Date: 2013-03-12 13:31+0300\n"
+"POT-Creation-Date: 2013-06-15 10:56+0400\n"
+"PO-Revision-Date: 2013-06-15 10:59+0300\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/mc/language/ru/)\n"
 "Language: ru\n"
@@ -1518,8 +1518,8 @@ msgstr ""
 "Текстовый редактор с дружественным интерфейсом пользователя.\n"
 "Создан для Midnight Commander."
 
-msgid "Copyright (C) 1996-2012 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2012 the Free Software Foundation"
+msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2013 the Free Software Foundation"
 
 msgid "About"
 msgstr "О программе"
@@ -2096,9 +2096,8 @@ msgstr "Просмотр вывода команды"
 msgid "Filter command and arguments:"
 msgstr "Введите команду и ее аргументы:"
 
-#, fuzzy
 msgid "Edit file"
-msgstr "Редактировать файлы"
+msgstr "Редактировать файл"
 
 msgid "Create a new Directory"
 msgstr "Создать новый каталог"
@@ -2623,6 +2622,8 @@ msgid ""
 "%s\n"
 "Directories: %zd, total size: %s"
 msgstr ""
+"%s\n"
+"Каталоги: %zd, общий объём: %s"
 
 msgid "Cannot operate on \"..\"!"
 msgstr "Эту операцию невозможно выполнить на \"..\"!"
@@ -3993,9 +3994,9 @@ msgstr ""
 "Предупреждение: неправильный флаг %c в %s:\n"
 "%s\n"
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: an error occurred while reading %s: %s"
-msgstr "sftp: произошла ошибка при чтении %s: %s"
+msgstr "sftp: an error occurred while reading %s: %s"
 
 msgid "sftp: Unable to get current user name."
 msgstr "sftp: невозможно получить имя пользователя."
@@ -4271,6 +4272,14 @@ msgstr ""
 msgid "Cannot view: not a regular file"
 msgstr "Просмотр невозможен: необычный файл"
 
+#, fuzzy, c-format
+msgid ""
+"Cannot open \"%s\" in magic mode\n"
+"%s"
+msgstr ""
+"Невозможно открыть \"%s\"\n"
+"%s"
+
 msgid "Seeking to search result"
 msgstr "Переход к найденному"
 
@@ -4280,9 +4289,8 @@ msgstr "Поиск закончен"
 msgid "Continue from beginning?"
 msgstr "Продолжить с начала?"
 
-#, fuzzy
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr "Невозможно получить локальную копию %s"
+msgstr "Невозможно получить локальную копию /ftp://some.host/editme.txt"
 
 #~ msgid "fish: storing zeros"
 #~ msgstr "fish: запись нулевых данных"

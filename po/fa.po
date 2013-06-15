@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-04-02 12:37+0300\n"
+"POT-Creation-Date: 2013-06-15 10:56+0400\n"
 "PO-Revision-Date: 2013-03-13 08:51+0000\n"
 "Last-Translator: Sina Saharkhiz <sinas1991@gmail.com>\n"
 "Language-Team: Persian (http://www.transifex.com/projects/p/mc/language/"
@@ -653,7 +653,7 @@ msgstr ""
 
 msgid ""
 "\n"
-"Please send any bug reports (including the output of `mc -V')\n"
+"Please send any bug reports (including the output of 'mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 
@@ -1439,7 +1439,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2012 the Free Software Foundation"
+msgid "Copyright (C) 1996-2013 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1514,8 +1514,8 @@ msgstr ""
 msgid "The shell is already running a command"
 msgstr "شل در حال اجرای فرمانی دیگر است"
 
-#, c-format
-msgid "Type `exit' to return to the Midnight Commander"
+#, fuzzy, c-format
+msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "برای برگشتن به فرماندار نیمه‌شب 'exit' را تایپ کنید"
 
 msgid "Set &all"
@@ -2058,7 +2058,7 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid "Symlink `%s' points to:"
+msgid "Symlink '%s' points to:"
 msgstr ""
 
 msgid "Edit symlink"
@@ -2073,7 +2073,7 @@ msgid "edit symlink: %s"
 msgstr ""
 
 #, c-format
-msgid "`%s' is not a symbolic link"
+msgid "'%s' is not a symbolic link"
 msgstr ""
 
 msgid "FTP to machine"
@@ -2574,7 +2574,7 @@ msgid "&Background"
 msgstr ""
 
 #, c-format
-msgid "Invalid source pattern `%s'"
+msgid "Invalid source pattern '%s'"
 msgstr ""
 
 msgid "&Chdir"

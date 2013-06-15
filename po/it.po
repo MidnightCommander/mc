@@ -11,10 +11,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-03-12 13:28+0400\n"
+"POT-Creation-Date: 2013-06-15 10:56+0400\n"
 "PO-Revision-Date: 2013-05-03 00:01+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
-"Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/it/)\n"
+"Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
+"it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -698,9 +699,10 @@ msgstr "[questa_dir] [dir_altro_pannello]"
 msgid "Set initial line number for the internal editor"
 msgstr "Imposta numero di riga iniziale per l'editor interno"
 
+#, fuzzy
 msgid ""
 "\n"
-"Please send any bug reports (including the output of `mc -V')\n"
+"Please send any bug reports (including the output of 'mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 "\n"
@@ -1512,7 +1514,8 @@ msgstr ""
 "Un semplice editor di testi\n"
 "scritto per il Midnight Commander."
 
-msgid "Copyright (C) 1996-2012 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2013 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2012 the Free Software Foundation"
 
 msgid "About"
@@ -1593,8 +1596,8 @@ msgstr "Impossibile ricevere una copia locale di %s"
 msgid "The shell is already running a command"
 msgstr "La shell sta già eseguendo un comando"
 
-#, c-format
-msgid "Type `exit' to return to the Midnight Commander"
+#, fuzzy, c-format
+msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Premi `exit' per tornare a Midnight Commander"
 
 msgid "Set &all"
@@ -2149,8 +2152,8 @@ msgstr ""
 "Non è né un xterm né una console; \n"
 "i pannelli non possono essere nascosti."
 
-#, c-format
-msgid "Symlink `%s' points to:"
+#, fuzzy, c-format
+msgid "Symlink '%s' points to:"
 msgstr "Il colleg. simb. \"%s\" punta a:"
 
 msgid "Edit symlink"
@@ -2164,8 +2167,8 @@ msgstr "modifica collegamento simb., impossibile rimuovere %s: %s"
 msgid "edit symlink: %s"
 msgstr "modifica del collegamento simb.: %s"
 
-#, c-format
-msgid "`%s' is not a symbolic link"
+#, fuzzy, c-format
+msgid "'%s' is not a symbolic link"
 msgstr "\"%s\" non è un collegamento simbolico"
 
 msgid "FTP to machine"
@@ -2752,8 +2755,8 @@ msgstr "Coll. simb. &stabili"
 msgid "&Background"
 msgstr "&Background"
 
-#, c-format
-msgid "Invalid source pattern `%s'"
+#, fuzzy, c-format
+msgid "Invalid source pattern '%s'"
 msgstr "Modello sorgente non valido \"%s\""
 
 msgid "&Chdir"
@@ -4270,6 +4273,14 @@ msgstr ""
 
 msgid "Cannot view: not a regular file"
 msgstr "Visualizzazione impossibile: non è un semplice file"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot open \"%s\" in magic mode\n"
+"%s"
+msgstr ""
+"Impossibile aprire il file \"%s\"\n"
+"%s"
 
 msgid "Seeking to search result"
 msgstr "In fase di ricerca"
