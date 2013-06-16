@@ -3,23 +3,23 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Alex Tkachenko <alex@bcs.zp.ua>, 1998.
-# and Alex Tkachenko <alex@bcs.zp.ua>, 1998.
-# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999.
-# Evgeny Bulgakov <bgav@netvision.net.il>, 1999.
-# Sergey Panov <sipan@mit.edu>, 1999.
-# Valek Filippov <frob@df.ru>, 2000.
-# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005.
-# Ilia Maslakov <il.smind@gmail.com>, 2009.
-# Slava Zanko <slavazanko@gmail.com>, 2009, 2011.
-# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012.
+# Alex Tkachenko <alex@bcs.zp.ua>, 1998
+# and Alex Tkachenko <alex@bcs.zp.ua>, 1998
+# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999
+# Evgeny Bulgakov <bgav@netvision.net.il>, 1999
+# Sergey Panov <sipan@mit.edu>, 1999
+# Valek Filippov <frob@df.ru>, 2000
+# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
+# Ilia Maslakov <il.smind@gmail.com>, 2009
+# Slava Zanko <slavazanko@gmail.com>, 2009, 2011
+# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
 # Andrew Borodin <aborodin@vmail.ru>, 2009-2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2013-06-15 10:56+0400\n"
-"PO-Revision-Date: 2013-06-15 10:59+0300\n"
+"PO-Revision-Date: 2013-06-16 08:43+0000\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/mc/language/ru/)\n"
 "Language: ru\n"
@@ -105,7 +105,7 @@ msgid ""
 "Your old settings were migrated from %s\n"
 "to %s\n"
 msgstr ""
-"Ваши старые настройки перемещены из %s\n"
+"Ваши старые настройки перенесены из %s\n"
 "в %s\n"
 
 msgid "Search string not found"
@@ -685,7 +685,6 @@ msgstr ""
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray, white\n"
 "\n"
-"\n"
 "Расширенные цвета, если доступны 256 цветов:\n"
 "   от color16 до color255 или от rgb000 до rgb555 и от gray0 до gray23\n"
 "\n"
@@ -1186,8 +1185,8 @@ msgid ""
 "Current text was modified without a file save.\n"
 "Continue discards these changes"
 msgstr ""
-"Текущий текст был модифицирован и не сохранен.\n"
-"Продолжение операции приведет к потере изменений."
+"Текущий текст был модифицирован и не сохранён.\n"
+"Продолжение операции приведёт к потере изменений."
 
 msgid "In se&lection"
 msgstr "В в&ыделенном"
@@ -1220,8 +1219,8 @@ msgid ""
 "Current text was modified without a file save.\n"
 "Continue discards these changes."
 msgstr ""
-"Текущий текст был модифицирован и не сохранен.\n"
-"Продолжение операции приведет к потере изменений"
+"Текущий текст был модифицирован и не сохранён.\n"
+"Продолжение операции приведёт к потере изменений"
 
 msgid "NoName"
 msgstr "Без имени"
@@ -1632,7 +1631,7 @@ msgid ""
 "Cannot chmod \"%s\"\n"
 "%s"
 msgstr ""
-"Невозможно изменить доступ \"%s\"\n"
+"Невозможно изменить режим доступа к \"%s\"\n"
 "%s"
 
 #, c-format
@@ -1697,9 +1696,8 @@ msgstr "Встроенный &редактор"
 msgid "Use internal vie&w"
 msgstr "Встро&енный просмотр"
 
-#, fuzzy
 msgid "A&sk new file name"
-msgstr "Введите имя файла:"
+msgstr "Спра&шивать имя нового файла"
 
 msgid "Auto m&enus"
 msgstr "Автоматические &меню"
@@ -2094,7 +2092,7 @@ msgid "Filtered view"
 msgstr "Просмотр вывода команды"
 
 msgid "Filter command and arguments:"
-msgstr "Введите команду и ее аргументы:"
+msgstr "Введите команду и её аргументы:"
 
 msgid "Edit file"
 msgstr "Редактировать файл"
@@ -2237,7 +2235,10 @@ msgid " %s%s file error"
 msgstr "ошибка файла %s%s"
 
 #, c-format
-msgid "The format of the %smc.ext file has changed with version 3.0. It seems that the installation failed. Please fetch a fresh copy from the Midnight Commander package."
+msgid ""
+"The format of the %smc.ext file has changed with version 3.0. It seems that "
+"the installation failed. Please fetch a fresh copy from the Midnight "
+"Commander package."
 msgstr "Формат %smc.ext изменён с версии 3.0. Возможно, произошёл сбой при установке. Пожалуйста, возьмите свежую копию из пакета Midnight Commander."
 
 #, c-format
@@ -2245,7 +2246,9 @@ msgid "%s file error"
 msgstr "ошибка файла %s"
 
 #, c-format
-msgid "The format of the %s file has changed with version 3.0. You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgid ""
+"The format of the %s file has changed with version 3.0. You may either want "
+"to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr "Формат файла %s изменён с версии 3.0. Вы можете либо скопировать его с %s/mc.ext, либо использовать этот файл как пример и написать свой."
 
 msgid "DialogTitle|Copy"
@@ -2343,7 +2346,7 @@ msgid ""
 "Delete it recursively?"
 msgstr ""
 "Каталог \"%s\" не пуст.\n"
-"Удалить рекурсивно?"
+"Удалить его со всем содержимым?"
 
 #, c-format
 msgid ""
@@ -2451,7 +2454,7 @@ msgid ""
 "Cannot chmod target file \"%s\"\n"
 "%s"
 msgstr ""
-"Невозможно сменить режим доступа целевого файла \"%s\"\n"
+"Невозможно сменить режим доступа к целевому файлу \"%s\"\n"
 "%s"
 
 #, c-format
@@ -3572,10 +3575,10 @@ msgid ""
 "and wait as well."
 msgstr ""
 "Пожалуйста, нажмите клавишу %s\n"
-"и подождите, пока это сообщение пропадет.\n"
+"и подождите, пока это сообщение пропадёт.\n"
 "\n"
-"Затем нажмите ее еще раз, чтобы убедиться,\n"
-"что справа от ее названия появилось \"OK\".\n"
+"Затем нажмите её еще раз, чтобы убедиться,\n"
+"что справа от её названия появилось \"OK\".\n"
 "\n"
 "Если вы хотите прервать обучение, нажмите\n"
 "клавишу Esc и тоже немного подождите."
@@ -3615,7 +3618,7 @@ msgid ""
 msgstr ""
 "Нажмите все перечисленные выше клавиши. После нажатий найдите,\n"
 "какие клавиши не имеют пометки \"OK\". Для обучения клавише выберите\n"
-"ее при помощи Tab или мышкой и нажмите пробел."
+"её при помощи Tab или мышкой и нажмите пробел."
 
 #, c-format
 msgid ""
@@ -3715,7 +3718,7 @@ msgstr "С поддержкой многих кодировок\n"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
-msgstr "Скомпилирован с библиотекой GLib версии  %d.%d.%d\n"
+msgstr "Скомпилирован с библиотекой GLib версии %d.%d.%d\n"
 
 #, c-format
 msgid "Virtual File Systems:"
@@ -3996,7 +3999,7 @@ msgstr ""
 
 #, c-format
 msgid "sftp: an error occurred while reading %s: %s"
-msgstr "sftp: an error occurred while reading %s: %s"
+msgstr "sftp: произошла ошибка при чтении %s: %s"
 
 msgid "sftp: Unable to get current user name."
 msgstr "sftp: невозможно получить имя пользователя."
@@ -4291,6 +4294,3 @@ msgstr "Продолжить с начала?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Невозможно получить локальную копию /ftp://some.host/editme.txt"
-
-#~ msgid "fish: storing zeros"
-#~ msgstr "fish: запись нулевых данных"
