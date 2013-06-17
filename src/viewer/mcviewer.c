@@ -376,7 +376,7 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
                 fd1 = mc_open (vpath1, O_RDONLY | O_NONBLOCK);
                 if (fd1 == -1)
                 {
-                    g_snprintf (tmp, sizeof (tmp), _("Cannot open \"%s\" in magic mode\n%s"),
+                    g_snprintf (tmp, sizeof (tmp), _("Cannot open \"%s\" in parse mode\n%s"),
                                 file, unix_error_string (errno));
                     mcview_show_error (view, tmp);
                 }
