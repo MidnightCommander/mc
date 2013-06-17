@@ -59,7 +59,7 @@
 #include "lib/util.h"           /* Q_() */
 #include "lib/widget.h"
 
-#include "src/setup.h"          /* For profile_name */
+#include "src/setup.h"
 #include "src/history.h"        /* MC_HISTORY_ESC_TIMEOUT */
 #include "src/execute.h"        /* pause_after_run */
 #ifdef ENABLE_BACKGROUND

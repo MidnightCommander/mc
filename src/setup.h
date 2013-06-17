@@ -73,7 +73,6 @@ struct mc_fhl_struct;
 /*** global variables defined in .c file *********************************************************/
 
 /* global paremeters */
-extern char *profile_name;
 extern char *global_profile_name;
 extern int confirm_delete;
 extern int confirm_directory_hotlist_delete;
@@ -135,7 +134,7 @@ extern GArray *macros_list;
 
 /*** declarations of public functions ************************************************************/
 
-char *setup_init (void);
+const char *setup_init (void);
 void load_setup (void);
 gboolean save_setup (gboolean save_options, gboolean save_panel_options);
 void done_setup (void);
