@@ -1173,11 +1173,16 @@ tree_frame (WDialog * h, WTree * tree)
         tty_printf (" %s ", title);
 
         if (panels_options.show_mini_info)
-            widget_move (w, tlines (tree) + 1, 0);
-        tty_print_alt_char (ACS_LTEE, FALSE);
-        widget_move (w, tlines (tree) + 1, w->cols - 1);
-        tty_print_alt_char (ACS_RTEE, FALSE);
-        tty_draw_hline (w->y + tlines (tree) + 1, w->x + 1, ACS_HLINE, w->cols - 2);
+        {
+            int y;
+
+            y = w->lines - 3;
+            widget_move (w, y, 0);
+            tty_print_alt_char (ACS_LTEE, FALSE);
+            widget_move (w, y, w->cols - 1);
+            tty_print_alt_char (ACS_RTEE, FALSE);
+            tty_draw_hline (w->y + y, w->x + 1, ACS_HLINE, w->cols - 2);
+        }
     }
 }
 
