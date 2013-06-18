@@ -1,11 +1,11 @@
 /*
    GLIB - Library of useful routines for C programming
 
-   Copyright (C) 2009, 2011
+   Copyright (C) 2009, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2009.
+   Slava Zanko <slavazanko@gmail.com>, 2009, 2013.
 
    This file is part of the Midnight Commander.
 
@@ -31,6 +31,7 @@
  */
 
 #include <config.h>
+#include <string.h>
 
 #include "global.h"
 #include "glibcompat.h"
@@ -66,5 +67,32 @@ g_unichar_iszerowidth (gunichar c)
     return FALSE;
 }
 #endif /* ! GLIB_CHECK_VERSION (2, 13, 0) */
+
+/* --------------------------------------------------------------------------------------------- */
+
+#if ! GLIB_CHECK_VERSION (2, 16, 0)
+/**
+ * g_strcmp0:
+ * @str1: (allow-none): a C string or %NULL
+ * @str2: (allow-none): another C string or %NULL
+ *
+ * Compares @str1 and @str2 like strcmp(). Handles %NULL
+ * gracefully by sorting it before non-%NULL strings.
+ * Comparing two %NULL pointers returns 0.
+ *
+ * Returns: an integer less than, equal to, or greater than zero, if @str1 is <, == or > than @str2.
+ *
+ * Since: 2.16
+ */
+int
+g_strcmp0 (const char *str1, const char *str2)
+{
+    if (!str1)
+        return -(str1 != str2);
+    if (!str2)
+        return str1 != str2;
+    return strcmp (str1, str2);
+}
+#endif /* ! GLIB_CHECK_VERSION (2, 16, 0) */
 
 /* --------------------------------------------------------------------------------------------- */

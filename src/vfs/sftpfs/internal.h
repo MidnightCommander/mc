@@ -43,6 +43,7 @@ typedef struct
 
     int socket_handle;
     const char *fingerprint;
+    vfs_path_element_t *original_connection_info;
 } sftpfs_super_data_t;
 
 /*** global variables defined in .c file *********************************************************/

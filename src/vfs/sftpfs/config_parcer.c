@@ -32,6 +32,7 @@
 #include "lib/global.h"
 
 #include "lib/search.h"
+#include "lib/util.h"           /* tilde_expand() */
 #include "lib/vfs/utilvfs.h"
 
 #include "internal.h"
@@ -120,7 +121,9 @@ sftpfs_correct_file_name (const char *filename)
     vfs_path_t *vpath;
     char *ret_value;
 
-    vpath = vfs_path_from_str (filename);
+    ret_value = tilde_expand (filename);
+    vpath = vfs_path_from_str (ret_value);
+    g_free (ret_value);
     ret_value = g_strdup (vfs_path_as_str (vpath));
     vfs_path_free (vpath);
     return ret_value;
