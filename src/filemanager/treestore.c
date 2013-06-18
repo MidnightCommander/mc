@@ -100,8 +100,7 @@ static size_t
 str_common (const vfs_path_t * s1_vpath, const vfs_path_t * s2_vpath)
 {
     size_t result = 0;
-    char *s1;
-    char *s2;
+    const char *s1, *s2;
 
     s1 = vfs_path_as_str (s1_vpath);
     s2 = vfs_path_as_str (s2_vpath);
@@ -139,8 +138,7 @@ static int
 pathcmp (const vfs_path_t * p1_vpath, const vfs_path_t * p2_vpath)
 {
     int ret_val;
-    char *p1;
-    char *p2;
+    const char *p1, *p2;
 
     p1 = vfs_path_as_str (p1_vpath);
     p2 = vfs_path_as_str (p2_vpath);

@@ -72,7 +72,7 @@ get_absolute_name (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-my_mkdir_rec (char *s, mode_t mode)
+my_mkdir_rec (const char *s, mode_t mode)
 {
     char *p, *q;
     int result;
@@ -91,12 +91,10 @@ my_mkdir_rec (char *s, mode_t mode)
     }
 
     /* FIXME: should check instead if s is at the root of that filesystem */
+    if (!vfs_file_is_local (s_vpath))
     {
-        if (!vfs_file_is_local (s_vpath))
-        {
-            vfs_path_free (s_vpath);
-            return -1;
-        }
+        vfs_path_free (s_vpath);
+        return -1;
     }
 
     if (!strcmp (s, PATH_SEP_STR))
