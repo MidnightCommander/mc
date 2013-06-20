@@ -608,7 +608,13 @@ restore_into_right_dir_panel (int idx, Widget * from_widget)
     const char *p_name = get_nth_panel_name (idx);
 
     if (last_was_panel)
-        new_widget = panel_new_with_dir (p_name, saved_dir);
+    {
+        vfs_path_t *saved_dir_vpath;
+
+        saved_dir_vpath = vfs_path_from_str (saved_dir);
+        new_widget = panel_new_with_dir (p_name, saved_dir_vpath);
+        vfs_path_free (saved_dir_vpath);
+    }
     else
         new_widget = panel_new (p_name);
 

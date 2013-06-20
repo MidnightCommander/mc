@@ -376,9 +376,13 @@ do_external_panelize (char *command)
         current_panel->count = next_free;
         if (list->list[0].fname[0] == PATH_SEP)
         {
+            vfs_path_t *vpath_root;
             int ret;
-            panel_set_cwd (current_panel, PATH_SEP_STR);
-            ret = chdir (PATH_SEP_STR);
+
+            vpath_root = vfs_path_from_str (PATH_SEP_STR);
+            panel_set_cwd (current_panel, vpath_root);
+            ret = mc_chdir (vpath_root);
+            vfs_path_free (vpath_root);
             (void) ret;
         }
     }

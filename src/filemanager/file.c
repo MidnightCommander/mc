@@ -197,12 +197,12 @@ static FileProgressStatus transform_error = FILE_CONT;
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-transform_source (FileOpContext * ctx, const char *source)
+transform_source (FileOpContext * ctx, const vfs_path_t * source_vpath)
 {
     char *s, *q;
     char *fnsource;
 
-    s = g_strdup (source);
+    s = g_strdup (vfs_path_as_str (source_vpath));
 
     /* We remove \n from the filename since regex routines would use \n as an anchor */
     /* this is just to be allowed to maniupulate file names with \n on it */
@@ -2886,7 +2886,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
             }
             else
             {
-                temp = transform_source (ctx, vfs_path_as_str (source_with_vpath));
+                temp = transform_source (ctx, source_with_vpath);
                 if (temp == NULL)
                     value = transform_error;
                 else
@@ -2997,7 +2997,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 }
                 else
                 {
-                    temp = transform_source (ctx, vfs_path_as_str (source_with_vpath));
+                    temp = transform_source (ctx, source_with_vpath);
                     if (temp == NULL)
                         value = transform_error;
                     else

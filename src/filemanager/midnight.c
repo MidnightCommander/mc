@@ -683,47 +683,25 @@ create_panels (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-put_current_path (void)
+midnight_put_panel_path (WPanel * panel)
 {
     vfs_path_t *cwd_vpath;
+    const char *cwd_vpath_str;
 
     if (!command_prompt)
         return;
 
 #ifdef HAVE_CHARSET
-    cwd_vpath = remove_encoding_from_path (current_panel->cwd_vpath);
+    cwd_vpath = remove_encoding_from_path (panel->cwd_vpath);
 #else
-    cwd_vpath = vfs_path_clone (current_panel->cwd_vpath);
+    cwd_vpath = vfs_path_clone (panel->cwd_vpath);
 #endif
 
-    command_insert (cmdline, vfs_path_as_str (cwd_vpath), FALSE);
-    if (cwd_vpath->str[strlen (vfs_path_as_str (cwd_vpath)) - 1] != PATH_SEP)
-        command_insert (cmdline, PATH_SEP_STR, FALSE);
+    cwd_vpath_str = vfs_path_as_str (cwd_vpath);
 
-    vfs_path_free (cwd_vpath);
-}
+    command_insert (cmdline, cwd_vpath_str, FALSE);
 
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-put_other_path (void)
-{
-    vfs_path_t *cwd_vpath;
-
-    if (get_other_type () != view_listing)
-        return;
-
-    if (!command_prompt)
-        return;
-
-#ifdef HAVE_CHARSET
-    cwd_vpath = remove_encoding_from_path (other_panel->cwd_vpath);
-#else
-    cwd_vpath = vfs_path_clone (other_panel->cwd_vpath);
-#endif
-
-    command_insert (cmdline, vfs_path_as_str (cwd_vpath), FALSE);
-    if (cwd_vpath->str[strlen (vfs_path_as_str (cwd_vpath)) - 1] != PATH_SEP)
+    if (cwd_vpath_str[strlen (cwd_vpath_str) - 1] != PATH_SEP)
         command_insert (cmdline, PATH_SEP_STR, FALSE);
 
     vfs_path_free (cwd_vpath);
@@ -1130,7 +1108,7 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         copy_cmd ();
         break;
     case CK_PutCurrentPath:
-        put_current_path ();
+        midnight_put_panel_path (current_panel);
         break;
     case CK_PutCurrentLink:
         put_current_link ();
@@ -1139,7 +1117,8 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         put_current_tagged ();
         break;
     case CK_PutOtherPath:
-        put_other_path ();
+        if (get_other_type () == view_listing)
+            midnight_put_panel_path (other_panel);
         break;
     case CK_PutOtherLink:
         put_other_link ();
@@ -1466,7 +1445,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         /* Ctrl-Shift-Enter */
         if (parm == (KEY_M_CTRL | KEY_M_SHIFT | '\n'))
         {
-            put_current_path ();
+            midnight_put_panel_path (current_panel);
             put_prog_name ();
             return MSG_HANDLED;
         }
