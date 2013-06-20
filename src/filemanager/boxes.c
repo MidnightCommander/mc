@@ -301,15 +301,6 @@ tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
 
     switch (msg)
     {
-    case MSG_POST_KEY:
-        /* The enter key will be processed by the tree widget */
-        if (parm == '\n')
-        {
-            h->ret_value = B_ENTER;
-            dlg_stop (h);
-        }
-        return MSG_HANDLED;
-
     case MSG_RESIZE:
         {
             Widget *bar;
