@@ -840,20 +840,20 @@ mc_tmpdir (void)
 
     canonicalize_pathname (buffer);
 
-    if (lstat (buffer, &st) == 0)
+    /* Try to create directory */
+    if (mkdir (buffer, S_IRWXU) != 0)
     {
-        /* Sanity check for existing directory */
-        if (!S_ISDIR (st.st_mode))
-            error = _("%s is not a directory\n");
-        else if (st.st_uid != getuid ())
-            error = _("Directory %s is not owned by you\n");
-        else if (((st.st_mode & 0777) != 0700) && (chmod (buffer, 0700) != 0))
-            error = _("Cannot set correct permissions for directory %s\n");
-    }
-    else
-    {
-        /* Need to create directory */
-        if (mkdir (buffer, S_IRWXU) != 0)
+        if (errno == EEXIST && lstat (buffer, &st) == 0)
+        {
+            /* Sanity check for existing directory */
+            if (!S_ISDIR (st.st_mode))
+                error = _("%s is not a directory\n");
+            else if (st.st_uid != getuid ())
+                error = _("Directory %s is not owned by you\n");
+            else if (((st.st_mode & 0777) != 0700) && (chmod (buffer, 0700) != 0))
+                error = _("Cannot set correct permissions for directory %s\n");
+        }
+        else
         {
             fprintf (stderr,
                      _("Cannot create temporary directory %s: %s\n"),
