@@ -361,14 +361,11 @@ dlg_mouse_event (WDialog * h, Gpm_Event * event)
 {
     Widget *wh = WIDGET (h);
 
-    GList *item;
-    GList *starting_widget = h->current;
-    int x = event->x;
-    int y = event->y;
+    GList *p, *first;
 
-    /* close the dialog by mouse click out of dialog area */
-    if (mouse_close_dialog && !h->fullscreen && ((event->buttons & GPM_B_LEFT) != 0) && ((event->type & GPM_DOWN) != 0) /* left click */
-        && !((x > wh->x) && (x <= wh->x + wh->cols) && (y > wh->y) && (y <= wh->y + wh->lines)))
+    /* close the dialog by mouse left click out of dialog area */
+    if (mouse_close_dialog && !h->fullscreen && ((event->buttons & GPM_B_LEFT) != 0)
+        && ((event->type & GPM_DOWN) != 0) && !mouse_global_in_widget (event, wh))
     {
         h->ret_value = B_CANCEL;
         dlg_stop (h);
@@ -384,24 +381,26 @@ dlg_mouse_event (WDialog * h, Gpm_Event * event)
             return mou;
     }
 
-    item = starting_widget;
+    first = h->current;
+    p = first;
+
     do
     {
-        Widget *widget = WIDGET (item->data);
+        Widget *w = WIDGET (p->data);
 
-        item = dlg_widget_prev (h, item);
+        p = dlg_widget_prev (h, p);
 
-        if ((widget->options & W_DISABLED) == 0 && widget->mouse != NULL)
+        if ((w->options & W_DISABLED) == 0 && w->mouse != NULL)
         {
             /* put global cursor position to the widget */
             int ret;
 
-            ret = widget->mouse (event, widget);
+            ret = w->mouse (event, w);
             if (ret != MOU_UNHANDLED)
                 return ret;
         }
     }
-    while (item != starting_widget);
+    while (p != first);
 
     return MOU_UNHANDLED;
 }
