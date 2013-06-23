@@ -751,7 +751,7 @@ dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
            according to flags (if any of flags require automatic
            resizing, like DLG_CENTER, end after that reposition
            controls in dialog according to flags of widget) */
-        dlg_set_size (h, WIDGET (h)->lines, WIDGET (h)->cols);
+        dlg_set_size (h, w->lines, w->cols);
         return MSG_HANDLED;
 
     default:
