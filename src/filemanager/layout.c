@@ -1038,7 +1038,7 @@ set_display_type (int num, panel_view_mode_t type)
             dlg_save_history (midnight_dlg);
         }
 
-        dlg_replace_widget (old_widget, new_widget);
+        widget_replace (old_widget, new_widget);
     }
 
     if (type == view_listing)

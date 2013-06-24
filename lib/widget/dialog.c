@@ -1339,38 +1339,3 @@ dlg_get_title (const WDialog * h, size_t len)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Replace widget old_w for widget new_w in the dialog */
-
-void
-dlg_replace_widget (Widget * old_w, Widget * new_w)
-{
-    WDialog *h = old_w->owner;
-    gboolean should_focus = FALSE;
-
-    if (h->widgets == NULL)
-        return;
-
-    if (h->current == NULL)
-        h->current = h->widgets;
-
-    if (old_w == h->current->data)
-        should_focus = TRUE;
-
-    new_w->owner = h;
-    new_w->id = old_w->id;
-
-    if (should_focus)
-        h->current->data = new_w;
-    else
-        g_list_find (h->widgets, old_w)->data = new_w;
-
-    send_message (old_w, NULL, MSG_DESTROY, 0, NULL);
-    send_message (new_w, NULL, MSG_INIT, 0, NULL);
-
-    if (should_focus)
-        dlg_select_widget (new_w);
-
-    widget_redraw (new_w);
-}
-
-/* --------------------------------------------------------------------------------------------- */

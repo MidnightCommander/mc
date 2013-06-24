@@ -146,6 +146,8 @@ void widget_redraw (Widget * w);
 void widget_erase (Widget * w);
 gboolean widget_is_active (const void *w);
 
+void widget_replace (Widget * old, Widget * new);
+
 /* get mouse pointer location within widget */
 Gpm_Event mouse_get_local (const Gpm_Event * global, const Widget * w);
 gboolean mouse_global_in_widget (const Gpm_Event * event, const Widget * w);
