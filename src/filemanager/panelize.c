@@ -170,7 +170,7 @@ init_panelize (void)
     panelize_cols = max (panelize_cols, blen + 4);
 
     panelize_dlg =
-        create_dlg (TRUE, 0, 0, 20, panelize_cols, dialog_colors, panelize_callback, NULL,
+        dlg_create (TRUE, 0, 0, 20, panelize_cols, dialog_colors, panelize_callback, NULL,
                     "[External panelize]", _("External panelize"), DLG_CENTER);
 
     /* add listbox to the dialogs */
@@ -216,7 +216,7 @@ init_panelize (void)
 static void
 panelize_done (void)
 {
-    destroy_dlg (panelize_dlg);
+    dlg_destroy (panelize_dlg);
     repaint_screen ();
 }
 
@@ -539,7 +539,7 @@ external_panelize (void)
     /* display file info */
     tty_setcolor (SELECTED_COLOR);
 
-    run_dlg (panelize_dlg);
+    dlg_run (panelize_dlg);
 
     switch (panelize_dlg->ret_value)
     {
@@ -564,7 +564,8 @@ external_panelize (void)
         if (target != NULL && *target)
         {
             char *cmd = g_strdup (target);
-            destroy_dlg (panelize_dlg);
+
+            dlg_destroy (panelize_dlg);
             do_external_panelize (cmd);
             g_free (cmd);
             repaint_screen ();

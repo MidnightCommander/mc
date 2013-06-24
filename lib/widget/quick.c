@@ -2,7 +2,7 @@
    Widget based utility functions.
 
    Copyright (C) 1994, 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
-   2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012
+   2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013
    The Free Software Foundation, Inc.
 
    Authors:
@@ -10,7 +10,7 @@
    Radek Doulik, 1994, 1995
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1995
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2011, 2012
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2011, 2012, 2013
 
    This file is part of the Midnight Commander.
 
@@ -402,11 +402,11 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
     width2 = (quick_dlg->cols - 7) / 2;
 
     if (quick_dlg->x == -1 || quick_dlg->y == -1)
-        dd = create_dlg (TRUE, 0, 0, y + 3, quick_dlg->cols,
+        dd = dlg_create (TRUE, 0, 0, y + 3, quick_dlg->cols,
                          dialog_colors, quick_dlg->callback, quick_dlg->mouse, quick_dlg->help,
                          quick_dlg->title, DLG_CENTER | DLG_TRYUP);
     else
-        dd = create_dlg (TRUE, quick_dlg->y, quick_dlg->x, y + 3, quick_dlg->cols,
+        dd = dlg_create (TRUE, quick_dlg->y, quick_dlg->x, y + 3, quick_dlg->cols,
                          dialog_colors, quick_dlg->callback, quick_dlg->mouse, quick_dlg->help,
                          quick_dlg->title, DLG_NONE);
 
@@ -568,7 +568,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
             dd->current = dd->widgets;
     }
 
-    return_val = run_dlg (dd);
+    return_val = dlg_run (dd);
 
     /* Get the data if we found something interesting */
     if (return_val != B_CANCEL)
@@ -601,7 +601,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
             }
         }
 
-    destroy_dlg (dd);
+    dlg_destroy (dd);
 
     /* destroy input labels created before */
     for (i = 0; i < widgets->len; i++)

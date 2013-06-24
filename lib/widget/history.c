@@ -2,7 +2,7 @@
    Widgets for the Midnight Commander
 
    Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
-   2004, 2005, 2006, 2007, 2009, 2010, 2011, 2012
+   2004, 2005, 2006, 2007, 2009, 2010, 2011, 2012, 2013
    The Free Software Foundation, Inc.
 
    Authors:
@@ -11,7 +11,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2011, 2012
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2011, 2012, 2013
 
    This file is part of the Midnight Commander.
 
@@ -320,7 +320,7 @@ history_show (GList ** history, Widget * widget, int current)
     hist_data.maxlen = maxlen;
 
     query_dlg =
-        create_dlg (TRUE, 0, 0, 4, 4, dialog_colors, history_dlg_callback, NULL,
+        dlg_create (TRUE, 0, 0, 4, 4, dialog_colors, history_dlg_callback, NULL,
                     "[History-query]", _("History"), DLG_COMPACT);
     query_dlg->data = &hist_data;
 
@@ -357,7 +357,7 @@ history_show (GList ** history, Widget * widget, int current)
             listbox_select_entry (query_list, current);
     }
 
-    if (run_dlg (query_dlg) != B_CANCEL)
+    if (dlg_run (query_dlg) != B_CANCEL)
     {
         char *q;
 
@@ -380,7 +380,7 @@ history_show (GList ** history, Widget * widget, int current)
     if (WIDGET (query_dlg)->y < widget->y)
         z = g_list_reverse (z);
 
-    destroy_dlg (query_dlg);
+    dlg_destroy (query_dlg);
 
     g_list_foreach (*history, (GFunc) g_free, NULL);
     g_list_free (*history);

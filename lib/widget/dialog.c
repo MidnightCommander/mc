@@ -526,7 +526,7 @@ dlg_key_event (WDialog * h, int d_key)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-frontend_run_dlg (WDialog * h)
+frontend_dlg_run (WDialog * h)
 {
     int d_key;
     Gpm_Event event;
@@ -763,7 +763,7 @@ dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
 /* --------------------------------------------------------------------------------------------- */
 
 WDialog *
-create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
+dlg_create (gboolean modal, int y1, int x1, int lines, int cols,
             const int *colors, widget_cb_fn callback, mouse_h mouse_handler,
             const char *help_ctx, const char *title, dlg_flags_t flags)
 {
@@ -772,7 +772,7 @@ create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
 
     new_d = g_new0 (WDialog, 1);
     w = WIDGET (new_d);
-    init_widget (w, y1, x1, lines, cols, (callback != NULL) ? callback : dlg_default_callback,
+    widget_init (w, y1, x1, lines, cols, (callback != NULL) ? callback : dlg_default_callback,
                  mouse_handler);
     widget_want_cursor (w, FALSE);
 
@@ -1171,7 +1171,7 @@ dlg_stop (WDialog * h)
 /** Init the process */
 
 void
-init_dlg (WDialog * h)
+dlg_init (WDialog * h)
 {
     if (top_dlg != NULL && DIALOG (top_dlg->data)->modal)
         h->modal = TRUE;
@@ -1222,7 +1222,7 @@ dlg_process_event (WDialog * h, int key, Gpm_Event * event)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Shutdown the run_dlg */
+/** Shutdown the dlg_run */
 
 void
 dlg_run_done (WDialog * h)
@@ -1246,10 +1246,10 @@ dlg_run_done (WDialog * h)
  */
 
 int
-run_dlg (WDialog * h)
+dlg_run (WDialog * h)
 {
-    init_dlg (h);
-    frontend_run_dlg (h);
+    dlg_init (h);
+    frontend_dlg_run (h);
     dlg_run_done (h);
     return h->ret_value;
 }
@@ -1257,7 +1257,7 @@ run_dlg (WDialog * h)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-destroy_dlg (WDialog * h)
+dlg_destroy (WDialog * h)
 {
     /* if some widgets have history, save all history at one moment here */
     dlg_save_history (h);

@@ -4056,7 +4056,7 @@ panel_new_with_dir (const char *panel_name, const vfs_path_t * vpath)
     panel = g_new0 (WPanel, 1);
     w = WIDGET (panel);
     /* No know sizes of the panel at startup */
-    init_widget (w, 0, 0, 0, 0, panel_callback, panel_event);
+    widget_init (w, 0, 0, 0, 0, panel_callback, panel_event);
     /* We do not want the cursor */
     widget_want_cursor (w, FALSE);
 

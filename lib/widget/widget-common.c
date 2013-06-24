@@ -138,7 +138,7 @@ hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-init_widget (Widget * w, int y, int x, int lines, int cols,
+widget_init (Widget * w, int y, int x, int lines, int cols,
              widget_cb_fn callback, mouse_h mouse_handler)
 {
     w->x = x;

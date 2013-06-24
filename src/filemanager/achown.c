@@ -2,7 +2,7 @@
    Chown-advanced command -- for the Midnight Commander
 
    Copyright (C) 1994, 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
-   2005, 2007, 2011
+   2005, 2007, 2011, 2012, 2013
    The Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -336,7 +336,7 @@ do_enter_key (WDialog * h, int f_pos)
         chl_end = FALSE;
 
         chl_dlg =
-            create_dlg (TRUE, lyy, lxx, 13, 17, dialog_colors, chl_callback, NULL,
+            dlg_create (TRUE, lyy, lxx, 13, 17, dialog_colors, chl_callback, NULL,
                         "[Advanced Chown]", title, DLG_COMPACT);
 
         /* get new listboxes */
@@ -366,7 +366,7 @@ do_enter_key (WDialog * h, int f_pos)
         b_pos = chl_list->pos;
         add_widget (chl_dlg, chl_list);
 
-        result = run_dlg (chl_dlg);
+        result = dlg_run (chl_dlg);
 
         if (b_pos != chl_list->pos)
         {
@@ -416,7 +416,7 @@ do_enter_key (WDialog * h, int f_pos)
             f_pos++;
         }
         /* Here we used to redraw the window */
-        destroy_dlg (chl_dlg);
+        dlg_destroy (chl_dlg);
     }
     while (chl_end);
 }
@@ -661,7 +661,7 @@ init_chown_advanced (void)
         dlg_h += 2;
 
     ch_dlg =
-        create_dlg (TRUE, 0, 0, dlg_h, dlg_w, dialog_colors, advanced_chown_callback, NULL,
+        dlg_create (TRUE, 0, 0, dlg_h, dlg_w, dialog_colors, advanced_chown_callback, NULL,
                     "[Advanced Chown]", _("Chown advanced command"), DLG_CENTER);
 
 
@@ -842,7 +842,7 @@ chown_advanced_cmd (void)
 
         if (mc_stat (vpath, sf_stat) != 0)
         {                       /* get status of file */
-            destroy_dlg (ch_dlg);
+            dlg_destroy (ch_dlg);
             vfs_path_free (vpath);
             break;
         }
@@ -857,7 +857,7 @@ chown_advanced_cmd (void)
         chown_refresh ();
         update_ownership ();
 
-        result = run_dlg (ch_dlg);
+        result = dlg_run (ch_dlg);
 
         switch (result)
         {
@@ -891,7 +891,7 @@ chown_advanced_cmd (void)
             do_file_mark (current_panel, current_file, 0);
             need_update = TRUE;
         }
-        destroy_dlg (ch_dlg);
+        dlg_destroy (ch_dlg);
         vfs_path_free (vpath);
     }
     while (current_panel->marked && !end_chown);

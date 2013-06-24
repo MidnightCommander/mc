@@ -9,7 +9,7 @@
    Miguel de Icaza, 1994, 1995, 1996, 1997
    Janne Kukonlehto, 1994, 1995
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2012, 2013
    Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
@@ -922,7 +922,7 @@ create_panels_and_run_mc (void)
     midnight_set_buttonbar (the_bar);
 
     /* Run the Midnight Commander if no file was specified in the command line */
-    run_dlg (midnight_dlg);
+    dlg_run (midnight_dlg);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1718,7 +1718,7 @@ do_nc (void)
     edit_stack_init ();
 #endif
 
-    midnight_dlg = create_dlg (FALSE, 0, 0, LINES, COLS, midnight_colors, midnight_callback,
+    midnight_dlg = dlg_create (FALSE, 0, 0, LINES, COLS, midnight_colors, midnight_callback,
                                midnight_event, "[main]", NULL, DLG_NONE);
 
     /* Check if we were invoked as an editor or file viewer */
@@ -1739,7 +1739,7 @@ do_nc (void)
 
         ret = TRUE;
 
-        /* destroy_dlg destroys even current_panel->cwd_vpath, so we have to save a copy :) */
+        /* dlg_destroy destroys even current_panel->cwd_vpath, so we have to save a copy :) */
         if (mc_args__last_wd_file != NULL && vfs_current_is_local ())
             last_wd_string = g_strdup (vfs_path_as_str (current_panel->cwd_vpath));
 
@@ -1753,7 +1753,7 @@ do_nc (void)
     mc_global.midnight_shutdown = TRUE;
     dialog_switch_shutdown ();
     done_mc ();
-    destroy_dlg (midnight_dlg);
+    dlg_destroy (midnight_dlg);
     current_panel = NULL;
 
 #ifdef USE_INTERNAL_EDIT

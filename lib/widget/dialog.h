@@ -29,7 +29,7 @@
 
 /*** enums ***************************************************************************************/
 
-/* Flags for create_dlg */
+/* Flags for dlg_create */
 typedef enum
 {
     DLG_NONE = 0,               /* No options */
@@ -87,7 +87,7 @@ struct WDialog
     char *title;                /* Title of the dialog */
 
     /* Set and received by the user */
-    int ret_value;              /* Result of run_dlg() */
+    int ret_value;              /* Result of dlg_run() */
 
     /* Internal flags */
     dlg_state_t state;
@@ -125,7 +125,7 @@ extern const global_keymap_t *dialog_map;
 /*** declarations of public functions ************************************************************/
 
 /* Creates a dialog head  */
-WDialog *create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
+WDialog *dlg_create (gboolean modal, int y1, int x1, int lines, int cols,
                      const int *colors, widget_cb_fn callback, mouse_h mouse_handler,
                      const char *help_ctx, const char *title, dlg_flags_t flags);
 
@@ -143,9 +143,9 @@ void dlg_set_size (WDialog * h, int lines, int cols);
 /* this function allows to set dialog position */
 void dlg_set_position (WDialog * h, int y1, int x1, int y2, int x2);
 
-void init_dlg (WDialog * h);
-int run_dlg (WDialog * d);
-void destroy_dlg (WDialog * h);
+void dlg_init (WDialog * h);
+int dlg_run (WDialog * d);
+void dlg_destroy (WDialog * h);
 
 void dlg_run_done (WDialog * h);
 void dlg_save_history (WDialog * h);

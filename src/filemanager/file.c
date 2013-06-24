@@ -2511,7 +2511,7 @@ compute_dir_size_create_ui (gboolean allow_skip)
     ui = g_new (ComputeDirSizeUI, 1);
 
     ui_width = max (COLS / 2, b_width + 6);
-    ui->dlg = create_dlg (TRUE, 0, 0, 8, ui_width, dialog_colors, NULL, NULL, NULL,
+    ui->dlg = dlg_create (TRUE, 0, 0, 8, ui_width, dialog_colors, NULL, NULL, NULL,
                           _("Directory scanning"), DLG_CENTER);
 
     ui->dirname = label_new (2, 3, "");
@@ -2528,8 +2528,8 @@ compute_dir_size_create_ui (gboolean allow_skip)
     }
 
     /* We will manage the dialog without any help,
-       that's why we have to call init_dlg */
-    init_dlg (ui->dlg);
+       that's why we have to call dlg_init */
+    dlg_init (ui->dlg);
 
     return ui;
 }
@@ -2546,7 +2546,7 @@ compute_dir_size_destroy_ui (ComputeDirSizeUI * ui)
 
         /* close and destroy dialog */
         dlg_run_done (ui->dlg);
-        destroy_dlg (ui->dlg);
+        dlg_destroy (ui->dlg);
         g_free (ui);
     }
 }

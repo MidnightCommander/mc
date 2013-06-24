@@ -132,7 +132,7 @@ int hotkey_width (const hotkey_t hotkey);
 void hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused);
 
 /* widget initialization */
-void init_widget (Widget * w, int y, int x, int lines, int cols,
+void widget_init (Widget * w, int y, int x, int lines, int cols,
                   widget_cb_fn callback, mouse_h mouse_handler);
 /* Default callback for widgets */
 cb_ret_t widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,

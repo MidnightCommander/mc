@@ -2,7 +2,7 @@
    Widgets for the Midnight Commander
 
    Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
-   2004, 2005, 2006, 2007, 2009, 2010, 2011
+   2004, 2005, 2006, 2007, 2009, 2010, 2011, 2013
    The Free Software Foundation, Inc.
 
    Authors:
@@ -11,7 +11,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013
 
    This file is part of the Midnight Commander.
 
@@ -128,7 +128,7 @@ hline_new (int y, int x, int width)
 
     l = g_new (WHLine, 1);
     w = WIDGET (l);
-    init_widget (w, y, x, lines, width < 0 ? 1 : width, hline_callback, NULL);
+    widget_init (w, y, x, lines, width < 0 ? 1 : width, hline_callback, NULL);
     l->text = NULL;
     l->auto_adjust_cols = (width < 0);
     l->transparent = FALSE;

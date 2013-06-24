@@ -8,6 +8,7 @@
    Written  by:
    Miguel de Icaza, 1995
    Slava Zanko <slavazanko@gmail.com>, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -599,7 +600,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
     disable = !options.content_use;
 
     find_dlg =
-        create_dlg (TRUE, 0, 0, lines, cols, dialog_colors, find_parm_callback, NULL, "[Find File]",
+        dlg_create (TRUE, 0, 0, lines, cols, dialog_colors, find_parm_callback, NULL, "[Find File]",
                     _("Find File"), DLG_CENTER);
 
     x1 = 3;
@@ -705,7 +706,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
   find_par_start:
     dlg_select_widget (in_name);
 
-    switch (run_dlg (find_dlg))
+    switch (dlg_run (find_dlg))
     {
     case B_CANCEL:
         return_value = FALSE;
@@ -802,7 +803,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
         }
     }
 
-    destroy_dlg (find_dlg);
+    dlg_destroy (find_dlg);
 
     return return_value;
 }
@@ -1576,7 +1577,7 @@ setup_gui (void)
     cols = COLS - 16;
 
     find_dlg =
-        create_dlg (TRUE, 0, 0, lines, cols, dialog_colors, find_callback, NULL, "[Find File]",
+        dlg_create (TRUE, 0, 0, lines, cols, dialog_colors, find_callback, NULL, "[Find File]",
                     _("Find File"), DLG_CENTER);
 
     find_calc_button_locations (find_dlg, TRUE);
@@ -1641,7 +1642,7 @@ run_process (void)
     resuming = 0;
 
     widget_want_idle (WIDGET (find_dlg), TRUE);
-    ret = run_dlg (find_dlg);
+    ret = dlg_run (find_dlg);
 
     mc_search_free (search_file_handle);
     search_file_handle = NULL;
@@ -1657,7 +1658,7 @@ static void
 kill_gui (void)
 {
     widget_want_idle (WIDGET (find_dlg), FALSE);
-    destroy_dlg (find_dlg);
+    dlg_destroy (find_dlg);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -2,7 +2,7 @@
    Chmod command -- for the Midnight Commander
 
    Copyright (C) 1994, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2007,
-   2008, 2009, 2010, 2011
+   2008, 2009, 2010, 2011, 2013
    The Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -312,7 +312,7 @@ init_chmod (const char *fname, const struct stat *sf_stat)
     }
 
     ch_dlg =
-        create_dlg (TRUE, 0, 0, lines, cols, dialog_colors,
+        dlg_create (TRUE, 0, 0, lines, cols, dialog_colors,
                     chmod_callback, NULL, "[Chmod]", _("Chmod command"), DLG_CENTER);
 
     add_widget (ch_dlg, groupbox_new (PY, PX, check_perm_num + 2, perm_gb_len, _("Permission")));
@@ -489,7 +489,7 @@ chmod_cmd (void)
         ch_dlg = init_chmod (fname, &sf_stat);
 
         /* do action */
-        result = run_dlg (ch_dlg);
+        result = dlg_run (ch_dlg);
 
         switch (result)
         {
@@ -552,7 +552,7 @@ chmod_cmd (void)
 
         vfs_path_free (vpath);
 
-        destroy_dlg (ch_dlg);
+        dlg_destroy (ch_dlg);
     }
     while (current_panel->marked != 0 && !end_chmod);
 

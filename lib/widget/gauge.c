@@ -2,7 +2,7 @@
    Widgets for the Midnight Commander
 
    Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
-   2004, 2005, 2006, 2007, 2009, 2010, 2011
+   2004, 2005, 2006, 2007, 2009, 2010, 2011, 2013
    The Free Software Foundation, Inc.
 
    Authors:
@@ -11,7 +11,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013
 
    This file is part of the Midnight Commander.
 
@@ -138,7 +138,7 @@ gauge_new (int y, int x, int cols, gboolean shown, int max, int current)
 
     g = g_new (WGauge, 1);
     w = WIDGET (g);
-    init_widget (w, y, x, 1, cols, gauge_callback, NULL);
+    widget_init (w, y, x, 1, cols, gauge_callback, NULL);
     widget_want_cursor (w, FALSE);
     widget_want_hotkey (w, FALSE);
 

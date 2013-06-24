@@ -515,7 +515,7 @@ init_layout (void)
     width = max (l1 * 2 + 7, b);
 
     layout_dlg =
-        create_dlg (TRUE, 0, 0, 15, width, dialog_colors, layout_callback, NULL, "[Layout]",
+        dlg_create (TRUE, 0, 0, 15, width, dialog_colors, layout_callback, NULL, "[Layout]",
                     _("Layout"), DLG_CENTER);
 
 #define XTRACT(i) *check_options[i].variable, check_options[i].text
@@ -646,7 +646,7 @@ layout_box (void)
 
     layout_dlg = init_layout ();
 
-    if (run_dlg (layout_dlg) == B_ENTER)
+    if (dlg_run (layout_dlg) == B_ENTER)
     {
         size_t i;
 
@@ -669,7 +669,7 @@ layout_box (void)
         layout_do_change = TRUE;
     }
 
-    destroy_dlg (layout_dlg);
+    dlg_destroy (layout_dlg);
     if (layout_do_change)
         layout_change ();
 }

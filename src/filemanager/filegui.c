@@ -535,7 +535,7 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
 
     /* FIXME - missing help node */
     ui->replace_dlg =
-        create_dlg (TRUE, 0, 0, rd_ylen, rd_xlen, alarm_colors, NULL, NULL, "[Replace]", title,
+        dlg_create (TRUE, 0, 0, rd_ylen, rd_xlen, alarm_colors, NULL, NULL, "[Replace]", title,
                     DLG_CENTER);
 
     /* prompt */
@@ -588,8 +588,8 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
     label_set_text (LABEL (label1), str_trunc (stripped_name, rd_xlen - 8));
     dlg_set_size (ui->replace_dlg, y + 3, rd_xlen);
     dlg_select_by_id (ui->replace_dlg, yes_id);
-    result = run_dlg (ui->replace_dlg);
-    destroy_dlg (ui->replace_dlg);
+    result = dlg_run (ui->replace_dlg);
+    dlg_destroy (ui->replace_dlg);
 
     g_free (widgets_len);
     g_free (stripped_name_orig);
@@ -732,7 +732,7 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
     ui->showing_bps = with_eta;
 
     ui->op_dlg =
-        create_dlg (TRUE, 0, 0, dlg_height, dlg_width, dialog_colors, NULL, NULL, NULL,
+        dlg_create (TRUE, 0, 0, dlg_height, dlg_width, dialog_colors, NULL, NULL, NULL,
                     op_names[ctx->operation], DLG_CENTER);
 
     ui->file_label[0] = label_new (y++, x, "");
@@ -826,8 +826,8 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
     dlg_select_widget (progress_buttons[0].w);
 
     /* We will manage the dialog without any help, that's why
-       we have to call init_dlg */
-    init_dlg (ui->op_dlg);
+       we have to call dlg_init */
+    dlg_init (ui->op_dlg);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -840,7 +840,7 @@ file_op_context_destroy_ui (FileOpContext * ctx)
         FileOpContextUI *ui = (FileOpContextUI *) ctx->ui;
 
         dlg_run_done (ui->op_dlg);
-        destroy_dlg (ui->op_dlg);
+        dlg_destroy (ui->op_dlg);
         g_free (ui);
         ctx->ui = NULL;
     }

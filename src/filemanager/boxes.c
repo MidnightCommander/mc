@@ -920,7 +920,7 @@ tree_box (const char *current_dir)
     (void) current_dir;
 
     /* Create the components */
-    dlg = create_dlg (TRUE, 0, 0, LINES - 9, COLS - 20, dialog_colors, tree_callback, NULL,
+    dlg = dlg_create (TRUE, 0, 0, LINES - 9, COLS - 20, dialog_colors, tree_callback, NULL,
                       "[Directory Tree]", _("Directory tree"), DLG_CENTER);
     wd = WIDGET (dlg);
 
@@ -933,14 +933,14 @@ tree_box (const char *current_dir)
     WIDGET (bar)->x = 0;
     WIDGET (bar)->y = LINES - 1;
 
-    if (run_dlg (dlg) == B_ENTER)
+    if (dlg_run (dlg) == B_ENTER)
     {
         const vfs_path_t *selected_name;
         selected_name = tree_selected_name (mytree);
         val = g_strdup (vfs_path_as_str (selected_name));
     }
 
-    destroy_dlg (dlg);
+    dlg_destroy (dlg);
     return val;
 }
 
@@ -1134,7 +1134,7 @@ jobs_cmd (void)
     x += (int) n_but - 1;
     cols = max (cols, x + 6);
 
-    jobs_dlg = create_dlg (TRUE, 0, 0, lines, cols, dialog_colors, NULL, NULL,
+    jobs_dlg = dlg_create (TRUE, 0, 0, lines, cols, dialog_colors, NULL, NULL,
                            "[Background jobs]", _("Background jobs"), DLG_CENTER);
 
     bg_list = listbox_new (2, 2, lines - 6, cols - 6, FALSE, NULL);
@@ -1152,8 +1152,8 @@ jobs_cmd (void)
         x += job_but[i].len + 1;
     }
 
-    (void) run_dlg (jobs_dlg);
-    destroy_dlg (jobs_dlg);
+    (void) dlg_run (jobs_dlg);
+    dlg_destroy (jobs_dlg);
 }
 #endif /* ENABLE_BACKGROUND */
 
