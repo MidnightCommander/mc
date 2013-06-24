@@ -335,6 +335,22 @@ widget_replace (Widget * old_w, Widget * new_w)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+  * Check whether two widgets are overlapped or not.
+  * @param a 1st widget
+  * @param b 2nd widget
+  *
+  * @return TRUE if widgets are overlapped, FALSE otherwise.
+  */
+
+gboolean
+widget_overlapped (const Widget * a, const Widget * b)
+{
+    return !((b->x >= a->x + a->cols)
+             || (a->x >= b->x + b->cols) || (b->y >= a->y + a->lines) || (a->y >= b->y + b->lines));
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /* get mouse pointer location within widget */
 
 Gpm_Event

@@ -163,7 +163,6 @@ cb_ret_t dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, in
 /* Default paint routine for dialogs */
 void dlg_default_repaint (WDialog * h);
 
-int dlg_overlap (Widget * a, Widget * b);
 void dlg_erase (WDialog * h);
 void dlg_stop (WDialog * h);
 

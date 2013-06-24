@@ -275,7 +275,7 @@ info_hook (void *data)
     other_widget = get_panel_widget (get_current_index ());
     if (!other_widget)
         return;
-    if (dlg_overlap (WIDGET (info), other_widget))
+    if (widget_overlapped (WIDGET (info), other_widget))
         return;
 
     info->ready = 1;

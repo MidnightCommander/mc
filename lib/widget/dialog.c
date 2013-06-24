@@ -246,7 +246,7 @@ do_select_widget (WDialog * h, GList * w, select_dir_t dir)
     }
     while (h->current != w /* && (WIDGET (h->current->data)->options & W_DISABLED) == 0 */ );
 
-    if (dlg_overlap (w0, WIDGET (h->current->data)))
+    if (widget_overlapped (w0, WIDGET (h->current->data)))
     {
         send_message (h->current->data, NULL, MSG_DRAW, 0, NULL);
         send_message (h->current->data, NULL, MSG_FOCUS, 0, NULL);
@@ -1004,17 +1004,6 @@ dlg_focus (WDialog * h)
 
     return FALSE;
 }
-
-/* --------------------------------------------------------------------------------------------- */
-/** Return true if the windows overlap */
-
-int
-dlg_overlap (Widget * a, Widget * b)
-{
-    return !((b->x >= a->x + a->cols)
-             || (a->x >= b->x + b->cols) || (b->y >= a->y + a->lines) || (a->y >= b->y + b->lines));
-}
-
 
 /* --------------------------------------------------------------------------------------------- */
 /** Find the widget with the given callback in the dialog h */

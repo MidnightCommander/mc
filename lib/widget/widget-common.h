@@ -145,7 +145,7 @@ void widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey);
 void widget_redraw (Widget * w);
 void widget_erase (Widget * w);
 gboolean widget_is_active (const void *w);
-
+gboolean widget_overlapped (const Widget * a, const Widget * b);
 void widget_replace (Widget * old, Widget * new);
 
 /* get mouse pointer location within widget */
