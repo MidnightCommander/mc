@@ -144,17 +144,22 @@ void widget_set_size (Widget * widget, int y, int x, int lines, int cols);
 void widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey);
 void widget_redraw (Widget * w);
 void widget_erase (Widget * w);
+gboolean widget_is_active (const void *w);
 
 /* get mouse pointer location within widget */
 Gpm_Event mouse_get_local (const Gpm_Event * global, const Widget * w);
 gboolean mouse_global_in_widget (const Gpm_Event * event, const Widget * w);
 
+/* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static inline cb_ret_t
 send_message (void *w, void *sender, widget_msg_t msg, int parm, void *data)
 {
     return WIDGET (w)->callback (WIDGET (w), WIDGET (sender), msg, parm, data);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 #endif /* MC__WIDGET_INTERNAL_H */

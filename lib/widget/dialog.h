@@ -184,15 +184,8 @@ void do_refresh (void);
 /* Used in load_prompt() */
 void update_cursor (WDialog * h);
 
+/* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/
-
-/* Return TRUE if the widget is active, FALSE otherwise */
-static inline gboolean
-dlg_widget_active (void *w)
-{
-    return (w == WIDGET (w)->owner->current->data);
-}
-
 /* --------------------------------------------------------------------------------------------- */
 
 static inline unsigned long
@@ -200,5 +193,7 @@ dlg_get_current_widget_id (const struct WDialog *h)
 {
     return WIDGET (h->current->data)->id;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 #endif /* MC__DIALOG_H */

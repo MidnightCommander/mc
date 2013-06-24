@@ -1134,9 +1134,9 @@ swap_panels (void)
             panel_re_sort (current_panel);
         }
 
-        if (dlg_widget_active (panels[0].widget))
+        if (widget_is_active (panels[0].widget))
             dlg_select_widget (panels[1].widget);
-        else if (dlg_widget_active (panels[1].widget))
+        else if (widget_is_active (panels[1].widget))
             dlg_select_widget (panels[0].widget);
     }
     else

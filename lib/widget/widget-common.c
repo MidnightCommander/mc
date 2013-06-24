@@ -2,7 +2,7 @@
    Widgets for the Midnight Commander
 
    Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
-   2004, 2005, 2006, 2007, 2009, 2010, 2011
+   2004, 2005, 2006, 2007, 2009, 2010, 2011, 2012, 2013
    The Free Software Foundation, Inc.
 
    Authors:
@@ -11,7 +11,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2011, 2012, 2013
 
    This file is part of the Midnight Commander.
 
@@ -267,6 +267,20 @@ widget_erase (Widget * w)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+  * Check whether widget is active or not.
+  * @param w the widget
+  *
+  * @return TRUE if the widget is active, FALSE otherwise
+  */
+
+gboolean
+widget_is_active (const void *w)
+{
+    return (w == WIDGET (w)->owner->current->data);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 widget_redraw (Widget * w)
@@ -281,8 +295,8 @@ widget_redraw (Widget * w)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 /* get mouse pointer location within widget */
+
 Gpm_Event
 mouse_get_local (const Gpm_Event * global, const Widget * w)
 {

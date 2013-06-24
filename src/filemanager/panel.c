@@ -3589,7 +3589,7 @@ panel_event (Gpm_Event * event, void *data)
     Widget *w = WIDGET (data);
 
     const int lines = llines (panel);
-    const gboolean is_active = dlg_widget_active (panel);
+    const gboolean is_active = widget_is_active (panel);
     const gboolean mouse_down = (event->type & GPM_DOWN) != 0;
     Gpm_Event local;
 

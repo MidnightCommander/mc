@@ -161,7 +161,7 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
             Widget *wi;
 
             wi = dlg_find_by_id (h, panel_listing_types_id);
-            if (dlg_widget_active (wi))
+            if (widget_is_active (wi))
             {
                 WInput *in;
 
@@ -172,7 +172,7 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
             }
 
             wi = dlg_find_by_id (h, panel_user_format_id);
-            if (dlg_widget_active (wi))
+            if (widget_is_active (wi))
             {
                 h->ret_value = B_USER + 6;
                 dlg_stop (h);
@@ -180,7 +180,7 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
             }
 
             wi = dlg_find_by_id (h, mini_user_format_id);
-            if (dlg_widget_active (wi))
+            if (widget_is_active (wi))
             {
                 h->ret_value = B_USER + 7;
                 dlg_stop (h);
@@ -193,10 +193,10 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
             Widget *wi;
 
             wi = dlg_find_by_id (h, panel_user_format_id);
-            if (dlg_widget_active (wi))
+            if (widget_is_active (wi))
             {
                 wi = dlg_find_by_id (h, mini_user_format_id);
-                if (dlg_widget_active (wi))
+                if (widget_is_active (wi))
                 {
                     WRadio *r;
 
