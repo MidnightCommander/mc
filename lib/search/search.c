@@ -2,11 +2,12 @@
    Search text engine.
    Interface functions
 
-   Copyright (C) 2009, 2011
+   Copyright (C) 2009, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2009.
+   Slava Zanko <slavazanko@gmail.com>, 2009
+   Andrew Borodin <aborodin@vmail.ru>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -192,18 +193,18 @@ mc_search_prepare (mc_search_t * lc_mc_search)
         for (loop1 = 0; loop1 < codepages->len; loop1++)
         {
             const char *id = ((codepage_desc *) g_ptr_array_index (codepages, loop1))->id;
-            if (!g_ascii_strcasecmp (id, cp_source))
+            if (!g_ascii_strcasecmp (id, cp_display))
             {
                 g_ptr_array_add (ret,
                                  mc_search__cond_struct_new (lc_mc_search, lc_mc_search->original,
                                                              lc_mc_search->original_len,
-                                                             cp_source));
+                                                             cp_display));
                 continue;
             }
 
             buffer =
                 mc_search__recode_str (lc_mc_search->original, lc_mc_search->original_len,
-                                       cp_source, id, &recoded_str_len);
+                                       cp_display, id, &recoded_str_len);
 
             g_ptr_array_add (ret,
                              mc_search__cond_struct_new (lc_mc_search, buffer,
@@ -217,7 +218,7 @@ mc_search_prepare (mc_search_t * lc_mc_search)
                          (gpointer) mc_search__cond_struct_new (lc_mc_search,
                                                                 lc_mc_search->original,
                                                                 lc_mc_search->original_len,
-                                                                cp_source));
+                                                                cp_display));
     }
 #else
     g_ptr_array_add (ret,
