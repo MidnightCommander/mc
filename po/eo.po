@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-06-15 10:56+0400\n"
+"POT-Creation-Date: 2013-06-27 16:02+0400\n"
 "PO-Revision-Date: 2013-03-13 13:34+0000\n"
 "Last-Translator: Keith Bowes <zooplah@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/projects/p/mc/language/"
@@ -4173,6 +4173,19 @@ msgstr "Ext2lib: eraro"
 msgid "Invalid value"
 msgstr "Nevalida valoro"
 
+msgid "File was modified. Save with exit?"
+msgstr "Dosiero estis modifita. Ĉu konservi dum eliro?"
+
+msgid "&Cancel quit"
+msgstr "Ne &eliri"
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+"Midnight Commander estas elirinta.\n"
+"Ĉu konservi modifitan dosieron?"
+
 msgid "Cannot spawn child process"
 msgstr "Ne eblas krei idan procezon"
 
@@ -4242,19 +4255,6 @@ msgstr ""
 "Ne eblas konservi dosieron:\n"
 "%s"
 
-msgid "File was modified. Save with exit?"
-msgstr "Dosiero estis modifita. Ĉu konservi dum eliro?"
-
-msgid "&Cancel quit"
-msgstr "Ne &eliri"
-
-msgid ""
-"Midnight Commander is being shut down.\n"
-"Save modified file?"
-msgstr ""
-"Midnight Commander estas elirinta.\n"
-"Ĉu konservi modifitan dosieron?"
-
 msgid "View: "
 msgstr "Vidi: "
 
@@ -4271,7 +4271,7 @@ msgstr "Ne eblas vidi: ne normala dosiero"
 
 #, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\" in magic mode\n"
+"Cannot open \"%s\" in parse mode\n"
 "%s"
 msgstr ""
 "Ne eblas malfermi je \"%s\"\n"

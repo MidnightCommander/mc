@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-06-15 10:56+0400\n"
+"POT-Creation-Date: 2013-06-27 16:02+0400\n"
 "PO-Revision-Date: 2013-03-13 18:27+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/projects/p/mc/language/pl/)\n"
@@ -4185,6 +4185,19 @@ msgstr "Błąd ext2lib"
 msgid "Invalid value"
 msgstr "Nieprawidłowa wartość"
 
+msgid "File was modified. Save with exit?"
+msgstr "Plik został zmodyfikowany. Zapisać przed zakończeniem?"
+
+msgid "&Cancel quit"
+msgstr "N&ie zamykaj"
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+"Program Midnight Commander kończy działanie.\n"
+"Zapisać zmodyfikowany plik?"
+
 msgid "Cannot spawn child process"
 msgstr "Nie można utworzyć procesu potomnego"
 
@@ -4254,19 +4267,6 @@ msgstr ""
 "Nie można zapisać pliku:\n"
 "%s"
 
-msgid "File was modified. Save with exit?"
-msgstr "Plik został zmodyfikowany. Zapisać przed zakończeniem?"
-
-msgid "&Cancel quit"
-msgstr "N&ie zamykaj"
-
-msgid ""
-"Midnight Commander is being shut down.\n"
-"Save modified file?"
-msgstr ""
-"Program Midnight Commander kończy działanie.\n"
-"Zapisać zmodyfikowany plik?"
-
 msgid "View: "
 msgstr "Podgląd: "
 
@@ -4283,7 +4283,7 @@ msgstr "Nie można wyświetlić: nie jest zwykłym plikiem"
 
 #, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\" in magic mode\n"
+"Cannot open \"%s\" in parse mode\n"
 "%s"
 msgstr ""
 "Nie można otworzyć \"%s\"\n"

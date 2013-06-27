@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-06-15 10:56+0400\n"
+"POT-Creation-Date: 2013-06-27 16:02+0400\n"
 "PO-Revision-Date: 2013-03-13 08:51+0000\n"
 "Last-Translator: David Martin <david.martin@telefonica.net>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/mc/language/"
@@ -4180,6 +4180,19 @@ msgstr "error Ext2lib"
 msgid "Invalid value"
 msgstr "Posición incorrecta"
 
+msgid "File was modified. Save with exit?"
+msgstr "El archivo fue modificado. ¿Desea guardarlo al salir?"
+
+msgid "&Cancel quit"
+msgstr "&Cancelar salida"
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+"Saliendo de Midnight Commander.\n"
+"¿Desea guardar el archivo modificado?"
+
 msgid "Cannot spawn child process"
 msgstr "Imposible ejecutar el proceso hijo"
 
@@ -4249,19 +4262,6 @@ msgstr ""
 "Imposible guardar el archivo:\n"
 "%s"
 
-msgid "File was modified. Save with exit?"
-msgstr "El archivo fue modificado. ¿Desea guardarlo al salir?"
-
-msgid "&Cancel quit"
-msgstr "&Cancelar salida"
-
-msgid ""
-"Midnight Commander is being shut down.\n"
-"Save modified file?"
-msgstr ""
-"Saliendo de Midnight Commander.\n"
-"¿Desea guardar el archivo modificado?"
-
 msgid "View: "
 msgstr "Ver:"
 
@@ -4278,7 +4278,7 @@ msgstr "Imposible ver: no es un archivo ordinario"
 
 #, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\" in magic mode\n"
+"Cannot open \"%s\" in parse mode\n"
 "%s"
 msgstr ""
 "Imposible abrir «%s»\n"

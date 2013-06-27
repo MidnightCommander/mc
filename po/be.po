@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-06-15 10:56+0400\n"
+"POT-Creation-Date: 2013-06-27 16:02+0400\n"
 "PO-Revision-Date: 2013-03-13 08:51+0000\n"
 "Last-Translator: Павал Шаламіцкі <yehekim@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/projects/p/mc/language/"
@@ -4170,6 +4170,19 @@ msgstr "Памылка «Ext2lib»"
 msgid "Invalid value"
 msgstr "Хібнае значэньне"
 
+msgid "File was modified. Save with exit?"
+msgstr "Файл зьмяніўся. Ці захаваць і выйсьці?"
+
+msgid "&Cancel quit"
+msgstr "&Не выходзіць"
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+"«Міднайт Камандэр» заканчвае працаваць.\n"
+"Ці захаваць зьменены файл?"
+
 msgid "Cannot spawn child process"
 msgstr "Немагчыма нарадзіць даччын працэс"
 
@@ -4239,19 +4252,6 @@ msgstr ""
 "Немагчыма захаваць файл:\n"
 "%s"
 
-msgid "File was modified. Save with exit?"
-msgstr "Файл зьмяніўся. Ці захаваць і выйсьці?"
-
-msgid "&Cancel quit"
-msgstr "&Не выходзіць"
-
-msgid ""
-"Midnight Commander is being shut down.\n"
-"Save modified file?"
-msgstr ""
-"«Міднайт Камандэр» заканчвае працаваць.\n"
-"Ці захаваць зьменены файл?"
-
 msgid "View: "
 msgstr "Праглядаць: "
 
@@ -4268,7 +4268,7 @@ msgstr "Немагчыма прагледзець: незвычайны файл
 
 #, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\" in magic mode\n"
+"Cannot open \"%s\" in parse mode\n"
 "%s"
 msgstr ""
 "Немагчыма адчыніць «%s»\n"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-06-15 10:56+0400\n"
+"POT-Creation-Date: 2013-06-27 16:02+0400\n"
 "PO-Revision-Date: 2013-03-31 16:08+0000\n"
 "Last-Translator: Richard E. van der Luit <nippur@fedoraproject.org>\n"
 "Language-Team: Dutch (http://www.transifex.com/projects/p/mc/language/nl/)\n"
@@ -4169,6 +4169,19 @@ msgstr "Ext2lib fout"
 msgid "Invalid value"
 msgstr "Ongeldige waarde"
 
+msgid "File was modified. Save with exit?"
+msgstr "Bestand is gewijzigd. Opslaan met afsluiten?"
+
+msgid "&Cancel quit"
+msgstr "&Annuleer afsluiten"
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+"Midnight Commander wordt afgesloten. \n"
+"Gewijzigd bestand opslaan??"
+
 msgid "Cannot spawn child process"
 msgstr "Kan geen kindproces opstarten"
 
@@ -4234,19 +4247,6 @@ msgid ""
 "%s"
 msgstr "Kon bestand %s niet opslaan"
 
-msgid "File was modified. Save with exit?"
-msgstr "Bestand is gewijzigd. Opslaan met afsluiten?"
-
-msgid "&Cancel quit"
-msgstr "&Annuleer afsluiten"
-
-msgid ""
-"Midnight Commander is being shut down.\n"
-"Save modified file?"
-msgstr ""
-"Midnight Commander wordt afgesloten. \n"
-"Gewijzigd bestand opslaan??"
-
 msgid "View: "
 msgstr "bekijk :"
 
@@ -4263,7 +4263,7 @@ msgstr "Kan het niet bekijken: geen normaal bestand"
 
 #, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\" in magic mode\n"
+"Cannot open \"%s\" in parse mode\n"
 "%s"
 msgstr ""
 "Kan bestand %s niet openen\n"

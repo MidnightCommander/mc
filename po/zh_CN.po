@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-06-15 10:56+0400\n"
+"POT-Creation-Date: 2013-06-27 16:02+0400\n"
 "PO-Revision-Date: 2013-03-13 08:51+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/mc/"
@@ -4126,6 +4126,19 @@ msgstr "Ext2lib 错误"
 msgid "Invalid value"
 msgstr "无效的值"
 
+msgid "File was modified. Save with exit?"
+msgstr "文件被修改，保存并退出？"
+
+msgid "&Cancel quit"
+msgstr "取消退出(&C)"
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+"Midnight Commander就要被关闭了，\n"
+"要保存修改过的文件吗?"
+
 msgid "Cannot spawn child process"
 msgstr "无法生成子进程"
 
@@ -4195,19 +4208,6 @@ msgstr ""
 "不能保存文件:\n"
 "%s"
 
-msgid "File was modified. Save with exit?"
-msgstr "文件被修改，保存并退出？"
-
-msgid "&Cancel quit"
-msgstr "取消退出(&C)"
-
-msgid ""
-"Midnight Commander is being shut down.\n"
-"Save modified file?"
-msgstr ""
-"Midnight Commander就要被关闭了，\n"
-"要保存修改过的文件吗?"
-
 msgid "View: "
 msgstr "查看："
 
@@ -4224,7 +4224,7 @@ msgstr "无法查看：不是常规文件"
 
 #, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\" in magic mode\n"
+"Cannot open \"%s\" in parse mode\n"
 "%s"
 msgstr ""
 "无法打开\"%s\"\n"
