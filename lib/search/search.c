@@ -2,11 +2,12 @@
    Search text engine.
    Interface functions
 
-   Copyright (C) 2009, 2011
+   Copyright (C) 2009, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2009.
+   Slava Zanko <slavazanko@gmail.com>, 2009
+   Andrew Borodin <aborodin@vmail.ru>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -61,8 +62,8 @@ mc_search__cond_struct_new (mc_search_t * lc_mc_search, const char *str,
                             gsize str_len, const char *charset)
 {
     mc_search_cond_t *mc_search_cond;
-    mc_search_cond = g_malloc0 (sizeof (mc_search_cond_t));
 
+    mc_search_cond = g_malloc0 (sizeof (mc_search_cond_t));
     mc_search_cond->str = g_string_new_len (str, str_len);
     mc_search_cond->charset = g_strdup (charset);
 
@@ -116,10 +117,11 @@ static void
 mc_search__conditions_free (GPtrArray * array)
 {
     gsize loop1;
-    mc_search_cond_t *lc_mc_search;
 
     for (loop1 = 0; loop1 < array->len; loop1++)
     {
+        mc_search_cond_t *lc_mc_search;
+
         lc_mc_search = (mc_search_cond_t *) g_ptr_array_index (array, loop1);
         mc_search__cond_struct_free (lc_mc_search);
     }
@@ -134,7 +136,8 @@ mc_search_t *
 mc_search_new (const gchar * original, gsize str_len)
 {
     mc_search_t *lc_mc_search;
-    if (!original)
+
+    if (original == NULL)
         return NULL;
 
     if ((gssize) str_len == -1)
@@ -161,11 +164,11 @@ mc_search_free (mc_search_t * lc_mc_search)
     g_free (lc_mc_search->original);
     g_free (lc_mc_search->error_str);
 
-    if (lc_mc_search->conditions)
+    if (lc_mc_search->conditions != NULL)
         mc_search__conditions_free (lc_mc_search->conditions);
 
 #ifdef SEARCH_TYPE_GLIB
-    if (lc_mc_search->regex_match_info)
+    if (lc_mc_search->regex_match_info != NULL)
         g_match_info_free (lc_mc_search->regex_match_info);
 #else /* SEARCH_TYPE_GLIB */
     g_free (lc_mc_search->regex_match_info);
@@ -183,27 +186,30 @@ gboolean
 mc_search_prepare (mc_search_t * lc_mc_search)
 {
     GPtrArray *ret;
+
     ret = g_ptr_array_new ();
 #ifdef HAVE_CHARSET
     if (lc_mc_search->is_all_charsets)
     {
         gsize loop1, recoded_str_len;
         gchar *buffer;
+
         for (loop1 = 0; loop1 < codepages->len; loop1++)
         {
             const char *id = ((codepage_desc *) g_ptr_array_index (codepages, loop1))->id;
-            if (!g_ascii_strcasecmp (id, cp_source))
+
+            if (!g_ascii_strcasecmp (id, cp_display))
             {
                 g_ptr_array_add (ret,
                                  mc_search__cond_struct_new (lc_mc_search, lc_mc_search->original,
                                                              lc_mc_search->original_len,
-                                                             cp_source));
+                                                             cp_display));
                 continue;
             }
 
             buffer =
                 mc_search__recode_str (lc_mc_search->original, lc_mc_search->original_len,
-                                       cp_source, id, &recoded_str_len);
+                                       cp_display, id, &recoded_str_len);
 
             g_ptr_array_add (ret,
                              mc_search__cond_struct_new (lc_mc_search, buffer,
@@ -214,16 +220,15 @@ mc_search_prepare (mc_search_t * lc_mc_search)
     else
     {
         g_ptr_array_add (ret,
-                         (gpointer) mc_search__cond_struct_new (lc_mc_search,
-                                                                lc_mc_search->original,
-                                                                lc_mc_search->original_len,
-                                                                cp_source));
+                         mc_search__cond_struct_new (lc_mc_search,
+                                                     lc_mc_search->original,
+                                                     lc_mc_search->original_len, cp_display));
     }
 #else
     g_ptr_array_add (ret,
-                     (gpointer) mc_search__cond_struct_new (lc_mc_search, lc_mc_search->original,
-                                                            lc_mc_search->original_len,
-                                                            str_detect_termencoding ()));
+                     mc_search__cond_struct_new (lc_mc_search, lc_mc_search->original,
+                                                 lc_mc_search->original_len,
+                                                 str_detect_termencoding ()));
 #endif
     lc_mc_search->conditions = ret;
 
@@ -247,7 +252,7 @@ mc_search_run (mc_search_t * lc_mc_search, const void *user_data,
         return FALSE;
     }
 #ifdef SEARCH_TYPE_GLIB
-    if (lc_mc_search->regex_match_info)
+    if (lc_mc_search->regex_match_info != NULL)
     {
         g_match_info_free (lc_mc_search->regex_match_info);
         lc_mc_search->regex_match_info = NULL;
@@ -407,7 +412,7 @@ mc_search (const gchar * pattern, const gchar * str, mc_search_type_t type)
 int
 mc_search_getstart_result_by_num (mc_search_t * lc_mc_search, int lc_index)
 {
-    if (!lc_mc_search)
+    if (lc_mc_search == NULL)
         return 0;
     if (lc_mc_search->search_type == MC_SEARCH_T_NORMAL)
         return 0;
@@ -415,6 +420,7 @@ mc_search_getstart_result_by_num (mc_search_t * lc_mc_search, int lc_index)
     {
         gint start_pos;
         gint end_pos;
+
         g_match_info_fetch_pos (lc_mc_search->regex_match_info, lc_index, &start_pos, &end_pos);
         return (int) start_pos;
     }
@@ -428,7 +434,7 @@ mc_search_getstart_result_by_num (mc_search_t * lc_mc_search, int lc_index)
 int
 mc_search_getend_result_by_num (mc_search_t * lc_mc_search, int lc_index)
 {
-    if (!lc_mc_search)
+    if (lc_mc_search == NULL)
         return 0;
     if (lc_mc_search->search_type == MC_SEARCH_T_NORMAL)
         return 0;
@@ -436,6 +442,7 @@ mc_search_getend_result_by_num (mc_search_t * lc_mc_search, int lc_index)
     {
         gint start_pos;
         gint end_pos;
+
         g_match_info_fetch_pos (lc_mc_search->regex_match_info, lc_index, &start_pos, &end_pos);
         return (int) end_pos;
     }
