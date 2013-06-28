@@ -220,7 +220,7 @@ GArray *macros_list;
 
 /*** file scope variables ************************************************************************/
 
-static char *profile_name = NULL;               /* ${XDG_CONFIG_HOME}/mc/ini */
+static char *profile_name = NULL;       /* ${XDG_CONFIG_HOME}/mc/ini */
 static char *panels_profile_name = NULL;        /* ${XDG_CACHE_HOME}/mc/panels.ini */
 
 /* *INDENT-OFF* */
