@@ -95,8 +95,8 @@ mcview_movement_fixups (mcview_t * view, gboolean reset_search)
     mcview_scroll_to_cursor (view);
     if (reset_search)
     {
-        view->search_start = view->dpy_start;
-        view->search_end = view->dpy_start;
+        view->search_start = view->hex_mode ? view->hex_cursor : view->dpy_start;
+        view->search_end = view->search_start;
     }
     view->dirty++;
 }
@@ -493,19 +493,15 @@ mcview_place_cursor (mcview_t * view)
 void
 mcview_moveto_match (mcview_t * view)
 {
-    off_t offset;
-
-    offset = view->search_start;
-
     if (view->hex_mode)
     {
-        view->hex_cursor = offset;
-        view->dpy_start = offset - offset % view->bytes_per_line;
+        view->hex_cursor = view->search_start;
+        view->hexedit_lownibble = FALSE;
+        view->dpy_start = view->search_start - view->search_start % view->bytes_per_line;
+        view->dpy_end = view->search_end - view->search_end % view->bytes_per_line;
     }
     else
-    {
-        view->dpy_start = mcview_bol (view, offset, 0);
-    }
+        view->dpy_start = mcview_bol (view, view->search_start, 0);
 
     mcview_scroll_to_cursor (view);
     view->dirty++;

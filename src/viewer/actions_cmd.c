@@ -98,10 +98,32 @@ mcview_remove_ext_script (mcview_t * view)
 
 /* Both views */
 static void
-mcview_search (mcview_t * view)
+mcview_search (mcview_t * view, gboolean start_search)
 {
-    if (mcview_dialog_search (view))
+    if (start_search)
+    {
+        if (mcview_dialog_search (view))
+        {
+            if (view->hex_mode)
+                view->search_start = view->hex_cursor;
+
+            mcview_do_search (view);
+        }
+    }
+    else
+    {
+        if (view->hex_mode)
+        {
+            if (!mcview_search_options.backwards)
+                view->search_start = view->hex_cursor + 1;
+            else if (view->hex_cursor > 0)
+                view->search_start = view->hex_cursor - 1;
+            else
+                view->search_start = 0;
+        }
+
         mcview_do_search (view);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -110,13 +132,12 @@ static void
 mcview_continue_search_cmd (mcview_t * view)
 {
     if (view->last_search_string != NULL)
-    {
-        mcview_do_search (view);
-    }
+        mcview_search (view, FALSE);
     else
     {
         /* find last search string in history */
         GList *history;
+
         history = history_get (MC_HISTORY_SHARED_SEARCH);
         if (history != NULL && history->data != NULL)
         {
@@ -128,12 +149,12 @@ mcview_continue_search_cmd (mcview_t * view)
             view->search = mc_search_new (view->last_search_string, -1);
             view->search_nroff_seq = mcview_nroff_seq_new (view);
 
-            if (!view->search)
+            if (view->search == NULL)
             {
                 /* if not... then ask for an expression */
                 g_free (view->last_search_string);
                 view->last_search_string = NULL;
-                mcview_search (view);
+                mcview_search (view, TRUE);
             }
             else
             {
@@ -144,7 +165,7 @@ mcview_continue_search_cmd (mcview_t * view)
                 view->search->search_fn = mcview_search_cmd_callback;
                 view->search->update_fn = mcview_search_update_cmd_callback;
 
-                mcview_do_search (view);
+                mcview_search (view, FALSE);
             }
         }
         else
@@ -152,7 +173,7 @@ mcview_continue_search_cmd (mcview_t * view)
             /* if not... then ask for an expression */
             g_free (view->last_search_string);
             view->last_search_string = NULL;
-            mcview_search (view);
+            mcview_search (view, TRUE);
         }
     }
 }
@@ -406,15 +427,15 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
         mcview_hexedit_save_changes (view);
         break;
     case CK_Search:
-        mcview_search (view);
+        mcview_search (view, TRUE);
         break;
     case CK_SearchForward:
         mcview_search_options.backwards = FALSE;
-        mcview_search (view);
+        mcview_search (view, TRUE);
         break;
     case CK_SearchBackward:
         mcview_search_options.backwards = TRUE;
-        mcview_search (view);
+        mcview_search (view, TRUE);
         break;
     case CK_MagicMode:
         mcview_toggle_magic_mode (view);

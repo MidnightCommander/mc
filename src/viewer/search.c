@@ -135,14 +135,6 @@ mcview_search_show_result (mcview_t * view, WDialog ** d, size_t match_len)
                                                             match_len) : 0;
     view->search_end = view->search_start + match_len + nroff_len;
 
-    if (view->hex_mode)
-    {
-        view->hex_cursor = view->search_start;
-        view->hexedit_lownibble = FALSE;
-        view->dpy_start = view->search_start - view->search_start % view->bytes_per_line;
-        view->dpy_end = view->search_end - view->search_end % view->bytes_per_line;
-    }
-
     if (verbose)
     {
         dlg_run_done (*d);
@@ -151,7 +143,6 @@ mcview_search_show_result (mcview_t * view, WDialog ** d, size_t match_len)
         tty_refresh ();
     }
     mcview_moveto_match (view);
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
