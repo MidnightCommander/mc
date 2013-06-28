@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-06-15 10:56+0400\n"
+"POT-Creation-Date: 2013-06-27 16:02+0400\n"
 "PO-Revision-Date: 2011-12-07 11:21+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.net/projects/p/mc/team/"
@@ -3925,6 +3925,17 @@ msgstr ""
 msgid "Invalid value"
 msgstr ""
 
+msgid "File was modified. Save with exit?"
+msgstr ""
+
+msgid "&Cancel quit"
+msgstr ""
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
 msgid "Cannot spawn child process"
 msgstr ""
 
@@ -3989,17 +4000,6 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "File was modified. Save with exit?"
-msgstr ""
-
-msgid "&Cancel quit"
-msgstr ""
-
-msgid ""
-"Midnight Commander is being shut down.\n"
-"Save modified file?"
-msgstr ""
-
 msgid "View: "
 msgstr ""
 
@@ -4014,7 +4014,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot open \"%s\" in magic mode\n"
+"Cannot open \"%s\" in parse mode\n"
 "%s"
 msgstr ""
 

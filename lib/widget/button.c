@@ -212,7 +212,7 @@ button_new (int y, int x, int action, button_flags_t flags, const char *text, bc
     b->action = action;
     b->flags = flags;
     b->text = parse_hotkey (text);
-    init_widget (w, y, x, 1, button_get_len (b), button_callback, button_event);
+    widget_init (w, y, x, 1, button_get_len (b), button_callback, button_event);
     b->selected = FALSE;
     b->callback = callback;
     widget_want_hotkey (w, TRUE);

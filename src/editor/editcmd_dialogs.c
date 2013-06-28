@@ -1,12 +1,12 @@
 /*
    Editor dialogs for high level editing commands
 
-   Copyright (C) 2009, 2011, 2012
+   Copyright (C) 2009, 2011, 2012, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2009.
-   Andrew Borodin, <aborodin@vmail.ru>, 2012.
+   Slava Zanko <slavazanko@gmail.com>, 2009
+   Andrew Borodin, <aborodin@vmail.ru>, 2012, 2013
 
    This file is part of the Midnight Commander.
 
@@ -313,7 +313,7 @@ editcmd_dialog_raw_key_query (const char *heading, const char *query, gboolean c
     w = max (w, wq + 3 * 2 + 1 + 2);
 
     raw_dlg =
-        create_dlg (TRUE, 0, 0, cancel ? 7 : 5, w, dialog_colors, editcmd_dialog_raw_key_query_cb,
+        dlg_create (TRUE, 0, 0, cancel ? 7 : 5, w, dialog_colors, editcmd_dialog_raw_key_query_cb,
                     NULL, NULL, heading, DLG_CENTER | DLG_TRYUP | DLG_WANT_TAB);
 
     add_widget (raw_dlg, label_new (y, 3, query));
@@ -327,8 +327,8 @@ editcmd_dialog_raw_key_query (const char *heading, const char *query, gboolean c
                             WPOS_KEEP_TOP | WPOS_CENTER_HORZ, NULL);
     }
 
-    w = run_dlg (raw_dlg);
-    destroy_dlg (raw_dlg);
+    w = dlg_run (raw_dlg);
+    dlg_destroy (raw_dlg);
 
     return (cancel && (w == ESC_CHAR || w == B_CANCEL)) ? 0 : w;
 }
@@ -372,7 +372,7 @@ editcmd_dialog_completion_show (const WEdit * edit, int max_len, GString ** comp
 
     /* create the dialog */
     compl_dlg =
-        create_dlg (TRUE, start_y, start_x, compl_dlg_h, compl_dlg_w,
+        dlg_create (TRUE, start_y, start_x, compl_dlg_h, compl_dlg_w,
                     dialog_colors, NULL, NULL, "[Completion]", NULL, DLG_COMPACT);
 
     /* create the listbox */
@@ -386,14 +386,14 @@ editcmd_dialog_completion_show (const WEdit * edit, int max_len, GString ** comp
         listbox_add_item (compl_list, LISTBOX_APPEND_AT_END, 0, (char *) compl[i]->str, NULL);
 
     /* pop up the dialog and apply the choosen completion */
-    if (run_dlg (compl_dlg) == B_ENTER)
+    if (dlg_run (compl_dlg) == B_ENTER)
     {
         listbox_get_current (compl_list, &curr, NULL);
         curr = g_strdup (curr);
     }
 
     /* destroy dialog before return */
-    destroy_dlg (compl_dlg);
+    dlg_destroy (compl_dlg);
 
     return curr;
 }
@@ -438,7 +438,7 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
         start_y -= (offset + 1);
 
     /* create the dialog */
-    def_dlg = create_dlg (TRUE, start_y, start_x, def_dlg_h, def_dlg_w,
+    def_dlg = dlg_create (TRUE, start_y, start_x, def_dlg_h, def_dlg_w,
                           dialog_colors, NULL, NULL, "[Definitions]", match_expr, DLG_COMPACT);
 
     /* create the listbox */
@@ -458,7 +458,7 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
     }
 
     /* pop up the dialog and apply the choosen completion */
-    if (run_dlg (def_dlg) == B_ENTER)
+    if (dlg_run (def_dlg) == B_ENTER)
     {
         char *tmp_curr_def = (char *) curr_def;
         int do_moveto = 0;
@@ -516,7 +516,7 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
     }
 
     /* destroy dialog before return */
-    destroy_dlg (def_dlg);
+    dlg_destroy (def_dlg);
 }
 
 /* --------------------------------------------------------------------------------------------- */

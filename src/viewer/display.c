@@ -420,6 +420,8 @@ mcview_percent (mcview_t * view, off_t p)
 
     widget_move (view, top, right - 4);
     tty_printf ("%3d%%", percent);
+    /* avoid cursor wrapping in NCurses-base MC */
+    widget_move (view, top, right - 1);
 }
 
 /* --------------------------------------------------------------------------------------------- */

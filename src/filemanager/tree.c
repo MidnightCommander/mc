@@ -572,36 +572,30 @@ tree_move_to_bottom (WTree * tree)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/** Handle mouse click */
-static void
-tree_mouse_click (WTree * tree, int y)
-{
-    if (tree->tree_shown[y])
-    {
-        tree->selected_ptr = tree->tree_shown[y];
-        tree->topdiff = y;
-    }
-    show_tree (tree);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static void
 tree_chdir_sel (WTree * tree)
 {
-    if (!tree->is_panel)
-        return;
+    if (tree->is_panel)
+    {
+        change_panel ();
 
-    change_panel ();
+        if (do_cd (tree->selected_ptr->name, cd_exact))
+            select_item (current_panel);
+        else
+            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"),
+                     vfs_path_as_str (tree->selected_ptr->name), unix_error_string (errno));
 
-    if (do_cd (tree->selected_ptr->name, cd_exact))
-        select_item (current_panel);
+        widget_redraw (WIDGET (current_panel));
+        change_panel ();
+        show_tree (tree);
+    }
     else
-        message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"),
-                 tree->selected_ptr->name->str, unix_error_string (errno));
+    {
+        WDialog *h = WIDGET (tree)->owner;
 
-    change_panel ();
-    show_tree (tree);
+        h->ret_value = B_ENTER;
+        dlg_stop (h);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -653,11 +647,14 @@ tree_event (Gpm_Event * event, void *data)
         tree_move_forward (tree, tlines (tree) - 1);
         show_tree (tree);
     }
-    else
+    else if ((local.type & (GPM_UP | GPM_DOUBLE)) == (GPM_UP | GPM_DOUBLE))
     {
-        tree_mouse_click (tree, local.y);
-        if ((local.type & (GPM_UP | GPM_DOUBLE)) == (GPM_UP | GPM_DOUBLE))
-            tree_chdir_sel (tree);
+        if (tree->tree_shown[local.y] != NULL)
+        {
+            tree->selected_ptr = tree->tree_shown[local.y];
+            tree->topdiff = local.y;
+        }
+        tree_chdir_sel (tree);
     }
 
     return MOU_NORMAL;
@@ -1173,11 +1170,16 @@ tree_frame (WDialog * h, WTree * tree)
         tty_printf (" %s ", title);
 
         if (panels_options.show_mini_info)
-            widget_move (w, tlines (tree) + 1, 0);
-        tty_print_alt_char (ACS_LTEE, FALSE);
-        widget_move (w, tlines (tree) + 1, w->cols - 1);
-        tty_print_alt_char (ACS_RTEE, FALSE);
-        tty_draw_hline (w->y + tlines (tree) + 1, w->x + 1, ACS_HLINE, w->cols - 2);
+        {
+            int y;
+
+            y = w->lines - 3;
+            widget_move (w, y, 0);
+            tty_print_alt_char (ACS_LTEE, FALSE);
+            widget_move (w, y, w->cols - 1);
+            tty_print_alt_char (ACS_RTEE, FALSE);
+            tty_draw_hline (w->y + y, w->x + 1, ACS_HLINE, w->cols - 2);
+        }
     }
 }
 
@@ -1258,7 +1260,7 @@ tree_new (int y, int x, int lines, int cols, gboolean is_panel)
     tree = g_new (WTree, 1);
     w = WIDGET (tree);
 
-    init_widget (w, y, x, lines, cols, tree_callback, tree_event);
+    widget_init (w, y, x, lines, cols, tree_callback, tree_event);
     tree->is_panel = is_panel;
     tree->selected_ptr = 0;
 

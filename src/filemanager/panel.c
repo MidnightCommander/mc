@@ -2972,16 +2972,19 @@ panel_set_sort_type_by_id (WPanel * panel, const char *name)
  */
 
 static const char *
-get_parent_dir_name (const char *cwd, const char *lwd)
+get_parent_dir_name (const vfs_path_t * cwd_vpath, const vfs_path_t * lwd_vpath)
 {
     size_t llen, clen;
-    const char *p;
+    const char *p, *cwd, *lwd;
 
-    llen = strlen (lwd);
-    clen = strlen (cwd);
+    llen = vfs_path_len (lwd_vpath);
+    clen = vfs_path_len (cwd_vpath);
 
     if (llen <= clen)
         return NULL;
+
+    cwd = vfs_path_as_str (cwd_vpath);
+    lwd = vfs_path_as_str (lwd_vpath);
 
     p = g_strrstr (lwd, VFS_PATH_URL_DELIMITER);
 
@@ -3044,21 +3047,18 @@ _do_panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_
     }
 
     if (mc_chdir (new_dir_vpath) == -1)
-    {
-        panel_set_cwd (panel, vfs_path_as_str (panel->cwd_vpath));
         return FALSE;
-    }
 
     /* Success: save previous directory, shutdown status of previous dir */
     olddir_vpath = vfs_path_clone (panel->cwd_vpath);
-    panel_set_lwd (panel, vfs_path_as_str (panel->cwd_vpath));
+    panel_set_lwd (panel, panel->cwd_vpath);
     input_free_completions (cmdline);
 
     vfs_path_free (panel->cwd_vpath);
     vfs_setup_cwd ();
     panel->cwd_vpath = vfs_path_clone (vfs_get_raw_current_dir ());
 
-    vfs_release_path (vfs_path_as_str (olddir_vpath));
+    vfs_release_path (olddir_vpath);
 
     subshell_chdir (panel->cwd_vpath);
 
@@ -3069,9 +3069,7 @@ _do_panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_
         do_load_dir (panel->cwd_vpath, &panel->dir, panel->sort_info.sort_field->sort_routine,
                      panel->sort_info.reverse, panel->sort_info.case_sensitive,
                      panel->sort_info.exec_first, panel->filter);
-    try_to_select (panel,
-                   get_parent_dir_name (vfs_path_as_str (panel->cwd_vpath),
-                                        vfs_path_as_str (olddir_vpath)));
+    try_to_select (panel, get_parent_dir_name (panel->cwd_vpath, olddir_vpath));
 
     load_hint (0);
     panel->dirty = 1;
@@ -3591,7 +3589,7 @@ panel_event (Gpm_Event * event, void *data)
     Widget *w = WIDGET (data);
 
     const int lines = llines (panel);
-    const gboolean is_active = dlg_widget_active (panel);
+    const gboolean is_active = widget_is_active (panel);
     const gboolean mouse_down = (event->type & GPM_DOWN) != 0;
     Gpm_Event local;
 
@@ -3927,6 +3925,34 @@ panel_save_curent_file_to_clip_file (const gchar * event_group_name, const gchar
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static vfs_path_t *
+panel_recursive_cd_to_parent (const vfs_path_t * vpath)
+{
+    vfs_path_t *cwd_vpath;
+
+    cwd_vpath = vfs_path_clone (vpath);
+
+    while (mc_chdir (cwd_vpath) < 0)
+    {
+        const char *panel_cwd_path;
+        vfs_path_t *tmp_vpath;
+
+        /* check if path contains only '/' */
+        panel_cwd_path = vfs_path_as_str (cwd_vpath);
+        if (panel_cwd_path[0] == PATH_SEP && panel_cwd_path[1] == '\0')
+            return NULL;
+
+        tmp_vpath = vfs_path_vtokens_get (cwd_vpath, 0, -1);
+        vfs_path_free (cwd_vpath);
+        cwd_vpath = vfs_path_build_filename (PATH_SEP_STR, vfs_path_as_str (tmp_vpath), NULL);
+        vfs_path_free (tmp_vpath);
+    }
+
+    return cwd_vpath;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -3968,10 +3994,13 @@ panel_clean_dir (WPanel * panel)
  */
 
 void
-panel_set_cwd (WPanel * panel, const char *path_str)
+panel_set_cwd (WPanel * panel, const vfs_path_t * vpath)
 {
-    vfs_path_free (panel->cwd_vpath);
-    panel->cwd_vpath = vfs_path_from_str (path_str);
+    if (vpath != panel->cwd_vpath)      /* check if new vpath is not the panel->cwd_vpath object */
+    {
+        vfs_path_free (panel->cwd_vpath);
+        panel->cwd_vpath = vfs_path_clone (vpath);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3983,10 +4012,13 @@ panel_set_cwd (WPanel * panel, const char *path_str)
  */
 
 void
-panel_set_lwd (WPanel * panel, const char *path_str)
+panel_set_lwd (WPanel * panel, const vfs_path_t * vpath)
 {
-    vfs_path_free (panel->lwd_vpath);
-    panel->lwd_vpath = vfs_path_from_str (path_str);
+    if (vpath != panel->lwd_vpath)      /* check if new vpath is not the panel->lwd_vpath object */
+    {
+        vfs_path_free (panel->lwd_vpath);
+        panel->lwd_vpath = vfs_path_clone (vpath);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -4013,7 +4045,7 @@ panel_new (const char *panel_name)
  */
 
 WPanel *
-panel_new_with_dir (const char *panel_name, const char *wpath)
+panel_new_with_dir (const char *panel_name, const vfs_path_t * vpath)
 {
     WPanel *panel;
     Widget *w;
@@ -4024,14 +4056,14 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
     panel = g_new0 (WPanel, 1);
     w = WIDGET (panel);
     /* No know sizes of the panel at startup */
-    init_widget (w, 0, 0, 0, 0, panel_callback, panel_event);
+    widget_init (w, 0, 0, 0, 0, panel_callback, panel_event);
     /* We do not want the cursor */
     widget_want_cursor (w, FALSE);
 
-    if (wpath != NULL)
+    if (vpath != NULL)
     {
         curdir = _vfs_get_cwd ();
-        panel_set_cwd (panel, wpath);
+        panel_set_cwd (panel, vpath);
     }
     else
     {
@@ -4039,7 +4071,7 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
         panel->cwd_vpath = vfs_path_clone (vfs_get_raw_current_dir ());
     }
 
-    panel_set_lwd (panel, ".");
+    panel_set_lwd (panel, vfs_get_raw_current_dir ());
 
     panel->hist_name = g_strconcat ("Dir Hist ", panel_name, (char *) NULL);
     /* directories history will be get later */
@@ -4120,11 +4152,11 @@ panel_new_with_dir (const char *panel_name, const char *wpath)
     /* Restore old right path */
     if (curdir != NULL)
     {
-        vfs_path_t *vpath;
+        vfs_path_t *tmp_vpath;
 
-        vpath = vfs_path_from_str (curdir);
-        err = mc_chdir (vpath);
-        vfs_path_free (vpath);
+        tmp_vpath = vfs_path_from_str (curdir);
+        err = mc_chdir (tmp_vpath);
+        vfs_path_free (tmp_vpath);
     }
     g_free (curdir);
 
@@ -4137,45 +4169,27 @@ void
 panel_reload (WPanel * panel)
 {
     struct stat current_stat;
-    gboolean ok;
+    vfs_path_t *cwd_vpath;
 
-    ok = (panels_options.fast_reload
-          && stat (vfs_path_as_str (panel->cwd_vpath), &current_stat) == 0
-          && current_stat.st_ctime == panel->dir_stat.st_ctime
-          && current_stat.st_mtime == panel->dir_stat.st_mtime);
-
-    if (ok)
+    if (panels_options.fast_reload && stat (vfs_path_as_str (panel->cwd_vpath), &current_stat) == 0
+        && current_stat.st_ctime == panel->dir_stat.st_ctime
+        && current_stat.st_mtime == panel->dir_stat.st_mtime)
         return;
 
-    do
+    cwd_vpath = panel_recursive_cd_to_parent (panel->cwd_vpath);
+    vfs_path_free (panel->cwd_vpath);
+
+    if (cwd_vpath == NULL)
     {
-        char *last_slash;
-        const char *panel_cwd_path;
-
-        if (mc_chdir (panel->cwd_vpath) != -1)
-            break;
-
-        panel_cwd_path = vfs_path_as_str (panel->cwd_vpath);
-
-        if (panel_cwd_path[0] == PATH_SEP && panel_cwd_path[1] == '\0')
-        {
-            panel_clean_dir (panel);
-            panel->count = set_zero_dir (&panel->dir) ? 1 : 0;
-            return;
-        }
-        last_slash = strrchr (panel_cwd_path, PATH_SEP);
-        vfs_path_free (panel->cwd_vpath);
-        if (last_slash == NULL || last_slash == panel_cwd_path)
-            panel->cwd_vpath = vfs_path_from_str (PATH_SEP_STR);
-        else
-        {
-            *last_slash = '\0';
-            panel->cwd_vpath = vfs_path_clone (panel->cwd_vpath);
-        }
-        memset (&(panel->dir_stat), 0, sizeof (panel->dir_stat));
-        show_dir (panel);
+        panel->cwd_vpath = vfs_path_from_str (PATH_SEP_STR);
+        panel_clean_dir (panel);
+        panel->count = set_zero_dir (&panel->dir) ? 1 : 0;
+        return;
     }
-    while (TRUE);
+
+    panel->cwd_vpath = cwd_vpath;
+    memset (&(panel->dir_stat), 0, sizeof (panel->dir_stat));
+    show_dir (panel);
 
     panel->count =
         do_reload_dir (panel->cwd_vpath, &panel->dir, panel->sort_info.sort_field->sort_routine,

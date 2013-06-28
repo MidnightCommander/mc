@@ -197,12 +197,12 @@ static FileProgressStatus transform_error = FILE_CONT;
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-transform_source (FileOpContext * ctx, const char *source)
+transform_source (FileOpContext * ctx, const vfs_path_t * source_vpath)
 {
     char *s, *q;
     char *fnsource;
 
-    s = g_strdup (source);
+    s = g_strdup (vfs_path_as_str (source_vpath));
 
     /* We remove \n from the filename since regex routines would use \n as an anchor */
     /* this is just to be allowed to maniupulate file names with \n on it */
@@ -2511,7 +2511,7 @@ compute_dir_size_create_ui (gboolean allow_skip)
     ui = g_new (ComputeDirSizeUI, 1);
 
     ui_width = max (COLS / 2, b_width + 6);
-    ui->dlg = create_dlg (TRUE, 0, 0, 8, ui_width, dialog_colors, NULL, NULL, NULL,
+    ui->dlg = dlg_create (TRUE, 0, 0, 8, ui_width, dialog_colors, NULL, NULL, NULL,
                           _("Directory scanning"), DLG_CENTER);
 
     ui->dirname = label_new (2, 3, "");
@@ -2528,8 +2528,8 @@ compute_dir_size_create_ui (gboolean allow_skip)
     }
 
     /* We will manage the dialog without any help,
-       that's why we have to call init_dlg */
-    init_dlg (ui->dlg);
+       that's why we have to call dlg_init */
+    dlg_init (ui->dlg);
 
     return ui;
 }
@@ -2546,7 +2546,7 @@ compute_dir_size_destroy_ui (ComputeDirSizeUI * ui)
 
         /* close and destroy dialog */
         dlg_run_done (ui->dlg);
-        destroy_dlg (ui->dlg);
+        dlg_destroy (ui->dlg);
         g_free (ui);
     }
 }
@@ -2886,7 +2886,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
             }
             else
             {
-                temp = transform_source (ctx, vfs_path_as_str (source_with_vpath));
+                temp = transform_source (ctx, source_with_vpath);
                 if (temp == NULL)
                     value = transform_error;
                 else
@@ -2997,7 +2997,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 }
                 else
                 {
-                    temp = transform_source (ctx, vfs_path_as_str (source_with_vpath));
+                    temp = transform_source (ctx, source_with_vpath);
                     if (temp == NULL)
                         value = transform_error;
                     else

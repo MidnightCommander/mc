@@ -2,7 +2,7 @@
    Widgets for the Midnight Commander
 
    Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
-   2004, 2005, 2006, 2007, 2009, 2010, 2011
+   2004, 2005, 2006, 2007, 2009, 2010, 2011, 2013
    The Free Software Foundation, Inc.
 
    Authors:
@@ -11,7 +11,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013
 
    This file is part of the Midnight Commander.
 
@@ -1014,7 +1014,7 @@ input_new (int y, int x, const int *input_colors, int width, const char *def_tex
 
     in = g_new (WInput, 1);
     w = WIDGET (in);
-    init_widget (w, y, x, 1, width, input_callback, input_event);
+    widget_init (w, y, x, 1, width, input_callback, input_event);
     w->options |= W_IS_INPUT;
     w->set_options = input_set_options_callback;
 

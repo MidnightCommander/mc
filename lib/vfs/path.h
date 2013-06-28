@@ -134,15 +134,13 @@ vfs_path_get_last_path_vfs (const vfs_path_t * vpath)
  *
  * @param vpath pointer to vfs_path_t object
  *
- * @return pointer to newly created string.
+ * @return pointer to constant string
  */
 
-static inline char *
+static inline const char *
 vfs_path_as_str (const vfs_path_t * vpath)
 {
-    if (vpath == NULL)
-        return NULL;
-    return vpath->str;
+    return (vpath == NULL ? NULL : vpath->str);
 }
 
 /* --------------------------------------------------------------------------------------------- */

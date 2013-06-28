@@ -2,7 +2,7 @@
    Widgets for the Midnight Commander
 
    Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
-   2004, 2005, 2006, 2007, 2009, 2010, 2011
+   2004, 2005, 2006, 2007, 2009, 2010, 2011, 2013
    The Free Software Foundation, Inc.
 
    Authors:
@@ -11,7 +11,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013
 
    This file is part of the Midnight Commander.
 
@@ -140,7 +140,7 @@ check_new (int y, int x, int state, const char *text)
     c = g_new (WCheck, 1);
     w = WIDGET (c);
     c->text = parse_hotkey (text);
-    init_widget (w, y, x, 1, 4 + hotkey_width (c->text), check_callback, check_event);
+    widget_init (w, y, x, 1, 4 + hotkey_width (c->text), check_callback, check_event);
     /* 4 is width of "[X] " */
     c->state = state ? C_BOOL : 0;
     widget_want_hotkey (w, TRUE);

@@ -2,7 +2,7 @@
    Widgets for the Midnight Commander
 
    Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
-   2004, 2005, 2006, 2007, 2009, 2010, 2011
+   2004, 2005, 2006, 2007, 2009, 2010, 2011, 2012, 2013
    The Free Software Foundation, Inc.
 
    Authors:
@@ -11,7 +11,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2011, 2012, 2013
 
    This file is part of the Midnight Commander.
 
@@ -138,7 +138,7 @@ hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-init_widget (Widget * w, int y, int x, int lines, int cols,
+widget_init (Widget * w, int y, int x, int lines, int cols,
              widget_cb_fn callback, mouse_h mouse_handler)
 {
     w->x = x;
@@ -267,6 +267,20 @@ widget_erase (Widget * w)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+  * Check whether widget is active or not.
+  * @param w the widget
+  *
+  * @return TRUE if the widget is active, FALSE otherwise
+  */
+
+gboolean
+widget_is_active (const void *w)
+{
+    return (w == WIDGET (w)->owner->current->data);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 void
 widget_redraw (Widget * w)
@@ -281,8 +295,64 @@ widget_redraw (Widget * w)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+  * Replace widget in the dialog.
+  *
+  * @param old_w old widget that need to be replaced
+  * @param new_w new widget that will replace @old_w
+  */
 
+void
+widget_replace (Widget * old_w, Widget * new_w)
+{
+    WDialog *h = old_w->owner;
+    gboolean should_focus = FALSE;
+
+    if (h->widgets == NULL)
+        return;
+
+    if (h->current == NULL)
+        h->current = h->widgets;
+
+    if (old_w == h->current->data)
+        should_focus = TRUE;
+
+    new_w->owner = h;
+    new_w->id = old_w->id;
+
+    if (should_focus)
+        h->current->data = new_w;
+    else
+        g_list_find (h->widgets, old_w)->data = new_w;
+
+    send_message (old_w, NULL, MSG_DESTROY, 0, NULL);
+    send_message (new_w, NULL, MSG_INIT, 0, NULL);
+
+    if (should_focus)
+        dlg_select_widget (new_w);
+
+    widget_redraw (new_w);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+  * Check whether two widgets are overlapped or not.
+  * @param a 1st widget
+  * @param b 2nd widget
+  *
+  * @return TRUE if widgets are overlapped, FALSE otherwise.
+  */
+
+gboolean
+widget_overlapped (const Widget * a, const Widget * b)
+{
+    return !((b->x >= a->x + a->cols)
+             || (a->x >= b->x + b->cols) || (b->y >= a->y + a->lines) || (a->y >= b->y + b->lines));
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /* get mouse pointer location within widget */
+
 Gpm_Event
 mouse_get_local (const Gpm_Event * global, const Widget * w)
 {

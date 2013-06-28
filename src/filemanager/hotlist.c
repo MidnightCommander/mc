@@ -2,7 +2,7 @@
    Directory hotlist -- for the Midnight Commander
 
    Copyright (C) 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002,
-   2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012
+   2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013
    The Free Software Foundation, Inc.
 
    Written by:
@@ -10,7 +10,7 @@
    Janne Kukonlehto, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2012
+   Andrew Borodin <aborodin@vmail.ru>, 2012, 2013
 
    Janne did the original Hotlist code, Andrej made the groupable
    hotlist; the move hotlist and revamped the file format and made
@@ -356,11 +356,11 @@ hotlist_button_callback (WButton * button, int action)
             listbox_get_current (l_hotlist, NULL, (void **) &item);
             init_movelist (item);
             hotlist_state.moving = TRUE;
-            ret = run_dlg (movelist_dlg);
+            ret = dlg_run (movelist_dlg);
             hotlist_state.moving = FALSE;
             listbox_get_current (l_movelist, NULL, (void **) &moveto_item);
             moveto_group = current_group;
-            destroy_dlg (movelist_dlg);
+            dlg_destroy (movelist_dlg);
             current_group = saved;
             if (ret == B_CANCEL)
                 return 0;
@@ -740,7 +740,7 @@ init_hotlist (hotlist_t list_type)
     }
 
     hotlist_dlg =
-        create_dlg (TRUE, 0, 0, lines, cols, dialog_colors, hotlist_callback, NULL, help_node,
+        dlg_create (TRUE, 0, 0, lines, cols, dialog_colors, hotlist_callback, NULL, help_node,
                     title, DLG_CENTER);
 
     y = UY;
@@ -807,7 +807,7 @@ init_movelist (struct hotlist *item)
     hdr = g_strdup_printf (_("Moving %s"), item->label);
 
     movelist_dlg =
-        create_dlg (TRUE, 0, 0, lines, cols, dialog_colors, hotlist_callback, NULL, "[Hotlist]",
+        dlg_create (TRUE, 0, 0, lines, cols, dialog_colors, hotlist_callback, NULL, "[Hotlist]",
                     hdr, DLG_CENTER);
 
     g_free (hdr);
@@ -848,7 +848,7 @@ init_movelist (struct hotlist *item)
 static void
 hotlist_done (void)
 {
-    destroy_dlg (hotlist_dlg);
+    dlg_destroy (hotlist_dlg);
     l_hotlist = NULL;
     if (FALSE)
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
@@ -1602,7 +1602,7 @@ hotlist_show (hotlist_t list_type)
     tty_setcolor (SELECTED_COLOR);
 
     hotlist_state.running = TRUE;
-    res = run_dlg (hotlist_dlg);
+    res = dlg_run (hotlist_dlg);
     hotlist_state.running = FALSE;
     save_hotlist ();
 

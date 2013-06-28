@@ -2,7 +2,7 @@
    Widget based utility functions.
 
    Copyright (C) 1994, 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
-   2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012
+   2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013
    The Free Software Foundation, Inc.
 
    Authors:
@@ -10,7 +10,7 @@
    Radek Doulik, 1994, 1995
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1995
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2012
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2012, 2013
 
    This file is part of the Midnight Commander.
 
@@ -129,7 +129,7 @@ do_create_message (int flags, const char *title, const char *text)
     /* do resize before initing and running */
     send_message (d, NULL, MSG_RESIZE, 0, NULL);
 
-    init_dlg (d);
+    dlg_init (d);
     g_free (p);
 
     return d;
@@ -149,7 +149,7 @@ fg_message (int flags, const char *title, const char *text)
     d = do_create_message (flags, title, text);
     tty_getch ();
     dlg_run_done (d);
-    destroy_dlg (d);
+    dlg_destroy (d);
 }
 
 
@@ -306,7 +306,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
 
     /* prepare dialog */
     query_dlg =
-        create_dlg (TRUE, 0, 0, lines, cols, query_colors, query_default_callback, NULL,
+        dlg_create (TRUE, 0, 0, lines, cols, query_colors, query_default_callback, NULL,
                     "[QueryBox]", header, dlg_flags);
 
     if (count > 0)
@@ -342,7 +342,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
             dlg_select_widget (defbutton);
 
         /* run dialog and make result */
-        switch (run_dlg (query_dlg))
+        switch (dlg_run (query_dlg))
         {
         case B_CANCEL:
             break;
@@ -351,7 +351,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
         }
 
         /* free used memory */
-        destroy_dlg (query_dlg);
+        dlg_destroy (query_dlg);
     }
     else
     {
@@ -375,7 +375,7 @@ query_set_sel (int new_sel)
 /* --------------------------------------------------------------------------------------------- */
 /**
  * Create message dialog.  The caller must call dlg_run_done() and
- * destroy_dlg() to dismiss it.  Not safe to call from background.
+ * dlg_destroy() to dismiss it.  Not safe to call from background.
  */
 
 struct WDialog *

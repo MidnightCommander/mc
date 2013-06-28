@@ -152,7 +152,7 @@ extern mc_fhl_t *mc_filehighlight;
 /*** declarations of public functions ************************************************************/
 
 WPanel *panel_new (const char *panel_name);
-WPanel *panel_new_with_dir (const char *panel_name, const char *dr);
+WPanel *panel_new_with_dir (const char *panel_name, const vfs_path_t * vpath);
 void panel_clean_dir (WPanel * panel);
 
 void panel_reload (WPanel * panel);
@@ -186,8 +186,8 @@ const panel_field_t *panel_get_field_by_title (const char *);
 const panel_field_t *panel_get_field_by_title_hotkey (const char *);
 gsize panel_get_num_of_user_possible_fields (void);
 const char **panel_get_user_possible_fields (gsize *);
-void panel_set_cwd (WPanel * panel, const char *path_str);
-void panel_set_lwd (WPanel * panel, const char *path_str);
+void panel_set_cwd (WPanel * panel, const vfs_path_t * vpath);
+void panel_set_lwd (WPanel * panel, const vfs_path_t * vpath);
 
 void panel_init (void);
 void panel_deinit (void);

@@ -198,7 +198,7 @@ mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
     mcview_t *view;
 
     view = g_new0 (mcview_t, 1);
-    init_widget (WIDGET (view), y, x, lines, cols, mcview_callback, mcview_event);
+    widget_init (WIDGET (view), y, x, lines, cols, mcview_callback, mcview_event);
 
     view->hex_mode = FALSE;
     view->hexedit_mode = FALSE;
@@ -236,7 +236,7 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
     WDialog *view_dlg;
 
     /* Create dialog and widgets, put them on the dialog */
-    view_dlg = create_dlg (FALSE, 0, 0, LINES, COLS, NULL, mcview_dialog_callback, NULL,
+    view_dlg = dlg_create (FALSE, 0, 0, LINES, COLS, NULL, mcview_dialog_callback, NULL,
                            "[Internal File Viewer]", NULL, DLG_WANT_TAB);
 
     lc_mcview = mcview_new (0, 0, LINES - 1, COLS, FALSE);
@@ -249,12 +249,12 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
     succeeded = mcview_load (lc_mcview, command, vfs_path_as_str (file_vpath), start_line);
 
     if (succeeded)
-        run_dlg (view_dlg);
+        dlg_run (view_dlg);
     else
         view_dlg->state = DLG_CLOSED;
 
     if (view_dlg->state == DLG_CLOSED)
-        destroy_dlg (view_dlg);
+        dlg_destroy (view_dlg);
 
     return succeeded;
 }
@@ -376,7 +376,7 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
                 fd1 = mc_open (vpath1, O_RDONLY | O_NONBLOCK);
                 if (fd1 == -1)
                 {
-                    g_snprintf (tmp, sizeof (tmp), _("Cannot open \"%s\" in magic mode\n%s"),
+                    g_snprintf (tmp, sizeof (tmp), _("Cannot open \"%s\" in parse mode\n%s"),
                                 file, unix_error_string (errno));
                     mcview_show_error (view, tmp);
                 }

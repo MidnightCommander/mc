@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-06-15 10:56+0400\n"
+"POT-Creation-Date: 2013-06-27 16:02+0400\n"
 "PO-Revision-Date: 2013-03-17 11:42+0000\n"
 "Last-Translator: Fabian Affolter <fab@fedoraproject.org>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/mc/language/de/)\n"
@@ -4129,6 +4129,19 @@ msgstr "Ext2lib-Fehler"
 msgid "Invalid value"
 msgstr "Ungültiger Wert"
 
+msgid "File was modified. Save with exit?"
+msgstr "Datei wurde geändert. Beim Beenden speichern?"
+
+msgid "&Cancel quit"
+msgstr "Doch nicht beenden"
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+"Midnight Commander wird beendet.\n"
+"Modifizierte Datei speichern?"
+
 msgid "Cannot spawn child process"
 msgstr "Kann Kindprozess nicht hervorbringen"
 
@@ -4198,19 +4211,6 @@ msgstr ""
 "Kann Datei nicht speichern:\n"
 "%s"
 
-msgid "File was modified. Save with exit?"
-msgstr "Datei wurde geändert. Beim Beenden speichern?"
-
-msgid "&Cancel quit"
-msgstr "Doch nicht beenden"
-
-msgid ""
-"Midnight Commander is being shut down.\n"
-"Save modified file?"
-msgstr ""
-"Midnight Commander wird beendet.\n"
-"Modifizierte Datei speichern?"
-
 msgid "View: "
 msgstr "Ansicht: "
 
@@ -4227,7 +4227,7 @@ msgstr "Kann es nicht anzeigen: Keine normale Datei"
 
 #, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\" in magic mode\n"
+"Cannot open \"%s\" in parse mode\n"
 "%s"
 msgstr ""
 "Kann \"%s\" nicht öffnen\n"

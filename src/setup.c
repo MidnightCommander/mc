@@ -2,7 +2,7 @@
    Setup loading/saving.
 
    Copyright (C) 1994, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2006, 2007, 2009, 2010, 2011
+   2006, 2007, 2009, 2010, 2011, 2013
    The Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -83,7 +83,6 @@
 
 /*** global variables ****************************************************************************/
 
-char *profile_name;             /* ${XDG_CONFIG_HOME}/mc/ini */
 char *global_profile_name;      /* mc.lib */
 
 /* Only used at program boot */
@@ -221,6 +220,7 @@ GArray *macros_list;
 
 /*** file scope variables ************************************************************************/
 
+static char *profile_name = NULL;               /* ${XDG_CONFIG_HOME}/mc/ini */
 static char *panels_profile_name = NULL;        /* ${XDG_CACHE_HOME}/mc/panels.ini */
 
 /* *INDENT-OFF* */
@@ -871,41 +871,42 @@ save_panel_types (void)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-char *
+const char *
 setup_init (void)
 {
-    char *profile;
-    char *inifile;
-
-    if (profile_name != NULL)
-        return profile_name;
-
-    profile = mc_config_get_full_path (MC_CONFIG_FILE);
-    if (!exist_file (profile))
+    if (profile_name == NULL)
     {
-        inifile = mc_build_filename (mc_global.sysconfig_dir, "mc.ini", NULL);
-        if (exist_file (inifile))
+        char *profile;
+
+        profile = mc_config_get_full_path (MC_CONFIG_FILE);
+        if (!exist_file (profile))
         {
-            g_free (profile);
-            profile = inifile;
-        }
-        else
-        {
-            g_free (inifile);
-            inifile = mc_build_filename (mc_global.share_data_dir, "mc.ini", NULL);
+            char *inifile;
+
+            inifile = mc_build_filename (mc_global.sysconfig_dir, "mc.ini", NULL);
             if (exist_file (inifile))
             {
                 g_free (profile);
                 profile = inifile;
             }
             else
+            {
                 g_free (inifile);
+                inifile = mc_build_filename (mc_global.share_data_dir, "mc.ini", NULL);
+                if (!exist_file (inifile))
+                    g_free (inifile);
+                else
+                {
+                    g_free (profile);
+                    profile = inifile;
+                }
+            }
         }
+
+        profile_name = profile;
     }
 
-    profile_name = profile;
-
-    return profile;
+    return profile_name;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -913,7 +914,7 @@ setup_init (void)
 void
 load_setup (void)
 {
-    char *profile;
+    const char *profile;
     size_t i;
     char *buffer;
     const char *kt;
@@ -1136,11 +1137,11 @@ done_setup (void)
 
     g_free (clipboard_store_path);
     g_free (clipboard_paste_path);
-    g_free (profile_name);
     g_free (global_profile_name);
     g_free (mc_global.tty.color_terminal_string);
     g_free (mc_global.tty.term_color_string);
     g_free (mc_global.tty.setup_color_string);
+    g_free (profile_name);
     g_free (panels_profile_name);
     mc_config_deinit (mc_main_config);
     mc_config_deinit (mc_panels_config);

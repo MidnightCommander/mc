@@ -9,6 +9,7 @@
    Written by:
    Jakub Jelinek, 1995
    Slava Zanko <slavazanko@gmail.com>, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -1253,14 +1254,14 @@ complete_engine (WInput * in, int what_to_do)
             min_end = end;
             query_height = h;
             query_width = w;
-            query_dlg = create_dlg (TRUE, y, x, query_height, query_width,
+            query_dlg = dlg_create (TRUE, y, x, query_height, query_width,
                                     dialog_colors, query_callback, NULL,
                                     "[Completion]", NULL, DLG_COMPACT);
             query_list = listbox_new (1, 1, h - 2, w - 2, FALSE, NULL);
             add_widget (query_dlg, query_list);
             for (p = in->completions + 1; *p; p++)
                 listbox_add_item (query_list, LISTBOX_APPEND_AT_END, 0, *p, NULL);
-            run_dlg (query_dlg);
+            dlg_run (query_dlg);
             q = NULL;
             if (query_dlg->ret_value == B_ENTER)
             {
@@ -1271,7 +1272,7 @@ complete_engine (WInput * in, int what_to_do)
             if (q || end != min_end)
                 input_free_completions (in);
             i = query_dlg->ret_value;   /* B_USER if user wants to start over again */
-            destroy_dlg (query_dlg);
+            dlg_destroy (query_dlg);
             if (i == B_USER)
                 return 1;
         }

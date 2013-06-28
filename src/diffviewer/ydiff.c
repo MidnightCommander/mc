@@ -5,7 +5,7 @@
    Written by:
    Daniel Borca <dborca@yahoo.com>, 2007
    Slava Zanko <slavazanko@gmail.com>, 2010, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2010, 2012
+   Andrew Borodin <aborodin@vmail.ru>, 2010, 2012, 2013
    Ilia Maslakov <il.smind@gmail.com>, 2010
 
    This file is part of the Midnight Commander.
@@ -3450,12 +3450,12 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
 
     /* Create dialog and widgets, put them on the dialog */
     dview_dlg =
-        create_dlg (FALSE, 0, 0, LINES, COLS, NULL, dview_dialog_callback, NULL,
+        dlg_create (FALSE, 0, 0, LINES, COLS, NULL, dview_dialog_callback, NULL,
                     "[Diff Viewer]", NULL, DLG_WANT_TAB);
 
     dview = g_new0 (WDiff, 1);
     w = WIDGET (dview);
-    init_widget (w, 0, 0, LINES - 1, COLS, dview_callback, dview_event);
+    widget_init (w, 0, 0, LINES - 1, COLS, dview_callback, dview_event);
     widget_want_cursor (w, FALSE);
 
     add_widget (dview_dlg, dview);
@@ -3470,10 +3470,10 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
      * be aware of it
      */
     if (error == 0)
-        run_dlg (dview_dlg);
+        dlg_run (dview_dlg);
 
     if ((error != 0) || (dview_dlg->state == DLG_CLOSED))
-        destroy_dlg (dview_dlg);
+        dlg_destroy (dview_dlg);
 
     return error == 0 ? 1 : 0;
 }

@@ -182,7 +182,7 @@ START_PARAMETRIZED_TEST (test_from_to_string, test_from_to_string_ds)
     vfs_path_t *vpath;
     size_t vpath_len;
     const vfs_path_element_t *path_element;
-    char *actual_result;
+    const char *actual_result;
 
     vpath = vfs_path_from_str_flags (data->input_string, VPF_USE_DEPRECATED_PARSER);
 

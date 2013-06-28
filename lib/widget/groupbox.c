@@ -105,7 +105,7 @@ groupbox_new (int y, int x, int height, int width, const char *title)
 
     g = g_new (WGroupbox, 1);
     w = WIDGET (g);
-    init_widget (w, y, x, height, width, groupbox_callback, NULL);
+    widget_init (w, y, x, height, width, groupbox_callback, NULL);
 
     widget_want_cursor (w, FALSE);
     widget_want_hotkey (w, FALSE);

@@ -2260,7 +2260,7 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
         edit = g_malloc0 (sizeof (WEdit));
         to_free = TRUE;
 
-        init_widget (WIDGET (edit), y, x, lines, cols, NULL, NULL);
+        widget_init (WIDGET (edit), y, x, lines, cols, NULL, NULL);
         edit->fullscreen = TRUE;
         edit_save_size (edit);
     }

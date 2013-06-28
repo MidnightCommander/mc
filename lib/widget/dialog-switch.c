@@ -3,12 +3,12 @@
 
    Original idea and code: Oleg "Olegarch" Konovalov <olegarch@linuxinside.com>
 
-   Copyright (c) 2009, 2010, 2011
+   Copyright (c) 2009, 2010, 2011, 2013
    The Free Software Foundation
 
    Written by:
    Daniel Borca <dborca@yahoo.com>, 2007
-   Andrew Borodin <aborodin@vmail.ru>, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2010, 2013
 
    This file is part of the Midnight Commander.
 
@@ -278,10 +278,10 @@ dialog_switch_process_pending (void)
 
         dialog_switch_pending = FALSE;
         h->state = DLG_SUSPENDED;
-        ret = run_dlg (h);
+        ret = dlg_run (h);
         if (h->state == DLG_CLOSED)
         {
-            destroy_dlg (h);
+            dlg_destroy (h);
 
             /* return to panels */
             if (mc_global.mc_run_mode == MC_RUN_FULL)
@@ -318,8 +318,8 @@ dialog_switch_shutdown (void)
     {
         WDialog *dlg = DIALOG (mc_dialogs->data);
 
-        run_dlg (dlg);
-        destroy_dlg (dlg);
+        dlg_run (dlg);
+        dlg_destroy (dlg);
     }
 }
 

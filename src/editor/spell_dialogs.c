@@ -1,11 +1,12 @@
 /*
    Editor spell checker dialogs
 
-   Copyright (C) 2012
+   Copyright (C) 2012, 2013
    The Free Software Foundation, Inc.
 
    Written by:
    Ilia Maslakov <il.smind@gmail.com>, 2012
+   Andrew Borodin <aborodin@vmail.ru>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -108,7 +109,7 @@ spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word
     sug_dlg_w += max_btn_len;
     sug_dlg_w = max (sug_dlg_w, word_label_len) + 1;
 
-    sug_dlg = create_dlg (TRUE, ypos, xpos, sug_dlg_h, sug_dlg_w,
+    sug_dlg = dlg_create (TRUE, ypos, xpos, sug_dlg_h, sug_dlg_w,
                           dialog_colors, NULL, NULL, "[ASpell]", _("Check word"), DLG_COMPACT);
 
     add_widget (sug_dlg, label_new (1, 2, lang_label));
@@ -127,7 +128,7 @@ spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word
     add_widget (sug_dlg, skip_btn);
     add_widget (sug_dlg, cancel_button);
 
-    res = run_dlg (sug_dlg);
+    res = dlg_run (sug_dlg);
     if (res == B_ENTER)
     {
         char *tmp = NULL;
@@ -138,7 +139,7 @@ spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word
         *new_word = tmp;
     }
 
-    destroy_dlg (sug_dlg);
+    dlg_destroy (sug_dlg);
     g_free (lang_label);
     g_free (word_label);
 

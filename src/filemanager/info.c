@@ -275,7 +275,7 @@ info_hook (void *data)
     other_widget = get_panel_widget (get_current_index ());
     if (!other_widget)
         return;
-    if (dlg_overlap (WIDGET (info), other_widget))
+    if (widget_overlapped (WIDGET (info), other_widget))
         return;
 
     info->ready = 1;
@@ -326,7 +326,7 @@ info_new (int y, int x, int lines, int cols)
 
     info = g_new (struct WInfo, 1);
     w = WIDGET (info);
-    init_widget (w, y, x, lines, cols, info_callback, NULL);
+    widget_init (w, y, x, lines, cols, info_callback, NULL);
     /* We do not want the cursor */
     widget_want_cursor (w, FALSE);
 

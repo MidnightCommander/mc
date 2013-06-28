@@ -246,7 +246,7 @@ do_select_widget (WDialog * h, GList * w, select_dir_t dir)
     }
     while (h->current != w /* && (WIDGET (h->current->data)->options & W_DISABLED) == 0 */ );
 
-    if (dlg_overlap (w0, WIDGET (h->current->data)))
+    if (widget_overlapped (w0, WIDGET (h->current->data)))
     {
         send_message (h->current->data, NULL, MSG_DRAW, 0, NULL);
         send_message (h->current->data, NULL, MSG_FOCUS, 0, NULL);
@@ -361,14 +361,11 @@ dlg_mouse_event (WDialog * h, Gpm_Event * event)
 {
     Widget *wh = WIDGET (h);
 
-    GList *item;
-    GList *starting_widget = h->current;
-    int x = event->x;
-    int y = event->y;
+    GList *p, *first;
 
-    /* close the dialog by mouse click out of dialog area */
-    if (mouse_close_dialog && !h->fullscreen && ((event->buttons & GPM_B_LEFT) != 0) && ((event->type & GPM_DOWN) != 0) /* left click */
-        && !((x > wh->x) && (x <= wh->x + wh->cols) && (y > wh->y) && (y <= wh->y + wh->lines)))
+    /* close the dialog by mouse left click out of dialog area */
+    if (mouse_close_dialog && !h->fullscreen && ((event->buttons & GPM_B_LEFT) != 0)
+        && ((event->type & GPM_DOWN) != 0) && !mouse_global_in_widget (event, wh))
     {
         h->ret_value = B_CANCEL;
         dlg_stop (h);
@@ -384,24 +381,26 @@ dlg_mouse_event (WDialog * h, Gpm_Event * event)
             return mou;
     }
 
-    item = starting_widget;
+    first = h->current;
+    p = first;
+
     do
     {
-        Widget *widget = WIDGET (item->data);
+        Widget *w = WIDGET (p->data);
 
-        item = dlg_widget_prev (h, item);
+        p = dlg_widget_prev (h, p);
 
-        if ((widget->options & W_DISABLED) == 0 && widget->mouse != NULL)
+        if ((w->options & W_DISABLED) == 0 && w->mouse != NULL)
         {
             /* put global cursor position to the widget */
             int ret;
 
-            ret = widget->mouse (event, widget);
+            ret = w->mouse (event, w);
             if (ret != MOU_UNHANDLED)
                 return ret;
         }
     }
-    while (item != starting_widget);
+    while (p != first);
 
     return MOU_UNHANDLED;
 }
@@ -527,7 +526,7 @@ dlg_key_event (WDialog * h, int d_key)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-frontend_run_dlg (WDialog * h)
+frontend_dlg_run (WDialog * h)
 {
     int d_key;
     Gpm_Event event;
@@ -751,7 +750,7 @@ dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
            according to flags (if any of flags require automatic
            resizing, like DLG_CENTER, end after that reposition
            controls in dialog according to flags of widget) */
-        dlg_set_size (h, WIDGET (h)->lines, WIDGET (h)->cols);
+        dlg_set_size (h, w->lines, w->cols);
         return MSG_HANDLED;
 
     default:
@@ -764,7 +763,7 @@ dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
 /* --------------------------------------------------------------------------------------------- */
 
 WDialog *
-create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
+dlg_create (gboolean modal, int y1, int x1, int lines, int cols,
             const int *colors, widget_cb_fn callback, mouse_h mouse_handler,
             const char *help_ctx, const char *title, dlg_flags_t flags)
 {
@@ -773,7 +772,7 @@ create_dlg (gboolean modal, int y1, int x1, int lines, int cols,
 
     new_d = g_new0 (WDialog, 1);
     w = WIDGET (new_d);
-    init_widget (w, y1, x1, lines, cols, (callback != NULL) ? callback : dlg_default_callback,
+    widget_init (w, y1, x1, lines, cols, (callback != NULL) ? callback : dlg_default_callback,
                  mouse_handler);
     widget_want_cursor (w, FALSE);
 
@@ -1007,17 +1006,6 @@ dlg_focus (WDialog * h)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Return true if the windows overlap */
-
-int
-dlg_overlap (Widget * a, Widget * b)
-{
-    return !((b->x >= a->x + a->cols)
-             || (a->x >= b->x + b->cols) || (b->y >= a->y + a->lines) || (a->y >= b->y + b->lines));
-}
-
-
-/* --------------------------------------------------------------------------------------------- */
 /** Find the widget with the given callback in the dialog h */
 
 Widget *
@@ -1183,7 +1171,7 @@ dlg_stop (WDialog * h)
 /** Init the process */
 
 void
-init_dlg (WDialog * h)
+dlg_init (WDialog * h)
 {
     if (top_dlg != NULL && DIALOG (top_dlg->data)->modal)
         h->modal = TRUE;
@@ -1234,7 +1222,7 @@ dlg_process_event (WDialog * h, int key, Gpm_Event * event)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Shutdown the run_dlg */
+/** Shutdown the dlg_run */
 
 void
 dlg_run_done (WDialog * h)
@@ -1258,10 +1246,10 @@ dlg_run_done (WDialog * h)
  */
 
 int
-run_dlg (WDialog * h)
+dlg_run (WDialog * h)
 {
-    init_dlg (h);
-    frontend_run_dlg (h);
+    dlg_init (h);
+    frontend_dlg_run (h);
     dlg_run_done (h);
     return h->ret_value;
 }
@@ -1269,7 +1257,7 @@ run_dlg (WDialog * h)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-destroy_dlg (WDialog * h)
+dlg_destroy (WDialog * h)
 {
     /* if some widgets have history, save all history at one moment here */
     dlg_save_history (h);
@@ -1337,41 +1325,6 @@ dlg_get_title (const WDialog * h, size_t len)
         t = g_strdup ("");
 
     return t;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** Replace widget old_w for widget new_w in the dialog */
-
-void
-dlg_replace_widget (Widget * old_w, Widget * new_w)
-{
-    WDialog *h = old_w->owner;
-    gboolean should_focus = FALSE;
-
-    if (h->widgets == NULL)
-        return;
-
-    if (h->current == NULL)
-        h->current = h->widgets;
-
-    if (old_w == h->current->data)
-        should_focus = TRUE;
-
-    new_w->owner = h;
-    new_w->id = old_w->id;
-
-    if (should_focus)
-        h->current->data = new_w;
-    else
-        g_list_find (h->widgets, old_w)->data = new_w;
-
-    send_message (old_w, NULL, MSG_DESTROY, 0, NULL);
-    send_message (new_w, NULL, MSG_INIT, 0, NULL);
-
-    if (should_focus)
-        dlg_select_widget (new_w);
-
-    widget_redraw (new_w);
 }
 
 /* --------------------------------------------------------------------------------------------- */

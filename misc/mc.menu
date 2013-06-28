@@ -65,7 +65,7 @@ shell_patterns=0
 
 = f \.c$ & t r
 + f \.c$ & t r & ! t t
-с       Compile and link current .c file
+c       Compile and link current .c file
         make `basename %f .c` 2>/dev/null || cc -O -o `basename %f .c` %f
 
 + t r & ! t t

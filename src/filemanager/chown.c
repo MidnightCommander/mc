@@ -2,7 +2,7 @@
    Chown command -- for the Midnight Commander
 
    Copyright (C) 1994, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2007, 2011, 2012
+   2007, 2011, 2012, 2013
    The Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -212,7 +212,7 @@ init_chown (void)
     lines = GH + 4 + (single_set ? 2 : 4);
 
     ch_dlg =
-        create_dlg (TRUE, 0, 0, lines, cols, dialog_colors, chown_callback, NULL, "[Chown]",
+        dlg_create (TRUE, 0, 0, lines, cols, dialog_colors, chown_callback, NULL, "[Chown]",
                     _("Chown command"), DLG_CENTER);
 
     add_widget (ch_dlg, groupbox_new (2, 3, GH, GW, _("User name")));
@@ -354,7 +354,7 @@ chown_cmd (void)
         vpath = vfs_path_from_str (fname);
         if (mc_stat (vpath, &sf_stat) != 0)
         {                       /* get status of file */
-            destroy_dlg (ch_dlg);
+            dlg_destroy (ch_dlg);
             vfs_path_free (vpath);
             break;
         }
@@ -371,7 +371,7 @@ chown_cmd (void)
         chown_label (3, buffer);
         chown_label (4, string_perm (sf_stat.st_mode));
 
-        switch (run_dlg (ch_dlg))
+        switch (dlg_run (ch_dlg))
         {
         case B_CANCEL:
             end_chown = 1;
@@ -445,7 +445,7 @@ chown_cmd (void)
             need_update = 1;
         }
 
-        destroy_dlg (ch_dlg);
+        dlg_destroy (ch_dlg);
     }
     while (current_panel->marked && !end_chown);
 

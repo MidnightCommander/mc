@@ -132,7 +132,7 @@ int hotkey_width (const hotkey_t hotkey);
 void hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused);
 
 /* widget initialization */
-void init_widget (Widget * w, int y, int x, int lines, int cols,
+void widget_init (Widget * w, int y, int x, int lines, int cols,
                   widget_cb_fn callback, mouse_h mouse_handler);
 /* Default callback for widgets */
 cb_ret_t widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
@@ -144,17 +144,24 @@ void widget_set_size (Widget * widget, int y, int x, int lines, int cols);
 void widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey);
 void widget_redraw (Widget * w);
 void widget_erase (Widget * w);
+gboolean widget_is_active (const void *w);
+gboolean widget_overlapped (const Widget * a, const Widget * b);
+void widget_replace (Widget * old, Widget * new);
 
 /* get mouse pointer location within widget */
 Gpm_Event mouse_get_local (const Gpm_Event * global, const Widget * w);
 gboolean mouse_global_in_widget (const Gpm_Event * event, const Widget * w);
 
+/* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static inline cb_ret_t
 send_message (void *w, void *sender, widget_msg_t msg, int parm, void *data)
 {
     return WIDGET (w)->callback (WIDGET (w), WIDGET (sender), msg, parm, data);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 #endif /* MC__WIDGET_INTERNAL_H */

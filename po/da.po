@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-06-15 10:56+0400\n"
+"POT-Creation-Date: 2013-06-27 16:02+0400\n"
 "PO-Revision-Date: 2013-03-13 08:51+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/mc/language/da/)\n"
@@ -4103,6 +4103,19 @@ msgstr "Ext2lib-fejl"
 msgid "Invalid value"
 msgstr "Ugyldig værdi"
 
+msgid "File was modified. Save with exit?"
+msgstr "Fil blev ændret. Gem under afslutning?"
+
+msgid "&Cancel quit"
+msgstr "&Afbryd afslut"
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+"Midnight Commander er ved at lukke ned.\n"
+"Gem ændret fil?"
+
 msgid "Cannot spawn child process"
 msgstr "Kan ikke spawn underproces"
 
@@ -4172,19 +4185,6 @@ msgstr ""
 "Kan ikke gemme fil:\n"
 "%s"
 
-msgid "File was modified. Save with exit?"
-msgstr "Fil blev ændret. Gem under afslutning?"
-
-msgid "&Cancel quit"
-msgstr "&Afbryd afslut"
-
-msgid ""
-"Midnight Commander is being shut down.\n"
-"Save modified file?"
-msgstr ""
-"Midnight Commander er ved at lukke ned.\n"
-"Gem ændret fil?"
-
 msgid "View: "
 msgstr "Vis: "
 
@@ -4201,7 +4201,7 @@ msgstr "Kan ikke vise: Ikke en regulær fil"
 
 #, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\" in magic mode\n"
+"Cannot open \"%s\" in parse mode\n"
 "%s"
 msgstr ""
 "Kan ikke åbne »%s«\n"

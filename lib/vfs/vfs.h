@@ -253,7 +253,7 @@ char *vfs_translate_path_n (const char *path);
 
 void vfs_stamp_path (const char *path);
 
-void vfs_release_path (const char *dir);
+void vfs_release_path (const vfs_path_t * vpath);
 
 void vfs_fill_names (fill_names_f);
 

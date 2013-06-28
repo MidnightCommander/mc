@@ -515,7 +515,7 @@ init_layout (void)
     width = max (l1 * 2 + 7, b);
 
     layout_dlg =
-        create_dlg (TRUE, 0, 0, 15, width, dialog_colors, layout_callback, NULL, "[Layout]",
+        dlg_create (TRUE, 0, 0, 15, width, dialog_colors, layout_callback, NULL, "[Layout]",
                     _("Layout"), DLG_CENTER);
 
 #define XTRACT(i) *check_options[i].variable, check_options[i].text
@@ -608,7 +608,13 @@ restore_into_right_dir_panel (int idx, Widget * from_widget)
     const char *p_name = get_nth_panel_name (idx);
 
     if (last_was_panel)
-        new_widget = panel_new_with_dir (p_name, saved_dir);
+    {
+        vfs_path_t *saved_dir_vpath;
+
+        saved_dir_vpath = vfs_path_from_str (saved_dir);
+        new_widget = panel_new_with_dir (p_name, saved_dir_vpath);
+        vfs_path_free (saved_dir_vpath);
+    }
     else
         new_widget = panel_new (p_name);
 
@@ -640,7 +646,7 @@ layout_box (void)
 
     layout_dlg = init_layout ();
 
-    if (run_dlg (layout_dlg) == B_ENTER)
+    if (dlg_run (layout_dlg) == B_ENTER)
     {
         size_t i;
 
@@ -663,7 +669,7 @@ layout_box (void)
         layout_do_change = TRUE;
     }
 
-    destroy_dlg (layout_dlg);
+    dlg_destroy (layout_dlg);
     if (layout_do_change)
         layout_change ();
 }
@@ -1032,7 +1038,7 @@ set_display_type (int num, panel_view_mode_t type)
             dlg_save_history (midnight_dlg);
         }
 
-        dlg_replace_widget (old_widget, new_widget);
+        widget_replace (old_widget, new_widget);
     }
 
     if (type == view_listing)
@@ -1128,9 +1134,9 @@ swap_panels (void)
             panel_re_sort (current_panel);
         }
 
-        if (dlg_widget_active (panels[0].widget))
+        if (widget_is_active (panels[0].widget))
             dlg_select_widget (panels[1].widget);
-        else if (dlg_widget_active (panels[1].widget))
+        else if (widget_is_active (panels[1].widget))
             dlg_select_widget (panels[0].widget);
     }
     else

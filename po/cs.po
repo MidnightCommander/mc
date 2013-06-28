@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-06-15 10:56+0400\n"
+"POT-Creation-Date: 2013-06-27 16:02+0400\n"
 "PO-Revision-Date: 2013-03-13 08:51+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/mc/language/cs/)\n"
@@ -4107,6 +4107,19 @@ msgstr "Chyba ext2lib"
 msgid "Invalid value"
 msgstr "Neplatná hodnota"
 
+msgid "File was modified. Save with exit?"
+msgstr "Soubor byl změněn, uložit při odchodu?"
+
+msgid "&Cancel quit"
+msgstr "&Zrušit odchod"
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+"Midnight Commander se ukončuje.\n"
+"Uložit upravený soubor?"
+
 msgid "Cannot spawn child process"
 msgstr "Nelze vytvořit proces potomka"
 
@@ -4176,19 +4189,6 @@ msgstr ""
 "Nemohu uložit soubor:\n"
 "%s"
 
-msgid "File was modified. Save with exit?"
-msgstr "Soubor byl změněn, uložit při odchodu?"
-
-msgid "&Cancel quit"
-msgstr "&Zrušit odchod"
-
-msgid ""
-"Midnight Commander is being shut down.\n"
-"Save modified file?"
-msgstr ""
-"Midnight Commander se ukončuje.\n"
-"Uložit upravený soubor?"
-
 msgid "View: "
 msgstr "Prohlížet: "
 
@@ -4205,7 +4205,7 @@ msgstr "Nelze prohlížet: není to normální soubor"
 
 #, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\" in magic mode\n"
+"Cannot open \"%s\" in parse mode\n"
 "%s"
 msgstr ""
 "Nelze otevřít „%s“\n"

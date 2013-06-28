@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-06-15 10:56+0400\n"
+"POT-Creation-Date: 2013-06-27 16:02+0400\n"
 "PO-Revision-Date: 2013-03-13 08:51+0000\n"
 "Last-Translator: Daniel <danicases@gmail.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/mc/language/"
@@ -3988,6 +3988,17 @@ msgstr ""
 msgid "Invalid value"
 msgstr "Valor invàlid"
 
+msgid "File was modified. Save with exit?"
+msgstr ""
+
+msgid "&Cancel quit"
+msgstr ""
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+
 msgid "Cannot spawn child process"
 msgstr ""
 
@@ -4054,17 +4065,6 @@ msgstr ""
 "No es pot desar el fitxer :\n"
 "%s"
 
-msgid "File was modified. Save with exit?"
-msgstr ""
-
-msgid "&Cancel quit"
-msgstr ""
-
-msgid ""
-"Midnight Commander is being shut down.\n"
-"Save modified file?"
-msgstr ""
-
 msgid "View: "
 msgstr "Visualitza:"
 
@@ -4081,7 +4081,7 @@ msgstr ""
 
 #, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\" in magic mode\n"
+"Cannot open \"%s\" in parse mode\n"
 "%s"
 msgstr ""
 "No es pot obrir \"%s\"\n"

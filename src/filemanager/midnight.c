@@ -9,7 +9,7 @@
    Miguel de Icaza, 1994, 1995, 1996, 1997
    Janne Kukonlehto, 1994, 1995
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2012, 2013
    Slava Zanko <slavazanko@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
@@ -683,47 +683,25 @@ create_panels (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-put_current_path (void)
+midnight_put_panel_path (WPanel * panel)
 {
     vfs_path_t *cwd_vpath;
+    const char *cwd_vpath_str;
 
     if (!command_prompt)
         return;
 
 #ifdef HAVE_CHARSET
-    cwd_vpath = remove_encoding_from_path (current_panel->cwd_vpath);
+    cwd_vpath = remove_encoding_from_path (panel->cwd_vpath);
 #else
-    cwd_vpath = vfs_path_clone (current_panel->cwd_vpath);
+    cwd_vpath = vfs_path_clone (panel->cwd_vpath);
 #endif
 
-    command_insert (cmdline, vfs_path_as_str (cwd_vpath), FALSE);
-    if (cwd_vpath->str[strlen (vfs_path_as_str (cwd_vpath)) - 1] != PATH_SEP)
-        command_insert (cmdline, PATH_SEP_STR, FALSE);
+    cwd_vpath_str = vfs_path_as_str (cwd_vpath);
 
-    vfs_path_free (cwd_vpath);
-}
+    command_insert (cmdline, cwd_vpath_str, FALSE);
 
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-put_other_path (void)
-{
-    vfs_path_t *cwd_vpath;
-
-    if (get_other_type () != view_listing)
-        return;
-
-    if (!command_prompt)
-        return;
-
-#ifdef HAVE_CHARSET
-    cwd_vpath = remove_encoding_from_path (other_panel->cwd_vpath);
-#else
-    cwd_vpath = vfs_path_clone (other_panel->cwd_vpath);
-#endif
-
-    command_insert (cmdline, vfs_path_as_str (cwd_vpath), FALSE);
-    if (cwd_vpath->str[strlen (vfs_path_as_str (cwd_vpath)) - 1] != PATH_SEP)
+    if (cwd_vpath_str[strlen (cwd_vpath_str) - 1] != PATH_SEP)
         command_insert (cmdline, PATH_SEP_STR, FALSE);
 
     vfs_path_free (cwd_vpath);
@@ -944,7 +922,7 @@ create_panels_and_run_mc (void)
     midnight_set_buttonbar (the_bar);
 
     /* Run the Midnight Commander if no file was specified in the command line */
-    run_dlg (midnight_dlg);
+    dlg_run (midnight_dlg);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1130,7 +1108,7 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         copy_cmd ();
         break;
     case CK_PutCurrentPath:
-        put_current_path ();
+        midnight_put_panel_path (current_panel);
         break;
     case CK_PutCurrentLink:
         put_current_link ();
@@ -1139,7 +1117,8 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         put_current_tagged ();
         break;
     case CK_PutOtherPath:
-        put_other_path ();
+        if (get_other_type () == view_listing)
+            midnight_put_panel_path (other_panel);
         break;
     case CK_PutOtherLink:
         put_other_link ();
@@ -1466,7 +1445,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         /* Ctrl-Shift-Enter */
         if (parm == (KEY_M_CTRL | KEY_M_SHIFT | '\n'))
         {
-            put_current_path ();
+            midnight_put_panel_path (current_panel);
             put_prog_name ();
             return MSG_HANDLED;
         }
@@ -1739,7 +1718,7 @@ do_nc (void)
     edit_stack_init ();
 #endif
 
-    midnight_dlg = create_dlg (FALSE, 0, 0, LINES, COLS, midnight_colors, midnight_callback,
+    midnight_dlg = dlg_create (FALSE, 0, 0, LINES, COLS, midnight_colors, midnight_callback,
                                midnight_event, "[main]", NULL, DLG_NONE);
 
     /* Check if we were invoked as an editor or file viewer */
@@ -1760,7 +1739,7 @@ do_nc (void)
 
         ret = TRUE;
 
-        /* destroy_dlg destroys even current_panel->cwd_vpath, so we have to save a copy :) */
+        /* dlg_destroy destroys even current_panel->cwd_vpath, so we have to save a copy :) */
         if (mc_args__last_wd_file != NULL && vfs_current_is_local ())
             last_wd_string = g_strdup (vfs_path_as_str (current_panel->cwd_vpath));
 
@@ -1774,7 +1753,7 @@ do_nc (void)
     mc_global.midnight_shutdown = TRUE;
     dialog_switch_shutdown ();
     done_mc ();
-    destroy_dlg (midnight_dlg);
+    dlg_destroy (midnight_dlg);
     current_panel = NULL;
 
 #ifdef USE_INTERNAL_EDIT

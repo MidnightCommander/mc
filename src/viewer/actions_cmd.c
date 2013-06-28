@@ -578,6 +578,44 @@ mcview_adjust_size (WDialog * h)
     mcview_update_bytes_per_line (view);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+mcview_ok_to_quit (mcview_t * view)
+{
+    int r;
+
+    if (view->change_list == NULL)
+        return TRUE;
+
+    if (!mc_global.midnight_shutdown)
+    {
+        query_set_sel (2);
+        r = query_dialog (_("Quit"),
+                          _("File was modified. Save with exit?"), D_NORMAL, 3,
+                          _("&Yes"), _("&No"), _("&Cancel quit"));
+    }
+    else
+    {
+        r = query_dialog (_("Quit"),
+                          _("Midnight Commander is being shut down.\nSave modified file?"),
+                          D_NORMAL, 2, _("&Yes"), _("&No"));
+        /* Esc is No */
+        if (r == -1)
+            r = 1;
+    }
+
+    switch (r)
+    {
+    case 0:                    /* Yes */
+        return mcview_hexedit_save_changes (view) || mc_global.midnight_shutdown;
+    case 1:                    /* No */
+        mcview_hexedit_free_change_list (view);
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/

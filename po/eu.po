@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-06-15 10:56+0400\n"
+"POT-Creation-Date: 2013-06-27 16:02+0400\n"
 "PO-Revision-Date: 2013-03-13 08:51+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/projects/p/mc/language/eu/)\n"
@@ -4141,6 +4141,19 @@ msgstr "Ext2lib akatsa"
 msgid "Invalid value"
 msgstr "Balio baliogabea"
 
+msgid "File was modified. Save with exit?"
+msgstr "Fitxategia aldatu da. Gorde irtetzerakoan?"
+
+msgid "&Cancel quit"
+msgstr "Irteera bertan behera &utzi"
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
+msgstr ""
+"Midnight Commander itzaltzen ari da.\n"
+"Gorde aldatutako fitxategia?"
+
 msgid "Cannot spawn child process"
 msgstr "Ezin sortu ume prozesua"
 
@@ -4210,19 +4223,6 @@ msgstr ""
 "Fitxategia ezin gorde:\n"
 "%s"
 
-msgid "File was modified. Save with exit?"
-msgstr "Fitxategia aldatu da. Gorde irtetzerakoan?"
-
-msgid "&Cancel quit"
-msgstr "Irteera bertan behera &utzi"
-
-msgid ""
-"Midnight Commander is being shut down.\n"
-"Save modified file?"
-msgstr ""
-"Midnight Commander itzaltzen ari da.\n"
-"Gorde aldatutako fitxategia?"
-
 msgid "View: "
 msgstr "Ikusi:"
 
@@ -4239,7 +4239,7 @@ msgstr "Ezin ikusi: ez da fitxategi arrunta"
 
 #, fuzzy, c-format
 msgid ""
-"Cannot open \"%s\" in magic mode\n"
+"Cannot open \"%s\" in parse mode\n"
 "%s"
 msgstr ""
 "\"%s\" ezin ireki\n"

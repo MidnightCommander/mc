@@ -2,12 +2,12 @@
    Learn keys
 
    Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2007, 2009, 2011, 2012
+   2007, 2009, 2011, 2012, 2013
    The Free Software Foundation, Inc.
 
    Written by:
    Jakub Jelinek, 1995
-   Andrew Borodin <aborodin@vmail.ru>, 2012
+   Andrew Borodin <aborodin@vmail.ru>, 2012, 2013
 
    This file is part of the Midnight Commander.
 
@@ -126,7 +126,7 @@ learn_button (WButton * button, int action)
     }
 
     dlg_run_done (d);
-    destroy_dlg (d);
+    dlg_destroy (d);
 
     dlg_select_widget (learnkeys[action - B_USER].button);
 
@@ -276,7 +276,7 @@ init_learn (void)
     do_refresh ();
 
     learn_dlg =
-        create_dlg (TRUE, 0, 0, dlg_height, dlg_width, dialog_colors, learn_callback, NULL,
+        dlg_create (TRUE, 0, 0, dlg_height, dlg_width, dialog_colors, learn_callback, NULL,
                     "[Learn keys]", learn_title, DLG_CENTER);
 
     /* find first unshown button */
@@ -342,7 +342,7 @@ init_learn (void)
 static void
 learn_done (void)
 {
-    destroy_dlg (learn_dlg);
+    dlg_destroy (learn_dlg);
     repaint_screen ();
 }
 
@@ -403,7 +403,7 @@ learn_keys (void)
     application_keypad_mode ();
 
     init_learn ();
-    result = run_dlg (learn_dlg);
+    result = dlg_run (learn_dlg);
 
     old_esc_mode = save_old_esc_mode;
     mc_global.tty.alternate_plus_minus = save_alternate_plus_minus;

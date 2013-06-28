@@ -557,7 +557,6 @@ do_load_dir (const vfs_path_t * vpath, dir_list * list, sortfn * sort, gboolean 
     int status, link_to_dir, stale_link;
     int next_free = 0;
     struct stat st;
-    const char *vpath_str;
 
     /* ".." (if any) must be the first entry in the list */
     if (!set_zero_dir (list))
@@ -576,10 +575,14 @@ do_load_dir (const vfs_path_t * vpath, dir_list * list, sortfn * sort, gboolean 
 
     tree_store_start_check (vpath);
 
-    vpath_str = vfs_path_as_str (vpath);
-    /* Do not add a ".." entry to the root directory */
-    if ((vpath_str[0] == PATH_SEP) && (vpath_str[1] == '\0'))
-        next_free--;
+    {
+        const char *vpath_str;
+
+        vpath_str = vfs_path_as_str (vpath);
+        /* Do not add a ".." entry to the root directory */
+        if ((vpath_str[0] == PATH_SEP) && (vpath_str[1] == '\0'))
+            next_free--;
+    }
 
     while ((dp = mc_readdir (dirp)) != NULL)
     {
