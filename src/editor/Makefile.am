@@ -1,6 +1,6 @@
 EXTRA_DIST =
 
-if USE_EDIT
+if USE_INTERNAL_EDIT
 noinst_LTLIBRARIES = libedit.la
 else
 noinst_LTLIBRARIES =

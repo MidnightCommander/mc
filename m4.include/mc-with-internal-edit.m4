@@ -1,16 +1,18 @@
 dnl
 dnl Internal editor support.
 dnl
-AC_DEFUN([MC_WITH_EDIT], [
+AC_DEFUN([MC_WITH_INTERNAL_EDIT], [
 
-    AC_ARG_WITH([edit], AS_HELP_STRING([--with-edit], [Enable internal editor @<:@yes@:>@]))
+    AC_ARG_WITH([internal_edit],
+        AS_HELP_STRING([--with-internal-edit], [Enable internal editor @<:@yes@:>@]))
 
-    if test x$with_edit != xno; then
+    if test x$with_internal_edit != xno; then
             AC_DEFINE(USE_INTERNAL_EDIT, 1, [Define to enable internal editor])
-            use_edit=yes
+            use_internal_edit=yes
             AC_MSG_NOTICE([using internal editor])
+            edit_msg="yes"
     else
-            use_edit=no
+            use_internal_edit=no
             edit_msg="no"
     fi
 
@@ -27,7 +29,7 @@ AC_DEFUN([MC_WITH_EDIT], [
         [enable_aspell=no]
     )
 
-    if test x$with_edit != xno -a x$enable_aspell != xno; then
+    if test x$with_internal_edit != xno -a x$enable_aspell != xno; then
             AC_CHECK_HEADERS([aspell.h], [], [
                 AC_ERROR([Could not find aspell development headers])
             ], [])
@@ -40,7 +42,5 @@ AC_DEFUN([MC_WITH_EDIT], [
                 enable_aspell=no
                 AC_MSG_NOTICE([aspell support is disabled because gmodule support is not available])
             fi
-    else
-            edit_msg="yes"
     fi
 ])

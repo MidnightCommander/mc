@@ -79,7 +79,7 @@ SYNTAXFILES =			\
 	yum-repo.syntax		\
 	yxx.syntax
 
-if USE_EDIT
+if USE_INTERNAL_EDIT
 syntaxdir =		$(pkgdatadir)/syntax
 syntax_DATA =		$(SYNTAX_OUT) \
 			$(SYNTAXFILES)

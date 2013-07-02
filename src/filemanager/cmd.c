@@ -790,6 +790,8 @@ do_edit_at_line (const vfs_path_t * what_vpath, gboolean internal, long start_li
     else
 #endif /* USE_INTERNAL_EDIT */
     {
+        (void) internal;
+
         if (editor == NULL)
         {
             editor = getenv ("EDITOR");

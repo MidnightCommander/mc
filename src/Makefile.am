@@ -1,6 +1,6 @@
 SUBDIRS = filemanager man2hlp vfs viewer
 
-if USE_EDIT
+if USE_INTERNAL_EDIT
 SUBDIRS += editor
 endif
 
@@ -29,7 +29,7 @@ pkglibexecdir = $(libexecdir)/@PACKAGE@
 
 bin_PROGRAMS = mc
 
-if USE_EDIT
+if USE_INTERNAL_EDIT
 EDITLIB = editor/libedit.la
 endif
 
@@ -90,7 +90,7 @@ EXTRA_DIST = $(SRC_maintainer) $(SRC_charset)
 
 install-exec-hook:
 	$(MAKE) install_mcview
-if USE_EDIT
+if USE_INTERNAL_EDIT
 	$(MAKE) install_mcedit
 endif
 if USE_DIFF
@@ -111,7 +111,7 @@ install_mcdiff:
 
 uninstall-hook:
 	rm -f $(DESTDIR)$(bindir)/$(binprefix)/mcview
-if USE_EDIT
+if USE_INTERNAL_EDIT
 	rm -f $(DESTDIR)$(bindir)/$(binprefix)/mcedit
 endif
 if USE_DIFF

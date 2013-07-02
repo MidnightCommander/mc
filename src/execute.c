@@ -633,12 +633,16 @@ execute_external_editor_or_viewer (const char *command, const vfs_path_t * filen
         char **argv_cmd_options;
         int argv_count;
 
-        g_shell_parse_argv (extern_cmd_options, &argv_count, &argv_cmd_options, NULL);
+        if (g_shell_parse_argv (extern_cmd_options, &argv_count, &argv_cmd_options, NULL))
+        {
+            do_executev (command, EXECUTE_INTERNAL, argv_cmd_options);
+            g_strfreev (argv_cmd_options);
+        }
+        else
+            do_executev (command, EXECUTE_INTERNAL, NULL);
+
         g_free (extern_cmd_options);
 
-        do_executev (command, EXECUTE_INTERNAL, argv_cmd_options);
-
-        g_strfreev (argv_cmd_options);
     }
 
     execute_cleanup_with_vfs_arg (filename_vpath, &localcopy_vpath, &mtime);
