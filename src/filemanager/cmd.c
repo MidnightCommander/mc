@@ -315,7 +315,7 @@ compare_files (const vfs_path_t * vpath1, const vfs_path_t * vpath2, off_t size)
                 data2 = mmap (0, size, PROT_READ, MAP_FILE | MAP_PRIVATE, file2, 0);
                 if (data2 != (char *) -1)
                 {
-                    rotate_dash ();
+                    rotate_dash (TRUE);
                     result = memcmp (data1, data2, size);
                     munmap (data2, size);
                 }
@@ -325,7 +325,7 @@ compare_files (const vfs_path_t * vpath1, const vfs_path_t * vpath2, off_t size)
             /* Don't have mmap() :( Even more ugly :) */
             char buf1[BUFSIZ], buf2[BUFSIZ];
             int n1, n2;
-            rotate_dash ();
+            rotate_dash (TRUE);
             do
             {
                 while ((n1 = read (file1, buf1, BUFSIZ)) == -1 && errno == EINTR);
@@ -338,6 +338,8 @@ compare_files (const vfs_path_t * vpath1, const vfs_path_t * vpath2, off_t size)
         }
         close (file1);
     }
+    rotate_dash (FALSE);
+
     return result;
 }
 

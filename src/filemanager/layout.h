@@ -79,7 +79,7 @@ void set_hintbar (const char *str);
 
 /* Rotating dash routines */
 void use_dash (gboolean flag);  /* Disable/Enable rotate_dash routines */
-void rotate_dash (void);
+void rotate_dash (gboolean show);
 
 #ifdef ENABLE_SUBSHELL
 gboolean do_load_prompt (void);

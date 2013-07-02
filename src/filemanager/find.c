@@ -1185,19 +1185,19 @@ find_ignore_dir_search (const char *dir)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-find_rotate_dash (const WDialog * h, gboolean finish)
+find_rotate_dash (const WDialog * h, gboolean show)
 {
-    static const char rotating_dash[] = "|/-\\";
-    static unsigned int pos = 0;
+    static const char rotating_dash[4] = "|/-\\";
+    static size_t pos = 0;
 
     if (verbose)
     {
         const Widget *w = WIDGET (h);
 
-        pos = (pos + 1) % 4;
         tty_setcolor (h->color[DLG_COLOR_NORMAL]);
         widget_move (h, w->lines - 7, w->cols - 4);
-        tty_print_char (finish ? ' ' : rotating_dash[pos]);
+        tty_print_char (show ? rotating_dash[pos] : ' ');
+        pos = (pos + 1) % sizeof (rotating_dash);
         mc_refresh ();
     }
 }
@@ -1261,7 +1261,7 @@ do_search (WDialog * h)
                                                   ignore_count), ignore_count);
                             status_update (msg);
                         }
-                        find_rotate_dash (h, TRUE);
+                        find_rotate_dash (h, FALSE);
                         stop_idle (h);
                         return 0;
                     }
@@ -1357,7 +1357,7 @@ do_search (WDialog * h)
             ;
     }                           /* for */
 
-    find_rotate_dash (h, FALSE);
+    find_rotate_dash (h, TRUE);
 
     return 1;
 }
@@ -1766,8 +1766,8 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
             list->list[next_free].second_sort_key = NULL;
             next_free++;
             g_free (name);
-            if (!(next_free & 15))
-                rotate_dash ();
+            if ((next_free & 15) == 0)
+                rotate_dash (TRUE);
         }
 
         if (next_free)
@@ -1793,6 +1793,7 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
     do_search (NULL);           /* force do_search to release resources */
     g_free (old_dir);
     old_dir = NULL;
+    rotate_dash (FALSE);
 
     return return_value;
 }
