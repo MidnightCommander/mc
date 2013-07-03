@@ -655,3 +655,12 @@ Configuration:
   Support for charset:        ${charset_msg}
   Search type:                ${SEARCH_TYPE}
 ])
+
+dnl option checking is disable by default due to AC_CONFIG_SUBDIRS
+dnl we enable it back for top-level ./configure
+if test -n "$ac_unrecognized_opts"; then
+  case $enable_option_checking in
+    fatal) AC_MSG_ERROR([unrecognized options: $ac_unrecognized_opts]) ;;
+    *)     AC_MSG_WARN( [unrecognized options: $ac_unrecognized_opts]) ;;
+  esac
+fi
