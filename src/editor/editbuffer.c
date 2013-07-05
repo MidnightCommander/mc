@@ -675,7 +675,7 @@ edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size)
     }
 
     /* reverse buffer */
-    for (i = 0; i < buf->b2->len / 2; i++)
+    for (i = 0; i < (off_t) buf->b2->len / 2; i++)
     {
         void **b1, **b2;
 
