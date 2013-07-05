@@ -155,6 +155,8 @@ my_setup (void)
     load_codepages_list ();
 #endif /* HAVE_CHARSET */
 
+    option_filesize_threshold = (char *) "64M";
+
     test_edit = edit_init (NULL, 0, 0, 24, 80, vfs_path_from_str ("test-data.txt"), 1);
     editcmd_dialog_completion_show__init ();
 }
@@ -264,7 +266,9 @@ START_PARAMETRIZED_TEST (test_autocomplete, test_autocomplete_ds)
         {
             int chr;
 
-            chr = edit_get_byte (test_edit, data->input_completed_word_start_pos + i++);
+            chr =
+                edit_buffer_get_byte (&test_edit->buffer,
+                                      data->input_completed_word_start_pos + i++);
             if (isspace (chr))
                 break;
             g_string_append_c (actual_completed_str, chr);
@@ -336,7 +340,9 @@ START_PARAMETRIZED_TEST (test_autocomplete_single, test_autocomplete_single_ds)
         {
             int chr;
 
-            chr = edit_get_byte (test_edit, data->input_completed_word_start_pos + i++);
+            chr =
+                edit_buffer_get_byte (&test_edit->buffer,
+                                      data->input_completed_word_start_pos + i++);
             if (isspace (chr))
                 break;
             g_string_append_c (actual_completed_str, chr);

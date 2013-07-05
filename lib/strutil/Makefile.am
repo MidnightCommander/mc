@@ -7,6 +7,7 @@ libmcstrutil_la_SOURCES = \
 	strutilascii.c \
 	strutil.c \
 	strutilutf8.c \
-	strverscmp.c
+	strverscmp.c \
+	xstrtol.c
 
 AM_CPPFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir)

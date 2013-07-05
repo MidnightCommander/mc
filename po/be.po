@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-06-27 16:02+0400\n"
+"POT-Creation-Date: 2013-07-05 09:13+0400\n"
 "PO-Revision-Date: 2013-03-13 08:51+0000\n"
 "Last-Translator: Павал Шаламіцкі <yehekim@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/projects/p/mc/language/"
@@ -924,8 +924,10 @@ msgstr "Немагчыма атрымаць памер або дазволы ф�
 msgid "\"%s\" is not a regular file"
 msgstr "«%s» ня ёсьць звычайным файлам"
 
-#, c-format
-msgid "File \"%s\" is too large"
+#, fuzzy, c-format
+msgid ""
+"File \"%s\" is too large.\n"
+"Open it anyway?"
 msgstr "Файл «%s» — завялікі"
 
 #, c-format

@@ -9,6 +9,7 @@
 #include "lib/widget.h"         /* Widget */
 
 #include "edit-impl.h"
+#include "editbuffer.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -74,10 +75,7 @@ struct WEdit
     vfs_path_t *dir_vpath;      /* NULL if filename is absolute */
 
     /* dynamic buffers and cursor position for editor: */
-    off_t curs1;                /* position of the cursor from the beginning of the file. */
-    off_t curs2;                /* position from the end of the file */
-    unsigned char *buffers1[MAXBUFF + 1];       /* all data up to curs1 */
-    unsigned char *buffers2[MAXBUFF + 1];       /* all data from end of file down to curs2 */
+    edit_buffer_t buffer;
 
 #ifdef HAVE_CHARSET
     /* multibyte support */
@@ -99,7 +97,6 @@ struct WEdit
     off_t found_start;          /* the found word from a search - start position */
 
     /* display information */
-    off_t last_byte;            /* Last byte of file */
     long start_display;         /* First char displayed */
     long start_col;             /* First displayed column, negative */
     long max_column;            /* The maximum cursor position ever reached used to calc hori scroll bar */
@@ -117,11 +114,9 @@ struct WEdit
     unsigned int fullscreen:1;  /* Is window fullscreen or not */
     long prev_col;              /* recent column position of the cursor - used when moving
                                    up or down past lines that are shorter than the current line */
-    long curs_line;             /* line number of the cursor. */
     long start_line;            /* line number of the top of the page */
 
     /* file info */
-    long total_lines;           /* total lines in the file */
     off_t mark1;                /* position of highlight start */
     off_t mark2;                /* position of highlight end */
     off_t end_mark_curs;        /* position of cursor after end of highlighting */

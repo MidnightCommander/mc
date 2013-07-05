@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-06-27 16:02+0400\n"
+"POT-Creation-Date: 2013-07-05 09:13+0400\n"
 "PO-Revision-Date: 2013-03-17 11:42+0000\n"
 "Last-Translator: Fabian Affolter <fab@fedoraproject.org>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/mc/language/de/)\n"
@@ -902,8 +902,10 @@ msgstr "Kann Größe/Zugriffsrechte der Datei \"%s\" nicht ermitteln"
 msgid "\"%s\" is not a regular file"
 msgstr "\"%s\" ist keine normale Datei"
 
-#, c-format
-msgid "File \"%s\" is too large"
+#, fuzzy, c-format
+msgid ""
+"File \"%s\" is too large.\n"
+"Open it anyway?"
 msgstr "Die Datei \"%s\" ist zu groß"
 
 #, c-format
