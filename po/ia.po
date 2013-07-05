@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-06-27 16:02+0400\n"
+"POT-Creation-Date: 2013-07-05 09:13+0400\n"
 "PO-Revision-Date: 2013-03-13 08:51+0000\n"
 "Last-Translator: Martijn Dekker <mcdutchie@hotmail.com>\n"
 "Language-Team: Interlingua (http://www.transifex.com/projects/p/mc/language/"
@@ -880,8 +880,10 @@ msgstr "Impossibile obtener dimension/permissiones pro %s"
 msgid "\"%s\" is not a regular file"
 msgstr "\"%s\" non es un file regular"
 
-#, c-format
-msgid "File \"%s\" is too large"
+#, fuzzy, c-format
+msgid ""
+"File \"%s\" is too large.\n"
+"Open it anyway?"
 msgstr "Le file \"%s\" es multo grande"
 
 #, c-format

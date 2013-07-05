@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-06-27 16:02+0400\n"
+"POT-Creation-Date: 2013-07-05 09:13+0400\n"
 "PO-Revision-Date: 2013-03-13 08:51+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/mc/"
@@ -902,8 +902,10 @@ msgstr "无法获取文件%s的大小和权限信息"
 msgid "\"%s\" is not a regular file"
 msgstr "\"%s\"不是一个常规文件"
 
-#, c-format
-msgid "File \"%s\" is too large"
+#, fuzzy, c-format
+msgid ""
+"File \"%s\" is too large.\n"
+"Open it anyway?"
 msgstr "文件\"%s\"太大"
 
 #, c-format

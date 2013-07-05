@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-06-27 16:02+0400\n"
+"POT-Creation-Date: 2013-07-05 09:13+0400\n"
 "PO-Revision-Date: 2013-03-26 10:28+0000\n"
 "Last-Translator: mbouzada <mbouzada@gmail.com>\n"
 "Language-Team: Galician (http://www.transifex.com/projects/p/mc/language/"
@@ -927,8 +927,10 @@ msgstr "Non é posíbel obter tamaño/permisos do ficheiro: %s"
 msgid "\"%s\" is not a regular file"
 msgstr "«%s» non é un ficheiro regular"
 
-#, c-format
-msgid "File \"%s\" is too large"
+#, fuzzy, c-format
+msgid ""
+"File \"%s\" is too large.\n"
+"Open it anyway?"
 msgstr "O ficheiro «%s» é demasiado grande"
 
 #, c-format
