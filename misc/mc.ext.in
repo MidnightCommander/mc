@@ -685,6 +685,11 @@ type/i/^zip\ archive
 	Open=%cd %p/uzip://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
 
+# jar(zip)
+type/i/^Java\ Jar\ file\ data\ \(zip\)
+	Open=%cd %p/uzip://
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zip
+
 # zoo
 shell/i/.zoo
 	Open=%cd %p/uzoo://
