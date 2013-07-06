@@ -9,24 +9,17 @@
 # rar and unrar can be found on http://www.rarlabs.com/
 
 RAR=rar
-UNRAR=$RAR
 
-# Prefer unrar (freeware).  Try to find unrar in $PATH.
-save_IFS="$IFS"; IFS=:
-for dir in $PATH; do
-    IFS="$save_IFS"
-    test -z "$dir" && dir=.
-    if test -x "$dir/unrar" -a -f "$dir/unrar"; then
-	UNRAR="$dir/unrar"
-	break
-    fi
-done
+# Prefer unrar (freeware).
+UNRAR=`which unrar 2>/dev/null`
 
-if [ ! -x $UNRAR -a -x $RAR ]; then
-    UNRAR=$RAR
-fi
+[ -z $UNRAR ] && UNRAR=$RAR
+[ ! -x $UNRAR -a -x $RAR ] && UNRAR=$RAR
 
-mcrarfs_list ()
+# Define $UNRAR version
+UNRAR_VERSION=`$UNRAR -? | grep "Copyright" | sed -e 's/.*\([0-9]\)\..*/\1/'`
+
+mcrar4fs_list ()
 {
      $UNRAR v -c- -cfg- "$1" | @AWK@ -v uid=`id -u` -v gid=`id -g` '
 BEGIN { flag=0 }
@@ -42,6 +35,27 @@ flag==1 {
 	    $6="-rw-r--r--"
     printf "%s 1 %s %s %d %02d/%02d/%02d %s ./%s\n", $6, uid, gid, $1, a[2], a[1], a[3], $5, str
 }'
+}
+
+mcrar5fs_list ()
+{
+     $UNRAR v -c- -cfg- "$1" | @AWK@ -v uid=`id -u` -v gid=`id -g` '
+BEGIN { flag=0 }
+/^-----------/ { flag++; if (flag > 1) exit 0; next }
+flag==1 {
+    split($5, a, "-")
+    if (index($1, "D") != 0)
+	$1="drwxr-xr-x"
+    else
+	if (index($1, ".") != 0)
+	    $1="-rw-r--r--"
+    printf "%s 1 %s %s %d %02d/%02d/%02d %s ./%s\n", $1, uid, gid, $2, a[2], a[1], a[3], $6, $8
+}'
+}
+
+mcrarfs_list ()
+{
+    [ x$UNRAR_VERSION = x5 ] && mcrar5fs_list "$@" || mcrar4fs_list "$@"
 }
 
 mcrarfs_copyin ()
