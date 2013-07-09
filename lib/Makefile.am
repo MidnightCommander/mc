@@ -63,12 +63,10 @@ libmc_la_LIBADD = \
 	vfs/libmcvfs.la \
 	widget/libmcwidget.la
 
-libmc_la_LIBADD += $(MCLIBS) $(SLANGLIB)
-
-if HAVE_GMODULE
-    libmc_la_LIBADD += $(GMODULE_LIBS)
-else
-    libmc_la_LIBADD += $(GLIB_LIBS)
-endif
-
-libmc_la_LIBADD += $(PCRE_LIBS) $(LIBICONV) $(INTLLIBS)
+libmc_la_LIBADD += \
+	$(MCLIBS) \
+	$(SLANGLIB) \
+	$(GLIB_LIBS) \
+	$(PCRE_LIBS) \
+	$(LIBICONV) \
+	$(INTLLIBS)

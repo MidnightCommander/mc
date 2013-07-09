@@ -145,7 +145,6 @@ dnl Check for main libraies
 dnl ############################################################################
 
 AC_CHECK_GLIB
-AC_G_MODULE_SUPPORTED
 MC_WITH_SCREEN
 MC_CHECK_SEARCH_TYPE
 dnl X11 support. Used to read keyboard modifiers when running under X11.
@@ -314,7 +313,7 @@ linux*)
 	    [AC_DEFINE(HAVE_LIBGPM, 1,
 		       [Define to enable gpm mouse support on Linux])
 	    mouse_lib="gpm and xterm"
-	    MCLIBS="$MCLIBS -lgpm"],
+	    MCLIBS="$MCLIBS -lgpm -ltinfo"],
             if test "x$with_gpm_mouse" = "xyes"; then
                 [AC_MSG_ERROR([libgpm is missing or older than 0.18])]
             else

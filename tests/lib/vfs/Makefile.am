@@ -10,8 +10,9 @@ AM_LDFLAGS = @TESTS_LDFLAGS@
 
 EXTRA_DIST = mc.charsets
 
-LIBS=@CHECK_LIBS@  \
-    $(top_builddir)/lib/libmc.la
+LIBS = @CHECK_LIBS@ \
+	$(top_builddir)/lib/libmc.la \
+	$(GLIB_LIBS)
 
 TESTS = \
 	canonicalize_pathname \

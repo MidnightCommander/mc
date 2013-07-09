@@ -4,7 +4,9 @@ AM_CPPFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) @CHECK_CFLAGS@
 
 AM_LDFLAGS = @TESTS_LDFLAGS@
 
-LIBS = @CHECK_LIBS@ $(top_builddir)/lib/libmc.la
+LIBS = @CHECK_LIBS@ \
+	$(top_builddir)/lib/libmc.la \
+	$(GLIB_LIBS)
 
 EXTRA_DIST = utilunix__my_system-common.c
 

@@ -45,7 +45,9 @@ libinternal_la_LIBADD = \
 
 mc_LDADD = \
 	libinternal.la \
-	$(top_builddir)/lib/libmc.la
+	$(top_builddir)/lib/libmc.la \
+	$(GLIB_LIBS) \
+	$(PCRE_LIBS)
 
 if ENABLE_VFS_SMB
 # this is a hack for linking with own samba library in simple way

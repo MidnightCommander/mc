@@ -5,7 +5,9 @@ AM_CPPFLAGS = \
 	-I$(top_srcdir)/lib/search \
 	@CHECK_CFLAGS@
 
-LIBS = @CHECK_LIBS@ $(top_builddir)/lib/libmc.la
+LIBS = @CHECK_LIBS@ \
+	$(top_builddir)/lib/libmc.la \
+	$(GLIB_LIBS)
 
 TESTS = \
 	regex_replace_esc_seq \

@@ -7,7 +7,9 @@ AM_CPPFLAGS = \
 
 AM_LDFLAGS = @TESTS_LDFLAGS@
 
-LIBS=@CHECK_LIBS@  $(top_builddir)/lib/libmc.la
+LIBS = @CHECK_LIBS@ \
+	$(top_builddir)/lib/libmc.la \
+	$(GLIB_LIBS)
 
 TESTS = \
 	config_string \
