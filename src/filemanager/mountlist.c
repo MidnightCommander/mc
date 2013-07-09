@@ -2,10 +2,8 @@
    Return a list of mounted file systems
 
    Copyright (C) 1991, 1992, 1997, 1998, 1999, 2000, 2001, 2002, 2003,
-   2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011 Free Software Foundation, Inc.
-
-   Copyright (C) 1991, 1992, 2011
-   The Free Software Foundation, Inc.
+   2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2013
+   Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
 
@@ -295,34 +293,12 @@ me_remote (char const *fs_name, char const *fs_type _GL_UNUSED)
 #define PROPAGATE_TOP_BIT(x) ((x) | ~ (EXTRACT_TOP_BIT (x) - 1))
 
 #ifdef STAT_STATVFS
-/* Return true if statvfs works.  This is false for statvfs on systems
-   with GNU libc on Linux kernels before 2.6.36, which stats all
-   preceding entries in /proc/mounts; that makes df hang if even one
-   of the corresponding file systems is hard-mounted but not available.  */
 #if ! (__linux__ && (__GLIBC__ || __UCLIBC__))
-/* The FRSIZE fallback is not required in this case.  */
 #undef STAT_STATFS2_FRSIZE
-static int
-statvfs_works (void)
-{
-    return 1;
-}
 #else
-#include <string.h>             /* for strverscmp */
 #include <sys/utsname.h>
 #include <sys/statfs.h>
 #define STAT_STATFS2_BSIZE 1
-
-static int
-statvfs_works (void)
-{
-    static int statvfs_works_cache = -1;
-    struct utsname name;
-
-    if (statvfs_works_cache < 0)
-        statvfs_works_cache = (uname (&name) == 0 && 0 <= strverscmp (name.release, "2.6.36"));
-    return statvfs_works_cache;
-}
 #endif
 #endif
 
@@ -336,6 +312,8 @@ statvfs_works (void)
 #define IS_EINTR(x) 0
 #endif
 #endif /* STAT_READ_FILSYS */
+
+#include "lib/strutil.h"
 
 /*** file scope type declarations ****************************************************************/
 
@@ -370,6 +348,30 @@ static struct mount_entry *mc_mount_list = NULL;
 #endif /* HAVE_INFOMOUNT_LIST */
 
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+#ifdef STAT_STATVFS
+/* Return true if statvfs works.  This is false for statvfs on systems
+   with GNU libc on Linux kernels before 2.6.36, which stats all
+   preceding entries in /proc/mounts; that makes df hang if even one
+   of the corresponding file systems is hard-mounted but not available.  */
+static int
+statvfs_works (void)
+{
+#if ! (__linux__ && (__GLIBC__ || __UCLIBC__))
+    /* The FRSIZE fallback is not required in this case.  */
+    return 1;
+#else
+    static int statvfs_works_cache = -1;
+    struct utsname name;
+
+    if (statvfs_works_cache < 0)
+        statvfs_works_cache = (uname (&name) == 0 && 0 <= str_verscmp (name.release, "2.6.36"));
+    return statvfs_works_cache;
+}
+#endif
+#endif
+
 /* --------------------------------------------------------------------------------------------- */
 
 #ifdef HAVE_INFOMOUNT_LIST
