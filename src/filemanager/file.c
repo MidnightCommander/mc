@@ -77,8 +77,6 @@
 #include "src/background.h"     /* do_background() */
 #endif
 
-#include "layout.h"             /* rotate_dash() */
-
 /* Needed for current_panel, other_panel and WTree */
 #include "dir.h"
 #include "filegui.h"
