@@ -1,25 +1,24 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
-# Slava Zanko <slavazanko@gmail.com>, 2011.
-# Tadashi Jokagi <elf2000@gmail.com>, 2012.
-# Tadashi Jokagi <elf@elf.no-ip.org>, 2011.
-# Yoshitaka Yamashita <drum@magic-touch.org>, 2012.
+# Slava Zanko <slavazanko@gmail.com>, 2011
+# Tadashi "ELF" Jokagi <elf@poyo.jp>, 2012
+# Tadashi "ELF" Jokagi <elf@poyo.jp>, 2011
+# Yoshitaka Yamashita <drum@magic-touch.org>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2013-07-05 09:13+0400\n"
-"PO-Revision-Date: 2013-03-13 08:51+0000\n"
-"Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
-"Language-Team: Japanese (http://www.transifex.com/projects/p/mc/language/"
-"ja/)\n"
-"Language: ja\n"
+"PO-Revision-Date: 2013-07-05 08:44+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"Language-Team: Japanese (http://www.transifex.com/projects/p/mc/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Warning: cannot load codepages list"
@@ -57,10 +56,7 @@ msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
-msgstr ""
-"ファイル「%s」は既に編集を始めています。\n"
-"ユーザー: %s\n"
-"プロセス ID: %d"
+msgstr "ファイル「%s」は既に編集を始めています。\nユーザー: %s\nプロセス ID: %d"
 
 msgid "File locked"
 msgstr "ファイルがロックされています"
@@ -128,17 +124,13 @@ msgstr ""
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"スキン '%s' をロードできませんでした。\n"
-"デフォルトのスキンがロードされます。"
+msgstr "スキン '%s' をロードできませんでした。\nデフォルトのスキンがロードされます。"
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"スキン '%s' を正しくパースできません。\n"
-"デフォルトのスキンがロードされます。"
+msgstr "スキン '%s' を正しくパースできません。\nデフォルトのスキンがロードされます。"
 
 #, c-format
 msgid ""
@@ -434,9 +426,7 @@ msgstr "環境変数 TERM がセットされていません\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"スクリーンサイズ %dx%d はサポートされていません\n"
-"TERM環境変数の値をチェックしてください\n"
+msgstr "スクリーンサイズ %dx%d はサポートされていません\nTERM環境変数の値をチェックしてください\n"
 
 msgid "Warning"
 msgstr "警告"
@@ -1505,9 +1495,7 @@ msgstr "文法ファイルの読み込み"
 msgid ""
 "Cannot open file %s\n"
 "%s"
-msgstr ""
-"ファイル %s が開けません\n"
-"%s"
+msgstr "ファイル %s が開けません\n%s"
 
 #, c-format
 msgid "Error in file %s on line %d"
@@ -1527,9 +1515,9 @@ msgstr ""
 msgid "The shell is already running a command"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
-msgstr "`exit' と入力すれば Midnight Commander へ戻ります"
+msgstr ""
 
 msgid "Set &all"
 msgstr "すべて設定(&a)"
@@ -1559,9 +1547,7 @@ msgstr ""
 msgid ""
 "Cannot chmod \"%s\"\n"
 "%s"
-msgstr ""
-"chmod \"%s\" ができません\n"
-"%s"
+msgstr "chmod \"%s\" ができません\n%s"
 
 #, c-format
 msgid ""
@@ -1753,7 +1739,8 @@ msgstr "反転(&R)"
 msgid "Sort order"
 msgstr "並び変える"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 msgid "Confirmation|&Delete"
 msgstr "確認 | 削除(&D)"
 
@@ -2087,9 +2074,9 @@ msgstr ""
 msgid "edit symlink: %s"
 msgstr "シンボリックリンクの編集: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' is not a symbolic link"
-msgstr "`%s'はシンボリックリンクではありません"
+msgstr ""
 
 msgid "FTP to machine"
 msgstr ""
@@ -2129,9 +2116,7 @@ msgstr ""
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
-msgstr ""
-"「%s」に移動できません\n"
-"%s"
+msgstr "「%s」に移動できません\n%s"
 
 msgid "Cannot read directory contents"
 msgstr ""
@@ -2590,9 +2575,9 @@ msgstr ""
 msgid "&Background"
 msgstr "バックグラウンド(&B)"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid source pattern '%s'"
-msgstr "トークン番号 %d が正しくありません"
+msgstr ""
 
 msgid "&Chdir"
 msgstr "ディレクトリ移動(&C)"
@@ -3263,9 +3248,7 @@ msgstr "SUID と SGID のプログラムを検索"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"書き出しのために %s をオープンすることができません:\n"
-"%s\n"
+msgstr "書き出しのために %s をオープンすることができません:\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3304,9 +3287,7 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"ファイル %s に書き込めません:\n"
-"%s\n"
+msgstr "ファイル %s に書き込めません:\n%s\n"
 
 msgid "Debug"
 msgstr "デバッグ"
@@ -3330,9 +3311,7 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"ファイル %s は root やあなたの所有物ではないのに誰でも書き込み\n"
-"可能です.利用するとあなたのセキュリティを侵害する恐れがあります"
+msgstr "ファイル %s は root やあなたの所有物ではないのに誰でも書き込み\n可能です.利用するとあなたのセキュリティを侵害する恐れがあります"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3393,15 +3372,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"%s を押してこのメッセージが\n"
-"消えるのを待ってください。そ\n"
-"して、もう一度押してボタンの\n"
-"横に「良」が表示されるのを\n"
-"確認します。\n"
-"\n"
-"中止するにはエスケープキーを押して待ってく\n"
-"ださい"
+msgstr "%s を押してこのメッセージが\n消えるのを待ってください。そ\nして、もう一度押してボタンの\n横に「良」が表示されるのを\n確認します。\n\n中止するにはエスケープキーを押して待ってく\nださい"
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3417,9 +3388,7 @@ msgstr "良"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"すべてのキーは問題なさそうです。\n"
-"すばらしい"
+msgstr "すべてのキーは問題なさそうです。\nすばらしい"
 
 msgid "&Discard"
 msgstr "破棄(&D)"
@@ -3427,9 +3396,7 @@ msgstr "破棄(&D)"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"すばらしい! ターミナルデータベースは完成しました!\n"
-"すべてのキーは動作します"
+msgstr "すばらしい! ターミナルデータベースは完成しました!\nすべてのキーは動作します"
 
 msgid ""
 "Press all the keys mentioned here. After you have done it, check\n"
@@ -3564,17 +3531,13 @@ msgstr "キャッシュのディレクトリー:"
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"cpio アーカイブを開けません\n"
-"%s"
+msgstr "cpio アーカイブを開けません\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"cpio アーカイブの終りが早すぎます\n"
-"%s"
+msgstr "cpio アーカイブの終りが早すぎます\n%s"
 
 #, c-format
 msgid ""
@@ -3582,10 +3545,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"cpio アーカイブ内 %s のハードリンクが\n"
-"矛盾しています\n"
-"%s"
+msgstr "cpio アーカイブ内 %s のハードリンクが\n矛盾しています\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3601,17 +3561,13 @@ msgstr "%s の中で壊れた cpio ヘッダに遭遇した"
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"予期しない EOF です\n"
-"%s"
+msgstr "予期しない EOF です\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"%s アーカイブを開くことが出来ません\n"
-"%s"
+msgstr "%s アーカイブを開くことが出来ません\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "不整合な extfs アーカイブです"
@@ -3788,17 +3744,13 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"警告: %s に無効な行があります:\n"
-"%s\n"
+msgstr "警告: %s に無効な行があります:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"警告: %2$s に無効なフラグ %1$c があります:\n"
-"%3$s\n"
+msgstr "警告: %2$s に無効なフラグ %1$c があります:\n%3$s\n"
 
 #, c-format
 msgid "sftp: an error occurred while reading %s: %s"
@@ -3887,9 +3839,7 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"tarアーカイブ%sを\n"
-"開けません"
+msgstr "tarアーカイブ%sを\n開けません"
 
 msgid "Inconsistent tar archive"
 msgstr "tar アーカイブに不整合"
@@ -4049,9 +3999,7 @@ msgstr ""
 msgid ""
 "Cannot save file:\n"
 "%s"
-msgstr ""
-"ファイルの保存ができません:\n"
-"%s"
+msgstr "ファイルの保存ができません:\n%s"
 
 msgid "View: "
 msgstr ""
@@ -4060,20 +4008,16 @@ msgstr ""
 msgid ""
 "Cannot open \"%s\"\n"
 "%s"
-msgstr ""
-"「%s」を開けません\n"
-"%s"
+msgstr "「%s」を開けません\n%s"
 
 msgid "Cannot view: not a regular file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open \"%s\" in parse mode\n"
 "%s"
 msgstr ""
-"「%s」を開けません\n"
-"%s"
 
 msgid "Seeking to search result"
 msgstr ""

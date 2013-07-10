@@ -1,23 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
-# Slava Zanko <slavazanko@gmail.com>, 2011.
-# Yasen Pramatarov <yasen@lindeas.com>, 2011, 2012.
+# Slava Zanko <slavazanko@gmail.com>, 2011
+# Yasen Pramatarov <yasen@lindeas.com>, 2011-2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2013-07-05 09:13+0400\n"
-"PO-Revision-Date: 2013-03-13 08:51+0000\n"
-"Last-Translator: Yasen Pramatarov <yasen@lindeas.com>\n"
-"Language-Team: Bulgarian (http://www.transifex.com/projects/p/mc/language/"
-"bg/)\n"
-"Language: bg\n"
+"PO-Revision-Date: 2013-07-05 08:44+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"Language-Team: Bulgarian (http://www.transifex.com/projects/p/mc/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: bg\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Warning: cannot load codepages list"
@@ -364,7 +363,7 @@ msgid "Underline"
 msgstr "Подчертаване"
 
 msgid "Understrike"
-msgstr ""
+msgstr "Подчертаване"
 
 msgid "Pipe"
 msgstr ""
@@ -425,12 +424,10 @@ msgstr "Променливата TERM не е установена!\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"Размер на екрана %dx%d не е поддържан.\n"
-"Проверете променливата на средата TERM.\n"
+msgstr "Размер на екрана %dx%d не е поддържан.\nПроверете променливата на средата TERM.\n"
 
 msgid "Warning"
-msgstr "Внимание"
+msgstr "Предупреждение"
 
 msgid "Pipe failed"
 msgstr ""
@@ -559,7 +556,7 @@ msgid "Launches the file viewer on a file"
 msgstr "Показване съдържанието на файл"
 
 msgid "Edit files"
-msgstr ""
+msgstr "Редактиране на файлове"
 
 msgid "Forces xterm features"
 msgstr "Използване възможности на xterm"
@@ -821,7 +818,7 @@ msgstr "Разлика:"
 
 #, c-format
 msgid "\"%s\" is a directory"
-msgstr ""
+msgstr "\"%s\" е директория"
 
 #, c-format
 msgid ""
@@ -860,11 +857,11 @@ msgstr ""
 msgid "\"%s\" is not a regular file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "File \"%s\" is too large.\n"
 "Open it anyway?"
-msgstr "Файлът \"%s\" е твърде голям"
+msgstr ""
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -978,7 +975,7 @@ msgid "Confirm save file: \"%s\""
 msgstr ""
 
 msgid "Save file"
-msgstr ""
+msgstr "Запазване на файл"
 
 msgid "&Save"
 msgstr "Запази"
@@ -1024,7 +1021,7 @@ msgid ""
 msgstr ""
 
 msgid "Close file"
-msgstr ""
+msgstr "Затваряне на файл"
 
 #, c-format
 msgid ""
@@ -1033,13 +1030,13 @@ msgid ""
 msgstr ""
 
 msgid "This function is not implemented"
-msgstr ""
+msgstr "Това действие все още не е внедрено"
 
 msgid "Copy to clipboard"
 msgstr ""
 
 msgid "Unable to save to file"
-msgstr ""
+msgstr "Грешка при запис на файла"
 
 msgid "Cut to clipboard"
 msgstr ""
@@ -1383,7 +1380,7 @@ msgid "Wrap mode"
 msgstr "Режим на пренасяне"
 
 msgid "Tabulation"
-msgstr ""
+msgstr "Табулация"
 
 msgid "&Fake half tabs"
 msgstr "Фалшиви полу-tab-ове"
@@ -1475,7 +1472,7 @@ msgid "&Add word"
 msgstr ""
 
 msgid "Language"
-msgstr ""
+msgstr "Език"
 
 msgid "Misspelled"
 msgstr ""
@@ -1487,7 +1484,7 @@ msgid "Suggest"
 msgstr ""
 
 msgid "Select language"
-msgstr ""
+msgstr "Избор на език"
 
 msgid "Load syntax file"
 msgstr ""
@@ -1516,9 +1513,9 @@ msgstr ""
 msgid "The shell is already running a command"
 msgstr "Обвивката вече изпълнява команда"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
-msgstr "Напишете `exit', за да се върнете в Midnight Commander"
+msgstr ""
 
 msgid "Set &all"
 msgstr "Прм всич"
@@ -1575,7 +1572,7 @@ msgid "Alwa&ys"
 msgstr "Винаги"
 
 msgid "File operations"
-msgstr ""
+msgstr "Действия с файлове"
 
 msgid "&Verbose operation"
 msgstr "Детайли при операции"
@@ -1602,7 +1599,7 @@ msgid "Timeout:"
 msgstr "Изчакване:"
 
 msgid "Pause after run"
-msgstr ""
+msgstr "Спиране след изпълнение"
 
 msgid "Use internal edi&t"
 msgstr ""
@@ -1740,7 +1737,8 @@ msgstr "Обратен ред"
 msgid "Sort order"
 msgstr "Ред на сортиране"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 msgid "Confirmation|&Delete"
 msgstr "Потвърждение|Из&триване"
 
@@ -1769,7 +1767,7 @@ msgid "&Full 8 bits output"
 msgstr ""
 
 msgid "&ISO 8859-1"
-msgstr ""
+msgstr "&ISO 8859-1"
 
 msgid "7 &bits"
 msgstr ""
@@ -1787,7 +1785,7 @@ msgid "&Select"
 msgstr "Маркирай"
 
 msgid "Directory tree"
-msgstr ""
+msgstr "Дърво на директориите"
 
 msgid "Timeout for freeing VFSs (sec):"
 msgstr ""
@@ -1838,7 +1836,7 @@ msgid "&Kill"
 msgstr "Убий"
 
 msgid "Background jobs"
-msgstr ""
+msgstr "Фонови задачи"
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -1993,10 +1991,10 @@ msgid "Cannot chdir to \"%s\""
 msgstr ""
 
 msgid "View file"
-msgstr ""
+msgstr "Преглед на файл"
 
 msgid "Filename:"
-msgstr ""
+msgstr "Име на файл:"
 
 msgid "Filtered view"
 msgstr ""
@@ -2005,7 +2003,7 @@ msgid "Filter command and arguments:"
 msgstr ""
 
 msgid "Edit file"
-msgstr ""
+msgstr "Редактиране на файл"
 
 msgid "Create a new Directory"
 msgstr " Създай нова директория "
@@ -2074,9 +2072,9 @@ msgstr ""
 msgid "edit symlink: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' is not a symbolic link"
-msgstr "`%s' не е връзка"
+msgstr ""
 
 msgid "FTP to machine"
 msgstr ""
@@ -2099,7 +2097,7 @@ msgid ""
 msgstr ""
 
 msgid "Setup"
-msgstr ""
+msgstr "Настройка"
 
 #, c-format
 msgid "Setup saved to %s"
@@ -2178,13 +2176,13 @@ msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
 msgid "file"
-msgstr "файла"
+msgstr "файл"
 
 msgid "files"
 msgstr "файла"
 
 msgid "directory"
-msgstr "директорията"
+msgstr "директория"
 
 msgid "directories"
 msgstr "директории"
@@ -2201,7 +2199,7 @@ msgstr "в:"
 
 #, c-format
 msgid "%s?"
-msgstr ""
+msgstr "%s?"
 
 msgid "Cannot make the hardlink"
 msgstr ""
@@ -2261,11 +2259,7 @@ msgid ""
 "and\n"
 "\"%s\"\n"
 "are the same file"
-msgstr ""
-"\"%s\"\n"
-"и\n"
-"\"%s\"\n"
-"са един и същи файл"
+msgstr "\"%s\"\nи\n\"%s\"\nса един и същи файл"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2433,11 +2427,7 @@ msgid ""
 "and\n"
 "\"%s\"\n"
 "are the same directory"
-msgstr ""
-"\"%s\"\n"
-"и\n"
-"\"%s\"\n"
-"са една и съща папка"
+msgstr "\"%s\"\nи\n\"%s\"\nса една и съща папка"
 
 #, c-format
 msgid ""
@@ -2452,7 +2442,7 @@ msgid ""
 msgstr ""
 
 msgid "Directory scanning"
-msgstr ""
+msgstr "Претърсване на директория"
 
 #, c-format
 msgid ""
@@ -2610,7 +2600,7 @@ msgid "Malformed regular expression"
 msgstr "Неправилен регулярен израз"
 
 msgid "File name:"
-msgstr ""
+msgstr "Име на файл:"
 
 msgid "&Find recursively"
 msgstr ""
@@ -3057,7 +3047,7 @@ msgid "The Midnight Commander"
 msgstr ""
 
 msgid "Do you really want to quit the Midnight Commander?"
-msgstr ""
+msgstr "Наистина ли искате да напуснете Midnight Commander?"
 
 msgid "&Above"
 msgstr ""
@@ -3197,14 +3187,14 @@ msgstr "<непрочетена връзка>"
 #, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s байт"
+msgstr[1] "%s байта"
 
 #, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s в %d файл"
+msgstr[1] "%s в %d файла"
 
 msgid "Panelize"
 msgstr ""
@@ -3261,9 +3251,7 @@ msgstr "Намери SUID и SGID програми"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"Не може да се отвори файлът %s за писане:\n"
-"%s\n"
+msgstr "Не може да се отвори файлът %s за писане:\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3302,9 +3290,7 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"Не може да се пише във файла %s:\n"
-"%s\n"
+msgstr "Не може да се пише във файла %s:\n%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3328,9 +3314,7 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"Файла %s не е на root или Ваш, или е достъпен за запис от всички.\n"
-"Използването му може да застраши сигурността Ви"
+msgstr "Файла %s не е на root или Ваш, или е достъпен за запис от всички.\nИзползването му може да застраши сигурността Ви"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3391,15 +3375,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"Моля, натианете %s\n"
-"и изчакайте това съобщение да изчезне.\n"
-"\n"
-"Тогава го натиснете пак, за да видите дали\n"
-"ще се появи OK до бутона мъ.\n"
-"\n"
-"Ако изкате да излезете, натиснете веднъж Escape\n"
-"и изчакайте."
+msgstr "Моля, натианете %s\nи изчакайте това съобщение да изчезне.\n\nТогава го натиснете пак, за да видите дали\nще се появи OK до бутона мъ.\n\nАко изкате да излезете, натиснете веднъж Escape\nи изчакайте."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3415,9 +3391,7 @@ msgstr "OK"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"Изглежда, че всичките Ви клавиши вече\n"
-"работят добре. Това е супер."
+msgstr "Изглежда, че всичките Ви клавиши вече\nработят добре. Това е супер."
 
 msgid "&Discard"
 msgstr "Отмени"
@@ -3425,9 +3399,7 @@ msgstr "Отмени"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"Страхотно! Имате пълна терминална база данни!\n"
-"Всичките Ви клавиши работят добре."
+msgstr "Страхотно! Имате пълна терминална база данни!\nВсичките Ви клавиши работят добре."
 
 msgid ""
 "Press all the keys mentioned here. After you have done it, check\n"
@@ -3480,7 +3452,7 @@ msgid "Cannot open named pipe %s\n"
 msgstr "Не може да се отвори именуваният канал %s\n"
 
 msgid "The shell is still active. Quit anyway?"
-msgstr ""
+msgstr "Обвивката е още активна. Да се напусне ли въпреки това?"
 
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
@@ -3562,17 +3534,13 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"Не може да се отвори cpio архива\n"
-"%s"
+msgstr "Не може да се отвори cpio архива\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"Преждевременен край на cpio архива\n"
-"%s"
+msgstr "Преждевременен край на cpio архива\n%s"
 
 #, c-format
 msgid ""
@@ -3580,11 +3548,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"Невалидни твърди връзки към\n"
-"%s\n"
-"в cpio архивa\n"
-"%s"
+msgstr "Невалидни твърди връзки към\n%s\nв cpio архивa\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3594,25 +3558,19 @@ msgstr "%s съдържа дублирани елементи! Пропуска�
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr ""
-"Повредено cpio заглавие срещнато в\n"
-"%s"
+msgstr "Повредено cpio заглавие срещнато в\n%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"Неочакван край на файла\n"
-"%s"
+msgstr "Неочакван край на файла\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"Не може да се отвори архива %s\n"
-"%s"
+msgstr "Не може да се отвори архива %s\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "Повреден extfs архив"
@@ -3789,17 +3747,13 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"Внимание: Неправилен ред в %s:\n"
-"%s\n"
+msgstr "Внимание: Неправилен ред в %s:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"Внимание: Неправилен флаг %c в %s:\n"
-"%s\n"
+msgstr "Внимание: Неправилен флаг %c в %s:\n%s\n"
 
 #, c-format
 msgid "sftp: an error occurred while reading %s: %s"
@@ -3816,7 +3770,7 @@ msgstr ""
 
 #, c-format
 msgid "sftp: %s"
-msgstr ""
+msgstr "sftp: %s"
 
 #, c-format
 msgid "sftp: making connection to %s"
@@ -3888,9 +3842,7 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"Не може да се отвори tar архива\n"
-"%s"
+msgstr "Не може да се отвори tar архива\n%s"
 
 msgid "Inconsistent tar archive"
 msgstr "Несъгласуван tar архив"
@@ -4064,13 +4016,11 @@ msgstr ""
 msgid "Cannot view: not a regular file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open \"%s\" in parse mode\n"
 "%s"
 msgstr ""
-"Не може да се отвори архива %s\n"
-"%s"
 
 msgid "Seeking to search result"
 msgstr ""
