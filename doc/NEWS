@@ -1,3 +1,39 @@
+Version 4.8.9
+
+- VFS
+
+  * extfs: support unrar-5 (#3015)
+  * extfs: use xorriso (if exists) for writing into ISO images (#3027)
+
+- Editor
+
+  * Support unlimited file size (#1743)
+
+- Misc
+
+  * Lot of code cleanups (#2990, #2071, #2164, #2998, #3003, #3005, #3022)
+  * Display additional info while viewing (by F3) *.iso files (#2006)
+  * New skins:
+    - modarin256: set of 256-color skins from Oliver Lange (#2737)
+
+- Fixes
+
+  * Fail to link if system lib does not contain strverscmp (#2992)
+  * Segfault when mc's temporary directory doesn't belong to the correct user (#3021)
+  * Race condition when creating temporary directory (#3025)
+  * Mouse doesn't work in screen and tmux (#3011)
+  * Incorrect file size in copy/move overwrite query dialog (#3000)
+  * Garbage in subshell prompt (#3001)
+  * Incorrect WLabel redraw after text change (#2991)
+  * Find File: "All charsets" options don't work (#3026)
+  * When an unknown key is pressed, it is interpreted as garbage (#2988)
+  * Segfault on creating new file in external editor (#3020)
+  * Rotating dash is not removed when mc finishes reading the directory (#2163)
+  * mcedit: word completion failed if word to be completed is begun from begin of file (#2245)
+  * mcview: broken switch between raw and parse modes (#2968)
+  * Hex viewer: continue search doesn't work (#2706)
+  * sftpfs: broken SSH aliases (#2923)
+
 Version 4.8.8
 
 - Core
