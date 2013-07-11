@@ -679,9 +679,9 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, int *have_
         }
 #endif /* HAVE_CHARSET */
 
-        mc_ungetlocalcopy (filename_vpath, localfile_vpath, FALSE);
-
         got_data = get_file_type_local (localfile_vpath, content_string, sizeof (content_string));
+
+        mc_ungetlocalcopy (filename_vpath, localfile_vpath, FALSE);
 
         if (got_data > 0)
         {
