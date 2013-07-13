@@ -501,10 +501,8 @@ string_file_size (file_entry * fe, int len)
     static char buffer[BUF_TINY];
 
     /* Don't ever show size of ".." since we don't calculate it */
-    if (!strcmp (fe->fname, ".."))
-    {
+    if (DIR_IS_DOTDOT (fe->fname))
         return _("UP--DIR");
-    }
 
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
     if (S_ISBLK (fe->st.st_mode) || S_ISCHR (fe->st.st_mode))
@@ -528,7 +526,7 @@ string_file_size_brief (file_entry * fe, int len)
         return _("SYMLINK");
     }
 
-    if ((S_ISDIR (fe->st.st_mode) || fe->f.link_to_dir) && strcmp (fe->fname, ".."))
+    if ((S_ISDIR (fe->st.st_mode) || fe->f.link_to_dir) && !DIR_IS_DOTDOT (fe->fname))
     {
         return _("SUB-DIR");
     }
@@ -1007,7 +1005,7 @@ display_mini_info (WPanel * panel)
         else
             tty_print_string (str_fit_to_term (_("<readlink failed>"), w->cols - 2, J_LEFT));
     }
-    else if (strcmp (panel->dir.list[panel->selected].fname, "..") == 0)
+    else if (DIR_IS_DOTDOT (panel->dir.list[panel->selected].fname))
     {
         /* FIXME:
          * while loading directory (do_load_dir() and do_reload_dir()),
@@ -4377,7 +4375,7 @@ do_file_mark (WPanel * panel, int idx, int mark)
         return;
 
     /* Only '..' can't be marked, '.' isn't visible */
-    if (strcmp (panel->dir.list[idx].fname, "..") == 0)
+    if (DIR_IS_DOTDOT (panel->dir.list[idx].fname))
         return;
 
     file_mark (panel, idx, mark);

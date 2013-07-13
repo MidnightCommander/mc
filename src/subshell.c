@@ -1221,7 +1221,7 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt)
             bPathNotEq = strcmp (p_subshell_cwd, p_current_panel_cwd);
         }
 
-        if (bPathNotEq && strcmp (pcwd, ".") != 0)
+        if (bPathNotEq && !DIR_IS_DOT (pcwd))
         {
             char *cwd;
 

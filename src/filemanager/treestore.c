@@ -748,7 +748,7 @@ tree_store_mark_checked (const char *subname)
         return;
 
     /* Calculate the full name of the subdirectory */
-    if (subname[0] == '.' && (subname[1] == 0 || (subname[1] == '.' && subname[2] == 0)))
+    if (DIR_IS_DOT (subname) || DIR_IS_DOTDOT (subname))
         return;
 
     cname = vfs_path_as_str (ts.check_name);
@@ -927,18 +927,12 @@ tree_store_rescan (const vfs_path_t * vpath)
         {
             vfs_path_t *tmp_vpath;
 
-            if (dp->d_name[0] == '.')
-            {
-                if (dp->d_name[1] == 0 || (dp->d_name[1] == '.' && dp->d_name[2] == 0))
-                    continue;
-            }
+            if (DIR_IS_DOT (dp->d_name) || DIR_IS_DOTDOT (dp->d_name))
+                continue;
 
             tmp_vpath = vfs_path_append_new (vpath, dp->d_name, NULL);
-            if (mc_lstat (tmp_vpath, &buf) != -1)
-            {
-                if (S_ISDIR (buf.st_mode))
-                    tree_store_mark_checked (dp->d_name);
-            }
+            if (mc_lstat (tmp_vpath, &buf) != -1 && S_ISDIR (buf.st_mode))
+                tree_store_mark_checked (dp->d_name);
             vfs_path_free (tmp_vpath);
         }
         mc_closedir (dirp);
