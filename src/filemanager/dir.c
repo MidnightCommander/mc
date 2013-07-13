@@ -449,7 +449,7 @@ do_sort (dir_list * list, sortfn * sort, int top, gboolean reverse_f, gboolean c
 
     /* If there is an ".." entry the caller must take care to
        ensure that it occupies the first list element. */
-    if (strcmp (list->list[0].fname, "..") == 0)
+    if (DIR_IS_DOTDOT (list->list[0].fname))
         dot_dot_found = 1;
 
     reverse = reverse_f ? -1 : 1;

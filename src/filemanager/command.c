@@ -400,7 +400,7 @@ do_cd_command (char *orig_cmd)
         {
             sync_tree (mc_config_get_home_dir ());
         }
-        else if (strcmp (cmd + operand_pos, "..") == 0)
+        else if (DIR_IS_DOTDOT (cmd + operand_pos))
         {
             if (vfs_path_elements_count (current_panel->cwd_vpath) != 1 ||
                 strlen (vfs_path_get_by_index (current_panel->cwd_vpath, 0)->path) > 1)

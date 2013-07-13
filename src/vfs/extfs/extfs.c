@@ -265,9 +265,9 @@ extfs_find_entry_int (struct entry *dir, const char *name, GSList * list,
         c = *q;
         *q = '\0';
 
-        if (strcmp (p, ".") != 0)
+        if (!DIR_IS_DOT (p))
         {
-            if (strcmp (p, "..") == 0)
+            if (DIR_IS_DOTDOT (p))
                 pent = pent->dir;
             else
             {
@@ -540,7 +540,7 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
                     *(p++) = '\0';
                     q = cfn;
                 }
-                if (S_ISDIR (hstat.st_mode) && (strcmp (p, ".") == 0 || strcmp (p, "..") == 0))
+                if (S_ISDIR (hstat.st_mode) && (DIR_IS_DOT (p) || DIR_IS_DOTDOT (p)))
                     goto read_extfs_continue;
                 pent = extfs_find_entry (current_archive->root_entry, q, TRUE, FALSE);
                 if (pent == NULL)

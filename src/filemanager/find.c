@@ -1306,7 +1306,7 @@ do_search (WDialog * h)
                 ;
         }                       /* while (!dp) */
 
-        if (strcmp (dp->d_name, ".") == 0 || strcmp (dp->d_name, "..") == 0)
+        if (DIR_IS_DOT (dp->d_name) || DIR_IS_DOTDOT (dp->d_name))
         {
             /* skip invalid filenames */
             while ((dp = mc_readdir (dirp)) != NULL && !str_is_valid_string (dp->d_name))

@@ -779,10 +779,10 @@ read_file_system_list (int need_fs_type)
                 char *name;
                 struct stat statbuf;
 
-                if (strcmp (d->d_name, "..") == 0)
+                if (DIR_IS_DOT (d->d_name))
                     continue;
 
-                if (strcmp (d->d_name, ".") == 0)
+                if (DIR_IS_DOTDOT (d->d_name))
                     name = g_strdup ("/");
                 else
                     name = g_strconcat ("/", d->d_name, (char *) NULL);

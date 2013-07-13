@@ -524,9 +524,7 @@ do_compute_dir_size (const vfs_path_t * dirname_vpath, void *ui,
     {
         vfs_path_t *tmp_vpath;
 
-        if (strcmp (dirent->d_name, ".") == 0)
-            continue;
-        if (strcmp (dirent->d_name, "..") == 0)
+        if (DIR_IS_DOT (dirent->d_name) || DIR_IS_DOTDOT (dirent->d_name))
             continue;
 
         tmp_vpath = vfs_path_append_new (dirname_vpath, dirent->d_name, NULL);
@@ -1076,7 +1074,7 @@ recursive_erase (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s)
     FileProgressStatus return_status = FILE_CONT;
     vfs_path_t *vpath;
 
-    if (strcmp (s, "..") == 0)
+    if (DIR_IS_DOTDOT (s))
         return FILE_RETRY;
 
     vpath = vfs_path_from_str (s);
@@ -1092,10 +1090,9 @@ recursive_erase (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s)
     {
         vfs_path_t *tmp_vpath;
 
-        if (!strcmp (next->d_name, "."))
+        if (DIR_IS_DOT (next->d_name) || DIR_IS_DOTDOT (next->d_name))
             continue;
-        if (!strcmp (next->d_name, ".."))
-            continue;
+
         path = mc_build_filename (s, next->d_name, NULL);
         tmp_vpath = vfs_path_from_str (path);
         if (mc_lstat (tmp_vpath, &buf) != 0)
@@ -1151,20 +1148,18 @@ check_dir_is_empty (const vfs_path_t * vpath)
 {
     DIR *dir;
     struct dirent *d;
-    int i;
+    int i = 1;
 
     dir = mc_opendir (vpath);
-    if (!dir)
+    if (dir == NULL)
         return -1;
 
-    for (i = 1, d = mc_readdir (dir); d; d = mc_readdir (dir))
-    {
-        if (d->d_name[0] == '.' && (d->d_name[1] == '\0' ||
-                                    (d->d_name[1] == '.' && d->d_name[2] == '\0')))
-            continue;           /* "." or ".." */
-        i = 0;
-        break;
-    }
+    for (d = mc_readdir (dir); d != NULL; d = mc_readdir (dir))
+        if (!DIR_IS_DOT (d->d_name) && !DIR_IS_DOTDOT (d->d_name))
+        {
+            i = 0;
+            break;
+        }
 
     mc_closedir (dir);
     return i;
@@ -1178,10 +1173,7 @@ erase_dir_iff_empty (FileOpContext * ctx, const char *s)
     FileProgressStatus error;
     vfs_path_t *s_vpath;
 
-    if (strcmp (s, "..") == 0)
-        return FILE_SKIP;
-
-    if (strcmp (s, ".") == 0)
+    if (DIR_IS_DOT (s) || DIR_IS_DOTDOT (s))
         return FILE_SKIP;
 
     file_progress_show_deleting (ctx, s);
@@ -2207,12 +2199,11 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     {
         char *path;
         vfs_path_t *tmp_vpath;
+
         /*
          * Now, we don't want '.' and '..' to be created / copied at any time
          */
-        if (!strcmp (next->d_name, "."))
-            continue;
-        if (!strcmp (next->d_name, ".."))
+        if (DIR_IS_DOT (next->d_name) || DIR_IS_DOTDOT (next->d_name))
             continue;
 
         /* get the filename and add it to the src directory */
@@ -2441,14 +2432,6 @@ erase_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_t * s_
 {
     FileProgressStatus error;
 
-    /*
-       if (strcmp (s, "..") == 0)
-       return FILE_SKIP;
-
-       if (strcmp (s, ".") == 0)
-       return FILE_SKIP;
-     */
-
     file_progress_show_deleting (ctx, vfs_path_as_str (s_vpath));
     if (check_progress_buttons (ctx) == FILE_ABORT)
         return FILE_ABORT;
@@ -2672,7 +2655,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         else
             source = panel_get_file (panel);
 
-        if (strcmp (source, "..") == 0)
+        if (DIR_IS_DOTDOT (source))
         {
             g_free (source);
             message (D_ERROR, MSG_ERROR, _("Cannot operate on \"..\"!"));
