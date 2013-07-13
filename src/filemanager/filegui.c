@@ -230,8 +230,13 @@ typedef struct
 
     /* Dialog and widgets for the operation progress window */
     WDialog *op_dlg;
-    WLabel *file_string[2];
-    WLabel *file_label[2];
+    /* Source file: label and name */
+    WLabel *src_file_label;
+    WLabel *src_file;
+    /* Target file: label and name */
+    WLabel *tgt_file_label;
+    WLabel *tgt_file;
+
     WGauge *progress_file_gauge;
     WLabel *progress_file_label;
 
@@ -750,17 +755,17 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
         dlg_create (TRUE, 0, 0, dlg_height, dlg_width, dialog_colors, NULL, NULL, NULL,
                     op_names[ctx->operation], DLG_CENTER);
 
-    ui->file_label[0] = label_new (y++, x, "");
-    add_widget (ui->op_dlg, ui->file_label[0]);
+    ui->src_file_label = label_new (y++, x, "");
+    add_widget (ui->op_dlg, ui->src_file_label);
 
-    ui->file_string[0] = label_new (y++, x, "");
-    add_widget (ui->op_dlg, ui->file_string[0]);
+    ui->src_file = label_new (y++, x, "");
+    add_widget (ui->op_dlg, ui->src_file);
 
-    ui->file_label[1] = label_new (y++, x, "");
-    add_widget (ui->op_dlg, ui->file_label[1]);
+    ui->tgt_file_label = label_new (y++, x, "");
+    add_widget (ui->op_dlg, ui->tgt_file_label);
 
-    ui->file_string[1] = label_new (y++, x, "");
-    add_widget (ui->op_dlg, ui->file_string[1]);
+    ui->tgt_file = label_new (y++, x, "");
+    add_widget (ui->op_dlg, ui->tgt_file);
 
     ui->progress_file_gauge = gauge_new (y++, x + 3, dlg_width - (x + 3) * 2, FALSE, 100, 0);
     if (!classic_progressbar && (current_panel == right_panel))
@@ -1021,14 +1026,14 @@ file_progress_show_source (FileOpContext * ctx, const vfs_path_t * s_vpath)
         char *s;
 
         s = vfs_path_tokens_get (s_vpath, -1, 1);
-        label_set_text (ui->file_label[0], _("Source"));
-        label_set_text (ui->file_string[0], truncFileString (ui->op_dlg, s));
+        label_set_text (ui->src_file_label, _("Source"));
+        label_set_text (ui->src_file, truncFileString (ui->op_dlg, s));
         g_free (s);
     }
     else
     {
-        label_set_text (ui->file_label[0], "");
-        label_set_text (ui->file_string[0], "");
+        label_set_text (ui->src_file_label, "");
+        label_set_text (ui->src_file, "");
     }
 }
 
@@ -1046,14 +1051,14 @@ file_progress_show_target (FileOpContext * ctx, const vfs_path_t * s_vpath)
 
     if (s_vpath != NULL)
     {
-        label_set_text (ui->file_label[1], _("Target"));
-        label_set_text (ui->file_string[1],
+        label_set_text (ui->tgt_file_label, _("Target"));
+        label_set_text (ui->tgt_file,
                         truncFileStringSecure (ui->op_dlg, vfs_path_as_str (s_vpath)));
     }
     else
     {
-        label_set_text (ui->file_label[1], "");
-        label_set_text (ui->file_string[1], "");
+        label_set_text (ui->tgt_file_label, "");
+        label_set_text (ui->tgt_file, "");
     }
 }
 
@@ -1068,8 +1073,8 @@ file_progress_show_deleting (FileOpContext * ctx, const char *s)
         return;
 
     ui = ctx->ui;
-    label_set_text (ui->file_label[0], _("Deleting"));
-    label_set_text (ui->file_label[0], truncFileStringSecure (ui->op_dlg, s));
+    label_set_text (ui->src_file_label, _("Deleting"));
+    label_set_text (ui->src_file, truncFileStringSecure (ui->op_dlg, s));
 }
 
 /* --------------------------------------------------------------------------------------------- */
