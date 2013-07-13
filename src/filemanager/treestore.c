@@ -715,10 +715,13 @@ tree_store_remove_entry (const vfs_path_t * name_vpath)
     while (current != NULL && vfs_path_equal_len (current->name, base->name, len))
     {
         gboolean ok;
+        const char *cname;
 
-        ok = (current->name->str[len] == '\0' || current->name->str[len] == PATH_SEP);
+        cname = vfs_path_as_str (current->name);
+        ok = (cname[len] == '\0' || cname[len] == PATH_SEP);
         if (!ok)
             break;
+
         old = current;
         current = current->next;
         remove_entry (old);
@@ -736,6 +739,8 @@ tree_store_mark_checked (const char *subname)
     vfs_path_t *name;
     tree_entry *current, *base;
     int flag = 1;
+    const char *cname;
+
     if (!ts.loaded)
         return;
 
@@ -746,7 +751,8 @@ tree_store_mark_checked (const char *subname)
     if (subname[0] == '.' && (subname[1] == 0 || (subname[1] == '.' && subname[2] == 0)))
         return;
 
-    if (ts.check_name->str[0] == PATH_SEP && ts.check_name->str[1] == 0)
+    cname = vfs_path_as_str (ts.check_name);
+    if (cname[0] == PATH_SEP && cname[1] == '\0')
         name = vfs_path_build_filename (PATH_SEP_STR, subname, NULL);
     else
         name = vfs_path_append_new (ts.check_name, subname, NULL);
@@ -777,10 +783,11 @@ tree_store_mark_checked (const char *subname)
         {
             gboolean ok;
 
-            ok = (current->name->str[len] == '\0' || current->name->str[len] == PATH_SEP
-                  || len == 1);
+            cname = vfs_path_as_str (current->name);
+            ok = (cname[len] == '\0' || cname[len] == PATH_SEP || len == 1);
             if (!ok)
                 break;
+
             current->mark = 0;
             current = current->next;
         }
@@ -832,10 +839,13 @@ tree_store_start_check (const vfs_path_t * vpath)
     while (current != NULL && vfs_path_equal_len (current->name, ts.check_name, len))
     {
         gboolean ok;
+        const char *cname;
 
-        ok = (current->name->str[len] == '\0' || current->name->str[len] == PATH_SEP || len == 1);
+        cname = vfs_path_as_str (current->name);
+        ok = (cname[len] == '\0' || cname[len] == PATH_SEP || len == 1);
         if (!ok)
             break;
+
         current->mark = 1;
         current = current->next;
     }
@@ -865,11 +875,13 @@ tree_store_end_check (void)
     while (current != NULL && vfs_path_equal_len (current->name, ts.check_name, len))
     {
         gboolean ok;
+        const char *cname;
 
-        ok = (current->name->str[len] == '\0' || current->name->str[len] == PATH_SEP || len == 1);
-
+        cname = vfs_path_as_str (current->name);
+        ok = (cname[len] == '\0' || cname[len] == PATH_SEP || len == 1);
         if (!ok)
             break;
+
         old = current;
         current = current->next;
         if (old->mark)
