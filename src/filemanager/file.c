@@ -2268,12 +2268,10 @@ FileProgressStatus
 move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, const char *d)
 {
     struct stat sbuf, dbuf, destbuf;
-    struct link *lp;
-    char *destdir;
     FileProgressStatus return_status;
     gboolean move_over = FALSE;
     gboolean dstat_ok;
-    vfs_path_t *src_vpath, *dst_vpath, *destdir_vpath;
+    vfs_path_t *src_vpath, *dst_vpath;
 
     src_vpath = vfs_path_from_str (s);
     dst_vpath = vfs_path_from_str (d);
@@ -2299,24 +2297,27 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     }
 
     if (!dstat_ok)
-        destdir = g_strdup (d); /* destination doesn't exist */
+        ;       /* destination doesn't exist */
     else if (!ctx->dive_into_subdirs)
-    {
-        destdir = g_strdup (d);
         move_over = TRUE;
-    }
     else
-        destdir = mc_build_filename (d, x_basename (s), NULL);
+    {
+        vfs_path_t *tmp;
 
-    destdir_vpath = vfs_path_from_str (destdir);
+        tmp = dst_vpath;
+        dst_vpath = vfs_path_append_new (dst_vpath, x_basename (s), NULL);
+        vfs_path_free (tmp);
+    }
+
+    d = vfs_path_as_str (dst_vpath);
 
     /* Check if the user inputted an existing dir */
   retry_dst_stat:
-    if (mc_stat (destdir_vpath, &destbuf) == 0)
+    if (mc_stat (dst_vpath, &destbuf) == 0)
     {
         if (move_over)
         {
-            return_status = copy_dir_dir (tctx, ctx, s, destdir, FALSE, TRUE, TRUE, NULL);
+            return_status = copy_dir_dir (tctx, ctx, s, d, FALSE, TRUE, TRUE, NULL);
 
             if (return_status != FILE_CONT)
                 goto ret;
@@ -2327,22 +2328,20 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         else
         {
             if (S_ISDIR (destbuf.st_mode))
-                return_status = file_error (_("Cannot overwrite directory \"%s\"\n%s"), destdir);
+                return_status = file_error (_("Cannot overwrite directory \"%s\"\n%s"), d);
             else
-                return_status = file_error (_("Cannot overwrite file \"%s\"\n%s"), destdir);
+                return_status = file_error (_("Cannot overwrite file \"%s\"\n%s"), d);
             if (return_status == FILE_SKIPALL)
                 ctx->skip_all = TRUE;
             if (return_status == FILE_RETRY)
                 goto retry_dst_stat;
         }
 
-        g_free (destdir);
-        vfs_path_free (destdir_vpath);
         goto ret_fast;
     }
 
   retry_rename:
-    if (mc_rename (src_vpath, destdir_vpath) == 0)
+    if (mc_rename (src_vpath, dst_vpath) == 0)
     {
         return_status = FILE_CONT;
         goto ret;
@@ -2361,7 +2360,7 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         goto ret;
     }
     /* Failed because of filesystem boundary -> copy dir instead */
-    return_status = copy_dir_dir (tctx, ctx, s, destdir, FALSE, FALSE, TRUE, NULL);
+    return_status = copy_dir_dir (tctx, ctx, s, d, FALSE, FALSE, TRUE, NULL);
 
     if (return_status != FILE_CONT)
         goto ret;
@@ -2378,7 +2377,7 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     {
         for (; erase_list != NULL && return_status != FILE_ABORT;)
         {
-            lp = (struct link *) erase_list->data;
+            struct link *lp = (struct link *) erase_list->data;
 
             if (S_ISDIR (lp->st_mode))
                 return_status = erase_dir_iff_empty (ctx, lp->src_vpath);
@@ -2392,8 +2391,6 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     erase_dir_iff_empty (ctx, src_vpath);
 
   ret:
-    g_free (destdir);
-    vfs_path_free (destdir_vpath);
     erase_list = free_linklist (erase_list);
   ret_fast:
     vfs_path_free (src_vpath);
