@@ -1065,61 +1065,49 @@ erase_file (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_t * v
   skipall->remove as much as possible
 */
 static FileProgressStatus
-recursive_erase (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s)
+recursive_erase (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_t * vpath)
 {
     struct dirent *next;
-    struct stat buf;
     DIR *reading;
-    char *path;
+    const char *s;
     FileProgressStatus return_status = FILE_CONT;
-    vfs_path_t *vpath;
 
-    if (DIR_IS_DOTDOT (s))
-        return FILE_RETRY;
-
-    vpath = vfs_path_from_str (s);
     reading = mc_opendir (vpath);
-
     if (reading == NULL)
-    {
-        return_status = FILE_RETRY;
-        goto ret;
-    }
+        return FILE_RETRY;
 
     while ((next = mc_readdir (reading)) && return_status != FILE_ABORT)
     {
         vfs_path_t *tmp_vpath;
+        struct stat buf;
 
         if (DIR_IS_DOT (next->d_name) || DIR_IS_DOTDOT (next->d_name))
             continue;
 
-        path = mc_build_filename (s, next->d_name, NULL);
-        tmp_vpath = vfs_path_from_str (path);
+        tmp_vpath = vfs_path_append_new (vpath, next->d_name, NULL);
         if (mc_lstat (tmp_vpath, &buf) != 0)
         {
-            g_free (path);
             mc_closedir (reading);
             vfs_path_free (tmp_vpath);
-            return_status = FILE_RETRY;
-            goto ret;
+            return FILE_RETRY;
         }
         if (S_ISDIR (buf.st_mode))
-            return_status = recursive_erase (tctx, ctx, path);
+            return_status = recursive_erase (tctx, ctx, tmp_vpath);
         else
             return_status = erase_file (tctx, ctx, tmp_vpath);
         vfs_path_free (tmp_vpath);
-        g_free (path);
     }
     mc_closedir (reading);
+
     if (return_status == FILE_ABORT)
-        goto ret;
+        return FILE_ABORT;
+
+    s = vfs_path_as_str (vpath);
 
     file_progress_show_deleting (ctx, s);
     if (check_progress_buttons (ctx) == FILE_ABORT)
-    {
-        return_status = FILE_ABORT;
-        goto ret;
-    }
+        return FILE_ABORT;
+
     mc_refresh ();
 
     while (my_rmdir (s) != 0 && !ctx->skip_all)
@@ -1128,14 +1116,12 @@ recursive_erase (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s)
         if (return_status == FILE_RETRY)
             continue;
         if (return_status == FILE_ABORT)
-            goto ret;
+            break;
         if (return_status == FILE_SKIPALL)
             ctx->skip_all = TRUE;
         break;
     }
 
-  ret:
-    vfs_path_free (vpath);
     return return_status;
 }
 
@@ -2444,7 +2430,7 @@ erase_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_t * s_
     {                           /* not empty */
         error = query_recursive (ctx, vfs_path_as_str (s_vpath));
         if (error == FILE_CONT)
-            error = recursive_erase (tctx, ctx, vfs_path_as_str (s_vpath));
+            error = recursive_erase (tctx, ctx, s_vpath);
         return error;
     }
 
