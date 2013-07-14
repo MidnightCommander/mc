@@ -1170,11 +1170,8 @@ check_dir_is_empty (const vfs_path_t * vpath)
 static FileProgressStatus
 erase_dir_iff_empty (FileOpContext * ctx, const char *s)
 {
-    FileProgressStatus error;
+    FileProgressStatus error = FILE_CONT;
     vfs_path_t *s_vpath;
-
-    if (DIR_IS_DOT (s) || DIR_IS_DOTDOT (s))
-        return FILE_SKIP;
 
     file_progress_show_deleting (ctx, s);
     if (check_progress_buttons (ctx) == FILE_ABORT)
@@ -1192,15 +1189,12 @@ erase_dir_iff_empty (FileOpContext * ctx, const char *s)
             if (error == FILE_SKIPALL)
                 ctx->skip_all = TRUE;
             if (error != FILE_RETRY)
-            {
-                vfs_path_free (s_vpath);
-                return error;
-            }
+                break;
         }
     }
 
     vfs_path_free (s_vpath);
-    return FILE_CONT;
+    return error;
 }
 
 /* }}} */
