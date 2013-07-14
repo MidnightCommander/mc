@@ -111,11 +111,7 @@ my_mkdir (const vfs_path_t * s_vpath, mode_t mode)
 {
     int result;
 
-    result = mc_mkdir (s_vpath, mode);
-
-    if (result != 0)
-        result = my_mkdir_rec (s_vpath, mode);
-
+    result = my_mkdir_rec (s_vpath, mode);
     if (result == 0)
     {
         vfs_path_t *my_s;
