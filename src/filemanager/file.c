@@ -1999,11 +1999,9 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     struct dirent *next;
     struct stat buf, cbuf;
     DIR *reading;
-    char *dest_dir = NULL;
     FileProgressStatus return_status = FILE_CONT;
-    struct utimbuf utb;
     struct link *lp;
-    vfs_path_t *src_vpath, *dst_vpath, *dest_dir_vpath = NULL;
+    vfs_path_t *src_vpath, *dst_vpath;
     gboolean do_mkdir = TRUE;
 
     src_vpath = vfs_path_from_str (s);
@@ -2080,15 +2078,11 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     if (mc_stat (dst_vpath, &buf) != 0)
     {
         /* Here the dir doesn't exist : make it ! */
-        if (move_over)
+        if (move_over && mc_rename (src_vpath, dst_vpath) == 0)
         {
-            if (mc_rename (src_vpath, dst_vpath) == 0)
-            {
-                return_status = FILE_CONT;
-                goto ret;
-            }
+            return_status = FILE_CONT;
+            goto ret;
         }
-        dest_dir = g_strdup (d);
     }
     else
     {
@@ -2116,26 +2110,30 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         }
         /* Dive into subdir if exists */
         if (toplevel && ctx->dive_into_subdirs)
-            dest_dir = mc_build_filename (d, x_basename (s), NULL);
-        else
         {
-            dest_dir = g_strdup (d);
-            do_mkdir = FALSE;
+            vfs_path_t *tmp;
+
+            tmp = dst_vpath;
+            dst_vpath = vfs_path_append_new (dst_vpath, x_basename (s), NULL);
+            vfs_path_free (tmp);
+
         }
+        else
+            do_mkdir = FALSE;
     }
 
-    dest_dir_vpath = vfs_path_from_str (dest_dir);
+    d = vfs_path_as_str (dst_vpath);
 
     if (do_mkdir)
     {
-        while (my_mkdir (dest_dir_vpath, (cbuf.st_mode & ctx->umask_kill) | S_IRWXU) != 0)
+        while (my_mkdir (dst_vpath, (cbuf.st_mode & ctx->umask_kill) | S_IRWXU) != 0)
         {
             if (ctx->skip_all)
                 return_status = FILE_SKIPALL;
             else
             {
                 return_status =
-                    file_error (_("Cannot create target directory \"%s\"\n%s"), dest_dir);
+                    file_error (_("Cannot create target directory \"%s\"\n%s"), d);
                 if (return_status == FILE_SKIPALL)
                     ctx->skip_all = TRUE;
             }
@@ -2144,8 +2142,8 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         }
 
         lp = g_new0 (struct link, 1);
-        mc_stat (dest_dir_vpath, &buf);
-        lp->vfs = vfs_path_get_by_index (dest_dir_vpath, -1)->class;
+        mc_stat (dst_vpath, &buf);
+        lp->vfs = vfs_path_get_by_index (dst_vpath, -1)->class;
         lp->ino = buf.st_ino;
         lp->dev = buf.st_dev;
         dest_dirs = g_slist_prepend (dest_dirs, lp);
@@ -2153,14 +2151,14 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
 
     if (ctx->preserve_uidgid)
     {
-        while (mc_chown (dest_dir_vpath, cbuf.st_uid, cbuf.st_gid) != 0)
+        while (mc_chown (dst_vpath, cbuf.st_uid, cbuf.st_gid) != 0)
         {
             if (ctx->skip_all)
                 return_status = FILE_SKIPALL;
             else
             {
                 return_status =
-                    file_error (_("Cannot chown target directory \"%s\"\n%s"), dest_dir);
+                    file_error (_("Cannot chown target directory \"%s\"\n%s"), d);
                 if (return_status == FILE_SKIPALL)
                     ctx->skip_all = TRUE;
             }
@@ -2194,7 +2192,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         {
             char *mdpath;
 
-            mdpath = mc_build_filename (dest_dir, next->d_name, NULL);
+            mdpath = mc_build_filename (d, next->d_name, NULL);
             /*
              * From here, we just intend to recursively copy subdirs, not
              * the double functionality of copying different when the target
@@ -2209,7 +2207,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         {
             char *dest_file;
 
-            dest_file = mc_build_filename (dest_dir, x_basename (path), NULL);
+            dest_file = mc_build_filename (d, x_basename (path), NULL);
             return_status = copy_file_file (tctx, ctx, path, dest_file);
             g_free (dest_file);
         }
@@ -2221,9 +2219,10 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
             if (ctx->erase_at_end)
             {
                 lp = g_new0 (struct link, 1);
-                lp->src_vpath = vfs_path_clone (tmp_vpath);
+                lp->src_vpath = tmp_vpath;
                 lp->st_mode = buf.st_mode;
                 erase_list = g_slist_append (erase_list, lp);
+                tmp_vpath = NULL;
             }
             else if (S_ISDIR (buf.st_mode))
                 return_status = erase_dir_iff_empty (ctx, tmp_vpath);
@@ -2236,22 +2235,22 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
 
     if (ctx->preserve)
     {
-        mc_chmod (dest_dir_vpath, cbuf.st_mode & ctx->umask_kill);
+        struct utimbuf utb;
+
+        mc_chmod (dst_vpath, cbuf.st_mode & ctx->umask_kill);
         utb.actime = cbuf.st_atime;
         utb.modtime = cbuf.st_mtime;
-        mc_utime (dest_dir_vpath, &utb);
+        mc_utime (dst_vpath, &utb);
     }
     else
     {
         cbuf.st_mode = umask (-1);
         umask (cbuf.st_mode);
         cbuf.st_mode = 0100777 & ~cbuf.st_mode;
-        mc_chmod (dest_dir_vpath, cbuf.st_mode & ctx->umask_kill);
+        mc_chmod (dst_vpath, cbuf.st_mode & ctx->umask_kill);
     }
 
   ret:
-    g_free (dest_dir);
-    vfs_path_free (dest_dir_vpath);
     free_link (parent_dirs->data);
     g_slist_free_1 (parent_dirs);
   ret_fast:
