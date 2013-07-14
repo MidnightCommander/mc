@@ -1154,10 +1154,12 @@ check_dir_is_empty (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static FileProgressStatus
-erase_dir_iff_empty (FileOpContext * ctx, const char *s)
+erase_dir_iff_empty (FileOpContext * ctx, const vfs_path_t * vpath)
 {
     FileProgressStatus error = FILE_CONT;
-    vfs_path_t *s_vpath;
+    const char *s;
+
+    s = vfs_path_as_str (vpath);
 
     file_progress_show_deleting (ctx, s);
     if (check_progress_buttons (ctx) == FILE_ABORT)
@@ -1165,9 +1167,7 @@ erase_dir_iff_empty (FileOpContext * ctx, const char *s)
 
     mc_refresh ();
 
-    s_vpath = vfs_path_from_str (s);
-
-    if (check_dir_is_empty (s_vpath) == 1)      /* not empty or error */
+    if (check_dir_is_empty (vpath) == 1)        /* not empty or error */
     {
         while (my_rmdir (s) != 0 && !ctx->skip_all)
         {
@@ -1179,7 +1179,6 @@ erase_dir_iff_empty (FileOpContext * ctx, const char *s)
         }
     }
 
-    vfs_path_free (s_vpath);
     return error;
 }
 
@@ -2214,6 +2213,9 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
             return_status = copy_file_file (tctx, ctx, path, dest_file);
             g_free (dest_file);
         }
+
+        g_free (path);
+
         if (do_delete && return_status == FILE_CONT)
         {
             if (ctx->erase_at_end)
@@ -2224,11 +2226,10 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
                 erase_list = g_slist_append (erase_list, lp);
             }
             else if (S_ISDIR (buf.st_mode))
-                return_status = erase_dir_iff_empty (ctx, path);
+                return_status = erase_dir_iff_empty (ctx, tmp_vpath);
             else
                 return_status = erase_file (tctx, ctx, tmp_vpath);
         }
-        g_free (path);
         vfs_path_free (tmp_vpath);
     }
     mc_closedir (reading);
@@ -2381,8 +2382,7 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
             lp = (struct link *) erase_list->data;
 
             if (S_ISDIR (lp->st_mode))
-
-                return_status = erase_dir_iff_empty (ctx, vfs_path_as_str (lp->src_vpath));
+                return_status = erase_dir_iff_empty (ctx, lp->src_vpath);
             else
                 return_status = erase_file (tctx, ctx, lp->src_vpath);
 
@@ -2390,7 +2390,7 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
             free_link (lp);
         }
     }
-    erase_dir_iff_empty (ctx, s);
+    erase_dir_iff_empty (ctx, src_vpath);
 
   ret:
     g_free (destdir);
