@@ -179,6 +179,7 @@
 #endif
 
 #include "lib/global.h"
+#include "lib/strutil.h"        /* str_verscmp() */
 #include "mountlist.h"
 
 /*** global variables ****************************************************************************/
@@ -294,6 +295,7 @@ me_remote (char const *fs_name, char const *fs_type _GL_UNUSED)
 
 #ifdef STAT_STATVFS
 #if ! (__linux__ && (__GLIBC__ || __UCLIBC__))
+/* The FRSIZE fallback is not required in this case.  */
 #undef STAT_STATFS2_FRSIZE
 #else
 #include <sys/utsname.h>
@@ -312,8 +314,6 @@ me_remote (char const *fs_name, char const *fs_type _GL_UNUSED)
 #define IS_EINTR(x) 0
 #endif
 #endif /* STAT_READ_FILSYS */
-
-#include "lib/strutil.h"
 
 /*** file scope type declarations ****************************************************************/
 
@@ -359,7 +359,6 @@ static int
 statvfs_works (void)
 {
 #if ! (__linux__ && (__GLIBC__ || __UCLIBC__))
-    /* The FRSIZE fallback is not required in this case.  */
     return 1;
 #else
     static int statvfs_works_cache = -1;
@@ -368,8 +367,8 @@ statvfs_works (void)
     if (statvfs_works_cache < 0)
         statvfs_works_cache = (uname (&name) == 0 && 0 <= str_verscmp (name.release, "2.6.36"));
     return statvfs_works_cache;
-}
 #endif
+}
 #endif
 
 /* --------------------------------------------------------------------------------------------- */
