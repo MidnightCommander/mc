@@ -325,15 +325,14 @@ check_file_access (WEdit * edit, const vfs_path_t * filename_vpath, struct stat 
     }
 
   cleanup:
+    (void) mc_close (file);
+
     if (errmsg != NULL)
     {
         edit_error_dialog (_("Error"), errmsg);
         g_free (errmsg);
         ret = FALSE;
     }
-
-    if (!ret)
-        (void) mc_close (file);
 
     return ret;
 }
