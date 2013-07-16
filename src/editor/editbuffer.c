@@ -778,3 +778,30 @@ edit_buffer_write_file (edit_buffer_t * buf, int fd)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Calculate percentage of specified character offset
+ *
+ * @param buf pointer to editor buffer
+ * @param p character offset
+ *
+ * @return percentage of specified character offset
+ */
+
+int
+edit_buffer_calc_percent (const edit_buffer_t * buf, off_t offset)
+{
+    int percent;
+
+    if (buf->size == 0)
+        percent = 0;
+    else if (offset >= buf->size)
+        percent = 100;
+    else if (offset > (INT_MAX / 100))
+        percent = offset / (buf->size / 100);
+    else
+        percent = offset * 100 / buf->size;
+
+    return percent;
+}
+
+/* --------------------------------------------------------------------------------------------- */

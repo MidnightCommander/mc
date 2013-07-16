@@ -51,6 +51,8 @@ off_t edit_buffer_move_backward (const edit_buffer_t * buf, off_t current, long 
 off_t edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size);
 off_t edit_buffer_write_file (edit_buffer_t * buf, int fd);
 
+int edit_buffer_calc_percent (const edit_buffer_t * buf, off_t offset);
+
 /*** inline functions ****************************************************************************/
 
 static inline int

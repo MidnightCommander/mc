@@ -232,10 +232,9 @@ edit_status_fullscreen (WEdit * edit, int color)
 
     if (simple_statusbar && w > EDITOR_MINIMUM_TERMINAL_WIDTH)
     {
-        size_t percent = 100;
+        int percent;
 
-        if (edit->buffer.lines + 1 != 0)
-            percent = (edit->buffer.curs_line + 1) * 100 / (edit->buffer.lines + 1);
+        percent = edit_buffer_calc_percent (&edit->buffer, edit->buffer.curs1);
         widget_move (h, 0, w - 6 - 6);
         tty_printf (" %3d%%", percent);
     }
