@@ -5,9 +5,11 @@
 #ifdef USE_NCURSES
 #ifdef HAVE_NCURSES_CURSES_H
 #include <ncurses/curses.h>
-#elif HAVE_NCURSES_NCURSES_H || HAVE_NCURSESW_CURSES_H
+#elif defined (HAVE_NCURSES_NCURSES_H)
 #include <ncurses/ncurses.h>
-#elif HAVE_NCURSES_HCURSES_H || HAVE_NCURSES_H
+#elif defined (HAVE_NCURSESW_CURSES_H)
+#include <ncursesw/curses.h>
+#elif defined (HAVE_NCURSES_HCURSES_H) || defined (HAVE_NCURSES_H)
 #include <ncurses.h>
 #else
 #include <curses.h>
