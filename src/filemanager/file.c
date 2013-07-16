@@ -1028,7 +1028,8 @@ erase_file (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_t * v
     int return_status;
     struct stat buf;
 
-    file_progress_show_deleting (ctx, vfs_path_as_str (vpath));
+    file_progress_show_deleting (ctx, vfs_path_as_str (vpath), &tctx->progress_count);
+    file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
     if (check_progress_buttons (ctx) == FILE_ABORT)
         return FILE_ABORT;
 
@@ -1051,9 +1052,11 @@ erase_file (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_t * v
             ctx->skip_all = TRUE;
         break;
     }
+
     if (tctx->progress_count == 0)
         return FILE_CONT;
-    return progress_update_one (tctx, ctx, buf.st_size);
+
+    return check_progress_buttons (ctx);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1104,7 +1107,8 @@ recursive_erase (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_
 
     s = vfs_path_as_str (vpath);
 
-    file_progress_show_deleting (ctx, s);
+    file_progress_show_deleting (ctx, s, NULL);
+    file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
     if (check_progress_buttons (ctx) == FILE_ABORT)
         return FILE_ABORT;
 
@@ -1154,14 +1158,15 @@ check_dir_is_empty (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static FileProgressStatus
-erase_dir_iff_empty (FileOpContext * ctx, const vfs_path_t * vpath)
+erase_dir_iff_empty (FileOpContext * ctx, const vfs_path_t * vpath, size_t count)
 {
     FileProgressStatus error = FILE_CONT;
     const char *s;
 
     s = vfs_path_as_str (vpath);
 
-    file_progress_show_deleting (ctx, s);
+    file_progress_show_deleting (ctx, s, NULL);
+    file_progress_show_count (ctx, count, ctx->progress_count);
     if (check_progress_buttons (ctx) == FILE_ABORT)
         return FILE_ABORT;
 
@@ -2225,7 +2230,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
                 tmp_vpath = NULL;
             }
             else if (S_ISDIR (buf.st_mode))
-                return_status = erase_dir_iff_empty (ctx, tmp_vpath);
+                return_status = erase_dir_iff_empty (ctx, tmp_vpath, tctx->progress_count);
             else
                 return_status = erase_file (tctx, ctx, tmp_vpath);
         }
@@ -2380,7 +2385,7 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
             struct link *lp = (struct link *) erase_list->data;
 
             if (S_ISDIR (lp->st_mode))
-                return_status = erase_dir_iff_empty (ctx, lp->src_vpath);
+                return_status = erase_dir_iff_empty (ctx, lp->src_vpath, tctx->progress_count);
             else
                 return_status = erase_file (tctx, ctx, lp->src_vpath);
 
@@ -2388,7 +2393,7 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
             free_link (lp);
         }
     }
-    erase_dir_iff_empty (ctx, src_vpath);
+    erase_dir_iff_empty (ctx, src_vpath, tctx->progress_count);
 
   ret:
     erase_list = free_linklist (erase_list);
@@ -2408,7 +2413,8 @@ erase_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_t * s_
 {
     FileProgressStatus error;
 
-    file_progress_show_deleting (ctx, vfs_path_as_str (s_vpath));
+    file_progress_show_deleting (ctx, vfs_path_as_str (s_vpath), NULL);
+    file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
     if (check_progress_buttons (ctx) == FILE_ABORT)
         return FILE_ABORT;
 
