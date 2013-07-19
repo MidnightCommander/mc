@@ -4538,7 +4538,8 @@ panel_change_encoding (WPanel * panel)
         vfs_change_encoding (panel->cwd_vpath, encoding);
 
         if (!do_panel_cd (panel, panel->cwd_vpath, cd_parse_command))
-            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""), panel->cwd_vpath->str);
+            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""),
+                     vfs_path_as_str (panel->cwd_vpath));
     }
 }
 
