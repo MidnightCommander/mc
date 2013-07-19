@@ -172,9 +172,7 @@ handle_dirent (dir_list * list, const char *fltr, struct dirent *dp,
 {
     vfs_path_t *vpath;
 
-    if (dp->d_name[0] == '.' && dp->d_name[1] == 0)
-        return 0;
-    if (dp->d_name[0] == '.' && dp->d_name[1] == '.' && dp->d_name[2] == 0)
+    if (DIR_IS_DOT (dp->d_name) || DIR_IS_DOTDOT (dp->d_name))
         return 0;
     if (!panels_options.show_dot_files && (dp->d_name[0] == '.'))
         return 0;
@@ -510,9 +508,7 @@ handle_path (dir_list * list, const char *path,
 {
     vfs_path_t *vpath;
 
-    if (path[0] == '.' && path[1] == 0)
-        return 0;
-    if (path[0] == '.' && path[1] == '.' && path[2] == 0)
+    if (DIR_IS_DOT (path) || DIR_IS_DOTDOT (path))
         return 0;
 
     vpath = vfs_path_from_str (path);
