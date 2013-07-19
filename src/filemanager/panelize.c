@@ -429,7 +429,7 @@ do_panelize_cd (struct WPanel *panel)
 
     for (i = 0; i < panelized_panel.count; i++)
     {
-        if (panelized_same || DIR_IS_DOTDOT (panelized_panel.list.list[i].fname[0]))
+        if (panelized_same || DIR_IS_DOTDOT (panelized_panel.list.list[i].fname))
         {
             list->list[i].fnamelen = panelized_panel.list.list[i].fnamelen;
             list->list[i].fname = g_strndup (panelized_panel.list.list[i].fname,
