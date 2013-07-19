@@ -418,36 +418,34 @@ edit_get_save_file_as (WEdit * edit)
         N_("&Macintosh format (CR)")
     };
 
+    quick_widget_t quick_widgets[] = {
+        /* *INDENT-OFF* */
+        QUICK_LABELED_INPUT (N_("Enter file name:"), input_label_above,
+                             vfs_path_as_str (edit->filename_vpath), "save-as",
+                             &filename_res, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
+        QUICK_SEPARATOR (TRUE),
+        QUICK_LABEL (N_("Change line breaks to:"), NULL),
+        QUICK_RADIO (LB_NAMES, lb_names, (int *) &cur_lb, NULL),
+        QUICK_BUTTONS_OK_CANCEL,
+        QUICK_END
+        /* *INDENT-ON* */
+    };
+
+    quick_dialog_t qdlg = {
+        -1, -1, 64,
+        N_("Save As"), "[Save File As]",
+        quick_widgets, NULL, NULL
+    };
+
+    if (quick_dialog (&qdlg) != B_CANCEL)
     {
-        quick_widget_t quick_widgets[] = {
-            /* *INDENT-OFF* */
-            QUICK_LABELED_INPUT (N_("Enter file name:"), input_label_above,
-                                 vfs_path_as_str (edit->filename_vpath), "save-as",
-                                 &filename_res, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
-            QUICK_SEPARATOR (TRUE),
-            QUICK_LABEL (N_("Change line breaks to:"), NULL),
-            QUICK_RADIO (LB_NAMES, lb_names, (int *) &cur_lb, NULL),
-            QUICK_BUTTONS_OK_CANCEL,
-            QUICK_END
-            /* *INDENT-ON* */
-        };
+        char *fname;
 
-        quick_dialog_t qdlg = {
-            -1, -1, 64,
-            N_("Save As"), "[Save File As]",
-            quick_widgets, NULL, NULL
-        };
-
-        if (quick_dialog (&qdlg) != B_CANCEL)
-        {
-            char *fname;
-
-            edit->lb = cur_lb;
-            fname = tilde_expand (filename_res);
-            g_free (filename_res);
-            ret_vpath = vfs_path_from_str (fname);
-            g_free (fname);
-        }
+        edit->lb = cur_lb;
+        fname = tilde_expand (filename_res);
+        g_free (filename_res);
+        ret_vpath = vfs_path_from_str (fname);
+        g_free (fname);
     }
 
     return ret_vpath;
