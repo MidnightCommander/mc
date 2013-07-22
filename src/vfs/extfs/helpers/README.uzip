@@ -93,7 +93,7 @@ Files appearing before their parent directories in the listings
 are now cached and printed later. This fixes a bug that would
 cause some directories to be listed twice.
 
-Temporary filenames are choosen better. That is, they are
+Temporary filenames are chosen better. That is, they are
 generated using tmpnam(3). Previously, hardcoded filenames
 (in the current directory) would be used.
 

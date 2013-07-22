@@ -97,7 +97,7 @@ struct WDialog
 
     /* Internal variables */
     GList *widgets;             /* widgets list */
-    GList *current;             /* Curently active widget */
+    GList *current;             /* Currently active widget */
     unsigned long widget_id;    /* maximum id of all widgets */
     void *data;                 /* Data can be passed to dialog */
     char *event_group;          /* Name of event group for this dialog */
