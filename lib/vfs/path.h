@@ -83,6 +83,7 @@ struct vfs_class *vfs_prefix_to_class (const char *prefix);
 
 #ifdef HAVE_CHARSET
 gboolean vfs_path_element_need_cleanup_converter (const vfs_path_element_t * element);
+vfs_path_t *vfs_path_change_encoding (vfs_path_t * vpath, const char *encoding);
 #endif
 
 char *vfs_path_serialize (const vfs_path_t * vpath, GError ** error);
