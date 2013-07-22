@@ -3881,7 +3881,7 @@ event_update_panels (const gchar * event_group_name, const gchar * event_name,
 
 /* event callback */
 static gboolean
-panel_save_curent_file_to_clip_file (const gchar * event_group_name, const gchar * event_name,
+panel_save_current_file_to_clip_file (const gchar * event_group_name, const gchar * event_name,
                                      gpointer init_data, gpointer data)
 {
     (void) event_group_name;
@@ -4770,8 +4770,8 @@ panel_init (void)
         mc_skin_get ("widget-panel", "filename-scroll-right-char", "}");
 
     mc_event_add (MCEVENT_GROUP_FILEMANAGER, "update_panels", event_update_panels, NULL, NULL);
-    mc_event_add (MCEVENT_GROUP_FILEMANAGER, "panel_save_curent_file_to_clip_file",
-                  panel_save_curent_file_to_clip_file, NULL, NULL);
+    mc_event_add (MCEVENT_GROUP_FILEMANAGER, "panel_save_current_file_to_clip_file",
+                  panel_save_current_file_to_clip_file, NULL, NULL);
 
 }
 

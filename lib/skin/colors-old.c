@@ -1,6 +1,6 @@
 /*
    Skins engine.
-   Work with colors - backward compability
+   Work with colors - backward compatibility
 
    Copyright (C) 2009, 2010, 2011, 2012
    The Free Software Foundation, Inc.

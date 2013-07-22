@@ -167,7 +167,7 @@ EatComment (FILE * InFile)
 static int
 Continuation (char *line, int pos)
   /* ------------------------------------------------------------------------ **
-   * Scan backards within a string to discover if the last non-whitespace
+   * Scan backwards within a string to discover if the last non-whitespace
    * character is a line-continuation character ('\\').
    *
    *  Input:  line  - A pointer to a buffer containing the string to be

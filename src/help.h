@@ -20,7 +20,7 @@
  *  Lazyness/widgeting attack: This file does use the dialog manager
  *  and uses mainly the dialog to achieve the help work.  there is only
  *  one specialized widget and it's only used to forward the mouse messages
- *  to the appropiate routine.
+ *  to the appropriate routine.
  *
  *  This file is included by help.c and man2hlp.c
  */
