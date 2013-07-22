@@ -4535,7 +4535,7 @@ panel_change_encoding (WPanel * panel)
     encoding = get_codepage_id (panel->codepage);
     if (encoding != NULL)
     {
-        vfs_change_encoding (panel->cwd_vpath, encoding);
+        vfs_path_change_encoding (panel->cwd_vpath, encoding);
 
         if (!do_panel_cd (panel, panel->cwd_vpath, cd_parse_command))
             message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""),
@@ -4566,14 +4566,19 @@ remove_encoding_from_path (const vfs_path_t * vpath)
         vfs_path_element_t *path_element;
 
         path_element = vfs_path_element_clone (vfs_path_get_by_index (vpath, indx));
-        vfs_path_add_element (ret_vpath, path_element);
 
         if (path_element->encoding == NULL)
+        {
+            vfs_path_add_element (ret_vpath, path_element);
             continue;
+        }
 
         converter = str_crt_conv_to (path_element->encoding);
         if (converter == INVALID_CONV)
+        {
+            vfs_path_add_element (ret_vpath, path_element);
             continue;
+        }
 
         g_free (path_element->encoding);
         path_element->encoding = NULL;
@@ -4588,6 +4593,7 @@ remove_encoding_from_path (const vfs_path_t * vpath)
         str_close_conv (converter);
         str_close_conv (path_element->dir.converter);
         path_element->dir.converter = INVALID_CONV;
+        vfs_path_add_element (ret_vpath, path_element);
     }
     g_string_free (tmp_conv, TRUE);
     return ret_vpath;
