@@ -659,7 +659,7 @@ edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size)
 
     }
 
-    /* fullfill other parts of b2 from end to begin */
+    /* fulfill other parts of b2 from end to begin */
     data_size = EDIT_BUF_SIZE;
     for (--i; i >= 0; i--)
     {
@@ -708,7 +708,7 @@ edit_buffer_write_file (edit_buffer_t * buf, int fd)
     off_t data_size, sz;
     void *b;
 
-    /* write all fullfilled parts of b1 from begin to end */
+    /* write all fulfilled parts of b1 from begin to end */
     if (buf->b1->len != 0)
     {
         data_size = EDIT_BUF_SIZE;
@@ -747,7 +747,7 @@ edit_buffer_write_file (edit_buffer_t * buf, int fd)
 
         if (sz == data_size)
         {
-            /* write other fullfilled parts of b2 from end to begin */
+            /* write other fulfilled parts of b2 from end to begin */
             data_size = EDIT_BUF_SIZE;
             while (--i >= 0)
             {

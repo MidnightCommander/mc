@@ -300,7 +300,7 @@ extfs_find_entry_int (struct entry *dir, const char *name, GSList * list,
                     }
 
                 /* When we load archive, we create automagically
-                 * non-existant directories
+                 * non-existent directories
                  */
                 if (pent == NULL && make_dirs)
                     pent = extfs_generate_entry (dir->inode->archive, p, pdir, S_IFDIR | 0777);

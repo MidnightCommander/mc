@@ -542,7 +542,7 @@ help_show (WDialog * h, const char *paint_start)
                 }
                 break;
             case ' ':
-                /* word delimeter */
+                /* word delimiter */
                 if (painting)
                     help_print_word (h, word, &col, &line, TRUE);
                 break;

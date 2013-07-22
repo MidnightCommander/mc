@@ -1610,7 +1610,7 @@ my_statfs (struct my_statfs *myfs_stats, const char *path)
          ** This is the "other side" of the hack to read_file_system_list() in
          ** mountlist.c.
          ** It's not the most efficient approach, but consumes less memory. It
-         ** also accomodates QNX's ability to mount filesystems on the fly.
+         ** also accommodates QNX's ability to mount filesystems on the fly.
          */
         struct mount_entry *entry;
     struct fs_usage fs_use;

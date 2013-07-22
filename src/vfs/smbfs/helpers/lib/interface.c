@@ -236,7 +236,7 @@ interpret_interfaces (char *s, struct interface **interfaces, const char *descri
 
     if (iface->bcast.s_addr != MKBCADDR (iface->ip.s_addr, iface->nmask.s_addr))
     {
-        DEBUG (2, ("Warning: inconsistant interface %s\n", inet_ntoa (iface->ip)));
+        DEBUG (2, ("Warning: inconsistent interface %s\n", inet_ntoa (iface->ip)));
     }
 
     iface->next = NULL;

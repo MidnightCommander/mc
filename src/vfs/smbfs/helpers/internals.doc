@@ -32,7 +32,7 @@ SVAL(buf,pos)
 
 returns the value of the unsigned short (16 bit) little-endian integer at 
 offset pos within buffer buf.  An integer of this type is sometimes
-refered to as "USHORT".
+referred to as "USHORT".
 
 -----------------------------------------------------------------------------
 IVAL(buf,pos)
@@ -93,7 +93,7 @@ RSSVAL(buf,pos,val)
 
 sets the value of the unsigned short (16 bit) big-endian integer at 
 offset pos within buffer buf to value val.
-refered to as "USHORT".
+referred to as "USHORT".
 
 -----------------------------------------------------------------------------
 RSIVAL(buf,pos,val)
