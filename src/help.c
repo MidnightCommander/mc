@@ -44,7 +44,7 @@
  *  Lazyness/widgeting attack: This file does use the dialog manager
  *  and uses mainly the dialog to achieve the help work.  there is only
  *  one specialized widget and it's only used to forward the mouse messages
- *  to the appropiate routine.
+ *  to the appropriate routine.
  */
 
 
@@ -542,7 +542,7 @@ help_show (WDialog * h, const char *paint_start)
                 }
                 break;
             case ' ':
-                /* word delimeter */
+                /* word delimiter */
                 if (painting)
                     help_print_word (h, word, &col, &line, TRUE);
                 break;
