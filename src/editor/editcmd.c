@@ -418,36 +418,34 @@ edit_get_save_file_as (WEdit * edit)
         N_("&Macintosh format (CR)")
     };
 
+    quick_widget_t quick_widgets[] = {
+        /* *INDENT-OFF* */
+        QUICK_LABELED_INPUT (N_("Enter file name:"), input_label_above,
+                             vfs_path_as_str (edit->filename_vpath), "save-as",
+                             &filename_res, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
+        QUICK_SEPARATOR (TRUE),
+        QUICK_LABEL (N_("Change line breaks to:"), NULL),
+        QUICK_RADIO (LB_NAMES, lb_names, (int *) &cur_lb, NULL),
+        QUICK_BUTTONS_OK_CANCEL,
+        QUICK_END
+        /* *INDENT-ON* */
+    };
+
+    quick_dialog_t qdlg = {
+        -1, -1, 64,
+        N_("Save As"), "[Save File As]",
+        quick_widgets, NULL, NULL
+    };
+
+    if (quick_dialog (&qdlg) != B_CANCEL)
     {
-        quick_widget_t quick_widgets[] = {
-            /* *INDENT-OFF* */
-            QUICK_LABELED_INPUT (N_("Enter file name:"), input_label_above,
-                                 vfs_path_as_str (edit->filename_vpath), "save-as",
-                                 &filename_res, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
-            QUICK_SEPARATOR (TRUE),
-            QUICK_LABEL (N_("Change line breaks to:"), NULL),
-            QUICK_RADIO (LB_NAMES, lb_names, (int *) &cur_lb, NULL),
-            QUICK_BUTTONS_OK_CANCEL,
-            QUICK_END
-            /* *INDENT-ON* */
-        };
+        char *fname;
 
-        quick_dialog_t qdlg = {
-            -1, -1, 64,
-            N_("Save As"), "[Save File As]",
-            quick_widgets, NULL, NULL
-        };
-
-        if (quick_dialog (&qdlg) != B_CANCEL)
-        {
-            char *fname;
-
-            edit->lb = cur_lb;
-            fname = tilde_expand (filename_res);
-            g_free (filename_res);
-            ret_vpath = vfs_path_from_str (fname);
-            g_free (fname);
-        }
+        edit->lb = cur_lb;
+        fname = tilde_expand (filename_res);
+        g_free (filename_res);
+        ret_vpath = vfs_path_from_str (fname);
+        g_free (fname);
     }
 
     return ret_vpath;
@@ -552,8 +550,9 @@ edit_block_delete (WEdit * edit)
     off_t curs_pos;
     long curs_line, c1, c2;
 
-    if (eval_marks (edit, &start_mark, &end_mark))
+    if (!eval_marks (edit, &start_mark, &end_mark))
         return 0;
+
     if (edit->column_highlight && edit->mark2 < 0)
         edit_mark_cmd (edit, FALSE);
     if ((end_mark - start_mark) > option_max_undo / 2)
@@ -762,7 +761,7 @@ edit_search_fix_search_start_if_selection (WEdit * edit)
     if (!edit_search_options.only_in_selection)
         return;
 
-    if (eval_marks (edit, &start_mark, &end_mark) != 0)
+    if (!eval_marks (edit, &start_mark, &end_mark) != 0)
         return;
 
     if (edit_search_options.backwards)
@@ -786,7 +785,6 @@ editcmd_find (WEdit * edit, gsize * len)
     off_t search_end;
     off_t start_mark = 0;
     off_t end_mark = edit->buffer.size;
-    int mark_res = 0;
     char end_string_symbol;
 
     end_string_symbol = edit_search_get_current_end_line_char (edit);
@@ -794,8 +792,7 @@ editcmd_find (WEdit * edit, gsize * len)
     /* prepare for search */
     if (edit_search_options.only_in_selection)
     {
-        mark_res = eval_marks (edit, &start_mark, &end_mark);
-        if (mark_res != 0)
+        if (!eval_marks (edit, &start_mark, &end_mark))
         {
             edit->search->error = MC_SEARCH_E_NOTFOUND;
             edit->search->error_str = g_strdup (_("Search string not found"));
@@ -2215,66 +2212,65 @@ edit_close_cmd (WEdit * edit)
 /**
    if mark2 is -1 then marking is from mark1 to the cursor.
    Otherwise its between the markers. This handles this.
-   Returns 1 if no text is marked.
+   Returns FALSE if no text is marked.
  */
 
-int
+gboolean
 eval_marks (WEdit * edit, off_t * start_mark, off_t * end_mark)
 {
-    if (edit->mark1 != edit->mark2)
-    {
-        off_t start_bol, start_eol;
-        off_t end_bol, end_eol;
-        off_t diff1, diff2;
-        long col1, col2;
-        long end_mark_curs;
+    long end_mark_curs;
 
-        if (edit->end_mark_curs < 0)
-            end_mark_curs = edit->buffer.curs1;
-        else
-            end_mark_curs = edit->end_mark_curs;
-
-        if (edit->mark2 >= 0)
-        {
-            *start_mark = min (edit->mark1, edit->mark2);
-            *end_mark = max (edit->mark1, edit->mark2);
-        }
-        else
-        {
-            *start_mark = min (edit->mark1, end_mark_curs);
-            *end_mark = max (edit->mark1, end_mark_curs);
-            edit->column2 = edit->curs_col + edit->over_col;
-        }
-
-        if (edit->column_highlight
-            && (((edit->mark1 > end_mark_curs) && (edit->column1 < edit->column2))
-                || ((edit->mark1 < end_mark_curs) && (edit->column1 > edit->column2))))
-        {
-            start_bol = edit_buffer_get_bol (&edit->buffer, *start_mark);
-            start_eol = edit_buffer_get_eol (&edit->buffer, start_bol - 1) + 1;
-            end_bol = edit_buffer_get_bol (&edit->buffer, *end_mark);
-            end_eol = edit_buffer_get_eol (&edit->buffer, *end_mark);
-            col1 = min (edit->column1, edit->column2);
-            col2 = max (edit->column1, edit->column2);
-
-            diff1 = edit_move_forward3 (edit, start_bol, col2, 0) -
-                edit_move_forward3 (edit, start_bol, col1, 0);
-            diff2 = edit_move_forward3 (edit, end_bol, col2, 0) -
-                edit_move_forward3 (edit, end_bol, col1, 0);
-
-            *start_mark -= diff1;
-            *end_mark += diff2;
-            *start_mark = max (*start_mark, start_eol);
-            *end_mark = min (*end_mark, end_eol);
-        }
-        return 0;
-    }
-    else
+    if (edit->mark1 == edit->mark2)
     {
         *start_mark = *end_mark = 0;
         edit->column2 = edit->column1 = 0;
-        return 1;
+        return FALSE;
     }
+
+    if (edit->end_mark_curs < 0)
+        end_mark_curs = edit->buffer.curs1;
+    else
+        end_mark_curs = edit->end_mark_curs;
+
+    if (edit->mark2 >= 0)
+    {
+        *start_mark = min (edit->mark1, edit->mark2);
+        *end_mark = max (edit->mark1, edit->mark2);
+    }
+    else
+    {
+        *start_mark = min (edit->mark1, end_mark_curs);
+        *end_mark = max (edit->mark1, end_mark_curs);
+        edit->column2 = edit->curs_col + edit->over_col;
+    }
+
+    if (edit->column_highlight
+        && ((edit->mark1 > end_mark_curs && edit->column1 < edit->column2)
+            || (edit->mark1 < end_mark_curs && edit->column1 > edit->column2)))
+    {
+        off_t start_bol, start_eol;
+        off_t end_bol, end_eol;
+        long col1, col2;
+        off_t diff1, diff2;
+
+        start_bol = edit_buffer_get_bol (&edit->buffer, *start_mark);
+        start_eol = edit_buffer_get_eol (&edit->buffer, start_bol - 1) + 1;
+        end_bol = edit_buffer_get_bol (&edit->buffer, *end_mark);
+        end_eol = edit_buffer_get_eol (&edit->buffer, *end_mark);
+        col1 = min (edit->column1, edit->column2);
+        col2 = max (edit->column1, edit->column2);
+
+        diff1 = edit_move_forward3 (edit, start_bol, col2, 0) -
+            edit_move_forward3 (edit, start_bol, col1, 0);
+        diff2 = edit_move_forward3 (edit, end_bol, col2, 0) -
+            edit_move_forward3 (edit, end_bol, col1, 0);
+
+        *start_mark -= diff1;
+        *end_mark += diff2;
+        *start_mark = max (*start_mark, start_eol);
+        *end_mark = min (*end_mark, end_eol);
+    }
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2290,7 +2286,7 @@ edit_block_copy_cmd (WEdit * edit)
     unsigned char *copy_buf;
 
     edit_update_curs_col (edit);
-    if (eval_marks (edit, &start_mark, &end_mark))
+    if (!eval_marks (edit, &start_mark, &end_mark))
         return;
 
     copy_buf = edit_get_block (edit, start_mark, end_mark, &size);
@@ -2337,7 +2333,7 @@ edit_block_move_cmd (WEdit * edit)
     unsigned char *copy_buf = NULL;
     off_t start_mark, end_mark;
 
-    if (eval_marks (edit, &start_mark, &end_mark))
+    if (!eval_marks (edit, &start_mark, &end_mark))
         return;
 
     if (!edit->column_highlight && edit->buffer.curs1 > start_mark && edit->buffer.curs1 < end_mark)
@@ -2436,12 +2432,12 @@ int
 edit_block_delete_cmd (WEdit * edit)
 {
     off_t start_mark, end_mark;
+
     if (eval_marks (edit, &start_mark, &end_mark))
-    {
-        edit_delete_line (edit);
-        return 0;
-    }
-    return edit_block_delete (edit);
+        return edit_block_delete (edit);
+
+    edit_delete_line (edit);
+    return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2889,8 +2885,9 @@ edit_copy_to_X_buf_cmd (WEdit * edit)
 {
     off_t start_mark, end_mark;
 
-    if (eval_marks (edit, &start_mark, &end_mark))
+    if (!eval_marks (edit, &start_mark, &end_mark))
         return TRUE;
+
     if (!edit_save_block_to_clip_file (edit, start_mark, end_mark))
     {
         edit_error_dialog (_("Copy to clipboard"), get_sys_error (_("Unable to save to file")));
@@ -2909,8 +2906,9 @@ edit_cut_to_X_buf_cmd (WEdit * edit)
 {
     off_t start_mark, end_mark;
 
-    if (eval_marks (edit, &start_mark, &end_mark))
+    if (!eval_marks (edit, &start_mark, &end_mark))
         return TRUE;
+
     if (!edit_save_block_to_clip_file (edit, start_mark, end_mark))
     {
         edit_error_dialog (_("Cut to clipboard"), _("Unable to save to file"));
@@ -2996,7 +2994,7 @@ edit_save_block_cmd (WEdit * edit)
     char *exp, *tmp;
     gboolean ret = FALSE;
 
-    if (eval_marks (edit, &start_mark, &end_mark))
+    if (!eval_marks (edit, &start_mark, &end_mark))
         return TRUE;
 
     tmp = mc_config_get_full_path (EDIT_CLIP_FILE);
@@ -3068,7 +3066,7 @@ edit_sort_cmd (WEdit * edit)
     off_t start_mark, end_mark;
     int e;
 
-    if (eval_marks (edit, &start_mark, &end_mark))
+    if (!eval_marks (edit, &start_mark, &end_mark))
     {
         edit_error_dialog (_("Sort block"), _("You must first highlight a block of text"));
         return 0;

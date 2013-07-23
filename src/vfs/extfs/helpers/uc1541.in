@@ -61,7 +61,7 @@ Changelog:
     2.0 Added reading raw D64 image, and mapping for jokers. Now it is
         possible to read files with PET-ASCII/control sequences in filenames.
         Working with d64 images only. Added workaround for space at the
-        beggining of the filename.
+        beginning of the filename.
     1.2 Added configuration env variables: UC1541_VERBOSE and UC1541_HIDE_DEL.
         First one, if set to any value, will cause that error messages from
         c1541 program will be redirected as a failure messages visible in MC.
@@ -439,7 +439,7 @@ class Uc1541(object):
                 if '/' in display_name:
                     display_name = display_name.replace('/', '|')
 
-                # workaround for space and dash at the beggining of the
+                # workaround for space and dash at the beginning of the
                 # filename
                 char_map = {' ': '~',
                             '-': '_'}

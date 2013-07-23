@@ -524,9 +524,7 @@ do_compute_dir_size (const vfs_path_t * dirname_vpath, void *ui,
     {
         vfs_path_t *tmp_vpath;
 
-        if (strcmp (dirent->d_name, ".") == 0)
-            continue;
-        if (strcmp (dirent->d_name, "..") == 0)
+        if (DIR_IS_DOT (dirent->d_name) || DIR_IS_DOTDOT (dirent->d_name))
             continue;
 
         tmp_vpath = vfs_path_append_new (dirname_vpath, dirent->d_name, NULL);
@@ -1030,7 +1028,8 @@ erase_file (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_t * v
     int return_status;
     struct stat buf;
 
-    file_progress_show_deleting (ctx, vfs_path_as_str (vpath));
+    file_progress_show_deleting (ctx, vfs_path_as_str (vpath), &tctx->progress_count);
+    file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
     if (check_progress_buttons (ctx) == FILE_ABORT)
         return FILE_ABORT;
 
@@ -1053,9 +1052,11 @@ erase_file (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_t * v
             ctx->skip_all = TRUE;
         break;
     }
+
     if (tctx->progress_count == 0)
         return FILE_CONT;
-    return progress_update_one (tctx, ctx, buf.st_size);
+
+    return check_progress_buttons (ctx);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1067,62 +1068,50 @@ erase_file (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_t * v
   skipall->remove as much as possible
 */
 static FileProgressStatus
-recursive_erase (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s)
+recursive_erase (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_t * vpath)
 {
     struct dirent *next;
-    struct stat buf;
     DIR *reading;
-    char *path;
+    const char *s;
     FileProgressStatus return_status = FILE_CONT;
-    vfs_path_t *vpath;
 
-    if (strcmp (s, "..") == 0)
-        return FILE_RETRY;
-
-    vpath = vfs_path_from_str (s);
     reading = mc_opendir (vpath);
-
     if (reading == NULL)
-    {
-        return_status = FILE_RETRY;
-        goto ret;
-    }
+        return FILE_RETRY;
 
     while ((next = mc_readdir (reading)) && return_status != FILE_ABORT)
     {
         vfs_path_t *tmp_vpath;
+        struct stat buf;
 
-        if (!strcmp (next->d_name, "."))
+        if (DIR_IS_DOT (next->d_name) || DIR_IS_DOTDOT (next->d_name))
             continue;
-        if (!strcmp (next->d_name, ".."))
-            continue;
-        path = mc_build_filename (s, next->d_name, NULL);
-        tmp_vpath = vfs_path_from_str (path);
+
+        tmp_vpath = vfs_path_append_new (vpath, next->d_name, NULL);
         if (mc_lstat (tmp_vpath, &buf) != 0)
         {
-            g_free (path);
             mc_closedir (reading);
             vfs_path_free (tmp_vpath);
-            return_status = FILE_RETRY;
-            goto ret;
+            return FILE_RETRY;
         }
         if (S_ISDIR (buf.st_mode))
-            return_status = recursive_erase (tctx, ctx, path);
+            return_status = recursive_erase (tctx, ctx, tmp_vpath);
         else
             return_status = erase_file (tctx, ctx, tmp_vpath);
         vfs_path_free (tmp_vpath);
-        g_free (path);
     }
     mc_closedir (reading);
-    if (return_status == FILE_ABORT)
-        goto ret;
 
-    file_progress_show_deleting (ctx, s);
+    if (return_status == FILE_ABORT)
+        return FILE_ABORT;
+
+    s = vfs_path_as_str (vpath);
+
+    file_progress_show_deleting (ctx, s, NULL);
+    file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
     if (check_progress_buttons (ctx) == FILE_ABORT)
-    {
-        return_status = FILE_ABORT;
-        goto ret;
-    }
+        return FILE_ABORT;
+
     mc_refresh ();
 
     while (my_rmdir (s) != 0 && !ctx->skip_all)
@@ -1131,14 +1120,12 @@ recursive_erase (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s)
         if (return_status == FILE_RETRY)
             continue;
         if (return_status == FILE_ABORT)
-            goto ret;
+            break;
         if (return_status == FILE_SKIPALL)
             ctx->skip_all = TRUE;
         break;
     }
 
-  ret:
-    vfs_path_free (vpath);
     return return_status;
 }
 
@@ -1151,20 +1138,18 @@ check_dir_is_empty (const vfs_path_t * vpath)
 {
     DIR *dir;
     struct dirent *d;
-    int i;
+    int i = 1;
 
     dir = mc_opendir (vpath);
-    if (!dir)
+    if (dir == NULL)
         return -1;
 
-    for (i = 1, d = mc_readdir (dir); d; d = mc_readdir (dir))
-    {
-        if (d->d_name[0] == '.' && (d->d_name[1] == '\0' ||
-                                    (d->d_name[1] == '.' && d->d_name[2] == '\0')))
-            continue;           /* "." or ".." */
-        i = 0;
-        break;
-    }
+    for (d = mc_readdir (dir); d != NULL; d = mc_readdir (dir))
+        if (!DIR_IS_DOT (d->d_name) && !DIR_IS_DOTDOT (d->d_name))
+        {
+            i = 0;
+            break;
+        }
 
     mc_closedir (dir);
     return i;
@@ -1173,26 +1158,21 @@ check_dir_is_empty (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static FileProgressStatus
-erase_dir_iff_empty (FileOpContext * ctx, const char *s)
+erase_dir_iff_empty (FileOpContext * ctx, const vfs_path_t * vpath, size_t count)
 {
-    FileProgressStatus error;
-    vfs_path_t *s_vpath;
+    FileProgressStatus error = FILE_CONT;
+    const char *s;
 
-    if (strcmp (s, "..") == 0)
-        return FILE_SKIP;
+    s = vfs_path_as_str (vpath);
 
-    if (strcmp (s, ".") == 0)
-        return FILE_SKIP;
-
-    file_progress_show_deleting (ctx, s);
+    file_progress_show_deleting (ctx, s, NULL);
+    file_progress_show_count (ctx, count, ctx->progress_count);
     if (check_progress_buttons (ctx) == FILE_ABORT)
         return FILE_ABORT;
 
     mc_refresh ();
 
-    s_vpath = vfs_path_from_str (s);
-
-    if (check_dir_is_empty (s_vpath) == 1)      /* not empty or error */
+    if (check_dir_is_empty (vpath) == 1)        /* not empty or error */
     {
         while (my_rmdir (s) != 0 && !ctx->skip_all)
         {
@@ -1200,15 +1180,11 @@ erase_dir_iff_empty (FileOpContext * ctx, const char *s)
             if (error == FILE_SKIPALL)
                 ctx->skip_all = TRUE;
             if (error != FILE_RETRY)
-            {
-                vfs_path_free (s_vpath);
-                return error;
-            }
+                break;
         }
     }
 
-    vfs_path_free (s_vpath);
-    return FILE_CONT;
+    return error;
 }
 
 /* }}} */
@@ -2028,11 +2004,9 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     struct dirent *next;
     struct stat buf, cbuf;
     DIR *reading;
-    char *dest_dir = NULL;
     FileProgressStatus return_status = FILE_CONT;
-    struct utimbuf utb;
     struct link *lp;
-    vfs_path_t *src_vpath, *dst_vpath, *dest_dir_vpath = NULL;
+    vfs_path_t *src_vpath, *dst_vpath;
     gboolean do_mkdir = TRUE;
 
     src_vpath = vfs_path_from_str (s);
@@ -2109,15 +2083,11 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     if (mc_stat (dst_vpath, &buf) != 0)
     {
         /* Here the dir doesn't exist : make it ! */
-        if (move_over)
+        if (move_over && mc_rename (src_vpath, dst_vpath) == 0)
         {
-            if (mc_rename (src_vpath, dst_vpath) == 0)
-            {
-                return_status = FILE_CONT;
-                goto ret;
-            }
+            return_status = FILE_CONT;
+            goto ret;
         }
-        dest_dir = g_strdup (d);
     }
     else
     {
@@ -2145,26 +2115,30 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         }
         /* Dive into subdir if exists */
         if (toplevel && ctx->dive_into_subdirs)
-            dest_dir = mc_build_filename (d, x_basename (s), NULL);
-        else
         {
-            dest_dir = g_strdup (d);
-            do_mkdir = FALSE;
+            vfs_path_t *tmp;
+
+            tmp = dst_vpath;
+            dst_vpath = vfs_path_append_new (dst_vpath, x_basename (s), NULL);
+            vfs_path_free (tmp);
+
         }
+        else
+            do_mkdir = FALSE;
     }
 
-    dest_dir_vpath = vfs_path_from_str (dest_dir);
+    d = vfs_path_as_str (dst_vpath);
 
     if (do_mkdir)
     {
-        while (my_mkdir (dest_dir_vpath, (cbuf.st_mode & ctx->umask_kill) | S_IRWXU) != 0)
+        while (my_mkdir (dst_vpath, (cbuf.st_mode & ctx->umask_kill) | S_IRWXU) != 0)
         {
             if (ctx->skip_all)
                 return_status = FILE_SKIPALL;
             else
             {
                 return_status =
-                    file_error (_("Cannot create target directory \"%s\"\n%s"), dest_dir);
+                    file_error (_("Cannot create target directory \"%s\"\n%s"), d);
                 if (return_status == FILE_SKIPALL)
                     ctx->skip_all = TRUE;
             }
@@ -2173,8 +2147,8 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         }
 
         lp = g_new0 (struct link, 1);
-        mc_stat (dest_dir_vpath, &buf);
-        lp->vfs = vfs_path_get_by_index (dest_dir_vpath, -1)->class;
+        mc_stat (dst_vpath, &buf);
+        lp->vfs = vfs_path_get_by_index (dst_vpath, -1)->class;
         lp->ino = buf.st_ino;
         lp->dev = buf.st_dev;
         dest_dirs = g_slist_prepend (dest_dirs, lp);
@@ -2182,14 +2156,14 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
 
     if (ctx->preserve_uidgid)
     {
-        while (mc_chown (dest_dir_vpath, cbuf.st_uid, cbuf.st_gid) != 0)
+        while (mc_chown (dst_vpath, cbuf.st_uid, cbuf.st_gid) != 0)
         {
             if (ctx->skip_all)
                 return_status = FILE_SKIPALL;
             else
             {
                 return_status =
-                    file_error (_("Cannot chown target directory \"%s\"\n%s"), dest_dir);
+                    file_error (_("Cannot chown target directory \"%s\"\n%s"), d);
                 if (return_status == FILE_SKIPALL)
                     ctx->skip_all = TRUE;
             }
@@ -2207,12 +2181,11 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     {
         char *path;
         vfs_path_t *tmp_vpath;
+
         /*
          * Now, we don't want '.' and '..' to be created / copied at any time
          */
-        if (!strcmp (next->d_name, "."))
-            continue;
-        if (!strcmp (next->d_name, ".."))
+        if (DIR_IS_DOT (next->d_name) || DIR_IS_DOTDOT (next->d_name))
             continue;
 
         /* get the filename and add it to the src directory */
@@ -2224,7 +2197,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         {
             char *mdpath;
 
-            mdpath = mc_build_filename (dest_dir, next->d_name, NULL);
+            mdpath = mc_build_filename (d, next->d_name, NULL);
             /*
              * From here, we just intend to recursively copy subdirs, not
              * the double functionality of copying different when the target
@@ -2239,47 +2212,50 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         {
             char *dest_file;
 
-            dest_file = mc_build_filename (dest_dir, x_basename (path), NULL);
+            dest_file = mc_build_filename (d, x_basename (path), NULL);
             return_status = copy_file_file (tctx, ctx, path, dest_file);
             g_free (dest_file);
         }
+
+        g_free (path);
+
         if (do_delete && return_status == FILE_CONT)
         {
             if (ctx->erase_at_end)
             {
                 lp = g_new0 (struct link, 1);
-                lp->src_vpath = vfs_path_clone (tmp_vpath);
+                lp->src_vpath = tmp_vpath;
                 lp->st_mode = buf.st_mode;
                 erase_list = g_slist_append (erase_list, lp);
+                tmp_vpath = NULL;
             }
             else if (S_ISDIR (buf.st_mode))
-                return_status = erase_dir_iff_empty (ctx, path);
+                return_status = erase_dir_iff_empty (ctx, tmp_vpath, tctx->progress_count);
             else
                 return_status = erase_file (tctx, ctx, tmp_vpath);
         }
-        g_free (path);
         vfs_path_free (tmp_vpath);
     }
     mc_closedir (reading);
 
     if (ctx->preserve)
     {
-        mc_chmod (dest_dir_vpath, cbuf.st_mode & ctx->umask_kill);
+        struct utimbuf utb;
+
+        mc_chmod (dst_vpath, cbuf.st_mode & ctx->umask_kill);
         utb.actime = cbuf.st_atime;
         utb.modtime = cbuf.st_mtime;
-        mc_utime (dest_dir_vpath, &utb);
+        mc_utime (dst_vpath, &utb);
     }
     else
     {
         cbuf.st_mode = umask (-1);
         umask (cbuf.st_mode);
         cbuf.st_mode = 0100777 & ~cbuf.st_mode;
-        mc_chmod (dest_dir_vpath, cbuf.st_mode & ctx->umask_kill);
+        mc_chmod (dst_vpath, cbuf.st_mode & ctx->umask_kill);
     }
 
   ret:
-    g_free (dest_dir);
-    vfs_path_free (dest_dir_vpath);
     free_link (parent_dirs->data);
     g_slist_free_1 (parent_dirs);
   ret_fast:
@@ -2297,12 +2273,10 @@ FileProgressStatus
 move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, const char *d)
 {
     struct stat sbuf, dbuf, destbuf;
-    struct link *lp;
-    char *destdir;
     FileProgressStatus return_status;
     gboolean move_over = FALSE;
     gboolean dstat_ok;
-    vfs_path_t *src_vpath, *dst_vpath, *destdir_vpath;
+    vfs_path_t *src_vpath, *dst_vpath;
 
     src_vpath = vfs_path_from_str (s);
     dst_vpath = vfs_path_from_str (d);
@@ -2328,24 +2302,27 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     }
 
     if (!dstat_ok)
-        destdir = g_strdup (d); /* destination doesn't exist */
+        ;       /* destination doesn't exist */
     else if (!ctx->dive_into_subdirs)
-    {
-        destdir = g_strdup (d);
         move_over = TRUE;
-    }
     else
-        destdir = mc_build_filename (d, x_basename (s), NULL);
+    {
+        vfs_path_t *tmp;
 
-    destdir_vpath = vfs_path_from_str (destdir);
+        tmp = dst_vpath;
+        dst_vpath = vfs_path_append_new (dst_vpath, x_basename (s), NULL);
+        vfs_path_free (tmp);
+    }
+
+    d = vfs_path_as_str (dst_vpath);
 
     /* Check if the user inputted an existing dir */
   retry_dst_stat:
-    if (mc_stat (destdir_vpath, &destbuf) == 0)
+    if (mc_stat (dst_vpath, &destbuf) == 0)
     {
         if (move_over)
         {
-            return_status = copy_dir_dir (tctx, ctx, s, destdir, FALSE, TRUE, TRUE, NULL);
+            return_status = copy_dir_dir (tctx, ctx, s, d, FALSE, TRUE, TRUE, NULL);
 
             if (return_status != FILE_CONT)
                 goto ret;
@@ -2356,22 +2333,20 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         else
         {
             if (S_ISDIR (destbuf.st_mode))
-                return_status = file_error (_("Cannot overwrite directory \"%s\"\n%s"), destdir);
+                return_status = file_error (_("Cannot overwrite directory \"%s\"\n%s"), d);
             else
-                return_status = file_error (_("Cannot overwrite file \"%s\"\n%s"), destdir);
+                return_status = file_error (_("Cannot overwrite file \"%s\"\n%s"), d);
             if (return_status == FILE_SKIPALL)
                 ctx->skip_all = TRUE;
             if (return_status == FILE_RETRY)
                 goto retry_dst_stat;
         }
 
-        g_free (destdir);
-        vfs_path_free (destdir_vpath);
         goto ret_fast;
     }
 
   retry_rename:
-    if (mc_rename (src_vpath, destdir_vpath) == 0)
+    if (mc_rename (src_vpath, dst_vpath) == 0)
     {
         return_status = FILE_CONT;
         goto ret;
@@ -2390,7 +2365,7 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
         goto ret;
     }
     /* Failed because of filesystem boundary -> copy dir instead */
-    return_status = copy_dir_dir (tctx, ctx, s, destdir, FALSE, FALSE, TRUE, NULL);
+    return_status = copy_dir_dir (tctx, ctx, s, d, FALSE, FALSE, TRUE, NULL);
 
     if (return_status != FILE_CONT)
         goto ret;
@@ -2407,11 +2382,10 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     {
         for (; erase_list != NULL && return_status != FILE_ABORT;)
         {
-            lp = (struct link *) erase_list->data;
+            struct link *lp = (struct link *) erase_list->data;
 
             if (S_ISDIR (lp->st_mode))
-
-                return_status = erase_dir_iff_empty (ctx, vfs_path_as_str (lp->src_vpath));
+                return_status = erase_dir_iff_empty (ctx, lp->src_vpath, tctx->progress_count);
             else
                 return_status = erase_file (tctx, ctx, lp->src_vpath);
 
@@ -2419,11 +2393,9 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
             free_link (lp);
         }
     }
-    erase_dir_iff_empty (ctx, s);
+    erase_dir_iff_empty (ctx, src_vpath, tctx->progress_count);
 
   ret:
-    g_free (destdir);
-    vfs_path_free (destdir_vpath);
     erase_list = free_linklist (erase_list);
   ret_fast:
     vfs_path_free (src_vpath);
@@ -2441,15 +2413,8 @@ erase_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_t * s_
 {
     FileProgressStatus error;
 
-    /*
-       if (strcmp (s, "..") == 0)
-       return FILE_SKIP;
-
-       if (strcmp (s, ".") == 0)
-       return FILE_SKIP;
-     */
-
-    file_progress_show_deleting (ctx, vfs_path_as_str (s_vpath));
+    file_progress_show_deleting (ctx, vfs_path_as_str (s_vpath), NULL);
+    file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
     if (check_progress_buttons (ctx) == FILE_ABORT)
         return FILE_ABORT;
 
@@ -2467,7 +2432,7 @@ erase_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_t * s_
     {                           /* not empty */
         error = query_recursive (ctx, vfs_path_as_str (s_vpath));
         if (error == FILE_CONT)
-            error = recursive_erase (tctx, ctx, vfs_path_as_str (s_vpath));
+            error = recursive_erase (tctx, ctx, s_vpath);
         return error;
     }
 
@@ -2672,7 +2637,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         else
             source = panel_get_file (panel);
 
-        if (strcmp (source, "..") == 0)
+        if (DIR_IS_DOTDOT (source))
         {
             g_free (source);
             message (D_ERROR, MSG_ERROR, _("Cannot operate on \"..\"!"));

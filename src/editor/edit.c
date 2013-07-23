@@ -1534,7 +1534,7 @@ edit_move_block_to_right (WEdit * edit)
     off_t start_mark, end_mark;
     long cur_bol, start_bol;
 
-    if (eval_marks (edit, &start_mark, &end_mark))
+    if (!eval_marks (edit, &start_mark, &end_mark))
         return;
 
     start_bol = edit_buffer_get_bol (&edit->buffer, start_mark);
@@ -1572,7 +1572,7 @@ edit_move_block_to_left (WEdit * edit)
     off_t cur_bol, start_bol;
     int i;
 
-    if (eval_marks (edit, &start_mark, &end_mark))
+    if (!eval_marks (edit, &start_mark, &end_mark))
         return;
 
     start_bol = edit_buffer_get_bol (&edit->buffer, start_mark);
@@ -1708,7 +1708,7 @@ void
 user_menu (WEdit * edit, const char *menu_file, int selected_entry)
 {
     char *block_file;
-    int nomark;
+    gboolean nomark;
     off_t curs;
     off_t start_mark, end_mark;
     struct stat status;
@@ -1717,8 +1717,8 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
     block_file = mc_config_get_full_path (EDIT_BLOCK_FILE);
     block_file_vpath = vfs_path_from_str (block_file);
     curs = edit->buffer.curs1;
-    nomark = eval_marks (edit, &start_mark, &end_mark);
-    if (nomark == 0)
+    nomark = !eval_marks (edit, &start_mark, &end_mark);
+    if (!nomark)
         edit_save_block (edit, block_file, start_mark, end_mark);
 
     /* run shell scripts from menu */
@@ -1729,7 +1729,7 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
         FILE *fd;
 
         /* i.e. we have marked block */
-        if (nomark == 0)
+        if (!nomark)
             rc = edit_block_delete_cmd (edit);
 
         if (rc == 0)
@@ -1737,7 +1737,7 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
             off_t ins_len;
 
             ins_len = edit_insert_file (edit, block_file_vpath);
-            if (nomark == 0 && ins_len > 0)
+            if (!nomark && ins_len > 0)
                 edit_set_markers (edit, start_mark, start_mark + ins_len, 0, 0);
         }
         /* truncate block file */

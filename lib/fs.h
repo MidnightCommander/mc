@@ -74,6 +74,9 @@
 
 #define MC_MAXFILENAMELEN MAXNAMLEN
 
+#define DIR_IS_DOT(x) ((x)[0] == '.' && (x)[1] == '\0')
+#define DIR_IS_DOTDOT(x) ((x)[0] == '.' && (x)[1] == '.' && (x)[2] == '\0')
+
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/

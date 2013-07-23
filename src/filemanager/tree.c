@@ -257,7 +257,8 @@ tree_show_mini_info (WTree * tree, int tree_lines, int tree_cols)
         tty_setcolor (tree->is_panel ? NORMAL_COLOR : TREE_NORMALC (h));
         tty_draw_hline (w->y + line, w->x + 1, ' ', tree_cols);
         widget_move (w, line, 1);
-        tty_print_string (str_fit_to_term (tree->selected_ptr->name->str, tree_cols, J_LEFT_FIT));
+        tty_print_string (str_fit_to_term
+                          (vfs_path_as_str (tree->selected_ptr->name), tree_cols, J_LEFT_FIT));
     }
 }
 
@@ -316,7 +317,11 @@ show_tree (WTree * tree)
             }
             else if (current->sublevel == tree->selected_ptr->sublevel)
             {
-                for (j = strlen (current->name->str) - 1; current->name->str[j] != PATH_SEP; j--);
+                const char *cname;
+
+                cname = vfs_path_as_str (current->name);
+                for (j = strlen (cname) - 1; cname[j] != PATH_SEP; j--)
+                    ;
                 if (vfs_path_equal_len (current->name, tree->selected_ptr->name, j))
                     i++;
             }
@@ -355,8 +360,8 @@ show_tree (WTree * tree)
         if (current->sublevel == topsublevel)
             /* Show full name */
             tty_print_string (str_fit_to_term
-                              (current->name->str, tree_cols + (tree->is_panel ? 0 : 1),
-                               J_LEFT_FIT));
+                              (vfs_path_as_str (current->name),
+                               tree_cols + (tree->is_panel ? 0 : 1), J_LEFT_FIT));
         else
         {
             /* Sub level directory */
@@ -403,8 +408,10 @@ show_tree (WTree * tree)
                 }
                 else if (current->sublevel == tree->selected_ptr->sublevel)
                 {
-                    for (j = strlen (current->name->str) - 1; current->name->str[j] != PATH_SEP;
-                         j--)
+                    const char *cname;
+
+                    cname = vfs_path_as_str (current->name);
+                    for (j = strlen (cname) - 1; cname[j] != PATH_SEP; j--)
                         ;
                     if (vfs_path_equal_len (current->name, tree->selected_ptr->name, j))
                         break;
@@ -762,7 +769,7 @@ tree_copy (WTree * tree, const char *default_dest)
         return;
 
     g_snprintf (msg, sizeof (msg), _("Copy \"%s\" directory to:"),
-                str_trunc (tree->selected_ptr->name->str, 50));
+                str_trunc (vfs_path_as_str (tree->selected_ptr->name), 50));
     dest = input_expand_dialog (Q_ ("DialogTitle|Copy"),
                                 msg, MC_HISTORY_FM_TREE_COPY, default_dest,
                                 INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD);
@@ -776,7 +783,8 @@ tree_copy (WTree * tree, const char *default_dest)
         tctx = file_op_total_context_new ();
         file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_MULTI_ITEM);
         tctx->ask_overwrite = FALSE;
-        copy_dir_dir (tctx, ctx, tree->selected_ptr->name->str, dest, TRUE, FALSE, FALSE, NULL);
+        copy_dir_dir (tctx, ctx, vfs_path_as_str (tree->selected_ptr->name), dest, TRUE, FALSE,
+                      FALSE, NULL);
         file_op_total_context_destroy (tctx);
         file_op_context_destroy (ctx);
     }
@@ -799,7 +807,7 @@ tree_move (WTree * tree, const char *default_dest)
         return;
 
     g_snprintf (msg, sizeof (msg), _("Move \"%s\" directory to:"),
-                str_trunc (tree->selected_ptr->name->str, 50));
+                str_trunc (vfs_path_as_str (tree->selected_ptr->name), 50));
     dest =
         input_expand_dialog (Q_ ("DialogTitle|Move"), msg, MC_HISTORY_FM_TREE_MOVE, default_dest,
                              INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD);
@@ -823,7 +831,7 @@ tree_move (WTree * tree, const char *default_dest)
     ctx = file_op_context_new (OP_MOVE);
     tctx = file_op_total_context_new ();
     file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_ONE_ITEM);
-    move_dir_dir (tctx, ctx, tree->selected_ptr->name->str, dest);
+    move_dir_dir (tctx, ctx, vfs_path_as_str (tree->selected_ptr->name), dest);
     file_op_total_context_destroy (tctx);
     file_op_context_destroy (ctx);
 
@@ -868,7 +876,7 @@ tree_rmdir (void *data)
         char *buf;
         int result;
 
-        buf = g_strdup_printf (_("Delete %s?"), tree->selected_ptr->name->str);
+        buf = g_strdup_printf (_("Delete %s?"), vfs_path_as_str (tree->selected_ptr->name));
 
         result = query_dialog (Q_ ("DialogTitle|Delete"), buf, D_ERROR, 2, _("&Yes"), _("&No"));
         g_free (buf);

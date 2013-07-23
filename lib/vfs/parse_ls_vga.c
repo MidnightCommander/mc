@@ -800,7 +800,7 @@ vfs_parse_ls_lga (const char *p, struct stat * s, char **filename, char **linkna
     if (num_spaces != NULL)
     {
         *num_spaces = column_ptr[idx] - column_ptr[idx - 1] - strlen (columns[idx - 1]);
-        if (strcmp (columns[idx], "..") == 0)
+        if (DIR_IS_DOTDOT (columns[idx]))
             vfs_parce_ls_final_num_spaces = *num_spaces;
     }
 

@@ -230,8 +230,13 @@ typedef struct
 
     /* Dialog and widgets for the operation progress window */
     WDialog *op_dlg;
-    WLabel *file_string[2];
-    WLabel *file_label[2];
+    /* Source file: label and name */
+    WLabel *src_file_label;
+    WLabel *src_file;
+    /* Target file: label and name */
+    WLabel *tgt_file_label;
+    WLabel *tgt_file;
+
     WGauge *progress_file_gauge;
     WLabel *progress_file_label;
 
@@ -743,53 +748,66 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
 
     ui = ctx->ui;
     ui->replace_result = REPLACE_YES;
-    ui->showing_eta = with_eta && ctx->progress_totals_computed;
-    ui->showing_bps = with_eta;
 
     ui->op_dlg =
         dlg_create (TRUE, 0, 0, dlg_height, dlg_width, dialog_colors, NULL, NULL, NULL,
                     op_names[ctx->operation], DLG_CENTER);
 
-    ui->file_label[0] = label_new (y++, x, "");
-    add_widget (ui->op_dlg, ui->file_label[0]);
-
-    ui->file_string[0] = label_new (y++, x, "");
-    add_widget (ui->op_dlg, ui->file_string[0]);
-
-    ui->file_label[1] = label_new (y++, x, "");
-    add_widget (ui->op_dlg, ui->file_label[1]);
-
-    ui->file_string[1] = label_new (y++, x, "");
-    add_widget (ui->op_dlg, ui->file_string[1]);
-
-    ui->progress_file_gauge = gauge_new (y++, x + 3, dlg_width - (x + 3) * 2, FALSE, 100, 0);
-    if (!classic_progressbar && (current_panel == right_panel))
-        ui->progress_file_gauge->from_left_to_right = FALSE;
-    add_widget_autopos (ui->op_dlg, ui->progress_file_gauge, WPOS_KEEP_TOP | WPOS_KEEP_HORZ, NULL);
-
-    ui->progress_file_label = label_new (y++, x, "");
-    add_widget (ui->op_dlg, ui->progress_file_label);
-
-    if (verbose && dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
+    if (dialog_type != FILEGUI_DIALOG_DELETE_ITEM)
     {
-        ui->total_bytes_label = hline_new (y++, -1, -1);
-        add_widget (ui->op_dlg, ui->total_bytes_label);
+        ui->showing_eta = with_eta && ctx->progress_totals_computed;
+        ui->showing_bps = with_eta;
 
-        if (ctx->progress_totals_computed)
+        ui->src_file_label = label_new (y++, x, "");
+        add_widget (ui->op_dlg, ui->src_file_label);
+
+        ui->src_file = label_new (y++, x, "");
+        add_widget (ui->op_dlg, ui->src_file);
+
+        ui->tgt_file_label = label_new (y++, x, "");
+        add_widget (ui->op_dlg, ui->tgt_file_label);
+
+        ui->tgt_file = label_new (y++, x, "");
+        add_widget (ui->op_dlg, ui->tgt_file);
+
+        ui->progress_file_gauge = gauge_new (y++, x + 3, dlg_width - (x + 3) * 2, FALSE, 100, 0);
+        if (!classic_progressbar && (current_panel == right_panel))
+            ui->progress_file_gauge->from_left_to_right = FALSE;
+        add_widget_autopos (ui->op_dlg, ui->progress_file_gauge, WPOS_KEEP_TOP | WPOS_KEEP_HORZ,
+                            NULL);
+
+        ui->progress_file_label = label_new (y++, x, "");
+        add_widget (ui->op_dlg, ui->progress_file_label);
+
+        if (verbose && dialog_type == FILEGUI_DIALOG_MULTI_ITEM)
         {
-            ui->progress_total_gauge =
-                gauge_new (y++, x + 3, dlg_width - (x + 3) * 2, FALSE, 100, 0);
-            if (!classic_progressbar && (current_panel == right_panel))
-                ui->progress_total_gauge->from_left_to_right = FALSE;
-            add_widget_autopos (ui->op_dlg, ui->progress_total_gauge,
-                                WPOS_KEEP_TOP | WPOS_KEEP_HORZ, NULL);
+            ui->total_bytes_label = hline_new (y++, -1, -1);
+            add_widget (ui->op_dlg, ui->total_bytes_label);
+
+            if (ctx->progress_totals_computed)
+            {
+                ui->progress_total_gauge =
+                    gauge_new (y++, x + 3, dlg_width - (x + 3) * 2, FALSE, 100, 0);
+                if (!classic_progressbar && (current_panel == right_panel))
+                    ui->progress_total_gauge->from_left_to_right = FALSE;
+                add_widget_autopos (ui->op_dlg, ui->progress_total_gauge,
+                                    WPOS_KEEP_TOP | WPOS_KEEP_HORZ, NULL);
+            }
+
+            ui->total_files_processed_label = label_new (y++, x, "");
+            add_widget (ui->op_dlg, ui->total_files_processed_label);
+
+            ui->time_label = label_new (y++, x, "");
+            add_widget (ui->op_dlg, ui->time_label);
         }
+    }
+    else
+    {
+        ui->src_file = label_new (y++, x, "");
+        add_widget (ui->op_dlg, ui->src_file);
 
         ui->total_files_processed_label = label_new (y++, x, "");
         add_widget (ui->op_dlg, ui->total_files_processed_label);
-
-        ui->time_label = label_new (y++, x, "");
-        add_widget (ui->op_dlg, ui->time_label);
     }
 
     add_widget (ui->op_dlg, hline_new (y++, -1, -1));
@@ -1021,14 +1039,14 @@ file_progress_show_source (FileOpContext * ctx, const vfs_path_t * s_vpath)
         char *s;
 
         s = vfs_path_tokens_get (s_vpath, -1, 1);
-        label_set_text (ui->file_label[0], _("Source"));
-        label_set_text (ui->file_string[0], truncFileString (ui->op_dlg, s));
+        label_set_text (ui->src_file_label, _("Source"));
+        label_set_text (ui->src_file, truncFileString (ui->op_dlg, s));
         g_free (s);
     }
     else
     {
-        label_set_text (ui->file_label[0], "");
-        label_set_text (ui->file_string[0], "");
+        label_set_text (ui->src_file_label, "");
+        label_set_text (ui->src_file, "");
     }
 }
 
@@ -1046,21 +1064,21 @@ file_progress_show_target (FileOpContext * ctx, const vfs_path_t * s_vpath)
 
     if (s_vpath != NULL)
     {
-        label_set_text (ui->file_label[1], _("Target"));
-        label_set_text (ui->file_string[1],
+        label_set_text (ui->tgt_file_label, _("Target"));
+        label_set_text (ui->tgt_file,
                         truncFileStringSecure (ui->op_dlg, vfs_path_as_str (s_vpath)));
     }
     else
     {
-        label_set_text (ui->file_label[1], "");
-        label_set_text (ui->file_string[1], "");
+        label_set_text (ui->tgt_file_label, "");
+        label_set_text (ui->tgt_file, "");
     }
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_deleting (FileOpContext * ctx, const char *s)
+file_progress_show_deleting (FileOpContext * ctx, const char *s, size_t * count)
 {
     FileOpContextUI *ui;
 
@@ -1068,8 +1086,10 @@ file_progress_show_deleting (FileOpContext * ctx, const char *s)
         return;
 
     ui = ctx->ui;
-    label_set_text (ui->file_label[0], _("Deleting"));
-    label_set_text (ui->file_label[0], truncFileStringSecure (ui->op_dlg, s));
+    label_set_text (ui->src_file, truncFileStringSecure (ui->op_dlg, s));
+
+    if (count != NULL)
+        (*count)++;
 }
 
 /* --------------------------------------------------------------------------------------------- */

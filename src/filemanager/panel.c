@@ -501,10 +501,8 @@ string_file_size (file_entry * fe, int len)
     static char buffer[BUF_TINY];
 
     /* Don't ever show size of ".." since we don't calculate it */
-    if (!strcmp (fe->fname, ".."))
-    {
+    if (DIR_IS_DOTDOT (fe->fname))
         return _("UP--DIR");
-    }
 
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
     if (S_ISBLK (fe->st.st_mode) || S_ISCHR (fe->st.st_mode))
@@ -528,7 +526,7 @@ string_file_size_brief (file_entry * fe, int len)
         return _("SYMLINK");
     }
 
-    if ((S_ISDIR (fe->st.st_mode) || fe->f.link_to_dir) && strcmp (fe->fname, ".."))
+    if ((S_ISDIR (fe->st.st_mode) || fe->f.link_to_dir) && !DIR_IS_DOTDOT (fe->fname))
     {
         return _("SUB-DIR");
     }
@@ -1007,7 +1005,7 @@ display_mini_info (WPanel * panel)
         else
             tty_print_string (str_fit_to_term (_("<readlink failed>"), w->cols - 2, J_LEFT));
     }
-    else if (strcmp (panel->dir.list[panel->selected].fname, "..") == 0)
+    else if (DIR_IS_DOTDOT (panel->dir.list[panel->selected].fname))
     {
         /* FIXME:
          * while loading directory (do_load_dir() and do_reload_dir()),
@@ -3881,7 +3879,7 @@ event_update_panels (const gchar * event_group_name, const gchar * event_name,
 
 /* event callback */
 static gboolean
-panel_save_curent_file_to_clip_file (const gchar * event_group_name, const gchar * event_name,
+panel_save_current_file_to_clip_file (const gchar * event_group_name, const gchar * event_name,
                                      gpointer init_data, gpointer data)
 {
     (void) event_group_name;
@@ -4377,7 +4375,7 @@ do_file_mark (WPanel * panel, int idx, int mark)
         return;
 
     /* Only '..' can't be marked, '.' isn't visible */
-    if (strcmp (panel->dir.list[idx].fname, "..") == 0)
+    if (DIR_IS_DOTDOT (panel->dir.list[idx].fname))
         return;
 
     file_mark (panel, idx, mark);
@@ -4537,10 +4535,11 @@ panel_change_encoding (WPanel * panel)
     encoding = get_codepage_id (panel->codepage);
     if (encoding != NULL)
     {
-        vfs_change_encoding (panel->cwd_vpath, encoding);
+        vfs_path_change_encoding (panel->cwd_vpath, encoding);
 
         if (!do_panel_cd (panel, panel->cwd_vpath, cd_parse_command))
-            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""), panel->cwd_vpath->str);
+            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""),
+                     vfs_path_as_str (panel->cwd_vpath));
     }
 }
 
@@ -4567,14 +4566,19 @@ remove_encoding_from_path (const vfs_path_t * vpath)
         vfs_path_element_t *path_element;
 
         path_element = vfs_path_element_clone (vfs_path_get_by_index (vpath, indx));
-        vfs_path_add_element (ret_vpath, path_element);
 
         if (path_element->encoding == NULL)
+        {
+            vfs_path_add_element (ret_vpath, path_element);
             continue;
+        }
 
         converter = str_crt_conv_to (path_element->encoding);
         if (converter == INVALID_CONV)
+        {
+            vfs_path_add_element (ret_vpath, path_element);
             continue;
+        }
 
         g_free (path_element->encoding);
         path_element->encoding = NULL;
@@ -4589,6 +4593,7 @@ remove_encoding_from_path (const vfs_path_t * vpath)
         str_close_conv (converter);
         str_close_conv (path_element->dir.converter);
         path_element->dir.converter = INVALID_CONV;
+        vfs_path_add_element (ret_vpath, path_element);
     }
     g_string_free (tmp_conv, TRUE);
     return ret_vpath;
@@ -4770,8 +4775,8 @@ panel_init (void)
         mc_skin_get ("widget-panel", "filename-scroll-right-char", "}");
 
     mc_event_add (MCEVENT_GROUP_FILEMANAGER, "update_panels", event_update_panels, NULL, NULL);
-    mc_event_add (MCEVENT_GROUP_FILEMANAGER, "panel_save_curent_file_to_clip_file",
-                  panel_save_curent_file_to_clip_file, NULL, NULL);
+    mc_event_add (MCEVENT_GROUP_FILEMANAGER, "panel_save_current_file_to_clip_file",
+                  panel_save_current_file_to_clip_file, NULL, NULL);
 
 }
 

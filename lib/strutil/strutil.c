@@ -101,12 +101,11 @@ static estr_t
 _str_convert (GIConv coder, const char *string, int size, GString * buffer)
 {
     estr_t state = ESTR_SUCCESS;
-    gchar *tmp_buff = NULL;
     gssize left;
     gsize bytes_read = 0;
     gsize bytes_written = 0;
-    GError *error = NULL;
-    errno = 0;
+
+    errno = 0;          /* FIXME: is it really needed? */
 
     if (coder == INVALID_CONV)
         return ESTR_FAILURE;
@@ -121,9 +120,7 @@ _str_convert (GIConv coder, const char *string, int size, GString * buffer)
        }
      */
     if (size < 0)
-    {
         size = strlen (string);
-    }
     else
     {
         left = strlen (string);
@@ -134,11 +131,14 @@ _str_convert (GIConv coder, const char *string, int size, GString * buffer)
     left = size;
     g_iconv (coder, NULL, NULL, NULL, NULL);
 
-    while (left)
+    while (left != 0)
     {
+        gchar *tmp_buff;
+        GError *error = NULL;
+
         tmp_buff = g_convert_with_iconv ((const gchar *) string,
                                          left, coder, &bytes_read, &bytes_written, &error);
-        if (error)
+        if (error != NULL)
         {
             int code = error->code;
 
@@ -167,17 +167,13 @@ _str_convert (GIConv coder, const char *string, int size, GString * buffer)
                     g_free (tmp_buff);
                 }
 
-                if ((int) bytes_read < left)
-                {
-                    string += bytes_read + 1;
-                    size -= (bytes_read + 1);
-                    left -= (bytes_read + 1);
-                    g_string_append_c (buffer, *(string - 1));
-                }
-                else
-                {
+                if ((int) bytes_read >= left)
                     return ESTR_PROBLEM;
-                }
+
+                string += bytes_read + 1;
+                size -= (bytes_read + 1);
+                left -= (bytes_read + 1);
+                g_string_append_c (buffer, *(string - 1));
                 state = ESTR_PROBLEM;
                 break;
 
@@ -202,31 +198,26 @@ _str_convert (GIConv coder, const char *string, int size, GString * buffer)
                 return ESTR_FAILURE;
             }
         }
+        else if (tmp_buff == NULL)
+        {
+            g_string_append (buffer, string);
+            return ESTR_PROBLEM;
+        }
+        else if (*tmp_buff == '\0')
+        {
+            g_free (tmp_buff);
+            g_string_append (buffer, string);
+            return state;
+        }
         else
         {
-            if (tmp_buff != NULL)
-            {
-                if (*tmp_buff)
-                {
-                    g_string_append (buffer, tmp_buff);
-                    g_free (tmp_buff);
-                    string += bytes_read;
-                    left -= bytes_read;
-                }
-                else
-                {
-                    g_free (tmp_buff);
-                    g_string_append (buffer, string);
-                    return state;
-                }
-            }
-            else
-            {
-                g_string_append (buffer, string);
-                return ESTR_PROBLEM;
-            }
+            g_string_append (buffer, tmp_buff);
+            g_free (tmp_buff);
+            string += bytes_read;
+            left -= bytes_read;
         }
     }
+
     return state;
 }
 
@@ -251,13 +242,10 @@ str_conv_gerror_message (GError * error, const char *def_msg)
 estr_t
 str_vfs_convert_from (GIConv coder, const char *string, GString * buffer)
 {
-    estr_t result;
+    estr_t result = ESTR_SUCCESS;
 
     if (coder == str_cnv_not_convert)
-    {
         g_string_append (buffer, string != NULL ? string : "");
-        result = ESTR_SUCCESS;
-    }
     else
         result = _str_convert (coder, string, -1, buffer);
 
@@ -275,11 +263,13 @@ str_printf (GString * buffer, const char *format, ...)
 {
     va_list ap;
     va_start (ap, format);
+
 #if GLIB_CHECK_VERSION (2, 14, 0)
     g_string_append_vprintf (buffer, format, ap);
 #else
     {
         gchar *tmp;
+
         tmp = g_strdup_vprintf (format, ap);
         g_string_append (buffer, tmp);
         g_free (tmp);
@@ -306,14 +296,10 @@ str_translate_char (GIConv conv, const char *keys, size_t ch_size, char *output,
 
     cnv = g_iconv (conv, (gchar **) & keys, &left, &output, &out_size);
     if (cnv == (size_t) (-1))
-    {
         return (errno == EINVAL) ? ESTR_PROBLEM : ESTR_FAILURE;
-    }
-    else
-    {
-        output[0] = '\0';
-        return ESTR_SUCCESS;
-    }
+
+    output[0] = '\0';
+    return ESTR_SUCCESS;
 }
 
 
@@ -335,15 +321,17 @@ str_detect_termencoding (void)
 static int
 str_test_encoding_class (const char *encoding, const char **table)
 {
-    int t;
     int result = 0;
-    if (encoding == NULL)
-        return result;
 
-    for (t = 0; table[t] != NULL; t++)
+    if (encoding != NULL)
     {
-        result += (g_ascii_strncasecmp (encoding, table[t], strlen (table[t])) == 0);
+        int t;
+
+        for (t = 0; table[t] != NULL; t++)
+            if (g_ascii_strncasecmp (encoding, table[t], strlen (table[t])) == 0)
+                result++;
     }
+
     return result;
 }
 
@@ -351,17 +339,11 @@ static void
 str_choose_str_functions (void)
 {
     if (str_test_encoding_class (codeset, str_utf8_encodings))
-    {
         used_class = str_utf8_init ();
-    }
     else if (str_test_encoding_class (codeset, str_8bit_encodings))
-    {
         used_class = str_8bit_init ();
-    }
     else
-    {
         used_class = str_ascii_init ();
-    }
 }
 
 gboolean
@@ -828,6 +810,7 @@ strrstr_skip_count (const char *haystack, const char *needle, size_t skip_count)
         len = semi - haystack - 1;
     }
     while (skip_count-- != 0);
+
     return semi;
 }
 
