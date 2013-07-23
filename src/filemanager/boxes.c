@@ -1062,16 +1062,17 @@ symlink_dialog (const vfs_path_t * existing_vpath, const vfs_path_t * new_vpath,
                 char **ret_existing, char **ret_new)
 {
     quick_widget_t quick_widgets[] = {
-            /* *INDENT-OFF* */
-            QUICK_LABELED_INPUT (N_("Existing filename (filename symlink will point to):"),
-                                 input_label_above,
-                                 vfs_path_as_str (existing_vpath), "input-2", ret_existing, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
-            QUICK_SEPARATOR (FALSE),
-            QUICK_LABELED_INPUT (N_("Symbolic link filename:"), input_label_above,
-                                 vfs_path_as_str (new_vpath), "input-1", ret_new, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
-            QUICK_BUTTONS_OK_CANCEL,
-            QUICK_END
-            /* *INDENT-ON* */
+        /* *INDENT-OFF* */
+        QUICK_LABELED_INPUT (N_("Existing filename (filename symlink will point to):"),
+                             input_label_above, vfs_path_as_str (existing_vpath), "input-2",
+                             ret_existing, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
+        QUICK_SEPARATOR (FALSE),
+        QUICK_LABELED_INPUT (N_("Symbolic link filename:"), input_label_above,
+                             vfs_path_as_str (new_vpath), "input-1",
+                             ret_new, NULL, FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
+        QUICK_BUTTONS_OK_CANCEL,
+        QUICK_END
+        /* *INDENT-ON* */
     };
 
     quick_dialog_t qdlg = {

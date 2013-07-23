@@ -614,16 +614,16 @@ get_file_encoding_local (const vfs_path_t * filename_vpath, char *buf, int bufle
  * Invoke the "file" command on the file and match its output against PTR.
  * have_type is a flag that is set if we already have tried to determine
  * the type of that file.
- * Return 1 for match, 0 for no match, -1 errors.
+ * Return TRUE for match, FALSE otherwise.
  */
 
 static gboolean
-regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, int *have_type,
-                  gboolean case_insense, GError ** error)
+regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean case_insense,
+                  gboolean * have_type, GError ** error)
 {
     gboolean found = FALSE;
 
-    /* Following variables are valid if *have_type is 1 */
+    /* Following variables are valid if *have_type is TRUE */
     static char content_string[2048];
 #ifdef HAVE_CHARSET
     static char encoding_id[21];        /* CSISO51INISCYRILLIC -- 20 */
@@ -634,7 +634,7 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, int *have_
     if (!use_file_to_check_type)
         return FALSE;
 
-    if (*have_type == 0)
+    if (!*have_type)
     {
         vfs_path_t *localfile_vpath;
         const char *realname;   /* name used with "file" */
@@ -644,7 +644,7 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, int *have_
 #endif /* HAVE_CHARSET */
 
         /* Don't repeate even unsuccessful checks */
-        *have_type = 1;
+        *have_type = TRUE;
 
         localfile_vpath = mc_getlocalcopy (filename_vpath);
         if (localfile_vpath == NULL)
@@ -782,7 +782,7 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
     int view_at_line_number;
     char *include_target;
     int include_target_len;
-    int have_type = 0;          /* Flag used by regex_check_type() */
+    gboolean have_type = FALSE; /* Flag used by regex_check_type() */
 
     if (filename_vpath == NULL)
         return 0;
@@ -968,7 +968,7 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
                 if (case_insense)
                     p += 2;
 
-                found = regex_check_type (filename_vpath, p, &have_type, case_insense, &error);
+                found = regex_check_type (filename_vpath, p, case_insense, &have_type, &error);
                 if (error != NULL)
                 {
                     g_error_free (error);

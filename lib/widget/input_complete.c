@@ -213,7 +213,7 @@ filename_completion_function (const char *text, int state, input_complete_t flag
            All entries except "." and ".." match. */
         if (filename_len == 0)
         {
-            if (!strcmp (entry->d_name, ".") || !strcmp (entry->d_name, ".."))
+            if (DIR_IS_DOT (entry->d_name) || DIR_IS_DOTDOT (entry->d_name))
                 continue;
         }
         else

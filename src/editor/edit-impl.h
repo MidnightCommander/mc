@@ -230,7 +230,7 @@ void edit_show_margin_cmd (WDialog * h);
 void edit_show_numbers_cmd (WDialog * h);
 void edit_date_cmd (WEdit * edit);
 void edit_goto_cmd (WEdit * edit);
-int eval_marks (WEdit * edit, off_t * start_mark, off_t * end_mark);
+gboolean eval_marks (WEdit * edit, off_t * start_mark, off_t * end_mark);
 void edit_status (WEdit * edit, gboolean active);
 void edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_insertion);
 void edit_update_screen (WEdit * edit);

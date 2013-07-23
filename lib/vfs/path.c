@@ -1033,6 +1033,39 @@ vfs_path_element_need_cleanup_converter (const vfs_path_element_t * element)
 {
     return (element->dir.converter != str_cnv_from_term && element->dir.converter != INVALID_CONV);
 }
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Change encoding for last part (vfs_path_element_t) of vpath
+ *
+ * @param vpath pointer to path structure
+ * encoding name of charset
+ *
+ * @return pointer to path structure (for use function in anoter functions)
+ */
+vfs_path_t *
+vfs_path_change_encoding (vfs_path_t * vpath, const char *encoding)
+{
+    vfs_path_element_t *path_element;
+
+    path_element = (vfs_path_element_t *) vfs_path_get_by_index (vpath, -1);
+    /* don't add current encoding */
+    if ((path_element->encoding != NULL) && (strcmp (encoding, path_element->encoding) == 0))
+        return vpath;
+
+    g_free (path_element->encoding);
+    path_element->encoding = g_strdup (encoding);
+
+    if (vfs_path_element_need_cleanup_converter (path_element))
+        str_close_conv (path_element->dir.converter);
+
+    path_element->dir.converter = str_crt_conv_from (path_element->encoding);
+
+    g_free (vpath->str);
+    vpath->str = vfs_path_to_str_flags (vpath, 0, VPF_NONE);
+    return vpath;
+}
+
 #endif
 
 /* --------------------------------------------------------------------------------------------- */

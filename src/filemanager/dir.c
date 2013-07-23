@@ -172,9 +172,7 @@ handle_dirent (dir_list * list, const char *fltr, struct dirent *dp,
 {
     vfs_path_t *vpath;
 
-    if (dp->d_name[0] == '.' && dp->d_name[1] == 0)
-        return 0;
-    if (dp->d_name[0] == '.' && dp->d_name[1] == '.' && dp->d_name[2] == 0)
+    if (DIR_IS_DOT (dp->d_name) || DIR_IS_DOTDOT (dp->d_name))
         return 0;
     if (!panels_options.show_dot_files && (dp->d_name[0] == '.'))
         return 0;
@@ -449,7 +447,7 @@ do_sort (dir_list * list, sortfn * sort, int top, gboolean reverse_f, gboolean c
 
     /* If there is an ".." entry the caller must take care to
        ensure that it occupies the first list element. */
-    if (strcmp (list->list[0].fname, "..") == 0)
+    if (DIR_IS_DOTDOT (list->list[0].fname))
         dot_dot_found = 1;
 
     reverse = reverse_f ? -1 : 1;
@@ -510,9 +508,7 @@ handle_path (dir_list * list, const char *path,
 {
     vfs_path_t *vpath;
 
-    if (path[0] == '.' && path[1] == 0)
-        return 0;
-    if (path[0] == '.' && path[1] == '.' && path[2] == 0)
+    if (DIR_IS_DOT (path) || DIR_IS_DOTDOT (path))
         return 0;
 
     vpath = vfs_path_from_str (path);

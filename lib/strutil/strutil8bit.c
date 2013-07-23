@@ -107,25 +107,21 @@ str_8bit_cprev_char (const char **text)
 static int
 str_8bit_cnext_noncomb_char (const char **text)
 {
-    if (*text[0] != '\0')
-    {
-        (*text)++;
-        return 1;
-    }
-    else
+    if (*text[0] == '\0')
         return 0;
+
+    (*text)++;
+    return 1;
 }
 
 static int
 str_8bit_cprev_noncomb_char (const char **text, const char *begin)
 {
-    if ((*text) != begin)
-    {
-        (*text)--;
-        return 1;
-    }
-    else
+    if ((*text) == begin)
         return 0;
+
+    (*text)--;
+    return 1;
 }
 
 static int
@@ -170,6 +166,7 @@ str_8bit_toupper (const char *text, char **out, size_t * remain)
 {
     if (*remain <= 1)
         return 0;
+
     (*out)[0] = char_toupper (text[0]);
     (*out)++;
     (*remain)--;
@@ -181,6 +178,7 @@ str_8bit_tolower (const char *text, char **out, size_t * remain)
 {
     if (*remain <= 1)
         return 0;
+
     (*out)[0] = char_tolower (text[0]);
     (*out)++;
     (*remain)--;
@@ -217,10 +215,7 @@ str_8bit_conv_gerror_message (GError * error, const char *def_msg)
         buf = g_string_new ("");
 
         if (str_convert (conv, error->message, buf) != ESTR_FAILURE)
-        {
-            ret = buf->str;
-            g_string_free (buf, FALSE);
-        }
+            ret = g_string_free (buf, FALSE);
         else
         {
             ret = g_strdup (def_msg != NULL ? def_msg : "");
@@ -236,19 +231,15 @@ str_8bit_conv_gerror_message (GError * error, const char *def_msg)
 static estr_t
 str_8bit_vfs_convert_to (GIConv coder, const char *string, int size, GString * buffer)
 {
-    estr_t result;
+    estr_t result = ESTR_SUCCESS;
 
     if (coder == str_cnv_not_convert)
-    {
         g_string_append_len (buffer, string, size);
-        result = ESTR_SUCCESS;
-    }
     else
         result = str_nconvert (coder, (char *) string, size, buffer);
 
     return result;
 }
-
 
 static const char *
 str_8bit_term_form (const char *text)
@@ -264,9 +255,7 @@ str_8bit_term_form (const char *text)
     length = strlen (text);
 
     for (; pos < length && remain > 1; pos++, actual++, remain--)
-    {
         actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
-    }
 
     actual[0] = '\0';
     return result;
@@ -278,7 +267,7 @@ str_8bit_fit_to_term (const char *text, int width, align_crt_t just_mode)
     static char result[BUF_MEDIUM];
     char *actual;
     size_t remain;
-    int ident;
+    int ident = 0;
     size_t length;
     size_t pos = 0;
 
@@ -288,7 +277,6 @@ str_8bit_fit_to_term (const char *text, int width, align_crt_t just_mode)
 
     if ((int) length <= width)
     {
-        ident = 0;
         switch (HIDE_FIT (just_mode))
         {
         case J_CENTER_LEFT:
@@ -307,9 +295,8 @@ str_8bit_fit_to_term (const char *text, int width, align_crt_t just_mode)
         remain -= ident;
 
         for (; pos < length && remain > 1; pos++, actual++, remain--)
-        {
             actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
-        }
+
         if (width - length - ident > 0)
         {
             if (remain <= width - length - ident)
@@ -318,51 +305,38 @@ str_8bit_fit_to_term (const char *text, int width, align_crt_t just_mode)
             actual += width - length - ident;
         }
     }
+    else if (IS_FIT (just_mode))
+    {
+        for (; pos + 1 <= (gsize) width / 2 && remain > 1; actual++, pos++, remain--)
+            actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
+
+        if (remain <= 1)
+            goto finally;
+        actual[0] = '~';
+        actual++;
+        remain--;
+
+        pos += length - width + 1;
+        for (; pos < length && remain > 1; pos++, actual++, remain--)
+            actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
+    }
     else
     {
-        if (IS_FIT (just_mode))
+        switch (HIDE_FIT (just_mode))
         {
-            for (; pos + 1 <= (gsize) width / 2 && remain > 1; actual++, pos++, remain--)
-            {
-
-                actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
-            }
-
-            if (remain <= 1)
-                goto finally;
-            actual[0] = '~';
-            actual++;
-            remain--;
-
-            pos += length - width + 1;
-
-            for (; pos < length && remain > 1; pos++, actual++, remain--)
-            {
-                actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
-            }
+        case J_CENTER:
+            ident = (length - width) / 2;
+            break;
+        case J_RIGHT:
+            ident = length - width;
+            break;
         }
-        else
-        {
-            ident = 0;
-            switch (HIDE_FIT (just_mode))
-            {
-            case J_CENTER:
-                ident = (length - width) / 2;
-                break;
-            case J_RIGHT:
-                ident = length - width;
-                break;
-            }
 
-            pos += ident;
-            for (; pos < (gsize) (ident + width) && remain > 1; pos++, actual++, remain--)
-            {
-
-                actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
-            }
-
-        }
+        pos += ident;
+        for (; pos < (gsize) (ident + width) && remain > 1; pos++, actual++, remain--)
+            actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
     }
+
   finally:
     actual[0] = '\0';
     return result;
@@ -383,27 +357,23 @@ str_8bit_term_trim (const char *text, int width)
 
     if (width > 0)
     {
-        if (width < (int) length)
+        if (width >= (int) length)
         {
-            if (width <= 3)
-            {
-                memset (actual, '.', width);
-                actual += width;
-            }
-            else
-            {
-                memset (actual, '.', 3);
-                actual += 3;
-                remain -= 3;
-
-                pos += length - width + 3;
-
-                for (; pos < length && remain > 1; pos++, actual++, remain--)
-                    actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
-            }
+            for (; pos < length && remain > 1; pos++, actual++, remain--)
+                actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
+        }
+        else if (width <= 3)
+        {
+            memset (actual, '.', width);
+            actual += width;
         }
         else
         {
+            memset (actual, '.', 3);
+            actual += 3;
+            remain -= 3;
+
+            pos += length - width + 3;
             for (; pos < length && remain > 1; pos++, actual++, remain--)
                 actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
         }
@@ -449,16 +419,11 @@ str_8bit_term_substring (const char *text, int start, int width)
     {
         pos += start;
         for (; pos < length && width > 0 && remain > 1; pos++, width--, actual++, remain--)
-        {
-
             actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
-        }
     }
 
     for (; width > 0 && remain > 1; actual++, remain--, width--)
-    {
         actual[0] = ' ';
-    }
 
     actual[0] = '\0';
     return result;
@@ -480,9 +445,7 @@ str_8bit_trunc (const char *text, int width)
     if ((int) length > width)
     {
         for (; pos + 1 <= (gsize) width / 2 && remain > 1; actual++, pos++, remain--)
-        {
             actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
-        }
 
         if (remain <= 1)
             goto finally;
@@ -491,18 +454,13 @@ str_8bit_trunc (const char *text, int width)
         remain--;
 
         pos += length - width + 1;
-
         for (; pos < length && remain > 1; pos++, actual++, remain--)
-        {
             actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
-        }
     }
     else
     {
         for (; pos < length && remain > 1; pos++, actual++, remain--)
-        {
             actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
-        }
     }
 
   finally:
@@ -543,9 +501,10 @@ str_8bit_strdown (const char *str)
 {
     char *rets, *p;
 
-    rets = g_strdup (str);
-    if (rets == NULL)
+    if (str == NULL)
         return NULL;
+
+    rets = g_strdup (str);
 
     for (p = rets; *p != '\0'; p++)
         *p = char_tolower (*p);
@@ -553,14 +512,13 @@ str_8bit_strdown (const char *str)
     return rets;
 }
 
-
 static const char *
 str_8bit_search_first (const char *text, const char *search, int case_sen)
 {
     char *fold_text;
     char *fold_search;
     const char *match;
-    size_t offsset;
+    size_t offset;
 
     fold_text = (case_sen) ? (char *) text : str_8bit_strdown (text);
     fold_search = (case_sen) ? (char *) search : str_8bit_strdown (search);
@@ -568,8 +526,8 @@ str_8bit_search_first (const char *text, const char *search, int case_sen)
     match = g_strstr_len (fold_text, -1, fold_search);
     if (match != NULL)
     {
-        offsset = match - fold_text;
-        match = text + offsset;
+        offset = match - fold_text;
+        match = text + offset;
     }
 
     if (!case_sen)
@@ -587,7 +545,7 @@ str_8bit_search_last (const char *text, const char *search, int case_sen)
     char *fold_text;
     char *fold_search;
     const char *match;
-    size_t offsset;
+    size_t offset;
 
     fold_text = (case_sen) ? (char *) text : str_8bit_strdown (text);
     fold_search = (case_sen) ? (char *) search : str_8bit_strdown (search);
@@ -595,8 +553,8 @@ str_8bit_search_last (const char *text, const char *search, int case_sen)
     match = g_strrstr_len (fold_text, -1, fold_search);
     if (match != NULL)
     {
-        offsset = match - fold_text;
-        match = text + offsset;
+        offset = match - fold_text;
+        match = text + offset;
     }
 
     if (!case_sen)
@@ -684,10 +642,11 @@ str_8bit_ncasecmp (const char *s1, const char *s2)
         s2++;
     }
 
-    if (n != 0)
-        return (((gint) (guchar) * s1) - ((gint) (guchar) * s2));
-    else
+    if (n == 0)
         return 0;
+
+    return (((gint) (guchar) * s1) - ((gint) (guchar) * s2));
+
 #endif
 }
 
@@ -695,8 +654,10 @@ static int
 str_8bit_prefix (const char *text, const char *prefix)
 {
     int result;
+
     for (result = 0; text[result] != '\0' && prefix[result] != '\0'
          && text[result] == prefix[result]; result++);
+
     return result;
 }
 
@@ -704,12 +665,12 @@ static int
 str_8bit_caseprefix (const char *text, const char *prefix)
 {
     int result;
+
     for (result = 0; text[result] != '\0' && prefix[result] != '\0'
          && char_toupper (text[result]) == char_toupper (prefix[result]); result++);
+
     return result;
 }
-
-
 
 static void
 str_8bit_fix_string (char *text)

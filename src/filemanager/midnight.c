@@ -1384,6 +1384,9 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         return MSG_HANDLED;
 
     case MSG_RESIZE:
+        /* dlg_set_size() is surplus for this case */
+        w->lines = LINES;
+        w->cols = COLS;
         setup_panels ();
         menubar_arrange (the_menubar);
         return MSG_HANDLED;

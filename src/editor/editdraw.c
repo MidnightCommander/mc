@@ -294,8 +294,8 @@ edit_status_window (WEdit * edit)
         edit_move (2, w->lines - 1);
         tty_printf ("%3ld %5ld/%ld %6ld/%ld",
                     edit->curs_col + edit->over_col,
-                    edit->buffer.curs_line + 1, edit->buffer.lines + 1, edit->buffer.curs1,
-                    edit->buffer.size);
+                    edit->buffer.curs_line + 1, edit->buffer.lines + 1, (long) edit->buffer.curs1,
+                    (long) edit->buffer.size);
     }
 
     /*

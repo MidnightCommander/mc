@@ -266,7 +266,7 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
 
     for (i = 0; i < current_panel->count; i++)
     {
-        if (strcmp (current_panel->dir.list[i].fname, "..") == 0)
+        if (DIR_IS_DOTDOT (current_panel->dir.list[i].fname))
             continue;
         if (S_ISDIR (current_panel->dir.list[i].st.st_mode) && files_only != 0)
             continue;
@@ -941,7 +941,7 @@ mkdir_cmd (void)
     const char *name = "";
 
     /* If 'on' then automatically fills name with current selected item name */
-    if (auto_fill_mkdir_name && strcmp (selection (current_panel)->fname, "..") != 0)
+    if (auto_fill_mkdir_name && !DIR_IS_DOTDOT (selection (current_panel)->fname))
         name = selection (current_panel)->fname;
 
     dir =
@@ -1607,7 +1607,7 @@ smart_dirsize_cmd (void)
     file_entry *entry;
 
     entry = &(panel->dir.list[panel->selected]);
-    if ((S_ISDIR (entry->st.st_mode) && (strcmp (entry->fname, "..") == 0)) || panel->dirs_marked)
+    if ((S_ISDIR (entry->st.st_mode) && DIR_IS_DOTDOT (entry->fname)) || panel->dirs_marked)
         dirsizes_cmd ();
     else
         single_dirsize_cmd ();
@@ -1622,7 +1622,7 @@ single_dirsize_cmd (void)
     file_entry *entry;
 
     entry = &(panel->dir.list[panel->selected]);
-    if (S_ISDIR (entry->st.st_mode) && strcmp (entry->fname, "..") != 0)
+    if (S_ISDIR (entry->st.st_mode) && !DIR_IS_DOTDOT (entry->fname))
     {
         size_t marked = 0;
         uintmax_t total = 0;
@@ -1668,7 +1668,7 @@ dirsizes_cmd (void)
     for (i = 0; i < panel->count; i++)
         if (S_ISDIR (panel->dir.list[i].st.st_mode)
             && ((panel->dirs_marked && panel->dir.list[i].f.marked)
-                || !panel->dirs_marked) && strcmp (panel->dir.list[i].fname, "..") != 0)
+                || !panel->dirs_marked) && !DIR_IS_DOTDOT (panel->dir.list[i].fname))
         {
             vfs_path_t *p;
             size_t marked = 0;

@@ -73,25 +73,21 @@ str_ascii_cprev_char (const char **text)
 static int
 str_ascii_cnext_noncomb_char (const char **text)
 {
-    if (*text[0] != '\0')
-    {
-        (*text)++;
-        return 1;
-    }
-    else
+    if (*text[0] == '\0')
         return 0;
+
+    (*text)++;
+    return 1;
 }
 
 static int
 str_ascii_cprev_noncomb_char (const char **text, const char *begin)
 {
-    if ((*text) != begin)
-    {
-        (*text)--;
-        return 1;
-    }
-    else
+    if ((*text) == begin)
         return 0;
+
+    (*text)--;
+    return 1;
 }
 
 static int
@@ -136,6 +132,7 @@ str_ascii_toupper (const char *text, char **out, size_t * remain)
 {
     if (*remain <= 1)
         return 0;
+
     (*out)[0] = (char) g_ascii_toupper ((gchar) text[0]);
     (*out)++;
     (*remain)--;
@@ -147,6 +144,7 @@ str_ascii_tolower (const char *text, char **out, size_t * remain)
 {
     if (*remain <= 1)
         return 0;
+
     (*out)[0] = (char) g_ascii_tolower ((gchar) text[0]);
     (*out)++;
     (*remain)--;
@@ -169,7 +167,7 @@ static gchar *
 str_ascii_conv_gerror_message (GError * error, const char *def_msg)
 {
     /* the same as str_utf8_conv_gerror_message() */
-    if ((error != NULL) && (error->message != NULL))
+    if (error != NULL)
         return g_strdup (error->message);
 
     return g_strdup (def_msg != NULL ? def_msg : "");
@@ -182,7 +180,6 @@ str_ascii_vfs_convert_to (GIConv coder, const char *string, int size, GString * 
     g_string_append_len (buffer, string, size);
     return ESTR_SUCCESS;
 }
-
 
 static const char *
 str_ascii_term_form (const char *text)
@@ -214,7 +211,7 @@ str_ascii_fit_to_term (const char *text, int width, align_crt_t just_mode)
     static char result[BUF_MEDIUM];
     char *actual;
     size_t remain;
-    int ident;
+    int ident = 0;
     size_t length;
     size_t pos = 0;
 
@@ -224,7 +221,6 @@ str_ascii_fit_to_term (const char *text, int width, align_crt_t just_mode)
 
     if ((int) length <= width)
     {
-        ident = 0;
         switch (HIDE_FIT (just_mode))
         {
         case J_CENTER_LEFT:
@@ -259,56 +255,53 @@ str_ascii_fit_to_term (const char *text, int width, align_crt_t just_mode)
             actual += width - length - ident;
         }
     }
-    else
+    else if (IS_FIT (just_mode))
     {
-        if (IS_FIT (just_mode))
+        /* copy prefix of text, that is not wider than width / 2 */
+        for (; pos + 1 <= (gsize) width / 2 && remain > 1; actual++, pos++, remain--)
         {
-            /* copy prefix of text, that is not wider than width / 2 */
-            for (; pos + 1 <= (gsize) width / 2 && remain > 1; actual++, pos++, remain--)
-            {
-                actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
-                actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
-            }
-
-            if (remain <= 1)
-                goto finally;
-            actual[0] = '~';
-            actual++;
-            remain--;
-
-            pos += length - width + 1;
-
-            /* copy suffix of text */
-            for (; pos < length && remain > 1; pos++, actual++, remain--)
-            {
-                actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
-                actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
-            }
+            actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
+            actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
         }
-        else
+
+        if (remain <= 1)
+            goto finally;
+        actual[0] = '~';
+        actual++;
+        remain--;
+
+        pos += length - width + 1;
+
+        /* copy suffix of text */
+        for (; pos < length && remain > 1; pos++, actual++, remain--)
         {
-            ident = 0;
-            switch (HIDE_FIT (just_mode))
-            {
-            case J_CENTER:
-                ident = (length - width) / 2;
-                break;
-            case J_RIGHT:
-                ident = length - width;
-                break;
-            }
-
-            /* copy substring text, substring start from ident and take width 
-             * characters from text */
-            pos += ident;
-            for (; pos < (gsize) (ident + width) && remain > 1; pos++, actual++, remain--)
-            {
-                actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
-                actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
-            }
-
+            actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
+            actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
         }
     }
+    else
+    {
+        switch (HIDE_FIT (just_mode))
+        {
+        case J_CENTER:
+            ident = (length - width) / 2;
+            break;
+        case J_RIGHT:
+            ident = length - width;
+            break;
+        }
+
+        /* copy substring text, substring start from ident and take width 
+         * characters from text */
+        pos += ident;
+        for (; pos < (gsize) (ident + width) && remain > 1; pos++, actual++, remain--)
+        {
+            actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
+            actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
+        }
+
+    }
+
   finally:
     actual[0] = '\0';
     return result;
@@ -330,32 +323,29 @@ str_ascii_term_trim (const char *text, int width)
 
     if (width > 0)
     {
-        if (width < (int) length)
+        if (width >= (int) length)
         {
-            if (width <= 3)
+            /* copy all characters */
+            for (; pos < length && remain > 1; pos++, actual++, remain--)
             {
-                memset (actual, '.', width);
-                actual += width;
+                actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
+                actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
             }
-            else
-            {
-                memset (actual, '.', 3);
-                actual += 3;
-                remain -= 3;
-
-                pos += length - width + 3;
-
-                /* copy suffix of text */
-                for (; pos < length && remain > 1; pos++, actual++, remain--)
-                {
-                    actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
-                    actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
-                }
-            }
+        }
+        else if (width <= 3)
+        {
+            memset (actual, '.', width);
+            actual += width;
         }
         else
         {
-            /* copy all characters */
+            memset (actual, '.', 3);
+            actual += 3;
+            remain -= 3;
+
+            pos += length - width + 3;
+
+            /* copy suffix of text */
             for (; pos < length && remain > 1; pos++, actual++, remain--)
             {
                 actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
@@ -414,9 +404,7 @@ str_ascii_term_substring (const char *text, int start, int width)
 
     /* if text is shorter then width, add space to the end */
     for (; width > 0 && remain > 1; actual++, remain--, width--)
-    {
         actual[0] = ' ';
-    }
 
     actual[0] = '\0';
     return result;
@@ -585,9 +573,7 @@ static void
 str_ascii_fix_string (char *text)
 {
     for (; text[0] != '\0'; text++)
-    {
         text[0] = ((unsigned char) text[0] < 128) ? text[0] : '?';
-    }
 }
 
 static char *
@@ -614,8 +600,10 @@ static int
 str_ascii_prefix (const char *text, const char *prefix)
 {
     int result;
+
     for (result = 0; text[result] != '\0' && prefix[result] != '\0'
          && text[result] == prefix[result]; result++);
+
     return result;
 }
 
@@ -623,11 +611,12 @@ static int
 str_ascii_caseprefix (const char *text, const char *prefix)
 {
     int result;
+
     for (result = 0; text[result] != '\0' && prefix[result] != '\0'
          && g_ascii_toupper (text[result]) == g_ascii_toupper (prefix[result]); result++);
+
     return result;
 }
-
 
 struct str_class
 str_ascii_init (void)

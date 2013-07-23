@@ -717,7 +717,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
             char *temp_dir;
 
             temp_dir = in_start->buffer;
-            if ((temp_dir[0] == '\0') || ((temp_dir[0] == '.') && (temp_dir[1] == '\0')))
+            if (*temp_dir == '\0' || DIR_IS_DOT (temp_dir))
                 temp_dir = g_strdup (vfs_path_as_str (current_panel->cwd_vpath));
             else
                 temp_dir = g_strdup (temp_dir);
@@ -768,7 +768,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
             s = tilde_expand (*start_dir);
             canonicalize_pathname (s);
 
-            if (s[0] == '.' && s[1] == '\0')
+            if (DIR_IS_DOT (s))
             {
                 *start_dir = g_strdup (vfs_path_as_str (current_panel->cwd_vpath));
                 /* FIXME: is current_panel->cwd_vpath canonicalized? */
@@ -792,7 +792,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
             }
 
             if (!options.ignore_dirs_enable || in_ignore->buffer[0] == '\0'
-                || (in_ignore->buffer[0] == '.' && in_ignore->buffer[1] == '\0'))
+                || DIR_IS_DOT (in_ignore->buffer))
                 *ignore_dirs = NULL;
             else
                 *ignore_dirs = g_strdup (in_ignore->buffer);
@@ -1306,7 +1306,7 @@ do_search (WDialog * h)
                 ;
         }                       /* while (!dp) */
 
-        if (strcmp (dp->d_name, ".") == 0 || strcmp (dp->d_name, "..") == 0)
+        if (DIR_IS_DOT (dp->d_name) || DIR_IS_DOTDOT (dp->d_name))
         {
             /* skip invalid filenames */
             while ((dp = mc_readdir (dirp)) != NULL && !str_is_valid_string (dp->d_name))

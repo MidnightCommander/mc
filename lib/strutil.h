@@ -493,8 +493,8 @@ int str_casecmp (const char *t1, const char *t2);
 int str_ncasecmp (const char *t1, const char *t2);
 
 /* return, how many bytes are are same from start in text and prefix
- * both strings are decomposed befor comapring and return value is counted
- * in decomposed form, too. caling with prefix, prefix, you get size in bytes
+ * both strings are decomposed before comparing and return value is counted
+ * in decomposed form, too. calling with prefix, prefix, you get size in bytes
  * of prefix in decomposed form,
  * I
  */

@@ -144,7 +144,7 @@ context default
     keyword whole dstring yellow
     keyword whole wstring yellow
 
-# D array atributes
+# D array attributes
     keyword wholeright .sizeof yellow
     keyword wholeright .length yellow
     keyword wholeright .ptr yellow
@@ -154,7 +154,7 @@ context default
     keyword wholeright .keys yellow
     keyword wholeright .values yellow
     keyword wholeright .rehash yellow
-# D types atributes
+# D types attributes
     keyword wholeright .init yellow
     keyword wholeright .alignof yellow
     keyword wholeright .mangleof yellow
@@ -178,7 +178,7 @@ context default
 # union
     keyword wholeright .offsetof yellow
 
-# D 2.0 atributes
+# D 2.0 attributes
     keyword wholeright .idup yellow
 
 # unary operators

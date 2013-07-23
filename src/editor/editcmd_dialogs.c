@@ -385,7 +385,7 @@ editcmd_dialog_completion_show (const WEdit * edit, int max_len, GString ** comp
     for (i = num_compl - 1; i >= 0; i--)        /* reverse order */
         listbox_add_item (compl_list, LISTBOX_APPEND_AT_END, 0, (char *) compl[i]->str, NULL);
 
-    /* pop up the dialog and apply the choosen completion */
+    /* pop up the dialog and apply the chosen completion */
     if (dlg_run (compl_dlg) == B_ENTER)
     {
         listbox_get_current (compl_list, &curr, NULL);
@@ -457,7 +457,7 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
         g_free (label_def);
     }
 
-    /* pop up the dialog and apply the choosen completion */
+    /* pop up the dialog and apply the chosen completion */
     if (dlg_run (def_dlg) == B_ENTER)
     {
         char *tmp_curr_def = (char *) curr_def;

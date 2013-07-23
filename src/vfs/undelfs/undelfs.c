@@ -705,7 +705,7 @@ undelfs_chdir (const vfs_path_t * vpath)
 
     /* We may use access because ext2 file systems are local */
     /* this could be fixed by making an ext2fs io manager to use */
-    /* our vfs, but that is left as an excercise for the reader */
+    /* our vfs, but that is left as an exercise for the reader */
     fd = open (file, O_RDONLY);
     if (fd == -1)
     {
