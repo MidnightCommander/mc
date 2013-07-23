@@ -2,137 +2,139 @@ Version 4.8.9
 
 - VFS
 
-  * extfs: support unrar-5 (#3015)
-  * extfs: use xorriso (if exists) for writing into ISO images (#3027)
+    * extfs: support unrar-5 (#3015)
+    * extfs: use xorriso (if exists) for writing into ISO images (#3027)
 
 - Editor
 
-  * Support unlimited file size (#1743)
+    * Support unlimited file size (#1743)
 
 - Misc
 
-  * Lot of code cleanups (#2990, #2071, #2164, #2998, #3003, #3005, #3022)
-  * Display additional info while viewing (by F3) *.iso files (#2006)
-  * New skins:
-    - modarin256: set of 256-color skins from Oliver Lange (#2737)
+    * Lot of code cleanups (#2990, #2071, #2164, #2998, #3003, #3005, #3022)
+    * Display additional info while viewing (by F3) *.iso files (#2006)
+    * New skins:
+        - modarin256: set of 256-color skins from Oliver Lange (#2737)
 
 - Fixes
 
-  * Fail to link if system lib does not contain strverscmp (#2992)
-  * Segfault when mc's temporary directory doesn't belong to the correct user (#3021)
-  * Race condition when creating temporary directory (#3025)
-  * Mouse doesn't work in screen and tmux (#3011)
-  * Incorrect file size in copy/move overwrite query dialog (#3000)
-  * Garbage in subshell prompt (#3001)
-  * Incorrect WLabel redraw after text change (#2991)
-  * Find File: "All charsets" options don't work (#3026)
-  * When an unknown key is pressed, it is interpreted as garbage (#2988)
-  * Segfault on creating new file in external editor (#3020)
-  * Rotating dash is not removed when mc finishes reading the directory (#2163)
-  * mcedit: word completion failed if word to be completed is begun from begin of file (#2245)
-  * mcview: broken switch between raw and parse modes (#2968)
-  * Hex viewer: continue search doesn't work (#2706)
-  * sftpfs: broken SSH aliases (#2923)
+    * Fail to link if system lib does not contain strverscmp (#2992)
+    * Segfault when mc's temporary directory doesn't belong to the correct user (#3021)
+    * Race condition when creating temporary directory (#3025)
+    * Mouse doesn't work in screen and tmux (#3011)
+    * Incorrect file size in copy/move overwrite query dialog (#3000)
+    * Garbage in subshell prompt (#3001)
+    * Incorrect WLabel redraw after text change (#2991)
+    * Find File: "All charsets" options don't work (#3026)
+    * When an unknown key is pressed, it is interpreted as garbage (#2988)
+    * Segfault on creating new file in external editor (#3020)
+    * Rotating dash is not removed when mc finishes reading the directory (#2163)
+    * mcedit: word completion failed if word to be completed is begun from begin of file (#2245)
+    * mcview: broken switch between raw and parse modes (#2968)
+    * Hex viewer: continue search doesn't work (#2706)
+    * sftpfs: broken SSH aliases (#2923)
+
 
 Version 4.8.8
 
 - Core
 
-  * Make copy/move progress dialog window wider up to 2/3 of screen width (#2076)
-  * Ask file name before create new file in editor (#2585)
-  * Support newer extended mouse protocol SGR-1006 instead of URXVT-1015 (#2956)
-  * Allow skip directory scanning before file operation. Print directory count and size in addition to directory name (#2101)
-  * Add jump support to target line in some external editors and viewers (#2206) 
+    * Make copy/move progress dialog window wider up to 2/3 of screen width (#2076)
+    * Ask file name before create new file in editor (#2585)
+    * Support newer extended mouse protocol SGR-1006 instead of URXVT-1015 (#2956)
+    * Allow skip directory scanning before file operation. Print directory count and size in addition to directory name (#2101)
+    * Add jump support to target line in some external editors and viewers (#2206)
 
 - Editor
 
-  * Update syntax highlighting:
-    - Jal programming language (#2855)
-    - gplink configuration files (.lkr extension) (#2855)
-    - Makefile with .mak extension (#2896)
-    - ZSH configuration files (#2950)
-    - Fortran (#2962) 
+    * Update syntax highlighting:
+        - Jal programming language (#2855)
+        - gplink configuration files (.lkr extension) (#2855)
+        - Makefile with .mak extension (#2896)
+        - ZSH configuration files (#2950)
+        - Fortran (#2962)
 
 - Misc
 
-  * Code cleanup (#2944, #2954)
-  * Report real compiler in MC_CHECK_ONE_CFLAG instead of 'gcc'
-  * Hints files now translated via Transifex (#2980) 
+    * Code cleanup (#2944, #2954)
+    * Report real compiler in MC_CHECK_ONE_CFLAG instead of 'gcc'
+    * Hints files now translated via Transifex (#2980)
 
 - Fixes
 
-  * Segfault in file operation due to unhandled regexp error (#2493)
-  * Tab completion vs. spaces and escaping (#55)\
-  * Special chars are not escaped in autocompletion of filenames (#2626)
-  * Buttons in the 'Directory hotlist' window are placed incorrectly (#2958)
-  * Mouse doesn't select text in subshell in native console (#2964)
-  * Mouse click below non-droppeddown menubar activates menu box (#2971)
-  * Insufficient quoting and wrong message in user menu (#2947)
-  * mcedit: floating point exception (division by zero) (#2953)
-  * mcedit: broken autocompletion (#2957)
-  * mcview: broken magic mode (#2976)
-  * Broken opening of .war archives (#2974) 
+    * Segfault in file operation due to unhandled regexp error (#2493)
+    * Tab completion vs. spaces and escaping (#55)\
+    * Special chars are not escaped in autocompletion of filenames (#2626)
+    * Buttons in the 'Directory hotlist' window are placed incorrectly (#2958)
+    * Mouse doesn't select text in subshell in native console (#2964)
+    * Mouse click below non-droppeddown menubar activates menu box (#2971)
+    * Insufficient quoting and wrong message in user menu (#2947)
+    * mcedit: floating point exception (division by zero) (#2953)
+    * mcedit: broken autocompletion (#2957)
+    * mcview: broken magic mode (#2976)
+    * Broken opening of .war archives (#2974)
+
 
 Version 4.8.7
 
 - Core
 
-  * Minimal GLib version is 2.12.0
-  * Implementation of suspend/resume in copy/move file operations (#2111)
-  * Start of widget subsystem reimplementation (#2919)
+    * Minimal GLib version is 2.12.0
+    * Implementation of suspend/resume in copy/move file operations (#2111)
+    * Start of widget subsystem reimplementation (#2919)
 
 - VFS
 
-  * uc1541 extfs plug-in updated up to version 2.5 (#2935)
+    * uc1541 extfs plug-in updated up to version 2.5 (#2935)
 
 - Editor
 
-  * Reset selection after text paste (only in non-persistent selection mode) (#2660)
-  * Don't indent blank lines (#303).
-  * Add .psgi as Perl syntax highlighting (#2912)
-  * Place cursor after inserted chars (#319)
-  * Add option in ini file to save spelling language (spell_language=NONE for disable aspell support) (#2914)
+    * Reset selection after text paste (only in non-persistent selection mode) (#2660)
+    * Don't indent blank lines (#303).
+    * Add .psgi as Perl syntax highlighting (#2912)
+    * Place cursor after inserted chars (#319)
+    * Add option in ini file to save spelling language (spell_language=NONE for disable aspell support) (#2914)
 
 - Misc
 
-  * Code cleanup (#2888, #1950)
-  * Minimal "check" utility version is 0.9.8
-  * Remove the empty contrib/dist/debian/ since it maintained separately in Debian (#2871)
-  * mc.ext updates:
-    - add support of SVG images (#2895)
-    - add support of .asm file extension (#2892)
-    - add support of .hh file extension (#2892)
-    - all file extension for source files now are case insensitive (#2892)
-    - add support of JNG and MNG images (#2893)
-    - add support of Gnumeric's spreadsheets (#2894)
-    - add support of .war archives (#2891)
-    - make a choice between arj and unarj archivers (#2890)
-    - make a choice between 7z and 7za archivers (#2890)
-    - add support of ape, aac and wvm4a media formats (#2767)
-    - add support of cbr and cbz comic books (#2739)
-    - add support of epub e-book format (#2739)
-    - add support of PAR archives (#2739)
-    - use libreoffice instead of ooffice, if found, to open ODT files (#2723)
-    - use dvicat if dvi2tty not found to view DVI files (#1686)
-    - use 'see' utility as default pdf viewer, if found (#1686)
-    - use 'see' utility to view images in console (#1686)
-  * Highlight OGV files as media (#2934)
-  * Added new translations:
-    - Persian (fa)
-    - Croatian (hr)
+    * Code cleanup (#2888, #1950)
+    * Minimal "check" utility version is 0.9.8
+    * Remove the empty contrib/dist/debian/ since it maintained separately in Debian (#2871)
+    * mc.ext updates:
+        - add support of SVG images (#2895)
+        - add support of .asm file extension (#2892)
+        - add support of .hh file extension (#2892)
+        - all file extension for source files now are case insensitive (#2892)
+        - add support of JNG and MNG images (#2893)
+        - add support of Gnumeric's spreadsheets (#2894)
+        - add support of .war archives (#2891)
+        - make a choice between arj and unarj archivers (#2890)
+        - make a choice between 7z and 7za archivers (#2890)
+        - add support of ape, aac and wvm4a media formats (#2767)
+        - add support of cbr and cbz comic books (#2739)
+        - add support of epub e-book format (#2739)
+        - add support of PAR archives (#2739)
+        - use libreoffice instead of ooffice, if found, to open ODT files (#2723)
+        - use dvicat if dvi2tty not found to view DVI files (#1686)
+        - use 'see' utility as default pdf viewer, if found (#1686)
+        - use 'see' utility to view images in console (#1686)
+    * Highlight OGV files as media (#2934)
+    * Added new translations:
+        - Persian (fa)
+        - Croatian (hr)
 
 - Fixes
 
-  * Build failure on Cygwin (#2917)
-  * Fail to check ncurses library if --with-ncurses-inc and --with-ncurses-libs options are used (#2926)
-  * Crash on Solaris while trying to copy a file (#2906)
-  * CVE-2012-4463: Does not sanitize MC_EXT_SELECTED variable properly (#2913)
-  * Attributes of existing directories are never preserved when copying (#2924)
-  * Broken path completion on paths starting with ~/ (#2898)
-  * Terminal settings are not changed when window is resized (#2198)
-  * Enter into symlink to compressed patch shows empty patch (#2910)
-  * Test failure on Cygwin due to incorrect linkage flag (#2918)
-  * Non-portable test (#2883)
+    * Build failure on Cygwin (#2917)
+    * Fail to check ncurses library if --with-ncurses-inc and --with-ncurses-libs options are used (#2926)
+    * Crash on Solaris while trying to copy a file (#2906)
+    * CVE-2012-4463: Does not sanitize MC_EXT_SELECTED variable properly (#2913)
+    * Attributes of existing directories are never preserved when copying (#2924)
+    * Broken path completion on paths starting with ~/ (#2898)
+    * Terminal settings are not changed when window is resized (#2198)
+    * Enter into symlink to compressed patch shows empty patch (#2910)
+    * Test failure on Cygwin due to incorrect linkage flag (#2918)
+    * Non-portable test (#2883)
 
 
 Version 4.8.6
@@ -140,6 +142,7 @@ Version 4.8.6
 - Fixes
     * mcedit: two-columns extra offset of cursor after tab character (#2881)
     * diffviewer: cannot open file if name contains '$' (#2873)
+
 
 Version 4.8.5
 
@@ -197,6 +200,7 @@ Version 4.8.5
     * Broken 'Enter' action on a rpm file containing space character in filename (#2838)
     * extfs: uc1541 broken handling (#2864)
     * mc.ext: OGV format handled as audio (#2869)
+
 
 Version 4.8.4
 
