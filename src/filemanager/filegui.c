@@ -1097,7 +1097,7 @@ file_progress_show_deleting (FileOpContext * ctx, const char *s, size_t * count)
 FileProgressStatus
 file_progress_real_query_replace (FileOpContext * ctx,
                                   enum OperationMode mode, const char *destname,
-                                  struct stat * _s_stat, struct stat * _d_stat)
+                                  struct stat *_s_stat, struct stat *_d_stat)
 {
     FileOpContextUI *ui;
 

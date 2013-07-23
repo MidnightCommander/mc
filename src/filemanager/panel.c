@@ -3880,7 +3880,7 @@ event_update_panels (const gchar * event_group_name, const gchar * event_name,
 /* event callback */
 static gboolean
 panel_save_current_file_to_clip_file (const gchar * event_group_name, const gchar * event_name,
-                                     gpointer init_data, gpointer data)
+                                      gpointer init_data, gpointer data)
 {
     (void) event_group_name;
     (void) event_name;

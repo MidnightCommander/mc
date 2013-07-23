@@ -105,7 +105,7 @@ _str_convert (GIConv coder, const char *string, int size, GString * buffer)
     gsize bytes_read = 0;
     gsize bytes_written = 0;
 
-    errno = 0;          /* FIXME: is it really needed? */
+    errno = 0;                  /* FIXME: is it really needed? */
 
     if (coder == INVALID_CONV)
         return ESTR_FAILURE;

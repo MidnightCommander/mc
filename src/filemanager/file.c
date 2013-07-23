@@ -2137,8 +2137,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
                 return_status = FILE_SKIPALL;
             else
             {
-                return_status =
-                    file_error (_("Cannot create target directory \"%s\"\n%s"), d);
+                return_status = file_error (_("Cannot create target directory \"%s\"\n%s"), d);
                 if (return_status == FILE_SKIPALL)
                     ctx->skip_all = TRUE;
             }
@@ -2162,8 +2161,7 @@ copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
                 return_status = FILE_SKIPALL;
             else
             {
-                return_status =
-                    file_error (_("Cannot chown target directory \"%s\"\n%s"), d);
+                return_status = file_error (_("Cannot chown target directory \"%s\"\n%s"), d);
                 if (return_status == FILE_SKIPALL)
                     ctx->skip_all = TRUE;
             }
@@ -2302,7 +2300,7 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     }
 
     if (!dstat_ok)
-        ;       /* destination doesn't exist */
+        ;                       /* destination doesn't exist */
     else if (!ctx->dive_into_subdirs)
         move_over = TRUE;
     else

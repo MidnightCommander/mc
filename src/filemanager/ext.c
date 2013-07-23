@@ -782,7 +782,7 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
     int view_at_line_number;
     char *include_target;
     int include_target_len;
-    gboolean have_type = FALSE;         /* Flag used by regex_check_type() */
+    gboolean have_type = FALSE; /* Flag used by regex_check_type() */
 
     if (filename_vpath == NULL)
         return 0;
