@@ -483,6 +483,9 @@ AM_CONDITIONAL(USE_ASPELL, [test x"$enable_aspell" = xyes ])
 AM_CONDITIONAL(USE_DIFF, [test -n "$use_diff"])
 AM_CONDITIONAL(CHARSET, [test -n "$have_charset"])
 AM_CONDITIONAL(CONS_SAVER, [test -n "$cons_saver"])
+dnl Clarify do we really need GModule
+AM_CONDITIONAL([HAVE_GMODULE], [test -n "$g_module_supported" && \
+                                test x"$textmode_x11_support" = x"yes" -o x"$enable_aspell" = x"yes"])
 
 AC_DEFINE_UNQUOTED([MC_CONFIGURE_ARGS], ["$ac_configure_args"], [MC configure arguments])
 

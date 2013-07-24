@@ -32,8 +32,6 @@ AC_DEFUN([AC_G_MODULE_SUPPORTED], [
             ;;
     esac
 
-    AM_CONDITIONAL([HAVE_GMODULE], [test x"$g_module_supported" != x])
-
     dnl
     dnl Try to find static libraries for glib and gmodule.
     dnl
