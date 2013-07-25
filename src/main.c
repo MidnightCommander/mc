@@ -469,6 +469,7 @@ main (int argc, char *argv[])
         g_list_free ((GList *) mc_run_param0);
     }
     g_free (mc_run_param1);
+    g_free (saved_other_dir);
 
     mc_config_deinit_config_paths ();
 

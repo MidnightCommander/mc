@@ -117,6 +117,9 @@ extern gboolean is_autodetect_codeset_enabled;
 extern char *spell_language;
 #endif
 
+/* Value of "other_dir" key in ini file */
+extern char *saved_other_dir;
+
 /* If set, then print to the given file the last directory we were at */
 extern char *last_wd_string;
 
