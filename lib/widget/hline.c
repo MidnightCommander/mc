@@ -79,6 +79,7 @@ hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                 w->cols = wo->cols - 2;
             }
         }
+        return MSG_HANDLED;
 
     case MSG_FOCUS:
         /* We don't want to get the focus */
