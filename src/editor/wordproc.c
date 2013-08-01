@@ -214,13 +214,23 @@ next_tab_pos (off_t x)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline off_t
-line_pixel_length (unsigned char *t, off_t b, off_t l)
+line_pixel_length (unsigned char *t, off_t b, off_t l, gboolean utf8)
 {
-    off_t x = 0, xn = 0;
+    off_t xn, x;                /* position conters */
+    off_t cw;                   /* character width in bytes */
 
-    while (TRUE)
+#ifndef HAVE_CHARSET
+    (void) utf8;
+#endif
+
+    for (xn = 0, x = 0; xn <= l; x = xn, b += cw)
     {
-        switch (t[b])
+        char *tb;
+
+        tb = (char *) t + b;
+        cw = 1;
+
+        switch (tb[0])
         {
         case '\n':
             return b;
@@ -228,14 +238,32 @@ line_pixel_length (unsigned char *t, off_t b, off_t l)
             xn = next_tab_pos (x);
             break;
         default:
+#ifdef HAVE_CHARSET
+            if (utf8)
+            {
+                gunichar ch;
+
+                ch = g_utf8_get_char_validated (tb, -1);
+                if (ch != (gunichar) (-2) && ch != (gunichar) (-1))
+                {
+                    char *next_ch;
+
+                    /* Calculate UTF-8 char width */
+                    next_ch = g_utf8_next_char (tb);
+                    if (next_ch != NULL)
+                        cw = next_ch - tb;
+
+                    if (g_unichar_iswide (ch))
+                        x++;
+                }
+            }
+#endif
+
             xn = x + 1;
             break;
         }
-        if (xn > l)
-            break;
-        x = xn;
-        b++;
     }
+
     return b;
 }
 
@@ -296,7 +324,7 @@ word_start (unsigned char *t, off_t q, off_t size)
 /** replaces ' ' with '\n' to properly format a paragraph */
 
 static inline void
-format_this (unsigned char *t, off_t size, long indent)
+format_this (unsigned char *t, off_t size, long indent, gboolean utf8)
 {
     off_t q = 0, ww;
 
@@ -309,7 +337,7 @@ format_this (unsigned char *t, off_t size, long indent)
     {
         off_t p;
 
-        q = line_pixel_length (t, q, ww);
+        q = line_pixel_length (t, q, ww, utf8);
         if (q > size)
             break;
         if (t[q] == '\n')
@@ -453,6 +481,7 @@ format_paragraph (WEdit * edit, gboolean force)
     GString *t;
     long indent;
     unsigned char *t2;
+    gboolean utf8 = FALSE;
 
     if (option_word_wrap_line_length < 2)
         return;
@@ -481,9 +510,12 @@ format_paragraph (WEdit * edit, gboolean force)
     }
 
     t2 = (unsigned char *) g_string_free (t, FALSE);
-    format_this (t2, q - p, indent);
+#ifdef HAVE_CHARSET
+    utf8 = edit->utf8;
+#endif
+    format_this (t2, q - p, indent, utf8);
     put_paragraph (edit, t2, p, indent, size);
-    g_free (t2);
+    g_free ((char *) t2);
 
     /* Scroll left as much as possible to show the formatted paragraph */
     edit_scroll_left (edit, -edit->start_col);
