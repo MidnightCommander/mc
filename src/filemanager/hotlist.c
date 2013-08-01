@@ -80,14 +80,14 @@
 #define B_REMOVE        (B_USER + 1)
 #define B_NEW_GROUP     (B_USER + 2)
 #define B_NEW_ENTRY     (B_USER + 3)
-#define B_UP_GROUP      (B_USER + 4)
-#define B_INSERT        (B_USER + 5)
-#define B_APPEND        (B_USER + 6)
-#define B_MOVE          (B_USER + 7)
-
+#define B_ENTER_GROUP   (B_USER + 4)
+#define B_UP_GROUP      (B_USER + 5)
+#define B_INSERT        (B_USER + 6)
+#define B_APPEND        (B_USER + 7)
+#define B_MOVE          (B_USER + 8)
 #ifdef ENABLE_VFS
-#define B_FREE_ALL_VFS (B_USER + 8)
-#define B_REFRESH_VFS (B_USER + 9)
+#define B_FREE_ALL_VFS  (B_USER + 9)
+#define B_REFRESH_VFS   (B_USER + 10)
 #endif
 
 #define TKN_GROUP   0
@@ -433,6 +433,7 @@ hotlist_button_callback (WButton * button, int action)
         return 0;
 
     case B_ENTER:
+    case B_ENTER_GROUP:
         {
             WListbox *list;
             void *data;
@@ -447,7 +448,7 @@ hotlist_button_callback (WButton * button, int action)
             hlp = (struct hotlist *) data;
 
             if (hlp->type == HL_TYPE_ENTRY)
-                return 1;
+                return (action == B_ENTER ? 1 : 0);
             if (hlp->type != HL_TYPE_DOTDOT)
             {
                 listbox_remove_list (list);
@@ -498,7 +499,6 @@ hotlist_handle_key (WDialog * h, int key)
 
     case '\n':
     case KEY_ENTER:
-    case KEY_RIGHT:
         if (hotlist_button_callback (NULL, B_ENTER) != 0)
         {
             h->ret_value = B_ENTER;
@@ -506,7 +506,14 @@ hotlist_handle_key (WDialog * h, int key)
         }
         return MSG_HANDLED;
 
+    case KEY_RIGHT:
+        /* enter to the group */
+        if (hotlist_state.type == LIST_VFSLIST)
+            return MSG_NOT_HANDLED;
+        return hotlist_button_callback (NULL, B_ENTER_GROUP) == 0 ? MSG_HANDLED : MSG_NOT_HANDLED;
+
     case KEY_LEFT:
+        /* leave the group */
         if (hotlist_state.type == LIST_VFSLIST)
             return MSG_NOT_HANDLED;
         return hotlist_button_callback (NULL, B_UP_GROUP) == 0 ? MSG_HANDLED : MSG_NOT_HANDLED;
