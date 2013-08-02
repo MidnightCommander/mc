@@ -1,3 +1,24 @@
+Version 4.8.10
+
+- Core
+
+    * Do not link GModule if it is not required (save space on embedded systems) (#2995)
+    * Behavior of the 'Right' key in the 'Directory hotlist' was changed: now 'Right' key is used only to enter into the group (#3045)
+
+- Misc
+    * Code cleanup (#3035)
+
+- Fixes
+
+    * Build failure on Cygwin (#3041)
+    * Broken NCurses detection (#3043)
+    * Broken handling of mc command line arguments (#3047)
+    * Cannot enter into zip archive in tar one (#3034)
+    * Cannot open some jar files
+    * mcedit: file descriptor leak (#3040)
+    * mcedit: paragraph format doesn't respect multibyte characters (#2713)
+    * Crash after entering a wrong SFTP password (#3036)
+
 Version 4.8.9
 
 - VFS
