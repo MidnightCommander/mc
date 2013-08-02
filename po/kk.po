@@ -3,20 +3,19 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# kristjanrats <kristjanrats@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
 "POT-Creation-Date: 2013-07-05 09:13+0400\n"
-"PO-Revision-Date: 2013-07-30 09:29+0000\n"
-"Last-Translator: kristjanrats <kristjanrats@gmail.com>\n"
-"Language-Team: Estonian (http://www.transifex.com/projects/p/mc/language/et/)\n"
+"PO-Revision-Date: 2013-07-21 08:27+0000\n"
+"Last-Translator: aborodin <aborodin@vmail.ru>\n"
+"Language-Team: Kazakh (http://www.transifex.com/projects/p/mc/language/kk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: et\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: kk\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr ""
@@ -248,7 +247,7 @@ msgid "* on keypad"
 msgstr ""
 
 msgid "Escape key"
-msgstr "Pao klahv"
+msgstr ""
 
 msgid "Left arrow keypad"
 msgstr ""
@@ -332,10 +331,10 @@ msgid "Colon"
 msgstr ""
 
 msgid "Exclamation mark"
-msgstr "Hüüumärk"
+msgstr ""
 
 msgid "Question mark"
-msgstr "Küsimärk"
+msgstr ""
 
 msgid "Ampersand"
 msgstr ""
@@ -2645,7 +2644,6 @@ msgstr ""
 msgid "Finished (ignored %zd directory)"
 msgid_plural "Finished (ignored %zd directories)"
 msgstr[0] ""
-msgstr[1] ""
 
 #, c-format
 msgid "Searching %s"
@@ -2808,7 +2806,6 @@ msgstr ""
 msgid " (%ld block)"
 msgid_plural " (%ld blocks)"
 msgstr[0] ""
-msgstr[1] ""
 
 #, c-format
 msgid "Owner:     %s/%s"
@@ -3040,7 +3037,6 @@ msgstr ""
 msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
 msgstr[0] ""
-msgstr[1] ""
 
 msgid "The Midnight Commander"
 msgstr ""
@@ -3187,13 +3183,11 @@ msgstr ""
 msgid "%s byte"
 msgid_plural "%s bytes"
 msgstr[0] ""
-msgstr[1] ""
 
 #, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] ""
-msgstr[1] ""
 
 msgid "Panelize"
 msgstr ""
