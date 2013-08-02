@@ -607,7 +607,7 @@ create_panels (void)
         if (mc_run_param0 == NULL && mc_run_param1 == NULL)
         {
             /* no arguments */
-            current_dir = NULL;         /* assume current dir */
+            current_dir = NULL; /* assume current dir */
             other_dir = saved_other_dir;        /* from ini */
         }
         else if (mc_run_param0 != NULL && mc_run_param1 != NULL)
@@ -616,11 +616,11 @@ create_panels (void)
             current_dir = (char *) mc_run_param0;
             other_dir = mc_run_param1;
         }
-        else /* mc_run_param0 != NULL && mc_run_param1 == NULL */
+        else                    /* mc_run_param0 != NULL && mc_run_param1 == NULL */
         {
             /* one argument */
-            current_dir = NULL;         /* assume current dir */
-            other_dir =  (char *) mc_run_param0;
+            current_dir = NULL; /* assume current dir */
+            other_dir = (char *) mc_run_param0;
         }
     }
     else
@@ -634,7 +634,7 @@ create_panels (void)
         if (mc_run_param0 == NULL && mc_run_param1 == NULL)
         {
             /* no arguments */
-            current_dir = NULL;         /* assume current dir */
+            current_dir = NULL; /* assume current dir */
             other_dir = saved_other_dir;        /* from ini */
         }
         else if (mc_run_param0 != NULL && mc_run_param1 != NULL)
@@ -643,10 +643,10 @@ create_panels (void)
             current_dir = mc_run_param1;
             other_dir = (char *) mc_run_param0;
         }
-        else /* mc_run_param0 != NULL && mc_run_param1 == NULL */
+        else                    /* mc_run_param0 != NULL && mc_run_param1 == NULL */
         {
             /* one argument */
-            current_dir = NULL;         /* assume current dir */;
+            current_dir = NULL; /* assume current dir */ ;
             other_dir = (char *) mc_run_param0;
         }
     }
