@@ -711,7 +711,7 @@ create_panels (void)
     the_hint->auto_adjust_cols = 0;
     WIDGET (the_hint)->cols = COLS;
 
-    the_menubar = menubar_new (0, 0, COLS, NULL);
+    the_menubar = menubar_new (0, 0, COLS, NULL, menubar_visible);
 }
 
 /* --------------------------------------------------------------------------------------------- */

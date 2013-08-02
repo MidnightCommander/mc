@@ -150,7 +150,7 @@ static gboolean is_start = FALSE;       /* Status of the start/stop toggle butto
 static char *old_dir = NULL;
 
 /* Where did we stop */
-static int resuming;
+static gboolean resuming;
 static int last_line;
 static int last_pos;
 
@@ -1068,7 +1068,7 @@ search_content (WDialog * h, const char *directory, const char *filename)
         if (resuming)
         {
             /* We've been previously suspended, start from the previous position */
-            resuming = 0;
+            resuming = FALSE;
             line = last_line;
             pos = last_pos;
         }
@@ -1106,7 +1106,7 @@ search_content (WDialog * h, const char *directory, const char *filename)
                     ret_val = TRUE;
                     break;
                 case FIND_SUSPEND:
-                    resuming = 1;
+                    resuming = TRUE;
                     last_line = line;
                     last_pos = pos;
                     ret_val = TRUE;
@@ -1382,7 +1382,7 @@ init_find_vars (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
+find_do_view_edit (gboolean unparsed_view, gboolean edit, char *dir, char *file)
 {
     char *fullname = NULL;
     const char *filename = NULL;
@@ -1404,7 +1404,7 @@ find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
     if (edit)
         do_edit_at_line (fullname_vpath, use_internal_edit, line);
     else
-        view_file_at_line (fullname_vpath, unparsed_view, use_internal_view, line);
+        view_file_at_line (fullname_vpath, unparsed_view ? 1 : 0, use_internal_view, line);
     vfs_path_free (fullname_vpath);
     g_free (fullname);
 }
@@ -1412,7 +1412,7 @@ find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-view_edit_currently_selected_file (int unparsed_view, int edit)
+view_edit_currently_selected_file (gboolean unparsed_view, gboolean edit)
 {
     char *dir = NULL;
     char *text = NULL;
@@ -1477,11 +1477,12 @@ find_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
     case MSG_KEY:
         if (parm == KEY_F (3) || parm == KEY_F (13))
         {
-            int unparsed_view = (parm == KEY_F (13));
-            return view_edit_currently_selected_file (unparsed_view, 0);
+            gboolean unparsed_view = (parm == KEY_F (13));
+
+            return view_edit_currently_selected_file (unparsed_view, FALSE);
         }
         if (parm == KEY_F (4))
-            return view_edit_currently_selected_file (0, 1);
+            return view_edit_currently_selected_file (FALSE, TRUE);
         return MSG_NOT_HANDLED;
 
     case MSG_RESIZE:
@@ -1530,7 +1531,7 @@ find_do_view_file (WButton * button, int action)
     (void) button;
     (void) action;
 
-    view_edit_currently_selected_file (0, 0);
+    view_edit_currently_selected_file (FALSE, FALSE);
     return 0;
 }
 
@@ -1543,7 +1544,7 @@ find_do_edit_file (WButton * button, int action)
     (void) button;
     (void) action;
 
-    view_edit_currently_selected_file (0, 1);
+    view_edit_currently_selected_file (FALSE, TRUE);
     return 0;
 }
 
@@ -1639,7 +1640,7 @@ run_process (void)
     search_file_handle->is_all_charsets = options.file_all_charsets;
     search_file_handle->is_entire_line = options.file_pattern;
 
-    resuming = 0;
+    resuming = FALSE;
 
     widget_want_idle (WIDGET (find_dlg), TRUE);
     ret = dlg_run (find_dlg);

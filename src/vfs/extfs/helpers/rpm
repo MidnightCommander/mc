@@ -288,8 +288,8 @@ mcrpmfs_copyout ()
 mcrpmfs_run ()
 {
     case "$1" in
-	INSTALL) echo "Installing \"\"$f\"\""; $RPM -ivh "${rpm_filename}"; exit 0;;
-	UPGRADE) echo "Upgrading \"\"$f\"\""; $RPM -Uvh "${rpm_filename}"; exit 0;;
+	INSTALL) echo "Installing \"${rpm_filename}\""; $RPM -ivh "${rpm_filename}"; exit 0;;
+	UPGRADE) echo "Upgrading \"${rpm_filename}\""; $RPM -Uvh "${rpm_filename}"; exit 0;;
 	REBUILD) echo "Rebuilding \"${rpm_filename}\""; $RPMBUILD --rebuild "${rpm_filename}"; exit 0;;
     esac
 }

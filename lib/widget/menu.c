@@ -836,7 +836,7 @@ destroy_menu (menu_t * menu)
 /* --------------------------------------------------------------------------------------------- */
 
 WMenuBar *
-menubar_new (int y, int x, int cols, GList * menu)
+menubar_new (int y, int x, int cols, GList * menu, gboolean visible)
 {
     WMenuBar *menubar;
     Widget *w;
@@ -845,7 +845,7 @@ menubar_new (int y, int x, int cols, GList * menu)
     w = WIDGET (menubar);
     widget_init (w, y, x, 1, cols, menubar_callback, menubar_event);
 
-    menubar->is_visible = TRUE; /* by default */
+    menubar->is_visible = visible;
     widget_want_cursor (w, FALSE);
     menubar_set_menu (menubar, menu);
 

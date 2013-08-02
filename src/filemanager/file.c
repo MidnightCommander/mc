@@ -2378,7 +2378,14 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     mc_refresh ();
     if (ctx->erase_at_end)
     {
-        for (; erase_list != NULL && return_status != FILE_ABORT;)
+        /* remove files after move */
+        if (erase_list != NULL)
+        {
+            file_op_context_destroy_ui (ctx);
+            file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_DELETE_ITEM);
+        }
+
+        while (erase_list != NULL && return_status != FILE_ABORT)
         {
             struct link *lp = (struct link *) erase_list->data;
 
