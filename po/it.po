@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2013-07-05 09:13+0400\n"
-"PO-Revision-Date: 2013-05-03 00:01+0200\n"
+"PO-Revision-Date: 2013-08-04 10:16+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
 "it/)\n"
@@ -699,7 +699,6 @@ msgstr "[questa_dir] [dir_altro_pannello]"
 msgid "Set initial line number for the internal editor"
 msgstr "Imposta numero di riga iniziale per l'editor interno"
 
-#, fuzzy
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
@@ -925,11 +924,13 @@ msgstr "Impossibile ottenere dimensioni/permessi per %s"
 msgid "\"%s\" is not a regular file"
 msgstr "\"%s\" non è un file normale"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "File \"%s\" is too large.\n"
 "Open it anyway?"
-msgstr "Il file \"%s\" è troppo grande"
+msgstr ""
+"Il file \"%s\" è troppo grande.\n"
+"Aprirlo comunque?"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1516,9 +1517,8 @@ msgstr ""
 "Un semplice editor di testi\n"
 "scritto per il Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2013 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2012 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2013 the Free Software Foundation"
 
 msgid "About"
 msgstr "Informazioni"
@@ -1598,9 +1598,9 @@ msgstr "Impossibile ricevere una copia locale di %s"
 msgid "The shell is already running a command"
 msgstr "La shell sta già eseguendo un comando"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
-msgstr "Premi `exit' per tornare a Midnight Commander"
+msgstr "Battere 'exit' per tornare al Midnight Commander"
 
 msgid "Set &all"
 msgstr "Im. &tut."
@@ -2154,9 +2154,9 @@ msgstr ""
 "Non è né un xterm né una console; \n"
 "i pannelli non possono essere nascosti."
 
-#, fuzzy, c-format
+#, c-format
 msgid "Symlink '%s' points to:"
-msgstr "Il colleg. simb. \"%s\" punta a:"
+msgstr "Il coll. simb. \"%s\" punta a:"
 
 msgid "Edit symlink"
 msgstr "Modifica coll. simb."
@@ -2169,9 +2169,9 @@ msgstr "modifica collegamento simb., impossibile rimuovere %s: %s"
 msgid "edit symlink: %s"
 msgstr "modifica del collegamento simb.: %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "'%s' is not a symbolic link"
-msgstr "\"%s\" non è un collegamento simbolico"
+msgstr "\"%s\" non è un coll. simbolico"
 
 msgid "FTP to machine"
 msgstr "Connessione FTP"
@@ -2757,7 +2757,7 @@ msgstr "Coll. simb. &stabili"
 msgid "&Background"
 msgstr "&Background"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid source pattern '%s'"
 msgstr "Modello sorgente non valido \"%s\""
 
@@ -4276,12 +4276,12 @@ msgstr ""
 msgid "Cannot view: not a regular file"
 msgstr "Visualizzazione impossibile: non è un semplice file"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot open \"%s\" in parse mode\n"
 "%s"
 msgstr ""
-"Impossibile aprire il file \"%s\"\n"
+"Impossibile aprire \"%s\" in modalità analisi\n"
 "%s"
 
 msgid "Seeking to search result"
