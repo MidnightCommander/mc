@@ -284,8 +284,8 @@ statvfs_works (void)
     if (statvfs_works_cache < 0)
         statvfs_works_cache = (uname (&name) == 0 && 0 <= str_verscmp (name.release, "2.6.36"));
     return statvfs_works_cache;
-}
 #endif
+}
 #endif
 
 /* --------------------------------------------------------------------------------------------- */
