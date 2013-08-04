@@ -3111,8 +3111,7 @@ for the second time, for the first time MC just beeps.
 .PP
 Apply escaping of
 .BR ? ", " * " and " &
-symbols (as
-.BR \\? ", " \\* ", " \\& )
+symbols (as \fB\\?\fR, \fB\\*\fR, \fB\\&\fR )
 in filenames to disallow use them as metasymbols in regular expressions
 when substitution is performed in the input line.
 
