@@ -172,11 +172,12 @@ screen modes, and able to send mouse escape sequences).
 Do not use X11 to get the state of modifiers Alt, Ctrl, Shift
 .PP
 If both paths are specified, the first path name is the directory to show
-in the left panel; the second path name is the directory to be shown in
-the right panel.
+in the active panel; the second path name is the directory to be shown in
+the other panel.
 .PP
 If one path is specified, the path name is the directory to show
-in the active panel; current directory is shown in the passive panel.
+in the active panel; value of "other_dir" from panels.ini is the directory
+to be shown in the passive panel.
 .PP
 If no paths are specified, current directory is shown in the active panel;
 value of "other_dir" from panels.ini is the directory to be shown in

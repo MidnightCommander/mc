@@ -584,15 +584,15 @@ create_panels (void)
      * Following cases from command line are possible:
      * 'mc' (no arguments):            mc_run_param0 == NULL, mc_run_param1 == NULL
      *                                 active panel uses current directory
-     *                                 passive panel uses "other_dir" from ini
+     *                                 passive panel uses "other_dir" from panels.ini
      *
      * 'mc dir1 dir2' (two arguments): mc_run_param0 != NULL, mc_run_param1 != NULL
-     *                                 left panel uses mc_run_param0
-     *                                 right panel uses mc_run_param1
+     *                                 active panel uses mc_run_param0
+     *                                 passive panel uses mc_run_param1
      *
      * 'mc dir1' (single argument):    mc_run_param0 != NULL, mc_run_param1 == NULL
-     *                                 active panel uses current directory
-     *                                 passive panel uses mc_run_param0
+     *                                 active panel uses mc_run_param0
+     *                                 passive panel uses "other_dir" from panels.ini
      */
 
     /* Set up panel directories */
@@ -619,8 +619,8 @@ create_panels (void)
         else                    /* mc_run_param0 != NULL && mc_run_param1 == NULL */
         {
             /* one argument */
-            current_dir = NULL; /* assume current dir */
-            other_dir = (char *) mc_run_param0;
+            current_dir = (char *) mc_run_param0;
+            other_dir = saved_other_dir;        /* from ini */
         }
     }
     else
@@ -640,14 +640,14 @@ create_panels (void)
         else if (mc_run_param0 != NULL && mc_run_param1 != NULL)
         {
             /* two arguments */
-            current_dir = mc_run_param1;
-            other_dir = (char *) mc_run_param0;
+            current_dir = (char *) mc_run_param0;
+            other_dir = mc_run_param1;
         }
         else                    /* mc_run_param0 != NULL && mc_run_param1 == NULL */
         {
             /* one argument */
-            current_dir = NULL; /* assume current dir */ ;
-            other_dir = (char *) mc_run_param0;
+            current_dir = (char *) mc_run_param0;
+            other_dir = saved_other_dir;        /* from ini */
         }
     }
 
