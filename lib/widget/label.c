@@ -34,6 +34,7 @@
 
 #include <config.h>
 
+#include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -185,6 +186,21 @@ label_set_text (WLabel * label, const char *text)
 
     if (newcols < w->cols)
         w->cols = newcols;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+label_set_textv (WLabel * label, const char *format, ...)
+{
+    va_list args;
+    char buf[BUF_1K];           /* FIXME: is it enough? */
+
+    va_start (args, format);
+    g_vsnprintf (buf, sizeof (buf), format, args);
+    va_end (args);
+
+    label_set_text (label, buf);
 }
 
 /* --------------------------------------------------------------------------------------------- */
