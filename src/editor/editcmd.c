@@ -1935,26 +1935,23 @@ edit_load_macro_cmd (WEdit * edit)
     if (macros_config == NULL || macros_list == NULL || macros_list->len != 0)
         return FALSE;
 
-    profile_keys = keys = mc_config_get_keys (macros_config, section_name, &len);
-    while (*profile_keys != NULL)
+    keys = mc_config_get_keys (macros_config, section_name, &len);
+    for (profile_keys = keys; *profile_keys != NULL; profile_keys++)
     {
-        gboolean have_macro;
+        gboolean have_macro = FALSE;
         GArray *macros;
         macros_t macro;
 
         macros = g_array_new (TRUE, FALSE, sizeof (macro_action_t));
-
-        curr_values = values = mc_config_get_string_list (macros_config, section_name,
-                                                          *profile_keys, &values_len);
+        values =
+            mc_config_get_string_list (macros_config, section_name, *profile_keys, &values_len);
         hotkey = lookup_key (*profile_keys, NULL);
-        have_macro = FALSE;
 
-        while (*curr_values != NULL && *curr_values[0] != '\0')
+        for (curr_values = values; *curr_values != NULL && *curr_values[0] != '\0'; curr_values++)
         {
             char **macro_pair = NULL;
 
             macro_pair = g_strsplit (*curr_values, ":", 2);
-
             if (macro_pair != NULL)
             {
                 macro_action_t m_act;
@@ -1988,7 +1985,6 @@ edit_load_macro_cmd (WEdit * edit)
                 g_strfreev (macro_pair);
                 macro_pair = NULL;
             }
-            curr_values++;
         }
         if (have_macro)
         {
@@ -1996,7 +1992,6 @@ edit_load_macro_cmd (WEdit * edit)
             macro.macro = macros;
             g_array_append_val (macros_list, macro);
         }
-        profile_keys++;
         g_strfreev (values);
     }
     g_strfreev (keys);
