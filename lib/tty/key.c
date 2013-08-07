@@ -1471,10 +1471,10 @@ lookup_key (const char *name, char **label)
         return 0;
 
     name = g_strstrip (g_strdup (name));
-    p = lc_keys = g_strsplit_set (name, "-+ ", -1);
+    lc_keys = g_strsplit_set (name, "-+ ", -1);
     g_free ((char *) name);
 
-    while ((p != NULL) && (*p != NULL))
+    for (p = lc_keys; p != NULL && *p != NULL; p++)
     {
         if ((*p)[0] != '\0')
         {
@@ -1495,8 +1495,6 @@ lookup_key (const char *name, char **label)
                 break;
             }
         }
-
-        p++;
     }
 
     g_strfreev (lc_keys);
@@ -1504,7 +1502,6 @@ lookup_key (const char *name, char **label)
     /* output */
     if (k <= 0)
         return 0;
-
 
     if (label != NULL)
     {
