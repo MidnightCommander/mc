@@ -141,6 +141,35 @@ static const off_t option_filesize_default_threshold = 64 * 1024 * 1024;        
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
+
+static int
+edit_load_status_update_cb (status_msg_t * sm)
+{
+    simple_status_msg_t *ssm = SIMPLE_STATUS_MSG (sm);
+    edit_buffer_read_file_status_msg_t *rsm = (edit_buffer_read_file_status_msg_t *) sm;
+    Widget *wd = WIDGET (sm->dlg);
+
+    if (verbose)
+        label_set_textv (ssm->label, _("Loading: %3d%%"),
+                         edit_buffer_calc_percent (rsm->buf, rsm->loaded));
+    else
+        label_set_text (ssm->label, _("Loading..."));
+
+    if (rsm->first)
+    {
+        int wd_width;
+        Widget *lw = WIDGET (ssm->label);
+
+        wd_width = max (wd->cols, lw->cols + 6);
+        widget_set_size (wd, wd->y, wd->x, wd->lines, wd_width);
+        widget_set_size (lw, lw->y, wd->x + (wd->cols - lw->cols) / 2, lw->lines, lw->cols);
+        rsm->first = FALSE;
+    }
+
+    return status_msg_common_update (sm);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /**
  * Load file OR text into buffers.  Set cursor to the beginning of file.
  *
@@ -152,6 +181,8 @@ edit_load_file_fast (edit_buffer_t * buf, const vfs_path_t * filename_vpath)
 {
     int file;
     gboolean ret;
+    edit_buffer_read_file_status_msg_t rsm;
+    gboolean aborted;
 
     file = mc_open (filename_vpath, O_RDONLY | O_BINARY);
     if (file < 0)
@@ -165,8 +196,18 @@ edit_load_file_fast (edit_buffer_t * buf, const vfs_path_t * filename_vpath)
         return FALSE;
     }
 
-    ret = (edit_buffer_read_file (buf, file, buf->size) == buf->size);
-    if (!ret)
+    rsm.first = TRUE;
+    rsm.buf = buf;
+    rsm.loaded = 0;
+
+    status_msg_init (STATUS_MSG (&rsm), _("Load file"), 1.0, simple_status_msg_init_cb,
+                     edit_load_status_update_cb, NULL);
+
+    ret = (edit_buffer_read_file (buf, file, buf->size, &rsm, &aborted) == buf->size);
+
+    status_msg_deinit (STATUS_MSG (&rsm));
+
+    if (!ret && !aborted)
     {
         gchar *errmsg;
 
