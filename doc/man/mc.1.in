@@ -1493,6 +1493,9 @@ To add new directories quickly, you can use the Add to hotlist command
 (C\-x h), which adds the current directory into the directory hotlist,
 asking just for the label for the directory.
 .PP
+When in the hotlist dialog, pressing keys 0 through 9 will select
+the 1st through 10th entry, respectively.
+.PP
 This makes cd to often used directories faster. You may consider using the
 CDPATH variable as described in
 .\"LINK2"
