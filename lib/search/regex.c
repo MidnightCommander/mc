@@ -2,12 +2,13 @@
    Search text engine.
    Regex search
 
-   Copyright (C) 2009, 2011
+   Copyright (C) 2009, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2009,2010,2011
+   Slava Zanko <slavazanko@gmail.com>, 2009, 2010, 2011
    Vitaliy Filippov <vitalif@yourcmc.ru>, 2011
+   Andrew Borodin <aborodin@vmail.ru>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -806,28 +807,56 @@ mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
         g_string_set_size (lc_mc_search->regex_buffer, 0);
         lc_mc_search->start_buffer = current_pos;
 
-        while (TRUE)
+        if (lc_mc_search->search_fn != NULL)
         {
-            int current_chr = '\n';     /* stop search symbol */
+            int current_chr;
 
-            ret = mc_search__get_char (lc_mc_search, user_data, current_pos, &current_chr);
-            if (ret == MC_SEARCH_CB_ABORT)
-                break;
+            do
+            {
+                /* stop search symbol */
+                current_chr = '\n';
 
-            if (ret == MC_SEARCH_CB_INVALID)
-                continue;
+                ret = lc_mc_search->search_fn (user_data, current_pos, &current_chr);
 
-            current_pos++;
+                if (ret == MC_SEARCH_CB_ABORT)
+                    break;
 
-            if (ret == MC_SEARCH_CB_SKIP)
-                continue;
+                if (ret == MC_SEARCH_CB_INVALID)
+                    continue;
 
-            virtual_pos++;
+                current_pos++;
 
-            g_string_append_c (lc_mc_search->regex_buffer, (char) current_chr);
+                if (ret == MC_SEARCH_CB_SKIP)
+                    continue;
 
-            if ((char) current_chr == '\n' || virtual_pos > end_search)
-                break;
+                virtual_pos++;
+
+                g_string_append_c (lc_mc_search->regex_buffer, (char) current_chr);
+            }
+            while ((char) current_chr != '\n' && virtual_pos <= end_search);
+        }
+        else
+        {
+            char current_chr;
+
+            /* optimization for standard case (for search from file manager)
+             *  where there is no MC_SEARCH_CB_INVALID or MC_SEARCH_CB_SKIP
+             *  return codes, so we can copy line at regex buffer all at once
+             */
+            do
+            {
+                current_chr = ((char *) user_data)[current_pos];
+                if (current_chr == '\0')
+                    break;
+
+                current_pos++;
+            }
+            while (current_chr != '\n' && current_pos <= end_search);
+
+            /* use virtual_pos as index of start of current chunk */
+            g_string_append_len (lc_mc_search->regex_buffer, (char *) user_data + virtual_pos,
+                                 current_pos - virtual_pos);
+            virtual_pos = current_pos;
         }
 
         switch (mc_search__regex_found_cond (lc_mc_search, lc_mc_search->regex_buffer))
