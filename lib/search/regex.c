@@ -546,61 +546,59 @@ static void
 mc_search_regex__process_append_str (GString * dest_str, const char *from, gsize len,
                                      replace_transform_type_t * replace_flags)
 {
-    gsize loop = 0;
+    gsize loop;
     gsize char_len;
-    char *tmp_str;
-    GString *tmp_string;
 
     if (len == (gsize) (-1))
         len = strlen (from);
 
-    if (*replace_flags == REPLACE_T_NO_TRANSFORM)
+    if ((*replace_flags == REPLACE_T_NO_TRANSFORM) != 0)
     {
         g_string_append_len (dest_str, from, len);
         return;
     }
-    while (loop < len)
+
+    for (loop = 0; loop < len; loop += char_len)
     {
+        GString *tmp_string = NULL;
+        char *tmp_str;
+
         tmp_str = mc_search__get_one_symbol (NULL, from + loop, len - loop, NULL);
         char_len = strlen (tmp_str);
-        if (*replace_flags & REPLACE_T_UPP_TRANSFORM_CHAR)
+
+        if ((*replace_flags & REPLACE_T_UPP_TRANSFORM_CHAR) != 0)
         {
             *replace_flags &= ~REPLACE_T_UPP_TRANSFORM_CHAR;
             tmp_string = mc_search__toupper_case_str (NULL, tmp_str, char_len);
-            g_string_append (dest_str, tmp_string->str);
+            g_string_append_len (dest_str, tmp_string->str, tmp_string->len);
             g_string_free (tmp_string, TRUE);
-
         }
-        else if (*replace_flags & REPLACE_T_LOW_TRANSFORM_CHAR)
+        else if ((*replace_flags & REPLACE_T_LOW_TRANSFORM_CHAR) != 0)
         {
             *replace_flags &= ~REPLACE_T_LOW_TRANSFORM_CHAR;
-            tmp_string = mc_search__toupper_case_str (NULL, tmp_str, char_len);
-            g_string_append (dest_str, tmp_string->str);
+            tmp_string = mc_search__tolower_case_str (NULL, tmp_str, char_len);
+            g_string_append_len (dest_str, tmp_string->str, tmp_string->len);
             g_string_free (tmp_string, TRUE);
-
         }
-        else if (*replace_flags & REPLACE_T_UPP_TRANSFORM)
+        else if ((*replace_flags & REPLACE_T_UPP_TRANSFORM) != 0)
         {
             tmp_string = mc_search__toupper_case_str (NULL, tmp_str, char_len);
-            g_string_append (dest_str, tmp_string->str);
+            g_string_append_len (dest_str, tmp_string->str, tmp_string->len);
             g_string_free (tmp_string, TRUE);
-
         }
-        else if (*replace_flags & REPLACE_T_LOW_TRANSFORM)
+        else if ((*replace_flags & REPLACE_T_LOW_TRANSFORM) != 0)
         {
             tmp_string = mc_search__tolower_case_str (NULL, tmp_str, char_len);
-            g_string_append (dest_str, tmp_string->str);
+            g_string_append_len (dest_str, tmp_string->str, tmp_string->len);
             g_string_free (tmp_string, TRUE);
-
         }
         else
         {
-            g_string_append (dest_str, tmp_str);
+            g_string_append_len (dest_str, tmp_str, tmp_string->len);
         }
-        g_free (tmp_str);
-        loop += char_len;
-    }
 
+        g_free (tmp_str);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
