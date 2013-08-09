@@ -119,12 +119,12 @@ mc_search__regex_str_append_if_special (GString * copy_to, const GString * regex
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 static void
 mc_search__cond_struct_new_regex_hex_add (const char *charset, GString * str_to,
                                           const char *one_char, gsize str_len)
 {
     GString *upp, *low;
-    gchar *tmp_str;
     gsize loop;
 
     upp = mc_search__toupper_case_str (charset, one_char, str_len);
@@ -132,23 +132,20 @@ mc_search__cond_struct_new_regex_hex_add (const char *charset, GString * str_to,
 
     for (loop = 0; loop < upp->len; loop++)
     {
+        gchar tmp_str[10 + 1];  /* longest content is "[\\x%02X\\x%02X]" */
+        gint tmp_len;
 
-        if (loop < low->len)
-        {
-            if (upp->str[loop] == low->str[loop])
-                tmp_str = g_strdup_printf ("\\x%02X", (unsigned char) upp->str[loop]);
-            else
-                tmp_str =
-                    g_strdup_printf ("[\\x%02X\\x%02X]", (unsigned char) upp->str[loop],
-                                     (unsigned char) low->str[loop]);
-        }
+        if (loop >= low->len || upp->str[loop] == low->str[loop])
+            tmp_len =
+                g_snprintf (tmp_str, sizeof (tmp_str), "\\x%02X", (unsigned char) upp->str[loop]);
         else
-        {
-            tmp_str = g_strdup_printf ("\\x%02X", (unsigned char) upp->str[loop]);
-        }
-        g_string_append (str_to, tmp_str);
-        g_free (tmp_str);
+            tmp_len =
+                g_snprintf (tmp_str, sizeof (tmp_str), "[\\x%02X\\x%02X]",
+                            (unsigned char) upp->str[loop], (unsigned char) low->str[loop]);
+
+        g_string_append_len (str_to, tmp_str, tmp_len);
     }
+
     g_string_free (upp, TRUE);
     g_string_free (low, TRUE);
 }
