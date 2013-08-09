@@ -188,7 +188,7 @@ mc_search__cond_struct_new_regex_accum_append (const char *charset, GString * st
         g_free (one_char);
     }
 
-    g_string_append (str_to, recoded_part->str);
+    g_string_append_len (str_to, recoded_part->str, recoded_part->len);
     g_string_free (recoded_part, TRUE);
     g_string_set_size (str_from, 0);
 }
