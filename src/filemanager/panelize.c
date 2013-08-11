@@ -259,22 +259,17 @@ add2panelize (char *label, char *command)
 static void
 add2panelize_cmd (void)
 {
-    char *label;
-
-    if (pname->buffer && (*pname->buffer))
+    if (pname->buffer != NULL && *pname->buffer != '\0')
     {
+        char *label;
+
         label = input_dialog (_("Add to external panelize"),
                               _("Enter command label:"), MC_HISTORY_FM_PANELIZE_ADD, "",
                               INPUT_COMPLETE_NONE);
-        if (!label)
-            return;
-        if (!*label)
-        {
+        if (label == NULL || *label == '\0')
             g_free (label);
-            return;
-        }
-
-        add2panelize (label, g_strdup (pname->buffer));
+        else
+            add2panelize (label, g_strdup (pname->buffer));
     }
 }
 
