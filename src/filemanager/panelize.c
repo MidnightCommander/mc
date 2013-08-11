@@ -423,14 +423,14 @@ do_panelize_cd (struct WPanel *panel)
         else
         {
             vfs_path_t *tmp_vpath;
-            const char *tmp_path;
+            const char *fname;
 
             tmp_vpath =
                 vfs_path_append_new (panelized_panel.root_vpath, panelized_panel.list.list[i].fname,
                                      NULL);
-            tmp_path = vfs_path_as_str (tmp_vpath);
-            list->list[i].fnamelen = strlen (tmp_path);
-            list->list[i].fname = g_strndup (tmp_path, list->list[i].fnamelen);
+            fname = vfs_path_as_str (tmp_vpath);
+            list->list[i].fnamelen = strlen (fname);
+            list->list[i].fname = g_strndup (fname, list->list[i].fnamelen);
             vfs_path_free (tmp_vpath);
         }
         list->list[i].f.link_to_dir = panelized_panel.list.list[i].f.link_to_dir;
