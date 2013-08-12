@@ -2757,7 +2757,7 @@ edit_search_cmd (WEdit * edit, gboolean again)
 gboolean
 edit_ok_to_exit (WEdit * edit)
 {
-    char *fname = (char *) N_("[NoName]");
+    const char *fname = N_("[NoName]");
     char *msg;
     int act;
 
@@ -2765,22 +2765,16 @@ edit_ok_to_exit (WEdit * edit)
         return TRUE;
 
     if (edit->filename_vpath != NULL)
-        fname = g_strdup (vfs_path_as_str (edit->filename_vpath));
+        fname = vfs_path_as_str (edit->filename_vpath);
 #ifdef ENABLE_NLS
     else
-        fname = g_strdup (_(fname));
-#else
-    else
-        fname = g_strdup (fname);
+        fname = _(fname);
 #endif
 
     if (!mc_global.midnight_shutdown)
     {
         if (!edit_check_newline (&edit->buffer))
-        {
-            g_free (fname);
             return FALSE;
-        }
 
         query_set_sel (2);
 
@@ -2799,7 +2793,6 @@ edit_ok_to_exit (WEdit * edit)
     }
 
     g_free (msg);
-    g_free (fname);
 
     switch (act)
     {
