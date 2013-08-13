@@ -800,7 +800,7 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols,
         g_free (t);
     }
 
-    /* unique name got event group for this dialog */
+    /* unique name of event group for this dialog */
     new_d->event_group = g_strdup_printf ("%s_%p", MCEVENT_GROUP_DIALOG, (void *) new_d);
 
     return new_d;
