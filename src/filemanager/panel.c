@@ -1505,13 +1505,13 @@ panel_format_modified (WPanel * panel)
 static void
 panel_paint_sort_info (WPanel * panel)
 {
-    if (*panel->sort_info.sort_field->hotkey != '\0')
+    if (*panel->sort_field->hotkey != '\0')
     {
         const char *sort_sign =
             panel->sort_info.reverse ? panel_sort_down_sign : panel_sort_up_sign;
         char *str;
 
-        str = g_strdup_printf ("%s%s", sort_sign, Q_ (panel->sort_info.sort_field->hotkey));
+        str = g_strdup_printf ("%s%s", sort_sign, Q_ (panel->sort_field->hotkey));
         widget_move (panel, 1, 1);
         tty_print_string (str);
         g_free (str);
@@ -1580,7 +1580,7 @@ paint_frame (WPanel * panel)
                 g_string_set_size (format_txt, 0);
 
                 if (panel->list_type == list_long
-                    && strcmp (format->id, panel->sort_info.sort_field->id) == 0)
+                    && strcmp (format->id, panel->sort_field->id) == 0)
                     g_string_append (format_txt,
                                      panel->sort_info.reverse
                                      ? panel_sort_down_sign : panel_sort_up_sign);
@@ -2817,7 +2817,7 @@ panel_toggle_sort_order_prev (WPanel * panel)
 
     const panel_field_t *pfield = NULL;
 
-    title = panel_get_title_without_hotkey (panel->sort_info.sort_field->title_hotkey);
+    title = panel_get_title_without_hotkey (panel->sort_field->title_hotkey);
     lc_index = panel_get_format_field_index_by_name (panel, title);
     g_free (title);
 
@@ -2837,7 +2837,7 @@ panel_toggle_sort_order_prev (WPanel * panel)
 
     if (pfield != NULL)
     {
-        panel->sort_info.sort_field = pfield;
+        panel->sort_field = pfield;
         panel_set_sort_order (panel, pfield);
     }
 }
@@ -2853,7 +2853,7 @@ panel_toggle_sort_order_next (WPanel * panel)
     gchar *title;
 
     format_field_count = panel_get_format_field_count (panel);
-    title = panel_get_title_without_hotkey (panel->sort_info.sort_field->title_hotkey);
+    title = panel_get_title_without_hotkey (panel->sort_field->title_hotkey);
     lc_index = panel_get_format_field_index_by_name (panel, title);
     g_free (title);
 
@@ -2875,7 +2875,7 @@ panel_toggle_sort_order_next (WPanel * panel)
 
     if (pfield != NULL)
     {
-        panel->sort_info.sort_field = pfield;
+        panel->sort_field = pfield;
         panel_set_sort_order (panel, pfield);
     }
 }
@@ -2887,10 +2887,10 @@ panel_select_sort_order (WPanel * panel)
 {
     const panel_field_t *sort_order;
 
-    sort_order = sort_box (&panel->sort_info);
+    sort_order = sort_box (&panel->sort_info, panel->sort_field);
     if (sort_order != NULL)
     {
-        panel->sort_info.sort_field = sort_order;
+        panel->sort_field = sort_order;
         panel_set_sort_order (panel, sort_order);
     }
 }
@@ -2946,19 +2946,19 @@ panel_content_scroll_right (WPanel * panel)
 static void
 panel_set_sort_type_by_id (WPanel * panel, const char *name)
 {
-    if (strcmp (panel->sort_info.sort_field->id, name) != 0)
+    if (strcmp (panel->sort_field->id, name) != 0)
     {
         const panel_field_t *sort_order;
 
         sort_order = panel_get_field_by_id (name);
         if (sort_order == NULL)
             return;
-        panel->sort_info.sort_field = sort_order;
+        panel->sort_field = sort_order;
     }
     else
         panel->sort_info.reverse = !panel->sort_info.reverse;
 
-    panel_set_sort_order (panel, panel->sort_info.sort_field);
+    panel_set_sort_order (panel, panel->sort_field);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3064,7 +3064,7 @@ _do_panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_
     panel_clean_dir (panel);
 
     panel->count =
-        do_load_dir (panel->cwd_vpath, &panel->dir, panel->sort_info.sort_field->sort_routine,
+        do_load_dir (panel->cwd_vpath, &panel->dir, panel->sort_field->sort_routine,
                      panel->sort_info.reverse, panel->sort_info.case_sensitive,
                      panel->sort_info.exec_first, panel->filter);
     try_to_select (panel, get_parent_dir_name (panel->cwd_vpath, olddir_vpath));
@@ -3336,7 +3336,7 @@ panel_execute_cmd (WPanel * panel, unsigned long command)
         break;
     case CK_SortReverse:
         panel->sort_info.reverse = !panel->sort_info.reverse;
-        panel_set_sort_order (panel, panel->sort_info.sort_field);
+        panel_set_sort_order (panel, panel->sort_field);
         break;
     case CK_SortByName:
         panel_set_sort_type_by_id (panel, "name");
@@ -3562,7 +3562,7 @@ mouse_sort_col (WPanel * panel, int x)
     if (col_sort_format == NULL)
         return;
 
-    if (panel->sort_info.sort_field == col_sort_format)
+    if (panel->sort_field == col_sort_format)
     {
         /* reverse the sort if clicked column is already the sorted column */
         panel->sort_info.reverse = !panel->sort_info.reverse;
@@ -4143,7 +4143,7 @@ panel_new_with_dir (const char *panel_name, const vfs_path_t * vpath)
 
     /* Load the default format */
     panel->count =
-        do_load_dir (panel->cwd_vpath, &panel->dir, panel->sort_info.sort_field->sort_routine,
+        do_load_dir (panel->cwd_vpath, &panel->dir, panel->sort_field->sort_routine,
                      panel->sort_info.reverse, panel->sort_info.case_sensitive,
                      panel->sort_info.exec_first, panel->filter);
 
@@ -4190,7 +4190,7 @@ panel_reload (WPanel * panel)
     show_dir (panel);
 
     panel->count =
-        do_reload_dir (panel->cwd_vpath, &panel->dir, panel->sort_info.sort_field->sort_routine,
+        do_reload_dir (panel->cwd_vpath, &panel->dir, panel->sort_field->sort_routine,
                        panel->count, panel->sort_info.reverse, panel->sort_info.case_sensitive,
                        panel->sort_info.exec_first, panel->filter);
 
@@ -4447,7 +4447,7 @@ panel_re_sort (WPanel * panel)
 
     filename = g_strdup (selection (panel)->fname);
     unselect_item (panel);
-    do_sort (&panel->dir, panel->sort_info.sort_field->sort_routine, panel->count - 1,
+    do_sort (&panel->dir, panel->sort_field->sort_routine, panel->count - 1,
              panel->sort_info.reverse, panel->sort_info.case_sensitive,
              panel->sort_info.exec_first);
     panel->selected = -1;
@@ -4473,7 +4473,7 @@ panel_set_sort_order (WPanel * panel, const panel_field_t * sort_order)
     if (sort_order == NULL)
         return;
 
-    panel->sort_info.sort_field = sort_order;
+    panel->sort_field = sort_order;
 
     /* The directory is already sorted, we have to load the unsorted stuff */
     if (sort_order->sort_routine == (GCompareFunc) unsorted)

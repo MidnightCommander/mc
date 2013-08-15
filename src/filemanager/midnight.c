@@ -403,7 +403,7 @@ sort_cmd (void)
         return;
 
     p = MENU_PANEL;
-    sort_order = sort_box (&p->sort_info);
+    sort_order = sort_box (&p->sort_info, p->sort_field);
     panel_set_sort_order (p, sort_order);
 }
 

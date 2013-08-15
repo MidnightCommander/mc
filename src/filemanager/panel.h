@@ -85,7 +85,6 @@ typedef struct panel_sort_info_struct
     gboolean reverse;           /* Show listing in reverse? */
     gboolean case_sensitive;    /* Listing is case sensitive? */
     gboolean exec_first;        /* Show executable top in list? */
-    const panel_field_t *sort_field;
 } panel_sort_info_t;
 
 typedef struct WPanel
@@ -110,7 +109,10 @@ typedef struct WPanel
     gboolean is_panelized;      /* Flag: special filelisting, can't reload */
     panel_display_t frame_size; /* half or full frame */
     char *filter;               /* File name filter */
-    panel_sort_info_t sort_info;        /* Sort descriptor */
+
+    /* sort */
+    panel_sort_info_t sort_info;
+    const panel_field_t *sort_field;
 
     int dirty;                  /* Should we redisplay the panel? */
 

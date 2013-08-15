@@ -1648,7 +1648,7 @@ single_dirsize_cmd (void)
 
     recalculate_panel_summary (panel);
 
-    if (current_panel->sort_info.sort_field->sort_routine == (GCompareFunc) sort_size)
+    if (current_panel->sort_field->sort_routine == (GCompareFunc) sort_size)
         panel_re_sort (panel);
 
     panel->dirty = 1;
@@ -1691,7 +1691,7 @@ dirsizes_cmd (void)
 
     recalculate_panel_summary (panel);
 
-    if (current_panel->sort_info.sort_field->sort_routine == (GCompareFunc) sort_size)
+    if (current_panel->sort_field->sort_routine == (GCompareFunc) sort_size)
         panel_re_sort (panel);
 
     panel->dirty = 1;
