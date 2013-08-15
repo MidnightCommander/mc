@@ -117,7 +117,7 @@ panel_field_t panel_fields[] = {
      N_("sort|u"),
      N_("&Unsorted"), TRUE, FALSE,
      string_file_name,
-     (sortfn *) unsorted
+     (GCompareFunc) unsorted
     }
     ,
     {
@@ -127,7 +127,7 @@ panel_field_t panel_fields[] = {
      N_("sort|n"),
      N_("&Name"), TRUE, TRUE,
      string_file_name,
-     (sortfn *) sort_name
+     (GCompareFunc) sort_name
     }
     ,
     {
@@ -137,7 +137,7 @@ panel_field_t panel_fields[] = {
      N_("sort|v"),
      N_("&Version"), TRUE, FALSE,
      string_file_name,
-     (sortfn *) sort_vers
+     (GCompareFunc) sort_vers
     }
     ,
     {
@@ -147,7 +147,7 @@ panel_field_t panel_fields[] = {
      N_("sort|e"),
      N_("E&xtension"), TRUE, FALSE,
      string_file_name,          /* TODO: string_file_ext */
-     (sortfn *) sort_ext
+     (GCompareFunc) sort_ext
     }
     ,
     {
@@ -157,7 +157,7 @@ panel_field_t panel_fields[] = {
      N_("sort|s"),
      N_("&Size"), TRUE, TRUE,
      string_file_size,
-     (sortfn *) sort_size
+     (GCompareFunc) sort_size
     }
     ,
     {
@@ -165,7 +165,7 @@ panel_field_t panel_fields[] = {
      "",
      N_("Block Size"), FALSE, FALSE,
      string_file_size_brief,
-     (sortfn *) sort_size
+     (GCompareFunc) sort_size
     }
     ,
     {
@@ -183,7 +183,7 @@ panel_field_t panel_fields[] = {
      N_("sort|m"),
      N_("&Modify time"), TRUE, TRUE,
      string_file_mtime,
-     (sortfn *) sort_time
+     (GCompareFunc) sort_time
     }
     ,
     {
@@ -193,7 +193,7 @@ panel_field_t panel_fields[] = {
      N_("sort|a"),
      N_("&Access time"), TRUE, TRUE,
      string_file_atime,
-     (sortfn *) sort_atime
+     (GCompareFunc) sort_atime
     }
     ,
     {
@@ -203,7 +203,7 @@ panel_field_t panel_fields[] = {
      N_("sort|h"),
      N_("C&hange time"), TRUE, TRUE,
      string_file_ctime,
-     (sortfn *) sort_ctime
+     (GCompareFunc) sort_ctime
     }
     ,
     {
@@ -236,7 +236,7 @@ panel_field_t panel_fields[] = {
      N_("sort|i"),
      N_("&Inode"), TRUE, TRUE,
      string_inode,
-     (sortfn *) sort_inode
+     (GCompareFunc) sort_inode
     }
     ,
     {
@@ -4476,7 +4476,7 @@ panel_set_sort_order (WPanel * panel, const panel_field_t * sort_order)
     panel->sort_info.sort_field = sort_order;
 
     /* The directory is already sorted, we have to load the unsorted stuff */
-    if (sort_order->sort_routine == (sortfn *) unsorted)
+    if (sort_order->sort_routine == (GCompareFunc) unsorted)
     {
         char *current_file;
 

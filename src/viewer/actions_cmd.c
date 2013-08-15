@@ -305,8 +305,8 @@ mcview_load_next_prev_init (mcview_t * view)
         view->dir_count = g_new (int, 1);
         view->dir_idx = g_new (int, 1);
 
-        *view->dir_count = do_load_dir (view->workdir_vpath, view->dir, (sortfn *) sort_name, FALSE,
-                                        TRUE, FALSE, NULL);
+        *view->dir_count = do_load_dir (view->workdir_vpath, view->dir, (GCompareFunc) sort_name,
+                                        FALSE, TRUE, FALSE, NULL);
 
         fname = x_basename (vfs_path_as_str (view->filename_vpath));
         fname_len = strlen (fname);

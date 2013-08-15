@@ -7,6 +7,7 @@
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -437,7 +438,7 @@ sort_size (file_entry * a, file_entry * b)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-do_sort (dir_list * list, sortfn * sort, int top, gboolean reverse_f, gboolean case_sensitive_f,
+do_sort (dir_list * list, GCompareFunc sort, int top, gboolean reverse_f, gboolean case_sensitive_f,
          gboolean exec_first_f)
 {
     int dot_dot_found = 0;
@@ -545,7 +546,7 @@ handle_path (dir_list * list, const char *path,
 /* --------------------------------------------------------------------------------------------- */
 
 int
-do_load_dir (const vfs_path_t * vpath, dir_list * list, sortfn * sort, gboolean lc_reverse,
+do_load_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort, gboolean lc_reverse,
              gboolean lc_case_sensitive, gboolean exec_ff, const char *fltr)
 {
     DIR *dirp;
@@ -630,7 +631,7 @@ if_link_is_exe (const vfs_path_t * full_name_vpath, const file_entry * file)
 /** If fltr is null, then it is a match */
 
 int
-do_reload_dir (const vfs_path_t * vpath, dir_list * list, sortfn * sort, int count,
+do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort, int count,
                gboolean lc_reverse, gboolean lc_case_sensitive, gboolean exec_ff, const char *fltr)
 {
     DIR *dirp;

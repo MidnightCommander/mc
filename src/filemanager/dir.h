@@ -16,8 +16,6 @@
 #define MIN_FILES 128
 #define RESIZE_STEPS 128
 
-typedef int sortfn (const void *, const void *);
-
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
@@ -32,11 +30,11 @@ typedef struct
 
 /*** declarations of public functions ************************************************************/
 
-int do_load_dir (const vfs_path_t * vpath, dir_list * list, sortfn * sort, gboolean reverse,
+int do_load_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort, gboolean reverse,
                  gboolean case_sensitive, gboolean exec_ff, const char *fltr);
-void do_sort (dir_list * list, sortfn * sort, int top, gboolean reverse,
+void do_sort (dir_list * list, GCompareFunc sort, int top, gboolean reverse,
               gboolean case_sensitive, gboolean exec_ff);
-int do_reload_dir (const vfs_path_t * vpath, dir_list * list, sortfn * sort, int count,
+int do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort, int count,
                    gboolean reverse, gboolean case_sensitive, gboolean exec_ff, const char *fltr);
 void clean_dir (dir_list * list, int count);
 gboolean set_zero_dir (dir_list * list);

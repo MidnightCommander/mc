@@ -70,7 +70,7 @@ typedef struct panel_field_struct
     gboolean is_user_choice;
     gboolean use_in_user_format;
     const char *(*string_fn) (file_entry *, int);
-    sortfn *sort_routine;       /* used by mouse_sort_col() */
+    GCompareFunc sort_routine;  /* used by mouse_sort_col() */
 } panel_field_t;
 
 typedef struct
