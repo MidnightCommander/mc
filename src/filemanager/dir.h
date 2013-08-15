@@ -26,16 +26,25 @@ typedef struct
     int size;
 } dir_list;
 
+/**
+ * A structure to represent sort options for directory content
+ */
+typedef struct dir_sort_options_struct
+{
+    gboolean reverse;           /**< sort is reverse */
+    gboolean case_sensitive;    /**< sort is case sensitive */
+    gboolean exec_first;        /**< executables are at top of list */
+} dir_sort_options_t;
+
 /*** global variables defined in .c file *********************************************************/
 
 /*** declarations of public functions ************************************************************/
 
-int do_load_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort, gboolean reverse,
-                 gboolean case_sensitive, gboolean exec_ff, const char *fltr);
-void do_sort (dir_list * list, GCompareFunc sort, int top, gboolean reverse,
-              gboolean case_sensitive, gboolean exec_ff);
+int do_load_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
+                 const dir_sort_options_t * sort_op, const char *fltr);
+void do_sort (dir_list * list, GCompareFunc sort, int top, const dir_sort_options_t * sort_op);
 int do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort, int count,
-                   gboolean reverse, gboolean case_sensitive, gboolean exec_ff, const char *fltr);
+                   const dir_sort_options_t * sort_op, const char *fltr);
 void clean_dir (dir_list * list, int count);
 gboolean set_zero_dir (dir_list * list);
 int handle_path (dir_list * list, const char *path, struct stat *buf1,

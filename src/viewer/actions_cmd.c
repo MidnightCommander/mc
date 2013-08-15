@@ -299,6 +299,7 @@ mcview_load_next_prev_init (mcview_t * view)
         const char *fname;
         size_t fname_len;
         int i;
+        dir_sort_options_t sort_op = { FALSE, TRUE, FALSE };
 
         /* load directory where requested file is */
         view->dir = g_new0 (dir_list, 1);
@@ -306,7 +307,7 @@ mcview_load_next_prev_init (mcview_t * view)
         view->dir_idx = g_new (int, 1);
 
         *view->dir_count = do_load_dir (view->workdir_vpath, view->dir, (GCompareFunc) sort_name,
-                                        FALSE, TRUE, FALSE, NULL);
+                                        &sort_op, NULL);
 
         fname = x_basename (vfs_path_as_str (view->filename_vpath));
         fname_len = strlen (fname);

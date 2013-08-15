@@ -80,13 +80,6 @@ typedef struct
     vfs_path_t *root_vpath;
 } panelized_panel_t;
 
-typedef struct panel_sort_info_struct
-{
-    gboolean reverse;           /* Show listing in reverse? */
-    gboolean case_sensitive;    /* Listing is case sensitive? */
-    gboolean exec_first;        /* Show executable top in list? */
-} panel_sort_info_t;
-
 typedef struct WPanel
 {
     Widget widget;
@@ -111,7 +104,7 @@ typedef struct WPanel
     char *filter;               /* File name filter */
 
     /* sort */
-    panel_sort_info_t sort_info;
+    dir_sort_options_t sort_info;
     const panel_field_t *sort_field;
 
     int dirty;                  /* Should we redisplay the panel? */

@@ -3065,8 +3065,7 @@ _do_panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_
 
     panel->count =
         do_load_dir (panel->cwd_vpath, &panel->dir, panel->sort_field->sort_routine,
-                     panel->sort_info.reverse, panel->sort_info.case_sensitive,
-                     panel->sort_info.exec_first, panel->filter);
+                     &panel->sort_info, panel->filter);
     try_to_select (panel, get_parent_dir_name (panel->cwd_vpath, olddir_vpath));
 
     load_hint (0);
@@ -4144,8 +4143,7 @@ panel_new_with_dir (const char *panel_name, const vfs_path_t * vpath)
     /* Load the default format */
     panel->count =
         do_load_dir (panel->cwd_vpath, &panel->dir, panel->sort_field->sort_routine,
-                     panel->sort_info.reverse, panel->sort_info.case_sensitive,
-                     panel->sort_info.exec_first, panel->filter);
+                     &panel->sort_info, panel->filter);
 
     /* Restore old right path */
     if (curdir != NULL)
@@ -4191,8 +4189,7 @@ panel_reload (WPanel * panel)
 
     panel->count =
         do_reload_dir (panel->cwd_vpath, &panel->dir, panel->sort_field->sort_routine,
-                       panel->count, panel->sort_info.reverse, panel->sort_info.case_sensitive,
-                       panel->sort_info.exec_first, panel->filter);
+                       panel->count, &panel->sort_info, panel->filter);
 
     panel->dirty = 1;
     if (panel->selected >= panel->count)
@@ -4447,9 +4444,7 @@ panel_re_sort (WPanel * panel)
 
     filename = g_strdup (selection (panel)->fname);
     unselect_item (panel);
-    do_sort (&panel->dir, panel->sort_field->sort_routine, panel->count - 1,
-             panel->sort_info.reverse, panel->sort_info.case_sensitive,
-             panel->sort_info.exec_first);
+    do_sort (&panel->dir, panel->sort_field->sort_routine, panel->count - 1, &panel->sort_info);
     panel->selected = -1;
     for (i = panel->count; i; i--)
     {

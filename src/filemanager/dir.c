@@ -438,8 +438,7 @@ sort_size (file_entry * a, file_entry * b)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-do_sort (dir_list * list, GCompareFunc sort, int top, gboolean reverse_f, gboolean case_sensitive_f,
-         gboolean exec_first_f)
+do_sort (dir_list * list, GCompareFunc sort, int top, const dir_sort_options_t * sort_op)
 {
     int dot_dot_found = 0;
 
@@ -451,9 +450,9 @@ do_sort (dir_list * list, GCompareFunc sort, int top, gboolean reverse_f, gboole
     if (DIR_IS_DOTDOT (list->list[0].fname))
         dot_dot_found = 1;
 
-    reverse = reverse_f ? -1 : 1;
-    case_sensitive = case_sensitive_f ? 1 : 0;
-    exec_first = exec_first_f;
+    reverse = sort_op->reverse ? -1 : 1;
+    case_sensitive = sort_op->case_sensitive ? 1 : 0;
+    exec_first = sort_op->exec_first;
     qsort (&(list->list)[dot_dot_found], top + 1 - dot_dot_found, sizeof (file_entry), sort);
 
     clean_sort_keys (list, dot_dot_found, top + 1 - dot_dot_found);
@@ -546,8 +545,8 @@ handle_path (dir_list * list, const char *path,
 /* --------------------------------------------------------------------------------------------- */
 
 int
-do_load_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort, gboolean lc_reverse,
-             gboolean lc_case_sensitive, gboolean exec_ff, const char *fltr)
+do_load_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
+             const dir_sort_options_t * sort_op, const char *fltr)
 {
     DIR *dirp;
     struct dirent *dp;
@@ -605,7 +604,7 @@ do_load_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort, gbool
     }
 
     if (next_free != 0)
-        do_sort (list, sort, next_free - 1, lc_reverse, lc_case_sensitive, exec_ff);
+        do_sort (list, sort, next_free - 1, sort_op);
 
   ret:
     mc_closedir (dirp);
@@ -632,7 +631,7 @@ if_link_is_exe (const vfs_path_t * full_name_vpath, const file_entry * file)
 
 int
 do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort, int count,
-               gboolean lc_reverse, gboolean lc_case_sensitive, gboolean exec_ff, const char *fltr)
+               const dir_sort_options_t * sort_op, const char *fltr)
 {
     DIR *dirp;
     struct dirent *dp;
@@ -746,10 +745,10 @@ do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort, int
     mc_closedir (dirp);
     tree_store_end_check ();
     g_hash_table_destroy (marked_files);
-    if (next_free)
-    {
-        do_sort (list, sort, next_free - 1, lc_reverse, lc_case_sensitive, exec_ff);
-    }
+
+    if (next_free != 0)
+        do_sort (list, sort, next_free - 1, sort_op);
+
     clean_dir (&dir_copy, count);
     rotate_dash (FALSE);
 

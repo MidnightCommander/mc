@@ -703,7 +703,7 @@ panel_listing_box (WPanel * panel, char **userp, char **minip, int *use_msformat
 /* --------------------------------------------------------------------------------------------- */
 
 const panel_field_t *
-sort_box (panel_sort_info_t * info, const panel_field_t * sort_field)
+sort_box (dir_sort_options_t * op, const panel_field_t * sort_field)
 {
     const char **sort_orders_names;
     gsize sort_names_num, i;
@@ -725,9 +725,9 @@ sort_box (panel_sort_info_t * info, const panel_field_t * sort_field)
             QUICK_START_COLUMNS,
                 QUICK_RADIO (sort_names_num, sort_orders_names, &sort_idx, NULL),
             QUICK_NEXT_COLUMN,
-                QUICK_CHECKBOX (N_("Executable &first"), &info->exec_first, NULL),
-                QUICK_CHECKBOX (N_("Cas&e sensitive"), &info->case_sensitive, NULL),
-                QUICK_CHECKBOX (N_("&Reverse"), &info->reverse, NULL),
+                QUICK_CHECKBOX (N_("Executable &first"), &op->exec_first, NULL),
+                QUICK_CHECKBOX (N_("Cas&e sensitive"), &op->case_sensitive, NULL),
+                QUICK_CHECKBOX (N_("&Reverse"), &op->reverse, NULL),
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END

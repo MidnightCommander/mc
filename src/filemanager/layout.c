@@ -1132,7 +1132,7 @@ swap_panels (void)
             current_panel = panel1;
 
         /* if sort options are different -> resort panels */
-        if (memcmp (&panel1->sort_info, &panel2->sort_info, sizeof (panel_sort_info_t)) != 0)
+        if (memcmp (&panel1->sort_info, &panel2->sort_info, sizeof (dir_sort_options_t)) != 0)
         {
             panel_re_sort (other_panel);
             panel_re_sort (current_panel);
