@@ -76,7 +76,6 @@ typedef struct panel_field_struct
 typedef struct
 {
     dir_list list;
-    int count;
     vfs_path_t *root_vpath;
 } panelized_panel_t;
 
@@ -92,7 +91,6 @@ typedef struct WPanel
     GList *dir_history;         /* directory history */
     GList *dir_history_current; /* pointer to the current history item */
     char *hist_name;            /* directory history name for history file */
-    int count;                  /* Number of files in dir structure */
     int marked;                 /* Count of marked files */
     int dirs_marked;            /* Count of marked directories */
     uintmax_t total;            /* Bytes in marked files */

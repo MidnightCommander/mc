@@ -1112,7 +1112,6 @@ swap_panels (void)
         panelswap (active);
         panelswap (cwd_vpath);
         panelswap (lwd_vpath);
-        panelswap (count);
         panelswap (marked);
         panelswap (dirs_marked);
         panelswap (total);

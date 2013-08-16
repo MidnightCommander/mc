@@ -1699,15 +1699,13 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
     if (return_value == B_PANELIZE && *filename)
     {
         int link_to_dir, stale_link;
-        int next_free = 0;
         int i;
         struct stat st;
         GList *entry;
         dir_list *list = &current_panel->dir;
         char *name = NULL;
 
-        if (set_zero_dir (list))
-            next_free++;
+        set_zero_dir (list);
 
         for (i = 0, entry = find_list->list; entry != NULL; i++, entry = g_list_next (entry))
         {
@@ -1740,40 +1738,39 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
                 continue;
             }
             /* Need to grow the *list? */
-            if (next_free == list->size && !dir_list_grow (list, RESIZE_STEPS))
+            if (list->len == list->size && !dir_list_grow (list, RESIZE_STEPS))
             {
                 g_free (name);
                 break;
             }
 
             /* don't add files more than once to the panel */
-            if (content_pattern != NULL && next_free > 0
-                && strcmp (list->list[next_free - 1].fname, p) == 0)
+            if (content_pattern != NULL && list->len != 0
+                && strcmp (list->list[list->len - 1].fname, p) == 0)
             {
                 g_free (name);
                 continue;
             }
 
-            if (next_free == 0) /* first turn i.e clean old list */
+            if (list->len == 0) /* first turn i.e clean old list */
                 panel_clean_dir (current_panel);
-            list->list[next_free].fnamelen = strlen (p);
-            list->list[next_free].fname = g_strndup (p, list->list[next_free].fnamelen);
-            list->list[next_free].f.marked = 0;
-            list->list[next_free].f.link_to_dir = link_to_dir;
-            list->list[next_free].f.stale_link = stale_link;
-            list->list[next_free].f.dir_size_computed = 0;
-            list->list[next_free].st = st;
-            list->list[next_free].sort_key = NULL;
-            list->list[next_free].second_sort_key = NULL;
-            next_free++;
+            list->list[list->len].fnamelen = strlen (p);
+            list->list[list->len].fname = g_strndup (p, list->list[list->len].fnamelen);
+            list->list[list->len].f.marked = 0;
+            list->list[list->len].f.link_to_dir = link_to_dir;
+            list->list[list->len].f.stale_link = stale_link;
+            list->list[list->len].f.dir_size_computed = 0;
+            list->list[list->len].st = st;
+            list->list[list->len].sort_key = NULL;
+            list->list[list->len].second_sort_key = NULL;
+            list->len++;
             g_free (name);
-            if ((next_free & 15) == 0)
+            if ((list->len & 15) == 0)
                 rotate_dash (TRUE);
         }
 
-        if (next_free)
+        if (list->len != 0)
         {
-            current_panel->count = next_free;
             current_panel->is_panelized = TRUE;
 
             /* absolute path */

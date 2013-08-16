@@ -264,7 +264,7 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
     search->is_entire_line = TRUE;
     search->is_case_sensitive = case_sens != 0;
 
-    for (i = 0; i < current_panel->count; i++)
+    for (i = 0; i < current_panel->dir.len; i++)
     {
         if (DIR_IS_DOTDOT (current_panel->dir.list[i].fname))
             continue;
@@ -356,7 +356,7 @@ compare_dir (WPanel * panel, WPanel * other, enum CompareMode mode)
     panel->dirs_marked = 0;
 
     /* Handle all files in the panel */
-    for (i = 0; i < panel->count; i++)
+    for (i = 0; i < panel->dir.len; i++)
     {
         file_entry *source = &panel->dir.list[i];
 
@@ -368,12 +368,12 @@ compare_dir (WPanel * panel, WPanel * other, enum CompareMode mode)
             continue;
 
         /* Search the corresponding entry from the other panel */
-        for (j = 0; j < other->count; j++)
+        for (j = 0; j < other->dir.len; j++)
         {
             if (strcmp (source->fname, other->dir.list[j].fname) == 0)
                 break;
         }
-        if (j >= other->count)
+        if (j >= other->dir.len)
             /* Not found -> mark */
             do_file_mark (panel, i, 1);
         else
@@ -1058,7 +1058,7 @@ select_invert_cmd (void)
     int i;
     file_entry *file;
 
-    for (i = 0; i < current_panel->count; i++)
+    for (i = 0; i < current_panel->dir.len; i++)
     {
         file = &current_panel->dir.list[i];
         if (!panels_options.reverse_files_only || !S_ISDIR (file->st.st_mode))
@@ -1665,7 +1665,7 @@ dirsizes_cmd (void)
 
     ui = compute_dir_size_create_ui (FALSE);
 
-    for (i = 0; i < panel->count; i++)
+    for (i = 0; i < panel->dir.len; i++)
         if (S_ISDIR (panel->dir.list[i].st.st_mode)
             && ((panel->dirs_marked && panel->dir.list[i].f.marked)
                 || !panel->dirs_marked) && !DIR_IS_DOTDOT (panel->dir.list[i].fname))

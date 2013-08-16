@@ -73,7 +73,7 @@ static int case_sensitive = OS_SORT_CASE_SENSITIVE_DEFAULT;
 /* Are the exec_bit files top in list */
 static gboolean exec_first = TRUE;
 
-static dir_list dir_copy = { 0, 0 };
+static dir_list dir_copy = { NULL, 0, 0 };
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -224,16 +224,18 @@ alloc_dir_copy (int size)
 {
     if (dir_copy.size < size)
     {
-        if (dir_copy.list)
+        if (dir_copy.list != NULL)
         {
             int i;
-            for (i = 0; i < dir_copy.size; i++)
+
+            for (i = 0; i < dir_copy.len; i++)
                 g_free (dir_copy.list[i].fname);
             g_free (dir_copy.list);
         }
 
         dir_copy.list = g_new0 (file_entry, size);
         dir_copy.size = size;
+        dir_copy.len = 0;
     }
 }
 
@@ -253,6 +255,7 @@ gboolean
 dir_list_grow (dir_list * list, int delta)
 {
     int size;
+    gboolean clear = FALSE;
 
     if (list == NULL)
         return FALSE;
@@ -262,7 +265,10 @@ dir_list_grow (dir_list * list, int delta)
 
     size = list->size + delta;
     if (size <= 0)
+    {
         size = MIN_FILES;
+        clear = TRUE;
+    }
 
     if (size != list->size)
     {
@@ -275,6 +281,8 @@ dir_list_grow (dir_list * list, int delta)
         list->list = fe;
         list->size = size;
     }
+
+    list->len = clear ? 0 : min (list->len, size);
 
     return TRUE;
 }
@@ -450,11 +458,11 @@ sort_size (file_entry * a, file_entry * b)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-do_sort (dir_list * list, GCompareFunc sort, int top, const dir_sort_options_t * sort_op)
+do_sort (dir_list * list, GCompareFunc sort, const dir_sort_options_t * sort_op)
 {
     int dot_dot_found = 0;
 
-    if (top == 0)
+    if (list->len < 2)
         return;
 
     /* If there is an ".." entry the caller must take care to
@@ -465,23 +473,25 @@ do_sort (dir_list * list, GCompareFunc sort, int top, const dir_sort_options_t *
     reverse = sort_op->reverse ? -1 : 1;
     case_sensitive = sort_op->case_sensitive ? 1 : 0;
     exec_first = sort_op->exec_first;
-    qsort (&(list->list)[dot_dot_found], top + 1 - dot_dot_found, sizeof (file_entry), sort);
+    qsort (&(list->list)[dot_dot_found], list->len - dot_dot_found, sizeof (file_entry), sort);
 
-    clean_sort_keys (list, dot_dot_found, top + 1 - dot_dot_found);
+    clean_sort_keys (list, dot_dot_found, list->len - dot_dot_found);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 void
-clean_dir (dir_list * list, int count)
+clean_dir (dir_list * list)
 {
     int i;
 
-    for (i = 0; i < count; i++)
+    for (i = 0; i < list->len; i++)
     {
         g_free (list->list[i].fname);
         list->list[i].fname = NULL;
     }
+
+    list->len = 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -492,7 +502,10 @@ set_zero_dir (dir_list * list)
 {
     /* Need to grow the *list? */
     if (list->size == 0 && !dir_list_grow (list, RESIZE_STEPS))
+    {
+        list->len = 0;
         return FALSE;
+    }
 
     memset (&(list->list)[0], 0, sizeof (file_entry));
     list->list[0].fnamelen = 2;
@@ -502,6 +515,7 @@ set_zero_dir (dir_list * list)
     list->list[0].f.dir_size_computed = 0;
     list->list[0].f.marked = 0;
     list->list[0].st.st_mode = 040755;
+    list->len = 1;
     return TRUE;
 }
 
@@ -552,29 +566,27 @@ handle_path (const char *path, struct stat *buf1, int *link_to_dir, int *stale_l
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+void
 do_load_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
              const dir_sort_options_t * sort_op, const char *fltr)
 {
     DIR *dirp;
     struct dirent *dp;
     int link_to_dir, stale_link;
-    int next_free = 0;
     struct stat st;
 
     /* ".." (if any) must be the first entry in the list */
     if (!set_zero_dir (list))
-        return next_free;
+        return;
 
     if (get_dotdot_dir_stat (vpath, &st))
-        list->list[next_free].st = st;
-    next_free++;
+        list->list[0].st = st;
 
     dirp = mc_opendir (vpath);
     if (dirp == NULL)
     {
         message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
-        return next_free;
+        return;
     }
 
     tree_store_start_check (vpath);
@@ -585,7 +597,7 @@ do_load_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
         vpath_str = vfs_path_as_str (vpath);
         /* Do not add a ".." entry to the root directory */
         if ((vpath_str[0] == PATH_SEP) && (vpath_str[1] == '\0'))
-            next_free--;
+            list->len--;
     }
 
     while ((dp = mc_readdir (dirp)) != NULL)
@@ -593,34 +605,31 @@ do_load_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
         if (!handle_dirent (dp, fltr, &st, &link_to_dir, &stale_link))
             continue;
         /* Need to grow the *list? */
-        if (next_free == list->size && !dir_list_grow (list, RESIZE_STEPS))
+        if (list->len == list->size && !dir_list_grow (list, RESIZE_STEPS))
             goto ret;
 
-        list->list[next_free].fnamelen = strlen (dp->d_name);
-        list->list[next_free].fname = g_strndup (dp->d_name, list->list[next_free].fnamelen);
-        list->list[next_free].f.marked = 0;
-        list->list[next_free].f.link_to_dir = link_to_dir;
-        list->list[next_free].f.stale_link = stale_link;
-        list->list[next_free].f.dir_size_computed = 0;
-        list->list[next_free].st = st;
-        list->list[next_free].sort_key = NULL;
-        list->list[next_free].second_sort_key = NULL;
-        next_free++;
+        list->list[list->len].fnamelen = strlen (dp->d_name);
+        list->list[list->len].fname = g_strndup (dp->d_name, list->list[list->len].fnamelen);
+        list->list[list->len].f.marked = 0;
+        list->list[list->len].f.link_to_dir = link_to_dir;
+        list->list[list->len].f.stale_link = stale_link;
+        list->list[list->len].f.dir_size_computed = 0;
+        list->list[list->len].st = st;
+        list->list[list->len].sort_key = NULL;
+        list->list[list->len].second_sort_key = NULL;
+        list->len++;
 
-        if ((next_free & 31) == 0)
+        if ((list->len & 31) == 0)
             rotate_dash (TRUE);
     }
 
-    if (next_free != 0)
-        do_sort (list, sort, next_free - 1, sort_op);
+    do_sort (list, sort, sort_op);
 
   ret:
     mc_closedir (dirp);
     tree_store_end_check ();
     rotate_dash (FALSE);
-    return next_free;
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -637,13 +646,12 @@ if_link_is_exe (const vfs_path_t * full_name_vpath, const file_entry * file)
 /* --------------------------------------------------------------------------------------------- */
 /** If fltr is null, then it is a match */
 
-int
-do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort, int count,
+void
+do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
                const dir_sort_options_t * sort_op, const char *fltr)
 {
     DIR *dirp;
     struct dirent *dp;
-    int next_free = 0;
     int i, link_to_dir, stale_link;
     struct stat st;
     int marked_cnt;
@@ -654,15 +662,16 @@ do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort, int
     if (dirp == NULL)
     {
         message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
-        clean_dir (list, count);
-        return set_zero_dir (list) ? 1 : 0;
+        clean_dir (list);
+        set_zero_dir (list);
+        return;
     }
 
     tree_store_start_check (vpath);
 
     marked_files = g_hash_table_new (g_str_hash, g_str_equal);
-    alloc_dir_copy (list->size);
-    for (marked_cnt = i = 0; i < count; i++)
+    alloc_dir_copy (list->len);
+    for (marked_cnt = i = 0; i < list->len; i++)
     {
         dir_copy.list[i].fnamelen = list->list[i].fnamelen;
         dir_copy.list[i].fname = list->list[i].fname;
@@ -688,24 +697,20 @@ do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort, int
     {
         if (!set_zero_dir (list))
         {
-            clean_dir (list, count);
-            clean_dir (&dir_copy, count);
-            return next_free;
+            clean_dir (&dir_copy);
+            return;
         }
 
         if (get_dotdot_dir_stat (vpath, &st))
-            list->list[next_free].st = st;
-
-        next_free++;
+            list->list[0].st = st;
     }
 
-    while ((dp = mc_readdir (dirp)))
+    while ((dp = mc_readdir (dirp)) != NULL)
     {
         if (!handle_dirent (dp, fltr, &st, &link_to_dir, &stale_link))
             continue;
-
         /* Need to grow the *list? */
-        if (next_free == list->size && !dir_list_grow (list, RESIZE_STEPS))
+        if (list->len == list->size && !dir_list_grow (list, RESIZE_STEPS))
         {
             mc_closedir (dirp);
             /* Norbert (Feb 12, 1997):
@@ -716,52 +721,46 @@ do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort, int
                leaks and because one 'clean_dir' would not be enough (and
                because I don't want to spent the time to make it working,
                IMHO it's not worthwhile).
-               clean_dir (&dir_copy, count);
+               clean_dir (&dir_copy);
              */
             tree_store_end_check ();
             g_hash_table_destroy (marked_files);
-            return next_free;
+            return;
         }
 
-        list->list[next_free].f.marked = 0;
+        list->list[list->len].f.marked = 0;
 
         /*
          * If we have marked files in the copy, scan through the copy
          * to find matching file.  Decrease number of remaining marks if
          * we copied one.
          */
-        if (marked_cnt > 0)
+        if (marked_cnt > 0 && g_hash_table_lookup (marked_files, dp->d_name) != NULL)
         {
-            if ((g_hash_table_lookup (marked_files, dp->d_name)))
-            {
-                list->list[next_free].f.marked = 1;
-                marked_cnt--;
-            }
+            list->list[list->len].f.marked = 1;
+            marked_cnt--;
         }
 
-        list->list[next_free].fnamelen = strlen (dp->d_name);
-        list->list[next_free].fname = g_strndup (dp->d_name, list->list[next_free].fnamelen);
-        list->list[next_free].f.link_to_dir = link_to_dir;
-        list->list[next_free].f.stale_link = stale_link;
-        list->list[next_free].f.dir_size_computed = 0;
-        list->list[next_free].st = st;
-        list->list[next_free].sort_key = NULL;
-        list->list[next_free].second_sort_key = NULL;
-        next_free++;
-        if ((next_free % 16) == 0)
+        list->list[list->len].fnamelen = strlen (dp->d_name);
+        list->list[list->len].fname = g_strndup (dp->d_name, list->list[list->len].fnamelen);
+        list->list[list->len].f.link_to_dir = link_to_dir;
+        list->list[list->len].f.stale_link = stale_link;
+        list->list[list->len].f.dir_size_computed = 0;
+        list->list[list->len].st = st;
+        list->list[list->len].sort_key = NULL;
+        list->list[list->len].second_sort_key = NULL;
+        list->len++;
+        if ((list->len & 15) == 0)
             rotate_dash (TRUE);
     }
     mc_closedir (dirp);
     tree_store_end_check ();
     g_hash_table_destroy (marked_files);
 
-    if (next_free != 0)
-        do_sort (list, sort, next_free - 1, sort_op);
+    do_sort (list, sort, sort_op);
 
-    clean_dir (&dir_copy, count);
+    clean_dir (&dir_copy);
     rotate_dash (FALSE);
-
-    return next_free;
 }
 
 /* --------------------------------------------------------------------------------------------- */

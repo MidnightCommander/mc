@@ -20,10 +20,14 @@
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
+/**
+ * A structure to represent directory content
+ */
 typedef struct
 {
-    file_entry *list;
-    int size;
+    file_entry *list;   /**< list of file_entry_t objects */
+    int size;           /**< number of allocated elements in list (capacity) */
+    int len;            /**< number of used elements in list */
 } dir_list;
 
 /**
@@ -42,12 +46,12 @@ typedef struct dir_sort_options_struct
 
 gboolean dir_list_grow (dir_list * list, int delta);
 
-int do_load_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
-                 const dir_sort_options_t * sort_op, const char *fltr);
-void do_sort (dir_list * list, GCompareFunc sort, int top, const dir_sort_options_t * sort_op);
-int do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort, int count,
-                   const dir_sort_options_t * sort_op, const char *fltr);
-void clean_dir (dir_list * list, int count);
+void do_load_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
+                  const dir_sort_options_t * sort_op, const char *fltr);
+void do_sort (dir_list * list, GCompareFunc sort, const dir_sort_options_t * sort_op);
+void do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
+                    const dir_sort_options_t * sort_op, const char *fltr);
+void clean_dir (dir_list * list);
 gboolean set_zero_dir (dir_list * list);
 gboolean handle_path (const char *path, struct stat *buf1, int *link_to_dir, int *stale_link);
 

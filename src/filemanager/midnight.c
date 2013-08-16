@@ -821,7 +821,7 @@ put_tagged (WPanel * panel)
     input_disable_update (cmdline);
     if (panel->marked)
     {
-        for (i = 0; i < panel->count; i++)
+        for (i = 0; i < panel->dir.len; i++)
         {
             if (panel->dir.list[i].f.marked)
                 command_insert (cmdline, panel->dir.list[i].fname, TRUE);
@@ -1783,7 +1783,7 @@ do_nc (void)
         /* don't handle VFS timestamps for dirs opened in panels */
         mc_event_destroy (MCEVENT_GROUP_CORE, "vfs_timestamp");
 
-        clean_dir (&panelized_panel.list, panelized_panel.count);
+        clean_dir (&panelized_panel.list);
     }
 
     /* Program end */
