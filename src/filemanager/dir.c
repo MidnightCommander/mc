@@ -139,30 +139,6 @@ clean_sort_keys (dir_list * list, int start, int count)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Increase directory list by RESIZE_STEPS
- *
- * @param list directory list
- * @return FALSE on failure, TRUE on success
- */
-
-static gboolean
-grow_list (dir_list * list)
-{
-    if (list == NULL)
-        return FALSE;
-
-    list->list = g_try_realloc (list->list, sizeof (file_entry) * (list->size + RESIZE_STEPS));
-
-    if (list->list == NULL)
-        return FALSE;
-
-    list->size += RESIZE_STEPS;
-
-    return TRUE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
  * If you change handle_dirent then check also handle_path.
  * @return -1 = failure, 0 = don't add, 1 = add to the list
  */
@@ -211,7 +187,7 @@ handle_dirent (dir_list * list, const char *fltr, struct dirent *dp,
         return 0;
 
     /* Need to grow the *list? */
-    if (next_free == list->size && !grow_list (list))
+    if (next_free == list->size && !dir_list_grow (list, RESIZE_STEPS))
         return -1;
 
     return 1;
@@ -267,6 +243,46 @@ alloc_dir_copy (int size)
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Increase or decrease directory list size.
+ *
+ * @param list directory list
+ * @param delta value by increase (if positive) or decrease (if negative) list size
+ *
+ * @return FALSE on failure, TRUE on success
+ */
+
+gboolean
+dir_list_grow (dir_list * list, int delta)
+{
+    int size;
+
+    if (list == NULL)
+        return FALSE;
+
+    if (delta == 0)
+        return TRUE;
+
+    size = list->size + delta;
+    if (size <= 0)
+        size = MIN_FILES;
+
+    if (size != list->size)
+    {
+        file_entry *fe;
+
+        fe = g_try_renew (file_entry, list->list, size);
+        if (fe == NULL)
+            return FALSE;
+
+        list->list = fe;
+        list->size = size;
+    }
+
+    return TRUE;
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 int
@@ -479,7 +495,7 @@ gboolean
 set_zero_dir (dir_list * list)
 {
     /* Need to grow the *list? */
-    if (list->size == 0 && !grow_list (list))
+    if (list->size == 0 && !dir_list_grow (list, RESIZE_STEPS))
         return FALSE;
 
     memset (&(list->list)[0], 0, sizeof (file_entry));
@@ -536,7 +552,7 @@ handle_path (dir_list * list, const char *path,
     vfs_path_free (vpath);
 
     /* Need to grow the *list? */
-    if (next_free == list->size && !grow_list (list))
+    if (next_free == list->size && !dir_list_grow (list, RESIZE_STEPS))
         return -1;
 
     return 1;
