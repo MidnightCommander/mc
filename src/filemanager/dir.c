@@ -140,21 +140,21 @@ clean_sort_keys (dir_list * list, int start, int count)
 /* --------------------------------------------------------------------------------------------- */
 /**
  * If you change handle_dirent then check also handle_path.
- * @return -1 = failure, 0 = don't add, 1 = add to the list
+ * @return FALSE = don't add, TRUE = add to the list
  */
 
-static int
-handle_dirent (dir_list * list, const char *fltr, struct dirent *dp,
-               struct stat *buf1, int next_free, int *link_to_dir, int *stale_link)
+static gboolean
+handle_dirent (struct dirent *dp, const char *fltr, struct stat *buf1, int *link_to_dir,
+               int *stale_link)
 {
     vfs_path_t *vpath;
 
     if (DIR_IS_DOT (dp->d_name) || DIR_IS_DOTDOT (dp->d_name))
-        return 0;
+        return FALSE;
     if (!panels_options.show_dot_files && (dp->d_name[0] == '.'))
-        return 0;
-    if (!panels_options.show_backups && dp->d_name[NLENGTH (dp) - 1] == '~')
-        return 0;
+        return FALSE;
+    if (!panels_options.show_backups && dp->d_name[strlen (dp->d_name) - 1] == '~')
+        return FALSE;
 
     vpath = vfs_path_from_str (dp->d_name);
     if (mc_lstat (vpath, buf1) == -1)
@@ -176,21 +176,17 @@ handle_dirent (dir_list * list, const char *fltr, struct dirent *dp,
     if (S_ISLNK (buf1->st_mode))
     {
         struct stat buf2;
+
         if (mc_stat (vpath, &buf2) == 0)
             *link_to_dir = S_ISDIR (buf2.st_mode) != 0;
         else
             *stale_link = 1;
     }
+
     vfs_path_free (vpath);
-    if (!(S_ISDIR (buf1->st_mode) || *link_to_dir) && (fltr != NULL)
-        && !mc_search (fltr, dp->d_name, MC_SEARCH_T_GLOB))
-        return 0;
 
-    /* Need to grow the *list? */
-    if (next_free == list->size && !dir_list_grow (list, RESIZE_STEPS))
-        return -1;
-
-    return 1;
+    return (S_ISDIR (buf1->st_mode) || *link_to_dir != 0 || fltr == NULL
+            || mc_search (fltr, dp->d_name, MC_SEARCH_T_GLOB));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -516,22 +512,21 @@ set_zero_dir (dir_list * list)
    and panels_options.show_backups.
    Moreover handle_path can't be used with a filemask.
    If you change handle_path then check also handle_dirent. */
-/* Return values: -1 = failure, 0 = don't add, 1 = add to the list */
+/* Return values: FALSE = don't add, TRUE = add to the list */
 
-int
-handle_path (dir_list * list, const char *path,
-             struct stat *buf1, int next_free, int *link_to_dir, int *stale_link)
+gboolean
+handle_path (const char *path, struct stat *buf1, int *link_to_dir, int *stale_link)
 {
     vfs_path_t *vpath;
 
     if (DIR_IS_DOT (path) || DIR_IS_DOTDOT (path))
-        return 0;
+        return FALSE;
 
     vpath = vfs_path_from_str (path);
     if (mc_lstat (vpath, buf1) == -1)
     {
         vfs_path_free (vpath);
-        return 0;
+        return FALSE;
     }
 
     if (S_ISDIR (buf1->st_mode))
@@ -543,6 +538,7 @@ handle_path (dir_list * list, const char *path,
     if (S_ISLNK (buf1->st_mode))
     {
         struct stat buf2;
+
         if (mc_stat (vpath, &buf2) == 0)
             *link_to_dir = S_ISDIR (buf2.st_mode) != 0;
         else
@@ -551,11 +547,7 @@ handle_path (dir_list * list, const char *path,
 
     vfs_path_free (vpath);
 
-    /* Need to grow the *list? */
-    if (next_free == list->size && !dir_list_grow (list, RESIZE_STEPS))
-        return -1;
-
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -566,7 +558,7 @@ do_load_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
 {
     DIR *dirp;
     struct dirent *dp;
-    int status, link_to_dir, stale_link;
+    int link_to_dir, stale_link;
     int next_free = 0;
     struct stat st;
 
@@ -598,13 +590,13 @@ do_load_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
 
     while ((dp = mc_readdir (dirp)) != NULL)
     {
-        status = handle_dirent (list, fltr, dp, &st, next_free, &link_to_dir, &stale_link);
-        if (status == 0)
+        if (!handle_dirent (dp, fltr, &st, &link_to_dir, &stale_link))
             continue;
-        if (status == -1)
+        /* Need to grow the *list? */
+        if (next_free == list->size && !dir_list_grow (list, RESIZE_STEPS))
             goto ret;
 
-        list->list[next_free].fnamelen = NLENGTH (dp);
+        list->list[next_free].fnamelen = strlen (dp->d_name);
         list->list[next_free].fname = g_strndup (dp->d_name, list->list[next_free].fnamelen);
         list->list[next_free].f.marked = 0;
         list->list[next_free].f.link_to_dir = link_to_dir;
@@ -652,7 +644,7 @@ do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort, int
     DIR *dirp;
     struct dirent *dp;
     int next_free = 0;
-    int i, status, link_to_dir, stale_link;
+    int i, link_to_dir, stale_link;
     struct stat st;
     int marked_cnt;
     GHashTable *marked_files;
@@ -709,10 +701,11 @@ do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort, int
 
     while ((dp = mc_readdir (dirp)))
     {
-        status = handle_dirent (list, fltr, dp, &st, next_free, &link_to_dir, &stale_link);
-        if (status == 0)
+        if (!handle_dirent (dp, fltr, &st, &link_to_dir, &stale_link))
             continue;
-        if (status == -1)
+
+        /* Need to grow the *list? */
+        if (next_free == list->size && !dir_list_grow (list, RESIZE_STEPS))
         {
             mc_closedir (dirp);
             /* Norbert (Feb 12, 1997):
@@ -746,7 +739,7 @@ do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort, int
             }
         }
 
-        list->list[next_free].fnamelen = NLENGTH (dp);
+        list->list[next_free].fnamelen = strlen (dp->d_name);
         list->list[next_free].fname = g_strndup (dp->d_name, list->list[next_free].fnamelen);
         list->list[next_free].f.link_to_dir = link_to_dir;
         list->list[next_free].f.stale_link = stale_link;

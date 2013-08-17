@@ -49,8 +49,7 @@ int do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
                    const dir_sort_options_t * sort_op, const char *fltr);
 void clean_dir (dir_list * list, int count);
 gboolean set_zero_dir (dir_list * list);
-int handle_path (dir_list * list, const char *path, struct stat *buf1,
-                 int next_free, int *link_to_dir, int *stale_link);
+gboolean handle_path (const char *path, struct stat *buf1, int *link_to_dir, int *stale_link);
 
 /* Sorting functions */
 int unsorted (file_entry * a, file_entry * b);

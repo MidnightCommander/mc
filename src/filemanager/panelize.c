@@ -311,7 +311,7 @@ remove_from_panelize (struct panelize *entry)
 static void
 do_external_panelize (char *command)
 {
-    int status, link_to_dir, stale_link;
+    int link_to_dir, stale_link;
     int next_free = 0;
     struct stat st;
     dir_list *list = &current_panel->dir;
@@ -352,11 +352,13 @@ do_external_panelize (char *command)
             name = line + 2;
         else
             name = line;
-        status = handle_path (list, name, &st, next_free, &link_to_dir, &stale_link);
-        if (status == 0)
+
+        if (!handle_path (name, &st, &link_to_dir, &stale_link))
             continue;
-        if (status == -1)
+        /* Need to grow the *list? */
+        if (next_free == list->size && !dir_list_grow (list, RESIZE_STEPS))
             break;
+
         list->list[next_free].fnamelen = strlen (name);
         list->list[next_free].fname = g_strndup (name, list->list[next_free].fnamelen);
         file_mark (current_panel, next_free, 0);

@@ -1698,7 +1698,7 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
 
     if (return_value == B_PANELIZE && *filename)
     {
-        int status, link_to_dir, stale_link;
+        int link_to_dir, stale_link;
         int next_free = 0;
         int i;
         struct stat st;
@@ -1734,13 +1734,13 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
                     p++;
             }
 
-            status = handle_path (list, p, &st, next_free, &link_to_dir, &stale_link);
-            if (status == 0)
+            if (!handle_path (p, &st, &link_to_dir, &stale_link))
             {
                 g_free (name);
                 continue;
             }
-            if (status == -1)
+            /* Need to grow the *list? */
+            if (next_free == list->size && !dir_list_grow (list, RESIZE_STEPS))
             {
                 g_free (name);
                 break;
