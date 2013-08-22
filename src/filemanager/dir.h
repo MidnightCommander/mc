@@ -45,6 +45,8 @@ typedef struct dir_sort_options_struct
 /*** declarations of public functions ************************************************************/
 
 gboolean dir_list_grow (dir_list * list, int delta);
+gboolean dir_list_append (dir_list * list, const char *fname, const struct stat *st,
+                          gboolean link_to_dir, gboolean stale_link);
 
 void do_load_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
                   const dir_sort_options_t * sort_op, const char *fltr);

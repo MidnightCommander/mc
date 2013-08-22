@@ -288,6 +288,41 @@ dir_list_grow (dir_list * list, int delta)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Append file info to the directory list.
+ *
+ * @param list directory list
+ * @param fname file name
+ * @param st file stat info
+ * @param link_to_dir is file link to directory
+ * @param stale_link is file stale elink
+ *
+ * @return FALSE on failure, TRUE on success
+ */
+
+gboolean
+dir_list_append (dir_list * list, const char *fname, const struct stat *st,
+                 gboolean link_to_dir, gboolean stale_link)
+{
+    /* Need to grow the *list? */
+    if (list->len == list->size && !dir_list_grow (list, RESIZE_STEPS))
+        return FALSE;
+
+    list->list[list->len].fnamelen = strlen (fname);
+    list->list[list->len].fname = g_strndup (fname, list->list[list->len].fnamelen);
+    list->list[list->len].f.marked = 0;
+    list->list[list->len].f.link_to_dir = link_to_dir ? 1 : 0;
+    list->list[list->len].f.stale_link = stale_link ? 1 : 0;
+    list->list[list->len].f.dir_size_computed = 0;
+    list->list[list->len].st = *st;
+    list->list[list->len].sort_key = NULL;
+    list->list[list->len].second_sort_key = NULL;
+    list->len++;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 int
 unsorted (file_entry * a, file_entry * b)
@@ -606,20 +641,9 @@ do_load_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
     {
         if (!handle_dirent (dp, fltr, &st, &link_to_dir, &stale_link))
             continue;
-        /* Need to grow the *list? */
-        if (list->len == list->size && !dir_list_grow (list, RESIZE_STEPS))
-            goto ret;
 
-        list->list[list->len].fnamelen = strlen (dp->d_name);
-        list->list[list->len].fname = g_strndup (dp->d_name, list->list[list->len].fnamelen);
-        list->list[list->len].f.marked = 0;
-        list->list[list->len].f.link_to_dir = link_to_dir;
-        list->list[list->len].f.stale_link = stale_link;
-        list->list[list->len].f.dir_size_computed = 0;
-        list->list[list->len].st = st;
-        list->list[list->len].sort_key = NULL;
-        list->list[list->len].second_sort_key = NULL;
-        list->len++;
+        if (!dir_list_append (list, dp->d_name, &st, link_to_dir != 0, stale_link != 0))
+            goto ret;
 
         if ((list->len & 31) == 0)
             rotate_dash (TRUE);
@@ -711,8 +735,8 @@ do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
     {
         if (!handle_dirent (dp, fltr, &st, &link_to_dir, &stale_link))
             continue;
-        /* Need to grow the *list? */
-        if (list->len == list->size && !dir_list_grow (list, RESIZE_STEPS))
+
+        if (!dir_list_append (list, dp->d_name, &st, link_to_dir != 0, stale_link != 0))
         {
             mc_closedir (dirp);
             /* Norbert (Feb 12, 1997):
@@ -730,7 +754,7 @@ do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
             return;
         }
 
-        list->list[list->len].f.marked = 0;
+        list->list[list->len - 1].f.marked = 0;
 
         /*
          * If we have marked files in the copy, scan through the copy
@@ -739,19 +763,10 @@ do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
          */
         if (marked_cnt > 0 && g_hash_table_lookup (marked_files, dp->d_name) != NULL)
         {
-            list->list[list->len].f.marked = 1;
+            list->list[list->len - 1].f.marked = 1;
             marked_cnt--;
         }
 
-        list->list[list->len].fnamelen = strlen (dp->d_name);
-        list->list[list->len].fname = g_strndup (dp->d_name, list->list[list->len].fnamelen);
-        list->list[list->len].f.link_to_dir = link_to_dir;
-        list->list[list->len].f.stale_link = stale_link;
-        list->list[list->len].f.dir_size_computed = 0;
-        list->list[list->len].st = st;
-        list->list[list->len].sort_key = NULL;
-        list->list[list->len].second_sort_key = NULL;
-        list->len++;
         if ((list->len & 15) == 0)
             rotate_dash (TRUE);
     }

@@ -353,20 +353,12 @@ do_external_panelize (char *command)
 
         if (!handle_path (name, &st, &link_to_dir, &stale_link))
             continue;
-        /* Need to grow the *list? */
-        if (list->len == list->size && !dir_list_grow (list, RESIZE_STEPS))
+
+        if (!dir_list_append (list, name, &st, link_to_dir != 0, stale_link != 0))
             break;
 
-        list->list[list->len].fnamelen = strlen (name);
-        list->list[list->len].fname = g_strndup (name, list->list[list->len].fnamelen);
-        list->list[list->len].f.link_to_dir = link_to_dir;
-        list->list[list->len].f.stale_link = stale_link;
-        list->list[list->len].f.dir_size_computed = 0;
-        list->list[list->len].st = st;
-        list->list[list->len].sort_key = NULL;
-        list->list[list->len].second_sort_key = NULL;
-        file_mark (current_panel, list->len, 0);
-        list->len++;
+        file_mark (current_panel, list->len - 1, 0);
+
         if ((list->len & 31) == 0)
             rotate_dash (TRUE);
     }
