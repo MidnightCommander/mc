@@ -10,6 +10,7 @@
    Miguel de Icaza, 1995
    Andrew Borodin <aborodin@vmail.ru>, 2011, 2012, 2013
    Slava Zanko <slavazanko@gmail.com>, 2013
+   Avi Kelman <patcherton.fixesthings@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -146,7 +147,6 @@ static panels_layout_t old_layout;
 static int old_output_lines;
 
 /* Internal variables */
-panels_layout_t _panels_layout;
 static int equal_split;
 static int _menubar_visible;
 static int _output_lines;
@@ -227,28 +227,27 @@ update_split (const WDialog * h)
 {
     /* Check split has to be done before testing if it changed, since
        it can change due to calling check_split() as well */
-    check_split (&_panels_layout);
-    old_layout = _panels_layout;
+    check_split (&panels_layout);
 
-    if (_panels_layout.horizontal_split)
-        check_options[0].widget->state = _panels_layout.horizontal_equal ? 1 : 0;
+    if (panels_layout.horizontal_split)
+        check_options[0].widget->state = panels_layout.horizontal_equal ? 1 : 0;
     else
-        check_options[0].widget->state = _panels_layout.vertical_equal ? 1 : 0;
+        check_options[0].widget->state = panels_layout.vertical_equal ? 1 : 0;
     widget_redraw (WIDGET (check_options[0].widget));
 
     tty_setcolor (check_options[0].widget->state & C_BOOL ? DISABLED_COLOR : COLOR_NORMAL);
 
     widget_move (h, 6, 5);
-    if (_panels_layout.horizontal_split)
-        tty_printf ("%03d", _panels_layout.top_panel_size);
+    if (panels_layout.horizontal_split)
+        tty_printf ("%03d", panels_layout.top_panel_size);
     else
-        tty_printf ("%03d", _panels_layout.left_panel_size);
+        tty_printf ("%03d", panels_layout.left_panel_size);
 
     widget_move (h, 6, 17);
-    if (_panels_layout.horizontal_split)
-        tty_printf ("%03d", height - _panels_layout.top_panel_size);
+    if (panels_layout.horizontal_split)
+        tty_printf ("%03d", height - panels_layout.top_panel_size);
     else
-        tty_printf ("%03d", COLS - _panels_layout.left_panel_size);
+        tty_printf ("%03d", COLS - panels_layout.left_panel_size);
 
     widget_move (h, 6, 12);
     tty_print_char ('=');
@@ -263,20 +262,22 @@ b_left_right_cback (WButton * button, int action)
 
     if (button == bleft_widget)
     {
-        if (_panels_layout.horizontal_split)
-            _panels_layout.top_panel_size++;
+        if (panels_layout.horizontal_split)
+            panels_layout.top_panel_size++;
         else
-            _panels_layout.left_panel_size++;
+            panels_layout.left_panel_size++;
     }
     else
     {
-        if (_panels_layout.horizontal_split)
-            _panels_layout.top_panel_size--;
+        if (panels_layout.horizontal_split)
+            panels_layout.top_panel_size--;
         else
-            _panels_layout.left_panel_size--;
+            panels_layout.left_panel_size--;
     }
 
     update_split (WIDGET (button)->owner);
+    layout_change ();
+    do_refresh ();
     return 0;
 }
 
@@ -320,10 +321,6 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
            update everything */
         dlg_default_repaint (h);
 
-        old_layout.horizontal_split = -1;
-        old_layout.left_panel_size = -1;
-        old_layout.top_panel_size = -1;
-
         old_output_lines = -1;
 
         update_split (h);
@@ -355,7 +352,7 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
                 _output_lines = 0;
             height = LINES - _keybar_visible - (_command_prompt ? 1 : 0) -
                 _menubar_visible - _output_lines - _message_visible;
-            minimum = MINHEIGHT * (1 + _panels_layout.horizontal_split);
+            minimum = MINHEIGHT * (1 + panels_layout.horizontal_split);
             if (height < minimum)
             {
                 _output_lines -= minimum - height;
@@ -378,23 +375,27 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
     case MSG_ACTION:
         if (sender == WIDGET (radio_widget))
         {
-            if (_panels_layout.horizontal_split != radio_widget->sel)
+            if (panels_layout.horizontal_split != radio_widget->sel)
             {
-                _panels_layout.horizontal_split = radio_widget->sel;
+                panels_layout.horizontal_split = radio_widget->sel;
 
-                if (_panels_layout.horizontal_split)
+                if (panels_layout.horizontal_split)
                 {
-                    if (_panels_layout.horizontal_equal)
-                        _panels_layout.top_panel_size = height / 2;
+                    if (panels_layout.horizontal_equal)
+                        panels_layout.top_panel_size = height / 2;
                 }
                 else
                 {
-                    if (_panels_layout.vertical_equal)
-                        _panels_layout.left_panel_size = COLS / 2;
+                    if (panels_layout.vertical_equal)
+                        panels_layout.left_panel_size = COLS / 2;
                 }
-            }
 
-            update_split (h);
+                update_split (h);
+                layout_change ();
+                do_refresh ();
+            }
+            else
+                update_split (h);
 
             return MSG_HANDLED;
         }
@@ -403,21 +404,23 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
         {
             int eq;
 
-            if (_panels_layout.horizontal_split)
+            if (panels_layout.horizontal_split)
             {
-                _panels_layout.horizontal_equal = check_options[0].widget->state & C_BOOL;
-                eq = _panels_layout.horizontal_equal;
+                panels_layout.horizontal_equal = check_options[0].widget->state & C_BOOL;
+                eq = panels_layout.horizontal_equal;
             }
             else
             {
-                _panels_layout.vertical_equal = check_options[0].widget->state & C_BOOL;
-                eq = _panels_layout.vertical_equal;
+                panels_layout.vertical_equal = check_options[0].widget->state & C_BOOL;
+                eq = panels_layout.vertical_equal;
             }
 
             widget_disable (WIDGET (bleft_widget), eq);
             widget_disable (WIDGET (bright_widget), eq);
 
             update_split (h);
+            layout_change ();
+            do_refresh ();
 
             return MSG_HANDLED;
         }
@@ -454,18 +457,12 @@ init_layout (void)
     output_lines_label = _("Output lines:");
 
     /* save old params */
-    _panels_layout = panels_layout;
     _menubar_visible = menubar_visible;
     _command_prompt = command_prompt;
     _keybar_visible = mc_global.keybar_visible;
     _message_visible = mc_global.message_visible;
     _xterm_title = xterm_title;
     _free_space = free_space;
-
-    old_layout.horizontal_split = -1;
-    old_layout.left_panel_size = -1;
-    old_layout.top_panel_size = -1;
-
     old_output_lines = -1;
     _output_lines = output_lines;
 
@@ -642,8 +639,9 @@ void
 layout_box (void)
 {
     WDialog *layout_dlg;
-    gboolean layout_do_change = FALSE;
 
+    old_layout = panels_layout;
+    old_output_lines = output_lines;
     layout_dlg = init_layout ();
 
     if (dlg_run (layout_dlg) == B_ENTER)
@@ -653,25 +651,18 @@ layout_box (void)
         for (i = 0; i < (size_t) LAYOUT_OPTIONS_COUNT; i++)
             if (check_options[i].widget != NULL)
                 *check_options[i].variable = check_options[i].widget->state & C_BOOL;
-
-        panels_layout.horizontal_split = radio_widget->sel;
-        if (panels_layout.horizontal_split)
-        {
-            panels_layout.horizontal_equal = *check_options[0].variable;
-            panels_layout.top_panel_size = _panels_layout.top_panel_size;
-        }
-        else
-        {
-            panels_layout.vertical_equal = *check_options[0].variable;
-            panels_layout.left_panel_size = _panels_layout.left_panel_size;
-        }
-        output_lines = _output_lines;
-        layout_do_change = TRUE;
+    }
+    else
+    {
+        /* restore layout */
+        panels_layout = old_layout;
+        output_lines = old_output_lines;
+        update_split (layout_dlg);
     }
 
     dlg_destroy (layout_dlg);
-    if (layout_do_change)
-        layout_change ();
+    layout_change ();
+    do_refresh ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
