@@ -377,18 +377,25 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
         {
             if (panels_layout.horizontal_split != radio_widget->sel)
             {
+                int eq;
+
                 panels_layout.horizontal_split = radio_widget->sel;
 
                 if (panels_layout.horizontal_split)
                 {
-                    if (panels_layout.horizontal_equal)
+                    eq = panels_layout.horizontal_equal;
+                    if (eq)
                         panels_layout.top_panel_size = height / 2;
                 }
                 else
                 {
-                    if (panels_layout.vertical_equal)
+                    eq = panels_layout.vertical_equal;
+                    if (eq)
                         panels_layout.left_panel_size = COLS / 2;
                 }
+
+                widget_disable (WIDGET (bleft_widget), eq);
+                widget_disable (WIDGET (bright_widget), eq);
 
                 update_split (h);
                 layout_change ();
