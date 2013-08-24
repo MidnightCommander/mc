@@ -260,7 +260,7 @@ b_left_right_cback (WButton * button, int action)
 {
     (void) action;
 
-    if (button == bleft_widget)
+    if (button == bright_widget)
     {
         if (panels_layout.horizontal_split)
             panels_layout.top_panel_size++;
