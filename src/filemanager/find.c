@@ -1738,7 +1738,7 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
                 continue;
             }
             /* Need to grow the *list? */
-            if (list->len == list->size && !dir_list_grow (list, RESIZE_STEPS))
+            if (list->len == list->size && !dir_list_grow (list, DIR_LIST_RESIZE_STEP))
             {
                 g_free (name);
                 break;

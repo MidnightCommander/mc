@@ -13,8 +13,8 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-#define MIN_FILES 128
-#define RESIZE_STEPS 128
+#define DIR_LIST_MIN_SIZE 128
+#define DIR_LIST_RESIZE_STEP 128
 
 /*** enums ***************************************************************************************/
 

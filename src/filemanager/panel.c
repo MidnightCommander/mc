@@ -4069,7 +4069,7 @@ panel_new_with_dir (const char *panel_name, const vfs_path_t * vpath)
     panel->hist_name = g_strconcat ("Dir Hist ", panel_name, (char *) NULL);
     /* directories history will be get later */
 
-    panel->dir.size = MIN_FILES;
+    panel->dir.size = DIR_LIST_MIN_SIZE;
     panel->dir.list = g_new (file_entry, panel->dir.size);
     panel->dir.len = 0;
     panel->active = 0;

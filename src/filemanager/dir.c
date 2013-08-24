@@ -266,7 +266,7 @@ dir_list_grow (dir_list * list, int delta)
     size = list->size + delta;
     if (size <= 0)
     {
-        size = MIN_FILES;
+        size = DIR_LIST_MIN_SIZE;
         clear = TRUE;
     }
 
@@ -305,7 +305,7 @@ dir_list_append (dir_list * list, const char *fname, const struct stat *st,
                  gboolean link_to_dir, gboolean stale_link)
 {
     /* Need to grow the *list? */
-    if (list->len == list->size && !dir_list_grow (list, RESIZE_STEPS))
+    if (list->len == list->size && !dir_list_grow (list, DIR_LIST_RESIZE_STEP))
         return FALSE;
 
     list->list[list->len].fnamelen = strlen (fname);
@@ -528,7 +528,7 @@ clean_dir (dir_list * list)
 
     list->len = 0;
     /* reduce memory usage */
-    dir_list_grow (list, MIN_FILES - list->size);
+    dir_list_grow (list, DIR_LIST_MIN_SIZE - list->size);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -538,7 +538,7 @@ gboolean
 set_zero_dir (dir_list * list)
 {
     /* Need to grow the *list? */
-    if (list->size == 0 && !dir_list_grow (list, RESIZE_STEPS))
+    if (list->size == 0 && !dir_list_grow (list, DIR_LIST_RESIZE_STEP))
     {
         list->len = 0;
         return FALSE;
