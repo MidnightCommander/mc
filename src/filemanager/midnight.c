@@ -72,7 +72,7 @@
 #include "hotlist.h"
 #include "panelize.h"
 #include "command.h"            /* cmdline */
-#include "dir.h"                /* clean_dir() */
+#include "dir.h"                /* dir_list_clean() */
 
 #include "chmod.h"
 #include "chown.h"
@@ -1783,7 +1783,7 @@ do_nc (void)
         /* don't handle VFS timestamps for dirs opened in panels */
         mc_event_destroy (MCEVENT_GROUP_CORE, "vfs_timestamp");
 
-        clean_dir (&panelized_panel.list);
+        dir_list_clean (&panelized_panel.list);
     }
 
     /* Program end */

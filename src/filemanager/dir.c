@@ -193,7 +193,7 @@ handle_dirent (struct dirent *dp, const char *fltr, struct stat *buf1, int *link
 /** get info about ".." */
 
 static gboolean
-get_dotdot_dir_stat (const vfs_path_t * vpath, struct stat *st)
+dir_get_dotdot_stat (const vfs_path_t * vpath, struct stat *st)
 {
     gboolean ret = FALSE;
 
@@ -205,12 +205,10 @@ get_dotdot_dir_stat (const vfs_path_t * vpath, struct stat *st)
         if (path != NULL && *path != '\0')
         {
             vfs_path_t *tmp_vpath;
-            struct stat s;
 
             tmp_vpath = vfs_path_append_new (vpath, "..", NULL);
-            ret = mc_stat (tmp_vpath, &s) == 0;
+            ret = mc_stat (tmp_vpath, st) == 0;
             vfs_path_free (tmp_vpath);
-            *st = s;
         }
     }
 
@@ -493,7 +491,7 @@ sort_size (file_entry * a, file_entry * b)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-do_sort (dir_list * list, GCompareFunc sort, const dir_sort_options_t * sort_op)
+dir_list_sort (dir_list * list, GCompareFunc sort, const dir_sort_options_t * sort_op)
 {
     int dot_dot_found = 0;
 
@@ -516,7 +514,7 @@ do_sort (dir_list * list, GCompareFunc sort, const dir_sort_options_t * sort_op)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-clean_dir (dir_list * list)
+dir_list_clean (dir_list * list)
 {
     int i;
 
@@ -535,7 +533,7 @@ clean_dir (dir_list * list)
 /** Used to set up a directory list when there is no access to a directory */
 
 gboolean
-set_zero_dir (dir_list * list)
+dir_list_init (dir_list * list)
 {
     /* Need to grow the *list? */
     if (list->size == 0 && !dir_list_grow (list, DIR_LIST_RESIZE_STEP))
@@ -604,8 +602,8 @@ handle_path (const char *path, struct stat *buf1, int *link_to_dir, int *stale_l
 /* --------------------------------------------------------------------------------------------- */
 
 void
-do_load_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
-             const dir_sort_options_t * sort_op, const char *fltr)
+dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
+               const dir_sort_options_t * sort_op, const char *fltr)
 {
     DIR *dirp;
     struct dirent *dp;
@@ -613,10 +611,10 @@ do_load_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
     struct stat st;
 
     /* ".." (if any) must be the first entry in the list */
-    if (!set_zero_dir (list))
+    if (!dir_list_init (list))
         return;
 
-    if (get_dotdot_dir_stat (vpath, &st))
+    if (dir_get_dotdot_stat (vpath, &st))
         list->list[0].st = st;
 
     dirp = mc_opendir (vpath);
@@ -649,7 +647,7 @@ do_load_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
             rotate_dash (TRUE);
     }
 
-    do_sort (list, sort, sort_op);
+    dir_list_sort (list, sort, sort_op);
 
   ret:
     mc_closedir (dirp);
@@ -673,8 +671,8 @@ if_link_is_exe (const vfs_path_t * full_name_vpath, const file_entry * file)
 /** If fltr is null, then it is a match */
 
 void
-do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
-               const dir_sort_options_t * sort_op, const char *fltr)
+dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
+                 const dir_sort_options_t * sort_op, const char *fltr)
 {
     DIR *dirp;
     struct dirent *dp;
@@ -688,8 +686,8 @@ do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
     if (dirp == NULL)
     {
         message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
-        clean_dir (list);
-        set_zero_dir (list);
+        dir_list_clean (list);
+        dir_list_init (list);
         return;
     }
 
@@ -721,13 +719,13 @@ do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
         (vfs_path_elements_count (vpath) == 1 && (tmp_path[0] == PATH_SEP)
          && (tmp_path[1] == '\0')))
     {
-        if (!set_zero_dir (list))
+        if (!dir_list_init (list))
         {
-            clean_dir (&dir_copy);
+            dir_list_clean (&dir_copy);
             return;
         }
 
-        if (get_dotdot_dir_stat (vpath, &st))
+        if (dir_get_dotdot_stat (vpath, &st))
             list->list[0].st = st;
     }
 
@@ -744,10 +742,10 @@ do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
                -1 means big trouble (at the moment no memory left),
                I don't bother with further cleanup because if one gets to
                this point he will have more problems than a few memory
-               leaks and because one 'clean_dir' would not be enough (and
+               leaks and because one 'dir_list_clean' would not be enough (and
                because I don't want to spent the time to make it working,
                IMHO it's not worthwhile).
-               clean_dir (&dir_copy);
+               dir_list_clean (&dir_copy);
              */
             tree_store_end_check ();
             g_hash_table_destroy (marked_files);
@@ -774,9 +772,9 @@ do_reload_dir (const vfs_path_t * vpath, dir_list * list, GCompareFunc sort,
     tree_store_end_check ();
     g_hash_table_destroy (marked_files);
 
-    do_sort (list, sort, sort_op);
+    dir_list_sort (list, sort, sort_op);
 
-    clean_dir (&dir_copy);
+    dir_list_clean (&dir_copy);
     rotate_dash (FALSE);
 }
 

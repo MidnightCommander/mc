@@ -1008,7 +1008,7 @@ display_mini_info (WPanel * panel)
     else if (DIR_IS_DOTDOT (panel->dir.list[panel->selected].fname))
     {
         /* FIXME:
-         * while loading directory (do_load_dir() and do_reload_dir()),
+         * while loading directory (dir_list_load() and dir_list_reload()),
          * the actual stat info about ".." directory isn't got;
          * so just don't display incorrect info about ".." directory */
         tty_print_string (str_fit_to_term (_("UP--DIR"), w->cols - 2, J_LEFT));
@@ -3063,8 +3063,8 @@ _do_panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_
     /* Reload current panel */
     panel_clean_dir (panel);
 
-    do_load_dir (panel->cwd_vpath, &panel->dir, panel->sort_field->sort_routine, &panel->sort_info,
-                 panel->filter);
+    dir_list_load (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine, &panel->sort_info,
+                   panel->filter);
     try_to_select (panel, get_parent_dir_name (panel->cwd_vpath, olddir_vpath));
 
     load_hint (0);
@@ -3741,7 +3741,7 @@ reload_panelized (WPanel * panel)
         vfs_path_free (vpath);
     }
     if (j == 0)
-        set_zero_dir (list);
+        dir_list_init (list);
     else
         list->len = j;
 
@@ -3975,7 +3975,7 @@ panel_clean_dir (WPanel * panel)
     panel->content_shift = -1;
     panel->max_shift = -1;
 
-    clean_dir (&panel->dir);
+    dir_list_clean (&panel->dir);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -4138,8 +4138,8 @@ panel_new_with_dir (const char *panel_name, const vfs_path_t * vpath)
     }
 
     /* Load the default format */
-    do_load_dir (panel->cwd_vpath, &panel->dir, panel->sort_field->sort_routine, &panel->sort_info,
-                 panel->filter);
+    dir_list_load (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine, &panel->sort_info,
+                   panel->filter);
 
     /* Restore old right path */
     if (curdir != NULL)
@@ -4175,7 +4175,7 @@ panel_reload (WPanel * panel)
     {
         panel->cwd_vpath = vfs_path_from_str (PATH_SEP_STR);
         panel_clean_dir (panel);
-        set_zero_dir (&panel->dir);
+        dir_list_init (&panel->dir);
         return;
     }
 
@@ -4183,8 +4183,8 @@ panel_reload (WPanel * panel)
     memset (&(panel->dir_stat), 0, sizeof (panel->dir_stat));
     show_dir (panel);
 
-    do_reload_dir (panel->cwd_vpath, &panel->dir, panel->sort_field->sort_routine, &panel->sort_info,
-                   panel->filter);
+    dir_list_reload (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine,
+                     &panel->sort_info, panel->filter);
 
     panel->dirty = 1;
     if (panel->selected >= panel->dir.len)
@@ -4439,7 +4439,7 @@ panel_re_sort (WPanel * panel)
 
     filename = g_strdup (selection (panel)->fname);
     unselect_item (panel);
-    do_sort (&panel->dir, panel->sort_field->sort_routine, &panel->sort_info);
+    dir_list_sort (&panel->dir, panel->sort_field->sort_routine, &panel->sort_info);
     panel->selected = -1;
     for (i = panel->dir.len; i != 0; i--)
     {

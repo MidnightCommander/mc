@@ -330,7 +330,7 @@ do_external_panelize (char *command)
 
     panelize_change_root (current_panel->cwd_vpath);
 
-    set_zero_dir (list);
+    dir_list_init (list);
 
     while (TRUE)
     {
@@ -366,7 +366,7 @@ do_external_panelize (char *command)
     current_panel->is_panelized = TRUE;
 
     if (list->len == 0)
-        set_zero_dir (list);
+        dir_list_init (list);
     else if (list->list[0].fname[0] == PATH_SEP)
     {
         vfs_path_t *vpath_root;
@@ -397,12 +397,12 @@ do_panelize_cd (struct WPanel *panel)
     dir_list *list;
     gboolean panelized_same;
 
-    clean_dir (&panel->dir);
+    dir_list_clean (&panel->dir);
     if (panelized_panel.root_vpath == NULL)
         panelize_change_root (current_panel->cwd_vpath);
 
     if (panelized_panel.list.len < 1)
-        set_zero_dir (&panelized_panel.list);
+        dir_list_init (&panelized_panel.list);
     else if (panelized_panel.list.len > panel->dir.size)
         dir_list_grow (&panel->dir, panelized_panel.list.len - panel->dir.size);
 
@@ -470,7 +470,7 @@ panelize_save_panel (struct WPanel *panel)
     panelize_change_root (current_panel->cwd_vpath);
 
     if (panelized_panel.list.len > 0)
-        clean_dir (&panelized_panel.list);
+        dir_list_clean (&panelized_panel.list);
     if (panel->dir.len == 0)
         return;
 

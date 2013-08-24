@@ -1705,7 +1705,7 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
         dir_list *list = &current_panel->dir;
         char *name = NULL;
 
-        set_zero_dir (list);
+        dir_list_init (list);
 
         for (i = 0, entry = find_list->list; entry != NULL; i++, entry = g_list_next (entry))
         {
