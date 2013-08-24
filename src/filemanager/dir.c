@@ -492,6 +492,8 @@ clean_dir (dir_list * list)
     }
 
     list->len = 0;
+    /* reduce memory usage */
+    dir_list_grow (list, MIN_FILES - list->size);
 }
 
 /* --------------------------------------------------------------------------------------------- */
