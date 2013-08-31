@@ -737,6 +737,8 @@ cpio_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
         ssize_t status;
 
         status = cpio_read_head (vpath_element->class, super);
+        if (status < 0)
+            return (-1);
 
         switch (status)
         {
