@@ -268,8 +268,9 @@ init_subshell_child (const char *pty_name)
             init_file = g_strdup (".bashrc");
         }
 
-        /* Make MC's special commands not show up in bash's history */
-        putenv ((char *) "HISTCONTROL=ignorespace");
+        /* Make MC's special commands not show up in bash's history and also suppress
+         * consecutive identical commands*/
+        putenv ((char *) "HISTCONTROL=ignoreboth");
 
         /* Allow alternative readline settings for MC */
         {
