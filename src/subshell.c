@@ -820,6 +820,119 @@ init_subshell_type (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Set up `precmd' or equivalent for reading the subshell's CWD.
+ *
+ * Attention! Never forget that these are *one-liners* even though the concatenated
+ * substrings contain line breaks and indentation for better understanding of the
+ * shell code. It is vital that each one-liner ends with a line feed character ("\n" ).
+ *
+ * @return initialized pre-command string
+ */
+
+static void
+init_subshell_precmd (char *precmd, size_t buff_size)
+{
+
+    switch (subshell_type)
+    {
+    case BASH:
+        g_snprintf (precmd, buff_size,
+                    " PROMPT_COMMAND='pwd>&%d; kill -STOP $$'; "
+                    "PS1='\\u@\\h:\\w\\$ '\n", subshell_pipe[WRITE]);
+        break;
+
+    case ASH_BUSYBOX:
+        /* BusyBox ash needs a somewhat complicated precmd emulation via PS1, and it is vital
+         * that BB be built with active CONFIG_ASH_EXPAND_PRMT, but this is the default anyway.
+         *
+         * A: This leads to a stopped subshell (=frozen mc) if user calls "ash" command
+         *    "PS1='$(pwd>&%d; kill -STOP $$)\\u@\\h:\\w\\$ '\n",
+         *
+         * B: This leads to "sh: precmd: not found" in sub-subshell if user calls "ash" command
+         *    "precmd() { pwd>&%d; kill -STOP $$; }; "
+         *    "PS1='$(precmd)\\u@\\h:\\w\\$ '\n",
+         *
+         * C: This works if user calls "ash" command because in sub-subshell
+         *    PRECMD is unfedined, thus evaluated to empty string - no damage done.
+         *    Attention: BusyBox must be built with FEATURE_EDITING_FANCY_PROMPT to
+         *    permit \u, \w, \h, \$ escape sequences. Unfortunately this cannot be guaranteed,
+         *    especially on embedded systems where people try to save space, so let's use
+         *    the dash version below. It should work on virtually all systems.
+         *    "precmd() { pwd>&%d; kill -STOP $$; }; "
+         *    "PRECMD=precmd; "
+         *    "PS1='$(eval $PRECMD)\\u@\\h:\\w\\$ '\n",
+         */
+    case DASH:
+        /* Debian ash needs a precmd emulation via PS1, similar to BusyBox ash,
+         * but does not support escape sequences for user, host and cwd in prompt.
+         * Attention! Make sure that the buffer for precmd is big enough.
+         *
+         * We want to have a fancy dynamic prompt with user@host:cwd just like in the BusyBox
+         * examples above, but because replacing the home directory part of the path by "~" is
+         * complicated, it bloats the precmd to a size > BUF_SMALL (128).
+         *
+         * The following example is a little less fancy (home directory not replaced)
+         * and shows the basic workings of our prompt for easier understanding:
+         *
+         * "precmd() { "
+         *     "echo \"$USER@$(hostname -s):$PWD\"; "
+         *     "pwd>&%d; "
+         *     "kill -STOP $$; "
+         * "}; "
+         * "PRECMD=precmd; "
+         * "PS1='$($PRECMD)$ '\n",
+         */
+        g_snprintf (precmd, buff_size,
+                    "precmd() { "
+                    "if [ ! \"${PWD##$HOME}\" ]; then "
+                    "MC_PWD=\"~\"; "
+                    "else "
+                    "[ \"${PWD##$HOME/}\" = \"$PWD\" ] && MC_PWD=\"$PWD\" || MC_PWD=\"~/${PWD##$HOME/}\"; "
+                    "fi; "
+                    "echo \"$USER@$(hostname -s):$MC_PWD\"; "
+                    "pwd>&%d; "
+                    "kill -STOP $$; "
+                    "}; " "PRECMD=precmd; " "PS1='$($PRECMD)$ '\n", subshell_pipe[WRITE]);
+        break;
+
+    case ZSH:
+        g_snprintf (precmd, buff_size,
+                    " precmd() { pwd>&%d; kill -STOP $$; }; "
+                    "PS1='%%n@%%m:%%~%%# '\n", subshell_pipe[WRITE]);
+        break;
+
+    case TCSH:
+        g_snprintf (precmd, buff_size,
+                    "set echo_style=both; "
+                    "set prompt='%%n@%%m:%%~%%# '; "
+                    "alias precmd 'echo $cwd:q >>%s; kill -STOP $$'\n", tcsh_fifo);
+        break;
+
+    case FISH:
+        /* We also want a fancy user@host:cwd prompt here, but fish makes it very easy to also
+         * use colours, which is what we will do. But first here is a simpler, uncoloured version:
+         * "function fish_prompt; "
+         *     "echo (whoami)@(hostname -s):(pwd)\\$\\ ; "
+         *     "echo \"$PWD\">&%d; "
+         *     "kill -STOP %%self; "
+         * "end\n",
+         *
+         * TODO: fish prompt is shown when panel is hidden (Ctrl-O), but not when it is visible.
+         * Find out how to fix this.
+         */
+        g_snprintf (precmd, buff_size,
+                    "function fish_prompt; "
+                    "echo (whoami)@(hostname -s):(set_color $fish_color_cwd)(pwd)(set_color normal)\\$\\ ; "
+                    "echo \"$PWD\">&%d; " "kill -STOP %%self; " "end\n", subshell_pipe[WRITE]);
+        break;
+
+    default:
+        break;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -935,6 +1048,8 @@ init_subshell (void)
         init_subshell_child (pty_name);
     }
 
+    init_subshell_precmd (precmd, BUF_MEDIUM);
+
     /* Set up `precmd' or equivalent for reading the subshell's CWD
      *
      * Attention! Never forget that these are *one-liners* even though the concatenated
@@ -1042,6 +1157,7 @@ init_subshell (void)
     default:
         break;
     }
+
     write_all (mc_global.tty.subshell_pty, precmd, strlen (precmd));
 
     /* Wait until the subshell has started up and processed the command */
