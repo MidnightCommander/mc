@@ -2485,9 +2485,13 @@ time with the sequence C\-o and jump back to the Midnight Commander, if
 you interrupt an application, you will not be able to run other
 external commands until you quit the application you interrupted.
 .PP
-A special subshell feature is that Midnight Commander displays a dynamic prompt
+A special subshell feature (except Bash shell) is that Midnight Commander displays a dynamic prompt
 like "user@host:current_path> " (with known problems for fish which displays the prompt in
 full-screen mode (Ctrl-o), but not when the MC panels are visible).
+.PP
+An extra added feature for Bash shell of using the subshell is that the prompt
+displayed by the Midnight Commander is the same prompt that you are
+currently using in your shell.
 .PP
 The
 .\"LINK2"

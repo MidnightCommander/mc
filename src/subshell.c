@@ -838,8 +838,7 @@ init_subshell_precmd (char *precmd, size_t buff_size)
     {
     case BASH:
         g_snprintf (precmd, buff_size,
-                    " PROMPT_COMMAND='pwd>&%d; kill -STOP $$'; "
-                    "PS1='\\u@\\h:\\w\\$ '\n", subshell_pipe[WRITE]);
+                    " PROMPT_COMMAND='pwd>&%d; kill -STOP $$';\n", subshell_pipe[WRITE]);
         break;
 
     case ASH_BUSYBOX:
