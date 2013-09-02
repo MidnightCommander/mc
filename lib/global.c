@@ -97,6 +97,7 @@ mc_global_t mc_global = {
 #endif /* !ENABLE_SUBSHELL */
 
         .shell = NULL,
+        .shell_realpath = NULL,
 
         .xterm_flag = FALSE,
         .disable_x11 = FALSE,

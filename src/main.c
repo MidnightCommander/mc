@@ -87,6 +87,9 @@
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
+
+static char rp_shell[PATH_MAX];
+
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -118,6 +121,44 @@ check_codeset (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Get a system shell.
+ *
+ * @return newly allocated string with shell name
+ */
+
+static char *
+mc_get_system_shell (void)
+{
+    char *sh_str;
+    /* 3rd choice: look for existing shells supported as MC subshells.  */
+    if (access ("/bin/bash", X_OK) == 0)
+        sh_str = g_strdup ("/bin/bash");
+    else if (access ("/bin/ash", X_OK) == 0)
+        sh_str = g_strdup ("/bin/ash");
+    else if (access ("/bin/dash", X_OK) == 0)
+        sh_str = g_strdup ("/bin/dash");
+    else if (access ("/bin/busybox", X_OK) == 0)
+        sh_str = g_strdup ("/bin/busybox");
+    else if (access ("/bin/zsh", X_OK) == 0)
+        sh_str = g_strdup ("/bin/zsh");
+    else if (access ("/bin/tcsh", X_OK) == 0)
+        sh_str = g_strdup ("/bin/tcsh");
+    /* No fish as fallback because it is so much different from other shells and
+     * in a way exotic (even though user-friendly by name) that we should not
+     * present it as a subshell without the user's explicit intention. We rather
+     * will not use a subshell but just a command line.
+     * else if (access("/bin/fish", X_OK) == 0)
+     *     mc_global.tty.shell = g_strdup ("/bin/fish");
+     */
+    else
+        /* Fallback and last resort: system default shell */
+        sh_str = g_strdup ("/bin/sh");
+
+    return sh_str;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 /** POSIX version.  The only version we support.  */
 static void
@@ -126,9 +167,11 @@ OS_Setup (void)
     const char *shell_env;
     const char *datadir_env;
 
+
     shell_env = getenv ("SHELL");
     if ((shell_env == NULL) || (shell_env[0] == '\0'))
     {
+        /* 2nd choice: user login shell */
         struct passwd *pwd;
 
         pwd = getpwuid (geteuid ());
@@ -136,13 +179,15 @@ OS_Setup (void)
             mc_global.tty.shell = g_strdup (pwd->pw_shell);
     }
     else
+        /* 1st choice: SHELL environment variable */
         mc_global.tty.shell = g_strdup (shell_env);
 
     if ((mc_global.tty.shell == NULL) || (mc_global.tty.shell[0] == '\0'))
     {
         g_free (mc_global.tty.shell);
-        mc_global.tty.shell = g_strdup ("/bin/sh");
+        mc_global.tty.shell = mc_get_system_shell ();
     }
+    mc_global.tty.shell_realpath = mc_realpath (mc_global.tty.shell, rp_shell);
 
     /* This is the directory, where MC was installed, on Unix this is DATADIR */
     /* and can be overriden by the MC_DATADIR environment variable */
