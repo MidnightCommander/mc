@@ -138,6 +138,10 @@ static const struct test_user_config_paths_ds
     },
     { /* 0. */
         CONF_DATA,
+        "ashrc"
+    },
+    { /* 0. */
+        CONF_DATA,
         "bashrc"
     },
     { /* 0. */
