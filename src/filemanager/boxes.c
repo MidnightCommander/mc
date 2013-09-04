@@ -760,13 +760,13 @@ confirm_box (void)
     quick_widget_t quick_widgets[] = {
         /* *INDENT-OFF* */
         /* TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix */
-        QUICK_CHECKBOX (N_("Confirmation|&Delete"), &confirm_delete, NULL),
-        QUICK_CHECKBOX (N_("Confirmation|O&verwrite"), &confirm_overwrite, NULL),
-        QUICK_CHECKBOX (N_("Confirmation|&Execute"), &confirm_execute, NULL),
-        QUICK_CHECKBOX (N_("Confirmation|E&xit"), &confirm_exit, NULL),
-        QUICK_CHECKBOX (N_("Confirmation|Di&rectory hotlist delete"),
+        QUICK_CHECKBOX (Q_("Confirmation|&Delete"), &confirm_delete, NULL),
+        QUICK_CHECKBOX (Q_("Confirmation|O&verwrite"), &confirm_overwrite, NULL),
+        QUICK_CHECKBOX (Q_("Confirmation|&Execute"), &confirm_execute, NULL),
+        QUICK_CHECKBOX (Q_("Confirmation|E&xit"), &confirm_exit, NULL),
+        QUICK_CHECKBOX (Q_("Confirmation|Di&rectory hotlist delete"),
                         &confirm_directory_hotlist_delete, NULL),
-        QUICK_CHECKBOX (N_("Confirmation|&History cleanup"),
+        QUICK_CHECKBOX (Q_("Confirmation|&History cleanup"),
                         &mc_global.widget.confirm_history_cleanup, NULL),
         QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
