@@ -21,6 +21,8 @@
 #	      https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=64007
 #  Slava Zanko <slavazanko@gmail.com>
 #	2009: Totally rewritten.
+#  Alexander Chumachenko <ledest@gmail.com>
+#	2013: add dependency version output
 #
 #  This file is part of the Midnight Commander.
 #
@@ -94,9 +96,9 @@ mcrpmfs_getAllNeededTags()
 "|URL=%{URL}"\
 "|EPOCH=%{EPOCH}"\
 "|LICENSE=%{LICENSE}"\
-"|REQUIRENAME=%{REQUIRENAME}"\
+"|REQUIRES=%{REQUIRENAME} %{REQUIREFLAGS:depflags} %{REQUIREVERSION}"\
 "|OBSOLETES=%{OBSOLETES}"\
-"|PROVIDES=%{PROVIDES}"\
+"|PROVIDES=%{PROVIDES} %{PROVIDEFLAGS:depflags} %{PROVIDEVERSION}"\
 ${tag_CONFLICTS}\
 "|PACKAGER=%{PACKAGER}" \
     "${rpm_filename}"
@@ -146,7 +148,7 @@ mcrpmfs_list_fastRPM ()
     echo "$FILEPREF 0 $DATE INFO/URL"
     echo "$FILEPREF 0 $DATE INFO/EPOCH"
     echo "$FILEPREF 0 $DATE INFO/LICENSE"
-    echo "$FILEPREF 0 $DATE INFO/REQUIRENAME"
+    echo "$FILEPREF 0 $DATE INFO/REQUIRES"
     echo "$FILEPREF 0 $DATE INFO/OBSOLETES"
     echo "$FILEPREF 0 $DATE INFO/PROVIDES"
     echo "$FILEPREF 0 $DATE INFO/CONFLICTS"
@@ -174,8 +176,7 @@ mcrpmfs_list_fullRPM ()
     mcrpmfs_printOneMetaInfo "INFO/EPOCH" "EPOCH"
     mcrpmfs_printOneMetaInfo "INFO/LICENSE" "LICENSE"
 
-
-    mcrpmfs_printOneMetaInfo "INFO/REQUIRENAME" "REQUIRENAME"
+    mcrpmfs_printOneMetaInfo "INFO/REQUIRES" "REQUIRES"
     mcrpmfs_printOneMetaInfo "INFO/OBSOLETES" "OBSOLETES"
     mcrpmfs_printOneMetaInfo "INFO/PROVIDES" "PROVIDES"
     mcrpmfs_printOneMetaInfo "INFO/CONFLICTS" "CONFLICTS"
@@ -265,8 +266,8 @@ mcrpmfs_copyout ()
 	INFO/EPOCH)		mcrpmfs_getOneTag "EPOCH" >"$2"; exit 0;;
 	INFO/LICENSE)		mcrpmfs_getOneTag "LICENSE" >"$2"; exit 0;;
 	INFO/RPMVERSION)	mcrpmfs_getRawOneTag "%{RPMVERSION}\n" >"$2"; exit 0;;
-	INFO/REQUIRENAME)	mcrpmfs_getRawOneTag "[%{REQUIRENAME} %{REQUIREFLAGS:depflags} %{REQUIREVERSION}\n]" >"$2"; exit 0;;
-	INFO/PROVIDES)		mcrpmfs_getRawOneTag "[%{PROVIDES}\n]" >"$2"; exit 0;;
+	INFO/REQUIRES)		mcrpmfs_getRawOneTag "[%{REQUIRENAME} %{REQUIREFLAGS:depflags} %{REQUIREVERSION}\n]" >"$2"; exit 0;;
+	INFO/PROVIDES)		mcrpmfs_getRawOneTag "[%{PROVIDES} %{PROVIDEFLAGS:depflags} %{PROVIDEVERSION}\n]" >"$2"; exit 0;;
 	INFO/SCRIPTS/PREIN)	mcrpmfs_getRawOneTag "%{RPMTAG_PREIN}\n" >"$2"; exit 0;;
 	INFO/SCRIPTS/POSTIN)	mcrpmfs_getRawOneTag "%{RPMTAG_POSTIN}\n" >"$2"; exit 0;;
 	INFO/SCRIPTS/PREUN)	mcrpmfs_getRawOneTag "%{RPMTAG_PREUN}\n" >"$2"; exit 0;;
