@@ -247,13 +247,14 @@ test_condition (WEdit * edit_widget, char *p, int *condition)
                 char *edit_filename;
 
                 edit_filename = edit_get_file_name (edit_widget);
-                *condition = mc_search (arg, edit_filename, search_type) ? 1 : 0;
+                *condition = mc_search (arg, "ASCII", edit_filename, search_type) ? 1 : 0;
                 g_free (edit_filename);
             }
             else
 #endif
                 *condition = panel != NULL &&
-                    mc_search (arg, panel->dir.list[panel->selected].fname, search_type) ? 1 : 0;
+                    mc_search (arg, "ASCII", panel->dir.list[panel->selected].fname,
+                               search_type) ? 1 : 0;
             break;
         case 'y':              /* syntax pattern */
 #ifdef USE_INTERNAL_EDIT
@@ -263,7 +264,7 @@ test_condition (WEdit * edit_widget, char *p, int *condition)
                 if (syntax_type != NULL)
                 {
                     p = extract_arg (p, arg, sizeof (arg));
-                    *condition = mc_search (arg, syntax_type, MC_SEARCH_T_NORMAL) ? 1 : 0;
+                    *condition = mc_search (arg, "ASCII", syntax_type, MC_SEARCH_T_NORMAL) ? 1 : 0;
                 }
             }
 #endif
@@ -271,7 +272,8 @@ test_condition (WEdit * edit_widget, char *p, int *condition)
         case 'd':
             p = extract_arg (p, arg, sizeof (arg));
             *condition = panel != NULL
-                && mc_search (arg, vfs_path_as_str (panel->cwd_vpath), search_type) ? 1 : 0;
+                && mc_search (arg, "ASCII", vfs_path_as_str (panel->cwd_vpath),
+                              search_type) ? 1 : 0;
             break;
         case 't':
             p = extract_arg (p, arg, sizeof (arg));

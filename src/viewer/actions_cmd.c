@@ -146,7 +146,11 @@ mcview_continue_search_cmd (mcview_t * view)
             g_list_foreach (history, (GFunc) g_free, NULL);
             g_list_free (history);
 
-            view->search = mc_search_new (view->last_search_string, -1);
+#ifdef HAVE_CHARSET
+            view->search = mc_search_new (view->last_search_string, -1, cp_source);
+#else
+            view->search = mc_search_new (view->last_search_string, -1, NULL);
+#endif
             view->search_nroff_seq = mcview_nroff_seq_new (view);
 
             if (view->search == NULL)

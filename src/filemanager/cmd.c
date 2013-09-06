@@ -259,7 +259,7 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
         return;
     }
 
-    search = mc_search_new (reg_exp, -1);
+    search = mc_search_new (reg_exp, -1, NULL);
     search->search_type = (shell_patterns != 0) ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
     search->is_entire_line = TRUE;
     search->is_case_sensitive = case_sens != 0;

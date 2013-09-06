@@ -189,7 +189,7 @@ handle_dirent (struct dirent *dp, const char *fltr, struct stat *buf1, int *link
     vfs_path_free (vpath);
 
     return (S_ISDIR (buf1->st_mode) || *link_to_dir != 0 || fltr == NULL
-            || mc_search (fltr, dp->d_name, MC_SEARCH_T_GLOB));
+            || mc_search (fltr, NULL, dp->d_name, MC_SEARCH_T_GLOB));
 }
 
 /* --------------------------------------------------------------------------------------------- */

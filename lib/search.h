@@ -108,6 +108,9 @@ typedef struct mc_search_struct
     /* original search string */
     gchar *original;
     gsize original_len;
+#ifdef HAVE_CHARSET
+    gchar *original_charset;
+#endif
 
     /* error code after search */
     mc_search_error_t error;
@@ -124,7 +127,8 @@ typedef struct mc_search_type_str_struct
 
 /*** declarations of public functions ************************************************************/
 
-mc_search_t *mc_search_new (const gchar * original, gsize original_len);
+mc_search_t *mc_search_new (const gchar * original, gsize original_len,
+                            const gchar * original_charset);
 
 void mc_search_free (mc_search_t * lc_mc_search);
 
@@ -144,7 +148,8 @@ gboolean mc_search_is_fixed_search_str (mc_search_t *);
 
 gchar **mc_search_get_types_strings_array (size_t * num);
 
-gboolean mc_search (const gchar *, const gchar *, mc_search_type_t);
+gboolean mc_search (const gchar * pattern, const gchar * pattern_charset, const gchar * str,
+                    mc_search_type_t type);
 
 int mc_search_getstart_result_by_num (mc_search_t *, int);
 int mc_search_getend_result_by_num (mc_search_t *, int);

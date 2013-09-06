@@ -129,27 +129,43 @@ mc_search__conditions_free (GPtrArray * array)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 /*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+/* Init search descriptor.
+ *
+ * @param original pattern to search
+ * @param original_len length of #original or -1 if #original is NULL-terminated
+ * @param original_charset charset of #original. If NULL then cp_display will be used
+ *
+ * @return new mc_search_t object. Use #mc_search_free() to free it.
+ */
 
 mc_search_t *
-mc_search_new (const gchar * original, gsize str_len)
+mc_search_new (const gchar * original, gsize original_len, const gchar * original_charset)
 {
     mc_search_t *lc_mc_search;
 
     if (original == NULL)
         return NULL;
 
-    if ((gssize) str_len == -1)
+    if ((gssize) original_len == -1)
     {
-        str_len = strlen (original);
-        if (str_len == 0)
+        original_len = strlen (original);
+        if (original_len == 0)
             return NULL;
     }
 
-    lc_mc_search = g_malloc0 (sizeof (mc_search_t));
-    lc_mc_search->original = g_strndup (original, str_len);
-    lc_mc_search->original_len = str_len;
+    lc_mc_search = g_new0 (mc_search_t, 1);
+    lc_mc_search->original = g_strndup (original, original_len);
+    lc_mc_search->original_len = original_len;
+#ifdef HAVE_CHARSET
+    lc_mc_search->original_charset =
+        g_strdup (original_charset != NULL
+                  && *original_charset != '\0' ? original_charset : cp_display);
+#else
+    (void) original_charset;
+#endif
+
     return lc_mc_search;
 }
 
@@ -162,6 +178,9 @@ mc_search_free (mc_search_t * lc_mc_search)
         return;
 
     g_free (lc_mc_search->original);
+#ifdef HAVE_CHARSET
+    g_free (lc_mc_search->original_charset);
+#endif
     g_free (lc_mc_search->error_str);
 
     if (lc_mc_search->conditions != NULL)
@@ -191,25 +210,27 @@ mc_search_prepare (mc_search_t * lc_mc_search)
 #ifdef HAVE_CHARSET
     if (lc_mc_search->is_all_charsets)
     {
-        gsize loop1, recoded_str_len;
-        gchar *buffer;
+        gsize loop1;
 
         for (loop1 = 0; loop1 < codepages->len; loop1++)
         {
-            const char *id = ((codepage_desc *) g_ptr_array_index (codepages, loop1))->id;
+            const char *id;
+            gsize recoded_str_len;
+            gchar *buffer;
 
-            if (!g_ascii_strcasecmp (id, cp_display))
+            id = ((codepage_desc *) g_ptr_array_index (codepages, loop1))->id;
+            if (g_ascii_strcasecmp (id, lc_mc_search->original_charset) == 0)
             {
                 g_ptr_array_add (ret,
                                  mc_search__cond_struct_new (lc_mc_search, lc_mc_search->original,
                                                              lc_mc_search->original_len,
-                                                             cp_display));
+                                                             lc_mc_search->original_charset));
                 continue;
             }
 
             buffer =
                 mc_search__recode_str (lc_mc_search->original, lc_mc_search->original_len,
-                                       cp_display, id, &recoded_str_len);
+                                       lc_mc_search->original_charset, id, &recoded_str_len);
 
             g_ptr_array_add (ret,
                              mc_search__cond_struct_new (lc_mc_search, buffer,
@@ -220,9 +241,9 @@ mc_search_prepare (mc_search_t * lc_mc_search)
     else
     {
         g_ptr_array_add (ret,
-                         mc_search__cond_struct_new (lc_mc_search,
-                                                     lc_mc_search->original,
-                                                     lc_mc_search->original_len, cp_display));
+                         mc_search__cond_struct_new (lc_mc_search, lc_mc_search->original,
+                                                     lc_mc_search->original_len,
+                                                     lc_mc_search->original_charset));
     }
 #else
     g_ptr_array_add (ret,
@@ -382,9 +403,19 @@ mc_search_is_fixed_search_str (mc_search_t * lc_mc_search)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* Search specified pattern in specified string.
+ *
+ * @param pattern string to search
+ * @param pattern_charset charset of #pattern. If NULL then cp_display will be used
+ * @param str string where search #pattern
+ * @param search type (normal, regex, hex or glob)
+ *
+ * @return TRUE if found is successful, FALSE otherwise.
+ */
 
 gboolean
-mc_search (const gchar * pattern, const gchar * str, mc_search_type_t type)
+mc_search (const gchar * pattern, const gchar * pattern_charset, const gchar * str,
+           mc_search_type_t type)
 {
     gboolean ret;
     mc_search_t *search;
@@ -392,7 +423,7 @@ mc_search (const gchar * pattern, const gchar * str, mc_search_type_t type)
     if (str == NULL)
         return FALSE;
 
-    search = mc_search_new (pattern, -1);
+    search = mc_search_new (pattern, -1, pattern_charset);
     if (search == NULL)
         return FALSE;
 

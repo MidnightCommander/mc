@@ -2450,7 +2450,7 @@ do_search (WPanel * panel, int c_code)
 
     reg_exp = g_strdup_printf ("%s*", panel->search_buffer);
     esc_str = strutils_escape (reg_exp, -1, ",|\\{}[]", TRUE);
-    search = mc_search_new (esc_str, -1);
+    search = mc_search_new (esc_str, -1, NULL);
     search->search_type = MC_SEARCH_T_GLOB;
     search->is_entire_line = TRUE;
     switch (panels_options.qsearch_mode)

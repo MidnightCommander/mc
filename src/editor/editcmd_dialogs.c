@@ -162,7 +162,11 @@ editcmd_dialog_search_show (WEdit * edit)
     edit->last_search_string = search_text;
     mc_search_free (edit->search);
 
-    edit->search = mc_search_new (edit->last_search_string, -1);
+#ifdef HAVE_CHARSET
+    edit->search = mc_search_new (edit->last_search_string, -1, cp_source);
+#else
+    edit->search = mc_search_new (edit->last_search_string, -1, NULL);
+#endif
     if (edit->search != NULL)
     {
         edit->search->search_type = edit_search_options.type;
