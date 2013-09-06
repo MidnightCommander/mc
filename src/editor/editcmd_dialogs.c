@@ -170,7 +170,9 @@ editcmd_dialog_search_show (WEdit * edit)
     if (edit->search != NULL)
     {
         edit->search->search_type = edit_search_options.type;
+#ifdef HAVE_CHARSET
         edit->search->is_all_charsets = edit_search_options.all_codepages;
+#endif
         edit->search->is_case_sensitive = edit_search_options.case_sens;
         edit->search->whole_words = edit_search_options.whole_words;
         edit->search->search_fn = edit_search_cmd_callback;

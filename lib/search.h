@@ -61,8 +61,10 @@ typedef struct mc_search_struct
 {
     /* public input data */
 
+#ifdef HAVE_CHARSET
     /* search in all charsets */
     gboolean is_all_charsets;
+#endif
 
     /* case sensitive search */
     gboolean is_case_sensitive;

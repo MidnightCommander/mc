@@ -258,7 +258,9 @@ dview_search_cmd (WDiff * dview)
         return;
 
     dview->search.handle->search_type = mcdiffview_search_options.type;
+#ifdef HAVE_CHARSET
     dview->search.handle->is_all_charsets = mcdiffview_search_options.all_codepages;
+#endif
     dview->search.handle->is_case_sensitive = mcdiffview_search_options.case_sens;
     dview->search.handle->whole_words = mcdiffview_search_options.whole_words;
 

@@ -1632,12 +1632,16 @@ run_process (void)
             options.content_regexp ? MC_SEARCH_T_REGEX : MC_SEARCH_T_NORMAL;
         search_content_handle->is_case_sensitive = options.content_case_sens;
         search_content_handle->whole_words = options.content_whole_words;
+#ifdef HAVE_CHARSET
         search_content_handle->is_all_charsets = options.content_all_charsets;
+#endif
     }
     search_file_handle = mc_search_new (find_pattern, -1, NULL);
     search_file_handle->search_type = options.file_pattern ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
     search_file_handle->is_case_sensitive = options.file_case_sens;
+#ifdef HAVE_CHARSET
     search_file_handle->is_all_charsets = options.file_all_charsets;
+#endif
     search_file_handle->is_entire_line = options.file_pattern;
 
     resuming = FALSE;
