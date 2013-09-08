@@ -549,7 +549,8 @@ do_compute_dir_size (const vfs_path_t * dirname_vpath, void *ui,
                 update_ui_count++;
                 if ((update_ui_count & 31) == 0)
                     ret =
-                        (cback == NULL) ? FILE_CONT : cback (ui, tmp_vpath, *dir_count, *ret_total);
+                        (cback == NULL) ? FILE_CONT : cback (ui, dirname_vpath, *dir_count,
+                                                             *ret_total);
             }
         }
 
