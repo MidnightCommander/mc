@@ -1624,7 +1624,7 @@ single_dirsize_cmd (void)
     entry = &(panel->dir.list[panel->selected]);
     if (S_ISDIR (entry->st.st_mode) && !DIR_IS_DOTDOT (entry->fname))
     {
-        size_t marked = 0;
+        size_t count = 0;
         uintmax_t total = 0;
         ComputeDirSizeUI *ui;
         vfs_path_t *p;
@@ -1632,7 +1632,7 @@ single_dirsize_cmd (void)
         ui = compute_dir_size_create_ui (FALSE);
         p = vfs_path_from_str (entry->fname);
 
-        if (compute_dir_size (p, ui, compute_dir_size_update_ui, &marked, &total, TRUE) ==
+        if (compute_dir_size (p, ui, compute_dir_size_update_ui, &count, &total, TRUE) ==
             FILE_CONT)
         {
             entry->st.st_size = (off_t) total;
@@ -1671,12 +1671,12 @@ dirsizes_cmd (void)
                 || !panel->dirs_marked) && !DIR_IS_DOTDOT (panel->dir.list[i].fname))
         {
             vfs_path_t *p;
-            size_t marked = 0;
+            size_t count = 0;
             uintmax_t total = 0;
             gboolean ok;
 
             p = vfs_path_from_str (panel->dir.list[i].fname);
-            ok = compute_dir_size (p, ui, compute_dir_size_update_ui, &marked, &total,
+            ok = compute_dir_size (p, ui, compute_dir_size_update_ui, &count, &total,
                                    TRUE) != FILE_CONT;
             vfs_path_free (p);
 
