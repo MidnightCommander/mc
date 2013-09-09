@@ -25,7 +25,7 @@ typedef struct mc_fhl_struct
 mc_fhl_t *mc_fhl_new (gboolean);
 void mc_fhl_free (mc_fhl_t **);
 
-int mc_fhl_get_color (mc_fhl_t *, file_entry *);
+int mc_fhl_get_color (mc_fhl_t *, file_entry_t *);
 
 gboolean mc_fhl_read_ini_file (mc_fhl_t *, const gchar *);
 gboolean mc_fhl_parse_ini_file (mc_fhl_t *);

@@ -312,7 +312,7 @@ mcview_load_next_prev_init (mcview_t * view)
         /* search current file in the list */
         for (i = 0; i != view->dir->len; i++)
         {
-            const file_entry *fe = &view->dir->list[i];
+            const file_entry_t *fe = &view->dir->list[i];
 
             if (fname_len == fe->fnamelen && strncmp (fname, fe->fname, fname_len) == 0)
                 break;

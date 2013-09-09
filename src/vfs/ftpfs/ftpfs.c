@@ -1494,7 +1494,7 @@ resolve_symlink_without_ls_options (struct vfs_class *me, struct vfs_s_super *su
             for (depth = 0; depth < 100; depth++)
             {                   /* depth protects against recursive symbolic links */
                 canonicalize_pathname (tmp);
-                fe = _get_file_entry (bucket, tmp, 0, 0);
+                fe = _get_file_entry_t (bucket, tmp, 0, 0);
                 if (fe)
                 {
                     if (S_ISLNK (fe->s.st_mode) && fe->l_stat == 0)

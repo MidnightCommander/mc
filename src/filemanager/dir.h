@@ -25,7 +25,7 @@
  */
 typedef struct
 {
-    file_entry *list;   /**< list of file_entry_t objects */
+    file_entry_t *list; /**< list of file_entry_t objects */
     int size;           /**< number of allocated elements in list (capacity) */
     int len;            /**< number of used elements in list */
 } dir_list;
@@ -58,22 +58,22 @@ void dir_list_clean (dir_list * list);
 gboolean handle_path (const char *path, struct stat *buf1, int *link_to_dir, int *stale_link);
 
 /* Sorting functions */
-int unsorted (file_entry * a, file_entry * b);
-int sort_name (file_entry * a, file_entry * b);
-int sort_vers (file_entry * a, file_entry * b);
-int sort_ext (file_entry * a, file_entry * b);
-int sort_time (file_entry * a, file_entry * b);
-int sort_atime (file_entry * a, file_entry * b);
-int sort_ctime (file_entry * a, file_entry * b);
-int sort_size (file_entry * a, file_entry * b);
-int sort_inode (file_entry * a, file_entry * b);
+int unsorted (file_entry_t * a, file_entry_t * b);
+int sort_name (file_entry_t * a, file_entry_t * b);
+int sort_vers (file_entry_t * a, file_entry_t * b);
+int sort_ext (file_entry_t * a, file_entry_t * b);
+int sort_time (file_entry_t * a, file_entry_t * b);
+int sort_atime (file_entry_t * a, file_entry_t * b);
+int sort_ctime (file_entry_t * a, file_entry_t * b);
+int sort_size (file_entry_t * a, file_entry_t * b);
+int sort_inode (file_entry_t * a, file_entry_t * b);
 
-gboolean if_link_is_exe (const vfs_path_t * full_name, const file_entry * file);
+gboolean if_link_is_exe (const vfs_path_t * full_name, const file_entry_t * file);
 
 /*** inline functions ****************************************************************************/
 
 static inline gboolean
-link_isdir (const file_entry * file)
+link_isdir (const file_entry_t * file)
 {
     return (gboolean) file->f.link_to_dir;
 }

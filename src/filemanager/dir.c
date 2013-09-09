@@ -130,7 +130,7 @@ clean_sort_keys (dir_list * list, int start, int count)
 
     for (i = 0; i < count; i++)
     {
-        file_entry *fentry;
+        file_entry_t *fentry;
 
         fentry = &list->list[i + start];
         str_release_key (fentry->sort_key, case_sensitive);
@@ -231,7 +231,7 @@ alloc_dir_copy (int size)
 
             for (i = 0; i < dir_copy.len; i++)
             {
-                file_entry *fentry;
+                file_entry_t *fentry;
 
                 fentry = &(dir_copy.list)[i];
                 g_free (fentry->fname);
@@ -239,7 +239,7 @@ alloc_dir_copy (int size)
             g_free (dir_copy.list);
         }
 
-        dir_copy.list = g_new0 (file_entry, size);
+        dir_copy.list = g_new0 (file_entry_t, size);
         dir_copy.size = size;
         dir_copy.len = 0;
     }
@@ -278,9 +278,9 @@ dir_list_grow (dir_list * list, int delta)
 
     if (size != list->size)
     {
-        file_entry *fe;
+        file_entry_t *fe;
 
-        fe = g_try_renew (file_entry, list->list, size);
+        fe = g_try_renew (file_entry_t, list->list, size);
         if (fe == NULL)
             return FALSE;
 
@@ -310,7 +310,7 @@ gboolean
 dir_list_append (dir_list * list, const char *fname, const struct stat * st,
                  gboolean link_to_dir, gboolean stale_link)
 {
-    file_entry *fentry;
+    file_entry_t *fentry;
 
     /* Need to grow the *list? */
     if (list->len == list->size && !dir_list_grow (list, DIR_LIST_RESIZE_STEP))
@@ -335,7 +335,7 @@ dir_list_append (dir_list * list, const char *fname, const struct stat * st,
 /* --------------------------------------------------------------------------------------------- */
 
 int
-unsorted (file_entry * a, file_entry * b)
+unsorted (file_entry_t * a, file_entry_t * b)
 {
     (void) a;
     (void) b;
@@ -345,7 +345,7 @@ unsorted (file_entry * a, file_entry * b)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-sort_name (file_entry * a, file_entry * b)
+sort_name (file_entry_t * a, file_entry_t * b)
 {
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
@@ -366,7 +366,7 @@ sort_name (file_entry * a, file_entry * b)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-sort_vers (file_entry * a, file_entry * b)
+sort_vers (file_entry_t * a, file_entry_t * b)
 {
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
@@ -384,7 +384,7 @@ sort_vers (file_entry * a, file_entry * b)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-sort_ext (file_entry * a, file_entry * b)
+sort_ext (file_entry_t * a, file_entry_t * b)
 {
     int r;
     int ad = MY_ISDIR (a);
@@ -410,7 +410,7 @@ sort_ext (file_entry * a, file_entry * b)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-sort_time (file_entry * a, file_entry * b)
+sort_time (file_entry_t * a, file_entry_t * b)
 {
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
@@ -430,7 +430,7 @@ sort_time (file_entry * a, file_entry * b)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-sort_ctime (file_entry * a, file_entry * b)
+sort_ctime (file_entry_t * a, file_entry_t * b)
 {
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
@@ -450,7 +450,7 @@ sort_ctime (file_entry * a, file_entry * b)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-sort_atime (file_entry * a, file_entry * b)
+sort_atime (file_entry_t * a, file_entry_t * b)
 {
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
@@ -470,7 +470,7 @@ sort_atime (file_entry * a, file_entry * b)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-sort_inode (file_entry * a, file_entry * b)
+sort_inode (file_entry_t * a, file_entry_t * b)
 {
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
@@ -484,7 +484,7 @@ sort_inode (file_entry * a, file_entry * b)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-sort_size (file_entry * a, file_entry * b)
+sort_size (file_entry_t * a, file_entry_t * b)
 {
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
@@ -505,7 +505,7 @@ sort_size (file_entry * a, file_entry * b)
 void
 dir_list_sort (dir_list * list, GCompareFunc sort, const dir_sort_options_t * sort_op)
 {
-    file_entry *fentry;
+    file_entry_t *fentry;
     int dot_dot_found = 0;
 
     if (list->len < 2)
@@ -520,7 +520,7 @@ dir_list_sort (dir_list * list, GCompareFunc sort, const dir_sort_options_t * so
     reverse = sort_op->reverse ? -1 : 1;
     case_sensitive = sort_op->case_sensitive ? 1 : 0;
     exec_first = sort_op->exec_first;
-    qsort (&(list->list)[dot_dot_found], list->len - dot_dot_found, sizeof (file_entry), sort);
+    qsort (&(list->list)[dot_dot_found], list->len - dot_dot_found, sizeof (file_entry_t), sort);
 
     clean_sort_keys (list, dot_dot_found, list->len - dot_dot_found);
 }
@@ -534,7 +534,7 @@ dir_list_clean (dir_list * list)
 
     for (i = 0; i < list->len; i++)
     {
-        file_entry *fentry;
+        file_entry_t *fentry;
 
         fentry = &list->list[i];
         g_free (fentry->fname);
@@ -552,7 +552,7 @@ dir_list_clean (dir_list * list)
 gboolean
 dir_list_init (dir_list * list)
 {
-    file_entry *fentry;
+    file_entry_t *fentry;
 
     /* Need to grow the *list? */
     if (list->size == 0 && !dir_list_grow (list, DIR_LIST_RESIZE_STEP))
@@ -562,7 +562,7 @@ dir_list_init (dir_list * list)
     }
 
     fentry = &list->list[0];
-    memset (fentry, 0, sizeof (file_entry));
+    memset (fentry, 0, sizeof (file_entry_t));
     fentry->fnamelen = 2;
     fentry->fname = g_strndup ("..", fentry->fnamelen);
     fentry->f.link_to_dir = 0;
@@ -629,7 +629,7 @@ dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
     struct dirent *dp;
     int link_to_dir, stale_link;
     struct stat st;
-    file_entry *fentry;
+    file_entry_t *fentry;
 
     /* ".." (if any) must be the first entry in the list */
     if (!dir_list_init (list))
@@ -680,7 +680,7 @@ dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-if_link_is_exe (const vfs_path_t * full_name_vpath, const file_entry * file)
+if_link_is_exe (const vfs_path_t * full_name_vpath, const file_entry_t * file)
 {
     struct stat b;
 
@@ -719,7 +719,7 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
     alloc_dir_copy (list->len);
     for (marked_cnt = i = 0; i < list->len; i++)
     {
-        file_entry *fentry, *dfentry;
+        file_entry_t *fentry, *dfentry;
 
         fentry = &list->list[i];
         dfentry = &dir_copy.list[i];
@@ -754,7 +754,7 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
 
         if (dir_get_dotdot_stat (vpath, &st))
         {
-            file_entry *fentry;
+            file_entry_t *fentry;
 
             fentry = &list->list[0];
             fentry->st = st;
@@ -763,7 +763,7 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
 
     while ((dp = mc_readdir (dirp)) != NULL)
     {
-        file_entry *fentry;
+        file_entry_t *fentry;
         if (!handle_dirent (dp, fltr, &st, &link_to_dir, &stale_link))
             continue;
 

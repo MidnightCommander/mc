@@ -69,7 +69,7 @@ typedef struct
         unsigned int stale_link:1;      /* If this is a symlink and points to Charon's land */
         unsigned int dir_size_computed:1;       /* Size of directory was computed with dirsizes_cmd */
     } f;
-} file_entry;
+} file_entry_t;
 
 /*** global variables defined in .c file *********************************************************/
 

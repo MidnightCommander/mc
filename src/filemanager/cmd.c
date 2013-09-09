@@ -358,7 +358,7 @@ compare_dir (WPanel * panel, WPanel * other, enum CompareMode mode)
     /* Handle all files in the panel */
     for (i = 0; i < panel->dir.len; i++)
     {
-        file_entry *source = &panel->dir.list[i];
+        file_entry_t *source = &panel->dir.list[i];
 
         /* Default: unmarked */
         file_mark (panel, i, 0);
@@ -379,7 +379,7 @@ compare_dir (WPanel * panel, WPanel * other, enum CompareMode mode)
         else
         {
             /* Found */
-            file_entry *target = &other->dir.list[j];
+            file_entry_t *target = &other->dir.list[j];
 
             if (mode != compare_size_only)
             {
@@ -1056,7 +1056,7 @@ void
 select_invert_cmd (void)
 {
     int i;
-    file_entry *file;
+    file_entry_t *file;
 
     for (i = 0; i < current_panel->dir.len; i++)
     {
@@ -1604,7 +1604,7 @@ void
 smart_dirsize_cmd (void)
 {
     WPanel *panel = current_panel;
-    file_entry *entry;
+    file_entry_t *entry;
 
     entry = &(panel->dir.list[panel->selected]);
     if ((S_ISDIR (entry->st.st_mode) && DIR_IS_DOTDOT (entry->fname)) || panel->dirs_marked)
@@ -1619,7 +1619,7 @@ void
 single_dirsize_cmd (void)
 {
     WPanel *panel = current_panel;
-    file_entry *entry;
+    file_entry_t *entry;
 
     entry = &(panel->dir.list[panel->selected]);
     if (S_ISDIR (entry->st.st_mode) && !DIR_IS_DOTDOT (entry->fname))

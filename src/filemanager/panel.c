@@ -89,24 +89,24 @@ hook_t *select_file_hook = NULL;
 panelized_panel_t panelized_panel = { {NULL, 0, -1}, NULL };
 /* *INDENT-ON* */
 
-static const char *string_file_name (file_entry *, int);
-static const char *string_file_size (file_entry *, int);
-static const char *string_file_size_brief (file_entry *, int);
-static const char *string_file_type (file_entry *, int);
-static const char *string_file_mtime (file_entry *, int);
-static const char *string_file_atime (file_entry *, int);
-static const char *string_file_ctime (file_entry *, int);
-static const char *string_file_permission (file_entry *, int);
-static const char *string_file_perm_octal (file_entry *, int);
-static const char *string_file_nlinks (file_entry *, int);
-static const char *string_inode (file_entry *, int);
-static const char *string_file_nuid (file_entry *, int);
-static const char *string_file_ngid (file_entry *, int);
-static const char *string_file_owner (file_entry *, int);
-static const char *string_file_group (file_entry *, int);
-static const char *string_marked (file_entry *, int);
-static const char *string_space (file_entry *, int);
-static const char *string_dot (file_entry *, int);
+static const char *string_file_name (file_entry_t *, int);
+static const char *string_file_size (file_entry_t *, int);
+static const char *string_file_size_brief (file_entry_t *, int);
+static const char *string_file_type (file_entry_t *, int);
+static const char *string_file_mtime (file_entry_t *, int);
+static const char *string_file_atime (file_entry_t *, int);
+static const char *string_file_ctime (file_entry_t *, int);
+static const char *string_file_permission (file_entry_t *, int);
+static const char *string_file_perm_octal (file_entry_t *, int);
+static const char *string_file_nlinks (file_entry_t *, int);
+static const char *string_inode (file_entry_t *, int);
+static const char *string_file_nuid (file_entry_t *, int);
+static const char *string_file_ngid (file_entry_t *, int);
+static const char *string_file_owner (file_entry_t *, int);
+static const char *string_file_group (file_entry_t *, int);
+static const char *string_marked (file_entry_t *, int);
+static const char *string_space (file_entry_t *, int);
+static const char *string_dot (file_entry_t *, int);
 
 /* *INDENT-OFF* */
 panel_field_t panel_fields[] = {
@@ -345,7 +345,7 @@ typedef struct format_e
     int field_len;
     align_crt_t just_mode;
     int expand;
-    const char *(*string_fn) (file_entry *, int len);
+    const char *(*string_fn) (file_entry_t *, int len);
     char *title;
     const char *id;
 } format_e;
@@ -406,7 +406,7 @@ delete_format (format_e * format)
 /** This code relies on the default justification!!! */
 
 static void
-add_permission_string (const char *dest, int width, file_entry * fe, int attr, int color,
+add_permission_string (const char *dest, int width, file_entry_t * fe, int attr, int color,
                        int is_octal)
 {
     int i, r, l;
@@ -448,7 +448,7 @@ add_permission_string (const char *dest, int width, file_entry * fe, int attr, i
 /** String representations of various file attributes name */
 
 static const char *
-string_file_name (file_entry * fe, int len)
+string_file_name (file_entry_t * fe, int len)
 {
     static char buffer[MC_MAXPATHLEN * MB_LEN_MAX + 1];
 
@@ -496,7 +496,7 @@ format_device_number (char *buf, size_t bufsize, dev_t dev)
 /** size */
 
 static const char *
-string_file_size (file_entry * fe, int len)
+string_file_size (file_entry_t * fe, int len)
 {
     static char buffer[BUF_TINY];
 
@@ -519,7 +519,7 @@ string_file_size (file_entry * fe, int len)
 /** bsize */
 
 static const char *
-string_file_size_brief (file_entry * fe, int len)
+string_file_size_brief (file_entry_t * fe, int len)
 {
     if (S_ISLNK (fe->st.st_mode) && !fe->f.link_to_dir)
     {
@@ -538,7 +538,7 @@ string_file_size_brief (file_entry * fe, int len)
 /** This functions return a string representation of a file entry type */
 
 static const char *
-string_file_type (file_entry * fe, int len)
+string_file_type (file_entry_t * fe, int len)
 {
     static char buffer[2];
 
@@ -580,7 +580,7 @@ string_file_type (file_entry * fe, int len)
 /** mtime */
 
 static const char *
-string_file_mtime (file_entry * fe, int len)
+string_file_mtime (file_entry_t * fe, int len)
 {
     (void) len;
     return file_date (fe->st.st_mtime);
@@ -590,7 +590,7 @@ string_file_mtime (file_entry * fe, int len)
 /** atime */
 
 static const char *
-string_file_atime (file_entry * fe, int len)
+string_file_atime (file_entry_t * fe, int len)
 {
     (void) len;
     return file_date (fe->st.st_atime);
@@ -600,7 +600,7 @@ string_file_atime (file_entry * fe, int len)
 /** ctime */
 
 static const char *
-string_file_ctime (file_entry * fe, int len)
+string_file_ctime (file_entry_t * fe, int len)
 {
     (void) len;
     return file_date (fe->st.st_ctime);
@@ -610,7 +610,7 @@ string_file_ctime (file_entry * fe, int len)
 /** perm */
 
 static const char *
-string_file_permission (file_entry * fe, int len)
+string_file_permission (file_entry_t * fe, int len)
 {
     (void) len;
     return string_perm (fe->st.st_mode);
@@ -620,7 +620,7 @@ string_file_permission (file_entry * fe, int len)
 /** mode */
 
 static const char *
-string_file_perm_octal (file_entry * fe, int len)
+string_file_perm_octal (file_entry_t * fe, int len)
 {
     static char buffer[10];
 
@@ -633,7 +633,7 @@ string_file_perm_octal (file_entry * fe, int len)
 /** nlink */
 
 static const char *
-string_file_nlinks (file_entry * fe, int len)
+string_file_nlinks (file_entry_t * fe, int len)
 {
     static char buffer[BUF_TINY];
 
@@ -646,7 +646,7 @@ string_file_nlinks (file_entry * fe, int len)
 /** inode */
 
 static const char *
-string_inode (file_entry * fe, int len)
+string_inode (file_entry_t * fe, int len)
 {
     static char buffer[10];
 
@@ -659,7 +659,7 @@ string_inode (file_entry * fe, int len)
 /** nuid */
 
 static const char *
-string_file_nuid (file_entry * fe, int len)
+string_file_nuid (file_entry_t * fe, int len)
 {
     static char buffer[10];
 
@@ -672,7 +672,7 @@ string_file_nuid (file_entry * fe, int len)
 /** ngid */
 
 static const char *
-string_file_ngid (file_entry * fe, int len)
+string_file_ngid (file_entry_t * fe, int len)
 {
     static char buffer[10];
 
@@ -685,7 +685,7 @@ string_file_ngid (file_entry * fe, int len)
 /** owner */
 
 static const char *
-string_file_owner (file_entry * fe, int len)
+string_file_owner (file_entry_t * fe, int len)
 {
     (void) len;
     return get_owner (fe->st.st_uid);
@@ -695,7 +695,7 @@ string_file_owner (file_entry * fe, int len)
 /** group */
 
 static const char *
-string_file_group (file_entry * fe, int len)
+string_file_group (file_entry_t * fe, int len)
 {
     (void) len;
     return get_group (fe->st.st_gid);
@@ -705,7 +705,7 @@ string_file_group (file_entry * fe, int len)
 /** mark */
 
 static const char *
-string_marked (file_entry * fe, int len)
+string_marked (file_entry_t * fe, int len)
 {
     (void) len;
     return fe->f.marked ? "*" : " ";
@@ -715,7 +715,7 @@ string_marked (file_entry * fe, int len)
 /** space */
 
 static const char *
-string_space (file_entry * fe, int len)
+string_space (file_entry_t * fe, int len)
 {
     (void) fe;
     (void) len;
@@ -726,7 +726,7 @@ string_space (file_entry * fe, int len)
 /** dot */
 
 static const char *
-string_dot (file_entry * fe, int len)
+string_dot (file_entry_t * fe, int len)
 {
     (void) fe;
     (void) len;
@@ -736,7 +736,7 @@ string_dot (file_entry * fe, int len)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-file_compute_color (int attr, file_entry * fe)
+file_compute_color (int attr, file_entry_t * fe)
 {
     switch (attr)
     {
@@ -767,7 +767,7 @@ format_file (char *dest, int limit, WPanel * panel, int file_index, int width, i
     int color, length, empty_line;
     const char *txt;
     format_e *format, *home;
-    file_entry *fe;
+    file_entry_t *fe;
     filename_scroll_flag_t res = FILENAME_NOSCROLL;
 
     (void) dest;
@@ -2554,7 +2554,7 @@ stop_search (WPanel * panel)
 /** Return 1 if the Enter key has been processed, 0 otherwise */
 
 static int
-do_enter_on_file_entry (file_entry * fe)
+do_enter_on_file_entry_t (file_entry_t * fe)
 {
     vfs_path_t *full_name_vpath;
     gboolean ok;
@@ -2631,7 +2631,7 @@ do_enter_on_file_entry (file_entry * fe)
 static int
 do_enter (WPanel * panel)
 {
-    return do_enter_on_file_entry (selection (panel));
+    return do_enter_on_file_entry_t (selection (panel));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2639,7 +2639,7 @@ do_enter (WPanel * panel)
 static void
 chdir_other_panel (WPanel * panel)
 {
-    const file_entry *entry = &panel->dir.list[panel->selected];
+    const file_entry_t *entry = &panel->dir.list[panel->selected];
 
     vfs_path_t *new_dir_vpath;
     char *sel_entry = NULL;
@@ -3063,8 +3063,8 @@ _do_panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_
     /* Reload current panel */
     panel_clean_dir (panel);
 
-    dir_list_load (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine, &panel->sort_info,
-                   panel->filter);
+    dir_list_load (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine,
+                   &panel->sort_info, panel->filter);
     try_to_select (panel, get_parent_dir_name (panel->cwd_vpath, olddir_vpath));
 
     load_hint (0);
@@ -3653,7 +3653,8 @@ panel_event (Gpm_Event * event, void *data)
     {
         if (is_active)
         {
-            if (panels_options.mouse_move_pages && (panel->top_file + ITEMS (panel) < panel->dir.len))
+            if (panels_options.mouse_move_pages
+                && (panel->top_file + ITEMS (panel) < panel->dir.len))
                 next_page (panel);
             else                /* We are in last page */
                 move_down (panel);
@@ -4070,7 +4071,7 @@ panel_new_with_dir (const char *panel_name, const vfs_path_t * vpath)
     /* directories history will be get later */
 
     panel->dir.size = DIR_LIST_MIN_SIZE;
-    panel->dir.list = g_new (file_entry, panel->dir.size);
+    panel->dir.list = g_new (file_entry_t, panel->dir.size);
     panel->dir.len = 0;
     panel->active = 0;
     panel->filter = 0;
@@ -4138,8 +4139,8 @@ panel_new_with_dir (const char *panel_name, const vfs_path_t * vpath)
     }
 
     /* Load the default format */
-    dir_list_load (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine, &panel->sort_info,
-                   panel->filter);
+    dir_list_load (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine,
+                   &panel->sort_info, panel->filter);
 
     /* Restore old right path */
     if (curdir != NULL)
