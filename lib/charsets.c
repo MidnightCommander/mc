@@ -220,7 +220,7 @@ load_codepages_list (void)
         fprintf (stderr, "%s\n", _("Warning: cannot load codepages list"));
 
         codepages = g_ptr_array_new ();
-        g_ptr_array_add (codepages, new_codepage_desc ("ASCII", _("7-bit ASCII")));
+        g_ptr_array_add (codepages, new_codepage_desc (DEFAULT_CHARSET, _("7-bit ASCII")));
     }
 }
 

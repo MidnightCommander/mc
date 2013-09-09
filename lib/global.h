@@ -155,6 +155,8 @@
 
 #define MC_ERROR g_quark_from_static_string (PACKAGE)
 
+#define DEFAULT_CHARSET "ASCII"
+
 /*** enums ***************************************************************************************/
 
 /* run mode and params */
