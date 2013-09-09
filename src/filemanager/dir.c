@@ -130,10 +130,13 @@ clean_sort_keys (dir_list * list, int start, int count)
 
     for (i = 0; i < count; i++)
     {
-        str_release_key (list->list[i + start].sort_key, case_sensitive);
-        list->list[i + start].sort_key = NULL;
-        str_release_key (list->list[i + start].second_sort_key, case_sensitive);
-        list->list[i + start].second_sort_key = NULL;
+        file_entry *fentry;
+
+        fentry = &list->list[i + start];
+        str_release_key (fentry->sort_key, case_sensitive);
+        fentry->sort_key = NULL;
+        str_release_key (fentry->second_sort_key, case_sensitive);
+        fentry->second_sort_key = NULL;
     }
 }
 
@@ -227,7 +230,12 @@ alloc_dir_copy (int size)
             int i;
 
             for (i = 0; i < dir_copy.len; i++)
-                g_free (dir_copy.list[i].fname);
+            {
+                file_entry *fentry;
+
+                fentry = &(dir_copy.list)[i];
+                g_free (fentry->fname);
+            }
             g_free (dir_copy.list);
         }
 
@@ -299,22 +307,26 @@ dir_list_grow (dir_list * list, int delta)
  */
 
 gboolean
-dir_list_append (dir_list * list, const char *fname, const struct stat *st,
+dir_list_append (dir_list * list, const char *fname, const struct stat * st,
                  gboolean link_to_dir, gboolean stale_link)
 {
+    file_entry *fentry;
+
     /* Need to grow the *list? */
     if (list->len == list->size && !dir_list_grow (list, DIR_LIST_RESIZE_STEP))
         return FALSE;
 
-    list->list[list->len].fnamelen = strlen (fname);
-    list->list[list->len].fname = g_strndup (fname, list->list[list->len].fnamelen);
-    list->list[list->len].f.marked = 0;
-    list->list[list->len].f.link_to_dir = link_to_dir ? 1 : 0;
-    list->list[list->len].f.stale_link = stale_link ? 1 : 0;
-    list->list[list->len].f.dir_size_computed = 0;
-    list->list[list->len].st = *st;
-    list->list[list->len].sort_key = NULL;
-    list->list[list->len].second_sort_key = NULL;
+    fentry = &list->list[list->len];
+    fentry->fnamelen = strlen (fname);
+    fentry->fname = g_strndup (fname, fentry->fnamelen);
+    fentry->f.marked = 0;
+    fentry->f.link_to_dir = link_to_dir ? 1 : 0;
+    fentry->f.stale_link = stale_link ? 1 : 0;
+    fentry->f.dir_size_computed = 0;
+    fentry->st = *st;
+    fentry->sort_key = NULL;
+    fentry->second_sort_key = NULL;
+
     list->len++;
 
     return TRUE;
@@ -493,6 +505,7 @@ sort_size (file_entry * a, file_entry * b)
 void
 dir_list_sort (dir_list * list, GCompareFunc sort, const dir_sort_options_t * sort_op)
 {
+    file_entry *fentry;
     int dot_dot_found = 0;
 
     if (list->len < 2)
@@ -500,7 +513,8 @@ dir_list_sort (dir_list * list, GCompareFunc sort, const dir_sort_options_t * so
 
     /* If there is an ".." entry the caller must take care to
        ensure that it occupies the first list element. */
-    if (DIR_IS_DOTDOT (list->list[0].fname))
+    fentry = &list->list[0];
+    if (DIR_IS_DOTDOT (fentry->fname))
         dot_dot_found = 1;
 
     reverse = sort_op->reverse ? -1 : 1;
@@ -520,8 +534,11 @@ dir_list_clean (dir_list * list)
 
     for (i = 0; i < list->len; i++)
     {
-        g_free (list->list[i].fname);
-        list->list[i].fname = NULL;
+        file_entry *fentry;
+
+        fentry = &list->list[i];
+        g_free (fentry->fname);
+        fentry->fname = NULL;
     }
 
     list->len = 0;
@@ -535,6 +552,8 @@ dir_list_clean (dir_list * list)
 gboolean
 dir_list_init (dir_list * list)
 {
+    file_entry *fentry;
+
     /* Need to grow the *list? */
     if (list->size == 0 && !dir_list_grow (list, DIR_LIST_RESIZE_STEP))
     {
@@ -542,14 +561,15 @@ dir_list_init (dir_list * list)
         return FALSE;
     }
 
-    memset (&(list->list)[0], 0, sizeof (file_entry));
-    list->list[0].fnamelen = 2;
-    list->list[0].fname = g_strndup ("..", list->list[0].fnamelen);
-    list->list[0].f.link_to_dir = 0;
-    list->list[0].f.stale_link = 0;
-    list->list[0].f.dir_size_computed = 0;
-    list->list[0].f.marked = 0;
-    list->list[0].st.st_mode = 040755;
+    fentry = &list->list[0];
+    memset (fentry, 0, sizeof (file_entry));
+    fentry->fnamelen = 2;
+    fentry->fname = g_strndup ("..", fentry->fnamelen);
+    fentry->f.link_to_dir = 0;
+    fentry->f.stale_link = 0;
+    fentry->f.dir_size_computed = 0;
+    fentry->f.marked = 0;
+    fentry->st.st_mode = 040755;
     list->len = 1;
     return TRUE;
 }
@@ -564,7 +584,7 @@ dir_list_init (dir_list * list)
 /* Return values: FALSE = don't add, TRUE = add to the list */
 
 gboolean
-handle_path (const char *path, struct stat *buf1, int *link_to_dir, int *stale_link)
+handle_path (const char *path, struct stat * buf1, int *link_to_dir, int *stale_link)
 {
     vfs_path_t *vpath;
 
@@ -609,13 +629,15 @@ dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
     struct dirent *dp;
     int link_to_dir, stale_link;
     struct stat st;
+    file_entry *fentry;
 
     /* ".." (if any) must be the first entry in the list */
     if (!dir_list_init (list))
         return;
 
+    fentry = &list->list[0];
     if (dir_get_dotdot_stat (vpath, &st))
-        list->list[0].st = st;
+        fentry->st = st;
 
     dirp = mc_opendir (vpath);
     if (dirp == NULL)
@@ -697,17 +719,22 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
     alloc_dir_copy (list->len);
     for (marked_cnt = i = 0; i < list->len; i++)
     {
-        dir_copy.list[i].fnamelen = list->list[i].fnamelen;
-        dir_copy.list[i].fname = list->list[i].fname;
-        dir_copy.list[i].f.marked = list->list[i].f.marked;
-        dir_copy.list[i].f.dir_size_computed = list->list[i].f.dir_size_computed;
-        dir_copy.list[i].f.link_to_dir = list->list[i].f.link_to_dir;
-        dir_copy.list[i].f.stale_link = list->list[i].f.stale_link;
-        dir_copy.list[i].sort_key = NULL;
-        dir_copy.list[i].second_sort_key = NULL;
-        if (list->list[i].f.marked)
+        file_entry *fentry, *dfentry;
+
+        fentry = &list->list[i];
+        dfentry = &dir_copy.list[i];
+
+        dfentry->fnamelen = fentry->fnamelen;
+        dfentry->fname = fentry->fname;
+        dfentry->f.marked = fentry->f.marked;
+        dfentry->f.dir_size_computed = fentry->f.dir_size_computed;
+        dfentry->f.link_to_dir = fentry->f.link_to_dir;
+        dfentry->f.stale_link = fentry->f.stale_link;
+        dfentry->sort_key = NULL;
+        dfentry->second_sort_key = NULL;
+        if (fentry->f.marked)
         {
-            g_hash_table_insert (marked_files, dir_copy.list[i].fname, &dir_copy.list[i]);
+            g_hash_table_insert (marked_files, dfentry->fname, dfentry);
             marked_cnt++;
         }
     }
@@ -726,11 +753,17 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
         }
 
         if (dir_get_dotdot_stat (vpath, &st))
-            list->list[0].st = st;
+        {
+            file_entry *fentry;
+
+            fentry = &list->list[0];
+            fentry->st = st;
+        }
     }
 
     while ((dp = mc_readdir (dirp)) != NULL)
     {
+        file_entry *fentry;
         if (!handle_dirent (dp, fltr, &st, &link_to_dir, &stale_link))
             continue;
 
@@ -751,8 +784,9 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
             g_hash_table_destroy (marked_files);
             return;
         }
+        fentry = &list->list[list->len - 1];
 
-        list->list[list->len - 1].f.marked = 0;
+        fentry->f.marked = 0;
 
         /*
          * If we have marked files in the copy, scan through the copy
@@ -761,7 +795,7 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
          */
         if (marked_cnt > 0 && g_hash_table_lookup (marked_files, dp->d_name) != NULL)
         {
-            list->list[list->len - 1].f.marked = 1;
+            fentry->f.marked = 1;
             marked_cnt--;
         }
 
