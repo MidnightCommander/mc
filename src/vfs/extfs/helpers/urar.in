@@ -51,7 +51,7 @@ flag==1 {
 	    $1="-rw-r--r--"
     printf "%s 1 %s %s %d %02d/%02d/%02d %s ./", $1, uid, gid, $2, a[2], a[1], a[3], $6
     for (i = 8; i < NF; ++i)
-	printf "%s ", $i
+        printf "%s ", $i
     printf "%s\n", $NF
 }'
 }
