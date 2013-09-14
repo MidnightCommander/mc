@@ -690,6 +690,7 @@ extfs_get_path_int (const vfs_path_t * vpath, struct archive **archive, gboolean
             if (strcmp (parc->name, archive_name) == 0)
             {
                 vfs_stamp (&vfs_extfs_ops, (vfsid) parc);
+                g_free (archive_name);
                 goto return_success;
             }
         }
