@@ -23,6 +23,8 @@
 #	2009: Totally rewritten.
 #  Alexander Chumachenko <ledest@gmail.com>
 #	2013: add dependency version output
+#  Denis Silakov <denis.silakov@rosalab.ru>
+#	2013: tar payload support.
 #
 #  This file is part of the Midnight Commander.
 #
@@ -197,6 +199,7 @@ mcrpmfs_list ()
 	exit 1
     }
     DATE=`mcrpmfs_getRawOneTag "%{BUILDTIME:date}\n" | cut -c 5-11,21-24`
+    PAYLOAD=`mcrpmfs_getRawOneTag "%{PAYLOADFORMAT}\n" | sed s/ustar/tar/`
 
     HEADERSIZE=`echo "$DESC" | wc -c`
     printf '%s %s %s HEADER\n' "${FILEPREF}"  "${HEADERSIZE}" "${DATE}"
@@ -226,7 +229,7 @@ mcrpmfs_list ()
 	mcrpmfs_list_fastRPM
     fi
 
-    echo "$FILEPREF 0 $DATE CONTENTS.cpio"
+    echo "$FILEPREF 0 $DATE CONTENTS.$PAYLOAD"
 }
 
 mcrpmfs_copyout ()
@@ -280,7 +283,7 @@ mcrpmfs_copyout ()
 	INFO/SIZE)		mcrpmfs_getRawOneTag "%{SIZE} bytes\n" > "$2"; exit 0;;
 	INFO/OBSOLETES)		mcrpmfs_getRawOneTag "[%{OBSOLETENAME} %|OBSOLETEFLAGS?{%{OBSOLETEFLAGS:depflags} %{OBSOLETEVERSION}}:{}|\n]" > "$2"; exit 0;;
 	INFO/CONFLICTS)		mcrpmfs_getRawOneTag "[%{CONFLICTNAME} %{CONFLICTFLAGS:depflags} %{CONFLICTVERSION}\n]" >"$2"; exit 0;;
-	CONTENTS.cpio)		$RPM2CPIO "${rpm_filename}" > "$2"; exit 0;;
+	CONTENTS.*)		$RPM2CPIO "${rpm_filename}" > "$2"; exit 0;;
 	*)
 	    ;;
     esac
