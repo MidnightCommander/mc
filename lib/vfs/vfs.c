@@ -354,7 +354,7 @@ vfs_translate_path_n (const char *path)
     const char *result;
 
     result = vfs_translate_path (path);
-    return (result != NULL) ? g_strdup (result) : NULL;
+    return g_strdup (result);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -449,7 +449,7 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
 
     current_archive = g_new (struct archive, 1);
     current_archive->fstype = fstype;
-    current_archive->name = (name != NULL) ? g_strdup (name) : NULL;
+    current_archive->name = g_strdup (name);
     current_archive->local_name = g_strdup (vfs_path_get_last_path_str (local_name_vpath));
 
     if (local_name_vpath != NULL)
