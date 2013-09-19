@@ -1272,8 +1272,8 @@ panel_compute_totals (const WPanel * panel, void *ui, compute_dir_size_callback 
 
 /** Initialize variables for progress bars */
 static FileProgressStatus
-panel_operate_init_totals (FileOperation operation, const WPanel * panel, const char *source,
-                           FileOpContext * ctx, filegui_dialog_type_t dialog_type)
+panel_operate_init_totals (const WPanel * panel, const char *source, FileOpContext * ctx,
+                           filegui_dialog_type_t dialog_type)
 {
     FileProgressStatus status;
 
@@ -1282,7 +1282,7 @@ panel_operate_init_totals (FileOperation operation, const WPanel * panel, const 
         return FILE_CONT;
 #endif
 
-    if (operation != OP_MOVE && verbose && file_op_compute_totals)
+    if (verbose && file_op_compute_totals)
     {
         ComputeDirSizeUI *ui;
 
@@ -2378,13 +2378,6 @@ move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, con
     mc_refresh ();
     if (ctx->erase_at_end)
     {
-        /* remove files after move */
-        if (erase_list != NULL)
-        {
-            file_op_context_destroy_ui (ctx);
-            file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_DELETE_ITEM);
-        }
-
         while (erase_list != NULL && return_status != FILE_ABORT)
         {
             struct link *lp = (struct link *) erase_list->data;
@@ -2792,14 +2785,12 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     {
         if (operation == OP_DELETE)
             dialog_type = FILEGUI_DIALOG_DELETE_ITEM;
+        else if (single_entry && S_ISDIR (selection (panel)->st.st_mode))
+            dialog_type = FILEGUI_DIALOG_MULTI_ITEM;
+        else if (single_entry || force_single)
+            dialog_type = FILEGUI_DIALOG_ONE_ITEM;
         else
-        {
-            dialog_type = ((operation != OP_COPY) || single_entry || force_single)
-                ? FILEGUI_DIALOG_ONE_ITEM : FILEGUI_DIALOG_MULTI_ITEM;
-
-            if (single_entry && (operation == OP_COPY) && S_ISDIR (selection (panel)->st.st_mode))
-                dialog_type = FILEGUI_DIALOG_MULTI_ITEM;
-        }
+            dialog_type = FILEGUI_DIALOG_MULTI_ITEM;
     }
 
     /* Initialize things */
@@ -2844,8 +2835,8 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         else
             source_with_vpath = vfs_path_append_new (panel->cwd_vpath, source, (char *) NULL);
 #endif /* WITH_FULL_PATHS */
-        if (panel_operate_init_totals
-            (operation, panel, vfs_path_as_str (source_with_vpath), ctx, dialog_type) == FILE_CONT)
+        if (panel_operate_init_totals (panel, vfs_path_as_str (source_with_vpath), ctx, dialog_type)
+            == FILE_CONT)
         {
             if (operation == OP_DELETE)
             {
@@ -2936,7 +2927,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 goto clean_up;
         }
 
-        if (panel_operate_init_totals (operation, panel, NULL, ctx, dialog_type) == FILE_CONT)
+        if (panel_operate_init_totals (panel, NULL, ctx, dialog_type) == FILE_CONT)
         {
             /* Loop for every file, perform the actual copy operation */
             for (i = 0; i < panel->count; i++)
