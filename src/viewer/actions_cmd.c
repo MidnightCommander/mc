@@ -286,7 +286,6 @@ mcview_load_next_prev_init (mcview_t * view)
     {
         /* get file list from current panel. Update it each time */
         view->dir = &current_panel->dir;
-        view->dir_count = &current_panel->count;
         view->dir_idx = &current_panel->selected;
     }
     else if (view->dir == NULL)
@@ -299,22 +298,21 @@ mcview_load_next_prev_init (mcview_t * view)
         const char *fname;
         size_t fname_len;
         int i;
+        dir_sort_options_t sort_op = { FALSE, TRUE, FALSE };
 
         /* load directory where requested file is */
         view->dir = g_new0 (dir_list, 1);
-        view->dir_count = g_new (int, 1);
         view->dir_idx = g_new (int, 1);
 
-        *view->dir_count = do_load_dir (view->workdir_vpath, view->dir, (sortfn *) sort_name, FALSE,
-                                        TRUE, FALSE, NULL);
+        dir_list_load (view->dir, view->workdir_vpath, (GCompareFunc) sort_name, &sort_op, NULL);
 
         fname = x_basename (vfs_path_as_str (view->filename_vpath));
         fname_len = strlen (fname);
 
         /* search current file in the list */
-        for (i = 0; i != *view->dir_count; i++)
+        for (i = 0; i != view->dir->len; i++)
         {
-            const file_entry *fe = &view->dir->list[i];
+            const file_entry_t *fe = &view->dir->list[i];
 
             if (fname_len == fe->fnamelen && strncmp (fname, fe->fname, fname_len) == 0)
                 break;
@@ -334,8 +332,8 @@ mcview_scan_for_file (mcview_t * view, int direction)
     for (i = *view->dir_idx + direction; i != *view->dir_idx; i += direction)
     {
         if (i < 0)
-            i = *view->dir_count - 1;
-        if (i == *view->dir_count)
+            i = view->dir->len - 1;
+        if (i == view->dir->len)
             i = 0;
         if (!S_ISDIR (view->dir->list[i].st.st_mode))
             break;
@@ -350,7 +348,7 @@ static void
 mcview_load_next_prev (mcview_t * view, int direction)
 {
     dir_list *dir;
-    int *dir_count, *dir_idx;
+    int *dir_idx;
     vfs_path_t *vfile;
     vfs_path_t *ext_script = NULL;
 
@@ -359,10 +357,8 @@ mcview_load_next_prev (mcview_t * view, int direction)
 
     /* reinit view */
     dir = view->dir;
-    dir_count = view->dir_count;
     dir_idx = view->dir_idx;
     view->dir = NULL;
-    view->dir_count = NULL;
     view->dir_idx = NULL;
     vfile = vfs_path_append_new (view->workdir_vpath, dir->list[*dir_idx].fname, (char *) NULL);
     mcview_done (view);
@@ -372,7 +368,6 @@ mcview_load_next_prev (mcview_t * view, int direction)
         mcview_load (view, NULL, vfs_path_as_str (vfile), 0);
     vfs_path_free (vfile);
     view->dir = dir;
-    view->dir_count = dir_count;
     view->dir_idx = dir_idx;
     view->ext_script = ext_script;
 

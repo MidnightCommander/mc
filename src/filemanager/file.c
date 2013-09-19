@@ -1214,7 +1214,7 @@ panel_get_file (WPanel * panel)
     {
         int i;
 
-        for (i = 0; i < panel->count; i++)
+        for (i = 0; i < panel->dir.len; i++)
             if (panel->dir.list[i].f.marked)
                 return g_strdup (panel->dir.list[i].fname);
     }
@@ -1237,7 +1237,7 @@ panel_compute_totals (const WPanel * panel, void *ui, compute_dir_size_callback 
 {
     int i;
 
-    for (i = 0; i < panel->count; i++)
+    for (i = 0; i < panel->dir.len; i++)
     {
         struct stat *s;
 
@@ -2930,7 +2930,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         if (panel_operate_init_totals (panel, NULL, ctx, dialog_type) == FILE_CONT)
         {
             /* Loop for every file, perform the actual copy operation */
-            for (i = 0; i < panel->count; i++)
+            for (i = 0; i < panel->dir.len; i++)
             {
                 const char *source2;
 

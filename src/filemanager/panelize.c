@@ -311,8 +311,7 @@ remove_from_panelize (struct panelize *entry)
 static void
 do_external_panelize (char *command)
 {
-    int status, link_to_dir, stale_link;
-    int next_free = 0;
+    int link_to_dir, stale_link;
     struct stat st;
     dir_list *list = &current_panel->dir;
     char line[MC_MAXPATHLEN];
@@ -331,10 +330,9 @@ do_external_panelize (char *command)
 
     panelize_change_root (current_panel->cwd_vpath);
 
-    if (set_zero_dir (list))
-        next_free++;
+    dir_list_init (list);
 
-    while (1)
+    while (TRUE)
     {
         clearerr (external);
         if (fgets (line, MC_MAXPATHLEN, external) == NULL)
@@ -352,45 +350,36 @@ do_external_panelize (char *command)
             name = line + 2;
         else
             name = line;
-        status = handle_path (list, name, &st, next_free, &link_to_dir, &stale_link);
-        if (status == 0)
+
+        if (!handle_path (name, &st, &link_to_dir, &stale_link))
             continue;
-        if (status == -1)
+
+        if (!dir_list_append (list, name, &st, link_to_dir != 0, stale_link != 0))
             break;
-        list->list[next_free].fnamelen = strlen (name);
-        list->list[next_free].fname = g_strndup (name, list->list[next_free].fnamelen);
-        file_mark (current_panel, next_free, 0);
-        list->list[next_free].f.link_to_dir = link_to_dir;
-        list->list[next_free].f.stale_link = stale_link;
-        list->list[next_free].f.dir_size_computed = 0;
-        list->list[next_free].st = st;
-        list->list[next_free].sort_key = NULL;
-        list->list[next_free].second_sort_key = NULL;
-        next_free++;
-        if ((next_free & 32) == 0)
+
+        file_mark (current_panel, list->len - 1, 0);
+
+        if ((list->len & 31) == 0)
             rotate_dash (TRUE);
     }
 
     current_panel->is_panelized = TRUE;
-    if (next_free)
-    {
-        current_panel->count = next_free;
-        if (list->list[0].fname[0] == PATH_SEP)
-        {
-            vfs_path_t *vpath_root;
-            int ret;
 
-            vpath_root = vfs_path_from_str (PATH_SEP_STR);
-            panel_set_cwd (current_panel, vpath_root);
-            ret = mc_chdir (vpath_root);
-            vfs_path_free (vpath_root);
-            (void) ret;
-        }
-    }
-    else
+    if (list->len == 0)
+        dir_list_init (list);
+    else if (list->list[0].fname[0] == PATH_SEP)
     {
-        current_panel->count = set_zero_dir (list) ? 1 : 0;
+        vfs_path_t *vpath_root;
+        int ret;
+
+        vpath_root = vfs_path_from_str (PATH_SEP_STR);
+        panel_set_cwd (current_panel, vpath_root);
+        ret = mc_chdir (vpath_root);
+        vfs_path_free (vpath_root);
+
+        (void) ret;
     }
+
     if (pclose (external) < 0)
         message (D_NORMAL, _("External panelize"), _("Pipe close failed"));
     close_error_pipe (D_NORMAL, NULL);
@@ -405,29 +394,25 @@ static void
 do_panelize_cd (struct WPanel *panel)
 {
     int i;
-    dir_list *list = &panel->dir;
+    dir_list *list;
     gboolean panelized_same;
 
-    clean_dir (list, panel->count);
+    dir_list_clean (&panel->dir);
     if (panelized_panel.root_vpath == NULL)
         panelize_change_root (current_panel->cwd_vpath);
 
-    if (panelized_panel.count < 1)
-    {
-        if (set_zero_dir (&panelized_panel.list))
-            panelized_panel.count = 1;
-    }
-    else if (panelized_panel.count >= list->size)
-    {
-        list->list = g_try_realloc (list->list, sizeof (file_entry) * panelized_panel.count);
-        list->size = panelized_panel.count;
-    }
-    panel->count = panelized_panel.count;
+    if (panelized_panel.list.len < 1)
+        dir_list_init (&panelized_panel.list);
+    else if (panelized_panel.list.len > panel->dir.size)
+        dir_list_grow (&panel->dir, panelized_panel.list.len - panel->dir.size);
+
+    list = &panel->dir;
+    list->len = panelized_panel.list.len;
     panel->is_panelized = TRUE;
 
-    panelized_same = (vfs_path_equal (panelized_panel.root_vpath, panel->cwd_vpath));
+    panelized_same = vfs_path_equal (panelized_panel.root_vpath, panel->cwd_vpath);
 
-    for (i = 0; i < panelized_panel.count; i++)
+    for (i = 0; i < panelized_panel.list.len; i++)
     {
         if (panelized_same || DIR_IS_DOTDOT (panelized_panel.list.list[i].fname))
         {
@@ -438,13 +423,15 @@ do_panelize_cd (struct WPanel *panel)
         else
         {
             vfs_path_t *tmp_vpath;
+            const char *tmp_path;
 
             tmp_vpath =
                 vfs_path_append_new (panelized_panel.root_vpath, panelized_panel.list.list[i].fname,
                                      NULL);
-            list->list[i].fname = g_strdup (vfs_path_as_str (tmp_vpath));
+            tmp_path = vfs_path_as_str (tmp_vpath);
+            list->list[i].fnamelen = strlen (tmp_path);
+            list->list[i].fname = g_strndup (tmp_path, list->list[i].fnamelen);
             vfs_path_free (tmp_vpath);
-            list->list[i].fnamelen = strlen (list->list[i].fname);
         }
         list->list[i].f.link_to_dir = panelized_panel.list.list[i].f.link_to_dir;
         list->list[i].f.stale_link = panelized_panel.list.list[i].f.stale_link;
@@ -482,19 +469,16 @@ panelize_save_panel (struct WPanel *panel)
 
     panelize_change_root (current_panel->cwd_vpath);
 
-    if (panelized_panel.count > 0)
-        clean_dir (&panelized_panel.list, panelized_panel.count);
-    if (panel->count < 1)
+    if (panelized_panel.list.len > 0)
+        dir_list_clean (&panelized_panel.list);
+    if (panel->dir.len == 0)
         return;
 
-    panelized_panel.count = panel->count;
-    if (panel->count >= panelized_panel.list.size)
-    {
-        panelized_panel.list.list = g_try_realloc (panelized_panel.list.list,
-                                                   sizeof (file_entry) * panel->count);
-        panelized_panel.list.size = panel->count;
-    }
-    for (i = 0; i < panel->count; i++)
+    if (panel->dir.len > panelized_panel.list.size)
+        dir_list_grow (&panelized_panel.list, panel->dir.len - panelized_panel.list.size);
+    panelized_panel.list.len = panel->dir.len;
+
+    for (i = 0; i < panel->dir.len; i++)
     {
         panelized_panel.list.list[i].fnamelen = list->list[i].fnamelen;
         panelized_panel.list.list[i].fname =

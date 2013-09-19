@@ -7,6 +7,7 @@
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -883,7 +884,7 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
 
             block = g_string_sized_new (16);
 
-            for (i = 0; i < panel->count; i++)
+            for (i = 0; i < panel->dir.len; i++)
                 if (panel->dir.list[i].f.marked)
                 {
                     char *tmp;

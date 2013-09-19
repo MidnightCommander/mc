@@ -184,8 +184,6 @@ struct mcview_struct
 
     dir_list *dir;              /* List of current directory files
                                  * to handle CK_FileNext and CK_FilePrev commands */
-    int *dir_count;             /* Number of files in dir structure.
-                                 * Pointer is used here as reference to WPanel::count */
     int *dir_idx;               /* Index of current file in dir structure.
                                  * Pointer is used here as reference to WPanel::count */
     vfs_path_t *ext_script;     /* Temporary script file created by regex_command_for() */

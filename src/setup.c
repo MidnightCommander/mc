@@ -1385,9 +1385,9 @@ panel_load_setup (WPanel * panel, const char *section)
 
     /* Load sort order */
     buffer = mc_config_get_string (mc_panels_config, section, "sort_order", "name");
-    panel->sort_info.sort_field = panel_get_field_by_id (buffer);
-    if (panel->sort_info.sort_field == NULL)
-        panel->sort_info.sort_field = panel_get_field_by_id ("name");
+    panel->sort_field = panel_get_field_by_id (buffer);
+    if (panel->sort_field == NULL)
+        panel->sort_field = panel_get_field_by_id ("name");
 
     g_free (buffer);
 
@@ -1431,7 +1431,7 @@ panel_save_setup (struct WPanel *panel, const char *section)
                        panel->sort_info.case_sensitive);
     mc_config_set_int (mc_panels_config, section, "exec_first", panel->sort_info.exec_first);
 
-    mc_config_set_string (mc_panels_config, section, "sort_order", panel->sort_info.sort_field->id);
+    mc_config_set_string (mc_panels_config, section, "sort_order", panel->sort_field->id);
 
     for (i = 0; list_types[i].key != NULL; i++)
         if (list_types[i].list_type == panel->list_type)

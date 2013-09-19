@@ -51,8 +51,9 @@ setup (void)
     mc_global.mc_run_mode = MC_RUN_FULL;
     current_panel = g_new0 (struct WPanel, 1);
     current_panel->cwd_vpath = vfs_path_from_str ("/home");
-    current_panel->dir.list = g_new0 (file_entry, MIN_FILES);
-    current_panel->dir.size = MIN_FILES;
+    current_panel->dir.size = DIR_LIST_MIN_SIZE;
+    current_panel->dir.list = g_new0 (file_entry_t, current_panel->dir.size);
+    current_panel->dir.len = 0;
 }
 
 static void
@@ -74,12 +75,12 @@ START_TEST (sanitize_variables)
     const char *expected_string;
 
     current_panel->selected = 0;
+    current_panel->dir.len = 3;
     current_panel->dir.list[0].fname = (char *) "selected file.txt";
     current_panel->dir.list[1].fname = (char *) "tagged file1.txt";
     current_panel->dir.list[1].f.marked = TRUE;
     current_panel->dir.list[2].fname = (char *) "tagged file2.txt";
     current_panel->dir.list[2].f.marked = TRUE;
-    current_panel->count = 3;
 
     /* when */
     filename_vpath = vfs_path_from_str ("/tmp/blabla.txt");
