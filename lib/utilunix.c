@@ -844,7 +844,7 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                     while (p >= lpath && *p != PATH_SEP)
                         p--;
 
-                    if (p != NULL)
+                    if (p >= lpath)
                         continue;
                 }
 #endif /* HAVE_CHARSET */
@@ -856,7 +856,6 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                     else
                         s[-1] = '\0';
                 }
-                break;
             }
 
             break;
