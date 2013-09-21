@@ -390,7 +390,7 @@ find_check_regexp (const char *r)
     mc_search_t *search;
     gboolean regexp_ok = FALSE;
 
-    search = mc_search_new (r, -1);
+    search = mc_search_new (r, -1, NULL);
 
     if (search != NULL)
     {
@@ -1625,19 +1625,23 @@ run_process (void)
 {
     int ret;
 
-    search_content_handle = mc_search_new (content_pattern, -1);
+    search_content_handle = mc_search_new (content_pattern, -1, NULL);
     if (search_content_handle)
     {
         search_content_handle->search_type =
             options.content_regexp ? MC_SEARCH_T_REGEX : MC_SEARCH_T_NORMAL;
         search_content_handle->is_case_sensitive = options.content_case_sens;
         search_content_handle->whole_words = options.content_whole_words;
+#ifdef HAVE_CHARSET
         search_content_handle->is_all_charsets = options.content_all_charsets;
+#endif
     }
-    search_file_handle = mc_search_new (find_pattern, -1);
+    search_file_handle = mc_search_new (find_pattern, -1, NULL);
     search_file_handle->search_type = options.file_pattern ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
     search_file_handle->is_case_sensitive = options.file_case_sens;
+#ifdef HAVE_CHARSET
     search_file_handle->is_all_charsets = options.file_all_charsets;
+#endif
     search_file_handle->is_entire_line = options.file_pattern;
 
     resuming = FALSE;

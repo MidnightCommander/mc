@@ -1314,12 +1314,12 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
             /* 3: auto-detect rule set from regular expressions */
             int q;
 
-            q = mc_search (args[1], editor_file, MC_SEARCH_T_REGEX);
+            q = mc_search (args[1], DEFAULT_CHARSET, editor_file, MC_SEARCH_T_REGEX);
             /* does filename match arg 1 ? */
             if (!q && args[3])
             {
                 /* does first line match arg 3 ? */
-                q = mc_search (args[3], first_line, MC_SEARCH_T_REGEX);
+                q = mc_search (args[3], DEFAULT_CHARSET, first_line, MC_SEARCH_T_REGEX);
             }
             if (q)
             {

@@ -247,13 +247,14 @@ test_condition (WEdit * edit_widget, char *p, int *condition)
                 char *edit_filename;
 
                 edit_filename = edit_get_file_name (edit_widget);
-                *condition = mc_search (arg, edit_filename, search_type) ? 1 : 0;
+                *condition = mc_search (arg, DEFAULT_CHARSET, edit_filename, search_type) ? 1 : 0;
                 g_free (edit_filename);
             }
             else
 #endif
                 *condition = panel != NULL &&
-                    mc_search (arg, panel->dir.list[panel->selected].fname, search_type) ? 1 : 0;
+                    mc_search (arg, DEFAULT_CHARSET, panel->dir.list[panel->selected].fname,
+                               search_type) ? 1 : 0;
             break;
         case 'y':              /* syntax pattern */
 #ifdef USE_INTERNAL_EDIT
@@ -263,7 +264,8 @@ test_condition (WEdit * edit_widget, char *p, int *condition)
                 if (syntax_type != NULL)
                 {
                     p = extract_arg (p, arg, sizeof (arg));
-                    *condition = mc_search (arg, syntax_type, MC_SEARCH_T_NORMAL) ? 1 : 0;
+                    *condition =
+                        mc_search (arg, DEFAULT_CHARSET, syntax_type, MC_SEARCH_T_NORMAL) ? 1 : 0;
                 }
             }
 #endif
@@ -271,7 +273,8 @@ test_condition (WEdit * edit_widget, char *p, int *condition)
         case 'd':
             p = extract_arg (p, arg, sizeof (arg));
             *condition = panel != NULL
-                && mc_search (arg, vfs_path_as_str (panel->cwd_vpath), search_type) ? 1 : 0;
+                && mc_search (arg, DEFAULT_CHARSET, vfs_path_as_str (panel->cwd_vpath),
+                              search_type) ? 1 : 0;
             break;
         case 't':
             p = extract_arg (p, arg, sizeof (arg));
@@ -639,7 +642,7 @@ check_format_view (const char *p)
         {
             for (q++; *q && *q != '}'; q++)
             {
-                if (!strncmp (q, "ascii", 5))
+                if (!strncmp (q, DEFAULT_CHARSET, 5))
                 {
                     mcview_default_hex_mode = 0;
                     q += 4;

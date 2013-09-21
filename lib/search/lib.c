@@ -64,7 +64,8 @@ mc_search__recode_str (const char *str, gsize str_len,
     gsize bytes_read;
     GIConv conv;
 
-    if (charset_from == NULL || charset_to == NULL || !strcmp (charset_to, charset_from))
+    if (charset_from == NULL || charset_to == NULL
+        || g_ascii_strcasecmp (charset_to, charset_from) == 0)
     {
         *bytes_written = str_len;
         return g_strndup (str, str_len);

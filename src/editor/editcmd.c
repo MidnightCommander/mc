@@ -1177,7 +1177,11 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
     off_t last_byte, start = -1;
     char *current_word;
 
-    srch = mc_search_new (match_expr, -1);
+#ifdef HAVE_CHARSET
+    srch = mc_search_new (match_expr, -1, cp_source);
+#else
+    srch = mc_search_new (match_expr, -1, NULL);
+#endif
     if (srch == NULL)
         return 0;
 
@@ -2510,16 +2514,22 @@ edit_replace_cmd (WEdit * edit, int again)
 
     input2_str = g_string_new (input2);
 
-    if (!edit->search)
+    if (edit->search == NULL)
     {
-        edit->search = mc_search_new (input1, -1);
+#ifdef HAVE_CHARSET
+        edit->search = mc_search_new (input1, -1, cp_source);
+#else
+        edit->search = mc_search_new (input1, -1, NULL);
+#endif
         if (edit->search == NULL)
         {
             edit->search_start = edit->buffer.curs1;
             goto cleanup;
         }
         edit->search->search_type = edit_search_options.type;
+#ifdef HAVE_CHARSET
         edit->search->is_all_charsets = edit_search_options.all_codepages;
+#endif
         edit->search->is_case_sensitive = edit_search_options.case_sens;
         edit->search->whole_words = edit_search_options.whole_words;
         edit->search->search_fn = edit_search_cmd_callback;
@@ -2706,7 +2716,11 @@ edit_search_cmd (WEdit * edit, gboolean again)
             g_list_foreach (history, (GFunc) g_free, NULL);
             g_list_free (history);
 
-            edit->search = mc_search_new (edit->last_search_string, -1);
+#ifdef HAVE_CHARSET
+            edit->search = mc_search_new (edit->last_search_string, -1, cp_source);
+#else
+            edit->search = mc_search_new (edit->last_search_string, -1, NULL);
+#endif
             if (edit->search == NULL)
             {
                 /* if not... then ask for an expression */
@@ -2717,7 +2731,9 @@ edit_search_cmd (WEdit * edit, gboolean again)
             else
             {
                 edit->search->search_type = edit_search_options.type;
+#ifdef HAVE_CHARSET
                 edit->search->is_all_charsets = edit_search_options.all_codepages;
+#endif
                 edit->search->is_case_sensitive = edit_search_options.case_sens;
                 edit->search->whole_words = edit_search_options.whole_words;
                 edit->search->search_fn = edit_search_cmd_callback;

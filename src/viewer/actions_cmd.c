@@ -146,7 +146,11 @@ mcview_continue_search_cmd (mcview_t * view)
             g_list_foreach (history, (GFunc) g_free, NULL);
             g_list_free (history);
 
-            view->search = mc_search_new (view->last_search_string, -1);
+#ifdef HAVE_CHARSET
+            view->search = mc_search_new (view->last_search_string, -1, cp_source);
+#else
+            view->search = mc_search_new (view->last_search_string, -1, NULL);
+#endif
             view->search_nroff_seq = mcview_nroff_seq_new (view);
 
             if (view->search == NULL)
@@ -159,7 +163,9 @@ mcview_continue_search_cmd (mcview_t * view)
             else
             {
                 view->search->search_type = mcview_search_options.type;
+#ifdef HAVE_CHARSET
                 view->search->is_all_charsets = mcview_search_options.all_codepages;
+#endif
                 view->search->is_case_sensitive = mcview_search_options.case_sens;
                 view->search->whole_words = mcview_search_options.whole_words;
                 view->search->search_fn = mcview_search_cmd_callback;

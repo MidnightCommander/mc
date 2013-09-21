@@ -370,7 +370,7 @@ str_init_strings (const char *termenc)
         if (str_cnv_not_convert == INVALID_CONV)
         {
             g_free (codeset);
-            codeset = g_strdup ("ASCII");
+            codeset = g_strdup (DEFAULT_CHARSET);
             str_cnv_not_convert = g_iconv_open (codeset, codeset);
         }
     }
