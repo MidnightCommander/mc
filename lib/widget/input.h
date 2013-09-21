@@ -56,7 +56,7 @@ typedef struct
     gboolean first;             /* is first keystroke? */
     int disable_update;         /* do we want to skip updates? */
     gboolean is_password;       /* is this a password input line? */
-    char *init_text;            /* initial text of input line */
+    gboolean init_from_history; /* init text will be get from history */
     char *buffer;               /* pointer to editing buffer */
     char *history_name;         /* name of history for loading and saving */
     GList *history;             /* the history */

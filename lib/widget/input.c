@@ -834,8 +834,6 @@ input_load_history (const gchar * event_group_name, const gchar * event_name,
 {
     WInput *in = INPUT (init_data);
     ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
-    const char *def_text;
-    size_t buffer_len;
 
     (void) event_group_name;
     (void) event_name;
@@ -843,27 +841,15 @@ input_load_history (const gchar * event_group_name, const gchar * event_name,
     in->history = history_load (ev->cfg, in->history_name);
     in->history_current = in->history;
 
-    if (in->init_text == NULL)
-        def_text = "";
-    else if (in->init_text == INPUT_LAST_TEXT)
+    if (in->init_from_history)
     {
+        const char *def_text = "";
+
         if (in->history != NULL && in->history->data != NULL)
             def_text = (const char *) in->history->data;
-        else
-            def_text = "";
 
-        in->init_text = NULL;
+        input_assign_text (in, def_text);
     }
-    else
-        def_text = in->init_text;
-
-    buffer_len = strlen (def_text);
-    buffer_len = 1 + max ((size_t) in->field_width, buffer_len);
-    in->current_max_size = buffer_len;
-    if (buffer_len > (size_t) in->field_width)
-        in->buffer = g_realloc (in->buffer, buffer_len);
-    strcpy (in->buffer, def_text);
-    in->point = str_length (in->buffer);
 
     return TRUE;
 }
@@ -915,9 +901,7 @@ input_destroy (WInput * in)
         g_list_free (in->history);
     }
     g_free (in->history_name);
-
     g_free (in->buffer);
-    g_free (in->init_text);
 
     g_free (kill_buffer);
     kill_buffer = NULL;
@@ -1024,21 +1008,23 @@ input_new (int y, int x, const int *input_colors, int width, const char *def_tex
     in->highlight = FALSE;
     in->term_first_shown = 0;
     in->disable_update = 0;
-    in->mark = 0;
-    in->need_push = TRUE;
     in->is_password = FALSE;
-    in->charpoint = 0;
     in->strip_password = FALSE;
 
     /* in->buffer will be corrected in "history_load" event handler */
     in->current_max_size = width + 1;
     in->buffer = g_new0 (char, in->current_max_size);
-    in->point = 0;
 
-    in->init_text = (def_text == INPUT_LAST_TEXT) ? INPUT_LAST_TEXT : g_strdup (def_text);
-
+    /* init completions before input_assign_text() call */
     in->completions = NULL;
     in->completion_flags = completion_flags;
+
+    in->init_from_history = (def_text == INPUT_LAST_TEXT);
+
+    if (in->init_from_history || def_text == NULL)
+        def_text = "";
+
+    input_assign_text (in, def_text);
 
     /* prepare to history setup */
     in->history = NULL;
@@ -1209,14 +1195,23 @@ input_key_is_in_map (WInput * in, int key)
 void
 input_assign_text (WInput * in, const char *text)
 {
+    size_t text_len, buffer_len;
+
+    if (text == NULL)
+        text = "";
+
     input_free_completions (in);
-    g_free (in->buffer);
-    in->current_max_size = strlen (text) + 1;
-    in->buffer = g_strndup (text, in->current_max_size);        /* was in->buffer->text */
-    in->point = str_length (in->buffer);
     in->mark = 0;
     in->need_push = TRUE;
     in->charpoint = 0;
+
+    text_len = strlen (text);
+    buffer_len = 1 + max ((size_t) in->field_width, text_len);
+    in->current_max_size = buffer_len;
+    if (buffer_len > (size_t) in->field_width)
+        in->buffer = g_realloc (in->buffer, buffer_len);
+    memmove (in->buffer, text, text_len + 1);
+    in->point = str_length (in->buffer);
     input_update (in, TRUE);
 }
 
