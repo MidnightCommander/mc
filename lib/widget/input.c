@@ -917,7 +917,6 @@ input_destroy (WInput * in)
     g_free (in->history_name);
 
     g_free (in->buffer);
-    input_free_completions (in);
     g_free (in->init_text);
 
     g_free (kill_buffer);
