@@ -1258,13 +1258,21 @@ input_update (WInput * in, gboolean clear_first)
     const char *cp;
     int pw;
 
-    if (should_show_history_button (in))
-        has_history = HISTORY_BUTTON_WIDTH;
-
     if (in->disable_update != 0)
         return;
 
+    /* don't draw widget not put into dialog */
+    if (w->owner == NULL || w->owner->state != DLG_ACTIVE)
+        return;
+
+    if (should_show_history_button (in))
+        has_history = HISTORY_BUTTON_WIDTH;
+
     buf_len = str_length (in->buffer);
+
+    /* Adjust the mark */
+    in->mark = min (in->mark, buf_len);
+
     pw = str_term_width2 (in->buffer, in->point);
 
     /* Make the point visible */
@@ -1274,13 +1282,6 @@ input_update (WInput * in, gboolean clear_first)
         if (in->term_first_shown < 0)
             in->term_first_shown = 0;
     }
-
-    /* Adjust the mark */
-    in->mark = min (in->mark, buf_len);
-
-    /* don't draw widget not put into dialog */
-    if (w->owner == NULL || w->owner->state != DLG_ACTIVE)
-        return;
 
     if (has_history != 0)
         draw_history_button (in);
