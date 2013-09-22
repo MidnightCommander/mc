@@ -733,7 +733,6 @@ setup_panels (void)
     else
     {
         widget_set_size (WIDGET (cmdline), 0, 0, 0, 0);
-        input_set_origin (cmdline, 0, 0);
         widget_set_size (WIDGET (the_prompt), LINES, COLS, 0, 0);
     }
 
@@ -850,7 +849,6 @@ setup_cmdline (void)
     widget_set_size (WIDGET (the_prompt), y, 0, 1, prompt_len);
     label_set_text (the_prompt, mc_prompt);
     widget_set_size (WIDGET (cmdline), y, prompt_len, 1, COLS - prompt_len);
-    input_set_origin (cmdline, prompt_len, COLS - prompt_len);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -85,7 +85,6 @@ WInput *input_new (int y, int x, const int *input_colors,
 /* callbac is public; needed for command line */
 cb_ret_t input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data);
 const int *input_get_default_colors (void);
-void input_set_origin (WInput * i, int x, int field_width);
 cb_ret_t input_handle_char (WInput * in, int key);
 int input_key_is_in_map (WInput * in, int key);
 void input_assign_text (WInput * in, const char *text);

@@ -1099,10 +1099,12 @@ input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     case MSG_ACTION:
         return input_execute_cmd (in, parm);
 
+    case MSG_RESIZE:
+        in->field_width = WIDGET (in)->cols;
+        /* fall through */
     case MSG_FOCUS:
     case MSG_UNFOCUS:
     case MSG_DRAW:
-    case MSG_RESIZE:
         input_update (in, FALSE);
         return MSG_HANDLED;
 
@@ -1139,16 +1141,6 @@ input_get_default_colors (void)
     standart_colors[WINPUTC_HISTORY] = INPUT_HISTORY_COLOR;
 
     return standart_colors;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-input_set_origin (WInput * in, int x, int field_width)
-{
-    WIDGET (in)->x = x;
-    in->field_width = WIDGET (in)->cols = field_width;
-    input_update (in, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
