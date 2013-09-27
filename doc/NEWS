@@ -699,7 +699,7 @@ Version 4.7.5-pre1
     * Incorrect key event handling in "Listing mode" dialog (#2045)
     * Usability of field history in "Find file" dialog (#2046, #2407)
     * Find "Whole words" search bug (#2396)
-    * Directory ignorance doesn't work in file find (#2366, #2434)
+    * List of ignored directories doesn't work in file find (#2366, #2434)
     * Incorrect line jump when started as editor (#2344)
     * User menu in standalone mcedit doesn't show filetype-specific items (#1651)
     * Configure script doesn't set samba configdir (#2419)
