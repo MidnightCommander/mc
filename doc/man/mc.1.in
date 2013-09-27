@@ -4102,7 +4102,7 @@ utility like 'xclip' to print the selection to standard out.
 For example:
 .PP
 .nf
-clipboard_pastee=xclip \-o
+clipboard_paste=xclip \-o
 .fi
 .TP
 .I autodetect_codeset
