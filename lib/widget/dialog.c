@@ -1192,11 +1192,13 @@ dlg_init (WDialog * h)
 
     h->state = DLG_ACTIVE;
 
-    /* Select the first widget that takes focus */
+    /* first send MSG_DRAW to dialog itself and all widgets... */
+    dlg_redraw (h);
+
+    /* ...then send MSG_FOCUS to select the first widget that can take focus */
     while (h->current != NULL && !dlg_focus (h))
         h->current = dlg_widget_next (h, h->current);
 
-    dlg_redraw (h);
 
     h->ret_value = 0;
 }
