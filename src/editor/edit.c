@@ -318,7 +318,7 @@ check_file_access (WEdit * edit, const vfs_path_t * filename_vpath, struct stat 
         g_free (errmsg);
         errmsg = NULL;
 
-        if (act == 1)
+        if (act != 0)
             ret = FALSE;
     }
 
