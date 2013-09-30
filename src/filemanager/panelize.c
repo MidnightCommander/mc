@@ -576,7 +576,7 @@ load_panelize (void)
                       g_strdup ("find . -name \\*.orig -print"));
         add2panelize (g_strdup (_("Find SUID and SGID programs")),
                       g_strdup
-                      ("find . \\( \\( -perm -04000 -a -perm +011 \\) -o \\( -perm -02000 -a -perm +01 \\) \\) -print"));
+                      ("find . \\( \\( -perm -04000 -a -perm /011 \\) -o \\( -perm -02000 -a -perm /01 \\) \\) -print"));
     }
     else
     {
