@@ -493,7 +493,7 @@ dlg_key_event (WDialog * h, int d_key)
             dlg_one_down (h);
             return;
         }
-        else if (d_key == KEY_BTAB)
+        else if ((d_key & ~(KEY_M_SHIFT | KEY_M_CTRL)) == '\t')
         {
             dlg_one_up (h);
             return;

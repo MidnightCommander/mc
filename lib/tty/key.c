@@ -331,6 +331,7 @@ static key_define_t xterm_key_defines[] = {
     {KEY_M_SHIFT | KEY_M_CTRL | KEY_DOWN, ESC_STR "[1;6B", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_M_CTRL | KEY_RIGHT, ESC_STR "[1;6C", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_M_CTRL | KEY_LEFT, ESC_STR "[1;6D", MCKEY_NOACTION},
+    {KEY_M_SHIFT | '\t', ESC_STR "[Z", MCKEY_NOACTION},
 
     /* putty */
     {KEY_M_SHIFT | KEY_M_CTRL | KEY_UP, ESC_STR "[[1;6A", MCKEY_NOACTION},
@@ -1013,18 +1014,11 @@ correct_key_code (int code)
     if (c == KEY_SCANCEL)
         c = '\t';
 
-    /* Convert Shift+Tab and Ctrl+Tab to Back Tab
-     * only if modifiers directly from X11
-     */
-#ifdef HAVE_TEXTMODE_X11_SUPPORT
-    if (x11_window != 0)
-#endif /* HAVE_TEXTMODE_X11_SUPPORT */
+    /* Convert Back Tab to Shift+Tab */
+    if (c == KEY_BTAB)
     {
-        if ((c == '\t') && (mod & (KEY_M_SHIFT | KEY_M_CTRL)))
-        {
-            c = KEY_BTAB;
-            mod = 0;
-        }
+        c = '\t';
+        mod = KEY_M_SHIFT;
     }
 
     /* F0 is the same as F10 for out purposes */
