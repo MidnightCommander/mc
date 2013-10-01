@@ -3457,14 +3457,14 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         if (option_auto_para_formatting)
         {
             edit_double_newline (edit);
-            if (option_return_does_auto_indent)
+            if (option_return_does_auto_indent && !bracketed_pasting_in_progress)
                 edit_auto_indent (edit);
             format_paragraph (edit, FALSE);
         }
         else
         {
             edit_insert (edit, '\n');
-            if (option_return_does_auto_indent)
+            if (option_return_does_auto_indent && !bracketed_pasting_in_progress)
                 edit_auto_indent (edit);
         }
         break;
