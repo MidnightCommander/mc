@@ -12,6 +12,7 @@
    Norbert Warmuth, 1997
    Denys Vlasenko <vda.linux@googlemail.com>, 2013
    Slava Zanko <slavazanko@gmail.com>, 2013
+   Egmont Koblinger <egmont@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -91,6 +92,8 @@ int old_esc_mode = 0;
 /* timeout for old_esc_mode in usec */
 int old_esc_mode_timeout = 1000000;     /* settable via env */
 int use_8th_bit_as_meta = 0;
+
+gboolean bracketed_pasting_in_progress = FALSE;
 
 /* This table is a mapping between names and the constants we use
  * We use this to allow users to define alternate definitions for
@@ -275,6 +278,8 @@ typedef int (*ph_pqc_f) (unsigned short, PhCursorInfo_t *);
 static key_define_t mc_default_keys[] = {
     {ESC_CHAR, ESC_STR, MCKEY_ESCAPE},
     {ESC_CHAR, ESC_STR ESC_STR, MCKEY_NOACTION},
+    {MCKEY_BRACKETED_PASTING_START, ESC_STR "[200~", MCKEY_NOACTION},
+    {MCKEY_BRACKETED_PASTING_END, ESC_STR "[201~", MCKEY_NOACTION},
     {0, NULL, MCKEY_NOACTION},
 };
 
@@ -2145,7 +2150,17 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
     {
         /* Mouse event */
         xmouse_get_event (event, c == MCKEY_EXTENDED_MOUSE);
-        return (event->type != 0) ? EV_MOUSE : EV_NONE;
+        c = (event->type != 0) ? EV_MOUSE : EV_NONE;
+    }
+    else if (c == MCKEY_BRACKETED_PASTING_START)
+    {
+        bracketed_pasting_in_progress = TRUE;
+        c = EV_NONE;
+    }
+    else if (c == MCKEY_BRACKETED_PASTING_END)
+    {
+        bracketed_pasting_in_progress = FALSE;
+        c = EV_NONE;
     }
 
     return c;
@@ -2247,6 +2262,25 @@ application_keypad_mode (void)
         fputs (ESC_STR "=", stdout);
         fflush (stdout);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+enable_bracketed_paste (void)
+{
+    printf (ESC_STR "[?2004h");
+    fflush (stdout);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+disable_bracketed_paste (void)
+{
+    printf (ESC_STR "[?2004l");
+    fflush (stdout);
+    bracketed_pasting_in_progress = FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
