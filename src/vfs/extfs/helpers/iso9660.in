@@ -41,7 +41,7 @@ xorriso_list() {
     dir="$2"
     $XORRISO -dev stdio:"$1" -cd "$dir" -lsl 2> /dev/null | @GREP@ "^[-d]" | \
     while read attr ln usr gr sz dt1 dt2 dt3 nm ; do
-        len=$((${#nm} - 2))
+        len=$((${#nm} - 1))
         name=$(printf "$nm" | cut -c2-$len)  # remove quotes
         if test $(printf "$nm" | cut -c1-2) != "d"; then
             printf "%s %s %s %s %s %s %s %s %s/%s\n" "$attr" "$ln" "$usr" "$gr" "$sz" "$dt1" "$dt2" "$dt3" "$dir" "$name"
