@@ -4124,7 +4124,7 @@ carencia de garantía.
 .\"NODE "AVAILABILITY"
 .SH "DISPONIBILIDAD"
 La última versión de este programa se puede encontrar en
-http://www.midnight-commander.org/downloads.
+http://ftp.midnight\-commander.org/.
 .\"NODE "SEE ALSO"
 .SH "VÉASE TAMBIÉN"
 mcedit(1), sh(1), bash(1), tcsh(1), zsh(1), ed(1), view(1),

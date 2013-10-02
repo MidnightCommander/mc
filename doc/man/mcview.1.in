@@ -87,9 +87,9 @@ help of the Midnight Commander for details on the License and the lack
 of warranty.
 .SH AVAILABILITY
 The latest version of this program can be found at
-ftp://ftp.gnu.org/gnu/mc/.
+http://ftp.midnight\-commander.org/.
 .SH SEE ALSO
 mc(1), mcedit(1)
 .PP
 .SH BUGS
-Bugs should be reported to mc\-devel@gnome.org
+Bugs should be reported to http://www.midnight\-commander.org/.
