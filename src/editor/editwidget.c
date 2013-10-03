@@ -1071,7 +1071,7 @@ edit_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
              * no further characters arrive (there's only an "end of bracket" which is swallowed
              * by tty_get_event()), so you end up with a screen that's not refreshed after pasting.
              * So let's trigger an IDLE signal.
-            */
+             */
             if (!is_idle ())
                 widget_want_idle (w, TRUE);
             return ret;

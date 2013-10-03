@@ -320,8 +320,8 @@ static const global_keymap_ini_t default_help_keymap[] = {
 #ifdef USE_INTERNAL_EDIT
 static const global_keymap_ini_t default_editor_keymap[] = {
     {"Enter", "enter"},
-    {"Return", "shift-enter; ctrl-enter; ctrl-shift-enter"},  /* useful for pasting multiline text */
-    {"Tab", "tab; shift-tab; ctrl-tab; ctrl-shift-tab"},  /* ditto */
+    {"Return", "shift-enter; ctrl-enter; ctrl-shift-enter"},    /* useful for pasting multiline text */
+    {"Tab", "tab; shift-tab; ctrl-tab; ctrl-shift-tab"},        /* ditto */
     {"BackSpace", "backspace; ctrl-h"},
     {"Delete", "delete; ctrl-d"},
     {"Left", "left"},
