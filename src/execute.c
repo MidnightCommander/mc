@@ -88,6 +88,7 @@ edition_post_exec (void)
     tty_raw_mode ();
     channels_up ();
     enable_mouse ();
+    enable_bracketed_paste ();
     if (mc_global.tty.alternate_plus_minus)
         application_keypad_mode ();
 }
@@ -107,6 +108,7 @@ edition_pre_exec (void)
 
     channels_down ();
     disable_mouse ();
+    disable_bracketed_paste ();
 
     tty_reset_shell_mode ();
     tty_keypad (FALSE);
@@ -455,6 +457,7 @@ toggle_panels (void)
 
     channels_down ();
     disable_mouse ();
+    disable_bracketed_paste ();
     if (clear_before_exec)
         clr_scr ();
     if (mc_global.tty.alternate_plus_minus)
@@ -518,6 +521,7 @@ toggle_panels (void)
     }
 
     enable_mouse ();
+    enable_bracketed_paste ();
     channels_up ();
     if (mc_global.tty.alternate_plus_minus)
         application_keypad_mode ();

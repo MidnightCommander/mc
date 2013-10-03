@@ -36,6 +36,10 @@
 /* Return code for the extended mouse sequence */
 #define MCKEY_EXTENDED_MOUSE     -3
 
+/* Return code for brackets of bracketed paste mode */
+#define MCKEY_BRACKETED_PASTING_START -4
+#define MCKEY_BRACKETED_PASTING_END   -5
+
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
@@ -60,6 +64,8 @@ extern int double_click_speed;
 extern int old_esc_mode;
 extern int use_8th_bit_as_meta;
 extern int mou_auto_repeat;
+
+extern gboolean bracketed_pasting_in_progress;
 
 /*** declarations of public functions ************************************************************/
 
@@ -100,6 +106,10 @@ int get_key_code (int nodelay);
 /* Set keypad mode (xterm and linux console only) */
 void numeric_keypad_mode (void);
 void application_keypad_mode (void);
+
+/* Bracketed paste mode */
+void enable_bracketed_paste (void);
+void disable_bracketed_paste (void);
 
 /*** inline functions ****************************************************************************/
 

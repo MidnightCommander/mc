@@ -12,6 +12,7 @@
    Norbert Warmuth, 1997
    Denys Vlasenko <vda.linux@googlemail.com>, 2013
    Slava Zanko <slavazanko@gmail.com>, 2013
+   Egmont Koblinger <egmont@gmail.com>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -91,6 +92,8 @@ int old_esc_mode = 0;
 /* timeout for old_esc_mode in usec */
 int old_esc_mode_timeout = 1000000;     /* settable via env */
 int use_8th_bit_as_meta = 0;
+
+gboolean bracketed_pasting_in_progress = FALSE;
 
 /* This table is a mapping between names and the constants we use
  * We use this to allow users to define alternate definitions for
@@ -275,6 +278,8 @@ typedef int (*ph_pqc_f) (unsigned short, PhCursorInfo_t *);
 static key_define_t mc_default_keys[] = {
     {ESC_CHAR, ESC_STR, MCKEY_ESCAPE},
     {ESC_CHAR, ESC_STR ESC_STR, MCKEY_NOACTION},
+    {MCKEY_BRACKETED_PASTING_START, ESC_STR "[200~", MCKEY_NOACTION},
+    {MCKEY_BRACKETED_PASTING_END, ESC_STR "[201~", MCKEY_NOACTION},
     {0, NULL, MCKEY_NOACTION},
 };
 
@@ -326,6 +331,7 @@ static key_define_t xterm_key_defines[] = {
     {KEY_M_SHIFT | KEY_M_CTRL | KEY_DOWN, ESC_STR "[1;6B", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_M_CTRL | KEY_RIGHT, ESC_STR "[1;6C", MCKEY_NOACTION},
     {KEY_M_SHIFT | KEY_M_CTRL | KEY_LEFT, ESC_STR "[1;6D", MCKEY_NOACTION},
+    {KEY_M_SHIFT | '\t', ESC_STR "[Z", MCKEY_NOACTION},
 
     /* putty */
     {KEY_M_SHIFT | KEY_M_CTRL | KEY_UP, ESC_STR "[[1;6A", MCKEY_NOACTION},
@@ -1008,18 +1014,11 @@ correct_key_code (int code)
     if (c == KEY_SCANCEL)
         c = '\t';
 
-    /* Convert Shift+Tab and Ctrl+Tab to Back Tab
-     * only if modifiers directly from X11
-     */
-#ifdef HAVE_TEXTMODE_X11_SUPPORT
-    if (x11_window != 0)
-#endif /* HAVE_TEXTMODE_X11_SUPPORT */
+    /* Convert Back Tab to Shift+Tab */
+    if (c == KEY_BTAB)
     {
-        if ((c == '\t') && (mod & (KEY_M_SHIFT | KEY_M_CTRL)))
-        {
-            c = KEY_BTAB;
-            mod = 0;
-        }
+        c = '\t';
+        mod = KEY_M_SHIFT;
     }
 
     /* F0 is the same as F10 for out purposes */
@@ -2145,7 +2144,17 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
     {
         /* Mouse event */
         xmouse_get_event (event, c == MCKEY_EXTENDED_MOUSE);
-        return (event->type != 0) ? EV_MOUSE : EV_NONE;
+        c = (event->type != 0) ? EV_MOUSE : EV_NONE;
+    }
+    else if (c == MCKEY_BRACKETED_PASTING_START)
+    {
+        bracketed_pasting_in_progress = TRUE;
+        c = EV_NONE;
+    }
+    else if (c == MCKEY_BRACKETED_PASTING_END)
+    {
+        bracketed_pasting_in_progress = FALSE;
+        c = EV_NONE;
     }
 
     return c;
@@ -2247,6 +2256,25 @@ application_keypad_mode (void)
         fputs (ESC_STR "=", stdout);
         fflush (stdout);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+enable_bracketed_paste (void)
+{
+    printf (ESC_STR "[?2004h");
+    fflush (stdout);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+disable_bracketed_paste (void)
+{
+    printf (ESC_STR "[?2004l");
+    fflush (stdout);
+    bracketed_pasting_in_progress = FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
