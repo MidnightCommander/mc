@@ -115,27 +115,6 @@ is_week (const char *str, struct tm *tim)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-static gboolean
-is_month (const char *str, struct tm *tim)
-{
-    static const char *month = "JanFebMarAprMayJunJulAugSepOctNovDec";
-    const char *pos;
-
-    if (str == NULL)
-        return FALSE;
-
-    pos = strstr (month, str);
-    if (pos == NULL)
-        return FALSE;
-
-    if (tim != NULL)
-        tim->tm_mon = (pos - month) / 3;
-
-    return TRUE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /**
  * Check for possible locale's abbreviated month name (Jan..Dec).
  * Any 3 bytes long string without digit, control and punctuation characters.
@@ -282,8 +261,9 @@ vfs_parse_filetype (const char *s, size_t * ret_skipped, mode_t * ret_type)
     }
 
     *ret_type = type;
-    *ret_skipped = 1;
 
+    if (ret_skipped != NULL)
+        *ret_skipped = 1;
     return TRUE;
 }
 
@@ -419,7 +399,8 @@ vfs_parse_fileperms (const char *s, size_t * ret_skipped, mode_t * ret_perms)
         /* ACLs on Solaris, HP-UX and others */
         p++;
 
-    *ret_skipped = p - s;
+    if (ret_skipped != NULL)
+        *ret_skipped = p - s;
     *ret_perms = perms;
 
     return TRUE;
@@ -510,6 +491,27 @@ vfs_parse_raw_filemode (const char *s, size_t * ret_skipped, mode_t * ret_mode)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+gboolean
+vfs_parse_month (const char *str, struct tm * tim)
+{
+    static const char *month = "JanFebMarAprMayJunJulAugSepOctNovDec";
+    const char *pos;
+
+    if (str == NULL)
+        return FALSE;
+
+    pos = strstr (month, str);
+    if (pos == NULL)
+        return FALSE;
+
+    if (tim != NULL)
+        tim->tm_mon = (pos - month) / 3;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /** This function parses from idx in the columns[] array */
 
 int
@@ -568,7 +570,7 @@ vfs_parse_filedate (int idx, time_t * t)
      */
 
     /* Month name */
-    if (is_month (p, &tim))
+    if (vfs_parse_month (p, &tim))
     {
         /* And we expect, it followed by day number */
         if (!is_num (idx))
@@ -732,7 +734,7 @@ vfs_parse_ls_lga (const char *p, struct stat * s, char **filename, char **linkna
 
     /* Mhm, the ls -lg did not produce a group field */
     for (idx = 3; idx <= 5; idx++)
-        if (is_month (columns[idx], NULL) || is_week (columns[idx], NULL)
+        if (vfs_parse_month (columns[idx], NULL) || is_week (columns[idx], NULL)
             || is_dos_date (columns[idx]) || is_localized_month (columns[idx]))
             break;
 

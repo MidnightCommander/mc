@@ -57,6 +57,7 @@ void vfs_parse_ls_lga_init (void);
 gboolean vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linkname,
                            size_t * filename_pos);
 size_t vfs_parse_ls_lga_get_final_spaces (void);
+gboolean vfs_parse_month (const char *str, struct tm *tim);
 int vfs_parse_filedate (int idx, time_t * t);
 
 /*** inline functions ****************************************************************************/
