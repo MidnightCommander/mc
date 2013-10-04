@@ -124,7 +124,7 @@ tty_start_interrupt_key (void)
     act.sa_flags = SA_RESTART;
 #else
     act.sa_flags = 0;
-#endif  /* SA_RESTART */
+#endif /* SA_RESTART */
     sigaction (SIGINT, &act, NULL);
 }
 

@@ -1632,8 +1632,7 @@ single_dirsize_cmd (void)
         ui = compute_dir_size_create_ui (FALSE);
         p = vfs_path_from_str (entry->fname);
 
-        if (compute_dir_size (p, ui, compute_dir_size_update_ui, &count, &total, TRUE) ==
-            FILE_CONT)
+        if (compute_dir_size (p, ui, compute_dir_size_update_ui, &count, &total, TRUE) == FILE_CONT)
         {
             entry->st.st_size = (off_t) total;
             entry->f.dir_size_computed = 1;
