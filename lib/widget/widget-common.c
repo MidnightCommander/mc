@@ -145,6 +145,7 @@ widget_init (Widget * w, int y, int x, int lines, int cols,
     w->y = y;
     w->cols = cols;
     w->lines = lines;
+    w->pos_flags = WPOS_KEEP_DEFAULT;
     w->callback = callback;
     w->mouse = mouse_handler;
     w->set_options = widget_default_set_options_callback;

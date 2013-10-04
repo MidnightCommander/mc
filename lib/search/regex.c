@@ -2,12 +2,13 @@
    Search text engine.
    Regex search
 
-   Copyright (C) 2009, 2011
+   Copyright (C) 2009, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2009,2010,2011
+   Slava Zanko <slavazanko@gmail.com>, 2009, 2010, 2011
    Vitaliy Filippov <vitalif@yourcmc.ru>, 2011
+   Andrew Borodin <aborodin@vmail.ru>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -118,12 +119,12 @@ mc_search__regex_str_append_if_special (GString * copy_to, const GString * regex
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 static void
 mc_search__cond_struct_new_regex_hex_add (const char *charset, GString * str_to,
                                           const char *one_char, gsize str_len)
 {
     GString *upp, *low;
-    gchar *tmp_str;
     gsize loop;
 
     upp = mc_search__toupper_case_str (charset, one_char, str_len);
@@ -131,23 +132,20 @@ mc_search__cond_struct_new_regex_hex_add (const char *charset, GString * str_to,
 
     for (loop = 0; loop < upp->len; loop++)
     {
+        gchar tmp_str[10 + 1];  /* longest content is "[\\x%02X\\x%02X]" */
+        gint tmp_len;
 
-        if (loop < low->len)
-        {
-            if (upp->str[loop] == low->str[loop])
-                tmp_str = g_strdup_printf ("\\x%02X", (unsigned char) upp->str[loop]);
-            else
-                tmp_str =
-                    g_strdup_printf ("[\\x%02X\\x%02X]", (unsigned char) upp->str[loop],
-                                     (unsigned char) low->str[loop]);
-        }
+        if (loop >= low->len || upp->str[loop] == low->str[loop])
+            tmp_len =
+                g_snprintf (tmp_str, sizeof (tmp_str), "\\x%02X", (unsigned char) upp->str[loop]);
         else
-        {
-            tmp_str = g_strdup_printf ("\\x%02X", (unsigned char) upp->str[loop]);
-        }
-        g_string_append (str_to, tmp_str);
-        g_free (tmp_str);
+            tmp_len =
+                g_snprintf (tmp_str, sizeof (tmp_str), "[\\x%02X\\x%02X]",
+                            (unsigned char) upp->str[loop], (unsigned char) low->str[loop]);
+
+        g_string_append_len (str_to, tmp_str, tmp_len);
     }
+
     g_string_free (upp, TRUE);
     g_string_free (low, TRUE);
 }
@@ -190,7 +188,7 @@ mc_search__cond_struct_new_regex_accum_append (const char *charset, GString * st
         g_free (one_char);
     }
 
-    g_string_append (str_to, recoded_part->str);
+    g_string_append_len (str_to, recoded_part->str, recoded_part->len);
     g_string_free (recoded_part, TRUE);
     g_string_set_size (str_from, 0);
 }
@@ -548,61 +546,59 @@ static void
 mc_search_regex__process_append_str (GString * dest_str, const char *from, gsize len,
                                      replace_transform_type_t * replace_flags)
 {
-    gsize loop = 0;
+    gsize loop;
     gsize char_len;
-    char *tmp_str;
-    GString *tmp_string;
 
     if (len == (gsize) (-1))
         len = strlen (from);
 
-    if (*replace_flags == REPLACE_T_NO_TRANSFORM)
+    if ((*replace_flags == REPLACE_T_NO_TRANSFORM) != 0)
     {
         g_string_append_len (dest_str, from, len);
         return;
     }
-    while (loop < len)
+
+    for (loop = 0; loop < len; loop += char_len)
     {
+        GString *tmp_string = NULL;
+        char *tmp_str;
+
         tmp_str = mc_search__get_one_symbol (NULL, from + loop, len - loop, NULL);
         char_len = strlen (tmp_str);
-        if (*replace_flags & REPLACE_T_UPP_TRANSFORM_CHAR)
+
+        if ((*replace_flags & REPLACE_T_UPP_TRANSFORM_CHAR) != 0)
         {
             *replace_flags &= ~REPLACE_T_UPP_TRANSFORM_CHAR;
             tmp_string = mc_search__toupper_case_str (NULL, tmp_str, char_len);
-            g_string_append (dest_str, tmp_string->str);
+            g_string_append_len (dest_str, tmp_string->str, tmp_string->len);
             g_string_free (tmp_string, TRUE);
-
         }
-        else if (*replace_flags & REPLACE_T_LOW_TRANSFORM_CHAR)
+        else if ((*replace_flags & REPLACE_T_LOW_TRANSFORM_CHAR) != 0)
         {
             *replace_flags &= ~REPLACE_T_LOW_TRANSFORM_CHAR;
-            tmp_string = mc_search__toupper_case_str (NULL, tmp_str, char_len);
-            g_string_append (dest_str, tmp_string->str);
+            tmp_string = mc_search__tolower_case_str (NULL, tmp_str, char_len);
+            g_string_append_len (dest_str, tmp_string->str, tmp_string->len);
             g_string_free (tmp_string, TRUE);
-
         }
-        else if (*replace_flags & REPLACE_T_UPP_TRANSFORM)
+        else if ((*replace_flags & REPLACE_T_UPP_TRANSFORM) != 0)
         {
             tmp_string = mc_search__toupper_case_str (NULL, tmp_str, char_len);
-            g_string_append (dest_str, tmp_string->str);
+            g_string_append_len (dest_str, tmp_string->str, tmp_string->len);
             g_string_free (tmp_string, TRUE);
-
         }
-        else if (*replace_flags & REPLACE_T_LOW_TRANSFORM)
+        else if ((*replace_flags & REPLACE_T_LOW_TRANSFORM) != 0)
         {
             tmp_string = mc_search__tolower_case_str (NULL, tmp_str, char_len);
-            g_string_append (dest_str, tmp_string->str);
+            g_string_append_len (dest_str, tmp_string->str, tmp_string->len);
             g_string_free (tmp_string, TRUE);
-
         }
         else
         {
-            g_string_append (dest_str, tmp_str);
+            g_string_append_len (dest_str, tmp_str, tmp_string->len);
         }
-        g_free (tmp_str);
-        loop += char_len;
-    }
 
+        g_free (tmp_str);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -806,28 +802,56 @@ mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
         g_string_set_size (lc_mc_search->regex_buffer, 0);
         lc_mc_search->start_buffer = current_pos;
 
-        while (TRUE)
+        if (lc_mc_search->search_fn != NULL)
         {
-            int current_chr = '\n';     /* stop search symbol */
+            int current_chr;
 
-            ret = mc_search__get_char (lc_mc_search, user_data, current_pos, &current_chr);
-            if (ret == MC_SEARCH_CB_ABORT)
-                break;
+            do
+            {
+                /* stop search symbol */
+                current_chr = '\n';
 
-            if (ret == MC_SEARCH_CB_INVALID)
-                continue;
+                ret = lc_mc_search->search_fn (user_data, current_pos, &current_chr);
 
-            current_pos++;
+                if (ret == MC_SEARCH_CB_ABORT)
+                    break;
 
-            if (ret == MC_SEARCH_CB_SKIP)
-                continue;
+                if (ret == MC_SEARCH_CB_INVALID)
+                    continue;
 
-            virtual_pos++;
+                current_pos++;
 
-            g_string_append_c (lc_mc_search->regex_buffer, (char) current_chr);
+                if (ret == MC_SEARCH_CB_SKIP)
+                    continue;
 
-            if ((char) current_chr == '\n' || virtual_pos > end_search)
-                break;
+                virtual_pos++;
+
+                g_string_append_c (lc_mc_search->regex_buffer, (char) current_chr);
+            }
+            while ((char) current_chr != '\n' && virtual_pos <= end_search);
+        }
+        else
+        {
+            char current_chr;
+
+            /* optimization for standard case (for search from file manager)
+             *  where there is no MC_SEARCH_CB_INVALID or MC_SEARCH_CB_SKIP
+             *  return codes, so we can copy line at regex buffer all at once
+             */
+            do
+            {
+                current_chr = ((char *) user_data)[current_pos];
+                if (current_chr == '\0')
+                    break;
+
+                current_pos++;
+            }
+            while (current_chr != '\n' && current_pos <= end_search);
+
+            /* use virtual_pos as index of start of current chunk */
+            g_string_append_len (lc_mc_search->regex_buffer, (char *) user_data + virtual_pos,
+                                 current_pos - virtual_pos);
+            virtual_pos = current_pos;
         }
 
         switch (mc_search__regex_found_cond (lc_mc_search, lc_mc_search->regex_buffer))

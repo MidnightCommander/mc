@@ -2949,8 +2949,7 @@ por segunda vez; con la primera Midnight Commander solo emite un pitido.
 .PP
 Aplica escapes a los símbolos
 .BR ? ", " * " y " &
-(como
-.BR \\? ", " \\* ", " \\& )
+(como \fB\\?\fR, \fB\\*\fR, \fB\\&\fR )
 en los nombres de archivo para evitar su interpretación en expresiones
 regulares al realizar sustituciones en la línea de entrada.
 .\"NODE "Virtual File System"
@@ -3937,7 +3936,7 @@ para volcar la selección de X Window a la salida estándar.
 Por ejemplo:
 .PP
 .nf
-clipboard_pastee=xclip \-o
+clipboard_paste=xclip \-o
 .fi
 .TP
 .I autodetect_codeset
@@ -4125,7 +4124,7 @@ carencia de garantía.
 .\"NODE "AVAILABILITY"
 .SH "DISPONIBILIDAD"
 La última versión de este programa se puede encontrar en
-http://www.midnight-commander.org/downloads.
+http://ftp.midnight\-commander.org/.
 .\"NODE "SEE ALSO"
 .SH "VÉASE TAMBIÉN"
 mcedit(1), sh(1), bash(1), tcsh(1), zsh(1), ed(1), view(1),

@@ -120,7 +120,11 @@ tty_start_interrupt_key (void)
 
     act.sa_handler = sigintr_handler;
     sigemptyset (&act.sa_mask);
+#ifdef SA_RESTART
     act.sa_flags = SA_RESTART;
+#else
+    act.sa_flags = 0;
+#endif  /* SA_RESTART */
     sigaction (SIGINT, &act, NULL);
 }
 

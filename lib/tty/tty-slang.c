@@ -61,10 +61,6 @@ extern int reset_hp_softkeys;
 
 /*** file scope macro definitions ****************************************************************/
 
-#ifndef SA_RESTART
-#define SA_RESTART 0
-#endif
-
 #ifndef SLTT_MAX_SCREEN_COLS
 #define SLTT_MAX_SCREEN_COLS 512
 #endif

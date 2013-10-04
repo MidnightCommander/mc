@@ -247,7 +247,7 @@ vfs_class_flags_t vfs_file_class_flags (const vfs_path_t * vpath);
 /* translate path back to terminal encoding, remove all #enc:
  * every invalid character is replaced with question mark
  * return static buffer */
-char *vfs_translate_path (const char *path);
+const char *vfs_translate_path (const char *path);
 /* return new string */
 char *vfs_translate_path_n (const char *path);
 

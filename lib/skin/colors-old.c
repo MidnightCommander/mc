@@ -148,11 +148,11 @@ mc_skin_colors_old_configure_one (mc_skin_t * mc_skin, const char *the_color_str
     if (the_color_string == NULL)
         return;
 
-    orig_colors = colors = g_strsplit (the_color_string, ":", -1);
-    if (colors == NULL)
+    orig_colors = g_strsplit (the_color_string, ":", -1);
+    if (orig_colors == NULL)
         return;
 
-    for (; *colors != NULL; colors++)
+    for (colors = orig_colors; *colors != NULL; colors++)
     {
         gchar **key_val;
         const gchar *skin_group, *skin_key;

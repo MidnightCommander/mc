@@ -27,6 +27,10 @@
 
 #include "tests/mctest.h"
 
+#ifdef HAVE_CHARSET
+#include "lib/charsets.h"
+#endif
+
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/vfs/xdirentry.h"
@@ -48,6 +52,11 @@ setup (void)
     init_localfs ();
     vfs_setup_work_dir ();
 
+#ifdef HAVE_CHARSET
+    mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
+    load_codepages_list ();
+#endif
+
     vfs_s_init_class (&vfs_test_ops, &test_subclass);
 
     vfs_test_ops.name = "testfs";
@@ -63,6 +72,10 @@ setup (void)
 static void
 teardown (void)
 {
+#ifdef HAVE_CHARSET
+    free_codepages_list ();
+#endif
+
     vfs_shut ();
     str_uninit_strings ();
 }
@@ -117,6 +130,40 @@ static const struct test_canonicalize_path_ds
         "ftp://user/../../",
         ".."
     },
+#ifdef HAVE_CHARSET
+    { /* 10. Supported encoding */
+        "/b/#enc:utf-8/../c",
+        "/c"
+    },
+    { /* 11. Unsupported encoding */
+        "/b/#enc:aaaa/../c",
+        "/b/c"
+    },
+    { /* 12. Supported encoding */
+        "/b/../#enc:utf-8/c",
+        "/#enc:utf-8/c"
+    },
+    { /* 13. Unsupported encoding */
+        "/b/../#enc:aaaa/c",
+        "/#enc:aaaa/c"
+    },
+    { /* 14.  Supported encoding */
+        "/b/c/#enc:utf-8/..",
+        "/b"
+    },
+    { /* 15.  Unsupported encoding */
+        "/b/c/#enc:aaaa/..",
+        "/b/c"
+    },
+    { /* 16.  Supported encoding */
+        "/b/c/../#enc:utf-8",
+        "/b/#enc:utf-8"
+    },
+    { /* 17.  Unsupported encoding */
+        "/b/c/../#enc:aaaa",
+        "/b/#enc:aaaa"
+    },
+#endif  /* HAVE_CHARSET */
 };
 /* *INDENT-ON* */
 

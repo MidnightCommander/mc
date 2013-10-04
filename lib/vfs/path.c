@@ -1338,19 +1338,22 @@ vfs_path_tokens_count (const vfs_path_t * vpath)
     for (element_index = 0; element_index < vfs_path_elements_count (vpath); element_index++)
     {
         const vfs_path_element_t *element;
-        char **path_tokens, **iterator;
+        const char *token, *prev_token;
 
         element = vfs_path_get_by_index (vpath, element_index);
-        path_tokens = iterator = g_strsplit (element->path, PATH_SEP_STR, -1);
 
-        while (*iterator != NULL)
+        for (prev_token = element->path; (token = strchr (prev_token, PATH_SEP)) != NULL;
+             prev_token = token + 1)
         {
-            if (**iterator != '\0')
+            /* skip empty substring */
+            if (token != prev_token)
                 count_tokens++;
-            iterator++;
         }
-        g_strfreev (path_tokens);
+
+        if (*prev_token != '\0')
+            count_tokens++;
     }
+
     return count_tokens;
 }
 
@@ -1405,9 +1408,9 @@ vfs_path_tokens_get (const vfs_path_t * vpath, ssize_t start_position, ssize_t l
 
         g_string_assign (element_tokens, "");
         element = vfs_path_get_by_index (vpath, element_index);
-        path_tokens = iterator = g_strsplit (element->path, PATH_SEP_STR, -1);
+        path_tokens = g_strsplit (element->path, PATH_SEP_STR, -1);
 
-        while (*iterator != NULL)
+        for (iterator = path_tokens; *iterator != NULL; iterator++)
         {
             if (**iterator != '\0')
             {
@@ -1428,7 +1431,6 @@ vfs_path_tokens_get (const vfs_path_t * vpath, ssize_t start_position, ssize_t l
                 else
                     start_position--;
             }
-            iterator++;
         }
         g_strfreev (path_tokens);
         vfs_path_tokens_add_class_info (element, ret_tokens, element_tokens);

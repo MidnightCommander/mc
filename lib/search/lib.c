@@ -2,11 +2,12 @@
    Search text engine.
    Common share code for module.
 
-   Copyright (C) 2009, 2011
+   Copyright (C) 2009, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2009.
+   Slava Zanko <slavazanko@gmail.com>, 2009, 2011
+   Andrew Borodin <aborodin@vmail.ru>, 2013
 
    This file is part of the Midnight Commander.
 
@@ -136,22 +137,6 @@ mc_search__get_one_symbol (const char *charset, const char *str, gsize str_len,
 #else
     return converted_str;
 #endif
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-mc_search_cbret_t
-mc_search__get_char (mc_search_t * lc_mc_search, const void *user_data, gsize current_pos,
-                     int *current_char)
-{
-    unsigned char *data;
-
-    if (lc_mc_search->search_fn != NULL)
-        return lc_mc_search->search_fn (user_data, current_pos, current_char);
-
-    data = (unsigned char *) user_data;
-    *current_char = (int) data[current_pos];
-    return (*current_char == 0) ? MC_SEARCH_CB_ABORT : MC_SEARCH_CB_OK;
 }
 
 /* --------------------------------------------------------------------------------------------- */

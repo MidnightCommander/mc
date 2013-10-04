@@ -336,17 +336,13 @@ vfs_strip_suffix_from_filename (const char *filename)
 
 /* --------------------------------------------------------------------------------------------- */
 
-char *
+const char *
 vfs_translate_path (const char *path)
 {
     estr_t state;
 
     g_string_set_size (vfs_str_buffer, 0);
     state = _vfs_translate_path (path, -1, str_cnv_from_term, vfs_str_buffer);
-    /*
-       strict version
-       return (state == 0) ? vfs_str_buffer->data : NULL;
-     */
     return (state != ESTR_FAILURE) ? vfs_str_buffer->str : NULL;
 }
 
@@ -355,10 +351,10 @@ vfs_translate_path (const char *path)
 char *
 vfs_translate_path_n (const char *path)
 {
-    char *result;
+    const char *result;
 
     result = vfs_translate_path (path);
-    return (result != NULL) ? g_strdup (result) : NULL;
+    return g_strdup (result);
 }
 
 /* --------------------------------------------------------------------------------------------- */

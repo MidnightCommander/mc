@@ -1823,12 +1823,12 @@ is always grown form left to right. If disabled, the growing direction
 of progressbar follows to direction of Copy/Move/Delete operation:
 from left panel to right one and vice versa. Enabled by default.
 .PP
-.I Mkdir autoname
+.I Mkdir autoname.
 When you press F7 to create a new directory, the input line in popup dialog
 will be filled by name of current file or directory in active panel.
 Disabled by default.
 .PP
-.I Preallocate space
+.I Preallocate space.
 Preallocate space for whole target file, if possible, before copy operation.
 Disabled by default.
 .PP
@@ -1858,17 +1858,17 @@ After executing your commands, the Midnight Commander can pause, so
 that you can examine the output of the command.  There are three
 possible settings for this variable:
 .PP
-.IR Never .
+.I Never.
 Means that you do not want to see the output of your command.  If you
 are using the Linux or FreeBSD console or an xterm, you will be able to
 see the output of the command by typing C\-o.
 .PP
-.IR On dumb terminals .
+.I On dumb terminals.
 You will get the pause message on terminals that are not capable of
 showing the output of the last command executed (any terminal that is
 not an xterm or the Linux console).
 .PP
-.IR Always .
+.I Always.
 The program will pause after executing all of your commands.
 .PP
 .B Other options
@@ -1897,7 +1897,7 @@ command is used.  See the section on the
 internal file viewer\&.
 .\"Internal File Viewer"
 .PP
-.I Ask new file name
+.I Ask new file name.
 If this option is enabled, file name is asked before open new file in editor.
 .PP
 .I Auto menus.
@@ -1966,7 +1966,7 @@ of screen. The options in this dialog are divided into several groups:
 The rest of the screen area is used for the two directory panels. You
 can specify whether the area is split to the panels in
 .I Vertical
- or
+or
 .I Horizontal
 direction. Panel layout can be changed using Alt\-, (Alt\-comma) shortcut.
 .PP
@@ -3111,8 +3111,7 @@ for the second time, for the first time MC just beeps.
 .PP
 Apply escaping of
 .BR ? ", " * " and " &
-symbols (as
-.BR \\? ", " \\* ", " \\& )
+symbols (as \fB\\?\fR, \fB\\*\fR, \fB\\&\fR )
 in filenames to disallow use them as metasymbols in regular expressions
 when substitution is performed in the input line.
 
@@ -4103,7 +4102,7 @@ utility like 'xclip' to print the selection to standard out.
 For example:
 .PP
 .nf
-clipboard_pastee=xclip \-o
+clipboard_paste=xclip \-o
 .fi
 .TP
 .I autodetect_codeset
@@ -4278,7 +4277,7 @@ help for details on the License and the lack of warranty.
 .\"NODE "AVAILABILITY"
 .SH "AVAILABILITY"
 The latest version of this program can be found at
-ftp://ftp.gnu.org/gnu/mc/.
+http://ftp.midnight\-commander.org/.
 .\"NODE "SEE ALSO"
 .SH "SEE ALSO"
 ed(1), gpm(1), terminfo(1), view(1), sh(1), bash(1),
@@ -4297,8 +4296,8 @@ distribution.
 See the file TODO in the distribution for information on what remains to
 be done.
 .PP
-If you want to report a problem with the program, please send mail to
-this address: mc\-devel@gnome.org.
+If you want to report a problem with the program, please create bugreport
+at http://www.midnight\-commander.org/.
 .PP
 Provide a detailed description of the bug, the version of the program
 you are running

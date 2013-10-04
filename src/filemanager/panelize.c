@@ -259,22 +259,17 @@ add2panelize (char *label, char *command)
 static void
 add2panelize_cmd (void)
 {
-    char *label;
-
-    if (pname->buffer && (*pname->buffer))
+    if (pname->buffer != NULL && *pname->buffer != '\0')
     {
+        char *label;
+
         label = input_dialog (_("Add to external panelize"),
                               _("Enter command label:"), MC_HISTORY_FM_PANELIZE_ADD, "",
                               INPUT_COMPLETE_NONE);
-        if (!label)
-            return;
-        if (!*label)
-        {
+        if (label == NULL || *label == '\0')
             g_free (label);
-            return;
-        }
-
-        add2panelize (label, g_strdup (pname->buffer));
+        else
+            add2panelize (label, g_strdup (pname->buffer));
     }
 }
 
@@ -423,14 +418,14 @@ do_panelize_cd (struct WPanel *panel)
         else
         {
             vfs_path_t *tmp_vpath;
-            const char *tmp_path;
+            const char *fname;
 
             tmp_vpath =
                 vfs_path_append_new (panelized_panel.root_vpath, panelized_panel.list.list[i].fname,
                                      NULL);
-            tmp_path = vfs_path_as_str (tmp_vpath);
-            list->list[i].fnamelen = strlen (tmp_path);
-            list->list[i].fname = g_strndup (tmp_path, list->list[i].fnamelen);
+            fname = vfs_path_as_str (tmp_vpath);
+            list->list[i].fnamelen = strlen (fname);
+            list->list[i].fname = g_strndup (fname, list->list[i].fnamelen);
             vfs_path_free (tmp_vpath);
         }
         list->list[i].f.link_to_dir = panelized_panel.list.list[i].f.link_to_dir;
@@ -565,17 +560,14 @@ external_panelize (void)
 void
 load_panelize (void)
 {
-    gchar **profile_keys, **keys;
+    char **keys;
     gsize len;
-    GIConv conv;
 
-    conv = str_crt_conv_from ("UTF-8");
-
-    profile_keys = keys = mc_config_get_keys (mc_main_config, panelize_section, &len);
+    keys = mc_config_get_keys (mc_main_config, panelize_section, &len);
 
     add2panelize (g_strdup (_("Other command")), g_strdup (""));
 
-    if (!profile_keys || *profile_keys == NULL)
+    if (keys == NULL || *keys == NULL)
     {
         add2panelize (g_strdup (_("Modified git files")), g_strdup ("git ls-files --modified"));
         add2panelize (g_strdup (_("Find rejects after patching")),
@@ -584,30 +576,37 @@ load_panelize (void)
                       g_strdup ("find . -name \\*.orig -print"));
         add2panelize (g_strdup (_("Find SUID and SGID programs")),
                       g_strdup
-                      ("find . \\( \\( -perm -04000 -a -perm +011 \\) -o \\( -perm -02000 -a -perm +01 \\) \\) -print"));
-        return;
+                      ("find . \\( \\( -perm -04000 -a -perm /011 \\) -o \\( -perm -02000 -a -perm /01 \\) \\) -print"));
     }
-
-    while (*profile_keys)
+    else
     {
-        GString *buffer;
+        GIConv conv;
+        char **profile_keys;
 
-        if (mc_global.utf8_display || conv == INVALID_CONV)
-            buffer = g_string_new (*profile_keys);
-        else
+        conv = str_crt_conv_from ("UTF-8");
+
+        for (profile_keys = keys; *profile_keys != NULL; profile_keys++)
         {
-            buffer = g_string_new ("");
-            if (str_convert (conv, *profile_keys, buffer) == ESTR_FAILURE)
-                g_string_assign (buffer, *profile_keys);
+            GString *buffer;
+
+            if (mc_global.utf8_display || conv == INVALID_CONV)
+                buffer = g_string_new (*profile_keys);
+            else
+            {
+                buffer = g_string_new ("");
+                if (str_convert (conv, *profile_keys, buffer) == ESTR_FAILURE)
+                    g_string_assign (buffer, *profile_keys);
+            }
+
+            add2panelize (g_string_free (buffer, FALSE),
+                          mc_config_get_string (mc_main_config, panelize_section, *profile_keys,
+                                                ""));
         }
 
-        add2panelize (g_string_free (buffer, FALSE),
-                      mc_config_get_string (mc_main_config, panelize_section, *profile_keys, ""));
-        profile_keys++;
+        str_close_conv (conv);
     }
 
     g_strfreev (keys);
-    str_close_conv (conv);
 }
 
 /* --------------------------------------------------------------------------------------------- */

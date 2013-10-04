@@ -116,15 +116,7 @@ mc_search__cond_struct_free (mc_search_cond_t * mc_search_cond)
 static void
 mc_search__conditions_free (GPtrArray * array)
 {
-    gsize loop1;
-
-    for (loop1 = 0; loop1 < array->len; loop1++)
-    {
-        mc_search_cond_t *lc_mc_search;
-
-        lc_mc_search = (mc_search_cond_t *) g_ptr_array_index (array, loop1);
-        mc_search__cond_struct_free (lc_mc_search);
-    }
+    g_ptr_array_foreach (array, (GFunc) mc_search__cond_struct_free, NULL);
     g_ptr_array_free (array, TRUE);
 }
 

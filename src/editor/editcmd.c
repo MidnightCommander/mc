@@ -1935,26 +1935,23 @@ edit_load_macro_cmd (WEdit * edit)
     if (macros_config == NULL || macros_list == NULL || macros_list->len != 0)
         return FALSE;
 
-    profile_keys = keys = mc_config_get_keys (macros_config, section_name, &len);
-    while (*profile_keys != NULL)
+    keys = mc_config_get_keys (macros_config, section_name, &len);
+    for (profile_keys = keys; *profile_keys != NULL; profile_keys++)
     {
-        gboolean have_macro;
+        gboolean have_macro = FALSE;
         GArray *macros;
         macros_t macro;
 
         macros = g_array_new (TRUE, FALSE, sizeof (macro_action_t));
-
-        curr_values = values = mc_config_get_string_list (macros_config, section_name,
-                                                          *profile_keys, &values_len);
+        values =
+            mc_config_get_string_list (macros_config, section_name, *profile_keys, &values_len);
         hotkey = lookup_key (*profile_keys, NULL);
-        have_macro = FALSE;
 
-        while (*curr_values != NULL && *curr_values[0] != '\0')
+        for (curr_values = values; *curr_values != NULL && *curr_values[0] != '\0'; curr_values++)
         {
             char **macro_pair = NULL;
 
             macro_pair = g_strsplit (*curr_values, ":", 2);
-
             if (macro_pair != NULL)
             {
                 macro_action_t m_act;
@@ -1988,7 +1985,6 @@ edit_load_macro_cmd (WEdit * edit)
                 g_strfreev (macro_pair);
                 macro_pair = NULL;
             }
-            curr_values++;
         }
         if (have_macro)
         {
@@ -1996,7 +1992,6 @@ edit_load_macro_cmd (WEdit * edit)
             macro.macro = macros;
             g_array_append_val (macros_list, macro);
         }
-        profile_keys++;
         g_strfreev (values);
     }
     g_strfreev (keys);
@@ -2762,7 +2757,7 @@ edit_search_cmd (WEdit * edit, gboolean again)
 gboolean
 edit_ok_to_exit (WEdit * edit)
 {
-    char *fname = (char *) N_("[NoName]");
+    const char *fname = N_("[NoName]");
     char *msg;
     int act;
 
@@ -2770,22 +2765,16 @@ edit_ok_to_exit (WEdit * edit)
         return TRUE;
 
     if (edit->filename_vpath != NULL)
-        fname = g_strdup (vfs_path_as_str (edit->filename_vpath));
+        fname = vfs_path_as_str (edit->filename_vpath);
 #ifdef ENABLE_NLS
     else
-        fname = g_strdup (_(fname));
-#else
-    else
-        fname = g_strdup (fname);
+        fname = _(fname);
 #endif
 
     if (!mc_global.midnight_shutdown)
     {
         if (!edit_check_newline (&edit->buffer))
-        {
-            g_free (fname);
             return FALSE;
-        }
 
         query_set_sel (2);
 
@@ -2804,7 +2793,6 @@ edit_ok_to_exit (WEdit * edit)
     }
 
     g_free (msg);
-    g_free (fname);
 
     switch (act)
     {

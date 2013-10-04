@@ -3248,7 +3248,7 @@ insert=\\e[Op
 .\"NODE "AVAILABILITY"
 .SH "ДОСТУПНОСТ"
 Најновија верзија овог програма се може наћи на адреси
-ftp://ftp.gnu.org/gnu/mc/.
+http://ftp.midnight\-commander.org/.
 .\"NODE "SEE ALSO"
 .SH "ВИДИТЕ И"
 ed(1), gpm(1), terminfo(1), view(1), sh(1), bash(1),

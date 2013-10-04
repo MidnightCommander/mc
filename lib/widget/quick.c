@@ -493,7 +493,8 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
                 }
 
                 /* forced update internal variables of inpuit line */
-                input_set_origin (INPUT (item->widget), item->widget->x, item->widget->cols);
+                widget_set_size (item->widget, item->widget->y, item->widget->x, 1,
+                                 item->widget->cols);
             }
             break;
 

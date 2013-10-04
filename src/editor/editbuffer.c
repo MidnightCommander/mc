@@ -640,10 +640,11 @@ off_t
 edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size)
 {
     off_t ret = 0;
-    off_t i;
+    off_t i, j;
     off_t data_size;
     void *b;
 
+    buf->lines = 0;
     buf->curs2 = size;
     i = buf->curs2 >> S_EDIT_BUF_SIZE;
 
@@ -653,10 +654,16 @@ edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size)
     {
         b = g_malloc0 (EDIT_BUF_SIZE);
         g_ptr_array_add (buf->b2, b);
-        ret = mc_read (fd, (char *) b + EDIT_BUF_SIZE - data_size, data_size);
+        b = (char *) b + EDIT_BUF_SIZE - data_size;
+        ret = mc_read (fd, b, data_size);
+
+        /* count lines */
+        for (j = 0; j < ret; j++)
+            if (*((char *) b + j) == '\n')
+                buf->lines++;
+
         if (ret < 0 || ret != data_size)
             return ret;
-
     }
 
     /* fulfill other parts of b2 from end to begin */
@@ -670,6 +677,12 @@ edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size)
         sz = mc_read (fd, b, data_size);
         if (sz >= 0)
             ret += sz;
+
+        /* count lines */
+        for (j = 0; j < sz; j++)
+            if (*((char *) b + j) == '\n')
+                buf->lines++;
+
         if (sz != data_size)
             break;
     }

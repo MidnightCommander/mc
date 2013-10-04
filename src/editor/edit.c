@@ -167,9 +167,7 @@ edit_load_file_fast (edit_buffer_t * buf, const vfs_path_t * filename_vpath)
     }
 
     ret = (edit_buffer_read_file (buf, file, buf->size) == buf->size);
-    if (ret)
-        buf->lines = edit_buffer_count_lines (buf, 0, buf->size);
-    else
+    if (!ret)
     {
         gchar *errmsg;
 
@@ -320,7 +318,7 @@ check_file_access (WEdit * edit, const vfs_path_t * filename_vpath, struct stat 
         g_free (errmsg);
         errmsg = NULL;
 
-        if (act == 1)
+        if (act != 0)
             ret = FALSE;
     }
 
