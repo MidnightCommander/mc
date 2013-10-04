@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-07-05 09:13+0400\n"
+"POT-Creation-Date: 2013-10-04 09:49+0400\n"
 "PO-Revision-Date: 2013-08-04 10:16+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -2739,9 +2739,6 @@ msgstr "Sorgente"
 msgid "Target"
 msgstr "Destinaz"
 
-msgid "Deleting"
-msgstr "Sto eliminando"
-
 msgid "Follow &links"
 msgstr "Segui i co&llegamenti"
 
@@ -4295,3 +4292,6 @@ msgstr "Continuare dall'inizio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Impossibile ricevere copia locale di /ftp://un.host/modificami.txt"
+
+#~ msgid "Deleting"
+#~ msgstr "Sto eliminando"
