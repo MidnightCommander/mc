@@ -50,8 +50,8 @@ CPPCHECK_CMD = cppcheck \
     --std=c99
 
 CPPCHECK_DIRS = \
-    $(top_srcdir)/lib \
-    $(top_srcdir)/src
+    "$(top_srcdir)/lib" \
+    "$(top_srcdir)/src"
 
 CPPCHECK_OUT_PREFIX = $(top_builddir)/cppcheck-
 
@@ -106,3 +106,22 @@ cppcheck-split-all: \
     cppcheck-unusedFunction \
     cppcheck-missingInclude
 
+INDENT_CMD = indent \
+    --gnu-style \
+    --format-first-column-comments \
+    --indent-level4 \
+    --brace-indent0 \
+    --line-length100 \
+    --no-tabs \
+    --blank-lines-after-procedures
+
+INDENT_DIRS = \
+    "$(top_srcdir)/lib" \
+    "$(top_srcdir)/src" \
+    "$(top_srcdir)/tests"
+
+indent:
+	for directory in $(INDENT_DIRS); do \
+	    find "$${directory}" -name '*.[ch]' -print0 | \
+	        xargs -0 $(INDENT_CMD); \
+	done
