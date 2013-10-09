@@ -569,6 +569,7 @@ command_completion_function (const char *_text, int state, input_complete_t flag
     };
     char *p, *found;
 
+    /* cppcheck-suppress uninitvar */
     SHOW_C_CTX ("command_completion_function");
 
     if (!(flags & INPUT_COMPLETE_COMMANDS))

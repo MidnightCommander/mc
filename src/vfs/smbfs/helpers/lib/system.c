@@ -103,6 +103,7 @@ sys_select (int maxfd, fd_set * fds, struct timeval *tval)
 #else /* !NO_SELECT */
 int
 sys_select (int maxfd, fd_set * fds, struct timeval *tval)
+/* cppcheck-suppress syntaxError */
 {
 #ifdef USE_POLL
     struct pollfd pfd[256];

@@ -1566,7 +1566,7 @@ edit_show_numbers_cmd (WDialog * h)
 void
 edit_save_mode_cmd (void)
 {
-    char *str_result;
+    char *str_result = NULL;
 
     const char *str[] = {
         N_("&Quick save"),
@@ -3201,9 +3201,9 @@ edit_block_process_cmd (WEdit * edit, int macro_number)
 void
 edit_mail_dialog (WEdit * edit)
 {
-    char *tmail_to;
-    char *tmail_subject;
-    char *tmail_cc;
+    char *tmail_to = NULL;
+    char *tmail_subject = NULL;
+    char *tmail_cc = NULL;
 
     static char *mail_cc_last = 0;
     static char *mail_subject_last = 0;

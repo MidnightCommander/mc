@@ -380,12 +380,15 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
     case S_IFCHR:
     case S_IFBLK:
 #ifdef S_IFSOCK
+        /* cppcheck-suppress syntaxError */
     case S_IFSOCK:
 #endif
 #ifdef S_IFIFO
+        /* cppcheck-suppress syntaxError */
     case S_IFIFO:
 #endif
 #ifdef S_IFNAM
+        /* cppcheck-suppress syntaxError */
     case S_IFNAM:
 #endif
         if ((st->st_size != 0) && (st->st_rdev == 0x0001))
