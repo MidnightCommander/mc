@@ -1109,8 +1109,8 @@ lcsubstr (const char *s, int m, const char *t, int n, GArray * ret, int min)
         }
     }
 
-    free (Lcurr);
-    free (Lprev);
+    g_free (Lcurr);
+    g_free (Lprev);
     return z;
 }
 
