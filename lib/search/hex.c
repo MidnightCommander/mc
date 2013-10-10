@@ -75,6 +75,7 @@ mc_search__hex_translate_to_regex (const GString * astr)
     {
         int val, ptr;
 
+        /* cppcheck-suppress invalidscanf */
         if (sscanf (tmp_str + loop, "%x%n", &val, &ptr))
         {
             if (val < -128 || val > 255)

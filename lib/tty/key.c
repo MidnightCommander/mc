@@ -1578,9 +1578,6 @@ lookup_key_by_code (const int keycode)
     /* modifier */
     unsigned int mod = keycode & KEY_M_MASK;
 
-    int use_meta = -1;
-    int use_ctrl = -1;
-    int use_shift = -1;
     int key_idx = -1;
 
     GString *s;
@@ -1594,8 +1591,7 @@ lookup_key_by_code (const int keycode)
         {
             if (lookup_keycode (KEY_M_ALT, &idx))
             {
-                use_meta = idx;
-                g_string_append (s, key_conv_tab_sorted[use_meta]->name);
+                g_string_append (s, key_conv_tab_sorted[idx]->name);
                 g_string_append_c (s, '-');
             }
         }
@@ -1607,8 +1603,7 @@ lookup_key_by_code (const int keycode)
 
             if (lookup_keycode (KEY_M_CTRL, &idx))
             {
-                use_ctrl = idx;
-                g_string_append (s, key_conv_tab_sorted[use_ctrl]->name);
+                g_string_append (s, key_conv_tab_sorted[idx]->name);
                 g_string_append_c (s, '-');
             }
         }
@@ -1616,12 +1611,11 @@ lookup_key_by_code (const int keycode)
         {
             if (lookup_keycode (KEY_M_ALT, &idx))
             {
-                use_shift = idx;
                 if (k < 127)
                     g_string_append_c (s, (gchar) g_ascii_toupper ((gchar) k));
                 else
                 {
-                    g_string_append (s, key_conv_tab_sorted[use_shift]->name);
+                    g_string_append (s, key_conv_tab_sorted[idx]->name);
                     g_string_append_c (s, '-');
                     g_string_append (s, key_conv_tab_sorted[key_idx]->name);
                 }

@@ -99,10 +99,13 @@ parse_256_color_name (const char *color_name)
 {
     int i;
     char dummy;
+
+    /* cppcheck-suppress invalidscanf */
     if (sscanf (color_name, "color%d%c", &i, &dummy) == 1 && i >= 0 && i < 256)
     {
         return i;
     }
+    /* cppcheck-suppress invalidscanf */
     if (sscanf (color_name, "gray%d%c", &i, &dummy) == 1 && i >= 0 && i < 24)
     {
         return 232 + i;
@@ -155,10 +158,10 @@ tty_color_get_name_by_index (int idx)
 int
 tty_color_get_index_by_name (const char *color_name)
 {
-
     if (color_name != NULL)
     {
         size_t i;
+
         for (i = 0; color_table[i].name != NULL; i++)
             if (strcmp (color_name, color_table[i].name) == 0)
                 return color_table[i].value;

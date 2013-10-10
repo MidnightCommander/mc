@@ -80,7 +80,7 @@ static vfs_path_t *
 mc_def_getlocalcopy (const vfs_path_t * filename_vpath)
 {
     vfs_path_t *tmp_vpath = NULL;
-    int fdin = -1, fdout = -1;
+    int fdin, fdout = -1;
     ssize_t i;
     char buffer[BUF_1K * 8];
     struct stat mystat;

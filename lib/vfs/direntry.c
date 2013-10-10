@@ -245,7 +245,6 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
 {
     struct vfs_s_entry *ent = NULL;
     char *const path = g_strdup (a_path);
-    struct vfs_s_entry *retval = NULL;
     GList *iter;
 
     if (root->super->root != root)
@@ -262,11 +261,11 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
         dirname = g_path_get_dirname (path);
         name = g_path_get_basename (path);
         ino = vfs_s_find_inode (me, root->super, dirname, follow, flags | FL_DIR);
-        retval = vfs_s_find_entry_tree (me, ino, name, follow, flags);
+        ent = vfs_s_find_entry_tree (me, ino, name, follow, flags);
         g_free (dirname);
         g_free (name);
         g_free (path);
-        return retval;
+        return ent;
     }
 
     iter = g_list_find_custom (root->subdir, path, (GCompareFunc) vfs_s_entry_compare);

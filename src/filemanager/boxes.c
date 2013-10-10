@@ -508,7 +508,6 @@ configure_box (void)
 #endif
 
         if (quick_dialog (&qdlg) == B_ENTER)
-            /* cppcheck-suppress uninitvar */
             old_esc_mode_timeout = atoi (time_out_new);
 
         g_free (time_out_new);

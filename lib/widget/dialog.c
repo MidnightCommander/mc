@@ -520,6 +520,7 @@ dlg_key_event (WDialog * h, int d_key)
     if (handled == MSG_NOT_HANDLED)
         handled = dlg_handle_key (h, d_key);
 
+    (void) handled;
     send_message (h, NULL, MSG_POST_KEY, d_key, NULL);
 }
 
