@@ -133,6 +133,7 @@ sftpfs_open_file (vfs_file_handler_t * file_handler, int flags, mode_t mode, GEr
         {
             sftpfs_ssherror_to_gliberror (super_data, libssh_errno, error);
             g_free (name);
+            g_free (file_handler_data);
             return FALSE;
         }
     }
