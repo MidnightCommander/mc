@@ -4694,18 +4694,20 @@ const panel_field_t *
 panel_get_field_by_title (const char *name)
 {
     gsize lc_index;
-    gchar *title = NULL;
 
     for (lc_index = 0; panel_fields[lc_index].id != NULL; lc_index++)
     {
+        gchar *title;
+        gboolean ok;
+
         title = panel_get_title_without_hotkey (panel_fields[lc_index].title_hotkey);
-        if (panel_fields[lc_index].title_hotkey != NULL && strcmp (name, title) == 0)
-        {
-            g_free (title);
+        ok = title != NULL && strcmp (name, title) == 0;
+        g_free (title);
+
+        if (ok)
             return &panel_fields[lc_index];
-        }
     }
-    g_free (title);
+
     return NULL;
 }
 
