@@ -57,7 +57,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * \fn FileOpContext * file_op_context_new (FileOperation op)
+ * \fn file_op_context_t * file_op_context_new (FileOperation op)
  * \param op file operation struct
  * \return The newly-created context, filled with the default file mask values.
  *
@@ -65,12 +65,12 @@
  * to have a user interface for this, call file_op_context_create_ui().
  */
 
-FileOpContext *
+file_op_context_t *
 file_op_context_new (FileOperation op)
 {
-    FileOpContext *ctx;
+    file_op_context_t *ctx;
 
-    ctx = g_new0 (FileOpContext, 1);
+    ctx = g_new0 (file_op_context_t, 1);
     ctx->operation = op;
     ctx->eta_secs = 0.0;
     ctx->progress_bytes = 0;
@@ -88,7 +88,7 @@ file_op_context_new (FileOperation op)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * \fn void file_op_context_destroy (FileOpContext *ctx)
+ * \fn void file_op_context_destroy (file_op_context_t *ctx)
  * \param ctx The file operation context to destroy.
  *
  * Destroys the specified file operation context and its associated UI data, if
@@ -96,7 +96,7 @@ file_op_context_new (FileOperation op)
  */
 
 void
-file_op_context_destroy (FileOpContext * ctx)
+file_op_context_destroy (file_op_context_t * ctx)
 {
     if (ctx != NULL)
     {

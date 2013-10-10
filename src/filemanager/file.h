@@ -34,15 +34,15 @@ typedef struct
 
 /*** declarations of public functions ************************************************************/
 
-FileProgressStatus copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
+FileProgressStatus copy_file_file (FileOpTotalContext * tctx, file_op_context_t * ctx,
                                    const char *src_path, const char *dst_path);
-FileProgressStatus move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx,
+FileProgressStatus move_dir_dir (FileOpTotalContext * tctx, file_op_context_t * ctx,
                                  const char *s, const char *d);
-FileProgressStatus copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx,
+FileProgressStatus copy_dir_dir (FileOpTotalContext * tctx, file_op_context_t * ctx,
                                  const char *s, const char *d,
                                  gboolean toplevel, gboolean move_over, gboolean do_delete,
                                  GSList * parent_dirs);
-FileProgressStatus erase_dir (FileOpTotalContext * tctx, FileOpContext * ctx,
+FileProgressStatus erase_dir (FileOpTotalContext * tctx, file_op_context_t * ctx,
                               const vfs_path_t * vpath);
 
 gboolean panel_operate (void *source_panel, FileOperation op, gboolean force_single);

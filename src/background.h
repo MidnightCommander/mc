@@ -6,7 +6,7 @@
 #define MC__BACKGROUND_H
 
 #include <sys/types.h>          /* pid_t */
-
+#include "filemanager/fileopctx.h"
 /*** typedefs(not structures) and defined constants **********************************************/
 
 enum TaskState
@@ -25,8 +25,6 @@ typedef struct TaskList
     struct TaskList *next;
 } TaskList;
 
-struct FileOpContext;
-
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
@@ -37,8 +35,8 @@ extern struct TaskList *task_list;
 
 /*** declarations of public functions ************************************************************/
 
-int do_background (struct FileOpContext *ctx, char *info);
-int parent_call (void *routine, struct FileOpContext *ctx, int argc, ...);
+int do_background (file_op_context_t * ctx, char *info);
+int parent_call (void *routine, file_op_context_t * ctx, int argc, ...);
 char *parent_call_string (void *routine, int argc, ...);
 
 void unregister_task_running (pid_t pid, int fd);

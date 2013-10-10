@@ -241,7 +241,7 @@ typedef struct
     replace_action_t replace_result;
 
     struct stat *s_stat, *d_stat;
-} FileOpContextUI;
+} file_op_context_ui_t;
 
 /*** file scope variables ************************************************************************/
 
@@ -396,7 +396,7 @@ file_bps_prepare_for_show (char *buffer, long bps)
  *   alex
  */
 static replace_action_t
-overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
+overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
 {
 #define ADD_RD_BUTTON(i, ypos) \
     add_widget_autopos (ui->replace_dlg, \
@@ -461,7 +461,7 @@ overwrite_query_dialog (FileOpContext * ctx, enum OperationMode mode)
     const size_t num = G_N_ELEMENTS (rd_widgets);
     int *widgets_len;
 
-    FileOpContextUI *ui = ctx->ui;
+    file_op_context_ui_t *ui = ctx->ui;
 
     char buffer[BUF_SMALL];
     char fsize_buffer[BUF_SMALL];
@@ -658,11 +658,11 @@ progress_button_callback (WButton * button, int action)
 /* --------------------------------------------------------------------------------------------- */
 
 FileProgressStatus
-check_progress_buttons (FileOpContext * ctx)
+check_progress_buttons (file_op_context_t * ctx)
 {
     int c;
     Gpm_Event event;
-    FileOpContextUI *ui;
+    file_op_context_ui_t *ui;
 
     if (ctx == NULL || ctx->ui == NULL)
         return FILE_CONT;
@@ -710,10 +710,10 @@ check_progress_buttons (FileOpContext * ctx)
 /* {{{ File progress display routines */
 
 void
-file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
+file_op_context_create_ui (file_op_context_t * ctx, gboolean with_eta,
                            filegui_dialog_type_t dialog_type)
 {
-    FileOpContextUI *ui;
+    file_op_context_ui_t *ui;
     int buttons_width;
     int dlg_width = 58, dlg_height = 17;
     int y = 2, x = 3;
@@ -733,7 +733,7 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
 
     ctx->dialog_type = dialog_type;
     ctx->recursive_result = RECURSIVE_YES;
-    ctx->ui = g_new0 (FileOpContextUI, 1);
+    ctx->ui = g_new0 (file_op_context_ui_t, 1);
 
     ui = ctx->ui;
     ui->replace_result = REPLACE_YES;
@@ -855,11 +855,11 @@ file_op_context_create_ui (FileOpContext * ctx, gboolean with_eta,
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_op_context_destroy_ui (FileOpContext * ctx)
+file_op_context_destroy_ui (file_op_context_t * ctx)
 {
     if (ctx != NULL && ctx->ui != NULL)
     {
-        FileOpContextUI *ui = (FileOpContextUI *) ctx->ui;
+        file_op_context_ui_t *ui = (file_op_context_ui_t *) ctx->ui;
 
         dlg_run_done (ui->op_dlg);
         dlg_destroy (ui->op_dlg);
@@ -874,10 +874,10 @@ file_op_context_destroy_ui (FileOpContext * ctx)
  */
 
 void
-file_progress_show (FileOpContext * ctx, off_t done, off_t total,
+file_progress_show (file_op_context_t * ctx, off_t done, off_t total,
                     const char *stalled_msg, gboolean force_update)
 {
-    FileOpContextUI *ui;
+    file_op_context_ui_t *ui;
     char buffer[BUF_TINY];
 
     if (!verbose || ctx == NULL || ctx->ui == NULL)
@@ -923,10 +923,10 @@ file_progress_show (FileOpContext * ctx, off_t done, off_t total,
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_count (FileOpContext * ctx, size_t done, size_t total)
+file_progress_show_count (file_op_context_t * ctx, size_t done, size_t total)
 {
     char buffer[BUF_TINY];
-    FileOpContextUI *ui;
+    file_op_context_ui_t *ui;
 
     if (ctx == NULL || ctx->ui == NULL)
         return;
@@ -945,13 +945,13 @@ file_progress_show_count (FileOpContext * ctx, size_t done, size_t total)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintmax_t copied_bytes,
-                          gboolean show_summary)
+file_progress_show_total (FileOpTotalContext * tctx, file_op_context_t * ctx,
+                          uintmax_t copied_bytes, gboolean show_summary)
 {
     char buffer[BUF_TINY];
     char buffer2[BUF_TINY];
     char buffer3[BUF_TINY];
-    FileOpContextUI *ui;
+    file_op_context_ui_t *ui;
 
     if (ctx == NULL || ctx->ui == NULL)
         return;
@@ -1027,9 +1027,9 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintma
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_source (FileOpContext * ctx, const vfs_path_t * s_vpath)
+file_progress_show_source (file_op_context_t * ctx, const vfs_path_t * s_vpath)
 {
-    FileOpContextUI *ui;
+    file_op_context_ui_t *ui;
 
     if (ctx == NULL || ctx->ui == NULL)
         return;
@@ -1055,9 +1055,9 @@ file_progress_show_source (FileOpContext * ctx, const vfs_path_t * s_vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_target (FileOpContext * ctx, const vfs_path_t * s_vpath)
+file_progress_show_target (file_op_context_t * ctx, const vfs_path_t * s_vpath)
 {
-    FileOpContextUI *ui;
+    file_op_context_ui_t *ui;
 
     if (ctx == NULL || ctx->ui == NULL)
         return;
@@ -1080,9 +1080,9 @@ file_progress_show_target (FileOpContext * ctx, const vfs_path_t * s_vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_deleting (FileOpContext * ctx, const char *s, size_t * count)
+file_progress_show_deleting (file_op_context_t * ctx, const char *s, size_t * count)
 {
-    FileOpContextUI *ui;
+    file_op_context_ui_t *ui;
 
     if (ctx == NULL || ctx->ui == NULL)
         return;
@@ -1097,11 +1097,11 @@ file_progress_show_deleting (FileOpContext * ctx, const char *s, size_t * count)
 /* --------------------------------------------------------------------------------------------- */
 
 FileProgressStatus
-file_progress_real_query_replace (FileOpContext * ctx,
+file_progress_real_query_replace (file_op_context_t * ctx,
                                   enum OperationMode mode, const char *destname,
                                   struct stat *_s_stat, struct stat *_d_stat)
 {
-    FileOpContextUI *ui;
+    file_op_context_ui_t *ui;
 
     if (ctx == NULL || ctx->ui == NULL)
         return FILE_CONT;
@@ -1156,7 +1156,7 @@ file_progress_real_query_replace (FileOpContext * ctx,
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-file_mask_dialog (FileOpContext * ctx, FileOperation operation,
+file_mask_dialog (file_op_context_t * ctx, FileOperation operation,
                   gboolean only_one,
                   const char *format, const void *text, const char *def_text, gboolean * do_bg)
 {
