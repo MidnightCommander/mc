@@ -740,8 +740,15 @@ read_file_system_list (int need_fs_type)
         int val;
         struct fs_data fsd;
 
-        while (errno = 0, 0 < (val = getmnt (&offset, &fsd, sizeof (fsd), NOSTAT_MANY, (char *) 0)))
+        while (TRUE)
         {
+            errno = 0;
+            val = getmnt (&offset, &fsd, sizeof (fsd), NOSTAT_MANY, (char *) NULL);
+            if (val < 0)
+                goto free_then_fail;
+            if (val == 0)
+                break;
+
             me = g_malloc (sizeof (*me));
             me->me_devname = g_strdup (fsd.fd_req.devname);
             me->me_mountdir = g_strdup (fsd.fd_req.path);
@@ -755,8 +762,6 @@ read_file_system_list (int need_fs_type)
             *mtail = me;
             mtail = &me->me_next;
         }
-        if (val < 0)
-            goto free_then_fail;
     }
 #endif /* MOUNTED_GETMNT. */
 
@@ -992,7 +997,7 @@ read_file_system_list (int need_fs_type)
         char *table = MNTTAB;
         FILE *fp;
         int ret;
-        int lockfd = -1;
+        int lockfd;
 
 #if defined F_RDLCK && defined F_SETLKW
         /* MNTTAB_LOCK is a macro name of our own invention; it's not present in
@@ -1003,9 +1008,10 @@ read_file_system_list (int need_fs_type)
 #define MNTTAB_LOCK "/etc/.mnttab.lock"
 #endif
         lockfd = open (MNTTAB_LOCK, O_RDONLY);
-        if (0 <= lockfd)
+        if (lockfd >= 0)
         {
             struct flock flock;
+
             flock.l_type = F_RDLCK;
             flock.l_whence = SEEK_SET;
             flock.l_start = 0;
@@ -1018,6 +1024,7 @@ read_file_system_list (int need_fs_type)
                     errno = saved_errno;
                     return NULL;
                 }
+            }
         }
         else if (errno != ENOENT)
             return NULL;
@@ -1048,10 +1055,10 @@ read_file_system_list (int need_fs_type)
             ret = fclose (fp) == EOF ? errno : 0 < ret ? 0 : -1;
         }
 
-        if (0 <= lockfd && close (lockfd) != 0)
+        if (lockfd >= 0 && close (lockfd) != 0)
             ret = errno;
 
-        if (0 <= ret)
+        if (ret >= 0)
         {
             errno = ret;
             goto free_then_fail;

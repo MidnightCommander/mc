@@ -310,7 +310,7 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
         retval = mcview_load_command_output (view, command);
     else if (file != NULL && file[0] != '\0')
     {
-        int fd = -1;
+        int fd;
         char tmp[BUF_MEDIUM];
         struct stat st;
 

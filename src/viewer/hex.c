@@ -111,6 +111,22 @@ utf8_to_int (char *str, int *char_width, gboolean * result)
 #endif /* HAVE_CHARSET */
 
 /* --------------------------------------------------------------------------------------------- */
+/** Determine the state of the current byte.
+ *
+ * @param view viewer object
+ * @param from offset
+ * @param curr current node
+ */
+
+static mark_t
+mcview_hex_calculate_boldflag (mcview_t * view, off_t from, struct hexedit_change_node *curr)
+{
+    return (from == view->hex_cursor) ? MARK_CURSOR
+        : (curr != NULL && from == curr->offset) ? MARK_CHANGED
+        : (view->search_start <= from && from < view->search_end) ? MARK_SELECTED : MARK_NORMAL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -218,11 +234,7 @@ mcview_display_hex (mcview_t * view)
             }
 
             /* Determine the state of the current byte */
-            boldflag =
-                (from == view->hex_cursor) ? MARK_CURSOR
-                : (curr != NULL && from == curr->offset) ? MARK_CHANGED
-                : (view->search_start <= from &&
-                   from < view->search_end) ? MARK_SELECTED : MARK_NORMAL;
+            boldflag = mcview_hex_calculate_boldflag (view, from, curr);
 
             /* Determine the value of the current byte */
             if (curr != NULL && from == curr->offset)

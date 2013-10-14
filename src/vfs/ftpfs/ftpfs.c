@@ -386,6 +386,7 @@ ftpfs_get_reply (struct vfs_class *me, int sock, char *string_buf, int string_le
             code = 421;
             return 4;
         }
+        /* cppcheck-suppress invalidscanf */
         switch (sscanf (answer, "%d", &code))
         {
         case 0:
@@ -405,6 +406,7 @@ ftpfs_get_reply (struct vfs_class *me, int sock, char *string_buf, int string_le
                         code = 421;
                         return 4;
                     }
+                    /* cppcheck-suppress invalidscanf */
                     if ((sscanf (answer, "%d", &i) > 0) && (code == i) && (answer[3] == ' '))
                         break;
                 }
@@ -1093,6 +1095,7 @@ ftpfs_setup_passive_pasv (struct vfs_class *me, struct vfs_s_super *super,
         return 0;
     if (!isdigit ((unsigned char) *c))
         return 0;
+    /* cppcheck-suppress invalidscanf */
     if (sscanf (c, "%d,%d,%d,%d,%d,%d", &xa, &xb, &xc, &xd, &xe, &xf) != 6)
         return 0;
 

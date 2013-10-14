@@ -250,8 +250,8 @@ handle_console_linux (console_action_t action)
             close (pipefd1[1]);
             close (pipefd2[0]);
             ret = waitpid (cons_saver_pid, &status, 0);
-            mc_global.tty.console_flag = '\0';
             (void) ret;
+            mc_global.tty.console_flag = '\0';
         }
         break;
     default:

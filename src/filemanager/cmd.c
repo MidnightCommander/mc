@@ -957,7 +957,7 @@ mkdir_cmd (void)
                              _("Enter directory name:"), MC_HISTORY_FM_MKDIR, name,
                              INPUT_COMPLETE_FILENAMES);
 
-    if (dir != NULL && dir != '\0')
+    if (dir != NULL && *dir != '\0')
     {
         vfs_path_t *absdir;
 

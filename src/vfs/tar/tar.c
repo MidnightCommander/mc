@@ -146,14 +146,10 @@ enum
 
 struct sparse
 {
+    /* cppcheck-suppress unusedStructMember */
     char offset[12];
+    /* cppcheck-suppress unusedStructMember */
     char numbytes[12];
-};
-
-struct sp_array
-{
-    int offset;
-    int numbytes;
 };
 
 union record
@@ -190,11 +186,15 @@ union record
             {
                 char atime[12];
                 char ctime[12];
+                /* cppcheck-suppress unusedStructMember */
                 char offset[12];
+                /* cppcheck-suppress unusedStructMember */
                 char longnames[4];
+                /* cppcheck-suppress unusedStructMember */
                 char pad;
                 struct sparse sp[SPARSE_IN_HDR];
                 char isextended;
+                /* cppcheck-suppress unusedStructMember */
                 char realsize[12];      /* true size of the sparse file */
             } oldgnu;
         } unused;
