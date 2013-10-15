@@ -386,7 +386,7 @@ do_external_panelize (char *command)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-do_panelize_cd (struct WPanel *panel)
+do_panelize_cd (WPanel * panel)
 {
     int i;
     dir_list *list;
@@ -457,7 +457,7 @@ panelize_change_root (const vfs_path_t * new_root)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-panelize_save_panel (struct WPanel *panel)
+panelize_save_panel (WPanel * panel)
 {
     int i;
     dir_list *list = &panel->dir;
@@ -496,7 +496,7 @@ cd_panelize_cmd (void)
     if (!SELECTED_IS_PANEL)
         set_display_type (MENU_PANEL_IDX, view_listing);
 
-    do_panelize_cd ((struct WPanel *) get_panel_widget (MENU_PANEL_IDX));
+    do_panelize_cd (PANEL (get_panel_widget (MENU_PANEL_IDX)));
 }
 
 /* --------------------------------------------------------------------------------------------- */

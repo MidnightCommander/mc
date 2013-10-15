@@ -10,6 +10,7 @@
 #include "lib/global.h"         /* GError */
 
 #include "filemanager/layout.h" /* panel_view_mode_t */
+#include "filemanager/panel.h"  /* WPanel */
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -53,8 +54,6 @@ typedef struct
     qsearch_mode_t qsearch_mode;        /* Quick search mode */
     gboolean torben_fj_mode;    /* If TRUE, use some usability hacks by Torben */
 } panels_options_t;
-
-struct WPanel;
 
 typedef struct macro_action_t
 {
@@ -154,8 +153,8 @@ char *load_anon_passwd (void);
 void load_keymap_defs (gboolean load_from_file);
 void free_keymap_defs (void);
 
-void panel_load_setup (struct WPanel *panel, const char *section);
-void panel_save_setup (struct WPanel *panel, const char *section);
+void panel_load_setup (WPanel * panel, const char *section);
+void panel_save_setup (WPanel * panel, const char *section);
 
 void panels_load_options (void);
 void panels_save_options (void);

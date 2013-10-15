@@ -1393,7 +1393,7 @@ panel_save_name (WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-directory_history_add (struct WPanel *panel, const vfs_path_t * vpath)
+directory_history_add (WPanel * panel, const vfs_path_t * vpath)
 {
     char *tmp;
 
@@ -1409,7 +1409,7 @@ static gboolean
 panel_load_history (const gchar * event_group_name, const gchar * event_name,
                     gpointer init_data, gpointer data)
 {
-    WPanel *p = (WPanel *) init_data;
+    WPanel *p = PANEL (init_data);
     ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
 
     (void) event_group_name;
@@ -1435,7 +1435,7 @@ static gboolean
 panel_save_history (const gchar * event_group_name, const gchar * event_name,
                     gpointer init_data, gpointer data)
 {
-    WPanel *p = (WPanel *) init_data;
+    WPanel *p = PANEL (init_data);
 
     (void) event_group_name;
     (void) event_name;
@@ -3399,7 +3399,7 @@ panel_key (WPanel * panel, int key)
 static cb_ret_t
 panel_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WPanel *panel = (WPanel *) w;
+    WPanel *panel = PANEL (w);
     WButtonBar *bb;
 
     switch (msg)
@@ -3585,7 +3585,7 @@ mouse_sort_col (WPanel * panel, int x)
 static int
 panel_event (Gpm_Event * event, void *data)
 {
-    WPanel *panel = (WPanel *) data;
+    WPanel *panel = PANEL (data);
     Widget *w = WIDGET (data);
 
     const int lines = llines (panel);
@@ -3799,7 +3799,7 @@ update_one_panel (int which, panel_update_flags_t flags, const char *current_fil
     {
         WPanel *panel;
 
-        panel = (WPanel *) get_panel_widget (which);
+        panel = PANEL (get_panel_widget (which));
         if (panel->is_panelized)
             flags &= ~UP_RELOAD;
         update_one_panel_widget (panel, flags, current_file);
@@ -4409,7 +4409,7 @@ do_file_mark (WPanel * panel, int idx, int mark)
  * Record change in the directory history.
  */
 gboolean
-do_panel_cd (struct WPanel *panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type)
+do_panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type)
 {
     gboolean r;
 
@@ -4621,9 +4621,9 @@ update_panels (panel_update_flags_t flags, const char *current_file)
         update_one_panel (get_other_index (), flags, UP_KEEPSEL);
 
     if (get_current_type () == view_listing)
-        panel = (WPanel *) get_panel_widget (get_current_index ());
+        panel = PANEL (get_panel_widget (get_current_index ()));
     else
-        panel = (WPanel *) get_panel_widget (get_other_index ());
+        panel = PANEL (get_panel_widget (get_other_index ()));
 
     if (!panel->is_panelized)
         (void) mc_chdir (panel->cwd_vpath);

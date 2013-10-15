@@ -2593,7 +2593,7 @@ compute_dir_size (const vfs_path_t * dirname_vpath, void *ui, compute_dir_size_c
 gboolean
 panel_operate (void *source_panel, FileOperation operation, gboolean force_single)
 {
-    WPanel *panel = (WPanel *) source_panel;
+    WPanel *panel = PANEL (source_panel);
     const gboolean single_entry = force_single || (panel->marked <= 1)
         || (get_current_type () == view_tree);
 

@@ -1422,7 +1422,7 @@ panel_load_setup (WPanel * panel, const char *section)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-panel_save_setup (struct WPanel *panel, const char *section)
+panel_save_setup (WPanel * panel, const char *section)
 {
     char buffer[BUF_TINY];
     size_t i;

@@ -24,8 +24,6 @@
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-struct WPanel;
-
 /*** global variables defined in .c file *********************************************************/
 
 extern WMenuBar *the_menubar;

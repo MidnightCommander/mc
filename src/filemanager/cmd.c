@@ -588,7 +588,7 @@ switch_to_listing (int panel_index)
     {
         WPanel *p;
 
-        p = (WPanel *) get_panel_widget (panel_index);
+        p = PANEL (get_panel_widget (panel_index));
         if (p->is_panelized)
         {
             p->is_panelized = FALSE;
@@ -603,9 +603,10 @@ switch_to_listing (int panel_index)
 static gboolean
 set_basic_panel_listing_to (int panel_index, int listing_mode)
 {
-    WPanel *p = (WPanel *) get_panel_widget (panel_index);
+    WPanel *p;
     gboolean ok;
 
+    p = PANEL (get_panel_widget (panel_index));
     switch_to_listing (panel_index);
     p->list_type = listing_mode;
 
@@ -1803,7 +1804,7 @@ info_cmd (void)
 void
 quick_view_cmd (void)
 {
-    if ((WPanel *) get_panel_widget (MENU_PANEL_IDX) == current_panel)
+    if (PANEL (get_panel_widget (MENU_PANEL_IDX)) == current_panel)
         change_panel ();
     set_display_type (MENU_PANEL_IDX, view_quick);
 }
@@ -1813,8 +1814,11 @@ quick_view_cmd (void)
 void
 toggle_listing_cmd (void)
 {
-    int current = get_current_index ();
-    WPanel *p = (WPanel *) get_panel_widget (current);
+    int current;
+    WPanel *p;
+
+    current = get_current_index ();
+    p = PANEL (get_panel_widget (current));
 
     set_basic_panel_listing_to (current, (p->list_type + 1) % LIST_TYPES);
 }

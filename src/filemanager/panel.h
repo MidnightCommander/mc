@@ -17,6 +17,7 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+#define PANEL(x) ((WPanel *)(x))
 #define selection(p) (&(p->dir.list[p->selected]))
 #define DEFAULT_USER_FORMAT "half type name | size | perm"
 
@@ -79,7 +80,7 @@ typedef struct
     vfs_path_t *root_vpath;
 } panelized_panel_t;
 
-typedef struct WPanel
+typedef struct
 {
     Widget widget;
     dir_list dir;               /* Directory contents */
@@ -170,7 +171,7 @@ void recalculate_panel_summary (WPanel * panel);
 void file_mark (WPanel * panel, int idx, int val);
 void do_file_mark (WPanel * panel, int idx, int val);
 
-gboolean do_panel_cd (struct WPanel *panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type);
+gboolean do_panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type);
 
 gsize panel_get_num_of_sortable_fields (void);
 const char **panel_get_sortable_fields (gsize *);
