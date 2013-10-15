@@ -3297,7 +3297,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
 #ifdef HAVE_CHARSET
         if (char_for_insertion > 255 && !mc_global.utf8_display)
         {
-            unsigned char str[6 + 1];
+            unsigned char str[UTF8_CHAR_LEN + 1];
             size_t i = 0;
             int res;
 
@@ -3311,7 +3311,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
             {
                 str[res] = '\0';
             }
-            while (str[i] != 0 && i <= 6)
+            while (i <= UTF8_CHAR_LEN && str[i] != 0)
             {
                 char_for_insertion = str[i];
                 edit_insert (edit, char_for_insertion);

@@ -432,7 +432,7 @@ str_nconvert_to_input (char *str, int len)
 unsigned char
 convert_from_utf_to_current (const char *str)
 {
-    unsigned char buf_ch[6 + 1];
+    unsigned char buf_ch[UTF8_CHAR_LEN + 1];
     unsigned char ch = '.';
     GIConv conv;
     const char *cp_to;
@@ -467,8 +467,8 @@ convert_from_utf_to_current (const char *str)
 unsigned char
 convert_from_utf_to_current_c (const int input_char, GIConv conv)
 {
-    unsigned char str[6 + 1];
-    unsigned char buf_ch[6 + 1];
+    unsigned char str[UTF8_CHAR_LEN + 1];
+    unsigned char buf_ch[UTF8_CHAR_LEN + 1];
     unsigned char ch = '.';
 
     int res = 0;
@@ -499,7 +499,7 @@ int
 convert_from_8bit_to_utf_c (const char input_char, GIConv conv)
 {
     unsigned char str[2];
-    unsigned char buf_ch[6 + 1];
+    unsigned char buf_ch[UTF8_CHAR_LEN + 1];
     int ch = '.';
     int res = 0;
 
@@ -533,7 +533,7 @@ int
 convert_from_8bit_to_utf_c2 (const char input_char)
 {
     unsigned char str[2];
-    unsigned char buf_ch[6 + 1];
+    unsigned char buf_ch[UTF8_CHAR_LEN + 1];
     int ch = '.';
     int res = 0;
     GIConv conv;

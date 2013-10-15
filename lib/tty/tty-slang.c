@@ -672,7 +672,7 @@ tty_print_alt_char (int c, gboolean single)
 void
 tty_print_anychar (int c)
 {
-    char str[6 + 1];
+    char str[UTF8_CHAR_LEN + 1];
 
     if (c > 255)
     {

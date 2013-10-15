@@ -173,7 +173,7 @@ mcview_display_hex (mcview_t * view)
 #ifdef HAVE_CHARSET
             if (view->utf8)
             {
-                char corr_buf[6 + 1];
+                char corr_buf[UTF8_CHAR_LEN + 1];
                 int cnt, cw = 1;
                 gboolean read_res = TRUE;
                 ch = mcview_get_utf (view, from, &cw, &read_res);
