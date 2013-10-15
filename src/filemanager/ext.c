@@ -625,9 +625,6 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean c
 
     /* Following variables are valid if *have_type is TRUE */
     static char content_string[2048];
-#ifdef HAVE_CHARSET
-    static char encoding_id[21];        /* CSISO51INISCYRILLIC -- 20 */
-#endif
     static size_t content_shift = 0;
     static int got_data = 0;
 
@@ -640,6 +637,7 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean c
         const char *realname;   /* name used with "file" */
 
 #ifdef HAVE_CHARSET
+        static char encoding_id[21];    /* CSISO51INISCYRILLIC -- 20 */
         int got_encoding_data;
 #endif /* HAVE_CHARSET */
 

@@ -760,7 +760,6 @@ str_msg_term_size (const char *text, int *lines, int *columns)
     char *p, *tmp;
     char *q;
     char c = '\0';
-    int width;
 
     *lines = 1;
     *columns = 0;
@@ -770,6 +769,8 @@ str_msg_term_size (const char *text, int *lines, int *columns)
 
     while (TRUE)
     {
+        int width;
+
         q = strchr (p, '\n');
         if (q != NULL)
         {

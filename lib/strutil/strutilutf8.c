@@ -439,11 +439,12 @@ str_utf8_term_form (const char *text)
 {
     static char result[BUF_MEDIUM * 6];
     const struct term_form *pre_form;
-    char *composed;
 
     pre_form = str_utf8_make_make_term_form (text, (size_t) (-1));
     if (pre_form->compose)
     {
+        char *composed;
+
         composed = g_utf8_normalize (pre_form->text, -1, G_NORMALIZE_DEFAULT_COMPOSE);
         g_strlcpy (result, composed, sizeof (result));
         g_free (composed);

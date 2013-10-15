@@ -697,23 +697,27 @@ static void
 ftpfs_load_no_proxy_list (void)
 {
     /* FixMe: shouldn't be hardcoded!!! */
-    char s[BUF_LARGE];          /* provide for BUF_LARGE characters */
-    FILE *npf;
-    int c;
-    char *p;
     static char *mc_file = NULL;
 
     mc_file = g_build_filename (mc_global.sysconfig_dir, "mc.no_proxy", (char *) NULL);
     if (exist_file (mc_file))
     {
+        FILE *npf;
+
         npf = fopen (mc_file, "r");
         if (npf != NULL)
         {
+            char s[BUF_LARGE];  /* provide for BUF_LARGE characters */
+
             while (fgets (s, sizeof (s), npf) != NULL)
             {
+                char *p;
+
                 p = strchr (s, '\n');
                 if (p == NULL)  /* skip bogus entries */
                 {
+                    int c;
+
                     while ((c = fgetc (npf)) != EOF && c != '\n')
                         ;
                     continue;
@@ -1409,7 +1413,6 @@ ftpfs_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
     struct vfs_s_super *super = FH_SUPER;
     static unsigned char const ipbuf[3] = { IAC, IP, IAC };
     fd_set mask;
-    char buf[BUF_8K];
     int dsock = FH_SOCK;
     FH_SOCK = -1;
     SUP->ctl_connection_busy = 0;
@@ -1437,6 +1440,8 @@ ftpfs_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
         if (select (dsock + 1, &mask, NULL, NULL, NULL) > 0)
         {
             struct timeval start_tim, tim;
+            char buf[BUF_8K];
+
             gettimeofday (&start_tim, NULL);
             /* flush the remaining data */
             while (read (dsock, buf, sizeof (buf)) > 0)
@@ -2310,11 +2315,12 @@ ftpfs_netrc_next (void)
 static int
 ftpfs_netrc_bad_mode (const char *netrcname)
 {
-    static int be_angry = 1;
     struct stat mystat;
 
     if (stat (netrcname, &mystat) >= 0 && (mystat.st_mode & 077))
     {
+        static int be_angry = 1;
+
         if (be_angry)
         {
             message (D_ERROR, MSG_ERROR,
@@ -2404,7 +2410,6 @@ ftpfs_netrc_lookup (const char *host, char **login, char **pass)
     char *tmp_pass = NULL;
     char hostname[MAXHOSTNAMELEN];
     const char *domain;
-    keyword_t keyword;
     static struct rupcache
     {
         struct rupcache *next;
@@ -2456,6 +2461,8 @@ ftpfs_netrc_lookup (const char *host, char **login, char **pass)
     /* Scan for keywords following "default" and "machine" */
     while (1)
     {
+        keyword_t keyword;
+
         int need_break = 0;
         keyword = ftpfs_netrc_next ();
 

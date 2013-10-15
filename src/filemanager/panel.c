@@ -1548,7 +1548,6 @@ paint_frame (WPanel * panel)
     Widget *w = WIDGET (panel);
 
     int side, width;
-    GString *format_txt;
 
     adjust_top_file (panel);
 
@@ -1559,6 +1558,7 @@ paint_frame (WPanel * panel)
 
     for (side = 0; side <= panel->split; side++)
     {
+        GString *format_txt;
         format_e *format;
 
         if (side)
@@ -1826,7 +1826,6 @@ use_display_format (WPanel * panel, const char *format, char **error, int isstat
     int expand_top = 0;         /* Max used element in expand */
     int usable_columns;         /* Usable columns in the panel */
     int total_cols = 0;
-    int i;
     format_e *darr, *home;
 
     if (!format)
@@ -1856,11 +1855,12 @@ use_display_format (WPanel * panel, const char *format, char **error, int isstat
     /* If we used more columns than the available columns, adjust that */
     if (total_cols > usable_columns)
     {
-        int pdif, dif = total_cols - usable_columns;
+        int dif = total_cols - usable_columns;
 
         while (dif)
         {
-            pdif = dif;
+            int pdif = dif;
+
             for (darr = home; darr; darr = darr->next)
             {
                 if (dif && darr->field_len - 1)
@@ -1880,6 +1880,7 @@ use_display_format (WPanel * panel, const char *format, char **error, int isstat
     /* Expand the available space */
     if ((usable_columns > total_cols) && expand_top)
     {
+        int i;
         int spaces = (usable_columns - total_cols) / expand_top;
         int extra = (usable_columns - total_cols) % expand_top;
 
@@ -2699,7 +2700,7 @@ static void
 chdir_to_readlink (WPanel * panel)
 {
     vfs_path_t *new_dir_vpath;
-    char buffer[MC_MAXPATHLEN], *p;
+    char buffer[MC_MAXPATHLEN];
     int i;
     struct stat st;
     vfs_path_t *panel_fname_vpath;
@@ -2724,6 +2725,8 @@ chdir_to_readlink (WPanel * panel)
     buffer[i] = 0;
     if (!S_ISDIR (st.st_mode))
     {
+        char *p;
+
         p = strrchr (buffer, PATH_SEP);
         if (p && !p[1])
         {
@@ -3529,7 +3532,6 @@ mouse_sort_col (WPanel * panel, int x)
     const char *lc_sort_name = NULL;
     panel_field_t *col_sort_format = NULL;
     format_e *format;
-    gchar *title;
 
     for (i = 0, format = panel->format; format != NULL; format = format->next)
     {
@@ -3547,6 +3549,8 @@ mouse_sort_col (WPanel * panel, int x)
 
     for (i = 0; panel_fields[i].id != NULL; i++)
     {
+        char *title;
+
         title = panel_get_title_without_hotkey (panel_fields[i].title_hotkey);
         if (!strcmp (lc_sort_name, title) && panel_fields[i].sort_routine)
         {

@@ -179,12 +179,12 @@ x11_available (void)
 Display *
 mc_XOpenDisplay (const char *displayname)
 {
-    Display *retval;
-
     if (x11_available ())
     {
         if (setjmp (x11_exception) == 0)
         {
+            Display *retval;
+
             longjmp_allowed = TRUE;
             retval = func_XOpenDisplay (displayname);
             longjmp_allowed = FALSE;
@@ -199,12 +199,12 @@ mc_XOpenDisplay (const char *displayname)
 int
 mc_XCloseDisplay (Display * display)
 {
-    int retval;
-
     if (x11_available ())
     {
         if (setjmp (x11_exception) == 0)
         {
+            int retval;
+
             longjmp_allowed = TRUE;
             retval = func_XCloseDisplay (display);
             longjmp_allowed = FALSE;

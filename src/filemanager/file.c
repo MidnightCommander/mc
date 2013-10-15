@@ -401,13 +401,13 @@ make_symlink (FileOpContext * ctx, const char *src_path, const char *dst_path)
 
     if (ctx->stable_symlinks && !g_path_is_absolute (link_target))
     {
-        char *p, *s;
-        vfs_path_t *q;
-
         const char *r = strrchr (src_path, PATH_SEP);
 
         if (r)
         {
+            char *p;
+            vfs_path_t *q;
+
             p = g_strndup (src_path, r - src_path + 1);
             if (g_path_is_absolute (dst_path))
                 q = vfs_path_from_str_flags (dst_path, VPF_NO_CANON);
@@ -416,6 +416,7 @@ make_symlink (FileOpContext * ctx, const char *src_path, const char *dst_path)
 
             if (vfs_path_tokens_count (q) > 1)
             {
+                char *s;
                 vfs_path_t *tmp_vpath1, *tmp_vpath2;
 
                 tmp_vpath1 = vfs_path_vtokens_get (q, -1, 1);
@@ -1026,7 +1027,6 @@ move_file_file (FileOpTotalContext * tctx, FileOpContext * ctx, const char *s, c
 static FileProgressStatus
 erase_file (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_t * vpath)
 {
-    int return_status;
     struct stat buf;
 
     file_progress_show_deleting (ctx, vfs_path_as_str (vpath), &tctx->progress_count);
@@ -1044,6 +1044,8 @@ erase_file (FileOpTotalContext * tctx, FileOpContext * ctx, const vfs_path_t * v
 
     while (mc_unlink (vpath) != 0 && !ctx->skip_all)
     {
+        int return_status;
+
         return_status = file_error (_("Cannot delete file \"%s\"\n%s"), vfs_path_as_str (vpath));
         if (return_status == FILE_ABORT)
             return return_status;

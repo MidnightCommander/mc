@@ -296,9 +296,7 @@ move_to_bottom (void)
 static const char *
 help_follow_link (const char *start, const char *lc_selected_item)
 {
-    char link_name[MAXLINKNAME];
     const char *p;
-    int i = 0;
 
     if (lc_selected_item == NULL)
         return start;
@@ -307,6 +305,9 @@ help_follow_link (const char *start, const char *lc_selected_item)
         ;
     if (*p == CHAR_LINK_POINTER)
     {
+        int i;
+        char link_name[MAXLINKNAME];
+
         link_name[0] = '[';
         for (i = 1; *p != CHAR_LINK_END && *p && *p != CHAR_NODE_END && i < MAXLINKNAME - 3;)
             link_name[i++] = *++p;

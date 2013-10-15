@@ -384,12 +384,12 @@ fish_set_env (int flags)
 static gboolean
 fish_info (struct vfs_class *me, struct vfs_s_super *super)
 {
-    char buffer[BUF_8K];
     if (fish_command (me, super, NONE, SUP->scr_info) == COMPLETE)
     {
         while (TRUE)
         {
             int res;
+            char buffer[BUF_8K];
 
             res = vfs_s_get_line_interruptible (me, buffer, sizeof (buffer), SUP->sockr);
             if ((res == 0) || (res == EINTR))

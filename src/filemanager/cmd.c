@@ -294,7 +294,7 @@ select_unselect_cmd (const char *title, const char *history_name, gboolean do_se
 static int
 compare_files (const vfs_path_t * vpath1, const vfs_path_t * vpath2, off_t size)
 {
-    int file1, file2;
+    int file1;
     int result = -1;            /* Different by default */
 
     if (size == 0)
@@ -303,15 +303,20 @@ compare_files (const vfs_path_t * vpath1, const vfs_path_t * vpath2, off_t size)
     file1 = open (vfs_path_as_str (vpath1), O_RDONLY);
     if (file1 >= 0)
     {
+        int file2;
+
         file2 = open (vfs_path_as_str (vpath2), O_RDONLY);
         if (file2 >= 0)
         {
 #ifdef HAVE_MMAP
-            char *data1, *data2;
+            char *data1;
+
             /* Ugly if jungle */
             data1 = mmap (0, size, PROT_READ, MAP_FILE | MAP_PRIVATE, file1, 0);
             if (data1 != (char *) -1)
             {
+                char *data2;
+
                 data2 = mmap (0, size, PROT_READ, MAP_FILE | MAP_PRIVATE, file2, 0);
                 if (data2 != (char *) -1)
                 {
@@ -619,7 +624,6 @@ set_basic_panel_listing_to (int panel_index, int listing_mode)
 gboolean
 view_file_at_line (const vfs_path_t * filename_vpath, int plain_view, int internal, long start_line)
 {
-    static const char *viewer = NULL;
     gboolean ret = TRUE;
 
     if (plain_view)
@@ -670,6 +674,8 @@ view_file_at_line (const vfs_path_t * filename_vpath, int plain_view, int intern
     }
     else
     {
+        static const char *viewer = NULL;
+
         if (viewer == NULL)
         {
             viewer = getenv ("VIEWER");
@@ -784,7 +790,6 @@ view_filtered_cmd (void)
 void
 do_edit_at_line (const vfs_path_t * what_vpath, gboolean internal, long start_line)
 {
-    static const char *editor = NULL;
 
 #ifdef USE_INTERNAL_EDIT
     if (internal)
@@ -792,6 +797,8 @@ do_edit_at_line (const vfs_path_t * what_vpath, gboolean internal, long start_li
     else
 #endif /* USE_INTERNAL_EDIT */
     {
+        static const char *editor = NULL;
+
         (void) internal;
 
         if (editor == NULL)
@@ -1056,11 +1063,11 @@ void
 select_invert_cmd (void)
 {
     int i;
-    file_entry_t *file;
 
     for (i = 0; i < current_panel->dir.len; i++)
     {
-        file = &current_panel->dir.list[i];
+        file_entry_t *file = &current_panel->dir.list[i];
+
         if (!panels_options.reverse_files_only || !S_ISDIR (file->st.st_mode))
             do_file_mark (current_panel, i, !file->f.marked);
     }
@@ -1087,7 +1094,6 @@ unselect_cmd (void)
 void
 ext_cmd (void)
 {
-    vfs_path_t *buffer_vpath;
     vfs_path_t *extdir_vpath;
     int dir;
 
@@ -1102,6 +1108,8 @@ ext_cmd (void)
 
     if (dir == 0)
     {
+        vfs_path_t *buffer_vpath;
+
         buffer_vpath = mc_config_get_full_vpath (MC_FILEBIND_FILE);
         check_for_default (extdir_vpath, buffer_vpath);
         do_edit (buffer_vpath);
@@ -1180,7 +1188,6 @@ edit_mc_menu_cmd (void)
 void
 edit_fhl_cmd (void)
 {
-    vfs_path_t *buffer_vpath = NULL;
     vfs_path_t *fhlfile_vpath = NULL;
 
     int dir;
@@ -1196,6 +1203,8 @@ edit_fhl_cmd (void)
 
     if (dir == 0)
     {
+        vfs_path_t *buffer_vpath;
+
         buffer_vpath = mc_config_get_full_vpath (MC_FHL_INI_FILE);
         check_for_default (fhlfile_vpath, buffer_vpath);
         do_edit (buffer_vpath);
@@ -1369,7 +1378,7 @@ edit_symlink_cmd (void)
         char buffer[MC_MAXPATHLEN];
         char *p = NULL;
         int i;
-        char *dest, *q;
+        char *q;
         vfs_path_t *p_vpath;
 
         p = selection (current_panel)->fname;
@@ -1380,6 +1389,8 @@ edit_symlink_cmd (void)
         i = readlink (p, buffer, MC_MAXPATHLEN - 1);
         if (i > 0)
         {
+            char *dest;
+
             buffer[i] = 0;
             dest =
                 input_expand_dialog (_("Edit symlink"), q, MC_HISTORY_FM_EDIT_LINK, buffer,

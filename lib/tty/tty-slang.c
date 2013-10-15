@@ -168,12 +168,13 @@ static void
 slang_reset_softkeys (void)
 {
     int key;
-    char *send;
     static const char display[] = "                ";
     char tmp[BUF_SMALL];
 
     for (key = 1; key < 9; key++)
     {
+        char *send;
+
         g_snprintf (tmp, sizeof (tmp), "k%d", key);
         send = (char *) SLtt_tgetstr (tmp);
         if (send != NULL)
@@ -672,11 +673,12 @@ tty_print_alt_char (int c, gboolean single)
 void
 tty_print_anychar (int c)
 {
-    char str[UTF8_CHAR_LEN + 1];
-
     if (c > 255)
     {
-        int res = g_unichar_to_utf8 (c, str);
+        char str[UTF8_CHAR_LEN + 1];
+        int res;
+
+        res = g_unichar_to_utf8 (c, str);
         if (res == 0)
         {
             str[0] = '.';

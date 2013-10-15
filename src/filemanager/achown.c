@@ -316,18 +316,19 @@ chl_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *dat
 static void
 do_enter_key (WDialog * h, int f_pos)
 {
-    WDialog *chl_dlg;
     WListbox *chl_list;
     struct passwd *chl_pass;
     struct group *chl_grp;
     int fe;
-    int lxx, lyy, b_pos;
     gboolean chl_end, is_owner;
-    const char *title;
-    int result;
 
     do
     {
+        int result;
+        WDialog *chl_dlg;
+        const char *title;
+        int lxx, lyy, b_pos;
+
         is_owner = (f_pos == 3);
         title = is_owner ? _("owner") : _("group");
 

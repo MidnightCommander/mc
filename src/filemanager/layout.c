@@ -877,8 +877,6 @@ set_hintbar (const char *str)
 void
 rotate_dash (gboolean show)
 {
-    static const char rotating_dash[4] = "|/-\\";
-    static size_t pos = 0;
     Widget *w = WIDGET (midnight_dlg);
 
     if (!nice_rotating_dash || (ok_to_refresh <= 0))
@@ -891,6 +889,9 @@ rotate_dash (gboolean show)
         tty_print_alt_char (ACS_URCORNER, FALSE);
     else
     {
+        static const char rotating_dash[4] = "|/-\\";
+        static size_t pos = 0;
+
         tty_print_char (rotating_dash[pos]);
         pos = (pos + 1) % sizeof (rotating_dash);
     }
@@ -903,14 +904,14 @@ rotate_dash (gboolean show)
 const char *
 get_nth_panel_name (int num)
 {
-    static char buffer[BUF_SMALL];
-
     if (!num)
         return "New Left Panel";
     else if (num == 1)
         return "New Right Panel";
     else
     {
+        static char buffer[BUF_SMALL];
+
         g_snprintf (buffer, sizeof (buffer), "%ith Panel", num);
         return buffer;
     }

@@ -113,8 +113,6 @@ void
 mcview_growbuf_read_until (mcview_t * view, off_t ofs)
 {
     ssize_t nread;
-    byte *p;
-    size_t bytesfree;
     gboolean short_read;
 
 #ifdef HAVE_ASSERT_H
@@ -127,6 +125,9 @@ mcview_growbuf_read_until (mcview_t * view, off_t ofs)
     short_read = FALSE;
     while (mcview_growbuf_filesize (view) < ofs || short_read)
     {
+        byte *p;
+        size_t bytesfree;
+
         if (view->growbuf_lastindex == VIEW_PAGE_SIZE)
         {
             /* Append a new block to the growing buffer */

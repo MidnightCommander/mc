@@ -621,7 +621,6 @@ read_file_system_list (int need_fs_type)
 #ifdef MOUNTED_LISTMNTENT
     {
         struct tabmntent *mntlist, *p;
-        struct mntent *mnt;
         struct mount_entry *me;
 
         /* the third and fourth arguments could be used to filter mounts,
@@ -633,7 +632,8 @@ read_file_system_list (int need_fs_type)
             return NULL;
         for (p = mntlist; p; p = p->next)
         {
-            mnt = p->ment;
+            struct mntent *mnt = p->ment;
+
             me = g_malloc (sizeof (*me));
             me->me_devname = g_strdup (mnt->mnt_fsname);
             me->me_mountdir = g_strdup (mnt->mnt_dir);
@@ -1590,13 +1590,15 @@ void
 my_statfs (struct my_statfs *myfs_stats, const char *path)
 {
 #ifdef HAVE_INFOMOUNT_LIST
-    size_t i, len = 0;
+    size_t len = 0;
     struct mount_entry *entry = NULL;
     struct mount_entry *temp = mc_mount_list;
     struct fs_usage fs_use;
 
     while (temp)
     {
+        size_t i;
+
         i = strlen (temp->me_mountdir);
         if (i > len && (strncmp (path, temp->me_mountdir, i) == 0))
             if (!entry || (path[i] == PATH_SEP || path[i] == '\0'))

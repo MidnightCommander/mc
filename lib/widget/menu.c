@@ -395,7 +395,6 @@ static void
 menubar_first (WMenuBar * menubar)
 {
     menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
-    menu_entry_t *entry;
 
     if (menu->selected == 0)
         return;
@@ -406,6 +405,8 @@ menubar_first (WMenuBar * menubar)
 
     while (TRUE)
     {
+        menu_entry_t *entry;
+
         entry = MENUENTRY (g_list_nth_data (menu->entries, menu->selected));
 
         if ((entry == NULL) || (entry->command == CK_IgnoreKey))

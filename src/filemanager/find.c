@@ -1810,10 +1810,11 @@ find_file (void)
     char *start_dir = NULL, *pattern = NULL, *content = NULL, *ignore_dirs = NULL;
     ssize_t start_dir_len;
     char *filename = NULL, *dirname = NULL;
-    int v;
 
     while (find_parameters (&start_dir, &start_dir_len, &ignore_dirs, &pattern, &content))
     {
+        int v;
+
         if (pattern[0] == '\0')
             break;              /* nothing search */
 

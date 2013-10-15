@@ -520,18 +520,17 @@ configure_box (void)
 void
 panel_options_box (void)
 {
-    const char *qsearch_options[] = {
-        N_("Case &insensitive"),
-        N_("Cas&e sensitive"),
-        N_("Use panel sort mo&de")
-    };
-
     int simple_swap;
 
     simple_swap = mc_config_get_bool (mc_main_config, CONFIG_PANELS_SECTION,
                                       "simple_swap", FALSE) ? 1 : 0;
-
     {
+        const char *qsearch_options[] = {
+            N_("Case &insensitive"),
+            N_("Cas&e sensitive"),
+            N_("Use panel sort mo&de")
+        };
+
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
             QUICK_START_COLUMNS,

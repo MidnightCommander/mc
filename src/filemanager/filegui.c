@@ -879,8 +879,6 @@ file_progress_show (FileOpContext * ctx, off_t done, off_t total,
 {
     FileOpContextUI *ui;
     char buffer[BUF_TINY];
-    char buffer2[BUF_TINY];
-    char buffer3[BUF_TINY];
 
     if (!verbose || ctx == NULL || ctx->ui == NULL)
         return;
@@ -901,11 +899,15 @@ file_progress_show (FileOpContext * ctx, off_t done, off_t total,
 
     if (ui->showing_eta && ctx->eta_secs > 0.5)
     {
+        char buffer2[BUF_TINY];
+
         file_eta_prepare_for_show (buffer2, ctx->eta_secs, FALSE);
         if (ctx->bps == 0)
             g_snprintf (buffer, BUF_TINY, "%s %s", buffer2, stalled_msg);
         else
         {
+            char buffer3[BUF_TINY];
+
             file_bps_prepare_for_show (buffer3, ctx->bps);
             g_snprintf (buffer, BUF_TINY, "%s (%s) %s", buffer2, buffer3, stalled_msg);
         }

@@ -1238,7 +1238,6 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
         char *dirname, *name;
         struct vfs_s_entry *ent;
         struct vfs_s_inode *dir;
-        int tmp_handle;
 
         /* If the filesystem is read-only, disable file creation */
         if (!(flags & O_CREAT) || !(path_element->class->write))
@@ -1258,6 +1257,7 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
         vfs_s_insert_entry (path_element->class, dir, ent);
         if ((VFSDATA (path_element)->flags & VFS_S_USETMP) != 0)
         {
+            int tmp_handle;
             vfs_path_t *tmp_vpath;
 
             tmp_handle = vfs_mkstemps (&tmp_vpath, path_element->class->name, name);
@@ -1547,7 +1547,6 @@ vfs_s_get_line (struct vfs_class *me, int sock, char *buf, int buf_len, char ter
 int
 vfs_s_get_line_interruptible (struct vfs_class *me, char *buffer, int size, int fd)
 {
-    int n;
     int i;
 
     (void) me;
@@ -1555,6 +1554,8 @@ vfs_s_get_line_interruptible (struct vfs_class *me, char *buffer, int size, int 
     tty_enable_interrupt_key ();
     for (i = 0; i < size - 1; i++)
     {
+        int n;
+
         n = read (fd, buffer + i, 1);
         tty_disable_interrupt_key ();
         if (n == -1 && errno == EINTR)

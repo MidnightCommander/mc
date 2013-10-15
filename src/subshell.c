@@ -184,10 +184,12 @@ static struct termios raw_mode;
 static ssize_t
 write_all (int fd, const void *buf, size_t count)
 {
-    ssize_t ret;
     ssize_t written = 0;
+
     while (count > 0)
     {
+        ssize_t ret;
+
         ret = write (fd, (const unsigned char *) buf + written, count);
         if (ret < 0)
         {
@@ -471,7 +473,6 @@ static gboolean
 feed_subshell (int how, int fail_on_error)
 {
     fd_set read_set;            /* For 'select' */
-    int maxfdp;
     int bytes;                  /* For the return value from 'read' */
     int i;                      /* Loop counter */
 
@@ -485,6 +486,8 @@ feed_subshell (int how, int fail_on_error)
 
     while (TRUE)
     {
+        int maxfdp;
+
         if (!subshell_alive)
             return FALSE;
 

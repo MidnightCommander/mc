@@ -814,13 +814,13 @@ put_prog_name (void)
 static void
 put_tagged (WPanel * panel)
 {
-    int i;
-
     if (!command_prompt)
         return;
     input_disable_update (cmdline);
     if (panel->marked)
     {
+        int i;
+
         for (i = 0; i < panel->dir.len; i++)
         {
             if (panel->dir.list[i].f.marked)

@@ -313,20 +313,20 @@ str_ascii_term_trim (const char *text, int width)
     static char result[BUF_MEDIUM];
     size_t remain;
     char *actual;
-    size_t pos = 0;
     size_t length;
 
     length = strlen (text);
     actual = result;
     remain = sizeof (result);
 
-
     if (width > 0)
     {
+        size_t pos;
+
         if (width >= (int) length)
         {
             /* copy all characters */
-            for (; pos < length && remain > 1; pos++, actual++, remain--)
+            for (pos = 0; pos < length && remain > 1; pos++, actual++, remain--)
             {
                 actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
                 actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
@@ -343,10 +343,8 @@ str_ascii_term_trim (const char *text, int width)
             actual += 3;
             remain -= 3;
 
-            pos += length - width + 3;
-
             /* copy suffix of text */
-            for (; pos < length && remain > 1; pos++, actual++, remain--)
+            for (pos = length - width + 3; pos < length && remain > 1; pos++, actual++, remain--)
             {
                 actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
                 actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
@@ -383,7 +381,6 @@ str_ascii_term_substring (const char *text, int start, int width)
     static char result[BUF_MEDIUM];
     size_t remain;
     char *actual;
-    size_t pos = 0;
     size_t length;
 
     actual = result;
@@ -392,11 +389,12 @@ str_ascii_term_substring (const char *text, int start, int width)
 
     if (start < (int) length)
     {
-        pos += start;
-        /* copy at most width characters from text from start */
-        for (; pos < length && width > 0 && remain > 1; pos++, width--, actual++, remain--)
-        {
+        size_t pos;
 
+        /* copy at most width characters from text from start */
+        for (pos = start; pos < length && width > 0 && remain > 1;
+             pos++, width--, actual++, remain--)
+        {
             actual[0] = isascii ((unsigned char) text[pos]) ? text[pos] : '?';
             actual[0] = g_ascii_isprint ((gchar) actual[0]) ? actual[0] : '.';
         }
@@ -497,7 +495,6 @@ str_ascii_search_first (const char *text, const char *search, int case_sen)
     char *fold_text;
     char *fold_search;
     const char *match;
-    size_t offset;
 
     fold_text = (case_sen) ? (char *) text : g_ascii_strdown (text, -1);
     fold_search = (case_sen) ? (char *) search : g_ascii_strdown (search, -1);
@@ -505,6 +502,8 @@ str_ascii_search_first (const char *text, const char *search, int case_sen)
     match = g_strstr_len (fold_text, -1, fold_search);
     if (match != NULL)
     {
+        size_t offset;
+
         offset = match - fold_text;
         match = text + offset;
     }
@@ -524,7 +523,6 @@ str_ascii_search_last (const char *text, const char *search, int case_sen)
     char *fold_text;
     char *fold_search;
     const char *match;
-    size_t offset;
 
     fold_text = (case_sen) ? (char *) text : g_ascii_strdown (text, -1);
     fold_search = (case_sen) ? (char *) search : g_ascii_strdown (search, -1);
@@ -532,6 +530,8 @@ str_ascii_search_last (const char *text, const char *search, int case_sen)
     match = g_strrstr_len (fold_text, -1, fold_search);
     if (match != NULL)
     {
+        size_t offset;
+
         offset = match - fold_text;
         match = text + offset;
     }

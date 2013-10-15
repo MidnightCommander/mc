@@ -450,7 +450,6 @@ toggle_panels (void)
 {
 #ifdef ENABLE_SUBSHELL
     vfs_path_t *new_dir_vpath = NULL;
-    vfs_path_t **new_dir_p;
 #endif /* ENABLE_SUBSHELL */
 
     SIG_ATOMIC_VOLATILE_T was_sigwinch = 0;
@@ -479,6 +478,8 @@ toggle_panels (void)
 #ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
     {
+        vfs_path_t **new_dir_p;
+
         new_dir_p = vfs_current_is_local ()? &new_dir_vpath : NULL;
         invoke_subshell (NULL, VISIBLY, new_dir_p);
     }

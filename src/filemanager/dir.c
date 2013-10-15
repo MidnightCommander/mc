@@ -386,12 +386,13 @@ sort_vers (file_entry_t * a, file_entry_t * b)
 int
 sort_ext (file_entry_t * a, file_entry_t * b)
 {
-    int r;
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
 
     if (ad == bd || panels_options.mix_all_files)
     {
+        int r;
+
         if (a->second_sort_key == NULL)
             a->second_sort_key = str_create_key (extension (a->fname), case_sensitive);
         if (b->second_sort_key == NULL)

@@ -240,7 +240,6 @@ char *
 get_owner (int uid)
 {
     struct passwd *pwd;
-    static char ibuf[10];
     char *name;
     static int uid_last;
 
@@ -256,6 +255,8 @@ get_owner (int uid)
     }
     else
     {
+        static char ibuf[10];
+
         g_snprintf (ibuf, sizeof (ibuf), "%d", uid);
         return ibuf;
     }
@@ -267,7 +268,6 @@ char *
 get_group (int gid)
 {
     struct group *grp;
-    static char gbuf[10];
     char *name;
     static int gid_last;
 
@@ -283,6 +283,8 @@ get_group (int gid)
     }
     else
     {
+        static char gbuf[10];
+
         g_snprintf (gbuf, sizeof (gbuf), "%d", gid);
         return gbuf;
     }
@@ -463,7 +465,6 @@ tilde_expand (const char *directory)
 {
     struct passwd *passwd;
     const char *p, *q;
-    char *name;
 
     if (*directory != '~')
         return g_strdup (directory);
@@ -485,6 +486,8 @@ tilde_expand (const char *directory)
         }
         else
         {
+            char *name;
+
             name = g_strndup (p, q - p);
             passwd = getpwnam (name);
             q++;
@@ -624,7 +627,6 @@ void
 custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
 {
     char *p, *s;
-    size_t len;
     char *lpath = path;         /* path without leading UNC part */
     const size_t url_delim_len = strlen (VFS_PATH_URL_DELIMITER);
 
@@ -672,6 +674,8 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
 
     if (flags & CANON_PATH_REMSLASHDOTS)
     {
+        size_t len;
+
         /* Remove trailing slashes */
         p = lpath + strlen (lpath) - 1;
         while (p > lpath && *p == PATH_SEP)

@@ -6,7 +6,7 @@
    The Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2009, 2010, 2011
+   Slava Zanko <slavazanko@gmail.com>, 2009, 2010, 2011, 2013
    Vitaliy Filippov <vitalif@yourcmc.ru>, 2011
    Andrew Borodin <aborodin@vmail.ru>, 2013
 
@@ -290,11 +290,12 @@ static mc_search__found_cond_t
 mc_search__regex_found_cond (mc_search_t * lc_mc_search, GString * search_str)
 {
     gsize loop1;
-    mc_search_cond_t *mc_search_cond;
-    mc_search__found_cond_t ret;
 
     for (loop1 = 0; loop1 < lc_mc_search->conditions->len; loop1++)
     {
+        mc_search_cond_t *mc_search_cond;
+        mc_search__found_cond_t ret;
+
         mc_search_cond = (mc_search_cond_t *) g_ptr_array_index (lc_mc_search->conditions, loop1);
 
         if (!mc_search_cond->regex_handle)
@@ -303,7 +304,6 @@ mc_search__regex_found_cond (mc_search_t * lc_mc_search, GString * search_str)
         ret =
             mc_search__regex_found_cond_one (lc_mc_search, mc_search_cond->regex_handle,
                                              search_str);
-
         if (ret != COND__NOT_FOUND)
             return ret;
     }
@@ -330,16 +330,19 @@ mc_search_regex__get_max_num_of_replace_tokens (const gchar * str, gsize len)
         if (str[loop] == '$' && str[loop + 1] == '{')
         {
             gsize tmp_len;
-            char *tmp_str;
-            int tmp_token;
+
             if (strutils_is_char_escaped (str, &str[loop]))
                 continue;
 
             for (tmp_len = 0;
                  loop + tmp_len + 2 < len && (str[loop + 2 + tmp_len] & (char) 0xf0) == 0x30;
                  tmp_len++);
+
             if (str[loop + 2 + tmp_len] == '}')
             {
+                int tmp_token;
+                char *tmp_str;
+
                 tmp_str = g_strndup (&str[loop + 2], tmp_len);
                 tmp_token = atoi (tmp_str);
                 if (max_token < tmp_token)
@@ -458,7 +461,6 @@ mc_search_regex__process_replace_str (const GString * replace_str, const gsize c
                                       gsize * skip_len, replace_transform_type_t * replace_flags)
 {
     int ret = -1;
-    char *tmp_str;
     const char *curr_str = &(replace_str->str[current_pos]);
 
     if (current_pos > replace_str->len)
@@ -469,6 +471,8 @@ mc_search_regex__process_replace_str (const GString * replace_str, const gsize c
     if ((*curr_str == '$') && (*(curr_str + 1) == '{') && ((*(curr_str + 2) & (char) 0xf0) == 0x30)
         && (replace_str->len > current_pos + 2))
     {
+        char *tmp_str;
+
         if (strutils_is_char_escaped (replace_str->str, curr_str))
         {
             *skip_len = 1;
@@ -914,7 +918,7 @@ mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * repla
     GString *ret;
     gchar *tmp_str;
 
-    int num_replace_tokens, lc_index;
+    int num_replace_tokens;
     gsize loop;
     gsize len = 0;
     gchar *prev_str;
@@ -939,6 +943,8 @@ mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * repla
 
     for (loop = 0; loop < replace_str->len - 1; loop++)
     {
+        int lc_index;
+
         lc_index = mc_search_regex__process_replace_str (replace_str, loop, &len, &replace_flags);
 
         if (lc_index == REPLACE_PREPARE_T_NOTHING_SPECIAL)

@@ -535,7 +535,6 @@ convert_from_8bit_to_utf_c2 (const char input_char)
     unsigned char str[2];
     unsigned char buf_ch[UTF8_CHAR_LEN + 1];
     int ch = '.';
-    int res = 0;
     GIConv conv;
     const char *cp_from;
 
@@ -547,6 +546,8 @@ convert_from_8bit_to_utf_c2 (const char input_char)
 
     if (conv != INVALID_CONV)
     {
+        int res = 0;
+
         switch (str_translate_char (conv, (char *) str, -1, (char *) buf_ch, sizeof (buf_ch)))
         {
         case ESTR_SUCCESS:

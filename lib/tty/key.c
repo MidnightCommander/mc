@@ -606,17 +606,16 @@ try_channels (int set_timeout)
 {
     struct timeval time_out;
     static fd_set select_set;
-    struct timeval *timeptr;
-    int v;
-    int maxfdp;
 
     while (1)
     {
+        struct timeval *timeptr = NULL;
+        int maxfdp, v;
+
         FD_ZERO (&select_set);
         FD_SET (input_fd, &select_set); /* Add stdin */
         maxfdp = max (add_selects (&select_set), input_fd);
 
-        timeptr = NULL;
         if (set_timeout)
         {
             time_out.tv_sec = 0;
@@ -867,7 +866,7 @@ get_modifier (void)
 {
     int result = 0;
 #ifdef __QNXNTO__
-    int mod_status, shift_ext_status;
+    int mod_status;
     static int in_photon = 0;
     static int ph_ig = 0;
     PhCursorInfo_t cursor_info;
@@ -922,6 +921,8 @@ get_modifier (void)
        console or xterm */
     if (in_photon == -1)
     {
+        int shift_ext_status;
+
         if (devctl (fileno (stdin), DCMD_CHR_LINESTATUS, &mod_status, sizeof (int), NULL) == -1)
             return 0;
         shift_ext_status = mod_status & 0xffffff00UL;
@@ -1951,7 +1952,6 @@ int
 tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 {
     int c;
-    static int flag = 0;        /* Return value from select */
 #ifdef HAVE_LIBGPM
     static struct Gpm_Event ev; /* Mouse event */
 #endif
@@ -1984,6 +1984,7 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
     while (pending_keys == NULL)
     {
         int nfd;
+        static int flag = 0;    /* Return value from select */
         fd_set select_set;
 
         FD_ZERO (&select_set);

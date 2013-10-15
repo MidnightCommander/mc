@@ -754,7 +754,6 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
 {
     /* Initial status at start of archive */
     ReadStatus status = STATUS_EOFMARK;
-    ReadStatus prev_status;
     int tard;
 
     current_tar_position = 0;
@@ -766,8 +765,8 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
     while (TRUE)
     {
         size_t h_size;
+        ReadStatus prev_status = status;
 
-        prev_status = status;
         status = tar_read_header (vpath_element->class, archive, tard, &h_size);
 
         switch (status)

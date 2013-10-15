@@ -172,14 +172,14 @@ static void
 save_tree (WTree * tree)
 {
     int error;
-    char *tree_name;
 
     (void) tree;
     error = tree_store_save ();
 
-
     if (error)
     {
+        char *tree_name;
+
         tree_name = mc_config_get_full_path (MC_TREESTORE_FILE);
         fprintf (stderr, _("Cannot open the %s file for writing:\n%s\n"), tree_name,
                  unix_error_string (error));

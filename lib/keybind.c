@@ -456,13 +456,14 @@ keybind_lookup_actionname (unsigned long action)
 const char *
 keybind_lookup_keymap_shortcut (const global_keymap_t * keymap, unsigned long action)
 {
-    size_t i;
-
     if (keymap != NULL)
+    {
+        size_t i;
+
         for (i = 0; keymap[i].key != 0; i++)
             if (keymap[i].command == action)
                 return (keymap[i].caption[0] != '\0') ? keymap[i].caption : NULL;
-
+    }
     return NULL;
 }
 
@@ -471,12 +472,14 @@ keybind_lookup_keymap_shortcut (const global_keymap_t * keymap, unsigned long ac
 unsigned long
 keybind_lookup_keymap_command (const global_keymap_t * keymap, long key)
 {
-    size_t i;
-
     if (keymap != NULL)
+    {
+        size_t i;
+
         for (i = 0; keymap[i].key != 0; i++)
             if (keymap[i].key == key)
                 return keymap[i].command;
+    }
 
     return CK_IgnoreKey;
 }

@@ -1924,7 +1924,6 @@ edit_load_macro_cmd (WEdit * edit)
     gsize len, values_len;
     const char *section_name = "editor";
     gchar *macros_fname;
-    int hotkey;
 
     (void) edit;
 
@@ -1938,6 +1937,7 @@ edit_load_macro_cmd (WEdit * edit)
     keys = mc_config_get_keys (macros_config, section_name, &len);
     for (profile_keys = keys; *profile_keys != NULL; profile_keys++)
     {
+        int hotkey;
         gboolean have_macro = FALSE;
         GArray *macros;
         macros_t macro;
@@ -2008,8 +2008,6 @@ edit_load_macro_cmd (WEdit * edit)
 gboolean
 edit_save_confirm_cmd (WEdit * edit)
 {
-    char *f = NULL;
-
     if (edit->filename_vpath == NULL)
         return edit_save_as_cmd (edit);
 
@@ -2018,6 +2016,7 @@ edit_save_confirm_cmd (WEdit * edit)
 
     if (edit_confirm_save)
     {
+        char *f;
         gboolean ok;
 
         f = g_strdup_printf (_("Confirm save file: \"%s\""),
@@ -2278,7 +2277,6 @@ void
 edit_block_copy_cmd (WEdit * edit)
 {
     off_t start_mark, end_mark, current = edit->buffer.curs1;
-    long col_delta = 0;
     off_t mark1, mark2;
     long c1, c2;
     off_t size;
@@ -2296,6 +2294,8 @@ edit_block_copy_cmd (WEdit * edit)
 
     if (edit->column_highlight)
     {
+        long col_delta;
+
         col_delta = abs (edit->column2 - edit->column1);
         edit_insert_column_of_text (edit, copy_buf, size, col_delta, &mark1, &mark2, &c1, &c2);
     }

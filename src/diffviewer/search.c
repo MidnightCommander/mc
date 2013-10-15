@@ -143,7 +143,6 @@ static gboolean
 mcdiffview_do_search_backward (WDiff * dview)
 {
     ssize_t ind;
-    DIFFLN *p;
 
     if (dview->search.last_accessed_num_line < 0)
     {
@@ -156,6 +155,8 @@ mcdiffview_do_search_backward (WDiff * dview)
 
     for (ind = --dview->search.last_accessed_num_line; ind >= 0; ind--)
     {
+        DIFFLN *p;
+
         p = (DIFFLN *) & g_array_index (dview->a[dview->ord], DIFFLN, (size_t) ind);
         if (p->u.len == 0)
             continue;
@@ -177,7 +178,6 @@ static gboolean
 mcdiffview_do_search_forward (WDiff * dview)
 {
     size_t ind;
-    DIFFLN *p;
 
     if (dview->search.last_accessed_num_line < 0)
         dview->search.last_accessed_num_line = -1;
@@ -190,6 +190,8 @@ mcdiffview_do_search_forward (WDiff * dview)
     for (ind = (size_t)++ dview->search.last_accessed_num_line; ind < dview->a[dview->ord]->len;
          ind++)
     {
+        DIFFLN *p;
+
         p = (DIFFLN *) & g_array_index (dview->a[dview->ord], DIFFLN, ind);
         if (p->u.len == 0)
             continue;

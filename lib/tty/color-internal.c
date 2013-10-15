@@ -2,12 +2,12 @@
    Internal stuff of color setup
 
    Copyright (C) 1994, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2007, 2008, 2009, 2010, 2011
+   2007, 2008, 2009, 2010, 2011, 2013
    The Free Software Foundation, Inc.
 
    Written by:
    Andrew Borodin <aborodin@vmail.ru>, 2009
-   Slava Zanko <slavazanko@gmail.com>, 2009
+   Slava Zanko <slavazanko@gmail.com>, 2009, 2013
    Egmont Koblinger <egmont@gmail.com>, 2010
 
    This file is part of the Midnight Commander.
@@ -124,7 +124,6 @@ parse_256_color_name (const char *color_name)
 const char *
 tty_color_get_name_by_index (int idx)
 {
-    static char **color_N_names = NULL;
     int i;
 
     /* Find the real English name of the first 16 colors, */
@@ -135,6 +134,8 @@ tty_color_get_name_by_index (int idx)
     /* Create and return the strings "color16" to "color255". */
     if (idx >= 16 && idx < 256)
     {
+        static char **color_N_names = NULL;
+
         if (color_N_names == NULL)
         {
             color_N_names = g_try_malloc0 (240 * sizeof (char *));
@@ -172,14 +173,18 @@ int
 tty_attr_get_bits (const char *attrs)
 {
     int attr_bits = 0;
-    gchar **attr_list;
-    int i, j;
 
     if (attrs != NULL)
     {
+        gchar **attr_list;
+        int i;
+
         attr_list = g_strsplit (attrs, "+", -1);
+
         for (i = 0; attr_list[i] != NULL; i++)
         {
+            int j;
+
             for (j = 0; attributes_table[j].name != NULL; j++)
             {
                 if (strcmp (attr_list[i], attributes_table[j].name) == 0)

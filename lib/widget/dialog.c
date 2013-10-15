@@ -528,7 +528,6 @@ dlg_key_event (WDialog * h, int d_key)
 static void
 frontend_dlg_run (WDialog * h)
 {
-    int d_key;
     Gpm_Event event;
 
     event.x = -1;
@@ -542,6 +541,8 @@ frontend_dlg_run (WDialog * h)
 
     while (h->state == DLG_ACTIVE)
     {
+        int d_key;
+
         if (mc_global.tty.winch_flag != 0)
             dialog_change_screen_size ();
 

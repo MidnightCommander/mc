@@ -162,7 +162,6 @@ buttonbar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
 {
     WButtonBar *bb = BUTTONBAR (w);
     int i;
-    const char *text;
 
     switch (msg)
     {
@@ -187,6 +186,7 @@ buttonbar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
             for (i = 0; i < BUTTONBAR_LABELS_NUM; i++)
             {
                 int width;
+                const char *text;
 
                 width = buttonbar_get_button_width (bb, i);
                 if (width <= 0)

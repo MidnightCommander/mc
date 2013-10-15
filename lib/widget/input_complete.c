@@ -736,8 +736,6 @@ completion_matches (const char *text, CompletionFunction entry_function, input_c
        lowest common denominator.  That then becomes match_list[0]. */
     if (matches)
     {
-        register size_t i = 1;
-        int low = 4096;         /* Count of max-matched characters. */
 
         /* If only one match, just use that. */
         if (matches == 1)
@@ -747,6 +745,8 @@ completion_matches (const char *text, CompletionFunction entry_function, input_c
         }
         else
         {
+            size_t i = 1;
+            int low = 4096;     /* Count of max-matched characters. */
             size_t j;
 
             qsort (match_list + 1, matches, sizeof (char *), match_compare);
@@ -847,12 +847,11 @@ try_complete_commands_prepare (try_complete_automation_state_t * state, char *te
         state->in_command_position++;
     else if (strchr (command_separator_chars, ti[0]) != NULL)
     {
-        int this_char, prev_char;
-
         state->in_command_position++;
-
         if (ti != text)
         {
+            int this_char, prev_char;
+
             /* Handle the two character tokens '>&', '<&', and '>|'.
                We are not in a command position after one of these. */
             this_char = ti[0];
@@ -938,20 +937,20 @@ try_complete_all_possible (try_complete_automation_state_t * state, char *text, 
             {
                 char *const cdpath_ref = g_strdup (getenv ("CDPATH"));
                 char *cdpath = cdpath_ref;
-                char c, *s;
+                char c;
 
-                if (cdpath == NULL)
-                    c = 0;
-                else
-                    c = ':';
+                c = (cdpath == NULL) ? '\0' : ':';
+
                 while (!matches && c == ':')
                 {
+                    char *s;
+
                     s = strchr (cdpath, ':');
                     if (s == NULL)
-                        s = strchr (cdpath, 0);
+                        s = strchr (cdpath, '\0');
                     c = *s;
-                    *s = 0;
-                    if (*cdpath)
+                    *s = '\0';
+                    if (*cdpath != '\0')
                     {
                         state->r = mc_build_filename (cdpath, state->word, NULL);
                         SHOW_C_CTX ("try_complete:filename_subst_2");
@@ -1009,7 +1008,6 @@ insert_text (WInput * in, char *text, ssize_t size)
 static cb_ret_t
 query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    static char buff[MB_LEN_MAX] = "";
     static int bl = 0;
 
     WDialog *h = DIALOG (w);
@@ -1085,6 +1083,7 @@ query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             }
             else
             {
+                static char buff[MB_LEN_MAX] = "";
                 GList *e;
                 int i;
                 int need_redraw = 0;
