@@ -72,7 +72,7 @@ const global_keymap_t *input_map = NULL;
 #endif
 
 #define should_show_history_button(in) \
-    (in->history != NULL && in->field_width > HISTORY_BUTTON_WIDTH * 2 + 1 \
+    (in->history != NULL && WIDGET (in)->cols > HISTORY_BUTTON_WIDTH * 2 + 1 \
          && WIDGET (in)->owner != NULL)
 
 /*** file scope type declarations ****************************************************************/
@@ -112,12 +112,12 @@ draw_history_button (WInput * in)
     else
         c = '|';
 
-    widget_move (in, 0, in->field_width - HISTORY_BUTTON_WIDTH);
+    widget_move (in, 0, WIDGET (in)->cols - HISTORY_BUTTON_WIDTH);
     tty_setcolor (disabled ? DISABLED_COLOR : in->color[WINPUTC_HISTORY]);
 
 #ifdef LARGE_HISTORY_BUTTON
     tty_print_string ("[ ]");
-    widget_move (in, 0, in->field_width - HISTORY_BUTTON_WIDTH + 1);
+    widget_move (in, 0, WIDGET (in)->cols - HISTORY_BUTTON_WIDTH + 1);
 #endif
 
     tty_print_char (c);
@@ -342,9 +342,12 @@ insert_char (WInput * in, int c_code)
     if (strlen (in->buffer) + 1 + in->charpoint >= in->current_max_size)
     {
         /* Expand the buffer */
-        size_t new_length = in->current_max_size + in->field_width + in->charpoint;
-        char *narea = g_try_renew (char, in->buffer, new_length);
-        if (narea)
+        size_t new_length;
+        char *narea;
+
+        new_length = in->current_max_size + WIDGET (in)->cols + in->charpoint;
+        narea = g_try_renew (char, in->buffer, new_length);
+        if (narea != NULL)
         {
             in->buffer = narea;
             in->current_max_size = new_length;
@@ -932,8 +935,7 @@ input_event (Gpm_Event * event, void *data)
 
         dlg_select_widget (w);
 
-        if (local.x >= in->field_width - HISTORY_BUTTON_WIDTH + 1
-            && should_show_history_button (in))
+        if (local.x >= w->cols - HISTORY_BUTTON_WIDTH + 1 && should_show_history_button (in))
             do_show_hist (in);
         else
         {
@@ -1003,7 +1005,6 @@ input_new (int y, int x, const int *input_colors, int width, const char *def_tex
 
     memmove (in->color, input_colors, sizeof (input_colors_t));
 
-    in->field_width = width;
     in->first = TRUE;
     in->highlight = FALSE;
     in->term_first_shown = 0;
@@ -1086,8 +1087,6 @@ input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         return input_execute_cmd (in, parm);
 
     case MSG_RESIZE:
-        in->field_width = WIDGET (in)->cols;
-        /* fall through */
     case MSG_FOCUS:
     case MSG_UNFOCUS:
     case MSG_DRAW:
@@ -1195,6 +1194,7 @@ input_key_is_in_map (WInput * in, int key)
 void
 input_assign_text (WInput * in, const char *text)
 {
+    Widget *w = WIDGET (in);
     size_t text_len, buffer_len;
 
     if (text == NULL)
@@ -1206,9 +1206,9 @@ input_assign_text (WInput * in, const char *text)
     in->charpoint = 0;
 
     text_len = strlen (text);
-    buffer_len = 1 + max ((size_t) in->field_width, text_len);
+    buffer_len = 1 + max ((size_t) w->cols, text_len);
     in->current_max_size = buffer_len;
-    if (buffer_len > (size_t) in->field_width)
+    if (buffer_len > (size_t) w->cols)
         in->buffer = g_realloc (in->buffer, buffer_len);
     memmove (in->buffer, text, text_len + 1);
     in->point = str_length (in->buffer);
@@ -1276,9 +1276,9 @@ input_update (WInput * in, gboolean clear_first)
     pw = str_term_width2 (in->buffer, in->point);
 
     /* Make the point visible */
-    if ((pw < in->term_first_shown) || (pw >= in->term_first_shown + in->field_width - has_history))
+    if ((pw < in->term_first_shown) || (pw >= in->term_first_shown + w->cols - has_history))
     {
-        in->term_first_shown = pw - (in->field_width / 3);
+        in->term_first_shown = pw - (w->cols / 3);
         if (in->term_first_shown < 0)
             in->term_first_shown = 0;
     }
@@ -1299,7 +1299,7 @@ input_update (WInput * in, gboolean clear_first)
     {
         if (!in->highlight)
             tty_print_string (str_term_substring (in->buffer, in->term_first_shown,
-                                                  in->field_width - has_history));
+                                                  w->cols - has_history));
         else
         {
             long m1, m2;
@@ -1307,8 +1307,7 @@ input_update (WInput * in, gboolean clear_first)
             if (input_eval_marks (in, &m1, &m2))
             {
                 tty_setcolor (in->color[WINPUTC_MAIN]);
-                cp = str_term_substring (in->buffer, in->term_first_shown,
-                                         in->field_width - has_history);
+                cp = str_term_substring (in->buffer, in->term_first_shown, w->cols - has_history);
                 tty_print_string (cp);
                 tty_setcolor (in->color[WINPUTC_MARK]);
                 if (m1 < in->term_first_shown)
@@ -1325,8 +1324,7 @@ input_update (WInput * in, gboolean clear_first)
                     widget_move (in, 0, m1 - in->term_first_shown);
                     buf_width = str_term_width2 (in->buffer, m1);
                     sel_width =
-                        min (m2 - m1,
-                             (in->field_width - has_history) - (buf_width - in->term_first_shown));
+                        min (m2 - m1, (w->cols - has_history) - (buf_width - in->term_first_shown));
                     tty_print_string (str_term_substring (in->buffer, m1, sel_width));
                 }
             }
@@ -1334,9 +1332,9 @@ input_update (WInput * in, gboolean clear_first)
     }
     else
     {
-        cp = str_term_substring (in->buffer, in->term_first_shown, in->field_width - has_history);
+        cp = str_term_substring (in->buffer, in->term_first_shown, w->cols - has_history);
         tty_setcolor (in->color[WINPUTC_MAIN]);
-        for (i = 0; i < in->field_width - has_history; i++)
+        for (i = 0; i < w->cols - has_history; i++)
         {
             if (i < (buf_len - in->term_first_shown) && cp[0] != '\0')
                 tty_print_char ('*');

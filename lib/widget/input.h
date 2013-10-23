@@ -52,7 +52,6 @@ typedef struct
     gboolean highlight;         /* there is a selected block */
     int term_first_shown;       /* column of the first shown character */
     size_t current_max_size;    /* maximum length of input line (bytes) */
-    int field_width;            /* width of the editing field */
     gboolean first;             /* is first keystroke? */
     int disable_update;         /* do we want to skip updates? */
     gboolean is_password;       /* is this a password input line? */

@@ -982,12 +982,13 @@ insert_text (WInput * in, char *text, ssize_t size)
     {
         /* Expand the buffer */
         char *narea;
+        Widget *w = WIDGET (in);
 
-        narea = g_try_realloc (in->buffer, in->current_max_size + size + in->field_width);
+        narea = g_try_realloc (in->buffer, in->current_max_size + size + w->cols);
         if (narea != NULL)
         {
             in->buffer = narea;
-            in->current_max_size += size + in->field_width;
+            in->current_max_size += size + w->cols;
         }
     }
     if (strlen (in->buffer) + 1 < (size_t) in->current_max_size)
