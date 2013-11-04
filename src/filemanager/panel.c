@@ -1473,8 +1473,7 @@ panel_destroy (WPanel * p)
     {
         /* directory history is already saved before this moment */
         p->dir_history = g_list_first (p->dir_history);
-        g_list_foreach (p->dir_history, (GFunc) g_free, NULL);
-        g_list_free (p->dir_history);
+        g_list_free_full (p->dir_history, g_free);
     }
     g_free (p->hist_name);
 

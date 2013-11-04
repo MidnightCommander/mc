@@ -828,8 +828,7 @@ void
 destroy_menu (menu_t * menu)
 {
     release_hotkey (menu->text);
-    g_list_foreach (menu->entries, (GFunc) menu_entry_free, NULL);
-    g_list_free (menu->entries);
+    g_list_free_full (menu->entries, (GDestroyNotify) menu_entry_free);
     g_free (menu->help_node);
     g_free (menu);
 }
@@ -860,10 +859,8 @@ menubar_set_menu (WMenuBar * menubar, GList * menu)
 {
     /* delete previous menu */
     if (menubar->menu != NULL)
-    {
-        g_list_foreach (menubar->menu, (GFunc) destroy_menu, NULL);
-        g_list_free (menubar->menu);
-    }
+        g_list_free_full (menubar->menu, (GDestroyNotify) destroy_menu);
+
     /* add new menu */
     menubar->is_active = FALSE;
     menubar->is_dropped = FALSE;

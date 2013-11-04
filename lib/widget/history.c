@@ -383,8 +383,7 @@ history_show (GList ** history, Widget * widget, int current)
 
     dlg_destroy (query_dlg);
 
-    g_list_foreach (*history, (GFunc) g_free, NULL);
-    g_list_free (*history);
+    g_list_free_full (*history, g_free);
     *history = g_list_last (z);
 
     return r;

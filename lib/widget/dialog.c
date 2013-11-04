@@ -1266,8 +1266,7 @@ dlg_destroy (WDialog * h)
     /* if some widgets have history, save all history at one moment here */
     dlg_save_history (h);
     dlg_broadcast_msg (h, MSG_DESTROY);
-    g_list_foreach (h->widgets, (GFunc) g_free, NULL);
-    g_list_free (h->widgets);
+    g_list_free_full (h->widgets, g_free);
     mc_event_group_del (h->event_group);
     g_free (h->event_group);
     g_free (h->title);

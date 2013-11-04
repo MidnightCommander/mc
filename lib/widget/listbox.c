@@ -688,8 +688,7 @@ listbox_remove_list (WListbox * l)
 {
     if ((l != NULL) && (l->count != 0))
     {
-        g_list_foreach (l->list, (GFunc) listbox_entry_free, NULL);
-        g_list_free (l->list);
+        g_list_free_full (l->list, listbox_entry_free);
         l->list = NULL;
         l->count = l->pos = l->top = 0;
     }

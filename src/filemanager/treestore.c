@@ -900,8 +900,7 @@ tree_store_end_check (void)
     vfs_path_free (ts.check_name);
     ts.check_name = NULL;
 
-    g_list_foreach (the_queue, (GFunc) vfs_path_free, NULL);
-    g_list_free (the_queue);
+    g_list_free_full (the_queue, (GDestroyNotify) vfs_path_free);
 }
 
 /* --------------------------------------------------------------------------------------------- */

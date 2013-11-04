@@ -2708,8 +2708,7 @@ edit_search_cmd (WEdit * edit, gboolean again)
             edit->last_search_string = (char *) history->data;
             history->data = NULL;
             history = g_list_first (history);
-            g_list_foreach (history, (GFunc) g_free, NULL);
-            g_list_free (history);
+            g_list_free_full (history, g_free);
 
 #ifdef HAVE_CHARSET
             edit->search = mc_search_new (edit->last_search_string, -1, cp_source);

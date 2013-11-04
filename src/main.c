@@ -469,10 +469,8 @@ main (int argc, char *argv[])
     if (mc_global.mc_run_mode != MC_RUN_EDITOR)
         g_free (mc_run_param0);
     else
-    {
-        g_list_foreach ((GList *) mc_run_param0, (GFunc) mcedit_arg_free, NULL);
-        g_list_free ((GList *) mc_run_param0);
-    }
+        g_list_free_full ((GList *) mc_run_param0, (GDestroyNotify) mcedit_arg_free);
+
     g_free (mc_run_param1);
     g_free (saved_other_dir);
 

@@ -900,8 +900,7 @@ input_destroy (WInput * in)
     {
         /* history is already saved before this moment */
         in->history.list = g_list_first (in->history.list);
-        g_list_foreach (in->history.list, (GFunc) g_free, NULL);
-        g_list_free (in->history.list);
+        g_list_free_full (in->history.list, g_free);
     }
     g_free (in->history.name);
     g_free (in->buffer);

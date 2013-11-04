@@ -143,8 +143,7 @@ mcview_continue_search_cmd (mcview_t * view)
         {
             view->last_search_string = (gchar *) g_strdup (history->data);
             history = g_list_first (history);
-            g_list_foreach (history, (GFunc) g_free, NULL);
-            g_list_free (history);
+            g_list_free_full (history, g_free);
 
 #ifdef HAVE_CHARSET
             view->search = mc_search_new (view->last_search_string, -1, cp_source);
