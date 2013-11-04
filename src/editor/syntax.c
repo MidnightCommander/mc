@@ -1450,8 +1450,7 @@ edit_free_syntax_rules (WEdit * edit)
         MC_PTR_FREE (edit->rules[i]);
     }
 
-    g_slist_foreach (edit->syntax_marker, (GFunc) g_free, NULL);
-    g_slist_free (edit->syntax_marker);
+    g_slist_free_full (edit->syntax_marker, g_free);
     edit->syntax_marker = NULL;
     MC_PTR_FREE (edit->rules);
     tty_color_free_all_tmp ();

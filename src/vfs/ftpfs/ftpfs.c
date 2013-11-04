@@ -2236,8 +2236,7 @@ ftpfs_done (struct vfs_class *me)
 {
     (void) me;
 
-    g_slist_foreach (no_proxy, (GFunc) g_free, NULL);
-    g_slist_free (no_proxy);
+    g_slist_free_full (no_proxy, g_free);
 
     g_free (ftpfs_anonymous_passwd);
     g_free (ftpfs_proxy_host);

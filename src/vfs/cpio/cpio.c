@@ -205,8 +205,7 @@ cpio_free_archive (struct vfs_class *me, struct vfs_s_super *super)
     if (arch->fd != -1)
         mc_close (arch->fd);
     arch->fd = -1;
-    g_slist_foreach (arch->deferred, (GFunc) g_free, NULL);
-    g_slist_free (arch->deferred);
+    g_slist_free_full (arch->deferred, g_free);
     arch->deferred = NULL;
     g_free (super->data);
     super->data = NULL;

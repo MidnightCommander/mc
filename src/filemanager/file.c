@@ -245,11 +245,10 @@ free_link (void *data)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void *
+static inline void *
 free_linklist (GSList * lp)
 {
-    g_slist_foreach (lp, (GFunc) free_link, NULL);
-    g_slist_free (lp);
+    g_slist_free_full (lp, free_link);
 
     return NULL;
 }

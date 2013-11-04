@@ -394,8 +394,7 @@ end_link_area (int x, int y)
 static void
 clear_link_areas (void)
 {
-    g_slist_foreach (link_area, (GFunc) g_free, NULL);
-    g_slist_free (link_area);
+    g_slist_free_full (link_area, g_free);
     link_area = NULL;
     inside_link_area = FALSE;
 }
