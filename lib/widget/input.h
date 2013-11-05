@@ -57,10 +57,6 @@ typedef struct
     gboolean is_password;       /* is this a password input line? */
     gboolean init_from_history; /* init text will be get from history */
     char *buffer;               /* pointer to editing buffer */
-    char *history_name;         /* name of history for loading and saving */
-    GList *history;             /* the history */
-    GList *history_current;     /* current history item */
-    gboolean history_changed;   /* the history has changed */
     gboolean need_push;         /* need to push the current Input on hist? */
     gboolean strip_password;    /* need to strip password before placing string to history */
     char **completions;         /* possible completions array */
@@ -68,6 +64,13 @@ typedef struct
     char charbuf[MB_LEN_MAX];   /* buffer for multibytes characters */
     size_t charpoint;           /* point to end of mulibyte sequence in charbuf */
     WLabel *label;              /* label associated with this input line */
+    struct input_history_t
+    {
+        char *name;             /* name of history for loading and saving */
+        GList *list;            /* the history */
+        GList *current;         /* current history item */
+        gboolean changed;       /* the history has changed */
+    } history;
 } WInput;
 
 /*** global variables defined in .c file *********************************************************/

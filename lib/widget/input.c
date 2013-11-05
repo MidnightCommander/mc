@@ -72,7 +72,7 @@ const global_keymap_t *input_map = NULL;
 #endif
 
 #define should_show_history_button(in) \
-    (in->history != NULL && WIDGET (in)->cols > HISTORY_BUTTON_WIDTH * 2 + 1 \
+    (in->history.list != NULL && WIDGET (in)->cols > HISTORY_BUTTON_WIDTH * 2 + 1 \
          && WIDGET (in)->owner != NULL)
 
 /*** file scope type declarations ****************************************************************/
@@ -105,9 +105,9 @@ draw_history_button (WInput * in)
     char c;
     gboolean disabled = (WIDGET (in)->options & W_DISABLED) != 0;
 
-    if (g_list_next (in->history_current) == NULL)
+    if (g_list_next (in->history.current) == NULL)
         c = '^';
-    else if (g_list_previous (in->history_current) == NULL)
+    else if (g_list_previous (in->history.current) == NULL)
         c = 'v';
     else
         c = '|';
@@ -193,10 +193,10 @@ do_show_hist (WInput * in)
     size_t len;
     char *r;
 
-    len = get_history_length (in->history);
+    len = get_history_length (in->history.list);
 
-    r = history_show (&in->history, WIDGET (in),
-                      g_list_position (in->history_current, in->history));
+    r = history_show (&in->history.list, WIDGET (in),
+                      g_list_position (in->history.list, in->history.list));
     if (r != NULL)
     {
         input_assign_text (in, r);
@@ -204,8 +204,8 @@ do_show_hist (WInput * in)
     }
 
     /* Has history cleaned up or not? */
-    if (len != get_history_length (in->history))
-        in->history_changed = TRUE;
+    if (len != get_history_length (in->history.list))
+        in->history.changed = TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -261,7 +261,7 @@ push_history (WInput * in, const char *text)
     g_free (t);
     t = g_strdup (empty ? "" : text);
 
-    if (!empty && in->history_name != NULL && in->strip_password)
+    if (!empty && in->history.name != NULL && in->strip_password)
     {
         /*
            We got string user:pass@host without any VFS prefixes
@@ -275,12 +275,12 @@ push_history (WInput * in, const char *text)
         t = url_with_stripped_password;
     }
 
-    if (in->history == NULL || in->history->data == NULL || strcmp (in->history->data, t) != 0 ||
-        in->history_changed)
+    if (in->history.list == NULL || in->history.list->data == NULL
+        || strcmp (in->history.list->data, t) != 0 || in->history.changed)
     {
-        in->history = list_append_unique (in->history, t);
-        in->history_current = in->history;
-        in->history_changed = TRUE;
+        in->history.list = list_append_unique (in->history.list, t);
+        in->history.current = in->history.list;
+        in->history.changed = TRUE;
     }
     else
         g_free (t);
@@ -637,18 +637,18 @@ hist_prev (WInput * in)
 {
     GList *prev;
 
-    if (in->history == NULL)
+    if (in->history.list == NULL)
         return;
 
     if (in->need_push)
         push_history (in, in->buffer);
 
-    prev = g_list_previous (in->history_current);
+    prev = g_list_previous (in->history.current);
     if (prev != NULL)
     {
         input_assign_text (in, (char *) prev->data);
-        in->history_current = prev;
-        in->history_changed = TRUE;
+        in->history.current = prev;
+        in->history.changed = TRUE;
         in->need_push = FALSE;
     }
 }
@@ -667,20 +667,20 @@ hist_next (WInput * in)
         return;
     }
 
-    if (in->history == NULL)
+    if (in->history.list == NULL)
         return;
 
-    next = g_list_next (in->history_current);
+    next = g_list_next (in->history.current);
     if (next == NULL)
     {
         input_assign_text (in, "");
-        in->history_current = in->history;
+        in->history.current = in->history.list;
     }
     else
     {
         input_assign_text (in, (char *) next->data);
-        in->history_current = next;
-        in->history_changed = TRUE;
+        in->history.current = next;
+        in->history.changed = TRUE;
         in->need_push = FALSE;
     }
 }
@@ -841,15 +841,15 @@ input_load_history (const gchar * event_group_name, const gchar * event_name,
     (void) event_group_name;
     (void) event_name;
 
-    in->history = history_load (ev->cfg, in->history_name);
-    in->history_current = in->history;
+    in->history.list = history_load (ev->cfg, in->history.name);
+    in->history.current = in->history.list;
 
     if (in->init_from_history)
     {
         const char *def_text = "";
 
-        if (in->history != NULL && in->history->data != NULL)
-            def_text = (const char *) in->history->data;
+        if (in->history.list != NULL && in->history.list->data != NULL)
+            def_text = (const char *) in->history.list->data;
 
         input_assign_text (in, def_text);
     }
@@ -874,9 +874,9 @@ input_save_history (const gchar * event_group_name, const gchar * event_name,
         ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
 
         push_history (in, in->buffer);
-        if (in->history_changed)
-            history_save (ev->cfg, in->history_name, in->history);
-        in->history_changed = FALSE;
+        if (in->history.changed)
+            history_save (ev->cfg, in->history.name, in->history.list);
+        in->history.changed = FALSE;
     }
 
     return TRUE;
@@ -896,14 +896,14 @@ input_destroy (WInput * in)
     input_free_completions (in);
 
     /* clean history */
-    if (in->history != NULL)
+    if (in->history.list != NULL)
     {
         /* history is already saved before this moment */
-        in->history = g_list_first (in->history);
-        g_list_foreach (in->history, (GFunc) g_free, NULL);
-        g_list_free (in->history);
+        in->history.list = g_list_first (in->history.list);
+        g_list_foreach (in->history.list, (GFunc) g_free, NULL);
+        g_list_free (in->history.list);
     }
-    g_free (in->history_name);
+    g_free (in->history.name);
     g_free (in->buffer);
 
     g_free (kill_buffer);
@@ -1028,12 +1028,12 @@ input_new (int y, int x, const int *input_colors, int width, const char *def_tex
     input_assign_text (in, def_text);
 
     /* prepare to history setup */
-    in->history = NULL;
-    in->history_current = NULL;
-    in->history_changed = FALSE;
-    in->history_name = NULL;
+    in->history.list = NULL;
+    in->history.current = NULL;
+    in->history.changed = FALSE;
+    in->history.name = NULL;
     if ((histname != NULL) && (*histname != '\0'))
-        in->history_name = g_strdup (histname);
+        in->history.name = g_strdup (histname);
     /* history will be loaded later */
 
     in->label = NULL;
