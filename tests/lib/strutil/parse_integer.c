@@ -132,7 +132,7 @@ START_TEST (parse_integer_test)
 
     /* then */
     fail_unless (invalid == data->invalid && actual_result == data->expected_result,
-                 "actial ( %" PRIuMAX ") not equal to\nexpected (%" PRIuMAX  ")",
+                 "actial ( %" PRIuMAX ") not equal to\nexpected (%" PRIuMAX ")",
                  actual_result, data->expected_result);
 }
 /* *INDENT-OFF* */
