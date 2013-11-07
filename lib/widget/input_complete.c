@@ -1350,11 +1350,18 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
         matches = completion_matches (state.word, username_completion_function, state.flags);
     }
 
-    /* And finally if this word is in a command position, then
+    /* If this word is in a command position, then
        complete over possible command names, including aliases, functions,
        and command names. */
     if (matches == NULL)
         matches = try_complete_all_possible (&state, text, lc_start);
+
+    /* And finally if nothing found, try complete directory name */
+    if (matches == NULL)
+    {
+        state.in_command_position = 0;
+        matches = try_complete_all_possible (&state, text, lc_start);
+    }
 
     g_free (state.word);
 
