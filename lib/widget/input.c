@@ -72,7 +72,7 @@ const global_keymap_t *input_map = NULL;
 #endif
 
 #define should_show_history_button(in) \
-    (in->history != NULL && in->field_width > HISTORY_BUTTON_WIDTH * 2 + 1 \
+    (in->history.list != NULL && WIDGET (in)->cols > HISTORY_BUTTON_WIDTH * 2 + 1 \
          && WIDGET (in)->owner != NULL)
 
 /*** file scope type declarations ****************************************************************/
@@ -105,19 +105,19 @@ draw_history_button (WInput * in)
     char c;
     gboolean disabled = (WIDGET (in)->options & W_DISABLED) != 0;
 
-    if (g_list_next (in->history_current) == NULL)
+    if (g_list_next (in->history.current) == NULL)
         c = '^';
-    else if (g_list_previous (in->history_current) == NULL)
+    else if (g_list_previous (in->history.current) == NULL)
         c = 'v';
     else
         c = '|';
 
-    widget_move (in, 0, in->field_width - HISTORY_BUTTON_WIDTH);
+    widget_move (in, 0, WIDGET (in)->cols - HISTORY_BUTTON_WIDTH);
     tty_setcolor (disabled ? DISABLED_COLOR : in->color[WINPUTC_HISTORY]);
 
 #ifdef LARGE_HISTORY_BUTTON
     tty_print_string ("[ ]");
-    widget_move (in, 0, in->field_width - HISTORY_BUTTON_WIDTH + 1);
+    widget_move (in, 0, WIDGET (in)->cols - HISTORY_BUTTON_WIDTH + 1);
 #endif
 
     tty_print_char (c);
@@ -193,10 +193,10 @@ do_show_hist (WInput * in)
     size_t len;
     char *r;
 
-    len = get_history_length (in->history);
+    len = get_history_length (in->history.list);
 
-    r = history_show (&in->history, WIDGET (in),
-                      g_list_position (in->history_current, in->history));
+    r = history_show (&in->history.list, WIDGET (in),
+                      g_list_position (in->history.list, in->history.list));
     if (r != NULL)
     {
         input_assign_text (in, r);
@@ -204,8 +204,8 @@ do_show_hist (WInput * in)
     }
 
     /* Has history cleaned up or not? */
-    if (len != get_history_length (in->history))
-        in->history_changed = TRUE;
+    if (len != get_history_length (in->history.list))
+        in->history.changed = TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -261,7 +261,7 @@ push_history (WInput * in, const char *text)
     g_free (t);
     t = g_strdup (empty ? "" : text);
 
-    if (!empty && in->history_name != NULL && in->strip_password)
+    if (!empty && in->history.name != NULL && in->strip_password)
     {
         /*
            We got string user:pass@host without any VFS prefixes
@@ -275,12 +275,12 @@ push_history (WInput * in, const char *text)
         t = url_with_stripped_password;
     }
 
-    if (in->history == NULL || in->history->data == NULL || strcmp (in->history->data, t) != 0 ||
-        in->history_changed)
+    if (in->history.list == NULL || in->history.list->data == NULL
+        || strcmp (in->history.list->data, t) != 0 || in->history.changed)
     {
-        in->history = list_append_unique (in->history, t);
-        in->history_current = in->history;
-        in->history_changed = TRUE;
+        in->history.list = list_append_unique (in->history.list, t);
+        in->history.current = in->history.list;
+        in->history.changed = TRUE;
     }
     else
         g_free (t);
@@ -342,9 +342,12 @@ insert_char (WInput * in, int c_code)
     if (strlen (in->buffer) + 1 + in->charpoint >= in->current_max_size)
     {
         /* Expand the buffer */
-        size_t new_length = in->current_max_size + in->field_width + in->charpoint;
-        char *narea = g_try_renew (char, in->buffer, new_length);
-        if (narea)
+        size_t new_length;
+        char *narea;
+
+        new_length = in->current_max_size + WIDGET (in)->cols + in->charpoint;
+        narea = g_try_renew (char, in->buffer, new_length);
+        if (narea != NULL)
         {
             in->buffer = narea;
             in->current_max_size = new_length;
@@ -634,18 +637,18 @@ hist_prev (WInput * in)
 {
     GList *prev;
 
-    if (in->history == NULL)
+    if (in->history.list == NULL)
         return;
 
     if (in->need_push)
         push_history (in, in->buffer);
 
-    prev = g_list_previous (in->history_current);
+    prev = g_list_previous (in->history.current);
     if (prev != NULL)
     {
         input_assign_text (in, (char *) prev->data);
-        in->history_current = prev;
-        in->history_changed = TRUE;
+        in->history.current = prev;
+        in->history.changed = TRUE;
         in->need_push = FALSE;
     }
 }
@@ -664,20 +667,20 @@ hist_next (WInput * in)
         return;
     }
 
-    if (in->history == NULL)
+    if (in->history.list == NULL)
         return;
 
-    next = g_list_next (in->history_current);
+    next = g_list_next (in->history.current);
     if (next == NULL)
     {
         input_assign_text (in, "");
-        in->history_current = in->history;
+        in->history.current = in->history.list;
     }
     else
     {
         input_assign_text (in, (char *) next->data);
-        in->history_current = next;
-        in->history_changed = TRUE;
+        in->history.current = next;
+        in->history.changed = TRUE;
         in->need_push = FALSE;
     }
 }
@@ -834,36 +837,22 @@ input_load_history (const gchar * event_group_name, const gchar * event_name,
 {
     WInput *in = INPUT (init_data);
     ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
-    const char *def_text;
-    size_t buffer_len;
 
     (void) event_group_name;
     (void) event_name;
 
-    in->history = history_load (ev->cfg, in->history_name);
-    in->history_current = in->history;
+    in->history.list = history_load (ev->cfg, in->history.name);
+    in->history.current = in->history.list;
 
-    if (in->init_text == NULL)
-        def_text = "";
-    else if (in->init_text == INPUT_LAST_TEXT)
+    if (in->init_from_history)
     {
-        if (in->history != NULL && in->history->data != NULL)
-            def_text = (const char *) in->history->data;
-        else
-            def_text = "";
+        const char *def_text = "";
 
-        in->init_text = NULL;
+        if (in->history.list != NULL && in->history.list->data != NULL)
+            def_text = (const char *) in->history.list->data;
+
+        input_assign_text (in, def_text);
     }
-    else
-        def_text = in->init_text;
-
-    buffer_len = strlen (def_text);
-    buffer_len = 1 + max ((size_t) in->field_width, buffer_len);
-    in->current_max_size = buffer_len;
-    if (buffer_len > (size_t) in->field_width)
-        in->buffer = g_realloc (in->buffer, buffer_len);
-    strcpy (in->buffer, def_text);
-    in->point = str_length (in->buffer);
 
     return TRUE;
 }
@@ -885,9 +874,9 @@ input_save_history (const gchar * event_group_name, const gchar * event_name,
         ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
 
         push_history (in, in->buffer);
-        if (in->history_changed)
-            history_save (ev->cfg, in->history_name, in->history);
-        in->history_changed = FALSE;
+        if (in->history.changed)
+            history_save (ev->cfg, in->history.name, in->history.list);
+        in->history.changed = FALSE;
     }
 
     return TRUE;
@@ -907,17 +896,15 @@ input_destroy (WInput * in)
     input_free_completions (in);
 
     /* clean history */
-    if (in->history != NULL)
+    if (in->history.list != NULL)
     {
         /* history is already saved before this moment */
-        in->history = g_list_first (in->history);
-        g_list_foreach (in->history, (GFunc) g_free, NULL);
-        g_list_free (in->history);
+        in->history.list = g_list_first (in->history.list);
+        g_list_foreach (in->history.list, (GFunc) g_free, NULL);
+        g_list_free (in->history.list);
     }
-    g_free (in->history_name);
-
+    g_free (in->history.name);
     g_free (in->buffer);
-    g_free (in->init_text);
 
     g_free (kill_buffer);
     kill_buffer = NULL;
@@ -948,8 +935,7 @@ input_event (Gpm_Event * event, void *data)
 
         dlg_select_widget (w);
 
-        if (local.x >= in->field_width - HISTORY_BUTTON_WIDTH + 1
-            && should_show_history_button (in))
+        if (local.x >= w->cols - HISTORY_BUTTON_WIDTH + 1 && should_show_history_button (in))
             do_show_hist (in);
         else
         {
@@ -1019,34 +1005,35 @@ input_new (int y, int x, const int *input_colors, int width, const char *def_tex
 
     memmove (in->color, input_colors, sizeof (input_colors_t));
 
-    in->field_width = width;
     in->first = TRUE;
     in->highlight = FALSE;
     in->term_first_shown = 0;
     in->disable_update = 0;
-    in->mark = 0;
-    in->need_push = TRUE;
     in->is_password = FALSE;
-    in->charpoint = 0;
     in->strip_password = FALSE;
 
     /* in->buffer will be corrected in "history_load" event handler */
     in->current_max_size = width + 1;
     in->buffer = g_new0 (char, in->current_max_size);
-    in->point = 0;
 
-    in->init_text = (def_text == INPUT_LAST_TEXT) ? INPUT_LAST_TEXT : g_strdup (def_text);
-
+    /* init completions before input_assign_text() call */
     in->completions = NULL;
     in->completion_flags = completion_flags;
 
+    in->init_from_history = (def_text == INPUT_LAST_TEXT);
+
+    if (in->init_from_history || def_text == NULL)
+        def_text = "";
+
+    input_assign_text (in, def_text);
+
     /* prepare to history setup */
-    in->history = NULL;
-    in->history_current = NULL;
-    in->history_changed = FALSE;
-    in->history_name = NULL;
+    in->history.list = NULL;
+    in->history.current = NULL;
+    in->history.changed = FALSE;
+    in->history.name = NULL;
     if ((histname != NULL) && (*histname != '\0'))
-        in->history_name = g_strdup (histname);
+        in->history.name = g_strdup (histname);
     /* history will be loaded later */
 
     in->label = NULL;
@@ -1100,8 +1087,6 @@ input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         return input_execute_cmd (in, parm);
 
     case MSG_RESIZE:
-        in->field_width = WIDGET (in)->cols;
-        /* fall through */
     case MSG_FOCUS:
     case MSG_UNFOCUS:
     case MSG_DRAW:
@@ -1209,14 +1194,24 @@ input_key_is_in_map (WInput * in, int key)
 void
 input_assign_text (WInput * in, const char *text)
 {
+    Widget *w = WIDGET (in);
+    size_t text_len, buffer_len;
+
+    if (text == NULL)
+        text = "";
+
     input_free_completions (in);
-    g_free (in->buffer);
-    in->current_max_size = strlen (text) + 1;
-    in->buffer = g_strndup (text, in->current_max_size);        /* was in->buffer->text */
-    in->point = str_length (in->buffer);
     in->mark = 0;
     in->need_push = TRUE;
     in->charpoint = 0;
+
+    text_len = strlen (text);
+    buffer_len = 1 + max ((size_t) w->cols, text_len);
+    in->current_max_size = buffer_len;
+    if (buffer_len > (size_t) w->cols)
+        in->buffer = g_realloc (in->buffer, buffer_len);
+    memmove (in->buffer, text, text_len + 1);
+    in->point = str_length (in->buffer);
     input_update (in, TRUE);
 }
 
@@ -1263,29 +1258,30 @@ input_update (WInput * in, gboolean clear_first)
     const char *cp;
     int pw;
 
-    if (should_show_history_button (in))
-        has_history = HISTORY_BUTTON_WIDTH;
-
     if (in->disable_update != 0)
         return;
-
-    buf_len = str_length (in->buffer);
-    pw = str_term_width2 (in->buffer, in->point);
-
-    /* Make the point visible */
-    if ((pw < in->term_first_shown) || (pw >= in->term_first_shown + in->field_width - has_history))
-    {
-        in->term_first_shown = pw - (in->field_width / 3);
-        if (in->term_first_shown < 0)
-            in->term_first_shown = 0;
-    }
-
-    /* Adjust the mark */
-    in->mark = min (in->mark, buf_len);
 
     /* don't draw widget not put into dialog */
     if (w->owner == NULL || w->owner->state != DLG_ACTIVE)
         return;
+
+    if (should_show_history_button (in))
+        has_history = HISTORY_BUTTON_WIDTH;
+
+    buf_len = str_length (in->buffer);
+
+    /* Adjust the mark */
+    in->mark = min (in->mark, buf_len);
+
+    pw = str_term_width2 (in->buffer, in->point);
+
+    /* Make the point visible */
+    if ((pw < in->term_first_shown) || (pw >= in->term_first_shown + w->cols - has_history))
+    {
+        in->term_first_shown = pw - (w->cols / 3);
+        if (in->term_first_shown < 0)
+            in->term_first_shown = 0;
+    }
 
     if (has_history != 0)
         draw_history_button (in);
@@ -1303,7 +1299,7 @@ input_update (WInput * in, gboolean clear_first)
     {
         if (!in->highlight)
             tty_print_string (str_term_substring (in->buffer, in->term_first_shown,
-                                                  in->field_width - has_history));
+                                                  w->cols - has_history));
         else
         {
             long m1, m2;
@@ -1311,8 +1307,7 @@ input_update (WInput * in, gboolean clear_first)
             if (input_eval_marks (in, &m1, &m2))
             {
                 tty_setcolor (in->color[WINPUTC_MAIN]);
-                cp = str_term_substring (in->buffer, in->term_first_shown,
-                                         in->field_width - has_history);
+                cp = str_term_substring (in->buffer, in->term_first_shown, w->cols - has_history);
                 tty_print_string (cp);
                 tty_setcolor (in->color[WINPUTC_MARK]);
                 if (m1 < in->term_first_shown)
@@ -1329,8 +1324,7 @@ input_update (WInput * in, gboolean clear_first)
                     widget_move (in, 0, m1 - in->term_first_shown);
                     buf_width = str_term_width2 (in->buffer, m1);
                     sel_width =
-                        min (m2 - m1,
-                             (in->field_width - has_history) - (buf_width - in->term_first_shown));
+                        min (m2 - m1, (w->cols - has_history) - (buf_width - in->term_first_shown));
                     tty_print_string (str_term_substring (in->buffer, m1, sel_width));
                 }
             }
@@ -1338,9 +1332,9 @@ input_update (WInput * in, gboolean clear_first)
     }
     else
     {
-        cp = str_term_substring (in->buffer, in->term_first_shown, in->field_width - has_history);
+        cp = str_term_substring (in->buffer, in->term_first_shown, w->cols - has_history);
         tty_setcolor (in->color[WINPUTC_MAIN]);
-        for (i = 0; i < in->field_width - has_history; i++)
+        for (i = 0; i < w->cols - has_history; i++)
         {
             if (i < (buf_len - in->term_first_shown) && cp[0] != '\0')
                 tty_print_char ('*');
