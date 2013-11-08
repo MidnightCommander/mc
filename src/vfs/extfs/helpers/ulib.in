@@ -73,7 +73,7 @@ sub mc_ulib_fs_copyout
     my($module, $fname) = @_;
     my $tmpdir = $ENV{'TMPDIR'};
 
-    $tmpdir = '/tmp' if ($tmpdir eq '');
+    $tmpdir = '/tmp' if (! defined $tmpdir or $tmpdir eq '');
 
     open(PIPE, "$gplib -tq $archive |") || die("Error in: $gplib -tq");
 
