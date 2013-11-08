@@ -868,6 +868,7 @@ View=%view{ascii} @EXTHELPERSDIR@/misc.sh view lyx
 [torrent]
 Shell=.torrent
 ShellIgnoreCase=true
+Open=%cd %p/torrent://
 View=%view{ascii} @EXTHELPERSDIR@/misc.sh view torrent
 
 

@@ -52,7 +52,7 @@ do_view_action() {
         lyxcat "${MC_EXT_FILENAME}"
         ;;
     torrent)
-        ctorrent -x "${MC_EXT_FILENAME}" 2>/dev/null
+        @EXTHELPERSDIR@/../extfs.d/torrent list "${MC_EXT_FILENAME}" 2>/dev/null
         ;;
     javaclass)
         jad -p "${MC_EXT_FILENAME}" 2>/dev/null || \
