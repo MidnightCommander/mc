@@ -739,7 +739,7 @@ vfs_path_from_str_flags (const char *path_str, vfs_path_flag_t flags)
     else
         vpath = vfs_path_from_str_uri_parser (path, flags);
 
-    vpath->str = vfs_path_to_str_flags (vpath, 0, VPF_NONE);
+    vpath->str = vfs_path_to_str_flags (vpath, 0, flags);
     g_free (path);
 
     return vpath;
