@@ -808,12 +808,9 @@ mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
 
         if (lc_mc_search->search_fn != NULL)
         {
-            int current_chr;
-
-            do
+            while (TRUE)
             {
-                /* stop search symbol */
-                current_chr = '\n';
+                int current_chr = '\n'; /* stop search symbol */
 
                 ret = lc_mc_search->search_fn (user_data, current_pos, &current_chr);
 
@@ -831,26 +828,30 @@ mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
                 virtual_pos++;
 
                 g_string_append_c (lc_mc_search->regex_buffer, (char) current_chr);
+
+                if ((char) current_chr == '\n' || virtual_pos > end_search)
+                    break;
             }
-            while ((char) current_chr != '\n' && virtual_pos <= end_search);
         }
         else
         {
-            char current_chr;
-
             /* optimization for standard case (for search from file manager)
              *  where there is no MC_SEARCH_CB_INVALID or MC_SEARCH_CB_SKIP
              *  return codes, so we can copy line at regex buffer all at once
              */
-            do
+            while (TRUE)
             {
+                char current_chr;
+
                 current_chr = ((char *) user_data)[current_pos];
                 if (current_chr == '\0')
                     break;
 
                 current_pos++;
+
+                if (current_chr == '\n' || current_pos > end_search)
+                    break;
             }
-            while (current_chr != '\n' && current_pos <= end_search);
 
             /* use virtual_pos as index of start of current chunk */
             g_string_append_len (lc_mc_search->regex_buffer, (char *) user_data + virtual_pos,
