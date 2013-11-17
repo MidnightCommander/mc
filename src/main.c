@@ -203,6 +203,7 @@ init_sigchld (void)
 {
     struct sigaction sigchld_action;
 
+    memset (&sigchld_action, 0, sizeof (sigchld_action));
     sigchld_action.sa_handler =
 #ifdef ENABLE_SUBSHELL
         mc_global.tty.use_subshell ? sigchld_handler :
@@ -213,8 +214,6 @@ init_sigchld (void)
 
 #ifdef SA_RESTART
     sigchld_action.sa_flags = SA_RESTART;
-#else
-    sigchld_action.sa_flags = 0;
 #endif /* !SA_RESTART */
 
     if (sigaction (SIGCHLD, &sigchld_action, NULL) == -1)

@@ -33,6 +33,7 @@
 #include <signal.h>
 #include <stdarg.h>
 #include <stdlib.h>
+#include <string.h>             /* memset() */
 #include <unistd.h>             /* exit() */
 
 #ifdef HAVE_SYS_IOCTL_H
@@ -118,12 +119,11 @@ tty_start_interrupt_key (void)
 {
     struct sigaction act;
 
+    memset (&act, 0, sizeof (act));
     act.sa_handler = sigintr_handler;
     sigemptyset (&act.sa_mask);
 #ifdef SA_RESTART
     act.sa_flags = SA_RESTART;
-#else
-    act.sa_flags = 0;
 #endif /* SA_RESTART */
     sigaction (SIGINT, &act, NULL);
 }
@@ -135,9 +135,9 @@ tty_enable_interrupt_key (void)
 {
     struct sigaction act;
 
+    memset (&act, 0, sizeof (act));
     act.sa_handler = sigintr_handler;
     sigemptyset (&act.sa_mask);
-    act.sa_flags = 0;
     sigaction (SIGINT, &act, NULL);
     got_interrupt = 0;
 }
@@ -149,9 +149,9 @@ tty_disable_interrupt_key (void)
 {
     struct sigaction act;
 
+    memset (&act, 0, sizeof (act));
     act.sa_handler = SIG_IGN;
     sigemptyset (&act.sa_mask);
-    act.sa_flags = 0;
     sigaction (SIGINT, &act, NULL);
 }
 

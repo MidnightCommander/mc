@@ -180,9 +180,9 @@ my_system__save_sigaction_handlers (my_system_sigactions_t * sigactions)
 {
     struct sigaction ignore;
 
+    memset (&ignore, 0, sizeof (ignore));
     ignore.sa_handler = SIG_IGN;
     sigemptyset (&ignore.sa_mask);
-    ignore.sa_flags = 0;
 
     sigaction (SIGINT, &ignore, &sigactions->intr);
     sigaction (SIGQUIT, &ignore, &sigactions->quit);

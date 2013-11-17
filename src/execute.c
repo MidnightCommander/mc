@@ -154,6 +154,7 @@ do_suspend_cmd (void)
     {
         struct sigaction sigtstp_action;
 
+        memset (&sigtstp_action, 0, sizeof (sigtstp_action));
         /* Make sure that the SIGTSTP below will suspend us directly,
            without calling ncurses' SIGTSTP handler; we *don't* want
            ncurses to redraw the screen immediately after the SIGCONT */
