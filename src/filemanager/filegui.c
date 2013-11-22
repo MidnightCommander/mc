@@ -930,6 +930,9 @@ file_progress_show_count (FileOpContext * ctx, size_t done, size_t total)
         return;
 
     ui = ctx->ui;
+    if (ui->total_files_processed_label == NULL)
+        return;
+
     if (ctx->progress_totals_computed)
         g_snprintf (buffer, BUF_TINY, _("Files processed: %zu/%zu"), done, total);
     else
@@ -946,8 +949,6 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintma
     char buffer[BUF_TINY];
     char buffer2[BUF_TINY];
     char buffer3[BUF_TINY];
-    char buffer4[BUF_TINY];
-    struct timeval tv_current;
     FileOpContextUI *ui;
 
     if (ctx == NULL || ctx->ui == NULL)
@@ -955,7 +956,7 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintma
 
     ui = ctx->ui;
 
-    if (ctx->progress_totals_computed)
+    if (ui->progress_total_gauge != NULL)
     {
         if (ctx->progress_bytes == 0)
             gauge_show (ui->progress_total_gauge, 0);
@@ -970,43 +971,53 @@ file_progress_show_total (FileOpTotalContext * tctx, FileOpContext * ctx, uintma
     if (!show_summary && tctx->bps == 0)
         return;
 
-    gettimeofday (&tv_current, NULL);
-    file_frmt_time (buffer2, tv_current.tv_sec - tctx->transfer_start.tv_sec);
-
-    if (ctx->progress_totals_computed)
+    if (ui->time_label != NULL)
     {
-        file_eta_prepare_for_show (buffer3, tctx->eta_secs, TRUE);
-        if (tctx->bps == 0)
-            g_snprintf (buffer, BUF_TINY, _("Time: %s %s"), buffer2, buffer3);
+        struct timeval tv_current;
+        char buffer4[BUF_TINY];
+
+        gettimeofday (&tv_current, NULL);
+        file_frmt_time (buffer2, tv_current.tv_sec - tctx->transfer_start.tv_sec);
+
+        if (ctx->progress_totals_computed)
+        {
+            file_eta_prepare_for_show (buffer3, tctx->eta_secs, TRUE);
+            if (tctx->bps == 0)
+                g_snprintf (buffer, BUF_TINY, _("Time: %s %s"), buffer2, buffer3);
+            else
+            {
+
+                file_bps_prepare_for_show (buffer4, (long) tctx->bps);
+                g_snprintf (buffer, BUF_TINY, _("Time: %s %s (%s)"), buffer2, buffer3, buffer4);
+            }
+        }
         else
         {
-            file_bps_prepare_for_show (buffer4, (long) tctx->bps);
-            g_snprintf (buffer, BUF_TINY, _("Time: %s %s (%s)"), buffer2, buffer3, buffer4);
+            if (tctx->bps == 0)
+                g_snprintf (buffer, BUF_TINY, _("Time: %s"), buffer2);
+            else
+            {
+                file_bps_prepare_for_show (buffer4, (long) tctx->bps);
+                g_snprintf (buffer, BUF_TINY, _("Time: %s (%s)"), buffer2, buffer4);
+            }
         }
+
+        label_set_text (ui->time_label, buffer);
     }
-    else
+
+    if (ui->total_bytes_label != NULL)
     {
-        if (tctx->bps == 0)
-            g_snprintf (buffer, BUF_TINY, _("Time: %s"), buffer2);
+        size_trunc_len (buffer2, 5, tctx->copied_bytes, 0, panels_options.kilobyte_si);
+        if (!ctx->progress_totals_computed)
+            g_snprintf (buffer, BUF_TINY, _(" Total: %s "), buffer2);
         else
         {
-            file_bps_prepare_for_show (buffer4, (long) tctx->bps);
-            g_snprintf (buffer, BUF_TINY, _("Time: %s (%s)"), buffer2, buffer4);
+            size_trunc_len (buffer3, 5, ctx->progress_bytes, 0, panels_options.kilobyte_si);
+            g_snprintf (buffer, BUF_TINY, _(" Total: %s/%s "), buffer2, buffer3);
         }
+
+        hline_set_text (ui->total_bytes_label, buffer);
     }
-
-    label_set_text (ui->time_label, buffer);
-
-    size_trunc_len (buffer2, 5, tctx->copied_bytes, 0, panels_options.kilobyte_si);
-    if (!ctx->progress_totals_computed)
-        g_snprintf (buffer, BUF_TINY, _(" Total: %s "), buffer2);
-    else
-    {
-        size_trunc_len (buffer3, 5, ctx->progress_bytes, 0, panels_options.kilobyte_si);
-        g_snprintf (buffer, BUF_TINY, _(" Total: %s/%s "), buffer2, buffer3);
-    }
-
-    hline_set_text (ui->total_bytes_label, buffer);
 }
 
 /* }}} */
