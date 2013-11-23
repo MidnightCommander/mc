@@ -1702,17 +1702,17 @@ void
 save_setup_cmd (void)
 {
     vfs_path_t *vpath;
-    char *path;
+    const char *path;
 
-    vpath = mc_config_get_full_vpath (MC_CONFIG_FILE);
-    path = vfs_path_to_str_flags (vpath, 0, VPF_STRIP_HOME);
-    vfs_path_free (vpath);
+    vpath = vfs_path_from_str_flags (mc_config_get_path (), VPF_STRIP_HOME);
+    path = vfs_path_as_str (vpath);
 
     if (save_setup (TRUE, TRUE))
         message (D_NORMAL, _("Setup"), _("Setup saved to %s"), path);
     else
         message (D_ERROR, _("Setup"), _("Unable to save setup to %s"), path);
-    g_free (path);
+
+    vfs_path_free (vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
