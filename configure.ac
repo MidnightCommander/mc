@@ -159,7 +159,8 @@ dnl ############################################################################
 AC_CHECK_HEADERS([string.h memory.h limits.h malloc.h \
 	utime.h sys/statfs.h sys/vfs.h \
 	sys/select.h sys/ioctl.h stropts.h arpa/inet.h \
-	sys/socket.h sys/sysmacros.h sys/mkdev.h])
+	sys/socket.h])
+AC_HEADER_MAJOR
 AC_HEADER_ASSERT
 
 

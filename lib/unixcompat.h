@@ -12,11 +12,11 @@
 #define MC_UNIXCOMPAT_H
 
 #include <sys/types.h>          /* BSD */
-#ifdef HAVE_SYS_MKDEV_H
-#include <sys/mkdev.h>          /* Solaris 9 */
-#endif
-#if defined(_AIX) && defined(HAVE_SYS_SYSMACROS_H)
-#include <sys/sysmacros.h>      /* AIX */
+
+#if MAJOR_IN_MKDEV
+#include <sys/mkdev.h>
+#elif MAJOR_IN_SYSMACROS
+#include <sys/sysmacros.h>
 #endif
 
 #if defined(_AIX)
