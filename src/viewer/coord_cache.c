@@ -50,7 +50,7 @@
 
 #include <config.h>
 
-#include <string.h>             /* for g_memmove() */
+#include <string.h>             /* memmove() */
 #ifdef MC_ENABLE_DEBUGGING_CODE
 #include <inttypes.h>           /* uintmax_t */
 #endif
@@ -93,8 +93,8 @@ mcview_ccache_add_entry (coord_cache_t * cache, size_t pos, const coord_cache_en
 
     /* insert new entry */
     if (pos != cache->size)
-        g_memmove (cache->cache[pos + 1], cache->cache[pos],
-                   (cache->size - pos) * sizeof (coord_cache_entry_t *));
+        memmove (cache->cache[pos + 1], cache->cache[pos],
+                 (cache->size - pos) * sizeof (coord_cache_entry_t *));
     cache->cache[pos] = g_memdup (entry, sizeof (coord_cache_entry_t));
     cache->size++;
 }
