@@ -1,0 +1,4 @@
+Please run the following command:
+make indent
+in the build root directory before each new commit.
+

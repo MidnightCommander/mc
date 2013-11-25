@@ -148,13 +148,13 @@ mcview_display_status (mcview_t * view)
 
     if (width > 40)
     {
-        char buffer[BUF_TRUNC_LEN + 1];
-
         widget_move (view, top, width - 32);
         if (view->hex_mode)
             tty_printf ("0x%08" PRIxMAX, (uintmax_t) view->hex_cursor);
         else
         {
+            char buffer[BUF_TRUNC_LEN + 1];
+
             size_trunc_len (buffer, BUF_TRUNC_LEN, mcview_get_filesize (view), 0,
                             panels_options.kilobyte_si);
             tty_printf ("%9" PRIuMAX "/%s%s %s", (uintmax_t) view->dpy_end,

@@ -584,8 +584,6 @@ edit_buffer_backspace (edit_buffer_t * buf)
 off_t
 edit_buffer_move_forward (const edit_buffer_t * buf, off_t current, long lines, off_t upto)
 {
-    long next;
-
     if (upto != 0)
         return (off_t) edit_buffer_count_lines (buf, current, upto);
 
@@ -593,6 +591,8 @@ edit_buffer_move_forward (const edit_buffer_t * buf, off_t current, long lines, 
 
     while (lines-- != 0)
     {
+        long next;
+
         next = edit_buffer_get_eol (buf, current) + 1;
         if (next > buf->size)
             break;

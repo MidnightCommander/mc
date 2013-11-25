@@ -1091,8 +1091,7 @@ edit_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
 
     case MSG_IDLE:
         widget_want_idle (w, FALSE);
-        edit_update_screen ((WEdit *) h->current->data);
-        return MSG_HANDLED;
+        return send_message (h->current->data, NULL, MSG_IDLE, 0, NULL);
 
     default:
         return dlg_default_callback (w, sender, msg, parm, data);
@@ -1160,6 +1159,10 @@ edit_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
             widget_move (w, y, x);
             return MSG_HANDLED;
         }
+
+    case MSG_IDLE:
+        edit_update_screen (e);
+        return MSG_HANDLED;
 
     case MSG_DESTROY:
         edit_clean (e);

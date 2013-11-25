@@ -239,7 +239,7 @@ vfs_path_url_split (vfs_path_element_t * path_element, const char *path)
 {
     char *pcopy;
     const char *pend;
-    char *colon, *inner_colon, *at, *rest;
+    char *colon, *at, *rest;
 
     path_element->port = 0;
 
@@ -254,6 +254,8 @@ vfs_path_url_split (vfs_path_element_t * path_element, const char *path)
         rest = pcopy;
     else
     {
+        char *inner_colon;
+
         *at = '\0';
         inner_colon = strchr (pcopy, ':');
         if (inner_colon != NULL)
@@ -290,6 +292,7 @@ vfs_path_url_split (vfs_path_element_t * path_element, const char *path)
     if (colon != NULL)
     {
         *colon = '\0';
+        /* cppcheck-suppress invalidscanf */
         if (sscanf (colon + 1, "%d", &path_element->port) == 1)
         {
             if (path_element->port <= 0 || path_element->port >= 65536)
@@ -443,7 +446,6 @@ vfs_path_from_str_uri_parser (char *path, vfs_path_flag_t flags)
     {
         char *vfs_prefix_start;
         char *real_vfs_prefix_start = url_delimiter;
-        char *slash_pointer;
         struct vfs_s_subclass *sub = NULL;
 
         while (real_vfs_prefix_start > path && *(real_vfs_prefix_start) != PATH_SEP)
@@ -463,6 +465,8 @@ vfs_path_from_str_uri_parser (char *path, vfs_path_flag_t flags)
         sub = VFSDATA (element);
         if (sub != NULL && (sub->flags & VFS_S_REMOTE) != 0)
         {
+            char *slash_pointer;
+
             slash_pointer = strchr (url_delimiter, PATH_SEP);
             if (slash_pointer == NULL)
             {

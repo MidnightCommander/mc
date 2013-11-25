@@ -6,7 +6,7 @@
     nano=%filename +%lineno
     joe=%filename +%lineno
     more=%filename +%lineno
-    less=%filename +%linenog
+    less=%filename +%lineno
     mcedit=%filename:%lineno
 
 [Special dirs]

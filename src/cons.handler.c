@@ -138,8 +138,6 @@ show_console_contents_linux (int starty, unsigned char begin_line, unsigned char
 static void
 handle_console_linux (console_action_t action)
 {
-    char *tty_name;
-    char *mc_conssaver;
     int status;
 
     switch (action)
@@ -186,6 +184,8 @@ handle_console_linux (console_action_t action)
         else
         {
             /* Child */
+            char *tty_name;
+
             /* Close the extra pipe ends */
             status = close (pipefd1[1]);
             status = close (pipefd2[0]);
@@ -206,8 +206,10 @@ handle_console_linux (console_action_t action)
                 if (dup2 (status, 2) == -1)
                     break;
                 status = close (status);
-                if (tty_name)
+                if (tty_name != NULL)
                 {
+                    char *mc_conssaver;
+
                     /* Exec the console save/restore handler */
                     mc_conssaver = mc_build_filename (SAVERDIR, "cons.saver", NULL);
                     execl (mc_conssaver, "cons.saver", tty_name, (char *) NULL);
@@ -248,8 +250,8 @@ handle_console_linux (console_action_t action)
             close (pipefd1[1]);
             close (pipefd2[0]);
             ret = waitpid (cons_saver_pid, &status, 0);
-            mc_global.tty.console_flag = '\0';
             (void) ret;
+            mc_global.tty.console_flag = '\0';
         }
         break;
     default:

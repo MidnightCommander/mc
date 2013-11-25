@@ -386,12 +386,13 @@ sort_vers (file_entry_t * a, file_entry_t * b)
 int
 sort_ext (file_entry_t * a, file_entry_t * b)
 {
-    int r;
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
 
     if (ad == bd || panels_options.mix_all_files)
     {
+        int r;
+
         if (a->second_sort_key == NULL)
             a->second_sort_key = str_create_key (extension (a->fname), case_sensitive);
         if (b->second_sort_key == NULL)
@@ -742,9 +743,12 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
     /* Add ".." except to the root directory. The ".." entry
        (if any) must be the first in the list. */
     tmp_path = vfs_path_get_by_index (vpath, 0)->path;
-    if (!
-        (vfs_path_elements_count (vpath) == 1 && (tmp_path[0] == PATH_SEP)
-         && (tmp_path[1] == '\0')))
+    if (vfs_path_elements_count (vpath) == 1 && tmp_path[0] == PATH_SEP && tmp_path[1] == '\0')
+    {
+        /* root directory */
+        dir_list_clean (list);
+    }
+    else
     {
         if (!dir_list_init (list))
         {
@@ -764,6 +768,7 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
     while ((dp = mc_readdir (dirp)) != NULL)
     {
         file_entry_t *fentry;
+
         if (!handle_dirent (dp, fltr, &st, &link_to_dir, &stale_link))
             continue;
 

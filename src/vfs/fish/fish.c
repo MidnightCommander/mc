@@ -197,6 +197,7 @@ fish_decode_reply (char *s, gboolean was_garbage)
 {
     int code;
 
+    /* cppcheck-suppress invalidscanf */
     if (sscanf (s, "%d", &code) == 0)
     {
         code = 500;
@@ -384,12 +385,12 @@ fish_set_env (int flags)
 static gboolean
 fish_info (struct vfs_class *me, struct vfs_s_super *super)
 {
-    char buffer[BUF_8K];
     if (fish_command (me, super, NONE, SUP->scr_info) == COMPLETE)
     {
         while (TRUE)
         {
             int res;
+            char buffer[BUF_8K];
 
             res = vfs_s_get_line_interruptible (me, buffer, sizeof (buffer), SUP->sockr);
             if ((res == 0) || (res == EINTR))
@@ -809,6 +810,7 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
         case 'D':
             {
                 struct tm tim;
+                /* cppcheck-suppress invalidscanf */
                 if (sscanf (buffer + 1, "%d %d %d %d %d %d", &tim.tm_year, &tim.tm_mon,
                             &tim.tm_mday, &tim.tm_hour, &tim.tm_min, &tim.tm_sec) != 6)
                     break;
@@ -818,6 +820,7 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
         case 'E':
             {
                 int maj, min;
+                /* cppcheck-suppress invalidscanf */
                 if (sscanf (buffer + 1, "%d,%d", &maj, &min) != 2)
                     break;
 #ifdef HAVE_STRUCT_STAT_ST_RDEV

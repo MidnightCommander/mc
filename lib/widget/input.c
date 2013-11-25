@@ -312,7 +312,6 @@ move_buffer_backward (WInput * in, int start, int end)
 static cb_ret_t
 insert_char (WInput * in, int c_code)
 {
-    size_t i;
     int res;
 
     if (in->highlight)
@@ -356,6 +355,7 @@ insert_char (WInput * in, int c_code)
 
     if (strlen (in->buffer) + in->charpoint < in->current_max_size)
     {
+        size_t i;
         /* bytes from begin */
         size_t ins_point = str_offset_to_pos (in->buffer, in->point);
         /* move chars */
@@ -900,8 +900,7 @@ input_destroy (WInput * in)
     {
         /* history is already saved before this moment */
         in->history.list = g_list_first (in->history.list);
-        g_list_foreach (in->history.list, (GFunc) g_free, NULL);
-        g_list_free (in->history.list);
+        g_list_free_full (in->history.list, g_free);
     }
     g_free (in->history.name);
     g_free (in->buffer);
@@ -1253,7 +1252,6 @@ input_update (WInput * in, gboolean clear_first)
 {
     Widget *w = WIDGET (in);
     int has_history = 0;
-    int i;
     int buf_len;
     const char *cp;
     int pw;
@@ -1332,6 +1330,8 @@ input_update (WInput * in, gboolean clear_first)
     }
     else
     {
+        int i;
+
         cp = str_term_substring (in->buffer, in->term_first_shown, w->cols - has_history);
         tty_setcolor (in->color[WINPUTC_MAIN]);
         for (i = 0; i < w->cols - has_history; i++)

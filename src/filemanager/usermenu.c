@@ -307,15 +307,16 @@ static void
 debug_out (char *start, char *end, int cond)
 {
     static char *msg;
-    int len;
 
     if (start == NULL && end == NULL)
     {
         /* Show output */
         if (debug_flag && msg)
         {
+            size_t len;
+
             len = strlen (msg);
-            if (len)
+            if (len != 0)
                 msg[len - 1] = 0;
             message (D_NORMAL, _("Debug"), "%s", msg);
 
@@ -361,11 +362,12 @@ test_line (WEdit * edit_widget, char *p, int *result)
 {
     int condition;
     char operator;
-    char *debug_start, *debug_end;
 
     /* Repeat till end of line */
     while (*p && *p != '\n')
     {
+        char *debug_start, *debug_end;
+
         /* support quote space .mnu */
         while ((*p == ' ' && *(p - 1) != '\\') || *p == '\t')
             p++;
@@ -473,7 +475,6 @@ execute_menu_command (WEdit * edit_widget, const char *commands, gboolean show_p
         {
             if (*commands == '}')
             {
-                char *tmp;
                 *parameter = 0;
                 parameter =
                     input_dialog (_("Parameter"), lc_prompt, MC_HISTORY_FM_MENU_EXEC_PARAM, "",
@@ -490,6 +491,8 @@ execute_menu_command (WEdit * edit_widget, const char *commands, gboolean show_p
                 }
                 if (do_quote)
                 {
+                    char *tmp;
+
                     tmp = name_quote (parameter, 0);
                     fputs (tmp, cmd_file);
                     g_free (tmp);
@@ -689,12 +692,13 @@ check_format_var (const char *p, char **v)
 {
     const char *q = p;
     char *var_name;
-    const char *value;
-    const char *dots = 0;
 
-    *v = 0;
+    *v = NULL;
     if (!strncmp (p, "var{", 4))
     {
+        const char *dots = NULL;
+        const char *value;
+
         for (q += 4; *q && *q != '}'; q++)
         {
             if (*q == ':')
@@ -925,7 +929,6 @@ user_menu_cmd (struct WEdit * edit_widget, const char *menu_file, int selected_e
     int max_cols, menu_lines, menu_limit;
     int col, i, accept_entry = 1;
     int selected, old_patterns;
-    Listbox *listbox;
     gboolean res = FALSE;
     gboolean interactive = TRUE;
 
@@ -1093,6 +1096,8 @@ user_menu_cmd (struct WEdit * edit_widget, const char *menu_file, int selected_e
             selected = selected_entry;
         else
         {
+            Listbox *listbox;
+
             max_cols = min (max (max_cols, col), MAX_ENTRY_LEN);
 
             /* Create listbox */

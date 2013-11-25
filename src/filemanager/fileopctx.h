@@ -76,7 +76,7 @@ struct mc_search_struct;
 /* This structure describes a context for file operations.  It is used to update
  * the progress windows and pass around options.
  */
-typedef struct FileOpContext
+typedef struct
 {
     /* Operation type (copy, move, delete) */
     FileOperation operation;
@@ -166,7 +166,7 @@ typedef struct FileOpContext
 
     /* User interface data goes here */
     void *ui;
-} FileOpContext;
+} file_op_context_t;
 
 typedef struct
 {
@@ -187,14 +187,14 @@ extern const char *op_names[3];
 
 /*** declarations of public functions ************************************************************/
 
-FileOpContext *file_op_context_new (FileOperation op);
-void file_op_context_destroy (FileOpContext * ctx);
+file_op_context_t *file_op_context_new (FileOperation op);
+void file_op_context_destroy (file_op_context_t * ctx);
 
 FileOpTotalContext *file_op_total_context_new (void);
 void file_op_total_context_destroy (FileOpTotalContext * tctx);
 
 /* The following functions are implemented separately by each port */
-FileProgressStatus file_progress_real_query_replace (FileOpContext * ctx,
+FileProgressStatus file_progress_real_query_replace (file_op_context_t * ctx,
                                                      enum OperationMode mode,
                                                      const char *destname,
                                                      struct stat *_s_stat, struct stat *_d_stat);

@@ -117,9 +117,6 @@ my_mkdir (const vfs_path_t * s_vpath, mode_t mode)
         vfs_path_t *my_s;
 
         my_s = get_absolute_name (s_vpath);
-#ifdef FIXME
-        tree_add_entry (tree, my_s);
-#endif
         vfs_path_free (my_s);
     }
     return result;
@@ -132,9 +129,6 @@ my_rmdir (const char *s)
 {
     int result;
     vfs_path_t *vpath;
-#ifdef FIXME
-    WTree *tree = 0;
-#endif
 
     vpath = vfs_path_from_str_flags (s, VPF_NO_CANON);
     /* FIXME: Should receive a Wtree! */
@@ -144,9 +138,6 @@ my_rmdir (const char *s)
         vfs_path_t *my_s;
 
         my_s = get_absolute_name (vpath);
-#ifdef FIXME
-        tree_remove_entry (tree, my_s);
-#endif
         vfs_path_free (my_s);
     }
     vfs_path_free (vpath);

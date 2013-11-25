@@ -34,15 +34,15 @@ typedef struct
 
 /*** declarations of public functions ************************************************************/
 
-FileProgressStatus copy_file_file (FileOpTotalContext * tctx, FileOpContext * ctx,
+FileProgressStatus copy_file_file (FileOpTotalContext * tctx, file_op_context_t * ctx,
                                    const char *src_path, const char *dst_path);
-FileProgressStatus move_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx,
+FileProgressStatus move_dir_dir (FileOpTotalContext * tctx, file_op_context_t * ctx,
                                  const char *s, const char *d);
-FileProgressStatus copy_dir_dir (FileOpTotalContext * tctx, FileOpContext * ctx,
+FileProgressStatus copy_dir_dir (FileOpTotalContext * tctx, file_op_context_t * ctx,
                                  const char *s, const char *d,
                                  gboolean toplevel, gboolean move_over, gboolean do_delete,
                                  GSList * parent_dirs);
-FileProgressStatus erase_dir (FileOpTotalContext * tctx, FileOpContext * ctx,
+FileProgressStatus erase_dir (FileOpTotalContext * tctx, file_op_context_t * ctx,
                               const vfs_path_t * vpath);
 
 gboolean panel_operate (void *source_panel, FileOperation op, gboolean force_single);
@@ -55,8 +55,8 @@ FileProgressStatus file_error (const char *format, const char *file);
 /* return value is FILE_CONT or FILE_ABORT */
 FileProgressStatus compute_dir_size (const vfs_path_t * dirname_vpath, void *ui,
                                      compute_dir_size_callback cback,
-                                     size_t * ret_count, uintmax_t * ret_total,
-                                     gboolean compute_symlinks);
+                                     size_t * ret_dir_count, size_t * ret_marked_count,
+                                     uintmax_t * ret_total, gboolean compute_symlinks);
 
 ComputeDirSizeUI *compute_dir_size_create_ui (gboolean allow_skip);
 void compute_dir_size_destroy_ui (ComputeDirSizeUI * ui);

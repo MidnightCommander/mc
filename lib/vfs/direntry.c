@@ -245,7 +245,6 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
 {
     struct vfs_s_entry *ent = NULL;
     char *const path = g_strdup (a_path);
-    struct vfs_s_entry *retval = NULL;
     GList *iter;
 
     if (root->super->root != root)
@@ -262,11 +261,11 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
         dirname = g_path_get_dirname (path);
         name = g_path_get_basename (path);
         ino = vfs_s_find_inode (me, root->super, dirname, follow, flags | FL_DIR);
-        retval = vfs_s_find_entry_tree (me, ino, name, follow, flags);
+        ent = vfs_s_find_entry_tree (me, ino, name, follow, flags);
         g_free (dirname);
         g_free (name);
         g_free (path);
-        return retval;
+        return ent;
     }
 
     iter = g_list_find_custom (root->subdir, path, (GCompareFunc) vfs_s_entry_compare);
@@ -1238,7 +1237,6 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
         char *dirname, *name;
         struct vfs_s_entry *ent;
         struct vfs_s_inode *dir;
-        int tmp_handle;
 
         /* If the filesystem is read-only, disable file creation */
         if (!(flags & O_CREAT) || !(path_element->class->write))
@@ -1258,6 +1256,7 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
         vfs_s_insert_entry (path_element->class, dir, ent);
         if ((VFSDATA (path_element)->flags & VFS_S_USETMP) != 0)
         {
+            int tmp_handle;
             vfs_path_t *tmp_vpath;
 
             tmp_handle = vfs_mkstemps (&tmp_vpath, path_element->class->name, name);
@@ -1547,7 +1546,6 @@ vfs_s_get_line (struct vfs_class *me, int sock, char *buf, int buf_len, char ter
 int
 vfs_s_get_line_interruptible (struct vfs_class *me, char *buffer, int size, int fd)
 {
-    int n;
     int i;
 
     (void) me;
@@ -1555,6 +1553,8 @@ vfs_s_get_line_interruptible (struct vfs_class *me, char *buffer, int size, int 
     tty_enable_interrupt_key ();
     for (i = 0; i < size - 1; i++)
     {
+        int n;
+
         n = read (fd, buffer + i, 1);
         tty_disable_interrupt_key ();
         if (n == -1 && errno == EINTR)

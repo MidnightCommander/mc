@@ -510,13 +510,9 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
     struct line_s *p = line;
 
     off_t m1 = 0, m2 = 0, q;
-    long c1, c2;
     int col, start_col_real;
-    unsigned int c;
     int color;
     int abn_style;
-    int i;
-    unsigned int cur_line = 0;
     int book_mark = 0;
     char line_stat[LINE_STATE_WIDTH + 1] = "\0";
 
@@ -547,6 +543,8 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
 
     if (option_line_state)
     {
+        unsigned int cur_line;
+
         cur_line = edit->start_line + row;
         if (cur_line <= (unsigned int) edit->buffer.lines)
         {
@@ -572,6 +570,8 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
             off_t tws = 0;
             if (tty_use_colors () && visible_tws)
             {
+                unsigned int c;
+
                 tws = edit_buffer_get_eol (&edit->buffer, b);
                 while (tws > b
                        && ((c = edit_buffer_get_byte (&edit->buffer, tws - 1)) == ' ' || c == '\t'))
@@ -581,7 +581,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
             while (col <= end_col - edit->start_col)
             {
                 int cw = 1;
-                int tab_over = 0;
+                unsigned int c;
                 gboolean wide_width_char = FALSE;
                 gboolean control_char = FALSE;
 
@@ -594,6 +594,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
                     if (edit->column_highlight)
                     {
                         long x;
+                        long c1, c2;
 
                         x = (long) edit_move_forward3 (edit, b, 0, q);
                         c1 = min (edit->column1, edit->column2);
@@ -632,74 +633,80 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
                     col = end_col - edit->start_col + 1;        /* quit */
                     break;
                 case '\t':
-                    i = TAB_SIZE - ((int) col % TAB_SIZE);
-                    tab_over = (end_col - edit->start_col) - (col + i - 1);
-                    if (tab_over < 0)
-                        i += tab_over;
-                    col += i;
-                    if (tty_use_colors () &&
-                        ((visible_tabs || (visible_tws && q >= tws)) && enable_show_tabs_tws))
                     {
-                        if (p->style & MOD_MARKED)
-                            c = p->style;
-                        else if (book_mark)
-                            c |= book_mark << 16;
-                        else
-                            c = p->style | MOD_WHITESPACE;
-                        if (i > 2)
+                        int tab_over;
+                        int i;
+
+                        i = TAB_SIZE - ((int) col % TAB_SIZE);
+                        tab_over = (end_col - edit->start_col) - (col + i - 1);
+                        if (tab_over < 0)
+                            i += tab_over;
+                        col += i;
+                        if (tty_use_colors () &&
+                            ((visible_tabs || (visible_tws && q >= tws)) && enable_show_tabs_tws))
                         {
-                            p->ch = '<';
-                            p->style = c;
-                            p++;
-                            while (--i > 1)
+                            if (p->style & MOD_MARKED)
+                                c = p->style;
+                            else if (book_mark)
+                                c |= book_mark << 16;
+                            else
+                                c = p->style | MOD_WHITESPACE;
+                            if (i > 2)
                             {
-                                p->ch = '-';
+                                p->ch = '<';
+                                p->style = c;
+                                p++;
+                                while (--i > 1)
+                                {
+                                    p->ch = '-';
+                                    p->style = c;
+                                    p++;
+                                }
+                                p->ch = '>';
                                 p->style = c;
                                 p++;
                             }
-                            p->ch = '>';
-                            p->style = c;
-                            p++;
+                            else if (i > 1)
+                            {
+                                p->ch = '<';
+                                p->style = c;
+                                p++;
+                                p->ch = '>';
+                                p->style = c;
+                                p++;
+                            }
+                            else
+                            {
+                                p->ch = '>';
+                                p->style = c;
+                                p++;
+                            }
                         }
-                        else if (i > 1)
+                        else if (tty_use_colors () && visible_tws && q >= tws
+                                 && enable_show_tabs_tws)
                         {
-                            p->ch = '<';
-                            p->style = c;
+                            p->ch = '.';
+                            p->style |= MOD_WHITESPACE;
+                            c = p->style & ~MOD_CURSOR;
                             p++;
-                            p->ch = '>';
-                            p->style = c;
-                            p++;
+                            while (--i)
+                            {
+                                p->ch = ' ';
+                                p->style = c;
+                                p++;
+                            }
                         }
                         else
                         {
-                            p->ch = '>';
-                            p->style = c;
+                            p->ch |= ' ';
+                            c = p->style & ~MOD_CURSOR;
                             p++;
-                        }
-                    }
-                    else if (tty_use_colors () && visible_tws && q >= tws && enable_show_tabs_tws)
-                    {
-                        p->ch = '.';
-                        p->style |= MOD_WHITESPACE;
-                        c = p->style & ~MOD_CURSOR;
-                        p++;
-                        while (--i)
-                        {
-                            p->ch = ' ';
-                            p->style = c;
-                            p++;
-                        }
-                    }
-                    else
-                    {
-                        p->ch |= ' ';
-                        c = p->style & ~MOD_CURSOR;
-                        p++;
-                        while (--i)
-                        {
-                            p->ch = ' ';
-                            p->style = c;
-                            p++;
+                            while (--i)
+                            {
+                                p->ch = ' ';
+                                p->style = c;
+                                p++;
+                            }
                         }
                     }
                     break;
@@ -847,9 +854,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
     Widget *w = WIDGET (edit);
     Widget *wh = WIDGET (w->owner);
 
-    long row = 0, curs_row;
     int force = edit->force;
-    long b;
     int y1, x1, y2, x2;
 
     int last_line;
@@ -903,6 +908,8 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
      */
     if ((force & REDRAW_CHAR_ONLY) == 0 || (force & REDRAW_PAGE) != 0)
     {
+        long row, b;
+
         if ((force & REDRAW_PAGE) != 0)
         {
             row = start_row;
@@ -918,7 +925,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
         }
         else
         {
-            curs_row = edit->curs_row;
+            long curs_row = edit->curs_row;
 
             if ((force & REDRAW_BEFORE_CURSOR) != 0 && start_row < curs_row)
             {

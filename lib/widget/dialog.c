@@ -520,6 +520,7 @@ dlg_key_event (WDialog * h, int d_key)
     if (handled == MSG_NOT_HANDLED)
         handled = dlg_handle_key (h, d_key);
 
+    (void) handled;
     send_message (h, NULL, MSG_POST_KEY, d_key, NULL);
 }
 
@@ -528,7 +529,6 @@ dlg_key_event (WDialog * h, int d_key)
 static void
 frontend_dlg_run (WDialog * h)
 {
-    int d_key;
     Gpm_Event event;
 
     event.x = -1;
@@ -542,6 +542,8 @@ frontend_dlg_run (WDialog * h)
 
     while (h->state == DLG_ACTIVE)
     {
+        int d_key;
+
         if (mc_global.tty.winch_flag != 0)
             dialog_change_screen_size ();
 
@@ -1264,8 +1266,7 @@ dlg_destroy (WDialog * h)
     /* if some widgets have history, save all history at one moment here */
     dlg_save_history (h);
     dlg_broadcast_msg (h, MSG_DESTROY);
-    g_list_foreach (h->widgets, (GFunc) g_free, NULL);
-    g_list_free (h->widgets);
+    g_list_free_full (h->widgets, g_free);
     mc_event_group_del (h->event_group);
     g_free (h->event_group);
     g_free (h->title);

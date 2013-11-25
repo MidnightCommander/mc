@@ -595,7 +595,7 @@ static void
 panel_do_cols (int idx)
 {
     if (get_display_type (idx) == view_listing)
-        set_panel_formats ((WPanel *) panels[idx].widget);
+        set_panel_formats (PANEL (panels[idx].widget));
     else
         panel_update_cols (panels[idx].widget, frame_half);
 }
@@ -877,8 +877,6 @@ set_hintbar (const char *str)
 void
 rotate_dash (gboolean show)
 {
-    static const char rotating_dash[4] = "|/-\\";
-    static size_t pos = 0;
     Widget *w = WIDGET (midnight_dlg);
 
     if (!nice_rotating_dash || (ok_to_refresh <= 0))
@@ -891,6 +889,9 @@ rotate_dash (gboolean show)
         tty_print_alt_char (ACS_URCORNER, FALSE);
     else
     {
+        static const char rotating_dash[4] = "|/-\\";
+        static size_t pos = 0;
+
         tty_print_char (rotating_dash[pos]);
         pos = (pos + 1) % sizeof (rotating_dash);
     }
@@ -903,14 +904,14 @@ rotate_dash (gboolean show)
 const char *
 get_nth_panel_name (int num)
 {
-    static char buffer[BUF_SMALL];
-
     if (!num)
         return "New Left Panel";
     else if (num == 1)
         return "New Right Panel";
     else
     {
+        static char buffer[BUF_SMALL];
+
         g_snprintf (buffer, sizeof (buffer), "%ith Panel", num);
         return buffer;
     }
@@ -957,7 +958,7 @@ set_display_type (int num, panel_view_mode_t type)
     if (panels[num].widget != NULL)
     {
         Widget *w = panels[num].widget;
-        WPanel *panel = (WPanel *) w;
+        WPanel *panel = PANEL (w);
 
         x = w->x;
         y = w->y;
@@ -1011,7 +1012,7 @@ set_display_type (int num, panel_view_mode_t type)
 
     case view_quick:
         new_widget = WIDGET (mcview_new (y, x, lines, cols, TRUE));
-        the_other_panel = (WPanel *) panels[the_other].widget;
+        the_other_panel = PANEL (panels[the_other].widget);
         if (the_other_panel != NULL)
             file_name = the_other_panel->dir.list[the_other_panel->selected].fname;
         else
@@ -1045,7 +1046,7 @@ set_display_type (int num, panel_view_mode_t type)
 
     if (type == view_listing)
     {
-        WPanel *panel = (WPanel *) new_widget;
+        WPanel *panel = PANEL (new_widget);
 
         /* if existing panel changed type to view_listing, then load history */
         if (old_widget != NULL)
@@ -1075,7 +1076,7 @@ set_display_type (int num, panel_view_mode_t type)
      * - as long as you stay in the left panel almost everything that uses
      *   current_panel causes segfault, e.g. C-Enter, C-x c, ...
      */
-    if ((type != view_listing) && (current_panel == (WPanel *) old_widget))
+    if ((type != view_listing) && (current_panel == PANEL (old_widget)))
         current_panel = num == 0 ? right_panel : left_panel;
 
     g_free (old_widget);
@@ -1092,8 +1093,8 @@ swap_panels (void)
     WPanel *panel1, *panel2;
     Widget *tmp_widget;
 
-    panel1 = (WPanel *) panels[0].widget;
-    panel2 = (WPanel *) panels[1].widget;
+    panel1 = PANEL (panels[0].widget);
+    panel2 = PANEL (panels[1].widget);
 
     if (panels[0].type == view_listing && panels[1].type == view_listing &&
         !mc_config_get_bool (mc_main_config, CONFIG_PANELS_SECTION, "simple_swap", FALSE))
@@ -1191,9 +1192,9 @@ swap_panels (void)
 
         /* force update formats because of possible changed sizes */
         if (panels[0].type == view_listing)
-            set_panel_formats ((WPanel *) panels[0].widget);
+            set_panel_formats (PANEL (panels[0].widget));
         if (panels[1].type == view_listing)
-            set_panel_formats ((WPanel *) panels[1].widget);
+            set_panel_formats (PANEL (panels[1].widget));
     }
 }
 
@@ -1234,10 +1235,10 @@ get_other_index (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-struct WPanel *
+WPanel *
 get_other_panel (void)
 {
-    return (struct WPanel *) get_panel_widget (get_other_index ());
+    return PANEL (get_panel_widget (get_other_index ()));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1275,7 +1276,7 @@ save_panel_dir (int idx)
 
     if ((type == view_listing) && (widget != NULL))
     {
-        WPanel *w = (WPanel *) widget;
+        WPanel *w = PANEL (widget);
 
         g_free (panels[idx].last_saved_dir);    /* last path no needed */
         /* Because path can be nonlocal */
@@ -1293,7 +1294,7 @@ get_panel_dir_for (const WPanel * widget)
     int i;
 
     for (i = 0; i < MAX_VIEWS; i++)
-        if ((WPanel *) get_panel_widget (i) == widget)
+        if (PANEL (get_panel_widget (i)) == widget)
             break;
 
     if (i >= MAX_VIEWS)
@@ -1303,7 +1304,7 @@ get_panel_dir_for (const WPanel * widget)
     {
         vfs_path_t *cwd_vpath;
 
-        cwd_vpath = ((WPanel *) get_panel_widget (i))->cwd_vpath;
+        cwd_vpath = PANEL (get_panel_widget (i))->cwd_vpath;
         return g_strdup (vfs_path_as_str (cwd_vpath));
     }
 

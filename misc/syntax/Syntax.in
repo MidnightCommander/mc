@@ -115,7 +115,7 @@ include j.syntax
 file ..\*\\.(java|JAVA|Java|jav|groovy|GROOVY|Groovy)$ Java\sProgram
 include java.syntax
 
-file ..\*\\.(properties|config) Java\sFile
+file ..\*\\.(properties|config)$ Java\sFile
 include properties.syntax
 
 file ..\*\\.(cs|CS)$ C\#\sProgram

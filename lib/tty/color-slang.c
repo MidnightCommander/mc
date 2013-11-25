@@ -65,18 +65,17 @@ has_colors (gboolean disable, gboolean force)
     {
         const char *terminal = getenv ("TERM");
         const size_t len = strlen (terminal);
-
         char *cts = mc_global.tty.color_terminal_string;
-        char *s;
-        size_t i;
 
         /* check mc_global.tty.color_terminal_string */
         while (*cts != '\0')
         {
+            char *s;
+            size_t i = 0;
+
             while (*cts == ' ' || *cts == '\t')
                 cts++;
             s = cts;
-            i = 0;
 
             while (*cts != '\0' && *cts != ',')
             {
@@ -145,7 +144,6 @@ tty_color_deinit_lib (void)
 void
 tty_color_try_alloc_pair_lib (tty_color_pair_t * mc_color_pair)
 {
-    const char *fg, *bg;
     if (mc_color_pair->ifg <= (int) SPEC_A_REVERSE)
     {
         switch (mc_color_pair->ifg)
@@ -172,6 +170,8 @@ tty_color_try_alloc_pair_lib (tty_color_pair_t * mc_color_pair)
     }
     else
     {
+        const char *fg, *bg;
+
         fg = tty_color_get_name_by_index (mc_color_pair->ifg);
         bg = tty_color_get_name_by_index (mc_color_pair->ibg);
         SLtt_set_color (mc_color_pair->pair_index, (char *) "", (char *) fg, (char *) bg);

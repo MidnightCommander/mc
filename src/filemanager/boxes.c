@@ -519,18 +519,17 @@ configure_box (void)
 void
 panel_options_box (void)
 {
-    const char *qsearch_options[] = {
-        N_("Case &insensitive"),
-        N_("Cas&e sensitive"),
-        N_("Use panel sort mo&de")
-    };
-
     int simple_swap;
 
     simple_swap = mc_config_get_bool (mc_main_config, CONFIG_PANELS_SECTION,
                                       "simple_swap", FALSE) ? 1 : 0;
-
     {
+        const char *qsearch_options[] = {
+            N_("Case &insensitive"),
+            N_("Cas&e sensitive"),
+            N_("Use panel sort mo&de")
+        };
+
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
             QUICK_START_COLUMNS,
@@ -630,8 +629,8 @@ panel_listing_box (WPanel * panel, char **userp, char **minip, int *use_msformat
 
     {
         int mini_user_status;
-        char *panel_user_format;
-        char *mini_user_format;
+        char *panel_user_format = NULL;
+        char *mini_user_format = NULL;
         const char *cp;
 
         /* Controls whether the array strings have been translated */
@@ -1013,6 +1012,7 @@ configure_vfs (void)
 
         if (quick_dialog (&qdlg) != B_CANCEL)
         {
+            /* cppcheck-suppress uninitvar */
             vfs_timeout = atoi (ret_timeout);
             g_free (ret_timeout);
 
@@ -1020,9 +1020,12 @@ configure_vfs (void)
                 vfs_timeout = 10;
 #ifdef ENABLE_VFS_FTP
             g_free (ftpfs_anonymous_passwd);
+            /* cppcheck-suppress uninitvar */
             ftpfs_anonymous_passwd = ret_passwd;
             g_free (ftpfs_proxy_host);
+            /* cppcheck-suppress uninitvar */
             ftpfs_proxy_host = ret_ftp_proxy;
+            /* cppcheck-suppress uninitvar */
             ftpfs_directory_timeout = atoi (ret_directory_timeout);
             g_free (ret_directory_timeout);
 #endif

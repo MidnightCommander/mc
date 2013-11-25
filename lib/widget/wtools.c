@@ -274,12 +274,10 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
     va_list ap;
     WDialog *query_dlg;
     WButton *button;
-    WButton *defbutton = NULL;
     int win_len = 0;
     int i;
     int result = -1;
     int cols, lines;
-    char *cur_name;
     const int *query_colors = (flags & D_ERROR) != 0 ? alarm_colors : dialog_colors;
     dlg_flags_t dlg_flags = (flags & D_CENTER) != 0 ? (DLG_CENTER | DLG_TRYUP) : DLG_NONE;
 
@@ -311,9 +309,10 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
 
     if (count > 0)
     {
+        WButton *defbutton = NULL;
+
         add_widget_autopos (query_dlg, label_new (2, 3, text), WPOS_KEEP_TOP | WPOS_CENTER_HORZ,
                             NULL);
-
         add_widget (query_dlg, hline_new (lines - 4, -1, -1));
 
         cols = (cols - win_len - 2) / 2 + 2;
@@ -321,6 +320,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
         for (i = 0; i < count; i++)
         {
             int xpos;
+            char *cur_name;
 
             cur_name = va_arg (ap, char *);
             xpos = str_term_width1 (cur_name) + 6;
@@ -487,11 +487,12 @@ input_expand_dialog (const char *header, const char *text,
                      input_complete_t completion_flags)
 {
     char *result;
-    char *expanded;
 
     result = input_dialog (header, text, history_name, def_text, completion_flags);
     if (result)
     {
+        char *expanded;
+
         expanded = tilde_expand (result);
         g_free (result);
         return expanded;

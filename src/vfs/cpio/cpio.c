@@ -205,8 +205,7 @@ cpio_free_archive (struct vfs_class *me, struct vfs_s_super *super)
     if (arch->fd != -1)
         mc_close (arch->fd);
     arch->fd = -1;
-    g_slist_foreach (arch->deferred, (GFunc) g_free, NULL);
-    g_slist_free (arch->deferred);
+    g_slist_free_full (arch->deferred, g_free);
     arch->deferred = NULL;
     g_free (super->data);
     super->data = NULL;
@@ -380,12 +379,15 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
     case S_IFCHR:
     case S_IFBLK:
 #ifdef S_IFSOCK
+        /* cppcheck-suppress syntaxError */
     case S_IFSOCK:
 #endif
 #ifdef S_IFIFO
+        /* cppcheck-suppress syntaxError */
     case S_IFIFO:
 #endif
 #ifdef S_IFNAM
+        /* cppcheck-suppress syntaxError */
     case S_IFNAM:
 #endif
         if ((st->st_size != 0) && (st->st_rdev == 0x0001))

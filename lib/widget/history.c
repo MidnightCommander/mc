@@ -290,7 +290,7 @@ char *
 history_show (GList ** history, Widget * widget, int current)
 {
     GList *z, *hlist = NULL, *hi;
-    size_t maxlen, i, count = 0;
+    size_t maxlen, count = 0;
     char *r = NULL;
     WDialog *query_dlg;
     WListbox *query_list;
@@ -304,6 +304,7 @@ history_show (GList ** history, Widget * widget, int current)
     for (z = *history; z != NULL; z = g_list_previous (z))
     {
         WLEntry *entry;
+        size_t i;
 
         i = str_term_width1 ((char *) z->data);
         maxlen = max (maxlen, i);
@@ -382,8 +383,7 @@ history_show (GList ** history, Widget * widget, int current)
 
     dlg_destroy (query_dlg);
 
-    g_list_foreach (*history, (GFunc) g_free, NULL);
-    g_list_free (*history);
+    g_list_free_full (*history, g_free);
     *history = g_list_last (z);
 
     return r;

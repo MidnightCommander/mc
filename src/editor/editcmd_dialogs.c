@@ -419,7 +419,6 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
     WListbox *def_list;
     int def_dlg_h;              /* dialog height */
     int def_dlg_w;              /* dialog width */
-    char *label_def = NULL;
 
     (void) word_len;
     /* calculate the dialog metrics */
@@ -456,6 +455,8 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
     /* fill the listbox with the completions */
     for (i = 0; i < num_lines; i++)
     {
+        char *label_def;
+
         label_def =
             g_strdup_printf ("%s -> %s:%ld", def_hash[i].short_define, def_hash[i].filename,
                              def_hash[i].line);

@@ -172,14 +172,14 @@ static void
 save_tree (WTree * tree)
 {
     int error;
-    char *tree_name;
 
     (void) tree;
     error = tree_store_save ();
 
-
     if (error)
     {
+        char *tree_name;
+
         tree_name = mc_config_get_full_path (MC_TREESTORE_FILE);
         fprintf (stderr, _("Cannot open the %s file for writing:\n%s\n"), tree_name,
                  unix_error_string (error));
@@ -776,7 +776,7 @@ tree_copy (WTree * tree, const char *default_dest)
 
     if (dest != NULL && *dest != '\0')
     {
-        FileOpContext *ctx;
+        file_op_context_t *ctx;
         FileOpTotalContext *tctx;
 
         ctx = file_op_context_new (OP_COPY);
@@ -800,7 +800,7 @@ tree_move (WTree * tree, const char *default_dest)
     char msg[BUF_MEDIUM];
     char *dest;
     struct stat buf;
-    FileOpContext *ctx;
+    file_op_context_t *ctx;
     FileOpTotalContext *tctx;
 
     if (tree->selected_ptr == NULL)
@@ -865,7 +865,7 @@ static void
 tree_rmdir (void *data)
 {
     WTree *tree = data;
-    FileOpContext *ctx;
+    file_op_context_t *ctx;
     FileOpTotalContext *tctx;
 
     if (!tree->selected_ptr)

@@ -342,13 +342,16 @@ undelfs_loaddel (void)
 static void *
 undelfs_opendir (const vfs_path_t * vpath)
 {
-    char *file, *f;
+    char *file, *f = NULL;
     const vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
     undelfs_get_path (vpath, &file, &f);
-    if (!file)
+    if (file == NULL)
+    {
+        g_free (f);
         return 0;
+    }
 
     /* We don't use the file name */
     g_free (f);
@@ -437,7 +440,7 @@ undelfs_closedir (void *vfs_info)
 static void *
 undelfs_open (const vfs_path_t * vpath, int flags, mode_t mode)
 {
-    char *file, *f;
+    char *file, *f = NULL;
     ext2_ino_t inode, i;
     undelfs_file *p = NULL;
     (void) flags;
@@ -445,8 +448,11 @@ undelfs_open (const vfs_path_t * vpath, int flags, mode_t mode)
 
     /* Only allow reads on this file system */
     undelfs_get_path (vpath, &file, &f);
-    if (!file)
+    if (file == NULL)
+    {
+        g_free (f);
         return 0;
+    }
 
     if (!ext2_fname || strcmp (ext2_fname, file))
     {
@@ -645,11 +651,14 @@ static int
 undelfs_lstat (const vfs_path_t * vpath, struct stat *buf)
 {
     int inode_index;
-    char *file, *f;
+    char *file, *f = NULL;
 
     undelfs_get_path (vpath, &file, &f);
-    if (!file)
+    if (file == NULL)
+    {
+        g_free (f);
         return 0;
+    }
 
     /* When called from save_cwd_stats we get an incorrect file and f here:
        e.g. incorrect                         correct
@@ -696,12 +705,15 @@ undelfs_fstat (void *vfs_info, struct stat *buf)
 static int
 undelfs_chdir (const vfs_path_t * vpath)
 {
-    char *file, *f;
+    char *file, *f = NULL;
     int fd;
 
     undelfs_get_path (vpath, &file, &f);
-    if (!file)
-        return -1;
+    if (file == NULL)
+    {
+        g_free (f);
+        return (-1);
+    }
 
     /* We may use access because ext2 file systems are local */
     /* this could be fixed by making an ext2fs io manager to use */
@@ -738,15 +750,16 @@ undelfs_lseek (void *vfs_info, off_t offset, int whence)
 static vfsid
 undelfs_getid (const vfs_path_t * vpath)
 {
-    char *fname, *fsname;
+    char *fname = NULL, *fsname;
+    gboolean ok;
 
     undelfs_get_path (vpath, &fsname, &fname);
+    ok = fsname != NULL;
 
-    if (!fsname)
-        return NULL;
     g_free (fname);
     g_free (fsname);
-    return (vfsid) fs;
+
+    return ok ? (vfsid) fs : NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */

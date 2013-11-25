@@ -2,7 +2,7 @@
    Utilities for VFS modules.
 
    Copyright (C) 1988, 1992, 1998, 1999, 2000, 2001, 2002, 2003, 2004,
-   2005, 2006, 2007, 2011
+   2005, 2006, 2007, 2011, 2013
    The Free Software Foundation, Inc.
 
    Copyright (C) 1995, 1996 Miguel de Icaza
@@ -60,10 +60,12 @@
 #define TGNMLEN 256
 #endif
 
-#define myuid   ( my_uid < 0? (my_uid = getuid()): my_uid )
-#define mygid   ( my_gid < 0? (my_gid = getgid()): my_gid )
-
 #define MC_HISTORY_VFS_PASSWORD       "mc.vfs.password"
+
+/*
+ * FIXME2, the "-993" is to reduce the chance of a hit on the first lookup.
+ */
+#define GUID_DEFAULT_CONST -993
 
 /*** file scope type declarations ****************************************************************/
 
@@ -96,7 +98,6 @@ vfs_get_local_username (void)
 /**
  * Look up a user or group name from a uid/gid, maintaining a cache.
  * FIXME, for now it's a one-entry cache.
- * FIXME2, the "-993" is to reduce the chance of a hit on the first lookup.
  * This file should be modified for non-unix systems to do something
  * reasonable.
  */
@@ -106,15 +107,14 @@ vfs_get_local_username (void)
 int
 vfs_finduid (const char *uname)
 {
-    static int saveuid = -993;
-    static char saveuname[TUNMLEN];
-    static int my_uid = -993;
-
-    struct passwd *pw;
+    static int saveuid = GUID_DEFAULT_CONST;
+    static char saveuname[TUNMLEN] = "\0";
 
     if (uname[0] != saveuname[0]        /* Quick test w/o proc call */
         || 0 != strncmp (uname, saveuname, TUNMLEN))
     {
+        struct passwd *pw;
+
         g_strlcpy (saveuname, uname, TUNMLEN);
         pw = getpwnam (uname);
         if (pw)
@@ -123,7 +123,12 @@ vfs_finduid (const char *uname)
         }
         else
         {
-            saveuid = myuid;
+            static int my_uid = GUID_DEFAULT_CONST;
+
+            if (my_uid < 0)
+                my_uid = getuid ();
+
+            saveuid = my_uid;
         }
     }
     return saveuid;
@@ -134,15 +139,15 @@ vfs_finduid (const char *uname)
 int
 vfs_findgid (const char *gname)
 {
-    static int savegid = -993;
-    static char savegname[TGNMLEN];
-    static int my_gid = -993;
+    static int savegid = GUID_DEFAULT_CONST;
+    static char savegname[TGNMLEN] = "\0";
 
-    struct group *gr;
 
     if (gname[0] != savegname[0]        /* Quick test w/o proc call */
         || 0 != strncmp (gname, savegname, TUNMLEN))
     {
+        struct group *gr;
+
         g_strlcpy (savegname, gname, TUNMLEN);
         gr = getgrnam (gname);
         if (gr)
@@ -151,7 +156,12 @@ vfs_findgid (const char *gname)
         }
         else
         {
-            savegid = mygid;
+            static int my_gid = GUID_DEFAULT_CONST;
+
+            if (my_gid < 0)
+                my_gid = getgid ();
+
+            savegid = my_gid;
         }
     }
     return savegid;
@@ -232,7 +242,7 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
     char *pcopy;
     size_t pcopy_len;
     const char *pend;
-    char *dir, *colon, *inner_colon, *at, *rest;
+    char *dir, *colon, *at, *rest;
 
     path_element = g_new0 (vfs_path_element_t, 1);
     path_element->port = default_port;
@@ -264,6 +274,8 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
         rest = pcopy;
     else
     {
+        char *inner_colon;
+
         *at = '\0';
         inner_colon = strchr (pcopy, ':');
         if (inner_colon != NULL)
@@ -307,6 +319,7 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
     if (colon != NULL)
     {
         *colon = '\0';
+        /* cppcheck-suppress invalidscanf */
         if (sscanf (colon + 1, "%d", &path_element->port) == 1)
         {
             if (path_element->port <= 0 || path_element->port >= 65536)

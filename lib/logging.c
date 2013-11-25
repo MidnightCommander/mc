@@ -112,13 +112,14 @@ get_log_filename (void)
 static void
 mc_va_log (const char *fmt, va_list args)
 {
-    FILE *f;
     char *logfilename;
 
     logfilename = get_log_filename ();
 
     if (logfilename != NULL)
     {
+        FILE *f;
+
         f = fopen (logfilename, "a");
         if (f != NULL)
         {

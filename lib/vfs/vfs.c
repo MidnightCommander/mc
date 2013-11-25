@@ -113,7 +113,6 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer
     estr_t state = ESTR_SUCCESS;
 #ifdef HAVE_CHARSET
     const char *semi;
-    const char *slash;
 
     if (size == 0)
         return ESTR_SUCCESS;
@@ -125,6 +124,7 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer
     if (semi != NULL && (semi == path || *(semi - 1) == PATH_SEP))
     {
         char encoding[16];
+        const char *slash;
         GIConv coder = INVALID_CONV;
         int ms;
 

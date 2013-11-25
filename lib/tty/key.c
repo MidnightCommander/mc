@@ -606,17 +606,16 @@ try_channels (int set_timeout)
 {
     struct timeval time_out;
     static fd_set select_set;
-    struct timeval *timeptr;
-    int v;
-    int maxfdp;
 
     while (1)
     {
+        struct timeval *timeptr = NULL;
+        int maxfdp, v;
+
         FD_ZERO (&select_set);
         FD_SET (input_fd, &select_set); /* Add stdin */
         maxfdp = max (add_selects (&select_set), input_fd);
 
-        timeptr = NULL;
         if (set_timeout)
         {
             time_out.tv_sec = 0;
@@ -867,7 +866,7 @@ get_modifier (void)
 {
     int result = 0;
 #ifdef __QNXNTO__
-    int mod_status, shift_ext_status;
+    int mod_status;
     static int in_photon = 0;
     static int ph_ig = 0;
     PhCursorInfo_t cursor_info;
@@ -922,6 +921,8 @@ get_modifier (void)
        console or xterm */
     if (in_photon == -1)
     {
+        int shift_ext_status;
+
         if (devctl (fileno (stdin), DCMD_CHR_LINESTATUS, &mod_status, sizeof (int), NULL) == -1)
             return 0;
         shift_ext_status = mod_status & 0xffffff00UL;
@@ -1577,9 +1578,6 @@ lookup_key_by_code (const int keycode)
     /* modifier */
     unsigned int mod = keycode & KEY_M_MASK;
 
-    int use_meta = -1;
-    int use_ctrl = -1;
-    int use_shift = -1;
     int key_idx = -1;
 
     GString *s;
@@ -1593,8 +1591,7 @@ lookup_key_by_code (const int keycode)
         {
             if (lookup_keycode (KEY_M_ALT, &idx))
             {
-                use_meta = idx;
-                g_string_append (s, key_conv_tab_sorted[use_meta]->name);
+                g_string_append (s, key_conv_tab_sorted[idx]->name);
                 g_string_append_c (s, '-');
             }
         }
@@ -1606,8 +1603,7 @@ lookup_key_by_code (const int keycode)
 
             if (lookup_keycode (KEY_M_CTRL, &idx))
             {
-                use_ctrl = idx;
-                g_string_append (s, key_conv_tab_sorted[use_ctrl]->name);
+                g_string_append (s, key_conv_tab_sorted[idx]->name);
                 g_string_append_c (s, '-');
             }
         }
@@ -1615,12 +1611,11 @@ lookup_key_by_code (const int keycode)
         {
             if (lookup_keycode (KEY_M_ALT, &idx))
             {
-                use_shift = idx;
                 if (k < 127)
                     g_string_append_c (s, (gchar) g_ascii_toupper ((gchar) k));
                 else
                 {
-                    g_string_append (s, key_conv_tab_sorted[use_shift]->name);
+                    g_string_append (s, key_conv_tab_sorted[idx]->name);
                     g_string_append_c (s, '-');
                     g_string_append (s, key_conv_tab_sorted[key_idx]->name);
                 }
@@ -1951,7 +1946,6 @@ int
 tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 {
     int c;
-    static int flag = 0;        /* Return value from select */
 #ifdef HAVE_LIBGPM
     static struct Gpm_Event ev; /* Mouse event */
 #endif
@@ -1984,6 +1978,7 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
     while (pending_keys == NULL)
     {
         int nfd;
+        static int flag = 0;    /* Return value from select */
         fd_set select_set;
 
         FD_ZERO (&select_set);

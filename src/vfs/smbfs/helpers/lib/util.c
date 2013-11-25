@@ -1829,6 +1829,7 @@ get_myname (char *my_name, struct in_addr * ip)
     struct hostent *hp;
     pstring hostname;
 
+    /* cppcheck-suppress uninitvar */
     *hostname = 0;
 
     /* get my host name */

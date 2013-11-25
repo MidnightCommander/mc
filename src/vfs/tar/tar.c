@@ -146,14 +146,10 @@ enum
 
 struct sparse
 {
+    /* cppcheck-suppress unusedStructMember */
     char offset[12];
+    /* cppcheck-suppress unusedStructMember */
     char numbytes[12];
-};
-
-struct sp_array
-{
-    int offset;
-    int numbytes;
 };
 
 union record
@@ -190,11 +186,15 @@ union record
             {
                 char atime[12];
                 char ctime[12];
+                /* cppcheck-suppress unusedStructMember */
                 char offset[12];
+                /* cppcheck-suppress unusedStructMember */
                 char longnames[4];
+                /* cppcheck-suppress unusedStructMember */
                 char pad;
                 struct sparse sp[SPARSE_IN_HDR];
                 char isextended;
+                /* cppcheck-suppress unusedStructMember */
                 char realsize[12];      /* true size of the sparse file */
             } oldgnu;
         } unused;
@@ -754,7 +754,6 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
 {
     /* Initial status at start of archive */
     ReadStatus status = STATUS_EOFMARK;
-    ReadStatus prev_status;
     int tard;
 
     current_tar_position = 0;
@@ -766,8 +765,8 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
     while (TRUE)
     {
         size_t h_size;
+        ReadStatus prev_status = status;
 
-        prev_status = status;
         status = tar_read_header (vpath_element->class, archive, tard, &h_size);
 
         switch (status)

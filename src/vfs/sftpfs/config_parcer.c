@@ -253,7 +253,6 @@ sftpfs_fill_config_entity_from_config (FILE * ssh_config_handler,
             {
                 mc_search_t *pattern_regexp;
 
-                pattern_block_hit = FALSE;
                 pattern_regexp = mc_search_new (host_pattern, -1, DEFAULT_CHARSET);
                 pattern_regexp->search_type = MC_SEARCH_T_GLOB;
                 pattern_regexp->is_case_sensitive = FALSE;

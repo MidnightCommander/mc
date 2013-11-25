@@ -29,6 +29,7 @@
 
 #include <stdlib.h>
 #include <signal.h>
+#include <string.h>             /* memset() */
 
 #include "lib/global.h"
 
@@ -68,8 +69,8 @@ tcp_init (void)
         return;
 
     got_sigpipe = 0;
+    memset (&sa, 0, sizeof (sa));
     sa.sa_handler = sig_pipe;
-    sa.sa_flags = 0;
     sigemptyset (&sa.sa_mask);
     sigaction (SIGPIPE, &sa, NULL);
 

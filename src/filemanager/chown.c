@@ -332,7 +332,6 @@ chown_cmd (void)
 {
     char *fname;
     struct stat sf_stat;
-    WDialog *ch_dlg;
     uid_t new_user;
     gid_t new_group;
     char buffer[BUF_TINY];
@@ -342,6 +341,7 @@ chown_cmd (void)
     do
     {                           /* do while any files remaining */
         vfs_path_t *vpath;
+        WDialog *ch_dlg;
 
         ch_dlg = init_chown ();
         new_user = new_group = -1;

@@ -203,6 +203,7 @@ init_sigchld (void)
 {
     struct sigaction sigchld_action;
 
+    memset (&sigchld_action, 0, sizeof (sigchld_action));
     sigchld_action.sa_handler =
 #ifdef ENABLE_SUBSHELL
         mc_global.tty.use_subshell ? sigchld_handler :
@@ -213,8 +214,6 @@ init_sigchld (void)
 
 #ifdef SA_RESTART
     sigchld_action.sa_flags = SA_RESTART;
-#else
-    sigchld_action.sa_flags = 0;
 #endif /* !SA_RESTART */
 
     if (sigaction (SIGCHLD, &sigchld_action, NULL) == -1)
@@ -453,9 +452,10 @@ main (int argc, char *argv[])
     if (macros_list != NULL)
     {
         guint i;
-        macros_t *macros;
         for (i = 0; i < macros_list->len; i++)
         {
+            macros_t *macros;
+
             macros = &g_array_index (macros_list, struct macros_t, i);
             if (macros != NULL && macros->macro != NULL)
                 (void) g_array_free (macros->macro, FALSE);
@@ -468,10 +468,8 @@ main (int argc, char *argv[])
     if (mc_global.mc_run_mode != MC_RUN_EDITOR)
         g_free (mc_run_param0);
     else
-    {
-        g_list_foreach ((GList *) mc_run_param0, (GFunc) mcedit_arg_free, NULL);
-        g_list_free ((GList *) mc_run_param0);
-    }
+        g_list_free_full ((GList *) mc_run_param0, (GDestroyNotify) mcedit_arg_free);
+
     g_free (mc_run_param1);
     g_free (saved_other_dir);
 

@@ -93,12 +93,11 @@ tty_setup_sigwinch (void (*handler) (int))
 #if (NCURSES_VERSION_MAJOR >= 4) && defined (SIGWINCH)
     struct sigaction act, oact;
 
+    memset (&act, 0, sizeof (act));
     act.sa_handler = handler;
     sigemptyset (&act.sa_mask);
 #ifdef SA_RESTART
     act.sa_flags = SA_RESTART;
-#else
-    act.sa_flags = 0;
 #endif /* SA_RESTART */
     sigaction (SIGWINCH, &act, &oact);
 #endif /* SIGWINCH */
@@ -528,8 +527,6 @@ tty_print_char (int c)
 void
 tty_print_anychar (int c)
 {
-    unsigned char str[6 + 1];
-
     if (mc_global.utf8_display || c > 255)
     {
         int res;
@@ -543,6 +540,7 @@ tty_print_anychar (int c)
         }
         else
         {
+            unsigned char str[UTF8_CHAR_LEN + 1];
             const char *s;
 
             str[res] = '\0';

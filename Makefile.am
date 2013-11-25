@@ -17,7 +17,16 @@ ACLOCAL_AMFLAGS = -I m4
 
 CONFIG_STATUS_DEPENDENCIES = $(top_srcdir)/version.h
 
-.PHONY: update-version
+.PHONY: update-version \
+        cppcheck \
+        cppcheck-error \
+        cppcheck-information \
+        cppcheck-performance \
+        cppcheck-portability \
+        cppcheck-style \
+        cppcheck-warning \
+        cppcheck-all
+
 
 update-version:
 	@if test -x $(top_srcdir)/maint/utils/version.sh; then \
@@ -30,3 +39,89 @@ update-version:
 	fi
 
 $(top_srcdir)/version.h: update-version
+
+CPPCHECK_CMD = cppcheck \
+    --inline-suppr \
+    --error-exitcode=0 \
+    -j 4 \
+    --force \
+    -I $(top_srcdir)/lib \
+    --language=c \
+    --std=c99
+
+CPPCHECK_DIRS = \
+    "$(top_srcdir)/lib" \
+    "$(top_srcdir)/src"
+
+CPPCHECK_OUT_PREFIX = $(top_builddir)/cppcheck-
+
+CPPCHECK_OUT_EXT = log.txt
+
+CPPCHECK_SED_FILTER = \
+    -e '/\/src\/vfs\/smbfs\//d' \
+    -e '/is reassigned a value before the old one has been used./d' \
+    -e '/ Unmatched suppression: /d' \
+    -e "/Skipping configuration '.*' since the value of '.*' is unknown./d"
+
+cppcheck:
+	$(CPPCHECK_CMD) --enable=all $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)all.$(CPPCHECK_OUT_EXT);
+	$(SED) -i $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)all.$(CPPCHECK_OUT_EXT)
+
+cppcheck-all: cppcheck
+
+cppcheck-information:
+	$(CPPCHECK_CMD) --enable=information $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)information.$(CPPCHECK_OUT_EXT);
+	$(SED) -i $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)information.$(CPPCHECK_OUT_EXT)
+
+cppcheck-performance:
+	$(CPPCHECK_CMD) --enable=performance $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)performance.$(CPPCHECK_OUT_EXT);
+	$(SED) -i $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)performance.$(CPPCHECK_OUT_EXT)
+
+cppcheck-portability:
+	$(CPPCHECK_CMD) --enable=portability $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)portability.$(CPPCHECK_OUT_EXT);
+	$(SED) -i $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)portability.$(CPPCHECK_OUT_EXT)
+
+cppcheck-style:
+	$(CPPCHECK_CMD) --enable=style $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)style.$(CPPCHECK_OUT_EXT);
+	$(SED) -i $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)style.$(CPPCHECK_OUT_EXT)
+
+cppcheck-warning:
+	$(CPPCHECK_CMD) --enable=warning $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)warning.$(CPPCHECK_OUT_EXT);
+	$(SED) -i $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)warning.$(CPPCHECK_OUT_EXT)
+
+cppcheck-unusedFunction:
+	$(CPPCHECK_CMD) --enable=unusedFunction $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)unusedFunction.$(CPPCHECK_OUT_EXT);
+	$(SED) -i $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)unusedFunction.$(CPPCHECK_OUT_EXT)
+
+cppcheck-missingInclude:
+	$(CPPCHECK_CMD) --enable=missingInclude $(CPPCHECK_DIRS) 2>$(CPPCHECK_OUT_PREFIX)missingInclude.$(CPPCHECK_OUT_EXT);
+	$(SED) -i $(CPPCHECK_SED_FILTER) $(CPPCHECK_OUT_PREFIX)missingInclude.$(CPPCHECK_OUT_EXT)
+
+cppcheck-split-all: \
+    cppcheck-information \
+    cppcheck-performance \
+    cppcheck-portability \
+    cppcheck-style \
+    cppcheck-warning \
+    cppcheck-unusedFunction \
+    cppcheck-missingInclude
+
+INDENT_CMD = indent \
+    --gnu-style \
+    --format-first-column-comments \
+    --indent-level4 \
+    --brace-indent0 \
+    --line-length100 \
+    --no-tabs \
+    --blank-lines-after-procedures
+
+INDENT_DIRS = \
+    "$(top_srcdir)/lib" \
+    "$(top_srcdir)/src" \
+    "$(top_srcdir)/tests"
+
+indent:
+	for directory in $(INDENT_DIRS); do \
+	    find "$${directory}" -name '*.[ch]' -print0 | \
+	        xargs -0 $(INDENT_CMD); \
+	done

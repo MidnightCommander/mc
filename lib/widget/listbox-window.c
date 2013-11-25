@@ -70,7 +70,7 @@ create_listbox_window_centered (int center_y, int center_x, int lines, int cols,
 
     const int space = 4;
 
-    int xpos, ypos, len;
+    int xpos, ypos;
     Listbox *listbox;
 
     /* Adjust sizes */
@@ -78,6 +78,8 @@ create_listbox_window_centered (int center_y, int center_x, int lines, int cols,
 
     if (title != NULL)
     {
+        int len;
+
         len = str_term_width1 (title) + 4;
         cols = max (cols, len);
     }

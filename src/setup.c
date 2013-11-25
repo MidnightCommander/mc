@@ -510,7 +510,6 @@ setup__move_panels_config_into_separate_file (const char *profile)
 {
     mc_config_t *tmp_cfg;
     char **groups, **curr_grp;
-    const char *need_grp;
 
     if (!exist_file (profile))
         return;
@@ -547,6 +546,8 @@ setup__move_panels_config_into_separate_file (const char *profile)
 
     while (*curr_grp)
     {
+        const char *need_grp;
+
         need_grp = setup__is_cfg_group_must_panel_config (*curr_grp);
         if (need_grp != NULL)
         {
@@ -1421,7 +1422,7 @@ panel_load_setup (WPanel * panel, const char *section)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-panel_save_setup (struct WPanel *panel, const char *section)
+panel_save_setup (WPanel * panel, const char *section)
 {
     char buffer[BUF_TINY];
     size_t i;

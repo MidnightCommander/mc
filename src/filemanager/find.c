@@ -1187,19 +1187,18 @@ find_ignore_dir_search (const char *dir)
 static void
 find_rotate_dash (const WDialog * h, gboolean show)
 {
-    static const char rotating_dash[4] = "|/-\\";
     static size_t pos = 0;
+    static const char rotating_dash[4] = "|/-\\";
+    const Widget *w = WIDGET (h);
 
-    if (verbose)
-    {
-        const Widget *w = WIDGET (h);
+    if (!verbose)
+        return;
 
-        tty_setcolor (h->color[DLG_COLOR_NORMAL]);
-        widget_move (h, w->lines - 7, w->cols - 4);
-        tty_print_char (show ? rotating_dash[pos] : ' ');
-        pos = (pos + 1) % sizeof (rotating_dash);
-        mc_refresh ();
-    }
+    tty_setcolor (h->color[DLG_COLOR_NORMAL]);
+    widget_move (h, w->lines - 7, w->cols - 4);
+    tty_print_char (show ? rotating_dash[pos] : ' ');
+    pos = (pos + 1) % sizeof (rotating_dash);
+    mc_refresh ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1810,10 +1809,11 @@ find_file (void)
     char *start_dir = NULL, *pattern = NULL, *content = NULL, *ignore_dirs = NULL;
     ssize_t start_dir_len;
     char *filename = NULL, *dirname = NULL;
-    int v;
 
     while (find_parameters (&start_dir, &start_dir_len, &ignore_dirs, &pattern, &content))
     {
+        int v;
+
         if (pattern[0] == '\0')
             break;              /* nothing search */
 

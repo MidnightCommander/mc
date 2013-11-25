@@ -242,8 +242,10 @@
 /* All cygwin mount points include ':' or start with '//'; so it
    requires a native Windows call to determine remote disks.  */
 static int
-me_remote (char const *fs_name, char const *fs_type _GL_UNUSED)
+me_remote (char const *fs_name, char const *fs_type)
 {
+    (void) fs_type;
+
     if (fs_name[0] && fs_name[1] == ':')
     {
         char drive[4];
@@ -397,86 +399,107 @@ fstype_to_string (short int t)
     switch (t)
     {
 #ifdef MOUNT_PC
+        /* cppcheck-suppress syntaxError */
     case MOUNT_PC:
         return "pc";
 #endif
 #ifdef MOUNT_MFS
+        /* cppcheck-suppress syntaxError */
     case MOUNT_MFS:
         return "mfs";
 #endif
 #ifdef MOUNT_LO
+        /* cppcheck-suppress syntaxError */
     case MOUNT_LO:
         return "lo";
 #endif
 #ifdef MOUNT_TFS
+        /* cppcheck-suppress syntaxError */
     case MOUNT_TFS:
         return "tfs";
 #endif
 #ifdef MOUNT_TMP
+        /* cppcheck-suppress syntaxError */
     case MOUNT_TMP:
         return "tmp";
 #endif
 #ifdef MOUNT_UFS
+        /* cppcheck-suppress syntaxError */
     case MOUNT_UFS:
         return "ufs";
 #endif
 #ifdef MOUNT_NFS
+        /* cppcheck-suppress syntaxError */
     case MOUNT_NFS:
         return "nfs";
 #endif
 #ifdef MOUNT_MSDOS
+        /* cppcheck-suppress syntaxError */
     case MOUNT_MSDOS:
         return "msdos";
 #endif
 #ifdef MOUNT_LFS
+        /* cppcheck-suppress syntaxError */
     case MOUNT_LFS:
         return "lfs";
 #endif
 #ifdef MOUNT_LOFS
+        /* cppcheck-suppress syntaxError */
     case MOUNT_LOFS:
         return "lofs";
 #endif
 #ifdef MOUNT_FDESC
+        /* cppcheck-suppress syntaxError */
     case MOUNT_FDESC:
         return "fdesc";
 #endif
 #ifdef MOUNT_PORTAL
+        /* cppcheck-suppress syntaxError */
     case MOUNT_PORTAL:
         return "portal";
 #endif
 #ifdef MOUNT_NULL
+        /* cppcheck-suppress syntaxError */
     case MOUNT_NULL:
         return "null";
 #endif
 #ifdef MOUNT_UMAP
+        /* cppcheck-suppress syntaxError */
     case MOUNT_UMAP:
         return "umap";
 #endif
 #ifdef MOUNT_KERNFS
+        /* cppcheck-suppress syntaxError */
     case MOUNT_KERNFS:
         return "kernfs";
 #endif
 #ifdef MOUNT_PROCFS
+        /* cppcheck-suppress syntaxError */
     case MOUNT_PROCFS:
         return "procfs";
 #endif
 #ifdef MOUNT_AFS
+        /* cppcheck-suppress syntaxError */
     case MOUNT_AFS:
         return "afs";
 #endif
 #ifdef MOUNT_CD9660
+        /* cppcheck-suppress syntaxError */
     case MOUNT_CD9660:
         return "cd9660";
 #endif
 #ifdef MOUNT_UNION
+        /* cppcheck-suppress syntaxError */
     case MOUNT_UNION:
         return "union";
 #endif
 #ifdef MOUNT_DEVFS
+        /* cppcheck-suppress syntaxError */
     case MOUNT_DEVFS:
         return "devfs";
 #endif
 #ifdef MOUNT_EXT2FS
+        /* cppcheck-suppress syntaxError */
     case MOUNT_EXT2FS:
         return "ext2fs";
 #endif
@@ -600,7 +623,6 @@ read_file_system_list (int need_fs_type)
 #ifdef MOUNTED_LISTMNTENT
     {
         struct tabmntent *mntlist, *p;
-        struct mntent *mnt;
         struct mount_entry *me;
 
         /* the third and fourth arguments could be used to filter mounts,
@@ -612,7 +634,8 @@ read_file_system_list (int need_fs_type)
             return NULL;
         for (p = mntlist; p; p = p->next)
         {
-            mnt = p->ment;
+            struct mntent *mnt = p->ment;
+
             me = g_malloc (sizeof (*me));
             me->me_devname = g_strdup (mnt->mnt_fsname);
             me->me_mountdir = g_strdup (mnt->mnt_dir);
@@ -719,8 +742,15 @@ read_file_system_list (int need_fs_type)
         int val;
         struct fs_data fsd;
 
-        while (errno = 0, 0 < (val = getmnt (&offset, &fsd, sizeof (fsd), NOSTAT_MANY, (char *) 0)))
+        while (TRUE)
         {
+            errno = 0;
+            val = getmnt (&offset, &fsd, sizeof (fsd), NOSTAT_MANY, (char *) NULL);
+            if (val < 0)
+                goto free_then_fail;
+            if (val == 0)
+                break;
+
             me = g_malloc (sizeof (*me));
             me->me_devname = g_strdup (fsd.fd_req.devname);
             me->me_mountdir = g_strdup (fsd.fd_req.path);
@@ -734,8 +764,6 @@ read_file_system_list (int need_fs_type)
             *mtail = me;
             mtail = &me->me_next;
         }
-        if (val < 0)
-            goto free_then_fail;
     }
 #endif /* MOUNTED_GETMNT. */
 
@@ -971,7 +999,7 @@ read_file_system_list (int need_fs_type)
         char *table = MNTTAB;
         FILE *fp;
         int ret;
-        int lockfd = -1;
+        int lockfd;
 
 #if defined F_RDLCK && defined F_SETLKW
         /* MNTTAB_LOCK is a macro name of our own invention; it's not present in
@@ -982,9 +1010,10 @@ read_file_system_list (int need_fs_type)
 #define MNTTAB_LOCK "/etc/.mnttab.lock"
 #endif
         lockfd = open (MNTTAB_LOCK, O_RDONLY);
-        if (0 <= lockfd)
+        if (lockfd >= 0)
         {
             struct flock flock;
+
             flock.l_type = F_RDLCK;
             flock.l_whence = SEEK_SET;
             flock.l_start = 0;
@@ -997,6 +1026,7 @@ read_file_system_list (int need_fs_type)
                     errno = saved_errno;
                     return NULL;
                 }
+            }
         }
         else if (errno != ENOENT)
             return NULL;
@@ -1027,10 +1057,10 @@ read_file_system_list (int need_fs_type)
             ret = fclose (fp) == EOF ? errno : 0 < ret ? 0 : -1;
         }
 
-        if (0 <= lockfd && close (lockfd) != 0)
+        if (lockfd >= 0 && close (lockfd) != 0)
             ret = errno;
 
-        if (0 <= ret)
+        if (ret >= 0)
         {
             errno = ret;
             goto free_then_fail;
@@ -1138,6 +1168,7 @@ read_file_system_list (int need_fs_type)
                 mtail = &me->me_next;
             }
         }
+        closedir (dirp);
     }
 #endif /* MOUNTED_INTERIX_STATVFS */
 
@@ -1568,13 +1599,15 @@ void
 my_statfs (struct my_statfs *myfs_stats, const char *path)
 {
 #ifdef HAVE_INFOMOUNT_LIST
-    size_t i, len = 0;
+    size_t len = 0;
     struct mount_entry *entry = NULL;
     struct mount_entry *temp = mc_mount_list;
     struct fs_usage fs_use;
 
     while (temp)
     {
+        size_t i;
+
         i = strlen (temp->me_mountdir);
         if (i > len && (strncmp (path, temp->me_mountdir, i) == 0))
             if (!entry || (path[i] == PATH_SEP || path[i] == '\0'))

@@ -253,7 +253,6 @@ int
 mc_fhl_get_color (mc_fhl_t * fhl, file_entry_t * fe)
 {
     guint i;
-    mc_fhl_filter_t *mc_filter;
     int ret;
 
     if (fhl == NULL)
@@ -261,6 +260,8 @@ mc_fhl_get_color (mc_fhl_t * fhl, file_entry_t * fe)
 
     for (i = 0; i < fhl->filters->len; i++)
     {
+        mc_fhl_filter_t *mc_filter;
+
         mc_filter = (mc_fhl_filter_t *) g_ptr_array_index (fhl->filters, i);
         switch (mc_filter->type)
         {

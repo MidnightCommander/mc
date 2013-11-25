@@ -888,8 +888,6 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
     struct context_rule **r, *c = NULL;
     int num_words = -1, num_contexts = -1;
     int result = 0;
-    int argc;
-    int i, j;
     int alloc_contexts = MAX_CONTEXTS,
         alloc_words_per_context = MAX_WORDS_PER_CONTEXT,
         max_alloc_words_per_context = MAX_WORDS_PER_CONTEXT;
@@ -909,6 +907,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
     {
         char **a;
         size_t len;
+        int argc;
 
         line++;
         l = 0;
@@ -1200,7 +1199,8 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
 
     if (result == 0)
     {
-        char *first_chars, *p;
+        int i;
+        char *first_chars;
 
         if (num_contexts == -1)
             return line;
@@ -1209,6 +1209,9 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
 
         for (i = 0; edit->rules[i] != NULL; i++)
         {
+            char *p;
+            int j;
+
             c = edit->rules[i];
             p = first_chars;
             *p++ = (char) 1;
@@ -1447,8 +1450,7 @@ edit_free_syntax_rules (WEdit * edit)
         MC_PTR_FREE (edit->rules[i]);
     }
 
-    g_slist_foreach (edit->syntax_marker, (GFunc) g_free, NULL);
-    g_slist_free (edit->syntax_marker);
+    g_slist_free_full (edit->syntax_marker, g_free);
     edit->syntax_marker = NULL;
     MC_PTR_FREE (edit->rules);
     tty_color_free_all_tmp ();

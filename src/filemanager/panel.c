@@ -1393,7 +1393,7 @@ panel_save_name (WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-directory_history_add (struct WPanel *panel, const vfs_path_t * vpath)
+directory_history_add (WPanel * panel, const vfs_path_t * vpath)
 {
     char *tmp;
 
@@ -1409,7 +1409,7 @@ static gboolean
 panel_load_history (const gchar * event_group_name, const gchar * event_name,
                     gpointer init_data, gpointer data)
 {
-    WPanel *p = (WPanel *) init_data;
+    WPanel *p = PANEL (init_data);
     ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
 
     (void) event_group_name;
@@ -1435,7 +1435,7 @@ static gboolean
 panel_save_history (const gchar * event_group_name, const gchar * event_name,
                     gpointer init_data, gpointer data)
 {
-    WPanel *p = (WPanel *) init_data;
+    WPanel *p = PANEL (init_data);
 
     (void) event_group_name;
     (void) event_name;
@@ -1473,8 +1473,7 @@ panel_destroy (WPanel * p)
     {
         /* directory history is already saved before this moment */
         p->dir_history = g_list_first (p->dir_history);
-        g_list_foreach (p->dir_history, (GFunc) g_free, NULL);
-        g_list_free (p->dir_history);
+        g_list_free_full (p->dir_history, g_free);
     }
     g_free (p->hist_name);
 
@@ -1548,7 +1547,6 @@ paint_frame (WPanel * panel)
     Widget *w = WIDGET (panel);
 
     int side, width;
-    GString *format_txt;
 
     adjust_top_file (panel);
 
@@ -1559,6 +1557,7 @@ paint_frame (WPanel * panel)
 
     for (side = 0; side <= panel->split; side++)
     {
+        GString *format_txt;
         format_e *format;
 
         if (side)
@@ -1826,7 +1825,6 @@ use_display_format (WPanel * panel, const char *format, char **error, int isstat
     int expand_top = 0;         /* Max used element in expand */
     int usable_columns;         /* Usable columns in the panel */
     int total_cols = 0;
-    int i;
     format_e *darr, *home;
 
     if (!format)
@@ -1856,11 +1854,12 @@ use_display_format (WPanel * panel, const char *format, char **error, int isstat
     /* If we used more columns than the available columns, adjust that */
     if (total_cols > usable_columns)
     {
-        int pdif, dif = total_cols - usable_columns;
+        int dif = total_cols - usable_columns;
 
         while (dif)
         {
-            pdif = dif;
+            int pdif = dif;
+
             for (darr = home; darr; darr = darr->next)
             {
                 if (dif && darr->field_len - 1)
@@ -1880,6 +1879,7 @@ use_display_format (WPanel * panel, const char *format, char **error, int isstat
     /* Expand the available space */
     if ((usable_columns > total_cols) && expand_top)
     {
+        int i;
         int spaces = (usable_columns - total_cols) / expand_top;
         int extra = (usable_columns - total_cols) % expand_top;
 
@@ -2699,7 +2699,7 @@ static void
 chdir_to_readlink (WPanel * panel)
 {
     vfs_path_t *new_dir_vpath;
-    char buffer[MC_MAXPATHLEN], *p;
+    char buffer[MC_MAXPATHLEN];
     int i;
     struct stat st;
     vfs_path_t *panel_fname_vpath;
@@ -2724,6 +2724,8 @@ chdir_to_readlink (WPanel * panel)
     buffer[i] = 0;
     if (!S_ISDIR (st.st_mode))
     {
+        char *p;
+
         p = strrchr (buffer, PATH_SEP);
         if (p && !p[1])
         {
@@ -3396,7 +3398,7 @@ panel_key (WPanel * panel, int key)
 static cb_ret_t
 panel_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WPanel *panel = (WPanel *) w;
+    WPanel *panel = PANEL (w);
     WButtonBar *bb;
 
     switch (msg)
@@ -3529,7 +3531,6 @@ mouse_sort_col (WPanel * panel, int x)
     const char *lc_sort_name = NULL;
     panel_field_t *col_sort_format = NULL;
     format_e *format;
-    gchar *title;
 
     for (i = 0, format = panel->format; format != NULL; format = format->next)
     {
@@ -3547,6 +3548,8 @@ mouse_sort_col (WPanel * panel, int x)
 
     for (i = 0; panel_fields[i].id != NULL; i++)
     {
+        char *title;
+
         title = panel_get_title_without_hotkey (panel_fields[i].title_hotkey);
         if (!strcmp (lc_sort_name, title) && panel_fields[i].sort_routine)
         {
@@ -3581,7 +3584,7 @@ mouse_sort_col (WPanel * panel, int x)
 static int
 panel_event (Gpm_Event * event, void *data)
 {
-    WPanel *panel = (WPanel *) data;
+    WPanel *panel = PANEL (data);
     Widget *w = WIDGET (data);
 
     const int lines = llines (panel);
@@ -3795,7 +3798,7 @@ update_one_panel (int which, panel_update_flags_t flags, const char *current_fil
     {
         WPanel *panel;
 
-        panel = (WPanel *) get_panel_widget (which);
+        panel = PANEL (get_panel_widget (which));
         if (panel->is_panelized)
             flags &= ~UP_RELOAD;
         update_one_panel_widget (panel, flags, current_file);
@@ -4405,7 +4408,7 @@ do_file_mark (WPanel * panel, int idx, int mark)
  * Record change in the directory history.
  */
 gboolean
-do_panel_cd (struct WPanel *panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type)
+do_panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type)
 {
     gboolean r;
 
@@ -4617,9 +4620,9 @@ update_panels (panel_update_flags_t flags, const char *current_file)
         update_one_panel (get_other_index (), flags, UP_KEEPSEL);
 
     if (get_current_type () == view_listing)
-        panel = (WPanel *) get_panel_widget (get_current_index ());
+        panel = PANEL (get_panel_widget (get_current_index ()));
     else
-        panel = (WPanel *) get_panel_widget (get_other_index ());
+        panel = PANEL (get_panel_widget (get_other_index ()));
 
     if (!panel->is_panelized)
         (void) mc_chdir (panel->cwd_vpath);
@@ -4694,18 +4697,20 @@ const panel_field_t *
 panel_get_field_by_title (const char *name)
 {
     gsize lc_index;
-    gchar *title = NULL;
 
     for (lc_index = 0; panel_fields[lc_index].id != NULL; lc_index++)
     {
+        gchar *title;
+        gboolean ok;
+
         title = panel_get_title_without_hotkey (panel_fields[lc_index].title_hotkey);
-        if (panel_fields[lc_index].title_hotkey != NULL && strcmp (name, title) == 0)
-        {
-            g_free (title);
+        ok = title != NULL && strcmp (name, title) == 0;
+        g_free (title);
+
+        if (ok)
             return &panel_fields[lc_index];
-        }
     }
-    g_free (title);
+
     return NULL;
 }
 

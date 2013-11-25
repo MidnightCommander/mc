@@ -70,9 +70,11 @@
 #define g_array_foreach(a, TP, cbf) \
 do { \
     size_t g_array_foreach_i;\
-    TP *g_array_foreach_var = NULL; \
+    \
     for (g_array_foreach_i = 0; g_array_foreach_i < a->len; g_array_foreach_i++) \
     { \
+        TP *g_array_foreach_var; \
+        \
         g_array_foreach_var = &g_array_index (a, TP, g_array_foreach_i); \
         (*cbf) (g_array_foreach_var); \
     } \
@@ -1109,8 +1111,8 @@ lcsubstr (const char *s, int m, const char *t, int n, GArray * ret, int min)
         }
     }
 
-    free (Lcurr);
-    free (Lprev);
+    g_free (Lcurr);
+    g_free (Lprev);
     return z;
 }
 
@@ -1419,8 +1421,7 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
                 utf_ch = dview_get_utf ((char *) src, &w, &res);
                 if (w > 1)
                     skip += w - 1;
-                if (!g_unichar_isprint (utf_ch))
-                    utf_ch = '.';
+                (void) utf_ch;
             }
             else
             {
@@ -1521,8 +1522,7 @@ cvt_mgeta (const char *src, size_t srcsize, char *dst, int dstsize, int skip, in
                 utf_ch = dview_get_utf ((char *) src, &w, &res);
                 if (w > 1)
                     skip += w - 1;
-                if (!g_unichar_isprint (utf_ch))
-                    utf_ch = '.';
+                (void) utf_ch;
             }
             else
             {
@@ -1799,12 +1799,12 @@ redo_diff (WDiff * dview)
         if (dview->hdiff != NULL)
         {
             size_t i;
-            const DIFFLN *p;
-            const DIFFLN *q;
 
             for (i = 0; i < dview->a[DIFF_LEFT]->len; i++)
             {
                 GArray *h = NULL;
+                const DIFFLN *p;
+                const DIFFLN *q;
 
                 p = &g_array_index (dview->a[DIFF_LEFT], DIFFLN, i);
                 q = &g_array_index (dview->a[DIFF_RIGHT], DIFFLN, i);
@@ -2921,10 +2921,10 @@ dview_goto_cmd (WDiff * dview, diff_place_t ord)
 
             if (newline > 0)
             {
-                const DIFFLN *p;
-
                 for (; i < dview->a[ord]->len; i++)
                 {
+                    const DIFFLN *p;
+
                     p = &g_array_index (dview->a[ord], DIFFLN, i);
                     if (p->line == newline)
                         break;

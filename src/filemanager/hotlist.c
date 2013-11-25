@@ -1393,7 +1393,6 @@ static void
 clean_up_hotlist_groups (const char *section)
 {
     char *grp_section;
-    gchar **profile_keys, **keys;
     gsize len;
 
     grp_section = g_strconcat (section, ".Group", (char *) NULL);
@@ -1402,6 +1401,8 @@ clean_up_hotlist_groups (const char *section)
 
     if (mc_config_has_group (mc_main_config, grp_section))
     {
+        char **profile_keys, **keys;
+
         profile_keys = keys = mc_config_get_keys (mc_main_config, grp_section, &len);
 
         while (*profile_keys != NULL)
