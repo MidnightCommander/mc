@@ -1026,7 +1026,6 @@ read_file_system_list (int need_fs_type)
                     errno = saved_errno;
                     return NULL;
                 }
-            }
         }
         else if (errno != ENOENT)
             return NULL;
