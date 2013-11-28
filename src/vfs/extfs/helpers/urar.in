@@ -4,7 +4,9 @@
 # (C) 1996 2:5020/337.13@fidonet.org
 # Updated by christian.gennerat@alcatel.fr 1999
 #            Andrew V. Samoilov <sav@bcs.zp.ua> 2000
+#
 # Andrew Borodin <aborodin@vmail.ru>
+# David Haller <dnh@opensuse.org>
 #	2013: support unrar5
 #
 # beta version 2.0
@@ -42,21 +44,62 @@ flag==1 {
 
 mcrar5fs_list ()
 {
-     $UNRAR v -c- -cfg- "$1" | @AWK@ -v uid=`id -u` -v gid=`id -g` '
-BEGIN { flag=0 }
-/^-----------/ { flag++; if (flag > 1) exit 0; next }
-flag==1 {
-    split($5, a, "-")
-    if (index($1, "D") != 0)
-	$1="drwxr-xr-x"
-    else
-	if (index($1, ".") != 0)
-	    $1="-rw-r--r--"
-    printf "%s 1 %s %s %d %02d/%02d/%02d %s ./", $1, uid, gid, $2, a[2], a[1], a[3], $6
-    for (i = 8; i < NF; ++i)
-        printf "%s ", $i
-    printf "%s\n", $NF
-}'
+    $UNRAR vt -c- -cfg- "$1" | @AWK@ -F ':' -v uid=`id -u` -v gid=`id -g` '
+    {
+        ### remove space after the ":" of the field name
+        sub ("^ ", "", $2);
+    }
+
+    $1 ~ / *Name$/ {
+        ### next file
+        name = mtime = size = attrs = "";
+        delete date;
+        name = $2;
+        ### if the name contains ":", append the rest of the fields
+        if (NF > 2) {
+            for (i = 3; i <= NF; i++) {
+                name = name ":" $i;
+            }
+        }
+    }
+    $1 ~ /^ *mtime$/ {
+        mtime = $2 ":" $3;
+    }
+    $1 ~ /^ *Size$/ {
+        size = $2;
+    }
+    $1 ~ /^ *Attributes$/ {
+        attrs = $2;
+    }
+
+    $1 ~ /^ *Compression$/ {
+        ### file done, using /^$/ is not so good you
+        ### would have to skip the version stuff first
+
+        ### get date and time
+        split (mtime, date, " ");
+        time = date[2];
+        ### cut off seconds from the time
+        sub (",[0-9]*$", "", time);
+        ### split for reordering of the date in the printf below
+        split (date[1], date, "-");
+        ### mc seems to be able to parse 4 digit years too, so remove if tested
+        # sub ("^..", "", date[1]); ### cut year to 2 digits only
+
+        ### check/adjust rights
+        if (index (attrs, "D") != 0) {
+            attrs = "drwxr-xr-x";
+        } else {
+            if (index (attrs, ".") != 0) {
+                attrs = "-rw-r--r--";
+            }
+        }
+
+        ### and finally
+        printf ("%s 1 %s %s %d %02d/%02d/%02d %s ./%s\n",
+                attrs, uid, gid, size, date[2], date[3], date[1], time, name);
+    }
+'
 }
 
 mcrarfs_list ()
