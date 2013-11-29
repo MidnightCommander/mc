@@ -1,3 +1,49 @@
+Version 4.8.11
+
+- Core
+  * Live update of panels size when editing layout (#3060)
+  * Support "Compute totals" option in move file operation (#2075)
+
+- VFS
+  * rpm extfs
+    - show dependency version (#2812)
+    - support tar payload (#3064)
+    - improve support for EPOCH tag (#1588)
+    - add support for PREINPROG/POSTINPROG/PREUNPROG/POSTUNPROG, VERIFYSCRIPTPROG and TRIGGERSCRIPTS/TRIGGERSCRIPTPROG tags (#1588)
+
+- Editor
+  * Support "bracketed paste mode" of xterm (#2661)
+  * Clarify Java syntax highlighting (#3057)
+
+- Misc
+  * Print warnings about unknown '--with-' / '--enable-' configure options (#3029)
+  * Code cleanup and refactoring (#3051, #3066)
+
+- Fixes
+  * FTBFS on GNU Hurd (#3053, #3071)
+  * Segfault while moving files (#3059, #3105)
+  * Broken handling of mc command line arguments (#3047)
+  * Copy/move doesn't work if num_history_items_recorded=0 (#3076)
+  * No subdir path completion in current dir, if stub is not starting with './' (#3018)
+  * Deprecated "find -perm +xxx" syntax is used (#3089)
+  * Home, End, Shift-Fn keys don't work in tmux (#2978)
+  * Improper [en|dis]abling of layout dialog split adjustment buttons (#3061)
+  * Bogus strings in 'Confirmation' config dialog (#2271)
+  * "Configure options" first entry not highlighted (#3084)
+  * "Setup saved to ~/.config/mc/ini" message is misleading (#3096)
+  * F3 doesn't work on .so files in FreeBSD 9.x (#3101)
+  * Typo in mc.lib: "less=%filename +%linenog" instead of "+%lineno" (part of #3044)
+  * Wrong order of filename and line number for external editor (part of #3044)
+  * mcedit: tabs are lost when text is pasted (#1797 as part of #2661)
+  * mcedit: question on large file treats Escape as Yes (#3107)
+  * Broken case-sensitive search in editor/viewer/diffviewer (#3069)
+  * Changes to files in nested .zip archives are lost (#3070)
+  * Incorrect handling of filenames with spaces with unrar v5 (#3073)
+  * iso9660 VFS: filenames truncating in ISO file listing (#3091)
+  * vfs_path_from_str_flags() doesn't support VPF_STRIP_HOME (#3098)
+  * Bright colors are used as background colors in 16-color skins (#3050)
+  * Various defects in documentation (#3052, #3092)
+
 Version 4.8.10
 
 - Core
