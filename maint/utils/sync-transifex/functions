@@ -147,14 +147,15 @@ createPo4A() {
 convertFromPoToText() {
     sync_dir_name=$1; shift
     sync_file_name=$1; shift
-
+    pushd "${SYNC_TX_CURRENT_DIR}"  >/dev/null
     po4a -k 0 -q \
         -M UTF-8 -L UTF-8 \
         --variable docfile="${sync_file_name}" \
         "${sync_dir_name}/po4a.cfg"
+    popd  >/dev/null
 }
 
 # ----------------------------------------------------------------------
 #*** main code *********************************************************
 
-SYNC_TX_CURRENT_DIR=${SYNC_TX_CURRENT_DIR:-$(pwd)}
+SYNC_TX_CURRENT_DIR=${SYNC_TX_CURRENT_DIR:-${MC_SOURCE_ROOT_DIR}/maint/utils/sync-transifex}
