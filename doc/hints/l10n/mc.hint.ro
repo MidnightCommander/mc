@@ -3,17 +3,17 @@ marcate.
 
 Sfat: Utilizați C-x p pentru a copia în linia de comandă calea curentă.
 
-Sfat: Completare: Utilizați M-Tab (sau Esc+Tab). Tastați de doua ori pentru
+Sfat: Completare: Utilizați M-Tab (sau Esc+Tab). Tastați de două ori pentru
 a obține lista.
 
 Sfat: Utilizați M-p și M-n pentru a accesa istoricul comenzilor.
 
 Sfat: Trebuie sa citați un caracter? Folosiți Control-q și caracterul.
 
-Sfat: Aceste mesaje sunt sâcâitoare? Puteți sa le opriți din meniul
+Sfat: Aceste mesaje sunt sâcâitoare? Puteți să le opriți din meniul
 Opțiuni/Aspect.
 
-Sfat: Selectarea directoarelor: adaugați slash la sfârșitul criteriului de
+Sfat: Selectarea dosarelor: adăugați slash la sfârșitul criteriului de
 selectare
 
 Sfat: Dacă terminalul nu dispune de taste funcționale, folosiți ESC+ numărul
@@ -29,10 +29,9 @@ Sfat: Tasta Tab schimbă panoul curent.
 Sfat: facilități VFS: Apăsați ENTER pe un fișier tar pentru a examina
 conținutul său.
 
-Sfat: Avem de asemenea și o pagină în manual.
+Sfat: Avem de asemenea și o pagină de manual.
 
-Sfat: Doriți navigare în stilul lynx? Puteți să-l setați în dialogul
-Configurație.
+Sfat: Dorești navigare în stilul lynx? Poți seta în dialogul Configurare.
 
 Sfat: macro-urile funcționează și în linia de comandă.
 
@@ -42,7 +41,7 @@ vizualizator.
 Sfat: Formatul listării de fișiere poate fi modificat; rulați "man mc"
 pentru detalii.
 
-Sfat: %D/%T se extinde pe fișierele marcate din directorul opus.
+Sfat: %D/%T se extinde pe fișierele marcate din dosarul opus.
 
 Sfat: Doriți un shell simplu? Apăsați C-o, iar pentru a revenit în MC
 apăsați din nou C-o.
@@ -51,25 +50,26 @@ Sfat: Configurând variabila CDPATH puteți minimiza numărul de taste apăsate
 pentru comenzi CD.
 
 Sfat: Dacă doriți să vedeți fișierele .*, specificați acest lucru în
-dialogul Configurație.
+dialogul Configurare.
 
 Sfat: Doriți să vedeți fișierele de backup *~ ? Specificați acest lucru în
-dialogul Configurație.
+dialogul Configurare.
 
 Sfat: Funcția de completare funcționează în toate liniile de intrare din
 toate dialogurile. Trebuie doar să apăsați M-Tab.
 
-Sfat: Pentru terminalele încete, indicatorul -s ar putea ajuta.
+Sfat: Pentru terminalele încete, opțiunea -s ar putea ajuta.
 
 Sfat: Căutare fișier: puteți lucra cu fișierele găsite folosind butonul de
 panelizare.
 
 Sfat: Doriți căutări complexe? Folosiți comanda de panelizare externă.
 
-Sfat: Pentru a schimba directorul curent în timpul tastării unei comenzi,
+Sfat: Pentru a schimba dosarul curent în timpul tastării unei comenzi,
 folosiți M-c (cd rapid).
 
-Nota: Comenzile shell nu funcționează în sisteme de fișiere non-local.
+Nota: Comenzile shell nu funcționează în sisteme de fișiere care nu sunt
+locale.
 
 Sfat: Puteți recupera textul șters cu C-y.
 
@@ -85,16 +85,16 @@ EDITOR.
 Sfat: Puteți specifica vizualizatorul extern cu ajutorul variabilelor de
 shell VIEWER sau PAGER.
 
-Sfat: Puteti dezactiva toate cererile de confirmare in meniul
-Optiuni/Confirmare.
+Sfat: Puteți dezactiva toate cererile de confirmare în meniul
+Opțiuni/Confirmări.
 
 Hint: Leap to frequently used directories in a single bound with C-.
 
 Sfat: Puteți să vă conectați la FTP în mod anonim din MC tastând 'cd
 ftp://machine.edu'
 
-Sfat: Serviciul FTP este incorporat în Midnight Commander, verificați meniul
-Fisier/FTP.
+Sfat: Serviciul FTP este încorporat în Midnight Commander, verificați meniul
+Fișier/Legătură FTP.
 
 Sfat: M-t schimbă rapid modul de listare.
 
@@ -103,7 +103,7 @@ ftp://user@machine.edu'
 
 Sfat: Puteți parcurge fișierele RPM apăsând ENTER pe fișier.
 
-Sfat: Pentru a marca directoarele in dialogul de selectie, adaugati slash.
+Sfat: Pentru a marca dosarele în dialogul de selecție, adăugați slash.
 
 Sfat: Pentru a folosi mouse-ul pentru a decupa și insera, trebuie să țineți
 tasta Shift apăsată.

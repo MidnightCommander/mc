@@ -1,93 +1,100 @@
-Hint: Use C-x t to copy tagged file names to the command line.
+Vihje: Kasuta  C-x, et kopeerida märgitud failide nimed käsureale.
 
-Hint: Use C-x p to copy the current pathname to the command line.
+Vihje: Kasuta C-x p, et kopeerida aktiivne otsingurada käsureale.
 
-Hint: Completion: use M-Tab (or Esc+Tab).  Type it twice to get a list.
+Vihje: Lõpetamiseks kasuta M-Tab (või Esc-Tab).  Topeltsisestus kuvab listi.
 
-Hint: Use M-p and M-n to access the command history.
+Vihje: Käskude ajaloo kasutamiseks kasuta M-p ja M-n.
 
-Hint: Need to quote a character? Use Control-q and the character.
+Vihje: Täht vajab tsiteeringut? Sisesta C-q ja täht.
 
-Hint: Tired of these messages? Turn them off from the Options/Layout menu.
+Vihje: Oled tüdinud neist teadetest? Lülita need välja menüüst
+Seaded/Paigutus.
 
-Hint: Selecting directories: add a slash to the end of the matching pattern.
+Vihje: Kataloogide valimine: lisa sobiva mustri lõppu kaldkriips.
 
-Hint: If your terminal lacks functions keys, use the ESC+number sequence.
+Vihje: Kui terminalil puuduvad funktsiooniklahvid, siis kasuta ESC+number
+jadasid.
 
-Hint: The homepage of GNU Midnight Commander:
-http://www.midnight-commander.org/
+Vihje: GNU Midnight Commanderi koduleht: http://www.midnight-commander.org/
 
-Hint: Please send any bug reports to mc-devel@gnome.org
+Vihje: Palun saada vearaportid aadressile mc-devel@gnome.org
 
-Hint: Tab changes your current panel.
+Vihje: TAB vahetab aktiivset paneeli.
 
-Hint: VFS coolness: tap enter on a tar file to examine its contents.
+Vihje: VFS võimalused: tar-faili sisuga tutvumiseks vajuta ta peal ENTER.
 
-Hint: We also have a nice manual page.
+Vihje: Olemas on ka meeldiv manuaal.
 
-Hint: Do you want lynx-style navigation? Set it in the Configuration dialog.
+Vihje: Soovid lynxi stiilis navigeerimist? Luba see konfiguratsiooni
+dialoogist.
 
-Hint: % macros work even on the command line.
+Vihje: %-makrod töötavad ka käsureal.
 
-Hint: M-! will allow you to execute programs and see the output in the
-viewer.
+Vihje: M-! lubab käivitada programme ja vaadata väljundit vaatajas.
 
-Hint: The file listing format can be customized; do "man mc" for details.
+Vihje: Faililistingu formaati saab muuta; lähemalt vaata manuaalist.
 
-Hint: %D/%T expands to the tagged files in the opposite directory.
+Vihje: %D/%T laiendab märgitud failid vastaskataloogis.
 
-Hint: Want your plain shell? Press C-o, and get back to MC with C-o again.
+Vihje: Soovid harilikku kesta? Vajuta C-o; tagasipöördumiseks vajuta uuesti
+C-o.
 
-Hint: Setting the CDPATH variable can save you keystrokes in cd commands.
+Vihje: Muutujale CDPATH väärtuse omistamine võib vähendada klahvivajutusi cd
+käskudes.
 
-Hint: If you want to see your .* files, say so in the Configuration dialog.
+Vihje: Kui soovid näha peidetud faile, siis luba see konfiguratsiooni
+dialoogis.
 
-Hint: Want to see your *~ backup files? Set it in the Configuration dialog.
+Vihje: Kui soovid näha varukoopia faile, siis luba see konfiguratsiooni
+dialoogis.
 
-Hint: Completion works on all input lines in all dialogs. Just press M-Tab.
+Vihje: Lõpetamine töötab iga dialoogi sisestusväljadel; lihtsalt vajuta
+M-Tab.
 
-Hint: On slow terminals the -s flag may help.
+Vihje: Parameeter -s võib aidata aeglase terminali kasutamisel.
 
-Hint: Find File: you can work on the files found using the Panelize button.
+Vihje: Failiotsing: sa saad töötada leitud failidega kasutades nuppu
+Paneelile.
 
-Hint: Want to do complex searches? Use the External Panelize command.
+Vihje: Soovid teha keerulisi otsinguid? Kasuta käsku Väline paneelile.
 
-Hint: To change directory halfway through typing a command, use M-c (quick
-cd).
+Vihje: Kataloogi kiirvahetuseks käsu sisestamise ajal kasuta M-c (quick cd).
 
-Note: Shell commands will not work when you are on a non-local file system.
+NB! Kesta käsud töötavad ainult kohalikus failisüsteemis.
 
-Hint: Bring text back from the dead with C-y.
+Vihje: C-y taastab kustutatud teksti.
 
-Hint: Are some of your keys not working? Look at Options/Learn keys.
+Vihje: Kas mõned klahvid ei tööta? Vaata Seaded/Õpi klahve.
 
-Hint: To look at the output of a command in the viewer, use M-!
+Vihje: Käsu väljundi vaatamiseks vaatajas kasuta M-!
 
-Hint: F13 (or Shift-F3) invokes the viewer in raw mode.
+Vihje: F13 (või Shift-F3) käivitab kuvaja toorrežiimis.
 
-Hint: You may specify the editor for F4 with the shell variable EDITOR.
+Vihje: Klahvile F4 saad redaktori määrata keskkonna muutujaga EDITOR.
 
-Hint: You may specify the external viewer with the shell vars VIEWER or
-PAGER.
+Vihje: Välise vaataja saad määrata keskkonna muutujaga VIEWER või PAGER.
 
-Hint: You can disable all requests for confirmation in Options/Confirmation.
+Vihje: Kinnituse küsimise kõigile päringutele saad keelata
+Seaded/Kinnitused.
 
 Hint: Leap to frequently used directories in a single bound with C-.
 
-Hint: You can do anonymous FTP with mc by typing 'cd ftp://machine.edu'
+Vihje: Anonüümse FTP kasutamiseks mc-ga sisesta 'cd ftp://masin.ee'
 
-Hint: FTP is built in the Midnight Commander, check the File/FTP link menu.
+Vihje: FTP on Midnight Commanderisse sisse ehitatud; vaata menüüst Fail/FTP
+link.
 
-Hint: M-t changes quickly the listing mode.
+Vihje: M-t võimaldab listingu režiimi kiiret muutmist.
 
-Hint: You can specify the username when doing ftps: 'cd
-ftp://user@machine.edu'
+Vihje: Kasutaja määramine FTP ühenduses: 'cd ftp://kasutaja@masin.ee'
 
-Hint: You can browse RPM files by tapping enter on top of an rpm file.
+Vihje: RPM faili sisuga tutvumiseks vajuta sellel Enter.
 
-Hint: To mark directories on the select dialog box, append a slash.
+Vihje: Kataloogide märkimiseks valiku dialoogis lisa kaldkriips.
 
-Hint: To use the mouse cut and paste may require holding the shift key
+Vihje: Hiirega lõikamiseks ja asetamiseks võib olla vajalik vajutada klahvi
+Shift.
 
 Hint: Key frequently visited ftp sites in the hotlist: type C-.
 
