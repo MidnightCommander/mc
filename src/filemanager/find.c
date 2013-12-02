@@ -38,6 +38,7 @@
 #include <string.h>
 #include <fcntl.h>
 #include <sys/stat.h>
+#include <sys/time.h>
 
 #include "lib/global.h"
 
@@ -65,6 +66,9 @@
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/
+
+#define MAX_REFRESH_INTERVAL (G_USEC_PER_SEC / 20)      /* 50 ms */
+#define MIN_REFRESH_FILE_SIZE (256 * 1024)      /* 256 KB */
 
 /*** file scope type declarations ****************************************************************/
 
@@ -148,6 +152,8 @@ static char *content_pattern = NULL;    /* pattern to search inside files; if
 static unsigned long matches;   /* Number of matches */
 static gboolean is_start = FALSE;       /* Status of the start/stop toggle button */
 static char *old_dir = NULL;
+
+static struct timeval last_refresh;
 
 /* Where did we stop */
 static gboolean resuming;
@@ -976,6 +982,10 @@ search_content (WDialog * h, const char *directory, const char *filename)
     int file_fd;
     gboolean ret_val = FALSE;
     vfs_path_t *vpath;
+    struct timeval tv;
+    time_t seconds;
+    suseconds_t useconds;
+    gboolean status_updated = FALSE;
 
     vpath = vfs_path_build_filename (directory, filename, (char *) NULL);
 
@@ -991,10 +1001,29 @@ search_content (WDialog * h, const char *directory, const char *filename)
     if (file_fd == -1)
         return FALSE;
 
-    g_snprintf (buffer, sizeof (buffer), _("Grepping in %s"), filename);
-    status_update (str_trunc (buffer, WIDGET (h)->cols - 8));
+    /* get time elapsed from last refresh */
+    if (gettimeofday (&tv, NULL) == -1)
+    {
+        tv.tv_sec = 0;
+        tv.tv_usec = 0;
+        last_refresh = tv;
+    }
+    seconds = tv.tv_sec - last_refresh.tv_sec;
+    useconds = tv.tv_usec - last_refresh.tv_usec;
+    if (useconds < 0)
+    {
+        seconds--;
+        useconds += G_USEC_PER_SEC;
+    }
 
-    mc_refresh ();
+    if (s.st_size >= MIN_REFRESH_FILE_SIZE || seconds > 0 || useconds > MAX_REFRESH_INTERVAL)
+    {
+        g_snprintf (buffer, sizeof (buffer), _("Grepping in %s"), filename);
+        status_update (str_trunc (buffer, WIDGET (h)->cols - 8));
+        mc_refresh ();
+        last_refresh = tv;
+        status_updated = TRUE;
+    }
 
     tty_enable_interrupt_key ();
     tty_got_interrupt ();
@@ -1069,6 +1098,17 @@ search_content (WDialog * h, const char *directory, const char *filename)
             if (!found          /* Search in binary line once */
                 && mc_search_run (search_content_handle, (const void *) strbuf, 0, i, &found_len))
             {
+                if (!status_updated)
+                {
+                    /* if we add results for a file, we have to ensure that
+                       name of this file is shown in status bar */
+                    g_snprintf (result, sizeof (result), _("Grepping in %s"), filename);
+                    status_update (str_trunc (result, WIDGET (h)->cols - 8));
+                    mc_refresh ();
+                    last_refresh = tv;
+                    status_updated = TRUE;
+                }
+
                 g_snprintf (result, sizeof (result), "%d:%s", line, filename);
                 find_add_match (directory, result);
                 found = TRUE;
@@ -1808,6 +1848,9 @@ find_file (void)
 
         if (pattern[0] == '\0')
             break;              /* nothing search */
+
+        last_refresh.tv_sec = 0;
+        last_refresh.tv_usec = 0;
 
         dirname = filename = NULL;
         is_start = FALSE;
