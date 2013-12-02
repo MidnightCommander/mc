@@ -1742,7 +1742,8 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
 
         dir_list_init (list);
 
-        for (i = 0, entry = find_list->list; entry != NULL; i++, entry = g_list_next (entry))
+        for (i = 0, entry = listbox_get_first_link (find_list); entry != NULL;
+             i++, entry = g_list_next (entry))
         {
             const char *lc_filename = NULL;
             WLEntry *le = LENTRY (entry->data);

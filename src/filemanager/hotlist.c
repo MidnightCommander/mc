@@ -242,7 +242,7 @@ update_path_name (void)
     WListbox *list = hotlist_state.moving ? l_movelist : l_hotlist;
     Widget *w = WIDGET (list);
 
-    if (list->count != 0)
+    if (!listbox_is_empty (list))
     {
         char *ctext = NULL;
         void *cdata = NULL;
@@ -350,7 +350,7 @@ hotlist_button_callback (WButton * button, int action)
             struct hotlist *moveto_group = NULL;
             int ret;
 
-            if (l_hotlist->count == 0)
+            if (listbox_is_empty (l_hotlist))
                 return 0;       /* empty group - nothing to do */
 
             listbox_get_current (l_hotlist, NULL, (void **) &item);
@@ -594,7 +594,7 @@ hotlist_listbox_callback (WListbox * list)
 {
     WDialog *dlg = WIDGET (list)->owner;
 
-    if (list->count != 0)
+    if (!listbox_is_empty (list))
     {
         void *data = NULL;
 
