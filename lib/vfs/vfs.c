@@ -44,6 +44,7 @@
 #include <config.h>
 
 #include <errno.h>
+#include <stdlib.h>
 
 #include "lib/global.h"
 #include "lib/strutil.h"
@@ -529,24 +530,37 @@ vfs_print_message (const char *msg, ...)
 void
 vfs_setup_cwd (void)
 {
+    char *current_dir;
+    vfs_path_t *tmp_vpath;
     const vfs_path_element_t *path_element;
 
     if (vfs_get_raw_current_dir () == NULL)
     {
-        char *tmp;
+        current_dir = g_get_current_dir ();
+        vfs_set_raw_current_dir (vfs_path_from_str (current_dir));
+        g_free (current_dir);
 
-        tmp = g_get_current_dir ();
-        vfs_set_raw_current_dir (vfs_path_from_str (tmp));
-        g_free (tmp);
+        current_dir = getenv ("PWD");
+        tmp_vpath = vfs_path_from_str (current_dir);
+
+        if (tmp_vpath != NULL)
+        {
+            struct stat my_stat, my_stat2;
+
+            if (mc_global.vfs.cd_symlinks
+                && mc_stat (tmp_vpath, &my_stat) == 0
+                && mc_stat (vfs_get_raw_current_dir (), &my_stat2) == 0
+                && my_stat.st_ino == my_stat2.st_ino && my_stat.st_dev == my_stat2.st_dev)
+                vfs_set_raw_current_dir (tmp_vpath);
+            else
+                vfs_path_free (tmp_vpath);
+        }
     }
 
     path_element = vfs_path_get_by_index (vfs_get_raw_current_dir (), -1);
 
     if ((path_element->class->flags & VFSF_LOCAL) != 0)
     {
-        char *current_dir;
-        vfs_path_t *tmp_vpath;
-
         current_dir = g_get_current_dir ();
         tmp_vpath = vfs_path_from_str (current_dir);
         g_free (current_dir);

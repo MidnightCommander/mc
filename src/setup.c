@@ -43,8 +43,6 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "lib/vfs/vfs.h"
-
 #ifdef ENABLE_VFS_FTP
 #include "src/vfs/ftpfs/ftpfs.h"
 #endif
@@ -990,18 +988,6 @@ load_setup (void)
     /* At least one of the panels is a listing panel */
     if (startup_left_mode != view_listing && startup_right_mode != view_listing)
         startup_left_mode = view_listing;
-
-    {
-        vfs_path_t *vpath;
-
-        buffer = mc_config_get_string (mc_panels_config, "Dirs", "other_dir", ".");
-        vpath = vfs_path_from_str (buffer);
-        if (vfs_file_is_local (vpath))
-            saved_other_dir = buffer;
-        else
-            g_free (buffer);
-        vfs_path_free (vpath);
-    }
 
     boot_current_is_left = mc_config_get_bool (mc_panels_config, "Dirs", "current_is_left", TRUE);
 
