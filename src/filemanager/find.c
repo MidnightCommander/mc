@@ -929,62 +929,6 @@ find_add_match (const char *dir, const char *file)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * get_line_at:
- *
- * Returns malloced null-terminated line from file file_fd.
- * Input is buffered in buf_size long buffer.
- * Current pos in buf is stored in pos.
- * n_read - number of read chars.
- * has_newline - is there newline ?
- */
-
-static char *
-get_line_at (int file_fd, char *buf, int buf_size, int *pos, int *n_read, gboolean * has_newline)
-{
-    char *buffer = NULL;
-    int buffer_size = 0;
-    char ch = 0;
-    int i = 0;
-
-    while (TRUE)
-    {
-        if (*pos >= *n_read)
-        {
-            *pos = 0;
-            *n_read = mc_read (file_fd, buf, buf_size);
-            if (*n_read <= 0)
-                break;
-        }
-
-        ch = buf[(*pos)++];
-        if (ch == '\0')
-        {
-            /* skip possible leading zero(s) */
-            if (i == 0)
-                continue;
-            break;
-        }
-
-        if (i >= buffer_size - 1)
-            buffer = g_realloc (buffer, buffer_size += 80);
-
-        /* Strip newline */
-        if (ch == '\n')
-            break;
-
-        buffer[i++] = ch;
-    }
-
-    *has_newline = (ch != '\0');
-
-    if (buffer != NULL)
-        buffer[i] = '\0';
-
-    return buffer;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 static FindProgressStatus
 check_find_events (WDialog * h)
@@ -1028,7 +972,7 @@ static gboolean
 search_content (WDialog * h, const char *directory, const char *filename)
 {
     struct stat s;
-    char buffer[BUF_4K];
+    char buffer[BUF_4K];        /* raw input buffer */
     int file_fd;
     gboolean ret_val = FALSE;
     vfs_path_t *vpath;
@@ -1059,11 +1003,11 @@ search_content (WDialog * h, const char *directory, const char *filename)
         int line = 1;
         int pos = 0;
         int n_read = 0;
-        gboolean has_newline;
-        char *p = NULL;
         gboolean found = FALSE;
         gsize found_len;
         char result[BUF_MEDIUM];
+        char *strbuf = NULL;    /* buffer for fetched string */
+        int strbuf_size = 0;
 
         if (resuming)
         {
@@ -1072,25 +1016,70 @@ search_content (WDialog * h, const char *directory, const char *filename)
             line = last_line;
             pos = last_pos;
         }
-        while (!ret_val
-               && (p = get_line_at (file_fd, buffer, sizeof (buffer),
-                                    &pos, &n_read, &has_newline)) != NULL)
+
+        while (!ret_val)
         {
+            char ch = '\0';
+            int i = 0;
+
+            /* read to buffer and get line from there */
+            while (TRUE)
+            {
+                if (pos >= n_read)
+                {
+                    pos = 0;
+                    n_read = mc_read (file_fd, buffer, sizeof (buffer));
+                    if (n_read <= 0)
+                        break;
+                }
+
+                ch = buffer[pos++];
+                if (ch == '\0')
+                {
+                    /* skip possible leading zero(s) */
+                    if (i == 0)
+                        continue;
+                    break;
+                }
+
+                if (i >= strbuf_size - 1)
+                {
+                    strbuf_size += 128;
+                    strbuf = g_realloc (strbuf, strbuf_size);
+                }
+
+                /* Strip newline */
+                if (ch == '\n')
+                    break;
+
+                strbuf[i++] = ch;
+            }
+
+            if (i == 0)
+            {
+                if (ch == '\0')
+                    break;
+
+                /* if (ch == '\n'): do not search in empty strings */
+                goto skip_search;
+            }
+
+            strbuf[i] = '\0';
+
             if (!found          /* Search in binary line once */
-                && mc_search_run (search_content_handle,
-                                  (const void *) p, 0, strlen (p), &found_len))
+                && mc_search_run (search_content_handle, (const void *) strbuf, 0, i, &found_len))
             {
                 g_snprintf (result, sizeof (result), "%d:%s", line, filename);
                 find_add_match (directory, result);
                 found = TRUE;
             }
-            g_free (p);
 
             if (found && options.content_first_hit)
                 break;
 
-            if (has_newline)
+            if (ch == '\n')
             {
+              skip_search:
                 found = FALSE;
                 line++;
             }
@@ -1116,7 +1105,10 @@ search_content (WDialog * h, const char *directory, const char *filename)
                 }
             }
         }
+
+        g_free (strbuf);
     }
+
     tty_disable_interrupt_key ();
     mc_close (file_fd);
     return ret_val;
