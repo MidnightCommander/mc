@@ -1946,6 +1946,7 @@ int
 tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 {
     int c;
+    int flag = 0;               /* Return value from select */
 #ifdef HAVE_LIBGPM
     static struct Gpm_Event ev; /* Mouse event */
 #endif
@@ -1978,7 +1979,6 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
     while (pending_keys == NULL)
     {
         int nfd;
-        static int flag = 0;    /* Return value from select */
         fd_set select_set;
 
         FD_ZERO (&select_set);
