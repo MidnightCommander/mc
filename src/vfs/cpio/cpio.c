@@ -787,7 +787,8 @@ cpio_super_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *p
         return 0;
 
     /* Has the cached archive been changed on the disk? */
-    if (((cpio_super_data_t *) parc->data)->st.st_mtime < archive_stat->st_mtime)
+    if (parc->data != NULL
+        && ((cpio_super_data_t *) parc->data)->st.st_mtime < archive_stat->st_mtime)
     {
         /* Yes, reload! */
         (*vfs_cpiofs_ops.free) ((vfsid) parc);
