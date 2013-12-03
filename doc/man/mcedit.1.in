@@ -556,6 +556,9 @@ Toggle show visible tabs, if editor_visible_tabs=1 tabs showed as '<\-\-\-\->'
 .I editor_persistent_selections
 Do not remove block selection after moving the cursor.
 .TP
+.I editor_drop_selection_on_copy
+Reset selection after copy to clipboard.
+.TP
 .I editor_cursor_beyond_eol
 Allow moving cursor beyond the end of line.
 .TP

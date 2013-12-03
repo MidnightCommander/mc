@@ -349,6 +349,7 @@ static const struct
     { "editor_edit_confirm_save", &edit_confirm_save },
     { "editor_syntax_highlighting", &option_syntax_highlighting },
     { "editor_persistent_selections", &option_persistent_selections },
+    { "editor_drop_selection_on_copy", &option_drop_selection_on_copy },
     { "editor_cursor_beyond_eol", &option_cursor_beyond_eol },
     { "editor_cursor_after_inserted_block", &option_cursor_after_inserted_block },
     { "editor_visible_tabs", &visible_tabs },
