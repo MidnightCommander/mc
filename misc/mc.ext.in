@@ -667,6 +667,7 @@ shell/i/.lyx
 
 # torrent
 shell/i/.torrent
+	Open=%cd %p/torrent://
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view torrent
 
 ### Plain compressed files ###
