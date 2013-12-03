@@ -656,6 +656,9 @@ vfs_s_close (void *fh)
     int res = 0;
     struct vfs_class *me = FH_SUPER->me;
 
+    if (me == NULL)
+        return (-1);
+
     FH_SUPER->fd_usage--;
     if (!FH_SUPER->fd_usage)
         vfs_stamp_create (me, FH_SUPER);
