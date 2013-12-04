@@ -1000,7 +1000,7 @@ mc_maybe_editor_or_viewer (void)
             if (mc_run_param0 != NULL && *(char *) mc_run_param0 != '\0')
                 vpath = prepend_cwd_on_local ((char *) mc_run_param0);
 
-            ret = view_file (vpath, 0, 1);
+            ret = view_file (vpath, FALSE, TRUE);
             vfs_path_free (vpath);
             break;
         }
