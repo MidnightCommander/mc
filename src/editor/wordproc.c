@@ -316,7 +316,6 @@ word_start (unsigned char *t, off_t q, off_t size)
             return (-1);
         if (c == ' ' || c == '\t')
             return i;
-        i--;
     }
 }
 
