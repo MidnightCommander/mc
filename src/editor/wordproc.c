@@ -498,14 +498,19 @@ format_paragraph (WEdit * edit, gboolean force)
     {
         off_t i;
 
-        if (strchr (NO_FORMAT_CHARS_START, t->str[0]) == NULL)
-            for (i = 0; i < size - 1; i++)
-                if (t->str[i] == '\n'
-                    && strchr (NO_FORMAT_CHARS_START "\t ", t->str[i + 1]) != NULL)
-                    break;
+        if (strchr (NO_FORMAT_CHARS_START, t->str[0]) != NULL)
+        {
+            g_string_free (t, TRUE);
+            return;
+        }
 
-        g_string_free (t, TRUE);
-        return;
+        for (i = 0; i < size - 1; i++)
+            if (t->str[i] == '\n'
+                && strchr (NO_FORMAT_CHARS_START "\t ", t->str[i + 1]) != NULL)
+            {
+                g_string_free (t, TRUE);
+                return;
+            }
     }
 
     t2 = (unsigned char *) g_string_free (t, FALSE);
