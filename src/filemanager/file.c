@@ -1235,8 +1235,7 @@ panel_compute_totals (const WPanel * panel, void *ui, compute_dir_size_callback 
                       size_t * ret_count, uintmax_t * ret_total, gboolean compute_symlinks)
 {
     int i;
-    size_t lc_count = 0;
-    uintmax_t lc_total = 0;
+    size_t dir_count = 0;
 
     for (i = 0; i < panel->dir.len; i++)
     {
@@ -1251,30 +1250,21 @@ panel_compute_totals (const WPanel * panel, void *ui, compute_dir_size_callback 
         {
             vfs_path_t *p;
             FileProgressStatus status;
-            size_t lc_dir_count = 0;
-            size_t lc_marked = 0;
-            uintmax_t lc_total2 = 0;
 
             p = vfs_path_append_new (panel->cwd_vpath, panel->dir.list[i].fname, NULL);
-            status = compute_dir_size (p, ui, cback, &lc_dir_count, &lc_marked, &lc_total2,
+            status = compute_dir_size (p, ui, cback, &dir_count, ret_count, ret_total,
                                        compute_symlinks);
             vfs_path_free (p);
 
             if (status != FILE_CONT)
                 return status;
-
-            lc_count += lc_marked;
-            lc_total += lc_total2;
         }
         else
         {
-            lc_count++;
-            lc_total += (uintmax_t) s->st_size;
+            (*ret_count)++;
+            *ret_total += (uintmax_t) s->st_size;
         }
     }
-
-    *ret_count = lc_count;
-    *ret_total = lc_total;
 
     return FILE_CONT;
 }
