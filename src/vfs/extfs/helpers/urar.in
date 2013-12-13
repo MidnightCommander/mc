@@ -50,7 +50,7 @@ mcrar5fs_list ()
         sub ("^ ", "", $2);
     }
 
-    $1 ~ / *Name$/ {
+    $1 ~ /^ *Name$/ {
         ### next file
         name = mtime = size = attrs = "";
         delete date;
