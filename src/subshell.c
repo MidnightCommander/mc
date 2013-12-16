@@ -892,7 +892,7 @@ init_subshell (void)
 
     case ZSH:
         g_snprintf (precmd, sizeof (precmd),
-                    " precmd(){ pwd>&%d;kill -STOP $$ }\n", subshell_pipe[WRITE]);
+                    " _mc_precmd(){ pwd>&%d;kill -STOP $$ }; precmd_functions+=_mc_precmd\n", subshell_pipe[WRITE]);
         break;
 
     case TCSH:
