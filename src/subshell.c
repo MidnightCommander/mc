@@ -1233,6 +1233,17 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt)
         }
     }
 
+    /* Really escape Zsh history */
+    if (subshell_type == ZSH)
+    {
+        /* Per Zsh documentation last command prefixed with space lingers in the internal history
+         * until the next command is entered before it vanishes. To make it vanish right away,
+         * type a space and press return. */
+        write_all (mc_global.tty.subshell_pty, " \n", 2);
+        subshell_state = RUNNING_COMMAND;
+        feed_subshell (QUIETLY, FALSE);
+    }
+
     update_subshell_prompt = FALSE;
 
     g_free (pcwd);
