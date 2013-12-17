@@ -814,7 +814,7 @@ panels_split_less (void)
 void
 setup_cmdline (void)
 {
-    int prompt_len;
+    int prompt_width;
     int y;
     char *tmp_prompt = (char *) mc_prompt;
 
@@ -826,12 +826,15 @@ setup_cmdline (void)
     }
 #endif
 
-    prompt_len = str_term_width1 (tmp_prompt);
+    prompt_width = str_term_width1 (tmp_prompt);
 
     /* Check for prompts too big */
-    if (COLS > 8 && prompt_len > COLS - 8)
+    if (COLS > 8 && prompt_width > COLS - 8)
     {
-        prompt_len = COLS - 8;
+        int prompt_len;
+
+        prompt_width = COLS - 8;
+        prompt_len = str_offset_to_pos (tmp_prompt, prompt_width);
         tmp_prompt[prompt_len] = '\0';
     }
 
@@ -846,9 +849,9 @@ setup_cmdline (void)
 
     y = LINES - 1 - mc_global.keybar_visible;
 
-    widget_set_size (WIDGET (the_prompt), y, 0, 1, prompt_len);
+    widget_set_size (WIDGET (the_prompt), y, 0, 1, prompt_width);
     label_set_text (the_prompt, mc_prompt);
-    widget_set_size (WIDGET (cmdline), y, prompt_len, 1, COLS - prompt_len);
+    widget_set_size (WIDGET (cmdline), y, prompt_width, 1, COLS - prompt_width);
 }
 
 /* --------------------------------------------------------------------------------------------- */
