@@ -57,11 +57,12 @@
 
 /*** global variables ****************************************************************************/
 
+char *option_stop_format_chars = NULL;
+
 /*** file scope macro definitions ****************************************************************/
 
 #define tab_width option_tab_spacing
 
-#define NO_FORMAT_CHARS_START "-+*\\,.;:&>"
 #define FONT_MEAN_WIDTH 1
 
 /*** file scope type declarations ****************************************************************/
@@ -112,7 +113,7 @@ bad_line_start (const edit_buffer_t * buf, off_t p)
                  && edit_buffer_get_byte (buf, p + 2) == '-');
     }
 
-    return (strchr (NO_FORMAT_CHARS_START, c) != NULL);
+    return (option_stop_format_chars != NULL && strchr (option_stop_format_chars, c) != NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -497,20 +498,29 @@ format_paragraph (WEdit * edit, gboolean force)
     if (!force)
     {
         off_t i;
+        char *stop_format_chars;
 
-        if (strchr (NO_FORMAT_CHARS_START, t->str[0]) != NULL)
+        if (option_stop_format_chars != NULL
+            && strchr (option_stop_format_chars, t->str[0]) != NULL)
         {
             g_string_free (t, TRUE);
             return;
         }
 
+        if (option_stop_format_chars == NULL || *option_stop_format_chars == '\0')
+            stop_format_chars = g_strdup ("\t");
+        else
+            stop_format_chars = g_strconcat (option_stop_format_chars, "\t", (char *) NULL);
+
         for (i = 0; i < size - 1; i++)
-            if (t->str[i] == '\n'
-                && strchr (NO_FORMAT_CHARS_START "\t ", t->str[i + 1]) != NULL)
+            if (t->str[i] == '\n' && strchr (stop_format_chars, t->str[i + 1]) != NULL)
             {
+                g_free (stop_format_chars);
                 g_string_free (t, TRUE);
                 return;
             }
+
+        g_free (stop_format_chars);
     }
 
     t2 = (unsigned char *) g_string_free (t, FALSE);
