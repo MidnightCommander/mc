@@ -91,6 +91,9 @@ int search_create_bookmark = FALSE;
 /* queries on a save */
 int edit_confirm_save = 1;
 
+/* whether we need to drop selection on copy to buffer */
+int option_drop_selection_on_copy = 1;
+
 /*** file scope macro definitions ****************************************************************/
 
 #define space_width 1
@@ -2898,6 +2901,9 @@ edit_copy_to_X_buf_cmd (WEdit * edit)
     }
     /* try use external clipboard utility */
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL);
+
+    if (option_drop_selection_on_copy)
+        edit_mark_cmd (edit, TRUE);
 
     return TRUE;
 }
