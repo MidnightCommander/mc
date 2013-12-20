@@ -47,7 +47,6 @@
 #include <sys/ioctl.h>
 #endif
 #include <termios.h>
-#include <unistd.h>
 
 #ifdef HAVE_STROPTS_H
 #include <stropts.h>            /* For I_PUSH */
@@ -55,6 +54,7 @@
 
 #include "lib/global.h"
 
+#include "lib/unixcompat.h"
 #include "lib/tty/tty.h"        /* LINES */
 #include "lib/tty/key.h"        /* XCTRL */
 #include "lib/vfs/vfs.h"
@@ -92,18 +92,6 @@ gboolean update_subshell_prompt = FALSE;
 
 #ifndef WIFEXITED
 #define WIFEXITED(stat_val) (((stat_val) & 255) == 0)
-#endif
-
-#ifndef STDIN_FILENO
-#define STDIN_FILENO 0
-#endif
-
-#ifndef STDOUT_FILENO
-#define STDOUT_FILENO 1
-#endif
-
-#ifndef STDERR_FILENO
-#define STDERR_FILENO 2
 #endif
 
 /* Initial length of the buffer for the subshell's prompt */

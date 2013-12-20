@@ -58,11 +58,12 @@
 #ifdef HAVE_GET_PROCESS_STATS
 #include <sys/procstats.h>
 #endif
-#include <unistd.h>
 #include <pwd.h>
 #include <grp.h>
 
 #include "lib/global.h"
+
+#include "lib/unixcompat.h"
 #include "lib/vfs/vfs.h"        /* VFS_ENCODING_PREFIX */
 #include "lib/strutil.h"        /* str_move() */
 #include "lib/util.h"
@@ -516,8 +517,8 @@ open_error_pipe (void)
     {
         message (D_NORMAL, _("Warning"), _("Pipe failed"));
     }
-    old_error = dup (2);
-    if (old_error < 0 || close (2) || dup (error_pipe[1]) != 2)
+    old_error = dup (STDERR_FILENO);
+    if (old_error < 0 || close (STDERR_FILENO) != 0 || dup (error_pipe[1]) != STDERR_FILENO)
     {
         message (D_NORMAL, _("Warning"), _("Dup failed"));
 
@@ -577,7 +578,7 @@ close_error_pipe (int error, const char *text)
         title = _("Warning");
     if (old_error >= 0)
     {
-        if (dup2 (old_error, 2) == -1)
+        if (dup2 (old_error, STDERR_FILENO) == -1)
         {
             if (error < 0)
                 error = D_ERROR;

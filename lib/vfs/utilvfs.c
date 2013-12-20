@@ -38,7 +38,6 @@
 #include <grp.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
 
 #include "lib/global.h"
 #include "lib/unixcompat.h"

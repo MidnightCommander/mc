@@ -332,11 +332,11 @@ fish_pipeopen (struct vfs_s_super *super, const char *path, const char *argv[])
     }
     else
     {
-        res = dup2 (fileset1[0], 0);
+        res = dup2 (fileset1[0], STDIN_FILENO);
         close (fileset1[0]);
         close (fileset1[1]);
-        res = dup2 (fileset2[1], 1);
-        close (2);
+        res = dup2 (fileset2[1], STDOUT_FILENO);
+        close (STDERR_FILENO);
         /* stderr to /dev/null */
         res = open ("/dev/null", O_WRONLY);
         close (fileset2[0]);

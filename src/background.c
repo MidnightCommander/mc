@@ -43,10 +43,11 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>           /* waitpid() */
-#include <unistd.h>
 #include <fcntl.h>
 
 #include "lib/global.h"
+
+#include "lib/unixcompat.h"
 #include "lib/tty/key.h"        /* add_select_channel(), delete_select_channel() */
 #include "lib/widget.h"         /* message() */
 #include "lib/event-types.h"
@@ -547,18 +548,18 @@ do_background (file_op_context_t * ctx, char *info)
         top_dlg = NULL;
 
         /* Make stdin/stdout/stderr point somewhere */
-        close (0);
-        close (1);
-        close (2);
+        close (STDIN_FILENO);
+        close (STDOUT_FILENO);
+        close (STDERR_FILENO);
 
         nullfd = open ("/dev/null", O_RDWR);
         if (nullfd != -1)
         {
-            while (dup2 (nullfd, 0) == -1 && errno == EINTR)
+            while (dup2 (nullfd, STDIN_FILENO) == -1 && errno == EINTR)
                 ;
-            while (dup2 (nullfd, 1) == -1 && errno == EINTR)
+            while (dup2 (nullfd, STDOUT_FILENO) == -1 && errno == EINTR)
                 ;
-            while (dup2 (nullfd, 2) == -1 && errno == EINTR)
+            while (dup2 (nullfd, STDERR_FILENO) == -1 && errno == EINTR)
                 ;
         }
 

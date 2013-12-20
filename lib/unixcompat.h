@@ -23,6 +23,8 @@
 #include <time.h>               /* AIX for tm */
 #endif
 
+#include <unistd.h>
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #ifndef major
@@ -38,6 +40,18 @@
 #ifndef makedev
 #warning makedev() is undefined. Device numbers will not be shown correctly.
 #define makedev(major,minor) ((((major) & 0xff) << 8) | ((minor) & 0xff))
+#endif
+
+#ifndef STDIN_FILENO
+#define STDIN_FILENO 0
+#endif
+
+#ifndef STDOUT_FILENO
+#define STDOUT_FILENO 1
+#endif
+
+#ifndef STDERR_FILENO
+#define STDERR_FILENO 2
 #endif
 
 /*** enums ***************************************************************************************/

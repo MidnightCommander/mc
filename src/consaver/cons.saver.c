@@ -67,7 +67,8 @@
 #endif
 #include <fcntl.h>
 #include <termios.h>
-#include <unistd.h>
+
+#include "lib/unixcompat.h"     /* STDERR_FILENO */
 
 #define LINUX_CONS_SAVER_C
 #include "cons.saver.h"
@@ -164,7 +165,7 @@ main (int argc, char **argv)
     const char *p, *q;
     struct winsize winsz;
 
-    close (2);
+    close (STDERR_FILENO);
 
     if (argc != 2)
         die ();
