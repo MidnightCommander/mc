@@ -1,10 +1,12 @@
 Version 4.8.11
 
 - Core
+
   * Live update of panels size when editing layout (#3060)
   * Support "Compute totals" option in move file operation (#2075)
 
 - VFS
+
   * rpm extfs
     - show dependency version (#2812)
     - support tar payload (#3064)
@@ -12,14 +14,17 @@ Version 4.8.11
     - add support for PREINPROG/POSTINPROG/PREUNPROG/POSTUNPROG, VERIFYSCRIPTPROG and TRIGGERSCRIPTS/TRIGGERSCRIPTPROG tags (#1588)
 
 - Editor
+
   * Support "bracketed paste mode" of xterm (#2661)
   * Clarify Java syntax highlighting (#3057)
 
 - Misc
+
   * Print warnings about unknown '--with-' / '--enable-' configure options (#3029)
   * Code cleanup and refactoring (#3051, #3066)
 
 - Fixes
+
   * FTBFS on GNU Hurd (#3053, #3071)
   * Segfault while moving files (#3059, #3105)
   * Broken handling of mc command line arguments (#3047)
@@ -44,6 +49,7 @@ Version 4.8.11
   * Bright colors are used as background colors in 16-color skins (#3050)
   * Various defects in documentation (#3052, #3092)
 
+
 Version 4.8.10
 
 - Core
@@ -52,6 +58,7 @@ Version 4.8.10
     * Behavior of the 'Right' key in the 'Directory hotlist' was changed: now 'Right' key is used only to enter into the group (#3045)
 
 - Misc
+
     * Code cleanup (#3035)
 
 - Fixes
@@ -64,6 +71,7 @@ Version 4.8.10
     * mcedit: file descriptor leak (#3040)
     * mcedit: paragraph format doesn't respect multibyte characters (#2713)
     * Crash after entering a wrong SFTP password (#3036)
+
 
 Version 4.8.9
 
@@ -207,6 +215,7 @@ Version 4.8.7
 Version 4.8.6
 
 - Fixes
+
     * mcedit: two-columns extra offset of cursor after tab character (#2881)
     * diffviewer: cannot open file if name contains '$' (#2873)
 
