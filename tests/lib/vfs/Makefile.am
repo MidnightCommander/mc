@@ -26,6 +26,7 @@ TESTS = \
 	vfs_path_from_str_flags \
 	vfs_path_string_convert \
 	vfs_prefix_to_class \
+	vfs_setup_cwd \
 	vfs_split \
 	vfs_s_get_path
 
@@ -65,6 +66,9 @@ tempdir_SOURCES = \
 
 vfs_get_encoding_SOURCES = \
 	vfs_get_encoding.c
+
+vfs_setup_cwd_SOURCES = \
+	vfs_setup_cwd.c
 
 vfs_split_SOURCES = \
 	vfs_split.c
