@@ -920,10 +920,11 @@ load_setup (void)
 {
     const char *profile;
     size_t i;
-    char *buffer;
     const char *kt;
 
 #ifdef HAVE_CHARSET
+    char *buffer;
+
     load_codepages_list ();
 #endif /* HAVE_CHARSET */
 
