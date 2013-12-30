@@ -616,8 +616,7 @@ warn_same_file (const char *fmt, const char *a, const char *b)
     union
     {
         void *p;
-          FileProgressStatus (*f) (enum OperationMode, const char *fmt,
-                                   const char *a, const char *b);
+        FileProgressStatus (*f) (enum OperationMode, const char *fmt, const char *a, const char *b);
     } pntr;
 /* *INDENT-ON* */
 
@@ -667,10 +666,8 @@ real_do_file_error (enum OperationMode mode, const char *error)
 static FileProgressStatus
 real_query_recursive (file_op_context_t * ctx, enum OperationMode mode, const char *s)
 {
-
     if (ctx->recursive_result < RECURSIVE_ALWAYS)
     {
-
         const char *msg;
         char *text;
 
@@ -713,11 +710,14 @@ real_query_recursive (file_op_context_t * ctx, enum OperationMode mode, const ch
 static FileProgressStatus
 do_file_error (const char *str)
 {
+/* *INDENT-OFF* */
     union
     {
         void *p;
-          FileProgressStatus (*f) (enum OperationMode, const char *);
+        FileProgressStatus (*f) (enum OperationMode, const char *);
     } pntr;
+/* *INDENT-ON* */
+
     pntr.f = real_do_file_error;
 
     if (mc_global.we_are_background)
@@ -731,11 +731,14 @@ do_file_error (const char *str)
 static FileProgressStatus
 query_recursive (file_op_context_t * ctx, const char *s)
 {
+/* *INDENT-OFF* */
     union
     {
         void *p;
-          FileProgressStatus (*f) (file_op_context_t *, enum OperationMode, const char *);
+        FileProgressStatus (*f) (file_op_context_t *, enum OperationMode, const char *);
     } pntr;
+/* *INDENT-ON* */
+
     pntr.f = real_query_recursive;
 
     if (mc_global.we_are_background)
@@ -750,12 +753,15 @@ static FileProgressStatus
 query_replace (file_op_context_t * ctx, const char *destname, struct stat *_s_stat,
                struct stat *_d_stat)
 {
+/* *INDENT-OFF* */
     union
     {
         void *p;
-          FileProgressStatus (*f) (file_op_context_t *, enum OperationMode, const char *,
-                                   struct stat *, struct stat *);
+        FileProgressStatus (*f) (file_op_context_t *, enum OperationMode, const char *,
+                                 struct stat *, struct stat *);
     } pntr;
+/* *INDENT-ON* */
+
     pntr.f = file_progress_real_query_replace;
 
     if (mc_global.we_are_background)
