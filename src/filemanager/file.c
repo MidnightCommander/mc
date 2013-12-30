@@ -2944,7 +2944,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                         value = transform_error;
                     else
                     {
-                        char *temp2, *temp3, *repl_dest, *source_with_path_str;
+                        char *temp2, *repl_dest, *source_with_path_str;
 
                         repl_dest = mc_search_prepare_replace_str2 (ctx->search_handle, dest);
                         if (ctx->search_handle->error != MC_SEARCH_E_OK)
@@ -2959,9 +2959,8 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                         g_free (repl_dest);
                         source_with_path_str =
                             strutils_shell_unescape (vfs_path_as_str (source_with_vpath));
-                        temp3 = temp2;
-                        temp2 = strutils_shell_unescape (temp2);
-                        g_free (temp3);
+                        temp = strutils_shell_unescape (temp2);
+                        g_free (temp2);
 
                         switch (operation)
                         {
@@ -2975,18 +2974,18 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                                 vfs_path_free (vpath);
                             }
                             if (S_ISDIR (src_stat.st_mode))
-                                value = copy_dir_dir (tctx, ctx, source_with_path_str, temp2,
+                                value = copy_dir_dir (tctx, ctx, source_with_path_str, temp,
                                                       TRUE, FALSE, FALSE, NULL);
                             else
-                                value = copy_file_file (tctx, ctx, source_with_path_str, temp2);
+                                value = copy_file_file (tctx, ctx, source_with_path_str, temp);
                             dest_dirs = free_linklist (dest_dirs);
                             break;
 
                         case OP_MOVE:
                             if (S_ISDIR (src_stat.st_mode))
-                                value = move_dir_dir (tctx, ctx, source_with_path_str, temp2);
+                                value = move_dir_dir (tctx, ctx, source_with_path_str, temp);
                             else
-                                value = move_file_file (tctx, ctx, source_with_path_str, temp2);
+                                value = move_file_file (tctx, ctx, source_with_path_str, temp);
                             break;
 
                         default:
@@ -2994,7 +2993,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                             abort ();
                         }
 
-                        g_free (temp2);
+                        g_free (temp);
                     }
                 }               /* Copy or move operation */
 
