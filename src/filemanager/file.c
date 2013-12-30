@@ -2252,7 +2252,7 @@ copy_dir_dir (FileOpTotalContext * tctx, file_op_context_t * ctx, const char *s,
 FileProgressStatus
 move_dir_dir (FileOpTotalContext * tctx, file_op_context_t * ctx, const char *s, const char *d)
 {
-    struct stat sbuf, dbuf, destbuf;
+    struct stat sbuf, dbuf;
     FileProgressStatus return_status;
     gboolean move_over = FALSE;
     gboolean dstat_ok;
@@ -2298,7 +2298,7 @@ move_dir_dir (FileOpTotalContext * tctx, file_op_context_t * ctx, const char *s,
 
     /* Check if the user inputted an existing dir */
   retry_dst_stat:
-    if (mc_stat (dst_vpath, &destbuf) == 0)
+    if (mc_stat (dst_vpath, &dbuf) == 0)
     {
         if (move_over)
         {
@@ -2312,7 +2312,7 @@ move_dir_dir (FileOpTotalContext * tctx, file_op_context_t * ctx, const char *s,
             return_status = FILE_SKIPALL;
         else
         {
-            if (S_ISDIR (destbuf.st_mode))
+            if (S_ISDIR (dbuf.st_mode))
                 return_status = file_error (_("Cannot overwrite directory \"%s\"\n%s"), d);
             else
                 return_status = file_error (_("Cannot overwrite file \"%s\"\n%s"), d);
