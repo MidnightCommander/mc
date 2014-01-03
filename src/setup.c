@@ -101,7 +101,7 @@ int confirm_overwrite = 1;
 /* Asks for confirmation before executing a program by pressing enter */
 int confirm_execute = 0;
 /* Asks for confirmation before leaving the program */
-int confirm_exit = 1;
+int confirm_exit = 0;
 
 /* If true, at startup the user-menu is invoked */
 int auto_menu = 0;
