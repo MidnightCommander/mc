@@ -293,13 +293,35 @@ main (int argc, char *argv[])
     vfs_init ();
     vfs_plugins_init ();
 
+    load_setup ();
+
+    /* Must be done after load_setup because depends on mc_global.vfs.cd_symlinks */
+    vfs_setup_work_dir ();
+
+    /* Resolve the other_dir panel option. Must be done after vfs_setup_work_dir */
+    {
+        char *buffer;
+        vfs_path_t *vpath;
+
+        buffer = mc_config_get_string (mc_panels_config, "Dirs", "other_dir", ".");
+        vpath = vfs_path_from_str (buffer);
+        if (vfs_file_is_local (vpath))
+            saved_other_dir = buffer;
+        else
+            g_free (buffer);
+        vfs_path_free (vpath);
+    }
+
     /* Set up temporary directory after VFS initialization */
     mc_tmpdir ();
 
-    /* do this after vfs initialization due to mc_setctl() call in mc_setup_by_args() */
+    /* do this after vfs initialization and vfs working directory setup
+       due to mc_setctl() and mcedit_arg_vpath_new() calls in mc_setup_by_args() */
     if (!mc_setup_by_args (argc, argv, &error))
     {
         vfs_shut ();
+        done_setup ();
+        g_free (saved_other_dir);
         mc_event_deinit (NULL);
         goto startup_exit_falure;
     }
@@ -336,25 +358,6 @@ main (int argc, char *argv[])
     /* Must be done before init_subshell, to set up the terminal size: */
     /* FIXME: Should be removed and LINES and COLS computed on subshell */
     tty_init (!mc_args__nomouse, mc_global.tty.xterm_flag);
-
-    load_setup ();
-
-    /* Must be done after load_setup because depends on mc_global.vfs.cd_symlinks */
-    vfs_setup_work_dir ();
-
-    /* Resolve the other_dir panel option. Must be done after vfs_setup_work_dir */
-    {
-        char *buffer;
-        vfs_path_t *vpath;
-
-        buffer = mc_config_get_string (mc_panels_config, "Dirs", "other_dir", ".");
-        vpath = vfs_path_from_str (buffer);
-        if (vfs_file_is_local (vpath))
-            saved_other_dir = buffer;
-        else
-            g_free (buffer);
-        vfs_path_free (vpath);
-    }
 
     /* start check mc_global.display_codepage and mc_global.source_codepage */
     check_codeset ();
