@@ -1,7 +1,7 @@
 /*
    Virtual File System garbage collection code
 
-   Copyright (C) 2003, 2004, 2005, 2007, 2011
+   Copyright (C) 2003-2014
    The Free Software Foundation, Inc.
 
    Written by:

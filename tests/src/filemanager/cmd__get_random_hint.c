@@ -2,7 +2,7 @@
    src/filemanager - filemanager functions.
    Tests for getting random hints.
 
-   Copyright (C) 2013
+   Copyright (C) 2013-2014
    The Free Software Foundation, Inc.
 
    Written by:

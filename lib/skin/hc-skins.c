@@ -2,7 +2,7 @@
    Skins engine.
    Set of hardcoded skins
 
-   Copyright (C) 2009, 2011, 2012
+   Copyright (C) 2009-2014
    The Free Software Foundation, Inc.
 
    Written by:

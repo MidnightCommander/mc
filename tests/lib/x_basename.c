@@ -1,7 +1,7 @@
 /*
    lib/vfs - x_basename() function testing
 
-   Copyright (C) 2011, 2013
+   Copyright (C) 2011-2014
    The Free Software Foundation, Inc.
 
    Written by:

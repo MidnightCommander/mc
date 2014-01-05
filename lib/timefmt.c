@@ -1,8 +1,7 @@
 /*
    Time formatting functions
 
-   Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
-   2004, 2005, 2007, 2009, 2010, 2011
+   Copyright (C) 1994-2014
    The Free Software Foundation, Inc.
 
    Written by:

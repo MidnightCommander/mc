@@ -1,8 +1,7 @@
 /*
    Editor initialisation and callback handler.
 
-   Copyright (C) 1996, 1997, 1998, 2001, 2002, 2003, 2004, 2005, 2006,
-   2007, 2011, 2012, 2013
+   Copyright (C) 1996-2014
    The Free Software Foundation, Inc.
 
    Written by:
@@ -145,7 +144,7 @@ edit_about (void)
         QUICK_LABEL (N_("A user friendly text editor\n"
                         "written for the Midnight Commander."), NULL),
         QUICK_SEPARATOR (FALSE),
-        QUICK_LABEL (N_("Copyright (C) 1996-2013 the Free Software Foundation"), NULL),
+        QUICK_LABEL (N_("Copyright (C) 1996-2014 the Free Software Foundation"), NULL),
         QUICK_START_BUTTONS (TRUE, TRUE),
             QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
         QUICK_END

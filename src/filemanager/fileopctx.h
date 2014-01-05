@@ -5,12 +5,6 @@
  *  \author Miguel de Icaza <miguel@nuclecu.unam.mx>
  */
 
-/* File operation contexts for the Midnight Commander
- *
- * Copyright (C) 1998 Free Software Foundation, Inc.
- *
- */
-
 #ifndef MC__FILEOPCTX_H
 #define MC__FILEOPCTX_H
 

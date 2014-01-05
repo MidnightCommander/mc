@@ -1,5 +1,5 @@
 /*
-   Copyright (C) 2007, 2010, 2011, 2012, 2013
+   Copyright (C) 2007-2014
    The Free Software Foundation, Inc.
 
    Written by:

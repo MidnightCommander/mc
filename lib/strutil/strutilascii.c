@@ -1,7 +1,7 @@
 /*
    ASCII strings utilities
 
-   Copyright (C) 2007, 2011, 2013
+   Copyright (C) 2007-2014
    The Free Software Foundation, Inc.
 
    Written by:
