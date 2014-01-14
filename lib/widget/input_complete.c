@@ -1050,7 +1050,7 @@ query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
                 new_end = str_get_prev_char (&input->buffer[end]) - input->buffer;
 
-                for (i = 0, e = LISTBOX (h->current->data)->list;
+                for (i = 0, e = listbox_get_first_link (LISTBOX (h->current->data));
                      e != NULL; i++, e = g_list_next (e))
                 {
                     WLEntry *le = LENTRY (e->data);
@@ -1102,7 +1102,7 @@ query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                     return MSG_HANDLED;
                 }
 
-                for (i = 0, e = LISTBOX (h->current->data)->list;
+                for (i = 0, e = listbox_get_first_link (LISTBOX (h->current->data));
                      e != NULL; i++, e = g_list_next (e))
                 {
                     WLEntry *le = LENTRY (e->data);

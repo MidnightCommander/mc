@@ -368,7 +368,7 @@ history_show (GList ** history, Widget * widget, int current)
 
     /* get modified history from dialog */
     z = NULL;
-    for (hi = query_list->list; hi != NULL; hi = g_list_next (hi))
+    for (hi = listbox_get_first_link (query_list); hi != NULL; hi = g_list_next (hi))
     {
         WLEntry *entry = LENTRY (hi->data);
 

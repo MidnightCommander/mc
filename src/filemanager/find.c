@@ -38,6 +38,7 @@
 #include <string.h>
 #include <fcntl.h>
 #include <sys/stat.h>
+#include <sys/time.h>
 
 #include "lib/global.h"
 
@@ -65,6 +66,9 @@
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/
+
+#define MAX_REFRESH_INTERVAL (G_USEC_PER_SEC / 20)      /* 50 ms */
+#define MIN_REFRESH_FILE_SIZE (256 * 1024)      /* 256 KB */
 
 /*** file scope type declarations ****************************************************************/
 
@@ -148,6 +152,8 @@ static char *content_pattern = NULL;    /* pattern to search inside files; if
 static unsigned long matches;   /* Number of matches */
 static gboolean is_start = FALSE;       /* Status of the start/stop toggle button */
 static char *old_dir = NULL;
+
+static struct timeval last_refresh;
 
 /* Where did we stop */
 static gboolean resuming;
@@ -929,62 +935,6 @@ find_add_match (const char *dir, const char *file)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * get_line_at:
- *
- * Returns malloced null-terminated line from file file_fd.
- * Input is buffered in buf_size long buffer.
- * Current pos in buf is stored in pos.
- * n_read - number of read chars.
- * has_newline - is there newline ?
- */
-
-static char *
-get_line_at (int file_fd, char *buf, int buf_size, int *pos, int *n_read, gboolean * has_newline)
-{
-    char *buffer = NULL;
-    int buffer_size = 0;
-    char ch = 0;
-    int i = 0;
-
-    while (TRUE)
-    {
-        if (*pos >= *n_read)
-        {
-            *pos = 0;
-            *n_read = mc_read (file_fd, buf, buf_size);
-            if (*n_read <= 0)
-                break;
-        }
-
-        ch = buf[(*pos)++];
-        if (ch == '\0')
-        {
-            /* skip possible leading zero(s) */
-            if (i == 0)
-                continue;
-            break;
-        }
-
-        if (i >= buffer_size - 1)
-            buffer = g_realloc (buffer, buffer_size += 80);
-
-        /* Strip newline */
-        if (ch == '\n')
-            break;
-
-        buffer[i++] = ch;
-    }
-
-    *has_newline = (ch != '\0');
-
-    if (buffer != NULL)
-        buffer[i] = '\0';
-
-    return buffer;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 static FindProgressStatus
 check_find_events (WDialog * h)
@@ -1028,10 +978,14 @@ static gboolean
 search_content (WDialog * h, const char *directory, const char *filename)
 {
     struct stat s;
-    char buffer[BUF_4K];
+    char buffer[BUF_4K];        /* raw input buffer */
     int file_fd;
     gboolean ret_val = FALSE;
     vfs_path_t *vpath;
+    struct timeval tv;
+    time_t seconds;
+    suseconds_t useconds;
+    gboolean status_updated = FALSE;
 
     vpath = vfs_path_build_filename (directory, filename, (char *) NULL);
 
@@ -1047,10 +1001,29 @@ search_content (WDialog * h, const char *directory, const char *filename)
     if (file_fd == -1)
         return FALSE;
 
-    g_snprintf (buffer, sizeof (buffer), _("Grepping in %s"), filename);
-    status_update (str_trunc (buffer, WIDGET (h)->cols - 8));
+    /* get time elapsed from last refresh */
+    if (gettimeofday (&tv, NULL) == -1)
+    {
+        tv.tv_sec = 0;
+        tv.tv_usec = 0;
+        last_refresh = tv;
+    }
+    seconds = tv.tv_sec - last_refresh.tv_sec;
+    useconds = tv.tv_usec - last_refresh.tv_usec;
+    if (useconds < 0)
+    {
+        seconds--;
+        useconds += G_USEC_PER_SEC;
+    }
 
-    mc_refresh ();
+    if (s.st_size >= MIN_REFRESH_FILE_SIZE || seconds > 0 || useconds > MAX_REFRESH_INTERVAL)
+    {
+        g_snprintf (buffer, sizeof (buffer), _("Grepping in %s"), filename);
+        status_update (str_trunc (buffer, WIDGET (h)->cols - 8));
+        mc_refresh ();
+        last_refresh = tv;
+        status_updated = TRUE;
+    }
 
     tty_enable_interrupt_key ();
     tty_got_interrupt ();
@@ -1059,11 +1032,11 @@ search_content (WDialog * h, const char *directory, const char *filename)
         int line = 1;
         int pos = 0;
         int n_read = 0;
-        gboolean has_newline;
-        char *p = NULL;
         gboolean found = FALSE;
         gsize found_len;
         char result[BUF_MEDIUM];
+        char *strbuf = NULL;    /* buffer for fetched string */
+        int strbuf_size = 0;
 
         if (resuming)
         {
@@ -1072,25 +1045,81 @@ search_content (WDialog * h, const char *directory, const char *filename)
             line = last_line;
             pos = last_pos;
         }
-        while (!ret_val
-               && (p = get_line_at (file_fd, buffer, sizeof (buffer),
-                                    &pos, &n_read, &has_newline)) != NULL)
+
+        while (!ret_val)
         {
-            if (!found          /* Search in binary line once */
-                && mc_search_run (search_content_handle,
-                                  (const void *) p, 0, strlen (p), &found_len))
+            char ch = '\0';
+            int i = 0;
+
+            /* read to buffer and get line from there */
+            while (TRUE)
             {
+                if (pos >= n_read)
+                {
+                    pos = 0;
+                    n_read = mc_read (file_fd, buffer, sizeof (buffer));
+                    if (n_read <= 0)
+                        break;
+                }
+
+                ch = buffer[pos++];
+                if (ch == '\0')
+                {
+                    /* skip possible leading zero(s) */
+                    if (i == 0)
+                        continue;
+                    break;
+                }
+
+                if (i >= strbuf_size - 1)
+                {
+                    strbuf_size += 128;
+                    strbuf = g_realloc (strbuf, strbuf_size);
+                }
+
+                /* Strip newline */
+                if (ch == '\n')
+                    break;
+
+                strbuf[i++] = ch;
+            }
+
+            if (i == 0)
+            {
+                if (ch == '\0')
+                    break;
+
+                /* if (ch == '\n'): do not search in empty strings */
+                goto skip_search;
+            }
+
+            strbuf[i] = '\0';
+
+            if (!found          /* Search in binary line once */
+                && mc_search_run (search_content_handle, (const void *) strbuf, 0, i, &found_len))
+            {
+                if (!status_updated)
+                {
+                    /* if we add results for a file, we have to ensure that
+                       name of this file is shown in status bar */
+                    g_snprintf (result, sizeof (result), _("Grepping in %s"), filename);
+                    status_update (str_trunc (result, WIDGET (h)->cols - 8));
+                    mc_refresh ();
+                    last_refresh = tv;
+                    status_updated = TRUE;
+                }
+
                 g_snprintf (result, sizeof (result), "%d:%s", line, filename);
                 find_add_match (directory, result);
                 found = TRUE;
             }
-            g_free (p);
 
             if (found && options.content_first_hit)
                 break;
 
-            if (has_newline)
+            if (ch == '\n')
             {
+              skip_search:
                 found = FALSE;
                 line++;
             }
@@ -1116,7 +1145,10 @@ search_content (WDialog * h, const char *directory, const char *filename)
                 }
             }
         }
+
+        g_free (strbuf);
     }
+
     tty_disable_interrupt_key ();
     mc_close (file_fd);
     return ret_val;
@@ -1710,7 +1742,8 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
 
         dir_list_init (list);
 
-        for (i = 0, entry = find_list->list; entry != NULL; i++, entry = g_list_next (entry))
+        for (i = 0, entry = listbox_get_first_link (find_list); entry != NULL;
+             i++, entry = g_list_next (entry))
         {
             const char *lc_filename = NULL;
             WLEntry *le = LENTRY (entry->data);
@@ -1816,6 +1849,9 @@ find_file (void)
 
         if (pattern[0] == '\0')
             break;              /* nothing search */
+
+        last_refresh.tv_sec = 0;
+        last_refresh.tv_usec = 0;
 
         dirname = filename = NULL;
         is_start = FALSE;
