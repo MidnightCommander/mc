@@ -598,6 +598,12 @@ Use
 .B spell_language = NONE
 to disable aspell support. Default value is 'en'. Option must located
 in the [Misc] section.
+.TP
+.I editor_stop_format_chars
+Set of characters to stop paragraph formatting. If one of those characters
+is found in the begin of line, that line and all following lines of paragraph
+will be untouched. Default value is
+"\fB-\fR\fB+\fR\fB*\fR\fB\\\fR\fB,\fR\fB.\fR\fB;\fR\fB:\fR\fB&\fR\fB>\fR".
 .SH MISCELLANEOUS
 You can use scanf search and replace to search and replace a C format
 string.  First take a look at the

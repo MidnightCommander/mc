@@ -376,6 +376,7 @@ static const struct
 #ifdef USE_INTERNAL_EDIT
     { "editor_backup_extension", &option_backup_ext, "~" },
     { "editor_filesize_threshold", &option_filesize_threshold, "64M" },
+    { "editor_stop_format_chars", &option_stop_format_chars, "-+*\\,.;:&>" },
 #endif
     { "mcview_eof", &mcview_show_eof, "" },
     {  NULL, NULL, NULL }
