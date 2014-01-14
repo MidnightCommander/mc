@@ -124,6 +124,9 @@ history_dlg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
     case MSG_RESIZE:
         return history_dlg_reposition (DIALOG (w));
 
+    case MSG_ACTION:
+        return dlg_broadcast_msg_to (DIALOG (w), msg, FALSE, 0);
+
     default:
         return dlg_default_callback (w, sender, msg, parm, data);
     }
@@ -356,6 +359,18 @@ history_show (GList ** history, Widget * widget, int current)
         listbox_set_list (query_list, hlist);
         if (current > 0)
             listbox_select_entry (query_list, current);
+    }
+
+    if (!mc_global.tty.slow_terminal)
+    {
+        WScrollBar *scrollbar;
+
+        scrollbar = scrollbar_new (WIDGET (query_list), SCROLLBAR_VERTICAL);
+        scrollbar_set_current (scrollbar, &query_list->pos);
+        scrollbar_set_total (scrollbar, &query_list->count);
+        scrollbar_set_first_displayed (scrollbar, &query_list->top);
+
+        add_widget (query_dlg, scrollbar);
     }
 
     if (dlg_run (query_dlg) != B_CANCEL)

@@ -19,6 +19,7 @@ libmcwidget_la_SOURCES = \
 	menu.c menu.h \
 	quick.c quick.h \
 	radio.c radio.h \
+	scrollbar.c scrollbar.h \
 	widget-common.c widget-common.h \
 	wtools.c wtools.h
 

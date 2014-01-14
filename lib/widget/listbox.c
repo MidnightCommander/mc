@@ -81,44 +81,6 @@ listbox_entry_free (void *data)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-listbox_drawscroll (WListbox * l)
-{
-    Widget *w = WIDGET (l);
-    int max_line = w->lines - 1;
-    int line = 0;
-    int i;
-
-    /* Are we at the top? */
-    widget_move (w, 0, w->cols);
-    if (l->top == 0)
-        tty_print_one_vline (TRUE);
-    else
-        tty_print_char ('^');
-
-    /* Are we at the bottom? */
-    widget_move (w, max_line, w->cols);
-    if ((l->top + w->lines == l->count) || (w->lines >= l->count))
-        tty_print_one_vline (TRUE);
-    else
-        tty_print_char ('v');
-
-    /* Now draw the nice relative pointer */
-    if (l->count != 0)
-        line = 1 + ((l->pos * (w->lines - 2)) / l->count);
-
-    for (i = 1; i < max_line; i++)
-    {
-        widget_move (w, i, w->cols);
-        if (i != line)
-            tty_print_one_vline (TRUE);
-        else
-            tty_print_char ('*');
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
 listbox_draw (WListbox * l, gboolean focused)
 {
     Widget *w = WIDGET (l);
@@ -172,12 +134,6 @@ listbox_draw (WListbox * l, gboolean focused)
     }
 
     l->cursor_y = sel_line;
-
-    if (l->scrollbar && (l->count > w->lines))
-    {
-        tty_setcolor (normalc);
-        listbox_drawscroll (l);
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -535,7 +491,6 @@ listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn 
     l->deletable = deletable;
     l->callback = callback;
     l->allow_duplicates = TRUE;
-    l->scrollbar = !mc_global.tty.slow_terminal;
     widget_want_hotkey (w, TRUE);
     widget_want_cursor (w, FALSE);
 
