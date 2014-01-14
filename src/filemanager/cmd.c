@@ -157,7 +157,7 @@ do_view_cmd (gboolean normal)
 
         file_idx = current_panel->selected;
         filename_vpath = vfs_path_from_str (current_panel->dir.list[file_idx].fname);
-        view_file (filename_vpath, normal, use_internal_view);
+        view_file (filename_vpath, normal, use_internal_view != 0);
         vfs_path_free (filename_vpath);
     }
 
@@ -169,17 +169,7 @@ do_view_cmd (gboolean normal)
 static inline void
 do_edit (const vfs_path_t * what_vpath)
 {
-    long line = 0;
-
-    if (!use_internal_edit)
-    {
-        long column;
-        off_t offset;
-
-        if (what_vpath != NULL && *(vfs_path_get_by_index (what_vpath, 0)->path) != '\0')
-            load_file_position (what_vpath, &line, &column, &offset, NULL);
-    }
-    do_edit_at_line (what_vpath, use_internal_edit, line);
+    edit_file_at_line (what_vpath, use_internal_edit != 0, 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -623,7 +613,8 @@ set_basic_panel_listing_to (int panel_index, int listing_mode)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-view_file_at_line (const vfs_path_t * filename_vpath, int plain_view, int internal, long start_line)
+view_file_at_line (const vfs_path_t * filename_vpath, gboolean plain_view, gboolean internal,
+                   long start_line)
 {
     gboolean ret = TRUE;
 
@@ -661,7 +652,7 @@ view_file_at_line (const vfs_path_t * filename_vpath, int plain_view, int intern
     {
         char view_entry[BUF_TINY];
 
-        if (start_line != 0)
+        if (start_line > 0)
             g_snprintf (view_entry, sizeof (view_entry), "View:%ld", start_line);
         else
             strcpy (view_entry, "View");
@@ -703,20 +694,9 @@ view_file_at_line (const vfs_path_t * filename_vpath, int plain_view, int intern
  */
 
 gboolean
-view_file (const vfs_path_t * filename_vpath, int plain_view, int internal)
+view_file (const vfs_path_t * filename_vpath, gboolean plain_view, gboolean internal)
 {
-    long line = 0;
-
-    if (!internal)
-    {
-        long column;
-        off_t offset;
-
-        if (filename_vpath != NULL && *(vfs_path_get_by_index (filename_vpath, 0)->path) != '\0')
-            load_file_position (filename_vpath, &line, &column, &offset, NULL);
-    }
-
-    return view_file_at_line (filename_vpath, plain_view, internal, line);
+    return view_file_at_line (filename_vpath, plain_view, internal, 0);
 }
 
 
@@ -742,12 +722,12 @@ view_file_cmd (void)
         input_expand_dialog (_("View file"), _("Filename:"),
                              MC_HISTORY_FM_VIEW_FILE, selection (current_panel)->fname,
                              INPUT_COMPLETE_FILENAMES);
-    if (!filename)
+    if (filename == NULL)
         return;
 
     vpath = vfs_path_from_str (filename);
     g_free (filename);
-    view_file (vpath, 0, use_internal_view);
+    view_file (vpath, FALSE, use_internal_view != 0);
     vfs_path_free (vpath);
 }
 
@@ -789,7 +769,7 @@ view_filtered_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-do_edit_at_line (const vfs_path_t * what_vpath, gboolean internal, long start_line)
+edit_file_at_line (const vfs_path_t * what_vpath, gboolean internal, long start_line)
 {
 
 #ifdef USE_INTERNAL_EDIT
@@ -808,9 +788,6 @@ do_edit_at_line (const vfs_path_t * what_vpath, gboolean internal, long start_li
             if (editor == NULL)
                 editor = get_default_editor ();
         }
-
-        if (start_line < 1)
-            start_line = 1;
 
         execute_external_editor_or_viewer (editor, what_vpath, start_line);
     }
@@ -849,7 +826,7 @@ edit_cmd_force_internal (void)
 
     fname = vfs_path_from_str (selection (current_panel)->fname);
     if (regex_command (fname, "Edit") == 0)
-        do_edit_at_line (fname, TRUE, 0);
+        edit_file_at_line (fname, TRUE, 1);
     vfs_path_free (fname);
 }
 #endif

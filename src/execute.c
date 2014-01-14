@@ -266,9 +266,13 @@ execute_get_external_cmd_opts_from_config (const char *command, const vfs_path_t
     if (filename_vpath == NULL)
         return g_strdup ("");
 
+    parameter = g_shell_quote (vfs_path_get_last_path_str (filename_vpath));
+
+    if (start_line <= 0)
+        return parameter;
+
     str_from_config = execute_get_opts_from_cfg (command, "%filename");
 
-    parameter = g_shell_quote (vfs_path_get_last_path_str (filename_vpath));
     return_str = str_replace_all (str_from_config, "%filename", parameter);
     g_free (parameter);
     g_free (str_from_config);
@@ -615,6 +619,7 @@ execute_with_vfs_arg (const char *command, const vfs_path_t * filename_vpath)
  * @param command editor/viewer to run
  * @param filename_vpath path for edit/view
  * @param start_line cursor will be placed at the 'start_line' position after opening file
+ *        if start_line is 0 or negative, no start line will be passed to editor/viewer
  */
 
 void

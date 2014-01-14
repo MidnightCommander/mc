@@ -52,14 +52,14 @@ void help_cmd (void);
 void smart_dirsize_cmd (void);
 void single_dirsize_cmd (void);
 void dirsizes_cmd (void);
-gboolean view_file_at_line (const vfs_path_t * filename_vpath, int plain_view, int internal,
-                            long start_line);
-gboolean view_file (const vfs_path_t * filename_vpath, int normal, int internal);
+gboolean view_file_at_line (const vfs_path_t * filename_vpath, gboolean plain_view,
+                            gboolean internal, long start_line);
+gboolean view_file (const vfs_path_t * filename_vpath, gboolean normal, gboolean internal);
 void view_cmd (void);
 void view_file_cmd (void);
 void view_raw_cmd (void);
 void view_filtered_cmd (void);
-void do_edit_at_line (const vfs_path_t * what_vpath, gboolean internal, long start_line);
+void edit_file_at_line (const vfs_path_t * what_vpath, gboolean internal, long start_line);
 void edit_cmd (void);
 void edit_cmd_new (void);
 #ifdef USE_INTERNAL_EDIT

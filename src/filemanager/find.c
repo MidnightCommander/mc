@@ -56,7 +56,7 @@
 #include "src/history.h"        /* MC_HISTORY_SHARED_SEARCH */
 
 #include "dir.h"
-#include "cmd.h"                /* view_file_at_line */
+#include "cmd.h"                /* view_file_at_line() */
 #include "midnight.h"           /* current_panel */
 #include "boxes.h"
 #include "panelize.h"
@@ -1433,9 +1433,9 @@ find_do_view_edit (gboolean unparsed_view, gboolean edit, char *dir, char *file)
 
     fullname_vpath = vfs_path_build_filename (dir, filename, (char *) NULL);
     if (edit)
-        do_edit_at_line (fullname_vpath, use_internal_edit, line);
+        edit_file_at_line (fullname_vpath, use_internal_edit != 0, line);
     else
-        view_file_at_line (fullname_vpath, unparsed_view ? 1 : 0, use_internal_view, line);
+        view_file_at_line (fullname_vpath, unparsed_view, use_internal_view != 0, line);
     vfs_path_free (fullname_vpath);
     g_free (fullname);
 }
