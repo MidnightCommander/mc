@@ -19,8 +19,8 @@ libedit_la_SOURCES = \
 	editoptions.c \
 	editwidget.c editwidget.h \
 	etags.c etags.h \
-	syntax.c \
-	wordproc.c
+	format.c \
+	syntax.c
 
 if USE_ASPELL
 if HAVE_GMODULE

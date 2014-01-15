@@ -1,15 +1,14 @@
 /*
-   Word-processor mode for the editor: does dynamic
-   paragraph formatting.
+   Dynamic paragraph formatting.
 
-   Copyright (C) 2011, 2013
+   Copyright (C) 2011, 2013, 2014
    The Free Software Foundation, Inc.
 
    Copyright (C) 1996 Paul Sheer
 
    Writen by:
    Paul Sheer, 1996
-   Andrew Borodin <aborodin@vmail.ru>, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2013, 2014
 
    This file is part of the Midnight Commander.
 
@@ -28,11 +27,11 @@
  */
 
 /** \file
- *  \brief Source: word-processor mode for the editor: does dynamic paragraph formatting
+ *  \brief Source: Dynamic paragraph formatting
  *  \author Paul Sheer
  *  \date 1996
  *  \author Andrew Borodin
- *  \date 2013
+ *  \date 2013, 2014
  */
 
 #include <config.h>
