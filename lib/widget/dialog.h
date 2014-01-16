@@ -160,6 +160,8 @@ void dlg_broadcast_msg (WDialog * h, widget_msg_t message);
 /* Default callback for dialogs */
 cb_ret_t dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data);
 
+cb_ret_t dlg_broadcast_msg_to (WDialog * h, widget_msg_t msg, gboolean reverse, int flags);
+
 /* Default paint routine for dialogs */
 void dlg_default_repaint (WDialog * h);
 

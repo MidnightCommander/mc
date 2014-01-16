@@ -112,47 +112,6 @@ dlg_widget_prev (WDialog * h, GList * l)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * broadcast a message to all the widgets in a dialog that have
- * the options set to flags. If flags is zero, the message is sent
- * to all widgets.
- */
-
-static void
-dlg_broadcast_msg_to (WDialog * h, widget_msg_t msg, gboolean reverse, int flags)
-{
-    GList *p, *first;
-
-    if (h->widgets == NULL)
-        return;
-
-    if (h->current == NULL)
-        h->current = h->widgets;
-
-    if (reverse)
-        p = dlg_widget_prev (h, h->current);
-    else
-        p = dlg_widget_next (h, h->current);
-
-    first = p;
-
-    do
-    {
-        Widget *w = WIDGET (p->data);
-
-        if (reverse)
-            p = dlg_widget_prev (h, p);
-        else
-            p = dlg_widget_next (h, p);
-
-        if ((flags == 0) || ((flags & w->options) != 0))
-            send_message (w, NULL, msg, 0, NULL);
-    }
-    while (first != p);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
   * Read histories from the ${XDG_CACHE_HOME}/mc/history file
   */
 static void
@@ -1328,6 +1287,55 @@ dlg_get_title (const WDialog * h, size_t len)
         t = g_strdup ("");
 
     return t;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * broadcast a message to all the widgets in a dialog that have
+ * the options set to flags. If flags is zero, the message is sent
+ * to all widgets.
+ */
+
+cb_ret_t
+dlg_broadcast_msg_to (WDialog * h, widget_msg_t msg, gboolean reverse, int flags)
+{
+    GList *p, *first;
+    cb_ret_t ret = MSG_NOT_HANDLED;
+
+    if (h->widgets == NULL)
+        return ret;
+
+    if (h->current == NULL)
+        h->current = h->widgets;
+
+    if (reverse)
+        p = dlg_widget_prev (h, h->current);
+    else
+        p = dlg_widget_next (h, h->current);
+
+    first = p;
+
+    do
+    {
+        Widget *w = WIDGET (p->data);
+
+        if (reverse)
+            p = dlg_widget_prev (h, p);
+        else
+            p = dlg_widget_next (h, p);
+
+        if ((flags == 0) || ((flags & w->options) != 0))
+        {
+            cb_ret_t widget_ret;
+
+            widget_ret = send_message (w, NULL, msg, 0, NULL);
+            if (ret == MSG_NOT_HANDLED && widget_ret != MSG_NOT_HANDLED)
+                ret = widget_ret;
+        }
+    }
+    while (first != p);
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
