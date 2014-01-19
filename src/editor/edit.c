@@ -253,6 +253,7 @@ check_file_access (WEdit * edit, const vfs_path_t * filename_vpath, struct stat 
 {
     static uintmax_t threshold = UINTMAX_MAX;
     int file;
+    int openerrno;
     gchar *errmsg = NULL;
     gboolean ret = TRUE;
 
@@ -260,6 +261,7 @@ check_file_access (WEdit * edit, const vfs_path_t * filename_vpath, struct stat 
     file = mc_open (filename_vpath, O_NONBLOCK | O_RDONLY | O_BINARY, 0666);
     if (file < 0)
     {
+        openerrno = errno;
         /*
          * Try creating the file. O_EXCL prevents following broken links
          * and opening existing files.
@@ -267,6 +269,7 @@ check_file_access (WEdit * edit, const vfs_path_t * filename_vpath, struct stat 
         file = mc_open (filename_vpath, O_NONBLOCK | O_RDONLY | O_BINARY | O_CREAT | O_EXCL, 0666);
         if (file < 0)
         {
+            errno = openerrno;
             errmsg =
                 g_strdup_printf (_("Cannot open %s for reading"), vfs_path_as_str (filename_vpath));
             goto cleanup;
@@ -359,6 +362,8 @@ edit_load_file (WEdit * edit)
     /* Cannot do fast load if a filter is used */
     if (edit_find_filter (edit->filename_vpath) >= 0)
         fast_load = FALSE;
+
+    errno = 0;
 
     /*
      * FIXME: line end translation should disable fast loading as well

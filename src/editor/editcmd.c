@@ -3252,6 +3252,23 @@ edit_mail_dialog (WEdit * edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
+void
+edit_error_dialog (const char * h, const char * s)
+{
+    char *tmp;
+
+    if (!errno)
+        query_dialog (h, s, D_ERROR, 1, _("&Dismiss"));
+    else
+    {
+        tmp = g_strdup_printf (_("%s: %s"), s, unix_error_string (errno));
+        query_dialog (h, tmp, D_ERROR, 1, _("&Dismiss"));
+        g_free (tmp);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /*******************/
 /* Word Completion */
 /*******************/
