@@ -395,6 +395,34 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Attempts to save the file, displays error messages to the user.
+ * Returns:
+ *    0 - error or user abort
+ *   -1 - "Save As" selected
+ *    1 - success
+ */
+
+static int
+edit_try_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
+{
+    int ret, choice;
+    char *tmp;
+
+    ret = edit_save_file (edit, filename_vpath);
+    if (ret > 0)
+        return ret;
+    if (ret < 0)
+        return 0;
+
+    tmp = g_strdup_printf (_("%s: %s"), _("Cannot save file"), unix_error_string (errno));
+    choice = query_dialog (_("Save"), tmp, D_ERROR, 2, _("Save &as..."), _("&Cancel"));
+    g_free (tmp);
+    return choice ? 0 : -1;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static gboolean
 edit_check_newline (const edit_buffer_t * buf)
 {
@@ -465,14 +493,14 @@ edit_save_cmd (WEdit * edit)
 
     if (!edit->locked && !edit->delete_file)
         save_lock = lock_file (edit->filename_vpath);
-    res = edit_save_file (edit, edit->filename_vpath);
+    res = edit_try_save_file (edit, edit->filename_vpath);
 
     /* Maintain modify (not save) lock on failure */
     if ((res > 0 && edit->locked) || save_lock)
         edit->locked = unlock_file (edit->filename_vpath);
 
     /* On failure try 'save as', it does locking on its own */
-    if (res == 0)
+    if (res == -1)
         return edit_save_as_cmd (edit);
     edit->force |= REDRAW_COMPLETELY;
     if (res > 0)
@@ -1701,7 +1729,7 @@ edit_save_as_cmd (WEdit * edit)
                 edit->stat1.st_mode |= S_IWRITE;
             }
 
-            rv = edit_save_file (edit, exp_vpath);
+            rv = edit_try_save_file (edit, exp_vpath);
             switch (rv)
             {
             case 1:
@@ -1729,14 +1757,17 @@ edit_save_as_cmd (WEdit * edit)
                 vfs_path_free (exp_vpath);
                 edit->force |= REDRAW_COMPLETELY;
                 return TRUE;
-            default:
-                edit_error_dialog (_("Save as"), get_sys_error (_("Cannot save file")));
-                /* fallthrough */
-            case -1:
+            case 0:
                 /* Failed, so maintain modify (not save) lock */
                 if (save_lock)
                     unlock_file (exp_vpath);
                 break;
+            case -1:
+                /* Show dialog again */
+                if (save_lock)
+                    unlock_file (exp_vpath);
+                vfs_path_free (exp_vpath);
+                return edit_save_as_cmd (edit);
             }
         }
     }
