@@ -321,9 +321,6 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
         }
         if (mc_close (fd) != 0)
             goto error_save;
-        /* Update the file information, especially the mtime. */
-        if (mc_stat (savename_vpath, &edit->stat1) == -1)
-            goto error_save;
     }
     else
     {                           /* change line breaks */
@@ -379,6 +376,10 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
     if (this_save_mode != EDIT_QUICK_SAVE)
         if (mc_rename (savename_vpath, real_filename_vpath) == -1)
             goto error_save;
+
+    /* Update the file information, especially the mtime. */
+    if (mc_stat (real_filename_vpath, &edit->stat1) == -1)
+        goto error_save;
 
     vfs_path_free (real_filename_vpath);
     vfs_path_free (savename_vpath);
