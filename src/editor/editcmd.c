@@ -82,6 +82,8 @@
 #include "spell_dialogs.h"
 #endif
 #include "etags.h"
+#include "src/execute.h"        /* For shell_execute */
+#include "lib/strescape.h"      /* For strutils_shell_escape */
 
 /*** global variables ****************************************************************************/
 
@@ -149,12 +151,16 @@ edit_save_mode_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
    b) rename <tempnam> to <filename>;
    if 2 (do backups) then  a) save to <tempnam>,
    b) rename <filename> to <filename.backup_ext>,
-   c) rename <tempnam> to <filename>. */
+   c) rename <tempnam> to <filename>.
+
+   sudo implies 1 (save to <tempnam>, run "sudo cp"
+   to move to <filename>).
+*/
 
 /* returns 0 on error, -1 on abort */
 
 static int
-edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
+edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath, gboolean sudo)
 {
     char *p;
     gchar *tmp;
@@ -197,6 +203,9 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
         if (fd != -1)
             mc_close (fd);
     }
+
+    if (this_save_mode == EDIT_QUICK_SAVE && sudo)
+        this_save_mode = EDIT_SAFE_SAVE;
 
     if (this_save_mode == EDIT_QUICK_SAVE && !edit->skip_detach_prompt)
     {
@@ -242,15 +251,20 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
 
     if (this_save_mode != EDIT_QUICK_SAVE)
     {
-        char *savedir, *saveprefix;
+        char *saveprefix;
 
-        savedir = vfs_path_tokens_get (real_filename_vpath, 0, -1);
-        if (savedir == NULL)
-            savedir = g_strdup (".");
+        if (sudo)
+            saveprefix = g_strdup ("cooledit");
+        else
+        {
+            char *savedir = vfs_path_tokens_get (real_filename_vpath, 0, -1);
+            if (savedir == NULL)
+                savedir = g_strdup (".");
 
-        /* Token-related function never return leading slash, so we need add it manually */
-        saveprefix = mc_build_filename ("/", savedir, "cooledit", NULL);
-        g_free (savedir);
+            /* Token-related function never return leading slash, so we need add it manually */
+            saveprefix = mc_build_filename ("/", savedir, "cooledit", NULL);
+            g_free (savedir);
+        }
         fd = mc_mkstemps (&savename_vpath, saveprefix, NULL);
         g_free (saveprefix);
         if (savename_vpath == NULL)
@@ -374,8 +388,39 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
     }
 
     if (this_save_mode != EDIT_QUICK_SAVE)
+    {
+        if (sudo)
+        {
+            char *cmd, *src_esc, *dst_esc;
+            struct stat sb;
+            time_t mtime = 0;
+
+            if (mc_stat (real_filename_vpath, &sb) == 0)
+                mtime = sb.st_mtime;
+
+            src_esc = strutils_shell_escape (vfs_path_as_str (savename_vpath));
+            dst_esc = strutils_shell_escape (vfs_path_as_str (real_filename_vpath));
+            cmd = g_strconcat ("sudo cp ",
+                               src_esc,
+                               " ",
+                               dst_esc,
+                               (char *) NULL);
+            g_free (src_esc);
+            g_free (dst_esc);
+            shell_execute (cmd, EXECUTE_HIDE);
+            g_free (cmd);
+            mc_unlink (savename_vpath);
+
+            if (mc_stat (real_filename_vpath, &sb) != 0 || sb.st_mtime == mtime)
+            {
+                errno = 0;
+                goto error_save;
+            }
+        }
+        else
         if (mc_rename (savename_vpath, real_filename_vpath) == -1)
             goto error_save;
+    }
 
     /* Update the file information, especially the mtime. */
     if (mc_stat (real_filename_vpath, &edit->stat1) == -1)
@@ -408,18 +453,48 @@ static int
 edit_try_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
 {
     int ret, choice;
+    gboolean sudo = FALSE;
     char *tmp;
 
-    ret = edit_save_file (edit, filename_vpath);
+  again:
+    ret = edit_save_file (edit, filename_vpath, sudo);
     if (ret > 0)
         return ret;
     if (ret < 0)
         return 0;
 
-    tmp = g_strdup_printf (_("%s: %s"), _("Cannot save file"), unix_error_string (errno));
-    choice = query_dialog (_("Save"), tmp, D_ERROR, 2, _("Save &as..."), _("&Cancel"));
+    if (errno)
+        tmp = g_strdup_printf (_("%s: %s"), _("Cannot save file"), unix_error_string (errno));
+    else
+        tmp = g_strdup (_("Cannot save file"));
+
+    if (!sudo && geteuid () != 0 && (errno == EACCES || errno == EPERM)
+            && vfs_file_is_local (filename_vpath))
+    {
+        choice = query_dialog (_("Save"), tmp, D_ERROR, 3, _("&sudo"), _("Save &as..."),
+                               _("&Cancel"));
+    }
+    else
+    {
+        choice = query_dialog (_("Save"), tmp, D_ERROR, 2, _("Save &as..."), _("&Cancel"));
+        if (choice >= 0)
+            choice++;
+    }
     g_free (tmp);
-    return choice ? 0 : -1;
+
+    switch (choice)
+    {
+        case 0:
+            /* sudo */
+            sudo = TRUE;
+            goto again;
+        case 1:
+            /* save as */
+            return -1;
+        default:
+            /* abort */
+            return 0;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
