@@ -656,10 +656,11 @@ listbox_select_entry (WListbox * l, int dest)
 void
 listbox_get_current (WListbox * l, char **string, void **extra)
 {
-    WLEntry *e;
+    WLEntry *e = NULL;
     gboolean ok;
 
-    e = listbox_get_nth_item (l, l->pos);
+    if (l != NULL)
+        e = listbox_get_nth_item (l, l->pos);
 
     ok = (e != NULL);
 
