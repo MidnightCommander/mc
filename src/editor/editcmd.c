@@ -82,6 +82,8 @@
 #include "spell_dialogs.h"
 #endif
 #include "etags.h"
+#include "src/execute.h"        /* For shell_execute */
+#include "lib/strescape.h"      /* For strutils_shell_escape */
 
 /*** global variables ****************************************************************************/
 
@@ -149,12 +151,16 @@ edit_save_mode_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
    b) rename <tempnam> to <filename>;
    if 2 (do backups) then  a) save to <tempnam>,
    b) rename <filename> to <filename.backup_ext>,
-   c) rename <tempnam> to <filename>. */
+   c) rename <tempnam> to <filename>.
+
+   sudo implies 1 (save to <tempnam>, run "sudo cp"
+   to move to <filename>).
+*/
 
 /* returns 0 on error, -1 on abort */
 
 static int
-edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
+edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath, gboolean sudo)
 {
     char *p;
     gchar *tmp;
@@ -197,6 +203,9 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
         if (fd != -1)
             mc_close (fd);
     }
+
+    if (this_save_mode == EDIT_QUICK_SAVE && sudo)
+        this_save_mode = EDIT_SAFE_SAVE;
 
     if (this_save_mode == EDIT_QUICK_SAVE && !edit->skip_detach_prompt)
     {
@@ -242,15 +251,20 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
 
     if (this_save_mode != EDIT_QUICK_SAVE)
     {
-        char *savedir, *saveprefix;
+        char *saveprefix;
 
-        savedir = vfs_path_tokens_get (real_filename_vpath, 0, -1);
-        if (savedir == NULL)
-            savedir = g_strdup (".");
+        if (sudo)
+            saveprefix = g_strdup ("cooledit");
+        else
+        {
+            char *savedir = vfs_path_tokens_get (real_filename_vpath, 0, -1);
+            if (savedir == NULL)
+                savedir = g_strdup (".");
 
-        /* Token-related function never return leading slash, so we need add it manually */
-        saveprefix = mc_build_filename ("/", savedir, "cooledit", NULL);
-        g_free (savedir);
+            /* Token-related function never return leading slash, so we need add it manually */
+            saveprefix = mc_build_filename ("/", savedir, "cooledit", NULL);
+            g_free (savedir);
+        }
         fd = mc_mkstemps (&savename_vpath, saveprefix, NULL);
         g_free (saveprefix);
         if (savename_vpath == NULL)
@@ -321,9 +335,6 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
         }
         if (mc_close (fd) != 0)
             goto error_save;
-        /* Update the file information, especially the mtime. */
-        if (mc_stat (savename_vpath, &edit->stat1) == -1)
-            goto error_save;
     }
     else
     {                           /* change line breaks */
@@ -377,8 +388,43 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
     }
 
     if (this_save_mode != EDIT_QUICK_SAVE)
+    {
+        if (sudo)
+        {
+            char *cmd, *src_esc, *dst_esc;
+            struct stat sb;
+            time_t mtime = 0;
+
+            if (mc_stat (real_filename_vpath, &sb) == 0)
+                mtime = sb.st_mtime;
+
+            src_esc = strutils_shell_escape (vfs_path_as_str (savename_vpath));
+            dst_esc = strutils_shell_escape (vfs_path_as_str (real_filename_vpath));
+            cmd = g_strconcat ("sudo cp ",
+                               src_esc,
+                               " ",
+                               dst_esc,
+                               (char *) NULL);
+            g_free (src_esc);
+            g_free (dst_esc);
+            shell_execute (cmd, EXECUTE_HIDE);
+            g_free (cmd);
+            mc_unlink (savename_vpath);
+
+            if (mc_stat (real_filename_vpath, &sb) != 0 || sb.st_mtime == mtime)
+            {
+                errno = 0;
+                goto error_save;
+            }
+        }
+        else
         if (mc_rename (savename_vpath, real_filename_vpath) == -1)
             goto error_save;
+    }
+
+    /* Update the file information, especially the mtime. */
+    if (mc_stat (real_filename_vpath, &edit->stat1) == -1)
+        goto error_save;
 
     vfs_path_free (real_filename_vpath);
     vfs_path_free (savename_vpath);
@@ -391,6 +437,64 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
     vfs_path_free (real_filename_vpath);
     vfs_path_free (savename_vpath);
     return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Attempts to save the file, displays error messages to the user.
+ * Returns:
+ *    0 - error or user abort
+ *   -1 - "Save As" selected
+ *    1 - success
+ */
+
+static int
+edit_try_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
+{
+    int ret, choice;
+    gboolean sudo = FALSE;
+    char *tmp;
+
+  again:
+    ret = edit_save_file (edit, filename_vpath, sudo);
+    if (ret > 0)
+        return ret;
+    if (ret < 0)
+        return 0;
+
+    if (errno)
+        tmp = g_strdup_printf (_("%s: %s"), _("Cannot save file"), unix_error_string (errno));
+    else
+        tmp = g_strdup (_("Cannot save file"));
+
+    if (!sudo && geteuid () != 0 && (errno == EACCES || errno == EPERM)
+            && vfs_file_is_local (filename_vpath))
+    {
+        choice = query_dialog (_("Save"), tmp, D_ERROR, 3, _("&sudo"), _("Save &as..."),
+                               _("&Cancel"));
+    }
+    else
+    {
+        choice = query_dialog (_("Save"), tmp, D_ERROR, 2, _("Save &as..."), _("&Cancel"));
+        if (choice >= 0)
+            choice++;
+    }
+    g_free (tmp);
+
+    switch (choice)
+    {
+        case 0:
+            /* sudo */
+            sudo = TRUE;
+            goto again;
+        case 1:
+            /* save as */
+            return -1;
+        default:
+            /* abort */
+            return 0;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -465,14 +569,14 @@ edit_save_cmd (WEdit * edit)
 
     if (!edit->locked && !edit->delete_file)
         save_lock = lock_file (edit->filename_vpath);
-    res = edit_save_file (edit, edit->filename_vpath);
+    res = edit_try_save_file (edit, edit->filename_vpath);
 
     /* Maintain modify (not save) lock on failure */
     if ((res > 0 && edit->locked) || save_lock)
         edit->locked = unlock_file (edit->filename_vpath);
 
     /* On failure try 'save as', it does locking on its own */
-    if (res == 0)
+    if (res == -1)
         return edit_save_as_cmd (edit);
     edit->force |= REDRAW_COMPLETELY;
     if (res > 0)
@@ -1701,7 +1805,7 @@ edit_save_as_cmd (WEdit * edit)
                 edit->stat1.st_mode |= S_IWRITE;
             }
 
-            rv = edit_save_file (edit, exp_vpath);
+            rv = edit_try_save_file (edit, exp_vpath);
             switch (rv)
             {
             case 1:
@@ -1729,14 +1833,17 @@ edit_save_as_cmd (WEdit * edit)
                 vfs_path_free (exp_vpath);
                 edit->force |= REDRAW_COMPLETELY;
                 return TRUE;
-            default:
-                edit_error_dialog (_("Save as"), get_sys_error (_("Cannot save file")));
-                /* fallthrough */
-            case -1:
+            case 0:
                 /* Failed, so maintain modify (not save) lock */
                 if (save_lock)
                     unlock_file (exp_vpath);
                 break;
+            case -1:
+                /* Show dialog again */
+                if (save_lock)
+                    unlock_file (exp_vpath);
+                vfs_path_free (exp_vpath);
+                return edit_save_as_cmd (edit);
             }
         }
     }
@@ -3247,6 +3354,23 @@ edit_mail_dialog (WEdit * edit)
         mail_subject_last = tmail_subject;
         mail_to_last = tmail_to;
         pipe_mail (&edit->buffer, mail_to_last, mail_subject_last, mail_cc_last);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+edit_error_dialog (const char * h, const char * s)
+{
+    char *tmp;
+
+    if (!errno)
+        query_dialog (h, s, D_ERROR, 1, _("&Dismiss"));
+    else
+    {
+        tmp = g_strdup_printf (_("%s: %s"), s, unix_error_string (errno));
+        query_dialog (h, tmp, D_ERROR, 1, _("&Dismiss"));
+        g_free (tmp);
     }
 }
 
