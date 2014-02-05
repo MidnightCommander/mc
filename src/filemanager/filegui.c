@@ -1312,6 +1312,9 @@ file_mask_dialog (file_op_context_t * ctx, FileOperation operation,
         else
             ctx->search_handle->search_type = MC_SEARCH_T_REGEX;
 
+        tmp = dest_dir;
+        dest_dir = tilde_expand (tmp);
+        g_free (tmp);
         vpath = vfs_path_from_str (dest_dir);
 
         ctx->dest_mask = strrchr (dest_dir, PATH_SEP);
