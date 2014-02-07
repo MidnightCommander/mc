@@ -150,10 +150,10 @@ static const char *op_names1[] = {
  * %m - "with source mask" or question mark for delete
  * %s - source name (truncated)
  * %d - number of marked files
- * %e - "to:" or question mark for delete
- *
- * xgettext:no-c-format */
-static const char *one_format = N_("%o %f \"%s\"%m");
+ * %n - the '\n' symbol to form two-line prompt for delete or space for other operations
+ */
+/* xgettext:no-c-format */
+static const char *one_format = N_("%o %f%n\"%s\"%m");
 /* xgettext:no-c-format */
 static const char *many_format = N_("%o %d %f%m");
 
@@ -164,11 +164,8 @@ static const char *prompt_parts[] = {
     N_("directories"),
     N_("files/directories"),
     /* TRANSLATORS: keep leading space here to split words in Copy/Move dialog */
-    N_(" with source mask:"),
-    N_("to:")
+    N_(" with source mask:")
 };
-
-static const char *question_format = N_("%s?");
 
 /*** file scope variables ************************************************************************/
 
@@ -1353,10 +1350,9 @@ static char *
 panel_operate_generate_prompt (const WPanel * panel, FileOperation operation,
                                gboolean single_source, const struct stat *src_stat)
 {
-    const char *sp, *cp;
-    char format_string[BUF_MEDIUM];
-    char *dp = format_string;
-    gboolean build_question = FALSE;
+    char *sp;
+    char *format_string;
+    const char *cp;
 
     static gboolean i18n_flag = FALSE;
     if (!i18n_flag)
@@ -1372,86 +1368,61 @@ panel_operate_generate_prompt (const WPanel * panel, FileOperation operation,
 
         one_format = _(one_format);
         many_format = _(many_format);
-        question_format = _(question_format);
 #endif /* ENABLE_NLS */
         i18n_flag = TRUE;
     }
 
-    sp = single_source ? one_format : many_format;
+    /* Possible promts:
+        OP_COPY:
+            "Copy file \"%s\" with source mask:"
+            "Copy %d files with source mask:"
+            "Copy directory \"%s\" with source mask:"
+            "Copy %d directories with source mask:"
+            "Copy %d files/directories with source mask:"
+        OP_MOVE:
+            "Move file \"%s\" with source mask:"
+            "Move %d files with source mask:"
+            "Move directory \"%s\" with source mask:"
+            "Move %d directories with source mask:"
+            "Move %d files/directories with source mask:"
+        OP_DELETE:
+            "Delete file \"%s\"?"
+            "Delete %d files?"
+            "Delete directory \"%s\"?"
+            "Delete %d directories?"
+            "Delete %d files/directories?"
+    */
 
-    while (*sp != '\0')
-    {
-        switch (*sp)
-        {
-        case '%':
-            cp = NULL;
-            switch (sp[1])
-            {
-            case 'o':
-                cp = op_names1[operation];
-                break;
-            case 'm':
-                if (operation == OP_DELETE)
-                {
-                    cp = "";
-                    build_question = TRUE;
-                }
-                else
-                    cp = prompt_parts[5];
-                break;
-            case 'e':
-                if (operation == OP_DELETE)
-                {
-                    cp = "";
-                    build_question = TRUE;
-                }
-                else
-                    cp = prompt_parts[6];
-                break;
-            case 'f':
-                if (single_source)
-                    cp = S_ISDIR (src_stat->st_mode) ? prompt_parts[2] : prompt_parts[0];
-                else
-                    cp = (panel->marked == panel->dirs_marked)
-                        ? prompt_parts[3]
-                        : (panel->dirs_marked ? prompt_parts[4] : prompt_parts[1]);
-                break;
-            default:
-                *dp++ = *sp++;
-            }
+    sp = (char *) (single_source ? one_format : many_format);
 
-            if (cp != NULL)
-            {
-                sp += 2;
+    /* 1. Substitute %o */
+    format_string = str_replace_all (sp, "%o", op_names1[(int) operation]);
 
-                while (*cp != '\0')
-                    *dp++ = *cp++;
+    /* 2. Substitute %n */
+    cp = operation == OP_DELETE ? "\n" : " ";
+    sp = format_string;
+    format_string = str_replace_all (sp, "%n", cp);
+    g_free (sp);
 
-                /* form two-lines query prompt for file deletion */
-                if (operation == OP_DELETE && sp[-1] == 'f')
-                {
-                    *dp++ = '\n';
+    /* 3. Substitute %f */
+    if (single_source)
+        cp = S_ISDIR (src_stat->st_mode) ? prompt_parts[2] : prompt_parts[0];
+    else if (panel->marked == panel->dirs_marked)
+        cp = prompt_parts[3];
+    else
+        cp = panel->dirs_marked != 0 ? prompt_parts[4] : prompt_parts[1];
 
-                    while (isblank (*sp) != 0)
-                        sp++;
-                }
-            }
-            break;
-        default:
-            *dp++ = *sp++;
-        }
-    }
-    *dp = '\0';
+    sp = format_string;
+    format_string = str_replace_all (sp, "%f", cp);
+    g_free (sp);
 
-    if (build_question)
-    {
-        char tmp[BUF_MEDIUM];
+    /* 4. Substitute %m */
+    cp = operation == OP_DELETE ? "?" : prompt_parts[5];
+    sp = format_string;
+    format_string = str_replace_all (sp, "%m", cp);
+    g_free (sp);
 
-        memmove (tmp, format_string, sizeof (tmp));
-        g_snprintf (format_string, sizeof (format_string), question_format, tmp);
-    }
-
-    return g_strdup (format_string);
+    return format_string;
 }
 
 /* --------------------------------------------------------------------------------------------- */

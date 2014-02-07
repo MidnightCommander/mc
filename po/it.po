@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-10-04 09:49+0400\n"
+"POT-Creation-Date: 2014-02-07 09:37+0400\n"
 "PO-Revision-Date: 2013-08-04 10:16+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -2275,8 +2275,8 @@ msgstr "Sposta"
 msgid "FileOperation|Delete"
 msgstr "Elimina"
 
-#, no-c-format
-msgid "%o %f \"%s\"%m"
+#, fuzzy, no-c-format
+msgid "%o %f%n\"%s\"%m"
 msgstr "%o %f \"%s\"%m"
 
 #, no-c-format
@@ -2301,13 +2301,6 @@ msgstr "file/directory"
 #. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
 msgid " with source mask:"
 msgstr " con maschera sorgente:"
-
-msgid "to:"
-msgstr "a:"
-
-#, c-format
-msgid "%s?"
-msgstr "%s?"
 
 msgid "Cannot make the hardlink"
 msgstr "Impossibile creare il coll. fisico"
@@ -2738,6 +2731,9 @@ msgstr "Sorgente"
 
 msgid "Target"
 msgstr "Destinaz"
+
+msgid "to:"
+msgstr "a:"
 
 msgid "Follow &links"
 msgstr "Segui i co&llegamenti"
@@ -4292,6 +4288,9 @@ msgstr "Continuare dall'inizio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Impossibile ricevere copia locale di /ftp://un.host/modificami.txt"
+
+#~ msgid "%s?"
+#~ msgstr "%s?"
 
 #~ msgid "Deleting"
 #~ msgstr "Sto eliminando"

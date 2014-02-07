@@ -13,12 +13,12 @@
 # Ilia Maslakov <il.smind@gmail.com>, 2009
 # Slava Zanko <slavazanko@gmail.com>, 2009, 2011
 # NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
-# Andrew Borodin <aborodin@vmail.ru>, 2009-2013.
+# Andrew Borodin <aborodin@vmail.ru>, 2009-2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2013-10-04 09:49+0400\n"
+"POT-Creation-Date: 2014-02-07 09:37+0400\n"
 "PO-Revision-Date: 2013-07-05 09:15+0300\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/mc/language/"
@@ -2287,8 +2287,8 @@ msgid "FileOperation|Delete"
 msgstr "Удалить"
 
 #, no-c-format
-msgid "%o %f \"%s\"%m"
-msgstr "%o %f \"%s\"%m"
+msgid "%o %f%n\"%s\"%m"
+msgstr "%o %f%n\"%s\"%m"
 
 #, no-c-format
 msgid "%o %d %f%m"
@@ -2312,13 +2312,6 @@ msgstr "файлы/каталоги"
 #. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
 msgid " with source mask:"
 msgstr " с исходным шаблоном:"
-
-msgid "to:"
-msgstr "в:"
-
-#, c-format
-msgid "%s?"
-msgstr "%s?"
 
 msgid "Cannot make the hardlink"
 msgstr "Невозможно создать жесткую ссылку"
@@ -2750,6 +2743,9 @@ msgstr "Источник"
 
 msgid "Target"
 msgstr "Приемник"
+
+msgid "to:"
+msgstr "в:"
 
 msgid "Follow &links"
 msgstr "&Разыменовывать ссылки"
@@ -4309,6 +4305,3 @@ msgstr "Продолжить с начала?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Невозможно получить локальную копию /ftp://some.host/editme.txt"
-
-#~ msgid "Deleting"
-#~ msgstr "Удаляем"
