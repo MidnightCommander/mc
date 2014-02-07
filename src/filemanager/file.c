@@ -1372,26 +1372,26 @@ panel_operate_generate_prompt (const WPanel * panel, FileOperation operation,
         i18n_flag = TRUE;
     }
 
-    /* Possible promts:
-        OP_COPY:
-            "Copy file \"%s\" with source mask:"
-            "Copy %d files with source mask:"
-            "Copy directory \"%s\" with source mask:"
-            "Copy %d directories with source mask:"
-            "Copy %d files/directories with source mask:"
-        OP_MOVE:
-            "Move file \"%s\" with source mask:"
-            "Move %d files with source mask:"
-            "Move directory \"%s\" with source mask:"
-            "Move %d directories with source mask:"
-            "Move %d files/directories with source mask:"
-        OP_DELETE:
-            "Delete file \"%s\"?"
-            "Delete %d files?"
-            "Delete directory \"%s\"?"
-            "Delete %d directories?"
-            "Delete %d files/directories?"
-    */
+    /* Possible prompts:
+     *   OP_COPY:
+     *       "Copy file \"%s\" with source mask:"
+     *       "Copy %d files with source mask:"
+     *       "Copy directory \"%s\" with source mask:"
+     *       "Copy %d directories with source mask:"
+     *       "Copy %d files/directories with source mask:"
+     *   OP_MOVE:
+     *       "Move file \"%s\" with source mask:"
+     *       "Move %d files with source mask:"
+     *       "Move directory \"%s\" with source mask:"
+     *       "Move %d directories with source mask:"
+     *       "Move %d files/directories with source mask:"
+     *   OP_DELETE:
+     *       "Delete file \"%s\"?"
+     *       "Delete %d files?"
+     *       "Delete directory \"%s\"?"
+     *       "Delete %d directories?"
+     *       "Delete %d files/directories?"
+     */
 
     sp = (char *) (single_source ? one_format : many_format);
 
