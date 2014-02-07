@@ -1069,15 +1069,6 @@ quit_cmd (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-toggle_show_hidden (void)
-{
-    panels_options.show_dot_files = !panels_options.show_dot_files;
-    update_panels (UP_RELOAD, UP_KEEPSEL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 /**
  * Repaint the contents of the panels without frames.  To schedule panel
  * for repainting, set panel->dirty to 1.  There are many reasons why
@@ -1093,6 +1084,17 @@ update_dirty_panels (void)
 
     if (get_other_type () == view_listing && other_panel->dirty)
         widget_redraw (WIDGET (other_panel));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+toggle_show_hidden (void)
+{
+    panels_options.show_dot_files = !panels_options.show_dot_files;
+    update_panels (UP_RELOAD, UP_KEEPSEL);
+    /* redraw panels forced */
+    update_dirty_panels ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
