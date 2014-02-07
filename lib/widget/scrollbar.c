@@ -48,12 +48,25 @@
 
 /*** file scope variables ************************************************************************/
 
+static struct
+{
+    char *current_char;
+
+    char *first_vert_char;
+    char *last_vert_char;
+    char *background_vert_char;
+
+    char *first_horiz_char;
+    char *last_horiz_char;
+    char *background_horiz_char;
+} scrollbar_skin;
+
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-scrollbar_set_size (WScrollBar *scrollbar)
+scrollbar_set_size (WScrollBar * scrollbar)
 {
     Widget *w = WIDGET (scrollbar);
     Widget *p = scrollbar->parent;
@@ -63,14 +76,14 @@ scrollbar_set_size (WScrollBar *scrollbar)
 
     /* There folloing cases are possible here:
        1. Parent is in dialog, scrollbar isn't.
-          Parents coordinates are absolute. Scrollbar's coordinate are relative to owner.
-          We need relative parent's coordinates here to place scrollbar properly.
+       Parents coordinates are absolute. Scrollbar's coordinate are relative to owner.
+       We need relative parent's coordinates here to place scrollbar properly.
        2. Parent and scrollbar are in dialog.
-          Parent's and scrollbar's coordinates are absolute. Use them.
+       Parent's and scrollbar's coordinates are absolute. Use them.
        3. Parent and scrollbar aren't in dialog.
-          Parent's and scrollbar's coordinates are relative to owner. Use them.
+       Parent's and scrollbar's coordinates are relative to owner. Use them.
        4. Parent isn't in dialog, scrollbar is.
-          This is abnormal and should not happen. */
+       This is abnormal and should not happen. */
 
     if (o != NULL && w->owner == NULL)
     {
@@ -106,17 +119,46 @@ scrollbar_draw_horizontal (WScrollBar * scrollbar)
     int column = 0;
     int i;
 
+    int start_pos = 0;
+    int end_pos = w->cols;
+    int total_columns = w->cols;
+
+
+    if (scrollbar_skin.first_horiz_char != NULL)
+    {
+        start_pos = 1;
+        total_columns--;
+    }
+
+    if (scrollbar_skin.last_horiz_char != NULL)
+    {
+        end_pos = w->cols - 1;
+        total_columns--;
+    }
+
     /* Now draw the nice relative pointer */
     if (*scrollbar->total != 0)
-        column = *scrollbar->current * w->cols / *scrollbar->total;
+        column = *scrollbar->current * total_columns / *scrollbar->total - start_pos;
 
-    for (i = 0; i < w->cols; i++)
+    if (scrollbar_skin.first_vert_char != NULL)
+    {
+        widget_move (w, 0, 0);
+        tty_print_string (scrollbar_skin.first_horiz_char);
+    }
+
+    for (i = start_pos; i < end_pos; i++)
     {
         widget_move (w, 0, i);
         if (i != column)
-            tty_print_char ('!');
+            tty_print_string (scrollbar_skin.background_horiz_char);
         else
-            tty_print_char ('+');
+            tty_print_string (scrollbar_skin.current_char);
+    }
+
+    if (scrollbar_skin.last_vert_char != NULL)
+    {
+        widget_move (w, 0, w->cols - 1);
+        tty_print_string (scrollbar_skin.last_horiz_char);
     }
 }
 
@@ -129,17 +171,45 @@ scrollbar_draw_vertical (WScrollBar * scrollbar)
     int line = 0;
     int i;
 
+    int start_pos = 0;
+    int end_pos = w->lines;
+    int total_lines = w->lines;
+
+    if (scrollbar_skin.first_vert_char != NULL)
+    {
+        start_pos = 1;
+        total_lines--;
+    }
+
+    if (scrollbar_skin.last_vert_char != NULL)
+    {
+        end_pos = w->lines - 1;
+        total_lines--;
+    }
+
     /* Now draw the nice relative pointer */
     if (*scrollbar->total != 0)
-        line = *scrollbar->current * w->lines / *scrollbar->total;
+        line = *scrollbar->current * total_lines / *scrollbar->total + start_pos;
 
-    for (i = 0; i < w->lines; i++)
+    if (scrollbar_skin.first_vert_char != NULL)
+    {
+        widget_move (w, 0, 0);
+        tty_print_string (scrollbar_skin.first_vert_char);
+    }
+
+    for (i = start_pos; i < end_pos; i++)
     {
         widget_move (w, i, 0);
         if (i != line)
-            tty_print_char ('|');
+            tty_print_string (scrollbar_skin.background_vert_char);
         else
-            tty_print_char ('+');
+            tty_print_string (scrollbar_skin.current_char);
+    }
+
+    if (scrollbar_skin.last_vert_char != NULL)
+    {
+        widget_move (w, w->lines - 1, 0);
+        tty_print_string (scrollbar_skin.last_vert_char);
     }
 }
 
@@ -148,8 +218,6 @@ scrollbar_draw_vertical (WScrollBar * scrollbar)
 static void
 scrollbar_draw (WScrollBar * scrollbar)
 {
-    //    const gboolean disabled = (scrollbar->parent->options & W_DISABLED) != 0;
-    //    const int normalc = disabled ? DISABLED_COLOR : scrollbar->parent->color[DLG_COLOR_NORMAL];
     const int normalc = DISABLED_COLOR;
 
     if (*scrollbar->total <= scrollbar->parent->lines)
@@ -178,7 +246,7 @@ scrollbar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
     switch (msg)
     {
     case MSG_INIT:
-//        w->pos_flags = WPOS_KEEP_RIGHT | WPOS_KEEP_BOTTOM;
+        //        w->pos_flags = WPOS_KEEP_RIGHT | WPOS_KEEP_BOTTOM;
         return MSG_HANDLED;
 
     case MSG_RESIZE:
@@ -280,6 +348,40 @@ scrollbar_set_first_displayed (WScrollBar * scrollbar, int *first_displayed)
 {
     if (scrollbar != NULL)
         scrollbar->first_displayed = first_displayed;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+scrollbar_global_init (void)
+{
+    scrollbar_skin.current_char = mc_skin_get ("widget-scollbar", "current-char", "*");
+
+    scrollbar_skin.first_vert_char = mc_skin_get ("widget-scollbar", "first-vert-char", NULL);
+    scrollbar_skin.last_vert_char = mc_skin_get ("widget-scollbar", "last-vert-char", NULL);
+    scrollbar_skin.background_vert_char =
+        mc_skin_get ("widget-scollbar", "background-vert-char", "|");
+
+    scrollbar_skin.first_horiz_char = mc_skin_get ("widget-scollbar", "first-horiz-char", NULL);
+    scrollbar_skin.last_horiz_char = mc_skin_get ("widget-scollbar", "last-horiz-char", NULL);
+    scrollbar_skin.background_horiz_char =
+        mc_skin_get ("widget-scollbar", "background-horiz-char", "-");
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+scrollbar_global_deinit (void)
+{
+    g_free (scrollbar_skin.current_char);
+
+    g_free (scrollbar_skin.first_vert_char);
+    g_free (scrollbar_skin.last_vert_char);
+    g_free (scrollbar_skin.background_vert_char);
+
+    g_free (scrollbar_skin.first_horiz_char);
+    g_free (scrollbar_skin.last_horiz_char);
+    g_free (scrollbar_skin.background_horiz_char);
 }
 
 /* --------------------------------------------------------------------------------------------- */

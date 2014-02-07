@@ -379,7 +379,7 @@ main (int argc, char *argv[])
         error = NULL;
     }
 
-    dlg_set_default_colors ();
+    widget_global_init ();
 
 #ifdef ENABLE_SUBSHELL
     /* Done here to ensure that the subshell doesn't  */
@@ -427,6 +427,8 @@ main (int argc, char *argv[])
     vfs_shut ();
 
     flush_extension_file ();    /* does only free memory */
+
+    widget_global_deinit ();
 
     mc_skin_deinit ();
     tty_colors_done ();

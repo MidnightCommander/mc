@@ -122,6 +122,9 @@ typedef struct hotkey_t
 
 /*** declarations of public functions ************************************************************/
 
+void widget_global_init (void);
+void widget_global_deinit (void);
+
 /* create hotkey from text */
 hotkey_t parse_hotkey (const char *text);
 /* release hotkey, free all mebers of hotkey_t */

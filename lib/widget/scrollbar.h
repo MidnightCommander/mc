@@ -39,6 +39,9 @@ void scrollbar_set_total (WScrollBar * scrollbar, int *total);
 void scrollbar_set_current (WScrollBar * scrollbar, int *current);
 void scrollbar_set_first_displayed (WScrollBar * scrollbar, int *first_displayed);
 
+void scrollbar_global_init (void);
+void scrollbar_global_deinit (void);
+
 /*** inline functions ****************************************************************************/
 
 #endif /* MC__WIDGET_SCROLLBAR_H */

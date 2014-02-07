@@ -377,3 +377,20 @@ mouse_global_in_widget (const Gpm_Event * event, const Widget * w)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+void
+widget_global_init (void)
+{
+    dlg_set_default_colors ();
+    scrollbar_global_init ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+widget_global_deinit (void)
+{
+    scrollbar_global_deinit ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
