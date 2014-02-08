@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/mc/language/"
@@ -157,6 +157,10 @@ msgstr ""
 "на не-256-кольоровому терміналі.\n"
 "Завантажено стандартну обкладинку"
 
+#, fuzzy
+msgid "Escape"
+msgstr "Escape"
+
 msgid "Function key 1"
 msgstr "F1"
 
@@ -217,59 +221,68 @@ msgstr "F19"
 msgid "Function key 20"
 msgstr "F20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "Доповнення/M-Tab"
+
+#, fuzzy
+msgid "BackTab/S-tab"
+msgstr "Зворотна табуляція S-tab"
+
+#, fuzzy
+msgid "Backspace"
 msgstr "← Backspace"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "↑"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "↓"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "←"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "→"
+
+#, fuzzy
+msgid "Insert"
+msgstr "&Вставити"
+
+#, fuzzy
+msgid "Delete"
+msgstr "&Видалити"
+
+#, fuzzy
+msgid "Home"
+msgstr "Home"
 
 msgid "End key"
 msgstr "End"
 
-msgid "Up arrow key"
-msgstr "↑"
-
-msgid "Down arrow key"
-msgstr "↓"
-
-msgid "Left arrow key"
-msgstr "←"
-
-msgid "Right arrow key"
-msgstr "→"
-
-msgid "Home key"
-msgstr "Home"
-
-msgid "Page Down key"
-msgstr "Page Down"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Page Up"
 
-msgid "Insert key"
-msgstr "Insert"
+#, fuzzy
+msgid "Page Down"
+msgstr "Page Down"
 
-msgid "Delete key"
-msgstr "Delete"
-
-msgid "Completion/M-tab"
-msgstr "Доповнення/M-Tab"
-
-msgid "Back Tabulation S-tab"
-msgstr "Зворотна табуляція S-tab"
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "Дод. +"
-
-msgid "- on keypad"
-msgstr "Дод. -"
-
-msgid "Slash on keypad"
-msgstr "Дод. /"
 
 msgid "* on keypad"
 msgstr "Дод. *"
 
-msgid "Escape key"
-msgstr "Escape"
+msgid "- on keypad"
+msgstr "Дод. -"
+
+msgid "+ on keypad"
+msgstr "Дод. +"
 
 msgid "Left arrow keypad"
 msgstr "Дод. ←"
@@ -322,14 +335,14 @@ msgstr "A1"
 msgid "C1 key"
 msgstr "C1"
 
-msgid "Plus"
-msgstr "+"
+msgid "Asterisk"
+msgstr "*"
 
 msgid "Minus"
 msgstr "-"
 
-msgid "Asterisk"
-msgstr "*"
+msgid "Plus"
+msgstr "+"
 
 msgid "Dot"
 msgstr "."
@@ -1511,7 +1524,7 @@ msgstr ""
 "Дружній до користувача редактор тексту\n"
 "написаний для Midnight Commander."
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1718,6 +1731,18 @@ msgstr "&Автозбереження параметрів"
 
 msgid "Configure options"
 msgstr "Параметри конфігурації"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr "Не враховувати регістр"
@@ -3198,6 +3223,10 @@ msgstr "Параметри панелі…"
 msgid "C&onfirmation..."
 msgstr "&Підтвердження…"
 
+#, fuzzy
+msgid "&Appearance..."
+msgstr "&Замінити…"
+
 msgid "&Display bits..."
 msgstr "&Відображення символів…"
 
@@ -4282,6 +4311,15 @@ msgstr "Почати спочатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Insert key"
+#~ msgstr "Insert"
+
+#~ msgid "Delete key"
+#~ msgstr "Delete"
+
+#~ msgid "Slash on keypad"
+#~ msgstr "Дод. /"
 
 #~ msgid "%s?"
 #~ msgstr "%s?"

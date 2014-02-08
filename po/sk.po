@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/projects/p/mc/language/sk/)\n"
@@ -147,6 +147,10 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
+#, fuzzy
+msgid "Escape"
+msgstr "Klávesa escape"
+
 msgid "Function key 1"
 msgstr "Funkčný klá. 1"
 
@@ -207,59 +211,67 @@ msgstr "Funkčný klá. 19"
 msgid "Function key 20"
 msgstr "Funkčný klá. 20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "Doplnenie/M-tab"
+
+msgid "BackTab/S-tab"
+msgstr ""
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Kláv. Backspace"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "Šípka hore"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "Šípka dole"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "Šípka vľavo"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "Šípka vpravo"
+
+#, fuzzy
+msgid "Insert"
+msgstr "v&Ložiť"
+
+#, fuzzy
+msgid "Delete"
+msgstr "&Zmazať"
+
+#, fuzzy
+msgid "Home"
+msgstr "Klávesa Home"
 
 msgid "End key"
 msgstr "Klávesa End"
 
-msgid "Up arrow key"
-msgstr "Šípka hore"
-
-msgid "Down arrow key"
-msgstr "Šípka dole"
-
-msgid "Left arrow key"
-msgstr "Šípka vľavo"
-
-msgid "Right arrow key"
-msgstr "Šípka vpravo"
-
-msgid "Home key"
-msgstr "Klávesa Home"
-
-msgid "Page Down key"
-msgstr "Kláv. Page Down"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Kláv. Page Up"
 
-msgid "Insert key"
-msgstr "Klávesa Insert"
+#, fuzzy
+msgid "Page Down"
+msgstr "Kláv. Page Down"
 
-msgid "Delete key"
-msgstr "Klávesa Delete"
-
-msgid "Completion/M-tab"
-msgstr "Doplnenie/M-tab"
-
-msgid "Back Tabulation S-tab"
-msgstr ""
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "+ na num. kláves."
-
-msgid "- on keypad"
-msgstr "- na num. kláves."
-
-msgid "Slash on keypad"
-msgstr "Lomka na kláves."
 
 msgid "* on keypad"
 msgstr "* na num. kláves."
 
-msgid "Escape key"
-msgstr "Klávesa escape"
+msgid "- on keypad"
+msgstr "- na num. kláves."
+
+msgid "+ on keypad"
+msgstr "+ na num. kláves."
 
 msgid "Left arrow keypad"
 msgstr "Ľava šípka na kláv."
@@ -312,14 +324,14 @@ msgstr "Klávesa A1"
 msgid "C1 key"
 msgstr "Klávesa C1"
 
-msgid "Plus"
-msgstr "Plus"
+msgid "Asterisk"
+msgstr "Hviezdička"
 
 msgid "Minus"
 msgstr "Mínus"
 
-msgid "Asterisk"
-msgstr "Hviezdička"
+msgid "Plus"
+msgstr "Plus"
 
 msgid "Dot"
 msgstr "Bodka"
@@ -1450,7 +1462,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1648,6 +1660,18 @@ msgstr ""
 
 msgid "Configure options"
 msgstr "Nastavovateľne voľby"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr ""
@@ -3034,6 +3058,10 @@ msgstr ""
 msgid "C&onfirmation..."
 msgstr "P&Otvrdenie..."
 
+#, fuzzy
+msgid "&Appearance..."
+msgstr "&Nahradiť..."
+
 msgid "&Display bits..."
 msgstr "&Zobrazené bity..."
 
@@ -4089,6 +4117,15 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Insert key"
+#~ msgstr "Klávesa Insert"
+
+#~ msgid "Delete key"
+#~ msgstr "Klávesa Delete"
+
+#~ msgid "Slash on keypad"
+#~ msgstr "Lomka na kláves."
 
 #~ msgid "%s?"
 #~ msgstr "%s?"

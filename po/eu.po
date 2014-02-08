@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/projects/p/mc/language/eu/)\n"
@@ -153,6 +153,10 @@ msgstr ""
 "256 koloretakoa ez den terminal batean erabili.\n"
 "Lehenetsitako azala zamatu da"
 
+#, fuzzy
+msgid "Escape"
+msgstr "Ihes tekla"
+
 msgid "Function key 1"
 msgstr "1. funtzio tekla"
 
@@ -213,59 +217,67 @@ msgstr "19. funtzio tekla"
 msgid "Function key 20"
 msgstr "20. funtzio tekla"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "Burutzea/M-tab"
+
+msgid "BackTab/S-tab"
+msgstr ""
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Atzera tekla"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "Gora gezia tekla"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "Behera gezia tekla"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "Ezkerrera gezia tekla"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "Eskuinera gezia tekla"
+
+#, fuzzy
+msgid "Insert"
+msgstr "T&xertatu"
+
+#, fuzzy
+msgid "Delete"
+msgstr "E&zabatu"
+
+#, fuzzy
+msgid "Home"
+msgstr "Hasiera tekla"
 
 msgid "End key"
 msgstr "Bukaera tekla"
 
-msgid "Up arrow key"
-msgstr "Gora gezia tekla"
-
-msgid "Down arrow key"
-msgstr "Behera gezia tekla"
-
-msgid "Left arrow key"
-msgstr "Ezkerrera gezia tekla"
-
-msgid "Right arrow key"
-msgstr "Eskuinera gezia tekla"
-
-msgid "Home key"
-msgstr "Hasiera tekla"
-
-msgid "Page Down key"
-msgstr "Orrian behera tekla"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Orrian gora tekla"
 
-msgid "Insert key"
-msgstr "Txertatu tekla"
+#, fuzzy
+msgid "Page Down"
+msgstr "Orrian behera tekla"
 
-msgid "Delete key"
-msgstr "Ezabatu tekla"
-
-msgid "Completion/M-tab"
-msgstr "Burutzea/M-tab"
-
-msgid "Back Tabulation S-tab"
-msgstr ""
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "+ zenbakizko teklatuan"
-
-msgid "- on keypad"
-msgstr "- zenbakizko teklatuan"
-
-msgid "Slash on keypad"
-msgstr "Barra, zenbakizko teklatuan"
 
 msgid "* on keypad"
 msgstr "* zenbakizko teklatuan"
 
-msgid "Escape key"
-msgstr "Ihes tekla"
+msgid "- on keypad"
+msgstr "- zenbakizko teklatuan"
+
+msgid "+ on keypad"
+msgstr "+ zenbakizko teklatuan"
 
 msgid "Left arrow keypad"
 msgstr "Ezkerrera gezia, zenbakizko teklatuan"
@@ -318,14 +330,14 @@ msgstr "A1 tekla"
 msgid "C1 key"
 msgstr "C1 tekla"
 
-msgid "Plus"
-msgstr "Gehi"
+msgid "Asterisk"
+msgstr "Asterisko"
 
 msgid "Minus"
 msgstr "Ken"
 
-msgid "Asterisk"
-msgstr "Asterisko"
+msgid "Plus"
+msgstr "Gehi"
 
 msgid "Dot"
 msgstr "Puntu"
@@ -1484,7 +1496,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1692,6 +1704,18 @@ msgstr "A&uto gorde ezarpena"
 
 msgid "Configure options"
 msgstr "Konfiguratu aukerak"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr "&Ez bereizi maius/minus"
@@ -3168,6 +3192,10 @@ msgstr "&Panelen aukerak..."
 msgid "C&onfirmation..."
 msgstr "&Berrespena..."
 
+#, fuzzy
+msgid "&Appearance..."
+msgstr "&Ordezkatu..."
+
 msgid "&Display bits..."
 msgstr "&Bistaratu bitak..."
 
@@ -4245,6 +4273,15 @@ msgstr "Hasieratik jarraitu?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Insert key"
+#~ msgstr "Txertatu tekla"
+
+#~ msgid "Delete key"
+#~ msgstr "Ezabatu tekla"
+
+#~ msgid "Slash on keypad"
+#~ msgstr "Barra, zenbakizko teklatuan"
 
 #~ msgid "%s?"
 #~ msgstr "%s?"

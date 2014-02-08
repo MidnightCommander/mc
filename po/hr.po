@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/projects/p/mc/language/"
@@ -137,6 +137,9 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
+msgid "Escape"
+msgstr ""
+
 msgid "Function key 1"
 msgstr ""
 
@@ -197,58 +200,55 @@ msgstr ""
 msgid "Function key 20"
 msgstr ""
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr ""
+
+msgid "BackTab/S-tab"
+msgstr ""
+
+msgid "Backspace"
+msgstr ""
+
+msgid "Up arrow"
+msgstr ""
+
+msgid "Down arrow"
+msgstr ""
+
+msgid "Left arrow"
+msgstr ""
+
+msgid "Right arrow"
+msgstr ""
+
+msgid "Insert"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Home"
 msgstr ""
 
 msgid "End key"
 msgstr ""
 
-msgid "Up arrow key"
+msgid "Page Up"
 msgstr ""
 
-msgid "Down arrow key"
+msgid "Page Down"
 msgstr ""
 
-msgid "Left arrow key"
-msgstr ""
-
-msgid "Right arrow key"
-msgstr ""
-
-msgid "Home key"
-msgstr ""
-
-msgid "Page Down key"
-msgstr ""
-
-msgid "Page Up key"
-msgstr ""
-
-msgid "Insert key"
-msgstr ""
-
-msgid "Delete key"
-msgstr ""
-
-msgid "Completion/M-tab"
-msgstr ""
-
-msgid "Back Tabulation S-tab"
-msgstr ""
-
-msgid "+ on keypad"
-msgstr ""
-
-msgid "- on keypad"
-msgstr ""
-
-msgid "Slash on keypad"
+msgid "/ on keypad"
 msgstr ""
 
 msgid "* on keypad"
 msgstr ""
 
-msgid "Escape key"
+msgid "- on keypad"
+msgstr ""
+
+msgid "+ on keypad"
 msgstr ""
 
 msgid "Left arrow keypad"
@@ -302,13 +302,13 @@ msgstr ""
 msgid "C1 key"
 msgstr ""
 
-msgid "Plus"
+msgid "Asterisk"
 msgstr ""
 
 msgid "Minus"
 msgstr ""
 
-msgid "Asterisk"
+msgid "Plus"
 msgstr ""
 
 msgid "Dot"
@@ -1438,7 +1438,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1635,6 +1635,18 @@ msgid "A&uto save setup"
 msgstr ""
 
 msgid "Configure options"
+msgstr ""
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
 msgstr ""
 
 msgid "Case &insensitive"
@@ -3020,6 +3032,9 @@ msgid "&Panel options..."
 msgstr ""
 
 msgid "C&onfirmation..."
+msgstr ""
+
+msgid "&Appearance..."
 msgstr ""
 
 msgid "&Display bits..."

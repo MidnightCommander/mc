@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Kristjan Räts <kristjanrats@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/projects/p/mc/language/"
@@ -153,6 +153,10 @@ msgstr ""
 "mis ei toeta 256 värvi on võimatu.\n"
 "Laeti vaikimisi nahk"
 
+#, fuzzy
+msgid "Escape"
+msgstr "Klahv Esc"
+
 msgid "Function key 1"
 msgstr "Klahv F1"
 
@@ -213,59 +217,68 @@ msgstr "Klahv F19"
 msgid "Function key 20"
 msgstr "Klahv F20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "Lõpetamine/M-Tab"
+
+#, fuzzy
+msgid "BackTab/S-tab"
+msgstr "Tagurpidi tab. S-Tab"
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Tagasisamm"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "Nool üles"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "Nool alla"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "Nool vasakule"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "Nool paremale"
+
+#, fuzzy
+msgid "Insert"
+msgstr "&Sisesta"
+
+#, fuzzy
+msgid "Delete"
+msgstr "K&ustuta"
+
+#, fuzzy
+msgid "Home"
+msgstr "Klahv Home"
 
 msgid "End key"
 msgstr "Klahv End"
 
-msgid "Up arrow key"
-msgstr "Nool üles"
-
-msgid "Down arrow key"
-msgstr "Nool alla"
-
-msgid "Left arrow key"
-msgstr "Nool vasakule"
-
-msgid "Right arrow key"
-msgstr "Nool paremale"
-
-msgid "Home key"
-msgstr "Klahv Home"
-
-msgid "Page Down key"
-msgstr "Klahv Page Down"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Klahv Page Up"
 
-msgid "Insert key"
-msgstr "Klahv Insert"
+#, fuzzy
+msgid "Page Down"
+msgstr "Klahv Page Down"
 
-msgid "Delete key"
-msgstr "Klahv Delete"
-
-msgid "Completion/M-tab"
-msgstr "Lõpetamine/M-Tab"
-
-msgid "Back Tabulation S-tab"
-msgstr "Tagurpidi tab. S-Tab"
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "numbristiku +"
-
-msgid "- on keypad"
-msgstr "numbristiku -"
-
-msgid "Slash on keypad"
-msgstr "numbristiku /"
 
 msgid "* on keypad"
 msgstr "numbristiku *"
 
-msgid "Escape key"
-msgstr "Klahv Esc"
+msgid "- on keypad"
+msgstr "numbristiku -"
+
+msgid "+ on keypad"
+msgstr "numbristiku +"
 
 msgid "Left arrow keypad"
 msgstr "numbristiku nool vasakule"
@@ -318,14 +331,14 @@ msgstr "Klahv A1"
 msgid "C1 key"
 msgstr "Klahv C1"
 
-msgid "Plus"
-msgstr "Pluss +"
+msgid "Asterisk"
+msgstr "Tärn *"
 
 msgid "Minus"
 msgstr "Miinus -"
 
-msgid "Asterisk"
-msgstr "Tärn *"
+msgid "Plus"
+msgstr "Pluss +"
 
 msgid "Dot"
 msgstr "Punkt ."
@@ -1513,7 +1526,8 @@ msgstr ""
 "Kasutajasõbralik tekstitoimeti, mis\n"
 "on loodud Midnight Commanderile."
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr "Kopeerimisõigus (C) 1996-2013 Free Software Foundation"
 
 msgid "About"
@@ -1720,6 +1734,18 @@ msgstr "Seadete a&utomaatsalvestus"
 
 msgid "Configure options"
 msgstr "Valikute seadistamine"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr "&Tõstutundetu"
@@ -3201,6 +3227,10 @@ msgstr "P&aneeli seaded..."
 msgid "C&onfirmation..."
 msgstr "&Kinnituste küsimine..."
 
+#, fuzzy
+msgid "&Appearance..."
+msgstr "&Asenda"
+
 msgid "&Display bits..."
 msgstr "&Kuva bitid"
 
@@ -4280,6 +4310,15 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
+
+#~ msgid "Insert key"
+#~ msgstr "Klahv Insert"
+
+#~ msgid "Delete key"
+#~ msgstr "Klahv Delete"
+
+#~ msgid "Slash on keypad"
+#~ msgstr "numbristiku /"
 
 #~ msgid "%s?"
 #~ msgstr "%s?"

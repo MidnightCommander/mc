@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/projects/p/mc/language/"
@@ -156,6 +156,10 @@ msgstr ""
 "pe un terminal non-256.\n"
 "A fost încărcată tematica implicită"
 
+#, fuzzy
+msgid "Escape"
+msgstr "Tasta Escape"
+
 msgid "Function key 1"
 msgstr "Tasta funcț. 1"
 
@@ -216,59 +220,68 @@ msgstr "Tasta funcț. 19"
 msgid "Function key 20"
 msgstr "Tasta funcț. 20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "Completare/M-tab"
+
+#, fuzzy
+msgid "BackTab/S-tab"
+msgstr "Tab înapoi S-tab"
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Tasta Backspace"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "Săgeata în sus"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "Săgeata în jos"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "Săgeata stânga"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "Săgeata dreapta"
+
+#, fuzzy
+msgid "Insert"
+msgstr "&Inserează"
+
+#, fuzzy
+msgid "Delete"
+msgstr "Ş&terge"
+
+#, fuzzy
+msgid "Home"
+msgstr "Tasta Home"
 
 msgid "End key"
 msgstr "Tasta End"
 
-msgid "Up arrow key"
-msgstr "Săgeata în sus"
-
-msgid "Down arrow key"
-msgstr "Săgeata în jos"
-
-msgid "Left arrow key"
-msgstr "Săgeata stânga"
-
-msgid "Right arrow key"
-msgstr "Săgeata dreapta"
-
-msgid "Home key"
-msgstr "Tasta Home"
-
-msgid "Page Down key"
-msgstr "Tasta Page Down"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Tasta Page Up"
 
-msgid "Insert key"
-msgstr "Tasta Insert"
+#, fuzzy
+msgid "Page Down"
+msgstr "Tasta Page Down"
 
-msgid "Delete key"
-msgstr "Tasta Delete"
-
-msgid "Completion/M-tab"
-msgstr "Completare/M-tab"
-
-msgid "Back Tabulation S-tab"
-msgstr "Tab înapoi S-tab"
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "+ pe keypad"
-
-msgid "- on keypad"
-msgstr "- pe keypad"
-
-msgid "Slash on keypad"
-msgstr "Slash pe keypad"
 
 msgid "* on keypad"
 msgstr "* pe keypad"
 
-msgid "Escape key"
-msgstr "Tasta Escape"
+msgid "- on keypad"
+msgstr "- pe keypad"
+
+msgid "+ on keypad"
+msgstr "+ pe keypad"
 
 msgid "Left arrow keypad"
 msgstr "Săgeată stânga pe keypad"
@@ -321,14 +334,14 @@ msgstr "Tasta A1"
 msgid "C1 key"
 msgstr "Tasta C1"
 
-msgid "Plus"
-msgstr "Plus"
+msgid "Asterisk"
+msgstr "Asterisc"
 
 msgid "Minus"
 msgstr "Minus"
 
-msgid "Asterisk"
-msgstr "Asterisc"
+msgid "Plus"
+msgstr "Plus"
 
 msgid "Dot"
 msgstr "Punct"
@@ -1501,7 +1514,8 @@ msgstr ""
 "Un editor de text ușor de utilizat\n"
 "creat pentru Midnight Commander."
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2013 the Free Software Foundation"
 
 msgid "About"
@@ -1709,6 +1723,18 @@ msgstr "Auto-salvare a configurației"
 
 msgid "Configure options"
 msgstr "Opțiuni de configurare"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr "&Ignoră majuscule"
@@ -3194,6 +3220,10 @@ msgstr "Opțiuni &panou..."
 msgid "C&onfirmation..."
 msgstr "C&onfirmare..."
 
+#, fuzzy
+msgid "&Appearance..."
+msgstr "În&locuire..."
+
 msgid "&Display bits..."
 msgstr "&Biți de afișare..."
 
@@ -4279,6 +4309,15 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
+
+#~ msgid "Insert key"
+#~ msgstr "Tasta Insert"
+
+#~ msgid "Delete key"
+#~ msgstr "Tasta Delete"
+
+#~ msgid "Slash on keypad"
+#~ msgstr "Slash pe keypad"
 
 #~ msgid "%s?"
 #~ msgstr "%s?"

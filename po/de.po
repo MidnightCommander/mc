@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/mc/language/de/)\n"
@@ -147,6 +147,10 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
+#, fuzzy
+msgid "Escape"
+msgstr "Escape Taste"
+
 msgid "Function key 1"
 msgstr "Funktionstaste 1"
 
@@ -207,59 +211,67 @@ msgstr "Funktionstaste 19"
 msgid "Function key 20"
 msgstr "Funktionstaste 20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "Vervollständigen/M-Tab"
+
+msgid "BackTab/S-tab"
+msgstr ""
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Backspace"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "Cursor oben"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "Cursor unten"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "Cursor links"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "Cursor rechts"
+
+#, fuzzy
+msgid "Insert"
+msgstr "E&infügen"
+
+#, fuzzy
+msgid "Delete"
+msgstr "Lös&chen"
+
+#, fuzzy
+msgid "Home"
+msgstr "Pos1-Taste"
 
 msgid "End key"
 msgstr "Ende"
 
-msgid "Up arrow key"
-msgstr "Cursor oben"
-
-msgid "Down arrow key"
-msgstr "Cursor unten"
-
-msgid "Left arrow key"
-msgstr "Cursor links"
-
-msgid "Right arrow key"
-msgstr "Cursor rechts"
-
-msgid "Home key"
-msgstr "Pos1-Taste"
-
-msgid "Page Down key"
-msgstr "Bild nach unten"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Bild nach oben"
 
-msgid "Insert key"
-msgstr "Einfügen"
+#, fuzzy
+msgid "Page Down"
+msgstr "Bild nach unten"
 
-msgid "Delete key"
-msgstr "Löschen"
-
-msgid "Completion/M-tab"
-msgstr "Vervollständigen/M-Tab"
-
-msgid "Back Tabulation S-tab"
-msgstr ""
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "Numerisch +"
-
-msgid "- on keypad"
-msgstr "Numerisch -"
-
-msgid "Slash on keypad"
-msgstr "Numerisch /"
 
 msgid "* on keypad"
 msgstr "Numerisch *"
 
-msgid "Escape key"
-msgstr "Escape Taste"
+msgid "- on keypad"
+msgstr "Numerisch -"
+
+msgid "+ on keypad"
+msgstr "Numerisch +"
 
 msgid "Left arrow keypad"
 msgstr "Numerisch Cursor links"
@@ -312,14 +324,14 @@ msgstr "A1-Taste"
 msgid "C1 key"
 msgstr "C1-Taste"
 
-msgid "Plus"
-msgstr "Plus"
+msgid "Asterisk"
+msgstr "Sternchen"
 
 msgid "Minus"
 msgstr "Minus"
 
-msgid "Asterisk"
-msgstr "Sternchen"
+msgid "Plus"
+msgstr "Plus"
 
 msgid "Dot"
 msgstr "Punkt"
@@ -1486,7 +1498,8 @@ msgstr ""
 "Ein benutzerfreundlicher Texteditor\n"
 "geschrieben für Midnight Commander."
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2013 the Free Software Foundation"
 
 msgid "About"
@@ -1694,6 +1707,18 @@ msgstr "Einstellungen auto&m. speichern"
 
 msgid "Configure options"
 msgstr "Einstellungen"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr "Groß-/&Kleinschreibung ignorieren"
@@ -3162,6 +3187,10 @@ msgstr "&Paneloptionen..."
 msgid "C&onfirmation..."
 msgstr "&Nachfragen..."
 
+#, fuzzy
+msgid "&Appearance..."
+msgstr "E&rsetzen..."
+
 msgid "&Display bits..."
 msgstr "&Darstellungsbits..."
 
@@ -4235,6 +4264,15 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Insert key"
+#~ msgstr "Einfügen"
+
+#~ msgid "Delete key"
+#~ msgstr "Löschen"
+
+#~ msgid "Slash on keypad"
+#~ msgstr "Numerisch /"
 
 #~ msgid "%s?"
 #~ msgstr "%s?"

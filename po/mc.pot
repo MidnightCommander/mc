@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.8.11-48-g9ade80d\n"
+"Project-Id-Version: mc 4.8.11-72-g83992be\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -106,9 +106,9 @@ msgid ""
 "to %s\n"
 msgstr ""
 
-#: lib/search/lib.c:44 src/diffviewer/search.c:232 src/editor/editcmd.c:799
-#: src/editor/editcmd.c:820 src/editor/editcmd.c:862 src/editor/editcmd.c:951
-#: src/editor/editcmd.c:2659 src/viewer/search.c:107
+#: lib/search/lib.c:44 src/diffviewer/search.c:232 src/editor/editcmd.c:798
+#: src/editor/editcmd.c:819 src/editor/editcmd.c:861 src/editor/editcmd.c:950
+#: src/editor/editcmd.c:2658 src/viewer/search.c:106
 msgid "Search string not found"
 msgstr ""
 
@@ -125,7 +125,7 @@ msgstr ""
 msgid "Invalid token number %d"
 msgstr ""
 
-#: lib/search/regex.c:267 lib/search/regex.c:736 src/filemanager/ext.c:737
+#: lib/search/regex.c:267 lib/search/regex.c:736 src/filemanager/ext.c:736
 msgid "Regular expression error"
 msgstr ""
 
@@ -133,7 +133,7 @@ msgstr ""
 msgid "No&rmal"
 msgstr ""
 
-#: lib/search/search.c:52 src/filemanager/find.c:524
+#: lib/search/search.c:52 src/filemanager/find.c:523
 msgid "Re&gular expression"
 msgstr ""
 
@@ -145,26 +145,30 @@ msgstr ""
 msgid "Wil&dcard search"
 msgstr ""
 
-#: lib/skin/common.c:126
+#: lib/skin/common.c:127
 #, c-format
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
 
-#: lib/skin/common.c:138
+#: lib/skin/common.c:139
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
 
-#: lib/skin/common.c:151
+#: lib/skin/common.c:152
 #, c-format
 msgid ""
 "Unable to use '%s' skin with 256 colors support\n"
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
+msgstr ""
+
+#: lib/tty/key.c:102 lib/tty/key.c:163
+msgid "Escape"
 msgstr ""
 
 #: lib/tty/key.c:105
@@ -247,296 +251,292 @@ msgstr ""
 msgid "Function key 20"
 msgstr ""
 
-#: lib/tty/key.c:125 lib/tty/key.c:165
-msgid "Backspace key"
-msgstr ""
-
-#: lib/tty/key.c:126
-msgid "End key"
-msgstr ""
-
-#: lib/tty/key.c:127
-msgid "Up arrow key"
-msgstr ""
-
-#: lib/tty/key.c:128
-msgid "Down arrow key"
-msgstr ""
-
-#: lib/tty/key.c:129
-msgid "Left arrow key"
-msgstr ""
-
-#: lib/tty/key.c:130
-msgid "Right arrow key"
-msgstr ""
-
-#: lib/tty/key.c:131
-msgid "Home key"
-msgstr ""
-
-#: lib/tty/key.c:132
-msgid "Page Down key"
-msgstr ""
-
-#: lib/tty/key.c:133
-msgid "Page Up key"
-msgstr ""
-
-#: lib/tty/key.c:134 lib/tty/key.c:166
-msgid "Insert key"
-msgstr ""
-
-#: lib/tty/key.c:135 lib/tty/key.c:167
-msgid "Delete key"
-msgstr ""
-
-#: lib/tty/key.c:136
+#: lib/tty/key.c:125
 msgid "Completion/M-tab"
 msgstr ""
 
+#: lib/tty/key.c:126
+msgid "BackTab/S-tab"
+msgstr ""
+
+#: lib/tty/key.c:127 lib/tty/key.c:164
+msgid "Backspace"
+msgstr ""
+
+#: lib/tty/key.c:128
+msgid "Up arrow"
+msgstr ""
+
+#: lib/tty/key.c:129
+msgid "Down arrow"
+msgstr ""
+
+#: lib/tty/key.c:130
+msgid "Left arrow"
+msgstr ""
+
+#: lib/tty/key.c:131
+msgid "Right arrow"
+msgstr ""
+
+#: lib/tty/key.c:132 lib/tty/key.c:165
+msgid "Insert"
+msgstr ""
+
+#: lib/tty/key.c:133 lib/tty/key.c:166
+msgid "Delete"
+msgstr ""
+
+#: lib/tty/key.c:134
+msgid "Home"
+msgstr ""
+
+#: lib/tty/key.c:135
+msgid "End key"
+msgstr ""
+
+#: lib/tty/key.c:136
+msgid "Page Up"
+msgstr ""
+
 #: lib/tty/key.c:137
-msgid "Back Tabulation S-tab"
+msgid "Page Down"
 msgstr ""
 
 #: lib/tty/key.c:138
-msgid "+ on keypad"
+msgid "/ on keypad"
 msgstr ""
 
 #: lib/tty/key.c:139
-msgid "- on keypad"
-msgstr ""
-
-#: lib/tty/key.c:140
-msgid "Slash on keypad"
-msgstr ""
-
-#: lib/tty/key.c:141
 msgid "* on keypad"
 msgstr ""
 
-#: lib/tty/key.c:144 lib/tty/key.c:164
-msgid "Escape key"
+#: lib/tty/key.c:140
+msgid "- on keypad"
 msgstr ""
 
-#: lib/tty/key.c:145
+#: lib/tty/key.c:141
+msgid "+ on keypad"
+msgstr ""
+
+#: lib/tty/key.c:144
 msgid "Left arrow keypad"
 msgstr ""
 
-#: lib/tty/key.c:146
+#: lib/tty/key.c:145
 msgid "Right arrow keypad"
 msgstr ""
 
-#: lib/tty/key.c:147
+#: lib/tty/key.c:146
 msgid "Up arrow keypad"
 msgstr ""
 
-#: lib/tty/key.c:148
+#: lib/tty/key.c:147
 msgid "Down arrow keypad"
 msgstr ""
 
-#: lib/tty/key.c:149
+#: lib/tty/key.c:148
 msgid "Home on keypad"
 msgstr ""
 
-#: lib/tty/key.c:150
+#: lib/tty/key.c:149
 msgid "End on keypad"
 msgstr ""
 
-#: lib/tty/key.c:151
+#: lib/tty/key.c:150
 msgid "Page Down keypad"
 msgstr ""
 
-#: lib/tty/key.c:152
+#: lib/tty/key.c:151
 msgid "Page Up keypad"
 msgstr ""
 
-#: lib/tty/key.c:153
+#: lib/tty/key.c:152
 msgid "Insert on keypad"
 msgstr ""
 
-#: lib/tty/key.c:154
+#: lib/tty/key.c:153
 msgid "Delete on keypad"
 msgstr ""
 
-#: lib/tty/key.c:155
+#: lib/tty/key.c:154
 msgid "Enter on keypad"
 msgstr ""
 
-#: lib/tty/key.c:156
+#: lib/tty/key.c:155
 msgid "Function key 21"
 msgstr ""
 
-#: lib/tty/key.c:157
+#: lib/tty/key.c:156
 msgid "Function key 22"
 msgstr ""
 
-#: lib/tty/key.c:158
+#: lib/tty/key.c:157
 msgid "Function key 23"
 msgstr ""
 
-#: lib/tty/key.c:159
+#: lib/tty/key.c:158
 msgid "Function key 24"
 msgstr ""
 
-#: lib/tty/key.c:160
+#: lib/tty/key.c:159
 msgid "A1 key"
 msgstr ""
 
-#: lib/tty/key.c:161
+#: lib/tty/key.c:160
 msgid "C1 key"
 msgstr ""
 
-#: lib/tty/key.c:168
-msgid "Plus"
-msgstr ""
-
-#: lib/tty/key.c:169
-msgid "Minus"
-msgstr ""
-
-#: lib/tty/key.c:170
+#: lib/tty/key.c:167
 msgid "Asterisk"
 msgstr ""
 
-#: lib/tty/key.c:171
+#: lib/tty/key.c:168
+msgid "Minus"
+msgstr ""
+
+#: lib/tty/key.c:169
+msgid "Plus"
+msgstr ""
+
+#: lib/tty/key.c:170
 msgid "Dot"
 msgstr ""
 
-#: lib/tty/key.c:172
+#: lib/tty/key.c:171
 msgid "Less than"
 msgstr ""
 
-#: lib/tty/key.c:173
+#: lib/tty/key.c:172
 msgid "Great than"
 msgstr ""
 
-#: lib/tty/key.c:174
+#: lib/tty/key.c:173
 msgid "Equal"
 msgstr ""
 
-#: lib/tty/key.c:175
+#: lib/tty/key.c:174
 msgid "Comma"
 msgstr ""
 
-#: lib/tty/key.c:176
+#: lib/tty/key.c:175
 msgid "Apostrophe"
 msgstr ""
 
-#: lib/tty/key.c:177
+#: lib/tty/key.c:176
 msgid "Colon"
 msgstr ""
 
-#: lib/tty/key.c:178
+#: lib/tty/key.c:177
 msgid "Exclamation mark"
 msgstr ""
 
-#: lib/tty/key.c:179
+#: lib/tty/key.c:178
 msgid "Question mark"
 msgstr ""
 
-#: lib/tty/key.c:180
+#: lib/tty/key.c:179
 msgid "Ampersand"
 msgstr ""
 
-#: lib/tty/key.c:181
+#: lib/tty/key.c:180
 msgid "Dollar sign"
 msgstr ""
 
-#: lib/tty/key.c:182
+#: lib/tty/key.c:181
 msgid "Quotation mark"
 msgstr ""
 
-#: lib/tty/key.c:183
+#: lib/tty/key.c:182
 msgid "Percent sign"
 msgstr ""
 
-#: lib/tty/key.c:184
+#: lib/tty/key.c:183
 msgid "Caret"
 msgstr ""
 
-#: lib/tty/key.c:185
+#: lib/tty/key.c:184
 msgid "Tilda"
 msgstr ""
 
-#: lib/tty/key.c:186
+#: lib/tty/key.c:185
 msgid "Prime"
 msgstr ""
 
-#: lib/tty/key.c:187
+#: lib/tty/key.c:186
 msgid "Underline"
 msgstr ""
 
-#: lib/tty/key.c:188
+#: lib/tty/key.c:187
 msgid "Understrike"
 msgstr ""
 
-#: lib/tty/key.c:189
+#: lib/tty/key.c:188
 msgid "Pipe"
 msgstr ""
 
-#: lib/tty/key.c:190
+#: lib/tty/key.c:189
 msgid "Left parenthesis"
 msgstr ""
 
-#: lib/tty/key.c:191
+#: lib/tty/key.c:190
 msgid "Right parenthesis"
 msgstr ""
 
-#: lib/tty/key.c:192
+#: lib/tty/key.c:191
 msgid "Left bracket"
 msgstr ""
 
-#: lib/tty/key.c:193
+#: lib/tty/key.c:192
 msgid "Right bracket"
 msgstr ""
 
-#: lib/tty/key.c:194
+#: lib/tty/key.c:193
 msgid "Left brace"
 msgstr ""
 
-#: lib/tty/key.c:195
+#: lib/tty/key.c:194
 msgid "Right brace"
 msgstr ""
 
-#: lib/tty/key.c:196
+#: lib/tty/key.c:195
 msgid "Enter"
 msgstr ""
 
-#: lib/tty/key.c:197
+#: lib/tty/key.c:196
 msgid "Tab key"
 msgstr ""
 
-#: lib/tty/key.c:198
+#: lib/tty/key.c:197
 msgid "Space key"
 msgstr ""
 
-#: lib/tty/key.c:199
+#: lib/tty/key.c:198
 msgid "Slash key"
 msgstr ""
 
-#: lib/tty/key.c:200
+#: lib/tty/key.c:199
 msgid "Backslash key"
 msgstr ""
 
-#: lib/tty/key.c:201 lib/tty/key.c:202
+#: lib/tty/key.c:200 lib/tty/key.c:201
 msgid "Number sign #"
 msgstr ""
 
 #. TRANSLATORS: Please translate as in "at sign" (@).
-#: lib/tty/key.c:204
+#: lib/tty/key.c:203
 msgid "At sign"
 msgstr ""
 
-#: lib/tty/key.c:207 lib/tty/key.c:208
+#: lib/tty/key.c:206 lib/tty/key.c:207
 msgid "Ctrl"
 msgstr ""
 
-#: lib/tty/key.c:209 lib/tty/key.c:210 lib/tty/key.c:211
+#: lib/tty/key.c:208 lib/tty/key.c:209 lib/tty/key.c:210
 msgid "Alt"
 msgstr ""
 
-#: lib/tty/key.c:212
+#: lib/tty/key.c:211
 msgid "Shift"
 msgstr ""
 
@@ -552,17 +552,17 @@ msgid ""
 msgstr ""
 
 #: lib/utilunix.c:517 lib/utilunix.c:522 lib/utilunix.c:577
-#: src/editor/edit.c:319 src/editor/editcmd.c:207 src/editor/editcmd.c:230
-#: src/editor/editcmd.c:401 src/editor/editcmd.c:563 src/editor/editcmd.c:1676
-#: src/editor/editcmd.c:3379 src/editor/editcmd.c:3408
+#: src/editor/edit.c:318 src/editor/editcmd.c:206 src/editor/editcmd.c:229
+#: src/editor/editcmd.c:400 src/editor/editcmd.c:562 src/editor/editcmd.c:1675
+#: src/editor/editcmd.c:3378 src/editor/editcmd.c:3407
 #: src/editor/editcmd_dialogs.c:478 src/execute.c:135
-#: src/filemanager/file.c:1631 src/filemanager/panel.c:4245 src/help.c:363
-#: src/main.c:377 src/main.c:411 src/subshell.c:391 src/subshell.c:1063
-#: src/viewer/actions_cmd.c:420
+#: src/filemanager/boxes.c:539 src/filemanager/file.c:1626
+#: src/filemanager/panel.c:4243 src/help.c:362 src/main.c:377 src/main.c:409
+#: src/subshell.c:378 src/subshell.c:1050 src/viewer/actions_cmd.c:419
 msgid "Warning"
 msgstr ""
 
-#: lib/utilunix.c:517 src/filemanager/ext.c:719
+#: lib/utilunix.c:517 src/filemanager/ext.c:718
 msgid "Pipe failed"
 msgstr ""
 
@@ -579,15 +579,15 @@ msgstr ""
 msgid "Directory cache expired for %s"
 msgstr ""
 
-#: lib/vfs/direntry.c:707 lib/vfs/direntry.c:710
+#: lib/vfs/direntry.c:710 lib/vfs/direntry.c:713
 msgid "bytes transferred"
 msgstr ""
 
-#: lib/vfs/direntry.c:1297
+#: lib/vfs/direntry.c:1300
 msgid "Starting linear transfer..."
 msgstr ""
 
-#: lib/vfs/direntry.c:1378
+#: lib/vfs/direntry.c:1381
 msgid "Getting file"
 msgstr ""
 
@@ -630,19 +630,19 @@ msgstr ""
 msgid "Press any key to continue..."
 msgstr ""
 
-#: lib/vfs/parse_ls_vga.c:869
+#: lib/vfs/parse_ls_vga.c:868
 msgid "Cannot parse:"
 msgstr ""
 
-#: lib/vfs/parse_ls_vga.c:872
+#: lib/vfs/parse_ls_vga.c:871
 msgid "More parsing errors will be ignored."
 msgstr ""
 
-#: lib/vfs/utilvfs.c:356
+#: lib/vfs/utilvfs.c:354
 msgid "Internal error:"
 msgstr ""
 
-#: lib/vfs/utilvfs.c:365 src/filemanager/boxes.c:1192
+#: lib/vfs/utilvfs.c:363 src/filemanager/boxes.c:1331
 msgid "Password:"
 msgstr ""
 
@@ -650,73 +650,73 @@ msgstr ""
 msgid "Screens"
 msgstr ""
 
-#: lib/widget/history.c:302 lib/widget/history.c:325
+#: lib/widget/history.c:301 lib/widget/history.c:324
 msgid "History"
 msgstr ""
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
-#: lib/widget/listbox.c:308
+#: lib/widget/listbox.c:307
 msgid "DialogTitle|History cleanup"
 msgstr ""
 
-#: lib/widget/listbox.c:309
+#: lib/widget/listbox.c:308
 msgid "Do you want clean this history?"
 msgstr ""
 
-#: lib/widget/listbox.c:310 src/diffviewer/ydiff.c:3099 src/editor/edit.c:319
-#: src/editor/editcmd.c:209 src/editor/editcmd.c:232 src/editor/editcmd.c:2782
-#: src/editor/editcmd.c:2788 src/filemanager/cmd.c:143
-#: src/filemanager/file.c:687 src/filemanager/file.c:2732
-#: src/filemanager/filegui.c:439 src/filemanager/hotlist.c:1122
-#: src/filemanager/hotlist.c:1139 src/filemanager/midnight.c:1036
-#: src/filemanager/midnight.c:1044 src/filemanager/panel.c:2597
-#: src/filemanager/tree.c:881 src/subshell.c:1065 src/viewer/actions_cmd.c:617
-#: src/viewer/actions_cmd.c:623 src/viewer/search.c:323
+#: lib/widget/listbox.c:309 src/diffviewer/ydiff.c:3099 src/editor/edit.c:318
+#: src/editor/editcmd.c:208 src/editor/editcmd.c:231 src/editor/editcmd.c:2781
+#: src/editor/editcmd.c:2787 src/filemanager/cmd.c:142
+#: src/filemanager/file.c:683 src/filemanager/file.c:2727
+#: src/filemanager/filegui.c:438 src/filemanager/hotlist.c:1121
+#: src/filemanager/hotlist.c:1138 src/filemanager/midnight.c:1037
+#: src/filemanager/midnight.c:1045 src/filemanager/panel.c:2595
+#: src/filemanager/tree.c:880 src/subshell.c:1052 src/viewer/actions_cmd.c:616
+#: src/viewer/actions_cmd.c:622 src/viewer/search.c:322
 msgid "&Yes"
 msgstr ""
 
-#: lib/widget/listbox.c:310 src/diffviewer/ydiff.c:3099 src/editor/edit.c:319
-#: src/editor/editcmd.c:209 src/editor/editcmd.c:2782
-#: src/editor/editcmd.c:2788 src/filemanager/cmd.c:143
-#: src/filemanager/file.c:687 src/filemanager/file.c:2732
-#: src/filemanager/filegui.c:441 src/filemanager/hotlist.c:1122
-#: src/filemanager/hotlist.c:1139 src/filemanager/midnight.c:1036
-#: src/filemanager/midnight.c:1044 src/filemanager/panel.c:2597
-#: src/filemanager/tree.c:881 src/subshell.c:1065 src/viewer/actions_cmd.c:617
-#: src/viewer/actions_cmd.c:623 src/viewer/search.c:324
+#: lib/widget/listbox.c:309 src/diffviewer/ydiff.c:3099 src/editor/edit.c:318
+#: src/editor/editcmd.c:208 src/editor/editcmd.c:2781
+#: src/editor/editcmd.c:2787 src/filemanager/cmd.c:142
+#: src/filemanager/file.c:683 src/filemanager/file.c:2727
+#: src/filemanager/filegui.c:440 src/filemanager/hotlist.c:1121
+#: src/filemanager/hotlist.c:1138 src/filemanager/midnight.c:1037
+#: src/filemanager/midnight.c:1045 src/filemanager/panel.c:2595
+#: src/filemanager/tree.c:880 src/subshell.c:1052 src/viewer/actions_cmd.c:616
+#: src/viewer/actions_cmd.c:622 src/viewer/search.c:323
 msgid "&No"
 msgstr ""
 
-#: lib/widget/quick.h:215 src/editor/editcmd.c:2659
-#: src/editor/editcmd_dialogs.c:121 src/editor/editwidget.c:150
-#: src/filemanager/boxes.c:1114 src/filemanager/filegui.c:1244
-#: src/filemanager/find.c:532 src/filemanager/layout.c:461 src/subshell.c:394
+#: lib/widget/quick.h:215 src/editor/editcmd.c:2658
+#: src/editor/editcmd_dialogs.c:121 src/editor/editwidget.c:149
+#: src/filemanager/boxes.c:1253 src/filemanager/filegui.c:1243
+#: src/filemanager/find.c:531 src/filemanager/layout.c:460 src/subshell.c:381
 msgid "&OK"
 msgstr ""
 
-#: lib/widget/quick.h:216 src/editor/editcmd.c:209 src/editor/editcmd.c:232
-#: src/editor/editcmd.c:403 src/editor/editcmd.c:566 src/editor/editcmd.c:1677
-#: src/editor/editcmd.c:2025 src/editor/editcmd.c:2782
-#: src/editor/editcmd.c:3382 src/editor/editcmd.c:3411
+#: lib/widget/quick.h:216 src/editor/editcmd.c:208 src/editor/editcmd.c:231
+#: src/editor/editcmd.c:402 src/editor/editcmd.c:565 src/editor/editcmd.c:1676
+#: src/editor/editcmd.c:2024 src/editor/editcmd.c:2781
+#: src/editor/editcmd.c:3381 src/editor/editcmd.c:3410
 #: src/editor/editcmd_dialogs.c:123 src/editor/editcmd_dialogs.c:284
 #: src/editor/editcmd_dialogs.c:480 src/editor/spell_dialogs.c:99
-#: src/filemanager/achown.c:97 src/filemanager/chmod.c:126
-#: src/filemanager/chown.c:92 src/filemanager/cmd.c:1266
-#: src/filemanager/filegui.c:1248 src/filemanager/find.c:532
-#: src/filemanager/hotlist.c:192 src/filemanager/hotlist.c:978
-#: src/filemanager/hotlist.c:1040 src/filemanager/layout.c:462
-#: src/filemanager/panelize.c:144 src/learn.c:258 src/viewer/hex.c:408
+#: src/filemanager/achown.c:96 src/filemanager/chmod.c:125
+#: src/filemanager/chown.c:91 src/filemanager/cmd.c:1265
+#: src/filemanager/filegui.c:1247 src/filemanager/find.c:531
+#: src/filemanager/hotlist.c:191 src/filemanager/hotlist.c:977
+#: src/filemanager/hotlist.c:1039 src/filemanager/layout.c:461
+#: src/filemanager/panelize.c:143 src/learn.c:257 src/viewer/hex.c:407
 msgid "&Cancel"
 msgstr ""
 
-#: lib/widget/wtools.c:164
+#: lib/widget/wtools.c:163
 msgid "Background process:"
 msgstr ""
 
-#: lib/widget/wtools.c:285 lib/widget/wtools.c:412 src/editor/edit.c:164
-#: src/editor/edit.c:175 src/editor/edit.c:332 src/editor/edit.c:1925
-#: src/editor/edit.c:1935 src/editor/editcmd.c:294 src/editor/editcmd.c:304
-#: src/editor/editcmd.c:345 src/editor/editcmd.c:2882 src/editor/spell.c:318
+#: lib/widget/wtools.c:284 lib/widget/wtools.c:411 src/editor/edit.c:163
+#: src/editor/edit.c:174 src/editor/edit.c:331 src/editor/edit.c:1924
+#: src/editor/edit.c:1934 src/editor/editcmd.c:293 src/editor/editcmd.c:303
+#: src/editor/editcmd.c:344 src/editor/editcmd.c:2881 src/editor/spell.c:318
 #: src/editor/spell.c:555 src/editor/spell.c:563
 #: tests/src/execute__common.c:145
 #: tests/src/execute__execute_with_vfs_arg.c:154
@@ -884,12 +884,12 @@ msgid ""
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 
-#: src/args.c:412 src/filemanager/midnight.c:1701 src/textconf.c:140
+#: src/args.c:412 src/filemanager/midnight.c:1705 src/textconf.c:140
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr ""
 
-#: src/args.c:597 src/filemanager/boxes.c:536
+#: src/args.c:597 src/filemanager/boxes.c:675
 msgid "Main options"
 msgstr ""
 
@@ -909,8 +909,8 @@ msgstr ""
 msgid "Two files are required to evoke the diffviewer."
 msgstr ""
 
-#: src/background.c:213 src/background.c:287 src/filemanager/file.c:599
-#: src/filemanager/file.c:641
+#: src/background.c:213 src/background.c:287 src/filemanager/file.c:598
+#: src/filemanager/file.c:639
 msgid "Background process error"
 msgstr ""
 
@@ -943,39 +943,39 @@ msgid "&Dismiss"
 msgstr ""
 
 #: src/diffviewer/search.c:85 src/editor/editcmd_dialogs.c:104
-#: src/editor/editcmd_dialogs.c:201 src/viewer/dialogs.c:90
+#: src/editor/editcmd_dialogs.c:201 src/viewer/dialogs.c:89
 msgid "Enter search string:"
 msgstr ""
 
 #: src/diffviewer/search.c:92 src/editor/editcmd_dialogs.c:112
-#: src/editor/editcmd_dialogs.c:211 src/filemanager/boxes.c:529
-#: src/filemanager/boxes.c:728 src/filemanager/find.c:518
-#: src/viewer/dialogs.c:98
+#: src/editor/editcmd_dialogs.c:211 src/filemanager/boxes.c:668
+#: src/filemanager/boxes.c:867 src/filemanager/find.c:517
+#: src/viewer/dialogs.c:97
 msgid "Cas&e sensitive"
 msgstr ""
 
 #: src/diffviewer/search.c:93 src/editor/editcmd_dialogs.c:113
-#: src/editor/editcmd_dialogs.c:212 src/viewer/dialogs.c:99
+#: src/editor/editcmd_dialogs.c:212 src/viewer/dialogs.c:98
 msgid "&Backwards"
 msgstr ""
 
 #: src/diffviewer/search.c:94 src/editor/editcmd_dialogs.c:115
-#: src/editor/editcmd_dialogs.c:214 src/filemanager/find.c:529
-#: src/viewer/dialogs.c:100
+#: src/editor/editcmd_dialogs.c:214 src/filemanager/find.c:528
+#: src/viewer/dialogs.c:99
 msgid "&Whole words"
 msgstr ""
 
 #: src/diffviewer/search.c:96 src/editor/editcmd_dialogs.c:117
-#: src/editor/editcmd_dialogs.c:216 src/filemanager/find.c:516
-#: src/viewer/dialogs.c:102
+#: src/editor/editcmd_dialogs.c:216 src/filemanager/find.c:515
+#: src/viewer/dialogs.c:101
 msgid "&All charsets"
 msgstr ""
 
 #: src/diffviewer/search.c:106 src/diffviewer/search.c:232
 #: src/diffviewer/search.c:245 src/diffviewer/search.c:278
-#: src/editor/editcmd.c:951 src/editor/editcmd.c:981 src/editor/editcmd.c:2553
-#: src/editor/editcmd_dialogs.c:130 src/viewer/dialogs.c:112
-#: src/viewer/search.c:142 src/viewer/search.c:244 src/viewer/search.c:347
+#: src/editor/editcmd.c:950 src/editor/editcmd.c:980 src/editor/editcmd.c:2552
+#: src/editor/editcmd_dialogs.c:130 src/viewer/dialogs.c:111
+#: src/viewer/search.c:141 src/viewer/search.c:243 src/viewer/search.c:346
 msgid "Search"
 msgstr ""
 
@@ -1061,23 +1061,23 @@ msgstr ""
 msgid "Goto line (right)"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2912 src/editor/editcmd.c:2966
+#: src/diffviewer/ydiff.c:2912 src/editor/editcmd.c:2965
 msgid "Enter line:"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2953 src/editor/editwidget.c:977
-#: src/filemanager/midnight.c:1657 src/filemanager/tree.c:1212 src/help.c:1146
-#: src/viewer/display.c:86
+#: src/diffviewer/ydiff.c:2953 src/editor/editwidget.c:976
+#: src/filemanager/midnight.c:1661 src/filemanager/tree.c:1211 src/help.c:1145
+#: src/viewer/display.c:85
 msgid "ButtonBar|Help"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2954 src/editor/editwidget.c:978
-#: src/viewer/display.c:98
+#: src/diffviewer/ydiff.c:2954 src/editor/editwidget.c:977
+#: src/viewer/display.c:97
 msgid "ButtonBar|Save"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2955 src/filemanager/midnight.c:1660
-#: src/viewer/display.c:93
+#: src/diffviewer/ydiff.c:2955 src/filemanager/midnight.c:1664
+#: src/viewer/display.c:92
 msgid "ButtonBar|Edit"
 msgstr ""
 
@@ -1085,8 +1085,8 @@ msgstr ""
 msgid "ButtonBar|Merge"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2957 src/editor/editwidget.c:983
-#: src/viewer/display.c:108
+#: src/diffviewer/ydiff.c:2957 src/editor/editwidget.c:982
+#: src/viewer/display.c:107
 msgid "ButtonBar|Search"
 msgstr ""
 
@@ -1094,14 +1094,14 @@ msgstr ""
 msgid "ButtonBar|Options"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2959 src/editor/editwidget.c:986
-#: src/filemanager/midnight.c:1666 src/help.c:1155 src/viewer/display.c:120
-#: src/viewer/display.c:123
+#: src/diffviewer/ydiff.c:2959 src/editor/editwidget.c:985
+#: src/filemanager/midnight.c:1670 src/help.c:1154 src/viewer/display.c:119
+#: src/viewer/display.c:122
 msgid "ButtonBar|Quit"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:3096 src/editor/editcmd.c:2788
-#: src/viewer/actions_cmd.c:615 src/viewer/actions_cmd.c:621
+#: src/diffviewer/ydiff.c:3096 src/editor/editcmd.c:2787
+#: src/viewer/actions_cmd.c:614 src/viewer/actions_cmd.c:620
 msgid "Quit"
 msgstr ""
 
@@ -1126,7 +1126,7 @@ msgid "\"%s\" is a directory"
 msgstr ""
 
 #: src/diffviewer/ydiff.c:3577 src/diffviewer/ydiff.c:3594
-#: src/filemanager/file.c:2634 src/viewer/mcviewer.c:336
+#: src/filemanager/file.c:2629 src/viewer/mcviewer.c:335
 #, c-format
 msgid ""
 "Cannot stat \"%s\"\n"
@@ -1153,363 +1153,363 @@ msgstr ""
 msgid "< Reload Current Syntax >"
 msgstr ""
 
-#: src/editor/edit.c:163 src/editor/edit.c:271
+#: src/editor/edit.c:162 src/editor/edit.c:270
 #, c-format
 msgid "Cannot open %s for reading"
 msgstr ""
 
-#: src/editor/edit.c:174
+#: src/editor/edit.c:173
 #, c-format
 msgid "Error reading %s"
 msgstr ""
 
-#: src/editor/edit.c:283
+#: src/editor/edit.c:282
 #, c-format
 msgid "Cannot get size/permissions for %s"
 msgstr ""
 
-#: src/editor/edit.c:292
+#: src/editor/edit.c:291
 #, c-format
 msgid "\"%s\" is not a regular file"
 msgstr ""
 
-#: src/editor/edit.c:317
+#: src/editor/edit.c:316
 #, c-format
 msgid ""
 "File \"%s\" is too large.\n"
 "Open it anyway?"
 msgstr ""
 
-#: src/editor/edit.c:1924
+#: src/editor/edit.c:1923
 #, c-format
 msgid "Error reading from pipe: %s"
 msgstr ""
 
-#: src/editor/edit.c:1934
+#: src/editor/edit.c:1933
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr ""
 
-#: src/editor/editcmd.c:208
+#: src/editor/editcmd.c:207
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
 
-#: src/editor/editcmd.c:231
+#: src/editor/editcmd.c:230
 msgid "The file has been modified in the meantime. Save anyway?"
 msgstr ""
 
-#: src/editor/editcmd.c:293
+#: src/editor/editcmd.c:292
 #, c-format
 msgid "Error writing to pipe: %s"
 msgstr ""
 
-#: src/editor/editcmd.c:303
+#: src/editor/editcmd.c:302
 #, c-format
 msgid "Cannot open pipe for writing: %s"
 msgstr ""
 
-#: src/editor/editcmd.c:344
+#: src/editor/editcmd.c:343
 #, c-format
 msgid "Cannot open file for writing: %s"
 msgstr ""
 
-#: src/editor/editcmd.c:402
+#: src/editor/editcmd.c:401
 msgid "The file you are saving is not finished with a newline"
 msgstr ""
 
-#: src/editor/editcmd.c:403 src/editor/editcmd.c:566 src/editor/editcmd.c:3381
-#: src/editor/editcmd.c:3410 src/editor/editcmd_dialogs.c:480
+#: src/editor/editcmd.c:402 src/editor/editcmd.c:565 src/editor/editcmd.c:3380
+#: src/editor/editcmd.c:3409 src/editor/editcmd_dialogs.c:480
 msgid "C&ontinue"
 msgstr ""
 
-#: src/editor/editcmd.c:416
+#: src/editor/editcmd.c:415
 msgid "&Do not change"
 msgstr ""
 
-#: src/editor/editcmd.c:417
+#: src/editor/editcmd.c:416
 msgid "&Unix format (LF)"
 msgstr ""
 
-#: src/editor/editcmd.c:418
+#: src/editor/editcmd.c:417
 msgid "&Windows/DOS format (CR LF)"
 msgstr ""
 
-#: src/editor/editcmd.c:419
+#: src/editor/editcmd.c:418
 msgid "&Macintosh format (CR)"
 msgstr ""
 
-#: src/editor/editcmd.c:424 src/editor/editcmd.c:2046
-#: src/editor/editcmd.c:3009 src/editor/editcmd.c:3041
-#: src/filemanager/cmd.c:845
+#: src/editor/editcmd.c:423 src/editor/editcmd.c:2045
+#: src/editor/editcmd.c:3008 src/editor/editcmd.c:3040
+#: src/filemanager/cmd.c:844
 msgid "Enter file name:"
 msgstr ""
 
-#: src/editor/editcmd.c:428
+#: src/editor/editcmd.c:427
 msgid "Change line breaks to:"
 msgstr ""
 
-#: src/editor/editcmd.c:437
+#: src/editor/editcmd.c:436
 msgid "Save As"
 msgstr ""
 
-#: src/editor/editcmd.c:565
+#: src/editor/editcmd.c:564
 msgid "Block is large, you may not be able to undo this action"
 msgstr ""
 
-#: src/editor/editcmd.c:1573
+#: src/editor/editcmd.c:1572
 msgid "&Quick save"
 msgstr ""
 
-#: src/editor/editcmd.c:1574
+#: src/editor/editcmd.c:1573
 msgid "&Safe save"
 msgstr ""
 
-#: src/editor/editcmd.c:1575
+#: src/editor/editcmd.c:1574
 msgid "&Do backups with following extension:"
 msgstr ""
 
-#: src/editor/editcmd.c:1596
+#: src/editor/editcmd.c:1595
 msgid "Check &POSIX new line"
 msgstr ""
 
-#: src/editor/editcmd.c:1604
+#: src/editor/editcmd.c:1603
 msgid "Edit Save Mode"
 msgstr ""
 
-#: src/editor/editcmd.c:1661 src/editor/editcmd.c:1731
+#: src/editor/editcmd.c:1660 src/editor/editcmd.c:1730
 msgid "Save as"
 msgstr ""
 
-#: src/editor/editcmd.c:1663
+#: src/editor/editcmd.c:1662
 msgid "Cannot save: destination is not a regular file"
 msgstr ""
 
-#: src/editor/editcmd.c:1677
+#: src/editor/editcmd.c:1676
 msgid "A file already exists with this name"
 msgstr ""
 
-#: src/editor/editcmd.c:1677
+#: src/editor/editcmd.c:1676
 msgid "&Overwrite"
 msgstr ""
 
-#: src/editor/editcmd.c:1731 src/editor/editcmd.c:3019
+#: src/editor/editcmd.c:1730 src/editor/editcmd.c:3018
 msgid "Cannot save file"
 msgstr ""
 
-#: src/editor/editcmd.c:1756 src/editor/editcmd.c:1759
+#: src/editor/editcmd.c:1755 src/editor/editcmd.c:1758
 msgid "Delete macro"
 msgstr ""
 
-#: src/editor/editcmd.c:1756
+#: src/editor/editcmd.c:1755
 msgid "Press macro hotkey:"
 msgstr ""
 
-#: src/editor/editcmd.c:1759
+#: src/editor/editcmd.c:1758
 msgid "Macro not deleted"
 msgstr ""
 
-#: src/editor/editcmd.c:1814
+#: src/editor/editcmd.c:1813
 msgid "Save macro"
 msgstr ""
 
-#: src/editor/editcmd.c:1814
+#: src/editor/editcmd.c:1813
 msgid "Press the macro's new hotkey:"
 msgstr ""
 
-#: src/editor/editcmd.c:1888
+#: src/editor/editcmd.c:1887
 msgid "Repeat last commands"
 msgstr ""
 
-#: src/editor/editcmd.c:1888
+#: src/editor/editcmd.c:1887
 msgid "Repeat times:"
 msgstr ""
 
-#: src/editor/editcmd.c:2023
+#: src/editor/editcmd.c:2022
 #, c-format
 msgid "Confirm save file: \"%s\""
 msgstr ""
 
-#: src/editor/editcmd.c:2025 src/viewer/hex.c:396 src/viewer/hex.c:408
+#: src/editor/editcmd.c:2024 src/viewer/hex.c:395 src/viewer/hex.c:407
 msgid "Save file"
 msgstr ""
 
-#: src/editor/editcmd.c:2025 src/editor/editmenu.c:77 src/learn.c:196
-#: src/learn.c:257
+#: src/editor/editcmd.c:2024 src/editor/editmenu.c:77 src/learn.c:195
+#: src/learn.c:256
 msgid "&Save"
 msgstr ""
 
-#: src/editor/editcmd.c:2046
+#: src/editor/editcmd.c:2045
 msgid "Load"
 msgstr ""
 
-#: src/editor/editcmd.c:2079
+#: src/editor/editcmd.c:2078
 msgid "Syntax file edit"
 msgstr ""
 
-#: src/editor/editcmd.c:2080
+#: src/editor/editcmd.c:2079
 msgid "Which syntax file you want to edit?"
 msgstr ""
 
-#: src/editor/editcmd.c:2081 src/editor/editcmd.c:2126
-#: src/filemanager/cmd.c:1083 src/filemanager/cmd.c:1121
-#: src/filemanager/cmd.c:1178
+#: src/editor/editcmd.c:2080 src/editor/editcmd.c:2125
+#: src/filemanager/cmd.c:1082 src/filemanager/cmd.c:1120
+#: src/filemanager/cmd.c:1177
 msgid "&User"
 msgstr ""
 
-#: src/editor/editcmd.c:2081 src/editor/editcmd.c:2126
+#: src/editor/editcmd.c:2080 src/editor/editcmd.c:2125
 msgid "&System wide"
 msgstr ""
 
-#: src/editor/editcmd.c:2124 src/filemanager/cmd.c:1119
+#: src/editor/editcmd.c:2123 src/filemanager/cmd.c:1118
 msgid "Menu edit"
 msgstr ""
 
-#: src/editor/editcmd.c:2125 src/filemanager/cmd.c:1120
+#: src/editor/editcmd.c:2124 src/filemanager/cmd.c:1119
 msgid "Which menu file do you want to edit?"
 msgstr ""
 
-#: src/editor/editcmd.c:2126 src/filemanager/cmd.c:1121
+#: src/editor/editcmd.c:2125 src/filemanager/cmd.c:1120
 msgid "&Local"
 msgstr ""
 
-#: src/editor/editcmd.c:2618 src/editor/editcmd.c:2659
-#: src/editor/editcmd.c:2670 src/editor/editcmd_dialogs.c:226
+#: src/editor/editcmd.c:2617 src/editor/editcmd.c:2658
+#: src/editor/editcmd.c:2669 src/editor/editcmd_dialogs.c:226
 msgid "Replace"
 msgstr ""
 
-#: src/editor/editcmd.c:2670
+#: src/editor/editcmd.c:2669
 #, c-format
 msgid "%ld replacements made"
 msgstr ""
 
-#: src/editor/editcmd.c:2760 src/editor/editwidget.c:394
+#: src/editor/editcmd.c:2759 src/editor/editwidget.c:393
 msgid "[NoName]"
 msgstr ""
 
-#: src/editor/editcmd.c:2781
+#: src/editor/editcmd.c:2780
 #, c-format
 msgid ""
 "File %s was modified.\n"
 "Save before close?"
 msgstr ""
 
-#: src/editor/editcmd.c:2782
+#: src/editor/editcmd.c:2781
 msgid "Close file"
 msgstr ""
 
-#: src/editor/editcmd.c:2786
+#: src/editor/editcmd.c:2785
 #, c-format
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file %s?"
 msgstr ""
 
-#: src/editor/editcmd.c:2882
+#: src/editor/editcmd.c:2881
 msgid "This function is not implemented"
 msgstr ""
 
-#: src/editor/editcmd.c:2897
+#: src/editor/editcmd.c:2896
 msgid "Copy to clipboard"
 msgstr ""
 
-#: src/editor/editcmd.c:2897 src/editor/editcmd.c:2921
+#: src/editor/editcmd.c:2896 src/editor/editcmd.c:2920
 msgid "Unable to save to file"
 msgstr ""
 
-#: src/editor/editcmd.c:2921
+#: src/editor/editcmd.c:2920
 msgid "Cut to clipboard"
 msgstr ""
 
-#: src/editor/editcmd.c:2966
+#: src/editor/editcmd.c:2965
 msgid "Goto line"
 msgstr ""
 
-#: src/editor/editcmd.c:3009 src/editor/editcmd.c:3019
+#: src/editor/editcmd.c:3008 src/editor/editcmd.c:3018
 msgid "Save block"
 msgstr ""
 
-#: src/editor/editcmd.c:3041 src/editor/editcmd.c:3056
+#: src/editor/editcmd.c:3040 src/editor/editcmd.c:3055
 msgid "Insert file"
 msgstr ""
 
-#: src/editor/editcmd.c:3056
+#: src/editor/editcmd.c:3055
 msgid "Cannot insert file"
 msgstr ""
 
-#: src/editor/editcmd.c:3078
+#: src/editor/editcmd.c:3077
 msgid "Sort block"
 msgstr ""
 
-#: src/editor/editcmd.c:3078
+#: src/editor/editcmd.c:3077
 msgid "You must first highlight a block of text"
 msgstr ""
 
-#: src/editor/editcmd.c:3086
+#: src/editor/editcmd.c:3085
 msgid "Run sort"
 msgstr ""
 
-#: src/editor/editcmd.c:3087
+#: src/editor/editcmd.c:3086
 msgid "Enter sort options (see manpage) separated by whitespace:"
 msgstr ""
 
-#: src/editor/editcmd.c:3108 src/editor/editcmd.c:3115
+#: src/editor/editcmd.c:3107 src/editor/editcmd.c:3114
 msgid "Sort"
 msgstr ""
 
-#: src/editor/editcmd.c:3108
+#: src/editor/editcmd.c:3107
 msgid "Cannot execute sort command"
 msgstr ""
 
-#: src/editor/editcmd.c:3114
+#: src/editor/editcmd.c:3113
 #, c-format
 msgid "Sort returned non-zero: %s"
 msgstr ""
 
-#: src/editor/editcmd.c:3149
+#: src/editor/editcmd.c:3148
 msgid "Paste output of external command"
 msgstr ""
 
-#: src/editor/editcmd.c:3150
+#: src/editor/editcmd.c:3149
 msgid "Enter shell command(s):"
 msgstr ""
 
-#: src/editor/editcmd.c:3167
+#: src/editor/editcmd.c:3166
 msgid "External command"
 msgstr ""
 
-#: src/editor/editcmd.c:3167
+#: src/editor/editcmd.c:3166
 msgid "Cannot execute command"
 msgstr ""
 
-#: src/editor/editcmd.c:3218
+#: src/editor/editcmd.c:3217
 msgid "mail -s <subject> -c <cc> <to>"
 msgstr ""
 
-#: src/editor/editcmd.c:3219
+#: src/editor/editcmd.c:3218
 msgid "To"
 msgstr ""
 
-#: src/editor/editcmd.c:3222
+#: src/editor/editcmd.c:3221
 msgid "Subject"
 msgstr ""
 
-#: src/editor/editcmd.c:3225
+#: src/editor/editcmd.c:3224
 msgid "Copies to"
 msgstr ""
 
-#: src/editor/editcmd.c:3235
+#: src/editor/editcmd.c:3234
 msgid "Mail"
 msgstr ""
 
-#: src/editor/editcmd.c:3342
+#: src/editor/editcmd.c:3341
 msgid "Insert literal"
 msgstr ""
 
-#: src/editor/editcmd.c:3343
+#: src/editor/editcmd.c:3342
 msgid "Press any key:"
 msgstr ""
 
-#: src/editor/editcmd.c:3380 src/editor/editcmd.c:3409
+#: src/editor/editcmd.c:3379 src/editor/editcmd.c:3408
 msgid ""
 "Current text was modified without a file save.\n"
 "Continue discards these changes"
@@ -1535,14 +1535,14 @@ msgstr ""
 msgid "&Replace"
 msgstr ""
 
-#: src/editor/editcmd_dialogs.c:282 src/filemanager/file.c:687
-#: src/filemanager/filegui.c:449
+#: src/editor/editcmd_dialogs.c:282 src/filemanager/file.c:683
+#: src/filemanager/filegui.c:448
 msgid "A&ll"
 msgstr ""
 
 #: src/editor/editcmd_dialogs.c:283 src/editor/spell_dialogs.c:97
-#: src/filemanager/file.c:602 src/filemanager/file.c:643
-#: src/filemanager/file.c:2444 src/filemanager/filegui.c:258
+#: src/filemanager/file.c:601 src/filemanager/file.c:641
+#: src/filemanager/file.c:2439 src/filemanager/filegui.c:257
 msgid "&Skip"
 msgstr ""
 
@@ -1560,7 +1560,7 @@ msgid ""
 "Continue discards these changes."
 msgstr ""
 
-#: src/editor/editdraw.c:265 src/editor/editwidget.c:339
+#: src/editor/editdraw.c:264 src/editor/editwidget.c:338
 msgid "NoName"
 msgstr ""
 
@@ -1596,7 +1596,7 @@ msgstr ""
 msgid "A&bout..."
 msgstr ""
 
-#: src/editor/editmenu.c:87 src/filemanager/find.c:198 src/subshell.c:394
+#: src/editor/editmenu.c:87 src/filemanager/find.c:197 src/subshell.c:381
 msgid "&Quit"
 msgstr ""
 
@@ -1636,8 +1636,8 @@ msgstr ""
 msgid "Mo&ve"
 msgstr ""
 
-#: src/editor/editmenu.c:112 src/filemanager/file.c:1914
-#: src/filemanager/midnight.c:257
+#: src/editor/editmenu.c:112 src/filemanager/file.c:1909
+#: src/filemanager/midnight.c:256
 msgid "&Delete"
 msgstr ""
 
@@ -1777,7 +1777,7 @@ msgstr ""
 msgid "&External formatter"
 msgstr ""
 
-#: src/editor/editmenu.c:230 src/filemanager/hotlist.c:204
+#: src/editor/editmenu.c:230 src/filemanager/hotlist.c:203
 msgid "&Move"
 msgstr ""
 
@@ -1809,7 +1809,7 @@ msgstr ""
 msgid "Save &mode..."
 msgstr ""
 
-#: src/editor/editmenu.c:251 src/filemanager/midnight.c:341
+#: src/editor/editmenu.c:251 src/filemanager/midnight.c:342
 msgid "Learn &keys..."
 msgstr ""
 
@@ -1825,15 +1825,15 @@ msgstr ""
 msgid "&Menu file"
 msgstr ""
 
-#: src/editor/editmenu.c:258 src/filemanager/midnight.c:346
+#: src/editor/editmenu.c:258 src/filemanager/midnight.c:347
 msgid "&Save setup"
 msgstr ""
 
-#: src/editor/editmenu.c:292 src/filemanager/midnight.c:358
+#: src/editor/editmenu.c:292 src/filemanager/midnight.c:359
 msgid "&File"
 msgstr ""
 
-#: src/editor/editmenu.c:294 src/filemanager/midnight.c:243
+#: src/editor/editmenu.c:294 src/filemanager/midnight.c:242
 msgid "&Edit"
 msgstr ""
 
@@ -1841,7 +1841,7 @@ msgstr ""
 msgid "&Search"
 msgstr ""
 
-#: src/editor/editmenu.c:299 src/filemanager/midnight.c:360
+#: src/editor/editmenu.c:299 src/filemanager/midnight.c:361
 msgid "&Command"
 msgstr ""
 
@@ -1853,143 +1853,143 @@ msgstr ""
 msgid "&Window"
 msgstr ""
 
-#: src/editor/editmenu.c:306 src/filemanager/midnight.c:362
+#: src/editor/editmenu.c:306 src/filemanager/midnight.c:363
 msgid "&Options"
 msgstr ""
 
-#: src/editor/editoptions.c:54
+#: src/editor/editoptions.c:53
 msgid "&None"
 msgstr ""
 
-#: src/editor/editoptions.c:55
+#: src/editor/editoptions.c:54
 msgid "&Dynamic paragraphing"
 msgstr ""
 
-#: src/editor/editoptions.c:56
+#: src/editor/editoptions.c:55
 msgid "Type &writer wrap"
 msgstr ""
 
-#: src/editor/editoptions.c:149
+#: src/editor/editoptions.c:148
 msgid "Wrap mode"
 msgstr ""
 
-#: src/editor/editoptions.c:154
+#: src/editor/editoptions.c:153
 msgid "Tabulation"
 msgstr ""
 
-#: src/editor/editoptions.c:155
+#: src/editor/editoptions.c:154
 msgid "&Fake half tabs"
 msgstr ""
 
-#: src/editor/editoptions.c:156
+#: src/editor/editoptions.c:155
 msgid "&Backspace through tabs"
 msgstr ""
 
-#: src/editor/editoptions.c:158
+#: src/editor/editoptions.c:157
 msgid "Fill tabs with &spaces"
 msgstr ""
 
-#: src/editor/editoptions.c:160
+#: src/editor/editoptions.c:159
 msgid "Tab spacing:"
 msgstr ""
 
-#: src/editor/editoptions.c:164 src/filemanager/boxes.c:466
-#: src/filemanager/layout.c:454
+#: src/editor/editoptions.c:163 src/filemanager/boxes.c:470
+#: src/filemanager/layout.c:453
 msgid "Other options"
 msgstr ""
 
-#: src/editor/editoptions.c:165
+#: src/editor/editoptions.c:164
 msgid "&Return does autoindent"
 msgstr ""
 
-#: src/editor/editoptions.c:167
+#: src/editor/editoptions.c:166
 msgid "Confir&m before saving"
 msgstr ""
 
-#: src/editor/editoptions.c:168
+#: src/editor/editoptions.c:167
 msgid "Save file &position"
 msgstr ""
 
-#: src/editor/editoptions.c:169
+#: src/editor/editoptions.c:168
 msgid "&Visible trailing spaces"
 msgstr ""
 
-#: src/editor/editoptions.c:170
+#: src/editor/editoptions.c:169
 msgid "Visible &tabs"
 msgstr ""
 
-#: src/editor/editoptions.c:171
+#: src/editor/editoptions.c:170
 msgid "Synta&x highlighting"
 msgstr ""
 
-#: src/editor/editoptions.c:172
+#: src/editor/editoptions.c:171
 msgid "C&ursor after inserted block"
 msgstr ""
 
-#: src/editor/editoptions.c:173
+#: src/editor/editoptions.c:172
 msgid "Pers&istent selection"
 msgstr ""
 
-#: src/editor/editoptions.c:175
+#: src/editor/editoptions.c:174
 msgid "Cursor be&yond end of line"
 msgstr ""
 
-#: src/editor/editoptions.c:177
+#: src/editor/editoptions.c:176
 msgid "&Group undo"
 msgstr ""
 
-#: src/editor/editoptions.c:178
+#: src/editor/editoptions.c:177
 msgid "Word wrap line length:"
 msgstr ""
 
-#: src/editor/editoptions.c:189
+#: src/editor/editoptions.c:188
 msgid "Editor options"
 msgstr ""
 
-#: src/editor/editwidget.c:145
+#: src/editor/editwidget.c:144
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
 msgstr ""
 
-#: src/editor/editwidget.c:148
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+#: src/editor/editwidget.c:147
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr ""
 
-#: src/editor/editwidget.c:157
+#: src/editor/editwidget.c:156
 msgid "About"
 msgstr ""
 
-#: src/editor/editwidget.c:330
+#: src/editor/editwidget.c:329
 msgid "Open files"
 msgstr ""
 
-#: src/editor/editwidget.c:398 src/editor/editwidget.c:401
+#: src/editor/editwidget.c:397 src/editor/editwidget.c:400
 msgid "Edit: "
 msgstr ""
 
-#: src/editor/editwidget.c:979
+#: src/editor/editwidget.c:978
 msgid "ButtonBar|Mark"
 msgstr ""
 
-#: src/editor/editwidget.c:980
+#: src/editor/editwidget.c:979
 msgid "ButtonBar|Replac"
 msgstr ""
 
-#: src/editor/editwidget.c:981 src/filemanager/midnight.c:1661
-#: src/filemanager/tree.c:1217
+#: src/editor/editwidget.c:980 src/filemanager/midnight.c:1665
+#: src/filemanager/tree.c:1216
 msgid "ButtonBar|Copy"
 msgstr ""
 
-#: src/editor/editwidget.c:982
+#: src/editor/editwidget.c:981
 msgid "ButtonBar|Move"
 msgstr ""
 
-#: src/editor/editwidget.c:984 src/filemanager/midnight.c:1664
+#: src/editor/editwidget.c:983 src/filemanager/midnight.c:1668
 msgid "ButtonBar|Delete"
 msgstr ""
 
-#: src/editor/editwidget.c:985 src/filemanager/midnight.c:1665
+#: src/editor/editwidget.c:984 src/filemanager/midnight.c:1669
 msgid "ButtonBar|PullDn"
 msgstr ""
 
@@ -2017,18 +2017,18 @@ msgstr ""
 msgid "Select language"
 msgstr ""
 
-#: src/editor/syntax.c:1503 src/editor/syntax.c:1509
+#: src/editor/syntax.c:1502 src/editor/syntax.c:1508
 msgid "Load syntax file"
 msgstr ""
 
-#: src/editor/syntax.c:1504 src/filemanager/usermenu.c:948 src/help.c:1087
+#: src/editor/syntax.c:1503 src/filemanager/usermenu.c:947 src/help.c:1086
 #, c-format
 msgid ""
 "Cannot open file %s\n"
 "%s"
 msgstr ""
 
-#: src/editor/syntax.c:1510
+#: src/editor/syntax.c:1509
 #, c-format
 msgid "Error in file %s on line %d"
 msgstr ""
@@ -2041,12 +2041,12 @@ msgid ""
 "extra access permissions with the \"su\" command?"
 msgstr ""
 
-#: src/execute.c:196 src/filemanager/ext.c:652
+#: src/execute.c:196 src/filemanager/ext.c:651
 #, c-format
 msgid "Cannot fetch a local copy of %s"
 msgstr ""
 
-#: src/execute.c:435 src/filemanager/command.c:285
+#: src/execute.c:435 src/filemanager/command.c:284
 msgid "The shell is already running a command"
 msgstr ""
 
@@ -2055,262 +2055,278 @@ msgstr ""
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr ""
 
-#: src/filemanager/achown.c:94 src/filemanager/chmod.c:121
-#: src/filemanager/chown.c:88
+#: src/filemanager/achown.c:93 src/filemanager/chmod.c:120
+#: src/filemanager/chown.c:87
 msgid "Set &all"
 msgstr ""
 
-#: src/filemanager/achown.c:95
+#: src/filemanager/achown.c:94
 msgid "S&kip"
 msgstr ""
 
-#: src/filemanager/achown.c:96 src/filemanager/chmod.c:125
-#: src/filemanager/chown.c:91
+#: src/filemanager/achown.c:95 src/filemanager/chmod.c:124
+#: src/filemanager/chown.c:90
 msgid "&Set"
 msgstr ""
 
-#: src/filemanager/achown.c:333 src/filemanager/achown.c:439
-#: src/filemanager/achown.c:446
+#: src/filemanager/achown.c:332 src/filemanager/achown.c:438
+#: src/filemanager/achown.c:445
 msgid "owner"
 msgstr ""
 
-#: src/filemanager/achown.c:333 src/filemanager/achown.c:441
-#: src/filemanager/achown.c:448
+#: src/filemanager/achown.c:332 src/filemanager/achown.c:440
+#: src/filemanager/achown.c:447
 msgid "group"
 msgstr ""
 
-#: src/filemanager/achown.c:443
+#: src/filemanager/achown.c:442
 msgid "other"
 msgstr ""
 
-#: src/filemanager/achown.c:451
+#: src/filemanager/achown.c:450
 msgid "Flag"
 msgstr ""
 
-#: src/filemanager/achown.c:670
+#: src/filemanager/achown.c:669
 msgid "Chown advanced command"
 msgstr ""
 
-#: src/filemanager/achown.c:783 src/filemanager/achown.c:807
-#: src/filemanager/achown.c:876 src/filemanager/chmod.c:412
-#: src/filemanager/chmod.c:498
+#: src/filemanager/achown.c:782 src/filemanager/achown.c:806
+#: src/filemanager/achown.c:875 src/filemanager/chmod.c:411
+#: src/filemanager/chmod.c:497
 #, c-format
 msgid ""
 "Cannot chmod \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/achown.c:788 src/filemanager/achown.c:812
-#: src/filemanager/achown.c:882 src/filemanager/chown.c:302
-#: src/filemanager/chown.c:432
+#: src/filemanager/achown.c:787 src/filemanager/achown.c:811
+#: src/filemanager/achown.c:881 src/filemanager/chown.c:301
+#: src/filemanager/chown.c:431
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/boxes.c:281 src/filemanager/boxes.c:846
+#: src/filemanager/boxes.c:285 src/filemanager/boxes.c:985
 #: src/selcodepage.c:101
 msgid "Other 8 bit"
 msgstr ""
 
-#: src/filemanager/boxes.c:363
+#: src/filemanager/boxes.c:367
 msgid "Running"
 msgstr ""
 
-#: src/filemanager/boxes.c:364 src/filemanager/find.c:1547
+#: src/filemanager/boxes.c:368 src/filemanager/find.c:1546
 msgid "Stopped"
 msgstr ""
 
-#: src/filemanager/boxes.c:431
+#: src/filemanager/boxes.c:435
 msgid "&Never"
 msgstr ""
 
-#: src/filemanager/boxes.c:432
+#: src/filemanager/boxes.c:436
 msgid "On dum&b terminals"
 msgstr ""
 
-#: src/filemanager/boxes.c:433
+#: src/filemanager/boxes.c:437
 msgid "Alwa&ys"
 msgstr ""
 
-#: src/filemanager/boxes.c:447
+#: src/filemanager/boxes.c:451
 msgid "File operations"
 msgstr ""
 
-#: src/filemanager/boxes.c:448
+#: src/filemanager/boxes.c:452
 msgid "&Verbose operation"
 msgstr ""
 
-#: src/filemanager/boxes.c:449
+#: src/filemanager/boxes.c:453
 msgid "Compute tota&ls"
 msgstr ""
 
-#: src/filemanager/boxes.c:450
+#: src/filemanager/boxes.c:454
 msgid "Classic pro&gressbar"
 msgstr ""
 
-#: src/filemanager/boxes.c:451
+#: src/filemanager/boxes.c:455
 msgid "Mkdi&r autoname"
 msgstr ""
 
-#: src/filemanager/boxes.c:452
+#: src/filemanager/boxes.c:456
 msgid "&Preallocate space"
 msgstr ""
 
-#: src/filemanager/boxes.c:455
+#: src/filemanager/boxes.c:459
 msgid "Esc key mode"
 msgstr ""
 
-#: src/filemanager/boxes.c:456
+#: src/filemanager/boxes.c:460
 msgid "S&ingle press"
 msgstr ""
 
-#: src/filemanager/boxes.c:457
+#: src/filemanager/boxes.c:461
 msgid "Timeout:"
 msgstr ""
 
-#: src/filemanager/boxes.c:462
+#: src/filemanager/boxes.c:466
 msgid "Pause after run"
 msgstr ""
 
-#: src/filemanager/boxes.c:467
+#: src/filemanager/boxes.c:471
 msgid "Use internal edi&t"
 msgstr ""
 
-#: src/filemanager/boxes.c:468
+#: src/filemanager/boxes.c:472
 msgid "Use internal vie&w"
 msgstr ""
 
-#: src/filemanager/boxes.c:469
+#: src/filemanager/boxes.c:473
 msgid "A&sk new file name"
 msgstr ""
 
-#: src/filemanager/boxes.c:471
+#: src/filemanager/boxes.c:475
 msgid "Auto m&enus"
 msgstr ""
 
-#: src/filemanager/boxes.c:472
+#: src/filemanager/boxes.c:476
 msgid "&Drop down menus"
 msgstr ""
 
-#: src/filemanager/boxes.c:473
+#: src/filemanager/boxes.c:477
 msgid "S&hell patterns"
 msgstr ""
 
-#: src/filemanager/boxes.c:474
+#: src/filemanager/boxes.c:478
 msgid "Co&mplete: show all"
 msgstr ""
 
-#: src/filemanager/boxes.c:476
+#: src/filemanager/boxes.c:480
 msgid "Rotating d&ash"
 msgstr ""
 
-#: src/filemanager/boxes.c:477
+#: src/filemanager/boxes.c:481
 msgid "Cd follows lin&ks"
 msgstr ""
 
-#: src/filemanager/boxes.c:478
+#: src/filemanager/boxes.c:482
 msgid "Sa&fe delete"
 msgstr ""
 
-#: src/filemanager/boxes.c:479
+#: src/filemanager/boxes.c:483
 msgid "A&uto save setup"
 msgstr ""
 
-#: src/filemanager/boxes.c:492
+#: src/filemanager/boxes.c:496
 msgid "Configure options"
 msgstr ""
 
-#: src/filemanager/boxes.c:528
+#: src/filemanager/boxes.c:550
+msgid "< Default >"
+msgstr ""
+
+#: src/filemanager/boxes.c:572
+msgid "Skins"
+msgstr ""
+
+#: src/filemanager/boxes.c:629
+msgid "Skin:"
+msgstr ""
+
+#: src/filemanager/boxes.c:641
+msgid "Appearance"
+msgstr ""
+
+#: src/filemanager/boxes.c:667
 msgid "Case &insensitive"
 msgstr ""
 
-#: src/filemanager/boxes.c:530
+#: src/filemanager/boxes.c:669
 msgid "Use panel sort mo&de"
 msgstr ""
 
-#: src/filemanager/boxes.c:537
+#: src/filemanager/boxes.c:676
 msgid "Show mi&ni-status"
 msgstr ""
 
-#: src/filemanager/boxes.c:538
+#: src/filemanager/boxes.c:677
 msgid "Use SI si&ze units"
 msgstr ""
 
-#: src/filemanager/boxes.c:539
+#: src/filemanager/boxes.c:678
 msgid "Mi&x all files"
 msgstr ""
 
-#: src/filemanager/boxes.c:540
+#: src/filemanager/boxes.c:679
 msgid "Show &backup files"
 msgstr ""
 
-#: src/filemanager/boxes.c:541
+#: src/filemanager/boxes.c:680
 msgid "Show &hidden files"
 msgstr ""
 
-#: src/filemanager/boxes.c:542
+#: src/filemanager/boxes.c:681
 msgid "&Fast dir reload"
 msgstr ""
 
-#: src/filemanager/boxes.c:543
+#: src/filemanager/boxes.c:682
 msgid "Ma&rk moves down"
 msgstr ""
 
-#: src/filemanager/boxes.c:544
+#: src/filemanager/boxes.c:683
 msgid "Re&verse files only"
 msgstr ""
 
-#: src/filemanager/boxes.c:546
+#: src/filemanager/boxes.c:685
 msgid "Simple s&wap"
 msgstr ""
 
-#: src/filemanager/boxes.c:547
+#: src/filemanager/boxes.c:686
 msgid "A&uto save panels setup"
 msgstr ""
 
-#: src/filemanager/boxes.c:553
+#: src/filemanager/boxes.c:692
 msgid "Navigation"
 msgstr ""
 
-#: src/filemanager/boxes.c:554
+#: src/filemanager/boxes.c:693
 msgid "L&ynx-like motion"
 msgstr ""
 
-#: src/filemanager/boxes.c:556
+#: src/filemanager/boxes.c:695
 msgid "Pa&ge scrolling"
 msgstr ""
 
-#: src/filemanager/boxes.c:557
+#: src/filemanager/boxes.c:696
 msgid "&Mouse page scrolling"
 msgstr ""
 
-#: src/filemanager/boxes.c:560
+#: src/filemanager/boxes.c:699
 msgid "File highlight"
 msgstr ""
 
-#: src/filemanager/boxes.c:561
+#: src/filemanager/boxes.c:700
 msgid "File &types"
 msgstr ""
 
-#: src/filemanager/boxes.c:562
+#: src/filemanager/boxes.c:701
 msgid "&Permissions"
 msgstr ""
 
-#: src/filemanager/boxes.c:564
+#: src/filemanager/boxes.c:703
 msgid "Quick search"
 msgstr ""
 
-#: src/filemanager/boxes.c:576
+#: src/filemanager/boxes.c:715
 msgid "Panel options"
 msgstr ""
 
-#: src/filemanager/boxes.c:589 src/filemanager/info.c:84
+#: src/filemanager/boxes.c:728 src/filemanager/info.c:83
 msgid "Information"
 msgstr ""
 
-#: src/filemanager/boxes.c:590
+#: src/filemanager/boxes.c:729
 msgid ""
 "Using the fast reload option may not reflect the exact\n"
 "directory contents. In this case you'll need to do a\n"
@@ -2318,565 +2334,565 @@ msgid ""
 "the details."
 msgstr ""
 
-#: src/filemanager/boxes.c:638
+#: src/filemanager/boxes.c:777
 msgid "&Full file list"
 msgstr ""
 
-#: src/filemanager/boxes.c:639
+#: src/filemanager/boxes.c:778
 msgid "&Brief file list"
 msgstr ""
 
-#: src/filemanager/boxes.c:640
+#: src/filemanager/boxes.c:779
 msgid "&Long file list"
 msgstr ""
 
-#: src/filemanager/boxes.c:641
+#: src/filemanager/boxes.c:780
 msgid "&User defined:"
 msgstr ""
 
-#: src/filemanager/boxes.c:650
+#: src/filemanager/boxes.c:789
 msgid "User &mini status"
 msgstr ""
 
-#: src/filemanager/boxes.c:660
+#: src/filemanager/boxes.c:799
 msgid "Listing mode"
 msgstr ""
 
-#: src/filemanager/boxes.c:727
+#: src/filemanager/boxes.c:866
 msgid "Executable &first"
 msgstr ""
 
-#: src/filemanager/boxes.c:729
+#: src/filemanager/boxes.c:868
 msgid "&Reverse"
 msgstr ""
 
-#: src/filemanager/boxes.c:738
+#: src/filemanager/boxes.c:877
 msgid "Sort order"
 msgstr ""
 
 #. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
-#: src/filemanager/boxes.c:762
+#: src/filemanager/boxes.c:901
 msgid "Confirmation|&Delete"
 msgstr ""
 
-#: src/filemanager/boxes.c:763
+#: src/filemanager/boxes.c:902
 msgid "Confirmation|O&verwrite"
 msgstr ""
 
-#: src/filemanager/boxes.c:764
+#: src/filemanager/boxes.c:903
 msgid "Confirmation|&Execute"
 msgstr ""
 
-#: src/filemanager/boxes.c:765
+#: src/filemanager/boxes.c:904
 msgid "Confirmation|E&xit"
 msgstr ""
 
-#: src/filemanager/boxes.c:766
+#: src/filemanager/boxes.c:905
 msgid "Confirmation|Di&rectory hotlist delete"
 msgstr ""
 
-#: src/filemanager/boxes.c:768
+#: src/filemanager/boxes.c:907
 msgid "Confirmation|&History cleanup"
 msgstr ""
 
-#: src/filemanager/boxes.c:777 src/filemanager/cmd.c:142
+#: src/filemanager/boxes.c:916 src/filemanager/cmd.c:141
 msgid "Confirmation"
 msgstr ""
 
-#: src/filemanager/boxes.c:794
+#: src/filemanager/boxes.c:933
 msgid "&UTF-8 output"
 msgstr ""
 
-#: src/filemanager/boxes.c:795
+#: src/filemanager/boxes.c:934
 msgid "&Full 8 bits output"
 msgstr ""
 
-#: src/filemanager/boxes.c:796
+#: src/filemanager/boxes.c:935
 msgid "&ISO 8859-1"
 msgstr ""
 
-#: src/filemanager/boxes.c:797
+#: src/filemanager/boxes.c:936
 msgid "7 &bits"
 msgstr ""
 
-#: src/filemanager/boxes.c:804 src/filemanager/boxes.c:866
+#: src/filemanager/boxes.c:943 src/filemanager/boxes.c:1005
 msgid "F&ull 8 bits input"
 msgstr ""
 
-#: src/filemanager/boxes.c:812 src/filemanager/boxes.c:874
+#: src/filemanager/boxes.c:951 src/filemanager/boxes.c:1013
 msgid "Display bits"
 msgstr ""
 
-#: src/filemanager/boxes.c:857
+#: src/filemanager/boxes.c:996
 msgid "Input / display codepage:"
 msgstr ""
 
-#: src/filemanager/boxes.c:863
+#: src/filemanager/boxes.c:1002
 msgid "&Select"
 msgstr ""
 
-#: src/filemanager/boxes.c:923 src/filemanager/tree.c:1172
+#: src/filemanager/boxes.c:1062 src/filemanager/tree.c:1171
 msgid "Directory tree"
 msgstr ""
 
-#: src/filemanager/boxes.c:971
+#: src/filemanager/boxes.c:1110
 msgid "Timeout for freeing VFSs (sec):"
 msgstr ""
 
-#: src/filemanager/boxes.c:976
+#: src/filemanager/boxes.c:1115
 msgid "FTP anonymous password:"
 msgstr ""
 
-#: src/filemanager/boxes.c:979
+#: src/filemanager/boxes.c:1118
 msgid "FTP directory cache timeout (sec):"
 msgstr ""
 
-#: src/filemanager/boxes.c:982
+#: src/filemanager/boxes.c:1121
 msgid "&Always use ftp proxy:"
 msgstr ""
 
-#: src/filemanager/boxes.c:986
+#: src/filemanager/boxes.c:1125
 msgid "&Use ~/.netrc"
 msgstr ""
 
-#: src/filemanager/boxes.c:987
+#: src/filemanager/boxes.c:1126
 msgid "Use &passive mode"
 msgstr ""
 
-#: src/filemanager/boxes.c:988
+#: src/filemanager/boxes.c:1127
 msgid "Use passive mode over pro&xy"
 msgstr ""
 
-#: src/filemanager/boxes.c:998
+#: src/filemanager/boxes.c:1137
 msgid "Virtual File System Setting"
 msgstr ""
 
-#: src/filemanager/boxes.c:1047
+#: src/filemanager/boxes.c:1186
 msgid "cd"
 msgstr ""
 
-#: src/filemanager/boxes.c:1054
+#: src/filemanager/boxes.c:1193
 msgid "Quick cd"
 msgstr ""
 
-#: src/filemanager/boxes.c:1069
+#: src/filemanager/boxes.c:1208
 msgid "Existing filename (filename symlink will point to):"
 msgstr ""
 
-#: src/filemanager/boxes.c:1073
+#: src/filemanager/boxes.c:1212
 msgid "Symbolic link filename:"
 msgstr ""
 
-#: src/filemanager/boxes.c:1083
+#: src/filemanager/boxes.c:1222
 msgid "Symbolic link"
 msgstr ""
 
-#: src/filemanager/boxes.c:1111
+#: src/filemanager/boxes.c:1250
 msgid "&Stop"
 msgstr ""
 
-#: src/filemanager/boxes.c:1112
+#: src/filemanager/boxes.c:1251
 msgid "&Resume"
 msgstr ""
 
-#: src/filemanager/boxes.c:1113
+#: src/filemanager/boxes.c:1252
 msgid "&Kill"
 msgstr ""
 
-#: src/filemanager/boxes.c:1142
+#: src/filemanager/boxes.c:1281
 msgid "Background jobs"
 msgstr ""
 
-#: src/filemanager/boxes.c:1178
+#: src/filemanager/boxes.c:1317
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr ""
 
-#: src/filemanager/boxes.c:1188
+#: src/filemanager/boxes.c:1327
 msgid "Domain:"
 msgstr ""
 
-#: src/filemanager/boxes.c:1190
+#: src/filemanager/boxes.c:1329
 msgid "Username:"
 msgstr ""
 
-#: src/filemanager/boxes.c:1207
+#: src/filemanager/boxes.c:1346
 msgid "SMB authentication"
 msgstr ""
 
-#: src/filemanager/chmod.c:83
+#: src/filemanager/chmod.c:82
 msgid "set &user ID on execution"
 msgstr ""
 
-#: src/filemanager/chmod.c:84
+#: src/filemanager/chmod.c:83
 msgid "set &group ID on execution"
 msgstr ""
 
-#: src/filemanager/chmod.c:85
+#: src/filemanager/chmod.c:84
 msgid "stick&y bit"
 msgstr ""
 
-#: src/filemanager/chmod.c:86
+#: src/filemanager/chmod.c:85
 msgid "&read by owner"
 msgstr ""
 
-#: src/filemanager/chmod.c:87
+#: src/filemanager/chmod.c:86
 msgid "&write by owner"
 msgstr ""
 
-#: src/filemanager/chmod.c:88
+#: src/filemanager/chmod.c:87
 msgid "e&xecute/search by owner"
 msgstr ""
 
-#: src/filemanager/chmod.c:89
+#: src/filemanager/chmod.c:88
 msgid "rea&d by group"
 msgstr ""
 
-#: src/filemanager/chmod.c:90
+#: src/filemanager/chmod.c:89
 msgid "write by grou&p"
 msgstr ""
 
-#: src/filemanager/chmod.c:91
+#: src/filemanager/chmod.c:90
 msgid "execu&te/search by group"
 msgstr ""
 
-#: src/filemanager/chmod.c:92
+#: src/filemanager/chmod.c:91
 msgid "read &by others"
 msgstr ""
 
-#: src/filemanager/chmod.c:93
+#: src/filemanager/chmod.c:92
 msgid "wr&ite by others"
 msgstr ""
 
-#: src/filemanager/chmod.c:94
+#: src/filemanager/chmod.c:93
 msgid "execute/searc&h by others"
 msgstr ""
 
-#: src/filemanager/chmod.c:102
+#: src/filemanager/chmod.c:101
 msgid "Name:"
 msgstr ""
 
-#: src/filemanager/chmod.c:103
+#: src/filemanager/chmod.c:102
 msgid "Permissions (octal):"
 msgstr ""
 
-#: src/filemanager/chmod.c:104
+#: src/filemanager/chmod.c:103
 msgid "Owner name:"
 msgstr ""
 
-#: src/filemanager/chmod.c:105
+#: src/filemanager/chmod.c:104
 msgid "Group name:"
 msgstr ""
 
-#: src/filemanager/chmod.c:122
+#: src/filemanager/chmod.c:121
 msgid "&Marked all"
 msgstr ""
 
-#: src/filemanager/chmod.c:123
+#: src/filemanager/chmod.c:122
 msgid "S&et marked"
 msgstr ""
 
-#: src/filemanager/chmod.c:124
+#: src/filemanager/chmod.c:123
 msgid "C&lear marked"
 msgstr ""
 
-#: src/filemanager/chmod.c:316
+#: src/filemanager/chmod.c:315
 msgid "Chmod command"
 msgstr ""
 
-#: src/filemanager/chmod.c:318 src/filemanager/chown.c:164
-#: src/filemanager/panel.c:212
+#: src/filemanager/chmod.c:317 src/filemanager/chown.c:163
+#: src/filemanager/panel.c:210
 msgid "Permission"
 msgstr ""
 
-#: src/filemanager/chmod.c:328 src/filemanager/chown.c:240
+#: src/filemanager/chmod.c:327 src/filemanager/chown.c:239
 msgid "File"
 msgstr ""
 
-#: src/filemanager/chown.c:89
+#: src/filemanager/chown.c:88
 msgid "Set &groups"
 msgstr ""
 
-#: src/filemanager/chown.c:90
+#: src/filemanager/chown.c:89
 msgid "Set &users"
 msgstr ""
 
-#: src/filemanager/chown.c:156
+#: src/filemanager/chown.c:155
 msgid "Name"
 msgstr ""
 
-#: src/filemanager/chown.c:158
+#: src/filemanager/chown.c:157
 msgid "Owner name"
 msgstr ""
 
-#: src/filemanager/chown.c:160 src/filemanager/chown.c:229
+#: src/filemanager/chown.c:159 src/filemanager/chown.c:228
 msgid "Group name"
 msgstr ""
 
-#: src/filemanager/chown.c:162
+#: src/filemanager/chown.c:161
 msgid "Size"
 msgstr ""
 
-#: src/filemanager/chown.c:216
+#: src/filemanager/chown.c:215
 msgid "Chown command"
 msgstr ""
 
-#: src/filemanager/chown.c:218
+#: src/filemanager/chown.c:217
 msgid "User name"
 msgstr ""
 
-#: src/filemanager/chown.c:222
+#: src/filemanager/chown.c:221
 msgid "<Unknown user>"
 msgstr ""
 
-#: src/filemanager/chown.c:233
+#: src/filemanager/chown.c:232
 msgid "<Unknown group>"
 msgstr ""
 
-#: src/filemanager/cmd.c:122
+#: src/filemanager/cmd.c:121
 msgid "Enter machine name (F1 for details):"
 msgstr ""
 
-#: src/filemanager/cmd.c:142
+#: src/filemanager/cmd.c:141
 msgid "Files tagged, want to cd?"
 msgstr ""
 
-#: src/filemanager/cmd.c:150 src/filemanager/cmd.c:1249
-#: src/filemanager/panel.c:2572 src/filemanager/panel.c:3156
+#: src/filemanager/cmd.c:149 src/filemanager/cmd.c:1248
+#: src/filemanager/panel.c:2570 src/filemanager/panel.c:3154
 msgid "Cannot change directory"
 msgstr ""
 
-#: src/filemanager/cmd.c:201
+#: src/filemanager/cmd.c:200
 msgid "Filter"
 msgstr ""
 
-#: src/filemanager/cmd.c:202
+#: src/filemanager/cmd.c:201
 msgid "Set expression for filtering filenames"
 msgstr ""
 
-#: src/filemanager/cmd.c:228
+#: src/filemanager/cmd.c:227
 msgid "&Files only"
 msgstr ""
 
-#: src/filemanager/cmd.c:229 src/filemanager/filegui.c:1231
-#: src/filemanager/find.c:514
+#: src/filemanager/cmd.c:228 src/filemanager/filegui.c:1230
+#: src/filemanager/find.c:513
 msgid "&Using shell patterns"
 msgstr ""
 
-#: src/filemanager/cmd.c:231
+#: src/filemanager/cmd.c:230
 msgid "&Case sensitive"
 msgstr ""
 
-#: src/filemanager/cmd.c:433
+#: src/filemanager/cmd.c:432
 #, c-format
 msgid "Link %s to:"
 msgstr ""
 
-#: src/filemanager/cmd.c:435
+#: src/filemanager/cmd.c:434
 msgid "Link"
 msgstr ""
 
-#: src/filemanager/cmd.c:441
+#: src/filemanager/cmd.c:440
 #, c-format
 msgid "link: %s"
 msgstr ""
 
-#: src/filemanager/cmd.c:478
+#: src/filemanager/cmd.c:477
 #, c-format
 msgid "symlink: %s"
 msgstr ""
 
-#: src/filemanager/cmd.c:535 src/filemanager/panel.c:4535
+#: src/filemanager/cmd.c:534 src/filemanager/panel.c:4533
 #, c-format
 msgid "Cannot chdir to \"%s\""
 msgstr ""
 
-#: src/filemanager/cmd.c:722
+#: src/filemanager/cmd.c:721
 msgid "View file"
 msgstr ""
 
-#: src/filemanager/cmd.c:722
+#: src/filemanager/cmd.c:721
 msgid "Filename:"
 msgstr ""
 
-#: src/filemanager/cmd.c:756
+#: src/filemanager/cmd.c:755
 msgid "Filtered view"
 msgstr ""
 
-#: src/filemanager/cmd.c:757
+#: src/filemanager/cmd.c:756
 msgid "Filter command and arguments:"
 msgstr ""
 
-#: src/filemanager/cmd.c:845
+#: src/filemanager/cmd.c:844
 msgid "Edit file"
 msgstr ""
 
-#: src/filemanager/cmd.c:933
+#: src/filemanager/cmd.c:932
 msgid "Create a new Directory"
 msgstr ""
 
-#: src/filemanager/cmd.c:934
+#: src/filemanager/cmd.c:933
 msgid "Enter directory name:"
 msgstr ""
 
-#: src/filemanager/cmd.c:1059
+#: src/filemanager/cmd.c:1058
 msgid "Select"
 msgstr ""
 
-#: src/filemanager/cmd.c:1067
+#: src/filemanager/cmd.c:1066
 msgid "Unselect"
 msgstr ""
 
-#: src/filemanager/cmd.c:1081
+#: src/filemanager/cmd.c:1080
 msgid "Extension file edit"
 msgstr ""
 
-#: src/filemanager/cmd.c:1082
+#: src/filemanager/cmd.c:1081
 msgid "Which extension file you want to edit?"
 msgstr ""
 
-#: src/filemanager/cmd.c:1083 src/filemanager/cmd.c:1121
-#: src/filemanager/cmd.c:1178
+#: src/filemanager/cmd.c:1082 src/filemanager/cmd.c:1120
+#: src/filemanager/cmd.c:1177
 msgid "&System Wide"
 msgstr ""
 
-#: src/filemanager/cmd.c:1176
+#: src/filemanager/cmd.c:1175
 msgid "Highlighting groups file edit"
 msgstr ""
 
-#: src/filemanager/cmd.c:1177
+#: src/filemanager/cmd.c:1176
 msgid "Which highlighting file you want to edit?"
 msgstr ""
 
-#: src/filemanager/cmd.c:1264
+#: src/filemanager/cmd.c:1263
 msgid "Compare directories"
 msgstr ""
 
-#: src/filemanager/cmd.c:1265
+#: src/filemanager/cmd.c:1264
 msgid "Select compare method:"
 msgstr ""
 
-#: src/filemanager/cmd.c:1266
+#: src/filemanager/cmd.c:1265
 msgid "&Quick"
 msgstr ""
 
-#: src/filemanager/cmd.c:1266
+#: src/filemanager/cmd.c:1265
 msgid "&Size only"
 msgstr ""
 
-#: src/filemanager/cmd.c:1266
+#: src/filemanager/cmd.c:1265
 msgid "&Thorough"
 msgstr ""
 
-#: src/filemanager/cmd.c:1281
+#: src/filemanager/cmd.c:1280
 msgid ""
 "Both panels should be in the listing mode\n"
 "to use this command"
 msgstr ""
 
-#: src/filemanager/cmd.c:1329
+#: src/filemanager/cmd.c:1328
 msgid ""
 "Not an xterm or Linux console;\n"
 "the panels cannot be toggled."
 msgstr ""
 
-#: src/filemanager/cmd.c:1365
+#: src/filemanager/cmd.c:1364
 #, c-format
 msgid "Symlink '%s' points to:"
 msgstr ""
 
-#: src/filemanager/cmd.c:1374
+#: src/filemanager/cmd.c:1373
 msgid "Edit symlink"
 msgstr ""
 
-#: src/filemanager/cmd.c:1383
+#: src/filemanager/cmd.c:1382
 #, c-format
 msgid "edit symlink, unable to remove %s: %s"
 msgstr ""
 
-#: src/filemanager/cmd.c:1392
+#: src/filemanager/cmd.c:1391
 #, c-format
 msgid "edit symlink: %s"
 msgstr ""
 
-#: src/filemanager/cmd.c:1407
+#: src/filemanager/cmd.c:1406
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr ""
 
-#: src/filemanager/cmd.c:1512
+#: src/filemanager/cmd.c:1511
 msgid "FTP to machine"
 msgstr ""
 
-#: src/filemanager/cmd.c:1523
+#: src/filemanager/cmd.c:1522
 msgid "SFTP to machine"
 msgstr ""
 
-#: src/filemanager/cmd.c:1535
+#: src/filemanager/cmd.c:1534
 msgid "Shell link to machine"
 msgstr ""
 
-#: src/filemanager/cmd.c:1547
+#: src/filemanager/cmd.c:1546
 msgid "SMB link to machine"
 msgstr ""
 
-#: src/filemanager/cmd.c:1558
+#: src/filemanager/cmd.c:1557
 msgid "Undelete files on an ext2 file system"
 msgstr ""
 
-#: src/filemanager/cmd.c:1559
+#: src/filemanager/cmd.c:1558
 msgid ""
 "Enter device (without /dev/) to undelete\n"
 "files on: (F1 for details)"
 msgstr ""
 
-#: src/filemanager/cmd.c:1703 src/filemanager/cmd.c:1705
+#: src/filemanager/cmd.c:1702 src/filemanager/cmd.c:1704
 msgid "Setup"
 msgstr ""
 
-#: src/filemanager/cmd.c:1703
+#: src/filemanager/cmd.c:1702
 #, c-format
 msgid "Setup saved to %s"
 msgstr ""
 
-#: src/filemanager/cmd.c:1705
+#: src/filemanager/cmd.c:1704
 #, c-format
 msgid "Unable to save setup to %s"
 msgstr ""
 
-#: src/filemanager/command.c:277 src/filemanager/usermenu.c:937
+#: src/filemanager/command.c:276 src/filemanager/usermenu.c:936
 msgid "Cannot execute commands on non-local filesystems"
 msgstr ""
 
-#: src/filemanager/command.c:451 src/filemanager/panel.c:3431
-#: src/filemanager/tree.c:592
+#: src/filemanager/command.c:450 src/filemanager/panel.c:3429
+#: src/filemanager/tree.c:591
 #, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/dir.c:646 src/filemanager/dir.c:711
+#: src/filemanager/dir.c:645 src/filemanager/dir.c:710
 msgid "Cannot read directory contents"
 msgstr ""
 
-#: src/filemanager/ext.c:246 src/filemanager/usermenu.c:480
+#: src/filemanager/ext.c:245 src/filemanager/usermenu.c:479
 msgid "Parameter"
 msgstr ""
 
-#: src/filemanager/ext.c:453 src/filemanager/usermenu.c:451
+#: src/filemanager/ext.c:452 src/filemanager/usermenu.c:450
 #, c-format
 msgid ""
 "Cannot create temporary command file\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/ext.c:839
+#: src/filemanager/ext.c:838
 #, c-format
 msgid " %s%s file error"
 msgstr ""
 
-#: src/filemanager/ext.c:841
+#: src/filemanager/ext.c:840
 #, c-format
 msgid ""
 "The format of the %smc.ext file has changed with version 3.0. It seems that "
@@ -2884,126 +2900,126 @@ msgid ""
 "Commander package."
 msgstr ""
 
-#: src/filemanager/ext.c:861
+#: src/filemanager/ext.c:860
 #, c-format
 msgid "%s file error"
 msgstr ""
 
-#: src/filemanager/ext.c:863
+#: src/filemanager/ext.c:862
 #, c-format
 msgid ""
 "The format of the %s file has changed with version 3.0. You may either want "
 "to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
 
-#: src/filemanager/file.c:96 src/filemanager/file.c:1912
-#: src/filemanager/tree.c:773
+#: src/filemanager/file.c:95 src/filemanager/file.c:1907
+#: src/filemanager/tree.c:772
 msgid "DialogTitle|Copy"
 msgstr ""
 
-#: src/filemanager/file.c:97 src/filemanager/tree.c:812
+#: src/filemanager/file.c:96 src/filemanager/tree.c:811
 msgid "DialogTitle|Move"
 msgstr ""
 
-#: src/filemanager/file.c:98 src/filemanager/hotlist.c:1121
-#: src/filemanager/hotlist.c:1138 src/filemanager/tree.c:881
+#: src/filemanager/file.c:97 src/filemanager/hotlist.c:1120
+#: src/filemanager/hotlist.c:1137 src/filemanager/tree.c:880
 msgid "DialogTitle|Delete"
 msgstr ""
 
-#: src/filemanager/file.c:141
+#: src/filemanager/file.c:140
 msgid "FileOperation|Copy"
 msgstr ""
 
-#: src/filemanager/file.c:142
+#: src/filemanager/file.c:141
 msgid "FileOperation|Move"
 msgstr ""
 
-#: src/filemanager/file.c:143
+#: src/filemanager/file.c:142
 msgid "FileOperation|Delete"
 msgstr ""
 
-#: src/filemanager/file.c:156
+#: src/filemanager/file.c:155
 #, no-c-format
 msgid "%o %f%n\"%s\"%m"
 msgstr ""
 
-#: src/filemanager/file.c:158
+#: src/filemanager/file.c:157
 #, no-c-format
 msgid "%o %d %f%m"
 msgstr ""
 
-#: src/filemanager/file.c:161
+#: src/filemanager/file.c:160
 msgid "file"
 msgstr ""
 
-#: src/filemanager/file.c:162
+#: src/filemanager/file.c:161
 msgid "files"
 msgstr ""
 
-#: src/filemanager/file.c:163
+#: src/filemanager/file.c:162
 msgid "directory"
 msgstr ""
 
-#: src/filemanager/file.c:164
+#: src/filemanager/file.c:163
 msgid "directories"
 msgstr ""
 
-#: src/filemanager/file.c:165
+#: src/filemanager/file.c:164
 msgid "files/directories"
 msgstr ""
 
 #. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
-#: src/filemanager/file.c:167
+#: src/filemanager/file.c:166
 msgid " with source mask:"
 msgstr ""
 
-#: src/filemanager/file.c:324
+#: src/filemanager/file.c:323
 msgid "Cannot make the hardlink"
 msgstr ""
 
-#: src/filemanager/file.c:376
+#: src/filemanager/file.c:375
 #, c-format
 msgid ""
 "Cannot read source link \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:392
+#: src/filemanager/file.c:391
 msgid ""
 "Cannot make stable symlinks acrossnon-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
 
-#: src/filemanager/file.c:465
+#: src/filemanager/file.c:464
 #, c-format
 msgid ""
 "Cannot create target symlink \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:602 src/filemanager/file.c:643
-#: src/filemanager/file.c:687 src/filemanager/file.c:2443
-#: src/filemanager/filegui.c:261 src/filemanager/filegui.c:457
+#: src/filemanager/file.c:601 src/filemanager/file.c:641
+#: src/filemanager/file.c:683 src/filemanager/file.c:2438
+#: src/filemanager/filegui.c:260 src/filemanager/filegui.c:456
 msgid "&Abort"
 msgstr ""
 
-#: src/filemanager/file.c:643
+#: src/filemanager/file.c:641
 msgid "Ski&p all"
 msgstr ""
 
-#: src/filemanager/file.c:643 src/viewer/hex.c:408
+#: src/filemanager/file.c:641 src/viewer/hex.c:407
 msgid "&Retry"
 msgstr ""
 
-#: src/filemanager/file.c:678
+#: src/filemanager/file.c:674
 #, c-format
 msgid ""
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
 msgstr ""
 
-#: src/filemanager/file.c:679
+#: src/filemanager/file.c:675
 #, c-format
 msgid ""
 "Background process:\n"
@@ -3011,18 +3027,18 @@ msgid ""
 "Delete it recursively?"
 msgstr ""
 
-#: src/filemanager/file.c:687 src/filemanager/filegui.c:453
+#: src/filemanager/file.c:683 src/filemanager/filegui.c:452
 msgid "Non&e"
 msgstr ""
 
-#: src/filemanager/file.c:903
+#: src/filemanager/file.c:908
 #, c-format
 msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:916 src/filemanager/file.c:1531
+#: src/filemanager/file.c:921 src/filemanager/file.c:1526
 #, c-format
 msgid ""
 "\"%s\"\n"
@@ -3031,198 +3047,198 @@ msgid ""
 "are the same file"
 msgstr ""
 
-#: src/filemanager/file.c:922
+#: src/filemanager/file.c:927
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
 msgstr ""
 
-#: src/filemanager/file.c:967
+#: src/filemanager/file.c:972
 #, c-format
 msgid ""
 "Cannot move file \"%s\" to \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:999
+#: src/filemanager/file.c:1004
 #, c-format
 msgid ""
 "Cannot remove file \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:1045
+#: src/filemanager/file.c:1050
 #, c-format
 msgid ""
 "Cannot delete file \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:1118 src/filemanager/file.c:1178
-#: src/filemanager/file.c:2425
+#: src/filemanager/file.c:1123 src/filemanager/file.c:1183
+#: src/filemanager/file.c:2420
 #, c-format
 msgid ""
 "Cannot remove directory \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:1498 src/filemanager/file.c:2320
+#: src/filemanager/file.c:1493 src/filemanager/file.c:2315
 #, c-format
 msgid ""
 "Cannot overwrite directory \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:1517
+#: src/filemanager/file.c:1512
 #, c-format
 msgid ""
 "Cannot stat source file \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:1568
+#: src/filemanager/file.c:1563
 #, c-format
 msgid ""
 "Cannot create special file \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:1580 src/filemanager/file.c:1925
+#: src/filemanager/file.c:1575 src/filemanager/file.c:1920
 #, c-format
 msgid ""
 "Cannot chown target file \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:1595 src/filemanager/file.c:1945
+#: src/filemanager/file.c:1590 src/filemanager/file.c:1940
 #, c-format
 msgid ""
 "Cannot chmod target file \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:1616
+#: src/filemanager/file.c:1611
 #, c-format
 msgid ""
 "Cannot open source file \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:1631
+#: src/filemanager/file.c:1626
 msgid "Reget failed, about to overwrite file"
 msgstr ""
 
-#: src/filemanager/file.c:1643
+#: src/filemanager/file.c:1638
 #, c-format
 msgid ""
 "Cannot fstat source file \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:1681
+#: src/filemanager/file.c:1676
 #, c-format
 msgid ""
 "Cannot create target file \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:1703
+#: src/filemanager/file.c:1698
 #, c-format
 msgid ""
 "Cannot fstat target file \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:1723
+#: src/filemanager/file.c:1718
 #, c-format
 msgid ""
 "Cannot preallocate space for target file \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:1767
+#: src/filemanager/file.c:1762
 #, c-format
 msgid ""
 "Cannot read source file\"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:1808
+#: src/filemanager/file.c:1803
 #, c-format
 msgid ""
 "Cannot write target file \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:1847
+#: src/filemanager/file.c:1842
 msgid "(stalled)"
 msgstr ""
 
-#: src/filemanager/file.c:1883
+#: src/filemanager/file.c:1878
 #, c-format
 msgid ""
 "Cannot close source file \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:1895
+#: src/filemanager/file.c:1890
 #, c-format
 msgid ""
 "Cannot close target file \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:1913
+#: src/filemanager/file.c:1908
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr ""
 
-#: src/filemanager/file.c:1914
+#: src/filemanager/file.c:1909
 msgid "&Keep"
 msgstr ""
 
-#: src/filemanager/file.c:2010
+#: src/filemanager/file.c:2005
 #, c-format
 msgid ""
 "Cannot stat source directory \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:2044
+#: src/filemanager/file.c:2039
 #, c-format
 msgid ""
 "Source \"%s\" is not a directory\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:2056
+#: src/filemanager/file.c:2051
 #, c-format
 msgid ""
 "Cannot copy cyclic symbolic link\n"
 "\"%s\""
 msgstr ""
 
-#: src/filemanager/file.c:2094 src/filemanager/file.c:2911
-#: src/filemanager/tree.c:827
+#: src/filemanager/file.c:2089 src/filemanager/file.c:2906
+#: src/filemanager/tree.c:826
 #, c-format
 msgid ""
 "Destination \"%s\" must be a directory\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:2126
+#: src/filemanager/file.c:2121
 #, c-format
 msgid ""
 "Cannot create target directory \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:2150
+#: src/filemanager/file.c:2145
 #, c-format
 msgid ""
 "Cannot chown target directory \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:2284
+#: src/filemanager/file.c:2279
 #, c-format
 msgid ""
 "\"%s\"\n"
@@ -3231,1222 +3247,1226 @@ msgid ""
 "are the same directory"
 msgstr ""
 
-#: src/filemanager/file.c:2322
+#: src/filemanager/file.c:2317
 #, c-format
 msgid ""
 "Cannot overwrite file \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:2343
+#: src/filemanager/file.c:2338
 #, c-format
 msgid ""
 "Cannot move directory \"%s\" to \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/file.c:2464
+#: src/filemanager/file.c:2459
 msgid "Directory scanning"
 msgstr ""
 
-#: src/filemanager/file.c:2517
+#: src/filemanager/file.c:2512
 #, c-format
 msgid ""
 "%s\n"
 "Directories: %zd, total size: %s"
 msgstr ""
 
-#: src/filemanager/file.c:2626
+#: src/filemanager/file.c:2621
 msgid "Cannot operate on \"..\"!"
 msgstr ""
 
-#: src/filemanager/file.c:2754
+#: src/filemanager/file.c:2749
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
-#: src/filemanager/filegui.c:259 src/filemanager/find.c:196
+#: src/filemanager/filegui.c:258 src/filemanager/find.c:195
 msgid "S&uspend"
 msgstr ""
 
-#: src/filemanager/filegui.c:260 src/filemanager/find.c:197
+#: src/filemanager/filegui.c:259 src/filemanager/find.c:196
 msgid "Con&tinue"
 msgstr ""
 
-#: src/filemanager/filegui.c:351
+#: src/filemanager/filegui.c:350
 #, c-format
 msgid "%d:%02d.%02d"
 msgstr ""
 
-#: src/filemanager/filegui.c:368
+#: src/filemanager/filegui.c:367
 #, c-format
 msgid "ETA %s"
 msgstr ""
 
-#: src/filemanager/filegui.c:378
+#: src/filemanager/filegui.c:377
 #, c-format
 msgid "%.2f MB/s"
 msgstr ""
 
-#: src/filemanager/filegui.c:382
+#: src/filemanager/filegui.c:381
 #, c-format
 msgid "%.2f KB/s"
 msgstr ""
 
-#: src/filemanager/filegui.c:386
+#: src/filemanager/filegui.c:385
 #, c-format
 msgid "%ld B/s"
 msgstr ""
 
-#: src/filemanager/filegui.c:429
+#: src/filemanager/filegui.c:428
 msgid "Target file already exists!"
 msgstr ""
 
-#: src/filemanager/filegui.c:433
+#: src/filemanager/filegui.c:432
 #, c-format
 msgid "New     : %s, size %s"
 msgstr ""
 
-#: src/filemanager/filegui.c:435
+#: src/filemanager/filegui.c:434
 #, c-format
 msgid "Existing: %s, size %s"
 msgstr ""
 
-#: src/filemanager/filegui.c:437
+#: src/filemanager/filegui.c:436
 msgid "Overwrite this target?"
 msgstr ""
 
-#: src/filemanager/filegui.c:443 src/filemanager/hotlist.c:200
+#: src/filemanager/filegui.c:442 src/filemanager/hotlist.c:199
 msgid "A&ppend"
 msgstr ""
 
-#: src/filemanager/filegui.c:445
+#: src/filemanager/filegui.c:444
 msgid "&Reget"
 msgstr ""
 
-#: src/filemanager/filegui.c:447
+#: src/filemanager/filegui.c:446
 msgid "Overwrite all targets?"
 msgstr ""
 
-#: src/filemanager/filegui.c:451
+#: src/filemanager/filegui.c:450
 msgid "&Update"
 msgstr ""
 
-#: src/filemanager/filegui.c:455
+#: src/filemanager/filegui.c:454
 msgid "If &size differs"
 msgstr ""
 
-#: src/filemanager/filegui.c:478
+#: src/filemanager/filegui.c:477
 msgid "File exists"
 msgstr ""
 
-#: src/filemanager/filegui.c:480
+#: src/filemanager/filegui.c:479
 msgid "Background process: File exists"
 msgstr ""
 
-#: src/filemanager/filegui.c:939
+#: src/filemanager/filegui.c:938
 #, c-format
 msgid "Files processed: %zu/%zu"
 msgstr ""
 
-#: src/filemanager/filegui.c:941
+#: src/filemanager/filegui.c:940
 #, c-format
 msgid "Files processed: %zu"
 msgstr ""
 
-#: src/filemanager/filegui.c:988
+#: src/filemanager/filegui.c:987
 #, c-format
 msgid "Time: %s %s"
 msgstr ""
 
-#: src/filemanager/filegui.c:993
+#: src/filemanager/filegui.c:992
 #, c-format
 msgid "Time: %s %s (%s)"
 msgstr ""
 
-#: src/filemanager/filegui.c:999
+#: src/filemanager/filegui.c:998
 #, c-format
 msgid "Time: %s"
 msgstr ""
 
-#: src/filemanager/filegui.c:1003
+#: src/filemanager/filegui.c:1002
 #, c-format
 msgid "Time: %s (%s)"
 msgstr ""
 
-#: src/filemanager/filegui.c:1014
+#: src/filemanager/filegui.c:1013
 #, c-format
 msgid " Total: %s "
 msgstr ""
 
-#: src/filemanager/filegui.c:1018
+#: src/filemanager/filegui.c:1017
 #, c-format
 msgid " Total: %s/%s "
 msgstr ""
 
-#: src/filemanager/filegui.c:1044
+#: src/filemanager/filegui.c:1043
 msgid "Source"
 msgstr ""
 
-#: src/filemanager/filegui.c:1069
+#: src/filemanager/filegui.c:1068
 msgid "Target"
 msgstr ""
 
-#: src/filemanager/filegui.c:1233
+#: src/filemanager/filegui.c:1232
 msgid "to:"
 msgstr ""
 
-#: src/filemanager/filegui.c:1237
+#: src/filemanager/filegui.c:1236
 msgid "Follow &links"
 msgstr ""
 
-#: src/filemanager/filegui.c:1238
+#: src/filemanager/filegui.c:1237
 msgid "Preserve &attributes"
 msgstr ""
 
-#: src/filemanager/filegui.c:1240
+#: src/filemanager/filegui.c:1239
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
-#: src/filemanager/filegui.c:1241
+#: src/filemanager/filegui.c:1240
 msgid "&Stable symlinks"
 msgstr ""
 
-#: src/filemanager/filegui.c:1246
+#: src/filemanager/filegui.c:1245
 msgid "&Background"
 msgstr ""
 
-#: src/filemanager/filegui.c:1300
+#: src/filemanager/filegui.c:1299
 #, c-format
 msgid "Invalid source pattern '%s'"
 msgstr ""
 
-#: src/filemanager/find.c:194
+#: src/filemanager/find.c:193
 msgid "&Chdir"
 msgstr ""
 
-#: src/filemanager/find.c:195
+#: src/filemanager/find.c:194
 msgid "&Again"
 msgstr ""
 
-#: src/filemanager/find.c:200 src/filemanager/panelize.c:141
+#: src/filemanager/find.c:199 src/filemanager/panelize.c:140
 msgid "Pane&lize"
 msgstr ""
 
-#: src/filemanager/find.c:201
+#: src/filemanager/find.c:200
 msgid "&View - F3"
 msgstr ""
 
-#: src/filemanager/find.c:202
+#: src/filemanager/find.c:201
 msgid "&Edit - F4"
 msgstr ""
 
-#: src/filemanager/find.c:378
+#: src/filemanager/find.c:377
 #, c-format
 msgid "Found: %ld"
 msgstr ""
 
-#: src/filemanager/find.c:462 src/filemanager/find.c:472
+#: src/filemanager/find.c:461 src/filemanager/find.c:471
 msgid "Malformed regular expression"
 msgstr ""
 
-#: src/filemanager/find.c:512
+#: src/filemanager/find.c:511
 msgid "File name:"
 msgstr ""
 
-#: src/filemanager/find.c:513
+#: src/filemanager/find.c:512
 msgid "&Find recursively"
 msgstr ""
 
-#: src/filemanager/find.c:519
+#: src/filemanager/find.c:518
 msgid "S&kip hidden"
 msgstr ""
 
-#: src/filemanager/find.c:522
+#: src/filemanager/find.c:521
 msgid "Content:"
 msgstr ""
 
-#: src/filemanager/find.c:523
+#: src/filemanager/find.c:522
 msgid "Sea&rch for content"
 msgstr ""
 
-#: src/filemanager/find.c:525
+#: src/filemanager/find.c:524
 msgid "Case sens&itive"
 msgstr ""
 
-#: src/filemanager/find.c:527
+#: src/filemanager/find.c:526
 msgid "A&ll charsets"
 msgstr ""
 
-#: src/filemanager/find.c:530
+#: src/filemanager/find.c:529
 msgid "Fir&st hit"
 msgstr ""
 
-#: src/filemanager/find.c:532 src/filemanager/midnight.c:204
+#: src/filemanager/find.c:531 src/filemanager/midnight.c:203
 msgid "&Tree"
 msgstr ""
 
-#: src/filemanager/find.c:610 src/filemanager/find.c:1613
+#: src/filemanager/find.c:609 src/filemanager/find.c:1612
 msgid "Find File"
 msgstr ""
 
-#: src/filemanager/find.c:617
+#: src/filemanager/find.c:616
 msgid "Start at:"
 msgstr ""
 
-#: src/filemanager/find.c:626
+#: src/filemanager/find.c:625
 msgid "Ena&ble ignore directories:"
 msgstr ""
 
-#: src/filemanager/find.c:1021 src/filemanager/find.c:1105
+#: src/filemanager/find.c:1020 src/filemanager/find.c:1104
 #, c-format
 msgid "Grepping in %s"
 msgstr ""
 
-#: src/filemanager/find.c:1285
+#: src/filemanager/find.c:1284
 msgid "Finished"
 msgstr ""
 
-#: src/filemanager/find.c:1290
+#: src/filemanager/find.c:1289
 #, c-format
 msgid "Finished (ignored %zd directory)"
 msgid_plural "Finished (ignored %zd directories)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/filemanager/find.c:1320 src/viewer/search.c:244
+#: src/filemanager/find.c:1319 src/viewer/search.c:243
 #, c-format
 msgid "Searching %s"
 msgstr ""
 
-#: src/filemanager/find.c:1547 src/filemanager/find.c:1627
+#: src/filemanager/find.c:1546 src/filemanager/find.c:1626
 msgid "Searching"
 msgstr ""
 
-#: src/filemanager/hotlist.c:180
+#: src/filemanager/hotlist.c:179
 msgid "Change &to"
 msgstr ""
 
-#: src/filemanager/hotlist.c:183
+#: src/filemanager/hotlist.c:182
 msgid "&Free VFSs now"
 msgstr ""
 
-#: src/filemanager/hotlist.c:185
+#: src/filemanager/hotlist.c:184
 msgid "&Refresh"
 msgstr ""
 
-#: src/filemanager/hotlist.c:188
+#: src/filemanager/hotlist.c:187
 msgid "&Add current"
 msgstr ""
 
-#: src/filemanager/hotlist.c:190
+#: src/filemanager/hotlist.c:189
 msgid "&Up"
 msgstr ""
 
-#: src/filemanager/hotlist.c:194
+#: src/filemanager/hotlist.c:193
 msgid "New &group"
 msgstr ""
 
-#: src/filemanager/hotlist.c:196
+#: src/filemanager/hotlist.c:195
 msgid "New &entry"
 msgstr ""
 
-#: src/filemanager/hotlist.c:198 src/filemanager/hotlist.c:977
-#: src/filemanager/hotlist.c:1039
+#: src/filemanager/hotlist.c:197 src/filemanager/hotlist.c:976
+#: src/filemanager/hotlist.c:1038
 msgid "&Insert"
 msgstr ""
 
-#: src/filemanager/hotlist.c:202 src/filemanager/panelize.c:142
+#: src/filemanager/hotlist.c:201 src/filemanager/panelize.c:141
 msgid "&Remove"
 msgstr ""
 
-#: src/filemanager/hotlist.c:260
+#: src/filemanager/hotlist.c:259
 msgid "Subgroup - press ENTER to see list"
 msgstr ""
 
-#: src/filemanager/hotlist.c:738
+#: src/filemanager/hotlist.c:737
 msgid "Active VFS directories"
 msgstr ""
 
-#: src/filemanager/hotlist.c:745
+#: src/filemanager/hotlist.c:744
 msgid "Directory hotlist"
 msgstr ""
 
-#: src/filemanager/hotlist.c:754 src/filemanager/hotlist.c:1441
+#: src/filemanager/hotlist.c:753 src/filemanager/hotlist.c:1440
 msgid "Top level group"
 msgstr ""
 
-#: src/filemanager/hotlist.c:778
+#: src/filemanager/hotlist.c:777
 msgid "Directory path"
 msgstr ""
 
-#: src/filemanager/hotlist.c:814
+#: src/filemanager/hotlist.c:813
 #, c-format
 msgid "Moving %s"
 msgstr ""
 
-#: src/filemanager/hotlist.c:823
+#: src/filemanager/hotlist.c:822
 msgid "Directory label"
 msgstr ""
 
-#: src/filemanager/hotlist.c:976 src/filemanager/hotlist.c:1038
+#: src/filemanager/hotlist.c:975 src/filemanager/hotlist.c:1037
 msgid "&Append"
 msgstr ""
 
-#: src/filemanager/hotlist.c:1007
+#: src/filemanager/hotlist.c:1006
 msgid "New hotlist entry"
 msgstr ""
 
-#: src/filemanager/hotlist.c:1007
+#: src/filemanager/hotlist.c:1006
 msgid "Directory label:"
 msgstr ""
 
-#: src/filemanager/hotlist.c:1008
+#: src/filemanager/hotlist.c:1007
 msgid "Directory path:"
 msgstr ""
 
-#: src/filemanager/hotlist.c:1066
+#: src/filemanager/hotlist.c:1065
 msgid "New hotlist group"
 msgstr ""
 
-#: src/filemanager/hotlist.c:1066
+#: src/filemanager/hotlist.c:1065
 msgid "Name of new group:"
 msgstr ""
 
-#: src/filemanager/hotlist.c:1119
+#: src/filemanager/hotlist.c:1118
 #, c-format
 msgid "Are you sure you want to remove entry \"%s\"?"
 msgstr ""
 
-#: src/filemanager/hotlist.c:1136
+#: src/filemanager/hotlist.c:1135
 #, c-format
 msgid ""
 "Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
 
-#: src/filemanager/hotlist.c:1464
+#: src/filemanager/hotlist.c:1463
 msgid "Hotlist Load"
 msgstr ""
 
-#: src/filemanager/hotlist.c:1466
+#: src/filemanager/hotlist.c:1465
 #, c-format
 msgid ""
 "MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
 
-#: src/filemanager/hotlist.c:1568
+#: src/filemanager/hotlist.c:1567
 #, c-format
 msgid "Label for \"%s\":"
 msgstr ""
 
-#: src/filemanager/hotlist.c:1580
+#: src/filemanager/hotlist.c:1579
 msgid "Add to hotlist"
 msgstr ""
 
-#: src/filemanager/info.c:120
+#: src/filemanager/info.c:119
 #, c-format
 msgid "Midnight Commander %s"
 msgstr ""
 
-#: src/filemanager/info.c:137
+#: src/filemanager/info.c:136
 #, c-format
 msgid "File: %s"
 msgstr ""
 
-#: src/filemanager/info.c:154
+#: src/filemanager/info.c:153
 msgid "No node information"
 msgstr ""
 
-#: src/filemanager/info.c:157
+#: src/filemanager/info.c:156
 msgid "Free nodes:"
 msgstr ""
 
-#: src/filemanager/info.c:165
+#: src/filemanager/info.c:164
 msgid "No space information"
 msgstr ""
 
-#: src/filemanager/info.c:172
+#: src/filemanager/info.c:171
 #, c-format
 msgid "Free space: %s/%s (%d%%)"
 msgstr ""
 
-#: src/filemanager/info.c:179
+#: src/filemanager/info.c:178
 #, c-format
 msgid "Type:      %s"
 msgstr ""
 
-#: src/filemanager/info.c:180
+#: src/filemanager/info.c:179
 msgid "non-local vfs"
 msgstr ""
 
-#: src/filemanager/info.c:186
+#: src/filemanager/info.c:185
 #, c-format
 msgid "Device:    %s"
 msgstr ""
 
-#: src/filemanager/info.c:191
+#: src/filemanager/info.c:190
 #, c-format
 msgid "Filesystem: %s"
 msgstr ""
 
-#: src/filemanager/info.c:197
+#: src/filemanager/info.c:196
 #, c-format
 msgid "Accessed:  %s"
 msgstr ""
 
-#: src/filemanager/info.c:202
+#: src/filemanager/info.c:201
 #, c-format
 msgid "Modified:  %s"
 msgstr ""
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
-#: src/filemanager/info.c:210
+#: src/filemanager/info.c:209
 #, c-format
 msgid "Changed:   %s"
 msgstr ""
 
-#: src/filemanager/info.c:218
+#: src/filemanager/info.c:217
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
 msgstr ""
 
-#: src/filemanager/info.c:225
+#: src/filemanager/info.c:224
 #, c-format
 msgid "Size:      %s"
 msgstr ""
 
-#: src/filemanager/info.c:227
+#: src/filemanager/info.c:226
 #, c-format
 msgid " (%ld block)"
 msgid_plural " (%ld blocks)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/filemanager/info.c:234
+#: src/filemanager/info.c:233
 #, c-format
 msgid "Owner:     %s/%s"
 msgstr ""
 
-#: src/filemanager/info.c:238
+#: src/filemanager/info.c:237
 #, c-format
 msgid "Links:     %d"
 msgstr ""
 
-#: src/filemanager/info.c:242
+#: src/filemanager/info.c:241
 #, c-format
 msgid "Mode:      %s (%04o)"
 msgstr ""
 
-#: src/filemanager/info.c:247
+#: src/filemanager/info.c:246
 #, c-format
 msgid "Location:  %Xh:%Xh"
 msgstr ""
 
-#: src/filemanager/layout.c:171
+#: src/filemanager/layout.c:170
 msgid "&Equal split"
 msgstr ""
 
-#: src/filemanager/layout.c:172
+#: src/filemanager/layout.c:171
 msgid "&Menubar visible"
 msgstr ""
 
-#: src/filemanager/layout.c:173
+#: src/filemanager/layout.c:172
 msgid "Command &prompt"
 msgstr ""
 
-#: src/filemanager/layout.c:174
+#: src/filemanager/layout.c:173
 msgid "&Keybar visible"
 msgstr ""
 
-#: src/filemanager/layout.c:175
+#: src/filemanager/layout.c:174
 msgid "H&intbar visible"
 msgstr ""
 
-#: src/filemanager/layout.c:176
+#: src/filemanager/layout.c:175
 msgid "&XTerm window title"
 msgstr ""
 
-#: src/filemanager/layout.c:177
+#: src/filemanager/layout.c:176
 msgid "&Show free space"
 msgstr ""
 
-#: src/filemanager/layout.c:452
+#: src/filemanager/layout.c:451
 msgid "Panel split"
 msgstr ""
 
-#: src/filemanager/layout.c:453
+#: src/filemanager/layout.c:452
 msgid "Console output"
 msgstr ""
 
-#: src/filemanager/layout.c:457
+#: src/filemanager/layout.c:456
 msgid "&Vertical"
 msgstr ""
 
-#: src/filemanager/layout.c:458
+#: src/filemanager/layout.c:457
 msgid "&Horizontal"
 msgstr ""
 
-#: src/filemanager/layout.c:464
+#: src/filemanager/layout.c:463
 msgid "Output lines:"
 msgstr ""
 
-#: src/filemanager/layout.c:523
+#: src/filemanager/layout.c:522
 msgid "Layout"
 msgstr ""
 
-#: src/filemanager/midnight.c:201
+#: src/filemanager/midnight.c:200
 msgid "File listin&g"
 msgstr ""
 
-#: src/filemanager/midnight.c:202
+#: src/filemanager/midnight.c:201
 msgid "&Quick view"
 msgstr ""
 
-#: src/filemanager/midnight.c:203
+#: src/filemanager/midnight.c:202
 msgid "&Info"
 msgstr ""
 
-#: src/filemanager/midnight.c:207
+#: src/filemanager/midnight.c:206
 msgid "&Listing mode..."
 msgstr ""
 
-#: src/filemanager/midnight.c:208
+#: src/filemanager/midnight.c:207
 msgid "&Sort order..."
 msgstr ""
 
-#: src/filemanager/midnight.c:209
+#: src/filemanager/midnight.c:208
 msgid "&Filter..."
 msgstr ""
 
-#: src/filemanager/midnight.c:211
+#: src/filemanager/midnight.c:210
 msgid "&Encoding..."
 msgstr ""
 
-#: src/filemanager/midnight.c:215
+#: src/filemanager/midnight.c:214
 msgid "FT&P link..."
 msgstr ""
 
-#: src/filemanager/midnight.c:218
+#: src/filemanager/midnight.c:217
 msgid "S&hell link..."
 msgstr ""
 
-#: src/filemanager/midnight.c:221
+#: src/filemanager/midnight.c:220
 msgid "S&FTP link..."
 msgstr ""
 
-#: src/filemanager/midnight.c:224
+#: src/filemanager/midnight.c:223
 msgid "SM&B link..."
 msgstr ""
 
-#: src/filemanager/midnight.c:226
+#: src/filemanager/midnight.c:225
 msgid "Paneli&ze"
 msgstr ""
 
-#: src/filemanager/midnight.c:228
+#: src/filemanager/midnight.c:227
 msgid "&Rescan"
 msgstr ""
 
-#: src/filemanager/midnight.c:240
+#: src/filemanager/midnight.c:239
 msgid "&View"
 msgstr ""
 
-#: src/filemanager/midnight.c:241
+#: src/filemanager/midnight.c:240
 msgid "Vie&w file..."
 msgstr ""
 
-#: src/filemanager/midnight.c:242
+#: src/filemanager/midnight.c:241
 msgid "&Filtered view"
 msgstr ""
 
-#: src/filemanager/midnight.c:244
+#: src/filemanager/midnight.c:243
 msgid "&Copy"
 msgstr ""
 
-#: src/filemanager/midnight.c:245
+#: src/filemanager/midnight.c:244
 msgid "C&hmod"
 msgstr ""
 
-#: src/filemanager/midnight.c:246
+#: src/filemanager/midnight.c:245
 msgid "&Link"
 msgstr ""
 
-#: src/filemanager/midnight.c:247
+#: src/filemanager/midnight.c:246
 msgid "&Symlink"
 msgstr ""
 
-#: src/filemanager/midnight.c:250
+#: src/filemanager/midnight.c:249
 msgid "Relative symlin&k"
 msgstr ""
 
-#: src/filemanager/midnight.c:251
+#: src/filemanager/midnight.c:250
 msgid "Edit s&ymlink"
 msgstr ""
 
-#: src/filemanager/midnight.c:252
+#: src/filemanager/midnight.c:251
 msgid "Ch&own"
 msgstr ""
 
-#: src/filemanager/midnight.c:254
+#: src/filemanager/midnight.c:253
 msgid "&Advanced chown"
 msgstr ""
 
-#: src/filemanager/midnight.c:255
+#: src/filemanager/midnight.c:254
 msgid "&Rename/Move"
 msgstr ""
 
-#: src/filemanager/midnight.c:256
+#: src/filemanager/midnight.c:255
 msgid "&Mkdir"
 msgstr ""
 
-#: src/filemanager/midnight.c:258
+#: src/filemanager/midnight.c:257
 msgid "&Quick cd"
 msgstr ""
 
-#: src/filemanager/midnight.c:260
+#: src/filemanager/midnight.c:259
 msgid "Select &group"
 msgstr ""
 
-#: src/filemanager/midnight.c:261
+#: src/filemanager/midnight.c:260
 msgid "U&nselect group"
 msgstr ""
 
-#: src/filemanager/midnight.c:262
+#: src/filemanager/midnight.c:261
 msgid "&Invert selection"
 msgstr ""
 
-#: src/filemanager/midnight.c:264
+#: src/filemanager/midnight.c:263
 msgid "E&xit"
 msgstr ""
 
-#: src/filemanager/midnight.c:280
+#: src/filemanager/midnight.c:279
 msgid "&User menu"
 msgstr ""
 
-#: src/filemanager/midnight.c:281
+#: src/filemanager/midnight.c:280
 msgid "&Directory tree"
 msgstr ""
 
-#: src/filemanager/midnight.c:282
+#: src/filemanager/midnight.c:281
 msgid "&Find file"
 msgstr ""
 
-#: src/filemanager/midnight.c:283
+#: src/filemanager/midnight.c:282
 msgid "S&wap panels"
 msgstr ""
 
-#: src/filemanager/midnight.c:284
+#: src/filemanager/midnight.c:283
 msgid "Switch &panels on/off"
 msgstr ""
 
-#: src/filemanager/midnight.c:286
+#: src/filemanager/midnight.c:285
 msgid "&Compare directories"
 msgstr ""
 
-#: src/filemanager/midnight.c:288
+#: src/filemanager/midnight.c:287
 msgid "C&ompare files"
 msgstr ""
 
-#: src/filemanager/midnight.c:291
+#: src/filemanager/midnight.c:290
 msgid "E&xternal panelize"
 msgstr ""
 
-#: src/filemanager/midnight.c:292
+#: src/filemanager/midnight.c:291
 msgid "Show directory s&izes"
 msgstr ""
 
-#: src/filemanager/midnight.c:294
+#: src/filemanager/midnight.c:293
 msgid "Command &history"
 msgstr ""
 
-#: src/filemanager/midnight.c:295
+#: src/filemanager/midnight.c:294
 msgid "Di&rectory hotlist"
 msgstr ""
 
-#: src/filemanager/midnight.c:297
+#: src/filemanager/midnight.c:296
 msgid "&Active VFS list"
 msgstr ""
 
-#: src/filemanager/midnight.c:300
+#: src/filemanager/midnight.c:299
 msgid "&Background jobs"
 msgstr ""
 
-#: src/filemanager/midnight.c:302
+#: src/filemanager/midnight.c:301
 msgid "Screen lis&t"
 msgstr ""
 
-#: src/filemanager/midnight.c:307
+#: src/filemanager/midnight.c:306
 msgid "&Undelete files (ext2fs only)"
 msgstr ""
 
-#: src/filemanager/midnight.c:310
+#: src/filemanager/midnight.c:309
 msgid "&Listing format edit"
 msgstr ""
 
-#: src/filemanager/midnight.c:317
+#: src/filemanager/midnight.c:316
 msgid "Edit &extension file"
 msgstr ""
 
-#: src/filemanager/midnight.c:318
+#: src/filemanager/midnight.c:317
 msgid "Edit &menu file"
 msgstr ""
 
-#: src/filemanager/midnight.c:321
+#: src/filemanager/midnight.c:320
 msgid "Edit hi&ghlighting group file"
 msgstr ""
 
-#: src/filemanager/midnight.c:334
+#: src/filemanager/midnight.c:333
 msgid "&Configuration..."
 msgstr ""
 
-#: src/filemanager/midnight.c:335
+#: src/filemanager/midnight.c:334
 msgid "&Layout..."
 msgstr ""
 
-#: src/filemanager/midnight.c:336
+#: src/filemanager/midnight.c:335
 msgid "&Panel options..."
 msgstr ""
 
-#: src/filemanager/midnight.c:338
+#: src/filemanager/midnight.c:337
 msgid "C&onfirmation..."
 msgstr ""
 
-#: src/filemanager/midnight.c:340
+#: src/filemanager/midnight.c:339
+msgid "&Appearance..."
+msgstr ""
+
+#: src/filemanager/midnight.c:341
 msgid "&Display bits..."
 msgstr ""
 
-#: src/filemanager/midnight.c:343
+#: src/filemanager/midnight.c:344
 msgid "&Virtual FS..."
 msgstr ""
 
-#: src/filemanager/midnight.c:448
+#: src/filemanager/midnight.c:449
 msgid "Panels:"
 msgstr ""
 
-#: src/filemanager/midnight.c:1033
+#: src/filemanager/midnight.c:1034
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/filemanager/midnight.c:1036 src/filemanager/midnight.c:1042
-#: src/filemanager/panel.c:2596
+#: src/filemanager/midnight.c:1037 src/filemanager/midnight.c:1043
+#: src/filemanager/panel.c:2594
 msgid "The Midnight Commander"
 msgstr ""
 
-#: src/filemanager/midnight.c:1043
+#: src/filemanager/midnight.c:1044
 msgid "Do you really want to quit the Midnight Commander?"
 msgstr ""
 
-#: src/filemanager/midnight.c:1646
+#: src/filemanager/midnight.c:1650
 msgid "&Above"
 msgstr ""
 
-#: src/filemanager/midnight.c:1646
+#: src/filemanager/midnight.c:1650
 msgid "&Left"
 msgstr ""
 
-#: src/filemanager/midnight.c:1647
+#: src/filemanager/midnight.c:1651
 msgid "&Below"
 msgstr ""
 
-#: src/filemanager/midnight.c:1647
+#: src/filemanager/midnight.c:1651
 msgid "&Right"
 msgstr ""
 
-#: src/filemanager/midnight.c:1658
+#: src/filemanager/midnight.c:1662
 msgid "ButtonBar|Menu"
 msgstr ""
 
-#: src/filemanager/midnight.c:1659 src/viewer/display.c:91
+#: src/filemanager/midnight.c:1663 src/viewer/display.c:90
 msgid "ButtonBar|View"
 msgstr ""
 
-#: src/filemanager/midnight.c:1662 src/filemanager/tree.c:1218
+#: src/filemanager/midnight.c:1666 src/filemanager/tree.c:1217
 msgid "ButtonBar|RenMov"
 msgstr ""
 
-#: src/filemanager/midnight.c:1663 src/filemanager/tree.c:1221
+#: src/filemanager/midnight.c:1667 src/filemanager/tree.c:1220
 msgid "ButtonBar|Mkdir"
 msgstr ""
 
-#: src/filemanager/mountlist.c:882
+#: src/filemanager/mountlist.c:881
 msgid "Memory exhausted!"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:117
+#: src/filemanager/panel.c:115
 msgid "sort|u"
 msgstr ""
 
-#: src/filemanager/panel.c:118
+#: src/filemanager/panel.c:116
 msgid "&Unsorted"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:127
+#: src/filemanager/panel.c:125
 msgid "sort|n"
 msgstr ""
 
-#: src/filemanager/panel.c:128
+#: src/filemanager/panel.c:126
 msgid "&Name"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'version' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:137
+#: src/filemanager/panel.c:135
 msgid "sort|v"
 msgstr ""
 
-#: src/filemanager/panel.c:138
+#: src/filemanager/panel.c:136
 msgid "&Version"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:147
+#: src/filemanager/panel.c:145
 msgid "sort|e"
 msgstr ""
 
-#: src/filemanager/panel.c:148
+#: src/filemanager/panel.c:146
 msgid "E&xtension"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:157
+#: src/filemanager/panel.c:155
 msgid "sort|s"
 msgstr ""
 
-#: src/filemanager/panel.c:158
+#: src/filemanager/panel.c:156
 msgid "&Size"
 msgstr ""
 
-#: src/filemanager/panel.c:166
+#: src/filemanager/panel.c:164
 msgid "Block Size"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:183
+#: src/filemanager/panel.c:181
 msgid "sort|m"
 msgstr ""
 
-#: src/filemanager/panel.c:184
+#: src/filemanager/panel.c:182
 msgid "&Modify time"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:193
+#: src/filemanager/panel.c:191
 msgid "sort|a"
 msgstr ""
 
-#: src/filemanager/panel.c:194
+#: src/filemanager/panel.c:192
 msgid "&Access time"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:203
+#: src/filemanager/panel.c:201
 msgid "sort|h"
 msgstr ""
 
-#: src/filemanager/panel.c:204
+#: src/filemanager/panel.c:202
 msgid "C&hange time"
 msgstr ""
 
-#: src/filemanager/panel.c:220
+#: src/filemanager/panel.c:218
 msgid "Perm"
 msgstr ""
 
-#: src/filemanager/panel.c:228
+#: src/filemanager/panel.c:226
 msgid "Nl"
 msgstr ""
 
 #. TRANSLATORS: one single character to represent 'inode' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
-#: src/filemanager/panel.c:236
+#: src/filemanager/panel.c:234
 msgid "sort|i"
 msgstr ""
 
-#: src/filemanager/panel.c:237
+#: src/filemanager/panel.c:235
 msgid "&Inode"
 msgstr ""
 
-#: src/filemanager/panel.c:245
+#: src/filemanager/panel.c:243
 msgid "UID"
 msgstr ""
 
-#: src/filemanager/panel.c:253
+#: src/filemanager/panel.c:251
 msgid "GID"
 msgstr ""
 
-#: src/filemanager/panel.c:261
+#: src/filemanager/panel.c:259
 msgid "Owner"
 msgstr ""
 
-#: src/filemanager/panel.c:269
+#: src/filemanager/panel.c:267
 msgid "Group"
 msgstr ""
 
-#: src/filemanager/panel.c:491
+#: src/filemanager/panel.c:489
 msgid "[dev]"
 msgstr ""
 
-#: src/filemanager/panel.c:505 src/filemanager/panel.c:1014
+#: src/filemanager/panel.c:503 src/filemanager/panel.c:1012
 msgid "UP--DIR"
 msgstr ""
 
-#: src/filemanager/panel.c:526
+#: src/filemanager/panel.c:524
 msgid "SYMLINK"
 msgstr ""
 
-#: src/filemanager/panel.c:531
+#: src/filemanager/panel.c:529
 msgid "SUB-DIR"
 msgstr ""
 
-#: src/filemanager/panel.c:1006
+#: src/filemanager/panel.c:1004
 msgid "<readlink failed>"
 msgstr ""
 
-#: src/filemanager/panel.c:1069
+#: src/filemanager/panel.c:1067
 #, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/filemanager/panel.c:1073
+#: src/filemanager/panel.c:1071
 #, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/filemanager/panel.c:1274
+#: src/filemanager/panel.c:1272
 msgid "Panelize"
 msgstr ""
 
-#: src/filemanager/panel.c:1808
+#: src/filemanager/panel.c:1806
 msgid "Unknown tag on display format:"
 msgstr ""
 
-#: src/filemanager/panel.c:2597
+#: src/filemanager/panel.c:2595
 msgid "Do you really want to execute?"
 msgstr ""
 
-#: src/filemanager/panel.c:4246
+#: src/filemanager/panel.c:4244
 msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
 
-#: src/filemanager/panelize.c:143
+#: src/filemanager/panelize.c:142
 msgid "&Add new"
 msgstr ""
 
-#: src/filemanager/panelize.c:175 src/filemanager/panelize.c:379
+#: src/filemanager/panelize.c:174 src/filemanager/panelize.c:378
 msgid "External panelize"
 msgstr ""
 
-#: src/filemanager/panelize.c:184 src/filemanager/panelize.c:281
-#: src/filemanager/panelize.c:568 src/filemanager/panelize.c:622
+#: src/filemanager/panelize.c:183 src/filemanager/panelize.c:280
+#: src/filemanager/panelize.c:567 src/filemanager/panelize.c:621
 msgid "Other command"
 msgstr ""
 
-#: src/filemanager/panelize.c:188
+#: src/filemanager/panelize.c:187
 msgid "Command"
 msgstr ""
 
-#: src/filemanager/panelize.c:266
+#: src/filemanager/panelize.c:265
 msgid "Add to external panelize"
 msgstr ""
 
-#: src/filemanager/panelize.c:267
+#: src/filemanager/panelize.c:266
 msgid "Enter command label:"
 msgstr ""
 
-#: src/filemanager/panelize.c:320
+#: src/filemanager/panelize.c:319
 msgid "Cannot invoke command."
 msgstr ""
 
-#: src/filemanager/panelize.c:379
+#: src/filemanager/panelize.c:378
 msgid "Pipe close failed"
 msgstr ""
 
-#: src/filemanager/panelize.c:511
+#: src/filemanager/panelize.c:510
 msgid "Cannot run external panelize in a non-local directory"
 msgstr ""
 
-#: src/filemanager/panelize.c:572
+#: src/filemanager/panelize.c:571
 msgid "Modified git files"
 msgstr ""
 
-#: src/filemanager/panelize.c:573
+#: src/filemanager/panelize.c:572
 msgid "Find rejects after patching"
 msgstr ""
 
-#: src/filemanager/panelize.c:575
+#: src/filemanager/panelize.c:574
 msgid "Find *.orig after patching"
 msgstr ""
 
-#: src/filemanager/panelize.c:577
+#: src/filemanager/panelize.c:576
 msgid "Find SUID and SGID programs"
 msgstr ""
 
-#: src/filemanager/tree.c:184
+#: src/filemanager/tree.c:183
 #, c-format
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
 msgstr ""
 
-#: src/filemanager/tree.c:771
+#: src/filemanager/tree.c:770
 #, c-format
 msgid "Copy \"%s\" directory to:"
 msgstr ""
 
-#: src/filemanager/tree.c:809
+#: src/filemanager/tree.c:808
 #, c-format
 msgid "Move \"%s\" directory to:"
 msgstr ""
 
-#: src/filemanager/tree.c:820
+#: src/filemanager/tree.c:819
 #, c-format
 msgid ""
 "Cannot stat the destination\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/tree.c:879
+#: src/filemanager/tree.c:878
 #, c-format
 msgid "Delete %s?"
 msgstr ""
 
-#: src/filemanager/tree.c:1031 src/filemanager/tree.c:1215
+#: src/filemanager/tree.c:1030 src/filemanager/tree.c:1214
 msgid "ButtonBar|Static"
 msgstr ""
 
-#: src/filemanager/tree.c:1032 src/filemanager/tree.c:1216
+#: src/filemanager/tree.c:1031 src/filemanager/tree.c:1215
 msgid "ButtonBar|Dynamc"
 msgstr ""
 
-#: src/filemanager/tree.c:1213
+#: src/filemanager/tree.c:1212
 msgid "ButtonBar|Rescan"
 msgstr ""
 
-#: src/filemanager/tree.c:1214
+#: src/filemanager/tree.c:1213
 msgid "ButtonBar|Forget"
 msgstr ""
 
-#: src/filemanager/tree.c:1225
+#: src/filemanager/tree.c:1224
 msgid "ButtonBar|Rmdir"
 msgstr ""
 
-#: src/filemanager/treestore.c:372
+#: src/filemanager/treestore.c:371
 #, c-format
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
 msgstr ""
 
-#: src/filemanager/usermenu.c:321
+#: src/filemanager/usermenu.c:320
 msgid "Debug"
 msgstr ""
 
-#: src/filemanager/usermenu.c:339
+#: src/filemanager/usermenu.c:338
 msgid "ERROR:"
 msgstr ""
 
-#: src/filemanager/usermenu.c:343
+#: src/filemanager/usermenu.c:342
 msgid "True:"
 msgstr ""
 
-#: src/filemanager/usermenu.c:345
+#: src/filemanager/usermenu.c:344
 msgid "False:"
 msgstr ""
 
-#: src/filemanager/usermenu.c:568
+#: src/filemanager/usermenu.c:567
 msgid "Error calling program"
 msgstr ""
 
-#: src/filemanager/usermenu.c:601
+#: src/filemanager/usermenu.c:600
 msgid "Warning -- ignoring file"
 msgstr ""
 
-#: src/filemanager/usermenu.c:602
+#: src/filemanager/usermenu.c:601
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
 msgstr ""
 
-#: src/filemanager/usermenu.c:713
+#: src/filemanager/usermenu.c:712
 msgid "Format error on file Extensions File"
 msgstr ""
 
-#: src/filemanager/usermenu.c:714
+#: src/filemanager/usermenu.c:713
 #, c-format
 msgid "The %%var macro has no default"
 msgstr ""
 
-#: src/filemanager/usermenu.c:715
+#: src/filemanager/usermenu.c:714
 #, c-format
 msgid "The %%var macro has no variable"
 msgstr ""
 
-#: src/filemanager/usermenu.c:987
+#: src/filemanager/usermenu.c:986
 #, c-format
 msgid ""
 "Cannot open file%s\n"
 "%s"
 msgstr ""
 
-#: src/filemanager/usermenu.c:1090
+#: src/filemanager/usermenu.c:1089
 #, c-format
 msgid "No suitable entries found in %s"
 msgstr ""
 
-#: src/filemanager/usermenu.c:1104
+#: src/filemanager/usermenu.c:1103
 msgid "User menu"
 msgstr ""
 
-#: src/help.c:325
+#: src/help.c:324
 msgid "Help file format error\n"
 msgstr ""
 
-#: src/help.c:363
+#: src/help.c:362
 msgid "Internal bug: Double start of link area"
 msgstr ""
 
-#: src/help.c:714 src/help.c:1109
+#: src/help.c:713 src/help.c:1108
 #, c-format
 msgid "Cannot find node %s in help file"
 msgstr ""
 
-#: src/help.c:1124
+#: src/help.c:1123
 msgid "Help"
 msgstr ""
 
-#: src/help.c:1147
+#: src/help.c:1146
 msgid "ButtonBar|Index"
 msgstr ""
 
-#: src/help.c:1148
+#: src/help.c:1147
 msgid "ButtonBar|Prev"
 msgstr ""
 
-#: src/learn.c:72
+#: src/learn.c:71
 msgid "Learn keys"
 msgstr ""
 
-#: src/learn.c:90
+#: src/learn.c:89
 msgid "Teach me a key"
 msgstr ""
 
-#: src/learn.c:91
+#: src/learn.c:90
 #, c-format
 msgid ""
 "Please press the %s\n"
@@ -4459,55 +4479,55 @@ msgid ""
 "and wait as well."
 msgstr ""
 
-#: src/learn.c:123
+#: src/learn.c:122
 msgid "Cannot accept this key"
 msgstr ""
 
-#: src/learn.c:123
+#: src/learn.c:122
 #, c-format
 msgid "You have entered \"%s\""
 msgstr ""
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
-#: src/learn.c:184
+#: src/learn.c:183
 msgid "OK"
 msgstr ""
 
-#: src/learn.c:194
+#: src/learn.c:193
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
 msgstr ""
 
-#: src/learn.c:196
+#: src/learn.c:195
 msgid "&Discard"
 msgstr ""
 
-#: src/learn.c:203
+#: src/learn.c:202
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
 msgstr ""
 
-#: src/learn.c:327
+#: src/learn.c:326
 msgid ""
 "Press all the keys mentioned here. After you have done it, check\n"
 "which keys are not marked with OK. Press space on the missing\n"
 "key, or click with the mouse to define it. Move around with Tab."
 msgstr ""
 
-#: src/main.c:256
+#: src/main.c:255
 #, c-format
 msgid ""
 "Failed to run:\n"
 "%s\n"
 msgstr ""
 
-#: src/main.c:269
+#: src/main.c:268
 msgid "Home directory path is not absolute"
 msgstr ""
 
-#: src/main.c:500
+#: src/main.c:498
 #, c-format
 msgid ""
 "\n"
@@ -4523,38 +4543,38 @@ msgstr ""
 msgid "-  < No translation >"
 msgstr ""
 
-#: src/setup.c:217
+#: src/setup.c:216
 msgid "%b %e  %Y"
 msgstr ""
 
-#: src/setup.c:218
+#: src/setup.c:217
 msgid "%b %e %H:%M"
 msgstr ""
 
-#: src/setup.c:1188
+#: src/setup.c:1187
 #, c-format
 msgid ""
 "Cannot save file %s:\n"
 "%s"
 msgstr ""
 
-#: src/subshell.c:392
+#: src/subshell.c:379
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
 "Subshell support will be disabled."
 msgstr ""
 
-#: src/subshell.c:850
+#: src/subshell.c:837
 #, c-format
 msgid "Cannot open named pipe %s\n"
 msgstr ""
 
-#: src/subshell.c:1064
+#: src/subshell.c:1051
 msgid "The shell is still active. Quit anyway?"
 msgstr ""
 
-#: src/subshell.c:1232
+#: src/subshell.c:1219
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
 msgstr ""
@@ -4654,21 +4674,21 @@ msgstr ""
 msgid "Cache directory:"
 msgstr ""
 
-#: src/vfs/cpio/cpio.c:227 src/vfs/cpio/cpio.c:252
+#: src/vfs/cpio/cpio.c:226 src/vfs/cpio/cpio.c:251
 #, c-format
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
 msgstr ""
 
-#: src/vfs/cpio/cpio.c:330
+#: src/vfs/cpio/cpio.c:329
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
 msgstr ""
 
-#: src/vfs/cpio/cpio.c:417
+#: src/vfs/cpio/cpio.c:416
 #, c-format
 msgid ""
 "Inconsistent hardlinks of\n"
@@ -4677,265 +4697,265 @@ msgid ""
 "%s"
 msgstr ""
 
-#: src/vfs/cpio/cpio.c:458
+#: src/vfs/cpio/cpio.c:457
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr ""
 
-#: src/vfs/cpio/cpio.c:549 src/vfs/cpio/cpio.c:610 src/vfs/cpio/cpio.c:616
-#: src/vfs/cpio/cpio.c:680 src/vfs/cpio/cpio.c:690
+#: src/vfs/cpio/cpio.c:548 src/vfs/cpio/cpio.c:609 src/vfs/cpio/cpio.c:615
+#: src/vfs/cpio/cpio.c:679 src/vfs/cpio/cpio.c:689
 #, c-format
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
 msgstr ""
 
-#: src/vfs/cpio/cpio.c:749
+#: src/vfs/cpio/cpio.c:748
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
 msgstr ""
 
-#: src/vfs/extfs/extfs.c:509
+#: src/vfs/extfs/extfs.c:508
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
 msgstr ""
 
-#: src/vfs/extfs/extfs.c:551 src/vfs/extfs/extfs.c:572
-#: src/vfs/extfs/extfs.c:628
+#: src/vfs/extfs/extfs.c:550 src/vfs/extfs/extfs.c:571
+#: src/vfs/extfs/extfs.c:627
 msgid "Inconsistent extfs archive"
 msgstr ""
 
-#: src/vfs/extfs/extfs.c:1575
+#: src/vfs/extfs/extfs.c:1574
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr ""
 
-#: src/vfs/fish/fish.c:284
+#: src/vfs/fish/fish.c:283
 #, c-format
 msgid "fish: Disconnecting from %s"
 msgstr ""
 
-#: src/vfs/fish/fish.c:461
+#: src/vfs/fish/fish.c:460
 msgid "fish: Waiting for initial line..."
 msgstr ""
 
-#: src/vfs/fish/fish.c:471
+#: src/vfs/fish/fish.c:470
 msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr ""
 
-#: src/vfs/fish/fish.c:478
+#: src/vfs/fish/fish.c:477
 #, c-format
 msgid "fish: Password is required for %s"
 msgstr ""
 
-#: src/vfs/fish/fish.c:487
+#: src/vfs/fish/fish.c:486
 msgid "fish: Sending password..."
 msgstr ""
 
-#: src/vfs/fish/fish.c:523
+#: src/vfs/fish/fish.c:522
 msgid "fish: Sending initial line..."
 msgstr ""
 
-#: src/vfs/fish/fish.c:534
+#: src/vfs/fish/fish.c:533
 msgid "fish: Handshaking version..."
 msgstr ""
 
-#: src/vfs/fish/fish.c:544
+#: src/vfs/fish/fish.c:543
 msgid "fish: Getting host info..."
 msgstr ""
 
-#: src/vfs/fish/fish.c:669
+#: src/vfs/fish/fish.c:668
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr ""
 
-#: src/vfs/fish/fish.c:837 src/vfs/ftpfs/ftpfs.c:1775
-#: src/vfs/undelfs/undelfs.c:392
+#: src/vfs/fish/fish.c:836 src/vfs/ftpfs/ftpfs.c:1774
+#: src/vfs/undelfs/undelfs.c:391
 #, c-format
 msgid "%s: done."
 msgstr ""
 
-#: src/vfs/fish/fish.c:844 src/vfs/ftpfs/ftpfs.c:1724
-#: src/vfs/undelfs/undelfs.c:395
+#: src/vfs/fish/fish.c:843 src/vfs/ftpfs/ftpfs.c:1723
+#: src/vfs/undelfs/undelfs.c:394
 #, c-format
 msgid "%s: failure"
 msgstr ""
 
-#: src/vfs/fish/fish.c:902
+#: src/vfs/fish/fish.c:901
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr ""
 
-#: src/vfs/fish/fish.c:940
+#: src/vfs/fish/fish.c:939
 msgid "fish: Local read failed, sending zeros"
 msgstr ""
 
-#: src/vfs/fish/fish.c:959
+#: src/vfs/fish/fish.c:958
 msgid "fish: storing file"
 msgstr ""
 
-#: src/vfs/fish/fish.c:1037
+#: src/vfs/fish/fish.c:1036
 msgid "Aborting transfer..."
 msgstr ""
 
-#: src/vfs/fish/fish.c:1053
+#: src/vfs/fish/fish.c:1052
 msgid "Error reported after abort."
 msgstr ""
 
-#: src/vfs/fish/fish.c:1055
+#: src/vfs/fish/fish.c:1054
 msgid "Aborted transfer would be successful."
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:551
+#: src/vfs/ftpfs/ftpfs.c:550
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:604
+#: src/vfs/ftpfs/ftpfs.c:603
 #, c-format
 msgid "FTP: Password required for %s"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:646
+#: src/vfs/ftpfs/ftpfs.c:645
 msgid "ftpfs: sending login name"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:651
+#: src/vfs/ftpfs/ftpfs.c:650
 msgid "ftpfs: sending user password"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:657
+#: src/vfs/ftpfs/ftpfs.c:656
 #, c-format
 msgid "FTP: Account required for user %s"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:659
+#: src/vfs/ftpfs/ftpfs.c:658
 msgid "Account:"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:664
+#: src/vfs/ftpfs/ftpfs.c:663
 msgid "ftpfs: sending user account"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:673
+#: src/vfs/ftpfs/ftpfs.c:672
 msgid "ftpfs: logged in"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:687
+#: src/vfs/ftpfs/ftpfs.c:686
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:818
+#: src/vfs/ftpfs/ftpfs.c:817
 msgid "ftpfs: Invalid host name."
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:867 src/vfs/ftpfs/ftpfs.c:883
+#: src/vfs/ftpfs/ftpfs.c:866 src/vfs/ftpfs/ftpfs.c:882
 #, c-format
 msgid "ftpfs: %s"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:890
+#: src/vfs/ftpfs/ftpfs.c:889
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:901
+#: src/vfs/ftpfs/ftpfs.c:900
 msgid "ftpfs: connection interrupted by user"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:903
+#: src/vfs/ftpfs/ftpfs.c:902
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:957
+#: src/vfs/ftpfs/ftpfs.c:956
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1284
+#: src/vfs/ftpfs/ftpfs.c:1283
 msgid "ftpfs: invalid address family"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1292
+#: src/vfs/ftpfs/ftpfs.c:1291
 #, c-format
 msgid "ftpfs: could not create socket: %s"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1326
+#: src/vfs/ftpfs/ftpfs.c:1325
 msgid "ftpfs: could not setup passive mode"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1423
+#: src/vfs/ftpfs/ftpfs.c:1422
 msgid "ftpfs: aborting transfer."
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1426
+#: src/vfs/ftpfs/ftpfs.c:1425
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1434
+#: src/vfs/ftpfs/ftpfs.c:1433
 msgid "ftpfs: abort failed"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1565 src/vfs/ftpfs/ftpfs.c:1678
+#: src/vfs/ftpfs/ftpfs.c:1564 src/vfs/ftpfs/ftpfs.c:1677
 msgid "ftpfs: CWD failed."
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1575 src/vfs/ftpfs/ftpfs.c:1583
+#: src/vfs/ftpfs/ftpfs.c:1574 src/vfs/ftpfs/ftpfs.c:1582
 msgid "ftpfs: couldn't resolve symlink"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1644
+#: src/vfs/ftpfs/ftpfs.c:1643
 msgid "Resolving symlink..."
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1668
+#: src/vfs/ftpfs/ftpfs.c:1667
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1671
+#: src/vfs/ftpfs/ftpfs.c:1670
 msgid "(strict rfc959)"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1671
+#: src/vfs/ftpfs/ftpfs.c:1670
 msgid "(chdir first)"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1789
+#: src/vfs/ftpfs/ftpfs.c:1788
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:1867
+#: src/vfs/ftpfs/ftpfs.c:1866
 msgid "ftpfs: storing file"
 msgstr ""
 
-#: src/vfs/ftpfs/ftpfs.c:2329
+#: src/vfs/ftpfs/ftpfs.c:2328
 msgid ""
 "~/.netrc file has incorrect mode\n"
 "Remove password or correct mode"
 msgstr ""
 
-#: src/vfs/sfs/sfs.c:428
+#: src/vfs/sfs/sfs.c:427
 #, c-format
 msgid "%s: Warning: file %s not found\n"
 msgstr ""
 
-#: src/vfs/sfs/sfs.c:457
+#: src/vfs/sfs/sfs.c:456
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
 msgstr ""
 
-#: src/vfs/sfs/sfs.c:476
+#: src/vfs/sfs/sfs.c:475
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
@@ -5048,205 +5068,205 @@ msgstr ""
 msgid "%s renaming files\n"
 msgstr ""
 
-#: src/vfs/tar/tar.c:295 src/vfs/tar/tar.c:320
+#: src/vfs/tar/tar.c:294 src/vfs/tar/tar.c:319
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
 msgstr ""
 
-#: src/vfs/tar/tar.c:574 src/vfs/tar/tar.c:605 src/vfs/tar/tar.c:690
-#: src/vfs/tar/tar.c:699
+#: src/vfs/tar/tar.c:573 src/vfs/tar/tar.c:604 src/vfs/tar/tar.c:689
+#: src/vfs/tar/tar.c:698
 msgid "Inconsistent tar archive"
 msgstr ""
 
-#: src/vfs/tar/tar.c:590
+#: src/vfs/tar/tar.c:589
 msgid "Unexpected EOF on archive file"
 msgstr ""
 
-#: src/vfs/tar/tar.c:790
+#: src/vfs/tar/tar.c:789
 #, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:130
+#: src/vfs/undelfs/undelfs.c:129
 msgid "undelfs: error"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:247
+#: src/vfs/undelfs/undelfs.c:246
 msgid "not enough memory"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:253
+#: src/vfs/undelfs/undelfs.c:252
 msgid "while allocating block buffer"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:259
+#: src/vfs/undelfs/undelfs.c:258
 #, c-format
 msgid "open_inode_scan: %d"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:265
+#: src/vfs/undelfs/undelfs.c:264
 #, c-format
 msgid "while starting inode scan %d"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:272
+#: src/vfs/undelfs/undelfs.c:271
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:287
+#: src/vfs/undelfs/undelfs.c:286
 #, c-format
 msgid "while calling ext2_block_iterate %d"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:299
+#: src/vfs/undelfs/undelfs.c:298
 msgid "no more memory while reallocating array"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:321
+#: src/vfs/undelfs/undelfs.c:320
 #, c-format
 msgid "while doing inode scan %d"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:374
+#: src/vfs/undelfs/undelfs.c:373
 #, c-format
 msgid "Cannot open file %s"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:377
+#: src/vfs/undelfs/undelfs.c:376
 msgid "undelfs: reading inode bitmap..."
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:380
+#: src/vfs/undelfs/undelfs.c:379
 #, c-format
 msgid ""
 "Cannot load inode bitmap from:\n"
 "%s"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:383
+#: src/vfs/undelfs/undelfs.c:382
 msgid "undelfs: reading block bitmap..."
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:386
+#: src/vfs/undelfs/undelfs.c:385
 #, c-format
 msgid ""
 "Cannot load block bitmap from:\n"
 "%s"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:411
+#: src/vfs/undelfs/undelfs.c:410
 msgid "vfs_info is not fs!"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:459 src/vfs/undelfs/undelfs.c:678
+#: src/vfs/undelfs/undelfs.c:458 src/vfs/undelfs/undelfs.c:677
 msgid "You have to chdir to extract files first"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:605
+#: src/vfs/undelfs/undelfs.c:604
 msgid "while iterating over blocks"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:724
+#: src/vfs/undelfs/undelfs.c:723
 #, c-format
 msgid "Cannot open file \"%s\""
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:818
+#: src/vfs/undelfs/undelfs.c:817
 msgid "Ext2lib error"
 msgstr ""
 
-#: src/viewer/actions_cmd.c:420
+#: src/viewer/actions_cmd.c:419
 msgid "Invalid value"
 msgstr ""
 
-#: src/viewer/actions_cmd.c:616
+#: src/viewer/actions_cmd.c:615
 msgid "File was modified. Save with exit?"
 msgstr ""
 
-#: src/viewer/actions_cmd.c:617
+#: src/viewer/actions_cmd.c:616
 msgid "&Cancel quit"
 msgstr ""
 
-#: src/viewer/actions_cmd.c:622
+#: src/viewer/actions_cmd.c:621
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file?"
 msgstr ""
 
-#: src/viewer/datasource.c:418
+#: src/viewer/datasource.c:417
 msgid "Cannot spawn child process"
 msgstr ""
 
-#: src/viewer/datasource.c:431
+#: src/viewer/datasource.c:430
 msgid "Empty output from child filter"
 msgstr ""
 
-#: src/viewer/dialogs.c:180
+#: src/viewer/dialogs.c:179
 msgid "&Line number (decimal)"
 msgstr ""
 
-#: src/viewer/dialogs.c:181
+#: src/viewer/dialogs.c:180
 msgid "Pe&rcents"
 msgstr ""
 
-#: src/viewer/dialogs.c:182
+#: src/viewer/dialogs.c:181
 msgid "&Decimal offset"
 msgstr ""
 
-#: src/viewer/dialogs.c:183
+#: src/viewer/dialogs.c:182
 msgid "He&xadecimal offset"
 msgstr ""
 
-#: src/viewer/dialogs.c:218
+#: src/viewer/dialogs.c:217
 msgid "Goto"
 msgstr ""
 
-#: src/viewer/display.c:97
+#: src/viewer/display.c:96
 msgid "ButtonBar|Ascii"
 msgstr ""
 
-#: src/viewer/display.c:99
+#: src/viewer/display.c:98
 msgid "ButtonBar|HxSrch"
 msgstr ""
 
-#: src/viewer/display.c:104
+#: src/viewer/display.c:103
 msgid "ButtonBar|UnWrap"
 msgstr ""
 
-#: src/viewer/display.c:105
+#: src/viewer/display.c:104
 msgid "ButtonBar|Wrap"
 msgstr ""
 
-#: src/viewer/display.c:106
+#: src/viewer/display.c:105
 msgid "ButtonBar|Hex"
 msgstr ""
 
-#: src/viewer/display.c:111
+#: src/viewer/display.c:110
 msgid "ButtonBar|Goto"
 msgstr ""
 
-#: src/viewer/display.c:112
+#: src/viewer/display.c:111
 msgid "ButtonBar|Raw"
 msgstr ""
 
-#: src/viewer/display.c:113
+#: src/viewer/display.c:112
 msgid "ButtonBar|Parse"
 msgstr ""
 
-#: src/viewer/display.c:121
+#: src/viewer/display.c:120
 msgid "ButtonBar|Unform"
 msgstr ""
 
-#: src/viewer/display.c:122
+#: src/viewer/display.c:121
 msgid "ButtonBar|Format"
 msgstr ""
 
-#: src/viewer/hex.c:397
+#: src/viewer/hex.c:396
 #, c-format
 msgid ""
 "Error while closing the file:\n"
@@ -5254,44 +5274,44 @@ msgid ""
 "Data may have been written or not"
 msgstr ""
 
-#: src/viewer/hex.c:405
+#: src/viewer/hex.c:404
 #, c-format
 msgid ""
 "Cannot save file:\n"
 "%s"
 msgstr ""
 
-#: src/viewer/lib.c:403 src/viewer/lib.c:405
+#: src/viewer/lib.c:402 src/viewer/lib.c:404
 msgid "View: "
 msgstr ""
 
-#: src/viewer/mcviewer.c:322
+#: src/viewer/mcviewer.c:321
 #, c-format
 msgid ""
 "Cannot open \"%s\"\n"
 "%s"
 msgstr ""
 
-#: src/viewer/mcviewer.c:349
+#: src/viewer/mcviewer.c:348
 msgid "Cannot view: not a regular file"
 msgstr ""
 
-#: src/viewer/mcviewer.c:379
+#: src/viewer/mcviewer.c:378
 #, c-format
 msgid ""
 "Cannot open \"%s\" in parse mode\n"
 "%s"
 msgstr ""
 
-#: src/viewer/search.c:142
+#: src/viewer/search.c:141
 msgid "Seeking to search result"
 msgstr ""
 
-#: src/viewer/search.c:323
+#: src/viewer/search.c:322
 msgid "Search done"
 msgstr ""
 
-#: src/viewer/search.c:323
+#: src/viewer/search.c:322
 msgid "Continue from beginning?"
 msgstr ""
 

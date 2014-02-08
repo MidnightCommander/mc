@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/projects/p/mc/language/ko/)\n"
@@ -140,6 +140,10 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
+#, fuzzy
+msgid "Escape"
+msgstr "ESC키"
+
 msgid "Function key 1"
 msgstr "F1"
 
@@ -200,59 +204,67 @@ msgstr "F19"
 msgid "Function key 20"
 msgstr "F20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "완료/M-tab"
+
+msgid "BackTab/S-tab"
+msgstr ""
+
+#, fuzzy
+msgid "Backspace"
 msgstr "백스페이스키"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "위 방향키"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "아래 방향키"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "왼쪽 방향키"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "오른쪽 방향키"
+
+#, fuzzy
+msgid "Insert"
+msgstr "삽입(&I)"
+
+#, fuzzy
+msgid "Delete"
+msgstr "삭제(&D)"
+
+#, fuzzy
+msgid "Home"
+msgstr "홈키"
 
 msgid "End key"
 msgstr "엔드키"
 
-msgid "Up arrow key"
-msgstr "위 방향키"
-
-msgid "Down arrow key"
-msgstr "아래 방향키"
-
-msgid "Left arrow key"
-msgstr "왼쪽 방향키"
-
-msgid "Right arrow key"
-msgstr "오른쪽 방향키"
-
-msgid "Home key"
-msgstr "홈키"
-
-msgid "Page Down key"
-msgstr "페이지다운키"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "페이지업키"
 
-msgid "Insert key"
-msgstr "인써트키"
+#, fuzzy
+msgid "Page Down"
+msgstr "페이지다운키"
 
-msgid "Delete key"
-msgstr "딜리트키"
-
-msgid "Completion/M-tab"
-msgstr "완료/M-tab"
-
-msgid "Back Tabulation S-tab"
-msgstr ""
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "키패드 +"
-
-msgid "- on keypad"
-msgstr "키패드 -"
-
-msgid "Slash on keypad"
-msgstr "키패드 /"
 
 msgid "* on keypad"
 msgstr "키패드 *"
 
-msgid "Escape key"
-msgstr "ESC키"
+msgid "- on keypad"
+msgstr "키패드 -"
+
+msgid "+ on keypad"
+msgstr "키패드 +"
 
 msgid "Left arrow keypad"
 msgstr "키패드 왼쪽 방향키"
@@ -305,14 +317,14 @@ msgstr ""
 msgid "C1 key"
 msgstr ""
 
-msgid "Plus"
-msgstr "플러스"
+msgid "Asterisk"
+msgstr "아스테릭키"
 
 msgid "Minus"
 msgstr "마이너스"
 
-msgid "Asterisk"
-msgstr "아스테릭키"
+msgid "Plus"
+msgstr "플러스"
 
 msgid "Dot"
 msgstr "점키"
@@ -1443,7 +1455,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1641,6 +1653,18 @@ msgstr ""
 
 msgid "Configure options"
 msgstr "환경설정 선택항목"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr ""
@@ -3023,6 +3047,10 @@ msgstr ""
 msgid "C&onfirmation..."
 msgstr "확인(&O)..."
 
+#, fuzzy
+msgid "&Appearance..."
+msgstr "바꾸기(&R)..."
+
 msgid "&Display bits..."
 msgstr "출력 비트(&D)..."
 
@@ -4067,6 +4095,15 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Insert key"
+#~ msgstr "인써트키"
+
+#~ msgid "Delete key"
+#~ msgstr "딜리트키"
+
+#~ msgid "Slash on keypad"
+#~ msgstr "키패드 /"
 
 #~ msgid "%s?"
 #~ msgstr "%s?"

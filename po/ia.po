@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Interlingua (http://www.transifex.com/projects/p/mc/language/"
@@ -145,6 +145,10 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
+#, fuzzy
+msgid "Escape"
+msgstr "Clave Esc"
+
 msgid "Function key 1"
 msgstr "Clave de function 1"
 
@@ -205,59 +209,67 @@ msgstr "Clave de function 19"
 msgid "Function key 20"
 msgstr "Clave de function 20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "Completion/M-tab"
+
+msgid "BackTab/S-tab"
+msgstr ""
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Clave Backspace/Correction"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "Clave flecha in alto"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "Clave flecha in basso"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "Clave flecha sinistre"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "Clave flecha dextre"
+
+#, fuzzy
+msgid "Insert"
+msgstr "&Inserer"
+
+#, fuzzy
+msgid "Delete"
+msgstr "&Deler"
+
+#, fuzzy
+msgid "Home"
+msgstr "Clave Home/Initio"
 
 msgid "End key"
 msgstr "Clave End/Fin"
 
-msgid "Up arrow key"
-msgstr "Clave flecha in alto"
-
-msgid "Down arrow key"
-msgstr "Clave flecha in basso"
-
-msgid "Left arrow key"
-msgstr "Clave flecha sinistre"
-
-msgid "Right arrow key"
-msgstr "Clave flecha dextre"
-
-msgid "Home key"
-msgstr "Clave Home/Initio"
-
-msgid "Page Down key"
-msgstr "Clave pagina in basso"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Clave pagina in alto"
 
-msgid "Insert key"
-msgstr "Clave Ins"
+#, fuzzy
+msgid "Page Down"
+msgstr "Clave pagina in basso"
 
-msgid "Delete key"
-msgstr "Clave Del"
-
-msgid "Completion/M-tab"
-msgstr "Completion/M-tab"
-
-msgid "Back Tabulation S-tab"
-msgstr ""
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "+ sur bloco numeric"
-
-msgid "- on keypad"
-msgstr "- sur bloco numeric"
-
-msgid "Slash on keypad"
-msgstr "/ sur bloco numeric"
 
 msgid "* on keypad"
 msgstr "* sur bloco numeric"
 
-msgid "Escape key"
-msgstr "Clave Esc"
+msgid "- on keypad"
+msgstr "- sur bloco numeric"
+
+msgid "+ on keypad"
+msgstr "+ sur bloco numeric"
 
 msgid "Left arrow keypad"
 msgstr "Flecha sinistre sur bloco numeric"
@@ -310,14 +322,14 @@ msgstr "Clave A1"
 msgid "C1 key"
 msgstr "Clave C1"
 
-msgid "Plus"
-msgstr "Plus"
+msgid "Asterisk"
+msgstr "Asterisco"
 
 msgid "Minus"
 msgstr "Minus"
 
-msgid "Asterisk"
-msgstr "Asterisco"
+msgid "Plus"
+msgstr "Plus"
 
 msgid "Dot"
 msgstr "Puncto"
@@ -1457,7 +1469,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1655,6 +1667,18 @@ msgstr ""
 
 msgid "Configure options"
 msgstr "Configurar optiones"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr ""
@@ -3039,6 +3063,9 @@ msgstr "Optiones del &pannello..."
 msgid "C&onfirmation..."
 msgstr "C&onfirmation..."
 
+msgid "&Appearance..."
+msgstr ""
+
 msgid "&Display bits..."
 msgstr ""
 
@@ -4076,3 +4103,12 @@ msgstr "Continuar ab initio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Insert key"
+#~ msgstr "Clave Ins"
+
+#~ msgid "Delete key"
+#~ msgstr "Clave Del"
+
+#~ msgid "Slash on keypad"
+#~ msgstr "/ sur bloco numeric"

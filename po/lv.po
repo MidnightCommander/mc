@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Latvian (http://www.transifex.com/projects/p/mc/language/"
@@ -138,6 +138,9 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
+msgid "Escape"
+msgstr ""
+
 msgid "Function key 1"
 msgstr "Funkc. taustiņš 1"
 
@@ -198,59 +201,67 @@ msgstr "Funkc. taustiņš 19"
 msgid "Function key 20"
 msgstr "Funkc. taustiņš 20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "Pabeigšana/M-tab"
+
+msgid "BackTab/S-tab"
+msgstr ""
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Backspace taustiņš"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "Taustiņš ar būltiņu uz augšu"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "Taustiņš ar būltiņu uz leju"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "Taustiņš ar būltiņu pa kreisi"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "Taustiņš ar būltiņu pa labi"
+
+#, fuzzy
+msgid "Insert"
+msgstr "ie&Vietot"
+
+#, fuzzy
+msgid "Delete"
+msgstr "&Dzēst"
+
+#, fuzzy
+msgid "Home"
+msgstr "Home taustiņš"
 
 msgid "End key"
 msgstr "End taustiņš"
 
-msgid "Up arrow key"
-msgstr "Taustiņš ar būltiņu uz augšu"
-
-msgid "Down arrow key"
-msgstr "Taustiņš ar būltiņu uz leju"
-
-msgid "Left arrow key"
-msgstr "Taustiņš ar būltiņu pa kreisi"
-
-msgid "Right arrow key"
-msgstr "Taustiņš ar būltiņu pa labi"
-
-msgid "Home key"
-msgstr "Home taustiņš"
-
-msgid "Page Down key"
-msgstr "Page Down taustiņš"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Page Up taustiņš"
 
-msgid "Insert key"
-msgstr "Insert taustiņš"
+#, fuzzy
+msgid "Page Down"
+msgstr "Page Down taustiņš"
 
-msgid "Delete key"
-msgstr "Delete taustiņš"
-
-msgid "Completion/M-tab"
-msgstr "Pabeigšana/M-tab"
-
-msgid "Back Tabulation S-tab"
-msgstr ""
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "+ uz klaviatūras"
-
-msgid "- on keypad"
-msgstr "- uz klaviatūras"
-
-msgid "Slash on keypad"
-msgstr "/ (Slash) uz klaviatūras"
 
 msgid "* on keypad"
 msgstr "* uz klaviatūras"
 
-msgid "Escape key"
-msgstr ""
+msgid "- on keypad"
+msgstr "- uz klaviatūras"
+
+msgid "+ on keypad"
+msgstr "+ uz klaviatūras"
 
 msgid "Left arrow keypad"
 msgstr "Būltiņa pa kreisi uz klaviatūras"
@@ -303,13 +314,13 @@ msgstr ""
 msgid "C1 key"
 msgstr ""
 
-msgid "Plus"
+msgid "Asterisk"
 msgstr ""
 
 msgid "Minus"
 msgstr ""
 
-msgid "Asterisk"
+msgid "Plus"
 msgstr ""
 
 msgid "Dot"
@@ -1441,7 +1452,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1639,6 +1650,18 @@ msgstr ""
 
 msgid "Configure options"
 msgstr "Konfigurēt opcijas"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr ""
@@ -3026,6 +3049,9 @@ msgstr ""
 msgid "C&onfirmation..."
 msgstr ""
 
+msgid "&Appearance..."
+msgstr ""
+
 msgid "&Display bits..."
 msgstr "&Displeja biti..."
 
@@ -4074,3 +4100,12 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Insert key"
+#~ msgstr "Insert taustiņš"
+
+#~ msgid "Delete key"
+#~ msgstr "Delete taustiņš"
+
+#~ msgid "Slash on keypad"
+#~ msgstr "/ (Slash) uz klaviatūras"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/projects/p/mc/language/"
@@ -155,6 +155,10 @@ msgstr ""
 "але тэрмінал не падтрымвае столькі колераў.\n"
 "Ужываецца звычайнае."
 
+#, fuzzy
+msgid "Escape"
+msgstr "Клявіша «Esc»"
+
 msgid "Function key 1"
 msgstr "Функцыянальная 1"
 
@@ -215,59 +219,68 @@ msgstr "Функцыянальная 19"
 msgid "Function key 20"
 msgstr "Функцыянальная 20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "Дапоўніць/«M-Tab»"
+
+#, fuzzy
+msgid "BackTab/S-tab"
+msgstr "Адв. зрух «S-Tab»"
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Кляв. «Backspace»"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "Стрэлка «ўверх»"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "Стрэлка «ўніз»"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "Стрэлка «ўлева»"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "Стрэлка «ўправа»"
+
+#, fuzzy
+msgid "Insert"
+msgstr "У &пачатак"
+
+#, fuzzy
+msgid "Delete"
+msgstr "&Выдаліць"
+
+#, fuzzy
+msgid "Home"
+msgstr "Клявіша «Home»"
 
 msgid "End key"
 msgstr "Клявіша «End»"
 
-msgid "Up arrow key"
-msgstr "Стрэлка «ўверх»"
-
-msgid "Down arrow key"
-msgstr "Стрэлка «ўніз»"
-
-msgid "Left arrow key"
-msgstr "Стрэлка «ўлева»"
-
-msgid "Right arrow key"
-msgstr "Стрэлка «ўправа»"
-
-msgid "Home key"
-msgstr "Клявіша «Home»"
-
-msgid "Page Down key"
-msgstr "Кляв. «Page Down»"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Кляв. «Page Up»"
 
-msgid "Insert key"
-msgstr "Клявіша «Insert»"
+#, fuzzy
+msgid "Page Down"
+msgstr "Кляв. «Page Down»"
 
-msgid "Delete key"
-msgstr "Клявіша «Delete»"
-
-msgid "Completion/M-tab"
-msgstr "Дапоўніць/«M-Tab»"
-
-msgid "Back Tabulation S-tab"
-msgstr "Адв. зрух «S-Tab»"
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "«+» лічбав. кляв."
-
-msgid "- on keypad"
-msgstr "«-» лічбав. кляв."
-
-msgid "Slash on keypad"
-msgstr "«/» лічбав. кляв."
 
 msgid "* on keypad"
 msgstr "«*» лічбав. кляв."
 
-msgid "Escape key"
-msgstr "Клявіша «Esc»"
+msgid "- on keypad"
+msgstr "«-» лічбав. кляв."
+
+msgid "+ on keypad"
+msgstr "«+» лічбав. кляв."
 
 msgid "Left arrow keypad"
 msgstr "«Улева» л/кл"
@@ -320,14 +333,14 @@ msgstr "Клявіша «A1»"
 msgid "C1 key"
 msgstr "Клявіша «C1»"
 
-msgid "Plus"
-msgstr "Плюс"
+msgid "Asterisk"
+msgstr "Зорачка"
 
 msgid "Minus"
 msgstr "Мінус"
 
-msgid "Asterisk"
-msgstr "Зорачка"
+msgid "Plus"
+msgstr "Плюс"
 
 msgid "Dot"
 msgstr "Кропка"
@@ -1509,7 +1522,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1717,6 +1730,18 @@ msgstr "Самарушна захоўваць &налады"
 
 msgid "Configure options"
 msgstr "Наставіць налады"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr "&Ня ўлічваць памер"
@@ -3194,6 +3219,10 @@ msgstr "Налады п&анэляў…"
 msgid "C&onfirmation..."
 msgstr "&Пацьвярджаць…"
 
+#, fuzzy
+msgid "&Appearance..."
+msgstr "&Замяніць…"
+
 msgid "&Display bits..."
 msgstr "&Кадоўка адлюстраваньня…"
 
@@ -4274,6 +4303,15 @@ msgstr "Ці працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Insert key"
+#~ msgstr "Клявіша «Insert»"
+
+#~ msgid "Delete key"
+#~ msgstr "Клявіша «Delete»"
+
+#~ msgid "Slash on keypad"
+#~ msgstr "«/» лічбав. кляв."
 
 #~ msgid "%s?"
 #~ msgstr "%s?"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/mc/"
@@ -158,6 +158,10 @@ msgstr ""
 "支持256色的皮肤“%s”。\n"
 "已加载默认皮肤"
 
+#, fuzzy
+msgid "Escape"
+msgstr "ESC 键"
+
 msgid "Function key 1"
 msgstr "F1"
 
@@ -218,59 +222,68 @@ msgstr "F19"
 msgid "Function key 20"
 msgstr "F20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "补全/M-Tab"
+
+#, fuzzy
+msgid "BackTab/S-tab"
+msgstr "后退制表 S-tab"
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Backspace 键"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "向上键"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "向下键"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "向左键"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "向右键"
+
+#, fuzzy
+msgid "Insert"
+msgstr "插入(&I)"
+
+#, fuzzy
+msgid "Delete"
+msgstr "删除(&D)"
+
+#, fuzzy
+msgid "Home"
+msgstr "Home 键"
 
 msgid "End key"
 msgstr "End 键"
 
-msgid "Up arrow key"
-msgstr "向上键"
-
-msgid "Down arrow key"
-msgstr "向下键"
-
-msgid "Left arrow key"
-msgstr "向左键"
-
-msgid "Right arrow key"
-msgstr "向右键"
-
-msgid "Home key"
-msgstr "Home 键"
-
-msgid "Page Down key"
-msgstr "Page Down 键"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Page Up 键"
 
-msgid "Insert key"
-msgstr "Insert 键"
+#, fuzzy
+msgid "Page Down"
+msgstr "Page Down 键"
 
-msgid "Delete key"
-msgstr "Delete 键"
-
-msgid "Completion/M-tab"
-msgstr "补全/M-Tab"
-
-msgid "Back Tabulation S-tab"
-msgstr "后退制表 S-tab"
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "小键盘 +"
-
-msgid "- on keypad"
-msgstr "小键盘 -"
-
-msgid "Slash on keypad"
-msgstr "小键盘 /"
 
 msgid "* on keypad"
 msgstr "小键盘 *"
 
-msgid "Escape key"
-msgstr "ESC 键"
+msgid "- on keypad"
+msgstr "小键盘 -"
+
+msgid "+ on keypad"
+msgstr "小键盘 +"
 
 msgid "Left arrow keypad"
 msgstr "小键盘向左键"
@@ -323,14 +336,14 @@ msgstr "A1键"
 msgid "C1 key"
 msgstr "C1键"
 
-msgid "Plus"
-msgstr "加号"
+msgid "Asterisk"
+msgstr "星号"
 
 msgid "Minus"
 msgstr "减号"
 
-msgid "Asterisk"
-msgstr "星号"
+msgid "Plus"
+msgstr "加号"
 
 msgid "Dot"
 msgstr "句号"
@@ -1517,7 +1530,8 @@ msgstr ""
 "为 Midnight Commander 编写的\n"
 "一个界面友好的文本编辑器。"
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr "版权所有 (C) 1996-2013 自由软件基金会"
 
 msgid "About"
@@ -1724,6 +1738,18 @@ msgstr "自动保存设置(&U)"
 
 msgid "Configure options"
 msgstr "配置选项"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr "大小写不敏感(&I)"
@@ -3203,6 +3229,10 @@ msgstr "面板选项(&P)..."
 msgid "C&onfirmation..."
 msgstr "确认(&O)..."
 
+#, fuzzy
+msgid "&Appearance..."
+msgstr "替换(&R)..."
+
 msgid "&Display bits..."
 msgstr "显示位(&D)..."
 
@@ -4279,6 +4309,15 @@ msgstr "从头继续搜索?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "无法获取 /ftp://some.host/editme.txt 的本地副本"
+
+#~ msgid "Insert key"
+#~ msgstr "Insert 键"
+
+#~ msgid "Delete key"
+#~ msgstr "Delete 键"
+
+#~ msgid "Slash on keypad"
+#~ msgstr "小键盘 /"
 
 #~ msgid "%s?"
 #~ msgstr "%s?"

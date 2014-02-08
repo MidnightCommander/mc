@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/projects/p/mc/language/"
@@ -156,6 +156,10 @@ msgstr ""
 "num terminal que não suporta 256 cores.\n"
 "Skin por defeito foi carregada"
 
+#, fuzzy
+msgid "Escape"
+msgstr "Tecla Escape"
+
 msgid "Function key 1"
 msgstr "Tecla de função 1"
 
@@ -216,59 +220,68 @@ msgstr "Tecla de função 19"
 msgid "Function key 20"
 msgstr "Tecla de função 20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "Completar/M-tab"
+
+#, fuzzy
+msgid "BackTab/S-tab"
+msgstr "Back Tabulation S-tab"
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Tecla de backspace"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "Tecla seta acima"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "Tecla seta abaixo"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "Tecla seta esquerda"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "Tecla seta direita"
+
+#, fuzzy
+msgid "Insert"
+msgstr "&Inserir"
+
+#, fuzzy
+msgid "Delete"
+msgstr "&Apagar"
+
+#, fuzzy
+msgid "Home"
+msgstr "Tecla Home"
 
 msgid "End key"
 msgstr "Tecla End"
 
-msgid "Up arrow key"
-msgstr "Tecla seta acima"
-
-msgid "Down arrow key"
-msgstr "Tecla seta abaixo"
-
-msgid "Left arrow key"
-msgstr "Tecla seta esquerda"
-
-msgid "Right arrow key"
-msgstr "Tecla seta direita"
-
-msgid "Home key"
-msgstr "Tecla Home"
-
-msgid "Page Down key"
-msgstr "Tecla Page Down"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Tecla Page Up"
 
-msgid "Insert key"
-msgstr "Tecla Insert"
+#, fuzzy
+msgid "Page Down"
+msgstr "Tecla Page Down"
 
-msgid "Delete key"
-msgstr "Tecla Delete"
-
-msgid "Completion/M-tab"
-msgstr "Completar/M-tab"
-
-msgid "Back Tabulation S-tab"
-msgstr "Back Tabulation S-tab"
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "+ no teclado numérico"
-
-msgid "- on keypad"
-msgstr "- no teclado numérico"
-
-msgid "Slash on keypad"
-msgstr "Barra no teclado numérico"
 
 msgid "* on keypad"
 msgstr "* no teclado numérico"
 
-msgid "Escape key"
-msgstr "Tecla Escape"
+msgid "- on keypad"
+msgstr "- no teclado numérico"
+
+msgid "+ on keypad"
+msgstr "+ no teclado numérico"
 
 msgid "Left arrow keypad"
 msgstr "Seta esquerda no teclado numérico"
@@ -321,14 +334,14 @@ msgstr "Tecla A1"
 msgid "C1 key"
 msgstr "Tecla C1"
 
-msgid "Plus"
-msgstr "Mais"
+msgid "Asterisk"
+msgstr "Asterisco"
 
 msgid "Minus"
 msgstr "Menos"
 
-msgid "Asterisk"
-msgstr "Asterisco"
+msgid "Plus"
+msgstr "Mais"
 
 msgid "Dot"
 msgstr "Ponto"
@@ -1519,7 +1532,8 @@ msgstr ""
 "Um editor de texto amigo do utilizador\n"
 "escrito para o Midnight Commander."
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2013 the Free Software Foundation"
 
 msgid "About"
@@ -1727,6 +1741,18 @@ msgstr "Guardar setup a&uto"
 
 msgid "Configure options"
 msgstr "Opções de configuração"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr "Insensível à cap&italização"
@@ -3211,6 +3237,10 @@ msgstr "Opções de &painel..."
 msgid "C&onfirmation..."
 msgstr "C&onfirmação..."
 
+#, fuzzy
+msgid "&Appearance..."
+msgstr "Substitui&r..."
+
 msgid "&Display bits..."
 msgstr "Mostrar &bits..."
 
@@ -4291,6 +4321,15 @@ msgstr "Continuar do início?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Não é possível obter uma cópia local de /ftp://some.host/editme.txt"
+
+#~ msgid "Insert key"
+#~ msgstr "Tecla Insert"
+
+#~ msgid "Delete key"
+#~ msgstr "Tecla Delete"
+
+#~ msgid "Slash on keypad"
+#~ msgstr "Barra no teclado numérico"
 
 #~ msgid "%s?"
 #~ msgstr "%s?"
