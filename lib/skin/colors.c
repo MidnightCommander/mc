@@ -178,6 +178,7 @@ mc_skin_color_set_default_for_terminal (mc_skin_t * mc_skin)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 static void
 mc_skin_color_cache_init (void)
 {

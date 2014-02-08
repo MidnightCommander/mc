@@ -110,13 +110,14 @@ mc_skin_try_to_load_default (void)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_skin_init (GError ** error)
+mc_skin_init (const gchar * skin_override, GError ** error)
 {
     gboolean is_good_init = TRUE;
 
     mc_skin__default.have_256_colors = FALSE;
 
-    mc_skin__default.name = mc_skin_get_default_name ();
+    mc_skin__default.name =
+        skin_override != NULL ? g_strdup (skin_override) : mc_skin_get_default_name ();
 
     mc_skin__default.colors = g_hash_table_new_full (g_str_hash, g_str_equal,
                                                      g_free, mc_skin_hash_destroy_value);
@@ -165,6 +166,9 @@ mc_skin_init (GError ** error)
 void
 mc_skin_deinit (void)
 {
+    tty_color_free_all_tmp ();
+    tty_color_free_all_non_tmp ();
+
     g_free (mc_skin__default.name);
     mc_skin__default.name = NULL;
     g_hash_table_destroy (mc_skin__default.colors);

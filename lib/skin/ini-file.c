@@ -25,7 +25,10 @@
  */
 
 #include <config.h>
+
 #include <string.h>
+
+#include "lib/global.h"         /* <glib.h> */
 
 #include "internal.h"
 #include "lib/fileloc.h"
@@ -40,6 +43,57 @@
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+mc_skin_get_list_from_dir (const gchar * base_dir, GPtrArray * list)
+{
+    gchar *name;
+    GDir *dir;
+
+    name = g_build_filename (base_dir, MC_SKINS_SUBDIR, (char *) NULL);
+    dir = g_dir_open (name, 0, NULL);
+    g_free (name);
+
+    if (dir != NULL)
+    {
+        while ((name = (gchar *) g_dir_read_name (dir)) != NULL)
+        {
+            gchar *sname;
+            size_t slen;
+            unsigned int i;
+
+            slen = strlen (name);
+            sname = g_strndup (name, slen);
+
+            if (slen > 4 && strcmp (sname + slen - 4, ".ini") == 0)
+                sname[slen - 4] = '\0';
+
+            for (i = 0; i < list->len; i++)
+                if (strcmp (sname, g_ptr_array_index (list, i)) == 0)
+                    break;
+
+            if (i < list->len)
+                g_free (sname);
+            else
+                g_ptr_array_add (list, sname);
+        }
+
+        g_dir_close (dir);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+string_array_comparator (gconstpointer a, gconstpointer b)
+{
+    char *aa = *(char **) a;
+    char *bb = *(char **) b;
+
+    return strcmp (aa, bb);
+}
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -73,6 +127,22 @@ mc_skin_ini_file_load_search_in_dir (mc_skin_t * mc_skin, const gchar * base_dir
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+GPtrArray *
+mc_skin_list (void)
+{
+    GPtrArray *list;
+
+    list = g_ptr_array_new ();
+    mc_skin_get_list_from_dir (mc_config_get_data_path (), list);
+    mc_skin_get_list_from_dir (mc_global.sysconfig_dir, list);
+    mc_skin_get_list_from_dir (mc_global.share_data_dir, list);
+    g_ptr_array_sort (list, (GCompareFunc) string_array_comparator);
+
+    return list;
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean

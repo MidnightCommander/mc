@@ -336,6 +336,8 @@ create_options_menu (void)
     entries =
         g_list_prepend (entries, menu_entry_create (_("C&onfirmation..."), CK_OptionsConfirm));
     entries =
+        g_list_prepend (entries, menu_entry_create (_("&Appearance..."), CK_OptionsAppearance));
+    entries =
         g_list_prepend (entries, menu_entry_create (_("&Display bits..."), CK_OptionsDisplayBits));
     entries = g_list_prepend (entries, menu_entry_create (_("Learn &keys..."), CK_LearnKeys));
 #ifdef ENABLE_VFS
@@ -1251,6 +1253,9 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
     case CK_OptionsLayout:
         layout_box ();
         break;
+    case CK_OptionsAppearance:
+        appearance_box ();
+        break;
     case CK_LearnKeys:
         learn_keys ();
         break;
@@ -1744,19 +1749,11 @@ do_nc (void)
 {
     gboolean ret;
 
-    dlg_colors_t midnight_colors;
-
-    midnight_colors[DLG_COLOR_NORMAL] = mc_skin_color_get ("dialog", "_default_");
-    midnight_colors[DLG_COLOR_FOCUS] = mc_skin_color_get ("dialog", "focus");
-    midnight_colors[DLG_COLOR_HOT_NORMAL] = mc_skin_color_get ("dialog", "hotnormal");
-    midnight_colors[DLG_COLOR_HOT_FOCUS] = mc_skin_color_get ("dialog", "hotfocus");
-    midnight_colors[DLG_COLOR_TITLE] = mc_skin_color_get ("dialog", "title");
-
 #ifdef USE_INTERNAL_EDIT
     edit_stack_init ();
 #endif
 
-    midnight_dlg = dlg_create (FALSE, 0, 0, LINES, COLS, midnight_colors, midnight_callback,
+    midnight_dlg = dlg_create (FALSE, 0, 0, LINES, COLS, dialog_colors, midnight_callback,
                                midnight_event, "[main]", NULL, DLG_NONE);
 
     /* Check if we were invoked as an editor or file viewer */

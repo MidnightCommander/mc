@@ -59,14 +59,6 @@ Listbox *
 create_listbox_window_centered (int center_y, int center_x, int lines, int cols,
                                 const char *title, const char *help)
 {
-    const dlg_colors_t listbox_colors = {
-        PMENU_ENTRY_COLOR,
-        PMENU_SELECTED_COLOR,
-        PMENU_ENTRY_COLOR,
-        PMENU_SELECTED_COLOR,
-        PMENU_TITLE_COLOR
-    };
-
     const int space = 4;
 
     int xpos, ypos;

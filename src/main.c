@@ -370,15 +370,14 @@ main (int argc, char *argv[])
 
     tty_init_colors (mc_global.tty.disable_colors, mc_args__force_colors);
 
-    mc_skin_init (&error);
+    mc_skin_init (NULL, &error);
+    dlg_set_default_colors ();
     if (error != NULL)
     {
         message (D_ERROR, _("Warning"), "%s", error->message);
         g_error_free (error);
         error = NULL;
     }
-
-    dlg_set_default_colors ();
 
 #ifdef ENABLE_SUBSHELL
     /* Done here to ensure that the subshell doesn't  */

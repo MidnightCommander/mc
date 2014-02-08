@@ -155,6 +155,7 @@ enum
     CK_PanelInfo,
     CK_Jobs,
     CK_OptionsLayout,
+    CK_OptionsAppearance,
     CK_Link,
     CK_PanelListing,
     CK_ListMode,
