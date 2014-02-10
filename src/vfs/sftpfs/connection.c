@@ -1,7 +1,7 @@
 /* Virtual File System: SFTP file system.
    The internal functions: connections
 
-   Copyright (C) 2011, 2013
+   Copyright (C) 2011-2014
    The Free Software Foundation, Inc.
 
    Written by:

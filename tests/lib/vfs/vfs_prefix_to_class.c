@@ -1,7 +1,7 @@
 /*
    lib/vfs - test vfs_prefix_to_class() functionality
 
-   Copyright (C) 2011, 2013
+   Copyright (C) 2011-2014
    The Free Software Foundation, Inc.
 
    Written by:

@@ -2,8 +2,7 @@
    Virtual File System: FISH implementation for transfering files over
    shell connections.
 
-   Copyright (C) 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006,
-   2007, 2008, 2009, 2010, 2011, 2013
+   Copyright (C) 1998-2014
    The Free Software Foundation, Inc.
 
    Written by:
@@ -332,11 +331,11 @@ fish_pipeopen (struct vfs_s_super *super, const char *path, const char *argv[])
     }
     else
     {
-        res = dup2 (fileset1[0], 0);
+        res = dup2 (fileset1[0], STDIN_FILENO);
         close (fileset1[0]);
         close (fileset1[1]);
-        res = dup2 (fileset2[1], 1);
-        close (2);
+        res = dup2 (fileset2[1], STDOUT_FILENO);
+        close (STDERR_FILENO);
         /* stderr to /dev/null */
         res = open ("/dev/null", O_WRONLY);
         close (fileset2[0]);

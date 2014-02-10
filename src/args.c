@@ -1,7 +1,7 @@
 /*
    Handle command line arguments.
 
-   Copyright (C) 2009, 2010, 2011, 2012
+   Copyright (C) 2009-2014
    The Free Software Foundation, Inc.
 
    Written by:

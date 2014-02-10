@@ -294,7 +294,5 @@ extern mc_global_t mc_global;
 
 /*** declarations of public functions ************************************************************/
 
-void refresh_screen (void *);
-
 /*** inline functions ****************************************************************************/
 #endif

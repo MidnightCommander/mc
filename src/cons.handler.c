@@ -1,9 +1,8 @@
 /*
    Client interface for General purpose Linux console save/restore server
 
-   Copyright (C) 1994, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2006, 2007, 2011
-   The Free Software Foundation, Inc. 
+   Copyright (C) 1994-2014
+   The Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
 
@@ -39,10 +38,10 @@
 #include <sys/ioctl.h>
 #endif
 #endif
-#include <unistd.h>
 
 #include "lib/global.h"
 
+#include "lib/unixcompat.h"
 #include "lib/tty/tty.h"
 #include "lib/skin.h"           /* tty_set_normal_attrs */
 #include "lib/tty/win.h"
@@ -193,17 +192,17 @@ handle_console_linux (console_action_t action)
             /* Bind the pipe 0 to the standard input */
             do
             {
-                if (dup2 (pipefd1[0], 0) == -1)
+                if (dup2 (pipefd1[0], STDIN_FILENO) == -1)
                     break;
                 status = close (pipefd1[0]);
                 /* Bind the pipe 1 to the standard output */
-                if (dup2 (pipefd2[1], 1) == -1)
+                if (dup2 (pipefd2[1], STDOUT_FILENO) == -1)
                     break;
 
                 status = close (pipefd2[1]);
                 /* Bind standard error to /dev/null */
                 status = open ("/dev/null", O_WRONLY);
-                if (dup2 (status, 2) == -1)
+                if (dup2 (status, STDERR_FILENO) == -1)
                     break;
                 status = close (status);
                 if (tty_name != NULL)

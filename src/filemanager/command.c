@@ -4,8 +4,7 @@
    with all the magic of the command input line, we depend on some
    help from the program's callback.
 
-   Copyright (C) 1995, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2007, 2011, 2013
+   Copyright (C) 1995-2014
    The Free Software Foundation, Inc.
 
    Written by:

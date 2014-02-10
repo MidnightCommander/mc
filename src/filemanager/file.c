@@ -1,8 +1,7 @@
 /*
    File management.
 
-   Copyright (C) 1994, 1995, 1996, 1998, 1999, 2000, 2001, 2002, 2003,
-   2004, 2005, 2006, 2007, 2011, 2012, 2013
+   Copyright (C) 1994-2014
    The Free Software Foundation, Inc.
 
    Written by:
@@ -616,8 +615,7 @@ warn_same_file (const char *fmt, const char *a, const char *b)
     union
     {
         void *p;
-          FileProgressStatus (*f) (enum OperationMode, const char *fmt,
-                                   const char *a, const char *b);
+        FileProgressStatus (*f) (enum OperationMode, const char *fmt, const char *a, const char *b);
     } pntr;
 /* *INDENT-ON* */
 
@@ -667,10 +665,8 @@ real_do_file_error (enum OperationMode mode, const char *error)
 static FileProgressStatus
 real_query_recursive (file_op_context_t * ctx, enum OperationMode mode, const char *s)
 {
-
     if (ctx->recursive_result < RECURSIVE_ALWAYS)
     {
-
         const char *msg;
         char *text;
 
@@ -713,11 +709,14 @@ real_query_recursive (file_op_context_t * ctx, enum OperationMode mode, const ch
 static FileProgressStatus
 do_file_error (const char *str)
 {
+/* *INDENT-OFF* */
     union
     {
         void *p;
-          FileProgressStatus (*f) (enum OperationMode, const char *);
+        FileProgressStatus (*f) (enum OperationMode, const char *);
     } pntr;
+/* *INDENT-ON* */
+
     pntr.f = real_do_file_error;
 
     if (mc_global.we_are_background)
@@ -731,11 +730,14 @@ do_file_error (const char *str)
 static FileProgressStatus
 query_recursive (file_op_context_t * ctx, const char *s)
 {
+/* *INDENT-OFF* */
     union
     {
         void *p;
-          FileProgressStatus (*f) (file_op_context_t *, enum OperationMode, const char *);
+        FileProgressStatus (*f) (file_op_context_t *, enum OperationMode, const char *);
     } pntr;
+/* *INDENT-ON* */
+
     pntr.f = real_query_recursive;
 
     if (mc_global.we_are_background)
@@ -750,12 +752,15 @@ static FileProgressStatus
 query_replace (file_op_context_t * ctx, const char *destname, struct stat *_s_stat,
                struct stat *_d_stat)
 {
+/* *INDENT-OFF* */
     union
     {
         void *p;
-          FileProgressStatus (*f) (file_op_context_t *, enum OperationMode, const char *,
-                                   struct stat *, struct stat *);
+        FileProgressStatus (*f) (file_op_context_t *, enum OperationMode, const char *,
+                                 struct stat *, struct stat *);
     } pntr;
+/* *INDENT-ON* */
+
     pntr.f = file_progress_real_query_replace;
 
     if (mc_global.we_are_background)
@@ -1235,8 +1240,7 @@ panel_compute_totals (const WPanel * panel, void *ui, compute_dir_size_callback 
                       size_t * ret_count, uintmax_t * ret_total, gboolean compute_symlinks)
 {
     int i;
-    size_t lc_count = 0;
-    uintmax_t lc_total = 0;
+    size_t dir_count = 0;
 
     for (i = 0; i < panel->dir.len; i++)
     {
@@ -1251,30 +1255,21 @@ panel_compute_totals (const WPanel * panel, void *ui, compute_dir_size_callback 
         {
             vfs_path_t *p;
             FileProgressStatus status;
-            size_t lc_dir_count = 0;
-            size_t lc_marked = 0;
-            uintmax_t lc_total2 = 0;
 
             p = vfs_path_append_new (panel->cwd_vpath, panel->dir.list[i].fname, NULL);
-            status = compute_dir_size (p, ui, cback, &lc_dir_count, &lc_marked, &lc_total2,
+            status = compute_dir_size (p, ui, cback, &dir_count, ret_count, ret_total,
                                        compute_symlinks);
             vfs_path_free (p);
 
             if (status != FILE_CONT)
                 return status;
-
-            lc_count += lc_marked;
-            lc_total += lc_total2;
         }
         else
         {
-            lc_count++;
-            lc_total += (uintmax_t) s->st_size;
+            (*ret_count)++;
+            *ret_total += (uintmax_t) s->st_size;
         }
     }
-
-    *ret_count = lc_count;
-    *ret_total = lc_total;
 
     return FILE_CONT;
 }
@@ -2256,7 +2251,7 @@ copy_dir_dir (FileOpTotalContext * tctx, file_op_context_t * ctx, const char *s,
 FileProgressStatus
 move_dir_dir (FileOpTotalContext * tctx, file_op_context_t * ctx, const char *s, const char *d)
 {
-    struct stat sbuf, dbuf, destbuf;
+    struct stat sbuf, dbuf;
     FileProgressStatus return_status;
     gboolean move_over = FALSE;
     gboolean dstat_ok;
@@ -2302,7 +2297,7 @@ move_dir_dir (FileOpTotalContext * tctx, file_op_context_t * ctx, const char *s,
 
     /* Check if the user inputted an existing dir */
   retry_dst_stat:
-    if (mc_stat (dst_vpath, &destbuf) == 0)
+    if (mc_stat (dst_vpath, &dbuf) == 0)
     {
         if (move_over)
         {
@@ -2316,7 +2311,7 @@ move_dir_dir (FileOpTotalContext * tctx, file_op_context_t * ctx, const char *s,
             return_status = FILE_SKIPALL;
         else
         {
-            if (S_ISDIR (destbuf.st_mode))
+            if (S_ISDIR (dbuf.st_mode))
                 return_status = file_error (_("Cannot overwrite directory \"%s\"\n%s"), d);
             else
                 return_status = file_error (_("Cannot overwrite file \"%s\"\n%s"), d);
@@ -2948,7 +2943,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                         value = transform_error;
                     else
                     {
-                        char *temp2, *temp3, *repl_dest, *source_with_path_str;
+                        char *temp2, *repl_dest, *source_with_path_str;
 
                         repl_dest = mc_search_prepare_replace_str2 (ctx->search_handle, dest);
                         if (ctx->search_handle->error != MC_SEARCH_E_OK)
@@ -2963,9 +2958,8 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                         g_free (repl_dest);
                         source_with_path_str =
                             strutils_shell_unescape (vfs_path_as_str (source_with_vpath));
-                        temp3 = temp2;
-                        temp2 = strutils_shell_unescape (temp2);
-                        g_free (temp3);
+                        temp = strutils_shell_unescape (temp2);
+                        g_free (temp2);
 
                         switch (operation)
                         {
@@ -2979,18 +2973,18 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                                 vfs_path_free (vpath);
                             }
                             if (S_ISDIR (src_stat.st_mode))
-                                value = copy_dir_dir (tctx, ctx, source_with_path_str, temp2,
+                                value = copy_dir_dir (tctx, ctx, source_with_path_str, temp,
                                                       TRUE, FALSE, FALSE, NULL);
                             else
-                                value = copy_file_file (tctx, ctx, source_with_path_str, temp2);
+                                value = copy_file_file (tctx, ctx, source_with_path_str, temp);
                             dest_dirs = free_linklist (dest_dirs);
                             break;
 
                         case OP_MOVE:
                             if (S_ISDIR (src_stat.st_mode))
-                                value = move_dir_dir (tctx, ctx, source_with_path_str, temp2);
+                                value = move_dir_dir (tctx, ctx, source_with_path_str, temp);
                             else
-                                value = move_file_file (tctx, ctx, source_with_path_str, temp2);
+                                value = move_file_file (tctx, ctx, source_with_path_str, temp);
                             break;
 
                         default:
@@ -2998,7 +2992,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                             abort ();
                         }
 
-                        g_free (temp2);
+                        g_free (temp);
                     }
                 }               /* Copy or move operation */
 

@@ -3,7 +3,7 @@
 
    Original idea and code: Oleg "Olegarch" Konovalov <olegarch@linuxinside.com>
 
-   Copyright (c) 2009, 2010, 2011, 2013
+   Copyright (C) 2009-2014
    The Free Software Foundation
 
    Written by:

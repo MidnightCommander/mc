@@ -159,7 +159,14 @@ gboolean mouse_global_in_widget (const Gpm_Event * event, const Widget * w);
 static inline cb_ret_t
 send_message (void *w, void *sender, widget_msg_t msg, int parm, void *data)
 {
-    return WIDGET (w)->callback (WIDGET (w), WIDGET (sender), msg, parm, data);
+    cb_ret_t ret = MSG_NOT_HANDLED;
+
+#if 1
+    if (w != NULL)              /* This must be always true, but... */
+#endif
+        ret = WIDGET (w)->callback (WIDGET (w), WIDGET (sender), msg, parm, data);
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */

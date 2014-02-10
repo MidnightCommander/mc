@@ -1,6 +1,6 @@
 /* lib/vfs - tests for vfspath_len() function.
 
-   Copyright (C) 2011, 2013
+   Copyright (C) 2011-2014
    The Free Software Foundation, Inc.
 
    Written by:

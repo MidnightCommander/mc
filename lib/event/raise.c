@@ -2,7 +2,7 @@
    Handle any events in application.
    Raise events.
 
-   Copyright (C) 2011
+   Copyright (C) 2011-2014
    The Free Software Foundation, Inc.
 
    Written by:

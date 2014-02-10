@@ -1,7 +1,7 @@
 /*
    Editor dialogs for high level editing commands
 
-   Copyright (C) 2009, 2011, 2012, 2013
+   Copyright (C) 2009-2014
    The Free Software Foundation, Inc.
 
    Written by:

@@ -40,7 +40,7 @@ do_view_action() {
 
     case "${filetype}" in
     man)
-        case "${MC_EXT_CURRENTDIR}"/"${MC_EXT_FILENAME}" in
+        case "${MC_EXT_FILENAME}" in
         */log/*|*/logs/*)
             cat "${MC_EXT_FILENAME}"
             ;;
@@ -59,7 +59,7 @@ do_view_action() {
         nroff @MAN_FLAGS@ -ms "${MC_EXT_FILENAME}"
         ;;
     man.gz|man.bz|man.bz2|man.lzma|man.xz)
-        case "${MC_EXT_CURRENTDIR}"/"${MC_EXT_FILENAME}" in
+        case "${MC_EXT_FILENAME}" in
         */log/*|*/logs/*)
             ${unpacker} "${MC_EXT_FILENAME}"
             ;;
@@ -84,7 +84,7 @@ do_open_action() {
         info -f "${MC_EXT_FILENAME}"
         ;;
     man)
-        case "${MC_EXT_CURRENTDIR}"/"${MC_EXT_FILENAME}" in
+        case "${MC_EXT_FILENAME}" in
         */log/*|*/logs/*)
             cat "${MC_EXT_FILENAME}"
             ;;
@@ -104,7 +104,7 @@ do_open_action() {
         nroff @MAN_FLAGS@ -ms "${MC_EXT_FILENAME}" | ${pager}
         ;;
     man.gz|man.bz|man.bz2|man.lzma|man.xz)
-        case "${MC_EXT_CURRENTDIR}"/"${MC_EXT_FILENAME}" in
+        case "${MC_EXT_FILENAME}" in
         */log/*|*/logs/*)
             ${unpacker} "${MC_EXT_FILENAME}"
             ;;

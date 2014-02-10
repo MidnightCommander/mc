@@ -1,7 +1,7 @@
 /*
    Virtual File System: GNU Tar file system.
 
-   Copyright (C) 2000, 2001, 2002, 2003, 2004, 2005, 2007, 2011, 2013
+   Copyright (C) 2000-2014
    The Free Software Foundation, Inc.
 
    Written by:
@@ -36,7 +36,6 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <unistd.h>
 
 #include "lib/global.h"
 #include "lib/unixcompat.h"
@@ -788,7 +787,8 @@ cpio_super_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *p
         return 0;
 
     /* Has the cached archive been changed on the disk? */
-    if (((cpio_super_data_t *) parc->data)->st.st_mtime < archive_stat->st_mtime)
+    if (parc->data != NULL
+        && ((cpio_super_data_t *) parc->data)->st.st_mtime < archive_stat->st_mtime)
     {
         /* Yes, reload! */
         (*vfs_cpiofs_ops.free) ((vfsid) parc);

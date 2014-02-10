@@ -1,8 +1,7 @@
 /*
    Setup loading/saving.
 
-   Copyright (C) 1994, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005,
-   2006, 2007, 2009, 2010, 2011, 2013
+   Copyright (C) 1994-2014
    The Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -101,7 +100,7 @@ int confirm_overwrite = 1;
 /* Asks for confirmation before executing a program by pressing enter */
 int confirm_execute = 0;
 /* Asks for confirmation before leaving the program */
-int confirm_exit = 1;
+int confirm_exit = 0;
 
 /* If true, at startup the user-menu is invoked */
 int auto_menu = 0;

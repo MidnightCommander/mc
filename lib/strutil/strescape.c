@@ -1,7 +1,7 @@
 /*
    Functions for escaping and unescaping strings
 
-   Copyright (C) 2009, 2011, 2013
+   Copyright (C) 2009-2014
    The Free Software Foundation, Inc.
 
    Written by:
