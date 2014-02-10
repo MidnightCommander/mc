@@ -44,6 +44,8 @@
 
 /*** file scope macro definitions ****************************************************************/
 
+#define SKIN_GROUP_NAME "widget-scrollbar"
+
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
@@ -355,17 +357,17 @@ scrollbar_set_first_displayed (WScrollBar * scrollbar, int *first_displayed)
 void
 scrollbar_global_init (void)
 {
-    scrollbar_skin.current_char = mc_skin_get ("widget-scollbar", "current-char", "*");
+    scrollbar_skin.current_char = mc_skin_get (SKIN_GROUP_NAME, "current-char", "*");
 
-    scrollbar_skin.first_vert_char = mc_skin_get ("widget-scollbar", "first-vert-char", NULL);
-    scrollbar_skin.last_vert_char = mc_skin_get ("widget-scollbar", "last-vert-char", NULL);
+    scrollbar_skin.first_vert_char = mc_skin_get (SKIN_GROUP_NAME, "first-vert-char", NULL);
+    scrollbar_skin.last_vert_char = mc_skin_get (SKIN_GROUP_NAME, "last-vert-char", NULL);
     scrollbar_skin.background_vert_char =
-        mc_skin_get ("widget-scollbar", "background-vert-char", "|");
+        mc_skin_get (SKIN_GROUP_NAME, "background-vert-char", "|");
 
-    scrollbar_skin.first_horiz_char = mc_skin_get ("widget-scollbar", "first-horiz-char", NULL);
-    scrollbar_skin.last_horiz_char = mc_skin_get ("widget-scollbar", "last-horiz-char", NULL);
+    scrollbar_skin.first_horiz_char = mc_skin_get (SKIN_GROUP_NAME, "first-horiz-char", NULL);
+    scrollbar_skin.last_horiz_char = mc_skin_get (SKIN_GROUP_NAME, "last-horiz-char", NULL);
     scrollbar_skin.background_horiz_char =
-        mc_skin_get ("widget-scollbar", "background-horiz-char", "-");
+        mc_skin_get (SKIN_GROUP_NAME, "background-horiz-char", "-");
 }
 
 /* --------------------------------------------------------------------------------------------- */
