@@ -83,7 +83,7 @@ struct WDialog
     gboolean modal;             /* type of dialog: modal or not */
     dlg_flags_t flags;          /* User flags */
     const char *help_ctx;       /* Name of the help entry */
-    dlg_colors_t color;         /* Color set. Unused in viewer and editor */
+    const int *color;           /* Color set. Unused in viewer and editor */
     char *title;                /* Title of the dialog */
 
     /* Set and received by the user */
@@ -111,6 +111,7 @@ struct WDialog
 /* Color styles for normal and error dialogs */
 extern dlg_colors_t dialog_colors;
 extern dlg_colors_t alarm_colors;
+extern dlg_colors_t listbox_colors;
 
 extern GList *top_dlg;
 

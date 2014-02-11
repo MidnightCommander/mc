@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/projects/p/mc/language/"
@@ -138,6 +138,9 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
+msgid "Escape"
+msgstr ""
+
 msgid "Function key 1"
 msgstr "Funktionstangent 1"
 
@@ -198,59 +201,67 @@ msgstr "Funktionstangent 19"
 msgid "Function key 20"
 msgstr "Funktionstangent 20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "Kompletera/M-tab"
+
+msgid "BackTab/S-tab"
+msgstr ""
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Backspace"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "Uppåtpil"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "Neråtpil"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "Vänsterpil"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "Högerpil"
+
+#, fuzzy
+msgid "Insert"
+msgstr "&Sätta in"
+
+#, fuzzy
+msgid "Delete"
+msgstr "&Ta bort"
+
+#, fuzzy
+msgid "Home"
+msgstr "Home"
 
 msgid "End key"
 msgstr "End"
 
-msgid "Up arrow key"
-msgstr "Uppåtpil"
-
-msgid "Down arrow key"
-msgstr "Neråtpil"
-
-msgid "Left arrow key"
-msgstr "Vänsterpil"
-
-msgid "Right arrow key"
-msgstr "Högerpil"
-
-msgid "Home key"
-msgstr "Home"
-
-msgid "Page Down key"
-msgstr "Page Down"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Page Up"
 
-msgid "Insert key"
-msgstr "Insert"
+#, fuzzy
+msgid "Page Down"
+msgstr "Page Down"
 
-msgid "Delete key"
-msgstr "Delete"
-
-msgid "Completion/M-tab"
-msgstr "Kompletera/M-tab"
-
-msgid "Back Tabulation S-tab"
-msgstr ""
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "+ på numeriska tangentbordet"
-
-msgid "- on keypad"
-msgstr "- på numeriska tangentbordet"
-
-msgid "Slash on keypad"
-msgstr "Snedstreck, numeriska"
 
 msgid "* on keypad"
 msgstr "* på numeriska tangentbordet"
 
-msgid "Escape key"
-msgstr ""
+msgid "- on keypad"
+msgstr "- på numeriska tangentbordet"
+
+msgid "+ on keypad"
+msgstr "+ på numeriska tangentbordet"
 
 msgid "Left arrow keypad"
 msgstr "Vänsterpil, numeriska"
@@ -303,13 +314,13 @@ msgstr ""
 msgid "C1 key"
 msgstr ""
 
-msgid "Plus"
+msgid "Asterisk"
 msgstr ""
 
 msgid "Minus"
 msgstr ""
 
-msgid "Asterisk"
+msgid "Plus"
 msgstr ""
 
 msgid "Dot"
@@ -1441,7 +1452,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1639,6 +1650,18 @@ msgstr ""
 
 msgid "Configure options"
 msgstr "Inställningar"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr ""
@@ -3023,6 +3046,9 @@ msgstr ""
 msgid "C&onfirmation..."
 msgstr ""
 
+msgid "&Appearance..."
+msgstr ""
+
 msgid "&Display bits..."
 msgstr "&Display bitar..."
 
@@ -4065,3 +4091,12 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Insert key"
+#~ msgstr "Insert"
+
+#~ msgid "Delete key"
+#~ msgstr "Delete"
+
+#~ msgid "Slash on keypad"
+#~ msgstr "Snedstreck, numeriska"

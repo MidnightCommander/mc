@@ -19,6 +19,7 @@
 /*** declarations of public functions ************************************************************/
 
 void configure_box (void);
+void appearance_box (void);
 void panel_options_box (void);
 int panel_listing_box (WPanel * p, char **user, char **mini, int *use_msformat, int num);
 const panel_field_t *sort_box (dir_sort_options_t * op, const panel_field_t * sort_field);

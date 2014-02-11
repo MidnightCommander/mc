@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/projects/p/mc/language/"
@@ -147,6 +147,10 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
+#, fuzzy
+msgid "Escape"
+msgstr "エスケープ キー"
+
 msgid "Function key 1"
 msgstr "Function キー 1"
 
@@ -207,59 +211,67 @@ msgstr "Function キー 19"
 msgid "Function key 20"
 msgstr "Function キー 20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "Completion/M-tab"
+
+msgid "BackTab/S-tab"
+msgstr ""
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Backspaece キー"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "上矢印"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "下矢印"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "左矢印"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "右矢印"
+
+#, fuzzy
+msgid "Insert"
+msgstr "挿入(&I)"
+
+#, fuzzy
+msgid "Delete"
+msgstr "削除(&D)"
+
+#, fuzzy
+msgid "Home"
+msgstr "Home キー"
 
 msgid "End key"
 msgstr "Endキー"
 
-msgid "Up arrow key"
-msgstr "上矢印"
-
-msgid "Down arrow key"
-msgstr "下矢印"
-
-msgid "Left arrow key"
-msgstr "左矢印"
-
-msgid "Right arrow key"
-msgstr "右矢印"
-
-msgid "Home key"
-msgstr "Home キー"
-
-msgid "Page Down key"
-msgstr "PageDownキー"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "PageUp キー"
 
-msgid "Insert key"
-msgstr "Insert キー"
+#, fuzzy
+msgid "Page Down"
+msgstr "PageDownキー"
 
-msgid "Delete key"
-msgstr "Delete キー"
-
-msgid "Completion/M-tab"
-msgstr "Completion/M-tab"
-
-msgid "Back Tabulation S-tab"
-msgstr ""
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "10キーの +"
-
-msgid "- on keypad"
-msgstr "10キーの -"
-
-msgid "Slash on keypad"
-msgstr "10キーの /"
 
 msgid "* on keypad"
 msgstr "10キーの *"
 
-msgid "Escape key"
-msgstr "エスケープ キー"
+msgid "- on keypad"
+msgstr "10キーの -"
+
+msgid "+ on keypad"
+msgstr "10キーの +"
 
 msgid "Left arrow keypad"
 msgstr "10キーの 左矢印"
@@ -312,14 +324,14 @@ msgstr "A1 キー"
 msgid "C1 key"
 msgstr "C1 キー"
 
-msgid "Plus"
-msgstr "プラス"
+msgid "Asterisk"
+msgstr "アスタリスク"
 
 msgid "Minus"
 msgstr "マイナス"
 
-msgid "Asterisk"
-msgstr "アスタリスク"
+msgid "Plus"
+msgstr "プラス"
 
 msgid "Dot"
 msgstr "ドット"
@@ -1450,7 +1462,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1652,6 +1664,18 @@ msgstr "自動保存の設定(&U)"
 
 msgid "Configure options"
 msgstr "設定オプション"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr ""
@@ -3036,6 +3060,10 @@ msgstr "パネルのオプション(&P)"
 msgid "C&onfirmation..."
 msgstr "確認(&O)..."
 
+#, fuzzy
+msgid "&Appearance..."
+msgstr "置換(&R)..."
+
 msgid "&Display bits..."
 msgstr "表示ビット数(&D)..."
 
@@ -4077,6 +4105,15 @@ msgstr "初めから続けますか?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Insert key"
+#~ msgstr "Insert キー"
+
+#~ msgid "Delete key"
+#~ msgstr "Delete キー"
+
+#~ msgid "Slash on keypad"
+#~ msgstr "10キーの /"
 
 #~ msgid "%s?"
 #~ msgstr "%s?"

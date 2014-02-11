@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Walloon (http://www.transifex.com/projects/p/mc/language/"
@@ -137,6 +137,9 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
+msgid "Escape"
+msgstr ""
+
 msgid "Function key 1"
 msgstr "F1"
 
@@ -197,58 +200,65 @@ msgstr "F19"
 msgid "Function key 20"
 msgstr "F20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr ""
+
+msgid "BackTab/S-tab"
+msgstr ""
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Backspace"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "Fletche copete"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "Fletche valeye"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "Fletche hintche"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "Fletche droete"
+
+#, fuzzy
+msgid "Insert"
+msgstr "&Sititchî"
+
+#, fuzzy
+msgid "Delete"
+msgstr "&Disfacer"
+
+#, fuzzy
+msgid "Home"
+msgstr "Home"
 
 msgid "End key"
 msgstr "End"
 
-msgid "Up arrow key"
-msgstr "Fletche copete"
-
-msgid "Down arrow key"
-msgstr "Fletche valeye"
-
-msgid "Left arrow key"
-msgstr "Fletche hintche"
-
-msgid "Right arrow key"
-msgstr "Fletche droete"
-
-msgid "Home key"
-msgstr "Home"
-
-msgid "Page Down key"
-msgstr "Pådje copete"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Pådje valeye"
 
-msgid "Insert key"
-msgstr "Insert"
+#, fuzzy
+msgid "Page Down"
+msgstr "Pådje copete"
 
-msgid "Delete key"
-msgstr "Delete"
-
-msgid "Completion/M-tab"
-msgstr ""
-
-msgid "Back Tabulation S-tab"
-msgstr ""
-
-msgid "+ on keypad"
-msgstr ""
-
-msgid "- on keypad"
-msgstr ""
-
-msgid "Slash on keypad"
+msgid "/ on keypad"
 msgstr ""
 
 msgid "* on keypad"
 msgstr ""
 
-msgid "Escape key"
+msgid "- on keypad"
+msgstr ""
+
+msgid "+ on keypad"
 msgstr ""
 
 msgid "Left arrow keypad"
@@ -302,13 +312,13 @@ msgstr ""
 msgid "C1 key"
 msgstr ""
 
-msgid "Plus"
+msgid "Asterisk"
 msgstr ""
 
 msgid "Minus"
 msgstr ""
 
-msgid "Asterisk"
+msgid "Plus"
 msgstr ""
 
 msgid "Dot"
@@ -1438,7 +1448,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1636,6 +1646,18 @@ msgstr ""
 
 msgid "Configure options"
 msgstr "Apontyî les tchûzes"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr ""
@@ -3020,6 +3042,9 @@ msgstr ""
 msgid "C&onfirmation..."
 msgstr ""
 
+msgid "&Appearance..."
+msgstr ""
+
 msgid "&Display bits..."
 msgstr ""
 
@@ -4047,3 +4072,9 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Insert key"
+#~ msgstr "Insert"
+
+#~ msgid "Delete key"
+#~ msgstr "Delete"

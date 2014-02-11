@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/mc/language/da/)\n"
@@ -143,6 +143,10 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
+#, fuzzy
+msgid "Escape"
+msgstr "Escape-tast"
+
 msgid "Function key 1"
 msgstr "Funktionstast 1"
 
@@ -203,59 +207,67 @@ msgstr "Funktionstast 19"
 msgid "Function key 20"
 msgstr "Funktionstast 20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "Fuldfør navn/M-tab"
+
+msgid "BackTab/S-tab"
+msgstr ""
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Slet tilbage-tast"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "Pil op"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "Pil ned"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "Venstrepil"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "Højrepil"
+
+#, fuzzy
+msgid "Insert"
+msgstr "&Indsæt"
+
+#, fuzzy
+msgid "Delete"
+msgstr "&Slet"
+
+#, fuzzy
+msgid "Home"
+msgstr "Home-tast"
 
 msgid "End key"
 msgstr "End-tast"
 
-msgid "Up arrow key"
-msgstr "Pil op"
-
-msgid "Down arrow key"
-msgstr "Pil ned"
-
-msgid "Left arrow key"
-msgstr "Venstrepil"
-
-msgid "Right arrow key"
-msgstr "Højrepil"
-
-msgid "Home key"
-msgstr "Home-tast"
-
-msgid "Page Down key"
-msgstr "Side ned-tast"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Side op-tast"
 
-msgid "Insert key"
-msgstr "Indsæt-tast"
+#, fuzzy
+msgid "Page Down"
+msgstr "Side ned-tast"
 
-msgid "Delete key"
-msgstr "Slet-tast"
-
-msgid "Completion/M-tab"
-msgstr "Fuldfør navn/M-tab"
-
-msgid "Back Tabulation S-tab"
-msgstr ""
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "+ på numerisk tastatur"
-
-msgid "- on keypad"
-msgstr "- på numerisk tastatur"
-
-msgid "Slash on keypad"
-msgstr "Slash på numerisk tastatur"
 
 msgid "* on keypad"
 msgstr "* på numerisk tastatur"
 
-msgid "Escape key"
-msgstr "Escape-tast"
+msgid "- on keypad"
+msgstr "- på numerisk tastatur"
+
+msgid "+ on keypad"
+msgstr "+ på numerisk tastatur"
 
 msgid "Left arrow keypad"
 msgstr "Venstrepil på numerisk tastatur"
@@ -308,14 +320,14 @@ msgstr "A1-tast"
 msgid "C1 key"
 msgstr "C1-tast"
 
-msgid "Plus"
-msgstr "Plus"
+msgid "Asterisk"
+msgstr "Stjerne"
 
 msgid "Minus"
 msgstr "Minus"
 
-msgid "Asterisk"
-msgstr "Stjerne"
+msgid "Plus"
+msgstr "Plus"
 
 msgid "Dot"
 msgstr "Punktum"
@@ -1461,7 +1473,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1669,6 +1681,18 @@ msgstr "Opsætning for a&utomatisk gemning"
 
 msgid "Configure options"
 msgstr "Konfigurer indstillinger"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr "Er ikke &versalfølsom"
@@ -3138,6 +3162,10 @@ msgstr "&Panelindstilinger..."
 msgid "C&onfirmation..."
 msgstr "&Bekræftelse..."
 
+#, fuzzy
+msgid "&Appearance..."
+msgstr "&Erstat..."
+
 msgid "&Display bits..."
 msgstr "&Vis bit..."
 
@@ -4207,6 +4235,15 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Insert key"
+#~ msgstr "Indsæt-tast"
+
+#~ msgid "Delete key"
+#~ msgstr "Slet-tast"
+
+#~ msgid "Slash on keypad"
+#~ msgstr "Slash på numerisk tastatur"
 
 #~ msgid "%s?"
 #~ msgstr "%s?"

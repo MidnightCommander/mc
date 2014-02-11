@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Galician (http://www.transifex.com/projects/p/mc/language/"
@@ -159,6 +159,10 @@ msgstr ""
 "para 256 colores en terminais sen esta característica.\n"
 "Cargouse o tema predeterminado"
 
+#, fuzzy
+msgid "Escape"
+msgstr "Tecla «Escape»"
+
 msgid "Function key 1"
 msgstr "Tecla «F1»"
 
@@ -219,59 +223,68 @@ msgstr "Tecla «F19»"
 msgid "Function key 20"
 msgstr "Tecla «F20»"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "Completar/M-Tab"
+
+#, fuzzy
+msgid "BackTab/S-tab"
+msgstr "Tab. atrás > Maiús-Tab"
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Tecla «Retroceso» (<--)"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "Tecla «Frecha arriba»"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "Tecla «Frecha abaixo»"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "Tecla «Frecha esquerda»"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "Tecla «Frecha dereita»"
+
+#, fuzzy
+msgid "Insert"
+msgstr "&Inserir"
+
+#, fuzzy
+msgid "Delete"
+msgstr "&Eliminar"
+
+#, fuzzy
+msgid "Home"
+msgstr "Tecla «Inicio»"
 
 msgid "End key"
 msgstr "Tecla «Fin»"
 
-msgid "Up arrow key"
-msgstr "Tecla «Frecha arriba»"
-
-msgid "Down arrow key"
-msgstr "Tecla «Frecha abaixo»"
-
-msgid "Left arrow key"
-msgstr "Tecla «Frecha esquerda»"
-
-msgid "Right arrow key"
-msgstr "Tecla «Frecha dereita»"
-
-msgid "Home key"
-msgstr "Tecla «Inicio»"
-
-msgid "Page Down key"
-msgstr "Tecla «Av Pág»"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Tecla «Re Pág»"
 
-msgid "Insert key"
-msgstr "Tecla «Insert»"
+#, fuzzy
+msgid "Page Down"
+msgstr "Tecla «Av Pág»"
 
-msgid "Delete key"
-msgstr "Tecla «Supr»"
-
-msgid "Completion/M-tab"
-msgstr "Completar/M-Tab"
-
-msgid "Back Tabulation S-tab"
-msgstr "Tab. atrás > Maiús-Tab"
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "+ no teclado numérico"
-
-msgid "- on keypad"
-msgstr "- no teclado numérico"
-
-msgid "Slash on keypad"
-msgstr "«/» (barra) do teclado numérico"
 
 msgid "* on keypad"
 msgstr "* no teclado numérico"
 
-msgid "Escape key"
-msgstr "Tecla «Escape»"
+msgid "- on keypad"
+msgstr "- no teclado numérico"
+
+msgid "+ on keypad"
+msgstr "+ no teclado numérico"
 
 msgid "Left arrow keypad"
 msgstr "«Frecha esquerda» do teclado numérico"
@@ -324,14 +337,14 @@ msgstr "Tecla «A1»"
 msgid "C1 key"
 msgstr "Tecla «C1»"
 
-msgid "Plus"
-msgstr "Máis"
+msgid "Asterisk"
+msgstr "Asterisco"
 
 msgid "Minus"
 msgstr "Menos"
 
-msgid "Asterisk"
-msgstr "Asterisco"
+msgid "Plus"
+msgstr "Máis"
 
 msgid "Dot"
 msgstr "Punto"
@@ -1519,7 +1532,8 @@ msgstr ""
 "Un editor de texto de uso amigábel\n"
 "escrito para o Midnight Commander."
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2013 a Free Software Foundation"
 
 msgid "About"
@@ -1727,6 +1741,18 @@ msgstr "Configuración do &Auto-gardado"
 
 msgid "Configure options"
 msgstr "Configuración"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr "&Non distinguir maiúsculas"
@@ -3212,6 +3238,10 @@ msgstr "Opcións dos &Paneis..."
 msgid "C&onfirmation..."
 msgstr "c&Onfirmación..."
 
+#, fuzzy
+msgid "&Appearance..."
+msgstr "Substituí&R..."
+
 msgid "&Display bits..."
 msgstr "&Mostrar bits..."
 
@@ -4293,6 +4323,15 @@ msgstr "Continuar desde o principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Non é posíbel obter unha copia local de /ftp://some.host/editme.txt"
+
+#~ msgid "Insert key"
+#~ msgstr "Tecla «Insert»"
+
+#~ msgid "Delete key"
+#~ msgstr "Tecla «Supr»"
+
+#~ msgid "Slash on keypad"
+#~ msgstr "«/» (barra) do teclado numérico"
 
 #~ msgid "%s?"
 #~ msgstr "%s?"

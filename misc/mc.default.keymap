@@ -38,6 +38,7 @@ Unselect = kpminus
 SelectInvert = kpasterisk
 ScreenList = alt-prime
 # OptionsLayout =
+# OptionsAppearance =
 # OptionsPanel =
 # OptionsConfirm =
 # OptionsDisplayBits =

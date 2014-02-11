@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/projects/p/mc/language/"
@@ -155,6 +155,10 @@ msgstr ""
 "nem 256 színű terminálokon.\\n\n"
 "Alapértelmezett borítás használata"
 
+#, fuzzy
+msgid "Escape"
+msgstr " Escape"
+
 msgid "Function key 1"
 msgstr " F1 "
 
@@ -215,59 +219,68 @@ msgstr " F19"
 msgid "Function key 20"
 msgstr " F20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr " Kieg./M-Tab"
+
+#, fuzzy
+msgid "BackTab/S-tab"
+msgstr "Hátsó Tabulátor S-tab"
+
+#, fuzzy
+msgid "Backspace"
 msgstr " \"Backspace\""
+
+#, fuzzy
+msgid "Up arrow"
+msgstr " <Fel> "
+
+#, fuzzy
+msgid "Down arrow"
+msgstr " <Le> "
+
+#, fuzzy
+msgid "Left arrow"
+msgstr " <Balra> "
+
+#, fuzzy
+msgid "Right arrow"
+msgstr " <Jobbra> "
+
+#, fuzzy
+msgid "Insert"
+msgstr "Be&szúrás"
+
+#, fuzzy
+msgid "Delete"
+msgstr "&Töröl"
+
+#, fuzzy
+msgid "Home"
+msgstr " \"Home\" "
 
 msgid "End key"
 msgstr " \"End\""
 
-msgid "Up arrow key"
-msgstr " <Fel> "
-
-msgid "Down arrow key"
-msgstr " <Le> "
-
-msgid "Left arrow key"
-msgstr " <Balra> "
-
-msgid "Right arrow key"
-msgstr " <Jobbra> "
-
-msgid "Home key"
-msgstr " \"Home\" "
-
-msgid "Page Down key"
-msgstr " \"Page Down\" "
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr " \"Page Up\" "
 
-msgid "Insert key"
-msgstr " \"Insert\" "
+#, fuzzy
+msgid "Page Down"
+msgstr " \"Page Down\" "
 
-msgid "Delete key"
-msgstr " \"Delete\" "
-
-msgid "Completion/M-tab"
-msgstr " Kieg./M-Tab"
-
-msgid "Back Tabulation S-tab"
-msgstr "Hátsó Tabulátor S-tab"
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr " + numerikus"
-
-msgid "- on keypad"
-msgstr " - numerikus"
-
-msgid "Slash on keypad"
-msgstr " / numerikus"
 
 msgid "* on keypad"
 msgstr " * numerikus"
 
-msgid "Escape key"
-msgstr " Escape"
+msgid "- on keypad"
+msgstr " - numerikus"
+
+msgid "+ on keypad"
+msgstr " + numerikus"
 
 msgid "Left arrow keypad"
 msgstr "<Jobbra> - numer."
@@ -320,14 +333,14 @@ msgstr "A1 billentyű"
 msgid "C1 key"
 msgstr "C1 billentyű"
 
-msgid "Plus"
-msgstr "Plusz"
+msgid "Asterisk"
+msgstr "Csillag"
 
 msgid "Minus"
 msgstr "Mínusz"
 
-msgid "Asterisk"
-msgstr "Csillag"
+msgid "Plus"
+msgstr "Plusz"
 
 msgid "Dot"
 msgstr "Pont"
@@ -1520,7 +1533,8 @@ msgstr ""
 "Felhasználóbarát szövegszerkesztő\n"
 "a Midnight Commander-hez készítve"
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2013 the Free Software Foundation"
 
 msgid "About"
@@ -1728,6 +1742,18 @@ msgstr "Auto &Beállításmentés"
 
 msgid "Configure options"
 msgstr "Alapbeállítások"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr "&Kis-/nagybetű mindegy"
@@ -3212,6 +3238,10 @@ msgstr "&Panelbeállítások..."
 msgid "C&onfirmation..."
 msgstr "&Rákérdezés..."
 
+#, fuzzy
+msgid "&Appearance..."
+msgstr "&Csere"
+
 msgid "&Display bits..."
 msgstr "&Kivitel és bevitel..."
 
@@ -4292,6 +4322,15 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
+
+#~ msgid "Insert key"
+#~ msgstr " \"Insert\" "
+
+#~ msgid "Delete key"
+#~ msgstr " \"Delete\" "
+
+#~ msgid "Slash on keypad"
+#~ msgstr " / numerikus"
 
 #~ msgid "%s?"
 #~ msgstr "%s?"

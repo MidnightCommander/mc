@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/projects/p/mc/language/"
@@ -144,6 +144,10 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
+#, fuzzy
+msgid "Escape"
+msgstr "Esc"
+
 msgid "Function key 1"
 msgstr "Funktio 1"
 
@@ -204,59 +208,67 @@ msgstr "Funktio 19"
 msgid "Function key 20"
 msgstr "Funktio 20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr ""
+
+msgid "BackTab/S-tab"
+msgstr ""
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Askelpalautin"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "Ylänuoli"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "Alanuoli"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "Vasen nuoli"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "Oikea nuoli"
+
+#, fuzzy
+msgid "Insert"
+msgstr "Insert"
+
+#, fuzzy
+msgid "Delete"
+msgstr "Delete"
+
+#, fuzzy
+msgid "Home"
+msgstr "Home"
 
 msgid "End key"
 msgstr "End"
 
-msgid "Up arrow key"
-msgstr "Ylänuoli"
-
-msgid "Down arrow key"
-msgstr "Alanuoli"
-
-msgid "Left arrow key"
-msgstr "Vasen nuoli"
-
-msgid "Right arrow key"
-msgstr "Oikea nuoli"
-
-msgid "Home key"
-msgstr "Home"
-
-msgid "Page Down key"
-msgstr "Page Down"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Page Up"
 
-msgid "Insert key"
-msgstr "Insert"
+#, fuzzy
+msgid "Page Down"
+msgstr "Page Down"
 
-msgid "Delete key"
-msgstr "Delete"
-
-msgid "Completion/M-tab"
-msgstr ""
-
-msgid "Back Tabulation S-tab"
-msgstr ""
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "+ keypadilla"
-
-msgid "- on keypad"
-msgstr "- keypadilla"
-
-msgid "Slash on keypad"
-msgstr "Viiva keypadilla"
 
 msgid "* on keypad"
 msgstr "* keypadilla"
 
-msgid "Escape key"
-msgstr "Esc"
+msgid "- on keypad"
+msgstr "- keypadilla"
+
+msgid "+ on keypad"
+msgstr "+ keypadilla"
 
 msgid "Left arrow keypad"
 msgstr "Vasen nuoli keypadilla"
@@ -309,14 +321,14 @@ msgstr "A1"
 msgid "C1 key"
 msgstr "C1"
 
-msgid "Plus"
-msgstr "Plus"
+msgid "Asterisk"
+msgstr "Tähti"
 
 msgid "Minus"
 msgstr "Miinus"
 
-msgid "Asterisk"
-msgstr "Tähti"
+msgid "Plus"
+msgstr "Plus"
 
 msgid "Dot"
 msgstr "Piste"
@@ -1447,7 +1459,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1644,6 +1656,18 @@ msgid "A&uto save setup"
 msgstr ""
 
 msgid "Configure options"
+msgstr ""
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
 msgstr ""
 
 msgid "Case &insensitive"
@@ -3029,6 +3053,9 @@ msgstr ""
 msgid "C&onfirmation..."
 msgstr ""
 
+msgid "&Appearance..."
+msgstr ""
+
 msgid "&Display bits..."
 msgstr ""
 
@@ -4039,3 +4066,6 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Slash on keypad"
+#~ msgstr "Viiva keypadilla"

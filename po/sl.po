@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Slovenian (http://www.transifex.com/projects/p/mc/language/"
@@ -147,6 +147,10 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
+#, fuzzy
+msgid "Escape"
+msgstr "Ubežna tipka"
+
 msgid "Function key 1"
 msgstr "Funkcijska tipka 1"
 
@@ -207,59 +211,67 @@ msgstr "Funkcijska tipka 19"
 msgid "Function key 20"
 msgstr "Funkcijska tipka 20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "Dopolni/predelčnica"
+
+msgid "BackTab/S-tab"
+msgstr ""
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Vračalka"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "Smerna tipka navzgor"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "Smerna tipka navzdol"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "Smerna tipka levo"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "Smerna tipka desno"
+
+#, fuzzy
+msgid "Insert"
+msgstr "&Vstavi"
+
+#, fuzzy
+msgid "Delete"
+msgstr "&Zbriši"
+
+#, fuzzy
+msgid "Home"
+msgstr "Tipka Domov"
 
 msgid "End key"
 msgstr "Tipka Konec"
 
-msgid "Up arrow key"
-msgstr "Smerna tipka navzgor"
-
-msgid "Down arrow key"
-msgstr "Smerna tipka navzdol"
-
-msgid "Left arrow key"
-msgstr "Smerna tipka levo"
-
-msgid "Right arrow key"
-msgstr "Smerna tipka desno"
-
-msgid "Home key"
-msgstr "Tipka Domov"
-
-msgid "Page Down key"
-msgstr "Tipka Stran navzdol"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Tipka Stran navzgor"
 
-msgid "Insert key"
-msgstr "Tipka Vstavi"
+#, fuzzy
+msgid "Page Down"
+msgstr "Tipka Stran navzdol"
 
-msgid "Delete key"
-msgstr "Tipka Izbriši"
-
-msgid "Completion/M-tab"
-msgstr "Dopolni/predelčnica"
-
-msgid "Back Tabulation S-tab"
-msgstr ""
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "+ na številčni tipkovnici"
-
-msgid "- on keypad"
-msgstr "- na številčni tipkovnici"
-
-msgid "Slash on keypad"
-msgstr "Poševnica na številčni tipkovnici"
 
 msgid "* on keypad"
 msgstr "* na številčni tipkovnici"
 
-msgid "Escape key"
-msgstr "Ubežna tipka"
+msgid "- on keypad"
+msgstr "- na številčni tipkovnici"
+
+msgid "+ on keypad"
+msgstr "+ na številčni tipkovnici"
 
 msgid "Left arrow keypad"
 msgstr "Smerna tipka levo na številčni tipkovnici"
@@ -312,14 +324,14 @@ msgstr "Tipka A1"
 msgid "C1 key"
 msgstr "Tipka C1"
 
-msgid "Plus"
-msgstr "Plus"
+msgid "Asterisk"
+msgstr "Zvezdica"
 
 msgid "Minus"
 msgstr "Minus"
 
-msgid "Asterisk"
-msgstr "Zvezdica"
+msgid "Plus"
+msgstr "Plus"
 
 msgid "Dot"
 msgstr "Pika"
@@ -1450,7 +1462,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1648,6 +1660,18 @@ msgstr ""
 
 msgid "Configure options"
 msgstr "Nastavi"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr ""
@@ -3036,6 +3060,9 @@ msgstr ""
 msgid "C&onfirmation..."
 msgstr ""
 
+msgid "&Appearance..."
+msgstr ""
+
 msgid "&Display bits..."
 msgstr "&Kaži bite..."
 
@@ -4087,3 +4114,12 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Insert key"
+#~ msgstr "Tipka Vstavi"
+
+#~ msgid "Delete key"
+#~ msgstr "Tipka Izbriši"
+
+#~ msgid "Slash on keypad"
+#~ msgstr "Poševnica na številčni tipkovnici"

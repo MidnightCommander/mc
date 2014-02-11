@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Serbian (http://www.transifex.com/projects/p/mc/language/"
@@ -138,6 +138,9 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
+msgid "Escape"
+msgstr ""
+
 msgid "Function key 1"
 msgstr "Функц. тастер 1"
 
@@ -198,59 +201,67 @@ msgstr "Функц. тастер 19"
 msgid "Function key 20"
 msgstr "Функц. тастер 20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "Допуна/M-tab"
+
+msgid "BackTab/S-tab"
+msgstr ""
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Таст. `Backspace'"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "Стрелица нагоре"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "Стрелица надоле"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "Стрелица налево"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "Стрелица надесно"
+
+#, fuzzy
+msgid "Insert"
+msgstr "У&метни"
+
+#, fuzzy
+msgid "Delete"
+msgstr "&Обриши"
+
+#, fuzzy
+msgid "Home"
+msgstr "Таст. `Home'"
 
 msgid "End key"
 msgstr "Таст. `End'"
 
-msgid "Up arrow key"
-msgstr "Стрелица нагоре"
-
-msgid "Down arrow key"
-msgstr "Стрелица надоле"
-
-msgid "Left arrow key"
-msgstr "Стрелица налево"
-
-msgid "Right arrow key"
-msgstr "Стрелица надесно"
-
-msgid "Home key"
-msgstr "Таст. `Home'"
-
-msgid "Page Down key"
-msgstr "Таст. `Page Up'"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Таст. `Page Down'"
 
-msgid "Insert key"
-msgstr "Таст. `Insert'"
+#, fuzzy
+msgid "Page Down"
+msgstr "Таст. `Page Up'"
 
-msgid "Delete key"
-msgstr "Таст. `Delete'"
-
-msgid "Completion/M-tab"
-msgstr "Допуна/M-tab"
-
-msgid "Back Tabulation S-tab"
-msgstr ""
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "Сиви +"
-
-msgid "- on keypad"
-msgstr "Сиви -"
-
-msgid "Slash on keypad"
-msgstr "Сиви /"
 
 msgid "* on keypad"
 msgstr "Сиви *"
 
-msgid "Escape key"
-msgstr ""
+msgid "- on keypad"
+msgstr "Сиви -"
+
+msgid "+ on keypad"
+msgstr "Сиви +"
 
 msgid "Left arrow keypad"
 msgstr "Сива стрел. налево"
@@ -303,13 +314,13 @@ msgstr ""
 msgid "C1 key"
 msgstr ""
 
-msgid "Plus"
+msgid "Asterisk"
 msgstr ""
 
 msgid "Minus"
 msgstr ""
 
-msgid "Asterisk"
+msgid "Plus"
 msgstr ""
 
 msgid "Dot"
@@ -1441,7 +1452,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1639,6 +1650,18 @@ msgstr ""
 
 msgid "Configure options"
 msgstr "Подеси изборе"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr ""
@@ -3025,6 +3048,9 @@ msgstr ""
 msgid "C&onfirmation..."
 msgstr ""
 
+msgid "&Appearance..."
+msgstr ""
+
 msgid "&Display bits..."
 msgstr "&Битова у приказу..."
 
@@ -4074,3 +4100,12 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Insert key"
+#~ msgstr "Таст. `Insert'"
+
+#~ msgid "Delete key"
+#~ msgstr "Таст. `Delete'"
+
+#~ msgid "Slash on keypad"
+#~ msgstr "Сиви /"

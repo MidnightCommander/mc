@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-08-04 10:16+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -156,6 +156,10 @@ msgstr ""
 "colori su terminale non a 256 colori.\n"
 "È stato caricato il tema predefinito"
 
+#, fuzzy
+msgid "Escape"
+msgstr "Tasto escape     "
+
 msgid "Function key 1"
 msgstr "Tasto funzione  1"
 
@@ -216,59 +220,68 @@ msgstr "Tasto funzione 19"
 msgid "Function key 20"
 msgstr "Tasto funzione 20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "Completam./M-Tab "
+
+#, fuzzy
+msgid "BackTab/S-tab"
+msgstr "Tabul. indietro S-tab"
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Tasto Backspace  "
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "Freccia su       "
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "Freccia giù      "
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "Freccia sinistra "
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "Freccia destra   "
+
+#, fuzzy
+msgid "Insert"
+msgstr "&Inserisci"
+
+#, fuzzy
+msgid "Delete"
+msgstr "&Elimina"
+
+#, fuzzy
+msgid "Home"
+msgstr "Tasto inizio     "
 
 msgid "End key"
 msgstr "Tasto fine       "
 
-msgid "Up arrow key"
-msgstr "Freccia su       "
-
-msgid "Down arrow key"
-msgstr "Freccia giù      "
-
-msgid "Left arrow key"
-msgstr "Freccia sinistra "
-
-msgid "Right arrow key"
-msgstr "Freccia destra   "
-
-msgid "Home key"
-msgstr "Tasto inizio     "
-
-msgid "Page Down key"
-msgstr "Tasto pagina giù "
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Tasto pagina su  "
 
-msgid "Insert key"
-msgstr "Tasto Ins        "
+#, fuzzy
+msgid "Page Down"
+msgstr "Tasto pagina giù "
 
-msgid "Delete key"
-msgstr "Tasto Canc       "
-
-msgid "Completion/M-tab"
-msgstr "Completam./M-Tab "
-
-msgid "Back Tabulation S-tab"
-msgstr "Tabul. indietro S-tab"
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "+ sul tastierino "
-
-msgid "- on keypad"
-msgstr "- sul tastierino "
-
-msgid "Slash on keypad"
-msgstr "/ sul tastierino "
 
 msgid "* on keypad"
 msgstr "* sul tastierino "
 
-msgid "Escape key"
-msgstr "Tasto escape     "
+msgid "- on keypad"
+msgstr "- sul tastierino "
+
+msgid "+ on keypad"
+msgstr "+ sul tastierino "
 
 msgid "Left arrow keypad"
 msgstr "Freccia a sinistra sul tastierino"
@@ -321,14 +334,14 @@ msgstr "Tasto A1"
 msgid "C1 key"
 msgstr "Tasto C1"
 
-msgid "Plus"
-msgstr "Più"
+msgid "Asterisk"
+msgstr "Asterisco"
 
 msgid "Minus"
 msgstr "Meno"
 
-msgid "Asterisk"
-msgstr "Asterisco"
+msgid "Plus"
+msgstr "Più"
 
 msgid "Dot"
 msgstr "Punto"
@@ -1517,7 +1530,8 @@ msgstr ""
 "Un semplice editor di testi\n"
 "scritto per il Midnight Commander."
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2013 the Free Software Foundation"
 
 msgid "About"
@@ -1725,6 +1739,18 @@ msgstr "Autosalva &configurazione"
 
 msgid "Configure options"
 msgstr "Configura opzioni"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr "Non distinguere le ma&iuscole"
@@ -3209,6 +3235,10 @@ msgstr "Opzioni &pannello..."
 msgid "C&onfirmation..."
 msgstr "C&onferme..."
 
+#, fuzzy
+msgid "&Appearance..."
+msgstr "&Sostituisci..."
+
 msgid "&Display bits..."
 msgstr "&Mostra bit..."
 
@@ -4288,6 +4318,15 @@ msgstr "Continuare dall'inizio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Impossibile ricevere copia locale di /ftp://un.host/modificami.txt"
+
+#~ msgid "Insert key"
+#~ msgstr "Tasto Ins        "
+
+#~ msgid "Delete key"
+#~ msgstr "Tasto Canc       "
+
+#~ msgid "Slash on keypad"
+#~ msgstr "/ sul tastierino "
 
 #~ msgid "%s?"
 #~ msgstr "%s?"

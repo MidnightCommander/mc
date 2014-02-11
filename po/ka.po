@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Georgian (http://www.transifex.com/projects/p/mc/language/"
@@ -137,6 +137,10 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
+#, fuzzy
+msgid "Escape"
+msgstr "გამოსვლის ღილაკი"
+
 msgid "Function key 1"
 msgstr ""
 
@@ -197,59 +201,62 @@ msgstr ""
 msgid "Function key 20"
 msgstr ""
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr ""
+
+msgid "BackTab/S-tab"
+msgstr ""
+
+msgid "Backspace"
+msgstr ""
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "ისარი ზევით"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "ისარი ქვევით"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "ისარი მარცხნივ"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "ისარი მარჯვნივ"
+
+#, fuzzy
+msgid "Insert"
+msgstr "ჩასმის ღილაკი"
+
+#, fuzzy
+msgid "Delete"
+msgstr "&წაშლა"
+
+msgid "Home"
 msgstr ""
 
 msgid "End key"
 msgstr ""
 
-msgid "Up arrow key"
-msgstr "ისარი ზევით"
-
-msgid "Down arrow key"
-msgstr "ისარი ქვევით"
-
-msgid "Left arrow key"
-msgstr "ისარი მარცხნივ"
-
-msgid "Right arrow key"
-msgstr "ისარი მარჯვნივ"
-
-msgid "Home key"
+msgid "Page Up"
 msgstr ""
 
-msgid "Page Down key"
+msgid "Page Down"
 msgstr ""
 
-msgid "Page Up key"
-msgstr ""
-
-msgid "Insert key"
-msgstr "ჩასმის ღილაკი"
-
-msgid "Delete key"
-msgstr "წაშლის ღილაკი"
-
-msgid "Completion/M-tab"
-msgstr ""
-
-msgid "Back Tabulation S-tab"
-msgstr ""
-
-msgid "+ on keypad"
-msgstr ""
-
-msgid "- on keypad"
-msgstr ""
-
-msgid "Slash on keypad"
+msgid "/ on keypad"
 msgstr ""
 
 msgid "* on keypad"
 msgstr ""
 
-msgid "Escape key"
-msgstr "გამოსვლის ღილაკი"
+msgid "- on keypad"
+msgstr ""
+
+msgid "+ on keypad"
+msgstr ""
 
 msgid "Left arrow keypad"
 msgstr ""
@@ -302,14 +309,14 @@ msgstr "A1 ღილაკი"
 msgid "C1 key"
 msgstr "C1 ღილაკი"
 
-msgid "Plus"
-msgstr ""
+msgid "Asterisk"
+msgstr "ვარსკვლავი"
 
 msgid "Minus"
 msgstr ""
 
-msgid "Asterisk"
-msgstr "ვარსკვლავი"
+msgid "Plus"
+msgstr ""
 
 msgid "Dot"
 msgstr "წერტილი"
@@ -1438,7 +1445,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1635,6 +1642,18 @@ msgid "A&uto save setup"
 msgstr ""
 
 msgid "Configure options"
+msgstr ""
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
 msgstr ""
 
 msgid "Case &insensitive"
@@ -3018,6 +3037,9 @@ msgstr ""
 msgid "C&onfirmation..."
 msgstr ""
 
+msgid "&Appearance..."
+msgstr ""
+
 msgid "&Display bits..."
 msgstr ""
 
@@ -4020,3 +4042,6 @@ msgstr "თავიდან დავიწყო?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Delete key"
+#~ msgstr "წაშლის ღილაკი"

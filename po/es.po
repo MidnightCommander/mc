@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/mc/language/"
@@ -158,6 +158,10 @@ msgstr ""
 "en terminales sin esta característica.\n"
 "Se ha cargado skin por defecto."
 
+#, fuzzy
+msgid "Escape"
+msgstr "Escape"
+
 msgid "Function key 1"
 msgstr "F1"
 
@@ -218,59 +222,68 @@ msgstr "F19"
 msgid "Function key 20"
 msgstr "F20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "Alt-Tab"
+
+#, fuzzy
+msgid "BackTab/S-tab"
+msgstr "Mayús-Tab"
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Borrar"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "Arriba"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "Abajo"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "Izquierda"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "Derecha"
+
+#, fuzzy
+msgid "Insert"
+msgstr "&Insertar"
+
+#, fuzzy
+msgid "Delete"
+msgstr "&Borrar"
+
+#, fuzzy
+msgid "Home"
+msgstr "Inicio"
 
 msgid "End key"
 msgstr "Fin"
 
-msgid "Up arrow key"
-msgstr "Arriba"
-
-msgid "Down arrow key"
-msgstr "Abajo"
-
-msgid "Left arrow key"
-msgstr "Izquierda"
-
-msgid "Right arrow key"
-msgstr "Derecha"
-
-msgid "Home key"
-msgstr "Inicio"
-
-msgid "Page Down key"
-msgstr "Avanzar Página"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Retrasar Página"
 
-msgid "Insert key"
-msgstr "Insertar"
+#, fuzzy
+msgid "Page Down"
+msgstr "Avanzar Página"
 
-msgid "Delete key"
-msgstr "Eliminar"
-
-msgid "Completion/M-tab"
-msgstr "Alt-Tab"
-
-msgid "Back Tabulation S-tab"
-msgstr "Mayús-Tab"
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "+ (num.)"
-
-msgid "- on keypad"
-msgstr "- (num.)"
-
-msgid "Slash on keypad"
-msgstr "/ (num.)"
 
 msgid "* on keypad"
 msgstr "* (num.)"
 
-msgid "Escape key"
-msgstr "Escape"
+msgid "- on keypad"
+msgstr "- (num.)"
+
+msgid "+ on keypad"
+msgstr "+ (num.)"
 
 msgid "Left arrow keypad"
 msgstr "Izquierda (num.)"
@@ -323,14 +336,14 @@ msgstr "A1"
 msgid "C1 key"
 msgstr "C1"
 
-msgid "Plus"
-msgstr "Suma"
+msgid "Asterisk"
+msgstr "Asterisco"
 
 msgid "Minus"
 msgstr "Resta"
 
-msgid "Asterisk"
-msgstr "Asterisco"
+msgid "Plus"
+msgstr "Suma"
 
 msgid "Dot"
 msgstr "Punto"
@@ -1522,7 +1535,8 @@ msgstr ""
 "Un editor de texto amigable\n"
 "para Midnight Commander."
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2013 the Free Software Foundation"
 
 msgid "About"
@@ -1730,6 +1744,18 @@ msgstr "auto-guarda con&Figuración"
 
 msgid "Configure options"
 msgstr "Configuración"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr "ignorar may/mi&N"
@@ -3214,6 +3240,10 @@ msgstr "pane&Les..."
 msgid "C&onfirmation..."
 msgstr "c&Onfirmación..."
 
+#, fuzzy
+msgid "&Appearance..."
+msgstr "&Reemplazar..."
+
 msgid "&Display bits..."
 msgstr "&Juego de caracteres..."
 
@@ -4293,6 +4323,15 @@ msgstr "¿Continuar desde el principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Imposible obtener una copia local de /ftp://some.host/editme.txt"
+
+#~ msgid "Insert key"
+#~ msgstr "Insertar"
+
+#~ msgid "Delete key"
+#~ msgstr "Eliminar"
+
+#~ msgid "Slash on keypad"
+#~ msgstr "/ (num.)"
 
 #~ msgid "%s?"
 #~ msgstr "¿%s?"

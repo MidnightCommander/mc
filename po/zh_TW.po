@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/mc/"
@@ -137,6 +137,9 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
+msgid "Escape"
+msgstr ""
+
 msgid "Function key 1"
 msgstr "功能鍵 1"
 
@@ -197,59 +200,67 @@ msgstr "功能鍵 19"
 msgid "Function key 20"
 msgstr "功能鍵 20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "Completion/M-tab 鍵"
+
+msgid "BackTab/S-tab"
+msgstr ""
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Backspace 鍵"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "向上鍵"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "向下鍵"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "向左鍵"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "向右鍵"
+
+#, fuzzy
+msgid "Insert"
+msgstr "插入"
+
+#, fuzzy
+msgid "Delete"
+msgstr "刪除"
+
+#, fuzzy
+msgid "Home"
+msgstr "Home 鍵"
 
 msgid "End key"
 msgstr "End 鍵"
 
-msgid "Up arrow key"
-msgstr "向上鍵"
-
-msgid "Down arrow key"
-msgstr "向下鍵"
-
-msgid "Left arrow key"
-msgstr "向左鍵"
-
-msgid "Right arrow key"
-msgstr "向右鍵"
-
-msgid "Home key"
-msgstr "Home 鍵"
-
-msgid "Page Down key"
-msgstr "Page Down 鍵"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Page Up 鍵"
 
-msgid "Insert key"
-msgstr "Insert 鍵"
+#, fuzzy
+msgid "Page Down"
+msgstr "Page Down 鍵"
 
-msgid "Delete key"
-msgstr "Delete 鍵"
-
-msgid "Completion/M-tab"
-msgstr "Completion/M-tab 鍵"
-
-msgid "Back Tabulation S-tab"
-msgstr ""
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "數字區的 +"
-
-msgid "- on keypad"
-msgstr "數字區的 -"
-
-msgid "Slash on keypad"
-msgstr "數字區的 / 鍵"
 
 msgid "* on keypad"
 msgstr "數字區的 *"
 
-msgid "Escape key"
-msgstr ""
+msgid "- on keypad"
+msgstr "數字區的 -"
+
+msgid "+ on keypad"
+msgstr "數字區的 +"
 
 msgid "Left arrow keypad"
 msgstr "數字區的向左鍵"
@@ -302,13 +313,13 @@ msgstr ""
 msgid "C1 key"
 msgstr ""
 
-msgid "Plus"
+msgid "Asterisk"
 msgstr ""
 
 msgid "Minus"
 msgstr ""
 
-msgid "Asterisk"
+msgid "Plus"
 msgstr ""
 
 msgid "Dot"
@@ -1440,7 +1451,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1638,6 +1649,18 @@ msgstr ""
 
 msgid "Configure options"
 msgstr "設定選項"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr ""
@@ -3020,6 +3043,9 @@ msgstr ""
 msgid "C&onfirmation..."
 msgstr ""
 
+msgid "&Appearance..."
+msgstr ""
+
 msgid "&Display bits..."
 msgstr "顯示位元數..."
 
@@ -4060,3 +4086,12 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Insert key"
+#~ msgstr "Insert 鍵"
+
+#~ msgid "Delete key"
+#~ msgstr "Delete 鍵"
+
+#~ msgid "Slash on keypad"
+#~ msgstr "數字區的 / 鍵"

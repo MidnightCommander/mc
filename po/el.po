@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/projects/p/mc/language/el/)\n"
@@ -150,6 +150,10 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
+#, fuzzy
+msgid "Escape"
+msgstr "Πλήκτρο Escape"
+
 msgid "Function key 1"
 msgstr "Πλήκτρο λειτουργίας 1"
 
@@ -210,59 +214,66 @@ msgstr "Πλήκτρο λειτουργίας 19"
 msgid "Function key 20"
 msgstr "Πλήκτρο λειτουργίας 20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr ""
+
+msgid "BackTab/S-tab"
+msgstr ""
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Πλήκτρο backspace"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "Πάνω βέλος"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "Κάτω βέλος"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "Αριστερό βέλος"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "Δεξί βέλος"
+
+#, fuzzy
+msgid "Insert"
+msgstr "&Εισαγωγή"
+
+#, fuzzy
+msgid "Delete"
+msgstr "&Διαγραφή"
+
+#, fuzzy
+msgid "Home"
+msgstr "Πλήκτρο home"
 
 msgid "End key"
 msgstr "Πλήκτρο end"
 
-msgid "Up arrow key"
-msgstr "Πάνω βέλος"
-
-msgid "Down arrow key"
-msgstr "Κάτω βέλος"
-
-msgid "Left arrow key"
-msgstr "Αριστερό βέλος"
-
-msgid "Right arrow key"
-msgstr "Δεξί βέλος"
-
-msgid "Home key"
-msgstr "Πλήκτρο home"
-
-msgid "Page Down key"
-msgstr "πλήκτρο Page Down"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "πλήκτρο Page Up"
 
-msgid "Insert key"
-msgstr "Πλήκτρο Insert"
+#, fuzzy
+msgid "Page Down"
+msgstr "πλήκτρο Page Down"
 
-msgid "Delete key"
-msgstr "Πλήκτρο Delete"
-
-msgid "Completion/M-tab"
-msgstr ""
-
-msgid "Back Tabulation S-tab"
-msgstr ""
-
-msgid "+ on keypad"
-msgstr ""
-
-msgid "- on keypad"
-msgstr ""
-
-msgid "Slash on keypad"
+msgid "/ on keypad"
 msgstr ""
 
 msgid "* on keypad"
 msgstr ""
 
-msgid "Escape key"
-msgstr "Πλήκτρο Escape"
+msgid "- on keypad"
+msgstr ""
+
+msgid "+ on keypad"
+msgstr ""
 
 msgid "Left arrow keypad"
 msgstr ""
@@ -315,14 +326,14 @@ msgstr "Πλήκτρο Α1"
 msgid "C1 key"
 msgstr "Πλήκτρο C1"
 
-msgid "Plus"
-msgstr "Συν"
+msgid "Asterisk"
+msgstr "Αστερίσκος"
 
 msgid "Minus"
 msgstr "Πλην"
 
-msgid "Asterisk"
-msgstr "Αστερίσκος"
+msgid "Plus"
+msgstr "Συν"
 
 msgid "Dot"
 msgstr "Τελεία"
@@ -1464,7 +1475,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1667,6 +1678,18 @@ msgid "A&uto save setup"
 msgstr ""
 
 msgid "Configure options"
+msgstr ""
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
 msgstr ""
 
 msgid "Case &insensitive"
@@ -3114,6 +3137,10 @@ msgstr ""
 msgid "C&onfirmation..."
 msgstr "Ε&πιβεβαίωση..."
 
+#, fuzzy
+msgid "&Appearance..."
+msgstr "Α&ντικατάσταση"
+
 msgid "&Display bits..."
 msgstr ""
 
@@ -4166,6 +4193,12 @@ msgstr "Συνέχεια από την αρχή;"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Insert key"
+#~ msgstr "Πλήκτρο Insert"
+
+#~ msgid "Delete key"
+#~ msgstr "Πλήκτρο Delete"
 
 #~ msgid "%s?"
 #~ msgstr "%s;"

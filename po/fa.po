@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Persian (http://www.transifex.com/projects/p/mc/language/"
@@ -140,6 +140,10 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
+#, fuzzy
+msgid "Escape"
+msgstr "کلید گریز"
+
 msgid "Function key 1"
 msgstr "کلید تابع ۱"
 
@@ -200,59 +204,66 @@ msgstr "کلید تابع ۱۹"
 msgid "Function key 20"
 msgstr "کلید تابع ۲۰"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "تکمیل/M-tab"
+
+msgid "BackTab/S-tab"
+msgstr ""
+
+#, fuzzy
+msgid "Backspace"
 msgstr "کلید پس‌بر"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "کلید جهت بالا"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "کلید جهت پایین"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "کلید جهت چپ"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "کلید جهت راست"
+
+#, fuzzy
+msgid "Insert"
+msgstr "درج"
+
+#, fuzzy
+msgid "Delete"
+msgstr "حذف"
+
+#, fuzzy
+msgid "Home"
+msgstr "کلید خانه"
 
 msgid "End key"
 msgstr "کلید پایان"
 
-msgid "Up arrow key"
-msgstr "کلید جهت بالا"
-
-msgid "Down arrow key"
-msgstr "کلید جهت پایین"
-
-msgid "Left arrow key"
-msgstr "کلید جهت چپ"
-
-msgid "Right arrow key"
-msgstr "کلید جهت راست"
-
-msgid "Home key"
-msgstr "کلید خانه"
-
-msgid "Page Down key"
-msgstr "کلید صفحه‌ی پایین"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "کلید صفحه‌ی بالا"
 
-msgid "Insert key"
-msgstr "کلید درج"
+#, fuzzy
+msgid "Page Down"
+msgstr "کلید صفحه‌ی پایین"
 
-msgid "Delete key"
-msgstr "کلید حذف"
-
-msgid "Completion/M-tab"
-msgstr "تکمیل/M-tab"
-
-msgid "Back Tabulation S-tab"
-msgstr ""
-
-msgid "+ on keypad"
-msgstr ""
-
-msgid "- on keypad"
-msgstr ""
-
-msgid "Slash on keypad"
+msgid "/ on keypad"
 msgstr ""
 
 msgid "* on keypad"
 msgstr ""
 
-msgid "Escape key"
-msgstr "کلید گریز"
+msgid "- on keypad"
+msgstr ""
+
+msgid "+ on keypad"
+msgstr ""
 
 msgid "Left arrow keypad"
 msgstr ""
@@ -305,14 +316,14 @@ msgstr "کلید A1"
 msgid "C1 key"
 msgstr "کلید C1"
 
-msgid "Plus"
-msgstr "مثبت"
+msgid "Asterisk"
+msgstr "ستاره"
 
 msgid "Minus"
 msgstr "منفی"
 
-msgid "Asterisk"
-msgstr "ستاره"
+msgid "Plus"
+msgstr "مثبت"
 
 msgid "Dot"
 msgstr "نقطه"
@@ -1441,7 +1452,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1639,6 +1650,18 @@ msgstr ""
 
 msgid "Configure options"
 msgstr "تنظیمات پیکربندی"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr ""
@@ -3021,6 +3044,9 @@ msgstr "تنظیمات قاب"
 msgid "C&onfirmation..."
 msgstr ""
 
+msgid "&Appearance..."
+msgstr ""
+
 msgid "&Display bits..."
 msgstr ""
 
@@ -4025,6 +4051,12 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Insert key"
+#~ msgstr "کلید درج"
+
+#~ msgid "Delete key"
+#~ msgstr "کلید حذف"
 
 #~ msgid "%s?"
 #~ msgstr "%s؟"

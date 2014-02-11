@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/projects/p/mc/language/"
@@ -144,6 +144,10 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
+#, fuzzy
+msgid "Escape"
+msgstr "Tombol escape"
+
 msgid "Function key 1"
 msgstr "Tombol fungsi 1"
 
@@ -204,59 +208,67 @@ msgstr "Tombol fungsi 19"
 msgid "Function key 20"
 msgstr "Tombol fungsi 20"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr ""
+
+msgid "BackTab/S-tab"
+msgstr ""
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Tombol backspace"
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "Tombol panah atas"
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "Tombol panah bawah"
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "Tombol panah kiri"
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "Tombol panah kanan"
+
+#, fuzzy
+msgid "Insert"
+msgstr "Tombol insert"
+
+#, fuzzy
+msgid "Delete"
+msgstr "Tombol delete"
+
+#, fuzzy
+msgid "Home"
+msgstr "Tombol home"
 
 msgid "End key"
 msgstr "Tombol end"
 
-msgid "Up arrow key"
-msgstr "Tombol panah atas"
-
-msgid "Down arrow key"
-msgstr "Tombol panah bawah"
-
-msgid "Left arrow key"
-msgstr "Tombol panah kiri"
-
-msgid "Right arrow key"
-msgstr "Tombol panah kanan"
-
-msgid "Home key"
-msgstr "Tombol home"
-
-msgid "Page Down key"
-msgstr "Tombol Page Down"
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Tombol Page Up"
 
-msgid "Insert key"
-msgstr "Tombol insert"
+#, fuzzy
+msgid "Page Down"
+msgstr "Tombol Page Down"
 
-msgid "Delete key"
-msgstr "Tombol delete"
-
-msgid "Completion/M-tab"
-msgstr ""
-
-msgid "Back Tabulation S-tab"
-msgstr ""
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "+ pada keypad"
-
-msgid "- on keypad"
-msgstr "- pada keypad"
-
-msgid "Slash on keypad"
-msgstr "Garis miring pada keypad"
 
 msgid "* on keypad"
 msgstr "* pada keypad"
 
-msgid "Escape key"
-msgstr "Tombol escape"
+msgid "- on keypad"
+msgstr "- pada keypad"
+
+msgid "+ on keypad"
+msgstr "+ pada keypad"
 
 msgid "Left arrow keypad"
 msgstr "Panah kiri keypad"
@@ -309,14 +321,14 @@ msgstr "Tombol A1"
 msgid "C1 key"
 msgstr "Tombol C1"
 
-msgid "Plus"
-msgstr "Plus"
+msgid "Asterisk"
+msgstr "Asterisk"
 
 msgid "Minus"
 msgstr "Minus"
 
-msgid "Asterisk"
-msgstr "Asterisk"
+msgid "Plus"
+msgstr "Plus"
 
 msgid "Dot"
 msgstr "Dot"
@@ -1447,7 +1459,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1644,6 +1656,18 @@ msgid "A&uto save setup"
 msgstr ""
 
 msgid "Configure options"
+msgstr ""
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
 msgstr ""
 
 msgid "Case &insensitive"
@@ -3027,6 +3051,9 @@ msgstr ""
 msgid "C&onfirmation..."
 msgstr ""
 
+msgid "&Appearance..."
+msgstr ""
+
 msgid "&Display bits..."
 msgstr ""
 
@@ -4033,3 +4060,6 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Slash on keypad"
+#~ msgstr "Garis miring pada keypad"

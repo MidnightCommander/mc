@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-07 09:37+0400\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/projects/p/mc/language/pl/)\n"
@@ -155,6 +155,10 @@ msgstr ""
 "kolorów na terminalu nie dysponującym 256 kolorami.\n"
 "Domyślna skórka nie została wczytana"
 
+#, fuzzy
+msgid "Escape"
+msgstr "Klawisz Escape    "
+
 msgid "Function key 1"
 msgstr "1 klaw. funkcyjny "
 
@@ -215,59 +219,68 @@ msgstr "19 klaw. funkcyjny"
 msgid "Function key 20"
 msgstr "20 klaw. funkcyjny"
 
-msgid "Backspace key"
+msgid "Completion/M-tab"
+msgstr "Uzupełnianie/M-tab"
+
+#, fuzzy
+msgid "BackTab/S-tab"
+msgstr "Wsteczna tabulacja/S-tab"
+
+#, fuzzy
+msgid "Backspace"
 msgstr "Klawisz Backspace "
+
+#, fuzzy
+msgid "Up arrow"
+msgstr "Strzałka w górę   "
+
+#, fuzzy
+msgid "Down arrow"
+msgstr "Strzałka w dół    "
+
+#, fuzzy
+msgid "Left arrow"
+msgstr "Strzałka w lewo   "
+
+#, fuzzy
+msgid "Right arrow"
+msgstr "Strzałka w prawo  "
+
+#, fuzzy
+msgid "Insert"
+msgstr "&Wstaw"
+
+#, fuzzy
+msgid "Delete"
+msgstr "&Usuń"
+
+#, fuzzy
+msgid "Home"
+msgstr "Klawisz Home      "
 
 msgid "End key"
 msgstr "Klawisz End       "
 
-msgid "Up arrow key"
-msgstr "Strzałka w górę   "
-
-msgid "Down arrow key"
-msgstr "Strzałka w dół    "
-
-msgid "Left arrow key"
-msgstr "Strzałka w lewo   "
-
-msgid "Right arrow key"
-msgstr "Strzałka w prawo  "
-
-msgid "Home key"
-msgstr "Klawisz Home      "
-
-msgid "Page Down key"
-msgstr "Klawisz Page Down "
-
-msgid "Page Up key"
+#, fuzzy
+msgid "Page Up"
 msgstr "Klawisz Page Up   "
 
-msgid "Insert key"
-msgstr "Klawisz Insert    "
+#, fuzzy
+msgid "Page Down"
+msgstr "Klawisz Page Down "
 
-msgid "Delete key"
-msgstr "Klawisz Delete    "
-
-msgid "Completion/M-tab"
-msgstr "Uzupełnianie/M-tab"
-
-msgid "Back Tabulation S-tab"
-msgstr "Wsteczna tabulacja/S-tab"
-
-msgid "+ on keypad"
+#, fuzzy
+msgid "/ on keypad"
 msgstr "+ na klaw. numer. "
-
-msgid "- on keypad"
-msgstr "- na klaw. numer. "
-
-msgid "Slash on keypad"
-msgstr "Ukośnik na klaw. numer."
 
 msgid "* on keypad"
 msgstr "* na klaw. numer. "
 
-msgid "Escape key"
-msgstr "Klawisz Escape    "
+msgid "- on keypad"
+msgstr "- na klaw. numer. "
+
+msgid "+ on keypad"
+msgstr "+ na klaw. numer. "
 
 msgid "Left arrow keypad"
 msgstr "Strzałka w lewo na klaw. numer."
@@ -320,14 +333,14 @@ msgstr "Klawisz A1"
 msgid "C1 key"
 msgstr "Klawisz C1"
 
-msgid "Plus"
-msgstr "Plus"
+msgid "Asterisk"
+msgstr "Gwiazdka"
 
 msgid "Minus"
 msgstr "Minus"
 
-msgid "Asterisk"
-msgstr "Gwiazdka"
+msgid "Plus"
+msgstr "Plus"
 
 msgid "Dot"
 msgstr "Kropka"
@@ -1519,7 +1532,8 @@ msgstr ""
 "Przyjazny dla użytkownika edytor tekstu,\n"
 "napisany dla programu Midnight Commander"
 
-msgid "Copyright (C) 1996-2013 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2014 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2013 Free Software Foundation"
 
 msgid "About"
@@ -1726,6 +1740,18 @@ msgstr "Auto&matyczny zapis ustawień"
 
 msgid "Configure options"
 msgstr "Konfiguracja opcji"
+
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
+msgid "Skin:"
+msgstr ""
+
+msgid "Appearance"
+msgstr ""
 
 msgid "Case &insensitive"
 msgstr "Bez rozróżniania w&ielkości"
@@ -3212,6 +3238,10 @@ msgstr "Opcje &panelu..."
 msgid "C&onfirmation..."
 msgstr "P&otwierdzenie..."
 
+#, fuzzy
+msgid "&Appearance..."
+msgstr "&Zastąp..."
+
 msgid "&Display bits..."
 msgstr "&Wyświetlane bity..."
 
@@ -4296,6 +4326,15 @@ msgstr "Kontynuować od początku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Nie można pobrać lokalnej kopii /ftp://jakiś.komputer/modyfikuj_mnie.txt"
+
+#~ msgid "Insert key"
+#~ msgstr "Klawisz Insert    "
+
+#~ msgid "Delete key"
+#~ msgstr "Klawisz Delete    "
+
+#~ msgid "Slash on keypad"
+#~ msgstr "Ukośnik na klaw. numer."
 
 #~ msgid "%s?"
 #~ msgstr "%s?"

@@ -103,6 +103,8 @@ static int listing_user_hotkey = 'u';
 static unsigned long panel_listing_types_id, panel_user_format_id;
 static unsigned long mini_user_status_id, mini_user_format_id;
 
+static unsigned long skin_name_id;
+
 #ifdef HAVE_CHARSET
 static int new_display_codepage;
 static unsigned long disp_bits_name_id;
@@ -111,6 +113,9 @@ static unsigned long disp_bits_name_id;
 #if defined(ENABLE_VFS) && defined(ENABLE_VFS_FTP)
 static unsigned long ftpfs_always_use_proxy_id, ftpfs_proxy_host_id;
 #endif /* ENABLE_VFS && ENABLE_VFS_FTP */
+
+GPtrArray *skin_names;
+gchar *current_skin_name;
 
 #ifdef ENABLE_BACKGROUND
 static WListbox *bg_list = NULL;
@@ -511,6 +516,141 @@ configure_box (void)
 
         g_free (time_out_new);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+skin_apply (const gchar * skin_override)
+{
+    GError *error = NULL;
+
+    mc_skin_deinit ();
+    mc_skin_init (skin_override, &error);
+    mc_fhl_free (&mc_filehighlight);
+    mc_filehighlight = mc_fhl_new (TRUE);
+    dlg_set_default_colors ();
+    panel_deinit ();
+    panel_init ();
+    repaint_screen ();
+
+    if (error != NULL)
+    {
+        message (D_ERROR, _("Warning"), "%s", error->message);
+        g_error_free (error);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static const gchar *
+skin_name_to_label (const gchar * name)
+{
+    if (strcmp (name, "default") == 0)
+        return _("< Default >");
+    return name;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+sel_skin_button (WButton * button, int action)
+{
+    int result;
+    WListbox *skin_list;
+    WDialog *skin_dlg;
+    const gchar *skin_name;
+    int lxx, lyy;
+    unsigned int i;
+    unsigned int pos = 1;
+
+    (void) action;
+
+    lxx = COLS / 2;
+    lyy = (LINES - 13) / 2;
+    skin_dlg =
+        dlg_create (TRUE, lyy, lxx, 13, 24, dialog_colors, NULL, NULL, "[Appearance]", _("Skins"),
+                    DLG_COMPACT);
+
+    skin_list = listbox_new (1, 1, 11, 22, FALSE, NULL);
+    skin_name = "default";
+    listbox_add_item (skin_list, LISTBOX_APPEND_AT_END, 0, skin_name_to_label (skin_name),
+                      (void *) skin_name);
+
+    if (strcmp (skin_name, current_skin_name) == 0)
+        listbox_select_entry (skin_list, 0);
+
+    for (i = 0; i < skin_names->len; i++)
+    {
+        skin_name = g_ptr_array_index (skin_names, i);
+        if (strcmp (skin_name, "default") != 0)
+        {
+            listbox_add_item (skin_list, LISTBOX_APPEND_AT_END, 0, skin_name_to_label (skin_name),
+                              (void *) skin_name);
+            if (strcmp (skin_name, current_skin_name) == 0)
+                listbox_select_entry (skin_list, pos);
+            pos++;
+        }
+    }
+
+    add_widget (skin_dlg, skin_list);
+
+    result = dlg_run (skin_dlg);
+    if (result == B_ENTER)
+    {
+        Widget *w;
+        gchar *skin_label;
+
+        listbox_get_current (skin_list, &skin_label, (void **) &skin_name);
+        g_free (current_skin_name);
+        current_skin_name = g_strdup (skin_name);
+        skin_apply (skin_name);
+
+        w = dlg_find_by_id (WIDGET (button)->owner, skin_name_id);
+        button_set_text (BUTTON (w), str_fit_to_term (skin_label, 20, J_LEFT_FIT));
+    }
+    dlg_destroy (skin_dlg);
+
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+appearance_box (void)
+{
+    current_skin_name = g_strdup (mc_skin__default.name);
+    skin_names = mc_skin_list ();
+
+    {
+        quick_widget_t quick_widgets[] = {
+            /* *INDENT-OFF* */
+            QUICK_START_COLUMNS,
+                QUICK_LABEL (N_("Skin:"), NULL),
+            QUICK_NEXT_COLUMN,
+                QUICK_BUTTON (str_fit_to_term (skin_name_to_label (current_skin_name), 20, J_LEFT_FIT),
+                              B_USER, sel_skin_button, &skin_name_id),
+            QUICK_STOP_COLUMNS,
+            QUICK_BUTTONS_OK_CANCEL,
+            QUICK_END
+            /* *INDENT-ON* */
+        };
+
+        quick_dialog_t qdlg = {
+            -1, -1, 54,
+            N_("Appearance"), "[Appearance]",
+            quick_widgets, dlg_default_callback, NULL
+        };
+
+        if (quick_dialog (&qdlg) == B_ENTER)
+            mc_config_set_string (mc_main_config, CONFIG_APP_SECTION, "skin", current_skin_name);
+        else
+            skin_apply (NULL);
+    }
+
+    g_free (current_skin_name);
+    g_ptr_array_foreach (skin_names, (GFunc) g_free, NULL);
+    g_ptr_array_free (skin_names, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
