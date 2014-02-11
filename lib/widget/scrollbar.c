@@ -122,7 +122,7 @@ scrollbar_draw_horizontal (WScrollBar * scrollbar)
     int i;
 
     int start_pos = 0;
-    int end_pos = w->cols;
+    int end_pos = w->cols - 1;
     int total_columns = w->cols;
 
     if (scrollbar_skin.first_horiz_char != NULL)
