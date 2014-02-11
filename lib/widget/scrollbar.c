@@ -125,42 +125,35 @@ scrollbar_draw_horizontal (WScrollBar * scrollbar)
     int end_pos = w->cols;
     int total_columns = w->cols;
 
-
     if (scrollbar_skin.first_horiz_char != NULL)
     {
-        start_pos = 1;
+        start_pos++;
         total_columns--;
-    }
 
-    if (scrollbar_skin.last_horiz_char != NULL)
-    {
-        end_pos = w->cols - 1;
-        total_columns--;
-    }
-
-    /* Now draw the nice relative pointer */
-    if (*scrollbar->total != 0)
-        column = *scrollbar->current * total_columns / *scrollbar->total - start_pos;
-
-    if (scrollbar_skin.first_vert_char != NULL)
-    {
         widget_move (w, 0, 0);
         tty_print_string (scrollbar_skin.first_horiz_char);
     }
 
-    for (i = start_pos; i < end_pos; i++)
+    if (scrollbar_skin.last_horiz_char != NULL)
+    {
+        end_pos--;
+        total_columns--;
+
+        widget_move (w, 0, w->cols - 1);
+        tty_print_string (scrollbar_skin.last_horiz_char);
+    }
+
+    /* Now draw the nice relative pointer */
+    if (*scrollbar->total != 0)
+        column = *scrollbar->current * total_columns / *scrollbar->total + start_pos;
+
+    for (i = start_pos; i <= end_pos; i++)
     {
         widget_move (w, 0, i);
         if (i != column)
             tty_print_string (scrollbar_skin.background_horiz_char);
         else
             tty_print_string (scrollbar_skin.current_char);
-    }
-
-    if (scrollbar_skin.last_vert_char != NULL)
-    {
-        widget_move (w, 0, w->cols - 1);
-        tty_print_string (scrollbar_skin.last_horiz_char);
     }
 }
 
@@ -174,44 +167,38 @@ scrollbar_draw_vertical (WScrollBar * scrollbar)
     int i;
 
     int start_pos = 0;
-    int end_pos = w->lines;
+    int end_pos = w->lines - 1;
     int total_lines = w->lines;
 
     if (scrollbar_skin.first_vert_char != NULL)
     {
-        start_pos = 1;
+        start_pos++;
         total_lines--;
+
+        widget_move (w, 0, 0);
+        tty_print_string (scrollbar_skin.first_vert_char);
     }
 
     if (scrollbar_skin.last_vert_char != NULL)
     {
-        end_pos = w->lines - 1;
+        end_pos--;
         total_lines--;
+
+        widget_move (w, w->lines - 1, 0);
+        tty_print_string (scrollbar_skin.last_vert_char);
     }
 
     /* Now draw the nice relative pointer */
     if (*scrollbar->total != 0)
         line = *scrollbar->current * total_lines / *scrollbar->total + start_pos;
 
-    if (scrollbar_skin.first_vert_char != NULL)
-    {
-        widget_move (w, 0, 0);
-        tty_print_string (scrollbar_skin.first_vert_char);
-    }
-
-    for (i = start_pos; i < end_pos; i++)
+    for (i = start_pos; i <= end_pos; i++)
     {
         widget_move (w, i, 0);
         if (i != line)
             tty_print_string (scrollbar_skin.background_vert_char);
         else
             tty_print_string (scrollbar_skin.current_char);
-    }
-
-    if (scrollbar_skin.last_vert_char != NULL)
-    {
-        widget_move (w, w->lines - 1, 0);
-        tty_print_string (scrollbar_skin.last_vert_char);
     }
 }
 
