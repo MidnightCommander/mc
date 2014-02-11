@@ -340,6 +340,9 @@ scrollbar_set_first_displayed (WScrollBar * scrollbar, int *first_displayed)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Initialize scrollbars.
+ */
 
 void
 scrollbar_global_init (void)
@@ -358,6 +361,9 @@ scrollbar_global_init (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Deinitialize scrollbars.
+ */
 
 void
 scrollbar_global_deinit (void)
