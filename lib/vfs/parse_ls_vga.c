@@ -2,7 +2,7 @@
    Routines for parsing output from the 'ls' command.
 
    Copyright (C) 1988-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Copyright (C) 1995, 1996 Miguel de Icaza
 

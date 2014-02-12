@@ -2,7 +2,7 @@
    libmc - checks for processing esc sequences in replace string
 
    Copyright (C) 2011-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Andrew Borodin <aborodin@vmail.ru>, 2011

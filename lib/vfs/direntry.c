@@ -2,7 +2,7 @@
    Directory cache support
 
    Copyright (C) 1998-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Pavel Machek <pavel@ucw.cz>, 1998

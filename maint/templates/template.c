@@ -2,7 +2,7 @@
    REPLACE: one line comment what the file is for.
 
    Copyright (C) <YEARS>
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    AUTHOR <MAIL>, YEARS.

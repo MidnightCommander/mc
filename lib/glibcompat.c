@@ -2,7 +2,7 @@
    GLIB - Library of useful routines for C programming
 
    Copyright (C) 2009-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2009, 2013.

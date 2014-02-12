@@ -4,7 +4,7 @@
    Additional keyboard support routines.
 
    Copyright (C) 1998-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Gyorgy Tamasi, 1998

@@ -2,7 +2,7 @@
    Virtual File System garbage collection code
 
    Copyright (C) 2003-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Miguel de Icaza, 1995

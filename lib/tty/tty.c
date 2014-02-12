@@ -2,7 +2,7 @@
    Interface to the terminal controlling library.
 
    Copyright (C) 2005-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Roland Illig <roland.illig@gmx.de>, 2005.

@@ -3,7 +3,7 @@
    (Let mc type for you...)
 
    Copyright (C) 1995-2014
-   the Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Jakub Jelinek, 1995

@@ -2,7 +2,7 @@
    Learn keys
 
    Copyright (C) 1995-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Jakub Jelinek, 1995

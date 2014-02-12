@@ -4,7 +4,7 @@
    structure.
 
    Copyright (C) 2011-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Author:
    Janne Kukonlehto

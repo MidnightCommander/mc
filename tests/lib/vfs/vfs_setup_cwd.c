@@ -2,7 +2,7 @@
    lib/vfs - test vfs_setup_cwd() functionality
 
    Copyright (C) 2013
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2013

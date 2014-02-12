@@ -2,7 +2,7 @@
    Virtual File System: GNU Tar file system.
 
    Copyright (C) 2000-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Jan Hudec, 2000

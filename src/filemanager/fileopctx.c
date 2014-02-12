@@ -2,7 +2,7 @@
    File operation contexts for the Midnight Commander
 
    Copyright (C) 1999-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Federico Mena <federico@nuclecu.unam.mx>

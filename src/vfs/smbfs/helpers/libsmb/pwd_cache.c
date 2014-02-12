@@ -6,7 +6,7 @@
    Copyright (C) Luke Kenneth Casson Leighton 1996-1998
 
    Copyright (C) 2011-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
 

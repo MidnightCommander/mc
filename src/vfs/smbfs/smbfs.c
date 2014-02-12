@@ -2,7 +2,7 @@
    Virtual File System: Midnight Commander file system.
 
    Copyright (C) 1999-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Wayne Roberts <wroberts1@home.com>, 1997

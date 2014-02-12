@@ -2,7 +2,7 @@
    Virtual File System: FTP file system.
 
    Copyright (C) 1995-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Ching Hui, 1995

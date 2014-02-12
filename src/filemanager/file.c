@@ -2,7 +2,7 @@
    File management.
 
    Copyright (C) 1994-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Janne Kukonlehto, 1994, 1995

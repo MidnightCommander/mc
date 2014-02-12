@@ -2,7 +2,7 @@
    Provides a log file to ease tracing the program.
 
    Copyright (C) 2006-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Roland Illig <roland.illig@gmx.de>, 2006

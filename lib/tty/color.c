@@ -3,7 +3,7 @@
    Interface functions.
 
    Copyright (C) 1994-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Andrew Borodin <aborodin@vmail.ru>, 2009

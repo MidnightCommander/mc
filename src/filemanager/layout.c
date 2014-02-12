@@ -2,7 +2,7 @@
    Panel layout module for the Midnight Commander
 
    Copyright (C) 1995-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Janne Kukonlehto, 1995
