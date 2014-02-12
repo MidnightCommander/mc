@@ -107,7 +107,6 @@ static unsigned long skin_name_id;
 
 #ifdef HAVE_CHARSET
 static int new_display_codepage;
-static unsigned long disp_bits_name_id;
 #endif /* HAVE_CHARSET */
 
 #if defined(ENABLE_VFS) && defined(ENABLE_VFS_FTP)
@@ -277,8 +276,6 @@ sel_charset_button (WButton * button, int action)
     if (new_dcp != SELECT_CHARSET_CANCEL)
     {
         const char *cpname;
-        char buf[BUF_TINY];
-        Widget *w;
 
         new_display_codepage = new_dcp;
         cpname = (new_display_codepage == SELECT_CHARSET_OTHER_8BIT) ?
@@ -286,10 +283,11 @@ sel_charset_button (WButton * button, int action)
             ((codepage_desc *) g_ptr_array_index (codepages, new_display_codepage))->name;
         if (cpname != NULL)
             mc_global.utf8_display = str_isutf8 (cpname);
-        /* avoid strange bug with label repainting */
-        g_snprintf (buf, sizeof (buf), "%-27s", cpname);
-        w = dlg_find_by_id (WIDGET (button)->owner, disp_bits_name_id);
-        label_set_text (LABEL (w), buf);
+        else
+            cpname = _("7-bit ASCII");  /* FIXME */
+
+        button_set_text (button, cpname);
+        dlg_redraw (WIDGET (button)->owner);
     }
 
     return 0;
@@ -982,10 +980,10 @@ display_bits_box (void)
 {
     const char *cpname;
 
+    new_display_codepage = mc_global.display_codepage;
+
     cpname = (new_display_codepage < 0) ? _("Other 8 bit")
         : ((codepage_desc *) g_ptr_array_index (codepages, new_display_codepage))->name;
-
-    new_display_codepage = mc_global.display_codepage;
 
     {
         int new_meta;
@@ -995,11 +993,7 @@ display_bits_box (void)
             QUICK_START_COLUMNS,
                 QUICK_LABEL (N_("Input / display codepage:"), NULL),
             QUICK_NEXT_COLUMN,
-            QUICK_STOP_COLUMNS,
-            QUICK_START_COLUMNS,
-                QUICK_LABEL (cpname, &disp_bits_name_id),
-            QUICK_NEXT_COLUMN,
-                QUICK_BUTTON (N_("&Select"), B_USER, sel_charset_button, NULL),
+                QUICK_BUTTON (cpname, B_USER, sel_charset_button, NULL),
             QUICK_STOP_COLUMNS,
             QUICK_SEPARATOR (TRUE),
                 QUICK_CHECKBOX (N_("F&ull 8 bits input"), &new_meta, NULL),
