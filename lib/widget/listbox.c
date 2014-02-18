@@ -353,7 +353,10 @@ static inline void
 listbox_append_item (WListbox * l, WLEntry * e, listbox_append_t pos)
 {
     if (l->list == NULL)
+    {
         l->list = g_queue_new ();
+        pos = LISTBOX_APPEND_AT_END;
+    }
 
     switch (pos)
     {
