@@ -700,7 +700,7 @@ dlg_set_position (WDialog * h, int y1, int x1, int y2, int x2)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** this function sets only size, leaving positioning to automatic methods */
+/** Set dialog size and position */
 
 void
 dlg_set_size (WDialog * h, int lines, int cols)
@@ -708,14 +708,19 @@ dlg_set_size (WDialog * h, int lines, int cols)
     int x = WIDGET (h)->x;
     int y = WIDGET (h)->y;
 
-    if (h->flags & DLG_CENTER)
+    if ((h->flags & DLG_CENTER) != 0)
     {
         y = (LINES - lines) / 2;
         x = (COLS - cols) / 2;
     }
 
-    if ((h->flags & DLG_TRYUP) && (y > 3))
-        y -= 2;
+    if ((h->flags & DLG_TRYUP) != 0)
+    {
+        if (y > 3)
+            y -= 2;
+        else if (y == 3)
+            y = 2;
+    }
 
     dlg_set_position (h, y, x, y + lines, x + cols);
 }
