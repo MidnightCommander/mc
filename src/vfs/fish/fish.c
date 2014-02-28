@@ -3,7 +3,7 @@
    shell connections.
 
    Copyright (C) 1998-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Pavel Machek, 1998

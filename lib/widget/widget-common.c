@@ -2,7 +2,7 @@
    Widgets for the Midnight Commander
 
    Copyright (C) 1994-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Authors:
    Radek Doulik, 1994, 1995

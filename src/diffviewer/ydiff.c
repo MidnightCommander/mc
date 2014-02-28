@@ -1,6 +1,6 @@
 /*
    Copyright (C) 2007-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Daniel Borca <dborca@yahoo.com>, 2007

@@ -2,7 +2,7 @@
    8bit strings utilities
 
    Copyright (C) 2007-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Rostislav Benes, 2007

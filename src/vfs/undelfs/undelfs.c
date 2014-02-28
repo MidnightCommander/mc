@@ -8,7 +8,7 @@
    written by Ted Ts'o (tytso@mit.edu) for the ext2fs package.
 
    Copyright (C) 1995-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Miguel de Icaza, 1995

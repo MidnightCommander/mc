@@ -2,7 +2,7 @@
    Definitions of key bindings.
 
    Copyright (C) 2005-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Vitja Makarov, 2005

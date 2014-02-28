@@ -2,7 +2,7 @@
    Compare strings while treating digits characters numerically.
 
    Copyright (C) 1997-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    This file is part of the GNU C Library.
    Contributed by Jean-Fran�ois Bignolles <bignolle ecoledoc ibp fr>, 1997.

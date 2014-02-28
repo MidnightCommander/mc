@@ -2,7 +2,7 @@
    lib/vfs - get vfs_path_t from string
 
    Copyright (C) 2011-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2011, 2013

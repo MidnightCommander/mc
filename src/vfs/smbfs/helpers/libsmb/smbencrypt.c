@@ -6,7 +6,7 @@
    Copyright (C) Andrew Tridgell 1992-1998
 
    Copyright (C) 2011-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Modified by Jeremy Allison 1995.
 

@@ -4,7 +4,7 @@
    Copyright (C) 2001 Walery Studennikov <despair@sama.ru>
 
    Copyright (C) 2011-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Walery Studennikov <despair@sama.ru>, 2001

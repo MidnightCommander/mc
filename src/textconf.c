@@ -2,7 +2,7 @@
    Print features specific for this build
 
    Copyright (C) 2000-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
 

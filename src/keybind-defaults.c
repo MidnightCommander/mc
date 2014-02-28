@@ -2,7 +2,7 @@
    Default values for keybinding engine
 
    Copyright (C) 2009-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Vitja Makarov, 2005

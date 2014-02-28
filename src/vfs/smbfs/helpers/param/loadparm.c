@@ -6,7 +6,7 @@
    Copyright (C) Karl Auer 1993-1998
 
    Copyright (C) 2011-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Largely re-written by Andrew Tridgell, September 1994
 

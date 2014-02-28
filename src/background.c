@@ -3,7 +3,7 @@
 /* Background support.
 
    Copyright (C) 1996-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Miguel de Icaza, 1996

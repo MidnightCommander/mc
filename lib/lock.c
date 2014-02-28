@@ -2,7 +2,7 @@
    File locking
 
    Copyright (C) 2003-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Adam Byrtek, 2003

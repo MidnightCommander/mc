@@ -2,7 +2,7 @@
    Virtual File System switch code
 
    Copyright (C) 1995-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by: 1995 Miguel de Icaza
    Jakub Jelinek, 1995

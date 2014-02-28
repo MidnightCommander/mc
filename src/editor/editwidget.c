@@ -2,7 +2,7 @@
    Editor initialisation and callback handler.
 
    Copyright (C) 1996-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Paul Sheer, 1996, 1997

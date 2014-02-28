@@ -2,7 +2,7 @@
    Editor dialogs for high level editing commands
 
    Copyright (C) 2009-2014
-   The Free Software Foundation, Inc.
+   Free Software Foundation, Inc.
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2009
