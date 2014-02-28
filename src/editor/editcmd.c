@@ -6,7 +6,7 @@
 
    Written by:
    Paul Sheer, 1996, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2012, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2012-2014
    Ilia Maslakov <il.smind@gmail.com>, 2012
 
    This file is part of the Midnight Commander.
@@ -398,7 +398,7 @@ edit_check_newline (const edit_buffer_t * buf)
     return !(option_check_nl_at_eof && buf->size > 0
              && edit_buffer_get_byte (buf, buf->size - 1) != '\n'
              && edit_query_dialog2 (_("Warning"),
-                                    _("The file you are saving is not finished with a newline"),
+                                    _("The file you are saving does not end with a newline."),
                                     _("C&ontinue"), _("&Cancel")) != 0);
 }
 
@@ -2772,9 +2772,6 @@ edit_ok_to_exit (WEdit * edit)
 
     if (!mc_global.midnight_shutdown)
     {
-        if (!edit_check_newline (&edit->buffer))
-            return FALSE;
-
         query_set_sel (2);
 
         msg = g_strdup_printf (_("File %s was modified.\nSave before close?"), fname);
@@ -2796,6 +2793,8 @@ edit_ok_to_exit (WEdit * edit)
     switch (act)
     {
     case 0:                    /* Yes */
+        if (!mc_global.midnight_shutdown && !edit_check_newline (&edit->buffer))
+            return FALSE;
         edit_push_markers (edit);
         edit_set_markers (edit, 0, 0, 0, 0);
         if (!edit_save_cmd (edit) || mc_global.midnight_shutdown)
