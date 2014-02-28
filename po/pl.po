@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-11 15:14+0400\n"
+"POT-Creation-Date: 2014-02-28 13:29+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/projects/p/mc/language/pl/)\n"
@@ -971,7 +971,8 @@ msgstr "Nie można otworzyć potoku do zapisywania: %s"
 msgid "Cannot open file for writing: %s"
 msgstr "Nie można otworzyć pliku do zapisywania: %s"
 
-msgid "The file you are saving is not finished with a newline"
+#, fuzzy
+msgid "The file you are saving does not end with a newline."
 msgstr "Zapisywany plik nie kończy się nowym wierszem"
 
 msgid "C&ontinue"
@@ -1899,9 +1900,6 @@ msgstr "Wyświetlane bity"
 
 msgid "Input / display codepage:"
 msgstr "Strona kodowa wejściowa/wyjściowa:"
-
-msgid "&Select"
-msgstr "&Wybierz"
 
 msgid "Directory tree"
 msgstr "Drzewo katalogów"
@@ -4326,6 +4324,9 @@ msgstr "Kontynuować od początku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Nie można pobrać lokalnej kopii /ftp://jakiś.komputer/modyfikuj_mnie.txt"
+
+#~ msgid "&Select"
+#~ msgstr "&Wybierz"
 
 #~ msgid "Insert key"
 #~ msgstr "Klawisz Insert    "

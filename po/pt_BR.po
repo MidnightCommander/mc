@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-11 15:14+0400\n"
+"POT-Creation-Date: 2014-02-28 13:29+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/mc/"
@@ -922,7 +922,8 @@ msgstr "Não foi possível abrir pipe para escrita: %s"
 msgid "Cannot open file for writing: %s"
 msgstr "Não foi possível abrir arquivo para escrita: %s"
 
-msgid "The file you are saving is not finished with a newline"
+#, fuzzy
+msgid "The file you are saving does not end with a newline."
 msgstr "O arquivo que você está salvando não termina com nova linha"
 
 msgid "C&ontinue"
@@ -1837,9 +1838,6 @@ msgstr ""
 
 msgid "Input / display codepage:"
 msgstr "Inserir / Exibir página de código:"
-
-msgid "&Select"
-msgstr ""
 
 msgid "Directory tree"
 msgstr "Árvore de diretórios"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-11 15:14+0400\n"
+"POT-Creation-Date: 2014-02-28 13:29+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/projects/p/mc/language/"
@@ -974,7 +974,8 @@ msgstr "A cső nem megnyitható írásra: %s"
 msgid "Cannot open file for writing: %s"
 msgstr "A(z) \"%s\" fájl nem megnyitható írásra."
 
-msgid "The file you are saving is not finished with a newline"
+#, fuzzy
+msgid "The file you are saving does not end with a newline."
 msgstr "A file nem soremeléssel ér véget"
 
 msgid "C&ontinue"
@@ -1900,9 +1901,6 @@ msgstr "Kivitel és bevitel"
 
 msgid "Input / display codepage:"
 msgstr "Beviteli/kijelzési kódlap:"
-
-msgid "&Select"
-msgstr "&Kiválaszt"
 
 msgid "Directory tree"
 msgstr "Könyvtárfa"
@@ -4322,6 +4320,9 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
+
+#~ msgid "&Select"
+#~ msgstr "&Kiválaszt"
 
 #~ msgid "Insert key"
 #~ msgstr " \"Insert\" "

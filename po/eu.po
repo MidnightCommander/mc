@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-11 15:14+0400\n"
+"POT-Creation-Date: 2014-02-28 13:29+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/projects/p/mc/language/eu/)\n"
@@ -941,7 +941,8 @@ msgstr "Hodia idazteko ezin ireki: %s"
 msgid "Cannot open file for writing: %s"
 msgstr "Fitxategia idazteko ezin ireki: %s"
 
-msgid "The file you are saving is not finished with a newline"
+#, fuzzy
+msgid "The file you are saving does not end with a newline."
 msgstr "Gordetzen ari zaren fitxategia ez da lerro-berri batekin amaitzen"
 
 msgid "C&ontinue"
@@ -1863,9 +1864,6 @@ msgstr "Bistaratu bitak"
 
 msgid "Input / display codepage:"
 msgstr "Sartu / bistaratu kode-orrialdea:"
-
-msgid "&Select"
-msgstr "&Hautatu"
 
 msgid "Directory tree"
 msgstr "Direktorio zuhaitza"
@@ -4273,6 +4271,9 @@ msgstr "Hasieratik jarraitu?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "&Select"
+#~ msgstr "&Hautatu"
 
 #~ msgid "Insert key"
 #~ msgstr "Txertatu tekla"

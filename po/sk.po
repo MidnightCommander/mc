@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-11 15:14+0400\n"
+"POT-Creation-Date: 2014-02-28 13:29+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/projects/p/mc/language/sk/)\n"
@@ -913,7 +913,8 @@ msgstr ""
 msgid "Cannot open file for writing: %s"
 msgstr ""
 
-msgid "The file you are saving is not finished with a newline"
+#, fuzzy
+msgid "The file you are saving does not end with a newline."
 msgstr "Súbor, ktorý ukladáte nie je ukončený znakom nového riadka"
 
 msgid "C&ontinue"
@@ -1815,9 +1816,6 @@ msgstr ""
 
 msgid "Input / display codepage:"
 msgstr "Vstupná/Zobrazovacia znaková sada:"
-
-msgid "&Select"
-msgstr "&Vybrať"
 
 msgid "Directory tree"
 msgstr ""
@@ -4117,6 +4115,9 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "&Select"
+#~ msgstr "&Vybrať"
 
 #~ msgid "Insert key"
 #~ msgstr "Klávesa Insert"

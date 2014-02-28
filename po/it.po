@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-11 15:14+0400\n"
+"POT-Creation-Date: 2014-02-28 13:29+0400\n"
 "PO-Revision-Date: 2013-08-04 10:16+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -971,7 +971,8 @@ msgstr "Impossibile aprire la pipe in scrittura: %s"
 msgid "Cannot open file for writing: %s"
 msgstr "Impossibile aprire il file in scrittura: %s"
 
-msgid "The file you are saving is not finished with a newline"
+#, fuzzy
+msgid "The file you are saving does not end with a newline."
 msgstr "Il file che si sta salvando non termina con un ritorno a capo"
 
 msgid "C&ontinue"
@@ -1899,9 +1900,6 @@ msgstr "Mostra i bit"
 
 msgid "Input / display codepage:"
 msgstr "Ingresso / mostra codepage:"
-
-msgid "&Select"
-msgstr "&Seleziona"
 
 msgid "Directory tree"
 msgstr "Albero directory"
@@ -4318,6 +4316,9 @@ msgstr "Continuare dall'inizio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Impossibile ricevere copia locale di /ftp://un.host/modificami.txt"
+
+#~ msgid "&Select"
+#~ msgstr "&Seleziona"
 
 #~ msgid "Insert key"
 #~ msgstr "Tasto Ins        "

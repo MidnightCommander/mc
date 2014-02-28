@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-11 15:14+0400\n"
+"POT-Creation-Date: 2014-02-28 13:29+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/mc/"
@@ -971,7 +971,8 @@ msgstr "试图打开管道写入时失败: %s"
 msgid "Cannot open file for writing: %s"
 msgstr "无法打开文件进行写操作: %s"
 
-msgid "The file you are saving is not finished with a newline"
+#, fuzzy
+msgid "The file you are saving does not end with a newline."
 msgstr "您要保存的文件没有以换行符结束"
 
 msgid "C&ontinue"
@@ -1896,9 +1897,6 @@ msgstr "显示位"
 
 msgid "Input / display codepage:"
 msgstr "输入/显示代码页: "
-
-msgid "&Select"
-msgstr "选择(&S)"
 
 msgid "Directory tree"
 msgstr "目录树"
@@ -4309,6 +4307,9 @@ msgstr "从头继续搜索?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "无法获取 /ftp://some.host/editme.txt 的本地副本"
+
+#~ msgid "&Select"
+#~ msgstr "选择(&S)"
 
 #~ msgid "Insert key"
 #~ msgstr "Insert 键"

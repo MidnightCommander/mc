@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-11 15:14+0400\n"
+"POT-Creation-Date: 2014-02-28 13:29+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/projects/p/mc/language/nl/)\n"
@@ -966,7 +966,8 @@ msgstr "Openen van pipe voor lezen mislukt: %s"
 msgid "Cannot open file for writing: %s"
 msgstr "Openen van bestand voor schrijven mislukt: %s "
 
-msgid "The file you are saving is not finished with a newline"
+#, fuzzy
+msgid "The file you are saving does not end with a newline."
 msgstr "Het bestand wat u opslaat eindigt niet met een nieuwe regel"
 
 msgid "C&ontinue"
@@ -1892,9 +1893,6 @@ msgstr "Weergave bits"
 
 msgid "Input / display codepage:"
 msgstr "Invoer / weergave karakterset:"
-
-msgid "&Select"
-msgstr "&Selecteer"
 
 msgid "Directory tree"
 msgstr "Maphiërarchie"
@@ -4305,6 +4303,9 @@ msgstr "Doorgaan vanaf het begin?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan geen lokale versie van /ftp://some.host/editme.txt ophalen"
+
+#~ msgid "&Select"
+#~ msgstr "&Selecteer"
 
 #~ msgid "Insert key"
 #~ msgstr "Ins"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-11 15:14+0400\n"
+"POT-Creation-Date: 2014-02-28 13:29+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Persian (http://www.transifex.com/projects/p/mc/language/"
@@ -903,7 +903,8 @@ msgstr ""
 msgid "Cannot open file for writing: %s"
 msgstr "امکان باز کردن فایل برای نوشتن وجود ندارد: %s"
 
-msgid "The file you are saving is not finished with a newline"
+#, fuzzy
+msgid "The file you are saving does not end with a newline."
 msgstr "فایلی که در حال ذخیره‌اش هستید، با خط خالی به پایان نرسیده است"
 
 msgid "C&ontinue"
@@ -1804,9 +1805,6 @@ msgid "Display bits"
 msgstr "بیت‌های نمایش"
 
 msgid "Input / display codepage:"
-msgstr ""
-
-msgid "&Select"
 msgstr ""
 
 msgid "Directory tree"

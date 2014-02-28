@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-11 15:14+0400\n"
+"POT-Creation-Date: 2014-02-28 13:29+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/projects/p/mc/language/"
@@ -954,7 +954,8 @@ msgstr "Nu se poate pipe pentru scriere: %s"
 msgid "Cannot open file for writing: %s"
 msgstr "Nu se poate deschide fișierul pentru scriere: %s"
 
-msgid "The file you are saving is not finished with a newline"
+#, fuzzy
+msgid "The file you are saving does not end with a newline."
 msgstr "Fișierul pe care îl salvezi nu se termină cu o linie nouă"
 
 msgid "C&ontinue"
@@ -1882,9 +1883,6 @@ msgstr "Biți de afișare"
 
 msgid "Input / display codepage:"
 msgstr "Intrare / cod de afișare:"
-
-msgid "&Select"
-msgstr "&Selectare"
 
 msgid "Directory tree"
 msgstr "Arbore dosare"
@@ -4309,6 +4307,9 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
+
+#~ msgid "&Select"
+#~ msgstr "&Selectare"
 
 #~ msgid "Insert key"
 #~ msgstr "Tasta Insert"

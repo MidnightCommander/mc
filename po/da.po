@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-11 15:14+0400\n"
+"POT-Creation-Date: 2014-02-28 13:29+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/mc/language/da/)\n"
@@ -920,7 +920,8 @@ msgstr "Kan ikke åbne datakanal til skrivning: %s"
 msgid "Cannot open file for writing: %s"
 msgstr "Kan ikke åbne fil til skrivning: %s"
 
-msgid "The file you are saving is not finished with a newline"
+#, fuzzy
+msgid "The file you are saving does not end with a newline."
 msgstr "Filen, du gemmer, er ikke afsluttet med et linjeskift"
 
 msgid "C&ontinue"
@@ -1840,9 +1841,6 @@ msgstr "Vis bit"
 
 msgid "Input / display codepage:"
 msgstr "Kodning for inddata/visning:"
-
-msgid "&Select"
-msgstr "&Vælg"
 
 msgid "Directory tree"
 msgstr "Mappetræ"
@@ -4235,6 +4233,9 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "&Select"
+#~ msgstr "&Vælg"
 
 #~ msgid "Insert key"
 #~ msgstr "Indsæt-tast"

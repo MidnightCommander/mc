@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-11 15:14+0400\n"
+"POT-Creation-Date: 2014-02-28 13:29+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Kristjan Räts <kristjanrats@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/projects/p/mc/language/"
@@ -967,7 +967,8 @@ msgstr "Toru avamine kirjutamiseks nurjus: %s"
 msgid "Cannot open file for writing: %s"
 msgstr "Faili avamine kirjutamiseks nurjus: %s"
 
-msgid "The file you are saving is not finished with a newline"
+#, fuzzy
+msgid "The file you are saving does not end with a newline."
 msgstr "Fail, mida salvestad, ei lõppe reavahetusega"
 
 msgid "C&ontinue"
@@ -1892,9 +1893,6 @@ msgstr "Kuva bitlisus"
 
 msgid "Input / display codepage:"
 msgstr "Sisend/kuva kooditabel:"
-
-msgid "&Select"
-msgstr "&Vali"
 
 msgid "Directory tree"
 msgstr "Kataloogipuu"
@@ -4310,6 +4308,9 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
+
+#~ msgid "&Select"
+#~ msgstr "&Vali"
 
 #~ msgid "Insert key"
 #~ msgstr "Klahv Insert"

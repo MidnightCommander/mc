@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-11 15:14+0400\n"
+"POT-Creation-Date: 2014-02-28 13:29+0400\n"
 "PO-Revision-Date: 2013-11-20 12:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/projects/p/mc/language/el/)\n"
@@ -922,7 +922,8 @@ msgstr ""
 msgid "Cannot open file for writing: %s"
 msgstr "Αδύνατο το άνοιγμα του αρχείου για εγγραφή: %s"
 
-msgid "The file you are saving is not finished with a newline"
+#, fuzzy
+msgid "The file you are saving does not end with a newline."
 msgstr "Το αρχείου που αποθηκεύετε δεν τελειώνει με νέα γραμμή"
 
 msgid "C&ontinue"
@@ -1834,9 +1835,6 @@ msgstr ""
 
 msgid "Input / display codepage:"
 msgstr ""
-
-msgid "&Select"
-msgstr "&Επιλογή"
 
 msgid "Directory tree"
 msgstr "Δέντρο καταλόγων"
@@ -4193,6 +4191,9 @@ msgstr "Συνέχεια από την αρχή;"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "&Select"
+#~ msgstr "&Επιλογή"
 
 #~ msgid "Insert key"
 #~ msgstr "Πλήκτρο Insert"
