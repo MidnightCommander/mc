@@ -343,7 +343,7 @@ mcview_do_search (mcview_t * view)
     }
 
     if (!isFound && view->search->error_str != NULL)
-        message (D_NORMAL, _("Search"), "%s", view->search->error_str);
+        query_dialog (_("Search"), view->search->error_str, D_NORMAL, 1, _("&Dismiss"));
 
     view->dirty++;
     mcview_update (view);
