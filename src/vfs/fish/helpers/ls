@@ -137,9 +137,9 @@ while((my $filename = readdir (DIR))){
     if (S_ISLNK ($mode)) {
         my $linkname = readlink ("$dirname/$filename");
         $linkname =~ $strutils_shell_escape_regex;
-        printf("R%%o %%o $uid.$gid\nS$size\nd$mloctime\n:\"$e_filename\" -> \"$linkname\"\n\n", S_IMODE($mode), S_IFMT($mode));
+        printf("R%%o %%o $uid.$gid\nS$size\nd$mloctime\n:\"%%s\" -> \"%%s\"\n\n", S_IMODE($mode), S_IFMT($mode), $e_filename, $linkname);
     } else {
-        printf("R%%o %%o $uid.$gid\nS$size\nd$mloctime\n:\"$e_filename\"\n\n", S_IMODE($mode), S_IFMT($mode));
+        printf("R%%o %%o $uid.$gid\nS$size\nd$mloctime\n:\"%%s\"\n\n", S_IMODE($mode), S_IFMT($mode), $e_filename);
     }
 }
     printf("### 200\n");
