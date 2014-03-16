@@ -647,6 +647,12 @@ tty_print_alt_char (int c, gboolean single)
     case ACS_RTEE:
         DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_RIGHTMIDDLE : MC_TTY_FRM_DRIGHTMIDDLE]);
         break;
+    case ACS_TTEE:
+        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_TOPMIDDLE : MC_TTY_FRM_DTOPMIDDLE]);
+        break;
+    case ACS_BTEE:
+        DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_BOTTOMMIDDLE : MC_TTY_FRM_DBOTTOMMIDDLE]);
+        break;
     case ACS_ULCORNER:
         DRAW (c, mc_tty_frm[single ? MC_TTY_FRM_LEFTTOP : MC_TTY_FRM_DLEFTTOP]);
         break;
