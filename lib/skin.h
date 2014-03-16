@@ -104,10 +104,9 @@
 #define DFF_CHH_COLOR             mc_skin_color__cache[61]
 #define DFF_CHD_COLOR             mc_skin_color__cache[62]
 #define DFF_DEL_COLOR             mc_skin_color__cache[63]
-#define DFF_FOLDER_COLOR          mc_skin_color__cache[64]
-#define DFF_ERROR_COLOR           mc_skin_color__cache[65]
+#define DFF_ERROR_COLOR           mc_skin_color__cache[64]
 
-#define MC_SKIN_COLOR_CACHE_COUNT 66
+#define MC_SKIN_COLOR_CACHE_COUNT 65
 
 /*** enums ***************************************************************************************/
 
