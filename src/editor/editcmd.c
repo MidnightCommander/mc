@@ -977,7 +977,7 @@ edit_do_search (WEdit * edit)
         {
             edit->search_start = edit->buffer.curs1;
             if (edit->search->error_str != NULL)
-                edit_error_dialog (_("Search"), edit->search->error_str);
+                edit_query_dialog (_("Search"), edit->search->error_str);
         }
     }
 
@@ -2549,7 +2549,7 @@ edit_replace_cmd (WEdit * edit, int again)
             if (!(edit->search->error == MC_SEARCH_E_OK ||
                   (once_found && edit->search->error == MC_SEARCH_E_NOTFOUND)))
             {
-                edit_error_dialog (_("Search"), edit->search->error_str);
+                edit_query_dialog (_("Search"), edit->search->error_str);
             }
             break;
         }
