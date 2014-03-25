@@ -70,6 +70,10 @@ WInput *cmdline;
 
 /*** file scope variables ************************************************************************/
 
+/* Color styles command line */
+static input_colors_t command_colors;
+
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -463,14 +467,8 @@ WInput *
 command_new (int y, int x, int cols)
 {
     WInput *cmd;
-    const input_colors_t command_colors = {
-        DEFAULT_COLOR,
-        COMMAND_MARK_COLOR,
-        DEFAULT_COLOR,
-        COMMAND_HISTORY_COLOR
-    };
 
-    cmd = input_new (y, x, (int *) command_colors, cols, "", "cmdline",
+    cmd = input_new (y, x, command_colors, cols, "", "cmdline",
                      INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_VARIABLES | INPUT_COMPLETE_USERNAMES
                      | INPUT_COMPLETE_HOSTNAMES | INPUT_COMPLETE_CD | INPUT_COMPLETE_COMMANDS |
                      INPUT_COMPLETE_SHELL_ESC);
@@ -479,6 +477,20 @@ command_new (int y, int x, int cols)
     WIDGET (cmd)->callback = command_callback;
 
     return cmd;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Set colors for the command line.
+ */
+
+void
+command_set_default_colors (void)
+{
+    command_colors[WINPUTC_MAIN] = DEFAULT_COLOR;
+    command_colors[WINPUTC_MARK] = COMMAND_MARK_COLOR;
+    command_colors[WINPUTC_UNCHANGED] = DEFAULT_COLOR;
+    command_colors[WINPUTC_HISTORY] = COMMAND_HISTORY_COLOR;
 }
 
 /* --------------------------------------------------------------------------------------------- */

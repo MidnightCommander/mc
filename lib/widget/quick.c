@@ -70,7 +70,7 @@ quick_create_input (int y, int x, const quick_widget_t * qw)
 {
     WInput *in;
 
-    in = input_new (y, x, input_get_default_colors (), 8, qw->u.input.text, qw->u.input.histname,
+    in = input_new (y, x, input_colors, 8, qw->u.input.text, qw->u.input.histname,
                     qw->u.input.completion_flags);
 
     in->is_password = qw->u.input.is_passwd;

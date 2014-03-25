@@ -615,7 +615,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
 
     add_widget (find_dlg, label_new (y1++, x1, _("Start at:")));
     in_start =
-        input_new (y1, x1, input_get_default_colors (), cols - b0 - 7, in_start_dir, "start",
+        input_new (y1, x1, input_colors, cols - b0 - 7, in_start_dir, "start",
                    INPUT_COMPLETE_CD | INPUT_COMPLETE_FILENAMES);
     add_widget (find_dlg, in_start);
 
@@ -626,7 +626,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
     add_widget (find_dlg, ignore_dirs_cbox);
 
     in_ignore =
-        input_new (y1++, x1, input_get_default_colors (), cols - 6,
+        input_new (y1++, x1, input_colors, cols - 6,
                    options.ignore_dirs != NULL ? options.ignore_dirs : "", "ignoredirs",
                    INPUT_COMPLETE_CD | INPUT_COMPLETE_FILENAMES);
     widget_disable (WIDGET (in_ignore), !options.ignore_dirs_enable);
@@ -639,7 +639,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
     /* Start 1st column */
     add_widget (find_dlg, label_new (y1++, x1, file_name_label));
     in_name =
-        input_new (y1++, x1, input_get_default_colors (), cw, INPUT_LAST_TEXT, "name",
+        input_new (y1++, x1, input_colors, cw, INPUT_LAST_TEXT, "name",
                    INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD);
     add_widget (find_dlg, in_name);
 
@@ -647,7 +647,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
     content_label = label_new (y2++, x2, content_content_label);
     add_widget (find_dlg, content_label);
     in_with =
-        input_new (y2++, x2, input_get_default_colors (), cw, INPUT_LAST_TEXT,
+        input_new (y2++, x2, input_colors, cw, INPUT_LAST_TEXT,
                    MC_HISTORY_SHARED_SEARCH, INPUT_COMPLETE_NONE);
     in_with->label = content_label;
     widget_disable (WIDGET (in_with), disable);
