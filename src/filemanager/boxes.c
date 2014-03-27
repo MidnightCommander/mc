@@ -528,6 +528,9 @@ skin_apply (const gchar * skin_override)
     mc_fhl_free (&mc_filehighlight);
     mc_filehighlight = mc_fhl_new (TRUE);
     dlg_set_default_colors ();
+    input_set_default_colors ();
+    if (mc_global.mc_run_mode == MC_RUN_FULL)
+        command_set_default_colors ();
     panel_deinit ();
     panel_init ();
     repaint_screen ();

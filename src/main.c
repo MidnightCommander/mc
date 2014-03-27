@@ -372,6 +372,9 @@ main (int argc, char *argv[])
 
     mc_skin_init (NULL, &error);
     dlg_set_default_colors ();
+    input_set_default_colors ();
+    if (mc_global.mc_run_mode == MC_RUN_FULL)
+        command_set_default_colors ();
     if (error != NULL)
     {
         message (D_ERROR, _("Warning"), "%s", error->message);

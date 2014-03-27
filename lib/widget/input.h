@@ -46,7 +46,7 @@ typedef int input_colors_t[WINPUTC_COUNT_COLORS];
 typedef struct
 {
     Widget widget;
-    input_colors_t color;
+    const int *color;
     int point;                  /* cursor position in the input line in characters */
     int mark;                   /* the mark position in characters */
     gboolean highlight;         /* there is a selected block */
@@ -79,14 +79,17 @@ extern int quote;
 
 extern const global_keymap_t *input_map;
 
+/* Color styles for normal and command line input widgets */
+extern input_colors_t input_colors;
+
 /*** declarations of public functions ************************************************************/
 
-WInput *input_new (int y, int x, const int *input_colors,
+WInput *input_new (int y, int x, const int *colors,
                    int len, const char *text, const char *histname,
                    input_complete_t completion_flags);
 /* callbac is public; needed for command line */
 cb_ret_t input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data);
-const int *input_get_default_colors (void);
+void input_set_default_colors (void);
 cb_ret_t input_handle_char (WInput * in, int key);
 int input_key_is_in_map (WInput * in, int key);
 void input_assign_text (WInput * in, const char *text);
