@@ -1,25 +1,24 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-28 13:29+0400\n"
-"PO-Revision-Date: 2013-11-20 12:28+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Latvian (http://www.transifex.com/projects/p/mc/language/"
-"lv/)\n"
-"Language: lv\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
+"PO-Revision-Date: 2014-02-19 09:12+0000\n"
+"Last-Translator: aborodin <aborodin@vmail.ru>\n"
+"Language-Team: Latvian (http://www.transifex.com/projects/p/mc/language/lv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
-"2);\n"
+"Language: lv\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);\n"
 
+# "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
 msgstr ""
 
@@ -207,52 +206,41 @@ msgstr "Pabeigšana/M-tab"
 msgid "BackTab/S-tab"
 msgstr ""
 
-#, fuzzy
 msgid "Backspace"
-msgstr "Backspace taustiņš"
+msgstr ""
 
-#, fuzzy
 msgid "Up arrow"
-msgstr "Taustiņš ar būltiņu uz augšu"
+msgstr ""
 
-#, fuzzy
 msgid "Down arrow"
-msgstr "Taustiņš ar būltiņu uz leju"
+msgstr ""
 
-#, fuzzy
 msgid "Left arrow"
-msgstr "Taustiņš ar būltiņu pa kreisi"
+msgstr ""
 
-#, fuzzy
 msgid "Right arrow"
-msgstr "Taustiņš ar būltiņu pa labi"
+msgstr ""
 
-#, fuzzy
 msgid "Insert"
-msgstr "ie&Vietot"
+msgstr ""
 
-#, fuzzy
 msgid "Delete"
-msgstr "&Dzēst"
+msgstr ""
 
-#, fuzzy
 msgid "Home"
-msgstr "Home taustiņš"
+msgstr ""
 
 msgid "End key"
 msgstr "End taustiņš"
 
-#, fuzzy
 msgid "Page Up"
-msgstr "Page Up taustiņš"
+msgstr ""
 
-#, fuzzy
 msgid "Page Down"
-msgstr "Page Down taustiņš"
+msgstr ""
 
-#, fuzzy
 msgid "/ on keypad"
-msgstr "+ uz klaviatūras"
+msgstr ""
 
 msgid "* on keypad"
 msgstr "* uz klaviatūras"
@@ -436,9 +424,7 @@ msgstr "TERM mainīgais nav ieslēgts!\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"Ekrāna izmērs %dx%d nav atbalstīts.\n"
-"Pārbaudi TERM vides mainīgo.\n"
+msgstr "Ekrāna izmērs %dx%d nav atbalstīts.\nPārbaudi TERM vides mainīgo.\n"
 
 msgid "Warning"
 msgstr "Brīdinājums"
@@ -903,7 +889,7 @@ msgstr ""
 msgid "Cannot open file for writing: %s"
 msgstr ""
 
-msgid "The file you are saving does not end with a newline."
+msgid "The file you are saving is not finished with a newline"
 msgstr ""
 
 msgid "C&ontinue"
@@ -1763,7 +1749,8 @@ msgstr "&Pretēji"
 msgid "Sort order"
 msgstr "Kārtošanas secība"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 msgid "Confirmation|&Delete"
 msgstr ""
 
@@ -1806,6 +1793,9 @@ msgstr ""
 msgid "Input / display codepage:"
 msgstr "Ievades / displeja kodu tabula:"
 
+msgid "&Select"
+msgstr "a&tlasīt"
+
 msgid "Directory tree"
 msgstr ""
 
@@ -1840,8 +1830,7 @@ msgid "Quick cd"
 msgstr "Ātrs cd"
 
 msgid "Existing filename (filename symlink will point to):"
-msgstr ""
-"Eksistējošs faila nosaukums (faila nosaukums, uz kuru simbolsaite norādīs):"
+msgstr "Eksistējošs faila nosaukums (faila nosaukums, uz kuru simbolsaite norādīs):"
 
 msgid "Symbolic link filename:"
 msgstr "Simbolsaites faila nosaukums:"
@@ -2190,9 +2179,9 @@ msgstr ""
 msgid "FileOperation|Delete"
 msgstr ""
 
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "%o %f%n\"%s\"%m"
-msgstr "%o %f \"%s\"%m"
+msgstr ""
 
 #, no-c-format
 msgid "%o %d %f%m"
@@ -3230,8 +3219,7 @@ msgid "Do you really want to execute?"
 msgstr ""
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr ""
-"Lietotāja piedāvātais formāts izskatās nepareizs, atgriežamies pie noklusētā."
+msgstr "Lietotāja piedāvātais formāts izskatās nepareizs, atgriežamies pie noklusētā."
 
 msgid "&Add new"
 msgstr "&Pievienot jaunu"
@@ -3276,9 +3264,7 @@ msgstr "Atrast SUID un SGID programmas"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"Nevarēja atvērt failu %s, lai ierakstītu:\n"
-"%s\n"
+msgstr "Nevarēja atvērt failu %s, lai ierakstītu:\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3317,9 +3303,7 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"Nevar ierakstīt failā %s:\n"
-"%s\n"
+msgstr "Nevar ierakstīt failā %s:\n%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3343,9 +3327,7 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"Faila %s īpašnieks nav root vai jūs, vai arī tai ir visiem-rakstīt atļauja.\n"
-"Tā lietošana var kompromitēt jūsu drošību"
+msgstr "Faila %s īpašnieks nav root vai jūs, vai arī tai ir visiem-rakstīt atļauja.\nTā lietošana var kompromitēt jūsu drošību"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3406,15 +3388,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"Lūdzu nospied %s\n"
-"un tad gaidi līdz šis ziņojums pazūd.\n"
-"\n"
-"Tad nospied to vēlreiz, lai redzētu, vai parādās OK\n"
-"blakus šai pogai.\n"
-"\n"
-"Ja tu vēlies iziet, vienreiz nospied Escape taustiņu\n"
-"un uzgaidil."
+msgstr "Lūdzu nospied %s\nun tad gaidi līdz šis ziņojums pazūd.\n\nTad nospied to vēlreiz, lai redzētu, vai parādās OK\nblakus šai pogai.\n\nJa tu vēlies iziet, vienreiz nospied Escape taustiņu\nun uzgaidil."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3430,9 +3404,7 @@ msgstr "OK"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"Izskatās, ka visi tavi taustiņi\n"
-"jau strādā labi. Tas ir lieliski."
+msgstr "Izskatās, ka visi tavi taustiņi\njau strādā labi. Tas ir lieliski."
 
 msgid "&Discard"
 msgstr "&Atsaukt"
@@ -3440,9 +3412,7 @@ msgstr "&Atsaukt"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"Lieliski! Jums ir pilnīga termināļa datubāze!\n"
-"Visi jūsu taustiņi strādā labi."
+msgstr "Lieliski! Jums ir pilnīga termināļa datubāze!\nVisi jūsu taustiņi strādā labi."
 
 msgid ""
 "Press all the keys mentioned here. After you have done it, check\n"
@@ -3577,17 +3547,13 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"Nevarēja atvērt cpio arhīvu\n"
-"%s"
+msgstr "Nevarēja atvērt cpio arhīvu\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"Negaidītas cpio arhīva beigas\n"
-"%s"
+msgstr "Negaidītas cpio arhīva beigas\n%s"
 
 #, c-format
 msgid ""
@@ -3595,11 +3561,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"Nekonsekventas cietsaites\n"
-"%s\n"
-"iekš cpio archīva\n"
-"%s"
+msgstr "Nekonsekventas cietsaites\n%s\niekš cpio archīva\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3609,25 +3571,19 @@ msgstr "%s satur dubultus ierakstus! Izlaižu!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr ""
-"Samaitājusies cpio galvene iekš\n"
-"%s"
+msgstr "Samaitājusies cpio galvene iekš\n%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"Negaidītas faila beigas\n"
-"%s"
+msgstr "Negaidītas faila beigas\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"Nevar atvērt %s arhīvu\n"
-"%s"
+msgstr "Nevar atvērt %s arhīvu\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "Nepatstāvīgs extfs arhīvs"
@@ -3644,8 +3600,7 @@ msgid "fish: Waiting for initial line..."
 msgstr "fish: Gaidām sākotnējo līniju..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Piedodiet, mēs patreiz nevaram veikt ar paroli autorizētus savienojumus."
+msgstr "Piedodiet, mēs patreiz nevaram veikt ar paroli autorizētus savienojumus."
 
 #, c-format
 msgid "fish: Password is required for %s"
@@ -3805,17 +3760,13 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"Brīdinājums: Nepareiza rindiņa iekš %s:\n"
-"%s\n"
+msgstr "Brīdinājums: Nepareiza rindiņa iekš %s:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"Brīdinājums: Nepareizs karodziņš %c iekš %s:\n"
-"%s\n"
+msgstr "Brīdinājums: Nepareizs karodziņš %c iekš %s:\n%s\n"
 
 #, c-format
 msgid "sftp: an error occurred while reading %s: %s"
@@ -3904,9 +3855,7 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"Nevar atvērt tar arhīvu\n"
-"%s"
+msgstr "Nevar atvērt tar arhīvu\n%s"
 
 msgid "Inconsistent tar archive"
 msgstr "Neatbilstīgs tar arhīvs"
@@ -4097,15 +4046,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "&Select"
-#~ msgstr "a&tlasīt"
-
-#~ msgid "Insert key"
-#~ msgstr "Insert taustiņš"
-
-#~ msgid "Delete key"
-#~ msgstr "Delete taustiņš"
-
-#~ msgid "Slash on keypad"
-#~ msgstr "/ (Slash) uz klaviatūras"

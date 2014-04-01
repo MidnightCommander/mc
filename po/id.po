@@ -1,24 +1,24 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Andika Triwidada <andika@gmail.com>, 2011-2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-28 13:29+0400\n"
-"PO-Revision-Date: 2013-11-20 12:28+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Indonesian (http://www.transifex.com/projects/p/mc/language/"
-"id/)\n"
-"Language: id\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
+"PO-Revision-Date: 2014-02-19 09:12+0000\n"
+"Last-Translator: aborodin <aborodin@vmail.ru>\n"
+"Language-Team: Indonesian (http://www.transifex.com/projects/p/mc/language/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: id\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+# "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
 msgstr "Peringatan: tak bisa memuat daftar codepage"
 
@@ -54,10 +54,7 @@ msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
-msgstr ""
-"Berkas \"%s\" sedang disunting.\n"
-"Pengguna: %s\n"
-"ID Proses: %d"
+msgstr "Berkas \"%s\" sedang disunting.\nPengguna: %s\nID Proses: %d"
 
 msgid "File locked"
 msgstr "Berkas dikunci"
@@ -125,17 +122,13 @@ msgstr ""
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Tak bisa memuat skin '%s'.\n"
-"Skin bawaan telah dimuat."
+msgstr "Tak bisa memuat skin '%s'.\nSkin bawaan telah dimuat."
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Tak bisa mengurai skin '%s'.\n"
-"Skin bawaan telah dimuat."
+msgstr "Tak bisa mengurai skin '%s'.\nSkin bawaan telah dimuat."
 
 #, c-format
 msgid ""
@@ -144,9 +137,8 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
-#, fuzzy
 msgid "Escape"
-msgstr "Tombol escape"
+msgstr ""
 
 msgid "Function key 1"
 msgstr "Tombol fungsi 1"
@@ -214,52 +206,41 @@ msgstr ""
 msgid "BackTab/S-tab"
 msgstr ""
 
-#, fuzzy
 msgid "Backspace"
-msgstr "Tombol backspace"
+msgstr ""
 
-#, fuzzy
 msgid "Up arrow"
-msgstr "Tombol panah atas"
+msgstr ""
 
-#, fuzzy
 msgid "Down arrow"
-msgstr "Tombol panah bawah"
+msgstr ""
 
-#, fuzzy
 msgid "Left arrow"
-msgstr "Tombol panah kiri"
+msgstr ""
 
-#, fuzzy
 msgid "Right arrow"
-msgstr "Tombol panah kanan"
+msgstr ""
 
-#, fuzzy
 msgid "Insert"
-msgstr "Tombol insert"
+msgstr ""
 
-#, fuzzy
 msgid "Delete"
-msgstr "Tombol delete"
+msgstr ""
 
-#, fuzzy
 msgid "Home"
-msgstr "Tombol home"
+msgstr ""
 
 msgid "End key"
 msgstr "Tombol end"
 
-#, fuzzy
 msgid "Page Up"
-msgstr "Tombol Page Up"
+msgstr ""
 
-#, fuzzy
 msgid "Page Down"
-msgstr "Tombol Page Down"
+msgstr ""
 
-#, fuzzy
 msgid "/ on keypad"
-msgstr "+ pada keypad"
+msgstr ""
 
 msgid "* on keypad"
 msgstr "* pada keypad"
@@ -443,9 +424,7 @@ msgstr ""
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"Ukuran layar %dx%d tak didukung.\n"
-"Periksalah variabel lingkungan TERM.\n"
+msgstr "Ukuran layar %dx%d tak didukung.\nPeriksalah variabel lingkungan TERM.\n"
 
 msgid "Warning"
 msgstr "Peringatan"
@@ -910,7 +889,7 @@ msgstr ""
 msgid "Cannot open file for writing: %s"
 msgstr ""
 
-msgid "The file you are saving does not end with a newline."
+msgid "The file you are saving is not finished with a newline"
 msgstr ""
 
 msgid "C&ontinue"
@@ -1770,7 +1749,8 @@ msgstr ""
 msgid "Sort order"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 msgid "Confirmation|&Delete"
 msgstr ""
 
@@ -1811,6 +1791,9 @@ msgid "Display bits"
 msgstr ""
 
 msgid "Input / display codepage:"
+msgstr ""
+
+msgid "&Select"
 msgstr ""
 
 msgid "Directory tree"
@@ -3554,17 +3537,13 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"Tak bisa membuka arsip cpio\n"
-"%s"
+msgstr "Tak bisa membuka arsip cpio\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"Akhir dini dari arsip cpio\n"
-"%s"
+msgstr "Akhir dini dari arsip cpio\n%s"
 
 #, c-format
 msgid ""
@@ -4057,6 +4036,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Slash on keypad"
-#~ msgstr "Garis miring pada keypad"

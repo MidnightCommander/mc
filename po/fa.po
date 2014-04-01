@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # EAAL <aryaz.egh@gmail.com>, 2012
 # monta2009 <monta2009@gmail.com>, 2012
@@ -11,17 +11,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-28 13:29+0400\n"
-"PO-Revision-Date: 2013-11-20 12:28+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Persian (http://www.transifex.com/projects/p/mc/language/"
-"fa/)\n"
-"Language: fa\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
+"PO-Revision-Date: 2014-02-19 09:12+0000\n"
+"Last-Translator: aborodin <aborodin@vmail.ru>\n"
+"Language-Team: Persian (http://www.transifex.com/projects/p/mc/language/fa/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fa\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+# "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
 msgstr ""
 
@@ -140,9 +140,8 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
-#, fuzzy
 msgid "Escape"
-msgstr "کلید گریز"
+msgstr ""
 
 msgid "Function key 1"
 msgstr "کلید تابع ۱"
@@ -210,48 +209,38 @@ msgstr "تکمیل/M-tab"
 msgid "BackTab/S-tab"
 msgstr ""
 
-#, fuzzy
 msgid "Backspace"
-msgstr "کلید پس‌بر"
+msgstr ""
 
-#, fuzzy
 msgid "Up arrow"
-msgstr "کلید جهت بالا"
+msgstr ""
 
-#, fuzzy
 msgid "Down arrow"
-msgstr "کلید جهت پایین"
+msgstr ""
 
-#, fuzzy
 msgid "Left arrow"
-msgstr "کلید جهت چپ"
+msgstr ""
 
-#, fuzzy
 msgid "Right arrow"
-msgstr "کلید جهت راست"
+msgstr ""
 
-#, fuzzy
 msgid "Insert"
-msgstr "درج"
+msgstr ""
 
-#, fuzzy
 msgid "Delete"
-msgstr "حذف"
+msgstr ""
 
-#, fuzzy
 msgid "Home"
-msgstr "کلید خانه"
+msgstr ""
 
 msgid "End key"
 msgstr "کلید پایان"
 
-#, fuzzy
 msgid "Page Up"
-msgstr "کلید صفحه‌ی بالا"
+msgstr ""
 
-#, fuzzy
 msgid "Page Down"
-msgstr "کلید صفحه‌ی پایین"
+msgstr ""
 
 msgid "/ on keypad"
 msgstr ""
@@ -903,8 +892,7 @@ msgstr ""
 msgid "Cannot open file for writing: %s"
 msgstr "امکان باز کردن فایل برای نوشتن وجود ندارد: %s"
 
-#, fuzzy
-msgid "The file you are saving does not end with a newline."
+msgid "The file you are saving is not finished with a newline"
 msgstr "فایلی که در حال ذخیره‌اش هستید، با خط خالی به پایان نرسیده است"
 
 msgid "C&ontinue"
@@ -1764,7 +1752,8 @@ msgstr ""
 msgid "Sort order"
 msgstr "ترتیب مرتب‌سازی"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 msgid "Confirmation|&Delete"
 msgstr ""
 
@@ -1805,6 +1794,9 @@ msgid "Display bits"
 msgstr "بیت‌های نمایش"
 
 msgid "Input / display codepage:"
+msgstr ""
+
+msgid "&Select"
 msgstr ""
 
 msgid "Directory tree"
@@ -3868,9 +3860,7 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive."
-msgstr ""
-"%s\n"
-"یک آرشیو tar به نظر نمی‌رسد."
+msgstr "%s\nیک آرشیو tar به نظر نمی‌رسد."
 
 msgid "undelfs: error"
 msgstr ""
@@ -4049,12 +4039,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Insert key"
-#~ msgstr "کلید درج"
-
-#~ msgid "Delete key"
-#~ msgstr "کلید حذف"
-
-#~ msgid "%s?"
-#~ msgstr "%s؟"

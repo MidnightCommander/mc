@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Dušan Lago <dusan.lago@gmail.com>, 2011
 # Jose Riha <jose1711@gmail.com>, 2012
@@ -11,16 +11,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-28 13:29+0400\n"
-"PO-Revision-Date: 2013-11-20 12:28+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2014-02-11 15:14+0400\n"
+"PO-Revision-Date: 2014-02-19 09:12+0000\n"
+"Last-Translator: aborodin <aborodin@vmail.ru>\n"
 "Language-Team: Slovak (http://www.transifex.com/projects/p/mc/language/sk/)\n"
-"Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: sk\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
+# "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
 msgstr "Upozornenie: nie je možné nahrať zoznam znakových sád"
 
@@ -56,10 +57,7 @@ msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
-msgstr ""
-"Súbor \"%s\" je už editovaný.\n"
-"Používateľ: %s\n"
-"ID procesu: %d"
+msgstr "Súbor \"%s\" je už editovaný.\nPoužívateľ: %s\nID procesu: %d"
 
 msgid "File locked"
 msgstr "Súbor zamknutý"
@@ -102,8 +100,7 @@ msgid "Not implemented yet"
 msgstr "Zatiaľ neimplementované"
 
 msgid "Num of replace tokens not equal to num of found tokens"
-msgstr ""
-"Počet tokenov určených k nahradeniu nezodpovedá počtu nájdených tokenov"
+msgstr "Počet tokenov určených k nahradeniu nezodpovedá počtu nájdených tokenov"
 
 #, c-format
 msgid "Invalid token number %d"
@@ -128,17 +125,13 @@ msgstr ""
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Nepodarilo sa načítať tému vzhľadu „%s“.\n"
-"Bola načítaná predvolená téma"
+msgstr "Nepodarilo sa načítať tému vzhľadu „%s“.\nBola načítaná predvolená téma"
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Nepodarilo sa spracovať tému vzhľadu „%s“.\n"
-"Bola načítaná predvolená téma"
+msgstr "Nepodarilo sa spracovať tému vzhľadu „%s“.\nBola načítaná predvolená téma"
 
 #, c-format
 msgid ""
@@ -147,9 +140,8 @@ msgid ""
 "Default skin has been loaded"
 msgstr ""
 
-#, fuzzy
 msgid "Escape"
-msgstr "Klávesa escape"
+msgstr ""
 
 msgid "Function key 1"
 msgstr "Funkčný klá. 1"
@@ -217,52 +209,41 @@ msgstr "Doplnenie/M-tab"
 msgid "BackTab/S-tab"
 msgstr ""
 
-#, fuzzy
 msgid "Backspace"
-msgstr "Kláv. Backspace"
+msgstr ""
 
-#, fuzzy
 msgid "Up arrow"
-msgstr "Šípka hore"
+msgstr ""
 
-#, fuzzy
 msgid "Down arrow"
-msgstr "Šípka dole"
+msgstr ""
 
-#, fuzzy
 msgid "Left arrow"
-msgstr "Šípka vľavo"
+msgstr ""
 
-#, fuzzy
 msgid "Right arrow"
-msgstr "Šípka vpravo"
+msgstr ""
 
-#, fuzzy
 msgid "Insert"
-msgstr "v&Ložiť"
+msgstr ""
 
-#, fuzzy
 msgid "Delete"
-msgstr "&Zmazať"
+msgstr ""
 
-#, fuzzy
 msgid "Home"
-msgstr "Klávesa Home"
+msgstr ""
 
 msgid "End key"
 msgstr "Klávesa End"
 
-#, fuzzy
 msgid "Page Up"
-msgstr "Kláv. Page Up"
+msgstr ""
 
-#, fuzzy
 msgid "Page Down"
-msgstr "Kláv. Page Down"
+msgstr ""
 
-#, fuzzy
 msgid "/ on keypad"
-msgstr "+ na num. kláves."
+msgstr ""
 
 msgid "* on keypad"
 msgstr "* na num. kláves."
@@ -446,9 +427,7 @@ msgstr "Premenlivé prostredie TERM je vymazané!\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"Veľkosť obrazovky %dx%d nie je podporovaná.\n"
-"Skontrolujte premennú prostredia TERM.\n"
+msgstr "Veľkosť obrazovky %dx%d nie je podporovaná.\nSkontrolujte premennú prostredia TERM.\n"
 
 msgid "Warning"
 msgstr "Varovanie"
@@ -913,8 +892,7 @@ msgstr ""
 msgid "Cannot open file for writing: %s"
 msgstr ""
 
-#, fuzzy
-msgid "The file you are saving does not end with a newline."
+msgid "The file you are saving is not finished with a newline"
 msgstr "Súbor, ktorý ukladáte nie je ukončený znakom nového riadka"
 
 msgid "C&ontinue"
@@ -1774,7 +1752,8 @@ msgstr "o&Brátený"
 msgid "Sort order"
 msgstr "Poradie triedenia"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 msgid "Confirmation|&Delete"
 msgstr ""
 
@@ -1816,6 +1795,9 @@ msgstr ""
 
 msgid "Input / display codepage:"
 msgstr "Vstupná/Zobrazovacia znaková sada:"
+
+msgid "&Select"
+msgstr "&Vybrať"
 
 msgid "Directory tree"
 msgstr ""
@@ -2200,9 +2182,9 @@ msgstr "FileOperation|Presunúť"
 msgid "FileOperation|Delete"
 msgstr "FileOperation|Zmazať"
 
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "%o %f%n\"%s\"%m"
-msgstr "%o %f \"%s\"%m"
+msgstr ""
 
 #, no-c-format
 msgid "%o %d %f%m"
@@ -3056,9 +3038,8 @@ msgstr ""
 msgid "C&onfirmation..."
 msgstr "P&Otvrdenie..."
 
-#, fuzzy
 msgid "&Appearance..."
-msgstr "&Nahradiť..."
+msgstr ""
 
 msgid "&Display bits..."
 msgstr "&Zobrazené bity..."
@@ -3286,9 +3267,7 @@ msgstr "Nájsť SUID a SGID programy"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"Nepodarilo sa otvoriť súbor %s pre zápis:\n"
-"%s\n"
+msgstr "Nepodarilo sa otvoriť súbor %s pre zápis:\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3327,9 +3306,7 @@ msgstr "ButtonBar|OdsAdr"
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"Nepodarilo sa zapísať do súboru %s:\n"
-"%s\n"
+msgstr "Nepodarilo sa zapísať do súboru %s:\n%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3353,9 +3330,7 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"Súbor %s nevlastní root ani vy alebo nie je zapisovateľný pre ostatných.\n"
-"Ak ho použijete, môže to kompromitovať vašu bezpečnosť"
+msgstr "Súbor %s nevlastní root ani vy alebo nie je zapisovateľný pre ostatných.\nAk ho použijete, môže to kompromitovať vašu bezpečnosť"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3416,15 +3391,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"Prosím stlačte %s\n"
-"a potom čakajte pokiaľ toto hlásenie zmizne.\n"
-"\n"
-"Potom to stlačte znova, ak uvidíte Áno objaví sa\n"
-"vedľa neho jeho tlačidlo.\n"
-"\n"
-"Ak chcete skončiť, stlačte jediný kláves Esc\n"
-"a taktiež počkajte."
+msgstr "Prosím stlačte %s\na potom čakajte pokiaľ toto hlásenie zmizne.\n\nPotom to stlačte znova, ak uvidíte Áno objaví sa\nvedľa neho jeho tlačidlo.\n\nAk chcete skončiť, stlačte jediný kláves Esc\na taktiež počkajte."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3440,9 +3407,7 @@ msgstr "Áno"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"Vyzerá to, že všetky vaše klávesy už\n"
-"pracujú dobre. To je skvelé."
+msgstr "Vyzerá to, že všetky vaše klávesy už\npracujú dobre. To je skvelé."
 
 msgid "&Discard"
 msgstr "&Vymazať"
@@ -3450,9 +3415,7 @@ msgstr "&Vymazať"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"Výborne! Máte kompletnú terminálovú databázu!\n"
-"Všetky vaše klávesy pracujú správne."
+msgstr "Výborne! Máte kompletnú terminálovú databázu!\nVšetky vaše klávesy pracujú správne."
 
 msgid ""
 "Press all the keys mentioned here. After you have done it, check\n"
@@ -3492,18 +3455,13 @@ msgstr "%b %e %H:%M"
 msgid ""
 "Cannot save file %s:\n"
 "%s"
-msgstr ""
-"Nebolo možné uložiť súbor %s:\n"
-"%s "
+msgstr "Nebolo možné uložiť súbor %s:\n%s "
 
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
 "Subshell support will be disabled."
-msgstr ""
-"GNU Midnight Commander už na tomto\n"
-"termináli beží.\n"
-"Podpora subshell bude vypnutá."
+msgstr "GNU Midnight Commander už na tomto\ntermináli beží.\nPodpora subshell bude vypnutá."
 
 #, c-format
 msgid "Cannot open named pipe %s\n"
@@ -3592,17 +3550,13 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"Nemohol som otvoriť cpio archív\n"
-"%s"
+msgstr "Nemohol som otvoriť cpio archív\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"Predčasný koniec cpio archívu\n"
-"%s"
+msgstr "Predčasný koniec cpio archívu\n%s"
 
 #, c-format
 msgid ""
@@ -3610,11 +3564,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"Nekonzistentné pevné odkazy\n"
-"%s\n"
-"v cpio archíve\n"
-"%s"
+msgstr "Nekonzistentné pevné odkazy\n%s\nv cpio archíve\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3624,25 +3574,19 @@ msgstr "%s obsahuje duplicitné položky! Preskakujem!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr ""
-"Poškodená hlavička cpio v\n"
-"%s"
+msgstr "Poškodená hlavička cpio v\n%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"Neočakávaný koniec súboru\n"
-"%s"
+msgstr "Neočakávaný koniec súboru\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"Nebolo možné otvoriť archív %s\n"
-"%s"
+msgstr "Nebolo možné otvoriť archív %s\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "Neúplný extfs archív"
@@ -3809,9 +3753,7 @@ msgstr "ftpfs: ukladám súbor"
 msgid ""
 "~/.netrc file has incorrect mode\n"
 "Remove password or correct mode"
-msgstr ""
-"súbor ~/.netrc nemá správne prístupové práva\n"
-"Odstráňte heslo alebo zmeňte práva"
+msgstr "súbor ~/.netrc nemá správne prístupové práva\nOdstráňte heslo alebo zmeňte práva"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
@@ -3821,17 +3763,13 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"Upozornenie: neplatný riadok v %s:\n"
-"%s\n"
+msgstr "Upozornenie: neplatný riadok v %s:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"Upozornenie: Neplatný príznak %c v %s:\n"
-"%s\n"
+msgstr "Upozornenie: Neplatný príznak %c v %s:\n%s\n"
 
 #, c-format
 msgid "sftp: an error occurred while reading %s: %s"
@@ -3920,9 +3858,7 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"Nie je možné otvoriť tar archív\n"
-"%s"
+msgstr "Nie je možné otvoriť tar archív\n%s"
 
 msgid "Inconsistent tar archive"
 msgstr "Poškodený archív tar"
@@ -3934,9 +3870,7 @@ msgstr "Neočakávaný koniec archívneho súboru"
 msgid ""
 "%s\n"
 "doesn't look like a tar archive."
-msgstr ""
-"%s\n"
-"nevyzerá ako archív .tar."
+msgstr "%s\nnevyzerá ako archív .tar."
 
 msgid "undelfs: error"
 msgstr "undelfs: chyba"
@@ -4115,18 +4049,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "&Select"
-#~ msgstr "&Vybrať"
-
-#~ msgid "Insert key"
-#~ msgstr "Klávesa Insert"
-
-#~ msgid "Delete key"
-#~ msgstr "Klávesa Delete"
-
-#~ msgid "Slash on keypad"
-#~ msgstr "Lomka na kláves."
-
-#~ msgid "%s?"
-#~ msgstr "%s?"
