@@ -1,3 +1,59 @@
+Version 4.8.12
+
+- Core
+
+  * Speed up of file find (#2290)
+  * If cwd is a symlink it is kept at startup (#3093)
+  * Improve support of Zsh (#3121, #3124, #3125, #3177)
+  * Launch external editor/viewer without passing line number (#3117)
+  * Exit without confirmation by default (#3132)
+  * Simple user-friendly skin selector (#2165, #3178)
+  * Use Joliet and RockRidge in ISO9660 image view action (#3187)
+
+- VFS
+
+  * Use .zip extension as preferred way to recognize ZIP archives (#2857)
+
+- Editor
+
+  * Configurable selection reset on CK_Store (#3111)
+
+- Misc
+
+  * Code cleanup (#3113, #3151)
+  * Adjust script permissions to installed ones (#2274)
+  * Fix name of FSF in add source files (#3167)
+  * Skin cleanups (#3180, #3184)
+  * Do not consider "String not found" message as error (#3179)
+
+- Fixes
+
+  * Broken build with NCurses (#3114)
+  * Incorrect tilde expansion in copy/rename/move dialog (#3131)
+  * Advanced chown: Escape on user list accepts value (#3150)
+  * Toggling hidden files using mouse doesn't update the other panel (#3156)
+  * Question mark in delete confirmation is on its own line (#3123)
+  * Popup dialogs wander upwards upon resize (#3173)
+  * Keypad '*' doesn't work with numlock off (#3133)
+  * Some inconsistencies in "Learn keys" UI (#3134)
+  * Unconventional behavior of "Display bits" dialog (#3152)
+  * Shift-Fn keys don't work in 256-color mode of tmux (#2978)
+  * mcedit: format paragraph produces inconsistent wrapping (#3119)
+  * mcedit: file out-of-date check on saving is botched (#3142)
+  * mcedit: 1st line is shifted after paragraph format (#1666)
+  * mcedit: trailing newline check applied too early when exiting (#3140)
+  * Inconsistency of the arrow's direction in the panel header line across skins (#3157)
+  * Possible segfault while passing messages to widgets (#3116)
+  * Possible segfault when freeing a VFS (#3116)
+  * Segfault in cpio VFS while reading corrupted RPM (#3116)
+  * Segfault in sftpfs VFS when trying to view a file (#3176)
+  * Incorrect handling of filenames with unrar v5 (#3073)
+  * FISH VFS: remote panel confused by filenames with '%' (#2983)
+  * iso9660: xorriso shows only one depth (#3122)
+  * Nicedark skin looks bad on black-on-white terminals (#3154)
+  * Incorrect definition of "topmiddle" and "bottommiddle" characters (#3183)
+
+
 Version 4.8.11
 
 - Core
