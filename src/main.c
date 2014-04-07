@@ -162,7 +162,7 @@ sigchld_handler_no_subshell (int sig)
 #ifdef __linux__
     int pid, status;
 
-    if (!mc_global.tty.console_flag != '\0')
+    if (mc_global.tty.console_flag == '\0')
         return;
 
     /* COMMENT: if it were true that after the call to handle_console(..INIT)
@@ -176,7 +176,6 @@ sigchld_handler_no_subshell (int sig)
 
     if (pid == cons_saver_pid)
     {
-
         if (WIFSTOPPED (status))
         {
             /* Someone has stopped cons.saver - restart it */
