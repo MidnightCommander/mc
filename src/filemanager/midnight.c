@@ -1007,7 +1007,16 @@ mc_maybe_editor_or_viewer (void)
         }
 #ifdef USE_DIFF_VIEW
     case MC_RUN_DIFFVIEWER:
-        ret = dview_diff_cmd (mc_run_param0, mc_run_param1);
+        {
+            ev_diffviewer_run_t event_info;
+
+            event_info.run_mode = mc_global.mc_run_mode;
+            event_info.data.file.first = mc_run_param0;
+            event_info.data.file.second = mc_run_param1;
+
+            mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "run", &event_info);
+            ret = event_info.ret_value;
+        }
         break;
 #endif /* USE_DIFF_VIEW */
     default:
@@ -1736,12 +1745,16 @@ quiet_quit_cmd (void)
 
 /** Run the main dialog that occupies the whole screen */
 gboolean
-do_nc (void)
+do_nc (GError ** error)
 {
     gboolean ret;
 
 #ifdef USE_INTERNAL_EDIT
     edit_stack_init ();
+#endif
+
+#ifdef USE_DIFF_VIEW
+    mc_diffviewer_init (error);
 #endif
 
     midnight_dlg = dlg_create (FALSE, 0, 0, LINES, COLS, dialog_colors, midnight_callback,

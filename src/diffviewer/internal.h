@@ -7,12 +7,19 @@
 #include "lib/tty/color.h"
 #include "lib/widget.h"
 
+#include "execute.h"
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 typedef int (*DFUNC) (void *ctx, int ch, int line, off_t off, size_t sz, const char *str);
 typedef int PAIR[2];
 
 #define error_dialog(h, s) query_dialog(h, s, D_ERROR, 1, _("&Dismiss"))
+
+#define ADD_CH '+'
+#define DEL_CH '-'
+#define CHG_CH '*'
+#define EQU_CH ' '
 
 /*** enums ***************************************************************************************/
 
@@ -27,7 +34,9 @@ typedef enum
 {
     DIFF_LEFT = 0,
     DIFF_RIGHT = 1,
-    DIFF_COUNT = 2
+    DIFF_COUNT = 2,
+    DIFF_CURRENT = 3,
+    DIFF_OTHER = 4
 } diff_place_t;
 
 typedef enum
@@ -39,23 +48,6 @@ typedef enum
 } DiffState;
 
 /*** structures declarations (and typedefs of structures)*****************************************/
-
-typedef struct
-{
-    int fd;
-    int pos;
-    int len;
-    char *buf;
-    int flags;
-    void *data;
-} FBUF;
-
-typedef struct
-{
-    int a[2][2];
-    int cmd;
-} DIFFCMD;
-
 
 typedef struct
 {
@@ -146,8 +138,32 @@ typedef struct WDiff
 
 /*** declarations of public functions ************************************************************/
 
+void mc_diffviewer_init_events (GError ** error);
+
 /* search.c */
-void dview_search_cmd (WDiff * dview);
-void dview_continue_search_cmd (WDiff * dview);
+gboolean mc_diffviewer_cmd_search (const gchar * event_group_name, const gchar * event_name,
+                                   gpointer init_data, gpointer data);
+gboolean mc_diffviewer_cmd_continue_search (const gchar * event_group_name,
+                                            const gchar * event_name, gpointer init_data,
+                                            gpointer data);
+
+
+int mc_diffviewer_calc_nwidth (const GArray ** const a);
+void mc_diffviewer_compute_split (WDiff * dview, int i);
+int mc_diffviewer_get_line_numbers (const GArray * a, size_t pos, int *linenum, int *lineofs);
+void mc_diffviewer_reread (WDiff * dview);
+void mc_diffviewer_update (WDiff * dview);
+
+void mc_diffviewer_destroy_hdiff (WDiff * dview);
+void mc_diffviewer_deinit (WDiff * dview);
+
+int mc_diffviewer_redo_diff (WDiff * dview);
+gboolean mc_diffviewer_cmd_merge (const gchar * event_group_name, const gchar * event_name,
+                                  gpointer init_data, gpointer data);
+
+gboolean mc_diffviewer_cmd_run (const gchar * event_group_name, const gchar * event_name,
+                                gpointer init_data, gpointer data);
+
+/*** inline functions ****************************************************************************/
 
 #endif /* MC__DIFFVIEW_INTERNAL_H */

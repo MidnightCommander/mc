@@ -236,18 +236,26 @@ mcdiffview_do_search (WDiff * dview)
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-dview_search_cmd (WDiff * dview)
+gboolean
+mc_diffviewer_cmd_search (const gchar * event_group_name, const gchar * event_name,
+                          gpointer init_data, gpointer data)
 {
+    WDiff *dview = (WDiff *) data;
+
+    (void) event_group_name;
+    (void) event_name;
+    (void) init_data;
+
     if (dview->dsrc != DATA_SRC_MEM)
     {
         error_dialog (_("Search"), _("Search is disabled"));
-        return;
+        return FALSE;
     }
 
     if (!mcdiffview_dialog_search (dview))
-        return;
+        return TRUE;
 
     mc_search_free (dview->search.handle);
 #ifdef HAVE_CHARSET
@@ -257,7 +265,7 @@ dview_search_cmd (WDiff * dview)
 #endif
 
     if (dview->search.handle == NULL)
-        return;
+        return TRUE;
 
     dview->search.handle->search_type = mcdiffview_search_options.type;
 #ifdef HAVE_CHARSET
@@ -267,19 +275,27 @@ dview_search_cmd (WDiff * dview)
     dview->search.handle->whole_words = mcdiffview_search_options.whole_words;
 
     mcdiffview_do_search (dview);
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-dview_continue_search_cmd (WDiff * dview)
+gboolean
+mc_diffviewer_cmd_continue_search (const gchar * event_group_name, const gchar * event_name,
+                                   gpointer init_data, gpointer data)
 {
+    WDiff *dview = (WDiff *) data;
+
     if (dview->dsrc != DATA_SRC_MEM)
         error_dialog (_("Search"), _("Search is disabled"));
     else if (dview->search.handle == NULL)
-        dview_search_cmd (dview);
+        return mc_diffviewer_cmd_search (event_group_name, event_name, init_data, data);
     else
         mcdiffview_do_search (dview);
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
