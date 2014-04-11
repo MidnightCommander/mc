@@ -22,6 +22,9 @@
 # yellow
 #
 
+file ..\*\\.(coffee|Coffee|COFFEE)$ JavaScript\sProgram
+include coffee.syntax
+
 file [Ss]yntax$ Syntax\sHighlighting\sdefinitions ^#\ssyntax\srules\sversion\s
 include syntax.syntax
 
