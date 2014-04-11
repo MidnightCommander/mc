@@ -94,17 +94,24 @@ mc_event_deinit (GError ** mcerror)
 gboolean
 mc_event_mass_add (event_init_t * events, GError ** mcerror)
 {
+    size_t array_group_index;
     size_t array_index;
 
     mc_return_val_if_error (mcerror, FALSE);
 
-    for (array_index = 0; events[array_index].event_group_name != NULL; array_index++)
+    for (array_group_index = 0; events[array_group_index].group_name != NULL; array_group_index++)
     {
-        if (!mc_event_add (events[array_index].event_group_name,
-                           events[array_index].event_name,
-                           events[array_index].cb, events[array_index].init_data, mcerror))
+        const char *group_name = events[array_group_index].group_name;
+
+        for (array_index = 0; events[array_group_index].events[array_index].name != NULL;
+             array_index++)
         {
-            return FALSE;
+            const char *name = events[array_group_index].events[array_index].name;
+            mc_event_callback_func_t cb = events[array_group_index].events[array_index].cb;
+            void *init_data = events[array_group_index].events[array_index].init_data;
+
+            if (!mc_event_add (group_name, name, cb, init_data, mcerror))
+                return FALSE;
         }
     }
     return TRUE;

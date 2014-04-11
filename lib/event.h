@@ -13,10 +13,15 @@ typedef gboolean (*mc_event_callback_func_t) (const gchar *, const gchar *, gpoi
 
 typedef struct
 {
-    const char *event_group_name;
-    const char *event_name;
+    const char *name;
     mc_event_callback_func_t cb;
     gpointer init_data;
+} event_init_group_t;
+
+typedef struct
+{
+    const char *group_name;
+    event_init_group_t *events;
 } event_init_t;
 
 /*** global variables defined in .c file *********************************************************/

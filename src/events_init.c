@@ -58,22 +58,29 @@ gboolean
 events_init (GError ** mcerror)
 {
     /* *INDENT-OFF* */
-    event_init_t standard_events[] =
+    event_init_group_t core_group_events[] =
     {
-        {MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", clipboard_file_to_ext_clip, NULL},
-        {MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", clipboard_file_from_ext_clip, NULL},
-        {MCEVENT_GROUP_CORE, "clipboard_text_to_file", clipboard_text_to_file, NULL},
-        {MCEVENT_GROUP_CORE, "clipboard_text_from_file", clipboard_text_from_file, NULL},
-
-        {MCEVENT_GROUP_CORE, "help", help_interactive_display, NULL},
-        {MCEVENT_GROUP_CORE, "suspend", execute_suspend, NULL},
+        {"clipboard_file_to_ext_clip", clipboard_file_to_ext_clip, NULL},
+        {"clipboard_file_from_ext_clip", clipboard_file_from_ext_clip, NULL},
+        {"clipboard_text_to_file", clipboard_text_to_file, NULL},
+        {"clipboard_text_from_file", clipboard_text_from_file, NULL},
+        {"help", help_interactive_display, NULL},
+        {"suspend", execute_suspend, NULL},
 
 #ifdef ENABLE_BACKGROUND
-        {MCEVENT_GROUP_CORE, "background_parent_call", background_parent_call, NULL},
-        {MCEVENT_GROUP_CORE, "background_parent_call_string", background_parent_call_string, NULL},
+        {"background_parent_call", background_parent_call, NULL},
+        {"background_parent_call_string", background_parent_call_string, NULL},
 #endif /* ENABLE_BACKGROUND */
 
-        {NULL, NULL, NULL, NULL}
+        {NULL, NULL, NULL}
+    };
+    /* *INDENT-ON* */
+
+    /* *INDENT-OFF* */
+    event_init_t standard_events[] =
+    {
+        {MCEVENT_GROUP_CORE, core_group_events},
+        {NULL, NULL}
     };
     /* *INDENT-ON* */
 
