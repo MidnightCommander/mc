@@ -1407,14 +1407,12 @@ directory_history_add (WPanel * panel, const vfs_path_t * vpath)
 
 /* "history_load" event handler */
 static gboolean
-panel_load_history (const gchar * event_group_name, const gchar * event_name,
-                    gpointer init_data, gpointer data)
+panel_load_history (event_info_t * event_info, gpointer data, GError ** error)
 {
-    WPanel *p = PANEL (init_data);
+    WPanel *p = PANEL (event_info->init_data);
     ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
 
-    (void) event_group_name;
-    (void) event_name;
+    (void) error;
 
     if (ev->receiver == NULL || ev->receiver == WIDGET (p))
     {
@@ -1433,13 +1431,11 @@ panel_load_history (const gchar * event_group_name, const gchar * event_name,
 
 /* "history_save" event handler */
 static gboolean
-panel_save_history (const gchar * event_group_name, const gchar * event_name,
-                    gpointer init_data, gpointer data)
+panel_save_history (event_info_t * event_info, gpointer data, GError ** error)
 {
-    WPanel *p = PANEL (init_data);
+    WPanel *p = PANEL (event_info->init_data);
 
-    (void) event_group_name;
-    (void) event_name;
+    (void) error;
 
     if (p->dir_history != NULL)
     {
@@ -4038,13 +4034,11 @@ do_try_to_select (WPanel * panel, const char *name)
 
 /* event callback */
 static gboolean
-event_update_panels (const gchar * event_group_name, const gchar * event_name,
-                     gpointer init_data, gpointer data)
+event_update_panels (event_info_t * event_info, gpointer data, GError ** error)
 {
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
     (void) data;
+    (void) error;
 
     update_panels (UP_RELOAD, UP_KEEPSEL);
 
@@ -4055,17 +4049,15 @@ event_update_panels (const gchar * event_group_name, const gchar * event_name,
 
 /* event callback */
 static gboolean
-panel_save_current_file_to_clip_file (const gchar * event_group_name, const gchar * event_name,
-                                      gpointer init_data, gpointer data)
+panel_save_current_file_to_clip_file (event_info_t * event_info, gpointer data, GError ** error)
 {
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
     (void) data;
+    (void) error;
 
     if (current_panel->marked == 0)
         mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file",
-                        (gpointer) selection (current_panel)->fname);
+                        (gpointer) selection (current_panel)->fname, error);
     else
     {
         int i;
@@ -4092,7 +4084,7 @@ panel_save_current_file_to_clip_file (const gchar * event_group_name, const gcha
                 }
             }
 
-        mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file", (gpointer) flist);
+        mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file", (gpointer) flist, error);
         g_free (flist);
     }
     return TRUE;

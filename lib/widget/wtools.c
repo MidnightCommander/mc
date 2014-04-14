@@ -242,7 +242,7 @@ wtools_parent_call (void *routine, gpointer ctx, int argc, ...)
     event_data.ctx = ctx;
     event_data.argc = argc;
     va_start (event_data.ap, argc);
-    mc_event_raise (MCEVENT_GROUP_CORE, "background_parent_call", (gpointer) & event_data);
+    mc_event_raise (MCEVENT_GROUP_CORE, "background_parent_call", (gpointer) & event_data, NULL);
     va_end (event_data.ap);
     return event_data.ret.i;
 }
@@ -257,7 +257,8 @@ wtools_parent_call_string (void *routine, int argc, ...)
     event_data.routine = routine;
     event_data.argc = argc;
     va_start (event_data.ap, argc);
-    mc_event_raise (MCEVENT_GROUP_CORE, "background_parent_call_string", (gpointer) & event_data);
+    mc_event_raise (MCEVENT_GROUP_CORE, "background_parent_call_string", (gpointer) & event_data,
+                    NULL);
     va_end (event_data.ap);
     return event_data.ret.s;
 }

@@ -2,6 +2,7 @@
 #define MC__DIFFVIEW_INTERNAL_H
 
 #include "lib/global.h"
+#include "lib/event.h"
 #include "lib/mcconfig.h"
 #include "lib/search.h"
 #include "lib/tty/color.h"
@@ -141,11 +142,9 @@ typedef struct WDiff
 void mc_diffviewer_init_events (GError ** error);
 
 /* search.c */
-gboolean mc_diffviewer_cmd_search (const gchar * event_group_name, const gchar * event_name,
-                                   gpointer init_data, gpointer data);
-gboolean mc_diffviewer_cmd_continue_search (const gchar * event_group_name,
-                                            const gchar * event_name, gpointer init_data,
-                                            gpointer data);
+gboolean mc_diffviewer_cmd_search (event_info_t * event_info, gpointer data, GError ** error);
+gboolean mc_diffviewer_cmd_continue_search (event_info_t * event_info, gpointer data,
+                                            GError ** error);
 
 
 int mc_diffviewer_calc_nwidth (const GArray ** const a);
@@ -158,11 +157,9 @@ void mc_diffviewer_destroy_hdiff (WDiff * dview);
 void mc_diffviewer_deinit (WDiff * dview);
 
 int mc_diffviewer_redo_diff (WDiff * dview);
-gboolean mc_diffviewer_cmd_merge (const gchar * event_group_name, const gchar * event_name,
-                                  gpointer init_data, gpointer data);
 
-gboolean mc_diffviewer_cmd_run (const gchar * event_group_name, const gchar * event_name,
-                                gpointer init_data, gpointer data);
+gboolean mc_diffviewer_cmd_merge (event_info_t * event_info, gpointer data, GError ** error);
+gboolean mc_diffviewer_cmd_run (event_info_t * event_info, gpointer data, GError ** error);
 
 /*** inline functions ****************************************************************************/
 

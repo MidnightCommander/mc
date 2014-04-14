@@ -69,14 +69,12 @@ typedef enum
 /* event callback */
 
 static gboolean
-mc_diffviewer_cmd_show_symbols (const gchar * event_group_name, const gchar * event_name,
-                                gpointer init_data, gpointer data)
+mc_diffviewer_cmd_show_symbols (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     dview->display_symbols ^= 1;
     dview->new_frame = 1;
@@ -88,14 +86,12 @@ mc_diffviewer_cmd_show_symbols (const gchar * event_group_name, const gchar * ev
 /* event callback */
 
 static gboolean
-mc_diffviewer_cmd_show_numbers (const gchar * event_group_name, const gchar * event_name,
-                                gpointer init_data, gpointer data)
+mc_diffviewer_cmd_show_numbers (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     dview->display_numbers ^= mc_diffviewer_calc_nwidth ((const GArray ** const) dview->a);
     dview->new_frame = 1;
@@ -107,20 +103,17 @@ mc_diffviewer_cmd_show_numbers (const gchar * event_group_name, const gchar * ev
 /* event callback */
 
 static gboolean
-mc_diffviewer_cmd_split_views (const gchar * event_group_name, const gchar * event_name,
-                               gpointer init_data, gpointer data)
+mc_diffviewer_cmd_split_views (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
     mc_diffviewer_split_type_t split_type;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) error;
 
-    if (init_data == NULL)
+    if (event_info->init_data == NULL)
         return TRUE;
 
-    split_type = (mc_diffviewer_split_type_t) init_data;
+    split_type = (mc_diffviewer_split_type_t) event_info->init_data;
 
     if (split_type == MC_DVIEW_SPLIT_FULL)
     {
@@ -153,16 +146,14 @@ mc_diffviewer_cmd_split_views (const gchar * event_group_name, const gchar * eve
 /* event callback */
 
 static gboolean
-mc_diffviewer_cmd_set_tab_size (const gchar * event_group_name, const gchar * event_name,
-                                gpointer init_data, gpointer data)
+mc_diffviewer_cmd_set_tab_size (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
 
-    (void) event_group_name;
-    (void) event_name;
+    (void) error;
 
-    if (init_data != NULL)
-        dview->tab_size = (int) (intptr_t) init_data;
+    if (event_info->init_data != NULL)
+        dview->tab_size = (int) (intptr_t) event_info->init_data;
 
     return TRUE;
 }
@@ -171,14 +162,12 @@ mc_diffviewer_cmd_set_tab_size (const gchar * event_group_name, const gchar * ev
 /* event callback */
 
 static gboolean
-mc_diffviewer_cmd_swap (const gchar * event_group_name, const gchar * event_name,
-                        gpointer init_data, gpointer data)
+mc_diffviewer_cmd_swap (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     dview->ord ^= 1;
 
@@ -189,14 +178,12 @@ mc_diffviewer_cmd_swap (const gchar * event_group_name, const gchar * event_name
 /* event callback */
 
 static gboolean
-mc_diffviewer_cmd_redo (const gchar * event_group_name, const gchar * event_name,
-                        gpointer init_data, gpointer data)
+mc_diffviewer_cmd_redo (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     if (dview->display_numbers)
     {
@@ -215,17 +202,16 @@ mc_diffviewer_cmd_redo (const gchar * event_group_name, const gchar * event_name
 /* event callback */
 
 static gboolean
-mc_diffviewer_cmd_hunk_next (const gchar * event_group_name, const gchar * event_name,
-                             gpointer init_data, gpointer data)
+mc_diffviewer_cmd_hunk_next (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
     const GArray *a;
     diff_place_t diff_place;
 
-    (void) event_group_name;
-    (void) event_name;
+    (void) event_info;
+    (void) error;
 
-    diff_place = (diff_place_t) init_data;
+    diff_place = (diff_place_t) event_info->init_data;
     a = dview->a[diff_place];
 
     while ((size_t) dview->skip_rows < a->len
@@ -244,17 +230,15 @@ mc_diffviewer_cmd_hunk_next (const gchar * event_group_name, const gchar * event
 /* event callback */
 
 static gboolean
-mc_diffviewer_cmd_hunk_prev (const gchar * event_group_name, const gchar * event_name,
-                             gpointer init_data, gpointer data)
+mc_diffviewer_cmd_hunk_prev (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
     const GArray *a;
     diff_place_t diff_place;
 
-    (void) event_group_name;
-    (void) event_name;
+    (void) error;
 
-    diff_place = (diff_place_t) init_data;
+    diff_place = (diff_place_t) event_info->init_data;
     a = dview->a[diff_place];
 
     while (dview->skip_rows > 0
@@ -278,11 +262,10 @@ mc_diffviewer_cmd_hunk_prev (const gchar * event_group_name, const gchar * event
 /* event callback */
 
 static gboolean
-mc_diffviewer_cmd_goto_line (const gchar * event_group_name, const gchar * event_name,
-                             gpointer init_data, gpointer data)
+mc_diffviewer_cmd_goto_line (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
-    diff_place_t ord = (diff_place_t) init_data;
+    diff_place_t ord = (diff_place_t) event_info->init_data;
     /* *INDENT-OFF* */
     static const char *title[2] = {
         N_("Goto line (left)"),
@@ -295,8 +278,7 @@ mc_diffviewer_cmd_goto_line (const gchar * event_group_name, const gchar * event
     int newline;
     char *input;
 
-    (void) event_group_name;
-    (void) event_name;
+    (void) error;
 
     input =
         input_dialog (_(title[ord]), _("Enter line:"), MC_HISTORY_YDIFF_GOTO_LINE, prev,
@@ -333,19 +315,14 @@ mc_diffviewer_cmd_goto_line (const gchar * event_group_name, const gchar * event
 /* event callback */
 
 static gboolean
-mc_diffviewer_cmd_edit (const gchar * event_group_name, const gchar * event_name,
-                        gpointer init_data, gpointer data)
+mc_diffviewer_cmd_edit (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
-    diff_place_t diff_place = (diff_place_t) init_data;
+    diff_place_t diff_place = (diff_place_t) event_info->init_data;
 
     WDialog *h;
     gboolean h_modal;
     int linenum, lineofs;
-
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
 
     switch (diff_place)
     {
@@ -381,7 +358,7 @@ mc_diffviewer_cmd_edit (const gchar * event_group_name, const gchar * event_name
         vfs_path_free (tmp_vpath);
     }
     h->modal = h_modal;
-    mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "redo", dview);
+    mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "redo", dview, error);
     mc_diffviewer_update (dview);
 
     return TRUE;
@@ -391,14 +368,12 @@ mc_diffviewer_cmd_edit (const gchar * event_group_name, const gchar * event_name
 /* event callback */
 
 static gboolean
-mc_diffviewer_cmd_goto_top (const gchar * event_group_name, const gchar * event_name,
-                            gpointer init_data, gpointer data)
+mc_diffviewer_cmd_goto_top (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     dview->skip_rows = dview->search.last_accessed_num_line = 0;
 
@@ -409,14 +384,12 @@ mc_diffviewer_cmd_goto_top (const gchar * event_group_name, const gchar * event_
 /* event callback */
 
 static gboolean
-mc_diffviewer_cmd_goto_bottom (const gchar * event_group_name, const gchar * event_name,
-                               gpointer init_data, gpointer data)
+mc_diffviewer_cmd_goto_bottom (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     dview->skip_rows = dview->search.last_accessed_num_line = dview->a[DIFF_LEFT]->len - 1;
 
@@ -427,14 +400,12 @@ mc_diffviewer_cmd_goto_bottom (const gchar * event_group_name, const gchar * eve
 /* event callback */
 
 static gboolean
-mc_diffviewer_cmd_goto_up (const gchar * event_group_name, const gchar * event_name,
-                           gpointer init_data, gpointer data)
+mc_diffviewer_cmd_goto_up (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     if (dview->skip_rows > 0)
     {
@@ -449,14 +420,12 @@ mc_diffviewer_cmd_goto_up (const gchar * event_group_name, const gchar * event_n
 /* event callback */
 
 static gboolean
-mc_diffviewer_cmd_goto_down (const gchar * event_group_name, const gchar * event_name,
-                             gpointer init_data, gpointer data)
+mc_diffviewer_cmd_goto_down (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     dview->skip_rows++;
     dview->search.last_accessed_num_line = dview->skip_rows;
@@ -468,14 +437,12 @@ mc_diffviewer_cmd_goto_down (const gchar * event_group_name, const gchar * event
 /* event callback */
 
 static gboolean
-mc_diffviewer_cmd_goto_page_up (const gchar * event_group_name, const gchar * event_name,
-                                gpointer init_data, gpointer data)
+mc_diffviewer_cmd_goto_page_up (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     if (dview->height > 2)
     {
@@ -490,14 +457,12 @@ mc_diffviewer_cmd_goto_page_up (const gchar * event_group_name, const gchar * ev
 /* event callback */
 
 static gboolean
-mc_diffviewer_cmd_goto_page_down (const gchar * event_group_name, const gchar * event_name,
-                                  gpointer init_data, gpointer data)
+mc_diffviewer_cmd_goto_page_down (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     if (dview->height > 2)
     {
@@ -512,16 +477,13 @@ mc_diffviewer_cmd_goto_page_down (const gchar * event_group_name, const gchar * 
 /* event callback */
 
 static gboolean
-mc_diffviewer_cmd_goto_left (const gchar * event_group_name, const gchar * event_name,
-                             gpointer init_data, gpointer data)
+mc_diffviewer_cmd_goto_left (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) error;
 
-    dview->skip_cols -= (int) (intptr_t) init_data;
+    dview->skip_cols -= (int) (intptr_t) event_info->init_data;
     return TRUE;
 }
 
@@ -529,16 +491,13 @@ mc_diffviewer_cmd_goto_left (const gchar * event_group_name, const gchar * event
 /* event callback */
 
 static gboolean
-mc_diffviewer_cmd_goto_right (const gchar * event_group_name, const gchar * event_name,
-                              gpointer init_data, gpointer data)
+mc_diffviewer_cmd_goto_right (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) error;
 
-    dview->skip_cols += (int) (intptr_t) init_data;
+    dview->skip_cols += (int) (intptr_t) event_info->init_data;
 
     return TRUE;
 }
@@ -547,14 +506,12 @@ mc_diffviewer_cmd_goto_right (const gchar * event_group_name, const gchar * even
 /* event callback */
 
 static gboolean
-mc_diffviewer_cmd_goto_start_of_line (const gchar * event_group_name, const gchar * event_name,
-                                      gpointer init_data, gpointer data)
+mc_diffviewer_cmd_goto_start_of_line (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     dview->skip_cols = 0;
 
@@ -565,14 +522,12 @@ mc_diffviewer_cmd_goto_start_of_line (const gchar * event_group_name, const gcha
 /* event callback */
 
 static gboolean
-mc_diffviewer_cmd_quit (const gchar * event_group_name, const gchar * event_name,
-                        gpointer init_data, gpointer data)
+mc_diffviewer_cmd_quit (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     dview->view_quit = 1;
 
@@ -583,15 +538,13 @@ mc_diffviewer_cmd_quit (const gchar * event_group_name, const gchar * event_name
 /* event callback */
 
 static gboolean
-mc_diffviewer_cmd_save_changes (const gchar * event_group_name, const gchar * event_name,
-                                gpointer init_data, gpointer data)
+mc_diffviewer_cmd_save_changes (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
     gboolean res;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     if (dview->merged[DIFF_LEFT])
     {

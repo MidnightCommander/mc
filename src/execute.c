@@ -570,13 +570,11 @@ toggle_panels (void)
 
 /* event callback */
 gboolean
-execute_suspend (const gchar * event_group_name, const gchar * event_name,
-                 gpointer init_data, gpointer data)
+execute_suspend (event_info_t * event_info, gpointer data, GError ** error)
 {
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
     (void) data;
+    (void) error;
 
     if (mc_global.mc_run_mode == MC_RUN_FULL)
         save_cwds_stat ();

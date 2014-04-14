@@ -173,7 +173,7 @@ static void
 edit_help (void)
 {
     ev_help_t event_data = { NULL, "[Internal File Editor]" };
-    mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
+    mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

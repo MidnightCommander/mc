@@ -494,9 +494,10 @@ copy_region (WInput * in, int x_first, int x_last)
     if (last == first)
     {
         /* Copy selected files to clipboard */
-        mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "panel_save_current_file_to_clip_file", NULL);
+        mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "panel_save_current_file_to_clip_file", NULL,
+                        NULL);
         /* try use external clipboard utility */
-        mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL);
+        mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL, NULL);
         return;
     }
 
@@ -507,9 +508,9 @@ copy_region (WInput * in, int x_first, int x_last)
 
     kill_buffer = g_strndup (in->buffer + first, last - first);
 
-    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file", kill_buffer);
+    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file", kill_buffer, NULL);
     /* try use external clipboard utility */
-    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL);
+    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -596,10 +597,10 @@ ins_from_clip (WInput * in)
     ev_clipboard_text_from_file_t event_data;
 
     /* try use external clipboard utility */
-    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL);
+    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL, NULL);
 
     event_data.text = &p;
-    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_from_file", &event_data);
+    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_from_file", &event_data, NULL);
     if (event_data.ret)
     {
         char *pp;
@@ -833,14 +834,12 @@ input_execute_cmd (WInput * in, unsigned long command)
 
 /* "history_load" event handler */
 static gboolean
-input_load_history (const gchar * event_group_name, const gchar * event_name,
-                    gpointer init_data, gpointer data)
+input_cmd_load_history (event_info_t * event_info, gpointer data, GError ** error)
 {
-    WInput *in = INPUT (init_data);
+    WInput *in = INPUT (event_info->init_data);
     ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
 
-    (void) event_group_name;
-    (void) event_name;
+    (void) error;
 
     in->history.list = history_load (ev->cfg, in->history.name);
     in->history.current = in->history.list;
@@ -862,13 +861,11 @@ input_load_history (const gchar * event_group_name, const gchar * event_name,
 
 /* "history_save" event handler */
 static gboolean
-input_save_history (const gchar * event_group_name, const gchar * event_name,
-                    gpointer init_data, gpointer data)
+input_cmd_save_history (event_info_t * event_info, gpointer data, GError ** error)
 {
-    WInput *in = INPUT (init_data);
+    WInput *in = INPUT (event_info->init_data);
 
-    (void) event_group_name;
-    (void) event_name;
+    (void) error;
 
     if (!in->is_password && (WIDGET (in)->owner->ret_value != B_CANCEL))
     {
@@ -1060,9 +1057,9 @@ input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     {
     case MSG_INIT:
         /* subscribe to "history_load" event */
-        mc_event_add (w->owner->event_group, MCEVENT_HISTORY_LOAD, input_load_history, w, NULL);
+        mc_event_add (w->owner->event_group, MCEVENT_HISTORY_LOAD, input_cmd_load_history, w, NULL);
         /* subscribe to "history_save" event */
-        mc_event_add (w->owner->event_group, MCEVENT_HISTORY_SAVE, input_save_history, w, NULL);
+        mc_event_add (w->owner->event_group, MCEVENT_HISTORY_SAVE, input_cmd_save_history, w, NULL);
         return MSG_HANDLED;
 
     case MSG_KEY:
@@ -1106,9 +1103,9 @@ input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
     case MSG_DESTROY:
         /* unsubscribe from "history_load" event */
-        mc_event_del (w->owner->event_group, MCEVENT_HISTORY_LOAD, input_load_history, w);
+        mc_event_del (w->owner->event_group, MCEVENT_HISTORY_LOAD, input_cmd_load_history, w);
         /* unsubscribe from "history_save" event */
-        mc_event_del (w->owner->event_group, MCEVENT_HISTORY_SAVE, input_save_history, w);
+        mc_event_del (w->owner->event_group, MCEVENT_HISTORY_SAVE, input_cmd_save_history, w);
         input_destroy (in);
         return MSG_HANDLED;
 

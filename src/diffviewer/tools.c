@@ -1779,18 +1779,14 @@ mc_diffviewer_deinit (WDiff * dview)
 /* event callback */
 
 gboolean
-mc_diffviewer_cmd_merge (const gchar * event_group_name, const gchar * event_name,
-                         gpointer init_data, gpointer data)
+mc_diffviewer_cmd_merge (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
-    diff_place_t source_diff = (diff_place_t) init_data;
+    diff_place_t source_diff = (diff_place_t) event_info->init_data;
     diff_place_t dest_diff;
     int from1, to1, from2, to2;
     int *source_from, *source_to, *dest_from, *dest_to;
     int hunk;
-
-    (void) event_group_name;
-    (void) event_name;
 
     switch (source_diff)
     {
@@ -1887,7 +1883,7 @@ mc_diffviewer_cmd_merge (const gchar * event_group_name, const gchar * event_nam
         vfs_path_free (merge_file_name_vpath);
     }
 
-    mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "redo", dview);
+    mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "redo", dview, error);
 
     return TRUE;
 }

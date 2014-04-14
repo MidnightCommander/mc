@@ -615,14 +615,12 @@ parent_call_string (void *routine, int argc, ...)
 
 /* event callback */
 gboolean
-background_parent_call (const gchar * event_group_name, const gchar * event_name,
-                        gpointer init_data, gpointer data)
+background_parent_call (event_info_t * event_info, gpointer data, GError ** error)
 {
     ev_background_parent_call_t *event_data = (ev_background_parent_call_t *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     event_data->ret.i =
         parent_va_call (event_data->routine, event_data->ctx, event_data->argc, event_data->ap);
@@ -634,14 +632,12 @@ background_parent_call (const gchar * event_group_name, const gchar * event_name
 
 /* event callback */
 gboolean
-background_parent_call_string (const gchar * event_group_name, const gchar * event_name,
-                               gpointer init_data, gpointer data)
+background_parent_call_string (event_info_t * event_info, gpointer data, GError ** error)
 {
     ev_background_parent_call_t *event_data = (ev_background_parent_call_t *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     event_data->ret.s =
         parent_va_call_string (event_data->routine, event_data->argc, event_data->ap);

@@ -5,6 +5,7 @@
 #ifndef MC__EXECUTE_H
 #define MC__EXECUTE_H
 
+#include "lib/event.h"
 #include "lib/utilunix.h"
 #include "lib/vfs/vfs.h"
 
@@ -38,8 +39,7 @@ void exec_shell (void);
 void toggle_panels (void);
 
 /* Handle toggling panels by Ctrl-Z */
-gboolean execute_suspend (const gchar * event_group_name, const gchar * event_name,
-                          gpointer init_data, gpointer data);
+gboolean execute_suspend (event_info_t * event_info, gpointer data, GError ** error);
 
 /* Execute command on a filename that can be on VFS */
 void execute_with_vfs_arg (const char *command, const vfs_path_t * filename_vpath);

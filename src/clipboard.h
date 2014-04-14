@@ -18,15 +18,11 @@ extern char *clipboard_paste_path;
 
 /*** declarations of public functions ************************************************************/
 
-gboolean clipboard_file_to_ext_clip (const gchar * event_group_name, const gchar * event_name,
-                                     gpointer init_data, gpointer data);
-gboolean clipboard_file_from_ext_clip (const gchar * event_group_name, const gchar * event_name,
-                                       gpointer init_data, gpointer data);
+gboolean clipboard_file_to_ext_clip (event_info_t * event_info, gpointer data, GError ** error);
+gboolean clipboard_file_from_ext_clip (event_info_t * event_info, gpointer data, GError ** error);
 
-gboolean clipboard_text_to_file (const gchar * event_group_name, const gchar * event_name,
-                                 gpointer init_data, gpointer data);
-gboolean clipboard_text_from_file (const gchar * event_group_name, const gchar * event_name,
-                                   gpointer init_data, gpointer data);
+gboolean clipboard_text_to_file (event_info_t * event_info, gpointer data, GError ** error);
+gboolean clipboard_text_from_file (event_info_t * event_info, gpointer data, GError ** error);
 
 /*** inline functions ****************************************************************************/
 

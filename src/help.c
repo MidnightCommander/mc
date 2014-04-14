@@ -1056,8 +1056,7 @@ mousedispatch_new (int y, int x, int yl, int xl)
 
 /* event callback */
 gboolean
-help_interactive_display (const gchar * event_group_name, const gchar * event_name,
-                          gpointer init_data, gpointer data)
+help_interactive_display (event_info_t * event_info, gpointer data, GError ** error)
 {
     const dlg_colors_t help_colors = {
         HELP_NORMAL_COLOR,      /* common text color */
@@ -1073,9 +1072,8 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
     char *filedata;
     ev_help_t *event_data = (ev_help_t *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     if (event_data->filename != NULL)
         g_file_get_contents (event_data->filename, &filedata, NULL, NULL);

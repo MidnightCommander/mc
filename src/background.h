@@ -6,6 +6,7 @@
 #define MC__BACKGROUND_H
 
 #include <sys/types.h>          /* pid_t */
+#include "lib/event.h"
 #include "filemanager/fileopctx.h"
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -42,12 +43,8 @@ char *parent_call_string (void *routine, int argc, ...);
 void unregister_task_running (pid_t pid, int fd);
 void unregister_task_with_pid (pid_t pid);
 
-gboolean background_parent_call (const gchar * event_group_name, const gchar * event_name,
-                                 gpointer init_data, gpointer data);
-
-gboolean
-background_parent_call_string (const gchar * event_group_name, const gchar * event_name,
-                               gpointer init_data, gpointer data);
+gboolean background_parent_call (event_info_t * event_info, gpointer data, GError ** error);
+gboolean background_parent_call_string (event_info_t * event_info, gpointer data, GError ** error);
 
 /*** inline functions ****************************************************************************/
 

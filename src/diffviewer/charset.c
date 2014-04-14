@@ -84,15 +84,13 @@ mc_diffviewer_set_codeset (WDiff * dview)
 /* event callback */
 
 gboolean
-mc_diffviewer_cmd_select_encoding_show_dialog (const gchar * event_group_name,
-                                               const gchar * event_name, gpointer init_data,
-                                               gpointer data)
+mc_diffviewer_cmd_select_encoding_show_dialog (event_info_t * event_info, gpointer data,
+                                               GError ** error)
 {
     WDiff *dview = (WDiff *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     if (do_select_codepage ())
         mc_diffviewer_set_codeset (dview);

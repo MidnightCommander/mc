@@ -287,7 +287,7 @@ dialog_switch_process_pending (void)
             if (mc_global.mc_run_mode == MC_RUN_FULL)
             {
                 mc_current = g_list_find (mc_dialogs, midnight_dlg);
-                mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "update_panels", NULL);
+                mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "update_panels", NULL, NULL);
             }
         }
     }

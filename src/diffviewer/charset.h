@@ -11,9 +11,8 @@
 
 /*** declarations of public functions ************************************************************/
 
-gboolean mc_diffviewer_cmd_select_encoding_show_dialog (const gchar * event_group_name,
-                                                        const gchar * event_name,
-                                                        gpointer init_data, gpointer data);
+gboolean mc_diffviewer_cmd_select_encoding_show_dialog (event_info_t * event_info, gpointer data,
+                                                        GError ** error);
 
 void mc_diffviewer_set_codeset (WDiff * dview);
 

@@ -516,7 +516,7 @@ vfs_print_message (const char *msg, ...)
     va_start (event_data.ap, msg);
     event_data.msg = msg;
 
-    mc_event_raise (MCEVENT_GROUP_CORE, "vfs_print_message", (gpointer) & event_data);
+    mc_event_raise (MCEVENT_GROUP_CORE, "vfs_print_message", (gpointer) & event_data, NULL);
     va_end (event_data.ap);
 }
 

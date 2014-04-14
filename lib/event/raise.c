@@ -40,17 +40,20 @@
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_event_raise (const gchar * event_group_name, const gchar * event_name, gpointer event_data)
+mc_event_raise (const gchar * event_group_name, const gchar * event_name, gpointer event_data,
+                GError ** error)
 {
     GTree *event_group;
     GPtrArray *callbacks;
     guint array_index;
+    event_info_t event_info;
 
     if (mc_event_grouplist == NULL || event_group_name == NULL || event_name == NULL)
         return FALSE;
@@ -63,10 +66,15 @@ mc_event_raise (const gchar * event_group_name, const gchar * event_name, gpoint
     if (callbacks == NULL)
         return FALSE;
 
+    event_info.group_name = event_group_name;
+    event_info.name = event_name;
+
     for (array_index = callbacks->len; array_index > 0; array_index--)
     {
         mc_event_callback_t *cb = g_ptr_array_index (callbacks, array_index - 1);
-        if (!(*cb->callback) (event_group_name, event_name, cb->init_data, event_data))
+
+        event_info.init_data = cb->init_data;
+        if (!(*cb->callback) (&event_info, event_data, error))
             break;
     }
     return TRUE;

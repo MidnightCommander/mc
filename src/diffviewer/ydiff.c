@@ -34,7 +34,6 @@
 #include <sys/wait.h>
 
 #include "lib/global.h"
-#include "lib/event.h"
 #include "lib/tty/tty.h"
 #include "lib/tty/color.h"
 #include "lib/tty/key.h"
@@ -263,7 +262,7 @@ dview_ok_to_exit (WDiff * dview)
         res = FALSE;
         break;
     case 0:                    /* Yes */
-        mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "save_changes", dview);
+        mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "save_changes", dview, NULL);
         res = TRUE;
         break;
     case 1:                    /* No */
@@ -409,7 +408,7 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
     default:;
     }
 
-    if (event_name != NULL && mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, event_name, dview))
+    if (event_name != NULL && mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, event_name, dview, NULL))
         res = MSG_HANDLED;
 
     return res;
@@ -447,7 +446,7 @@ dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     {
     case MSG_INIT:
         dview_labels (dview);
-        mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "options_load", dview);
+        mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "options_load", dview, NULL);
         mc_diffviewer_update (dview);
         return MSG_HANDLED;
 
@@ -473,7 +472,7 @@ dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         return i;
 
     case MSG_DESTROY:
-        mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "options_save", dview);
+        mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "options_save", dview, NULL);
         mc_diffviewer_deinit (dview);
         return MSG_HANDLED;
 
@@ -739,17 +738,15 @@ while (0)
 
 
 gboolean
-mc_diffviewer_cmd_run (const gchar * event_group_name, const gchar * event_name,
-                       gpointer init_data, gpointer data)
+mc_diffviewer_cmd_run (event_info_t * event_info, gpointer data, GError ** error)
 {
     ev_diffviewer_run_t *info = (ev_diffviewer_run_t *) data;
     int rv = 0;
     vfs_path_t *file0 = NULL;
     vfs_path_t *file1 = NULL;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     if (mc_diffviewer_get_fnames_of_diffs (info, &file0, &file1))
     {

@@ -56,14 +56,12 @@
 /* event callback */
 
 gboolean
-mc_diffviewer_cmd_options_save (const gchar * event_group_name, const gchar * event_name,
-                                gpointer init_data, gpointer data)
+mc_diffviewer_cmd_options_save (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     mc_config_set_bool (mc_main_config, "DiffView", "show_symbols",
                         dview->display_symbols != 0 ? TRUE : FALSE);
@@ -90,16 +88,14 @@ mc_diffviewer_cmd_options_save (const gchar * event_group_name, const gchar * ev
 /* event callback */
 
 gboolean
-mc_diffviewer_cmd_options_load (const gchar * event_group_name, const gchar * event_name,
-                                gpointer init_data, gpointer data)
+mc_diffviewer_cmd_options_load (event_info_t * event_info, gpointer data, GError ** error)
 {
     gboolean show_numbers, show_symbols;
     int tab_size;
     WDiff *dview = (WDiff *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     show_symbols = mc_config_get_bool (mc_main_config, "DiffView", "show_symbols", FALSE);
     if (show_symbols)
@@ -135,8 +131,7 @@ mc_diffviewer_cmd_options_load (const gchar * event_group_name, const gchar * ev
 /* event callback */
 
 gboolean
-mc_diffviewer_cmd_options_show_dialog (const gchar * event_group_name, const gchar * event_name,
-                                       gpointer init_data, gpointer data)
+mc_diffviewer_cmd_options_show_dialog (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
 
@@ -170,9 +165,8 @@ mc_diffviewer_cmd_options_show_dialog (const gchar * event_group_name, const gch
         quick_widgets, NULL, NULL
     };
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     if (quick_dialog (&qdlg) != B_CANCEL)
         mc_diffviewer_reread (dview);

@@ -5,11 +5,19 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-typedef gboolean (*mc_event_callback_func_t) (const gchar *, const gchar *, gpointer, gpointer);
+struct event_info_t;
+typedef gboolean (*mc_event_callback_func_t) (struct event_info_t *, gpointer, GError **);
 
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
+
+typedef struct event_info_t
+{
+    const char *group_name;
+    const char *name;
+    gpointer init_data;
+} event_info_t;
 
 typedef struct
 {
@@ -42,9 +50,8 @@ gboolean mc_event_present (const gchar *, const gchar *);
 gboolean mc_event_mass_add (event_init_t *, GError **);
 
 /* raise.c: */
-gboolean mc_event_raise (const gchar *, const gchar *, gpointer);
-
-
+gboolean
+mc_event_raise (const gchar * event_group_name, const gchar * event_name, gpointer event_data,
+                GError ** error);
 /*** inline functions ****************************************************************************/
-
 #endif /* MC__EVENT_H */

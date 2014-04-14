@@ -239,14 +239,12 @@ mcdiffview_do_search (WDiff * dview)
 /* event callback */
 
 gboolean
-mc_diffviewer_cmd_search (const gchar * event_group_name, const gchar * event_name,
-                          gpointer init_data, gpointer data)
+mc_diffviewer_cmd_search (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     if (dview->dsrc != DATA_SRC_MEM)
     {
@@ -283,15 +281,17 @@ mc_diffviewer_cmd_search (const gchar * event_group_name, const gchar * event_na
 /* event callback */
 
 gboolean
-mc_diffviewer_cmd_continue_search (const gchar * event_group_name, const gchar * event_name,
-                                   gpointer init_data, gpointer data)
+mc_diffviewer_cmd_continue_search (event_info_t * event_info, gpointer data, GError ** error)
 {
     WDiff *dview = (WDiff *) data;
+
+    (void) event_info;
+    (void) error;
 
     if (dview->dsrc != DATA_SRC_MEM)
         error_dialog (_("Search"), _("Search is disabled"));
     else if (dview->search.handle == NULL)
-        return mc_diffviewer_cmd_search (event_group_name, event_name, init_data, data);
+        return mc_diffviewer_cmd_search (event_info, data, error);
     else
         mcdiffview_do_search (dview);
 

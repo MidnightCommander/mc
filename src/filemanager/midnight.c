@@ -492,14 +492,12 @@ check_panel_timestamp (const WPanel * panel, panel_view_mode_t mode, struct vfs_
 
 /* event callback */
 static gboolean
-check_current_panel_timestamp (const gchar * event_group_name, const gchar * event_name,
-                               gpointer init_data, gpointer data)
+check_current_panel_timestamp (event_info_t * event_info, gpointer data, GError ** error)
 {
     ev_vfs_stamp_create_t *event_data = (ev_vfs_stamp_create_t *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     event_data->ret =
         check_panel_timestamp (current_panel, get_current_type (), event_data->vclass,
@@ -511,14 +509,12 @@ check_current_panel_timestamp (const gchar * event_group_name, const gchar * eve
 
 /* event callback */
 static gboolean
-check_other_panel_timestamp (const gchar * event_group_name, const gchar * event_name,
-                             gpointer init_data, gpointer data)
+check_other_panel_timestamp (event_info_t * event_info, gpointer data, GError ** error)
 {
     ev_vfs_stamp_create_t *event_data = (ev_vfs_stamp_create_t *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     event_data->ret =
         check_panel_timestamp (other_panel, get_other_type (), event_data->vclass, event_data->id);
@@ -530,15 +526,13 @@ check_other_panel_timestamp (const gchar * event_group_name, const gchar * event
 
 /* event callback */
 static gboolean
-print_vfs_message (const gchar * event_group_name, const gchar * event_name,
-                   gpointer init_data, gpointer data)
+print_vfs_message (event_info_t * event_info, gpointer data, GError ** error)
 {
     char str[128];
     ev_vfs_print_message_t *event_data = (ev_vfs_print_message_t *) data;
 
-    (void) event_group_name;
-    (void) event_name;
-    (void) init_data;
+    (void) event_info;
+    (void) error;
 
     g_vsnprintf (str, sizeof (str), event_data->msg, event_data->ap);
 
@@ -1014,7 +1008,7 @@ mc_maybe_editor_or_viewer (void)
             event_info.data.file.first = mc_run_param0;
             event_info.data.file.second = mc_run_param1;
 
-            mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "run", &event_info);
+            mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "run", &event_info, NULL);
             ret = event_info.ret_value;
         }
         break;
@@ -1349,7 +1343,7 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         ctl_x_cmd ();
         break;
     case CK_Suspend:
-        mc_event_raise (MCEVENT_GROUP_CORE, "suspend", NULL);
+        mc_event_raise (MCEVENT_GROUP_CORE, "suspend", NULL, NULL);
         break;
     case CK_Swap:
         swap_cmd ();

@@ -28,6 +28,8 @@
 #ifndef MC__HELP_H
 #define MC__HELP_H
 
+#include "lib/event.h"
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /* Markers used in the help files */
@@ -50,8 +52,7 @@
 
 /*** declarations of public functions ************************************************************/
 
-gboolean help_interactive_display (const gchar * event_group_name, const gchar * event_name,
-                                   gpointer init_data, gpointer data);
+gboolean help_interactive_display (event_info_t * event_info, gpointer data, GError ** error);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__HELP_H */
