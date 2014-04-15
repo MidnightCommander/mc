@@ -32,7 +32,7 @@ FileProgressStatus check_progress_buttons (file_op_context_t * ctx);
 void file_progress_show (file_op_context_t * ctx, off_t done, off_t total,
                          const char *stalled_msg, gboolean force_update);
 void file_progress_show_count (file_op_context_t * ctx, size_t done, size_t total);
-void file_progress_show_total (FileOpTotalContext * tctx, file_op_context_t * ctx,
+void file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ctx,
                                uintmax_t copied_bytes, gboolean show_summary);
 void file_progress_show_source (file_op_context_t * ctx, const vfs_path_t * s_vpath);
 void file_progress_show_target (file_op_context_t * ctx, const vfs_path_t * path);

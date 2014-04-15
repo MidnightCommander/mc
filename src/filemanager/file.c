@@ -560,7 +560,7 @@ do_compute_dir_size (const vfs_path_t * dirname_vpath, void *ui,
 /* --------------------------------------------------------------------------------------------- */
 
 static FileProgressStatus
-progress_update_one (FileOpTotalContext * tctx, file_op_context_t * ctx, off_t add)
+progress_update_one (file_op_total_context_t * tctx, file_op_context_t * ctx, off_t add)
 {
     struct timeval tv_current;
     static struct timeval tv_start = { };
@@ -821,7 +821,7 @@ files_error (const char *format, const char *file1, const char *file2)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-copy_file_file_display_progress (FileOpTotalContext * tctx, file_op_context_t * ctx,
+copy_file_file_display_progress (file_op_total_context_t * tctx, file_op_context_t * ctx,
                                  struct timeval tv_current, struct timeval tv_transfer_start,
                                  off_t file_size, off_t n_read_total)
 {
@@ -876,7 +876,8 @@ copy_file_file_display_progress (FileOpTotalContext * tctx, file_op_context_t * 
 
 /* {{{ Move routines */
 static FileProgressStatus
-move_file_file (FileOpTotalContext * tctx, file_op_context_t * ctx, const char *s, const char *d)
+move_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx, const char *s,
+                const char *d)
 {
     struct stat src_stats, dst_stats;
     FileProgressStatus return_status = FILE_CONT;
@@ -1026,7 +1027,7 @@ move_file_file (FileOpTotalContext * tctx, file_op_context_t * ctx, const char *
 /** Don't update progress status if progress_count==NULL */
 
 static FileProgressStatus
-erase_file (FileOpTotalContext * tctx, file_op_context_t * ctx, const vfs_path_t * vpath)
+erase_file (file_op_total_context_t * tctx, file_op_context_t * ctx, const vfs_path_t * vpath)
 {
     struct stat buf;
 
@@ -1072,7 +1073,7 @@ erase_file (FileOpTotalContext * tctx, file_op_context_t * ctx, const vfs_path_t
   skipall->remove as much as possible
 */
 static FileProgressStatus
-recursive_erase (FileOpTotalContext * tctx, file_op_context_t * ctx, const vfs_path_t * vpath)
+recursive_erase (file_op_total_context_t * tctx, file_op_context_t * ctx, const vfs_path_t * vpath)
 {
     struct dirent *next;
     DIR *reading;
@@ -1443,7 +1444,7 @@ end_bg_process (file_op_context_t * ctx, enum OperationMode mode)
 /* --------------------------------------------------------------------------------------------- */
 
 FileProgressStatus
-copy_file_file (FileOpTotalContext * tctx, file_op_context_t * ctx,
+copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
                 const char *src_path, const char *dst_path)
 {
     uid_t src_uid = (uid_t) (-1);
@@ -1979,7 +1980,7 @@ copy_file_file (FileOpTotalContext * tctx, file_op_context_t * ctx,
    function calls */
 
 FileProgressStatus
-copy_dir_dir (FileOpTotalContext * tctx, file_op_context_t * ctx, const char *s, const char *d,
+copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const char *s, const char *d,
               gboolean toplevel, gboolean move_over, gboolean do_delete, GSList * parent_dirs)
 {
     struct dirent *next;
@@ -2249,7 +2250,7 @@ copy_dir_dir (FileOpTotalContext * tctx, file_op_context_t * ctx, const char *s,
 /* {{{ Move routines */
 
 FileProgressStatus
-move_dir_dir (FileOpTotalContext * tctx, file_op_context_t * ctx, const char *s, const char *d)
+move_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const char *s, const char *d)
 {
     struct stat sbuf, dbuf;
     FileProgressStatus return_status;
@@ -2395,7 +2396,7 @@ move_dir_dir (FileOpTotalContext * tctx, file_op_context_t * ctx, const char *s,
 /* {{{ Erase routines */
 
 FileProgressStatus
-erase_dir (FileOpTotalContext * tctx, file_op_context_t * ctx, const vfs_path_t * s_vpath)
+erase_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const vfs_path_t * s_vpath)
 {
     FileProgressStatus error;
 
@@ -2596,7 +2597,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     int i;
     FileProgressStatus value;
     file_op_context_t *ctx;
-    FileOpTotalContext *tctx;
+    file_op_total_context_t *tctx;
     vfs_path_t *tmp_vpath;
     filegui_dialog_type_t dialog_type = FILEGUI_DIALOG_ONE_ITEM;
 

@@ -944,7 +944,7 @@ file_progress_show_count (file_op_context_t * ctx, size_t done, size_t total)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_total (FileOpTotalContext * tctx, file_op_context_t * ctx,
+file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ctx,
                           uintmax_t copied_bytes, gboolean show_summary)
 {
     char buffer[BUF_TINY];

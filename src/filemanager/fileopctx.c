@@ -108,11 +108,11 @@ file_op_context_destroy (file_op_context_t * ctx)
 
 /* --------------------------------------------------------------------------------------------- */
 
-FileOpTotalContext *
+file_op_total_context_t *
 file_op_total_context_new (void)
 {
-    FileOpTotalContext *tctx;
-    tctx = g_new0 (FileOpTotalContext, 1);
+    file_op_total_context_t *tctx;
+    tctx = g_new0 (file_op_total_context_t, 1);
     tctx->ask_overwrite = TRUE;
     return tctx;
 }
@@ -120,7 +120,7 @@ file_op_total_context_new (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_op_total_context_destroy (FileOpTotalContext * tctx)
+file_op_total_context_destroy (file_op_total_context_t * tctx)
 {
     g_free (tctx);
 }
