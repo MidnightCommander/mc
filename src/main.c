@@ -415,14 +415,9 @@ main (int argc, char *argv[])
     if (mc_global.midnight_shutdown)
         exit_code = EXIT_SUCCESS;
     else
-        exit_code = do_nc (&error) ? EXIT_SUCCESS : EXIT_FAILURE;
+        exit_code = do_nc (&mcerror) ? EXIT_SUCCESS : EXIT_FAILURE;
 
-    if (error != NULL)
-    {
-        message (D_ERROR, _("Warning"), "%s", error->message);
-        g_error_free (error);
-        error = NULL;
-    }
+    mc_error_message (&mcerror);
 
     /* Save the tree store */
     (void) tree_store_save ();

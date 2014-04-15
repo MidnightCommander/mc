@@ -65,6 +65,7 @@
 #ifdef HAVE_ASPELL
 #include "spell.h"
 #endif
+#include "macro.h"
 
 /*** global variables ****************************************************************************/
 

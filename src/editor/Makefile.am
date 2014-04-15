@@ -20,6 +20,7 @@ libedit_la_SOURCES = \
 	editwidget.c editwidget.h \
 	etags.c etags.h \
 	format.c \
+	macro.c macro.h \
 	syntax.c
 
 if USE_ASPELL
