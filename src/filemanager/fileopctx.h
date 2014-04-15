@@ -165,6 +165,7 @@ typedef struct
 typedef struct
 {
     size_t progress_count;
+    size_t prev_progress_count; /* Used in OP_MOVE between copy and remove directories */
     uintmax_t progress_bytes;
     uintmax_t copied_bytes;
     size_t bps;

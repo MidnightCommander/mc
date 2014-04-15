@@ -2350,6 +2350,7 @@ move_dir_dir (FileOpTotalContext * tctx, file_op_context_t * ctx, const char *s,
         goto ret;
   oktoret:
     file_progress_show_source (ctx, NULL);
+    file_progress_show_target (ctx, NULL);
     file_progress_show (ctx, 0, 0, "", FALSE);
 
     return_status = check_progress_buttons (ctx);
@@ -2359,6 +2360,9 @@ move_dir_dir (FileOpTotalContext * tctx, file_op_context_t * ctx, const char *s,
     mc_refresh ();
     if (ctx->erase_at_end)
     {
+        /* Reset progress count before delete to avoid counting files twice */
+        tctx->progress_count = tctx->prev_progress_count;
+
         while (erase_list != NULL && return_status != FILE_ABORT)
         {
             struct link *lp = (struct link *) erase_list->data;
@@ -2371,6 +2375,9 @@ move_dir_dir (FileOpTotalContext * tctx, file_op_context_t * ctx, const char *s,
             erase_list = g_slist_remove (erase_list, lp);
             free_link (lp);
         }
+
+        /* Save progress counter before move next directory */
+        tctx->prev_progress_count = tctx->progress_count;
     }
     erase_dir_iff_empty (ctx, src_vpath, tctx->progress_count);
 
