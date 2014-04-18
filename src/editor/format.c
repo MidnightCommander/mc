@@ -53,6 +53,7 @@
 
 #include "edit-impl.h"
 #include "editwidget.h"
+#include "event.h"
 
 /*** global variables ****************************************************************************/
 
@@ -469,10 +470,8 @@ test_indent (const WEdit * edit, off_t p, off_t q)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
 
-void
+static void
 format_paragraph (WEdit * edit, gboolean force)
 {
     off_t p, q;
@@ -488,6 +487,7 @@ format_paragraph (WEdit * edit, gboolean force)
     if (edit_line_is_blank (edit, edit->buffer.curs_line))
         return;
 
+    edit->force |= REDRAW_PAGE;
     p = begin_paragraph (edit, force, &lines);
     q = end_paragraph (edit, force);
     indent = test_indent (edit, p, q);
@@ -543,15 +543,57 @@ format_paragraph (WEdit * edit, gboolean force)
     /* try move to the start of next paragraph */
     if (edit->buffer.curs_line < edit->buffer.lines)
     {
-        edit_execute_cmd (edit, CK_Home, -1);
+        mc_editor_event_data_move_cursor_t cursor_event_data = {
+            .editor = edit,
+            .is_mark = FALSE,
+            .is_column = FALSE,
+            .direction = TO_LINE_BEGIN
+        };
 
+        mc_event_raise (MCEVENT_GROUP_EDITOR, "move_cursor", &cursor_event_data, NULL);
+        cursor_event_data.direction = TO_DOWN;
         do
         {
-            edit_execute_cmd (edit, CK_Down, -1);
+            mc_event_raise (MCEVENT_GROUP_EDITOR, "move_cursor", &cursor_event_data, NULL);
         }
         while (edit->buffer.curs_line < edit->buffer.lines
                && edit_line_is_blank (edit, edit->buffer.curs_line));
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_format_paragraph (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+    gboolean force = (gboolean) (intptr_t) event_info->init_data;
+
+    (void) error;
+
+    format_paragraph (edit, force);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_format_paragraph_auto (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+
+    (void) error;
+    (void) event_info;
+
+    if (option_auto_para_formatting)
+        format_paragraph (edit, FALSE);
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

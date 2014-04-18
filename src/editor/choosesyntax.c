@@ -42,6 +42,7 @@
 
 #include "edit-impl.h"
 #include "editwidget.h"
+#include "event.h"
 
 /*** global variables ****************************************************************************/
 
@@ -93,12 +94,18 @@ exec_edit_syntax_dialog (const GPtrArray * names, const char *current_syntax)
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-edit_syntax_dialog (WEdit * edit)
+gboolean
+mc_editor_cmd_syntax_show_dialog (event_info_t * event_info, gpointer data, GError ** error)
 {
     GPtrArray *names;
     int syntax;
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
 
     names = g_ptr_array_new ();
 
@@ -143,6 +150,8 @@ edit_syntax_dialog (WEdit * edit)
 
     g_ptr_array_foreach (names, (GFunc) g_free, NULL);
     g_ptr_array_free (names, TRUE);
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

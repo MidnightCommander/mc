@@ -111,6 +111,7 @@ struct WEdit
     unsigned int delete_file:1; /* New file, needs to be deleted unless modified */
     unsigned int highlight:1;   /* There is a selected block */
     unsigned int column_highlight:1;
+    unsigned int is_cursor_moved:1;
     unsigned int fullscreen:1;  /* Is window fullscreen or not */
     long prev_col;              /* recent column position of the cursor - used when moving
                                    up or down past lines that are shorter than the current line */

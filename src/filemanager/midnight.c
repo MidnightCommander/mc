@@ -1744,7 +1744,7 @@ do_nc (GError ** error)
     gboolean ret;
 
 #ifdef USE_INTERNAL_EDIT
-    edit_stack_init ();
+    mc_editor_init (error);
 #endif
 
 #ifdef USE_DIFF_VIEW
@@ -1790,7 +1790,7 @@ do_nc (GError ** error)
     current_panel = NULL;
 
 #ifdef USE_INTERNAL_EDIT
-    edit_stack_free ();
+    mc_editor_deinit (error);
 #endif
 
     if ((quit & SUBSHELL_EXIT) == 0)

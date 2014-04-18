@@ -66,6 +66,7 @@
 #include "spell.h"
 #endif
 #include "macro.h"
+#include "event.h"
 
 /*** global variables ****************************************************************************/
 
@@ -446,7 +447,7 @@ edit_event (Gpm_Event * event, void *data)
 
         if (local.x == w->cols - dx - 4)
         {
-            edit_toggle_fullscreen (edit);
+            mc_event_raise (MCEVENT_GROUP_EDITOR, "toggle_fullscreen", edit, NULL);
             return MOU_NORMAL;
         }
 
@@ -594,7 +595,7 @@ edit_event (Gpm_Event * event, void *data)
             else if (y == w->y && (event->type & (GPM_DOUBLE | GPM_UP)) == (GPM_DOUBLE | GPM_UP))
             {
                 /* double click on top line (toggle fullscreen) */
-                edit_toggle_fullscreen (edit);
+                mc_event_raise (MCEVENT_GROUP_EDITOR, "toggle_fullscreen", edit, NULL);
                 edit->drag_state = MCEDIT_DRAG_NORMAL;
                 edit->force |= REDRAW_COMPLETELY;
                 edit_update_screen (edit);
@@ -692,7 +693,7 @@ edit_dialog_event (Gpm_Event * event, void *data)
 
             /* Handle buttons */
             if (x <= 2)
-                edit_toggle_fullscreen (e);
+                mc_event_raise (MCEVENT_GROUP_EDITOR, "toggle_fullscreen", e, NULL);
             else
                 send_message (h, NULL, MSG_ACTION, CK_Close, NULL);
 
@@ -1466,15 +1467,21 @@ edit_handle_move_resize (WEdit * edit, unsigned long command)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 /**
  * Toggle window fuulscreen mode.
  *
  * @param edit editor object
  */
 
-void
-edit_toggle_fullscreen (WEdit * edit)
+gboolean
+mc_editor_cmd_toggle_fullscreen (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
     edit->fullscreen = !edit->fullscreen;
     edit->force = REDRAW_COMPLETELY;
 
@@ -1490,6 +1497,8 @@ edit_toggle_fullscreen (WEdit * edit)
         edit->force |= REDRAW_PAGE;
         edit_update_screen (edit);
     }
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

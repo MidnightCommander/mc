@@ -39,6 +39,7 @@
 #include "editwidget.h"
 #include "editcmd_dialogs.h"
 
+#include "event.h"
 #include "macro.h"
 
 /*** global variables ****************************************************************************/
@@ -140,15 +141,24 @@ edit_delete_macro (WEdit * edit, int hotkey)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-void
-edit_delete_macro_cmd (WEdit * edit)
+/* event callback */
+
+gboolean
+mc_editor_cmd_macro_delete (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WEdit *edit = (WEdit *) data;
+
     int hotkey;
+
+    (void) event_info;
+    (void) error;
 
     hotkey = editcmd_dialog_raw_key_query (_("Delete macro"), _("Press macro hotkey:"), TRUE);
 
     if (hotkey != 0 && !edit_delete_macro (edit, hotkey))
         message (D_ERROR, _("Delete macro"), _("Macro not deleted"));
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -186,11 +196,13 @@ edit_execute_macro (WEdit * edit, int hotkey)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-/** returns FALSE on error */
 gboolean
-edit_store_macro_cmd (WEdit * edit)
+mc_editor_cmd_macro_store (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WEdit *edit = (WEdit *) data;
+
     int i;
     int hotkey;
     GString *marcros_string;
@@ -202,17 +214,20 @@ edit_store_macro_cmd (WEdit * edit)
     gboolean have_macro = FALSE;
     char *skeyname = NULL;
 
+    (void) event_info;
+    (void) error;
+
     hotkey =
         editcmd_dialog_raw_key_query (_("Save macro"), _("Press the macro's new hotkey:"), TRUE);
     if (hotkey == ESC_CHAR)
-        return FALSE;
+        return TRUE;
 
     tmp_act = keybind_lookup_keymap_command (editor_map, hotkey);
 
     /* return FALSE if try assign macro into restricted hotkeys */
     if (tmp_act == CK_MacroStartRecord
         || tmp_act == CK_MacroStopRecord || tmp_act == CK_MacroStartStopRecord)
-        return FALSE;
+        return TRUE;
 
     edit_delete_macro (edit, hotkey);
 
@@ -221,7 +236,7 @@ edit_store_macro_cmd (WEdit * edit)
     g_free (macros_fname);
 
     if (macros_config == NULL)
-        return FALSE;
+        return TRUE;
 
     edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
 
@@ -264,33 +279,40 @@ edit_store_macro_cmd (WEdit * edit)
     g_string_free (marcros_string, TRUE);
     mc_config_save_file (macros_config, NULL);
     mc_config_deinit (macros_config);
+
     return TRUE;
 }
 
  /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
 gboolean
-edit_repeat_macro_cmd (WEdit * edit)
+mc_editor_cmd_macro_repeat (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WEdit *edit = (WEdit *) data;
+
     int i, j;
     char *f;
     long count_repeat;
-    char *error = NULL;
+    char *error_str = NULL;
+
+    (void) event_info;
+    (void) error;
 
     f = input_dialog (_("Repeat last commands"), _("Repeat times:"), MC_HISTORY_EDIT_REPEAT, NULL,
                       INPUT_COMPLETE_NONE);
     if (f == NULL || *f == '\0')
     {
         g_free (f);
-        return FALSE;
+        return TRUE;
     }
 
-    count_repeat = strtol (f, &error, 0);
+    count_repeat = strtol (f, &error_str, 0);
 
-    if (*error != '\0')
+    if (*error_str != '\0')
     {
         g_free (f);
-        return FALSE;
+        return TRUE;
     }
 
     g_free (f);
@@ -302,6 +324,7 @@ edit_repeat_macro_cmd (WEdit * edit)
         for (i = 0; i < macro_index; i++)
             edit_execute_cmd (edit, record_macro_buf[i].action, record_macro_buf[i].ch);
     edit_update_screen (edit);
+
     return TRUE;
 }
 
@@ -388,35 +411,52 @@ edit_load_macro_cmd (WEdit * edit)
     g_strfreev (keys);
     mc_config_deinit (macros_config);
     edit_macro_sort_by_hotkey ();
+
     return TRUE;
 }
 
 /* }}} Macro stuff end here */
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-edit_begin_end_macro_cmd (WEdit * edit)
+gboolean
+mc_editor_cmd_macro_record_start_stop (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
     /* edit is a pointer to the widget */
     if (edit != NULL)
     {
         unsigned long command = macro_index < 0 ? CK_MacroStartRecord : CK_MacroStopRecord;
         edit_execute_key_command (edit, command, -1);
     }
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-edit_begin_end_repeat_cmd (WEdit * edit)
+gboolean
+mc_editor_cmd_macro_repeat_start_stop (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
     /* edit is a pointer to the widget */
     if (edit != NULL)
     {
         unsigned long command = macro_index < 0 ? CK_RepeatStartRecord : CK_RepeatStopRecord;
         edit_execute_key_command (edit, command, -1);
     }
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

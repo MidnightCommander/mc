@@ -76,11 +76,8 @@
 #include "edit-impl.h"
 #include "editwidget.h"
 #include "editcmd_dialogs.h"
-#ifdef HAVE_ASPELL
-#include "spell.h"
-#include "spell_dialogs.h"
-#endif
 #include "etags.h"
+#include "event.h"
 
 /*** global variables ****************************************************************************/
 
@@ -504,7 +501,7 @@ edit_save_cmd (WEdit * edit)
 
     /* On failure try 'save as', it does locking on its own */
     if (res == 0)
-        return edit_save_as_cmd (edit);
+        return mc_editor_call_event_save_as (edit);
     edit->force |= REDRAW_COMPLETELY;
     if (res > 0)
     {
@@ -572,78 +569,6 @@ edit_delete_column_of_text (WEdit * edit)
                               edit_buffer_move_forward (&edit->buffer, edit->buffer.curs1, 1,
                                                         0) - edit->buffer.curs1);
     }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** if success return 0 */
-
-static int
-edit_block_delete (WEdit * edit)
-{
-    off_t start_mark, end_mark;
-    off_t curs_pos;
-    long curs_line, c1, c2;
-
-    if (!eval_marks (edit, &start_mark, &end_mark))
-        return 0;
-
-    if (edit->column_highlight && edit->mark2 < 0)
-        edit_mark_cmd (edit, FALSE);
-    if ((end_mark - start_mark) > option_max_undo / 2)
-    {
-        /* Warning message with a query to continue or cancel the operation */
-        if (edit_query_dialog2
-            (_("Warning"),
-             _
-             ("Block is large, you may not be able to undo this action"),
-             _("C&ontinue"), _("&Cancel")))
-        {
-            return 1;
-        }
-    }
-    c1 = min (edit->column1, edit->column2);
-    c2 = max (edit->column1, edit->column2);
-    edit->column1 = c1;
-    edit->column2 = c2;
-
-    edit_push_markers (edit);
-
-    curs_line = edit->buffer.curs_line;
-
-    curs_pos = edit->curs_col + edit->over_col;
-
-    /* move cursor to start of selection */
-    edit_cursor_move (edit, start_mark - edit->buffer.curs1);
-    edit_scroll_screen_over_cursor (edit);
-
-    if (start_mark < end_mark)
-    {
-        if (edit->column_highlight)
-        {
-            off_t line_width;
-
-            if (edit->mark2 < 0)
-                edit_mark_cmd (edit, FALSE);
-            edit_delete_column_of_text (edit);
-            /* move cursor to the saved position */
-            edit_move_to_line (edit, curs_line);
-            /* calculate line width and cursor position before cut */
-            line_width = edit_move_forward3 (edit, edit_buffer_get_current_bol (&edit->buffer), 0,
-                                             edit_buffer_get_current_eol (&edit->buffer));
-            if (option_cursor_beyond_eol && curs_pos > line_width)
-                edit->over_col = curs_pos - line_width;
-        }
-        else
-        {
-            off_t count;
-
-            for (count = start_mark; count < end_mark; count++)
-                edit_delete (edit, TRUE);
-        }
-    }
-    edit_set_markers (edit, 0, 0, 0, 0);
-    edit->force |= REDRAW_PAGE;
-    return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1595,20 +1520,51 @@ edit_set_filename (WEdit * edit, const vfs_path_t * name_vpath)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/* Here we want to warn the users of overwriting an existing file,
-   but only if they have made a change to the filename */
-/* returns TRUE on success */
+/**
+ * The proxy function for calling "save_as" event.
+ */
+
 gboolean
-edit_save_as_cmd (WEdit * edit)
+mc_editor_call_event_save_as (WEdit * edit)
 {
-    /* This heads the 'Save As' dialog box */
+    mc_editor_event_data_ret_boolean_t event_data = {
+        .editor = edit
+    };
+
+    mc_event_raise (MCEVENT_GROUP_EDITOR, "save_as", &event_data, NULL);
+    return event_data.return_value;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+/**
+ * Here we want to warn the users of overwriting an existing file,
+ *  but only if they have made a change to the filename 
+ *
+ * return value stored to mc_editor_event_data_ret_boolean_t->return_value
+ * returns TRUE on success
+ */
+
+gboolean
+mc_editor_cmd_save_as (event_info_t * event_info, gpointer data, GError ** error)
+{
+    mc_editor_event_data_ret_boolean_t *event_data = (mc_editor_event_data_ret_boolean_t *) data;
+    WEdit *edit = (WEdit *) event_data->editor;
+
     vfs_path_t *exp_vpath;
     int save_lock = 0;
     int different_filename = 0;
 
-    if (!edit_check_newline (&edit->buffer))
-        return FALSE;
+    (void) event_info;
+    (void) error;
 
+    /* This heads the 'Save As' dialog box */
+
+    if (!edit_check_newline (&edit->buffer))
+    {
+        event_data->return_value = FALSE;
+        return TRUE;
+    }
     exp_vpath = edit_get_save_file_as (edit);
     edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
 
@@ -1695,6 +1651,7 @@ edit_save_as_cmd (WEdit * edit)
                     edit_load_syntax (edit, NULL, edit->syntax_type);
                 vfs_path_free (exp_vpath);
                 edit->force |= REDRAW_COMPLETELY;
+                event_data->return_value = TRUE;
                 return TRUE;
             default:
                 edit_error_dialog (_("Save as"), get_sys_error (_("Cannot save file")));
@@ -1711,20 +1668,26 @@ edit_save_as_cmd (WEdit * edit)
   ret:
     vfs_path_free (exp_vpath);
     edit->force |= REDRAW_COMPLETELY;
-    return FALSE;
+    event_data->return_value = FALSE;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** returns TRUE on success */
+/* event callback */
 
 gboolean
-edit_save_confirm_cmd (WEdit * edit)
+mc_editor_cmd_save_confirm (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
     if (edit->filename_vpath == NULL)
-        return edit_save_as_cmd (edit);
+        return mc_editor_call_event_save_as (edit);
 
     if (!edit_check_newline (&edit->buffer))
-        return FALSE;
+        return TRUE;
 
     if (edit_confirm_save)
     {
@@ -1736,9 +1699,10 @@ edit_save_confirm_cmd (WEdit * edit)
         ok = (edit_query_dialog2 (_("Save file"), f, _("&Save"), _("&Cancel")) == 0);
         g_free (f);
         if (!ok)
-            return FALSE;
+            return TRUE;
     }
-    return edit_save_cmd (edit);
+    (void) edit_save_cmd (edit);
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1984,179 +1948,15 @@ eval_marks (WEdit * edit, off_t * start_mark, off_t * end_mark)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-edit_block_copy_cmd (WEdit * edit)
+gboolean
+mc_editor_cmd_replace (event_info_t * event_info, gpointer data, GError ** error)
 {
-    off_t start_mark, end_mark, current = edit->buffer.curs1;
-    off_t mark1, mark2;
-    long c1, c2;
-    off_t size;
-    unsigned char *copy_buf;
+    WEdit *edit = (WEdit *) data;
+    /** call with edit = 0 before shutdown to close memory leaks */
+    gboolean again = (gboolean) (intptr_t) event_info->init_data;
 
-    edit_update_curs_col (edit);
-    if (!eval_marks (edit, &start_mark, &end_mark))
-        return;
-
-    copy_buf = edit_get_block (edit, start_mark, end_mark, &size);
-
-    /* all that gets pushed are deletes hence little space is used on the stack */
-
-    edit_push_markers (edit);
-
-    if (edit->column_highlight)
-    {
-        long col_delta;
-
-        col_delta = abs (edit->column2 - edit->column1);
-        edit_insert_column_of_text (edit, copy_buf, size, col_delta, &mark1, &mark2, &c1, &c2);
-    }
-    else
-    {
-        int size_orig = size;
-
-        while (size-- != 0)
-            edit_insert_ahead (edit, copy_buf[size]);
-
-        /* Place cursor at the end of text selection */
-        if (option_cursor_after_inserted_block)
-            edit_cursor_move (edit, size_orig);
-    }
-
-    g_free (copy_buf);
-    edit_scroll_screen_over_cursor (edit);
-
-    if (edit->column_highlight)
-        edit_set_markers (edit, edit->buffer.curs1, mark2, c1, c2);
-    else if (start_mark < current && end_mark > current)
-        edit_set_markers (edit, start_mark, end_mark + end_mark - start_mark, 0, 0);
-
-    edit->force |= REDRAW_PAGE;
-}
-
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-edit_block_move_cmd (WEdit * edit)
-{
-    off_t current;
-    unsigned char *copy_buf = NULL;
-    off_t start_mark, end_mark;
-
-    if (!eval_marks (edit, &start_mark, &end_mark))
-        return;
-
-    if (!edit->column_highlight && edit->buffer.curs1 > start_mark && edit->buffer.curs1 < end_mark)
-        return;
-
-    if (edit->mark2 < 0)
-        edit_mark_cmd (edit, FALSE);
-    edit_push_markers (edit);
-
-    if (edit->column_highlight)
-    {
-        off_t mark1, mark2;
-        off_t size;
-        long c1, c2, b_width;
-        long x, x2;
-
-        c1 = min (edit->column1, edit->column2);
-        c2 = max (edit->column1, edit->column2);
-        b_width = c2 - c1;
-
-        edit_update_curs_col (edit);
-
-        x = edit->curs_col;
-        x2 = x + edit->over_col;
-
-        /* do nothing when cursor inside first line of selected area */
-        if ((edit_buffer_get_eol (&edit->buffer, edit->buffer.curs1) ==
-             edit_buffer_get_eol (&edit->buffer, start_mark)) && x2 > c1 && x2 <= c2)
-            return;
-
-        if (edit->buffer.curs1 > start_mark
-            && edit->buffer.curs1 < edit_buffer_get_eol (&edit->buffer, end_mark))
-        {
-            if (x > c2)
-                x -= b_width;
-            else if (x > c1 && x <= c2)
-                x = c1;
-        }
-        /* save current selection into buffer */
-        copy_buf = edit_get_block (edit, start_mark, end_mark, &size);
-
-        /* remove current selection */
-        edit_block_delete_cmd (edit);
-
-        edit->over_col = max (0, edit->over_col - b_width);
-        /* calculate the cursor pos after delete block */
-        current = edit_move_forward3 (edit, edit_buffer_get_current_bol (&edit->buffer), x, 0);
-        edit_cursor_move (edit, current - edit->buffer.curs1);
-        edit_scroll_screen_over_cursor (edit);
-
-        /* add TWS if need before block insertion */
-        if (option_cursor_beyond_eol && edit->over_col > 0)
-            edit_insert_over (edit);
-
-        edit_insert_column_of_text (edit, copy_buf, size, b_width, &mark1, &mark2, &c1, &c2);
-        edit_set_markers (edit, mark1, mark2, c1, c2);
-    }
-    else
-    {
-        off_t count, count_orig;
-
-        current = edit->buffer.curs1;
-        copy_buf = g_malloc0 (end_mark - start_mark);
-        edit_cursor_move (edit, start_mark - edit->buffer.curs1);
-        edit_scroll_screen_over_cursor (edit);
-
-        for (count = start_mark; count < end_mark; count++)
-            copy_buf[end_mark - count - 1] = edit_delete (edit, TRUE);
-
-        edit_scroll_screen_over_cursor (edit);
-        edit_cursor_move (edit,
-                          current - edit->buffer.curs1 -
-                          (((current - edit->buffer.curs1) > 0) ? end_mark - start_mark : 0));
-        edit_scroll_screen_over_cursor (edit);
-        count_orig = count;
-        while (count-- > start_mark)
-            edit_insert_ahead (edit, copy_buf[end_mark - count - 1]);
-
-        edit_set_markers (edit, edit->buffer.curs1, edit->buffer.curs1 + end_mark - start_mark, 0,
-                          0);
-
-        /* Place cursor at the end of text selection */
-        if (option_cursor_after_inserted_block)
-            edit_cursor_move (edit, count_orig - start_mark);
-    }
-
-    edit_scroll_screen_over_cursor (edit);
-    g_free (copy_buf);
-    edit->force |= REDRAW_PAGE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** returns 1 if canceelled by user */
-
-int
-edit_block_delete_cmd (WEdit * edit)
-{
-    off_t start_mark, end_mark;
-
-    if (eval_marks (edit, &start_mark, &end_mark))
-        return edit_block_delete (edit);
-
-    edit_delete_line (edit);
-    return 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** call with edit = 0 before shutdown to close memory leaks */
-
-void
-edit_replace_cmd (WEdit * edit, int again)
-{
     /* 1 = search string, 2 = replace with */
     static char *saved1 = NULL; /* saved default[123] */
     static char *saved2 = NULL;
@@ -2169,11 +1969,13 @@ edit_replace_cmd (WEdit * edit, int again)
     gboolean once_found = FALSE;
     edit_search_status_msg_t esm;
 
+    (void) error;
+
     if (edit == NULL)
     {
         MC_PTR_FREE (saved1);
         MC_PTR_FREE (saved2);
-        return;
+        return TRUE;
     }
 
     edit->force |= REDRAW_COMPLETELY;
@@ -2395,6 +2197,9 @@ edit_replace_cmd (WEdit * edit, int again)
     g_free (input2);
     if (input2_str != NULL)
         g_string_free (input2_str, TRUE);
+
+    edit->prev_col = edit_get_col (edit);
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2421,13 +2226,18 @@ edit_search_update_callback (const void *user_data, gsize char_offset)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-edit_search_cmd (WEdit * edit, gboolean again)
+gboolean
+mc_editor_cmd_search (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WEdit *edit = (WEdit *) data;
+    gboolean again = (gboolean) (intptr_t) event_info->init_data;
+
+    (void) error;
 
     if (edit == NULL)
-        return;
+        return FALSE;
 
     if (!again)
         edit_search (edit);
@@ -2478,6 +2288,10 @@ edit_search_cmd (WEdit * edit, gboolean again)
             edit_search (edit);
         }
     }
+
+    edit->prev_col = edit_get_col (edit);
+
+    return TRUE;
 }
 
 
@@ -2607,20 +2421,31 @@ edit_save_block (WEdit * edit, const char *filename, off_t start, off_t finish)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-edit_paste_from_history (WEdit * edit)
+gboolean
+mc_editor_cmd_paste_from_history (event_info_t * event_info, gpointer data, GError ** error)
 {
-    (void) edit;
+    (void) event_info;
+    (void) data;
+    (void) error;
     edit_error_dialog (_("Error"), _("This function is not implemented"));
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
 gboolean
-edit_copy_to_X_buf_cmd (WEdit * edit)
+mc_editor_cmd_ext_clip_copy (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WEdit *edit = (WEdit *) data;
+
     off_t start_mark, end_mark;
+
+    (void) event_info;
+    (void) error;
 
     if (!eval_marks (edit, &start_mark, &end_mark))
         return TRUE;
@@ -2640,11 +2465,17 @@ edit_copy_to_X_buf_cmd (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
 gboolean
-edit_cut_to_X_buf_cmd (WEdit * edit)
+mc_editor_cmd_ext_clip_cut (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WEdit *edit = (WEdit *) data;
+
     off_t start_mark, end_mark;
+
+    (void) event_info;
+    (void) error;
 
     if (!eval_marks (edit, &start_mark, &end_mark))
         return TRUE;
@@ -2652,66 +2483,87 @@ edit_cut_to_X_buf_cmd (WEdit * edit)
     if (!edit_save_block_to_clip_file (edit, start_mark, end_mark))
     {
         edit_error_dialog (_("Cut to clipboard"), _("Unable to save to file"));
-        return FALSE;
+        return TRUE;
     }
     /* try use external clipboard utility */
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL, NULL);
 
-    edit_block_delete_cmd (edit);
+    mc_editor_call_event_block_delete (edit);
     edit_mark_cmd (edit, TRUE);
 
     return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
 gboolean
-edit_paste_from_X_buf_cmd (WEdit * edit)
+mc_editor_cmd_ext_clip_paste (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WEdit *edit = (WEdit *) data;
+
     vfs_path_t *tmp;
-    gboolean ret;
+
+    (void) event_info;
+    (void) error;
+
+    if (!option_persistent_selections && edit->mark1 != edit->mark2)
+        mc_editor_call_event_block_delete (edit);
+    if (option_cursor_beyond_eol && edit->over_col > 0)
+        edit_insert_over (edit);
 
     /* try use external clipboard utility */
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL, NULL);
     tmp = mc_config_get_full_vpath (EDIT_CLIP_FILE);
-    ret = (edit_insert_file (edit, tmp) >= 0);
+    edit_insert_file (edit, tmp);
     vfs_path_free (tmp);
 
-    return ret;
+    if (!option_persistent_selections && edit->mark2 >= 0)
+    {
+        if (edit->column_highlight)
+            edit_push_undo_action (edit, COLUMN_ON);
+        edit->column_highlight = 0;
+        edit_mark_cmd (edit, TRUE);
+    }
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 /**
  * Ask user for the line and go to that line.
  * Negative numbers mean line from the end (i.e. -1 is the last line).
  */
 
-void
-edit_goto_cmd (WEdit * edit)
+gboolean
+mc_editor_cmd_goto_line (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WEdit *edit = (WEdit *) data;
+
     char *f;
     static long line = 0;       /* line as typed, saved as default */
     long l;
-    char *error;
+    char *error_str;
     char s[32];
+
+    (void) event_info;
+    (void) error;
 
     g_snprintf (s, sizeof (s), "%ld", line);
     f = input_dialog (_("Goto line"), _("Enter line:"), MC_HISTORY_EDIT_GOTO_LINE, line ? s : "",
                       INPUT_COMPLETE_NONE);
-    if (!f)
-        return;
-
-    if (!*f)
+    if (f == NULL || *f == '\0')
     {
         g_free (f);
-        return;
+        return TRUE;
     }
 
-    l = strtol (f, &error, 0);
-    if (*error)
+    l = strtol (f, &error_str, 0);
+    if (*error_str != '\0')
     {
         g_free (f);
-        return;
+        return TRUE;
     }
 
     line = l;
@@ -2721,18 +2573,24 @@ edit_goto_cmd (WEdit * edit)
     edit_move_to_line (edit, l - 1);
     edit->force |= REDRAW_COMPLETELY;
     g_free (f);
+
+    return TRUE;
 }
 
 
 /* --------------------------------------------------------------------------------------------- */
-/** Return TRUE on success */
+/* event callback */
 
 gboolean
-edit_save_block_cmd (WEdit * edit)
+mc_editor_cmd_save_block (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WEdit *edit = (WEdit *) data;
+
     off_t start_mark, end_mark;
     char *exp, *tmp;
-    gboolean ret = FALSE;
+
+    (void) event_info;
+    (void) error;
 
     if (!eval_marks (edit, &start_mark, &end_mark))
         return TRUE;
@@ -2746,9 +2604,7 @@ edit_save_block_cmd (WEdit * edit)
 
     if (exp != NULL && *exp != '\0')
     {
-        if (edit_save_block (edit, exp, start_mark, end_mark))
-            ret = TRUE;
-        else
+        if (!edit_save_block (edit, exp, start_mark, end_mark))
             edit_error_dialog (_("Save block"), get_sys_error (_("Cannot save file")));
 
         edit->force |= REDRAW_COMPLETELY;
@@ -2756,19 +2612,22 @@ edit_save_block_cmd (WEdit * edit)
 
     g_free (exp);
 
-    return ret;
+    return TRUE;
 }
 
-
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-/** returns TRUE on success */
 gboolean
-edit_insert_file_cmd (WEdit * edit)
+mc_editor_cmd_insert_file (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WEdit *edit = (WEdit *) data;
+
     char *tmp;
     char *exp;
-    gboolean ret = FALSE;
+
+    (void) event_info;
+    (void) error;
 
     tmp = mc_config_get_full_path (EDIT_CLIP_FILE);
     exp = input_expand_dialog (_("Insert file"), _("Enter file name:"),
@@ -2782,34 +2641,39 @@ edit_insert_file_cmd (WEdit * edit)
         vfs_path_t *exp_vpath;
 
         exp_vpath = vfs_path_from_str (exp);
-        ret = (edit_insert_file (edit, exp_vpath) >= 0);
-        vfs_path_free (exp_vpath);
-
-        if (!ret)
+        if (edit_insert_file (edit, exp_vpath) < 0)
             edit_error_dialog (_("Insert file"), get_sys_error (_("Cannot insert file")));
+        vfs_path_free (exp_vpath);
     }
 
     g_free (exp);
 
     edit->force |= REDRAW_COMPLETELY;
-    return ret;
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 /** sorts a block, returns -1 on system fail, 1 on cancel and 0 on success */
 
-int
-edit_sort_cmd (WEdit * edit)
+gboolean
+mc_editor_cmd_sort (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WEdit *edit = (WEdit *) data;
+
     static char *old = 0;
     char *exp, *tmp, *tmp_edit_block_name, *tmp_edit_temp_name;
     off_t start_mark, end_mark;
     int e;
 
+    (void) event_info;
+    (void) error;
+
     if (!eval_marks (edit, &start_mark, &end_mark))
     {
         edit_error_dialog (_("Sort block"), _("You must first highlight a block of text"));
-        return 0;
+        return TRUE;
     }
 
     tmp = mc_config_get_full_path (EDIT_BLOCK_FILE);
@@ -2820,63 +2684,70 @@ edit_sort_cmd (WEdit * edit)
                         _("Enter sort options (see manpage) separated by whitespace:"),
                         MC_HISTORY_EDIT_SORT, (old != NULL) ? old : "", INPUT_COMPLETE_NONE);
 
-    if (!exp)
-        return 1;
     g_free (old);
-    old = exp;
-    tmp_edit_block_name = mc_config_get_full_path (EDIT_BLOCK_FILE);
-    tmp_edit_temp_name = mc_config_get_full_path (EDIT_TEMP_FILE);
-    tmp =
-        g_strconcat (" sort ", exp, " ", tmp_edit_block_name,
-                     " > ", tmp_edit_temp_name, (char *) NULL);
-    g_free (tmp_edit_temp_name);
-    g_free (tmp_edit_block_name);
 
-    e = system (tmp);
-    g_free (tmp);
-    if (e)
+    if (exp != NULL)
     {
-        if (e == -1 || e == 127)
+        old = exp;
+        tmp_edit_block_name = mc_config_get_full_path (EDIT_BLOCK_FILE);
+        tmp_edit_temp_name = mc_config_get_full_path (EDIT_TEMP_FILE);
+        tmp =
+            g_strconcat (" sort ", exp, " ", tmp_edit_block_name,
+                         " > ", tmp_edit_temp_name, (char *) NULL);
+        g_free (tmp_edit_temp_name);
+        g_free (tmp_edit_block_name);
+
+        e = system (tmp);
+        g_free (tmp);
+        if (e)
         {
-            edit_error_dialog (_("Sort"), get_sys_error (_("Cannot execute sort command")));
+            if (e == -1 || e == 127)
+            {
+                edit_error_dialog (_("Sort"), get_sys_error (_("Cannot execute sort command")));
+            }
+            else
+            {
+                char q[BUF_TINY];
+                sprintf (q, "%d ", e);
+                tmp = g_strdup_printf (_("Sort returned non-zero: %s"), q);
+                edit_error_dialog (_("Sort"), tmp);
+                g_free (tmp);
+            }
+            return TRUE;
         }
-        else
+
+        edit->force |= REDRAW_COMPLETELY;
+
+        if (!mc_editor_call_event_block_delete (edit))
         {
-            char q[8];
-            sprintf (q, "%d ", e);
-            tmp = g_strdup_printf (_("Sort returned non-zero: %s"), q);
-            edit_error_dialog (_("Sort"), tmp);
-            g_free (tmp);
+            vfs_path_t *tmp_vpath;
+
+            tmp_vpath = mc_config_get_full_vpath (EDIT_TEMP_FILE);
+            edit_insert_file (edit, tmp_vpath);
+            vfs_path_free (tmp_vpath);
         }
-        return -1;
     }
 
-    edit->force |= REDRAW_COMPLETELY;
-
-    if (edit_block_delete_cmd (edit))
-        return 1;
-
-    {
-        vfs_path_t *tmp_vpath;
-
-        tmp_vpath = mc_config_get_full_vpath (EDIT_TEMP_FILE);
-        edit_insert_file (edit, tmp_vpath);
-        vfs_path_free (tmp_vpath);
-    }
-    return 0;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 /**
  * Ask user for a command, execute it and paste its output back to the
  * editor.
  */
 
-int
-edit_ext_cmd (WEdit * edit)
+gboolean
+mc_editor_cmd_run_external_command (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WEdit *edit = (WEdit *) data;
+
     char *exp, *tmp, *tmp_edit_temp_file;
     int e;
+
+    (void) event_info;
+    (void) error;
 
     exp =
         input_dialog (_("Paste output of external command"),
@@ -2885,32 +2756,33 @@ edit_ext_cmd (WEdit * edit)
                       | INPUT_COMPLETE_HOSTNAMES | INPUT_COMPLETE_CD | INPUT_COMPLETE_COMMANDS |
                       INPUT_COMPLETE_SHELL_ESC);
 
-    if (!exp)
-        return 1;
-
-    tmp_edit_temp_file = mc_config_get_full_path (EDIT_TEMP_FILE);
-    tmp = g_strconcat (exp, " > ", tmp_edit_temp_file, (char *) NULL);
-    g_free (tmp_edit_temp_file);
-    e = system (tmp);
-    g_free (tmp);
-    g_free (exp);
-
-    if (e)
+    if (exp != NULL)
     {
-        edit_error_dialog (_("External command"), get_sys_error (_("Cannot execute command")));
-        return -1;
+
+        tmp_edit_temp_file = mc_config_get_full_path (EDIT_TEMP_FILE);
+        tmp = g_strconcat (exp, " > ", tmp_edit_temp_file, (char *) NULL);
+        g_free (tmp_edit_temp_file);
+        e = system (tmp);
+        g_free (tmp);
+        g_free (exp);
+
+        if (e != 0)
+        {
+            edit_error_dialog (_("External command"), get_sys_error (_("Cannot execute command")));
+            return TRUE;
+        }
+
+        edit->force |= REDRAW_COMPLETELY;
+
+        {
+            vfs_path_t *tmp_vpath;
+
+            tmp_vpath = mc_config_get_full_vpath (EDIT_TEMP_FILE);
+            edit_insert_file (edit, tmp_vpath);
+            vfs_path_free (tmp_vpath);
+        }
     }
-
-    edit->force |= REDRAW_COMPLETELY;
-
-    {
-        vfs_path_t *tmp_vpath;
-
-        tmp_vpath = mc_config_get_full_vpath (EDIT_TEMP_FILE);
-        edit_insert_file (edit, tmp_vpath);
-        vfs_path_free (tmp_vpath);
-    }
-    return 0;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2926,17 +2798,20 @@ edit_block_process_cmd (WEdit * edit, int macro_number)
 
     fname = g_strdup_printf ("%s.%i.sh", MC_EXTMACRO_FILE, macro_number);
     macros_fname = g_build_filename (mc_config_get_data_path (), fname, (char *) NULL);
-    user_menu (edit, macros_fname, 0);
+    mc_editor_call_event_user_menu (edit, macros_fname, 0);
     g_free (fname);
     g_free (macros_fname);
     edit->force |= REDRAW_COMPLETELY;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-edit_mail_dialog (WEdit * edit)
+gboolean
+mc_editor_cmd_mail (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WEdit *edit = (WEdit *) data;
+
     char *tmail_to = NULL;
     char *tmail_subject = NULL;
     char *tmail_cc = NULL;
@@ -2969,6 +2844,9 @@ edit_mail_dialog (WEdit * edit)
         quick_widgets, NULL, NULL
     };
 
+    (void) event_info;
+    (void) error;
+
     if (quick_dialog (&qdlg) != B_CANCEL)
     {
         g_free (mail_cc_last);
@@ -2979,6 +2857,8 @@ edit_mail_dialog (WEdit * edit)
         mail_to_last = tmail_to;
         pipe_mail (&edit->buffer, mail_to_last, mail_subject_last, mail_cc_last);
     }
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3052,36 +2932,59 @@ edit_complete_word_cmd (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
 #ifdef HAVE_CHARSET
-void
-edit_select_codepage_cmd (WEdit * edit)
+
+gboolean
+mc_editor_cmd_select_codepage (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
     if (do_select_codepage ())
         edit_set_codeset (edit);
 
     edit->force = REDRAW_PAGE;
     widget_redraw (WIDGET (edit));
+
+    return TRUE;
 }
 #endif
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-edit_insert_literal_cmd (WEdit * edit)
+gboolean
+mc_editor_cmd_insert_literal (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WEdit *edit = (WEdit *) data;
+
     int char_for_insertion;
+
+    (void) event_info;
+    (void) error;
 
     char_for_insertion = editcmd_dialog_raw_key_query (_("Insert literal"),
                                                        _("Press any key:"), FALSE);
     edit_execute_key_command (edit, -1, ascii_alpha_to_cntrl (char_for_insertion));
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
 gboolean
-edit_load_forward_cmd (WEdit * edit)
+mc_editor_cmd_file_load_next (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
     if (edit->modified
         && edit_query_dialog2 (_("Warning"),
                                _("Current text was modified without a file save.\n"
@@ -3092,25 +2995,28 @@ edit_load_forward_cmd (WEdit * edit)
         return TRUE;
     }
 
-    if (edit_stack_iterator + 1 >= MAX_HISTORY_MOVETO)
-        return FALSE;
-
-    if (edit_history_moveto[edit_stack_iterator + 1].line < 1)
-        return FALSE;
-
-    edit_stack_iterator++;
-    if (edit_history_moveto[edit_stack_iterator].filename_vpath != NULL)
-        return edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename_vpath,
-                                 edit_history_moveto[edit_stack_iterator].line);
-
-    return FALSE;
+    if (edit_stack_iterator + 1 < MAX_HISTORY_MOVETO
+        && edit_history_moveto[edit_stack_iterator + 1].line >= 1)
+    {
+        edit_stack_iterator++;
+        if (edit_history_moveto[edit_stack_iterator].filename_vpath != NULL)
+            edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename_vpath,
+                              edit_history_moveto[edit_stack_iterator].line);
+    }
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
 gboolean
-edit_load_back_cmd (WEdit * edit)
+mc_editor_cmd_file_load_prev (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
     if (edit->modified
         && edit_query_dialog2 (_("Warning"),
                                _("Current text was modified without a file save.\n"
@@ -3122,22 +3028,24 @@ edit_load_back_cmd (WEdit * edit)
     }
 
     /* we are in the bottom of the stack, NO WAY! */
-    if (edit_stack_iterator == 0)
-        return FALSE;
-
-    edit_stack_iterator--;
-    if (edit_history_moveto[edit_stack_iterator].filename_vpath != NULL)
-        return edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename_vpath,
-                                 edit_history_moveto[edit_stack_iterator].line);
-
-    return FALSE;
+    if (edit_stack_iterator != 0)
+    {
+        edit_stack_iterator--;
+        if (edit_history_moveto[edit_stack_iterator].filename_vpath != NULL)
+            edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename_vpath,
+                              edit_history_moveto[edit_stack_iterator].line);
+    }
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-edit_get_match_keyword_cmd (WEdit * edit)
+gboolean
+mc_editor_cmd_match_keyword (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WEdit *edit = (WEdit *) data;
+
     gsize word_len = 0, max_len = 0;
     int num_def = 0;
     gsize i;
@@ -3149,6 +3057,9 @@ edit_get_match_keyword_cmd (WEdit * edit)
 
     etags_hash_t def_hash[MAX_DEFINITIONS];
 
+    (void) event_info;
+    (void) error;
+
     for (i = 0; i < MAX_DEFINITIONS; i++)
     {
         def_hash[i].filename = NULL;
@@ -3156,7 +3067,7 @@ edit_get_match_keyword_cmd (WEdit * edit)
 
     /* search start of word to be completed */
     if (!edit_find_word_start (&edit->buffer, &word_start, &word_len))
-        return;
+        return TRUE;
 
     /* prepare match expression */
     match_expr = g_string_sized_new (word_len);
@@ -3196,141 +3107,284 @@ edit_get_match_keyword_cmd (WEdit * edit)
                                                (etags_hash_t *) & def_hash, num_def);
     }
     g_string_free (match_expr, TRUE);
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * The proxy function for calling "block_delete" event.
+ */
 
-#ifdef HAVE_ASPELL
-int
-edit_suggest_current_word (WEdit * edit)
+gboolean
+mc_editor_call_event_block_delete (WEdit * edit)
 {
-    gsize cut_len = 0;
-    gsize word_len = 0;
-    off_t word_start = 0;
-    int retval = B_SKIP_WORD;
-    GString *match_word;
+    mc_editor_event_data_ret_boolean_t event_data = {
+        .editor = edit
+    };
 
-    /* search start of word to spell check */
-    match_word = edit_buffer_get_word_from_pos (&edit->buffer, edit->buffer.curs1, &word_start,
-                                                &cut_len);
-    word_len = match_word->len;
+    mc_event_raise (MCEVENT_GROUP_EDITOR, "block_delete", &event_data, NULL);
+    return event_data.return_value;
+}
 
-#ifdef HAVE_CHARSET
-    if (mc_global.source_codepage >= 0 && (mc_global.source_codepage != mc_global.display_codepage))
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_block_copy (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+
+    off_t start_mark, end_mark, current = edit->buffer.curs1;
+    off_t mark1, mark2;
+    long c1, c2;
+    off_t size;
+    unsigned char *copy_buf;
+
+
+    (void) event_info;
+    (void) error;
+
+    if (option_cursor_beyond_eol && edit->over_col > 0)
+        edit_insert_over (edit);
+
+
+    edit_update_curs_col (edit);
+    if (!eval_marks (edit, &start_mark, &end_mark))
+        return TRUE;
+
+    copy_buf = edit_get_block (edit, start_mark, end_mark, &size);
+
+    /* all that gets pushed are deletes hence little space is used on the stack */
+
+    edit_push_markers (edit);
+
+    if (edit->column_highlight)
     {
-        GString *tmp_word;
+        long col_delta;
 
-        tmp_word = str_convert_to_display (match_word->str);
-        g_string_free (match_word, TRUE);
-        match_word = tmp_word;
+        col_delta = abs (edit->column2 - edit->column1);
+        edit_insert_column_of_text (edit, copy_buf, size, col_delta, &mark1, &mark2, &c1, &c2);
     }
-#endif
-    if (!aspell_check (match_word->str, (int) word_len))
+    else
     {
-        GArray *suggest;
-        unsigned int res;
+        int size_orig = size;
 
-        suggest = g_array_new (TRUE, FALSE, sizeof (char *));
+        while (size-- != 0)
+            edit_insert_ahead (edit, copy_buf[size]);
 
-        res = aspell_suggest (suggest, match_word->str, (int) word_len);
-        if (res != 0)
+        /* Place cursor at the end of text selection */
+        if (option_cursor_after_inserted_block)
+            edit_cursor_move (edit, size_orig);
+    }
+
+    g_free (copy_buf);
+    edit_scroll_screen_over_cursor (edit);
+
+    if (edit->column_highlight)
+        edit_set_markers (edit, edit->buffer.curs1, mark2, c1, c2);
+    else if (start_mark < current && end_mark > current)
+        edit_set_markers (edit, start_mark, end_mark + end_mark - start_mark, 0, 0);
+
+    edit->force |= REDRAW_PAGE;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+/**
+ * return value stored to mc_editor_event_data_ret_boolean_t->return_value
+ */
+gboolean
+mc_editor_cmd_block_delete (event_info_t * event_info, gpointer data, GError ** error)
+{
+    mc_editor_event_data_ret_boolean_t *event_data = (mc_editor_event_data_ret_boolean_t *) data;
+    WEdit *edit = (WEdit *) event_data->editor;
+
+    off_t start_mark, end_mark;
+
+    (void) event_info;
+    (void) error;
+
+    if (eval_marks (edit, &start_mark, &end_mark))
+    {
+        off_t curs_pos;
+        long curs_line, c1, c2;
+
+        if (edit->column_highlight && edit->mark2 < 0)
+            edit_mark_cmd (edit, FALSE);
+        if ((end_mark - start_mark) > option_max_undo / 2)
         {
-            char *new_word = NULL;
-
-            edit->found_start = word_start;
-            edit->found_len = word_len;
-            edit->force |= REDRAW_PAGE;
-            edit_scroll_screen_over_cursor (edit);
-            edit_render_keypress (edit);
-
-            retval = spell_dialog_spell_suggest_show (edit, match_word->str, &new_word, suggest);
-            edit_cursor_move (edit, word_len - cut_len);
-
-            if (retval == B_ENTER && new_word != NULL)
+            /* Warning message with a query to continue or cancel the operation */
+            if (edit_query_dialog2
+                (_("Warning"),
+                 _
+                 ("Block is large, you may not be able to undo this action"),
+                 _("C&ontinue"), _("&Cancel")))
             {
-                guint i;
-                char *cp_word;
-
-#ifdef HAVE_CHARSET
-                if (mc_global.source_codepage >= 0 &&
-                    (mc_global.source_codepage != mc_global.display_codepage))
-                {
-                    GString *tmp_word;
-
-                    tmp_word = str_convert_to_input (new_word);
-                    g_free (new_word);
-                    new_word = g_string_free (tmp_word, FALSE);
-                }
-#endif
-                cp_word = new_word;
-                for (i = 0; i < word_len; i++)
-                    edit_backspace (edit, TRUE);
-                for (; *new_word; new_word++)
-                    edit_insert (edit, *new_word);
-                g_free (cp_word);
+                event_data->return_value = TRUE;
+                return TRUE;
             }
-            else if (retval == B_ADD_WORD && match_word != NULL)
-                aspell_add_to_dict (match_word->str, (int) word_len);
         }
+        c1 = min (edit->column1, edit->column2);
+        c2 = max (edit->column1, edit->column2);
+        edit->column1 = c1;
+        edit->column2 = c2;
 
-        g_array_free (suggest, TRUE);
-        edit->found_start = 0;
-        edit->found_len = 0;
-    }
-    g_string_free (match_word, TRUE);
-    return retval;
-}
+        edit_push_markers (edit);
 
-/* --------------------------------------------------------------------------------------------- */
+        curs_line = edit->buffer.curs_line;
 
-void
-edit_spellcheck_file (WEdit * edit)
-{
-    if (edit->buffer.curs_line > 0)
-    {
-        edit_cursor_move (edit, -edit->buffer.curs1);
-        edit_move_to_prev_col (edit, 0);
-        edit_update_curs_row (edit);
-    }
+        curs_pos = edit->curs_col + edit->over_col;
 
-    do
-    {
-        int c1, c2;
+        /* move cursor to start of selection */
+        edit_cursor_move (edit, start_mark - edit->buffer.curs1);
+        edit_scroll_screen_over_cursor (edit);
 
-        c2 = edit_buffer_get_current_byte (&edit->buffer);
-
-        do
+        if (start_mark < end_mark)
         {
-            if (edit->buffer.curs1 >= edit->buffer.size)
-                return;
+            if (edit->column_highlight)
+            {
+                off_t line_width;
 
-            c1 = c2;
-            edit_cursor_move (edit, 1);
-            c2 = edit_buffer_get_current_byte (&edit->buffer);
+                if (edit->mark2 < 0)
+                    edit_mark_cmd (edit, FALSE);
+                edit_delete_column_of_text (edit);
+                /* move cursor to the saved position */
+                edit_move_to_line (edit, curs_line);
+                /* calculate line width and cursor position before cut */
+                line_width =
+                    edit_move_forward3 (edit, edit_buffer_get_current_bol (&edit->buffer), 0,
+                                        edit_buffer_get_current_eol (&edit->buffer));
+                if (option_cursor_beyond_eol && curs_pos > line_width)
+                    edit->over_col = curs_pos - line_width;
+            }
+            else
+            {
+                off_t count;
+
+                for (count = start_mark; count < end_mark; count++)
+                    edit_delete (edit, TRUE);
+            }
         }
-        while (is_break_char (c1) || is_break_char (c2));
+        edit_set_markers (edit, 0, 0, 0, 0);
+        edit->force |= REDRAW_PAGE;
     }
-    while (edit_suggest_current_word (edit) != B_CANCEL);
+    else
+        mc_event_raise (MCEVENT_GROUP_EDITOR, "delete_line", edit, NULL);
+    event_data->return_value = FALSE;
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-edit_set_spell_lang (void)
+gboolean
+mc_editor_cmd_block_move (event_info_t * event_info, gpointer data, GError ** error)
 {
-    GArray *lang_list;
+    WEdit *edit = (WEdit *) data;
 
-    lang_list = g_array_new (TRUE, FALSE, sizeof (char *));
-    if (aspell_get_lang_list (lang_list) != 0)
+    off_t current;
+    unsigned char *copy_buf = NULL;
+    off_t start_mark, end_mark;
+
+    (void) event_info;
+    (void) error;
+
+    if (!eval_marks (edit, &start_mark, &end_mark))
+        return TRUE;
+
+    if (!edit->column_highlight && edit->buffer.curs1 > start_mark && edit->buffer.curs1 < end_mark)
+        return TRUE;
+
+    if (edit->mark2 < 0)
+        edit_mark_cmd (edit, FALSE);
+    edit_push_markers (edit);
+
+    if (edit->column_highlight)
     {
-        char *lang;
+        off_t mark1, mark2;
+        off_t size;
+        long c1, c2, b_width;
+        long x, x2;
 
-        lang = spell_dialog_lang_list_show (lang_list);
-        if (lang != NULL)
-            (void) aspell_set_lang (lang);
+        c1 = min (edit->column1, edit->column2);
+        c2 = max (edit->column1, edit->column2);
+        b_width = c2 - c1;
+
+        edit_update_curs_col (edit);
+
+        x = edit->curs_col;
+        x2 = x + edit->over_col;
+
+        /* do nothing when cursor inside first line of selected area */
+        if ((edit_buffer_get_eol (&edit->buffer, edit->buffer.curs1) ==
+             edit_buffer_get_eol (&edit->buffer, start_mark)) && x2 > c1 && x2 <= c2)
+            return TRUE;
+
+        if (edit->buffer.curs1 > start_mark
+            && edit->buffer.curs1 < edit_buffer_get_eol (&edit->buffer, end_mark))
+        {
+            if (x > c2)
+                x -= b_width;
+            else if (x > c1 && x <= c2)
+                x = c1;
+        }
+        /* save current selection into buffer */
+        copy_buf = edit_get_block (edit, start_mark, end_mark, &size);
+
+        /* remove current selection */
+        mc_editor_call_event_block_delete (edit);
+
+        edit->over_col = max (0, edit->over_col - b_width);
+        /* calculate the cursor pos after delete block */
+        current = edit_move_forward3 (edit, edit_buffer_get_current_bol (&edit->buffer), x, 0);
+        edit_cursor_move (edit, current - edit->buffer.curs1);
+        edit_scroll_screen_over_cursor (edit);
+
+        /* add TWS if need before block insertion */
+        if (option_cursor_beyond_eol && edit->over_col > 0)
+            edit_insert_over (edit);
+
+        edit_insert_column_of_text (edit, copy_buf, size, b_width, &mark1, &mark2, &c1, &c2);
+        edit_set_markers (edit, mark1, mark2, c1, c2);
     }
-    aspell_array_clean (lang_list);
+    else
+    {
+        off_t count, count_orig;
+
+        current = edit->buffer.curs1;
+        copy_buf = g_malloc0 (end_mark - start_mark);
+        edit_cursor_move (edit, start_mark - edit->buffer.curs1);
+        edit_scroll_screen_over_cursor (edit);
+
+        for (count = start_mark; count < end_mark; count++)
+            copy_buf[end_mark - count - 1] = edit_delete (edit, TRUE);
+
+        edit_scroll_screen_over_cursor (edit);
+        edit_cursor_move (edit,
+                          current - edit->buffer.curs1 -
+                          (((current - edit->buffer.curs1) > 0) ? end_mark - start_mark : 0));
+        edit_scroll_screen_over_cursor (edit);
+        count_orig = count;
+        while (count-- > start_mark)
+            edit_insert_ahead (edit, copy_buf[end_mark - count - 1]);
+
+        edit_set_markers (edit, edit->buffer.curs1, edit->buffer.curs1 + end_mark - start_mark, 0,
+                          0);
+
+        /* Place cursor at the end of text selection */
+        if (option_cursor_after_inserted_block)
+            edit_cursor_move (edit, count_orig - start_mark);
+    }
+
+    edit_scroll_screen_over_cursor (edit);
+    g_free (copy_buf);
+    edit->force |= REDRAW_PAGE;
+
+    return TRUE;
 }
-#endif /* HAVE_ASPELL */
 
 /* --------------------------------------------------------------------------------------------- */

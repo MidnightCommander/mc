@@ -63,8 +63,8 @@ extern int show_right_margin;
 /*** declarations of public functions ************************************************************/
 
 /* used in main() */
-void edit_stack_init (void);
-void edit_stack_free (void);
+void mc_editor_init (GError ** error);
+void mc_editor_deinit (GError ** error);
 
 gboolean edit_file (const vfs_path_t * file_vpath, long line);
 gboolean edit_files (const GList * files);

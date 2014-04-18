@@ -18,6 +18,7 @@ libedit_la_SOURCES = \
 	editmenu.c \
 	editoptions.c \
 	editwidget.c editwidget.h \
+	event.c event.h \
 	etags.c etags.h \
 	format.c \
 	macro.c macro.h \
@@ -27,6 +28,7 @@ if USE_ASPELL
 if HAVE_GMODULE
 libedit_la_SOURCES += \
 	spell.c spell.h \
+	spell_cmd.c \
 	spell_dialogs.c spell_dialogs.h
 endif
 endif

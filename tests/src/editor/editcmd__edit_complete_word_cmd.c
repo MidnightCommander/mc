@@ -69,17 +69,6 @@ edit_get_syntax_color (WEdit * _edit, off_t _byte_index)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* @Mock */
-gboolean
-edit_load_macro_cmd (WEdit * _edit)
-{
-    (void) _edit;
-
-    return FALSE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 /* @CapturedValue */
 static const WEdit *editcmd_dialog_completion_show__edit;
 /* @CapturedValue */

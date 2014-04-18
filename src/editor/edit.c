@@ -46,6 +46,7 @@
 
 #include "lib/global.h"
 
+#include "lib/event.h"
 #include "lib/tty/color.h"
 #include "lib/tty/tty.h"        /* attrset() */
 #include "lib/tty/key.h"        /* is_idle() */
@@ -73,6 +74,7 @@
 #include "spell.h"
 #endif
 #include "macro.h"
+#include "event.h"
 
 /*** global variables ****************************************************************************/
 
@@ -1090,46 +1092,6 @@ edit_move_updown (WEdit * edit, long lines, gboolean do_scroll, gboolean directi
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-static void
-edit_right_delete_word (WEdit * edit)
-{
-    while (edit->buffer.curs1 < edit->buffer.size)
-    {
-        int c1, c2;
-
-        c1 = edit_delete (edit, TRUE);
-        c2 = edit_buffer_get_current_byte (&edit->buffer);
-        if (c1 == '\n' || c2 == '\n')
-            break;
-        if ((isspace (c1) == 0) != (isspace (c2) == 0))
-            break;
-        if ((my_type_of (c1) & my_type_of (c2)) == 0)
-            break;
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-edit_left_delete_word (WEdit * edit)
-{
-    while (edit->buffer.curs1 > 0)
-    {
-        int c1, c2;
-
-        c1 = edit_backspace (edit, TRUE);
-        c2 = edit_buffer_get_previous_byte (&edit->buffer);
-        if (c1 == '\n' || c2 == '\n')
-            break;
-        if ((isspace (c1) == 0) != (isspace (c2) == 0))
-            break;
-        if ((my_type_of (c1) & my_type_of (c2)) == 0)
-            break;
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /**
    the start column position is not recorded, and hence does not
    undo as it happed. But who would notice.
@@ -1314,24 +1276,6 @@ edit_group_undo (WEdit * edit)
         if (!option_group_undo)
             ac = STACK_BOTTOM;
     }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-edit_delete_to_line_end (WEdit * edit)
-{
-    while (edit_buffer_get_current_byte (&edit->buffer) != '\n' && edit->buffer.curs2 != 0)
-        edit_delete (edit, TRUE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-edit_delete_to_line_begin (WEdit * edit)
-{
-    while (edit_buffer_get_previous_byte (&edit->buffer) != '\n' && edit->buffer.curs1 != 0)
-        edit_backspace (edit, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1556,106 +1500,6 @@ edit_get_bracket (WEdit * edit, gboolean in_screen, unsigned long furthest_brack
 
 /* --------------------------------------------------------------------------------------------- */
 
-static inline void
-edit_goto_matching_bracket (WEdit * edit)
-{
-    off_t q;
-
-    q = edit_get_bracket (edit, 0, 0);
-    if (q >= 0)
-    {
-        edit->bracket = edit->buffer.curs1;
-        edit->force |= REDRAW_PAGE;
-        edit_cursor_move (edit, q - edit->buffer.curs1);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-edit_move_block_to_right (WEdit * edit)
-{
-    off_t start_mark, end_mark;
-    long cur_bol, start_bol;
-
-    if (!eval_marks (edit, &start_mark, &end_mark))
-        return;
-
-    start_bol = edit_buffer_get_bol (&edit->buffer, start_mark);
-    cur_bol = edit_buffer_get_bol (&edit->buffer, end_mark - 1);
-
-    do
-    {
-        edit_cursor_move (edit, cur_bol - edit->buffer.curs1);
-        if (!edit_line_is_blank (edit, edit->buffer.curs_line))
-        {
-            if (option_fill_tabs_with_spaces)
-                insert_spaces_tab (edit, option_fake_half_tabs);
-            else
-                edit_insert (edit, '\t');
-            edit_cursor_move (edit,
-                              edit_buffer_get_bol (&edit->buffer, cur_bol) - edit->buffer.curs1);
-        }
-
-        if (cur_bol == 0)
-            break;
-
-        cur_bol = edit_buffer_get_bol (&edit->buffer, cur_bol - 1);
-    }
-    while (cur_bol >= start_bol);
-
-    edit->force |= REDRAW_PAGE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-edit_move_block_to_left (WEdit * edit)
-{
-    off_t start_mark, end_mark;
-    off_t cur_bol, start_bol;
-    int i;
-
-    if (!eval_marks (edit, &start_mark, &end_mark))
-        return;
-
-    start_bol = edit_buffer_get_bol (&edit->buffer, start_mark);
-    cur_bol = edit_buffer_get_bol (&edit->buffer, end_mark - 1);
-
-    do
-    {
-        int del_tab_width;
-        int next_char;
-
-        edit_cursor_move (edit, cur_bol - edit->buffer.curs1);
-
-        if (option_fake_half_tabs)
-            del_tab_width = HALF_TAB_SIZE;
-        else
-            del_tab_width = option_tab_spacing;
-
-        next_char = edit_buffer_get_current_byte (&edit->buffer);
-        if (next_char == '\t')
-            edit_delete (edit, TRUE);
-        else if (next_char == ' ')
-            for (i = 1; i <= del_tab_width; i++)
-            {
-                if (next_char == ' ')
-                    edit_delete (edit, TRUE);
-                next_char = edit_buffer_get_current_byte (&edit->buffer);
-            }
-
-        if (cur_bol == 0)
-            break;
-
-        cur_bol = edit_buffer_get_bol (&edit->buffer, cur_bol - 1);
-    }
-    while (cur_bol >= start_bol);
-
-    edit->force |= REDRAW_PAGE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /**
  * prints at the cursor
  * @return number of chars printed
@@ -1667,7 +1511,14 @@ edit_print_string (WEdit * e, const char *s)
     size_t i = 0;
 
     while (s[i] != '\0')
-        edit_execute_cmd (e, CK_InsertChar, (unsigned char) s[i++]);
+    {
+        mc_editor_event_data_insert_char_t event_data = {
+            .editor = e,
+            .char_for_insertion = (unsigned char) s[i++],
+        };
+        /* Raw call og event callback for speedup. */
+        mc_editor_cmd_insert_char (NULL, &event_data, NULL);
+    }
     e->force |= REDRAW_COMPLETELY;
     edit_update_screen (e);
     return i;
@@ -1743,20 +1594,94 @@ edit_insert_column_from_file (WEdit * edit, int file, off_t * start_pos, off_t *
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+mc_edit_switch_off_selection (WEdit * edit)
+{
+    if (!option_persistent_selections && edit->mark2 >= 0)
+    {
+        if (edit->column_highlight)
+            edit_push_undo_action (edit, COLUMN_ON);
+        edit->column_highlight = 0;
+        edit_mark_cmd (edit, TRUE);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+mc_edit_go_left_cmd (WEdit * edit)
+{
+
+    if (option_fake_half_tabs && is_in_indent (&edit->buffer) && right_of_four_spaces (edit))
+    {
+        if (option_cursor_beyond_eol && edit->over_col > 0)
+            edit->over_col--;
+        else
+            edit_cursor_move (edit, -HALF_TAB_SIZE);
+        edit->force &= (0xFFF - REDRAW_CHAR_ONLY);
+    }
+    else
+        edit_left_char_move_cmd (edit);
+
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+mc_edit_go_right_cmd (WEdit * edit)
+{
+    if (option_fake_half_tabs && is_in_indent (&edit->buffer) && left_of_four_spaces (edit))
+    {
+        edit_cursor_move (edit, HALF_TAB_SIZE);
+        edit->force &= (0xFFF - REDRAW_CHAR_ONLY);
+    }
+    else
+        edit_right_char_move_cmd (edit);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/** User edit menu, like user menu (F2) but only in editor. */
+/**
+ * The proxy function for calling "save_as" event.
+ */
 
 void
-user_menu (WEdit * edit, const char *menu_file, int selected_entry)
+mc_editor_call_event_user_menu (WEdit * edit, const char *menu_file, int selected_entry)
 {
+    mc_editor_event_data_user_menu_t event_data = {
+        .editor = edit,
+        .menu_file = menu_file,
+        .selected_entry = selected_entry
+    };
+
+    mc_event_raise (MCEVENT_GROUP_EDITOR, "user_menu", &event_data, NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+/** User edit menu, like user menu (F2) but only in editor. */
+/* event callback */
+
+gboolean
+mc_editor_cmd_user_menu (event_info_t * event_info, gpointer data, GError ** error)
+{
+    mc_editor_event_data_user_menu_t *event_data = (mc_editor_event_data_user_menu_t *) data;
+    WEdit *edit = event_data->editor;
+    const char *menu_file = event_data->menu_file;
+    int selected_entry = event_data->selected_entry;
+
     char *block_file;
     gboolean nomark;
     off_t curs;
     off_t start_mark, end_mark;
     struct stat status;
     vfs_path_t *block_file_vpath;
+
+    (void) event_info;
+    (void) error;
 
     block_file = mc_config_get_full_path (EDIT_BLOCK_FILE);
     block_file_vpath = vfs_path_from_str (block_file);
@@ -1774,7 +1699,7 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
 
         /* i.e. we have marked block */
         if (!nomark)
-            rc = edit_block_delete_cmd (edit);
+            rc = mc_editor_call_event_block_delete (edit);
 
         if (rc == 0)
         {
@@ -1795,6 +1720,8 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
     edit_cursor_move (edit, curs - edit->buffer.curs1);
     edit->force |= REDRAW_PAGE;
     widget_redraw (WIDGET (edit));
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3118,31 +3045,6 @@ edit_mark_current_line_cmd (WEdit * edit)
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
-edit_delete_line (WEdit * edit)
-{
-    /*
-     * Delete right part of the line.
-     * Note that edit_buffer_get_byte() returns '\n' when byte position is
-     *   beyond EOF.
-     */
-    while (edit_buffer_get_current_byte (&edit->buffer) != '\n')
-        (void) edit_delete (edit, TRUE);
-
-    /*
-     * Delete '\n' char.
-     * Note that edit_delete() will not corrupt anything if called while
-     *   cursor position is EOF.
-     */
-    (void) edit_delete (edit, TRUE);
-
-    /*
-     * Delete left part of the line.
-     * Note, that edit_buffer_get_byte() returns '\n' when byte position is < 0.
-     */
-    while (edit_buffer_get_previous_byte (&edit->buffer) != '\n')
-        (void) edit_backspace (edit, TRUE);
-}
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -3169,86 +3071,12 @@ edit_find_bracket (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * This executes a command as though the user initiated it through a key
- * press.  Callback with MSG_KEY as a message calls this after
- * translating the key press.  This function can be used to pass any
- * command to the editor.  Note that the screen wouldn't update
- * automatically.  Either of command or char_for_insertion must be
- * passed as -1.  Commands are executed, and char_for_insertion is
- * inserted at the cursor.
- */
 
-void
-edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_insertion)
+static void
+edit_process_highlight_cmd (WEdit * edit, unsigned long command)
 {
-    if (command == CK_MacroStartRecord || command == CK_RepeatStartRecord
-        || (macro_index < 0
-            && (command == CK_MacroStartStopRecord || command == CK_RepeatStartStopRecord)))
-    {
-        macro_index = 0;
-        edit->force |= REDRAW_CHAR_ONLY | REDRAW_LINE;
-        return;
-    }
-    if (macro_index != -1)
-    {
-        edit->force |= REDRAW_COMPLETELY;
-        if (command == CK_MacroStopRecord || command == CK_MacroStartStopRecord)
-        {
-            edit_store_macro_cmd (edit);
-            macro_index = -1;
-            return;
-        }
-        if (command == CK_RepeatStopRecord || command == CK_RepeatStartStopRecord)
-        {
-            edit_repeat_macro_cmd (edit);
-            macro_index = -1;
-            return;
-        }
-    }
-
-    if (macro_index >= 0 && macro_index < MAX_MACRO_LENGTH - 1)
-    {
-        record_macro_buf[macro_index].action = command;
-        record_macro_buf[macro_index++].ch = char_for_insertion;
-    }
-    /* record the beginning of a set of editing actions initiated by a key press */
-    if (command != CK_Undo && command != CK_ExtendedKeyMap)
-        edit_push_key_press (edit);
-
-    edit_execute_cmd (edit, command, char_for_insertion);
-    if (edit->column_highlight)
-        edit->force |= REDRAW_PAGE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
-   This executes a command at a lower level than macro recording.
-   It also does not push a key_press onto the undo stack. This means
-   that if it is called many times, a single undo command will undo
-   all of them. It also does not check for the Undo command.
- */
-void
-edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
-{
-    Widget *w = WIDGET (edit);
-
     if (command == CK_WindowFullscreen)
-    {
-        edit_toggle_fullscreen (edit);
         return;
-    }
-
-    /* handle window state */
-    if (edit_handle_move_resize (edit, command))
-        return;
-
-    edit->force |= REDRAW_LINE;
-
-    /* The next key press will unhighlight the found string, so update
-     * the whole page */
-    if (edit->found_len || edit->column_highlight)
-        edit->force |= REDRAW_PAGE;
 
     switch (command)
     {
@@ -3290,686 +3118,647 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         }
         edit->highlight = 1;
         break;
-
-        /* any other command */
     default:
         if (edit->highlight)
             edit_mark_cmd (edit, FALSE);        /* clear */
         edit->highlight = 0;
     }
+}
 
-    /* first check for undo */
-    if (command == CK_Undo)
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * This executes a command as though the user initiated it through a key
+ * press.7  Callback with MSG_KEY as a message calls this after
+ * translating the key press.  This function can be used to pass any
+ * command to the editor.  Note that the screen wouldn't update
+ * automatically.  Either of command or char_for_insertion must be
+ * passed as -1.  Commands are executed, and char_for_insertion is
+ * inserted at the cursor.
+ */
+
+void
+edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_insertion)
+{
+    if (command == CK_MacroStartRecord || command == CK_RepeatStartRecord
+        || (macro_index < 0
+            && (command == CK_MacroStartStopRecord || command == CK_RepeatStartStopRecord)))
     {
-        edit->redo_stack_reset = 0;
-        edit_group_undo (edit);
-        edit->found_len = 0;
-        edit->prev_col = edit_get_col (edit);
-        edit->search_start = edit->buffer.curs1;
+        macro_index = 0;
+        edit->force |= REDRAW_CHAR_ONLY | REDRAW_LINE;
         return;
     }
-    /*  check for redo */
-    if (command == CK_Redo)
+    if (macro_index != -1)
     {
-        edit->redo_stack_reset = 0;
-        edit_do_redo (edit);
-        edit->found_len = 0;
-        edit->prev_col = edit_get_col (edit);
-        edit->search_start = edit->buffer.curs1;
-        return;
+        edit->force |= REDRAW_COMPLETELY;
+        if (command == CK_MacroStopRecord || command == CK_MacroStartStopRecord)
+        {
+            mc_event_raise (MCEVENT_GROUP_EDITOR, "macro_store", edit, NULL);
+            macro_index = -1;
+            return;
+        }
+        if (command == CK_RepeatStopRecord || command == CK_RepeatStartStopRecord)
+        {
+            mc_event_raise (MCEVENT_GROUP_EDITOR, "macro_repeat", edit, NULL);
+            macro_index = -1;
+            return;
+        }
     }
 
-    edit->redo_stack_reset = 1;
-
-    /* An ordinary key press */
-    if (char_for_insertion >= 0)
+    if (macro_index >= 0 && macro_index < MAX_MACRO_LENGTH - 1)
     {
-        /* if non persistent selection and text selected */
-        if (!option_persistent_selections && edit->mark1 != edit->mark2)
-            edit_block_delete_cmd (edit);
-
-        if (edit->overwrite)
-        {
-            /* remove char only one time, after input first byte, multibyte chars */
-#ifdef HAVE_CHARSET
-            if (!mc_global.utf8_display || edit->charpoint == 0)
-#endif
-                if (edit_buffer_get_current_byte (&edit->buffer) != '\n')
-
-                    edit_delete (edit, FALSE);
-        }
-        if (option_cursor_beyond_eol && edit->over_col > 0)
-            edit_insert_over (edit);
-#ifdef HAVE_CHARSET
-        if (char_for_insertion > 255 && !mc_global.utf8_display)
-        {
-            unsigned char str[UTF8_CHAR_LEN + 1];
-            size_t i = 0;
-            int res;
-
-            res = g_unichar_to_utf8 (char_for_insertion, (char *) str);
-            if (res == 0)
-            {
-                str[0] = '.';
-                str[1] = '\0';
-            }
-            else
-            {
-                str[res] = '\0';
-            }
-            while (i <= UTF8_CHAR_LEN && str[i] != '\0')
-            {
-                char_for_insertion = str[i];
-                edit_insert (edit, char_for_insertion);
-                i++;
-            }
-        }
-        else
-#endif
-            edit_insert (edit, char_for_insertion);
-
-        if (option_auto_para_formatting)
-        {
-            format_paragraph (edit, FALSE);
-            edit->force |= REDRAW_PAGE;
-        }
-        else
-            check_and_wrap_line (edit);
-        edit->found_len = 0;
-        edit->prev_col = edit_get_col (edit);
-        edit->search_start = edit->buffer.curs1;
-        edit_find_bracket (edit);
-        return;
+        record_macro_buf[macro_index].action = command;
+        record_macro_buf[macro_index++].ch = char_for_insertion;
     }
+    /* record the beginning of a set of editing actions initiated by a key press */
+    if (command != CK_Undo && command != CK_ExtendedKeyMap)
+        edit_push_key_press (edit);
+
+    edit_execute_cmd (edit, command, char_for_insertion);
+
+    if (edit->column_highlight)
+        edit->force |= REDRAW_PAGE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+   This executes a command at a lower level than macro recording.
+   It also does not push a key_press onto the undo stack. This means
+   that if it is called many times, a single undo command will undo
+   all of them. It also does not check for the Undo command.
+ */
+void
+edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
+{
+    const char *event_name = NULL;
+    void *event_data;
+    mc_editor_event_data_insert_char_t insert_event_data = {
+        .editor = edit,
+        .char_for_insertion = char_for_insertion
+    };
+
+    mc_editor_event_data_move_cursor_t cursor_event_data = {
+        .editor = edit,
+        .is_mark = FALSE,
+        .is_column = FALSE
+    };
+    mc_editor_event_data_ret_boolean_t ret_boolean_event_data = {
+        .editor = edit,
+    };
+    mc_editor_event_data_user_menu_t user_menu_event_data = {
+        .editor = edit,
+    };
+
+    edit->is_cursor_moved = FALSE;
 
     switch (command)
     {
-    case CK_TopOnScreen:
     case CK_BottomOnScreen:
-    case CK_Top:
-    case CK_Bottom:
-    case CK_PageUp:
-    case CK_PageDown:
-    case CK_Home:
-    case CK_End:
-    case CK_Up:
     case CK_Down:
+    case CK_End:
+    case CK_Home:
     case CK_Left:
-    case CK_Right:
-    case CK_WordLeft:
-    case CK_WordRight:
-        if (!option_persistent_selections && edit->mark2 >= 0)
-        {
-            if (edit->column_highlight)
-                edit_push_undo_action (edit, COLUMN_ON);
-            edit->column_highlight = 0;
-            edit_mark_cmd (edit, TRUE);
-        }
-    }
-
-    switch (command)
-    {
-    case CK_TopOnScreen:
-    case CK_BottomOnScreen:
+    case CK_MarkColumnDown:
+    case CK_MarkColumnLeft:
+    case CK_MarkColumnPageDown:
+    case CK_MarkColumnPageUp:
+    case CK_MarkColumnParagraphDown:
+    case CK_MarkColumnParagraphUp:
+    case CK_MarkColumnRight:
+    case CK_MarkColumnScrollDown:
+    case CK_MarkColumnScrollUp:
+    case CK_MarkColumnUp:
+    case CK_MarkDown:
+    case CK_MarkLeft:
+    case CK_MarkPageDown:
+    case CK_MarkPageUp:
+    case CK_MarkParagraphDown:
+    case CK_MarkToFileBegin:
+    case CK_MarkParagraphUp:
+    case CK_MarkRight:
+    case CK_MarkScrollDown:
+    case CK_MarkScrollUp:
+    case CK_MarkToEnd:
+    case CK_MarkToHome:
     case CK_MarkToPageBegin:
     case CK_MarkToPageEnd:
-    case CK_Up:
-    case CK_Down:
-    case CK_WordLeft:
-    case CK_WordRight:
     case CK_MarkToWordBegin:
     case CK_MarkToWordEnd:
     case CK_MarkUp:
-    case CK_MarkDown:
-    case CK_MarkColumnUp:
-    case CK_MarkColumnDown:
-        if (edit->mark2 == -1)
-            break;              /*marking is following the cursor: may need to highlight a whole line */
-    case CK_Left:
+    case CK_PageDown:
+    case CK_PageUp:
+    case CK_ParagraphDown:
+    case CK_ParagraphUp:
     case CK_Right:
-    case CK_MarkLeft:
-    case CK_MarkRight:
-        edit->force |= REDRAW_CHAR_ONLY;
+    case CK_ScrollDown:
+    case CK_ScrollUp:
+    case CK_Top:
+    case CK_TopOnScreen:
+    case CK_Up:
+    case CK_WordLeft:
+    case CK_WordRight:
+    case CK_Bottom:
+    case CK_MarkToFileEnd:
+        event_data = &cursor_event_data;
+        break;
+    case CK_Remove:
+    case CK_SaveAs:
+        event_data = &ret_boolean_event_data;
+        break;
+    case CK_InsertChar:
+    case CK_Return:
+        event_data = &insert_event_data;
+        break;
+    case CK_UserMenu:
+        event_data = &user_menu_event_data;
+        break;
+    default:
+        event_data = edit;
+    }
+
+    if (command != CK_WindowFullscreen)
+    {
+        /* handle window state */
+        if (edit_handle_move_resize (edit, command))
+            return;
+
+        edit->force |= REDRAW_LINE;
+
+        /* The next key press will unhighlight the found string, so update
+         * the whole page */
+        if (edit->found_len || edit->column_highlight)
+            edit->force |= REDRAW_PAGE;
+
+        edit_process_highlight_cmd (edit, command);
+
+        if (!(command == CK_Redo || command == CK_Undo))
+            edit->redo_stack_reset = 1;
     }
 
     /* basic cursor key commands */
     switch (command)
     {
+    case CK_WindowFullscreen:
+        event_name = "toggle_fullscreen";
+    case CK_Undo:
+        event_name = "undo";
+        break;
+    case CK_Redo:
+        event_name = "redo";
+        break;
+    case CK_InsertChar:
+        event_name = "insert_char";
+        break;
     case CK_BackSpace:
-        /* if non persistent selection and text selected */
-        if (!option_persistent_selections && edit->mark1 != edit->mark2)
-            edit_block_delete_cmd (edit);
-        else if (option_cursor_beyond_eol && edit->over_col > 0)
-            edit->over_col--;
-        else if (option_backspace_through_tabs && is_in_indent (&edit->buffer))
-        {
-            while (edit_buffer_get_previous_byte (&edit->buffer) != '\n' && edit->buffer.curs1 > 0)
-                edit_backspace (edit, TRUE);
-        }
-        else if (option_fake_half_tabs && is_in_indent (&edit->buffer)
-                 && right_of_four_spaces (edit))
-        {
-            int i;
-
-            for (i = 0; i < HALF_TAB_SIZE; i++)
-                edit_backspace (edit, TRUE);
-        }
-        else
-            edit_backspace (edit, FALSE);
+        event_name = "backspace";
         break;
     case CK_Delete:
-        /* if non persistent selection and text selected */
-        if (!option_persistent_selections && edit->mark1 != edit->mark2)
-            edit_block_delete_cmd (edit);
-        else
-        {
-            if (option_cursor_beyond_eol && edit->over_col > 0)
-                edit_insert_over (edit);
-
-            if (option_fake_half_tabs && is_in_indent (&edit->buffer) && left_of_four_spaces (edit))
-            {
-                int i;
-
-                for (i = 1; i <= HALF_TAB_SIZE; i++)
-                    edit_delete (edit, TRUE);
-            }
-            else
-                edit_delete (edit, FALSE);
-        }
+        event_name = "delete";
         break;
     case CK_DeleteToWordBegin:
-        edit->over_col = 0;
-        edit_left_delete_word (edit);
+        event_name = "delete_word_left";
         break;
     case CK_DeleteToWordEnd:
-        if (option_cursor_beyond_eol && edit->over_col > 0)
-            edit_insert_over (edit);
-
-        edit_right_delete_word (edit);
+        event_name = "delete_word_right";
         break;
     case CK_DeleteLine:
-        edit_delete_line (edit);
+        event_name = "delete_line";
         break;
     case CK_DeleteToHome:
-        edit_delete_to_line_begin (edit);
+        event_name = "delete_line_to_begin";
         break;
     case CK_DeleteToEnd:
-        edit_delete_to_line_end (edit);
+        event_name = "delete_line_to_end";
         break;
     case CK_Enter:
-        edit->over_col = 0;
-        if (option_auto_para_formatting)
-        {
-            edit_double_newline (edit);
-            if (option_return_does_auto_indent && !bracketed_pasting_in_progress)
-                edit_auto_indent (edit);
-            format_paragraph (edit, FALSE);
-        }
-        else
-        {
-            edit_insert (edit, '\n');
-            if (option_return_does_auto_indent && !bracketed_pasting_in_progress)
-                edit_auto_indent (edit);
-        }
+        event_name = "enter";
         break;
     case CK_Return:
-        edit_insert (edit, '\n');
+        insert_event_data.char_for_insertion = '\n';
+        event_name = "insert_char_raw";
         break;
-
     case CK_MarkColumnPageUp:
-        edit->column_highlight = 1;
+        cursor_event_data.direction = TO_PAGE_UP;
+        cursor_event_data.is_mark = TRUE;
+        cursor_event_data.is_column = TRUE;
+        event_name = "move_cursor";
+        break;
     case CK_PageUp:
+        cursor_event_data.direction = TO_PAGE_UP;
+        event_name = "move_cursor";
+        break;
     case CK_MarkPageUp:
-        edit_move_up (edit, w->lines - 1, 1);
+        cursor_event_data.direction = TO_PAGE_UP;
+        cursor_event_data.is_mark = TRUE;
+        event_name = "move_cursor";
         break;
     case CK_MarkColumnPageDown:
-        edit->column_highlight = 1;
+        cursor_event_data.direction = TO_PAGE_DOWN;
+        cursor_event_data.is_mark = TRUE;
+        cursor_event_data.is_column = TRUE;
+        event_name = "move_cursor";
+        break;
     case CK_PageDown:
+        cursor_event_data.direction = TO_PAGE_DOWN;
+        event_name = "move_cursor";
+        break;
     case CK_MarkPageDown:
-        edit_move_down (edit, w->lines - 1, 1);
+        cursor_event_data.direction = TO_PAGE_DOWN;
+        cursor_event_data.is_mark = TRUE;
+        event_name = "move_cursor";
         break;
     case CK_MarkColumnLeft:
-        edit->column_highlight = 1;
-    case CK_Left:
+        cursor_event_data.direction = TO_LEFT;
+        cursor_event_data.is_mark = TRUE;
+        cursor_event_data.is_column = TRUE;
+        event_name = "move_cursor";
+        break;
     case CK_MarkLeft:
-        if (option_fake_half_tabs && is_in_indent (&edit->buffer) && right_of_four_spaces (edit))
-        {
-            if (option_cursor_beyond_eol && edit->over_col > 0)
-                edit->over_col--;
-            else
-                edit_cursor_move (edit, -HALF_TAB_SIZE);
-            edit->force &= (0xFFF - REDRAW_CHAR_ONLY);
-        }
-        else
-            edit_left_char_move_cmd (edit);
+        cursor_event_data.direction = TO_LEFT;
+        cursor_event_data.is_mark = TRUE;
+        event_name = "move_cursor";
+        break;
+    case CK_Left:
+        cursor_event_data.direction = TO_LEFT;
+        edit->force |= REDRAW_CHAR_ONLY;
+        event_name = "move_cursor";
         break;
     case CK_MarkColumnRight:
-        edit->column_highlight = 1;
+        cursor_event_data.direction = TO_RIGHT;
+        cursor_event_data.is_mark = TRUE;
+        cursor_event_data.is_column = TRUE;
+        event_name = "move_cursor";
+        break;
     case CK_Right:
+        cursor_event_data.direction = TO_RIGHT;
+        event_name = "move_cursor";
+        break;
     case CK_MarkRight:
-        if (option_fake_half_tabs && is_in_indent (&edit->buffer) && left_of_four_spaces (edit))
-        {
-            edit_cursor_move (edit, HALF_TAB_SIZE);
-            edit->force &= (0xFFF - REDRAW_CHAR_ONLY);
-        }
-        else
-            edit_right_char_move_cmd (edit);
+        cursor_event_data.direction = TO_RIGHT;
+        cursor_event_data.is_mark = TRUE;
+        event_name = "move_cursor";
         break;
     case CK_TopOnScreen:
+        cursor_event_data.direction = TO_PAGE_BEGIN;
+        event_name = "move_cursor";
+        break;
     case CK_MarkToPageBegin:
-        edit_begin_page (edit);
+        cursor_event_data.direction = TO_PAGE_BEGIN;
+        cursor_event_data.is_mark = TRUE;
+        event_name = "move_cursor";
         break;
     case CK_BottomOnScreen:
+        cursor_event_data.direction = TO_PAGE_END;
+        event_name = "move_cursor";
+        break;
     case CK_MarkToPageEnd:
-        edit_end_page (edit);
+        cursor_event_data.direction = TO_PAGE_END;
+        cursor_event_data.is_mark = TRUE;
+        event_name = "move_cursor";
         break;
     case CK_WordLeft:
+        cursor_event_data.direction = TO_WORD_BEGIN;
+        event_name = "move_cursor";
+        break;
     case CK_MarkToWordBegin:
-        edit->over_col = 0;
-        edit_left_word_move_cmd (edit);
+        cursor_event_data.direction = TO_WORD_BEGIN;
+        cursor_event_data.is_mark = TRUE;
+        event_name = "move_cursor";
         break;
     case CK_WordRight:
+        cursor_event_data.direction = TO_WORD_END;
+        event_name = "move_cursor";
+        break;
     case CK_MarkToWordEnd:
-        edit->over_col = 0;
-        edit_right_word_move_cmd (edit);
+        cursor_event_data.direction = TO_WORD_END;
+        cursor_event_data.is_mark = TRUE;
+        event_name = "move_cursor";
         break;
     case CK_MarkColumnUp:
-        edit->column_highlight = 1;
+        cursor_event_data.direction = TO_UP;
+        cursor_event_data.is_mark = TRUE;
+        cursor_event_data.is_column = TRUE;
+        event_name = "move_cursor";
+        break;
     case CK_Up:
+        cursor_event_data.direction = TO_UP;
+        event_name = "move_cursor";
+        break;
     case CK_MarkUp:
-        edit_move_up (edit, 1, 0);
+        cursor_event_data.direction = TO_UP;
+        cursor_event_data.is_mark = TRUE;
+        event_name = "move_cursor";
         break;
     case CK_MarkColumnDown:
-        edit->column_highlight = 1;
+        cursor_event_data.direction = TO_DOWN;
+        cursor_event_data.is_mark = TRUE;
+        cursor_event_data.is_column = TRUE;
+        event_name = "move_cursor";
+        break;
     case CK_Down:
+        cursor_event_data.direction = TO_DOWN;
+        event_name = "move_cursor";
+        break;
     case CK_MarkDown:
-        edit_move_down (edit, 1, 0);
+        cursor_event_data.direction = TO_DOWN;
+        cursor_event_data.is_mark = TRUE;
+        event_name = "move_cursor";
         break;
     case CK_MarkColumnParagraphUp:
-        edit->column_highlight = 1;
+        cursor_event_data.direction = TO_PARAGRAPH_UP;
+        cursor_event_data.is_mark = TRUE;
+        cursor_event_data.is_column = TRUE;
+        event_name = "move_cursor";
+        break;
     case CK_ParagraphUp:
+        cursor_event_data.direction = TO_PARAGRAPH_UP;
+        event_name = "move_cursor";
+        break;
     case CK_MarkParagraphUp:
-        edit_move_up_paragraph (edit, 0);
+        cursor_event_data.direction = TO_PARAGRAPH_UP;
+        cursor_event_data.is_mark = TRUE;
+        event_name = "move_cursor";
         break;
     case CK_MarkColumnParagraphDown:
-        edit->column_highlight = 1;
+        cursor_event_data.direction = TO_PARAGRAPH_DOWN;
+        cursor_event_data.is_mark = TRUE;
+        cursor_event_data.is_column = TRUE;
+        event_name = "move_cursor";
+        break;
     case CK_ParagraphDown:
+        cursor_event_data.direction = TO_PARAGRAPH_DOWN;
+        event_name = "move_cursor";
+        break;
     case CK_MarkParagraphDown:
-        edit_move_down_paragraph (edit, 0);
+        cursor_event_data.direction = TO_PARAGRAPH_DOWN;
+        cursor_event_data.is_mark = TRUE;
+        event_name = "move_cursor";
         break;
     case CK_MarkColumnScrollUp:
-        edit->column_highlight = 1;
+        cursor_event_data.direction = TO_SCROLL_UP;
+        cursor_event_data.is_mark = TRUE;
+        cursor_event_data.is_column = TRUE;
+        event_name = "move_cursor";
+        break;
     case CK_ScrollUp:
+        cursor_event_data.direction = TO_SCROLL_UP;
+        event_name = "move_cursor";
+        break;
     case CK_MarkScrollUp:
-        edit_move_up (edit, 1, 1);
+        cursor_event_data.direction = TO_SCROLL_UP;
+        cursor_event_data.is_mark = TRUE;
+        event_name = "move_cursor";
         break;
     case CK_MarkColumnScrollDown:
-        edit->column_highlight = 1;
+        cursor_event_data.direction = TO_SCROLL_DOWN;
+        cursor_event_data.is_mark = TRUE;
+        cursor_event_data.is_column = TRUE;
+        event_name = "move_cursor";
+        break;
     case CK_ScrollDown:
+        cursor_event_data.direction = TO_SCROLL_DOWN;
+        event_name = "move_cursor";
+        break;
     case CK_MarkScrollDown:
-        edit_move_down (edit, 1, 1);
+        cursor_event_data.direction = TO_SCROLL_DOWN;
+        cursor_event_data.is_mark = TRUE;
+        event_name = "move_cursor";
         break;
     case CK_Home:
+        cursor_event_data.direction = TO_LINE_BEGIN;
+        event_name = "move_cursor";
+        break;
     case CK_MarkToHome:
-        edit_cursor_to_bol (edit);
+        cursor_event_data.direction = TO_LINE_BEGIN;
+        cursor_event_data.is_mark = TRUE;
+        event_name = "move_cursor";
         break;
     case CK_End:
+        cursor_event_data.direction = TO_LINE_END;
+        event_name = "move_cursor";
+        break;
     case CK_MarkToEnd:
-        edit_cursor_to_eol (edit);
+        cursor_event_data.direction = TO_LINE_END;
+        cursor_event_data.is_mark = TRUE;
+        event_name = "move_cursor";
+        break;
+    case CK_Top:
+        cursor_event_data.direction = TO_FILE_BEGIN;
+        event_name = "move_cursor";
+        break;
+    case CK_MarkToFileBegin:
+        cursor_event_data.direction = TO_FILE_BEGIN;
+        cursor_event_data.is_mark = TRUE;
+        event_name = "move_cursor";
+        break;
+    case CK_Bottom:
+        cursor_event_data.direction = TO_FILE_END;
+        event_name = "move_cursor";
+        break;
+    case CK_MarkToFileEnd:
+        cursor_event_data.direction = TO_FILE_END;
+        cursor_event_data.is_mark = TRUE;
+        event_name = "move_cursor";
         break;
     case CK_Tab:
-        /* if text marked shift block */
-        if (edit->mark1 != edit->mark2 && !option_persistent_selections)
-        {
-            if (edit->mark2 < 0)
-                edit_mark_cmd (edit, FALSE);
-            edit_move_block_to_right (edit);
-        }
-        else
-        {
-            if (option_cursor_beyond_eol)
-                edit_insert_over (edit);
-            edit_tab_cmd (edit);
-            if (option_auto_para_formatting)
-            {
-                format_paragraph (edit, FALSE);
-                edit->force |= REDRAW_PAGE;
-            }
-            else
-                check_and_wrap_line (edit);
-        }
+        event_name = "tab";
         break;
-
     case CK_InsertOverwrite:
+        event_name = "switch_insert_overwrite";
         edit->overwrite = !edit->overwrite;
         break;
-
     case CK_Mark:
-        if (edit->mark2 >= 0)
-        {
-            if (edit->column_highlight)
-                edit_push_undo_action (edit, COLUMN_ON);
-            edit->column_highlight = 0;
-        }
-        edit_mark_cmd (edit, FALSE);
+        event_name = "mark";
         break;
     case CK_MarkColumn:
-        if (!edit->column_highlight)
-            edit_push_undo_action (edit, COLUMN_OFF);
-        edit->column_highlight = 1;
-        edit_mark_cmd (edit, FALSE);
+        event_name = "mark_column";
         break;
     case CK_MarkAll:
-        edit_set_markers (edit, 0, edit->buffer.size, 0, 0);
-        edit->force |= REDRAW_PAGE;
+        event_name = "mark_all";
         break;
     case CK_Unmark:
-        if (edit->column_highlight)
-            edit_push_undo_action (edit, COLUMN_ON);
-        edit->column_highlight = 0;
-        edit_mark_cmd (edit, TRUE);
+        event_name = "unmark";
         break;
     case CK_MarkWord:
-        if (edit->column_highlight)
-            edit_push_undo_action (edit, COLUMN_ON);
-        edit->column_highlight = 0;
-        edit_mark_current_word_cmd (edit);
+        event_name = "mark_word";
         break;
     case CK_MarkLine:
-        if (edit->column_highlight)
-            edit_push_undo_action (edit, COLUMN_ON);
-        edit->column_highlight = 0;
-        edit_mark_current_line_cmd (edit);
+        event_name = "mark_line";
         break;
 
     case CK_Bookmark:
-        book_mark_clear (edit, edit->buffer.curs_line, BOOK_MARK_FOUND_COLOR);
-        if (book_mark_query_color (edit, edit->buffer.curs_line, BOOK_MARK_COLOR))
-            book_mark_clear (edit, edit->buffer.curs_line, BOOK_MARK_COLOR);
-        else
-            book_mark_insert (edit, edit->buffer.curs_line, BOOK_MARK_COLOR);
+        event_name = "bookmark_toggle";
         break;
     case CK_BookmarkFlush:
-        book_mark_flush (edit, BOOK_MARK_COLOR);
-        book_mark_flush (edit, BOOK_MARK_FOUND_COLOR);
-        edit->force |= REDRAW_PAGE;
+        event_name = "bookmark_flush";
         break;
     case CK_BookmarkNext:
-        if (edit->book_mark != NULL)
-        {
-            edit_book_mark_t *p;
-
-            p = book_mark_find (edit, edit->buffer.curs_line);
-            if (p->next != NULL)
-            {
-                p = p->next;
-                if (p->line >= edit->start_line + w->lines || p->line < edit->start_line)
-                    edit_move_display (edit, p->line - w->lines / 2);
-                edit_move_to_line (edit, p->line);
-            }
-        }
+        event_name = "bookmark_next";
         break;
     case CK_BookmarkPrev:
-        if (edit->book_mark != NULL)
-        {
-            edit_book_mark_t *p;
-
-            p = book_mark_find (edit, edit->buffer.curs_line);
-            while (p->line == edit->buffer.curs_line)
-                if (p->prev != NULL)
-                    p = p->prev;
-            if (p->line >= 0)
-            {
-                if (p->line >= edit->start_line + w->lines || p->line < edit->start_line)
-                    edit_move_display (edit, p->line - w->lines / 2);
-                edit_move_to_line (edit, p->line);
-            }
-        }
-        break;
-
-    case CK_Top:
-    case CK_MarkToFileBegin:
-        edit_move_to_top (edit);
-        break;
-    case CK_Bottom:
-    case CK_MarkToFileEnd:
-        edit_move_to_bottom (edit);
+        event_name = "bookmark_prev";
         break;
 
     case CK_Copy:
-        if (option_cursor_beyond_eol && edit->over_col > 0)
-            edit_insert_over (edit);
-        edit_block_copy_cmd (edit);
+        event_name = "block_copy";
         break;
     case CK_Remove:
-        edit_block_delete_cmd (edit);
+        event_name = "block_delete";
         break;
     case CK_Move:
-        edit_block_move_cmd (edit);
+        event_name = "block_move";
         break;
 
     case CK_BlockShiftLeft:
-        if (edit->mark1 != edit->mark2)
-            edit_move_block_to_left (edit);
+        event_name = "block_move_to_left";
         break;
     case CK_BlockShiftRight:
-        if (edit->mark1 != edit->mark2)
-            edit_move_block_to_right (edit);
+        event_name = "block_move_to_right";
         break;
     case CK_Store:
-        edit_copy_to_X_buf_cmd (edit);
+        event_name = "ext_clip_copy";
         break;
     case CK_Cut:
-        edit_cut_to_X_buf_cmd (edit);
+        event_name = "ext_clip_cut";
         break;
     case CK_Paste:
-        /* if non persistent selection and text selected */
-        if (!option_persistent_selections && edit->mark1 != edit->mark2)
-            edit_block_delete_cmd (edit);
-        if (option_cursor_beyond_eol && edit->over_col > 0)
-            edit_insert_over (edit);
-        edit_paste_from_X_buf_cmd (edit);
-        if (!option_persistent_selections && edit->mark2 >= 0)
-        {
-            if (edit->column_highlight)
-                edit_push_undo_action (edit, COLUMN_ON);
-            edit->column_highlight = 0;
-            edit_mark_cmd (edit, TRUE);
-        }
+        event_name = "ext_clip_paste";
         break;
     case CK_History:
-        edit_paste_from_history (edit);
+        event_name = "paste_from_history";
         break;
 
     case CK_SaveAs:
-        edit_save_as_cmd (edit);
+        event_name = "save_as";
         break;
     case CK_Save:
-        edit_save_confirm_cmd (edit);
+        event_name = "save_confirm";
         break;
     case CK_BlockSave:
-        edit_save_block_cmd (edit);
+        event_name = "save_block";
         break;
     case CK_InsertFile:
-        edit_insert_file_cmd (edit);
+        event_name = "insert_file";
         break;
 
     case CK_FilePrev:
-        edit_load_back_cmd (edit);
+        event_name = "file_load_prev";
         break;
     case CK_FileNext:
-        edit_load_forward_cmd (edit);
+        event_name = "file_load_next";
         break;
 
     case CK_SyntaxChoose:
-        edit_syntax_dialog (edit);
+        event_name = "syntax_show_dialog";
         break;
 
     case CK_Search:
-        edit_search_cmd (edit, FALSE);
+        event_name = "search";
         break;
     case CK_SearchContinue:
-        edit_search_cmd (edit, TRUE);
+        event_name = "search_continue";
         break;
     case CK_Replace:
-        edit_replace_cmd (edit, 0);
+        event_name = "replace";
         break;
     case CK_ReplaceContinue:
-        edit_replace_cmd (edit, 1);
+        event_name = "replace_continue";
         break;
     case CK_Complete:
-        /* if text marked shift block */
-        if (edit->mark1 != edit->mark2 && !option_persistent_selections)
-            edit_move_block_to_left (edit);
-        else
-            edit_complete_word_cmd (edit);
+        event_name = "complete";
         break;
     case CK_Find:
-        edit_get_match_keyword_cmd (edit);
+        event_name = "match_keyword";
         break;
+    case CK_Date:
+        event_name = "print_current_date";
+        break;
+    case CK_Goto:
+        event_name = "goto_line";
+        break;
+    case CK_ParagraphFormat:
+        event_name = "format_paragraph_force";
+        break;
+    case CK_MacroDelete:
+        event_name = "macro_delete";
+        break;
+    case CK_MatchBracket:
+        event_name = "goto_matching_bracket";
+        break;
+    case CK_UserMenu:
+        user_menu_event_data.menu_file = NULL;
+        user_menu_event_data.selected_entry = -1;
+        event_name = "user_menu";
+        break;
+    case CK_Sort:
+        event_name = "sort";
+        break;
+    case CK_ExternalCommand:
+        event_name = "run_external_command";
+        break;
+    case CK_Mail:
+        event_name = "mail";
+        break;
+    case CK_InsertLiteral:
+        event_name = "insert_literal";
+        break;
+    case CK_MacroStartStopRecord:
+        event_name = "macro_record_start_stop";
+        break;
+    case CK_RepeatStartStopRecord:
+        event_name = "macro_repeat_start_stop";
+        break;
+    case CK_ExtendedKeyMap:
+        /* the action will be removed */
+        edit->extmod = TRUE;
+        break;
+
+#ifdef HAVE_CHARSET
+    case CK_SelectCodepage:
+        event_name = "select_codepage";
+        break;
+#endif
 
 #ifdef HAVE_ASPELL
     case CK_SpellCheckCurrentWord:
-        edit_suggest_current_word (edit);
+        event_name = "spell_suggest_word";
         break;
     case CK_SpellCheck:
-        edit_spellcheck_file (edit);
+        event_name = "spell_check";
         break;
     case CK_SpellCheckSelectLang:
-        edit_set_spell_lang ();
+        event_name = "spell_set_language";
         break;
 #endif
 
-    case CK_Date:
-        {
-            char s[BUF_MEDIUM];
-            /* fool gcc to prevent a Y2K warning */
-            char time_format[] = "_c";
-            time_format[0] = '%';
-
-            FMT_LOCALTIME_CURRENT (s, sizeof (s), time_format);
-            edit_print_string (edit, s);
-            edit->force |= REDRAW_PAGE;
-        }
-        break;
-    case CK_Goto:
-        edit_goto_cmd (edit);
-        break;
-    case CK_ParagraphFormat:
-        format_paragraph (edit, TRUE);
-        edit->force |= REDRAW_PAGE;
-        break;
-    case CK_MacroDelete:
-        edit_delete_macro_cmd (edit);
-        break;
-    case CK_MatchBracket:
-        edit_goto_matching_bracket (edit);
-        break;
-    case CK_UserMenu:
-        user_menu (edit, NULL, -1);
-        break;
-    case CK_Sort:
-        edit_sort_cmd (edit);
-        break;
-    case CK_ExternalCommand:
-        edit_ext_cmd (edit);
-        break;
-    case CK_Mail:
-        edit_mail_dialog (edit);
-        break;
-#ifdef HAVE_CHARSET
-    case CK_SelectCodepage:
-        edit_select_codepage_cmd (edit);
-        break;
-#endif
-    case CK_InsertLiteral:
-        edit_insert_literal_cmd (edit);
-        break;
-    case CK_MacroStartStopRecord:
-        edit_begin_end_macro_cmd (edit);
-        break;
-    case CK_RepeatStartStopRecord:
-        edit_begin_end_repeat_cmd (edit);
-        break;
-    case CK_ExtendedKeyMap:
-        edit->extmod = TRUE;
-        break;
     default:
         break;
     }
 
-    /* CK_PipeBlock */
-    if ((command / CK_PipeBlock (0)) == 1)
-        edit_block_process_cmd (edit, command - CK_PipeBlock (0));
-
-    /* keys which must set the col position, and the search vars */
-    switch (command)
+    if (command != CK_WindowFullscreen)
     {
-    case CK_Search:
-    case CK_SearchContinue:
-    case CK_Replace:
-    case CK_ReplaceContinue:
-    case CK_Complete:
-        edit->prev_col = edit_get_col (edit);
-        break;
-    case CK_Up:
-    case CK_MarkUp:
-    case CK_MarkColumnUp:
-    case CK_Down:
-    case CK_MarkDown:
-    case CK_MarkColumnDown:
-    case CK_PageUp:
-    case CK_MarkPageUp:
-    case CK_MarkColumnPageUp:
-    case CK_PageDown:
-    case CK_MarkPageDown:
-    case CK_MarkColumnPageDown:
-    case CK_Top:
-    case CK_MarkToFileBegin:
-    case CK_Bottom:
-    case CK_MarkToFileEnd:
-    case CK_ParagraphUp:
-    case CK_MarkParagraphUp:
-    case CK_MarkColumnParagraphUp:
-    case CK_ParagraphDown:
-    case CK_MarkParagraphDown:
-    case CK_MarkColumnParagraphDown:
-    case CK_ScrollUp:
-    case CK_MarkScrollUp:
-    case CK_MarkColumnScrollUp:
-    case CK_ScrollDown:
-    case CK_MarkScrollDown:
-    case CK_MarkColumnScrollDown:
-        edit->search_start = edit->buffer.curs1;
-        edit->found_len = 0;
-        break;
-    default:
-        edit->found_len = 0;
-        edit->prev_col = edit_get_col (edit);
-        edit->search_start = edit->buffer.curs1;
-    }
-    edit_find_bracket (edit);
+        /* CK_PipeBlock */
+        if ((command / CK_PipeBlock (0)) == 1)
+            edit_block_process_cmd (edit, command - CK_PipeBlock (0));
 
-    if (option_auto_para_formatting)
-    {
-        switch (command)
+        edit->found_len = 0;
+        if (!edit->is_cursor_moved)
         {
-        case CK_BackSpace:
-        case CK_Delete:
-        case CK_DeleteToWordBegin:
-        case CK_DeleteToWordEnd:
-        case CK_DeleteToHome:
-        case CK_DeleteToEnd:
-            format_paragraph (edit, FALSE);
-            edit->force |= REDRAW_PAGE;
+            edit->prev_col = edit_get_col (edit);
         }
+
+        edit_find_bracket (edit);
     }
+
+    if (event_name != NULL)
+        mc_event_raise (MCEVENT_GROUP_EDITOR, event_name, event_data, NULL);
+
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_stack_init (void)
+mc_editor_init (GError ** error)
 {
     for (edit_stack_iterator = 0; edit_stack_iterator < MAX_HISTORY_MOVETO; edit_stack_iterator++)
     {
@@ -3978,13 +3767,17 @@ edit_stack_init (void)
     }
 
     edit_stack_iterator = 0;
+
+    mc_editor_init_events (error);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_stack_free (void)
+mc_editor_deinit (GError ** error)
 {
+    (void) error;
+
     for (edit_stack_iterator = 0; edit_stack_iterator < MAX_HISTORY_MOVETO; edit_stack_iterator++)
         vfs_path_free (edit_history_moveto[edit_stack_iterator].filename_vpath);
 }
@@ -4005,6 +3798,845 @@ void
 edit_move_down (WEdit * edit, long i, gboolean do_scroll)
 {
     edit_move_updown (edit, i, do_scroll, FALSE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_backspace (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
+    /* if non persistent selection and text selected */
+    if (!option_persistent_selections && edit->mark1 != edit->mark2)
+        mc_editor_call_event_block_delete (edit);
+    else if (option_cursor_beyond_eol && edit->over_col > 0)
+        edit->over_col--;
+    else if (option_backspace_through_tabs && is_in_indent (&edit->buffer))
+    {
+        while (edit_buffer_get_previous_byte (&edit->buffer) != '\n' && edit->buffer.curs1 > 0)
+            edit_backspace (edit, TRUE);
+    }
+    else if (option_fake_half_tabs && is_in_indent (&edit->buffer) && right_of_four_spaces (edit))
+    {
+        int i;
+
+        for (i = 0; i < HALF_TAB_SIZE; i++)
+            edit_backspace (edit, TRUE);
+    }
+    else
+        edit_backspace (edit, FALSE);
+
+    mc_event_raise (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL);
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_delete (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
+    /* if non persistent selection and text selected */
+    if (!option_persistent_selections && edit->mark1 != edit->mark2)
+        mc_editor_call_event_block_delete (edit);
+    else
+    {
+        if (option_cursor_beyond_eol && edit->over_col > 0)
+            edit_insert_over (edit);
+
+        if (option_fake_half_tabs && is_in_indent (&edit->buffer) && left_of_four_spaces (edit))
+        {
+            int i;
+
+            for (i = 1; i <= HALF_TAB_SIZE; i++)
+                edit_delete (edit, TRUE);
+        }
+        else
+            edit_delete (edit, FALSE);
+    }
+
+    mc_event_raise (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL);
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_delete_word (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+    mc_editor_event_direction_t event_direction =
+        (mc_editor_event_direction_t) event_info->init_data;
+
+    (void) error;
+
+    if (event_direction == TO_LEFT)
+        edit->over_col = 0;
+    else if (option_cursor_beyond_eol && edit->over_col > 0)
+        edit_insert_over (edit);
+
+    while (edit->buffer.curs1 > 0)
+    {
+        int c1, c2;
+        if (event_direction == TO_LEFT)
+            c1 = edit_backspace (edit, TRUE);
+        else
+            c1 = edit_delete (edit, TRUE);
+
+        c2 = edit_buffer_get_previous_byte (&edit->buffer);
+        if (c1 == '\n' || c2 == '\n')
+            break;
+        if ((isspace (c1) == 0) != (isspace (c2) == 0))
+            break;
+        if ((my_type_of (c1) & my_type_of (c2)) == 0)
+            break;
+    }
+
+    mc_event_raise (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL);
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_delete_line (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+    mc_editor_event_direction_t event_direction =
+        (mc_editor_event_direction_t) event_info->init_data;
+
+    (void) error;
+
+    switch (event_direction)
+    {
+    case TO_LINE_BEGIN:
+        while (edit_buffer_get_previous_byte (&edit->buffer) != '\n' && edit->buffer.curs1 != 0)
+            edit_backspace (edit, TRUE);
+        mc_event_raise (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL);
+        break;
+    case TO_LINE_END:
+        while (edit_buffer_get_current_byte (&edit->buffer) != '\n' && edit->buffer.curs2 != 0)
+            edit_delete (edit, TRUE);
+        mc_event_raise (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL);
+        break;
+    default:
+
+        /*
+         * Delete right part of the line.
+         * Note that edit_buffer_get_byte() returns '\n' when byte position is
+         *   beyond EOF.
+         */
+        while (edit_buffer_get_current_byte (&edit->buffer) != '\n')
+            (void) edit_delete (edit, TRUE);
+
+        /*
+         * Delete '\n' char.
+         * Note that edit_delete() will not corrupt anything if called while
+         *   cursor position is EOF.
+         */
+        (void) edit_delete (edit, TRUE);
+
+        /*
+         * Delete left part of the line.
+         * Note, that edit_buffer_get_byte() returns '\n' when byte position is < 0.
+         */
+        while (edit_buffer_get_previous_byte (&edit->buffer) != '\n')
+            (void) edit_backspace (edit, TRUE);
+
+    }
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_enter (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
+    edit->over_col = 0;
+    if (option_auto_para_formatting)
+    {
+        edit_double_newline (edit);
+        if (option_return_does_auto_indent && !bracketed_pasting_in_progress)
+            edit_auto_indent (edit);
+    }
+    else
+    {
+        edit_insert (edit, '\n');
+        if (option_return_does_auto_indent && !bracketed_pasting_in_progress)
+            edit_auto_indent (edit);
+    }
+    mc_event_raise (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_insert_char_raw (event_info_t * event_info, gpointer data, GError ** error)
+{
+    mc_editor_event_data_insert_char_t *event_data = (mc_editor_event_data_insert_char_t *) data;
+    WEdit *edit = event_data->editor;
+
+    (void) event_info;
+    (void) error;
+
+    edit_insert (edit, event_data->char_for_insertion);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_insert_char (event_info_t * event_info, gpointer data, GError ** error)
+{
+    mc_editor_event_data_insert_char_t *event_data = (mc_editor_event_data_insert_char_t *) data;
+    WEdit *edit = event_data->editor;
+
+    (void) event_info;
+    (void) error;
+
+    /* An ordinary key press */
+    if (event_data->char_for_insertion < 0)
+        return TRUE;
+
+    /* if non persistent selection and text selected */
+    if (!option_persistent_selections && edit->mark1 != edit->mark2)
+        mc_editor_call_event_block_delete (edit);
+
+    if (edit->overwrite)
+    {
+        /* remove char only one time, after input first byte, multibyte chars */
+#ifdef HAVE_CHARSET
+        if (!mc_global.utf8_display || edit->charpoint == 0)
+#endif
+            if (edit_buffer_get_current_byte (&edit->buffer) != '\n')
+
+                edit_delete (edit, FALSE);
+    }
+    if (option_cursor_beyond_eol && edit->over_col > 0)
+        edit_insert_over (edit);
+#ifdef HAVE_CHARSET
+    if (event_data->char_for_insertion > 255 && !mc_global.utf8_display)
+    {
+        unsigned char str[UTF8_CHAR_LEN + 1];
+        size_t i = 0;
+        int res;
+
+        res = g_unichar_to_utf8 (event_data->char_for_insertion, (char *) str);
+        if (res == 0)
+        {
+            str[0] = '.';
+            str[1] = '\0';
+        }
+        else
+        {
+            str[res] = '\0';
+        }
+        while (i <= UTF8_CHAR_LEN && str[i] != '\0')
+        {
+            event_data->char_for_insertion = str[i];
+            edit_insert (edit, event_data->char_for_insertion);
+            i++;
+        }
+    }
+    else
+#endif
+        edit_insert (edit, event_data->char_for_insertion);
+
+    mc_event_raise (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL);
+
+    if (!option_auto_para_formatting)
+        check_and_wrap_line (edit);
+
+    edit->found_len = 0;
+    edit->prev_col = edit_get_col (edit);
+    edit->search_start = edit->buffer.curs1;
+    edit_find_bracket (edit);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_undo (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
+    edit->redo_stack_reset = 0;
+    edit_group_undo (edit);
+    edit->found_len = 0;
+    edit->prev_col = edit_get_col (edit);
+    edit->search_start = edit->buffer.curs1;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_redo (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
+    edit->redo_stack_reset = 0;
+    edit_do_redo (edit);
+    edit->found_len = 0;
+    edit->prev_col = edit_get_col (edit);
+    edit->search_start = edit->buffer.curs1;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_move_cursor (event_info_t * event_info, gpointer data, GError ** error)
+{
+    mc_editor_event_data_move_cursor_t *event_data = (mc_editor_event_data_move_cursor_t *) data;
+    WEdit *edit = event_data->editor;
+    Widget *w = WIDGET (edit);
+
+    (void) event_info;
+    (void) error;
+
+
+    if (!event_data->is_mark)
+        mc_edit_switch_off_selection (edit);
+
+    if (event_data->is_column)
+        edit->column_highlight = 1;
+
+    if (edit->mark2 != -1)
+        edit->force |= REDRAW_CHAR_ONLY;
+
+    switch (event_data->direction)
+    {
+    case TO_PAGE_UP:
+        edit_move_up (edit, w->lines - 1, 1);
+        break;
+    case TO_PAGE_DOWN:
+        edit_move_down (edit, w->lines - 1, 1);
+        break;
+    case TO_LEFT:
+        mc_edit_go_left_cmd (edit);
+        break;
+    case TO_RIGHT:
+        mc_edit_go_right_cmd (edit);
+        break;
+    case TO_PAGE_BEGIN:
+        edit_begin_page (edit);
+        break;
+    case TO_PAGE_END:
+        edit_end_page (edit);
+        break;
+    case TO_WORD_BEGIN:
+        edit->over_col = 0;
+        edit_left_word_move_cmd (edit);
+        break;
+    case TO_WORD_END:
+        edit->over_col = 0;
+        edit_right_word_move_cmd (edit);
+        break;
+    case TO_UP:
+        edit_move_up (edit, 1, 0);
+        break;
+    case TO_DOWN:
+        edit_move_down (edit, 1, 0);
+        break;
+    case TO_PARAGRAPH_UP:
+        edit_move_up_paragraph (edit, 0);
+        break;
+    case TO_PARAGRAPH_DOWN:
+        edit_move_down_paragraph (edit, 0);
+        break;
+    case TO_SCROLL_UP:
+        edit_move_up (edit, 1, 1);
+        break;
+    case TO_SCROLL_DOWN:
+        edit_move_down (edit, 1, 1);
+        break;
+    case TO_LINE_BEGIN:
+        edit_cursor_to_bol (edit);
+        break;
+    case TO_LINE_END:
+        edit_cursor_to_eol (edit);
+        break;
+    case TO_FILE_BEGIN:
+        edit_move_to_top (edit);
+        break;
+    case TO_FILE_END:
+        edit_move_to_bottom (edit);
+        break;
+
+    default:;
+    }
+
+    edit->is_cursor_moved = TRUE;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_tab (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
+    /* if text marked shift block */
+    if (edit->mark1 != edit->mark2 && !option_persistent_selections)
+    {
+        if (edit->mark2 < 0)
+            edit_mark_cmd (edit, FALSE);
+        mc_event_raise (MCEVENT_GROUP_EDITOR, "block_move_to_right", edit, NULL);
+
+    }
+    else
+    {
+        if (option_cursor_beyond_eol)
+            edit_insert_over (edit);
+        edit_tab_cmd (edit);
+        mc_event_raise (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL);
+
+        if (!option_auto_para_formatting)
+            check_and_wrap_line (edit);
+    }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_switch_insert_overwrite (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
+    edit->overwrite = !edit->overwrite;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_mark (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
+    if (edit->mark2 >= 0)
+    {
+        if (edit->column_highlight)
+            edit_push_undo_action (edit, COLUMN_ON);
+        edit->column_highlight = 0;
+    }
+    edit_mark_cmd (edit, FALSE);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_mark_column (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
+    if (!edit->column_highlight)
+        edit_push_undo_action (edit, COLUMN_OFF);
+    edit->column_highlight = 1;
+    edit_mark_cmd (edit, FALSE);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_mark_all (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
+    edit_set_markers (edit, 0, edit->buffer.size, 0, 0);
+    edit->force |= REDRAW_PAGE;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_unmark (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
+    if (edit->column_highlight)
+        edit_push_undo_action (edit, COLUMN_ON);
+    edit->column_highlight = 0;
+    edit_mark_cmd (edit, TRUE);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_mark_word (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
+    if (edit->column_highlight)
+        edit_push_undo_action (edit, COLUMN_ON);
+    edit->column_highlight = 0;
+    edit_mark_current_word_cmd (edit);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_mark_line (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
+    if (edit->column_highlight)
+        edit_push_undo_action (edit, COLUMN_ON);
+    edit->column_highlight = 0;
+    edit_mark_current_line_cmd (edit);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_bookmark_toggle (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
+    book_mark_clear (edit, edit->buffer.curs_line, BOOK_MARK_FOUND_COLOR);
+    if (book_mark_query_color (edit, edit->buffer.curs_line, BOOK_MARK_COLOR))
+        book_mark_clear (edit, edit->buffer.curs_line, BOOK_MARK_COLOR);
+    else
+        book_mark_insert (edit, edit->buffer.curs_line, BOOK_MARK_COLOR);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_bookmark_flush (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
+    book_mark_flush (edit, BOOK_MARK_COLOR);
+    book_mark_flush (edit, BOOK_MARK_FOUND_COLOR);
+    edit->force |= REDRAW_PAGE;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_bookmark_next (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+    Widget *w = WIDGET (edit);
+
+    (void) event_info;
+    (void) error;
+
+    if (edit->book_mark != NULL)
+    {
+        edit_book_mark_t *p;
+
+        p = book_mark_find (edit, edit->buffer.curs_line);
+        if (p->next != NULL)
+        {
+            p = p->next;
+            if (p->line >= edit->start_line + w->lines || p->line < edit->start_line)
+                edit_move_display (edit, p->line - w->lines / 2);
+            edit_move_to_line (edit, p->line);
+        }
+    }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_bookmark_prev (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+    Widget *w = WIDGET (edit);
+
+    (void) event_info;
+    (void) error;
+
+    if (edit->book_mark != NULL)
+    {
+        edit_book_mark_t *p;
+
+        p = book_mark_find (edit, edit->buffer.curs_line);
+        while (p->line == edit->buffer.curs_line)
+            if (p->prev != NULL)
+                p = p->prev;
+        if (p->line >= 0)
+        {
+            if (p->line >= edit->start_line + w->lines || p->line < edit->start_line)
+                edit_move_display (edit, p->line - w->lines / 2);
+            edit_move_to_line (edit, p->line);
+        }
+    }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_block_move_to_left (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+
+    off_t start_mark, end_mark;
+    off_t cur_bol, start_bol;
+    int i;
+
+    (void) event_info;
+    (void) error;
+
+    if (edit->mark1 == edit->mark2 || !eval_marks (edit, &start_mark, &end_mark))
+        return TRUE;
+
+    start_bol = edit_buffer_get_bol (&edit->buffer, start_mark);
+    cur_bol = edit_buffer_get_bol (&edit->buffer, end_mark - 1);
+
+    do
+    {
+        int del_tab_width;
+        int next_char;
+
+        edit_cursor_move (edit, cur_bol - edit->buffer.curs1);
+
+        if (option_fake_half_tabs)
+            del_tab_width = HALF_TAB_SIZE;
+        else
+            del_tab_width = option_tab_spacing;
+
+        next_char = edit_buffer_get_current_byte (&edit->buffer);
+        if (next_char == '\t')
+            edit_delete (edit, TRUE);
+        else if (next_char == ' ')
+            for (i = 1; i <= del_tab_width; i++)
+            {
+                if (next_char == ' ')
+                    edit_delete (edit, TRUE);
+                next_char = edit_buffer_get_current_byte (&edit->buffer);
+            }
+
+        if (cur_bol == 0)
+            break;
+
+        cur_bol = edit_buffer_get_bol (&edit->buffer, cur_bol - 1);
+    }
+    while (cur_bol >= start_bol);
+
+    edit->force |= REDRAW_PAGE;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_block_move_to_right (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+
+    off_t start_mark, end_mark;
+    long cur_bol, start_bol;
+
+    (void) event_info;
+    (void) error;
+
+    if (edit->mark1 == edit->mark2 || !eval_marks (edit, &start_mark, &end_mark))
+        return TRUE;
+
+    start_bol = edit_buffer_get_bol (&edit->buffer, start_mark);
+    cur_bol = edit_buffer_get_bol (&edit->buffer, end_mark - 1);
+
+    do
+    {
+        edit_cursor_move (edit, cur_bol - edit->buffer.curs1);
+        if (!edit_line_is_blank (edit, edit->buffer.curs_line))
+        {
+            if (option_fill_tabs_with_spaces)
+                insert_spaces_tab (edit, option_fake_half_tabs);
+            else
+                edit_insert (edit, '\t');
+            edit_cursor_move (edit,
+                              edit_buffer_get_bol (&edit->buffer, cur_bol) - edit->buffer.curs1);
+        }
+
+        if (cur_bol == 0)
+            break;
+
+        cur_bol = edit_buffer_get_bol (&edit->buffer, cur_bol - 1);
+    }
+    while (cur_bol >= start_bol);
+
+    edit->force |= REDRAW_PAGE;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_complete (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+
+    (void) event_info;
+    (void) error;
+
+    /* if text marked shift block */
+    if (!option_persistent_selections)
+        mc_event_raise (MCEVENT_GROUP_EDITOR, "block_move_to_left", edit, NULL);
+    else
+        edit_complete_word_cmd (edit);
+    edit->prev_col = edit_get_col (edit);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+/* TODO: should be implemented as plugin? */
+gboolean
+mc_editor_cmd_print_current_date (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+
+    char s[BUF_MEDIUM];
+    /* fool gcc to prevent a Y2K warning */
+    char time_format[] = "_c";
+
+    (void) event_info;
+    (void) error;
+    time_format[0] = '%';
+
+    FMT_LOCALTIME_CURRENT (s, sizeof (s), time_format);
+    edit_print_string (edit, s);
+    edit->force |= REDRAW_PAGE;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_editor_cmd_goto_matching_bracket (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WEdit *edit = (WEdit *) data;
+
+    off_t q;
+
+    (void) event_info;
+    (void) error;
+
+    q = edit_get_bracket (edit, 0, 0);
+    if (q >= 0)
+    {
+        edit->bracket = edit->buffer.curs1;
+        edit->force |= REDRAW_PAGE;
+        edit_cursor_move (edit, q - edit->buffer.curs1);
+    }
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

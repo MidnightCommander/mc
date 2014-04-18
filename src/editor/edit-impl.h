@@ -115,6 +115,7 @@ typedef struct edit_stack_type
 
 struct Widget;
 struct WMenuBar;
+struct edit_buffer_struct;
 
 /*** global variables defined in .c file *********************************************************/
 
@@ -150,7 +151,7 @@ WEdit *find_editor (const WDialog * h);
 gboolean edit_widget_is_editor (const Widget * w);
 gboolean edit_drop_hotkey_menu (WDialog * h, int key);
 void edit_menu_cmd (WDialog * h);
-void user_menu (WEdit * edit, const char *menu_file, int selected_entry);
+void mc_editor_call_event_user_menu (WEdit * edit, const char *menu_file, int selected_entry);
 void edit_init_menu (struct WMenuBar *menubar);
 void edit_save_mode_cmd (void);
 off_t edit_move_forward3 (const WEdit * edit, off_t current, long cols, off_t upto);
@@ -170,10 +171,7 @@ void edit_find_bracket (WEdit * edit);
 gboolean edit_reload_line (WEdit * edit, const vfs_path_t * filename_vpath, long line);
 void edit_set_codeset (WEdit * edit);
 
-void edit_block_copy_cmd (WEdit * edit);
-void edit_block_move_cmd (WEdit * edit);
-int edit_block_delete_cmd (WEdit * edit);
-void edit_delete_line (WEdit * edit);
+int mc_editor_call_event_block_delete (WEdit * edit);
 
 int edit_delete (WEdit * edit, gboolean byte_delete);
 int edit_backspace (WEdit * edit, gboolean byte_delete);
@@ -187,8 +185,7 @@ void edit_insert_ahead (WEdit * edit, int c);
 off_t edit_write_stream (WEdit * edit, FILE * f);
 char *edit_get_write_filter (const vfs_path_t * write_name_vpath,
                              const vfs_path_t * filename_vpath);
-gboolean edit_save_confirm_cmd (WEdit * edit);
-gboolean edit_save_as_cmd (WEdit * edit);
+gboolean mc_editor_call_event_save_as (WEdit * edit);
 WEdit *edit_init (WEdit * edit, int y, int x, int lines, int cols,
                   const vfs_path_t * filename_vpath, long line);
 gboolean edit_clean (WEdit * edit);
@@ -202,28 +199,15 @@ void edit_mark_current_word_cmd (WEdit * edit);
 void edit_mark_current_line_cmd (WEdit * edit);
 void edit_set_markers (WEdit * edit, off_t m1, off_t m2, long c1, long c2);
 void edit_push_markers (WEdit * edit);
-void edit_replace_cmd (WEdit * edit, int again);
-void edit_search_cmd (WEdit * edit, gboolean again);
 mc_search_cbret_t edit_search_cmd_callback (const void *user_data, gsize char_offset,
                                             int *current_char);
 mc_search_cbret_t edit_search_update_callback (const void *user_data, gsize char_offset);
 
 void edit_complete_word_cmd (WEdit * edit);
-void edit_get_match_keyword_cmd (WEdit * edit);
-
-#ifdef HAVE_ASPELL
-int edit_suggest_current_word (WEdit * edit);
-void edit_spellcheck_file (WEdit * edit);
-void edit_set_spell_lang (void);
-#endif
 
 gboolean edit_save_block (WEdit * edit, const char *filename, off_t start, off_t finish);
-gboolean edit_save_block_cmd (WEdit * edit);
-gboolean edit_insert_file_cmd (WEdit * edit);
 
 off_t edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath);
-gboolean edit_load_back_cmd (WEdit * edit);
-gboolean edit_load_forward_cmd (WEdit * edit);
 void edit_block_process_cmd (WEdit * edit, int macro_number);
 void edit_refresh_cmd (void);
 void edit_syntax_onoff_cmd (WDialog * h);
@@ -231,28 +215,15 @@ void edit_show_tabs_tws_cmd (WDialog * h);
 void edit_show_margin_cmd (WDialog * h);
 void edit_show_numbers_cmd (WDialog * h);
 void edit_date_cmd (WEdit * edit);
-void edit_goto_cmd (WEdit * edit);
 gboolean eval_marks (WEdit * edit, off_t * start_mark, off_t * end_mark);
 void edit_status (WEdit * edit, gboolean active);
 void edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_insertion);
 void edit_update_screen (WEdit * edit);
 void edit_save_size (WEdit * edit);
 gboolean edit_handle_move_resize (WEdit * edit, unsigned long command);
-void edit_toggle_fullscreen (WEdit * edit);
 void edit_move_to_line (WEdit * e, long line);
 void edit_move_display (WEdit * e, long line);
 void edit_word_wrap (WEdit * edit);
-int edit_sort_cmd (WEdit * edit);
-int edit_ext_cmd (WEdit * edit);
-
-gboolean edit_copy_to_X_buf_cmd (WEdit * edit);
-gboolean edit_cut_to_X_buf_cmd (WEdit * edit);
-gboolean edit_paste_from_X_buf_cmd (WEdit * edit);
-
-void edit_select_codepage_cmd (WEdit * edit);
-void edit_insert_literal_cmd (WEdit * edit);
-
-void edit_paste_from_history (WEdit * edit);
 
 void edit_set_filename (WEdit * edit, const vfs_path_t * name_vpath);
 
@@ -273,9 +244,6 @@ void book_mark_restore (WEdit * edit, int color);
 gboolean edit_line_is_blank (WEdit * edit, long line);
 gboolean is_break_char (char c);
 void edit_options_dialog (WDialog * h);
-void edit_syntax_dialog (WEdit * edit);
-void edit_mail_dialog (WEdit * edit);
-void format_paragraph (WEdit * edit, gboolean force);
 
 /* either command or char_for_insertion must be passed as -1 */
 void edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion);
