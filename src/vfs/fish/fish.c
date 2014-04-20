@@ -856,7 +856,7 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
     gchar *shell_commands = NULL;
     struct vfs_s_super *super = FH_SUPER;
     int code;
-    off_t total;
+    off_t total = 0;
     char buffer[BUF_8K];
     struct stat s;
     int h;
@@ -923,13 +923,14 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
                              (uintmax_t) s.st_size);
         g_free (shell_commands);
     }
+
+    g_free (quoted_name);
+
     if (code != PRELIM)
     {
         close (h);
         ERRNOR (E_REMOTE, -1);
     }
-
-    total = 0;
 
     while (TRUE)
     {
@@ -962,7 +963,6 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
                            (uintmax_t) total, (uintmax_t) s.st_size);
     }
     close (h);
-    g_free (quoted_name);
 
     if (fish_get_reply (me, SUP->sockr, NULL, 0) != COMPLETE)
         ERRNOR (E_REMOTE, -1);
@@ -971,7 +971,6 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
   error_return:
     close (h);
     fish_get_reply (me, SUP->sockr, NULL, 0);
-    g_free (quoted_name);
     return -1;
 }
 
