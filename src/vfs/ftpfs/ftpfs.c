@@ -2429,12 +2429,10 @@ ftpfs_netrc_lookup (const char *host, char **login, char **pass)
     /* Look up in the cache first */
     for (rupp = rup_cache; rupp != NULL; rupp = rupp->next)
     {
-        if (!strcmp (host, rupp->host))
+        if (strcmp (host, rupp->host) == 0)
         {
-            if (rupp->login)
-                *login = g_strdup (rupp->login);
-            if (pass && rupp->pass)
-                *pass = g_strdup (rupp->pass);
+            *login = g_strdup (rupp->login);
+            *pass = g_strdup (rupp->pass);
             return 0;
         }
     }
