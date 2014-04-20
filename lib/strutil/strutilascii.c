@@ -303,6 +303,8 @@ str_ascii_fit_to_term (const char *text, int width, align_crt_t just_mode)
     }
 
   finally:
+    if (actual >= result + sizeof (result))
+        actual = result + sizeof (result) - 1;
     actual[0] = '\0';
     return result;
 }
