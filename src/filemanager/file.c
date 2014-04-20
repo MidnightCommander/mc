@@ -2253,7 +2253,7 @@ FileProgressStatus
 move_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const char *s, const char *d)
 {
     struct stat sbuf, dbuf;
-    FileProgressStatus return_status;
+    FileProgressStatus return_status = FILE_CONT;
     gboolean move_over = FALSE;
     gboolean dstat_ok;
     vfs_path_t *src_vpath, *dst_vpath;
