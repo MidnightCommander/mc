@@ -596,10 +596,6 @@ mc_search_regex__process_append_str (GString * dest_str, const char *from, gsize
             g_string_append_len (dest_str, tmp_string->str, tmp_string->len);
             g_string_free (tmp_string, TRUE);
         }
-        else
-        {
-            g_string_append_len (dest_str, tmp_str, tmp_string->len);
-        }
 
         g_free (tmp_str);
     }
