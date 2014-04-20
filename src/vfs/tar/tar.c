@@ -401,6 +401,7 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *heade
     else
         st->st_mode |= S_IFREG;
 
+    st->st_dev = 0;
     st->st_rdev = 0;
     switch (arch->type)
     {
