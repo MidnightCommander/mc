@@ -648,6 +648,9 @@ x_basename (const char *s)
     url_delim = g_strrstr (s, VFS_PATH_URL_DELIMITER);
     path_sep = strrchr (s, PATH_SEP);
 
+    if (path_sep == NULL)
+        return s;
+
     if (url_delim == NULL
         || url_delim < path_sep - strlen (VFS_PATH_URL_DELIMITER)
         || url_delim - s + strlen (VFS_PATH_URL_DELIMITER) < strlen (s))
