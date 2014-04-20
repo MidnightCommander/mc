@@ -647,7 +647,7 @@ static int
 fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 {
     struct vfs_s_super *super = dir->super;
-    char buffer[8192];
+    char buffer[BUF_8K] = "\0";
     struct vfs_s_entry *ent = NULL;
     FILE *logfile;
     char *quoted_path;
@@ -677,8 +677,11 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     ent = vfs_s_generate_entry (me, NULL, dir, 0);
     while (TRUE)
     {
-        int res = vfs_s_get_line_interruptible (me, buffer, sizeof (buffer), SUP->sockr);
-        if ((!res) || (res == EINTR))
+        int res;
+
+        res = vfs_s_get_line_interruptible (me, buffer, sizeof (buffer), SUP->sockr);
+
+        if ((res == 0) || (res == EINTR))
         {
             vfs_s_free_entry (me, ent);
             me->verrno = ECONNRESET;
