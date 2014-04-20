@@ -77,8 +77,7 @@ sftpfs_open_socket (struct vfs_s_super *super, GError ** error)
         return -1;
     }
 
-    sprintf (port, "%hu", (unsigned short) super->path_element->port);
-    if (port == NULL)
+    if (sprintf (port, "%hu", (unsigned short) super->path_element->port) < 0)
     {
         g_set_error (error, MC_ERROR, -1, _("sftp: Invalid port value."));
         return -1;
