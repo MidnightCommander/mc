@@ -198,7 +198,7 @@ background_attention (int fd, void *closure)
         void *pointer;
     } routine;
     /*    void *routine; */
-    int argc, i, result, status;
+    int argc, i, status;
     char *data[MAXCALLARGS];
     ssize_t bytes, ret;
     struct TaskList *p;
@@ -289,6 +289,8 @@ background_attention (int fd, void *closure)
     /* Handle the call */
     if (type == Return_Integer)
     {
+        int result = 0;
+
         if (!have_ctx)
             switch (argc)
             {
