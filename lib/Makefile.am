@@ -38,6 +38,7 @@ libmc_la_SOURCES = \
 	glibcompat.c glibcompat.h \
 	global.c global.h \
 	keybind.c keybind.h \
+	keymap.c keymap.h \
 	lock.c lock.h \
 	serialize.c serialize.h \
 	timefmt.c timefmt.h \
