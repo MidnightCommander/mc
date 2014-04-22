@@ -1055,7 +1055,8 @@ set_display_type (int num, panel_view_mode_t type)
         {
             ev_history_load_save_t event_data = { NULL, new_widget };
 
-            mc_event_raise (midnight_dlg->event_group, MCEVENT_HISTORY_LOAD, &event_data, NULL);
+            mc_event_raise (midnight_dlg->event_group, MCEVENT_HISTORY_LOAD, &event_data, NULL,
+                            NULL);
         }
 
         if (num == 0)

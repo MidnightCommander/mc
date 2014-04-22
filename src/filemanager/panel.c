@@ -4057,7 +4057,7 @@ panel_save_current_file_to_clip_file (event_info_t * event_info, gpointer data, 
 
     if (current_panel->marked == 0)
         mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file",
-                        (gpointer) selection (current_panel)->fname, error);
+                        (gpointer) selection (current_panel)->fname, NULL, error);
     else
     {
         int i;
@@ -4084,7 +4084,8 @@ panel_save_current_file_to_clip_file (event_info_t * event_info, gpointer data, 
                 }
             }
 
-        mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file", (gpointer) flist, error);
+        mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file", (gpointer) flist, NULL,
+                        error);
         g_free (flist);
     }
     return TRUE;

@@ -52,13 +52,6 @@ typedef struct
 
 typedef struct
 {
-    struct WEdit *editor;
-    gboolean return_value;
-} mc_editor_event_data_ret_boolean_t;
-
-
-typedef struct
-{
     WEdit *editor;
     const char *menu_file;
     int selected_entry;

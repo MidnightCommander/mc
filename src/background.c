@@ -619,10 +619,9 @@ background_parent_call (event_info_t * event_info, gpointer data, GError ** erro
 {
     ev_background_parent_call_t *event_data = (ev_background_parent_call_t *) data;
 
-    (void) event_info;
     (void) error;
 
-    event_data->ret.i =
+    event_info->ret->i =
         parent_va_call (event_data->routine, event_data->ctx, event_data->argc, event_data->ap);
 
     return TRUE;
@@ -636,10 +635,9 @@ background_parent_call_string (event_info_t * event_info, gpointer data, GError 
 {
     ev_background_parent_call_t *event_data = (ev_background_parent_call_t *) data;
 
-    (void) event_info;
     (void) error;
 
-    event_data->ret.s =
+    event_info->ret->s =
         parent_va_call_string (event_data->routine, event_data->argc, event_data->ap);
 
     return TRUE;

@@ -550,11 +550,11 @@ format_paragraph (WEdit * edit, gboolean force)
             .direction = TO_LINE_BEGIN
         };
 
-        mc_event_raise (MCEVENT_GROUP_EDITOR, "move_cursor", &cursor_event_data, NULL);
+        mc_event_raise (MCEVENT_GROUP_EDITOR, "move_cursor", &cursor_event_data, NULL, NULL);
         cursor_event_data.direction = TO_DOWN;
         do
         {
-            mc_event_raise (MCEVENT_GROUP_EDITOR, "move_cursor", &cursor_event_data, NULL);
+            mc_event_raise (MCEVENT_GROUP_EDITOR, "move_cursor", &cursor_event_data, NULL, NULL);
         }
         while (edit->buffer.curs_line < edit->buffer.lines
                && edit_line_is_blank (edit, edit->buffer.curs_line));

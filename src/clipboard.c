@@ -208,10 +208,9 @@ clipboard_text_from_file (event_info_t * event_info, gpointer data, GError ** er
     char buf[BUF_LARGE];
     FILE *f;
     char *fname = NULL;
+    char **text = (char **) data;
     gboolean first = TRUE;
-    ev_clipboard_text_from_file_t *event_data = (ev_clipboard_text_from_file_t *) data;
 
-    (void) event_info;
     (void) error;
 
     fname = mc_config_get_full_path (EDIT_CLIP_FILE);
@@ -220,11 +219,11 @@ clipboard_text_from_file (event_info_t * event_info, gpointer data, GError ** er
 
     if (f == NULL)
     {
-        event_data->ret = FALSE;
+        event_info->ret->b = FALSE;
         return TRUE;
     }
 
-    *(event_data->text) = NULL;
+    *text = NULL;
 
     while (fgets (buf, sizeof (buf), f))
     {
@@ -239,22 +238,22 @@ clipboard_text_from_file (event_info_t * event_info, gpointer data, GError ** er
             if (first)
             {
                 first = FALSE;
-                *(event_data->text) = g_strdup (buf);
+                *text = g_strdup (buf);
             }
             else
             {
                 /* remove \n on EOL */
                 char *tmp;
 
-                tmp = g_strconcat (*(event_data->text), " ", buf, (char *) NULL);
-                g_free (*(event_data->text));
-                *(event_data->text) = tmp;
+                tmp = g_strconcat (*text, " ", buf, (char *) NULL);
+                g_free (*text);
+                *text = tmp;
             }
         }
     }
 
     fclose (f);
-    event_data->ret = (*(event_data->text) != NULL);
+    event_info->ret->b = (*text != NULL);
     return TRUE;
 }
 

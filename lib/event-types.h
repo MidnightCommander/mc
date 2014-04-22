@@ -27,7 +27,6 @@ typedef struct
 {
     struct vfs_class *vclass;
     gpointer id;
-    gboolean ret;
 } ev_vfs_stamp_create_t;
 
 /* MCEVENT_GROUP_CORE:vfs_print_message */
@@ -36,13 +35,6 @@ typedef struct
     const char *msg;
     va_list ap;
 } ev_vfs_print_message_t;
-
-/* MCEVENT_GROUP_CORE:clipboard_text_from_file */
-typedef struct
-{
-    char **text;
-    gboolean ret;
-} ev_clipboard_text_from_file_t;
 
 /* MCEVENT_GROUP_CORE:help */
 typedef struct
@@ -59,11 +51,6 @@ typedef struct
     gpointer *ctx;
     int argc;
     va_list ap;
-    union
-    {
-        int i;
-        char *s;
-    } ret;
 } ev_background_parent_call_t;
 
 /* MCEVENT_GROUP_DIALOG:history_load */

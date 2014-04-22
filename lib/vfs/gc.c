@@ -181,7 +181,8 @@ vfs_stamp_create (struct vfs_class *vclass, vfsid id)
 {
     vfsid nvfsid;
 
-    ev_vfs_stamp_create_t event_data = { vclass, id, FALSE };
+    ev_vfs_stamp_create_t event_data = { vclass, id };
+    event_return_t ret;
     const vfs_path_t *vpath;
     const vfs_path_element_t *path_element;
 
@@ -201,9 +202,9 @@ vfs_stamp_create (struct vfs_class *vclass, vfsid id)
 
     if (!(id == NULL || (path_element->class == vclass && nvfsid == id)))
     {
-        mc_event_raise (MCEVENT_GROUP_CORE, "vfs_timestamp", (gpointer) & event_data, NULL);
+        mc_event_raise (MCEVENT_GROUP_CORE, "vfs_timestamp", (gpointer) & event_data, &ret, NULL);
 
-        if (!event_data.ret && vclass != NULL && vclass->nothingisopen != NULL
+        if (!ret.b && vclass != NULL && vclass->nothingisopen != NULL
             && vclass->nothingisopen (id) != 0)
             vfs_addstamp (vclass, id);
     }

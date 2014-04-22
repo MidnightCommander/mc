@@ -175,7 +175,7 @@ static void
 edit_help (void)
 {
     ev_help_t event_data = { NULL, "[Internal File Editor]" };
-    mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data, NULL);
+    mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data, NULL, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -447,7 +447,7 @@ edit_event (Gpm_Event * event, void *data)
 
         if (local.x == w->cols - dx - 4)
         {
-            mc_event_raise (MCEVENT_GROUP_EDITOR, "toggle_fullscreen", edit, NULL);
+            mc_event_raise (MCEVENT_GROUP_EDITOR, "toggle_fullscreen", edit, NULL, NULL);
             return MOU_NORMAL;
         }
 
@@ -595,7 +595,7 @@ edit_event (Gpm_Event * event, void *data)
             else if (y == w->y && (event->type & (GPM_DOUBLE | GPM_UP)) == (GPM_DOUBLE | GPM_UP))
             {
                 /* double click on top line (toggle fullscreen) */
-                mc_event_raise (MCEVENT_GROUP_EDITOR, "toggle_fullscreen", edit, NULL);
+                mc_event_raise (MCEVENT_GROUP_EDITOR, "toggle_fullscreen", edit, NULL, NULL);
                 edit->drag_state = MCEDIT_DRAG_NORMAL;
                 edit->force |= REDRAW_COMPLETELY;
                 edit_update_screen (edit);
@@ -693,7 +693,7 @@ edit_dialog_event (Gpm_Event * event, void *data)
 
             /* Handle buttons */
             if (x <= 2)
-                mc_event_raise (MCEVENT_GROUP_EDITOR, "toggle_fullscreen", e, NULL);
+                mc_event_raise (MCEVENT_GROUP_EDITOR, "toggle_fullscreen", e, NULL, NULL);
             else
                 send_message (h, NULL, MSG_ACTION, CK_Close, NULL);
 

@@ -391,7 +391,7 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
     case CK_Help:
         {
             ev_help_t event_data = { NULL, "[Internal File Viewer]" };
-            mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data, NULL);
+            mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data, NULL, NULL);
         }
         break;
     case CK_WrapMode:

@@ -25,6 +25,7 @@
  */
 
 #include <config.h>
+#include <string.h>
 
 #include "lib/global.h"
 #include "lib/event.h"
@@ -48,12 +49,14 @@
 
 gboolean
 mc_event_raise (const gchar * event_group_name, const gchar * event_name, gpointer event_data,
-                GError ** error)
+                event_return_t * ret, GError ** error)
 {
+    gboolean ret_value = FALSE;
     GTree *event_group;
     GPtrArray *callbacks;
     guint array_index;
     event_info_t event_info;
+    event_return_t loc_ret;
 
     if (mc_event_grouplist == NULL || event_group_name == NULL || event_name == NULL)
         return FALSE;
@@ -66,18 +69,27 @@ mc_event_raise (const gchar * event_group_name, const gchar * event_name, gpoint
     if (callbacks == NULL)
         return FALSE;
 
+    if (ret != NULL)
+        memcpy (&loc_ret, ret, sizeof (event_return_t));
+
     event_info.group_name = event_group_name;
     event_info.name = event_name;
+    event_info.ret = &loc_ret;
 
     for (array_index = callbacks->len; array_index > 0; array_index--)
     {
         mc_event_callback_t *cb = g_ptr_array_index (callbacks, array_index - 1);
 
+        ret_value = TRUE;
         event_info.init_data = cb->init_data;
         if (!(*cb->callback) (&event_info, event_data, error))
             break;
     }
-    return TRUE;
+
+    if (ret != NULL)
+        memcpy (ret, event_info.ret, sizeof (event_return_t));
+
+    return ret_value;
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -12,11 +12,20 @@ typedef gboolean (*mc_event_callback_func_t) (struct event_info_t *, gpointer, G
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
+typedef union
+{
+    gboolean b;
+    int i;
+    char *s;
+    void *p;
+} event_return_t;
+
 typedef struct event_info_t
 {
     const char *group_name;
     const char *name;
     gpointer init_data;
+    event_return_t *ret;
 } event_info_t;
 
 typedef struct
@@ -31,6 +40,7 @@ typedef struct
     const char *group_name;
     event_init_group_t *events;
 } event_init_t;
+
 
 /*** global variables defined in .c file *********************************************************/
 
@@ -52,6 +62,6 @@ gboolean mc_event_mass_add (event_init_t *, GError **);
 /* raise.c: */
 gboolean
 mc_event_raise (const gchar * event_group_name, const gchar * event_name, gpointer event_data,
-                GError ** error);
+                event_return_t * ret, GError ** error);
 /*** inline functions ****************************************************************************/
 #endif /* MC__EVENT_H */

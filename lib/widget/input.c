@@ -495,9 +495,9 @@ copy_region (WInput * in, int x_first, int x_last)
     {
         /* Copy selected files to clipboard */
         mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "panel_save_current_file_to_clip_file", NULL,
-                        NULL);
+                        NULL, NULL);
         /* try use external clipboard utility */
-        mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL, NULL);
+        mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL, NULL, NULL);
         return;
     }
 
@@ -508,9 +508,9 @@ copy_region (WInput * in, int x_first, int x_last)
 
     kill_buffer = g_strndup (in->buffer + first, last - first);
 
-    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file", kill_buffer, NULL);
+    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file", kill_buffer, NULL, NULL);
     /* try use external clipboard utility */
-    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL, NULL);
+    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL, NULL, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -594,14 +594,13 @@ static void
 ins_from_clip (WInput * in)
 {
     char *p = NULL;
-    ev_clipboard_text_from_file_t event_data;
+    event_return_t ret;
 
     /* try use external clipboard utility */
-    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL, NULL);
+    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL, NULL, NULL);
 
-    event_data.text = &p;
-    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_from_file", &event_data, NULL);
-    if (event_data.ret)
+    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_from_file", &p, &ret, NULL);
+    if (ret.b)
     {
         char *pp;
 

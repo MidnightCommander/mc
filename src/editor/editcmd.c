@@ -1527,12 +1527,10 @@ edit_set_filename (WEdit * edit, const vfs_path_t * name_vpath)
 gboolean
 mc_editor_call_event_save_as (WEdit * edit)
 {
-    mc_editor_event_data_ret_boolean_t event_data = {
-        .editor = edit
-    };
+    event_return_t ret;
 
-    mc_event_raise (MCEVENT_GROUP_EDITOR, "save_as", &event_data, NULL);
-    return event_data.return_value;
+    mc_event_raise (MCEVENT_GROUP_EDITOR, "save_as", edit, &ret, NULL);
+    return ret.b;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1548,21 +1546,19 @@ mc_editor_call_event_save_as (WEdit * edit)
 gboolean
 mc_editor_cmd_save_as (event_info_t * event_info, gpointer data, GError ** error)
 {
-    mc_editor_event_data_ret_boolean_t *event_data = (mc_editor_event_data_ret_boolean_t *) data;
-    WEdit *edit = (WEdit *) event_data->editor;
+    WEdit *edit = (WEdit *) data;
 
     vfs_path_t *exp_vpath;
     int save_lock = 0;
     int different_filename = 0;
 
-    (void) event_info;
     (void) error;
 
     /* This heads the 'Save As' dialog box */
 
     if (!edit_check_newline (&edit->buffer))
     {
-        event_data->return_value = FALSE;
+        event_info->ret->b = FALSE;
         return TRUE;
     }
     exp_vpath = edit_get_save_file_as (edit);
@@ -1651,7 +1647,7 @@ mc_editor_cmd_save_as (event_info_t * event_info, gpointer data, GError ** error
                     edit_load_syntax (edit, NULL, edit->syntax_type);
                 vfs_path_free (exp_vpath);
                 edit->force |= REDRAW_COMPLETELY;
-                event_data->return_value = TRUE;
+                event_info->ret->b = TRUE;
                 return TRUE;
             default:
                 edit_error_dialog (_("Save as"), get_sys_error (_("Cannot save file")));
@@ -1668,7 +1664,7 @@ mc_editor_cmd_save_as (event_info_t * event_info, gpointer data, GError ** error
   ret:
     vfs_path_free (exp_vpath);
     edit->force |= REDRAW_COMPLETELY;
-    event_data->return_value = FALSE;
+    event_info->ret->b = FALSE;
     return TRUE;
 }
 
@@ -2456,7 +2452,7 @@ mc_editor_cmd_ext_clip_copy (event_info_t * event_info, gpointer data, GError **
         return FALSE;
     }
     /* try use external clipboard utility */
-    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL, NULL);
+    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL, NULL, NULL);
 
     if (option_drop_selection_on_copy)
         edit_mark_cmd (edit, TRUE);
@@ -2486,7 +2482,7 @@ mc_editor_cmd_ext_clip_cut (event_info_t * event_info, gpointer data, GError ** 
         return TRUE;
     }
     /* try use external clipboard utility */
-    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL, NULL);
+    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL, NULL, NULL);
 
     mc_editor_call_event_block_delete (edit);
     edit_mark_cmd (edit, TRUE);
@@ -2513,7 +2509,7 @@ mc_editor_cmd_ext_clip_paste (event_info_t * event_info, gpointer data, GError *
         edit_insert_over (edit);
 
     /* try use external clipboard utility */
-    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL, NULL);
+    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL, NULL, NULL);
     tmp = mc_config_get_full_vpath (EDIT_CLIP_FILE);
     edit_insert_file (edit, tmp);
     vfs_path_free (tmp);
@@ -3119,12 +3115,10 @@ mc_editor_cmd_match_keyword (event_info_t * event_info, gpointer data, GError **
 gboolean
 mc_editor_call_event_block_delete (WEdit * edit)
 {
-    mc_editor_event_data_ret_boolean_t event_data = {
-        .editor = edit
-    };
+    event_return_t ret;
 
-    mc_event_raise (MCEVENT_GROUP_EDITOR, "block_delete", &event_data, NULL);
-    return event_data.return_value;
+    mc_event_raise (MCEVENT_GROUP_EDITOR, "block_delete", edit, &ret, NULL);
+    return ret.b;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3199,12 +3193,10 @@ mc_editor_cmd_block_copy (event_info_t * event_info, gpointer data, GError ** er
 gboolean
 mc_editor_cmd_block_delete (event_info_t * event_info, gpointer data, GError ** error)
 {
-    mc_editor_event_data_ret_boolean_t *event_data = (mc_editor_event_data_ret_boolean_t *) data;
-    WEdit *edit = (WEdit *) event_data->editor;
+    WEdit *edit = (WEdit *) data;
 
     off_t start_mark, end_mark;
 
-    (void) event_info;
     (void) error;
 
     if (eval_marks (edit, &start_mark, &end_mark))
@@ -3223,7 +3215,7 @@ mc_editor_cmd_block_delete (event_info_t * event_info, gpointer data, GError ** 
                  ("Block is large, you may not be able to undo this action"),
                  _("C&ontinue"), _("&Cancel")))
             {
-                event_data->return_value = TRUE;
+                event_info->ret->b = TRUE;
                 return TRUE;
             }
         }
@@ -3272,8 +3264,9 @@ mc_editor_cmd_block_delete (event_info_t * event_info, gpointer data, GError ** 
         edit->force |= REDRAW_PAGE;
     }
     else
-        mc_event_raise (MCEVENT_GROUP_EDITOR, "delete_line", edit, NULL);
-    event_data->return_value = FALSE;
+        mc_event_raise (MCEVENT_GROUP_EDITOR, "delete_line", edit, NULL, NULL);
+
+    event_info->ret->b = FALSE;
 
     return TRUE;
 }

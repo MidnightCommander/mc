@@ -1191,7 +1191,7 @@ diff_view_cmd (void)
     event_info.data.panel.first = current_panel;
     event_info.data.panel.second = other_panel;
 
-    mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "run", &event_info, NULL);
+    mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "run", &event_info, NULL, NULL);
 
     if (mc_global.mc_run_mode == MC_RUN_FULL)
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
@@ -1317,7 +1317,7 @@ help_cmd (void)
     else
         event_data.node = "[main]";
 
-    mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data, NULL);
+    mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data, NULL, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -489,8 +489,8 @@ check_panel_timestamp (const WPanel * panel, panel_view_mode_t mode, struct vfs_
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 /* event callback */
+
 static gboolean
 check_current_panel_timestamp (event_info_t * event_info, gpointer data, GError ** error)
 {
@@ -499,15 +499,15 @@ check_current_panel_timestamp (event_info_t * event_info, gpointer data, GError 
     (void) event_info;
     (void) error;
 
-    event_data->ret =
+    event_info->ret->b =
         check_panel_timestamp (current_panel, get_current_type (), event_data->vclass,
                                event_data->id);
-    return !event_data->ret;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 /* event callback */
+
 static gboolean
 check_other_panel_timestamp (event_info_t * event_info, gpointer data, GError ** error)
 {
@@ -516,9 +516,10 @@ check_other_panel_timestamp (event_info_t * event_info, gpointer data, GError **
     (void) event_info;
     (void) error;
 
-    event_data->ret =
+    event_info->ret->b =
         check_panel_timestamp (other_panel, get_other_type (), event_data->vclass, event_data->id);
-    return !event_data->ret;
+
+    return TRUE;
 }
 #endif /* ENABLE_VFS */
 
@@ -1008,7 +1009,7 @@ mc_maybe_editor_or_viewer (void)
             event_info.data.file.first = mc_run_param0;
             event_info.data.file.second = mc_run_param1;
 
-            mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "run", &event_info, NULL);
+            mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "run", &event_info, NULL, NULL);
             ret = event_info.ret_value;
         }
         break;
@@ -1343,7 +1344,7 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         ctl_x_cmd ();
         break;
     case CK_Suspend:
-        mc_event_raise (MCEVENT_GROUP_CORE, "suspend", NULL, NULL);
+        mc_event_raise (MCEVENT_GROUP_CORE, "suspend", NULL, NULL, NULL);
         break;
     case CK_Swap:
         swap_cmd ();
