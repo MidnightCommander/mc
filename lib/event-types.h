@@ -11,6 +11,7 @@
 #define MCEVENT_GROUP_DIFFVIEWER "DiffViewer"
 #define MCEVENT_GROUP_EDITOR "Editor"
 #define MCEVENT_GROUP_FILEMANAGER "FileManager"
+#define MCEVENT_GROUP_TREEVIEW "FileManager:Tree"
 #define MCEVENT_GROUP_VIEWER "Viewer"
 
 /* Events */

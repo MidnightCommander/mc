@@ -68,6 +68,7 @@
 #include "cmd.h"
 #include "filegui.h"
 
+#include "event.h"
 #include "tree.h"
 
 /*** global variables ****************************************************************************/
@@ -112,10 +113,6 @@ struct WTree
 static gboolean tree_navigation_flag = FALSE;
 
 /*** file scope functions ************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-static void tree_rescan (void *data);
-
 /* --------------------------------------------------------------------------------------------- */
 
 static tree_entry *
@@ -214,10 +211,15 @@ tree_destroy (WTree * tree)
 static void
 load_tree (WTree * tree)
 {
-    tree_store_load ();
+    mc_tree_chdir_t chdir_info = {
+        .tree = tree
+    };
 
+    tree_store_load ();
     tree->selected_ptr = tree->store->tree_first;
-    tree_chdir (tree, mc_config_get_home_dir ());
+    chdir_info.dir = (char *) mc_config_get_home_dir ();
+
+    mc_event_raise (MCEVENT_GROUP_TREEVIEW, "chdir", &chdir_info, NULL, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -497,7 +499,7 @@ tree_move_forward (WTree * tree, int i)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-tree_move_to_child (WTree * tree)
+tree_move_to_child (WTree * tree, GError ** error)
 {
     tree_entry *current;
 
@@ -517,7 +519,7 @@ tree_move_to_child (WTree * tree)
     else
     {
         /* No -> rescan and try again */
-        tree_rescan (tree);
+        mc_event_raise (MCEVENT_GROUP_TREEVIEW, "rescan", tree, NULL, error);
         current = tree->selected_ptr->next;
         if (current && current->sublevel > tree->selected_ptr->sublevel)
         {
@@ -574,38 +576,10 @@ tree_move_to_bottom (WTree * tree)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-tree_chdir_sel (WTree * tree)
-{
-    if (tree->is_panel)
-    {
-        change_panel ();
-
-        if (do_cd (tree->selected_ptr->name, cd_exact))
-            select_item (current_panel);
-        else
-            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"),
-                     vfs_path_as_str (tree->selected_ptr->name), unix_error_string (errno));
-
-        widget_redraw (WIDGET (current_panel));
-        change_panel ();
-        show_tree (tree);
-    }
-    else
-    {
-        WDialog *h = WIDGET (tree)->owner;
-
-        h->ret_value = B_ENTER;
-        dlg_stop (h);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-maybe_chdir (WTree * tree)
+maybe_chdir (WTree * tree, GError ** error)
 {
     if (xtree_mode && tree->is_panel && is_idle ())
-        tree_chdir_sel (tree);
+        mc_event_raise (MCEVENT_GROUP_TREEVIEW, "enter", tree, NULL, error);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -655,7 +629,7 @@ tree_event (Gpm_Event * event, void *data)
             tree->selected_ptr = tree->tree_shown[local.y];
             tree->topdiff = local.y;
         }
-        tree_chdir_sel (tree);
+        mc_event_raise (MCEVENT_GROUP_TREEVIEW, "enter", tree, NULL, NULL);
     }
 
     return MOU_NORMAL;
@@ -715,126 +689,10 @@ tree_do_search (WTree * tree, int key)
         tree->search_buffer[--l] = 0;
 
     show_tree (tree);
-    maybe_chdir (tree);
+    maybe_chdir (tree, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-static void
-tree_rescan (void *data)
-{
-    WTree *tree = data;
-    vfs_path_t *old_vpath;
-
-    old_vpath = vfs_path_clone (vfs_get_raw_current_dir ());
-    if (old_vpath == NULL)
-        return;
-
-    if (tree->selected_ptr != NULL && mc_chdir (tree->selected_ptr->name) == 0)
-    {
-        int ret;
-
-        tree_store_rescan (tree->selected_ptr->name);
-        ret = mc_chdir (old_vpath);
-        (void) ret;
-    }
-    vfs_path_free (old_vpath);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-tree_forget (void *data)
-{
-    WTree *tree = data;
-    if (tree->selected_ptr)
-        tree_remove_entry (tree, tree->selected_ptr->name);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-tree_copy (WTree * tree, const char *default_dest)
-{
-    char msg[BUF_MEDIUM];
-    char *dest;
-
-    if (tree->selected_ptr == NULL)
-        return;
-
-    g_snprintf (msg, sizeof (msg), _("Copy \"%s\" directory to:"),
-                str_trunc (vfs_path_as_str (tree->selected_ptr->name), 50));
-    dest = input_expand_dialog (Q_ ("DialogTitle|Copy"),
-                                msg, MC_HISTORY_FM_TREE_COPY, default_dest,
-                                INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD);
-
-    if (dest != NULL && *dest != '\0')
-    {
-        file_op_context_t *ctx;
-        file_op_total_context_t *tctx;
-
-        ctx = file_op_context_new (OP_COPY);
-        tctx = file_op_total_context_new ();
-        file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_MULTI_ITEM);
-        tctx->ask_overwrite = FALSE;
-        copy_dir_dir (tctx, ctx, vfs_path_as_str (tree->selected_ptr->name), dest, TRUE, FALSE,
-                      FALSE, NULL);
-        file_op_total_context_destroy (tctx);
-        file_op_context_destroy (ctx);
-    }
-
-    g_free (dest);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-tree_move (WTree * tree, const char *default_dest)
-{
-    char msg[BUF_MEDIUM];
-    char *dest;
-    struct stat buf;
-    file_op_context_t *ctx;
-    file_op_total_context_t *tctx;
-
-    if (tree->selected_ptr == NULL)
-        return;
-
-    g_snprintf (msg, sizeof (msg), _("Move \"%s\" directory to:"),
-                str_trunc (vfs_path_as_str (tree->selected_ptr->name), 50));
-    dest =
-        input_expand_dialog (Q_ ("DialogTitle|Move"), msg, MC_HISTORY_FM_TREE_MOVE, default_dest,
-                             INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD);
-
-    if (dest == NULL || *dest == '\0')
-        goto ret;
-
-    if (stat (dest, &buf))
-    {
-        message (D_ERROR, MSG_ERROR, _("Cannot stat the destination\n%s"),
-                 unix_error_string (errno));
-        goto ret;
-    }
-
-    if (!S_ISDIR (buf.st_mode))
-    {
-        file_error (_("Destination \"%s\" must be a directory\n%s"), dest);
-        goto ret;
-    }
-
-    ctx = file_op_context_new (OP_MOVE);
-    tctx = file_op_total_context_new ();
-    file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_ONE_ITEM);
-    move_dir_dir (tctx, ctx, vfs_path_as_str (tree->selected_ptr->name), dest);
-    file_op_total_context_destroy (tctx);
-    file_op_context_destroy (ctx);
-
-  ret:
-    g_free (dest);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 #if 0
 static void
 tree_mkdir (WTree * tree)
@@ -855,183 +713,13 @@ tree_mkdir (WTree * tree)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-tree_rmdir (void *data)
-{
-    WTree *tree = data;
-    file_op_context_t *ctx;
-    file_op_total_context_t *tctx;
-
-    if (!tree->selected_ptr)
-        return;
-
-    if (confirm_delete)
-    {
-        char *buf;
-        int result;
-
-        buf = g_strdup_printf (_("Delete %s?"), vfs_path_as_str (tree->selected_ptr->name));
-
-        result = query_dialog (Q_ ("DialogTitle|Delete"), buf, D_ERROR, 2, _("&Yes"), _("&No"));
-        g_free (buf);
-        if (result != 0)
-            return;
-    }
-
-    ctx = file_op_context_new (OP_DELETE);
-    tctx = file_op_total_context_new ();
-
-    file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_ONE_ITEM);
-    if (erase_dir (tctx, ctx, tree->selected_ptr->name) == FILE_CONT)
-        tree_forget (tree);
-    file_op_total_context_destroy (tctx);
-    file_op_context_destroy (ctx);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static inline void
-tree_move_up (WTree * tree)
-{
-    tree_move_backward (tree, 1);
-    show_tree (tree);
-    maybe_chdir (tree);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static inline void
-tree_move_down (WTree * tree)
-{
-    tree_move_forward (tree, 1);
-    show_tree (tree);
-    maybe_chdir (tree);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static inline void
-tree_move_home (WTree * tree)
-{
-    tree_move_to_top (tree);
-    show_tree (tree);
-    maybe_chdir (tree);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static inline void
-tree_move_end (WTree * tree)
-{
-    tree_move_to_bottom (tree);
-    show_tree (tree);
-    maybe_chdir (tree);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-tree_move_pgup (WTree * tree)
-{
-    tree_move_backward (tree, tlines (tree) - 1);
-    show_tree (tree);
-    maybe_chdir (tree);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-tree_move_pgdn (WTree * tree)
-{
-    tree_move_forward (tree, tlines (tree) - 1);
-    show_tree (tree);
-    maybe_chdir (tree);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static gboolean
-tree_move_left (WTree * tree)
-{
-    gboolean v = FALSE;
-
-    if (tree_navigation_flag)
-    {
-        v = tree_move_to_parent (tree);
-        show_tree (tree);
-        maybe_chdir (tree);
-    }
-
-    return v;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static gboolean
-tree_move_right (WTree * tree)
-{
-    gboolean v = FALSE;
-
-    if (tree_navigation_flag)
-    {
-        tree_move_to_child (tree);
-        show_tree (tree);
-        maybe_chdir (tree);
-        v = TRUE;
-    }
-
-    return v;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-tree_start_search (WTree * tree)
-{
-    gboolean i;
-
-    if (tree->searching)
-    {
-        if (tree->selected_ptr == tree->store->tree_last)
-            tree_move_to_top (tree);
-        else
-        {
-            /* set navigation mode temporarily to 'Static' because in
-             * dynamic navigation mode tree_move_forward will not move
-             * to a lower sublevel if necessary (sequent searches must
-             * start with the directory followed the last found directory)
-             */
-            i = tree_navigation_flag;
-            tree_navigation_flag = 0;
-            tree_move_forward (tree, 1);
-            tree_navigation_flag = i;
-        }
-        tree_do_search (tree, 0);
-    }
-    else
-    {
-        tree->searching = 1;
-        tree->search_buffer[0] = 0;
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-tree_toggle_navig (WTree * tree)
-{
-    tree_navigation_flag = !tree_navigation_flag;
-    buttonbar_set_label (find_buttonbar (WIDGET (tree)->owner), 4,
-                         tree_navigation_flag ? Q_ ("ButtonBar|Static")
-                         : Q_ ("ButtonBar|Dynamc"), tree_map, WIDGET (tree));
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static cb_ret_t
 tree_execute_cmd (WTree * tree, unsigned long command)
 {
-    cb_ret_t res = MSG_HANDLED;
+    const char *event_name = NULL;
+    event_return_t ret;
+
+    ret.b = TRUE;
 
     if (command != CK_Search)
         tree->searching = 0;
@@ -1039,64 +727,71 @@ tree_execute_cmd (WTree * tree, unsigned long command)
     switch (command)
     {
     case CK_Help:
-        {
-            ev_help_t event_data = { NULL, "[Directory Tree]" };
-            mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data, NULL, NULL);
-        }
+        event_name = "help";
         break;
     case CK_Forget:
-        tree_forget (tree);
+        event_name = "forget";
         break;
     case CK_ToggleNavigation:
-        tree_toggle_navig (tree);
+        event_name = "navigation_mode_toggle";
         break;
     case CK_Copy:
-        tree_copy (tree, "");
+        event_name = "copy";
         break;
     case CK_Move:
-        tree_move (tree, "");
+        event_name = "move";
         break;
     case CK_Up:
-        tree_move_up (tree);
+        event_name = "goto_up";
         break;
     case CK_Down:
-        tree_move_down (tree);
+        event_name = "goto_down";
+        break;
+    case CK_Left:
+        event_name = "goto_left";
+        break;
+    case CK_Right:
+        event_name = "goto_right";
         break;
     case CK_Top:
-        tree_move_home (tree);
+        event_name = "goto_home";
         break;
     case CK_Bottom:
-        tree_move_end (tree);
+        event_name = "goto_end";
         break;
     case CK_PageUp:
-        tree_move_pgup (tree);
+        event_name = "goto_page_up";
         break;
     case CK_PageDown:
-        tree_move_pgdn (tree);
+        event_name = "goto_page_down";
         break;
     case CK_Enter:
-        tree_chdir_sel (tree);
+        event_name = "enter";
         break;
     case CK_Reread:
-        tree_rescan (tree);
+        event_name = "rescan";
         break;
     case CK_Search:
-        tree_start_search (tree);
+        event_name = "search_begin";
         break;
     case CK_Delete:
-        tree_rmdir (tree);
+        event_name = "rmdir";
         break;
     case CK_Quit:
         if (!tree->is_panel)
             dlg_stop (WIDGET (tree)->owner);
-        return res;
-    default:
-        res = MSG_NOT_HANDLED;
+        break;
     }
 
-    show_tree (tree);
+    if (command != CK_Quit /* ignore left-right ? */ )
+        show_tree (tree);
 
-    return res;
+    if (mc_event_raise (MCEVENT_GROUP_TREEVIEW, event_name, tree, &ret, NULL))
+    {
+        return (ret.b) ? MSG_HANDLED : MSG_NOT_HANDLED;
+    }
+
+    return MSG_NOT_HANDLED;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1128,21 +823,13 @@ tree_key (WTree * tree, int key)
 
     for (i = 0; tree_map[i].key != 0; i++)
         if (key == tree_map[i].key)
-            switch (tree_map[i].command)
-            {
-            case CK_Left:
-                return tree_move_left (tree) ? MSG_HANDLED : MSG_NOT_HANDLED;
-            case CK_Right:
-                return tree_move_right (tree) ? MSG_HANDLED : MSG_NOT_HANDLED;
-            default:
-                tree_execute_cmd (tree, tree_map[i].command);
-                return MSG_HANDLED;
-            }
-
+        {
+            return tree_execute_cmd (tree, tree_map[i].command);
+        }
     /* Do not eat characters not meant for the tree below ' ' (e.g. C-l). */
     if (!command_prompt && ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE))
     {
-        tree_start_search (tree);
+        mc_event_raise (MCEVENT_GROUP_TREEVIEW, "search_begin", tree, NULL, NULL);
         tree_do_search (tree, key);
         return MSG_HANDLED;
     }
@@ -1250,6 +937,43 @@ tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static WTree *
+find_tree (struct WDialog *h)
+{
+    return (WTree *) find_widget_type (h, tree_callback);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
+tree_box_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+{
+    WDialog *h = DIALOG (w);
+
+    switch (msg)
+    {
+    case MSG_RESIZE:
+        {
+            Widget *bar;
+
+            /* simply call dlg_set_size() with new size */
+            dlg_set_size (h, LINES - 9, COLS - 20);
+            bar = WIDGET (find_buttonbar (h));
+            bar->x = 0;
+            bar->y = LINES - 1;
+            return MSG_HANDLED;
+        }
+
+    case MSG_ACTION:
+        return send_message (find_tree (h), NULL, MSG_ACTION, parm, NULL);
+
+    default:
+        return dlg_default_callback (w, sender, msg, parm, data);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1281,24 +1005,6 @@ tree_new (int y, int x, int lines, int cols, gboolean is_panel)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-void
-tree_chdir (WTree * tree, const char *dir)
-{
-    vfs_path_t *vpath;
-    tree_entry *current;
-
-    vpath = vfs_path_from_str (dir);
-    current = tree_store_whereis (vpath);
-    if (current != NULL)
-    {
-        tree->selected_ptr = current;
-        tree_check_focus (tree);
-    }
-    vfs_path_free (vpath);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /** Return name of the currently selected entry */
 
 vfs_path_t *
@@ -1308,19 +1014,524 @@ tree_selected_name (const WTree * tree)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-sync_tree (const char *path)
+gboolean
+mc_tree_cmd_help (event_info_t * event_info, gpointer data, GError ** error)
 {
-    tree_chdir (the_tree, path);
+    ev_help_t event_data = { NULL, "[Directory Tree]" };
+
+    (void) event_info;
+    (void) error;
+    (void) data;
+
+    mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data, NULL, NULL);
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-WTree *
-find_tree (struct WDialog *h)
+gboolean
+mc_tree_cmd_forget (event_info_t * event_info, gpointer data, GError ** error)
 {
-    return (WTree *) find_widget_type (h, tree_callback);
+    WTree *tree = (WTree *) data;
+
+    (void) event_info;
+    (void) error;
+
+    if (tree->selected_ptr)
+        tree_remove_entry (tree, tree->selected_ptr->name);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_tree_cmd_navigation_mode_toggle (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WTree *tree = (WTree *) data;
+
+    (void) event_info;
+    (void) error;
+
+    tree_navigation_flag = !tree_navigation_flag;
+    buttonbar_set_label (find_buttonbar (WIDGET (tree)->owner), 4,
+                         tree_navigation_flag ? Q_ ("ButtonBar|Static")
+                         : Q_ ("ButtonBar|Dynamc"), tree_map, WIDGET (tree));
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_tree_cmd_copy (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WTree *tree = (WTree *) data;
+
+    char msg[BUF_MEDIUM];
+    char *dest;
+
+    (void) event_info;
+    (void) error;
+
+    if (tree->selected_ptr == NULL)
+        return TRUE;
+
+    g_snprintf (msg, sizeof (msg), _("Copy \"%s\" directory to:"),
+                str_trunc (vfs_path_as_str (tree->selected_ptr->name), 50));
+    dest = input_expand_dialog (Q_ ("DialogTitle|Copy"),
+                                msg, MC_HISTORY_FM_TREE_COPY, "",
+                                INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD);
+
+    if (dest != NULL && *dest != '\0')
+    {
+        file_op_context_t *ctx;
+        file_op_total_context_t *tctx;
+
+        ctx = file_op_context_new (OP_COPY);
+        tctx = file_op_total_context_new ();
+        file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_MULTI_ITEM);
+        tctx->ask_overwrite = FALSE;
+        copy_dir_dir (tctx, ctx, vfs_path_as_str (tree->selected_ptr->name), dest, TRUE, FALSE,
+                      FALSE, NULL);
+        file_op_total_context_destroy (tctx);
+        file_op_context_destroy (ctx);
+    }
+
+    g_free (dest);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_tree_cmd_move (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WTree *tree = (WTree *) data;
+
+    char msg[BUF_MEDIUM];
+    char *dest;
+    struct stat buf;
+    file_op_context_t *ctx;
+    file_op_total_context_t *tctx;
+
+    (void) event_info;
+    (void) error;
+
+    if (tree->selected_ptr == NULL)
+        return TRUE;
+
+    g_snprintf (msg, sizeof (msg), _("Move \"%s\" directory to:"),
+                str_trunc (vfs_path_as_str (tree->selected_ptr->name), 50));
+    dest =
+        input_expand_dialog (Q_ ("DialogTitle|Move"), msg, MC_HISTORY_FM_TREE_MOVE, "",
+                             INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD);
+
+    if (dest == NULL || *dest == '\0')
+    {
+        g_free (dest);
+        return TRUE;
+    }
+    if (stat (dest, &buf))
+    {
+        message (D_ERROR, MSG_ERROR, _("Cannot stat the destination\n%s"),
+                 unix_error_string (errno));
+        g_free (dest);
+        return TRUE;
+    }
+
+    if (!S_ISDIR (buf.st_mode))
+    {
+        file_error (_("Destination \"%s\" must be a directory\n%s"), dest);
+        g_free (dest);
+        return TRUE;
+    }
+
+    ctx = file_op_context_new (OP_MOVE);
+    tctx = file_op_total_context_new ();
+    file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_ONE_ITEM);
+    move_dir_dir (tctx, ctx, vfs_path_as_str (tree->selected_ptr->name), dest);
+    file_op_total_context_destroy (tctx);
+    file_op_context_destroy (ctx);
+
+    g_free (dest);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_tree_cmd_goto_up (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WTree *tree = (WTree *) data;
+
+    (void) event_info;
+    (void) error;
+
+    tree_move_backward (tree, 1);
+    show_tree (tree);
+    maybe_chdir (tree, error);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_tree_cmd_goto_down (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WTree *tree = (WTree *) data;
+
+    (void) event_info;
+    (void) error;
+
+    tree_move_forward (tree, 1);
+    show_tree (tree);
+    maybe_chdir (tree, error);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_tree_cmd_goto_home (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WTree *tree = (WTree *) data;
+
+    (void) event_info;
+    (void) error;
+
+    tree_move_to_top (tree);
+    show_tree (tree);
+    maybe_chdir (tree, error);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_tree_cmd_goto_end (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WTree *tree = (WTree *) data;
+
+    (void) event_info;
+    (void) error;
+
+    tree_move_to_bottom (tree);
+    show_tree (tree);
+    maybe_chdir (tree, error);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_tree_cmd_goto_page_up (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WTree *tree = (WTree *) data;
+
+    (void) event_info;
+    (void) error;
+
+    tree_move_backward (tree, tlines (tree) - 1);
+    show_tree (tree);
+    maybe_chdir (tree, error);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_tree_cmd_goto_page_down (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WTree *tree = (WTree *) data;
+
+    (void) event_info;
+    (void) error;
+
+    tree_move_forward (tree, tlines (tree) - 1);
+    show_tree (tree);
+    maybe_chdir (tree, error);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_tree_cmd_goto_left (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WTree *tree = (WTree *) data;
+
+    (void) error;
+
+    event_info->ret->b = FALSE;
+
+    if (tree_navigation_flag)
+    {
+        event_info->ret->b = tree_move_to_parent (tree);
+        show_tree (tree);
+        maybe_chdir (tree, error);
+    }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_tree_cmd_goto_right (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WTree *tree = (WTree *) data;
+
+    (void) error;
+
+    event_info->ret->b = FALSE;
+
+    if (tree_navigation_flag)
+    {
+        tree_move_to_child (tree, error);
+        show_tree (tree);
+        maybe_chdir (tree, error);
+        event_info->ret->b = TRUE;
+    }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_tree_cmd_enter (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WTree *tree = (WTree *) data;
+
+    (void) error;
+    (void) event_info;
+
+    if (tree->is_panel)
+    {
+        change_panel ();
+
+        if (do_cd (tree->selected_ptr->name, cd_exact))
+            select_item (current_panel);
+        else
+            message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"),
+                     vfs_path_as_str (tree->selected_ptr->name), unix_error_string (errno));
+
+        widget_redraw (WIDGET (current_panel));
+        change_panel ();
+        show_tree (tree);
+    }
+    else
+    {
+        WDialog *h = WIDGET (tree)->owner;
+
+        h->ret_value = B_ENTER;
+        dlg_stop (h);
+    }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_tree_cmd_rescan (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WTree *tree = (WTree *) data;
+
+    vfs_path_t *old_vpath;
+
+    (void) error;
+    (void) event_info;
+
+    old_vpath = vfs_path_clone (vfs_get_raw_current_dir ());
+    if (old_vpath == NULL)
+        return TRUE;
+
+    if (tree->selected_ptr != NULL && mc_chdir (tree->selected_ptr->name) == 0)
+    {
+        int ret;
+
+        tree_store_rescan (tree->selected_ptr->name);
+        ret = mc_chdir (old_vpath);
+        (void) ret;
+    }
+    vfs_path_free (old_vpath);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_tree_cmd_search_begin (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WTree *tree = (WTree *) data;
+
+    gboolean i;
+
+    (void) error;
+    (void) event_info;
+
+    if (tree->searching)
+    {
+        if (tree->selected_ptr == tree->store->tree_last)
+            tree_move_to_top (tree);
+        else
+        {
+            /* set navigation mode temporarily to 'Static' because in
+             * dynamic navigation mode tree_move_forward will not move
+             * to a lower sublevel if necessary (sequent searches must
+             * start with the directory followed the last found directory)
+             */
+            i = tree_navigation_flag;
+            tree_navigation_flag = 0;
+            tree_move_forward (tree, 1);
+            tree_navigation_flag = i;
+        }
+        tree_do_search (tree, 0);
+    }
+    else
+    {
+        tree->searching = 1;
+        tree->search_buffer[0] = 0;
+    }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_tree_cmd_rmdir (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WTree *tree = (WTree *) data;
+
+    file_op_context_t *ctx;
+    file_op_total_context_t *tctx;
+
+    (void) error;
+    (void) event_info;
+
+    if (!tree->selected_ptr)
+        return TRUE;
+
+    if (confirm_delete)
+    {
+        char *buf;
+        int result;
+
+        buf = g_strdup_printf (_("Delete %s?"), vfs_path_as_str (tree->selected_ptr->name));
+
+        result = query_dialog (Q_ ("DialogTitle|Delete"), buf, D_ERROR, 2, _("&Yes"), _("&No"));
+        g_free (buf);
+        if (result != 0)
+            return TRUE;
+    }
+
+    ctx = file_op_context_new (OP_DELETE);
+    tctx = file_op_total_context_new ();
+
+    file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_ONE_ITEM);
+    if (erase_dir (tctx, ctx, tree->selected_ptr->name) == FILE_CONT)
+        mc_event_raise (MCEVENT_GROUP_TREEVIEW, "forget", tree, NULL, NULL);
+    file_op_total_context_destroy (tctx);
+    file_op_context_destroy (ctx);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_tree_cmd_chdir (event_info_t * event_info, gpointer data, GError ** error)
+{
+    mc_tree_chdir_t *chdir_info = (mc_tree_chdir_t *) data;
+    vfs_path_t *vpath;
+    tree_entry *current;
+
+    (void) error;
+    (void) event_info;
+
+    vpath = vfs_path_from_str (chdir_info->dir);
+    current = tree_store_whereis (vpath);
+    if (current != NULL)
+    {
+        chdir_info->tree->selected_ptr = current;
+        tree_check_focus (chdir_info->tree);
+    }
+    vfs_path_free (vpath);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+/** Show tree in a box, not on a panel */
+
+gboolean
+mc_tree_cmd_show_box (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WTree *mytree;
+    WDialog *dlg;
+    Widget *wd;
+    WButtonBar *bar;
+
+    (void) error;
+    (void) data;
+
+    event_info->ret->s = NULL;
+
+    /* Create the components */
+    dlg = dlg_create (TRUE, 0, 0, LINES - 9, COLS - 20, dialog_colors, tree_box_callback, NULL,
+                      "[Directory Tree]", _("Directory tree"), DLG_CENTER);
+    wd = WIDGET (dlg);
+
+    mytree = tree_new (2, 2, wd->lines - 6, wd->cols - 5, FALSE);
+    add_widget_autopos (dlg, mytree, WPOS_KEEP_ALL, NULL);
+    add_widget_autopos (dlg, hline_new (wd->lines - 4, 1, -1), WPOS_KEEP_BOTTOM, NULL);
+    bar = buttonbar_new (TRUE);
+    add_widget (dlg, bar);
+    /* restore ButtonBar coordinates after add_widget() */
+    WIDGET (bar)->x = 0;
+    WIDGET (bar)->y = LINES - 1;
+
+    if (dlg_run (dlg) == B_ENTER)
+    {
+        const vfs_path_t *selected_name;
+        selected_name = tree_selected_name (mytree);
+        event_info->ret->s = g_strdup (vfs_path_as_str (selected_name));
+    }
+
+    dlg_destroy (dlg);
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

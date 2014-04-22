@@ -399,10 +399,12 @@ do_cd_command (char *orig_cmd)
 
     if (get_current_type () == view_tree)
     {
+        mc_tree_chdir_t chdir_info = {
+            .tree = the_tree
+        };
+
         if (cmd[0] == 0)
-        {
-            sync_tree (mc_config_get_home_dir ());
-        }
+            chdir_info.dir = g_strdup (mc_config_get_home_dir ());
         else if (DIR_IS_DOTDOT (cmd + operand_pos))
         {
             if (vfs_path_elements_count (current_panel->cwd_vpath) != 1 ||
@@ -414,18 +416,20 @@ do_cd_command (char *orig_cmd)
                     vfs_path_vtokens_get (tmp_vpath, 0, vfs_path_tokens_count (tmp_vpath) - 1);
                 vfs_path_free (tmp_vpath);
             }
-            sync_tree (vfs_path_as_str (current_panel->cwd_vpath));
+            chdir_info.dir = g_strdup (vfs_path_as_str (current_panel->cwd_vpath));
         }
         else if (IS_PATH_SEP (cmd[operand_pos]))
-            sync_tree (cmd + operand_pos);
+            chdir_info.dir = g_strdup (cmd + operand_pos);
         else
         {
             vfs_path_t *new_vpath;
 
             new_vpath = vfs_path_append_new (current_panel->cwd_vpath, cmd + operand_pos, NULL);
-            sync_tree (vfs_path_as_str (new_vpath));
+            chdir_info.dir = g_strdup (vfs_path_as_str (new_vpath));
             vfs_path_free (new_vpath);
         }
+        mc_event_raise (MCEVENT_GROUP_TREEVIEW, "chdir", &chdir_info, NULL, NULL);
+        g_free (chdir_info.dir);
     }
     else
     {

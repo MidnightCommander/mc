@@ -86,7 +86,7 @@
 #include "filenot.h"
 #include "hotlist.h"            /* hotlist_show() */
 #include "panel.h"              /* WPanel */
-#include "tree.h"               /* tree_chdir() */
+#include "tree.h"               /* mc_tree_chdir_t */
 #include "midnight.h"           /* change_panel() */
 #include "usermenu.h"           /* MC_GLOBAL_MENU */
 #include "command.h"            /* cmdline */
@@ -1110,7 +1110,13 @@ hotlist_cmd (void)
         return;
 
     if (get_current_type () == view_tree)
-        tree_chdir (the_tree, target);
+    {
+        mc_tree_chdir_t chdir_info = {
+            .tree = the_tree,
+            .dir = target
+        };
+        mc_event_raise (MCEVENT_GROUP_TREEVIEW, "chdir", &chdir_info, NULL, NULL);
+    }
     else
     {
         vfs_path_t *deprecated_vpath;

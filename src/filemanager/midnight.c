@@ -87,6 +87,7 @@
 
 #include "src/consaver/cons.saver.h"    /* show_console_contents */
 
+#include "event.h"
 #include "midnight.h"
 
 /* TODO: merge content of layout.c here */
@@ -152,17 +153,18 @@ stop_dialogs (void)
 static void
 treebox_cmd (void)
 {
-    char *sel_dir;
+    event_return_t ret;
 
-    sel_dir = tree_box (selection (current_panel)->fname);
-    if (sel_dir != NULL)
+    mc_event_raise (MCEVENT_GROUP_TREEVIEW, "show_box", NULL, &ret, NULL);
+
+    if (ret.s != NULL)
     {
         vfs_path_t *sel_vdir;
 
-        sel_vdir = vfs_path_from_str (sel_dir);
+        sel_vdir = vfs_path_from_str (ret.s);
         do_cd (sel_vdir, cd_exact);
         vfs_path_free (sel_vdir);
-        g_free (sel_dir);
+        g_free (ret.s);
     }
 }
 
@@ -496,7 +498,6 @@ check_current_panel_timestamp (event_info_t * event_info, gpointer data, GError 
 {
     ev_vfs_stamp_create_t *event_data = (ev_vfs_stamp_create_t *) data;
 
-    (void) event_info;
     (void) error;
 
     event_info->ret->b =
@@ -513,7 +514,6 @@ check_other_panel_timestamp (event_info_t * event_info, gpointer data, GError **
 {
     ev_vfs_stamp_create_t *event_data = (ev_vfs_stamp_create_t *) data;
 
-    (void) event_info;
     (void) error;
 
     event_info->ret->b =
@@ -1768,6 +1768,7 @@ do_nc (GError ** error)
 
         setup_mc ();
         mc_filehighlight = mc_fhl_new (TRUE);
+        mc_filemanager_init_events (error);
         create_panels_and_run_mc ();
         mc_fhl_free (&mc_filehighlight);
 

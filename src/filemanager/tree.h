@@ -15,6 +15,12 @@
 
 typedef struct WTree WTree;
 
+typedef struct
+{
+    WTree *tree;
+    char *dir;
+} mc_tree_chdir_t;
+
 /*** global variables defined in .c file *********************************************************/
 
 extern WTree *the_tree;
@@ -26,12 +32,7 @@ struct WDialog;
 
 WTree *tree_new (int y, int x, int lines, int cols, gboolean is_panel);
 
-void tree_chdir (WTree * tree, const char *dir);
 vfs_path_t *tree_selected_name (const WTree * tree);
-
-void sync_tree (const char *pathname);
-
-WTree *find_tree (struct WDialog *h);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__TREE_H */

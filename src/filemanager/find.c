@@ -41,6 +41,8 @@
 
 #include "lib/global.h"
 
+#include "lib/event.h"
+
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
 #include "lib/skin.h"
@@ -702,21 +704,23 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
 
     case B_TREE:
         {
-            char *temp_dir;
-
-            temp_dir = in_start->buffer;
-            if (*temp_dir == '\0' || DIR_IS_DOT (temp_dir))
-                temp_dir = g_strdup (vfs_path_as_str (current_panel->cwd_vpath));
-            else
-                temp_dir = g_strdup (temp_dir);
+            event_return_t ret;
 
             if (in_start_dir != INPUT_LAST_TEXT)
                 g_free (in_start_dir);
-            in_start_dir = tree_box (temp_dir);
-            if (in_start_dir == NULL)
-                in_start_dir = temp_dir;
+
+            mc_event_raise (MCEVENT_GROUP_TREEVIEW, "show_box", NULL, &ret, NULL);
+
+            if (ret.s == NULL)
+            {
+                in_start_dir = in_start->buffer;
+                if (*in_start_dir == '\0' || DIR_IS_DOT (in_start_dir))
+                    in_start_dir = g_strdup (vfs_path_as_str (current_panel->cwd_vpath));
+                else
+                    in_start_dir = g_strdup (in_start_dir);
+            }
             else
-                g_free (temp_dir);
+                in_start_dir = ret.s;
 
             input_assign_text (in_start, in_start_dir);
 

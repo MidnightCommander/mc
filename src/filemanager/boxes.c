@@ -387,35 +387,6 @@ sel_charset_button (WButton * button, int action)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static cb_ret_t
-tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
-{
-    WDialog *h = DIALOG (w);
-
-    switch (msg)
-    {
-    case MSG_RESIZE:
-        {
-            Widget *bar;
-
-            /* simply call dlg_set_size() with new size */
-            dlg_set_size (h, LINES - 9, COLS - 20);
-            bar = WIDGET (find_buttonbar (h));
-            bar->x = 0;
-            bar->y = LINES - 1;
-            return MSG_HANDLED;
-        }
-
-    case MSG_ACTION:
-        return send_message (find_tree (h), NULL, MSG_ACTION, parm, NULL);
-
-    default:
-        return dlg_default_callback (w, sender, msg, parm, data);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 #if defined(ENABLE_VFS) && defined (ENABLE_VFS_FTP)
 static cb_ret_t
 confvfs_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
@@ -1031,45 +1002,6 @@ display_bits_box (void)
     }
 }
 #endif /* HAVE_CHARSET */
-
-/* --------------------------------------------------------------------------------------------- */
-/** Show tree in a box, not on a panel */
-
-char *
-tree_box (const char *current_dir)
-{
-    WTree *mytree;
-    WDialog *dlg;
-    Widget *wd;
-    char *val = NULL;
-    WButtonBar *bar;
-
-    (void) current_dir;
-
-    /* Create the components */
-    dlg = dlg_create (TRUE, 0, 0, LINES - 9, COLS - 20, dialog_colors, tree_callback, NULL,
-                      "[Directory Tree]", _("Directory tree"), DLG_CENTER);
-    wd = WIDGET (dlg);
-
-    mytree = tree_new (2, 2, wd->lines - 6, wd->cols - 5, FALSE);
-    add_widget_autopos (dlg, mytree, WPOS_KEEP_ALL, NULL);
-    add_widget_autopos (dlg, hline_new (wd->lines - 4, 1, -1), WPOS_KEEP_BOTTOM, NULL);
-    bar = buttonbar_new (TRUE);
-    add_widget (dlg, bar);
-    /* restore ButtonBar coordinates after add_widget() */
-    WIDGET (bar)->x = 0;
-    WIDGET (bar)->y = LINES - 1;
-
-    if (dlg_run (dlg) == B_ENTER)
-    {
-        const vfs_path_t *selected_name;
-        selected_name = tree_selected_name (mytree);
-        val = g_strdup (vfs_path_as_str (selected_name));
-    }
-
-    dlg_destroy (dlg);
-    return val;
-}
 
 /* --------------------------------------------------------------------------------------------- */
 

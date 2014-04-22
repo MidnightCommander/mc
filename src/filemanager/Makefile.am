@@ -9,6 +9,7 @@ libmcfilemanager_la_SOURCES = \
 	cmd.c cmd.h \
 	command.c command.h \
 	dir.c dir.h \
+	event.c event.h \
 	ext.c ext.h \
 	file.c file.h \
 	filegui.c filegui.h \

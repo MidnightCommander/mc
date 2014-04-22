@@ -100,12 +100,6 @@ shell_execute (const char *command, int flags)
     (void) flags;
 }
 
-void
-sync_tree (const char *pathname)
-{
-    (void) pathname;
-}
-
 /* --------------------------------------------------------------------------------------------- */
 
 static void

@@ -30,7 +30,6 @@ void jobs_cmd (void);
 char *cd_dialog (void);
 void symlink_dialog (const vfs_path_t * existing_vpath, const vfs_path_t * new_vpath,
                      char **ret_existing, char **ret_new);
-char *tree_box (const char *current_dir);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__BOXES_H */
