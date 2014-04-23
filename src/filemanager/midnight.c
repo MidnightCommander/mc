@@ -1108,6 +1108,9 @@ static cb_ret_t
 midnight_execute_cmd (Widget * sender, unsigned long command)
 {
     cb_ret_t res = MSG_HANDLED;
+    const char *event_group_name = MCEVENT_GROUP_FILEMANAGER;
+    const char *event_name = NULL;
+    event_return_t ret;
 
     (void) sender;
 
@@ -1385,7 +1388,7 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         user_file_menu_cmd ();
         break;
     case CK_View:
-        view_cmd ();
+        event_name = "view";
         break;
     case CK_ViewFile:
         view_file_cmd ();
@@ -1397,7 +1400,114 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         res = MSG_NOT_HANDLED;
     }
 
+    if (mc_event_raise (event_group_name, event_name, current_panel, &ret, NULL))
+    {
+        return (ret.b) ? MSG_HANDLED : MSG_NOT_HANDLED;
+    }
+
     return res;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
+midnight_handle_raw_keys (int parm)
+{
+    unsigned long command;
+
+    if (ctl_x_map_enabled)
+    {
+        ctl_x_map_enabled = FALSE;
+        command = keybind_lookup_keymap_command (main_x_map, parm);
+        if (command != CK_IgnoreKey)
+            return midnight_execute_cmd (NULL, command);
+    }
+
+    /* FIXME: should handle all menu shortcuts before this point */
+    if (the_menubar->is_active)
+        return MSG_NOT_HANDLED;
+
+    if (parm == '\t')
+        input_free_completions (cmdline);
+
+    if (parm == '\n')
+    {
+        size_t i;
+
+        /* HACK: don't execute command in the command line if Enter was pressed
+           in the quick viewer panel. */
+        /* TODO: currently, when one of panels is other than view_listing,
+           current_panel points to view_listing panel all time independently of
+           it's activity. Thus, we can't use get_current_type() here.
+           current_panel should point to actualy current active panel
+           independently of it's type. */
+        if (current_panel->active == 0 && get_other_type () == view_quick)
+            return MSG_NOT_HANDLED;
+
+        for (i = 0; cmdline->buffer[i] != '\0' &&
+             (cmdline->buffer[i] == ' ' || cmdline->buffer[i] == '\t'); i++)
+            ;
+
+        if (cmdline->buffer[i] != '\0')
+        {
+            send_message (cmdline, NULL, MSG_KEY, parm, NULL);
+            return MSG_HANDLED;
+        }
+
+        input_insert (cmdline, "", FALSE);
+        cmdline->point = 0;
+    }
+
+    /* Ctrl-Enter and Alt-Enter */
+    if (((parm & ~(KEY_M_CTRL | KEY_M_ALT)) == '\n') && (parm & (KEY_M_CTRL | KEY_M_ALT)))
+    {
+        put_prog_name ();
+        return MSG_HANDLED;
+    }
+
+    /* Ctrl-Shift-Enter */
+    if (parm == (KEY_M_CTRL | KEY_M_SHIFT | '\n'))
+    {
+        midnight_put_panel_path (current_panel);
+        put_prog_name ();
+        return MSG_HANDLED;
+    }
+
+    if ((!mc_global.tty.alternate_plus_minus
+         || !(mc_global.tty.console_flag != '\0' || mc_global.tty.xterm_flag)) && !quote
+        && !current_panel->searching)
+    {
+        if (!only_leading_plus_minus)
+        {
+            /* Special treatement, since the input line will eat them */
+            if (parm == '+')
+                return send_message (current_panel, midnight_dlg, MSG_ACTION, CK_Select, NULL);
+
+            if (parm == '\\' || parm == '-')
+                return send_message (current_panel, midnight_dlg, MSG_ACTION, CK_Unselect, NULL);
+
+            if (parm == '*')
+                return send_message (current_panel, midnight_dlg, MSG_ACTION, CK_SelectInvert,
+                                     NULL);
+        }
+        else if (!command_prompt || !cmdline->buffer[0])
+        {
+            /* Special treatement '+', '-', '\', '*' only when this is
+             * first char on input line
+             */
+
+            if (parm == '+')
+                return send_message (current_panel, midnight_dlg, MSG_ACTION, CK_Select, NULL);
+
+            if (parm == '\\' || parm == '-')
+                return send_message (current_panel, midnight_dlg, MSG_ACTION, CK_Unselect, NULL);
+
+            if (parm == '*')
+                return send_message (current_panel, midnight_dlg, MSG_ACTION, CK_SelectInvert,
+                                     NULL);
+        }
+    }
+    return MSG_NOT_HANDLED;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1445,100 +1555,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         return MSG_HANDLED;
 
     case MSG_KEY:
-        if (ctl_x_map_enabled)
-        {
-            ctl_x_map_enabled = FALSE;
-            command = keybind_lookup_keymap_command (main_x_map, parm);
-            if (command != CK_IgnoreKey)
-                return midnight_execute_cmd (NULL, command);
-        }
-
-        /* FIXME: should handle all menu shortcuts before this point */
-        if (the_menubar->is_active)
-            return MSG_NOT_HANDLED;
-
-        if (parm == '\t')
-            input_free_completions (cmdline);
-
-        if (parm == '\n')
-        {
-            size_t i;
-
-            /* HACK: don't execute command in the command line if Enter was pressed
-               in the quick viewer panel. */
-            /* TODO: currently, when one of panels is other than view_listing,
-               current_panel points to view_listing panel all time independently of
-               it's activity. Thus, we can't use get_current_type() here.
-               current_panel should point to actualy current active panel
-               independently of it's type. */
-            if (current_panel->active == 0 && get_other_type () == view_quick)
-                return MSG_NOT_HANDLED;
-
-            for (i = 0; cmdline->buffer[i] != '\0' &&
-                 (cmdline->buffer[i] == ' ' || cmdline->buffer[i] == '\t'); i++)
-                ;
-
-            if (cmdline->buffer[i] != '\0')
-            {
-                send_message (cmdline, NULL, MSG_KEY, parm, NULL);
-                return MSG_HANDLED;
-            }
-
-            input_insert (cmdline, "", FALSE);
-            cmdline->point = 0;
-        }
-
-        /* Ctrl-Enter and Alt-Enter */
-        if (((parm & ~(KEY_M_CTRL | KEY_M_ALT)) == '\n') && (parm & (KEY_M_CTRL | KEY_M_ALT)))
-        {
-            put_prog_name ();
-            return MSG_HANDLED;
-        }
-
-        /* Ctrl-Shift-Enter */
-        if (parm == (KEY_M_CTRL | KEY_M_SHIFT | '\n'))
-        {
-            midnight_put_panel_path (current_panel);
-            put_prog_name ();
-            return MSG_HANDLED;
-        }
-
-        if ((!mc_global.tty.alternate_plus_minus
-             || !(mc_global.tty.console_flag != '\0' || mc_global.tty.xterm_flag)) && !quote
-            && !current_panel->searching)
-        {
-            if (!only_leading_plus_minus)
-            {
-                /* Special treatement, since the input line will eat them */
-                if (parm == '+')
-                    return send_message (current_panel, midnight_dlg, MSG_ACTION, CK_Select, NULL);
-
-                if (parm == '\\' || parm == '-')
-                    return send_message (current_panel, midnight_dlg, MSG_ACTION, CK_Unselect,
-                                         NULL);
-
-                if (parm == '*')
-                    return send_message (current_panel, midnight_dlg, MSG_ACTION, CK_SelectInvert,
-                                         NULL);
-            }
-            else if (!command_prompt || cmdline->buffer[0] == '\0')
-            {
-                /* Special treatement '+', '-', '\', '*' only when this is
-                 * first char on input line
-                 */
-                if (parm == '+')
-                    return send_message (current_panel, midnight_dlg, MSG_ACTION, CK_Select, NULL);
-
-                if (parm == '\\' || parm == '-')
-                    return send_message (current_panel, midnight_dlg, MSG_ACTION, CK_Unselect,
-                                         NULL);
-
-                if (parm == '*')
-                    return send_message (current_panel, midnight_dlg, MSG_ACTION, CK_SelectInvert,
-                                         NULL);
-            }
-        }
-        return MSG_NOT_HANDLED;
+        return midnight_handle_raw_keys (parm);
 
     case MSG_HOTKEY_HANDLED:
         if ((get_current_type () == view_listing) && current_panel->searching)

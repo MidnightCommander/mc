@@ -46,23 +46,17 @@ void dirsizes_cmd (void);
 gboolean view_file_at_line (const vfs_path_t * filename_vpath, gboolean plain_view,
                             gboolean internal, long start_line);
 gboolean view_file (const vfs_path_t * filename_vpath, gboolean normal, gboolean internal);
-void view_cmd (void);
 void view_file_cmd (void);
-void view_raw_cmd (void);
 void view_filtered_cmd (void);
 void edit_file_at_line (const vfs_path_t * what_vpath, gboolean internal, long start_line);
 void edit_cmd (void);
-void edit_cmd_new (void);
 #ifdef USE_INTERNAL_EDIT
 void edit_cmd_force_internal (void);
 #endif
 void copy_cmd (void);
-void copy_cmd_local (void);
 void rename_cmd (void);
-void rename_cmd_local (void);
 void mkdir_cmd (void);
 void delete_cmd (void);
-void delete_cmd_local (void);
 void find_cmd (void);
 void filter_cmd (void);
 void reread_cmd (void);

@@ -117,17 +117,17 @@ clipboard_file_from_ext_clip (event_info_t * event_info, gpointer data, GError *
 
     while (TRUE)
     {
-        GError *error = NULL;
+        GError *mcerror = NULL;
 
         p->out.len = MC_PIPE_BUFSIZE;
         p->err.len = MC_PIPE_BUFSIZE;
 
-        mc_pread (p, &error);
+        mc_pread (p, &mcerror);
 
-        if (error != NULL)
+        if (mcerror != NULL)
         {
             /* don't show error message */
-            g_error_free (error);
+            g_error_free (mcerror);
             break;
         }
 
@@ -168,7 +168,7 @@ clipboard_file_from_ext_clip (event_info_t * event_info, gpointer data, GError *
 
 /* event callback */
 gboolean
-clipboard_text_to_file (event_info_t * event_info, gpointer data, GError ** error)
+clipboard_text_to_file (event_info_t * event_info, gpointer data, GError ** mcerror)
 {
     int file;
     vfs_path_t *fname_vpath = NULL;
@@ -176,7 +176,7 @@ clipboard_text_to_file (event_info_t * event_info, gpointer data, GError ** erro
     const char *text = (const char *) data;
 
     (void) event_info;
-    (void) error;
+    (void) mcerror;
 
     if (text == NULL)
         return FALSE;
@@ -203,7 +203,7 @@ clipboard_text_to_file (event_info_t * event_info, gpointer data, GError ** erro
 
 /* event callback */
 gboolean
-clipboard_text_from_file (event_info_t * event_info, gpointer data, GError ** error)
+clipboard_text_from_file (event_info_t * event_info, gpointer data, GError ** mcerror)
 {
     char buf[BUF_LARGE];
     FILE *f;
@@ -211,7 +211,7 @@ clipboard_text_from_file (event_info_t * event_info, gpointer data, GError ** er
     char **text = (char **) data;
     gboolean first = TRUE;
 
-    (void) error;
+    (void) mcerror;
 
     fname = mc_config_get_full_path (EDIT_CLIP_FILE);
     f = fopen (fname, "r");

@@ -80,6 +80,7 @@
 #include "src/diffviewer/ydiff.h"
 #endif
 
+#include "event.h"
 #include "fileopctx.h"
 #include "file.h"               /* file operation routines */
 #include "find.h"               /* find_file() */
@@ -125,15 +126,20 @@ static const char *machine_str = N_("Enter machine name (F1 for details):");
  * Run viewer (internal or external) on the currently selected file.
  * If normal is TRUE, force internal viewer and raw mode (used for F13).
  */
+
 static void
-do_view_cmd (gboolean normal)
+do_view_cmd (WPanel * panel, gboolean normal)
 {
+    file_entry_t *fe;
+
+    fe = selection (panel);
+
     /* Directories are viewed by changing to them */
-    if (S_ISDIR (selection (current_panel)->st.st_mode) || link_isdir (selection (current_panel)))
+    if (S_ISDIR (fe->st.st_mode) || link_isdir (fe))
     {
         vfs_path_t *fname_vpath;
 
-        if (confirm_view_dir && (current_panel->marked || current_panel->dirs_marked))
+        if (confirm_view_dir && (panel->marked || panel->dirs_marked))
         {
             if (query_dialog
                 (_("Confirmation"), _("Files tagged, want to cd?"), D_NORMAL, 2,
@@ -142,7 +148,7 @@ do_view_cmd (gboolean normal)
                 return;
             }
         }
-        fname_vpath = vfs_path_from_str (selection (current_panel)->fname);
+        fname_vpath = vfs_path_from_str (fe->fname);
         if (!do_cd (fname_vpath, cd_exact))
             message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
         vfs_path_free (fname_vpath);
@@ -152,8 +158,8 @@ do_view_cmd (gboolean normal)
         int file_idx;
         vfs_path_t *filename_vpath;
 
-        file_idx = current_panel->selected;
-        filename_vpath = vfs_path_from_str (current_panel->dir.list[file_idx].fname);
+        file_idx = panel->selected;
+        filename_vpath = vfs_path_from_str (panel->dir.list[file_idx].fname);
         view_file (filename_vpath, normal, use_internal_view != 0);
         vfs_path_free (filename_vpath);
     }
@@ -626,12 +632,20 @@ view_file (const vfs_path_t * filename_vpath, gboolean plain_view, gboolean inte
 
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 /** Run user's preferred viewer on the currently selected file */
 
-void
-view_cmd (void)
+gboolean
+mc_panel_cmd_file_view (event_info_t * event_info, gpointer data, GError ** error)
 {
-    do_view_cmd (FALSE);
+    WPanel *panel = (WPanel *) data;
+
+    (void) error;
+    (void) event_info;
+
+    do_view_cmd (panel, FALSE);
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -657,11 +671,20 @@ view_file_cmd (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 /** Run plain internal viewer on the currently selected file */
-void
-view_raw_cmd (void)
+
+gboolean
+mc_panel_cmd_file_view_raw (event_info_t * event_info, gpointer data, GError ** error)
 {
-    do_view_cmd (TRUE);
+    WPanel *panel = (WPanel *) data;
+
+    (void) error;
+    (void) event_info;
+
+    do_view_cmd (panel, TRUE);
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -757,11 +780,16 @@ edit_cmd_force_internal (void)
 #endif
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-edit_cmd_new (void)
+gboolean
+mc_panel_cmd_edit_new (event_info_t * event_info, gpointer data, GError ** error)
 {
     vfs_path_t *fname_vpath = NULL;
+
+    (void) error;
+    (void) data;
+    (void) event_info;
 
     if (editor_ask_filename_before_edit)
     {
@@ -770,7 +798,7 @@ edit_cmd_new (void)
         fname = input_expand_dialog (_("Edit file"), _("Enter file name:"),
                                      MC_HISTORY_EDIT_LOAD, "", INPUT_COMPLETE_FILENAMES);
         if (fname == NULL)
-            return;
+            return TRUE;
 
         if (*fname != '\0')
             fname_vpath = vfs_path_from_str (fname);
@@ -784,6 +812,8 @@ edit_cmd_new (void)
     do_edit (fname_vpath);
 
     vfs_path_free (fname_vpath);
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -815,31 +845,47 @@ rename_cmd (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 /** Invoked by F15.  Copy, default to the same panel, ignore marks.  */
 
-void
-copy_cmd_local (void)
+gboolean
+mc_panel_cmd_copy_single (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WPanel *panel = (WPanel *) data;
+
+    (void) error;
+    (void) event_info;
+
     save_cwds_stat ();
-    if (panel_operate (current_panel, OP_COPY, TRUE))
+    if (panel_operate (panel, OP_COPY, TRUE))
     {
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
         repaint_screen ();
     }
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 /** Invoked by F16.  Move/rename, default to the same panel.  */
 
-void
-rename_cmd_local (void)
+gboolean
+mc_panel_cmd_rename_single (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WPanel *panel = (WPanel *) data;
+
+    (void) error;
+    (void) event_info;
+
     save_cwds_stat ();
-    if (panel_operate (current_panel, OP_MOVE, TRUE))
+    if (panel_operate (panel, OP_MOVE, TRUE))
     {
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
         repaint_screen ();
     }
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -908,18 +954,26 @@ delete_cmd (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 /** Invoked by F18.  Remove selected file, regardless of marked files.  */
 
-void
-delete_cmd_local (void)
+gboolean
+mc_panel_cmd_delete_single (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WPanel *panel = (WPanel *) data;
+
+    (void) error;
+    (void) event_info;
+
     save_cwds_stat ();
 
-    if (panel_operate (current_panel, OP_DELETE, TRUE))
+    if (panel_operate (panel, OP_DELETE, TRUE))
     {
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
         repaint_screen ();
     }
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1131,6 +1185,8 @@ hotlist_cmd (void)
     }
     g_free (target);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 #ifdef ENABLE_VFS
 void
@@ -1715,7 +1771,7 @@ void
 encoding_cmd (void)
 {
     if (SELECTED_IS_PANEL)
-        panel_change_encoding (MENU_PANEL);
+        mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "select_codepage", MENU_PANEL, NULL, NULL);
 }
 #endif
 

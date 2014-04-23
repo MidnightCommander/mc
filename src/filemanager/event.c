@@ -76,9 +76,77 @@ mc_filemanager_init_events (GError ** error)
     /* *INDENT-ON* */
 
     /* *INDENT-OFF* */
+    event_init_group_t filemanager_group_events[] =
+    {
+        {"update_panels", mc_panel_cmd_update_panels, NULL},
+        {"save_current_file_to_clip_file", mc_panel_cmd_save_current_file_to_clip_file, NULL},
+        {"chdir_other", mc_panel_cmd_chdir_other, NULL},
+        {"chdir_other_if_link", mc_panel_cmd_chdir_other_if_link, NULL},
+        {"copy_single", mc_panel_cmd_copy_single, NULL},
+        {"delete_single", mc_panel_cmd_delete_single, NULL},
+        {"enter", mc_panel_cmd_enter, NULL},
+        {"view_raw", mc_panel_cmd_file_view_raw, NULL},
+        {"view", mc_panel_cmd_file_view, NULL},
+        {"edit_new", mc_panel_cmd_edit_new, NULL},
+        {"rename_single", mc_panel_cmd_rename_single, NULL},
+        {"goto_page_down", mc_panel_cmd_goto_page_down, NULL},
+        {"goto_page_up", mc_panel_cmd_goto_page_up, NULL},
+        {"ch_sub_dir", mc_panel_cmd_ch_sub_dir, NULL},
+        {"ch_parent_dir", mc_panel_cmd_ch_parent_dir, NULL},
+        {"directory_history_list", mc_panel_cmd_directory_history_list, NULL},
+        {"directory_history_next", mc_panel_cmd_directory_history_next, NULL},
+        {"directory_history_prev", mc_panel_cmd_directory_history_prev, NULL},
+        {"goto_bottom_screen", mc_panel_cmd_goto_bottom_screen, NULL},
+        {"goto_middle_screen", mc_panel_cmd_goto_middle_screen, NULL},
+        {"goto_top_screen", mc_panel_cmd_goto_top_screen, NULL},
+        {"mark", mc_panel_cmd_mark, NULL},
+        {"mark_up", mc_panel_cmd_mark_up, NULL},
+        {"mark_down", mc_panel_cmd_mark_down, NULL},
+        {"mark_left", mc_panel_cmd_mark_left, NULL},
+        {"mark_right", mc_panel_cmd_mark_right, NULL},
+        {"cd_parent_smart", mc_panel_cmd_cd_parent_smart, NULL},
+
+        {"goto_up", mc_panel_cmd_goto_up, NULL},
+        {"goto_down", mc_panel_cmd_goto_down, NULL},
+        {"goto_left", mc_panel_cmd_goto_left, NULL},
+        {"goto_right", mc_panel_cmd_goto_right, NULL},
+        {"goto_home", mc_panel_cmd_goto_home, NULL},
+        {"goto_end", mc_panel_cmd_goto_end, NULL},
+
+        {"content_scroll_left", mc_panel_cmd_content_scroll_left, NULL},
+        {"content_scroll_right", mc_panel_cmd_content_scroll_right, NULL},
+
+        {"search", mc_panel_cmd_search, NULL},
+        {"search_stop", mc_panel_cmd_search_stop, NULL},
+        {"sync_other", mc_panel_cmd_sync_other, NULL},
+
+        {"sort_order_select", mc_panel_cmd_sort_order_select, NULL},
+        {"sort_order_prev", mc_panel_cmd_sort_order_prev, NULL},
+        {"sort_order_next", mc_panel_cmd_sort_order_next, NULL},
+        {"sort_order_reverse", mc_panel_cmd_sort_order_next, NULL},
+        {"sort_by_name", mc_panel_cmd_sort_order_next, NULL},
+        {"sort_by_extension", mc_panel_cmd_sort_order_next, NULL},
+        {"sort_by_size", mc_panel_cmd_sort_order_next, NULL},
+        {"sort_by_mtime", mc_panel_cmd_sort_order_next, NULL},
+
+        {"select_files", mc_panel_cmd_select_files, NULL},
+        {"unselect_files", mc_panel_cmd_unselect_files, NULL},
+        {"select_invert_files", mc_panel_cmd_select_invert_files, NULL},
+        {"select_files_by_extension", mc_panel_cmd_select_files_by_extension, NULL},
+
+#ifdef HAVE_CHARSET
+        {"select_codepage", mc_panel_cmd_select_codepage, NULL},
+#endif /* HAVE_CHARSET */
+
+        {NULL, NULL, NULL}
+    };
+    /* *INDENT-ON* */
+
+    /* *INDENT-OFF* */
     event_init_t standard_events[] =
     {
         {MCEVENT_GROUP_TREEVIEW, treeview_group_events},
+        {MCEVENT_GROUP_FILEMANAGER, filemanager_group_events},
         {NULL, NULL}
     };
     /* *INDENT-ON* */

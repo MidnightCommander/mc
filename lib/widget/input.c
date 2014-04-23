@@ -494,7 +494,7 @@ copy_region (WInput * in, int x_first, int x_last)
     if (last == first)
     {
         /* Copy selected files to clipboard */
-        mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "panel_save_current_file_to_clip_file", NULL,
+        mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "save_current_file_to_clip_file", NULL,
                         NULL, NULL);
         /* try use external clipboard utility */
         mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL, NULL, NULL);

@@ -161,7 +161,6 @@ void panel_set_sort_order (WPanel * panel, const panel_field_t * sort_order);
 void panel_re_sort (WPanel * panel);
 
 #ifdef HAVE_CHARSET
-void panel_change_encoding (WPanel * panel);
 vfs_path_t *remove_encoding_from_path (const vfs_path_t * vpath);
 #endif
 
