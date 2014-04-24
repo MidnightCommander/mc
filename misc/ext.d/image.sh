@@ -13,7 +13,10 @@ do_view_action() {
 
     case "${filetype}" in
     jpeg)
-        identify "${MC_EXT_FILENAME}"; test -x /usr/bin/exif && echo && exif "${MC_EXT_FILENAME}" 2>/dev/null
+        which exif >/dev/null 2>&1 && \
+        {
+            identify "${MC_EXT_FILENAME}"; exif "${MC_EXT_FILENAME}" 2>/dev/null
+        }
         ;;
     xpm)
         sxpm "${MC_EXT_FILENAME}"
@@ -29,7 +32,7 @@ do_open_action() {
 
     case "${filetype}" in
     xbm)
-        bitmap "${MC_EXT_FILENAME}"
+        (bitmap "${MC_EXT_FILENAME}" &)
         ;;
     xcf)
         (gimp "${MC_EXT_FILENAME}" &)
@@ -43,7 +46,7 @@ do_open_action() {
         elif see >/dev/null 2>&1; then
             (see "${MC_EXT_FILENAME}" &)
         else
-            zgv "${MC_EXT_FILENAME}"
+            (zgv "${MC_EXT_FILENAME}" &)
         fi
         ;;
     esac
