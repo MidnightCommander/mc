@@ -78,6 +78,7 @@
 #include "midnight.h"           /* current_panel */
 
 #include "boxes.h"
+#include "event.h"
 
 /*** global variables ****************************************************************************/
 
@@ -485,11 +486,13 @@ task_cb (WButton * button, int action)
 #endif /* ENABLE_BACKGROUND */
 
 /* --------------------------------------------------------------------------------------------- */
+
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-
-void
-configure_box (void)
+/* event callback */
+gboolean
+mc_filemanager_cmd_configuration_show_dialog (event_info_t * event_info, gpointer data,
+                                              GError ** error)
 {
     const char *pause_options[] = {
         N_("&Never"),
@@ -498,6 +501,10 @@ configure_box (void)
     };
 
     int pause_options_num;
+
+    (void) error;
+    (void) event_info;
+    (void) data;
 
     pause_options_num = G_N_ELEMENTS (pause_options);
 
@@ -576,13 +583,21 @@ configure_box (void)
 
         g_free (time_out_new);
     }
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-appearance_box (void)
+gboolean
+mc_filemanager_cmd_configuration_appearance_show_dialog (event_info_t * event_info, gpointer data,
+                                                         GError ** error)
 {
+    (void) error;
+    (void) event_info;
+    (void) data;
+
     current_skin_name = g_strdup (mc_skin__default.name);
     skin_names = mc_skin_list ();
 
@@ -615,14 +630,22 @@ appearance_box (void)
     g_free (current_skin_name);
     g_ptr_array_foreach (skin_names, (GFunc) g_free, NULL);
     g_ptr_array_free (skin_names, TRUE);
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-panel_options_box (void)
+gboolean
+mc_filemanager_cmd_configuration_panel_show_dialog (event_info_t * event_info, gpointer data,
+                                                    GError ** error)
 {
     int simple_swap;
+
+    (void) error;
+    (void) event_info;
+    (void) data;
 
     simple_swap = mc_config_get_bool (mc_main_config, CONFIG_PANELS_SECTION,
                                       "simple_swap", FALSE) ? 1 : 0;
@@ -681,7 +704,7 @@ panel_options_box (void)
         };
 
         if (quick_dialog (&qdlg) != B_ENTER)
-            return;
+            return TRUE;
     }
 
     mc_config_set_bool (mc_main_config, CONFIG_PANELS_SECTION,
@@ -697,6 +720,8 @@ panel_options_box (void)
     }
 
     update_panels (UP_RELOAD, UP_KEEPSEL);
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -855,11 +880,18 @@ sort_box (dir_sort_options_t * op, const panel_field_t * sort_field)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-confirm_box (void)
+gboolean
+mc_filemanager_cmd_configuration_confirmations_show_dialog (event_info_t * event_info,
+                                                            gpointer data, GError ** error)
 {
-    quick_widget_t quick_widgets[] = {
+    (void) error;
+    (void) event_info;
+    (void) data;
+
+    {
+        quick_widget_t quick_widgets[] = {
         /* *INDENT-OFF* */
         /* TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix */
         QUICK_CHECKBOX (Q_("Confirmation|&Delete"), &confirm_delete, NULL),
@@ -873,34 +905,44 @@ confirm_box (void)
         QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
         /* *INDENT-ON* */
-    };
+        };
 
-    quick_dialog_t qdlg = {
-        -1, -1, 46,
-        N_("Confirmation"), "[Confirmation]",
-        quick_widgets, NULL, NULL
-    };
+        quick_dialog_t qdlg = {
+            -1, -1, 46,
+            N_("Confirmation"), "[Confirmation]",
+            quick_widgets, NULL, NULL
+        };
 
-    (void) quick_dialog (&qdlg);
+        (void) quick_dialog (&qdlg);
+    }
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 #ifndef HAVE_CHARSET
-void
-display_bits_box (void)
+/* event callback */
+
+gboolean
+mc_filemanager_cmd_configuration_display_bits_show_dialog (event_info_t * event_info, gpointer data,
+                                                           GError ** error)
 {
-    int new_meta;
-    int current_mode;
+    (void) error;
+    (void) event_info;
+    (void) data;
 
-    const char *display_bits_str[] = {
-        N_("&UTF-8 output"),
-        N_("&Full 8 bits output"),
-        N_("&ISO 8859-1"),
-        N_("7 &bits")
-    };
+    {
+        int new_meta;
+        int current_mode;
 
-    quick_widget_t quick_widgets[] = {
+        const char *display_bits_str[] = {
+            N_("&UTF-8 output"),
+            N_("&Full 8 bits output"),
+            N_("&ISO 8859-1"),
+            N_("7 &bits")
+        };
+
+        quick_widget_t quick_widgets[] = {
         /* *INDENT-OFF* */
         QUICK_RADIO (4, display_bits_str, &current_mode, NULL),
         QUICK_SEPARATOR (TRUE),
@@ -908,53 +950,61 @@ display_bits_box (void)
         QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
         /* *INDENT-ON* */
-    };
+        };
 
-    quick_dialog_t qdlg = {
-        -1, -1, 46,
-        _("Display bits"), "[Display bits]",
-        quick_widgets, NULL, NULL
-    };
+        quick_dialog_t qdlg = {
+            -1, -1, 46,
+            _("Display bits"), "[Display bits]",
+            quick_widgets, NULL, NULL
+        };
 
-    if (mc_global.full_eight_bits)
-        current_mode = 0;
-    else if (mc_global.eight_bit_clean)
-        current_mode = 1;
-    else
-        current_mode = 2;
+        if (mc_global.full_eight_bits)
+            current_mode = 0;
+        else if (mc_global.eight_bit_clean)
+            current_mode = 1;
+        else
+            current_mode = 2;
 
-    new_meta = !use_8th_bit_as_meta;
+        new_meta = !use_8th_bit_as_meta;
 
-    if (quick_dialog (&qdlg) != B_CANCEL)
-    {
-        mc_global.eight_bit_clean = current_mode < 3;
-        mc_global.full_eight_bits = current_mode < 2;
+        if (quick_dialog (&qdlg) != B_CANCEL)
+        {
+            mc_global.eight_bit_clean = current_mode < 3;
+            mc_global.full_eight_bits = current_mode < 2;
 #ifndef HAVE_SLANG
-        meta (stdscr, mc_global.eight_bit_clean);
+            meta (stdscr, mc_global.eight_bit_clean);
 #else
-        SLsmg_Display_Eight_Bit = mc_global.full_eight_bits ? 128 : 160;
+            SLsmg_Display_Eight_Bit = mc_global.full_eight_bits ? 128 : 160;
 #endif
-        use_8th_bit_as_meta = !new_meta;
+            use_8th_bit_as_meta = !new_meta;
+        }
+
     }
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 #else /* HAVE_CHARSET */
-
-void
-display_bits_box (void)
+gboolean
+mc_filemanager_cmd_configuration_display_bits_show_dialog (event_info_t * event_info, gpointer data,
+                                                           GError ** error)
 {
-    const char *cpname;
-
-    new_display_codepage = mc_global.display_codepage;
-
-    cpname = (new_display_codepage < 0) ? _("Other 8 bit")
-        : ((codepage_desc *) g_ptr_array_index (codepages, new_display_codepage))->name;
+    (void) error;
+    (void) event_info;
+    (void) data;
 
     {
-        int new_meta;
+        const char *cpname;
 
-        quick_widget_t quick_widgets[] = {
+        new_display_codepage = mc_global.display_codepage;
+
+        cpname = (new_display_codepage < 0) ? _("Other 8 bit")
+            : ((codepage_desc *) g_ptr_array_index (codepages, new_display_codepage))->name;
+
+        {
+            int new_meta;
+
+            quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
             QUICK_START_COLUMNS,
                 QUICK_LABEL (N_("Input / display codepage:"), NULL),
@@ -966,53 +1016,65 @@ display_bits_box (void)
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
             /* *INDENT-ON* */
-        };
+            };
 
-        quick_dialog_t qdlg = {
-            -1, -1, 46,
-            N_("Display bits"), "[Display bits]",
-            quick_widgets, NULL, NULL
-        };
+            quick_dialog_t qdlg = {
+                -1, -1, 46,
+                N_("Display bits"), "[Display bits]",
+                quick_widgets, NULL, NULL
+            };
 
-        new_meta = !use_8th_bit_as_meta;
-        application_keypad_mode ();
+            new_meta = !use_8th_bit_as_meta;
+            application_keypad_mode ();
 
-        if (quick_dialog (&qdlg) == B_ENTER)
-        {
-            char *errmsg;
-
-            mc_global.display_codepage = new_display_codepage;
-
-            errmsg = init_translation_table (mc_global.source_codepage, mc_global.display_codepage);
-            if (errmsg != NULL)
+            if (quick_dialog (&qdlg) == B_ENTER)
             {
-                message (D_ERROR, MSG_ERROR, "%s", errmsg);
-                g_free (errmsg);
-            }
+                char *errmsg;
+
+                mc_global.display_codepage = new_display_codepage;
+
+                errmsg =
+                    init_translation_table (mc_global.source_codepage, mc_global.display_codepage);
+                if (errmsg != NULL)
+                {
+                    message (D_ERROR, MSG_ERROR, "%s", errmsg);
+                    g_free (errmsg);
+                }
 
 #ifdef HAVE_SLANG
-            tty_display_8bit (mc_global.display_codepage != 0 && mc_global.display_codepage != 1);
+                tty_display_8bit (mc_global.display_codepage != 0
+                                  && mc_global.display_codepage != 1);
 #else
-            tty_display_8bit (mc_global.display_codepage != 0);
+                tty_display_8bit (mc_global.display_codepage != 0);
 #endif
-            use_8th_bit_as_meta = !new_meta;
+                use_8th_bit_as_meta = !new_meta;
 
-            repaint_screen ();
+                repaint_screen ();
+            }
         }
     }
+    return TRUE;
 }
 #endif /* HAVE_CHARSET */
 
 /* --------------------------------------------------------------------------------------------- */
-
 #ifdef ENABLE_VFS
-void
-configure_vfs (void)
+/* event callback */
+
+gboolean
+mc_filemanager_cmd_configuration_vfs_show_dialog (event_info_t * event_info, gpointer data,
+                                                  GError ** error)
 {
     char buffer2[BUF_TINY];
 #ifdef ENABLE_VFS_FTP
     char buffer3[BUF_TINY];
+#endif /* ENABLE_VFS_FTP */
 
+    (void) error;
+    (void) event_info;
+    (void) data;
+
+#ifdef ENABLE_VFS_FTP
     g_snprintf (buffer3, sizeof (buffer3), "%i", ftpfs_directory_timeout);
 #endif
 
@@ -1091,6 +1153,8 @@ configure_vfs (void)
 #endif
         }
     }
+
+    return TRUE;
 }
 
 #endif /* ENABLE_VFS */
@@ -1152,10 +1216,11 @@ symlink_dialog (const vfs_path_t * existing_vpath, const vfs_path_t * new_vpath,
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 #ifdef ENABLE_BACKGROUND
-void
-jobs_cmd (void)
+/* event callback */
+
+gboolean
+mc_filemanager_cmd_show_background_jobs (event_info_t * event_info, gpointer data, GError ** error)
 {
     struct
     {
@@ -1182,6 +1247,10 @@ jobs_cmd (void)
     int cols = 60;
     int lines = 15;
     int x = 0;
+
+    (void) error;
+    (void) event_info;
+    (void) data;
 
     for (i = 0; i < n_but; i++)
     {
@@ -1218,6 +1287,8 @@ jobs_cmd (void)
 
     (void) dlg_run (jobs_dlg);
     dlg_destroy (jobs_dlg);
+
+    return TRUE;
 }
 #endif /* ENABLE_BACKGROUND */
 

@@ -22,7 +22,6 @@ size_t dialog_switch_num (void);
 
 void dialog_switch_next (void);
 void dialog_switch_prev (void);
-void dialog_switch_list (void);
 
 int dialog_switch_process_pending (void);
 void dialog_switch_got_winch (void);

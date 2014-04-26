@@ -52,6 +52,7 @@
 #include "lib/widget.h"
 #include "lib/event.h"          /* mc_event_raise() */
 
+#include "event.h"              /* mc_event_raise() */
 #include "input_complete.h"
 
 /*** global variables ****************************************************************************/
@@ -169,12 +170,17 @@ delete_region (WInput * in, int x_first, int x_last)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-static void
-do_show_hist (WInput * in)
+gboolean
+mc_widget_input_show_history (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WInput *in = (WInput *) data;
     size_t len;
     char *r;
+
+    (void) event_info;
+    (void) error;
 
     len = get_history_length (in->history.list);
 
@@ -189,6 +195,8 @@ do_show_hist (WInput * in)
     /* Has history cleaned up or not? */
     if (len != get_history_length (in->history.list))
         in->history.changed = TRUE;
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -494,7 +502,7 @@ copy_region (WInput * in, int x_first, int x_last)
     if (last == first)
     {
         /* Copy selected files to clipboard */
-        mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "save_current_file_to_clip_file", NULL,
+        mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "save_current_file_to_clip_file", NULL,
                         NULL, NULL);
         /* try use external clipboard utility */
         mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL, NULL, NULL);
@@ -683,6 +691,12 @@ static cb_ret_t
 input_execute_cmd (WInput * in, unsigned long command)
 {
     cb_ret_t res = MSG_HANDLED;
+    event_return_t event_ret;
+    const char *event_group_name = MCEVENT_GROUP_WIDGET_INPUT;
+    const char *event_name = NULL;
+    void *event_data = in;
+
+    event_ret.b = TRUE;
 
     switch (command)
     {
@@ -802,13 +816,18 @@ input_execute_cmd (WInput * in, unsigned long command)
         hist_next (in);
         break;
     case CK_History:
-        do_show_hist (in);
+        event_name = "show_history";
         break;
     case CK_Complete:
         complete (in);
         break;
     default:
         res = MSG_NOT_HANDLED;
+    }
+
+    if (mc_event_raise (event_group_name, event_name, event_data, &event_ret, NULL))
+    {
+        res = (event_ret.b) ? MSG_HANDLED : MSG_NOT_HANDLED;
     }
 
     switch (command)
@@ -933,7 +952,7 @@ input_event (Gpm_Event * event, void *data)
         dlg_select_widget (w);
 
         if (local.x >= w->cols - HISTORY_BUTTON_WIDTH + 1 && should_show_history_button (in))
-            do_show_hist (in);
+            mc_event_raise (MCEVENT_GROUP_WIDGET_INPUT, "show_history", in, NULL, NULL);
         else
         {
             if (local.x + in->term_first_shown - 1 < str_term_width1 (in->buffer))
@@ -1051,7 +1070,6 @@ input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 {
     WInput *in = INPUT (w);
     cb_ret_t v;
-
     switch (msg)
     {
     case MSG_INIT:

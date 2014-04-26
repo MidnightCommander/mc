@@ -57,7 +57,6 @@
 #include "src/keybind-defaults.h"       /* keybind_lookup_keymap_command() */
 #include "src/setup.h"          /* home_dir */
 #include "src/filemanager/cmd.h"        /* view_other_cmd(), save_setup_cmd()  */
-#include "src/learn.h"          /* learn_keys() */
 #include "src/args.h"           /* mcedit_arg_t */
 
 #include "edit-impl.h"
@@ -713,7 +712,13 @@ static cb_ret_t
 edit_dialog_command_execute (WDialog * h, unsigned long command)
 {
     Widget *wh = WIDGET (h);
-    gboolean ret = MSG_HANDLED;
+    gboolean res = MSG_HANDLED;
+    const char *event_group_name = MCEVENT_GROUP_EDITOR;
+    const char *event_name = NULL;
+    event_return_t ret;
+    void *event_data = h;
+
+    ret.b = TRUE;
 
     switch (command)
     {
@@ -772,10 +777,11 @@ edit_dialog_command_execute (WDialog * h, unsigned long command)
         edit_refresh_cmd ();
         break;
     case CK_Shell:
-        view_other_cmd ();
+        event_group_name = MCEVENT_GROUP_FILEMANAGER;
+        event_name = "view_other";
         break;
     case CK_LearnKeys:
-        learn_keys ();
+        event_name = "configuration_learn_keys_show_dialog";
         break;
     case CK_WindowMove:
     case CK_WindowResize:
@@ -800,14 +806,20 @@ edit_dialog_command_execute (WDialog * h, unsigned long command)
         edit_save_mode_cmd ();
         break;
     case CK_SaveSetup:
-        save_setup_cmd ();
+        event_group_name = MCEVENT_GROUP_CORE;
+        event_name = "save_setup";
         break;
     default:
-        ret = MSG_NOT_HANDLED;
+        res = MSG_NOT_HANDLED;
         break;
     }
 
-    return ret;
+    if (mc_event_raise (event_group_name, event_name, event_data, &ret, NULL))
+    {
+        return (ret.b) ? MSG_HANDLED : MSG_NOT_HANDLED;
+    }
+
+    return res;
 }
 
 /* --------------------------------------------------------------------------------------------- */

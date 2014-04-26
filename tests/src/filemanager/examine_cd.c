@@ -64,12 +64,6 @@ do_cd (const vfs_path_t * new_dir_vpath, enum cd_enum cd_type)
     return TRUE;
 }
 
-gboolean
-quiet_quit_cmd (void)
-{
-    return FALSE;
-}
-
 char *
 expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
 {

@@ -67,7 +67,7 @@ libinternal_la_SOURCES = \
 	help.c help.h \
 	history.h \
 	keybind-defaults.c keybind-defaults.h \
-	learn.c learn.h \
+	learn.c \
 	setup.c setup.h \
 	textconf.c textconf.h \
 	util.c util.h

@@ -285,6 +285,7 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
 {
     cb_ret_t res = MSG_NOT_HANDLED;
     const char *event_name = NULL;
+    const char *event_group_name = MCEVENT_GROUP_DIFFVIEWER;
 
     switch (command)
     {
@@ -385,7 +386,8 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
         event_name = "goto_start_of_line";
         break;
     case CK_Shell:
-        view_other_cmd ();
+        event_group_name = MCEVENT_GROUP_FILEMANAGER;
+        event_name = "view_other";
         res = MSG_HANDLED;
         break;
     case CK_Quit:
@@ -408,8 +410,7 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
     default:;
     }
 
-    if (event_name != NULL
-        && mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, event_name, dview, NULL, NULL))
+    if (event_name != NULL && mc_event_raise (event_group_name, event_name, dview, NULL, NULL))
         res = MSG_HANDLED;
 
     return res;

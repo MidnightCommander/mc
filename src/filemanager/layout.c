@@ -59,6 +59,7 @@
 #endif
 
 #include "command.h"
+#include "event.h"
 #include "midnight.h"
 #include "tree.h"
 /* Needed for the extern declarations of integer parameters */
@@ -640,11 +641,17 @@ layout_change (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-layout_box (void)
+gboolean
+mc_filemanager_cmd_configuration_layout_show_dialog (event_info_t * event_info, gpointer data,
+                                                     GError ** error)
 {
     WDialog *layout_dlg;
+
+    (void) error;
+    (void) event_info;
+    (void) data;
 
     old_layout = panels_layout;
     old_output_lines = output_lines;
@@ -669,6 +676,8 @@ layout_box (void)
     dlg_destroy (layout_dlg);
     layout_change ();
     do_refresh ();
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -757,9 +766,15 @@ setup_panels (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
-panels_split_equal (void)
+/* event callback */
+
+gboolean
+mc_filemanager_cmd_panels_split_equal (event_info_t * event_info, gpointer data, GError ** error)
 {
+    (void) error;
+    (void) event_info;
+    (void) data;
+
     if (panels_layout.horizontal_split)
         panels_layout.horizontal_equal = TRUE;
     else
@@ -767,13 +782,20 @@ panels_split_equal (void)
 
     layout_change ();
     do_refresh ();
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-panels_split_more (void)
+gboolean
+mc_filemanager_cmd_panels_split_more (event_info_t * event_info, gpointer data, GError ** error)
 {
+    (void) error;
+    (void) event_info;
+    (void) data;
+
     if (panels_layout.horizontal_split)
     {
         panels_layout.horizontal_equal = FALSE;
@@ -786,13 +808,20 @@ panels_split_more (void)
     }
 
     layout_change ();
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-panels_split_less (void)
+gboolean
+mc_filemanager_cmd_panels_split_less (event_info_t * event_info, gpointer data, GError ** error)
 {
+    (void) error;
+    (void) event_info;
+    (void) data;
+
     if (panels_layout.horizontal_split)
     {
         panels_layout.horizontal_equal = FALSE;
@@ -805,10 +834,11 @@ panels_split_less (void)
     }
 
     layout_change ();
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 
 void
 setup_cmdline (void)
@@ -1242,6 +1272,18 @@ WPanel *
 get_other_panel (void)
 {
     return PANEL (get_panel_widget (get_other_index ()));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/** Returns the view type for the specified panel/view */
+
+panel_view_mode_t
+get_panel_type (WPanel * panel)
+{
+    if (panels[0].widget == WIDGET (panel))
+        return panels[0].type;
+    else
+        return panels[1].type;
 }
 
 /* --------------------------------------------------------------------------------------------- */

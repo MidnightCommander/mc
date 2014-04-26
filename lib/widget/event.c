@@ -1,11 +1,11 @@
 /*
-   Event callbacks initialization
+   Editor's events definitions.
 
-   Copyright (C) 2011-2015
+   Copyright (C) 2012-2014
    Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2011.
+   Slava Zanko <slavazanko@gmail.com>, 2014
 
    This file is part of the Midnight Commander.
 
@@ -26,15 +26,9 @@
 #include <config.h>
 
 #include "lib/global.h"
+#include "lib/event.h"
 
-#ifdef ENABLE_BACKGROUND
-#include "background.h"         /* (background_parent_call), background_parent_call_string() */
-#endif /* ENABLE_BACKGROUND */
-#include "clipboard.h"          /* clipboard events */
-#include "execute.h"            /* execute_suspend() */
-#include "help.h"               /* help_interactive_display() */
-
-#include "events_init.h"
+#include "event.h"
 
 /*** global variables ****************************************************************************/
 
@@ -44,7 +38,6 @@
 
 /*** file scope variables ************************************************************************/
 
-
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -52,42 +45,39 @@
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-gboolean
-events_init (GError ** mcerror)
+void
+mc_widget_init_events (GError ** error)
 {
     /* *INDENT-OFF* */
-    event_init_group_t core_group_events[] =
+    event_init_group_t dialog_group_events[] =
     {
-        {"clipboard_file_to_ext_clip", clipboard_file_to_ext_clip, NULL},
-        {"clipboard_file_from_ext_clip", clipboard_file_from_ext_clip, NULL},
-        {"clipboard_text_to_file", clipboard_text_to_file, NULL},
-        {"clipboard_text_from_file", clipboard_text_from_file, NULL},
-        {"help", help_interactive_display, NULL},
-        {"suspend", execute_suspend, NULL},
-        {"configuration_learn_keys_show_dialog", mc_core_cmd_configuration_learn_keys_show_dialog, NULL},
-        {"save_setup", mc_core_cmd_save_setup, NULL},
-
-#ifdef ENABLE_BACKGROUND
-        {"background_parent_call", background_parent_call, NULL},
-        {"background_parent_call_string", background_parent_call_string, NULL},
-#endif /* ENABLE_BACKGROUND */
+        {"show_dialog_list", mc_widget_dialog_show_dialog_list, NULL},
 
         {NULL, NULL, NULL}
     };
     /* *INDENT-ON* */
 
     /* *INDENT-OFF* */
+    event_init_group_t input_group_events[] =
+    {
+        {"show_history", mc_widget_input_show_history, NULL},
+
+        {NULL, NULL, NULL}
+    };
+    /* *INDENT-ON* */
+
+
+    /* *INDENT-OFF* */
     event_init_t standard_events[] =
     {
-        {MCEVENT_GROUP_CORE, core_group_events},
+        {MCEVENT_GROUP_WIDGET_DIALOG, dialog_group_events},
+        {MCEVENT_GROUP_WIDGET_INPUT, input_group_events},
         {NULL, NULL}
     };
     /* *INDENT-ON* */
 
-    if (!mc_event_init (mcerror))
-        return FALSE;
+    mc_event_mass_add (standard_events, error);
 
-    return mc_event_mass_add (standard_events, mcerror);
 }
 
 /* --------------------------------------------------------------------------------------------- */

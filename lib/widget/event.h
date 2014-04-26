@@ -1,9 +1,7 @@
-/** \file achown.h
- *  \brief Header: Contains functions for advanced chowning
- */
+#ifndef MC__WIDGET_EVENT_H
+#define MC__WIDGET_EVENT_H
 
-#ifndef MC__ACHOWN_H
-#define MC__ACHOWN_H
+#include "lib/event.h"
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -15,7 +13,14 @@
 
 /*** declarations of public functions ************************************************************/
 
-void chown_advanced_cmd (void);
+void mc_widget_init_events (GError ** error);
+
+gboolean mc_widget_dialog_show_dialog_list (event_info_t * event_info, gpointer data,
+                                            GError ** error);
+
+
+gboolean mc_widget_input_show_history (event_info_t * event_info, gpointer data, GError ** error);
 
 /*** inline functions ****************************************************************************/
-#endif /* MC__ACHOWN_H */
+
+#endif /* MC__WIDGET_EVENT_H */

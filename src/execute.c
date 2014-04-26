@@ -515,7 +515,11 @@ toggle_panels (void)
     if ((quit & SUBSHELL_EXIT) != 0)
     {
         /* User did 'exit' or 'logout': quit MC */
-        if (quiet_quit_cmd ())
+        event_return_t ret;
+
+        ret.b = FALSE;
+        mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "quiet_quit", NULL, &ret, NULL);
+        if (ret.b)
             return;
 
         quit = 0;

@@ -57,12 +57,11 @@
 #include "src/history.h"        /* MC_HISTORY_SHARED_SEARCH */
 
 #include "dir.h"
+#include "event.h"
 #include "cmd.h"                /* view_file_at_line() */
 #include "midnight.h"           /* current_panel */
 #include "boxes.h"
 #include "panelize.h"
-
-#include "find.h"
 
 /*** global variables ****************************************************************************/
 
@@ -1761,13 +1760,18 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-find_file (void)
+gboolean
+mc_filemanager_cmd_find_file (event_info_t * event_info, gpointer data, GError ** error)
 {
     char *start_dir = NULL, *pattern = NULL, *content = NULL, *ignore_dirs = NULL;
     ssize_t start_dir_len;
     char *filename = NULL, *dirname = NULL;
+
+    (void) error;
+    (void) event_info;
+    (void) data;
 
     while (find_parameters (&start_dir, &start_dir_len, &ignore_dirs, &pattern, &content))
     {
@@ -1827,6 +1831,8 @@ find_file (void)
             break;
         }
     }
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

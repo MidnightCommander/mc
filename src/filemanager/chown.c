@@ -47,10 +47,9 @@
 #include "src/setup.h"          /* panels_options */
 
 /* Needed for the extern declarations of integer parameters */
-#include "chmod.h"
 #include "midnight.h"           /* current_panel */
 
-#include "chown.h"
+#include "event.h"
 
 /*** global variables ****************************************************************************/
 
@@ -325,20 +324,25 @@ apply_chowns (uid_t u, gid_t g)
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-chown_cmd (void)
+gboolean
+mc_filemanager_cmd_chown (event_info_t * event_info, gpointer data, GError ** error)
 {
-    char *fname;
-    struct stat sf_stat;
-    uid_t new_user;
-    gid_t new_group;
-    char buffer[BUF_TINY];
+    (void) error;
+    (void) event_info;
+    (void) data;
 
     chown_i18n ();
 
     do
     {                           /* do while any files remaining */
+        char *fname;
+        struct stat sf_stat;
+        uid_t new_user;
+        gid_t new_group;
+        char buffer[BUF_TINY];
+
         vfs_path_t *vpath;
         WDialog *ch_dlg;
 
@@ -449,6 +453,8 @@ chown_cmd (void)
     while (current_panel->marked && !end_chown);
 
     chown_done ();
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

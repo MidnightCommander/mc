@@ -385,13 +385,19 @@ static cb_ret_t
 mcview_execute_cmd (mcview_t * view, unsigned long command)
 {
     int res = MSG_HANDLED;
+    const char *event_group_name = MCEVENT_GROUP_VIEWER;
+    const char *event_name = NULL;
+    event_return_t ret;
+    void *event_data = view;
+
+    ret.b = TRUE;
 
     switch (command)
     {
     case CK_Help:
         {
-            ev_help_t event_data = { NULL, "[Internal File Viewer]" };
-            mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data, NULL, NULL);
+            ev_help_t help_event_data = { NULL, "[Internal File Viewer]" };
+            mc_event_raise (MCEVENT_GROUP_CORE, "help", &help_event_data, NULL, NULL);
         }
         break;
     case CK_WrapMode:
@@ -505,7 +511,8 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
         mcview_moveto_bottom (view);
         break;
     case CK_Shell:
-        view_other_cmd ();
+        event_group_name = MCEVENT_GROUP_FILEMANAGER;
+        event_name = "view_other";
         break;
     case CK_BookmarkGoto:
         view->marks[view->marker] = view->dpy_start;
@@ -538,6 +545,12 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
     default:
         res = MSG_NOT_HANDLED;
     }
+
+    if (mc_event_raise (event_group_name, event_name, event_data, &ret, NULL))
+    {
+        return (ret.b) ? MSG_HANDLED : MSG_NOT_HANDLED;
+    }
+
     return res;
 }
 

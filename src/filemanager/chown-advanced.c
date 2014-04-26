@@ -48,9 +48,8 @@
 
 #include "dir.h"
 #include "midnight.h"           /* current_panel */
-#include "chmod.h"
 
-#include "achown.h"
+#include "event.h"
 
 /*** global variables ****************************************************************************/
 
@@ -820,12 +819,17 @@ apply_advanced_chowns (struct stat *sf)
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-chown_advanced_cmd (void)
+gboolean
+mc_filemanager_cmd_chown_advanced (event_info_t * event_info, gpointer data, GError ** error)
 {
     /* Number of files at startup */
     int files_on_begin;
+
+    (void) error;
+    (void) event_info;
+    (void) data;
 
     files_on_begin = max (1, current_panel->marked);
 
@@ -901,6 +905,8 @@ chown_advanced_cmd (void)
     while (current_panel->marked && !end_chown);
 
     chown_advanced_done ();
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

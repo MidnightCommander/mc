@@ -266,8 +266,12 @@ enter (WInput * lc_cmdline)
     }
     else if (strcmp (cmd, "exit") == 0)
     {
+        event_return_t ret;
+
+        ret.b = FALSE;
         input_assign_text (lc_cmdline, "");
-        if (!quiet_quit_cmd ())
+        mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "quiet_quit", NULL, &ret, NULL);
+        if (!ret.b)
             return MSG_NOT_HANDLED;
     }
     else
@@ -312,7 +316,11 @@ enter (WInput * lc_cmdline)
 #ifdef ENABLE_SUBSHELL
         if ((quit & SUBSHELL_EXIT) != 0)
         {
-            if (quiet_quit_cmd ())
+            event_return_t ret;
+
+            ret.b = FALSE;
+            mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "quiet_quit", NULL, &ret, NULL);
+            if (ret.b)
                 return MSG_HANDLED;
 
             quit = 0;

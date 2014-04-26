@@ -39,7 +39,7 @@
 #include "lib/tty/win.h"        /* do_enter_ca_mode() */
 #endif
 #include "lib/widget.h"
-#include "lib/event.h"
+#include "event.h"
 
 /*** global variables ****************************************************************************/
 
@@ -219,10 +219,12 @@ dialog_switch_prev (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-dialog_switch_list (void)
+gboolean
+mc_widget_dialog_show_dialog_list (event_info_t * event_info, gpointer data, GError ** error)
 {
+    WDialog *dialog = (WDialog *) data;
     const size_t dlg_num = g_list_length (mc_dialogs);
     int lines, cols;
     Listbox *listbox;
@@ -230,8 +232,16 @@ dialog_switch_list (void)
     int i = 0;
     int rv;
 
+    (void) error;
+
+    if (dialog != NULL && dialog->modal)
+    {
+        event_info->ret->b = FALSE;
+        return TRUE;
+    }
+
     if (mc_global.midnight_shutdown || mc_current == NULL)
-        return;
+        return TRUE;
 
     lines = min ((size_t) (LINES * 2 / 3), dlg_num);
     cols = COLS * 2 / 3;
@@ -263,6 +273,8 @@ dialog_switch_list (void)
         h = g_list_nth (mc_dialogs, dlg_num - 1 - rv);
         dialog_switch_goto (h);
     }
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -287,7 +299,7 @@ dialog_switch_process_pending (void)
             if (mc_global.mc_run_mode == MC_RUN_FULL)
             {
                 mc_current = g_list_find (mc_dialogs, midnight_dlg);
-                mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "update_panels", NULL, NULL, NULL);
+                mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "update_panels", NULL, NULL, NULL);
             }
         }
     }

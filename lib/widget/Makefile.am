@@ -7,6 +7,7 @@ libmcwidget_la_SOURCES = \
 	check.c check.h \
 	dialog.c dialog.h \
 	dialog-switch.c dialog-switch.h \
+	event.c event.h \
 	gauge.c gauge.h \
 	groupbox.c groupbox.h \
 	hline.c hline.h \

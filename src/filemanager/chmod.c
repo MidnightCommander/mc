@@ -33,6 +33,8 @@
 
 #include "lib/global.h"
 
+#include "lib/event.h"
+
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
 #include "lib/vfs/vfs.h"
@@ -41,8 +43,8 @@
 #include "lib/widget.h"
 #include "lib/keybind.h"        /* CK_Cancel */
 
+#include "event.h"
 #include "midnight.h"           /* current_panel */
-#include "chmod.h"
 
 /*** global variables ****************************************************************************/
 
@@ -448,10 +450,15 @@ apply_mask (struct stat *sf)
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-chmod_cmd (void)
+gboolean
+mc_filemanager_cmd_chmod (event_info_t * event_info, gpointer data, GError ** error)
 {
+    (void) error;
+    (void) event_info;
+    (void) data;
+
     chmod_i18n ();
 
     do
@@ -556,6 +563,8 @@ chmod_cmd (void)
     while (current_panel->marked != 0 && !end_chmod);
 
     chmod_done ();
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

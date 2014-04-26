@@ -274,6 +274,14 @@ static cb_ret_t
 dlg_execute_cmd (WDialog * h, unsigned long command)
 {
     cb_ret_t ret = MSG_HANDLED;
+
+    event_return_t event_ret;
+    const char *event_group_name = MCEVENT_GROUP_WIDGET_DIALOG;
+    const char *event_name = NULL;
+    void *event_data = h;
+
+    event_ret.b = TRUE;
+
     switch (command)
     {
     case CK_Ok:
@@ -296,8 +304,8 @@ dlg_execute_cmd (WDialog * h, unsigned long command)
 
     case CK_Help:
         {
-            ev_help_t event_data = { NULL, h->help_ctx };
-            mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data, NULL, NULL);
+            ev_help_t help_event_data = { NULL, h->help_ctx };
+            mc_event_raise (MCEVENT_GROUP_CORE, "help", &help_event_data, NULL, NULL);
         }
         break;
 
@@ -310,10 +318,7 @@ dlg_execute_cmd (WDialog * h, unsigned long command)
         break;
 
     case CK_ScreenList:
-        if (!h->modal)
-            dialog_switch_list ();
-        else
-            ret = MSG_NOT_HANDLED;
+        event_name = "show_dialog_list";
         break;
     case CK_ScreenNext:
         if (!h->modal)
@@ -330,6 +335,11 @@ dlg_execute_cmd (WDialog * h, unsigned long command)
 
     default:
         ret = MSG_NOT_HANDLED;
+    }
+
+    if (mc_event_raise (event_group_name, event_name, event_data, &event_ret, NULL))
+    {
+        return (event_ret.b) ? MSG_HANDLED : MSG_NOT_HANDLED;
     }
 
     return ret;
@@ -807,7 +817,7 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols,
     }
 
     /* unique name of event group for this dialog */
-    new_d->event_group = g_strdup_printf ("%s_%p", MCEVENT_GROUP_DIALOG, (void *) new_d);
+    new_d->event_group = g_strdup_printf ("%s_%p", MCEVENT_GROUP_WIDGET_DIALOG, (void *) new_d);
 
     return new_d;
 }

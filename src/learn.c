@@ -43,7 +43,7 @@
 #include "lib/widget.h"
 
 #include "setup.h"
-#include "learn.h"
+#include "events_init.h"
 
 /*** global variables ****************************************************************************/
 
@@ -382,12 +382,17 @@ learn_save (void)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-void
-learn_keys (void)
+gboolean
+mc_core_cmd_configuration_learn_keys_show_dialog (event_info_t * event_info, gpointer data,
+                                                  GError ** error)
 {
     int save_old_esc_mode = old_esc_mode;
     gboolean save_alternate_plus_minus = mc_global.tty.alternate_plus_minus;
     int result;
+
+    (void) error;
+    (void) event_info;
+    (void) data;
 
     /* old_esc_mode cannot work in learn keys dialog */
     old_esc_mode = 0;
@@ -411,6 +416,8 @@ learn_keys (void)
         learn_save ();
 
     learn_done ();
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -62,6 +62,7 @@
 #include "filemanager/cmd.h"
 
 #include "args.h"
+#include "events_init.h"
 #include "execute.h"            /* pause_after_run */
 #include "clipboard.h"
 #include "keybind-defaults.h"   /* keybind_lookup_action */
@@ -1478,6 +1479,33 @@ panels_save_options (void)
                        "quick_search_mode", (int) panels_options.qsearch_mode);
     mc_config_set_int (mc_main_config, CONFIG_PANELS_SECTION,
                        "select_flags", (int) panels_options.select_flags);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_core_cmd_save_setup (event_info_t * event_info, gpointer data, GError ** error)
+{
+    vfs_path_t *vpath;
+    const char *path;
+    gboolean ret_value;
+
+    (void) error;
+    (void) event_info;
+    (void) data;
+
+    vpath = vfs_path_from_str_flags (mc_config_get_path (), VPF_STRIP_HOME);
+    path = vfs_path_as_str (vpath);
+
+    ret_value = save_setup (TRUE, TRUE);
+
+    message (D_NORMAL, _("Setup"),
+             (ret_value) ? _("Setup saved to %s") : _("Unable to save setup to %s"), path);
+
+    vfs_path_free (vpath);
+
+    return ret_value;
 }
 
 /* --------------------------------------------------------------------------------------------- */

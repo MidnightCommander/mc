@@ -2,10 +2,10 @@
 noinst_LTLIBRARIES = libmcfilemanager.la
 
 libmcfilemanager_la_SOURCES = \
-	achown.c achown.h \
 	boxes.c boxes.h \
-	chmod.c chmod.h \
-	chown.c chown.h \
+	chmod.c \
+	chown.c \
+	chown-advanced.c \
 	cmd.c cmd.h \
 	command.c command.h \
 	dir.c dir.h \
@@ -15,7 +15,7 @@ libmcfilemanager_la_SOURCES = \
 	filegui.c filegui.h \
 	filenot.c filenot.h \
 	fileopctx.c fileopctx.h \
-	find.c find.h \
+	find.c \
 	hotlist.c hotlist.h \
 	info.c info.h \
 	layout.c layout.h \

@@ -49,6 +49,7 @@
 #include "src/setup.h"          /* For profile_bname */
 #include "src/history.h"
 
+#include "event.h"
 #include "dir.h"
 #include "midnight.h"           /* current_panel */
 #include "layout.h"             /* rotate_dash() */
@@ -488,27 +489,39 @@ panelize_save_panel (WPanel * panel)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-cd_panelize_cmd (void)
+gboolean
+mc_filemanager_cmd_panelize (event_info_t * event_info, gpointer data, GError ** error)
 {
+    (void) error;
+    (void) event_info;
+    (void) data;
+
     if (!SELECTED_IS_PANEL)
         set_display_type (MENU_PANEL_IDX, view_listing);
 
     do_panelize_cd (PANEL (get_panel_widget (MENU_PANEL_IDX)));
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-external_panelize (void)
+gboolean
+mc_filemanager_cmd_external_panelize (event_info_t * event_info, gpointer data, GError ** error)
 {
     char *target = NULL;
+
+    (void) error;
+    (void) event_info;
+    (void) data;
 
     if (!vfs_current_is_local ())
     {
         message (D_ERROR, MSG_ERROR, _("Cannot run external panelize in a non-local directory"));
-        return;
+        return TRUE;
     }
 
     init_panelize ();
@@ -546,12 +559,14 @@ external_panelize (void)
             do_external_panelize (cmd);
             g_free (cmd);
             repaint_screen ();
-            return;
+            return TRUE;
         }
         break;
     }
 
     panelize_done ();
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

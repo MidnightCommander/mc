@@ -373,8 +373,7 @@ main (int argc, char *argv[])
     tty_init_colors (mc_global.tty.disable_colors, mc_args__force_colors);
 
     mc_skin_init (NULL, &mcerror);
-    dlg_set_default_colors ();
-    input_set_default_colors ();
+    mc_widget_init (&mcerror);
     if (mc_global.mc_run_mode == MC_RUN_FULL)
         command_set_default_colors ();
 

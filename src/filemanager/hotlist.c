@@ -59,6 +59,7 @@
 #include "src/setup.h"          /* For profile_bname */
 #include "src/history.h"
 
+#include "event.h"              /* current_panel */
 #include "midnight.h"           /* current_panel */
 #include "command.h"            /* cmdline */
 
@@ -424,7 +425,7 @@ hotlist_button_callback (WButton * button, int action)
         return 0;
 
     case B_ADD_CURRENT:
-        add2hotlist_cmd ();
+        mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "hotlist_add", NULL, NULL, NULL);
         return 0;
 
     case B_NEW_ENTRY:
@@ -1553,14 +1554,19 @@ add_dotdot_to_list (void)
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
+/* event callback */
 
-void
-add2hotlist_cmd (void)
+gboolean
+mc_filemanager_cmd_hotlist_add (event_info_t * event_info, gpointer data, GError ** error)
 {
     char *lc_prompt;
     const char *cp = N_("Label for \"%s\":");
     int l;
     char *label_string, *label;
+
+    (void) error;
+    (void) event_info;
+    (void) data;
 
 #ifdef ENABLE_NLS
     cp = _(cp);
@@ -1584,6 +1590,8 @@ add2hotlist_cmd (void)
         add2hotlist (label, label_string, HL_TYPE_ENTRY, LISTBOX_APPEND_AT_END);
         hotlist_state.modified = TRUE;
     }
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

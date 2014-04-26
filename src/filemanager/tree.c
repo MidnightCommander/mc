@@ -703,9 +703,6 @@ tree_mkdir (WTree * tree)
         return;
     if (chdir (tree->selected_ptr->name))
         return;
-    /* FIXME
-       mkdir_cmd (tree);
-     */
     tree_rescan (tree);
     chdir (old_dir);
 }
