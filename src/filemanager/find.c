@@ -1241,7 +1241,6 @@ do_search (WDialog * h)
     static DIR *dirp = NULL;
     static char *directory = NULL;
     struct stat tmp_stat;
-    static int subdirs_left = 0;
     gsize bytes_found;
     unsigned short count;
 
@@ -1319,13 +1318,6 @@ do_search (WDialog * h)
                     g_snprintf (buffer, sizeof (buffer), _("Searching %s"), directory);
                     status_update (str_trunc (directory, WIDGET (h)->cols - 8));
                 }
-                /* mc_stat should not be called after mc_opendir
-                   because vfs_s_opendir modifies the st_nlink
-                 */
-                if (mc_stat (tmp_vpath, &tmp_stat) == 0)
-                    subdirs_left = tmp_stat.st_nlink - 2;
-                else
-                    subdirs_left = 0;
 
                 dirp = mc_opendir (tmp_vpath);
                 vfs_path_free (tmp_vpath);
@@ -1349,7 +1341,7 @@ do_search (WDialog * h)
         {
             gboolean search_ok;
 
-            if ((subdirs_left != 0) && options.find_recurs && (directory != NULL))
+            if (options.find_recurs && (directory != NULL))
             {                   /* Can directory be NULL ? */
                 /* handle relative ignore dirs here */
                 if (options.ignore_dirs_enable && find_ignore_dir_search (dp->d_name))
@@ -1361,10 +1353,7 @@ do_search (WDialog * h)
                     tmp_vpath = vfs_path_build_filename (directory, dp->d_name, (char *) NULL);
 
                     if (mc_lstat (tmp_vpath, &tmp_stat) == 0 && S_ISDIR (tmp_stat.st_mode))
-                    {
                         push_directory (tmp_vpath);
-                        subdirs_left--;
-                    }
                     else
                         vfs_path_free (tmp_vpath);
                 }
