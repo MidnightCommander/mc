@@ -1,3 +1,22 @@
+#
+# JavaScript syntax highlighting
+# for MC Editor/CoolEdit
+#
+# Author: Vlad Romanenko <VladRomanenko@ukr.net>
+# Based on c.syntax
+#
+# TODO:
+# Highlight JS regexpressions /../
+# More built-in functions
+#
+# 2002-09-17  Vlad Romanenko <VladRomanenko@ukr.net>
+#    * More C and Java consistency by Pavel Roskin <proski@gnu.org>.
+#    * Advanced number highlighting.
+#
+# 2002-09-16  Vlad Romanenko <VladRomanenko@ukr.net>
+#    * Initial public release.
+#
+
 context default
 
     #=========================
@@ -15,9 +34,11 @@ context default
     keyword whole for magenta
     keyword whole function magenta
     keyword whole if magenta
+    keyword whole then magenta
     keyword whole in magenta
     keyword whole instanceof magenta
     keyword whole new magenta
+    keyword whole of magenta
     keyword whole prototype magenta
     keyword whole return magenta
     keyword whole switch magenta
@@ -25,6 +46,7 @@ context default
     keyword whole throw magenta
     keyword whole try magenta
     keyword whole typeof magenta
+    keyword whole unless magenta
     keyword whole var magenta
     keyword whole while magenta
     keyword whole with magenta
@@ -87,7 +109,7 @@ context default
     keyword - yellow
     keyword / yellow
     keyword % yellow
-    keyword = yellow
+    keyword whole = yellow
     keyword ! yellow
     keyword & yellow
     keyword | yellow
@@ -112,38 +134,11 @@ context default
 
     #=========================
     # Comments
-    keyword /\* brown
-    keyword \*/ brown
-    keyword // brown
-    context # \n brown
+    context ### ### brown
         spellcheck
 
-
-context exclusive /\* \*/ brown
-    spellcheck
-    keyword whole BUG brightred
-    keyword whole FixMe brightred
-    keyword whole FIXME brightred
-    keyword whole Note brightred
-    keyword whole NOTE brightred
-    keyword whole ToDo brightred
-    keyword whole TODO brightred
-    keyword !!\[!\] brightred
-    keyword ??\[?\] brightred
-
-
-context exclusive // \n brown
-    spellcheck
-    keyword whole BUG brightred
-    keyword whole FixMe brightred
-    keyword whole FIXME brightred
-    keyword whole Note brightred
-    keyword whole NOTE brightred
-    keyword whole ToDo brightred
-    keyword whole TODO brightred
-    keyword !!\[!\] brightred
-    keyword ??\[?\] brightred
-
+    context # \n brown
+        spellcheck
 
 #=============================
 # Strings
