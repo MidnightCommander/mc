@@ -49,6 +49,9 @@ include python.syntax
 file ..\*\\.(pyx|pxd|pxi)$ Cython\sor\sPyrex\sProgram
 include cython.syntax
 
+file ..\*\\.(coffee|Coffee|COFFEE)$ JavaScript\sProgram
+include coffee.syntax
+
 file ..\*\\.(rb|RB)$ Ruby\sProgram ^#!.\*([\s/]ruby|@RUBY@)
 include ruby.syntax
 
@@ -231,6 +234,9 @@ include erlang.syntax
 
 file ..\*\\.hrl$ Erlang\sHeader ^-record\\(
 include erlang.syntax
+
+file ..\*\\.(erb)$ Rails\serb\sFile
+include erb.syntax
 
 file .\*named.conf$ Bind9\sconfiguration
 include named.syntax
