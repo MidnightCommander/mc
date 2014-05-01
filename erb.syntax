@@ -44,7 +44,7 @@ context default
     keyword </FRAME> brightcyan/17
     keyword </FRAMESET> brightcyan/17
     keyword </H1> brightcyan/17
-    keyword </H2> brightcyan/17
+            keyword </H2> brightcyan/17
     keyword </H3> brightcyan/17
     keyword </H4> brightcyan/17
     keyword </H5> brightcyan/17
@@ -54,6 +54,7 @@ context default
     keyword </HR> brightcyan/17
     keyword </HTML> brightcyan/17
     keyword </I> brightcyan/17
+    keyword </INPUT> brightcyan/17
     keyword </IMG> brightcyan/17
     keyword </LABEL> brightcyan/17
     keyword </LI> brightcyan/17
@@ -64,6 +65,7 @@ context default
     keyword </P> brightcyan/17
     keyword </SPAN> brightcyan/17
     keyword </TABLE> brightcyan/17
+    keyword </TEXTAREA> brightcyan/17
     keyword </TBODY> brightcyan/17
     keyword </TD> brightcyan/17
     keyword </TITLE> brightcyan/17
@@ -107,20 +109,12 @@ context <A\s >                    brightcyan/17
     keyword "_parent" magenta/22
     keyword "_top" magenta/22
 
-#    keyword "*" cyan/5
-
-#    keyword whole charset       yellow/24
-#    keyword whole type          yellow/24
     keyword \sname yellow/24
     keyword \shref yellow/24
-#    keyword \shreflang      yellow/24
-#    keyword \srel           yellow/24
-#    keyword \srev           yellow/24
     keyword \sshape yellow/24
     keyword \sitemprop yellow/24
     keyword \scoords yellow/24
-#    keyword \stabindex      yellow/24
-#    keyword \sselected      yellow/24
+    keyword \starget_element yellow/24
     keyword \starget yellow/24
     keyword \sonblur yellow/24
     keyword \sonclick yellow/24
@@ -136,6 +130,10 @@ context <A\s >                    brightcyan/17
     keyword \sonmouseup yellow/24
     keyword \sclass yellow/24
     keyword \sid yellow/24
+    keyword \sdata-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
+    keyword \srole yellow/24
+    keyword \sstyle yellow/24
+    keyword \stabindex yellow/24
     keyword <%*%> green
 
 context <ABBR >                    brightcyan/17
@@ -479,6 +477,9 @@ context <BUTTON >               brightcyan/17
     keyword \sid yellow/24
     keyword \sstyle yellow/24
     keyword \stitle yellow/24
+    keyword \sdata-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
+    keyword \styp\[e\] yellow/24
+
 
     keyword \sdir yellow/24
     keyword \slang yellow/24
@@ -728,8 +729,7 @@ context <DIV >                  brightcyan/17
     keyword whole "right" magenta/22
 
     keyword \sdata-hook yellow
-
-#    keyword "*" cyan/5
+    keyword \sdata\-\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_\-abcdefghijklmnopqrstuvwxyz\}\[\?\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] yellow/24
     keyword <%*%> green
 
 context <DL >                   brightcyan/17
@@ -1229,6 +1229,50 @@ context <HTML >                 brightcyan/17
 #    keyword "*" cyan/5
     keyword <%*%> green
 
+context <INPUT >                brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+    keyword \sname yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \su yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \salt yellow/24
+    keyword \sborder yellow/24
+    keyword \sheight yellow/24
+    keyword \shspace yellow/24
+    keyword \sismap yellow/24
+    keyword \ssrc yellow/24
+#    keyword "*.gif" brightred/19
+#    keyword "*.jpg" brightred/19
+#    keyword "*.png" brightred/19
+    keyword \susemap yellow/24
+    keyword \svspace yellow/24
+    keyword \swidth yellow/24
+    keyword \svalue yellow/24
+    keyword \stype yellow/24
+#    keyword "*" cyan/5
+#    keyword <%*%> green
+    keyword data\-\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_\-abcdefghijklmnopqrstuvwxyz\}\[\?\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] yellow/24
+    keyword <%*%> green
+
+
 
 context <IMG >                  brightcyan/17
     keyword = brightred/18
@@ -1386,6 +1430,50 @@ context <META >                 brightcyan/17
 #    keyword "*" cyan/5
     keyword <%*%> green
 
+context <TEXTAREA >                brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
+    keyword \sname yellow/24
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \su yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+
+    keyword \salt yellow/24
+    keyword \sborder yellow/24
+    keyword \sheight yellow/24
+    keyword \shspace yellow/24
+    keyword \sismap yellow/24
+    keyword \ssrc yellow/24
+#    keyword "*.gif" brightred/19
+#    keyword "*.jpg" brightred/19
+#    keyword "*.png" brightred/19
+    keyword \susemap yellow/24
+    keyword \svspace yellow/24
+    keyword \swidth yellow/24
+    keyword \svalue yellow/24
+    keyword \stype yellow/24
+#    keyword "*" cyan/5
+#    keyword <%*%> green
+    keyword data\-\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_\-abcdefghijklmnopqrstuvwxyz\}\[\?\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] yellow/24
+    keyword <%*%> green
+
+
 context <TITLE >                brightcyan/17
     keyword = brightred/18
     keyword \sdir yellow/24
@@ -1435,6 +1523,9 @@ context <TABLE >                brightcyan/17
     keyword \scellpadding yellow/24
     keyword "right" magenta/22
     keyword "left" magenta/22
+    keyword \sdata-\[abcdefghijklmnopqrstuvwxyz\]-\[abcdefghijklmnopqrstuvwxyz\]-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
+    keyword \sdata-\[abcdefghijklmnopqrstuvwxyz\]-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
+    keyword \sdata-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
 #    keyword "*" cyan/5
     keyword <%*%> green
 
@@ -1572,6 +1663,9 @@ context <TD >                   brightcyan/17
 
     keyword \sdir yellow/24
     keyword \slang yellow/24
+    keyword \sdata-\[abcdefghijklmnopqrstuvwxyz\]-\[abcdefghijklmnopqrstuvwxyz\]-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
+    keyword \sdata-\[abcdefghijklmnopqrstuvwxyz\]-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
+    keyword \sdata-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
 
     keyword \sonclick yellow/24
     keyword \sondblclick yellow/24
@@ -1705,6 +1799,8 @@ context <TR >                   brightcyan/17
     keyword \sid yellow/24
     keyword \sstyle yellow/24
     keyword \stitle yellow/24
+    keyword \sdata-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
+
 
     keyword \sdir yellow/24
     keyword \slang yellow/24
