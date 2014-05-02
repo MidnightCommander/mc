@@ -366,7 +366,7 @@ mc_args_new_color_group (void)
                                                      "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
                                                      "                 editlinestate, editbg, editframe, editframeactive\n"
                                                      "                 editframedrag\n"
-                                                     "   Viewer:       viewbold, viewunderline, viewselected\n"
+                                                     "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
                                                      "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"),
                                                    /* TRANSLATORS: don't translate color names and attributes */
                                                    _("Standard Colors:\n"

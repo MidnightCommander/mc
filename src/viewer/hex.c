@@ -182,7 +182,7 @@ mcview_display_hex (mcview_t * view)
             /*              tty_print_char(hex_buff[i]); */
             col += 1;
         }
-        tty_setcolor (NORMAL_COLOR);
+        tty_setcolor (VIEW_NORMAL_COLOR);
 
         for (bytes = 0; bytes < view->bytes_per_line; bytes++, from++)
         {
@@ -243,7 +243,7 @@ mcview_display_hex (mcview_t * view)
             }
 
             /* Select the color for the hex number */
-            tty_setcolor (boldflag == MARK_NORMAL ? NORMAL_COLOR :
+            tty_setcolor (boldflag == MARK_NORMAL ? VIEW_NORMAL_COLOR :
                           boldflag == MARK_SELECTED ? VIEW_BOLD_COLOR :
                           boldflag == MARK_CHANGED ? VIEW_UNDERLINED_COLOR :
                           /* boldflag == MARK_CURSOR */
@@ -263,7 +263,7 @@ mcview_display_hex (mcview_t * view)
             }
 
             /* Print the separator */
-            tty_setcolor (NORMAL_COLOR);
+            tty_setcolor (VIEW_NORMAL_COLOR);
             if (bytes != view->bytes_per_line - 1)
             {
                 if (col < width)
@@ -290,7 +290,7 @@ mcview_display_hex (mcview_t * view)
 
             /* Select the color for the character; this differs from the
              * hex color when boldflag == MARK_CURSOR */
-            tty_setcolor (boldflag == MARK_NORMAL ? NORMAL_COLOR :
+            tty_setcolor (boldflag == MARK_NORMAL ? VIEW_NORMAL_COLOR :
                           boldflag == MARK_SELECTED ? VIEW_BOLD_COLOR :
                           boldflag == MARK_CHANGED ? VIEW_UNDERLINED_COLOR :
                           /* boldflag == MARK_CURSOR */
@@ -342,7 +342,7 @@ mcview_display_hex (mcview_t * view)
     }
 
     /* Be polite to the other functions */
-    tty_setcolor (NORMAL_COLOR);
+    tty_setcolor (VIEW_NORMAL_COLOR);
 
     mcview_place_cursor (view);
     view->dpy_end = from;

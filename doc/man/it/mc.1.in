@@ -2958,6 +2958,7 @@ sono: helpnormal, helpitalic, helpbold, helplink, helpslink.
 Il colore del visualizzatore è: viewunderline.
 Colori speciali di evidenziazione: executable, directory, link, device, 
 special, core.
+I colori dell'viewer sono: viewnormal, viewbold, viewunderline, viewselected.
 I colori dell'editor sono: editnormal, editbold, editmarked.
 .PP
 .I input 
