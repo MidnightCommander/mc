@@ -1,8 +1,12 @@
-# html highlighting with tags in caps always. if you want everything in lowercase
-# use tr
-
-# i got upto IMG in the netscape comprehensive tags reference. thereafter will get
-# done later - paul
+# erb syntax highlighting
+# for mcedit
+# Autor r72cccp
+# based on html file from mcedit and ruby file from Marco Ciampa:
+# ===================================================================================
+# Ruby syntax file derived from perl syntax by Marco Ciampa <ciampix@libero.it>
+# alpha version 0.2 16/05/2003
+# ===================================================================================
+# html highlighting - paul
 
 caseinsensitive
 
