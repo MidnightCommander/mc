@@ -217,6 +217,7 @@ mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path, gboolean r
     mc_config_t *tmp_config;
     gchar **groups, **curr_grp;
     gchar *value;
+    gboolean ok;
 
     if (mc_config == NULL)
         return FALSE;
@@ -226,12 +227,7 @@ mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path, gboolean r
         return FALSE;
 
     groups = mc_config_get_groups (tmp_config, NULL);
-
-    if (groups == NULL)
-    {
-        mc_config_deinit (tmp_config);
-        return FALSE;
-    }
+    ok = (*groups != NULL);
 
     for (curr_grp = groups; *curr_grp != NULL; curr_grp++)
     {
@@ -255,9 +251,11 @@ mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path, gboolean r
         }
         g_strfreev (keys);
     }
+
     g_strfreev (groups);
     mc_config_deinit (tmp_config);
-    return TRUE;
+
+    return ok;
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

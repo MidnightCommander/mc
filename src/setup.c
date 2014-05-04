@@ -514,45 +514,38 @@ setup__move_panels_config_into_separate_file (const char *profile)
         return;
 
     tmp_cfg = mc_config_init (profile, FALSE);
-    if (!tmp_cfg)
+    if (tmp_cfg == NULL)
         return;
 
-    curr_grp = groups = mc_config_get_groups (tmp_cfg, NULL);
-    if (!groups)
+    groups = mc_config_get_groups (tmp_cfg, NULL);
+    if (*groups == NULL)
     {
+        g_strfreev (groups);
         mc_config_deinit (tmp_cfg);
         return;
     }
 
-    while (*curr_grp)
-    {
+    for (curr_grp = groups; *curr_grp != NULL; curr_grp++)
         if (setup__is_cfg_group_must_panel_config (*curr_grp) == NULL)
             mc_config_del_group (tmp_cfg, *curr_grp);
-        curr_grp++;
-    }
 
     mc_config_save_to_file (tmp_cfg, panels_profile_name, NULL);
     mc_config_deinit (tmp_cfg);
 
     tmp_cfg = mc_config_init (profile, FALSE);
-    if (!tmp_cfg)
+    if (tmp_cfg == NULL)
     {
         g_strfreev (groups);
         return;
     }
 
-    curr_grp = groups;
-
-    while (*curr_grp)
+    for (curr_grp = groups; *curr_grp != NULL; curr_grp++)
     {
         const char *need_grp;
 
         need_grp = setup__is_cfg_group_must_panel_config (*curr_grp);
         if (need_grp != NULL)
-        {
             mc_config_del_group (tmp_cfg, need_grp);
-        }
-        curr_grp++;
     }
     g_strfreev (groups);
 

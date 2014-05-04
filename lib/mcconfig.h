@@ -49,7 +49,7 @@ gboolean mc_config_save_to_file (mc_config_t * config, const gchar * filename, G
 
 /* mcconfig/get.c: */
 
-gchar **mc_config_get_groups (const mc_config_t *, gsize *);
+gchar **mc_config_get_groups (const mc_config_t * mc_config, gsize * len);
 
 gchar **mc_config_get_keys (const mc_config_t * mc_config, const gchar * group, gsize * len);
 

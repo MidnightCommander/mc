@@ -225,18 +225,16 @@ gboolean
 mc_fhl_parse_ini_file (mc_fhl_t * fhl)
 {
     gchar **group_names, **orig_group_names;
+    gboolean ok;
 
     mc_fhl_array_free (fhl);
     fhl->filters = g_ptr_array_new ();
 
-    orig_group_names = group_names = mc_config_get_groups (fhl->config, NULL);
+    orig_group_names = mc_config_get_groups (fhl->config, NULL);
+    ok = (*orig_group_names != NULL);
 
-    if (group_names == NULL)
-        return FALSE;
-
-    while (*group_names)
+    for (group_names = orig_group_names; *group_names != NULL; group_names++)
     {
-
         if (mc_config_has_param (fhl->config, *group_names, "type"))
         {
             /* parse filetype filter */
@@ -252,11 +250,11 @@ mc_fhl_parse_ini_file (mc_fhl_t * fhl)
             /* parse extensions filter */
             mc_fhl_parse_get_extensions (fhl, *group_names);
         }
-        group_names++;
     }
 
     g_strfreev (orig_group_names);
-    return TRUE;
+
+    return ok;
 }
 
 /* --------------------------------------------------------------------------------------------- */
