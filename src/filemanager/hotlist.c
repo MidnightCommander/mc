@@ -1159,33 +1159,28 @@ static void
 load_group (struct hotlist *grp)
 {
     gchar **profile_keys, **keys;
-    gsize len;
     char *group_section;
     struct hotlist *current = 0;
 
     group_section = find_group_section (grp);
 
-    profile_keys = keys = mc_config_get_keys (mc_main_config, group_section, &len);
+    keys = mc_config_get_keys (mc_main_config, group_section, NULL);
 
     current_group = grp;
 
-    while (*profile_keys != NULL)
-    {
+    for (profile_keys = keys; *profile_keys != NULL; profile_keys++)
         add2hotlist (mc_config_get_string (mc_main_config, group_section, *profile_keys, ""),
                      g_strdup (*profile_keys), HL_TYPE_GROUP, LISTBOX_APPEND_AT_END);
-        profile_keys++;
-    }
+
     g_free (group_section);
     g_strfreev (keys);
 
-    profile_keys = keys = mc_config_get_keys (mc_main_config, grp->directory, &len);
+    keys = mc_config_get_keys (mc_main_config, grp->directory, NULL);
 
-    while (*profile_keys != NULL)
-    {
+    for (profile_keys = keys; *profile_keys != NULL; profile_keys++)
         add2hotlist (mc_config_get_string (mc_main_config, group_section, *profile_keys, ""),
                      g_strdup (*profile_keys), HL_TYPE_ENTRY, LISTBOX_APPEND_AT_END);
-        profile_keys++;
-    }
+
     g_strfreev (keys);
 
     for (current = grp->head; current; current = current->next)
@@ -1392,7 +1387,6 @@ static void
 clean_up_hotlist_groups (const char *section)
 {
     char *grp_section;
-    gsize len;
 
     grp_section = g_strconcat (section, ".Group", (char *) NULL);
     if (mc_config_has_group (mc_main_config, section))
@@ -1402,13 +1396,11 @@ clean_up_hotlist_groups (const char *section)
     {
         char **profile_keys, **keys;
 
-        profile_keys = keys = mc_config_get_keys (mc_main_config, grp_section, &len);
+        keys = mc_config_get_keys (mc_main_config, grp_section, NULL);
 
-        while (*profile_keys != NULL)
-        {
+        for (profile_keys = keys; *profile_keys != NULL; profile_keys++)
             clean_up_hotlist_groups (*profile_keys);
-            profile_keys++;
-        }
+
         g_strfreev (keys);
         mc_config_del_group (mc_main_config, grp_section);
     }

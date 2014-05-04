@@ -302,7 +302,6 @@ mc_skin_color_parse_ini_file (mc_skin_t * mc_skin)
 {
     gsize items_count;
     gchar **groups, **orig_groups;
-    gchar **keys, **orig_keys;
     mc_skin_color_t *mc_skin_color;
 
     mc_skin_color_check_bw_mode (mc_skin);
@@ -325,14 +324,14 @@ mc_skin_color_parse_ini_file (mc_skin_t * mc_skin)
 
     for (; *groups != NULL; groups++)
     {
+        gchar **keys, **orig_keys;
+
         if (!mc_skin_color_check_inisection (*groups))
             continue;
 
-        orig_keys = keys = mc_config_get_keys (mc_skin->config, *groups, &items_count);
-        if (keys == NULL)
-            continue;
+        orig_keys = mc_config_get_keys (mc_skin->config, *groups, NULL);
 
-        for (; *keys != NULL; keys++)
+        for (keys = orig_keys; *keys != NULL; keys++)
         {
             mc_skin_color = mc_skin_color_get_from_ini_file (mc_skin, *groups, *keys);
             if (mc_skin_color != NULL)

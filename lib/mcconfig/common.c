@@ -216,7 +216,6 @@ mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path, gboolean r
 {
     mc_config_t *tmp_config;
     gchar **groups, **curr_grp;
-    gchar **keys, **curr_key;
     gchar *value;
 
     if (mc_config == NULL)
@@ -236,7 +235,10 @@ mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path, gboolean r
 
     for (curr_grp = groups; *curr_grp != NULL; curr_grp++)
     {
+        gchar **keys, **curr_key;
+
         keys = mc_config_get_keys (tmp_config, *curr_grp, NULL);
+
         for (curr_key = keys; *curr_key != NULL; curr_key++)
         {
             value = g_key_file_get_value (tmp_config->handle, *curr_grp, *curr_key, NULL);

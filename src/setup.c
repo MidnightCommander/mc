@@ -627,15 +627,15 @@ load_keys_from_section (const char *terminal, mc_config_t * cfg)
     gchar **values, **curr_values;
     char *valcopy, *value;
     long key_code;
-    gsize len, values_len;
+    gsize values_len;
 
     if (terminal == NULL)
         return;
 
     section_name = g_strconcat ("terminal:", terminal, (char *) NULL);
-    profile_keys = keys = mc_config_get_keys (cfg, section_name, &len);
+    keys = mc_config_get_keys (cfg, section_name, NULL);
 
-    while (*profile_keys != NULL)
+    for (profile_keys = keys; *profile_keys != NULL; profile_keys++)
     {
         /* copy=other causes all keys from [terminal:other] to be loaded. */
         if (g_ascii_strcasecmp (*profile_keys, "copy") == 0)
@@ -643,7 +643,6 @@ load_keys_from_section (const char *terminal, mc_config_t * cfg)
             valcopy = mc_config_get_string (cfg, section_name, *profile_keys, "");
             load_keys_from_section (valcopy, cfg);
             g_free (valcopy);
-            profile_keys++;
             continue;
         }
 
@@ -674,7 +673,6 @@ load_keys_from_section (const char *terminal, mc_config_t * cfg)
             }
         }
 
-        profile_keys++;
         g_strfreev (values);
     }
     g_strfreev (keys);
@@ -687,16 +685,16 @@ static void
 load_keymap_from_section (const char *section_name, GArray * keymap, mc_config_t * cfg)
 {
     gchar **profile_keys, **keys;
-    gsize len;
 
     if (section_name == NULL)
         return;
 
-    profile_keys = keys = mc_config_get_keys (cfg, section_name, &len);
+    keys = mc_config_get_keys (cfg, section_name, NULL);
 
-    while (*profile_keys != NULL)
+    for (profile_keys = keys; *profile_keys != NULL; profile_keys++)
     {
         gchar **values, **curr_values;
+        gsize len;
 
         curr_values = values = mc_config_get_string_list (cfg, section_name, *profile_keys, &len);
 
@@ -714,8 +712,6 @@ load_keymap_from_section (const char *section_name, GArray * keymap, mc_config_t
 
             g_strfreev (values);
         }
-
-        profile_keys++;
     }
 
     g_strfreev (keys);
