@@ -617,10 +617,8 @@ load_keys_from_section (const char *terminal, mc_config_t * cfg)
 {
     char *section_name;
     gchar **profile_keys, **keys;
-    gchar **values, **curr_values;
     char *valcopy, *value;
     long key_code;
-    gsize values_len;
 
     if (terminal == NULL)
         return;
@@ -639,22 +637,24 @@ load_keys_from_section (const char *terminal, mc_config_t * cfg)
             continue;
         }
 
-        curr_values = values =
-            mc_config_get_string_list (cfg, section_name, *profile_keys, &values_len);
-
         key_code = lookup_key (*profile_keys, NULL);
-
         if (key_code != 0)
         {
-            if (curr_values != NULL)
+            gchar **values;
+
+            values = mc_config_get_string_list (cfg, section_name, *profile_keys, NULL);
+            if (values != NULL)
             {
-                while (*curr_values != NULL)
+                gchar **curr_values;
+
+                for (curr_values = values; *curr_values != NULL; curr_values++)
                 {
                     valcopy = convert_controls (*curr_values);
                     define_sequence (key_code, valcopy, MCKEY_NOACTION);
                     g_free (valcopy);
-                    curr_values++;
                 }
+
+                g_strfreev (values);
             }
             else
             {
@@ -665,8 +665,6 @@ load_keys_from_section (const char *terminal, mc_config_t * cfg)
                 g_free (value);
             }
         }
-
-        g_strfreev (values);
     }
     g_strfreev (keys);
     g_free (section_name);
@@ -686,22 +684,21 @@ load_keymap_from_section (const char *section_name, GArray * keymap, mc_config_t
 
     for (profile_keys = keys; *profile_keys != NULL; profile_keys++)
     {
-        gchar **values, **curr_values;
-        gsize len;
+        gchar **values;
 
-        curr_values = values = mc_config_get_string_list (cfg, section_name, *profile_keys, &len);
-
-        if (curr_values != NULL)
+        values = mc_config_get_string_list (cfg, section_name, *profile_keys, NULL);
+        if (values != NULL)
         {
             int action;
 
             action = keybind_lookup_action (*profile_keys);
             if (action > 0)
-                while (*curr_values != NULL)
-                {
+            {
+                gchar **curr_values;
+
+                for (curr_values = values; *curr_values != NULL; curr_values++)
                     keybind_cmd_bind (keymap, *curr_values, action);
-                    curr_values++;
-                }
+            }
 
             g_strfreev (values);
         }

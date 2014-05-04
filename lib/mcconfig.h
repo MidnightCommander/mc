@@ -62,7 +62,8 @@ gboolean mc_config_get_bool (mc_config_t *, const gchar *, const gchar *, gboole
 int mc_config_get_int (mc_config_t *, const gchar *, const gchar *, int);
 
 
-gchar **mc_config_get_string_list (mc_config_t *, const gchar *, const gchar *, gsize *);
+gchar **mc_config_get_string_list (mc_config_t * mc_config, const gchar * group,
+                                   const gchar * param, gsize * length);
 
 gboolean *mc_config_get_bool_list (mc_config_t *, const gchar *, const gchar *, gsize *);
 

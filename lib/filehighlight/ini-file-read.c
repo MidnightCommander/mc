@@ -132,12 +132,9 @@ mc_fhl_parse_get_extensions (mc_fhl_t * fhl, const gchar * group_name)
 {
     mc_fhl_filter_t *mc_filter;
     gchar **exts, **exts_orig;
-    gsize exts_size;
     GString *buf;
 
-    exts_orig = exts =
-        mc_config_get_string_list (fhl->config, group_name, "extensions", &exts_size);
-
+    exts_orig = mc_config_get_string_list (fhl->config, group_name, "extensions", NULL);
     if (exts_orig == NULL || exts_orig[0] == NULL)
     {
         g_strfreev (exts_orig);
@@ -145,6 +142,7 @@ mc_fhl_parse_get_extensions (mc_fhl_t * fhl, const gchar * group_name)
     }
 
     buf = g_string_sized_new (64);
+
     for (exts = exts_orig; *exts != NULL; exts++)
     {
         char *esc_ext;
