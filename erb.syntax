@@ -6,7 +6,7 @@
 # Ruby syntax file derived from perl syntax by Marco Ciampa <ciampix@libero.it>
 # alpha version 0.2 16/05/2003
 # ===================================================================================
-# html highlighting - paul
+# html highlighting
 
 caseinsensitive
 
@@ -48,7 +48,7 @@ context default
     keyword </FRAME> brightcyan/17
     keyword </FRAMESET> brightcyan/17
     keyword </H1> brightcyan/17
-            keyword </H2> brightcyan/17
+    keyword </H2> brightcyan/17
     keyword </H3> brightcyan/17
     keyword </H4> brightcyan/17
     keyword </H5> brightcyan/17
@@ -322,31 +322,7 @@ context <ASIDE >                 brightcyan/17
 #    keyword "*" cyan/5
     keyword <%*%> green
 
-context <B >                    brightcyan/17
-    keyword = brightred/18
-
-    keyword \sclass yellow/24
-    keyword \sid yellow/24
-    keyword \sstyle yellow/24
-    keyword \stitle yellow/24
-
-    keyword \sdir yellow/24
-    keyword \slang yellow/24
-
-    keyword \sonclick yellow/24
-    keyword \sondblclick yellow/24
-    keyword \sonkeydown yellow/24
-    keyword \sonkeypress yellow/24
-    keyword \sonkeyup yellow/24
-    keyword \sonmousedown yellow/24
-    keyword \sonmousemove yellow/24
-    keyword \sonmouseout yellow/24
-    keyword \sonmouseover yellow/24
-    keyword \sonmouseup yellow/24
-#    keyword "*" cyan/5
-    keyword <%*%> green
-
-context <BASE >                 brightcyan/17
+context <BASE\s >                 brightcyan/17
     keyword = brightred/18
 
     keyword \shref yellow/24
@@ -459,7 +435,10 @@ context <BODY >                 brightcyan/17
     keyword \slink yellow/24
     keyword \stext yellow/24
     keyword \svlink yellow/24
-    keyword \sdata-hook yellow/24
+    keyword \seevlink yellow/24
+    keyword data-\[abcdefghijklmnopqrstuvwxyz\]-\[abcdefghijklmnopqrstuvwxyz\]-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
+    keyword data-\[abcdefghijklmnopqrstuvwxyz\]-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
+    keyword data-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
 
     keyword <%*%> green
 
@@ -484,6 +463,30 @@ context <BUTTON >               brightcyan/17
     keyword \sdata-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
     keyword \styp\[e\] yellow/24
 
+
+    keyword \sdir yellow/24
+    keyword \slang yellow/24
+
+    keyword \sonclick yellow/24
+    keyword \sondblclick yellow/24
+    keyword \sonkeydown yellow/24
+    keyword \sonkeypress yellow/24
+    keyword \sonkeyup yellow/24
+    keyword \sonmousedown yellow/24
+    keyword \sonmousemove yellow/24
+    keyword \sonmouseout yellow/24
+    keyword \sonmouseover yellow/24
+    keyword \sonmouseup yellow/24
+#    keyword "*" cyan/5
+    keyword <%*%> green
+
+context <B\s >                    brightcyan/17
+    keyword = brightred/18
+
+    keyword \sclass yellow/24
+    keyword \sid yellow/24
+    keyword \sstyle yellow/24
+    keyword \stitle yellow/24
 
     keyword \sdir yellow/24
     keyword \slang yellow/24
@@ -1317,7 +1320,7 @@ context <IMG >                  brightcyan/17
 #    keyword <%*%> green
     keyword <%*%> green
 
-context <I >                    brightcyan/17
+context <I\s >                    brightcyan/17
     keyword = brightred/18
 
     keyword \sclass yellow/24
@@ -1566,7 +1569,7 @@ context <TBODY >                brightcyan/17
 #    keyword "*" cyan/5
     keyword <%*%> green
 
-context <P >                  brightcyan/17
+context <P\s >                  brightcyan/17
     keyword = brightred/18
 
     keyword \sclass yellow/24
@@ -1705,7 +1708,7 @@ context <TD >                   brightcyan/17
 #    keyword "*" cyan/5
     keyword <%*%> green
 
-context <TH >                   brightcyan/17
+context <TH\s >                   brightcyan/17
     keyword = brightred/18
 
     keyword \sclass yellow/24
@@ -1848,7 +1851,7 @@ context <TT >                   brightcyan/17
     keyword \sdir yellow/24
     keyword \slang yellow/24
 
-context <U >                    brightcyan/17
+context <U\s >                    brightcyan/17
     keyword = brightred/18
 
     keyword \sclass yellow/24
