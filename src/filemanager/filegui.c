@@ -1087,7 +1087,10 @@ file_progress_show_deleting (file_op_context_t * ctx, const char *s, size_t * co
         return;
 
     ui = ctx->ui;
-    label_set_text (ui->src_file_label, _("Deleting"));
+
+    if (ui->src_file_label != NULL)
+        label_set_text (ui->src_file_label, _("Deleting"));
+
     label_set_text (ui->src_file, truncFileStringSecure (ui->op_dlg, s));
 
     if (count != NULL)
