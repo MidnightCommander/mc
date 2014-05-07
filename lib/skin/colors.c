@@ -233,6 +233,7 @@ mc_skin_color_cache_init (void)
     HELP_SLINK_COLOR = mc_skin_color_get ("help", "helpslink");
     HELP_TITLE_COLOR = mc_skin_color_get ("help", "helptitle");
 
+    VIEW_NORMAL_COLOR = mc_skin_color_get ("viewer", "_default_");
     VIEW_BOLD_COLOR = mc_skin_color_get ("viewer", "viewbold");
     VIEW_UNDERLINED_COLOR = mc_skin_color_get ("viewer", "viewunderline");
     VIEW_SELECTED_COLOR = mc_skin_color_get ("viewer", "viewselected");

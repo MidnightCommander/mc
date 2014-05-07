@@ -75,38 +75,39 @@
 #define HELP_TITLE_COLOR          mc_skin_color__cache[43]
 
 
-#define VIEW_BOLD_COLOR           mc_skin_color__cache[44]
-#define VIEW_UNDERLINED_COLOR     mc_skin_color__cache[45]
-#define VIEW_SELECTED_COLOR       mc_skin_color__cache[46]
+#define VIEW_NORMAL_COLOR         mc_skin_color__cache[44]
+#define VIEW_BOLD_COLOR           mc_skin_color__cache[45]
+#define VIEW_UNDERLINED_COLOR     mc_skin_color__cache[46]
+#define VIEW_SELECTED_COLOR       mc_skin_color__cache[47]
 
 /*
  * editor colors - only 4 for normal, search->found, select, and whitespace
  * respectively
  * Last is defined to view color.
  */
-#define EDITOR_NORMAL_COLOR       mc_skin_color__cache[47]
-#define EDITOR_BOLD_COLOR         mc_skin_color__cache[48]
-#define EDITOR_MARKED_COLOR       mc_skin_color__cache[49]
-#define EDITOR_WHITESPACE_COLOR   mc_skin_color__cache[50]
-#define EDITOR_RIGHT_MARGIN_COLOR mc_skin_color__cache[51]
-#define EDITOR_BACKGROUND         mc_skin_color__cache[52]
-#define EDITOR_FRAME              mc_skin_color__cache[53]
-#define EDITOR_FRAME_ACTIVE       mc_skin_color__cache[54]
-#define EDITOR_FRAME_DRAG         mc_skin_color__cache[55]
+#define EDITOR_NORMAL_COLOR       mc_skin_color__cache[48]
+#define EDITOR_BOLD_COLOR         mc_skin_color__cache[49]
+#define EDITOR_MARKED_COLOR       mc_skin_color__cache[50]
+#define EDITOR_WHITESPACE_COLOR   mc_skin_color__cache[51]
+#define EDITOR_RIGHT_MARGIN_COLOR mc_skin_color__cache[52]
+#define EDITOR_BACKGROUND         mc_skin_color__cache[53]
+#define EDITOR_FRAME              mc_skin_color__cache[54]
+#define EDITOR_FRAME_ACTIVE       mc_skin_color__cache[55]
+#define EDITOR_FRAME_DRAG         mc_skin_color__cache[56]
 /* color of left 8 char status per line */
-#define LINE_STATE_COLOR          mc_skin_color__cache[56]
-#define BOOK_MARK_COLOR           mc_skin_color__cache[57]
-#define BOOK_MARK_FOUND_COLOR     mc_skin_color__cache[58]
+#define LINE_STATE_COLOR          mc_skin_color__cache[57]
+#define BOOK_MARK_COLOR           mc_skin_color__cache[58]
+#define BOOK_MARK_FOUND_COLOR     mc_skin_color__cache[59]
 
 /* Diff colors */
-#define DFF_ADD_COLOR             mc_skin_color__cache[59]
-#define DFF_CHG_COLOR             mc_skin_color__cache[60]
-#define DFF_CHH_COLOR             mc_skin_color__cache[61]
-#define DFF_CHD_COLOR             mc_skin_color__cache[62]
-#define DFF_DEL_COLOR             mc_skin_color__cache[63]
-#define DFF_ERROR_COLOR           mc_skin_color__cache[64]
+#define DFF_ADD_COLOR             mc_skin_color__cache[60]
+#define DFF_CHG_COLOR             mc_skin_color__cache[61]
+#define DFF_CHH_COLOR             mc_skin_color__cache[62]
+#define DFF_CHD_COLOR             mc_skin_color__cache[63]
+#define DFF_DEL_COLOR             mc_skin_color__cache[64]
+#define DFF_ERROR_COLOR           mc_skin_color__cache[65]
 
-#define MC_SKIN_COLOR_CACHE_COUNT 65
+#define MC_SKIN_COLOR_CACHE_COUNT 66
 
 /*** enums ***************************************************************************************/
 

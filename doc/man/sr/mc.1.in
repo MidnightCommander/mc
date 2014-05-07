@@ -2972,8 +2972,8 @@ menunormal, menusel, menuhot, menuhotsel, menuinactive. Боје дијалог�
 dnormal, dfocus, dhotnormal, dhotfocus. Боје помоћи су: helpnormal, helpitalic,
 helpbold, helplink, helpslink. Боја прегледача је: viewunderline.
 Посебне боје за истицање су: executable, directory, link, stalelink,
-device, special, core. Боје уређивача су: editnormal, editbold,
-editmarked.
+device, special, core. Viewer colors are: viewnormal, viewbold, viewunderline,
+viewselected. Боје уређивача су: editnormal, editbold, editmarked.
 .PP
 .I input
 одређује боју редова за унос који се користе у дијалозима упита.
