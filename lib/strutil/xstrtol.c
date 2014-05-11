@@ -177,7 +177,7 @@ xstrtoumax (const char *s, char **ptr, int base, uintmax_t * val, const char *va
             break;
 
         case 'c':
-            overflow = 0;
+            overflow = LONGINT_OK;
             break;
 
         case 'E':              /* exa or exbi */
