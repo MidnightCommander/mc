@@ -1835,11 +1835,15 @@ use_display_format (WPanel * panel, const char *format, char **error, int isstat
 
     panel->dirty = 1;
 
+    usable_columns = WIDGET (panel)->cols - 2;
+
     /* Status needn't to be split */
-    usable_columns = ((WIDGET (panel)->cols - 2) / ((isstatus)
-                                                    ? 1
-                                                    : (panel->split + 1))) - (!isstatus
-                                                                              && panel->split);
+    if (!isstatus)
+    {
+        usable_columns /= panel->split + 1;
+        if (panel->split != 0)
+            usable_columns--;
+    }
 
     /* Look for the expandable fields and set field_len based on the requested field len */
     for (darr = home; darr && expand_top < MAX_EXPAND; darr = darr->next)
@@ -1852,39 +1856,38 @@ use_display_format (WPanel * panel, const char *format, char **error, int isstat
     /* If we used more columns than the available columns, adjust that */
     if (total_cols > usable_columns)
     {
-        int dif = total_cols - usable_columns;
+        int dif;
+        int pdif = 0;
 
-        while (dif)
+        dif = total_cols - usable_columns;
+
+        while (dif != 0 && pdif != dif)
         {
-            int pdif = dif;
+            pdif = dif;
 
             for (darr = home; darr; darr = darr->next)
-            {
-                if (dif && darr->field_len - 1)
+                if (dif != 0 && darr->field_len != 1)
                 {
                     darr->field_len--;
                     dif--;
                 }
-            }
-
-            /* avoid endless loop if num fields > 40 */
-            if (pdif == dif)
-                break;
         }
+
         total_cols = usable_columns;    /* give up, the rest should be truncated */
     }
 
     /* Expand the available space */
-    if ((usable_columns > total_cols) && expand_top)
+    if (usable_columns > total_cols && expand_top != 0)
     {
         int i;
         int spaces = (usable_columns - total_cols) / expand_top;
-        int extra = (usable_columns - total_cols) % expand_top;
 
         for (i = 0, darr = home; darr && (i < expand_top); darr = darr->next)
             if (darr->expand)
             {
-                darr->field_len += (spaces + ((i == 0) ? extra : 0));
+                darr->field_len += spaces;
+                if (i == 0)
+                    darr->field_len += (usable_columns - total_cols) % expand_top;
                 i++;
             }
     }
