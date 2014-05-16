@@ -64,7 +64,7 @@ typedef struct panel_field_struct
 {
     const char *id;
     int min_size;
-    int expands;
+    gboolean expands;
     align_crt_t default_just;
     const char *hotkey;
     const char *title_hotkey;

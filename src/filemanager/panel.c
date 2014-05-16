@@ -109,7 +109,7 @@ static const char *string_dot (file_entry_t *, int);
 /* *INDENT-OFF* */
 panel_field_t panel_fields[] = {
     {
-     "unsorted", 12, 1, J_LEFT_FIT,
+     "unsorted", 12, TRUE, J_LEFT_FIT,
      /* TRANSLATORS: one single character to represent 'unsorted' sort mode  */
      /* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
      N_("sort|u"),
@@ -119,7 +119,7 @@ panel_field_t panel_fields[] = {
     }
     ,
     {
-     "name", 12, 1, J_LEFT_FIT,
+     "name", 12, TRUE, J_LEFT_FIT,
      /* TRANSLATORS: one single character to represent 'name' sort mode  */
      /* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
      N_("sort|n"),
@@ -129,7 +129,7 @@ panel_field_t panel_fields[] = {
     }
     ,
     {
-     "version", 12, 1, J_LEFT_FIT,
+     "version", 12, TRUE, J_LEFT_FIT,
      /* TRANSLATORS: one single character to represent 'version' sort mode  */
      /* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
      N_("sort|v"),
@@ -139,7 +139,7 @@ panel_field_t panel_fields[] = {
     }
     ,
     {
-     "extension", 12, 1, J_LEFT_FIT,
+     "extension", 12, TRUE, J_LEFT_FIT,
      /* TRANSLATORS: one single character to represent 'extension' sort mode  */
      /* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
      N_("sort|e"),
@@ -149,7 +149,7 @@ panel_field_t panel_fields[] = {
     }
     ,
     {
-     "size", 7, 0, J_RIGHT,
+     "size", 7, FALSE, J_RIGHT,
      /* TRANSLATORS: one single character to represent 'size' sort mode  */
      /* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
      N_("sort|s"),
@@ -159,7 +159,7 @@ panel_field_t panel_fields[] = {
     }
     ,
     {
-     "bsize", 7, 0, J_RIGHT,
+     "bsize", 7, FALSE, J_RIGHT,
      "",
      N_("Block Size"), FALSE, FALSE,
      string_file_size_brief,
@@ -167,7 +167,7 @@ panel_field_t panel_fields[] = {
     }
     ,
     {
-     "type", 1, 0, J_LEFT,
+     "type", 1, FALSE, J_LEFT,
      "",
      "", FALSE, TRUE,
      string_file_type,
@@ -175,7 +175,7 @@ panel_field_t panel_fields[] = {
     }
     ,
     {
-     "mtime", 12, 0, J_RIGHT,
+     "mtime", 12, FALSE, J_RIGHT,
      /* TRANSLATORS: one single character to represent 'Modify time' sort mode  */
      /* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
      N_("sort|m"),
@@ -185,7 +185,7 @@ panel_field_t panel_fields[] = {
     }
     ,
     {
-     "atime", 12, 0, J_RIGHT,
+     "atime", 12, FALSE, J_RIGHT,
      /* TRANSLATORS: one single character to represent 'Access time' sort mode  */
      /* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
      N_("sort|a"),
@@ -195,7 +195,7 @@ panel_field_t panel_fields[] = {
     }
     ,
     {
-     "ctime", 12, 0, J_RIGHT,
+     "ctime", 12, FALSE, J_RIGHT,
      /* TRANSLATORS: one single character to represent 'Change time' sort mode  */
      /* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
      N_("sort|h"),
@@ -205,7 +205,7 @@ panel_field_t panel_fields[] = {
     }
     ,
     {
-     "perm", 10, 0, J_LEFT,
+     "perm", 10, FALSE, J_LEFT,
      "",
      N_("Permission"), FALSE, TRUE,
      string_file_permission,
@@ -213,7 +213,7 @@ panel_field_t panel_fields[] = {
     }
     ,
     {
-     "mode", 6, 0, J_RIGHT,
+     "mode", 6, FALSE, J_RIGHT,
      "",
      N_("Perm"), FALSE, TRUE,
      string_file_perm_octal,
@@ -221,14 +221,14 @@ panel_field_t panel_fields[] = {
     }
     ,
     {
-     "nlink", 2, 0, J_RIGHT,
+     "nlink", 2, FALSE, J_RIGHT,
      "",
      N_("Nl"), FALSE, TRUE,
      string_file_nlinks, NULL
     }
     ,
     {
-     "inode", 5, 0, J_RIGHT,
+     "inode", 5, FALSE, J_RIGHT,
      /* TRANSLATORS: one single character to represent 'inode' sort mode  */
      /* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
      N_("sort|i"),
@@ -238,7 +238,7 @@ panel_field_t panel_fields[] = {
     }
     ,
     {
-     "nuid", 5, 0, J_RIGHT,
+     "nuid", 5, FALSE, J_RIGHT,
      "",
      N_("UID"), FALSE, FALSE,
      string_file_nuid,
@@ -246,7 +246,7 @@ panel_field_t panel_fields[] = {
     }
     ,
     {
-     "ngid", 5, 0, J_RIGHT,
+     "ngid", 5, FALSE, J_RIGHT,
      "",
      N_("GID"), FALSE, FALSE,
      string_file_ngid,
@@ -254,7 +254,7 @@ panel_field_t panel_fields[] = {
     }
     ,
     {
-     "owner", 8, 0, J_LEFT_FIT,
+     "owner", 8, FALSE, J_LEFT_FIT,
      "",
      N_("Owner"), FALSE, TRUE,
      string_file_owner,
@@ -262,7 +262,7 @@ panel_field_t panel_fields[] = {
     }
     ,
     {
-     "group", 8, 0, J_LEFT_FIT,
+     "group", 8, FALSE, J_LEFT_FIT,
      "",
      N_("Group"), FALSE, TRUE,
      string_file_group,
@@ -270,7 +270,7 @@ panel_field_t panel_fields[] = {
     }
     ,
     {
-     "mark", 1, 0, J_RIGHT,
+     "mark", 1, FALSE, J_RIGHT,
      "",
      " ", FALSE, TRUE,
      string_marked,
@@ -278,7 +278,7 @@ panel_field_t panel_fields[] = {
     }
     ,
     {
-     "|", 1, 0, J_RIGHT,
+     "|", 1, FALSE, J_RIGHT,
      "",
      " ", FALSE, TRUE,
      NULL,
@@ -286,7 +286,7 @@ panel_field_t panel_fields[] = {
     }
     ,
     {
-     "space", 1, 0, J_RIGHT,
+     "space", 1, FALSE, J_RIGHT,
      "",
      " ", FALSE, TRUE,
      string_space,
@@ -294,7 +294,7 @@ panel_field_t panel_fields[] = {
     }
     ,
     {
-     "dot", 1, 0, J_RIGHT,
+     "dot", 1, FALSE, J_RIGHT,
      "",
      " ", FALSE, FALSE,
      string_dot,
@@ -302,7 +302,7 @@ panel_field_t panel_fields[] = {
     }
     ,
     {
-     NULL, 0, 0, J_RIGHT, NULL, NULL, FALSE, FALSE, NULL, NULL
+     NULL, 0, FALSE, J_RIGHT, NULL, NULL, FALSE, FALSE, NULL, NULL
     }
 };
 /* *INDENT-ON* */
@@ -342,7 +342,7 @@ typedef struct format_e
     int requested_field_len;
     int field_len;
     align_crt_t just_mode;
-    int expand;
+    gboolean expand;
     const char *(*string_fn) (file_entry_t *, int len);
     char *title;
     const char *id;
@@ -760,7 +760,7 @@ file_compute_color (int attr, file_entry_t * fe)
 
 static filename_scroll_flag_t
 format_file (char *dest, int limit, WPanel * panel, int file_index, int width, int attr,
-             int isstatus, int *field_lenght)
+             gboolean isstatus, int *field_lenght)
 {
     int color, length, empty_line;
     const char *txt;
@@ -772,7 +772,7 @@ format_file (char *dest, int limit, WPanel * panel, int file_index, int width, i
     (void) limit;
     length = 0;
     empty_line = (file_index >= panel->dir.len);
-    home = (isstatus) ? panel->status_format : panel->format;
+    home = isstatus ? panel->status_format : panel->format;
     fe = &panel->dir.list[file_index];
     *field_lenght = 0;
 
@@ -878,7 +878,7 @@ format_file (char *dest, int limit, WPanel * panel, int file_index, int width, i
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-repaint_file (WPanel * panel, int file_index, int mv, int attr, int isstatus)
+repaint_file (WPanel * panel, int file_index, gboolean mv, int attr, gboolean isstatus)
 {
     Widget *w = WIDGET (panel);
 
@@ -1013,7 +1013,7 @@ display_mini_info (WPanel * panel)
     }
     else
         /* Default behavior */
-        repaint_file (panel, panel->selected, 0, STATUS, 1);
+        repaint_file (panel, panel->selected, FALSE, STATUS, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1037,7 +1037,7 @@ paint_dir (WPanel * panel)
             color = 2 * (panel->dir.list[i + panel->top_file].f.marked);
             color += (panel->selected == i + panel->top_file && panel->active);
         }
-        repaint_file (panel, i + panel->top_file, 1, color, 0);
+        repaint_file (panel, i + panel->top_file, TRUE, color, FALSE);
     }
 
     tty_set_normal_attrs ();
@@ -1620,7 +1620,7 @@ paint_frame (WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
-parse_panel_size (WPanel * panel, const char *format, int isstatus)
+parse_panel_size (WPanel * panel, const char *format, gboolean isstatus)
 {
     panel_display_t frame = frame_half;
     format = skip_separators (format);
@@ -1676,12 +1676,12 @@ parse_panel_size (WPanel * panel, const char *format, int isstatus)
 /* --------------------------------------------------------------------------------------------- */
 
 static format_e *
-parse_display_format (WPanel * panel, const char *format, char **error, int isstatus,
+parse_display_format (WPanel * panel, const char *format, char **error, gboolean isstatus,
                       int *res_total_cols)
 {
     format_e *darr, *old = 0, *home = 0;        /* The formats we return */
     int total_cols = 0;         /* Used columns by the format */
-    int set_justify;            /* flag: set justification mode? */
+    gboolean set_justify;       /* flag: set justification mode? */
     align_crt_t justify = J_LEFT;       /* Which mode. */
     size_t i;
 
@@ -1706,7 +1706,7 @@ parse_display_format (WPanel * panel, const char *format, char **error, int isst
 
     while (*format)
     {                           /* format can be an empty string */
-        int found = 0;
+        gboolean found = FALSE;
 
         darr = g_new0 (format_e, 1);
 
@@ -1720,9 +1720,9 @@ parse_display_format (WPanel * panel, const char *format, char **error, int isst
 
         format = skip_separators (format);
 
-        if (strchr ("<=>", *format))
+        set_justify = strchr ("<=>", *format) != NULL;
+        if (set_justify)
         {
-            set_justify = 1;
             switch (*format)
             {
             case '<':
@@ -1738,8 +1738,6 @@ parse_display_format (WPanel * panel, const char *format, char **error, int isst
             }
             format = skip_separators (format + 1);
         }
-        else
-            set_justify = 0;
 
         for (i = 0; panel_fields[i].id != NULL; i++)
         {
@@ -1765,7 +1763,7 @@ parse_display_format (WPanel * panel, const char *format, char **error, int isst
                 else
                     darr->just_mode = justify;
             }
-            found = 1;
+            found = TRUE;
 
             format = skip_separators (format);
 
@@ -1777,7 +1775,7 @@ parse_display_format (WPanel * panel, const char *format, char **error, int isst
                 /* If the size was specified, we don't want
                  * auto-expansion by default
                  */
-                darr->expand = 0;
+                darr->expand = FALSE;
                 format++;
                 req_length = atoi (format);
                 darr->requested_field_len = req_length;
@@ -1787,7 +1785,7 @@ parse_display_format (WPanel * panel, const char *format, char **error, int isst
                 /* Now, if they insist on expansion */
                 if (*format == '+')
                 {
-                    darr->expand = 1;
+                    darr->expand = TRUE;
                     format++;
                 }
 
@@ -1817,7 +1815,7 @@ parse_display_format (WPanel * panel, const char *format, char **error, int isst
 /* --------------------------------------------------------------------------------------------- */
 
 static format_e *
-use_display_format (WPanel * panel, const char *format, char **error, int isstatus)
+use_display_format (WPanel * panel, const char *format, char **error, gboolean isstatus)
 {
 #define MAX_EXPAND 4
     int expand_top = 0;         /* Max used element in expand */
@@ -1999,7 +1997,7 @@ force_maybe_cd (void)
 static void
 unselect_item (WPanel * panel)
 {
-    repaint_file (panel, panel->selected, 1, 2 * selection (panel)->f.marked, 0);
+    repaint_file (panel, panel->selected, TRUE, 2 * selection (panel)->f.marked, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -4210,7 +4208,7 @@ set_panel_formats (WPanel * p)
     char *err = NULL;
     int retcode = 0;
 
-    form = use_display_format (p, panel_format (p), &err, 0);
+    form = use_display_format (p, panel_format (p), &err, FALSE);
 
     if (err != NULL)
     {
@@ -4225,7 +4223,7 @@ set_panel_formats (WPanel * p)
 
     if (panels_options.show_mini_info)
     {
-        form = use_display_format (p, mini_status_format (p), &err, 1);
+        form = use_display_format (p, mini_status_format (p), &err, TRUE);
 
         if (err != NULL)
         {
