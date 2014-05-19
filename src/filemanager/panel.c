@@ -1681,8 +1681,6 @@ parse_display_format (WPanel * panel, const char *format, char **error, gboolean
 {
     format_e *darr, *old = 0, *home = 0;        /* The formats we return */
     int total_cols = 0;         /* Used columns by the format */
-    gboolean set_justify;       /* flag: set justification mode? */
-    align_crt_t justify = J_LEFT;       /* Which mode. */
     size_t i;
 
     static size_t i18n_timelength = 0;  /* flag: check ?Time length at startup */
@@ -1706,6 +1704,8 @@ parse_display_format (WPanel * panel, const char *format, char **error, gboolean
 
     while (*format)
     {                           /* format can be an empty string */
+        align_crt_t justify;    /* Which mode. */
+        gboolean set_justify = TRUE;    /* flag: set justification mode? */
         gboolean found = FALSE;
 
         darr = g_new0 (format_e, 1);
@@ -1720,23 +1720,24 @@ parse_display_format (WPanel * panel, const char *format, char **error, gboolean
 
         format = skip_separators (format);
 
-        set_justify = strchr ("<=>", *format) != NULL;
-        if (set_justify)
+        switch (*format)
         {
-            switch (*format)
-            {
-            case '<':
-                justify = J_LEFT;
-                break;
-            case '=':
-                justify = J_CENTER;
-                break;
-            case '>':
-            default:
-                justify = J_RIGHT;
-                break;
-            }
+        case '<':
+            justify = J_LEFT;
             format = skip_separators (format + 1);
+            break;
+        case '=':
+            justify = J_CENTER;
+            format = skip_separators (format + 1);
+            break;
+        case '>':
+            justify = J_RIGHT;
+            format = skip_separators (format + 1);
+            break;
+        default:
+            justify = J_LEFT;
+            set_justify = FALSE;
+            break;
         }
 
         for (i = 0; panel_fields[i].id != NULL; i++)
