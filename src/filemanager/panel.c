@@ -773,8 +773,7 @@ static filename_scroll_flag_t
 format_file (char *dest, int limit, WPanel * panel, int file_index, int width, int attr,
              gboolean isstatus, int *field_lenght)
 {
-    int color, length, empty_line;
-    const char *txt;
+    int color, length = 0, empty_line;
     format_e *format, *home;
     file_entry_t *fe;
     filename_scroll_flag_t res = FILENAME_NOSCROLL;
@@ -782,7 +781,6 @@ format_file (char *dest, int limit, WPanel * panel, int file_index, int width, i
     (void) dest;
     (void) limit;
 
-    length = 0;
     empty_line = (file_index >= panel->dir.len);
     home = isstatus ? panel->status_format : panel->format;
     fe = &panel->dir.list[file_index];
@@ -800,13 +798,12 @@ format_file (char *dest, int limit, WPanel * panel, int file_index, int width, i
 
         if (format->string_fn)
         {
+            const char *txt = " ";
             int len, perm;
             const char *prepared_text;
             int name_offset = 0;
 
-            if (empty_line)
-                txt = " ";
-            else
+            if (!empty_line)
                 txt = (*format->string_fn) (fe, format->field_len);
 
             len = format->field_len;
@@ -1035,7 +1032,6 @@ static void
 paint_dir (WPanel * panel)
 {
     int i;
-    int color;                  /* Color value of the line */
     int items;                  /* Number of items */
 
     items = llines (panel) * (panel->split ? 2 : 1);
@@ -1044,13 +1040,14 @@ paint_dir (WPanel * panel)
 
     for (i = 0; i < items; i++)
     {
-        if (i + panel->top_file >= panel->dir.len)
-            color = 0;
-        else
+        int color = 0;          /* Color value of the line */
+
+        if (i + panel->top_file < panel->dir.len)
         {
             color = 2 * (panel->dir.list[i + panel->top_file].f.marked);
             color += (panel->selected == i + panel->top_file && panel->active);
         }
+
         repaint_file (panel, i + panel->top_file, TRUE, color, FALSE);
     }
 
