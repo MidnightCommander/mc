@@ -145,7 +145,6 @@ extern mc_fhl_t *mc_filehighlight;
 
 /*** declarations of public functions ************************************************************/
 
-WPanel *panel_new (const char *panel_name);
 WPanel *panel_new_with_dir (const char *panel_name, const vfs_path_t * vpath);
 void panel_clean_dir (WPanel * panel);
 
@@ -187,5 +186,23 @@ void panel_init (void);
 void panel_deinit (void);
 gboolean do_cd (const vfs_path_t * new_dir_vpath, enum cd_enum cd_type);
 
+/* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Panel creation.
+ *
+ * @param panel_name the name of the panel for setup retieving
+ *
+ * @return new instance of WPanel
+ */
+
+static inline WPanel *
+panel_new (const char *panel_name)
+{
+    return panel_new_with_dir (panel_name, NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 #endif /* MC__PANEL_H */

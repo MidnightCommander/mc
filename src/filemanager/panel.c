@@ -1503,7 +1503,7 @@ panel_destroy (WPanel * p)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
+static inline void
 panel_format_modified (WPanel * panel)
 {
     panel->format_modified = 1;
@@ -2014,7 +2014,7 @@ force_maybe_cd (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
+static inline void
 unselect_item (WPanel * panel)
 {
     repaint_file (panel, panel->selected, TRUE, 2 * selection (panel)->f.marked, FALSE);
@@ -2354,7 +2354,7 @@ do_mark_file (WPanel * panel, mark_act_t do_move)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
+static inline void
 mark_file (WPanel * panel)
 {
     do_mark_file (panel, MARK_DOWN);
@@ -2362,7 +2362,7 @@ mark_file (WPanel * panel)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
+static inline void
 mark_file_up (WPanel * panel)
 {
     do_mark_file (panel, MARK_FORCE_UP);
@@ -2370,7 +2370,7 @@ mark_file_up (WPanel * panel)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
+static inline void
 mark_file_down (WPanel * panel)
 {
     do_mark_file (panel, MARK_FORCE_DOWN);
@@ -4049,18 +4049,6 @@ panel_set_lwd (WPanel * panel, const vfs_path_t * vpath)
         vfs_path_free (panel->lwd_vpath);
         panel->lwd_vpath = vfs_path_clone (vpath);
     }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** Panel creation.
- * @param panel_name the name of the panel for setup retieving
- * @return new instance of WPanel
- */
-
-WPanel *
-panel_new (const char *panel_name)
-{
-    return panel_new_with_dir (panel_name, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
