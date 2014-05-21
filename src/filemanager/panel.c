@@ -1341,8 +1341,8 @@ ITEMS (WPanel * p)
 {
     if (p->split)
         return llines (p) * 2;
-    else
-        return llines (p);
+
+    return llines (p);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1396,8 +1396,8 @@ panel_save_name (WPanel * panel)
     /* If the program is shuting down */
     if ((mc_global.midnight_shutdown && auto_save_setup) || saving_setup)
         return g_strdup (panel->panel_name);
-    else
-        return g_strconcat ("Temporal:", panel->panel_name, (char *) NULL);
+
+    return g_strconcat ("Temporal:", panel->panel_name, (char *) NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2116,8 +2116,8 @@ move_left (WPanel * panel)
         move_selection (panel, -llines (panel));
         return MSG_HANDLED;
     }
-    else
-        return maybe_cd (1);    /* cd .. */
+
+    return maybe_cd (1);        /* cd .. */
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2130,8 +2130,8 @@ move_right (WPanel * panel)
         move_selection (panel, llines (panel));
         return MSG_HANDLED;
     }
-    else
-        return maybe_cd (0);    /* cd (selection) */
+
+    return maybe_cd (0);        /* cd (selection) */
 }
 
 /* --------------------------------------------------------------------------------------------- */
