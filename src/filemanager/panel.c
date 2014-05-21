@@ -2068,7 +2068,7 @@ static void
 move_selection (WPanel * panel, int lines)
 {
     int new_pos;
-    int adjust = 0;
+    gboolean adjust = FALSE;
 
     new_pos = panel->selected + lines;
     if (new_pos >= panel->dir.len)
@@ -2083,13 +2083,13 @@ move_selection (WPanel * panel, int lines)
     if (panel->selected - panel->top_file >= ITEMS (panel))
     {
         panel->top_file += lines;
-        adjust = 1;
+        adjust = TRUE;
     }
 
     if (panel->selected - panel->top_file < 0)
     {
         panel->top_file += lines;
-        adjust = 1;
+        adjust = TRUE;
     }
 
     if (adjust)
