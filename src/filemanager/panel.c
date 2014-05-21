@@ -1963,7 +1963,7 @@ mini_status_format (WPanel * panel)
 /** Used to emulate Lynx's entering leaving a directory with the arrow keys */
 
 static cb_ret_t
-maybe_cd (int move_up_dir)
+maybe_cd (gboolean move_up_dir)
 {
     if (panels_options.navigate_with_arrows && (cmdline->buffer[0] == '\0'))
     {
@@ -2114,7 +2114,7 @@ move_left (WPanel * panel)
         return MSG_HANDLED;
     }
 
-    return maybe_cd (1);        /* cd .. */
+    return maybe_cd (TRUE);     /* cd .. */
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2128,7 +2128,7 @@ move_right (WPanel * panel)
         return MSG_HANDLED;
     }
 
-    return maybe_cd (0);        /* cd (selection) */
+    return maybe_cd (FALSE);    /* cd (selection) */
 }
 
 /* --------------------------------------------------------------------------------------------- */
