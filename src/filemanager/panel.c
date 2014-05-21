@@ -791,11 +791,8 @@ format_file (char *dest, int limit, WPanel * panel, int file_index, int width, i
     else
         color = NORMAL_COLOR;
 
-    for (format = home; format; format = format->next)
+    for (format = home; format != NULL && length != width; format = format->next)
     {
-        if (length == width)
-            break;
-
         if (format->string_fn)
         {
             const char *txt = " ";
@@ -2792,7 +2789,7 @@ panel_get_format_field_index_by_name (WPanel * panel, const char *name)
     gsize lc_index;
 
     for (lc_index = 1, format = panel->format;
-         !(format == NULL || strcmp (format->title, name) == 0); format = format->next, lc_index++)
+         format != NULL && strcmp (format->title, name) != 0; format = format->next, lc_index++)
         ;
 
     if (format == NULL)
@@ -2808,8 +2805,7 @@ panel_get_format_field_by_index (WPanel * panel, gsize lc_index)
 {
     format_e *format;
 
-    for (format = panel->format;
-         !(format == NULL || lc_index == 0); format = format->next, lc_index--)
+    for (format = panel->format; format != NULL && lc_index != 0; format = format->next, lc_index--)
         ;
 
     return format;
