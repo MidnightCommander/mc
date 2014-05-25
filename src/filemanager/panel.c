@@ -2572,10 +2572,10 @@ stop_search (WPanel * panel)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Return 1 if the Enter key has been processed, 0 otherwise */
+/** Return TRUE if the Enter key has been processed, FALSE otherwise */
 
-static int
-do_enter_on_file_entry_t (file_entry_t * fe)
+static gboolean
+do_enter_on_file_entry (file_entry_t * fe)
 {
     vfs_path_t *full_name_vpath;
     gboolean ok;
@@ -2592,7 +2592,7 @@ do_enter_on_file_entry_t (file_entry_t * fe)
         if (!do_cd (fname_vpath, cd_exact))
             message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
         vfs_path_free (fname_vpath);
-        return 1;
+        return TRUE;
     }
 
     full_name_vpath = vfs_path_append_new (current_panel->cwd_vpath, fe->fname, NULL);
@@ -2601,7 +2601,7 @@ do_enter_on_file_entry_t (file_entry_t * fe)
     if (regex_command (full_name_vpath, "Open") != 0)
     {
         vfs_path_free (full_name_vpath);
-        return 1;
+        return TRUE;
     }
 
     /* Check if the file is executable */
@@ -2609,14 +2609,14 @@ do_enter_on_file_entry_t (file_entry_t * fe)
     ok = (is_exe (fe->st.st_mode) && if_link_is_exe (full_name_vpath, fe));
     vfs_path_free (full_name_vpath);
     if (!ok)
-        return 0;
+        return FALSE;
 
     if (confirm_execute)
     {
         if (query_dialog
             (_("The Midnight Commander"),
              _("Do you really want to execute?"), D_NORMAL, 2, _("&Yes"), _("&No")) != 0)
-            return 1;
+            return TRUE;
     }
 
     if (!vfs_current_is_local ())
@@ -2644,15 +2644,15 @@ do_enter_on_file_entry_t (file_entry_t * fe)
     mc_global.source_codepage = default_source_codepage;
 #endif
 
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static inline gboolean
 do_enter (WPanel * panel)
 {
-    return do_enter_on_file_entry_t (selection (panel));
+    return do_enter_on_file_entry (selection (panel));
 }
 
 /* --------------------------------------------------------------------------------------------- */
