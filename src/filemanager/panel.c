@@ -1523,22 +1523,23 @@ panel_paint_sort_info (WPanel * panel)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static gchar *
+static const char *
 panel_get_title_without_hotkey (const char *title)
 {
-    char *translated_title;
-    char *hkey;
+    static char translated_title[BUF_TINY];
 
-    if (title == NULL)
-        return NULL;
-    if (title[0] == '\0')
-        return g_strdup ("");
+    if (title == NULL || title[0] == '\0')
+        translated_title[0] = '\0';
+    else
+    {
+        char *hkey;
 
-    translated_title = g_strdup (_(title));
+        g_snprintf (translated_title, sizeof (translated_title), "%s", _(title));
 
-    hkey = strchr (translated_title, '&');
-    if ((hkey != NULL) && (hkey[1] != '\0'))
-        memmove ((void *) hkey, (void *) hkey + 1, strlen (hkey));
+        hkey = strchr (translated_title, '&');
+        if (hkey != NULL && hkey[1] != '\0')
+            memmove ((void *) hkey, (void *) hkey + 1, strlen (hkey));
+    }
 
     return translated_title;
 }
@@ -1759,7 +1760,7 @@ parse_display_format (WPanel * panel, const char *format, char **error, gboolean
 
             darr->requested_field_len = panel_fields[i].min_size;
             darr->string_fn = panel_fields[i].string_fn;
-            darr->title = panel_get_title_without_hotkey (panel_fields[i].title_hotkey);
+            darr->title = g_strdup (panel_get_title_without_hotkey (panel_fields[i].title_hotkey));
 
             darr->id = panel_fields[i].id;
             darr->expand = panel_fields[i].expands;
@@ -2837,12 +2838,11 @@ static void
 panel_toggle_sort_order_prev (WPanel * panel)
 {
     gsize lc_index, i;
-    gchar *title;
+    const char *title;
     const panel_field_t *pfield = NULL;
 
     title = panel_get_title_without_hotkey (panel->sort_field->title_hotkey);
     lc_index = panel_get_format_field_index_by_name (panel, title);
-    g_free (title);
 
     if (lc_index > 1)
     {
@@ -2875,12 +2875,11 @@ panel_toggle_sort_order_next (WPanel * panel)
     gsize lc_index, i;
     const panel_field_t *pfield = NULL;
     gsize format_field_count;
-    gchar *title;
+    const char *title;
 
     format_field_count = panel_get_format_field_count (panel);
     title = panel_get_title_without_hotkey (panel->sort_field->title_hotkey);
     lc_index = panel_get_format_field_index_by_name (panel, title);
-    g_free (title);
 
     if (lc_index != 0 && lc_index != format_field_count)
     {
@@ -3574,16 +3573,14 @@ mouse_sort_col (WPanel * panel, int x)
 
     for (i = 0; panel_fields[i].id != NULL; i++)
     {
-        char *title;
+        const char *title;
 
         title = panel_get_title_without_hotkey (panel_fields[i].title_hotkey);
-        if (!strcmp (lc_sort_name, title) && panel_fields[i].sort_routine)
+        if (strcmp (title, lc_sort_name) == 0 && panel_fields[i].sort_routine != NULL)
         {
             col_sort_format = &panel_fields[i];
-            g_free (title);
             break;
         }
-        g_free (title);
     }
 
     if (col_sort_format == NULL)
@@ -4723,14 +4720,10 @@ panel_get_field_by_title (const char *name)
 
     for (lc_index = 0; panel_fields[lc_index].id != NULL; lc_index++)
     {
-        gchar *title;
-        gboolean ok;
+        const char *title;
 
         title = panel_get_title_without_hotkey (panel_fields[lc_index].title_hotkey);
-        ok = title != NULL && strcmp (name, title) == 0;
-        g_free (title);
-
-        if (ok)
+        if (strcmp (title, name) == 0)
             return &panel_fields[lc_index];
     }
 
