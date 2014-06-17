@@ -3140,21 +3140,36 @@ edit_sort_cmd (WEdit * edit)
 int
 edit_ext_cmd (WEdit * edit)
 {
+    char *stdin_str = NULL;
     char *exp, *tmp, *tmp_edit_temp_file;
     int e;
 
-    exp =
-        input_dialog (_("Paste output of external command"),
-                      _("Enter shell command(s):"), MC_HISTORY_EDIT_PASTE_EXTCMD, NULL,
-                      INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_VARIABLES | INPUT_COMPLETE_USERNAMES
-                      | INPUT_COMPLETE_HOSTNAMES | INPUT_COMPLETE_CD | INPUT_COMPLETE_COMMANDS |
-                      INPUT_COMPLETE_SHELL_ESC);
+    off_t start_mark, end_mark;
+    gboolean block_present_flag = FALSE;
+
+    exp = input_dialog (_("Paste output of external command"),
+                        _("Enter shell command(s):"), MC_HISTORY_EDIT_PASTE_EXTCMD, NULL,
+                        INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_VARIABLES |
+                        INPUT_COMPLETE_USERNAMES | INPUT_COMPLETE_HOSTNAMES | INPUT_COMPLETE_CD |
+                        INPUT_COMPLETE_COMMANDS | INPUT_COMPLETE_SHELL_ESC);
 
     if (!exp)
         return 1;
 
+    if (eval_marks (edit, &start_mark, &end_mark))
+    {
+        stdin_str = mc_config_get_full_path (EDIT_BLOCK_FILE);
+        edit_save_block (edit, stdin_str, start_mark, end_mark);
+        block_present_flag = TRUE;
+    }
+
     tmp_edit_temp_file = mc_config_get_full_path (EDIT_TEMP_FILE);
-    tmp = g_strconcat (exp, " > ", tmp_edit_temp_file, (char *) NULL);
+    if (block_present_flag)
+        tmp = g_strconcat ("< ", stdin_str, " ", exp, " > ", tmp_edit_temp_file, (char *) NULL);
+    else
+        tmp = g_strconcat ("< ", "/dev/null", " ", exp, " > ", tmp_edit_temp_file, (char *) NULL);
+
+    g_free (stdin_str);
     g_free (tmp_edit_temp_file);
     e = system (tmp);
     g_free (tmp);
@@ -3167,6 +3182,8 @@ edit_ext_cmd (WEdit * edit)
     }
 
     edit->force |= REDRAW_COMPLETELY;
+    if (block_present_flag && edit_block_delete_cmd (edit))
+        return 1;
 
     {
         vfs_path_t *tmp_vpath;
