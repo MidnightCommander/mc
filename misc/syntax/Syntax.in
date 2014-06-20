@@ -37,10 +37,10 @@ include diff.syntax
 file ..\*\\.lsm$ LSM\sFile
 include lsm.syntax
 
-file .\*(bash_completion|profile|\\.(sh|bash_login|bash_profile|bash_logout|bash_aliases|bash_exports|bash_history|bashrc|profile|zlogin|zlogout|zprofile|zshenv|zshrc))$ Shell\sScript ^#!\s\*/(.\*/|usr/bin/env\s)([a-z]?|ba|pdk)sh
+file .\*(bash_completion|profile|\\.(sh|bash_login|bash_profile|bash_logout|bash_aliases|bash_exports|bash_history|bashrc|profile))$ Shell\sScript ^#!\s\*/(.\*/|usr/bin/env\s)([a-z]?|ba|pdk)sh
 include sh.syntax
 
-file ..\*\\.(pl|PL|pm|PM|psgi|PSGI)$ Perl\sProgram ^#!.\*([\s/]perl|@PERL@)
+file ..\*\\.(pl|PL|pm|PM)$ Perl\sProgram ^#!.\*([\s/]perl|@PERL@)
 include perl.syntax
 
 file ..\*\\.(py|PY)$ Python\sProgram ^#!.\*([\s/]python|@PYTHON@)
@@ -49,7 +49,7 @@ include python.syntax
 file ..\*\\.(pyx|pxd|pxi)$ Cython\sor\sPyrex\sProgram
 include cython.syntax
 
-file ..\*\\.(rb|RB)$ Ruby\sProgram ^#!.\*([\s/]ruby|@RUBY@)
+file ..\*\\.(rb|RB|rake|RAKE|jbuilder|rabl)|Gemfile$ Ruby\sProgram ^#!.\*([\s/]ruby|@RUBY@) Rakefile
 include ruby.syntax
 
 file ..\*\\.(coffee|Coffee|COFFEE)$ JavaScript\sProgram
@@ -57,6 +57,12 @@ include coffee.syntax
 
 file ..\*\\.(man|[0-9n]|[0-9](x|ncurses|ssl|p|pm|menu|form|vga|t|td))$ NROFF\sSource
 include nroff.syntax
+
+file ..\*\\.(html\.erb)$ Rails\serb\stemplate
+include erb.syntax
+
+file ..\*\\.(skim\.erb)$ Rails\sskim\serb\stemplate
+include ruby.syntax
 
 file ..\*\\.(htm|html|HTM|HTML)$ HTML\sFile
 include html.syntax
@@ -70,11 +76,8 @@ include xml.syntax
 file ..\*\\.(tt|TT)$ Template::Toolkit\sFile
 include tt.syntax
 
-file (.\*[Mm]akefile[\\\.A-Za-z0-9]\*|..\*\\.mk|..\*\\.mak|Kbuild)$ Makefile
+file (.\*[Mm]akefile[\\\.A-Za-z0-9]\*|..\*\\.mk|Kbuild)$ Makefile
 include makefile.syntax
-
-file CMakeLists.txt$ CMake
-include cmake.syntax
 
 file ..\*\\.(pp|PP|pas|PAS|dpr|DPR|inc|INC)$ Pascal\sProgram
 include pascal.syntax
@@ -91,13 +94,13 @@ include slang.syntax
 file ..\*\\.tex$ LaTeX\s2.09\sDocument
 include latex.syntax
 
-file ..\*\\.(texi|texinfo|TEXI|TEXINFO)$ Texinfo\sDocument
+file ..\*\.(texi|texinfo|TEXI|TEXINFO)$ Texinfo\sDocument
 include texinfo.syntax
 
 file ..\*\\.c$ C\sProgram
 include c.syntax
 
-file ..\*\\.([hC]|CC|cxx|cc|cpp|CPP|CXX|hxx|hh|hpp|HPP|h\\.in)$ C/C\+\+\sProgram
+file ..\*\\.([hC]|CC|cxx|cc|cpp|CPP|CXX|hxx|hh|hpp|HPP|h\.in)$ C/C\+\+\sProgram
 include cxx.syntax
 
 file ..\*\\.d$ D\sProgram
@@ -121,7 +124,7 @@ include j.syntax
 file ..\*\\.(java|JAVA|Java|jav|groovy|GROOVY|Groovy)$ Java\sProgram
 include java.syntax
 
-file ..\*\\.(properties|config)$ Java\sFile
+file ..\*\\.(properties|config) Java\sFile
 include properties.syntax
 
 file ..\*\\.(cs|CS)$ C\#\sProgram
@@ -129,6 +132,9 @@ include cs.syntax
 
 file ..\*\\.(js|JS)$ JavaScript\sProgram
 include js.syntax
+
+file ..\*\\.(coffee|Coffee|COFFEE)$ JavaScript\sProgram
+include coffee.syntax
 
 file ..\*\\.(as|AS)$ ActionScript\sProgram
 include as.syntax
@@ -151,7 +157,7 @@ include octave.syntax
 file ..\*\\.(sql|SQL)$ SQL\sProgram
 include sql.syntax
 
-file ..\*\\.(spec|spec\\.in)$ RPM\sSpecfile
+file ..\*\\.(spec|spec\.in)$ RPM\sSpecfile
 include spec.syntax
 
 file ..\*\\.repo$ YUM\sRepo\sFile
@@ -160,7 +166,7 @@ include yum-repo.syntax
 file ..\*\\.(awk)$ AWK\sFile
 include awk.syntax
 
-file ..\*\\.(css|qss|CSS|QSS)$ CSS\sFile
+file ..\*\\.(scss|css|qss|CSS|QSS|scss\.erb|css\.erb)$ CSS\sFile
 include css.syntax
 
 file .\*ChangeLog[\\\.A-Za-z0-9_]\*$ GNU\sChangeLog\sFile
@@ -196,7 +202,7 @@ include ini.syntax
 file Don_t_match_me Mail\sfolder ^(From|Return-(P|p)ath:|From:|Date:)\s
 include mail.syntax
 
-file \\.procmailrc$ Procmail\sRC\sFile ^#/usr/bin/procmail
+file \.procmailrc$ Procmail\sRC\sFile ^#/usr/bin/procmail
 include procmail.syntax
 
 file sources.list$ sources\slist
@@ -252,15 +258,6 @@ include sh.syntax
 
 file ..\*\\.(l|y|yxx|ypp)$ Lex/Flex/Yacc/Bison\ssource
 include yxx.syntax
-
-file ..\*\\.dlink\\.sw$ D-Link\sSwitch\sCommands
-include dlink.syntax
-
-file ..\*\\.([jJ][aA][lL][tT]?)$ Jal\ssource
-include jal.syntax
-
-file ..\*\\.([lL][kK][rR])$ PIC\slinker\sscript\sfile
-include lkr.syntax
 
 file .\* unknown
 include unknown.syntax
