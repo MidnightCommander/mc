@@ -23,7 +23,7 @@ context default
     keyword \* yellow
     keyword / yellow
     keyword % yellow
-    keyword = yellow
+    keyword whole = yellow
     keyword \+= yellow
     keyword -= yellow
     keyword == yellow
@@ -218,12 +218,15 @@ context default
 context # \n brown
     spellcheck
 
-context " " green
-    keyword \\" brightgreen
-    keyword \\\\ brightgreen
+context =begin =end brown
+    spellcheck
 
-context ' ' brightgreen
-    keyword \\' green
+context " " brightgreen
+    keyword \\" green
     keyword \\\\ green
+
+context ' ' green
+    keyword \\' brightgreen
+    keyword \\\\ brightgreen
 
 context exclusive ` ` white black

@@ -52,11 +52,17 @@ include cython.syntax
 file ..\*\\.(rb|RB)$ Ruby\sProgram ^#!.\*([\s/]ruby|@RUBY@)
 include ruby.syntax
 
+file ..\*\\.(coffee|Coffee|COFFEE)$ JavaScript\sProgram
+include coffee.syntax
+
 file ..\*\\.(man|[0-9n]|[0-9](x|ncurses|ssl|p|pm|menu|form|vga|t|td))$ NROFF\sSource
 include nroff.syntax
 
 file ..\*\\.(htm|html|HTM|HTML)$ HTML\sFile
 include html.syntax
+
+file ..\*\\.(erb)$ Rails\serb\sFile
+include erb.syntax
 
 file ..\*\\.(xml|XML|xsd|XSD|xslt?|XSLT?|dtd|DTD|qpg|qpg.in)$ XML\sdocument (\\?xml\sversion|!DOCTYPE\s)
 include xml.syntax
