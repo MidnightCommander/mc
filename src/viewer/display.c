@@ -344,7 +344,7 @@ mcview_display_clean (mcview_t * view)
 {
     Widget *w = WIDGET (view);
 
-    tty_setcolor (NORMAL_COLOR);
+    tty_setcolor (VIEW_NORMAL_COLOR);
     widget_erase (w);
     if (view->dpy_frame_size != 0)
         tty_draw_box (w->y, w->x, w->lines, w->cols, FALSE);
@@ -390,7 +390,7 @@ mcview_display_ruler (mcview_t * view)
             }
         }
     }
-    tty_setcolor (NORMAL_COLOR);
+    tty_setcolor (VIEW_NORMAL_COLOR);
 }
 
 /* --------------------------------------------------------------------------------------------- */

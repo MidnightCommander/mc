@@ -96,6 +96,7 @@ static const mc_skin_colors_old_t old_colors[] = {
     {"reverse", "core", "reverse"},
     {"selected", "core", "selected"},
     {"statusbar", "statusbar", "_default_"},
+    {"viewnormal", "viewer", "_default_"},
     {"viewbold", "viewer", "viewbold"},
     {"viewselected", "viewer", "viewselected"},
     {"viewunderline", "viewer", "viewunderline"}

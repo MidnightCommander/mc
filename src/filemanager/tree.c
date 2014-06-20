@@ -776,7 +776,7 @@ tree_copy (WTree * tree, const char *default_dest)
     if (dest != NULL && *dest != '\0')
     {
         file_op_context_t *ctx;
-        FileOpTotalContext *tctx;
+        file_op_total_context_t *tctx;
 
         ctx = file_op_context_new (OP_COPY);
         tctx = file_op_total_context_new ();
@@ -800,7 +800,7 @@ tree_move (WTree * tree, const char *default_dest)
     char *dest;
     struct stat buf;
     file_op_context_t *ctx;
-    FileOpTotalContext *tctx;
+    file_op_total_context_t *tctx;
 
     if (tree->selected_ptr == NULL)
         return;
@@ -865,7 +865,7 @@ tree_rmdir (void *data)
 {
     WTree *tree = data;
     file_op_context_t *ctx;
-    FileOpTotalContext *tctx;
+    file_op_total_context_t *tctx;
 
     if (!tree->selected_ptr)
         return;

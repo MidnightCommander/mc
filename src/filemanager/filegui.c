@@ -944,7 +944,7 @@ file_progress_show_count (file_op_context_t * ctx, size_t done, size_t total)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_total (FileOpTotalContext * tctx, file_op_context_t * ctx,
+file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ctx,
                           uintmax_t copied_bytes, gboolean show_summary)
 {
     char buffer[BUF_TINY];
@@ -1087,6 +1087,10 @@ file_progress_show_deleting (file_op_context_t * ctx, const char *s, size_t * co
         return;
 
     ui = ctx->ui;
+
+    if (ui->src_file_label != NULL)
+        label_set_text (ui->src_file_label, _("Deleting"));
+
     label_set_text (ui->src_file, truncFileStringSecure (ui->op_dlg, s));
 
     if (count != NULL)

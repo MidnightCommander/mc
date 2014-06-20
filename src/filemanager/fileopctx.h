@@ -165,6 +165,7 @@ typedef struct
 typedef struct
 {
     size_t progress_count;
+    size_t prev_progress_count; /* Used in OP_MOVE between copy and remove directories */
     uintmax_t progress_bytes;
     uintmax_t copied_bytes;
     size_t bps;
@@ -173,7 +174,7 @@ typedef struct
     double eta_secs;
 
     gboolean ask_overwrite;
-} FileOpTotalContext;
+} file_op_total_context_t;
 
 /*** global variables defined in .c file *********************************************************/
 
@@ -184,8 +185,8 @@ extern const char *op_names[3];
 file_op_context_t *file_op_context_new (FileOperation op);
 void file_op_context_destroy (file_op_context_t * ctx);
 
-FileOpTotalContext *file_op_total_context_new (void);
-void file_op_total_context_destroy (FileOpTotalContext * tctx);
+file_op_total_context_t *file_op_total_context_new (void);
+void file_op_total_context_destroy (file_op_total_context_t * tctx);
 
 /* The following functions are implemented separately by each port */
 FileProgressStatus file_progress_real_query_replace (file_op_context_t * ctx,

@@ -116,7 +116,7 @@ mcview_display_nroff (mcview_t * view)
         curr = curr->next;
     }
 
-    tty_setcolor (NORMAL_COLOR);
+    tty_setcolor (VIEW_NORMAL_COLOR);
     for (row = 0, col = 0; row < height;)
     {
 #ifdef HAVE_CHARSET
@@ -245,7 +245,7 @@ mcview_display_nroff (mcview_t * view)
                 col--;
         }
 #endif
-        tty_setcolor (NORMAL_COLOR);
+        tty_setcolor (VIEW_NORMAL_COLOR);
     }
     view->dpy_end = from;
 }

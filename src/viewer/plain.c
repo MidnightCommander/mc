@@ -86,7 +86,7 @@ mcview_display_text (mcview_t * view)
 
     while (TRUE)
     {
-        tty_setcolor (NORMAL_COLOR);
+        tty_setcolor (VIEW_NORMAL_COLOR);
 
         if (row >= height)
             break;

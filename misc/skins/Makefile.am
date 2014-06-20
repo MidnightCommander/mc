@@ -7,6 +7,8 @@ skin_DATA = \
 	double-lines.ini \
 	featured.ini \
 	gotar.ini \
+	gray-green-purple256.ini \
+	gray-orange-blue256.ini \
 	mc46.ini \
 	modarcon16-defbg.ini \
 	modarcon16.ini \
