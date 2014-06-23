@@ -3827,9 +3827,6 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
     case CK_UserMenu:
         user_menu (edit, NULL, -1);
         break;
-    case CK_Sort:
-        edit_sort_cmd (edit);
-        break;
     case CK_ExternalCommand:
         edit_ext_cmd (edit);
         break;

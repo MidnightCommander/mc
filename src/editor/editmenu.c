@@ -208,7 +208,6 @@ create_format_menu (void)
     entries = g_list_prepend (entries, menu_separator_create ());
     entries =
         g_list_prepend (entries, menu_entry_create (_("&Format paragraph"), CK_ParagraphFormat));
-    entries = g_list_prepend (entries, menu_entry_create (_("&Sort..."), CK_Sort));
     entries =
         g_list_prepend (entries, menu_entry_create (_("&Paste output of..."), CK_ExternalCommand));
     entries =
