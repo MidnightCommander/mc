@@ -97,6 +97,7 @@ EditNew = f14
 CopySingle = f15
 MoveSingle = f16
 DeleteSingle = f18
+# SelectExt =
 Select = alt-plus
 Unselect = alt-minus
 SelectInvert = alt-asterisk

@@ -182,6 +182,7 @@ enum
     CK_PutOtherTagged,
     CK_Select,
     CK_Unselect,
+    CK_SelectExt,
     CK_SelectInvert,
 
     /* panels */
