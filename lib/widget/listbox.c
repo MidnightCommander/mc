@@ -478,7 +478,7 @@ listbox_event (Gpm_Event * event, void *data)
     if ((event->type & GPM_DOWN) != 0)
         dlg_select_widget (l);
 
-    if (g_queue_is_empty (l->list))
+    if (listbox_is_empty (l))
         return MOU_NORMAL;
 
     if ((event->type & (GPM_DOWN | GPM_DRAG)) != 0)
