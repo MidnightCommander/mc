@@ -21,6 +21,7 @@
 #define DIALOG(x) ((WDialog *)(x))
 
 /* Common return values */
+/* ATTENTION: avoid overlapping with FileProgressStatus values */
 #define B_EXIT          0
 #define B_CANCEL        1
 #define B_ENTER         2
