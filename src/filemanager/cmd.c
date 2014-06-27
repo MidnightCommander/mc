@@ -57,7 +57,6 @@
 #include "lib/tty/key.h"        /* ALT() macro */
 #include "lib/tty/win.h"        /* do_enter_ca_mode() */
 #include "lib/mcconfig.h"
-#include "lib/search.h"
 #include "lib/filehighlight.h"  /* MC_FHL_INI_FILE */
 #include "lib/vfs/vfs.h"
 #include "lib/fileloc.h"
@@ -99,8 +98,6 @@
 #include "cmd.h"                /* Our definitions */
 
 /*** global variables ****************************************************************************/
-
-int select_flags = SELECT_MATCH_CASE | SELECT_SHELL_PATTERNS;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -204,78 +201,6 @@ set_panel_filter (WPanel * p)
     if (!reg_exp)
         return;
     set_panel_filter_to (p, reg_exp);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-select_unselect_cmd (const char *title, const char *history_name, gboolean do_select)
-{
-    int files_only = (select_flags & SELECT_FILES_ONLY) != 0;
-    int case_sens = (select_flags & SELECT_MATCH_CASE) != 0;
-    int shell_patterns = (select_flags & SELECT_SHELL_PATTERNS) != 0;
-
-    char *reg_exp;
-    mc_search_t *search;
-    int i;
-
-    quick_widget_t quick_widgets[] = {
-        /* *INDENT-OFF* */
-        QUICK_INPUT (INPUT_LAST_TEXT, history_name, &reg_exp, NULL,
-                     FALSE, FALSE, INPUT_COMPLETE_FILENAMES),
-        QUICK_START_COLUMNS,
-            QUICK_CHECKBOX (N_("&Files only"), &files_only, NULL),
-            QUICK_CHECKBOX (N_("&Using shell patterns"), &shell_patterns, NULL),
-        QUICK_NEXT_COLUMN,
-            QUICK_CHECKBOX (N_("&Case sensitive"), &case_sens, NULL),
-        QUICK_STOP_COLUMNS,
-        QUICK_END
-        /* *INDENT-ON* */
-    };
-
-    quick_dialog_t qdlg = {
-        -1, -1, 50,
-        title, "[Select/Unselect Files]",
-        quick_widgets, NULL, NULL
-    };
-
-    if (quick_dialog (&qdlg) == B_CANCEL)
-        return;
-
-    if (reg_exp == NULL || *reg_exp == '\0')
-    {
-        g_free (reg_exp);
-        return;
-    }
-
-    search = mc_search_new (reg_exp, -1, NULL);
-    search->search_type = (shell_patterns != 0) ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
-    search->is_entire_line = TRUE;
-    search->is_case_sensitive = case_sens != 0;
-
-    for (i = 0; i < current_panel->dir.len; i++)
-    {
-        if (DIR_IS_DOTDOT (current_panel->dir.list[i].fname))
-            continue;
-        if (S_ISDIR (current_panel->dir.list[i].st.st_mode) && files_only != 0)
-            continue;
-
-        if (mc_search_run (search, current_panel->dir.list[i].fname,
-                           0, current_panel->dir.list[i].fnamelen, NULL))
-            do_file_mark (current_panel, i, do_select);
-    }
-
-    mc_search_free (search);
-    g_free (reg_exp);
-
-    /* result flags */
-    select_flags = 0;
-    if (case_sens != 0)
-        select_flags |= SELECT_MATCH_CASE;
-    if (files_only != 0)
-        select_flags |= SELECT_FILES_ONLY;
-    if (shell_patterns != 0)
-        select_flags |= SELECT_SHELL_PATTERNS;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1032,38 +957,6 @@ reread_cmd (void)
 
     update_panels (UP_RELOAD | flag, UP_KEEPSEL);
     repaint_screen ();
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-select_invert_cmd (void)
-{
-    int i;
-
-    for (i = 0; i < current_panel->dir.len; i++)
-    {
-        file_entry_t *file = &current_panel->dir.list[i];
-
-        if (!panels_options.reverse_files_only || !S_ISDIR (file->st.st_mode))
-            do_file_mark (current_panel, i, !file->f.marked);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-select_cmd (void)
-{
-    select_unselect_cmd (_("Select"), ":select_cmd: Select ", TRUE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-unselect_cmd (void)
-{
-    select_unselect_cmd (_("Unselect"), ":unselect_cmd: Unselect ", FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

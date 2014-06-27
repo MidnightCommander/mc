@@ -48,6 +48,14 @@ typedef enum
     UP_ONLY_CURRENT = 2
 } panel_update_flags_t;
 
+/* selection flags */
+typedef enum
+{
+    SELECT_FILES_ONLY = 1 << 0,
+    SELECT_MATCH_CASE = 1 << 1,
+    SELECT_SHELL_PATTERNS = 1 << 2
+} select_flags_t;
+
 /* run mode and params */
 
 enum cd_enum

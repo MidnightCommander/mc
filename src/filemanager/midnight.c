@@ -1319,14 +1319,13 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         vfs_list ();
         break;
 #endif
-    case CK_SelectInvert:
-        select_invert_cmd ();
-        break;
     case CK_SaveSetup:
         save_setup_cmd ();
         break;
     case CK_Select:
-        select_cmd ();
+    case CK_Unselect:
+    case CK_SelectInvert:
+        res = send_message (current_panel, midnight_dlg, MSG_ACTION, command, NULL);
         break;
     case CK_Shell:
         view_other_cmd ();
@@ -1378,9 +1377,6 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         undelete_cmd ();
         break;
 #endif
-    case CK_Unselect:
-        unselect_cmd ();
-        break;
     case CK_UserMenu:
         user_file_menu_cmd ();
         break;
@@ -1501,46 +1497,31 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
             {
                 /* Special treatement, since the input line will eat them */
                 if (parm == '+')
-                {
-                    select_cmd ();
-                    return MSG_HANDLED;
-                }
+                    return send_message (current_panel, midnight_dlg, MSG_ACTION, CK_Select, NULL);
 
                 if (parm == '\\' || parm == '-')
-                {
-                    unselect_cmd ();
-                    return MSG_HANDLED;
-                }
+                    return send_message (current_panel, midnight_dlg, MSG_ACTION, CK_Unselect,
+                                         NULL);
 
                 if (parm == '*')
-                {
-                    select_invert_cmd ();
-                    return MSG_HANDLED;
-                }
+                    return send_message (current_panel, midnight_dlg, MSG_ACTION, CK_SelectInvert,
+                                         NULL);
             }
-            else if (!command_prompt || !cmdline->buffer[0])
+            else if (!command_prompt || cmdline->buffer[0] == '\0')
             {
                 /* Special treatement '+', '-', '\', '*' only when this is
                  * first char on input line
                  */
-
                 if (parm == '+')
-                {
-                    select_cmd ();
-                    return MSG_HANDLED;
-                }
+                    return send_message (current_panel, midnight_dlg, MSG_ACTION, CK_Select, NULL);
 
                 if (parm == '\\' || parm == '-')
-                {
-                    unselect_cmd ();
-                    return MSG_HANDLED;
-                }
+                    return send_message (current_panel, midnight_dlg, MSG_ACTION, CK_Unselect,
+                                         NULL);
 
                 if (parm == '*')
-                {
-                    select_invert_cmd ();
-                    return MSG_HANDLED;
-                }
+                    return send_message (current_panel, midnight_dlg, MSG_ACTION, CK_SelectInvert,
+                                         NULL);
             }
         }
         return MSG_NOT_HANDLED;
