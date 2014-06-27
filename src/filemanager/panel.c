@@ -310,8 +310,6 @@ panel_field_t panel_fields[] = {
 
 mc_fhl_t *mc_filehighlight = NULL;
 
-int select_flags = SELECT_MATCH_CASE | SELECT_SHELL_PATTERNS;
-
 extern int saving_setup;
 
 /*** file scope macro definitions ****************************************************************/
@@ -2418,9 +2416,9 @@ static void
 panel_select_unselect_files (WPanel *panel, const char *title, const char *history_name,
                              gboolean do_select)
 {
-    int files_only = (select_flags & SELECT_FILES_ONLY) != 0;
-    int case_sens = (select_flags & SELECT_MATCH_CASE) != 0;
-    int shell_patterns = (select_flags & SELECT_SHELL_PATTERNS) != 0;
+    int files_only = (panels_options.select_flags & SELECT_FILES_ONLY) != 0;
+    int case_sens = (panels_options.select_flags & SELECT_MATCH_CASE) != 0;
+    int shell_patterns = (panels_options.select_flags & SELECT_SHELL_PATTERNS) != 0;
 
     char *reg_exp;
     mc_search_t *search;
@@ -2475,13 +2473,13 @@ panel_select_unselect_files (WPanel *panel, const char *title, const char *histo
     g_free (reg_exp);
 
     /* result flags */
-    select_flags = 0;
+    panels_options.select_flags = 0;
     if (case_sens != 0)
-        select_flags |= SELECT_MATCH_CASE;
+        panels_options.select_flags |= SELECT_MATCH_CASE;
     if (files_only != 0)
-        select_flags |= SELECT_FILES_ONLY;
+        panels_options.select_flags |= SELECT_FILES_ONLY;
     if (shell_patterns != 0)
-        select_flags |= SELECT_SHELL_PATTERNS;
+        panels_options.select_flags |= SELECT_SHELL_PATTERNS;
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -143,7 +143,8 @@ panels_options_t panels_options = {
     .filetype_mode = TRUE,
     .permission_mode = FALSE,
     .qsearch_mode = QSEARCH_PANEL_CASE,
-    .torben_fj_mode = FALSE
+    .torben_fj_mode = FALSE,
+    .select_flags = SELECT_MATCH_CASE | SELECT_SHELL_PATTERNS
 };
 
 int easy_patterns = 1;
@@ -362,7 +363,6 @@ static const struct
     { "mcview_remember_file_position", &mcview_remember_file_position },
     { "auto_fill_mkdir_name", &auto_fill_mkdir_name },
     { "copymove_persistent_attr", &setup_copymove_persistent_attr },
-    { "select_flags", &select_flags },
     { NULL, NULL }
 };
 
@@ -1453,6 +1453,10 @@ panels_load_options (void)
             panels_options.qsearch_mode = QSEARCH_PANEL_CASE;
         else
             panels_options.qsearch_mode = (qsearch_mode_t) qmode;
+
+        panels_options.select_flags =
+            mc_config_get_int (mc_main_config, CONFIG_PANELS_SECTION, "select_flags",
+                               (int) panels_options.select_flags);
     }
 }
 
@@ -1472,6 +1476,8 @@ panels_save_options (void)
 
     mc_config_set_int (mc_main_config, CONFIG_PANELS_SECTION,
                        "quick_search_mode", (int) panels_options.qsearch_mode);
+    mc_config_set_int (mc_main_config, CONFIG_PANELS_SECTION,
+                       "select_flags", (int) panels_options.select_flags);
 }
 
 /* --------------------------------------------------------------------------------------------- */
