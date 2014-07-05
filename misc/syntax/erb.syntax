@@ -137,6 +137,7 @@ context <A\s >                    brightcyan/17
     keyword \sonmouseup yellow/24
     keyword \sclass yellow/24
     keyword \sid yellow/24
+    keyword \srel yellow/24
     keyword \sdata-\[abcdefghijklmnopqrstuvwxyz\] yellow/24
     keyword \srole yellow/24
     keyword \sstyle yellow/24
