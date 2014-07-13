@@ -151,6 +151,7 @@ if test $ac_cv_func_getmntent = yes; then
         [Define if there is a function named getmntent for reading the list
          of mounted file systems, and that function takes a single argument.
          (4.3BSD, SunOS, HP-UX, Dynix, Irix)])
+      AC_CHECK_FUNCS([hasmntopt])
     fi
   fi
 
