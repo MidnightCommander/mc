@@ -3114,25 +3114,6 @@ context default
     keyword : brightcyan
     keyword ; brightmagenta
 
-context exclusive ?> <? cyan
-    keyword whole &*; brightgreen
-context exclusive <html <? cyan
-    keyword whole &*; brightgreen
-context exclusive <HTML <? cyan
-    keyword whole &*; brightgreen
-context exclusive <doctype <? cyan
-    keyword whole &*; brightgreen
-context exclusive <DOCTYPE <? cyan
-    keyword whole &*; brightgreen
-
-context exclusive /\* \*/ brown
-    spellcheck
-context exclusive // \n brown
-    spellcheck
-
-context linestart # \n brown
-    spellcheck
-
 context " " green
     spellcheck
     keyword \\" brightgreen
@@ -3152,3 +3133,24 @@ context " " green
 context ' ' brightgreen
     spellcheck
     keyword \\' brightcyan
+
+context exclusive <? ?> cyan
+    keyword whole &*; brightgreen
+context <html > cyan
+    keyword whole &*; brightgreen
+context <HTML > cyan
+    keyword whole &*; brightgreen
+context <!doctype > cyan
+    keyword whole &*; brightgreen
+context <!DOCTYPE > cyan
+    keyword whole &*; brightgreen
+
+context exclusive /\* \*/ brown
+    spellcheck
+
+context exclusive // \n brown
+    spellcheck
+
+context linestart # \n brown
+    spellcheck
+
