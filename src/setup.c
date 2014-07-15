@@ -1166,13 +1166,13 @@ save_config (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-setup_save_config_show_error (const char *filename, GError ** error)
+setup_save_config_show_error (const char *filename, GError ** mcerror)
 {
-    if (error != NULL && *error != NULL)
+    if (mcerror != NULL && *mcerror != NULL)
     {
-        message (D_ERROR, MSG_ERROR, _("Cannot save file %s:\n%s"), filename, (*error)->message);
-        g_error_free (*error);
-        *error = NULL;
+        message (D_ERROR, MSG_ERROR, _("Cannot save file %s:\n%s"), filename, (*mcerror)->message);
+        g_error_free (*mcerror);
+        *mcerror = NULL;
     }
 }
 

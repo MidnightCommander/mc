@@ -141,7 +141,7 @@ void load_setup (void);
 gboolean save_setup (gboolean save_options, gboolean save_panel_options);
 void done_setup (void);
 void save_config (void);
-void setup_save_config_show_error (const char *filename, GError ** error);
+void setup_save_config_show_error (const char *filename, GError ** mcerror);
 
 void save_layout (void);
 

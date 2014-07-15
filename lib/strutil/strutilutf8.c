@@ -333,10 +333,10 @@ str_utf8_length_noncomb (const char *text)
  */
 
 static gchar *
-str_utf8_conv_gerror_message (GError * error, const char *def_msg)
+str_utf8_conv_gerror_message (GError * mcerror, const char *def_msg)
 {
-    if (error != NULL)
-        return g_strdup (error->message);
+    if (mcerror != NULL)
+        return g_strdup (mcerror->message);
 
     return g_strdup (def_msg != NULL ? def_msg : "");
 }

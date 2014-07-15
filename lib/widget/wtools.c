@@ -431,6 +431,22 @@ message (int flags, const char *title, const char *text, ...)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/** Show error message box */
+
+gboolean
+mc_error_message (GError ** mcerror)
+{
+    if (mcerror == NULL || *mcerror == NULL)
+        return FALSE;
+
+    message (D_ERROR, MSG_ERROR, _("%d: %s"), (*mcerror)->code, (*mcerror)->message);
+    g_error_free (*mcerror);
+    *mcerror = NULL;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /**
  * Show input dialog, background safe.
  *

@@ -27,6 +27,7 @@
 #include <config.h>
 
 #include "lib/global.h"
+#include "lib/util.h"
 #include "lib/event.h"
 
 #include "internal.h"
@@ -49,10 +50,11 @@ GTree *mc_event_grouplist = NULL;
 gboolean
 mc_event_init (GError ** mcerror)
 {
+    mc_return_val_if_error (mcerror, FALSE);
+
     if (mc_event_grouplist != NULL)
     {
-        g_propagate_error (mcerror,
-                           g_error_new (MC_ERROR, 1, _("Event system already initialized")));
+        mc_propagate_error (mcerror, 1, "%s", _("Event system already initialized"));
         return FALSE;
     }
 
@@ -62,8 +64,7 @@ mc_event_init (GError ** mcerror)
 
     if (mc_event_grouplist == NULL)
     {
-        g_propagate_error (mcerror,
-                           g_error_new (MC_ERROR, 2, _("Failed to initialize event system")));
+        mc_propagate_error (mcerror, 2, "%s", _("Failed to initialize event system"));
         return FALSE;
     }
 
@@ -75,9 +76,11 @@ mc_event_init (GError ** mcerror)
 gboolean
 mc_event_deinit (GError ** mcerror)
 {
+    mc_return_val_if_error (mcerror, FALSE);
+
     if (mc_event_grouplist == NULL)
     {
-        g_propagate_error (mcerror, g_error_new (MC_ERROR, 1, _("Event system not initialized")));
+        mc_propagate_error (mcerror, 3, "%s", _("Event system not initialized"));
         return FALSE;
     }
 
@@ -92,6 +95,8 @@ gboolean
 mc_event_mass_add (event_init_t * events, GError ** mcerror)
 {
     size_t array_index;
+
+    mc_return_val_if_error (mcerror, FALSE);
 
     for (array_index = 0; events[array_index].event_group_name != NULL; array_index++)
     {

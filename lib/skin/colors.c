@@ -319,7 +319,7 @@ mc_skin_color_parse_ini_file (mc_skin_t * mc_skin)
     tty_color_set_defaults (mc_skin_color->fgcolor, mc_skin_color->bgcolor, mc_skin_color->attrs);
     mc_skin_color_add_to_hash (mc_skin, "core", "_default_", mc_skin_color);
 
-    for (groups = orig_groups ; *groups != NULL; groups++)
+    for (groups = orig_groups; *groups != NULL; groups++)
     {
         gchar **keys, **orig_keys;
 

@@ -134,16 +134,16 @@ _str_convert (GIConv coder, const char *string, int size, GString * buffer)
     while (left != 0)
     {
         gchar *tmp_buff;
-        GError *error = NULL;
+        GError *mcerror = NULL;
 
         tmp_buff = g_convert_with_iconv ((const gchar *) string,
-                                         left, coder, &bytes_read, &bytes_written, &error);
-        if (error != NULL)
+                                         left, coder, &bytes_read, &bytes_written, &mcerror);
+        if (mcerror != NULL)
         {
-            int code = error->code;
+            int code = mcerror->code;
 
-            g_error_free (error);
-            error = NULL;
+            g_error_free (mcerror);
+            mcerror = NULL;
 
             switch (code)
             {
@@ -234,9 +234,9 @@ str_nconvert (GIConv coder, const char *string, int size, GString * buffer)
 }
 
 gchar *
-str_conv_gerror_message (GError * error, const char *def_msg)
+str_conv_gerror_message (GError * mcerror, const char *def_msg)
 {
-    return used_class.conv_gerror_message (error, def_msg);
+    return used_class.conv_gerror_message (mcerror, def_msg);
 }
 
 estr_t

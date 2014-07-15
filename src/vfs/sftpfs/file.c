@@ -30,6 +30,7 @@
 #include <libssh2_sftp.h>
 
 #include "lib/global.h"
+#include "lib/util.h"
 
 #include "internal.h"
 
@@ -54,22 +55,23 @@ typedef struct
  * Reopen file by file handle.
  *
  * @param file_handler the file handler data
- * @param error        pointer to the error handler
+ * @param mcerror      pointer to the error handler
  */
 static void
-sftpfs_reopen (vfs_file_handler_t * file_handler, GError ** error)
+sftpfs_reopen (vfs_file_handler_t * file_handler, GError ** mcerror)
 {
     sftpfs_file_handler_data_t *file_handler_data;
     int flags;
     mode_t mode;
 
+    g_return_if_fail (mcerror == NULL || *mcerror == NULL);
+
     file_handler_data = (sftpfs_file_handler_data_t *) file_handler->data;
     flags = file_handler_data->flags;
     mode = file_handler_data->mode;
 
-    sftpfs_close_file (file_handler, error);
-    if (error == NULL || *error == NULL)
-        sftpfs_open_file (file_handler, flags, mode, error);
+    sftpfs_close_file (file_handler, mcerror);
+    sftpfs_open_file (file_handler, flags, mode, mcerror);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -81,12 +83,12 @@ sftpfs_reopen (vfs_file_handler_t * file_handler, GError ** error)
  * @param file_handler the file handler data
  * @param flags        flags (see man 2 open)
  * @param mode         mode (see man 2 open)
- * @param error        pointer to the error handler
+ * @param mcerror      pointer to the error handler
  * @return TRUE if connection was created successfully, FALSE otherwise
  */
 
 gboolean
-sftpfs_open_file (vfs_file_handler_t * file_handler, int flags, mode_t mode, GError ** error)
+sftpfs_open_file (vfs_file_handler_t * file_handler, int flags, mode_t mode, GError ** mcerror)
 {
     unsigned long sftp_open_flags = 0;
     int sftp_open_mode = 0;
@@ -96,6 +98,7 @@ sftpfs_open_file (vfs_file_handler_t * file_handler, int flags, mode_t mode, GEr
     char *name;
 
     (void) mode;
+    mc_return_val_if_error (mcerror, FALSE);
 
     name = vfs_s_fullpath (&sftpfs_class, file_handler->ino);
     if (name == NULL)
@@ -135,7 +138,7 @@ sftpfs_open_file (vfs_file_handler_t * file_handler, int flags, mode_t mode, GEr
         libssh_errno = libssh2_session_last_errno (super_data->session);
         if (libssh_errno != LIBSSH2_ERROR_EAGAIN)
         {
-            sftpfs_ssherror_to_gliberror (super_data, libssh_errno, error);
+            sftpfs_ssherror_to_gliberror (super_data, libssh_errno, mcerror);
             g_free (name);
             g_free (file_handler_data);
             return FALSE;
@@ -152,7 +155,7 @@ sftpfs_open_file (vfs_file_handler_t * file_handler, int flags, mode_t mode, GEr
     {
         struct stat file_info;
 
-        if (sftpfs_fstat (file_handler, &file_info, error) == 0)
+        if (sftpfs_fstat (file_handler, &file_info, mcerror) == 0)
             libssh2_sftp_seek64 (file_handler_data->handle, file_info.st_size);
     }
     return TRUE;
@@ -162,14 +165,14 @@ sftpfs_open_file (vfs_file_handler_t * file_handler, int flags, mode_t mode, GEr
 /**
  * Stats the file specified by the file descriptor.
  *
- * @param data  file data handler
- * @param buf   buffer for store stat-info
- * @param error pointer to the error handler
+ * @param data    file data handler
+ * @param buf     buffer for store stat-info
+ * @param mcerror pointer to the error handler
  * @return 0 if success, negative value otherwise
  */
 
 int
-sftpfs_fstat (void *data, struct stat *buf, GError ** error)
+sftpfs_fstat (void *data, struct stat *buf, GError ** mcerror)
 {
     int res;
     LIBSSH2_SFTP_ATTRIBUTES attrs;
@@ -177,6 +180,8 @@ sftpfs_fstat (void *data, struct stat *buf, GError ** error)
     sftpfs_file_handler_data_t *sftpfs_fh = fh->data;
     struct vfs_s_super *super = fh->ino->super;
     sftpfs_super_data_t *super_data = (sftpfs_super_data_t *) super->data;
+
+    mc_return_val_if_error (mcerror, -1);
 
     if (sftpfs_fh->handle == NULL)
         return -1;
@@ -189,13 +194,12 @@ sftpfs_fstat (void *data, struct stat *buf, GError ** error)
 
         if (res != LIBSSH2_ERROR_EAGAIN)
         {
-            sftpfs_ssherror_to_gliberror (super_data, res, error);
+            sftpfs_ssherror_to_gliberror (super_data, res, mcerror);
             return -1;
         }
 
-        sftpfs_waitsocket (super_data, error);
-        if (error != NULL && *error != NULL)
-            return -1;
+        sftpfs_waitsocket (super_data, mcerror);
+        mc_return_val_if_error (mcerror, -1);
     }
     while (res == LIBSSH2_ERROR_EAGAIN);
 
@@ -226,23 +230,26 @@ sftpfs_fstat (void *data, struct stat *buf, GError ** error)
  * Read up to 'count' bytes from the file descriptor 'file_handler' to the buffer starting at 'buffer'.
  *
  * @param file_handler file data handler
- * @param buffer buffer for data
- * @param count data size
- * @param error pointer to the error handler
+ * @param buffer       buffer for data
+ * @param count        data size
+ * @param mcerror      pointer to the error handler
  *
  * @return 0 on success, negative value otherwise
  */
 
 ssize_t
-sftpfs_read_file (vfs_file_handler_t * file_handler, char *buffer, size_t count, GError ** error)
+sftpfs_read_file (vfs_file_handler_t * file_handler, char *buffer, size_t count, GError ** mcerror)
 {
     ssize_t rc;
     sftpfs_file_handler_data_t *file_handler_data;
     sftpfs_super_data_t *super_data;
 
+    mc_return_val_if_error (mcerror, -1);
+
     if (file_handler == NULL || file_handler->data == NULL)
     {
-        g_set_error (error, MC_ERROR, -1, _("sftp: No file handler data present for reading file"));
+        mc_propagate_error (mcerror, -1, "%s",
+                            _("sftp: No file handler data present for reading file"));
         return -1;
     }
 
@@ -257,13 +264,12 @@ sftpfs_read_file (vfs_file_handler_t * file_handler, char *buffer, size_t count,
 
         if (rc != LIBSSH2_ERROR_EAGAIN)
         {
-            sftpfs_ssherror_to_gliberror (super_data, rc, error);
+            sftpfs_ssherror_to_gliberror (super_data, rc, mcerror);
             return -1;
         }
 
-        sftpfs_waitsocket (super_data, error);
-        if (error != NULL && *error != NULL)
-            return -1;
+        sftpfs_waitsocket (super_data, mcerror);
+        mc_return_val_if_error (mcerror, -1);
     }
     while (rc == LIBSSH2_ERROR_EAGAIN);
 
@@ -280,18 +286,20 @@ sftpfs_read_file (vfs_file_handler_t * file_handler, char *buffer, size_t count,
  * @param file_handler file data handler
  * @param buffer       buffer for data
  * @param count        data size
- * @param error        pointer to the error handler
+ * @param mcerror      pointer to the error handler
  *
  * @return 0 on success, negative value otherwise
  */
 
 ssize_t
 sftpfs_write_file (vfs_file_handler_t * file_handler, const char *buffer, size_t count,
-                   GError ** error)
+                   GError ** mcerror)
 {
     ssize_t rc;
     sftpfs_file_handler_data_t *file_handler_data;
     sftpfs_super_data_t *super_data;
+
+    mc_return_val_if_error (mcerror, -1);
 
     file_handler_data = (sftpfs_file_handler_data_t *) file_handler->data;
     super_data = (sftpfs_super_data_t *) file_handler->ino->super->data;
@@ -306,13 +314,12 @@ sftpfs_write_file (vfs_file_handler_t * file_handler, const char *buffer, size_t
 
         if (rc != LIBSSH2_ERROR_EAGAIN)
         {
-            sftpfs_ssherror_to_gliberror (super_data, rc, error);
+            sftpfs_ssherror_to_gliberror (super_data, rc, mcerror);
             return -1;
         }
 
-        sftpfs_waitsocket (super_data, error);
-        if (error != NULL && *error != NULL)
-            return -1;
+        sftpfs_waitsocket (super_data, mcerror);
+        mc_return_val_if_error (mcerror, -1);
     }
     while (rc == LIBSSH2_ERROR_EAGAIN);
 
@@ -325,17 +332,17 @@ sftpfs_write_file (vfs_file_handler_t * file_handler, const char *buffer, size_t
  * Close a file descriptor.
  *
  * @param file_handler    file data handler
- * @param error           pointer to the error handler
+ * @param mcerror         pointer to the error handler
  *
  * @return 0 on success, negative value otherwise
  */
 
 int
-sftpfs_close_file (vfs_file_handler_t * file_handler, GError ** error)
+sftpfs_close_file (vfs_file_handler_t * file_handler, GError ** mcerror)
 {
     sftpfs_file_handler_data_t *file_handler_data;
 
-    (void) error;
+    mc_return_val_if_error (mcerror, -1);
 
     file_handler_data = (sftpfs_file_handler_data_t *) file_handler->data;
     if (file_handler_data == NULL)
@@ -355,15 +362,17 @@ sftpfs_close_file (vfs_file_handler_t * file_handler, GError ** error)
  * @param file_handler   file data handler
  * @param offset         file offset
  * @param whence         method of seek (at begin, at current, at end)
- * @param error          pointer to the error handler
+ * @param mcerror        pointer to the error handler
  *
  * @return 0 on success, negative value otherwise
  */
 
 off_t
-sftpfs_lseek (vfs_file_handler_t * file_handler, off_t offset, int whence, GError ** error)
+sftpfs_lseek (vfs_file_handler_t * file_handler, off_t offset, int whence, GError ** mcerror)
 {
     sftpfs_file_handler_data_t *file_handler_data;
+
+    mc_return_val_if_error (mcerror, 0);
 
     switch (whence)
     {
@@ -374,9 +383,8 @@ sftpfs_lseek (vfs_file_handler_t * file_handler, off_t offset, int whence, GErro
            badness." */
         if (file_handler->pos > offset || offset == 0)
         {
-            sftpfs_reopen (file_handler, error);
-            if (error != NULL && *error != NULL)
-                return 0;
+            sftpfs_reopen (file_handler, mcerror);
+            mc_return_val_if_error (mcerror, 0);
         }
         file_handler->pos = offset;
         break;
@@ -386,9 +394,8 @@ sftpfs_lseek (vfs_file_handler_t * file_handler, off_t offset, int whence, GErro
     case SEEK_END:
         if (file_handler->pos > file_handler->ino->st.st_size - offset)
         {
-            sftpfs_reopen (file_handler, error);
-            if (error != NULL && *error != NULL)
-                return 0;
+            sftpfs_reopen (file_handler, mcerror);
+            mc_return_val_if_error (mcerror, 0);
         }
         file_handler->pos = file_handler->ino->st.st_size - offset;
         break;

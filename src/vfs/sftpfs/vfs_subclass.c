@@ -30,6 +30,7 @@
 #include <string.h>             /* memset() */
 
 #include "lib/global.h"
+#include "lib/widget.h"
 #include "lib/vfs/utilvfs.h"
 
 #include "internal.h"
@@ -89,7 +90,7 @@ static int
 sftpfs_cb_open_connection (struct vfs_s_super *super,
                            const vfs_path_t * vpath, const vfs_path_element_t * vpath_element)
 {
-    GError *error = NULL;
+    GError *mcerror = NULL;
     sftpfs_super_data_t *sftpfs_super_data;
     int ret_value;
 
@@ -107,11 +108,10 @@ sftpfs_cb_open_connection (struct vfs_s_super *super,
     super->data = sftpfs_super_data;
     super->path_element = vfs_path_element_clone (vpath_element);
 
-    sftpfs_fill_connection_data_from_config (super, &error);
-    if (error != NULL)
+    sftpfs_fill_connection_data_from_config (super, &mcerror);
+    if (mc_error_message (&mcerror))
     {
-        vpath_element->class->verrno = error->code;
-        sftpfs_show_error (&error);
+        vpath_element->class->verrno = mcerror->code;
         return -1;
     }
 
@@ -120,8 +120,8 @@ sftpfs_cb_open_connection (struct vfs_s_super *super,
         vfs_s_new_inode (vpath_element->class, super,
                          vfs_s_default_stat (vpath_element->class, S_IFDIR | 0755));
 
-    ret_value = sftpfs_open_connection (super, &error);
-    sftpfs_show_error (&error);
+    ret_value = sftpfs_open_connection (super, &mcerror);
+    mc_error_message (&mcerror);
     return ret_value;
 }
 
@@ -136,11 +136,11 @@ sftpfs_cb_open_connection (struct vfs_s_super *super,
 static void
 sftpfs_cb_close_connection (struct vfs_class *me, struct vfs_s_super *super)
 {
-    GError *error = NULL;
+    GError *mcerror = NULL;
 
     (void) me;
-    sftpfs_close_connection (super, "Normal Shutdown", &error);
-    sftpfs_show_error (&error);
+    sftpfs_close_connection (super, "Normal Shutdown", &mcerror);
+    mc_error_message (&mcerror);
     g_free (super->data);
 }
 

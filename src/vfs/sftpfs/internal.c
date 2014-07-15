@@ -28,6 +28,7 @@
 #include <errno.h>
 
 #include "lib/global.h"
+#include "lib/util.h"
 
 #include "internal.h"
 
@@ -48,43 +49,23 @@ GString *sftpfs_filename_buffer = NULL;
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Show error message (if error have raised) and cleanup GError object.
- *
- * @param error pointer to object contains error message
- * @return TRUE if error message was printed, FALSE otherwise
- */
-
-gboolean
-sftpfs_show_error (GError ** error)
-{
-    if (error == NULL || *error == NULL)
-        return FALSE;
-
-    vfs_print_message ("(%d) %s", (*error)->code, (*error)->message);
-    g_error_free (*error);
-    *error = NULL;
-    return TRUE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
  * Convert libssh error to GError object.
  *
  * @param super_data   extra data for SFTP connection
  * @param libssh_errno errno from libssh
- * @param error        pointer to the error object
+ * @param mcerror      pointer to the error object
  */
 
 void
-sftpfs_ssherror_to_gliberror (sftpfs_super_data_t * super_data, int libssh_errno, GError ** error)
+sftpfs_ssherror_to_gliberror (sftpfs_super_data_t * super_data, int libssh_errno, GError ** mcerror)
 {
     char *err = NULL;
     int err_len;
 
-    g_return_if_fail (error == NULL || *error == NULL);
+    mc_return_if_error (mcerror);
 
     libssh2_session_last_error (super_data->session, &err, &err_len, 1);
-    g_set_error (error, MC_ERROR, libssh_errno, "%s", err);
+    mc_propagate_error (mcerror, libssh_errno, "%s", err);
     g_free (err);
 }
 
@@ -108,12 +89,12 @@ sftpfs_fix_filename (const char *file_name)
  * Awaiting for any activity on socket.
  *
  * @param super_data extra data for SFTP connection
- * @param error      unused
+ * @param mcerror    pointer to the error object
  * @return 0 if success, negative value otherwise
  */
 
 int
-sftpfs_waitsocket (sftpfs_super_data_t * super_data, GError ** error)
+sftpfs_waitsocket (sftpfs_super_data_t * super_data, GError ** mcerror)
 {
     struct timeval timeout = { 10, 0 };
     fd_set fd;
@@ -121,7 +102,7 @@ sftpfs_waitsocket (sftpfs_super_data_t * super_data, GError ** error)
     fd_set *readfd = NULL;
     int dir;
 
-    (void) error;
+    mc_return_val_if_error (mcerror, -1);
 
     FD_ZERO (&fd);
     FD_SET (super_data->socket_handle, &fd);
@@ -142,20 +123,22 @@ sftpfs_waitsocket (sftpfs_super_data_t * super_data, GError ** error)
 /**
  * Getting information about a symbolic link.
  *
- * @param vpath path to file, directory or symbolic link
- * @param buf   buffer for store stat-info
- * @param error pointer to error object
+ * @param vpath   path to file, directory or symbolic link
+ * @param buf     buffer for store stat-info
+ * @param mcerror pointer to error object
  * @return 0 if success, negative value otherwise
  */
 
 int
-sftpfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** error)
+sftpfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
 {
     struct vfs_s_super *super;
     sftpfs_super_data_t *super_data;
     LIBSSH2_SFTP_ATTRIBUTES attrs;
     int res;
     const vfs_path_element_t *path_element;
+
+    mc_return_val_if_error (mcerror, -1);
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
@@ -182,13 +165,12 @@ sftpfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** error)
 
         if (res != LIBSSH2_ERROR_EAGAIN)
         {
-            sftpfs_ssherror_to_gliberror (super_data, res, error);
+            sftpfs_ssherror_to_gliberror (super_data, res, mcerror);
             return -1;
         }
 
-        sftpfs_waitsocket (super_data, error);
-        if (error != NULL && *error != NULL)
-            return -1;
+        sftpfs_waitsocket (super_data, mcerror);
+        mc_return_val_if_error (mcerror, -1);
     }
     while (res == LIBSSH2_ERROR_EAGAIN);
 
@@ -218,20 +200,22 @@ sftpfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** error)
 /**
  * Getting information about a file or directory.
  *
- * @param vpath path to file or directory
- * @param buf   buffer for store stat-info
- * @param error pointer to error object
+ * @param vpath   path to file or directory
+ * @param buf     buffer for store stat-info
+ * @param mcerror pointer to error object
  * @return 0 if success, negative value otherwise
  */
 
 int
-sftpfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** error)
+sftpfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
 {
     struct vfs_s_super *super;
     sftpfs_super_data_t *super_data;
     LIBSSH2_SFTP_ATTRIBUTES attrs;
     int res;
     const vfs_path_element_t *path_element;
+
+    mc_return_val_if_error (mcerror, -1);
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
@@ -259,13 +243,12 @@ sftpfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** error)
 
         if (res != LIBSSH2_ERROR_EAGAIN)
         {
-            sftpfs_ssherror_to_gliberror (super_data, res, error);
+            sftpfs_ssherror_to_gliberror (super_data, res, mcerror);
             return -1;
         }
 
-        sftpfs_waitsocket (super_data, error);
-        if (error != NULL && *error != NULL)
-            return -1;
+        sftpfs_waitsocket (super_data, mcerror);
+        mc_return_val_if_error (mcerror, -1);
     }
     while (res == LIBSSH2_ERROR_EAGAIN);
 
@@ -296,20 +279,22 @@ sftpfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** error)
 /**
  * Read value of a symbolic link.
  *
- * @param vpath path to file or directory
- * @param buf   buffer for store stat-info
- * @param size  buffer size
- * @param error pointer to error object
+ * @param vpath   path to file or directory
+ * @param buf     buffer for store stat-info
+ * @param size    buffer size
+ * @param mcerror pointer to error object
  * @return 0 if success, negative value otherwise
  */
 
 int
-sftpfs_readlink (const vfs_path_t * vpath, char *buf, size_t size, GError ** error)
+sftpfs_readlink (const vfs_path_t * vpath, char *buf, size_t size, GError ** mcerror)
 {
     struct vfs_s_super *super;
     sftpfs_super_data_t *super_data;
     int res;
     const vfs_path_element_t *path_element;
+
+    mc_return_val_if_error (mcerror, -1);
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
@@ -335,13 +320,12 @@ sftpfs_readlink (const vfs_path_t * vpath, char *buf, size_t size, GError ** err
 
         if (res != LIBSSH2_ERROR_EAGAIN)
         {
-            sftpfs_ssherror_to_gliberror (super_data, res, error);
+            sftpfs_ssherror_to_gliberror (super_data, res, mcerror);
             return -1;
         }
 
-        sftpfs_waitsocket (super_data, error);
-        if (error != NULL && *error != NULL)
-            return -1;
+        sftpfs_waitsocket (super_data, mcerror);
+        mc_return_val_if_error (mcerror, -1);
     }
     while (res == LIBSSH2_ERROR_EAGAIN);
 
@@ -352,14 +336,14 @@ sftpfs_readlink (const vfs_path_t * vpath, char *buf, size_t size, GError ** err
 /**
  * Create symlink to file or directory
  *
- * @param vpath1 path to file or directory
- * @param vpath2 path to symlink
- * @param error  pointer to error object
+ * @param vpath1  path to file or directory
+ * @param vpath2  path to symlink
+ * @param mcerror pointer to error object
  * @return 0 if success, negative value otherwise
  */
 
 int
-sftpfs_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** error)
+sftpfs_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** mcerror)
 {
     struct vfs_s_super *super;
     sftpfs_super_data_t *super_data;
@@ -367,6 +351,8 @@ sftpfs_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** 
     const vfs_path_element_t *path_element2;
     char *tmp_path;
     int res;
+
+    mc_return_val_if_error (mcerror, -1);
 
     path_element2 = vfs_path_get_by_index (vpath2, -1);
 
@@ -399,13 +385,13 @@ sftpfs_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** 
 
         if (res != LIBSSH2_ERROR_EAGAIN)
         {
-            sftpfs_ssherror_to_gliberror (super_data, res, error);
+            sftpfs_ssherror_to_gliberror (super_data, res, mcerror);
             g_free (tmp_path);
             return -1;
         }
 
-        sftpfs_waitsocket (super_data, error);
-        if (error != NULL && *error != NULL)
+        sftpfs_waitsocket (super_data, mcerror);
+        if (mcerror != NULL && *mcerror != NULL)
         {
             g_free (tmp_path);
             return -1;
@@ -421,20 +407,22 @@ sftpfs_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** 
 /**
  * Changes the permissions of the file.
  *
- * @param vpath path to file or directory
- * @param mode  mode (see man 2 open)
- * @param error pointer to error object
+ * @param vpath   path to file or directory
+ * @param mode    mode (see man 2 open)
+ * @param mcerror pointer to error object
  * @return 0 if success, negative value otherwise
  */
 
 int
-sftpfs_chmod (const vfs_path_t * vpath, mode_t mode, GError ** error)
+sftpfs_chmod (const vfs_path_t * vpath, mode_t mode, GError ** mcerror)
 {
     struct vfs_s_super *super;
     sftpfs_super_data_t *super_data;
     LIBSSH2_SFTP_ATTRIBUTES attrs;
     int res;
     const vfs_path_element_t *path_element;
+
+    mc_return_val_if_error (mcerror, -1);
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
@@ -461,13 +449,12 @@ sftpfs_chmod (const vfs_path_t * vpath, mode_t mode, GError ** error)
 
         if (res != LIBSSH2_ERROR_EAGAIN)
         {
-            sftpfs_ssherror_to_gliberror (super_data, res, error);
+            sftpfs_ssherror_to_gliberror (super_data, res, mcerror);
             return -1;
         }
 
-        sftpfs_waitsocket (super_data, error);
-        if (error != NULL && *error != NULL)
-            return -1;
+        sftpfs_waitsocket (super_data, mcerror);
+        mc_return_val_if_error (mcerror, -1);
     }
     while (res == LIBSSH2_ERROR_EAGAIN);
 
@@ -485,13 +472,12 @@ sftpfs_chmod (const vfs_path_t * vpath, mode_t mode, GError ** error)
             break;
         else if (res != LIBSSH2_ERROR_EAGAIN)
         {
-            sftpfs_ssherror_to_gliberror (super_data, res, error);
+            sftpfs_ssherror_to_gliberror (super_data, res, mcerror);
             return -1;
         }
 
-        sftpfs_waitsocket (super_data, error);
-        if (error != NULL && *error != NULL)
-            return -1;
+        sftpfs_waitsocket (super_data, mcerror);
+        mc_return_val_if_error (mcerror, -1);
     }
     while (res == LIBSSH2_ERROR_EAGAIN);
     return res;
@@ -501,18 +487,20 @@ sftpfs_chmod (const vfs_path_t * vpath, mode_t mode, GError ** error)
 /**
  * Delete a name from the file system.
  *
- * @param vpath path to file or directory
- * @param error pointer to error object
+ * @param vpath   path to file or directory
+ * @param mcerror pointer to error object
  * @return 0 if success, negative value otherwise
  */
 
 int
-sftpfs_unlink (const vfs_path_t * vpath, GError ** error)
+sftpfs_unlink (const vfs_path_t * vpath, GError ** mcerror)
 {
     struct vfs_s_super *super;
     sftpfs_super_data_t *super_data;
     int res;
     const vfs_path_element_t *path_element;
+
+    mc_return_val_if_error (mcerror, -1);
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
@@ -540,13 +528,12 @@ sftpfs_unlink (const vfs_path_t * vpath, GError ** error)
 
         if (res != LIBSSH2_ERROR_EAGAIN)
         {
-            sftpfs_ssherror_to_gliberror (super_data, res, error);
+            sftpfs_ssherror_to_gliberror (super_data, res, mcerror);
             return -1;
         }
 
-        sftpfs_waitsocket (super_data, error);
-        if (error != NULL && *error != NULL)
-            return -1;
+        sftpfs_waitsocket (super_data, mcerror);
+        mc_return_val_if_error (mcerror, -1);
     }
     while (res == LIBSSH2_ERROR_EAGAIN);
 
@@ -557,14 +544,14 @@ sftpfs_unlink (const vfs_path_t * vpath, GError ** error)
 /**
  * Rename a file, moving it between directories if required.
  *
- * @param vpath1 path to source file or directory
- * @param vpath2 path to destination file or directory
- * @param error  pointer to error object
+ * @param vpath1   path to source file or directory
+ * @param vpath2   path to destination file or directory
+ * @param mcerror  pointer to error object
  * @return 0 if success, negative value otherwise
  */
 
 int
-sftpfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** error)
+sftpfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** mcerror)
 {
     struct vfs_s_super *super;
     sftpfs_super_data_t *super_data;
@@ -573,6 +560,7 @@ sftpfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** e
     char *tmp_path;
     int res;
 
+    mc_return_val_if_error (mcerror, -1);
     path_element2 = vfs_path_get_by_index (vpath2, -1);
 
     if (vfs_s_get_path (vpath2, &super, 0) == NULL)
@@ -603,13 +591,13 @@ sftpfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** e
 
         if (res != LIBSSH2_ERROR_EAGAIN)
         {
-            sftpfs_ssherror_to_gliberror (super_data, res, error);
+            sftpfs_ssherror_to_gliberror (super_data, res, mcerror);
             g_free (tmp_path);
             return -1;
         }
 
-        sftpfs_waitsocket (super_data, error);
-        if (error != NULL && *error != NULL)
+        sftpfs_waitsocket (super_data, mcerror);
+        if (mcerror != NULL && *mcerror != NULL)
         {
             g_free (tmp_path);
             return -1;

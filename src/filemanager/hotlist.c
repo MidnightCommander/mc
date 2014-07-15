@@ -1466,11 +1466,13 @@ load_hotlist (void)
 
     if (remove_old_list)
     {
-        GError *error = NULL;
+        GError *mcerror = NULL;
 
         clean_up_hotlist_groups ("Hotlist");
-        if (!mc_config_save_file (mc_main_config, &error))
-            setup_save_config_show_error (mc_main_config->ini_path, &error);
+        if (!mc_config_save_file (mc_main_config, &mcerror))
+            setup_save_config_show_error (mc_main_config->ini_path, &mcerror);
+
+        mc_error_message (&mcerror);
     }
 
     stat (hotlist_file_name, &stat_buf);

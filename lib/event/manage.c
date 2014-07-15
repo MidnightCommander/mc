@@ -27,6 +27,7 @@
 #include <config.h>
 
 #include "lib/global.h"
+#include "lib/util.h"
 #include "lib/event.h"
 
 #include "internal.h"
@@ -68,12 +69,12 @@ mc_event_add (const gchar * event_group_name, const gchar * event_name,
     GPtrArray *callbacks;
     mc_event_callback_t *cb;
 
+    mc_return_val_if_error (mcerror, FALSE);
+
     if (mc_event_grouplist == NULL || event_group_name == NULL || event_name == NULL
         || event_callback == NULL)
     {
-        g_propagate_error (mcerror,
-                           g_error_new (MC_ERROR, 1,
-                                        _("Check input data! Some of parameters are NULL!")));
+        mc_propagate_error (mcerror, 1, "%s", _("Check input data! Some of parameters are NULL!"));
         return FALSE;
     }
 
@@ -159,6 +160,8 @@ mc_event_get_event_group_by_name (const gchar * event_group_name, gboolean creat
 {
     GTree *event_group;
 
+    mc_return_val_if_error (mcerror, FALSE);
+
     event_group = (GTree *) g_tree_lookup (mc_event_grouplist, (gconstpointer) event_group_name);
     if (event_group == NULL && create_new)
     {
@@ -169,10 +172,8 @@ mc_event_get_event_group_by_name (const gchar * event_group_name, gboolean creat
                              (GDestroyNotify) mc_event_group_destroy_value);
         if (event_group == NULL)
         {
-            g_propagate_error (mcerror,
-                               g_error_new (MC_ERROR, 1,
-                                            _("Unable to create group '%s' for events!"),
-                                            event_group_name));
+            mc_propagate_error (mcerror, 1, _("Unable to create group '%s' for events!"),
+                                event_group_name);
             return NULL;
         }
         g_tree_insert (mc_event_grouplist, g_strdup (event_group_name), (gpointer) event_group);
@@ -188,15 +189,15 @@ mc_event_get_event_by_name (GTree * event_group, const gchar * event_name, gbool
 {
     GPtrArray *callbacks;
 
+    mc_return_val_if_error (mcerror, FALSE);
+
     callbacks = (GPtrArray *) g_tree_lookup (event_group, (gconstpointer) event_name);
     if (callbacks == NULL && create_new)
     {
         callbacks = g_ptr_array_new ();
         if (callbacks == NULL)
         {
-            g_propagate_error (mcerror,
-                               g_error_new (MC_ERROR, 1,
-                                            _("Unable to create event '%s'!"), event_name));
+            mc_propagate_error (mcerror, 1, _("Unable to create event '%s'!"), event_name);
             return NULL;
         }
         g_tree_insert (event_group, g_strdup (event_name), (gpointer) callbacks);

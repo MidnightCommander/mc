@@ -2413,7 +2413,7 @@ mark_file_left (WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-panel_select_unselect_files (WPanel *panel, const char *title, const char *history_name,
+panel_select_unselect_files (WPanel * panel, const char *title, const char *history_name,
                              gboolean do_select)
 {
     int files_only = (panels_options.select_flags & SELECT_FILES_ONLY) != 0;
@@ -2485,7 +2485,7 @@ panel_select_unselect_files (WPanel *panel, const char *title, const char *histo
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-panel_select_files (WPanel *panel)
+panel_select_files (WPanel * panel)
 {
     panel_select_unselect_files (panel, _("Select"), ":select_cmd: Select ", TRUE);
 }
@@ -2493,7 +2493,7 @@ panel_select_files (WPanel *panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-panel_unselect_files (WPanel *panel)
+panel_unselect_files (WPanel * panel)
 {
     panel_select_unselect_files (panel, _("Unselect"), ":unselect_cmd: Unselect ", FALSE);
 }
@@ -2501,7 +2501,7 @@ panel_unselect_files (WPanel *panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-panel_select_invert_files (WPanel *panel)
+panel_select_invert_files (WPanel * panel)
 {
     int i;
 

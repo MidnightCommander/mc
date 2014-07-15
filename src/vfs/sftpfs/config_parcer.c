@@ -196,19 +196,21 @@ sftpfs_fill_config_entity_from_string (sftpfs_ssh_config_entity_t * config_entit
  * @param ssh_config_handler file descriptor for the ssh config file
  * @param config_entity      config entity structure
  * @param vpath_element      path element with host data (hostname, port)
- * @param error              pointer to the error handler
+ * @param mcerror            pointer to the error handler
  * @return TRUE if config entity was filled successfully, FALSE otherwise
  */
 
 static gboolean
 sftpfs_fill_config_entity_from_config (FILE * ssh_config_handler,
                                        sftpfs_ssh_config_entity_t * config_entity,
-                                       const vfs_path_element_t * vpath_element, GError ** error)
+                                       const vfs_path_element_t * vpath_element, GError ** mcerror)
 {
     char buffer[BUF_MEDIUM];
     gboolean host_block_hit = FALSE;
     gboolean pattern_block_hit = FALSE;
     mc_search_t *host_regexp;
+
+    mc_return_val_if_error (mcerror, FALSE);
 
     host_regexp = mc_search_new ("^\\s*host\\s+(.*)$", -1, DEFAULT_CHARSET);
     host_regexp->search_type = MC_SEARCH_T_REGEX;
@@ -221,9 +223,9 @@ sftpfs_fill_config_entity_from_config (FILE * ssh_config_handler,
         {
             if (errno != 0)
             {
-                g_set_error (error, MC_ERROR, errno,
-                             _("sftp: an error occurred while reading %s: %s"), SFTPFS_SSH_CONFIG,
-                             strerror (errno));
+                mc_propagate_error (mcerror, errno,
+                                    _("sftp: an error occurred while reading %s: %s"),
+                                    SFTPFS_SSH_CONFIG, strerror (errno));
                 mc_search_free (host_regexp);
                 return FALSE;
             }
@@ -277,16 +279,18 @@ sftpfs_fill_config_entity_from_config (FILE * ssh_config_handler,
  * Open the ssh config file and fill config entity.
  *
  * @param vpath_element path element with host data (hostname, port)
- * @param error         pointer to the error handler
+ * @param mcerror       pointer to the error handler
  * @return newly allocated config entity structure
  */
 
 static sftpfs_ssh_config_entity_t *
-sftpfs_get_config_entity (const vfs_path_element_t * vpath_element, GError ** error)
+sftpfs_get_config_entity (const vfs_path_element_t * vpath_element, GError ** mcerror)
 {
     sftpfs_ssh_config_entity_t *config_entity;
     FILE *ssh_config_handler;
     char *config_filename;
+
+    mc_return_val_if_error (mcerror, FALSE);
 
     config_entity = g_new0 (sftpfs_ssh_config_entity_t, 1);
     config_entity->password_auth = TRUE;
@@ -303,7 +307,7 @@ sftpfs_get_config_entity (const vfs_path_element_t * vpath_element, GError ** er
         gboolean ok;
 
         ok = sftpfs_fill_config_entity_from_config
-            (ssh_config_handler, config_entity, vpath_element, error);
+            (ssh_config_handler, config_entity, vpath_element, mcerror);
         fclose (ssh_config_handler);
 
         if (!ok)
@@ -320,7 +324,7 @@ sftpfs_get_config_entity (const vfs_path_element_t * vpath_element, GError ** er
         {
             sftpfs_ssh_config_entity_free (config_entity);
             config_entity = NULL;
-            g_set_error (error, MC_ERROR, EPERM, _("sftp: Unable to get current user name."));
+            mc_propagate_error (mcerror, EPERM, "%s", _("sftp: Unable to get current user name."));
         }
     }
     return config_entity;
@@ -337,14 +341,16 @@ sftpfs_get_config_entity (const vfs_path_element_t * vpath_element, GError ** er
  */
 
 void
-sftpfs_fill_connection_data_from_config (struct vfs_s_super *super, GError ** error)
+sftpfs_fill_connection_data_from_config (struct vfs_s_super *super, GError ** mcerror)
 {
     sftpfs_super_data_t *super_data;
     sftpfs_ssh_config_entity_t *config_entity;
 
+    mc_return_if_error (mcerror);
+
     super_data = (sftpfs_super_data_t *) super->data;
 
-    config_entity = sftpfs_get_config_entity (super->path_element, error);
+    config_entity = sftpfs_get_config_entity (super->path_element, mcerror);
     if (config_entity == NULL)
         return;
 

@@ -1399,3 +1399,57 @@ guess_message_value (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Propagate error in simple way.
+ *
+ * @param dest error return location
+ * @param code error code
+ * @param format printf()-style format for error message
+ * @param ... parameters for message format
+ */
+
+void
+mc_propagate_error (GError ** dest, int code, const char *format, ...)
+{
+    if (dest != NULL && *dest == NULL)
+    {
+        GError *tmp_error;
+        va_list args;
+
+        va_start (args, format);
+        tmp_error = g_error_new_valist (MC_ERROR, code, format, args);
+        va_end (args);
+
+        g_propagate_error (dest, tmp_error);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Replace existing error in simple way.
+ *
+ * @param dest error return location
+ * @param code error code
+ * @param format printf()-style format for error message
+ * @param ... parameters for message format
+ */
+
+void
+mc_replace_error (GError ** dest, int code, const char *format, ...)
+{
+    if (dest != NULL)
+    {
+        GError *tmp_error;
+        va_list args;
+
+        va_start (args, format);
+        tmp_error = g_error_new_valist (MC_ERROR, code, format, args);
+        va_end (args);
+
+        g_error_free (*dest);
+        *dest = NULL;
+        g_propagate_error (dest, tmp_error);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */

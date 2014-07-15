@@ -137,3 +137,32 @@ g_list_free_full (GList * list, GDestroyNotify free_func)
 #endif /* ! GLIB_CHECK_VERSION (2, 28, 0) */
 
 /* --------------------------------------------------------------------------------------------- */
+#if ! GLIB_CHECK_VERSION (2, 22, 0)
+/**
+ * Creates a new GError with the given domain and code, and a message formatted with format.
+ * @param domain error domain
+ * @param code error code
+ * @param format printf()-style format for error message
+ * @param args va_list of parameters for the message format
+ * @returns a new GError
+ */
+
+GError *
+g_error_new_valist (GQuark domain, gint code, const gchar * format, va_list args)
+{
+    char *message;
+    GError *ret_value;
+
+    va_start (ap, format);
+    message = g_strdup_vprintf (format, ap);
+    va_end (ap);
+
+    ret_value = g_error_new_literal (domain, code, message);
+    g_free (message);
+
+    return ret_value;
+}
+
+#endif /* ! GLIB_CHECK_VERSION (2, 22, 0) */
+
+/* --------------------------------------------------------------------------------------------- */
