@@ -1,21 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-11 15:14+0400\n"
+"POT-Creation-Date: 2014-07-22 14:35+0400\n"
 "PO-Revision-Date: 2014-02-19 09:12+0000\n"
 "Last-Translator: aborodin <aborodin@vmail.ru>\n"
-"Language-Team: Finnish (http://www.transifex.com/projects/p/mc/language/fi/)\n"
+"Language-Team: Finnish (http://www.transifex.com/projects/p/mc/language/"
+"fi/)\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
@@ -54,7 +55,10 @@ msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
-msgstr "Tiedosto \"%s\" on juuri nyt käsittelyssä.\nKäyttäjä: %s\nProsessin ID: %d"
+msgstr ""
+"Tiedosto \"%s\" on juuri nyt käsittelyssä.\n"
+"Käyttäjä: %s\n"
+"Prosessin ID: %d"
 
 msgid "File locked"
 msgstr "Tiedosto lukittu"
@@ -122,13 +126,17 @@ msgstr ""
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr "Teemaa '%s' ei pysty lataamaan.\nPerusteema asetettu."
+msgstr ""
+"Teemaa '%s' ei pysty lataamaan.\n"
+"Perusteema asetettu."
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr "Teemaa '%s' ei pysty käsittelemään.\nPerusteema asetettu."
+msgstr ""
+"Teemaa '%s' ei pysty käsittelemään.\n"
+"Perusteema asetettu."
 
 #, c-format
 msgid ""
@@ -424,7 +432,9 @@ msgstr ""
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr "Näytön koko %dx%d ei ole yhteensopiva.\nTarkista TERM.\n"
+msgstr ""
+"Näytön koko %dx%d ei ole yhteensopiva.\n"
+"Tarkista TERM.\n"
 
 msgid "Warning"
 msgstr "Varoitus"
@@ -525,6 +535,13 @@ msgstr "Taustaprosessi:"
 msgid "Error"
 msgstr "Virhe"
 
+#, c-format
+msgid "%d: %s"
+msgstr ""
+
+msgid "&Abort"
+msgstr ""
+
 msgid "Displays the current version"
 msgstr ""
 
@@ -618,7 +635,7 @@ msgid ""
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate, editbg, editframe, editframeactive\n"
 "                 editframedrag\n"
-"   Viewer:       viewbold, viewunderline, viewselected\n"
+"   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
 
@@ -842,8 +859,19 @@ msgid "< Reload Current Syntax >"
 msgstr ""
 
 #, c-format
+msgid "Loading: %3d%%"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+#, c-format
 msgid "Cannot open %s for reading"
 msgstr ""
+
+#, fuzzy
+msgid "Load file"
+msgstr "tiedosto"
 
 #, c-format
 msgid "Error reading %s"
@@ -871,6 +899,14 @@ msgstr ""
 msgid "Cannot open pipe for reading: %s"
 msgstr ""
 
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr ""
+
+#, c-format
+msgid "Searching %s"
+msgstr ""
+
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
 
@@ -889,7 +925,7 @@ msgstr ""
 msgid "Cannot open file for writing: %s"
 msgstr ""
 
-msgid "The file you are saving is not finished with a newline"
+msgid "The file you are saving does not end with a newline."
 msgstr ""
 
 msgid "C&ontinue"
@@ -917,6 +953,9 @@ msgid "Save As"
 msgstr ""
 
 msgid "Block is large, you may not be able to undo this action"
+msgstr ""
+
+msgid "Collect completions"
 msgstr ""
 
 msgid "&Quick save"
@@ -1749,8 +1788,7 @@ msgstr "&Käänteinen"
 msgid "Sort order"
 msgstr "Järjestys"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 msgid "Confirmation|&Delete"
 msgstr ""
 
@@ -1791,9 +1829,6 @@ msgid "Display bits"
 msgstr ""
 
 msgid "Input / display codepage:"
-msgstr ""
-
-msgid "&Select"
 msgstr ""
 
 msgid "Directory tree"
@@ -1974,15 +2009,6 @@ msgstr ""
 msgid "Set expression for filtering filenames"
 msgstr ""
 
-msgid "&Files only"
-msgstr ""
-
-msgid "&Using shell patterns"
-msgstr ""
-
-msgid "&Case sensitive"
-msgstr ""
-
 #, c-format
 msgid "Link %s to:"
 msgstr ""
@@ -2021,12 +2047,6 @@ msgid "Create a new Directory"
 msgstr "Luo uusi hakemisto"
 
 msgid "Enter directory name:"
-msgstr ""
-
-msgid "Select"
-msgstr ""
-
-msgid "Unselect"
 msgstr ""
 
 msgid "Extension file edit"
@@ -2106,6 +2126,9 @@ msgstr ""
 msgid ""
 "Enter device (without /dev/) to undelete\n"
 "files on: (F1 for details)"
+msgstr ""
+
+msgid "Directory scanning"
 msgstr ""
 
 msgid "Setup"
@@ -2225,9 +2248,6 @@ msgstr ""
 msgid ""
 "Cannot create target symlink \"%s\"\n"
 "%s"
-msgstr ""
-
-msgid "&Abort"
 msgstr ""
 
 msgid "Ski&p all"
@@ -2446,13 +2466,8 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Directory scanning"
-msgstr ""
-
 #, c-format
-msgid ""
-"%s\n"
-"Directories: %zd, total size: %s"
+msgid "Directories: %zd, total size: %s"
 msgstr ""
 
 msgid "Cannot operate on \"..\"!"
@@ -2560,6 +2575,12 @@ msgstr ""
 msgid "Target"
 msgstr ""
 
+msgid "Deleting"
+msgstr ""
+
+msgid "&Using shell patterns"
+msgstr ""
+
 msgid "to:"
 msgstr ""
 
@@ -2652,10 +2673,6 @@ msgid "Finished (ignored %zd directory)"
 msgid_plural "Finished (ignored %zd directories)"
 msgstr[0] ""
 msgstr[1] ""
-
-#, c-format
-msgid "Searching %s"
-msgstr ""
 
 msgid "Searching"
 msgstr ""
@@ -3210,6 +3227,18 @@ msgstr ""
 msgid "Unknown tag on display format:"
 msgstr ""
 
+msgid "&Files only"
+msgstr ""
+
+msgid "&Case sensitive"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "Unselect"
+msgstr ""
+
 msgid "Do you really want to execute?"
 msgstr ""
 
@@ -3595,7 +3624,8 @@ msgid "fish: Waiting for initial line..."
 msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Sori, mutta emme voi tehdä salasanan authenkaatiota yhteyksille juuri nyt."
+msgstr ""
+"Sori, mutta emme voi tehdä salasanan authenkaatiota yhteyksille juuri nyt."
 
 #, c-format
 msgid "fish: Password is required for %s"
@@ -3755,13 +3785,17 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr "Varoitus: Invalidi rivi %s:\n%s\n"
+msgstr ""
+"Varoitus: Invalidi rivi %s:\n"
+"%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr "Virhe: Virheellinen lippu %c kohteessa %s:\n%s\n"
+msgstr ""
+"Virhe: Virheellinen lippu %c kohteessa %s:\n"
+"%s\n"
 
 #, c-format
 msgid "sftp: an error occurred while reading %s: %s"
@@ -4028,9 +4062,6 @@ msgstr ""
 msgid ""
 "Cannot open \"%s\" in parse mode\n"
 "%s"
-msgstr ""
-
-msgid "Seeking to search result"
 msgstr ""
 
 msgid "Search done"

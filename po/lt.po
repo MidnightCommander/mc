@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # nerijus <nerijus@users.sourceforge.net>, 2011
 # Slava Zanko <slavazanko@gmail.com>, 2011
@@ -9,15 +9,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-11 15:14+0400\n"
+"POT-Creation-Date: 2014-07-22 14:35+0400\n"
 "PO-Revision-Date: 2014-02-19 09:12+0000\n"
 "Last-Translator: aborodin <aborodin@vmail.ru>\n"
-"Language-Team: Lithuanian (http://www.transifex.com/projects/p/mc/language/lt/)\n"
+"Language-Team: Lithuanian (http://www.transifex.com/projects/p/mc/language/"
+"lt/)\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: lt\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -425,7 +427,9 @@ msgstr "Aplinkos kintamasis TERM nenustatytas!\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr "Ekrano dydis %dx%d nepalaikomas.\nPatikrinkite TERM aplinkos kintamąjį.\n"
+msgstr ""
+"Ekrano dydis %dx%d nepalaikomas.\n"
+"Patikrinkite TERM aplinkos kintamąjį.\n"
 
 msgid "Warning"
 msgstr "Įspėjimas"
@@ -526,6 +530,13 @@ msgstr "Foninis procesas:"
 msgid "Error"
 msgstr "Klaida"
 
+#, c-format
+msgid "%d: %s"
+msgstr ""
+
+msgid "&Abort"
+msgstr "Nutr&aukti"
+
 msgid "Displays the current version"
 msgstr "Parodo dabartinę versiją"
 
@@ -619,7 +630,7 @@ msgid ""
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate, editbg, editframe, editframeactive\n"
 "                 editframedrag\n"
-"   Viewer:       viewbold, viewunderline, viewselected\n"
+"   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
 
@@ -843,8 +854,19 @@ msgid "< Reload Current Syntax >"
 msgstr "< Įkelti esamą sintaksę iš naujo >"
 
 #, c-format
+msgid "Loading: %3d%%"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+#, c-format
 msgid "Cannot open %s for reading"
 msgstr ""
+
+#, fuzzy
+msgid "Load file"
+msgstr "failą"
 
 #, c-format
 msgid "Error reading %s"
@@ -872,6 +894,14 @@ msgstr ""
 msgid "Cannot open pipe for reading: %s"
 msgstr ""
 
+#, fuzzy, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Ieškoma %s"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Ieškoma %s"
+
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
 
@@ -890,7 +920,7 @@ msgstr ""
 msgid "Cannot open file for writing: %s"
 msgstr ""
 
-msgid "The file you are saving is not finished with a newline"
+msgid "The file you are saving does not end with a newline."
 msgstr ""
 
 msgid "C&ontinue"
@@ -919,6 +949,10 @@ msgstr ""
 
 msgid "Block is large, you may not be able to undo this action"
 msgstr ""
+
+#, fuzzy
+msgid "Collect completions"
+msgstr "Nustatymai"
 
 msgid "&Quick save"
 msgstr ""
@@ -1750,8 +1784,7 @@ msgstr "A&tbulai"
 msgid "Sort order"
 msgstr "Rikiavimo tvarka"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 msgid "Confirmation|&Delete"
 msgstr ""
 
@@ -1793,9 +1826,6 @@ msgstr ""
 
 msgid "Input / display codepage:"
 msgstr "Įvesties / išvesties kodų lentelė:"
-
-msgid "&Select"
-msgstr "Ž&ymėti"
 
 msgid "Directory tree"
 msgstr ""
@@ -1975,15 +2005,6 @@ msgstr ""
 msgid "Set expression for filtering filenames"
 msgstr ""
 
-msgid "&Files only"
-msgstr ""
-
-msgid "&Using shell patterns"
-msgstr "Na&udojant aplinkos išraiškas"
-
-msgid "&Case sensitive"
-msgstr ""
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Sukurti nuorodą iš „%s“ į:"
@@ -2022,12 +2043,6 @@ msgid "Create a new Directory"
 msgstr "Sukurti naują aplanką"
 
 msgid "Enter directory name:"
-msgstr ""
-
-msgid "Select"
-msgstr ""
-
-msgid "Unselect"
 msgstr ""
 
 msgid "Extension file edit"
@@ -2107,6 +2122,9 @@ msgstr ""
 msgid ""
 "Enter device (without /dev/) to undelete\n"
 "files on: (F1 for details)"
+msgstr ""
+
+msgid "Directory scanning"
 msgstr ""
 
 msgid "Setup"
@@ -2228,9 +2246,6 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "&Abort"
-msgstr "Nutr&aukti"
-
 msgid "Ski&p all"
 msgstr ""
 
@@ -2281,25 +2296,33 @@ msgstr ""
 msgid ""
 "Cannot remove file \"%s\"\n"
 "%s"
-msgstr "Nepavyko pašalinti failo \"%s\"\n%s"
+msgstr ""
+"Nepavyko pašalinti failo \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot delete file \"%s\"\n"
 "%s"
-msgstr "Nepavyko pašalinti failo \"%s\"\n%s"
+msgstr ""
+"Nepavyko pašalinti failo \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot remove directory \"%s\"\n"
 "%s"
-msgstr "Nepavyko pašalinti aplanko \"%s\"\n%s"
+msgstr ""
+"Nepavyko pašalinti aplanko \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot overwrite directory \"%s\"\n"
 "%s"
-msgstr "Nepavyko perrašyti aplanko \"%s\"\n%s"
+msgstr ""
+"Nepavyko perrašyti aplanko \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2439,7 +2462,9 @@ msgstr ""
 msgid ""
 "Cannot overwrite file \"%s\"\n"
 "%s"
-msgstr "Nepavyko perrašyti failo \"%s\"\n%s"
+msgstr ""
+"Nepavyko perrašyti failo \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -2447,13 +2472,8 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Directory scanning"
-msgstr ""
-
 #, c-format
-msgid ""
-"%s\n"
-"Directories: %zd, total size: %s"
+msgid "Directories: %zd, total size: %s"
 msgstr ""
 
 msgid "Cannot operate on \"..\"!"
@@ -2561,6 +2581,13 @@ msgstr "Iš"
 msgid "Target"
 msgstr "Į"
 
+#, fuzzy
+msgid "Deleting"
+msgstr "Š&alinti"
+
+msgid "&Using shell patterns"
+msgstr "Na&udojant aplinkos išraiškas"
+
 msgid "to:"
 msgstr "į:"
 
@@ -2654,10 +2681,6 @@ msgid_plural "Finished (ignored %zd directories)"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-
-#, c-format
-msgid "Searching %s"
-msgstr "Ieškoma %s"
 
 msgid "Searching"
 msgstr "Ieškoma"
@@ -3216,6 +3239,18 @@ msgstr ""
 msgid "Unknown tag on display format:"
 msgstr ""
 
+msgid "&Files only"
+msgstr ""
+
+msgid "&Case sensitive"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "Unselect"
+msgstr ""
+
 msgid "Do you really want to execute?"
 msgstr ""
 
@@ -3265,7 +3300,9 @@ msgstr "Rasti SUID ir SGID programas"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr " Nepavyko atverti failo %s rašymui:\n%s\n"
+msgstr ""
+" Nepavyko atverti failo %s rašymui:\n"
+"%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3304,7 +3341,9 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr "Nepavyko įrašyti į failą %s:\n%s\n"
+msgstr ""
+"Nepavyko įrašyti į failą %s:\n"
+"%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3328,7 +3367,9 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr "Failas %s nepriklauso nei „root“, nei jums arba visi gali į ją rašyti.\nJo naudojimas gali būti nesaugus"
+msgstr ""
+"Failas %s nepriklauso nei „root“, nei jums arba visi gali į ją rašyti.\n"
+"Jo naudojimas gali būti nesaugus"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3389,7 +3430,15 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr "Paspauskite %s\nir palaukite, kol dings šis pranešimas.\n\nTuomet paspauskite jį dar kartą ir patikrinkite,\nar prie mygtuko atsirado „OK“.\n\nJei norite atsisakyti, paspauskite „Grįžti“ („Esc“) \nir palaukite."
+msgstr ""
+"Paspauskite %s\n"
+"ir palaukite, kol dings šis pranešimas.\n"
+"\n"
+"Tuomet paspauskite jį dar kartą ir patikrinkite,\n"
+"ar prie mygtuko atsirado „OK“.\n"
+"\n"
+"Jei norite atsisakyti, paspauskite „Grįžti“ („Esc“) \n"
+"ir palaukite."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3405,7 +3454,9 @@ msgstr "OK"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr "Panašu, kad visi klavišai jau veikia\ngerai. Tai puiku."
+msgstr ""
+"Panašu, kad visi klavišai jau veikia\n"
+"gerai. Tai puiku."
 
 msgid "&Discard"
 msgstr "A&tmesti"
@@ -3413,7 +3464,9 @@ msgstr "A&tmesti"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr "Puiku! Turite išsamią terminalo duomenų bazę!\nVisi klavišai veikia puikiai."
+msgstr ""
+"Puiku! Turite išsamią terminalo duomenų bazę!\n"
+"Visi klavišai veikia puikiai."
 
 msgid ""
 "Press all the keys mentioned here. After you have done it, check\n"
@@ -3459,7 +3512,10 @@ msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
 "Subshell support will be disabled."
-msgstr "GNU Midnight Commander jau paleistas\nšiame terminale.\n„Subshell“ palaikymas neveiks."
+msgstr ""
+"GNU Midnight Commander jau paleistas\n"
+"šiame terminale.\n"
+"„Subshell“ palaikymas neveiks."
 
 #, c-format
 msgid "Cannot open named pipe %s\n"
@@ -3548,13 +3604,17 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr "Nepvyko atverti „cpio“ archyvo\n%s"
+msgstr ""
+"Nepvyko atverti „cpio“ archyvo\n"
+"%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr "Ankstyva „cpio“ archyvo pabaiga\n%s"
+msgstr ""
+"Ankstyva „cpio“ archyvo pabaiga\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3562,7 +3622,11 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr "Nesutampančios nuorodos:\n%s\n„cpio“ archyve\n%s"
+msgstr ""
+"Nesutampančios nuorodos:\n"
+"%s\n"
+"„cpio“ archyve\n"
+"%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3572,19 +3636,25 @@ msgstr "Faile „%s“ turi dvigubų įrašų! Praleidžiama!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr "Sugadinta „cpio“ archyvo antraštė:\n%s"
+msgstr ""
+"Sugadinta „cpio“ archyvo antraštė:\n"
+"%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr "Netikėta failo pabaiga\n%s"
+msgstr ""
+"Netikėta failo pabaiga\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr "Nepavyko atverti „%s“ archyvo\n%s"
+msgstr ""
+"Nepavyko atverti „%s“ archyvo\n"
+"%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "Prieštaringas „extfs“ archyvas"
@@ -3761,13 +3831,17 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr "Įspėjimas: klaidinga eilutė faile %s:\n%s\n"
+msgstr ""
+"Įspėjimas: klaidinga eilutė faile %s:\n"
+"%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr "Įspėjimas: klaidingas parametras %c faile %s:\n%s\n"
+msgstr ""
+"Įspėjimas: klaidingas parametras %c faile %s:\n"
+"%s\n"
 
 #, c-format
 msgid "sftp: an error occurred while reading %s: %s"
@@ -3856,7 +3930,9 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr "Nepavyko atverti tar archyvo\n%s"
+msgstr ""
+"Nepavyko atverti tar archyvo\n"
+"%s"
 
 msgid "Inconsistent tar archive"
 msgstr "Nevientisas tar archyvas"
@@ -4036,9 +4112,6 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Seeking to search result"
-msgstr ""
-
 msgid "Search done"
 msgstr ""
 
@@ -4047,3 +4120,6 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "&Select"
+#~ msgstr "Ž&ymėti"

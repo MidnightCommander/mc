@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Cybjit <cybjit@gmail.com>, 2012
 # Slava Zanko <slavazanko@gmail.com>, 2011
@@ -9,14 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-11 15:14+0400\n"
+"POT-Creation-Date: 2014-07-22 14:35+0400\n"
 "PO-Revision-Date: 2014-02-19 09:12+0000\n"
 "Last-Translator: aborodin <aborodin@vmail.ru>\n"
-"Language-Team: Swedish (http://www.transifex.com/projects/p/mc/language/sv/)\n"
+"Language-Team: Swedish (http://www.transifex.com/projects/p/mc/language/"
+"sv/)\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
@@ -425,7 +426,9 @@ msgstr "Omgivningsvariablen TERM är inte satt!\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr "Skärmstorleken %d×%d stöds inte.\nKontrollera miljövariabeln TERM.\n"
+msgstr ""
+"Skärmstorleken %d×%d stöds inte.\n"
+"Kontrollera miljövariabeln TERM.\n"
 
 msgid "Warning"
 msgstr "Varning"
@@ -526,6 +529,13 @@ msgstr "Bakgrundsprocess:"
 msgid "Error"
 msgstr "Fel"
 
+#, c-format
+msgid "%d: %s"
+msgstr ""
+
+msgid "&Abort"
+msgstr "&Avbryt"
+
 msgid "Displays the current version"
 msgstr "Visa den aktuella versionen"
 
@@ -619,7 +629,7 @@ msgid ""
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate, editbg, editframe, editframeactive\n"
 "                 editframedrag\n"
-"   Viewer:       viewbold, viewunderline, viewselected\n"
+"   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
 
@@ -843,8 +853,19 @@ msgid "< Reload Current Syntax >"
 msgstr ""
 
 #, c-format
+msgid "Loading: %3d%%"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+#, c-format
 msgid "Cannot open %s for reading"
 msgstr ""
+
+#, fuzzy
+msgid "Load file"
+msgstr "fil"
 
 #, c-format
 msgid "Error reading %s"
@@ -872,6 +893,14 @@ msgstr ""
 msgid "Cannot open pipe for reading: %s"
 msgstr ""
 
+#, fuzzy, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Söker efter %s"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Söker efter %s"
+
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
 
@@ -890,7 +919,7 @@ msgstr ""
 msgid "Cannot open file for writing: %s"
 msgstr ""
 
-msgid "The file you are saving is not finished with a newline"
+msgid "The file you are saving does not end with a newline."
 msgstr ""
 
 msgid "C&ontinue"
@@ -919,6 +948,10 @@ msgstr ""
 
 msgid "Block is large, you may not be able to undo this action"
 msgstr ""
+
+#, fuzzy
+msgid "Collect completions"
+msgstr "Inställningar"
 
 msgid "&Quick save"
 msgstr ""
@@ -1750,8 +1783,7 @@ msgstr "&Omvänd"
 msgid "Sort order"
 msgstr "Sorteringsordning"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 msgid "Confirmation|&Delete"
 msgstr ""
 
@@ -1793,9 +1825,6 @@ msgstr ""
 
 msgid "Input / display codepage:"
 msgstr "Teckentabell för inmatning/visning:"
-
-msgid "&Select"
-msgstr "&Välj"
 
 msgid "Directory tree"
 msgstr ""
@@ -1975,15 +2004,6 @@ msgstr ""
 msgid "Set expression for filtering filenames"
 msgstr ""
 
-msgid "&Files only"
-msgstr ""
-
-msgid "&Using shell patterns"
-msgstr "använd skal&Mönster"
-
-msgid "&Case sensitive"
-msgstr ""
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Länka %s till:"
@@ -2022,12 +2042,6 @@ msgid "Create a new Directory"
 msgstr "Skapa en ny katalog"
 
 msgid "Enter directory name:"
-msgstr ""
-
-msgid "Select"
-msgstr ""
-
-msgid "Unselect"
 msgstr ""
 
 msgid "Extension file edit"
@@ -2107,6 +2121,9 @@ msgstr ""
 msgid ""
 "Enter device (without /dev/) to undelete\n"
 "files on: (F1 for details)"
+msgstr ""
+
+msgid "Directory scanning"
 msgstr ""
 
 msgid "Setup"
@@ -2227,9 +2244,6 @@ msgid ""
 "Cannot create target symlink \"%s\"\n"
 "%s"
 msgstr ""
-
-msgid "&Abort"
-msgstr "&Avbryt"
 
 msgid "Ski&p all"
 msgstr ""
@@ -2447,13 +2461,8 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Directory scanning"
-msgstr ""
-
 #, c-format
-msgid ""
-"%s\n"
-"Directories: %zd, total size: %s"
+msgid "Directories: %zd, total size: %s"
 msgstr ""
 
 msgid "Cannot operate on \"..\"!"
@@ -2561,6 +2570,13 @@ msgstr "Källa"
 msgid "Target"
 msgstr "Mål"
 
+#, fuzzy
+msgid "Deleting"
+msgstr "&Ta bort"
+
+msgid "&Using shell patterns"
+msgstr "använd skal&Mönster"
+
 msgid "to:"
 msgstr "till:"
 
@@ -2653,10 +2669,6 @@ msgid "Finished (ignored %zd directory)"
 msgid_plural "Finished (ignored %zd directories)"
 msgstr[0] ""
 msgstr[1] ""
-
-#, c-format
-msgid "Searching %s"
-msgstr "Söker efter %s"
 
 msgid "Searching"
 msgstr "Söker"
@@ -3211,6 +3223,18 @@ msgstr ""
 msgid "Unknown tag on display format:"
 msgstr ""
 
+msgid "&Files only"
+msgstr ""
+
+msgid "&Case sensitive"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "Unselect"
+msgstr ""
+
 msgid "Do you really want to execute?"
 msgstr ""
 
@@ -3260,7 +3284,9 @@ msgstr "Sök SUID- och SGID-program"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr "Kan inte öppna filen %s för skrivning:\n%s\n"
+msgstr ""
+"Kan inte öppna filen %s för skrivning:\n"
+"%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3299,7 +3325,9 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr "Kan inte skriva till filen %s:\n%s\n"
+msgstr ""
+"Kan inte skriva till filen %s:\n"
+"%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3323,7 +3351,9 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr "Fil %s ägs varken av dig eller root, eller är skrivbar för alla.\nAtt använda den kan äventyra din säkerhet"
+msgstr ""
+"Fil %s ägs varken av dig eller root, eller är skrivbar för alla.\n"
+"Att använda den kan äventyra din säkerhet"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3384,7 +3414,14 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr "Tryck ned %s\noch vänta tills meddelandet försvinner.\nSedan, pressa ned tangenten igen för att se om\ndet står OK bredvid.\n\nOm du vill avbryta, tryck en gång på Escape \ntangenten och vänta."
+msgstr ""
+"Tryck ned %s\n"
+"och vänta tills meddelandet försvinner.\n"
+"Sedan, pressa ned tangenten igen för att se om\n"
+"det står OK bredvid.\n"
+"\n"
+"Om du vill avbryta, tryck en gång på Escape \n"
+"tangenten och vänta."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3400,7 +3437,9 @@ msgstr "OK"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr "Det verkar som om alla dina tangenter\nfungerar. Det är toppen!"
+msgstr ""
+"Det verkar som om alla dina tangenter\n"
+"fungerar. Det är toppen!"
 
 msgid "&Discard"
 msgstr "&Förkasta"
@@ -3408,7 +3447,9 @@ msgstr "&Förkasta"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr "Toppen! Nu har du en komplett terminaldatabas!\nAlla dina tangenter fungerar."
+msgstr ""
+"Toppen! Nu har du en komplett terminaldatabas!\n"
+"Alla dina tangenter fungerar."
 
 msgid ""
 "Press all the keys mentioned here. After you have done it, check\n"
@@ -3543,13 +3584,17 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr "Kan inte öppna cpio-arkivet\n%s"
+msgstr ""
+"Kan inte öppna cpio-arkivet\n"
+"%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr "För tidigt slut på cpio-arkivet\n%s"
+msgstr ""
+"För tidigt slut på cpio-arkivet\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3557,7 +3602,11 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr "Felaktiga hårda länkar för\n%s\ni cpio-arkivet\n%s"
+msgstr ""
+"Felaktiga hårda länkar för\n"
+"%s\n"
+"i cpio-arkivet\n"
+"%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3567,19 +3616,25 @@ msgstr "%s innehåller dubbla poster! Hoppar över den!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr "Felaktig cpio-header påträffad i\n%s"
+msgstr ""
+"Felaktig cpio-header påträffad i\n"
+"%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr "Oväntat filslut\n%s"
+msgstr ""
+"Oväntat filslut\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr "Kan inte öppna %s arkivet\n%s"
+msgstr ""
+"Kan inte öppna %s arkivet\n"
+"%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "Inkonsistent extfsfil"
@@ -3756,13 +3811,17 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr "Varning: Ogiltig rad i %s:\n%s\n"
+msgstr ""
+"Varning: Ogiltig rad i %s:\n"
+"%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr "Varning: Flaggan %c i %s är ogiltig:\n%s\n"
+msgstr ""
+"Varning: Flaggan %c i %s är ogiltig:\n"
+"%s\n"
 
 #, c-format
 msgid "sftp: an error occurred while reading %s: %s"
@@ -3851,7 +3910,9 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr "Kan inte öppna tarfilen\n%s"
+msgstr ""
+"Kan inte öppna tarfilen\n"
+"%s"
 
 msgid "Inconsistent tar archive"
 msgstr "Inkonsistensfel i tararkivet"
@@ -4031,9 +4092,6 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Seeking to search result"
-msgstr ""
-
 msgid "Search done"
 msgstr ""
 
@@ -4042,3 +4100,6 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "&Select"
+#~ msgstr "&Välj"

@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-28 13:29+0400\n"
-"PO-Revision-Date: 2014-02-28 13:31+0300\n"
+"POT-Creation-Date: 2014-07-22 14:35+0400\n"
+"PO-Revision-Date: 2014-07-22 14:40+0300\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/mc/language/ru/)\n"
 "Language: ru\n"
@@ -552,6 +552,13 @@ msgstr "Фоновый процесс:"
 msgid "Error"
 msgstr "Ошибка"
 
+#, c-format
+msgid "%d: %s"
+msgstr "%d: %s"
+
+msgid "&Abort"
+msgstr "&Прервать"
+
 msgid "Displays the current version"
 msgstr "Показать текущую версию"
 
@@ -645,7 +652,7 @@ msgid ""
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate, editbg, editframe, editframeactive\n"
 "                 editframedrag\n"
-"   Viewer:       viewbold, viewunderline, viewselected\n"
+"   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
 "--colors КЛЮЧЕВОЕ_СЛОВО={ТЕКСТ},{ФОН},{АТРИБУТ}:КЛЮЧЕВОЕ_СЛОВО2=...\n"
@@ -664,7 +671,7 @@ msgstr ""
 "   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
 "                       editlinestate, editbg, editframe, editframeactive\n"
 "                       editframedrag\n"
-"   Просмотрщик:        viewbold, viewunderline, viewselected\n"
+"   Просмотрщик:        viewnormal, viewbold, viewunderline, viewselected\n"
 "   Справка:            helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
@@ -913,8 +920,18 @@ msgid "< Reload Current Syntax >"
 msgstr "Перезагрузить текущее цветовыделение"
 
 #, c-format
+msgid "Loading: %3d%%"
+msgstr "Загрузка: %3d%%"
+
+msgid "Loading..."
+msgstr "Загрузка..."
+
+#, c-format
 msgid "Cannot open %s for reading"
 msgstr "Невозможно открыть файл %s для чтения"
+
+msgid "Load file"
+msgstr "Загрузка файла"
 
 #, c-format
 msgid "Error reading %s"
@@ -943,6 +960,14 @@ msgstr "Ошибка чтения из канала: %s"
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "Невозможно открыть канал для чтения: %s"
+
+#, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Ищем %s: %3d%%"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Ищем %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "Файл имеет жесткие ссылки. Отсоединить перед сохранением?"
@@ -991,6 +1016,9 @@ msgstr "Сохранить как"
 
 msgid "Block is large, you may not be able to undo this action"
 msgstr "Блок слишком велик, вам может не удаться отменить эту операцию."
+
+msgid "Collect completions"
+msgstr "Поиск дополнений"
 
 msgid "&Quick save"
 msgstr "&Быстрое сохранение"
@@ -2067,15 +2095,6 @@ msgstr "Фильтр"
 msgid "Set expression for filtering filenames"
 msgstr "Задайте выражение для выбора имен файлов"
 
-msgid "&Files only"
-msgstr "Только файлы"
-
-msgid "&Using shell patterns"
-msgstr "&Метасимволы shell"
-
-msgid "&Case sensitive"
-msgstr "Учет ре&гистра"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Создать ссылку с %s на:"
@@ -2115,12 +2134,6 @@ msgstr "Создать новый каталог"
 
 msgid "Enter directory name:"
 msgstr "Введите имя каталога:"
-
-msgid "Select"
-msgstr "отметить группу"
-
-msgid "Unselect"
-msgstr "Снять отметку"
 
 msgid "Extension file edit"
 msgstr "Редактирование файла расширений"
@@ -2206,6 +2219,9 @@ msgid ""
 msgstr ""
 "Введите имя устройства (без /dev/), на котором\n"
 "восстанавливать файлы после удаления (детали по F1):"
+
+msgid "Directory scanning"
+msgstr "Путь к каталогу"
 
 msgid "Setup"
 msgstr "Настройка"
@@ -2331,9 +2347,6 @@ msgid ""
 msgstr ""
 "Невозможно создать целевую симв. ссылку \"%s\"\n"
 "%s"
-
-msgid "&Abort"
-msgstr "&Прервать"
 
 msgid "Ski&p all"
 msgstr "Пропустить вс&ё"
@@ -2618,16 +2631,9 @@ msgstr ""
 "Невозможно переместить каталог \"%s\" в \"%s\"\n"
 "%s"
 
-msgid "Directory scanning"
-msgstr "Путь к каталогу"
-
 #, c-format
-msgid ""
-"%s\n"
-"Directories: %zd, total size: %s"
-msgstr ""
-"%s\n"
-"Каталоги: %zd, общий объём: %s"
+msgid "Directories: %zd, total size: %s"
+msgstr "Каталоги: %zd, общий объём: %s"
 
 msgid "Cannot operate on \"..\"!"
 msgstr "Эту операцию невозможно выполнить на \"..\"!"
@@ -2734,6 +2740,12 @@ msgstr "Источник"
 msgid "Target"
 msgstr "Приемник"
 
+msgid "Deleting"
+msgstr "Удаление"
+
+msgid "&Using shell patterns"
+msgstr "&Метасимволы shell"
+
 msgid "to:"
 msgstr "в:"
 
@@ -2827,10 +2839,6 @@ msgid_plural "Finished (ignored %zd directories)"
 msgstr[0] "Завершено (пропущен %zd каталог)"
 msgstr[1] "Завершено (пропущено %zd каталога)"
 msgstr[2] "Завершено (пропущено %zd каталогов)"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Ищем %s"
 
 msgid "Searching"
 msgstr "Ищем"
@@ -3392,6 +3400,18 @@ msgstr "Панелизация"
 
 msgid "Unknown tag on display format:"
 msgstr "Неизвестный тег в формате отображения:"
+
+msgid "&Files only"
+msgstr "Только файлы"
+
+msgid "&Case sensitive"
+msgstr "Учет ре&гистра"
+
+msgid "Select"
+msgstr "отметить группу"
+
+msgid "Unselect"
+msgstr "Снять отметку"
 
 msgid "Do you really want to execute?"
 msgstr "Вы действительно хотите выполнить это?"
@@ -4287,9 +4307,6 @@ msgstr ""
 "Невозможно открыть \"%s\" в режиме фильтра\n"
 "%s"
 
-msgid "Seeking to search result"
-msgstr "Переход к найденному"
-
 msgid "Search done"
 msgstr "Поиск закончен"
 
@@ -4299,3 +4316,5 @@ msgstr "Продолжить с начала?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Невозможно получить локальную копию /ftp://some.host/editme.txt"
 
+#~ msgid "Seeking to search result"
+#~ msgstr "Переход к найденному"

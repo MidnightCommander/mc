@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-28 13:29+0400\n"
+"POT-Creation-Date: 2014-07-22 14:35+0400\n"
 "PO-Revision-Date: 2013-08-04 10:16+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -559,6 +559,13 @@ msgstr "Processo in background:"
 msgid "Error"
 msgstr "Errore"
 
+#, c-format
+msgid "%d: %s"
+msgstr ""
+
+msgid "&Abort"
+msgstr "&Annulla"
+
 msgid "Displays the current version"
 msgstr "Visualizza la versione corrente"
 
@@ -636,6 +643,7 @@ msgid "Show mc with specified skin"
 msgstr "Mostra mc con il tema specificato"
 
 #. TRANSLATORS: don't translate keywords
+#, fuzzy
 msgid ""
 "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n"
 "\n"
@@ -653,7 +661,7 @@ msgid ""
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate, editbg, editframe, editframeactive\n"
 "                 editframedrag\n"
-"   Viewer:       viewbold, viewunderline, viewselected\n"
+"   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
 "--colors PCHIAVE1={PRIMOP},{SFONDO},{ATTRIB}:PCHIAVE2=...\n"
@@ -922,8 +930,20 @@ msgid "< Reload Current Syntax >"
 msgstr "< Ricarica la sintassi corrente >"
 
 #, c-format
+msgid "Loading: %3d%%"
+msgstr ""
+
+#, fuzzy
+msgid "Loading..."
+msgstr "&Codifica..."
+
+#, c-format
 msgid "Cannot open %s for reading"
 msgstr "Impossibile aprire %s in lettura"
+
+#, fuzzy
+msgid "Load file"
+msgstr "Carica file sintassi"
 
 #, c-format
 msgid "Error reading %s"
@@ -952,6 +972,14 @@ msgstr "Errore leggendo dalla pipe: %s"
 #, c-format
 msgid "Cannot open pipe for reading: %s"
 msgstr "Impossibile aprire la pipe in lettura: %s"
+
+#, fuzzy, c-format
+msgid "Searching %s: %3d%%"
+msgstr "Cercando %s"
+
+#, c-format
+msgid "Searching %s"
+msgstr "Cercando %s"
 
 msgid "File has hard-links. Detach before saving?"
 msgstr "Il file ha collegamenti (link) hard. Scollegarli prima di salvare?"
@@ -1001,6 +1029,10 @@ msgstr "Salva come"
 
 msgid "Block is large, you may not be able to undo this action"
 msgstr "Il blocco è grande, potresti non riuscire ad annullare l'azione."
+
+#, fuzzy
+msgid "Collect completions"
+msgstr "Opzioni colore"
 
 msgid "&Quick save"
 msgstr "Salva &veloce"
@@ -2079,15 +2111,6 @@ msgstr "Filtro"
 msgid "Set expression for filtering filenames"
 msgstr "Imposta l'espressione per filtrare i nomi dei file"
 
-msgid "&Files only"
-msgstr "Solo &file"
-
-msgid "&Using shell patterns"
-msgstr "&Usa i modelli della shell"
-
-msgid "&Case sensitive"
-msgstr "Distingui le maius&cole"
-
 #, c-format
 msgid "Link %s to:"
 msgstr "Collega %s a:"
@@ -2127,12 +2150,6 @@ msgstr "Crea una nuova directory"
 
 msgid "Enter directory name:"
 msgstr "Inserire nome directory:"
-
-msgid "Select"
-msgstr "Seleziona"
-
-msgid "Unselect"
-msgstr "Deseleziona"
 
 msgid "Extension file edit"
 msgstr "Modifica file delle estensioni"
@@ -2218,6 +2235,9 @@ msgid ""
 msgstr ""
 "Inserire il nome del dispositivo (senza /dev/) dal quale\n"
 "volete ripristinare i file: (F1 per i dettagli)"
+
+msgid "Directory scanning"
+msgstr "Scansione directory"
 
 msgid "Setup"
 msgstr "Configurazione"
@@ -2353,9 +2373,6 @@ msgid ""
 msgstr ""
 "Impossibile creare collegamento simb. destinazione \"%s\"\n"
 "%s"
-
-msgid "&Abort"
-msgstr "&Annulla"
 
 msgid "Ski&p all"
 msgstr "Salta tutti"
@@ -2640,13 +2657,8 @@ msgstr ""
 "Impossibile spostare la directory \"%s\" in \"%s\"\n"
 "%s"
 
-msgid "Directory scanning"
-msgstr "Scansione directory"
-
-#, c-format
-msgid ""
-"%s\n"
-"Directories: %zd, total size: %s"
+#, fuzzy, c-format
+msgid "Directories: %zd, total size: %s"
 msgstr ""
 "%s\n"
 "Directory: %zd, dim totale: %s"
@@ -2756,6 +2768,12 @@ msgstr "Sorgente"
 msgid "Target"
 msgstr "Destinaz"
 
+msgid "Deleting"
+msgstr "Sto eliminando"
+
+msgid "&Using shell patterns"
+msgstr "&Usa i modelli della shell"
+
 msgid "to:"
 msgstr "a:"
 
@@ -2848,10 +2866,6 @@ msgid "Finished (ignored %zd directory)"
 msgid_plural "Finished (ignored %zd directories)"
 msgstr[0] "Finito (ignorata %zd directory)"
 msgstr[1] "Finito (ignorate %zd directory)"
-
-#, c-format
-msgid "Searching %s"
-msgstr "Cercando %s"
 
 msgid "Searching"
 msgstr "Cercando"
@@ -3410,6 +3424,18 @@ msgstr "Pannellizza"
 
 msgid "Unknown tag on display format:"
 msgstr "Codice sconosciuto per tale formato:"
+
+msgid "&Files only"
+msgstr "Solo &file"
+
+msgid "&Case sensitive"
+msgstr "Distingui le maius&cole"
+
+msgid "Select"
+msgstr "Seleziona"
+
+msgid "Unselect"
+msgstr "Deseleziona"
 
 msgid "Do you really want to execute?"
 msgstr "Vuoi veramente eseguirlo?"
@@ -4305,9 +4331,6 @@ msgstr ""
 "Impossibile aprire \"%s\" in modalità analisi\n"
 "%s"
 
-msgid "Seeking to search result"
-msgstr "In fase di ricerca"
-
 msgid "Search done"
 msgstr "Ricerca conclusa"
 
@@ -4316,6 +4339,9 @@ msgstr "Continuare dall'inizio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Impossibile ricevere copia locale di /ftp://un.host/modificami.txt"
+
+#~ msgid "Seeking to search result"
+#~ msgstr "In fase di ricerca"
 
 #~ msgid "&Select"
 #~ msgstr "&Seleziona"
@@ -4331,6 +4357,3 @@ msgstr "Impossibile ricevere copia locale di /ftp://un.host/modificami.txt"
 
 #~ msgid "%s?"
 #~ msgstr "%s?"
-
-#~ msgid "Deleting"
-#~ msgstr "Sto eliminando"

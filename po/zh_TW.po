@@ -1,21 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-02-11 15:14+0400\n"
+"POT-Creation-Date: 2014-07-22 14:35+0400\n"
 "PO-Revision-Date: 2014-02-19 09:12+0000\n"
 "Last-Translator: aborodin <aborodin@vmail.ru>\n"
-"Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/mc/language/zh_TW/)\n"
+"Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/mc/"
+"language/zh_TW/)\n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
@@ -424,7 +425,9 @@ msgstr "環境變數 TERM 並未設定！ \n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr "不支援 %dx%d 的螢幕大小。\n請檢查 TERM 環境變數。\n"
+msgstr ""
+"不支援 %dx%d 的螢幕大小。\n"
+"請檢查 TERM 環境變數。\n"
 
 msgid "Warning"
 msgstr "警告"
@@ -525,6 +528,13 @@ msgstr "背景程序："
 msgid "Error"
 msgstr "錯誤"
 
+#, c-format
+msgid "%d: %s"
+msgstr ""
+
+msgid "&Abort"
+msgstr "中斷"
+
 msgid "Displays the current version"
 msgstr "顯示目前的版本"
 
@@ -618,7 +628,7 @@ msgid ""
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate, editbg, editframe, editframeactive\n"
 "                 editframedrag\n"
-"   Viewer:       viewbold, viewunderline, viewselected\n"
+"   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
 
@@ -842,8 +852,19 @@ msgid "< Reload Current Syntax >"
 msgstr ""
 
 #, c-format
+msgid "Loading: %3d%%"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+#, c-format
 msgid "Cannot open %s for reading"
 msgstr ""
+
+#, fuzzy
+msgid "Load file"
+msgstr "檔案"
 
 #, c-format
 msgid "Error reading %s"
@@ -871,6 +892,14 @@ msgstr ""
 msgid "Cannot open pipe for reading: %s"
 msgstr ""
 
+#, fuzzy, c-format
+msgid "Searching %s: %3d%%"
+msgstr "搜尋 %s"
+
+#, c-format
+msgid "Searching %s"
+msgstr "搜尋 %s"
+
 msgid "File has hard-links. Detach before saving?"
 msgstr ""
 
@@ -889,7 +918,7 @@ msgstr ""
 msgid "Cannot open file for writing: %s"
 msgstr ""
 
-msgid "The file you are saving is not finished with a newline"
+msgid "The file you are saving does not end with a newline."
 msgstr ""
 
 msgid "C&ontinue"
@@ -918,6 +947,10 @@ msgstr ""
 
 msgid "Block is large, you may not be able to undo this action"
 msgstr ""
+
+#, fuzzy
+msgid "Collect completions"
+msgstr "設定選項"
 
 msgid "&Quick save"
 msgstr ""
@@ -1749,8 +1782,7 @@ msgstr "反向"
 msgid "Sort order"
 msgstr "排序的順序"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 msgid "Confirmation|&Delete"
 msgstr ""
 
@@ -1792,9 +1824,6 @@ msgstr ""
 
 msgid "Input / display codepage:"
 msgstr "輸入/顯示 頁碼："
-
-msgid "&Select"
-msgstr "選取(&S)"
 
 msgid "Directory tree"
 msgstr ""
@@ -1974,15 +2003,6 @@ msgstr ""
 msgid "Set expression for filtering filenames"
 msgstr ""
 
-msgid "&Files only"
-msgstr ""
-
-msgid "&Using shell patterns"
-msgstr "使用系統殼萬用字元"
-
-msgid "&Case sensitive"
-msgstr ""
-
 #, c-format
 msgid "Link %s to:"
 msgstr ""
@@ -2021,12 +2041,6 @@ msgid "Create a new Directory"
 msgstr "建立新目錄"
 
 msgid "Enter directory name:"
-msgstr ""
-
-msgid "Select"
-msgstr ""
-
-msgid "Unselect"
 msgstr ""
 
 msgid "Extension file edit"
@@ -2106,6 +2120,9 @@ msgstr ""
 msgid ""
 "Enter device (without /dev/) to undelete\n"
 "files on: (F1 for details)"
+msgstr ""
+
+msgid "Directory scanning"
 msgstr ""
 
 msgid "Setup"
@@ -2226,9 +2243,6 @@ msgid ""
 "Cannot create target symlink \"%s\"\n"
 "%s"
 msgstr ""
-
-msgid "&Abort"
-msgstr "中斷"
 
 msgid "Ski&p all"
 msgstr ""
@@ -2446,13 +2460,8 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Directory scanning"
-msgstr ""
-
 #, c-format
-msgid ""
-"%s\n"
-"Directories: %zd, total size: %s"
+msgid "Directories: %zd, total size: %s"
 msgstr ""
 
 msgid "Cannot operate on \"..\"!"
@@ -2560,6 +2569,13 @@ msgstr "來源"
 msgid "Target"
 msgstr "目標"
 
+#, fuzzy
+msgid "Deleting"
+msgstr "刪除"
+
+msgid "&Using shell patterns"
+msgstr "使用系統殼萬用字元"
+
 msgid "to:"
 msgstr "到："
 
@@ -2651,10 +2667,6 @@ msgstr "完成"
 msgid "Finished (ignored %zd directory)"
 msgid_plural "Finished (ignored %zd directories)"
 msgstr[0] ""
-
-#, c-format
-msgid "Searching %s"
-msgstr "搜尋 %s"
 
 msgid "Searching"
 msgstr "搜尋中"
@@ -3205,6 +3217,18 @@ msgstr ""
 msgid "Unknown tag on display format:"
 msgstr ""
 
+msgid "&Files only"
+msgstr ""
+
+msgid "&Case sensitive"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "Unselect"
+msgstr ""
+
 msgid "Do you really want to execute?"
 msgstr ""
 
@@ -3254,7 +3278,9 @@ msgstr "找出 SUID 與 SGID 的程式"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr "無法開啟檔案 %s 來寫入資料：\n%s\n"
+msgstr ""
+"無法開啟檔案 %s 來寫入資料：\n"
+"%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3293,7 +3319,9 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr "無法寫入到檔案 %s :\n%s\n"
+msgstr ""
+"無法寫入到檔案 %s :\n"
+"%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3317,7 +3345,9 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr "檔案 %s 的擁有者並不是 root 或您，或者檔案允許任何人寫入；\n使用這個檔案對您系統的安全造成危害。"
+msgstr ""
+"檔案 %s 的擁有者並不是 root 或您，或者檔案允許任何人寫入；\n"
+"使用這個檔案對您系統的安全造成危害。"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3378,7 +3408,15 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr "請按下 %s\n然後等到此一訊息消失。\n\n接著再按一次，看看在按鈕旁邊是不是有\n顯示 \"好\"。\n\n要離開的話，按一下 Esc 鍵，然後等待\n一下子就可以了。"
+msgstr ""
+"請按下 %s\n"
+"然後等到此一訊息消失。\n"
+"\n"
+"接著再按一次，看看在按鈕旁邊是不是有\n"
+"顯示 \"好\"。\n"
+"\n"
+"要離開的話，按一下 Esc 鍵，然後等待\n"
+"一下子就可以了。"
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3394,7 +3432,9 @@ msgstr "好"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr "看起來您所有的按鍵都\n正常無誤，很好。"
+msgstr ""
+"看起來您所有的按鍵都\n"
+"正常無誤，很好。"
 
 msgid "&Discard"
 msgstr "忽略"
@@ -3402,7 +3442,9 @@ msgstr "忽略"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr "太好了！您的終端機資料庫很完整！ \n所有的按鍵都可以正常使用。"
+msgstr ""
+"太好了！您的終端機資料庫很完整！ \n"
+"所有的按鍵都可以正常使用。"
 
 msgid ""
 "Press all the keys mentioned here. After you have done it, check\n"
@@ -3537,13 +3579,17 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr "無法開啟 cpio 檔案集\n%s"
+msgstr ""
+"無法開啟 cpio 檔案集\n"
+"%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr "cpio 檔案集的結尾過早出現\n%s"
+msgstr ""
+"cpio 檔案集的結尾過早出現\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3551,7 +3597,11 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr "錯誤的硬連結\n%s\n在 cpio 檔案集\n%s"
+msgstr ""
+"錯誤的硬連結\n"
+"%s\n"
+"在 cpio 檔案集\n"
+"%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3561,19 +3611,25 @@ msgstr "%s 有重複的進入點! 放棄中!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr "發現不完整的 cpio 標頭\n%s"
+msgstr ""
+"發現不完整的 cpio 標頭\n"
+"%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr "未預期的檔案結束\n%s"
+msgstr ""
+"未預期的檔案結束\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr "無法開啟 %s 檔案集\n%s"
+msgstr ""
+"無法開啟 %s 檔案集\n"
+"%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "不完整的 extfs 檔案集"
@@ -3750,13 +3806,17 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr "警告：%s 中此行不正確：\n%s\n"
+msgstr ""
+"警告：%s 中此行不正確：\n"
+"%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr "警告：%2$s 中的旗標 %1$c 不正確：\n%3$s\n"
+msgstr ""
+"警告：%2$s 中的旗標 %1$c 不正確：\n"
+"%3$s\n"
 
 #, c-format
 msgid "sftp: an error occurred while reading %s: %s"
@@ -3845,7 +3905,9 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr "無法開啟 tar 檔案集\n%s"
+msgstr ""
+"無法開啟 tar 檔案集\n"
+"%s"
 
 msgid "Inconsistent tar archive"
 msgstr "不完整的 tar 檔案集"
@@ -4025,9 +4087,6 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Seeking to search result"
-msgstr ""
-
 msgid "Search done"
 msgstr ""
 
@@ -4036,3 +4095,6 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "&Select"
+#~ msgstr "選取(&S)"
