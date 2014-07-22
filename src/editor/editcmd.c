@@ -1228,7 +1228,6 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
     off_t last_byte, start = -1;
     char *current_word;
     gboolean entire_file;
-    status_msg_t sm;
     edit_search_status_msg_t esm;
 
 #ifdef HAVE_CHARSET
@@ -1254,7 +1253,7 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
     esm.edit = edit;
     esm.offset = entire_file ? 0 : word_start;
 
-    status_msg_init (STATUS_MSG (&sm), _("Collect completions"), 1.0, simple_status_msg_init_cb,
+    status_msg_init (STATUS_MSG (&esm), _("Collect completions"), 1.0, simple_status_msg_init_cb,
                      edit_search_status_update_cb, NULL);
 
     current_word = edit_collect_completions_get_current_word (&esm, srch, word_start);
