@@ -408,3 +408,30 @@ mcview_get_title (const WDialog * h, size_t len)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+int
+mcview_calc_percent (mcview_t * view, off_t p)
+{
+    const screen_dimen right = view->status_area.left + view->status_area.width;
+    const screen_dimen height = view->status_area.height;
+    off_t filesize;
+    int percent;
+
+    if (height < 1 || right < 4)
+        return (-1);
+    if (mcview_may_still_grow (view))
+        return (-1);
+
+    filesize = mcview_get_filesize (view);
+
+    if (filesize == 0 || view->dpy_end == filesize)
+        percent = 100;
+    else if (p > (INT_MAX / 100))
+        percent = p / (filesize / 100);
+    else
+        percent = p * 100 / filesize;
+
+    return percent;
+}
+
+/* --------------------------------------------------------------------------------------------- */

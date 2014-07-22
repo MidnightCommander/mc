@@ -176,6 +176,7 @@ editcmd_dialog_search_show (WEdit * edit)
         edit->search->is_case_sensitive = edit_search_options.case_sens;
         edit->search->whole_words = edit_search_options.whole_words;
         edit->search->search_fn = edit_search_cmd_callback;
+        edit->search->update_fn = edit_search_update_callback;
     }
 
     return (edit->search != NULL);

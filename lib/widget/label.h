@@ -28,6 +28,7 @@ typedef struct
 
 WLabel *label_new (int y, int x, const char *text);
 void label_set_text (WLabel * label, const char *text);
+void label_set_textv (WLabel * label, const char *format, ...);
 
 /*** inline functions ****************************************************************************/
 

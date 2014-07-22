@@ -637,12 +637,17 @@ edit_buffer_move_backward (const edit_buffer_t * buf, off_t current, long lines)
  */
 
 off_t
-edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size)
+edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size,
+                       edit_buffer_read_file_status_msg_t * sm, gboolean * aborted)
 {
     off_t ret = 0;
     off_t i, j;
     off_t data_size;
     void *b;
+    status_msg_t *s = STATUS_MSG (sm);
+    unsigned short update_cnt = 0;
+
+    *aborted = FALSE;
 
     buf->lines = 0;
     buf->curs2 = size;
@@ -683,6 +688,24 @@ edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size)
             if (*((char *) b + j) == '\n')
                 buf->lines++;
 
+        if (s != NULL && s->update != NULL)
+        {
+            update_cnt = (update_cnt + 1) & 0xf;
+            if (update_cnt == 0)
+            {
+                /* FIXME: overcare */
+                if (sm->buf == NULL)
+                    sm->buf = buf;
+
+                sm->loaded = ret;
+                if (s->update (s) == B_CANCEL)
+                {
+                    *aborted = TRUE;
+                    return (-1);
+                }
+            }
+        }
+
         if (sz != data_size)
             break;
     }
@@ -698,6 +721,20 @@ edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size)
         b = *b1;
         *b1 = *b2;
         *b2 = b;
+
+        if (s != NULL && s->update != NULL)
+        {
+            update_cnt = (update_cnt + 1) & 0xf;
+            if (update_cnt == 0)
+            {
+                sm->loaded = ret;
+                if (s->update (s) == B_CANCEL)
+                {
+                    *aborted = TRUE;
+                    return (-1);
+                }
+            }
+        }
     }
 
     return ret;
@@ -775,6 +812,33 @@ edit_buffer_write_file (edit_buffer_t * buf, int fd)
     }
 
     return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Calculate percentage of specified character offset
+ *
+ * @param buf pointer to editor buffer
+ * @param p character offset
+ *
+ * @return percentage of specified character offset
+ */
+
+int
+edit_buffer_calc_percent (const edit_buffer_t * buf, off_t offset)
+{
+    int percent;
+
+    if (buf->size == 0)
+        percent = 0;
+    else if (offset >= buf->size)
+        percent = 100;
+    else if (offset > (INT_MAX / 100))
+        percent = offset / (buf->size / 100);
+    else
+        percent = offset * 100 / buf->size;
+
+    return percent;
 }
 
 /* --------------------------------------------------------------------------------------------- */

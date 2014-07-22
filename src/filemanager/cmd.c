@@ -118,6 +118,7 @@ enum CompareMode
 static const char *machine_str = N_("Enter machine name (F1 for details):");
 #endif /* ENABLE_VFS_NET */
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -1508,21 +1509,24 @@ single_dirsize_cmd (void)
         size_t dir_count = 0;
         size_t count = 0;
         uintmax_t total = 0;
-        ComputeDirSizeUI *ui;
+        dirsize_status_msg_t dsm;
         vfs_path_t *p;
 
-        ui = compute_dir_size_create_ui (FALSE);
         p = vfs_path_from_str (entry->fname);
 
-        if (compute_dir_size (p, ui, compute_dir_size_update_ui, &dir_count, &count, &total, TRUE)
-            == FILE_CONT)
+        memset (&dsm, 0, sizeof (dsm));
+        status_msg_init (STATUS_MSG (&dsm), _("Directory scanning"), 1.0, dirsize_status_init_cb,
+                         dirsize_status_update_cb, dirsize_status_deinit_cb);
+
+        if (compute_dir_size (p, &dsm, &dir_count, &count, &total, TRUE) == FILE_CONT)
         {
             entry->st.st_size = (off_t) total;
             entry->f.dir_size_computed = 1;
         }
 
         vfs_path_free (p);
-        compute_dir_size_destroy_ui (ui);
+
+        status_msg_deinit (STATUS_MSG (&dsm));
     }
 
     if (panels_options.mark_moves_down)
@@ -1543,9 +1547,11 @@ dirsizes_cmd (void)
 {
     WPanel *panel = current_panel;
     int i;
-    ComputeDirSizeUI *ui;
+    dirsize_status_msg_t dsm;
 
-    ui = compute_dir_size_create_ui (FALSE);
+    memset (&dsm, 0, sizeof (dsm));
+    status_msg_init (STATUS_MSG (&dsm), _("Directory scanning"), 1.0, dirsize_status_init_cb,
+                     dirsize_status_update_cb, dirsize_status_deinit_cb);
 
     for (i = 0; i < panel->dir.len; i++)
         if (S_ISDIR (panel->dir.list[i].st.st_mode)
@@ -1559,10 +1565,8 @@ dirsizes_cmd (void)
             gboolean ok;
 
             p = vfs_path_from_str (panel->dir.list[i].fname);
-            ok = compute_dir_size (p, ui, compute_dir_size_update_ui, &dir_count, &count, &total,
-                                   TRUE) != FILE_CONT;
+            ok = compute_dir_size (p, &dsm, &dir_count, &count, &total, TRUE) != FILE_CONT;
             vfs_path_free (p);
-
             if (ok)
                 break;
 
@@ -1570,7 +1574,7 @@ dirsizes_cmd (void)
             panel->dir.list[i].f.dir_size_computed = 1;
         }
 
-    compute_dir_size_destroy_ui (ui);
+    status_msg_deinit (STATUS_MSG (&dsm));
 
     recalculate_panel_summary (panel);
 
