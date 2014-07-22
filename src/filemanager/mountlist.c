@@ -163,7 +163,13 @@
 
 #undef MNT_IGNORE
 #ifdef MNTOPT_IGNORE
-#define MNT_IGNORE(M) hasmntopt ((M), MNTOPT_IGNORE)
+#if defined __sun && defined __SVR4
+/* Solaris defines hasmntopt(struct mnttab *, char *)
+   while it is otherwise hasmntopt(struct mnttab *, const char *).  */
+#define MNT_IGNORE(M) hasmntopt (M, (char *) MNTOPT_IGNORE)
+#else
+#define MNT_IGNORE(M) hasmntopt (M, MNTOPT_IGNORE)
+#endif
 #else
 #define MNT_IGNORE(M) 0
 #endif
@@ -192,11 +198,6 @@
 #if defined(HAVE_INFOMOUNT_LIST) || defined(HAVE_INFOMOUNT_QNX)
 #define HAVE_INFOMOUNT
 #endif
-
-/* The results of open() in this file are not used with fchdir,
-   therefore save some unnecessary work in fchdir.c.  */
-#undef open
-#undef close
 
 /* The results of opendir() in this file are not used with dirfd and fchdir,
    therefore save some unnecessary work in fchdir.c.  */

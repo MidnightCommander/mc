@@ -1084,15 +1084,17 @@ vfs_path_change_encoding (vfs_path_t * vpath, const char *encoding)
  */
 
 char *
-vfs_path_serialize (const vfs_path_t * vpath, GError ** error)
+vfs_path_serialize (const vfs_path_t * vpath, GError ** mcerror)
 {
     mc_config_t *cpath;
     ssize_t element_index;
     char *ret_value;
 
+    mc_return_val_if_error (mcerror, FALSE);
+
     if ((vpath == NULL) || (vfs_path_elements_count (vpath) == 0))
     {
-        g_set_error (error, MC_ERROR, -1, "vpath object is empty");
+        mc_propagate_error (mcerror, -1, "%s", "vpath object is empty");
         return NULL;
 
     }
@@ -1124,7 +1126,7 @@ vfs_path_serialize (const vfs_path_t * vpath, GError ** error)
         g_free (groupname);
     }
 
-    ret_value = mc_serialize_config (cpath, error);
+    ret_value = mc_serialize_config (cpath, mcerror);
     mc_config_deinit (cpath);
     return ret_value;
 }
@@ -1140,13 +1142,15 @@ vfs_path_serialize (const vfs_path_t * vpath, GError ** error)
  */
 
 vfs_path_t *
-vfs_path_deserialize (const char *data, GError ** error)
+vfs_path_deserialize (const char *data, GError ** mcerror)
 {
     mc_config_t *cpath;
     size_t element_index = 0;
     vfs_path_t *vpath;
 
-    cpath = mc_deserialize_config (data, error);
+    mc_return_val_if_error (mcerror, FALSE);
+
+    cpath = mc_deserialize_config (data, mcerror);
     if (cpath == NULL)
         return NULL;
 
@@ -1173,7 +1177,7 @@ vfs_path_deserialize (const char *data, GError ** error)
         {
             g_free (element);
             vfs_path_free (vpath);
-            g_set_error (error, MC_ERROR, -1, "Unable to find VFS class by name '%s'", cfg_value);
+            g_set_error (mcerror, MC_ERROR, -1, "Unable to find VFS class by name '%s'", cfg_value);
             g_free (cfg_value);
             mc_config_deinit (cpath);
             return NULL;
@@ -1205,7 +1209,7 @@ vfs_path_deserialize (const char *data, GError ** error)
     if (vfs_path_elements_count (vpath) == 0)
     {
         vfs_path_free (vpath);
-        g_set_error (error, MC_ERROR, -1, "No any path elements found");
+        g_set_error (mcerror, MC_ERROR, -1, "No any path elements found");
         return NULL;
     }
     vpath->str = vfs_path_to_str_flags (vpath, 0, VPF_NONE);

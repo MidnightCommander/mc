@@ -48,6 +48,14 @@ typedef enum
     UP_ONLY_CURRENT = 2
 } panel_update_flags_t;
 
+/* selection flags */
+typedef enum
+{
+    SELECT_FILES_ONLY = 1 << 0,
+    SELECT_MATCH_CASE = 1 << 1,
+    SELECT_SHELL_PATTERNS = 1 << 2
+} panel_select_flags_t;
+
 /* run mode and params */
 
 enum cd_enum
@@ -64,7 +72,7 @@ typedef struct panel_field_struct
 {
     const char *id;
     int min_size;
-    int expands;
+    gboolean expands;
     align_crt_t default_just;
     const char *hotkey;
     const char *title_hotkey;
@@ -145,7 +153,6 @@ extern mc_fhl_t *mc_filehighlight;
 
 /*** declarations of public functions ************************************************************/
 
-WPanel *panel_new (const char *panel_name);
 WPanel *panel_new_with_dir (const char *panel_name, const vfs_path_t * vpath);
 void panel_clean_dir (WPanel * panel);
 
@@ -187,5 +194,23 @@ void panel_init (void);
 void panel_deinit (void);
 gboolean do_cd (const vfs_path_t * new_dir_vpath, enum cd_enum cd_type);
 
+/* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Panel creation.
+ *
+ * @param panel_name the name of the panel for setup retieving
+ *
+ * @return new instance of WPanel
+ */
+
+static inline WPanel *
+panel_new (const char *panel_name)
+{
+    return panel_new_with_dir (panel_name, NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 #endif /* MC__PANEL_H */

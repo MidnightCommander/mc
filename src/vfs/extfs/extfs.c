@@ -1595,7 +1595,7 @@ extfs_get_plugins (const char *where, gboolean silent)
 
             f = open (fullname, O_RDONLY);
 
-            if (f > 0)
+            if (f >= 0)
             {
                 size_t len, i;
                 extfs_plugin_info_t info;

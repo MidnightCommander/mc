@@ -907,7 +907,8 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
      */
     if ((force & REDRAW_CHAR_ONLY) == 0 || (force & REDRAW_PAGE) != 0)
     {
-        long row, b;
+        long row = 0;
+        long b;
 
         if ((force & REDRAW_PAGE) != 0)
         {

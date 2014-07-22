@@ -55,7 +55,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-events_init (GError ** error)
+events_init (GError ** mcerror)
 {
     /* *INDENT-OFF* */
     event_init_t standard_events[] =
@@ -77,10 +77,10 @@ events_init (GError ** error)
     };
     /* *INDENT-ON* */
 
-    if (!mc_event_init (error))
+    if (!mc_event_init (mcerror))
         return FALSE;
 
-    return mc_event_mass_add (standard_events, error);
+    return mc_event_mass_add (standard_events, mcerror);
 }
 
 /* --------------------------------------------------------------------------------------------- */

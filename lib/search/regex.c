@@ -253,19 +253,19 @@ mc_search__regex_found_cond_one (mc_search_t * lc_mc_search, mc_search_regex_t *
                                  GString * search_str)
 {
 #ifdef SEARCH_TYPE_GLIB
-    GError *error = NULL;
+    GError *mcerror = NULL;
 
     if (!g_regex_match_full (regex, search_str->str, search_str->len, 0, G_REGEX_MATCH_NEWLINE_ANY,
-                             &lc_mc_search->regex_match_info, &error))
+                             &lc_mc_search->regex_match_info, &mcerror))
     {
         g_match_info_free (lc_mc_search->regex_match_info);
         lc_mc_search->regex_match_info = NULL;
-        if (error)
+        if (mcerror != NULL)
         {
             lc_mc_search->error = MC_SEARCH_E_REGEX;
             lc_mc_search->error_str =
-                str_conv_gerror_message (error, _("Regular expression error"));
-            g_error_free (error);
+                str_conv_gerror_message (mcerror, _("Regular expression error"));
+            g_error_free (mcerror);
             return COND__FOUND_ERROR;
         }
         return COND__NOT_FOUND;
@@ -596,10 +596,6 @@ mc_search_regex__process_append_str (GString * dest_str, const char *from, gsize
             g_string_append_len (dest_str, tmp_string->str, tmp_string->len);
             g_string_free (tmp_string, TRUE);
         }
-        else
-        {
-            g_string_append_len (dest_str, tmp_str, tmp_string->len);
-        }
 
         g_free (tmp_str);
     }
@@ -716,7 +712,7 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_
                                        mc_search_cond_t * mc_search_cond)
 {
 #ifdef SEARCH_TYPE_GLIB
-    GError *error = NULL;
+    GError *mcerror = NULL;
 
     if (!lc_mc_search->is_case_sensitive)
     {
@@ -728,13 +724,13 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_
     }
     mc_search_cond->regex_handle =
         g_regex_new (mc_search_cond->str->str, G_REGEX_OPTIMIZE | G_REGEX_RAW | G_REGEX_DOTALL,
-                     0, &error);
+                     0, &mcerror);
 
-    if (error != NULL)
+    if (mcerror != NULL)
     {
         lc_mc_search->error = MC_SEARCH_E_REGEX_COMPILE;
-        lc_mc_search->error_str = str_conv_gerror_message (error, _("Regular expression error"));
-        g_error_free (error);
+        lc_mc_search->error_str = str_conv_gerror_message (mcerror, _("Regular expression error"));
+        g_error_free (mcerror);
         return;
     }
 #else /* SEARCH_TYPE_GLIB */

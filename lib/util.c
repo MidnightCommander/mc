@@ -648,6 +648,9 @@ x_basename (const char *s)
     url_delim = g_strrstr (s, VFS_PATH_URL_DELIMITER);
     path_sep = strrchr (s, PATH_SEP);
 
+    if (path_sep == NULL)
+        return s;
+
     if (url_delim == NULL
         || url_delim < path_sep - strlen (VFS_PATH_URL_DELIMITER)
         || url_delim - s + strlen (VFS_PATH_URL_DELIMITER) < strlen (s))
@@ -1393,6 +1396,60 @@ guess_message_value (void)
         locale = "";
 
     return g_strdup (locale);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Propagate error in simple way.
+ *
+ * @param dest error return location
+ * @param code error code
+ * @param format printf()-style format for error message
+ * @param ... parameters for message format
+ */
+
+void
+mc_propagate_error (GError ** dest, int code, const char *format, ...)
+{
+    if (dest != NULL && *dest == NULL)
+    {
+        GError *tmp_error;
+        va_list args;
+
+        va_start (args, format);
+        tmp_error = g_error_new_valist (MC_ERROR, code, format, args);
+        va_end (args);
+
+        g_propagate_error (dest, tmp_error);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Replace existing error in simple way.
+ *
+ * @param dest error return location
+ * @param code error code
+ * @param format printf()-style format for error message
+ * @param ... parameters for message format
+ */
+
+void
+mc_replace_error (GError ** dest, int code, const char *format, ...)
+{
+    if (dest != NULL)
+    {
+        GError *tmp_error;
+        va_list args;
+
+        va_start (args, format);
+        tmp_error = g_error_new_valist (MC_ERROR, code, format, args);
+        va_end (args);
+
+        g_error_free (*dest);
+        *dest = NULL;
+        g_propagate_error (dest, tmp_error);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

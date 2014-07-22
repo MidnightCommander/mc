@@ -134,26 +134,25 @@ static const struct
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mc_config_mkdir (const char *directory_name, GError ** error)
+mc_config_mkdir (const char *directory_name, GError ** mcerror)
 {
+    mc_return_if_error (mcerror);
+
     if ((!g_file_test (directory_name, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_DIR)) &&
         (g_mkdir_with_parents (directory_name, 0700) != 0))
-    {
-        g_propagate_error (error,
-                           g_error_new (MC_ERROR, 0, _("Cannot create %s directory"),
-                                        directory_name));
-    }
+        mc_propagate_error (mcerror, 0, _("Cannot create %s directory"), directory_name);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-mc_config_init_one_config_path (const char *path_base, const char *subdir, GError ** error)
+mc_config_init_one_config_path (const char *path_base, const char *subdir, GError ** mcerror)
 {
     char *full_path;
 
-    full_path = g_build_filename (path_base, subdir, NULL);
+    mc_return_val_if_error (mcerror, FALSE);
 
+    full_path = g_build_filename (path_base, subdir, NULL);
     if (g_file_test (full_path, G_FILE_TEST_EXISTS))
     {
         if (g_file_test (full_path, G_FILE_TEST_IS_DIR))
@@ -167,8 +166,8 @@ mc_config_init_one_config_path (const char *path_base, const char *subdir, GErro
         }
     }
 
-    mc_config_mkdir (full_path, error);
-    if (error != NULL && *error != NULL)
+    mc_config_mkdir (full_path, mcerror);
+    if (mcerror != NULL && *mcerror != NULL)
     {
         g_free (full_path);
         full_path = NULL;
@@ -187,15 +186,17 @@ mc_config_get_deprecated_path (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mc_config_copy (const char *old_name, const char *new_name, GError ** error)
+mc_config_copy (const char *old_name, const char *new_name, GError ** mcerror)
 {
+    mc_return_if_error (mcerror);
+
     if (g_file_test (old_name, G_FILE_TEST_IS_REGULAR))
     {
         char *contents = NULL;
         size_t length;
 
-        if (g_file_get_contents (old_name, &contents, &length, error))
-            g_file_set_contents (new_name, contents, length, error);
+        if (g_file_get_contents (old_name, &contents, &length, mcerror))
+            g_file_set_contents (new_name, contents, length, mcerror);
 
         g_free (contents);
         return;
@@ -207,18 +208,16 @@ mc_config_copy (const char *old_name, const char *new_name, GError ** error)
         GDir *dir;
         const char *dir_name;
 
-        dir = g_dir_open (old_name, 0, error);
+        dir = g_dir_open (old_name, 0, mcerror);
         if (dir == NULL)
             return;
 
         if (g_mkdir_with_parents (new_name, 0700) == -1)
         {
             g_dir_close (dir);
-            g_propagate_error (error,
-                               g_error_new (MC_ERROR, 0,
-                                            _
-                                            ("An error occurred while migrating user settings: %s"),
-                                            unix_error_string (errno)));
+            mc_propagate_error (mcerror, 0,
+                                _("An error occurred while migrating user settings: %s"),
+                                unix_error_string (errno));
             return;
         }
 
@@ -228,7 +227,7 @@ mc_config_copy (const char *old_name, const char *new_name, GError ** error)
 
             old_name2 = g_build_filename (old_name, dir_name, NULL);
             new_name2 = g_build_filename (new_name, dir_name, NULL);
-            mc_config_copy (old_name2, new_name2, error);
+            mc_config_copy (old_name2, new_name2, mcerror);
             g_free (new_name2);
             g_free (old_name2);
         }
@@ -286,9 +285,11 @@ mc_config_deprecated_dir_present (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mc_config_init_config_paths (GError ** error)
+mc_config_init_config_paths (GError ** mcerror)
 {
     char *dir;
+
+    mc_return_if_error (mcerror);
 
     if (xdg_vars_initialized)
         return;
@@ -300,46 +301,46 @@ mc_config_init_config_paths (GError ** error)
     if (mc_home != NULL)
     {
         dir = g_build_filename (mc_home, ".config", (char *) NULL);
-        mc_config_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, error);
+        mc_config_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, mcerror);
         g_free (dir);
 
         dir = g_build_filename (mc_home, ".cache", (char *) NULL);
-        mc_cache_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, error);
+        mc_cache_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, mcerror);
         g_free (dir);
 
         dir = g_build_filename (mc_home, ".local", "share", (char *) NULL);
-        mc_data_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, error);
+        mc_data_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, mcerror);
         g_free (dir);
     }
     else
     {
         dir = (char *) g_get_user_config_dir ();
         if (dir != NULL && *dir != '\0')
-            mc_config_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, error);
+            mc_config_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, mcerror);
         else
         {
             dir = g_build_filename (homedir, ".config", (char *) NULL);
-            mc_config_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, error);
+            mc_config_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, mcerror);
             g_free (dir);
         }
 
         dir = (char *) g_get_user_cache_dir ();
         if (dir != NULL && *dir != '\0')
-            mc_cache_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, error);
+            mc_cache_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, mcerror);
         else
         {
             dir = g_build_filename (homedir, ".cache", (char *) NULL);
-            mc_cache_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, error);
+            mc_cache_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, mcerror);
             g_free (dir);
         }
 
         dir = (char *) g_get_user_data_dir ();
         if (dir != NULL && *dir != '\0')
-            mc_data_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, error);
+            mc_data_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, mcerror);
         else
         {
             dir = g_build_filename (homedir, ".local", "share", (char *) NULL);
-            mc_data_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, error);
+            mc_data_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, mcerror);
             g_free (dir);
         }
     }
@@ -357,7 +358,7 @@ mc_config_init_config_paths (GError ** error)
         dir = g_build_filename (mc_config_get_home_dir (), MC_USERCONF_DIR, (char *) NULL);
     }
 
-    mc_data_str = mc_cache_str = mc_config_str = mc_config_init_one_config_path (dir, "", error);
+    mc_data_str = mc_cache_str = mc_config_str = mc_config_init_one_config_path (dir, "", mcerror);
 
     g_free (dir);
 #endif /* MC_HOMEDIR_XDG */
@@ -439,24 +440,25 @@ mc_config_get_path (void)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_config_migrate_from_old_place (GError ** error, char **msg)
+mc_config_migrate_from_old_place (GError ** mcerror, char **msg)
 {
     char *old_dir;
     size_t rule_index;
+
+    mc_return_val_if_error (mcerror, FALSE);
 
     if (!mc_config_deprecated_dir_present ())
         return FALSE;
 
     old_dir = mc_config_get_deprecated_path ();
 
-    g_free (mc_config_init_one_config_path (mc_config_str, EDIT_DIR, error));
+    g_free (mc_config_init_one_config_path (mc_config_str, EDIT_DIR, mcerror));
 #ifdef MC_HOMEDIR_XDG
-    g_free (mc_config_init_one_config_path (mc_cache_str, EDIT_DIR, error));
-    g_free (mc_config_init_one_config_path (mc_data_str, EDIT_DIR, error));
+    g_free (mc_config_init_one_config_path (mc_cache_str, EDIT_DIR, mcerror));
+    g_free (mc_config_init_one_config_path (mc_data_str, EDIT_DIR, mcerror));
 #endif /* MC_HOMEDIR_XDG */
 
-    if (*error != NULL)
-        return FALSE;
+    mc_return_val_if_error (mcerror, FALSE);
 
     for (rule_index = 0; mc_config_files_reference[rule_index].old_filename != NULL; rule_index++)
     {
@@ -474,7 +476,7 @@ mc_config_migrate_from_old_place (GError ** error, char **msg)
             const char *filename = mc_config_files_reference[rule_index].new_filename;
 
             new_name = g_build_filename (basedir, filename, NULL);
-            mc_config_copy (old_name, new_name, error);
+            mc_config_copy (old_name, new_name, mcerror);
             g_free (new_name);
         }
         g_free (old_name);

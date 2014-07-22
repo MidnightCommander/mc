@@ -464,8 +464,8 @@ void
 mcview_set_datasource_string (mcview_t * view, const char *s)
 {
     view->datasource = DS_STRING;
-    view->ds_string_data = (byte *) g_strdup (s);
     view->ds_string_len = strlen (s);
+    view->ds_string_data = (byte *) g_strndup (s, view->ds_string_len);
 }
 
 /* --------------------------------------------------------------------------------------------- */

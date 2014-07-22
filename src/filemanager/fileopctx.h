@@ -46,14 +46,15 @@ typedef enum
     RECURSIVE_ABORT = 4
 } FileCopyMode;
 
+/* ATTENTION: avoid overlapping with B_* values (lib/widget/dialog.h) */
 typedef enum
 {
-    FILE_CONT = 0,
-    FILE_RETRY = 1,
-    FILE_SKIP = 2,
-    FILE_ABORT = 3,
-    FILE_SKIPALL = 4,
-    FILE_SUSPEND = 5
+    FILE_CONT = 10,
+    FILE_RETRY,
+    FILE_SKIP,
+    FILE_ABORT,
+    FILE_SKIPALL,
+    FILE_SUSPEND
 } FileProgressStatus;
 
 /* First argument passed to real functions */

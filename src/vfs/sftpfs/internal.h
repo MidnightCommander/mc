@@ -61,40 +61,39 @@ void sftpfs_init_subclass_callbacks (void);
 void sftpfs_init_config_variables_patterns (void);
 void sftpfs_deinit_config_variables_patterns (void);
 
-gboolean sftpfs_show_error (GError ** error);
 void sftpfs_ssherror_to_gliberror (sftpfs_super_data_t * super_data, int libssh_errno,
-                                   GError ** error);
-int sftpfs_waitsocket (sftpfs_super_data_t * super_data, GError ** error);
+                                   GError ** mcerror);
+int sftpfs_waitsocket (sftpfs_super_data_t * super_data, GError ** mcerror);
 
 const char *sftpfs_fix_filename (const char *file_name);
-int sftpfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** error);
-int sftpfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** error);
-int sftpfs_readlink (const vfs_path_t * vpath, char *buf, size_t size, GError ** error);
-int sftpfs_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** error);
-int sftpfs_chmod (const vfs_path_t * vpath, mode_t mode, GError ** error);
-int sftpfs_unlink (const vfs_path_t * vpath, GError ** error);
-int sftpfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** error);
+int sftpfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror);
+int sftpfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror);
+int sftpfs_readlink (const vfs_path_t * vpath, char *buf, size_t size, GError ** mcerror);
+int sftpfs_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** mcerror);
+int sftpfs_chmod (const vfs_path_t * vpath, mode_t mode, GError ** mcerror);
+int sftpfs_unlink (const vfs_path_t * vpath, GError ** mcerror);
+int sftpfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** mcerror);
 
-void sftpfs_fill_connection_data_from_config (struct vfs_s_super *super, GError ** error);
-int sftpfs_open_connection (struct vfs_s_super *super, GError ** error);
+void sftpfs_fill_connection_data_from_config (struct vfs_s_super *super, GError ** mcerror);
+int sftpfs_open_connection (struct vfs_s_super *super, GError ** mcerror);
 void sftpfs_close_connection (struct vfs_s_super *super, const char *shutdown_message,
-                              GError ** error);
+                              GError ** mcerror);
 
-void *sftpfs_opendir (const vfs_path_t * vpath, GError ** error);
-void *sftpfs_readdir (void *data, GError ** error);
-int sftpfs_closedir (void *data, GError ** error);
-int sftpfs_mkdir (const vfs_path_t * vpath, mode_t mode, GError ** error);
-int sftpfs_rmdir (const vfs_path_t * vpath, GError ** error);
+void *sftpfs_opendir (const vfs_path_t * vpath, GError ** mcerror);
+void *sftpfs_readdir (void *data, GError ** mcerror);
+int sftpfs_closedir (void *data, GError ** mcerror);
+int sftpfs_mkdir (const vfs_path_t * vpath, mode_t mode, GError ** mcerror);
+int sftpfs_rmdir (const vfs_path_t * vpath, GError ** mcerror);
 
 gboolean sftpfs_open_file (vfs_file_handler_t * file_handler, int flags, mode_t mode,
-                           GError ** error);
+                           GError ** mcerror);
 ssize_t sftpfs_read_file (vfs_file_handler_t * file_handler, char *buffer, size_t count,
-                          GError ** error);
+                          GError ** mcerror);
 ssize_t sftpfs_write_file (vfs_file_handler_t * file_handler, const char *buffer, size_t count,
-                           GError ** error);
-int sftpfs_close_file (vfs_file_handler_t * file_handler, GError ** error);
-int sftpfs_fstat (void *data, struct stat *buf, GError ** error);
-off_t sftpfs_lseek (vfs_file_handler_t * file_handler, off_t offset, int whence, GError ** error);
+                           GError ** mcerror);
+int sftpfs_close_file (vfs_file_handler_t * file_handler, GError ** mcerror);
+int sftpfs_fstat (void *data, struct stat *buf, GError ** mcerror);
+off_t sftpfs_lseek (vfs_file_handler_t * file_handler, off_t offset, int whence, GError ** mcerror);
 
 /*** inline functions ****************************************************************************/
 

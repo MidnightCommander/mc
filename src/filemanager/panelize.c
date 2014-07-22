@@ -560,13 +560,12 @@ void
 load_panelize (void)
 {
     char **keys;
-    gsize len;
 
-    keys = mc_config_get_keys (mc_main_config, panelize_section, &len);
+    keys = mc_config_get_keys (mc_main_config, panelize_section, NULL);
 
     add2panelize (g_strdup (_("Other command")), g_strdup (""));
 
-    if (keys == NULL || *keys == NULL)
+    if (*keys == NULL)
     {
         add2panelize (g_strdup (_("Modified git files")), g_strdup ("git ls-files --modified"));
         add2panelize (g_strdup (_("Find rejects after patching")),

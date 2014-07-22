@@ -1657,7 +1657,6 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
     struct vfs_s_entry *ent;
     struct vfs_s_super *super = dir->super;
     int sock, num_entries = 0;
-    char lc_buffer[BUF_8K];
     int cd_first;
 
     cd_first = ftpfs_first_cd_then_ls || (SUP->strict == RFC_STRICT)
@@ -1705,13 +1704,15 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
     tty_enable_interrupt_key ();
 
     vfs_parse_ls_lga_init ();
-    while (1)
+    while (TRUE)
     {
         int i;
         size_t count_spaces = 0;
-        int res = vfs_s_get_line_interruptible (me, lc_buffer, sizeof (lc_buffer),
-                                                sock);
-        if (!res)
+        int res;
+        char lc_buffer[BUF_8K] = "\0";
+
+        res = vfs_s_get_line_interruptible (me, lc_buffer, sizeof (lc_buffer), sock);
+        if (res == 0)
             break;
 
         if (res == EINTR)
@@ -2428,12 +2429,10 @@ ftpfs_netrc_lookup (const char *host, char **login, char **pass)
     /* Look up in the cache first */
     for (rupp = rup_cache; rupp != NULL; rupp = rupp->next)
     {
-        if (!strcmp (host, rupp->host))
+        if (strcmp (host, rupp->host) == 0)
         {
-            if (rupp->login)
-                *login = g_strdup (rupp->login);
-            if (pass && rupp->pass)
-                *pass = g_strdup (rupp->pass);
+            *login = g_strdup (rupp->login);
+            *pass = g_strdup (rupp->pass);
             return 0;
         }
     }

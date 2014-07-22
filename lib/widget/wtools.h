@@ -50,6 +50,8 @@ struct WDialog *create_message (int flags, const char *title,
 void message (int flags, const char *title, const char *text, ...)
     __attribute__ ((format (__printf__, 3, 4)));
 
+gboolean mc_error_message (GError ** mcerror);
+
 /*** inline functions ****************************************************************************/
 
 #endif /* MC__WTOOLS_H */

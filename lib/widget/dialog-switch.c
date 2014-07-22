@@ -4,7 +4,7 @@
    Original idea and code: Oleg "Olegarch" Konovalov <olegarch@linuxinside.com>
 
    Copyright (C) 2009-2014
-   The Free Software Foundation
+   Free Software Foundation, Inc.
 
    Written by:
    Daniel Borca <dborca@yahoo.com>, 2007

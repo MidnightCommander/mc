@@ -1550,34 +1550,42 @@ int
 vfs_s_get_line_interruptible (struct vfs_class *me, char *buffer, int size, int fd)
 {
     int i;
+    int res = 0;
 
     (void) me;
 
     tty_enable_interrupt_key ();
+
     for (i = 0; i < size - 1; i++)
     {
-        int n;
+        ssize_t n;
 
-        n = read (fd, buffer + i, 1);
-        tty_disable_interrupt_key ();
+        n = read (fd, &buffer[i], 1);
         if (n == -1 && errno == EINTR)
         {
-            buffer[i] = 0;
-            return EINTR;
+            buffer[i] = '\0';
+            res = EINTR;
+            goto ret;
         }
         if (n == 0)
         {
-            buffer[i] = 0;
-            return 0;
+            buffer[i] = '\0';
+            goto ret;
         }
         if (buffer[i] == '\n')
         {
-            buffer[i] = 0;
-            return 1;
+            buffer[i] = '\0';
+            res = 1;
+            goto ret;
         }
     }
-    buffer[size - 1] = 0;
-    return 0;
+
+    buffer[size - 1] = '\0';
+
+  ret:
+    tty_disable_interrupt_key ();
+
+    return res;
 }
 #endif /* ENABLE_VFS_NET */
 

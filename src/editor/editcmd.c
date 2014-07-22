@@ -1921,7 +1921,6 @@ edit_load_macro_cmd (WEdit * edit)
     mc_config_t *macros_config = NULL;
     gchar **profile_keys, **keys;
     gchar **values, **curr_values;
-    gsize len, values_len;
     const char *section_name = "editor";
     gchar *macros_fname;
 
@@ -1934,7 +1933,8 @@ edit_load_macro_cmd (WEdit * edit)
     if (macros_config == NULL || macros_list == NULL || macros_list->len != 0)
         return FALSE;
 
-    keys = mc_config_get_keys (macros_config, section_name, &len);
+    keys = mc_config_get_keys (macros_config, section_name, NULL);
+
     for (profile_keys = keys; *profile_keys != NULL; profile_keys++)
     {
         int hotkey;
@@ -1943,8 +1943,7 @@ edit_load_macro_cmd (WEdit * edit)
         macros_t macro;
 
         macros = g_array_new (TRUE, FALSE, sizeof (macro_action_t));
-        values =
-            mc_config_get_string_list (macros_config, section_name, *profile_keys, &values_len);
+        values = mc_config_get_string_list (macros_config, section_name, *profile_keys, NULL);
         hotkey = lookup_key (*profile_keys, NULL);
 
         for (curr_values = values; *curr_values != NULL && *curr_values[0] != '\0'; curr_values++)

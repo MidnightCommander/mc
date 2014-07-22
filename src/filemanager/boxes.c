@@ -521,10 +521,10 @@ configure_box (void)
 static void
 skin_apply (const gchar * skin_override)
 {
-    GError *error = NULL;
+    GError *mcerror = NULL;
 
     mc_skin_deinit ();
-    mc_skin_init (skin_override, &error);
+    mc_skin_init (skin_override, &mcerror);
     mc_fhl_free (&mc_filehighlight);
     mc_filehighlight = mc_fhl_new (TRUE);
     dlg_set_default_colors ();
@@ -535,11 +535,7 @@ skin_apply (const gchar * skin_override)
     panel_init ();
     repaint_screen ();
 
-    if (error != NULL)
-    {
-        message (D_ERROR, _("Warning"), "%s", error->message);
-        g_error_free (error);
-    }
+    mc_error_message (&mcerror);
 }
 
 /* --------------------------------------------------------------------------------------------- */

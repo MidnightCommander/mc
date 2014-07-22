@@ -48,7 +48,7 @@ mc_config_t *mc_panels_config;
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 static gboolean
-mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path, GError ** error)
+mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path, GError ** mcerror)
 {
     gchar *data, *written_data;
     gsize len, total_written;
@@ -57,10 +57,12 @@ mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path,
     ssize_t cur_written;
     vfs_path_t *ini_vpath;
 
+    mc_return_val_if_error (mcerror, FALSE);
+
     data = g_key_file_to_data (mc_config->handle, &len, NULL);
     if (!exist_file (ini_path))
     {
-        ret = g_file_set_contents (ini_path, data, len, error);
+        ret = g_file_set_contents (ini_path, data, len, mcerror);
         g_free (data);
         return ret;
     }
@@ -73,7 +75,7 @@ mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path,
 
     if (fd == -1)
     {
-        g_propagate_error (error, g_error_new (MC_ERROR, 0, "%s", unix_error_string (errno)));
+        mc_propagate_error (mcerror, 0, "%s", unix_error_string (errno));
         g_free (data);
         return FALSE;
     }
@@ -88,7 +90,7 @@ mc_config_new_or_override_file (mc_config_t * mc_config, const gchar * ini_path,
     if (cur_written == -1)
     {
         mc_util_restore_from_backup_if_possible (ini_path, "~");
-        g_propagate_error (error, g_error_new (MC_ERROR, 0, "%s", unix_error_string (errno)));
+        mc_propagate_error (mcerror, 0, "%s", unix_error_string (errno));
         return FALSE;
     }
 
@@ -216,8 +218,8 @@ mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path, gboolean r
 {
     mc_config_t *tmp_config;
     gchar **groups, **curr_grp;
-    gchar **keys, **curr_key;
     gchar *value;
+    gboolean ok;
 
     if (mc_config == NULL)
         return FALSE;
@@ -227,16 +229,14 @@ mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path, gboolean r
         return FALSE;
 
     groups = mc_config_get_groups (tmp_config, NULL);
-
-    if (groups == NULL)
-    {
-        mc_config_deinit (tmp_config);
-        return FALSE;
-    }
+    ok = (*groups != NULL);
 
     for (curr_grp = groups; *curr_grp != NULL; curr_grp++)
     {
+        gchar **keys, **curr_key;
+
         keys = mc_config_get_keys (tmp_config, *curr_grp, NULL);
+
         for (curr_key = keys; *curr_key != NULL; curr_key++)
         {
             value = g_key_file_get_value (tmp_config->handle, *curr_grp, *curr_key, NULL);
@@ -253,33 +253,37 @@ mc_config_read_file (mc_config_t * mc_config, const gchar * ini_path, gboolean r
         }
         g_strfreev (keys);
     }
+
     g_strfreev (groups);
     mc_config_deinit (tmp_config);
-    return TRUE;
+
+    return ok;
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 gboolean
-mc_config_save_file (mc_config_t * mc_config, GError ** error)
+mc_config_save_file (mc_config_t * mc_config, GError ** mcerror)
 {
+    mc_return_val_if_error (mcerror, FALSE);
+
     if (mc_config == NULL || mc_config->ini_path == NULL)
-    {
         return FALSE;
-    }
-    return mc_config_new_or_override_file (mc_config, mc_config->ini_path, error);
+
+    return mc_config_new_or_override_file (mc_config, mc_config->ini_path, mcerror);
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 gboolean
-mc_config_save_to_file (mc_config_t * mc_config, const gchar * ini_path, GError ** error)
+mc_config_save_to_file (mc_config_t * mc_config, const gchar * ini_path, GError ** mcerror)
 {
+    mc_return_val_if_error (mcerror, FALSE);
+
     if (mc_config == NULL)
-    {
         return FALSE;
-    }
-    return mc_config_new_or_override_file (mc_config, ini_path, error);
+
+    return mc_config_new_or_override_file (mc_config, ini_path, mcerror);
 
 }
 

@@ -164,11 +164,11 @@ str_ascii_length2 (const char *text, int size)
 }
 
 static gchar *
-str_ascii_conv_gerror_message (GError * error, const char *def_msg)
+str_ascii_conv_gerror_message (GError * mcerror, const char *def_msg)
 {
     /* the same as str_utf8_conv_gerror_message() */
-    if (error != NULL)
-        return g_strdup (error->message);
+    if (mcerror != NULL)
+        return g_strdup (mcerror->message);
 
     return g_strdup (def_msg != NULL ? def_msg : "");
 }
@@ -303,6 +303,8 @@ str_ascii_fit_to_term (const char *text, int width, align_crt_t just_mode)
     }
 
   finally:
+    if (actual >= result + sizeof (result))
+        actual = result + sizeof (result) - 1;
     actual[0] = '\0';
     return result;
 }

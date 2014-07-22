@@ -401,6 +401,7 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *heade
     else
         st->st_mode |= S_IFREG;
 
+    st->st_dev = 0;
     st->st_rdev = 0;
     switch (arch->type)
     {
@@ -736,7 +737,9 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
         {
             while (tar_get_next_record (archive, tard)->ext_hdr.isextended != 0)
                 ;
-            inode->data_offset = current_tar_position;
+
+            if (inode != NULL)
+                inode->data_offset = current_tar_position;
         }
         return STATUS_SUCCESS;
     }

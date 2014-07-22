@@ -618,7 +618,7 @@ get_file_encoding_local (const vfs_path_t * filename_vpath, char *buf, int bufle
 
 static gboolean
 regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean case_insense,
-                  gboolean * have_type, GError ** error)
+                  gboolean * have_type, GError ** mcerror)
 {
     gboolean found = FALSE;
 
@@ -626,6 +626,8 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean c
     static char content_string[2048];
     static size_t content_shift = 0;
     static int got_data = 0;
+
+    mc_return_val_if_error (mcerror, FALSE);
 
     if (!use_file_to_check_type)
         return FALSE;
@@ -646,10 +648,8 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean c
         localfile_vpath = mc_getlocalcopy (filename_vpath);
         if (localfile_vpath == NULL)
         {
-            g_propagate_error (error,
-                               g_error_new (MC_ERROR, -1,
-                                            _("Cannot fetch a local copy of %s"),
-                                            vfs_path_as_str (filename_vpath)));
+            mc_propagate_error (mcerror, -1, _("Cannot fetch a local copy of %s"),
+                                vfs_path_as_str (filename_vpath));
             return FALSE;
         }
 
@@ -715,7 +715,7 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean c
 
     if (got_data == -1)
     {
-        g_propagate_error (error, g_error_new (MC_ERROR, -1, _("Pipe failed")));
+        mc_propagate_error (mcerror, -1, "%s", _("Pipe failed"));
         return FALSE;
     }
 
@@ -733,7 +733,7 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean c
         }
         else
         {
-            g_propagate_error (error, g_error_new (MC_ERROR, -1, _("Regular expression error")));
+            mc_propagate_error (mcerror, -1, "%s", _("Regular expression error"));
         }
     }
 
@@ -958,7 +958,7 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
             }
             else if (strncmp (p, "type/", 5) == 0)
             {
-                GError *error = NULL;
+                GError *mcerror = NULL;
 
                 p += 5;
 
@@ -966,12 +966,9 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
                 if (case_insense)
                     p += 2;
 
-                found = regex_check_type (filename_vpath, p, case_insense, &have_type, &error);
-                if (error != NULL)
-                {
-                    g_error_free (error);
+                found = regex_check_type (filename_vpath, p, case_insense, &have_type, &mcerror);
+                if (mc_error_message (&mcerror))
                     error_flag = TRUE;  /* leave it if file cannot be opened */
-                }
             }
             else if (strncmp (p, "default/", 8) == 0)
                 found = TRUE;

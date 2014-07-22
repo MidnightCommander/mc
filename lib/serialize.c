@@ -196,17 +196,15 @@ char *
 mc_serialize_config (const mc_config_t * data, GError ** error)
 {
     gchar **groups, **group_iterator;
-    size_t group_count;
     GString *buffer;
 
     buffer = g_string_new ("");
-    group_iterator = groups = mc_config_get_groups (data, &group_count);
+    groups = mc_config_get_groups (data, NULL);
 
-    while (group_count-- != 0)
+    for (group_iterator = groups; *group_iterator != NULL; group_iterator++)
     {
         char *serialized_str;
         gchar **params, **param_iterator;
-        size_t param_count;
 
         serialized_str = mc_serialize_str ('g', *group_iterator, error);
         if (serialized_str == NULL)
@@ -218,11 +216,12 @@ mc_serialize_config (const mc_config_t * data, GError ** error)
         g_string_append (buffer, serialized_str);
         g_free (serialized_str);
 
-        param_iterator = params = mc_config_get_keys (data, *group_iterator, &param_count);
+        params = mc_config_get_keys (data, *group_iterator, NULL);
 
-        while (param_count-- != 0)
+        for (param_iterator = params; *param_iterator != NULL; param_iterator++)
         {
             char *value;
+
             serialized_str = mc_serialize_str ('p', *param_iterator, error);
             if (serialized_str == NULL)
             {
@@ -248,13 +247,9 @@ mc_serialize_config (const mc_config_t * data, GError ** error)
 
             g_string_append (buffer, serialized_str);
             g_free (serialized_str);
-
-            param_iterator++;
         }
 
         g_strfreev (params);
-
-        group_iterator++;
     }
     return g_string_free (buffer, FALSE);
 }

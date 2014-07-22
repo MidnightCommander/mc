@@ -30,6 +30,7 @@
 #include <libssh2_sftp.h>
 
 #include "lib/global.h"
+#include "lib/util.h"
 
 #include "internal.h"
 
@@ -56,19 +57,21 @@ typedef struct
 /**
  * Open a directory stream corresponding to the directory name.
  *
- * @param vpath path to directory
- * @param error pointer to the error handler
+ * @param vpath   path to directory
+ * @param mcerror pointer to the error handler
  * @return directory data handler if success, NULL otherwise
  */
 
 void *
-sftpfs_opendir (const vfs_path_t * vpath, GError ** error)
+sftpfs_opendir (const vfs_path_t * vpath, GError ** mcerror)
 {
     sftpfs_dir_data_t *sftpfs_dir;
     struct vfs_s_super *super;
     sftpfs_super_data_t *super_data;
     const vfs_path_element_t *path_element;
     LIBSSH2_SFTP_HANDLE *handle;
+
+    mc_return_val_if_error (mcerror, NULL);
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
@@ -90,12 +93,12 @@ sftpfs_opendir (const vfs_path_t * vpath, GError ** error)
         libssh_errno = libssh2_session_last_errno (super_data->session);
         if (libssh_errno != LIBSSH2_ERROR_EAGAIN)
         {
-            sftpfs_ssherror_to_gliberror (super_data, libssh_errno, error);
+            sftpfs_ssherror_to_gliberror (super_data, libssh_errno, mcerror);
             return NULL;
         }
-        sftpfs_waitsocket (super_data, error);
-        if (error != NULL && *error != NULL)
-            return NULL;
+        sftpfs_waitsocket (super_data, mcerror);
+
+        mc_return_val_if_error (mcerror, NULL);
     }
 
     sftpfs_dir = g_new0 (sftpfs_dir_data_t, 1);
@@ -109,19 +112,21 @@ sftpfs_opendir (const vfs_path_t * vpath, GError ** error)
 /**
  * Get a pointer to a structure representing the next directory entry.
  *
- * @param data  directory data handler
- * @param error pointer to the error handler
+ * @param data    directory data handler
+ * @param mcerror pointer to the error handler
  * @return information about direntry if success, NULL otherwise
  */
 
 void *
-sftpfs_readdir (void *data, GError ** error)
+sftpfs_readdir (void *data, GError ** mcerror)
 {
     char mem[BUF_MEDIUM];
     LIBSSH2_SFTP_ATTRIBUTES attrs;
     sftpfs_dir_data_t *sftpfs_dir = (sftpfs_dir_data_t *) data;
     static union vfs_dirent sftpfs_dirent;
     int rc;
+
+    mc_return_val_if_error (mcerror, NULL);
 
     do
     {
@@ -131,13 +136,12 @@ sftpfs_readdir (void *data, GError ** error)
 
         if (rc != LIBSSH2_ERROR_EAGAIN)
         {
-            sftpfs_ssherror_to_gliberror (sftpfs_dir->super_data, rc, error);
+            sftpfs_ssherror_to_gliberror (sftpfs_dir->super_data, rc, mcerror);
             return NULL;
         }
 
-        sftpfs_waitsocket (sftpfs_dir->super_data, error);
-        if (error != NULL && *error != NULL)
-            return NULL;
+        sftpfs_waitsocket (sftpfs_dir->super_data, mcerror);
+        mc_return_val_if_error (mcerror, NULL);
     }
     while (rc == LIBSSH2_ERROR_EAGAIN);
 
@@ -153,18 +157,18 @@ sftpfs_readdir (void *data, GError ** error)
 /**
  * Close the directory stream.
  *
- * @param data  directory data handler
- * @param error pointer to the error handler
+ * @param data    directory data handler
+ * @param mcerror pointer to the error handler
  * @return 0 if success, negative value otherwise
  */
 
 int
-sftpfs_closedir (void *data, GError ** error)
+sftpfs_closedir (void *data, GError ** mcerror)
 {
     int rc;
     sftpfs_dir_data_t *sftpfs_dir = (sftpfs_dir_data_t *) data;
 
-    (void) error;
+    mc_return_val_if_error (mcerror, -1);
 
     rc = libssh2_sftp_closedir (sftpfs_dir->handle);
     g_free (sftpfs_dir);
@@ -175,19 +179,21 @@ sftpfs_closedir (void *data, GError ** error)
 /**
  * Create a new directory.
  *
- * @param vpath path directory
- * @param mode  mode (see man 2 open)
- * @param error pointer to the error handler
+ * @param vpath   path directory
+ * @param mode    mode (see man 2 open)
+ * @param mcerror pointer to the error handler
  * @return 0 if success, negative value otherwise
  */
 
 int
-sftpfs_mkdir (const vfs_path_t * vpath, mode_t mode, GError ** error)
+sftpfs_mkdir (const vfs_path_t * vpath, mode_t mode, GError ** mcerror)
 {
     int res;
     struct vfs_s_super *super;
     sftpfs_super_data_t *super_data;
     const vfs_path_element_t *path_element;
+
+    mc_return_val_if_error (mcerror, -1);
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
@@ -215,13 +221,12 @@ sftpfs_mkdir (const vfs_path_t * vpath, mode_t mode, GError ** error)
 
         if (res != LIBSSH2_ERROR_EAGAIN)
         {
-            sftpfs_ssherror_to_gliberror (super_data, res, error);
+            sftpfs_ssherror_to_gliberror (super_data, res, mcerror);
             return -1;
         }
 
-        sftpfs_waitsocket (super_data, error);
-        if (error != NULL && *error != NULL)
-            return -1;
+        sftpfs_waitsocket (super_data, mcerror);
+        mc_return_val_if_error (mcerror, -1);
     }
     while (res == LIBSSH2_ERROR_EAGAIN);
 
@@ -232,18 +237,20 @@ sftpfs_mkdir (const vfs_path_t * vpath, mode_t mode, GError ** error)
 /**
  * Remove a directory.
  *
- * @param vpath path directory
- * @param error pointer to the error handler
+ * @param vpath   path directory
+ * @param mcerror pointer to the error handler
  * @return 0 if success, negative value otherwise
  */
 
 int
-sftpfs_rmdir (const vfs_path_t * vpath, GError ** error)
+sftpfs_rmdir (const vfs_path_t * vpath, GError ** mcerror)
 {
     int res;
     struct vfs_s_super *super;
     sftpfs_super_data_t *super_data;
     const vfs_path_element_t *path_element;
+
+    mc_return_val_if_error (mcerror, -1);
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
@@ -270,13 +277,12 @@ sftpfs_rmdir (const vfs_path_t * vpath, GError ** error)
 
         if (res != LIBSSH2_ERROR_EAGAIN)
         {
-            sftpfs_ssherror_to_gliberror (super_data, res, error);
+            sftpfs_ssherror_to_gliberror (super_data, res, mcerror);
             return -1;
         }
 
-        sftpfs_waitsocket (super_data, error);
-        if (error != NULL && *error != NULL)
-            return -1;
+        sftpfs_waitsocket (super_data, mcerror);
+        mc_return_val_if_error (mcerror, -1);
     }
     while (res == LIBSSH2_ERROR_EAGAIN);
 

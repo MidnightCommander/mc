@@ -82,9 +82,9 @@ char *mc_run_param1 = NULL;
 
 /* forward declarations */
 static gboolean parse_mc_e_argument (const gchar * option_name, const gchar * value,
-                                     gpointer data, GError ** error);
+                                     gpointer data, GError ** mcerror);
 static gboolean parse_mc_v_argument (const gchar * option_name, const gchar * value,
-                                     gpointer data, GError ** error);
+                                     gpointer data, GError ** mcerror);
 
 static GOptionContext *context;
 
@@ -418,7 +418,7 @@ mc_args_add_extended_info_to_help (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static gchar *
-mc_args__convert_help_to_syscharset (const gchar * charset, const gchar * error_message,
+mc_args__convert_help_to_syscharset (const gchar * charset, const gchar * error_message_str,
                                      const gchar * help_str)
 {
     GString *buffer;
@@ -427,7 +427,7 @@ mc_args__convert_help_to_syscharset (const gchar * charset, const gchar * error_
 
     buffer = g_string_new ("");
     conv = g_iconv_open (charset, "UTF-8");
-    full_help_str = g_strdup_printf ("%s\n\n%s\n", error_message, help_str);
+    full_help_str = g_strdup_printf ("%s\n\n%s\n", error_message_str, help_str);
 
     str_convert (conv, full_help_str, buffer);
 
@@ -440,12 +440,14 @@ mc_args__convert_help_to_syscharset (const gchar * charset, const gchar * error_
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-parse_mc_e_argument (const gchar * option_name, const gchar * value, gpointer data, GError ** error)
+parse_mc_e_argument (const gchar * option_name, const gchar * value, gpointer data,
+                     GError ** mcerror)
 {
     (void) option_name;
     (void) value;
     (void) data;
-    (void) error;
+
+    mc_return_val_if_error (mcerror, FALSE);
 
     mc_global.mc_run_mode = MC_RUN_EDITOR;
 
@@ -455,11 +457,13 @@ parse_mc_e_argument (const gchar * option_name, const gchar * value, gpointer da
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-parse_mc_v_argument (const gchar * option_name, const gchar * value, gpointer data, GError ** error)
+parse_mc_v_argument (const gchar * option_name, const gchar * value, gpointer data,
+                     GError ** mcerror)
 {
     (void) option_name;
     (void) data;
-    (void) error;
+
+    mc_return_val_if_error (mcerror, FALSE);
 
     mc_global.mc_run_mode = MC_RUN_VIEWER;
     mc_run_param0 = g_strdup (value);
@@ -576,10 +580,12 @@ parse_mcedit_arguments (int argc, char **argv)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_args_parse (int *argc, char ***argv, const char *translation_domain, GError ** error)
+mc_args_parse (int *argc, char ***argv, const char *translation_domain, GError ** mcerror)
 {
     const gchar *_system_codepage;
     gboolean ok = TRUE;
+
+    mc_return_val_if_error (mcerror, FALSE);
 
     _system_codepage = str_detect_termencoding ();
 
@@ -613,12 +619,11 @@ mc_args_parse (int *argc, char ***argv, const char *translation_domain, GError *
     g_option_context_add_group (context, color_group);
     g_option_group_set_translation_domain (color_group, translation_domain);
 
-    if (!g_option_context_parse (context, argc, argv, error))
+    if (!g_option_context_parse (context, argc, argv, mcerror))
     {
-        GError *error2 = NULL;
 
-        if (*error == NULL)
-            *error = g_error_new (MC_ERROR, 0, "%s\n", _("Arguments parse error!"));
+        if (*mcerror == NULL)
+            mc_propagate_error (mcerror, 0, "%s\n", _("Arguments parse error!"));
         else
         {
             gchar *help_str;
@@ -629,22 +634,19 @@ mc_args_parse (int *argc, char ***argv, const char *translation_domain, GError *
             help_str = g_strdup ("");
 #endif
             if (str_isutf8 (_system_codepage))
-                error2 = g_error_new ((*error)->domain, (*error)->code, "%s\n\n%s\n",
-                                      (*error)->message, help_str);
+                mc_replace_error (mcerror, (*mcerror)->code, "%s\n\n%s\n", (*mcerror)->message,
+                                  help_str);
             else
             {
                 gchar *full_help_str;
 
                 full_help_str =
-                    mc_args__convert_help_to_syscharset (_system_codepage, (*error)->message,
+                    mc_args__convert_help_to_syscharset (_system_codepage, (*mcerror)->message,
                                                          help_str);
-                error2 = g_error_new ((*error)->domain, (*error)->code, "%s", full_help_str);
+                mc_replace_error (mcerror, (*mcerror)->code, "%s", full_help_str);
                 g_free (full_help_str);
             }
-
             g_free (help_str);
-            g_error_free (*error);
-            *error = error2;
         }
 
         ok = FALSE;
@@ -696,10 +698,12 @@ mc_args_show_info (void)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_setup_by_args (int argc, char **argv, GError ** error)
+mc_setup_by_args (int argc, char **argv, GError ** mcerror)
 {
     const char *base;
     char *tmp;
+
+    mc_return_val_if_error (mcerror, FALSE);
 
     if (mc_args__force_colors)
         mc_global.tty.disable_colors = FALSE;
@@ -748,7 +752,7 @@ mc_setup_by_args (int argc, char **argv, GError ** error)
             mc_run_param0 = g_strdup (tmp);
         else
         {
-            *error = g_error_new (MC_ERROR, 0, "%s\n", _("No arguments given to the viewer."));
+            mc_propagate_error (mcerror, 0, "%s\n", _("No arguments given to the viewer."));
             return FALSE;
         }
         mc_global.mc_run_mode = MC_RUN_VIEWER;
@@ -760,8 +764,8 @@ mc_setup_by_args (int argc, char **argv, GError ** error)
 
         if (argc < 3)
         {
-            *error = g_error_new (MC_ERROR, 0, "%s\n",
-                                  _("Two files are required to evoke the diffviewer."));
+            mc_propagate_error (mcerror, 0, "%s\n",
+                                _("Two files are required to evoke the diffviewer."));
             return FALSE;
         }
 

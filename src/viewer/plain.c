@@ -14,7 +14,7 @@
    Pavel Machek, 1998
    Roland Illig <roland.illig@gmx.de>, 2004, 2005
    Slava Zanko <slavazanko@google.com>, 2009
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2014
    Ilia Maslakov <il.smind@gmail.com>, 2009
 
    This file is part of the Midnight Commander.
@@ -84,13 +84,8 @@ mcview_display_text (mcview_t * view)
     while ((curr != NULL) && (curr->offset < from))
         curr = curr->next;
 
-    while (TRUE)
+    while (row < height)
     {
-        tty_setcolor (VIEW_NORMAL_COLOR);
-
-        if (row >= height)
-            break;
-
 #ifdef HAVE_CHARSET
         if (view->utf8)
         {
@@ -150,11 +145,14 @@ mcview_display_text (mcview_t * view)
 
         if (view->search_start <= from && from < view->search_end)
             tty_setcolor (SELECTED_COLOR);
+        else
+            tty_setcolor (VIEW_NORMAL_COLOR);
 
         if (((off_t) col >= view->dpy_text_column)
             && ((off_t) col - view->dpy_text_column < (off_t) width))
         {
             widget_move (view, top + row, left + ((off_t) col - view->dpy_text_column));
+
 #ifdef HAVE_CHARSET
             if (mc_global.utf8_display)
             {
@@ -166,14 +164,15 @@ mcview_display_text (mcview_t * view)
             else if (view->utf8)
                 c = convert_from_utf_to_current_c (c, view->converter);
             else
-#endif
             {
-#ifdef HAVE_CHARSET
                 c = convert_to_display_c (c);
-#endif
                 if (!is_printable (c))
                     c = '.';
             }
+#else /* HAVE_CHARSET */
+            if (!is_printable (c))
+                c = '.';
+#endif /* HAVE_CHARSET */
 
             tty_print_anychar (c);
         }
@@ -194,9 +193,9 @@ mcview_display_text (mcview_t * view)
     view->dpy_end = from;
     if (mcview_show_eof != NULL && mcview_show_eof[0] != '\0')
     {
-        if (last_row && mcview_get_byte (view, from - 1, &c))
-            if (c != '\n')
-                row--;
+        if (last_row && mcview_get_byte (view, from - 1, &c) && c != '\n')
+            row--;
+
         while (++row < height)
         {
             widget_move (view, top + row, left);

@@ -279,17 +279,14 @@ mc_skin_color_check_bw_mode (mc_skin_t * mc_skin)
     if (tty_use_colors () && !mc_global.tty.disable_colors)
         return;
 
-    orig_groups = groups = mc_config_get_groups (mc_skin->config, NULL);
+    orig_groups = mc_config_get_groups (mc_skin->config, NULL);
 
-    if (groups == NULL)
-        return;
-
-    for (; *groups != NULL; groups++)
-    {
+    for (groups = orig_groups; *groups != NULL; groups++)
         if (mc_skin_color_check_inisection (*groups))
             mc_config_del_group (mc_skin->config, *groups);
-    }
+
     g_strfreev (orig_groups);
+
     mc_skin_hardcoded_blackwhite_colors (mc_skin);
 }
 
@@ -302,15 +299,14 @@ mc_skin_color_parse_ini_file (mc_skin_t * mc_skin)
 {
     gsize items_count;
     gchar **groups, **orig_groups;
-    gchar **keys, **orig_keys;
     mc_skin_color_t *mc_skin_color;
 
     mc_skin_color_check_bw_mode (mc_skin);
 
-    orig_groups = groups = mc_config_get_groups (mc_skin->config, &items_count);
-    if (groups == NULL || groups[0] == NULL)
+    orig_groups = mc_config_get_groups (mc_skin->config, &items_count);
+    if (*orig_groups == NULL)
     {
-        g_strfreev (groups);
+        g_strfreev (orig_groups);
         return FALSE;
     }
 
@@ -323,16 +319,16 @@ mc_skin_color_parse_ini_file (mc_skin_t * mc_skin)
     tty_color_set_defaults (mc_skin_color->fgcolor, mc_skin_color->bgcolor, mc_skin_color->attrs);
     mc_skin_color_add_to_hash (mc_skin, "core", "_default_", mc_skin_color);
 
-    for (; *groups != NULL; groups++)
+    for (groups = orig_groups; *groups != NULL; groups++)
     {
+        gchar **keys, **orig_keys;
+
         if (!mc_skin_color_check_inisection (*groups))
             continue;
 
-        orig_keys = keys = mc_config_get_keys (mc_skin->config, *groups, &items_count);
-        if (keys == NULL)
-            continue;
+        orig_keys = mc_config_get_keys (mc_skin->config, *groups, NULL);
 
-        for (; *keys != NULL; keys++)
+        for (keys = orig_keys; *keys != NULL; keys++)
         {
             mc_skin_color = mc_skin_color_get_from_ini_file (mc_skin, *groups, *keys);
             if (mc_skin_color != NULL)
