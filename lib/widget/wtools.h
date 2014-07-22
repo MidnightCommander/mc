@@ -86,7 +86,7 @@ void message (int flags, const char *title, const char *text, ...)
 
 gboolean mc_error_message (GError ** mcerror);
 
-status_msg_t *status_msg_create (const char *title, double delay,  status_msg_cb init_cb,
+status_msg_t *status_msg_create (const char *title, double delay, status_msg_cb init_cb,
                                  status_msg_update_cb update_cb, status_msg_cb deinit_cb);
 void status_msg_destroy (status_msg_t * sm);
 void status_msg_init (status_msg_t * sm, const char *title, double delay, status_msg_cb init_cb,

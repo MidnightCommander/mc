@@ -204,7 +204,7 @@ dirsize_status_locate_buttons (dirsize_status_msg_t * dsm)
 
     if (!dsm->allow_skip)
     {
-        /* single button: "Abort "*/
+        /* single button: "Abort" */
         x += (wd->cols - dsm->abort_button->cols) / 2;
         widget_set_size (dsm->abort_button, y, x,
                          dsm->abort_button->lines, dsm->abort_button->cols);
@@ -216,7 +216,8 @@ dirsize_status_locate_buttons (dirsize_status_msg_t * dsm)
 
         cols = dsm->abort_button->cols + dsm->skip_button->cols + 1;
         x += (wd->cols - cols) / 2;
-        widget_set_size (dsm->abort_button, y, x, dsm->abort_button->lines, dsm->abort_button->cols);
+        widget_set_size (dsm->abort_button, y, x, dsm->abort_button->lines,
+                         dsm->abort_button->cols);
         x += dsm->abort_button->cols + 1;
         widget_set_size (dsm->skip_button, y, x, dsm->skip_button->lines, dsm->skip_button->cols);
     }

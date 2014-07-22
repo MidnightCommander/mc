@@ -56,7 +56,7 @@ static WDialog *last_query_dlg;
 
 static int sel_pos = 0;
 
-static const guint64 status_msg_delay_threshold = G_USEC_PER_SEC / 100;         /* 0.01 s */
+static const guint64 status_msg_delay_threshold = G_USEC_PER_SEC / 100; /* 0.01 s */
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/

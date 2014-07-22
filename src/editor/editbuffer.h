@@ -58,7 +58,7 @@ off_t edit_buffer_move_forward (const edit_buffer_t * buf, off_t current, long l
 off_t edit_buffer_move_backward (const edit_buffer_t * buf, off_t current, long lines);
 
 off_t edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size,
-                             edit_buffer_read_file_status_msg_t *sm, gboolean * aborted);
+                             edit_buffer_read_file_status_msg_t * sm, gboolean * aborted);
 off_t edit_buffer_write_file (edit_buffer_t * buf, int fd);
 
 int edit_buffer_calc_percent (const edit_buffer_t * buf, off_t offset);
