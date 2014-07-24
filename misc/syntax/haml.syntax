@@ -1,0 +1,464 @@
+# haml syntax highlighting
+# for mcedit
+# Autor r72cccp
+# based on html file from mcedit and ruby file from Marco Ciampa:
+# ===================================================================================
+# Ruby syntax file derived from perl syntax by Marco Ciampa <ciampix@libero.it>
+# alpha version 0.2 16/05/2003
+# ===================================================================================
+# html highlighting
+
+caseinsensitive
+
+context default
+
+context -# \n brown
+
+context = \n
+#Bang path
+
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby brightcyan black
+    keyword whole linestart #!\[\s\]/bin/ruby brightcyan black
+
+# Symbols :bla-bla
+    keyword whole \:\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_\-abcdefghijklmnopqrstuvwxyz\}\[\?\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] white
+
+#Operators
+
+    keyword > yellow
+    keyword < yellow
+    keyword - yellow
+    keyword \+ yellow
+    keyword \* yellow
+    keyword / yellow
+    keyword % yellow
+    keyword whole = yellow
+    keyword \+= yellow
+    keyword -= yellow
+    keyword == yellow
+    keyword != yellow
+    keyword === yellow
+    keyword <=> yellow
+    keyword ! yellow
+    keyword ~ yellow
+    keyword =~ yellow
+    keyword & yellow
+    keyword | yellow
+    keyword .. yellow
+
+#System variables
+
+# hack for regexps
+    keyword $/ yellow
+    keyword $\{!@&\+`'=~/\\,.;<>_\*"$:F?\} red
+    keyword $\{\0123456789\} red
+    keyword $-+ red
+
+    keyword whole $defout red
+    keyword whole $DEBUG red
+    keyword whole $F red
+    keyword whole $FILENAME red
+    keyword whole $LOAD_PATH red
+    keyword whole $SAFE red
+    keyword whole $VERBOSE red
+    keyword whole __FILE__ red
+    keyword whole __LINE__ red
+    keyword whole BEGIN red
+    keyword whole END red
+    keyword whole DATA red
+    keyword whole RUBY_PLATFORM red
+    keyword whole RUBY_RELEASE_DATE red
+    keyword whole RUBY_VERSION red
+    keyword whole $stdin red
+    keyword whole STDIN red
+    keyword whole $stdout red
+    keyword whole STDOUT red
+    keyword whole $stderr red
+    keyword whole STDERR red
+    keyword whole argv red
+    keyword whole ARGV red
+    keyword whole ARGF red
+    keyword whole env red
+    keyword whole ENV red
+
+#Braces &
+
+    keyword { brightcyan
+    keyword } brightcyan
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword [ brightcyan
+    keyword ] brightcyan
+    keyword , brightcyan
+    keyword : brightcyan
+
+    keyword whole false brightred
+    keyword whole FALSE brightred
+    keyword whole nil brightred
+    keyword whole NIL brightred
+    keyword whole true brightred
+    keyword whole TRUE brightred
+
+#Variables
+
+    keyword wholeright $+ brightgreen
+    keyword wholeright @+ white
+    keyword \\" brightred
+    keyword \\' brightred
+
+#Reserved words (see ruby manual)
+
+    keyword whole def magenta
+
+    keyword whole alias magenta
+    keyword whole and magenta
+    keyword whole begin magenta
+    keyword whole break magenta
+    keyword whole case magenta
+    keyword whole class magenta
+    keyword whole defined\? magenta
+    keyword whole do magenta
+    keyword whole else magenta
+    keyword whole elsif magenta
+    keyword whole end magenta
+    keyword whole ensure magenta
+    keyword whole for magenta
+    keyword whole if magenta
+    keyword whole in magenta
+    keyword whole module magenta
+    keyword whole next magenta
+    keyword whole not magenta
+    keyword whole or magenta
+    keyword whole redo magenta
+    keyword whole rescue magenta
+    keyword whole retry magenta
+    keyword whole return magenta
+    keyword whole self magenta
+    keyword whole super magenta
+    keyword whole then magenta
+    keyword whole undef magenta
+    keyword whole unless magenta
+    keyword whole until magenta
+    keyword whole when magenta
+    keyword whole while magenta
+    keyword whole yeld magenta
+
+#First class methods
+
+    keyword whole new yellow
+    keyword whole inherited yellow
+    keyword whole superclass yellow
+
+#Class module
+#   exclusion
+    keyword whole include\? green
+    keyword whole include magenta
+    keyword whole require magenta
+    keyword whole require_relative magenta
+#    keyword whole where magenta
+
+#Class numeric
+
+    keyword whole abs red
+    keyword whole modulo red
+    keyword whole remainder red
+
+#Class IO
+
+    keyword whole close yellow
+    keyword whole crypt yellow
+    keyword whole delete yellow
+    keyword whole each yellow
+    keyword whole gets yellow
+    keyword whole grep yellow
+    keyword whole inspect yellow
+    keyword whole join yellow
+    keyword whole sync yellow
+
+#Class Array
+
+    keyword whole index yellow
+    keyword whole indexes yellow
+    keyword whole indices yellow
+    keyword whole size yellow
+    keyword whole pop yellow
+    keyword whole push yellow
+    keyword whole sort yellow
+    keyword whole shift yellow
+    keyword whole unshift yellow
+
+#Math module
+
+    keyword whole Math::PI red
+    keyword whole Math::E red
+    keyword whole atan2 red
+    keyword whole cos red
+    keyword whole exp red
+    keyword whole frexp red
+    keyword whole ldexp red
+    keyword whole log red
+    keyword whole log10 red
+    keyword whole sin red
+    keyword whole sqrt red
+    keyword whole tan red
+
+#Kernel module
+
+    keyword whole chomp yellow
+    keyword whole chomp! yellow
+    keyword whole chop yellow
+    keyword whole chop! yellow
+    keyword whole raise yellow
+    keyword whole fork yellow
+    keyword whole rand yellow
+    keyword whole srand yellow
+    keyword whole open yellow
+    keyword whole print yellow
+    keyword whole printf yellow
+    keyword whole sprintf yellow
+    keyword whole exec yellow
+    keyword whole eval yellow
+    keyword whole exit yellow
+    keyword whole sleep yellow
+
+context wholeleft - \n
+#Bang path
+
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby brightcyan black
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/ruby brightcyan black
+    keyword whole linestart #!\[\s\]/bin/ruby brightcyan black
+
+# Symbols :bla-bla
+    keyword whole \:\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_\-abcdefghijklmnopqrstuvwxyz\}\[\?\-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\] white
+
+#Operators
+
+    keyword > yellow
+    keyword < yellow
+    keyword - yellow
+    keyword \+ yellow
+    keyword \* yellow
+    keyword / yellow
+    keyword % yellow
+    keyword whole = yellow
+    keyword \+= yellow
+    keyword -= yellow
+    keyword == yellow
+    keyword != yellow
+    keyword === yellow
+    keyword <=> yellow
+    keyword ! yellow
+    keyword ~ yellow
+    keyword =~ yellow
+    keyword & yellow
+    keyword | yellow
+    keyword .. yellow
+
+#System variables
+
+# hack for regexps
+    keyword $/ yellow
+    keyword $\{!@&\+`'=~/\\,.;<>_\*"$:F?\} red
+    keyword $\{\0123456789\} red
+    keyword $-+ red
+
+    keyword whole $defout red
+    keyword whole $DEBUG red
+    keyword whole $F red
+    keyword whole $FILENAME red
+    keyword whole $LOAD_PATH red
+    keyword whole $SAFE red
+    keyword whole $VERBOSE red
+    keyword whole __FILE__ red
+    keyword whole __LINE__ red
+    keyword whole BEGIN red
+    keyword whole END red
+    keyword whole DATA red
+    keyword whole RUBY_PLATFORM red
+    keyword whole RUBY_RELEASE_DATE red
+    keyword whole RUBY_VERSION red
+    keyword whole $stdin red
+    keyword whole STDIN red
+    keyword whole $stdout red
+    keyword whole STDOUT red
+    keyword whole $stderr red
+    keyword whole STDERR red
+    keyword whole argv red
+    keyword whole ARGV red
+    keyword whole ARGF red
+    keyword whole env red
+    keyword whole ENV red
+
+#Braces &
+
+    keyword { brightcyan
+    keyword } brightcyan
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword [ brightcyan
+    keyword ] brightcyan
+    keyword , brightcyan
+    keyword : brightcyan
+
+    keyword whole false brightred
+    keyword whole FALSE brightred
+    keyword whole nil brightred
+    keyword whole NIL brightred
+    keyword whole true brightred
+    keyword whole TRUE brightred
+
+#Variables
+
+    keyword wholeright $+ brightgreen
+    keyword wholeright @+ white
+    keyword \\" brightred
+    keyword \\' brightred
+
+#Reserved words (see ruby manual)
+
+    keyword whole def magenta
+
+    keyword whole alias magenta
+    keyword whole and magenta
+    keyword whole begin magenta
+    keyword whole break magenta
+    keyword whole case magenta
+    keyword whole class magenta
+    keyword whole defined\? magenta
+    keyword whole do magenta
+    keyword whole else magenta
+    keyword whole elsif magenta
+    keyword whole end magenta
+    keyword whole ensure magenta
+    keyword whole for magenta
+    keyword whole if magenta
+    keyword whole in magenta
+    keyword whole module magenta
+    keyword whole next magenta
+    keyword whole not magenta
+    keyword whole or magenta
+    keyword whole redo magenta
+    keyword whole rescue magenta
+    keyword whole retry magenta
+    keyword whole return magenta
+    keyword whole self magenta
+    keyword whole super magenta
+    keyword whole then magenta
+    keyword whole undef magenta
+    keyword whole unless magenta
+    keyword whole until magenta
+    keyword whole when magenta
+    keyword whole while magenta
+    keyword whole yeld magenta
+
+#First class methods
+
+    keyword whole new yellow
+    keyword whole inherited yellow
+    keyword whole superclass yellow
+
+#Class module
+#   exclusion
+    keyword whole include\? green
+    keyword whole include magenta
+    keyword whole require magenta
+    keyword whole require_relative magenta
+#    keyword whole where magenta
+
+#Class numeric
+
+    keyword whole abs red
+    keyword whole modulo red
+    keyword whole remainder red
+
+#Class IO
+
+    keyword whole close yellow
+    keyword whole crypt yellow
+    keyword whole delete yellow
+    keyword whole each yellow
+    keyword whole gets yellow
+    keyword whole grep yellow
+    keyword whole inspect yellow
+    keyword whole join yellow
+    keyword whole sync yellow
+
+#Class Array
+
+    keyword whole index yellow
+    keyword whole indexes yellow
+    keyword whole indices yellow
+    keyword whole size yellow
+    keyword whole pop yellow
+    keyword whole push yellow
+    keyword whole sort yellow
+    keyword whole shift yellow
+    keyword whole unshift yellow
+
+#Math module
+
+    keyword whole Math::PI red
+    keyword whole Math::E red
+    keyword whole atan2 red
+    keyword whole cos red
+    keyword whole exp red
+    keyword whole frexp red
+    keyword whole ldexp red
+    keyword whole log red
+    keyword whole log10 red
+    keyword whole sin red
+    keyword whole sqrt red
+    keyword whole tan red
+
+#Kernel module
+
+    keyword whole chomp yellow
+    keyword whole chomp! yellow
+    keyword whole chop yellow
+    keyword whole chop! yellow
+    keyword whole raise yellow
+    keyword whole fork yellow
+    keyword whole rand yellow
+    keyword whole srand yellow
+    keyword whole open yellow
+    keyword whole print yellow
+    keyword whole printf yellow
+    keyword whole sprintf yellow
+    keyword whole exec yellow
+    keyword whole eval yellow
+    keyword whole exit yellow
+    keyword whole sleep yellow
+
+
+context % \n brightgray
+
+    keyword wholeleft -# brown
+
+    wholechars abcdefghijklmnopqrstuvwxyz_-\s\t\n
+
+    keyword .*\s yellow
+    keyword .*\n yellow
+    keyword #*\s yellow
+    keyword #*\n yellow
+    keyword {"*" yellow
+    keyword ,\s"*" yellow
+    keyword \s"*" yellow
+    keyword :\s"*" brightgreen
+    keyword =>\s"*" brightgreen
+    keyword whole @* white
+    keyword [*] white
+
+    keyword { white
+    keyword } white
+    keyword [ white
+    keyword ] white
+    keyword whole abcdefghijklmnopqrstuvwxyz_   yellow
+    keyword whole class   yellow
+
+    keyword => brightred
+    keyword = brightred
