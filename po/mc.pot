@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.8.12-74-g394cde3\n"
+"Project-Id-Version: mc 4.8.12-83-gc88fb51\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-07-22 14:35+0400\n"
+"POT-Creation-Date: 2014-07-25 10:37+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -557,7 +557,7 @@ msgstr ""
 #: src/editor/editcmd.c:3459 src/editor/editcmd.c:3488
 #: src/editor/editcmd_dialogs.c:479 src/execute.c:135
 #: src/filemanager/file.c:1674 src/filemanager/panel.c:4361 src/help.c:362
-#: src/main.c:406 src/subshell.c:378 src/subshell.c:1050
+#: src/main.c:406 src/subshell.c:378 src/subshell.c:1053
 #: src/viewer/actions_cmd.c:419
 msgid "Warning"
 msgstr ""
@@ -670,7 +670,7 @@ msgstr ""
 #: src/filemanager/filegui.c:438 src/filemanager/hotlist.c:1121
 #: src/filemanager/hotlist.c:1138 src/filemanager/midnight.c:1037
 #: src/filemanager/midnight.c:1045 src/filemanager/panel.c:2723
-#: src/filemanager/tree.c:880 src/subshell.c:1052 src/viewer/actions_cmd.c:616
+#: src/filemanager/tree.c:880 src/subshell.c:1055 src/viewer/actions_cmd.c:616
 #: src/viewer/actions_cmd.c:622 src/viewer/search.c:358
 msgid "&Yes"
 msgstr ""
@@ -682,7 +682,7 @@ msgstr ""
 #: src/filemanager/filegui.c:440 src/filemanager/hotlist.c:1121
 #: src/filemanager/hotlist.c:1138 src/filemanager/midnight.c:1037
 #: src/filemanager/midnight.c:1045 src/filemanager/panel.c:2723
-#: src/filemanager/tree.c:880 src/subshell.c:1052 src/viewer/actions_cmd.c:616
+#: src/filemanager/tree.c:880 src/subshell.c:1055 src/viewer/actions_cmd.c:616
 #: src/viewer/actions_cmd.c:622 src/viewer/search.c:359
 msgid "&No"
 msgstr ""
@@ -2032,6 +2032,102 @@ msgstr ""
 
 #: src/editor/editwidget.c:984 src/filemanager/midnight.c:1650
 msgid "ButtonBar|PullDn"
+msgstr ""
+
+#: src/editor/spell.c:100
+msgid "Breton"
+msgstr ""
+
+#: src/editor/spell.c:101
+msgid "Czech"
+msgstr ""
+
+#: src/editor/spell.c:102
+msgid "Welsh"
+msgstr ""
+
+#: src/editor/spell.c:103
+msgid "Danish"
+msgstr ""
+
+#: src/editor/spell.c:104
+msgid "German"
+msgstr ""
+
+#: src/editor/spell.c:105
+msgid "Greek"
+msgstr ""
+
+#: src/editor/spell.c:106
+msgid "English"
+msgstr ""
+
+#: src/editor/spell.c:107
+msgid "British English"
+msgstr ""
+
+#: src/editor/spell.c:108
+msgid "Canadian English"
+msgstr ""
+
+#: src/editor/spell.c:109
+msgid "American English"
+msgstr ""
+
+#: src/editor/spell.c:110
+msgid "Esperanto"
+msgstr ""
+
+#: src/editor/spell.c:111
+msgid "Spanish"
+msgstr ""
+
+#: src/editor/spell.c:112
+msgid "Faroese"
+msgstr ""
+
+#: src/editor/spell.c:113
+msgid "French"
+msgstr ""
+
+#: src/editor/spell.c:114
+msgid "Italian"
+msgstr ""
+
+#: src/editor/spell.c:115
+msgid "Dutch"
+msgstr ""
+
+#: src/editor/spell.c:116
+msgid "Norwegian"
+msgstr ""
+
+#: src/editor/spell.c:117
+msgid "Polish"
+msgstr ""
+
+#: src/editor/spell.c:118
+msgid "Portuguese"
+msgstr ""
+
+#: src/editor/spell.c:119
+msgid "Romanian"
+msgstr ""
+
+#: src/editor/spell.c:120
+msgid "Russian"
+msgstr ""
+
+#: src/editor/spell.c:121
+msgid "Slovak"
+msgstr ""
+
+#: src/editor/spell.c:122
+msgid "Swedish"
+msgstr ""
+
+#: src/editor/spell.c:123
+msgid "Ukrainian"
 msgstr ""
 
 #: src/editor/spell_dialogs.c:94
@@ -4599,11 +4695,11 @@ msgstr ""
 msgid "Cannot open named pipe %s\n"
 msgstr ""
 
-#: src/subshell.c:1051
+#: src/subshell.c:1054
 msgid "The shell is still active. Quit anyway?"
 msgstr ""
 
-#: src/subshell.c:1219
+#: src/subshell.c:1222
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
 msgstr ""
