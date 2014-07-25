@@ -759,7 +759,7 @@ init_subshell (void)
 {
     /* This must be remembered across calls to init_subshell() */
     static char pty_name[BUF_SMALL];
-    char precmd[BUF_SMALL];
+    char precmd[BUF_MEDIUM];
 
     switch (check_sid ())
     {
@@ -889,8 +889,11 @@ init_subshell (void)
                     "alias precmd 'echo $cwd:q >>%s;kill -STOP $$'\n", tcsh_fifo);
         break;
     case FISH:
+        /* Use fish_prompt_mc function for prompt, if not present then copy fish_prompt to it. */
         g_snprintf (precmd, sizeof (precmd),
-                    "function fish_prompt ; pwd>&%d;kill -STOP %%self; end\n",
+                    "if not functions -q fish_prompt_mc;"
+                    "functions -c fish_prompt fish_prompt_mc; end;"
+                    "function fish_prompt; pwd>&%d; fish_prompt_mc; kill -STOP %%self; end\n",
                     subshell_pipe[WRITE]);
         break;
 
