@@ -97,30 +97,30 @@ static struct
 } spell_codes_map[] =
 {
     /* *INDENT-OFF* */
-    {"br", "Breton"},
-    {"cs", "Czech"},
-    {"cy", "Welsh"},
-    {"da", "Danish"},
-    {"de", "German"},
-    {"el", "Greek"},
-    {"en", "English"},
-    {"en_GB", "British English"},
-    {"en_CA", "Canadian English"},
-    {"en_US", "American English"},
-    {"eo", "Esperanto"},
-    {"es", "Spanish"},
-    {"fo", "Faroese"},
-    {"fr", "French"},
-    {"it", "Italian"},
-    {"nl", "Dutch"},
-    {"no", "Norwegian"},
-    {"pl", "Polish"},
-    {"pt", "Portuguese"},
-    {"ro", "Romanian"},
-    {"ru", "Russian"},
-    {"sk", "Slovak"},
-    {"sv", "Swedish"},
-    {"uk", "Ukrainian"},
+    {"br", N_("Breton")},
+    {"cs", N_("Czech")},
+    {"cy", N_("Welsh")},
+    {"da", N_("Danish")},
+    {"de", N_("German")},
+    {"el", N_("Greek")},
+    {"en", N_("English")},
+    {"en_GB", N_("British English")},
+    {"en_CA", N_("Canadian English")},
+    {"en_US", N_("American English")},
+    {"eo", N_("Esperanto")},
+    {"es", N_("Spanish")},
+    {"fo", N_("Faroese")},
+    {"fr", N_("French")},
+    {"it", N_("Italian")},
+    {"nl", N_("Dutch")},
+    {"no", N_("Norwegian")},
+    {"pl", N_("Polish")},
+    {"pt", N_("Portuguese")},
+    {"ro", N_("Romanian")},
+    {"ru", N_("Russian")},
+    {"sk", N_("Slovak")},
+    {"sv", N_("Swedish")},
+    {"uk", N_("Ukrainian")},
     {NULL, NULL}
     /* *INDENT-ON* */
 };
@@ -142,7 +142,7 @@ spell_decode_lang (const char *code)
     for (i = 0; spell_codes_map[i].code != NULL; i++)
     {
         if (strcmp (spell_codes_map[i].code, code) == 0)
-            return spell_codes_map[i].name;
+            return _(spell_codes_map[i].name);
     }
 
     return code;
