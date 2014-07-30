@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-07-30 12:55+0200\n"
-"PO-Revision-Date: 2014-07-30 12:55+0200\n"
+"POT-Creation-Date: 2014-07-30 13:34+0200\n"
+"PO-Revision-Date: 2014-07-30 13:33+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
 "it/)\n"
@@ -157,73 +157,73 @@ msgstr ""
 "È stato caricato il tema predefinito"
 
 msgid "Escape"
-msgstr "Escape"
+msgstr "Escape "
 
 msgid "Function key 1"
-msgstr "Tasto funzione  1"
+msgstr "Tasto funz.e  1"
 
 msgid "Function key 2"
-msgstr "Tasto funzione  2"
+msgstr "Tasto funz.e  2"
 
 msgid "Function key 3"
-msgstr "Tasto funzione  3"
+msgstr "Tasto funz.e  3"
 
 msgid "Function key 4"
-msgstr "Tasto funzione  4"
+msgstr "Tasto funz.e  4"
 
 msgid "Function key 5"
-msgstr "Tasto funzione  5"
+msgstr "Tasto funz.e  5"
 
 msgid "Function key 6"
-msgstr "Tasto funzione  6"
+msgstr "Tasto funz.e  6"
 
 msgid "Function key 7"
-msgstr "Tasto funzione  7"
+msgstr "Tasto funz.e  7"
 
 msgid "Function key 8"
-msgstr "Tasto funzione  8"
+msgstr "Tasto funz.e  8"
 
 msgid "Function key 9"
-msgstr "Tasto funzione  9"
+msgstr "Tasto funz.e  9"
 
 msgid "Function key 10"
-msgstr "Tasto funzione 10"
+msgstr "Tasto funz.e 10"
 
 msgid "Function key 11"
-msgstr "Tasto funzione 11"
+msgstr "Tasto funz.e 11"
 
 msgid "Function key 12"
-msgstr "Tasto funzione 12"
+msgstr "Tasto funz.e 12"
 
 msgid "Function key 13"
-msgstr "Tasto funzione 13"
+msgstr "Tasto funz.e 13"
 
 msgid "Function key 14"
-msgstr "Tasto funzione 14"
+msgstr "Tasto funz.e 14"
 
 msgid "Function key 15"
-msgstr "Tasto funzione 15"
+msgstr "Tasto funz.e 15"
 
 msgid "Function key 16"
-msgstr "Tasto funzione 16"
+msgstr "Tasto funz.e 16"
 
 msgid "Function key 17"
-msgstr "Tasto funzione 17"
+msgstr "Tasto funz.e 17"
 
 msgid "Function key 18"
-msgstr "Tasto funzione 18"
+msgstr "Tasto funz.e 18"
 
 msgid "Function key 19"
-msgstr "Tasto funzione 19"
+msgstr "Tasto funz.e 19"
 
 msgid "Function key 20"
-msgstr "Tasto funzione 20"
+msgstr "Tasto funz.e 20"
 
 msgid "Completion/M-tab"
-msgstr "Completam./M-Tab "
+msgstr "Completam./M-Tab"
 
 msgid "BackTab/S-tab"
-msgstr "Tab ind./M-tab"
+msgstr "Tab indi.o/S-tab"
 
 msgid "Backspace"
 msgstr "Backspace"
@@ -3713,9 +3713,9 @@ msgid ""
 "which keys are not marked with OK. Press space on the missing\n"
 "key, or click with the mouse to define it. Move around with Tab."
 msgstr ""
-"Premere tutti i tasti qui menzionati. Dopo aferlo fatto, controllare\n"
-"che tasti non sono marcati con OK. Premere spazio sui tasti mancanti\n"
-"o fare clic con il mouse per definirli. Spostarsi tramite il Tab."
+"Premere tutti i tasti qui menzionati. Dopo averlo fatto, controllare\n"
+"che tasti non siano marcati con OK. Premere spazio sui tasti mancanti\n"
+"o fare clic con il mouse per definirli. Spostarsi tramite Tab."
 
 #, c-format
 msgid ""
