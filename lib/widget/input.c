@@ -900,6 +900,9 @@ input_destroy (WInput * in)
 static int
 input_event (Gpm_Event * event, void *data)
 {
+    /* save point between GPM_DOWN and GPM_DRAG */
+    static int prev_point = 0;
+
     WInput *in = INPUT (data);
     Widget *w = WIDGET (data);
 
@@ -924,20 +927,27 @@ input_event (Gpm_Event * event, void *data)
             do_show_hist (in);
         else
         {
-            in->point = str_length (in->buffer);
             if (local.x + in->term_first_shown - 1 < str_term_width1 (in->buffer))
                 in->point = str_column_to_pos (in->buffer, local.x + in->term_first_shown - 1);
-        }
+            else
+                in->point = str_length (in->buffer);
 
-        input_update (in, TRUE);
+            /* save point for the possible following GPM_DRAG action */
+            if ((event->type & GPM_DOWN) != 0)
+                prev_point = in->point;
+        }
     }
 
-    /* A lone up mustn't do anything */
-    if (in->mark >= 0 && (event->type & (GPM_UP | GPM_DRAG)) != 0)
-        return MOU_NORMAL;
+    /* start point: set marker using point before first GPM_DRAG action */
+    if (in->mark < 0 && (event->type & GPM_DRAG) != 0)
+        in->mark = prev_point;
 
-    if ((event->type & GPM_DRAG) == 0)
-        input_mark_cmd (in, TRUE);
+    /* don't create highlight region of 0 length */
+    if (in->mark == in->point)
+        input_mark_cmd (in, FALSE);
+
+    if ((event->type & (GPM_DOWN | GPM_DRAG)) != 0)
+        input_update (in, TRUE);
 
     return MOU_NORMAL;
 }
