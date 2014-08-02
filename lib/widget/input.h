@@ -48,8 +48,7 @@ typedef struct
     Widget widget;
     const int *color;
     int point;                  /* cursor position in the input line in characters */
-    int mark;                   /* the mark position in characters */
-    gboolean highlight;         /* there is a selected block */
+    int mark;                   /* the mark position in characters; negative value means no marked text */
     int term_first_shown;       /* column of the first shown character */
     size_t current_max_size;    /* maximum length of input line (bytes) */
     gboolean first;             /* is first keystroke? */
