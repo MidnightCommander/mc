@@ -33,6 +33,7 @@
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/search.h"
+#include "lib/util.h"
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
 #endif
@@ -273,8 +274,7 @@ mc_search_run (mc_search_t * lc_mc_search, const void *user_data,
 #endif /* SEARCH_TYPE_GLIB */
 
     lc_mc_search->error = MC_SEARCH_E_OK;
-    g_free (lc_mc_search->error_str);
-    lc_mc_search->error_str = NULL;
+    MC_PTR_FREE (lc_mc_search->error_str);
 
     if ((lc_mc_search->conditions == NULL) && !mc_search_prepare (lc_mc_search))
         return FALSE;

@@ -320,8 +320,7 @@ tar_open_archive_int (struct vfs_class *me, const vfs_path_t * vpath, struct vfs
         g_free (s);
         if (result == -1)
         {
-            g_free (archive->name);
-            archive->name = NULL;
+            MC_PTR_FREE (archive->name);
             ERRNOR (ENOENT, -1);
         }
     }
@@ -585,8 +584,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
             data = tar_get_next_record (archive, tard)->charptr;
             if (data == NULL)
             {
-                g_free (*longp);
-                *longp = NULL;
+                MC_PTR_FREE (*longp);
                 message (D_ERROR, MSG_ERROR, _("Unexpected EOF on archive file"));
                 return STATUS_BADCHECKSUM;
             }
@@ -600,8 +598,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
 
         if (bp - *longp == MC_MAXPATHLEN && bp[-1] != '\0')
         {
-            g_free (*longp);
-            *longp = NULL;
+            MC_PTR_FREE (*longp);
             message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
             return STATUS_BADCHECKSUM;
         }

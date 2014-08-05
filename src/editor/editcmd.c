@@ -2017,16 +2017,14 @@ edit_load_macro_cmd (WEdit * edit)
                 else
                 {
                     m_act.action = keybind_lookup_action (macro_pair[0]);
-                    g_free (macro_pair[0]);
-                    macro_pair[0] = NULL;
+                    MC_PTR_FREE (macro_pair[0]);
                 }
                 if (macro_pair[1] == NULL || macro_pair[1][0] == '\0')
                     m_act.ch = -1;
                 else
                 {
                     m_act.ch = strtol (macro_pair[1], NULL, 0);
-                    g_free (macro_pair[1]);
-                    macro_pair[1] = NULL;
+                    MC_PTR_FREE (macro_pair[1]);
                 }
                 if (m_act.action != 0)
                 {
@@ -2516,8 +2514,8 @@ edit_replace_cmd (WEdit * edit, int again)
 
     if (edit == NULL)
     {
-        g_free (saved1), saved1 = NULL;
-        g_free (saved2), saved2 = NULL;
+        MC_PTR_FREE (saved1);
+        MC_PTR_FREE (saved2);
         return;
     }
 
@@ -2799,8 +2797,7 @@ edit_search_cmd (WEdit * edit, gboolean again)
             if (edit->search == NULL)
             {
                 /* if not... then ask for an expression */
-                g_free (edit->last_search_string);
-                edit->last_search_string = NULL;
+                MC_PTR_FREE (edit->last_search_string);
                 edit_search (edit);
             }
             else
@@ -2820,8 +2817,7 @@ edit_search_cmd (WEdit * edit, gboolean again)
         else
         {
             /* if not... then ask for an expression */
-            g_free (edit->last_search_string);
-            edit->last_search_string = NULL;
+            MC_PTR_FREE (edit->last_search_string);
             edit_search (edit);
         }
     }

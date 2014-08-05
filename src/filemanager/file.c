@@ -3077,8 +3077,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 #endif /* WITH_FULL_PATHS */
     g_free (dest);
     vfs_path_free (dest_vpath);
-    g_free (ctx->dest_mask);
-    ctx->dest_mask = NULL;
+    MC_PTR_FREE (ctx->dest_mask);
 
 #ifdef ENABLE_BACKGROUND
     /* Let our parent know we are saying bye bye */

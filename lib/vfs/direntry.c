@@ -963,8 +963,7 @@ vfs_s_free_entry (struct vfs_class *me, struct vfs_s_entry *ent)
     if (ent->dir != NULL)
         ent->dir->subdir = g_list_remove (ent->dir->subdir, ent);
 
-    g_free (ent->name);
-    /* ent->name = NULL; */
+    MC_PTR_FREE (ent->name);
 
     if (ent->ino != NULL)
     {
@@ -1405,8 +1404,7 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
     close (handle);
     unlink (ino->localname);
   error_4:
-    g_free (ino->localname);
-    ino->localname = NULL;
+    MC_PTR_FREE (ino->localname);
     g_free (fh.data);
     return -1;
 }

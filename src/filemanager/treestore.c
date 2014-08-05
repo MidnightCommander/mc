@@ -894,8 +894,7 @@ tree_store_end_check (void)
     }
 
     /* get the stuff in the scan order */
-    ts.add_queue_vpath = g_list_reverse (ts.add_queue_vpath);
-    the_queue = ts.add_queue_vpath;
+    the_queue = g_list_reverse (ts.add_queue_vpath);
     ts.add_queue_vpath = NULL;
     vfs_path_free (ts.check_name);
     ts.check_name = NULL;

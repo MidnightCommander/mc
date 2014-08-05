@@ -368,12 +368,10 @@ mcview_close_datasource (mcview_t * view)
     case DS_FILE:
         (void) mc_close (view->ds_file_fd);
         view->ds_file_fd = -1;
-        g_free (view->ds_file_data);
-        view->ds_file_data = NULL;
+        MC_PTR_FREE (view->ds_file_data);
         break;
     case DS_STRING:
-        g_free (view->ds_string_data);
-        view->ds_string_data = NULL;
+        MC_PTR_FREE (view->ds_string_data);
         break;
     default:
 #ifdef HAVE_ASSERT_H

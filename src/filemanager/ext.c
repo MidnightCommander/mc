@@ -747,8 +747,7 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean c
 void
 flush_extension_file (void)
 {
-    g_free (data);
-    data = NULL;
+    MC_PTR_FREE (data);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -828,8 +827,7 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
             if (strstr (data, "regex/") == NULL && strstr (data, "shell/") == NULL &&
                 strstr (data, "type/") == NULL)
             {
-                g_free (data);
-                data = NULL;
+                MC_PTR_FREE (data);
 
                 if (!mc_user_ext)
                 {

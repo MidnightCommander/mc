@@ -298,8 +298,7 @@ aspell_init (void)
 
     if (!spell_available ())
     {
-        g_free (global_speller);
-        global_speller = NULL;
+        MC_PTR_FREE (global_speller);
         return;
     }
 
@@ -338,8 +337,7 @@ aspell_clean (void)
     if (global_speller->config != NULL)
         mc_delete_aspell_config (global_speller->config);
 
-    g_free (global_speller);
-    global_speller = NULL;
+    MC_PTR_FREE (global_speller);
 
     g_module_close (spell_module);
     spell_module = NULL;

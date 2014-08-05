@@ -224,8 +224,7 @@ mcview_done (mcview_t * view)
     view->filename_vpath = NULL;
     vfs_path_free (view->workdir_vpath);
     view->workdir_vpath = NULL;
-    g_free (view->command);
-    view->command = NULL;
+    MC_PTR_FREE (view->command);
 
     mcview_close_datasource (view);
     /* the growing buffer is freed with the datasource */

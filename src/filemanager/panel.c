@@ -4694,8 +4694,7 @@ remove_encoding_from_path (const vfs_path_t * vpath)
             continue;
         }
 
-        g_free (path_element->encoding);
-        path_element->encoding = NULL;
+        MC_PTR_FREE (path_element->encoding);
 
         str_vfs_convert_from (converter, path_element->path, tmp_conv);
 

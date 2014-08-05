@@ -1663,14 +1663,12 @@ done_hotlist (void)
         remove_group (hotlist);
         g_free (hotlist->label);
         g_free (hotlist->directory);
-        g_free (hotlist);
-        hotlist = NULL;
+        MC_PTR_FREE (hotlist);
     }
 
     hotlist_state.loaded = FALSE;
 
-    g_free (hotlist_file_name);
-    hotlist_file_name = NULL;
+    MC_PTR_FREE (hotlist_file_name);
     l_hotlist = NULL;
     current_group = NULL;
 
