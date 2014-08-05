@@ -79,11 +79,7 @@ sftpfs_open_socket (struct vfs_s_super *super, GError ** mcerror)
         return -1;
     }
 
-    if (sprintf (port, "%hu", (unsigned short) super->path_element->port) < 0)
-    {
-        mc_propagate_error (mcerror, -1, "%s", _("sftp: Invalid port value."));
-        return -1;
-    }
+    sprintf (port, "%hu", (unsigned short) super->path_element->port);
 
     tty_enable_interrupt_key ();        /* clear the interrupt flag */
 
