@@ -239,7 +239,7 @@ static union record rec_buf;
 static long
 tar_from_oct (int digs, char *where)
 {
-    register long value;
+    long value;
 
     while (isspace ((unsigned char) *where))
     {                           /* Skip spaces */
@@ -451,10 +451,10 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
 {
     tar_super_data_t *arch = (tar_super_data_t *) archive->data;
 
-    register int i;
-    register long sum, signed_sum, recsum;
-    register char *p;
-    register union record *header;
+    int i;
+    long sum, signed_sum, recsum;
+    char *p;
+    union record *header;
     static char *next_long_name = NULL, *next_long_link = NULL;
 
   recurse:

@@ -80,7 +80,7 @@ static char *menu = NULL;
 static char *
 strip_ext (char *ss)
 {
-    register char *s = ss;
+    char *s = ss;
     char *e = NULL;
     while (*s)
     {
