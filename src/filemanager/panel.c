@@ -772,7 +772,7 @@ file_compute_color (int attr, file_entry_t * fe)
 
 static filename_scroll_flag_t
 format_file (char *dest, int limit, WPanel * panel, int file_index, int width, int attr,
-             gboolean isstatus, int *field_lenght)
+             gboolean isstatus, int *field_length)
 {
     int color, length = 0, empty_line;
     format_e *format, *home;
@@ -785,7 +785,7 @@ format_file (char *dest, int limit, WPanel * panel, int file_index, int width, i
     empty_line = (file_index >= panel->dir.len);
     home = isstatus ? panel->status_format : panel->format;
     fe = &panel->dir.list[file_index];
-    *field_lenght = 0;
+    *field_length = 0;
 
     if (!empty_line)
         color = file_compute_color (attr, fe);
@@ -815,7 +815,7 @@ format_file (char *dest, int limit, WPanel * panel, int file_index, int width, i
                 int str_len;
                 int i;
 
-                *field_lenght = len + 1;
+                *field_length = len + 1;
 
                 str_len = str_length (txt);
                 i = max (0, str_len - len);

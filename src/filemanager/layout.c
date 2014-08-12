@@ -704,7 +704,7 @@ setup_panels (void)
     check_split (&panels_layout);
     start_y = menubar_visible;
 
-    /* The column computing is defered until panel_do_cols */
+    /* The column computing is deferred until panel_do_cols */
     if (panels_layout.horizontal_split)
     {
         widget_set_size (panels[0].widget, start_y, 0, panels_layout.top_panel_size, 0);

@@ -170,7 +170,7 @@ int verbose = 1;
 
 /*
  * Whether the Midnight Commander tries to provide more
- * information about copy/move sizes and bytes transfered
+ * information about copy/move sizes and bytes transferred
  * at the expense of some speed
  */
 int file_op_compute_totals = 1;

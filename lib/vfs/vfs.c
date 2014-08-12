@@ -32,7 +32,7 @@
  * \author Jakub Jelinek
  * \author Pavel Machek
  * \date 1995, 1998
- * \warning funtions like extfs_lstat() have right to destroy any
+ * \warning functions like extfs_lstat() have right to destroy any
  * strings you pass to them. This is acutally ok as you g_strdup what
  * you are passing to them, anyway; still, beware.
  *
