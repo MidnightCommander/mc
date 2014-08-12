@@ -252,7 +252,7 @@ static const char *netrcp;
 /* char *ftpfs_translate_path (struct ftpfs_connection *bucket, char *remote_path)
    Translate a Unix path, i.e. MC's internal path representation (e.g.
    /somedir/somefile) to a path valid for the remote server. Every path
-   transfered to the remote server has to be mangled by this function
+   transferred to the remote server has to be mangled by this function
    right prior to sending it.
    Currently only Amiga ftp servers are handled in a special manner.
 

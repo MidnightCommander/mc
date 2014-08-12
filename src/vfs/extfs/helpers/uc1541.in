@@ -10,7 +10,7 @@ Remarks
 -------
 
 Due to different way of representing file entries on regular D64 disk images,
-there could be issues with filenames that are transfered from/to the image.
+there could be issues with filenames that are transferred from/to the image.
 Following rules was applied to represent a single file entry:
 
 1. An extension is attached to the end of a filename depending on a file type.
