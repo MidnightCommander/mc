@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2014
 
    This file is part of the Midnight Commander.
 
@@ -128,26 +128,9 @@ draw_history_button (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-input_set_markers (WInput * in, long m1)
-{
-    in->mark = m1;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
 input_mark_cmd (WInput * in, gboolean mark)
 {
-    if (mark == 0)
-    {
-        in->highlight = FALSE;
-        input_set_markers (in, 0);
-    }
-    else
-    {
-        in->highlight = TRUE;
-        input_set_markers (in, in->point);
-    }
+    in->mark = mark ? in->point : -1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -155,17 +138,15 @@ input_mark_cmd (WInput * in, gboolean mark)
 static gboolean
 input_eval_marks (WInput * in, long *start_mark, long *end_mark)
 {
-    if (in->highlight)
+    if (in->mark >= 0)
     {
         *start_mark = min (in->mark, in->point);
         *end_mark = max (in->mark, in->point);
         return TRUE;
     }
-    else
-    {
-        *start_mark = *end_mark = 0;
-        return FALSE;
-    }
+
+    *start_mark = *end_mark = -1;
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -315,13 +296,11 @@ static cb_ret_t
 insert_char (WInput * in, int c_code)
 {
     int res;
+    long m1, m2;
 
-    if (in->highlight)
-    {
-        long m1, m2;
-        if (input_eval_marks (in, &m1, &m2))
-            delete_region (in, m1, m2);
-    }
+    if (input_eval_marks (in, &m1, &m2))
+        delete_region (in, m1, m2);
+
     if (c_code == -1)
         return MSG_NOT_HANDLED;
 
@@ -603,8 +582,7 @@ clear_line (WInput * in)
     in->need_push = TRUE;
     in->buffer[0] = '\0';
     in->point = 0;
-    in->mark = 0;
-    in->highlight = FALSE;
+    in->mark = -1;
     in->charpoint = 0;
 }
 
@@ -710,7 +688,7 @@ input_execute_cmd (WInput * in, unsigned long command)
         command == CK_MarkToWordBegin || command == CK_MarkToWordEnd ||
         command == CK_MarkToHome || command == CK_MarkToEnd)
     {
-        if (!in->highlight)
+        if (in->mark < 0)
         {
             input_mark_cmd (in, FALSE); /* clear */
             input_mark_cmd (in, TRUE);  /* marking on */
@@ -723,7 +701,7 @@ input_execute_cmd (WInput * in, unsigned long command)
     case CK_WordLeft:
     case CK_Right:
     case CK_Left:
-        if (in->highlight)
+        if (in->mark >= 0)
             input_mark_cmd (in, FALSE);
     }
 
@@ -754,26 +732,27 @@ input_execute_cmd (WInput * in, unsigned long command)
         forward_word (in);
         break;
     case CK_BackSpace:
-        if (in->highlight)
         {
             long m1, m2;
+
             if (input_eval_marks (in, &m1, &m2))
                 delete_region (in, m1, m2);
+            else
+                backward_delete (in);
         }
-        else
-            backward_delete (in);
         break;
     case CK_Delete:
         if (in->first)
             port_region_marked_for_delete (in);
-        else if (in->highlight)
+        else
         {
             long m1, m2;
+
             if (input_eval_marks (in, &m1, &m2))
                 delete_region (in, m1, m2);
+            else
+                delete_char (in);
         }
-        else
-            delete_char (in);
         break;
     case CK_DeleteToWordEnd:
         kill_word (in);
@@ -785,7 +764,7 @@ input_execute_cmd (WInput * in, unsigned long command)
         input_mark_cmd (in, TRUE);
         break;
     case CK_Remove:
-        delete_region (in, in->point, in->mark);
+        delete_region (in, in->point, max (in->mark, 0));
         break;
     case CK_DeleteToEnd:
         kill_line (in);
@@ -794,11 +773,16 @@ input_execute_cmd (WInput * in, unsigned long command)
         clear_line (in);
         break;
     case CK_Store:
-        copy_region (in, in->mark, in->point);
+        copy_region (in, max (in->mark, 0), in->point);
         break;
     case CK_Cut:
-        copy_region (in, in->mark, in->point);
-        delete_region (in, in->point, in->mark);
+        {
+            long m;
+
+            m = max (in->mark, 0);
+            copy_region (in, m, in->point);
+            delete_region (in, in->point, m);
+        }
         break;
     case CK_Yank:
         yank (in);
@@ -825,7 +809,7 @@ input_execute_cmd (WInput * in, unsigned long command)
     if (command != CK_MarkLeft && command != CK_MarkRight &&
         command != CK_MarkToWordBegin && command != CK_MarkToWordEnd &&
         command != CK_MarkToHome && command != CK_MarkToEnd)
-        in->highlight = FALSE;
+        in->mark = -1;
 
     return res;
 }
@@ -916,6 +900,9 @@ input_destroy (WInput * in)
 static int
 input_event (Gpm_Event * event, void *data)
 {
+    /* save point between GPM_DOWN and GPM_DRAG */
+    static int prev_point = 0;
+
     WInput *in = INPUT (data);
     Widget *w = WIDGET (data);
 
@@ -940,20 +927,27 @@ input_event (Gpm_Event * event, void *data)
             do_show_hist (in);
         else
         {
-            in->point = str_length (in->buffer);
             if (local.x + in->term_first_shown - 1 < str_term_width1 (in->buffer))
                 in->point = str_column_to_pos (in->buffer, local.x + in->term_first_shown - 1);
-        }
+            else
+                in->point = str_length (in->buffer);
 
-        input_update (in, TRUE);
+            /* save point for the possible following GPM_DRAG action */
+            if ((event->type & GPM_DOWN) != 0)
+                prev_point = in->point;
+        }
     }
 
-    /* A lone up mustn't do anything */
-    if (in->highlight && (event->type & (GPM_UP | GPM_DRAG)) != 0)
-        return MOU_NORMAL;
+    /* start point: set marker using point before first GPM_DRAG action */
+    if (in->mark < 0 && (event->type & GPM_DRAG) != 0)
+        in->mark = prev_point;
 
-    if ((event->type & GPM_DRAG) == 0)
-        input_mark_cmd (in, TRUE);
+    /* don't create highlight region of 0 length */
+    if (in->mark == in->point)
+        input_mark_cmd (in, FALSE);
+
+    if ((event->type & (GPM_DOWN | GPM_DRAG)) != 0)
+        input_update (in, TRUE);
 
     return MOU_NORMAL;
 }
@@ -1006,7 +1000,7 @@ input_new (int y, int x, const int *colors, int width, const char *def_text,
 
     in->color = colors;
     in->first = TRUE;
-    in->highlight = FALSE;
+    in->mark = -1;
     in->term_first_shown = 0;
     in->disable_update = 0;
     in->is_password = FALSE;
@@ -1194,7 +1188,7 @@ input_assign_text (WInput * in, const char *text)
         text = "";
 
     input_free_completions (in);
-    in->mark = 0;
+    in->mark = -1;
     in->need_push = TRUE;
     in->charpoint = 0;
 
@@ -1289,7 +1283,7 @@ input_update (WInput * in, gboolean clear_first)
 
     if (!in->is_password)
     {
-        if (!in->highlight)
+        if (in->mark < 0)
             tty_print_string (str_term_substring (in->buffer, in->term_first_shown,
                                                   w->cols - has_history));
         else
@@ -1375,8 +1369,7 @@ input_clean (WInput * in)
     in->buffer[0] = '\0';
     in->point = 0;
     in->charpoint = 0;
-    in->mark = 0;
-    in->highlight = FALSE;
+    in->mark = -1;
     input_free_completions (in);
     input_update (in, FALSE);
 }
