@@ -893,7 +893,7 @@ init_subshell (void)
         g_snprintf (precmd, sizeof (precmd),
                     "if not functions -q fish_prompt_mc;"
                     "functions -c fish_prompt fish_prompt_mc; end;"
-                    "function fish_prompt; pwd>&%d; fish_prompt_mc; kill -STOP %%self; end\n",
+                    "function fish_prompt; echo $PWD>&%d; fish_prompt_mc; kill -STOP %%self; end\n",
                     subshell_pipe[WRITE]);
         break;
 
