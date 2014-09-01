@@ -74,15 +74,12 @@ mcview_display_text (mcview_t * view)
     int cw = 1;
     int c, prev_ch = 0;
     gboolean last_row = TRUE;
-    struct hexedit_change_node *curr = view->change_list;
 
     mcview_display_clean (view);
     mcview_display_ruler (view);
 
     /* Find the first displayable changed byte */
     from = view->dpy_start;
-    while ((curr != NULL) && (curr->offset < from))
-        curr = curr->next;
 
     while (row < height)
     {
