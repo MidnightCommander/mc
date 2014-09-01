@@ -106,7 +106,7 @@ do_mcview_event (mcview_t * view, Gpm_Event * event, int *result)
     if ((local.type & (GPM_DOWN | GPM_DRAG)) == 0)
         return FALSE;
 
-    /* Wheel events */
+    /* Wheel events. Allow them in the inactive panel */
     if ((local.buttons & GPM_B_UP) != 0 && (local.type & GPM_DOWN) != 0)
     {
         mcview_move_up (view, 2);
@@ -117,6 +117,10 @@ do_mcview_event (mcview_t * view, Gpm_Event * event, int *result)
         mcview_move_down (view, 2);
         return TRUE;
     }
+
+    /* Grab focus */
+    if (mcview_is_in_panel (view) && !view->active)
+        change_panel ();
 
     x = local.x;
     y = local.y;
@@ -207,6 +211,7 @@ mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
     view->text_wrap_mode = FALSE;
     view->magic_mode = FALSE;
 
+    view->active = FALSE;
     view->dpy_frame_size = is_panel ? 1 : 0;
     view->converter = str_cnv_from_term;
 
