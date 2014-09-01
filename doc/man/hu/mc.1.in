@@ -1,4 +1,4 @@
-.\" -*- mode: troff; coding: utf8 -*-
+.\" -*- mode: troff; coding: UTF-8 -*-
 .\"TOPICS "Tartalomjegyzék"
 .TH MC 1 "%DATE_OF_MAN_PAGE%" "MC Version %DISTR_VERSION%" "GNU Midnight Commander"
 .\"SKIP_SECTION"
