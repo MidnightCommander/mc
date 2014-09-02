@@ -224,8 +224,7 @@ mcview_done (mcview_t * view)
     view->filename_vpath = NULL;
     vfs_path_free (view->workdir_vpath);
     view->workdir_vpath = NULL;
-    g_free (view->command);
-    view->command = NULL;
+    MC_PTR_FREE (view->command);
 
     mcview_close_datasource (view);
     /* the growing buffer is freed with the datasource */
@@ -423,8 +422,13 @@ mcview_calc_percent (mcview_t * view, off_t p)
         return (-1);
 
     filesize = mcview_get_filesize (view);
+    if (view->hex_mode && filesize > 0)
+    {
+        /* p can't be beyond the last char, only over that. Compensate for this. */
+        filesize--;
+    }
 
-    if (filesize == 0 || view->dpy_end == filesize)
+    if (filesize == 0 || p >= filesize)
         percent = 100;
     else if (p > (INT_MAX / 100))
         percent = p / (filesize / 100);

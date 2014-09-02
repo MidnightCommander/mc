@@ -890,9 +890,7 @@ input_destroy (WInput * in)
     }
     g_free (in->history.name);
     g_free (in->buffer);
-
-    g_free (kill_buffer);
-    kill_buffer = NULL;
+    MC_PTR_FREE (kill_buffer);
 }
 
 /* --------------------------------------------------------------------------------------------- */

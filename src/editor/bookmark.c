@@ -238,10 +238,8 @@ book_mark_clear (WEdit * edit, long line, int c)
     }
     /* if there is only our dummy book mark left, clear it for speed */
     if (edit->book_mark->line == -1 && edit->book_mark->next == NULL)
-    {
-        g_free (edit->book_mark);
-        edit->book_mark = NULL;
-    }
+        MC_PTR_FREE (edit->book_mark);
+
     return r;
 }
 
@@ -271,10 +269,7 @@ book_mark_flush (WEdit * edit, int c)
         }
     }
     if (edit->book_mark->next == NULL)
-    {
-        g_free (edit->book_mark);
-        edit->book_mark = NULL;
-    }
+        MC_PTR_FREE (edit->book_mark);
 
     edit->force |= REDRAW_PAGE;
 }

@@ -357,8 +357,7 @@ check_file_access (WEdit * edit, const vfs_path_t * filename_vpath, struct stat 
         errmsg = g_strdup_printf (_("File \"%s\" is too large.\nOpen it anyway?"),
                                   vfs_path_as_str (filename_vpath));
         act = edit_query_dialog2 (_("Warning"), errmsg, _("&Yes"), _("&No"));
-        g_free (errmsg);
-        errmsg = NULL;
+        MC_PTR_FREE (errmsg);
 
         if (act != 0)
             ret = FALSE;

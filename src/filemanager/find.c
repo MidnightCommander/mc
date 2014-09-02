@@ -265,10 +265,7 @@ parse_ignore_dirs (const char *ignore_dirs)
         if (find_ignore_dirs[w][0] != '\0')
             w++;
         else
-        {
-            g_free (find_ignore_dirs[w]);
-            find_ignore_dirs[w] = NULL;
-        }
+            MC_PTR_FREE (find_ignore_dirs[w]);
     }
 
     if (find_ignore_dirs[0] == NULL)
@@ -315,10 +312,7 @@ find_load_options (void)
     options.ignore_dirs = mc_config_get_string (mc_main_config, "FindFile", "ignore_dirs", "");
 
     if (options.ignore_dirs[0] == '\0')
-    {
-        g_free (options.ignore_dirs);
-        options.ignore_dirs = NULL;
-    }
+        MC_PTR_FREE (options.ignore_dirs);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1251,8 +1245,7 @@ do_search (WDialog * h)
             mc_closedir (dirp);
             dirp = NULL;
         }
-        g_free (directory);
-        directory = NULL;
+        MC_PTR_FREE (directory);
         dp = NULL;
         return 1;
     }
@@ -1386,8 +1379,7 @@ do_search (WDialog * h)
 static void
 init_find_vars (void)
 {
-    g_free (old_dir);
-    old_dir = NULL;
+    MC_PTR_FREE (old_dir);
     matches = 0;
     ignore_count = 0;
 
@@ -1813,8 +1805,7 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
     g_free (content_pattern);
     kill_gui ();
     do_search (NULL);           /* force do_search to release resources */
-    g_free (old_dir);
-    old_dir = NULL;
+    MC_PTR_FREE (old_dir);
     rotate_dash (FALSE);
 
     return return_value;

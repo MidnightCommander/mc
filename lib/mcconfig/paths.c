@@ -168,10 +168,8 @@ mc_config_init_one_config_path (const char *path_base, const char *subdir, GErro
 
     mc_config_mkdir (full_path, mcerror);
     if (mcerror != NULL && *mcerror != NULL)
-    {
-        g_free (full_path);
-        full_path = NULL;
-    }
+        MC_PTR_FREE (full_path);
+
     return full_path;
 }
 

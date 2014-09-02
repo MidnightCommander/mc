@@ -862,8 +862,7 @@ file_op_context_destroy_ui (file_op_context_t * ctx)
 
         dlg_run_done (ui->op_dlg);
         dlg_destroy (ui->op_dlg);
-        g_free (ui);
-        ctx->ui = NULL;
+        MC_PTR_FREE (ctx->ui);
     }
 }
 

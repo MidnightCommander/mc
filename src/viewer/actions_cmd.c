@@ -154,8 +154,7 @@ mcview_continue_search_cmd (mcview_t * view)
             if (view->search == NULL)
             {
                 /* if not... then ask for an expression */
-                g_free (view->last_search_string);
-                view->last_search_string = NULL;
+                MC_PTR_FREE (view->last_search_string);
                 mcview_search (view, TRUE);
             }
             else
@@ -175,8 +174,7 @@ mcview_continue_search_cmd (mcview_t * view)
         else
         {
             /* if not... then ask for an expression */
-            g_free (view->last_search_string);
-            view->last_search_string = NULL;
+            MC_PTR_FREE (view->last_search_string);
             mcview_search (view, TRUE);
         }
     }

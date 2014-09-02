@@ -168,13 +168,11 @@ mc_skin_deinit (void)
     tty_color_free_all_tmp ();
     tty_color_free_all_non_tmp ();
 
-    g_free (mc_skin__default.name);
-    mc_skin__default.name = NULL;
+    MC_PTR_FREE (mc_skin__default.name);
     g_hash_table_destroy (mc_skin__default.colors);
     mc_skin__default.colors = NULL;
 
-    g_free (mc_skin__default.description);
-    mc_skin__default.description = NULL;
+    MC_PTR_FREE (mc_skin__default.description);
 
     mc_config_deinit (mc_skin__default.config);
     mc_skin__default.config = NULL;

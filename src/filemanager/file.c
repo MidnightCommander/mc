@@ -11,7 +11,7 @@
    Jakub Jelinek, 1995, 1996
    Norbert Warmuth, 1997
    Pavel Machek, 1998
-   Andrew Borodin <aborodin@vmail.ru>, 2011, 2012, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2011-2014
 
    The copy code was based in GNU's cp, and was written by:
    Torbjorn Granlund, David MacKenzie, and Jim Meyering.
@@ -1384,14 +1384,12 @@ panel_operate_init_totals (const WPanel * panel, const char *source, file_op_con
 /* --------------------------------------------------------------------------------------------- */
 /**
  * Generate user prompt for panel operation.
- * single_source is the name if the source entry or NULL for multiple
- * entries.
- * src_stat is only used when single_source is not NULL.
+ * src_stat must be not NULL for single source, and NULL for multiple sources
  */
 
 static char *
 panel_operate_generate_prompt (const WPanel * panel, FileOperation operation,
-                               gboolean single_source, const struct stat *src_stat)
+                               const struct stat *src_stat)
 {
     char *sp;
     char *format_string;
@@ -1436,7 +1434,7 @@ panel_operate_generate_prompt (const WPanel * panel, FileOperation operation,
      *       "Delete %d files/directories?"
      */
 
-    sp = (char *) (single_source ? one_format : many_format);
+    sp = (char *) (src_stat != NULL ? one_format : many_format);
 
     /* 1. Substitute %o */
     format_string = str_replace_all (sp, "%o", op_names1[(int) operation]);
@@ -1448,7 +1446,7 @@ panel_operate_generate_prompt (const WPanel * panel, FileOperation operation,
     g_free (sp);
 
     /* 3. Substitute %f */
-    if (single_source)
+    if (src_stat != NULL)
         cp = S_ISDIR (src_stat->st_mode) ? prompt_parts[2] : prompt_parts[0];
     else if (panel->marked == panel->dirs_marked)
         cp = prompt_parts[3];
@@ -2718,7 +2716,8 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         }
 
         /* Generate confirmation prompt */
-        format = panel_operate_generate_prompt (panel, operation, source != NULL, &src_stat);
+        format =
+            panel_operate_generate_prompt (panel, operation, source != NULL ? &src_stat : NULL);
 
         dest = file_mask_dialog (ctx, operation, source != NULL, format,
                                  source != NULL ? (void *) source
@@ -2741,7 +2740,8 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         char fmd_buf[BUF_MEDIUM];
 
         /* Generate confirmation prompt */
-        format = panel_operate_generate_prompt (panel, OP_DELETE, source != NULL, &src_stat);
+        format =
+            panel_operate_generate_prompt (panel, OP_DELETE, source != NULL ? &src_stat : NULL);
 
         if (source == NULL)
             g_snprintf (fmd_buf, sizeof (fmd_buf), format, panel->marked);
@@ -3077,8 +3077,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 #endif /* WITH_FULL_PATHS */
     g_free (dest);
     vfs_path_free (dest_vpath);
-    g_free (ctx->dest_mask);
-    ctx->dest_mask = NULL;
+    MC_PTR_FREE (ctx->dest_mask);
 
 #ifdef ENABLE_BACKGROUND
     /* Let our parent know we are saying bye bye */

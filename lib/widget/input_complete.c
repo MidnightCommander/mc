@@ -270,14 +270,11 @@ filename_completion_function (const char *text, int state, input_complete_t flag
             mc_closedir (directory);
             directory = NULL;
         }
-        g_free (dirname);
-        dirname = NULL;
+        MC_PTR_FREE (dirname);
         vfs_path_free (dirname_vpath);
         dirname_vpath = NULL;
-        g_free (filename);
-        filename = NULL;
-        g_free (users_dirname);
-        users_dirname = NULL;
+        MC_PTR_FREE (filename);
+        MC_PTR_FREE (users_dirname);
         return NULL;
     }
 
@@ -660,18 +657,12 @@ command_completion_function (const char *_text, int state, input_complete_t flag
             }
             found = filename_completion_function (cur_word, state - init_state, flags);
             if (!found)
-            {
-                g_free (cur_word);
-                cur_word = NULL;
-            }
+                MC_PTR_FREE (cur_word);
         }
     }
 
     if (found == NULL)
-    {
-        g_free (path);
-        path = NULL;
-    }
+        MC_PTR_FREE (path);
     else
     {
         p = strrchr (found, PATH_SEP);
@@ -795,11 +786,9 @@ completion_matches (const char *text, CompletionFunction entry_function, input_c
             match_list[0] = g_strndup (match_list[1], low);
         }
     }
-    else
-    {                           /* There were no matches. */
-        g_free (match_list);
-        match_list = NULL;
-    }
+    else /* There were no matches. */
+        MC_PTR_FREE (match_list);
+
     return match_list;
 }
 

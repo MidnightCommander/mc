@@ -1489,10 +1489,7 @@ static void
 fish_fh_free_data (vfs_file_handler_t * fh)
 {
     if (fh != NULL)
-    {
-        g_free (fh->data);
-        fh->data = NULL;
-    }
+        MC_PTR_FREE (fh->data);
 }
 
 /* --------------------------------------------------------------------------------------------- */

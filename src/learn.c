@@ -95,10 +95,7 @@ learn_button (WButton * button, int action)
                           "and wait as well."), _(key_name_conv_tab[action - B_USER].longname));
     mc_refresh ();
     if (learnkeys[action - B_USER].sequence != NULL)
-    {
-        g_free (learnkeys[action - B_USER].sequence);
-        learnkeys[action - B_USER].sequence = NULL;
-    }
+        MC_PTR_FREE (learnkeys[action - B_USER].sequence);
 
     seq = learn_key ();
     if (seq != NULL)

@@ -505,9 +505,8 @@ sfs_done (struct vfs_class *me)
 
     for (i = 0; i < sfs_no; i++)
     {
-        g_free (sfs_prefix[i]);
-        g_free (sfs_command[i]);
-        sfs_prefix[i] = sfs_command[i] = NULL;
+        MC_PTR_FREE (sfs_prefix[i]);
+        MC_PTR_FREE (sfs_command[i]);
     }
     sfs_no = 0;
 }

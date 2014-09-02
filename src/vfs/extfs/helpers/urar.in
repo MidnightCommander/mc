@@ -22,7 +22,7 @@ UNRAR=`which unrar 2>/dev/null`
 [ ! -x $UNRAR -a -x $RAR ] && UNRAR=$RAR
 
 # Define $UNRAR version
-UNRAR_VERSION=`$UNRAR -? | grep "Copyright" | sed -e 's/.*\([0-9]\)\..*/\1/'`
+UNRAR_VERSION=`$UNRAR -cfg- -? | grep "Copyright" | sed -e 's/.*\([0-9]\)\..*/\1/'`
 
 mcrar4fs_list ()
 {

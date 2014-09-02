@@ -4,7 +4,7 @@ AM_CPPFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir) $(LIBSSH_CFLAGS)
 noinst_LTLIBRARIES = libvfs-sftpfs.la
 
 libvfs_sftpfs_la_SOURCES = \
-	config_parcer.c \
+	config_parser.c \
 	connection.c \
 	dir.c \
 	file.c \

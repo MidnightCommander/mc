@@ -63,6 +63,7 @@
 
 #include "lib/global.h"
 
+#include "lib/util.h"
 #include "lib/widget.h"         /* message() */
 #include "lib/vfs/utilvfs.h"
 #include "lib/vfs/vfs.h"
@@ -140,12 +141,9 @@ undelfs_shutdown (void)
     if (fs)
         ext2fs_close (fs);
     fs = NULL;
-    g_free (ext2_fname);
-    ext2_fname = NULL;
-    g_free (delarray);
-    delarray = NULL;
-    g_free (block_buf);
-    block_buf = NULL;
+    MC_PTR_FREE (ext2_fname);
+    MC_PTR_FREE (delarray);
+    MC_PTR_FREE (block_buf);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -328,11 +326,9 @@ undelfs_loaddel (void)
   error_out:
     ext2fs_close_inode_scan (scan);
   free_block_buf:
-    g_free (block_buf);
-    block_buf = NULL;
+    MC_PTR_FREE (block_buf);
   free_delarray:
-    g_free (delarray);
-    delarray = NULL;
+    MC_PTR_FREE (delarray);
     return 0;
 }
 

@@ -135,8 +135,7 @@ resolve_symlinks (const vfs_path_t * vpath)
         *q = 0;
         if (mc_lstat (vpath, &mybuf) < 0)
         {
-            g_free (buf);
-            buf = NULL;
+            MC_PTR_FREE (buf);
             goto ret;
         }
         if (!S_ISLNK (mybuf.st_mode))
@@ -148,8 +147,7 @@ resolve_symlinks (const vfs_path_t * vpath)
             len = mc_readlink (vpath, buf2, MC_MAXPATHLEN - 1);
             if (len < 0)
             {
-                g_free (buf);
-                buf = NULL;
+                MC_PTR_FREE (buf);
                 goto ret;
             }
             buf2[len] = 0;

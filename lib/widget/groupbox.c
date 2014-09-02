@@ -39,6 +39,7 @@
 #include "lib/tty/tty.h"
 #include "lib/tty/color.h"
 #include "lib/skin.h"
+#include "lib/util.h"
 #include "lib/widget.h"
 
 /*** global variables ****************************************************************************/
@@ -120,8 +121,7 @@ groupbox_new (int y, int x, int height, int width, const char *title)
 void
 groupbox_set_title (WGroupbox * g, const char *title)
 {
-    g_free (g->title);
-    g->title = NULL;
+    MC_PTR_FREE (g->title);
 
     /* Strip existing spaces, add one space before and after the title */
     if (title != NULL && *title != '\0')

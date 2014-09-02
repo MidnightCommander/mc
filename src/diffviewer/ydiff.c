@@ -1858,8 +1858,7 @@ destroy_hdiff (WDiff * dview)
 
     mc_search_free (dview->search.handle);
     dview->search.handle = NULL;
-    g_free (dview->search.last_string);
-    dview->search.last_string = NULL;
+    MC_PTR_FREE (dview->search.last_string);
 }
 
 /* --------------------------------------------------------------------------------------------- */

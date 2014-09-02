@@ -206,8 +206,7 @@ cpio_free_archive (struct vfs_class *me, struct vfs_s_super *super)
     arch->fd = -1;
     g_slist_free_full (arch->deferred, g_free);
     arch->deferred = NULL;
-    g_free (super->data);
-    super->data = NULL;
+    MC_PTR_FREE (super->data);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -250,8 +249,7 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const vfs_
         {
             message (D_ERROR, MSG_ERROR, _("Cannot open cpio archive\n%s"), s);
             g_free (s);
-            g_free (super->name);
-            super->name = NULL;
+            MC_PTR_FREE (super->name);
             return -1;
         }
         g_free (s);

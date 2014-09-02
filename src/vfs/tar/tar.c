@@ -239,7 +239,7 @@ static union record rec_buf;
 static long
 tar_from_oct (int digs, char *where)
 {
-    register long value;
+    long value;
 
     while (isspace ((unsigned char) *where))
     {                           /* Skip spaces */
@@ -320,8 +320,7 @@ tar_open_archive_int (struct vfs_class *me, const vfs_path_t * vpath, struct vfs
         g_free (s);
         if (result == -1)
         {
-            g_free (archive->name);
-            archive->name = NULL;
+            MC_PTR_FREE (archive->name);
             ERRNOR (ENOENT, -1);
         }
     }
@@ -451,10 +450,10 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
 {
     tar_super_data_t *arch = (tar_super_data_t *) archive->data;
 
-    register int i;
-    register long sum, signed_sum, recsum;
-    register char *p;
-    register union record *header;
+    int i;
+    long sum, signed_sum, recsum;
+    char *p;
+    union record *header;
     static char *next_long_name = NULL, *next_long_link = NULL;
 
   recurse:
@@ -585,8 +584,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
             data = tar_get_next_record (archive, tard)->charptr;
             if (data == NULL)
             {
-                g_free (*longp);
-                *longp = NULL;
+                MC_PTR_FREE (*longp);
                 message (D_ERROR, MSG_ERROR, _("Unexpected EOF on archive file"));
                 return STATUS_BADCHECKSUM;
             }
@@ -600,8 +598,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
 
         if (bp - *longp == MC_MAXPATHLEN && bp[-1] != '\0')
         {
-            g_free (*longp);
-            *longp = NULL;
+            MC_PTR_FREE (*longp);
             message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
             return STATUS_BADCHECKSUM;
         }

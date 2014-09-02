@@ -537,8 +537,7 @@ dir_list_clean (dir_list * list)
         file_entry_t *fentry;
 
         fentry = &list->list[i];
-        g_free (fentry->fname);
-        fentry->fname = NULL;
+        MC_PTR_FREE (fentry->fname);
     }
 
     list->len = 0;

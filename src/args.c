@@ -330,17 +330,10 @@ static gchar *mc_args__loc__usage_string = NULL;
 static void
 mc_args_clean_temp_help_strings (void)
 {
-    g_free (mc_args__loc__colors_string);
-    mc_args__loc__colors_string = NULL;
-
-    g_free (mc_args__loc__footer_string);
-    mc_args__loc__footer_string = NULL;
-
-    g_free (mc_args__loc__header_string);
-    mc_args__loc__header_string = NULL;
-
-    g_free (mc_args__loc__usage_string);
-    mc_args__loc__usage_string = NULL;
+    MC_PTR_FREE (mc_args__loc__colors_string);
+    MC_PTR_FREE (mc_args__loc__footer_string);
+    MC_PTR_FREE (mc_args__loc__header_string);
+    MC_PTR_FREE (mc_args__loc__usage_string);
 }
 
 /* --------------------------------------------------------------------------------------------- */

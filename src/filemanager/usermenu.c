@@ -80,7 +80,7 @@ static char *menu = NULL;
 static char *
 strip_ext (char *ss)
 {
-    register char *s = ss;
+    char *s = ss;
     char *e = NULL;
     while (*s)
     {
@@ -321,8 +321,7 @@ debug_out (char *start, char *end, int cond)
 
         }
         debug_flag = 0;
-        g_free (msg);
-        msg = NULL;
+        MC_PTR_FREE (msg);
     }
     else
     {
@@ -946,8 +945,7 @@ user_menu_cmd (struct WEdit * edit_widget, const char *menu_file, int selected_e
         {
             message (D_ERROR, MSG_ERROR, _("Cannot open file %s\n%s"), menu,
                      unix_error_string (errno));
-            g_free (menu);
-            menu = NULL;
+            MC_PTR_FREE (menu);
             return FALSE;
         }
 
@@ -984,8 +982,7 @@ user_menu_cmd (struct WEdit * edit_widget, const char *menu_file, int selected_e
     if (!g_file_get_contents (menu, &data, NULL, NULL))
     {
         message (D_ERROR, MSG_ERROR, _("Cannot open file%s\n%s"), menu, unix_error_string (errno));
-        g_free (menu);
-        menu = NULL;
+        MC_PTR_FREE (menu);
         return FALSE;
     }
 
@@ -1124,8 +1121,7 @@ user_menu_cmd (struct WEdit * edit_widget, const char *menu_file, int selected_e
     }
 
     easy_patterns = old_patterns;
-    g_free (menu);
-    menu = NULL;
+    MC_PTR_FREE (menu);
     g_free (entries);
     g_free (data);
     return res;
