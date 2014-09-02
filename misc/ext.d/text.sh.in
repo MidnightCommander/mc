@@ -45,7 +45,7 @@ do_view_action() {
             cat "${MC_EXT_FILENAME}"
             ;;
         *)
-            { zsoelim "${MC_EXT_FILENAME}" 2>/dev/null || cat "${MC_EXT_FILENAME}"; } | nroff @MAN_FLAGS@ @MANDOC@
+            MANROFFOPT=-c MAN_KEEP_FORMATTING=1 man -P cat -l "${MC_EXT_FILENAME}"
             ;;
         esac
         ;;
@@ -64,7 +64,9 @@ do_view_action() {
             ${unpacker} "${MC_EXT_FILENAME}"
             ;;
         *)
-            ${unpacker} "${MC_EXT_FILENAME}" | nroff @MAN_FLAGS@ @MANDOC@
+            # "man" takes care of uncompressing.
+            # This way the stdin is left intact so the correct width is used.
+            MANROFFOPT=-c MAN_KEEP_FORMATTING=1 man -P cat -l "${MC_EXT_FILENAME}"
             ;;
         esac
         ;;
