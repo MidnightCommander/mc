@@ -786,7 +786,7 @@ completion_matches (const char *text, CompletionFunction entry_function, input_c
             match_list[0] = g_strndup (match_list[1], low);
         }
     }
-    else /* There were no matches. */
+    else                        /* There were no matches. */
         MC_PTR_FREE (match_list);
 
     return match_list;
