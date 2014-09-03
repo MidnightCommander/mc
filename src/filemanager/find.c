@@ -249,8 +249,7 @@ parse_ignore_dirs (const char *ignore_dirs)
         if (find_ignore_dirs[r][0] == '\0')
         {
             /* empty entry -- skip it */
-            g_free (find_ignore_dirs[r]);
-            find_ignore_dirs[r] = NULL;
+            MC_PTR_FREE (find_ignore_dirs[r]);
             continue;
         }
 
