@@ -14,7 +14,7 @@
    Norbert Warmuth, 1997
    Miguel de Icaza, 1996, 1999
    Slava Zanko <slavazanko@gmail.com>, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2013, 2014
 
    This file is part of the Midnight Commander.
 
@@ -306,7 +306,6 @@ show_tree (WTree * tree)
         i = 0;
         while (current->prev && i < tree->topdiff)
         {
-
             current = current->prev;
 
             if (current->sublevel < tree->selected_ptr->sublevel)
@@ -324,15 +323,11 @@ show_tree (WTree * tree)
                 if (vfs_path_equal_len (current->name, tree->selected_ptr->name, j))
                     i++;
             }
-            else
+            else if (current->sublevel == tree->selected_ptr->sublevel + 1)
             {
-                if (current->sublevel == tree->selected_ptr->sublevel + 1
-                    && vfs_path_len (tree->selected_ptr->name) > 1)
-                {
-                    if (vfs_path_equal_len (current->name, tree->selected_ptr->name,
-                                            vfs_path_len (tree->selected_ptr->name)))
-                        i++;
-                }
+                j = vfs_path_len (tree->selected_ptr->name);
+                if (j > 1 && vfs_path_equal_len (current->name, tree->selected_ptr->name, j))
+                    i++;
             }
         }
         tree->topdiff = i;
