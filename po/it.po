@@ -4296,8 +4296,8 @@ msgstr "Impossibile spawn del processo figlio"
 msgid "Empty output from child filter"
 msgstr "Risultato vuoto da filtro figlio"
 
-msgid "&Line number (decimal)"
-msgstr "Numero di &linea (decimale)"
+msgid "&Line number"
+msgstr "Numero di &linea"
 
 msgid "Pe&rcents"
 msgstr "Pe%rcentuale"

@@ -5332,7 +5332,7 @@ msgid "Empty output from child filter"
 msgstr ""
 
 #: src/viewer/dialogs.c:179
-msgid "&Line number (decimal)"
+msgid "&Line number"
 msgstr ""
 
 #: src/viewer/dialogs.c:180

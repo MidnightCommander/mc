@@ -4310,8 +4310,8 @@ msgstr "Imposible ejecutar el proceso hijo"
 msgid "Empty output from child filter"
 msgstr "Salida del filtro vacía"
 
-msgid "&Line number (decimal)"
-msgstr "número de &Línea (decimal)"
+msgid "&Line number"
+msgstr "número de &Línea"
 
 msgid "Pe&rcents"
 msgstr "po&Rcentaje del archivo"

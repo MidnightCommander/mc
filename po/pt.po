@@ -4308,8 +4308,8 @@ msgstr "Não é possível gerar processo child"
 msgid "Empty output from child filter"
 msgstr "Output vazio de filtro de child"
 
-msgid "&Line number (decimal)"
-msgstr "Número de &linha (decimal)"
+msgid "&Line number"
+msgstr "Número de &linha"
 
 msgid "Pe&rcents"
 msgstr "Pe&rcentagens"

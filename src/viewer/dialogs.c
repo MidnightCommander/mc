@@ -176,7 +176,7 @@ mcview_dialog_goto (mcview_t * view, off_t * offset)
     } mcview_goto_type_t;
 
     const char *mc_view_goto_str[] = {
-        N_("&Line number (decimal)"),
+        N_("&Line number"),
         N_("Pe&rcents"),
         N_("&Decimal offset"),
         N_("He&xadecimal offset")
@@ -238,6 +238,9 @@ mcview_dialog_goto (mcview_t * view, off_t * offset)
             switch (current_goto_type)
             {
             case MC_VIEW_GOTO_LINENUM:
+                /* Line number entered by user is 1-based. */
+                if (addr > 0)
+                    addr--;
                 mcview_coord_to_offset (view, offset, addr, 0);
                 *offset = mcview_bol (view, *offset, 0);
                 break;

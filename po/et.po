@@ -4297,8 +4297,8 @@ msgstr "Alamprotsessi loomine nurjus"
 msgid "Empty output from child filter"
 msgstr "Alamprotsessi filter ei väljastanud mitte midagi"
 
-msgid "&Line number (decimal)"
-msgstr "&Rea number (kümnendarv)"
+msgid "&Line number"
+msgstr "&Rea number"
 
 msgid "Pe&rcents"
 msgstr "P&rotsendid"

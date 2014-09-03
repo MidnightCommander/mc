@@ -4312,8 +4312,8 @@ msgstr "Nie można utworzyć procesu potomnego"
 msgid "Empty output from child filter"
 msgstr "Puste wyjście filtru potomnego"
 
-msgid "&Line number (decimal)"
-msgstr "&Numer wiersza (dziesiętny)"
+msgid "&Line number"
+msgstr "&Numer wiersza"
 
 msgid "Pe&rcents"
 msgstr "P&rocenty"

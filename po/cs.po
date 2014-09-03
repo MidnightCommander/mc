@@ -4229,8 +4229,8 @@ msgstr "Nelze vytvořit proces potomka"
 msgid "Empty output from child filter"
 msgstr "Prázdný výstup z filtru potomka"
 
-msgid "&Line number (decimal)"
-msgstr "Číslo řádku (dekadicky)"
+msgid "&Line number"
+msgstr "Číslo řádku"
 
 msgid "Pe&rcents"
 msgstr "Procenta"

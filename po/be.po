@@ -4293,8 +4293,8 @@ msgstr "Немагчыма нарадзіць даччын працэс"
 msgid "Empty output from child filter"
 msgstr "Даччына сіта не вярнула зьвестак"
 
-msgid "&Line number (decimal)"
-msgstr "&Нумар радку (дзесятковы)"
+msgid "&Line number"
+msgstr "&Нумар радку"
 
 msgid "Pe&rcents"
 msgstr "&Адсоткі"

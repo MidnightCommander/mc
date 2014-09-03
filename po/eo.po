@@ -4300,8 +4300,8 @@ msgstr "Ne eblas krei idan procezon"
 msgid "Empty output from child filter"
 msgstr "Vaka eligo el ida filtrilo"
 
-msgid "&Line number (decimal)"
-msgstr "&Linia numero (dekuma)"
+msgid "&Line number"
+msgstr "&Linia numero"
 
 msgid "Pe&rcents"
 msgstr "&Elcentoj"

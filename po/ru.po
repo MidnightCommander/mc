@@ -4313,8 +4313,8 @@ msgstr "Невозможно породить дочерний процесс"
 msgid "Empty output from child filter"
 msgstr "Дочерний фильтр не вернул данные"
 
-msgid "&Line number (decimal)"
-msgstr "&Номер строки (десятичный)"
+msgid "&Line number"
+msgstr "&Номер строки"
 
 msgid "Pe&rcents"
 msgstr "П&роценты"

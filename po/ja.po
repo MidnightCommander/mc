@@ -4097,8 +4097,8 @@ msgstr ""
 msgid "Empty output from child filter"
 msgstr ""
 
-msgid "&Line number (decimal)"
-msgstr "行番号(10進数)(&L)"
+msgid "&Line number"
+msgstr "行番号(&L)"
 
 msgid "Pe&rcents"
 msgstr ""
