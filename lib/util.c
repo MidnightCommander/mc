@@ -245,28 +245,26 @@ is_printable (int c)
 /* --------------------------------------------------------------------------------------------- */
 /**
  * Quote the filename for the purpose of inserting it into the command
- * line.  If quote_percent is 1, replace "%" with "%%" - the percent is
+ * line.  If quote_percent is TRUE, replace "%" with "%%" - the percent is
  * processed by the mc command line.
  */
 char *
-name_quote (const char *s, int quote_percent)
+name_quote (const char *s, gboolean quote_percent)
 {
-    char *ret, *d;
+    GString *ret;
 
-    d = ret = g_malloc (strlen (s) * 2 + 2 + 1);
+    ret = g_string_sized_new (64);
+
     if (*s == '-')
-    {
-        *d++ = '.';
-        *d++ = '/';
-    }
+        g_string_append (ret, "." PATH_SEP_STR);
 
-    for (; *s; s++, d++)
+    for (; *s != '\0'; s++)
     {
         switch (*s)
         {
         case '%':
             if (quote_percent)
-                *d++ = '%';
+                g_string_append_c (ret, '%');
             break;
         case '\'':
         case '\\':
@@ -291,24 +289,24 @@ name_quote (const char *s, int quote_percent)
         case '*':
         case '(':
         case ')':
-            *d++ = '\\';
+            g_string_append_c (ret, '\\');
             break;
         case '~':
         case '#':
-            if (d == ret)
-                *d++ = '\\';
+            if (ret->len == 0)
+                g_string_append_c (ret, '\\');
             break;
         }
-        *d = *s;
+        g_string_append_c (ret, *s);
     }
-    *d = '\0';
-    return ret;
+
+    return g_string_free (ret, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-fake_name_quote (const char *s, int quote_percent)
+fake_name_quote (const char *s, gboolean quote_percent)
 {
     (void) quote_percent;
     return g_strdup (s);

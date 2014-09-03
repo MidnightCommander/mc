@@ -508,7 +508,7 @@ command_insert (WInput * in, const char *text, gboolean insert_extra_space)
 {
     char *quoted_text;
 
-    quoted_text = name_quote (text, 1);
+    quoted_text = name_quote (text, TRUE);
     input_insert (in, quoted_text, insert_extra_space);
     g_free (quoted_text);
 }

@@ -2784,8 +2784,10 @@ do_enter_on_file_entry (file_entry_t * fe)
     }
 
     {
-        char *tmp = name_quote (fe->fname, 0);
-        char *cmd = g_strconcat (".", PATH_SEP_STR, tmp, (char *) NULL);
+        char *tmp, *cmd;
+
+        tmp = name_quote (fe->fname, FALSE);
+        cmd = g_strconcat (".", PATH_SEP_STR, tmp, (char *) NULL);
         g_free (tmp);
         shell_execute (cmd, 0);
         g_free (cmd);

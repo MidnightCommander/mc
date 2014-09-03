@@ -256,7 +256,7 @@ edit_get_filter (const vfs_path_t * filename_vpath)
     if (i < 0)
         return NULL;
 
-    quoted_name = name_quote (vfs_path_as_str (filename_vpath), 0);
+    quoted_name = name_quote (vfs_path_as_str (filename_vpath), FALSE);
     p = g_strdup_printf (all_filters[i].read, quoted_name);
     g_free (quoted_name);
     return p;
@@ -1810,7 +1810,7 @@ edit_get_write_filter (const vfs_path_t * write_name_vpath, const vfs_path_t * f
         return NULL;
 
     path_element = vfs_path_get_by_index (write_name_vpath, -1);
-    writename = name_quote (path_element->path, 0);
+    writename = name_quote (path_element->path, FALSE);
     p = g_strdup_printf (all_filters[i].write, writename);
     g_free (writename);
     return p;

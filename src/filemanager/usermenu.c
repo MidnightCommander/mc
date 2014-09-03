@@ -491,7 +491,7 @@ execute_menu_command (WEdit * edit_widget, const char *commands, gboolean show_p
                 {
                     char *tmp;
 
-                    tmp = name_quote (parameter, 0);
+                    tmp = name_quote (parameter, FALSE);
                     fputs (tmp, cmd_file);
                     g_free (tmp);
                 }
@@ -737,7 +737,7 @@ char *
 expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
 {
     WPanel *panel = NULL;
-    char *(*quote_func) (const char *, int);
+    char *(*quote_func) (const char *, gboolean);
     char *fname = NULL;
     char *result;
     char c_lc;
@@ -785,10 +785,10 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
     {
     case 'f':
     case 'p':
-        result = (*quote_func) (fname, 0);
+        result = quote_func (fname, FALSE);
         goto ret;
     case 'x':
-        result = (*quote_func) (extension (fname), 0);
+        result = quote_func (extension (fname), FALSE);
         goto ret;
     case 'd':
         {
@@ -800,7 +800,7 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
             else
                 cwd = vfs_get_current_dir ();
 
-            qstr = (*quote_func) (cwd, 0);
+            qstr = quote_func (cwd, FALSE);
 
             g_free (cwd);
 
@@ -838,14 +838,14 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
                 char *file;
 
                 file = mc_config_get_full_path (EDIT_BLOCK_FILE);
-                result = (*quote_func) (file, 0);
+                result = quote_func (file, FALSE);
                 g_free (file);
                 goto ret;
             }
 #endif
             if (c_lc == 'b')
             {
-                result = strip_ext ((*quote_func) (fname, 0));
+                result = strip_ext (quote_func (fname, FALSE));
                 goto ret;
             }
             break;
@@ -854,7 +854,7 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
 #ifdef USE_INTERNAL_EDIT
         if (edit_widget)
         {
-            result = strip_ext ((*quote_func) (fname, 0));
+            result = strip_ext (quote_func (fname, FALSE));
             goto ret;
         }
 #endif
@@ -862,14 +862,14 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
     case 'm':                  /* menu file name */
         if (menu)
         {
-            result = (*quote_func) (menu, 0);
+            result = quote_func (menu, FALSE);
             goto ret;
         }
         break;
     case 's':
         if (!panel || !panel->marked)
         {
-            result = (*quote_func) (fname, 0);
+            result = quote_func (fname, FALSE);
             goto ret;
         }
 
@@ -894,7 +894,7 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
                 {
                     char *tmp;
 
-                    tmp = (*quote_func) (panel->dir.list[i].fname, 0);
+                    tmp = quote_func (panel->dir.list[i].fname, FALSE);
                     g_string_append (block, tmp);
                     g_string_append_c (block, ' ');
                     g_free (tmp);

@@ -157,11 +157,11 @@ sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
             vfs_path_free (pname);
             return -1;
         }
-        pqname = name_quote (vfs_path_get_last_path_str (s), 0);
+        pqname = name_quote (vfs_path_get_last_path_str (s), FALSE);
         vfs_path_free (s);
     }
     else
-        pqname = name_quote (vfs_path_as_str (pname), 0);
+        pqname = name_quote (vfs_path_as_str (pname), FALSE);
 
     vfs_path_free (pname);
 
