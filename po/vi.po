@@ -4087,7 +4087,7 @@ msgstr ""
 msgid "Empty output from child filter"
 msgstr "Bộ lọc con trả lại kết quả rỗng"
 
-msgid "&Line number (decimal)"
+msgid "&Line number"
 msgstr ""
 
 msgid "Pe&rcents"

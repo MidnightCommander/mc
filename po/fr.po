@@ -4222,8 +4222,8 @@ msgstr "Impossible de créer un processus fils"
 msgid "Empty output from child filter"
 msgstr "Sortie vide du processus fils"
 
-msgid "&Line number (decimal)"
-msgstr "&Numéro de ligne (décimal)"
+msgid "&Line number"
+msgstr "&Numéro de ligne"
 
 msgid "Pe&rcents"
 msgstr "Pou&rcents"

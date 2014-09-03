@@ -4110,7 +4110,7 @@ msgstr ""
 msgid "Empty output from child filter"
 msgstr "Prazen izhod iz podprograma - filtra"
 
-msgid "&Line number (decimal)"
+msgid "&Line number"
 msgstr ""
 
 msgid "Pe&rcents"

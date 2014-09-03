@@ -4301,8 +4301,8 @@ msgstr "Не вдалося створити процес-нащадок"
 msgid "Empty output from child filter"
 msgstr "Фільтр-нащадок не повернув даних"
 
-msgid "&Line number (decimal)"
-msgstr "&Номер рядка (десяткове число)"
+msgid "&Line number"
+msgstr "&Номер рядка"
 
 msgid "Pe&rcents"
 msgstr "Ві&дсотки"

@@ -4296,8 +4296,8 @@ msgstr "无法生成子进程"
 msgid "Empty output from child filter"
 msgstr "子过滤器输出为空"
 
-msgid "&Line number (decimal)"
-msgstr "行号(10进制&L)"
+msgid "&Line number"
+msgstr "行号(&L)"
 
 msgid "Pe&rcents"
 msgstr "百分比(&R)"

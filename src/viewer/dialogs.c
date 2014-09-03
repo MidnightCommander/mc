@@ -176,7 +176,7 @@ mcview_dialog_goto (mcview_t * view, off_t * offset)
     } mcview_goto_type_t;
 
     const char *mc_view_goto_str[] = {
-        N_("&Line number (decimal)"),
+        N_("&Line number"),
         N_("Pe&rcents"),
         N_("&Decimal offset"),
         N_("He&xadecimal offset")

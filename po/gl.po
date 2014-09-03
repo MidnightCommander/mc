@@ -4310,8 +4310,8 @@ msgstr "Non é posíbel executar o proceso fillo"
 msgid "Empty output from child filter"
 msgstr "Saída do filtro baleira"
 
-msgid "&Line number (decimal)"
-msgstr "Número de &Liña (decimal)"
+msgid "&Line number"
+msgstr "Número de &Liña"
 
 msgid "Pe&rcents"
 msgstr "Pe&Rcentiles"

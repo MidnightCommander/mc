@@ -4108,7 +4108,7 @@ msgstr ""
 msgid "Empty output from child filter"
 msgstr "Filtras nepateikė informacijos"
 
-msgid "&Line number (decimal)"
+msgid "&Line number"
 msgstr ""
 
 msgid "Pe&rcents"

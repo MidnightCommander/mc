@@ -4254,8 +4254,8 @@ msgstr "Kann Kindprozess nicht hervorbringen"
 msgid "Empty output from child filter"
 msgstr "Der Filter gab nichts aus"
 
-msgid "&Line number (decimal)"
-msgstr "Zei&lennummer (dezimal)"
+msgid "&Line number"
+msgstr "Zei&lennummer"
 
 msgid "Pe&rcents"
 msgstr "P&rozente"

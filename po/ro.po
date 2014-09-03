@@ -4295,8 +4295,8 @@ msgstr "Nu se poate porni procesul copil"
 msgid "Empty output from child filter"
 msgstr "Ieșire vidă de la filtrul copil"
 
-msgid "&Line number (decimal)"
-msgstr "Număr de &linie (zecimal)"
+msgid "&Line number"
+msgstr "Număr de &linie"
 
 msgid "Pe&rcents"
 msgstr "P&rocente"

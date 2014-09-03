@@ -4092,8 +4092,8 @@ msgstr ""
 msgid "Empty output from child filter"
 msgstr "이 하위필터는 내보내기 충분"
 
-msgid "&Line number (decimal)"
-msgstr "줄 번호 (10 진수)(&L)"
+msgid "&Line number"
+msgstr "줄 번호 (&L)"
 
 msgid "Pe&rcents"
 msgstr "퍼센트(&R)"

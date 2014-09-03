@@ -4311,8 +4311,8 @@ msgstr "Nem sikerült programot indítani"
 msgid "Empty output from child filter"
 msgstr "A szűrő kimenete üres."
 
-msgid "&Line number (decimal)"
-msgstr "&Sorszám (decimális)"
+msgid "&Line number"
+msgstr "&Sorszám"
 
 msgid "Pe&rcents"
 msgstr "Szá&zalék"

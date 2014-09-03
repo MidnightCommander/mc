@@ -4225,8 +4225,8 @@ msgstr "Kan ikke spawn underproces"
 msgid "Empty output from child filter"
 msgstr "Tom uddata fra underfilter"
 
-msgid "&Line number (decimal)"
-msgstr "&Linjenummer (decimal)"
+msgid "&Line number"
+msgstr "&Linjenummer"
 
 msgid "Pe&rcents"
 msgstr "&Procenter"

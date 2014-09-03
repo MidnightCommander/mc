@@ -4296,8 +4296,8 @@ msgstr "Kan geen kindproces opstarten"
 msgid "Empty output from child filter"
 msgstr "Geen uitvoer van kindfilter"
 
-msgid "&Line number (decimal)"
-msgstr "Rege&lnummer (decimaal)"
+msgid "&Line number"
+msgstr "Rege&lnummer"
 
 msgid "Pe&rcents"
 msgstr "Pe&rcenten"
