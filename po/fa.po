@@ -1,10 +1,10 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
-# EAAL <aryaz.egh@gmail.com>, 2012
-# monta2009 <monta2009@gmail.com>, 2012
+# Aryaz Eghbali <aryaz.egh@gmail.com>, 2012
+# Mohammadreza MontazeriShatoori <monta2009@gmail.com>, 2012
 # Sina Saharkhiz <sinas1991@gmail.com>, 2012-2013
 # Slava Zanko <slavazanko@gmail.com>, 2012
 msgid ""
@@ -12,14 +12,13 @@ msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2014-07-25 10:37+0400\n"
-"PO-Revision-Date: 2014-02-19 09:12+0000\n"
-"Last-Translator: aborodin <aborodin@vmail.ru>\n"
-"Language-Team: Persian (http://www.transifex.com/projects/p/mc/language/"
-"fa/)\n"
-"Language: fa\n"
+"PO-Revision-Date: 2014-09-04 10:10+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"Language-Team: Persian (http://www.transifex.com/projects/p/mc/language/fa/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fa\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
@@ -863,9 +862,8 @@ msgstr ""
 msgid "Cannot open %s for reading"
 msgstr ""
 
-#, fuzzy
 msgid "Load file"
-msgstr "ذخیره فایل"
+msgstr ""
 
 #, c-format
 msgid "Error reading %s"
@@ -893,9 +891,9 @@ msgstr ""
 msgid "Cannot open pipe for reading: %s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Searching %s: %3d%%"
-msgstr "در حال جستجوی %s"
+msgstr ""
 
 #, c-format
 msgid "Searching %s"
@@ -919,9 +917,8 @@ msgstr ""
 msgid "Cannot open file for writing: %s"
 msgstr "امکان باز کردن فایل برای نوشتن وجود ندارد: %s"
 
-#, fuzzy
 msgid "The file you are saving does not end with a newline."
-msgstr "فایلی که در حال ذخیره‌اش هستید، با خط خالی به پایان نرسیده است"
+msgstr ""
 
 msgid "C&ontinue"
 msgstr "ادامه"
@@ -950,9 +947,8 @@ msgstr "ذخیره به عنوان"
 msgid "Block is large, you may not be able to undo this action"
 msgstr ""
 
-#, fuzzy
 msgid "Collect completions"
-msgstr "تنظیمات رنگ"
+msgstr ""
 
 msgid "&Quick save"
 msgstr "ذخیره‌ی سریع"
@@ -1856,7 +1852,8 @@ msgstr ""
 msgid "Sort order"
 msgstr "ترتیب مرتب‌سازی"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 msgid "Confirmation|&Delete"
 msgstr ""
 
@@ -2643,9 +2640,8 @@ msgstr ""
 msgid "Target"
 msgstr ""
 
-#, fuzzy
 msgid "Deleting"
-msgstr "حذف"
+msgstr ""
 
 msgid "&Using shell patterns"
 msgstr ""
@@ -3955,9 +3951,7 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive."
-msgstr ""
-"%s\n"
-"یک آرشیو tar به نظر نمی‌رسد."
+msgstr "%s\nیک آرشیو tar به نظر نمی‌رسد."
 
 msgid "undelfs: error"
 msgstr ""
