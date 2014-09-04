@@ -1,3 +1,39 @@
+Version 4.8.13
+
+-Core
+  * New engine of user-friendly interruption of long-time operations (#2136)
+
+- Editor
+  * Improvements of syntax highlighting:
+    * CMake (#3216)
+    * PHP (#3230)
+  * Translate language names in the spelling assistant dialogue (#3233)
+
+-Viewer
+  * Add separate normal(default) colour pair for viewer (#3204)
+  * Dealing with utf-8 man pages in view/open (#1539)
+  * "Goto line" is 1-based now (#3245)
+
+- Misc
+  * Code cleanup (#3189, #3223, #3242)
+  * Add new skins: gray-green-purple256 and gray-orange-blue256 (#3190)
+
+- Fixes
+  * First Backspace/Delete is ignored after mouse click in an input widget (#3225)
+  * Recursive find file doesn't work on Samba share (#3097)
+  * Recursive find file doesn't work on Windows NFS share (#3202)
+  * Incorrect file counter in move operation (#3196, #3209)
+  * "Directory scanning" window is too narrow (#3162)
+  * Colon is not recognized inside escape seq in prompt (#3241)
+  * Quick view doesn't grab focus on mouse click (#3251)
+  * fish subshell: overridden prompt (#3232, #3237)
+  * mcviewer: broken switch between raw and parse modes (#3219)
+  * mcviewer: incorrect percentage in mcview hex mode (#3258)
+  * RAR VFS incorrectly recognizes UnRAR version (#3240)
+  * viewbold and viewselected are missing from some skins (#3244)
+  * Incorrect enconding name for manual page (#3239)
+  * "User menu -> View manual page" doesn't do coloring (#3243)
+
 Version 4.8.12
 
 - Core
