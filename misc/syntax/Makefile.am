@@ -58,6 +58,7 @@ SYNTAXFILES =			\
 	povray.syntax		\
 	procmail.syntax		\
 	properties.syntax	\
+	puppet.syntax		\
 	python.syntax		\
 	cython.syntax		\
 	ruby.syntax		\

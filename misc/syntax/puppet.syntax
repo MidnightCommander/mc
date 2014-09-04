@@ -1,0 +1,517 @@
+# Puppet syntax file for GNU Midnight Commander
+# Author: Sergey Zhuga <sergey.zhuga@gmail.com>
+
+context default
+
+# Operators
+
+  keyword =>  yellow
+  keyword !=  yellow
+  keyword \+= yellow
+  keyword \+> yellow
+  keyword ->  yellow
+  keyword ~>  yellow
+  keyword <-  yellow
+  keyword <~  yellow
+  keyword =   yellow
+
+# Braces
+
+  keyword { brightcyan
+  keyword } brightcyan
+  keyword ( brightcyan
+  keyword ) brightcyan
+  keyword [ brightcyan
+  keyword ] brightcyan
+  keyword , brightcyan
+  keyword : brightcyan
+
+# Booleans
+
+  keyword whole false brightred
+  keyword whole FALSE brightred
+  keyword whole nil   brightred
+  keyword whole NIL   brightred
+  keyword whole true  brightred
+  keyword whole TRUE  brightred
+
+# Variables
+
+  keyword wholeright $+\:\:+\:\:+\:\:+\:\:+ white
+  keyword wholeright $+\:\:+\:\:+\:\:+ white
+  keyword wholeright $+\:\:+\:\:+ white
+  keyword wholeright $+\:\:+ white
+  keyword wholeright $+ white
+
+# Parameters
+
+  keyword whole aclinherit magenta
+  keyword whole aclmode magenta
+  keyword whole action_url magenta
+  keyword whole active_checks_enabled magenta
+  keyword whole address magenta
+  keyword whole address1 magenta
+  keyword whole address2 magenta
+  keyword whole address3 magenta
+  keyword whole address4 magenta
+  keyword whole address5 magenta
+  keyword whole address6 magenta
+  keyword whole admin magenta
+  keyword whole adminfile magenta
+  keyword whole age magenta
+  keyword whole alias magenta
+  keyword whole allowcdrom magenta
+  keyword whole allowdupe magenta
+  keyword whole allowed_trunk_vlans magenta
+  keyword whole allow_root magenta
+  keyword whole arguments magenta
+  keyword whole atboot magenta
+  keyword whole atime magenta
+  keyword whole attribute_membership magenta
+  keyword whole attributes magenta
+  keyword whole auth_class magenta
+  keyword whole authenticate_user magenta
+  keyword whole auth_membership magenta
+  keyword whole auths magenta
+  keyword whole auth_type magenta
+  keyword whole autoboot magenta
+  keyword whole backup magenta
+  keyword whole baseurl magenta
+  keyword whole binary magenta
+  keyword whole blockdevice magenta
+  keyword whole canmount magenta
+  keyword whole can_submit_commands magenta
+  keyword whole category magenta
+  keyword whole changes magenta
+  keyword whole check_command magenta
+  keyword whole check_freshness magenta
+  keyword whole check_interval magenta
+  keyword whole check_period magenta
+  keyword whole checksum magenta
+  keyword whole clone magenta
+  keyword whole command magenta
+  keyword whole command_line magenta
+  keyword whole command_name magenta
+  keyword whole comment magenta
+  keyword whole compression magenta
+  keyword whole configfiles magenta
+  keyword whole contactgroup_members magenta
+  keyword whole contactgroup_name magenta
+  keyword whole contactgroups magenta
+  keyword whole contact_groups magenta
+  keyword whole contact_name magenta
+  keyword whole contacts magenta
+  keyword whole content magenta
+  keyword whole context magenta
+  keyword whole control magenta
+  keyword whole copies magenta
+  keyword whole cost magenta
+  keyword whole create_args magenta
+  keyword whole creates magenta
+  keyword whole ctime magenta
+  keyword whole cwd magenta
+  keyword whole dataset magenta
+  keyword whole dependency_period magenta
+  keyword whole dependent_hostgroup_name magenta
+  keyword whole dependent_host_name magenta
+  keyword whole dependent_service_description magenta
+  keyword whole descr magenta
+  keyword whole description magenta
+  keyword whole device magenta
+  keyword whole devices magenta
+  keyword whole device_url magenta
+  keyword whole disk magenta
+  keyword whole display_name magenta
+  keyword whole ds_name magenta
+  keyword whole ds_type magenta
+  keyword whole dump magenta
+  keyword whole duplex magenta
+  keyword whole email magenta
+  keyword whole enable magenta
+  keyword whole enabled magenta
+  keyword whole enablegroups magenta
+  keyword whole en_address magenta
+  keyword whole encapsulation magenta
+  keyword whole ensure magenta
+  keyword whole environment magenta
+  keyword whole escalation_options magenta
+  keyword whole escalation_period magenta
+  keyword whole etherchannel magenta
+  keyword whole event_handler magenta
+  keyword whole event_handler_enabled magenta
+  keyword whole exclude magenta
+  keyword whole exec magenta
+  keyword whole execution_failure_criteria magenta
+  keyword whole expiry magenta
+  keyword whole failovermethod magenta
+  keyword whole failure_prediction_enabled magenta
+  keyword whole first_notification magenta
+  keyword whole first_notification_delay magenta
+  keyword whole flap_detection_enabled magenta
+  keyword whole flap_detection_options magenta
+  keyword whole flavor magenta
+  keyword whole force magenta
+  keyword whole freshness_threshold magenta
+  keyword whole friday magenta
+  keyword whole fstype magenta
+  keyword whole gid magenta
+  keyword whole gpgcheck magenta
+  keyword whole gpgkey magenta
+  keyword whole group magenta
+  keyword whole groups magenta
+  keyword whole hasrestart magenta
+  keyword whole hasstatus magenta
+  keyword whole high_flap_threshold magenta
+  keyword whole home magenta
+  keyword whole host_aliases magenta
+  keyword whole hostgroup_members magenta
+  keyword whole hostgroup_name magenta
+  keyword whole hostgroups magenta
+  keyword whole host_name magenta
+  keyword whole host_notification_commands magenta
+  keyword whole host_notification_options magenta
+  keyword whole host_notification_period magenta
+  keyword whole host_notifications_enabled magenta
+  keyword whole hour magenta
+  keyword whole http_caching magenta
+  keyword whole ia_load_module magenta
+  keyword whole icon_image magenta
+  keyword whole icon_image_alt magenta
+  keyword whole id magenta
+  keyword whole ignore magenta
+  keyword whole incl magenta
+  keyword whole includepkgs magenta
+  keyword whole inherit magenta
+  keyword whole inherits_parent magenta
+  keyword whole initial_state magenta
+  keyword whole install_args magenta
+  keyword whole install_options magenta
+  keyword whole instance magenta
+  keyword whole ip magenta
+  keyword whole ipaddress magenta
+  keyword whole ip_address magenta
+  keyword whole iptype magenta
+  keyword whole is_volatile magenta
+  keyword whole keepalive magenta
+  keyword whole key magenta
+  keyword whole key_membership magenta
+  keyword whole keys magenta
+  keyword whole k_of_n magenta
+  keyword whole last_notification magenta
+  keyword whole lens magenta
+  keyword whole links magenta
+  keyword whole load_path magenta
+  keyword whole log magenta
+  keyword whole logbias magenta
+  keyword whole logoutput magenta
+  keyword whole low_flap_threshold magenta
+  keyword whole mailserver magenta
+  keyword whole managehome magenta
+  keyword whole manifest magenta
+  keyword whole matches magenta
+  keyword whole max_check_attempts magenta
+  keyword whole mechanisms magenta
+  keyword whole members magenta
+  keyword whole membership magenta
+  keyword whole message magenta
+  keyword whole metadata_expire magenta
+  keyword whole minute magenta
+  keyword whole mirror magenta
+  keyword whole mirrorlist magenta
+  keyword whole mode magenta
+  keyword whole monday magenta
+  keyword whole month magenta
+  keyword whole monthday magenta
+  keyword whole mountpoint magenta
+  keyword whole mtime magenta
+  keyword whole _naginator_name magenta
+  keyword whole name magenta
+  keyword whole native_vlan magenta
+  keyword whole nbmand magenta
+  keyword whole normal_check_interval magenta
+  keyword whole notes magenta
+  keyword whole notes_url magenta
+  keyword whole notification_failure_criteria magenta
+  keyword whole notification_interval magenta
+  keyword whole notification_options magenta
+  keyword whole notification_period magenta
+  keyword whole notifications_enabled magenta
+  keyword whole obsess_over_host magenta
+  keyword whole obsess_over_service magenta
+  keyword whole onlyif magenta
+  keyword whole options magenta
+  keyword whole owner magenta
+  keyword whole pager magenta
+  keyword whole parallelize_check magenta
+  keyword whole parents magenta
+  keyword whole pass magenta
+  keyword whole passive_checks_enabled magenta
+  keyword whole password magenta
+  keyword whole password_max_age magenta
+  keyword whole password_min_age magenta
+  keyword whole path magenta
+  keyword whole pattern magenta
+  keyword whole period magenta
+  keyword whole periodmatch magenta
+  keyword whole persistent magenta
+  keyword whole platform magenta
+  keyword whole pool magenta
+  keyword whole port magenta
+  keyword whole primarycache magenta
+  keyword whole principals magenta
+  keyword whole priority magenta
+  keyword whole process_perf_data magenta
+  keyword whole profile_membership magenta
+  keyword whole profiles magenta
+  keyword whole project magenta
+  keyword whole protect magenta
+  keyword whole provider magenta
+  keyword whole proxy magenta
+  keyword whole proxy_password magenta
+  keyword whole proxy_username magenta
+  keyword whole purge magenta
+  keyword whole quota magenta
+  keyword whole raid_parity magenta
+  keyword whole raidz magenta
+  keyword whole range magenta
+  keyword whole readonly magenta
+  keyword whole realhostname magenta
+  keyword whole realname magenta
+  keyword whole recipient magenta
+  keyword whole recordsize magenta
+  keyword whole recurse magenta
+  keyword whole recurselimit magenta
+  keyword whole refquota magenta
+  keyword whole refreservation magenta
+  keyword whole refresh magenta
+  keyword whole refreshonly magenta
+  keyword whole register magenta
+  keyword whole remounts magenta
+  keyword whole repeat magenta
+  keyword whole replace magenta
+  keyword whole reservation magenta
+  keyword whole responsefile magenta
+  keyword whole restart magenta
+  keyword whole retain_nonstatus_information magenta
+  keyword whole retain_status_information magenta
+  keyword whole retry_check_interval magenta
+  keyword whole retry_interval magenta
+  keyword whole returns magenta
+  keyword whole rmdirs magenta
+  keyword whole role_membership magenta
+  keyword whole roles magenta
+  keyword whole root magenta
+  keyword whole rule magenta
+  keyword whole saturday magenta
+  keyword whole secondarycache magenta
+  keyword whole selinux_ignore_defaults magenta
+  keyword whole selmoduledir magenta
+  keyword whole selmodulepath magenta
+  keyword whole selrange magenta
+  keyword whole selrole magenta
+  keyword whole seltype magenta
+  keyword whole seluser magenta
+  keyword whole server magenta
+  keyword whole service_description magenta
+  keyword whole servicegroup_members magenta
+  keyword whole servicegroup_name magenta
+  keyword whole servicegroups magenta
+  keyword whole service_notification_commands magenta
+  keyword whole service_notification_options magenta
+  keyword whole service_notification_period magenta
+  keyword whole service_notifications_enabled magenta
+  keyword whole session_owner magenta
+  keyword whole setuid magenta
+  keyword whole shared magenta
+  keyword whole shareiscsi magenta
+  keyword whole sharenfs magenta
+  keyword whole shares magenta
+  keyword whole sharesmb magenta
+  keyword whole shell magenta
+  keyword whole size magenta
+  keyword whole snapdir magenta
+  keyword whole source magenta
+  keyword whole sourceselect magenta
+  keyword whole spare magenta
+  keyword whole special magenta
+  keyword whole speed magenta
+  keyword whole stalking_options magenta
+  keyword whole start magenta
+  keyword whole status magenta
+  keyword whole statusmap_image magenta
+  keyword whole stop magenta
+  keyword whole sunday magenta
+  keyword whole syncversion magenta
+  keyword whole sysidcfg magenta
+  keyword whole system magenta
+  keyword whole target magenta
+  keyword whole thursday magenta
+  keyword whole timeout magenta
+  keyword whole timeperiod_name magenta
+  keyword whole tries magenta
+  keyword whole trigger magenta
+  keyword whole try_sleep magenta
+  keyword whole tuesday magenta
+  keyword whole type magenta
+  keyword whole type_check magenta
+  keyword whole uid magenta
+  keyword whole unless magenta
+  keyword whole unless_system_user magenta
+  keyword whole url magenta
+  keyword whole use magenta
+  keyword whole user magenta
+  keyword whole value magenta
+  keyword whole vendor magenta
+  keyword whole version magenta
+  keyword whole volsize magenta
+  keyword whole vrml_image magenta
+  keyword whole vscan magenta
+  keyword whole webserver magenta
+  keyword whole wednesday magenta
+  keyword whole weekday magenta
+  keyword whole withpath magenta
+  keyword whole working_dir magenta
+  keyword whole xattr magenta
+  keyword whole zoned magenta
+
+# Meta parameters
+
+  keyword whole alias brightmagenta
+  keyword whole audit brightmagenta
+  keyword whole before brightmagenta
+  keyword whole check brightmagenta
+  keyword whole loglevel brightmagenta
+  keyword whole noop brightmagenta
+  keyword whole notify brightmagenta
+  keyword whole require brightmagenta
+  keyword whole schedule brightmagenta
+  keyword whole stage brightmagenta
+  keyword whole subscribe brightmagenta
+  keyword whole tag brightmagenta
+
+# Types
+
+  keyword whole augeas red
+  keyword whole computer red
+  keyword whole cron red
+  keyword whole exec red
+  keyword whole file red
+  keyword whole filebucket red
+  keyword whole group red
+  keyword whole host red
+  keyword whole interface red
+  keyword whole k5login red
+  keyword whole macauthorization red
+  keyword whole mailalias red
+  keyword whole maillist red
+  keyword whole mcx red
+  keyword whole mount red
+  keyword whole nagios_command red
+  keyword whole nagios_contact red
+  keyword whole nagios_contactgroup red
+  keyword whole nagios_host red
+  keyword whole nagios_hostdependency red
+  keyword whole nagios_hostescalation red
+  keyword whole nagios_hostextinfo red
+  keyword whole nagios_hostgroup red
+  keyword whole nagios_service red
+  keyword whole nagios_servicedependency red
+  keyword whole nagios_serviceescalation red
+  keyword whole nagios_serviceextinfo red
+  keyword whole nagios_servicegroup red
+  keyword whole nagios_timeperiod red
+  keyword whole notify red
+  keyword whole package red
+  keyword whole resources red
+  keyword whole router red
+  keyword whole schedule red
+  keyword whole scheduled_task red
+  keyword whole selboolean red
+  keyword whole selmodule red
+  keyword whole service red
+  keyword whole ssh_authorized_key red
+  keyword whole sshkey red
+  keyword whole stage red
+  keyword whole tidy red
+  keyword whole user red
+  keyword whole vlan red
+  keyword whole yumrepo red
+  keyword whole zfs red
+  keyword whole zone red
+  keyword whole zpool red
+
+# Functions
+
+  keyword whole alert brightred
+  keyword whole create_resources brightred
+  keyword whole crit brightred
+  keyword whole debug brightred
+  keyword whole defined brightred
+  keyword whole emerg brightred
+  keyword whole err brightred
+  keyword whole extlookup brightred
+  keyword whole fail brightred
+  keyword whole file brightred
+  keyword whole fqdn_rand brightred
+  keyword whole generate brightred
+  keyword whole info brightred
+  keyword whole inline_template brightred
+  keyword whole md5 brightred
+  keyword whole notice brightred
+  keyword whole realize brightred
+  keyword whole regsubst brightred
+  keyword whole require brightred
+  keyword whole search brightred
+  keyword whole sha1 brightred
+  keyword whole shellquote brightred
+  keyword whole split brightred
+  keyword whole sprintf brightred
+  keyword whole tag brightred
+  keyword whole tagged brightred
+  keyword whole template brightred
+  keyword whole versioncmp brightred
+  keyword whole warning brightred
+
+# Reserved words
+
+  keyword whole absent yellow
+  keyword whole and yellow
+  keyword whole case yellow
+  keyword whole class yellow
+  keyword whole default yellow
+  keyword whole define yellow
+  keyword whole directory yellow
+  keyword whole else yellow
+  keyword whole elsif yellow
+  keyword whole if yellow
+  keyword whole include yellow
+  keyword whole inherits yellow
+  keyword whole installed yellow
+  keyword whole latest yellow
+  keyword whole link yellow
+  keyword whole node yellow
+  keyword whole on_failure yellow
+  keyword whole or yellow
+  keyword whole present yellow
+  keyword whole running yellow
+
+# Other contexts
+
+context # \n brown
+  spellcheck
+
+context " " green
+  keyword \\" brightgreen
+  keyword \\\\ brightgreen
+  keyword wholeright ${+\:\:+\:\:+\:\:+\:\:+} white
+  keyword wholeright ${+\:\:+\:\:+\:\:+} white
+  keyword wholeright ${+\:\:+\:\:+} white
+  keyword wholeright ${+\:\:+} white
+  keyword wholeright ${+} white
+  keyword wholeright $+ white
+
+context ' ' brightgreen
+  keyword \\' green
+  keyword \\\\ green
+
+context exclusive ` ` white black
