@@ -12,14 +12,22 @@ if CHARSET
 pkgdata_DATA += mc.charsets
 endif
 
+SCRIPTS_IN = \
+	mc.menu.in \
+	mc.menu.sr.in \
+	mcedit.menu.in
+
+SCRIPTS_OUT = \
+	mc.menu \
+	mc.menu.sr \
+	mcedit.menu
+
 LIBFILES_CONST = \
-	mcedit.menu \
 	filehighlight.ini \
 	mc.keymap \
 	mc.default.keymap \
-	mc.emacs.keymap \
-	mc.menu \
-	mc.menu.sr
+	mc.emacs.keymap
+
 
 LIBFILES_SCRIPT = \
 	edit.indent.rc
@@ -29,6 +37,7 @@ CLEANFILES = $(SCRIPTS_OUT)
 cfgdir = $(sysconfdir)/@PACKAGE@
 cfg_DATA = \
 	$(LIBFILES_CONST) \
+	$(SCRIPTS_OUT) \
 	$(LIBFILES_OUT)
 
 cfg_SCRIPTS = \
