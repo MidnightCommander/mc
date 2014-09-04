@@ -1,94 +1,119 @@
-Petunjuk: Gunakan C-x untuk mengkopi nama berkas yang ditandai ke command
+Petunjuk: Gunakan C-x untuk menyalin nama berkas yang ditandai ke command
 line.
 
-Petunjuk: Gunakan C-x untuk mengkopi nama path saat ini ke command line.
+Petunjuk: Gunakan C-x untuk menyalin nama path saat ini ke command line.
 
-Hint: Completion: use M-Tab (or Esc+Tab).  Type it twice to get a list.
+Petunjuk: Pelengkapan: gunakan M-Tab (atau Esc+Tab). Ketikkan dua kali untuk
+memperoleh daftar.
 
-Hint: Use M-p and M-n to access the command history.
+Petunjuk: Gunakan M-p dan M-n untuk mengakses riwayat perintah.
 
-Hint: Need to quote a character? Use Control-q and the character.
+Petunjuk: Perlu mengutip suatu karakter? Gunakan Contrl-q dan karakter
+tersebut.
 
-Hint: Tired of these messages? Turn them off from the Options/Layout menu.
+Petunjuk: Bosan dengan pesan-pesan ini? Matikan mereka dari menu Opsi/Tata
+Letak.
 
-Hint: Selecting directories: add a slash to the end of the matching pattern.
+Petunjuk: Memilih direktori: tambahkan garis miring di akhir pola yang
+cocok.
 
-Hint: If your terminal lacks functions keys, use the ESC+number sequence.
+Petunjuk: Bila terminal Anda tak punya tombol fungsi, gunakan urutan
+ESC+angka.
 
-Hint: The homepage of GNU Midnight Commander:
+Petunjuk: Laman web GNU Midnight Commander:
 http://www.midnight-commander.org/
 
-Hint: Please send any bug reports to mc-devel@gnome.org
+Petunjuk: Harap kirim laporan bug ke mc-devel@gnome.org
 
-Hint: Tab changes your current panel.
+Petunjuk: Tab mengubah panel Anda saat ini.
 
-Hint: VFS coolness: tap enter on a tar file to examine its contents.
+Petunjuk: VFS itu keren: ketuk enter pada suatu file tar untuk memeriksa
+isinya.
 
 Petunjuk: Kami juga memiliki halaman manual yang bagus.
 
-Hint: Do you want lynx-style navigation? Set it in the Configuration dialog.
+Petunjuk: Apakah Anda ingin navigasi gaya lynx? Atur itu dalam dialog
+Konfigurasi.
 
-Hint: % macros work even on the command line.
+Petunjuk: makro bekerja bahkan pada command line.
 
-Hint: M-! will allow you to execute programs and see the output in the
-viewer.
+Petunjuk: M-! memungkinkan Anda mengeksekusi program dan melihat keluaran
+dalam penampil.
 
-Hint: The file listing format can be customized; do "man mc" for details.
+Petunjuk: Format daftar file dapat dikustomisasi; jalankan "man mc" untuk
+rincian.
 
-Hint: %D/%T expands to the tagged files in the opposite directory.
+Petunjuk: %D/%T mengembang menjadi file yang di-tag di direktori yang
+berlawanan.
 
-Hint: Want your plain shell? Press C-o, and get back to MC with C-o again.
+Petunjuk: Ingin shell polos? Tekan C-o, dan kembali lagi ke MC dengan C-o
+lagi.
 
-Hint: Setting the CDPATH variable can save you keystrokes in cd commands.
+Petunjuk: Menata variabel CDPATH dapat menghemat ketukan tombol dalam
+perintah cd.
 
-Hint: If you want to see your .* files, say so in the Configuration dialog.
+Petunjtuk: Bila Anda ingin melihat file .*, nyatakan saja dalam dialog
+Konfigurasi.
 
-Hint: Want to see your *~ backup files? Set it in the Configuration dialog.
+Petunjuk: Ingin melihat file cadangan *~? Atur itu dalam dialog Konfigurasi.
 
-Hint: Completion works on all input lines in all dialogs. Just press M-Tab.
+Petunjuk: Pelengkapan bekerja pada semua baris masukan dalam semua
+dialog. Tekan M-Tab saja.
 
-Hint: On slow terminals the -s flag may help.
+Petunjuk: Pada terminal yang lambat flag -s mungkin membantu.
 
-Hint: Find File: you can work on the files found using the Panelize button.
+Petunjuk: Cari File: Anda dapat bekerja pada file yang ditemukan memakai
+tombol Panelkan.
 
-Hint: Want to do complex searches? Use the External Panelize command.
+Petunjuk: Ingin melakukan pencarian rumit? Pakai perintah Panelkan
+Eksternal.
 
-Hint: To change directory halfway through typing a command, use M-c (quick
-cd).
+Petunjul: Untuk pindah direktori saat tengah mengetikkan suatu perintah,
+gunakan M-c (cd cepat).
 
-Note: Shell commands will not work when you are on a non-local file system.
+Catatan: Perintah shell tak akan bekerja bila Anda berada pada sistem file
+bukan lokal.
 
-Hint: Bring text back from the dead with C-y.
+Petunjuk: Panggil kembali teks dari kematian dengan C-y.
 
-Hint: Are some of your keys not working? Look at Options/Learn keys.
+Petunjuk: Apakah beberapa tombol Anda tak bekerja? Lihat pada tombol-tombol
+Opsi/Belajar.
 
-Hint: To look at the output of a command in the viewer, use M-!
+Petunjuk: Untuk melihat keluaran dari suatu perintah dalam penampil, pakai
+M-!
 
-Hint: F13 (or Shift-F3) invokes the viewer in raw mode.
+Petunjuk: F13 (atau Shift-F3) memanggil penampil dalam mode mentah.
 
-Hint: You may specify the editor for F4 with the shell variable EDITOR.
+Petunjuk: Anda boleh menyatakan penyunting bagi F4 dengan variabel shell
+EDITOR.
 
-Hint: You may specify the external viewer with the shell vars VIEWER or
-PAGER.
+Petunjuk: Anda boleh menyatakan penampil eksternal dengan variabel shell
+VIEWER atau PAGER.
 
-Hint: You can disable all requests for confirmation in Options/Confirmation.
+Petunjuk: Anda dapat menonaktifkan semua permintaan konfirmasi dalam
+Opsi/Konfirmasi.
 
 Hint: Leap to frequently used directories in a single bound with C-.
 
-Hint: You can do anonymous FTP with mc by typing 'cd ftp://machine.edu'
+Petunjuk: Anda dapat melakukan FTP anonim memakai mc dengan mengetikkan 'cd
+ftp://server.ftp.yang.dituju'
 
-Hint: FTP is built in the Midnight Commander, check the File/FTP link menu.
+Petunjuk: FTP sudah ada dalam Midnight Commander, periksalah menu File/Taut
+FTP.
 
-Hint: M-t changes quickly the listing mode.
+Petunjuk: M-t mengubah secara cepat mode penampilan daftar.
 
-Hint: You can specify the username when doing ftps: 'cd
-ftp://user@machine.edu'
+Petunjuk: Anda dapat menyatakan nama pengguna ketika melakukan ftp: 'cd
+ftp://pengguna@server.ftp.yang.dituju'
 
-Hint: You can browse RPM files by tapping enter on top of an rpm file.
+Petunjuk: Anda dapat meramban file RPM dengan mengetuk enter pada suatu file
+rpm.
 
-Hint: To mark directories on the select dialog box, append a slash.
+Petunjuk: Untuk menandai direktori pada kotak dialog pilihan, tambahkan
+suatu garis miring.
 
-Hint: To use the mouse cut and paste may require holding the shift key
+Petunjuk: Untuk memakai potong dan tempel tetikus mungkin perlu menahan
+tombol shift.
 
 Hint: Key frequently visited ftp sites in the hotlist: type C-.
 
