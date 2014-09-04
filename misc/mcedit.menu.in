@@ -459,10 +459,7 @@ s       Invoke `shell'
 
 m       view `man'
         MAN=%{Enter name of man:}
-        TMPFILE=`mktemp ${MC_TMPDIR:-/tmp}/mcview.$MAN.XXXXXX` || exit 1
-        man -Pcat $MAN >$TMPFILE
-        mcview $TMPFILE
-        rm -f $TMPFILE
+        %view{ascii,nroff} MANROFFOPT='@MAN_FLAGS@' MAN_KEEP_FORMATTING=1 man -P cat $MAN
 
 i       Insert a out of command to cursor.
         CMD=%{ Enter command: }
