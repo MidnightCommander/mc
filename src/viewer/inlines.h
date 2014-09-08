@@ -120,7 +120,7 @@ mcview_get_byte (mcview_t * view, off_t offset, int *retval)
 #ifdef HAVE_ASSERT_H
     assert (!"Unknown datasource type");
 #endif
-    return -1;
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
