@@ -135,7 +135,9 @@ struct mcview_struct
     gboolean hexedit_lownibble; /* Are we editing the last significant nibble? */
     gboolean locked;            /* We hold lock on current file */
 
+#ifdef HAVE_CHARSET
     gboolean utf8;              /* It's multibyte file codeset */
+#endif
 
     coord_cache_t *coord_cache; /* Cache for mapping offsets to cursor positions */
 

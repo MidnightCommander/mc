@@ -376,16 +376,15 @@ mcview_moveto_eol (mcview_t * view)
     else
     {
         off_t eol;
+
         bol = mcview_bol (view, view->dpy_start, 0);
         eol = mcview_eol (view, view->dpy_start, mcview_get_filesize (view));
-        if (!view->utf8)
-        {
-            if (eol > bol)
-                view->dpy_text_column = eol - bol;
-        }
-        else
+
+#ifdef HAVE_CHARSET
+        if (view->utf8)
         {
             char *str = NULL;
+
             switch (view->datasource)
             {
             case DS_STDIO_PIPE:
@@ -406,6 +405,10 @@ mcview_moveto_eol (mcview_t * view)
             else
                 view->dpy_text_column = eol - bol;
         }
+        else
+#endif /* HAVE_CHARSET */
+        if (eol > bol)
+            view->dpy_text_column = eol - bol;
 
         if (view->dpy_text_column < (off_t) view->data_area.width)
             view->dpy_text_column = 0;
