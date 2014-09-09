@@ -242,39 +242,26 @@ mcview_growbuf_read_until (mcview_t * view, off_t ofs)
 gboolean
 mcview_get_byte_growing_buffer (mcview_t * view, off_t byte_index, int *retval)
 {
-    off_t pageno;
-    off_t pageindex;
-
-    if (retval != NULL)
-        *retval = -1;
-
-    pageno = byte_index / VIEW_PAGE_SIZE;
-    pageindex = byte_index % VIEW_PAGE_SIZE;
+    char *p;
 
 #ifdef HAVE_ASSERT_H
     assert (view->growbuf_in_use);
 #endif
 
-    if (pageno < 0)
+    if (retval != NULL)
+        *retval = -1;
+
+    if (byte_index < 0)
         return FALSE;
 
-    mcview_growbuf_read_until (view, byte_index + 1);
-    if (view->growbuf_blockptr->len == 0)
+    p = mcview_get_ptr_growing_buffer (view, byte_index);
+    if (p == NULL)
         return FALSE;
-    if (pageno < (off_t) view->growbuf_blockptr->len - 1)
-    {
-        if (retval != NULL)
-            *retval = *((byte *) (g_ptr_array_index (view->growbuf_blockptr, pageno) + pageindex));
-        return TRUE;
-    }
-    if (pageno == (off_t) view->growbuf_blockptr->len - 1
-        && pageindex < (off_t) view->growbuf_lastindex)
-    {
-        if (retval != NULL)
-            *retval = *((byte *) (g_ptr_array_index (view->growbuf_blockptr, pageno) + pageindex));
-        return TRUE;
-    }
-    return FALSE;
+
+    if (retval != NULL)
+        *retval = *p;
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -282,15 +269,17 @@ mcview_get_byte_growing_buffer (mcview_t * view, off_t byte_index, int *retval)
 char *
 mcview_get_ptr_growing_buffer (mcview_t * view, off_t byte_index)
 {
-    off_t pageno = byte_index / VIEW_PAGE_SIZE;
-    off_t pageindex = byte_index % VIEW_PAGE_SIZE;
+    off_t pageno, pageindex;
 
 #ifdef HAVE_ASSERT_H
     assert (view->growbuf_in_use);
 #endif
 
-    if (pageno < 0)
+    if (byte_index < 0)
         return NULL;
+
+    pageno = byte_index / VIEW_PAGE_SIZE;
+    pageindex = byte_index % VIEW_PAGE_SIZE;
 
     mcview_growbuf_read_until (view, byte_index + 1);
     if (view->growbuf_blockptr->len == 0)
