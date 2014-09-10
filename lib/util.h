@@ -249,6 +249,8 @@ char *mc_build_filenamev (const char *first_element, va_list args);
 void mc_propagate_error (GError ** dest, int code, const char *format, ...);
 void mc_replace_error (GError ** dest, int code, const char *format, ...);
 
+gboolean mc_time_elapsed (guint64 * timestamp, guint64 delay);
+
 /*** inline functions **************************************************/
 
 static inline gboolean

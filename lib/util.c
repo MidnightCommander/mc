@@ -52,6 +52,7 @@
 #include "lib/vfs/vfs.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
+#include "lib/timer.h"
 
 /*** global variables ****************************************************************************/
 
@@ -1448,6 +1449,31 @@ mc_replace_error (GError ** dest, int code, const char *format, ...)
         *dest = NULL;
         g_propagate_error (dest, tmp_error);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Returns if the given duration has elapsed since the given timestamp,
+ * and if it has then updates the timestamp.
+ *
+ * @param timestamp the last timestamp in microseconds, updated if the given time elapsed
+ * @param deleay amount of time in microseconds
+
+ * @return TRUE if clock skew detected, FALSE otherwise
+ */
+gboolean
+mc_time_elapsed (guint64 * timestamp, guint64 delay)
+{
+    guint64 now;
+
+    now = mc_timer_elapsed (mc_global.timer);
+
+    if (now >= *timestamp && now < *timestamp + delay)
+        return FALSE;
+
+    *timestamp = now;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
