@@ -9,7 +9,7 @@
    Radek Doulik, 1994, 1995
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1995
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2012, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2014
 
    This file is part of the Midnight Commander.
 
@@ -55,8 +55,6 @@
 static WDialog *last_query_dlg;
 
 static int sel_pos = 0;
-
-static const guint64 status_msg_delay_threshold = G_USEC_PER_SEC / 100; /* 0.01 s */
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -573,8 +571,13 @@ void
 status_msg_init (status_msg_t * sm, const char *title, double delay, status_msg_cb init_cb,
                  status_msg_update_cb update_cb, status_msg_cb deinit_cb)
 {
+    guint64 start;
+
+    start = mc_timer_elapsed (mc_global.timer);
+
     sm->dlg = dlg_create (TRUE, 0, 0, 7, min (max (40, COLS / 2), COLS), dialog_colors,
                           NULL, NULL, NULL, title, DLG_CENTER);
+    sm->start = start;
     sm->delay = delay * G_USEC_PER_SEC;
     sm->block = FALSE;
 
@@ -585,11 +588,8 @@ status_msg_init (status_msg_t * sm, const char *title, double delay, status_msg_
     if (sm->init != NULL)
         sm->init (sm);
 
-    if (sm->delay > status_msg_delay_threshold)
-        sm->timer = mc_timer_new ();
-    else
+    if (mc_time_elapsed (&start, sm->delay))
     {
-        sm->timer = NULL;
         /* We will manage the dialog without any help, that's why we have to call init_dlg */
         dlg_init (sm->dlg);
     }
@@ -610,9 +610,6 @@ status_msg_deinit (status_msg_t * sm)
 
     if (sm->deinit != NULL)
         sm->deinit (sm);
-
-    if (sm->timer != NULL)
-        mc_timer_destroy (sm->timer);
 
     /* close and destroy dialog */
     dlg_run_done (sm->dlg);
@@ -637,23 +634,22 @@ status_msg_common_update (status_msg_t * sm)
     if (sm == NULL)
         return B_ENTER;
 
-    if (sm->timer != NULL)
-    {
-        if (mc_timer_elapsed (sm->timer) > sm->delay)
-        {
-            mc_timer_destroy (sm->timer);       /* we not need the timer anymore */
-            sm->timer = NULL;
-
-            if (sm->dlg != NULL)
-                dlg_init (sm->dlg);
-        }
-
-        return B_ENTER;
-    }
-
     /* This should not happen, but... */
     if (sm->dlg == NULL)
         return B_ENTER;
+
+    if (sm->dlg->state != DLG_ACTIVE)
+    {
+        /* dialog is not shown yet */
+
+        /* do not change sm->start */
+        guint64 start = sm->start;
+
+        if (mc_time_elapsed (&start, sm->delay))
+            dlg_init (sm->dlg);
+
+        return B_ENTER;
+    }
 
     event.x = -1;               /* Don't show the GPM cursor */
     c = tty_get_event (&event, FALSE, sm->block);
