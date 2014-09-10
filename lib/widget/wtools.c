@@ -573,6 +573,9 @@ status_msg_init (status_msg_t * sm, const char *title, double delay, status_msg_
 {
     guint64 start;
 
+    /* repaint screen to remove previous finished dialog */
+    mc_refresh ();
+
     start = mc_timer_elapsed (mc_global.timer);
 
     sm->dlg = dlg_create (TRUE, 0, 0, 7, min (max (40, COLS / 2), COLS), dialog_colors,
