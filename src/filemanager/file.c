@@ -521,7 +521,9 @@ do_compute_dir_size (const vfs_path_t * dirname_vpath, dirsize_status_msg_t * ds
                      size_t * dir_count, size_t * ret_marked, uintmax_t * ret_total,
                      gboolean compute_symlinks)
 {
-    static unsigned short int update_ui_count = 0;
+    static guint64 timestamp = 0;
+    /* update with 25 FPS rate */
+    static const guint64 delay = G_USEC_PER_SEC / 25;
 
     status_msg_t *sm = STATUS_MSG (dsm);
     int res;
@@ -564,36 +566,23 @@ do_compute_dir_size (const vfs_path_t * dirname_vpath, dirsize_status_msg_t * ds
         if (res == 0)
         {
             if (S_ISDIR (s.st_mode))
-            {
                 ret =
                     do_compute_dir_size (tmp_vpath, dsm, dir_count, ret_marked, ret_total,
                                          compute_symlinks);
-                if (ret == FILE_CONT && sm->update != NULL)
-                {
-                    dsm->dirname_vpath = tmp_vpath;
-                    dsm->dir_count = *dir_count;
-                    dsm->total_size = *ret_total;
-                    ret = (FileProgressStatus) sm->update (sm);
-                }
-            }
             else
             {
+                ret = FILE_CONT;
+
                 (*ret_marked)++;
                 *ret_total += (uintmax_t) s.st_size;
+            }
 
-                update_ui_count++;
-                if ((update_ui_count & 31) == 0)
-                {
-                    if (sm->update == NULL)
-                        ret = FILE_CONT;
-                    else
-                    {
-                        dsm->dirname_vpath = dirname_vpath;
-                        dsm->dir_count = *dir_count;
-                        dsm->total_size = *ret_total;
-                        ret = (FileProgressStatus) sm->update (sm);
-                    }
-                }
+            if (ret == FILE_CONT && sm->update != NULL && mc_time_elapsed (&timestamp, delay))
+            {
+                dsm->dirname_vpath = tmp_vpath;
+                dsm->dir_count = *dir_count;
+                dsm->total_size = *ret_total;
+                ret = (FileProgressStatus) sm->update (sm);
             }
         }
 
@@ -1341,7 +1330,7 @@ panel_operate_init_totals (const WPanel * panel, const char *source, file_op_con
 
         memset (&dsm, 0, sizeof (dsm));
         dsm.allow_skip = TRUE;
-        status_msg_init (STATUS_MSG (&dsm), _("Directory scanning"), 1.0, dirsize_status_init_cb,
+        status_msg_init (STATUS_MSG (&dsm), _("Directory scanning"), 0, dirsize_status_init_cb,
                          dirsize_status_update_cb, dirsize_status_deinit_cb);
 
         ctx->progress_count = 0;
