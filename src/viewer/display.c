@@ -288,11 +288,12 @@ mcview_compute_areas (mcview_t * view)
     /* Compute the heights of the areas */
     rest = view_area.height;
 
-    height = mcview_dimen_min (rest, 1);
+    height = min (rest, 1);
     view->status_area.height = height;
     rest -= height;
 
-    height = mcview_dimen_min (rest, (ruler == RULER_NONE || view->hex_mode) ? 0 : 2);
+    height = (ruler == RULER_NONE || view->hex_mode) ? 0 : 2;
+    height = min (rest, height);
     view->ruler_area.height = height;
     rest -= height;
 

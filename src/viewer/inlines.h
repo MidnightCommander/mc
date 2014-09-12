@@ -45,14 +45,6 @@ mcview_dimen_doz (screen_dimen a, screen_dimen b)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static inline screen_dimen
-mcview_dimen_min (screen_dimen a, screen_dimen b)
-{
-    return (a < b) ? a : b;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 /* {{{ Simple Primitive Functions for mcview_t }}} */
 static inline gboolean
 mcview_is_in_panel (mcview_t * view)
