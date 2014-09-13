@@ -251,10 +251,6 @@ mcview_display (mcview_t * view)
     {
         mcview_display_hex (view);
     }
-    else if (view->text_nroff_mode)
-    {
-        mcview_display_nroff (view);
-    }
     else
     {
         mcview_display_text (view);

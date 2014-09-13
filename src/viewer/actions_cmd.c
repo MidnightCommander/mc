@@ -510,6 +510,8 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
         break;
     case CK_Bookmark:
         view->dpy_start = view->marks[view->marker];
+        view->dpy_paragraph_skip_lines = 0;     /* TODO: remember this value in the marker? */
+        view->dpy_wrap_dirty = TRUE;
         view->dirty++;
         break;
 #ifdef HAVE_CHARSET
@@ -592,6 +594,7 @@ mcview_adjust_size (WDialog * h)
     widget_set_size (WIDGET (view), 0, 0, LINES - 1, COLS);
     widget_set_size (WIDGET (b), LINES - 1, 0, 1, COLS);
 
+    view->dpy_wrap_dirty = TRUE;
     mcview_compute_areas (view);
     mcview_update_bytes_per_line (view);
 }

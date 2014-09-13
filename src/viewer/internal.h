@@ -87,6 +87,18 @@ typedef struct
     coord_cache_entry_t **cache;
 } coord_cache_t;
 
+/* TODO: find a better name. This is not actually a "state machine",
+ * but a "state machine's state", but that sounds silly.
+ * Could be parser_state, formatter_state... */
+typedef struct
+{
+    off_t offset;               /* The file offset at which this is the state. */
+    off_t unwrapped_column;     /* Columns if the paragraph wasn't wrapped, */
+    /* used for positioning TABs in wrapped lines */
+    gboolean nroff_underscore_is_underlined;    /* whether _\b_ is underlined rather than bold */
+    gboolean print_lonely_combining;    /* whether lonely combining marks are printed on a dotted circle */
+} mcview_state_machine_t;
+
 struct mcview_nroff_struct;
 
 struct mcview_struct
@@ -144,8 +156,12 @@ struct mcview_struct
     /* Display information */
     gboolean active;            /* Active or not in QuickView mode */
     screen_dimen dpy_frame_size;        /* Size of the frame surrounding the real viewer */
-    off_t dpy_start;            /* Offset of the displayed data */
+    off_t dpy_start;            /* Offset of the displayed data (start of the paragraph in non-hex mode) */
     off_t dpy_end;              /* Offset after the displayed data */
+    off_t dpy_paragraph_skip_lines;     /* Extra lines to skip in wrap mode */
+    mcview_state_machine_t dpy_state_top;       /* Parser-formatter state at the topmost visible line in wrap mode */
+    mcview_state_machine_t dpy_state_bottom;    /* Parser-formatter state after the bottomvisible line in wrap mode */
+    gboolean dpy_wrap_dirty;    /* dpy_state_top needs to be recomputed */
     off_t dpy_text_column;      /* Number of skipped columns in non-wrap
                                  * text mode */
     off_t hex_cursor;           /* Hexview cursor position in file */
@@ -155,6 +171,8 @@ struct mcview_struct
     struct area status_area;    /* Where the status line is displayed */
     struct area ruler_area;     /* Where the ruler is displayed */
     struct area data_area;      /* Where the data is displayed */
+
+    ssize_t force_max;          /* Force a max offset, or -1 */
 
     int dirty;                  /* Number of skipped updates */
     gboolean dpy_bbar_dirty;    /* Does the button bar need to be updated? */
@@ -222,6 +240,14 @@ extern mcview_search_options_t mcview_search_options;
 cb_ret_t mcview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data);
 cb_ret_t mcview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
                                  void *data);
+
+/* ascii.c: */
+void mcview_display_text (mcview_t *);
+void mcview_state_machine_init (mcview_state_machine_t *, off_t);
+void mcview_ascii_move_down (mcview_t *, off_t);
+void mcview_ascii_move_up (mcview_t *, off_t);
+void mcview_ascii_moveto_bol (mcview_t *);
+void mcview_ascii_moveto_eol (mcview_t *);
 
 /* coord_cache.c: */
 coord_cache_t *coord_cache_new (void);
@@ -312,19 +338,13 @@ void mcview_place_cursor (mcview_t *);
 void mcview_moveto_match (mcview_t *);
 
 /* nroff.c: */
-void mcview_display_nroff (mcview_t * view);
 int mcview__get_nroff_real_len (mcview_t * view, off_t, off_t p);
-
 mcview_nroff_t *mcview_nroff_seq_new_num (mcview_t * view, off_t p);
 mcview_nroff_t *mcview_nroff_seq_new (mcview_t * view);
 void mcview_nroff_seq_free (mcview_nroff_t **);
 nroff_type_t mcview_nroff_seq_info (mcview_nroff_t *);
 int mcview_nroff_seq_next (mcview_nroff_t *);
 int mcview_nroff_seq_prev (mcview_nroff_t *);
-
-
-/* plain.c: */
-void mcview_display_text (mcview_t *);
 
 /* search.c: */
 mc_search_cbret_t mcview_search_cmd_callback (const void *user_data, gsize char_offset,

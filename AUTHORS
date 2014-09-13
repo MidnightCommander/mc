@@ -64,6 +64,7 @@ Egmont Koblinger <egmont@gmail.com>
         Support of extended mouse clicks beyond 223 column
         Support of bracketed paste mode of xterm
                 (http://invisible-island.net/xterm/ctlseqs/ctlseqs.html#Bracketed%20Paste%20Mode)
+        Rewritten viewer
 
 Erwin van Eijk <wabbit@corner.iaf.nl>
 
