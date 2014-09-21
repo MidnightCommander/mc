@@ -152,6 +152,19 @@ if test $ac_cv_func_getmntent = yes; then
          of mounted file systems, and that function takes a single argument.
          (4.3BSD, SunOS, HP-UX, Dynix, Irix)])
       AC_CHECK_FUNCS([hasmntopt])
+
+      # Check for libmount to support /proc/self/mountinfo on Linux
+      AC_CACHE_VAL([ac_cv_lib_libmount_mnt_table_parse_stream],
+        [AC_CHECK_LIB([mount], [mnt_new_table_from_file],
+          ac_cv_lib_mount_mnt_table_parse_stream=yes,
+          ac_cv_lib_mount_mnt_table_parse_stream=no)])
+      if test $ac_cv_lib_mount_mnt_table_parse_stream = yes; then
+         AC_DEFINE([MOUNTED_PROC_MOUNTINFO], [1],
+           [Define if want to use /proc/self/mountinfo on Linux.])
+         LIBS="-lmount $LIBS"
+      elif test -f /proc/self/mountinfo; then
+         AC_MSG_WARN([/proc/self/mountinfo present but libmount is missing.])
+      fi
     fi
   fi
 
