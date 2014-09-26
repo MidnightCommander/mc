@@ -180,10 +180,8 @@ mcview_move_down (mcview_t * view, off_t lines)
     {
         off_t i, limit;
 
-        if (last_byte >= (off_t) view->bytes_per_line)
-            limit = last_byte - view->bytes_per_line;
-        else
-            limit = 0;
+        limit = mcview_offset_doz (last_byte, (off_t) view->bytes_per_line);
+
         for (i = 0; i < lines && view->hex_cursor < limit; i++)
         {
             view->hex_cursor += view->bytes_per_line;
@@ -258,12 +256,8 @@ mcview_move_left (mcview_t * view, off_t columns)
                 view->hexedit_lownibble = !view->hexedit_lownibble;
     }
     else
-    {
-        if (view->dpy_text_column >= columns)
-            view->dpy_text_column -= columns;
-        else
-            view->dpy_text_column = 0;
-    }
+        view->dpy_text_column = mcview_offset_doz (view->dpy_text_column, columns);
+
     mcview_movement_fixups (view, FALSE);
 }
 
@@ -276,6 +270,7 @@ mcview_move_right (mcview_t * view, off_t columns)
     {
         off_t last_byte;
         off_t old_cursor = view->hex_cursor;
+
         last_byte = mcview_offset_doz (mcview_get_filesize (view), 1);
 #ifdef HAVE_ASSERT_H
         assert (columns == 1);
@@ -410,10 +405,8 @@ mcview_moveto_eol (mcview_t * view)
         if (eol > bol)
             view->dpy_text_column = eol - bol;
 
-        if (view->dpy_text_column < (off_t) view->data_area.width)
-            view->dpy_text_column = 0;
-        else
-            view->dpy_text_column = view->dpy_text_column - (off_t) view->data_area.width;
+        view->dpy_text_column =
+            mcview_offset_doz (view->dpy_text_column, (off_t) view->data_area.width);
     }
     mcview_movement_fixups (view, FALSE);
 }

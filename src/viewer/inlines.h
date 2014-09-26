@@ -17,6 +17,7 @@
 
 /*** inline functions ****************************************************************************/
 
+/* difference or zero */
 static inline off_t
 mcview_offset_doz (off_t a, off_t b)
 {
