@@ -100,7 +100,8 @@ struct mcview_struct
     enum view_ds datasource;    /* Where the displayed data comes from */
 
     /* stdio pipe data source */
-    FILE *ds_stdio_pipe;        /* Output of a shell command */
+    mc_pipe_t *ds_stdio_pipe;   /* Output of a shell command */
+    gboolean pipe_first_err_msg;        /* Show only 1st message from stderr */
 
     /* vfs pipe data source */
     int ds_vfs_pipe;            /* Non-seekable vfs file descriptor */
@@ -263,6 +264,7 @@ void mcview_display_ruler (mcview_t * view);
 
 /* growbuf.c: */
 void mcview_growbuf_init (mcview_t * view);
+void mcview_growbuf_done (mcview_t * view);
 void mcview_growbuf_free (mcview_t * view);
 off_t mcview_growbuf_filesize (mcview_t * view);
 void mcview_growbuf_read_until (mcview_t * view, off_t p);

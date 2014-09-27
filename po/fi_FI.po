@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-07-25 10:37+0400\n"
+"POT-Creation-Date: 2014-09-27 20:13+0400\n"
 "PO-Revision-Date: 2013-03-13 08:51+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -445,6 +445,28 @@ msgid ""
 msgstr ""
 "Näytön koko %dx%d ei ole yhteensopiva.\n"
 "Tarkista TERM.\n"
+
+#, fuzzy
+msgid "Cannot create pipe descriptor"
+msgstr "Väliaikaishakemiston luonti epäonnistui %s: %s\n"
+
+msgid "Cannot parse command for pipe"
+msgstr ""
+
+msgid "Cannot create pipe streams"
+msgstr ""
+
+#, c-format
+msgid ""
+"Unexpected error in select() reading data from a child process:\n"
+"%s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"Unexpected error in waitpid():\n"
+"%s"
+msgstr "Odottaminen päättyminen tiedostossa %s"
 
 msgid "Warning"
 msgstr "Varoitus"
@@ -3889,9 +3911,6 @@ msgstr ""
 msgid "sftp: Invalid host name."
 msgstr ""
 
-msgid "sftp: Invalid port value."
-msgstr ""
-
 #, c-format
 msgid "sftp: %s"
 msgstr ""
@@ -4064,12 +4083,6 @@ msgid ""
 "Save modified file?"
 msgstr ""
 
-msgid "Cannot spawn child process"
-msgstr ""
-
-msgid "Empty output from child filter"
-msgstr ""
-
 msgid "&Line number"
 msgstr ""
 
@@ -4113,6 +4126,12 @@ msgid "ButtonBar|Unform"
 msgstr ""
 
 msgid "ButtonBar|Format"
+msgstr ""
+
+#, c-format
+msgid ""
+"Failed to read data from child stdout:\n"
+"%s"
 msgstr ""
 
 #, c-format

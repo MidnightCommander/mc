@@ -325,6 +325,7 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
         {
             g_snprintf (tmp, sizeof (tmp), _("Cannot open \"%s\"\n%s"),
                         file, unix_error_string (errno));
+            mcview_close_datasource (view);
             mcview_show_error (view, tmp);
             vfs_path_free (view->filename_vpath);
             view->filename_vpath = NULL;
@@ -339,6 +340,7 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
             mc_close (fd);
             g_snprintf (tmp, sizeof (tmp), _("Cannot stat \"%s\"\n%s"),
                         file, unix_error_string (errno));
+            mcview_close_datasource (view);
             mcview_show_error (view, tmp);
             vfs_path_free (view->filename_vpath);
             view->filename_vpath = NULL;
@@ -350,6 +352,7 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
         if (!S_ISREG (st.st_mode))
         {
             mc_close (fd);
+            mcview_close_datasource (view);
             mcview_show_error (view, _("Cannot view: not a regular file"));
             vfs_path_free (view->filename_vpath);
             view->filename_vpath = NULL;
@@ -382,6 +385,7 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
                 {
                     g_snprintf (tmp, sizeof (tmp), _("Cannot open \"%s\" in parse mode\n%s"),
                                 file, unix_error_string (errno));
+                    mcview_close_datasource (view);
                     mcview_show_error (view, tmp);
                 }
                 else

@@ -69,25 +69,26 @@
 
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/* --------------------------------------------------------------------------------------------- */
-/*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
 static void
-mcview_set_datasource_stdio_pipe (mcview_t * view, FILE * fp)
+mcview_set_datasource_stdio_pipe (mcview_t * view, mc_pipe_t * p)
 {
-#ifdef HAVE_ASSERT_H
-    assert (fp != NULL);
-#endif
+    p->out.len = MC_PIPE_BUFSIZE;
+    p->out.null_term = FALSE;
+    p->err.len = MC_PIPE_BUFSIZE;
+    p->err.null_term = TRUE;
     view->datasource = DS_STDIO_PIPE;
-    view->ds_stdio_pipe = fp;
+    view->ds_stdio_pipe = p;
+    view->pipe_first_err_msg = TRUE;
 
     mcview_growbuf_init (view);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 void
@@ -350,19 +351,14 @@ mcview_close_datasource (mcview_t * view)
     case DS_STDIO_PIPE:
         if (view->ds_stdio_pipe != NULL)
         {
-            (void) pclose (view->ds_stdio_pipe);
+            mcview_growbuf_done (view);
             mcview_display (view);
-            close_error_pipe (D_NORMAL, NULL);
-            view->ds_stdio_pipe = NULL;
         }
         mcview_growbuf_free (view);
         break;
     case DS_VFS_PIPE:
         if (view->ds_vfs_pipe != -1)
-        {
-            (void) mc_close (view->ds_vfs_pipe);
-            view->ds_vfs_pipe = -1;
-        }
+            mcview_growbuf_done (view);
         mcview_growbuf_free (view);
         break;
     case DS_FILE:
@@ -401,44 +397,29 @@ mcview_set_datasource_file (mcview_t * view, int fd, const struct stat *st)
 gboolean
 mcview_load_command_output (mcview_t * view, const char *command)
 {
-    FILE *fp;
+    mc_pipe_t *pipe;
+    GError *error = NULL;
 
     mcview_close_datasource (view);
 
-    open_error_pipe ();
-    fp = popen (command, "r");
-    if (fp == NULL)
+    pipe = mc_popen (command, &error);
+    if (pipe == NULL)
     {
-        /* Avoid two messages.  Message from stderr has priority.  */
         mcview_display (view);
-        if (!close_error_pipe (mcview_is_in_panel (view) ? -1 : D_ERROR, NULL))
-            mcview_show_error (view, _("Cannot spawn child process"));
+        mcview_show_error (view, error->message);
+        g_error_free (error);
         return FALSE;
     }
 
-    /* First, check if filter produced any output */
-    mcview_set_datasource_stdio_pipe (view, fp);
+    /* Check if filter produced any output */
+    mcview_set_datasource_stdio_pipe (view, pipe);
     if (!mcview_get_byte (view, 0, NULL))
     {
         mcview_close_datasource (view);
-
-        /* Avoid two messages.  Message from stderr has priority.  */
         mcview_display (view);
-        if (!close_error_pipe (mcview_is_in_panel (view) ? -1 : D_ERROR, NULL))
-            mcview_show_error (view, _("Empty output from child filter"));
         return FALSE;
     }
-    else
-    {
-        /*
-         * At least something was read correctly. Close stderr and let
-         * program die if it will try to write something there.
-         *
-         * Ideally stderr should be read asynchronously to prevent programs
-         * from blocking (poll/select multiplexor).
-         */
-        close_error_pipe (D_NORMAL, NULL);
-    }
+
     return TRUE;
 }
 

@@ -304,15 +304,10 @@ mcview_select_encoding (mcview_t * view)
 void
 mcview_show_error (mcview_t * view, const char *msg)
 {
-    mcview_close_datasource (view);
     if (mcview_is_in_panel (view))
-    {
         mcview_set_datasource_string (view, msg);
-    }
     else
-    {
         message (D_ERROR, MSG_ERROR, "%s", msg);
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -1,21 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-07-25 10:37+0400\n"
+"POT-Creation-Date: 2014-09-27 20:13+0400\n"
 "PO-Revision-Date: 2014-09-04 10:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/mc/language/zh_TW/)\n"
+"Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/mc/"
+"language/zh_TW/)\n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
@@ -424,7 +425,35 @@ msgstr "環境變數 TERM 並未設定！ \n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr "不支援 %dx%d 的螢幕大小。\n請檢查 TERM 環境變數。\n"
+msgstr ""
+"不支援 %dx%d 的螢幕大小。\n"
+"請檢查 TERM 環境變數。\n"
+
+#, fuzzy
+msgid "Cannot create pipe descriptor"
+msgstr "無法改變目錄"
+
+#, fuzzy
+msgid "Cannot parse command for pipe"
+msgstr "無法呼叫指令。"
+
+#, fuzzy
+msgid "Cannot create pipe streams"
+msgstr "無法開啟具名管線 %s\n"
+
+#, c-format
+msgid ""
+"Unexpected error in select() reading data from a child process:\n"
+"%s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"Unexpected error in waitpid():\n"
+"%s"
+msgstr ""
+"未預期的檔案結束\n"
+"%s"
 
 msgid "Warning"
 msgstr "警告"
@@ -1849,8 +1878,7 @@ msgstr "反向"
 msgid "Sort order"
 msgstr "排序的順序"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 msgid "Confirmation|&Delete"
 msgstr ""
 
@@ -3345,7 +3373,9 @@ msgstr "找出 SUID 與 SGID 的程式"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr "無法開啟檔案 %s 來寫入資料：\n%s\n"
+msgstr ""
+"無法開啟檔案 %s 來寫入資料：\n"
+"%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3384,7 +3414,9 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr "無法寫入到檔案 %s :\n%s\n"
+msgstr ""
+"無法寫入到檔案 %s :\n"
+"%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3408,7 +3440,9 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr "檔案 %s 的擁有者並不是 root 或您，或者檔案允許任何人寫入；\n使用這個檔案對您系統的安全造成危害。"
+msgstr ""
+"檔案 %s 的擁有者並不是 root 或您，或者檔案允許任何人寫入；\n"
+"使用這個檔案對您系統的安全造成危害。"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3469,7 +3503,15 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr "請按下 %s\n然後等到此一訊息消失。\n\n接著再按一次，看看在按鈕旁邊是不是有\n顯示 \"好\"。\n\n要離開的話，按一下 Esc 鍵，然後等待\n一下子就可以了。"
+msgstr ""
+"請按下 %s\n"
+"然後等到此一訊息消失。\n"
+"\n"
+"接著再按一次，看看在按鈕旁邊是不是有\n"
+"顯示 \"好\"。\n"
+"\n"
+"要離開的話，按一下 Esc 鍵，然後等待\n"
+"一下子就可以了。"
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3485,7 +3527,9 @@ msgstr "好"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr "看起來您所有的按鍵都\n正常無誤，很好。"
+msgstr ""
+"看起來您所有的按鍵都\n"
+"正常無誤，很好。"
 
 msgid "&Discard"
 msgstr "忽略"
@@ -3493,7 +3537,9 @@ msgstr "忽略"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr "太好了！您的終端機資料庫很完整！ \n所有的按鍵都可以正常使用。"
+msgstr ""
+"太好了！您的終端機資料庫很完整！ \n"
+"所有的按鍵都可以正常使用。"
 
 msgid ""
 "Press all the keys mentioned here. After you have done it, check\n"
@@ -3628,13 +3674,17 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr "無法開啟 cpio 檔案集\n%s"
+msgstr ""
+"無法開啟 cpio 檔案集\n"
+"%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr "cpio 檔案集的結尾過早出現\n%s"
+msgstr ""
+"cpio 檔案集的結尾過早出現\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -3642,7 +3692,11 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr "錯誤的硬連結\n%s\n在 cpio 檔案集\n%s"
+msgstr ""
+"錯誤的硬連結\n"
+"%s\n"
+"在 cpio 檔案集\n"
+"%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3652,19 +3706,25 @@ msgstr "%s 有重複的進入點! 放棄中!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr "發現不完整的 cpio 標頭\n%s"
+msgstr ""
+"發現不完整的 cpio 標頭\n"
+"%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr "未預期的檔案結束\n%s"
+msgstr ""
+"未預期的檔案結束\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr "無法開啟 %s 檔案集\n%s"
+msgstr ""
+"無法開啟 %s 檔案集\n"
+"%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "不完整的 extfs 檔案集"
@@ -3841,13 +3901,17 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr "警告：%s 中此行不正確：\n%s\n"
+msgstr ""
+"警告：%s 中此行不正確：\n"
+"%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr "警告：%2$s 中的旗標 %1$c 不正確：\n%3$s\n"
+msgstr ""
+"警告：%2$s 中的旗標 %1$c 不正確：\n"
+"%3$s\n"
 
 #, c-format
 msgid "sftp: an error occurred while reading %s: %s"
@@ -3857,9 +3921,6 @@ msgid "sftp: Unable to get current user name."
 msgstr ""
 
 msgid "sftp: Invalid host name."
-msgstr ""
-
-msgid "sftp: Invalid port value."
 msgstr ""
 
 #, c-format
@@ -3936,7 +3997,9 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr "無法開啟 tar 檔案集\n%s"
+msgstr ""
+"無法開啟 tar 檔案集\n"
+"%s"
 
 msgid "Inconsistent tar archive"
 msgstr "不完整的 tar 檔案集"
@@ -4034,12 +4097,6 @@ msgid ""
 "Save modified file?"
 msgstr ""
 
-msgid "Cannot spawn child process"
-msgstr ""
-
-msgid "Empty output from child filter"
-msgstr ""
-
 msgid "&Line number"
 msgstr ""
 
@@ -4083,6 +4140,12 @@ msgid "ButtonBar|Unform"
 msgstr ""
 
 msgid "ButtonBar|Format"
+msgstr ""
+
+#, c-format
+msgid ""
+"Failed to read data from child stdout:\n"
+"%s"
 msgstr ""
 
 #, c-format

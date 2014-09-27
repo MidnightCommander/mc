@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-07-30 13:34+0200\n"
+"POT-Creation-Date: 2014-09-27 20:13+0400\n"
 "PO-Revision-Date: 2014-07-30 13:33+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -446,6 +446,34 @@ msgid ""
 msgstr ""
 "Schermo di dimensione %dx%d non supportato.\n"
 "Controllare la variabile ambiente TERM.\n"
+
+#, fuzzy
+msgid "Cannot create pipe descriptor"
+msgstr "Impossibile creare la directory %s"
+
+#, fuzzy
+msgid "Cannot parse command for pipe"
+msgstr ""
+"Non posso creare file comandi temporaneo \n"
+"%s"
+
+#, fuzzy
+msgid "Cannot create pipe streams"
+msgstr "Impossibile creare la directory %s"
+
+#, c-format
+msgid ""
+"Unexpected error in select() reading data from a child process:\n"
+"%s"
+msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"Unexpected error in waitpid():\n"
+"%s"
+msgstr ""
+"Inattesa fine del file\n"
+"%s"
 
 msgid "Warning"
 msgstr "Attenzione"
@@ -4105,9 +4133,6 @@ msgstr "sftp: impossibile ottenere il nome utente corrente."
 msgid "sftp: Invalid host name."
 msgstr "sftp: nome host non valido."
 
-msgid "sftp: Invalid port value."
-msgstr "sftp: porta non valida."
-
 #, c-format
 msgid "sftp: %s"
 msgstr "sftp: %s"
@@ -4290,12 +4315,6 @@ msgstr ""
 "Midnight Commander si sta chiudendo.\n"
 "Salvare il file modificato?"
 
-msgid "Cannot spawn child process"
-msgstr "Impossibile spawn del processo figlio"
-
-msgid "Empty output from child filter"
-msgstr "Risultato vuoto da filtro figlio"
-
 msgid "&Line number"
 msgstr "Numero di &linea"
 
@@ -4340,6 +4359,12 @@ msgstr "NonForm"
 
 msgid "ButtonBar|Format"
 msgstr "Formatt"
+
+#, c-format
+msgid ""
+"Failed to read data from child stdout:\n"
+"%s"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -4389,3 +4414,12 @@ msgstr "Continuare dall'inizio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Impossibile ricevere copia locale di /ftp://un.host/modificami.txt"
+
+#~ msgid "sftp: Invalid port value."
+#~ msgstr "sftp: porta non valida."
+
+#~ msgid "Cannot spawn child process"
+#~ msgstr "Impossibile spawn del processo figlio"
+
+#~ msgid "Empty output from child filter"
+#~ msgstr "Risultato vuoto da filtro figlio"
