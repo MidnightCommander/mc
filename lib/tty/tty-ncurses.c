@@ -66,7 +66,7 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#if defined(_AIX) && !defined(CTRL)
+#if !defined(CTRL)
 #define CTRL(x) ((x) & 0x1f)
 #endif
 
