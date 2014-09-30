@@ -1051,7 +1051,7 @@ read_file_system_list (int need_fs_type)
         char *table = MNTTAB;
         FILE *fp;
         int ret;
-        int lockfd;
+        int lockfd = -1;
 
 #if defined F_RDLCK && defined F_SETLKW
         /* MNTTAB_LOCK is a macro name of our own invention; it's not present in
