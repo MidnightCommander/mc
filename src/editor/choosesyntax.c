@@ -35,7 +35,7 @@
 #include <config.h>
 
 #include <stdlib.h>
-#include <sys/types.h>
+#include <string.h>             /* strcmp() */
 
 #include "lib/global.h"
 #include "lib/widget.h"         /* Listbox */
@@ -67,19 +67,23 @@ pstrcmp (const void *p1, const void *p2)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-exec_edit_syntax_dialog (const char **names, const char *current_syntax)
+exec_edit_syntax_dialog (const GPtrArray * names, const char *current_syntax)
 {
     size_t i;
+    Listbox *syntaxlist;
 
-    Listbox *syntaxlist = create_listbox_window (LIST_LINES, MAX_ENTRY_LEN,
-                                                 _("Choose syntax highlighting"), NULL);
+    syntaxlist = create_listbox_window (LIST_LINES, MAX_ENTRY_LEN,
+                                        _("Choose syntax highlighting"), NULL);
     LISTBOX_APPEND_TEXT (syntaxlist, 'A', _("< Auto >"), NULL);
     LISTBOX_APPEND_TEXT (syntaxlist, 'R', _("< Reload Current Syntax >"), NULL);
 
-    for (i = 0; names[i] != NULL; i++)
+    for (i = 0; i < names->len; i++)
     {
-        LISTBOX_APPEND_TEXT (syntaxlist, 0, names[i], NULL);
-        if ((current_syntax != NULL) && (strcmp (names[i], current_syntax) == 0))
+        const char *name;
+
+        name = g_ptr_array_index (names, i);
+        LISTBOX_APPEND_TEXT (syntaxlist, 0, name, NULL);
+        if (current_syntax != NULL && strcmp (name, current_syntax) == 0)
             listbox_select_entry (syntaxlist->list, i + N_DFLT_ENTRIES);
     }
 
@@ -93,27 +97,27 @@ exec_edit_syntax_dialog (const char **names, const char *current_syntax)
 void
 edit_syntax_dialog (WEdit * edit)
 {
-    char *current_syntax;
-    int old_auto_syntax, syntax;
-    char **names;
-    gboolean force_reload = FALSE;
-    size_t count;
+    GPtrArray *names;
+    int syntax;
 
-    current_syntax = g_strdup (edit->syntax_type);
-    old_auto_syntax = option_auto_syntax;
-
-    names = g_new0 (char *, 1);
+    names = g_ptr_array_new ();
 
     /* We fill the list of syntax files every time the editor is invoked.
        Instead we could save the list to a file and update it once the syntax
        file gets updated (either by testing or by explicit user command). */
-    edit_load_syntax (NULL, &names, NULL);
-    count = g_strv_length (names);
-    qsort (names, count, sizeof (char *), pstrcmp);
+    edit_load_syntax (NULL, names, NULL);
+    g_ptr_array_sort (names, pstrcmp);
 
-    syntax = exec_edit_syntax_dialog ((const char **) names, current_syntax);
+    syntax = exec_edit_syntax_dialog (names, edit->syntax_type);
     if (syntax >= 0)
     {
+        gboolean force_reload = FALSE;
+        char *current_syntax;
+        int old_auto_syntax;
+
+        current_syntax = g_strdup (edit->syntax_type);
+        old_auto_syntax = option_auto_syntax;
+
         switch (syntax)
         {
         case 0:                /* auto syntax */
@@ -125,19 +129,20 @@ edit_syntax_dialog (WEdit * edit)
         default:
             option_auto_syntax = 0;
             g_free (edit->syntax_type);
-            edit->syntax_type = g_strdup (names[syntax - N_DFLT_ENTRIES]);
+            edit->syntax_type = g_strdup (g_ptr_array_index (names, syntax - N_DFLT_ENTRIES));
         }
 
         /* Load or unload syntax rules if the option has changed */
-        if ((option_auto_syntax && !old_auto_syntax) || old_auto_syntax ||
-            (current_syntax && edit->syntax_type &&
-             (strcmp (current_syntax, edit->syntax_type) != 0)) || force_reload)
+        if (force_reload || (option_auto_syntax && !old_auto_syntax) || old_auto_syntax ||
+            (current_syntax != NULL && edit->syntax_type != NULL &&
+             strcmp (current_syntax, edit->syntax_type) != 0))
             edit_load_syntax (edit, NULL, edit->syntax_type);
 
         g_free (current_syntax);
     }
 
-    g_strfreev (names);
+    g_ptr_array_foreach (names, (GFunc) g_free, NULL);
+    g_ptr_array_free (names, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

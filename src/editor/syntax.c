@@ -1230,18 +1230,15 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
 
 /* returns -1 on file error, line number on error in file syntax */
 static int
-edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
+edit_read_syntax_file (WEdit * edit, GPtrArray * pnames, const char *syntax_file,
                        const char *editor_file, const char *first_line, const char *type)
 {
-#define NENTRIES 30
     FILE *f, *g = NULL;
     char *args[1024], *l = NULL;
     long line = 0;
     int result = 0;
-    int count = 0;
     char *lib_file;
     gboolean found = FALSE;
-    char **tmpnames = NULL;
 
     f = fopen (syntax_file, "r");
     if (f == NULL)
@@ -1290,20 +1287,11 @@ edit_read_syntax_file (WEdit * edit, char ***pnames, const char *syntax_file,
             result = line;
             break;
         }
-        if (pnames && *pnames)
+
+        if (pnames != NULL)
         {
             /* 1: just collecting a list of names of rule sets */
-            /* Reallocate the list if required */
-            if (count % NENTRIES == 0)
-            {
-                tmpnames =
-                    (char **) g_try_realloc (*pnames, (count + NENTRIES + 1) * sizeof (char *));
-                if (tmpnames == NULL)
-                    break;
-                *pnames = tmpnames;
-            }
-            (*pnames)[count++] = g_strdup (args[2]);
-            (*pnames)[count] = NULL;
+            g_ptr_array_add (pnames, g_strdup (args[2]));
         }
         else if (type)
         {
@@ -1463,7 +1451,7 @@ edit_free_syntax_rules (WEdit * edit)
  * type must be edit->syntax_type or NULL
  */
 void
-edit_load_syntax (WEdit * edit, char ***pnames, const char *type)
+edit_load_syntax (WEdit * edit, GPtrArray * pnames, const char *type)
 {
     int r;
     char *f = NULL;
@@ -1483,7 +1471,7 @@ edit_load_syntax (WEdit * edit, char ***pnames, const char *type)
     if (!tty_use_colors ())
         return;
 
-    if (!option_syntax_highlighting && (!pnames || !*pnames))
+    if (!option_syntax_highlighting && (pnames == NULL || pnames->len == 0))
         return;
 
     if (edit != NULL && edit->filename_vpath == NULL)
