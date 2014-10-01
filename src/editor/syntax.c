@@ -102,7 +102,6 @@ int option_auto_syntax = 1;
 typedef struct
 {
     char *keyword;
-    unsigned char first;
     char *whole_word_chars_left;
     char *whole_word_chars_right;
     long line_start;
@@ -1137,7 +1136,6 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
                 break_a;
             }
             k->keyword = g_strdup (*a++);
-            k->first = *k->keyword;
             subst_defines (edit->defines, a, &args[1024]);
             fg = *a;
             if (*a != NULL)
@@ -1211,6 +1209,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
 
         first_chars = g_string_sized_new (32);
 
+        /* collect first character of keywords */
         for (i = 0; edit->rules[i] != NULL; i++)
         {
             size_t j;
@@ -1224,7 +1223,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
                 syntax_keyword_t *k;
 
                 k = SYNTAX_KEYWORD (g_ptr_array_index (c->keyword, j));
-                g_string_append_c (first_chars, k->first);
+                g_string_append_c (first_chars, k->keyword[0]);
             }
 
             c->keyword_first_chars = g_strndup (first_chars->str, first_chars->len);
