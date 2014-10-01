@@ -153,7 +153,7 @@ struct WEdit
 
     /* syntax higlighting */
     GSList *syntax_marker;
-    struct context_rule **rules;
+    GPtrArray *rules;
     off_t last_get_rule;
     edit_syntax_rule_t rule;
     char *syntax_type;          /* description of syntax highlighting type being used */
