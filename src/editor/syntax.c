@@ -1199,28 +1199,28 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
     if (result == 0)
     {
         int i;
-        char *first_chars;
+        GString *first_chars;
 
         if (num_contexts == -1)
             return line;
 
-        first_chars = g_malloc0 (max_alloc_words_per_context + 2);
+        first_chars = g_string_sized_new (max_alloc_words_per_context + 2);
 
         for (i = 0; edit->rules[i] != NULL; i++)
         {
-            char *p;
             int j;
 
+            g_string_set_size (first_chars, 0);
             c = edit->rules[i];
-            p = first_chars;
-            *p++ = (char) 1;
+
+            g_string_append_c (first_chars, (char) 1);
             for (j = 1; c->keyword[j] != NULL; j++)
-                *p++ = c->keyword[j]->first;
-            *p = '\0';
-            c->keyword_first_chars = g_strdup (first_chars);
+                g_string_append_c (first_chars, c->keyword[j]->first);
+
+            c->keyword_first_chars = g_strndup (first_chars->str, first_chars->len);
         }
 
-        g_free (first_chars);
+        g_string_free (first_chars, TRUE);
     }
 
     return result;
