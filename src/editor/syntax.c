@@ -95,9 +95,11 @@ int option_auto_syntax = 1;
 #define check_a {if(!*a){result=line;break;}}
 #define check_not_a {if(*a){result=line;break;}}
 
+#define SYNTAX_KEYWORD(x) ((syntax_keyword_t *) (x))
+
 /*** file scope type declarations ****************************************************************/
 
-struct key_word
+typedef struct
 {
     char *keyword;
     unsigned char first;
@@ -105,7 +107,7 @@ struct key_word
     char *whole_word_chars_right;
     long line_start;
     int color;
-};
+} syntax_keyword_t;
 
 struct context_rule
 {
@@ -121,7 +123,7 @@ struct context_rule
     char *keyword_first_chars;
     gboolean spelling;
     /* first word is word[1] */
-    struct key_word **keyword;
+    GPtrArray *keyword;
 };
 
 typedef struct
@@ -134,7 +136,21 @@ typedef struct
 
 static char *error_file_name = NULL;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+syntax_keyword_free (gpointer keyword)
+{
+    syntax_keyword_t *k = SYNTAX_KEYWORD (keyword);
+
+    g_free (k->keyword);
+    g_free (k->whole_word_chars_left);
+    g_free (k->whole_word_chars_right);
+    g_free (k);
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static gint
@@ -407,12 +423,12 @@ apply_rules_going_right (WEdit * edit, off_t i)
         if (p != NULL)
             while (*(p = xx_strchr (edit, (unsigned char *) p + 1, c)) != '\0')
             {
-                struct key_word *k;
+                syntax_keyword_t *k;
                 int count;
                 off_t e;
 
                 count = p - r->keyword_first_chars;
-                k = r->keyword[count];
+                k = SYNTAX_KEYWORD (g_ptr_array_index (r->keyword, count));
                 e = compare_word_to_right (edit, i, k->keyword, k->whole_word_chars_left,
                                            k->whole_word_chars_right, k->line_start);
                 if (e > 0)
@@ -509,12 +525,12 @@ apply_rules_going_right (WEdit * edit, off_t i)
 
         while (*(p = xx_strchr (edit, (unsigned char *) p + 1, c)) != '\0')
         {
-            struct key_word *k;
+            syntax_keyword_t *k;
             int count;
             off_t e;
 
             count = p - r->keyword_first_chars;
-            k = r->keyword[count];
+            k = SYNTAX_KEYWORD (g_ptr_array_index (r->keyword, count));
             e = compare_word_to_right (edit, i, k->keyword, k->whole_word_chars_left,
                                        k->whole_word_chars_right, k->line_start);
             if (e > 0)
@@ -594,7 +610,11 @@ edit_get_rule (WEdit * edit, off_t byte_index)
 static inline int
 translate_rule_to_color (const WEdit * edit, const edit_syntax_rule_t * rule)
 {
-    return edit->rules[rule->context]->keyword[rule->keyword]->color;
+    syntax_keyword_t *k;
+
+    k = SYNTAX_KEYWORD (g_ptr_array_index (edit->rules[rule->context]->keyword, rule->keyword));
+
+    return k->color;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -885,11 +905,10 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
     char *l = 0;
     int save_line = 0, line = 0;
     struct context_rule **r, *c = NULL;
-    int num_words = -1, num_contexts = -1;
+    gboolean no_words = TRUE;
+    int num_contexts = -1;
     int result = 0;
-    int alloc_contexts = MAX_CONTEXTS,
-        alloc_words_per_context = MAX_WORDS_PER_CONTEXT,
-        max_alloc_words_per_context = MAX_WORDS_PER_CONTEXT;
+    int alloc_contexts = MAX_CONTEXTS;
 
     args[0] = NULL;
     edit->is_case_insensitive = FALSE;
@@ -982,6 +1001,8 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
         }
         else if (strcmp (args[0], "context") == 0)
         {
+            syntax_keyword_t *k;
+
             check_a;
             if (num_contexts == -1)
             {
@@ -998,7 +1019,6 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
             else
             {
                 /* Terminate previous context.  */
-                r[num_contexts - 1]->keyword[num_words] = NULL;
                 c = r[num_contexts] = g_malloc0 (sizeof (struct context_rule));
                 if (strcmp (*a, "exclusive") == 0)
                 {
@@ -1041,9 +1061,10 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
                 c->first_left = *c->left;
                 c->first_right = *c->right;
             }
-            c->keyword = g_malloc (alloc_words_per_context * sizeof (struct key_word *));
-            num_words = 1;
-            c->keyword[0] = g_malloc0 (sizeof (struct key_word));
+            c->keyword = g_ptr_array_new ();
+            k = g_new0 (syntax_keyword_t, 1);
+            g_ptr_array_add (c->keyword, k);
+            no_words = FALSE;
             subst_defines (edit->defines, a, &args[1024]);
             fg = *a;
             if (*a != NULL)
@@ -1057,11 +1078,10 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
             g_strlcpy (last_fg, fg != NULL ? fg : "", sizeof (last_fg));
             g_strlcpy (last_bg, bg != NULL ? bg : "", sizeof (last_bg));
             g_strlcpy (last_attrs, attrs != NULL ? attrs : "", sizeof (last_attrs));
-            c->keyword[0]->color = this_try_alloc_color_pair (fg, bg, attrs);
-            c->keyword[0]->keyword = g_strdup (" ");
+            k->color = this_try_alloc_color_pair (fg, bg, attrs);
+            k->keyword = g_strdup (" ");
             check_not_a;
 
-            alloc_words_per_context = MAX_WORDS_PER_CONTEXT;
             if (++num_contexts >= alloc_contexts)
             {
                 struct context_rule **tmp;
@@ -1082,12 +1102,13 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
         }
         else if (strcmp (args[0], "keyword") == 0)
         {
-            struct key_word *k;
+            syntax_keyword_t *k;
 
-            if (num_words == -1)
+            if (no_words)
                 break_a;
             check_a;
-            k = r[num_contexts - 1]->keyword[num_words] = g_malloc0 (sizeof (struct key_word));
+            k = g_new0 (syntax_keyword_t, 1);
+            g_ptr_array_add (r[num_contexts - 1]->keyword, k);
             if (strcmp (*a, "whole") == 0)
             {
                 a++;
@@ -1135,19 +1156,6 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
                 attrs = last_attrs;
             k->color = this_try_alloc_color_pair (fg, bg, attrs);
             check_not_a;
-
-            if (++num_words >= alloc_words_per_context)
-            {
-                struct key_word **tmp;
-
-                alloc_words_per_context += 1024;
-
-                if (alloc_words_per_context > max_alloc_words_per_context)
-                    max_alloc_words_per_context = alloc_words_per_context;
-
-                tmp = g_realloc (c->keyword, alloc_words_per_context * sizeof (struct key_word *));
-                c->keyword = tmp;
-            }
         }
         else if (*(args[0]) == '#')
         {
@@ -1188,10 +1196,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
 
     /* Terminate context array.  */
     if (num_contexts > 0)
-    {
-        r[num_contexts - 1]->keyword[num_words] = NULL;
         r[num_contexts] = NULL;
-    }
 
     if (edit->rules[0] == NULL)
         MC_PTR_FREE (edit->rules);
@@ -1204,18 +1209,23 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
         if (num_contexts == -1)
             return line;
 
-        first_chars = g_string_sized_new (max_alloc_words_per_context + 2);
+        first_chars = g_string_sized_new (32);
 
         for (i = 0; edit->rules[i] != NULL; i++)
         {
-            int j;
+            size_t j;
 
             g_string_set_size (first_chars, 0);
             c = edit->rules[i];
 
             g_string_append_c (first_chars, (char) 1);
-            for (j = 1; c->keyword[j] != NULL; j++)
-                g_string_append_c (first_chars, c->keyword[j]->first);
+            for (j = 1; j < c->keyword->len; j++)
+            {
+                syntax_keyword_t *k;
+
+                k = SYNTAX_KEYWORD (g_ptr_array_index (c->keyword, j));
+                g_string_append_c (first_chars, k->first);
+            }
 
             c->keyword_first_chars = g_strndup (first_chars->str, first_chars->len);
         }
@@ -1330,8 +1340,8 @@ edit_read_syntax_file (WEdit * edit, GPtrArray * pnames, const char *syntax_file
                     g_free (edit->syntax_type);
                     edit->syntax_type = g_strdup (syntax_type);
                     /* if there are no rules then turn off syntax highlighting for speed */
-                    if (!g && !edit->rules[1])
-                        if (!edit->rules[0]->keyword[1] && !edit->rules[0]->spelling)
+                    if (g == NULL && edit->rules[1] == NULL)
+                        if (edit->rules[0]->keyword->len == 1 && !edit->rules[0]->spelling)
                         {
                             edit_free_syntax_rules (edit);
                             break;
@@ -1404,7 +1414,7 @@ edit_get_syntax_color (WEdit * edit, off_t byte_index)
 void
 edit_free_syntax_rules (WEdit * edit)
 {
-    size_t i, j;
+    size_t i;
 
     if (!edit)
         return;
@@ -1418,21 +1428,16 @@ edit_free_syntax_rules (WEdit * edit)
 
     for (i = 0; edit->rules[i]; i++)
     {
-        if (edit->rules[i]->keyword)
+        if (edit->rules[i]->keyword != NULL)
         {
-            for (j = 0; edit->rules[i]->keyword[j]; j++)
-            {
-                MC_PTR_FREE (edit->rules[i]->keyword[j]->keyword);
-                MC_PTR_FREE (edit->rules[i]->keyword[j]->whole_word_chars_left);
-                MC_PTR_FREE (edit->rules[i]->keyword[j]->whole_word_chars_right);
-                MC_PTR_FREE (edit->rules[i]->keyword[j]);
-            }
+            g_ptr_array_foreach (edit->rules[i]->keyword, (GFunc) syntax_keyword_free, NULL);
+            g_ptr_array_free (edit->rules[i]->keyword, TRUE);
         }
+
         MC_PTR_FREE (edit->rules[i]->left);
         MC_PTR_FREE (edit->rules[i]->right);
         MC_PTR_FREE (edit->rules[i]->whole_word_chars_left);
         MC_PTR_FREE (edit->rules[i]->whole_word_chars_right);
-        MC_PTR_FREE (edit->rules[i]->keyword);
         MC_PTR_FREE (edit->rules[i]->keyword_first_chars);
         MC_PTR_FREE (edit->rules[i]);
     }
