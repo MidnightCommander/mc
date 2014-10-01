@@ -8,7 +8,7 @@
    Paul Sheer, 1998
    Egmont Koblinger <egmont@gmail.com>, 2010
    Slava Zanko <slavazanko@gmail.com>, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2013, 2014
 
    This file is part of the Midnight Commander.
 
@@ -1046,13 +1046,13 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
             c->keyword[0] = g_malloc0 (sizeof (struct key_word));
             subst_defines (edit->defines, a, &args[1024]);
             fg = *a;
-            if (*a != '\0')
+            if (*a != NULL)
                 a++;
             bg = *a;
-            if (*a != '\0')
+            if (*a != NULL)
                 a++;
             attrs = *a;
-            if (*a != '\0')
+            if (*a != NULL)
                 a++;
             g_strlcpy (last_fg, fg != NULL ? fg : "", sizeof (last_fg));
             g_strlcpy (last_bg, bg != NULL ? bg : "", sizeof (last_bg));
@@ -1119,13 +1119,13 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
             k->first = *k->keyword;
             subst_defines (edit->defines, a, &args[1024]);
             fg = *a;
-            if (*a != '\0')
+            if (*a != NULL)
                 a++;
             bg = *a;
-            if (*a != '\0')
+            if (*a != NULL)
                 a++;
             attrs = *a;
-            if (*a != '\0')
+            if (*a != NULL)
                 a++;
             if (fg == NULL)
                 fg = last_fg;
