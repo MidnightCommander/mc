@@ -771,16 +771,13 @@ file_compute_color (int attr, file_entry_t * fe)
 /** Formats the file number file_index of panel in the buffer dest */
 
 static filename_scroll_flag_t
-format_file (char *dest, int limit, WPanel * panel, int file_index, int width, int attr,
-             gboolean isstatus, int *field_length)
+format_file (WPanel * panel, int file_index, int width, int attr, gboolean isstatus,
+             int *field_length)
 {
     int color, length = 0, empty_line;
     format_e *format, *home;
     file_entry_t *fe;
     filename_scroll_flag_t res = FILENAME_NOSCROLL;
-
-    (void) dest;
-    (void) limit;
 
     empty_line = (file_index >= panel->dir.len);
     home = isstatus ? panel->status_format : panel->format;
@@ -893,7 +890,6 @@ repaint_file (WPanel * panel, int file_index, gboolean mv, int attr, gboolean is
     int second_column = 0;
     int width;
     int offset = 0;
-    char buffer[BUF_MEDIUM];
     filename_scroll_flag_t ret_frm;
     int ypos = 0;
     gboolean panel_is_split = !isstatus && panel->split;
@@ -930,7 +926,7 @@ repaint_file (WPanel * panel, int file_index, gboolean mv, int attr, gboolean is
         widget_move (w, ypos, offset + 1);
     }
 
-    ret_frm = format_file (buffer, sizeof (buffer), panel, file_index, width, attr, isstatus, &fln);
+    ret_frm = format_file (panel, file_index, width, attr, isstatus, &fln);
 
     if (panel_is_split)
     {
