@@ -103,8 +103,6 @@ static int listing_user_hotkey = 'u';
 static unsigned long panel_listing_types_id, panel_user_format_id;
 static unsigned long mini_user_status_id, mini_user_format_id;
 
-static unsigned long skin_name_id;
-
 #ifdef HAVE_CHARSET
 static int new_display_codepage;
 #endif /* HAVE_CHARSET */
@@ -595,7 +593,6 @@ sel_skin_button (WButton * button, int action)
     result = dlg_run (skin_dlg);
     if (result == B_ENTER)
     {
-        Widget *w;
         gchar *skin_label;
 
         listbox_get_current (skin_list, &skin_label, (void **) &skin_name);
@@ -603,8 +600,7 @@ sel_skin_button (WButton * button, int action)
         current_skin_name = g_strdup (skin_name);
         skin_apply (skin_name);
 
-        w = dlg_find_by_id (WIDGET (button)->owner, skin_name_id);
-        button_set_text (BUTTON (w), str_fit_to_term (skin_label, 20, J_LEFT_FIT));
+        button_set_text (button, str_fit_to_term (skin_label, 20, J_LEFT_FIT));
     }
     dlg_destroy (skin_dlg);
 
@@ -626,7 +622,7 @@ appearance_box (void)
                 QUICK_LABEL (N_("Skin:"), NULL),
             QUICK_NEXT_COLUMN,
                 QUICK_BUTTON (str_fit_to_term (skin_name_to_label (current_skin_name), 20, J_LEFT_FIT),
-                              B_USER, sel_skin_button, &skin_name_id),
+                              B_USER, sel_skin_button, NULL),
             QUICK_STOP_COLUMNS,
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
