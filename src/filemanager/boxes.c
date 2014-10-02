@@ -149,6 +149,99 @@ configure_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+skin_apply (const gchar * skin_override)
+{
+    GError *mcerror = NULL;
+
+    mc_skin_deinit ();
+    mc_skin_init (skin_override, &mcerror);
+    mc_fhl_free (&mc_filehighlight);
+    mc_filehighlight = mc_fhl_new (TRUE);
+    dlg_set_default_colors ();
+    input_set_default_colors ();
+    if (mc_global.mc_run_mode == MC_RUN_FULL)
+        command_set_default_colors ();
+    panel_deinit ();
+    panel_init ();
+    repaint_screen ();
+
+    mc_error_message (&mcerror);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static const gchar *
+skin_name_to_label (const gchar * name)
+{
+    if (strcmp (name, "default") == 0)
+        return _("< Default >");
+    return name;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+sel_skin_button (WButton * button, int action)
+{
+    int result;
+    WListbox *skin_list;
+    WDialog *skin_dlg;
+    const gchar *skin_name;
+    int lxx, lyy;
+    unsigned int i;
+    unsigned int pos = 1;
+
+    (void) action;
+
+    lxx = COLS / 2;
+    lyy = (LINES - 13) / 2;
+    skin_dlg =
+        dlg_create (TRUE, lyy, lxx, 13, 24, dialog_colors, NULL, NULL, "[Appearance]", _("Skins"),
+                    DLG_COMPACT);
+
+    skin_list = listbox_new (1, 1, 11, 22, FALSE, NULL);
+    skin_name = "default";
+    listbox_add_item (skin_list, LISTBOX_APPEND_AT_END, 0, skin_name_to_label (skin_name),
+                      (void *) skin_name);
+
+    if (strcmp (skin_name, current_skin_name) == 0)
+        listbox_select_entry (skin_list, 0);
+
+    for (i = 0; i < skin_names->len; i++)
+    {
+        skin_name = g_ptr_array_index (skin_names, i);
+        if (strcmp (skin_name, "default") != 0)
+        {
+            listbox_add_item (skin_list, LISTBOX_APPEND_AT_END, 0, skin_name_to_label (skin_name),
+                              (void *) skin_name);
+            if (strcmp (skin_name, current_skin_name) == 0)
+                listbox_select_entry (skin_list, pos);
+            pos++;
+        }
+    }
+
+    add_widget (skin_dlg, skin_list);
+
+    result = dlg_run (skin_dlg);
+    if (result == B_ENTER)
+    {
+        gchar *skin_label;
+
+        listbox_get_current (skin_list, &skin_label, (void **) &skin_name);
+        g_free (current_skin_name);
+        current_skin_name = g_strdup (skin_name);
+        skin_apply (skin_name);
+
+        button_set_text (button, str_fit_to_term (skin_label, 20, J_LEFT_FIT));
+    }
+    dlg_destroy (skin_dlg);
+
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
@@ -512,99 +605,6 @@ configure_box (void)
 
         g_free (time_out_new);
     }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-skin_apply (const gchar * skin_override)
-{
-    GError *mcerror = NULL;
-
-    mc_skin_deinit ();
-    mc_skin_init (skin_override, &mcerror);
-    mc_fhl_free (&mc_filehighlight);
-    mc_filehighlight = mc_fhl_new (TRUE);
-    dlg_set_default_colors ();
-    input_set_default_colors ();
-    if (mc_global.mc_run_mode == MC_RUN_FULL)
-        command_set_default_colors ();
-    panel_deinit ();
-    panel_init ();
-    repaint_screen ();
-
-    mc_error_message (&mcerror);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static const gchar *
-skin_name_to_label (const gchar * name)
-{
-    if (strcmp (name, "default") == 0)
-        return _("< Default >");
-    return name;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static int
-sel_skin_button (WButton * button, int action)
-{
-    int result;
-    WListbox *skin_list;
-    WDialog *skin_dlg;
-    const gchar *skin_name;
-    int lxx, lyy;
-    unsigned int i;
-    unsigned int pos = 1;
-
-    (void) action;
-
-    lxx = COLS / 2;
-    lyy = (LINES - 13) / 2;
-    skin_dlg =
-        dlg_create (TRUE, lyy, lxx, 13, 24, dialog_colors, NULL, NULL, "[Appearance]", _("Skins"),
-                    DLG_COMPACT);
-
-    skin_list = listbox_new (1, 1, 11, 22, FALSE, NULL);
-    skin_name = "default";
-    listbox_add_item (skin_list, LISTBOX_APPEND_AT_END, 0, skin_name_to_label (skin_name),
-                      (void *) skin_name);
-
-    if (strcmp (skin_name, current_skin_name) == 0)
-        listbox_select_entry (skin_list, 0);
-
-    for (i = 0; i < skin_names->len; i++)
-    {
-        skin_name = g_ptr_array_index (skin_names, i);
-        if (strcmp (skin_name, "default") != 0)
-        {
-            listbox_add_item (skin_list, LISTBOX_APPEND_AT_END, 0, skin_name_to_label (skin_name),
-                              (void *) skin_name);
-            if (strcmp (skin_name, current_skin_name) == 0)
-                listbox_select_entry (skin_list, pos);
-            pos++;
-        }
-    }
-
-    add_widget (skin_dlg, skin_list);
-
-    result = dlg_run (skin_dlg);
-    if (result == B_ENTER)
-    {
-        gchar *skin_label;
-
-        listbox_get_current (skin_list, &skin_label, (void **) &skin_name);
-        g_free (current_skin_name);
-        current_skin_name = g_strdup (skin_name);
-        skin_apply (skin_name);
-
-        button_set_text (button, str_fit_to_term (skin_label, 20, J_LEFT_FIT));
-    }
-    dlg_destroy (skin_dlg);
-
-    return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
