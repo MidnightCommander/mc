@@ -42,8 +42,8 @@ enum
 struct status_msg_t
 {
     WDialog *dlg;               /* pointer to status message dialog */
+    guint64 start;              /* start time in microseconds */
     guint64 delay;              /* delay before raise the 'dlg' in microseconds */
-    mc_timer_t *timer;          /* timer to measure 'delay' */
     gboolean block;             /* how to get event using tty_get_event() */
 
     status_msg_cb init;         /* callback to init derived classes */

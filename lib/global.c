@@ -31,6 +31,7 @@
 #include <config.h>
 
 #include "global.h"
+#include "lib/timer.h"
 
 /* *INDENT-OFF* */
 #ifdef ENABLE_SUBSHELL
@@ -49,6 +50,7 @@
 /* *INDENT-OFF* */
 mc_global_t mc_global = {
     .mc_run_mode = MC_RUN_FULL,
+    .timer = NULL,
     .midnight_shutdown = FALSE,
 
     .sysconfig_dir = NULL,
