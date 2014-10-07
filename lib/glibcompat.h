@@ -1,6 +1,10 @@
 #ifndef MC_GLIBCOMPAT_H
 #define MC_GLIBCOMPAT_H
 
+#if ! GLIB_CHECK_VERSION (2, 22, 0)
+#include <stdarg.h>             /* for g_error_new_valist() */
+#endif /* ! GLIB_CHECK_VERSION (2, 22, 0) */
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /*** enums ***************************************************************************************/
