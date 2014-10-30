@@ -7,6 +7,7 @@
 
 /* Event groups for main modules */
 #define MCEVENT_GROUP_CORE "Core"
+#define MCEVENT_GROUP_HELP "Help"
 #define MCEVENT_GROUP_DIFFVIEWER "DiffViewer"
 #define MCEVENT_GROUP_EDITOR "Editor"
 #define MCEVENT_GROUP_FILEMANAGER "FileManager"

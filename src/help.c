@@ -66,6 +66,7 @@
 #include "lib/event-types.h"
 
 #include "keybind-defaults.h"
+#include "events_init.h"
 #include "help.h"
 
 /*** global variables ****************************************************************************/
@@ -263,31 +264,6 @@ static void
 move_backward (int i)
 {
     currentpoint = move_backward2 (currentpoint, ++i);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-move_to_top (void)
-{
-    while (((int) (currentpoint > fdata) > 0) && (*currentpoint != CHAR_NODE_END))
-        currentpoint--;
-
-    while (*currentpoint != ']')
-        currentpoint++;
-    currentpoint = currentpoint + 2;    /* Skip the newline following the start of the node */
-    selected_item = NULL;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-move_to_bottom (void)
-{
-    while ((*currentpoint != '\0') && (*currentpoint != CHAR_NODE_END))
-        currentpoint++;
-    currentpoint--;
-    move_backward (1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -680,246 +656,81 @@ help_event (Gpm_Event * event, void *vp)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** show help */
-
-static void
-help_help (WDialog * h)
-{
-    const char *p;
-
-    history_ptr = (history_ptr + 1) % HISTORY_SIZE;
-    history[history_ptr].page = currentpoint;
-    history[history_ptr].link = selected_item;
-
-    p = search_string (fdata, "[How to use help]");
-    if (p != NULL)
-    {
-        currentpoint = p + 1;   /* Skip the newline following the start of the node */
-        selected_item = NULL;
-        send_message (h, NULL, MSG_DRAW, 0, NULL);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-help_index (WDialog * h)
-{
-    const char *new_item;
-
-    new_item = search_string (fdata, "[Contents]");
-
-    if (new_item == NULL)
-        message (D_ERROR, MSG_ERROR, _("Cannot find node %s in help file"), "[Contents]");
-    else
-    {
-        history_ptr = (history_ptr + 1) % HISTORY_SIZE;
-        history[history_ptr].page = currentpoint;
-        history[history_ptr].link = selected_item;
-
-        currentpoint = new_item + 1;    /* Skip the newline following the start of the node */
-        selected_item = NULL;
-        send_message (h, NULL, MSG_DRAW, 0, NULL);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-help_back (WDialog * h)
-{
-    currentpoint = history[history_ptr].page;
-    selected_item = history[history_ptr].link;
-    history_ptr--;
-    if (history_ptr < 0)
-        history_ptr = HISTORY_SIZE - 1;
-
-    send_message (h, NULL, MSG_DRAW, 0, NULL);  /* FIXME: unneeded? */
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-help_next_link (gboolean move_down)
-{
-    const char *new_item;
-
-    new_item = select_next_link (selected_item);
-    if (new_item != NULL)
-    {
-        selected_item = new_item;
-        if ((int) (selected_item - last_shown) >= 0)
-        {
-            if (move_down)
-                move_forward (1);
-            else
-                selected_item = NULL;
-        }
-    }
-    else if (move_down)
-        move_forward (1);
-    else
-        selected_item = NULL;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-help_prev_link (gboolean move_up)
-{
-    const char *new_item;
-
-    new_item = select_prev_link (selected_item);
-    selected_item = new_item;
-    if ((selected_item == NULL) || (selected_item < currentpoint))
-    {
-        if (move_up)
-            move_backward (1);
-        else if ((link_area != NULL) && (link_area->data != NULL))
-            selected_item = ((Link_Area *) link_area->data)->link_name;
-        else
-            selected_item = NULL;
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-help_next_node (void)
-{
-    const char *new_item;
-
-    new_item = currentpoint;
-    while ((*new_item != '\0') && (*new_item != CHAR_NODE_END))
-        new_item++;
-
-    if (*++new_item == '[')
-        while (*++new_item != '\0')
-            if ((*new_item == ']') && (*++new_item != '\0') && (*++new_item != '\0'))
-            {
-                currentpoint = new_item;
-                selected_item = NULL;
-                break;
-            }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-help_prev_node (void)
-{
-    const char *new_item;
-
-    new_item = currentpoint;
-    while (((int) (new_item - fdata) > 1) && (*new_item != CHAR_NODE_END))
-        new_item--;
-    new_item--;
-    while (((int) (new_item - fdata) > 0) && (*new_item != CHAR_NODE_END))
-        new_item--;
-    while (*new_item != ']')
-        new_item++;
-    currentpoint = new_item + 2;
-    selected_item = NULL;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-help_select_link (void)
-{
-    /* follow link */
-    if (selected_item == NULL)
-    {
-#ifdef WE_WANT_TO_GO_BACKWARD_ON_KEY_RIGHT
-        /* Is there any reason why the right key would take us
-         * backward if there are no links selected?, I agree
-         * with Torben than doing nothing in this case is better
-         */
-        /* If there are no links, go backward in history */
-        history_ptr--;
-        if (history_ptr < 0)
-            history_ptr = HISTORY_SIZE - 1;
-
-        currentpoint = history[history_ptr].page;
-        selected_item = history[history_ptr].link;
-#endif
-    }
-    else
-    {
-        history_ptr = (history_ptr + 1) % HISTORY_SIZE;
-        history[history_ptr].page = currentpoint;
-        history[history_ptr].link = selected_item;
-        currentpoint = help_follow_link (currentpoint, selected_item);
-    }
-
-    selected_item = NULL;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 help_execute_cmd (unsigned long command)
 {
-    cb_ret_t ret = MSG_HANDLED;
+    cb_ret_t res = MSG_HANDLED;
+    const char *event_group_name = MCEVENT_GROUP_HELP;
+    const char *event_name = NULL;
+    event_return_t ret;
+    void *event_data = whelp;
+
+    ret.b = TRUE;
 
     switch (command)
     {
     case CK_Help:
-        help_help (whelp);
+        event_name = "show_dialog";
         break;
     case CK_Index:
-        help_index (whelp);
+        event_name = "go_index";
         break;
     case CK_Back:
-        help_back (whelp);
+        event_name = "go_back";
         break;
     case CK_Up:
-        help_prev_link (TRUE);
+        event_name = "go_up";
         break;
     case CK_Down:
-        help_next_link (TRUE);
+        event_name = "go_down";
         break;
     case CK_PageDown:
-        move_forward (help_lines - 1);
+        event_name = "go_page_down";
         break;
     case CK_PageUp:
-        move_backward (help_lines - 1);
+        event_name = "go_page_up";
         break;
     case CK_HalfPageDown:
-        move_forward (help_lines / 2);
+        event_name = "go_half_page_down";
         break;
     case CK_HalfPageUp:
-        move_backward (help_lines / 2);
+        event_name = "go_half_page_up";
         break;
     case CK_Top:
-        move_to_top ();
+        event_name = "go_top";
         break;
     case CK_Bottom:
-        move_to_bottom ();
+        event_name = "go_bottom";
         break;
     case CK_Enter:
-        help_select_link ();
+        event_name = "select_link";
         break;
     case CK_LinkNext:
-        help_next_link (FALSE);
+        event_name = "go_next_link";
         break;
     case CK_LinkPrev:
-        help_prev_link (FALSE);
+        event_name = "go_prev_link";
         break;
     case CK_NodeNext:
-        help_next_node ();
+        event_name = "go_next_node";
         break;
     case CK_NodePrev:
-        help_prev_node ();
+        event_name = "go_prev_node";
         break;
     case CK_Quit:
-        dlg_stop (whelp);
+        event_name = "quit";
         break;
     default:
-        ret = MSG_NOT_HANDLED;
+        res = MSG_NOT_HANDLED;
     }
 
-    return ret;
+    if (mc_event_raise (event_group_name, event_name, event_data, &ret, NULL))
+    {
+        return (ret.b) ? MSG_HANDLED : MSG_NOT_HANDLED;
+    }
+
+    return res;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1053,10 +864,10 @@ mousedispatch_new (int y, int x, int yl, int xl)
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-
 /* event callback */
+
 gboolean
-help_interactive_display (event_info_t * event_info, gpointer data, GError ** error)
+mc_help_cmd_interactive_display (event_info_t * event_info, gpointer data, GError ** error)
 {
     const dlg_colors_t help_colors = {
         HELP_NORMAL_COLOR,      /* common text color */
@@ -1154,6 +965,389 @@ help_interactive_display (event_info_t * event_info, gpointer data, GError ** er
     dlg_run (whelp);
     interactive_display_finish ();
     dlg_destroy (whelp);
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+/** show help */
+
+gboolean
+mc_help_cmd_show_dialog (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WDialog *h = (WDialog *) data;
+    const char *p;
+
+    (void) error;
+    (void) event_info;
+
+    history_ptr = (history_ptr + 1) % HISTORY_SIZE;
+    history[history_ptr].page = currentpoint;
+    history[history_ptr].link = selected_item;
+
+    p = search_string (fdata, "[How to use help]");
+    if (p != NULL)
+    {
+        currentpoint = p + 1;   /* Skip the newline following the start of the node */
+        selected_item = NULL;
+        send_message (h, NULL, MSG_DRAW, 0, NULL);
+    }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_help_cmd_go_index (event_info_t * event_info, gpointer data, GError ** error)
+{
+    const char *new_item;
+    WDialog *h = (WDialog *) data;
+
+    (void) error;
+    (void) event_info;
+
+    new_item = search_string (fdata, "[Contents]");
+
+    if (new_item == NULL)
+        message (D_ERROR, MSG_ERROR, _("Cannot find node %s in help file"), "[Contents]");
+    else
+    {
+        history_ptr = (history_ptr + 1) % HISTORY_SIZE;
+        history[history_ptr].page = currentpoint;
+        history[history_ptr].link = selected_item;
+
+        currentpoint = new_item + 1;    /* Skip the newline following the start of the node */
+        selected_item = NULL;
+        send_message (h, NULL, MSG_DRAW, 0, NULL);
+    }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_help_cmd_go_back (event_info_t * event_info, gpointer data, GError ** error)
+{
+    WDialog *h = (WDialog *) data;
+
+    (void) error;
+    (void) event_info;
+
+    currentpoint = history[history_ptr].page;
+    selected_item = history[history_ptr].link;
+    history_ptr--;
+    if (history_ptr < 0)
+        history_ptr = HISTORY_SIZE - 1;
+
+    send_message (h, NULL, MSG_DRAW, 0, NULL);  /* FIXME: unneeded? */
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_help_cmd_go_down (event_info_t * event_info, gpointer data, GError ** error)
+{
+    const char *new_item;
+
+    (void) data;
+    (void) error;
+    (void) event_info;
+
+    new_item = select_next_link (selected_item);
+    if (new_item != NULL)
+    {
+        selected_item = new_item;
+        if ((int) (selected_item - last_shown) >= 0)
+            move_forward (1);
+    }
+    else
+        move_forward (1);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_help_cmd_go_next_link (event_info_t * event_info, gpointer data, GError ** error)
+{
+    const char *new_item;
+
+    (void) data;
+    (void) error;
+    (void) event_info;
+
+    new_item = select_next_link (selected_item);
+    if (new_item != NULL)
+    {
+        selected_item = new_item;
+        if ((int) (selected_item - last_shown) >= 0)
+            selected_item = NULL;
+    }
+    else
+        selected_item = NULL;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_help_cmd_go_up (event_info_t * event_info, gpointer data, GError ** error)
+{
+    const char *new_item;
+
+    (void) data;
+    (void) error;
+    (void) event_info;
+
+    new_item = select_prev_link (selected_item);
+    selected_item = new_item;
+    if ((selected_item == NULL) || (selected_item < currentpoint))
+        move_backward (1);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_help_cmd_go_prev_link (event_info_t * event_info, gpointer data, GError ** error)
+{
+    const char *new_item;
+
+    (void) data;
+    (void) error;
+    (void) event_info;
+
+    new_item = select_prev_link (selected_item);
+    selected_item = new_item;
+    if ((selected_item == NULL) || (selected_item < currentpoint))
+    {
+        if ((link_area != NULL) && (link_area->data != NULL))
+            selected_item = ((Link_Area *) link_area->data)->link_name;
+        else
+            selected_item = NULL;
+    }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_help_cmd_go_page_down (event_info_t * event_info, gpointer data, GError ** error)
+{
+    (void) data;
+    (void) error;
+    (void) event_info;
+
+    move_forward (help_lines - 1);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_help_cmd_go_page_up (event_info_t * event_info, gpointer data, GError ** error)
+{
+    (void) data;
+    (void) error;
+    (void) event_info;
+
+    move_backward (help_lines - 1);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_help_cmd_go_half_page_down (event_info_t * event_info, gpointer data, GError ** error)
+{
+    (void) data;
+    (void) error;
+    (void) event_info;
+
+    move_forward (help_lines / 2);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_help_cmd_go_half_page_up (event_info_t * event_info, gpointer data, GError ** error)
+{
+    (void) data;
+    (void) error;
+    (void) event_info;
+
+    move_backward (help_lines / 2);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_help_cmd_go_top (event_info_t * event_info, gpointer data, GError ** error)
+{
+    (void) data;
+    (void) error;
+    (void) event_info;
+
+    while (((int) (currentpoint > fdata) > 0) && (*currentpoint != CHAR_NODE_END))
+        currentpoint--;
+
+    while (*currentpoint != ']')
+        currentpoint++;
+    currentpoint = currentpoint + 2;    /* Skip the newline following the start of the node */
+    selected_item = NULL;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_help_cmd_go_bottom (event_info_t * event_info, gpointer data, GError ** error)
+{
+    (void) data;
+    (void) error;
+    (void) event_info;
+
+    while ((*currentpoint != '\0') && (*currentpoint != CHAR_NODE_END))
+        currentpoint++;
+    currentpoint--;
+    move_backward (1);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_help_cmd_select_link (event_info_t * event_info, gpointer data, GError ** error)
+{
+    (void) data;
+    (void) error;
+    (void) event_info;
+
+    /* follow link */
+    if (selected_item == NULL)
+    {
+#ifdef WE_WANT_TO_GO_BACKWARD_ON_KEY_RIGHT
+        /* Is there any reason why the right key would take us
+         * backward if there are no links selected?, I agree
+         * with Torben than doing nothing in this case is better
+         */
+        /* If there are no links, go backward in history */
+        history_ptr--;
+        if (history_ptr < 0)
+            history_ptr = HISTORY_SIZE - 1;
+
+        currentpoint = history[history_ptr].page;
+        selected_item = history[history_ptr].link;
+#endif
+    }
+    else
+    {
+        history_ptr = (history_ptr + 1) % HISTORY_SIZE;
+        history[history_ptr].page = currentpoint;
+        history[history_ptr].link = selected_item;
+        currentpoint = help_follow_link (currentpoint, selected_item);
+    }
+
+    selected_item = NULL;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_help_cmd_go_next_node (event_info_t * event_info, gpointer data, GError ** error)
+{
+    const char *new_item;
+
+    (void) data;
+    (void) error;
+    (void) event_info;
+
+    new_item = currentpoint;
+    while ((*new_item != '\0') && (*new_item != CHAR_NODE_END))
+        new_item++;
+
+    if (*++new_item == '[')
+        while (*++new_item != '\0')
+            if ((*new_item == ']') && (*++new_item != '\0') && (*++new_item != '\0'))
+            {
+                currentpoint = new_item;
+                selected_item = NULL;
+                break;
+            }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_help_cmd_go_prev_node (event_info_t * event_info, gpointer data, GError ** error)
+{
+    const char *new_item;
+
+    (void) data;
+    (void) error;
+    (void) event_info;
+
+    new_item = currentpoint;
+    while (((int) (new_item - fdata) > 1) && (*new_item != CHAR_NODE_END))
+        new_item--;
+    new_item--;
+    while (((int) (new_item - fdata) > 0) && (*new_item != CHAR_NODE_END))
+        new_item--;
+    while (*new_item != ']')
+        new_item++;
+    currentpoint = new_item + 2;
+    selected_item = NULL;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* event callback */
+
+gboolean
+mc_help_cmd_quit (event_info_t * event_info, gpointer data, GError ** error)
+{
+    (void) data;
+    (void) error;
+    (void) event_info;
+
+    dlg_stop (whelp);
+
     return TRUE;
 }
 

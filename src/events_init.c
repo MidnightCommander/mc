@@ -62,7 +62,7 @@ events_init (GError ** mcerror)
         {"clipboard_file_from_ext_clip", clipboard_file_from_ext_clip, NULL},
         {"clipboard_text_to_file", clipboard_text_to_file, NULL},
         {"clipboard_text_from_file", clipboard_text_from_file, NULL},
-        {"help", help_interactive_display, NULL},
+        {"help", mc_help_cmd_interactive_display, NULL},
         {"suspend", execute_suspend, NULL},
         {"configuration_learn_keys_show_dialog", mc_core_cmd_configuration_learn_keys_show_dialog, NULL},
         {"save_setup", mc_core_cmd_save_setup, NULL},
@@ -77,9 +77,35 @@ events_init (GError ** mcerror)
     /* *INDENT-ON* */
 
     /* *INDENT-OFF* */
+    event_init_group_t help_group_events[] =
+    {
+        {"show_dialog", mc_help_cmd_show_dialog, NULL},
+        {"go_index", mc_help_cmd_go_index, NULL},
+        {"go_back", mc_help_cmd_go_back, NULL},
+        {"go_down", mc_help_cmd_go_down, NULL},
+        {"go_next_link", mc_help_cmd_go_next_link, NULL},
+        {"go_up", mc_help_cmd_go_up, NULL},
+        {"go_prev_link", mc_help_cmd_go_prev_link, NULL},
+        {"go_page_down", mc_help_cmd_go_page_down, NULL},
+        {"go_pageup", mc_help_cmd_go_page_up, NULL},
+        {"go_half_page_down", mc_help_cmd_go_half_page_down, NULL},
+        {"go_half_pageup", mc_help_cmd_go_half_page_up, NULL},
+        {"go_top", mc_help_cmd_go_top, NULL},
+        {"go_bottom", mc_help_cmd_go_bottom, NULL},
+        {"select_link", mc_help_cmd_select_link, NULL},
+        {"go_next_node", mc_help_cmd_go_next_node, NULL},
+        {"go_prev_node", mc_help_cmd_go_prev_node, NULL},
+        {"quit", mc_help_cmd_quit, NULL},
+
+        {NULL, NULL, NULL}
+    };
+    /* *INDENT-ON* */
+
+    /* *INDENT-OFF* */
     event_init_t standard_events[] =
     {
         {MCEVENT_GROUP_CORE, core_group_events},
+        {MCEVENT_GROUP_HELP, help_group_events},
         {NULL, NULL}
     };
     /* *INDENT-ON* */
