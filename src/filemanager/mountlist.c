@@ -233,10 +233,9 @@
    we grant an exception to any with "bind" in its list of mount options.
    I.e., those are *not* dummy entries.  */
 #ifdef MOUNTED_GETMNTENT1
-#define ME_DUMMY(Fs_name, Fs_type, Fs_ent)      \
+#define ME_DUMMY(Fs_name, Fs_type, Bind)        \
   (ME_DUMMY_0 (Fs_name, Fs_type)                \
-   || (strcmp (Fs_type, "none") == 0            \
-       && !hasmntopt (Fs_ent, "bind")))
+   || (strcmp (Fs_type, "none") == 0 && !Bind))
 #else
 #define ME_DUMMY(Fs_name, Fs_type)              \
   (ME_DUMMY_0 (Fs_name, Fs_type) || strcmp (Fs_type, "none") == 0)
@@ -680,8 +679,14 @@ read_file_system_list (int need_fs_type)
                 me->me_type = g_strdup (mnt_fs_get_fstype (fs));
                 me->me_type_malloced = 1;
                 me->me_dev = mnt_fs_get_devno (fs);
-                me->me_dummy = mnt_fs_is_pseudofs (fs);
-                me->me_remote = mnt_fs_is_netfs (fs);
+                /* Note we don't use mnt_fs_is_pseudofs() or mnt_fs_is_netfs() here
+                   as libmount's classification is non-compatible currently.
+                   Also we pass "false" for the "Bind" option as that's only
+                   significant when the Fs_type is "none" which will not be
+                   the case when parsing "/proc/self/mountinfo", and only
+                   applies for static /etc/mtab files.  */
+                me->me_dummy = ME_DUMMY (me->me_devname, me->me_type, FALSE);
+                me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
 
                 /* Add to the linked list. */
                 *mtail = me;
@@ -703,14 +708,18 @@ read_file_system_list (int need_fs_type)
             if (fp == NULL)
                 return NULL;
 
-            while ((mnt = getmntent (fp)))
+            while ((mnt = getmntent (fp)) != NULL)
             {
+                gboolean bind;
+
+                bind = hasmntopt (mnt, "bind") != NULL;
+
                 me = g_malloc (sizeof (*me));
                 me->me_devname = g_strdup (mnt->mnt_fsname);
                 me->me_mountdir = g_strdup (mnt->mnt_dir);
                 me->me_type = g_strdup (mnt->mnt_type);
                 me->me_type_malloced = 1;
-                me->me_dummy = ME_DUMMY (me->me_devname, me->me_type, mnt);
+                me->me_dummy = ME_DUMMY (me->me_devname, me->me_type, bind);
                 me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
                 me->me_dev = dev_from_mount_options (mnt->mnt_opts);
 
