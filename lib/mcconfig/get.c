@@ -124,6 +124,15 @@ mc_config_get_string (mc_config_t * mc_config, const gchar * group,
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+/**
+ * Get a value as string of specified parameter.
+ *
+ * @param mc_config the configuration object
+ * @param group     the group of parameter
+ * @param param     the parameter name
+ * @param def       default value if parameterdoesn't exists
+ * @return a value of parameter
+ */
 
 gchar *
 mc_config_get_string_raw (const mc_config_t * mc_config, const gchar * group,
