@@ -25,9 +25,11 @@ typedef struct WButtonBar
 {
     Widget widget;
     gboolean visible;           /* Is it visible? */
+    gboolean use_keymap;        /* is the widget used Keymap(new, true) or keybind(old, false)? */
     struct
     {
         char *text;
+        const char *keymap_section;
         unsigned long command;
         Widget *receiver;
         int end_coord;          /* cumulative width of buttons so far */
@@ -41,6 +43,9 @@ struct global_keymap_t;
 /*** declarations of public functions ************************************************************/
 
 WButtonBar *buttonbar_new (gboolean visible);
+void
+buttonbar_init_button (WButtonBar * bb, int idx, const char *text,
+                       const char *keymap_section, const Widget * w);
 void buttonbar_set_label (WButtonBar * bb, int idx, const char *text,
                           const struct global_keymap_t *keymap, const Widget * receiver);
 WButtonBar *find_buttonbar (const WDialog * h);

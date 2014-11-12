@@ -38,6 +38,7 @@
 #include <string.h>
 
 #include "lib/global.h"
+#include "lib/keymap.h"
 
 #include "lib/tty/tty.h"
 #include "lib/tty/mouse.h"
@@ -144,13 +145,35 @@ set_label_text (WButtonBar * bb, int idx, const char *text)
 
 /* returns TRUE if a function has been called, FALSE otherwise. */
 static gboolean
-buttonbar_call (WButtonBar * bb, int i)
+buttonbar_call (WButtonBar * bb, int i, GError ** error)
 {
     cb_ret_t ret = MSG_NOT_HANDLED;
-    Widget *w = WIDGET (bb);
 
-    if ((bb != NULL) && (bb->labels[i].command != CK_IgnoreKey))
-        ret = send_message (w->owner, w, MSG_ACTION, bb->labels[i].command, bb->labels[i].receiver);
+    if (bb->use_keymap)
+    {
+        if (bb->labels[i].keymap_section != NULL)
+        {
+            event_return_t event_ret;
+
+            event_ret.b = TRUE;
+            if (mc_keymap_process_group
+                (bb->labels[i].keymap_section, bb->labels[i].command,
+                 (void *) bb->labels[i].receiver, &event_ret, error))
+                ret = (event_ret.b) ? MSG_HANDLED : MSG_NOT_HANDLED;
+        }
+    }
+    else
+    {
+        if ((bb != NULL) && (bb->labels[i].command != CK_IgnoreKey))
+        {
+            Widget *w = WIDGET (bb);
+
+            ret =
+                send_message (w->owner, w, MSG_ACTION, bb->labels[i].command,
+                              bb->labels[i].receiver);
+        }
+    }
+
     return ret;
 }
 
@@ -169,7 +192,7 @@ buttonbar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
 
     case MSG_HOTKEY:
         for (i = 0; i < BUTTONBAR_LABELS_NUM; i++)
-            if (parm == KEY_F (i + 1) && buttonbar_call (bb, i))
+            if (parm == KEY_F (i + 1) && buttonbar_call (bb, i, NULL))
                 return MSG_HANDLED;
         return MSG_NOT_HANDLED;
 
@@ -230,7 +253,7 @@ buttonbar_event (Gpm_Event * event, void *data)
         local = mouse_get_local (event, w);
         button = buttonbar_get_button_by_x_coord (bb, local.x - 1);
         if (button >= 0)
-            buttonbar_call (bb, button);
+            buttonbar_call (bb, button, NULL);
     }
 
     return MOU_NORMAL;
@@ -252,10 +275,40 @@ buttonbar_new (gboolean visible)
 
     w->pos_flags = WPOS_KEEP_HORZ | WPOS_KEEP_BOTTOM;
     bb->visible = visible;
+    bb->use_keymap = FALSE;
     widget_want_hotkey (w, TRUE);
     widget_want_cursor (w, FALSE);
 
     return bb;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Init one button in buttonbar. use keymap implementation.
+ *
+ * @param bb the ButtonBar object
+ * @param idx the buton index
+ * @param text the label of button
+ * @param keymap_section the keymap section for searching event
+ * @param receiver the widget
+ */
+
+void
+buttonbar_init_button (WButtonBar * bb, int idx, const char *text,
+                       const char *keymap_section, const Widget * w)
+{
+    if ((bb != NULL) && (idx >= 1) && (idx <= BUTTONBAR_LABELS_NUM))
+    {
+        bb->use_keymap = TRUE;
+        bb->labels[idx - 1].command = KEY_F (idx);
+        bb->labels[idx - 1].receiver = WIDGET (w);
+        bb->labels[idx - 1].keymap_section = keymap_section;
+
+        if ((text == NULL) || (text[0] == '\0'))
+            set_label_text (bb, idx, "");
+        else
+            set_label_text (bb, idx, text);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
