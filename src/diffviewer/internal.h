@@ -90,7 +90,7 @@ typedef struct WDiff
     int ndiff;                  /* number of hunks */
     DSRC dsrc;                  /* data source: memory or temporary file */
 
-    int view_quit:1;            /* Quit flag */
+    gboolean view_quit;         /* Quit flag */
 
     int height;
     int half1;
@@ -140,6 +140,7 @@ typedef struct WDiff
 /*** declarations of public functions ************************************************************/
 
 void mc_diffviewer_init_events (GError ** error);
+void mc_diffviewer_init_keymaps (GError ** error);
 
 /* search.c */
 gboolean mc_diffviewer_cmd_search (event_info_t * event_info, gpointer data, GError ** error);

@@ -4,6 +4,7 @@ libdiffviewer_la_SOURCES = \
 	events.c \
 	execute.c execute.h \
 	internal.h \
+	keymaps.c \
 	options.c options.h \
 	search.c \
 	tools.c \

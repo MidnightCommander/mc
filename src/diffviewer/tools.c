@@ -1585,6 +1585,9 @@ mc_diffviewer_update (WDiff * dview)
     int width2;
     int last;
 
+    if (dview->view_quit)
+        return;
+
     last = dview->a[DIFF_LEFT]->len - 1;
 
     if (dview->skip_rows > last)

@@ -44,6 +44,7 @@
 #include "lib/charsets.h"
 #endif
 #include "lib/event.h"          /* mc_event_raise() */
+#include "lib/keymap.h"
 
 #include "src/filemanager/cmd.h"        /* edit_file_at_line(), view_other_cmd() */
 #include "src/filemanager/panel.h"
@@ -149,7 +150,7 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
 
     dview->ndiff = ndiff;
 
-    dview->view_quit = 0;
+    dview->view_quit = FALSE;
 
     dview->bias = 0;
     dview->new_frame = 1;
@@ -192,13 +193,13 @@ dview_labels (WDiff * dview)
     h = d->owner;
     b = find_buttonbar (h);
 
-    buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), diff_map, d);
-    buttonbar_set_label (b, 2, Q_ ("ButtonBar|Save"), diff_map, d);
-    buttonbar_set_label (b, 4, Q_ ("ButtonBar|Edit"), diff_map, d);
-    buttonbar_set_label (b, 5, Q_ ("ButtonBar|Merge"), diff_map, d);
-    buttonbar_set_label (b, 7, Q_ ("ButtonBar|Search"), diff_map, d);
-    buttonbar_set_label (b, 9, Q_ ("ButtonBar|Options"), diff_map, d);
-    buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), diff_map, d);
+    buttonbar_init_button (b, 1, Q_ ("ButtonBar|Help"), KEYMAP_SECTION_DIFFVIEWER, d);
+    buttonbar_init_button (b, 2, Q_ ("ButtonBar|Save"), KEYMAP_SECTION_DIFFVIEWER, d);
+    buttonbar_init_button (b, 4, Q_ ("ButtonBar|Edit"), KEYMAP_SECTION_DIFFVIEWER, d);
+    buttonbar_init_button (b, 5, Q_ ("ButtonBar|Merge"), KEYMAP_SECTION_DIFFVIEWER, d);
+    buttonbar_init_button (b, 7, Q_ ("ButtonBar|Search"), KEYMAP_SECTION_DIFFVIEWER, d);
+    buttonbar_init_button (b, 9, Q_ ("ButtonBar|Options"), KEYMAP_SECTION_DIFFVIEWER, d);
+    buttonbar_init_button (b, 10, Q_ ("ButtonBar|Quit"), KEYMAP_SECTION_DIFFVIEWER, d);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -279,160 +280,26 @@ dview_ok_to_exit (WDiff * dview)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-static cb_ret_t
-dview_execute_cmd (WDiff * dview, unsigned long command)
-{
-    cb_ret_t res = MSG_NOT_HANDLED;
-    const char *event_name = NULL;
-    const char *event_group_name = MCEVENT_GROUP_DIFFVIEWER;
-
-    switch (command)
-    {
-    case CK_ShowSymbols:
-        event_name = "show_symbols";
-        break;
-    case CK_ShowNumbers:
-        event_name = "show_numbers";
-        break;
-    case CK_SplitFull:
-        event_name = "split_full";
-        break;
-    case CK_SplitEqual:
-        event_name = "split_equal";
-        break;
-    case CK_SplitMore:
-        event_name = "split_more";
-        break;
-    case CK_SplitLess:
-        event_name = "split_less";
-        break;
-    case CK_Tab2:
-        event_name = "tab_size_2";
-        break;
-    case CK_Tab3:
-        event_name = "tab_size_3";
-        break;
-    case CK_Tab4:
-        event_name = "tab_size_4";
-        break;
-    case CK_Tab8:
-        event_name = "tab_size_8";
-        break;
-    case CK_Swap:
-        event_name = "swap";
-        break;
-    case CK_Redo:
-        event_name = "redo";
-        break;
-    case CK_HunkNext:
-        event_name = "hunk_next";
-        break;
-    case CK_HunkPrev:
-        event_name = "hunk_prev";
-        break;
-    case CK_Goto:
-        event_name = "goto_line";
-        break;
-    case CK_Edit:
-        event_name = "edit_current";
-        break;
-    case CK_Merge:
-        event_name = "merge_from_left_to_right";
-        break;
-    case CK_MergeOther:
-        event_name = "merge_from_right_to_left";
-        break;
-    case CK_EditOther:
-        event_name = "edit_other";
-        break;
-    case CK_Search:
-        event_name = "search";
-        break;
-    case CK_SearchContinue:
-        event_name = "continue_search";
-        break;
-    case CK_Top:
-        event_name = "goto_top";
-        break;
-    case CK_Bottom:
-        event_name = "goto_bottom";
-        break;
-    case CK_Up:
-        event_name = "goto_up";
-        break;
-    case CK_Down:
-        event_name = "goto_down";
-        break;
-    case CK_PageDown:
-        event_name = "goto_page_down";
-        break;
-    case CK_PageUp:
-        event_name = "goto_page_up";
-        break;
-    case CK_Left:
-        event_name = "goto_left";
-        break;
-    case CK_Right:
-        event_name = "goto_right";
-        break;
-    case CK_LeftQuick:
-        event_name = "goto_left_quick";
-        break;
-    case CK_RightQuick:
-        event_name = "goto_right_quick";
-        break;
-    case CK_Home:
-        event_name = "goto_start_of_line";
-        break;
-    case CK_Shell:
-        event_group_name = MCEVENT_GROUP_FILEMANAGER;
-        event_name = "view_other";
-        res = MSG_HANDLED;
-        break;
-    case CK_Quit:
-        event_name = "quit";
-        break;
-    case CK_Save:
-        event_name = "save_changes";
-        break;
-    case CK_Options:
-        event_name = "options_show_dialog";
-        break;
-#ifdef HAVE_CHARSET
-    case CK_SelectCodepage:
-        event_name = "select_encoding_show_dialog";
-        break;
-#endif
-    case CK_Cancel:
-        /* don't close diffviewer due to SIGINT */
-        break;
-    default:;
-    }
-
-    if (event_name != NULL && mc_event_raise (event_group_name, event_name, dview, NULL, NULL))
-        res = MSG_HANDLED;
-
-    return res;
-}
-
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-dview_handle_key (WDiff * dview, int key)
+dview_handle_key (WDiff * dview, int key, GError ** error)
 {
-    unsigned long command;
+    cb_ret_t ret_value = MSG_NOT_HANDLED;
+    event_return_t ret;
 
 #ifdef HAVE_CHARSET
     key = convert_from_input_c (key);
 #endif
 
-    command = keybind_lookup_keymap_command (diff_map, key);
-    if ((command != CK_IgnoreKey) && (dview_execute_cmd (dview, command) == MSG_HANDLED))
-        return MSG_HANDLED;
+    ret.b = TRUE;
 
-    /* Key not used */
-    return MSG_NOT_HANDLED;
+    if (mc_keymap_process_group (KEYMAP_SECTION_DIFFVIEWER, key, (void *) dview, &ret, error))
+        ret_value = (ret.b) ? MSG_HANDLED : MSG_NOT_HANDLED;
+
+    mc_diffviewer_update (dview);
+
+    return ret_value;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -441,8 +308,6 @@ static cb_ret_t
 dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WDiff *dview = (WDiff *) w;
-    WDialog *h = w->owner;
-    cb_ret_t i;
 
     switch (msg)
     {
@@ -458,20 +323,7 @@ dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         return MSG_HANDLED;
 
     case MSG_KEY:
-        i = dview_handle_key (dview, parm);
-        if (dview->view_quit)
-            dlg_stop (h);
-        else
-            mc_diffviewer_update (dview);
-        return i;
-
-    case MSG_ACTION:
-        i = dview_execute_cmd (dview, parm);
-        if (dview->view_quit)
-            dlg_stop (h);
-        else
-            mc_diffviewer_update (dview);
-        return i;
+        return dview_handle_key (dview, parm, NULL);
 
     case MSG_DESTROY:
         mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "options_save", dview, NULL, NULL);
@@ -513,21 +365,6 @@ dview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, 
     case MSG_RESIZE:
         dview_adjust_size (h);
         return MSG_HANDLED;
-
-    case MSG_ACTION:
-        /* shortcut */
-        if (sender == NULL)
-            return dview_execute_cmd (NULL, parm);
-        /* message from buttonbar */
-        if (sender == WIDGET (find_buttonbar (h)))
-        {
-            if (data != NULL)
-                return send_message (data, NULL, MSG_ACTION, parm, NULL);
-
-            dview = (WDiff *) find_widget_type (h, dview_callback);
-            return dview_execute_cmd (dview, parm);
-        }
-        return MSG_NOT_HANDLED;
 
     case MSG_VALIDATE:
         dview = (WDiff *) find_widget_type (h, dview_callback);
@@ -696,6 +533,7 @@ void
 mc_diffviewer_init (GError ** error)
 {
     mc_diffviewer_init_events (error);
+    mc_diffviewer_init_keymaps (error);
 }
 
 /* --------------------------------------------------------------------------------------------- */

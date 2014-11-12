@@ -33,6 +33,7 @@
 #include <sys/stat.h>
 
 #include "lib/global.h"
+#include "lib/keymap.h"
 
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
@@ -721,7 +722,7 @@ load_setup_get_keymap_profile_config (gboolean load_from_file)
     char *fname, *fname2;
 
     /* 0) Create default keymap */
-    keymap_config = create_default_keymap ();
+    keymap_config = create_default_keymap (NULL);
     if (!load_from_file)
         return keymap_config;
 
@@ -1234,7 +1235,7 @@ load_anon_passwd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-load_keymap_defs (gboolean load_from_file)
+load_keymap_defs (gboolean load_from_file, GError ** error)
 {
     /*
      * Load keymap from GLOBAL_KEYMAP_FILE before ${XDG_CONFIG_HOME}/mc/mc.keymap, so that the user
@@ -1246,6 +1247,30 @@ load_keymap_defs (gboolean load_from_file)
 
     if (mc_global_keymap != NULL)
     {
+        char **keymap_sections, **section_name;
+
+        keymap_sections = mc_config_get_groups (mc_global_keymap, NULL);
+
+        for (section_name = keymap_sections; *section_name != NULL; section_name++)
+        {
+            char **keymap_names, **param_name;
+
+            keymap_names = mc_config_get_keys (mc_global_keymap, *section_name, NULL);
+            for (param_name = keymap_names; *param_name != NULL; param_name++)
+            {
+                char *value;
+
+                value =
+                    mc_config_get_string_raw (mc_global_keymap, *section_name, *param_name, NULL);
+
+                if (value != NULL)
+                    mc_keymap_bind_keycode (*section_name, *param_name, value, TRUE, error);
+            }
+            g_strfreev (keymap_names);
+        }
+        g_strfreev (keymap_sections);
+
+
         main_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section (KEYMAP_SECTION_MAIN, main_keymap, mc_global_keymap);
         main_x_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
@@ -1281,11 +1306,6 @@ load_keymap_defs (gboolean load_from_file)
         viewer_hex_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
         load_keymap_from_section (KEYMAP_SECTION_VIEWER_HEX, viewer_hex_keymap, mc_global_keymap);
 
-#ifdef USE_DIFF_VIEW
-        diff_keymap = g_array_new (TRUE, FALSE, sizeof (global_keymap_t));
-        load_keymap_from_section (KEYMAP_SECTION_DIFFVIEWER, diff_keymap, mc_global_keymap);
-#endif
-
         mc_config_deinit (mc_global_keymap);
     }
 
@@ -1303,9 +1323,6 @@ load_keymap_defs (gboolean load_from_file)
 #endif
     viewer_map = (global_keymap_t *) viewer_keymap->data;
     viewer_hex_map = (global_keymap_t *) viewer_hex_keymap->data;
-#ifdef USE_DIFF_VIEW
-    diff_map = (global_keymap_t *) diff_keymap->data;
-#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1339,10 +1356,6 @@ free_keymap_defs (void)
         g_array_free (viewer_keymap, TRUE);
     if (viewer_hex_keymap != NULL)
         g_array_free (viewer_hex_keymap, TRUE);
-#ifdef USE_DIFF_VIEW
-    if (diff_keymap != NULL)
-        g_array_free (diff_keymap, TRUE);
-#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -44,6 +44,7 @@
 #include "lib/global.h"
 
 #include "lib/event.h"
+#include "lib/keymap.h"
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"        /* For init_key() */
 #include "lib/tty/mouse.h"      /* init_mouse() */
@@ -291,6 +292,12 @@ main (int argc, char *argv[])
         goto startup_exit_falure;
     }
 
+    if (!mc_keymap_init (&mcerror))
+    {
+        mc_event_deinit (NULL);
+        goto startup_exit_falure;
+    }
+
     vfs_init ();
     vfs_plugins_init ();
 
@@ -366,7 +373,7 @@ main (int argc, char *argv[])
     /* Removing this from the X code let's us type C-c */
     load_key_defs ();
 
-    load_keymap_defs (!mc_args__nokeymap);
+    load_keymap_defs (!mc_args__nokeymap, &mcerror);
 
     macros_list = g_array_new (TRUE, FALSE, sizeof (macros_t));
 
@@ -434,6 +441,7 @@ main (int argc, char *argv[])
     tty_shutdown ();
 
     done_setup ();
+    mc_keymap_deinit (&mcerror);
 
     if (mc_global.tty.console_flag != '\0' && (quit & SUBSHELL_EXIT) == 0)
         handle_console (CONSOLE_RESTORE);

@@ -150,7 +150,7 @@ void load_key_defs (void);
 char *load_anon_passwd (void);
 #endif /* ENABLE_VFS_FTP */
 
-void load_keymap_defs (gboolean load_from_file);
+void load_keymap_defs (gboolean load_from_file, GError ** error);
 void free_keymap_defs (void);
 
 void panel_load_setup (WPanel * panel, const char *section);

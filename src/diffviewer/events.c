@@ -529,7 +529,8 @@ mc_diffviewer_cmd_quit (event_info_t * event_info, gpointer data, GError ** erro
     (void) event_info;
     (void) error;
 
-    dview->view_quit = 1;
+    dview->view_quit = TRUE;
+    dlg_stop (WIDGET (data)->owner);
 
     return TRUE;
 }

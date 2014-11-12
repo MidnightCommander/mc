@@ -29,8 +29,10 @@
 
 #include "lib/global.h"
 #include "lib/widget.h"         /* dialog_map, input_map, listbox_map */
+#include "lib/keymap.h"
 
 #include "keybind-defaults.h"
+
 
 /*** global variables ****************************************************************************/
 
@@ -48,9 +50,6 @@ GArray *editor_x_keymap = NULL;
 #endif
 GArray *viewer_keymap = NULL;
 GArray *viewer_hex_keymap = NULL;
-#ifdef USE_DIFF_VIEW
-GArray *diff_keymap = NULL;
-#endif
 
 const global_keymap_t *main_map = NULL;
 const global_keymap_t *main_x_map = NULL;
@@ -64,25 +63,17 @@ const global_keymap_t *editor_x_map = NULL;
 #endif
 const global_keymap_t *viewer_map = NULL;
 const global_keymap_t *viewer_hex_map = NULL;
-#ifdef USE_DIFF_VIEW
-const global_keymap_t *diff_map = NULL;
-#endif
 
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
 
 /* default keymaps in ini (key=value) format */
-typedef struct global_keymap_ini_t
-{
-    const char *key;
-    const char *value;
-} global_keymap_ini_t;
 
 /*** file scope variables ************************************************************************/
 
 /* midnight */
-static const global_keymap_ini_t default_main_keymap[] = {
+static const default_keymap_ini_t default_main_keymap[] = {
     {"Help", "f1"},
     {"UserMenu", "f2"},
     {"View", "f3"},
@@ -133,7 +124,7 @@ static const global_keymap_ini_t default_main_keymap[] = {
     {NULL, NULL}
 };
 
-static const global_keymap_ini_t default_main_x_keymap[] = {
+static const default_keymap_ini_t default_main_x_keymap[] = {
     {"CompareDirs", "d"},
 #ifdef USE_DIFF_VIEW
     {"CompareFiles", "ctrl-d"},
@@ -164,7 +155,7 @@ static const global_keymap_ini_t default_main_x_keymap[] = {
 };
 
 /* panel */
-static const global_keymap_ini_t default_panel_keymap[] = {
+static const default_keymap_ini_t default_panel_keymap[] = {
     {"PanelOtherCd", "alt-o"},
     {"PanelOtherCdLink", "alt-l"},
     {"CopySingle", "f15"},
@@ -204,7 +195,7 @@ static const global_keymap_ini_t default_panel_keymap[] = {
 };
 
 /* dialog */
-static const global_keymap_ini_t default_dialog_keymap[] = {
+static const default_keymap_ini_t default_dialog_keymap[] = {
     {"Ok", "enter"},
     {"Cancel", "f10; esc; ctrl-g"},
     {"Up", "up; left"},
@@ -223,7 +214,7 @@ static const global_keymap_ini_t default_dialog_keymap[] = {
 };
 
 /* input line */
-static const global_keymap_ini_t default_input_keymap[] = {
+static const default_keymap_ini_t default_input_keymap[] = {
     /* Motion */
     {"Home", "ctrl-a; alt-lt; home; a1"},
     {"End", "ctrl-e; alt-gt; end; c1"},
@@ -258,7 +249,7 @@ static const global_keymap_ini_t default_input_keymap[] = {
 };
 
 /* listbox */
-static const global_keymap_ini_t default_listbox_keymap[] = {
+static const default_keymap_ini_t default_listbox_keymap[] = {
     {"Up", "up; ctrl-p"},
     {"Down", "down; ctrl-n"},
     {"Top", "home; alt-lt; a1"},
@@ -271,7 +262,7 @@ static const global_keymap_ini_t default_listbox_keymap[] = {
 };
 
 /* tree */
-static const global_keymap_ini_t default_tree_keymap[] = {
+static const default_keymap_ini_t default_tree_keymap[] = {
     {"Help = f1"},
     {"Rescan = f2; ctrl-r"},
     {"Forget = f3"},
@@ -296,7 +287,7 @@ static const global_keymap_ini_t default_tree_keymap[] = {
 };
 
 /* help */
-static const global_keymap_ini_t default_help_keymap[] = {
+static const default_keymap_ini_t default_help_keymap[] = {
     {"Help", "f1"},
     {"Index", "f2; c"},
     {"Back", "f3; left; l"},
@@ -318,7 +309,7 @@ static const global_keymap_ini_t default_help_keymap[] = {
 };
 
 #ifdef USE_INTERNAL_EDIT
-static const global_keymap_ini_t default_editor_keymap[] = {
+static const default_keymap_ini_t default_editor_keymap[] = {
     {"Enter", "enter"},
     {"Return", "shift-enter; ctrl-enter; ctrl-shift-enter"},    /* useful for pasting multiline text */
     {"Tab", "tab; shift-tab; ctrl-tab; ctrl-shift-tab"},        /* ditto */
@@ -423,13 +414,13 @@ static const global_keymap_ini_t default_editor_keymap[] = {
 };
 
 /* emacs keyboard layout emulation */
-static const global_keymap_ini_t default_editor_x_keymap[] = {
+static const default_keymap_ini_t default_editor_x_keymap[] = {
     {NULL, NULL}
 };
 #endif /* USE_INTERNAL_EDIT */
 
 /* viewer */
-static const global_keymap_ini_t default_viewer_keymap[] = {
+static const default_keymap_ini_t default_viewer_keymap[] = {
     {"Help", "f1"},
     {"WrapMode", "f2"},
     {"Quit", "f3; f10; q; esc"},
@@ -470,7 +461,7 @@ static const global_keymap_ini_t default_viewer_keymap[] = {
 };
 
 /* hex viewer */
-static const global_keymap_ini_t default_viewer_hex_keymap[] = {
+static const default_keymap_ini_t default_viewer_hex_keymap[] = {
     {"Help", "f1"},
     {"HexEditMode", "f2"},
     {"Quit", "f3; f10; q; esc"},
@@ -503,53 +494,10 @@ static const global_keymap_ini_t default_viewer_hex_keymap[] = {
     {NULL, NULL}
 };
 
-#ifdef  USE_DIFF_VIEW
-/* diff viewer */
-static const global_keymap_ini_t default_diff_keymap[] = {
-    {"ShowSymbols", "alt-s; s"},
-    {"ShowNumbers", "alt-n; l"},
-    {"SplitFull", "f"},
-    {"SplitEqual", "equal"},
-    {"SplitMore", "gt"},
-    {"SplitLess", "lt"},
-    {"Tab2", "2"},
-    {"Tab3", "3"},
-    {"Tab4", "4"},
-    {"Tab8", "8"},
-    {"Swap", "ctrl-u"},
-    {"Redo", "ctrl-r"},
-    {"HunkNext", "n; enter; space"},
-    {"HunkPrev", "p; backspace"},
-    {"Goto", "g; shift-g"},
-    {"Save", "f2"},
-    {"Edit", "f4"},
-    {"EditOther", "f14"},
-    {"Merge", "f5"},
-    {"MergeOther", "f15"},
-    {"Search", "f7"},
-    {"SearchContinue", "f17"},
-    {"Options", "f9"},
-    {"Top", "ctrl-home"},
-    {"Bottom", "ctrl-end"},
-    {"Down", "down"},
-    {"Up", "up"},
-    {"LeftQuick", "ctrl-left"},
-    {"RightQuick", "ctrl-right"},
-    {"Left", "left"},
-    {"Right", "right"},
-    {"PageDown", "pgdn"},
-    {"PageUp", "pgup"},
-    {"Home", "home"},
-    {"End", "end"},
-    {"Help", "f1"},
-    {"Quit", "f10; q; shift-q; esc"},
-#ifdef HAVE_CHARSET
-    {"SelectCodepage", "alt-e"},
-#endif
-    {"Shell", "ctrl-o"},
+static const mc_keymap_event_init_t mc_keymap_event_defaults[] = {
     {NULL, NULL}
 };
-#endif
+
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -562,7 +510,7 @@ static const global_keymap_ini_t default_diff_keymap[] = {
 
 static void
 create_default_keymap_section (mc_config_t * keymap, const char *section,
-                               const global_keymap_ini_t * k)
+                               const default_keymap_ini_t * k)
 {
     size_t i;
 
@@ -574,8 +522,20 @@ create_default_keymap_section (mc_config_t * keymap, const char *section,
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+void
+mc_core_keybind_mass_init (const char *keymap_group, const default_keymap_ini_t * k,
+                           gboolean isDeleteOld, GError ** error)
+{
+    size_t i;
+
+    for (i = 0; k[i].key != NULL; i++)
+        mc_keymap_bind_keycode (keymap_group, k[i].key, k[i].value, isDeleteOld, error);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 mc_config_t *
-create_default_keymap (void)
+create_default_keymap (GError ** error)
 {
     mc_config_t *keymap;
 
@@ -595,9 +555,10 @@ create_default_keymap (void)
 #endif
     create_default_keymap_section (keymap, KEYMAP_SECTION_VIEWER, default_viewer_keymap);
     create_default_keymap_section (keymap, KEYMAP_SECTION_VIEWER_HEX, default_viewer_hex_keymap);
-#ifdef  USE_DIFF_VIEW
-    create_default_keymap_section (keymap, KEYMAP_SECTION_DIFFVIEWER, default_diff_keymap);
-#endif
+
+    mc_keymap_mass_bind_event (mc_keymap_event_defaults, error);
 
     return keymap;
 }
+
+/* --------------------------------------------------------------------------------------------- */
