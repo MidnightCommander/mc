@@ -6,6 +6,7 @@
 
    Written by:
    Ilia Maslakov <il.smind@gmail.com>, 2010.
+   Andrew Borodin <aborodin@vmail.ru>, 2014.
 
    This file is part of the Midnight Commander.
 
@@ -93,7 +94,8 @@ gboolean
 clipboard_file_from_ext_clip (const gchar * event_group_name, const gchar * event_name,
                               gpointer init_data, gpointer data)
 {
-    char *tmp, *cmd;
+    mc_pipe_t *p;
+    int file = -1;
     const char *d = getenv ("DISPLAY");
 
     (void) event_group_name;
@@ -104,14 +106,60 @@ clipboard_file_from_ext_clip (const gchar * event_group_name, const gchar * even
     if (d == NULL || clipboard_paste_path == NULL || clipboard_paste_path[0] == '\0')
         return TRUE;
 
-    tmp = mc_config_get_full_path (EDIT_CLIP_FILE);
-    cmd = g_strconcat (clipboard_paste_path, " > ", tmp, " 2>/dev/null", (char *) NULL);
+    p = mc_popen (clipboard_paste_path, NULL);
+    if (p == NULL)
+        return TRUE;    /* don't show error message */
 
-    if (cmd != NULL)
-        my_system (EXECUTE_AS_SHELL, mc_global.tty.shell, cmd);
+    p->out.null_term = FALSE;
+    p->err.null_term = TRUE;
 
-    g_free (cmd);
-    g_free (tmp);
+    while (TRUE)
+    {
+        GError *error = NULL;
+
+        p->out.len = MC_PIPE_BUFSIZE;
+        p->err.len = MC_PIPE_BUFSIZE;
+
+        mc_pread (p, &error);
+
+        if (error != NULL)
+        {
+            /* don't show error message */
+            g_error_free (error);
+            break;
+        }
+
+        /* ignore stderr and get stdout */
+        if (p->out.len == MC_PIPE_STREAM_EOF || p->out.len == MC_PIPE_ERROR_READ)
+            break;
+
+        if (p->out.len > 0)
+        {
+            ssize_t nwrite;
+
+            if (file < 0)
+            {
+                vfs_path_t *fname_vpath;
+
+                fname_vpath = mc_config_get_full_vpath (EDIT_CLIP_FILE);
+                file = mc_open (fname_vpath, O_CREAT | O_WRONLY | O_TRUNC,
+                                S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH | O_BINARY);
+                vfs_path_free (fname_vpath);
+
+                if (file < 0)
+                    break;
+            }
+
+            nwrite = mc_write (file, p->out.buf, p->out.len);
+            (void) nwrite;
+        }
+    }
+
+    if (file >= 0)
+        mc_close (file);
+
+    mc_pclose (p, NULL);
+
     return TRUE;
 }
 
