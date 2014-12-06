@@ -25,6 +25,10 @@
 
 #define TEST_SUITE_NAME "src/editor/detect_linebreaks"
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
 #include <check.h>
 
 #include <config.h>
@@ -57,22 +61,9 @@ teardown (void)
 START_TEST (test_detect_lb_type)
 {
     LineBreaks result;
-    /* prepare for test */
-    int fd = open (filename, O_WRONLY|O_CREAT, 0644);
-    int i;
-    if (fd == -1)
-    {
-        fail("unable to create test input file %s",filename);
-        return;
-    }
-    for (i = 0;i<200;i++)
-    {
-        write (fd, "Test for detect line break\r\n", 29);
-    }
-    write (fd, "\r\n", 2);
-    close(fd);
+    char buf[] = "Test for detect line break\r\n";
 
-    result = detect_lb_type ((char *) filename);
+    result = detect_lb_type_buf ((unsigned char *) buf, strlen(buf));
     fail_unless(result == LB_WIN, "Incorrect lineBreak: result(%d) != LB_WIN(%d)",result, LB_WIN);
 
     unlink(filename);
@@ -84,25 +75,16 @@ END_TEST
 START_TEST (test_detect_lb_type_very_long_string)
 {
     LineBreaks result;
-    /* prepare for test */
-    int fd = open (filename, O_WRONLY|O_CREAT, 0644);
+    char buf[1024] = "";
     int i;
-    if (fd == -1)
-    {
-        fail("unable to create test input file %s",filename);
-        return;
-    }
     for (i = 0; i<20 ; i++)
     {
-        write (fd, "Very long string. ", 18);
+        strcat (buf, "Very long string. ");
     }
-    write (fd, "\r\n", 2);
-    close(fd);
+    strcat (buf, "\r\n");
 
-    result = detect_lb_type ((char *) filename);
+    result = detect_lb_type_buf ((unsigned char *) buf, strlen(buf));
     fail_unless(result == LB_WIN, "Incorrect lineBreak: result(%d) != LB_WIN(%d)",result, LB_WIN);
-
-    unlink(filename);
 }
 END_TEST
 
@@ -111,20 +93,11 @@ END_TEST
 START_TEST (test_detect_lb_type_rrrrrn)
 {
     LineBreaks result;
-    /* prepare for test */
-    int fd = open (filename, O_WRONLY|O_CREAT, 0644);
-    if (fd == -1)
-    {
-        fail("unable to create test input file %s",filename);
-        return;
-    }
-    write (fd, "test\r\r\r\r\r\n", 10);
-    close(fd);
+    char buf[1024] = "";
+    strcat (buf, "test\r\r\r\r\r\n");
 
-    result = detect_lb_type ((char *) filename);
-    fail_unless(result == LB_MAC, "Incorrect lineBreak: result(%d) != LB_MAC(%d)",result, LB_MAC);
-
-    unlink(filename);
+    result = detect_lb_type_buf ((unsigned char *) buf, strlen(buf));
+    fail_unless(result == LB_ASIS, "Incorrect lineBreak: result(%d) != LB_ASIS(%d)", result, LB_ASIS);
 }
 END_TEST
 
@@ -133,20 +106,22 @@ END_TEST
 START_TEST (test_detect_lb_type_nnnnnr)
 {
     LineBreaks result;
-    /* prepare for test */
-    int fd = open (filename, O_WRONLY|O_CREAT, 0644);
-    if (fd == -1)
-    {
-        fail("unable to create test input file %s",filename);
-        return;
-    }
-    write (fd, "test\n\n\n\n\n\r", 10);
-    close(fd);
+    char buf[] = "test\n\n\n\n\n\r  ";
 
-    result = detect_lb_type ((char *) filename);
+    result = detect_lb_type_buf ((unsigned char *) buf, strlen(buf));
     fail_unless(result == LB_ASIS, "Incorrect lineBreak: result(%d) != LB_ASIS(%d)",result, LB_ASIS);
+}
+END_TEST
 
-    unlink(filename);
+/* --------------------------------------------------------------------------------------------- */
+
+START_TEST (test_detect_lb_type_nnnrnrnnnn)
+{
+    LineBreaks result;
+    char buf[] = "test\n\n\n\r\n\r\n\r\n\n\n\n";
+
+    result = detect_lb_type_buf ((unsigned char *) buf, strlen(buf));
+    fail_unless(result == LB_ASIS, "Incorrect lineBreak: result(%d) != LB_ASIS(%d)",result, LB_ASIS);
 }
 END_TEST
 
@@ -155,20 +130,10 @@ END_TEST
 START_TEST (test_detect_lb_type_rrrrrr)
 {
     LineBreaks result;
-    /* prepare for test */
-    int fd = open (filename, O_WRONLY|O_CREAT, 0644);
-    if (fd == -1)
-    {
-        fail("unable to create test input file %s",filename);
-        return;
-    }
-    write (fd, "test\r\r\r\r\r\r", 10);
-    close(fd);
+    char buf[1024] = "test\r\r\r\r\r\r";
 
-    result = detect_lb_type ((char *) filename);
-    fail_unless(result == LB_MAC, "Incorrect lineBreak: result(%d) != LB_MAC(%d)",result, LB_MAC);
-
-    unlink(filename);
+    result = detect_lb_type_buf ((unsigned char *) buf, strlen(buf));
+    fail_unless(result == LB_MAC, "Incorrect lineBreak: result(%d) != LB_MAC(%d)", result, LB_MAC);
 }
 END_TEST
 
@@ -177,20 +142,10 @@ END_TEST
 START_TEST (test_detect_lb_type_nnnnnn)
 {
     LineBreaks result;
-    /* prepare for test */
-    int fd = open (filename, O_WRONLY|O_CREAT, 0644);
-    if (fd == -1)
-    {
-        fail("unable to create test input file %s",filename);
-        return;
-    }
-    write (fd, "test\n\n\n\n\n\n", 10);
-    close(fd);
+    char buf[1024] = "test\n\n\n\n\n\n";
 
-    result = detect_lb_type ((char *) filename);
-    fail_unless(result == LB_ASIS, "Incorrect lineBreak: result(%d) != LB_ASIS(%d)",result, LB_ASIS);
-
-    unlink(filename);
+    result = detect_lb_type_buf ((unsigned char *) buf, strlen(buf));
+    fail_unless(result == LB_ASIS, "Incorrect lineBreak: result(%d) != LB_ASIS(%d)", result, LB_ASIS);
 }
 END_TEST
 
@@ -199,25 +154,15 @@ END_TEST
 START_TEST (test_detect_lb_type_buffer_border)
 {
     LineBreaks result;
-    char buf[DETECT_LB_TYPE_BUFLEN];
-    /* prepare for test */
-    int fd = open (filename, O_WRONLY|O_CREAT, 0644);
-    if (fd == -1)
-    {
-        fail("unable to create test input file %s",filename);
-        return;
-    }
+    char buf[DETECT_LB_TYPE_BUFLEN + 100];
     memset(buf, ' ', DETECT_LB_TYPE_BUFLEN);
+    buf[DETECT_LB_TYPE_BUFLEN - 101] = '\r';
+    buf[DETECT_LB_TYPE_BUFLEN - 100] = '\n';
     buf[DETECT_LB_TYPE_BUFLEN - 1] = '\r';
+    buf[DETECT_LB_TYPE_BUFLEN] = '\n';
 
-    write (fd, buf, DETECT_LB_TYPE_BUFLEN);
-    write (fd, "\n", 1);
-    close(fd);
-
-    result = detect_lb_type ((char *) filename);
-    fail_unless(result == LB_WIN, "Incorrect lineBreak: result(%d) != LB_WIN(%d)",result, LB_WIN);
-
-    unlink(filename);
+    result = detect_lb_type_buf ((unsigned char *) buf, DETECT_LB_TYPE_BUFLEN);
+    fail_unless(result == LB_WIN, "Incorrect lineBreak: result(%d) != LB_WIN(%d)", result, LB_WIN);
 }
 END_TEST
 
@@ -226,25 +171,15 @@ END_TEST
 START_TEST (test_detect_lb_type_buffer_border_overflow)
 {
     LineBreaks result;
-    char buf[DETECT_LB_TYPE_BUFLEN];
-    /* prepare for test */
-    int fd = open (filename, O_WRONLY|O_CREAT, 0644);
-    if (fd == -1)
-    {
-        fail("unable to create test input file %s",filename);
-        return;
-    }
+    char buf[DETECT_LB_TYPE_BUFLEN + 100];
     memset(buf, ' ', DETECT_LB_TYPE_BUFLEN);
+    buf[DETECT_LB_TYPE_BUFLEN - 100] = '\r';
     buf[DETECT_LB_TYPE_BUFLEN - 1] = '\r';
 
-    write (fd, buf, DETECT_LB_TYPE_BUFLEN);
-    write (fd, "bla-bla\r\n", 9);
-    close(fd);
+    strcat (buf, "bla-bla\r\n");
 
-    result = detect_lb_type ((char *) filename);
+    result = detect_lb_type_buf ((unsigned char *) buf, DETECT_LB_TYPE_BUFLEN);
     fail_unless(result == LB_MAC, "Incorrect lineBreak: result(%d) != LB_MAC(%d)",result, LB_MAC);
-
-    unlink(filename);
 }
 END_TEST
 
@@ -253,24 +188,13 @@ END_TEST
 START_TEST (test_detect_lb_type_buffer_border_more)
 {
     LineBreaks result;
-    char buf[DETECT_LB_TYPE_BUFLEN];
-    /* prepare for test */
-    int fd = open (filename, O_WRONLY|O_CREAT, 0644);
-    if (fd == -1)
-    {
-        fail("unable to create test input file %s",filename);
-        return;
-    }
+    char buf[DETECT_LB_TYPE_BUFLEN + 100];
     memset(buf, ' ', DETECT_LB_TYPE_BUFLEN);
 
-    write (fd, buf, DETECT_LB_TYPE_BUFLEN);
-    write (fd, "bla-bla\n", 8);
-    close(fd);
+    strcat (buf, "bla-bla\n");
 
-    result = detect_lb_type ((char *) filename);
+    result = detect_lb_type_buf ((unsigned char *) buf, strlen(buf));
     fail_unless(result == LB_ASIS, "Incorrect lineBreak: result(%d) != LB_ASIS(%d)",result, LB_ASIS);
-
-    unlink(filename);
 }
 END_TEST
 
@@ -292,6 +216,7 @@ main (void)
     tcase_add_test (tc_core, test_detect_lb_type_very_long_string);
     tcase_add_test (tc_core, test_detect_lb_type_rrrrrn);
     tcase_add_test (tc_core, test_detect_lb_type_nnnnnr);
+    tcase_add_test (tc_core, test_detect_lb_type_nnnrnrnnnn);
     tcase_add_test (tc_core, test_detect_lb_type_rrrrrr);
     tcase_add_test (tc_core, test_detect_lb_type_nnnnnn);
     tcase_add_test (tc_core, test_detect_lb_type_buffer_border);

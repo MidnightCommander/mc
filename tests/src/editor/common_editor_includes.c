@@ -23,7 +23,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "edit-widget.h"
+#include "editwidget.h"
 #include "lib/global.h"
 #include "lib/keybind.h"
 
@@ -50,13 +50,6 @@ user_menu_cmd (struct WEdit *edit_widget, const char *menu_file, int selected_en
     (void) selected_entry;
     return TRUE;
 }
-static int
-check_for_default (const char *default_file, const char *file)
-{
-    (void) default_file;
-    (void) file;
-    return 0;
-}
 static void
 save_setup_cmd (void)
 {
@@ -77,11 +70,9 @@ view_other_cmd (void)
 #include "editcmd.c"
 #include "editwidget.c"
 #include "editdraw.c"
-#include "editkeys.c"
 #include "editmenu.c"
 #include "editoptions.c"
 #include "syntax.c"
-#include "wordproc.c"
 #include "choosesyntax.c"
 #include "etags.c"
 #include "editcmd_dialogs.c"
