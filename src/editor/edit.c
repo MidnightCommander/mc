@@ -388,9 +388,61 @@ check_file_access (WEdit * edit, const vfs_path_t * filename_vpath, struct stat 
 /* --------------------------------------------------------------------------------------------- */
 
 static LineBreaks
+detect_lb_type_buf (unsigned char *p, ssize_t sz)
+{
+    LineBreaks detected_lb = LB_ASIS;
+
+    /* If there was error or file too short, give up */
+    if (sz <= 2)
+        return LB_ASIS;
+
+    p[(size_t) sz] = '\0';
+    /* Avoid ambiguity of our buffer breaking CR LF sequence */
+    if (p[sz - 1] == '\r') {
+        p[--sz] = '\0';
+    }
+
+    for (; sz--; p++) {
+        LineBreaks new_lb = LB_ASIS;
+        if (*p == '\r') {
+            if (p[1] == '\n') {
+                sz--; p++;
+                new_lb = LB_WIN;
+            } else {
+                new_lb = LB_MAC;
+            }
+        } else if (*p == '\n') {
+            /* LF CR is anomaly for text file, give up */
+            if (p[1] == '\r')
+                return LB_ASIS;
+            new_lb = LB_UNIX;
+        } else if (*p < 0x20 && *p != '\t' && *p != '\f') {
+            /* The only common special char in text files is  tab, much
+               less commonly - form feed. Anything else - give up. */
+            return LB_ASIS;
+        }
+
+        /* If we detected a new lb, and it doesn't match previously
+           detected, give up */
+        if (new_lb != LB_ASIS) {
+            if (detected_lb != LB_ASIS && detected_lb != new_lb) {
+                return LB_ASIS;
+            }
+            detected_lb = new_lb;
+        }
+    }
+
+    /* LB_UNIX means that within buffer, we saw only LF breaks, but
+       we cannot be sure about entire file. So, go conservative route
+       and don't report to user in UI that this file has unix line
+       breaks. */
+    return detected_lb == LB_UNIX ? LB_ASIS : detected_lb;
+}
+
+static LineBreaks
 detect_lb_type (const vfs_path_t *filename_vpath)
 {
-    char buf[BUF_MEDIUM];
+    unsigned char buf[BUF_LARGE];
     ssize_t file, sz;
 
     file = mc_open (filename_vpath, O_RDONLY | O_BINARY);
@@ -400,15 +452,7 @@ detect_lb_type (const vfs_path_t *filename_vpath)
     sz = mc_read (file, buf, sizeof (buf) - 1);
     mc_close (file);
 
-    if (sz <= 0)
-        return LB_ASIS;
-
-    buf[(size_t) sz] = '\0';
-    if (strstr (buf, "\r\n") != NULL)
-        return LB_WIN;
-    if (strchr (buf, '\r') != NULL)
-        return LB_MAC;
-    return LB_ASIS;
+    return detect_lb_type_buf (buf, sz);
 }
 
 /* --------------------------------------------------------------------------------------------- */
