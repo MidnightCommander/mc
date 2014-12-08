@@ -28,6 +28,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/types.h>
+#include <fcntl.h>
 
 #include "lib/global.h"
 #include "lib/fileloc.h"
@@ -53,6 +55,10 @@ char *clipboard_paste_path = NULL;
 
 /*** file scope variables ************************************************************************/
 
+static const int clip_open_flags = O_CREAT | O_WRONLY | O_TRUNC | O_BINARY;
+static const mode_t clip_open_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -142,8 +148,7 @@ clipboard_file_from_ext_clip (const gchar * event_group_name, const gchar * even
                 vfs_path_t *fname_vpath;
 
                 fname_vpath = mc_config_get_full_vpath (EDIT_CLIP_FILE);
-                file = mc_open (fname_vpath, O_CREAT | O_WRONLY | O_TRUNC,
-                                S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH | O_BINARY);
+                file = mc_open (fname_vpath, clip_open_flags, clip_open_mode);
                 vfs_path_free (fname_vpath);
 
                 if (file < 0)
@@ -183,8 +188,7 @@ clipboard_text_to_file (const gchar * event_group_name, const gchar * event_name
         return FALSE;
 
     fname_vpath = mc_config_get_full_vpath (EDIT_CLIP_FILE);
-    file = mc_open (fname_vpath, O_CREAT | O_WRONLY | O_TRUNC,
-                    S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH | O_BINARY);
+    file = mc_open (fname_vpath, clip_open_flags, clip_open_mode);
     vfs_path_free (fname_vpath);
 
     if (file == -1)
