@@ -4108,7 +4108,7 @@ utility like 'xclip' to read text into X selection from file.
 For example:
 .PP
 .nf
-clipboard_store=xclip \-i
+clipboard_store=/usr/bin/xclip \-i
 .fi
 .TP
 .I clipboard_paste
@@ -4117,7 +4117,7 @@ utility like 'xclip' to print the selection to standard out.
 For example:
 .PP
 .nf
-clipboard_paste=xclip \-o
+clipboard_paste=/usr/bin/xclip \-o
 .fi
 .TP
 .I autodetect_codeset
