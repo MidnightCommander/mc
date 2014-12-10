@@ -4,8 +4,7 @@
 #
 # Translators:
 # Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# and Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999
+# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999, 2014
 # Evgeny Bulgakov <bgav@netvision.net.il>, 1999
 # Sergey Panov <sipan@mit.edu>, 1999
 # Valek Filippov <frob@df.ru>, 2000
@@ -98,7 +97,7 @@ msgid ""
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 msgstr ""
 "Ваши старые настройки перенесены из %s\n"
-"в директории, рекомендованные FreeDesktop.org.\n"
+"в каталоги, рекомендованные FreeDesktop.org.\n"
 "Для более полной информации посетите страницу\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 
@@ -4010,7 +4009,7 @@ msgstr "Передача успешно прервана."
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: отсоединение от %s"
+msgstr "ftpfs: отключение от %s"
 
 #, c-format
 msgid "FTP: Password required for %s"
@@ -4027,7 +4026,7 @@ msgid "FTP: Account required for user %s"
 msgstr "FTP: Необходима учётная запись для пользователя %s"
 
 msgid "Account:"
-msgstr "Счет:"
+msgstr "Учётная запись:"
 
 msgid "ftpfs: sending user account"
 msgstr "ftpfs: посылается учётная запись пользователя"

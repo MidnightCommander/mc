@@ -722,6 +722,9 @@ msgid ""
 "Please send any bug reports (including the output of 'mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
+"\n"
+"Створюйте будь-які повідомлення про помилки (включаючи вивід «mc -V»)\n"
+"як квитки на сайті www.midnight-commander.org\n"
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
@@ -761,8 +764,8 @@ msgid ""
 "Background process sent us a request for more arguments\n"
 "than we can handle."
 msgstr ""
-"Фоновий процес запитує більше аргументів, \n"
-" ніж можна контролювати."
+"Фоновий процес запитує більше аргументів,\n"
+"ніж можна контролювати."
 
 msgid "&Dismiss"
 msgstr "&Закрити"
@@ -951,7 +954,8 @@ msgstr "«%s» не є звичайним файлом"
 msgid ""
 "File \"%s\" is too large.\n"
 "Open it anyway?"
-msgstr ""
+msgstr "Файл «%s» занадто великий.\n"
+"Відкрити його будь що?"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1135,7 +1139,7 @@ msgstr ""
 "Зберегти змінений файл %s?"
 
 msgid "This function is not implemented"
-msgstr "Цю функція ще не реалізовано"
+msgstr "Цю функцію ще не реалізовано"
 
 msgid "Copy to clipboard"
 msgstr "Скопіювати у буфер"
@@ -1997,7 +2001,7 @@ msgid "FTP anonymous password:"
 msgstr "FTP палоль для аноніма:"
 
 msgid "FTP directory cache timeout (sec):"
-msgstr "Таймаут кешування директорії  для FTP (сек):"
+msgstr "Таймаут кешування каталогу для FTP (сек):"
 
 msgid "&Always use ftp proxy:"
 msgstr "&Завжди використовувати ftp проксі:"
@@ -2197,7 +2201,7 @@ msgid "Filter command and arguments:"
 msgstr "Введіть команду та її аргументи:"
 
 msgid "Edit file"
-msgstr ""
+msgstr "Редагувати файл"
 
 msgid "Create a new Directory"
 msgstr "Створити новий каталог"
@@ -2251,7 +2255,7 @@ msgstr ""
 
 #, c-format
 msgid "Symlink '%s' points to:"
-msgstr ""
+msgstr "Символьне посилання «%s» вказує на:"
 
 msgid "Edit symlink"
 msgstr "Редагувати символьне посилання"
@@ -2266,7 +2270,7 @@ msgstr "редагування символьного посилання: %s"
 
 #, c-format
 msgid "'%s' is not a symbolic link"
-msgstr ""
+msgstr "«%s» не є символьним посиланням"
 
 msgid "FTP to machine"
 msgstr "FTP-з’єднання з віддаленою машиною"
@@ -2640,7 +2644,7 @@ msgid ""
 "Cannot stat source directory \"%s\"\n"
 "%s"
 msgstr ""
-"Не вдавдалосяться отримати властивості вихідного каталогу «%s»\n"
+"Не вдалося отримати властивості вихідного каталогу «%s»\n"
 "%s"
 
 #, c-format
@@ -2664,7 +2668,7 @@ msgid ""
 "Destination \"%s\" must be a directory\n"
 "%s"
 msgstr ""
-"Призначення «%s» повинно бути каталогом\n"
+"Призначення «%s» має бути каталогом\n"
 "%s"
 
 #, c-format
@@ -2711,7 +2715,7 @@ msgstr ""
 
 #, c-format
 msgid "Directories: %zd, total size: %s"
-msgstr ""
+msgstr "Каталоги: %zd, загальний розмір: %s"
 
 msgid "Cannot operate on \"..\"!"
 msgstr "Не можна виконувати операції з «..»"
@@ -2925,7 +2929,7 @@ msgid "Change &to"
 msgstr "Змінити &на"
 
 msgid "&Free VFSs now"
-msgstr "Зараз вільно VFSs"
+msgstr "Звільнити VFSs"
 
 msgid "&Refresh"
 msgstr "&Оновити"
@@ -4144,7 +4148,7 @@ msgid "sftp: Failure establishing SSH session: (%d)"
 msgstr "sftp: Невдача при встановленні SSH сессії: (%d)"
 
 msgid "sftp: No file handler data present for reading file"
-msgstr "sftp: Немає даних про  оброблювач для читання файлу"
+msgstr "sftp: Немає даних про оброблювач для читання файлу"
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
@@ -4156,8 +4160,7 @@ msgstr "sftp: Створення списку завершено."
 #, c-format
 msgid "reconnect to %s failed"
 msgstr ""
-"сталася помилка повторного з’єднання з %s\n"
-" "
+"сталася помилка повторного з’єднання з %s"
 
 msgid "Authentication failed"
 msgstr "Сталася помилка авторизації "
@@ -4391,7 +4394,7 @@ msgid "Continue from beginning?"
 msgstr "Почати спочатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr ""
+msgstr "Не вдалося отримати локальну копію /ftp://some.host/editme.txt"
 
 #~ msgid "sftp: Invalid port value."
 #~ msgstr "sftp: Неправильний порт."
