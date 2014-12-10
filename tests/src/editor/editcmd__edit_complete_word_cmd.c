@@ -48,7 +48,7 @@ static WEdit *test_edit;
 /* --------------------------------------------------------------------------------------------- */
 /* @Mock */
 void
-edit_load_syntax (WEdit * _edit, char ***_pnames, const char *_type)
+edit_load_syntax (WEdit * _edit, GPtrArray * _pnames, const char *_type)
 {
     (void) _edit;
     (void) _pnames;

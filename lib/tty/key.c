@@ -174,6 +174,7 @@ const key_code_name_t key_name_conv_tab[] = {
     {(int) ',', "comma", N_("Comma"), ","},
     {(int) '\'', "apostrophe", N_("Apostrophe"), "\'"},
     {(int) ':', "colon", N_("Colon"), ":"},
+    {(int) ';', "semicolon", N_("Semicolon"), ";"},
     {(int) '!', "exclamation", N_("Exclamation mark"), "!"},
     {(int) '?', "question", N_("Question mark"), "?"},
     {(int) '&', "ampersand", N_("Ampersand"), "&"},

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-09-27 20:13+0400\n"
+"POT-Creation-Date: 2014-12-10 13:09+0300\n"
 "PO-Revision-Date: 2013-03-13 08:51+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -348,6 +348,9 @@ msgid "Apostrophe"
 msgstr ""
 
 msgid "Colon"
+msgstr ""
+
+msgid "Semicolon"
 msgstr ""
 
 msgid "Exclamation mark"
@@ -1696,6 +1699,12 @@ msgid ""
 "%s"
 msgstr ""
 
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
 msgid "Other 8 bit"
 msgstr ""
 
@@ -1778,12 +1787,6 @@ msgid "A&uto save setup"
 msgstr ""
 
 msgid "Configure options"
-msgstr ""
-
-msgid "< Default >"
-msgstr ""
-
-msgid "Skins"
 msgstr ""
 
 msgid "Skin:"

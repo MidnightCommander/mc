@@ -153,9 +153,7 @@ g_error_new_valist (GQuark domain, gint code, const gchar * format, va_list args
     char *message;
     GError *ret_value;
 
-    va_start (ap, format);
-    message = g_strdup_vprintf (format, ap);
-    va_end (ap);
+    message = g_strdup_vprintf (format, args);
 
     ret_value = g_error_new_literal (domain, code, message);
     g_free (message);

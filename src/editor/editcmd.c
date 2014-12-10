@@ -1109,9 +1109,9 @@ pipe_mail (const edit_buffer_t * buf, char *to, char *subject, char *cc)
     FILE *p = 0;
     char *s;
 
-    to = name_quote (to, 0);
-    subject = name_quote (subject, 0);
-    cc = name_quote (cc, 0);
+    to = name_quote (to, FALSE);
+    subject = name_quote (subject, FALSE);
+    cc = name_quote (cc, FALSE);
     s = g_strconcat ("mail -s ", subject, *cc ? " -c " : "", cc, " ", to, (char *) NULL);
     g_free (to);
     g_free (subject);

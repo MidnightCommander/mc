@@ -264,7 +264,7 @@ void edit_paste_from_history (WEdit * edit);
 
 void edit_set_filename (WEdit * edit, const vfs_path_t * name_vpath);
 
-void edit_load_syntax (WEdit * edit, char ***pnames, const char *type);
+void edit_load_syntax (WEdit * edit, GPtrArray * pnames, const char *type);
 void edit_free_syntax_rules (WEdit * edit);
 int edit_get_syntax_color (WEdit * edit, off_t byte_index);
 

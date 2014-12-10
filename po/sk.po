@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-09-27 20:13+0400\n"
+"POT-Creation-Date: 2014-12-10 13:09+0300\n"
 "PO-Revision-Date: 2014-09-04 10:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/projects/p/mc/language/sk/)\n"
@@ -342,6 +342,9 @@ msgstr "Apostrof"
 
 msgid "Colon"
 msgstr "Dvojbodka"
+
+msgid "Semicolon"
+msgstr ""
 
 msgid "Exclamation mark"
 msgstr "Výkričník"
@@ -1692,6 +1695,12 @@ msgid ""
 "%s"
 msgstr ""
 
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
 msgid "Other 8 bit"
 msgstr "Iné 8-bitové"
 
@@ -1775,12 +1784,6 @@ msgstr ""
 
 msgid "Configure options"
 msgstr "Nastavovateľne voľby"
-
-msgid "< Default >"
-msgstr ""
-
-msgid "Skins"
-msgstr ""
 
 msgid "Skin:"
 msgstr ""

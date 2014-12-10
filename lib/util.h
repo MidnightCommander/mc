@@ -124,10 +124,10 @@ int is_printable (int c);
 /* Quote the filename for the purpose of inserting it into the command
  * line.  If quote_percent is 1, replace "%" with "%%" - the percent is
  * processed by the mc command line. */
-char *name_quote (const char *c, int quote_percent);
+char *name_quote (const char *c, gboolean quote_percent);
 
 /* returns a duplicate of c. */
-char *fake_name_quote (const char *c, int quote_percent);
+char *fake_name_quote (const char *c, gboolean quote_percent);
 
 /* path_trunc() is the same as str_trunc() but
  * it deletes possible password from path for security

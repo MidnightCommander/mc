@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-09-27 20:13+0400\n"
+"POT-Creation-Date: 2014-12-10 13:09+0300\n"
 "PO-Revision-Date: 2014-09-04 10:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/projects/p/mc/language/"
@@ -339,6 +339,9 @@ msgstr "Apostrof"
 
 msgid "Colon"
 msgstr "Titik dua"
+
+msgid "Semicolon"
+msgstr ""
 
 msgid "Exclamation mark"
 msgstr "Tanda seru"
@@ -1685,6 +1688,12 @@ msgid ""
 "%s"
 msgstr ""
 
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
 msgid "Other 8 bit"
 msgstr ""
 
@@ -1767,12 +1776,6 @@ msgid "A&uto save setup"
 msgstr ""
 
 msgid "Configure options"
-msgstr ""
-
-msgid "< Default >"
-msgstr ""
-
-msgid "Skins"
 msgstr ""
 
 msgid "Skin:"

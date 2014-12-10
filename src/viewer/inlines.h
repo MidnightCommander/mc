@@ -17,6 +17,7 @@
 
 /*** inline functions ****************************************************************************/
 
+/* difference or zero */
 static inline off_t
 mcview_offset_doz (off_t a, off_t b)
 {
@@ -41,14 +42,6 @@ static inline screen_dimen
 mcview_dimen_doz (screen_dimen a, screen_dimen b)
 {
     return (a >= b) ? a - b : 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static inline screen_dimen
-mcview_dimen_min (screen_dimen a, screen_dimen b)
-{
-    return (a < b) ? a : b;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -120,7 +113,7 @@ mcview_get_byte (mcview_t * view, off_t offset, int *retval)
 #ifdef HAVE_ASSERT_H
     assert (!"Unknown datasource type");
 #endif
-    return -1;
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

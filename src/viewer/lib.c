@@ -242,8 +242,7 @@ mcview_done (mcview_t * view)
 
     mc_search_free (view->search);
     view->search = NULL;
-    g_free (view->last_search_string);
-    view->last_search_string = NULL;
+    MC_PTR_FREE (view->last_search_string);
     mcview_nroff_seq_free (&view->search_nroff_seq);
     mcview_hexedit_free_change_list (view);
 

@@ -151,19 +151,6 @@ mcview_get_ptr_file (mcview_t * view, off_t byte_index)
 
 /* --------------------------------------------------------------------------------------------- */
 
-char *
-mcview_get_ptr_string (mcview_t * view, off_t byte_index)
-{
-#ifdef HAVE_ASSERT_H
-    assert (view->datasource == DS_STRING);
-#endif
-    if (byte_index < (off_t) view->ds_string_len)
-        return (char *) (view->ds_string_data + byte_index);
-    return NULL;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 int
 mcview_get_utf (mcview_t * view, off_t byte_index, int *char_width, gboolean * result)
 {
@@ -237,21 +224,34 @@ mcview_get_utf (mcview_t * view, off_t byte_index, int *char_width, gboolean * r
 
 /* --------------------------------------------------------------------------------------------- */
 
-gboolean
-mcview_get_byte_string (mcview_t * view, off_t byte_index, int *retval)
+char *
+mcview_get_ptr_string (mcview_t * view, off_t byte_index)
 {
 #ifdef HAVE_ASSERT_H
     assert (view->datasource == DS_STRING);
 #endif
-    if (byte_index < (off_t) view->ds_string_len)
-    {
-        if (retval)
-            *retval = view->ds_string_data[byte_index];
-        return TRUE;
-    }
-    if (retval)
+    if (byte_index >= 0 && byte_index < (off_t) view->ds_string_len)
+        return (char *) (view->ds_string_data + byte_index);
+    return NULL;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+mcview_get_byte_string (mcview_t * view, off_t byte_index, int *retval)
+{
+    char *p;
+
+    if (retval != NULL)
         *retval = -1;
-    return FALSE;
+
+    p = mcview_get_ptr_string (view, byte_index);
+    if (p == NULL)
+        return FALSE;
+
+    if (retval != NULL)
+        *retval = *p;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

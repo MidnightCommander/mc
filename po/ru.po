@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-09-27 20:13+0400\n"
-"PO-Revision-Date: 2014-09-09 14:43+0300\n"
+"POT-Creation-Date: 2014-12-10 13:09+0300\n"
+"PO-Revision-Date: 2014-12-10 13:12+0300\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/mc/language/"
 "ru/)\n"
@@ -358,6 +358,9 @@ msgstr "Апостроф"
 
 msgid "Colon"
 msgstr "Двоеточие"
+
+msgid "Semicolon"
+msgstr ""
 
 msgid "Exclamation mark"
 msgstr "Exclamation mark"
@@ -1775,6 +1778,12 @@ msgstr ""
 "Невозможно изменить владельца \"%s\"\n"
 "%s"
 
+msgid "< Default >"
+msgstr "< По умолчанию >"
+
+msgid "Skins"
+msgstr "Скины"
+
 msgid "Other 8 bit"
 msgstr "Другая 8-битная"
 
@@ -1858,12 +1867,6 @@ msgstr "&Автосохранение настроек"
 
 msgid "Configure options"
 msgstr "Параметры конфигурации"
-
-msgid "< Default >"
-msgstr "< По умолчанию >"
-
-msgid "Skins"
-msgstr "Скины"
 
 msgid "Skin:"
 msgstr "Скин:"
@@ -3519,7 +3522,7 @@ msgid "&Case sensitive"
 msgstr "Учет ре&гистра"
 
 msgid "Select"
-msgstr "отметить группу"
+msgstr "Отметить группу"
 
 msgid "Unselect"
 msgstr "Снять отметку"

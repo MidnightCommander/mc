@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-09-27 20:13+0400\n"
+"POT-Creation-Date: 2014-12-10 13:09+0300\n"
 "PO-Revision-Date: 2014-09-04 10:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/projects/p/mc/language/"
@@ -348,6 +348,9 @@ msgstr "Apostrofo"
 
 msgid "Colon"
 msgstr "Dupunkto"
+
+msgid "Semicolon"
+msgstr ""
 
 msgid "Exclamation mark"
 msgstr "Krisigno"
@@ -1769,6 +1772,12 @@ msgstr ""
 "Ne eblas ŝanĝi estrecon de \"%s\"\n"
 "%s"
 
+msgid "< Default >"
+msgstr "< Apriora >"
+
+msgid "Skins"
+msgstr "Etosoj"
+
 msgid "Other 8 bit"
 msgstr "Alia 8-bita"
 
@@ -1852,12 +1861,6 @@ msgstr "Aŭtomate konservi agor&don"
 
 msgid "Configure options"
 msgstr "Agordaĵoj"
-
-msgid "< Default >"
-msgstr "< Apriora >"
-
-msgid "Skins"
-msgstr "Etosoj"
 
 msgid "Skin:"
 msgstr "Etoso:"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-09-27 20:13+0400\n"
+"POT-Creation-Date: 2014-12-10 13:09+0300\n"
 "PO-Revision-Date: 2014-09-04 10:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/mc/language/"
@@ -352,6 +352,9 @@ msgstr "'"
 
 msgid "Colon"
 msgstr ":"
+
+msgid "Semicolon"
+msgstr ""
 
 msgid "Exclamation mark"
 msgstr "!"
@@ -954,7 +957,8 @@ msgstr "«%s» не є звичайним файлом"
 msgid ""
 "File \"%s\" is too large.\n"
 "Open it anyway?"
-msgstr "Файл «%s» занадто великий.\n"
+msgstr ""
+"Файл «%s» занадто великий.\n"
 "Відкрити його будь що?"
 
 #, c-format
@@ -1749,6 +1753,12 @@ msgstr ""
 "Не вдалося змінити власника «%s» \n"
 "%s"
 
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
 msgid "Other 8 bit"
 msgstr "Інше 8-розрядне"
 
@@ -1832,12 +1842,6 @@ msgstr "&Автозбереження параметрів"
 
 msgid "Configure options"
 msgstr "Параметри конфігурації"
-
-msgid "< Default >"
-msgstr ""
-
-msgid "Skins"
-msgstr ""
 
 msgid "Skin:"
 msgstr ""
@@ -4159,8 +4163,7 @@ msgstr "sftp: Створення списку завершено."
 
 #, c-format
 msgid "reconnect to %s failed"
-msgstr ""
-"сталася помилка повторного з’єднання з %s"
+msgstr "сталася помилка повторного з’єднання з %s"
 
 msgid "Authentication failed"
 msgstr "Сталася помилка авторизації "

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-09-27 20:13+0400\n"
+"POT-Creation-Date: 2014-12-10 13:09+0300\n"
 "PO-Revision-Date: 2014-09-04 10:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/projects/p/mc/language/eu/)\n"
@@ -348,6 +348,9 @@ msgstr "Apostrofe"
 
 msgid "Colon"
 msgstr "Bi puntu"
+
+msgid "Semicolon"
+msgstr ""
 
 msgid "Exclamation mark"
 msgstr "Harridura marka"
@@ -1738,6 +1741,12 @@ msgstr ""
 "\"%s\"-ren jabea ezin aldatu (\"chown\")\n"
 "%s"
 
+msgid "< Default >"
+msgstr ""
+
+msgid "Skins"
+msgstr ""
+
 msgid "Other 8 bit"
 msgstr "Beste 8 bit"
 
@@ -1821,12 +1830,6 @@ msgstr "A&uto gorde ezarpena"
 
 msgid "Configure options"
 msgstr "Konfiguratu aukerak"
-
-msgid "< Default >"
-msgstr ""
-
-msgid "Skins"
-msgstr ""
 
 msgid "Skin:"
 msgstr ""
