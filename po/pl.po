@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-09-27 20:13+0400\n"
+"POT-Creation-Date: 2014-12-10 13:09+0300\n"
 "PO-Revision-Date: 2014-09-04 10:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/projects/p/mc/language/pl/)\n"
@@ -350,6 +350,9 @@ msgstr "Apostrof"
 
 msgid "Colon"
 msgstr "Dwukropek"
+
+msgid "Semicolon"
+msgstr ""
 
 msgid "Exclamation mark"
 msgstr "Wykrzyknik"
@@ -1772,6 +1775,12 @@ msgstr ""
 "Nie można wykonać chown na \"%s\"\n"
 "%s"
 
+msgid "< Default >"
+msgstr "< Domyślne >"
+
+msgid "Skins"
+msgstr "Skórki"
+
 msgid "Other 8 bit"
 msgstr "Inne 8 bitowe"
 
@@ -1855,12 +1864,6 @@ msgstr "Auto&matyczny zapis ustawień"
 
 msgid "Configure options"
 msgstr "Konfiguracja opcji"
-
-msgid "< Default >"
-msgstr "< Domyślne >"
-
-msgid "Skins"
-msgstr "Skórki"
 
 msgid "Skin:"
 msgstr "Skórka:"

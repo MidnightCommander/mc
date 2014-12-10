@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-09-27 20:13+0400\n"
+"POT-Creation-Date: 2014-12-10 13:09+0300\n"
 "PO-Revision-Date: 2014-09-04 10:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/projects/p/mc/language/"
@@ -351,6 +351,9 @@ msgstr "Apostrof"
 
 msgid "Colon"
 msgstr "Punct și virgulă"
+
+msgid "Semicolon"
+msgstr ""
 
 msgid "Exclamation mark"
 msgstr "Semn de exclamare"
@@ -1755,6 +1758,12 @@ msgstr ""
 "Nu se poate aplica chown \"%s\"\n"
 "%s"
 
+msgid "< Default >"
+msgstr "< Implicit >"
+
+msgid "Skins"
+msgstr "Tematici"
+
 msgid "Other 8 bit"
 msgstr "Alt 8 biți"
 
@@ -1838,12 +1847,6 @@ msgstr "Auto-salvare a configurației"
 
 msgid "Configure options"
 msgstr "Opțiuni de configurare"
-
-msgid "< Default >"
-msgstr "< Implicit >"
-
-msgid "Skins"
-msgstr "Tematici"
 
 msgid "Skin:"
 msgstr "Tematică:"

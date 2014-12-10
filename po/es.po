@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-09-27 20:13+0400\n"
+"POT-Creation-Date: 2014-12-10 13:09+0300\n"
 "PO-Revision-Date: 2014-09-04 10:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/mc/language/"
@@ -353,6 +353,9 @@ msgstr "Apóstrofo"
 
 msgid "Colon"
 msgstr "Dos puntos"
+
+msgid "Semicolon"
+msgstr ""
 
 msgid "Exclamation mark"
 msgstr "Exclamación"
@@ -1776,6 +1779,12 @@ msgstr ""
 "Imposible cambiar el dueño de «%s»\n"
 "%s"
 
+msgid "< Default >"
+msgstr "< Por defecto >"
+
+msgid "Skins"
+msgstr "Skins"
+
 msgid "Other 8 bit"
 msgstr "Otro (8 bit)"
 
@@ -1859,12 +1868,6 @@ msgstr "auto-guarda con&Figuración"
 
 msgid "Configure options"
 msgstr "Configuración"
-
-msgid "< Default >"
-msgstr "< Por defecto >"
-
-msgid "Skins"
-msgstr "Skins"
 
 msgid "Skin:"
 msgstr "Skin:"

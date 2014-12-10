@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-09-27 20:13+0400\n"
+"POT-Creation-Date: 2014-12-10 13:09+0300\n"
 "PO-Revision-Date: 2014-09-04 10:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Galician (http://www.transifex.com/projects/p/mc/language/"
@@ -354,6 +354,9 @@ msgstr "Apostrofo"
 
 msgid "Colon"
 msgstr "Dous puntos"
+
+msgid "Semicolon"
+msgstr ""
 
 msgid "Exclamation mark"
 msgstr "Signo de exclamación"
@@ -1754,6 +1757,12 @@ msgstr ""
 "Non é posíbel cambiar o propietario de «%s»\n"
 "%s"
 
+msgid "< Default >"
+msgstr "< Predeterminado >"
+
+msgid "Skins"
+msgstr "Temas"
+
 msgid "Other 8 bit"
 msgstr "Outro (8 bit)"
 
@@ -1837,12 +1846,6 @@ msgstr "Configuración do &Auto-gardado"
 
 msgid "Configure options"
 msgstr "Configuración"
-
-msgid "< Default >"
-msgstr "< Predeterminado >"
-
-msgid "Skins"
-msgstr "Temas"
 
 msgid "Skin:"
 msgstr "Tema:"
