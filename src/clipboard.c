@@ -114,7 +114,7 @@ clipboard_file_from_ext_clip (const gchar * event_group_name, const gchar * even
 
     p = mc_popen (clipboard_paste_path, NULL);
     if (p == NULL)
-        return TRUE;    /* don't show error message */
+        return TRUE;            /* don't show error message */
 
     p->out.null_term = FALSE;
     p->err.null_term = TRUE;
