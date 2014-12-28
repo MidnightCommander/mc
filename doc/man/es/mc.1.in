@@ -186,8 +186,16 @@ modos de pantalla, y pueden enviar secuencias de escape de ratón).
 .I \-X, \-\-no\-x11
 No utilizar X11 para obtener el estado de Mayús, Ctrl, Alt.
 .PP
-Si se especifica, el primer directorio se mostrará en el
-panel activo y el segundo directorio en el otro panel.
+Si se especifican los dos directorios, el primer nombre se usará para el directorio a mostrar
+en el panel activo; el segundo nombre para el directorio a mostrar en el otro panel.
+.PP
+Si solo se especifica un directorio, el nombre se usará para el directorio a mostrar en el
+panel activo; el valor de «other_dir» de panels.ini será el nombre del directorio mostrado
+en el panel pasivo.
+.PP
+Si no se especifica ningún directorio, el directorio actual se mostrará en el
+panel activo; el valor de «other_dir» de panels.ini será el nombre del directorio mostrado
+en el panel pasivo.
 .\"NODE "Overview"
 .SH "Introducción"
 La pantalla de Midnight Commander está divida en cuatro partes. La mayor
@@ -459,7 +467,7 @@ visor de archivos\&.
 .TP
 .B Alt\-?
 .\"LINK2"
-buscar archivo\&.
+buscar archivos\&.
 .\"Find File"
 .TP
 .B Alt\-c
@@ -556,14 +564,14 @@ Finalmente, si no se activa
 la selección se hará sin distinguir caracteres en mayúsculas o minúsculas.
 .TP
 .B \- (menos) o \\\\ (contrabarra)
-usaremos la tecla \- o "\\" para deseleccionar un grupo de archivos. Ésta es la operación contraria
-a la realizada por la tecla Más (+).
+usaremos las teclas «\-» o «\\» para deseleccionar un grupo de archivos.  Esta es
+la operación opuesta a la realizada por la tecla «+».
 
 .TP
 .PP
 .B * N. del T.:
 La tecla que realiza originalmente la función descrita es el Menos (\-)
-ya que ésta es la utilizada en la aplicación originaria, Comandante Norton.
+ya que esta es la utilizada en la aplicación originaria, Comandante Norton.
 
 .TP
 .B Arriba, Ctrl\-p
@@ -1081,7 +1089,7 @@ Si
 .B VIEWER
 no está definida se aplica la variable
 .B PAGER
-y si ésta tampoco, se invoca al comando "view". Con Mayús\-F3, se abre
+y si esta tampoco, se invoca al comando «view».  Con Mayús\-F3, se abre
 directamente el visor interno, pero sin realizar ningún tipo de formateo
 o preprocesamiento del archivo.
 .P
@@ -1266,7 +1274,7 @@ comando cd interno\&.
 muestra una figura con estructura de árbol con los directorios.
 .PP
 .\"LINK2"
-Buscar archivo
+Buscar archivos
 .\"Find File"
 permite buscar un archivo específico. El comando "Intercambiar paneles"
 intercambia los contenidos de los dos paneles de directorios.
@@ -1390,7 +1398,7 @@ Las siguientes acciones están disponibles solo en el árbol de directorios. No
 son funcionales en la vista de árbol.
 .PP
 .B F1 (Ayuda).
-Invoca el visor de ayuda y muestra ésta sección.
+Invoca el visor de ayuda y muestra esta sección.
 .PP
 .B Esc, F10.
 Sale del árbol de directorios. No cambia el directorio.
@@ -1404,22 +1412,21 @@ Véase también la sección sobre
 soporte de ratón\&.
 .\"Mouse Support"
 .\"NODE "    Find File"
-.SH "    Buscar Archivo"
-La opción Buscar Archivo primero pregunta por el directorio inicial para la búsqueda
-y el nombre de archivo a buscar. Pulsando el botón árbol
-podemos seleccionar el directorio inicial desde el
+.SH "    Buscar Archivos"
+La utilidad para Buscar Archivos primero pregunta por el directorio de inicio
+y el nombre de archivo a buscar.  Pulsando el botón Árbol podemos seleccionar
+el directorio inicial en el
 .\"LINK2"
 Árbol de directorios\&.
 .\"Directory Tree"
 .PP
-El campo de contenidos acepta expresiones regulares similares a egrep(1). Eso
-significa que tenemos caracteres de escape con significado especial para egrep con "\\",
-p.e. si buscamos "strcmp (" tendremos que introducir "strcmp \\("
-(sin las dobles comillas).
+El campo de contenidos puede aceptar expresiones regulares similares a egrep(1). En 
+ese caso podremos proteger caracteres con significado especial para egrep anteponiendo «\\»,
+p.ej. si buscamos «strcmp (» tendremos que introducir «strcmp \\(".
 .PP
-Con la opción \"Palabras completas\" se puede limitar la búsqueda a archivos donde
-la parte coincidente forme una palabra completa.  Esto coincide con la utilidad de la
-opción \"\-w\" de grep.
+Con la opción «Palabras completas» se puede limitar la búsqueda a archivos donde
+la parte coincidente forme una palabra completa.  Eso se corresponde con la función
+de la opción «\-w» de grep.
 .PP
 Podemos iniciar la búsqueda pulsando el botón Aceptar.
 Durante el proceso de búsqueda podemos detenerla desde el botón Terminar.
@@ -1510,50 +1517,63 @@ Abre el archivo
 en nuestro editor. El administrador puede optar por editar, en su lugar,
 el archivo de extensiones del sistema
 .IR %prefix%/share/mc/mc.ext .
-El formato del archivo (formato nuevo cambiado desde la versión 3.0)
-es como sigue:
+El formato del archivo es como sigue:
 .PP
 Todas las líneas que empiecen con # o estén vacías serán ignoradas.
 .PP
 Las líneas que comiencen en la primera columna deberán tener el siguiente formato:
 .PP
-.I PalabraClave/Descripción+NuevaLínea,
-p.e. cualquier cosa después de
-.I palabraClave/
-hasta el fin de línea es
-.I descripción
+.IR PalabraClave/descripción ,
+i. e. todo lo que vaya tras la «/» hasta el fin de línea será la
+.IR descripción .
 .PP
-las palabras clave son:
+Las palabras clave son:
 .TP
 .I shell
-(desc es entonces cualquier extensión (sin comodines), p.e. para indicar todos los archivos
-con extensión desc (*desc). Ejemplo: .tar indica *.tar)
+\-
+.I Descripción
+será una extensión (sin comodines).  Un archivo coincide si su nombre acaba en
+.IR Descripción .
+Por ejemplo:
+.I shell/.tar
+corresponde a
+.IR *.tar .
 .TP
 .I regex
-(desc es una expresión regular)
-.TP
-.I type
-(el archivo coincide si `file %f` coincide con la expresión regular indicada en desc
-(el nombre de archivo: parte de `file %f` es eliminada))
+\-
+.I Descripción
+es una expresión regular.  Un archivo coincide si la salida de
+.I file %f
+encaja con la expresión regular
+.I Descripción
+(quitando la parte inicial «nombre de archivo:»)
 .TP
 .I default
-(coincide con todo archivo sin importar su descripción)
+\- Coincide para cualquier archivo. Se ignora la
+.IR descripción .
+.TP
+.I include
+\- Incorpora una sección común.
+.I Descripción
+es el nombre de la sección.
 .PP
 El resto de líneas deben comenzar con un espacio o tabulador y usar el
 siguiente formato:
-.I PalabraClave=comando+NuevaLínea
-(sin espacios junto al =), donde
+.I PalabraClave=comando
+(sin espacios alrededor de «=»), donde
 .I PalabraClave
 debe ser:
 .I Open
-(si el usuario pulsa 
+(si el usuario pulsa
 .I Intro
- o dos veces el ratón),
+o dos veces el ratón),
 .I View
-(F3) o
+(F3),
 .I Edit
-(F4).
-.I comando
+(F4) o
+.I Include
+(para agregar reglas de la sección común).
+.I Comando
 es cualquier comando en línea del shell, con
 .\"LINK2"
 sustitución de macro
@@ -1564,9 +1584,9 @@ Las reglas se aplican en estricto orden. Aunque se produzca una
 coincidencia, si la acción solicitada no está disponible, se ignora y la
 búsqueda continúa (por ejemplo, si un archivo encaja con dos entradas,
 pero la acción Ver no está definida en la primera, al pulsar F3, se
-ejecuta la acción Ver de la segunda). Como último recurso
+ejecuta la acción Ver de la segunda).  Por eso, como último recurso
 .I default
-debe incluir todas las acciones.
+sí debe incluir todas las acciones.
 .\"NODE "    Background jobs"
 .SH "    Trabajos en Segundo Plano"
 Nos permite controlar el estado de cualquier proceso de Midnight Commander
@@ -1749,6 +1769,12 @@ Confirmación
 .\"Confirmation"
 podemos especificar qué acciones requieren una confirmación del usuario
 antes de ser realizadas.
+.PP
+En
+.\"LINK2"
+Aspecto
+.\"Appearance"
+podemos seleccionar un «skin» o apariencia para el programa.
 .PP
 En
 .\"LINK2"
@@ -2109,8 +2135,17 @@ distingue o no mayúsculas en los nombres: ignorar, distinguir o aplicar el mism
 criterio elegido en el orden de los nombres en el panel.
 .\"NODE "    Confirmation"
 .SH "    Confirmación"
-En este menú configuramos las opciones de confirmación de eliminación de archivos,
+En este diálogo configuramos las opciones de confirmación de eliminación de archivos,
 sobreescritura, ejecución pulsando intro y salir del programa.
+.\"NODE "    Appearance"
+.SH "    Aspecto"
+Aquí se puede elegir un «skin» o apariencia para usar.
+.PP
+Véase la sección sobre
+.\"LINK2"
+Skins
+.\"Skins"
+para conocer los detalles de los archivos de definición de estos «skins».
 .\"NODE "    Display bits"
 .SH "    Juego de caracteres"
 Esta opción permite configurar el conjunto de caracteres visibles en la
@@ -2131,10 +2166,11 @@ abajo, 'k' arriba y 'l' derecha) y después de pulsar cualquier tecla del cursor
 las marcará con OK), entonces podremos usar esa tecla también.
 .PP
 Para probarlas basta con pulsar cada una de ellas. Tan pronto como pulsamos una tecla y
-ésta funciona adecuadamente, OK debería aparecer junto al nombre de la susodicha tecla. Una vez
-que una tecla es marcada con OK empieza a funcionar con normalidad, p.e. F1 la primera vez
-comprobará que F1 funciona perfectamente, pero a partir de ese momento mostrará la ayuda.
-Esto mismo es aplicable a las teclas del cursor. La tecla Tab debería funcionar siempre.
+esta funciona adecuadamente, la marca «✓» debería aparecer junto al nombre de la susodicha
+tecla. Una vez que cada tecla queda marcada vuelve a funcionar con normalidad, p. ej. F1 la
+primera vez comprobará que F1 funciona perfectamente, pero a partir de ese momento mostrará
+la ayuda.  Esto mismo es aplicable a las teclas del cursor.  La tecla Tab debería funcionar
+siempre.
 .PP
 Si algunas teclas no funcionan adecuadamente, entonces no veremos el OK tras el nombre de la tecla
 después de haberla pulsado. Podemos entonces intentar solucionarlo. Haremos esto
@@ -2186,7 +2222,7 @@ diversas opciones.
 .I Contraseña de FTP anónimo
 es la contraseña a utilizar en conexiones en modo anónimo, esto es,
 empleando el nombre de usuario "anonymous".  Algunos sitios exigen que
-ésta sea una dirección de correo electrónico válida, pero tampoco es
+esta sea una dirección de correo electrónico válida, pero tampoco es
 conveniente dar nuestra dirección real a desconocidos para protegernos
 de los envíos de correo masivo.
 .PP
@@ -2380,7 +2416,7 @@ archivo actual.
 .PP
 .I "%cd"
 .IP
-Ésta es una macro especial usada para cambiar del directorio actual
+Esta es una macro especial usada para cambiar del directorio actual
 al directorio especificado frente a él. Esto se utiliza principalmente
 como interfaz con el
 .\"LINK2"
@@ -2737,7 +2773,7 @@ Cambia el modo de ajuste de líneas en pantalla.
 .PP
 .B * N. del T.:
 Envuelta (Ajustada), se muestra toda la información de la línea en la pantalla, de
-modo que si ésta ocupa más del ancho de la pantalla aparece como si fuese
+modo que si esta ocupa más del ancho de la pantalla aparece como si fuese
 otra línea aparte o bien desenvuelta (desajustada), truncando el contenido
 de la línea que sobresale de la pantalla. Este contenido puede ser
 consultado utilizando las teclas del cursor.
@@ -3205,7 +3241,7 @@ archivo existente. Representan algún tipo de información relacionada con
 el sistema en forma de árbol de directorios. Se accede a ellos ejecutando
 .RI ' "cd nombrefs://" '
 donde nombrefs es el nombre corto que identifica el extfs (ver más
-adelante).  Ejemplos de éstos son audio (lista de pistas de sonido en
+adelante).  Ejemplos de estos son audio (lista de pistas de sonido en
 el CD) o apt (lista de paquetes de tipo Debian en el sistema).
 .PP
 Por ejemplo, para listar las pistas de música del CD, escribir
@@ -3444,8 +3480,8 @@ base_color=normal=white,default:marked=magenta,default
 
 .\"NODE "Skins"
 .SH "Skins"
-Con los skins (pieles, caretas) se puede cambiar la apariencia global de
-Midhight Commander.  Para ello hay que proporcionar un archivo que contenga
+Con los «skins» (pieles, caretas) se puede cambiar la apariencia global de
+Midnight Commander.  Para ello hay que proporcionar un archivo que contenga
 descripciones de colores y formas de trazar las líneas de borde de los
 paneles y diálogos.  La redefinición de colores es completamente compatible
 con la configuración tradicional detallada en la sección sobre
@@ -3876,19 +3912,17 @@ Esta variable solo funciona si no se utiliza el soporte de subshell.
 Cuando utilizamos la combinación
 .I Ctrl\-o
 para volver a la pantalla de usuario, si está activada, tendremos un
-nuevo shell. De otro modo, pulsando cualquier tecla nos devolverá a
+nuevo shell.  De otro modo, pulsando cualquier tecla nos devolverá a
 Midnight Commander.
 .TP
 .I timeformat_recent
 Cambiar el formato de fecha y hora empleado para fechas dentro de los seis
-últimos meses.
-Véase las páginas de manual de strftime o date para la descripción del formato a
-emplear. Sin esta opción se emplea el formato por defecto.
+últimos meses.  Véanse las páginas de manual de strftime o date para la descripción
+del formato a emplear.  Sin esta opción se emplea el formato por defecto.
 .TP
 .I timeformat_old
 Cambiar el formato de fecha y hora empleado para fechas más antiguas que seis
-meses.
-Véase las páginas de manual de strftime o date para la descripción del formato a
+meses.  Véanse las páginas de manual de strftime o date para la descripción del formato a
 emplear. Sin esta opción se emplea el formato por defecto.
 .TP
 .I torben_fj_mode
@@ -3906,7 +3940,7 @@ ya estemos ahí, en cuyo caso moverá la selección al último nombre de archivo
 .TP
 .I use_file_to_guess_type
 Si esta variable está activada (por defecto lo está) se recurrirá al
-comando "file" para reconocer los tipos de archivo referidos en el archivo
+comando «file» para reconocer los tipos de archivo referidos en el archivo
 .\"LINK2"
 mc.ext\&.
 .\"Edit Extension File"
@@ -3943,7 +3977,7 @@ clipboard_paste=/usr/bin/xclip \-o
 Esta opción permite emplear la orden 'enca' para autodetectar el juego de
 caracteres de los archivos de texto para el visor y el editor interno. La
 lista de valores posibles se puede obtener con
-`enca \-\-list languages | cut \-d : \-f1'. Esta opción tiene que estar
+`enca \-\-list languages | cut \-d : \-f1'.  Esta opción tiene que estar
 dentro de la sección [Misc].
 .PP
 For example:
@@ -3953,22 +3987,20 @@ autodetect_codeset=russian
 .fi
 .\"NODE "Parameters for external editor or viewer"
 .SH "Parámetros para editor o visor externo"
-Midnight Commander permite especificar opciones para editores y visores externos.
-Midnight Commander busca la sección
+Midnight Commander permite especificar opciones para editores y visores
+externos.  Midnight Commander busca la sección
 .I [External editor or viewer parameters]
 en el archivo de inicialización del sistema
 .B %prefix%/share/mc/mc.lib
 o en el del usuario
 .BR ~/.config/mc/ini .
 El nombre de la opción debe coincidir con el nombre (ruta completa) del editor
-o visor externo. Su valor puede contener las siguientes variables:
-.PP
+o visor externo.  Su valor puede contener las siguientes variables:
+.TP
 .I %filename
-.IP
 El nombre del archivo a editar/ver.
-.PP
+.TP
 .I %lineno
-.IP
 La línea de comienzo donde abrir el archivo.
 .PP
 Por ejemplo:
@@ -3979,6 +4011,17 @@ Por ejemplo:
     joe=%filename +%lineno
     more=%filename +%lineno
 .fi
+.PP
+La línea de comienzo solo se pasa al editor o visor externo cuando se llama
+desde la ventana de resultados de
+.\"LINK2"
+buscar archivo\&.
+.\"Find File"
+.PP
+Si el editor o visor externo se lanza mediante las teclas F3/F4, MC confía en que
+el programa (al menos «joe», pero puede que otros también) se comporte abriendo por
+defecto el archivo donde se abrió la última vez.  MC no evita que el editor o visor
+externo pueda guardar y restaurar posiciones en los archivos abiertos.
 .\"NODE "Terminal databases"
 .SH "Ajustes del Terminal"
 Midnight Commander permite hacer ajustes a la base de datos de terminales
@@ -4152,17 +4195,17 @@ distribución.
 .SH "ERRORES"
 Véase el archivo "TODO" en la distribución para saber qué falta por hacer.
 .PP
-Para informar de problemas con el programa, envíar un
-mensaje a la dirección: mc\-devel@gnome.org.
+Para informar de problemas con el programa, introducir una nueva incidencia
+en http://www.midnight\-commander.org/.
 .PP
 Se debe proporcionar una descripción detallada del problema, la
-versión del programa (se obtiene con
+versión del programa (que se obtiene con
 .RI ' "mc \-V" ')
-y el sistema operativo utilizados.  Si el programa revienta, sería
+y el sistema operativo utilizados.  Si el programa «revienta», sería
 también útil disponer del estado de la pila.
 .\"NODE "TRANSLATION"
 .SH "TRADUCCIÓN"
 Francisco Gabriel Aroca, 1998.  Reformateado y actualizado por David
-Martín, 2002\-2013.
+Martín, 2002\-2014.
 .PP
 Midnight Commander traducido a castellano por David Martín.
