@@ -8,11 +8,15 @@ AM_CPPFLAGS = \
 LIBS = @CHECK_LIBS@ $(top_builddir)/lib/libmc.la
 
 TESTS = \
+	glob_prepare_replace_str \
 	regex_replace_esc_seq \
 	regex_process_escape_sequence \
 	translate_replace_glob_to_regex
 
 check_PROGRAMS = $(TESTS)
+
+glob_prepare_replace_str_SOURCES = \
+	glob_prepare_replace_str.c
 
 regex_replace_esc_seq_SOURCES = \
 	regex_replace_esc_seq.c
