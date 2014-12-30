@@ -65,9 +65,6 @@ static gboolean
 mc_search__regex_str_append_if_special (GString * copy_to, const GString * regex_str,
                                         gsize * offset)
 {
-    char *tmp_regex_str;
-    gsize spec_chr_len;
-    const char **spec_chr;
     const char *special_chars[] = {
         "\\s", "\\S",
         "\\d", "\\D",
@@ -83,39 +80,41 @@ mc_search__regex_str_append_if_special (GString * copy_to, const GString * regex
         "\\E", "\\Q",
         NULL
     };
-    spec_chr = special_chars;
+
+    char *tmp_regex_str;
+    const char **spec_chr;
 
     tmp_regex_str = &(regex_str->str[*offset]);
 
-    while (*spec_chr)
+    for (spec_chr = special_chars; *spec_chr != NULL; spec_chr++)
     {
-        spec_chr_len = strlen (*spec_chr);
-        if (!strncmp (tmp_regex_str, *spec_chr, spec_chr_len))
-        {
-            if (!strutils_is_char_escaped (regex_str->str, tmp_regex_str))
-            {
-                if (!strncmp ("\\x", *spec_chr, spec_chr_len))
-                {
-                    if (*(tmp_regex_str + spec_chr_len) == '{')
-                    {
-                        while ((spec_chr_len < regex_str->len - *offset)
-                               && *(tmp_regex_str + spec_chr_len) != '}')
-                            spec_chr_len++;
-                        if (*(tmp_regex_str + spec_chr_len) == '}')
-                            spec_chr_len++;
-                    }
-                    else
-                        spec_chr_len += 2;
-                }
-                g_string_append_len (copy_to, tmp_regex_str, spec_chr_len);
-                *offset += spec_chr_len;
-                return TRUE;
-            }
-        }
-        spec_chr++;
-    }
-    return FALSE;
+        gsize spec_chr_len;
 
+        spec_chr_len = strlen (*spec_chr);
+
+        if (strncmp (tmp_regex_str, *spec_chr, spec_chr_len) == 0
+            && !strutils_is_char_escaped (regex_str->str, tmp_regex_str))
+        {
+            if (strncmp ("\\x", *spec_chr, spec_chr_len) == 0)
+            {
+                if (tmp_regex_str[spec_chr_len] != '{')
+                    spec_chr_len += 2;
+                else
+                {
+                    while ((spec_chr_len < regex_str->len - *offset)
+                           && tmp_regex_str[spec_chr_len] != '}')
+                        spec_chr_len++;
+                    if (tmp_regex_str[spec_chr_len] == '}')
+                        spec_chr_len++;
+                }
+            }
+            g_string_append_len (copy_to, tmp_regex_str, spec_chr_len);
+            *offset += spec_chr_len;
+            return TRUE;
+        }
+    }
+
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
