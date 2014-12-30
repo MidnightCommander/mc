@@ -8,7 +8,7 @@
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2009, 2010, 2011, 2013
    Vitaliy Filippov <vitalif@yourcmc.ru>, 2011
-   Andrew Borodin <aborodin@vmail.ru>, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2013, 2014
 
    This file is part of the Midnight Commander.
 
@@ -368,8 +368,8 @@ mc_search_regex__get_token_by_num (const mc_search_t * lc_mc_search, gsize lc_in
     fnd_end = lc_mc_search->iovector[lc_index * 2 + 1];
 #endif /* SEARCH_TYPE_GLIB */
 
-    if (fnd_end - fnd_start == 0)
-        return NULL;
+    if (fnd_end == fnd_start)
+        return g_strdup ("");
 
     return g_strndup (lc_mc_search->regex_buffer->str + fnd_start, fnd_end - fnd_start);
 
@@ -913,7 +913,6 @@ GString *
 mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str)
 {
     GString *ret;
-    gchar *tmp_str;
 
     int num_replace_tokens;
     gsize loop;
@@ -941,6 +940,7 @@ mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * repla
     for (loop = 0; loop < replace_str->len - 1; loop++)
     {
         int lc_index;
+        gchar *tmp_str;
 
         lc_index = mc_search_regex__process_replace_str (replace_str, loop, &len, &replace_flags);
 
@@ -994,8 +994,6 @@ mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * repla
         }
 
         tmp_str = mc_search_regex__get_token_by_num (lc_mc_search, lc_index);
-        if (tmp_str == NULL)
-            continue;
 
         if (loop)
             mc_search_regex__process_append_str (ret, prev_str, replace_str->str - prev_str + loop,
