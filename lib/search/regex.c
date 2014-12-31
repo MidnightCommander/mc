@@ -381,17 +381,18 @@ mc_search_regex__replace_handle_esc_seq (const GString * replace_str, const gsiz
                                          gsize * skip_len, int *ret)
 {
     char *curr_str = &(replace_str->str[current_pos]);
-    char c = *(curr_str + 1);
+    char c = curr_str[1];
 
     if (replace_str->len > current_pos + 2)
     {
         if (c == '{')
         {
             for (*skip_len = 2; /* \{ */
-                 current_pos + *skip_len < replace_str->len
-                 && *(curr_str + *skip_len) >= '0'
-                 && *(curr_str + *skip_len) <= '7'; (*skip_len)++);
-            if (current_pos + *skip_len < replace_str->len && *(curr_str + *skip_len) == '}')
+                 current_pos + *skip_len < replace_str->len && curr_str[*skip_len] >= '0'
+                 && curr_str[*skip_len] <= '7'; (*skip_len)++)
+                ;
+
+            if (current_pos + *skip_len < replace_str->len && curr_str[*skip_len] == '}')
             {
                 (*skip_len)++;
                 *ret = REPLACE_PREPARE_T_ESCAPE_SEQ;
@@ -407,13 +408,15 @@ mc_search_regex__replace_handle_esc_seq (const GString * replace_str, const gsiz
         if (c == 'x')
         {
             *skip_len = 2;      /* \x */
-            c = *(curr_str + 2);
+            c = curr_str[2];
             if (c == '{')
             {
                 for (*skip_len = 3;     /* \x{ */
                      current_pos + *skip_len < replace_str->len
-                     && g_ascii_isxdigit ((guchar) * (curr_str + *skip_len)); (*skip_len)++);
-                if (current_pos + *skip_len < replace_str->len && *(curr_str + *skip_len) == '}')
+                     && g_ascii_isxdigit ((guchar) curr_str[*skip_len]); (*skip_len)++)
+                    ;
+
+                if (current_pos + *skip_len < replace_str->len && curr_str[*skip_len] == '}')
                 {
                     (*skip_len)++;
                     *ret = REPLACE_PREPARE_T_ESCAPE_SEQ;
@@ -433,7 +436,7 @@ mc_search_regex__replace_handle_esc_seq (const GString * replace_str, const gsiz
             }
             else
             {
-                c = *(curr_str + 3);
+                c = curr_str[3];
                 if (!g_ascii_isxdigit ((guchar) c))
                     *skip_len = 3;      /* \xH */
                 else
@@ -467,8 +470,8 @@ mc_search_regex__process_replace_str (const GString * replace_str, const gsize c
 
     *skip_len = 0;
 
-    if ((*curr_str == '$') && (*(curr_str + 1) == '{') && ((*(curr_str + 2) & (char) 0xf0) == 0x30)
-        && (replace_str->len > current_pos + 2))
+    if (replace_str->len > current_pos + 2 && curr_str[0] == '$' && curr_str[1] == '{'
+        && (curr_str[2] & (char) 0xf0) == 0x30)
     {
         char *tmp_str;
 
@@ -480,9 +483,10 @@ mc_search_regex__process_replace_str (const GString * replace_str, const gsize c
 
         for (*skip_len = 0;
              current_pos + *skip_len + 2 < replace_str->len
-             && (*(curr_str + 2 + *skip_len) & (char) 0xf0) == 0x30; (*skip_len)++);
+             && (curr_str[2 + *skip_len] & (char) 0xf0) == 0x30; (*skip_len)++)
+            ;
 
-        if (*(curr_str + 2 + *skip_len) != '}')
+        if (curr_str[2 + *skip_len] != '}')
             return REPLACE_PREPARE_T_NOTHING_SPECIAL;
 
         tmp_str = g_strndup (curr_str + 2, *skip_len);
@@ -496,7 +500,7 @@ mc_search_regex__process_replace_str (const GString * replace_str, const gsize c
         return ret;             /* capture buffer index >= 0 */
     }
 
-    if ((*curr_str == '\\') && (replace_str->len > current_pos + 1))
+    if (curr_str[0] == '\\' && replace_str->len > current_pos + 1)
     {
         if (strutils_is_char_escaped (replace_str->str, curr_str))
         {
@@ -504,9 +508,9 @@ mc_search_regex__process_replace_str (const GString * replace_str, const gsize c
             return REPLACE_PREPARE_T_NOTHING_SPECIAL;
         }
 
-        if (g_ascii_isdigit (*(curr_str + 1)))
+        if (g_ascii_isdigit (curr_str[1]))
         {
-            ret = g_ascii_digit_value (*(curr_str + 1));        /* capture buffer index >= 0 */
+            ret = g_ascii_digit_value (curr_str[1]);    /* capture buffer index >= 0 */
             *skip_len = 2;      /* \\ and one digit */
             return ret;
         }
@@ -516,7 +520,8 @@ mc_search_regex__process_replace_str (const GString * replace_str, const gsize c
 
         ret = REPLACE_PREPARE_T_REPLACE_FLAG;
         *skip_len += 2;
-        switch (*(curr_str + 1))
+
+        switch (curr_str[1])
         {
         case 'U':
             *replace_flags |= REPLACE_T_UPP_TRANSFORM;
@@ -615,6 +620,7 @@ mc_search_regex__process_escape_sequence (GString * dest_str, const char *from, 
         len = strlen (from);
     if (len == 0)
         return;
+
     if (from[i] == '{')
         i++;
     if (i >= len)
