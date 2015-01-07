@@ -290,7 +290,7 @@ ftpfs_translate_path (struct vfs_class *me, struct vfs_s_super *super, const cha
         }
 
         /* strip leading slash(es) */
-        while (*remote_path == '/')
+        while (IS_PATH_SEP (*remote_path))
             remote_path++;
 
         /*
@@ -304,11 +304,11 @@ ftpfs_translate_path (struct vfs_class *me, struct vfs_s_super *super, const cha
 
         /* replace first occurrence of ":/" with ":" */
         p = strchr (ret, ':');
-        if ((p != NULL) && (*(p + 1) == '/'))
+        if (p != NULL && IS_PATH_SEP (p[1]))
             memmove (p + 1, p + 2, strlen (p + 2) + 1);
 
         /* strip trailing "/." */
-        p = strrchr (ret, '/');
+        p = strrchr (ret, PATH_SEP);
         if ((p != NULL) && (*(p + 1) == '.') && (*(p + 2) == '\0'))
             *p = '\0';
 
@@ -990,7 +990,7 @@ ftpfs_open_archive (struct vfs_s_super *super,
     SUP->isbinary = TYPE_UNKNOWN;
     SUP->remote_is_amiga = 0;
     SUP->ctl_connection_busy = 0;
-    super->name = g_strdup ("/");
+    super->name = g_strdup (PATH_SEP_STR);
     super->root =
         vfs_s_new_inode (vpath_element->class, super,
                          vfs_s_default_stat (vpath_element->class, S_IFDIR | 0755));
@@ -1045,19 +1045,19 @@ ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super)
 
                     if (*bufp != '\0')
                     {
-                        if (*(bufq - 1) != '/')
+                        if (!IS_PATH_SEP (bufq[-1]))
                         {
-                            *bufq++ = '/';
+                            *bufq++ = PATH_SEP;
                             *bufq = '\0';
                         }
 
-                        if (*bufp == '/')
+                        if (IS_PATH_SEP (*bufp))
                             return g_strdup (bufp);
 
                         /* If the remote server is an Amiga a leading slash
                            might be missing. MC needs it because it is used
                            as separator between hostname and path internally. */
-                        return g_strconcat ("/", bufp, (char *) NULL);
+                        return g_strconcat (PATH_SEP_STR, bufp, (char *) NULL);
                     }
 
                     break;
@@ -1381,7 +1381,7 @@ ftpfs_open_data_connection (struct vfs_class *me, struct vfs_s_super *super, con
         char *remote_path = ftpfs_translate_path (me, super, remote);
         j = ftpfs_command (me, super, WAIT_REPLY, "%s /%s", cmd,
                            /* WarFtpD can't STORE //filename */
-                           (*remote_path == '/') ? remote_path + 1 : remote_path);
+                           IS_PATH_SEP (*remote_path) ? remote_path + 1 : remote_path);
         g_free (remote_path);
     }
     else
@@ -1484,7 +1484,7 @@ resolve_symlink_without_ls_options (struct vfs_class *me, struct vfs_s_super *su
         fel = flist->data;
         if (S_ISLNK (fel->s.st_mode) && fel->linkname)
         {
-            if (fel->linkname[0] == '/')
+            if (IS_PATH_SEP (fel->linkname[0]))
             {
                 if (strlen (fel->linkname) >= MC_MAXPATHLEN)
                     continue;
@@ -1496,7 +1496,7 @@ resolve_symlink_without_ls_options (struct vfs_class *me, struct vfs_s_super *su
                     continue;
                 strcpy (tmp, dir->remote_path);
                 if (tmp[1] != '\0')
-                    strcat (tmp, "/");
+                    strcat (tmp, PATH_SEP_STR);
                 strcat (tmp + 1, fel->linkname);
             }
             for (depth = 0; depth < 100; depth++)
@@ -1508,7 +1508,7 @@ resolve_symlink_without_ls_options (struct vfs_class *me, struct vfs_s_super *su
                     if (S_ISLNK (fe->s.st_mode) && fe->l_stat == 0)
                     {
                         /* Symlink points to link which isn't resolved, yet. */
-                        if (fe->linkname[0] == '/')
+                        if (IS_PATH_SEP (fe->linkname[0]))
                         {
                             if (strlen (fe->linkname) >= MC_MAXPATHLEN)
                                 break;
@@ -1519,7 +1519,7 @@ resolve_symlink_without_ls_options (struct vfs_class *me, struct vfs_s_super *su
                             /* at this point tmp looks always like this
                                /directory/filename, i.e. no need to check
                                strrchr's return value */
-                            *(strrchr (tmp, '/') + 1) = '\0';   /* dirname */
+                            *(strrchr (tmp, PATH_SEP) + 1) = '\0';      /* dirname */
                             if ((strlen (tmp) + strlen (fe->linkname)) >= MC_MAXPATHLEN)
                                 break;
                             strcat (tmp, fe->linkname);

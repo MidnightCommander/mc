@@ -439,12 +439,12 @@ sfs_init (struct vfs_class *me)
             continue;
 
         for (c = key; *c; c++)
-            if ((*c == ':') || (*c == '/'))
+            if (*c == ':' || IS_PATH_SEP (*c))
             {
                 semi = c;
-                if (*c == '/')
+                if (IS_PATH_SEP (*c))
                 {
-                    *c = 0;
+                    *c = '\0';
                     flags |= F_FULLMATCH;
                 }
                 break;

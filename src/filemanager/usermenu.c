@@ -86,7 +86,7 @@ strip_ext (char *ss)
     {
         if (*s == '.')
             e = s;
-        if (*s == PATH_SEP && e)
+        if (IS_PATH_SEP (*s) && e != NULL)
             e = NULL;           /* '.' in *directory* name */
         s++;
     }

@@ -356,7 +356,7 @@ extfs_fill_names (struct vfs_class *me, fill_names_f func)
 
         info = &g_array_index (extfs_plugins, extfs_plugin_info_t, a->fstype);
         name =
-            g_strconcat (a->name ? a->name : "", "/", info->prefix, VFS_PATH_URL_DELIMITER,
+            g_strconcat (a->name ? a->name : "", PATH_SEP_STR, info->prefix, VFS_PATH_URL_DELIMITER,
                          (char *) NULL);
         func (name);
         g_free (name);
@@ -523,11 +523,11 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
 
             if (*cfn != '\0')
             {
-                if (*cfn == PATH_SEP)
+                if (IS_PATH_SEP (*cfn))
                     cfn++;
                 p = strchr (cfn, '\0');
-                if (p != cfn && *(p - 1) == PATH_SEP)
-                    *(p - 1) = '\0';
+                if (p != cfn && IS_PATH_SEP (p[-1]))
+                    p[-1] = '\0';
                 p = strrchr (cfn, PATH_SEP);
                 if (p == NULL)
                 {

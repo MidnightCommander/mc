@@ -848,7 +848,7 @@ read_file_system_list (int need_fs_type)
         /* All volumes are mounted in the rootfs, directly under /. */
         rootdir_list = NULL;
         rootdir_tail = &rootdir_list;
-        dirp = opendir ("/");
+        dirp = opendir (PATH_SEP_STR);
         if (dirp)
         {
             struct dirent *d;
@@ -862,9 +862,9 @@ read_file_system_list (int need_fs_type)
                     continue;
 
                 if (DIR_IS_DOTDOT (d->d_name))
-                    name = g_strdup ("/");
+                    name = g_strdup (PATH_SEP_STR);
                 else
-                    name = g_strconcat ("/", d->d_name, (char *) NULL);
+                    name = g_strconcat (PATH_SEP_STR, d->d_name, (char *) NULL);
 
                 if (lstat (name, &statbuf) >= 0 && S_ISDIR (statbuf.st_mode))
                 {
@@ -1661,7 +1661,7 @@ my_statfs (struct my_statfs *myfs_stats, const char *path)
 
         i = strlen (temp->me_mountdir);
         if (i > len && (strncmp (path, temp->me_mountdir, i) == 0))
-            if (!entry || (path[i] == PATH_SEP || path[i] == '\0'))
+            if (entry == NULL || IS_PATH_SEP (path[i]) || path[i] == '\0')
             {
                 len = i;
                 entry = temp;

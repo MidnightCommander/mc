@@ -2689,7 +2689,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
          * dir is deleted)
          */
         if (!force_single && tmp_dest_dir[0] != '\0'
-            && tmp_dest_dir[strlen (tmp_dest_dir) - 1] != PATH_SEP)
+            && !IS_PATH_SEP (tmp_dest_dir[strlen (tmp_dest_dir) - 1]))
         {
             /* add trailing separator */
             dest_dir = g_strconcat (tmp_dest_dir, PATH_SEP_STR, (char *) NULL);

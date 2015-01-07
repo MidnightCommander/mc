@@ -152,28 +152,28 @@ resolve_symlinks (const vfs_path_t * vpath)
                 goto ret;
             }
             buf2[len] = 0;
-            if (*buf2 == PATH_SEP)
+            if (IS_PATH_SEP (*buf2))
                 strcpy (buf, buf2);
             else
                 strcpy (r, buf2);
         }
         canonicalize_pathname (buf);
         r = strchr (buf, 0);
-        if (!*r || *(r - 1) != PATH_SEP)
+        if (*r == '\0' || !IS_PATH_SEP (r[-1]))
             /* FIXME: this condition is always true because r points to the EOL */
         {
             *r++ = PATH_SEP;
-            *r = 0;
+            *r = '\0';
         }
         *q = c;
         p = q;
     }
     while (c != '\0');
 
-    if (!*buf)
+    if (*buf == '\0')
         strcpy (buf, PATH_SEP_STR);
-    else if (*(r - 1) == PATH_SEP && r != buf + 1)
-        *(r - 1) = 0;
+    else if (IS_PATH_SEP (r[-1]) && r != buf + 1)
+        r[-1] = '\0';
 
   ret:
     g_free (buf2);
@@ -653,17 +653,18 @@ x_basename (const char *s)
         || url_delim - s + strlen (VFS_PATH_URL_DELIMITER) < strlen (s))
     {
         /* avoid trailing PATH_SEP, if present */
-        if (s[strlen (s) - 1] == PATH_SEP)
-        {
-            while (--path_sep > s && *path_sep != PATH_SEP);
-            return (path_sep != s) ? path_sep + 1 : s;
-        }
-        else
+        if (!IS_PATH_SEP (s[strlen (s) - 1]))
             return (path_sep != NULL) ? path_sep + 1 : s;
+
+        while (--path_sep > s && !IS_PATH_SEP (*path_sep))
+            ;
+        return (path_sep != s) ? path_sep + 1 : s;
     }
 
-    while (--url_delim > s && *url_delim != PATH_SEP);
-    while (--url_delim > s && *url_delim != PATH_SEP);
+    while (--url_delim > s && !IS_PATH_SEP (*url_delim))
+        ;
+    while (--url_delim > s && !IS_PATH_SEP (*url_delim))
+        ;
 
     return (url_delim == s) ? s : url_delim + 1;
 }

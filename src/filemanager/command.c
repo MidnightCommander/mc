@@ -200,7 +200,7 @@ handle_cdpath (const char *path)
     gboolean result = FALSE;
 
     /* CDPATH handling */
-    if (*path != PATH_SEP)
+    if (!IS_PATH_SEP (*path))
     {
         char *cdpath, *p;
         char c;
@@ -416,10 +416,8 @@ do_cd_command (char *orig_cmd)
             }
             sync_tree (vfs_path_as_str (current_panel->cwd_vpath));
         }
-        else if (cmd[operand_pos] == PATH_SEP)
-        {
+        else if (IS_PATH_SEP (cmd[operand_pos]))
             sync_tree (cmd + operand_pos);
-        }
         else
         {
             vfs_path_t *new_vpath;

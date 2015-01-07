@@ -318,7 +318,7 @@ show_tree (WTree * tree)
                 const char *cname;
 
                 cname = vfs_path_as_str (current->name);
-                for (j = strlen (cname) - 1; cname[j] != PATH_SEP; j--)
+                for (j = strlen (cname) - 1; !IS_PATH_SEP (cname[j]); j--)
                     ;
                 if (vfs_path_equal_len (current->name, tree->selected_ptr->name, j))
                     i++;
@@ -405,7 +405,7 @@ show_tree (WTree * tree)
                     const char *cname;
 
                     cname = vfs_path_as_str (current->name);
-                    for (j = strlen (cname) - 1; cname[j] != PATH_SEP; j--)
+                    for (j = strlen (cname) - 1; !IS_PATH_SEP (cname[j]); j--)
                         ;
                     if (vfs_path_equal_len (current->name, tree->selected_ptr->name, j))
                         break;

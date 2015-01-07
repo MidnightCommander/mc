@@ -179,13 +179,13 @@ undelfs_get_path (const vfs_path_t * vpath, char **fsname, char **file)
 #if 0
     /* Strip trailing ./
      */
-    if (p - dirname > 2 && *(p - 1) == '/' && *(p - 2) == '.')
+    if (p - dirname > 2 && IS_PATH_SEP (p[-1]) && p[-2] == '.')
         *(p = p - 2) = 0;
 #endif
 
     while (p > dirname)
     {
-        if (*p == '/')
+        if (IS_PATH_SEP (*p))
         {
             char *tmp;
 

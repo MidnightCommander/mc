@@ -684,10 +684,10 @@ tilde_expand (const char *directory)
     p = directory + 1;
 
     /* d = "~" or d = "~/" */
-    if (!(*p) || (*p == PATH_SEP))
+    if (*p == '\0' || IS_PATH_SEP (*p))
     {
         passwd = getpwuid (geteuid ());
-        q = (*p == PATH_SEP) ? p + 1 : "";
+        q = IS_PATH_SEP (*p) ? p + 1 : "";
     }
     else
     {
@@ -843,12 +843,12 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
     const size_t url_delim_len = strlen (VFS_PATH_URL_DELIMITER);
 
     /* Detect and preserve UNC paths: //server/... */
-    if ((flags & CANON_PATH_GUARDUNC) && path[0] == PATH_SEP && path[1] == PATH_SEP)
+    if ((flags & CANON_PATH_GUARDUNC) != 0 && IS_PATH_SEP (path[0]) && IS_PATH_SEP (path[1]))
     {
         p = path + 2;
-        while (p[0] && p[0] != '/')
+        while (p[0] != '\0' && !IS_PATH_SEP (p[0]))
             p++;
-        if (p[0] == '/' && p > path + 2)
+        if (IS_PATH_SEP (p[0]) && p > path + 2)
             lpath = p;
     }
 
@@ -861,10 +861,11 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
         p = lpath;
         while (*p)
         {
-            if (p[0] == PATH_SEP && p[1] == PATH_SEP && (p == lpath || *(p - 1) != ':'))
+            if (IS_PATH_SEP (p[0]) && IS_PATH_SEP (p[1]) && (p == lpath || *(p - 1) != ':'))
             {
                 s = p + 1;
-                while (*(++s) == PATH_SEP);
+                while (IS_PATH_SEP (*(++s)))
+                    ;
                 str_move (p + 1, s);
             }
             p++;
@@ -877,7 +878,7 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
         p = lpath;
         while (*p)
         {
-            if (p[0] == PATH_SEP && p[1] == '.' && p[2] == PATH_SEP)
+            if (IS_PATH_SEP (p[0]) && p[1] == '.' && IS_PATH_SEP (p[2]))
                 str_move (p, p + 2);
             else
                 p++;
@@ -890,7 +891,7 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
 
         /* Remove trailing slashes */
         p = lpath + strlen (lpath) - 1;
-        while (p > lpath && *p == PATH_SEP)
+        while (p > lpath && IS_PATH_SEP (*p))
         {
             if (p >= lpath - (url_delim_len + 1)
                 && strncmp (p - url_delim_len + 1, VFS_PATH_URL_DELIMITER, url_delim_len) == 0)
@@ -899,7 +900,7 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
         }
 
         /* Remove leading "./" */
-        if (lpath[0] == '.' && lpath[1] == PATH_SEP)
+        if (lpath[0] == '.' && IS_PATH_SEP (lpath[1]))
         {
             if (lpath[2] == 0)
             {
@@ -916,7 +917,7 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
         len = strlen (lpath);
         if (len < 2)
             return;
-        if (lpath[len - 1] == PATH_SEP
+        if (IS_PATH_SEP (lpath[len - 1])
             && (len < url_delim_len
                 || strncmp (lpath + len - url_delim_len, VFS_PATH_URL_DELIMITER,
                             url_delim_len) != 0))
@@ -925,7 +926,7 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
         }
         else
         {
-            if (lpath[len - 1] == '.' && lpath[len - 2] == PATH_SEP)
+            if (lpath[len - 1] == '.' && IS_PATH_SEP (lpath[len - 2]))
             {
                 if (len == 2)
                 {
@@ -950,7 +951,8 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
         p = lpath;
         while (p[0] && p[1] && p[2])
         {
-            if ((p[0] != PATH_SEP || p[1] != '.' || p[2] != '.') || (p[3] != PATH_SEP && p[3] != 0))
+            if (!IS_PATH_SEP (p[0]) || p[1] != '.' || p[2] != '.'
+                || (!IS_PATH_SEP (p[3]) && p[3] != '\0'))
             {
                 p++;
                 continue;
@@ -962,7 +964,8 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                 && strncmp (s - url_delim_len + 2, VFS_PATH_URL_DELIMITER, url_delim_len) == 0)
             {
                 s -= (url_delim_len - 2);
-                while (s >= lpath && *s-- != PATH_SEP);
+                while (s >= lpath && !IS_PATH_SEP (*s--))
+                    ;
             }
 
             while (s >= lpath)
@@ -973,8 +976,9 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                     char *vfs_prefix = s - url_delim_len;
                     struct vfs_class *vclass;
 
-                    while (vfs_prefix > lpath && *--vfs_prefix != PATH_SEP);
-                    if (*vfs_prefix == PATH_SEP)
+                    while (vfs_prefix > lpath && !IS_PATH_SEP (*--vfs_prefix))
+                        ;
+                    if (IS_PATH_SEP (*vfs_prefix))
                         vfs_prefix++;
                     *(s - url_delim_len) = '\0';
 
@@ -992,7 +996,7 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                     }
                 }
 
-                if (*s == PATH_SEP)
+                if (IS_PATH_SEP (*s))
                     break;
 
                 s--;
@@ -1009,7 +1013,7 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
 
             if (p[3] != 0)
             {
-                if (s == lpath && *s == PATH_SEP)
+                if (s == lpath && IS_PATH_SEP (*s))
                 {
                     /* "/../foo" -> "/foo" */
                     str_move (s + 1, p + 4);
@@ -1034,17 +1038,15 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
             if (s == lpath)
             {
                 /* "token/.." -> "." */
-                if (lpath[0] != PATH_SEP)
-                {
+                if (!IS_PATH_SEP (lpath[0]))
                     lpath[0] = '.';
-                }
-                lpath[1] = 0;
+                lpath[1] = '\0';
             }
             else
             {
                 /* "foo/token/.." -> "foo" */
                 if (s == lpath + 1)
-                    s[0] = 0;
+                    s[0] = '\0';
 #ifdef HAVE_CHARSET
                 else if ((strncmp (s, VFS_ENCODING_PREFIX, enc_prefix_len) == 0)
                          && (is_supported_encoding (s + enc_prefix_len)))
@@ -1055,9 +1057,9 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                     s[2] = '\0';
 
                     /* search for the previous token */
-                    /* s[-1] == PATH_SEP */
+                    /* IS_PATH_SEP (s[-1]) */
                     p = s - 1;
-                    while (p >= lpath && *p != PATH_SEP)
+                    while (p >= lpath && !IS_PATH_SEP (*p))
                         p--;
 
                     if (p >= lpath)
@@ -1121,9 +1123,8 @@ mc_realpath (const char *path, char *resolved_path)
     path = copy_path;
     max_path = copy_path + PATH_MAX - 2;
     /* If it's a relative pathname use getwd for starters. */
-    if (*path != '/')
+    if (!IS_PATH_SEP (*path))
     {
-
         new_path = g_get_current_dir ();
         if (new_path == NULL)
         {
@@ -1137,19 +1138,19 @@ mc_realpath (const char *path, char *resolved_path)
         }
 
         new_path += strlen (got_path);
-        if (new_path[-1] != '/')
-            *new_path++ = '/';
+        if (!IS_PATH_SEP (new_path[-1]))
+            *new_path++ = PATH_SEP;
     }
     else
     {
-        *new_path++ = '/';
+        *new_path++ = PATH_SEP;
         path++;
     }
     /* Expand each slash-separated pathname component. */
     while (*path != '\0')
     {
         /* Ignore stray "/". */
-        if (*path == '/')
+        if (IS_PATH_SEP (*path))
         {
             path++;
             continue;
@@ -1157,27 +1158,28 @@ mc_realpath (const char *path, char *resolved_path)
         if (*path == '.')
         {
             /* Ignore ".". */
-            if (path[1] == '\0' || path[1] == '/')
+            if (path[1] == '\0' || IS_PATH_SEP (path[1]))
             {
                 path++;
                 continue;
             }
             if (path[1] == '.')
             {
-                if (path[2] == '\0' || path[2] == '/')
+                if (path[2] == '\0' || IS_PATH_SEP (path[2]))
                 {
                     path += 2;
                     /* Ignore ".." at root. */
                     if (new_path == got_path + 1)
                         continue;
                     /* Handle ".." by backing up. */
-                    while ((--new_path)[-1] != '/');
+                    while (!IS_PATH_SEP ((--new_path)[-1]))
+                        ;
                     continue;
                 }
             }
         }
         /* Safely copy the next pathname component. */
-        while (*path != '\0' && *path != '/')
+        while (*path != '\0' && !IS_PATH_SEP (*path))
         {
             if (path > max_path)
             {
@@ -1211,12 +1213,13 @@ mc_realpath (const char *path, char *resolved_path)
         {
             /* Note: readlink doesn't add the null byte. */
             link_path[n] = '\0';
-            if (*link_path == '/')
+            if (IS_PATH_SEP (*link_path))
                 /* Start over for an absolute symlink. */
                 new_path = got_path;
             else
                 /* Otherwise back up over this component. */
-                while (*(--new_path) != '/');
+                while (!IS_PATH_SEP (*(--new_path)))
+                    ;
             /* Safe sex check. */
             if (strlen (path) + n >= PATH_MAX - 2)
             {
@@ -1229,10 +1232,10 @@ mc_realpath (const char *path, char *resolved_path)
             path = copy_path;
         }
 #endif /* S_IFLNK */
-        *new_path++ = '/';
+        *new_path++ = PATH_SEP;
     }
     /* Delete trailing slash but don't whomp a lone slash. */
-    if (new_path != got_path + 1 && new_path[-1] == '/')
+    if (new_path != got_path + 1 && IS_PATH_SEP (new_path[-1]))
         new_path--;
     /* Make sure it's null terminated. */
     *new_path = '\0';
@@ -1313,7 +1316,7 @@ mc_build_filenamev (const char *first_element, va_list args)
 
     path = g_string_new ("");
 
-    absolute = (*first_element != '\0' && *first_element == PATH_SEP);
+    absolute = IS_PATH_SEP (*first_element);
 
     do
     {
@@ -1331,10 +1334,10 @@ mc_build_filenamev (const char *first_element, va_list args)
 
             canonicalize_pathname (tmp_element);
             len = strlen (tmp_element);
-            start = (tmp_element[0] == PATH_SEP) ? tmp_element + 1 : tmp_element;
+            start = IS_PATH_SEP (tmp_element[0]) ? tmp_element + 1 : tmp_element;
 
             g_string_append (path, start);
-            if (tmp_element[len - 1] != PATH_SEP && element != NULL)
+            if (!IS_PATH_SEP (tmp_element[len - 1]) && element != NULL)
                 g_string_append_c (path, PATH_SEP);
 
             g_free (tmp_element);

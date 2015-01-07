@@ -444,7 +444,7 @@ nice_cd (const char *text, const char *xtext, const char *help,
 
     g_free (machine);
 
-    if (*cd_path != PATH_SEP)
+    if (!IS_PATH_SEP (*cd_path))
     {
         char *tmp = cd_path;
 
@@ -863,7 +863,7 @@ mkdir_cmd (void)
     {
         vfs_path_t *absdir;
 
-        if (dir[0] == '/' || dir[0] == '~')
+        if (IS_PATH_SEP (dir[0]) || dir[0] == '~')
             absdir = vfs_path_from_str (dir);
         else
         {

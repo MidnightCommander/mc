@@ -887,7 +887,7 @@ insert_file (const char *dir, const char *file)
     char *tmp_name = NULL;
     static char *dirname = NULL;
 
-    while (dir[0] == PATH_SEP && dir[1] == PATH_SEP)
+    while (IS_PATH_SEP (dir[0]) && IS_PATH_SEP (dir[1]))
         dir++;
 
     if (old_dir)
@@ -1181,7 +1181,7 @@ find_ignore_dir_search (const char *dir)
                 {
                     /* be sure that ignore dir is not a part of dir like:
                        ignore dir is "h", dir is "home" */
-                    if (dir[ilen] == '\0' || dir[ilen] == PATH_SEP)
+                    if (dir[ilen] == '\0' || IS_PATH_SEP (dir[ilen]))
                         return TRUE;
                 }
                 break;
@@ -1190,7 +1190,8 @@ find_ignore_dir_search (const char *dir)
                     char *d;
 
                     d = strstr (dir, *ignore_dir);
-                    if (d != NULL && d[-1] == PATH_SEP && (d[ilen] == '\0' || d[ilen] == PATH_SEP))
+                    if (d != NULL && IS_PATH_SEP (d[-1])
+                        && (d[ilen] == '\0' || IS_PATH_SEP (d[ilen])))
                         return TRUE;
                 }
                 break;
@@ -1743,7 +1744,7 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
             else
             {
                 p = name + (size_t) start_dir_len;
-                if (*p == PATH_SEP)
+                if (IS_PATH_SEP (*p))
                     p++;
             }
 

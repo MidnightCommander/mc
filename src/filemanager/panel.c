@@ -2900,7 +2900,7 @@ chdir_to_readlink (WPanel * panel)
             return;
         p[1] = 0;
     }
-    if (*buffer == PATH_SEP)
+    if (IS_PATH_SEP (*buffer))
         new_dir_vpath = vfs_path_from_str (buffer);
     else
         new_dir_vpath = vfs_path_append_new (panel->cwd_vpath, buffer, NULL);
@@ -3167,22 +3167,21 @@ get_parent_dir_name (const vfs_path_t * cwd_vpath, const vfs_path_t * lwd_vpath)
 
         if ((p != NULL)
             && (strncmp (cwd, lwd, (size_t) (p - lwd)) == 0)
-            && (clen == (size_t) (p - lwd)
-                || ((p == lwd) && (cwd[0] == PATH_SEP) && (cwd[1] == '\0'))))
+            && (clen == (size_t) (p - lwd) || (p == lwd && IS_PATH_SEP (cwd[0]) && cwd[1] == '\0')))
             return (p + 1);
 
         return NULL;
     }
 
     /* skip VFS prefix */
-    while (--p > lwd && *p != PATH_SEP)
+    while (--p > lwd && !IS_PATH_SEP (*p))
         ;
     /* get last component */
-    while (--p > lwd && *p != PATH_SEP)
+    while (--p > lwd && !IS_PATH_SEP (*p))
         ;
 
     /* return last component */
-    return (p != lwd || *p == PATH_SEP) ? p + 1 : p;
+    return (p != lwd || IS_PATH_SEP (*p)) ? p + 1 : p;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -4115,7 +4114,7 @@ panel_recursive_cd_to_parent (const vfs_path_t * vpath)
 
         /* check if path contains only '/' */
         panel_cwd_path = vfs_path_as_str (cwd_vpath);
-        if (panel_cwd_path[0] == PATH_SEP && panel_cwd_path[1] == '\0')
+        if (IS_PATH_SEP (panel_cwd_path[0]) && panel_cwd_path[1] == '\0')
             return NULL;
 
         tmp_vpath = vfs_path_vtokens_get (cwd_vpath, 0, -1);

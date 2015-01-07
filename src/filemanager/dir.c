@@ -652,7 +652,7 @@ dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
 
         vpath_str = vfs_path_as_str (vpath);
         /* Do not add a ".." entry to the root directory */
-        if ((vpath_str[0] == PATH_SEP) && (vpath_str[1] == '\0'))
+        if (IS_PATH_SEP (vpath_str[0]) && vpath_str[1] == '\0')
             list->len--;
     }
 
@@ -741,7 +741,7 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
     /* Add ".." except to the root directory. The ".." entry
        (if any) must be the first in the list. */
     tmp_path = vfs_path_get_by_index (vpath, 0)->path;
-    if (vfs_path_elements_count (vpath) == 1 && tmp_path[0] == PATH_SEP && tmp_path[1] == '\0')
+    if (vfs_path_elements_count (vpath) == 1 && IS_PATH_SEP (tmp_path[0]) && tmp_path[1] == '\0')
     {
         /* root directory */
         dir_list_clean (list);
