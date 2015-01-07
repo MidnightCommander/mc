@@ -3533,7 +3533,7 @@ edit_get_match_keyword_cmd (WEdit * edit)
         g_string_append_c (match_expr, edit_buffer_get_byte (&edit->buffer, word_start + i));
 
     ptr = g_get_current_dir ();
-    path = g_strconcat (ptr, G_DIR_SEPARATOR_S, (char *) NULL);
+    path = g_strconcat (ptr, PATH_SEP_STR, (char *) NULL);
     g_free (ptr);
 
     /* Recursive search file 'TAGS' in parent dirs */
@@ -3547,7 +3547,7 @@ edit_get_match_keyword_cmd (WEdit * edit)
         if (exist_file (tagfile))
             break;
     }
-    while (strcmp (path, G_DIR_SEPARATOR_S) != 0);
+    while (strcmp (path, PATH_SEP_STR) != 0);
 
     if (tagfile)
     {
