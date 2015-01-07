@@ -1,7 +1,7 @@
 /*
    lib/vfs - manipulations with temp files and  dirs
 
-   Copyright (C) 2012-2014
+   Copyright (C) 2012-2015
    Free Software Foundation, Inc.
 
    Written by:

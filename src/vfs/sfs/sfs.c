@@ -1,7 +1,7 @@
 /*
    Single File fileSystem
 
-   Copyright 1998-2014
+   Copyright 1998-2015
    Free Software Foundation, Inc.
 
    Written by:

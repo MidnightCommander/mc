@@ -2,7 +2,7 @@
    File highlight plugin.
    Reading and parse rules from ini-files
 
-   Copyright (C) 2009-2014
+   Copyright (C) 2009-2015
    Free Software Foundation, Inc.
 
    Written by:

@@ -1,7 +1,7 @@
 /*
    lib/vfs - test vfs_split() functionality
 
-   Copyright (C) 2011-2014
+   Copyright (C) 2011-2015
    Free Software Foundation, Inc.
 
    Written by:
