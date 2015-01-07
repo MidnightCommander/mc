@@ -8,7 +8,7 @@
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2009, 2010, 2011, 2013
    Vitaliy Filippov <vitalif@yourcmc.ru>, 2011
-   Andrew Borodin <aborodin@vmail.ru>, 2013, 2014
+   Andrew Borodin <aborodin@vmail.ru>, 2013-2015
 
    This file is part of the Midnight Commander.
 
@@ -940,8 +940,7 @@ mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * repla
 
     int num_replace_tokens;
     gsize loop;
-    gsize len = 0;
-    gchar *prev_str;
+    gsize prev = 0;
     replace_transform_type_t replace_flags = REPLACE_T_NO_TRANSFORM;
 
     num_replace_tokens =
@@ -959,12 +958,12 @@ mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * repla
     }
 
     ret = g_string_sized_new (64);
-    prev_str = replace_str->str;
 
     for (loop = 0; loop < replace_str->len - 1; loop++)
     {
         int lc_index;
         gchar *tmp_str;
+        gsize len = 0;
 
         lc_index = mc_search_regex__process_replace_str (replace_str, loop, &len, &replace_flags);
 
@@ -972,39 +971,37 @@ mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * repla
         {
             if (len != 0)
             {
-                mc_search_regex__process_append_str (ret, prev_str,
-                                                     replace_str->str - prev_str + loop,
+                mc_search_regex__process_append_str (ret, replace_str->str + prev, loop - prev,
                                                      &replace_flags);
                 mc_search_regex__process_append_str (ret, replace_str->str + loop + 1, len - 1,
                                                      &replace_flags);
-                prev_str = replace_str->str + loop + len;
-                loop += len - 1;
+                prev = loop + len;
+                loop = prev - 1;        /* prepare to loop++ */
             }
+
             continue;
         }
 
         if (lc_index == REPLACE_PREPARE_T_REPLACE_FLAG)
         {
-            if (loop)
-                mc_search_regex__process_append_str (ret, prev_str,
-                                                     replace_str->str - prev_str + loop,
+            if (loop != 0)
+                mc_search_regex__process_append_str (ret, replace_str->str + prev, loop - prev,
                                                      &replace_flags);
-            prev_str = replace_str->str + loop + len;
-            loop += len - 1;
+            prev = loop + len;
+            loop = prev - 1;    /* prepare to loop++ */
             continue;
         }
 
         /* escape sequence */
         if (lc_index == REPLACE_PREPARE_T_ESCAPE_SEQ)
         {
-            mc_search_regex__process_append_str (ret, prev_str,
-                                                 replace_str->str + loop - prev_str,
+            mc_search_regex__process_append_str (ret, replace_str->str + prev, loop - prev,
                                                  &replace_flags);
             /* call process_escape_sequence without starting '\\' */
             mc_search_regex__process_escape_sequence (ret, replace_str->str + loop + 1, len - 1,
                                                       &replace_flags, lc_mc_search->is_utf8);
-            prev_str = replace_str->str + loop + len;
-            loop += len - 1;
+            prev = loop + len;
+            loop = prev - 1;    /* prepare to loop++ */
             continue;
         }
 
@@ -1019,17 +1016,18 @@ mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * repla
 
         tmp_str = mc_search_regex__get_token_by_num (lc_mc_search, lc_index);
 
-        if (loop)
-            mc_search_regex__process_append_str (ret, prev_str, replace_str->str - prev_str + loop,
+        if (loop != 0)
+            mc_search_regex__process_append_str (ret, replace_str->str + prev, loop - prev,
                                                  &replace_flags);
-        prev_str = replace_str->str + loop + len;
 
         mc_search_regex__process_append_str (ret, tmp_str, -1, &replace_flags);
         g_free (tmp_str);
-        loop += len - 1;
+
+        prev = loop + len;
+        loop = prev - 1;        /* prepare to loop++ */
     }
-    mc_search_regex__process_append_str (ret, prev_str,
-                                         replace_str->str - prev_str + replace_str->len,
+
+    mc_search_regex__process_append_str (ret, replace_str->str + prev, replace_str->len - prev,
                                          &replace_flags);
 
     return ret;
