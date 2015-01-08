@@ -406,6 +406,10 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
   finish:
     view->command = g_strdup (command);
     view->dpy_start = 0;
+    view->dpy_paragraph_skip_lines = 0;
+    mcview_state_machine_init (&view->dpy_state_top, 0);
+    view->dpy_wrap_dirty = FALSE;
+    view->force_max = -1;
     view->search_start = 0;
     view->search_end = 0;
     view->dpy_text_column = 0;
@@ -425,7 +429,10 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
         else
             new_offset = min (new_offset, max_offset);
         if (!view->hex_mode)
+        {
             view->dpy_start = mcview_bol (view, new_offset, 0);
+            view->dpy_wrap_dirty = TRUE;
+        }
         else
         {
             view->dpy_start = new_offset - new_offset % view->bytes_per_line;

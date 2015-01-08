@@ -152,7 +152,7 @@ mcview_get_ptr_file (mcview_t * view, off_t byte_index)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mcview_get_utf (mcview_t * view, off_t byte_index, int *char_width, gboolean * result)
+mcview_get_utf (mcview_t * view, off_t byte_index, int *bytes_consumed, gboolean * result)
 {
     gchar *str = NULL;
     int res = -1;
@@ -160,7 +160,7 @@ mcview_get_utf (mcview_t * view, off_t byte_index, int *char_width, gboolean * r
     gchar *next_ch = NULL;
     gchar utf8buf[UTF8_CHAR_LEN + 1];
 
-    *char_width = 0;
+    *bytes_consumed = 0;
     *result = FALSE;
 
     switch (view->datasource)
@@ -206,7 +206,7 @@ mcview_get_utf (mcview_t * view, off_t byte_index, int *char_width, gboolean * r
     if (res < 0)
     {
         ch = *str;
-        *char_width = 1;
+        *bytes_consumed = 1;
     }
     else
     {
@@ -214,7 +214,7 @@ mcview_get_utf (mcview_t * view, off_t byte_index, int *char_width, gboolean * r
         /* Calculate UTF-8 char width */
         next_ch = g_utf8_next_char (str);
         if (next_ch)
-            *char_width = next_ch - str;
+            *bytes_consumed = next_ch - str;
         else
             return 0;
     }
