@@ -208,6 +208,9 @@ mcview_wcwidth (const mcview_t * view, int c)
         if (g_unichar_iszerowidth (c))
             return 0;
     }
+#else
+    (void) view;
+    (void) c;
 #endif /* HAVE_CHARSET */
     return 1;
 }
@@ -220,6 +223,9 @@ mcview_ismark (const mcview_t * view, int c)
 #ifdef HAVE_CHARSET
     if (view->utf8)
         return g_unichar_ismark (c);
+#else
+    (void) view;
+    (void) c;
 #endif /* HAVE_CHARSET */
     return FALSE;
 }
@@ -239,6 +245,9 @@ mcview_is_non_spacing_mark (const mcview_t * view, int c)
 
         return type == G_UNICODE_NON_SPACING_MARK || type == G_UNICODE_ENCLOSING_MARK;
     }
+#else
+    (void) view;
+    (void) c;
 #endif /* HAVE_CHARSET */
     return FALSE;
 }
@@ -252,6 +261,9 @@ mcview_is_spacing_mark (const mcview_t * view, int c)
 #ifdef HAVE_CHARSET
     if (view->utf8)
         return g_unichar_type (c) == G_UNICODE_SPACING_MARK;
+#else
+    (void) view;
+    (void) c;
 #endif /* HAVE_CHARSET */
     return FALSE;
 }
@@ -266,6 +278,8 @@ mcview_isprint (const mcview_t * view, int c)
     if (!view->utf8)
         c = convert_from_8bit_to_utf_c ((unsigned char) c, view->converter);
     return g_unichar_isprint (c);
+#else
+    (void) view;
 #endif /* HAVE_CHARSET */
     /* TODO this is very-very buggy by design: ticket 3257 comments 0-1 */
     return is_printable (c);
@@ -302,6 +316,8 @@ mcview_char_display (const mcview_t * view, int c, char *s)
         /* TODO the is_printable check below will be broken for this */
         c = convert_to_display_c (c);
     }
+#else
+    (void) view;
 #endif /* HAVE_CHARSET */
     /* TODO this is very-very buggy by design: ticket 3257 comments 0-1 */
     if (!is_printable (c))
@@ -325,9 +341,6 @@ mcview_char_display (const mcview_t * view, int c, char *s)
 static gboolean
 mcview_get_next_char (mcview_t * view, mcview_state_machine_t * state, int *c)
 {
-    gboolean result;
-    int bytes_consumed;
-
     /* Pretend EOF if we reached force_max */
     if (view->force_max >= 0 && state->offset >= view->force_max)
         return FALSE;
@@ -335,6 +348,9 @@ mcview_get_next_char (mcview_t * view, mcview_state_machine_t * state, int *c)
 #ifdef HAVE_CHARSET
     if (view->utf8)
     {
+        gboolean result;
+        int bytes_consumed;
+
         *c = mcview_get_utf (view, state->offset, &bytes_consumed, &result);
         if (!result)
             return FALSE;
