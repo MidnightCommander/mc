@@ -656,7 +656,8 @@ mcview_display_line (mcview_t * view, mcview_state_machine_t * state, int row,
         /* In wrap mode only: We're done with this row if the character sequence wouldn't fit.
          * Except if at the first column, because then it wouldn't fit in the next row either.
          * In this extreme case let the unwrapped code below do its best to display it. */
-        if (view->text_wrap_mode && (off_t) col + charwidth > dpy_text_column + width && col > 0)
+        if (view->text_wrap_mode && (off_t) col + charwidth > dpy_text_column + (off_t) width
+            && col > 0)
         {
             *state = state_saved;
             if (paragraph_ended != NULL)
@@ -670,7 +671,7 @@ mcview_display_line (mcview_t * view, mcview_state_machine_t * state, int row,
         if (row >= 0 && row < (int) height)
         {
             if ((off_t) col >= dpy_text_column &&
-                (off_t) col + charwidth <= dpy_text_column + width)
+                (off_t) col + charwidth <= dpy_text_column + (off_t) width)
             {
                 /* The combining character sequence fits entirely in the viewport. Print it. */
                 tty_setcolor (color);
@@ -700,20 +701,20 @@ mcview_display_line (mcview_t * view, mcview_state_machine_t * state, int row,
                  * or spaces with the correct attributes for partial Tabs. */
                 tty_setcolor (color);
                 for (i = dpy_text_column;
-                     i < (off_t) col + charwidth && i < dpy_text_column + width; i++)
+                     i < (off_t) col + charwidth && i < dpy_text_column + (off_t) width; i++)
                 {
                     widget_move (view, top + row, left + (i - dpy_text_column));
                     tty_print_anychar ((cs[0] == '\t') ? ' ' : PARTIAL_CJK_AT_LEFT_MARGIN);
                 }
             }
-            else if ((off_t) col < dpy_text_column + width &&
-                     (off_t) col + charwidth > dpy_text_column + width)
+            else if ((off_t) col < dpy_text_column + (off_t) width &&
+                     (off_t) col + charwidth > dpy_text_column + (off_t) width)
             {
                 /* The combining character sequence would cross the right edge of the viewport
                  * and we're not wrapping. Print replacement character(s),
                  * or spaces with the correct attributes for partial Tabs. */
                 tty_setcolor (color);
-                for (i = col; i < dpy_text_column + width; i++)
+                for (i = col; i < dpy_text_column + (off_t) width; i++)
                 {
                     widget_move (view, top + row, left + (i - dpy_text_column));
                     tty_print_anychar ((cs[0] == '\t') ? ' ' : PARTIAL_CJK_AT_RIGHT_MARGIN);
@@ -724,7 +725,8 @@ mcview_display_line (mcview_t * view, mcview_state_machine_t * state, int row,
         col += charwidth;
         state->unwrapped_column += charwidth;
 
-        if (!view->text_wrap_mode && col >= dpy_text_column + width && linewidth == NULL)
+        if (!view->text_wrap_mode && (off_t) col >= dpy_text_column + (off_t) width
+            && linewidth == NULL)
         {
             /* Optimization: Fast forward to the end of the line, rather than carefully
              * parsing and then not actually displaying it. */
