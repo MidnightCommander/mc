@@ -21,15 +21,15 @@ EXTRA_DIST = \
 	$(SCRIPTS_IN) \
 	$(noinst_DATA)
 
-mc.csh: $(srcdir)/mc.csh.in
+mc.csh: $(top_builddir)/config.status $(srcdir)/mc.csh.in
 	sed "s%@""pkglibexecdir@%$(pkglibexecdir)%" $(srcdir)/mc.csh.in > mc.csh
 
-mc.sh: $(srcdir)/mc.sh.in
+mc.sh: $(top_builddir)/config.status $(srcdir)/mc.sh.in
 	sed "s%@""pkglibexecdir@%$(pkglibexecdir)%" $(srcdir)/mc.sh.in > mc.sh
 
-mc-wrapper.csh: $(srcdir)/mc-wrapper.csh.in
+mc-wrapper.csh: $(top_builddir)/config.status $(srcdir)/mc-wrapper.csh.in
 	sed "s%@""bindir@%$(bindir)%" $(srcdir)/mc-wrapper.csh.in > mc-wrapper.csh
 
-mc-wrapper.sh: $(srcdir)/mc-wrapper.sh.in
+mc-wrapper.sh: $(top_builddir)/config.status $(srcdir)/mc-wrapper.sh.in
 	sed "s%@""bindir@%$(bindir)%" $(srcdir)/mc-wrapper.sh.in > mc-wrapper.sh
 
