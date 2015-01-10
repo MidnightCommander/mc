@@ -576,17 +576,17 @@ dview_get_byte (char *str, gboolean * result)
 /**
  * Get utf multibyte char from string
  *
- * @param char * str, int * char_width, gboolean * result
+ * @param char * str, int * char_length, gboolean * result
  * @return int as utf character or 0 and result == FALSE if fail
  */
 
 static int
-dview_get_utf (char *str, int *char_width, gboolean * result)
+dview_get_utf (char *str, int *char_length, gboolean * result)
 {
     int res = -1;
     gunichar ch;
     gchar *next_ch = NULL;
-    int width = 0;
+    int ch_len = 0;
 
     *result = TRUE;
 
@@ -603,14 +603,11 @@ dview_get_utf (char *str, int *char_width, gboolean * result)
     else
     {
         ch = res;
-        /* Calculate UTF-8 char width */
+        /* Calculate UTF-8 char length */
         next_ch = g_utf8_next_char (str);
-        if (next_ch != NULL)
-            width = next_ch - str;
-        else
-            ch = 0;
+        ch_len = next_ch - str;
     }
-    *char_width = width;
+    *char_length = ch_len;
     return ch;
 }
 
@@ -1415,12 +1412,12 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
             {
                 int utf_ch = 0;
                 gboolean res;
-                int w;
+                int ch_len;
 
                 skip--;
-                utf_ch = dview_get_utf ((char *) src, &w, &res);
-                if (w > 1)
-                    skip += w - 1;
+                utf_ch = dview_get_utf ((char *) src, &ch_len, &res);
+                if (ch_len > 1)
+                    skip += ch_len - 1;
                 (void) utf_ch;
             }
             else
@@ -1516,12 +1513,12 @@ cvt_mgeta (const char *src, size_t srcsize, char *dst, int dstsize, int skip, in
             {
                 int utf_ch = 0;
                 gboolean res;
-                int w;
+                int ch_len;
 
                 skip--;
-                utf_ch = dview_get_utf ((char *) src, &w, &res);
-                if (w > 1)
-                    skip += w - 1;
+                utf_ch = dview_get_utf ((char *) src, &ch_len, &res);
+                if (ch_len > 1)
+                    skip += ch_len - 1;
                 (void) utf_ch;
             }
             else
@@ -2604,14 +2601,15 @@ dview_display_file (const WDiff * dview, diff_place_t ord, int r, int c, int hei
 
                     for (cnt = 0; cnt < strlen (buf) && col < width; cnt++)
                     {
-                        int w;
                         gboolean ch_res;
 
                         if (dview->utf8)
                         {
-                            next_ch = dview_get_utf (buf + cnt, &w, &ch_res);
-                            if (w > 1)
-                                cnt += w - 1;
+                            int ch_len;
+
+                            next_ch = dview_get_utf (buf + cnt, &ch_len, &ch_res);
+                            if (ch_len > 1)
+                                cnt += ch_len - 1;
                             if (!g_unichar_isprint (next_ch))
                                 next_ch = '.';
                         }
@@ -2676,14 +2674,15 @@ dview_display_file (const WDiff * dview, diff_place_t ord, int r, int c, int hei
         col = 0;
         for (cnt = 0; cnt < strlen (buf) && col < width; cnt++)
         {
-            int w;
             gboolean ch_res;
 
             if (dview->utf8)
             {
-                next_ch = dview_get_utf (buf + cnt, &w, &ch_res);
-                if (w > 1)
-                    cnt += w - 1;
+                int ch_len;
+
+                next_ch = dview_get_utf (buf + cnt, &ch_len, &ch_res);
+                if (ch_len > 1)
+                    cnt += ch_len - 1;
                 if (!g_unichar_isprint (next_ch))
                     next_ch = '.';
             }

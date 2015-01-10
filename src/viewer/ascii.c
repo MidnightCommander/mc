@@ -355,16 +355,16 @@ mcview_get_next_char (mcview_t * view, mcview_state_machine_t * state, int *c)
     if (view->utf8)
     {
         gboolean result;
-        int bytes_consumed;
+        int char_length;
 
-        *c = mcview_get_utf (view, state->offset, &bytes_consumed, &result);
+        *c = mcview_get_utf (view, state->offset, &char_length, &result);
         if (!result)
             return FALSE;
         /* Pretend EOF if we crossed force_max */
-        if (view->force_max >= 0 && state->offset + bytes_consumed > view->force_max)
+        if (view->force_max >= 0 && state->offset + char_length > view->force_max)
             return FALSE;
 
-        state->offset += bytes_consumed;
+        state->offset += char_length;
         return TRUE;
     }
 #endif /* HAVE_CHARSET */

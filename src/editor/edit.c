@@ -994,15 +994,15 @@ edit_right_word_move_cmd (WEdit * edit)
 static void
 edit_right_char_move_cmd (WEdit * edit)
 {
-    int cw = 1;
+    int char_length = 1;
     int c;
 
 #ifdef HAVE_CHARSET
     if (edit->utf8)
     {
-        c = edit_buffer_get_utf (&edit->buffer, edit->buffer.curs1, &cw);
-        if (cw < 1)
-            cw = 1;
+        c = edit_buffer_get_utf (&edit->buffer, edit->buffer.curs1, &char_length);
+        if (char_length < 1)
+            char_length = 1;
     }
     else
 #endif
@@ -1011,7 +1011,7 @@ edit_right_char_move_cmd (WEdit * edit)
     if (option_cursor_beyond_eol && c == '\n')
         edit->over_col++;
     else
-        edit_cursor_move (edit, cw);
+        edit_cursor_move (edit, char_length);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1019,7 +1019,7 @@ edit_right_char_move_cmd (WEdit * edit)
 static void
 edit_left_char_move_cmd (WEdit * edit)
 {
-    int cw = 1;
+    int char_length = 1;
 
     if (edit->column_highlight
         && option_cursor_beyond_eol
@@ -1029,16 +1029,16 @@ edit_left_char_move_cmd (WEdit * edit)
 #ifdef HAVE_CHARSET
     if (edit->utf8)
     {
-        edit_buffer_get_prev_utf (&edit->buffer, edit->buffer.curs1, &cw);
-        if (cw < 1)
-            cw = 1;
+        edit_buffer_get_prev_utf (&edit->buffer, edit->buffer.curs1, &char_length);
+        if (char_length < 1)
+            char_length = 1;
     }
 #endif
 
     if (option_cursor_beyond_eol && edit->over_col > 0)
         edit->over_col--;
     else
-        edit_cursor_move (edit, -cw);
+        edit_cursor_move (edit, -char_length);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2581,7 +2581,7 @@ int
 edit_delete (WEdit * edit, gboolean byte_delete)
 {
     int p = 0;
-    int cw = 1;
+    int char_length = 1;
     int i;
 
     if (edit->buffer.curs2 == 0)
@@ -2591,9 +2591,9 @@ edit_delete (WEdit * edit, gboolean byte_delete)
     /* if byte_delete == TRUE then delete only one byte not multibyte char */
     if (edit->utf8 && !byte_delete)
     {
-        edit_buffer_get_utf (&edit->buffer, edit->buffer.curs1, &cw);
-        if (cw < 1)
-            cw = 1;
+        edit_buffer_get_utf (&edit->buffer, edit->buffer.curs1, &char_length);
+        if (char_length < 1)
+            char_length = 1;
     }
 #else
     (void) byte_delete;
@@ -2602,7 +2602,7 @@ edit_delete (WEdit * edit, gboolean byte_delete)
     if (edit->mark2 != edit->mark1)
         edit_push_markers (edit);
 
-    for (i = 1; i <= cw; i++)
+    for (i = 1; i <= char_length; i++)
     {
         if (edit->mark1 > edit->buffer.curs1)
         {
@@ -2643,7 +2643,7 @@ int
 edit_backspace (WEdit * edit, gboolean byte_delete)
 {
     int p = 0;
-    int cw = 1;
+    int char_length = 1;
     int i;
 
     if (edit->buffer.curs1 == 0)
@@ -2655,15 +2655,15 @@ edit_backspace (WEdit * edit, gboolean byte_delete)
 #ifdef HAVE_CHARSET
     if (edit->utf8 && !byte_delete)
     {
-        edit_buffer_get_prev_utf (&edit->buffer, edit->buffer.curs1, &cw);
-        if (cw < 1)
-            cw = 1;
+        edit_buffer_get_prev_utf (&edit->buffer, edit->buffer.curs1, &char_length);
+        if (char_length < 1)
+            char_length = 1;
     }
 #else
     (void) byte_delete;
 #endif
 
-    for (i = 1; i <= cw; i++)
+    for (i = 1; i <= char_length; i++)
     {
         if (edit->mark1 >= edit->buffer.curs1)
         {
@@ -2779,18 +2779,18 @@ edit_move_forward3 (const WEdit * edit, off_t current, long cols, off_t upto)
         if (edit->utf8)
         {
             int utf_ch;
-            int cw = 1;
+            int char_length = 1;
 
-            utf_ch = edit_buffer_get_utf (&edit->buffer, p, &cw);
+            utf_ch = edit_buffer_get_utf (&edit->buffer, p, &char_length);
             if (mc_global.utf8_display)
             {
-                if (cw > 1)
-                    col -= cw - 1;
+                if (char_length > 1)
+                    col -= char_length - 1;
                 if (g_unichar_iswide (utf_ch))
                     col++;
             }
-            else if (cw > 1 && g_unichar_isprint (utf_ch))
-                col -= cw - 1;
+            else if (char_length > 1 && g_unichar_isprint (utf_ch))
+                col -= char_length - 1;
         }
 
         c = convert_to_display_c (c);

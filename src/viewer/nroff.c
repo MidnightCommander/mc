@@ -65,11 +65,11 @@ mcview_nroff_get_char (mcview_nroff_t * nroff, int *ret_val, off_t nroff_index)
     if (nroff->view->utf8)
     {
         gboolean utf_result;
-        c = mcview_get_utf (nroff->view, nroff_index, &nroff->char_width, &utf_result);
+        c = mcview_get_utf (nroff->view, nroff_index, &nroff->char_length, &utf_result);
         if (!utf_result)
         {
             /* we need got symbol in any case */
-            nroff->char_width = 1;
+            nroff->char_length = 1;
             if (!mcview_get_byte (nroff->view, nroff_index, &c) || !g_ascii_isprint (c))
                 return FALSE;
         }
@@ -77,7 +77,7 @@ mcview_nroff_get_char (mcview_nroff_t * nroff, int *ret_val, off_t nroff_index)
     else
 #endif
     {
-        nroff->char_width = 1;
+        nroff->char_length = 1;
         if (!mcview_get_byte (nroff->view, nroff_index, &c))
             return FALSE;
     }
@@ -109,7 +109,7 @@ mcview__get_nroff_real_len (mcview_t * view, off_t start, off_t length)
         switch (nroff->type)
         {
         case NROFF_TYPE_BOLD:
-            ret += 1 + nroff->char_width;       /* real char width and 0x8 */
+            ret += 1 + nroff->char_length;      /* real char length and 0x8 */
             break;
         case NROFF_TYPE_UNDERLINE:
             ret += 2;           /* underline symbol and ox8 */
@@ -117,7 +117,7 @@ mcview__get_nroff_real_len (mcview_t * view, off_t start, off_t length)
         default:
             break;
         }
-        i += nroff->char_width;
+        i += nroff->char_length;
         mcview_nroff_seq_next (nroff);
     }
 
@@ -175,10 +175,10 @@ mcview_nroff_seq_info (mcview_nroff_t * nroff)
     if (!mcview_nroff_get_char (nroff, &nroff->current_char, nroff->index))
         return nroff->type;
 
-    if (!mcview_get_byte (nroff->view, nroff->index + nroff->char_width, &next) || next != '\b')
+    if (!mcview_get_byte (nroff->view, nroff->index + nroff->char_length, &next) || next != '\b')
         return nroff->type;
 
-    if (!mcview_nroff_get_char (nroff, &next2, nroff->index + 1 + nroff->char_width))
+    if (!mcview_nroff_get_char (nroff, &next2, nroff->index + 1 + nroff->char_length))
         return nroff->type;
 
     if (nroff->current_char == '_' && next2 == '_')
@@ -216,7 +216,7 @@ mcview_nroff_seq_next (mcview_nroff_t * nroff)
     switch (nroff->type)
     {
     case NROFF_TYPE_BOLD:
-        nroff->index += 1 + nroff->char_width;
+        nroff->index += 1 + nroff->char_length;
         break;
     case NROFF_TYPE_UNDERLINE:
         nroff->index += 2;
@@ -225,7 +225,7 @@ mcview_nroff_seq_next (mcview_nroff_t * nroff)
         break;
     }
 
-    nroff->index += nroff->char_width;
+    nroff->index += nroff->char_length;
 
     mcview_nroff_seq_info (nroff);
     return nroff->current_char;

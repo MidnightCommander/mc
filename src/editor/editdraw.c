@@ -119,10 +119,10 @@ status_string (WEdit * edit, char *s, int w)
         if (edit->utf8)
         {
             unsigned int cur_utf = 0;
-            int cw = 1;
+            int char_length = 1;
 
-            cur_utf = edit_buffer_get_utf (&edit->buffer, edit->buffer.curs1, &cw);
-            if (cw > 0)
+            cur_utf = edit_buffer_get_utf (&edit->buffer, edit->buffer.curs1, &char_length);
+            if (char_length > 0)
             {
                 g_snprintf (byte_str, sizeof (byte_str), "%04d 0x%03X",
                             (unsigned) cur_utf, (unsigned) cur_utf);
@@ -310,10 +310,10 @@ edit_status_window (WEdit * edit)
         else if (edit->utf8)
         {
             unsigned int cur_utf;
-            int cw = 1;
+            int char_length = 1;
 
-            cur_utf = edit_buffer_get_utf (&edit->buffer, edit->buffer.curs1, &cw);
-            if (cw <= 0)
+            cur_utf = edit_buffer_get_utf (&edit->buffer, edit->buffer.curs1, &char_length);
+            if (char_length <= 0)
                 cur_utf = edit_buffer_get_current_byte (&edit->buffer);
             tty_printf ("[%05d 0x%04X]", cur_utf, cur_utf);
         }
@@ -578,7 +578,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
 
             while (col <= end_col - edit->start_col)
             {
-                int cw = 1;
+                int char_length = 1;
                 unsigned int c;
                 gboolean wide_width_char = FALSE;
                 gboolean control_char = FALSE;
@@ -610,7 +610,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
 
 #ifdef HAVE_CHARSET
                 if (edit->utf8)
-                    c = edit_buffer_get_utf (&edit->buffer, q, &cw);
+                    c = edit_buffer_get_utf (&edit->buffer, q, &char_length);
                 else
 #endif
                     c = edit_buffer_get_byte (&edit->buffer, q);
@@ -799,10 +799,8 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
                 }               /* case */
 
                 q++;
-                if (cw > 1)
-                {
-                    q += cw - 1;
-                }
+                if (char_length > 1)
+                    q += char_length - 1;
 
                 if (col > (end_col - edit->start_col + 1))
                 {
