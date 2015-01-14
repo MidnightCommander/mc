@@ -75,6 +75,9 @@ do_open_action() {
             (glade-2 "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
         fi
         ;;
+    po)
+        (poedit "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+        ;;
     lyx)
         lyx "${MC_EXT_FILENAME}"
         ;;

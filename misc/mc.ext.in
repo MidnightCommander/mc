@@ -656,6 +656,10 @@ shell/i/.glade
 shell/.mo
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view mo
 
+# po
+shell/.po
+	Open=@EXTHELPERSDIR@/misc.sh open po
+
 # lyx
 shell/i/.lyx
 	Open=@EXTHELPERSDIR@/misc.sh open lyx
