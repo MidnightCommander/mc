@@ -255,13 +255,7 @@ edit_buffer_get_utf (const edit_buffer_t * buf, off_t byte_index, int *char_leng
         ch = res;
         /* Calculate UTF-8 char length */
         next_ch = g_utf8_next_char (str);
-        if (next_ch != NULL)
-            *char_length = next_ch - str;
-        else
-        {
-            ch = 0;
-            *char_length = 0;
-        }
+        *char_length = next_ch - str;
     }
 
     return (int) ch;

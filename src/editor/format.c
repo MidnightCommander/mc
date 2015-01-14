@@ -252,8 +252,7 @@ line_pixel_length (unsigned char *t, off_t b, off_t l, gboolean utf8)
 
                     /* Calculate UTF-8 char length */
                     next_ch = g_utf8_next_char (tb);
-                    if (next_ch != NULL)
-                        char_length = next_ch - tb;
+                    char_length = next_ch - tb;
 
                     if (g_unichar_iswide (ch))
                         x++;

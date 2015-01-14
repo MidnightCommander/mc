@@ -213,10 +213,7 @@ mcview_get_utf (mcview_t * view, off_t byte_index, int *char_length, gboolean * 
         ch = res;
         /* Calculate UTF-8 char length */
         next_ch = g_utf8_next_char (str);
-        if (next_ch != NULL)
-            *char_length = next_ch - str;
-        else
-            return 0;
+        *char_length = next_ch - str;
     }
     *result = TRUE;
     return ch;

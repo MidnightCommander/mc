@@ -586,7 +586,6 @@ dview_get_utf (char *str, int *char_length, gboolean * result)
 {
     int res = -1;
     gunichar ch;
-    gchar *next_ch = NULL;
     int ch_len = 0;
 
     *result = TRUE;
@@ -603,6 +602,8 @@ dview_get_utf (char *str, int *char_length, gboolean * result)
         ch = *str;
     else
     {
+        gchar *next_ch;
+
         ch = res;
         /* Calculate UTF-8 char length */
         next_ch = g_utf8_next_char (str);
