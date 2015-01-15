@@ -70,7 +70,6 @@
 #define FIRST_TOKEN_R strtok_r (line, " \t", &next)
 #define NEXT_TOKEN_R  strtok_r (NULL, " \t", &next)
 
-#define ERR1 do { g_free (line); return FALSE; } while (FALSE)
 #define ERR2 do { (*err)++; return FALSE; } while (FALSE)
 
 /*** file scope type declarations ****************************************************************/
@@ -280,9 +279,8 @@ ftpfs_convert_date (const char *s)
  */
 
 static gboolean
-parse_ls_line (char *line_c, struct stat *s, char **filename, char **linkname)
+parse_ls_line (char *line, struct stat *s, char **filename, char **linkname)
 {
-    char *line;
     char *next = NULL;
     char *t;
     mode_t type, mode = 0;
@@ -292,18 +290,13 @@ parse_ls_line (char *line_c, struct stat *s, char **filename, char **linkname)
     gboolean year_anomaly = FALSE;
     char *name;
 
-    line = g_strdup (line_c);
-
     /* parse perms */
     t = FIRST_TOKEN_R;
     if (t == NULL)
-        ERR1;
+        return FALSE;
 
     if (!vfs_parse_filetype (t, NULL, &type))
-    {
-        g_free (line);
         return FALSE;
-    }
 
     if (vfs_parse_fileperms (t + 1, NULL, &mode))
         mode |= type;
@@ -313,13 +306,13 @@ parse_ls_line (char *line_c, struct stat *s, char **filename, char **linkname)
     /* link count */
     t = NEXT_TOKEN_R;
     if (t == NULL)
-        ERR1;
+        return FALSE;
     s->st_nlink = atol (t);
 
     /* user */
     t = NEXT_TOKEN_R;
     if (t == NULL)
-        ERR1;
+        return FALSE;
 
     s->st_uid = ftpfs_get_uid (t);
 
@@ -329,7 +322,7 @@ parse_ls_line (char *line_c, struct stat *s, char **filename, char **linkname)
     /* size or month */
     t = NEXT_TOKEN_R;
     if (t == NULL)
-        ERR1;
+        return FALSE;
     if (isdigit ((unsigned char) *t))
     {
         /* it's size, so the previous was group: */
@@ -342,7 +335,7 @@ parse_ls_line (char *line_c, struct stat *s, char **filename, char **linkname)
             s->st_size = (off_t) size;
         t = NEXT_TOKEN_R;
         if (t == NULL)
-            ERR1;
+            return FALSE;
     }
     else
     {
@@ -368,13 +361,13 @@ parse_ls_line (char *line_c, struct stat *s, char **filename, char **linkname)
 
     day_of_month = NEXT_TOKEN_R;
     if (day_of_month == NULL)
-        ERR1;
+        return FALSE;
     date.tm_mday = atoi (day_of_month);
 
     /* time or year */
     t = NEXT_TOKEN_R;
     if (t == NULL)
-        ERR1;
+        return FALSE;
     date.tm_isdst = -1;
     date.tm_hour = date.tm_min = 0;
     date.tm_sec = 30;
@@ -399,7 +392,7 @@ parse_ls_line (char *line_c, struct stat *s, char **filename, char **linkname)
 
     name = strtok_r (NULL, "", &next);
     if (name == NULL)
-        ERR1;
+        return FALSE;
 
     /* there are ls which output extra space after year. */
     if (year_anomaly && *name == ' ')
@@ -421,8 +414,6 @@ parse_ls_line (char *line_c, struct stat *s, char **filename, char **linkname)
     }
 
     *filename = g_strdup (name);
-
-    g_free (line);
 
     return TRUE;
 }
