@@ -1765,12 +1765,25 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
     }
 
     if (sock == -1)
-        goto fallback;
+    {
+      fallback:
+        if (ftp_super->strict == RFC_AUTODETECT)
+        {
+            /* It's our first attempt to get a directory listing from this
+               server (UNIX style LIST command) */
+            ftp_super->strict = RFC_STRICT;
+            /* I hate goto, but recursive call needs another 8K on stack */
+            /* return ftpfs_dir_load (me, dir, remote_path); */
+            cd_first = TRUE;
+            goto again;
+        }
 
-    /* Clear the interrupt flag */
-    tty_enable_interrupt_key ();
+        vfs_print_message ("%s", _("ftpfs: failed; nowhere to fallback to"));
+        ERRNOR (EACCES, -1);
+    }
 
     vfs_parse_ls_lga_init ();
+
     while (TRUE)
     {
         int i;
@@ -1787,7 +1800,6 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
             me->verrno = ECONNRESET;
             close (sock);
             ftp_super->ctl_connection_busy = FALSE;
-            tty_disable_interrupt_key ();
             ftpfs_get_reply (me, ftp_super->sock, NULL, 0);
             vfs_print_message (_("%s: failure"), me->name);
             return (-1);
@@ -1844,21 +1856,6 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
 
     vfs_print_message (_("%s: done."), me->name);
     return 0;
-
-  fallback:
-    if (ftp_super->strict == RFC_AUTODETECT)
-    {
-        /* It's our first attempt to get a directory listing from this
-           server (UNIX style LIST command) */
-        ftp_super->strict = RFC_STRICT;
-        /* I hate goto, but recursive call needs another 8K on stack */
-        /* return ftpfs_dir_load (me, dir, remote_path); */
-        cd_first = TRUE;
-        goto again;
-    }
-
-    vfs_print_message ("%s", _("ftpfs: failed; nowhere to fallback to"));
-    ERRNOR (EACCES, -1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
