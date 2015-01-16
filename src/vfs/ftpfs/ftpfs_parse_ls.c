@@ -1155,15 +1155,20 @@ ftpfs_parse_long_list (struct vfs_class * me, struct vfs_s_inode * dir, GSList *
                 struct vfs_s_entry *info;
                 gboolean ok;
                 char *tmp_line;
+                int nlink;
 
                 /* parser can clobber the line - work on a copy */
                 tmp_line = g_strndup (b, blen);
 
                 info = vfs_s_generate_entry (me, NULL, dir, 0);
+                nlink = info->ino->st.st_nlink;
                 ok = (*line_parsers[i]) (tmp_line, &info->ino->st, &info->name,
                                          &info->ino->linkname, &err[i]);
                 if (ok && strchr (info->name, '/') == NULL)
+                {
+                    info->ino->st.st_nlink = nlink;     /* Ouch, we need to preserve our counts :-( */
                     set[i] = g_slist_prepend (set[i], info);
+                }
                 else
                     vfs_s_free_entry (me, info);
 
@@ -1191,15 +1196,20 @@ ftpfs_parse_long_list (struct vfs_class * me, struct vfs_s_inode * dir, GSList *
             struct vfs_s_entry *info;
             gboolean ok;
             char *tmp_line;
+            int nlink;
 
             /* parser can clobber the line - work on a copy */
             tmp_line = g_strndup (b, blen);
 
             info = vfs_s_generate_entry (me, NULL, dir, 0);
+            nlink = info->ino->st.st_nlink;
             ok = guessed_parser (tmp_line, &info->ino->st, &info->name, &info->ino->linkname,
                                  the_err);
             if (ok && strchr (info->name, '/') == NULL)
+            {
+                info->ino->st.st_nlink = nlink; /* Ouch, we need to preserve our counts :-( */
                 *the_set = g_slist_prepend (*the_set, info);
+            }
             else
                 vfs_s_free_entry (me, info);
 
