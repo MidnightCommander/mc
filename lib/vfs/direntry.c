@@ -196,7 +196,7 @@ vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
         for (pseg = 0; path[pseg] != '\0' && !IS_PATH_SEP (path[pseg]); pseg++)
             ;
 
-        for (iter = root->subdir; iter != NULL; iter = g_list_next (iter))
+        for (iter = g_queue_peek_head_link (root->subdir); iter != NULL; iter = g_list_next (iter))
         {
             ent = VFS_ENTRY (iter->data);
             if (strlen (ent->name) == pseg && strncmp (ent->name, path, pseg) == 0)
@@ -259,7 +259,7 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
         return ent;
     }
 
-    iter = g_list_find_custom (root->subdir, path, (GCompareFunc) vfs_s_entry_compare);
+    iter = g_queue_find_custom (root->subdir, path, (GCompareFunc) vfs_s_entry_compare);
     ent = iter != NULL ? VFS_ENTRY (iter->data) : NULL;
 
     if (ent != NULL && !VFS_SUBCLASS (me)->dir_uptodate (me, ent->ino))
@@ -286,7 +286,7 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
 
         vfs_s_insert_entry (me, root, ent);
 
-        iter = g_list_find_custom (root->subdir, path, (GCompareFunc) vfs_s_entry_compare);
+        iter = g_queue_find_custom (root->subdir, path, (GCompareFunc) vfs_s_entry_compare);
         ent = iter != NULL ? VFS_ENTRY (iter->data) : NULL;
     }
     if (ent == NULL)
@@ -441,7 +441,7 @@ vfs_s_opendir (const vfs_path_t * vpath)
     }
 #endif
     info = g_new (struct dirhandle, 1);
-    info->cur = dir->subdir;
+    info->cur = g_queue_peek_head_link (dir->subdir);
     info->dir = dir;
 
     return info;
@@ -888,6 +888,7 @@ vfs_s_new_inode (struct vfs_class *me, struct vfs_s_super *super, struct stat *i
     if (initstat != NULL)
         ino->st = *initstat;
     ino->super = super;
+    ino->subdir = g_queue_new ();
     ino->st.st_nlink = 0;
     ino->st.st_ino = VFS_SUBCLASS (me)->inode_counter++;
     ino->st.st_dev = VFS_SUBCLASS (me)->rdev;
@@ -914,8 +915,16 @@ vfs_s_free_inode (struct vfs_class *me, struct vfs_s_inode *ino)
         return;
     }
 
-    while (ino->subdir != NULL)
-        vfs_s_free_entry (me, VFS_ENTRY (ino->subdir->data));
+    while (g_queue_get_length (ino->subdir) != 0)
+    {
+        struct vfs_s_entry *entry;
+
+        entry = VFS_ENTRY (g_queue_peek_head (ino->subdir));
+        vfs_s_free_entry (me, entry);
+    }
+
+    g_queue_free (ino->subdir);
+    ino->subdir = NULL;
 
     CALL (free_inode) (me, ino);
     g_free (ino->linkname);
@@ -951,7 +960,7 @@ void
 vfs_s_free_entry (struct vfs_class *me, struct vfs_s_entry *ent)
 {
     if (ent->dir != NULL)
-        ent->dir->subdir = g_list_remove (ent->dir->subdir, ent);
+        g_queue_remove (ent->dir->subdir, ent);
 
     MC_PTR_FREE (ent->name);
 
@@ -974,7 +983,7 @@ vfs_s_insert_entry (struct vfs_class *me, struct vfs_s_inode *dir, struct vfs_s_
     ent->dir = dir;
 
     ent->ino->st.st_nlink++;
-    dir->subdir = g_list_append (dir->subdir, ent);
+    g_queue_push_tail (dir->subdir, ent);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1708,7 +1717,8 @@ vfs_s_normalize_filename_leading_spaces (struct vfs_s_inode *root_inode, size_t 
 {
     GList *iter;
 
-    for (iter = root_inode->subdir; iter != NULL; iter = g_list_next (iter))
+    for (iter = g_queue_peek_head_link (root_inode->subdir); iter != NULL;
+         iter = g_list_next (iter))
     {
         struct vfs_s_entry *entry = VFS_ENTRY (iter->data);
 
