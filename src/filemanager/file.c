@@ -2528,13 +2528,12 @@ dirsize_status_update_cb (status_msg_t * sm)
     if (WIDGET (dsm->count_size)->cols + 6 > wd->cols)
     {
         dlg_set_size (sm->dlg, wd->lines, WIDGET (dsm->count_size)->cols + 6);
-        dirsize_status_locate_buttons ((dirsize_status_msg_t *) sm);
+        dirsize_status_locate_buttons (dsm);
         dlg_redraw (sm->dlg);
     }
 
     /* adjust first label */
-    label_set_text (dsm->dirname,
-                    str_trunc (vfs_path_as_str (dsm->dirname_vpath), WIDGET (sm->dlg)->cols - 6));
+    label_set_text (dsm->dirname, str_trunc (vfs_path_as_str (dsm->dirname_vpath), wd->cols - 6));
 
     switch (status_msg_common_update (sm))
     {
