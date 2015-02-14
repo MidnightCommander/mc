@@ -295,7 +295,7 @@ You may redefine key bindings. See
 .I redefine hotkey bindings
 .\"Keys_redefine"
 .PP
-for more info. All other key bindings (described in this manual) relative
+for more info. All other key bindings (described in this manual) are relative
 to default behavior.
 
 .PP
