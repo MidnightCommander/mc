@@ -672,7 +672,8 @@ mcview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
     case MSG_KEY:
         i = mcview_handle_key (view, parm);
         mcview_update (view);
-        return i;
+        /* don't pass any chars to command line in QuickView mode */
+        return mcview_is_in_panel (view) ? MSG_HANDLED : i;
 
     case MSG_ACTION:
         i = mcview_execute_cmd (view, parm);
