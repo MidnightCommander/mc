@@ -541,6 +541,7 @@ configure_box (void)
                     QUICK_CHECKBOX (N_("&Verbose operation"), &verbose, NULL),
                     QUICK_CHECKBOX (N_("Compute tota&ls"), &file_op_compute_totals, NULL),
                     QUICK_CHECKBOX (N_("Classic pro&gressbar"), &classic_progressbar, NULL),
+                    QUICK_CHECKBOX (N_("Smooth progressbar"), &smooth_progressbar, NULL),
                     QUICK_CHECKBOX (N_("Mkdi&r autoname"), &auto_fill_mkdir_name, NULL),
                     QUICK_CHECKBOX (N_("&Preallocate space"), &mc_global.vfs.preallocate_space,
                                     NULL),

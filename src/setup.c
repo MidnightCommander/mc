@@ -316,6 +316,7 @@ static const struct
     { "num_history_items_recorded", &num_history_items_recorded },
     { "file_op_compute_totals", &file_op_compute_totals },
     { "classic_progressbar", &classic_progressbar},
+    { "smooth_progressbar", &smooth_progressbar},
 #ifdef ENABLE_VFS
     { "vfs_timeout", &vfs_timeout },
 #ifdef ENABLE_VFS_FTP

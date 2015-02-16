@@ -87,6 +87,7 @@ extern int drop_menus;
 extern int verbose;
 extern int setup_copymove_persistent_attr;
 extern int classic_progressbar;
+extern int smooth_progressbar;
 extern int easy_patterns;
 extern int option_tab_spacing;
 extern int auto_save_setup;
