@@ -11,12 +11,17 @@
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /* When using Slang with color, we have all the indexes free but
- * those defined here (A_BOLD, A_UNDERLINE, A_REVERSE, A_BLINK)
+ * those defined here (A_BOLD, A_ITALIC, A_UNDERLINE, A_REVERSE, A_BLINK)
  */
 
 #ifndef A_BOLD
 #define A_BOLD SLTT_BOLD_MASK
 #endif /* A_BOLD */
+#ifdef SLTT_ITALIC_MASK         /* available since slang-pre2.3.0-107 */
+#ifndef A_ITALIC
+#define A_ITALIC SLTT_ITALIC_MASK
+#endif /* A_ITALIC */
+#endif /* SLTT_ITALIC_MASK */
 #ifndef A_UNDERLINE
 #define A_UNDERLINE SLTT_ULINE_MASK
 #endif /* A_UNDERLINE */

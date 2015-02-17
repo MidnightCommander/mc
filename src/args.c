@@ -369,7 +369,7 @@ mc_args_new_color_group (void)
                                                     "Extended colors, when 256 colors are available:\n"
                                                     "   color16 to color255, or rgb000 to rgb555 and gray0 to gray23\n\n"
                                                     "Attributes:\n"
-                                                    "   bold, underline, reverse, blink; append more with '+'\n")
+                                                    "   bold, italic, underline, reverse, blink; append more with '+'\n")
                                                     );
 /* *INDENT-ON* */
 
