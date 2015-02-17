@@ -102,12 +102,14 @@ mcview_display_hex (mcview_t * view)
     const screen_dimen height = view->data_area.height;
     const screen_dimen width = view->data_area.width;
     const int ngroups = view->bytes_per_line / 4;
-    const screen_dimen text_start = 8 + 13 * ngroups + ((width < 80) ? 0 : (ngroups - 1 + 1));
     /* 8 characters are used for the file offset, and every hex group
-     * takes 13 characters. On "big" screens, the groups are separated
-     * by an extra vertical line, and there is an extra space before the
-     * text column.
+     * takes 13 characters. Starting at width of 80 columns, the groups
+     * are separated by an extra vertical line. Starting at width of 81,
+     * there is an extra space before the text column. There is always a
+     * mostly empty column on the right, to allow overflowing CJKs.
      */
+    const screen_dimen text_start = 8 + 13 * ngroups +
+        ((width < 80) ? 0 : (width == 80) ? (ngroups - 1) : (ngroups - 1 + 1));
 
     int row;
     off_t from;
