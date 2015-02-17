@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-12-10 13:09+0300\n"
+"POT-Creation-Date: 2015-02-17 15:19+0300\n"
 "PO-Revision-Date: 2014-09-04 10:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/projects/p/mc/language/"
@@ -673,7 +673,7 @@ msgid ""
 "   color16 to color255, or rgb000 to rgb555 and gray0 to gray23\n"
 "\n"
 "Attributes:\n"
-"   bold, underline, reverse, blink; append more with '+'\n"
+"   bold, italic, underline, reverse, blink; append more with '+'\n"
 msgstr ""
 
 msgid "Color options"
@@ -3462,12 +3462,6 @@ msgstr ""
 
 #, c-format
 msgid "The %%var macro has no variable"
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot open file%s\n"
-"%s"
 msgstr ""
 
 #, c-format

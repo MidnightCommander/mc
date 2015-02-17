@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-12-10 13:09+0300\n"
+"POT-Creation-Date: 2015-02-17 15:19+0300\n"
 "PO-Revision-Date: 2014-09-04 10:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/projects/p/mc/language/"
@@ -699,6 +699,7 @@ msgstr ""
 "   Abi:          helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
+#, fuzzy
 msgid ""
 "Standard Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -709,7 +710,7 @@ msgid ""
 "   color16 to color255, or rgb000 to rgb555 and gray0 to gray23\n"
 "\n"
 "Attributes:\n"
-"   bold, underline, reverse, blink; append more with '+'\n"
+"   bold, italic, underline, reverse, blink; append more with '+'\n"
 msgstr ""
 "Standardvärvid:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -3645,14 +3646,6 @@ msgid "The %%var macro has no variable"
 msgstr "Makrol %%var puudub muutuja"
 
 #, c-format
-msgid ""
-"Cannot open file%s\n"
-"%s"
-msgstr ""
-"Faili %s avamine nurjus\n"
-"%s"
-
-#, c-format
 msgid "No suitable entries found in %s"
 msgstr "Failist %s ei leitud sobivaid kirjeid"
 
@@ -4410,6 +4403,13 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
+
+#~ msgid ""
+#~ "Cannot open file%s\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Faili %s avamine nurjus\n"
+#~ "%s"
 
 #~ msgid "sftp: Invalid port value."
 #~ msgstr "sftp: vigane pordi väärtus."

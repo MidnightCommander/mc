@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-12-10 13:09+0300\n"
+"POT-Creation-Date: 2015-02-17 15:19+0300\n"
 "PO-Revision-Date: 2015-02-14 21:18+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -699,6 +699,7 @@ msgstr ""
 "   Aiuto:        helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
+#, fuzzy
 msgid ""
 "Standard Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -709,7 +710,7 @@ msgid ""
 "   color16 to color255, or rgb000 to rgb555 and gray0 to gray23\n"
 "\n"
 "Attributes:\n"
-"   bold, underline, reverse, blink; append more with '+'\n"
+"   bold, italic, underline, reverse, blink; append more with '+'\n"
 msgstr ""
 "Colori standard:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -3649,14 +3650,6 @@ msgid "The %%var macro has no variable"
 msgstr "Le macro %%var non ha variabile"
 
 #, c-format
-msgid ""
-"Cannot open file%s\n"
-"%s"
-msgstr ""
-"Impossibile aprire il file %s\n"
-"%s"
-
-#, c-format
 msgid "No suitable entries found in %s"
 msgstr "Non trovo voci appropriate in %s"
 
@@ -4416,3 +4409,10 @@ msgstr "Continuare dall'inizio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Impossibile ricevere copia locale di /ftp://un.host/modificami.txt"
+
+#~ msgid ""
+#~ "Cannot open file%s\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Impossibile aprire il file %s\n"
+#~ "%s"

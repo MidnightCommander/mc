@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-12-10 13:09+0300\n"
+"POT-Creation-Date: 2015-02-17 15:19+0300\n"
 "PO-Revision-Date: 2014-09-04 10:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/mc/language/"
@@ -684,6 +684,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: don't translate color names and attributes
+#, fuzzy
 msgid ""
 "Standard Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -694,7 +695,7 @@ msgid ""
 "   color16 to color255, or rgb000 to rgb555 and gray0 to gray23\n"
 "\n"
 "Attributes:\n"
-"   bold, underline, reverse, blink; append more with '+'\n"
+"   bold, italic, underline, reverse, blink; append more with '+'\n"
 msgstr ""
 "Стандартні кольори:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -3634,14 +3635,6 @@ msgid "The %%var macro has no variable"
 msgstr "Макрос %%var не має змінної"
 
 #, c-format
-msgid ""
-"Cannot open file%s\n"
-"%s"
-msgstr ""
-"Не вдалося відкрити файл %s\n"
-"%s"
-
-#, c-format
 msgid "No suitable entries found in %s"
 msgstr "У %s не знайдено потрібних записів"
 
@@ -4398,6 +4391,13 @@ msgstr "Почати спочатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не вдалося отримати локальну копію /ftp://some.host/editme.txt"
+
+#~ msgid ""
+#~ "Cannot open file%s\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не вдалося відкрити файл %s\n"
+#~ "%s"
 
 #~ msgid "sftp: Invalid port value."
 #~ msgstr "sftp: Неправильний порт."

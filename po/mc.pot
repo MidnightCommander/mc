@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.8.13-45-g3bb0b4a\n"
+"Project-Id-Version: mc 4.8.13-85-g45d135d\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-12-10 13:09+0300\n"
+"POT-Creation-Date: 2015-02-17 15:19+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -587,7 +587,7 @@ msgstr ""
 #: src/editor/editcmd.c:3455 src/editor/editcmd.c:3484
 #: src/editor/editcmd_dialogs.c:479 src/execute.c:135
 #: src/filemanager/file.c:1660 src/filemanager/panel.c:4408 src/help.c:362
-#: src/main.c:410 src/subshell.c:378 src/subshell.c:1053
+#: src/main.c:410 src/subshell.c:378 src/subshell.c:1054
 #: src/viewer/actions_cmd.c:417
 msgid "Warning"
 msgstr ""
@@ -700,8 +700,8 @@ msgstr ""
 #: src/filemanager/filegui.c:438 src/filemanager/hotlist.c:1121
 #: src/filemanager/hotlist.c:1138 src/filemanager/midnight.c:1037
 #: src/filemanager/midnight.c:1045 src/filemanager/panel.c:2765
-#: src/filemanager/tree.c:875 src/subshell.c:1055 src/viewer/actions_cmd.c:614
-#: src/viewer/actions_cmd.c:620 src/viewer/search.c:358
+#: src/filemanager/tree.c:875 src/subshell.c:1056 src/viewer/actions_cmd.c:617
+#: src/viewer/actions_cmd.c:623 src/viewer/search.c:358
 msgid "&Yes"
 msgstr ""
 
@@ -712,8 +712,8 @@ msgstr ""
 #: src/filemanager/filegui.c:440 src/filemanager/hotlist.c:1121
 #: src/filemanager/hotlist.c:1138 src/filemanager/midnight.c:1037
 #: src/filemanager/midnight.c:1045 src/filemanager/panel.c:2765
-#: src/filemanager/tree.c:875 src/subshell.c:1055 src/viewer/actions_cmd.c:614
-#: src/viewer/actions_cmd.c:620 src/viewer/search.c:359
+#: src/filemanager/tree.c:875 src/subshell.c:1056 src/viewer/actions_cmd.c:617
+#: src/viewer/actions_cmd.c:623 src/viewer/search.c:359
 msgid "&No"
 msgstr ""
 
@@ -735,7 +735,7 @@ msgstr ""
 #: src/filemanager/filegui.c:1250 src/filemanager/find.c:524
 #: src/filemanager/hotlist.c:191 src/filemanager/hotlist.c:977
 #: src/filemanager/hotlist.c:1039 src/filemanager/layout.c:461
-#: src/filemanager/panelize.c:143 src/learn.c:254 src/viewer/hex.c:407
+#: src/filemanager/panelize.c:143 src/learn.c:254 src/viewer/hex.c:433
 msgid "&Cancel"
 msgstr ""
 
@@ -900,7 +900,7 @@ msgid ""
 "   color16 to color255, or rgb000 to rgb555 and gray0 to gray23\n"
 "\n"
 "Attributes:\n"
-"   bold, underline, reverse, blink; append more with '+'\n"
+"   bold, italic, underline, reverse, blink; append more with '+'\n"
 msgstr ""
 
 #: src/args.c:377
@@ -926,7 +926,7 @@ msgid ""
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 
-#: src/args.c:405 src/filemanager/midnight.c:1686 src/textconf.c:140
+#: src/args.c:405 src/filemanager/midnight.c:1696 src/textconf.c:140
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr ""
@@ -1110,7 +1110,7 @@ msgid "Enter line:"
 msgstr ""
 
 #: src/diffviewer/ydiff.c:2952 src/editor/editwidget.c:976
-#: src/filemanager/midnight.c:1642 src/filemanager/tree.c:1206 src/help.c:1145
+#: src/filemanager/midnight.c:1652 src/filemanager/tree.c:1206 src/help.c:1145
 #: src/viewer/display.c:85
 msgid "ButtonBar|Help"
 msgstr ""
@@ -1120,7 +1120,7 @@ msgstr ""
 msgid "ButtonBar|Save"
 msgstr ""
 
-#: src/diffviewer/ydiff.c:2954 src/filemanager/midnight.c:1645
+#: src/diffviewer/ydiff.c:2954 src/filemanager/midnight.c:1655
 #: src/viewer/display.c:92
 msgid "ButtonBar|Edit"
 msgstr ""
@@ -1139,13 +1139,13 @@ msgid "ButtonBar|Options"
 msgstr ""
 
 #: src/diffviewer/ydiff.c:2958 src/editor/editwidget.c:985
-#: src/filemanager/midnight.c:1651 src/help.c:1154 src/viewer/display.c:119
+#: src/filemanager/midnight.c:1661 src/help.c:1154 src/viewer/display.c:119
 #: src/viewer/display.c:122
 msgid "ButtonBar|Quit"
 msgstr ""
 
 #: src/diffviewer/ydiff.c:3095 src/editor/editcmd.c:2862
-#: src/viewer/actions_cmd.c:612 src/viewer/actions_cmd.c:618
+#: src/viewer/actions_cmd.c:615 src/viewer/actions_cmd.c:621
 msgid "Quit"
 msgstr ""
 
@@ -1400,7 +1400,7 @@ msgstr ""
 msgid "Confirm save file: \"%s\""
 msgstr ""
 
-#: src/editor/editcmd.c:2079 src/viewer/hex.c:395 src/viewer/hex.c:407
+#: src/editor/editcmd.c:2079 src/viewer/hex.c:421 src/viewer/hex.c:433
 msgid "Save file"
 msgstr ""
 
@@ -2047,7 +2047,7 @@ msgstr ""
 msgid "ButtonBar|Replac"
 msgstr ""
 
-#: src/editor/editwidget.c:980 src/filemanager/midnight.c:1646
+#: src/editor/editwidget.c:980 src/filemanager/midnight.c:1656
 #: src/filemanager/tree.c:1211
 msgid "ButtonBar|Copy"
 msgstr ""
@@ -2056,11 +2056,11 @@ msgstr ""
 msgid "ButtonBar|Move"
 msgstr ""
 
-#: src/editor/editwidget.c:983 src/filemanager/midnight.c:1649
+#: src/editor/editwidget.c:983 src/filemanager/midnight.c:1659
 msgid "ButtonBar|Delete"
 msgstr ""
 
-#: src/editor/editwidget.c:984 src/filemanager/midnight.c:1650
+#: src/editor/editwidget.c:984 src/filemanager/midnight.c:1660
 msgid "ButtonBar|PullDn"
 msgstr ""
 
@@ -2188,7 +2188,8 @@ msgstr ""
 msgid "Load syntax file"
 msgstr ""
 
-#: src/editor/syntax.c:1501 src/filemanager/usermenu.c:946 src/help.c:1086
+#: src/editor/syntax.c:1501 src/filemanager/usermenu.c:946
+#: src/filemanager/usermenu.c:984 src/help.c:1086
 #, c-format
 msgid ""
 "Cannot open file %s\n"
@@ -3149,7 +3150,7 @@ msgstr ""
 msgid "Ski&p all"
 msgstr ""
 
-#: src/filemanager/file.c:677 src/viewer/hex.c:407
+#: src/filemanager/file.c:677 src/viewer/hex.c:433
 msgid "&Retry"
 msgstr ""
 
@@ -4198,35 +4199,35 @@ msgstr ""
 msgid "Do you really want to quit the Midnight Commander?"
 msgstr ""
 
-#: src/filemanager/midnight.c:1631
+#: src/filemanager/midnight.c:1641
 msgid "&Above"
 msgstr ""
 
-#: src/filemanager/midnight.c:1631
+#: src/filemanager/midnight.c:1641
 msgid "&Left"
 msgstr ""
 
-#: src/filemanager/midnight.c:1632
+#: src/filemanager/midnight.c:1642
 msgid "&Below"
 msgstr ""
 
-#: src/filemanager/midnight.c:1632
+#: src/filemanager/midnight.c:1642
 msgid "&Right"
 msgstr ""
 
-#: src/filemanager/midnight.c:1643
+#: src/filemanager/midnight.c:1653
 msgid "ButtonBar|Menu"
 msgstr ""
 
-#: src/filemanager/midnight.c:1644 src/viewer/display.c:90
+#: src/filemanager/midnight.c:1654 src/viewer/display.c:90
 msgid "ButtonBar|View"
 msgstr ""
 
-#: src/filemanager/midnight.c:1647 src/filemanager/tree.c:1212
+#: src/filemanager/midnight.c:1657 src/filemanager/tree.c:1212
 msgid "ButtonBar|RenMov"
 msgstr ""
 
-#: src/filemanager/midnight.c:1648 src/filemanager/tree.c:1215
+#: src/filemanager/midnight.c:1658 src/filemanager/tree.c:1215
 msgid "ButtonBar|Mkdir"
 msgstr ""
 
@@ -4572,13 +4573,6 @@ msgstr ""
 msgid "The %%var macro has no variable"
 msgstr ""
 
-#: src/filemanager/usermenu.c:984
-#, c-format
-msgid ""
-"Cannot open file%s\n"
-"%s"
-msgstr ""
-
 #: src/filemanager/usermenu.c:1086
 #, c-format
 msgid "No suitable entries found in %s"
@@ -4725,11 +4719,11 @@ msgstr ""
 msgid "Cannot open named pipe %s\n"
 msgstr ""
 
-#: src/subshell.c:1054
+#: src/subshell.c:1055
 msgid "The shell is still active. Quit anyway?"
 msgstr ""
 
-#: src/subshell.c:1222
+#: src/subshell.c:1223
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
 msgstr ""
@@ -5335,15 +5329,15 @@ msgstr ""
 msgid "Invalid value"
 msgstr ""
 
-#: src/viewer/actions_cmd.c:613
+#: src/viewer/actions_cmd.c:616
 msgid "File was modified. Save with exit?"
 msgstr ""
 
-#: src/viewer/actions_cmd.c:614
+#: src/viewer/actions_cmd.c:617
 msgid "&Cancel quit"
 msgstr ""
 
-#: src/viewer/actions_cmd.c:619
+#: src/viewer/actions_cmd.c:622
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file?"
@@ -5416,7 +5410,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: src/viewer/hex.c:396
+#: src/viewer/hex.c:422
 #, c-format
 msgid ""
 "Error while closing the file:\n"
@@ -5424,14 +5418,14 @@ msgid ""
 "Data may have been written or not"
 msgstr ""
 
-#: src/viewer/hex.c:404
+#: src/viewer/hex.c:430
 #, c-format
 msgid ""
 "Cannot save file:\n"
 "%s"
 msgstr ""
 
-#: src/viewer/lib.c:397 src/viewer/lib.c:399
+#: src/viewer/lib.c:404 src/viewer/lib.c:406
 msgid "View: "
 msgstr ""
 
