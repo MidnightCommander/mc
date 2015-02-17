@@ -252,7 +252,7 @@ mcview_handle_editkey (mcview_t * view, int key)
     else
     {
         /* Text editing */
-        if (key < 256 && ((key == '\n') || is_printable (key)))
+        if (key < 256 && key != '\t')
             byte_val = key;
         else
             return MSG_NOT_HANDLED;
