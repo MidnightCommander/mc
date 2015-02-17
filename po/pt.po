@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-12-10 13:09+0300\n"
+"POT-Creation-Date: 2015-02-17 15:19+0300\n"
 "PO-Revision-Date: 2014-09-04 12:38+0000\n"
 "Last-Translator: Gilberto Jorge <gmj125@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/projects/p/mc/language/"
@@ -705,6 +705,7 @@ msgstr ""
 "   Ajuda:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
+#, fuzzy
 msgid ""
 "Standard Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -715,7 +716,7 @@ msgid ""
 "   color16 to color255, or rgb000 to rgb555 and gray0 to gray23\n"
 "\n"
 "Attributes:\n"
-"   bold, underline, reverse, blink; append more with '+'\n"
+"   bold, italic, underline, reverse, blink; append more with '+'\n"
 msgstr ""
 "Cores standard:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -3657,14 +3658,6 @@ msgid "The %%var macro has no variable"
 msgstr "A %%var macro não tem variável"
 
 #, c-format
-msgid ""
-"Cannot open file%s\n"
-"%s"
-msgstr ""
-"Não é possível abrir ficheiro %s\n"
-"%s"
-
-#, c-format
 msgid "No suitable entries found in %s"
 msgstr "Não foram encontradas entradas adequadas em %s"
 
@@ -4422,6 +4415,13 @@ msgstr "Continuar do início?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Não é possível obter uma cópia local de /ftp://some.host/editme.txt"
+
+#~ msgid ""
+#~ "Cannot open file%s\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Não é possível abrir ficheiro %s\n"
+#~ "%s"
 
 #~ msgid "sftp: Invalid port value."
 #~ msgstr "sftp: Valor de porto inválido."

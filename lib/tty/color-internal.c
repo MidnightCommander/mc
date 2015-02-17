@@ -83,6 +83,9 @@ mc_tty_color_table_t const color_table[] = {
 
 mc_tty_color_table_t const attributes_table[] = {
     {"bold", A_BOLD},
+#ifdef A_ITALIC                 /* available since ncurses-5.9-20130831 / slang-pre2.3.0-107 */
+    {"italic", A_ITALIC},
+#endif /* A_ITALIC */
     {"underline", A_UNDERLINE},
     {"reverse", A_REVERSE},
     {"blink", A_BLINK},

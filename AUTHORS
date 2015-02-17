@@ -61,6 +61,7 @@ Antonio Palama, DOS port <palama@posso.dm.unipi.it>
 
 Egmont Koblinger <egmont@gmail.com>
         Support of 256 colors
+        Support of italic text
         Support of extended mouse clicks beyond 223 column
         Support of bracketed paste mode of xterm
                 (http://invisible-island.net/xterm/ctlseqs/ctlseqs.html#Bracketed%20Paste%20Mode)

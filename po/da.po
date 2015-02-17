@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-12-10 13:09+0300\n"
+"POT-Creation-Date: 2015-02-17 15:19+0300\n"
 "PO-Revision-Date: 2014-09-04 10:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/projects/p/mc/language/da/)\n"
@@ -680,7 +680,7 @@ msgid ""
 "   color16 to color255, or rgb000 to rgb555 and gray0 to gray23\n"
 "\n"
 "Attributes:\n"
-"   bold, underline, reverse, blink; append more with '+'\n"
+"   bold, italic, underline, reverse, blink; append more with '+'\n"
 msgstr ""
 
 msgid "Color options"
@@ -3584,14 +3584,6 @@ msgid "The %%var macro has no variable"
 msgstr "Makroen %%var har ingen variabel"
 
 #, c-format
-msgid ""
-"Cannot open file%s\n"
-"%s"
-msgstr ""
-"Kan ikke åbne fil %s\n"
-"%s"
-
-#, c-format
 msgid "No suitable entries found in %s"
 msgstr "Ingen egnede punkter fundet i %s"
 
@@ -4339,6 +4331,13 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid ""
+#~ "Cannot open file%s\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Kan ikke åbne fil %s\n"
+#~ "%s"
 
 #~ msgid "Cannot spawn child process"
 #~ msgstr "Kan ikke spawn underproces"

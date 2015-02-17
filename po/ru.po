@@ -12,12 +12,12 @@
 # Ilia Maslakov <il.smind@gmail.com>, 2009
 # Slava Zanko <slavazanko@gmail.com>, 2009, 2011
 # NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
-# Andrew Borodin <aborodin@vmail.ru>, 2009-2014.
+# Andrew Borodin <aborodin@vmail.ru>, 2009-2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2014-12-10 13:09+0300\n"
+"POT-Creation-Date: 2015-02-17 15:19+0300\n"
 "PO-Revision-Date: 2014-12-10 13:12+0300\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/mc/language/"
@@ -162,7 +162,7 @@ msgid ""
 msgstr ""
 "Невозможно использовать скин %s, требующий 256 цветов,\n"
 "на терминале, не поддерживающем 256 цветов.\n"
-"Будет использован скин по-умолчанию"
+"Будет использован скин по умолчанию"
 
 msgid "Escape"
 msgstr "Клавиша Esc      "
@@ -716,7 +716,7 @@ msgid ""
 "   color16 to color255, or rgb000 to rgb555 and gray0 to gray23\n"
 "\n"
 "Attributes:\n"
-"   bold, underline, reverse, blink; append more with '+'\n"
+"   bold, italic, underline, reverse, blink; append more with '+'\n"
 msgstr ""
 "Стандартные цвета:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -727,7 +727,7 @@ msgstr ""
 "   от color16 до color255 или от rgb000 до rgb555 и от gray0 до gray23\n"
 "\n"
 "Атрибуты:\n"
-"   bold, underline, reverse, blink; несколько атрибутов объединяются знаком "
+"   bold, italic, underline, reverse, blink; несколько атрибутов объединяются знаком "
 "\"+\"\n"
 
 msgid "Color options"
@@ -3660,14 +3660,6 @@ msgstr "Макрос %%var не имеет значения по умолчан�
 #, c-format
 msgid "The %%var macro has no variable"
 msgstr "Макрос %%var не имеет переменной"
-
-#, c-format
-msgid ""
-"Cannot open file%s\n"
-"%s"
-msgstr ""
-"Невозможно открыть файл %s\n"
-"%s"
 
 #, c-format
 msgid "No suitable entries found in %s"

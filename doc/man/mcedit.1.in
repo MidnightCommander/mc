@@ -439,7 +439,7 @@ uses the color before the slash.  See cooledit(1) for supported
 .B cooledit
 colors.
 .PP
-Attributes can be any of bold, underline, reverse and blink, appended by a
+Attributes can be any of bold, italic, underline, reverse and blink, appended by a
 plus sign if more than one are desired.
 .PP
 Comments may be put on a separate line starting with the hash sign (#).
