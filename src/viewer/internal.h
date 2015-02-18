@@ -350,7 +350,7 @@ int mcview_nroff_seq_prev (mcview_nroff_t *);
 mc_search_cbret_t mcview_search_cmd_callback (const void *user_data, gsize char_offset,
                                               int *current_char);
 mc_search_cbret_t mcview_search_update_cmd_callback (const void *user_data, gsize char_offset);
-void mcview_do_search (mcview_t * view);
+void mcview_do_search (mcview_t * view, off_t want_search_start);
 
 /*** inline functions ****************************************************************************/
 

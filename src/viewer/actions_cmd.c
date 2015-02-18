@@ -99,14 +99,16 @@ mcview_remove_ext_script (mcview_t * view)
 static void
 mcview_search (mcview_t * view, gboolean start_search)
 {
+    off_t want_search_start = view->search_start;
+
     if (start_search)
     {
         if (mcview_dialog_search (view))
         {
             if (view->hex_mode)
-                view->search_start = view->hex_cursor;
+                want_search_start = view->hex_cursor;
 
-            mcview_do_search (view);
+            mcview_do_search (view, want_search_start);
         }
     }
     else
@@ -114,14 +116,14 @@ mcview_search (mcview_t * view, gboolean start_search)
         if (view->hex_mode)
         {
             if (!mcview_search_options.backwards)
-                view->search_start = view->hex_cursor + 1;
+                want_search_start = view->hex_cursor + 1;
             else if (view->hex_cursor > 0)
-                view->search_start = view->hex_cursor - 1;
+                want_search_start = view->hex_cursor - 1;
             else
-                view->search_start = 0;
+                want_search_start = 0;
         }
 
-        mcview_do_search (view);
+        mcview_do_search (view, want_search_start);
     }
 }
 

@@ -262,16 +262,18 @@ mcview_search_update_cmd_callback (const void *user_data, gsize char_offset)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_do_search (mcview_t * view)
+mcview_do_search (mcview_t * view, off_t want_search_start)
 {
     mcview_search_status_msg_t vsm;
 
     off_t search_start = 0;
+    off_t orig_search_start = view->search_start;
     gboolean isFound = FALSE;
     gboolean need_search_again = TRUE;
 
     size_t match_len;
 
+    view->search_start = want_search_start;
     /* for avoid infinite search loop we need to increase or decrease start offset of search */
 
     if (view->search_start != 0)
@@ -352,6 +354,7 @@ mcview_do_search (mcview_t * view)
     {
         int result;
 
+        view->search_start = orig_search_start;
         mcview_update (view);
 
         result =
@@ -369,7 +372,7 @@ mcview_do_search (mcview_t * view)
         /* continue search form beginning */
         off_t search_end;
 
-        search_end = view->search_start;
+        search_end = orig_search_start;
         /* search_start is 0 here */
         view->update_activate = search_start;
 
@@ -390,8 +393,11 @@ mcview_do_search (mcview_t * view)
     }
 
     if (!isFound && view->search->error_str != NULL)
+    {
+        view->search_start = orig_search_start;
+        mcview_update (view);
         query_dialog (_("Search"), view->search->error_str, D_NORMAL, 1, _("&Dismiss"));
-
+    }
     view->dirty++;
 }
 
