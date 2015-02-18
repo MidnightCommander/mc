@@ -624,7 +624,7 @@ mcview_display_line (mcview_t * view, mcview_state_machine_t * state, int row,
         }
 
         if (view->search_start <= state->offset && state->offset < view->search_end)
-            color = SELECTED_COLOR;
+            color = VIEW_SELECTED_COLOR;
 
         if (cs[0] == '\n')
         {
