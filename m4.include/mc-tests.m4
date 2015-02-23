@@ -20,6 +20,8 @@ AC_DEFUN([MC_UNIT_TESTS],[
             [check >= 0.9.8],
             [have_check=yes],
             [AC_MSG_WARN(['Check' utility not found. Check your environment])])
+        AC_SUBST(CHECK_CFLAGS)
+        AC_SUBST(CHECK_LIBS)
     fi
     AM_CONDITIONAL(HAVE_TESTS, test x"$have_check" = "xyes")
 

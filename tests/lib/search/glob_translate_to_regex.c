@@ -32,45 +32,68 @@
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* @DataSource("test_translate_replace_glob_to_regex_ds") */
+/* @DataSource("test_glob_translate_to_regex_ds") */
 /* *INDENT-OFF* */
-static const struct test_translate_replace_glob_to_regex_ds
+static const struct test_glob_translate_to_regex_ds
 {
     const char *input_value;
     const char *expected_result;
-} test_translate_replace_glob_to_regex_ds[] =
+} test_glob_translate_to_regex_ds[] =
 {
     {
-        "a&a?a",
-        "a\\&a\\1a"
+        "test*",
+        "test(.*)"
     },
     {
-        "a\\&a?a",
-        "a\\&a\\1a"
+        "t?es*t",
+        "t(.)es(.*)t"
     },
     {
-        "a&a\\?a",
-        "a\\&a\\?a"
+        "te{st}",
+        "te(st)"
     },
     {
-        "a\\&a\\?a",
-        "a\\&a\\?a"
+        "te{st|ts}",
+        "te(st|ts)"
+    },
+    {
+        "te{st,ts}",
+        "te(st|ts)"
+    },
+    {
+        "te[st]",
+        "te[st]"
+    },
+    {
+        "t,e.st",
+        "t|e\\.st"
+    },
+    {
+        "^t,e.+st+$",
+        "\\^t|e\\.\\+st\\+\\$"
+    },
+    {
+        "te!@#$%^&*()_+|\";:'{}:><?\\?\\*.,/[]|\\/st",
+        "te!@#\\$%\\^&(.*)\\(\\)_\\+|\";:'():><(.)\\\\\\.|/[]|\\/st"
     },
 };
 /* *INDENT-ON* */
 
-/* @Test(dataSource = "test_translate_replace_glob_to_regex_ds") */
+/* @Test(dataSource = "test_glob_translate_to_regex_ds") */
 /* *INDENT-OFF* */
-START_PARAMETRIZED_TEST (test_translate_replace_glob_to_regex, test_translate_replace_glob_to_regex_ds)
+START_PARAMETRIZED_TEST (test_glob_translate_to_regex, test_glob_translate_to_regex_ds)
 /* *INDENT-ON* */
 {
     /* given */
+    GString *tmp = g_string_new (data->input_value);
     GString *dest_str;
 
     /* when */
-    dest_str = mc_search__translate_replace_glob_to_regex (data->input_value);
+    dest_str = mc_search__glob_translate_to_regex (tmp);
 
     /* then */
+    g_string_free (tmp, TRUE);
+
     mctest_assert_str_eq (dest_str->str, data->expected_result);
     g_string_free (dest_str, TRUE);
 }
@@ -90,8 +113,8 @@ main (void)
     SRunner *sr;
 
     /* Add new tests here: *************** */
-    mctest_add_parameterized_test (tc_core, test_translate_replace_glob_to_regex,
-                                   test_translate_replace_glob_to_regex_ds);
+    mctest_add_parameterized_test (tc_core, test_glob_translate_to_regex,
+                                   test_glob_translate_to_regex_ds);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);
