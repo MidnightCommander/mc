@@ -1098,7 +1098,7 @@ user_menu_cmd (struct WEdit * edit_widget, const char *menu_file, int selected_e
 
             /* Create listbox */
             listbox = create_listbox_window (menu_lines, max_cols + 2, _("User menu"),
-                                             "[Menu File Edit]");
+                                             "[Edit Menu File]");
             /* insert all the items found */
             for (i = 0; i < menu_lines; i++)
             {
