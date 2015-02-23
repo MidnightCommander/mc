@@ -54,25 +54,36 @@ mc_search__glob_translate_to_regex (const GString * astr)
     buff = g_string_sized_new (32);
 
     for (loop = 0; loop < astr->len; loop++)
+    {
         switch (str[loop])
         {
         case '*':
             if (!strutils_is_char_escaped (str, &(str[loop])))
+            {
                 g_string_append (buff, inside_group ? ".*" : "(.*)");
+                continue;
+            }
             break;
         case '?':
             if (!strutils_is_char_escaped (str, &(str[loop])))
+            {
                 g_string_append (buff, inside_group ? "." : "(.)");
+                continue;
+            }
             break;
         case ',':
             if (!strutils_is_char_escaped (str, &(str[loop])))
-                g_string_append_c (buff, '|');
+            {
+                g_string_append_c (buff, inside_group ? '|' : ',');
+                continue;
+            }
             break;
         case '{':
             if (!strutils_is_char_escaped (str, &(str[loop])))
             {
                 g_string_append_c (buff, '(');
                 inside_group = TRUE;
+                continue;
             }
             break;
         case '}':
@@ -80,6 +91,7 @@ mc_search__glob_translate_to_regex (const GString * astr)
             {
                 g_string_append_c (buff, ')');
                 inside_group = FALSE;
+                continue;
             }
             break;
         case '+':
@@ -89,12 +101,12 @@ mc_search__glob_translate_to_regex (const GString * astr)
         case ')':
         case '^':
             g_string_append_c (buff, '\\');
-            /* fall through */
+            break;
         default:
-            g_string_append_c (buff, str[loop]);
             break;
         }
-
+        g_string_append_c (buff, str[loop]);
+    }
     return buff;
 }
 
