@@ -610,7 +610,7 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-is_wildcarded (char *p)
+is_wildcarded (const char *p)
 {
     for (; *p; p++)
     {
