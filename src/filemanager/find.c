@@ -166,17 +166,7 @@ static WLabel *status_label;    /* Finished, Searching etc. */
 static WLabel *found_num_label; /* Number of found items */
 
 /* This keeps track of the directory stack */
-#if GLIB_CHECK_VERSION (2, 14, 0)
 static GQueue dir_queue = G_QUEUE_INIT;
-#else
-typedef struct dir_stack
-{
-    vfs_path_t *name;
-    struct dir_stack *prev;
-} dir_stack;
-
-static dir_stack *dir_stack_base = 0;
-#endif /* GLIB_CHECK_VERSION */
 
 /* *INDENT-OFF* */
 static struct
@@ -808,7 +798,6 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
 
 /* --------------------------------------------------------------------------------------------- */
 
-#if GLIB_CHECK_VERSION (2, 14, 0)
 static inline void
 push_directory (const vfs_path_t * dir)
 {
@@ -832,52 +821,6 @@ clear_stack (void)
     g_queue_foreach (&dir_queue, (GFunc) vfs_path_free, NULL);
     g_queue_clear (&dir_queue);
 }
-
-/* --------------------------------------------------------------------------------------------- */
-
-#else /* GLIB_CHECK_VERSION */
-static void
-push_directory (const vfs_path_t * dir)
-{
-    dir_stack *new;
-
-    new = g_new (dir_stack, 1);
-    new->name = (vfs_path_t *) dir;
-    new->prev = dir_stack_base;
-    dir_stack_base = new;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static vfs_path_t *
-pop_directory (void)
-{
-    vfs_path_t *name = NULL;
-
-    if (dir_stack_base != NULL)
-    {
-        dir_stack *next;
-        name = dir_stack_base->name;
-        next = dir_stack_base->prev;
-        g_free (dir_stack_base);
-        dir_stack_base = next;
-    }
-
-    return name;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** Remove all the items from the stack */
-
-static void
-clear_stack (void)
-{
-    vfs_path_t *dir = NULL;
-
-    while ((dir = pop_directory ()) != NULL)
-        vfs_path_free (dir);
-}
-#endif /* GLIB_CHECK_VERSION */
 
 /* --------------------------------------------------------------------------------------------- */
 
