@@ -989,6 +989,7 @@ ftpfs_open_archive (struct vfs_s_super *super,
     SUP->strict = ftpfs_use_unix_list_options ? RFC_AUTODETECT : RFC_STRICT;
     SUP->isbinary = TYPE_UNKNOWN;
     SUP->remote_is_amiga = 0;
+    SUP->ctl_connection_busy = 0;
     super->name = g_strdup ("/");
     super->root =
         vfs_s_new_inode (vpath_element->class, super,
@@ -1359,6 +1360,10 @@ ftpfs_open_data_connection (struct vfs_class *me, struct vfs_s_super *super, con
     int s, j, data;
     socklen_t fromlen = sizeof (from);
 
+    /* FTP doesn't allow to open more than one file at a time */
+    if (SUP->ctl_connection_busy)
+        return -1;
+
     s = ftpfs_initconn (me, super);
     if (s == -1)
         return -1;
@@ -1399,6 +1404,7 @@ ftpfs_open_data_connection (struct vfs_class *me, struct vfs_s_super *super, con
         close (s);
     }
     tty_disable_interrupt_key ();
+    SUP->ctl_connection_busy = 1;
     return data;
 }
 
@@ -1714,6 +1720,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
         {
             me->verrno = ECONNRESET;
             close (sock);
+            SUP->ctl_connection_busy = 0;
             tty_disable_interrupt_key ();
             ftpfs_get_reply (me, SUP->sock, NULL, 0);
             vfs_print_message (_("%s: failure"), me->name);
@@ -1742,6 +1749,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
     }
 
     close (sock);
+    SUP->ctl_connection_busy = 0;
     me->verrno = E_REMOTE;
     if ((ftpfs_get_reply (me, SUP->sock, NULL, 0) != COMPLETE))
         goto fallback;
@@ -1807,9 +1815,10 @@ ftpfs_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, cha
     if (h == -1)
         ERRNOR (EIO, -1);
 
-    sock =
-        ftpfs_open_data_connection (me, super, ftp->append ? "APPE" : "STOR", name, TYPE_BINARY, 0);
-    if (sock < 0 || fstat (h, &s) == -1)
+    if (fstat (h, &s) == -1 ||
+        ((sock =
+          ftpfs_open_data_connection (me, super, ftp->append ? "APPE" : "STOR", name, TYPE_BINARY,
+                                      0)) < 0))
     {
         close (h);
         return -1;
@@ -1863,6 +1872,7 @@ ftpfs_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, cha
     }
     tty_disable_interrupt_key ();
     close (sock);
+    SUP->ctl_connection_busy = 0;
     close (h);
     if (ftpfs_get_reply (me, SUP->sock, NULL, 0) != COMPLETE)
         ERRNOR (EIO, -1);
@@ -1870,6 +1880,7 @@ ftpfs_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, cha
   error_return:
     tty_disable_interrupt_key ();
     close (sock);
+    SUP->ctl_connection_busy = 0;
     close (h);
     ftpfs_get_reply (me, SUP->sock, NULL, 0);
     return -1;
@@ -1893,7 +1904,6 @@ ftpfs_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
     if (FH_SOCK == -1)
         ERRNOR (EACCES, 0);
     fh->linear = LS_LINEAR_OPEN;
-    ((ftp_super_data_t *) (FH_SUPER->data))->ctl_connection_busy = 1;
     ((ftp_fh_data_t *) fh->data)->append = 0;
     return 1;
 }
@@ -2208,6 +2218,7 @@ ftpfs_fh_close (struct vfs_class *me, vfs_file_handler_t * fh)
 
         close (fh->handle);
         fh->handle = -1;
+        ftp->ctl_connection_busy = 0;
         /* File is stored to destination already, so
          * we prevent MEDATA->ftpfs_file_store() call from vfs_s_close ()
          */
