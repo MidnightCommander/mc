@@ -65,48 +65,48 @@ static const struct test_is_wildcarded_ds
     gboolean expected_result;
 } test_is_wildcarded_ds[] =
 {
-    {
+    { /* 0 */
         "blabla",
         FALSE
     },
-    {
+    { /* 1 */
         "bla?bla",
         FALSE
     },
-    {
+    { /* 2 */
         "bla*bla",
         TRUE
     },
-    {
+    { /* 3 */
         "bla\\*bla",
-        TRUE
+        FALSE
     },
 
-    {
+    { /* 4 */
         "bla\\\\*bla",
         TRUE
     },
-    {
+    { /* 5 */
         "bla\\1bla",
         TRUE
     },
-    {
+    { /* 6 */
         "bla\\\\1bla",
-        TRUE
+        FALSE
     },
-    {
+    { /* 7 */
         "bla\\\t\\\\1bla",
-        TRUE
+        FALSE
     },
-    {
+    { /* 8 */
         "bla\\\t\\\\\\1bla",
         TRUE
     },
-    {
+    { /* 9 */
         "bla\\9bla",
         TRUE
     },
-    {
+    { /* 10 */
         "blabla\\",
         FALSE
     },

@@ -612,12 +612,21 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
 static gboolean
 is_wildcarded (const char *p)
 {
+    int escaped = 0;
     for (; *p; p++)
     {
-        if (*p == '*')
-            return TRUE;
-        if (*p == '\\' && p[1] >= '1' && p[1] <= '9')
-            return TRUE;
+        if (*p == '\\')
+        {
+            if (p[1] >= '1' && p[1] <= '9' && !escaped)
+                return TRUE;
+            escaped = !escaped;
+        }
+        else
+        {
+            if (*p == '*' && !escaped)
+                return TRUE;
+            escaped = 0;
+        }
     }
     return FALSE;
 }
