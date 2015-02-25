@@ -704,6 +704,25 @@ mc_search_regex__process_escape_sequence (GString * dest_str, const char *from, 
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Get regex flags for compilation of expressions.
+ * @param charset   the charset
+ *
+ * @return regex flags
+ */
+
+static GRegexCompileFlags
+mc_search__regex_get_compile_flags (const char *charset)
+{
+    GRegexCompileFlags g_regex_options = G_REGEX_OPTIMIZE | G_REGEX_DOTALL;
+
+    if (!(mc_global.utf8_display && str_isutf8 (charset)))
+        g_regex_options |= G_REGEX_RAW;
+
+    return g_regex_options;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -723,8 +742,8 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_
         g_string_free (tmp, TRUE);
     }
     mc_search_cond->regex_handle =
-        g_regex_new (mc_search_cond->str->str, G_REGEX_OPTIMIZE | G_REGEX_RAW | G_REGEX_DOTALL,
-                     0, &mcerror);
+        g_regex_new (mc_search_cond->str->str, mc_search__regex_get_compile_flags (charset), 0,
+                     &mcerror);
 
     if (mcerror != NULL)
     {
