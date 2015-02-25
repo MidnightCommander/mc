@@ -71,7 +71,7 @@ static const struct test_is_wildcarded_ds
     },
     { /* 1 */
         "bla?bla",
-        FALSE
+        TRUE
     },
     { /* 2 */
         "bla*bla",
@@ -109,6 +109,14 @@ static const struct test_is_wildcarded_ds
     { /* 10 */
         "blabla\\",
         FALSE
+    },
+    { /* 11 */
+        "blab\\?la",
+        FALSE
+    },
+    { /* 12 */
+        "blab\\\\?la",
+        TRUE
     },
 };
 /* *INDENT-ON* */
