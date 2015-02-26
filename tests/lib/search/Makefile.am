@@ -32,5 +32,5 @@ translate_replace_glob_to_regex_SOURCES = \
 glob_translate_to_regex_SOURCES = \
 	glob_translate_to_regex.c
 
-regex_get_compile_flags__SOURCES = \
+regex_get_compile_flags_SOURCES = \
 	regex_get_compile_flags.c
