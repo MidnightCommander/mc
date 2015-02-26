@@ -1,7 +1,7 @@
 /*
    src - tests for execute_external_editor_or_viewer() function
 
-   Copyright (C) 2013-2014
+   Copyright (C) 2013-2015
    Free Software Foundation, Inc.
 
    Written by:

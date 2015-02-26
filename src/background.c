@@ -2,7 +2,7 @@
 
 /* Background support.
 
-   Copyright (C) 1996-2014
+   Copyright (C) 1996-2015
    Free Software Foundation, Inc.
 
    Written by:
@@ -171,6 +171,17 @@ destroy_task_and_return_fd (pid_t pid)
  */
 
 static int
+reading_failed (int i, char **data)
+{
+    while (i >= 0)
+        g_free (data[i--]);
+    message (D_ERROR, _("Background protocol error"), "%s", _("Reading failed"));
+    return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
 background_attention (int fd, void *closure)
 {
     file_op_context_t *ctx;
@@ -234,8 +245,7 @@ background_attention (int fd, void *closure)
         (read (fd, &type, sizeof (type)) != sizeof (type)) ||
         (read (fd, &have_ctx, sizeof (have_ctx)) != sizeof (have_ctx)))
     {
-        message (D_ERROR, _("Background protocol error"), _("Reading failed"));
-        return 0;
+        return reading_failed (-1, data);
     }
 
     if (argc > MAXCALLARGS)
@@ -249,8 +259,7 @@ background_attention (int fd, void *closure)
     {
         if (read (fd, ctx, sizeof (file_op_context_t)) != sizeof (file_op_context_t))
         {
-            message (D_ERROR, _("Background protocol error"), _("Reading failed"));
-            return 0;
+            return reading_failed (-1, data);
         }
     }
 
@@ -260,14 +269,12 @@ background_attention (int fd, void *closure)
 
         if (read (fd, &size, sizeof (size)) != sizeof (size))
         {
-            message (D_ERROR, _("Background protocol error"), _("Reading failed"));
-            return 0;
+            return reading_failed (i - 1, data);
         }
         data[i] = g_malloc (size + 1);
         if (read (fd, data[i], size) != size)
         {
-            message (D_ERROR, _("Background protocol error"), _("Reading failed"));
-            return 0;
+            return reading_failed (i, data);
         }
         data[i][size] = 0;      /* NULL terminate the blocks (they could be strings) */
     }

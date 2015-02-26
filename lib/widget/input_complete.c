@@ -2,7 +2,7 @@
    Input line filename/username/hostname/variable/command completion.
    (Let mc type for you...)
 
-   Copyright (C) 1995-2014
+   Copyright (C) 1995-2015
    Free Software Foundation, Inc.
 
    Written by:
@@ -288,7 +288,7 @@ filename_completion_function (const char *text, int state, input_complete_t flag
             g_string_append (temp, users_dirname);
 
             /* We need a '/' at the end. */
-            if (temp->str[temp->len - 1] != PATH_SEP)
+            if (!IS_PATH_SEP (temp->str[temp->len - 1]))
                 g_string_append_c (temp, PATH_SEP);
         }
         g_string_append (temp, entry->d_name);
@@ -909,7 +909,7 @@ try_complete_all_possible (try_complete_automation_state_t * state, char *text, 
         SHOW_C_CTX ("try_complete:filename_subst_1");
         matches = completion_matches (state->word, filename_completion_function, state->flags);
 
-        if (matches == NULL && state->is_cd && *state->word != PATH_SEP && *state->word != '~')
+        if (matches == NULL && state->is_cd && !IS_PATH_SEP (*state->word) && *state->word != '~')
         {
             state->q = text + *lc_start;
             for (state->p = text;

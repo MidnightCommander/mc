@@ -1,7 +1,7 @@
 /*
    Print features specific for this build
 
-   Copyright (C) 2000-2014
+   Copyright (C) 2000-2015
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -193,10 +193,10 @@ show_datadirs_extended (void)
 #if defined ENABLE_VFS_EXTFS || defined ENABLE_VFS_FISH
     PRINTF_SECTION (_("VFS plugins and scripts:"), LIBEXECDIR);
 #ifdef ENABLE_VFS_EXTFS
-    PRINTF2 ("extfs.d:", LIBEXECDIR, MC_EXTFS_DIR "/");
+    PRINTF2 ("extfs.d:", LIBEXECDIR, MC_EXTFS_DIR PATH_SEP_STR);
 #endif
 #ifdef ENABLE_VFS_FISH
-    PRINTF2 ("fish:", LIBEXECDIR, FISH_PREFIX "/");
+    PRINTF2 ("fish:", LIBEXECDIR, FISH_PREFIX PATH_SEP_STR);
 #endif
 #endif /* ENABLE_VFS_EXTFS || defiined ENABLE_VFS_FISH */
     (void) puts ("");
@@ -205,12 +205,12 @@ show_datadirs_extended (void)
 
     PRINTF_SECTION2 (_("Config directory:"), mc_config_get_path ());
     PRINTF_SECTION2 (_("Data directory:"), mc_config_get_data_path ());
-    PRINTF ("skins:", mc_config_get_data_path (), MC_SKINS_SUBDIR "/");
+    PRINTF ("skins:", mc_config_get_data_path (), MC_SKINS_SUBDIR PATH_SEP_STR);
 #ifdef ENABLE_VFS_EXTFS
-    PRINTF ("extfs.d:", mc_config_get_data_path (), MC_EXTFS_DIR "/");
+    PRINTF ("extfs.d:", mc_config_get_data_path (), MC_EXTFS_DIR PATH_SEP_STR);
 #endif
 #ifdef ENABLE_VFS_FISH
-    PRINTF ("fish:", mc_config_get_data_path (), FISH_PREFIX "/");
+    PRINTF ("fish:", mc_config_get_data_path (), FISH_PREFIX PATH_SEP_STR);
 #endif
 #ifdef USE_INTERNAL_EDIT
     PRINTF ("mcedit macros:", mc_config_get_data_path (), MC_MACRO_FILE);

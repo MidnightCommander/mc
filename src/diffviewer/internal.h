@@ -114,9 +114,13 @@ typedef struct WDiff
     int tab_size;
     diff_place_t ord;
     int full;
+
+#ifdef HAVE_CHARSET
     gboolean utf8;
     /* converter for translation of text */
     GIConv converter;
+#endif                          /* HAVE_CHARSET */
+
     struct
     {
         int quality;

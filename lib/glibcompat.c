@@ -1,7 +1,7 @@
 /*
    GLIB - Library of useful routines for C programming
 
-   Copyright (C) 2009-2014
+   Copyright (C) 2009-2015
    Free Software Foundation, Inc.
 
    Written by:
@@ -47,27 +47,6 @@
 /*** file scope functions ************************************************************************/
 
 /*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-#if ! GLIB_CHECK_VERSION (2, 13, 0)
-/*
-   This is incomplete copy of same glib-function.
-   For older glib (less than 2.13) functional is enought.
-   For full version of glib welcome to glib update.
- */
-gboolean
-g_unichar_iszerowidth (gunichar c)
-{
-    if (G_UNLIKELY (c == 0x00AD))
-        return FALSE;
-
-    if (G_UNLIKELY ((c >= 0x1160 && c < 0x1200) || c == 0x200B))
-        return TRUE;
-
-    return FALSE;
-}
-#endif /* ! GLIB_CHECK_VERSION (2, 13, 0) */
-
 /* --------------------------------------------------------------------------------------------- */
 
 #if ! GLIB_CHECK_VERSION (2, 16, 0)

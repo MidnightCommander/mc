@@ -1,7 +1,7 @@
 /*
    Main dialog (file panels) of the Midnight Commander
 
-   Copyright (C) 1994-2014
+   Copyright (C) 1994-2015
    Free Software Foundation, Inc.
 
    Written by:
@@ -736,7 +736,7 @@ midnight_put_panel_path (WPanel * panel)
 
     command_insert (cmdline, cwd_vpath_str, FALSE);
 
-    if (cwd_vpath_str[strlen (cwd_vpath_str) - 1] != PATH_SEP)
+    if (!IS_PATH_SEP (cwd_vpath_str[strlen (cwd_vpath_str) - 1]))
         command_insert (cmdline, PATH_SEP_STR, FALSE);
 
     vfs_path_free (cwd_vpath);

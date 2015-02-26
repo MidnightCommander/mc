@@ -1,7 +1,7 @@
 /*
    External panelize
 
-   Copyright (C) 1995-2014
+   Copyright (C) 1995-2015
    Free Software Foundation, Inc.
 
    Written by:
@@ -340,7 +340,7 @@ do_external_panelize (char *command)
             line[strlen (line) - 1] = 0;
         if (strlen (line) < 1)
             continue;
-        if (line[0] == '.' && line[1] == PATH_SEP)
+        if (line[0] == '.' && IS_PATH_SEP (line[1]))
             name = line + 2;
         else
             name = line;
@@ -361,7 +361,7 @@ do_external_panelize (char *command)
 
     if (list->len == 0)
         dir_list_init (list);
-    else if (list->list[0].fname[0] == PATH_SEP)
+    else if (IS_PATH_SEP (list->list[0].fname[0]))
     {
         vfs_path_t *vpath_root;
         int ret;

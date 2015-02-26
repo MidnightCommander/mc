@@ -1,6 +1,6 @@
 /* lib/vfs - test vfs_path_from_str_flags() function
 
-   Copyright (C) 2013-2014
+   Copyright (C) 2013-2015
    Free Software Foundation, Inc.
 
    Written by:

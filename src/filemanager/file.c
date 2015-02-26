@@ -1,7 +1,7 @@
 /*
    File management.
 
-   Copyright (C) 1994-2014
+   Copyright (C) 1994-2015
    Free Software Foundation, Inc.
 
    Written by:
@@ -2528,13 +2528,12 @@ dirsize_status_update_cb (status_msg_t * sm)
     if (WIDGET (dsm->count_size)->cols + 6 > wd->cols)
     {
         dlg_set_size (sm->dlg, wd->lines, WIDGET (dsm->count_size)->cols + 6);
-        dirsize_status_locate_buttons ((dirsize_status_msg_t *) sm);
+        dirsize_status_locate_buttons (dsm);
         dlg_redraw (sm->dlg);
     }
 
     /* adjust first label */
-    label_set_text (dsm->dirname,
-                    str_trunc (vfs_path_as_str (dsm->dirname_vpath), WIDGET (sm->dlg)->cols - 6));
+    label_set_text (dsm->dirname, str_trunc (vfs_path_as_str (dsm->dirname_vpath), wd->cols - 6));
 
     switch (status_msg_common_update (sm))
     {
@@ -2689,7 +2688,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
          * dir is deleted)
          */
         if (!force_single && tmp_dest_dir[0] != '\0'
-            && tmp_dest_dir[strlen (tmp_dest_dir) - 1] != PATH_SEP)
+            && !IS_PATH_SEP (tmp_dest_dir[strlen (tmp_dest_dir) - 1]))
         {
             /* add trailing separator */
             dest_dir = g_strconcat (tmp_dest_dir, PATH_SEP_STR, (char *) NULL);

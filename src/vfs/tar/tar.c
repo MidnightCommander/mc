@@ -1,7 +1,7 @@
 /*
    Virtual File System: GNU Tar file system.
 
-   Copyright (C) 1995-2014
+   Copyright (C) 1995-2015
    Free Software Foundation, Inc.
 
    Written by:
@@ -524,7 +524,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
         else
             len = strlen (header->header.arch_name);
 
-        if (len != 0 && header->header.arch_name[len - 1] == '/')
+        if (len != 0 && IS_PATH_SEP (header->header.arch_name[len - 1]))
             header->header.linkflag = LF_DIR;
     }
 
@@ -618,8 +618,8 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
         current_link_name =
             (next_long_link ? next_long_link : g_strndup (header->header.arch_linkname, NAMSIZ));
         len = strlen (current_link_name);
-        if (len > 1 && current_link_name[len - 1] == '/')
-            current_link_name[len - 1] = 0;
+        if (len > 1 && IS_PATH_SEP (current_link_name[len - 1]))
+            current_link_name[len - 1] = '\0';
 
         current_file_name = NULL;
         switch (arch->type)
@@ -669,7 +669,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
 
         data_position = current_tar_position;
 
-        p = strrchr (current_file_name, '/');
+        p = strrchr (current_file_name, PATH_SEP);
         if (p == NULL)
         {
             p = current_file_name;

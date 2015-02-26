@@ -2,7 +2,7 @@
    Virtual File System: FISH implementation for transfering files over
    shell connections.
 
-   Copyright (C) 1998-2014
+   Copyright (C) 1998-2015
    Free Software Foundation, Inc.
 
    Written by:
@@ -546,8 +546,8 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 
 #if 0
     super->name =
-        g_strconcat ("sh://", super->path_element->user, "@", super->path_element->host, "/",
-                     (char *) NULL);
+        g_strconcat ("sh://", super->path_element->user, "@", super->path_element->host,
+                     PATH_SEP_STR, (char *) NULL);
 #else
     super->name = g_strdup (PATH_SEP_STR);
 #endif
@@ -1573,8 +1573,8 @@ fish_fill_names (struct vfs_class *me, fill_names_f func)
 
         name =
             g_strconcat (vfs_fish_ops.prefix, VFS_PATH_URL_DELIMITER,
-                         super->path_element->user, "@", super->path_element->host, flags, "/",
-                         super->path_element->path, (char *) NULL);
+                         super->path_element->user, "@", super->path_element->host, flags,
+                         PATH_SEP_STR, super->path_element->path, (char *) NULL);
         func (name);
         g_free (name);
     }

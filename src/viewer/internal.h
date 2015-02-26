@@ -215,7 +215,7 @@ typedef struct mcview_nroff_struct
 {
     mcview_t *view;
     off_t index;
-    int char_width;
+    int char_length;
     int current_char;
     nroff_type_t type;
     nroff_type_t prev_type;

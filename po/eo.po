@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2015-02-17 15:19+0300\n"
+"POT-Creation-Date: 2015-02-26 09:43+0300\n"
 "PO-Revision-Date: 2014-09-04 10:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/projects/p/mc/language/"
@@ -764,6 +764,12 @@ msgstr "Neniuj parametroj donitaj al la legilo."
 msgid "Two files are required to evoke the diffviewer."
 msgstr "Du dosieroj estas bezonitaj por voki la flikaĵo-legilon."
 
+msgid "Background protocol error"
+msgstr "Eraro ĉe fona protokolo"
+
+msgid "Reading failed"
+msgstr "Legado malsukcesis"
+
 msgid "Background process error"
 msgstr "Eraro ĉe fona procezo"
 
@@ -772,12 +778,6 @@ msgstr "Nekonata eraro en ido"
 
 msgid "Child died unexpectedly"
 msgstr "Ido mortis neatendite"
-
-msgid "Background protocol error"
-msgstr "Eraro ĉe fona protokolo"
-
-msgid "Reading failed"
-msgstr "Legado malsukcesis"
 
 msgid ""
 "Background process sent us a request for more arguments\n"
@@ -1576,7 +1576,8 @@ msgstr ""
 "Afabla tekstoredaktilo\n"
 "verkita por Midnight Commander."
 
-msgid "Copyright (C) 1996-2014 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2015 the Free Software Foundation"
 msgstr "Kopirajto (C) 1996–2014 la Fondaĵo pri liberaj programoj"
 
 msgid "About"

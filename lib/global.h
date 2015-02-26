@@ -128,6 +128,7 @@
 /* OS specific defines */
 #define PATH_SEP '/'
 #define PATH_SEP_STR "/"
+#define IS_PATH_SEP(c) ((c) == PATH_SEP)
 #define PATH_ENV_SEP ':'
 #define TMPDIR_DEFAULT "/tmp"
 #define SCRIPT_SUFFIX ""

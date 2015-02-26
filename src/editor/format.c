@@ -1,7 +1,7 @@
 /*
    Dynamic paragraph formatting.
 
-   Copyright (C) 2011-2014
+   Copyright (C) 2011-2015
    Free Software Foundation, Inc.
 
    Copyright (C) 1996 Paul Sheer
@@ -219,18 +219,18 @@ static inline off_t
 line_pixel_length (unsigned char *t, off_t b, off_t l, gboolean utf8)
 {
     off_t xn, x;                /* position conters */
-    off_t cw;                   /* character width in bytes */
+    off_t char_length;          /* character length in bytes */
 
 #ifndef HAVE_CHARSET
     (void) utf8;
 #endif
 
-    for (xn = 0, x = 0; xn <= l; x = xn, b += cw)
+    for (xn = 0, x = 0; xn <= l; x = xn, b += char_length)
     {
         char *tb;
 
         tb = (char *) t + b;
-        cw = 1;
+        char_length = 1;
 
         switch (tb[0])
         {
@@ -250,10 +250,9 @@ line_pixel_length (unsigned char *t, off_t b, off_t l, gboolean utf8)
                 {
                     char *next_ch;
 
-                    /* Calculate UTF-8 char width */
+                    /* Calculate UTF-8 char length */
                     next_ch = g_utf8_next_char (tb);
-                    if (next_ch != NULL)
-                        cw = next_ch - tb;
+                    char_length = next_ch - tb;
 
                     if (g_unichar_iswide (ch))
                         x++;

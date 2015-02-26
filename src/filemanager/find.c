@@ -1,7 +1,7 @@
 /*
    Find file command for the Midnight Commander
 
-   Copyright (C) 1995-2014
+   Copyright (C) 1995-2015
    Free Software Foundation, Inc.
 
    Written  by:
@@ -166,17 +166,7 @@ static WLabel *status_label;    /* Finished, Searching etc. */
 static WLabel *found_num_label; /* Number of found items */
 
 /* This keeps track of the directory stack */
-#if GLIB_CHECK_VERSION (2, 14, 0)
 static GQueue dir_queue = G_QUEUE_INIT;
-#else
-typedef struct dir_stack
-{
-    vfs_path_t *name;
-    struct dir_stack *prev;
-} dir_stack;
-
-static dir_stack *dir_stack_base = 0;
-#endif /* GLIB_CHECK_VERSION */
 
 /* *INDENT-OFF* */
 static struct
@@ -808,7 +798,6 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
 
 /* --------------------------------------------------------------------------------------------- */
 
-#if GLIB_CHECK_VERSION (2, 14, 0)
 static inline void
 push_directory (const vfs_path_t * dir)
 {
@@ -835,59 +824,13 @@ clear_stack (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#else /* GLIB_CHECK_VERSION */
-static void
-push_directory (const vfs_path_t * dir)
-{
-    dir_stack *new;
-
-    new = g_new (dir_stack, 1);
-    new->name = (vfs_path_t *) dir;
-    new->prev = dir_stack_base;
-    dir_stack_base = new;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static vfs_path_t *
-pop_directory (void)
-{
-    vfs_path_t *name = NULL;
-
-    if (dir_stack_base != NULL)
-    {
-        dir_stack *next;
-        name = dir_stack_base->name;
-        next = dir_stack_base->prev;
-        g_free (dir_stack_base);
-        dir_stack_base = next;
-    }
-
-    return name;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** Remove all the items from the stack */
-
-static void
-clear_stack (void)
-{
-    vfs_path_t *dir = NULL;
-
-    while ((dir = pop_directory ()) != NULL)
-        vfs_path_free (dir);
-}
-#endif /* GLIB_CHECK_VERSION */
-
-/* --------------------------------------------------------------------------------------------- */
-
 static void
 insert_file (const char *dir, const char *file)
 {
     char *tmp_name = NULL;
     static char *dirname = NULL;
 
-    while (dir[0] == PATH_SEP && dir[1] == PATH_SEP)
+    while (IS_PATH_SEP (dir[0]) && IS_PATH_SEP (dir[1]))
         dir++;
 
     if (old_dir)
@@ -1181,7 +1124,7 @@ find_ignore_dir_search (const char *dir)
                 {
                     /* be sure that ignore dir is not a part of dir like:
                        ignore dir is "h", dir is "home" */
-                    if (dir[ilen] == '\0' || dir[ilen] == PATH_SEP)
+                    if (dir[ilen] == '\0' || IS_PATH_SEP (dir[ilen]))
                         return TRUE;
                 }
                 break;
@@ -1190,7 +1133,8 @@ find_ignore_dir_search (const char *dir)
                     char *d;
 
                     d = strstr (dir, *ignore_dir);
-                    if (d != NULL && d[-1] == PATH_SEP && (d[ilen] == '\0' || d[ilen] == PATH_SEP))
+                    if (d != NULL && IS_PATH_SEP (d[-1])
+                        && (d[ilen] == '\0' || IS_PATH_SEP (d[ilen])))
                         return TRUE;
                 }
                 break;
@@ -1743,7 +1687,7 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
             else
             {
                 p = name + (size_t) start_dir_len;
-                if (*p == PATH_SEP)
+                if (IS_PATH_SEP (*p))
                     p++;
             }
 

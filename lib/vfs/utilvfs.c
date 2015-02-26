@@ -1,7 +1,7 @@
 /*
    Utilities for VFS modules.
 
-   Copyright (C) 1988-2014
+   Copyright (C) 1988-2015
    Free Software Foundation, Inc.
 
    Copyright (C) 1995, 1996 Miguel de Icaza
@@ -253,7 +253,7 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
     if ((flags & URL_NOSLASH) == 0)
     {
         /* locate path component */
-        while (*dir != PATH_SEP && *dir != '\0')
+        while (!IS_PATH_SEP (*dir) && *dir != '\0')
             dir++;
         if (*dir == '\0')
             path_element->path = g_strdup (PATH_SEP_STR);

@@ -2,7 +2,7 @@
    Search text engine.
    Interface functions
 
-   Copyright (C) 2009-2014
+   Copyright (C) 2009-2015
    Free Software Foundation, Inc.
 
    Written by:
@@ -366,7 +366,7 @@ mc_search_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-mc_search_prepare_replace_str2 (mc_search_t * lc_mc_search, char *replace_str)
+mc_search_prepare_replace_str2 (mc_search_t * lc_mc_search, const char *replace_str)
 {
     GString *ret;
     GString *replace_str2;

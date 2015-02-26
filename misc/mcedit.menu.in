@@ -461,7 +461,7 @@ m       view `man'
         MAN=%{Enter name of man:}
         %view{ascii,nroff} MANROFFOPT='@MAN_FLAGS@' MAN_KEEP_FORMATTING=1 man -P cat $MAN
 
-i       Insert a out of command to cursor.
+i       Insert output of command to cursor
         CMD=%{ Enter command: }
         eval $CMD > %b
 

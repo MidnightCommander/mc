@@ -1,7 +1,7 @@
 /*
    Virtual File System: GNU Tar file system.
 
-   Copyright (C) 2000-2014
+   Copyright (C) 2000-2015
    Free Software Foundation, Inc.
 
    Written by:
@@ -421,7 +421,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
     }
 
     /* remove trailing slashes */
-    for (tn = name + strlen (name) - 1; tn >= name && *tn == PATH_SEP; tn--)
+    for (tn = name + strlen (name) - 1; tn >= name && IS_PATH_SEP (*tn); tn--)
         *tn = '\0';
 
     tn = strrchr (name, PATH_SEP);

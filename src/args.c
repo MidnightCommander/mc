@@ -1,7 +1,7 @@
 /*
    Handle command line arguments.
 
-   Copyright (C) 2009-2014
+   Copyright (C) 2009-2015
    Free Software Foundation, Inc.
 
    Written by:
@@ -621,11 +621,8 @@ mc_args_parse (int *argc, char ***argv, const char *translation_domain, GError *
         {
             gchar *help_str;
 
-#if GLIB_CHECK_VERSION(2,14,0)
             help_str = g_option_context_get_help (context, TRUE, NULL);
-#else
-            help_str = g_strdup ("");
-#endif
+
             if (str_isutf8 (_system_codepage))
                 mc_replace_error (mcerror, (*mcerror)->code, "%s\n\n%s\n", (*mcerror)->message,
                                   help_str);

@@ -1,24 +1,29 @@
 Version 4.8.13
 
--Core
+- Core
+
   * New engine of user-friendly interruption of long-time operations (#2136)
 
 - Editor
+
   * Improvements of syntax highlighting:
     * CMake (#3216)
     * PHP (#3230)
   * Translate language names in the spelling assistant dialogue (#3233)
 
--Viewer
+- Viewer
+
   * Add separate normal(default) colour pair for viewer (#3204)
   * Dealing with utf-8 man pages in view/open (#1539)
   * "Goto line" is 1-based now (#3245)
 
 - Misc
+
   * Code cleanup (#3189, #3223, #3242)
   * Add new skins: gray-green-purple256 and gray-orange-blue256 (#3190)
 
 - Fixes
+
   * First Backspace/Delete is ignored after mouse click in an input widget (#3225)
   * Recursive find file doesn't work on Samba share (#3097)
   * Recursive find file doesn't work on Windows NFS share (#3202)
@@ -33,6 +38,7 @@ Version 4.8.13
   * viewbold and viewselected are missing from some skins (#3244)
   * Incorrect enconding name for manual page (#3239)
   * "User menu -> View manual page" doesn't do coloring (#3243)
+
 
 Version 4.8.12
 

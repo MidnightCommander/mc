@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2015-02-17 15:19+0300\n"
+"POT-Creation-Date: 2015-02-26 09:43+0300\n"
 "PO-Revision-Date: 2014-09-04 10:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/projects/p/mc/language/"
@@ -751,6 +751,12 @@ msgstr "Hiányzó paraméterek a nézethez."
 msgid "Two files are required to evoke the diffviewer."
 msgstr "Két fájl kell a diff-nézet indításához."
 
+msgid "Background protocol error"
+msgstr "Háttérprotokoll-hiba"
+
+msgid "Reading failed"
+msgstr "Sikertelen olvasás"
+
 msgid "Background process error"
 msgstr "Hiba a háttérfolyamatban"
 
@@ -759,12 +765,6 @@ msgstr "Ismeretlen hiba a futtatott programban"
 
 msgid "Child died unexpectedly"
 msgstr "Váratlanul leállt a futtatott program"
-
-msgid "Background protocol error"
-msgstr "Háttérprotokoll-hiba"
-
-msgid "Reading failed"
-msgstr "Sikertelen olvasás"
 
 msgid ""
 "Background process sent us a request for more arguments\n"
@@ -1562,7 +1562,7 @@ msgstr ""
 "Felhasználóbarát szövegszerkesztő\n"
 "a Midnight Commander-hez készítve"
 
-msgid "Copyright (C) 1996-2014 the Free Software Foundation"
+msgid "Copyright (C) 1996-2015 the Free Software Foundation"
 msgstr ""
 
 msgid "About"

@@ -1,7 +1,7 @@
 /*
    Virtual File System path handlers
 
-   Copyright (C) 2011-2014
+   Copyright (C) 2011-2015
    Free Software Foundation, Inc.
 
    Written by:
@@ -139,7 +139,7 @@ vfs_canon (const char *path)
         vfs_die ("Cannot canonicalize NULL");
 
     /* Relative to current directory */
-    if (*path != PATH_SEP)
+    if (!IS_PATH_SEP (*path))
     {
         char *result, *local;
 
@@ -198,7 +198,7 @@ vfs_get_encoding (const char *path, ssize_t len)
     if (semi == NULL)
         return NULL;
 
-    if (semi == path || *(semi - 1) == PATH_SEP)
+    if (semi == path || IS_PATH_SEP (semi[-1]))
     {
         char *slash;
 
@@ -448,11 +448,11 @@ vfs_path_from_str_uri_parser (char *path, vfs_path_flag_t flags)
         char *real_vfs_prefix_start = url_delimiter;
         struct vfs_s_subclass *sub = NULL;
 
-        while (real_vfs_prefix_start > path && *(real_vfs_prefix_start) != PATH_SEP)
+        while (real_vfs_prefix_start > path && !IS_PATH_SEP (*real_vfs_prefix_start))
             real_vfs_prefix_start--;
         vfs_prefix_start = real_vfs_prefix_start;
 
-        if (*(vfs_prefix_start) == PATH_SEP)
+        if (IS_PATH_SEP (*vfs_prefix_start))
             vfs_prefix_start += 1;
 
         *url_delimiter = '\0';
@@ -495,8 +495,8 @@ vfs_path_from_str_uri_parser (char *path, vfs_path_flag_t flags)
 #endif
         g_array_prepend_val (vpath->path, element);
 
-        if ((real_vfs_prefix_start > path && *(real_vfs_prefix_start) == PATH_SEP) ||
-            (real_vfs_prefix_start == path && *(real_vfs_prefix_start) != PATH_SEP))
+        if ((real_vfs_prefix_start > path && IS_PATH_SEP (*real_vfs_prefix_start)) ||
+            (real_vfs_prefix_start == path && !IS_PATH_SEP (*real_vfs_prefix_start)))
             *real_vfs_prefix_start = '\0';
         else
             *(real_vfs_prefix_start + 1) = '\0';
@@ -537,7 +537,7 @@ vfs_path_tokens_add_class_info (const vfs_path_element_t * element, GString * re
     {
         char *url_str;
 
-        if (ret_tokens->len > 0 && ret_tokens->str[ret_tokens->len - 1] != PATH_SEP)
+        if (ret_tokens->len > 0 && !IS_PATH_SEP (ret_tokens->str[ret_tokens->len - 1]))
             g_string_append_c (ret_tokens, PATH_SEP);
 
         g_string_append (ret_tokens, element->vfs_prefix);
@@ -556,7 +556,7 @@ vfs_path_tokens_add_class_info (const vfs_path_element_t * element, GString * re
 #ifdef HAVE_CHARSET
     if (element->encoding != NULL)
     {
-        if (ret_tokens->len > 0 && ret_tokens->str[ret_tokens->len - 1] != PATH_SEP)
+        if (ret_tokens->len > 0 && !IS_PATH_SEP (ret_tokens->str[ret_tokens->len - 1]))
             g_string_append (ret_tokens, PATH_SEP_STR);
         g_string_append (ret_tokens, VFS_ENCODING_PREFIX);
         g_string_append (ret_tokens, element->encoding);
@@ -584,7 +584,7 @@ vfs_path_strip_home (const char *dir)
 
         len = strlen (home_dir);
 
-        if (strncmp (dir, home_dir, len) == 0 && (dir[len] == PATH_SEP || dir[len] == '\0'))
+        if (strncmp (dir, home_dir, len) == 0 && (IS_PATH_SEP (dir[len]) || dir[len] == '\0'))
             return g_strdup_printf ("~%s", dir + len);
     }
 
@@ -606,8 +606,8 @@ vfs_path_strip_home (const char *dir)
     } \
     else \
     { \
-        if ((!is_relative) && (*appendfrom != PATH_SEP) && (*appendfrom != '\0') \
-            && (buffer->len == 0 || buffer->str[buffer->len - 1] != PATH_SEP)) \
+        if (!is_relative && !IS_PATH_SEP (*appendfrom) && *appendfrom != '\0' \
+            && (buffer->len == 0 || !IS_PATH_SEP (buffer->str[buffer->len - 1]))) \
             g_string_append_c (buffer, PATH_SEP); \
         g_string_append (buffer, appendfrom); \
     } \
@@ -651,7 +651,7 @@ vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_fl
         if (element->vfs_prefix != NULL)
         {
             char *url_str;
-            if ((!is_relative) && (buffer->len == 0 || buffer->str[buffer->len - 1] != PATH_SEP))
+            if (!is_relative && (buffer->len == 0 || !IS_PATH_SEP (buffer->str[buffer->len - 1])))
                 g_string_append_c (buffer, PATH_SEP);
 
             g_string_append (buffer, element->vfs_prefix);
@@ -674,7 +674,7 @@ vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_fl
             if ((flags & VPF_HIDE_CHARSET) == 0)
             {
                 if ((!is_relative)
-                    && (buffer->len == 0 || buffer->str[buffer->len - 1] != PATH_SEP))
+                    && (buffer->len == 0 || !IS_PATH_SEP (buffer->str[buffer->len - 1])))
                     g_string_append (buffer, PATH_SEP_STR);
                 g_string_append (buffer, VFS_ENCODING_PREFIX);
                 g_string_append (buffer, element->encoding);
@@ -1547,7 +1547,7 @@ vfs_path_element_build_pretty_path_str (const vfs_path_element_t * element)
     g_string_append (pretty_path, url_params);
     g_free (url_params);
 
-    if (*element->path != PATH_SEP)
+    if (!IS_PATH_SEP (*element->path))
         g_string_append_c (pretty_path, PATH_SEP);
 
     g_string_append (pretty_path, element->path);

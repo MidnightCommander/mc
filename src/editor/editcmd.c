@@ -1,7 +1,7 @@
 /*
    Editor high level editing commands
 
-   Copyright (C) 1996-2014
+   Copyright (C) 1996-2015
    Free Software Foundation, Inc.
 
    Written by:
@@ -211,14 +211,10 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
     if (*start_filename == '\0')
         return 0;
 
-    if (*start_filename != PATH_SEP && edit->dir_vpath != NULL)
-    {
+    if (!IS_PATH_SEP (*start_filename) && edit->dir_vpath != NULL)
         real_filename_vpath = vfs_path_append_vpath_new (edit->dir_vpath, filename_vpath, NULL);
-    }
     else
-    {
         real_filename_vpath = vfs_path_clone (filename_vpath);
-    }
 
     this_save_mode = option_save_mode;
     if (this_save_mode != EDIT_QUICK_SAVE)
@@ -284,7 +280,7 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
             savedir = g_strdup (".");
 
         /* Token-related function never return leading slash, so we need add it manually */
-        saveprefix = mc_build_filename ("/", savedir, "cooledit", NULL);
+        saveprefix = mc_build_filename (PATH_SEP_STR, savedir, "cooledit", NULL);
         g_free (savedir);
         fd = mc_mkstemps (&savename_vpath, saveprefix, NULL);
         g_free (saveprefix);
@@ -3533,7 +3529,7 @@ edit_get_match_keyword_cmd (WEdit * edit)
         g_string_append_c (match_expr, edit_buffer_get_byte (&edit->buffer, word_start + i));
 
     ptr = g_get_current_dir ();
-    path = g_strconcat (ptr, G_DIR_SEPARATOR_S, (char *) NULL);
+    path = g_strconcat (ptr, PATH_SEP_STR, (char *) NULL);
     g_free (ptr);
 
     /* Recursive search file 'TAGS' in parent dirs */
@@ -3547,7 +3543,7 @@ edit_get_match_keyword_cmd (WEdit * edit)
         if (exist_file (tagfile))
             break;
     }
-    while (strcmp (path, G_DIR_SEPARATOR_S) != 0);
+    while (strcmp (path, PATH_SEP_STR) != 0);
 
     if (tagfile)
     {

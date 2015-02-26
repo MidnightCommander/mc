@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2015-02-17 15:19+0300\n"
+"POT-Creation-Date: 2015-02-26 09:43+0300\n"
 "PO-Revision-Date: 2014-09-04 10:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/mc/language/fr/)\n"
@@ -724,6 +724,12 @@ msgstr "Aucun argument passé à la visionneuse."
 msgid "Two files are required to evoke the diffviewer."
 msgstr "Deux fichiers sont nécessaires pour lancer la vue différentielle."
 
+msgid "Background protocol error"
+msgstr "Erreur de protocole en tâche de fond"
+
+msgid "Reading failed"
+msgstr "Échec de lecture"
+
 msgid "Background process error"
 msgstr "Erreur dans un processus en tâche de fond"
 
@@ -732,12 +738,6 @@ msgstr " Erreur inconnue dans le processus fils"
 
 msgid "Child died unexpectedly"
 msgstr " Fin inattendue du processus fils"
-
-msgid "Background protocol error"
-msgstr "Erreur de protocole en tâche de fond"
-
-msgid "Reading failed"
-msgstr "Échec de lecture"
 
 msgid ""
 "Background process sent us a request for more arguments\n"
@@ -1524,7 +1524,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2014 the Free Software Foundation"
+msgid "Copyright (C) 1996-2015 the Free Software Foundation"
 msgstr ""
 
 msgid "About"

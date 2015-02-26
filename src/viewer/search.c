@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Function for search data
 
-   Copyright (C) 1994-2014
+   Copyright (C) 1994-2015
    Free Software Foundation, Inc.
 
    Written by:
@@ -202,13 +202,13 @@ mcview_search_cmd_callback (const void *user_data, gsize char_offset, int *curre
     }
 
     if (search_cb_char_curr_index == -1
-        || search_cb_char_curr_index >= view->search_nroff_seq->char_width)
+        || search_cb_char_curr_index >= view->search_nroff_seq->char_length)
     {
         if (search_cb_char_curr_index != -1)
             mcview_nroff_seq_next (view->search_nroff_seq);
 
         search_cb_char_curr_index = 0;
-        if (view->search_nroff_seq->char_width > 1)
+        if (view->search_nroff_seq->char_length > 1)
             g_unichar_to_utf8 (view->search_nroff_seq->current_char, search_cb_char_buffer);
         else
             search_cb_char_buffer[0] = (char) view->search_nroff_seq->current_char;
@@ -218,7 +218,7 @@ mcview_search_cmd_callback (const void *user_data, gsize char_offset, int *curre
             switch (view->search_nroff_seq->type)
             {
             case NROFF_TYPE_BOLD:
-                view->search_numNeedSkipChar = 1 + view->search_nroff_seq->char_width;  /* real char width and 0x8 */
+                view->search_numNeedSkipChar = 1 + view->search_nroff_seq->char_length; /* real char length and 0x8 */
                 break;
             case NROFF_TYPE_UNDERLINE:
                 view->search_numNeedSkipChar = 2;       /* underline symbol and ox8 */
@@ -285,11 +285,12 @@ mcview_do_search (mcview_t * view, off_t want_search_start)
             if (mcview_search_options.backwards)
             {
                 mcview_nroff_t *nroff;
+
                 nroff = mcview_nroff_seq_new_num (view, view->search_start);
                 if (mcview_nroff_seq_prev (nroff) != -1)
                     search_start =
                         -(mcview__get_nroff_real_len (view, nroff->index - 1, 2) +
-                          nroff->char_width + 1);
+                          nroff->char_length + 1);
                 else
                     search_start = -2;
 

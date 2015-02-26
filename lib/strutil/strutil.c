@@ -1,7 +1,7 @@
 /*
    Common strings utilities
 
-   Copyright (C) 2007-2014
+   Copyright (C) 2007-2015
    Free Software Foundation, Inc.
 
    Written by:
@@ -264,17 +264,7 @@ str_printf (GString * buffer, const char *format, ...)
     va_list ap;
     va_start (ap, format);
 
-#if GLIB_CHECK_VERSION (2, 14, 0)
     g_string_append_vprintf (buffer, format, ap);
-#else
-    {
-        gchar *tmp;
-
-        tmp = g_strdup_vprintf (format, ap);
-        g_string_append (buffer, tmp);
-        g_free (tmp);
-    }
-#endif
     va_end (ap);
 }
 

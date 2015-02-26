@@ -3,7 +3,7 @@
    tree about the changes made to the directory
    structure.
 
-   Copyright (C) 2011-2014
+   Copyright (C) 2011-2015
    Free Software Foundation, Inc.
 
    Author:
@@ -63,7 +63,7 @@ get_absolute_name (const vfs_path_t * vpath)
     if (vpath == NULL)
         return NULL;
 
-    if (*(vfs_path_get_by_index (vpath, 0)->path) == PATH_SEP)
+    if (IS_PATH_SEP (*vfs_path_get_by_index (vpath, 0)->path))
         return vfs_path_clone (vpath);
 
     return vfs_path_append_vpath_new (vfs_get_raw_current_dir (), vpath, NULL);

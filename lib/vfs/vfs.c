@@ -1,7 +1,7 @@
 /*
    Virtual File System switch code
 
-   Copyright (C) 1995-2014
+   Copyright (C) 1995-2015
    Free Software Foundation, Inc.
 
    Written by: 1995 Miguel de Icaza
@@ -76,7 +76,7 @@ struct vfs_class *current_vfs = NULL;
 
 #define VFS_FIRST_HANDLE 100
 
-#define ISSLASH(a) (!a || (a == '/'))
+#define ISSLASH(a) (a == '\0' || IS_PATH_SEP (a))
 
 /*** file scope type declarations ****************************************************************/
 
@@ -121,7 +121,7 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer
 
     /* try found /#enc: */
     semi = g_strrstr_len (path, size, VFS_ENCODING_PREFIX);
-    if (semi != NULL && (semi == path || *(semi - 1) == PATH_SEP))
+    if (semi != NULL && (semi == path || IS_PATH_SEP (semi[-1])))
     {
         char encoding[16];
         const char *slash;

@@ -1,7 +1,7 @@
 /*
    Virtual File System: interface functions
 
-   Copyright (C) 2011-2014
+   Copyright (C) 2011-2015
    Free Software Foundation, Inc.
 
    Written by:
@@ -710,7 +710,7 @@ mc_chdir (const vfs_path_t * vpath)
             char *p;
 
             p = strchr (path_element->path, 0) - 1;
-            if (*p == PATH_SEP && p > path_element->path)
+            if (IS_PATH_SEP (*p) && p > path_element->path)
                 *p = '\0';
         }
 
@@ -826,10 +826,8 @@ mc_tmpdir (void)
         return tmpdir;
 
     sys_tmp = getenv ("TMPDIR");
-    if (!sys_tmp || sys_tmp[0] != '/')
-    {
+    if (sys_tmp == NULL || !IS_PATH_SEP (sys_tmp[0]))
         sys_tmp = TMPDIR_DEFAULT;
-    }
 
     pwd = getpwuid (getuid ());
 

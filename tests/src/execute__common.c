@@ -1,7 +1,7 @@
 /*
    Common code for testing functions in src/execute.c file.
 
-   Copyright (C) 2013-2014
+   Copyright (C) 2013-2015
 
    Free Software Foundation, Inc.
 
