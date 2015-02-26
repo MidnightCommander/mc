@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2015-02-17 15:19+0300\n"
+"POT-Creation-Date: 2015-02-26 09:43+0300\n"
 "PO-Revision-Date: 2014-09-04 10:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/projects/p/mc/language/nl/)\n"
@@ -747,6 +747,12 @@ msgstr "Geen argumenten opgegevan aan de viewer"
 msgid "Two files are required to evoke the diffviewer."
 msgstr "Voor de diffviewer zijn 2 files nodig"
 
+msgid "Background protocol error"
+msgstr "Backgound protocol fout"
+
+msgid "Reading failed"
+msgstr "Lezen mislukt"
+
 msgid "Background process error"
 msgstr "Background process fout"
 
@@ -755,12 +761,6 @@ msgstr "Onbekende fout in child"
 
 msgid "Child died unexpectedly"
 msgstr "Child is onverwacht gestopt"
-
-msgid "Background protocol error"
-msgstr "Backgound protocol fout"
-
-msgid "Reading failed"
-msgstr "Lezen mislukt"
 
 msgid ""
 "Background process sent us a request for more arguments\n"
@@ -1554,7 +1554,7 @@ msgstr ""
 "Eeen gebruikersvriendelijke tekstbewerker\n"
 "geschreven voor de Midnight Commander"
 
-msgid "Copyright (C) 1996-2014 the Free Software Foundation"
+msgid "Copyright (C) 1996-2015 the Free Software Foundation"
 msgstr ""
 
 msgid "About"

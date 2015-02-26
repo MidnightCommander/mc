@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2015-02-17 15:19+0300\n"
+"POT-Creation-Date: 2015-02-26 09:43+0300\n"
 "PO-Revision-Date: 2014-09-04 10:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/projects/p/mc/language/eu/)\n"
@@ -742,6 +742,12 @@ msgstr "Ez zaizkio argumentuak eman erakusleari."
 msgid "Two files are required to evoke the diffviewer."
 msgstr "Bi fitxategi behar dira diffviwer erabiltzeko"
 
+msgid "Background protocol error"
+msgstr "Hondoko protokolo baten akatsa"
+
+msgid "Reading failed"
+msgstr "Irakurtzeak huts egin du"
+
 msgid "Background process error"
 msgstr "Hondoko prozesu baten akatsa"
 
@@ -750,12 +756,6 @@ msgstr "Akats ezezaguna umean"
 
 msgid "Child died unexpectedly"
 msgstr "Umea ustekabean hil da"
-
-msgid "Background protocol error"
-msgstr "Hondoko protokolo baten akatsa"
-
-msgid "Reading failed"
-msgstr "Irakurtzeak huts egin du"
 
 msgid ""
 "Background process sent us a request for more arguments\n"
@@ -1545,7 +1545,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2014 the Free Software Foundation"
+msgid "Copyright (C) 1996-2015 the Free Software Foundation"
 msgstr ""
 
 msgid "About"

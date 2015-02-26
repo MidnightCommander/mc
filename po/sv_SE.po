@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2015-02-17 15:19+0300\n"
+"POT-Creation-Date: 2015-02-26 09:43+0300\n"
 "PO-Revision-Date: 2011-12-07 11:21+0000\n"
 "Last-Translator: slavazanko <slavazanko@gmail.com>\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.net/projects/p/mc/team/"
@@ -703,6 +703,12 @@ msgstr ""
 msgid "Two files are required to evoke the diffviewer."
 msgstr ""
 
+msgid "Background protocol error"
+msgstr ""
+
+msgid "Reading failed"
+msgstr ""
+
 msgid "Background process error"
 msgstr ""
 
@@ -710,12 +716,6 @@ msgid "Unknown error in child"
 msgstr ""
 
 msgid "Child died unexpectedly"
-msgstr ""
-
-msgid "Background protocol error"
-msgstr ""
-
-msgid "Reading failed"
 msgstr ""
 
 msgid ""
@@ -1489,7 +1489,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2014 the Free Software Foundation"
+msgid "Copyright (C) 1996-2015 the Free Software Foundation"
 msgstr ""
 
 msgid "About"

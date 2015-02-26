@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2015-02-17 15:19+0300\n"
+"POT-Creation-Date: 2015-02-26 09:43+0300\n"
 "PO-Revision-Date: 2015-02-14 21:18+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -763,6 +763,12 @@ msgstr "Nessun argomento fornito al visualizzatore"
 msgid "Two files are required to evoke the diffviewer."
 msgstr "Sono necessari due file nell'esecuzione del visualizzatore diff."
 
+msgid "Background protocol error"
+msgstr "Errore del protocollo in background "
+
+msgid "Reading failed"
+msgstr "Lettura fallita"
+
 msgid "Background process error"
 msgstr "Errore del processo in background"
 
@@ -771,12 +777,6 @@ msgstr "Errore sconosciuto nel processo figlio "
 
 msgid "Child died unexpectedly"
 msgstr "Il processo figlio è uscito prematuramente"
-
-msgid "Background protocol error"
-msgstr "Errore del protocollo in background "
-
-msgid "Reading failed"
-msgstr "Lettura fallita"
 
 msgid ""
 "Background process sent us a request for more arguments\n"
@@ -1574,7 +1574,8 @@ msgstr ""
 "Un semplice editor di testi\n"
 "scritto per il Midnight Commander."
 
-msgid "Copyright (C) 1996-2014 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2015 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2014 the Free Software Foundation"
 
 msgid "About"

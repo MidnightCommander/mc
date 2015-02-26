@@ -17,15 +17,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2015-02-17 15:19+0300\n"
-"PO-Revision-Date: 2014-12-10 13:12+0300\n"
+"POT-Creation-Date: 2015-02-26 09:43+0300\n"
+"PO-Revision-Date: 2015-02-26 09:45+0300\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
-"Language-Team: Russian (http://www.transifex.com/projects/p/mc/language/"
-"ru/)\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/mc/language/ru/)\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ru\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 msgid "Warning: cannot load codepages list"
@@ -115,8 +114,7 @@ msgid "Not implemented yet"
 msgstr "Пока не реализовано"
 
 msgid "Num of replace tokens not equal to num of found tokens"
-msgstr ""
-"Количество шаблонных полей не соответствует количеству полей для замены"
+msgstr "Количество шаблонных полей не соответствует количеству полей для замены"
 
 #, c-format
 msgid "Invalid token number %d"
@@ -359,7 +357,7 @@ msgid "Colon"
 msgstr "Двоеточие"
 
 msgid "Semicolon"
-msgstr ""
+msgstr "Точка с запятой"
 
 msgid "Exclamation mark"
 msgstr "Exclamation mark"
@@ -645,8 +643,7 @@ msgid "Load definitions of key bindings from specified file"
 msgstr "Чтение определений привязок клавиш из указанного файла"
 
 msgid "Don't load definitions of key bindings from file, use defaults"
-msgstr ""
-"Не загружать привязки клавиш из файла, использовать привязки по умолчанию"
+msgstr "Не загружать привязки клавиш из файла, использовать привязки по умолчанию"
 
 msgid "Requests to run in black and white"
 msgstr "Принудительно установить черно-белый режим"
@@ -683,26 +680,22 @@ msgid ""
 msgstr ""
 "--colors КЛЮЧЕВОЕ_СЛОВО={ТЕКСТ},{ФОН},{АТРИБУТ}:КЛЮЧЕВОЕ_СЛОВО2=...\n"
 "\n"
-"{ТЕКСТ}, {ФОН} и {АТРИБУТ} можно опустить, чтобы использовать значения по "
-"умолчанию\n"
+"{ТЕКСТ}, {ФОН} и {АТРИБУТ} можно опустить, чтобы использовать значения по умолчанию\n"
 "\n"
 "Ключевые слова:\n"
 "   Общие:              errors, disabled, reverse, gauge, header\n"
 "                       input, inputmark, inputunchanged, commandlinemark\n"
 "                       bbarhotkey, bbarbutton, statusbar\n"
 "   Отображение файлов: normal, selected, marked, markselect\n"
-"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, "
-"errdhotnormal,\n"
+"   Диалоги:            dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n"
 "                       errdhotfocus\n"
-"   Меню:               menunormal, menuhot, menusel, menuhotsel, "
-"menuinactive\n"
+"   Меню:               menunormal, menuhot, menusel, menuhotsel, menuinactive\n"
 "   Всплывающие меню:   pmenunormal, pmenusel, pmenutitle\n"
 "   Редактор:           editnormal, editbold, editmarked, editwhitespace,\n"
 "                       editlinestate, editbg, editframe, editframeactive\n"
 "                       editframedrag\n"
 "   Просмотрщик:        viewnormal, viewbold, viewunderline, viewselected\n"
-"   Справка:            helpnormal, helpitalic, helpbold, helplink, "
-"helpslink\n"
+"   Справка:            helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -726,8 +719,7 @@ msgstr ""
 "   от color16 до color255 или от rgb000 до rgb555 и от gray0 до gray23\n"
 "\n"
 "Атрибуты:\n"
-"   bold, italic, underline, reverse, blink; несколько атрибутов объединяются знаком "
-"\"+\"\n"
+"   bold, italic, underline, reverse, blink; несколько атрибутов объединяются знаком \"+\"\n"
 
 msgid "Color options"
 msgstr "Цветовые настройки"
@@ -769,6 +761,12 @@ msgstr "Не заданы аргументы для программы прос�
 msgid "Two files are required to evoke the diffviewer."
 msgstr "Требуются два файла для программы сравнения."
 
+msgid "Background protocol error"
+msgstr "Ошибка фонового протокола"
+
+msgid "Reading failed"
+msgstr "Сбой чтения"
+
 msgid "Background process error"
 msgstr "Ошибка фонового процесса"
 
@@ -777,12 +775,6 @@ msgstr "Неизвестная ошибка в дочернем процессе
 
 msgid "Child died unexpectedly"
 msgstr "Дочерний процесс неожиданно завершился"
-
-msgid "Background protocol error"
-msgstr "Ошибка фонового протокола"
-
-msgid "Reading failed"
-msgstr "Сбой чтения"
 
 msgid ""
 "Background process sent us a request for more arguments\n"
@@ -1580,8 +1572,8 @@ msgstr ""
 "Текстовый редактор с дружественным интерфейсом пользователя.\n"
 "Создан для Midnight Commander."
 
-msgid "Copyright (C) 1996-2014 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2014 the Free Software Foundation"
+msgid "Copyright (C) 1996-2015 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2015 the Free Software Foundation"
 
 msgid "About"
 msgstr "О программе"
@@ -1977,8 +1969,7 @@ msgstr "&Обратный"
 msgid "Sort order"
 msgstr "Порядок сортировки"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 msgid "Confirmation|&Delete"
 msgstr "&Удаление"
 
@@ -2368,25 +2359,16 @@ msgid " %s%s file error"
 msgstr "ошибка файла %s%s"
 
 #, c-format
-msgid ""
-"The format of the %smc.ext file has changed with version 3.0. It seems that "
-"the installation failed. Please fetch a fresh copy from the Midnight "
-"Commander package."
-msgstr ""
-"Формат %smc.ext изменён с версии 3.0. Возможно, произошёл сбой при "
-"установке. Пожалуйста, возьмите свежую копию из пакета Midnight Commander."
+msgid "The format of the %smc.ext file has changed with version 3.0. It seems that the installation failed. Please fetch a fresh copy from the Midnight Commander package."
+msgstr "Формат %smc.ext изменён с версии 3.0. Возможно, произошёл сбой при установке. Пожалуйста, возьмите свежую копию из пакета Midnight Commander."
 
 #, c-format
 msgid "%s file error"
 msgstr "ошибка файла %s"
 
 #, c-format
-msgid ""
-"The format of the %s file has changed with version 3.0. You may either want "
-"to copy it from %smc.ext or use that file as an example of how to write it."
-msgstr ""
-"Формат файла %s изменён с версии 3.0. Вы можете либо скопировать его с %s/mc."
-"ext, либо использовать этот файл как пример и написать свой."
+msgid "The format of the %s file has changed with version 3.0. You may either want to copy it from %smc.ext or use that file as an example of how to write it."
+msgstr "Формат файла %s изменён с версии 3.0. Вы можете либо скопировать его с %s/mc.ext, либо использовать этот файл как пример и написать свой."
 
 msgid "DialogTitle|Copy"
 msgstr "Копирование"
@@ -2449,8 +2431,7 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Невозможно создать устойчивые симв. ссылки через нелокальные файловые "
-"системы:\n"
+"Невозможно создать устойчивые симв. ссылки через нелокальные файловые системы:\n"
 "\n"
 "Опция \"Устойчивые символические ссылки\" будет отменена"
 
@@ -4418,3 +4399,4 @@ msgstr "Продолжить с начала?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Невозможно получить локальную копию /ftp://some.host/editme.txt"
+
