@@ -379,7 +379,7 @@ static int state_mark = 0;
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-set_colors (WPanel * panel)
+set_colors (const WPanel * panel)
 {
     (void) panel;
 
@@ -1062,7 +1062,7 @@ paint_dir (WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-display_total_marked_size (WPanel * panel, int y, int x, gboolean size_only)
+display_total_marked_size (const WPanel * panel, int y, int x, gboolean size_only)
 {
     Widget *w = WIDGET (panel);
 
@@ -1106,7 +1106,7 @@ display_total_marked_size (WPanel * panel, int y, int x, gboolean size_only)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mini_info_separator (WPanel * panel)
+mini_info_separator (const WPanel * panel)
 {
     if (panels_options.show_mini_info)
     {
@@ -1124,7 +1124,7 @@ mini_info_separator (WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-show_free_space (WPanel * panel)
+show_free_space (const WPanel * panel)
 {
     /* Used to figure out how many free space we have */
     static struct my_statfs myfs_stats;
@@ -1178,7 +1178,7 @@ show_free_space (WPanel * panel)
  */
 
 static char *
-panel_correct_path_to_show (WPanel * panel)
+panel_correct_path_to_show (const WPanel * panel)
 {
     vfs_path_t *last_vpath;
     const vfs_path_element_t *path_element;
@@ -1189,7 +1189,6 @@ panel_correct_path_to_show (WPanel * panel)
 
     /* get last path element */
     path_element = vfs_path_element_clone (vfs_path_get_by_index (panel->cwd_vpath, -1));
-
 
     if (elements_count > 1 && (strcmp (path_element->class->name, "cpiofs") == 0 ||
                                strcmp (path_element->class->name, "extfs") == 0 ||
@@ -1235,7 +1234,7 @@ panel_correct_path_to_show (WPanel * panel)
 
 #ifdef HAVE_CHARSET
 static char *
-panel_get_encoding_info_str (WPanel * panel)
+panel_get_encoding_info_str (const WPanel * panel)
 {
     char *ret_str = NULL;
     const vfs_path_element_t *path_element;
@@ -1251,7 +1250,7 @@ panel_get_encoding_info_str (WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-show_dir (WPanel * panel)
+show_dir (const WPanel * panel)
 {
     Widget *w = WIDGET (panel);
 
@@ -1504,7 +1503,7 @@ panel_format_modified (WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-panel_paint_sort_info (WPanel * panel)
+panel_paint_sort_info (const WPanel * panel)
 {
     if (*panel->sort_field->hotkey != '\0')
     {
@@ -1545,17 +1544,12 @@ panel_get_title_without_hotkey (const char *title)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-paint_frame (WPanel * panel)
+panel_print_header (const WPanel * panel)
 {
     Widget *w = WIDGET (panel);
 
     int side;
     GString *format_txt;
-
-    adjust_top_file (panel);
-
-    widget_erase (w);
-    show_dir (panel);
 
     widget_move (w, 1, 1);
     format_txt = g_string_new ("");
@@ -3615,7 +3609,10 @@ panel_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
     case MSG_DRAW:
         /* Repaint everything, including frame and separator */
-        paint_frame (panel);    /* including show_dir */
+        widget_erase (w);
+        show_dir (panel);
+        panel_print_header (panel);
+        adjust_top_file (panel);
         paint_dir (panel);
         mini_info_separator (panel);
         display_mini_info (panel);
