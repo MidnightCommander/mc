@@ -93,7 +93,7 @@ typedef struct
     Widget widget;
     dir_list dir;               /* Directory contents */
 
-    int list_type;              /* listing type (was view_type) */
+    enum list_types list_type;  /* listing type */
     int active;                 /* If panel is currently selected */
     vfs_path_t *cwd_vpath;      /* Current Working Directory */
     vfs_path_t *lwd_vpath;      /* Last Working Directory */
@@ -105,7 +105,8 @@ typedef struct
     uintmax_t total;            /* Bytes in marked files */
     int top_file;               /* The file showed on the top of the panel */
     int selected;               /* Index to the selected file */
-    int split;                  /* Split panel to allow two columns */
+    int list_cols;              /* Number of file list columns */
+    int brief_cols;             /* Number of columns in case of list_brief format */
     gboolean is_panelized;      /* Flag: special filelisting, can't reload */
     panel_display_t frame_size; /* half or full frame */
     char *filter;               /* File name filter */

@@ -782,7 +782,7 @@ file_compute_color (int attr, file_entry_t * fe)
 static int
 panel_items (const WPanel * p)
 {
-    return panel_lines (p) * (p->split != 0 ? 2 : 1);
+    return panel_lines (p) * p->list_cols;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -906,7 +906,7 @@ repaint_file (WPanel * panel, int file_index, gboolean mv, int attr, gboolean is
 {
     Widget *w = WIDGET (panel);
 
-    int second_column = 0;
+    int nth_column = 0;
     int width;
     int offset = 0;
     filename_scroll_flag_t ret_frm;
@@ -914,19 +914,18 @@ repaint_file (WPanel * panel, int file_index, gboolean mv, int attr, gboolean is
     gboolean panel_is_split;
     int fln = 0;
 
-    panel_is_split = !isstatus && panel->split != 0;
+    panel_is_split = !isstatus && panel->list_cols > 1;
     width = w->cols - 2;
 
     if (panel_is_split)
     {
-        second_column = (file_index - panel->top_file) / panel_lines (panel);
-        width = width / 2 - 1;
+        nth_column = (file_index - panel->top_file) / panel_lines (panel);
+        width /= panel->list_cols;
 
-        if (second_column != 0)
-        {
-            offset = 1 + width;
+        offset = width * nth_column;
+
+        if (nth_column + 1 >= panel->list_cols)
             width = w->cols - offset - 2;
-        }
     }
 
     /* Nothing to paint */
@@ -935,41 +934,34 @@ repaint_file (WPanel * panel, int file_index, gboolean mv, int attr, gboolean is
 
     if (mv)
     {
-        int pos = file_index - panel->top_file;
+        ypos = file_index - panel->top_file;
 
         if (panel_is_split)
-            ypos = pos % panel_lines (panel);
-        else
-            ypos = pos;
+            ypos %= panel_lines (panel);
 
-        ypos += 2;
+        ypos += 2;              /* top frame and header */
         widget_move (w, ypos, offset + 1);
     }
 
     ret_frm = format_file (panel, file_index, width, attr, isstatus, &fln);
 
-    if (panel_is_split)
+    if (panel_is_split && nth_column + 1 < panel->list_cols)
     {
-        if (second_column)
-            tty_print_char (' ');
-        else
-        {
-            tty_setcolor (NORMAL_COLOR);
-            tty_print_one_vline (TRUE);
-        }
+        tty_setcolor (NORMAL_COLOR);
+        tty_print_one_vline (TRUE);
     }
 
     if (ret_frm != FILENAME_NOSCROLL && mv)
     {
         if (!panel_is_split && fln > 0)
         {
-            if (panel->list_type == list_long)
+            if (panel->list_type != list_long)
+                width = fln;
+            else
             {
                 offset = width - fln + 1;
                 width = fln - 1;
             }
-            else
-                width = fln;
         }
 
         widget_move (w, ypos, offset);
@@ -978,7 +970,11 @@ repaint_file (WPanel * panel, int file_index, gboolean mv, int attr, gboolean is
 
         if ((ret_frm & FILENAME_SCROLL_RIGHT) != 0)
         {
-            widget_move (w, ypos, offset + 1 + width);
+            offset += width;
+            if (nth_column + 1 >= panel->list_cols)
+                offset++;
+
+            widget_move (w, ypos, offset);
             tty_setcolor (NORMAL_COLOR);
             tty_print_string (panel_filename_scroll_right_char);
         }
@@ -1563,33 +1559,20 @@ panel_print_header (const WPanel * panel)
 {
     Widget *w = WIDGET (panel);
 
-    int side;
+    int y, x;
+    int i;
     GString *format_txt;
 
     widget_move (w, 1, 1);
+    tty_getyx (&y, &x);
+    tty_setcolor (NORMAL_COLOR);
+    tty_draw_hline (y, x, ' ', w->cols - 2);
+
     format_txt = g_string_new ("");
 
-    for (side = 0; side <= panel->split; side++)
+    for (i = 0; i < panel->list_cols; i++)
     {
-        int width;
         format_e *format;
-
-        if (side == 0)
-        {
-            /* 1st column */
-            if (panel->split != 0)
-                width = w->cols / 2 - 3;
-            else
-                width = w->cols - 2;
-        }
-        else
-        {
-            /* end of previous (i. e. 1st) column */
-            tty_setcolor (NORMAL_COLOR);
-            tty_print_one_vline (TRUE);
-            /* next (i. e. 2nd) column */
-            width = w->cols - w->cols / 2 - 1;
-        }
 
         for (format = panel->format; format != NULL; format = format->next)
         {
@@ -1616,22 +1599,18 @@ panel_print_header (const WPanel * panel)
                 tty_setcolor (HEADER_COLOR);
                 tty_print_string (str_fit_to_term (format_txt->str, format->field_len,
                                                    J_CENTER_LEFT));
-                width -= format->field_len;
             }
             else
             {
                 tty_setcolor (NORMAL_COLOR);
                 tty_print_one_vline (TRUE);
-                width--;
             }
         }
 
-        if (width > 0)
+        if (i < panel->list_cols - 1)
         {
-            int y, x;
-
-            tty_getyx (&y, &x);
-            tty_draw_hline (y, x, ' ', width);
+            tty_setcolor (NORMAL_COLOR);
+            tty_print_one_vline (TRUE);
         }
     }
 
@@ -1663,16 +1642,23 @@ parse_panel_size (WPanel * panel, const char *format, gboolean isstatus)
     if (!isstatus)
     {
         panel->frame_size = frame;
-        panel->split = 0;
+        panel->list_cols = 1;
     }
 
     /* Now, the optional column specifier */
     format = skip_separators (format);
 
-    if (*format == '1' || *format == '2')
+    if (g_ascii_isdigit (*format))
     {
-        if (!isstatus)
-            panel->split = *format == '2' ? 1 : 0;
+        if (!isstatus && panel->list_type == list_brief)
+        {
+            panel->brief_cols = g_ascii_digit_value (*format);
+            if (panel->brief_cols < 1)
+                panel->brief_cols = 1;
+
+            panel->list_cols = panel->brief_cols;
+        }
+
         format++;
     }
 
@@ -1868,12 +1854,11 @@ use_display_format (WPanel * panel, const char *format, char **error, gboolean i
     panel->dirty = 1;
 
     usable_columns = WIDGET (panel)->cols - 2;
-
     /* Status needn't to be split */
     if (!isstatus)
     {
-        usable_columns /= panel->split + 1;
-        if (panel->split != 0)
+        usable_columns /= panel->list_cols;
+        if (panel->list_cols > 1)
             usable_columns--;
     }
 
@@ -2177,7 +2162,7 @@ move_selection (WPanel * panel, int lines)
 static cb_ret_t
 move_left (WPanel * panel)
 {
-    if (panel->split != 0)
+    if (panel->list_cols > 1)
     {
         move_selection (panel, -panel_lines (panel));
         return MSG_HANDLED;
@@ -2191,7 +2176,7 @@ move_left (WPanel * panel)
 static cb_ret_t
 move_right (WPanel * panel)
 {
-    if (panel->split != 0)
+    if (panel->list_cols > 1)
     {
         move_selection (panel, panel_lines (panel));
         return MSG_HANDLED;
@@ -3896,8 +3881,14 @@ panel_event (Gpm_Event * event, void *data)
         else
         {
             my_index = panel->top_file + local.y - 1;
-            if (panel->split != 0 && local.x > (w->cols - 2) / 2)
-                my_index += lines;
+
+            if (panel->list_type == list_brief && panel->list_cols > 1)
+            {
+                int width;
+
+                width = (w->cols - 2) / panel->list_cols;
+                my_index += lines * ((local.x - 1) / width);
+            }
 
             if (my_index >= panel->dir.len)
                 my_index = panel->dir.len - 1;
@@ -4284,7 +4275,8 @@ panel_new_with_dir (const char *panel_name, const vfs_path_t * vpath)
     panel->dir.len = 0;
     panel->active = 0;
     panel->filter = NULL;
-    panel->split = 0;
+    panel->list_cols = 1;
+    panel->brief_cols = 2;
     panel->top_file = 0;
     panel->selected = 0;
     panel->marked = 0;
