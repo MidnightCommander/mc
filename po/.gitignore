@@ -3,6 +3,7 @@
 *.mo
 *.msg
 *.pox
+*.pot
 Makefile
 Makefile.in
 Makefile.in.in
