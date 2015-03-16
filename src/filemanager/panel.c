@@ -320,9 +320,6 @@ extern int saving_setup;
 #define MARKED_SELECTED 3
 #define STATUS          5
 
-/* This macro extracts the number of available lines in a panel */
-#define llines(p) (WIDGET (p)->lines - 3 - (panels_options.show_mini_info ? 2 : 0))
-
 /*** file scope type declarations ****************************************************************/
 
 typedef enum
@@ -375,6 +372,8 @@ static WPanel *mouse_mark_panel = NULL;
 
 static int mouse_marking = 0;
 static int state_mark = 0;
+
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -400,6 +399,16 @@ delete_format (format_e * format)
         g_free (format);
         format = next;
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/** Extract the number of available lines in a panel */
+
+static int
+panel_lines (const WPanel * p)
+{
+    /* 3 lines are: top frame, column header, botton frame */
+    return (WIDGET (p)->lines - 3 - (panels_options.show_mini_info ? 2 : 0));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -773,7 +782,7 @@ file_compute_color (int attr, file_entry_t * fe)
 static int
 panel_items (const WPanel * p)
 {
-    return llines (p) * (p->split != 0 ? 2 : 1);
+    return panel_lines (p) * (p->split != 0 ? 2 : 1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -910,7 +919,7 @@ repaint_file (WPanel * panel, int file_index, gboolean mv, int attr, gboolean is
 
     if (panel_is_split)
     {
-        second_column = (file_index - panel->top_file) / llines (panel);
+        second_column = (file_index - panel->top_file) / panel_lines (panel);
         width = width / 2 - 1;
 
         if (second_column != 0)
@@ -929,7 +938,7 @@ repaint_file (WPanel * panel, int file_index, gboolean mv, int attr, gboolean is
         int pos = file_index - panel->top_file;
 
         if (panel_is_split)
-            ypos = pos % llines (panel);
+            ypos = pos % panel_lines (panel);
         else
             ypos = pos;
 
@@ -986,7 +995,7 @@ display_mini_info (WPanel * panel)
     if (!panels_options.show_mini_info)
         return;
 
-    widget_move (w, llines (panel) + 3, 1);
+    widget_move (w, panel_lines (panel) + 3, 1);
 
     if (panel->searching)
     {
@@ -1095,8 +1104,8 @@ display_total_marked_size (const WPanel * panel, int y, int x, gboolean size_onl
         x = (w->cols - str_term_width1 (buf)) / 2 - 1;
 
     /*
-     * y == llines (panel) + 2  for mini_info_separator
-     * y == w->lines - 1        for panel bottom frame
+     * y == panel_lines (panel) + 2  for mini_info_separator
+     * y == w->lines - 1             for panel bottom frame
      */
     widget_move (w, y, x);
     tty_setcolor (MARKED_COLOR);
@@ -1111,7 +1120,9 @@ mini_info_separator (const WPanel * panel)
     if (panels_options.show_mini_info)
     {
         Widget *w = WIDGET (panel);
-        const int y = llines (panel) + 2;
+        int y;
+
+        y = panel_lines (panel) + 2;
 
         tty_setcolor (NORMAL_COLOR);
         tty_draw_hline (w->y + y, w->x + 1, ACS_HLINE, w->cols - 2);
@@ -1261,9 +1272,13 @@ show_dir (const WPanel * panel)
 
     if (panels_options.show_mini_info)
     {
-        widget_move (w, llines (panel) + 2, 0);
+        int y;
+
+        y = panel_lines (panel) + 2;
+
+        widget_move (w, y, 0);
         tty_print_alt_char (ACS_LTEE, FALSE);
-        widget_move (w, llines (panel) + 2, w->cols - 1);
+        widget_move (w, y, w->cols - 1);
         tty_print_alt_char (ACS_RTEE, FALSE);
     }
 
@@ -2164,7 +2179,7 @@ move_left (WPanel * panel)
 {
     if (panel->split != 0)
     {
-        move_selection (panel, -llines (panel));
+        move_selection (panel, -panel_lines (panel));
         return MSG_HANDLED;
     }
 
@@ -2178,7 +2193,7 @@ move_right (WPanel * panel)
 {
     if (panel->split != 0)
     {
-        move_selection (panel, llines (panel));
+        move_selection (panel, panel_lines (panel));
         return MSG_HANDLED;
     }
 
@@ -2435,11 +2450,12 @@ mark_file_down (WPanel * panel)
 static void
 mark_file_right (WPanel * panel)
 {
-    int lines = llines (panel);
+    int lines;
 
     if (state_mark < 0)
         state_mark = selection (panel)->f.marked ? 0 : 1;
 
+    lines = panel_lines (panel);
     lines = min (lines, panel->dir.len - panel->selected - 1);
     for (; lines != 0; lines--)
     {
@@ -2454,11 +2470,12 @@ mark_file_right (WPanel * panel)
 static void
 mark_file_left (WPanel * panel)
 {
-    int lines = llines (panel);
+    int lines;
 
     if (state_mark < 0)
         state_mark = selection (panel)->f.marked ? 0 : 1;
 
+    lines = panel_lines (panel);
     lines = min (lines, panel->selected + 1);
     for (; lines != 0; lines--)
     {
@@ -3786,7 +3803,7 @@ panel_event (Gpm_Event * event, void *data)
     WPanel *panel = PANEL (data);
     Widget *w = WIDGET (data);
 
-    const int lines = llines (panel);
+    int lines;
     const gboolean is_active = widget_is_active (panel);
     const gboolean mouse_down = (event->type & GPM_DOWN) != 0;
     Gpm_Event local;
@@ -3864,6 +3881,8 @@ panel_event (Gpm_Event * event, void *data)
         goto finish;
     }
 
+    lines = panel_lines (panel);
+
     local.y -= 2;
     if ((local.type & (GPM_DOWN | GPM_DRAG)) != 0)
     {
@@ -3878,7 +3897,7 @@ panel_event (Gpm_Event * event, void *data)
         {
             my_index = panel->top_file + local.y - 1;
             if (panel->split != 0 && local.x > (w->cols - 2) / 2)
-                my_index += llines (panel);
+                my_index += lines;
 
             if (my_index >= panel->dir.len)
                 my_index = panel->dir.len - 1;
