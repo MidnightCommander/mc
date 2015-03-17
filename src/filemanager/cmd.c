@@ -6,7 +6,7 @@
    Free Software Foundation, Inc.
 
    Written by:
-   Andrew Borodin <aborodin@vmail.ru>, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2013-2015
 
    This file is part of the Midnight Commander.
 
@@ -466,12 +466,15 @@ nice_cd (const char *text, const char *xtext, const char *help,
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-configure_panel_listing (WPanel * p, int list_type, int use_msformat, char *user, char *status)
+configure_panel_listing (WPanel * p, int list_type, int brief_cols, int use_msformat, char *user,
+                         char *status)
 {
     p->user_mini_status = use_msformat;
     p->list_type = list_type;
 
-    if (list_type == list_user || use_msformat)
+    if (list_type == list_brief)
+        p->brief_cols = brief_cols;
+    else if (list_type == list_user || use_msformat)
     {
         g_free (p->user_format);
         p->user_format = user;
@@ -1642,19 +1645,19 @@ void
 change_listing_cmd (void)
 {
     int list_type;
-    int use_msformat;
+    int use_msformat, brief_cols;
     char *user, *status;
     WPanel *p = NULL;
 
     if (SELECTED_IS_PANEL)
         p = MENU_PANEL_IDX == 0 ? left_panel : right_panel;
 
-    list_type = panel_listing_box (p, &user, &status, &use_msformat, MENU_PANEL_IDX);
+    list_type = panel_listing_box (p, MENU_PANEL_IDX, &user, &status, &use_msformat, &brief_cols);
     if (list_type != -1)
     {
         switch_to_listing (MENU_PANEL_IDX);
         p = MENU_PANEL_IDX == 0 ? left_panel : right_panel;
-        configure_panel_listing (p, list_type, use_msformat, user, status);
+        configure_panel_listing (p, list_type, brief_cols, use_msformat, user, status);
     }
 }
 

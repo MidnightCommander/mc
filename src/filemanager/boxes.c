@@ -7,7 +7,7 @@
    Written by:
    Miguel de Icaza, 1994, 1995
    Jakub Jelinek, 1995
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2011, 2012, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2015
 
    This file is part of the Midnight Commander.
 
@@ -95,12 +95,14 @@
 
 unsigned long configure_old_esc_mode_id, configure_time_out_id;
 
+/* Index in list_types[] for "brief" */
+static const int panel_listing_brief_idx = 1;
 /* Index in list_types[] for "user defined" */
 static const int panel_listing_user_idx = 3;
 
 static char **status_format;
 static int listing_user_hotkey = 'u';
-static unsigned long panel_listing_types_id, panel_user_format_id;
+static unsigned long panel_listing_types_id, panel_user_format_id, panel_brief_cols_id;
 static unsigned long mini_user_status_id, mini_user_format_id;
 
 #ifdef HAVE_CHARSET
@@ -308,17 +310,20 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
         if (sender != NULL && sender->id == panel_listing_types_id)
         {
             WCheck *ch;
-            WInput *in1, *in2;
+            WInput *in1, *in2, *in3;
 
             in1 = INPUT (dlg_find_by_id (h, panel_user_format_id));
+            in2 = INPUT (dlg_find_by_id (h, panel_brief_cols_id));
             ch = CHECK (dlg_find_by_id (h, mini_user_status_id));
-            in2 = INPUT (dlg_find_by_id (h, mini_user_format_id));
+            in3 = INPUT (dlg_find_by_id (h, mini_user_format_id));
 
             if (!(ch->state & C_BOOL))
-                input_assign_text (in2, status_format[RADIO (sender)->sel]);
-            input_update (in2, FALSE);
+                input_assign_text (in3, status_format[RADIO (sender)->sel]);
             input_update (in1, FALSE);
+            input_update (in2, FALSE);
+            input_update (in3, FALSE);
             widget_disable (WIDGET (in1), RADIO (sender)->sel != panel_listing_user_idx);
+            widget_disable (WIDGET (in2), RADIO (sender)->sel != panel_listing_brief_idx);
             return MSG_HANDLED;
         }
 
@@ -732,7 +737,8 @@ panel_options_box (void)
 
 /* return list type */
 int
-panel_listing_box (WPanel * panel, char **userp, char **minip, int *use_msformat, int num)
+panel_listing_box (WPanel * panel, int num, char **userp, char **minip, int *use_msformat,
+                   int *brief_cols)
 {
     int result = -1;
     char *section = NULL;
@@ -761,6 +767,8 @@ panel_listing_box (WPanel * panel, char **userp, char **minip, int *use_msformat
 
     {
         int mini_user_status;
+        char panel_brief_cols_in[BUF_TINY];
+        char *panel_brief_cols_out = NULL;
         char *panel_user_format = NULL;
         char *mini_user_format = NULL;
         const char *cp;
@@ -768,14 +776,21 @@ panel_listing_box (WPanel * panel, char **userp, char **minip, int *use_msformat
         /* Controls whether the array strings have been translated */
         const char *list_types[LIST_TYPES] = {
             N_("&Full file list"),
-            N_("&Brief file list"),
+            N_("&Brief file list:"),
             N_("&Long file list"),
             N_("&User defined:")
         };
 
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
-            QUICK_RADIO (LIST_TYPES, list_types, &result, &panel_listing_types_id),
+            QUICK_START_COLUMNS,
+                QUICK_RADIO (LIST_TYPES, list_types, &result, &panel_listing_types_id),
+            QUICK_NEXT_COLUMN,
+                QUICK_SEPARATOR (FALSE),
+                QUICK_LABELED_INPUT (_ ("columns"), input_label_right, panel_brief_cols_in,
+                                     "panel-brief-cols-input", &panel_brief_cols_out,
+                                     &panel_brief_cols_id, FALSE, FALSE, INPUT_COMPLETE_NONE),
+            QUICK_STOP_COLUMNS,
             QUICK_INPUT (panel->user_format, "user-fmt-input", &panel_user_format,
                          &panel_user_format_id, FALSE, FALSE, INPUT_COMPLETE_NONE),
             QUICK_SEPARATOR (TRUE),
@@ -802,19 +817,35 @@ panel_listing_box (WPanel * panel, char **userp, char **minip, int *use_msformat
         result = panel->list_type;
         status_format = panel->user_status_format;
 
+        g_snprintf (panel_brief_cols_in, sizeof (panel_brief_cols_in), "%d", panel->brief_cols);
+
+        if (panel->list_type != panel_listing_brief_idx)
+            quick_widgets[4].options = W_DISABLED;
+
         if (panel->list_type != panel_listing_user_idx)
-            quick_widgets[1].options = W_DISABLED;
+            quick_widgets[6].options = W_DISABLED;
 
         if (!mini_user_status)
-            quick_widgets[4].options = W_DISABLED;
+            quick_widgets[9].options = W_DISABLED;
 
         if (quick_dialog (&qdlg) == B_CANCEL)
             result = -1;
         else
         {
+            int cols;
+            char *error = NULL;
+
             *userp = panel_user_format;
             *minip = mini_user_format;
             *use_msformat = mini_user_status;
+
+            cols = strtol (panel_brief_cols_out, &error, 10);
+            if (*error == '\0')
+                *brief_cols = cols;
+            else
+                *brief_cols = panel->brief_cols;
+
+            g_free (panel_brief_cols_out);
         }
     }
 

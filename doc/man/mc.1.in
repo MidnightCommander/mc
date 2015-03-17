@@ -826,8 +826,8 @@ and
 The full directory view shows the file name, the size of the file and
 the modification time.
 .PP
-The brief view shows only the file name and it has two columns
-(therefore showing twice as many files as other views). The long view
+The brief view shows only the file name and it has from 1 up to 9 columns
+(therefore showing more files unlike other views). The long view
 is similar to the output of
 .B "ls \-l"
 command. The long view takes the whole screen width.

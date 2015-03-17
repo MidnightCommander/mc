@@ -1671,7 +1671,7 @@ parse_panel_size (WPanel * panel, const char *format, gboolean isstatus)
 /* Format is:
 
    all              := panel_format? format
-   panel_format     := [full|half] [1|2]
+   panel_format     := [full|half] [1-9]
    format           := one_format_e
    | format , one_format_e
 
@@ -1917,13 +1917,26 @@ use_display_format (WPanel * panel, const char *format, char **error, gboolean i
 static const char *
 panel_format (WPanel * panel)
 {
+
     switch (panel->list_type)
     {
     case list_long:
         return "full perm space nlink space owner space group space size space mtime space name";
 
     case list_brief:
-        return "half 2 type name";
+        {
+            static char format[BUF_TINY];
+            int brief_cols = panel->brief_cols;
+
+            if (brief_cols < 1)
+                brief_cols = 2;
+
+            if (brief_cols > 9)
+                brief_cols = 9;
+
+            g_snprintf (format, sizeof (format), "half %d type name", brief_cols);
+            return format;
+        }
 
     case list_user:
         return panel->user_format;
