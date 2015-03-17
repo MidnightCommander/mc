@@ -783,21 +783,21 @@ static filename_scroll_flag_t
 format_file (WPanel * panel, int file_index, int width, int attr, gboolean isstatus,
              int *field_length)
 {
-    int color, length = 0;
-    gboolean empty_line;
+    int color = NORMAL_COLOR;
+    int length = 0;
     format_e *format, *home;
-    file_entry_t *fe;
+    file_entry_t *fe = NULL;
     filename_scroll_flag_t res = FILENAME_NOSCROLL;
 
-    empty_line = (file_index >= panel->dir.len);
-    home = isstatus ? panel->status_format : panel->format;
-    fe = &panel->dir.list[file_index];
     *field_length = 0;
 
-    if (!empty_line)
+    if (file_index < panel->dir.len)
+    {
+        fe = &panel->dir.list[file_index];
         color = file_compute_color (attr, fe);
-    else
-        color = NORMAL_COLOR;
+    }
+
+    home = isstatus ? panel->status_format : panel->format;
 
     for (format = home; format != NULL && length != width; format = format->next)
     {
@@ -808,7 +808,7 @@ format_file (WPanel * panel, int file_index, int width, int attr, gboolean issta
             const char *prepared_text;
             int name_offset = 0;
 
-            if (!empty_line)
+            if (fe != NULL)
                 txt = format->string_fn (fe, format->field_len);
 
             len = format->field_len;
@@ -860,7 +860,7 @@ format_file (WPanel * panel, int file_index, int width, int attr, gboolean issta
             else
                 prepared_text = str_fit_to_term (txt, len, format->just_mode);
 
-            if (perm != 0)
+            if (perm != 0 && fe != NULL)
                 add_permission_string (prepared_text, format->field_len, fe, attr, color,
                                        perm != 1);
             else
