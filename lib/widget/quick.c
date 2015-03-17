@@ -477,9 +477,12 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
                     break;
 
                 case input_label_right:
-                    label->x =
-                        item->widget->x + item->widget->cols + 1 - WIDGET (item->widget->owner)->x;
+                    if (item->widget->x != x1)
+                        item->widget->x = x2;
+                    if (g != NULL)
+                        item->widget->x += 2;
                     item->widget->cols = width - label->cols - 1;
+                    label->x = item->widget->x + item->widget->cols + 1;
                     break;
 
                 default:
