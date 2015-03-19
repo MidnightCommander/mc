@@ -27,7 +27,7 @@ Tip: Stiskem Enter na souboru .tar nebo .tar.gz si prohlédnete obsah.
 
 Tip: Existuje také manuálová stránka [mc(1)].
 
-Tip: Přejete si klávesy stejně jako v lynxu? Nastavte to v Nastavení.
+Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 Tip: Makra uvozená % pracují na příkazové řádce.
 

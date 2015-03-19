@@ -27,7 +27,7 @@ onderzoeken.
 
 Hint: We hebben ook een aardige handleiding.
 
-Hint: Wil je lynx-achtige navigatie? Stel het in in de Configuratie dialoog.
+Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 Hint: % macros werken zelf op de commando lijn.
 

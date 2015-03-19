@@ -11,7 +11,7 @@ Vihje: Täht vajab tsiteeringut? Sisesta C-q ja täht.
 Vihje: Oled tüdinud neist teadetest? Lülita need välja menüüst
 Seaded/Paigutus.
 
-Vihje: Kataloogide valimine: lisa sobiva mustri lõppu kaldkriips.
+Vihje: Kataloogide valimiseks lisa sobiva mustri lõppu kaldkriips.
 
 Vihje: Kui terminalil puuduvad funktsiooniklahvid, siis kasuta ESC+number
 jadasid.
@@ -26,8 +26,7 @@ Vihje: VFS võimalused: tar-faili sisuga tutvumiseks vajuta ta peal ENTER.
 
 Vihje: Olemas on ka meeldiv manuaal.
 
-Vihje: Soovid lynxi stiilis navigeerimist? Luba see konfiguratsiooni
-dialoogist.
+Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 Vihje: %-makrod töötavad ka käsureal.
 

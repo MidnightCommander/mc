@@ -1,12 +1,12 @@
 Hint: Use C-x t to copy tagged file names to the command line.
 
-Συμβουλή: Χρησιμοποιήστε το C-x p για να αντιγράψετε την τρέχουσα διαδρομή
-στη γραμμή εντολών.
+Συμβουλή: Πατώντας C-x p μπορείτε να αντιγράψετε την τρέχουσα τοποθεσία στη
+γραμμή εντολών.
 
-Συμβουλή: Συμπλήρωση: χρησιμοποιήστε M-Tab (ή Esc+Tab).  Πατήστε το δύο
-φορές για να δείτε μια λίστα.
+Συμβουλή: Πατήστε M-Tab (ή Esc+Tab) για συμπλήρωση. Πατήστε το δύο φορές για
+να δείτε μια λίστα.
 
-Συμβουλή: Χρησιμοποιήστε M-p και M-n για να δείτε το ιστορικό εντολών.
+Συμβουλή: Πατήστε M-p και M-n για να δείτε το ιστορικό εντολών.
 
 Hint: Need to quote a character? Use Control-q and the character.
 
@@ -27,8 +27,7 @@ Hint: VFS coolness: tap enter on a tar file to examine its contents.
 
 Hint: We also have a nice manual page.
 
-Συμβουλή: Θέλετε περιήγηση στο στυλ του lynx; Ρυθμίστε το στο διάλογο
-Ρυθμίσεις.
+Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 Hint: % macros work even on the command line.
 

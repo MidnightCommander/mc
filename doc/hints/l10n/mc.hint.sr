@@ -1,93 +1,112 @@
-Hint: Use C-x t to copy tagged file names to the command line.
+Савет: Користите „C-x t“ да умножите означене називе датотека у линији
+наредби.
 
-Hint: Use C-x p to copy the current pathname to the command line.
+Савет: Користите „C-x p“ да умножите назив текуће путање у линији наредби.
 
-Hint: Completion: use M-Tab (or Esc+Tab).  Type it twice to get a list.
+Савет: Довршавање: користите „M-Tab“ (или „Esc+Tab“).  Укуцајте га два пута
+да добавите списак.
 
-Hint: Use M-p and M-n to access the command history.
+Савет: Користите „M-p“ и „M-n“ да приступите историјату наредби.
 
-Hint: Need to quote a character? Use Control-q and the character.
+Савет: Треба да цитирате знак? Користите „Ctrl-q“ и знак.
 
-Hint: Tired of these messages? Turn them off from the Options/Layout menu.
+Савет: Ове поруке вас излуђују? Искључите их у изборнику „Опције/Распоред“.
 
-Hint: Selecting directories: add a slash to the end of the matching pattern.
+Савет: Бирање директоријума: додајте косу црту на крај обрасца за поређење.
 
-Hint: If your terminal lacks functions keys, use the ESC+number sequence.
+Савет: Ако вашем терминалу недостају функцијски тастери, користите низ
+„ЕСЦ+број“.
 
-Hint: The homepage of GNU Midnight Commander:
+Савет: Матична страница Гнуовог Поноћног наредника:
 http://www.midnight-commander.org/
 
-Hint: Please send any bug reports to mc-devel@gnome.org
+Савет: Све извештаје о грешкама пошаљите на „mc-devel@gnome.org“
 
-Hint: Tab changes your current panel.
+Савет: Табулатор мења ваш текући панел.
 
-Hint: VFS coolness: tap enter on a tar file to examine its contents.
+Савет: Смиреност ВСД-а: лупните тастер „Унеси“ на тар датотеци да испитате
+њен садржај.
 
-Hint: We also have a nice manual page.
+Савет: Такође имамо и лепу страницу упутства.
 
-Hint: Do you want lynx-style navigation? Set it in the Configuration dialog.
+Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
-Hint: % macros work even on the command line.
+Савет: % макрои раде чак и на линији наредби.
 
-Hint: M-! will allow you to execute programs and see the output in the
-viewer.
+Савет: „M-!“ ће вам омогућити да извршите програме и да видите излаз у
+прегледачу.
 
-Hint: The file listing format can be customized; do "man mc" for details.
+Савет: Запис исписивања датотека може бити прилагођен; упишите „man mc“ за
+појединости.
 
-Hint: %D/%T expands to the tagged files in the opposite directory.
+Савет: „%D/%T“ се проширује ка означеним датотекама у супротном
+директоријуму.
 
-Hint: Want your plain shell? Press C-o, and get back to MC with C-o again.
+Савет: Желите вашу обичну љуску? Притисните „C-o“, и вратите се Поноћном
+нареднику опет са „C-o“.
 
-Hint: Setting the CDPATH variable can save you keystrokes in cd commands.
+Савет: Постављањем променљиве „CDPATH“ може да вам уштеди пречице тастатуре
+у „cd“ наредбама.
 
-Hint: If you want to see your .* files, say so in the Configuration dialog.
+Савет: Ако желите да видите ваше „.*“ датотеке, реците тако у прозорчету
+подешавања.
 
-Hint: Want to see your *~ backup files? Set it in the Configuration dialog.
+Савет: Желите да видите ваше датотеке резерви „*~“? Поставите то у
+прозорчету подешавања.
 
-Hint: Completion works on all input lines in all dialogs. Just press M-Tab.
+Савет: Довршавање ради на свим улазним редовима у свим прозорчићима. Само
+притисните „M-Tab“.
 
-Hint: On slow terminals the -s flag may help.
+Савет: На спорим терминалима заставица „-s“ може бити од користи.
 
-Hint: Find File: you can work on the files found using the Panelize button.
+Савет: Налажење датотеке: можете да радите на налажењу датотека користећи
+дугме „У окно“.
 
-Hint: Want to do complex searches? Use the External Panelize command.
+Савет: Желите да обавите сложене претраге? Користите наредбу „Спољним
+програмом у окно“.
 
-Hint: To change directory halfway through typing a command, use M-c (quick
-cd).
+Савет: Да промените директоријум на пола пута куцајући наредбу, користите
+„M-c“ (брза промена директоријума).
 
-Note: Shell commands will not work when you are on a non-local file system.
+Напомена: Наредбе љуске неће радити када нисте на месном систему датотека.
 
-Hint: Bring text back from the dead with C-y.
+Савет: Вратите текст у живот са „C-y“.
 
-Hint: Are some of your keys not working? Look at Options/Learn keys.
+Савет: Да ли неки од ваших тастера не раде? Погледајте „Опције/Научи
+тастере“.
 
-Hint: To look at the output of a command in the viewer, use M-!
+Савет: Да погледате излаз наредбе у прегледачу, користите „M-!“.
 
-Hint: F13 (or Shift-F3) invokes the viewer in raw mode.
+Савет: Ф13 (или Помак-Ф3) призива прегледача у сировом режиму.
 
-Hint: You may specify the editor for F4 with the shell variable EDITOR.
+Савет: Можете да наведете уређивача за Ф4 променљивом љуске „УРЕЂИВАЧ“.
 
-Hint: You may specify the external viewer with the shell vars VIEWER or
-PAGER.
+Савет: Можете да наведете спољног прегледача променљивима љуске „ПРЕГЛЕДАЧ“
+или „СТРАНИЧНИК“.
 
-Hint: You can disable all requests for confirmation in Options/Confirmation.
+Савет: Можете да искључите све захтеве за потврђивањем у изборнику
+„Опције/Потврђивање“.
 
 Hint: Leap to frequently used directories in a single bound with C-.
 
-Hint: You can do anonymous FTP with mc by typing 'cd ftp://machine.edu'
+Савет: Можете да одрадите безимени протокол преноса датотека са „cd
+ftp://machine.edu“
 
-Hint: FTP is built in the Midnight Commander, check the File/FTP link menu.
+Савет: Протокол преноса датотека је изграђен у Поноћном нареднику, проверите
+изборник „Датотека/ФТП веза“.
 
-Hint: M-t changes quickly the listing mode.
+Савет: „M-t“ мења брзо режим исписивања.
 
-Hint: You can specify the username when doing ftps: 'cd
-ftp://user@machine.edu'
+Савет: Можете да наведете име корисника када обављате фтпс: „cd
+ftp://user@machine.edu“
 
-Hint: You can browse RPM files by tapping enter on top of an rpm file.
+Савет: Можете да разгледате РПМ датотеке ако лупнете тастером „Унеси“ по рпм
+датотеци.
 
-Hint: To mark directories on the select dialog box, append a slash.
+Савет: Да означите директоријуме у пољу прозорчета за избор, прикачите косу
+црту.
 
-Hint: To use the mouse cut and paste may require holding the shift key
+Савет: Исецање и убацивање мишем може да захтева држање тастера помака
 
 Hint: Key frequently visited ftp sites in the hotlist: type C-.
 

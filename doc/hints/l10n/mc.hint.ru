@@ -29,8 +29,7 @@ http://www.midnight-commander.org/
 
 Совет: У нас также имеется толковая страница руководства.
 
-Совет: Вы хотите навигацию в стиле Lynx? Установите это в диалоге
-Конфигурация.
+Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 Совет: Макросы % работают даже в командной строке.
 

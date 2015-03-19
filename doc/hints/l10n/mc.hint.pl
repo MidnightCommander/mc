@@ -29,7 +29,7 @@ zawartość.
 
 Porada: warto zajrzeć także na stronę podręcznika.
 
-Porada: nawigację w stylu programu Lynx można ustawić w oknie konfiguracji.
+Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 Porada: makra % działają także w wierszu poleceń.
 

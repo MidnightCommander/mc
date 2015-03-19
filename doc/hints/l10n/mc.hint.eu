@@ -27,8 +27,7 @@ Hint: VFS coolness: tap enter on a tar file to examine its contents.
 
 Aholkua: Eskuliburu orrialde ederra ere badaukagu.
 
-Aholkua: Lynx tankerako nabigazioa nahi duzu? Ezarri ezazu Konfigurazio
-elkarrizketan.
+Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 Hint: % macros work even on the command line.
 
