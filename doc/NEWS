@@ -1,3 +1,61 @@
+Version 4.8.14
+
+- Core
+
+  * Minimal version of GLib is 2.14.0
+  * Add new panel binding "!SelectExt" to select/unselect files with the same extension as the current file (#3228)
+  * Speed up of directory size calculation (#3247)
+  * Support of italic text (#3065)
+
+- Editor
+
+  * New syntax highlighting support:
+    - puppet (#3266)
+
+- Viewer
+
+  * Rewrite mcview's rendering and scrolling (#3250, #3256)
+    - no more partial lines at the top and failure to scroll when Up or Down is pressed;
+    - better handling of CJK characters;
+    - handle combining accents;
+    - improved nroff support;
+    - more conventional scrolling behavior at the end of the file.
+  * Use VIEW_SELECTED_COLOR in plain mode (#3405)
+  * In !QuickView panel, don't pass any chars to command line to avoid unexpected command execution (#3253)
+
+- Misc
+
+  * Code cleanup (#3265, #3262)
+  * Bind poedit to Edit action for .po files (#3287)
+  * Better grammar mcedit user menu (#3246)
+
+- Fixes
+
+  * Fail to build against musl libc (#3267)
+  * Error compiling with glib 2.20.3 (#3333)
+  * Overwrite of the PROMPT_COMMAND bash variable (#2027)
+  * contrib/*.?sh are not recreated after rerun of configure (#3181)
+  * File rename handles zero-length substitutions incorrectly (#2952)
+  * Lose files on "Skip" when "Cannot preallocate space for target file" (#3297)
+  * Info panel can't obtain file system statistics on Solaris (#3277)
+  * "Shell patterns" broken beyond repair (#2309)
+  * File selection by patterns uses bytes instead of unicode characters (#2743)
+  * Copy files dosn't work as expected, when copying to a directory with the special symbol in its name (#3235)
+  * Wrong order of old_colors table items (#3404)
+  * Input line: Alt+Backspace on one-letter word erases too much (#3390)
+  * "Directory scanning" window is too narrow (#3162)
+  * No Help for User Menu (#3409)
+  * mcedit: paste from clipboard does not work (#3339)
+  * mcviewer: hang when viewing broken man page (#2966)
+  * mcview hex: incorrect highlight when search string not found (#3263)
+  * mcview hex edit: UTF-8 chars are not updated (#3259)
+  * mcview hex edit: can't enter certain UTF-8 characters (#3260)
+  * mcview hex edit: CJK overflow (#3261)
+  * mcedit: status line doesn't show full path to file (#3285)
+  * Freeze when copying from one FTP location to another (#358)
+  * Fix vertical line color if a file is marked and selected (#3417)
+
+
 Version 4.8.13
 
 - Core
