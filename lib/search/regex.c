@@ -61,6 +61,7 @@ typedef enum
 
 /*** file scope functions ************************************************************************/
 
+#ifndef SEARCH_TYPE_GLIB
 static gboolean
 mc_search__regex_str_append_if_special (GString * copy_to, const GString * regex_str,
                                         gsize * offset)
@@ -244,6 +245,7 @@ mc_search__cond_struct_new_regex_ci_str (const char *charset, const GString * as
 
     return ret_str;
 }
+#endif /* !SEARCH_TYPE_GLIB */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -717,12 +719,15 @@ mc_search_regex__process_escape_sequence (GString * dest_str, const char *from, 
  */
 
 static GRegexCompileFlags
-mc_search__regex_get_compile_flags (const char *charset)
+mc_search__regex_get_compile_flags (const char *charset, gboolean is_case_sensitive)
 {
     GRegexCompileFlags g_regex_options = G_REGEX_OPTIMIZE | G_REGEX_DOTALL;
 
     if (!(mc_global.utf8_display && str_isutf8 (charset)))
         g_regex_options |= G_REGEX_RAW;
+
+    if (!is_case_sensitive)
+        g_regex_options |= G_REGEX_CASELESS;
 
     return g_regex_options;
 }
@@ -738,17 +743,10 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_
 #ifdef SEARCH_TYPE_GLIB
     GError *mcerror = NULL;
 
-    if (!lc_mc_search->is_case_sensitive)
-    {
-        GString *tmp;
-
-        tmp = mc_search_cond->str;
-        mc_search_cond->str = mc_search__cond_struct_new_regex_ci_str (charset, tmp);
-        g_string_free (tmp, TRUE);
-    }
     mc_search_cond->regex_handle =
-        g_regex_new (mc_search_cond->str->str, mc_search__regex_get_compile_flags (charset), 0,
-                     &mcerror);
+        g_regex_new (mc_search_cond->str->str,
+                     mc_search__regex_get_compile_flags (charset, lc_mc_search->is_case_sensitive),
+                     0, &mcerror);
 
     if (mcerror != NULL)
     {

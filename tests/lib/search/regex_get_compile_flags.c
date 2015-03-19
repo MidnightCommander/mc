@@ -37,41 +37,73 @@ static const struct test_regex_get_compile_flags_ds
 {
     const char *charset;
     const gboolean utf_flag;
+    const gboolean is_case_sensitive;
     const GRegexCompileFlags expected_result;
 } test_regex_get_compile_flags_ds[] =
 {
     {
         "utf8",
         TRUE,
+        TRUE,
         G_REGEX_OPTIMIZE | G_REGEX_DOTALL
     },
     {
         "utf8",
         FALSE,
+        TRUE,
         G_REGEX_OPTIMIZE | G_REGEX_DOTALL | G_REGEX_RAW
     },
     {
+        "utf8",
+        TRUE,
+        FALSE,
+        G_REGEX_OPTIMIZE | G_REGEX_DOTALL | G_REGEX_CASELESS
+    },
+    {
+        "utf8",
+        FALSE,
+        FALSE,
+        G_REGEX_OPTIMIZE | G_REGEX_DOTALL | G_REGEX_RAW | G_REGEX_CASELESS
+    },
+    {
         "utf-8",
+        TRUE,
         TRUE,
         G_REGEX_OPTIMIZE | G_REGEX_DOTALL
     },
     {
         "utf-8",
         FALSE,
+        TRUE,
         G_REGEX_OPTIMIZE | G_REGEX_DOTALL | G_REGEX_RAW
     },
     {
+        "utf-8",
+        TRUE,
+        FALSE,
+        G_REGEX_OPTIMIZE | G_REGEX_DOTALL | G_REGEX_CASELESS
+    },
+    {
+        "utf-8",
+        FALSE,
+        FALSE,
+        G_REGEX_OPTIMIZE | G_REGEX_DOTALL | G_REGEX_RAW | G_REGEX_CASELESS
+    },
+    {
         "latin1",
+        TRUE,
         TRUE,
         G_REGEX_OPTIMIZE | G_REGEX_DOTALL  | G_REGEX_RAW
     },
     {
         "latin1",
         FALSE,
+        TRUE,
         G_REGEX_OPTIMIZE | G_REGEX_DOTALL | G_REGEX_RAW
     },
     {
         "blablabla",
+        TRUE,
         TRUE,
         G_REGEX_OPTIMIZE | G_REGEX_DOTALL  | G_REGEX_RAW
     },
@@ -89,7 +121,7 @@ START_PARAMETRIZED_TEST (test_regex_get_compile_flags, test_regex_get_compile_fl
     mc_global.utf8_display = data->utf_flag;
 
     /* when */
-    actual_result = mc_search__regex_get_compile_flags (data->charset);
+    actual_result = mc_search__regex_get_compile_flags (data->charset, data->is_case_sensitive);
 
     /* then */
     mctest_assert_int_eq (actual_result, data->expected_result);
