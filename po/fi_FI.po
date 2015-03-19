@@ -1,21 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
-"Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2015-02-26 09:43+0300\n"
+"Report-Msgid-Bugs-To: http://www.midnight-commander.org/report\n"
+"POT-Creation-Date: 2013-03-12 13:28+0400\n"
 "PO-Revision-Date: 2013-03-13 08:51+0000\n"
 "Last-Translator: Slava Zanko <slavazanko@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: fi_FI\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fi_FI\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Warning: cannot load codepages list"
@@ -53,10 +53,7 @@ msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
-msgstr ""
-"Tiedosto \"%s\" on juuri nyt käsittelyssä.\n"
-"Käyttäjä: %s\n"
-"Prosessin ID: %d"
+msgstr "Tiedosto \"%s\" on juuri nyt käsittelyssä.\nKäyttäjä: %s\nProsessin ID: %d"
 
 msgid "File locked"
 msgstr "Tiedosto lukittu"
@@ -124,17 +121,13 @@ msgstr ""
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Teemaa '%s' ei pysty lataamaan.\n"
-"Perusteema asetettu."
+msgstr "Teemaa '%s' ei pysty lataamaan.\nPerusteema asetettu."
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Teemaa '%s' ei pysty käsittelemään.\n"
-"Perusteema asetettu."
+msgstr "Teemaa '%s' ei pysty käsittelemään.\nPerusteema asetettu."
 
 #, c-format
 msgid ""
@@ -142,10 +135,6 @@ msgid ""
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
 msgstr ""
-
-#, fuzzy
-msgid "Escape"
-msgstr "Esc"
 
 msgid "Function key 1"
 msgstr "Funktio 1"
@@ -207,67 +196,59 @@ msgstr "Funktio 19"
 msgid "Function key 20"
 msgstr "Funktio 20"
 
-msgid "Completion/M-tab"
-msgstr ""
-
-msgid "BackTab/S-tab"
-msgstr ""
-
-#, fuzzy
-msgid "Backspace"
+msgid "Backspace key"
 msgstr "Askelpalautin"
-
-#, fuzzy
-msgid "Up arrow"
-msgstr "Ylänuoli"
-
-#, fuzzy
-msgid "Down arrow"
-msgstr "Alanuoli"
-
-#, fuzzy
-msgid "Left arrow"
-msgstr "Vasen nuoli"
-
-#, fuzzy
-msgid "Right arrow"
-msgstr "Oikea nuoli"
-
-#, fuzzy
-msgid "Insert"
-msgstr "Insert"
-
-#, fuzzy
-msgid "Delete"
-msgstr "Delete"
-
-#, fuzzy
-msgid "Home"
-msgstr "Home"
 
 msgid "End key"
 msgstr "End"
 
-#, fuzzy
-msgid "Page Up"
-msgstr "Page Up"
+msgid "Up arrow key"
+msgstr "Ylänuoli"
 
-#, fuzzy
-msgid "Page Down"
+msgid "Down arrow key"
+msgstr "Alanuoli"
+
+msgid "Left arrow key"
+msgstr "Vasen nuoli"
+
+msgid "Right arrow key"
+msgstr "Oikea nuoli"
+
+msgid "Home key"
+msgstr "Home"
+
+msgid "Page Down key"
 msgstr "Page Down"
 
-#, fuzzy
-msgid "/ on keypad"
-msgstr "+ keypadilla"
+msgid "Page Up key"
+msgstr "Page Up"
 
-msgid "* on keypad"
-msgstr "* keypadilla"
+msgid "Insert key"
+msgstr "Insert"
+
+msgid "Delete key"
+msgstr "Delete"
+
+msgid "Completion/M-tab"
+msgstr ""
+
+msgid "Back Tabulation S-tab"
+msgstr ""
+
+msgid "+ on keypad"
+msgstr "+ keypadilla"
 
 msgid "- on keypad"
 msgstr "- keypadilla"
 
-msgid "+ on keypad"
-msgstr "+ keypadilla"
+msgid "Slash on keypad"
+msgstr "Viiva keypadilla"
+
+msgid "* on keypad"
+msgstr "* keypadilla"
+
+msgid "Escape key"
+msgstr "Esc"
 
 msgid "Left arrow keypad"
 msgstr "Vasen nuoli keypadilla"
@@ -320,14 +301,14 @@ msgstr "A1"
 msgid "C1 key"
 msgstr "C1"
 
-msgid "Asterisk"
-msgstr "Tähti"
+msgid "Plus"
+msgstr "Plus"
 
 msgid "Minus"
 msgstr "Miinus"
 
-msgid "Plus"
-msgstr "Plus"
+msgid "Asterisk"
+msgstr "Tähti"
 
 msgid "Dot"
 msgstr "Piste"
@@ -348,9 +329,6 @@ msgid "Apostrophe"
 msgstr ""
 
 msgid "Colon"
-msgstr ""
-
-msgid "Semicolon"
 msgstr ""
 
 msgid "Exclamation mark"
@@ -445,31 +423,7 @@ msgstr ""
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"Näytön koko %dx%d ei ole yhteensopiva.\n"
-"Tarkista TERM.\n"
-
-#, fuzzy
-msgid "Cannot create pipe descriptor"
-msgstr "Väliaikaishakemiston luonti epäonnistui %s: %s\n"
-
-msgid "Cannot parse command for pipe"
-msgstr ""
-
-msgid "Cannot create pipe streams"
-msgstr ""
-
-#, c-format
-msgid ""
-"Unexpected error in select() reading data from a child process:\n"
-"%s"
-msgstr ""
-
-#, fuzzy, c-format
-msgid ""
-"Unexpected error in waitpid():\n"
-"%s"
-msgstr "Odottaminen päättyminen tiedostossa %s"
+msgstr "Näytön koko %dx%d ei ole yhteensopiva.\nTarkista TERM.\n"
 
 msgid "Warning"
 msgstr "Varoitus"
@@ -570,13 +524,6 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#, c-format
-msgid "%d: %s"
-msgstr ""
-
-msgid "&Abort"
-msgstr ""
-
 msgid "Displays the current version"
 msgstr ""
 
@@ -670,7 +617,7 @@ msgid ""
 "   Editor:       editnormal, editbold, editmarked, editwhitespace,\n"
 "                 editlinestate, editbg, editframe, editframeactive\n"
 "                 editframedrag\n"
-"   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
+"   Viewer:       viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 msgstr ""
 
@@ -685,7 +632,7 @@ msgid ""
 "   color16 to color255, or rgb000 to rgb555 and gray0 to gray23\n"
 "\n"
 "Attributes:\n"
-"   bold, italic, underline, reverse, blink; append more with '+'\n"
+"   bold, underline, reverse, blink; append more with '+'\n"
 msgstr ""
 
 msgid "Color options"
@@ -702,7 +649,7 @@ msgstr ""
 
 msgid ""
 "\n"
-"Please send any bug reports (including the output of 'mc -V')\n"
+"Please send any bug reports (including the output of `mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 
@@ -725,12 +672,6 @@ msgstr ""
 msgid "Two files are required to evoke the diffviewer."
 msgstr ""
 
-msgid "Background protocol error"
-msgstr ""
-
-msgid "Reading failed"
-msgstr ""
-
 msgid "Background process error"
 msgstr ""
 
@@ -738,6 +679,12 @@ msgid "Unknown error in child"
 msgstr ""
 
 msgid "Child died unexpectedly"
+msgstr ""
+
+msgid "Background protocol error"
+msgstr ""
+
+msgid "Reading failed"
 msgstr ""
 
 msgid ""
@@ -894,19 +841,8 @@ msgid "< Reload Current Syntax >"
 msgstr ""
 
 #, c-format
-msgid "Loading: %3d%%"
-msgstr ""
-
-msgid "Loading..."
-msgstr ""
-
-#, c-format
 msgid "Cannot open %s for reading"
 msgstr ""
-
-#, fuzzy
-msgid "Load file"
-msgstr "tiedosto"
 
 #, c-format
 msgid "Error reading %s"
@@ -921,9 +857,7 @@ msgid "\"%s\" is not a regular file"
 msgstr ""
 
 #, c-format
-msgid ""
-"File \"%s\" is too large.\n"
-"Open it anyway?"
+msgid "File \"%s\" is too large"
 msgstr ""
 
 #, c-format
@@ -932,14 +866,6 @@ msgstr ""
 
 #, c-format
 msgid "Cannot open pipe for reading: %s"
-msgstr ""
-
-#, c-format
-msgid "Searching %s: %3d%%"
-msgstr ""
-
-#, c-format
-msgid "Searching %s"
 msgstr ""
 
 msgid "File has hard-links. Detach before saving?"
@@ -960,7 +886,7 @@ msgstr ""
 msgid "Cannot open file for writing: %s"
 msgstr ""
 
-msgid "The file you are saving does not end with a newline."
+msgid "The file you are saving is not finished with a newline"
 msgstr ""
 
 msgid "C&ontinue"
@@ -988,9 +914,6 @@ msgid "Save As"
 msgstr ""
 
 msgid "Block is large, you may not be able to undo this action"
-msgstr ""
-
-msgid "Collect completions"
 msgstr ""
 
 msgid "&Quick save"
@@ -1512,7 +1435,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2015 the Free Software Foundation"
+msgid "Copyright (C) 1996-2012 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1540,78 +1463,6 @@ msgid "ButtonBar|Delete"
 msgstr ""
 
 msgid "ButtonBar|PullDn"
-msgstr ""
-
-msgid "Breton"
-msgstr ""
-
-msgid "Czech"
-msgstr ""
-
-msgid "Welsh"
-msgstr ""
-
-msgid "Danish"
-msgstr ""
-
-msgid "German"
-msgstr ""
-
-msgid "Greek"
-msgstr ""
-
-msgid "English"
-msgstr ""
-
-msgid "British English"
-msgstr ""
-
-msgid "Canadian English"
-msgstr ""
-
-msgid "American English"
-msgstr ""
-
-msgid "Esperanto"
-msgstr ""
-
-msgid "Spanish"
-msgstr ""
-
-msgid "Faroese"
-msgstr ""
-
-msgid "French"
-msgstr ""
-
-msgid "Italian"
-msgstr ""
-
-msgid "Dutch"
-msgstr ""
-
-msgid "Norwegian"
-msgstr ""
-
-msgid "Polish"
-msgstr ""
-
-msgid "Portuguese"
-msgstr ""
-
-msgid "Romanian"
-msgstr ""
-
-msgid "Russian"
-msgstr ""
-
-msgid "Slovak"
-msgstr ""
-
-msgid "Swedish"
-msgstr ""
-
-msgid "Ukrainian"
 msgstr ""
 
 msgid "&Add word"
@@ -1660,7 +1511,7 @@ msgid "The shell is already running a command"
 msgstr ""
 
 #, c-format
-msgid "Type 'exit' to return to the Midnight Commander"
+msgid "Type `exit' to return to the Midnight Commander"
 msgstr ""
 
 msgid "Set &all"
@@ -1697,12 +1548,6 @@ msgstr ""
 msgid ""
 "Cannot chown \"%s\"\n"
 "%s"
-msgstr ""
-
-msgid "< Default >"
-msgstr ""
-
-msgid "Skins"
 msgstr ""
 
 msgid "Other 8 bit"
@@ -1787,12 +1632,6 @@ msgid "A&uto save setup"
 msgstr ""
 
 msgid "Configure options"
-msgstr ""
-
-msgid "Skin:"
-msgstr ""
-
-msgid "Appearance"
 msgstr ""
 
 msgid "Case &insensitive"
@@ -1895,7 +1734,8 @@ msgstr ""
 msgid "Sort order"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 msgid "Confirmation|&Delete"
 msgstr ""
 
@@ -1936,6 +1776,9 @@ msgid "Display bits"
 msgstr ""
 
 msgid "Input / display codepage:"
+msgstr ""
+
+msgid "&Select"
 msgstr ""
 
 msgid "Directory tree"
@@ -2116,6 +1959,15 @@ msgstr ""
 msgid "Set expression for filtering filenames"
 msgstr ""
 
+msgid "&Files only"
+msgstr ""
+
+msgid "&Using shell patterns"
+msgstr ""
+
+msgid "&Case sensitive"
+msgstr ""
+
 #, c-format
 msgid "Link %s to:"
 msgstr ""
@@ -2154,6 +2006,12 @@ msgid "Create a new Directory"
 msgstr ""
 
 msgid "Enter directory name:"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "Unselect"
 msgstr ""
 
 msgid "Extension file edit"
@@ -2197,7 +2055,7 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid "Symlink '%s' points to:"
+msgid "Symlink `%s' points to:"
 msgstr ""
 
 msgid "Edit symlink"
@@ -2212,7 +2070,7 @@ msgid "edit symlink: %s"
 msgstr ""
 
 #, c-format
-msgid "'%s' is not a symbolic link"
+msgid "`%s' is not a symbolic link"
 msgstr ""
 
 msgid "FTP to machine"
@@ -2233,9 +2091,6 @@ msgstr ""
 msgid ""
 "Enter device (without /dev/) to undelete\n"
 "files on: (F1 for details)"
-msgstr ""
-
-msgid "Directory scanning"
 msgstr ""
 
 msgid "Setup"
@@ -2310,7 +2165,7 @@ msgid "FileOperation|Delete"
 msgstr ""
 
 #, no-c-format
-msgid "%o %f%n\"%s\"%m"
+msgid "%o %f \"%s\"%m"
 msgstr ""
 
 #, no-c-format
@@ -2336,6 +2191,13 @@ msgstr ""
 msgid " with source mask:"
 msgstr ""
 
+msgid "to:"
+msgstr ""
+
+#, c-format
+msgid "%s?"
+msgstr ""
+
 msgid "Cannot make the hardlink"
 msgstr ""
 
@@ -2355,6 +2217,9 @@ msgstr ""
 msgid ""
 "Cannot create target symlink \"%s\"\n"
 "%s"
+msgstr ""
+
+msgid "&Abort"
 msgstr ""
 
 msgid "Ski&p all"
@@ -2573,8 +2438,13 @@ msgid ""
 "%s"
 msgstr ""
 
+msgid "Directory scanning"
+msgstr ""
+
 #, c-format
-msgid "Directories: %zd, total size: %s"
+msgid ""
+"%s\n"
+"Directories: %zd, total size: %s"
 msgstr ""
 
 msgid "Cannot operate on \"..\"!"
@@ -2685,12 +2555,6 @@ msgstr ""
 msgid "Deleting"
 msgstr ""
 
-msgid "&Using shell patterns"
-msgstr ""
-
-msgid "to:"
-msgstr ""
-
 msgid "Follow &links"
 msgstr ""
 
@@ -2706,9 +2570,9 @@ msgstr ""
 msgid "&Background"
 msgstr ""
 
-#, fuzzy, c-format
-msgid "Invalid source pattern '%s'"
-msgstr "Token %d ei ole validi"
+#, c-format
+msgid "Invalid source pattern `%s'"
+msgstr ""
 
 msgid "&Chdir"
 msgstr ""
@@ -2780,6 +2644,10 @@ msgid "Finished (ignored %zd directory)"
 msgid_plural "Finished (ignored %zd directories)"
 msgstr[0] ""
 msgstr[1] ""
+
+#, c-format
+msgid "Searching %s"
+msgstr ""
 
 msgid "Searching"
 msgstr ""
@@ -3157,9 +3025,6 @@ msgstr ""
 msgid "C&onfirmation..."
 msgstr ""
 
-msgid "&Appearance..."
-msgstr ""
-
 msgid "&Display bits..."
 msgstr ""
 
@@ -3334,18 +3199,6 @@ msgstr ""
 msgid "Unknown tag on display format:"
 msgstr ""
 
-msgid "&Files only"
-msgstr ""
-
-msgid "&Case sensitive"
-msgstr ""
-
-msgid "Select"
-msgstr ""
-
-msgid "Unselect"
-msgstr ""
-
 msgid "Do you really want to execute?"
 msgstr ""
 
@@ -3469,6 +3322,12 @@ msgstr ""
 
 #, c-format
 msgid "The %%var macro has no variable"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot open file%s\n"
+"%s"
 msgstr ""
 
 #, c-format
@@ -3725,8 +3584,7 @@ msgid "fish: Waiting for initial line..."
 msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Sori, mutta emme voi tehdä salasanan authenkaatiota yhteyksille juuri nyt."
+msgstr "Sori, mutta emme voi tehdä salasanan authenkaatiota yhteyksille juuri nyt."
 
 #, c-format
 msgid "fish: Password is required for %s"
@@ -3886,17 +3744,13 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"Varoitus: Invalidi rivi %s:\n"
-"%s\n"
+msgstr "Varoitus: Invalidi rivi %s:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"Virhe: Virheellinen lippu %c kohteessa %s:\n"
-"%s\n"
+msgstr "Virhe: Virheellinen lippu %c kohteessa %s:\n%s\n"
 
 #, c-format
 msgid "sftp: an error occurred while reading %s: %s"
@@ -3906,6 +3760,9 @@ msgid "sftp: Unable to get current user name."
 msgstr ""
 
 msgid "sftp: Invalid host name."
+msgstr ""
+
+msgid "sftp: Invalid port value."
 msgstr ""
 
 #, c-format
@@ -4069,18 +3926,13 @@ msgstr ""
 msgid "Invalid value"
 msgstr ""
 
-msgid "File was modified. Save with exit?"
+msgid "Cannot spawn child process"
 msgstr ""
 
-msgid "&Cancel quit"
+msgid "Empty output from child filter"
 msgstr ""
 
-msgid ""
-"Midnight Commander is being shut down.\n"
-"Save modified file?"
-msgstr ""
-
-msgid "&Line number"
+msgid "&Line number (decimal)"
 msgstr ""
 
 msgid "Pe&rcents"
@@ -4127,12 +3979,6 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Failed to read data from child stdout:\n"
-"%s"
-msgstr ""
-
-#, c-format
-msgid ""
 "Error while closing the file:\n"
 "%s\n"
 "Data may have been written or not"
@@ -4142,6 +3988,17 @@ msgstr ""
 msgid ""
 "Cannot save file:\n"
 "%s"
+msgstr ""
+
+msgid "File was modified. Save with exit?"
+msgstr ""
+
+msgid "&Cancel quit"
+msgstr ""
+
+msgid ""
+"Midnight Commander is being shut down.\n"
+"Save modified file?"
 msgstr ""
 
 msgid "View: "
@@ -4156,10 +4013,7 @@ msgstr ""
 msgid "Cannot view: not a regular file"
 msgstr ""
 
-#, c-format
-msgid ""
-"Cannot open \"%s\" in parse mode\n"
-"%s"
+msgid "Seeking to search result"
 msgstr ""
 
 msgid "Search done"
@@ -4170,6 +4024,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Slash on keypad"
-#~ msgstr "Viiva keypadilla"

@@ -1,82 +1,81 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011
+# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2015-02-26 09:43+0300\n"
-"PO-Revision-Date: 2014-09-04 10:10+0000\n"
+"PO-Revision-Date: 2015-02-26 09:48+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Serbian (http://www.transifex.com/projects/p/mc/language/"
-"sr/)\n"
-"Language: sr\n"
+"Language-Team: Serbian (http://www.transifex.com/projects/p/mc/language/sr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: sr\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
-msgstr ""
+msgstr "Упозорење: не могу да учитам списак кодних страница"
 
 msgid "7-bit ASCII"
-msgstr ""
+msgstr "7-битни АСКРИ"
 
 #, c-format
 msgid "Cannot translate from %s to %s"
-msgstr "Не могу да преведем из %s у %s"
+msgstr "Не могу да преведем из „%s“ у „%s“"
 
 msgid "Event system already initialized"
-msgstr ""
+msgstr "Систем догађаја је већ покренут"
 
 msgid "Failed to initialize event system"
-msgstr ""
+msgstr "Нисам успео да покренем систем догађаја"
 
 msgid "Event system not initialized"
-msgstr ""
+msgstr "Систем догађаја није покренут"
 
 msgid "Check input data! Some of parameters are NULL!"
-msgstr ""
+msgstr "Проверите улазне податке! Неки параметри су НИШТА!"
 
 #, c-format
 msgid "Unable to create group '%s' for events!"
-msgstr ""
+msgstr "Не могу да направим групу „%s“ за догађаје!"
 
 #, c-format
 msgid "Unable to create event '%s'!"
-msgstr ""
+msgstr "Не могу направим догађај „%s“!"
 
 #, c-format
 msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
-msgstr ""
+msgstr "Датотека „%s“ је већ била уређивана.\nКорисник: %s\nИБ процеса: %d"
 
 msgid "File locked"
 msgstr "Датотека је закључана"
 
 msgid "&Grab lock"
-msgstr "&Заузми катанац"
+msgstr "&Узми катанац"
 
 msgid "&Ignore lock"
-msgstr "З&анемари катанац"
+msgstr "&Занемари катанац"
 
 #, c-format
 msgid "Cannot create %s directory"
-msgstr ""
+msgstr "Не могу да направим директоријум „%s“"
 
 msgid "FATAL: not a directory:"
-msgstr ""
+msgstr "КОБНО: није директоријум:"
 
 #, c-format
 msgid "An error occurred while migrating user settings: %s"
-msgstr ""
+msgstr "Дошло је до грешке приликом премештања корисникових подешавања: %s"
 
 #, c-format
 msgid ""
@@ -84,63 +83,63 @@ msgid ""
 "to Freedesktop recommended dirs.\n"
 "To get more info, please visit\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
+msgstr "Ваша стара подешавања су премештена из „%s“\nу директоријум који препоручује Фридесктоп.\nЗа више података, посетите\n„http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html“"
 
 #, c-format
 msgid ""
 "Your old settings were migrated from %s\n"
 "to %s\n"
-msgstr ""
+msgstr "Ваша стара подешавања су премештена из „%s“\nу „%s“\n"
 
 msgid "Search string not found"
-msgstr ""
+msgstr "Нисам нашао тражену ниску"
 
 msgid "Not implemented yet"
-msgstr ""
+msgstr "Још није у примени"
 
 msgid "Num of replace tokens not equal to num of found tokens"
-msgstr ""
+msgstr "Број замена није исти са бројем пронађених елемената"
 
 #, c-format
 msgid "Invalid token number %d"
-msgstr ""
+msgstr "Неисправан број елемента „%d“"
 
 msgid "Regular expression error"
-msgstr ""
+msgstr "Грешка регуларног израза"
 
 msgid "No&rmal"
-msgstr ""
+msgstr "&Обично"
 
 msgid "Re&gular expression"
-msgstr ""
+msgstr "&Регуларни израз"
 
 msgid "He&xadecimal"
-msgstr ""
+msgstr "&Хексадецимални"
 
 msgid "Wil&dcard search"
-msgstr ""
+msgstr "Претрага &џокером"
 
 #, c-format
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
+msgstr "Не могу да учитам маску „%s“.\nУчитана је основна маска."
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
+msgstr "Не могу да обрадим маску „%s“.\nУчитана је основна маска."
 
 #, c-format
 msgid ""
 "Unable to use '%s' skin with 256 colors support\n"
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
-msgstr ""
+msgstr "Не могу да користим маску „%s“ са подршком за 256 боја\nна терминалу који нема 256 боја.\nУчитана је основна маска."
 
 msgid "Escape"
-msgstr ""
+msgstr "Заокрет"
 
 msgid "Function key 1"
 msgstr "Функц. тастер 1"
@@ -203,280 +202,273 @@ msgid "Function key 20"
 msgstr "Функц. тастер 20"
 
 msgid "Completion/M-tab"
-msgstr "Допуна/M-tab"
+msgstr "Довршавање/М-таб"
 
 msgid "BackTab/S-tab"
-msgstr ""
+msgstr "Повратни таб/С-таб"
 
 msgid "Backspace"
-msgstr ""
+msgstr "Повратница"
 
 msgid "Up arrow"
-msgstr ""
+msgstr "Стрелица на горе"
 
 msgid "Down arrow"
-msgstr ""
+msgstr "Стрелица на доле"
 
 msgid "Left arrow"
-msgstr ""
+msgstr "Стрелица на лево"
 
 msgid "Right arrow"
-msgstr ""
+msgstr "Стрелица на десно"
 
 msgid "Insert"
-msgstr ""
+msgstr "Уметни"
 
 msgid "Delete"
-msgstr ""
+msgstr "Обриши"
 
 msgid "Home"
-msgstr ""
+msgstr "Почетак"
 
 msgid "End key"
-msgstr "Таст. `End'"
+msgstr "Тастер завршетка"
 
 msgid "Page Up"
-msgstr ""
+msgstr "Страница горе"
 
 msgid "Page Down"
-msgstr ""
+msgstr "Страница доле"
 
 msgid "/ on keypad"
-msgstr ""
+msgstr "/ на бројевном делу"
 
 msgid "* on keypad"
-msgstr "Сиви *"
+msgstr "* на бројевном делу"
 
 msgid "- on keypad"
-msgstr "Сиви -"
+msgstr "- на бројевном делу"
 
 msgid "+ on keypad"
-msgstr "Сиви +"
+msgstr "+ на бројевном делу"
 
 msgid "Left arrow keypad"
-msgstr "Сива стрел. налево"
+msgstr "Стрелица на лево на бројевном делу"
 
 msgid "Right arrow keypad"
-msgstr "Сива стрел. надесно"
+msgstr "Стрелица на десно на бројевном делу"
 
 msgid "Up arrow keypad"
-msgstr "Сива стрел. нагоре"
+msgstr "Стрелица на горе на бројевном делу"
 
 msgid "Down arrow keypad"
-msgstr "Сива стрел. надоле"
+msgstr "Стрелица на доле на бројевном делу"
 
 msgid "Home on keypad"
-msgstr "Сиви `Home'"
+msgstr "Почетни тастер на бројевном делу"
 
 msgid "End on keypad"
-msgstr "Сиви `End'"
+msgstr "Тастер завршетка на бројевном делу"
 
 msgid "Page Down keypad"
-msgstr "Сиви `Page Down'"
+msgstr "Страница доле на бројевном делу"
 
 msgid "Page Up keypad"
-msgstr "Сиви `Page Up'"
+msgstr "Страница горе на бројевном делу"
 
 msgid "Insert on keypad"
-msgstr "Сиви `Insert'"
+msgstr "Тастер уметања на бројевном делу"
 
 msgid "Delete on keypad"
-msgstr "Сиви `Delete'"
+msgstr "Тастер брисања на бројевном делу"
 
 msgid "Enter on keypad"
-msgstr "Сиви `Enter'"
+msgstr "Тастер уноса на бројевном делу"
 
 msgid "Function key 21"
-msgstr ""
+msgstr "Функц. тастер 21"
 
 msgid "Function key 22"
-msgstr ""
+msgstr "Функц. тастер 22"
 
 msgid "Function key 23"
-msgstr ""
+msgstr "Функц. тастер 23"
 
 msgid "Function key 24"
-msgstr ""
+msgstr "Функц. тастер 24"
 
 msgid "A1 key"
-msgstr ""
+msgstr "Тастер А1"
 
 msgid "C1 key"
-msgstr ""
+msgstr "Тастер Ц1"
 
 msgid "Asterisk"
-msgstr ""
+msgstr "Звездица"
 
 msgid "Minus"
-msgstr ""
+msgstr "Минус"
 
 msgid "Plus"
-msgstr ""
+msgstr "Плус"
 
 msgid "Dot"
-msgstr ""
+msgstr "Тачка"
 
 msgid "Less than"
-msgstr ""
+msgstr "Мање од"
 
 msgid "Great than"
-msgstr ""
+msgstr "Веће од"
 
 msgid "Equal"
-msgstr ""
+msgstr "Једнако"
 
 msgid "Comma"
-msgstr ""
+msgstr "Зарез"
 
 msgid "Apostrophe"
-msgstr ""
+msgstr "Апостроф"
 
 msgid "Colon"
-msgstr ""
+msgstr "Двотачка"
 
 msgid "Semicolon"
-msgstr ""
+msgstr "Запетачка"
 
 msgid "Exclamation mark"
-msgstr ""
+msgstr "Узвичник"
 
 msgid "Question mark"
-msgstr ""
+msgstr "Упитник"
 
 msgid "Ampersand"
-msgstr ""
+msgstr "Амперсанд"
 
 msgid "Dollar sign"
-msgstr ""
+msgstr "Знак долара"
 
 msgid "Quotation mark"
-msgstr ""
+msgstr "Знак наводника"
 
 msgid "Percent sign"
-msgstr ""
+msgstr "Знак процената"
 
 msgid "Caret"
-msgstr ""
+msgstr "Капица"
 
 msgid "Tilda"
-msgstr ""
+msgstr "Тилда"
 
 msgid "Prime"
-msgstr ""
+msgstr "Примус"
 
 msgid "Underline"
-msgstr ""
+msgstr "Доња цртица"
 
 msgid "Understrike"
-msgstr ""
+msgstr "Подвлака"
 
 msgid "Pipe"
-msgstr ""
+msgstr "Спојка"
 
 msgid "Left parenthesis"
-msgstr ""
+msgstr "Лева мала заграда"
 
 msgid "Right parenthesis"
-msgstr ""
+msgstr "Десна мала заграда"
 
 msgid "Left bracket"
-msgstr ""
+msgstr "Лева средња заграда"
 
 msgid "Right bracket"
-msgstr ""
+msgstr "Десна средња заграда"
 
 msgid "Left brace"
-msgstr ""
+msgstr "Лева велика заграда"
 
 msgid "Right brace"
-msgstr ""
+msgstr "Десна велика заграда"
 
 msgid "Enter"
-msgstr ""
+msgstr "Унеси"
 
 msgid "Tab key"
-msgstr ""
+msgstr "Тастер табулатора"
 
 msgid "Space key"
-msgstr ""
+msgstr "Тастер размака"
 
 msgid "Slash key"
-msgstr ""
+msgstr "Тастер косе црте"
 
 msgid "Backslash key"
-msgstr ""
+msgstr "Тастер контра косе црте"
 
 msgid "Number sign #"
-msgstr ""
+msgstr "Знак бројева #"
 
 #. TRANSLATORS: Please translate as in "at sign" (@).
 msgid "At sign"
-msgstr ""
+msgstr "Лудо а"
 
 msgid "Ctrl"
-msgstr ""
+msgstr "Ктрл"
 
 msgid "Alt"
-msgstr ""
+msgstr "Алт"
 
 msgid "Shift"
-msgstr ""
+msgstr "Помак"
 
 msgid "The TERM environment variable is unset!\n"
-msgstr "Променљива љуске `TERM' није постављена!\n"
+msgstr "Променљива љуске „TERM“ је расподешена!\n"
 
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"Величина екрана %dx%d није подржана.\n"
-"Проверите променљиву љуске `TERM'.\n"
+msgstr "Величина екрана %dx%d није подржана.\nПроверите променљиву окружења „TERM“.\n"
 
-#, fuzzy
 msgid "Cannot create pipe descriptor"
-msgstr "Не могу да променим директоријум"
+msgstr "Не могу да направим описника спојке"
 
-#, fuzzy
 msgid "Cannot parse command for pipe"
-msgstr "Не могу да извршим наредбу"
+msgstr "Не могу да обрадим наредбу за спојку"
 
-#, fuzzy
 msgid "Cannot create pipe streams"
-msgstr "Не могу да отворим именовану цев %s\n"
+msgstr "Не могу да направим токове спојке"
 
 #, c-format
 msgid ""
 "Unexpected error in select() reading data from a child process:\n"
 "%s"
-msgstr ""
+msgstr "Неочекивана грешка у функцији бирања података за читање из потпроцеса:\n%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unexpected error in waitpid():\n"
 "%s"
-msgstr ""
-"Неочекивани завршетак датотеке\n"
-"%s"
+msgstr "Неочекивана грешка у функцији чекања пид-а:\n%s"
 
 msgid "Warning"
 msgstr "Упозорење"
 
 msgid "Pipe failed"
-msgstr ""
+msgstr "Сојка није успела"
 
 msgid "Dup failed"
-msgstr ""
+msgstr "Удвостручавање није успело"
 
 msgid "Error dup'ing old error pipe"
-msgstr ""
+msgstr "Грешка удвостручавања старе спојке грешке"
 
 #, c-format
 msgid "Directory cache expired for %s"
 msgstr "Остава директоријума је истекла за %s"
 
 msgid "bytes transferred"
-msgstr ""
+msgstr "пренешених бајтова"
 
 msgid "Starting linear transfer..."
 msgstr "Покрећем линеарни пренос..."
@@ -489,11 +481,11 @@ msgstr "Измене у датотеци су изгубљене"
 
 #, c-format
 msgid "%s is not a directory\n"
-msgstr "%s није директоријум\n"
+msgstr "„%s“ није директоријум\n"
 
 #, c-format
 msgid "Directory %s is not owned by you\n"
-msgstr "Не поседујете директоријум %s\n"
+msgstr "Директоријум „%s“ није у вашем власништву\n"
 
 #, c-format
 msgid "Cannot set correct permissions for directory %s\n"
@@ -501,22 +493,22 @@ msgstr "Не могу да поставим исправне дозволе за
 
 #, c-format
 msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Не могу да створим привремени директоријум %s: %s\n"
+msgstr "Не могу да направим привремени директоријум %s: %s\n"
 
 #, c-format
 msgid "Temporary files will be created in %s\n"
-msgstr "Привремене датотеке ће бити стваране у %s\n"
+msgstr "Привремене датотеке ће бити направљене у %s\n"
 
 #, c-format
 msgid "Temporary files will not be created\n"
-msgstr "Привремене датотеке неће бити стваране\n"
+msgstr "Привремене датотеке неће бити направљене\n"
 
 #, c-format
 msgid "Press any key to continue..."
-msgstr "Притисните било који тастер за наставак..."
+msgstr "Притиснитенеки тастер да наставите..."
 
 msgid "Cannot parse:"
-msgstr "Не могу да рашчланим:"
+msgstr "Не могу да обрадим:"
 
 msgid "More parsing errors will be ignored."
 msgstr "Даље грешке ће бити занемарене."
@@ -528,17 +520,17 @@ msgid "Password:"
 msgstr "Лозинка:"
 
 msgid "Screens"
-msgstr ""
+msgstr "Екрани"
 
 msgid "History"
-msgstr ""
+msgstr "Историјат"
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
 msgid "DialogTitle|History cleanup"
-msgstr ""
+msgstr "Чишћење историјата"
 
 msgid "Do you want clean this history?"
-msgstr ""
+msgstr "Да ли желите да очистите овај историјат?"
 
 msgid "&Yes"
 msgstr "&Да"
@@ -550,7 +542,7 @@ msgid "&OK"
 msgstr "&У реду"
 
 msgid "&Cancel"
-msgstr "&Поништи"
+msgstr "&Откажи"
 
 msgid "Background process:"
 msgstr "Позадински процес:"
@@ -560,61 +552,61 @@ msgstr "Грешка"
 
 #, c-format
 msgid "%d: %s"
-msgstr ""
+msgstr "%d: %s"
 
 msgid "&Abort"
 msgstr "&Прекини"
 
 msgid "Displays the current version"
-msgstr "Приказује текућу верзију"
+msgstr "Приказује текуће издање"
 
 msgid "Print data directory"
-msgstr "Штампај директоријум са подацима"
+msgstr "Исписује директоријум са подацима"
 
 msgid "Print extended info about used data directories"
-msgstr ""
+msgstr "Исписује проширене податке о коришћеним директоријумима података"
 
 msgid "Print configure options"
-msgstr ""
+msgstr "Исписује могућности подешавања"
 
 msgid "Print last working directory to specified file"
-msgstr "Штампај последњи радни директоријум у задану датотеку"
+msgstr "Исписује последњи радни директоријум у наведеној датотеци"
 
 msgid "Enables subshell support (default)"
-msgstr "Укључује подршку за подљуске (подраз.)"
+msgstr "Укључује подршку за подљуске (основно)"
 
 msgid "Disables subshell support"
 msgstr "Искључује подршку за подљуске"
 
 msgid "Log ftp dialog to specified file"
-msgstr "Бележи садржај дијалога FTP-а у задану датотеку"
+msgstr "Бележи садржај фтп прозорчета у задану датотеку"
 
 msgid "Set debug level"
-msgstr "Постављање нивоа поправљања"
+msgstr "Подешава ниво прочишћавања"
 
 msgid "Launches the file viewer on a file"
 msgstr "Покреће прегледач датотека над датотеком"
 
 msgid "Edit files"
-msgstr ""
+msgstr "Уређује датотеке"
 
 msgid "Forces xterm features"
-msgstr "Захтева одлике Икс терминала"
+msgstr "Захтева функције Х терминала"
 
 msgid "Disable X11 support"
-msgstr ""
+msgstr "Искључује подршку за Х11"
 
 msgid "Tries to use an old highlight mouse tracking"
-msgstr ""
+msgstr "Покушава да користи старо истицање праћења миша"
 
 msgid "Disable mouse support in text version"
-msgstr "Искључи подршку за миша у текстуалној верзији"
+msgstr "Искључује подршку за миша у текстуалном издању"
 
 msgid "Tries to use termcap instead of terminfo"
-msgstr "Покушава да користи termcap уместо terminfo-а"
+msgstr "Покушава да користи термкап уместо терминфо-а"
 
 msgid "To run on slow terminals"
-msgstr "Покретање на спором терминалу"
+msgstr "За покретање на спором терминалу"
 
 msgid "Use stickchars to draw"
 msgstr "Користи квазиграфичке симболе за цртање"
@@ -623,22 +615,22 @@ msgid "Resets soft keys on HP terminals"
 msgstr "Поставља меке тастере на ХП-овим терминалима"
 
 msgid "Load definitions of key bindings from specified file"
-msgstr ""
+msgstr "Учитава одреднице свеза тастера из наведене датотеке"
 
 msgid "Don't load definitions of key bindings from file, use defaults"
-msgstr ""
+msgstr "Не учитава одреднице свеза тастера из датотеке, користи основности"
 
 msgid "Requests to run in black and white"
 msgstr "Захтева покретање у режиму без боја"
 
 msgid "Request to run in color mode"
-msgstr "Захтевање обојеног режима"
+msgstr "Захтева покретање у режиму боја"
 
 msgid "Specifies a color configuration"
-msgstr "Поставља подешавања боја"
+msgstr "Наводи подешавања боја"
 
 msgid "Show mc with specified skin"
-msgstr ""
+msgstr "Приказује поноћног наредника са наведеном маском"
 
 #. TRANSLATORS: don't translate keywords
 msgid ""
@@ -660,7 +652,7 @@ msgid ""
 "                 editframedrag\n"
 "   Viewer:       viewnormal,viewbold, viewunderline, viewselected\n"
 "   Help:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
-msgstr ""
+msgstr "--colors KEYWORD={FORE},{BACK},{ATTR}:KEYWORD2=...\n\n{FORE}, {BACK} и {ATTR} могу да се изоставе, а биће коришћене основности\n\n Кључне речи:\n   Опште:       errors, disabled, reverse, gauge, header\n                 input, inputmark, inputunchanged, commandlinemark\n                 bbarhotkey, bbarbutton, statusbar\n   Приказивање датотека: normal, selected, marked, markselect\n   Поља прозорчета: dnormal, dfocus, dhotnormal, dhotfocus, errdhotnormal,\n                 errdhotfocus\n   Изборници:        menunormal, menuhot, menusel, menuhotsel, menuinactive\n   Искачући изборници:  pmenunormal, pmenusel, pmenutitle\n   Уређивач:       editnormal, editbold, editmarked, editwhitespace,\n                 editlinestate, editbg, editframe, editframeactive\n                 editframedrag\n   Прегледач:       viewnormal,viewbold, viewunderline, viewselected\n   Помоћ:         helpnormal, helpitalic, helpbold, helplink, helpslink\n"
 
 #. TRANSLATORS: don't translate color names and attributes
 msgid ""
@@ -677,13 +669,13 @@ msgid ""
 msgstr ""
 
 msgid "Color options"
-msgstr ""
+msgstr "Опције боје"
 
 msgid "+number"
 msgstr "+број"
 
 msgid "[this_dir] [other_panel_dir]"
-msgstr ""
+msgstr "[овај_дир] [други_дир_панела]"
 
 msgid "Set initial line number for the internal editor"
 msgstr "Поставите број почетног реда за уграђени уређивач"
@@ -692,963 +684,963 @@ msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
-msgstr ""
+msgstr "\nИзвештаје о грешкама (укључујући и излаз наредбе „mc -V“)\nпошаљите као листић на „www.midnight-commander.org“\n"
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
-msgstr "ГНУ-ов поноћни наредник %s\n"
+msgstr "Гнуов Поноћни наредник %s\n"
 
 msgid "Main options"
-msgstr ""
+msgstr "Главне опције"
 
 msgid "Terminal options"
-msgstr ""
+msgstr "Опције терминала"
 
 msgid "Arguments parse error!"
-msgstr ""
+msgstr "Грешка обраде аргумената!"
 
 msgid "No arguments given to the viewer."
-msgstr ""
+msgstr "Аргументи нису дати прегледачу."
 
 msgid "Two files are required to evoke the diffviewer."
-msgstr ""
+msgstr "Потребне су две датотеке за призивање прегледача разлика."
 
 msgid "Background protocol error"
-msgstr ""
+msgstr "Грешка позадинског протокола"
 
 msgid "Reading failed"
-msgstr ""
+msgstr "Читање није успело"
 
 msgid "Background process error"
-msgstr ""
+msgstr "Грешка позадинског процеса"
 
 msgid "Unknown error in child"
-msgstr ""
+msgstr "Непозната грешка у породу"
 
 msgid "Child died unexpectedly"
-msgstr ""
+msgstr "Пород је неочекивано завршио"
 
 msgid ""
 "Background process sent us a request for more arguments\n"
 "than we can handle."
-msgstr ""
+msgstr "Позадински процес нам је послао захтев за више аргумената\nнего што можемо да обрадимо."
 
 msgid "&Dismiss"
-msgstr "&Отпусти"
+msgstr "&Одбиј"
 
 msgid "Enter search string:"
-msgstr ""
+msgstr "Унеси ниску претраге:"
 
 msgid "Cas&e sensitive"
-msgstr ""
+msgstr "Разликуј &величину слова"
 
 msgid "&Backwards"
-msgstr "Уна&зад"
+msgstr "&Уназад"
 
 msgid "&Whole words"
-msgstr ""
+msgstr "&Целе речи"
 
 msgid "&All charsets"
-msgstr ""
+msgstr "&Све знакове"
 
 msgid "Search"
 msgstr "Тражи"
 
 msgid "Search is disabled"
-msgstr ""
+msgstr "Претрага је искључена"
 
 #, c-format
 msgid ""
 "Cannot create temporary diff file\n"
 "%s"
-msgstr ""
+msgstr "Не могу да направим привремену датотеку разлика\n%s"
 
 #, c-format
 msgid ""
 "Cannot create backup file\n"
 "%s%s\n"
 "%s"
-msgstr ""
+msgstr "Не могу да направим датотеку резерве\n%s%s\n%s"
 
 #, c-format
 msgid ""
 "Cannot create temporary merge file\n"
 "%s"
-msgstr ""
+msgstr "Не могу да направим привремену датотеку стапања\n%s"
 
 msgid "&Fastest (Assume large files)"
-msgstr ""
+msgstr "&Најбрже (Подразумева велике датотеке)"
 
 msgid "&Minimal (Find a smaller set of change)"
-msgstr ""
+msgstr "&Најмање (Налази најмањи скуп промене)"
 
 msgid "Diff algorithm"
-msgstr ""
+msgstr "Алгоритам разлика"
 
 msgid "Diff extra options"
-msgstr ""
+msgstr "Додатне опције разлика"
 
 msgid "&Ignore case"
-msgstr ""
+msgstr "&Занемари величину слова"
 
 msgid "Ignore tab &expansion"
-msgstr ""
+msgstr "Занемари &раширеност табулатора"
 
 msgid "Ignore &space change"
-msgstr ""
+msgstr "Занемари промену &размака"
 
 msgid "Ignore all &whitespace"
-msgstr ""
+msgstr "Занемари све &празнине"
 
 msgid "Strip &trailing carriage return"
-msgstr ""
+msgstr "Откини пратећи &повратни носач"
 
 msgid "Diff Options"
-msgstr ""
+msgstr "Опције разлика"
 
 msgid "Edit"
-msgstr ""
+msgstr "Уреди"
 
 msgid "Edit is disabled"
-msgstr ""
+msgstr "Уређивање је искључено"
 
 msgid "Goto line (left)"
-msgstr ""
+msgstr "Иди на ред (лево)"
 
 msgid "Goto line (right)"
-msgstr ""
+msgstr "Иди на ред (десно)"
 
 msgid "Enter line:"
-msgstr ""
+msgstr "Унеси ред:"
 
 msgid "ButtonBar|Help"
-msgstr ""
+msgstr "Помоћ"
 
 msgid "ButtonBar|Save"
-msgstr ""
+msgstr "Сачувај"
 
 msgid "ButtonBar|Edit"
-msgstr ""
+msgstr "Уреди"
 
 msgid "ButtonBar|Merge"
-msgstr ""
+msgstr "Споји"
 
 msgid "ButtonBar|Search"
-msgstr ""
+msgstr "Потражи"
 
 msgid "ButtonBar|Options"
-msgstr ""
+msgstr "Опције"
 
 msgid "ButtonBar|Quit"
-msgstr ""
+msgstr "Изађи"
 
 msgid "Quit"
 msgstr "Заврши"
 
 msgid "File(s) was modified. Save with exit?"
-msgstr ""
+msgstr "Датотека је измењена. Да сачувам при изласку?"
 
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file(s)?"
-msgstr ""
+msgstr "Поноћни наредник је угашен.\nДа сачувам измењену датотеку?"
 
 msgid "Diff:"
-msgstr ""
+msgstr "Разлике:"
 
 #, c-format
 msgid "\"%s\" is a directory"
-msgstr ""
+msgstr "„%s“ је директоријум"
 
 #, c-format
 msgid ""
 "Cannot stat \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да добијем податке о „%s“\n%s"
 
 msgid "Diff viewer: invalid mode"
-msgstr ""
+msgstr "Прегледач разлика: неисправан режим"
 
 msgid "Two files are needed to compare"
-msgstr ""
+msgstr "Две датотеке су потребне за поређење"
 
 msgid "Choose syntax highlighting"
-msgstr ""
+msgstr "Изаберите истицање синтаксе"
 
 msgid "< Auto >"
-msgstr ""
+msgstr "< Самостално >"
 
 msgid "< Reload Current Syntax >"
-msgstr ""
+msgstr "< Учитај текућу синтаксу >"
 
 #, c-format
 msgid "Loading: %3d%%"
-msgstr ""
+msgstr "Учитавам: %3d%%"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Учитавам..."
 
 #, c-format
 msgid "Cannot open %s for reading"
-msgstr ""
+msgstr "Не могу да отворим „%s“ за читање"
 
 msgid "Load file"
-msgstr ""
+msgstr "Учитај датотеку"
 
 #, c-format
 msgid "Error reading %s"
-msgstr ""
+msgstr "Грешка читања „%s“"
 
 #, c-format
 msgid "Cannot get size/permissions for %s"
-msgstr ""
+msgstr "Не могу да добавим величину/овлашћења за „%s“"
 
 #, c-format
 msgid "\"%s\" is not a regular file"
-msgstr ""
+msgstr "„%s“ није обична датотека"
 
 #, c-format
 msgid ""
 "File \"%s\" is too large.\n"
 "Open it anyway?"
-msgstr ""
+msgstr "Датотека „%s“ је превелика.\nДа је ипак отворим?"
 
 #, c-format
 msgid "Error reading from pipe: %s"
-msgstr ""
+msgstr "Грешка читања из спојке: %s"
 
 #, c-format
 msgid "Cannot open pipe for reading: %s"
-msgstr ""
+msgstr "Не могу да отворим спојку за читање: %s"
 
 #, c-format
 msgid "Searching %s: %3d%%"
-msgstr ""
+msgstr "Тражим „%s“: %3d%%"
 
 #, c-format
 msgid "Searching %s"
-msgstr "Тражим %s"
+msgstr "Тражим „%s“"
 
 msgid "File has hard-links. Detach before saving?"
-msgstr ""
+msgstr "Датотека има чврсте везе. Да је откачим пре чувања?"
 
 msgid "The file has been modified in the meantime. Save anyway?"
-msgstr ""
+msgstr "Датотека је измењена у међувремену. Да је ипак сачувам?"
 
 #, c-format
 msgid "Error writing to pipe: %s"
-msgstr ""
+msgstr "Грешка писања у спојку: %s"
 
 #, c-format
 msgid "Cannot open pipe for writing: %s"
-msgstr ""
+msgstr "Не могу да отворим спојку за писање: %s"
 
 #, c-format
 msgid "Cannot open file for writing: %s"
-msgstr ""
+msgstr "Не могу да отворим датотеку за писање: %s"
 
 msgid "The file you are saving does not end with a newline."
-msgstr ""
+msgstr "Датотека коју чувате не завршава се новим редом."
 
 msgid "C&ontinue"
-msgstr ""
+msgstr "&Настави"
 
 msgid "&Do not change"
-msgstr ""
+msgstr "Не &мењај"
 
 msgid "&Unix format (LF)"
-msgstr ""
+msgstr "&Јуникс запис (ЛФ)"
 
 msgid "&Windows/DOS format (CR LF)"
-msgstr ""
+msgstr "&Виндоуз/ДОС запис (ЦР ЛФ)"
 
 msgid "&Macintosh format (CR)"
-msgstr ""
+msgstr "&Мекинтош запис (ЦР)"
 
 msgid "Enter file name:"
-msgstr ""
+msgstr "Унеси назив датотеке:"
 
 msgid "Change line breaks to:"
-msgstr ""
+msgstr "Измени преломе редова на:"
 
 msgid "Save As"
-msgstr ""
+msgstr "Сачувај као"
 
 msgid "Block is large, you may not be able to undo this action"
-msgstr ""
+msgstr "Блок је повелик, нећете моћи да поништите ову радњу"
 
 msgid "Collect completions"
-msgstr ""
+msgstr "Сакупи довршавања"
 
 msgid "&Quick save"
-msgstr ""
+msgstr "&Брзо сачувај"
 
 msgid "&Safe save"
-msgstr ""
+msgstr "Бе&збедно сачувај"
 
 msgid "&Do backups with following extension:"
-msgstr ""
+msgstr "&Направи резерве са следећим проширењем:"
 
 msgid "Check &POSIX new line"
-msgstr ""
+msgstr "Провери нови ред &ПОСИКС-а"
 
 msgid "Edit Save Mode"
-msgstr ""
+msgstr "Уредите режим чувања"
 
 msgid "Save as"
-msgstr ""
+msgstr "Сачувај као"
 
 msgid "Cannot save: destination is not a regular file"
-msgstr ""
+msgstr "Не могу да сачувам: одредиште није обична датотека"
 
 msgid "A file already exists with this name"
-msgstr ""
+msgstr "Већ постоји датотека под овим називом"
 
 msgid "&Overwrite"
-msgstr ""
+msgstr "&Препиши"
 
 msgid "Cannot save file"
-msgstr ""
+msgstr "Не могу да сачувам датотеку"
 
 msgid "Delete macro"
-msgstr ""
+msgstr "Обриши макро"
 
 msgid "Press macro hotkey:"
-msgstr ""
+msgstr "Притисните макро пречицу:"
 
 msgid "Macro not deleted"
-msgstr ""
+msgstr "Макро није обрисан"
 
 msgid "Save macro"
-msgstr ""
+msgstr "Сачувај макро"
 
 msgid "Press the macro's new hotkey:"
-msgstr ""
+msgstr "Притисните нову пречицу макроа:"
 
 msgid "Repeat last commands"
-msgstr ""
+msgstr "Понови последње наредбе"
 
 msgid "Repeat times:"
-msgstr ""
+msgstr "Времена понављања:"
 
 #, c-format
 msgid "Confirm save file: \"%s\""
-msgstr ""
+msgstr "Потврди чување датотеке: „%s“"
 
 msgid "Save file"
-msgstr ""
+msgstr "Сачувај датотеку"
 
 msgid "&Save"
-msgstr "са&Чувај"
+msgstr "&Сачувај"
 
 msgid "Load"
-msgstr ""
+msgstr "Учитај"
 
 msgid "Syntax file edit"
 msgstr "Уређивање синтаксне датотеке"
 
 msgid "Which syntax file you want to edit?"
-msgstr ""
+msgstr "Коју датотеку синтаксе желите да уређујете?"
 
 msgid "&User"
 msgstr "&Корисничку"
 
 msgid "&System wide"
-msgstr ""
+msgstr "&Системску"
 
 msgid "Menu edit"
-msgstr ""
+msgstr "Уређивање изборника"
 
 msgid "Which menu file do you want to edit?"
-msgstr ""
+msgstr "Коју датотеку изборника желите да уређујете?"
 
 msgid "&Local"
-msgstr "&Локалну"
+msgstr "&Месну"
 
 msgid "Replace"
-msgstr ""
+msgstr "Замени"
 
 #, c-format
 msgid "%ld replacements made"
-msgstr ""
+msgstr "%ld одрађене замене"
 
 msgid "[NoName]"
-msgstr ""
+msgstr "[Без назива]"
 
 #, c-format
 msgid ""
 "File %s was modified.\n"
 "Save before close?"
-msgstr ""
+msgstr "Датотека „%s“ је измењена.\nДа сачувам пре затварања?"
 
 msgid "Close file"
-msgstr ""
+msgstr "Затвори датотеку"
 
 #, c-format
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file %s?"
-msgstr ""
+msgstr "Поноћни наредник је угашен.\nДа сачувам измењену датотеку „%s“?"
 
 msgid "This function is not implemented"
-msgstr ""
+msgstr "Ова функција није примењена"
 
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Умножи у оставу"
 
 msgid "Unable to save to file"
-msgstr ""
+msgstr "Не могу да сачувам у датотеку"
 
 msgid "Cut to clipboard"
-msgstr ""
+msgstr "Исеци у оставу"
 
 msgid "Goto line"
-msgstr ""
+msgstr "Иди на ред"
 
 msgid "Save block"
-msgstr ""
+msgstr "Сачувај блок"
 
 msgid "Insert file"
-msgstr ""
+msgstr "Уметни датотеку"
 
 msgid "Cannot insert file"
-msgstr ""
+msgstr "Не могу да уметнем датотеку"
 
 msgid "Sort block"
-msgstr ""
+msgstr "Поређај блок"
 
 msgid "You must first highlight a block of text"
-msgstr ""
+msgstr "Морате прво да изаберете блок текста"
 
 msgid "Run sort"
-msgstr ""
+msgstr "Покрени ређање"
 
 msgid "Enter sort options (see manpage) separated by whitespace:"
-msgstr ""
+msgstr "Унесите опције ређања (видите странице упутства) одвојене празнинама:"
 
 msgid "Sort"
-msgstr ""
+msgstr "Поређај"
 
 msgid "Cannot execute sort command"
-msgstr ""
+msgstr "Не могу да извршим наредбу ређања"
 
 #, c-format
 msgid "Sort returned non-zero: %s"
-msgstr ""
+msgstr "Ређање је дало не-нулти резултат: %s"
 
 msgid "Paste output of external command"
-msgstr "Залепи излаз спољашње наредбе"
+msgstr "Убаци излаз спољне наредбе"
 
 msgid "Enter shell command(s):"
 msgstr "Унесите наредбе љуске:"
 
 msgid "External command"
-msgstr "Спољашња наредба"
+msgstr "Спољна наредба"
 
 msgid "Cannot execute command"
 msgstr "Не могу да извршим наредбу"
 
 msgid "mail -s <subject> -c <cc> <to>"
-msgstr ""
+msgstr "mail -s <тема> -c <уу> <прима>"
 
 msgid "To"
-msgstr ""
+msgstr "Прима"
 
 msgid "Subject"
-msgstr ""
+msgstr "Тема"
 
 msgid "Copies to"
-msgstr ""
+msgstr "Умношке у"
 
 msgid "Mail"
-msgstr ""
+msgstr "Пошта"
 
 msgid "Insert literal"
-msgstr ""
+msgstr "Уметни словност"
 
 msgid "Press any key:"
-msgstr ""
+msgstr "Притисните неки тастер:"
 
 msgid ""
 "Current text was modified without a file save.\n"
 "Continue discards these changes"
-msgstr ""
+msgstr "Текући текст је измењен без чувања датотеке.\nНастављање ће одбацити ове измене"
 
 msgid "In se&lection"
-msgstr ""
+msgstr "У &избору"
 
 msgid "&Find all"
-msgstr ""
+msgstr "&Нађи све"
 
 msgid "Enter replacement string:"
-msgstr ""
+msgstr "Унесите ниску замене:"
 
 msgid "Replace with:"
-msgstr ""
+msgstr "Замени са:"
 
 msgid "&Replace"
-msgstr "За&мени"
+msgstr "&Замени"
 
 msgid "A&ll"
-msgstr "С&ве"
+msgstr "&Све"
 
 msgid "&Skip"
-msgstr "Пре&скочи"
+msgstr "&Прескочи"
 
 msgid "Confirm replace"
-msgstr ""
+msgstr "Потврди замену"
 
 msgid "Cancel"
-msgstr "Поништи"
+msgstr "Откажи"
 
 msgid ""
 "Current text was modified without a file save.\n"
 "Continue discards these changes."
-msgstr ""
+msgstr "Текући текст је измењен без чувања датотеке.\nНастављање ће одбацити ове измене."
 
 msgid "NoName"
-msgstr ""
+msgstr "Без назива"
 
 msgid "&Open file..."
 msgstr "&Отвори датотеку..."
 
 msgid "&New"
-msgstr ""
+msgstr "&Нова"
 
 msgid "&Close"
-msgstr ""
+msgstr "&Затвори"
 
 msgid "Save &as..."
-msgstr ""
+msgstr "Сачувај &као..."
 
 msgid "&Insert file..."
-msgstr ""
+msgstr "&Уметни датотеку..."
 
 msgid "Cop&y to file..."
-msgstr ""
+msgstr "Умножи &у датотеку..."
 
 msgid "&User menu..."
-msgstr ""
+msgstr "&Кориснички изборник..."
 
 msgid "A&bout..."
-msgstr ""
+msgstr "О &програму..."
 
 msgid "&Quit"
 msgstr "&Заврши"
 
 msgid "&Undo"
-msgstr ""
+msgstr "&Опозови"
 
 msgid "&Redo"
-msgstr ""
+msgstr "&Врати"
 
 msgid "&Toggle ins/overw"
-msgstr ""
+msgstr "&Промени уметање/преглед"
 
 msgid "To&ggle mark"
-msgstr ""
+msgstr "Промени &ознаку"
 
 msgid "&Mark columns"
-msgstr ""
+msgstr "Означи с&тупце"
 
 msgid "Mark &all"
-msgstr ""
+msgstr "Означи с&ве"
 
 msgid "Unmar&k"
-msgstr ""
+msgstr "&Одзначи"
 
 msgid "Cop&y"
-msgstr ""
+msgstr "&Умножи"
 
 msgid "Mo&ve"
-msgstr ""
+msgstr "&Премести"
 
 msgid "&Delete"
 msgstr "&Обриши"
 
 msgid "Co&py to clipfile"
-msgstr ""
+msgstr "Умножи у &датотеку оставе"
 
 msgid "&Cut to clipfile"
-msgstr ""
+msgstr "&Исеци у датотеку оставе"
 
 msgid "Pa&ste from clipfile"
-msgstr ""
+msgstr "&Убаци из датотеке оставе"
 
 msgid "&Beginning"
-msgstr ""
+msgstr "&Почетак"
 
 msgid "&End"
-msgstr ""
+msgstr "&Крај"
 
 msgid "&Search..."
-msgstr ""
+msgstr "&Потражи..."
 
 msgid "Search &again"
-msgstr ""
+msgstr "Потражи &опет"
 
 msgid "&Replace..."
-msgstr ""
+msgstr "&Замени..."
 
 msgid "&Toggle bookmark"
-msgstr ""
+msgstr "&Искључи обележивач"
 
 msgid "&Next bookmark"
-msgstr ""
+msgstr "&Следећи обележивач"
 
 msgid "&Prev bookmark"
-msgstr ""
+msgstr "&Претходни обележивач"
 
 msgid "&Flush bookmarks"
-msgstr ""
+msgstr "Преточи &обележиваче"
 
 msgid "&Go to line..."
-msgstr ""
+msgstr "&Иди на ред..."
 
 msgid "&Toggle line state"
-msgstr ""
+msgstr "&Промени стање реда"
 
 msgid "Go to matching &bracket"
-msgstr ""
+msgstr "Иди на одговарајућу &заграду"
 
 msgid "Toggle s&yntax highlighting"
-msgstr ""
+msgstr "Промени &истицање синтаксе"
 
 msgid "&Find declaration"
-msgstr ""
+msgstr "&Нађи објаву"
 
 msgid "Back from &declaration"
-msgstr ""
+msgstr "Назад &од објаве"
 
 msgid "For&ward to declaration"
-msgstr ""
+msgstr "Напред &до објаве"
 
 msgid "Encod&ing..."
-msgstr ""
+msgstr "&Кодирање..."
 
 msgid "&Refresh screen"
-msgstr ""
+msgstr "&Освежи екран"
 
 msgid "&Start/Stop record macro"
-msgstr ""
+msgstr "&Покрени/заустави снимање макроа"
 
 msgid "Delete macr&o..."
-msgstr ""
+msgstr "Обриши &макро..."
 
 msgid "Record/Repeat &actions"
-msgstr ""
+msgstr "Сними/понови &радњу"
 
 msgid "S&pell check"
-msgstr ""
+msgstr "Провери &писање"
 
 msgid "C&heck word"
-msgstr ""
+msgstr "Провери &реч"
 
 msgid "Change spelling &language..."
-msgstr ""
+msgstr "Измени &језик провере писања..."
 
 msgid "&Mail..."
-msgstr ""
+msgstr "&Пошта..."
 
 msgid "Insert &literal..."
-msgstr ""
+msgstr "Уметни &словност..."
 
 msgid "Insert &date/time"
-msgstr ""
+msgstr "Уметни &датум/време"
 
 msgid "&Format paragraph"
-msgstr ""
+msgstr "&Обликуј пасус"
 
 msgid "&Sort..."
-msgstr ""
+msgstr "&Поређај..."
 
 msgid "&Paste output of..."
-msgstr ""
+msgstr "&Убаци излаз из..."
 
 msgid "&External formatter"
-msgstr ""
+msgstr "&Спољни обликовач"
 
 msgid "&Move"
 msgstr "&Премести"
 
 msgid "&Resize"
-msgstr ""
+msgstr "Промени &величину"
 
 msgid "&Toggle fullscreen"
-msgstr ""
+msgstr "Преко &целог екрана"
 
 msgid "&Next"
-msgstr ""
+msgstr "&Следеће"
 
 msgid "&Previous"
-msgstr ""
+msgstr "&Претходно"
 
 msgid "&List..."
-msgstr ""
+msgstr "&Списак..."
 
 msgid "&General..."
-msgstr ""
+msgstr "&Опште..."
 
 msgid "Save &mode..."
-msgstr ""
+msgstr "&Сачувај режим..."
 
 msgid "Learn &keys..."
-msgstr ""
+msgstr "Научи &тастере..."
 
 msgid "Syntax &highlighting..."
-msgstr ""
+msgstr "Истицање &синтаксе..."
 
 msgid "S&yntax file"
-msgstr ""
+msgstr "&Датотека синтаксе"
 
 msgid "&Menu file"
-msgstr ""
+msgstr "Датотека &изборника"
 
 msgid "&Save setup"
 msgstr "&Сачувај подешавања"
 
 msgid "&File"
-msgstr ""
+msgstr "&Датотека"
 
 msgid "&Edit"
-msgstr ""
+msgstr "У&реди"
 
 msgid "&Search"
-msgstr ""
+msgstr "&Потражи"
 
 msgid "&Command"
-msgstr ""
+msgstr "&Наредба"
 
 msgid "For&mat"
-msgstr ""
+msgstr "&Обликуј"
 
 msgid "&Window"
-msgstr ""
+msgstr "&Прозор"
 
 msgid "&Options"
-msgstr ""
+msgstr "&Опције"
 
 msgid "&None"
-msgstr ""
+msgstr "&Ништа"
 
 msgid "&Dynamic paragraphing"
-msgstr ""
+msgstr "&Динамички пасуси"
 
 msgid "Type &writer wrap"
-msgstr ""
+msgstr "Врста &прелома реда"
 
 msgid "Wrap mode"
 msgstr "Прелом редова"
 
 msgid "Tabulation"
-msgstr ""
+msgstr "Табулација"
 
 msgid "&Fake half tabs"
 msgstr "&Лажна полутабулација"
 
 msgid "&Backspace through tabs"
-msgstr "Тастером `&Backsp' кроз табул."
+msgstr "&Повратница кроз табулаторе"
 
 msgid "Fill tabs with &spaces"
-msgstr "Попуни табулато&ре размацима"
+msgstr "Попуни табулаторе &размацима"
 
 msgid "Tab spacing:"
-msgstr ""
+msgstr "Простирање табулатора:"
 
 msgid "Other options"
-msgstr ""
+msgstr "Остале опције"
 
 msgid "&Return does autoindent"
-msgstr "Тастер `&Return' не увлачи"
+msgstr "&Повратак обавља самоувлачење"
 
 msgid "Confir&m before saving"
-msgstr "Потврда &чувања"
+msgstr "Потврди пре &чувања"
 
 msgid "Save file &position"
-msgstr "Чување текуће &позиције"
+msgstr "Сачувај &положај датотеке"
 
 msgid "&Visible trailing spaces"
-msgstr ""
+msgstr "&Завршни размаци су видљиви"
 
 msgid "Visible &tabs"
-msgstr ""
+msgstr "&Табулатори су видљиви"
 
 msgid "Synta&x highlighting"
-msgstr "Исти&цање синтаксе"
+msgstr "Истицање &синтаксе"
 
 msgid "C&ursor after inserted block"
-msgstr ""
+msgstr "Курсор &након уметнутог блока"
 
 msgid "Pers&istent selection"
-msgstr ""
+msgstr "Постојани &избор"
 
 msgid "Cursor be&yond end of line"
-msgstr ""
+msgstr "Курсор &ван краја реда"
 
 msgid "&Group undo"
-msgstr ""
+msgstr "Опозив &групе"
 
 msgid "Word wrap line length:"
-msgstr ""
+msgstr "Дужина реда прелома речи:"
 
 msgid "Editor options"
-msgstr ""
+msgstr "Опције уређивача"
 
 msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
-msgstr ""
+msgstr "Уређивач текста наклоњен кориснику\nнаписан за Поноћног наредника."
 
 msgid "Copyright (C) 1996-2015 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
-msgstr ""
+msgstr "О програму"
 
 msgid "Open files"
-msgstr ""
+msgstr "Отвори датотеке"
 
 msgid "Edit: "
-msgstr ""
+msgstr "Уреди: "
 
 msgid "ButtonBar|Mark"
-msgstr ""
+msgstr "Означи"
 
 msgid "ButtonBar|Replac"
-msgstr ""
+msgstr "Замени"
 
 msgid "ButtonBar|Copy"
-msgstr ""
+msgstr "Умножи"
 
 msgid "ButtonBar|Move"
-msgstr ""
+msgstr "Премести"
 
 msgid "ButtonBar|Delete"
-msgstr ""
+msgstr "Обриши"
 
 msgid "ButtonBar|PullDn"
-msgstr ""
+msgstr "Помери доле"
 
 msgid "Breton"
-msgstr ""
+msgstr "Бретонски"
 
 msgid "Czech"
-msgstr ""
+msgstr "Чешки"
 
 msgid "Welsh"
-msgstr ""
+msgstr "Велшки"
 
 msgid "Danish"
-msgstr ""
+msgstr "Дански"
 
 msgid "German"
-msgstr ""
+msgstr "Немачки"
 
 msgid "Greek"
-msgstr ""
+msgstr "Грчки"
 
 msgid "English"
-msgstr ""
+msgstr "Енглески"
 
 msgid "British English"
-msgstr ""
+msgstr "Британски енглески"
 
 msgid "Canadian English"
-msgstr ""
+msgstr "Канадски енглески"
 
 msgid "American English"
-msgstr ""
+msgstr "Амерички енглески"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Есперанто"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Шпански"
 
 msgid "Faroese"
-msgstr ""
+msgstr "Фарски"
 
 msgid "French"
-msgstr ""
+msgstr "Француски"
 
 msgid "Italian"
-msgstr ""
+msgstr "Италијански"
 
 msgid "Dutch"
-msgstr ""
+msgstr "Холандски"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "Норвешки"
 
 msgid "Polish"
-msgstr ""
+msgstr "Пољски"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "Португалски"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Румунски"
 
 msgid "Russian"
-msgstr ""
+msgstr "Руски"
 
 msgid "Slovak"
-msgstr ""
+msgstr "Словачки"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Шведски"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Украјински"
 
 msgid "&Add word"
-msgstr ""
+msgstr "&Додај реч"
 
 msgid "Language"
-msgstr ""
+msgstr "Језик"
 
 msgid "Misspelled"
-msgstr ""
+msgstr "Погрешно написано"
 
 msgid "Check word"
-msgstr ""
+msgstr "Провери реч"
 
 msgid "Suggest"
-msgstr ""
+msgstr "Предложи"
 
 msgid "Select language"
-msgstr ""
+msgstr "Изабери језик"
 
 msgid "Load syntax file"
-msgstr ""
+msgstr "Учитај датотеку синтаксе"
 
 #, c-format
 msgid ""
 "Cannot open file %s\n"
 "%s"
-msgstr ""
+msgstr "Не могу да отворим датотеку „%s“\n%s"
 
 #, c-format
 msgid "Error in file %s on line %d"
-msgstr ""
+msgstr "Грешка у датотеци „%s“ у %d. реду"
 
 msgid ""
 "The Commander can't change to the directory that\n"
 "the subshell claims you are in. Perhaps you have\n"
 "deleted your working directory, or given yourself\n"
 "extra access permissions with the \"su\" command?"
-msgstr ""
+msgstr "Наредник не може да пређе у директоријум за који\nподљуска тврди да сте у њему. Може бити да сте\nобрисали ваш радни директоријум, или да сте себи\nдали посебна овлашћења приступа наредбом „su“?"
 
 #, c-format
 msgid "Cannot fetch a local copy of %s"
-msgstr ""
+msgstr "Не могу да довучем месни умножак „%s“"
 
 msgid "The shell is already running a command"
-msgstr ""
+msgstr "Шкољка већ извршава наредбу"
 
 #, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
-msgstr ""
+msgstr "Укуцајте „exit“ да се вратите Поноћном нареднику"
 
 msgid "Set &all"
 msgstr "Постави &све"
@@ -1672,188 +1664,188 @@ msgid "Flag"
 msgstr "Ознака"
 
 msgid "Chown advanced command"
-msgstr ""
+msgstr "Напредна наредба промене власника"
 
 #, c-format
 msgid ""
 "Cannot chmod \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да променим режим „%s“\n%s"
 
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да променим власника „%s“\n%s"
 
 msgid "< Default >"
-msgstr ""
+msgstr "< Основно >"
 
 msgid "Skins"
-msgstr ""
+msgstr "Маске"
 
 msgid "Other 8 bit"
 msgstr "Другa, осмобитнa"
 
 msgid "Running"
-msgstr ""
+msgstr "Покренут"
 
 msgid "Stopped"
-msgstr "Заустављено "
+msgstr "Заустављен"
 
 msgid "&Never"
 msgstr "&Никад"
 
 msgid "On dum&b terminals"
-msgstr ""
+msgstr "На &немуштим терминалима"
 
 msgid "Alwa&ys"
 msgstr "&Увек"
 
 msgid "File operations"
-msgstr ""
+msgstr "Радње над датотекама"
 
 msgid "&Verbose operation"
-msgstr "&Брбљиви рад"
+msgstr "&Опширан рад"
 
 msgid "Compute tota&ls"
-msgstr ""
+msgstr "Израчунај &укупности"
 
 msgid "Classic pro&gressbar"
-msgstr ""
+msgstr "Уобичајена &трака напретка"
 
 msgid "Mkdi&r autoname"
-msgstr ""
+msgstr "Самоназив стварања &директоријума"
 
 msgid "&Preallocate space"
-msgstr ""
+msgstr "Унапред &расподели простор"
 
 msgid "Esc key mode"
-msgstr ""
+msgstr "Режим тастера ескејп"
 
 msgid "S&ingle press"
-msgstr ""
+msgstr "&Један притисак"
 
 msgid "Timeout:"
-msgstr ""
+msgstr "Време:"
 
 msgid "Pause after run"
-msgstr ""
+msgstr "Паузирај након извршавања"
 
 msgid "Use internal edi&t"
-msgstr ""
+msgstr "Користи унутрашњи &уређивач"
 
 msgid "Use internal vie&w"
-msgstr ""
+msgstr "Користи унутрашњи &преглед"
 
 msgid "A&sk new file name"
-msgstr ""
+msgstr "Затражи &нови назив датотеке"
 
 msgid "Auto m&enus"
-msgstr ""
+msgstr "Самостални &изборници"
 
 msgid "&Drop down menus"
-msgstr "&Падајући менији"
+msgstr "&Падајући изборници"
 
 msgid "S&hell patterns"
-msgstr ""
+msgstr "Обрасци &љуске"
 
 msgid "Co&mplete: show all"
-msgstr ""
+msgstr "&Употпуни: прикажи све"
 
 msgid "Rotating d&ash"
-msgstr ""
+msgstr "Вртећа &цртица"
 
 msgid "Cd follows lin&ks"
-msgstr ""
+msgstr "Цд прати &везе"
 
 msgid "Sa&fe delete"
-msgstr ""
+msgstr "&Безбедно брисање"
 
 msgid "A&uto save setup"
-msgstr ""
+msgstr "&Сам сачувај подешавања"
 
 msgid "Configure options"
-msgstr "Подеси изборе"
+msgstr "Опције подешавања"
 
 msgid "Skin:"
-msgstr ""
+msgstr "Маска:"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Изглед"
 
 msgid "Case &insensitive"
-msgstr ""
+msgstr "Не &разликуј величину слова"
 
 msgid "Use panel sort mo&de"
-msgstr ""
+msgstr "Користи панелни &режим ређања"
 
 msgid "Show mi&ni-status"
-msgstr ""
+msgstr "Прикажи &мини-стања"
 
 msgid "Use SI si&ze units"
-msgstr ""
+msgstr "Користи СИ &јединице за величину"
 
 msgid "Mi&x all files"
-msgstr ""
+msgstr "&Измешај све датотеке"
 
 msgid "Show &backup files"
-msgstr ""
+msgstr "Прикажи &резервне датотеке"
 
 msgid "Show &hidden files"
-msgstr ""
+msgstr "Прикажи &скривене датотеке"
 
 msgid "&Fast dir reload"
-msgstr "&Брзо учитавање директоријума"
+msgstr "&Брзо учитај директоријум"
 
 msgid "Ma&rk moves down"
-msgstr ""
+msgstr "Означи &премештања на доле"
 
 msgid "Re&verse files only"
-msgstr ""
+msgstr "Поврати &само датотеке"
 
 msgid "Simple s&wap"
-msgstr ""
+msgstr "Једноставна &размена"
 
 msgid "A&uto save panels setup"
-msgstr ""
+msgstr "Сам сачувај &подешавања панела"
 
 msgid "Navigation"
-msgstr ""
+msgstr "Кретање"
 
 msgid "L&ynx-like motion"
-msgstr "L&ynx-олико кретање"
+msgstr "Кретање &налик Линксу"
 
 msgid "Pa&ge scrolling"
-msgstr ""
+msgstr "Премицање &странице"
 
 msgid "&Mouse page scrolling"
-msgstr ""
+msgstr "Премицање странице &мишем"
 
 msgid "File highlight"
-msgstr ""
+msgstr "Истицање датотеке"
 
 msgid "File &types"
-msgstr ""
+msgstr "&Врсте датотеке"
 
 msgid "&Permissions"
-msgstr ""
+msgstr "&Овлашћења"
 
 msgid "Quick search"
-msgstr ""
+msgstr "Брза претрага"
 
 msgid "Panel options"
-msgstr ""
+msgstr "Опције панела"
 
 msgid "Information"
-msgstr ""
+msgstr "Подаци"
 
 msgid ""
 "Using the fast reload option may not reflect the exact\n"
 "directory contents. In this case you'll need to do a\n"
 "manual reload of the directory. See the man page for\n"
 "the details."
-msgstr ""
+msgstr "Употреба опције брзог поновног учитавања можда неће осликати\nтачан садржај директоријума. У том случају мораћете ручно да\nпоново учитате директоријум. Видите страницу упутства за\nпојединостима."
 
 msgid "&Full file list"
 msgstr "&Пун списак датотека"
@@ -1862,101 +1854,102 @@ msgid "&Brief file list"
 msgstr "&Кратак списак датотека"
 
 msgid "&Long file list"
-msgstr "&Дугачак списак датотека"
+msgstr "&Дуг списак датотека"
 
 msgid "&User defined:"
-msgstr "&Кориснички задано:"
+msgstr "Корисник је &задао:"
 
 msgid "User &mini status"
-msgstr ""
+msgstr "Корисниково &мини стање"
 
 msgid "Listing mode"
 msgstr "Режим списка"
 
 msgid "Executable &first"
-msgstr ""
+msgstr "Прво &извршне"
 
 msgid "&Reverse"
 msgstr "&Обрни"
 
 msgid "Sort order"
-msgstr "Поредак ређања"
+msgstr "Редослед ређања"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 msgid "Confirmation|&Delete"
-msgstr ""
+msgstr "&Обриши"
 
 msgid "Confirmation|O&verwrite"
-msgstr ""
+msgstr "&Препиши"
 
 msgid "Confirmation|&Execute"
-msgstr ""
+msgstr "Из&врши"
 
 msgid "Confirmation|E&xit"
-msgstr ""
+msgstr "Из&ађи"
 
 msgid "Confirmation|Di&rectory hotlist delete"
-msgstr ""
+msgstr "Обриши врућ списак &директоријума"
 
 msgid "Confirmation|&History cleanup"
-msgstr ""
+msgstr "Очисти &историјат"
 
 msgid "Confirmation"
-msgstr ""
+msgstr "Потврђивање"
 
 msgid "&UTF-8 output"
-msgstr ""
+msgstr "&УТФ-8 излаз"
 
 msgid "&Full 8 bits output"
-msgstr ""
+msgstr "&Пун осмобитни излаз"
 
 msgid "&ISO 8859-1"
-msgstr ""
+msgstr "&ИСО 8859-1"
 
 msgid "7 &bits"
-msgstr ""
+msgstr "7 &бита"
 
 msgid "F&ull 8 bits input"
-msgstr "П&ун осмобитни улаз"
+msgstr "Пун &осмобитни улаз"
 
 msgid "Display bits"
-msgstr ""
+msgstr "Битова у приказу"
 
 msgid "Input / display codepage:"
 msgstr "Кодна страна улаза и приказа:"
 
 msgid "Directory tree"
-msgstr ""
+msgstr "Стабло директоријума"
 
 msgid "Timeout for freeing VFSs (sec):"
-msgstr ""
+msgstr "Временски рок за ослобађање вирт. сис. дат. (сек):"
 
 msgid "FTP anonymous password:"
-msgstr ""
+msgstr "Лозинка безименог ФТП-а:"
 
 msgid "FTP directory cache timeout (sec):"
-msgstr ""
+msgstr "Временски рок оставе директоријума ФТП-а (сек):"
 
 msgid "&Always use ftp proxy:"
-msgstr ""
+msgstr "&Увек користи фтп посредника:"
 
 msgid "&Use ~/.netrc"
-msgstr "&Користи ~/.netrc"
+msgstr "&Користи „~/.netrc“"
 
 msgid "Use &passive mode"
 msgstr "Користи &пасивни режим"
 
 msgid "Use passive mode over pro&xy"
-msgstr ""
+msgstr "Користи пасивни &режим преко посредника"
 
 msgid "Virtual File System Setting"
-msgstr ""
+msgstr "Подешавања виртуелног система датотека"
 
 msgid "cd"
 msgstr "пром.дир."
 
 msgid "Quick cd"
-msgstr "Брза пром.дир."
+msgstr "Брза промена директоријума"
 
 msgid "Existing filename (filename symlink will point to):"
 msgstr "Постојећа датотека (на коју ће упућивати веза):"
@@ -1977,68 +1970,68 @@ msgid "&Kill"
 msgstr "&Убиј"
 
 msgid "Background jobs"
-msgstr ""
+msgstr "Позадински послови"
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
-msgstr "Лозинка за \\\\%s\\%s"
+msgstr "Лозинка за „\\\\%s\\%s“"
 
 msgid "Domain:"
 msgstr "Домен:"
 
 msgid "Username:"
-msgstr "Корисн. име:"
+msgstr "Корисник:"
 
 msgid "SMB authentication"
-msgstr ""
+msgstr "СМБ потврђивање идентитета"
 
 msgid "set &user ID on execution"
-msgstr ""
+msgstr "подеси ИБ &корисника при извршавању"
 
 msgid "set &group ID on execution"
-msgstr ""
+msgstr "подеси ИБ &групе при извршавању"
 
 msgid "stick&y bit"
-msgstr ""
+msgstr "&лепљиви бит"
 
 msgid "&read by owner"
-msgstr ""
+msgstr "власник &чита"
 
 msgid "&write by owner"
-msgstr ""
+msgstr "власник &уписује"
 
 msgid "e&xecute/search by owner"
-msgstr ""
+msgstr "власник &извршава/претражује"
 
 msgid "rea&d by group"
-msgstr ""
+msgstr "група &чита"
 
 msgid "write by grou&p"
-msgstr ""
+msgstr "група &пише"
 
 msgid "execu&te/search by group"
-msgstr ""
+msgstr "група &извршава/претражује"
 
 msgid "read &by others"
-msgstr ""
+msgstr "остали &читају"
 
 msgid "wr&ite by others"
-msgstr ""
+msgstr "остали &пишу"
 
 msgid "execute/searc&h by others"
-msgstr ""
+msgstr "остали &извршавају/претражују"
 
 msgid "Name:"
-msgstr ""
+msgstr "Назив:"
 
 msgid "Permissions (octal):"
-msgstr ""
+msgstr "Овлашћења (октално):"
 
 msgid "Owner name:"
-msgstr ""
+msgstr "Власник:"
 
 msgid "Group name:"
-msgstr ""
+msgstr "Група:"
 
 msgid "&Marked all"
 msgstr "&Све означене"
@@ -2050,10 +2043,10 @@ msgid "C&lear marked"
 msgstr "О&чисти означене"
 
 msgid "Chmod command"
-msgstr "Промена дозвола"
+msgstr "Наредба промене режима"
 
 msgid "Permission"
-msgstr "Дозволе"
+msgstr "Овлашћења"
 
 msgid "File"
 msgstr "Датотека"
@@ -2077,10 +2070,10 @@ msgid "Size"
 msgstr "Величина"
 
 msgid "Chown command"
-msgstr ""
+msgstr "Наредба промене власника"
 
 msgid "User name"
-msgstr ""
+msgstr "Корисник"
 
 msgid "<Unknown user>"
 msgstr "<Непознат корисник>"
@@ -2089,216 +2082,216 @@ msgid "<Unknown group>"
 msgstr "<Непозната група>"
 
 msgid "Enter machine name (F1 for details):"
-msgstr ""
+msgstr "Унесите назив рачунара (Ф1 за појединости):"
 
 msgid "Files tagged, want to cd?"
-msgstr "Датотеке означене, да пром.дир.?"
+msgstr "Датотеке су означене, желите ли да променим директоријум?"
 
 msgid "Cannot change directory"
 msgstr "Не могу да променим директоријум"
 
 msgid "Filter"
-msgstr ""
+msgstr "Пропусник"
 
 msgid "Set expression for filtering filenames"
-msgstr ""
+msgstr "Поставите израз за издвајање назива датотека"
 
 #, c-format
 msgid "Link %s to:"
-msgstr "Повежи %s са:"
+msgstr "Повежите „%s“ са:"
 
 msgid "Link"
-msgstr ""
+msgstr "Веза"
 
 #, c-format
 msgid "link: %s"
-msgstr ""
+msgstr "веза: %s"
 
 #, c-format
 msgid "symlink: %s"
-msgstr ""
+msgstr "симболичка веза: %s"
 
 #, c-format
 msgid "Cannot chdir to \"%s\""
-msgstr ""
+msgstr "Не могу да пређем у директоријум „%s“"
 
 msgid "View file"
-msgstr ""
+msgstr "Прегледајте датотеку"
 
 msgid "Filename:"
-msgstr ""
+msgstr "Датотека:"
 
 msgid "Filtered view"
-msgstr ""
+msgstr "Издвојени преглед"
 
 msgid "Filter command and arguments:"
-msgstr ""
+msgstr "Издвојте наредбу и аргументе:"
 
 msgid "Edit file"
-msgstr ""
+msgstr "Уреди датотеку"
 
 msgid "Create a new Directory"
-msgstr "Створи нови директоријум"
+msgstr "Направите нови директоријум"
 
 msgid "Enter directory name:"
-msgstr ""
+msgstr "Унесите назив директоријума:"
 
 msgid "Extension file edit"
-msgstr "Уређивање датотеке са врстама"
+msgstr "Уређивање датотеке проширења"
 
 msgid "Which extension file you want to edit?"
-msgstr ""
+msgstr "Коју датотеку проширења желите да уређујете?"
 
 msgid "&System Wide"
 msgstr "&Системску"
 
 msgid "Highlighting groups file edit"
-msgstr ""
+msgstr "Уређивање датотеке истицања група"
 
 msgid "Which highlighting file you want to edit?"
-msgstr ""
+msgstr "Коју датотеку истицања желите да уређујете?"
 
 msgid "Compare directories"
-msgstr ""
+msgstr "Упоредите директоријуме"
 
 msgid "Select compare method:"
-msgstr ""
+msgstr "Изаберите начин поређења:"
 
 msgid "&Quick"
-msgstr "&Брз"
+msgstr "&Брзо"
 
 msgid "&Size only"
 msgstr "&Само величина"
 
 msgid "&Thorough"
-msgstr "&Темељан"
+msgstr "&Темељно"
 
 msgid ""
 "Both panels should be in the listing mode\n"
 "to use this command"
-msgstr ""
+msgstr "Оба панела морају бити у режиму списка\nза коришћење ове наредбе"
 
 msgid ""
 "Not an xterm or Linux console;\n"
 "the panels cannot be toggled."
-msgstr ""
+msgstr "Није конзоа хтерминала или Линукса;\nпанели не могу бити промењени."
 
 #, c-format
 msgid "Symlink '%s' points to:"
-msgstr ""
+msgstr "Симболичка веза „%s“ упућује на:"
 
 msgid "Edit symlink"
-msgstr ""
+msgstr "Уреди симболичку везу"
 
 #, c-format
 msgid "edit symlink, unable to remove %s: %s"
-msgstr ""
+msgstr "уређивање симболичке везе, не може да уклони „%s“: %s"
 
 #, c-format
 msgid "edit symlink: %s"
-msgstr ""
+msgstr "уреди симболичку везу: %s"
 
 #, c-format
 msgid "'%s' is not a symbolic link"
-msgstr ""
+msgstr "„%s“ није симболичка веза"
 
 msgid "FTP to machine"
-msgstr ""
+msgstr "ФТП на рачунар"
 
 msgid "SFTP to machine"
-msgstr ""
+msgstr "СФТП на рачунар"
 
 msgid "Shell link to machine"
-msgstr ""
+msgstr "Веза љуске на рачунар"
 
 msgid "SMB link to machine"
-msgstr ""
+msgstr "СМБ веза на рачунар"
 
 msgid "Undelete files on an ext2 file system"
-msgstr ""
+msgstr "Поништите брисање датотека на екст2 систему датотека"
 
 msgid ""
 "Enter device (without /dev/) to undelete\n"
 "files on: (F1 for details)"
-msgstr ""
+msgstr "Унесите уређај (без „/dev/“) да поништите брисање датотека\nна: (Ф1 за појединости)"
 
 msgid "Directory scanning"
-msgstr ""
+msgstr "Прегледање директоријума"
 
 msgid "Setup"
-msgstr ""
+msgstr "Подешавање"
 
 #, c-format
 msgid "Setup saved to %s"
-msgstr ""
+msgstr "Подешавање је сачувано у „%s“"
 
 #, c-format
 msgid "Unable to save setup to %s"
-msgstr ""
+msgstr "Не могу да сачувам подешавање у „%s“"
 
 msgid "Cannot execute commands on non-local filesystems"
-msgstr ""
+msgstr "Не могу да извршим наредбе на не-месним системима датотека"
 
 #, c-format
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да пређем у директоријум „%s“\n%s"
 
 msgid "Cannot read directory contents"
-msgstr "Не могу да учитам садржај директоријума"
+msgstr "Не могу да прочитам садржај директоријума"
 
 msgid "Parameter"
-msgstr ""
+msgstr "Параметар"
 
 #, c-format
 msgid ""
 "Cannot create temporary command file\n"
 "%s"
-msgstr ""
+msgstr "Не могу да направим привремену датотеку наредбе\n%s"
 
 #, c-format
 msgid " %s%s file error"
-msgstr ""
+msgstr " %s%s грешка датотеке"
 
 #, c-format
 msgid ""
 "The format of the %smc.ext file has changed with version 3.0. It seems that "
 "the installation failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
-msgstr ""
+msgstr "Запис датотеке „%smc.ext“ је измењен издањем 3.0. Изгледа да инсталација није успела. Набавите најновији примерак из пакета Поноћног наредника."
 
 #, c-format
 msgid "%s file error"
-msgstr ""
+msgstr "Грешка датотеке „%s“"
 
 #, c-format
 msgid ""
 "The format of the %s file has changed with version 3.0. You may either want "
 "to copy it from %smc.ext or use that file as an example of how to write it."
-msgstr ""
+msgstr "Запис датотеке „%s“ је измењен издањем 3.0. Можда желите да је умножите из „%smc.ext“ или да користите ту датотеку као пример како је записати."
 
 msgid "DialogTitle|Copy"
-msgstr ""
+msgstr "Умножите"
 
 msgid "DialogTitle|Move"
-msgstr ""
+msgstr "Преместите"
 
 msgid "DialogTitle|Delete"
-msgstr ""
+msgstr "Обришите"
 
 msgid "FileOperation|Copy"
-msgstr ""
+msgstr "Умножи"
 
 msgid "FileOperation|Move"
-msgstr ""
+msgstr "Премести"
 
 msgid "FileOperation|Delete"
-msgstr ""
+msgstr "Обриши"
 
 #, no-c-format
 msgid "%o %f%n\"%s\"%m"
-msgstr ""
+msgstr "%o %f%n„%s“%m"
 
 #, no-c-format
 msgid "%o %d %f%m"
@@ -2324,44 +2317,44 @@ msgid " with source mask:"
 msgstr " уз изворну маску:"
 
 msgid "Cannot make the hardlink"
-msgstr ""
+msgstr "Не могу да направим чврсту везу"
 
 #, c-format
 msgid ""
 "Cannot read source link \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да прочитам изворну везу „%s“\n%s"
 
 msgid ""
 "Cannot make stable symlinks acrossnon-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
-msgstr ""
+msgstr "Не могу да направим постојане симболичке везе преко не-месних система датотека:\n\nОпција постојаних симболичких веза биће искључена"
 
 #, c-format
 msgid ""
 "Cannot create target symlink \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да направим циљну симболичку везу „%s“\n%s"
 
 msgid "Ski&p all"
-msgstr ""
+msgstr "Прескочи &све"
 
 msgid "&Retry"
-msgstr "П&робај поново"
+msgstr "Пробај &поново"
 
 #, c-format
 msgid ""
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
-msgstr ""
+msgstr "Директоријум „%s“ није празан.\nДа га обришем дубински?"
 
 #, c-format
 msgid ""
 "Background process:\n"
 "Directory \"%s\" not empty.\n"
 "Delete it recursively?"
-msgstr ""
+msgstr "Позадински процес:\nДиректоријум „%s“ није празан.\nДа га обришем дубински?"
 
 msgid "Non&e"
 msgstr "&Ништа"
@@ -2370,7 +2363,7 @@ msgstr "&Ништа"
 msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да добијем податке о датотеци „%s“\n%s"
 
 #, c-format
 msgid ""
@@ -2378,110 +2371,110 @@ msgid ""
 "and\n"
 "\"%s\"\n"
 "are the same file"
-msgstr ""
+msgstr "„%s“\nи\n„%s“\nсу једна иста датотека"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
-msgstr ""
+msgstr "Не могу да препишем директоријум „%s“"
 
 #, c-format
 msgid ""
 "Cannot move file \"%s\" to \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да преместим датотеку „%s“ у „%s“\n%s"
 
 #, c-format
 msgid ""
 "Cannot remove file \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да уклоним датотеку „%s“\n%s"
 
 #, c-format
 msgid ""
 "Cannot delete file \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да обришем датотеку „%s“\n%s"
 
 #, c-format
 msgid ""
 "Cannot remove directory \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да уклоним директоријум „%s“\n%s"
 
 #, c-format
 msgid ""
 "Cannot overwrite directory \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да препишем директоријум „%s“\n%s"
 
 #, c-format
 msgid ""
 "Cannot stat source file \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да добијем податке о изворној датотеци „%s“\n%s"
 
 #, c-format
 msgid ""
 "Cannot create special file \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да направим посебну датотеку „%s“\n%s"
 
 #, c-format
 msgid ""
 "Cannot chown target file \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да променим власништво циљне датотеке „%s“\n%s"
 
 #, c-format
 msgid ""
 "Cannot chmod target file \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да променим режим циљне датотеке „%s“\n%s"
 
 #, c-format
 msgid ""
 "Cannot open source file \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да отворим изворну везу „%s“\n%s"
 
 msgid "Reget failed, about to overwrite file"
-msgstr ""
+msgstr "Поновно добављање није успело, за време преписивања датотеке"
 
 #, c-format
 msgid ""
 "Cannot fstat source file \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да дознам податке о изворној датотеци „%s“\n%s"
 
 #, c-format
 msgid ""
 "Cannot create target file \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да направим циљну датотеку „%s“\n%s"
 
 #, c-format
 msgid ""
 "Cannot fstat target file \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да дознам податке о циљној датотеци „%s“\n%s"
 
 #, c-format
 msgid ""
 "Cannot preallocate space for target file \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да прерасподелим простор за циљу датотеку „%s“\n%s"
 
 #, c-format
 msgid ""
 "Cannot read source file\"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да прочитам изворну датотеку „%s“\n%s"
 
 #, c-format
 msgid ""
 "Cannot write target file \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да запишем циљну датотеку „%s“\n%s"
 
 msgid "(stalled)"
 msgstr "(застој)"
@@ -2490,13 +2483,13 @@ msgstr "(застој)"
 msgid ""
 "Cannot close source file \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да затворим изворну везу „%s“\n%s"
 
 #, c-format
 msgid ""
 "Cannot close target file \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да затворим циљну датотеку „%s“\n%s"
 
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "Датотека није у потпуности преузета. Да је задржим?"
@@ -2508,37 +2501,37 @@ msgstr "&Задржи"
 msgid ""
 "Cannot stat source directory \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да добијем податке о изворном директоријуму „%s“\n%s"
 
 #, c-format
 msgid ""
 "Source \"%s\" is not a directory\n"
 "%s"
-msgstr ""
+msgstr "Извор „%s“ није директоријум\n%s"
 
 #, c-format
 msgid ""
 "Cannot copy cyclic symbolic link\n"
 "\"%s\""
-msgstr ""
+msgstr "Не могу да умножим цикличну симболичку везу\n„%s“"
 
 #, c-format
 msgid ""
 "Destination \"%s\" must be a directory\n"
 "%s"
-msgstr ""
+msgstr "Одредиште „%s“ мора бити директоријум\n%s"
 
 #, c-format
 msgid ""
 "Cannot create target directory \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да направим циљни директоријум „%s“\n%s"
 
 #, c-format
 msgid ""
 "Cannot chown target directory \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да променим власништво циљног директоријума „%s“\n%s"
 
 #, c-format
 msgid ""
@@ -2546,43 +2539,43 @@ msgid ""
 "and\n"
 "\"%s\"\n"
 "are the same directory"
-msgstr ""
+msgstr "„%s“\nи\n„%s“\nсу један исти директоријум"
 
 #, c-format
 msgid ""
 "Cannot overwrite file \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да препишем датотеку „%s“\n%s"
 
 #, c-format
 msgid ""
 "Cannot move directory \"%s\" to \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да преместим директоријум „%s“ у „%s“\n%s"
 
 #, c-format
 msgid "Directories: %zd, total size: %s"
-msgstr ""
+msgstr "Број директоријума: %zd, укупне величине: %s"
 
 msgid "Cannot operate on \"..\"!"
-msgstr ""
+msgstr "Не могу да радим над \"..\"!"
 
 msgid "Sorry, I could not put the job in background"
-msgstr ""
+msgstr "Извините, не могу да поставим посао у позадину"
 
 msgid "S&uspend"
-msgstr ""
+msgstr "&Обустави"
 
 msgid "Con&tinue"
 msgstr "&Настави"
 
 #, c-format
 msgid "%d:%02d.%02d"
-msgstr ""
+msgstr "%d:%02d.%02d"
 
 #, c-format
 msgid "ETA %s"
-msgstr ""
+msgstr "ЕТА %s"
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2597,18 +2590,18 @@ msgid "%ld B/s"
 msgstr "%ld Б/с"
 
 msgid "Target file already exists!"
-msgstr ""
+msgstr "Циљна датотека већ постоји!"
 
 #, c-format
 msgid "New     : %s, size %s"
-msgstr ""
+msgstr "Нова     : %s, величине %s"
 
 #, c-format
 msgid "Existing: %s, size %s"
-msgstr ""
+msgstr "Постоји: %s, величине %s"
 
 msgid "Overwrite this target?"
-msgstr "Желите ли да препишем ово одредиште?"
+msgstr "Да препишем ово одредиште?"
 
 msgid "A&ppend"
 msgstr "&Надовежи"
@@ -2617,51 +2610,51 @@ msgid "&Reget"
 msgstr "&Поново преузми"
 
 msgid "Overwrite all targets?"
-msgstr "Желите ли да препишем сва одредишта?"
+msgstr "Да препишем сва одредишта?"
 
 msgid "&Update"
-msgstr "&Ажурирај"
+msgstr "&Освежи"
 
 msgid "If &size differs"
-msgstr "Ако је &величина различита"
+msgstr "Ако се &величине разликују"
 
 msgid "File exists"
-msgstr ""
+msgstr "Датотека постоји"
 
 msgid "Background process: File exists"
-msgstr ""
+msgstr "Позадински процес: Датотека постоји"
 
 #, c-format
 msgid "Files processed: %zu/%zu"
-msgstr ""
+msgstr "Обрађене датотеке: %zu/%zu"
 
 #, c-format
 msgid "Files processed: %zu"
-msgstr ""
+msgstr "Обрађене датотеке: %zu"
 
 #, c-format
 msgid "Time: %s %s"
-msgstr ""
+msgstr "Време: %s %s"
 
 #, c-format
 msgid "Time: %s %s (%s)"
-msgstr ""
+msgstr "Време: %s %s (%s)"
 
 #, c-format
 msgid "Time: %s"
-msgstr ""
+msgstr "Време: %s"
 
 #, c-format
 msgid "Time: %s (%s)"
-msgstr ""
+msgstr "Време: %s (%s)"
 
 #, c-format
 msgid " Total: %s "
-msgstr ""
+msgstr " Укупно: %s "
 
 #, c-format
 msgid " Total: %s/%s "
-msgstr ""
+msgstr " Укупно: %s/%s "
 
 msgid "Source"
 msgstr "Извор"
@@ -2670,7 +2663,7 @@ msgid "Target"
 msgstr "Одредиште"
 
 msgid "Deleting"
-msgstr ""
+msgstr "Брисање"
 
 msgid "&Using shell patterns"
 msgstr "&Користи обрасце љуске"
@@ -2679,85 +2672,85 @@ msgid "to:"
 msgstr "у:"
 
 msgid "Follow &links"
-msgstr ""
+msgstr "Прати &везе"
 
 msgid "Preserve &attributes"
-msgstr ""
+msgstr "Причувај &особине"
 
 msgid "Di&ve into subdir if exists"
-msgstr ""
+msgstr "&Урони у поддиректоријум ако постоји"
 
 msgid "&Stable symlinks"
-msgstr ""
+msgstr "&Постојане симболичке везе"
 
 msgid "&Background"
 msgstr "&Позадина"
 
 #, c-format
 msgid "Invalid source pattern '%s'"
-msgstr ""
+msgstr "Неисправан образац извора '%s'"
 
 msgid "&Chdir"
-msgstr "&Пром.дир."
+msgstr "&Промени директоријум"
 
 msgid "&Again"
-msgstr "&Поново"
+msgstr "&Опет"
 
 msgid "Pane&lize"
 msgstr "Претвори &у окно"
 
 msgid "&View - F3"
-msgstr "&Прегледај - F3"
+msgstr "&Прегледај — Ф3"
 
 msgid "&Edit - F4"
-msgstr "&Уреди - F4"
+msgstr "&Уреди — Ф4"
 
 #, c-format
 msgid "Found: %ld"
-msgstr ""
+msgstr "Нађох: %ld"
 
 msgid "Malformed regular expression"
-msgstr ""
+msgstr "Лош регуларни израз"
 
 msgid "File name:"
-msgstr ""
+msgstr "Датотека:"
 
 msgid "&Find recursively"
-msgstr ""
+msgstr "Нађи &дубински"
 
 msgid "S&kip hidden"
-msgstr ""
+msgstr "Прескочи &скривене"
 
 msgid "Content:"
-msgstr ""
+msgstr "Садржај:"
 
 msgid "Sea&rch for content"
-msgstr ""
+msgstr "&Потражи садржај"
 
 msgid "Case sens&itive"
-msgstr ""
+msgstr "Разликуј &величину слова"
 
 msgid "A&ll charsets"
-msgstr ""
+msgstr "&Све знаке"
 
 msgid "Fir&st hit"
-msgstr ""
+msgstr "Први &погодак"
 
 msgid "&Tree"
 msgstr "&Стабло"
 
 msgid "Find File"
-msgstr "Нађи датотеку"
+msgstr "Нађите датотеку"
 
 msgid "Start at:"
 msgstr "Почни од:"
 
 msgid "Ena&ble ignore directories:"
-msgstr ""
+msgstr "Укључи &занемарене директоријуме:"
 
 #, c-format
 msgid "Grepping in %s"
-msgstr "Тражим текст у %s"
+msgstr "Тражим текст у „%s“"
 
 msgid "Finished"
 msgstr "Готово"
@@ -2765,18 +2758,18 @@ msgstr "Готово"
 #, c-format
 msgid "Finished (ignored %zd directory)"
 msgid_plural "Finished (ignored %zd directories)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Готово (занемарио сам %zd директоријум)"
+msgstr[1] "Готово (занемарио сам %zd директоријума)"
+msgstr[2] "Готово (занемарио сам %zd директоријума)"
 
 msgid "Searching"
 msgstr "Тражим"
 
 msgid "Change &to"
-msgstr ""
+msgstr "Промени &у"
 
 msgid "&Free VFSs now"
-msgstr ""
+msgstr "&Ослободи ВСД-а сада"
 
 msgid "&Refresh"
 msgstr "&Освежи"
@@ -2788,35 +2781,35 @@ msgid "&Up"
 msgstr "&Горе"
 
 msgid "New &group"
-msgstr ""
+msgstr "Нова &група"
 
 msgid "New &entry"
-msgstr ""
+msgstr "Нови &унос"
 
 msgid "&Insert"
 msgstr "У&метни"
 
 msgid "&Remove"
-msgstr "&Уклони"
+msgstr "У&клони"
 
 msgid "Subgroup - press ENTER to see list"
-msgstr "Подгрупа - притисните `ENTER' за списак"
+msgstr "Подгрупа — притисните „УНЕСИ“ да видите списак"
 
 msgid "Active VFS directories"
-msgstr "Активни директоријуми ВСД"
+msgstr "Радни директоријуми виртуелног система датотека"
 
 msgid "Directory hotlist"
-msgstr "Брзи списак директоријума"
+msgstr "Врући списак директоријума"
 
 msgid "Top level group"
-msgstr ""
+msgstr "Група највишег нивоа"
 
 msgid "Directory path"
 msgstr "Путања директоријума"
 
 #, c-format
 msgid "Moving %s"
-msgstr "Премештам %s"
+msgstr "Премештам „%s“"
 
 msgid "Directory label"
 msgstr "Натпис директоријума"
@@ -2825,45 +2818,45 @@ msgid "&Append"
 msgstr "&Надовежи"
 
 msgid "New hotlist entry"
-msgstr "Нова ставка брзог списка"
+msgstr "Нова ставка врућег списка"
 
 msgid "Directory label:"
-msgstr ""
+msgstr "Натпис директоријума:"
 
 msgid "Directory path:"
-msgstr ""
+msgstr "Путања директоријума:"
 
 msgid "New hotlist group"
-msgstr ""
+msgstr "Нова група брзог списка"
 
 msgid "Name of new group:"
-msgstr ""
+msgstr "Назив нове групе:"
 
 #, c-format
 msgid "Are you sure you want to remove entry \"%s\"?"
-msgstr ""
+msgstr "Да ли сигурно желите да уклоните унос „%s“?"
 
 #, c-format
 msgid ""
 "Group \"%s\" is not empty.\n"
 "Remove it?"
-msgstr ""
+msgstr "Група „%s“ није празна.\nДа је уклоним?"
 
 msgid "Hotlist Load"
-msgstr ""
+msgstr "Учитавање врућег списка"
 
 #, c-format
 msgid ""
 "MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
-msgstr ""
+msgstr "Поноћни наредник није могао да запише датотеку „%s“,\nваши стари уноси врућег списка нису обрисани"
 
 #, c-format
 msgid "Label for \"%s\":"
-msgstr "Натпис за `%s':"
+msgstr "Натпис за „%s“:"
 
 msgid "Add to hotlist"
-msgstr ""
+msgstr "Додај на врући списак"
 
 #, c-format
 msgid "Midnight Commander %s"
@@ -2871,106 +2864,106 @@ msgstr "Поноћни наредник %s"
 
 #, c-format
 msgid "File: %s"
-msgstr "Датотека: %s"
+msgstr "Датотека:           %s"
 
 msgid "No node information"
 msgstr "Нема података о чворовима"
 
 msgid "Free nodes:"
-msgstr ""
+msgstr "Слободних чворова:"
 
 msgid "No space information"
 msgstr "Нема података о простору"
 
 #, c-format
 msgid "Free space: %s/%s (%d%%)"
-msgstr ""
+msgstr "Слободан простор:  %s/%s (%d%%)"
 
 #, c-format
 msgid "Type:      %s"
-msgstr ""
+msgstr "Врста:             %s"
 
 msgid "non-local vfs"
-msgstr "не-локални всд"
+msgstr "не-месни всд"
 
 #, c-format
 msgid "Device:    %s"
-msgstr "Уређај:          %s"
+msgstr "Уређај:            %s"
 
 #, c-format
 msgid "Filesystem: %s"
-msgstr "Систем датот.:   %s"
+msgstr "Систем датотека:   %s"
 
 #, c-format
 msgid "Accessed:  %s"
-msgstr "Посл. приступ:   %s"
+msgstr "Датум приступа:    %s"
 
 #, c-format
 msgid "Modified:  %s"
-msgstr "Датум измене:    %s"
+msgstr "Датум промене:     %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
 msgid "Changed:   %s"
-msgstr ""
+msgstr "Датум измене:      %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
-msgstr ""
+msgstr "Врста уређаја:     навећи %lu, најмањи %lu"
 
 #, c-format
 msgid "Size:      %s"
-msgstr "Величина:        %s"
+msgstr "Величина:          %s"
 
 #, c-format
 msgid " (%ld block)"
 msgid_plural " (%ld blocks)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] " (%ld блок)"
+msgstr[1] " (%ld блока)"
+msgstr[2] " (%ld блокова)"
 
 #, c-format
 msgid "Owner:     %s/%s"
-msgstr "Власник:         %s/%s"
+msgstr "Власник:           %s/%s"
 
 #, c-format
 msgid "Links:     %d"
-msgstr "Веза:            %d"
+msgstr "Број веза:         %d"
 
 #, c-format
 msgid "Mode:      %s (%04o)"
-msgstr "Дозволе:         %s (%04o)"
+msgstr "Дозволе:           %s (%04o)"
 
 #, c-format
 msgid "Location:  %Xh:%Xh"
-msgstr "Место:           %Xh:%Xh"
+msgstr "Место:             %Xh:%Xh"
 
 msgid "&Equal split"
-msgstr "подједнака по&Дела"
+msgstr "&Подједнака подела"
 
 msgid "&Menubar visible"
-msgstr ""
+msgstr "Трака &изборника је видљива"
 
 msgid "Command &prompt"
-msgstr ""
+msgstr "Упит &наредбе"
 
 msgid "&Keybar visible"
-msgstr "ред са &Тастерима је видљив"
+msgstr "Трака &тастера је видљива"
 
 msgid "H&intbar visible"
-msgstr ""
+msgstr "Трака &савета је видљива"
 
 msgid "&XTerm window title"
-msgstr ""
+msgstr "Наслов прозора &Хтерминала"
 
 msgid "&Show free space"
-msgstr ""
+msgstr "&Покажи слободан простор"
 
 msgid "Panel split"
-msgstr ""
+msgstr "Подела панела"
 
 msgid "Console output"
-msgstr ""
+msgstr "Излаз конзоле"
 
 msgid "&Vertical"
 msgstr "&Усправно"
@@ -2979,237 +2972,237 @@ msgid "&Horizontal"
 msgstr "&Положено"
 
 msgid "Output lines:"
-msgstr ""
+msgstr "Излазни редови:"
 
 msgid "Layout"
 msgstr "Распоред"
 
 msgid "File listin&g"
-msgstr ""
+msgstr "&Испиши датотеке"
 
 msgid "&Quick view"
-msgstr ""
+msgstr "&Брзи преглед"
 
 msgid "&Info"
-msgstr ""
+msgstr "&Подаци"
 
 msgid "&Listing mode..."
-msgstr "&Режим списка..."
+msgstr "Режим &списка..."
 
 msgid "&Sort order..."
-msgstr "&Поредак ређања..."
+msgstr "Редослед &ређања..."
 
 msgid "&Filter..."
-msgstr "&Филтар..."
+msgstr "&Пропусник..."
 
 msgid "&Encoding..."
-msgstr ""
+msgstr "&Кодирање..."
 
 msgid "FT&P link..."
-msgstr "Повезивање FT&P-ом..."
+msgstr "&ФТП веза..."
 
 msgid "S&hell link..."
-msgstr "Повезивање &љуском..."
+msgstr "Веза &љуске..."
 
 msgid "S&FTP link..."
-msgstr ""
+msgstr "&СФТП веза..."
 
 msgid "SM&B link..."
-msgstr "Повезивање SM&B-ом..."
+msgstr "СМ&Б веза..."
 
 msgid "Paneli&ze"
-msgstr ""
+msgstr "Претвори &у окно"
 
 msgid "&Rescan"
-msgstr ""
+msgstr "&Поново прегледај"
 
 msgid "&View"
-msgstr ""
+msgstr "&Преглед"
 
 msgid "Vie&w file..."
-msgstr ""
+msgstr "Прегледај &датотеку..."
 
 msgid "&Filtered view"
-msgstr ""
+msgstr "&Издвојени преглед"
 
 msgid "&Copy"
-msgstr ""
+msgstr "У&множи"
 
 msgid "C&hmod"
-msgstr ""
+msgstr "Промени &режим"
 
 msgid "&Link"
-msgstr ""
+msgstr "&Веза"
 
 msgid "&Symlink"
-msgstr ""
+msgstr "&Симболичка веза"
 
 msgid "Relative symlin&k"
-msgstr ""
+msgstr "Релативна &симболичка веза"
 
 msgid "Edit s&ymlink"
-msgstr ""
+msgstr "&Уреди симболичку везу"
 
 msgid "Ch&own"
-msgstr ""
+msgstr "Промени &власништво"
 
 msgid "&Advanced chown"
-msgstr ""
+msgstr "&Напредна промена власништва"
 
 msgid "&Rename/Move"
-msgstr ""
+msgstr "&Преиме/Премес"
 
 msgid "&Mkdir"
-msgstr ""
+msgstr "Направи &дир."
 
 msgid "&Quick cd"
-msgstr ""
+msgstr "&Брзо промени директоријум"
 
 msgid "Select &group"
-msgstr ""
+msgstr "Изабери &групу"
 
 msgid "U&nselect group"
-msgstr ""
+msgstr "Поништи &избор групе"
 
 msgid "&Invert selection"
-msgstr ""
+msgstr "&Преокрени избор"
 
 msgid "E&xit"
-msgstr ""
+msgstr "&Изађи"
 
 msgid "&User menu"
-msgstr ""
+msgstr "&Кориснички изборник"
 
 msgid "&Directory tree"
 msgstr "&Стабло директоријума"
 
 msgid "&Find file"
-msgstr ""
+msgstr "&Нађи датотеку"
 
 msgid "S&wap panels"
-msgstr ""
+msgstr "&Размени панеле"
 
 msgid "Switch &panels on/off"
-msgstr ""
+msgstr "Укључи/искључи &панеле"
 
 msgid "&Compare directories"
-msgstr ""
+msgstr "&Упореди директоријуме"
 
 msgid "C&ompare files"
-msgstr ""
+msgstr "Упореди &датотеке"
 
 msgid "E&xternal panelize"
-msgstr ""
+msgstr "&Спољним програмом у окно"
 
 msgid "Show directory s&izes"
-msgstr ""
+msgstr "Прикажи &величине директоријума"
 
 msgid "Command &history"
-msgstr ""
+msgstr "Историјат &наредби"
 
 msgid "Di&rectory hotlist"
-msgstr ""
+msgstr "&Врући списак директоријума"
 
 msgid "&Active VFS list"
-msgstr ""
+msgstr "&Списак радних ВСД-а"
 
 msgid "&Background jobs"
-msgstr ""
+msgstr "&Позадински послови"
 
 msgid "Screen lis&t"
-msgstr ""
+msgstr "Списак &екрана"
 
 msgid "&Undelete files (ext2fs only)"
-msgstr "&Одобриши датотеке (само на ext2fs)"
+msgstr "&Одобриши датотеке (само на екст2сд-у)"
 
 msgid "&Listing format edit"
-msgstr "&Уреди формат списка"
+msgstr "&Испиши уређивање записа"
 
 msgid "Edit &extension file"
-msgstr "Уреди датотеку &врста"
+msgstr "Уреди датотеку &проширења"
 
 msgid "Edit &menu file"
-msgstr "Уреди датотеку &менија"
+msgstr "Уреди датотеку &изборника"
 
 msgid "Edit hi&ghlighting group file"
-msgstr ""
+msgstr "Уреди истицање &датотеке групе"
 
 msgid "&Configuration..."
 msgstr "&Подешавања..."
 
 msgid "&Layout..."
-msgstr "&Изглед..."
+msgstr "&Распоред..."
 
 msgid "&Panel options..."
-msgstr ""
+msgstr "Опције &панела..."
 
 msgid "C&onfirmation..."
-msgstr ""
+msgstr "П&отврђивање..."
 
 msgid "&Appearance..."
-msgstr ""
+msgstr "&Изглед..."
 
 msgid "&Display bits..."
 msgstr "&Битова у приказу..."
 
 msgid "&Virtual FS..."
-msgstr "&Виртуални СД..."
+msgstr "&Виртуелни СД..."
 
 msgid "Panels:"
-msgstr ""
+msgstr "Панели:"
 
 #, c-format
 msgid "You have %zd opened screen. Quit anyway?"
 msgid_plural "You have %zd opened screens. Quit anyway?"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Отворили сте %zd екран. Да ипак изађем?"
+msgstr[1] "Отворили сте %zd екрана. Да ипак изађем?"
+msgstr[2] "Отворили сте %zd екрана. Да ипак изађем?"
 
 msgid "The Midnight Commander"
-msgstr ""
+msgstr "Поноћни наредник"
 
 msgid "Do you really want to quit the Midnight Commander?"
-msgstr ""
+msgstr "Да ли стварно желите да изађете из Поноћног наредника?"
 
 msgid "&Above"
-msgstr ""
+msgstr "И&знад"
 
 msgid "&Left"
-msgstr ""
+msgstr "&Леви"
 
 msgid "&Below"
-msgstr ""
+msgstr "И&спод"
 
 msgid "&Right"
-msgstr ""
+msgstr "&Десни"
 
 msgid "ButtonBar|Menu"
-msgstr ""
+msgstr "Изборник"
 
 msgid "ButtonBar|View"
-msgstr ""
+msgstr "Преглед"
 
 msgid "ButtonBar|RenMov"
-msgstr ""
+msgstr "ПреименујПремести"
 
 msgid "ButtonBar|Mkdir"
-msgstr ""
+msgstr "Направи директоријум"
 
 msgid "Memory exhausted!"
-msgstr ""
+msgstr "Меморија је потрошена!"
 
 #. TRANSLATORS: one single character to represent 'unsorted' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|u"
-msgstr ""
+msgstr "н"
 
 msgid "&Unsorted"
-msgstr "Н&есређено"
+msgstr "&Несређено"
 
 #. TRANSLATORS: one single character to represent 'name' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|n"
-msgstr ""
+msgstr "н"
 
 msgid "&Name"
 msgstr "&Назив"
@@ -3217,56 +3210,56 @@ msgstr "&Назив"
 #. TRANSLATORS: one single character to represent 'version' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|v"
-msgstr ""
+msgstr "и"
 
 msgid "&Version"
-msgstr ""
+msgstr "&Издање"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|e"
-msgstr ""
+msgstr "п"
 
 msgid "E&xtension"
-msgstr ""
+msgstr "&Проширење"
 
 #. TRANSLATORS: one single character to represent 'size' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|s"
-msgstr ""
+msgstr "в"
 
 msgid "&Size"
 msgstr "&Величина"
 
 msgid "Block Size"
-msgstr ""
+msgstr "Величина блока"
 
 #. TRANSLATORS: one single character to represent 'Modify time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|m"
-msgstr ""
+msgstr "п"
 
 msgid "&Modify time"
-msgstr "Датум &измене"
+msgstr "Датум про&мене"
 
 #. TRANSLATORS: one single character to represent 'Access time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|a"
-msgstr ""
+msgstr "п"
 
 msgid "&Access time"
-msgstr "Датум &приступа"
+msgstr "Датум при&ступа"
 
 #. TRANSLATORS: one single character to represent 'Change time' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|h"
-msgstr ""
+msgstr "и"
 
 msgid "C&hange time"
-msgstr ""
+msgstr "Датум и&змене"
 
 msgid "Perm"
-msgstr "Дозв"
+msgstr "Овла"
 
 msgid "Nl"
 msgstr "Бв"
@@ -3274,16 +3267,16 @@ msgstr "Бв"
 #. TRANSLATORS: one single character to represent 'inode' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
 msgid "sort|i"
-msgstr ""
+msgstr "и"
 
 msgid "&Inode"
-msgstr "&Ичвор"
+msgstr "&И-чвор"
 
 msgid "UID"
 msgstr "КИБ"
 
 msgid "GID"
-msgstr "ИБГ"
+msgstr "ГИБ"
 
 msgid "Owner"
 msgstr "Власник"
@@ -3292,7 +3285,7 @@ msgid "Group"
 msgstr "Група"
 
 msgid "[dev]"
-msgstr ""
+msgstr "[дев]"
 
 msgid "UP--DIR"
 msgstr "НАД-ДИР"
@@ -3304,51 +3297,51 @@ msgid "SUB-DIR"
 msgstr "ПОД-ДИР"
 
 msgid "<readlink failed>"
-msgstr "<неуспешно читање везе>"
+msgstr "<читање везе није успело>"
 
 #, c-format
 msgid "%s byte"
 msgid_plural "%s bytes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%s бајт"
+msgstr[1] "%s бајта"
+msgstr[2] "%s бајтова"
 
 #, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%s у %d датотеци"
+msgstr[1] "%s у %d датотеке"
+msgstr[2] "%s у %d датотека"
 
 msgid "Panelize"
-msgstr ""
+msgstr "У окно"
 
 msgid "Unknown tag on display format:"
-msgstr ""
+msgstr "Непозната ознака на запису приказа:"
 
 msgid "&Files only"
-msgstr ""
+msgstr "&Само датотеке"
 
 msgid "&Case sensitive"
-msgstr ""
+msgstr "Разликуј &величину слова"
 
 msgid "Select"
-msgstr ""
+msgstr "Изаберите"
 
 msgid "Unselect"
-msgstr ""
+msgstr "Поништите избор"
 
 msgid "Do you really want to execute?"
-msgstr ""
+msgstr "Да ли стварно желите да извршите?"
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr "Кориснички формат не изгледа исправно, враћам на подраз."
+msgstr "Корисников запис изгледа да је неисправан, враћам на основно."
 
 msgid "&Add new"
 msgstr "&Додај ново"
 
 msgid "External panelize"
-msgstr "Критеријум попуне окна"
+msgstr "Спољним програмом у окно"
 
 msgid "Other command"
 msgstr "Друга наредба"
@@ -3357,43 +3350,41 @@ msgid "Command"
 msgstr "Наредба"
 
 msgid "Add to external panelize"
-msgstr ""
+msgstr "Додај спољном програму за у окно"
 
 msgid "Enter command label:"
-msgstr ""
+msgstr "Унесите натпис наредбе:"
 
 msgid "Cannot invoke command."
 msgstr "Не могу да покренем наредбу."
 
 msgid "Pipe close failed"
-msgstr "Затварање цеви није успело"
+msgstr "Затварање спојке није успело"
 
 msgid "Cannot run external panelize in a non-local directory"
-msgstr ""
+msgstr "Не могу да покренем спољни програм за приказ у окну у не-месном директоријуму"
 
 msgid "Modified git files"
-msgstr ""
+msgstr "Измењене датотеке гита"
 
 msgid "Find rejects after patching"
 msgstr "Нађи одбијене исправке после крпљења"
 
 msgid "Find *.orig after patching"
-msgstr "Нађи *.orig после крпљења"
+msgstr "Нађи „*.orig“ после крпљења"
 
 msgid "Find SUID and SGID programs"
-msgstr "Нађи програме са постављеним ПКИБ (SUID) и ПГИБ (SGID)"
+msgstr "Нађи ПКИБ и ПГИБ програме"
 
 #, c-format
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"Не могу да отворим датотеку %s за упис:\n"
-"%s\n"
+msgstr "Не могу да отворим датотеку „%s“ за упис:\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
-msgstr "Копирај директоријум `%s' у:"
+msgstr "Умножите директоријум „%s“ у:"
 
 #, c-format
 msgid "Move \"%s\" directory to:"
@@ -3403,103 +3394,99 @@ msgstr "Премести директоријум `%s' у:"
 msgid ""
 "Cannot stat the destination\n"
 "%s"
-msgstr ""
+msgstr "Не могу да добавим податке о одредишту\n%s"
 
 #, c-format
 msgid "Delete %s?"
-msgstr ""
+msgstr "Да обришем „%s“?"
 
 msgid "ButtonBar|Static"
-msgstr ""
+msgstr "Непроменљиво"
 
 msgid "ButtonBar|Dynamc"
-msgstr ""
+msgstr "Променљво"
 
 msgid "ButtonBar|Rescan"
-msgstr ""
+msgstr "Поново прегледај"
 
 msgid "ButtonBar|Forget"
-msgstr ""
+msgstr "Заборави"
 
 msgid "ButtonBar|Rmdir"
-msgstr ""
+msgstr "Уклони директоријум"
 
 #, c-format
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"Не могу да пишем у датотеку %s:\n"
-"%s\n"
+msgstr "Не могу да пишем у датотеку „%s“:\n%s\n"
 
 msgid "Debug"
-msgstr ""
+msgstr "Прочисти"
 
 msgid "ERROR:"
-msgstr ""
+msgstr "ГРЕШКА:"
 
 msgid "True:"
-msgstr ""
+msgstr "Тачно:"
 
 msgid "False:"
-msgstr ""
+msgstr "Нетачно:"
 
 msgid "Error calling program"
-msgstr ""
+msgstr "Грешка позивања програма"
 
 msgid "Warning -- ignoring file"
-msgstr ""
+msgstr "Упозорење — занемарујем датотеку"
 
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"Датотеку %s не поседује ни администратор ни ви, а није ни\n"
-"читљива за свет. Њена употреба може да угрози вашу безбедност"
+msgstr "Ни администратор ни ви нисте власници датотеке „%s“\nили није уопште читљива. Њена употреба може да угрози вашу безбедност"
 
 msgid "Format error on file Extensions File"
-msgstr ""
+msgstr "Грешка записа на датотеци „Датотека проширења“"
 
 #, c-format
 msgid "The %%var macro has no default"
-msgstr ""
+msgstr "Макро „%%var“ нема основности"
 
 #, c-format
 msgid "The %%var macro has no variable"
-msgstr ""
+msgstr "Макро „%%var“ нема променљиве"
 
 #, c-format
 msgid "No suitable entries found in %s"
-msgstr ""
+msgstr "Нисам нашао одговарајуће уносе у „%s“"
 
 msgid "User menu"
-msgstr ""
+msgstr "Кориснички изборник"
 
 msgid "Help file format error\n"
-msgstr ""
+msgstr "Грешка записа датотеке помоћи\n"
 
 msgid "Internal bug: Double start of link area"
-msgstr ""
+msgstr "Унутрашња грешка: Двоструки почетак области везе"
 
 #, c-format
 msgid "Cannot find node %s in help file"
-msgstr ""
+msgstr "Не могу да пронађем чвор „%s“ у датотеци помоћи"
 
 msgid "Help"
 msgstr "Помоћ"
 
 msgid "ButtonBar|Index"
-msgstr ""
+msgstr "Попис"
 
 msgid "ButtonBar|Prev"
-msgstr ""
+msgstr "Преглед"
 
 msgid "Learn keys"
-msgstr "Научи тастере"
+msgstr "Научите тастере"
 
 msgid "Teach me a key"
-msgstr ""
+msgstr "Научте тастере"
 
 #, c-format
 msgid ""
@@ -3511,22 +3498,14 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"Молим да притиснете тастер %s\n"
-"и да сачекате да ова порука нестане.\n"
-"\n"
-"Онда га поново притисните и видите да ли се појављује\n"
-"`Да' поред његовог дугмета.\n"
-"\n"
-"Ако желите да одустанете, притисните једном тастер\n"
-"`Escape' и сачекајте."
+msgstr "Притисните тастер „%s“\nи сачекајте да ова порука нестане.\n\nЗатим га поново притисните да видите да ли се појављује\n„Да“ поред његовог дугмета.\n\nАко желите да одустанете, притисните једном тастер\n„Escape“ и сачекајте."
 
 msgid "Cannot accept this key"
-msgstr ""
+msgstr "Не могу да прихватим овај тастер"
 
 #, c-format
 msgid "You have entered \"%s\""
-msgstr ""
+msgstr "Унесли сте „%s“"
 
 #. TRANSLATORS: This label appears near learned keys.  Keep it short.
 msgid "OK"
@@ -3535,9 +3514,7 @@ msgstr "Да"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"Изгледа да сви ваши тастери већ сада\n"
-"лепо раде. То је одлично."
+msgstr "Изгледа да сви ваши тастери већ сада\nлепо раде. То је одлично."
 
 msgid "&Discard"
 msgstr "&Одбаци"
@@ -3545,157 +3522,148 @@ msgstr "&Одбаци"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"Одлично! Имате потпуну терминалску базу!\n"
-"Сви ваши тастери добро раде."
+msgstr "Одлично! Имате потпуну терминалску базу података!\nСви ваши тастери добро раде."
 
 msgid ""
 "Press all the keys mentioned here. After you have done it, check\n"
 "which keys are not marked with OK. Press space on the missing\n"
 "key, or click with the mouse to define it. Move around with Tab."
-msgstr ""
+msgstr "Притисните све тастере овде наведене. Након тога, проверите који\nтастери нису означени са „Да“. Притисните размак код недостајућих\nтастера, или их одредите мишем. Крећите се унаоколо табулаторорм."
 
 #, c-format
 msgid ""
 "Failed to run:\n"
 "%s\n"
-msgstr ""
+msgstr "Нисам успео да покренем:\n„%s“\n"
 
 msgid "Home directory path is not absolute"
-msgstr ""
+msgstr "Путања почетног директоријума није апсолутна"
 
 #, c-format
 msgid ""
 "\n"
 "Failed while close:\n"
 "%s\n"
-msgstr ""
+msgstr "\nНисам успео да затворим:\n%s\n"
 
 msgid "Choose codepage"
-msgstr ""
+msgstr "Изаберите кодну страницу"
 
 msgid "-  < No translation >"
-msgstr "-  < Без претварања >"
+msgstr "—  < Без претварања >"
 
 msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
+msgstr "%e. %b. %Y."
 
 msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
+msgstr "%e. %b. у %H:%M"
 
 #, c-format
 msgid ""
 "Cannot save file %s:\n"
 "%s"
-msgstr ""
+msgstr "Не могу да сачувам датотеку „%s“:\n%s"
 
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
 "Subshell support will be disabled."
-msgstr ""
-"ГНУ-ов поноћни наредник је већ\n"
-"покренут на овом терминалу.\n"
-"Подршка за подљуске ће бити искључена."
+msgstr "Гнуов Поноћни наредник је већ\nпокренут на овом терминалу.\nПодршка за подљуске ће бити искључена."
 
 #, c-format
 msgid "Cannot open named pipe %s\n"
-msgstr "Не могу да отворим именовану цев %s\n"
+msgstr "Не могу да отворим именовану спојку „%s“\n"
 
 msgid "The shell is still active. Quit anyway?"
-msgstr ""
+msgstr "Љуска је још увек радна. Да ипак изађем?"
 
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
-msgstr "Упозорење: Не могу да идем на %s.\n"
+msgstr "Упозорење: Не могу да пређем на „%s“.\n"
 
 msgid "Using the S-Lang library with terminfo database\n"
-msgstr ""
+msgstr "Користим библиотеку „S-Lang“ са базом терминалских података\n"
 
 msgid "Using the ncurses library\n"
-msgstr ""
+msgstr "Користим библиотеку „ncurses“\n"
 
 msgid "Using the ncursesw library\n"
-msgstr ""
+msgstr "Користим библиотеку „ncursesw“\n"
 
 msgid "With builtin Editor\n"
 msgstr "Са уграђеним уређивачем\n"
 
 msgid "With optional subshell support\n"
-msgstr ""
+msgstr "Са изборном подршком подљуске\n"
 
 msgid "With subshell support as default\n"
-msgstr ""
+msgstr "Са подршком подљуске као основном\n"
 
 msgid "With support for background operations\n"
 msgstr "Са подршком за позадинске радње\n"
 
 msgid "With mouse support on xterm and Linux console\n"
-msgstr "Са подршком за миша у Икс терминалу и конзоли\n"
+msgstr "Са подршком за миша у Х терминалу и конзоли\n"
 
 msgid "With mouse support on xterm\n"
-msgstr "Са подршком за миша у Икс терминалу\n"
+msgstr "Са подршком за миша у Х терминалу\n"
 
 msgid "With support for X11 events\n"
-msgstr "Са подршком за догађаје Икса 11\n"
+msgstr "Са подршком за догађаје Х11\n"
 
 msgid "With internationalization support\n"
 msgstr "Са подршком за интернационализацију\n"
 
 msgid "With multiple codepages support\n"
-msgstr "Са подршком за више кодних страна\n"
+msgstr "Са подршком за више кодних страница\n"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
-msgstr ""
+msgstr "Изграђено је Гбиблиотеком %d.%d.%d\n"
 
 #, c-format
 msgid "Virtual File Systems:"
-msgstr ""
+msgstr "Виртуелни систем датотека:"
 
 #, c-format
 msgid "Data types:"
-msgstr ""
+msgstr "Врсте података:"
 
 msgid "Root directory:"
-msgstr ""
+msgstr "Корени директоријум:"
 
 msgid "System data"
-msgstr ""
+msgstr "Системски подаци"
 
 msgid "Config directory:"
-msgstr ""
+msgstr "Директоријум подешавања:"
 
 msgid "Data directory:"
-msgstr ""
+msgstr "Директоријум података:"
 
 msgid "File extension handlers:"
-msgstr ""
+msgstr "Руковаоци проширењем датотека:"
 
 msgid "VFS plugins and scripts:"
-msgstr ""
+msgstr "Прикључци и скрипте ВСД-а:"
 
 msgid "User data"
-msgstr ""
+msgstr "Кориснички подаци"
 
 msgid "Cache directory:"
-msgstr ""
+msgstr "Директоријум оставе:"
 
 #, c-format
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"Не могу да отворим архиву врсте `cpio'\n"
-"%s"
+msgstr "Не могу да отворим „cpio“ архиву\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"Прерани завршетак архиве врсте `cpio'\n"
-"%s"
+msgstr "Прерани завршетак „cpio“ архиве\n%s"
 
 #, c-format
 msgid ""
@@ -3703,50 +3671,40 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"Недоследне тврде везе\n"
-"%s\n"
-"у архиви врсте `cpio'\n"
-"%s"
+msgstr "Недоследне чврсте везе\n%s\nу „cpio“ архиви\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
-msgstr "%s садржи двоструке ставке! Заобилазим!"
+msgstr "„%s“ садржи двоструке ставке! Заобилазим!"
 
 #, c-format
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr ""
-"Покварено заглавље архиве врсте `cpio' у\n"
-"%s"
+msgstr "Оштећено заглавље „cpio“ архиве у\n%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"Неочекивани завршетак датотеке\n"
-"%s"
+msgstr "Неочекивани крај датотеке\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"Не могу да отворим архиву врсте `%s'\n"
-"%s"
+msgstr "Не могу да отворим „%s“ архиву\n%s"
 
 msgid "Inconsistent extfs archive"
-msgstr "Недоследна архива extfs"
+msgstr "Недоследна екстсд архива"
 
 #, c-format
 msgid "Warning: cannot open %s directory\n"
-msgstr ""
+msgstr "Упозорење: не могу да отворим директоријум „%s“\n"
 
 #, c-format
 msgid "fish: Disconnecting from %s"
-msgstr "fish: Прекидам повезивање са %s"
+msgstr "fish: Прекидам везу са „%s“"
 
 msgid "fish: Waiting for initial line..."
 msgstr "fish: Чекам почетни ред..."
@@ -3756,7 +3714,7 @@ msgstr "Извините, али за сад не можемо да се пов�
 
 #, c-format
 msgid "fish: Password is required for %s"
-msgstr ""
+msgstr "fish: Потребна је лозинка за „%s“"
 
 msgid "fish: Sending password..."
 msgstr "fish: Шаљем лозинку..."
@@ -3765,14 +3723,14 @@ msgid "fish: Sending initial line..."
 msgstr "fish: Шаљем почетни ред..."
 
 msgid "fish: Handshaking version..."
-msgstr "fish: Преговарам о верзији..."
+msgstr "fish: Преговарам о издању..."
 
 msgid "fish: Getting host info..."
-msgstr ""
+msgstr "fish: Добављам податке о домаћину..."
 
 #, c-format
 msgid "fish: Reading directory %s..."
-msgstr "fish: Учитавам директоријум %s..."
+msgstr "fish: Читам директоријум „%s“..."
 
 #, c-format
 msgid "%s: done."
@@ -3784,13 +3742,13 @@ msgstr "%s: неуспех"
 
 #, c-format
 msgid "fish: store %s: sending command..."
-msgstr "fish: складиштење %s: шаљем наредбу..."
+msgstr "fish: складиште „%s“: шаљем наредбу..."
 
 msgid "fish: Local read failed, sending zeros"
-msgstr "fish: Локално читање није успело, шаљем нуле"
+msgstr "fish: Месно читање није успело, шаљем нуле"
 
 msgid "fish: storing file"
-msgstr ""
+msgstr "fish: смештам датотеку"
 
 msgid "Aborting transfer..."
 msgstr "Прекидам пренос..."
@@ -3803,11 +3761,11 @@ msgstr "Прекинути пренос би био успешан."
 
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: Прекидам повезивање са %s"
+msgstr "ftpfs: Прекидам везу са „%s“"
 
 #, c-format
 msgid "FTP: Password required for %s"
-msgstr ""
+msgstr "FTP: Потребна је лозинка за „%s“"
 
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: шаљем корисничко име"
@@ -3817,7 +3775,7 @@ msgstr "ftpfs: шаљем лозинку"
 
 #, c-format
 msgid "FTP: Account required for user %s"
-msgstr "FTP: Неопходан је налог за корисника %s"
+msgstr "FTP: Потребан је налог за корисника %s"
 
 msgid "Account:"
 msgstr "Налог:"
@@ -3837,11 +3795,11 @@ msgstr "ftpfs: Неисправни назив домаћина."
 
 #, c-format
 msgid "ftpfs: %s"
-msgstr ""
+msgstr "ftpfs: %s"
 
 #, c-format
 msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: повезујем се са %s"
+msgstr "ftpfs: повезујем се са „%s“"
 
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: повезивање је прекинуо корисник"
@@ -3852,17 +3810,17 @@ msgstr "ftpfs: повезивање са сервером није успело:
 
 #, c-format
 msgid "Waiting to retry... %d (Control-G to cancel)"
-msgstr ""
+msgstr "Чекам да бих поново покушао... %d (Ктрл-Г да откажете)"
 
 msgid "ftpfs: invalid address family"
-msgstr ""
+msgstr "ftpfs: неисправна породица адресе"
 
 #, c-format
 msgid "ftpfs: could not create socket: %s"
-msgstr ""
+msgstr "ftpfs: не могу да направим прикључницу: %s"
 
 msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: нисам могао да подесим пасивни режим"
+msgstr "ftpfs: не могу да подесим пасивни режим"
 
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: прекидам пренос."
@@ -3875,329 +3833,320 @@ msgid "ftpfs: abort failed"
 msgstr "ftpfs: прекидање није успело"
 
 msgid "ftpfs: CWD failed."
-msgstr "ftpfs: наредба `CWD' није успела."
+msgstr "ftpfs: наредба „CWD“ није успела."
 
 msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: нисам могао да разрешим симвезу"
+msgstr "ftpfs: не могу да решим симболичку везу"
 
 msgid "Resolving symlink..."
-msgstr "Разрешавам симвезе..."
+msgstr "Решавам симболичку везу..."
 
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: Учитавам директоријум FTP-а %s... %s%s"
+msgstr "ftpfs: Читам ФТП директоријум „%s“... %s%s"
 
 msgid "(strict rfc959)"
-msgstr "(строго према rfc959)"
+msgstr "(изричито рфц959)"
 
 msgid "(chdir first)"
-msgstr "(прво постави дир.)"
+msgstr "(прво промени директоријум)"
 
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: нисам успео; немам решења"
 
 msgid "ftpfs: storing file"
-msgstr ""
+msgstr "ftpfs: смештам датотеку"
 
 msgid ""
 "~/.netrc file has incorrect mode\n"
 "Remove password or correct mode"
-msgstr ""
+msgstr "Датотека „~/.netrc“ има неисправан режим\nУклоните лозинку или исправите режим"
 
 #, c-format
 msgid "%s: Warning: file %s not found\n"
-msgstr ""
+msgstr "%s: Упозорење: нисам нашао датотеку „%s“\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"Упозорење: Неисправан ред у %s:\n"
-"%s\n"
+msgstr "Упозорење: Неисправан ред у „%s“:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"Упозорење: Неисправан прекидач %c у %s:\n"
-"%s\n"
+msgstr "Упозорење: Неисправна заставица „%c“ у „%s“:\n%s\n"
 
 #, c-format
 msgid "sftp: an error occurred while reading %s: %s"
-msgstr ""
+msgstr "sftp: дошло је до грешке приликом читања „%s“: %s"
 
 msgid "sftp: Unable to get current user name."
-msgstr ""
+msgstr "sftp: Не могу да добавим име текућег корисника."
 
 msgid "sftp: Invalid host name."
-msgstr ""
+msgstr "sftp: Неисправни назив домаћина."
 
 #, c-format
 msgid "sftp: %s"
-msgstr ""
+msgstr "sftp: %s"
 
 #, c-format
 msgid "sftp: making connection to %s"
-msgstr ""
+msgstr "sftp: повезујем се са „%s“"
 
 msgid "sftp: connection interrupted by user"
-msgstr ""
+msgstr "sftp: повезивање је прекинуо корисник"
 
 #, c-format
 msgid "sftp: connection to server failed: %s"
-msgstr ""
+msgstr "sftp: повезивање са сервером није успело: %s"
 
 #, c-format
 msgid "sftp: Enter passphrase for %s "
-msgstr ""
+msgstr "sftp: Унесите пропусну реч за „%s“ "
 
 msgid "sftp: Passphrase is empty."
-msgstr ""
+msgstr "sftp: Пропусна реч је празна."
 
 #, c-format
 msgid "sftp: Enter password for %s "
-msgstr ""
+msgstr "sftp: Унесите лозинку за „%s“ "
 
 msgid "sftp: Password is empty."
-msgstr ""
+msgstr "sftp: Лозинка је празна."
 
 #, c-format
 msgid "sftp: Failure establishing SSH session: (%d)"
-msgstr ""
+msgstr "sftp: Неуспех успостављања сесије безбедне шкољке: (%d)"
 
 msgid "sftp: No file handler data present for reading file"
-msgstr ""
+msgstr "sftp: Нема података руковаоца датотеком за читање датотеке"
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
-msgstr ""
+msgstr "sftp: (Ктрл-Г прекида) Исписујем... %s"
 
 msgid "sftp: Listing done."
-msgstr ""
+msgstr "sftp: Исписивање је готово."
 
 #, c-format
 msgid "reconnect to %s failed"
-msgstr ""
+msgstr "поновно повезивање на „%s“ није успело"
 
 msgid "Authentication failed"
-msgstr ""
+msgstr "Потврђивање идентитета није успело"
 
 #, c-format
 msgid "Error %s creating directory %s"
-msgstr ""
+msgstr "Грешка „%s“ прављења директоријума „%s“"
 
 #, c-format
 msgid "Error %s removing directory %s"
-msgstr ""
+msgstr "Грешка „%s“ уклањања директоријума „%s“"
 
 #, c-format
 msgid "%s opening remote file %s"
-msgstr ""
+msgstr "„%s“ отвара удаљену датотеку „%s“"
 
 #, c-format
 msgid "%s removing remote file %s"
-msgstr ""
+msgstr "„%s“ уклања удаљену датотеку „%s“"
 
 #, c-format
 msgid "%s renaming files\n"
-msgstr ""
+msgstr "„%s“ преименује датотеке\n"
 
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"Не могу да отворим архиву врсте `tar'\n"
-"%s"
+msgstr "Не могу да отворим тар архиву\n%s"
 
 msgid "Inconsistent tar archive"
-msgstr "Недоследна архива врсте `tar'"
+msgstr "Недоследна тар архива"
 
 msgid "Unexpected EOF on archive file"
-msgstr "Неочекивани завршетак датотеке у архиви"
+msgstr "Неочекивани крај датотеке у архиви"
 
 #, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive."
-msgstr ""
+msgstr "%s\nне изгледа да је тар архива."
 
 msgid "undelfs: error"
-msgstr ""
+msgstr "undelfs: грешка"
 
 msgid "not enough memory"
-msgstr ""
+msgstr "нема довољно меморије"
 
 msgid "while allocating block buffer"
-msgstr ""
+msgstr "приликом додељивања међумеморије блока"
 
 #, c-format
 msgid "open_inode_scan: %d"
-msgstr ""
+msgstr "open_inode_scan: %d"
 
 #, c-format
 msgid "while starting inode scan %d"
-msgstr ""
+msgstr "за време покретања прегледа и-чвора „%d“"
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: учитавам податке о обрисаним ичворовима: %d ичворова"
+msgstr "undelfs: учитавам %d и-чвора података обрисаних датотека"
 
 #, c-format
 msgid "while calling ext2_block_iterate %d"
-msgstr ""
+msgstr "за време позивања „ext2_block_iterate“ %d"
 
 msgid "no more memory while reallocating array"
-msgstr ""
+msgstr "нема више меморије приликом прерасподеле низа"
 
 #, c-format
 msgid "while doing inode scan %d"
-msgstr ""
+msgstr "за време обављања прегледа и-чвора „%d“"
 
 #, c-format
 msgid "Cannot open file %s"
-msgstr ""
+msgstr "Не могу да отворим датотеку „%s“"
 
 msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: читам мапу битова за ичворове..."
+msgstr "undelfs: читам битмапу и-чвора..."
 
 #, c-format
 msgid ""
 "Cannot load inode bitmap from:\n"
 "%s"
-msgstr ""
+msgstr "Не могу да учитам битмапу и-чвора из:\n%s"
 
 msgid "undelfs: reading block bitmap..."
-msgstr "undelfs: учитавам мапу битова за ичворове..."
+msgstr "undelfs: учитавам битмапу и-чвора..."
 
 #, c-format
 msgid ""
 "Cannot load block bitmap from:\n"
 "%s"
-msgstr ""
+msgstr "Не могу да учитам битмапу блока из:\n%s"
 
 msgid "vfs_info is not fs!"
-msgstr ""
+msgstr "„vfs_info“ није сд!"
 
 msgid "You have to chdir to extract files first"
-msgstr ""
+msgstr "Промените директоријум да бисте распаковали датотеке"
 
 msgid "while iterating over blocks"
-msgstr ""
+msgstr "за време опетовања над блоковима"
 
 #, c-format
 msgid "Cannot open file \"%s\""
-msgstr ""
+msgstr "Не могу да отворим датотеку „%s“"
 
 msgid "Ext2lib error"
-msgstr ""
+msgstr "Грешка Екст2библ-а"
 
 msgid "Invalid value"
-msgstr ""
+msgstr "Неисправна вредност"
 
 msgid "File was modified. Save with exit?"
-msgstr ""
+msgstr "Датотека је измењена. Да сачувам при изласку?"
 
 msgid "&Cancel quit"
-msgstr ""
+msgstr "&Откажи излазак"
 
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file?"
-msgstr ""
+msgstr "Поноћни наредник је угашен.\nДа сачувам измењену датотеку?"
 
 msgid "&Line number"
-msgstr ""
+msgstr "&Број реда"
 
 msgid "Pe&rcents"
-msgstr ""
+msgstr "&Проценте"
 
 msgid "&Decimal offset"
-msgstr ""
+msgstr "&Децимални померај"
 
 msgid "He&xadecimal offset"
-msgstr ""
+msgstr "&Хексадецимални померај"
 
 msgid "Goto"
-msgstr "ИдиНа"
+msgstr "Иди на"
 
 msgid "ButtonBar|Ascii"
-msgstr ""
+msgstr "Аскри"
 
 msgid "ButtonBar|HxSrch"
-msgstr ""
+msgstr "Хекс претрага"
 
 msgid "ButtonBar|UnWrap"
-msgstr ""
+msgstr "Поништи прелом"
 
 msgid "ButtonBar|Wrap"
-msgstr ""
+msgstr "Преломи"
 
 msgid "ButtonBar|Hex"
-msgstr ""
+msgstr "Хекс"
 
 msgid "ButtonBar|Goto"
-msgstr ""
+msgstr "Иди на"
 
 msgid "ButtonBar|Raw"
-msgstr ""
+msgstr "Сирово"
 
 msgid "ButtonBar|Parse"
-msgstr ""
+msgstr "Обради"
 
 msgid "ButtonBar|Unform"
-msgstr ""
+msgstr "Разобликуј"
 
 msgid "ButtonBar|Format"
-msgstr ""
+msgstr "Обликуј"
 
 #, c-format
 msgid ""
 "Failed to read data from child stdout:\n"
 "%s"
-msgstr ""
+msgstr "Нисам успео да прочитам податке из стандардног излаза порода:\n%s"
 
 #, c-format
 msgid ""
 "Error while closing the file:\n"
 "%s\n"
 "Data may have been written or not"
-msgstr ""
+msgstr "Грешка приликом затварања датотеке:\n%s\nПодаци могу бити уписани или не"
 
 #, c-format
 msgid ""
 "Cannot save file:\n"
 "%s"
-msgstr ""
+msgstr "Не могу да сачувам датотеку:\n%s"
 
 msgid "View: "
-msgstr ""
+msgstr "Преглед: "
 
 #, c-format
 msgid ""
 "Cannot open \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не могу да отворим „%s“\n%s"
 
 msgid "Cannot view: not a regular file"
-msgstr ""
+msgstr "Не могу да прикажем: није обична датотека"
 
 #, c-format
 msgid ""
 "Cannot open \"%s\" in parse mode\n"
 "%s"
-msgstr ""
+msgstr "Не могу да отворим „%s“ у режиму обраде\n%s"
 
 msgid "Search done"
-msgstr ""
+msgstr "Претрага је обављена"
 
 msgid "Continue from beginning?"
-msgstr ""
+msgstr "Да наставим са почетка?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr ""
-
-#~ msgid "Empty output from child filter"
-#~ msgstr "Дете-филтар није исписало ништа"
+msgstr "Не могу да довучем месни примерак „/ftp://some.host/editme.txt“"
