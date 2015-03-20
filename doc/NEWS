@@ -53,7 +53,6 @@ Version 4.8.14
   * mcview hex edit: CJK overflow (#3261)
   * mcedit: status line doesn't show full path to file (#3285)
   * Freeze when copying from one FTP location to another (#358)
-  * Fix vertical line color if a file is marked and selected (#3417)
 
 
 Version 4.8.13
