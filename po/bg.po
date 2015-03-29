@@ -2876,17 +2876,17 @@ msgstr "Няма информация за пространството"
 
 #, c-format
 msgid "Free space: %s/%s (%d%%)"
-msgstr "Свободно пространство %s/%s (%d%%)"
+msgstr "Свободно пространство: %s/%s (%d%%)"
 
 #, c-format
-msgid "Type:      %s"
-msgstr "Вид: %s"
+msgid "Type:       %s"
+msgstr "Вид:          %s"
 
 msgid "non-local vfs"
 msgstr "не-локална vfs"
 
 #, c-format
-msgid "Device:    %s"
+msgid "Device:     %s"
 msgstr "Устройство:   %s"
 
 #, c-format
@@ -2894,24 +2894,24 @@ msgid "Filesystem: %s"
 msgstr "Файлова с-ма: %s"
 
 #, c-format
-msgid "Accessed:  %s"
+msgid "Accessed:   %s"
 msgstr "Отварян:      %s"
 
 #, c-format
-msgid "Modified:  %s"
+msgid "Modified:   %s"
 msgstr "Променян:     %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
-msgid "Changed:   %s"
-msgstr "Променено: %s"
+msgid "Changed:    %s"
+msgstr "Променено:    %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
 msgstr ""
 
 #, c-format
-msgid "Size:      %s"
+msgid "Size:       %s"
 msgstr "Размер:       %s"
 
 #, c-format
@@ -2921,19 +2921,19 @@ msgstr[0] ""
 msgstr[1] ""
 
 #, c-format
-msgid "Owner:     %s/%s"
+msgid "Owner:      %s/%s"
 msgstr "Собственик:   %s/%s"
 
 #, c-format
-msgid "Links:     %d"
+msgid "Links:      %d"
 msgstr "Връзки:       %d"
 
 #, c-format
-msgid "Mode:      %s (%04o)"
+msgid "Mode:       %s (%04o)"
 msgstr "Режим:        %s (%04o)"
 
 #, c-format
-msgid "Location:  %Xh:%Xh"
+msgid "Location:   %Xh:%Xh"
 msgstr "Разположен:   %Xh:%Xh"
 
 msgid "&Equal split"

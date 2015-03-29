@@ -2871,7 +2871,7 @@ msgid "No node information"
 msgstr "Няма зьвестак пра вузел"
 
 msgid "Free nodes:"
-msgstr "Вузлы:"
+msgstr "Вузлы:      "
 
 msgid "No space information"
 msgstr "Няма зьвестак пра прастору"
@@ -2881,14 +2881,14 @@ msgid "Free space: %s/%s (%d%%)"
 msgstr "Прастора:    %s/%s (%d%%)"
 
 #, c-format
-msgid "Type:      %s"
+msgid "Type:       %s"
 msgstr "Від:         %s"
 
 msgid "non-local vfs"
 msgstr "нелякальная УФС"
 
 #, c-format
-msgid "Device:    %s"
+msgid "Device:     %s"
 msgstr "Прылада:     %s"
 
 #, c-format
@@ -2896,16 +2896,16 @@ msgid "Filesystem: %s"
 msgstr "Файл. сыст.: %s"
 
 #, c-format
-msgid "Accessed:  %s"
+msgid "Accessed:   %s"
 msgstr "Зьвярталіся: %s"
 
 #, c-format
-msgid "Modified:  %s"
+msgid "Modified:   %s"
 msgstr "Рэдаґавалі:  %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
-msgid "Changed:   %s"
+msgid "Changed:    %s"
 msgstr "Зьмянілі:    %s"
 
 #, c-format
@@ -2913,7 +2913,7 @@ msgid "Dev. type: major %lu, minor %lu"
 msgstr "Від прылады: мажор %lu, мінор %lu"
 
 #, c-format
-msgid "Size:      %s"
+msgid "Size:       %s"
 msgstr "Памер:       %s"
 
 #, c-format
@@ -2925,19 +2925,19 @@ msgstr[2] " (%ld блёкаў)"
 msgstr[3] " (%ld блёкаў)"
 
 #, c-format
-msgid "Owner:     %s/%s"
+msgid "Owner:      %s/%s"
 msgstr "Уладальнік:  %s/%s"
 
 #, c-format
-msgid "Links:     %d"
+msgid "Links:      %d"
 msgstr "Спасылкі:    %d"
 
 #, c-format
-msgid "Mode:      %s (%04o)"
+msgid "Mode:       %s (%04o)"
 msgstr "Дазволы:     %s (%04o)"
 
 #, c-format
-msgid "Location:  %Xh:%Xh"
+msgid "Location:   %Xh:%Xh"
 msgstr "Месца:       %Xh:%Xh"
 
 msgid "&Equal split"

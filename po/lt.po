@@ -2880,31 +2880,31 @@ msgid "Free space: %s/%s (%d%%)"
 msgstr ""
 
 #, c-format
-msgid "Type:      %s"
+msgid "Type:       %s"
 msgstr ""
 
 msgid "non-local vfs"
 msgstr "nevietinė VFS"
 
 #, c-format
-msgid "Device:    %s"
-msgstr "Įtaisas:   %s"
+msgid "Device:     %s"
+msgstr "Įtaisas:    %s"
 
 #, c-format
 msgid "Filesystem: %s"
 msgstr "Failų sistema: %s"
 
 #, c-format
-msgid "Accessed:  %s"
-msgstr "Pasiekta:  %s"
+msgid "Accessed:   %s"
+msgstr "Pasiekta:   %s"
 
 #, c-format
-msgid "Modified:  %s"
-msgstr "Keista:    %s"
+msgid "Modified:   %s"
+msgstr "Keista:     %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
-msgid "Changed:   %s"
+msgid "Changed:    %s"
 msgstr ""
 
 #, c-format
@@ -2912,8 +2912,8 @@ msgid "Dev. type: major %lu, minor %lu"
 msgstr "Įreng. tipas: major %lu, minor %lu"
 
 #, c-format
-msgid "Size:      %s"
-msgstr "Dydis:     %s"
+msgid "Size:       %s"
+msgstr "Dydis:      %s"
 
 #, c-format
 msgid " (%ld block)"
@@ -2923,19 +2923,19 @@ msgstr[1] " (%ld blokai)"
 msgstr[2] " (%ld blokų)"
 
 #, c-format
-msgid "Owner:     %s/%s"
+msgid "Owner:      %s/%s"
 msgstr "Savininkas: %s/%s"
 
 #, c-format
-msgid "Links:     %d"
+msgid "Links:      %d"
 msgstr "Nuorodos:   %d"
 
 #, c-format
-msgid "Mode:      %s (%04o)"
+msgid "Mode:       %s (%04o)"
 msgstr "Režimas:    %s (%04o)"
 
 #, c-format
-msgid "Location:  %Xh:%Xh"
+msgid "Location:   %Xh:%Xh"
 msgstr "Vieta:      %Xh:%Xh"
 
 msgid "&Equal split"

@@ -175,14 +175,14 @@ info_show_info (WInfo * info)
 
     case 14:
         widget_move (w, 14, 3);
-        tty_printf (_("Type:      %s"),
+        tty_printf (_("Type:       %s"),
                     myfs_stats.typename ? myfs_stats.typename : _("non-local vfs"));
         if (myfs_stats.type != 0xffff && myfs_stats.type != -1)
             tty_printf (" (%Xh)", myfs_stats.type);
 
     case 13:
         widget_move (w, 13, 3);
-        str_printf (buff, _("Device:    %s"), str_trunc (myfs_stats.device, w->cols - i18n_adjust));
+        str_printf (buff, _("Device:     %s"), str_trunc (myfs_stats.device, w->cols - i18n_adjust));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
     case 12:
@@ -193,12 +193,12 @@ info_show_info (WInfo * info)
         g_string_set_size (buff, 0);
     case 11:
         widget_move (w, 11, 3);
-        str_printf (buff, _("Accessed:  %s"), file_date (st.st_atime));
+        str_printf (buff, _("Accessed:   %s"), file_date (st.st_atime));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
     case 10:
         widget_move (w, 10, 3);
-        str_printf (buff, _("Modified:  %s"), file_date (st.st_mtime));
+        str_printf (buff, _("Modified:   %s"), file_date (st.st_mtime));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
     case 9:
@@ -206,7 +206,7 @@ info_show_info (WInfo * info)
         /* The field st_ctime is changed by writing or by setting inode
            information (i.e., owner, group, link count, mode, etc.).  */
         /* TRANSLATORS: Time of last status change as in stat(2) man. */
-        str_printf (buff, _("Changed:   %s"), file_date (st.st_ctime));
+        str_printf (buff, _("Changed:    %s"), file_date (st.st_ctime));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
 
@@ -221,7 +221,7 @@ info_show_info (WInfo * info)
         {
             char buffer[10];
             size_trunc_len (buffer, 9, st.st_size, 0, panels_options.kilobyte_si);
-            tty_printf (_("Size:      %s"), buffer);
+            tty_printf (_("Size:       %s"), buffer);
 #ifdef HAVE_STRUCT_STAT_ST_BLOCKS
             tty_printf (ngettext (" (%ld block)", " (%ld blocks)",
                                   (unsigned long) st.st_blocks), (unsigned long) st.st_blocks);
@@ -230,20 +230,20 @@ info_show_info (WInfo * info)
 
     case 7:
         widget_move (w, 7, 3);
-        tty_printf (_("Owner:     %s/%s"), get_owner (st.st_uid), get_group (st.st_gid));
+        tty_printf (_("Owner:      %s/%s"), get_owner (st.st_uid), get_group (st.st_gid));
 
     case 6:
         widget_move (w, 6, 3);
-        tty_printf (_("Links:     %d"), (int) st.st_nlink);
+        tty_printf (_("Links:      %d"), (int) st.st_nlink);
 
     case 5:
         widget_move (w, 5, 3);
-        tty_printf (_("Mode:      %s (%04o)"),
+        tty_printf (_("Mode:       %s (%04o)"),
                     string_perm (st.st_mode), (unsigned) st.st_mode & 07777);
 
     case 4:
         widget_move (w, 4, 3);
-        tty_printf (_("Location:  %Xh:%Xh"), (int) st.st_dev, (int) st.st_ino);
+        tty_printf (_("Location:   %Xh:%Xh"), (int) st.st_dev, (int) st.st_ino);
 
     case 3:
         {

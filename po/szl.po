@@ -2878,14 +2878,14 @@ msgid "Free space: %s/%s (%d%%)"
 msgstr ""
 
 #, c-format
-msgid "Type:      %s"
+msgid "Type:       %s"
 msgstr ""
 
 msgid "non-local vfs"
 msgstr ""
 
 #, c-format
-msgid "Device:    %s"
+msgid "Device:     %s"
 msgstr ""
 
 #, c-format
@@ -2893,16 +2893,16 @@ msgid "Filesystem: %s"
 msgstr ""
 
 #, c-format
-msgid "Accessed:  %s"
+msgid "Accessed:   %s"
 msgstr ""
 
 #, c-format
-msgid "Modified:  %s"
+msgid "Modified:   %s"
 msgstr ""
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
-msgid "Changed:   %s"
+msgid "Changed:    %s"
 msgstr ""
 
 #, c-format
@@ -2910,7 +2910,7 @@ msgid "Dev. type: major %lu, minor %lu"
 msgstr ""
 
 #, c-format
-msgid "Size:      %s"
+msgid "Size:       %s"
 msgstr ""
 
 #, c-format
@@ -2921,19 +2921,19 @@ msgstr[1] ""
 msgstr[2] ""
 
 #, c-format
-msgid "Owner:     %s/%s"
+msgid "Owner:      %s/%s"
 msgstr ""
 
 #, c-format
-msgid "Links:     %d"
+msgid "Links:      %d"
 msgstr ""
 
 #, c-format
-msgid "Mode:      %s (%04o)"
+msgid "Mode:       %s (%04o)"
 msgstr ""
 
 #, c-format
-msgid "Location:  %Xh:%Xh"
+msgid "Location:   %Xh:%Xh"
 msgstr ""
 
 msgid "&Equal split"

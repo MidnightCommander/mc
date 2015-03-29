@@ -2880,14 +2880,14 @@ msgid "Free space: %s/%s (%d%%)"
 msgstr ""
 
 #, c-format
-msgid "Type:      %s"
-msgstr "Typ:       %s"
+msgid "Type:       %s"
+msgstr "Typ:        %s"
 
 msgid "non-local vfs"
 msgstr "vzdálený vfs"
 
 #, c-format
-msgid "Device:    %s"
+msgid "Device:     %s"
 msgstr "Zařízení:   %s"
 
 #, c-format
@@ -2895,16 +2895,16 @@ msgid "Filesystem: %s"
 msgstr "Systém souborů: %s"
 
 #, c-format
-msgid "Accessed:  %s"
-msgstr "Přístup:   %s"
+msgid "Accessed:   %s"
+msgstr "Přístup:    %s"
 
 #, c-format
-msgid "Modified:  %s"
-msgstr "Změněn:   %s"
+msgid "Modified:   %s"
+msgstr "Změněn:     %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
-msgid "Changed:   %s"
+msgid "Changed:    %s"
 msgstr "I-uzel změněn: %s"
 
 #, c-format
@@ -2912,8 +2912,8 @@ msgid "Dev. type: major %lu, minor %lu"
 msgstr "Typ zařízení: větší %lu, menší %lu"
 
 #, c-format
-msgid "Size:      %s"
-msgstr "Velikost:  %s"
+msgid "Size:       %s"
+msgstr "Velikost:   %s"
 
 #, c-format
 msgid " (%ld block)"
@@ -2923,20 +2923,20 @@ msgstr[1] " (%ld bloky)"
 msgstr[2] " (%ld bloků)"
 
 #, c-format
-msgid "Owner:     %s/%s"
-msgstr "Vlastník:  %s/%s"
+msgid "Owner:      %s/%s"
+msgstr "Vlastník:   %s/%s"
 
 #, c-format
-msgid "Links:     %d"
-msgstr "Odkazů:    %d"
+msgid "Links:      %d"
+msgstr "Odkazů:     %d"
 
 #, c-format
-msgid "Mode:      %s (%04o)"
-msgstr "Práva:     %s (%04o)"
+msgid "Mode:       %s (%04o)"
+msgstr "Práva:      %s (%04o)"
 
 #, c-format
-msgid "Location:  %Xh:%Xh"
-msgstr "Poloha:    %Xh:%Xh"
+msgid "Location:   %Xh:%Xh"
+msgstr "Poloha:     %Xh:%Xh"
 
 msgid "&Equal split"
 msgstr "Rozdělení na &poloviny"

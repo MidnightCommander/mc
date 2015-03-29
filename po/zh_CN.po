@@ -2872,7 +2872,7 @@ msgid "No node information"
 msgstr "没有节点信息"
 
 msgid "Free nodes:"
-msgstr "空闲结点: "
+msgstr "空闲结点:"
 
 msgid "No space information"
 msgstr "没有空间信息"
@@ -2882,31 +2882,31 @@ msgid "Free space: %s/%s (%d%%)"
 msgstr "空余空间: %s/%s (%d%%)"
 
 #, c-format
-msgid "Type:      %s"
-msgstr "类型: %s"
+msgid "Type:       %s"
+msgstr "类型:     %s"
 
 msgid "non-local vfs"
 msgstr "非本地 vfs"
 
 #, c-format
-msgid "Device:    %s"
-msgstr "设备: %s"
+msgid "Device:     %s"
+msgstr "设备:     %s"
 
 #, c-format
 msgid "Filesystem: %s"
 msgstr "文件系统: %s"
 
 #, c-format
-msgid "Accessed:  %s"
+msgid "Accessed:   %s"
 msgstr "最后访问时间: %s"
 
 #, c-format
-msgid "Modified:  %s"
+msgid "Modified:   %s"
 msgstr "最后修改时间: %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
-msgid "Changed:   %s"
+msgid "Changed:    %s"
 msgstr "创建时间: %s"
 
 #, c-format
@@ -2914,7 +2914,7 @@ msgid "Dev. type: major %lu, minor %lu"
 msgstr "设备类型: 主要%lu，次要%lu"
 
 #, c-format
-msgid "Size:      %s"
+msgid "Size:       %s"
 msgstr "文件大小: %s"
 
 #, c-format
@@ -2923,20 +2923,20 @@ msgid_plural " (%ld blocks)"
 msgstr[0] " (%ld 块)"
 
 #, c-format
-msgid "Owner:     %s/%s"
+msgid "Owner:      %s/%s"
 msgstr "所有者:   %s/%s"
 
 #, c-format
-msgid "Links:     %d"
-msgstr "链接:   %d"
+msgid "Links:      %d"
+msgstr "链接:     %d"
 
 #, c-format
-msgid "Mode:      %s (%04o)"
-msgstr "模式:   %s (%04o)"
+msgid "Mode:       %s (%04o)"
+msgstr "模式:     %s (%04o)"
 
 #, c-format
-msgid "Location:  %Xh:%Xh"
-msgstr "位置:   %Xh:%Xh"
+msgid "Location:   %Xh:%Xh"
+msgstr "位置:     %Xh:%Xh"
 
 msgid "&Equal split"
 msgstr "平分(&E)"

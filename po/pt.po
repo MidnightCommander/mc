@@ -2871,7 +2871,7 @@ msgid "No node information"
 msgstr "Nenhuma informação de nó"
 
 msgid "Free nodes:"
-msgstr "Nós livres:"
+msgstr "Nós livres:  "
 
 msgid "No space information"
 msgstr "Nenhuma informação de espaço"
@@ -2881,14 +2881,14 @@ msgid "Free space: %s/%s (%d%%)"
 msgstr "Espaço livre: %s/%s (%d%%)"
 
 #, c-format
-msgid "Type:      %s"
+msgid "Type:       %s"
 msgstr "Tipo:         %s"
 
 msgid "non-local vfs"
 msgstr "vfs não local"
 
 #, c-format
-msgid "Device:    %s"
+msgid "Device:     %s"
 msgstr "Dispositivo:  %s"
 
 #, c-format
@@ -2896,16 +2896,16 @@ msgid "Filesystem: %s"
 msgstr "Sist. Fich.:  %s"
 
 #, c-format
-msgid "Accessed:  %s"
+msgid "Accessed:   %s"
 msgstr "Acedido:      %s"
 
 #, c-format
-msgid "Modified:  %s"
+msgid "Modified:   %s"
 msgstr "Modificado:   %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
-msgid "Changed:   %s"
+msgid "Changed:    %s"
 msgstr "Alterado:     %s"
 
 #, c-format
@@ -2913,7 +2913,7 @@ msgid "Dev. type: major %lu, minor %lu"
 msgstr "Dev. tipo: maior %lu, menor %lu"
 
 #, c-format
-msgid "Size:      %s"
+msgid "Size:       %s"
 msgstr "Tamanho:      %s"
 
 #, c-format
@@ -2923,19 +2923,19 @@ msgstr[0] " (%ld bloco)"
 msgstr[1] " (%ld blocos)"
 
 #, c-format
-msgid "Owner:     %s/%s"
+msgid "Owner:      %s/%s"
 msgstr "Proprietário: %s/%s"
 
 #, c-format
-msgid "Links:     %d"
+msgid "Links:      %d"
 msgstr "Ligações:     %d"
 
 #, c-format
-msgid "Mode:      %s (%04o)"
+msgid "Mode:       %s (%04o)"
 msgstr "Modo:         %s (%04o)"
 
 #, c-format
-msgid "Location:  %Xh:%Xh"
+msgid "Location:   %Xh:%Xh"
 msgstr "Localização:  %Xh:%Xh"
 
 msgid "&Equal split"

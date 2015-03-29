@@ -2880,14 +2880,14 @@ msgid "Free space: %s/%s (%d%%)"
 msgstr "Ελεύθερος χώρος: %s/%s (%d%%)"
 
 #, c-format
-msgid "Type:      %s"
+msgid "Type:       %s"
 msgstr "Τύπος:      %s"
 
 msgid "non-local vfs"
 msgstr "μη τοπικό vfs"
 
 #, c-format
-msgid "Device:    %s"
+msgid "Device:     %s"
 msgstr "Συσκευή:    %s"
 
 #, c-format
@@ -2895,25 +2895,25 @@ msgid "Filesystem: %s"
 msgstr "Σύστημα αρχείων: %s"
 
 #, c-format
-msgid "Accessed:  %s"
-msgstr "Προσπελάστηκε:  %s"
+msgid "Accessed:   %s"
+msgstr "Προσπελάστηκε: %s"
 
 #, c-format
-msgid "Modified:  %s"
-msgstr "Τροποποιήθηκε:  %s"
+msgid "Modified:   %s"
+msgstr "Τροποποιήθηκε: %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
-msgid "Changed:   %s"
-msgstr "Άλλαξε:   %s"
+msgid "Changed:    %s"
+msgstr "Άλλαξε:     %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
 msgstr ""
 
 #, c-format
-msgid "Size:      %s"
-msgstr "Μέγεθος:      %s"
+msgid "Size:       %s"
+msgstr "Μέγεθος:    %s"
 
 #, c-format
 msgid " (%ld block)"
@@ -2922,20 +2922,20 @@ msgstr[0] ""
 msgstr[1] ""
 
 #, c-format
-msgid "Owner:     %s/%s"
-msgstr "Ιδιοκτήτης:     %s/%s"
+msgid "Owner:      %s/%s"
+msgstr "Ιδιοκτήτης: %s/%s"
 
 #, c-format
-msgid "Links:     %d"
+msgid "Links:      %d"
 msgstr "Δεσμοί:     %d"
 
 #, c-format
-msgid "Mode:      %s (%04o)"
-msgstr "Λειτουργία:      %s (%04o)"
+msgid "Mode:       %s (%04o)"
+msgstr "Λειτουργία: %s (%04o)"
 
 #, c-format
-msgid "Location:  %Xh:%Xh"
-msgstr "Τοποθεσίαα:  %Xh:%Xh"
+msgid "Location:   %Xh:%Xh"
+msgstr "Τοποθεσίαα: %Xh:%Xh"
 
 msgid "&Equal split"
 msgstr "&Ίσος διαχωρισμός"

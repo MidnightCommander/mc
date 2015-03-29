@@ -2881,31 +2881,31 @@ msgid "Free space: %s/%s (%d%%)"
 msgstr ""
 
 #, c-format
-msgid "Type:      %s"
+msgid "Type:       %s"
 msgstr ""
 
 msgid "non-local vfs"
 msgstr "vfs não local"
 
 #, c-format
-msgid "Device:    %s"
-msgstr "Dispositivo:  %s"
+msgid "Device:     %s"
+msgstr "Dispositivo: %s"
 
 #, c-format
 msgid "Filesystem: %s"
 msgstr "Sistema de arquivos: %s"
 
 #, c-format
-msgid "Accessed:  %s"
-msgstr "Acessado: %s"
+msgid "Accessed:   %s"
+msgstr "Acessado:    %s"
 
 #, c-format
-msgid "Modified:  %s"
-msgstr "Modificado: %s"
+msgid "Modified:   %s"
+msgstr "Modificado:  %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
-msgid "Changed:   %s"
+msgid "Changed:    %s"
 msgstr ""
 
 #, c-format
@@ -2913,7 +2913,7 @@ msgid "Dev. type: major %lu, minor %lu"
 msgstr ""
 
 #, c-format
-msgid "Size:      %s"
+msgid "Size:       %s"
 msgstr ""
 
 #, c-format
@@ -2923,19 +2923,19 @@ msgstr[0] ""
 msgstr[1] ""
 
 #, c-format
-msgid "Owner:     %s/%s"
-msgstr "Dono:    %s/%s"
+msgid "Owner:      %s/%s"
+msgstr "Dono:        %s/%s"
 
 #, c-format
-msgid "Links:     %d"
+msgid "Links:      %d"
 msgstr "Ligações:    %d"
 
 #, c-format
-msgid "Mode:      %s (%04o)"
-msgstr "Modo:     %s (%04o)"
+msgid "Mode:       %s (%04o)"
+msgstr "Modo:        %s (%04o)"
 
 #, c-format
-msgid "Location:  %Xh:%Xh"
+msgid "Location:   %Xh:%Xh"
 msgstr "Localização: %Xh:%Xh"
 
 msgid "&Equal split"

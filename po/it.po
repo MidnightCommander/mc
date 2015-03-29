@@ -4083,7 +4083,7 @@ msgstr "Nessuna info sui nodi"
 
 #: ../src/filemanager/info.c:156
 msgid "Free nodes:"
-msgstr "Nodi liberi:"
+msgstr "Nodi liberi:  "
 
 #: ../src/filemanager/info.c:164
 msgid "No space information"
@@ -4096,8 +4096,8 @@ msgstr "Spazio libero: %s/%s (%d%%)"
 
 #: ../src/filemanager/info.c:178
 #, c-format
-msgid "Type:      %s"
-msgstr "Tipo:      %s"
+msgid "Type:       %s"
+msgstr "Tipo:          %s"
 
 #: ../src/filemanager/info.c:179
 msgid "non-local vfs"
@@ -4105,31 +4105,31 @@ msgstr "vfs non-locale"
 
 #: ../src/filemanager/info.c:185
 #, c-format
-msgid "Device:    %s"
-msgstr "Periferica: %s"
+msgid "Device:     %s"
+msgstr "Periferica:    %s"
 
 #: ../src/filemanager/info.c:190
 #, c-format
 msgid "Filesystem: %s"
-msgstr "Filesystem: %s"
+msgstr "Filesystem:    %s"
 
 #: ../src/filemanager/info.c:196
 #, c-format
-msgid "Accessed:  %s"
-msgstr "Aperto:     %s"
+msgid "Accessed:   %s"
+msgstr "Aperto:        %s"
 
 #: ../src/filemanager/info.c:201
 #, c-format
-msgid "Modified:  %s"
-msgstr "Modificato: %s"
+msgid "Modified:   %s"
+msgstr "Modificato:    %s"
 
 #. The field st_ctime is changed by writing or by setting inode
 #. information (i.e., owner, group, link count, mode, etc.).
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #: ../src/filemanager/info.c:209
 #, c-format
-msgid "Changed:   %s"
-msgstr "Cambiato:  %s"
+msgid "Changed:    %s"
+msgstr "Cambiato:      %s"
 
 #: ../src/filemanager/info.c:217
 #, c-format
@@ -4138,8 +4138,8 @@ msgstr "Tipo dis.: major %lu, minor %lu"
 
 #: ../src/filemanager/info.c:224
 #, c-format
-msgid "Size:      %s"
-msgstr "Dimensione: %s"
+msgid "Size:       %s"
+msgstr "Dimensione:    %s"
 
 #: ../src/filemanager/info.c:226
 #, c-format
@@ -4150,23 +4150,23 @@ msgstr[1] " (%ld blocchi)"
 
 #: ../src/filemanager/info.c:233
 #, c-format
-msgid "Owner:     %s/%s"
-msgstr "Proprietà:  %s/%s"
+msgid "Owner:      %s/%s"
+msgstr "Proprietà:     %s/%s"
 
 #: ../src/filemanager/info.c:237
 #, c-format
-msgid "Links:     %d"
-msgstr "Collegamenti:   %d"
+msgid "Links:      %d"
+msgstr "Collegamenti:  %d"
 
 #: ../src/filemanager/info.c:241
 #, c-format
-msgid "Mode:      %s (%04o)"
-msgstr "Permessi:   %s (%04o)"
+msgid "Mode:       %s (%04o)"
+msgstr "Permessi:      %s (%04o)"
 
 #: ../src/filemanager/info.c:246
 #, c-format
-msgid "Location:  %Xh:%Xh"
-msgstr "Posizione:  %Xh:%Xh"
+msgid "Location:   %Xh:%Xh"
+msgstr "Posizione:     %Xh:%Xh"
 
 #. *INDENT-OFF*
 #: ../src/filemanager/layout.c:170

@@ -3827,7 +3827,7 @@ msgstr ""
 
 #: src/filemanager/info.c:178
 #, c-format
-msgid "Type:      %s"
+msgid "Type:       %s"
 msgstr ""
 
 #: src/filemanager/info.c:179
@@ -3836,7 +3836,7 @@ msgstr ""
 
 #: src/filemanager/info.c:185
 #, c-format
-msgid "Device:    %s"
+msgid "Device:     %s"
 msgstr ""
 
 #: src/filemanager/info.c:190
@@ -3846,18 +3846,18 @@ msgstr ""
 
 #: src/filemanager/info.c:196
 #, c-format
-msgid "Accessed:  %s"
+msgid "Accessed:   %s"
 msgstr ""
 
 #: src/filemanager/info.c:201
 #, c-format
-msgid "Modified:  %s"
+msgid "Modified:   %s"
 msgstr ""
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #: src/filemanager/info.c:209
 #, c-format
-msgid "Changed:   %s"
+msgid "Changed:    %s"
 msgstr ""
 
 #: src/filemanager/info.c:217
@@ -3867,7 +3867,7 @@ msgstr ""
 
 #: src/filemanager/info.c:224
 #, c-format
-msgid "Size:      %s"
+msgid "Size:       %s"
 msgstr ""
 
 #: src/filemanager/info.c:226
@@ -3879,22 +3879,22 @@ msgstr[1] ""
 
 #: src/filemanager/info.c:233
 #, c-format
-msgid "Owner:     %s/%s"
+msgid "Owner:      %s/%s"
 msgstr ""
 
 #: src/filemanager/info.c:237
 #, c-format
-msgid "Links:     %d"
+msgid "Links:      %d"
 msgstr ""
 
 #: src/filemanager/info.c:241
 #, c-format
-msgid "Mode:      %s (%04o)"
+msgid "Mode:       %s (%04o)"
 msgstr ""
 
 #: src/filemanager/info.c:246
 #, c-format
-msgid "Location:  %Xh:%Xh"
+msgid "Location:   %Xh:%Xh"
 msgstr ""
 
 #: src/filemanager/layout.c:170
