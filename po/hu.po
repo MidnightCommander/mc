@@ -2878,17 +2878,17 @@ msgstr "Nincs adat a tárolóhelyről"
 
 #, c-format
 msgid "Free space: %s/%s (%d%%)"
-msgstr "Szabad hely: %s/%s (%d%%)"
+msgstr "Szabad hely:  %s/%s (%d%%)"
 
 #, c-format
-msgid "Type:      %s"
+msgid "Type:       %s"
 msgstr "Fájlr.-típus: %s"
 
 msgid "non-local vfs"
 msgstr "távoli VFS"
 
 #, c-format
-msgid "Device:    %s"
+msgid "Device:     %s"
 msgstr "Eszköz:       %s"
 
 #, c-format
@@ -2896,16 +2896,16 @@ msgid "Filesystem: %s"
 msgstr "Fájlrendszer: %s"
 
 #, c-format
-msgid "Accessed:  %s"
+msgid "Accessed:   %s"
 msgstr "Elérés ideje: %s"
 
 #, c-format
-msgid "Modified:  %s"
+msgid "Modified:   %s"
 msgstr "Módosítás:    %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
-msgid "Changed:   %s"
+msgid "Changed:    %s"
 msgstr "Változtatás:  %s"
 
 #, c-format
@@ -2913,7 +2913,7 @@ msgid "Dev. type: major %lu, minor %lu"
 msgstr "Eszköztípus:  fő: %lu, al: %lu"
 
 #, c-format
-msgid "Size:      %s"
+msgid "Size:       %s"
 msgstr "Méret:        %s"
 
 #, c-format
@@ -2923,19 +2923,19 @@ msgstr[0] "(%ld blokk)"
 msgstr[1] "(%ld blokk)"
 
 #, c-format
-msgid "Owner:     %s/%s"
+msgid "Owner:      %s/%s"
 msgstr "Tulajdonos:   %s/%s"
 
 #, c-format
-msgid "Links:     %d"
+msgid "Links:      %d"
 msgstr "Linkek száma: %d"
 
 #, c-format
-msgid "Mode:      %s (%04o)"
+msgid "Mode:       %s (%04o)"
 msgstr "Típus+jogok:  %s (%04o)"
 
 #, c-format
-msgid "Location:  %Xh:%Xh"
+msgid "Location:   %Xh:%Xh"
 msgstr "Hely:         %Xh:%Xh"
 
 msgid "&Equal split"

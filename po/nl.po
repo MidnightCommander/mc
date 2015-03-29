@@ -2883,31 +2883,31 @@ msgid "Free space: %s/%s (%d%%)"
 msgstr "Vrij ruimte: %s/%s (%d%%)"
 
 #, c-format
-msgid "Type:      %s"
-msgstr "Type:      %s"
+msgid "Type:       %s"
+msgstr "Type:        %s"
 
 msgid "non-local vfs"
 msgstr "non-lokaal vfs"
 
 #, c-format
-msgid "Device:    %s"
-msgstr "Apparaat:     %s"
+msgid "Device:     %s"
+msgstr "Apparaat:    %s"
 
 #, c-format
 msgid "Filesystem: %s"
 msgstr "Bestandssysteem: %s"
 
 #, c-format
-msgid "Accessed:  %s"
-msgstr "Benaderd: %s"
+msgid "Accessed:   %s"
+msgstr "Benaderd:    %s"
 
 #, c-format
-msgid "Modified:  %s"
-msgstr "Veranderd:  %s"
+msgid "Modified:   %s"
+msgstr "Veranderd:   %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
-msgid "Changed:   %s"
+msgid "Changed:    %s"
 msgstr "Veranderd:   %s"
 
 #, c-format
@@ -2915,7 +2915,7 @@ msgid "Dev. type: major %lu, minor %lu"
 msgstr "Dev. type: major %lu, minor %lu"
 
 #, c-format
-msgid "Size:      %s"
+msgid "Size:       %s"
 msgstr "Grootte:     %s"
 
 #, c-format
@@ -2925,20 +2925,20 @@ msgstr[0] " (%ld blok)"
 msgstr[1] " (%ld blokken)"
 
 #, c-format
-msgid "Owner:     %s/%s"
-msgstr "Eigenaar:  %s/%s"
+msgid "Owner:      %s/%s"
+msgstr "Eigenaar:    %s/%s"
 
 #, c-format
-msgid "Links:     %d"
-msgstr "Links:     %d"
+msgid "Links:      %d"
+msgstr "Links:       %d"
 
 #, c-format
-msgid "Mode:      %s (%04o)"
-msgstr "Modus:      %s (%04o)"
+msgid "Mode:       %s (%04o)"
+msgstr "Modus:       %s (%04o)"
 
 #, c-format
-msgid "Location:  %Xh:%Xh"
-msgstr "Locatie:       %Xh:%Xh"
+msgid "Location:   %Xh:%Xh"
+msgstr "Locatie:     %Xh:%Xh"
 
 msgid "&Equal split"
 msgstr "Gelijkmatig verd&elen"

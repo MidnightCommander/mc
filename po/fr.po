@@ -2864,7 +2864,7 @@ msgstr "Midnight Commander %s"
 
 #, c-format
 msgid "File: %s"
-msgstr "Fichier: %s"
+msgstr "Fichier : %s"
 
 msgid "No node information"
 msgstr "Pas d'information sur les I-noeuds"
@@ -2877,43 +2877,43 @@ msgstr "Pas d'information sur l'espace"
 
 #, c-format
 msgid "Free space: %s/%s (%d%%)"
-msgstr "Espace libre : %s/%s (%d%%)"
+msgstr "Espace libre :  %s/%s (%d%%)"
 
 #, c-format
-msgid "Type:      %s"
-msgstr "Type :      %s"
+msgid "Type:       %s"
+msgstr "Type :          %s"
 
 msgid "non-local vfs"
 msgstr "VFS non local"
 
 #, c-format
-msgid "Device:    %s"
-msgstr "Périphérique : %s"
+msgid "Device:     %s"
+msgstr "Périphérique :  %s"
 
 #, c-format
 msgid "Filesystem: %s"
 msgstr "Système de fichiers: %s"
 
 #, c-format
-msgid "Accessed:  %s"
-msgstr "Accédé: %s"
+msgid "Accessed:   %s"
+msgstr "Accédé :        %s"
 
 #, c-format
-msgid "Modified:  %s"
-msgstr "Modifié: %s"
+msgid "Modified:   %s"
+msgstr "Modifié :       %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
-msgid "Changed:   %s"
-msgstr "Modifié :   %s"
+msgid "Changed:    %s"
+msgstr "Modifié :       %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
 msgstr "Type périph. : majeur %lu, mineur %lu"
 
 #, c-format
-msgid "Size:      %s"
-msgstr "Taille: %s"
+msgid "Size:       %s"
+msgstr "Taille :        %s"
 
 #, c-format
 msgid " (%ld block)"
@@ -2922,20 +2922,20 @@ msgstr[0] " (%ld bloc)"
 msgstr[1] "(%ld blocs)"
 
 #, c-format
-msgid "Owner:     %s/%s"
-msgstr "Propriétaire : %s/%s"
+msgid "Owner:      %s/%s"
+msgstr "Propriétaire :  %s/%s"
 
 #, c-format
-msgid "Links:     %d"
-msgstr "Liens: %d"
+msgid "Links:      %d"
+msgstr "Liens :         %d"
 
 #, c-format
-msgid "Mode:      %s (%04o)"
-msgstr "Mode :     %s (%04o)"
+msgid "Mode:       %s (%04o)"
+msgstr "Mode :          %s (%04o)"
 
 #, c-format
-msgid "Location:  %Xh:%Xh"
-msgstr "Emplacement : %Xh:%Xh"
+msgid "Location:   %Xh:%Xh"
+msgstr "Emplacement :   %Xh:%Xh"
 
 msgid "&Equal split"
 msgstr "Séparer en d&eux parties égales"

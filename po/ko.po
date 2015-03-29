@@ -2877,14 +2877,14 @@ msgid "Free space: %s/%s (%d%%)"
 msgstr ""
 
 #, c-format
-msgid "Type:      %s"
+msgid "Type:       %s"
 msgstr ""
 
 msgid "non-local vfs"
 msgstr "원격 vfs"
 
 #, c-format
-msgid "Device:    %s"
+msgid "Device:     %s"
 msgstr "디바이스: %s"
 
 #, c-format
@@ -2892,25 +2892,25 @@ msgid "Filesystem: %s"
 msgstr "파일체계: %s"
 
 #, c-format
-msgid "Accessed:  %s"
+msgid "Accessed:   %s"
 msgstr "액세스일: %s"
 
 #, c-format
-msgid "Modified:  %s"
-msgstr "수정일: %s"
+msgid "Modified:   %s"
+msgstr "수정일:   %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
-msgid "Changed:   %s"
-msgstr "변경됨:  %s"
+msgid "Changed:    %s"
+msgstr "변경됨:   %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
 msgstr "Dev. type: 주요 %lu, 기여 %lu"
 
 #, c-format
-msgid "Size:      %s"
-msgstr "크기: %s"
+msgid "Size:       %s"
+msgstr "크기:     %s"
 
 #, c-format
 msgid " (%ld block)"
@@ -2918,20 +2918,20 @@ msgid_plural " (%ld blocks)"
 msgstr[0] ""
 
 #, c-format
-msgid "Owner:     %s/%s"
-msgstr "소유자: %s/%s"
+msgid "Owner:      %s/%s"
+msgstr "소유자:   %s/%s"
 
 #, c-format
-msgid "Links:     %d"
-msgstr "링크: %d"
+msgid "Links:      %d"
+msgstr "링크:     %d"
 
 #, c-format
-msgid "Mode:      %s (%04o)"
-msgstr "모드: %s (%04o)"
+msgid "Mode:       %s (%04o)"
+msgstr "모드:     %s (%04o)"
 
 #, c-format
-msgid "Location:  %Xh:%Xh"
-msgstr "위치: %Xh:%Xh"
+msgid "Location:   %Xh:%Xh"
+msgstr "위치:     %Xh:%Xh"
 
 msgid "&Equal split"
 msgstr "같은 너비로(&E)"

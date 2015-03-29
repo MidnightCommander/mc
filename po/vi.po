@@ -2877,31 +2877,31 @@ msgid "Free space: %s/%s (%d%%)"
 msgstr ""
 
 #, c-format
-msgid "Type:      %s"
+msgid "Type:       %s"
 msgstr ""
 
 msgid "non-local vfs"
 msgstr "không phải vfs cục bộ"
 
 #, c-format
-msgid "Device:    %s"
-msgstr "Thiết bị:     %s"
+msgid "Device:     %s"
+msgstr "Thiết bị:   %s"
 
 #, c-format
 msgid "Filesystem: %s"
 msgstr "Hệ thống tập tin: %s"
 
 #, c-format
-msgid "Accessed:  %s"
-msgstr "Truy cập:     %s"
+msgid "Accessed:   %s"
+msgstr "Truy cập:   %s"
 
 #, c-format
-msgid "Modified:  %s"
-msgstr "Sửa đổi:      %s"
+msgid "Modified:   %s"
+msgstr "Sửa đổi:    %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
-msgid "Changed:   %s"
+msgid "Changed:    %s"
 msgstr ""
 
 #, c-format
@@ -2909,8 +2909,8 @@ msgid "Dev. type: major %lu, minor %lu"
 msgstr "Dạng thiết bị: major %lu, minor %lu"
 
 #, c-format
-msgid "Size:      %s"
-msgstr "Kích thước:   %s"
+msgid "Size:       %s"
+msgstr "Kích thước: %s"
 
 #, c-format
 msgid " (%ld block)"
@@ -2918,20 +2918,20 @@ msgid_plural " (%ld blocks)"
 msgstr[0] " (%ld khối)"
 
 #, c-format
-msgid "Owner:     %s/%s"
-msgstr "Chủ sở hữu:   %s/%s"
+msgid "Owner:      %s/%s"
+msgstr "Chủ sở hữu: %s/%s"
 
 #, c-format
-msgid "Links:     %d"
-msgstr "Liên kết:     %d"
+msgid "Links:      %d"
+msgstr "Liên kết:   %d"
 
 #, c-format
-msgid "Mode:      %s (%04o)"
-msgstr "Quyền hạn:    %s (%04o)"
+msgid "Mode:       %s (%04o)"
+msgstr "Quyền hạn:  %s (%04o)"
 
 #, c-format
-msgid "Location:  %Xh:%Xh"
-msgstr "Vị trí:       %Xh:%Xh"
+msgid "Location:   %Xh:%Xh"
+msgstr "Vị trí:     %Xh:%Xh"
 
 msgid "&Equal split"
 msgstr "&Kích thước bằng nhau"

@@ -2882,31 +2882,31 @@ msgid "Free space: %s/%s (%d%%)"
 msgstr ""
 
 #, c-format
-msgid "Type:      %s"
+msgid "Type:       %s"
 msgstr ""
 
 msgid "non-local vfs"
 msgstr "ne-krajeven navidezni datotečni sistem (vfs)"
 
 #, c-format
-msgid "Device:    %s"
-msgstr "Naprava:   %s"
+msgid "Device:     %s"
+msgstr "Naprava:     %s"
 
 #, c-format
 msgid "Filesystem: %s"
 msgstr "Datotečni sistem: %s"
 
 #, c-format
-msgid "Accessed:  %s"
-msgstr "Dostopan:  %s"
+msgid "Accessed:   %s"
+msgstr "Dostopan:    %s"
 
 #, c-format
-msgid "Modified:  %s"
-msgstr "Modificiran %s"
+msgid "Modified:   %s"
+msgstr "Modificiran: %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
-msgid "Changed:   %s"
+msgid "Changed:    %s"
 msgstr ""
 
 #, c-format
@@ -2914,8 +2914,8 @@ msgid "Dev. type: major %lu, minor %lu"
 msgstr ""
 
 #, c-format
-msgid "Size:      %s"
-msgstr "Velikost:  %s"
+msgid "Size:       %s"
+msgstr "Velikost:    %s"
 
 #, c-format
 msgid " (%ld block)"
@@ -2926,20 +2926,20 @@ msgstr[2] ""
 msgstr[3] ""
 
 #, c-format
-msgid "Owner:     %s/%s"
-msgstr "Lastnik:   %s/%s"
+msgid "Owner:      %s/%s"
+msgstr "Lastnik:     %s/%s"
 
 #, c-format
-msgid "Links:     %d"
-msgstr "Povezave:  %d"
+msgid "Links:      %d"
+msgstr "Povezave:    %d"
 
 #, c-format
-msgid "Mode:      %s (%04o)"
-msgstr "Način:     %s (%04o)"
+msgid "Mode:       %s (%04o)"
+msgstr "Način:       %s (%04o)"
 
 #, c-format
-msgid "Location:  %Xh:%Xh"
-msgstr "Lokacija:  %Xh:%Xh"
+msgid "Location:   %Xh:%Xh"
+msgstr "Lokacija:    %Xh:%Xh"
 
 msgid "&Equal split"
 msgstr "&Enakomerni razrez"

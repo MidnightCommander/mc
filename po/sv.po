@@ -2879,31 +2879,31 @@ msgid "Free space: %s/%s (%d%%)"
 msgstr ""
 
 #, c-format
-msgid "Type:      %s"
+msgid "Type:       %s"
 msgstr ""
 
 msgid "non-local vfs"
 msgstr "icke-lokalt vfs"
 
 #, c-format
-msgid "Device:    %s"
-msgstr "Enhet:    %s"
+msgid "Device:     %s"
+msgstr "Enhet:      %s"
 
 #, c-format
 msgid "Filesystem: %s"
 msgstr "Filsystem:  %s"
 
 #, c-format
-msgid "Accessed:  %s"
-msgstr "Accessad:  %s"
+msgid "Accessed:   %s"
+msgstr "Accessad:   %s"
 
 #, c-format
-msgid "Modified:  %s"
+msgid "Modified:   %s"
 msgstr "Modifierad: %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
-msgid "Changed:   %s"
+msgid "Changed:    %s"
 msgstr ""
 
 #, c-format
@@ -2911,8 +2911,8 @@ msgid "Dev. type: major %lu, minor %lu"
 msgstr ""
 
 #, c-format
-msgid "Size:      %s"
-msgstr "Storlek:   %s"
+msgid "Size:       %s"
+msgstr "Storlek:    %s"
 
 #, c-format
 msgid " (%ld block)"
@@ -2921,20 +2921,20 @@ msgstr[0] ""
 msgstr[1] ""
 
 #, c-format
-msgid "Owner:     %s/%s"
-msgstr "Ägare:     %s/%s"
+msgid "Owner:      %s/%s"
+msgstr "Ägare:      %s/%s"
 
 #, c-format
-msgid "Links:     %d"
-msgstr "Länkar:    %d"
+msgid "Links:      %d"
+msgstr "Länkar:     %d"
 
 #, c-format
-msgid "Mode:      %s (%04o)"
-msgstr "Läge:      %s (%04o)"
+msgid "Mode:       %s (%04o)"
+msgstr "Läge:       %s (%04o)"
 
 #, c-format
-msgid "Location:  %Xh:%Xh"
-msgstr "Placering: %Xh:%Xh"
+msgid "Location:   %Xh:%Xh"
+msgstr "Placering:  %Xh:%Xh"
 
 msgid "&Equal split"
 msgstr "Dela på mitten"

@@ -3057,14 +3057,14 @@ msgid "Free space: %s/%s (%d%%)"
 msgstr "Своб. место: %s/%s (%d%%)"
 
 #, c-format
-msgid "Type:      %s"
-msgstr "Тип:       %s"
+msgid "Type:       %s"
+msgstr "Тип: %s"
 
 msgid "non-local vfs"
 msgstr "нелокальная ВФС"
 
 #, c-format
-msgid "Device:    %s"
+msgid "Device:     %s"
 msgstr "Устройство: %s"
 
 #, c-format
@@ -3072,16 +3072,16 @@ msgid "Filesystem: %s"
 msgstr "ФС: %s"
 
 #, c-format
-msgid "Accessed:  %s"
+msgid "Accessed:   %s"
 msgstr "Обращение: %s"
 
 #, c-format
-msgid "Modified:  %s"
+msgid "Modified:   %s"
 msgstr "Модифицирован: %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
-msgid "Changed:   %s"
+msgid "Changed:    %s"
 msgstr "Изменён: %s"
 
 #, c-format
@@ -3089,7 +3089,7 @@ msgid "Dev. type: major %lu, minor %lu"
 msgstr "Тип устройства: major %lu, minor %lu"
 
 #, c-format
-msgid "Size:      %s"
+msgid "Size:       %s"
 msgstr "Размер: %s"
 
 #, c-format
@@ -3100,19 +3100,19 @@ msgstr[1] "(%ld блока)"
 msgstr[2] "(%ld блоков)"
 
 #, c-format
-msgid "Owner:     %s/%s"
+msgid "Owner:      %s/%s"
 msgstr "Владелец: %s/%s"
 
 #, c-format
-msgid "Links:     %d"
+msgid "Links:      %d"
 msgstr "Ссылок: %d"
 
 #, c-format
-msgid "Mode:      %s (%04o)"
+msgid "Mode:       %s (%04o)"
 msgstr "Права: %s (%04o)"
 
 #, c-format
-msgid "Location:  %Xh:%Xh"
+msgid "Location:   %Xh:%Xh"
 msgstr "Положение: %Xh:%Xh"
 
 msgid "&Equal split"

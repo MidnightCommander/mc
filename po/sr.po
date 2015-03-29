@@ -2864,7 +2864,7 @@ msgstr "Поноћни наредник %s"
 
 #, c-format
 msgid "File: %s"
-msgstr "Датотека:           %s"
+msgstr "Датотека:         %s"
 
 msgid "No node information"
 msgstr "Нема података о чворовима"
@@ -2880,40 +2880,40 @@ msgid "Free space: %s/%s (%d%%)"
 msgstr "Слободан простор:  %s/%s (%d%%)"
 
 #, c-format
-msgid "Type:      %s"
-msgstr "Врста:             %s"
+msgid "Type:       %s"
+msgstr "Врста:           %s"
 
 msgid "non-local vfs"
 msgstr "не-месни всд"
 
 #, c-format
-msgid "Device:    %s"
-msgstr "Уређај:            %s"
+msgid "Device:     %s"
+msgstr "Уређај:          %s"
 
 #, c-format
 msgid "Filesystem: %s"
-msgstr "Систем датотека:   %s"
+msgstr "Систем датотека: %s"
 
 #, c-format
-msgid "Accessed:  %s"
-msgstr "Датум приступа:    %s"
+msgid "Accessed:   %s"
+msgstr "Датум приступа:  %s"
 
 #, c-format
-msgid "Modified:  %s"
-msgstr "Датум промене:     %s"
+msgid "Modified:   %s"
+msgstr "Датум промене:   %s"
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
-msgid "Changed:   %s"
-msgstr "Датум измене:      %s"
+msgid "Changed:    %s"
+msgstr "Датум измене:    %s"
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
 msgstr "Врста уређаја:     навећи %lu, најмањи %lu"
 
 #, c-format
-msgid "Size:      %s"
-msgstr "Величина:          %s"
+msgid "Size:       %s"
+msgstr "Величина:        %s"
 
 #, c-format
 msgid " (%ld block)"
@@ -2923,20 +2923,20 @@ msgstr[1] " (%ld блока)"
 msgstr[2] " (%ld блокова)"
 
 #, c-format
-msgid "Owner:     %s/%s"
-msgstr "Власник:           %s/%s"
+msgid "Owner:      %s/%s"
+msgstr "Власник:         %s/%s"
 
 #, c-format
-msgid "Links:     %d"
-msgstr "Број веза:         %d"
+msgid "Links:      %d"
+msgstr "Број веза:       %d"
 
 #, c-format
-msgid "Mode:      %s (%04o)"
-msgstr "Дозволе:           %s (%04o)"
+msgid "Mode:       %s (%04o)"
+msgstr "Дозволе:         %s (%04o)"
 
 #, c-format
-msgid "Location:  %Xh:%Xh"
-msgstr "Место:             %Xh:%Xh"
+msgid "Location:   %Xh:%Xh"
+msgstr "Место:           %Xh:%Xh"
 
 msgid "&Equal split"
 msgstr "&Подједнака подела"
