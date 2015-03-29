@@ -653,7 +653,7 @@ shell/i/.glade
 	Open=@EXTHELPERSDIR@/misc.sh open glade
 
 # Gettext Catalogs
-shell/.mo
+regex/\.g?mo$
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view mo
 
 # po
