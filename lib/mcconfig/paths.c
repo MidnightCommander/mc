@@ -286,6 +286,9 @@ void
 mc_config_init_config_paths (GError ** mcerror)
 {
     char *dir;
+#ifndef MC_HOMEDIR_XDG
+    char *defined_userconf_dir;
+#endif
 
     mc_return_if_error (mcerror);
 
@@ -345,8 +348,6 @@ mc_config_init_config_paths (GError ** mcerror)
 
     mc_config_fix_migrated_rules ();
 #else /* MC_HOMEDIR_XDG */
-    char *defined_userconf_dir;
-
     defined_userconf_dir = tilde_expand (MC_USERCONF_DIR);
     if (g_path_is_absolute (defined_userconf_dir))
         dir = defined_userconf_dir;
