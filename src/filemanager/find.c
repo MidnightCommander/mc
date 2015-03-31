@@ -199,7 +199,8 @@ static WListbox *find_list;     /* Listbox with the file list */
 
 static find_file_options_t options = {
     TRUE, TRUE, TRUE, FALSE, FALSE,
-    FALSE, TRUE, FALSE, FALSE, FALSE, FALSE
+    FALSE, TRUE, FALSE, FALSE, FALSE, FALSE,
+    FALSE, NULL
 };
 
 static char *in_start_dir = INPUT_LAST_TEXT;
