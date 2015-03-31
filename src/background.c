@@ -200,7 +200,7 @@ background_attention (int fd, void *closure)
         int (*non_have_ctx3) (file_op_context_t *, int, char *, char *, char *);
         int (*non_have_ctx4) (file_op_context_t *, int, char *, char *, char *, char *);
 
-        char *(*ret_str0) ();
+        char *(*ret_str0) (void);
         char *(*ret_str1) (char *);
         char *(*ret_str2) (char *, char *);
         char *(*ret_str3) (char *, char *, char *);

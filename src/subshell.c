@@ -390,7 +390,7 @@ check_sid (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-init_raw_mode ()
+init_raw_mode (void)
 {
     static int initialized = 0;
 
