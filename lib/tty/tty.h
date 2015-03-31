@@ -67,7 +67,9 @@ extern char *tty_tgetstr (const char *name);
 
 /* {{{ Input }}} */
 
+#ifdef HAVE_SLANG
 extern int reset_hp_softkeys;
+#endif
 
 /*** declarations of public functions ************************************************************/
 
