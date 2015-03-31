@@ -2616,7 +2616,7 @@ dview_display_file (const WDiff * dview, diff_place_t ord, int r, int c, int hei
 #ifdef HAVE_CHARSET
                         if (dview->utf8)
                         {
-                            int ch_len;
+                            int ch_len = 0;
 
                             next_ch = dview_get_utf (buf + cnt, &ch_len, &ch_res);
                             if (ch_len > 1)
@@ -2693,7 +2693,7 @@ dview_display_file (const WDiff * dview, diff_place_t ord, int r, int c, int hei
 #ifdef HAVE_CHARSET
             if (dview->utf8)
             {
-                int ch_len;
+                int ch_len = 0;
 
                 next_ch = dview_get_utf (buf + cnt, &ch_len, &ch_res);
                 if (ch_len > 1)
