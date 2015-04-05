@@ -102,7 +102,7 @@ static const struct
     /* *INDENT-ON* */
 };
 
-#ifdef MC_HOMEDIR_XDG
+#if MC_HOMEDIR_XDG
 static const struct
 {
     char **old_basedir;
@@ -286,7 +286,7 @@ void
 mc_config_init_config_paths (GError ** mcerror)
 {
     char *dir;
-#ifndef MC_HOMEDIR_XDG
+#if MC_HOMEDIR_XDG == 0
     char *defined_userconf_dir;
 #endif
 
@@ -298,7 +298,7 @@ mc_config_init_config_paths (GError ** mcerror)
     /* init mc_home and homedir if not yet */
     (void) mc_config_get_home_dir ();
 
-#ifdef MC_HOMEDIR_XDG
+#if MC_HOMEDIR_XDG
     if (mc_home != NULL)
     {
         dir = g_build_filename (mc_home, ".config", (char *) NULL);
@@ -374,7 +374,7 @@ mc_config_deinit_config_paths (void)
         return;
 
     g_free (mc_config_str);
-#ifdef MC_HOMEDIR_XDG
+#if MC_HOMEDIR_XDG
     g_free (mc_cache_str);
     g_free (mc_data_str);
 #endif /* MC_HOMEDIR_XDG */
@@ -452,7 +452,7 @@ mc_config_migrate_from_old_place (GError ** mcerror, char **msg)
     old_dir = mc_config_get_deprecated_path ();
 
     g_free (mc_config_init_one_config_path (mc_config_str, EDIT_DIR, mcerror));
-#ifdef MC_HOMEDIR_XDG
+#if MC_HOMEDIR_XDG
     g_free (mc_config_init_one_config_path (mc_cache_str, EDIT_DIR, mcerror));
     g_free (mc_config_init_one_config_path (mc_data_str, EDIT_DIR, mcerror));
 #endif /* MC_HOMEDIR_XDG */
@@ -481,7 +481,7 @@ mc_config_migrate_from_old_place (GError ** mcerror, char **msg)
         g_free (old_name);
     }
 
-#ifdef MC_HOMEDIR_XDG
+#if MC_HOMEDIR_XDG
     *msg = g_strdup_printf (_("Your old settings were migrated from %s\n"
                               "to Freedesktop recommended dirs.\n"
                               "To get more info, please visit\n"

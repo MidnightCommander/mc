@@ -373,9 +373,9 @@ AC_ARG_WITH([homedir],
 
 
 if test x$with_homedir = xXDG; then
-    AC_DEFINE(MC_HOMEDIR_XDG, 1,
-	[Define to enable XDG standard support])
+    AC_DEFINE(MC_HOMEDIR_XDG, 1, [Define to enable XDG standard support])
 else
+    AC_DEFINE(MC_HOMEDIR_XDG, 0, [Define to disble XDG standard support])
     AC_DEFINE_UNQUOTED([MC_USERCONF_DIR], ["$with_homedir"], [Where configs will be placed relative to $HOME])
 fi
 
