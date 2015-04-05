@@ -13,9 +13,9 @@
 
 #include <sys/types.h>          /* BSD */
 
-#if MAJOR_IN_MKDEV
+#ifdef MAJOR_IN_MKDEV
 #include <sys/mkdev.h>
-#elif MAJOR_IN_SYSMACROS
+#elif defined MAJOR_IN_SYSMACROS
 #include <sys/sysmacros.h>
 #endif
 

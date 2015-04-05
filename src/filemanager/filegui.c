@@ -53,9 +53,9 @@
 #include <config.h>
 
 /* Keep this conditional in sync with the similar conditional in m4.include/mc-get-fs-info. */
-#if ((STAT_STATVFS || STAT_STATVFS64)                                       \
-     && (HAVE_STRUCT_STATVFS_F_BASETYPE || HAVE_STRUCT_STATVFS_F_FSTYPENAME \
-         || (! HAVE_STRUCT_STATFS_F_FSTYPENAME)))
+#if ((defined STAT_STATVFS || defined STAT_STATVFS64)                                       \
+     && (defined HAVE_STRUCT_STATVFS_F_BASETYPE || defined HAVE_STRUCT_STATVFS_F_FSTYPENAME \
+         || (! defined HAVE_STRUCT_STATFS_F_FSTYPENAME)))
 #define USE_STATVFS 1
 #else
 #define USE_STATVFS 0
@@ -85,7 +85,7 @@
 #include <nfs/nfs_clnt.h>
 #include <nfs/vfs.h>
 #endif
-#elif HAVE_OS_H                 /* BeOS */
+#elif defined HAVE_OS_H         /* BeOS */
 #include <fs_info.h>
 #endif
 
@@ -134,12 +134,12 @@ statfs (char const *filename, struct fs_info *buf)
 #endif
 #endif
 
-#if HAVE_STRUCT_STATVFS_F_BASETYPE
+#ifdef HAVE_STRUCT_STATVFS_F_BASETYPE
 #define STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME f_basetype
 #else
-#if HAVE_STRUCT_STATVFS_F_FSTYPENAME || HAVE_STRUCT_STATFS_F_FSTYPENAME
+#if defined HAVE_STRUCT_STATVFS_F_FSTYPENAME || defined HAVE_STRUCT_STATFS_F_FSTYPENAME
 #define STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME f_fstypename
-#elif HAVE_OS_H                 /* BeOS */
+#elif defined HAVE_OS_H         /* BeOS */
 #define STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME fsh_name
 #endif
 #endif
