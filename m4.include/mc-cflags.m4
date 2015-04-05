@@ -12,7 +12,15 @@ AC_DEFUN([MC_CHECK_ONE_CFLAG],[
   AC_MSG_CHECKING([whether ${CC} accepts $1])
 
   safe_CFLAGS=$CFLAGS
-  CFLAGS="$1"
+
+  case "$CC" in
+    clang*)
+      CFLAGS="-Werror $1"
+      ;;
+    *)
+      CFLAGS="$1"
+      ;;
+  esac
 
   AC_COMPILE_IFELSE(
     [AC_LANG_PROGRAM([], [[return 0;]])],
