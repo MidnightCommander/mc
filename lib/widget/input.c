@@ -50,9 +50,9 @@
 #include "lib/util.h"
 #include "lib/keybind.h"        /* global_keymap_t */
 #include "lib/widget.h"
-#include "lib/event.h"          /* mc_event_raise() */
+#include "lib/event.h"          /* mc_event_dispatch() */
 
-#include "event.h"              /* mc_event_raise() */
+#include "event.h"              /* mc_event_dispatch() */
 #include "input_complete.h"
 
 /*** global variables ****************************************************************************/
@@ -502,10 +502,10 @@ copy_region (WInput * in, int x_first, int x_last)
     if (last == first)
     {
         /* Copy selected files to clipboard */
-        mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "save_current_file_to_clip_file", NULL,
-                        NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "save_current_file_to_clip_file", NULL,
+                           NULL, NULL);
         /* try use external clipboard utility */
-        mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL, NULL, NULL);
         return;
     }
 
@@ -516,9 +516,9 @@ copy_region (WInput * in, int x_first, int x_last)
 
     kill_buffer = g_strndup (in->buffer + first, last - first);
 
-    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file", kill_buffer, NULL, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_CORE, "clipboard_text_to_file", kill_buffer, NULL, NULL);
     /* try use external clipboard utility */
-    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL, NULL, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL, NULL, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -605,9 +605,9 @@ ins_from_clip (WInput * in)
     event_return_t ret;
 
     /* try use external clipboard utility */
-    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL, NULL, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL, NULL, NULL);
 
-    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_from_file", &p, &ret, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_CORE, "clipboard_text_from_file", &p, &ret, NULL);
     if (ret.b)
     {
         char *pp;
@@ -825,7 +825,7 @@ input_execute_cmd (WInput * in, unsigned long command)
         res = MSG_NOT_HANDLED;
     }
 
-    if (mc_event_raise (event_group_name, event_name, event_data, &event_ret, NULL))
+    if (mc_event_dispatch (event_group_name, event_name, event_data, &event_ret, NULL))
     {
         res = (event_ret.b) ? MSG_HANDLED : MSG_NOT_HANDLED;
     }
@@ -952,7 +952,7 @@ input_event (Gpm_Event * event, void *data)
         dlg_select_widget (w);
 
         if (local.x >= w->cols - HISTORY_BUTTON_WIDTH + 1 && should_show_history_button (in))
-            mc_event_raise (MCEVENT_GROUP_WIDGET_INPUT, "show_history", in, NULL, NULL);
+            mc_event_dispatch (MCEVENT_GROUP_WIDGET_INPUT, "show_history", in, NULL, NULL);
         else
         {
             if (local.x + in->term_first_shown - 1 < str_term_width1 (in->buffer))

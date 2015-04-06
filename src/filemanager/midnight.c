@@ -792,7 +792,7 @@ mc_maybe_editor_or_viewer (void)
             event_info.data.file.first = mc_run_param0;
             event_info.data.file.second = mc_run_param1;
 
-            mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "run", &event_info, NULL, NULL);
+            mc_event_dispatch (MCEVENT_GROUP_DIFFVIEWER, "run", &event_info, NULL, NULL);
             ret = event_info.ret_value;
         }
         break;
@@ -861,7 +861,7 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
     ret.b = TRUE;
 
     /* stop quick search before executing any command */
-    mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "search_stop", current_panel, NULL, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "search_stop", current_panel, NULL, NULL);
 
     switch (command)
     {
@@ -1155,7 +1155,7 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
         res = MSG_NOT_HANDLED;
     }
 
-    if (mc_event_raise (event_group_name, event_name, event_data, &ret, NULL))
+    if (mc_event_dispatch (event_group_name, event_name, event_data, &ret, NULL))
     {
         return (ret.b) ? MSG_HANDLED : MSG_NOT_HANDLED;
     }
@@ -1223,7 +1223,7 @@ midnight_handle_raw_keys (int parm)
     /* Ctrl-Shift-Enter */
     if (parm == (KEY_M_CTRL | KEY_M_SHIFT | '\n'))
     {
-        mc_event_raise (MCEVENT_GROUP_CORE, "put_path_to_cmdline", current_panel, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_CORE, "put_path_to_cmdline", current_panel, NULL, NULL);
         put_prog_name ();
         return MSG_HANDLED;
     }
@@ -1734,7 +1734,7 @@ mc_filemanager_cmd_menu (event_info_t * event_info, gpointer data, GError ** err
     else
         the_menubar->selected = g_list_length (the_menubar->menu) - 1;
 
-    mc_event_raise (event_info->group_name, "menu_last_selected", NULL, event_info->ret, error);
+    mc_event_dispatch (event_info->group_name, "menu_last_selected", NULL, event_info->ret, error);
 
     return TRUE;
 }
@@ -1830,7 +1830,7 @@ mc_filemanager_cmd_treebox (event_info_t * event_info, gpointer data, GError ** 
 
     (void) event_info;
 
-    mc_event_raise (MCEVENT_GROUP_TREEVIEW, "show_box", data, &ret, error);
+    mc_event_dispatch (MCEVENT_GROUP_TREEVIEW, "show_box", data, &ret, error);
 
     if (ret.s != NULL)
     {

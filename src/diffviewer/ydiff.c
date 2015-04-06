@@ -43,7 +43,7 @@
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
 #endif
-#include "lib/event.h"          /* mc_event_raise() */
+#include "lib/event.h"          /* mc_event_dispatch() */
 #include "lib/keymap.h"
 
 #include "src/filemanager/cmd.h"        /* edit_file_at_line(), view_other_cmd() */
@@ -263,7 +263,7 @@ dview_ok_to_exit (WDiff * dview)
         res = FALSE;
         break;
     case 0:                    /* Yes */
-        mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "save_changes", dview, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_DIFFVIEWER, "save_changes", dview, NULL, NULL);
         res = TRUE;
         break;
     case 1:                    /* No */
@@ -313,7 +313,7 @@ dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     {
     case MSG_INIT:
         dview_labels (dview);
-        mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "options_load", dview, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_DIFFVIEWER, "options_load", dview, NULL, NULL);
         mc_diffviewer_update (dview);
         return MSG_HANDLED;
 
@@ -326,7 +326,7 @@ dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         return dview_handle_key (dview, parm, NULL);
 
     case MSG_DESTROY:
-        mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "options_save", dview, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_DIFFVIEWER, "options_save", dview, NULL, NULL);
         mc_diffviewer_deinit (dview);
         return MSG_HANDLED;
 

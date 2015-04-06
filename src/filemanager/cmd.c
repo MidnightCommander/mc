@@ -64,7 +64,7 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 #include "lib/keybind.h"        /* CK_Down, CK_History */
-#include "lib/event.h"          /* mc_event_raise() */
+#include "lib/event.h"          /* mc_event_dispatch() */
 
 #include "src/viewer/mcviewer.h"
 #include "src/setup.h"
@@ -193,7 +193,7 @@ set_panel_filter_to (WPanel * p, char *allocated_filter_string)
         p->filter = allocated_filter_string;
     else
         g_free (allocated_filter_string);
-    mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "reread", NULL, NULL, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER, "reread", NULL, NULL, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1264,7 +1264,7 @@ mc_filemanager_cmd_hotlist (event_info_t * event_info, gpointer data, GError ** 
             .tree = the_tree,
             .dir = target
         };
-        mc_event_raise (MCEVENT_GROUP_TREEVIEW, "chdir", &chdir_info, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_TREEVIEW, "chdir", &chdir_info, NULL, NULL);
     }
     else
     {
@@ -1369,7 +1369,7 @@ mc_filemanager_cmd_run_diffviewer (event_info_t * event_info, gpointer data, GEr
     diffviewer_event_info.data.panel.first = current_panel;
     diffviewer_event_info.data.panel.second = other_panel;
 
-    mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "run", &diffviewer_event_info, NULL, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_DIFFVIEWER, "run", &diffviewer_event_info, NULL, NULL);
 
     if (mc_global.mc_run_mode == MC_RUN_FULL)
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
@@ -1565,7 +1565,7 @@ mc_filemanager_cmd_help (event_info_t * event_info, gpointer data, GError ** err
     else
         event_data.node = "[main]";
 
-    mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data, NULL, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_CORE, "help", &event_data, NULL, NULL);
 
     return TRUE;
 }
@@ -2038,7 +2038,8 @@ mc_filemanager_cmd_select_encoding (event_info_t * event_info, gpointer data, GE
     (void) data;
 
     if (SELECTED_IS_PANEL)
-        mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "select_codepage", MENU_PANEL, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "select_codepage", MENU_PANEL, NULL,
+                           NULL);
 
     return TRUE;
 }

@@ -202,7 +202,8 @@ vfs_stamp_create (struct vfs_class *vclass, vfsid id)
 
     if (!(id == NULL || (path_element->class == vclass && nvfsid == id)))
     {
-        mc_event_raise (MCEVENT_GROUP_CORE, "vfs_timestamp", (gpointer) & event_data, &ret, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_CORE, "vfs_timestamp", (gpointer) & event_data, &ret,
+                           NULL);
 
         if (!ret.b && vclass != NULL && vclass->nothingisopen != NULL
             && vclass->nothingisopen (id) != 0)

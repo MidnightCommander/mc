@@ -57,7 +57,7 @@
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
 #endif
-#include "lib/event.h"          /* mc_event_raise() */
+#include "lib/event.h"          /* mc_event_dispatch() */
 
 #include "src/filemanager/layout.h"
 #include "src/filemanager/cmd.h"
@@ -397,7 +397,7 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
     case CK_Help:
         {
             ev_help_t help_event_data = { NULL, "[Internal File Viewer]" };
-            mc_event_raise (MCEVENT_GROUP_CORE, "help", &help_event_data, NULL, NULL);
+            mc_event_dispatch (MCEVENT_GROUP_CORE, "help", &help_event_data, NULL, NULL);
         }
         break;
     case CK_WrapMode:
@@ -546,7 +546,7 @@ mcview_execute_cmd (mcview_t * view, unsigned long command)
         res = MSG_NOT_HANDLED;
     }
 
-    if (mc_event_raise (event_group_name, event_name, event_data, &ret, NULL))
+    if (mc_event_dispatch (event_group_name, event_name, event_data, &ret, NULL))
     {
         return (ret.b) ? MSG_HANDLED : MSG_NOT_HANDLED;
     }

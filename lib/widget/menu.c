@@ -42,7 +42,7 @@
 #include "lib/tty/key.h"        /* key macros */
 #include "lib/strutil.h"
 #include "lib/widget.h"
-#include "lib/event.h"          /* mc_event_raise() */
+#include "lib/event.h"          /* mc_event_dispatch() */
 
 /*** global variables ****************************************************************************/
 
@@ -471,7 +471,7 @@ menubar_handle_key (WMenuBar * menubar, int key)
             else
                 event_data.node = "[Menu Bar]";
 
-            mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data, NULL, NULL);
+            mc_event_dispatch (MCEVENT_GROUP_CORE, "help", &event_data, NULL, NULL);
             menubar_draw (menubar);
             return 1;
         }

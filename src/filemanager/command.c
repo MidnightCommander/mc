@@ -270,7 +270,7 @@ enter (WInput * lc_cmdline)
 
         ret.b = FALSE;
         input_assign_text (lc_cmdline, "");
-        mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "quiet_quit", NULL, &ret, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER, "quiet_quit", NULL, &ret, NULL);
         if (!ret.b)
             return MSG_NOT_HANDLED;
     }
@@ -319,7 +319,7 @@ enter (WInput * lc_cmdline)
             event_return_t ret;
 
             ret.b = FALSE;
-            mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "quiet_quit", NULL, &ret, NULL);
+            mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER, "quiet_quit", NULL, &ret, NULL);
             if (ret.b)
                 return MSG_HANDLED;
 
@@ -436,7 +436,7 @@ do_cd_command (char *orig_cmd)
             chdir_info.dir = g_strdup (vfs_path_as_str (new_vpath));
             vfs_path_free (new_vpath);
         }
-        mc_event_raise (MCEVENT_GROUP_TREEVIEW, "chdir", &chdir_info, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_TREEVIEW, "chdir", &chdir_info, NULL, NULL);
         g_free (chdir_info.dir);
     }
     else

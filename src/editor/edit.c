@@ -1656,7 +1656,7 @@ mc_editor_call_event_user_menu (WEdit * edit, const char *menu_file, int selecte
         .selected_entry = selected_entry
     };
 
-    mc_event_raise (MCEVENT_GROUP_EDITOR, "user_menu", &event_data, NULL, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_EDITOR, "user_menu", &event_data, NULL, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3151,13 +3151,13 @@ edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_inse
         edit->force |= REDRAW_COMPLETELY;
         if (command == CK_MacroStopRecord || command == CK_MacroStartStopRecord)
         {
-            mc_event_raise (MCEVENT_GROUP_EDITOR, "macro_store", edit, NULL, NULL);
+            mc_event_dispatch (MCEVENT_GROUP_EDITOR, "macro_store", edit, NULL, NULL);
             macro_index = -1;
             return;
         }
         if (command == CK_RepeatStopRecord || command == CK_RepeatStartStopRecord)
         {
-            mc_event_raise (MCEVENT_GROUP_EDITOR, "macro_repeat", edit, NULL, NULL);
+            mc_event_dispatch (MCEVENT_GROUP_EDITOR, "macro_repeat", edit, NULL, NULL);
             macro_index = -1;
             return;
         }
@@ -3743,7 +3743,7 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
     }
 
     if (event_name != NULL)
-        mc_event_raise (MCEVENT_GROUP_EDITOR, event_name, event_data, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_EDITOR, event_name, event_data, NULL, NULL);
 
 }
 
@@ -3823,7 +3823,7 @@ mc_editor_cmd_backspace (event_info_t * event_info, gpointer data, GError ** err
     else
         edit_backspace (edit, FALSE);
 
-    mc_event_raise (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL, NULL);
     return TRUE;
 }
 
@@ -3857,7 +3857,7 @@ mc_editor_cmd_delete (event_info_t * event_info, gpointer data, GError ** error)
             edit_delete (edit, FALSE);
     }
 
-    mc_event_raise (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL, NULL);
     return TRUE;
 }
 
@@ -3895,7 +3895,7 @@ mc_editor_cmd_delete_word (event_info_t * event_info, gpointer data, GError ** e
             break;
     }
 
-    mc_event_raise (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL, NULL);
     return TRUE;
 }
 
@@ -3916,12 +3916,12 @@ mc_editor_cmd_delete_line (event_info_t * event_info, gpointer data, GError ** e
     case TO_LINE_BEGIN:
         while (edit_buffer_get_previous_byte (&edit->buffer) != '\n' && edit->buffer.curs1 != 0)
             edit_backspace (edit, TRUE);
-        mc_event_raise (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL, NULL);
         break;
     case TO_LINE_END:
         while (edit_buffer_get_current_byte (&edit->buffer) != '\n' && edit->buffer.curs2 != 0)
             edit_delete (edit, TRUE);
-        mc_event_raise (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL, NULL);
         break;
     default:
 
@@ -3975,7 +3975,7 @@ mc_editor_cmd_enter (event_info_t * event_info, gpointer data, GError ** error)
         if (option_return_does_auto_indent && !bracketed_pasting_in_progress)
             edit_auto_indent (edit);
     }
-    mc_event_raise (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL, NULL);
 
     return TRUE;
 }
@@ -4057,7 +4057,7 @@ mc_editor_cmd_insert_char (event_info_t * event_info, gpointer data, GError ** e
 #endif
         edit_insert (edit, event_data->char_for_insertion);
 
-    mc_event_raise (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL, NULL);
 
     if (!option_auto_para_formatting)
         check_and_wrap_line (edit);
@@ -4216,7 +4216,7 @@ mc_editor_cmd_tab (event_info_t * event_info, gpointer data, GError ** error)
     {
         if (edit->mark2 < 0)
             edit_mark_cmd (edit, FALSE);
-        mc_event_raise (MCEVENT_GROUP_EDITOR, "block_move_to_right", edit, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_EDITOR, "block_move_to_right", edit, NULL, NULL);
 
     }
     else
@@ -4224,7 +4224,7 @@ mc_editor_cmd_tab (event_info_t * event_info, gpointer data, GError ** error)
         if (option_cursor_beyond_eol)
             edit_insert_over (edit);
         edit_tab_cmd (edit);
-        mc_event_raise (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_EDITOR, "format_paragraph_auto", edit, NULL, NULL);
 
         if (!option_auto_para_formatting)
             check_and_wrap_line (edit);
@@ -4576,7 +4576,7 @@ mc_editor_cmd_complete (event_info_t * event_info, gpointer data, GError ** erro
 
     /* if text marked shift block */
     if (!option_persistent_selections)
-        mc_event_raise (MCEVENT_GROUP_EDITOR, "block_move_to_left", edit, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_EDITOR, "block_move_to_left", edit, NULL, NULL);
     else
         edit_complete_word_cmd (edit);
     edit->prev_col = edit_get_col (edit);

@@ -518,7 +518,7 @@ toggle_panels (void)
         event_return_t ret;
 
         ret.b = FALSE;
-        mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "quiet_quit", NULL, &ret, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER, "quiet_quit", NULL, &ret, NULL);
         if (ret.b)
             return;
 

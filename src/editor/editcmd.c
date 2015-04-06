@@ -60,7 +60,7 @@
 #include "lib/util.h"           /* tilde_expand() */
 #include "lib/vfs/vfs.h"
 #include "lib/widget.h"
-#include "lib/event.h"          /* mc_event_raise() */
+#include "lib/event.h"          /* mc_event_dispatch() */
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
 #endif
@@ -1529,7 +1529,7 @@ mc_editor_call_event_save_as (WEdit * edit)
 {
     event_return_t ret;
 
-    mc_event_raise (MCEVENT_GROUP_EDITOR, "save_as", edit, &ret, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_EDITOR, "save_as", edit, &ret, NULL);
     return ret.b;
 }
 
@@ -2452,7 +2452,7 @@ mc_editor_cmd_ext_clip_copy (event_info_t * event_info, gpointer data, GError **
         return FALSE;
     }
     /* try use external clipboard utility */
-    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL, NULL, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL, NULL, NULL);
 
     if (option_drop_selection_on_copy)
         edit_mark_cmd (edit, TRUE);
@@ -2482,7 +2482,7 @@ mc_editor_cmd_ext_clip_cut (event_info_t * event_info, gpointer data, GError ** 
         return TRUE;
     }
     /* try use external clipboard utility */
-    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL, NULL, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", NULL, NULL, NULL);
 
     mc_editor_call_event_block_delete (edit);
     edit_mark_cmd (edit, TRUE);
@@ -2509,7 +2509,7 @@ mc_editor_cmd_ext_clip_paste (event_info_t * event_info, gpointer data, GError *
         edit_insert_over (edit);
 
     /* try use external clipboard utility */
-    mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL, NULL, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL, NULL, NULL);
     tmp = mc_config_get_full_vpath (EDIT_CLIP_FILE);
     edit_insert_file (edit, tmp);
     vfs_path_free (tmp);
@@ -3117,7 +3117,7 @@ mc_editor_call_event_block_delete (WEdit * edit)
 {
     event_return_t ret;
 
-    mc_event_raise (MCEVENT_GROUP_EDITOR, "block_delete", edit, &ret, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_EDITOR, "block_delete", edit, &ret, NULL);
     return ret.b;
 }
 
@@ -3264,7 +3264,7 @@ mc_editor_cmd_block_delete (event_info_t * event_info, gpointer data, GError ** 
         edit->force |= REDRAW_PAGE;
     }
     else
-        mc_event_raise (MCEVENT_GROUP_EDITOR, "delete_line", edit, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_EDITOR, "delete_line", edit, NULL, NULL);
 
     event_info->ret->b = FALSE;
 

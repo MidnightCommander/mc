@@ -49,7 +49,7 @@
 #include "lib/util.h"           /* mc_build_filename() */
 #include "lib/widget.h"
 #include "lib/mcconfig.h"
-#include "lib/event.h"          /* mc_event_raise() */
+#include "lib/event.h"          /* mc_event_dispatch() */
 #ifdef HAVE_CHARSET
 #include "lib/charsets.h"
 #endif
@@ -174,7 +174,7 @@ static void
 edit_help (void)
 {
     ev_help_t event_data = { NULL, "[Internal File Editor]" };
-    mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data, NULL, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_CORE, "help", &event_data, NULL, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -446,7 +446,7 @@ edit_event (Gpm_Event * event, void *data)
 
         if (local.x == w->cols - dx - 4)
         {
-            mc_event_raise (MCEVENT_GROUP_EDITOR, "toggle_fullscreen", edit, NULL, NULL);
+            mc_event_dispatch (MCEVENT_GROUP_EDITOR, "toggle_fullscreen", edit, NULL, NULL);
             return MOU_NORMAL;
         }
 
@@ -594,7 +594,7 @@ edit_event (Gpm_Event * event, void *data)
             else if (y == w->y && (event->type & (GPM_DOUBLE | GPM_UP)) == (GPM_DOUBLE | GPM_UP))
             {
                 /* double click on top line (toggle fullscreen) */
-                mc_event_raise (MCEVENT_GROUP_EDITOR, "toggle_fullscreen", edit, NULL, NULL);
+                mc_event_dispatch (MCEVENT_GROUP_EDITOR, "toggle_fullscreen", edit, NULL, NULL);
                 edit->drag_state = MCEDIT_DRAG_NORMAL;
                 edit->force |= REDRAW_COMPLETELY;
                 edit_update_screen (edit);
@@ -692,7 +692,7 @@ edit_dialog_event (Gpm_Event * event, void *data)
 
             /* Handle buttons */
             if (x <= 2)
-                mc_event_raise (MCEVENT_GROUP_EDITOR, "toggle_fullscreen", e, NULL, NULL);
+                mc_event_dispatch (MCEVENT_GROUP_EDITOR, "toggle_fullscreen", e, NULL, NULL);
             else
                 send_message (h, NULL, MSG_ACTION, CK_Close, NULL);
 
@@ -814,7 +814,7 @@ edit_dialog_command_execute (WDialog * h, unsigned long command)
         break;
     }
 
-    if (mc_event_raise (event_group_name, event_name, event_data, &ret, NULL))
+    if (mc_event_dispatch (event_group_name, event_name, event_data, &ret, NULL))
     {
         return (ret.b) ? MSG_HANDLED : MSG_NOT_HANDLED;
     }

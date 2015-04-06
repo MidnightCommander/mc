@@ -425,7 +425,7 @@ hotlist_button_callback (WButton * button, int action)
         return 0;
 
     case B_ADD_CURRENT:
-        mc_event_raise (MCEVENT_GROUP_FILEMANAGER, "hotlist_add", NULL, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER, "hotlist_add", NULL, NULL, NULL);
         return 0;
 
     case B_NEW_ENTRY:

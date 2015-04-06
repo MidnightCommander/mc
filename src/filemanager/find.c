@@ -708,7 +708,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
             if (in_start_dir != INPUT_LAST_TEXT)
                 g_free (in_start_dir);
 
-            mc_event_raise (MCEVENT_GROUP_TREEVIEW, "show_box", NULL, &ret, NULL);
+            mc_event_dispatch (MCEVENT_GROUP_TREEVIEW, "show_box", NULL, &ret, NULL);
 
             if (ret.s == NULL)
             {

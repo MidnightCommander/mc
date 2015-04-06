@@ -54,7 +54,7 @@
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/widget.h"
-#include "lib/event.h"          /* mc_event_raise() */
+#include "lib/event.h"          /* mc_event_dispatch() */
 
 #include "src/setup.h"          /* confirm_delete, panels_options */
 #include "src/keybind-defaults.h"
@@ -219,7 +219,7 @@ load_tree (WTree * tree)
     tree->selected_ptr = tree->store->tree_first;
     chdir_info.dir = (char *) mc_config_get_home_dir ();
 
-    mc_event_raise (MCEVENT_GROUP_TREEVIEW, "chdir", &chdir_info, NULL, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_TREEVIEW, "chdir", &chdir_info, NULL, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -519,7 +519,7 @@ tree_move_to_child (WTree * tree, GError ** error)
     else
     {
         /* No -> rescan and try again */
-        mc_event_raise (MCEVENT_GROUP_TREEVIEW, "rescan", tree, NULL, error);
+        mc_event_dispatch (MCEVENT_GROUP_TREEVIEW, "rescan", tree, NULL, error);
         current = tree->selected_ptr->next;
         if (current && current->sublevel > tree->selected_ptr->sublevel)
         {
@@ -579,7 +579,7 @@ static void
 maybe_chdir (WTree * tree, GError ** error)
 {
     if (xtree_mode && tree->is_panel && is_idle ())
-        mc_event_raise (MCEVENT_GROUP_TREEVIEW, "enter", tree, NULL, error);
+        mc_event_dispatch (MCEVENT_GROUP_TREEVIEW, "enter", tree, NULL, error);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -629,7 +629,7 @@ tree_event (Gpm_Event * event, void *data)
             tree->selected_ptr = tree->tree_shown[local.y];
             tree->topdiff = local.y;
         }
-        mc_event_raise (MCEVENT_GROUP_TREEVIEW, "enter", tree, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_TREEVIEW, "enter", tree, NULL, NULL);
     }
 
     return MOU_NORMAL;
@@ -783,7 +783,7 @@ tree_execute_cmd (WTree * tree, unsigned long command)
     if (command != CK_Quit /* ignore left-right ? */ )
         show_tree (tree);
 
-    if (mc_event_raise (MCEVENT_GROUP_TREEVIEW, event_name, tree, &ret, NULL))
+    if (mc_event_dispatch (MCEVENT_GROUP_TREEVIEW, event_name, tree, &ret, NULL))
     {
         return (ret.b) ? MSG_HANDLED : MSG_NOT_HANDLED;
     }
@@ -826,7 +826,7 @@ tree_key (WTree * tree, int key)
     /* Do not eat characters not meant for the tree below ' ' (e.g. C-l). */
     if (!command_prompt && ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE))
     {
-        mc_event_raise (MCEVENT_GROUP_TREEVIEW, "search_begin", tree, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_TREEVIEW, "search_begin", tree, NULL, NULL);
         tree_do_search (tree, key);
         return MSG_HANDLED;
     }
@@ -1022,7 +1022,7 @@ mc_tree_cmd_help (event_info_t * event_info, gpointer data, GError ** error)
     (void) error;
     (void) data;
 
-    mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data, NULL, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_CORE, "help", &event_data, NULL, NULL);
 
     return TRUE;
 }
@@ -1457,7 +1457,7 @@ mc_tree_cmd_rmdir (event_info_t * event_info, gpointer data, GError ** error)
 
     file_op_context_create_ui (ctx, FALSE, FILEGUI_DIALOG_ONE_ITEM);
     if (erase_dir (tctx, ctx, tree->selected_ptr->name) == FILE_CONT)
-        mc_event_raise (MCEVENT_GROUP_TREEVIEW, "forget", tree, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_TREEVIEW, "forget", tree, NULL, NULL);
     file_op_total_context_destroy (tctx);
     file_op_context_destroy (ctx);
 

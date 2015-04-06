@@ -61,7 +61,7 @@ gboolean mc_event_mass_add (event_init_t *, GError **);
 
 /* raise.c: */
 gboolean
-mc_event_raise (const gchar * event_group_name, const gchar * event_name, gpointer event_data,
-                event_return_t * ret, GError ** error);
+mc_event_dispatch (const gchar * event_group_name, const gchar * event_name, gpointer event_data,
+                   event_return_t * ret, GError ** error);
 /*** inline functions ****************************************************************************/
 #endif /* MC__EVENT_H */

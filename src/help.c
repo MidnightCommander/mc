@@ -725,7 +725,7 @@ help_execute_cmd (unsigned long command)
         res = MSG_NOT_HANDLED;
     }
 
-    if (mc_event_raise (event_group_name, event_name, event_data, &ret, NULL))
+    if (mc_event_dispatch (event_group_name, event_name, event_data, &ret, NULL))
     {
         return (ret.b) ? MSG_HANDLED : MSG_NOT_HANDLED;
     }

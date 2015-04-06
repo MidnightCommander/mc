@@ -407,7 +407,7 @@ mc_keymap_process_group (const char *group, long pressed_keycode, void *data, ev
     if (keymap_event->switch_group != NULL)
         data = keymap_event->switch_group;
 
-    ret_value = mc_event_raise (keymap_event->group, keymap_event->name, data, ret, error);
+    ret_value = mc_event_dispatch (keymap_event->group, keymap_event->name, data, ret, error);
 
     if (switch_group_cmd_was_called && switched_group == NULL)
     {

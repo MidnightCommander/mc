@@ -1886,7 +1886,7 @@ mc_diffviewer_cmd_merge (event_info_t * event_info, gpointer data, GError ** err
         vfs_path_free (merge_file_name_vpath);
     }
 
-    mc_event_raise (MCEVENT_GROUP_DIFFVIEWER, "redo", dview, NULL, error);
+    mc_event_dispatch (MCEVENT_GROUP_DIFFVIEWER, "redo", dview, NULL, error);
 
     return TRUE;
 }

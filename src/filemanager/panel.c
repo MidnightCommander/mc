@@ -2042,9 +2042,9 @@ do_mark_file (WPanel * panel, mark_act_t do_move)
 {
     do_file_mark (panel, panel->selected, selection (panel)->f.marked ? 0 : 1);
     if ((panels_options.mark_moves_down && do_move == MARK_DOWN) || do_move == MARK_FORCE_DOWN)
-        mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_down", panel, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_down", panel, NULL, NULL);
     else if (do_move == MARK_FORCE_UP)
-        mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_up", panel, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_up", panel, NULL, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2442,7 +2442,7 @@ panel_execute_cmd (WPanel * panel, unsigned long command)
     const char *event_name = NULL;
 
     if (command != CK_Search)
-        mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "search_stop", panel, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "search_stop", panel, NULL, NULL);
 
     ret.b = TRUE;
 
@@ -2611,7 +2611,7 @@ panel_execute_cmd (WPanel * panel, unsigned long command)
         break;
     }
 
-    mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, event_name, panel, &ret, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, event_name, panel, &ret, NULL);
 
     return (ret.b) ? MSG_HANDLED : MSG_NOT_HANDLED;
 }
@@ -2625,7 +2625,7 @@ panel_key (WPanel * panel, int key)
 
     if (is_abort_char (key))
     {
-        mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "search_stop", panel, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "search_stop", panel, NULL, NULL);
         return MSG_HANDLED;
     }
 
@@ -2641,13 +2641,14 @@ panel_key (WPanel * panel, int key)
 
     if (panels_options.torben_fj_mode && key == ALT ('h'))
     {
-        mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_middle_screen", panel, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_middle_screen", panel, NULL,
+                           NULL);
         return MSG_HANDLED;
     }
 
     if (!command_prompt && ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE))
     {
-        mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "search", panel, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "search", panel, NULL, NULL);
         do_search (panel, key);
         return MSG_HANDLED;
     }
@@ -2711,7 +2712,7 @@ panel_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
     case MSG_UNFOCUS:
         /* Janne: look at this for the multiple panel options */
-        mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "search_stop", panel, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "search_stop", panel, NULL, NULL);
         panel->active = 0;
         show_dir (panel);
         unselect_item (panel);
@@ -2864,24 +2865,24 @@ panel_event (Gpm_Event * event, void *data)
         /* "<" button */
         if (mouse_down && local.x == 2)
         {
-            mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "directory_history_prev", panel, NULL,
-                            NULL);
+            mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "directory_history_prev", panel,
+                               NULL, NULL);
             goto finish;
         }
 
         /* ">" button */
         if (mouse_down && local.x == w->cols - 1)
         {
-            mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "directory_history_next", panel, NULL,
-                            NULL);
+            mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "directory_history_next", panel,
+                               NULL, NULL);
             goto finish;
         }
 
         /* "^" button */
         if (mouse_down && local.x >= w->cols - 4 && local.x <= w->cols - 2)
         {
-            mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "directory_history_list", panel, NULL,
-                            NULL);
+            mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "directory_history_list", panel,
+                               NULL, NULL);
             goto finish;
         }
 
@@ -2909,9 +2910,10 @@ panel_event (Gpm_Event * event, void *data)
         if (is_active)
         {
             if (panels_options.mouse_move_pages && (panel->top_file > 0))
-                mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_page_up", panel, NULL, NULL);
+                mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_page_up", panel, NULL,
+                                   NULL);
             else                /* We are in first page */
-                mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_up", panel, NULL, NULL);
+                mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_up", panel, NULL, NULL);
         }
         goto finish;
     }
@@ -2922,10 +2924,10 @@ panel_event (Gpm_Event * event, void *data)
         {
             if (panels_options.mouse_move_pages
                 && (panel->top_file + ITEMS (panel) < panel->dir.len))
-                mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_page_down", panel, NULL,
-                                NULL);
+                mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_page_down", panel, NULL,
+                                   NULL);
             else                /* We are in last page */
-                mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_down", panel, NULL, NULL);
+                mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_down", panel, NULL, NULL);
         }
         goto finish;
     }
@@ -2962,7 +2964,7 @@ panel_event (Gpm_Event * event, void *data)
     }
     else if ((local.type & (GPM_UP | GPM_DOUBLE)) == (GPM_UP | GPM_DOUBLE) &&
              local.y > 0 && local.y <= lines)
-        mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "enter", panel, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "enter", panel, NULL, NULL);
 
   finish:
     if (panel->dirty)
@@ -3998,7 +4000,7 @@ mc_panel_cmd_chdir_other (event_info_t * event_info, gpointer data, GError ** er
         try_to_select (current_panel, sel_entry);
     change_panel ();
 
-    mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_down", panel, NULL, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_down", panel, NULL, NULL);
 
     return TRUE;
 }
@@ -4062,7 +4064,7 @@ mc_panel_cmd_chdir_other_if_link (event_info_t * event_info, gpointer data, GErr
     vfs_path_free (new_dir_vpath);
     change_panel ();
 
-    mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_down", panel, NULL, NULL);
+    mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_down", panel, NULL, NULL);
 
     return TRUE;
 }
@@ -4252,8 +4254,8 @@ mc_panel_cmd_save_current_file_to_clip_file (event_info_t * event_info, gpointer
     (void) error;
 
     if (current_panel->marked == 0)
-        mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file",
-                        (gpointer) selection (current_panel)->fname, NULL, error);
+        mc_event_dispatch (MCEVENT_GROUP_CORE, "clipboard_text_to_file",
+                           (gpointer) selection (current_panel)->fname, NULL, error);
     else
     {
         int i;
@@ -4280,8 +4282,8 @@ mc_panel_cmd_save_current_file_to_clip_file (event_info_t * event_info, gpointer
                 }
             }
 
-        mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_text_to_file", (gpointer) flist, NULL,
-                        error);
+        mc_event_dispatch (MCEVENT_GROUP_CORE, "clipboard_text_to_file", (gpointer) flist, NULL,
+                           error);
         g_free (flist);
     }
     return TRUE;
@@ -4616,7 +4618,7 @@ mc_panel_cmd_mark_right (event_info_t * event_info, gpointer data, GError ** err
     for (; lines != 0; lines--)
     {
         do_file_mark (panel, panel->selected, state_mark);
-        mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_down", panel, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_down", panel, NULL, NULL);
     }
     do_file_mark (panel, panel->selected, state_mark);
 
@@ -4643,7 +4645,7 @@ mc_panel_cmd_mark_left (event_info_t * event_info, gpointer data, GError ** erro
     for (; lines != 0; lines--)
     {
         do_file_mark (panel, panel->selected, state_mark);
-        mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_up", panel, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_up", panel, NULL, NULL);
     }
     do_file_mark (panel, panel->selected, state_mark);
 
@@ -4789,13 +4791,14 @@ mc_panel_cmd_goto_home (event_info_t * event_info, gpointer data, GError ** erro
 
         if (panel->selected > middle_pos)
         {
-            mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_middle_screen", panel, NULL,
-                            NULL);
+            mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_middle_screen", panel, NULL,
+                               NULL);
             return TRUE;
         }
         if (panel->selected != panel->top_file)
         {
-            mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_top_screen", panel, NULL, NULL);
+            mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_top_screen", panel, NULL,
+                               NULL);
             return TRUE;
         }
     }
@@ -4831,14 +4834,14 @@ mc_panel_cmd_goto_end (event_info_t * event_info, gpointer data, GError ** error
 
         if (panel->selected < middle_pos)
         {
-            mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_middle_screen", panel, NULL,
-                            NULL);
+            mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_middle_screen", panel, NULL,
+                               NULL);
             return TRUE;
         }
         if (panel->selected != (panel->top_file + ITEMS (panel) - 1))
         {
-            mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_bottom_screen", panel, NULL,
-                            NULL);
+            mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_bottom_screen", panel, NULL,
+                               NULL);
             return TRUE;
         }
     }
@@ -4993,7 +4996,7 @@ mc_panel_cmd_search (event_info_t * event_info, gpointer data, GError ** error)
         if (panel->selected + 1 == panel->dir.len)
             panel->selected = 0;
         else
-            mc_event_raise (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_down", panel, NULL, NULL);
+            mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_down", panel, NULL, NULL);
 
         /* in case if there was no search string we need to recall
            previous string, with which we ended previous searching */

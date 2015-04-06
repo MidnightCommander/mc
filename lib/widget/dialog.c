@@ -43,7 +43,7 @@
 #include "lib/strutil.h"
 #include "lib/widget.h"
 #include "lib/fileloc.h"        /* MC_HISTORY_FILE */
-#include "lib/event.h"          /* mc_event_raise() */
+#include "lib/event.h"          /* mc_event_dispatch() */
 
 /*** global variables ****************************************************************************/
 
@@ -169,7 +169,7 @@ dlg_read_history (WDialog * h)
     event_data.receiver = NULL;
 
     /* create all histories in dialog */
-    mc_event_raise (h->event_group, MCEVENT_HISTORY_LOAD, &event_data, NULL, NULL);
+    mc_event_dispatch (h->event_group, MCEVENT_HISTORY_LOAD, &event_data, NULL, NULL);
 
     mc_config_deinit (event_data.cfg);
     g_free (profile);
@@ -305,12 +305,12 @@ dlg_execute_cmd (WDialog * h, unsigned long command)
     case CK_Help:
         {
             ev_help_t help_event_data = { NULL, h->help_ctx };
-            mc_event_raise (MCEVENT_GROUP_CORE, "help", &help_event_data, NULL, NULL);
+            mc_event_dispatch (MCEVENT_GROUP_CORE, "help", &help_event_data, NULL, NULL);
         }
         break;
 
     case CK_Suspend:
-        mc_event_raise (MCEVENT_GROUP_CORE, "suspend", NULL, NULL, NULL);
+        mc_event_dispatch (MCEVENT_GROUP_CORE, "suspend", NULL, NULL, NULL);
         refresh_cmd ();
         break;
     case CK_Refresh:
@@ -337,7 +337,7 @@ dlg_execute_cmd (WDialog * h, unsigned long command)
         ret = MSG_NOT_HANDLED;
     }
 
-    if (mc_event_raise (event_group_name, event_name, event_data, &event_ret, NULL))
+    if (mc_event_dispatch (event_group_name, event_name, event_data, &event_ret, NULL))
     {
         return (event_ret.b) ? MSG_HANDLED : MSG_NOT_HANDLED;
     }
@@ -1323,7 +1323,7 @@ dlg_save_history (WDialog * h)
         event_data.receiver = NULL;
 
         /* get all histories in dialog */
-        mc_event_raise (h->event_group, MCEVENT_HISTORY_SAVE, &event_data, NULL, NULL);
+        mc_event_dispatch (h->event_group, MCEVENT_HISTORY_SAVE, &event_data, NULL, NULL);
 
         mc_config_save_file (event_data.cfg, NULL);
         mc_config_deinit (event_data.cfg);
