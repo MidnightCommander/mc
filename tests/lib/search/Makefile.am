@@ -1,3 +1,4 @@
+PACKAGE_STRING = "/lib/search"
 
 AM_CPPFLAGS = \
 	$(GLIB_CFLAGS) \

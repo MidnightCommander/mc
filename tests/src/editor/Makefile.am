@@ -1,3 +1,5 @@
+PACKAGE_STRING = "/src/editor"
+
 AM_CPPFLAGS = \
 	-DTEST_SHARE_DIR=\"$(abs_srcdir)\" \
 	$(GLIB_CFLAGS) \

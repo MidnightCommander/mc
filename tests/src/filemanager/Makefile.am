@@ -1,3 +1,5 @@
+PACKAGE_STRING = "/src/filemanager"
+
 AM_CPPFLAGS = \
 	$(GLIB_CFLAGS) \
 	-I$(top_srcdir) \
