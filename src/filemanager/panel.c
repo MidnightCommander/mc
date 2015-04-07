@@ -2040,11 +2040,17 @@ move_selection (WPanel * panel, int lines)
 static void
 do_mark_file (WPanel * panel, mark_act_t do_move)
 {
+    const char *event_name = NULL;
+
     do_file_mark (panel, panel->selected, selection (panel)->f.marked ? 0 : 1);
+
     if ((panels_options.mark_moves_down && do_move == MARK_DOWN) || do_move == MARK_FORCE_DOWN)
-        mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_down", panel, NULL, NULL);
+        event_name = "goto_down";
     else if (do_move == MARK_FORCE_UP)
-        mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_up", panel, NULL, NULL);
+        event_name = "goto_up";
+
+    if (event_name != NULL)
+        mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, event_name, panel, NULL, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2788,151 +2794,160 @@ mark_if_marking (WPanel * panel, Gpm_Event * event)
  * sorted on that column.
  */
 
-static void
-mouse_sort_col (WPanel * panel, int x)
+static gboolean
+panel_event_handle_sort_col (Gpm_Event * event, WPanel * panel)
 {
-    int i;
-    const char *lc_sort_name = NULL;
-    panel_field_t *col_sort_format = NULL;
-    format_e *format;
+    Gpm_Event local;
+    const gboolean mouse_down = (event->type & GPM_DOWN) != 0;
 
-    for (i = 0, format = panel->format; format != NULL; format = format->next)
+    local = mouse_get_local (event, WIDGET (panel));
+
+    if (mouse_down && (local.buttons & (GPM_B_UP | GPM_B_DOWN)) == 0 && local.y == 2)
     {
-        i += format->field_len;
-        if (x < i + 1)
+
+        int i;
+        const char *lc_sort_name = NULL;
+        panel_field_t *col_sort_format = NULL;
+        format_e *format;
+
+        for (i = 0, format = panel->format; format != NULL; format = format->next)
         {
-            /* found column */
-            lc_sort_name = format->title;
-            break;
+            i += format->field_len;
+            if (local.x < i + 1)
+            {
+                /* found column */
+                lc_sort_name = format->title;
+                break;
+            }
         }
-    }
 
-    if (lc_sort_name == NULL)
-        return;
+        if (lc_sort_name == NULL)
+            return TRUE;
 
-    for (i = 0; panel_fields[i].id != NULL; i++)
-    {
-        const char *title;
-
-        title = panel_get_title_without_hotkey (panel_fields[i].title_hotkey);
-        if (strcmp (title, lc_sort_name) == 0 && panel_fields[i].sort_routine != NULL)
+        for (i = 0; panel_fields[i].id != NULL; i++)
         {
-            col_sort_format = &panel_fields[i];
-            break;
+            const char *title;
+
+            title = panel_get_title_without_hotkey (panel_fields[i].title_hotkey);
+            if (strcmp (title, lc_sort_name) == 0 && panel_fields[i].sort_routine != NULL)
+            {
+                col_sort_format = &panel_fields[i];
+                break;
+            }
         }
-    }
 
-    if (col_sort_format == NULL)
-        return;
+        if (col_sort_format == NULL)
+            return TRUE;
 
-    if (panel->sort_field == col_sort_format)
-    {
-        /* reverse the sort if clicked column is already the sorted column */
-        panel->sort_info.reverse = !panel->sort_info.reverse;
+        if (panel->sort_field == col_sort_format)
+        {
+            /* reverse the sort if clicked column is already the sorted column */
+            panel->sort_info.reverse = !panel->sort_info.reverse;
+        }
+        else
+        {
+            /* new sort is forced to be ascending */
+            panel->sort_info.reverse = FALSE;
+        }
+        panel_set_sort_order (panel, col_sort_format);
+        return TRUE;
     }
-    else
-    {
-        /* new sort is forced to be ascending */
-        panel->sort_info.reverse = FALSE;
-    }
-    panel_set_sort_order (panel, col_sort_format);
+    return FALSE;
 }
 
-
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Mouse callback of the panel minus repainting.
- */
-static int
-panel_event (Gpm_Event * event, void *data)
-{
-    WPanel *panel = PANEL (data);
-    Widget *w = WIDGET (data);
 
-    const int lines = llines (panel);
-    const gboolean is_active = widget_is_active (panel);
-    const gboolean mouse_down = (event->type & GPM_DOWN) != 0;
+static gboolean
+panel_event_handle_first_line (Gpm_Event * event, WPanel * panel)
+{
+    const char *event_name = NULL;
+    const char *event_group_name = MCEVENT_GROUP_FILEMANAGER_PANEL;
+    Widget *w = WIDGET (panel);
     Gpm_Event local;
 
-    if (!mouse_global_in_widget (event, WIDGET (data)))
-        return MOU_UNHANDLED;
+    local = mouse_get_local (event, w);
+    if (local.y == 1)
+    {
+        const gboolean mouse_down = (event->type & GPM_DOWN) != 0;
+
+
+        if (mouse_down && local.x == 2) /* "<" button */
+            event_name = "directory_history_prev";
+        else if (mouse_down && local.x == w->cols - 1)  /* ">" button */
+            event_name = "directory_history_next";
+        else if (mouse_down && local.x >= w->cols - 4 && local.x <= w->cols - 2)        /* "^" button */
+            event_name = "directory_history_list";
+        else if (mouse_down && local.x == w->cols - 5)  /* "." button show/hide hidden files */
+        {
+            event_group_name = MCEVENT_GROUP_FILEMANAGER;
+            event_name = "toggle_hidden";
+        }
+
+        if (event_name != NULL)
+            mc_event_dispatch (event_group_name, event_name, panel, NULL, NULL);
+
+    }
+    return (event_name != NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+panel_event_handle_wheel (Gpm_Event * event, WPanel * panel)
+{
+    Widget *w = WIDGET (panel);
+    const gboolean mouse_down = (event->type & GPM_DOWN) != 0;
+    gboolean ret_value = FALSE;
+    const char *event_name = NULL;
+    Gpm_Event local;
+    const gboolean is_active = widget_is_active (panel);
 
     local = mouse_get_local (event, w);
 
-    /* 1st line */
-    if (local.y == 1)
-    {
-        /* "<" button */
-        if (mouse_down && local.x == 2)
-        {
-            mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "directory_history_prev", panel,
-                               NULL, NULL);
-            goto finish;
-        }
-
-        /* ">" button */
-        if (mouse_down && local.x == w->cols - 1)
-        {
-            mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "directory_history_next", panel,
-                               NULL, NULL);
-            goto finish;
-        }
-
-        /* "^" button */
-        if (mouse_down && local.x >= w->cols - 4 && local.x <= w->cols - 2)
-        {
-            mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "directory_history_list", panel,
-                               NULL, NULL);
-            goto finish;
-        }
-
-        /* "." button show/hide hidden files */
-        if (mouse_down && local.x == w->cols - 5)
-        {
-            send_message (midnight_dlg, NULL, MSG_ACTION, CK_ShowHidden, NULL);
-            goto finish;
-        }
-
-        /* no other events on 1st line */
-        return MOU_UNHANDLED;
-    }
-
-    /* sort on clicked column; don't handle wheel events */
-    if (mouse_down && (local.buttons & (GPM_B_UP | GPM_B_DOWN)) == 0 && local.y == 2)
-    {
-        mouse_sort_col (panel, local.x);
-        goto finish;
-    }
-
-    /* Mouse wheel events */
     if (mouse_down && (local.buttons & GPM_B_UP) != 0)
     {
         if (is_active)
         {
             if (panels_options.mouse_move_pages && (panel->top_file > 0))
-                mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_page_up", panel, NULL,
-                                   NULL);
+                event_name = "goto_page_up";
             else                /* We are in first page */
-                mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_up", panel, NULL, NULL);
+                event_name = "goto_up";
         }
-        goto finish;
+        ret_value = TRUE;
     }
-
-    if (mouse_down && (local.buttons & GPM_B_DOWN) != 0)
+    else if (mouse_down && (local.buttons & GPM_B_DOWN) != 0)
     {
         if (is_active)
         {
             if (panels_options.mouse_move_pages
                 && (panel->top_file + ITEMS (panel) < panel->dir.len))
-                mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_page_down", panel, NULL,
-                                   NULL);
+                event_name = "goto_page_down";
             else                /* We are in last page */
-                mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "goto_down", panel, NULL, NULL);
+                event_name = "goto_down";
         }
-        goto finish;
+        ret_value = TRUE;
     }
 
+    if (event_name != NULL)
+        mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, event_name, panel, NULL, NULL);
+
+    return ret_value;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+panel_event_handle_drag_n_drop (Gpm_Event * event, WPanel * panel)
+{
+    Widget *w = WIDGET (panel);
+    const gboolean is_active = widget_is_active (panel);
+    gboolean ret_value = FALSE;
+    Gpm_Event local;
+    const int lines = llines (panel);
+
+    local = mouse_get_local (event, w);
     local.y -= 2;
+
     if ((local.type & (GPM_DOWN | GPM_DRAG)) != 0)
     {
         int my_index;
@@ -2961,14 +2976,38 @@ panel_event (Gpm_Event * event, void *data)
 
         /* This one is new */
         mark_if_marking (panel, &local);
+        ret_value = TRUE;
     }
     else if ((local.type & (GPM_UP | GPM_DOUBLE)) == (GPM_UP | GPM_DOUBLE) &&
              local.y > 0 && local.y <= lines)
+    {
         mc_event_dispatch (MCEVENT_GROUP_FILEMANAGER_PANEL, "enter", panel, NULL, NULL);
+        ret_value = TRUE;
+    }
+    return ret_value;
+}
 
-  finish:
-    if (panel->dirty)
-        widget_redraw (w);
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Mouse callback of the panel minus repainting.
+ */
+static int
+panel_event (Gpm_Event * event, void *data)
+{
+    WPanel *panel = PANEL (data);
+
+    if (!mouse_global_in_widget (event, WIDGET (data)))
+        return MOU_UNHANDLED;
+
+    /* sort on clicked column; don't handle wheel events */
+    if (panel_event_handle_sort_col (event, panel) ||
+        panel_event_handle_first_line (event, panel) ||
+        panel_event_handle_wheel (event, panel) || panel_event_handle_drag_n_drop (event, panel))
+    {
+        if (panel->dirty)
+            widget_redraw (WIDGET (data));
+    }
+
 
     return MOU_NORMAL;
 }
