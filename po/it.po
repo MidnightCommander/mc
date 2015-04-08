@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2015-03-13 11:24+0100\n"
-"PO-Revision-Date: 2015-03-13 11:25+0100\n"
+"PO-Revision-Date: 2015-04-08 09:55+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
 "it/)\n"
@@ -3663,7 +3663,7 @@ msgstr "Spiacente, non posso mettere il programma in background"
 
 #: ../src/filemanager/filegui.c:258 ../src/filemanager/find.c:185
 msgid "S&uspend"
-msgstr "Sospendi"
+msgstr "S&ospendi"
 
 #: ../src/filemanager/filegui.c:259 ../src/filemanager/find.c:186
 msgid "Con&tinue"
@@ -3796,7 +3796,7 @@ msgstr "Sorgente"
 
 #: ../src/filemanager/filegui.c:1076
 msgid "Target"
-msgstr "Destinaz"
+msgstr "Destinazione"
 
 #: ../src/filemanager/filegui.c:1100
 msgid "Deleting"
