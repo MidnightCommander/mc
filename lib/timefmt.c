@@ -120,7 +120,7 @@ const char *
 file_date (time_t when)
 {
     static char timebuf[MB_LEN_MAX * MAX_I18NTIMELENGTH + 1];
-    time_t current_time = time ((time_t) 0);
+    time_t current_time = time (NULL);
     const char *fmt;
 
     if (current_time > when + 6L * 30L * 24L * 60L * 60L        /* Old. */
