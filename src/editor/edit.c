@@ -42,7 +42,6 @@
 #include <sys/stat.h>
 #include <stdint.h>             /* UINTMAX_MAX */
 #include <stdlib.h>
-#include <fcntl.h>
 
 #include "lib/global.h"
 

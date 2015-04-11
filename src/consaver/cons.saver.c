@@ -64,7 +64,9 @@
 #ifdef HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>
 #endif
+#ifdef HAVE_FCNTL_H
 #include <fcntl.h>
+#endif
 #include <termios.h>
 
 #include "lib/unixcompat.h"     /* STDERR_FILENO */

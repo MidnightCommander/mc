@@ -46,7 +46,6 @@
 #endif
 #include <unistd.h>
 #include <stdlib.h>
-#include <fcntl.h>
 #include <pwd.h>
 #include <grp.h>
 #include <sys/time.h>

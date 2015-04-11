@@ -43,7 +43,6 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
-#include <fcntl.h>
 
 #include "lib/global.h"
 #include "lib/util.h"

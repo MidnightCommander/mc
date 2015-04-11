@@ -91,7 +91,6 @@ What to do with this?
 #endif
 #include <errno.h>
 #include <ctype.h>
-#include <fcntl.h>
 #include <sys/time.h>           /* gettimeofday() */
 #include <inttypes.h>           /* uintmax_t */
 

@@ -48,7 +48,6 @@
 #include <errno.h>
 #include <sys/stat.h>
 #include <stdlib.h>
-#include <fcntl.h>
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"

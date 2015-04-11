@@ -58,8 +58,6 @@
 #include <config.h>
 
 #include <errno.h>
-#include <fcntl.h>              /* include fcntl.h -> sys/fcntl.h only       */
-                                /* includes fcntl.h see IEEE Std 1003.1-2008 */
 #include <time.h>
 #include <sys/time.h>           /* gettimeofday() */
 #include <inttypes.h>           /* uintmax_t */

@@ -21,6 +21,9 @@
 #include <sys/param.h>
 #endif
 
+/* for O_* macros */
+#include <fcntl.h>
+
 /* for sig_atomic_t */
 #include <signal.h>
 

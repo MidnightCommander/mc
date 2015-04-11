@@ -41,7 +41,6 @@
 #include <sys/types.h>
 #include <signal.h>
 #include <ctype.h>              /* is_digit() */
-#include <fcntl.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #include <dirent.h>

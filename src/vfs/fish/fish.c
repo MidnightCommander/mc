@@ -52,7 +52,6 @@
 
 #include <config.h>
 #include <errno.h>
-#include <fcntl.h>
 #include <pwd.h>
 #include <grp.h>
 #include <sys/time.h>           /* gettimeofday() */

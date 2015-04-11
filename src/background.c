@@ -42,7 +42,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>           /* waitpid() */
-#include <fcntl.h>
 
 #include "lib/global.h"
 
