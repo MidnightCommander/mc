@@ -1778,6 +1778,7 @@ find_file (void)
         dirname = filename = NULL;
         is_start = FALSE;
         v = do_find (start_dir, start_dir_len, ignore_dirs, pattern, content, &dirname, &filename);
+        g_free (start_dir);
         g_free (ignore_dirs);
         g_free (pattern);
 
