@@ -735,6 +735,9 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
         }
     }
 
+    /* save len for later dir_list_clean() */
+    dir_copy.len = list->len;
+
     /* Add ".." except to the root directory. The ".." entry
        (if any) must be the first in the list. */
     tmp_path = vfs_path_get_by_index (vpath, 0)->path;
