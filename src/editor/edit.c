@@ -697,7 +697,7 @@ edit_find_line (WEdit * edit, long line)
     {
         long n;
 
-        n = abs (edit->line_numbers[i] - line);
+        n = labs (edit->line_numbers[i] - line);
         if (n < m)
         {
             m = n;

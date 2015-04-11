@@ -2346,7 +2346,7 @@ edit_block_copy_cmd (WEdit * edit)
     {
         long col_delta;
 
-        col_delta = abs (edit->column2 - edit->column1);
+        col_delta = labs (edit->column2 - edit->column1);
         edit_insert_column_of_text (edit, copy_buf, size, col_delta, &mark1, &mark2, &c1, &c2);
     }
     else
