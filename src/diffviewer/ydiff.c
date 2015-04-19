@@ -2003,6 +2003,8 @@ get_current_hunk (WDiff * dview, int *start_line1, int *end_line1, int *start_li
         case CHG_CH:
             res = DIFF_CHG;
             break;
+        default:
+            break;
         }
         while (pos > 0 && ((DIFFLN *) & g_array_index (a0, DIFFLN, pos))->ch != EQU_CH)
             pos--;
@@ -2237,6 +2239,8 @@ do_merge_hunk (WDiff * dview, action_direction_t merge_direction)
             break;
         case DIFF_CHG:
             dview_replace_hunk (dview, merge_file, from1, to1, from2, to2, merge_direction);
+            break;
+        default:
             break;
         }
         fflush (merge_file);

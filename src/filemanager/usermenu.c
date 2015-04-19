@@ -905,7 +905,10 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
             result = g_string_free (block, FALSE);
             goto ret;
         }                       /* sub case block */
+    default:
+        break;
     }                           /* switch */
+
     result = g_strdup ("% ");
     result[1] = c;
   ret:

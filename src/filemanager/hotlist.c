@@ -1538,6 +1538,8 @@ do { \
         case HL_TYPE_DOTDOT:
             /* do nothing */
             break;
+        default:
+            break;
         }
 }
 

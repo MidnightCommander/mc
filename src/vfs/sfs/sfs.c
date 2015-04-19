@@ -187,6 +187,8 @@ sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
             case '%':
                 COPY_CHAR;
                 continue;
+            default:
+                break;
             }
             if (ptr != NULL)
             {

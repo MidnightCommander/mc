@@ -170,6 +170,8 @@ fill_stat_struct (struct stat *etalon_stat, int iterator)
         etalon_stat->st_mtime = 1308838140;
         etalon_stat->st_ctime = 1308838140;
         break;
+    default:
+        break;
     }
 }
 

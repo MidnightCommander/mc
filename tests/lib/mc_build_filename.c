@@ -81,8 +81,9 @@ run_mc_build_filename (int iteration)
         return mc_build_filename ("pa", "", "th", NULL);
     case 12:
         return mc_build_filename ("/pa", "", "/th", NULL);
+    default:
+        return NULL;
     }
-    return NULL;
 }
 
 /* @DataSource("test_mc_build_filename_ds") */

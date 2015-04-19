@@ -115,7 +115,6 @@ examine_cd (const char *_path)
     /* Variable expansion */
     for (p = path_tilde, r = q; *p != '\0' && r < q + MC_MAXPATHLEN;)
     {
-
         switch (state)
         {
         case copy_sym:
@@ -181,6 +180,9 @@ examine_cd (const char *_path)
                 state = copy_sym;
                 break;
             }
+
+        default:
+            break;
         }
     }
 

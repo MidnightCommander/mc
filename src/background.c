@@ -315,6 +315,8 @@ background_attention (int fd, void *closure)
             case 4:
                 result = routine.have_ctx4 (Background, data[0], data[1], data[2], data[3]);
                 break;
+            default:
+                break;
             }
         else
             switch (argc)
@@ -334,6 +336,8 @@ background_attention (int fd, void *closure)
             case 4:
                 result =
                     routine.non_have_ctx4 (ctx, Background, data[0], data[1], data[2], data[3]);
+                break;
+            default:
                 break;
             }
 

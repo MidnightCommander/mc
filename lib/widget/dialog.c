@@ -241,6 +241,8 @@ do_select_widget (WDialog * h, GList * w, select_dir_t dir)
         case SELECT_PREV:
             h->current = dlg_widget_prev (h, h->current);
             break;
+        default:
+            break;
         }
     }
     while (h->current != w /* && (WIDGET (h->current->data)->options & W_DISABLED) == 0 */ );

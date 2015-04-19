@@ -309,6 +309,8 @@ vfs_path_url_split (vfs_path_element_t * path_element, const char *path)
                 case 'r':
                     path_element->port = 2;
                     break;
+                default:
+                    break;
                 }
             }
     }

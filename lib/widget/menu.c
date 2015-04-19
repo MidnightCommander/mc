@@ -475,6 +475,7 @@ menubar_handle_key (WMenuBar * menubar, int key)
             menubar_draw (menubar);
             return 1;
         }
+
     case KEY_LEFT:
     case XCTRL ('b'):
         menubar_left (menubar);
@@ -484,6 +485,9 @@ menubar_handle_key (WMenuBar * menubar, int key)
     case XCTRL ('f'):
         menubar_right (menubar);
         return 1;
+
+    default:
+        break;
     }
 
     if (!menubar->is_dropped)
@@ -553,6 +557,9 @@ menubar_handle_key (WMenuBar * menubar, int key)
         case KEY_UP:
         case XCTRL ('p'):
             menubar_up (menubar);
+            break;
+
+        default:
             break;
         }
     }

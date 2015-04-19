@@ -399,6 +399,8 @@ sftpfs_lseek (vfs_file_handler_t * file_handler, off_t offset, int whence, GErro
         }
         file_handler->pos = file_handler->ino->st.st_size - offset;
         break;
+    default:
+        break;
     }
 
     file_handler_data = (sftpfs_file_handler_data_t *) file_handler->data;

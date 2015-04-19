@@ -230,6 +230,8 @@ str_ascii_fit_to_term (const char *text, int width, align_crt_t just_mode)
         case J_RIGHT:
             ident = width - length;
             break;
+        default:
+            break;
         }
 
         /* add space before text */
@@ -288,6 +290,8 @@ str_ascii_fit_to_term (const char *text, int width, align_crt_t just_mode)
             break;
         case J_RIGHT:
             ident = length - width;
+            break;
+        default:
             break;
         }
 

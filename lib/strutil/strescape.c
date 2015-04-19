@@ -81,6 +81,8 @@ strutils_escape (const char *src, gsize src_len, const char *escaped_chars,
             case '\0':
                 g_string_append (ret, "\\0");
                 continue;
+            default:
+                break;
             }
         }
 
@@ -145,6 +147,8 @@ strutils_unescape (const char *src, gsize src_len, const char *unescaped_chars,
                 case '0':
                     g_string_append_c (ret, '\0');
                     continue;
+                default:
+                    break;
                 }
             }
 

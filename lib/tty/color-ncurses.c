@@ -144,7 +144,6 @@ tty_color_deinit_lib (void)
 void
 tty_color_try_alloc_pair_lib (tty_color_pair_t * mc_color_pair)
 {
-
     if (mc_color_pair->ifg <= (int) SPEC_A_REVERSE)
     {
         switch (mc_color_pair->ifg)
@@ -169,6 +168,8 @@ tty_color_try_alloc_pair_lib (tty_color_pair_t * mc_color_pair)
                                             COLOR_WHITE, COLOR_BLACK,
                                             COLOR_WHITE, COLOR_BLACK, A_UNDERLINE);
             break;
+        default:
+            break;
         }
     }
     else
@@ -178,7 +179,6 @@ tty_color_try_alloc_pair_lib (tty_color_pair_t * mc_color_pair)
         ifg = mc_color_pair->ifg;
         ibg = mc_color_pair->ibg;
         attr = mc_color_pair->attr;
-
 
         /* In non-256 color mode, change bright colors into bold */
         if (!tty_use_256colors ())

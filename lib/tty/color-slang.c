@@ -156,7 +156,6 @@ tty_color_try_alloc_pair_lib (tty_color_pair_t * mc_color_pair)
                                             "white", "black", "white", "black", SLTT_BOLD_MASK);
             break;
         case SPEC_A_BOLD_REVERSE:
-
             mc_tty_color_pair_init_special (mc_color_pair,
                                             "white", "white",
                                             "white", "white", SLTT_BOLD_MASK | SLTT_REV_MASK);
@@ -164,6 +163,8 @@ tty_color_try_alloc_pair_lib (tty_color_pair_t * mc_color_pair)
         case SPEC_A_UNDERLINE:
             mc_tty_color_pair_init_special (mc_color_pair,
                                             "white", "black", "white", "black", SLTT_ULINE_MASK);
+            break;
+        default:
             break;
         }
     }

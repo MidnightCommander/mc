@@ -659,6 +659,8 @@ command_completion_function (const char *_text, int state, input_complete_t flag
             if (!found)
                 MC_PTR_FREE (cur_word);
         }
+    default:
+        break;
     }
 
     if (found == NULL)
@@ -1088,6 +1090,8 @@ query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                     /* fallthrough */
                 case -2:
                     return MSG_HANDLED;
+                default:
+                    break;
                 }
 
                 for (i = 0, e = listbox_get_first_link (LISTBOX (h->current->data));

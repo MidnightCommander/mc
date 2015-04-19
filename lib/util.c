@@ -297,6 +297,8 @@ name_quote (const char *s, gboolean quote_percent)
             if (ret->len == 0)
                 g_string_append_c (ret, '\\');
             break;
+        default:
+            break;
         }
         g_string_append_c (ret, *s);
     }
@@ -855,6 +857,8 @@ get_compression_type (int fd, const char *name)
             return COMPRESSION_BZIP;
         case 'h':
             return COMPRESSION_BZIP2;
+        default:
+            break;
         }
     }
 
@@ -902,6 +906,8 @@ decompress_extension (int type)
         return "/ulzma" VFS_PATH_URL_DELIMITER;
     case COMPRESSION_XZ:
         return "/uxz" VFS_PATH_URL_DELIMITER;
+    default:
+        break;
     }
     /* Should never reach this place */
     fprintf (stderr, "Fatal: decompress_extension called with an unknown argument\n");

@@ -750,6 +750,8 @@ cpio_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
             continue;
         case STATUS_TRAIL:
             break;
+        default:
+            break;
         }
         break;
     }

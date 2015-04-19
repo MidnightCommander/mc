@@ -330,6 +330,8 @@ mc_deserialize_config (const char *data, GError ** error)
             g_free (current_value);
             current_status = WAIT_GROUP;
             break;
+        default:
+            break;
         }
     }
     g_free (current_group);

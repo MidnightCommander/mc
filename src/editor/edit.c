@@ -1168,6 +1168,8 @@ edit_do_undo (WEdit * edit)
         case COLUMN_OFF:
             edit->column_highlight = 0;
             break;
+        default:
+            break;
         }
         if (ac >= 256 && ac < 512)
             edit_insert_ahead (edit, ac - 256);
@@ -1250,6 +1252,8 @@ edit_do_redo (WEdit * edit)
             break;
         case COLUMN_OFF:
             edit->column_highlight = 0;
+            break;
+        default:
             break;
         }
         if (ac >= 256 && ac < 512)
@@ -1912,6 +1916,7 @@ edit_write_stream (WEdit * edit, FILE * f)
                     return i;
                 break;
             case LB_ASIS:      /* default without changes */
+            default:
                 break;
             }
         }
@@ -3404,6 +3409,8 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
             edit->column_highlight = 0;
             edit_mark_cmd (edit, TRUE);
         }
+    default:
+        break;
     }
 
     switch (command)
@@ -3429,6 +3436,8 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
     case CK_MarkLeft:
     case CK_MarkRight:
         edit->force |= REDRAW_CHAR_ONLY;
+    default:
+        break;
     }
 
     /* basic cursor key commands */
@@ -3961,6 +3970,8 @@ edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
         case CK_DeleteToEnd:
             format_paragraph (edit, FALSE);
             edit->force |= REDRAW_PAGE;
+        default:
+            break;
         }
     }
 }

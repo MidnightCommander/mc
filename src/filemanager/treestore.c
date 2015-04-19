@@ -192,6 +192,8 @@ decode (char *buffer)
         case '\\':
             *q = '\\';
             break;
+        default:
+            break;
         }
     }
     *q = *p;

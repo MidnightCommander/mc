@@ -417,6 +417,8 @@ mcview_ccache_lookup (mcview_t * view, coord_cache_entry_t * coord, enum ccache_
         case NROFF_BACKSPACE:
             nroff_state = NROFF_CONTINUATION;
             break;
+        default:
+            break;
         }
 
         /* Cache entries must guarantee that for each i < j,

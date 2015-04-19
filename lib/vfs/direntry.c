@@ -638,6 +638,8 @@ vfs_s_lseek (void *fh, off_t offset, int whence)
     case SEEK_END:
         offset += size;
         break;
+    default:
+        break;
     }
     if (offset < 0)
         FH->pos = 0;
@@ -820,8 +822,9 @@ vfs_s_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
     case VFS_SETCTL_FLUSH:
         ((struct vfs_s_subclass *) path_element->class->data)->flush = 1;
         return 1;
+    default:
+        return 0;
     }
-    return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */

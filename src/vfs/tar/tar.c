@@ -422,6 +422,8 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *heade
             st->st_rdev =
                 (tar_from_oct (8, header->header.devmajor) << 8) |
                 tar_from_oct (8, header->header.devminor);
+        default:
+            break;
         }
     default:
         st->st_uid = tar_from_oct (8, header->header.uid);
@@ -799,6 +801,9 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
 
             case STATUS_EOF:
                 return 0;
+
+            default:
+                break;
             }
 
             /* Record of zeroes */
@@ -806,6 +811,8 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
             /* FALL THRU */
             /* exit from loop */
         case STATUS_EOF:       /* End of archive */
+            break;
+        default:
             break;
         }
         break;

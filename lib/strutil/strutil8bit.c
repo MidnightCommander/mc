@@ -278,6 +278,8 @@ str_8bit_fit_to_term (const char *text, int width, align_crt_t just_mode)
         case J_RIGHT:
             ident = width - length;
             break;
+        default:
+            break;
         }
 
         if ((int) remain <= ident)
@@ -322,6 +324,8 @@ str_8bit_fit_to_term (const char *text, int width, align_crt_t just_mode)
         case J_RIGHT:
             ident = length - width;
             break;
+        default:
+            break;
         }
 
         pos += ident;
@@ -354,7 +358,6 @@ str_8bit_term_trim (const char *text, int width)
 
         if (width >= (int) length)
         {
-
             for (pos = 0; pos < length && remain > 1; pos++, actual++, remain--)
                 actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
         }

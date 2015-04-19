@@ -334,6 +334,9 @@ init_subshell_child (const char *pty_name)
     case FISH:
         execl (mc_global.tty.shell, "fish", (char *) NULL);
         break;
+
+    default:
+        break;
     }
 
     /* If we get this far, everything failed miserably */
@@ -769,6 +772,8 @@ init_subshell (void)
         mc_global.tty.use_subshell = FALSE;
         mc_global.midnight_shutdown = TRUE;
         return;
+    default:
+        break;
     }
 
     /* Take the current (hopefully pristine) tty mode and make */
@@ -897,6 +902,8 @@ init_subshell (void)
                     subshell_pipe[WRITE]);
         break;
 
+    default:
+        break;
     }
     write_all (mc_global.tty.subshell_pty, precmd, strlen (precmd));
 

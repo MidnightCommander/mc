@@ -223,6 +223,8 @@ mc_fhl_get_color_filetype (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, file_ent
         if (mc_fhl_is_special_door (fe))
             my_color = TRUE;
         break;
+    default:
+        break;
     }
 
     return (my_color) ? mc_filter->color_pair_index : -1;
@@ -275,6 +277,8 @@ mc_fhl_get_color (mc_fhl_t * fhl, file_entry_t * fe)
             ret = mc_fhl_get_color_regexp (mc_filter, fhl, fe);
             if (ret > 0)
                 return -ret;
+            break;
+        default:
             break;
         }
     }

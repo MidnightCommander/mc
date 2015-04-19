@@ -269,6 +269,8 @@ main (int argc, char **argv)
         case CONSOLE_CONTENTS:
             send_contents (buffer + 4, winsz.ws_col, winsz.ws_row);
             break;
+        default:
+            break;
         }
 
         if (write (1, &console_flag, 1) != 1)

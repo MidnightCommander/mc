@@ -2874,6 +2874,7 @@ edit_ok_to_exit (WEdit * edit)
             return mc_global.midnight_shutdown;
         break;
     case 1:                    /* No */
+    default:
         break;
     case 2:                    /* Cancel quit */
     case -1:                   /* Esc */
