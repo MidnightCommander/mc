@@ -3961,7 +3961,7 @@ para cargar texto de un archivo como selección en X Window.
 Por ejemplo:
 .PP
 .nf
-clipboard_store=/usr/bin/xclip \-i
+clipboard_store=xclip \-i
 .fi
 .TP
 .I clipboard_paste
@@ -3970,7 +3970,7 @@ para volcar la selección de X Window a la salida estándar.
 Por ejemplo:
 .PP
 .nf
-clipboard_paste=/usr/bin/xclip \-o
+clipboard_paste=xclip \-o
 .fi
 .TP
 .I autodetect_codeset
