@@ -4491,7 +4491,7 @@ mc.ext\&.
 Например:
 .PP
 .nf
-clipboard_store=/usr/bin/xclip \-i
+clipboard_store=xclip \-i
 .fi
 .TP
 .I clipboard_paste
@@ -4501,7 +4501,7 @@ clipboard_store=/usr/bin/xclip \-i
 Например:
 .PP
 .nf
-clipboard_paste=/usr/bin/xclip \-o
+clipboard_paste=xclip \-o
 .fi
 .PP
 .I autodetect_codeset

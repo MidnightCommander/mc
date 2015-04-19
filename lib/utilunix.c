@@ -528,8 +528,9 @@ mc_popen (const char *command, GError ** error)
         goto ret_err;
     }
 
-    if (!g_spawn_async_with_pipes (NULL, argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD, NULL, NULL,
-                                   &p->child_pid, NULL, &p->out.fd, &p->err.fd, error))
+    if (!g_spawn_async_with_pipes
+        (NULL, argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD | G_SPAWN_SEARCH_PATH, NULL, NULL,
+         &p->child_pid, NULL, &p->out.fd, &p->err.fd, error))
     {
         mc_replace_error (error, MC_PIPE_ERROR_CREATE_PIPE_STREAM, "%s",
                           _("Cannot create pipe streams"));
