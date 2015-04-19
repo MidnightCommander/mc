@@ -42,6 +42,7 @@ extern int option_persistent_selections;
 extern int option_drop_selection_on_copy;
 extern int option_cursor_beyond_eol;
 extern gboolean option_cursor_after_inserted_block;
+extern int option_state_full_filename;
 extern int option_line_state;
 extern int option_save_mode;
 extern int option_save_position;

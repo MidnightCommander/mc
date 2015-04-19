@@ -90,6 +90,7 @@ int option_cursor_beyond_eol = 0;
 int option_line_state = 0;
 int option_line_state_width = 0;
 gboolean option_cursor_after_inserted_block = FALSE;
+int option_state_full_filename = 0;
 
 int option_edit_right_extreme = 0;
 int option_edit_left_extreme = 0;

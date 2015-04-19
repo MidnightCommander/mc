@@ -210,7 +210,12 @@ edit_status_fullscreen (WEdit * edit, int color)
     status_len = (int) str_term_width1 (status);
 
     if (edit->filename_vpath != NULL)
+    {
         fname = vfs_path_get_last_path_str (edit->filename_vpath);
+
+        if (!option_state_full_filename)
+            fname = x_basename (fname);
+    }
 
     fname_len = str_term_width1 (fname);
     if (fname_len < preferred_fname_len)
@@ -263,7 +268,12 @@ edit_status_window (WEdit * edit)
         const char *fname = N_("NoName");
 
         if (edit->filename_vpath != NULL)
+        {
             fname = vfs_path_get_last_path_str (edit->filename_vpath);
+
+            if (!option_state_full_filename)
+                fname = x_basename (fname);
+        }
 #ifdef ENABLE_NLS
         else
             fname = _(fname);
