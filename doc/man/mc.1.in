@@ -3737,7 +3737,7 @@ color of input lines used in query dialogs
 .I inputmark
 color of input selected text
 .TP
-.I inputunhanged
+.I inputunchanged
 color of input text before first modification or cursor movement
 .TP
 .I commandlinemark
