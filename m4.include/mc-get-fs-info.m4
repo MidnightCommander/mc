@@ -43,22 +43,20 @@ AC_INCLUDES_DEFAULT
 "
   statfs_includes="\
 AC_INCLUDES_DEFAULT
-#if HAVE_SYS_VFS_H
+#ifdef HAVE_SYS_VFS_H
 # include <sys/vfs.h>
-#elif HAVE_SYS_MOUNT_H && HAVE_SYS_PARAM_H
+#elif defined HAVE_SYS_MOUNT_H && defined HAVE_SYS_PARAM_H
 # include <sys/param.h>
 # include <sys/mount.h>
-# if HAVE_NETINET_IN_H && HAVE_NFS_NFS_CLNT_H && HAVE_NFS_VFS_H
+# if defined HAVE_NETINET_IN_H && defined HAVE_NFS_NFS_CLNT_H && defined HAVE_NFS_VFS_H
 #  include <netinet/in.h>
 #  include <nfs/nfs_clnt.h>
 #  include <nfs/vfs.h>
 # endif
-#elif HAVE_OS_H
+#elif defined HAVE_OS_H
 # include <fs_info.h>
 #endif
 "
-  dnl Keep this long conditional in sync with the USE_STATVFS conditional
-  dnl in src/filemanager/filegui.c.
   if case "$fu_cv_sys_stat_statvfs$fu_cv_sys_stat_statvfs64" in
        *yes*) ;; *) false;; esac &&
      { AC_CHECK_MEMBERS([struct statvfs.f_basetype],,, [$statvfs_includes])

@@ -609,7 +609,6 @@ str_utf8_fit_to_term (const char *text, int width, align_crt_t just_mode)
 
     if (pre_form->width <= (gsize) width)
     {
-        tool.ident = 0;
         switch (HIDE_FIT (just_mode))
         {
         case J_CENTER_LEFT:
@@ -618,6 +617,9 @@ str_utf8_fit_to_term (const char *text, int width, align_crt_t just_mode)
             break;
         case J_RIGHT:
             tool.ident = width - pre_form->width;
+            break;
+        default:
+            tool.ident = 0;
             break;
         }
 
@@ -638,7 +640,6 @@ str_utf8_fit_to_term (const char *text, int width, align_crt_t just_mode)
     }
     else
     {
-        tool.ident = 0;
         switch (HIDE_FIT (just_mode))
         {
         case J_CENTER:
@@ -646,6 +647,9 @@ str_utf8_fit_to_term (const char *text, int width, align_crt_t just_mode)
             break;
         case J_RIGHT:
             tool.ident = width - pre_form->width;
+            break;
+        default:
+            tool.ident = 0;
             break;
         }
 

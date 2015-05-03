@@ -303,6 +303,8 @@ chl_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *dat
                 h->ret_value = parm;
                 dlg_stop (h);
             }
+        default:
+            break;
         }
 
     default:
@@ -615,6 +617,9 @@ advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
                     dlg_one_down (h);
             }
             break;
+
+        default:
+            break;
         }
         return MSG_NOT_HANDLED;
 
@@ -887,6 +892,7 @@ chown_advanced_cmd (void)
             break;
 
         case B_SKIP:
+        default:
             break;
         }
 

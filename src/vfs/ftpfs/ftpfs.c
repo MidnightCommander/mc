@@ -91,7 +91,6 @@ What to do with this?
 #endif
 #include <errno.h>
 #include <ctype.h>
-#include <fcntl.h>
 #include <sys/time.h>           /* gettimeofday() */
 #include <inttypes.h>           /* uintmax_t */
 
@@ -410,6 +409,8 @@ ftpfs_get_reply (struct vfs_class *me, int sock, char *string_buf, int string_le
             if (string_buf != NULL)
                 g_strlcpy (string_buf, answer, string_len);
             return code / 100;
+        default:
+            break;
         }
     }
 }
@@ -1144,6 +1145,8 @@ ftpfs_setup_passive_epsv (struct vfs_class *me, struct vfs_s_super *super,
         break;
     case AF_INET6:
         ((struct sockaddr_in6 *) sa)->sin6_port = port;
+        break;
+    default:
         break;
     }
 

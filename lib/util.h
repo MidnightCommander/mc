@@ -5,12 +5,12 @@
 #ifndef MC_UTIL_H
 #define MC_UTIL_H
 
-#include "lib/global.h"         /* include <glib.h> */
-
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <inttypes.h>           /* uintmax_t */
 #include <unistd.h>
+
+#include "lib/global.h"         /* include <glib.h> */
 
 #include "lib/vfs/vfs.h"
 

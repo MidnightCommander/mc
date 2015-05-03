@@ -14,7 +14,6 @@
 #include <utime.h>
 #endif
 #include <stdio.h>
-#include <fcntl.h>
 #include <unistd.h>
 #include <stddef.h>
 

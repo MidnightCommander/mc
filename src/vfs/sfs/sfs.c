@@ -43,7 +43,6 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
-#include <fcntl.h>
 
 #include "lib/global.h"
 #include "lib/util.h"
@@ -188,6 +187,8 @@ sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
             case '%':
                 COPY_CHAR;
                 continue;
+            default:
+                break;
             }
             if (ptr != NULL)
             {

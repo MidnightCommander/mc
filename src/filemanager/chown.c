@@ -436,6 +436,9 @@ chown_cmd (void)
                     apply_chowns (new_user, new_group);
                 break;
             }
+
+        default:
+            break;
         }                       /* switch */
 
         if (current_panel->marked && ch_dlg->ret_value != B_CANCEL)

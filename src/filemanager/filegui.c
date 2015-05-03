@@ -52,10 +52,9 @@
 
 #include <config.h>
 
-/* Keep this conditional in sync with the similar conditional in m4.include/mc-get-fs-info. */
-#if ((STAT_STATVFS || STAT_STATVFS64)                                       \
-     && (HAVE_STRUCT_STATVFS_F_BASETYPE || HAVE_STRUCT_STATVFS_F_FSTYPENAME \
-         || (! HAVE_STRUCT_STATFS_F_FSTYPENAME)))
+#if ((defined STAT_STATVFS || defined STAT_STATVFS64)                                       \
+     && (defined HAVE_STRUCT_STATVFS_F_BASETYPE || defined HAVE_STRUCT_STATVFS_F_FSTYPENAME \
+         || (! defined HAVE_STRUCT_STATFS_F_FSTYPENAME)))
 #define USE_STATVFS 1
 #else
 #define USE_STATVFS 0
@@ -70,27 +69,27 @@
 
 #if USE_STATVFS
 #include <sys/statvfs.h>
-#elif HAVE_SYS_VFS_H
+#elif defined HAVE_SYS_VFS_H
 #include <sys/vfs.h>
-#elif HAVE_SYS_MOUNT_H && HAVE_SYS_PARAM_H
+#elif defined HAVE_SYS_MOUNT_H && defined HAVE_SYS_PARAM_H
 /* NOTE: freebsd5.0 needs sys/param.h and sys/mount.h for statfs.
    It does have statvfs.h, but shouldn't use it, since it doesn't
    HAVE_STRUCT_STATVFS_F_BASETYPE.  So find a clean way to fix it.  */
 /* NetBSD 1.5.2 needs these, for the declaration of struct statfs. */
 #include <sys/param.h>
 #include <sys/mount.h>
-#if HAVE_NFS_NFS_CLNT_H && HAVE_NFS_VFS_H
+#if defined HAVE_NFS_NFS_CLNT_H && defined HAVE_NFS_VFS_H
 /* Ultrix 4.4 needs these for the declaration of struct statfs.  */
 #include <netinet/in.h>
 #include <nfs/nfs_clnt.h>
 #include <nfs/vfs.h>
 #endif
-#elif HAVE_OS_H                 /* BeOS */
+#elif defined HAVE_OS_H         /* BeOS */
 #include <fs_info.h>
 #endif
 
 #if USE_STATVFS
-#if ! STAT_STATVFS && STAT_STATVFS64
+#if ! defined STAT_STATVFS && defined STAT_STATVFS64
 #define STRUCT_STATVFS struct statvfs64
 #define STATFS statvfs64
 #else
@@ -107,7 +106,7 @@
 #else
 #define STATFS statfs
 #define STRUCT_STATVFS struct statfs
-#if HAVE_OS_H                   /* BeOS */
+#ifdef HAVE_OS_H                /* BeOS */
 /* BeOS has a statvfs function, but it does not return sensible values
    for f_files, f_ffree and f_favail, and lacks f_type, f_basetype and
    f_fstypename.  Use 'struct fs_info' instead.  */
@@ -134,12 +133,12 @@ statfs (char const *filename, struct fs_info *buf)
 #endif
 #endif
 
-#if HAVE_STRUCT_STATVFS_F_BASETYPE
+#ifdef HAVE_STRUCT_STATVFS_F_BASETYPE
 #define STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME f_basetype
 #else
-#if HAVE_STRUCT_STATVFS_F_FSTYPENAME || HAVE_STRUCT_STATFS_F_FSTYPENAME
+#if defined HAVE_STRUCT_STATVFS_F_FSTYPENAME || defined HAVE_STRUCT_STATFS_F_FSTYPENAME
 #define STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME f_fstypename
-#elif HAVE_OS_H                 /* BeOS */
+#elif defined HAVE_OS_H         /* BeOS */
 #define STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME fsh_name
 #endif
 #endif

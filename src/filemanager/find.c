@@ -35,7 +35,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/time.h>
 
@@ -199,7 +198,8 @@ static WListbox *find_list;     /* Listbox with the file list */
 
 static find_file_options_t options = {
     TRUE, TRUE, TRUE, FALSE, FALSE,
-    FALSE, TRUE, FALSE, FALSE, FALSE, FALSE
+    FALSE, TRUE, FALSE, FALSE, FALSE, FALSE,
+    FALSE, NULL
 };
 
 static char *in_start_dir = INPUT_LAST_TEXT;
@@ -1778,6 +1778,7 @@ find_file (void)
         dirname = filename = NULL;
         is_start = FALSE;
         v = do_find (start_dir, start_dir_len, ignore_dirs, pattern, content, &dirname, &filename);
+        g_free (start_dir);
         g_free (ignore_dirs);
         g_free (pattern);
 

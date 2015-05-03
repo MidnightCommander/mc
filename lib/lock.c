@@ -248,9 +248,9 @@ lock_file (const vfs_path_t * fname_vpath)
                 break;
             case 1:
             case -1:
+            default:           /* Esc Esc */
                 g_free (msg);
                 goto ret;
-                break;          /* FIXME: unneeded? */
             }
             g_free (msg);
         }

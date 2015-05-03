@@ -121,9 +121,10 @@ mc_search__translate_replace_glob_to_regex (const char *str)
 
     buff = g_string_sized_new (32);
 
-    while (*str)
+    while (*str != '\0')
     {
         char c = *str++;
+
         switch (c)
         {
         case '\\':
@@ -145,6 +146,8 @@ mc_search__translate_replace_glob_to_regex (const char *str)
         case '&':
             if (!escaped_mode)
                 g_string_append_c (buff, '\\');
+            break;
+        default:
             break;
         }
         g_string_append_c (buff, c);

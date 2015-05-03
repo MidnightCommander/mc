@@ -629,6 +629,7 @@ dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
     int link_to_dir, stale_link;
     struct stat st;
     file_entry_t *fentry;
+    const char *vpath_str;
 
     /* ".." (if any) must be the first entry in the list */
     if (!dir_list_init (list))
@@ -647,14 +648,10 @@ dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
 
     tree_store_start_check (vpath);
 
-    {
-        const char *vpath_str;
-
-        vpath_str = vfs_path_as_str (vpath);
-        /* Do not add a ".." entry to the root directory */
-        if (IS_PATH_SEP (vpath_str[0]) && vpath_str[1] == '\0')
-            list->len--;
-    }
+    vpath_str = vfs_path_as_str (vpath);
+    /* Do not add a ".." entry to the root directory */
+    if (IS_PATH_SEP (vpath_str[0]) && vpath_str[1] == '\0')
+        dir_list_clean (list);
 
     while ((dp = mc_readdir (dirp)) != NULL)
     {
@@ -737,6 +734,9 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
             marked_cnt++;
         }
     }
+
+    /* save len for later dir_list_clean() */
+    dir_copy.len = list->len;
 
     /* Add ".." except to the root directory. The ".." entry
        (if any) must be the first in the list. */

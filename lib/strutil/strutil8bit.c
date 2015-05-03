@@ -55,18 +55,10 @@ static inline int char_##func_name(char c)     \
 
 /* *INDENT-OFF* */
 DECLARE_CTYPE_WRAPPER (isalnum)
-DECLARE_CTYPE_WRAPPER (isalpha)
-DECLARE_CTYPE_WRAPPER (isascii)
-DECLARE_CTYPE_WRAPPER (isblank)
-DECLARE_CTYPE_WRAPPER (iscntrl)
 DECLARE_CTYPE_WRAPPER (isdigit)
-DECLARE_CTYPE_WRAPPER (isgraph)
-DECLARE_CTYPE_WRAPPER (islower)
 DECLARE_CTYPE_WRAPPER (isprint)
 DECLARE_CTYPE_WRAPPER (ispunct)
 DECLARE_CTYPE_WRAPPER (isspace)
-DECLARE_CTYPE_WRAPPER (isupper)
-DECLARE_CTYPE_WRAPPER (isxdigit)
 DECLARE_CTYPE_WRAPPER (toupper)
 DECLARE_CTYPE_WRAPPER (tolower)
 /* *INDENT-ON* */
@@ -286,6 +278,8 @@ str_8bit_fit_to_term (const char *text, int width, align_crt_t just_mode)
         case J_RIGHT:
             ident = width - length;
             break;
+        default:
+            break;
         }
 
         if ((int) remain <= ident)
@@ -330,6 +324,8 @@ str_8bit_fit_to_term (const char *text, int width, align_crt_t just_mode)
         case J_RIGHT:
             ident = length - width;
             break;
+        default:
+            break;
         }
 
         pos += ident;
@@ -362,7 +358,6 @@ str_8bit_term_trim (const char *text, int width)
 
         if (width >= (int) length)
         {
-
             for (pos = 0; pos < length && remain > 1; pos++, actual++, remain--)
                 actual[0] = char_isprint (text[pos]) ? text[pos] : '.';
         }

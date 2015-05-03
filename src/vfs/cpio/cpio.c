@@ -33,7 +33,6 @@
 #include <config.h>
 
 #include <errno.h>
-#include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 
@@ -750,6 +749,8 @@ cpio_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
         case STATUS_OK:
             continue;
         case STATUS_TRAIL:
+            break;
+        default:
             break;
         }
         break;

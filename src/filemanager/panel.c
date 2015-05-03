@@ -3376,7 +3376,10 @@ panel_execute_cmd (WPanel * panel, unsigned long command)
         /* reset state of marks flag */
         state_mark = -1;
         break;
+    default:
+        break;
     }
+
     switch (command)
     {
     case CK_PanelOtherCd:
@@ -3525,7 +3528,10 @@ panel_execute_cmd (WPanel * panel, unsigned long command)
     case CK_SortByMTime:
         panel_set_sort_type_by_id (panel, "mtime");
         break;
+    default:
+        break;
     }
+
     return res;
 }
 

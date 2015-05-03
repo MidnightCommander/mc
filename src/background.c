@@ -42,7 +42,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>           /* waitpid() */
-#include <fcntl.h>
 
 #include "lib/global.h"
 
@@ -200,7 +199,7 @@ background_attention (int fd, void *closure)
         int (*non_have_ctx3) (file_op_context_t *, int, char *, char *, char *);
         int (*non_have_ctx4) (file_op_context_t *, int, char *, char *, char *, char *);
 
-        char *(*ret_str0) ();
+        char *(*ret_str0) (void);
         char *(*ret_str1) (char *);
         char *(*ret_str2) (char *, char *);
         char *(*ret_str3) (char *, char *, char *);
@@ -316,6 +315,8 @@ background_attention (int fd, void *closure)
             case 4:
                 result = routine.have_ctx4 (Background, data[0], data[1], data[2], data[3]);
                 break;
+            default:
+                break;
             }
         else
             switch (argc)
@@ -335,6 +336,8 @@ background_attention (int fd, void *closure)
             case 4:
                 result =
                     routine.non_have_ctx4 (ctx, Background, data[0], data[1], data[2], data[3]);
+                break;
+            default:
                 break;
             }
 

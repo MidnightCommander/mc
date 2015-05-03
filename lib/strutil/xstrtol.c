@@ -163,6 +163,8 @@ xstrtoumax (const char *s, char **ptr, int base, uintmax_t * val, const char *va
                 base = 1000;
                 suffixes++;
                 break;
+            default:
+                break;
             }
         }
 

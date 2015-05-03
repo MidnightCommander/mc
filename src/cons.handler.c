@@ -30,7 +30,6 @@
 #include <sys/wait.h>
 #include <signal.h>
 #include <stdio.h>
-#include <fcntl.h>
 #include <sys/types.h>
 #ifdef __FreeBSD__
 #include <sys/consio.h>

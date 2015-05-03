@@ -39,7 +39,6 @@
 #include <errno.h>
 #include <string.h>
 #include <signal.h>
-#include <fcntl.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #ifdef HAVE_SYS_IOCTL_H
@@ -335,6 +334,9 @@ init_subshell_child (const char *pty_name)
     case FISH:
         execl (mc_global.tty.shell, "fish", (char *) NULL);
         break;
+
+    default:
+        break;
     }
 
     /* If we get this far, everything failed miserably */
@@ -390,7 +392,7 @@ check_sid (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-init_raw_mode ()
+init_raw_mode (void)
 {
     static int initialized = 0;
 
@@ -601,10 +603,10 @@ pty_open_master (char *pty_name)
 
 #ifdef HAVE_POSIX_OPENPT
     pty_master = posix_openpt (O_RDWR);
-#elif HAVE_GETPT
+#elif defined HAVE_GETPT
     /* getpt () is a GNU extension (glibc 2.1.x) */
     pty_master = getpt ();
-#elif IS_AIX
+#elif defined IS_AIX
     strcpy (pty_name, "/dev/ptc");
     pty_master = open (pty_name, O_RDWR);
 #else
@@ -770,6 +772,8 @@ init_subshell (void)
         mc_global.tty.use_subshell = FALSE;
         mc_global.midnight_shutdown = TRUE;
         return;
+    default:
+        break;
     }
 
     /* Take the current (hopefully pristine) tty mode and make */
@@ -898,6 +902,8 @@ init_subshell (void)
                     subshell_pipe[WRITE]);
         break;
 
+    default:
+        break;
     }
     write_all (mc_global.tty.subshell_pty, precmd, strlen (precmd));
 

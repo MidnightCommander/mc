@@ -35,7 +35,6 @@
 
 #include <config.h>
 #include <errno.h>
-#include <fcntl.h>
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"

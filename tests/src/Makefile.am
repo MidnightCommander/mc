@@ -1,3 +1,5 @@
+PACKAGE_STRING = "/src"
+
 SUBDIRS = . filemanager
 
 if USE_INTERNAL_EDIT

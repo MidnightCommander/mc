@@ -541,6 +541,9 @@ chmod_cmd (void)
 
             apply_mask (&sf_stat);
             break;
+
+        default:
+            break;
         }
 
         if (current_panel->marked != 0 && result != B_CANCEL)

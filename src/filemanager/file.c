@@ -59,7 +59,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <fcntl.h>
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
@@ -599,7 +598,7 @@ static FileProgressStatus
 progress_update_one (file_op_total_context_t * tctx, file_op_context_t * ctx, off_t add)
 {
     struct timeval tv_current;
-    static struct timeval tv_start = { };
+    static struct timeval tv_start = { 0, 0 };
 
     tctx->progress_count++;
     tctx->progress_bytes += (uintmax_t) add;

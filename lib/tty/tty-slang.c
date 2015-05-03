@@ -57,8 +57,6 @@
 
 /*** global variables ****************************************************************************/
 
-extern int reset_hp_softkeys;
-
 /*** file scope macro definitions ****************************************************************/
 
 #ifndef SLTT_MAX_SCREEN_COLS

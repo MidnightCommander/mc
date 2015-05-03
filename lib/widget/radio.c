@@ -105,8 +105,9 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                 r->pos++;
                 return MSG_HANDLED;
             }
+        default:
+            return MSG_NOT_HANDLED;
         }
-        return MSG_NOT_HANDLED;
 
     case MSG_CURSOR:
         send_message (w->owner, w, MSG_ACTION, 0, NULL);

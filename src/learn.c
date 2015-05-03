@@ -218,6 +218,8 @@ learn_check_key (int c)
     case 'k':
         dlg_one_up (learn_dlg);
         return TRUE;
+    default:
+        break;
     }
 
     /* Prevent from disappearing if a non-defined sequence is pressed

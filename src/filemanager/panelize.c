@@ -516,9 +516,7 @@ external_panelize (void)
     /* display file info */
     tty_setcolor (SELECTED_COLOR);
 
-    dlg_run (panelize_dlg);
-
-    switch (panelize_dlg->ret_value)
+    switch (dlg_run (panelize_dlg))
     {
     case B_CANCEL:
         break;
@@ -548,6 +546,9 @@ external_panelize (void)
             repaint_screen ();
             return;
         }
+        break;
+
+    default:
         break;
     }
 

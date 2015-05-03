@@ -12,7 +12,15 @@ AC_DEFUN([MC_CHECK_ONE_CFLAG],[
   AC_MSG_CHECKING([whether ${CC} accepts $1])
 
   safe_CFLAGS=$CFLAGS
-  CFLAGS="$1"
+
+  case "$CC" in
+    clang*)
+      CFLAGS="-Werror $1"
+      ;;
+    *)
+      CFLAGS="$1"
+      ;;
+  esac
 
   AC_COMPILE_IFELSE(
     [AC_LANG_PROGRAM([], [[return 0;]])],
@@ -52,8 +60,10 @@ dnl    MC_CHECK_ONE_CFLAG([-Wbad-function-cast])
     MC_CHECK_ONE_CFLAG([-Wformat-security])
     MC_CHECK_ONE_CFLAG([-Wimplicit])
     MC_CHECK_ONE_CFLAG([-Wignored-qualifiers])
+    MC_CHECK_ONE_CFLAG([-Wmaybe-uninitialized])
     MC_CHECK_ONE_CFLAG([-Wmissing-braces])
     MC_CHECK_ONE_CFLAG([-Wmissing-declarations])
+    MC_CHECK_ONE_CFLAG([-Wmissing-field-initializers])
     MC_CHECK_ONE_CFLAG([-Wmissing-parameter-type])
     MC_CHECK_ONE_CFLAG([-Wmissing-prototypes])
     MC_CHECK_ONE_CFLAG([-Wnested-externs])
@@ -61,13 +71,17 @@ dnl    MC_CHECK_ONE_CFLAG([-Wbad-function-cast])
     MC_CHECK_ONE_CFLAG([-Wno-unreachable-code])
     MC_CHECK_ONE_CFLAG([-Wparentheses])
     MC_CHECK_ONE_CFLAG([-Wpointer-sign])
+    MC_CHECK_ONE_CFLAG([-Wredundant-decls])
     MC_CHECK_ONE_CFLAG([-Wreturn-type])
     MC_CHECK_ONE_CFLAG([-Wsequence-point])
     MC_CHECK_ONE_CFLAG([-Wshadow])
     MC_CHECK_ONE_CFLAG([-Wsign-compare])
 dnl    MC_CHECK_ONE_CFLAG([-Wstrict-aliasing])
+    MC_CHECK_ONE_CFLAG([-Wstrict-prototypes])
     MC_CHECK_ONE_CFLAG([-Wswitch])
+    MC_CHECK_ONE_CFLAG([-Wswitch-default])
     MC_CHECK_ONE_CFLAG([-Wtype-limits])
+    MC_CHECK_ONE_CFLAG([-Wundef])
     MC_CHECK_ONE_CFLAG([-Wuninitialized])
     MC_CHECK_ONE_CFLAG([-Wunused-but-set-variable])
     MC_CHECK_ONE_CFLAG([-Wunused-function])

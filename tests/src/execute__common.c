@@ -48,13 +48,13 @@ vfs_file_is_local (const vfs_path_t * vpath)
 }
 
 static void
-vfs_file_is_local__init ()
+vfs_file_is_local__init (void)
 {
     vfs_file_is_local__vpath__captured = g_ptr_array_new ();
 }
 
 static void
-vfs_file_is_local__deinit ()
+vfs_file_is_local__deinit (void)
 {
     g_ptr_array_foreach (vfs_file_is_local__vpath__captured, (GFunc) vfs_path_free, NULL);
     g_ptr_array_free (vfs_file_is_local__vpath__captured, TRUE);
@@ -81,14 +81,14 @@ do_execute (const char *lc_shell, const char *command, int flags)
 }
 
 static void
-do_execute__init ()
+do_execute__init (void)
 {
     do_execute__command__captured = NULL;
     do_execute__lc_shell__captured = NULL;
 }
 
 static void
-do_execute__deinit ()
+do_execute__deinit (void)
 {
     g_free (do_execute__lc_shell__captured);
     g_free (do_execute__command__captured);

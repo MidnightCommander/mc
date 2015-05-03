@@ -52,7 +52,6 @@
 
 #include <config.h>
 #include <errno.h>
-#include <fcntl.h>
 #include <pwd.h>
 #include <grp.h>
 #include <sys/time.h>           /* gettimeofday() */
@@ -829,6 +828,8 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
                 ST.st_rdev = makedev (maj, min);
 #endif
             }
+        default:
+            break;
         }
     }
 

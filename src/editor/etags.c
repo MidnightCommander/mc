@@ -153,6 +153,8 @@ parse_define (char *buf, char **long_name, char **short_name, long *line)
             *short_name = shortdef;
             *line = atol (linedef);
             return TRUE;
+        default:
+            break;
         }
         buf++;
         c = *buf;
@@ -249,6 +251,8 @@ etags_set_definition_hash (const char *tagfile, const char *start_path,
                     num++;
                 }
             }
+            break;
+        default:
             break;
         }
     }

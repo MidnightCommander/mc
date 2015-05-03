@@ -81,8 +81,9 @@ run_mc_build_filename (int iteration)
         return mc_build_filename ("pa", "", "th", NULL);
     case 12:
         return mc_build_filename ("/pa", "", "/th", NULL);
+    default:
+        return NULL;
     }
-    return NULL;
 }
 
 /* @DataSource("test_mc_build_filename_ds") */
@@ -148,10 +149,10 @@ main (void)
     suite_add_tcase (s, tc_core);
     sr = srunner_create (s);
     srunner_set_log (sr, "mc_build_filename.log");
-    srunner_run_all (sr, CK_NORMAL);
+    srunner_run_all (sr, CK_ENV);
     number_failed = srunner_ntests_failed (sr);
     srunner_free (sr);
-    return (number_failed == 0) ? 0 : 1;
+    return (number_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -48,7 +48,6 @@
 #include <errno.h>
 #include <sys/stat.h>
 #include <stdlib.h>
-#include <fcntl.h>
 
 #include "lib/global.h"
 #include "lib/tty/tty.h"
@@ -2347,7 +2346,7 @@ edit_block_copy_cmd (WEdit * edit)
     {
         long col_delta;
 
-        col_delta = abs (edit->column2 - edit->column1);
+        col_delta = labs (edit->column2 - edit->column1);
         edit_insert_column_of_text (edit, copy_buf, size, col_delta, &mark1, &mark2, &c1, &c2);
     }
     else
@@ -2875,6 +2874,7 @@ edit_ok_to_exit (WEdit * edit)
             return mc_global.midnight_shutdown;
         break;
     case 1:                    /* No */
+    default:
         break;
     case 2:                    /* Cancel quit */
     case -1:                   /* Esc */

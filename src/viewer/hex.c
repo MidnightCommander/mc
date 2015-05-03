@@ -36,7 +36,6 @@
 #include <config.h>
 
 #include <errno.h>
-#include <fcntl.h>
 #include <inttypes.h>           /* uintmax_t */
 
 #include "lib/global.h"

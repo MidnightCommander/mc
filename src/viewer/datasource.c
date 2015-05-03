@@ -176,6 +176,7 @@ mcview_get_utf (mcview_t * view, off_t byte_index, int *char_length, gboolean * 
         str = mcview_get_ptr_string (view, byte_index);
         break;
     case DS_NONE:
+    default:
         break;
     }
 

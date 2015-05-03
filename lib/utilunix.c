@@ -44,7 +44,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <fcntl.h>
 #ifdef HAVE_SYS_PARAM_H
 #include <sys/param.h>
 #endif
@@ -894,7 +893,7 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
         p = lpath + strlen (lpath) - 1;
         while (p > lpath && IS_PATH_SEP (*p))
         {
-            if (p >= lpath - (url_delim_len + 1)
+            if (p >= lpath + url_delim_len - 1
                 && strncmp (p - url_delim_len + 1, VFS_PATH_URL_DELIMITER, url_delim_len) == 0)
                 break;
             *p-- = 0;

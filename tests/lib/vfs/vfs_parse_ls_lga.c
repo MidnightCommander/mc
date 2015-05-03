@@ -170,6 +170,8 @@ fill_stat_struct (struct stat *etalon_stat, int iterator)
         etalon_stat->st_mtime = 1308838140;
         etalon_stat->st_ctime = 1308838140;
         break;
+    default:
+        break;
     }
 }
 
@@ -381,10 +383,10 @@ main (void)
     suite_add_tcase (s, tc_core);
     sr = srunner_create (s);
     srunner_set_log (sr, "vfs_parse_ls_lga.log");
-    srunner_run_all (sr, CK_NORMAL);
+    srunner_run_all (sr, CK_ENV);
     number_failed = srunner_ntests_failed (sr);
     srunner_free (sr);
-    return (number_failed == 0) ? 0 : 1;
+    return (number_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

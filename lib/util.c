@@ -40,7 +40,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <fcntl.h>
 #include <sys/time.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -79,11 +78,13 @@
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+#ifndef HAVE_CHARSET
 static inline int
 is_7bit_printable (unsigned char c)
 {
     return (c > 31 && c < 127);
 }
+#endif
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -295,6 +296,8 @@ name_quote (const char *s, gboolean quote_percent)
         case '#':
             if (ret->len == 0)
                 g_string_append_c (ret, '\\');
+            break;
+        default:
             break;
         }
         g_string_append_c (ret, *s);
@@ -854,6 +857,8 @@ get_compression_type (int fd, const char *name)
             return COMPRESSION_BZIP;
         case 'h':
             return COMPRESSION_BZIP2;
+        default:
+            break;
         }
     }
 
@@ -901,6 +906,8 @@ decompress_extension (int type)
         return "/ulzma" VFS_PATH_URL_DELIMITER;
     case COMPRESSION_XZ:
         return "/uxz" VFS_PATH_URL_DELIMITER;
+    default:
+        break;
     }
     /* Should never reach this place */
     fprintf (stderr, "Fatal: decompress_extension called with an unknown argument\n");

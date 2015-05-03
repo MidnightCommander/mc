@@ -272,12 +272,12 @@ static const global_keymap_ini_t default_listbox_keymap[] = {
 
 /* tree */
 static const global_keymap_ini_t default_tree_keymap[] = {
-    {"Help = f1"},
-    {"Rescan = f2; ctrl-r"},
-    {"Forget = f3"},
-    {"ToggleNavigation = f4"},
-    {"Copy = f5"},
-    {"Move = f6"},
+    {"Help", "f1"},
+    {"Rescan", "f2; ctrl-r"},
+    {"Forget", "f3"},
+    {"ToggleNavigation", "f4"},
+    {"Copy", "f5"},
+    {"Move", "f6"},
 #if 0
     {"MakeDir", "f7"},
 #endif

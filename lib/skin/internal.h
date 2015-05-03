@@ -20,8 +20,6 @@ typedef struct mc_skin_color_struct
 
 /*** global variables defined in .c file *********************************************************/
 
-extern mc_skin_t mc_skin__default;
-
 /*** declarations of public functions ************************************************************/
 
 gboolean mc_skin_ini_file_load (mc_skin_t *);

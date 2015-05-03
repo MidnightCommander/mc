@@ -49,7 +49,7 @@
 inline static gboolean
 mc_fhl_is_file (file_entry_t * fe)
 {
-#if S_ISREG == 0
+#if HAVE_S_ISREG == 0
     (void) fe;
 #endif
     return S_ISREG (fe->st.st_mode);
@@ -64,7 +64,7 @@ mc_fhl_is_file_exec (file_entry_t * fe)
 inline static gboolean
 mc_fhl_is_dir (file_entry_t * fe)
 {
-#if S_ISDIR == 0
+#if HAVE_S_ISDIR == 0
     (void) fe;
 #endif
     return S_ISDIR (fe->st.st_mode);
@@ -73,7 +73,7 @@ mc_fhl_is_dir (file_entry_t * fe)
 inline static gboolean
 mc_fhl_is_link (file_entry_t * fe)
 {
-#if S_ISLNK == 0
+#if HAVE_S_ISLNK == 0
     (void) fe;
 #endif
     return S_ISLNK (fe->st.st_mode);
@@ -100,7 +100,7 @@ mc_fhl_is_stale_link (file_entry_t * fe)
 inline static gboolean
 mc_fhl_is_device_char (file_entry_t * fe)
 {
-#if S_ISCHR == 0
+#if HAVE_S_ISCHR == 0
     (void) fe;
 #endif
     return S_ISCHR (fe->st.st_mode);
@@ -109,7 +109,7 @@ mc_fhl_is_device_char (file_entry_t * fe)
 inline static gboolean
 mc_fhl_is_device_block (file_entry_t * fe)
 {
-#if S_ISBLK == 0
+#if HAVE_S_ISBLK == 0
     (void) fe;
 #endif
     return S_ISBLK (fe->st.st_mode);
@@ -118,7 +118,7 @@ mc_fhl_is_device_block (file_entry_t * fe)
 inline static gboolean
 mc_fhl_is_special_socket (file_entry_t * fe)
 {
-#if S_ISSOCK == 0
+#if HAVE_S_ISSOCK == 0
     (void) fe;
 #endif
     return S_ISSOCK (fe->st.st_mode);
@@ -127,7 +127,7 @@ mc_fhl_is_special_socket (file_entry_t * fe)
 inline static gboolean
 mc_fhl_is_special_fifo (file_entry_t * fe)
 {
-#if S_ISFIFO == 0
+#if HAVE_S_ISFIFO == 0
     (void) fe;
 #endif
     return S_ISFIFO (fe->st.st_mode);
@@ -136,7 +136,7 @@ mc_fhl_is_special_fifo (file_entry_t * fe)
 inline static gboolean
 mc_fhl_is_special_door (file_entry_t * fe)
 {
-#if S_ISDOOR == 0
+#if HAVE_S_ISDOOR == 0
     (void) fe;
 #endif
 
@@ -223,6 +223,8 @@ mc_fhl_get_color_filetype (mc_fhl_filter_t * mc_filter, mc_fhl_t * fhl, file_ent
         if (mc_fhl_is_special_door (fe))
             my_color = TRUE;
         break;
+    default:
+        break;
     }
 
     return (my_color) ? mc_filter->color_pair_index : -1;
@@ -275,6 +277,8 @@ mc_fhl_get_color (mc_fhl_t * fhl, file_entry_t * fe)
             ret = mc_fhl_get_color_regexp (mc_filter, fhl, fe);
             if (ret > 0)
                 return -ret;
+            break;
+        default:
             break;
         }
     }

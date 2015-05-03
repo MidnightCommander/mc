@@ -109,11 +109,12 @@ mcview_get_byte (mcview_t * view, off_t offset, int *retval)
         return mcview_get_byte_string (view, offset, retval);
     case DS_NONE:
         return mcview_get_byte_none (view, offset, retval);
-    }
+    default:
 #ifdef HAVE_ASSERT_H
-    assert (!"Unknown datasource type");
+        assert (!"Unknown datasource type");
 #endif
-    return FALSE;
+        return FALSE;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
