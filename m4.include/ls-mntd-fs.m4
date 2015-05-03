@@ -1,7 +1,7 @@
-# serial 29
+# serial 32
 # How to list mounted file systems.
 
-# Copyright (C) 1998-2004, 2006, 2009-2011 Free Software Foundation, Inc.
+# Copyright (C) 1998-2004, 2006, 2009-2015 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -110,7 +110,7 @@ if test -z "$ac_list_mounted_fs"; then
     AC_DEFINE([MOUNTED_VMOUNT], [1],
         [Define if there is a function named mntctl that can be used to read
          the list of mounted file systems, and there is a system header file
-         that declares 'struct vmount.'  (AIX)])
+         that declares 'struct vmount'.  (AIX)])
   fi
 fi
 
@@ -120,7 +120,7 @@ if test $ac_cv_func_getmntent = yes; then
   # Determine whether it's the one-argument variant or the two-argument one.
 
   if test -z "$ac_list_mounted_fs"; then
-    # 4.3BSD, SunOS, HP-UX, Dynix, Irix
+    # GNU/Linux, 4.3BSD, SunOS, HP-UX, Dynix, Irix
     AC_MSG_CHECKING([for one-argument getmntent function])
     AC_CACHE_VAL([fu_cv_sys_mounted_getmntent1],
                  [AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
@@ -152,19 +152,6 @@ if test $ac_cv_func_getmntent = yes; then
          of mounted file systems, and that function takes a single argument.
          (4.3BSD, SunOS, HP-UX, Dynix, Irix)])
       AC_CHECK_FUNCS([hasmntopt])
-
-      # Check for libmount to support /proc/self/mountinfo on Linux
-      AC_CACHE_VAL([ac_cv_lib_libmount_mnt_table_parse_stream],
-        [AC_CHECK_LIB([mount], [mnt_new_table_from_file],
-          ac_cv_lib_mount_mnt_table_parse_stream=yes,
-          ac_cv_lib_mount_mnt_table_parse_stream=no)])
-      if test $ac_cv_lib_mount_mnt_table_parse_stream = yes; then
-         AC_DEFINE([MOUNTED_PROC_MOUNTINFO], [1],
-           [Define if want to use /proc/self/mountinfo on Linux.])
-         LIBS="-lmount $LIBS"
-      elif test -f /proc/self/mountinfo; then
-         AC_MSG_WARN([/proc/self/mountinfo present but libmount is missing.])
-      fi
     fi
   fi
 
@@ -353,7 +340,7 @@ if test -z "$ac_list_mounted_fs"; then
       ac_list_mounted_fs=found
       AC_DEFINE([MOUNTED_INTERIX_STATVFS], [1],
                 [Define if we are on interix, and ought to use statvfs plus
-                 some special knowledge on where mounted filesystems can be
+                 some special knowledge on where mounted file systems can be
                  found. (Interix)])
     fi
     ;;
