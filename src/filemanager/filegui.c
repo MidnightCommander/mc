@@ -269,7 +269,7 @@ struct
    preceding entries in /proc/mounts; that makes df hang if even one
    of the corresponding file systems is hard-mounted but not available.  */
 
-#if USE_STATVFS && ! (! STAT_STATVFS && STAT_STATVFS64)
+#if USE_STATVFS && ! (! defined STAT_STATVFS && defined STAT_STATVFS64)
 static int
 statvfs_works (void)
 {
