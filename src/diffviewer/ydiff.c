@@ -2496,7 +2496,7 @@ dview_fini (WDiff * dview)
         f_close (dview->f[DIFF_LEFT]);
     }
 
-#if HAVE_CHARSET
+#ifdef HAVE_CHARSET
     if (dview->converter != str_cnv_from_term)
         str_close_conv (dview->converter);
 #endif
