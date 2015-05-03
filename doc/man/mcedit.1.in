@@ -604,6 +604,10 @@ Set of characters to stop paragraph formatting. If one of those characters
 is found in the begin of line, that line and all following lines of paragraph
 will be untouched. Default value is
 "\fB-\fR\fB+\fR\fB*\fR\fB\\\fR\fB,\fR\fB.\fR\fB;\fR\fB:\fR\fB&\fR\fB>\fR".
+.TP
+.I editor_state_full_filename
+Show full file name in the status line. If disabled (default), the only file
+name is shown.
 .SH MISCELLANEOUS
 You can use scanf search and replace to search and replace a C format
 string.  First take a look at the
