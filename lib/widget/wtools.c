@@ -435,12 +435,16 @@ message (int flags, const char *title, const char *text, ...)
 /** Show error message box */
 
 gboolean
-mc_error_message (GError ** mcerror)
+mc_error_message (GError ** mcerror, int *code)
 {
     if (mcerror == NULL || *mcerror == NULL)
         return FALSE;
 
     message (D_ERROR, MSG_ERROR, _("%d: %s"), (*mcerror)->code, (*mcerror)->message);
+
+    if (code != NULL)
+        *code = (*mcerror)->code;
+
     g_error_free (*mcerror);
     *mcerror = NULL;
 

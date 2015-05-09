@@ -84,7 +84,7 @@ struct WDialog *create_message (int flags, const char *title,
 void message (int flags, const char *title, const char *text, ...)
     __attribute__ ((format (__printf__, 3, 4)));
 
-gboolean mc_error_message (GError ** mcerror);
+gboolean mc_error_message (GError ** mcerror, int *code);
 
 status_msg_t *status_msg_create (const char *title, double delay, status_msg_cb init_cb,
                                  status_msg_update_cb update_cb, status_msg_cb deinit_cb);

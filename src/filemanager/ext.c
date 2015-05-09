@@ -965,7 +965,7 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
                     p += 2;
 
                 found = regex_check_type (filename_vpath, p, case_insense, &have_type, &mcerror);
-                if (mc_error_message (&mcerror))
+                if (mc_error_message (&mcerror, NULL))
                     error_flag = TRUE;  /* leave it if file cannot be opened */
             }
             else if (strncmp (p, "default/", 8) == 0)
