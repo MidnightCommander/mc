@@ -2776,11 +2776,10 @@ do_enter_on_file_entry (file_entry_t * fe)
     full_name_vpath = vfs_path_append_new (current_panel->cwd_vpath, fe->fname, NULL);
 
     /* Try associated command */
-    if (regex_command (full_name_vpath, "Open") != 0)
-    {
-        vfs_path_free (full_name_vpath);
+    ok = regex_command (full_name_vpath, "Open") != 0;
+    vfs_path_free (full_name_vpath);
+    if (ok)
         return TRUE;
-    }
 
     /* Check if the file is executable */
     full_name_vpath = vfs_path_append_new (current_panel->cwd_vpath, fe->fname, NULL);
