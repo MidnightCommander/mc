@@ -172,15 +172,16 @@ static const GOptionEntry argument_main_table[] = {
     },
 #endif /* ENABLE_VFS_SMB */
 
-    /* single file operations */
     {
-     "view", 'v', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_CALLBACK,
+     /* handle arguments manually */
+     "view", 'v', G_OPTION_FLAG_IN_MAIN | G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK,
      parse_mc_v_argument,
      N_("Launches the file viewer on a file"),
      "<file>"
     },
 
     {
+     /* handle arguments manually */
      "edit", 'e', G_OPTION_FLAG_IN_MAIN | G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK,
      parse_mc_e_argument,
      N_("Edit files"),
@@ -461,7 +462,6 @@ parse_mc_v_argument (const gchar * option_name, const gchar * value, gpointer da
     mc_return_val_if_error (mcerror, FALSE);
 
     mc_global.mc_run_mode = MC_RUN_VIEWER;
-    mc_run_param0 = g_strdup (value);
 
     return TRUE;
 }
@@ -616,7 +616,6 @@ mc_args_parse (int *argc, char ***argv, const char *translation_domain, GError *
 
     if (!g_option_context_parse (context, argc, argv, mcerror))
     {
-
         if (*mcerror == NULL)
             mc_propagate_error (mcerror, 0, "%s\n", _("Arguments parse error!"));
         else
@@ -732,76 +731,60 @@ mc_setup_by_args (int argc, char **argv, GError ** mcerror)
     if (strncmp (base, "mce", 3) == 0 || strcmp (base, "vi") == 0)
     {
         /* mce* or vi is link to mc */
-
-        mc_run_param0 = parse_mcedit_arguments (argc - 1, &argv[1]);
         mc_global.mc_run_mode = MC_RUN_EDITOR;
     }
     else if (strncmp (base, "mcv", 3) == 0 || strcmp (base, "view") == 0)
     {
         /* mcv* or view is link to mc */
-
-        if (tmp != NULL)
-            mc_run_param0 = g_strdup (tmp);
-        else
-        {
-            mc_propagate_error (mcerror, 0, "%s\n", _("No arguments given to the viewer."));
-            return FALSE;
-        }
         mc_global.mc_run_mode = MC_RUN_VIEWER;
     }
 #ifdef USE_DIFF_VIEW
     else if (strncmp (base, "mcd", 3) == 0 || strcmp (base, "diff") == 0)
     {
         /* mcd* or diff is link to mc */
+        mc_global.mc_run_mode = MC_RUN_DIFFVIEWER;
+    }
+#endif /* USE_DIFF_VIEW */
 
-        if (argc < 3)
+    switch (mc_global.mc_run_mode)
+    {
+    case MC_RUN_EDITOR:
+        mc_run_param0 = parse_mcedit_arguments (argc - 1, &argv[1]);
+        break;
+
+    case MC_RUN_VIEWER:
+        if (tmp == NULL)
         {
-            mc_propagate_error (mcerror, 0, "%s\n",
-                                _("Two files are required to evoke the diffviewer."));
+            mc_propagate_error (mcerror, 0, "%s\n", _("No arguments given to the viewer."));
             return FALSE;
         }
 
+        mc_run_param0 = g_strdup (tmp);
+        break;
+
+#ifdef USE_DIFF_VIEW
+    case MC_RUN_DIFFVIEWER:
+        if (argc < 3)
+        {
+            mc_propagate_error (mcerror, 0, "%s\n",
+                                _("Two files are required to envoke the diffviewer."));
+            return FALSE;
+        }
+        /* fallthrough */
+#endif /* USE_DIFF_VIEW */
+
+    case MC_RUN_FULL:
+    default:
+        /* set the current dir and the other dir for filemanager,
+           or two files for diff viewer */
         if (tmp != NULL)
         {
             mc_run_param0 = g_strdup (tmp);
             tmp = (argc > 1) ? argv[2] : NULL;
             if (tmp != NULL)
                 mc_run_param1 = g_strdup (tmp);
-            mc_global.mc_run_mode = MC_RUN_DIFFVIEWER;
         }
-    }
-#endif /* USE_DIFF_VIEW */
-    else
-    {
-        /* MC is run as mc */
-
-        switch (mc_global.mc_run_mode)
-        {
-        case MC_RUN_EDITOR:
-            mc_run_param0 = parse_mcedit_arguments (argc - 1, &argv[1]);
-            break;
-
-        case MC_RUN_VIEWER:
-            /* mc_run_param0 is set up in parse_mc_v_argument() */
-            break;
-
-        case MC_RUN_DIFFVIEWER:
-            /* not implemented yet */
-            break;
-
-        case MC_RUN_FULL:
-        default:
-            /* sets the current dir and the other dir */
-            if (tmp != NULL)
-            {
-                mc_run_param0 = g_strdup (tmp);
-                tmp = (argc > 1) ? argv[2] : NULL;
-                if (tmp != NULL)
-                    mc_run_param1 = g_strdup (tmp);
-            }
-            mc_global.mc_run_mode = MC_RUN_FULL;
-            break;
-        }
+        break;
     }
 
     return TRUE;
