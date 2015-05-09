@@ -3014,6 +3014,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                             abort ();
                         }
 
+                        g_free (source_with_path_str);
                         g_free (temp);
                     }
                 }               /* Copy or move operation */
