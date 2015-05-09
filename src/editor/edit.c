@@ -2195,6 +2195,7 @@ edit_clean (WEdit * edit)
     vfs_path_free (edit->dir_vpath);
     mc_search_free (edit->search);
     edit->search = NULL;
+    MC_PTR_FREE (edit->last_search_string);
 
 #ifdef HAVE_CHARSET
     if (edit->converter != str_cnv_from_term)
