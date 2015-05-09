@@ -721,7 +721,7 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
         dfentry = &dir_copy.list[i];
 
         dfentry->fnamelen = fentry->fnamelen;
-        dfentry->fname = fentry->fname;
+        dfentry->fname = g_strndup (fentry->fname, fentry->fnamelen);
         dfentry->f.marked = fentry->f.marked;
         dfentry->f.dir_size_computed = fentry->f.dir_size_computed;
         dfentry->f.link_to_dir = fentry->f.link_to_dir;
@@ -748,6 +748,7 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
     }
     else
     {
+        dir_list_clean (list);
         if (!dir_list_init (list))
         {
             dir_list_clean (&dir_copy);
