@@ -71,6 +71,7 @@ dnl Sorted -W options:
     MC_CHECK_ONE_CFLAG([-Wno-long-long])
     MC_CHECK_ONE_CFLAG([-Wno-unreachable-code])
     MC_CHECK_ONE_CFLAG([-Wparentheses])
+    MC_CHECK_ONE_CFLAG([-Wpointer-arith])
     MC_CHECK_ONE_CFLAG([-Wpointer-sign])
     MC_CHECK_ONE_CFLAG([-Wredundant-decls])
     MC_CHECK_ONE_CFLAG([-Wreturn-type])

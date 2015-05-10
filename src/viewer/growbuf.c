@@ -155,8 +155,8 @@ mcview_growbuf_read_until (mcview_t * view, off_t ofs)
             g_ptr_array_add (view->growbuf_blockptr, newblock);
             view->growbuf_lastindex = 0;
         }
-        p = g_ptr_array_index (view->growbuf_blockptr,
-                               view->growbuf_blockptr->len - 1) + view->growbuf_lastindex;
+
+        p = (byte *) g_ptr_array_index (view->growbuf_blockptr, view->growbuf_blockptr->len - 1) + view->growbuf_lastindex;
 
         bytesfree = VIEW_PAGE_SIZE - view->growbuf_lastindex;
 
@@ -293,10 +293,10 @@ mcview_get_ptr_growing_buffer (mcview_t * view, off_t byte_index)
     if (view->growbuf_blockptr->len == 0)
         return NULL;
     if (pageno < (off_t) view->growbuf_blockptr->len - 1)
-        return (char *) (g_ptr_array_index (view->growbuf_blockptr, pageno) + pageindex);
+        return ((char *) g_ptr_array_index (view->growbuf_blockptr, pageno) + pageindex);
     if (pageno == (off_t) view->growbuf_blockptr->len - 1
         && pageindex < (off_t) view->growbuf_lastindex)
-        return (char *) (g_ptr_array_index (view->growbuf_blockptr, pageno) + pageindex);
+        return ((char *) g_ptr_array_index (view->growbuf_blockptr, pageno) + pageindex);
     return NULL;
 }
 

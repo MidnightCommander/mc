@@ -1544,7 +1544,7 @@ panel_get_title_without_hotkey (const char *title)
 
         hkey = strchr (translated_title, '&');
         if (hkey != NULL && hkey[1] != '\0')
-            memmove ((void *) hkey, (void *) hkey + 1, strlen (hkey));
+            memmove (hkey, hkey + 1, strlen (hkey));
     }
 
     return translated_title;
