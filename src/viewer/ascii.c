@@ -286,9 +286,9 @@ mcview_isprint (const mcview_t * view, int c)
     return g_unichar_isprint (c);
 #else
     (void) view;
-#endif /* HAVE_CHARSET */
     /* TODO this is very-very buggy by design: ticket 3257 comments 0-1 */
     return is_printable (c);
+#endif /* HAVE_CHARSET */
 }
 
 /* --------------------------------------------------------------------------------------------- */

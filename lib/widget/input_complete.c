@@ -1030,7 +1030,6 @@ query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                 input_handle_char (input, parm);
                 h->ret_value = B_USER;
                 dlg_stop (h);
-                return MSG_HANDLED;
             }
             else
             {
@@ -1070,7 +1069,6 @@ query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                 /* This means we want to refill the list box and start again */
                 h->ret_value = B_USER;
                 dlg_stop (h);
-                return MSG_HANDLED;
             }
             else
             {
@@ -1165,9 +1163,8 @@ query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                 }
                 bl = 0;
             }
-            return MSG_HANDLED;
         }
-        break;
+        return MSG_HANDLED;
 
     default:
         return dlg_default_callback (w, sender, msg, parm, data);
