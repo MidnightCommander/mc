@@ -71,7 +71,7 @@ enum config_var_type
 /*** file scope variables ************************************************************************/
 
 /* *INDENT-OFF* */
-struct
+static struct
 {
     const char *pattern;
     mc_search_t *pattern_regexp;

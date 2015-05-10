@@ -66,8 +66,6 @@
 
 /*** global variables ****************************************************************************/
 
-GArray *extfs_plugins = NULL;
-
 /*** file scope macro definitions ****************************************************************/
 
 #undef ERRNOR
@@ -134,6 +132,8 @@ typedef struct
 } extfs_plugin_info_t;
 
 /*** file scope variables ************************************************************************/
+
+static GArray *extfs_plugins = NULL;
 
 static gboolean errloop;
 static gboolean notadir;

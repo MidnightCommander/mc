@@ -243,7 +243,7 @@ typedef struct
 
 /*** file scope variables ************************************************************************/
 
-struct
+static struct
 {
     Widget *w;
     FileProgressStatus action;

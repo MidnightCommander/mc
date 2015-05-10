@@ -63,7 +63,7 @@ static int (*mc_aspell_config_replace) (struct AspellConfig * ths, const char *k
 static struct AspellCanHaveError *(*mc_new_aspell_speller) (struct AspellConfig * config);
 static unsigned int (*mc_aspell_error_number) (const struct AspellCanHaveError * ths);
 static const char *(*mc_aspell_speller_error_message) (const struct AspellSpeller * ths);
-const struct AspellError *(*mc_aspell_speller_error) (const struct AspellSpeller * ths);
+static const struct AspellError *(*mc_aspell_speller_error) (const struct AspellSpeller * ths);
 
 static struct AspellSpeller *(*mc_to_aspell_speller) (struct AspellCanHaveError * obj);
 static int (*mc_aspell_speller_check) (struct AspellSpeller * ths, const char *word, int word_size);

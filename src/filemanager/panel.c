@@ -310,8 +310,6 @@ panel_field_t panel_fields[] = {
 
 mc_fhl_t *mc_filehighlight = NULL;
 
-extern int saving_setup;
-
 /*** file scope macro definitions ****************************************************************/
 
 #define NORMAL          0

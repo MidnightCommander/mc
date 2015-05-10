@@ -134,6 +134,8 @@ extern struct macro_action_t record_macro_buf[MAX_MACRO_LENGTH];
 
 extern GArray *macros_list;
 
+extern int saving_setup;
+
 /*** declarations of public functions ************************************************************/
 
 const char *setup_init (void);

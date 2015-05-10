@@ -46,9 +46,6 @@
 
 /*** global variables ****************************************************************************/
 
-/* If true, show version info and exit */
-gboolean mc_args__show_version = FALSE;
-
 /* If true, assume we are running on an xterm terminal */
 gboolean mc_args__force_xterm = FALSE;
 
@@ -79,6 +76,9 @@ char *mc_run_param1 = NULL;
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
+
+/* If true, show version info and exit */
+static gboolean mc_args__show_version = FALSE;
 
 /* forward declarations */
 static gboolean parse_mc_e_argument (const gchar * option_name, const gchar * value,
@@ -193,7 +193,7 @@ static const GOptionEntry argument_main_table[] = {
     /* *INDENT-ON* */
 };
 
-GOptionGroup *terminal_group;
+static GOptionGroup *terminal_group;
 #define ARGS_TERM_OPTIONS 0
 static const GOptionEntry argument_terminal_table[] = {
     /* *INDENT-OFF* */
@@ -280,7 +280,7 @@ static const GOptionEntry argument_terminal_table[] = {
 
 #undef ARGS_TERM_OPTIONS
 
-GOptionGroup *color_group;
+static GOptionGroup *color_group;
 #define ARGS_COLOR_OPTIONS 0
 /* #define ARGS_COLOR_OPTIONS G_OPTION_FLAG_IN_MAIN */
 static const GOptionEntry argument_color_table[] = {
