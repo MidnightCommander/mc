@@ -1061,7 +1061,6 @@ extfs_readdir (void *data)
 
     g_strlcpy (dir.dent.d_name, (*info)->name, MC_MAXPATHLEN);
 
-    compute_namelen (&dir.dent);
     *info = (*info)->next_in_dir;
 
     return (void *) &dir;

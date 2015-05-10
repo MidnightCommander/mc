@@ -939,8 +939,6 @@ smbfs_readdir (void *info)
     g_strlcpy (dirent_dest, smbfs_info->current->text, MC_MAXPATHLEN);
     smbfs_info->current = smbfs_info->current->next;
 
-    compute_namelen (&smbfs_readdir_data.dent);
-
     return &smbfs_readdir_data;
 }
 

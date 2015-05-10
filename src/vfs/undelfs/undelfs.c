@@ -414,8 +414,6 @@ undelfs_readdir (void *vfs_info)
                     (long) delarray[readdir_ptr].ino, delarray[readdir_ptr].num_blocks);
     readdir_ptr++;
 
-    compute_namelen (&undelfs_readdir_data.dent);
-
     return &undelfs_readdir_data;
 }
 

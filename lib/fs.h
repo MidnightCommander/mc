@@ -100,7 +100,6 @@
 
 /* unistd.h defines _POSIX_VERSION on POSIX.1 systems. */
 #define NLENGTH(dirent) (strlen ((dirent)->d_name))
-#define DIRENT_LENGTH_COMPUTED 1
 
 /* DragonFlyBSD doesn't provide MAXNAMLEN macro */
 #ifndef MAXNAMLEN
@@ -121,16 +120,5 @@
 /*** declarations of public functions ************************************************************/
 
 /*** inline functions ****************************************************************************/
-
-static inline void
-compute_namelen (struct dirent *dent __attribute__ ((unused)))
-{
-#ifdef DIRENT_LENGTH_COMPUTED
-    (void) dent;
-    return;
-#else
-    dent->d_namlen = strlen (dent);
-#endif
-}
 
 #endif
