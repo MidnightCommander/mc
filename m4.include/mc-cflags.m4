@@ -52,7 +52,7 @@ dnl    MC_CHECK_ONE_CFLAG([-fno-stack-protector])
 esac
 
 dnl Sorted -W options:
-dnl    MC_CHECK_ONE_CFLAG([-Wbad-function-cast])
+    MC_CHECK_ONE_CFLAG([-Wbad-function-cast])
     MC_CHECK_ONE_CFLAG([-Wcomment])
     MC_CHECK_ONE_CFLAG([-Wdeclaration-after-statement])
     MC_CHECK_ONE_CFLAG([-Wfloat-equal])
