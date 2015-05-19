@@ -39,8 +39,11 @@
 #    AWS_ACCESS_KEY_ID         : Amazon AWS acces key (required)
 #    AWS_SECRET_ACCESS_KEY     : Amazon AWS secret access key (required)
 #  Optional:
-#    MCVFS_EXTFS_S3_LOCATION   : where to create new buckets, "EU"(default) or "US"
+#    MCVFS_EXTFS_S3_LOCATION   : where to create new buckets: "EU" - default, "USWest", "APNortheast" etc.
+#    MCVFS_EXTFS_S3_HOST       : host to connect to ("s3.amazonaws.com" - default, you may use another to speedup
+#                                operations, e.g. "s3.eu-central-1.amazonaws.com"). Needed for V4 authentication method.
 #    MCVFS_EXTFS_S3_DEBUGFILE  : write debug info to this file (no info default)
+#    MCVFS_EXTFS_S3_DEBUGLEVEL : debug messages level ("WARNING" - default, "DEBUG" - verbose)
 #
 #
 # Usage:
@@ -48,6 +51,13 @@
 #
 #
 # History:
+#  2015-05-19 Dmitry Koterov <dmitry.koterov@gmail.com>
+#   - Resolve "Please use AWS4-HMAC-SHA256" error: enforce the new V4 authentication method.
+#     It is required in many (if not all) locations nowadays.
+#   - Manual location specification support ("US" location is deprecated).
+#   - Connection host selection support (MCVFS_EXTFS_S3_HOST).
+#   - Debug level specification support (MCVFS_EXTFS_S3_DEBUGLEVEL).
+#
 #  2009-02-07 Jakob Kemi <jakob.kemi@gmail.com>
 #   - Updated instructions.
 #   - Improved error reporting.
@@ -79,8 +89,10 @@ from boto.exception import BotoServerError
 USER=os.getenv('USER','0')
 AWS_ACCESS_KEY_ID=os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY=os.getenv('AWS_SECRET_ACCESS_KEY')
-LOCATION = os.getenv('MCVFS_EXTFS_S3_LOCATION', 'EU').lower()
-DEBUGFILE = os.getenv('MCVFS_EXTFS_S3_DEBUGFILE')
+LOCATION=os.getenv('MCVFS_EXTFS_S3_LOCATION', 'EU')
+HOST=os.getenv('MCVFS_EXTFS_S3_HOST', 's3.amazonaws.com')
+DEBUGFILE=os.getenv('MCVFS_EXTFS_S3_DEBUGFILE')
+DEBUGLEVEL=os.getenv('MCVFS_EXTFS_S3_DEBUGLEVEL', 'WARNING')
 
 if not AWS_ACCESS_KEY_ID or not AWS_SECRET_ACCESS_KEY:
 	sys.stderr.write('Missing AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY environment variables.\n')
@@ -93,7 +105,7 @@ if DEBUGFILE:
 		filename=DEBUGFILE,
 		level=logging.DEBUG,
 		format='%(asctime)s %(levelname)s %(message)s')
-	logging.getLogger('boto').setLevel(logging.WARNING)
+	logging.getLogger('boto').setLevel(getattr(logging, DEBUGLEVEL))
 else:
 	class Void(object):
 		def __getattr__(self, attr):
@@ -164,13 +176,22 @@ def threadmap(fun, iterable, maxthreads=16):
 logger.debug('started')
 
 # Global S3 connection
-s3 = S3Connection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
-if LOCATION == 'eu':
-	logger.debug('Using location EU for new buckets')
-	S3LOCATION = boto.s3.connection.Location.EU
-else:
-	logger.debug('Using location US for new buckets')
-	S3LOCATION = boto.s3.connection.Location.US
+S3LOCATION = None
+LOCATIONS = []
+for att in dir(boto.s3.connection.Location):
+	v = getattr(boto.s3.connection.Location, att)
+	if type(v) is str and not att.startswith('_'):
+		LOCATIONS.append(att)
+		if att.lower() == LOCATION.lower() or v.lower() == LOCATION.lower():
+			logger.debug('Using location %s for new buckets', att)
+			S3LOCATION = v
+			break
+if S3LOCATION is None:
+    raise Exception("Unknown location: %s. Please use one of: %s" % (LOCATION, ", ".join(LOCATIONS)))
+
+# Only V4 method is supported in all locations.
+os.environ['S3_USE_SIGV4'] = 'True'
+s3 = S3Connection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, host=HOST)
 
 logger.debug('argv: ' + str(sys.argv))
 
@@ -362,7 +383,7 @@ elif cmd == 'mkdir':
 	else:
 		bucket = dirname
 		try:
-			s3.create_bucket(bucket, location=boto.s3.connection.Location.EU)
+			s3.create_bucket(bucket, location=S3LOCATION)
 		except BotoServerError:
 			handleServerError('Unable to create bucket "%s"' % (bucket))
 
