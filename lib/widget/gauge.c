@@ -46,11 +46,24 @@
 
 /*** global variables ****************************************************************************/
 
+int smooth_progressbar = 1;
+
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
+
+const char *char_fractions[8] = {
+    "\342\226\217",
+    "\342\226\216",
+    "\342\226\215",
+    "\342\226\214",
+    "\342\226\213",
+    "\342\226\212",
+    "\342\226\211",
+    "\342\226\210"
+};
 
 /*** file scope functions ************************************************************************/
 
@@ -79,7 +92,7 @@ gauge_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         else
         {
             int gauge_len;
-            int percentage, columns;
+            int percentage, columns, columns_fraction;
             long total = g->max;
             long done = g->current;
 
@@ -99,14 +112,31 @@ gauge_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             gauge_len = w->cols - 7;    /* 7 positions for percentage */
 
             percentage = (200 * done / total + 1) / 2;
-            columns = (2 * gauge_len * done / total + 1) / 2;
+            columns = (8 * gauge_len * done / total + 1) / 8;
+            tty_setcolor (h->color[DLG_COLOR_NORMAL]);
             tty_print_char ('[');
             if (g->from_left_to_right)
             {
-                tty_setcolor (GAUGE_COLOR);
-                tty_printf ("%*s", (int) columns, "");
-                tty_setcolor (h->color[DLG_COLOR_NORMAL]);
-                tty_printf ("%*s] %3d%%", gauge_len - columns, "", percentage);
+                if (smooth_progressbar)
+                {
+                    columns_fraction = (8 * gauge_len * done / total + 1) % 8;
+                    for (int i = 0; i < (int)columns; i++)
+                    {
+                        tty_printf (char_fractions[7]);
+                    }
+                    if (columns_fraction != 0)
+                    {
+                        tty_printf (char_fractions[columns_fraction - 1]);
+                    }
+                }
+                else
+                {
+                    tty_setcolor (GAUGE_COLOR);
+                    tty_printf ("%*s", (int) columns, "");
+                    tty_setcolor (h->color[DLG_COLOR_NORMAL]);
+
+                }
+                tty_printf ("%*s] %3d%%", gauge_len - columns - (columns_fraction > 0 ? 1 : 0), "", percentage);
             }
             else
             {
