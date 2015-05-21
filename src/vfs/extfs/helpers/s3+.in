@@ -39,8 +39,9 @@
 #    AWS_ACCESS_KEY_ID         : Amazon AWS acces key (required)
 #    AWS_SECRET_ACCESS_KEY     : Amazon AWS secret access key (required)
 #  Optional:
-#    MCVFS_EXTFS_S3_LOCATION   : where to create new buckets, "EU"(default) or "US"
-#    MCVFS_EXTFS_S3_DEBUGFILE  : write debug info to this file (no info default)
+#    MCVFS_EXTFS_S3_LOCATION   : where to create new buckets: "EU" - default, "USWest", "APNortheast" etc.
+#    MCVFS_EXTFS_S3_DEBUGFILE  : write debug info to this file (no info by default)
+#    MCVFS_EXTFS_S3_DEBUGLEVEL : debug messages level ("WARNING" - default, "DEBUG" - verbose)
 #
 #
 # Usage:
@@ -48,6 +49,12 @@
 #
 #
 # History:
+#  2015-05-21 Dmitry Koterov <dmitry.koterov@gmail.com>
+#   - Resolve "Please use AWS4-HMAC-SHA256" error: enforce the new V4 authentication method.
+#     It is required in many (if not all) locations nowadays.
+#   - Now s3+ works with buckets in different regions: locations are auto-detected.
+#   - Debug level specification support (MCVFS_EXTFS_S3_DEBUGLEVEL).
+#
 #  2009-02-07 Jakob Kemi <jakob.kemi@gmail.com>
 #   - Updated instructions.
 #   - Improved error reporting.
@@ -71,7 +78,6 @@ import datetime
 
 import boto
 from boto.s3.connection import S3Connection
-from boto.s3.key import Key
 from boto.exception import BotoServerError
 
 
@@ -79,8 +85,9 @@ from boto.exception import BotoServerError
 USER=os.getenv('USER','0')
 AWS_ACCESS_KEY_ID=os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY=os.getenv('AWS_SECRET_ACCESS_KEY')
-LOCATION = os.getenv('MCVFS_EXTFS_S3_LOCATION', 'EU').lower()
-DEBUGFILE = os.getenv('MCVFS_EXTFS_S3_DEBUGFILE')
+S3LOCATION=os.getenv('MCVFS_EXTFS_S3_LOCATION', 'EU')
+DEBUGFILE=os.getenv('MCVFS_EXTFS_S3_DEBUGFILE')
+DEBUGLEVEL=os.getenv('MCVFS_EXTFS_S3_DEBUGLEVEL', 'WARNING')
 
 if not AWS_ACCESS_KEY_ID or not AWS_SECRET_ACCESS_KEY:
 	sys.stderr.write('Missing AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY environment variables.\n')
@@ -93,7 +100,7 @@ if DEBUGFILE:
 		filename=DEBUGFILE,
 		level=logging.DEBUG,
 		format='%(asctime)s %(levelname)s %(message)s')
-	logging.getLogger('boto').setLevel(logging.WARNING)
+	logging.getLogger('boto').setLevel(getattr(logging, DEBUGLEVEL))
 else:
 	class Void(object):
 		def __getattr__(self, attr):
@@ -163,23 +170,59 @@ def threadmap(fun, iterable, maxthreads=16):
 
 logger.debug('started')
 
-# Global S3 connection
-s3 = S3Connection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
-if LOCATION == 'eu':
-	logger.debug('Using location EU for new buckets')
-	S3LOCATION = boto.s3.connection.Location.EU
-else:
-	logger.debug('Using location US for new buckets')
-	S3LOCATION = boto.s3.connection.Location.US
+if S3LOCATION.upper() == "EU":
+    S3LOCATION = "eu-central-1"
+if S3LOCATION.upper() == "US":
+    S3LOCATION = "us-east-1"
+for att in dir(boto.s3.connection.Location):
+	v = getattr(boto.s3.connection.Location, att)
+	if type(v) is str and att.lower() == S3LOCATION.lower():
+		S3LOCATION = v
+		break
+logger.debug('Using location %s for new buckets', S3LOCATION)
+
+
+def get_connection(location):
+	"""
+	Creates a connection to the specified region.
+	"""
+	os.environ['S3_USE_SIGV4'] = 'True' # only V4 method is supported in all locations.
+	return boto.s3.connect_to_region(
+		location,
+		aws_access_key_id=AWS_ACCESS_KEY_ID,
+		aws_secret_access_key=AWS_SECRET_ACCESS_KEY
+	)
+
+
+# Global S3 default connection.
+s3 = get_connection('us-east-1')
+
+
+def get_bucket(name):
+	"""
+	Returns a bucket by its name, no matter what region is it in.
+	"""
+	try:
+		b = s3.get_bucket(name, validate=False)
+		b.get_location() # just to raise an exception on error
+		return b
+	except boto.exception.S3ResponseError, e:
+		# Seems this is the only proper way to switch to the bucket's region.
+		# Requesting of the default region for "?location" does not work unfortunately.
+		m = re.search(r'<Region>(.*?)</Region>', e.body)
+		if m:
+			return get_connection(m.group(1)).get_bucket(name)
+		raise
+
 
 logger.debug('argv: ' + str(sys.argv))
-
 try:
 	cmd = sys.argv[1]
 	args = sys.argv[2:]
 except:
 	sys.stderr.write('This program should be called from within MC\n')
 	sys.exit(1)
+
 
 def handleServerError(msg):
 	e = sys.exc_info()
@@ -242,7 +285,7 @@ if cmd == 'list':
 		try:
 			if os.path.islink('/etc/localtime'):
 				link = os.readlink('/etc/localtime')
-				tz = '/'.join(p.split(os.path.sep)[-2:])
+				tz = '/'.join(link.split(os.path.sep)[-2:])
 				return pytz.timezone(tz)
 		except:
 			pass
@@ -269,10 +312,16 @@ if cmd == 'list':
 
 
 	def bucketList(b):
+		b = get_bucket(b.name)  # get the bucket at its own region
 		totsz = 0
 		mostrecent = '1970-01-01T00:00:00.000Z'
 		ret = []
 		for k in b.list():
+			if k.name.endswith('/'):
+				# Sometimes someone create S3 keys which are ended with "/".
+				# Extfs cannot work with them as with files, and such keys may
+				# hide same-name directories, so we skip them.
+				continue
 			mostrecent = max(mostrecent, k.last_modified)
 			datetime = convDate(k.last_modified)
 			ret.append('%10s %3d %-8s %-8s %d %s %s\n' % (
@@ -301,7 +350,7 @@ elif cmd == 'copyout':
 	logger.info('copyout bucket: %s, key: %s'%(bucket, key))
 
 	try:
-		b = s3.get_bucket(bucket)
+		b = get_bucket(bucket)
 		k = b.get_key(key)
 
 		out = open(extractto, 'w')
@@ -326,7 +375,7 @@ elif cmd == 'copyin':
 	logger.info('copyin bucket: %s, key: %s'%(bucket, key))
 
 	try:
-		b = s3.get_bucket(bucket)
+		b = get_bucket(bucket)
 		k = b.new_key(key)
 		k.set_contents_from_file(fp=open(sourcefile,'r'))
 	except BotoServerError:
@@ -343,7 +392,7 @@ elif cmd == 'rm':
 	logger.info('rm bucket: %s, key: %s'%(bucket, key))
 
 	try:
-		b = s3.get_bucket(bucket)
+		b = get_bucket(bucket)
 		b.delete_key(key)
 	except BotoServerError:
 		handleServerError('Unable to remove key "%s"' % (key))
@@ -362,7 +411,7 @@ elif cmd == 'mkdir':
 	else:
 		bucket = dirname
 		try:
-			s3.create_bucket(bucket, location=boto.s3.connection.Location.EU)
+			get_connection(S3LOCATION).create_bucket(bucket, location=S3LOCATION)
 		except BotoServerError:
 			handleServerError('Unable to create bucket "%s"' % (bucket))
 
@@ -380,8 +429,8 @@ elif cmd == 'rmdir':
 	else:
 		bucket = dirname
 		try:
-			b = s3.get_bucket(bucket)
-			s3.delete_bucket(b)
+			b = get_bucket(bucket)
+			b.connection.delete_bucket(b)
 		except BotoServerError:
 			handleServerError('Unable to delete bucket "%s"' % (bucket))
 
