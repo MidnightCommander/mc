@@ -77,8 +77,6 @@ groupbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 
             if (g->title != NULL)
             {
-                Widget *wo = WIDGET (w->owner);
-
                 tty_setcolor (disabled ? DISABLED_COLOR : h->color[DLG_COLOR_TITLE]);
                 widget_move (w, 0, 1);
                 tty_print_string (g->title);
