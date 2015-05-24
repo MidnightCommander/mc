@@ -457,6 +457,7 @@ parse_mc_v_argument (const gchar * option_name, const gchar * value, gpointer da
                      GError ** mcerror)
 {
     (void) option_name;
+    (void) value;
     (void) data;
 
     mc_return_val_if_error (mcerror, FALSE);
