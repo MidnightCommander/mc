@@ -156,7 +156,8 @@ mcview_growbuf_read_until (mcview_t * view, off_t ofs)
             view->growbuf_lastindex = 0;
         }
 
-        p = (byte *) g_ptr_array_index (view->growbuf_blockptr, view->growbuf_blockptr->len - 1) + view->growbuf_lastindex;
+        p = (byte *) g_ptr_array_index (view->growbuf_blockptr,
+                                        view->growbuf_blockptr->len - 1) + view->growbuf_lastindex;
 
         bytesfree = VIEW_PAGE_SIZE - view->growbuf_lastindex;
 
