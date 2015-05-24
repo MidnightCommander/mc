@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Aryaz Eghbali <aryaz.egh@gmail.com>, 2012
 # Mohammadreza MontazeriShatoori <monta2009@gmail.com>, 2012
@@ -11,14 +11,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2015-02-26 09:43+0300\n"
+"POT-Creation-Date: 2015-05-24 18:29+0300\n"
 "PO-Revision-Date: 2015-02-26 09:48+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Persian (http://www.transifex.com/projects/p/mc/language/fa/)\n"
+"Language-Team: Persian (http://www.transifex.com/projects/p/mc/language/"
+"fa/)\n"
+"Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fa\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
@@ -704,7 +705,7 @@ msgstr ""
 msgid "No arguments given to the viewer."
 msgstr ""
 
-msgid "Two files are required to evoke the diffviewer."
+msgid "Two files are required to envoke the diffviewer."
 msgstr ""
 
 msgid "Background protocol error"
@@ -1852,13 +1853,16 @@ msgstr ""
 msgid "&Full file list"
 msgstr ""
 
-msgid "&Brief file list"
+msgid "&Brief file list:"
 msgstr ""
 
 msgid "&Long file list"
 msgstr ""
 
 msgid "&User defined:"
+msgstr ""
+
+msgid "columns"
 msgstr ""
 
 msgid "User &mini status"
@@ -1876,8 +1880,7 @@ msgstr ""
 msgid "Sort order"
 msgstr "ترتیب مرتب‌سازی"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 msgid "Confirmation|&Delete"
 msgstr ""
 
@@ -3966,7 +3969,9 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive."
-msgstr "%s\nیک آرشیو tar به نظر نمی‌رسد."
+msgstr ""
+"%s\n"
+"یک آرشیو tar به نظر نمی‌رسد."
 
 msgid "undelfs: error"
 msgstr ""

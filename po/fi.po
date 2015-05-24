@@ -1,21 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2015-02-26 09:43+0300\n"
+"POT-Creation-Date: 2015-05-24 18:29+0300\n"
 "PO-Revision-Date: 2015-02-26 09:48+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Finnish (http://www.transifex.com/projects/p/mc/language/fi/)\n"
+"Language-Team: Finnish (http://www.transifex.com/projects/p/mc/language/"
+"fi/)\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
@@ -54,7 +55,10 @@ msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
-msgstr "Tiedosto \"%s\" on juuri nyt käsittelyssä.\nKäyttäjä: %s\nProsessin ID: %d"
+msgstr ""
+"Tiedosto \"%s\" on juuri nyt käsittelyssä.\n"
+"Käyttäjä: %s\n"
+"Prosessin ID: %d"
 
 msgid "File locked"
 msgstr "Tiedosto lukittu"
@@ -122,13 +126,17 @@ msgstr ""
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr "Teemaa '%s' ei pysty lataamaan.\nPerusteema asetettu."
+msgstr ""
+"Teemaa '%s' ei pysty lataamaan.\n"
+"Perusteema asetettu."
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr "Teemaa '%s' ei pysty käsittelemään.\nPerusteema asetettu."
+msgstr ""
+"Teemaa '%s' ei pysty käsittelemään.\n"
+"Perusteema asetettu."
 
 #, c-format
 msgid ""
@@ -427,7 +435,9 @@ msgstr ""
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr "Näytön koko %dx%d ei ole yhteensopiva.\nTarkista TERM.\n"
+msgstr ""
+"Näytön koko %dx%d ei ole yhteensopiva.\n"
+"Tarkista TERM.\n"
 
 msgid "Cannot create pipe descriptor"
 msgstr ""
@@ -701,7 +711,7 @@ msgstr ""
 msgid "No arguments given to the viewer."
 msgstr ""
 
-msgid "Two files are required to evoke the diffviewer."
+msgid "Two files are required to envoke the diffviewer."
 msgstr ""
 
 msgid "Background protocol error"
@@ -1849,7 +1859,8 @@ msgstr ""
 msgid "&Full file list"
 msgstr "&Täysi tiedostolista"
 
-msgid "&Brief file list"
+#, fuzzy
+msgid "&Brief file list:"
 msgstr "&Lyhyt tiedostolista"
 
 msgid "&Long file list"
@@ -1857,6 +1868,9 @@ msgstr "&Pitkä tiedostolista"
 
 msgid "&User defined:"
 msgstr "&Oma tiedostolista:"
+
+msgid "columns"
+msgstr ""
 
 msgid "User &mini status"
 msgstr ""
@@ -1873,8 +1887,7 @@ msgstr "&Käänteinen"
 msgid "Sort order"
 msgstr "Järjestys"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 msgid "Confirmation|&Delete"
 msgstr ""
 
@@ -3704,7 +3717,8 @@ msgid "fish: Waiting for initial line..."
 msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Sori, mutta emme voi tehdä salasanan authenkaatiota yhteyksille juuri nyt."
+msgstr ""
+"Sori, mutta emme voi tehdä salasanan authenkaatiota yhteyksille juuri nyt."
 
 #, c-format
 msgid "fish: Password is required for %s"
@@ -3864,13 +3878,17 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr "Varoitus: Invalidi rivi %s:\n%s\n"
+msgstr ""
+"Varoitus: Invalidi rivi %s:\n"
+"%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr "Virhe: Virheellinen lippu %c kohteessa %s:\n%s\n"
+msgstr ""
+"Virhe: Virheellinen lippu %c kohteessa %s:\n"
+"%s\n"
 
 #, c-format
 msgid "sftp: an error occurred while reading %s: %s"

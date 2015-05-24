@@ -1,21 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2015-02-26 09:43+0300\n"
+"POT-Creation-Date: 2015-05-24 18:29+0300\n"
 "PO-Revision-Date: 2015-02-26 09:48+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Walloon (http://www.transifex.com/projects/p/mc/language/wa/)\n"
+"Language-Team: Walloon (http://www.transifex.com/projects/p/mc/language/"
+"wa/)\n"
+"Language: wa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: wa\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
@@ -701,7 +702,7 @@ msgstr ""
 msgid "No arguments given to the viewer."
 msgstr ""
 
-msgid "Two files are required to evoke the diffviewer."
+msgid "Two files are required to envoke the diffviewer."
 msgstr ""
 
 msgid "Background protocol error"
@@ -1849,7 +1850,8 @@ msgstr ""
 msgid "&Full file list"
 msgstr "Djîvêye e&tire des fitchîs"
 
-msgid "&Brief file list"
+#, fuzzy
+msgid "&Brief file list:"
 msgstr "&Coûte djîvêye des fitchîs"
 
 msgid "&Long file list"
@@ -1857,6 +1859,9 @@ msgstr "&Longue djîvêye des fitchîs"
 
 msgid "&User defined:"
 msgstr "A vosse &Môde:"
+
+msgid "columns"
+msgstr ""
 
 msgid "User &mini status"
 msgstr ""
@@ -1873,8 +1878,7 @@ msgstr "Å&rvier"
 msgid "Sort order"
 msgstr "Ôrde po relire"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 msgid "Confirmation|&Delete"
 msgstr ""
 
@@ -3374,7 +3378,9 @@ msgstr "Trover les programes SUID eyet SGID"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr "Dji n' sai drovî li fitchî %s po scrire divins:\n%s\n"
+msgstr ""
+"Dji n' sai drovî li fitchî %s po scrire divins:\n"
+"%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3413,7 +3419,9 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr "Dji n' sai scrire e fitchî %s :\n%s\n"
+msgstr ""
+"Dji n' sai scrire e fitchî %s :\n"
+"%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3437,7 +3445,10 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr "Li fitchî %s n' est ni da vosse ni da root. Tot l' monde pout bén scrire divins.\nDo côp, si vos vos e siervoz, ça pôreut esse dandjureu..."
+msgstr ""
+"Li fitchî %s n' est ni da vosse ni da root. Tot l' monde pout bén scrire "
+"divins.\n"
+"Do côp, si vos vos e siervoz, ça pôreut esse dandjureu..."
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3492,7 +3503,16 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr "Tchôkîz so %s\net s'  rawårdez djusk' a tant ki li messaedje eva.\n\nAdon, tchôkîz co on côp sol minme tape po vey s' i gn a on 'I Va' k' aparexhe\ndjusse asto do boton.\n\nSi vos voloz spiter foû, tchôkîz on côp so Escape\net ratindoz eto."
+msgstr ""
+"Tchôkîz so %s\n"
+"et s'  rawårdez djusk' a tant ki li messaedje eva.\n"
+"\n"
+"Adon, tchôkîz co on côp sol minme tape po vey s' i gn a on 'I Va' k' "
+"aparexhe\n"
+"djusse asto do boton.\n"
+"\n"
+"Si vos voloz spiter foû, tchôkîz on côp so Escape\n"
+"et ratindoz eto."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3508,7 +3528,9 @@ msgstr "I Va"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr "Dj' a l' idêye ki totes vos tapes rotèt ddja \na môde di djin. Clapant, edon?"
+msgstr ""
+"Dj' a l' idêye ki totes vos tapes rotèt ddja \n"
+"a môde di djin. Clapant, edon?"
 
 msgid "&Discard"
 msgstr "&Taper la hatch et match"
@@ -3516,7 +3538,9 @@ msgstr "&Taper la hatch et match"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr "Clapant! Li båze di dnêyes po vosse terminå est pår fwaite!\nTotes vos tapes rotèt a l' idêye."
+msgstr ""
+"Clapant! Li båze di dnêyes po vosse terminå est pår fwaite!\n"
+"Totes vos tapes rotèt a l' idêye."
 
 msgid ""
 "Press all the keys mentioned here. After you have done it, check\n"
@@ -3651,7 +3675,9 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr "Dji n' sai drovî li fitchî cpio\n%s"
+msgstr ""
+"Dji n' sai drovî li fitchî cpio\n"
+"%s"
 
 #, c-format
 msgid ""
