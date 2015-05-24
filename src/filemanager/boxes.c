@@ -819,10 +819,10 @@ panel_listing_box (WPanel * panel, int num, char **userp, char **minip, int *use
 
         g_snprintf (panel_brief_cols_in, sizeof (panel_brief_cols_in), "%d", panel->brief_cols);
 
-        if (panel->list_type != panel_listing_brief_idx)
+        if ((int) panel->list_type != panel_listing_brief_idx)
             quick_widgets[4].options = W_DISABLED;
 
-        if (panel->list_type != panel_listing_user_idx)
+        if ((int) panel->list_type != panel_listing_user_idx)
             quick_widgets[6].options = W_DISABLED;
 
         if (!mini_user_status)
