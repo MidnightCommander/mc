@@ -149,7 +149,6 @@ sftpfs_readdir (void *data, GError ** mcerror)
         return NULL;
 
     g_strlcpy (sftpfs_dirent.dent.d_name, mem, BUF_MEDIUM);
-    compute_namelen (&sftpfs_dirent.dent);
     return &sftpfs_dirent;
 }
 

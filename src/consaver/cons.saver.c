@@ -208,7 +208,6 @@ main (int argc, char **argv)
         break;
     default:
         die ();
-        break;
     }
 
     snprintf (console_name, sizeof (console_name), p, console_minor);

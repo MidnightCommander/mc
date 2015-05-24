@@ -581,7 +581,7 @@ do_compute_dir_size (const vfs_path_t * dirname_vpath, dirsize_status_msg_t * ds
                 dsm->dirname_vpath = tmp_vpath;
                 dsm->dir_count = *dir_count;
                 dsm->total_size = *ret_total;
-                ret = (FileProgressStatus) sm->update (sm);
+                ret = sm->update (sm);
             }
         }
 
@@ -714,8 +714,8 @@ real_query_recursive (file_op_context_t * ctx, enum OperationMode mode, const ch
             query_set_sel (1);
 
         ctx->recursive_result =
-            (FileCopyMode) query_dialog (op_names[OP_DELETE], text, D_ERROR, 5,
-                                         _("&Yes"), _("&No"), _("A&ll"), _("Non&e"), _("&Abort"));
+            query_dialog (op_names[OP_DELETE], text, D_ERROR, 5, _("&Yes"), _("&No"), _("A&ll"),
+                          _("Non&e"), _("&Abort"));
         g_free (text);
 
         if (ctx->recursive_result != RECURSIVE_ABORT)
@@ -3014,6 +3014,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                             abort ();
                         }
 
+                        g_free (source_with_path_str);
                         g_free (temp);
                     }
                 }               /* Copy or move operation */

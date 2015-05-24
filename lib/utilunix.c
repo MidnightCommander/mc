@@ -215,8 +215,8 @@ my_system_make_arg_array (int flags, const char *shell, char **execute_name)
 
     if ((flags & EXECUTE_AS_SHELL) != 0)
     {
-        g_ptr_array_add (args_array, g_strdup (shell));
-        g_ptr_array_add (args_array, g_strdup ("-c"));
+        g_ptr_array_add (args_array, (gpointer) shell);
+        g_ptr_array_add (args_array, (gpointer) "-c");
         *execute_name = g_strdup (shell);
     }
     else
@@ -229,7 +229,7 @@ my_system_make_arg_array (int flags, const char *shell, char **execute_name)
         else
             *execute_name = g_strndup (shell, (gsize) (shell_token - shell));
 
-        g_ptr_array_add (args_array, g_strdup (shell));
+        g_ptr_array_add (args_array, (gpointer) shell);
     }
     return args_array;
 }

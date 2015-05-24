@@ -448,7 +448,6 @@ vfs_s_readdir (void *data)
     else
         vfs_die ("Null in structure-cannot happen");
 
-    compute_namelen (&dir.dent);
     info->cur = g_list_next (info->cur);
 
     return (void *) &dir;

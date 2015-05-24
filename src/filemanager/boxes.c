@@ -93,7 +93,7 @@
 
 /*** file scope variables ************************************************************************/
 
-unsigned long configure_old_esc_mode_id, configure_time_out_id;
+static unsigned long configure_old_esc_mode_id, configure_time_out_id;
 
 /* Index in list_types[] for "brief" */
 static const int panel_listing_brief_idx = 1;
@@ -113,8 +113,8 @@ static int new_display_codepage;
 static unsigned long ftpfs_always_use_proxy_id, ftpfs_proxy_host_id;
 #endif /* ENABLE_VFS && ENABLE_VFS_FTP */
 
-GPtrArray *skin_names;
-gchar *current_skin_name;
+static GPtrArray *skin_names;
+static gchar *current_skin_name;
 
 #ifdef ENABLE_BACKGROUND
 static WListbox *bg_list = NULL;
@@ -819,10 +819,10 @@ panel_listing_box (WPanel * panel, int num, char **userp, char **minip, int *use
 
         g_snprintf (panel_brief_cols_in, sizeof (panel_brief_cols_in), "%d", panel->brief_cols);
 
-        if (panel->list_type != panel_listing_brief_idx)
+        if ((int) panel->list_type != panel_listing_brief_idx)
             quick_widgets[4].options = W_DISABLED;
 
-        if (panel->list_type != panel_listing_user_idx)
+        if ((int) panel->list_type != panel_listing_user_idx)
             quick_widgets[6].options = W_DISABLED;
 
         if (!mini_user_status)

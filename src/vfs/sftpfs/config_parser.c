@@ -71,7 +71,7 @@ enum config_var_type
 /*** file scope variables ************************************************************************/
 
 /* *INDENT-OFF* */
-struct
+static struct
 {
     const char *pattern;
     mc_search_t *pattern_regexp;
@@ -131,8 +131,9 @@ sftpfs_correct_file_name (const char *filename)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* FIXME: is pointer arith correct here? */
 #define POINTER_TO_STRUCTURE_MEMBER(type)  \
-    ((type) ((void *) config_entity + (off_t) config_variables[i].offset))
+    ((type) (config_entity + (off_t) config_variables[i].offset))
 
 /**
  * Parse string and filling one config entity by parsed data.

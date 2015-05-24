@@ -88,9 +88,6 @@
 
 #include "midnight.h"
 
-/* TODO: merge content of layout.c here */
-extern int ok_to_refresh;
-
 /*** global variables ****************************************************************************/
 
 /* When the modes are active, left_panel, right_panel and tree_panel */

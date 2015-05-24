@@ -310,8 +310,6 @@ panel_field_t panel_fields[] = {
 
 mc_fhl_t *mc_filehighlight = NULL;
 
-extern int saving_setup;
-
 /*** file scope macro definitions ****************************************************************/
 
 #define NORMAL          0
@@ -1546,7 +1544,7 @@ panel_get_title_without_hotkey (const char *title)
 
         hkey = strchr (translated_title, '&');
         if (hkey != NULL && hkey[1] != '\0')
-            memmove ((void *) hkey, (void *) hkey + 1, strlen (hkey));
+            memmove (hkey, hkey + 1, strlen (hkey));
     }
 
     return translated_title;
@@ -2776,11 +2774,10 @@ do_enter_on_file_entry (file_entry_t * fe)
     full_name_vpath = vfs_path_append_new (current_panel->cwd_vpath, fe->fname, NULL);
 
     /* Try associated command */
-    if (regex_command (full_name_vpath, "Open") != 0)
-    {
-        vfs_path_free (full_name_vpath);
+    ok = regex_command (full_name_vpath, "Open") != 0;
+    vfs_path_free (full_name_vpath);
+    if (ok)
         return TRUE;
-    }
 
     /* Check if the file is executable */
     full_name_vpath = vfs_path_append_new (current_panel->cwd_vpath, fe->fname, NULL);

@@ -192,7 +192,7 @@ static struct
 /* *INDENT-ON* */
 
 static const size_t fbuts_num = G_N_ELEMENTS (fbuts);
-const size_t quit_button = 4;   /* index of "Quit" button */
+static const size_t quit_button = 4;    /* index of "Quit" button */
 
 static WListbox *find_list;     /* Listbox with the file list */
 

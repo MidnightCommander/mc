@@ -110,6 +110,10 @@ hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         }
         return MSG_HANDLED;
 
+    case MSG_DESTROY:
+        g_free (l->text);
+        return MSG_HANDLED;
+
     default:
         return widget_default_callback (w, sender, msg, parm, data);
     }

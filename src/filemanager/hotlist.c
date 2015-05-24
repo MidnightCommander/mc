@@ -856,8 +856,9 @@ hotlist_done (void)
 {
     dlg_destroy (hotlist_dlg);
     l_hotlist = NULL;
-    if (FALSE)
-        update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+#if 0
+    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+#endif
     repaint_screen ();
 }
 
