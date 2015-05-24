@@ -166,7 +166,7 @@ skin_apply (const gchar * skin_override)
     panel_init ();
     repaint_screen ();
 
-    mc_error_message (&mcerror);
+    mc_error_message (&mcerror, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

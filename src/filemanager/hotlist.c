@@ -1472,7 +1472,7 @@ load_hotlist (void)
         if (!mc_config_save_file (mc_main_config, &mcerror))
             setup_save_config_show_error (mc_main_config->ini_path, &mcerror);
 
-        mc_error_message (&mcerror);
+        mc_error_message (&mcerror, NULL);
     }
 
     stat (hotlist_file_name, &stat_buf);

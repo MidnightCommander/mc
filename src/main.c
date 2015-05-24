@@ -378,7 +378,7 @@ main (int argc, char *argv[])
     if (mc_global.mc_run_mode == MC_RUN_FULL)
         command_set_default_colors ();
 
-    mc_error_message (&mcerror);
+    mc_error_message (&mcerror, NULL);
 
 #ifdef ENABLE_SUBSHELL
     /* Done here to ensure that the subshell doesn't  */

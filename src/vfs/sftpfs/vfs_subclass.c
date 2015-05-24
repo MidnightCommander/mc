@@ -109,9 +109,9 @@ sftpfs_cb_open_connection (struct vfs_s_super *super,
     super->path_element = vfs_path_element_clone (vpath_element);
 
     sftpfs_fill_connection_data_from_config (super, &mcerror);
-    if (mc_error_message (&mcerror))
+    if (mc_error_message (&mcerror, &ret_value))
     {
-        vpath_element->class->verrno = mcerror->code;
+        vpath_element->class->verrno = ret_value;
         return -1;
     }
 
@@ -121,7 +121,7 @@ sftpfs_cb_open_connection (struct vfs_s_super *super,
                          vfs_s_default_stat (vpath_element->class, S_IFDIR | 0755));
 
     ret_value = sftpfs_open_connection (super, &mcerror);
-    mc_error_message (&mcerror);
+    mc_error_message (&mcerror, NULL);
     return ret_value;
 }
 
@@ -140,7 +140,7 @@ sftpfs_cb_close_connection (struct vfs_class *me, struct vfs_s_super *super)
 
     (void) me;
     sftpfs_close_connection (super, "Normal Shutdown", &mcerror);
-    mc_error_message (&mcerror);
+    mc_error_message (&mcerror, NULL);
     g_free (super->data);
 }
 
