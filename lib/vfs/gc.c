@@ -51,6 +51,39 @@
 
 #include "gc.h"
 
+/*
+ * The garbage collection mechanism is based on "stamps".
+ *
+ * A stamp is a record that says "I'm a filesystem which is no longer in
+ * use. Free me when you get a chance."
+ *
+ * This file contains a set of functions used for managing this stamp. You
+ * should use them when you write your own filesystem. Here are some rules
+ * of thumb:
+ *
+ * (1) When the last open file in your filesystem gets closed, conditionally
+ *     create a stamp. You do this with vfs_stamp_create(). (The meaning
+ *     of "conditionaly" is explained below.)
+ *
+ * (2) When a file in your filesystem is opened, delete the stamp. You do
+ *     this with vfs_rmstamp().
+ *
+ * (3) When a path inside your filesystem is invoked, call vfs_stamp() to
+ *     postpone the free'ing of your filesystem a bit. (This simply updates
+ *     a timestamp variable inside the stamp.)
+ *
+ * Additionally, when a user navigates to a new directory in a panel (or a
+ * programmer uses mc_chdir()), a stamp is conditionally created for the
+ * previous directory's filesystem. This ensures that that filesystem is
+ * free'ed. (see: _do_panel_cd() -> vfs_release_path(); mc_chdir()).
+ *
+ * We've spoken here of "conditionally creating" a stamp. What we mean is
+ * that vfs_stamp_create() is to be used: this function creates a stamp
+ * only if no directories are open (aka "active") in your filesystem. (If
+ * there _are_ directories open, it means that the filesystem is in use, in
+ * which case we don't want to free it.)
+ */
+
 /*** global variables ****************************************************************************/
 
 int vfs_timeout = 60;           /* VFS timeout in seconds */
