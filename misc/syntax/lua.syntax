@@ -1,7 +1,11 @@
 #
-# LUA Scripting Language syntax highlight
-# // Mike Gorchak <lestat@i.com.ua>
+# Lua syntax highlighting
 #
+# History:
+#
+# - 2015: Support for long strings and long comments.
+# - 2011: String-literal fixes.
+# - 2005: Started by Mike Gorchak <lestat@i.com.ua>
 
 context default lightgray
 
@@ -28,9 +32,13 @@ context default lightgray
     keyword whole until white
     keyword whole while white
 
-# Comments
+# Comment and string delimiters
     keyword -- brown
-    keyword ]] brown
+    keyword ]\[=\]] brown
+    # The following colorizes the start delimiter of "long" strings.
+    # The start delimiter of "long" comments isn't affected by the following
+    # directive but gets its color from the "--" above (gods know why).
+    keyword [\[=\][ brown
 
 # Operators
     keyword ( white
@@ -60,6 +68,7 @@ context default lightgray
 
 
 # Library Functions
+
     # basiclib
     keyword whole error yellow
     keyword whole getmetatable yellow
@@ -74,7 +83,7 @@ context default lightgray
     keyword whole tostring yellow
     keyword whole type yellow
     keyword whole assert yellow
-    keyword whole unpack yellow
+    #keyword whole unpack yellow    # modern code should use table.unpack()
     keyword whole rawequal yellow
     keyword whole rawget yellow
     keyword whole rawset yellow
@@ -115,6 +124,7 @@ context default lightgray
     keyword whole table.sort yellow
     keyword whole table.insert yellow
     keyword whole table.remove yellow
+    keyword whole table.unpack yellow
 
     # mathlib
     keyword whole math.abs yellow
@@ -194,15 +204,52 @@ context default lightgray
     keyword whole _VERSION brightmagenta
     keyword whole _G brightmagenta
 
+#
+# Long comments
+#
 
-# Comments
 context exclusive --[[ ]] brown
+    # hightlights ldoc tags: "@todo", "@param", "@function" etc.
+    keyword @\[abcdefghijklmnopqrstuvwxyz\] brightred base
+    spellcheck
+context exclusive --[=[ ]=] brown
+    keyword @\[abcdefghijklmnopqrstuvwxyz\] brightred base
+    spellcheck
+context exclusive --[==[ ]==] brown
+    keyword @\[abcdefghijklmnopqrstuvwxyz\] brightred base
+    spellcheck
+context exclusive --[===[ ]===] brown
+    keyword @\[abcdefghijklmnopqrstuvwxyz\] brightred base
+    spellcheck
+# 4 equals and up (the number of ='s doesn't have to match, but that's the best we can do):
+context exclusive --[====\[=\][ ]====\[=\]] brown
+    keyword @\[abcdefghijklmnopqrstuvwxyz\] brightred base
     spellcheck
 
+#
+# Long strings
+#
+
+context exclusive [[ ]] brightmagenta
+    spellcheck
+context exclusive [=[ ]=] brightmagenta
+    spellcheck
+context exclusive [==[ ]==] brightmagenta
+    spellcheck
+context exclusive [===[ ]===] brightmagenta
+    spellcheck
+# 4 equals and up (the number of ='s doesn't have to match, but that's the best we can do):
+context exclusive [====\[=\][ ]====\[=\]] brightmagenta
+    spellcheck
+
+
+# Simple comments
 context exclusive -- \n brown
+    keyword @\[abcdefghijklmnopqrstuvwxyz\] brightred base
     spellcheck
 
-context linestart # \n brown
+# Shebang line
+context linestart #! \n brown
 
 # Strings
 context " " green
@@ -211,6 +258,7 @@ context " " green
     keyword %d brightgreen
     keyword %l brightgreen
     keyword %p brightgreen
+    keyword %q brightgreen
     keyword %s brightgreen
     keyword %u brightgreen
     keyword %w brightgreen
@@ -231,6 +279,7 @@ context ' ' green
     keyword %d brightgreen
     keyword %l brightgreen
     keyword %p brightgreen
+    keyword %q brightgreen
     keyword %s brightgreen
     keyword %u brightgreen
     keyword %w brightgreen
