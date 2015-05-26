@@ -1288,14 +1288,14 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 /* --------------------------------------------------------------------------------------------- */
 
 /* returns -1 on file error, line number on error in file syntax */
-static int
+static long
 edit_read_syntax_file (WEdit *edit, GPtrArray *pnames, const char *syntax_file,
                        const char *editor_file, const char *first_line, const char *type)
 {
     FILE *f, *g = NULL;
     char *args[ARGS_LEN], *l = NULL;
     long line = 0;
-    int result = 0;
+    long result = 0;
     gboolean found = FALSE;
 
     f = fopen (syntax_file, "r");
@@ -1530,7 +1530,7 @@ edit_free_syntax_rules (WEdit *edit)
 void
 edit_load_syntax (WEdit *edit, GPtrArray *pnames, const char *type)
 {
-    int r;
+    long r;
     char *f = NULL;
 
     if (auto_syntax)
@@ -1569,7 +1569,7 @@ edit_load_syntax (WEdit *edit, GPtrArray *pnames, const char *type)
     else if (r != 0)
     {
         edit_free_syntax_rules (edit);
-        message (D_ERROR, _ ("Load syntax file"), _ ("Error in file %s on line %d"),
+        message (D_ERROR, _ ("Load syntax file"), _ ("Error in file %s on line %ld"),
                  error_file_name != NULL ? error_file_name : f, r);
         MC_PTR_FREE (error_file_name);
     }
