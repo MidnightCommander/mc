@@ -118,7 +118,7 @@ static const struct check_substitute_ds
     const char *config_opts_string;
     const char *app_name;
     const char *file_name;
-    int start_line;
+    long start_line;
     const char *expected_result;
 } check_substitute_ds[] = {
     {

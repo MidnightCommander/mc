@@ -373,7 +373,7 @@ exec_make_shell_string (const char *lc_data, const vfs_path_t *filename_vpath, G
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-exec_extension_view (void *target, char *cmd, const vfs_path_t *filename_vpath, int start_line)
+exec_extension_view (void *target, char *cmd, const vfs_path_t *filename_vpath, long start_line)
 {
     mcview_mode_flags_t def_flags = {
         .wrap = FALSE,
@@ -428,7 +428,7 @@ exec_extension_cd (WPanel *panel, GString *buffer)
 
 static vfs_path_t *
 exec_extension (WPanel *panel, void *target, const vfs_path_t *filename_vpath, const char *lc_data,
-                int start_line)
+                long start_line)
 {
     GString *shell_string, *export_variables;
     GString *buffer = NULL;
@@ -900,7 +900,7 @@ regex_command_for (void *target, const vfs_path_t *filename_vpath, const char *a
     gboolean error_flag = FALSE;
     int ret = 0;
     struct stat mystat;
-    int view_at_line_number = 0;
+    long view_at_line_number = 0;
 #ifdef USE_FILE_CMD
     gboolean have_type = FALSE;  // Flag used by regex_check_type()
 #endif
@@ -917,7 +917,7 @@ regex_command_for (void *target, const vfs_path_t *filename_vpath, const char *a
     // Check for the special View:%d parameter
     if (strncmp (action, "View:", 5) == 0)
     {
-        view_at_line_number = atoi (action + 5);
+        view_at_line_number = atol (action + 5);
         action = "View";
     }
 
