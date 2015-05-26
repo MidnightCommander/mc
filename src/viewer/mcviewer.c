@@ -235,7 +235,7 @@ mcview_new (const WRect *r, gboolean is_panel)
 /** Real view only */
 
 gboolean
-mcview_viewer (const char *command, const vfs_path_t *file_vpath, int start_line,
+mcview_viewer (const char *command, const vfs_path_t *file_vpath, long start_line,
                off_t search_start, off_t search_end)
 {
     gboolean succeeded;
@@ -282,8 +282,8 @@ mcview_viewer (const char *command, const vfs_path_t *file_vpath, int start_line
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mcview_load (WView *view, const char *command, const char *file, int start_line, off_t search_start,
-             off_t search_end)
+mcview_load (WView *view, const char *command, const char *file, long start_line,
+             off_t search_start, off_t search_end)
 {
     gboolean retval = FALSE;
     vfs_path_t *vpath = NULL;

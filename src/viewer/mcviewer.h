@@ -44,10 +44,10 @@ extern WView *mcview_new (const WRect *r, gboolean is_panel);
 /* Shows {file} or the output of {command} in the internal viewer,
  * starting in line {start_line}.
  */
-extern gboolean mcview_viewer (const char *command, const vfs_path_t *file_vpath, int start_line,
+extern gboolean mcview_viewer (const char *command, const vfs_path_t *file_vpath, long start_line,
                                off_t search_start, off_t search_end);
 
-extern gboolean mcview_load (WView *view, const char *command, const char *file, int start_line,
+extern gboolean mcview_load (WView *view, const char *command, const char *file, long start_line,
                              off_t search_start, off_t search_end);
 
 extern void mcview_clear_mode_flags (mcview_mode_flags_t *flags);
