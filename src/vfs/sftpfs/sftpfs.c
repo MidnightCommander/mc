@@ -436,7 +436,7 @@ sftpfs_cb_chown (const vfs_path_t *vpath, uid_t owner, gid_t group)
 static ssize_t
 sftpfs_cb_read (void *data, char *buffer, size_t count)
 {
-    int rc;
+    ssize_t rc;
     GError *mcerror = NULL;
     vfs_file_handler_t *fh = VFS_FILE_HANDLER (data);
 
@@ -464,7 +464,7 @@ sftpfs_cb_read (void *data, char *buffer, size_t count)
 static ssize_t
 sftpfs_cb_write (void *data, const char *buf, size_t nbyte)
 {
-    int rc;
+    ssize_t rc;
     GError *mcerror = NULL;
     vfs_file_handler_t *fh = VFS_FILE_HANDLER (data);
 
