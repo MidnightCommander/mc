@@ -290,7 +290,7 @@ next_word_start (unsigned char *t, off_t q, off_t size)
 /* --------------------------------------------------------------------------------------------- */
 /** find the start of a word */
 
-static inline int
+static inline off_t
 word_start (unsigned char *t, off_t q, off_t size)
 {
     off_t i;
