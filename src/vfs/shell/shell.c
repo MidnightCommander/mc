@@ -502,7 +502,7 @@ shell_info (struct vfs_class *me, struct vfs_s_super *super)
                 ERRNOR (ECONNRESET, FALSE);
             if (strncmp (buffer, "### ", 4) == 0)
                 break;
-            shell_super->host_flags = atol (buffer);
+            shell_super->host_flags = atoi (buffer);
         }
         return TRUE;
     }
