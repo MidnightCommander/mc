@@ -2095,7 +2095,6 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 
                         /* Try to reopen gpm_mouse connection */
                         disable_mouse ();
-                        enable_mouse ();
                     }
                 }
             }
