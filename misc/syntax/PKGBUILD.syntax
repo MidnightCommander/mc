@@ -5,20 +5,20 @@ context default
     keyword whole linestart pkgname brightcyan
     keyword whole linestart pkgver brightcyan
     keyword whole linestart pkgrel brightcyan
-    keyword whole linestart \[\s\]*pkgdesc brightcyan
+    keyword whole linestart pkgdesc brightcyan
     keyword whole linestart arch brightcyan
     keyword whole linestart url brightcyan
     keyword whole linestart license brightcyan
-    keyword whole linestart \[\s\]*groups brightcyan
-    keyword whole linestart \[\s\]*depends brightcyan
-    keyword whole linestart \[\s\]*makedepends brightcyan
-    keyword whole linestart \[\s\]*optdepends brightcyan
-    keyword whole linestart \[\s\]*provides brightcyan
-    keyword whole linestart \[\s\]*conflicts brightcyan
-    keyword whole linestart \[\s\]*replaces brightcyan
+    keyword whole linestart groups brightcyan
+    keyword whole linestart depends brightcyan
+    keyword whole linestart makedepends brightcyan
+    keyword whole linestart optdepends brightcyan
+    keyword whole linestart provides brightcyan
+    keyword whole linestart conflicts brightcyan
+    keyword whole linestart replaces brightcyan
     keyword whole linestart backup brightcyan
     keyword whole linestart options brightcyan
-    keyword whole linestart \[\s\]*install brightcyan
+    keyword whole linestart install brightcyan
     keyword whole linestart source brightcyan
     keyword whole linestart noextract brightcyan
     keyword whole linestart backup brightcyan
