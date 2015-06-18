@@ -570,8 +570,8 @@ la operación opuesta a la realizada por la tecla «+».
 .TP
 .PP
 .B * N. del T.:
-La tecla que realiza originalmente la función descrita es el Menos (\-)
-ya que esta es la utilizada en la aplicación originaria, Comandante Norton.
+La tecla que realiza originalmente la función descrita es la «\-» (menos)
+ya que es la utilizada en la aplicación originaria, Comandante Norton.
 
 .TP
 .B Arriba, Ctrl\-p
@@ -854,8 +854,8 @@ y
 En modo completo se muestra el nombre del archivo, su tamaño y la fecha
 y hora de modificación.
 .PP
-Breve muestra solo los nombres de archivo, en dos columnas. Esto permite
-ver el doble de entradas que en los otros modos.
+En modo breve se muestran solo los nombres de archivo usando entre 1 y 9
+columnas. Esto permite ver muchas más entradas que en los otros modos.
 .PP
 El modo largo es similar a la salida de la orden
 .BR "ls \-l" .
@@ -2729,6 +2729,104 @@ regulares normales.  Véase la página de manual de
 Finalmente, si no se activa
 .I Distinguir May/min
 la selección se hará sin distinguir caracteres en mayúsculas o minúsculas.
+.\"NODE "Diff Viewer"
+.SH "Comparador de Archivos Interno"
+El comparador de archivos interno permite comparar dos archivos y editarlos
+en el sitio quedando la comparación actualizada sobre la marcha.  Se puede
+navegar y ver copias de trabajos desde los sistemas de control de versiones
+populares (GIT, Subversion, etc).
+.PP
+El comparador ofrece los siguientes atajos de teclado:
+.TP
+.B F1
+Invoca el visor de ayuda y muestra esta sección.
+.TP
+.B F2
+Guarda los archivos modificados.
+.TP
+.B F4
+Edita el archivo del panel izquierdo.
+.TP
+.B F14
+Edita el archivo del panel derecho.
+.TP
+.B F5
+Combina el fragmento actual. Solo se combina el fragmento actual.
+.TP
+.B F7
+Comenzar una búsqueda.
+.TP
+.B F17
+Repetir la búsqueda previa.
+.TP
+.B F10, Esc, q
+Salir del comparador.
+.TP
+.B Alt\-s, s
+Mostrar/ocultar el estado de los fragmentos.
+.TP
+.B Alt\-n, l
+Mostrar/ocultar números de línea.
+.TP
+.B f
+Maximizar el panel izquierdo.
+.TP
+.B =
+Igualar el ancho de los paneles.
+.TP
+.B >
+Reducir el panel derecho.
+.TP
+.B <
+Reducir el panel izquierdo.
+.TP
+.B c
+Mostrar/ocultar «^M» para los saltos de línea con carácter de retorno (CR).
+.TP
+.B 2, 3, 4, 8
+Fijar ancho de tabulaciones.
+.TP
+.B Ctrl\-u
+Intercambia el contenido de los paneles.
+.TP
+.B Ctrl\-r
+Actualizar la pantalla.
+.TP
+.B Ctrl\-o
+Alternar con la pantalla de órdenes del sistema.
+.TP
+.B Intro, Espacio, n
+Avanzar al siguiente fragmento diferente.
+.TP
+.B Backspace, p
+Retroceder al fragmento diferente anterior.
+.TP
+.B g
+Saltar a la línea indicada.
+.TP
+.B Abajo
+Avanzar una línea.
+.TP
+.B Ariba
+Retroceder una línea.
+.TP
+.B AvPág (Página adelante)
+Avanza una página hacia abajo.
+.TP
+.B RePág (Página atrás)
+Retrocede una página hacia arriba.
+.TP
+.B Inicio, A1
+Va al comienzo de la línea.
+.TP
+.B Fin
+Va al final de la línea.
+.TP
+.B Ctrl\-Inicio
+Vuelve al comienzo del archivo.
+.TP
+.B Ctrl\-Fin, C1
+Avanza hasta el final del archivo.
 .\"NODE "Internal File Viewer"
 .SH "Visor de Archivos Interno"
 El visor de archivos interno ofrece dos modos de presentación: ASCII y
@@ -3595,6 +3693,15 @@ color de la parte completada en las barras de progreso.
 .I input
 color de los recuadros de texto editable en los dialogos.
 .TP
+.I inputmark
+color de los textos editables en los dialogos.
+.TP
+.I inputunchanged
+color original de los textos editables antes de tocarlos.
+.TP
+.I commandlinemark
+color del texto seleccionado en la línea de órdenes.
+.TP
 .I reverse
 color inverso.
 
@@ -3961,7 +4068,7 @@ para cargar texto de un archivo como selección en X Window.
 Por ejemplo:
 .PP
 .nf
-clipboard_store=xclip \-i
+clipboard_store=/usr/bin/xclip \-i
 .fi
 .TP
 .I clipboard_paste
@@ -3970,7 +4077,7 @@ para volcar la selección de X Window a la salida estándar.
 Por ejemplo:
 .PP
 .nf
-clipboard_paste=xclip \-o
+clipboard_paste=/usr/bin/xclip \-o
 .fi
 .TP
 .I autodetect_codeset
@@ -4179,7 +4286,7 @@ La página web de Midnight Commander está en:
 .fi
 .PP
 La presente documentación recoge información relativa a la versión 4.8
-(marzo de 2013).  Esta traducción no está completamente actualizada con
+(mayo de 2015).  Esta traducción no está completamente actualizada con
 la versión original en inglés.  Para acceder a información sobre
 versiones recientes consultar la página de manual en inglés que contiene
 información más completa y actualizada.  Para ver el susodicho manual
@@ -4206,6 +4313,6 @@ también útil disponer del estado de la pila.
 .\"NODE "TRANSLATION"
 .SH "TRADUCCIÓN"
 Francisco Gabriel Aroca, 1998.  Reformateado y actualizado por David
-Martín, 2002\-2014.
+Martín, 2002\-2015.
 .PP
 Midnight Commander traducido a castellano por David Martín.
