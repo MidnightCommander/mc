@@ -49,7 +49,7 @@ Alexander Dong <ado@software-ag.de>
 Alex I. Tkachenko <alex@bcs.zp.ua>
 	SCO UNIX support.
 
-Andreas Mohr <band@gmx.li>
+Andreas Mohr <and@gmx.li>
 	Find a lot of memory leaks.
 	A lot of code cleanups.
 
