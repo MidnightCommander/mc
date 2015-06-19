@@ -1770,7 +1770,13 @@ find_file (void)
         int v;
 
         if (pattern[0] == '\0')
+        {
+            g_free (start_dir);
+            g_free (ignore_dirs);
+            g_free (pattern);
+            g_free (content);
             break;              /* nothing search */
+        }
 
         last_refresh.tv_sec = 0;
         last_refresh.tv_usec = 0;
@@ -1805,6 +1811,7 @@ find_file (void)
                 vfs_path_free (filename_vpath);
             }
 
+            g_free (content);
             g_free (dirname);
             g_free (filename);
             break;
