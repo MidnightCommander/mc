@@ -31,27 +31,38 @@
 #include "lib/global.h"
 #include "lib/strutil.h"
 
-/* functions for singlebyte encodings, all characters have width 1
- * using standard system functions
- * there are only small differences between functions in strutil8bit.c 
- * and strutilascii.c
+/* Functions for singlebyte encodings, all characters have width 1
+ * using standard system functions.
+ * There are only small differences between functions in strutil8bit.c
+ * and strutilascii.c.
  */
 
-static const char replch = '?';
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
 
 /*
  * Inlines to equalize 'char' signedness for single 'char' encodings.
  * Instead of writing
- *    isspace((unsigned char)c);
+ *    isspace ((unsigned char) c);
  * you can write
- *    char_isspace(c);
+ *    char_isspace (c);
  */
-
 #define DECLARE_CTYPE_WRAPPER(func_name)       \
 static inline int char_##func_name(char c)     \
 {                                              \
     return func_name((int)(unsigned char)c);   \
 }
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
+static const char replch = '?';
+
+/* --------------------------------------------------------------------------------------------- */
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 /* *INDENT-OFF* */
 DECLARE_CTYPE_WRAPPER (isalnum)
@@ -63,11 +74,15 @@ DECLARE_CTYPE_WRAPPER (toupper)
 DECLARE_CTYPE_WRAPPER (tolower)
 /* *INDENT-ON* */
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 str_8bit_insert_replace_char (GString * buffer)
 {
     g_string_append_c (buffer, replch);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_8bit_is_valid_string (const char *text)
@@ -75,6 +90,8 @@ str_8bit_is_valid_string (const char *text)
     (void) text;
     return 1;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_8bit_is_valid_char (const char *ch, size_t size)
@@ -84,17 +101,23 @@ str_8bit_is_valid_char (const char *ch, size_t size)
     return 1;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 str_8bit_cnext_char (const char **text)
 {
     (*text)++;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 str_8bit_cprev_char (const char **text)
 {
     (*text)--;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_8bit_cnext_noncomb_char (const char **text)
@@ -106,6 +129,8 @@ str_8bit_cnext_noncomb_char (const char **text)
     return 1;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_8bit_cprev_noncomb_char (const char **text, const char *begin)
 {
@@ -116,11 +141,15 @@ str_8bit_cprev_noncomb_char (const char **text, const char *begin)
     return 1;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_8bit_isspace (const char *text)
 {
     return char_isspace (text[0]);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_8bit_ispunct (const char *text)
@@ -128,11 +157,15 @@ str_8bit_ispunct (const char *text)
     return char_ispunct (text[0]);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_8bit_isalnum (const char *text)
 {
     return char_isalnum (text[0]);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_8bit_isdigit (const char *text)
@@ -140,11 +173,15 @@ str_8bit_isdigit (const char *text)
     return char_isdigit (text[0]);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_8bit_isprint (const char *text)
 {
     return char_isprint (text[0]);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static gboolean
 str_8bit_iscombiningmark (const char *text)
@@ -152,6 +189,8 @@ str_8bit_iscombiningmark (const char *text)
     (void) text;
     return FALSE;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_8bit_toupper (const char *text, char **out, size_t * remain)
@@ -165,6 +204,8 @@ str_8bit_toupper (const char *text, char **out, size_t * remain)
     return 1;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_8bit_tolower (const char *text, char **out, size_t * remain)
 {
@@ -177,17 +218,23 @@ str_8bit_tolower (const char *text, char **out, size_t * remain)
     return 1;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_8bit_length (const char *text)
 {
     return strlen (text);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_8bit_length2 (const char *text, int size)
 {
     return (size >= 0) ? min (strlen (text), (gsize) size) : strlen (text);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static gchar *
 str_8bit_conv_gerror_message (GError * mcerror, const char *def_msg)
@@ -220,6 +267,8 @@ str_8bit_conv_gerror_message (GError * mcerror, const char *def_msg)
     return ret;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static estr_t
 str_8bit_vfs_convert_to (GIConv coder, const char *string, int size, GString * buffer)
 {
@@ -232,6 +281,8 @@ str_8bit_vfs_convert_to (GIConv coder, const char *string, int size, GString * b
 
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static const char *
 str_8bit_term_form (const char *text)
@@ -252,6 +303,8 @@ str_8bit_term_form (const char *text)
     actual[0] = '\0';
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static const char *
 str_8bit_fit_to_term (const char *text, int width, align_crt_t just_mode)
@@ -340,6 +393,8 @@ str_8bit_fit_to_term (const char *text, int width, align_crt_t just_mode)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static const char *
 str_8bit_term_trim (const char *text, int width)
 {
@@ -381,11 +436,15 @@ str_8bit_term_trim (const char *text, int width)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_8bit_term_width2 (const char *text, size_t length)
 {
     return (length != (size_t) (-1)) ? min (strlen (text), length) : strlen (text);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_8bit_term_width1 (const char *text)
@@ -393,12 +452,16 @@ str_8bit_term_width1 (const char *text)
     return str_8bit_term_width2 (text, (size_t) (-1));
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_8bit_term_char_width (const char *text)
 {
     (void) text;
     return 1;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static const char *
 str_8bit_term_substring (const char *text, int start, int width)
@@ -427,6 +490,8 @@ str_8bit_term_substring (const char *text, int start, int width)
     actual[0] = '\0';
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static const char *
 str_8bit_trunc (const char *text, int width)
@@ -467,12 +532,16 @@ str_8bit_trunc (const char *text, int width)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_8bit_offset_to_pos (const char *text, size_t length)
 {
     (void) text;
     return (int) length;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_8bit_column_to_pos (const char *text, size_t pos)
@@ -481,6 +550,8 @@ str_8bit_column_to_pos (const char *text, size_t pos)
     return (int) pos;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static char *
 str_8bit_create_search_needle (const char *needle, int case_sen)
 {
@@ -488,12 +559,16 @@ str_8bit_create_search_needle (const char *needle, int case_sen)
     return (char *) needle;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 str_8bit_release_search_needle (char *needle, int case_sen)
 {
     (void) case_sen;
     (void) needle;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static char *
 str_8bit_strdown (const char *str)
@@ -510,6 +585,8 @@ str_8bit_strdown (const char *str)
 
     return rets;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static const char *
 str_8bit_search_first (const char *text, const char *search, int case_sen)
@@ -539,6 +616,8 @@ str_8bit_search_first (const char *text, const char *search, int case_sen)
     return match;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static const char *
 str_8bit_search_last (const char *text, const char *search, int case_sen)
 {
@@ -567,17 +646,23 @@ str_8bit_search_last (const char *text, const char *search, int case_sen)
     return match;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_8bit_compare (const char *t1, const char *t2)
 {
     return strcmp (t1, t2);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_8bit_ncompare (const char *t1, const char *t2)
 {
     return strncmp (t1, t2, min (strlen (t1), strlen (t2)));
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_8bit_casecmp (const char *s1, const char *s2)
@@ -611,6 +696,8 @@ str_8bit_casecmp (const char *s1, const char *s2)
     return (((gint) (guchar) * s1) - ((gint) (guchar) * s2));
 #endif
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_8bit_ncasecmp (const char *s1, const char *s2)
@@ -651,6 +738,8 @@ str_8bit_ncasecmp (const char *s1, const char *s2)
 #endif
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_8bit_prefix (const char *text, const char *prefix)
 {
@@ -661,6 +750,8 @@ str_8bit_prefix (const char *text, const char *prefix)
 
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_8bit_caseprefix (const char *text, const char *prefix)
@@ -673,17 +764,23 @@ str_8bit_caseprefix (const char *text, const char *prefix)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 str_8bit_fix_string (char *text)
 {
     (void) text;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static char *
 str_8bit_create_key (const char *text, int case_sen)
 {
     return (case_sen) ? (char *) text : str_8bit_strdown (text);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_8bit_key_collate (const char *t1, const char *t2, int case_sen)
@@ -694,12 +791,18 @@ str_8bit_key_collate (const char *t1, const char *t2, int case_sen)
         return strcoll (t1, t2);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 str_8bit_release_key (char *key, int case_sen)
 {
     if (!case_sen)
         g_free (key);
 }
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 struct str_class
 str_8bit_init (void)
@@ -756,3 +859,5 @@ str_8bit_init (void)
 
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */
