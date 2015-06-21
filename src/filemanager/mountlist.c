@@ -1192,18 +1192,20 @@ read_file_system_list (int need_fs_type)
 #ifdef MOUNTED_VMOUNT           /* AIX.  */
     {
         int bufsize;
-        char *entries, *thisent;
+        void *entries;
+        char *thisent;
         struct vmount *vmp;
         int n_entries;
         int i;
 
         /* Ask how many bytes to allocate for the mounted file system info.  */
-        if (mntctl (MCTL_QUERY, sizeof (bufsize), (struct vmount *) &bufsize) != 0)
+        entries = &bufsize;
+        if (mntctl (MCTL_QUERY, sizeof (bufsize), entries) != 0)
             return NULL;
         entries = g_malloc (bufsize);
 
         /* Get the list of mounted file systems.  */
-        n_entries = mntctl (MCTL_QUERY, bufsize, (struct vmount *) entries);
+        n_entries = mntctl (MCTL_QUERY, bufsize, entries);
         if (n_entries < 0)
         {
             int saved_errno = errno;
