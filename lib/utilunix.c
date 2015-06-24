@@ -282,28 +282,28 @@ mc_pread_stream (mc_pipe_stream_t * ps, const fd_set * fds)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-char *
-get_owner (int uid)
+const char *
+get_owner (uid_t uid)
 {
     struct passwd *pwd;
     char *name;
-    static int uid_last;
+    static uid_t uid_last;
 
-    name = i_cache_match (uid, uid_cache, UID_CACHE_SIZE);
+    name = i_cache_match ((int) uid, uid_cache, UID_CACHE_SIZE);
     if (name != NULL)
         return name;
 
     pwd = getpwuid (uid);
     if (pwd != NULL)
     {
-        i_cache_add (uid, uid_cache, UID_CACHE_SIZE, pwd->pw_name, &uid_last);
+        i_cache_add ((int) uid, uid_cache, UID_CACHE_SIZE, pwd->pw_name, (int *) &uid_last);
         return pwd->pw_name;
     }
     else
     {
         static char ibuf[10];
 
-        g_snprintf (ibuf, sizeof (ibuf), "%d", uid);
+        g_snprintf (ibuf, sizeof (ibuf), "%d", (int) uid);
         return ibuf;
     }
 }

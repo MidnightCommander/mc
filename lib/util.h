@@ -179,7 +179,7 @@ int get_user_permissions (struct stat *buf);
 
 void init_uid_gid_cache (void);
 const char *get_group (gid_t gid);
-char *get_owner (int);
+const char *get_owner (uid_t uid);
 
 /* Returns a copy of *s until a \n is found and is below top */
 const char *extract_line (const char *s, const char *top);
