@@ -310,28 +310,28 @@ get_owner (int uid)
 
 /* --------------------------------------------------------------------------------------------- */
 
-char *
-get_group (int gid)
+const char *
+get_group (gid_t gid)
 {
     struct group *grp;
     char *name;
-    static int gid_last;
+    static gid_t gid_last;
 
-    name = i_cache_match (gid, gid_cache, GID_CACHE_SIZE);
+    name = i_cache_match ((int) gid, gid_cache, GID_CACHE_SIZE);
     if (name != NULL)
         return name;
 
     grp = getgrgid (gid);
     if (grp != NULL)
     {
-        i_cache_add (gid, gid_cache, GID_CACHE_SIZE, grp->gr_name, &gid_last);
+        i_cache_add ((int) gid, gid_cache, GID_CACHE_SIZE, grp->gr_name, (int *) &gid_last);
         return grp->gr_name;
     }
     else
     {
         static char gbuf[10];
 
-        g_snprintf (gbuf, sizeof (gbuf), "%d", gid);
+        g_snprintf (gbuf, sizeof (gbuf), "%d", (int) gid);
         return gbuf;
     }
 }

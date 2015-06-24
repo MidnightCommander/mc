@@ -178,7 +178,7 @@ void destroy_groups (void);
 int get_user_permissions (struct stat *buf);
 
 void init_uid_gid_cache (void);
-char *get_group (int);
+const char *get_group (gid_t gid);
 char *get_owner (int);
 
 /* Returns a copy of *s until a \n is found and is below top */
