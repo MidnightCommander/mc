@@ -74,11 +74,14 @@ size_t
 i18n_checktimelength (void)
 {
     size_t length = 0;
-    const time_t testtime = time (NULL);
-    struct tm *lt = localtime (&testtime);
+    time_t testtime;
+    struct tm *lt;
 
     if (i18n_timelength_cache <= MAX_I18NTIMELENGTH)
         return i18n_timelength_cache;
+
+    testtime = time (NULL);
+    lt = localtime (&testtime);
 
     if (lt == NULL)
     {
@@ -88,6 +91,7 @@ i18n_checktimelength (void)
     else
     {
         char buf[MB_LEN_MAX * MAX_I18NTIMELENGTH + 1];
+        size_t tlen;
 
         /* We are interested in the longest possible date */
         lt->tm_sec = lt->tm_min = lt->tm_hour = lt->tm_mday = 10;
@@ -96,12 +100,15 @@ i18n_checktimelength (void)
         for (lt->tm_mon = 0; lt->tm_mon < 12; lt->tm_mon++)
         {
             strftime (buf, sizeof (buf) - 1, user_recent_timeformat, lt);
-            length = max ((size_t) str_term_width1 (buf), length);
+            tlen = (size_t) str_term_width1 (buf);
+            length = max (tlen, length);
             strftime (buf, sizeof (buf) - 1, user_old_timeformat, lt);
-            length = max ((size_t) str_term_width1 (buf), length);
+            tlen = (size_t) str_term_width1 (buf);
+            length = max (tlen, length);
         }
 
-        length = max ((size_t) str_term_width1 (_(INVALID_TIME_TEXT)), length);
+        tlen = (size_t) str_term_width1 (_(INVALID_TIME_TEXT));
+        length = max (tlen, length);
     }
 
     /* Don't handle big differences. Use standard value (email bug, please) */
