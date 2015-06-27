@@ -135,13 +135,16 @@ _vfs_split_with_semi_skip_count (char *path, const char **inpath, const char **o
 static char *
 vfs_canon (const char *path)
 {
+    char *result;
+
     if (path == NULL)
         vfs_die ("Cannot canonicalize NULL");
 
-    /* Relative to current directory */
     if (!IS_PATH_SEP (*path))
     {
-        char *result, *local;
+        /* Relative to current directory */
+
+        char *local;
 
         if (g_str_has_prefix (path, VFS_ENCODING_PREFIX))
         {
@@ -161,20 +164,16 @@ vfs_canon (const char *path)
         }
         result = vfs_canon (local);
         g_free (local);
-        return result;
     }
-
-    /*
-     * So we have path of following form:
-     * /p1/p2#op/.././././p3#op/p4. Good luck.
-     */
+    else
     {
-        char *result;
+        /* Absolute path */
 
         result = g_strdup (path);
         canonicalize_pathname (result);
-        return result;
     }
+
+    return result;
 }
 
 /* --------------------------------------------------------------------------------------------- */
