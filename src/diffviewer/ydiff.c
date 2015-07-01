@@ -3212,7 +3212,7 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
             find_prev_hunk (dview->a[DIFF_LEFT], dview->skip_rows);
         break;
     case CK_Goto:
-        dview_goto_cmd (dview, TRUE);
+        dview_goto_cmd (dview, DIFF_RIGHT);
         break;
     case CK_Edit:
         dview_edit (dview, dview->ord);
