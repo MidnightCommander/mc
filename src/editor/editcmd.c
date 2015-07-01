@@ -3029,15 +3029,14 @@ edit_paste_from_X_buf_cmd (WEdit * edit)
 void
 edit_goto_cmd (WEdit * edit)
 {
+    static gboolean first_run = TRUE;
+
     char *f;
-    static long line = 0;       /* line as typed, saved as default */
     long l;
     char *error;
-    char s[32];
 
-    g_snprintf (s, sizeof (s), "%ld", line);
-    f = input_dialog (_("Goto line"), _("Enter line:"), MC_HISTORY_EDIT_GOTO_LINE, line ? s : "",
-                      INPUT_COMPLETE_NONE);
+    f = input_dialog (_("Goto line"), _("Enter line:"), MC_HISTORY_EDIT_GOTO_LINE,
+                      first_run ? NULL : INPUT_LAST_TEXT, INPUT_COMPLETE_NONE);
     if (!f)
         return;
 
@@ -3054,13 +3053,14 @@ edit_goto_cmd (WEdit * edit)
         return;
     }
 
-    line = l;
     if (l < 0)
         l = edit->buffer.lines + l + 2;
     edit_move_display (edit, l - WIDGET (edit)->lines / 2 - 1);
     edit_move_to_line (edit, l - 1);
     edit->force |= REDRAW_COMPLETELY;
     g_free (f);
+
+    first_run = FALSE;
 }
 
 
