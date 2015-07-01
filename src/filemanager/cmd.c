@@ -427,7 +427,7 @@ nice_cd (const char *text, const char *xtext, const char *help,
         return;
 
     machine =
-        input_dialog_help (text, xtext, help, history_name, "", strip_password,
+        input_dialog_help (text, xtext, help, history_name, INPUT_LAST_TEXT, strip_password,
                            INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD | INPUT_COMPLETE_HOSTNAMES |
                            INPUT_COMPLETE_USERNAMES);
     if (machine == NULL)
