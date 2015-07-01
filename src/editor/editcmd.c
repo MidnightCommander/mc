@@ -3271,27 +3271,20 @@ edit_block_process_cmd (WEdit * edit, int macro_number)
 void
 edit_mail_dialog (WEdit * edit)
 {
-    char *tmail_to = NULL;
-    char *tmail_subject = NULL;
-    char *tmail_cc = NULL;
-
-    static char *mail_cc_last = 0;
-    static char *mail_subject_last = 0;
-    static char *mail_to_last = 0;
-
+    char *mail_to, *mail_subject, *mail_cc;
 
     quick_widget_t quick_widgets[] = {
         /* *INDENT-OFF* */
         QUICK_LABEL (N_("mail -s <subject> -c <cc> <to>"), NULL),
         QUICK_LABELED_INPUT (N_("To"), input_label_above,
-                             mail_to_last != NULL ? mail_to_last : "", "mail-dlg-input-3",
-                             &tmail_to, NULL, FALSE, FALSE, INPUT_COMPLETE_USERNAMES),
+                             INPUT_LAST_TEXT, "mail-dlg-input-3",
+                             &mail_to, NULL, FALSE, FALSE, INPUT_COMPLETE_USERNAMES),
         QUICK_LABELED_INPUT (N_("Subject"), input_label_above,
-                              mail_subject_last != NULL ? mail_subject_last : "", "mail-dlg-input-2",
-                              &tmail_subject, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
+                              INPUT_LAST_TEXT, "mail-dlg-input-2",
+                              &mail_subject, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
         QUICK_LABELED_INPUT (N_("Copies to"), input_label_above,
-                             mail_cc_last != NULL ? mail_cc_last  : "", "mail-dlg-input",
-                             &tmail_cc, NULL, FALSE, FALSE, INPUT_COMPLETE_USERNAMES),
+                             INPUT_LAST_TEXT, "mail-dlg-input",
+                             &mail_cc, NULL, FALSE, FALSE, INPUT_COMPLETE_USERNAMES),
         QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
         /* *INDENT-ON* */
@@ -3305,13 +3298,10 @@ edit_mail_dialog (WEdit * edit)
 
     if (quick_dialog (&qdlg) != B_CANCEL)
     {
-        g_free (mail_cc_last);
-        g_free (mail_subject_last);
-        g_free (mail_to_last);
-        mail_cc_last = tmail_cc;
-        mail_subject_last = tmail_subject;
-        mail_to_last = tmail_to;
-        pipe_mail (&edit->buffer, mail_to_last, mail_subject_last, mail_cc_last);
+        pipe_mail (&edit->buffer, mail_to, mail_subject, mail_cc);
+        g_free (mail_to);
+        g_free (mail_subject);
+        g_free (mail_cc);
     }
 }
 
