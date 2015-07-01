@@ -3138,7 +3138,6 @@ edit_insert_file_cmd (WEdit * edit)
 int
 edit_sort_cmd (WEdit * edit)
 {
-    static char *old = 0;
     char *exp, *tmp, *tmp_edit_block_name, *tmp_edit_temp_name;
     off_t start_mark, end_mark;
     int e;
@@ -3155,12 +3154,10 @@ edit_sort_cmd (WEdit * edit)
 
     exp = input_dialog (_("Run sort"),
                         _("Enter sort options (see manpage) separated by whitespace:"),
-                        MC_HISTORY_EDIT_SORT, (old != NULL) ? old : "", INPUT_COMPLETE_NONE);
+                        MC_HISTORY_EDIT_SORT, INPUT_LAST_TEXT, INPUT_COMPLETE_NONE);
 
     if (!exp)
         return 1;
-    g_free (old);
-    old = exp;
     tmp_edit_block_name = mc_config_get_full_path (EDIT_BLOCK_FILE);
     tmp_edit_temp_name = mc_config_get_full_path (EDIT_TEMP_FILE);
     tmp =
