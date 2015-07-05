@@ -3037,17 +3037,14 @@ edit_goto_cmd (WEdit * edit)
 
     f = input_dialog (_("Goto line"), _("Enter line:"), MC_HISTORY_EDIT_GOTO_LINE,
                       first_run ? NULL : INPUT_LAST_TEXT, INPUT_COMPLETE_NONE);
-    if (!f)
-        return;
-
-    if (!*f)
+    if (f == NULL || *f == '\0')
     {
         g_free (f);
         return;
     }
 
     l = strtol (f, &error, 0);
-    if (*error)
+    if (*error != '\0')
     {
         g_free (f);
         return;
