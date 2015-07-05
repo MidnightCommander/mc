@@ -3156,8 +3156,9 @@ edit_sort_cmd (WEdit * edit)
                         _("Enter sort options (see manpage) separated by whitespace:"),
                         MC_HISTORY_EDIT_SORT, INPUT_LAST_TEXT, INPUT_COMPLETE_NONE);
 
-    if (!exp)
+    if (exp == NULL)
         return 1;
+
     tmp_edit_block_name = mc_config_get_full_path (EDIT_BLOCK_FILE);
     tmp_edit_temp_name = mc_config_get_full_path (EDIT_TEMP_FILE);
     tmp =
@@ -3168,15 +3169,14 @@ edit_sort_cmd (WEdit * edit)
 
     e = system (tmp);
     g_free (tmp);
-    if (e)
+    if (e != 0)
     {
         if (e == -1 || e == 127)
-        {
             edit_error_dialog (_("Sort"), get_sys_error (_("Cannot execute sort command")));
-        }
         else
         {
             char q[8];
+
             sprintf (q, "%d ", e);
             tmp = g_strdup_printf (_("Sort returned non-zero: %s"), q);
             edit_error_dialog (_("Sort"), tmp);
