@@ -49,6 +49,10 @@
 #
 #
 # History:
+#
+#  2015-07-22 Dmitry Koterov <dmitry.koterov@gmail.com>
+#   - Support for non-ASCII characters in filenames (system encoding detection).
+#
 #  2015-05-21 Dmitry Koterov <dmitry.koterov@gmail.com>
 #   - Resolve "Please use AWS4-HMAC-SHA256" error: enforce the new V4 authentication method.
 #     It is required in many (if not all) locations nowadays.
