@@ -1763,21 +1763,22 @@ find_file (void)
 {
     char *start_dir = NULL, *pattern = NULL, *content = NULL, *ignore_dirs = NULL;
     ssize_t start_dir_len;
-    char *filename = NULL, *dirname = NULL;
 
     while (find_parameters (&start_dir, &start_dir_len, &ignore_dirs, &pattern, &content))
     {
-        int v;
+        char *filename = NULL, *dirname = NULL;
+        int v = B_CANCEL;
 
-        if (pattern[0] == '\0')
-            break;              /* nothing search */
+        if (pattern[0] != '\0')
+        {
+            last_refresh.tv_sec = 0;
+            last_refresh.tv_usec = 0;
 
-        last_refresh.tv_sec = 0;
-        last_refresh.tv_usec = 0;
+            is_start = FALSE;
+            v = do_find (start_dir, start_dir_len, ignore_dirs, pattern, content, &dirname,
+                         &filename);
+        }
 
-        dirname = filename = NULL;
-        is_start = FALSE;
-        v = do_find (start_dir, start_dir_len, ignore_dirs, pattern, content, &dirname, &filename);
         g_free (start_dir);
         g_free (ignore_dirs);
         g_free (pattern);
@@ -1804,17 +1805,13 @@ find_file (void)
                 do_cd (filename_vpath, cd_exact);
                 vfs_path_free (filename_vpath);
             }
-
-            g_free (dirname);
-            g_free (filename);
-            break;
         }
 
         g_free (content);
         g_free (dirname);
         g_free (filename);
 
-        if (v == B_CANCEL)
+        if (v == B_ENTER || v == B_CANCEL)
             break;
 
         if (v == B_PANELIZE)
