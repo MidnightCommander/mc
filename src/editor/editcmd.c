@@ -2170,6 +2170,7 @@ edit_load_menu_file (WDialog * h)
     int dir;
     gboolean ret;
 
+    query_set_sel (1);
     dir = query_dialog (_("Menu edit"),
                         _("Which menu file do you want to edit?"), D_NORMAL,
                         geteuid () != 0 ? 2 : 3, _("&Local"), _("&User"), _("&System wide"));
