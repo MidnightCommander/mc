@@ -3933,10 +3933,10 @@ reload_panelized (WPanel * panel)
     int i, j;
     dir_list *list = &panel->dir;
 
-    if (panel != current_panel)
-        (void) mc_chdir (panel->cwd_vpath);
+    /* refresh current VFS directory required for vfs_path_from_str() */
+    (void) mc_chdir (panel->cwd_vpath);
 
-    for (i = 0, j = 0; i < panel->dir.len; i++)
+    for (i = 0, j = 0; i < list->len; i++)
     {
         vfs_path_t *vpath;
 
@@ -4813,7 +4813,7 @@ remove_encoding_from_path (const vfs_path_t * vpath)
  * If current_file == -1 then it automatically sets current_file and
  * other_file to the currently selected files in the panels.
  *
- * if force_update has the UP_ONLY_CURRENT bit toggled on, then it
+ * If flags has the UP_ONLY_CURRENT bit toggled on, then it
  * will not reload the other panel.
  *
  * @param flags for reload panel
@@ -4823,12 +4823,13 @@ remove_encoding_from_path (const vfs_path_t * vpath)
 void
 update_panels (panel_update_flags_t flags, const char *current_file)
 {
-    gboolean reload_other = (flags & UP_ONLY_CURRENT) == 0;
     WPanel *panel;
 
-    update_one_panel (get_current_index (), flags, current_file);
-    if (reload_other)
+    /* first, update other panel... */
+    if ((flags & UP_ONLY_CURRENT) == 0)
         update_one_panel (get_other_index (), flags, UP_KEEPSEL);
+    /* ...then current one */
+    update_one_panel (get_current_index (), flags, current_file);
 
     if (get_current_type () == view_listing)
         panel = PANEL (get_panel_widget (get_current_index ()));
