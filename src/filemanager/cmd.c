@@ -1011,6 +1011,7 @@ edit_mc_menu_cmd (void)
     vfs_path_t *menufile_vpath;
     int dir = 0;
 
+    query_set_sel (1);
     dir = query_dialog (_("Menu edit"),
                         _("Which menu file do you want to edit?"),
                         D_NORMAL, geteuid ()? 2 : 3, _("&Local"), _("&User"), _("&System Wide"));
