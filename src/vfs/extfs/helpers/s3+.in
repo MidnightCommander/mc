@@ -49,6 +49,10 @@
 #
 #
 # History:
+#
+#  2015-07-22 Dmitry Koterov <dmitry.koterov@gmail.com>
+#   - Support for non-ASCII characters in filenames (system encoding detection).
+#
 #  2015-05-21 Dmitry Koterov <dmitry.koterov@gmail.com>
 #   - Resolve "Please use AWS4-HMAC-SHA256" error: enforce the new V4 authentication method.
 #     It is required in many (if not all) locations nowadays.
@@ -109,7 +113,38 @@ else:
 			return self
 	logging = Void()
 
-logger=logging.getLogger('s3extfs')
+logger = logging.getLogger('s3extfs')
+
+
+def __fix_io_encoding(last_resort_default='UTF-8'):
+    """
+    The following code is needed to work with non-ASCII characters in filenames.
+    We're trying hard to detect the system encoding.
+    """
+    import codecs
+    import locale
+    for var in ('stdin', 'stdout', 'stderr'):
+        if getattr(sys, var).encoding is None:
+            enc = None
+            if enc is None:
+                try:
+                    enc = locale.getpreferredencoding()
+                except:
+                    pass
+            if enc is None:
+                try:
+                    enc = sys.getfilesystemencoding()
+                except:
+                    pass
+            if enc is None:
+                try:
+                    enc = sys.stdout.encoding
+                except:
+                    pass
+            if enc is None:
+                enc = last_resort_default
+            setattr(sys, var, codecs.getwriter(enc)(getattr(sys, var), 'strict'))
+__fix_io_encoding()
 
 
 def threadmap(fun, iterable, maxthreads=16):
