@@ -73,7 +73,7 @@ const off_t OFFSETTYPE_MAX = ((off_t) 1 << (OFF_T_BITWIDTH - 1)) - 1;
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_toggle_magic_mode (mcview_t * view)
+mcview_toggle_magic_mode (WView * view)
 {
     char *filename, *command;
     dir_list *dir;
@@ -104,7 +104,7 @@ mcview_toggle_magic_mode (mcview_t * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_toggle_wrap_mode (mcview_t * view)
+mcview_toggle_wrap_mode (WView * view)
 {
     view->text_wrap_mode = !view->text_wrap_mode;
     view->dpy_wrap_dirty = TRUE;
@@ -115,7 +115,7 @@ mcview_toggle_wrap_mode (mcview_t * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_toggle_nroff_mode (mcview_t * view)
+mcview_toggle_nroff_mode (WView * view)
 {
     view->text_nroff_mode = !view->text_nroff_mode;
     mcview_altered_nroff_flag = 1;
@@ -127,7 +127,7 @@ mcview_toggle_nroff_mode (mcview_t * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_toggle_hex_mode (mcview_t * view)
+mcview_toggle_hex_mode (WView * view)
 {
     view->hex_mode = !view->hex_mode;
 
@@ -153,7 +153,7 @@ mcview_toggle_hex_mode (mcview_t * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_init (mcview_t * view)
+mcview_init (WView * view)
 {
     size_t i;
 
@@ -205,7 +205,7 @@ mcview_init (mcview_t * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_done (mcview_t * view)
+mcview_done (WView * view)
 {
     /* Save current file position */
     if (mcview_remember_file_position && view->filename_vpath != NULL)
@@ -267,7 +267,7 @@ mcview_done (mcview_t * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_set_codeset (mcview_t * view)
+mcview_set_codeset (WView * view)
 {
 #ifdef HAVE_CHARSET
     const char *cp_id = NULL;
@@ -298,7 +298,7 @@ mcview_set_codeset (mcview_t * view)
 
 #ifdef HAVE_CHARSET
 void
-mcview_select_encoding (mcview_t * view)
+mcview_select_encoding (WView * view)
 {
     if (do_select_codepage ())
         mcview_set_codeset (view);
@@ -308,7 +308,7 @@ mcview_select_encoding (mcview_t * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_show_error (mcview_t * view, const char *msg)
+mcview_show_error (WView * view, const char *msg)
 {
     if (mcview_is_in_panel (view))
         mcview_set_datasource_string (view, msg);
@@ -322,7 +322,7 @@ mcview_show_error (mcview_t * view, const char *msg)
  */
 
 off_t
-mcview_bol (mcview_t * view, off_t current, off_t limit)
+mcview_bol (WView * view, off_t current, off_t limit)
 {
     int c;
     off_t filesize;
@@ -357,7 +357,7 @@ mcview_bol (mcview_t * view, off_t current, off_t limit)
  */
 
 off_t
-mcview_eol (mcview_t * view, off_t current, off_t limit)
+mcview_eol (WView * view, off_t current, off_t limit)
 {
     int c, prev_ch = 0;
     off_t filesize;
@@ -390,7 +390,7 @@ mcview_eol (mcview_t * view, off_t current, off_t limit)
 char *
 mcview_get_title (const WDialog * h, size_t len)
 {
-    const mcview_t *view = (const mcview_t *) find_widget_type (h, mcview_callback);
+    const WView *view = (const WView *) find_widget_type (h, mcview_callback);
     const char *modified = view->hexedit_mode && (view->change_list != NULL) ? "(*) " : "    ";
     const char *file_label;
     const char *view_filename;
@@ -410,7 +410,7 @@ mcview_get_title (const WDialog * h, size_t len)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-mcview_calc_percent (mcview_t * view, off_t p)
+mcview_calc_percent (WView * view, off_t p)
 {
     const screen_dimen right = view->status_area.left + view->status_area.width;
     const screen_dimen height = view->status_area.height;

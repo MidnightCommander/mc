@@ -141,7 +141,7 @@ mcview_coord_cache_entry_less_nroff (const coord_cache_entry_t * a, const coord_
  * smaller than ''coord'', according to the criterion ''sort_by''. */
 
 static inline size_t
-mcview_ccache_find (mcview_t * view, const coord_cache_entry_t * coord, cmp_func_t cmp_func)
+mcview_ccache_find (WView * view, const coord_cache_entry_t * coord, cmp_func_t cmp_func)
 {
     size_t base = 0;
     size_t limit = view->coord_cache->size;
@@ -208,7 +208,7 @@ coord_cache_free (coord_cache_t * cache)
 #ifdef MC_ENABLE_DEBUGGING_CODE
 
 void
-mcview_ccache_dump (mcview_t * view)
+mcview_ccache_dump (WView * view)
 {
     FILE *f;
     off_t offset, line, column, nextline_offset, filesize;
@@ -282,7 +282,7 @@ mcview_ccache_dump (mcview_t * view)
  */
 
 void
-mcview_ccache_lookup (mcview_t * view, coord_cache_entry_t * coord, enum ccache_type lookup_what)
+mcview_ccache_lookup (WView * view, coord_cache_entry_t * coord, enum ccache_type lookup_what)
 {
     size_t i;
     coord_cache_t *cache;

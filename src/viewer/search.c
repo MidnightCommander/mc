@@ -54,7 +54,7 @@ typedef struct
     simple_status_msg_t status_msg;     /* base class */
 
     gboolean first;
-    mcview_t *view;
+    WView *view;
     off_t offset;
 } mcview_search_status_msg_t;
 
@@ -101,7 +101,7 @@ mcview_search_status_update_cb (status_msg_t * sm)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mcview_search_update_steps (mcview_t * view)
+mcview_search_update_steps (WView * view)
 {
     off_t filesize = mcview_get_filesize (view);
     if (filesize != 0)
@@ -119,7 +119,7 @@ mcview_search_update_steps (mcview_t * view)
 static gboolean
 mcview_find (mcview_search_status_msg_t * ssm, off_t search_start, off_t search_end, gsize * len)
 {
-    mcview_t *view = ssm->view;
+    WView *view = ssm->view;
 
     view->search_numNeedSkipChar = 0;
     search_cb_char_curr_index = -1;
@@ -158,7 +158,7 @@ mcview_find (mcview_search_status_msg_t * ssm, off_t search_start, off_t search_
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-mcview_search_show_result (mcview_t * view, size_t match_len)
+mcview_search_show_result (WView * view, size_t match_len)
 {
     int nroff_len;
 
@@ -186,7 +186,7 @@ mcview_search_show_result (mcview_t * view, size_t match_len)
 mc_search_cbret_t
 mcview_search_cmd_callback (const void *user_data, gsize char_offset, int *current_char)
 {
-    mcview_t *view = ((mcview_search_status_msg_t *) user_data)->view;
+    WView *view = ((mcview_search_status_msg_t *) user_data)->view;
 
     /*    view_read_continue (view, &view->search_onechar_info); *//* AB:FIXME */
     if (!view->text_nroff_mode)
@@ -262,7 +262,7 @@ mcview_search_update_cmd_callback (const void *user_data, gsize char_offset)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_do_search (mcview_t * view, off_t want_search_start)
+mcview_do_search (WView * view, off_t want_search_start)
 {
     mcview_search_status_msg_t vsm;
 

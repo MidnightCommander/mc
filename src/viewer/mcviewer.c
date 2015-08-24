@@ -83,7 +83,7 @@ char *mcview_show_eof = NULL;
 
 /** Both views */
 static gboolean
-do_mcview_event (mcview_t * view, Gpm_Event * event, int *result)
+do_mcview_event (WView * view, Gpm_Event * event, int *result)
 {
     screen_dimen y, x;
     Gpm_Event local;
@@ -179,7 +179,7 @@ do_mcview_event (mcview_t * view, Gpm_Event * event, int *result)
 static int
 mcview_event (Gpm_Event * event, void *data)
 {
-    mcview_t *view = (mcview_t *) data;
+    WView *view = (WView *) data;
     int result;
 
     if (!mouse_global_in_widget (event, WIDGET (data)))
@@ -194,12 +194,12 @@ mcview_event (Gpm_Event * event, void *data)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-mcview_t *
+WView *
 mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
 {
-    mcview_t *view;
+    WView *view;
 
-    view = g_new0 (mcview_t, 1);
+    view = g_new0 (WView, 1);
     widget_init (WIDGET (view), y, x, lines, cols, mcview_callback, mcview_event);
 
     view->hex_mode = FALSE;
@@ -236,7 +236,7 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
                off_t search_start, off_t search_end)
 {
     gboolean succeeded;
-    mcview_t *lc_mcview;
+    WView *lc_mcview;
     WDialog *view_dlg;
 
     /* Create dialog and widgets, put them on the dialog */
@@ -270,7 +270,7 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mcview_load (mcview_t * view, const char *command, const char *file, int start_line,
+mcview_load (WView * view, const char *command, const char *file, int start_line,
              off_t search_start, off_t search_end)
 {
     gboolean retval = FALSE;

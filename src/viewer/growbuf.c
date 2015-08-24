@@ -62,7 +62,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_growbuf_init (mcview_t * view)
+mcview_growbuf_init (WView * view)
 {
     view->growbuf_in_use = TRUE;
     view->growbuf_blockptr = g_ptr_array_new ();
@@ -73,7 +73,7 @@ mcview_growbuf_init (mcview_t * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_growbuf_done (mcview_t * view)
+mcview_growbuf_done (WView * view)
 {
     view->growbuf_finished = TRUE;
 
@@ -92,7 +92,7 @@ mcview_growbuf_done (mcview_t * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_growbuf_free (mcview_t * view)
+mcview_growbuf_free (WView * view)
 {
 #ifdef HAVE_ASSERT_H
     assert (view->growbuf_in_use);
@@ -109,7 +109,7 @@ mcview_growbuf_free (mcview_t * view)
 /* --------------------------------------------------------------------------------------------- */
 
 off_t
-mcview_growbuf_filesize (mcview_t * view)
+mcview_growbuf_filesize (WView * view)
 {
 #ifdef HAVE_ASSERT_H
     assert (view->growbuf_in_use);
@@ -128,7 +128,7 @@ mcview_growbuf_filesize (mcview_t * view)
  */
 
 void
-mcview_growbuf_read_until (mcview_t * view, off_t ofs)
+mcview_growbuf_read_until (WView * view, off_t ofs)
 {
     gboolean short_read = FALSE;
 
@@ -249,7 +249,7 @@ mcview_growbuf_read_until (mcview_t * view, off_t ofs)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mcview_get_byte_growing_buffer (mcview_t * view, off_t byte_index, int *retval)
+mcview_get_byte_growing_buffer (WView * view, off_t byte_index, int *retval)
 {
     char *p;
 
@@ -276,7 +276,7 @@ mcview_get_byte_growing_buffer (mcview_t * view, off_t byte_index, int *retval)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-mcview_get_ptr_growing_buffer (mcview_t * view, off_t byte_index)
+mcview_get_ptr_growing_buffer (WView * view, off_t byte_index)
 {
     off_t pageno, pageindex;
 
