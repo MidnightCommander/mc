@@ -1289,7 +1289,7 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
     {
         if (VFSDATA (path_element)->linear_start)
         {
-            vfs_print_message (_("Starting linear transfer..."));
+            vfs_print_message ("%s", _("Starting linear transfer..."));
             fh->linear = LS_LINEAR_PREOPEN;
         }
     }

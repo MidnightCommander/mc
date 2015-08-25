@@ -518,7 +518,7 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
     if (!ftalk)
         ERRNOR (E_PROTO, -1);
 
-    vfs_print_message (_("fish: Sending initial line..."));
+    vfs_print_message ("%s", _("fish: Sending initial line..."));
     /*
      * Run 'start_fish_server'. If it doesn't exist - no problem,
      * we'll talk directly to the shell.
@@ -529,7 +529,7 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
          "#FISH\necho; start_fish_server 2>&1; echo '### 200'\n") != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
-    vfs_print_message (_("fish: Handshaking version..."));
+    vfs_print_message ("%s", _("fish: Handshaking version..."));
     if (fish_command (me, super, WAIT_REPLY, "%s", "#VER 0.0.3\necho '### 000'\n") != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
@@ -539,7 +539,7 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
          "LANG=C LC_ALL=C LC_TIME=C; export LANG LC_ALL LC_TIME;\n" "echo '### 200'\n") != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
-    vfs_print_message (_("fish: Getting host info..."));
+    vfs_print_message ("%s", _("fish: Getting host info..."));
     if (fish_info (me, super))
         SUP->scr_env = fish_set_env (SUP->host_flags);
 
@@ -941,7 +941,7 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
         {
             if ((errno == EINTR) && tty_got_interrupt ())
                 continue;
-            vfs_print_message (_("fish: Local read failed, sending zeros"));
+            vfs_print_message ("%s", _("fish: Local read failed, sending zeros"));
             close (h);
             h = open ("/dev/zero", O_RDONLY);
         }
@@ -1036,7 +1036,7 @@ fish_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
     char buffer[BUF_8K];
     ssize_t n;
 
-    vfs_print_message (_("Aborting transfer..."));
+    vfs_print_message ("%s", _("Aborting transfer..."));
 
     do
     {
@@ -1052,9 +1052,9 @@ fish_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
     while (n != 0);
 
     if (fish_get_reply (me, SUP->sockr, NULL, 0) != COMPLETE)
-        vfs_print_message (_("Error reported after abort."));
+        vfs_print_message ("%s", _("Error reported after abort."));
     else
-        vfs_print_message (_("Aborted transfer would be successful."));
+        vfs_print_message ("%s", _("Aborted transfer would be successful."));
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -214,7 +214,7 @@ sftpfs_cb_readdir (void *data)
         if (sftpfs_dirent != NULL)
             vfs_print_message (_("sftp: (Ctrl-G break) Listing... %s"), sftpfs_dirent->dent.d_name);
         else
-            vfs_print_message (_("sftp: Listing done."));
+            vfs_print_message ("%s", _("sftp: Listing done."));
     }
 
     return sftpfs_dirent;

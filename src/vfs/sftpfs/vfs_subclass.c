@@ -98,7 +98,7 @@ sftpfs_cb_open_connection (struct vfs_s_super *super,
 
     if (vpath_element->host == NULL || *vpath_element->host == '\0')
     {
-        vfs_print_message (_("sftp: Invalid host name."));
+        vfs_print_message ("%s", _("sftp: Invalid host name."));
         vpath_element->class->verrno = EPERM;
         return -1;
     }
