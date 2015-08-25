@@ -22,8 +22,10 @@
 
 /*** declarations of public functions ************************************************************/
 
-extern void mc_log (const char *, ...) __attribute__ ((__format__ (__printf__, 1, 2)));
-extern void mc_always_log (const char *, ...) __attribute__ ((__format__ (__printf__, 1, 2)));
+/* *INDENT-OFF* */
+void mc_log (const char *fmt, ...) G_GNUC_PRINTF (1, 2);
+void mc_always_log (const char *fmt, ...) G_GNUC_PRINTF (1, 2);
+/* *INDENT-ON* */
 
 /*** inline functions ****************************************************************************/
 

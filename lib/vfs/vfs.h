@@ -256,7 +256,9 @@ void vfs_release_path (const vfs_path_t * vpath);
 
 void vfs_fill_names (fill_names_f);
 
-void vfs_print_message (const char *msg, ...) __attribute__ ((format (__printf__, 1, 2)));
+/* *INDENT-OFF* */
+void vfs_print_message (const char *msg, ...) G_GNUC_PRINTF (1, 2);
+/* *INDENT-ON* */
 
 int vfs_ferrno (struct vfs_class *vfs);
 

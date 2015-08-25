@@ -246,8 +246,10 @@ char *guess_message_value (void);
 char *mc_build_filename (const char *first_element, ...);
 char *mc_build_filenamev (const char *first_element, va_list args);
 
-void mc_propagate_error (GError ** dest, int code, const char *format, ...);
-void mc_replace_error (GError ** dest, int code, const char *format, ...);
+/* *INDENT-OFF* */
+void mc_propagate_error (GError ** dest, int code, const char *format, ...) G_GNUC_PRINTF (3, 4);
+void mc_replace_error (GError ** dest, int code, const char *format, ...) G_GNUC_PRINTF (3, 4);
+/* *INDENT-ON* */
 
 gboolean mc_time_elapsed (guint64 * timestamp, guint64 delay);
 

@@ -110,6 +110,7 @@ get_log_filename (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
+G_GNUC_PRINTF (1, 0)
 mc_va_log (const char *fmt, va_list args)
 {
     char *logfilename;

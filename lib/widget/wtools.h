@@ -77,12 +77,13 @@ int query_dialog (const char *header, const char *text, int flags, int count, ..
 void query_set_sel (int new_sel);
 
 /* Create message box but don't dismiss it yet, not background safe */
-struct WDialog *create_message (int flags, const char *title,
-                                const char *text, ...) __attribute__ ((format (__printf__, 3, 4)));
+/* *INDENT-OFF* */
+struct WDialog *create_message (int flags, const char *title, const char *text, ...)
+                G_GNUC_PRINTF (3, 4);
 
 /* Show message box, background safe */
-void message (int flags, const char *title, const char *text, ...)
-    __attribute__ ((format (__printf__, 3, 4)));
+void message (int flags, const char *title, const char *text, ...) G_GNUC_PRINTF (3, 4);
+/* *INDENT-ON* */
 
 gboolean mc_error_message (GError ** mcerror, int *code);
 

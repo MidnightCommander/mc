@@ -236,6 +236,7 @@ fish_get_reply (struct vfs_class *me, int sock, char *string_buf, int string_len
 /* --------------------------------------------------------------------------------------------- */
 
 static int
+G_GNUC_PRINTF (4, 5)
 fish_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const char *fmt, ...)
 {
     va_list ap;

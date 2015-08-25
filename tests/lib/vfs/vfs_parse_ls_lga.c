@@ -43,7 +43,9 @@ struct vfs_s_entry *vfs_root_entry;
 static struct vfs_s_inode *vfs_root_inode;
 static struct vfs_s_super *vfs_test_super;
 
-void message (int flags, const char *title, const char *text, ...);
+/* *INDENT-OFF* */
+void message (int flags, const char *title, const char *text, ...) G_GNUC_PRINTF (3, 4);
+/* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
 

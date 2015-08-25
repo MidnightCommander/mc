@@ -52,6 +52,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 static void
+G_GNUC_PRINTF (2, 3)
 prepend_error_message (GError ** error, const char *format, ...)
 {
     char *prepend_str;

@@ -64,6 +64,7 @@ dnl Sorted -W options:
     MC_CHECK_ONE_CFLAG([-Wmissing-braces])
     MC_CHECK_ONE_CFLAG([-Wmissing-declarations])
     MC_CHECK_ONE_CFLAG([-Wmissing-field-initializers])
+    MC_CHECK_ONE_CFLAG([-Wmissing-format-attribute])
     MC_CHECK_ONE_CFLAG([-Wmissing-parameter-type])
     MC_CHECK_ONE_CFLAG([-Wmissing-prototypes])
     MC_CHECK_ONE_CFLAG([-Wmissing-variable-declarations])
