@@ -280,7 +280,7 @@ fish_free_archive (struct vfs_class *me, struct vfs_s_super *super)
     if ((SUP->sockw != -1) || (SUP->sockr != -1))
     {
         vfs_print_message (_("fish: Disconnecting from %s"), super->name ? super->name : "???");
-        fish_command (me, super, NONE, "#BYE\nexit\n");
+        fish_command (me, super, NONE, "%s", "#BYE\nexit\n");
         close (SUP->sockw);
         close (SUP->sockr);
         SUP->sockw = SUP->sockr = -1;
@@ -383,7 +383,7 @@ fish_set_env (int flags)
 static gboolean
 fish_info (struct vfs_class *me, struct vfs_s_super *super)
 {
-    if (fish_command (me, super, NONE, SUP->scr_info) == COMPLETE)
+    if (fish_command (me, super, NONE, "%s", SUP->scr_info) == COMPLETE)
     {
         while (TRUE)
         {
@@ -525,17 +525,17 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
      */
 
     if (fish_command
-        (me, super, WAIT_REPLY,
+        (me, super, WAIT_REPLY, "%s",
          "#FISH\necho; start_fish_server 2>&1; echo '### 200'\n") != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
     vfs_print_message (_("fish: Handshaking version..."));
-    if (fish_command (me, super, WAIT_REPLY, "#VER 0.0.3\necho '### 000'\n") != COMPLETE)
+    if (fish_command (me, super, WAIT_REPLY, "%s", "#VER 0.0.3\necho '### 000'\n") != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
     /* Set up remote locale to C, otherwise dates cannot be recognized */
     if (fish_command
-        (me, super, WAIT_REPLY,
+        (me, super, WAIT_REPLY, "%s",
          "LANG=C LC_ALL=C LC_TIME=C; export LANG LC_ALL LC_TIME;\n" "echo '### 200'\n") != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
