@@ -470,13 +470,14 @@ main (int argc, char *argv[])
     if (macros_list != NULL)
     {
         guint i;
+
         for (i = 0; i < macros_list->len; i++)
         {
             macros_t *macros;
 
             macros = &g_array_index (macros_list, struct macros_t, i);
             if (macros != NULL && macros->macro != NULL)
-                (void) g_array_free (macros->macro, FALSE);
+                (void) g_array_free (macros->macro, TRUE);
         }
         (void) g_array_free (macros_list, TRUE);
     }
