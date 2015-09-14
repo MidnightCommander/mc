@@ -1979,11 +1979,14 @@ edit_load_macro_cmd (WEdit * edit)
 
     (void) edit;
 
+    if (macros_list == NULL || macros_list->len != 0)
+        return FALSE;
+
     macros_fname = mc_config_get_full_path (MC_MACRO_FILE);
     macros_config = mc_config_init (macros_fname, TRUE);
     g_free (macros_fname);
 
-    if (macros_config == NULL || macros_list == NULL || macros_list->len != 0)
+    if (macros_config == NULL)
         return FALSE;
 
     keys = mc_config_get_keys (macros_config, section_name, NULL);
