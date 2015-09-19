@@ -881,21 +881,10 @@ mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
         {
         case COND__FOUND_OK:
 #ifdef SEARCH_TYPE_GLIB
-            if (lc_mc_search->whole_words)
-                g_match_info_fetch_pos (lc_mc_search->regex_match_info, 2, &start_pos, &end_pos);
-            else
-                g_match_info_fetch_pos (lc_mc_search->regex_match_info, 0, &start_pos, &end_pos);
+            g_match_info_fetch_pos (lc_mc_search->regex_match_info, 0, &start_pos, &end_pos);
 #else /* SEARCH_TYPE_GLIB */
-            if (lc_mc_search->whole_words)
-            {
-                start_pos = lc_mc_search->iovector[4];
-                end_pos = lc_mc_search->iovector[5];
-            }
-            else
-            {
-                start_pos = lc_mc_search->iovector[0];
-                end_pos = lc_mc_search->iovector[1];
-            }
+            start_pos = lc_mc_search->iovector[0];
+            end_pos = lc_mc_search->iovector[1];
 #endif /* SEARCH_TYPE_GLIB */
             if (found_len != NULL)
                 *found_len = end_pos - start_pos;
