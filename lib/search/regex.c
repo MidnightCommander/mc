@@ -740,65 +740,79 @@ void
 mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_search,
                                        mc_search_cond_t * mc_search_cond)
 {
+    if (lc_mc_search->whole_words && !lc_mc_search->is_entire_line)
+    {
+        /* NOTE: \b as word boundary doesn't allow search
+         * whole words with non-ASCII symbols.
+         * Update: Is it still true nowadays? Probably not. #2396, #3524 */
+        g_string_prepend (mc_search_cond->str, "(?<![\\p{L}\\p{N}_])");
+        g_string_append (mc_search_cond->str, "(?![\\p{L}\\p{N}_])");
+    }
+
+    {
 #ifdef SEARCH_TYPE_GLIB
-    GError *mcerror = NULL;
+        GError *mcerror = NULL;
 
-    mc_search_cond->regex_handle =
-        g_regex_new (mc_search_cond->str->str,
-                     mc_search__regex_get_compile_flags (charset, lc_mc_search->is_case_sensitive),
-                     0, &mcerror);
+        mc_search_cond->regex_handle =
+            g_regex_new (mc_search_cond->str->str,
+                         mc_search__regex_get_compile_flags (charset,
+                                                             lc_mc_search->is_case_sensitive), 0,
+                         &mcerror);
 
-    if (mcerror != NULL)
-    {
-        lc_mc_search->error = MC_SEARCH_E_REGEX_COMPILE;
-        lc_mc_search->error_str = str_conv_gerror_message (mcerror, _("Regular expression error"));
-        g_error_free (mcerror);
-        return;
-    }
-#else /* SEARCH_TYPE_GLIB */
-    const char *error;
-    int erroffset;
-    int pcre_options = PCRE_EXTRA | PCRE_MULTILINE;
-
-    if (str_isutf8 (charset) && mc_global.utf8_display)
-    {
-        pcre_options |= PCRE_UTF8;
-        if (!lc_mc_search->is_case_sensitive)
-            pcre_options |= PCRE_CASELESS;
-    }
-    else
-    {
-        if (!lc_mc_search->is_case_sensitive)
+        if (mcerror != NULL)
         {
-            GString *tmp;
-
-            tmp = mc_search_cond->str;
-            mc_search_cond->str = mc_search__cond_struct_new_regex_ci_str (charset, tmp);
-            g_string_free (tmp, TRUE);
+            lc_mc_search->error = MC_SEARCH_E_REGEX_COMPILE;
+            lc_mc_search->error_str =
+                str_conv_gerror_message (mcerror, _("Regular expression error"));
+            g_error_free (mcerror);
+            return;
         }
-    }
+#else /* SEARCH_TYPE_GLIB */
+        const char *error;
+        int erroffset;
+        int pcre_options = PCRE_EXTRA | PCRE_MULTILINE;
 
-    mc_search_cond->regex_handle =
-        pcre_compile (mc_search_cond->str->str, pcre_options, &error, &erroffset, NULL);
-    if (mc_search_cond->regex_handle == NULL)
-    {
-        lc_mc_search->error = MC_SEARCH_E_REGEX_COMPILE;
-        lc_mc_search->error_str = g_strdup (error);
-        return;
-    }
-    lc_mc_search->regex_match_info = pcre_study (mc_search_cond->regex_handle, 0, &error);
-    if (lc_mc_search->regex_match_info == NULL)
-    {
-        if (error)
+        if (str_isutf8 (charset) && mc_global.utf8_display)
+        {
+            pcre_options |= PCRE_UTF8;
+            if (!lc_mc_search->is_case_sensitive)
+                pcre_options |= PCRE_CASELESS;
+        }
+        else
+        {
+            if (!lc_mc_search->is_case_sensitive)
+            {
+                GString *tmp;
+
+                tmp = mc_search_cond->str;
+                mc_search_cond->str = mc_search__cond_struct_new_regex_ci_str (charset, tmp);
+                g_string_free (tmp, TRUE);
+            }
+        }
+
+        mc_search_cond->regex_handle =
+            pcre_compile (mc_search_cond->str->str, pcre_options, &error, &erroffset, NULL);
+        if (mc_search_cond->regex_handle == NULL)
         {
             lc_mc_search->error = MC_SEARCH_E_REGEX_COMPILE;
             lc_mc_search->error_str = g_strdup (error);
-            g_free (mc_search_cond->regex_handle);
-            mc_search_cond->regex_handle = NULL;
             return;
         }
-    }
+        lc_mc_search->regex_match_info = pcre_study (mc_search_cond->regex_handle, 0, &error);
+        if (lc_mc_search->regex_match_info == NULL)
+        {
+            if (error != NULL)
+            {
+                lc_mc_search->error = MC_SEARCH_E_REGEX_COMPILE;
+                lc_mc_search->error_str = g_strdup (error);
+                g_free (mc_search_cond->regex_handle);
+                mc_search_cond->regex_handle = NULL;
+                return;
+            }
+        }
 #endif /* SEARCH_TYPE_GLIB */
+    }
+
     lc_mc_search->is_utf8 = str_isutf8 (charset);
 }
 
