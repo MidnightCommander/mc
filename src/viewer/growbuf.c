@@ -268,7 +268,7 @@ mcview_get_byte_growing_buffer (WView * view, off_t byte_index, int *retval)
         return FALSE;
 
     if (retval != NULL)
-        *retval = *p;
+        *retval = (unsigned char) (*p);
 
     return TRUE;
 }
