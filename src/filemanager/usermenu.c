@@ -550,7 +550,7 @@ execute_menu_command (WEdit * edit_widget, const char *commands, gboolean show_p
     mc_chmod (file_name_vpath, S_IRWXU);
     if (run_view)
     {
-        mcview_viewer (vfs_path_as_str (file_name_vpath), NULL, 0);
+        mcview_viewer (vfs_path_as_str (file_name_vpath), NULL, 0, 0, 0);
         dialog_switch_process_pending ();
     }
     else

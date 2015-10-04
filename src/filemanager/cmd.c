@@ -541,7 +541,7 @@ set_basic_panel_listing_to (int panel_index, int listing_mode)
 
 gboolean
 view_file_at_line (const vfs_path_t * filename_vpath, gboolean plain_view, gboolean internal,
-                   long start_line)
+                   long start_line, off_t search_start, off_t search_end)
 {
     gboolean ret = TRUE;
 
@@ -564,7 +564,7 @@ view_file_at_line (const vfs_path_t * filename_vpath, gboolean plain_view, gbool
         mcview_default_nroff_flag = 0;
         mcview_default_magic_flag = 0;
 
-        ret = mcview_viewer (NULL, filename_vpath, start_line);
+        ret = mcview_viewer (NULL, filename_vpath, start_line, search_start, search_end);
 
         if (changed_hex_mode && !mcview_altered_hex_mode)
             mcview_default_hex_mode = 1;
@@ -587,7 +587,7 @@ view_file_at_line (const vfs_path_t * filename_vpath, gboolean plain_view, gbool
         ret = (regex_command (filename_vpath, view_entry) == 0);
         if (ret)
         {
-            ret = mcview_viewer (NULL, filename_vpath, start_line);
+            ret = mcview_viewer (NULL, filename_vpath, start_line, search_start, search_end);
             dialog_switch_process_pending ();
         }
     }
@@ -623,7 +623,7 @@ view_file_at_line (const vfs_path_t * filename_vpath, gboolean plain_view, gbool
 gboolean
 view_file (const vfs_path_t * filename_vpath, gboolean plain_view, gboolean internal)
 {
-    return view_file_at_line (filename_vpath, plain_view, internal, 0);
+    return view_file_at_line (filename_vpath, plain_view, internal, 0, 0, 0);
 }
 
 
@@ -687,7 +687,7 @@ view_filtered_cmd (void)
 
     if (command != NULL)
     {
-        mcview_viewer (command, NULL, 0);
+        mcview_viewer (command, NULL, 0, 0, 0);
         g_free (command);
         dialog_switch_process_pending ();
     }

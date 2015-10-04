@@ -91,7 +91,7 @@ mcview_toggle_magic_mode (mcview_t * view)
     view->dir_idx = NULL;
     mcview_done (view);
     mcview_init (view);
-    mcview_load (view, command, filename, 0);
+    mcview_load (view, command, filename, 0, 0, 0);
     view->dir = dir;
     view->dir_idx = dir_idx;
     g_free (filename);
