@@ -332,7 +332,7 @@ find_save_options (void)
 static inline char *
 add_to_list (const char *text, void *data)
 {
-    return listbox_add_item (find_list, LISTBOX_APPEND_AT_END, 0, text, data);
+    return listbox_add_item (find_list, LISTBOX_APPEND_AT_END, 0, text, data, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

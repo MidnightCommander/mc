@@ -120,7 +120,7 @@ spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word
     sug_list = listbox_new (5, 2, sug_dlg_h - 7, 24, FALSE, NULL);
     for (i = 0; i < suggest->len; i++)
         listbox_add_item (sug_list, LISTBOX_APPEND_AT_END, 0, g_array_index (suggest, char *, i),
-                          NULL);
+                          NULL, FALSE);
     add_widget (sug_dlg, sug_list);
 
     add_widget (sug_dlg, add_btn);
@@ -170,7 +170,7 @@ spell_dialog_lang_list_show (GArray * languages)
                                                 _("Select language"), "[ASpell]");
 
     for (i = 0; i < languages->len; i++)
-        LISTBOX_APPEND_TEXT (lang_list, 0, g_array_index (languages, char *, i), NULL);
+        LISTBOX_APPEND_TEXT (lang_list, 0, g_array_index (languages, char *, i), NULL, FALSE);
 
     res = run_listbox (lang_list);
     if (res >= 0)

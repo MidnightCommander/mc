@@ -74,15 +74,15 @@ exec_edit_syntax_dialog (const GPtrArray * names, const char *current_syntax)
 
     syntaxlist = create_listbox_window (LIST_LINES, MAX_ENTRY_LEN,
                                         _("Choose syntax highlighting"), NULL);
-    LISTBOX_APPEND_TEXT (syntaxlist, 'A', _("< Auto >"), NULL);
-    LISTBOX_APPEND_TEXT (syntaxlist, 'R', _("< Reload Current Syntax >"), NULL);
+    LISTBOX_APPEND_TEXT (syntaxlist, 'A', _("< Auto >"), NULL, FALSE);
+    LISTBOX_APPEND_TEXT (syntaxlist, 'R', _("< Reload Current Syntax >"), NULL, FALSE);
 
     for (i = 0; i < names->len; i++)
     {
         const char *name;
 
         name = g_ptr_array_index (names, i);
-        LISTBOX_APPEND_TEXT (syntaxlist, 0, name, NULL);
+        LISTBOX_APPEND_TEXT (syntaxlist, 0, name, NULL, FALSE);
         if (current_syntax != NULL && strcmp (name, current_syntax) == 0)
             listbox_select_entry (syntaxlist->list, i + N_DFLT_ENTRIES);
     }

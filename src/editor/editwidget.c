@@ -342,7 +342,7 @@ edit_window_list (const WDialog * h)
                                      vfs_path_as_str (e->filename_vpath));
 
             listbox_add_item (listbox->list, LISTBOX_APPEND_AT_END, get_hotkey (i++),
-                              str_term_trim (fname, WIDGET (listbox->list)->cols - 2), NULL);
+                              str_term_trim (fname, WIDGET (listbox->list)->cols - 2), NULL, FALSE);
             g_free (fname);
         }
 

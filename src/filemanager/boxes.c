@@ -205,7 +205,7 @@ sel_skin_button (WButton * button, int action)
     skin_list = listbox_new (1, 1, 11, 22, FALSE, NULL);
     skin_name = "default";
     listbox_add_item (skin_list, LISTBOX_APPEND_AT_END, 0, skin_name_to_label (skin_name),
-                      (void *) skin_name);
+                      (void *) skin_name, FALSE);
 
     if (strcmp (skin_name, current_skin_name) == 0)
         listbox_select_entry (skin_list, 0);
@@ -216,7 +216,7 @@ sel_skin_button (WButton * button, int action)
         if (strcmp (skin_name, "default") != 0)
         {
             listbox_add_item (skin_list, LISTBOX_APPEND_AT_END, 0, skin_name_to_label (skin_name),
-                              (void *) skin_name);
+                              (void *) skin_name, FALSE);
             if (strcmp (skin_name, current_skin_name) == 0)
                 listbox_select_entry (skin_list, pos);
             pos++;
@@ -467,7 +467,7 @@ jobs_fill_listbox (WListbox * list)
         char *s;
 
         s = g_strconcat (state_str[tl->state], " ", tl->info, (char *) NULL);
-        listbox_add_item (list, LISTBOX_APPEND_AT_END, 0, s, (void *) tl);
+        listbox_add_item (list, LISTBOX_APPEND_AT_END, 0, s, (void *) tl, FALSE);
         g_free (s);
     }
 }
