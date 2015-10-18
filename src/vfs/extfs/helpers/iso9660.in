@@ -156,7 +156,8 @@ BEGIN {
   if (SEMICOLON = "YES") sub(";1$", "", name);
   ## sub(";[0-9]+$", "", name) ## would break copyout
   # skip . and ..
-  if (name ~ /^\.\.?/) next;
+  if (name == ".") next;
+  if (name == "..") next;
   printf "%s%s%s\n", attr, dir, name
 }'
 }
