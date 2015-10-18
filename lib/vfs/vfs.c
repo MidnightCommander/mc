@@ -364,11 +364,24 @@ vfs_translate_path_n (const char *path)
 /**
  * Get current directory without any OS calls.
  *
- * @return string contain current path
+ * @return string contains current path
+ */
+
+const char *
+vfs_get_current_dir (void)
+{
+    return current_path->str;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Get current directory without any OS calls.
+ *
+ * @return newly allocated string contains current path
  */
 
 char *
-vfs_get_current_dir (void)
+vfs_get_current_dir_n (void)
 {
     return g_strdup (current_path->str);
 }

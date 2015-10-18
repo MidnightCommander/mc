@@ -156,11 +156,10 @@ vfs_canon (const char *path)
         }
         else
         {
-            char *curr_dir;
+            const char *curr_dir;
 
             curr_dir = vfs_get_current_dir ();
             local = mc_build_filename (curr_dir, path, NULL);
-            g_free (curr_dir);
         }
         result = vfs_canon (local);
         g_free (local);

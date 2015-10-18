@@ -792,17 +792,15 @@ expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
         goto ret;
     case 'd':
         {
-            char *cwd;
+            const char *cwd;
             char *qstr;
 
-            if (panel)
-                cwd = g_strdup (vfs_path_as_str (panel->cwd_vpath));
+            if (panel != NULL)
+                cwd = vfs_path_as_str (panel->cwd_vpath);
             else
                 cwd = vfs_get_current_dir ();
 
             qstr = quote_func (cwd, FALSE);
-
-            g_free (cwd);
 
             result = qstr;
             goto ret;

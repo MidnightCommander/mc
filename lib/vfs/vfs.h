@@ -232,7 +232,8 @@ void vfs_timeout_handler (void);
 int vfs_timeouts (void);
 void vfs_expire (gboolean now);
 
-char *vfs_get_current_dir (void);
+const char *vfs_get_current_dir (void);
+char *vfs_get_current_dir_n (void);
 const vfs_path_t *vfs_get_raw_current_dir (void);
 void vfs_set_raw_current_dir (const vfs_path_t * vpath);
 
