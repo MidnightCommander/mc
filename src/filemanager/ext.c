@@ -364,9 +364,9 @@ exec_extension_view (void *target, char *cmd, const vfs_path_t * filename_vpath,
         changed_nroff_flag = 1;
 
     if (target == NULL)
-        mcview_viewer (cmd, filename_vpath, start_line);
+        mcview_viewer (cmd, filename_vpath, start_line, 0, 0);
     else
-        mcview_load ((mcview_t *) target, cmd, vfs_path_as_str (filename_vpath), start_line);
+        mcview_load ((mcview_t *) target, cmd, vfs_path_as_str (filename_vpath), start_line, 0, 0);
 
     if (changed_hex_mode && !mcview_altered_hex_mode)
         mcview_default_hex_mode = def_hex_mode;

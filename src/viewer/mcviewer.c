@@ -232,7 +232,8 @@ mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
 /** Real view only */
 
 gboolean
-mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_line)
+mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_line,
+               off_t search_start, off_t search_end)
 {
     gboolean succeeded;
     mcview_t *lc_mcview;
@@ -249,7 +250,9 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
 
     view_dlg->get_title = mcview_get_title;
 
-    succeeded = mcview_load (lc_mcview, command, vfs_path_as_str (file_vpath), start_line);
+    succeeded =
+        mcview_load (lc_mcview, command, vfs_path_as_str (file_vpath), start_line, search_start,
+                     search_end);
 
     if (succeeded)
         dlg_run (view_dlg);
@@ -267,7 +270,8 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mcview_load (mcview_t * view, const char *command, const char *file, int start_line)
+mcview_load (mcview_t * view, const char *command, const char *file, int start_line,
+             off_t search_start, off_t search_end)
 {
     gboolean retval = FALSE;
     vfs_path_t *vpath = NULL;
@@ -409,8 +413,6 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
     mcview_state_machine_init (&view->dpy_state_top, 0);
     view->dpy_wrap_dirty = FALSE;
     view->force_max = -1;
-    view->search_start = 0;
-    view->search_end = 0;
     view->dpy_text_column = 0;
 
     mcview_compute_areas (view);
@@ -441,6 +443,8 @@ mcview_load (mcview_t * view, const char *command, const char *file, int start_l
     else if (start_line > 0)
         mcview_moveto (view, start_line - 1, 0);
 
+    view->search_start = search_start;
+    view->search_end = search_end;
     view->hexedit_lownibble = FALSE;
     view->hexview_in_text = FALSE;
     view->change_list = NULL;

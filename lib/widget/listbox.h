@@ -40,6 +40,7 @@ typedef struct WLEntry
     char *text;                 /* Text to display */
     int hotkey;
     void *data;                 /* Client information */
+    gboolean free_data;         /* Whether to free the data on entry's removal */
 } WLEntry;
 
 typedef struct WListbox
@@ -73,8 +74,8 @@ void listbox_remove_current (WListbox * l);
 gboolean listbox_is_empty (const WListbox * l);
 void listbox_set_list (WListbox * l, GList * list);
 void listbox_remove_list (WListbox * l);
-char *listbox_add_item (WListbox * l, listbox_append_t pos,
-                        int hotkey, const char *text, void *data);
+char *listbox_add_item (WListbox * l, listbox_append_t pos, int hotkey, const char *text,
+                        void *data, gboolean free_data);
 
 /*** inline functions ****************************************************************************/
 

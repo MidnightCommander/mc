@@ -290,12 +290,12 @@ fill_listbox (WListbox * list)
                 g_string_truncate (buff, 0);
                 g_string_append (buff, "->");
                 g_string_append (buff, current->label);
-                listbox_add_item (list, LISTBOX_APPEND_AT_END, 0, buff->str, current);
+                listbox_add_item (list, LISTBOX_APPEND_AT_END, 0, buff->str, current, FALSE);
             }
             break;
         case HL_TYPE_DOTDOT:
         case HL_TYPE_ENTRY:
-            listbox_add_item (list, LISTBOX_APPEND_AT_END, 0, current->label, current);
+            listbox_add_item (list, LISTBOX_APPEND_AT_END, 0, current->label, current, FALSE);
         default:
             break;
         }
@@ -328,7 +328,7 @@ unlink_entry (struct hotlist *entry)
 static void
 add_name_to_list (const char *path)
 {
-    listbox_add_item (l_hotlist, LISTBOX_APPEND_AT_END, 0, path, 0);
+    listbox_add_item (l_hotlist, LISTBOX_APPEND_AT_END, 0, path, NULL, FALSE);
 }
 #endif /* !ENABLE_VFS */
 
@@ -476,7 +476,8 @@ hotlist_button_callback (WButton * button, int action)
 
     case B_REFRESH_VFS:
         listbox_remove_list (l_hotlist);
-        listbox_add_item (l_hotlist, LISTBOX_APPEND_AT_END, 0, mc_config_get_home_dir (), 0);
+        listbox_add_item (l_hotlist, LISTBOX_APPEND_AT_END, 0, mc_config_get_home_dir (), NULL,
+                          FALSE);
         vfs_fill_names (add_name_to_list);
         return 0;
 #endif /* ENABLE_VFS */
@@ -762,7 +763,8 @@ init_hotlist (hotlist_t list_type)
 #ifdef ENABLE_VFS
     if (list_type == LIST_VFSLIST)
     {
-        listbox_add_item (l_hotlist, LISTBOX_APPEND_AT_END, 0, mc_config_get_home_dir (), 0);
+        listbox_add_item (l_hotlist, LISTBOX_APPEND_AT_END, 0, mc_config_get_home_dir (), NULL,
+                          FALSE);
         vfs_fill_names (add_name_to_list);
     }
     else
@@ -948,11 +950,11 @@ add2hotlist (char *label, char *directory, enum HotListType type, listbox_append
             char *lbl;
 
             lbl = g_strconcat ("->", new->label, (char *) NULL);
-            listbox_add_item (l_hotlist, pos, 0, lbl, new);
+            listbox_add_item (l_hotlist, pos, 0, lbl, new, FALSE);
             g_free (lbl);
         }
         else
-            listbox_add_item (l_hotlist, pos, 0, new->label, new);
+            listbox_add_item (l_hotlist, pos, 0, new->label, new, FALSE);
         listbox_select_entry (l_hotlist, l_hotlist->pos);
     }
 

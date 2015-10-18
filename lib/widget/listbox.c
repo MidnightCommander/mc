@@ -75,7 +75,10 @@ static void
 listbox_entry_free (void *data)
 {
     WLEntry *e = data;
+
     g_free (e->text);
+    if (e->free_data)
+        g_free (e->data);
     g_free (e);
 }
 
@@ -770,7 +773,8 @@ listbox_remove_list (WListbox * l)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-listbox_add_item (WListbox * l, listbox_append_t pos, int hotkey, const char *text, void *data)
+listbox_add_item (WListbox * l, listbox_append_t pos, int hotkey, const char *text, void *data,
+                  gboolean free_data)
 {
     WLEntry *entry;
 
@@ -783,6 +787,7 @@ listbox_add_item (WListbox * l, listbox_append_t pos, int hotkey, const char *te
     entry = g_new (WLEntry, 1);
     entry->text = g_strdup (text);
     entry->data = data;
+    entry->free_data = free_data;
     entry->hotkey = hotkey;
 
     listbox_append_item (l, entry, pos);

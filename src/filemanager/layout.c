@@ -1020,7 +1020,7 @@ set_display_type (int num, panel_view_mode_t type)
         else
             file_name = "";
 
-        mcview_load ((struct mcview_struct *) new_widget, 0, file_name, 0);
+        mcview_load ((struct mcview_struct *) new_widget, 0, file_name, 0, 0, 0);
         break;
 
     default:

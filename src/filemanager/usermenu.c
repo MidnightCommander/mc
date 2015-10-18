@@ -550,7 +550,7 @@ execute_menu_command (WEdit * edit_widget, const char *commands, gboolean show_p
     mc_chmod (file_name_vpath, S_IRWXU);
     if (run_view)
     {
-        mcview_viewer (vfs_path_as_str (file_name_vpath), NULL, 0);
+        mcview_viewer (vfs_path_as_str (file_name_vpath), NULL, 0, 0, 0);
         dialog_switch_process_pending ();
     }
     else
@@ -1107,7 +1107,7 @@ user_menu_cmd (struct WEdit * edit_widget, const char *menu_file, int selected_e
             {
                 p = entries[i];
                 LISTBOX_APPEND_TEXT (listbox, (unsigned char) p[0],
-                                     extract_line (p, p + MAX_ENTRY_LEN), p);
+                                     extract_line (p, p + MAX_ENTRY_LEN), p, FALSE);
             }
             /* Select the default entry */
             listbox_select_entry (listbox->list, selected);

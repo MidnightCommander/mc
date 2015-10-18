@@ -1251,7 +1251,7 @@ complete_engine (WInput * in, int what_to_do)
             query_list = listbox_new (1, 1, h - 2, w - 2, FALSE, NULL);
             add_widget (query_dlg, query_list);
             for (p = in->completions + 1; *p; p++)
-                listbox_add_item (query_list, LISTBOX_APPEND_AT_END, 0, *p, NULL);
+                listbox_add_item (query_list, LISTBOX_APPEND_AT_END, 0, *p, NULL, FALSE);
             dlg_run (query_dlg);
             q = NULL;
             if (query_dlg->ret_value == B_ENTER)

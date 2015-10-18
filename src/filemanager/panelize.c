@@ -179,7 +179,7 @@ init_panelize (void)
 
     l_panelize = listbox_new (y, UX + 1, 10, panelize_cols - UX * 2 - 2, FALSE, NULL);
     for (current = panelize; current != NULL; current = current->next)
-        listbox_add_item (l_panelize, LISTBOX_APPEND_AT_END, 0, current->label, current);
+        listbox_add_item (l_panelize, LISTBOX_APPEND_AT_END, 0, current->label, current, FALSE);
     listbox_select_entry (l_panelize, listbox_search_text (l_panelize, _("Other command")));
     add_widget (panelize_dlg, l_panelize);
 
