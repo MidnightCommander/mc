@@ -249,6 +249,65 @@ mc_search__cond_struct_new_regex_ci_str (const char *charset, const GString * as
 
 /* --------------------------------------------------------------------------------------------- */
 
+#ifdef SEARCH_TYPE_GLIB
+/* A thin wrapper above g_regex_match_full that makes sure the string passed
+ * to it is valid UTF-8 (unless G_REGEX_RAW compile flag was set), as it is a
+ * requirement by glib and it might crash otherwise. See: mc ticket 3449.
+ * Be careful: there might be embedded NULs in the strings. */
+static gboolean
+mc_search__g_regex_match_full_safe (const GRegex * regex,
+                                    const gchar * string,
+                                    gssize string_len,
+                                    gint start_position,
+                                    GRegexMatchFlags match_options,
+                                    GMatchInfo ** match_info, GError ** error)
+{
+    char *string_safe, *p, *end;
+    gboolean ret;
+
+    if ((g_regex_get_compile_flags (regex) & G_REGEX_RAW)
+        || g_utf8_validate (string, string_len, NULL))
+    {
+        return g_regex_match_full (regex, string, string_len, start_position, match_options,
+                                   match_info, error);
+    }
+
+    if (string_len < 0)
+    {
+        string_len = strlen (string);
+    }
+
+    /* Correctly handle embedded NULs while copying */
+    p = string_safe = g_malloc (string_len);
+    memcpy (string_safe, string, string_len);
+    end = p + string_len;
+
+    while (p < end)
+    {
+        gunichar c = g_utf8_get_char_validated (p, -1);
+        if (c != (gunichar) (-1) && c != (gunichar) (-2))
+        {
+            p = g_utf8_next_char (p);
+        }
+        else
+        {
+            /* U+FFFD would be the proper choice, but then we'd have to
+               maintain mapping between old and new offsets.
+               So rather do a byte by byte replacement. */
+            *p++ = '\0';
+        }
+    }
+
+    ret =
+        g_regex_match_full (regex, string_safe, string_len, start_position, match_options,
+                            match_info, error);
+    g_free (string_safe);
+    return ret;
+}
+#endif /* SEARCH_TYPE_GLIB */
+
+/* --------------------------------------------------------------------------------------------- */
+
 static mc_search__found_cond_t
 mc_search__regex_found_cond_one (mc_search_t * lc_mc_search, mc_search_regex_t * regex,
                                  GString * search_str)
@@ -256,8 +315,9 @@ mc_search__regex_found_cond_one (mc_search_t * lc_mc_search, mc_search_regex_t *
 #ifdef SEARCH_TYPE_GLIB
     GError *mcerror = NULL;
 
-    if (!g_regex_match_full (regex, search_str->str, search_str->len, 0, G_REGEX_MATCH_NEWLINE_ANY,
-                             &lc_mc_search->regex_match_info, &mcerror))
+    if (!mc_search__g_regex_match_full_safe
+        (regex, search_str->str, search_str->len, 0, G_REGEX_MATCH_NEWLINE_ANY,
+         &lc_mc_search->regex_match_info, &mcerror))
     {
         g_match_info_free (lc_mc_search->regex_match_info);
         lc_mc_search->regex_match_info = NULL;
