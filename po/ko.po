@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2015-05-24 18:29+0300\n"
-"PO-Revision-Date: 2015-02-26 09:48+0000\n"
+"PO-Revision-Date: 2015-06-04 08:38+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Korean (http://www.transifex.com/projects/p/mc/language/ko/)\n"
-"Language: ko\n"
+"Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ko\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
@@ -122,17 +122,13 @@ msgstr ""
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"스킨 '%s'을(를) 불러올 수 없습니다.\n"
-"기본 스킨으로 불러 옵니다."
+msgstr "스킨 '%s'을(를) 불러올 수 없습니다.\n기본 스킨으로 불러 옵니다."
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"스킨 '%s'을(를) 구분할 수 없습니다.\n"
-"기본 스킨으로 불러 옵니다."
+msgstr "스킨 '%s'을(를) 구분할 수 없습니다.\n기본 스킨으로 불러 옵니다."
 
 #, c-format
 msgid ""
@@ -431,9 +427,7 @@ msgstr "TERM 환경변수가 설정되어있지 않습니다!\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"화면크기 %dx%d은(는) 지원되지 않습니다.\n"
-"TERM 환경변수를 확인해 보세요.\n"
+msgstr "화면크기 %dx%d은(는) 지원되지 않습니다.\nTERM 환경변수를 확인해 보세요.\n"
 
 msgid "Cannot create pipe descriptor"
 msgstr ""
@@ -1855,9 +1849,8 @@ msgstr ""
 msgid "&Full file list"
 msgstr "전체 보여주기(&F)"
 
-#, fuzzy
 msgid "&Brief file list:"
-msgstr "간단히 보여주기(&B)"
+msgstr ""
 
 msgid "&Long file list"
 msgstr "길게 보여주기(&L)"
@@ -1865,9 +1858,8 @@ msgstr "길게 보여주기(&L)"
 msgid "&User defined:"
 msgstr "사용자 정의(&U):"
 
-#, fuzzy
 msgid "columns"
-msgstr "줄 선택(&M)"
+msgstr ""
 
 msgid "User &mini status"
 msgstr ""
@@ -1884,7 +1876,8 @@ msgstr "반대로(&R)"
 msgid "Sort order"
 msgstr "정렬 순서"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 msgid "Confirmation|&Delete"
 msgstr "Confirmation인|삭제(&D)"
 
@@ -2895,7 +2888,7 @@ msgstr "원격 vfs"
 
 #, c-format
 msgid "Device:     %s"
-msgstr "디바이스: %s"
+msgstr ""
 
 #, c-format
 msgid "Filesystem: %s"
@@ -2903,16 +2896,16 @@ msgstr "파일체계: %s"
 
 #, c-format
 msgid "Accessed:   %s"
-msgstr "액세스일: %s"
+msgstr ""
 
 #, c-format
 msgid "Modified:   %s"
-msgstr "수정일:   %s"
+msgstr ""
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
 msgid "Changed:    %s"
-msgstr "변경됨:   %s"
+msgstr ""
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -2920,7 +2913,7 @@ msgstr "Dev. type: 주요 %lu, 기여 %lu"
 
 #, c-format
 msgid "Size:       %s"
-msgstr "크기:     %s"
+msgstr ""
 
 #, c-format
 msgid " (%ld block)"
@@ -2929,19 +2922,19 @@ msgstr[0] ""
 
 #, c-format
 msgid "Owner:      %s/%s"
-msgstr "소유자:   %s/%s"
+msgstr ""
 
 #, c-format
 msgid "Links:      %d"
-msgstr "링크:     %d"
+msgstr ""
 
 #, c-format
 msgid "Mode:       %s (%04o)"
-msgstr "모드:     %s (%04o)"
+msgstr ""
 
 #, c-format
 msgid "Location:   %Xh:%Xh"
-msgstr "위치:     %Xh:%Xh"
+msgstr ""
 
 msgid "&Equal split"
 msgstr "같은 너비로(&E)"
@@ -3379,9 +3372,7 @@ msgstr "SUID와 SGID 풀그림이 있어요"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"쓰기 위한 파일 %s을(를) 열 수 없어요:\n"
-"%s\n"
+msgstr "쓰기 위한 파일 %s을(를) 열 수 없어요:\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3420,9 +3411,7 @@ msgstr "ButtonBar|디렉지우기"
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"%s 파일에 쓸 수 없습니다:\n"
-"%s\n"
+msgstr "%s 파일에 쓸 수 없습니다:\n%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3446,9 +3435,7 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"%s 파일이 root 혹은 당신의 소유가 아니거나 누구든 쓰기 가능합니다.\n"
-"이 파일을 사용하는 것은 보안에 문제가 있습니다"
+msgstr "%s 파일이 root 혹은 당신의 소유가 아니거나 누구든 쓰기 가능합니다.\n이 파일을 사용하는 것은 보안에 문제가 있습니다"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3503,15 +3490,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"%s을(를) 누르십시오\n"
-"그리고 이 메시지가 사라지기를 기다리십시오.\n"
-"\n"
-"그리고, 해당 단추가 OK가 나타나도록 한번 더\n"
-"그 키를 누르십시오\n"
-"\n"
-"만약 빠져나가길 원하시면 Escape키를 한번만 누른 후\n"
-"마찬가지로 기다리십시오."
+msgstr "%s을(를) 누르십시오\n그리고 이 메시지가 사라지기를 기다리십시오.\n\n그리고, 해당 단추가 OK가 나타나도록 한번 더\n그 키를 누르십시오\n\n만약 빠져나가길 원하시면 Escape키를 한번만 누른 후\n마찬가지로 기다리십시오."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3527,9 +3506,7 @@ msgstr "OK"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"당신의 키들이 이미 잘 동작하는 것처럼\n"
-"보이는 군요. 아주 좋습니다."
+msgstr "당신의 키들이 이미 잘 동작하는 것처럼\n보이는 군요. 아주 좋습니다."
 
 msgid "&Discard"
 msgstr "버림(&D)"
@@ -3537,9 +3514,7 @@ msgstr "버림(&D)"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"훌륭해요! 당신은 단말창 데이터베이스를 완성했어요!\n"
-"이제 모든 키가 제대로 동작합니다."
+msgstr "훌륭해요! 당신은 단말창 데이터베이스를 완성했어요!\n이제 모든 키가 제대로 동작합니다."
 
 msgid ""
 "Press all the keys mentioned here. After you have done it, check\n"
@@ -3579,18 +3554,13 @@ msgstr "%b %e %H:%M"
 msgid ""
 "Cannot save file %s:\n"
 "%s"
-msgstr ""
-" 파일을 저장할 수 없습니다.%s:\n"
-"%s "
+msgstr " 파일을 저장할 수 없습니다.%s:\n%s "
 
 msgid ""
 "GNU Midnight Commander is already\n"
 "running on this terminal.\n"
 "Subshell support will be disabled."
-msgstr ""
-"GNU 미드나잇 코맨더는 이미\n"
-"터미널에서 실행 중입니다.\n"
-"Subshell 지원이 비활성화 됩니다."
+msgstr "GNU 미드나잇 코맨더는 이미\n터미널에서 실행 중입니다.\nSubshell 지원이 비활성화 됩니다."
 
 #, c-format
 msgid "Cannot open named pipe %s\n"
@@ -3679,17 +3649,13 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"cpio 아카이브를 열 수 없습니다\n"
-"%s"
+msgstr "cpio 아카이브를 열 수 없습니다\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"cpio 아카이브의 끝에 잘못됨\n"
-"%s"
+msgstr "cpio 아카이브의 끝에 잘못됨\n%s"
 
 #, c-format
 msgid ""
@@ -3697,10 +3663,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"일관성 하드링크n%s\n"
-"in cpio archive\n"
-"%s"
+msgstr "일관성 하드링크n%s\nin cpio archive\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3710,25 +3673,19 @@ msgstr "%s 중복된 항목을 포함하고있습니다! 건너 뜁니다!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr ""
-"cpio 손상된 헤더에 있습니다\n"
-"%s"
+msgstr "cpio 손상된 헤더에 있습니다\n%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"파일의 끝에 알 수 없습니다\n"
-"%s"
+msgstr "파일의 끝에 알 수 없습니다\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"%s 아카이브를 열 수 없습니다\n"
-"%s"
+msgstr "%s 아카이브를 열 수 없습니다\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "일관적 extfs 아카이브 "
@@ -3905,17 +3862,13 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"경고: %s에 잘못된 라인:\n"
-"%s\n"
+msgstr "경고: %s에 잘못된 라인:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"경고: 잘못된 플래그 %c이(가) %s에 있음:\n"
-"%s\n"
+msgstr "경고: 잘못된 플래그 %c이(가) %s에 있음:\n%s\n"
 
 #, c-format
 msgid "sftp: an error occurred while reading %s: %s"
@@ -4001,9 +3954,7 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"tar 아카이브를 열 수 없습니다\n"
-"%s"
+msgstr "tar 아카이브를 열 수 없습니다\n%s"
 
 msgid "Inconsistent tar archive"
 msgstr "잘못된 테잎 아카이브"

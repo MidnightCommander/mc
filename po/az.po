@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
@@ -9,14 +9,13 @@ msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2015-05-24 18:29+0300\n"
-"PO-Revision-Date: 2015-02-26 09:48+0000\n"
+"PO-Revision-Date: 2015-06-04 08:38+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Azerbaijani (http://www.transifex.com/projects/p/mc/language/"
-"az/)\n"
-"Language: az\n"
+"Language-Team: Azerbaijani (http://www.transifex.com/mc/mc/language/az/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: az\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
@@ -428,9 +427,7 @@ msgstr "TERM dəyişəni bildirilməyib!\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"%dx%d ekran böyüklüyü dəstəklənmir.\n"
-"TERM sistem dəyişgənini yoxla.\n"
+msgstr "%dx%d ekran böyüklüyü dəstəklənmir.\nTERM sistem dəyişgənini yoxla.\n"
 
 msgid "Cannot create pipe descriptor"
 msgstr ""
@@ -1852,9 +1849,8 @@ msgstr ""
 msgid "&Full file list"
 msgstr "&Tam fayl sıralaması"
 
-#, fuzzy
 msgid "&Brief file list:"
-msgstr "&Qısa fayl sıralamsı"
+msgstr ""
 
 msgid "&Long file list"
 msgstr "&Uzun fayl sıralaması"
@@ -1880,7 +1876,8 @@ msgstr "Tə&rs"
 msgid "Sort order"
 msgstr "Süzmə əmri"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 msgid "Confirmation|&Delete"
 msgstr ""
 
@@ -2892,7 +2889,7 @@ msgstr "yerli olmayan vfs"
 
 #, c-format
 msgid "Device:     %s"
-msgstr "Avadanlıq:  %s"
+msgstr ""
 
 #, c-format
 msgid "Filesystem: %s"
@@ -2900,11 +2897,11 @@ msgstr "Fayl sistemi: %s"
 
 #, c-format
 msgid "Accessed:   %s"
-msgstr "Çatılıb:    %s"
+msgstr ""
 
 #, c-format
 msgid "Modified:   %s"
-msgstr "Düzəldilib: %s"
+msgstr ""
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
@@ -2917,7 +2914,7 @@ msgstr ""
 
 #, c-format
 msgid "Size:       %s"
-msgstr "Böyüklük:   %s"
+msgstr ""
 
 #, c-format
 msgid " (%ld block)"
@@ -2927,19 +2924,19 @@ msgstr[1] ""
 
 #, c-format
 msgid "Owner:      %s/%s"
-msgstr "Yiyə:       %s/%s"
+msgstr ""
 
 #, c-format
 msgid "Links:      %d"
-msgstr "Bağlar:     %d"
+msgstr ""
 
 #, c-format
 msgid "Mode:       %s (%04o)"
-msgstr "Mod:        %s ( %04o )"
+msgstr ""
 
 #, c-format
 msgid "Location:   %Xh:%Xh"
-msgstr "Yeri:       %Xh:%Xh"
+msgstr ""
 
 msgid "&Equal split"
 msgstr "&Bərabər böl"
@@ -3335,8 +3332,7 @@ msgid "Do you really want to execute?"
 msgstr ""
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr ""
-"İstifadəçi tərəfindən bildirlən şəkillandirmə düzgün deyil, əsasa keçirəm."
+msgstr "İstifadəçi tərəfindən bildirlən şəkillandirmə düzgün deyil, əsasa keçirəm."
 
 msgid "&Add new"
 msgstr "Təzə bir d&ədə əlavə et"
@@ -3381,9 +3377,7 @@ msgstr "SUID və SGID proqramları tap"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"%s faylını yazmaq üçün aça bilmədim :\n"
-"%s\n"
+msgstr "%s faylını yazmaq üçün aça bilmədim :\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3422,9 +3416,7 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"%s faylına yaza bilmirəm:\n"
-"%s\n"
+msgstr "%s faylına yaza bilmirəm:\n%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3448,9 +3440,7 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-" %s faylının yiyəsi root və ya sən deyilsiniz.\n"
-"Bunu istifadə etmək bir az təhlükəsizliyə xələl gətirə bilər"
+msgstr " %s faylının yiyəsi root və ya sən deyilsiniz.\nBunu istifadə etmək bir az təhlükəsizliyə xələl gətirə bilər"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3505,15 +3495,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"Lütfən, %s basın\n"
-"və ismarıc itənə qədər gözləyin.\n"
-"\n"
-"Sonra OLDU görünməsi üçün sonrakı düyməni \n"
-"yenə tıqlayın.\n"
-"\n"
-"Çıxmaq istəyirsiniz isə Çıx (Escape) düyməsini bir dəfə\n"
-"tıqlayın və gözləyin."
+msgstr "Lütfən, %s basın\nvə ismarıc itənə qədər gözləyin.\n\nSonra OLDU görünməsi üçün sonrakı düyməni \nyenə tıqlayın.\n\nÇıxmaq istəyirsiniz isə Çıx (Escape) düyməsini bir dəfə\ntıqlayın və gözləyin."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3529,9 +3511,7 @@ msgstr "Oldu"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"Dəyəsən büyün düymələriniz yaxşı işləyir.\n"
-"Əntiqə."
+msgstr "Dəyəsən büyün düymələriniz yaxşı işləyir.\nƏntiqə."
 
 msgid "&Discard"
 msgstr "U&nut"
@@ -3539,9 +3519,7 @@ msgstr "U&nut"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"Ə'la! Terminal databeyzi qurtardınız!\n"
-"Bütün düymələriniz yaxşı işləyir."
+msgstr "Ə'la! Terminal databeyzi qurtardınız!\nBütün düymələriniz yaxşı işləyir."
 
 msgid ""
 "Press all the keys mentioned here. After you have done it, check\n"
@@ -3676,17 +3654,13 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"%s\n"
-"cpio arxivini aça bilmədim"
+msgstr "%s\ncpio arxivini aça bilmədim"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"Cpio arxivinin erkən bitməsi\n"
-"%s"
+msgstr "Cpio arxivinin erkən bitməsi\n%s"
 
 #, c-format
 msgid ""
@@ -3694,10 +3668,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"Cpio arxivinin\n"
-"%s da(də)\n"
-"%sdüzgün olmayan ağır bağlar"
+msgstr "Cpio arxivinin\n%s da(də)\n%sdüzgün olmayan ağır bağlar"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3707,25 +3678,19 @@ msgstr "%s cüt girişlər daxiledir! Keçirəm!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr ""
-"Cpio başlığı pozulması burada görüldü\n"
-"%s"
+msgstr "Cpio başlığı pozulması burada görüldü\n%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"Faylın gözlənilməz bitişi görüldü\n"
-"%s"
+msgstr "Faylın gözlənilməz bitişi görüldü\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"%s arxivi açıla bilmir\n"
-"%s"
+msgstr "%s arxivi açıla bilmir\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "extfs arxivi xəsərlidir"
@@ -3902,17 +3867,13 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"Xəbərdarlıq: %s də xətalı sətir:\n"
-"%s\n"
+msgstr "Xəbərdarlıq: %s də xətalı sətir:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"Xəbərdarlıq: %2$s də xətalı %1$c bayrağı:\n"
-"%3$s\n"
+msgstr "Xəbərdarlıq: %2$s də xətalı %1$c bayrağı:\n%3$s\n"
 
 #, c-format
 msgid "sftp: an error occurred while reading %s: %s"
@@ -3998,9 +3959,7 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"%s\n"
-"tar arxivini aça bilmədim"
+msgstr "%s\ntar arxivini aça bilmədim"
 
 msgid "Inconsistent tar archive"
 msgstr "Tar arxivi düzgün deyildir"

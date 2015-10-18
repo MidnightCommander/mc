@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Matej Urbančič <>, 2012
 # mateju <>, 2011
@@ -11,16 +11,14 @@ msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2015-05-24 18:29+0300\n"
-"PO-Revision-Date: 2015-02-26 09:48+0000\n"
+"PO-Revision-Date: 2015-06-04 08:38+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Slovenian (http://www.transifex.com/projects/p/mc/language/"
-"sl/)\n"
-"Language: sl\n"
+"Language-Team: Slovenian (http://www.transifex.com/mc/mc/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3);\n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -58,10 +56,7 @@ msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
-msgstr ""
-"Datoteka \"%s\" je že odprta za urejanje.\n"
-"Uporabnik:%s\n"
-"ID opravila:%d"
+msgstr "Datoteka \"%s\" je že odprta za urejanje.\nUporabnik:%s\nID opravila:%d"
 
 msgid "File locked"
 msgstr "Datoteka je zaklenjena"
@@ -129,17 +124,13 @@ msgstr ""
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Ni mogoče naložiti preobleke '%s'.\n"
-"Naložena je privzeta preobleka."
+msgstr "Ni mogoče naložiti preobleke '%s'.\nNaložena je privzeta preobleka."
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Ni mogoče razčleniti preobleke '%s'.\n"
-"Naložena je privzeta preobleka."
+msgstr "Ni mogoče razčleniti preobleke '%s'.\nNaložena je privzeta preobleka."
 
 #, c-format
 msgid ""
@@ -438,9 +429,7 @@ msgstr "TERM okoljska spremenljivka ni nastavljena!\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"Velikost zaslona %dx%d ni podprta.\n"
-"Preverite okoljsko spremenljivko TERM.\n"
+msgstr "Velikost zaslona %dx%d ni podprta.\nPreverite okoljsko spremenljivko TERM.\n"
 
 msgid "Cannot create pipe descriptor"
 msgstr ""
@@ -1862,9 +1851,8 @@ msgstr ""
 msgid "&Full file list"
 msgstr "&Polni seznam datotek"
 
-#, fuzzy
 msgid "&Brief file list:"
-msgstr "&Hitri seznam datotek"
+msgstr ""
 
 msgid "&Long file list"
 msgstr "&Dolgi seznam datotek"
@@ -1890,7 +1878,8 @@ msgstr "&Obrnjeno"
 msgid "Sort order"
 msgstr "Vrstni red sortiranja"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 msgid "Confirmation|&Delete"
 msgstr ""
 
@@ -2904,7 +2893,7 @@ msgstr "ne-krajeven navidezni datotečni sistem (vfs)"
 
 #, c-format
 msgid "Device:     %s"
-msgstr "Naprava:     %s"
+msgstr ""
 
 #, c-format
 msgid "Filesystem: %s"
@@ -2912,11 +2901,11 @@ msgstr "Datotečni sistem: %s"
 
 #, c-format
 msgid "Accessed:   %s"
-msgstr "Dostopan:    %s"
+msgstr ""
 
 #, c-format
 msgid "Modified:   %s"
-msgstr "Modificiran: %s"
+msgstr ""
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
@@ -2929,7 +2918,7 @@ msgstr ""
 
 #, c-format
 msgid "Size:       %s"
-msgstr "Velikost:    %s"
+msgstr ""
 
 #, c-format
 msgid " (%ld block)"
@@ -2941,19 +2930,19 @@ msgstr[3] ""
 
 #, c-format
 msgid "Owner:      %s/%s"
-msgstr "Lastnik:     %s/%s"
+msgstr ""
 
 #, c-format
 msgid "Links:      %d"
-msgstr "Povezave:    %d"
+msgstr ""
 
 #, c-format
 msgid "Mode:       %s (%04o)"
-msgstr "Način:       %s (%04o)"
+msgstr ""
 
 #, c-format
 msgid "Location:   %Xh:%Xh"
-msgstr "Lokacija:    %Xh:%Xh"
+msgstr ""
 
 msgid "&Equal split"
 msgstr "&Enakomerni razrez"
@@ -3355,8 +3344,7 @@ msgid "Do you really want to execute?"
 msgstr ""
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr ""
-"Uporabniško podano oblikovanje izgleda neveljavno, uporabljam privzeto."
+msgstr "Uporabniško podano oblikovanje izgleda neveljavno, uporabljam privzeto."
 
 msgid "&Add new"
 msgstr "&Dodaj novo"
@@ -3401,9 +3389,7 @@ msgstr "Poišči SUID in SGID programe"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"Ne morem odpreti datoteke %s za pisanje:\n"
-"%s\n"
+msgstr "Ne morem odpreti datoteke %s za pisanje:\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3442,9 +3428,7 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"Ne morem pisati v datoteko %s:\n"
-"%s\n"
+msgstr "Ne morem pisati v datoteko %s:\n%s\n"
 
 msgid "Debug"
 msgstr ""
@@ -3468,9 +3452,7 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"Lastnik datoteke %s niste vi in ni pisljiva za vse.\n"
-"Njena uporaba lahko ošibi varnost sistema"
+msgstr "Lastnik datoteke %s niste vi in ni pisljiva za vse.\nNjena uporaba lahko ošibi varnost sistema"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3525,15 +3507,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"Prosim pritisnite %s\n"
-"in počakajte dokler to sporočilo ne izgine.\n"
-"\n"
-"Nato jo pritisnite znova, da vidite ali se pojavi V redu\n"
-"zraven njenega gumba.\n"
-"\n"
-"Če želite ven, pritisnite tipko Escape\n"
-"in prav tako počakajte."
+msgstr "Prosim pritisnite %s\nin počakajte dokler to sporočilo ne izgine.\n\nNato jo pritisnite znova, da vidite ali se pojavi V redu\nzraven njenega gumba.\n\nČe želite ven, pritisnite tipko Escape\nin prav tako počakajte."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3549,9 +3523,7 @@ msgstr "V redu"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"Kaže, da vse vaše tipke že dobro delujejo.\n"
-"To je odlično."
+msgstr "Kaže, da vse vaše tipke že dobro delujejo.\nTo je odlično."
 
 msgid "&Discard"
 msgstr "&Zavrzi"
@@ -3559,9 +3531,7 @@ msgstr "&Zavrzi"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"Odlično! Imate popolno terminalsko zbirko podatkov\n"
-"Vse vaše tipke delujejo dobro."
+msgstr "Odlično! Imate popolno terminalsko zbirko podatkov\nVse vaše tipke delujejo dobro."
 
 msgid ""
 "Press all the keys mentioned here. After you have done it, check\n"
@@ -3696,17 +3666,13 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"Ne morem odpreti cpio arhiva\n"
-"%s"
+msgstr "Ne morem odpreti cpio arhiva\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"Prezgoden konec cpio arhiva\n"
-"%s"
+msgstr "Prezgoden konec cpio arhiva\n%s"
 
 #, c-format
 msgid ""
@@ -3714,11 +3680,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"Nekonsistentne močne povezave \n"
-"%s\n"
-"v cpio archivu\n"
-"%s"
+msgstr "Nekonsistentne močne povezave \n%s\nv cpio archivu\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3728,25 +3690,19 @@ msgstr "%s vsebuje podvojene vnose! Preskakujem!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr ""
-"Pokvarjena cpio glava v\n"
-"%s"
+msgstr "Pokvarjena cpio glava v\n%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"Nepričakovan konec datoteke\n"
-"%s"
+msgstr "Nepričakovan konec datoteke\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"Ne morem odpreti arhiva %s\n"
-"%s"
+msgstr "Ne morem odpreti arhiva %s\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "Nekonsistenten extfs arhiv"
@@ -3763,8 +3719,7 @@ msgid "fish: Waiting for initial line..."
 msgstr "fish: Čakam na inicializacijsko vrstico..."
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Oprostite, zaenkrat ne znamo ustvarjati z geslom avtentificiranih povezav."
+msgstr "Oprostite, zaenkrat ne znamo ustvarjati z geslom avtentificiranih povezav."
 
 #, c-format
 msgid "fish: Password is required for %s"
@@ -3924,17 +3879,13 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"Opozorilo: Neveljavna vrstica v %s:\n"
-"%s\n"
+msgstr "Opozorilo: Neveljavna vrstica v %s:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"Opozorilo: Neveljavna zastavica %c v %s:\n"
-"%s\n"
+msgstr "Opozorilo: Neveljavna zastavica %c v %s:\n%s\n"
 
 #, c-format
 msgid "sftp: an error occurred while reading %s: %s"
@@ -4020,9 +3971,7 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"Ne morem odpreti tar arhiva\n"
-"%s"
+msgstr "Ne morem odpreti tar arhiva\n%s"
 
 msgid "Inconsistent tar archive"
 msgstr "Nekonsistenten tar arhiv"

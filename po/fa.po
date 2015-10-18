@@ -1,30 +1,29 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Aryaz Eghbali <aryaz.egh@gmail.com>, 2012
 # Mohammadreza MontazeriShatoori <monta2009@gmail.com>, 2012
-# Sina Saharkhiz <sinas1991@gmail.com>, 2012-2013
+# Sina Saharkhiz <sinas1991@gmail.com>, 2012-2013,2015
 # Slava Zanko <slavazanko@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2015-05-24 18:29+0300\n"
-"PO-Revision-Date: 2015-02-26 09:48+0000\n"
+"PO-Revision-Date: 2015-06-04 08:38+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Persian (http://www.transifex.com/projects/p/mc/language/"
-"fa/)\n"
-"Language: fa\n"
+"Language-Team: Persian (http://www.transifex.com/mc/mc/language/fa/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fa\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
-msgstr ""
+msgstr "اخطار: لیست صفحات کد را نمی‌توان بارگیری کرد"
 
 msgid "7-bit ASCII"
 msgstr "ASCII ۷  بیتی"
@@ -34,16 +33,16 @@ msgid "Cannot translate from %s to %s"
 msgstr "امکان ترجمه از %s به %s وجود ندارد"
 
 msgid "Event system already initialized"
-msgstr ""
+msgstr "سیستم رخداد قبلا مقداردهی اولیه شده است"
 
 msgid "Failed to initialize event system"
-msgstr ""
+msgstr "مقداردهی اولیه‌ی سیستم رخداد شکست خورد"
 
 msgid "Event system not initialized"
-msgstr ""
+msgstr "سیستم رخداد مقداردهی اولیه نشده است"
 
 msgid "Check input data! Some of parameters are NULL!"
-msgstr ""
+msgstr "داده ورودی را بررسی کنید! بعضی از پارامترها NULL هستند!"
 
 #, c-format
 msgid "Unable to create group '%s' for events!"
@@ -1880,7 +1879,8 @@ msgstr ""
 msgid "Sort order"
 msgstr "ترتیب مرتب‌سازی"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 msgid "Confirmation|&Delete"
 msgstr ""
 
@@ -3969,9 +3969,7 @@ msgstr ""
 msgid ""
 "%s\n"
 "doesn't look like a tar archive."
-msgstr ""
-"%s\n"
-"یک آرشیو tar به نظر نمی‌رسد."
+msgstr "%s\nیک آرشیو tar به نظر نمی‌رسد."
 
 msgid "undelfs: error"
 msgstr ""

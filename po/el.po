@@ -1,23 +1,25 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
+# Efstathios Iosifidis <iefstathios@gmail.com>, 2015
 # Panos Bouklis <panos@echidna-band.com>, 2012
 # Slava Zanko <slavazanko@gmail.com>, 2011
+# Thodoris Arvanitidis <inactive+watchdog@transifex.com>, 2015
 # Γιάννης Ανθυμίδης <yannanth@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2015-05-24 18:29+0300\n"
-"PO-Revision-Date: 2015-02-26 09:48+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Greek (http://www.transifex.com/projects/p/mc/language/el/)\n"
-"Language: el\n"
+"PO-Revision-Date: 2015-06-08 19:39+0000\n"
+"Last-Translator: Efstathios Iosifidis <iefstathios@gmail.com>\n"
+"Language-Team: Greek (http://www.transifex.com/mc/mc/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: el\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
@@ -56,10 +58,7 @@ msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
-msgstr ""
-"Το αρχείο \"%s\" βρίσκεται ήδη υπό επεξεργασία.\n"
-"Χρήστης: %s\n"
-"ID διεργασίας: %d"
+msgstr "Το αρχείο \"%s\" βρίσκεται ήδη υπό επεξεργασία.\nΧρήστης: %s\nID διεργασίας: %d"
 
 msgid "File locked"
 msgstr "Το αρχείο είναι κλειδωμένο"
@@ -87,19 +86,13 @@ msgid ""
 "to Freedesktop recommended dirs.\n"
 "To get more info, please visit\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
-"Οι παλιές σας ρυθμίσεις μετακινήθηκαν από %s\n"
-"στους προτεινόμενους καταλόγους του Freedesktop.\n"
-"Για να λάβετε περισσότερες πληροφορίες, παρακαλούμε επισκεφτείτε το\n"
-"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+msgstr "Οι παλιές σας ρυθμίσεις μετακινήθηκαν από %s\nστους προτεινόμενους καταλόγους του Freedesktop.\nΓια να λάβετε περισσότερες πληροφορίες, παρακαλούμε επισκεφτείτε το\nhttp://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 
 #, c-format
 msgid ""
 "Your old settings were migrated from %s\n"
 "to %s\n"
-msgstr ""
-"Οι παλιές σας ρυθμίσεις μετακινήθηκαν από %s\n"
-"σε %s\n"
+msgstr "Οι παλιές σας ρυθμίσεις μετακινήθηκαν από %s\nσε %s\n"
 
 msgid "Search string not found"
 msgstr ""
@@ -133,17 +126,13 @@ msgstr ""
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Αδύνατη η φόρτωση του δέρματος '%s'. \n"
-" Το προεπιλεγμένο δέρμα έχει φορτωθεί"
+msgstr "Αδύνατη η φόρτωση του δέρματος '%s'. \n Το προεπιλεγμένο δέρμα έχει φορτωθεί"
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Αδύνατη η ανάγνωση του δέρματος '%s'. \n"
-" Το προεπιλεγμένο δέρμα έχει φορτωθεί"
+msgstr "Αδύνατη η ανάγνωση του δέρματος '%s'. \n Το προεπιλεγμένο δέρμα έχει φορτωθεί"
 
 #, c-format
 msgid ""
@@ -225,34 +214,34 @@ msgid "Backspace"
 msgstr ""
 
 msgid "Up arrow"
-msgstr ""
+msgstr "Πάνω βέλος"
 
 msgid "Down arrow"
-msgstr ""
+msgstr "Κάτω βέλος"
 
 msgid "Left arrow"
-msgstr ""
+msgstr "Αριστερό βέλος"
 
 msgid "Right arrow"
-msgstr ""
+msgstr "Δεξί βέλος"
 
 msgid "Insert"
-msgstr ""
+msgstr "Πλήκτρο Insert"
 
 msgid "Delete"
-msgstr ""
+msgstr "Πλήκτρο Delete"
 
 msgid "Home"
-msgstr ""
+msgstr "Πλήκτρο Home"
 
 msgid "End key"
-msgstr "Πλήκτρο end"
+msgstr "Πλήκτρο End"
 
 msgid "Page Up"
-msgstr ""
+msgstr "Πλήκτρο Page Up"
 
 msgid "Page Down"
-msgstr ""
+msgstr "Πλήκτρο Page Down"
 
 msgid "/ on keypad"
 msgstr ""
@@ -267,28 +256,28 @@ msgid "+ on keypad"
 msgstr ""
 
 msgid "Left arrow keypad"
-msgstr ""
+msgstr "Αριστερό βέλος"
 
 msgid "Right arrow keypad"
-msgstr ""
+msgstr "Δεξί βέλος"
 
 msgid "Up arrow keypad"
-msgstr ""
+msgstr "Πάνω βέλος"
 
 msgid "Down arrow keypad"
-msgstr ""
+msgstr "Κάτω βέλος"
 
 msgid "Home on keypad"
-msgstr ""
+msgstr "Πλήκτρο Home"
 
 msgid "End on keypad"
-msgstr ""
+msgstr "Πλήκτρο End"
 
 msgid "Page Down keypad"
-msgstr ""
+msgstr "Πλήκτρο Page Down"
 
 msgid "Page Up keypad"
-msgstr ""
+msgstr "Πλήκτρο Page Up"
 
 msgid "Insert on keypad"
 msgstr ""
@@ -566,7 +555,7 @@ msgstr "Σφάλμα"
 
 #, c-format
 msgid "%d: %s"
-msgstr ""
+msgstr "%d: %s"
 
 msgid "&Abort"
 msgstr "&Εγκατάλειψη"
@@ -578,9 +567,7 @@ msgid "Print data directory"
 msgstr "Εκτύπωση δεδομένων καταλόγου"
 
 msgid "Print extended info about used data directories"
-msgstr ""
-"Εκτύπωση εκτεταμένων πληροφοριών σχετικά με τους χρησιμοποιημένους "
-"καταλόγους δεδομένων"
+msgstr "Εκτύπωση εκτεταμένων πληροφοριών σχετικά με τους χρησιμοποιημένους καταλόγους δεδομένων"
 
 msgid "Print configure options"
 msgstr "Εκτύπωση επιλογών ρυθμίσεων"
@@ -739,9 +726,7 @@ msgstr ""
 msgid ""
 "Background process sent us a request for more arguments\n"
 "than we can handle."
-msgstr ""
-"Η  διαδικασία παρασκηνίου μας έστειλε ένα αίτημα με περισσότερα ορίσματα\n"
-"από όσα μπορούμε να διαχειριστούμε."
+msgstr "Η  διαδικασία παρασκηνίου μας έστειλε ένα αίτημα με περισσότερα ορίσματα\nαπό όσα μπορούμε να διαχειριστούμε."
 
 msgid "&Dismiss"
 msgstr ""
@@ -778,18 +763,13 @@ msgid ""
 "Cannot create backup file\n"
 "%s%s\n"
 "%s"
-msgstr ""
-"Αδυναμία δημιουργίας αντιγράφου ασφαλείας\n"
-"%s%s\n"
-"%s"
+msgstr "Αδυναμία δημιουργίας αντιγράφου ασφαλείας\n%s%s\n%s"
 
 #, c-format
 msgid ""
 "Cannot create temporary merge file\n"
 "%s"
-msgstr ""
-"Αδυναμία δημιουργίας προσωρινού αρχείου συγχώνευσης\n"
-"%s"
+msgstr "Αδυναμία δημιουργίας προσωρινού αρχείου συγχώνευσης\n%s"
 
 msgid "&Fastest (Assume large files)"
 msgstr "&Γρηγορότερο (Υπέθεσε μεγάλα αρχεία)"
@@ -908,7 +888,7 @@ msgid "Cannot open %s for reading"
 msgstr "Αδύνατο το άνοιγμα του %s για ανάγνωση"
 
 msgid "Load file"
-msgstr ""
+msgstr "Φόρτωση αρχείου"
 
 #, c-format
 msgid "Error reading %s"
@@ -1094,9 +1074,7 @@ msgstr "[ΧωρίςΌνομα]"
 msgid ""
 "File %s was modified.\n"
 "Save before close?"
-msgstr ""
-"Το αρχείο %s τροποποιήθηκε.\n"
-"Αποθήκευση πριν το κλείσιμο;"
+msgstr "Το αρχείο %s τροποποιήθηκε.\nΑποθήκευση πριν το κλείσιμο;"
 
 msgid "Close file"
 msgstr "Κλείσιμο αρχείου"
@@ -1105,9 +1083,7 @@ msgstr "Κλείσιμο αρχείου"
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file %s?"
-msgstr ""
-"Το Midnight Commander τερματίζεται.\n"
-"Να αποθηκευτεί το τροποποιημένο αρχείο %s;"
+msgstr "Το Midnight Commander τερματίζεται.\nΝα αποθηκευτεί το τροποποιημένο αρχείο %s;"
 
 msgid "This function is not implemented"
 msgstr "Αυτή η λειτουργία δεν έχει υλοποιηθεί"
@@ -1549,94 +1525,94 @@ msgid "ButtonBar|PullDn"
 msgstr ""
 
 msgid "Breton"
-msgstr ""
+msgstr "Βρετονικά"
 
 msgid "Czech"
-msgstr ""
+msgstr "Τσέχικα"
 
 msgid "Welsh"
-msgstr ""
+msgstr "Ουαλικά"
 
 msgid "Danish"
-msgstr ""
+msgstr "Δανικά"
 
 msgid "German"
-msgstr ""
+msgstr "Γερμανικά"
 
 msgid "Greek"
-msgstr ""
+msgstr "Ελληνικά"
 
 msgid "English"
-msgstr ""
+msgstr "Αγγλικά"
 
 msgid "British English"
-msgstr ""
+msgstr "Βρετανικά Αγγλικά"
 
 msgid "Canadian English"
-msgstr ""
+msgstr "Καναδικά Αγγλικά"
 
 msgid "American English"
-msgstr ""
+msgstr "Αμερικάνικα Αγγλικά"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Εσπεράντο"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Ισπανικά"
 
 msgid "Faroese"
 msgstr ""
 
 msgid "French"
-msgstr ""
+msgstr "Γαλλικά"
 
 msgid "Italian"
-msgstr ""
+msgstr "Ιταλικά"
 
 msgid "Dutch"
-msgstr ""
+msgstr "Ολλανδικά"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "Νορβηγικά"
 
 msgid "Polish"
-msgstr ""
+msgstr "Πολωνικά"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "Πορτογαλικά"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Ρουμάνικα"
 
 msgid "Russian"
-msgstr ""
+msgstr "Ρωσικά"
 
 msgid "Slovak"
-msgstr ""
+msgstr "Σλοβάκικα"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Σουηδικά"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ουκρανικά"
 
 msgid "&Add word"
-msgstr ""
+msgstr "&Προσθήκη λέξης"
 
 msgid "Language"
-msgstr ""
+msgstr "Γλώσσα"
 
 msgid "Misspelled"
 msgstr ""
 
 msgid "Check word"
-msgstr ""
+msgstr "Έλεγχος λέξης"
 
 msgid "Suggest"
 msgstr ""
 
 msgid "Select language"
-msgstr ""
+msgstr "Επιλογή γλώσσας"
 
 msgid "Load syntax file"
 msgstr "Φόρτωμα αρχείου συντακτικού"
@@ -1645,9 +1621,7 @@ msgstr "Φόρτωμα αρχείου συντακτικού"
 msgid ""
 "Cannot open file %s\n"
 "%s"
-msgstr ""
-"Αδυναμία ανοίγματος του αρχείου %s\n"
-"%s"
+msgstr "Αδυναμία ανοίγματος του αρχείου %s\n%s"
 
 #, c-format
 msgid "Error in file %s on line %d"
@@ -1699,20 +1673,16 @@ msgstr "Προχωρημένη εντολή chown"
 msgid ""
 "Cannot chmod \"%s\"\n"
 "%s"
-msgstr ""
-"Αδυναμία chmod \"%s\"\n"
-"%s"
+msgstr "Αδυναμία chmod \"%s\"\n%s"
 
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
 "%s"
-msgstr ""
-"Αδυναμία chown \"%s\"\n"
-"%s"
+msgstr "Αδυναμία chown \"%s\"\n%s"
 
 msgid "< Default >"
-msgstr ""
+msgstr "< Default >"
 
 msgid "Skins"
 msgstr ""
@@ -1883,9 +1853,8 @@ msgstr ""
 msgid "&Full file list"
 msgstr "&Πλήρης λίστα αρχείων"
 
-#, fuzzy
 msgid "&Brief file list:"
-msgstr "&Σύντομη λίστα αρχείων"
+msgstr ""
 
 msgid "&Long file list"
 msgstr "&Μεγάλη λίστα αρχείων"
@@ -1894,7 +1863,7 @@ msgid "&User defined:"
 msgstr "&Καθορισμένη από χρήστη:"
 
 msgid "columns"
-msgstr ""
+msgstr "στήλες"
 
 msgid "User &mini status"
 msgstr ""
@@ -1911,7 +1880,8 @@ msgstr "&Αναστροφή"
 msgid "Sort order"
 msgstr "Σειρά ταξινόμησης"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 msgid "Confirmation|&Delete"
 msgstr "Επιβεβαίωση|&Διαγραφή"
 
@@ -1943,7 +1913,7 @@ msgid "&ISO 8859-1"
 msgstr ""
 
 msgid "7 &bits"
-msgstr ""
+msgstr "7 &bits"
 
 msgid "F&ull 8 bits input"
 msgstr ""
@@ -2164,7 +2134,7 @@ msgid "Filter command and arguments:"
 msgstr "Εντολή και ορίσματα φίλτρου:"
 
 msgid "Edit file"
-msgstr ""
+msgstr "Επεξεργασία αρχείου"
 
 msgid "Create a new Directory"
 msgstr "Δημιουργία νέου καταλόγου"
@@ -2249,9 +2219,7 @@ msgstr "Επαναφορά αρχείων σε  ένα σύστημα αρχεί
 msgid ""
 "Enter device (without /dev/) to undelete\n"
 "files on: (F1 for details)"
-msgstr ""
-"Εισάγετε τη συσκευή (χωρίς το /dev/) για να επαναφέρετε\n"
-"αρχεία σε: (F1 για λεπτομέρειες)"
+msgstr "Εισάγετε τη συσκευή (χωρίς το /dev/) για να επαναφέρετε\nαρχεία σε: (F1 για λεπτομέρειες)"
 
 msgid "Directory scanning"
 msgstr "Σάρωση καταλόγου"
@@ -2274,9 +2242,7 @@ msgstr "Αδυναμία εκτέλεσης εντολών σε μη τοπικ�
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
-msgstr ""
-"Αδυναμία chdir σε \"%s\"\n"
-"%s"
+msgstr "Αδυναμία chdir σε \"%s\"\n%s"
 
 msgid "Cannot read directory contents"
 msgstr "Αδυναμία ανάγνωσης περιεχομένων καταλόγου"
@@ -2288,9 +2254,7 @@ msgstr "Παράμετρος"
 msgid ""
 "Cannot create temporary command file\n"
 "%s"
-msgstr ""
-"Αδυναμία δημιουργίας προσωρινού αρχείου εντολών\n"
-"%s"
+msgstr "Αδυναμία δημιουργίας προσωρινού αρχείου εντολών\n%s"
 
 #, c-format
 msgid " %s%s file error"
@@ -2301,10 +2265,7 @@ msgid ""
 "The format of the %smc.ext file has changed with version 3.0. It seems that "
 "the installation failed. Please fetch a fresh copy from the Midnight "
 "Commander package."
-msgstr ""
-"Η μορφή του αρχείου %smc.ext άλλαξε με την έκδοση 3.0. Φαίνεται ότι η "
-"εγκατάσταση απέτυχε. Παρακαλούμε λάβετε ένα νέο αντίγραφο του πακέτου του "
-"Midnight Commander."
+msgstr "Η μορφή του αρχείου %smc.ext άλλαξε με την έκδοση 3.0. Φαίνεται ότι η εγκατάσταση απέτυχε. Παρακαλούμε λάβετε ένα νέο αντίγραφο του πακέτου του Midnight Commander."
 
 #, c-format
 msgid "%s file error"
@@ -2314,10 +2275,7 @@ msgstr "Σφάλμα αρχείου %s"
 msgid ""
 "The format of the %s file has changed with version 3.0. You may either want "
 "to copy it from %smc.ext or use that file as an example of how to write it."
-msgstr ""
-"Η μορφή του αρχείου %s άλλαξε με την έκδοση 3.0. Ίσως θέλετε να το "
-"αντιγράψετε από %smc.ext ή να χρησιμοποιήσετε εκείνο το αρχείο ως παράδειγμα "
-"για το πως να το γράψετε."
+msgstr "Η μορφή του αρχείου %s άλλαξε με την έκδοση 3.0. Ίσως θέλετε να το αντιγράψετε από %smc.ext ή να χρησιμοποιήσετε εκείνο το αρχείο ως παράδειγμα για το πως να το γράψετε."
 
 msgid "DialogTitle|Copy"
 msgstr "ΤίτλοςΔιαλόγου|Αντιγραφή"
@@ -2339,7 +2297,7 @@ msgstr "ΕργασίαΑρχείου|Διαγραφή"
 
 #, no-c-format
 msgid "%o %f%n\"%s\"%m"
-msgstr ""
+msgstr "%o %f%n\"%s\"%m"
 
 #, no-c-format
 msgid "%o %d %f%m"
@@ -2419,11 +2377,7 @@ msgid ""
 "and\n"
 "\"%s\"\n"
 "are the same file"
-msgstr ""
-"\"%s\"\n"
-"και\n"
-"\"%s\"\n"
-"είναι το ίδιο αρχείο"
+msgstr "\"%s\"\nκαι\n\"%s\"\nείναι το ίδιο αρχείο"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2433,41 +2387,31 @@ msgstr "Αδυναμία αντικατάστασης καταλόγου \"%s\""
 msgid ""
 "Cannot move file \"%s\" to \"%s\"\n"
 "%s"
-msgstr ""
-"Αδυναμία μετακίνησης αρχείου \"%s\" στο \"%s\"\n"
-"%s"
+msgstr "Αδυναμία μετακίνησης αρχείου \"%s\" στο \"%s\"\n%s"
 
 #, c-format
 msgid ""
 "Cannot remove file \"%s\"\n"
 "%s"
-msgstr ""
-"Αδυναμία αφαίρεσης αρχείου \"%s\"\n"
-"%s"
+msgstr "Αδυναμία αφαίρεσης αρχείου \"%s\"\n%s"
 
 #, c-format
 msgid ""
 "Cannot delete file \"%s\"\n"
 "%s"
-msgstr ""
-"Αδυναμία διαγραφής αρχείου \"%s\"\n"
-"%s"
+msgstr "Αδυναμία διαγραφής αρχείου \"%s\"\n%s"
 
 #, c-format
 msgid ""
 "Cannot remove directory \"%s\"\n"
 "%s"
-msgstr ""
-"Αδυναμία αφαίρεσης καταλόγου \"%s\"\n"
-"%s"
+msgstr "Αδυναμία αφαίρεσης καταλόγου \"%s\"\n%s"
 
 #, c-format
 msgid ""
 "Cannot overwrite directory \"%s\"\n"
 "%s"
-msgstr ""
-"Αδυναμία αντικατάστασης καταλόγου \"%s\"\n"
-"%s"
+msgstr "Αδυναμία αντικατάστασης καταλόγου \"%s\"\n%s"
 
 #, c-format
 msgid ""
@@ -2479,33 +2423,25 @@ msgstr ""
 msgid ""
 "Cannot create special file \"%s\"\n"
 "%s"
-msgstr ""
-"Αδυναμία δημιουργίας ειδικού αρχείου \"%s\"\n"
-"%s"
+msgstr "Αδυναμία δημιουργίας ειδικού αρχείου \"%s\"\n%s"
 
 #, c-format
 msgid ""
 "Cannot chown target file \"%s\"\n"
 "%s"
-msgstr ""
-"Αδυναμία chown στο αρχείο στόχο \"%s\"\n"
-"%s"
+msgstr "Αδυναμία chown στο αρχείο στόχο \"%s\"\n%s"
 
 #, c-format
 msgid ""
 "Cannot chmod target file \"%s\"\n"
 "%s"
-msgstr ""
-"Αδυναμία chmod στο αρχείο στόχο \"%s\"\n"
-"%s"
+msgstr "Αδυναμία chmod στο αρχείο στόχο \"%s\"\n%s"
 
 #, c-format
 msgid ""
 "Cannot open source file \"%s\"\n"
 "%s"
-msgstr ""
-"Αδυναμία ανοίγματος πηγαίου αρχείου \"%s\"\n"
-"%s"
+msgstr "Αδυναμία ανοίγματος πηγαίου αρχείου \"%s\"\n%s"
 
 msgid "Reget failed, about to overwrite file"
 msgstr ""
@@ -2520,9 +2456,7 @@ msgstr ""
 msgid ""
 "Cannot create target file \"%s\"\n"
 "%s"
-msgstr ""
-"Αδυναμία δημιουργίας αρχείου στόχου \"%s\"\n"
-"%s"
+msgstr "Αδυναμία δημιουργίας αρχείου στόχου \"%s\"\n%s"
 
 #, c-format
 msgid ""
@@ -2540,17 +2474,13 @@ msgstr ""
 msgid ""
 "Cannot read source file\"%s\"\n"
 "%s"
-msgstr ""
-"Αδυναμία ανάγνωσης πηγαίου αρχείου \"%s\"\n"
-"%s"
+msgstr "Αδυναμία ανάγνωσης πηγαίου αρχείου \"%s\"\n%s"
 
 #, c-format
 msgid ""
 "Cannot write target file \"%s\"\n"
 "%s"
-msgstr ""
-"Αδυναμία εγγραφής στο αρχείο στόχο \"%s\"\n"
-"%s"
+msgstr "Αδυναμία εγγραφής στο αρχείο στόχο \"%s\"\n%s"
 
 msgid "(stalled)"
 msgstr "(σταμάτησε)"
@@ -2559,17 +2489,13 @@ msgstr "(σταμάτησε)"
 msgid ""
 "Cannot close source file \"%s\"\n"
 "%s"
-msgstr ""
-"Αδυναμία κλεισίματος πηγαίου αρχείου \"%s\"\n"
-"%s"
+msgstr "Αδυναμία κλεισίματος πηγαίου αρχείου \"%s\"\n%s"
 
 #, c-format
 msgid ""
 "Cannot close target file \"%s\"\n"
 "%s"
-msgstr ""
-"Αδυναμία κλεισίματος αρχείου στόχου \"%s\"\n"
-"%s"
+msgstr "Αδυναμία κλεισίματος αρχείου στόχου \"%s\"\n%s"
 
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "Ανακτήθηκε ατελές αρχείο. Να διατηρηθεί;"
@@ -2587,9 +2513,7 @@ msgstr ""
 msgid ""
 "Source \"%s\" is not a directory\n"
 "%s"
-msgstr ""
-"Η πηγή \"%s\" δεν είναι κατάλογος\n"
-"%s"
+msgstr "Η πηγή \"%s\" δεν είναι κατάλογος\n%s"
 
 #, c-format
 msgid ""
@@ -2601,25 +2525,19 @@ msgstr ""
 msgid ""
 "Destination \"%s\" must be a directory\n"
 "%s"
-msgstr ""
-"Ο προορισμός \"%s\" πρέπει να είναι κατάλογος\n"
-"%s"
+msgstr "Ο προορισμός \"%s\" πρέπει να είναι κατάλογος\n%s"
 
 #, c-format
 msgid ""
 "Cannot create target directory \"%s\"\n"
 "%s"
-msgstr ""
-"Αδυναμία δημιουργίας καταλόγου στόχου \"%s\"\n"
-"%s"
+msgstr "Αδυναμία δημιουργίας καταλόγου στόχου \"%s\"\n%s"
 
 #, c-format
 msgid ""
 "Cannot chown target directory \"%s\"\n"
 "%s"
-msgstr ""
-"Αδυναμία chown στον κατάλογο στόχο \"%s\"\n"
-"%s"
+msgstr "Αδυναμία chown στον κατάλογο στόχο \"%s\"\n%s"
 
 #, c-format
 msgid ""
@@ -2627,27 +2545,19 @@ msgid ""
 "and\n"
 "\"%s\"\n"
 "are the same directory"
-msgstr ""
-"\"%s\"\n"
-"και\n"
-"\"%s\"\n"
-"είναι ο ίδιος κατάλογος"
+msgstr "\"%s\"\nκαι\n\"%s\"\nείναι ο ίδιος κατάλογος"
 
 #, c-format
 msgid ""
 "Cannot overwrite file \"%s\"\n"
 "%s"
-msgstr ""
-"Αδυναμία αντικατάστασης αρχείου \"%s\"\n"
-"%s"
+msgstr "Αδυναμία αντικατάστασης αρχείου \"%s\"\n%s"
 
 #, c-format
 msgid ""
 "Cannot move directory \"%s\" to \"%s\"\n"
 "%s"
-msgstr ""
-"Αδυναμία μετακίνησης καταλόγου \"%s\" to \"%s\"\n"
-"%s"
+msgstr "Αδυναμία μετακίνησης καταλόγου \"%s\" to \"%s\"\n%s"
 
 #, c-format
 msgid "Directories: %zd, total size: %s"
@@ -2935,9 +2845,7 @@ msgstr "Θέλετε σίγουρα να αφαιρέσετε την καταχ�
 msgid ""
 "Group \"%s\" is not empty.\n"
 "Remove it?"
-msgstr ""
-"Η ομάδα \"%s\" δεν είναι κενή.\n"
-"Να αφαιρεθεί;"
+msgstr "Η ομάδα \"%s\" δεν είναι κενή.\nΝα αφαιρεθεί;"
 
 msgid "Hotlist Load"
 msgstr ""
@@ -2978,14 +2886,14 @@ msgstr "Ελεύθερος χώρος: %s/%s (%d%%)"
 
 #, c-format
 msgid "Type:       %s"
-msgstr "Τύπος:      %s"
+msgstr "Τύπος:       %s"
 
 msgid "non-local vfs"
 msgstr "μη τοπικό vfs"
 
 #, c-format
 msgid "Device:     %s"
-msgstr "Συσκευή:    %s"
+msgstr "Συσκευή:     %s"
 
 #, c-format
 msgid "Filesystem: %s"
@@ -2993,16 +2901,16 @@ msgstr "Σύστημα αρχείων: %s"
 
 #, c-format
 msgid "Accessed:   %s"
-msgstr "Προσπελάστηκε: %s"
+msgstr ""
 
 #, c-format
 msgid "Modified:   %s"
-msgstr "Τροποποιήθηκε: %s"
+msgstr ""
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
 msgid "Changed:    %s"
-msgstr "Άλλαξε:     %s"
+msgstr ""
 
 #, c-format
 msgid "Dev. type: major %lu, minor %lu"
@@ -3010,7 +2918,7 @@ msgstr ""
 
 #, c-format
 msgid "Size:       %s"
-msgstr "Μέγεθος:    %s"
+msgstr "Μέγεθος:       %s"
 
 #, c-format
 msgid " (%ld block)"
@@ -3020,19 +2928,19 @@ msgstr[1] ""
 
 #, c-format
 msgid "Owner:      %s/%s"
-msgstr "Ιδιοκτήτης: %s/%s"
+msgstr ""
 
 #, c-format
 msgid "Links:      %d"
-msgstr "Δεσμοί:     %d"
+msgstr "Σύνδεσμοι:      %d"
 
 #, c-format
 msgid "Mode:       %s (%04o)"
-msgstr "Λειτουργία: %s (%04o)"
+msgstr ""
 
 #, c-format
 msgid "Location:   %Xh:%Xh"
-msgstr "Τοποθεσίαα: %Xh:%Xh"
+msgstr ""
 
 msgid "&Equal split"
 msgstr "&Ίσος διαχωρισμός"
@@ -3392,7 +3300,7 @@ msgid "SUB-DIR"
 msgstr ""
 
 msgid "<readlink failed>"
-msgstr ""
+msgstr "<readlink failed>"
 
 #, c-format
 msgid "%s byte"
@@ -3473,9 +3381,7 @@ msgstr "Εύρεση προγραμμάτων SUID και SGID"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"Αδυναμία ανοίγματος αρχείου %s για εγγραφή:\n"
-"%s\n"
+msgstr "Αδυναμία ανοίγματος αρχείου %s για εγγραφή:\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3514,9 +3420,7 @@ msgstr "ΓραμμήΚουμπιών|Rmdir"
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"Αδυναμία εγγραφής στο αρχείο %s:\n"
-"%s\n"
+msgstr "Αδυναμία εγγραφής στο αρχείο %s:\n%s\n"
 
 msgid "Debug"
 msgstr "Αποσφαλμάτωση"
@@ -3595,15 +3499,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"Παρακαλούμε πατήστε το %s\n"
-"και περιμένετε μέχρι αυτό το μήνυμα να εξαφανιστεί.\n"
-"\n"
-"Έπειτα, πατήστε το πάλι για να δείτε αν εμφανίζεται το OK\n"
-"δίπλα στο κουμπί του.\n"
-"\n"
-"Αν θέλετε να φύγετε, πατήστε το πλήκτρο Escape\n"
-"και περιμένετε."
+msgstr "Παρακαλούμε πατήστε το %s\nκαι περιμένετε μέχρι αυτό το μήνυμα να εξαφανιστεί.\n\nΈπειτα, πατήστε το πάλι για να δείτε αν εμφανίζεται το OK\nδίπλα στο κουμπί του.\n\nΑν θέλετε να φύγετε, πατήστε το πλήκτρο Escape\nκαι περιμένετε."
 
 msgid "Cannot accept this key"
 msgstr "Το κουμπί δεν μπορεί να γίνει δεκτό"
@@ -3619,9 +3515,7 @@ msgstr "OK"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"Φαίνεται ότι όλα τα πλήκτρα σας\n"
-"λειτουργούν. Υπέροχα."
+msgstr "Φαίνεται ότι όλα τα πλήκτρα σας\nλειτουργούν. Υπέροχα."
 
 msgid "&Discard"
 msgstr ""
@@ -3629,9 +3523,7 @@ msgstr ""
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"Ωραία! Έχετε μία ολοκληρωμένη βάση δεδομένων τερματικού!\n"
-"Όλα τα πλήκτρα σας δουλεύουν κανονικά."
+msgstr "Ωραία! Έχετε μία ολοκληρωμένη βάση δεδομένων τερματικού!\nΌλα τα πλήκτρα σας δουλεύουν κανονικά."
 
 msgid ""
 "Press all the keys mentioned here. After you have done it, check\n"
@@ -3643,9 +3535,7 @@ msgstr ""
 msgid ""
 "Failed to run:\n"
 "%s\n"
-msgstr ""
-"Αποτυχία εκτέλεσης:\n"
-"%s\n"
+msgstr "Αποτυχία εκτέλεσης:\n%s\n"
 
 msgid "Home directory path is not absolute"
 msgstr ""
@@ -3655,10 +3545,7 @@ msgid ""
 "\n"
 "Failed while close:\n"
 "%s\n"
-msgstr ""
-"\n"
-"Απέτυχε κατά το κλείσιμο:\n"
-"%s\n"
+msgstr "\nΑπέτυχε κατά το κλείσιμο:\n%s\n"
 
 msgid "Choose codepage"
 msgstr ""
@@ -3676,9 +3563,7 @@ msgstr "%b %e %H:%M"
 msgid ""
 "Cannot save file %s:\n"
 "%s"
-msgstr ""
-"Αδυναμία αποθήκευσης αρχείου %s:\n"
-"%s"
+msgstr "Αδυναμία αποθήκευσης αρχείου %s:\n%s"
 
 msgid ""
 "GNU Midnight Commander is already\n"
@@ -3803,17 +3688,13 @@ msgstr ""
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"Απροσδόκητο τέλος αρχείου\n"
-"%s"
+msgstr "Απροσδόκητο τέλος αρχείου\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"Άνοιγμα αρχείου %s ανεπιτυχές\n"
-"%s"
+msgstr "Άνοιγμα αρχείου %s ανεπιτυχές\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "Χαλασμένο αρχείο extfs"
@@ -3830,8 +3711,7 @@ msgid "fish: Waiting for initial line..."
 msgstr ""
 
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr ""
-"Λυπούμαστε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν υποστηρίζονται."
+msgstr "Λυπούμαστε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν υποστηρίζονται."
 
 #, c-format
 msgid "fish: Password is required for %s"
@@ -3991,17 +3871,13 @@ msgstr "%s: Προειδοποίηση: το αρχείο %s δε βρέθηκε
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"Προειδοποίηση: Μη έγκυρη γραμμή στο %s:\n"
-"%s\n"
+msgstr "Προειδοποίηση: Μη έγκυρη γραμμή στο %s:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"Προειδοποίηση: Μη έγκυρη σημαία %c στο %s:\n"
-"%s\n"
+msgstr "Προειδοποίηση: Μη έγκυρη σημαία %c στο %s:\n%s\n"
 
 #, c-format
 msgid "sftp: an error occurred while reading %s: %s"
@@ -4015,7 +3891,7 @@ msgstr ""
 
 #, c-format
 msgid "sftp: %s"
-msgstr ""
+msgstr "sftp: %s"
 
 #, c-format
 msgid "sftp: making connection to %s"
@@ -4087,9 +3963,7 @@ msgstr "%s μετονομάζει αρχεία\n"
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"Άνοιγμα αρχειοθήκης tar ανεπιτυχές\n"
-"%s"
+msgstr "Άνοιγμα αρχειοθήκης tar ανεπιτυχές\n%s"
 
 msgid "Inconsistent tar archive"
 msgstr "Χαλασμένη αρχειοθήκη tar"
@@ -4101,9 +3975,7 @@ msgstr "Απρόσμενο EOF στην αρχειοθήκη"
 msgid ""
 "%s\n"
 "doesn't look like a tar archive."
-msgstr ""
-"%s\n"
-"δε μοιάζει με αρχειοθήκη tar."
+msgstr "%s\nδε μοιάζει με αρχειοθήκη tar."
 
 msgid "undelfs: error"
 msgstr "undelfs: σφάλμα"
@@ -4187,9 +4059,7 @@ msgstr "&Ακύρωση εξόδου"
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file?"
-msgstr ""
-"Το Midnight Commander τερματίζεται.\n"
-"Αποθήκευση τροποποιημένου αρχείου;"
+msgstr "Το Midnight Commander τερματίζεται.\nΑποθήκευση τροποποιημένου αρχείου;"
 
 msgid "&Line number"
 msgstr ""
@@ -4247,18 +4117,13 @@ msgid ""
 "Error while closing the file:\n"
 "%s\n"
 "Data may have been written or not"
-msgstr ""
-"Σφάλμα κατά το κλείσιμο του αρχείου:\n"
-"%s\n"
-"Τα δεδομένα μπορεί να γράφτηκαν, ή και όχι"
+msgstr "Σφάλμα κατά το κλείσιμο του αρχείου:\n%s\nΤα δεδομένα μπορεί να γράφτηκαν, ή και όχι"
 
 #, c-format
 msgid ""
 "Cannot save file:\n"
 "%s"
-msgstr ""
-"Αδυναμία αποθήκευσης αρχείου:\n"
-"%s"
+msgstr "Αδυναμία αποθήκευσης αρχείου:\n%s"
 
 msgid "View: "
 msgstr "Προβολή:"
@@ -4267,9 +4132,7 @@ msgstr "Προβολή:"
 msgid ""
 "Cannot open \"%s\"\n"
 "%s"
-msgstr ""
-"Αδυναμία ανοίγματος \"%s\"\n"
-"%s"
+msgstr "Αδυναμία ανοίγματος \"%s\"\n%s"
 
 msgid "Cannot view: not a regular file"
 msgstr "Αδυναμία προβολής: ασυνήθιστο αρχείο"

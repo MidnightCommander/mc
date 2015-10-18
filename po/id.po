@@ -1,22 +1,22 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Andika Triwidada <andika@gmail.com>, 2011-2012
+# Gung Sukma <so.hot.call@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2015-05-24 18:29+0300\n"
-"PO-Revision-Date: 2015-02-26 09:48+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: Indonesian (http://www.transifex.com/projects/p/mc/language/"
-"id/)\n"
-"Language: id\n"
+"PO-Revision-Date: 2015-06-30 02:18+0000\n"
+"Last-Translator: Gung Sukma <so.hot.call@gmail.com>\n"
+"Language-Team: Indonesian (http://www.transifex.com/mc/mc/language/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: id\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
@@ -40,7 +40,7 @@ msgid "Event system not initialized"
 msgstr ""
 
 msgid "Check input data! Some of parameters are NULL!"
-msgstr ""
+msgstr "Periksa data masukan! Beberapa parameter NULL!"
 
 #, c-format
 msgid "Unable to create group '%s' for events!"
@@ -55,10 +55,7 @@ msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
-msgstr ""
-"Berkas \"%s\" sedang disunting.\n"
-"Pengguna: %s\n"
-"ID Proses: %d"
+msgstr "Berkas \"%s\" sedang disunting.\nPengguna: %s\nID Proses: %d"
 
 msgid "File locked"
 msgstr "Berkas dikunci"
@@ -71,10 +68,10 @@ msgstr "Aba&ikan kunci"
 
 #, c-format
 msgid "Cannot create %s directory"
-msgstr ""
+msgstr "Tidak bisa membuat direktori %s"
 
 msgid "FATAL: not a directory:"
-msgstr ""
+msgstr "FATAL: bukan sebuah direktori:"
 
 #, c-format
 msgid "An error occurred while migrating user settings: %s"
@@ -126,17 +123,13 @@ msgstr ""
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Tak bisa memuat skin '%s'.\n"
-"Skin bawaan telah dimuat."
+msgstr "Tak bisa memuat skin '%s'.\nSkin bawaan telah dimuat."
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr ""
-"Tak bisa mengurai skin '%s'.\n"
-"Skin bawaan telah dimuat."
+msgstr "Tak bisa mengurai skin '%s'.\nSkin bawaan telah dimuat."
 
 #, c-format
 msgid ""
@@ -435,9 +428,7 @@ msgstr ""
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"Ukuran layar %dx%d tak didukung.\n"
-"Periksalah variabel lingkungan TERM.\n"
+msgstr "Ukuran layar %dx%d tak didukung.\nPeriksalah variabel lingkungan TERM.\n"
 
 msgid "Cannot create pipe descriptor"
 msgstr ""
@@ -477,7 +468,7 @@ msgid "Directory cache expired for %s"
 msgstr ""
 
 msgid "bytes transferred"
-msgstr ""
+msgstr "byte ditransfer"
 
 msgid "Starting linear transfer..."
 msgstr ""
@@ -542,13 +533,13 @@ msgid "Do you want clean this history?"
 msgstr ""
 
 msgid "&Yes"
-msgstr ""
+msgstr "&Ya"
 
 msgid "&No"
 msgstr ""
 
 msgid "&OK"
-msgstr ""
+msgstr "&Oke"
 
 msgid "&Cancel"
 msgstr ""
@@ -1150,7 +1141,7 @@ msgid "Cannot execute command"
 msgstr ""
 
 msgid "mail -s <subject> -c <cc> <to>"
-msgstr ""
+msgstr "mail -s <subject> -c <cc> <to>"
 
 msgid "To"
 msgstr ""
@@ -1886,7 +1877,8 @@ msgstr ""
 msgid "Sort order"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 msgid "Confirmation|&Delete"
 msgstr ""
 
@@ -3658,17 +3650,13 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"Tak bisa membuka arsip cpio\n"
-"%s"
+msgstr "Tak bisa membuka arsip cpio\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"Akhir dini dari arsip cpio\n"
-"%s"
+msgstr "Akhir dini dari arsip cpio\n%s"
 
 #, c-format
 msgid ""
