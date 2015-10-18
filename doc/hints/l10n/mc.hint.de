@@ -1,93 +1,117 @@
-Hint: Use C-x t to copy tagged file names to the command line.
+Hinweis: Benutze Control-x t, um markierte Dateinamen in die Kommandozeile
+zu kopieren.
 
-Hint: Use C-x p to copy the current pathname to the command line.
+Hinweis: Benutze Control-x p um den aktuellen Pfadnamen in die Kommandozeile
+zu kopieren.
 
-Hint: Completion: use M-Tab (or Esc+Tab).  Type it twice to get a list.
+Hinweis: Vervollständigung: benutze M-Tabulator (oder ESC+Tabulator). Drücke
+zweimal um eine Liste zu bekommen.
 
-Hint: Use M-p and M-n to access the command history.
+Hinweis: Benutze M-p und M-n für die Befehls Historie.
 
-Hint: Need to quote a character? Use Control-q and the character.
+Hinweis: Möchtest du ein Zeichen zitieren? Benutze Steuerung-Q und das
+Zeichen.
 
-Hint: Tired of these messages? Turn them off from the Options/Layout menu.
+Hinweis: Langweilen dich diese Nachrichten? Stelle sie im Options /
+Layoutmenü ab.
 
-Hint: Selecting directories: add a slash to the end of the matching pattern.
+Hinweis: Verzeichnisse Auswählen: Füge am Ende des Mustervergleichs einen
+Schrägstrich hinzu.
 
-Hint: If your terminal lacks functions keys, use the ESC+number sequence.
+Hinweis: Wenn dein Terminal keine Funktionstasten unterstützt, benutze die
+Kombination ESC+Nummer.
 
-Hint: The homepage of GNU Midnight Commander:
+Hinweis: Die Homepage von GNU Midnight Commander:
 http://www.midnight-commander.org/
 
-Hint: Please send any bug reports to mc-devel@gnome.org
+Hinweis: Bitte sende jeden Fehlerreport an mc-devel@gnome.org
 
-Hint: Tab changes your current panel.
+Hinweis: Tabulator wechselt das aktuelle Panel.
 
-Hint: VFS coolness: tap enter on a tar file to examine its contents.
+Hinweis: cooles VFS: drücke Enter auf einer tar Datei um den Inhalt zu
+sehen.
 
-Hint: We also have a nice manual page.
+Hinweis: Wir haben auch eine schöne Handbuchseite.
 
 Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
-Hint: % macros work even on the command line.
+Hinweis: % Makros funktionieren auch auf der Kommandozeile.
 
-Hint: M-! will allow you to execute programs and see the output in the
-viewer.
+Hinweis: M-! erlaubt die Programme zu starten und die Ausgabe im Viewer zu
+sehen.
 
-Hint: The file listing format can be customized; do "man mc" for details.
+Hinweis: Das Format der Dateiliste kann angepasst werden; siehe "man mc" für
+Details.
 
-Hint: %D/%T expands to the tagged files in the opposite directory.
+Hinweis: %D/%T wird auf die markierten Dateien im gegenüberliegenden
+Verzeichnis erweitert.
 
-Hint: Want your plain shell? Press C-o, and get back to MC with C-o again.
+Hinweis: Möchtest du eine einfache Shell? Drücke Control-o, und zum Wechseln
+zum MC nochmals Control-o.
 
-Hint: Setting the CDPATH variable can save you keystrokes in cd commands.
+Hinweis: Das Setzen der Variablen CDPATH kann dir in cd-Kommandos
+Tastenschläge ersparen.
 
-Hint: If you want to see your .* files, say so in the Configuration dialog.
+Hinweis: Wenn du die .* Dateien sehen möchtest, setze dies im
+Konfigurationsdialog.
 
-Hint: Want to see your *~ backup files? Set it in the Configuration dialog.
+Hinweis: Möchtest du die *~ Sicherungsdateien sehen? Setze dies im
+Konfigurationsdialog.
 
-Hint: Completion works on all input lines in all dialogs. Just press M-Tab.
+Hinweis: Vervollständigung funktioniert auf allen Eingabezeilen in allen
+Dialogen. Drücke M-Tabulator.
 
-Hint: On slow terminals the -s flag may help.
+Hinweis: bei langsamen Terminals hilft vielleicht der Parameter -s.
 
-Hint: Find File: you can work on the files found using the Panelize button.
+Hinweis: Datei suchen: Du kannst mit den Suchergebnissen über das Befehlmenü
+arbeiten.
 
-Hint: Want to do complex searches? Use the External Panelize command.
+Hinweis: Möchtest du eine erweiterte Suche? Benutze den Menü Befehl "Datei
+suchen".
 
-Hint: To change directory halfway through typing a command, use M-c (quick
-cd).
+Hinweis: Um das Verzeichnis auf halbem Weg durch Eingabe eines Befehls zu
+ändern, verwende M-c (schnelles cd).
 
-Note: Shell commands will not work when you are on a non-local file system.
+Hinweis: Shell Befehle funktionieren nicht, wenn du auf einem nichtlokalen
+Dateisystem bist.
 
-Hint: Bring text back from the dead with C-y.
+Hinweis: Bringe den Text von einem totem Display zurück mit Control-y.
 
-Hint: Are some of your keys not working? Look at Options/Learn keys.
+Hinweis: Funktionieren einige Tasten nicht? Sie dir das Menü Optionen /
+Tasten lernen an.
 
-Hint: To look at the output of a command in the viewer, use M-!
+Hinweis: Um die Ausgabe eines Befehls im Anzeiger zu sehen, benutze M-!
 
-Hint: F13 (or Shift-F3) invokes the viewer in raw mode.
+Hinweis: F13 (oder Shift-F3) ruft den Betrachter im RAW Modus auf.
 
-Hint: You may specify the editor for F4 with the shell variable EDITOR.
+Hinweis: Du kannst den Editior für F4 mit der Shellvariable EDITOR setzen.
 
-Hint: You may specify the external viewer with the shell vars VIEWER or
-PAGER.
+Hinweis: Du kannst den externen Viewer mit der Shellvariable VIEWER oder
+PAGER setzen.
 
-Hint: You can disable all requests for confirmation in Options/Confirmation.
+Hinweis: Du kannst alle Bestätigungsanfragen unter Optionen / Nachfragen
+deaktivieren.
 
 Hint: Leap to frequently used directories in a single bound with C-.
 
-Hint: You can do anonymous FTP with mc by typing 'cd ftp://machine.edu'
+Hinweis: Du kannst eine anonyme FTP Verbindung im mc starten mit der Eingabe
+von 'cd ftp://machine.edu'
 
-Hint: FTP is built in the Midnight Commander, check the File/FTP link menu.
+Hinweis: FTP ist im Midnight Commander eingebaut, prüfe das
+Datei/FTP-Verbindung Menü.
 
-Hint: M-t changes quickly the listing mode.
+Hinweis: M-t wechselt schnell den Listenmodus.
 
-Hint: You can specify the username when doing ftps: 'cd
+Hinweis: Du kannst den Benutzernamen nutzen, wenn du bei ftps eingibst: 'cd
 ftp://user@machine.edu'
 
-Hint: You can browse RPM files by tapping enter on top of an rpm file.
+Hinweis: Du kannst eine RPM Datei mit Enter auf die Datei durchsuchen.
 
-Hint: To mark directories on the select dialog box, append a slash.
+Hinweis: Um Verzeichnisse in der Auswahlbox zu markieren, füge einen
+Schrägstrich hinzu.
 
-Hint: To use the mouse cut and paste may require holding the shift key
+Hinweis: Um mit der Maus Ausschneiden und Einfügen zu nutzen, muss evtl die
+Shifttaste gedrückt werden.
 
 Hint: Key frequently visited ftp sites in the hotlist: type C-.
 

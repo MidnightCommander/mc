@@ -16,7 +16,7 @@ dopasowania.
 
 Porada: jeśli w terminalu nie ma klawiszy funkcyjnych, można użyć Esc+numer.
 
-Porada: strona domowa GNU Midnight Commander:
+Porada: witryna programu GNU Midnight Commander:
 http://www.midnight-commander.org
 
 Porada: raporty błędów (w języku angielskim) proszę wysłać na
@@ -36,8 +36,8 @@ Porada: makra % działają także w wierszu poleceń.
 Porada: M-! umożliwia wyświetlenie wyjścia wykonywanych programów w
 podglądzie.
 
-Porada: format wyświetlania listy plików można dostosować (więcej w "man
-mc").
+Porada: format wyświetlania listy plików można dostosować (więcej w „man
+mc”).
 
 Porada: %D/%T oznacza zaznaczone pliki w drugim panelu.
 
@@ -85,15 +85,15 @@ Opcje/Potwierdzenia.
 
 Hint: Leap to frequently used directories in a single bound with C-.
 
-Porada: można połączyć się z anonimowym FTP wpisując "cd
-ftp://komputer.edu".
+Porada: można połączyć się z anonimowym FTP wpisując „cd
+ftp://komputer.edu”.
 
 Porada: FTP jest wbudowane w mc, proszę zobaczyć menu Plik/Połączenie FTP.
 
 Porada: M-t szybko zmienia tryb wyświetlania.
 
-Porada: można podać użytkownika dla ftps: "cd
-ftp://użytkownik@komputer.edu".
+Porada: można podać użytkownika dla ftps: „cd
+ftp://użytkownik@komputer.edu”.
 
 Porada: można przeglądać pakiety RPM naciskając na nich klawisz Enter.
 

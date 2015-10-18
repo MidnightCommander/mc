@@ -1,17 +1,20 @@
-Aholkua: Erabili C-x t etiketatutako fitxategi izenak komando lerrora
+Aholkua: Erabili Ktrl-x t hautatutako fitxategi izenak komando lerrora
 kopiatzeko.
 
-Aholkua: Erabili C-x p uneko bide-izena komando lerrora kopiatzeko.
+Aholkua: Erabili Ktrl-x p uneko bide-izena komando lerrora kopiatzeko.
 
-Hint: Completion: use M-Tab (or Esc+Tab).  Type it twice to get a list.
+Aholkua: Osatzea: erabili Alt-Tab (edo Ihes+Tab; X ingurunean
+Ktrl+Alt+Tab). Tekleatu bitan zerrenda bat jasotzeko.
 
-Aholkua: Erabili M-p eta M-n komandoen historia atzitzeko.
+Aholkua: Erabili Alt-p eta Alt-n komandoen historia atzitzeko.
 
-Hint: Need to quote a character? Use Control-q and the character.
+Aholkua: Karaktere bat txertatzeko? Erabili Kontrol-q eta karakterea
+(adibidez '+' txertatzeko Ktrl-q +).
 
-Hint: Tired of these messages? Turn them off from the Options/Layout menu.
+Aholkua: Mezu hauekin gogaituta? Itzali itzazu Aukerak/Diseinua menutik.
 
-Hint: Selecting directories: add a slash to the end of the matching pattern.
+Aholkua: Direktorioak hautatzea: erantsi «/» barra zeiharra bilaketa
+ereduaren amaieran.
 
 Aholkua: Zure terminalari funtzio teklak falta bazaizkio, erabili
 Ihes+zenbakia sekuentzia.
@@ -19,29 +22,31 @@ Ihes+zenbakia sekuentzia.
 Hint: GNU Midnight Commander-ren atariko orria:
 http://www.midnight-commander.org/
 
-Aholkua: Mesedez bidali akats txosten oro hona mc-devel@gnome.org
+Aholkua: Mesedez bidali akats txosten oro hona: mc-devel@gnome.org
 
-Hint: Tab changes your current panel.
+Aholkua: Tab teklak zure uneko panela aldatzen du.
 
-Hint: VFS coolness: tap enter on a tar file to examine its contents.
+Aholkua: VFS-ren onurak: sakatu sartu tar fitxategi batean bere edukia
+aztertzeko.
 
 Aholkua: Eskuliburu orrialde ederra ere badaukagu.
 
 Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
-Hint: % macros work even on the command line.
+Aholkua: % makroak komando lerroan ere erabili daitezke.
 
-Hint: M-! will allow you to execute programs and see the output in the
-viewer.
+Aholkua: Alt-! erabili programak exekutatu eta irteera erakuslean ikusteko.
 
-Hint: The file listing format can be customized; do "man mc" for details.
+Aholkua: Fitxategiak zerrendatzeko formatua egokitu daiteke; egin "man mc"
+xehetasunak ikusteko.
 
 Hint: %D/%T expands to the tagged files in the opposite directory.
 
-Aholkua: Zure shell soila nahi duzu? Sakatu C-o, eta itzuli MC-ra C-o berriz
-erabiliz.
+Aholkua: Zure shell soila nahi duzu? Sakatu Ktrl-o, eta itzuli MC-ra Ktrl-o
+berriz erabiliz.
 
-Hint: Setting the CDPATH variable can save you keystrokes in cd commands.
+Aholkua: CDPATH aldagaia ezarrita cd komandoetan teklak sakatzea aurreztu
+dezakezu.
 
 Aholkua: Zure .* fitxategiak ikusi nahi badituzu, horrela adierazi
 Konfigurazio elkarrizketan.
@@ -49,46 +54,52 @@ Konfigurazio elkarrizketan.
 Aholkua: Zure *~backup fitxategiak ikusi nahi dituzu? Ezarri ezazu
 Konfigurazio elkarrizketan.
 
-Hint: Completion works on all input lines in all dialogs. Just press M-Tab.
+Aholkua: Osatzea, elkarrizketa guztietako sarrera lerro guztietan
+dabil. Sakatu Alt-Tab (X ingurunean Ktrl+Alt+Tab).
 
 Aholkua: Terminal moteletan -s banderak lagundu dezake.
 
-Hint: Find File: you can work on the files found using the Panelize button.
+Aholkua: Aurkitu fitxategia: Aurkitutako fitxategietan lan egin dezakezu
+Panelatu botoia erabiliz.
 
-Hint: Want to do complex searches? Use the External Panelize command.
+Aholkua: Bilaketa konplexuak egin nahi? Erabili Kanpora Paneleratu komandoa.
 
 Hint: To change directory halfway through typing a command, use M-c (quick
 cd).
 
-Note: Shell commands will not work when you are on a non-local file system.
+Oharra: Shell komandoak ez dira ibiliko bertakoa ez den fitxategi-sisteman
+zaudenean.
 
-Hint: Bring text back from the dead with C-y.
+Aholkua: Ekarri atzera testua heriotzatik Ktrl-y erabilita.
 
-Hint: Are some of your keys not working? Look at Options/Learn keys.
+Aholkua: Zure teklatako batzuk ez dabiltza? Begiratu Aukerak/Teklak ikasi.
 
-Hint: To look at the output of a command in the viewer, use M-!
+Aholkua: Komando baten irteera erakuslean ikusteko, erabili M-!
 
 Hint: F13 (or Shift-F3) invokes the viewer in raw mode.
 
 Aholkua: F4-rentzako editorea zehaztu dezakezu EDITOR shell aldagaiarekin.
 
-Hint: You may specify the external viewer with the shell vars VIEWER or
-PAGER.
+Aholkua: Kanpoko erakuslea zehaztu dezakezu VIEWER edo PAGER shell
+aldagaiekin.
 
-Hint: You can disable all requests for confirmation in Options/Confirmation.
+Aholkua: Berresteko eskaera guztiak ezgaitu ditzakezu
+Aukerak/Berrespena-tik.
 
 Hint: Leap to frequently used directories in a single bound with C-.
 
-Hint: You can do anonymous FTP with mc by typing 'cd ftp://machine.edu'
+Aholkua: FTP anonimoa egin dezakezu mc-rekin 'cd ftp://machine.edu'
+tekleatuta.
 
 Hint: FTP is built in the Midnight Commander, check the File/FTP link menu.
 
-Hint: M-t changes quickly the listing mode.
+Aholkua: Alt-t zerrendatze modua azkar aldatzeko.
 
-Hint: You can specify the username when doing ftps: 'cd
-ftp://user@machine.edu'
+Aholkua: Erabiltzaile izena zehaztu dezakezu ftp-ak egiterakoan: 'cd
+ftp://erabiltzailea@machine.edu'
 
-Hint: You can browse RPM files by tapping enter on top of an rpm file.
+Aholkua: RPM fitxategiak arakatu ditzakezu rpm fitxategi baten gainean sartu
+sakatuta.
 
 Hint: To mark directories on the select dialog box, append a slash.
 
