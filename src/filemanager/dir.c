@@ -508,7 +508,7 @@ dir_list_sort (dir_list * list, GCompareFunc sort, const dir_sort_options_t * so
     file_entry_t *fentry;
     int dot_dot_found = 0;
 
-    if (list->len < 2)
+    if (list->len < 2 || sort == (GCompareFunc) unsorted)
         return;
 
     /* If there is an ".." entry the caller must take care to
