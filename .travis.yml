@@ -1,6 +1,9 @@
 language: c
 sudo: true
 
+env:
+  - CFLAGS=-Wno-error=shadow
+
 install:
   - sudo apt-get update -qq
   - sudo apt-get install -y autoconf gettext autopoint libtool check
