@@ -1,7 +1,6 @@
 Read the INSTALL file for the complete instructions. 
 
-GNU Midnight Commander requires glib2.  You may already have glib
-installed, but if you don't, take it from ftp://ftp.gtk.org/pub/gtk/
+GNU Midnight Commander requires glib2.
 
 GNU Midnight Commander uses the S-Lang screen library by default. It
 tries the S-Lang library installed on the system.  If it's not found,
