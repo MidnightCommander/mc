@@ -384,10 +384,10 @@ glib
 The only "hard" dependency of GNU Midnight Commander is glib.  You can
 get glib from
 
-ftp://ftp.gtk.org/pub/glib/
+ftp://ftp.gnome.org/pub/gnome/sources/glib/
 
-Minimal version of glib: 2.14.x
-Recommended version: 2.14.x and higher.
+Minimal version of glib: 2.26.x
+Recommended version: 2.26.x and higher.
 
 Newer versions may work, but haven't been tested.
 

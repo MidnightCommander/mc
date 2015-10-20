@@ -28,11 +28,6 @@ included with this distribution package.
 Dependencies
 ------------
 
-To compile the GNU Midnight Commander, you need to have a copy of the
-glib library version 2.14.x or newer, available at
-
-ftp://ftp.gtk.org/pub/glib/
-
 Please read the file INSTALL for installation instructions
 and full list of dependencies.
 
