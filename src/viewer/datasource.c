@@ -395,13 +395,13 @@ mcview_set_datasource_file (WView * view, int fd, const struct stat *st)
 gboolean
 mcview_load_command_output (WView * view, const char *command)
 {
-    mc_pipe_t *pipe;
+    mc_pipe_t *p;
     GError *error = NULL;
 
     mcview_close_datasource (view);
 
-    pipe = mc_popen (command, &error);
-    if (pipe == NULL)
+    p = mc_popen (command, &error);
+    if (p == NULL)
     {
         mcview_display (view);
         mcview_show_error (view, error->message);
@@ -410,7 +410,7 @@ mcview_load_command_output (WView * view, const char *command)
     }
 
     /* Check if filter produced any output */
-    mcview_set_datasource_stdio_pipe (view, pipe);
+    mcview_set_datasource_stdio_pipe (view, p);
     if (!mcview_get_byte (view, 0, NULL))
     {
         mcview_close_datasource (view);
