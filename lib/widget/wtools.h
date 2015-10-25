@@ -48,7 +48,7 @@ struct status_msg_t
 
     status_msg_cb init;         /* callback to init derived classes */
     status_msg_update_cb update;        /* callback to update dlg */
-    status_msg_cb deinit;       /* callback to deinit deribed clesses */
+    status_msg_cb deinit;       /* callback to deinit derived classes */
 };
 
 /* Simple status message with label and 'Abort' button */

@@ -297,7 +297,7 @@ mcview_load (WView * view, const char *command, const char *file, int start_line
         }
         else
         {
-            /* try extract path form filename */
+            /* try extract path from filename */
             const char *fname;
             char *dir;
 

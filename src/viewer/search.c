@@ -370,7 +370,7 @@ mcview_do_search (WView * view, off_t want_search_start)
 
     if (!isFound && view->search->error_str != NULL)
     {
-        /* continue search form beginning */
+        /* continue search from beginning */
         off_t search_end;
 
         search_end = orig_search_start;
