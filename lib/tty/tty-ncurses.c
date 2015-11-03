@@ -37,6 +37,7 @@
 #ifdef HAVE_SYS_IOCTL_H
 #include <sys/ioctl.h>
 #endif
+#include <sys/ttydefaults.h>
 #include <termios.h>
 
 #include "lib/global.h"
