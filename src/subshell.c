@@ -878,8 +878,13 @@ init_subshell (void)
     {
     case BASH:
         g_snprintf (precmd, sizeof (precmd),
-                    " PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'pwd>&%d;kill -STOP $$'\n",
-                    subshell_pipe[WRITE]);
+                    " if [ -n \"${PROMPT_COMMAND:-}\" ]; then\n"
+                    "   PROMPT_COMMAND_MC_SAVE=\"$PROMPT_COMMAND\"\n"
+                    "   PROMPT_COMMAND='eval -- \"$PROMPT_COMMAND_MC_SAVE\"; pwd >&%d; kill -STOP $$'\n"
+                    " else\n"
+                    "   PROMPT_COMMAND='pwd >&%d; kill -STOP $$'\n"
+                    " fi\n",
+                    subshell_pipe[WRITE], subshell_pipe[WRITE]);
         break;
 
     case ZSH:
