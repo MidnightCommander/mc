@@ -368,13 +368,13 @@ undelfs_opendir (const vfs_path_t * vpath)
         message (D_ERROR, undelfserr, _("Cannot open file %s"), ext2_fname);
         return 0;
     }
-    vfs_print_message (_("undelfs: reading inode bitmap..."));
+    vfs_print_message ("%s", _("undelfs: reading inode bitmap..."));
     if (ext2fs_read_inode_bitmap (fs))
     {
         message (D_ERROR, undelfserr, _("Cannot load inode bitmap from:\n%s"), ext2_fname);
         goto quit_opendir;
     }
-    vfs_print_message (_("undelfs: reading block bitmap..."));
+    vfs_print_message ("%s", _("undelfs: reading block bitmap..."));
     if (ext2fs_read_block_bitmap (fs))
     {
         message (D_ERROR, undelfserr, _("Cannot load block bitmap from:\n%s"), ext2_fname);

@@ -236,6 +236,7 @@ fish_get_reply (struct vfs_class *me, int sock, char *string_buf, int string_len
 /* --------------------------------------------------------------------------------------------- */
 
 static int
+G_GNUC_PRINTF (4, 5)
 fish_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const char *fmt, ...)
 {
     va_list ap;
@@ -280,7 +281,7 @@ fish_free_archive (struct vfs_class *me, struct vfs_s_super *super)
     if ((SUP->sockw != -1) || (SUP->sockr != -1))
     {
         vfs_print_message (_("fish: Disconnecting from %s"), super->name ? super->name : "???");
-        fish_command (me, super, NONE, "#BYE\nexit\n");
+        fish_command (me, super, NONE, "%s", "#BYE\nexit\n");
         close (SUP->sockw);
         close (SUP->sockr);
         SUP->sockw = SUP->sockr = -1;
@@ -383,7 +384,7 @@ fish_set_env (int flags)
 static gboolean
 fish_info (struct vfs_class *me, struct vfs_s_super *super)
 {
-    if (fish_command (me, super, NONE, SUP->scr_info) == COMPLETE)
+    if (fish_command (me, super, NONE, "%s", SUP->scr_info) == COMPLETE)
     {
         while (TRUE)
         {
@@ -518,28 +519,28 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
     if (!ftalk)
         ERRNOR (E_PROTO, -1);
 
-    vfs_print_message (_("fish: Sending initial line..."));
+    vfs_print_message ("%s", _("fish: Sending initial line..."));
     /*
      * Run 'start_fish_server'. If it doesn't exist - no problem,
      * we'll talk directly to the shell.
      */
 
     if (fish_command
-        (me, super, WAIT_REPLY,
+        (me, super, WAIT_REPLY, "%s",
          "#FISH\necho; start_fish_server 2>&1; echo '### 200'\n") != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
-    vfs_print_message (_("fish: Handshaking version..."));
-    if (fish_command (me, super, WAIT_REPLY, "#VER 0.0.3\necho '### 000'\n") != COMPLETE)
+    vfs_print_message ("%s", _("fish: Handshaking version..."));
+    if (fish_command (me, super, WAIT_REPLY, "%s", "#VER 0.0.3\necho '### 000'\n") != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
     /* Set up remote locale to C, otherwise dates cannot be recognized */
     if (fish_command
-        (me, super, WAIT_REPLY,
+        (me, super, WAIT_REPLY, "%s",
          "LANG=C LC_ALL=C LC_TIME=C; export LANG LC_ALL LC_TIME;\n" "echo '### 200'\n") != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
-    vfs_print_message (_("fish: Getting host info..."));
+    vfs_print_message ("%s", _("fish: Getting host info..."));
     if (fish_info (me, super))
         SUP->scr_env = fish_set_env (SUP->host_flags);
 
@@ -941,7 +942,7 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
         {
             if ((errno == EINTR) && tty_got_interrupt ())
                 continue;
-            vfs_print_message (_("fish: Local read failed, sending zeros"));
+            vfs_print_message ("%s", _("fish: Local read failed, sending zeros"));
             close (h);
             h = open ("/dev/zero", O_RDONLY);
         }
@@ -1036,7 +1037,7 @@ fish_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
     char buffer[BUF_8K];
     ssize_t n;
 
-    vfs_print_message (_("Aborting transfer..."));
+    vfs_print_message ("%s", _("Aborting transfer..."));
 
     do
     {
@@ -1052,9 +1053,9 @@ fish_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
     while (n != 0);
 
     if (fish_get_reply (me, SUP->sockr, NULL, 0) != COMPLETE)
-        vfs_print_message (_("Error reported after abort."));
+        vfs_print_message ("%s", _("Error reported after abort."));
     else
-        vfs_print_message (_("Aborted transfer would be successful."));
+        vfs_print_message ("%s", _("Aborted transfer would be successful."));
 }
 
 /* --------------------------------------------------------------------------------------------- */

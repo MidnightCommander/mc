@@ -324,12 +324,13 @@ struct mount_entry
 {
     char *me_devname;           /* Device node name, including "/dev/". */
     char *me_mountdir;          /* Mount point directory name. */
+    char *me_mntroot;           /* Directory on filesystem of device used
+                                   as root for the (bind) mount. */
     char *me_type;              /* "nfs", "4.2", etc. */
     dev_t me_dev;               /* Device number of me_mountdir. */
     unsigned int me_dummy:1;    /* Nonzero for dummy file systems. */
     unsigned int me_remote:1;   /* Nonzero for remote fileystems. */
     unsigned int me_type_malloced:1;    /* Nonzero if me_type was malloced. */
-    struct mount_entry *me_next;
 };
 
 struct fs_usage
@@ -346,7 +347,7 @@ struct fs_usage
 /*** file scope variables ************************************************************************/
 
 #ifdef HAVE_INFOMOUNT_LIST
-static struct mount_entry *mc_mount_list = NULL;
+static GSList *mc_mount_list = NULL;
 #endif /* HAVE_INFOMOUNT_LIST */
 
 /*** file scope functions ************************************************************************/
@@ -379,10 +380,11 @@ statvfs_works (void)
 static void
 free_mount_entry (struct mount_entry *me)
 {
-    if (!me)
+    if (me == NULL)
         return;
     g_free (me->me_devname);
     g_free (me->me_mountdir);
+    g_free (me->me_mntroot);
     if (me->me_type_malloced)
         g_free (me->me_type);
     g_free (me);
@@ -642,17 +644,15 @@ unescape_tab (char *str)
    If NEED_FS_TYPE is true, ensure that the file system type fields in
    the returned list are valid.  Otherwise, they might not be.  */
 
-static struct mount_entry *
+static GSList *
 read_file_system_list (int need_fs_type)
 {
-    struct mount_entry *mount_list;
+    GSList *mount_list = NULL;
     struct mount_entry *me;
-    struct mount_entry **mtail = &mount_list;
 
 #ifdef MOUNTED_LISTMNTENT
     {
         struct tabmntent *mntlist, *p;
-        struct mount_entry *me;
 
         /* the third and fourth arguments could be used to filter mounts,
            but Crays doesn't seem to have any mounts that we want to
@@ -668,13 +668,14 @@ read_file_system_list (int need_fs_type)
             me = g_malloc (sizeof (*me));
             me->me_devname = g_strdup (mnt->mnt_fsname);
             me->me_mountdir = g_strdup (mnt->mnt_dir);
+            me->me_mntroot = NULL;
             me->me_type = g_strdup (mnt->mnt_type);
             me->me_type_malloced = 1;
             me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
             me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
             me->me_dev = -1;
-            *mtail = me;
-            mtail = &me->me_next;
+
+            mount_list = g_slist_prepend (mount_list, me);
         }
         freemntlist (mntlist);
     }
@@ -700,7 +701,8 @@ read_file_system_list (int need_fs_type)
             while (getline (&line, &buf_size, fp) != -1)
             {
                 unsigned int devmaj, devmin;
-                int target_s, target_e, type_s, type_e, source_s, source_e;
+                int target_s, target_e, type_s, type_e;
+                int source_s, source_e, mntroot_s, mntroot_e;
                 char test;
                 char *dash;
                 int rc;
@@ -708,11 +710,12 @@ read_file_system_list (int need_fs_type)
                 rc = sscanf (line, "%*u "       /* id - discarded  */
                              "%*u "     /* parent - discarded */
                              "%u:%u "   /* dev major:minor  */
-                             "%*s "     /* mountroot - discarded  */
+                             "%n%*s%n " /* mountroot */
                              "%n%*s%n"  /* target, start and end  */
                              "%c",      /* more data...  */
-                             &devmaj, &devmin, &target_s, &target_e, &test);
-                if (rc != 3 && rc != 5) /* 5 if %n included in count.  */
+                             &devmaj, &devmin, &mntroot_s, &mntroot_e, &target_s, &target_e, &test);
+
+                if (rc != 3 && rc != 7) /* 7 if %n included in count.  */
                     continue;
 
                 /* skip optional fields, terminated by " - "  */
@@ -729,17 +732,20 @@ read_file_system_list (int need_fs_type)
                     continue;
 
                 /* manipulate the sub-strings in place.  */
+                line[mntroot_e] = '\0';
                 line[target_e] = '\0';
                 dash[type_e] = '\0';
                 dash[source_e] = '\0';
                 unescape_tab (dash + source_s);
                 unescape_tab (line + target_s);
+                unescape_tab (line + mntroot_s);
 
                 me = g_malloc (sizeof *me);
 
-                me->me_devname = strdup (dash + source_s);
-                me->me_mountdir = strdup (line + target_s);
-                me->me_type = strdup (dash + type_s);
+                me->me_devname = g_strdup (dash + source_s);
+                me->me_mountdir = g_strdup (line + target_s);
+                me->me_mntroot = g_strdup (line + mntroot_s);
+                me->me_type = g_strdup (dash + type_s);
                 me->me_type_malloced = 1;
                 me->me_dev = makedev (devmaj, devmin);
                 /* we pass "false" for the "Bind" option as that's only
@@ -749,9 +755,7 @@ read_file_system_list (int need_fs_type)
                 me->me_dummy = ME_DUMMY (me->me_devname, me->me_type, FALSE);
                 me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
 
-                /* Add to the linked list. */
-                *mtail = me;
-                mtail = &me->me_next;
+                mount_list = g_slist_prepend (mount_list, me);
             }
 
             free (line);
@@ -787,15 +791,14 @@ read_file_system_list (int need_fs_type)
                 me = g_malloc (sizeof (*me));
                 me->me_devname = g_strdup (mnt->mnt_fsname);
                 me->me_mountdir = g_strdup (mnt->mnt_dir);
+                me->me_mntroot = NULL;
                 me->me_type = g_strdup (mnt->mnt_type);
                 me->me_type_malloced = 1;
                 me->me_dummy = ME_DUMMY (me->me_devname, me->me_type, bind);
                 me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
                 me->me_dev = dev_from_mount_options (mnt->mnt_opts);
 
-                /* Add to the linked list. */
-                *mtail = me;
-                mtail = &me->me_next;
+                mount_list = g_slist_prepend (mount_list, me);
             }
 
             if (endmntent (fp) == 0)
@@ -819,15 +822,14 @@ read_file_system_list (int need_fs_type)
             me = g_malloc (sizeof (*me));
             me->me_devname = g_strdup (fsp->f_mntfromname);
             me->me_mountdir = g_strdup (fsp->f_mntonname);
+            me->me_mntroot = NULL;
             me->me_type = fs_type;
             me->me_type_malloced = 0;
             me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
             me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
             me->me_dev = (dev_t) (-1);  /* Magic; means not known yet. */
 
-            /* Add to the linked list. */
-            *mtail = me;
-            mtail = &me->me_next;
+            mount_list = g_slist_prepend (mount_list, me);
         }
     }
 #endif /* MOUNTED_GETMNTINFO */
@@ -845,15 +847,14 @@ read_file_system_list (int need_fs_type)
             me = g_malloc (sizeof (*me));
             me->me_devname = g_strdup (fsp->f_mntfromname);
             me->me_mountdir = g_strdup (fsp->f_mntonname);
+            me->me_mntroot = NULL;
             me->me_type = g_strdup (fsp->f_fstypename);
             me->me_type_malloced = 1;
             me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
             me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
             me->me_dev = (dev_t) (-1);  /* Magic; means not known yet. */
 
-            /* Add to the linked list. */
-            *mtail = me;
-            mtail = &me->me_next;
+            mount_list = g_slist_prepend (mount_list, me);
         }
     }
 #endif /* MOUNTED_GETMNTINFO2 */
@@ -876,15 +877,14 @@ read_file_system_list (int need_fs_type)
             me = g_malloc (sizeof (*me));
             me->me_devname = g_strdup (fsd.fd_req.devname);
             me->me_mountdir = g_strdup (fsd.fd_req.path);
+            me->me_mntroot = NULL;
             me->me_type = gt_names[fsd.fd_req.fstype];
             me->me_type_malloced = 0;
             me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
             me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
             me->me_dev = fsd.fd_req.dev;
 
-            /* Add to the linked list. */
-            *mtail = me;
-            mtail = &me->me_next;
+            mount_list = g_slist_prepend (mount_list, me);
         }
     }
 #endif /* MOUNTED_GETMNT. */
@@ -968,21 +968,20 @@ read_file_system_list (int need_fs_type)
                 me->me_devname =
                     g_strdup (fi.device_name[0] != '\0' ? fi.device_name : fi.fsh_name);
                 me->me_mountdir = g_strdup (re != NULL ? re->name : fi.fsh_name);
+                me->me_mntroot = NULL;
                 me->me_type = g_strdup (fi.fsh_name);
                 me->me_type_malloced = 1;
                 me->me_dev = fi.dev;
                 me->me_dummy = 0;
                 me->me_remote = (fi.flags & B_FS_IS_SHARED) != 0;
 
-                /* Add to the linked list. */
-                *mtail = me;
-                mtail = &me->me_next;
+                mount_list = g_slist_prepend (mount_list, me);
             }
-        *mtail = NULL;
 
         while (rootdir_list != NULL)
         {
             struct rootdir_entry *re = rootdir_list;
+
             rootdir_list = re->next;
             g_free (re->name);
             g_free (re);
@@ -1020,15 +1019,14 @@ read_file_system_list (int need_fs_type)
             me = g_malloc (sizeof (*me));
             me->me_devname = g_strdup (stats[counter].f_mntfromname);
             me->me_mountdir = g_strdup (stats[counter].f_mntonname);
+            me->me_mntroot = NULL;
             me->me_type = g_strdup (FS_TYPE (stats[counter]));
             me->me_type_malloced = 1;
             me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
             me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
             me->me_dev = (dev_t) (-1);  /* Magic; means not known yet. */
 
-            /* Add to the linked list. */
-            *mtail = me;
-            mtail = &me->me_next;
+            mount_list = g_slist_prepend (mount_list, me);
         }
 
         g_free (stats);
@@ -1054,6 +1052,7 @@ read_file_system_list (int need_fs_type)
             me->me_devname = g_strconcat ("/dev/", mnt.mt_dev, (char *) NULL);
 #endif
             me->me_mountdir = g_strdup (mnt.mt_filsys);
+            me->me_mntroot = NULL;
             me->me_dev = (dev_t) (-1);  /* Magic; means not known yet. */
             me->me_type = "";
             me->me_type_malloced = 0;
@@ -1074,15 +1073,14 @@ read_file_system_list (int need_fs_type)
             me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
             me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
 
-            /* Add to the linked list. */
-            *mtail = me;
-            mtail = &me->me_next;
+            mount_list = g_slist_prepend (mount_list, me);
         }
 
         if (ferror (fp))
         {
             /* The last fread() call must have failed.  */
             int saved_errno = errno;
+
             fclose (fp);
             errno = saved_errno;
             goto free_then_fail;
@@ -1096,20 +1094,20 @@ read_file_system_list (int need_fs_type)
 #ifdef MOUNTED_GETMNTTBL        /* DolphinOS goes its own way.  */
     {
         struct mntent **mnttbl = getmnttbl (), **ent;
+
         for (ent = mnttbl; *ent; ent++)
         {
             me = g_malloc (sizeof (*me));
             me->me_devname = g_strdup ((*ent)->mt_resource);
             me->me_mountdir = g_strdup ((*ent)->mt_directory);
+            me->me_mntroot = NULL;
             me->me_type = g_strdup ((*ent)->mt_fstype);
             me->me_type_malloced = 1;
             me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
             me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
             me->me_dev = (dev_t) (-1);  /* Magic; means not known yet. */
 
-            /* Add to the linked list. */
-            *mtail = me;
-            mtail = &me->me_next;
+            mount_list = g_slist_prepend (mount_list, me);
         }
         endmnttbl ();
     }
@@ -1164,15 +1162,14 @@ read_file_system_list (int need_fs_type)
                 me = g_malloc (sizeof (*me));
                 me->me_devname = g_strdup (mnt.mnt_special);
                 me->me_mountdir = g_strdup (mnt.mnt_mountp);
+                me->me_mntroot = NULL;
                 me->me_type = g_strdup (mnt.mnt_fstype);
                 me->me_type_malloced = 1;
                 me->me_dummy = MNT_IGNORE (&mnt) != 0;
                 me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
                 me->me_dev = dev_from_mount_options (mnt.mnt_mntopts);
 
-                /* Add to the linked list. */
-                *mtail = me;
-                mtail = &me->me_next;
+                mount_list = g_slist_prepend (mount_list, me);
             }
 
             ret = fclose (fp) == EOF ? errno : 0 < ret ? 0 : -1;
@@ -1192,21 +1189,24 @@ read_file_system_list (int need_fs_type)
 #ifdef MOUNTED_VMOUNT           /* AIX.  */
     {
         int bufsize;
-        char *entries, *thisent;
+        void *entries;
+        char *thisent;
         struct vmount *vmp;
         int n_entries;
         int i;
 
         /* Ask how many bytes to allocate for the mounted file system info.  */
-        if (mntctl (MCTL_QUERY, sizeof (bufsize), (struct vmount *) &bufsize) != 0)
+        entries = &bufsize;
+        if (mntctl (MCTL_QUERY, sizeof (bufsize), entries) != 0)
             return NULL;
         entries = g_malloc (bufsize);
 
         /* Get the list of mounted file systems.  */
-        n_entries = mntctl (MCTL_QUERY, bufsize, (struct vmount *) entries);
+        n_entries = mntctl (MCTL_QUERY, bufsize, entries);
         if (n_entries < 0)
         {
             int saved_errno = errno;
+
             g_free (entries);
             errno = saved_errno;
             return NULL;
@@ -1234,6 +1234,7 @@ read_file_system_list (int need_fs_type)
                 me->me_devname = g_strdup (thisent + vmp->vmt_data[VMT_OBJECT].vmt_off);
             }
             me->me_mountdir = g_strdup (thisent + vmp->vmt_data[VMT_STUB].vmt_off);
+            me->me_mntroot = NULL;
             me->me_type = g_strdup (fstype_to_string (vmp->vmt_gfstype));
             me->me_type_malloced = 1;
             options = thisent + vmp->vmt_data[VMT_ARGS].vmt_off;
@@ -1244,14 +1245,11 @@ read_file_system_list (int need_fs_type)
                                 || ignore[sizeof ("ignore") - 1] == '\0'));
             me->me_dev = (dev_t) (-1);  /* vmt_fsid might be the info we want.  */
 
-            /* Add to the linked list. */
-            *mtail = me;
-            mtail = &me->me_next;
+            mount_list = g_slist_prepend (mount_list, me);
         }
         g_free (entries);
     }
 #endif /* MOUNTED_VMOUNT. */
-
 
 #ifdef MOUNTED_INTERIX_STATVFS
     {
@@ -1278,15 +1276,14 @@ read_file_system_list (int need_fs_type)
                 me = g_malloc (sizeof *me);
                 me->me_devname = g_strdup (dev.f_mntfromname);
                 me->me_mountdir = g_strdup (dev.f_mntonname);
+                me->me_mntroot = NULL;
                 me->me_type = g_strdup (dev.f_fstypename);
                 me->me_type_malloced = 1;
                 me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
                 me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
                 me->me_dev = (dev_t) (-1);      /* Magic; means not known yet. */
 
-                /* Add to the linked list. */
-                *mtail = me;
-                mtail = &me->me_next;
+                mount_list = g_slist_prepend (mount_list, me);
             }
         }
         closedir (dirp);
@@ -1294,31 +1291,19 @@ read_file_system_list (int need_fs_type)
 #endif /* MOUNTED_INTERIX_STATVFS */
 
     (void) need_fs_type;        /* avoid argument-unused warning */
-    *mtail = NULL;
-    return mount_list;
 
+    return g_slist_reverse (mount_list);
 
   free_then_fail:
     {
         int saved_errno = errno;
-        *mtail = NULL;
 
-        while (mount_list)
-        {
-            me = mount_list->me_next;
-            g_free (mount_list->me_devname);
-            g_free (mount_list->me_mountdir);
-            if (mount_list->me_type_malloced)
-                g_free (mount_list->me_type);
-            g_free (mount_list);
-            mount_list = me;
-        }
+        g_slist_free_full (mount_list, (GDestroyNotify) free_mount_entry);
 
         errno = saved_errno;
         return NULL;
     }
 }
-
 #endif /* HAVE_INFOMOUNT_LIST */
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1332,24 +1317,30 @@ read_file_system_list (int need_fs_type)
  ** this hack.
  */
 
-static struct mount_entry *
+static GSList *
 read_file_system_list (int need_fs_type, int all_fs)
 {
     struct _disk_entry de;
     struct statfs fs;
     int i, fd;
     char *tp, dev[_POSIX_NAME_MAX], dir[_POSIX_PATH_MAX];
+    struct mount_entry *me = NULL;
+    static GSList *list = NULL;
 
-    static struct mount_entry *me = NULL;
-
-    if (me)
+    if (list != NULL)
     {
+        me = (struct mount_entry *) list->data;
+
         g_free (me->me_devname);
         g_free (me->me_mountdir);
+        g_free (me->me_mntroot);
         g_free (me->me_type);
     }
     else
+    {
         me = (struct mount_entry *) g_malloc (sizeof (struct mount_entry));
+        list = g_slist_prepend (list, me);
+    }
 
     if (!getcwd (dir, _POSIX_PATH_MAX))
         return (NULL);
@@ -1400,6 +1391,7 @@ read_file_system_list (int need_fs_type, int all_fs)
 
     me->me_devname = g_strdup (dev);
     me->me_mountdir = g_strdup (dir);
+    me->me_mntroot = NULL;
     me->me_type = g_strdup (tp);
     me->me_dev = de.disk_type;
 
@@ -1411,7 +1403,7 @@ read_file_system_list (int need_fs_type, int all_fs)
     fprintf (stderr, "fsys_get_mount_pt():\n\tmount point='%s'\n", dir);
 #endif /* DEBUG */
 
-    return (me);
+    return (list);
 }
 #endif /* HAVE_INFOMOUNT_QNX */
 
@@ -1690,15 +1682,7 @@ void
 free_my_statfs (void)
 {
 #ifdef HAVE_INFOMOUNT_LIST
-    while (mc_mount_list != NULL)
-    {
-        struct mount_entry *next;
-
-        next = mc_mount_list->me_next;
-        free_mount_entry (mc_mount_list);
-        mc_mount_list = next;
-    }
-
+    g_slist_free_full (mc_mount_list, (GDestroyNotify) free_mount_entry);
     mc_mount_list = NULL;
 #endif /* HAVE_INFOMOUNT_LIST */
 }
@@ -1722,24 +1706,25 @@ my_statfs (struct my_statfs *myfs_stats, const char *path)
 #ifdef HAVE_INFOMOUNT_LIST
     size_t len = 0;
     struct mount_entry *entry = NULL;
-    struct mount_entry *temp = mc_mount_list;
+    GSList *temp;
     struct fs_usage fs_use;
 
-    while (temp)
+    for (temp = mc_mount_list; temp != NULL; temp = g_slist_next (temp))
     {
+        struct mount_entry *me;
         size_t i;
 
-        i = strlen (temp->me_mountdir);
-        if (i > len && (strncmp (path, temp->me_mountdir, i) == 0))
-            if (entry == NULL || IS_PATH_SEP (path[i]) || path[i] == '\0')
-            {
-                len = i;
-                entry = temp;
-            }
-        temp = temp->me_next;
+        me = (struct mount_entry *) temp->data;
+        i = strlen (me->me_mountdir);
+        if (i > len && (strncmp (path, me->me_mountdir, i) == 0) &&
+            (entry == NULL || IS_PATH_SEP (path[i]) || path[i] == '\0'))
+        {
+            len = i;
+            entry = me;
+        }
     }
 
-    if (entry)
+    if (entry != NULL)
     {
         memset (&fs_use, 0, sizeof (struct fs_usage));
         get_fs_usage (entry->me_mountdir, NULL, &fs_use);
@@ -1747,6 +1732,7 @@ my_statfs (struct my_statfs *myfs_stats, const char *path)
         myfs_stats->type = entry->me_dev;
         myfs_stats->typename = entry->me_type;
         myfs_stats->mpoint = entry->me_mountdir;
+        myfs_stats->mroot = entry->me_mntroot;
         myfs_stats->device = entry->me_devname;
         myfs_stats->avail =
             ((uintmax_t) (getuid ()? fs_use.fsu_bavail : fs_use.fsu_bfree) *
@@ -1776,6 +1762,7 @@ my_statfs (struct my_statfs *myfs_stats, const char *path)
         myfs_stats->type = entry->me_dev;
         myfs_stats->typename = entry->me_type;
         myfs_stats->mpoint = entry->me_mountdir;
+        myfs_stats->mroot = entry->me_mntroot;
         myfs_stats->device = entry->me_devname;
 
         myfs_stats->avail = ((uintmax_t) fs_use.fsu_bfree * fs_use.fsu_blocksize) >> 10;

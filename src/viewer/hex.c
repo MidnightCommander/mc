@@ -81,7 +81,7 @@ static const char hex_char[] = "0123456789ABCDEF";
  */
 
 static mark_t
-mcview_hex_calculate_boldflag (mcview_t * view, off_t from, struct hexedit_change_node *curr,
+mcview_hex_calculate_boldflag (WView * view, off_t from, struct hexedit_change_node *curr,
                                gboolean force_changed)
 {
     return (from == view->hex_cursor) ? MARK_CURSOR
@@ -94,7 +94,7 @@ mcview_hex_calculate_boldflag (mcview_t * view, off_t from, struct hexedit_chang
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_display_hex (mcview_t * view)
+mcview_display_hex (WView * view)
 {
     const screen_dimen top = view->data_area.top;
     const screen_dimen left = view->data_area.left;
@@ -376,7 +376,7 @@ mcview_display_hex (mcview_t * view)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mcview_hexedit_save_changes (mcview_t * view)
+mcview_hexedit_save_changes (WView * view)
 {
     int answer = 0;
 
@@ -439,7 +439,7 @@ mcview_hexedit_save_changes (mcview_t * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_toggle_hexedit_mode (mcview_t * view)
+mcview_toggle_hexedit_mode (WView * view)
 {
     view->hexedit_mode = !view->hexedit_mode;
     view->dpy_bbar_dirty = TRUE;
@@ -449,7 +449,7 @@ mcview_toggle_hexedit_mode (mcview_t * view)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-mcview_hexedit_free_change_list (mcview_t * view)
+mcview_hexedit_free_change_list (WView * view)
 {
     struct hexedit_change_node *curr, *next;
 

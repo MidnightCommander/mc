@@ -23,6 +23,7 @@ struct my_statfs
     int type;
     char *typename;
     const char *mpoint;
+    const char *mroot;
     const char *device;
     uintmax_t avail;            /* in kB */
     uintmax_t total;            /* in kB */

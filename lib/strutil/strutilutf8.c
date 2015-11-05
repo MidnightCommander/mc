@@ -34,7 +34,35 @@
 
 /* using function for utf-8 from glib */
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
+/*** file scope type declarations ****************************************************************/
+
+struct utf8_tool
+{
+    char *actual;
+    size_t remain;
+    const char *cheked;
+    int ident;
+    gboolean compose;
+};
+
+struct term_form
+{
+    char text[BUF_MEDIUM * 6];
+    size_t width;
+    gboolean compose;
+};
+
+/*** file scope variables ************************************************************************/
+
 static const char replch[] = "\xEF\xBF\xBD";
+
+/* --------------------------------------------------------------------------------------------- */
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static gboolean
 str_unichar_iscombiningmark (gunichar uni)
@@ -46,17 +74,23 @@ str_unichar_iscombiningmark (gunichar uni)
         || (type == G_UNICODE_ENCLOSING_MARK) || (type == G_UNICODE_NON_SPACING_MARK);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 str_utf8_insert_replace_char (GString * buffer)
 {
     g_string_append (buffer, replch);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_utf8_is_valid_string (const char *text)
 {
     return g_utf8_validate (text, -1, NULL);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_utf8_is_valid_char (const char *ch, size_t size)
@@ -72,17 +106,23 @@ str_utf8_is_valid_char (const char *ch, size_t size)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 str_utf8_cnext_char (const char **text)
 {
     (*text) = g_utf8_next_char (*text);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 str_utf8_cprev_char (const char **text)
 {
     (*text) = g_utf8_prev_char (*text);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 str_utf8_cnext_char_safe (const char **text)
@@ -92,6 +132,8 @@ str_utf8_cnext_char_safe (const char **text)
     else
         (*text)++;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 str_utf8_cprev_char_safe (const char **text)
@@ -106,6 +148,8 @@ str_utf8_cprev_char_safe (const char **text)
     else
         (*text)--;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 str_utf8_fix_string (char *text)
@@ -125,6 +169,8 @@ str_utf8_fix_string (char *text)
     }
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_utf8_isspace (const char *text)
 {
@@ -133,6 +179,8 @@ str_utf8_isspace (const char *text)
     uni = g_utf8_get_char_validated (text, -1);
     return g_unichar_isspace (uni);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_utf8_ispunct (const char *text)
@@ -143,6 +191,8 @@ str_utf8_ispunct (const char *text)
     return g_unichar_ispunct (uni);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_utf8_isalnum (const char *text)
 {
@@ -151,6 +201,8 @@ str_utf8_isalnum (const char *text)
     uni = g_utf8_get_char_validated (text, -1);
     return g_unichar_isalnum (uni);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_utf8_isdigit (const char *text)
@@ -161,6 +213,8 @@ str_utf8_isdigit (const char *text)
     return g_unichar_isdigit (uni);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_utf8_isprint (const char *ch)
 {
@@ -170,6 +224,8 @@ str_utf8_isprint (const char *ch)
     return g_unichar_isprint (uni);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static gboolean
 str_utf8_iscombiningmark (const char *ch)
 {
@@ -178,6 +234,8 @@ str_utf8_iscombiningmark (const char *ch)
     uni = g_utf8_get_char_validated (ch, -1);
     return str_unichar_iscombiningmark (uni);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_utf8_cnext_noncomb_char (const char **text)
@@ -195,6 +253,8 @@ str_utf8_cnext_noncomb_char (const char **text)
     return count;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_utf8_cprev_noncomb_char (const char **text, const char *begin)
 {
@@ -210,6 +270,8 @@ str_utf8_cprev_noncomb_char (const char **text, const char *begin)
 
     return count;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_utf8_toupper (const char *text, char **out, size_t * remain)
@@ -232,6 +294,8 @@ str_utf8_toupper (const char *text, char **out, size_t * remain)
     return 1;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_utf8_tolower (const char *text, char **out, size_t * remain)
 {
@@ -252,6 +316,8 @@ str_utf8_tolower (const char *text, char **out, size_t * remain)
     (*remain) -= left;
     return 1;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_utf8_length (const char *text)
@@ -277,6 +343,8 @@ str_utf8_length (const char *text)
 
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_utf8_length2 (const char *text, int size)
@@ -306,6 +374,8 @@ str_utf8_length2 (const char *text, int size)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_utf8_length_noncomb (const char *text)
 {
@@ -321,16 +391,22 @@ str_utf8_length_noncomb (const char *text)
     return result;
 }
 
-/*
-   static void
-   str_utf8_questmark_sustb (char **string, size_t * left, GString * buffer)
-   {
-   char *next = g_utf8_next_char (*string);
-   (*left) -= next - (*string);
-   (*string) = next;
-   g_string_append_c (buffer, '?');
-   }
- */
+/* --------------------------------------------------------------------------------------------- */
+
+#if 0
+static void
+str_utf8_questmark_sustb (char **string, size_t * left, GString * buffer)
+{
+    char *next;
+
+    next = g_utf8_next_char (*string);
+    (*left) -= next - (*string);
+    (*string) = next;
+    g_string_append_c (buffer, '?');
+}
+#endif
+
+/* --------------------------------------------------------------------------------------------- */
 
 static gchar *
 str_utf8_conv_gerror_message (GError * mcerror, const char *def_msg)
@@ -340,6 +416,8 @@ str_utf8_conv_gerror_message (GError * mcerror, const char *def_msg)
 
     return g_strdup (def_msg != NULL ? def_msg : "");
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static estr_t
 str_utf8_vfs_convert_to (GIConv coder, const char *string, int size, GString * buffer)
@@ -354,15 +432,10 @@ str_utf8_vfs_convert_to (GIConv coder, const char *string, int size, GString * b
     return result;
 }
 
-struct term_form
-{
-    char text[BUF_MEDIUM * 6];
-    size_t width;
-    gboolean compose;
-};
+/* --------------------------------------------------------------------------------------------- */
+/* utility function, that makes string valid in utf8 and all characters printable
+ * return width of string too */
 
-/* utiliti function, that make string valid in utf8 and all characters printable
- * return width of string too*/
 static const struct term_form *
 str_utf8_make_make_term_form (const char *text, size_t length)
 {
@@ -434,6 +507,8 @@ str_utf8_make_make_term_form (const char *text, size_t length)
     return &result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static const char *
 str_utf8_term_form (const char *text)
 {
@@ -455,16 +530,9 @@ str_utf8_term_form (const char *text)
     return result;
 }
 
-struct utf8_tool
-{
-    char *actual;
-    size_t remain;
-    const char *cheked;
-    int ident;
-    gboolean compose;
-};
+/* --------------------------------------------------------------------------------------------- */
+/* utility function, that copies all characters from checked to actual */
 
-/* utiliti function, that copy all characters from cheked to actual */
 static gboolean
 utf8_tool_copy_chars_to_end (struct utf8_tool *tool)
 {
@@ -489,8 +557,10 @@ utf8_tool_copy_chars_to_end (struct utf8_tool *tool)
     return TRUE;
 }
 
-/* utiliti function, that copy characters from cheked to actual until ident is
+/* --------------------------------------------------------------------------------------------- */
+/* utility function, that copies characters from checked to actual until ident is
  * smaller than to_ident */
+
 static gboolean
 utf8_tool_copy_chars_to (struct utf8_tool *tool, int to_ident)
 {
@@ -527,7 +597,9 @@ utf8_tool_copy_chars_to (struct utf8_tool *tool, int to_ident)
     return TRUE;
 }
 
-/* utiliti function, add count spaces to actual */
+/* --------------------------------------------------------------------------------------------- */
+/* utility function, adds count spaces to actual */
+
 static int
 utf8_tool_insert_space (struct utf8_tool *tool, int count)
 {
@@ -542,7 +614,9 @@ utf8_tool_insert_space (struct utf8_tool *tool, int count)
     return 1;
 }
 
-/* utiliti function, add one characters to actual */
+/* --------------------------------------------------------------------------------------------- */
+/* utility function, adds one characters to actual */
+
 static int
 utf8_tool_insert_char (struct utf8_tool *tool, char ch)
 {
@@ -555,8 +629,10 @@ utf8_tool_insert_char (struct utf8_tool *tool, char ch)
     return 1;
 }
 
-/* utiliti function, thah skip characters from cheked until ident is greater or
+/* --------------------------------------------------------------------------------------------- */
+/* utility function, thah skips characters from checked until ident is greater or
  * equal to to_ident */
+
 static gboolean
 utf8_tool_skip_chars_to (struct utf8_tool *tool, int to_ident)
 {
@@ -584,6 +660,8 @@ utf8_tool_skip_chars_to (struct utf8_tool *tool, int to_ident)
     return TRUE;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 utf8_tool_compose (char *buffer, size_t size)
 {
@@ -593,6 +671,8 @@ utf8_tool_compose (char *buffer, size_t size)
     g_strlcpy (buffer, composed, size);
     g_free (composed);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static const char *
 str_utf8_fit_to_term (const char *text, int width, align_crt_t just_mode)
@@ -665,6 +745,8 @@ str_utf8_fit_to_term (const char *text, int width, align_crt_t just_mode)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static const char *
 str_utf8_term_trim (const char *text, int width)
 {
@@ -710,6 +792,8 @@ str_utf8_term_trim (const char *text, int width)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_utf8_term_width2 (const char *text, size_t length)
 {
@@ -719,11 +803,15 @@ str_utf8_term_width2 (const char *text, size_t length)
     return result->width;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_utf8_term_width1 (const char *text)
 {
     return str_utf8_term_width2 (text, (size_t) (-1));
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_utf8_term_char_width (const char *text)
@@ -733,6 +821,8 @@ str_utf8_term_char_width (const char *text)
     uni = g_utf8_get_char_validated (text, -1);
     return (str_unichar_iscombiningmark (uni)) ? 0 : ((g_unichar_iswide (uni)) ? 2 : 1);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static const char *
 str_utf8_term_substring (const char *text, int start, int width)
@@ -762,6 +852,8 @@ str_utf8_term_substring (const char *text, int start, int width)
         utf8_tool_compose (result, sizeof (result));
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static const char *
 str_utf8_trunc (const char *text, int width)
@@ -796,6 +888,8 @@ str_utf8_trunc (const char *text, int width)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_utf8_offset_to_pos (const char *text, size_t length)
 {
@@ -813,6 +907,8 @@ str_utf8_offset_to_pos (const char *text, size_t length)
         return result;
     }
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_utf8_column_to_pos (const char *text, size_t pos)
@@ -857,6 +953,8 @@ str_utf8_column_to_pos (const char *text, size_t pos)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static char *
 str_utf8_create_search_needle (const char *needle, int case_sen)
 {
@@ -875,12 +973,16 @@ str_utf8_create_search_needle (const char *needle, int case_sen)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 str_utf8_release_search_needle (char *needle, int case_sen)
 {
     (void) case_sen;
     g_free (needle);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static const char *
 str_utf8_search_first (const char *text, const char *search, int case_sen)
@@ -924,6 +1026,8 @@ str_utf8_search_first (const char *text, const char *search, int case_sen)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static const char *
 str_utf8_search_last (const char *text, const char *search, int case_sen)
 {
@@ -964,6 +1068,8 @@ str_utf8_search_last (const char *text, const char *search, int case_sen)
 
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static char *
 str_utf8_normalize (const char *text)
@@ -1007,6 +1113,8 @@ str_utf8_normalize (const char *text)
 
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static char *
 str_utf8_casefold_normalize (const char *text)
@@ -1057,6 +1165,8 @@ str_utf8_casefold_normalize (const char *text)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_utf8_compare (const char *t1, const char *t2)
 {
@@ -1073,6 +1183,8 @@ str_utf8_compare (const char *t1, const char *t2)
 
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_utf8_ncompare (const char *t1, const char *t2)
@@ -1094,6 +1206,8 @@ str_utf8_ncompare (const char *t1, const char *t2)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_utf8_casecmp (const char *t1, const char *t2)
 {
@@ -1110,6 +1224,8 @@ str_utf8_casecmp (const char *t1, const char *t2)
 
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_utf8_ncasecmp (const char *t1, const char *t2)
@@ -1130,6 +1246,8 @@ str_utf8_ncasecmp (const char *t1, const char *t2)
 
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_utf8_prefix (const char *text, const char *prefix)
@@ -1166,6 +1284,8 @@ str_utf8_prefix (const char *text, const char *prefix)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_utf8_caseprefix (const char *text, const char *prefix)
 {
@@ -1200,6 +1320,8 @@ str_utf8_caseprefix (const char *text, const char *prefix)
 
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static char *
 str_utf8_create_key_gen (const char *text, int case_sen,
@@ -1273,11 +1395,15 @@ str_utf8_create_key_gen (const char *text, int case_sen,
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static char *
 str_utf8_create_key (const char *text, int case_sen)
 {
     return str_utf8_create_key_gen (text, case_sen, g_utf8_collate_key);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 #ifdef MC__USE_STR_UTF8_CREATE_KEY_FOR_FILENAME
 static char *
@@ -1287,6 +1413,8 @@ str_utf8_create_key_for_filename (const char *text, int case_sen)
 }
 #endif
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_utf8_key_collate (const char *t1, const char *t2, int case_sen)
 {
@@ -1294,12 +1422,18 @@ str_utf8_key_collate (const char *t1, const char *t2, int case_sen)
     return strcmp (t1, t2);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 str_utf8_release_key (char *key, int case_sen)
 {
     (void) case_sen;
     g_free (key);
 }
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 struct str_class
 str_utf8_init (void)
@@ -1362,3 +1496,5 @@ str_utf8_init (void)
 
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */

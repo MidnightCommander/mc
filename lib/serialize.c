@@ -52,6 +52,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 static void
+G_GNUC_PRINTF (2, 3)
 prepend_error_message (GError ** error, const char *format, ...)
 {
     char *prepend_str;
@@ -266,7 +267,7 @@ mc_serialize_config (const mc_config_t * data, GError ** error)
 
 #define FUNC_NAME "mc_deserialize_config()"
 #define prepend_error_and_exit() { \
-    prepend_error_message (error, FUNC_NAME " at %lu", current_position + 1); \
+    prepend_error_message (error, FUNC_NAME " at %zd", current_position + 1); \
                 mc_config_deinit (ret_data); \
                 return NULL; \
 }

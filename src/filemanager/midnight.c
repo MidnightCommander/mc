@@ -529,41 +529,40 @@ static gboolean
 print_vfs_message (const gchar * event_group_name, const gchar * event_name,
                    gpointer init_data, gpointer data)
 {
-    char str[128];
     ev_vfs_print_message_t *event_data = (ev_vfs_print_message_t *) data;
 
     (void) event_group_name;
     (void) event_name;
     (void) init_data;
 
-    g_vsnprintf (str, sizeof (str), event_data->msg, event_data->ap);
-
     if (mc_global.midnight_shutdown)
-        return TRUE;
+        goto ret;
 
     if (!mc_global.message_visible || the_hint == NULL || WIDGET (the_hint)->owner == NULL)
     {
         int col, row;
 
         if (!nice_rotating_dash || (ok_to_refresh <= 0))
-            return TRUE;
+            goto ret;
 
         /* Preserve current cursor position */
         tty_getyx (&row, &col);
 
         tty_gotoyx (0, 0);
         tty_setcolor (NORMAL_COLOR);
-        tty_print_string (str_fit_to_term (str, COLS - 1, J_LEFT));
+        tty_print_string (str_fit_to_term (event_data->msg, COLS - 1, J_LEFT));
 
         /* Restore cursor position */
         tty_gotoyx (row, col);
         mc_refresh ();
-        return TRUE;
+        goto ret;
     }
 
     if (mc_global.message_visible)
-        set_hintbar (str);
+        set_hintbar (event_data->msg);
 
+  ret:
+    MC_PTR_FREE (event_data->msg);
     return TRUE;
 }
 
@@ -914,13 +913,12 @@ done_mc (void)
      * We sync the profiles since the hotlist may have changed, while
      * we only change the setup data if we have the auto save feature set
      */
-    char *curr_dir;
+    const char *curr_dir;
 
     save_setup (auto_save_setup, panels_options.auto_save_setup);
 
     curr_dir = vfs_get_current_dir ();
     vfs_stamp_path (curr_dir);
-    g_free (curr_dir);
 
     if ((current_panel != NULL) && (get_current_type () == view_listing))
         vfs_stamp_path (vfs_path_as_str (current_panel->cwd_vpath));

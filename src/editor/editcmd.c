@@ -1979,11 +1979,14 @@ edit_load_macro_cmd (WEdit * edit)
 
     (void) edit;
 
+    if (macros_list == NULL || macros_list->len != 0)
+        return FALSE;
+
     macros_fname = mc_config_get_full_path (MC_MACRO_FILE);
     macros_config = mc_config_init (macros_fname, TRUE);
     g_free (macros_fname);
 
-    if (macros_config == NULL || macros_list == NULL || macros_list->len != 0)
+    if (macros_config == NULL)
         return FALSE;
 
     keys = mc_config_get_keys (macros_config, section_name, NULL);
@@ -3029,38 +3032,35 @@ edit_paste_from_X_buf_cmd (WEdit * edit)
 void
 edit_goto_cmd (WEdit * edit)
 {
+    static gboolean first_run = TRUE;
+
     char *f;
-    static long line = 0;       /* line as typed, saved as default */
     long l;
     char *error;
-    char s[32];
 
-    g_snprintf (s, sizeof (s), "%ld", line);
-    f = input_dialog (_("Goto line"), _("Enter line:"), MC_HISTORY_EDIT_GOTO_LINE, line ? s : "",
-                      INPUT_COMPLETE_NONE);
-    if (!f)
-        return;
-
-    if (!*f)
+    f = input_dialog (_("Goto line"), _("Enter line:"), MC_HISTORY_EDIT_GOTO_LINE,
+                      first_run ? NULL : INPUT_LAST_TEXT, INPUT_COMPLETE_NONE);
+    if (f == NULL || *f == '\0')
     {
         g_free (f);
         return;
     }
 
     l = strtol (f, &error, 0);
-    if (*error)
+    if (*error != '\0')
     {
         g_free (f);
         return;
     }
 
-    line = l;
     if (l < 0)
         l = edit->buffer.lines + l + 2;
     edit_move_display (edit, l - WIDGET (edit)->lines / 2 - 1);
     edit_move_to_line (edit, l - 1);
     edit->force |= REDRAW_COMPLETELY;
     g_free (f);
+
+    first_run = FALSE;
 }
 
 
@@ -3141,7 +3141,6 @@ edit_insert_file_cmd (WEdit * edit)
 int
 edit_sort_cmd (WEdit * edit)
 {
-    static char *old = 0;
     char *exp, *tmp, *tmp_edit_block_name, *tmp_edit_temp_name;
     off_t start_mark, end_mark;
     int e;
@@ -3158,12 +3157,11 @@ edit_sort_cmd (WEdit * edit)
 
     exp = input_dialog (_("Run sort"),
                         _("Enter sort options (see manpage) separated by whitespace:"),
-                        MC_HISTORY_EDIT_SORT, (old != NULL) ? old : "", INPUT_COMPLETE_NONE);
+                        MC_HISTORY_EDIT_SORT, INPUT_LAST_TEXT, INPUT_COMPLETE_NONE);
 
-    if (!exp)
+    if (exp == NULL)
         return 1;
-    g_free (old);
-    old = exp;
+
     tmp_edit_block_name = mc_config_get_full_path (EDIT_BLOCK_FILE);
     tmp_edit_temp_name = mc_config_get_full_path (EDIT_TEMP_FILE);
     tmp =
@@ -3174,15 +3172,14 @@ edit_sort_cmd (WEdit * edit)
 
     e = system (tmp);
     g_free (tmp);
-    if (e)
+    if (e != 0)
     {
         if (e == -1 || e == 127)
-        {
             edit_error_dialog (_("Sort"), get_sys_error (_("Cannot execute sort command")));
-        }
         else
         {
             char q[8];
+
             sprintf (q, "%d ", e);
             tmp = g_strdup_printf (_("Sort returned non-zero: %s"), q);
             edit_error_dialog (_("Sort"), tmp);
@@ -3220,7 +3217,7 @@ edit_ext_cmd (WEdit * edit)
 
     exp =
         input_dialog (_("Paste output of external command"),
-                      _("Enter shell command(s):"), MC_HISTORY_EDIT_PASTE_EXTCMD, NULL,
+                      _("Enter shell command(s):"), MC_HISTORY_EDIT_PASTE_EXTCMD, INPUT_LAST_TEXT,
                       INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_VARIABLES | INPUT_COMPLETE_USERNAMES
                       | INPUT_COMPLETE_HOSTNAMES | INPUT_COMPLETE_CD | INPUT_COMPLETE_COMMANDS |
                       INPUT_COMPLETE_SHELL_ESC);
@@ -3277,27 +3274,20 @@ edit_block_process_cmd (WEdit * edit, int macro_number)
 void
 edit_mail_dialog (WEdit * edit)
 {
-    char *tmail_to = NULL;
-    char *tmail_subject = NULL;
-    char *tmail_cc = NULL;
-
-    static char *mail_cc_last = 0;
-    static char *mail_subject_last = 0;
-    static char *mail_to_last = 0;
-
+    char *mail_to, *mail_subject, *mail_cc;
 
     quick_widget_t quick_widgets[] = {
         /* *INDENT-OFF* */
         QUICK_LABEL (N_("mail -s <subject> -c <cc> <to>"), NULL),
         QUICK_LABELED_INPUT (N_("To"), input_label_above,
-                             mail_to_last != NULL ? mail_to_last : "", "mail-dlg-input-3",
-                             &tmail_to, NULL, FALSE, FALSE, INPUT_COMPLETE_USERNAMES),
+                             INPUT_LAST_TEXT, "mail-dlg-input-3",
+                             &mail_to, NULL, FALSE, FALSE, INPUT_COMPLETE_USERNAMES),
         QUICK_LABELED_INPUT (N_("Subject"), input_label_above,
-                              mail_subject_last != NULL ? mail_subject_last : "", "mail-dlg-input-2",
-                              &tmail_subject, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
+                              INPUT_LAST_TEXT, "mail-dlg-input-2",
+                              &mail_subject, NULL, FALSE, FALSE, INPUT_COMPLETE_NONE),
         QUICK_LABELED_INPUT (N_("Copies to"), input_label_above,
-                             mail_cc_last != NULL ? mail_cc_last  : "", "mail-dlg-input",
-                             &tmail_cc, NULL, FALSE, FALSE, INPUT_COMPLETE_USERNAMES),
+                             INPUT_LAST_TEXT, "mail-dlg-input",
+                             &mail_cc, NULL, FALSE, FALSE, INPUT_COMPLETE_USERNAMES),
         QUICK_BUTTONS_OK_CANCEL,
         QUICK_END
         /* *INDENT-ON* */
@@ -3311,13 +3301,10 @@ edit_mail_dialog (WEdit * edit)
 
     if (quick_dialog (&qdlg) != B_CANCEL)
     {
-        g_free (mail_cc_last);
-        g_free (mail_subject_last);
-        g_free (mail_to_last);
-        mail_cc_last = tmail_cc;
-        mail_subject_last = tmail_subject;
-        mail_to_last = tmail_to;
-        pipe_mail (&edit->buffer, mail_to_last, mail_subject_last, mail_cc_last);
+        pipe_mail (&edit->buffer, mail_to, mail_subject, mail_cc);
+        g_free (mail_to);
+        g_free (mail_subject);
+        g_free (mail_cc);
     }
 }
 
@@ -3595,6 +3582,7 @@ edit_suggest_current_word (WEdit * edit)
     {
         GArray *suggest;
         unsigned int res;
+        guint i;
 
         suggest = g_array_new (TRUE, FALSE, sizeof (char *));
 
@@ -3614,7 +3602,6 @@ edit_suggest_current_word (WEdit * edit)
 
             if (retval == B_ENTER && new_word != NULL)
             {
-                guint i;
                 char *cp_word;
 
 #ifdef HAVE_CHARSET
@@ -3639,6 +3626,14 @@ edit_suggest_current_word (WEdit * edit)
                 aspell_add_to_dict (match_word->str, (int) word_len);
         }
 
+
+        for (i = 0; i < suggest->len; i++)
+        {
+            char *cur_sugg_word;
+
+            cur_sugg_word = g_array_index (suggest, char *, i);
+            g_free (cur_sugg_word);
+        }
         g_array_free (suggest, TRUE);
         edit->found_start = 0;
         edit->found_len = 0;

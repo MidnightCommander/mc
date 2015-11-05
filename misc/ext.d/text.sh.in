@@ -135,7 +135,7 @@ view)
     do_view_action "${filetype}"
     ;;
 open)
-    "${MC_XDG_OPEN}" "${MC_EXT_FILENAME}" 2>/dev/null || \
+    ("${MC_XDG_OPEN}" "${MC_EXT_FILENAME}" >/dev/null 2>&1 &) || \
         do_open_action "${filetype}" "${pager}"
     ;;
 *)

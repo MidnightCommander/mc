@@ -260,7 +260,7 @@ gboolean
 dir_list_grow (dir_list * list, int delta)
 {
     int size;
-    gboolean clear = FALSE;
+    gboolean clear_flag = FALSE;
 
     if (list == NULL)
         return FALSE;
@@ -272,7 +272,7 @@ dir_list_grow (dir_list * list, int delta)
     if (size <= 0)
     {
         size = DIR_LIST_MIN_SIZE;
-        clear = TRUE;
+        clear_flag = TRUE;
     }
 
     if (size != list->size)
@@ -287,7 +287,7 @@ dir_list_grow (dir_list * list, int delta)
         list->size = size;
     }
 
-    list->len = clear ? 0 : min (list->len, size);
+    list->len = clear_flag ? 0 : min (list->len, size);
 
     return TRUE;
 }

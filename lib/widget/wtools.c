@@ -597,7 +597,7 @@ status_msg_init (status_msg_t * sm, const char *title, double delay, status_msg_
 
     if (mc_time_elapsed (&start, sm->delay))
     {
-        /* We will manage the dialog without any help, that's why we have to call init_dlg */
+        /* We will manage the dialog without any help, that's why we have to call dlg_init */
         dlg_init (sm->dlg);
     }
 }

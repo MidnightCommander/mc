@@ -69,7 +69,7 @@
  * fin.
  *
  *
- * This is called a "gab buffer".
+ * This is called a "gap buffer".
  * See also:
  * http://en.wikipedia.org/wiki/Gap_buffer
  * http://stackoverflow.com/questions/4199694/data-structure-for-text-editor

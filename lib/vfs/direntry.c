@@ -696,22 +696,13 @@ static void
 vfs_s_print_stats (const char *fs_name, const char *action,
                    const char *file_name, off_t have, off_t need)
 {
-    static const char *i18n_percent_transf_format = NULL;
-    static const char *i18n_transf_format = NULL;
-
-    if (i18n_percent_transf_format == NULL)
-    {
-        i18n_percent_transf_format = "%s: %s: %s %3d%% (%" PRIuMAX " %s";
-        i18n_transf_format = "%s: %s: %s %" PRIuMAX " %s";
-    }
-
     if (need)
-        vfs_print_message (i18n_percent_transf_format, fs_name, action,
+        vfs_print_message (_("%s: %s: %s %3d%% %" PRIuMAX " %s"), fs_name, action,
                            file_name, (int) ((double) have * 100 / need), (uintmax_t) have,
                            _("bytes transferred"));
     else
-        vfs_print_message (i18n_transf_format, fs_name, action, file_name, (uintmax_t) have,
-                           _("bytes transferred"));
+        vfs_print_message (_("%s: %s: %s %" PRIuMAX " %s"), fs_name, action, file_name,
+                           (uintmax_t) have, _("bytes transferred"));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1298,7 +1289,7 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
     {
         if (VFSDATA (path_element)->linear_start)
         {
-            vfs_print_message (_("Starting linear transfer..."));
+            vfs_print_message ("%s", _("Starting linear transfer..."));
             fh->linear = LS_LINEAR_PREOPEN;
         }
     }

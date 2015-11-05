@@ -54,7 +54,7 @@ gboolean mc_args__nomouse = FALSE;
 /* Force colors, only used by Slang */
 gboolean mc_args__force_colors = FALSE;
 
-/* Don't load keymap form file and use default one */
+/* Don't load keymap from file and use default one */
 gboolean mc_args__nokeymap = FALSE;
 
 char *mc_args__last_wd_file = NULL;

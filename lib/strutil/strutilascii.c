@@ -32,10 +32,22 @@
 #include "lib/strutil.h"
 
 /* using g_ascii function from glib
- * on terminal are showed only ascii characters (lower than 0x80) 
+ * on terminal are showed only ascii characters (lower than 0x80)
  */
 
+/*** global variables ****************************************************************************/
+
+/*** file scope macro definitions ****************************************************************/
+
+/*** file scope type declarations ****************************************************************/
+
+/*** file scope variables ************************************************************************/
+
 static const char replch = '?';
+
+/* --------------------------------------------------------------------------------------------- */
+/*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 str_ascii_insert_replace_char (GString * buffer)
@@ -43,12 +55,16 @@ str_ascii_insert_replace_char (GString * buffer)
     g_string_append_c (buffer, replch);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_ascii_is_valid_string (const char *text)
 {
     (void) text;
     return 1;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_ascii_is_valid_char (const char *ch, size_t size)
@@ -58,17 +74,23 @@ str_ascii_is_valid_char (const char *ch, size_t size)
     return 1;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 str_ascii_cnext_char (const char **text)
 {
     (*text)++;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 str_ascii_cprev_char (const char **text)
 {
     (*text)--;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_ascii_cnext_noncomb_char (const char **text)
@@ -80,6 +102,8 @@ str_ascii_cnext_noncomb_char (const char **text)
     return 1;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_ascii_cprev_noncomb_char (const char **text, const char *begin)
 {
@@ -90,11 +114,15 @@ str_ascii_cprev_noncomb_char (const char **text, const char *begin)
     return 1;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_ascii_isspace (const char *text)
 {
     return g_ascii_isspace ((gchar) text[0]);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_ascii_ispunct (const char *text)
@@ -102,11 +130,15 @@ str_ascii_ispunct (const char *text)
     return g_ascii_ispunct ((gchar) text[0]);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_ascii_isalnum (const char *text)
 {
     return g_ascii_isalnum ((gchar) text[0]);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_ascii_isdigit (const char *text)
@@ -114,11 +146,15 @@ str_ascii_isdigit (const char *text)
     return g_ascii_isdigit ((gchar) text[0]);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_ascii_isprint (const char *text)
 {
     return g_ascii_isprint ((gchar) text[0]);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static gboolean
 str_ascii_iscombiningmark (const char *text)
@@ -126,6 +162,8 @@ str_ascii_iscombiningmark (const char *text)
     (void) text;
     return FALSE;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_ascii_toupper (const char *text, char **out, size_t * remain)
@@ -139,6 +177,8 @@ str_ascii_toupper (const char *text, char **out, size_t * remain)
     return 1;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_ascii_tolower (const char *text, char **out, size_t * remain)
 {
@@ -151,17 +191,23 @@ str_ascii_tolower (const char *text, char **out, size_t * remain)
     return 1;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_ascii_length (const char *text)
 {
     return strlen (text);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_ascii_length2 (const char *text, int size)
 {
     return (size >= 0) ? min (strlen (text), (gsize) size) : strlen (text);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static gchar *
 str_ascii_conv_gerror_message (GError * mcerror, const char *def_msg)
@@ -173,6 +219,8 @@ str_ascii_conv_gerror_message (GError * mcerror, const char *def_msg)
     return g_strdup (def_msg != NULL ? def_msg : "");
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static estr_t
 str_ascii_vfs_convert_to (GIConv coder, const char *string, int size, GString * buffer)
 {
@@ -180,6 +228,8 @@ str_ascii_vfs_convert_to (GIConv coder, const char *string, int size, GString * 
     g_string_append_len (buffer, string, size);
     return ESTR_SUCCESS;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static const char *
 str_ascii_term_form (const char *text)
@@ -204,6 +254,8 @@ str_ascii_term_form (const char *text)
     actual[0] = '\0';
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static const char *
 str_ascii_fit_to_term (const char *text, int width, align_crt_t just_mode)
@@ -313,6 +365,8 @@ str_ascii_fit_to_term (const char *text, int width, align_crt_t just_mode)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static const char *
 str_ascii_term_trim (const char *text, int width)
 {
@@ -362,11 +416,15 @@ str_ascii_term_trim (const char *text, int width)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_ascii_term_width2 (const char *text, size_t length)
 {
     return (length != (size_t) (-1)) ? min (strlen (text), length) : strlen (text);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_ascii_term_width1 (const char *text)
@@ -374,12 +432,16 @@ str_ascii_term_width1 (const char *text)
     return str_ascii_term_width2 (text, (size_t) (-1));
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_ascii_term_char_width (const char *text)
 {
     (void) text;
     return 1;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static const char *
 str_ascii_term_substring (const char *text, int start, int width)
@@ -413,6 +475,8 @@ str_ascii_term_substring (const char *text, int start, int width)
     actual[0] = '\0';
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static const char *
 str_ascii_trunc (const char *text, int width)
@@ -466,12 +530,16 @@ str_ascii_trunc (const char *text, int width)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_ascii_offset_to_pos (const char *text, size_t length)
 {
     (void) text;
     return (int) length;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_ascii_column_to_pos (const char *text, size_t pos)
@@ -480,12 +548,16 @@ str_ascii_column_to_pos (const char *text, size_t pos)
     return (int) pos;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static char *
 str_ascii_create_search_needle (const char *needle, int case_sen)
 {
     (void) case_sen;
     return (char *) needle;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 str_ascii_release_search_needle (char *needle, int case_sen)
@@ -494,6 +566,8 @@ str_ascii_release_search_needle (char *needle, int case_sen)
     (void) needle;
 
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static const char *
 str_ascii_search_first (const char *text, const char *search, int case_sen)
@@ -523,6 +597,8 @@ str_ascii_search_first (const char *text, const char *search, int case_sen)
     return match;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static const char *
 str_ascii_search_last (const char *text, const char *search, int case_sen)
 {
@@ -551,11 +627,15 @@ str_ascii_search_last (const char *text, const char *search, int case_sen)
     return match;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_ascii_compare (const char *t1, const char *t2)
 {
     return strcmp (t1, t2);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_ascii_ncompare (const char *t1, const char *t2)
@@ -563,17 +643,23 @@ str_ascii_ncompare (const char *t1, const char *t2)
     return strncmp (t1, t2, min (strlen (t1), strlen (t2)));
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_ascii_casecmp (const char *t1, const char *t2)
 {
     return g_ascii_strcasecmp (t1, t2);
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_ascii_ncasecmp (const char *t1, const char *t2)
 {
     return g_ascii_strncasecmp (t1, t2, min (strlen (t1), strlen (t2)));
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 str_ascii_fix_string (char *text)
@@ -582,6 +668,8 @@ str_ascii_fix_string (char *text)
         text[0] = ((unsigned char) text[0] < 128) ? text[0] : '?';
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static char *
 str_ascii_create_key (const char *text, int case_sen)
 {
@@ -589,11 +677,15 @@ str_ascii_create_key (const char *text, int case_sen)
     return (char *) text;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_ascii_key_collate (const char *t1, const char *t2, int case_sen)
 {
     return (case_sen) ? strcmp (t1, t2) : g_ascii_strcasecmp (t1, t2);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 str_ascii_release_key (char *key, int case_sen)
@@ -601,6 +693,8 @@ str_ascii_release_key (char *key, int case_sen)
     (void) key;
     (void) case_sen;
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 str_ascii_prefix (const char *text, const char *prefix)
@@ -613,6 +707,8 @@ str_ascii_prefix (const char *text, const char *prefix)
     return result;
 }
 
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 str_ascii_caseprefix (const char *text, const char *prefix)
 {
@@ -623,6 +719,10 @@ str_ascii_caseprefix (const char *text, const char *prefix)
 
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
 struct str_class
 str_ascii_init (void)
@@ -679,3 +779,5 @@ str_ascii_init (void)
 
     return result;
 }
+
+/* --------------------------------------------------------------------------------------------- */

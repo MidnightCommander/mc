@@ -64,6 +64,7 @@
 #include <glib.h>
 #include "glibcompat.h"
 
+/* For SMB VFS only */
 #ifndef __GNUC__
 #define __attribute__(x)
 #endif
