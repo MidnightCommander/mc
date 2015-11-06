@@ -1,3 +1,42 @@
+Version 4.8.15
+
+- Core
+  * Minimal version of GLib is 2.26.0
+  * Use the PATH environment variable to search for the executable when opening pipe (#3444)
+  * Support more than 2 (up to 9) columns in file panel in brief mode (#3212)
+  * Clarify file sorting in "Unsorted" mode (#3496)
+  * WGroupbox: respect dialog's colors (#3468)
+  * Highlight find file's result in internal viewer (#3530)
+
+- VFS
+  * s3 extfs vfs: bugfixes and improvements (#3470, #3502)
+
+- Editor
+  * Add hidden option to choose full or base file name in the status line (#3445)
+  * Improvements of syntax highlighting:
+    - Lua (#3471)
+    - PKGBUILD (#3484)
+
+- Misc
+  * Text alignment in Info panel (#3155)
+  * Select of menu file edit: change default button to "User" (#3493)
+  * Recognize .gmo files as well as .mo ones (#3422)
+  * Fix mc.pot comment tripping up Transifex and unportable inplace sed (#3479)
+  * A lot of code clean up (#3420, #3424, #3426, #3427, #3428, #3429, #3430, #3431, #3434, #3435, #3437, #3463, #3464, #3465, #3466, #3467, #3494, #3495, #3539)
+  * Documentation updates:
+    - Spanish man and help: Diff Viewer section and minor fixes (#3477)
+    - VFS garbage collection (#3472)
+
+- Fixes
+  * Various memory leaks (#3438, #3439, #3440, #3457, #3458, #3459, #3460, #3461, #3462, #3475, #3520, #3521, #3522)
+  * Linux kernel-specific segfault on startup (#3441)
+  * Lost of Panelize contents in some cases (#3032, #3489, #3498, #3507)
+  * Wrong highlight of search result in case of "Regular expression" and "Whole words" (#3524)
+  * "Whole words" search works only in Normal mode (#3525)
+  * SFTP VFS: segfault (#3456)
+  * Segfault in "Find file" due to invalid UTF-8 sequences (#3449)
+  * Bash variable 'PROMPT_COMMAND' in  pantheon-terminal (#3534)
+
 Version 4.8.14
 
 - Core
