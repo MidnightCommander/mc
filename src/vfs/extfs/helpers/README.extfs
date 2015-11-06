@@ -73,3 +73,8 @@ patchsetfs - list of patches of current file
 
 # Gputils lib archives.
 ulib
+
+# Adroid device exploring using adb (Android Debug Bridge)
+# Tested with version 1.0.31. Executing "adb root" may be
+# needed to get full access to device.
+adb+
