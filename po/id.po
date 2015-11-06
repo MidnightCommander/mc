@@ -4,14 +4,15 @@
 # 
 # Translators:
 # Andika Triwidada <andika@gmail.com>, 2011-2012
+# Ferriandy Chianiago <gpl4all@gmail.com>, 2015
 # Gung Sukma <so.hot.call@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2015-05-24 18:29+0300\n"
-"PO-Revision-Date: 2015-06-30 02:18+0000\n"
-"Last-Translator: Gung Sukma <so.hot.call@gmail.com>\n"
+"PO-Revision-Date: 2015-10-26 05:19+0000\n"
+"Last-Translator: Ferriandy Chianiago <gpl4all@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/mc/mc/language/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,24 +32,24 @@ msgid "Cannot translate from %s to %s"
 msgstr "Tak bisa menerjemahkan dari %s ke %s"
 
 msgid "Event system already initialized"
-msgstr ""
+msgstr "Event system sudah diinisiasi"
 
 msgid "Failed to initialize event system"
-msgstr ""
+msgstr "Gagal dalam inisiasi event system"
 
 msgid "Event system not initialized"
-msgstr ""
+msgstr "Event system tidak diinisiasi"
 
 msgid "Check input data! Some of parameters are NULL!"
 msgstr "Periksa data masukan! Beberapa parameter NULL!"
 
 #, c-format
 msgid "Unable to create group '%s' for events!"
-msgstr ""
+msgstr "Gagal membuat group '%s' untuk events!"
 
 #, c-format
 msgid "Unable to create event '%s'!"
-msgstr ""
+msgstr "Gagal membuat event '%s'!"
 
 #, c-format
 msgid ""
@@ -75,7 +76,7 @@ msgstr "FATAL: bukan sebuah direktori:"
 
 #, c-format
 msgid "An error occurred while migrating user settings: %s"
-msgstr ""
+msgstr "Terjadi kesalahan saat migrasi setting pengguna: %s"
 
 #, c-format
 msgid ""
@@ -83,13 +84,13 @@ msgid ""
 "to Freedesktop recommended dirs.\n"
 "To get more info, please visit\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr ""
+msgstr "Setting lama anda sudah dimigrasikan dari %s\nke direktori yang direkomendasikan Freedesktop.\nUntuk penjelasan lebih lanjutm silahkan kunjungi\nhttp://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 
 #, c-format
 msgid ""
 "Your old settings were migrated from %s\n"
 "to %s\n"
-msgstr ""
+msgstr "Setting lama anda telah dimigrasikan dari %s\nke %s\n"
 
 msgid "Search string not found"
 msgstr "String yang dicari tak ditemukan"
@@ -105,19 +106,19 @@ msgid "Invalid token number %d"
 msgstr "Nomor token %d tak valid"
 
 msgid "Regular expression error"
-msgstr ""
+msgstr "Kesalahan pada Regular expression"
 
 msgid "No&rmal"
-msgstr ""
+msgstr "No&rmal"
 
 msgid "Re&gular expression"
-msgstr ""
+msgstr "Re&gular expression"
 
 msgid "He&xadecimal"
-msgstr ""
+msgstr "He&xadecimal"
 
 msgid "Wil&dcard search"
-msgstr ""
+msgstr "Wil&dcard search"
 
 #, c-format
 msgid ""
@@ -136,10 +137,10 @@ msgid ""
 "Unable to use '%s' skin with 256 colors support\n"
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
-msgstr ""
+msgstr "Tidak bisa menggukan '%s' skin dengan support 256 warna\npada terminal non-256 warna.\nSkin default sudah dimuat."
 
 msgid "Escape"
-msgstr ""
+msgstr "Escape"
 
 msgid "Function key 1"
 msgstr "Tombol fungsi 1"
@@ -202,46 +203,46 @@ msgid "Function key 20"
 msgstr "Tombol fungsi 20"
 
 msgid "Completion/M-tab"
-msgstr ""
+msgstr "Completion/M-tab"
 
 msgid "BackTab/S-tab"
-msgstr ""
+msgstr "BackTab/S-tab"
 
 msgid "Backspace"
-msgstr ""
+msgstr "Backspace"
 
 msgid "Up arrow"
-msgstr ""
+msgstr "Up arrow"
 
 msgid "Down arrow"
-msgstr ""
+msgstr "Down arrow"
 
 msgid "Left arrow"
-msgstr ""
+msgstr "Left arrow"
 
 msgid "Right arrow"
-msgstr ""
+msgstr "Right arrow"
 
 msgid "Insert"
-msgstr ""
+msgstr "Insert"
 
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 msgid "Home"
-msgstr ""
+msgstr "Home"
 
 msgid "End key"
 msgstr "Tombol end"
 
 msgid "Page Up"
-msgstr ""
+msgstr "Page Up"
 
 msgid "Page Down"
-msgstr ""
+msgstr "Page Down"
 
 msgid "/ on keypad"
-msgstr ""
+msgstr "/ on keypad"
 
 msgid "* on keypad"
 msgstr "* pada keypad"
@@ -334,7 +335,7 @@ msgid "Colon"
 msgstr "Titik dua"
 
 msgid "Semicolon"
-msgstr ""
+msgstr "Semicolon"
 
 msgid "Exclamation mark"
 msgstr "Tanda seru"
@@ -343,7 +344,7 @@ msgid "Question mark"
 msgstr "Tanda tanya"
 
 msgid "Ampersand"
-msgstr ""
+msgstr "Ampersand"
 
 msgid "Dollar sign"
 msgstr "Tanda dolar"
@@ -352,7 +353,7 @@ msgid "Quotation mark"
 msgstr "Tanda tanya"
 
 msgid "Percent sign"
-msgstr ""
+msgstr "Percent sign"
 
 msgid "Caret"
 msgstr "Karet"
@@ -361,13 +362,13 @@ msgid "Tilda"
 msgstr "Cacing"
 
 msgid "Prime"
-msgstr ""
+msgstr "Prime"
 
 msgid "Underline"
 msgstr "Garis bawah"
 
 msgid "Understrike"
-msgstr ""
+msgstr "Understrike"
 
 msgid "Pipe"
 msgstr "Pipa"
@@ -403,14 +404,14 @@ msgid "Slash key"
 msgstr "Tombol garis miring"
 
 msgid "Backslash key"
-msgstr ""
+msgstr "Backslash key"
 
 msgid "Number sign #"
-msgstr ""
+msgstr "Number sign #"
 
 #. TRANSLATORS: Please translate as in "at sign" (@).
 msgid "At sign"
-msgstr ""
+msgstr "At sign"
 
 msgid "Ctrl"
 msgstr "Ctrl"
@@ -422,7 +423,7 @@ msgid "Shift"
 msgstr "Shift"
 
 msgid "The TERM environment variable is unset!\n"
-msgstr ""
+msgstr "Environment variable TERM belum diset\n"
 
 #, c-format
 msgid ""
@@ -431,25 +432,25 @@ msgid ""
 msgstr "Ukuran layar %dx%d tak didukung.\nPeriksalah variabel lingkungan TERM.\n"
 
 msgid "Cannot create pipe descriptor"
-msgstr ""
+msgstr "Gagal membuat pipe descriptor"
 
 msgid "Cannot parse command for pipe"
-msgstr ""
+msgstr "Gagal mengurai perintah untuk pipe"
 
 msgid "Cannot create pipe streams"
-msgstr ""
+msgstr "Gagal membuat pipe streams"
 
 #, c-format
 msgid ""
 "Unexpected error in select() reading data from a child process:\n"
 "%s"
-msgstr ""
+msgstr "Kesalahan tak terduga dalam select() membaca data dari child process\n%s"
 
 #, c-format
 msgid ""
 "Unexpected error in waitpid():\n"
 "%s"
-msgstr ""
+msgstr "Kesalahan tak terduga dalam waitpid()\n%s"
 
 msgid "Warning"
 msgstr "Peringatan"
@@ -461,23 +462,23 @@ msgid "Dup failed"
 msgstr "Dup gagal"
 
 msgid "Error dup'ing old error pipe"
-msgstr ""
+msgstr "Kesalahan pada dup'ing error pipe"
 
 #, c-format
 msgid "Directory cache expired for %s"
-msgstr ""
+msgstr "Cache direktori untuk %s sudah kadaluarsa "
 
 msgid "bytes transferred"
 msgstr "byte ditransfer"
 
 msgid "Starting linear transfer..."
-msgstr ""
+msgstr "Memulai transfer liner..."
 
 msgid "Getting file"
-msgstr ""
+msgstr "Mendapatkan file"
 
 msgid "Changes to file lost"
-msgstr ""
+msgstr "Perubahan file tidak tersimpan"
 
 #, c-format
 msgid "%s is not a directory\n"
@@ -508,129 +509,129 @@ msgid "Press any key to continue..."
 msgstr "Tekan sebarang tombol untuk melanjutkan..."
 
 msgid "Cannot parse:"
-msgstr ""
+msgstr "Gagal mengurai:"
 
 msgid "More parsing errors will be ignored."
-msgstr ""
+msgstr "Lebih banyak lagi kesalahan penguraian akan diabaikan."
 
 msgid "Internal error:"
-msgstr ""
+msgstr "Kesalahan internal."
 
 msgid "Password:"
-msgstr ""
+msgstr "Password:"
 
 msgid "Screens"
-msgstr ""
+msgstr "Screens"
 
 msgid "History"
-msgstr ""
+msgstr "History"
 
 #. TRANSLATORS: no need to translate 'DialogTitle', it's just a context prefix
 msgid "DialogTitle|History cleanup"
-msgstr ""
+msgstr "Pembersihan DialogTitle|History"
 
 msgid "Do you want clean this history?"
-msgstr ""
+msgstr "Apakah anda mau membersihkan history?"
 
 msgid "&Yes"
 msgstr "&Ya"
 
 msgid "&No"
-msgstr ""
+msgstr "&No"
 
 msgid "&OK"
 msgstr "&Oke"
 
 msgid "&Cancel"
-msgstr ""
+msgstr "&Cancel"
 
 msgid "Background process:"
-msgstr ""
+msgstr "Proses Background:"
 
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #, c-format
 msgid "%d: %s"
-msgstr ""
+msgstr "%d: %s"
 
 msgid "&Abort"
-msgstr ""
+msgstr "&Abort"
 
 msgid "Displays the current version"
-msgstr ""
+msgstr "Tampilkan versi"
 
 msgid "Print data directory"
-msgstr ""
+msgstr "Cetak data directory"
 
 msgid "Print extended info about used data directories"
-msgstr ""
+msgstr "Cetak info lebih lanjut dari data directory yang terpakai"
 
 msgid "Print configure options"
-msgstr ""
+msgstr "Cetak opsi konfigurasi"
 
 msgid "Print last working directory to specified file"
-msgstr ""
+msgstr "Cetak working directory yang terakhir digunakan ke file yang ditentukan"
 
 msgid "Enables subshell support (default)"
-msgstr ""
+msgstr "Perbolehkan subshell (default)"
 
 msgid "Disables subshell support"
-msgstr ""
+msgstr "Non aktifkan subshell"
 
 msgid "Log ftp dialog to specified file"
-msgstr ""
+msgstr "Rekam log ftp dialog ke file yang ditentukan"
 
 msgid "Set debug level"
-msgstr ""
+msgstr "Tentukan level debug"
 
 msgid "Launches the file viewer on a file"
-msgstr ""
+msgstr "Jalankan file viewer atas file"
 
 msgid "Edit files"
-msgstr ""
+msgstr "Menyunting files"
 
 msgid "Forces xterm features"
-msgstr ""
+msgstr "Paksakan fitur xterm"
 
 msgid "Disable X11 support"
-msgstr ""
+msgstr "Non aktifkan X11 support"
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
 
 msgid "Disable mouse support in text version"
-msgstr ""
+msgstr "Non aktifkan mouse support dalam moda text"
 
 msgid "Tries to use termcap instead of terminfo"
-msgstr ""
+msgstr "Mencoba menggunakan termcap bukannya terminfo"
 
 msgid "To run on slow terminals"
-msgstr ""
+msgstr "Untuk menjalankan pada terminal yang lambat"
 
 msgid "Use stickchars to draw"
-msgstr ""
+msgstr "Gunakan stickchars untuk menggambar"
 
 msgid "Resets soft keys on HP terminals"
 msgstr ""
 
 msgid "Load definitions of key bindings from specified file"
-msgstr ""
+msgstr "Memuat definisi key bindings dari file yang ditenttukan"
 
 msgid "Don't load definitions of key bindings from file, use defaults"
-msgstr ""
+msgstr "Jangan memuat definisi key bindings dari file, gunakan default"
 
 msgid "Requests to run in black and white"
-msgstr ""
+msgstr "Meminta untuk dijalankan dalam moda hitam putih"
 
 msgid "Request to run in color mode"
-msgstr ""
+msgstr "Meminta untuk dijalankan dalam moda berwarna"
 
 msgid "Specifies a color configuration"
-msgstr ""
+msgstr "Tentukan konfigurasi warna"
 
 msgid "Show mc with specified skin"
-msgstr ""
+msgstr "Tampilkan mc dengan skin tertentu"
 
 #. TRANSLATORS: don't translate keywords
 msgid ""
@@ -669,241 +670,241 @@ msgid ""
 msgstr ""
 
 msgid "Color options"
-msgstr ""
+msgstr "Opsi warna"
 
 msgid "+number"
-msgstr ""
+msgstr "+number"
 
 msgid "[this_dir] [other_panel_dir]"
-msgstr ""
+msgstr "[this_dir] [other_panel_dir]"
 
 msgid "Set initial line number for the internal editor"
-msgstr ""
+msgstr "Set nomor baris awal untuk editor internal"
 
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
-msgstr ""
+msgstr "\nHarap kirimkan laporan bug (sertakan output dari 'mc -V)\nsebagai tiket di www.midnight-commander.org\n"
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
-msgstr ""
+msgstr "GNU Midnight Commander %s\n"
 
 msgid "Main options"
-msgstr ""
+msgstr "Opsi utama"
 
 msgid "Terminal options"
-msgstr ""
+msgstr "Opsi terminal"
 
 msgid "Arguments parse error!"
-msgstr ""
+msgstr "Kesalahan mengurai argumen!"
 
 msgid "No arguments given to the viewer."
-msgstr ""
+msgstr "Tidak ada argumen yang diberikan kepada viewer"
 
 msgid "Two files are required to envoke the diffviewer."
-msgstr ""
+msgstr "Dua file dibutuhkan untuk menjalankan diffviewer"
 
 msgid "Background protocol error"
-msgstr ""
+msgstr "Kesalahan background protocol"
 
 msgid "Reading failed"
-msgstr ""
+msgstr "Kesalahan membaca"
 
 msgid "Background process error"
-msgstr ""
+msgstr "Kesalahan background process"
 
 msgid "Unknown error in child"
-msgstr ""
+msgstr "Error yang tidak dikenal di dalam child"
 
 msgid "Child died unexpectedly"
-msgstr ""
+msgstr "Terminasi child yang tidak terduga"
 
 msgid ""
 "Background process sent us a request for more arguments\n"
 "than we can handle."
-msgstr ""
+msgstr "Background process meminta argumen tambahan\nyang tidak bisa kita sediakan"
 
 msgid "&Dismiss"
-msgstr ""
+msgstr "&Dismiss"
 
 msgid "Enter search string:"
-msgstr ""
+msgstr "Masukkan string pencarian:"
 
 msgid "Cas&e sensitive"
-msgstr ""
+msgstr "Cas&e sensitive"
 
 msgid "&Backwards"
-msgstr ""
+msgstr "&Backwards"
 
 msgid "&Whole words"
-msgstr ""
+msgstr "&Whole words"
 
 msgid "&All charsets"
-msgstr ""
+msgstr "&All charsets"
 
 msgid "Search"
-msgstr ""
+msgstr "Pencarian"
 
 msgid "Search is disabled"
-msgstr ""
+msgstr "Pencarian dinon aktifkan"
 
 #, c-format
 msgid ""
 "Cannot create temporary diff file\n"
 "%s"
-msgstr ""
+msgstr "Gagal membuat temporary diff file\n%s"
 
 #, c-format
 msgid ""
 "Cannot create backup file\n"
 "%s%s\n"
 "%s"
-msgstr ""
+msgstr "Gagal membuat backup file\n%s%s\n%s"
 
 #, c-format
 msgid ""
 "Cannot create temporary merge file\n"
 "%s"
-msgstr ""
+msgstr "Gagal membuat temporary merge file\n%s"
 
 msgid "&Fastest (Assume large files)"
-msgstr ""
+msgstr "&Fastest (Asumsi file besar)"
 
 msgid "&Minimal (Find a smaller set of change)"
-msgstr ""
+msgstr "&Minimal (Temukan set of change yang lebih kecil)"
 
 msgid "Diff algorithm"
-msgstr ""
+msgstr "Algoritma Diff"
 
 msgid "Diff extra options"
-msgstr ""
+msgstr "Opsi tambahan Diff"
 
 msgid "&Ignore case"
-msgstr ""
+msgstr "Aba&ikan case"
 
 msgid "Ignore tab &expansion"
-msgstr ""
+msgstr "Abaikan tab &expansion"
 
 msgid "Ignore &space change"
-msgstr ""
+msgstr "Abaikan perubahan &space"
 
 msgid "Ignore all &whitespace"
-msgstr ""
+msgstr "Abaikan semua &whitespace"
 
 msgid "Strip &trailing carriage return"
-msgstr ""
+msgstr "Hilangkan &trailing carriage return"
 
 msgid "Diff Options"
-msgstr ""
+msgstr "Opsi Diff"
 
 msgid "Edit"
-msgstr ""
+msgstr "Menyunting"
 
 msgid "Edit is disabled"
-msgstr ""
+msgstr "Menyunting dinon aktifkan"
 
 msgid "Goto line (left)"
-msgstr ""
+msgstr "Pindah ke baris (kiri)"
 
 msgid "Goto line (right)"
-msgstr ""
+msgstr "Pindah ke baris (kanan)"
 
 msgid "Enter line:"
-msgstr ""
+msgstr "Masukkan baris:"
 
 msgid "ButtonBar|Help"
-msgstr ""
+msgstr "ButtonBar|Bantuan"
 
 msgid "ButtonBar|Save"
-msgstr ""
+msgstr "ButtonBar|Simpan"
 
 msgid "ButtonBar|Edit"
-msgstr ""
+msgstr "ButtonBar|Menyunting"
 
 msgid "ButtonBar|Merge"
-msgstr ""
+msgstr "ButtonBar|Gabung"
 
 msgid "ButtonBar|Search"
-msgstr ""
+msgstr "ButtonBar|Cari"
 
 msgid "ButtonBar|Options"
-msgstr ""
+msgstr "ButtonBar|Opsi"
 
 msgid "ButtonBar|Quit"
-msgstr ""
+msgstr "ButtonBar|Keluar"
 
 msgid "Quit"
-msgstr ""
+msgstr "Keluar"
 
 msgid "File(s) was modified. Save with exit?"
-msgstr ""
+msgstr "File(s) telah dirubah. Simpan saat keluar?"
 
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file(s)?"
-msgstr ""
+msgstr "Midnight Commander sedang dimatikan.\nSimpan file yang sudah dirubah?"
 
 msgid "Diff:"
-msgstr ""
+msgstr "Diff:"
 
 #, c-format
 msgid "\"%s\" is a directory"
-msgstr ""
+msgstr "\"%s\" adalah directory"
 
 #, c-format
 msgid ""
 "Cannot stat \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Gagal stat \"%s\"\n%s"
 
 msgid "Diff viewer: invalid mode"
-msgstr ""
+msgstr "Diff viewer: moda tidak valid"
 
 msgid "Two files are needed to compare"
-msgstr ""
+msgstr "Dibutuhkan dua file untuk membandingkan"
 
 msgid "Choose syntax highlighting"
-msgstr ""
+msgstr "Pilih syntax highlighting"
 
 msgid "< Auto >"
-msgstr ""
+msgstr "< Auto >"
 
 msgid "< Reload Current Syntax >"
-msgstr ""
+msgstr "< Reload Current Syntax >"
 
 #, c-format
 msgid "Loading: %3d%%"
-msgstr ""
+msgstr "Memuat: %3d%%"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Memuat..."
 
 #, c-format
 msgid "Cannot open %s for reading"
-msgstr ""
+msgstr "Gagal membuka %s untuk dibaca"
 
 msgid "Load file"
-msgstr ""
+msgstr "Memuat file"
 
 #, c-format
 msgid "Error reading %s"
-msgstr ""
+msgstr "Kesalahan membaca %s"
 
 #, c-format
 msgid "Cannot get size/permissions for %s"
-msgstr ""
+msgstr "Gagal mendapatkan ukuran/ijin untuk %s"
 
 #, c-format
 msgid "\"%s\" is not a regular file"
-msgstr ""
+msgstr "\"%s\" bukan regular file"
 
 #, c-format
 msgid ""
 "File \"%s\" is too large.\n"
 "Open it anyway?"
-msgstr ""
+msgstr "File \"%s\" terlalu besar.\nTetap dibuka?"
 
 #, c-format
 msgid "Error reading from pipe: %s"
