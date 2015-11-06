@@ -3215,7 +3215,7 @@ edit_ext_cmd (WEdit * edit)
     char *exp, *tmp, *tmp_edit_temp_file;
     int e;
 
-    char *stdin_str = (char *)"/dev/null";
+    char *stdin_str = g_strdup("/dev/null");
     off_t start_mark, end_mark;
     int  block_present_flag = 0;
 
@@ -3230,6 +3230,7 @@ edit_ext_cmd (WEdit * edit)
         return 1;
 
     if (eval_marks (edit, &start_mark, &end_mark)) {
+	g_free(stdin_str);
 	stdin_str = mc_config_get_full_path (EDIT_BLOCK_FILE);
 	edit_save_block (edit, stdin_str, start_mark, end_mark);
 	block_present_flag = 1;
@@ -3241,8 +3242,7 @@ edit_ext_cmd (WEdit * edit)
     e = system (tmp);
     g_free (tmp);
     g_free (exp);
-    if (block_present_flag)
-	g_free(stdin_str);
+    g_free(stdin_str);
 
     if (e)
     {
