@@ -804,9 +804,8 @@ extfs_resolve_symlinks_int (struct entry *entry, GSList * list)
         if (pent == NULL && entry->inode->readdir_delayed == TRUE)
         {
             struct archive *archive = entry->inode->archive;
-            int result =
-                extfs_read_archive (archive->fstype, archive->name, &archive,
-                                    entry->inode->linkname);
+            int result = extfs_read_archive (archive->fstype, archive->name, &archive,
+                                             entry->inode->linkname);
             (void) result;
 
             looping = g_slist_prepend (list, entry);
