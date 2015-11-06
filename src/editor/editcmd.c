@@ -3215,7 +3215,7 @@ edit_ext_cmd (WEdit * edit)
     char *exp, *tmp, *tmp_edit_temp_file;
     int e;
 
-    const char *stdin_str = "/dev/null";
+    char *stdin_str = "/dev/null";
     off_t start_mark, end_mark;
     int  block_present_flag = 0;
 
