@@ -247,7 +247,7 @@ extfs_find_entry_int (struct entry *dir, const char *name, GSList * list,
                       gboolean make_dirs, gboolean make_file)
 {
     struct entry *pent, *pdir;
-    const char *p, *name_end;
+    const char *p;
     char *q;
     char c = PATH_SEP;
 
@@ -260,7 +260,6 @@ extfs_find_entry_int (struct entry *dir, const char *name, GSList * list,
 
     pent = dir;
     p = name;
-    name_end = name + strlen (name);
 
     q = strchr (p, PATH_SEP);
     if (q == NULL)
