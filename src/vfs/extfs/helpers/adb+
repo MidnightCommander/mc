@@ -1,0 +1,136 @@
+#!/bin/bash
+#
+# extfs support for adb shell: android device explorimg
+# Written by Sergey Ya. Korshumoff <seyko2@gmail.com>, 2014
+#   Introduced MC support for a partial list command:
+#   only one directory a time. The mode is designated
+#   by "### " in the first line of output. In such mode
+#   after an archive name parameter a directory parameter
+#   is followed. Usage: cd adb://
+
+adb_list ()
+{
+    DIR=$@
+    echo "### $DIR ### $(date)"
+    DIR=$(echo $DIR | sed -e 's,^/,,')
+    LIST="$($ADB shell ls -l $DIR)"
+    IFS='
+'
+    for LINE in $LIST; do
+	LINE=$(echo $LINE | tr -d '\r')
+	IFS=' '; FILD=( $LINE )
+	PERM=${FILD[0]}
+	OWNER=${FILD[1]}
+	GROUP=${FILD[2]}
+
+	TYPE=$(echo $PERM | tr -d 'srwx-')
+	[ "$TYPE" == "" ] && {
+	    SIZE=${FILD[3]}
+	    DATE=${FILD[4]}
+	    TIME=${FILD[5]}
+	    FILE=${FILD[6]}
+	    ARROW=""
+	    LINK=""
+	}
+	[ "$TYPE" == "d" ] && {
+	    SIZE='0'
+	    DATE=${FILD[3]}
+	    TIME=${FILD[4]}
+	    FILE=${FILD[5]}
+	    ARROW=""
+	    LINK=""
+	}
+	[ "$TYPE" == "l" ] && {
+	    SIZE='0'
+	    DATE=${FILD[3]}
+	    TIME=${FILD[4]}
+	    FILE=${FILD[5]}
+	    ARROW=${FILD[6]}
+	    LINK=${FILD[7]}
+	}
+	[ "$TYPE" == "c" -o "$TYPE" == "b" ] && {
+	    SIZE="${FILD[3]}${FILD[4]}"
+	    DATE=${FILD[5]}
+	    TIME=${FILD[6]}
+	    FILE=${FILD[7]}
+	    ARROW=""
+	    LINK=""
+	}
+	DATE_TIME=$(date -d "$DATE $TIME" "+%m-%d-%Y %H:%M")
+	echo "$PERM 1 $OWNER $GROUP $SIZE $DATE_TIME $DIR/$FILE $ARROW $LINK"
+    done
+}
+
+adb_copyout ()
+{
+    FROM="$2"
+    TO="$3"
+    $ADB pull $FROM $TO &> /dev/null
+    rc=$?
+}
+
+adb_copyin ()
+{
+    TO="$2"
+    FROM="$3"
+    $ADB push $FROM $TO &> /dev/null
+    rc=$?
+}
+
+adb_rm ()
+{
+    FILE="$2"
+    $ADB shell rm $FILE &> /dev/null
+    rc=$?
+}
+
+adb_mkdir ()
+{
+    DIR="$2"
+    $ADB shell mkdir $DIR &> /dev/null
+    rc=$?
+}
+
+adb_rmdir ()
+{
+    DIR="$2"
+    $ADB shell rmdir $DIR &> /dev/null
+    rc=$?
+}
+
+
+LC_ALL=C
+export LC_ALL
+
+ADB=$(which adb)
+if [ -z "$ADB" ]; then
+    echo "Error: could not find adb"
+    exit 1
+fi
+
+ADB_STATE=$($ADB get-state | tail -n1)
+[ "$ADB_STATE" != "device" ] && {
+    $ADB kill-server > /dev/null 2>&1
+    $ADB usb > /dev/null 2>&1
+}
+
+ADB_STATE=$($ADB get-state | tail -n1)
+[ "$ADB_STATE" != "device" ] && {
+    echo "Error: adb iis not connected to device"
+    exit 1
+}
+
+cmd="$1"
+shift
+
+rc=0
+case "$cmd" in
+    list)    adb_list    "$@" ;;
+    copyout) adb_copyout "$@" ;;
+    copyin)  adb_copyin  "$@" ;;
+    mkdir)   adb_mkdir   "$@" ;;
+    rm)      adb_rm      "$@" ;;
+    rmdir)   adb_rmdir   "$@" ;;
+    *) rc=1 ;;
+esac
+exit $rc
