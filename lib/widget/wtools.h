@@ -31,7 +31,8 @@ enum
 {
     D_NORMAL = 0,
     D_ERROR = (1 << 0),
-    D_CENTER = (1 << 1)
+    D_CENTER = (1 << 1),
+    D_LOWER  = (1 << 2)
 } /* dialog options */ ;
 
 /*** structures declarations (and typedefs of structures)*****************************************/
