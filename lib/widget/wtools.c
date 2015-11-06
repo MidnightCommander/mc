@@ -278,6 +278,9 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
     int i;
     int result = -1;
     int cols, lines;
+    int lxx = 0;
+    int lyy = 0;
+
     const int *query_colors = (flags & D_ERROR) != 0 ? alarm_colors : dialog_colors;
     dlg_flags_t dlg_flags = (flags & D_CENTER) != 0 ? (DLG_CENTER | DLG_TRYUP) : DLG_NONE;
 
@@ -302,9 +305,16 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
     cols = 6 + max (win_len, max (str_term_width1 (header), cols));
     lines += 4 + (count > 0 ? 2 : 0);
 
+    if (flags & D_LOWER)
+    {
+        lxx = (COLS - cols) / 2;
+        lyy = (LINES - lines + 8) / 2;
+        dlg_flags = DLG_NONE;
+    }
+
     /* prepare dialog */
     query_dlg =
-        dlg_create (TRUE, 0, 0, lines, cols, query_colors, query_default_callback, NULL,
+        dlg_create (TRUE, lyy, lxx, lines, cols, query_colors, query_default_callback, NULL,
                     "[QueryBox]", header, dlg_flags);
 
     if (count > 0)
@@ -336,7 +346,8 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
         va_end (ap);
 
         /* do resize before running and selecting any widget */
-        send_message (query_dlg, NULL, MSG_RESIZE, 0, NULL);
+        if ((flags & D_LOWER) == 0)
+            send_message (query_dlg, NULL, MSG_RESIZE, 0, NULL);
 
         if (defbutton != NULL)
             dlg_select_widget (defbutton);
