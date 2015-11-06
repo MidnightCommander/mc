@@ -883,8 +883,7 @@ init_subshell (void)
                     "   PROMPT_COMMAND='eval -- \"$PROMPT_COMMAND_MC_SAVE\"; pwd >&%d; kill -STOP $$'\n"
                     " else\n"
                     "   PROMPT_COMMAND='pwd >&%d; kill -STOP $$'\n"
-                    " fi\n",
-                    subshell_pipe[WRITE], subshell_pipe[WRITE]);
+                    " fi\n", subshell_pipe[WRITE], subshell_pipe[WRITE]);
         break;
 
     case ZSH:
