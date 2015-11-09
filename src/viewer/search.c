@@ -350,7 +350,7 @@ mcview_do_search (WView * view, off_t want_search_start)
 
     status_msg_deinit (STATUS_MSG (&vsm));
 
-    if (view->search_start != 0 && !isFound && need_search_again
+    if (orig_search_start != 0 && !isFound && need_search_again
         && !mcview_search_options.backwards)
     {
         int result;
@@ -365,32 +365,29 @@ mcview_do_search (WView * view, off_t want_search_start)
         if (result != 0)
             isFound = TRUE;
         else
-            search_start = 0;
-    }
-
-    if (!isFound && view->search->error_str != NULL)
-    {
-        /* continue search from beginning */
-        off_t search_end;
-
-        search_end = orig_search_start;
-        /* search_start is 0 here */
-        view->update_activate = search_start;
-
-        vsm.first = TRUE;
-        vsm.view = view;
-        vsm.offset = search_start;
-
-        status_msg_init (STATUS_MSG (&vsm), _("Search"), 1.0, simple_status_msg_init_cb,
-                         mcview_search_status_update_cb, NULL);
-
-        if (mcview_find (&vsm, search_start, search_end, &match_len))
         {
-            mcview_search_show_result (view, match_len);
-            isFound = TRUE;
-        }
+            /* continue search from beginning */
+            off_t search_end;
 
-        status_msg_deinit (STATUS_MSG (&vsm));
+            search_start = 0;
+            search_end = orig_search_start;
+            view->update_activate = 0;
+
+            vsm.first = TRUE;
+            vsm.view = view;
+            vsm.offset = search_start;
+
+            status_msg_init (STATUS_MSG (&vsm), _("Search"), 1.0, simple_status_msg_init_cb,
+                             mcview_search_status_update_cb, NULL);
+
+            if (mcview_find (&vsm, search_start, search_end, &match_len))
+            {
+                mcview_search_show_result (view, match_len);
+                isFound = TRUE;
+            }
+
+            status_msg_deinit (STATUS_MSG (&vsm));
+        }
     }
 
     if (!isFound && view->search->error_str != NULL)
