@@ -303,7 +303,7 @@ mcview_do_search (WView * view, off_t want_search_start)
         }
     }
 
-    if (mcview_search_options.backwards && (int) search_start < 0)
+    if (mcview_search_options.backwards && search_start < 0)
         search_start = 0;
 
     /* Compute the percent steps */
@@ -338,13 +338,8 @@ mcview_do_search (WView * view, off_t want_search_start)
             break;
 
         search_start = growbufsize - view->search->original_len;
-        if (search_start <= 0)
-        {
-            search_start = 0;
-            break;
-        }
     }
-    while (mcview_may_still_grow (view));
+    while (search_start > 0 && mcview_may_still_grow (view));
 
     status_msg_deinit (STATUS_MSG (&vsm));
 
@@ -360,20 +355,17 @@ mcview_do_search (WView * view, off_t want_search_start)
         else
         {
             /* continue search from beginning */
-            off_t search_end;
-
-            search_start = 0;
-            search_end = orig_search_start;
             view->update_activate = 0;
 
             vsm.first = TRUE;
             vsm.view = view;
-            vsm.offset = search_start;
+            vsm.offset = 0;
 
             status_msg_init (STATUS_MSG (&vsm), _("Search"), 1.0, simple_status_msg_init_cb,
                              mcview_search_status_update_cb, NULL);
 
-            if (mcview_find (&vsm, search_start, search_end, &match_len))
+            /* search from file begin up to initial search start position */
+            if (mcview_find (&vsm, 0, orig_search_start, &match_len))
             {
                 mcview_search_show_result (view, match_len);
                 found = TRUE;
