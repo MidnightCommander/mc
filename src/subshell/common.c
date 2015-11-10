@@ -265,6 +265,7 @@ init_subshell_child (const char *pty_name)
     /* and the user's startup file may do a 'cd' command anyway   */
     {
         int ret;
+
         ret = chdir (mc_config_get_home_dir ());        /* FIXME? What about when we re-run the subshell? */
         (void) ret;
     }
@@ -274,6 +275,7 @@ init_subshell_child (const char *pty_name)
     if (mc_sid != -1)
     {
         char sid_str[BUF_SMALL];
+
         g_snprintf (sid_str, sizeof (sid_str), "MC_SID=%ld", (long) mc_sid);
         putenv (g_strdup (sid_str));
     }
@@ -297,7 +299,9 @@ init_subshell_child (const char *pty_name)
 
         /* Allow alternative readline settings for MC */
         {
-            char *input_file = mc_config_get_full_path ("inputrc");
+            char *input_file;
+
+            input_file = mc_config_get_full_path ("inputrc");
             if (access (input_file, R_OK) == 0)
             {
                 putenv_str = g_strconcat ("INPUTRC=", input_file, NULL);
@@ -407,11 +411,11 @@ check_sid (void)
     int r;
 
     sid_str = getenv ("MC_SID");
-    if (!sid_str)
+    if (sid_str == NULL)
         return 0;
 
     old_sid = (pid_t) strtol (sid_str, NULL, 0);
-    if (!old_sid)
+    if (old_sid == 0)
         return 0;
 
     my_sid = getsid (0);
@@ -426,12 +430,8 @@ check_sid (void)
                       _("GNU Midnight Commander is already\n"
                         "running on this terminal.\n"
                         "Subshell support will be disabled."), D_ERROR, 2, _("&OK"), _("&Quit"));
-    if (r != 0)
-    {
-        return 2;
-    }
 
-    return 1;
+    return (r != 0) ? 2 : 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -439,7 +439,7 @@ check_sid (void)
 static void
 init_raw_mode (void)
 {
-    static int initialized = 0;
+    static gboolean initialized = FALSE;
 
     /* MC calls tty_reset_shell_mode() in pre_exec() to set the real tty to its */
     /* original settings.  However, here we need to make this tty very raw,     */
@@ -447,7 +447,7 @@ init_raw_mode (void)
     /* pty.  So, instead of changing the code for execute(), pre_exec(),        */
     /* etc, we just set up the modes we need here, before each command.         */
 
-    if (initialized == 0)       /* First time: initialise 'raw_mode' */
+    if (!initialized)           /* First time: initialise 'raw_mode' */
     {
         tcgetattr (STDOUT_FILENO, &raw_mode);
         raw_mode.c_lflag &= ~ICANON;    /* Disable line-editing chars, etc.   */
@@ -458,7 +458,7 @@ init_raw_mode (void)
         raw_mode.c_oflag &= ~OPOST;     /* Don't postprocess output           */
         raw_mode.c_cc[VTIME] = 0;       /* IE: wait forever, and return as    */
         raw_mode.c_cc[VMIN] = 1;        /* soon as a character is available   */
-        initialized = 1;
+        initialized = TRUE;
     }
 }
 
@@ -679,8 +679,9 @@ pty_open_master (char *pty_name)
 static int
 pty_open_slave (const char *pty_name)
 {
-    int pty_slave = open (pty_name, O_RDWR);
+    int pty_slave;
 
+    pty_slave = open (pty_name, O_RDWR);
     if (pty_slave == -1)
     {
         fprintf (stderr, "open (%s, O_RDWR): %s\r\n", pty_name, unix_error_string (errno));
@@ -688,7 +689,7 @@ pty_open_slave (const char *pty_name)
     }
 #if !defined(__osf__) && !defined(__linux__)
 #if defined (I_FIND) && defined (I_PUSH)
-    if (!ioctl (pty_slave, I_FIND, "ptem"))
+    if (ioctl (pty_slave, I_FIND, "ptem") == 0)
         if (ioctl (pty_slave, I_PUSH, "ptem") == -1)
         {
             fprintf (stderr, "ioctl (%d, I_PUSH, \"ptem\") failed: %s\r\n",
@@ -697,7 +698,7 @@ pty_open_slave (const char *pty_name)
             return -1;
         }
 
-    if (!ioctl (pty_slave, I_FIND, "ldterm"))
+    if (ioctl (pty_slave, I_FIND, "ldterm") == 0)
         if (ioctl (pty_slave, I_PUSH, "ldterm") == -1)
         {
             fprintf (stderr,
@@ -707,7 +708,7 @@ pty_open_slave (const char *pty_name)
             return -1;
         }
 #if !defined(sgi) && !defined(__sgi)
-    if (!ioctl (pty_slave, I_FIND, "ttcompat"))
+    if (ioctl (pty_slave, I_FIND, "ttcompat") == 0)
         if (ioctl (pty_slave, I_PUSH, "ttcompat") == -1)
         {
             fprintf (stderr,
@@ -770,8 +771,9 @@ static int
 pty_open_slave (const char *pty_name)
 {
     int pty_slave;
-    struct group *group_info = getgrnam ("tty");
+    struct group *group_info;
 
+    group_info = getgrnam ("tty");
     if (group_info != NULL)
     {
         /* The following two calls will only succeed if we are root */
@@ -803,22 +805,22 @@ init_subshell_type (void)
     /* Find out what type of shell we have. Also consider real paths (resolved symlinks)
      * because e.g. csh might point to tcsh, ash to dash or busybox, sh to anything. */
 
-    if (strstr (mc_global.tty.shell, "/zsh") || strstr (mc_global.tty.shell_realpath, "/zsh")
-        || getenv ("ZSH_VERSION"))
+    if (strstr (mc_global.tty.shell, "/zsh") != NULL
+        || strstr (mc_global.tty.shell_realpath, "/zsh") != NULL || getenv ("ZSH_VERSION") != NULL)
         /* Also detects ksh symlinked to zsh */
         subshell_type = ZSH;
-    else if (strstr (mc_global.tty.shell, "/tcsh")
-             || strstr (mc_global.tty.shell_realpath, "/tcsh"))
+    else if (strstr (mc_global.tty.shell, "/tcsh") != NULL
+             || strstr (mc_global.tty.shell_realpath, "/tcsh") != NULL)
         /* Also detects csh symlinked to tcsh */
         subshell_type = TCSH;
-    else if (strstr (mc_global.tty.shell, "/fish")
-             || strstr (mc_global.tty.shell_realpath, "/fish"))
+    else if (strstr (mc_global.tty.shell, "/fish") != NULL
+             || strstr (mc_global.tty.shell_realpath, "/fish") != NULL)
         subshell_type = FISH;
-    else if (strstr (mc_global.tty.shell, "/dash")
-             || strstr (mc_global.tty.shell_realpath, "/dash"))
+    else if (strstr (mc_global.tty.shell, "/dash") != NULL
+             || strstr (mc_global.tty.shell_realpath, "/dash") != NULL)
         /* Debian ash (also found if symlinked to by ash/sh) */
         subshell_type = DASH;
-    else if (strstr (mc_global.tty.shell_realpath, "/busybox"))
+    else if (strstr (mc_global.tty.shell_realpath, "/busybox") != NULL)
     {
         /* If shell is symlinked to busybox, assume it is an ash, even though theoretically
          * it could also be a hush (a mini shell for non-MMU systems deactivated by default).
@@ -829,7 +831,7 @@ init_subshell_type (void)
          * in order to avoid that case. */
         subshell_type = ASH_BUSYBOX;
     }
-    else if (strstr (mc_global.tty.shell, "/bash") || getenv ("BASH"))
+    else if (strstr (mc_global.tty.shell, "/bash") != NULL || getenv ("BASH") != NULL)
         /* If bash is not symlinked to busybox, it is safe to assume it is a real bash */
         subshell_type = BASH;
     else
@@ -854,7 +856,6 @@ init_subshell_type (void)
 static void
 init_subshell_precmd (char *precmd, size_t buff_size)
 {
-
     switch (subshell_type)
     {
     case BASH:
@@ -1483,21 +1484,24 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt)
 
     if (subshell_alive)
     {
-        int bPathNotEq = strcmp (subshell_cwd, pcwd);
+        gboolean bPathNotEq;
+
+        bPathNotEq = strcmp (subshell_cwd, pcwd) != 0;
 
         if (bPathNotEq && subshell_type == TCSH)
         {
             char rp_subshell_cwd[PATH_MAX];
             char rp_current_panel_cwd[PATH_MAX];
+            char *p_subshell_cwd, *p_current_panel_cwd;
 
-            char *p_subshell_cwd = mc_realpath (subshell_cwd, rp_subshell_cwd);
-            char *p_current_panel_cwd = mc_realpath (pcwd, rp_current_panel_cwd);
+            p_subshell_cwd = mc_realpath (subshell_cwd, rp_subshell_cwd);
+            p_current_panel_cwd = mc_realpath (pcwd, rp_current_panel_cwd);
 
             if (p_subshell_cwd == NULL)
                 p_subshell_cwd = subshell_cwd;
             if (p_current_panel_cwd == NULL)
                 p_current_panel_cwd = pcwd;
-            bPathNotEq = strcmp (p_subshell_cwd, p_current_panel_cwd);
+            bPathNotEq = strcmp (p_subshell_cwd, p_current_panel_cwd) != 0;
         }
 
         if (bPathNotEq && !DIR_IS_DOT (pcwd))
