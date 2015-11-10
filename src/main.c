@@ -168,6 +168,8 @@ OS_Setup (void)
     const char *datadir_env;
 
 
+    mc_global.shell = g_new0 (mc_shell_t, 1);
+
     shell_env = getenv ("SHELL");
     if ((shell_env == NULL) || (shell_env[0] == '\0'))
     {
@@ -176,18 +178,18 @@ OS_Setup (void)
 
         pwd = getpwuid (geteuid ());
         if (pwd != NULL)
-            mc_global.tty.shell = g_strdup (pwd->pw_shell);
+            mc_global.shell->path = g_strdup (pwd->pw_shell);
     }
     else
         /* 1st choice: SHELL environment variable */
-        mc_global.tty.shell = g_strdup (shell_env);
+        mc_global.shell->path = g_strdup (shell_env);
 
-    if ((mc_global.tty.shell == NULL) || (mc_global.tty.shell[0] == '\0'))
+    if ((mc_global.shell->path == NULL) || (mc_global.shell->path[0] == '\0'))
     {
-        g_free (mc_global.tty.shell);
-        mc_global.tty.shell = mc_get_system_shell ();
+        g_free (mc_global.shell->path);
+        mc_global.shell->path = mc_get_system_shell ();
     }
-    mc_global.tty.shell_realpath = mc_realpath (mc_global.tty.shell, rp_shell);
+    mc_global.shell->real_path = mc_realpath (mc_global.shell->path, rp_shell);
 
     /* This is the directory, where MC was installed, on Unix this is DATADIR */
     /* and can be overriden by the MC_DATADIR environment variable */
@@ -301,7 +303,9 @@ main (int argc, char *argv[])
       startup_exit_falure:
         fprintf (stderr, _("Failed to run:\n%s\n"), mcerror->message);
         g_error_free (mcerror);
-        g_free (mc_global.tty.shell);
+
+        g_free (mc_global.shell->path);
+        g_free (mc_global.shell);
       startup_exit_ok:
         str_uninit_strings ();
         mc_timer_destroy (mc_global.timer);
@@ -508,7 +512,8 @@ main (int argc, char *argv[])
     }
     g_free (last_wd_string);
 
-    g_free (mc_global.tty.shell);
+    g_free (mc_global.shell->path);
+    g_free (mc_global.shell);
 
     done_key ();
 

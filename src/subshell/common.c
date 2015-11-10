@@ -132,15 +132,15 @@ enum
 };
 
 /* Subshell type (gleaned from the SHELL environment variable, if available) */
-static enum
-{
-    BASH,
-    ASH_BUSYBOX,                /* BusyBox default shell (ash) */
-    DASH,                       /* Debian variant of ash */
-    TCSH,
-    ZSH,
-    FISH
-} subshell_type;
+//static enum
+//{
+//    BASH,
+//    ASH_BUSYBOX,                /* BusyBox default shell (ash) */
+//    DASH,                       /* Debian variant of ash */
+//    TCSH,
+//    ZSH,
+//    FISH
+//} subshell_type;
 
 /*** file scope variables ************************************************************************/
 
@@ -280,7 +280,7 @@ init_subshell_child (const char *pty_name)
         putenv (g_strdup (sid_str));
     }
 
-    switch (subshell_type)
+    switch (mc_global.shell->type)
     {
     case BASH:
         /* Do we have a custom init file ~/.local/share/mc/bashrc? */
@@ -338,7 +338,7 @@ init_subshell_child (const char *pty_name)
         break;
 
     default:
-        fprintf (stderr, __FILE__ ": unimplemented subshell type %d\r\n", subshell_type);
+        fprintf (stderr, __FILE__ ": unimplemented subshell type %d\r\n", mc_global.shell->type);
         my_exit (FORK_FAILURE);
     }
 
@@ -363,16 +363,16 @@ init_subshell_child (const char *pty_name)
 
     /* Execute the subshell at last */
 
-    switch (subshell_type)
+    switch (mc_global.shell->type)
     {
     case BASH:
-        execl (mc_global.tty.shell, "bash", "-rcfile", init_file, (char *) NULL);
+        execl (mc_global.shell->path, "bash", "-rcfile", init_file, (char *) NULL);
         break;
 
     case ZSH:
         /* Use -g to exclude cmds beginning with space from history
          * and -Z to use the line editor on non-interactive term */
-        execl (mc_global.tty.shell, "zsh", "-Z", "-g", (char *) NULL);
+        execl (mc_global.shell->path, "zsh", "-Z", "-g", (char *) NULL);
 
         break;
 
@@ -380,7 +380,7 @@ init_subshell_child (const char *pty_name)
     case DASH:
     case TCSH:
     case FISH:
-        execl (mc_global.tty.shell, mc_global.tty.shell, (char *) NULL);
+        execl (mc_global.shell->path, mc_global.shell->path, (char *) NULL);
         break;
 
     default:
@@ -805,22 +805,22 @@ init_subshell_type (void)
     /* Find out what type of shell we have. Also consider real paths (resolved symlinks)
      * because e.g. csh might point to tcsh, ash to dash or busybox, sh to anything. */
 
-    if (strstr (mc_global.tty.shell, "/zsh") != NULL
-        || strstr (mc_global.tty.shell_realpath, "/zsh") != NULL || getenv ("ZSH_VERSION") != NULL)
+    if (strstr (mc_global.shell->path, "/zsh") != NULL
+        || strstr (mc_global.shell->real_path, "/zsh") != NULL || getenv ("ZSH_VERSION") != NULL)
         /* Also detects ksh symlinked to zsh */
-        subshell_type = ZSH;
-    else if (strstr (mc_global.tty.shell, "/tcsh") != NULL
-             || strstr (mc_global.tty.shell_realpath, "/tcsh") != NULL)
+        mc_global.shell->type = ZSH;
+    else if (strstr (mc_global.shell->path, "/tcsh") != NULL
+             || strstr (mc_global.shell->real_path, "/tcsh") != NULL)
         /* Also detects csh symlinked to tcsh */
-        subshell_type = TCSH;
-    else if (strstr (mc_global.tty.shell, "/fish") != NULL
-             || strstr (mc_global.tty.shell_realpath, "/fish") != NULL)
-        subshell_type = FISH;
-    else if (strstr (mc_global.tty.shell, "/dash") != NULL
-             || strstr (mc_global.tty.shell_realpath, "/dash") != NULL)
+        mc_global.shell->type = TCSH;
+    else if (strstr (mc_global.shell->path, "/fish") != NULL
+             || strstr (mc_global.shell->real_path, "/fish") != NULL)
+        mc_global.shell->type = FISH;
+    else if (strstr (mc_global.shell->path, "/dash") != NULL
+             || strstr (mc_global.shell->real_path, "/dash") != NULL)
         /* Debian ash (also found if symlinked to by ash/sh) */
-        subshell_type = DASH;
-    else if (strstr (mc_global.tty.shell_realpath, "/busybox") != NULL)
+        mc_global.shell->type = DASH;
+    else if (strstr (mc_global.shell->real_path, "/busybox") != NULL)
     {
         /* If shell is symlinked to busybox, assume it is an ash, even though theoretically
          * it could also be a hush (a mini shell for non-MMU systems deactivated by default).
@@ -829,11 +829,11 @@ init_subshell_type (void)
          * Sometimes even bash is symlinked to busybox (CONFIG_FEATURE_BASH_IS_ASH option),
          * so we need to check busybox symlinks *before* checking for the name "bash"
          * in order to avoid that case. */
-        subshell_type = ASH_BUSYBOX;
+        mc_global.shell->type = ASH_BUSYBOX;
     }
-    else if (strstr (mc_global.tty.shell, "/bash") != NULL || getenv ("BASH") != NULL)
+    else if (strstr (mc_global.shell->path, "/bash") != NULL || getenv ("BASH") != NULL)
         /* If bash is not symlinked to busybox, it is safe to assume it is a real bash */
-        subshell_type = BASH;
+        mc_global.shell->type = BASH;
     else
     {
         mc_global.tty.use_subshell = FALSE;
@@ -856,7 +856,7 @@ init_subshell_type (void)
 static void
 init_subshell_precmd (char *precmd, size_t buff_size)
 {
-    switch (subshell_type)
+    switch (mc_global.shell->type)
     {
     case BASH:
         g_snprintf (precmd, buff_size,
@@ -978,7 +978,7 @@ subshell_name_quote (const char *s)
     const char *su, *n;
     const char *quote_cmd_start, *quote_cmd_end;
 
-    if (subshell_type == FISH)
+    if (mc_global.shell->type == FISH)
     {
         quote_cmd_start = "(printf \"%b\" '";
         quote_cmd_end = "')";
@@ -1096,7 +1096,7 @@ init_subshell (void)
 
         /* Create a pipe for receiving the subshell's CWD */
 
-        if (subshell_type == TCSH)
+        if (mc_global.shell->type == TCSH)
         {
             g_snprintf (tcsh_fifo, sizeof (tcsh_fifo), "%s/mc.pipe.%d",
                         mc_tmpdir (), (int) getpid ());
@@ -1155,7 +1155,7 @@ init_subshell (void)
      * shell code. It is vital that each one-liner ends with a line feed character ("\n" ).
      */
 
-    switch (subshell_type)
+    switch (mc_global.shell->type)
     {
     case BASH:
         g_snprintf (precmd, sizeof (precmd),
@@ -1414,7 +1414,7 @@ exit_subshell (void)
 
     if (subshell_quit)
     {
-        if (subshell_type == TCSH)
+        if (mc_global.shell->type == TCSH)
         {
             if (unlink (tcsh_fifo) == -1)
                 fprintf (stderr, "Cannot remove named pipe %s: %s\r\n",
@@ -1488,7 +1488,7 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt)
 
         bPathNotEq = strcmp (subshell_cwd, pcwd) != 0;
 
-        if (bPathNotEq && subshell_type == TCSH)
+        if (bPathNotEq && mc_global.shell->type == TCSH)
         {
             char rp_subshell_cwd[PATH_MAX];
             char rp_current_panel_cwd[PATH_MAX];
@@ -1517,7 +1517,7 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt)
     }
 
     /* Really escape Zsh history */
-    if (subshell_type == ZSH)
+    if (mc_global.shell->type == ZSH)
     {
         /* Per Zsh documentation last command prefixed with space lingers in the internal history
          * until the next command is entered before it vanishes. To make it vanish right away,

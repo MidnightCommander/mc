@@ -35,7 +35,7 @@
 #include "src/filemanager/midnight.h"
 #include "src/filemanager/tree.h"
 #ifdef ENABLE_SUBSHELL
-#include "src/subshell.h"
+#include "src/subshell/subshell.h"
 #endif /* ENABLE_SUBSHELL */
 
 #include "src/filemanager/command.c"

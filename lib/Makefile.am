@@ -40,6 +40,7 @@ libmc_la_SOURCES = \
 	keybind.c keybind.h \
 	lock.c lock.h \
 	serialize.c serialize.h \
+	shell.h \
 	timefmt.c timefmt.h \
 	timer.c timer.h
 

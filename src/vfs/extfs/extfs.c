@@ -848,7 +848,7 @@ extfs_cmd (const char *str_extfs_cmd, struct archive *archive,
     g_free (quoted_archive_name);
 
     open_error_pipe ();
-    retval = my_system (EXECUTE_AS_SHELL, mc_global.tty.shell, cmd);
+    retval = my_system (EXECUTE_AS_SHELL, mc_global.shell->path, cmd);
     g_free (cmd);
     close_error_pipe (D_ERROR, NULL);
     return retval;
