@@ -13,21 +13,21 @@
 # Slava Zanko <slavazanko@gmail.com>, 2009, 2011
 # NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
 # Andrew Borodin <aborodin@vmail.ru>, 2009-2015.
+# Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
+# AlexL <loginov.alex.valer@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2015-05-24 18:29+0300\n"
-"PO-Revision-Date: 2015-02-26 09:45+0300\n"
+"POT-Creation-Date: 2015-11-08 21:17+0100\n"
+"PO-Revision-Date: 2015-11-10 21:56+0300\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
-"Language-Team: Russian (http://www.transifex.com/projects/p/mc/language/"
-"ru/)\n"
-"Language: ru\n"
+"Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 msgid "Warning: cannot load codepages list"
 msgstr "Внимание: невозможно загрузить список кодировок"
@@ -459,25 +459,29 @@ msgstr ""
 "Проверьте переменную окружения TERM.\n"
 
 msgid "Cannot create pipe descriptor"
-msgstr ""
+msgstr "Не удалось создать дескриптор канала"
 
 msgid "Cannot parse command for pipe"
-msgstr ""
+msgstr "Не удалось разобрать команду для канала"
 
 msgid "Cannot create pipe streams"
-msgstr ""
+msgstr "Не удалось создать потоки канала"
 
 #, c-format
 msgid ""
 "Unexpected error in select() reading data from a child process:\n"
 "%s"
 msgstr ""
+"Неожиданная ошибка в select() при чтении данных из дочернего процесса:\n"
+"%s"
 
 #, c-format
 msgid ""
 "Unexpected error in waitpid():\n"
 "%s"
 msgstr ""
+"Неожиданная ошибка в waitpid():\n"
+"%s"
 
 msgid "Warning"
 msgstr "Предупреждение"
@@ -495,8 +499,16 @@ msgstr "Ошибка дублирования старого канала оши
 msgid "Directory cache expired for %s"
 msgstr "Кэш каталога устарел для %s"
 
+#, c-format
+msgid "%s: %s: %s %3d%% %<PRIuMAX> %s"
+msgstr ""
+
 msgid "bytes transferred"
 msgstr "переданных байт"
+
+#, c-format
+msgid "%s: %s: %s %<PRIuMAX> %s"
+msgstr ""
 
 msgid "Starting linear transfer..."
 msgstr "Запуск линейной передачи..."
@@ -1612,76 +1624,76 @@ msgid "ButtonBar|PullDn"
 msgstr "МенюMC"
 
 msgid "Breton"
-msgstr ""
+msgstr "Бретонский"
 
 msgid "Czech"
-msgstr ""
+msgstr "Чешский"
 
 msgid "Welsh"
-msgstr ""
+msgstr "Валлийский"
 
 msgid "Danish"
-msgstr ""
+msgstr "Датский"
 
 msgid "German"
-msgstr ""
+msgstr "Немецкий"
 
 msgid "Greek"
-msgstr ""
+msgstr "Греческий"
 
 msgid "English"
-msgstr ""
+msgstr "Английский"
 
 msgid "British English"
-msgstr ""
+msgstr "Британский английский"
 
 msgid "Canadian English"
-msgstr ""
+msgstr "Канадский английский"
 
 msgid "American English"
-msgstr ""
+msgstr "Американский английский"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Эсперанто"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Испанский"
 
 msgid "Faroese"
-msgstr ""
+msgstr "Фарерский"
 
 msgid "French"
-msgstr ""
+msgstr "Французский"
 
 msgid "Italian"
-msgstr ""
+msgstr "Итальянский"
 
 msgid "Dutch"
-msgstr ""
+msgstr "Голландский"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "Норвежский"
 
 msgid "Polish"
-msgstr ""
+msgstr "Польский"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "Португальский"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Румынский"
 
 msgid "Russian"
-msgstr ""
+msgstr "Русский"
 
 msgid "Slovak"
-msgstr ""
+msgstr "Словацкий"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Швецкий"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Украинский"
 
 msgid "&Add word"
 msgstr "&Добавить"
@@ -1963,9 +1975,8 @@ msgstr "&Расширенный"
 msgid "&User defined:"
 msgstr "&Определенный пользователем"
 
-#, fuzzy
 msgid "columns"
-msgstr "В&ыделить столбцы"
+msgstr "столбцы"
 
 msgid "User &mini status"
 msgstr "Строка &мини-статуса в формате пользователя"
@@ -1982,7 +1993,8 @@ msgstr "&Обратный"
 msgid "Sort order"
 msgstr "Порядок сортировки"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 msgid "Confirmation|&Delete"
 msgstr "&Удаление"
 
@@ -2957,6 +2969,7 @@ msgid_plural "Finished (ignored %zd directories)"
 msgstr[0] "Завершено (пропущен %zd каталог)"
 msgstr[1] "Завершено (пропущено %zd каталога)"
 msgstr[2] "Завершено (пропущено %zd каталогов)"
+msgstr[3] "Завершено (пропущено %zd каталогов)"
 
 msgid "Searching"
 msgstr "Ищем"
@@ -3121,6 +3134,7 @@ msgid_plural " (%ld blocks)"
 msgstr[0] "(%ld блок)"
 msgstr[1] "(%ld блока)"
 msgstr[2] "(%ld блоков)"
+msgstr[3] "(%ld блоков)"
 
 #, c-format
 msgid "Owner:      %s/%s"
@@ -3357,6 +3371,7 @@ msgid_plural "You have %zd opened screens. Quit anyway?"
 msgstr[0] "У вас %zd открытый экран. Всё равно выйти?"
 msgstr[1] "У вас %zd открытых экрана. Всё равно выйти?"
 msgstr[2] "У вас %zd открытых экранов. Всё равно выйти?"
+msgstr[3] "У вас %zd открытых экранов. Всё равно выйти?"
 
 msgid "The Midnight Commander"
 msgstr "Midnight Commander"
@@ -3505,6 +3520,7 @@ msgid_plural "%s bytes"
 msgstr[0] "%s байт"
 msgstr[1] "%s байта"
 msgstr[2] "%s байт"
+msgstr[3] "%s байт"
 
 #, c-format
 msgid "%s in %d file"
@@ -3512,6 +3528,7 @@ msgid_plural "%s in %d files"
 msgstr[0] "%s в %d файле"
 msgstr[1] "%s в %d файлах"
 msgstr[2] "%s в %d файлах"
+msgstr[3] "%s в %d файлах"
 
 msgid "Panelize"
 msgstr "Панелизация"
@@ -4373,6 +4390,8 @@ msgid ""
 "Failed to read data from child stdout:\n"
 "%s"
 msgstr ""
+"Не удалось прочитать данные из дочернего stdout:\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4422,3 +4441,4 @@ msgstr "Продолжить с начала?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Невозможно получить локальную копию /ftp://some.host/editme.txt"
+
