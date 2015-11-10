@@ -255,6 +255,7 @@ typedef struct
 
         /* The user's shell */
         char *shell;
+        char *shell_realpath;
 
         /* This flag is set by xterm detection routine in function main() */
         /* It is used by function view_other_cmd() */

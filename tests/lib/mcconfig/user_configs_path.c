@@ -88,95 +88,99 @@ static const struct test_user_config_paths_ds
         CONF_MAIN,
         MC_CONFIG_FILE
     },
-    { /* 0. */
+    { /* 1. */
         CONF_MAIN,
         MC_FHL_INI_FILE
     },
-    { /* 0. */
+    { /* 2. */
         CONF_MAIN,
         MC_HOTLIST_FILE
     },
-    { /* 0. */
+    { /* 3. */
         CONF_MAIN,
         GLOBAL_KEYMAP_FILE
     },
-    { /* 0. */
+    { /* 4. */
         CONF_MAIN,
         MC_USERMENU_FILE
     },
-    { /* 0. */
+    { /* 5. */
         CONF_MAIN,
         EDIT_SYNTAX_FILE
     },
-    { /* 0. */
+    { /* 6. */
         CONF_MAIN,
         EDIT_HOME_MENU
     },
-    { /* 0. */
+    { /* 7. */
         CONF_MAIN,
         EDIT_DIR PATH_SEP_STR "edit.indent.rc"
     },
-    { /* 0. */
+    { /* 8. */
         CONF_MAIN,
         EDIT_DIR PATH_SEP_STR "edit.spell.rc"
     },
-    { /* 0. */
+    { /* 9. */
         CONF_MAIN,
         MC_PANELS_FILE
     },
-    { /* 0. */
+    { /* 10. */
         CONF_MAIN,
         MC_FILEBIND_FILE
     },
-    { /* 0. */
+    { /* 11. */
         CONF_DATA,
         MC_SKINS_SUBDIR
     },
-    { /* 0. */
+    { /* 12. */
         CONF_DATA,
         FISH_PREFIX
     },
-    { /* 0. */
+    { /* 13. */
+        CONF_DATA,
+        "ashrc"
+    },
+    { /* 14. */
         CONF_DATA,
         "bashrc"
     },
-    { /* 0. */
+    { /* 15. */
         CONF_DATA,
         "inputrc"
     },
-    { /* 0. */
+    { /* 16. */
         CONF_DATA,
         MC_EXTFS_DIR
     },
-    { /* 0. */
+    { /* 17. */
         CONF_DATA,
         MC_HISTORY_FILE
     },
-    { /* 0. */
+    { /* 18. */
         CONF_DATA,
         MC_FILEPOS_FILE
     },
-    { /* 0. */
+    { /* 19. */
         CONF_DATA,
         EDIT_CLIP_FILE
     },
-    { /* 0. */
+    { /* 20. */
         CONF_DATA,
         MC_MACRO_FILE
     },
-    { /* 0. */
+    { /* 21. */
         CONF_CACHE,
         "mc.log"
     },
-    { /* 0. */
+    { /* 22. */
         CONF_CACHE,
         MC_TREESTORE_FILE
     },
-    { /* 0. */
+    { /* 23. */
         CONF_CACHE,
         EDIT_TEMP_FILE
     },
-    { /* 0. */
+    { /* 24. */
         CONF_CACHE,
         EDIT_BLOCK_FILE
     },
