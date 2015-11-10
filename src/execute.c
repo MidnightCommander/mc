@@ -49,7 +49,7 @@
 #include "filemanager/layout.h" /* use_dash() */
 #include "consaver/cons.saver.h"
 #ifdef ENABLE_SUBSHELL
-#include "subshell.h"
+#include "subshell/subshell.h"
 #endif
 #include "setup.h"              /* clear_before_exec */
 

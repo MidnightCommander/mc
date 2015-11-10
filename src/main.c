@@ -67,7 +67,7 @@
 #include "events_init.h"
 #include "args.h"
 #ifdef ENABLE_SUBSHELL
-#include "subshell.h"
+#include "subshell/subshell.h"
 #endif
 #include "setup.h"              /* load_setup() */
 

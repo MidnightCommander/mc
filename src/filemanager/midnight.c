@@ -55,7 +55,7 @@
 
 #include "src/args.h"
 #ifdef ENABLE_SUBSHELL
-#include "src/subshell.h"
+#include "src/subshell/subshell.h"
 #endif
 #include "src/setup.h"          /* variables */
 #include "src/learn.h"          /* learn_keys() */

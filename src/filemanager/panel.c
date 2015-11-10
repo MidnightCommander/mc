@@ -63,7 +63,7 @@
 #endif
 #include "src/keybind-defaults.h"       /* global_keymap_t */
 #ifdef ENABLE_SUBSHELL
-#include "src/subshell.h"       /* do_subshell_chdir() */
+#include "src/subshell/subshell.h"      /* do_subshell_chdir() */
 #endif
 
 #include "dir.h"

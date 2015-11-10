@@ -5,7 +5,31 @@
    Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2013
+   Alexander Kriegisch <Alexander@Kriegisch.name>
+   Aliaksey Kandratsenka <alk@tut.by>
+   Andreas Mohr <and@gmx.li>
+   Andrew Borodin <aborodin@vmail.ru>
+   Andrew Borodin <borodin@borodin.zarya>
+   Andrew V. Samoilov <sav@bcs.zp.ua>
+   Chris Owen <chris@candu.co.uk>
+   Claes Nästén <me@pekdon.net>
+   Egmont Koblinger <egmont@gmail.com>
+   Enrico Weigelt, metux IT service <weigelt@metux.de>
+   Igor Urazov <z0rc3r@gmail.com>
+   Ilia Maslakov <il.smind@gmail.com>
+   Leonard den Ottolander <leonard@den.ottolander.nl>
+   Miguel de Icaza <miguel@novell.com>
+   Mikhail S. Pobolovets <styx.mp@gmail.com>
+   Norbert Warmuth <nwarmuth@privat.circular.de>
+   Patrick Winnertz <winnie@debian.org>
+   Pavel Machek <pavel@suse.cz>
+   Pavel Roskin <proski@gnu.org>
+   Pavel Tsekov <ptsekov@gmx.net>
+   Roland Illig <roland.illig@gmx.de>
+   Sergei Trofimovich <slyfox@inbox.ru>
+   Slava Zanko <slavazanko@gmail.com>, 2013,2015.
+   Timur Bakeyev <mc@bat.ru>
+   Vit Rosin <vit_r@list.ru>
 
    This file is part of the Midnight Commander.
 
@@ -61,11 +85,8 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "filemanager/midnight.h"       /* current_panel */
-
-#include "consaver/cons.saver.h"        /* handle_console() */
-#include "setup.h"
 #include "subshell.h"
+#include "internal.h"
 
 /*** global variables ****************************************************************************/
 
@@ -932,6 +953,83 @@ init_subshell_precmd (char *precmd, size_t buff_size)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Carefully quote directory name to allow entering any directory safely,
+ * no matter what weird characters it may contain in its name.
+ * NOTE: Treat directory name an untrusted data, don't allow it to cause
+ * executing any commands in the shell.  Escape all control characters.
+ * Use following technique:
+ *
+ * printf(1) with format string containing a single conversion specifier,
+ * "b", and an argument which contains a copy of the string passed to 
+ * subshell_name_quote() with all characters, except digits and letters,
+ * replaced by the backslash-escape sequence \0nnn, where "nnn" is the
+ * numeric value of the character converted to octal number.
+ * 
+ *   cd "`printf "%b" 'ABC\0nnnDEF\0nnnXYZ'`"
+ *
+ */
+
+static GString *
+subshell_name_quote (const char *s)
+{
+    GString *ret;
+    const char *su, *n;
+    const char *quote_cmd_start, *quote_cmd_end;
+
+    if (subshell_type == FISH)
+    {
+        quote_cmd_start = "(printf \"%b\" '";
+        quote_cmd_end = "')";
+    }
+    /* TODO: When BusyBox printf is fixed, get rid of this "else if", see
+       http://lists.busybox.net/pipermail/busybox/2012-March/077460.html */
+    /* else if (subshell_type == ASH_BUSYBOX)
+       {
+       quote_cmd_start = "\"`echo -en '";
+       quote_cmd_end = "'`\"";
+       } */
+    else
+    {
+        quote_cmd_start = "\"`printf \"%b\" '";
+        quote_cmd_end = "'`\"";
+    }
+
+    ret = g_string_sized_new (64);
+
+    /* Prevent interpreting leading '-' as a switch for 'cd' */
+    if (s[0] == '-')
+        g_string_append (ret, "./");
+
+    /* Copy the beginning of the command to the buffer */
+    g_string_append (ret, quote_cmd_start);
+
+    /*
+     * Print every character except digits and letters as a backslash-escape
+     * sequence of the form \0nnn, where "nnn" is the numeric value of the
+     * character converted to octal number.
+     */
+    for (su = s; su[0] != '\0'; su = n)
+    {
+        n = str_cget_next_char_safe (su);
+
+        if (str_isalnum (su))
+            g_string_append_len (ret, su, n - su);
+        else
+        {
+            int c;
+
+            for (c = 0; c < n - su; c++)
+                g_string_append_printf (ret, "\\0%03o", (unsigned char) su[c]);
+        }
+    }
+
+    g_string_append (ret, quote_cmd_end);
+
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1182,7 +1280,7 @@ invoke_subshell (const char *command, int how, vfs_path_t ** new_dir_vpath)
 
     /* Make the subshell change to MC's working directory */
     if (new_dir_vpath != NULL)
-        do_subshell_chdir (current_panel->cwd_vpath, TRUE);
+        do_subshell_chdir (subshell_get_cwd_from_current_panel (), TRUE);
 
     if (command == NULL)        /* The user has done "C-o" from MC */
     {
@@ -1212,16 +1310,16 @@ invoke_subshell (const char *command, int how, vfs_path_t ** new_dir_vpath)
     {
         const char *pcwd;
 
-        pcwd = vfs_translate_path (vfs_path_as_str (current_panel->cwd_vpath));
+        pcwd = vfs_translate_path (vfs_path_as_str (subshell_get_cwd_from_current_panel ()));
         if (strcmp (subshell_cwd, pcwd) != 0)
             *new_dir_vpath = vfs_path_from_str (subshell_cwd);  /* Make MC change to the subshell's CWD */
     }
 
     /* Restart the subshell if it has died by SIGHUP, SIGQUIT, etc. */
-    while (!subshell_alive && quit == 0 && mc_global.tty.use_subshell)
+    while (!subshell_alive && subshell_get_mainloop_quit () == 0 && mc_global.tty.use_subshell)
         init_subshell ();
 
-    return quit;
+    return subshell_get_mainloop_quit ();
 }
 
 
@@ -1331,84 +1429,6 @@ exit_subshell (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Carefully quote directory name to allow entering any directory safely,
- * no matter what weird characters it may contain in its name.
- * NOTE: Treat directory name an untrusted data, don't allow it to cause
- * executing any commands in the shell.  Escape all control characters.
- * Use following technique:
- *
- * printf(1) with format string containing a single conversion specifier,
- * "b", and an argument which contains a copy of the string passed to 
- * subshell_name_quote() with all characters, except digits and letters,
- * replaced by the backslash-escape sequence \0nnn, where "nnn" is the
- * numeric value of the character converted to octal number.
- * 
- *   cd "`printf "%b" 'ABC\0nnnDEF\0nnnXYZ'`"
- *
- */
-
-static GString *
-subshell_name_quote (const char *s)
-{
-    GString *ret;
-    const char *su, *n;
-    const char *quote_cmd_start, *quote_cmd_end;
-
-    if (subshell_type == FISH)
-    {
-        quote_cmd_start = "(printf \"%b\" '";
-        quote_cmd_end = "')";
-    }
-    /* TODO: When BusyBox printf is fixed, get rid of this "else if", see
-       http://lists.busybox.net/pipermail/busybox/2012-March/077460.html */
-    /* else if (subshell_type == ASH_BUSYBOX)
-       {
-       quote_cmd_start = "\"`echo -en '";
-       quote_cmd_end = "'`\"";
-       } */
-    else
-    {
-        quote_cmd_start = "\"`printf \"%b\" '";
-        quote_cmd_end = "'`\"";
-    }
-
-    ret = g_string_sized_new (64);
-
-    /* Prevent interpreting leading '-' as a switch for 'cd' */
-    if (s[0] == '-')
-        g_string_append (ret, "./");
-
-    /* Copy the beginning of the command to the buffer */
-    g_string_append (ret, quote_cmd_start);
-
-    /*
-     * Print every character except digits and letters as a backslash-escape
-     * sequence of the form \0nnn, where "nnn" is the numeric value of the
-     * character converted to octal number.
-     */
-    for (su = s; su[0] != '\0'; su = n)
-    {
-        n = str_cget_next_char_safe (su);
-
-        if (str_isalnum (su))
-            g_string_append_len (ret, su, n - su);
-        else
-        {
-            int c;
-
-            for (c = 0; c < n - su; c++)
-                g_string_append_printf (ret, "\\0%03o", (unsigned char) su[c]);
-        }
-    }
-
-    g_string_append (ret, quote_cmd_end);
-
-    return ret;
-}
-
-
-/* --------------------------------------------------------------------------------------------- */
 
 /** If it actually changed the directory it returns true */
 void
@@ -1416,7 +1436,7 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt)
 {
     char *pcwd;
 
-    pcwd = vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_RECODE);
+    pcwd = vfs_path_to_str_flags (subshell_get_cwd_from_current_panel (), 0, VPF_RECODE);
 
     if (!(subshell_state == INACTIVE && strcmp (subshell_cwd, pcwd) != 0))
     {
@@ -1484,7 +1504,9 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt)
         {
             char *cwd;
 
-            cwd = vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_STRIP_PASSWORD);
+            cwd =
+                vfs_path_to_str_flags (subshell_get_cwd_from_current_panel (), 0,
+                                       VPF_STRIP_PASSWORD);
             vfs_print_message (_("Warning: Cannot change to %s.\n"), cwd);
             g_free (cwd);
         }
@@ -1560,27 +1582,14 @@ sigchld_handler (int sig)
             subshell_alive = FALSE;
             delete_select_channel (mc_global.tty.subshell_pty);
             if (WIFEXITED (status) && WEXITSTATUS (status) != FORK_FAILURE)
-                quit |= SUBSHELL_EXIT;  /* Exited normally */
+            {
+                int subshell_quit;
+                subshell_quit = subshell_get_mainloop_quit () | SUBSHELL_EXIT;  /* Exited normally */
+                subshell_set_mainloop_quit (subshell_quit);
+            }
         }
     }
-#ifdef __linux__
-    pid = waitpid (cons_saver_pid, &status, WUNTRACED | WNOHANG);
-
-    if (pid == cons_saver_pid)
-    {
-
-        if (WIFSTOPPED (status))
-            /* Someone has stopped cons.saver - restart it */
-            kill (pid, SIGCONT);
-        else
-        {
-            /* cons.saver has died - disable confole saving */
-            handle_console (CONSOLE_DONE);
-            mc_global.tty.console_flag = '\0';
-        }
-
-    }
-#endif /* __linux__ */
+    subshell_handle_cons_saver ();
 
     /* If we got here, some other child exited; ignore it */
 }
