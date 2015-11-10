@@ -287,7 +287,7 @@ init_subshell_child (const char *pty_name)
         init_file = mc_config_get_full_path ("bashrc");
 
         /* Otherwise use ~/.bashrc */
-        if (access (init_file, R_OK) == -1)
+        if (!exist_file (init_file))
         {
             g_free (init_file);
             init_file = g_strdup (".bashrc");
@@ -302,7 +302,7 @@ init_subshell_child (const char *pty_name)
             char *input_file;
 
             input_file = mc_config_get_full_path ("inputrc");
-            if (access (input_file, R_OK) == 0)
+            if (exist_file (input_file))
             {
                 putenv_str = g_strconcat ("INPUTRC=", input_file, NULL);
                 putenv (putenv_str);
@@ -318,7 +318,7 @@ init_subshell_child (const char *pty_name)
         init_file = mc_config_get_full_path ("ashrc");
 
         /* Otherwise use ~/.profile */
-        if (access (init_file, R_OK) == -1)
+        if (!exist_file (init_file))
         {
             g_free (init_file);
             init_file = g_strdup (".profile");
