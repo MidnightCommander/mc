@@ -33,9 +33,11 @@ Version 4.8.15
   * Lost of Panelize contents in some cases (#3032, #3489, #3498, #3507)
   * Wrong highlight of search result in case of "Regular expression" and "Whole words" (#3524)
   * "Whole words" search works only in Normal mode (#3525)
+  * View find results doesn't jump to match line if file is too short to scroll page (#3530)
   * SFTP VFS: segfault (#3456)
   * Segfault in "Find file" due to invalid UTF-8 sequences (#3449)
   * Bash variable 'PROMPT_COMMAND' in  pantheon-terminal (#3534)
+
 
 Version 4.8.14
 
