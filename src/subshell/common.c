@@ -131,17 +131,6 @@ enum
     WRITE = 1
 };
 
-/* Subshell type (gleaned from the SHELL environment variable, if available) */
-//static enum
-//{
-//    BASH,
-//    ASH_BUSYBOX,                /* BusyBox default shell (ash) */
-//    DASH,                       /* Debian variant of ash */
-//    TCSH,
-//    ZSH,
-//    FISH
-//} subshell_type;
-
 /*** file scope variables ************************************************************************/
 
 /* tcsh closes all non-standard file descriptors, so we have to use a pipe */
@@ -282,7 +271,7 @@ init_subshell_child (const char *pty_name)
 
     switch (mc_global.shell->type)
     {
-    case BASH:
+    case SHELL_BASH:
         /* Do we have a custom init file ~/.local/share/mc/bashrc? */
         init_file = mc_config_get_full_path ("bashrc");
 
@@ -312,8 +301,8 @@ init_subshell_child (const char *pty_name)
 
         break;
 
-    case ASH_BUSYBOX:
-    case DASH:
+    case SHELL_ASH_BUSYBOX:
+    case SHELL_DASH:
         /* Do we have a custom init file ~/.local/share/mc/ashrc? */
         init_file = mc_config_get_full_path ("ashrc");
 
@@ -332,9 +321,9 @@ init_subshell_child (const char *pty_name)
         break;
 
         /* TODO: Find a way to pass initfile to TCSH, ZSH and FISH */
-    case TCSH:
-    case ZSH:
-    case FISH:
+    case SHELL_TCSH:
+    case SHELL_ZSH:
+    case SHELL_FISH:
         break;
 
     default:
@@ -365,21 +354,21 @@ init_subshell_child (const char *pty_name)
 
     switch (mc_global.shell->type)
     {
-    case BASH:
+    case SHELL_BASH:
         execl (mc_global.shell->path, "bash", "-rcfile", init_file, (char *) NULL);
         break;
 
-    case ZSH:
+    case SHELL_ZSH:
         /* Use -g to exclude cmds beginning with space from history
          * and -Z to use the line editor on non-interactive term */
         execl (mc_global.shell->path, "zsh", "-Z", "-g", (char *) NULL);
 
         break;
 
-    case ASH_BUSYBOX:
-    case DASH:
-    case TCSH:
-    case FISH:
+    case SHELL_ASH_BUSYBOX:
+    case SHELL_DASH:
+    case SHELL_TCSH:
+    case SHELL_FISH:
         execl (mc_global.shell->path, mc_global.shell->path, (char *) NULL);
         break;
 
@@ -792,58 +781,6 @@ pty_open_slave (const char *pty_name)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Get a subshell type and store in subshell_type variable
- *
- * @return TRUE if subtype was gotten, FALSE otherwise
- */
-
-static gboolean
-init_subshell_type (void)
-{
-    gboolean result = TRUE;
-
-    /* Find out what type of shell we have. Also consider real paths (resolved symlinks)
-     * because e.g. csh might point to tcsh, ash to dash or busybox, sh to anything. */
-
-    if (strstr (mc_global.shell->path, "/zsh") != NULL
-        || strstr (mc_global.shell->real_path, "/zsh") != NULL || getenv ("ZSH_VERSION") != NULL)
-        /* Also detects ksh symlinked to zsh */
-        mc_global.shell->type = ZSH;
-    else if (strstr (mc_global.shell->path, "/tcsh") != NULL
-             || strstr (mc_global.shell->real_path, "/tcsh") != NULL)
-        /* Also detects csh symlinked to tcsh */
-        mc_global.shell->type = TCSH;
-    else if (strstr (mc_global.shell->path, "/fish") != NULL
-             || strstr (mc_global.shell->real_path, "/fish") != NULL)
-        mc_global.shell->type = FISH;
-    else if (strstr (mc_global.shell->path, "/dash") != NULL
-             || strstr (mc_global.shell->real_path, "/dash") != NULL)
-        /* Debian ash (also found if symlinked to by ash/sh) */
-        mc_global.shell->type = DASH;
-    else if (strstr (mc_global.shell->real_path, "/busybox") != NULL)
-    {
-        /* If shell is symlinked to busybox, assume it is an ash, even though theoretically
-         * it could also be a hush (a mini shell for non-MMU systems deactivated by default).
-         * For simplicity's sake we assume that busybox always contains an ash, not a hush.
-         * On embedded platforms or on server systems, /bin/sh often points to busybox.
-         * Sometimes even bash is symlinked to busybox (CONFIG_FEATURE_BASH_IS_ASH option),
-         * so we need to check busybox symlinks *before* checking for the name "bash"
-         * in order to avoid that case. */
-        mc_global.shell->type = ASH_BUSYBOX;
-    }
-    else if (strstr (mc_global.shell->path, "/bash") != NULL || getenv ("BASH") != NULL)
-        /* If bash is not symlinked to busybox, it is safe to assume it is a real bash */
-        mc_global.shell->type = BASH;
-    else
-    {
-        mc_global.tty.use_subshell = FALSE;
-        result = FALSE;
-    }
-    return result;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
  * Set up `precmd' or equivalent for reading the subshell's CWD.
  *
  * Attention! Never forget that these are *one-liners* even though the concatenated
@@ -858,12 +795,12 @@ init_subshell_precmd (char *precmd, size_t buff_size)
 {
     switch (mc_global.shell->type)
     {
-    case BASH:
+    case SHELL_BASH:
         g_snprintf (precmd, buff_size,
                     " PROMPT_COMMAND='pwd>&%d; kill -STOP $$';\n", subshell_pipe[WRITE]);
         break;
 
-    case ASH_BUSYBOX:
+    case SHELL_ASH_BUSYBOX:
         /* BusyBox ash needs a somewhat complicated precmd emulation via PS1, and it is vital
          * that BB be built with active CONFIG_ASH_EXPAND_PRMT, but this is the default anyway.
          *
@@ -884,7 +821,7 @@ init_subshell_precmd (char *precmd, size_t buff_size)
          *    "PRECMD=precmd; "
          *    "PS1='$(eval $PRECMD)\\u@\\h:\\w\\$ '\n",
          */
-    case DASH:
+    case SHELL_DASH:
         /* Debian ash needs a precmd emulation via PS1, similar to BusyBox ash,
          * but does not support escape sequences for user, host and cwd in prompt.
          * Attention! Make sure that the buffer for precmd is big enough.
@@ -917,20 +854,20 @@ init_subshell_precmd (char *precmd, size_t buff_size)
                     "}; " "PRECMD=precmd; " "PS1='$($PRECMD)$ '\n", subshell_pipe[WRITE]);
         break;
 
-    case ZSH:
+    case SHELL_ZSH:
         g_snprintf (precmd, buff_size,
                     " precmd() { pwd>&%d; kill -STOP $$; }; "
                     "PS1='%%n@%%m:%%~%%# '\n", subshell_pipe[WRITE]);
         break;
 
-    case TCSH:
+    case SHELL_TCSH:
         g_snprintf (precmd, buff_size,
                     "set echo_style=both; "
                     "set prompt='%%n@%%m:%%~%%# '; "
                     "alias precmd 'echo $cwd:q >>%s; kill -STOP $$'\n", tcsh_fifo);
         break;
 
-    case FISH:
+    case SHELL_FISH:
         /* We also want a fancy user@host:cwd prompt here, but fish makes it very easy to also
          * use colours, which is what we will do. But first here is a simpler, uncoloured version:
          * "function fish_prompt; "
@@ -978,7 +915,7 @@ subshell_name_quote (const char *s)
     const char *su, *n;
     const char *quote_cmd_start, *quote_cmd_end;
 
-    if (mc_global.shell->type == FISH)
+    if (mc_global.shell->type == SHELL_FISH)
     {
         quote_cmd_start = "(printf \"%b\" '";
         quote_cmd_end = "')";
@@ -1071,7 +1008,7 @@ init_subshell (void)
 
     if (mc_global.tty.subshell_pty == 0)
     {                           /* First time through */
-        if (!init_subshell_type ())
+        if (mc_global.shell->type == SHELL_NONE)
             return;
 
         /* Open a pty for talking to the subshell */
@@ -1096,7 +1033,7 @@ init_subshell (void)
 
         /* Create a pipe for receiving the subshell's CWD */
 
-        if (mc_global.shell->type == TCSH)
+        if (mc_global.shell->type == SHELL_TCSH)
         {
             g_snprintf (tcsh_fifo, sizeof (tcsh_fifo), "%s/mc.pipe.%d",
                         mc_tmpdir (), (int) getpid ());
@@ -1157,13 +1094,13 @@ init_subshell (void)
 
     switch (mc_global.shell->type)
     {
-    case BASH:
+    case SHELL_BASH:
         g_snprintf (precmd, sizeof (precmd),
                     " PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND\n}'pwd>&%d;kill -STOP $$'\n"
                     "PS1='\\u@\\h:\\w\\$ '\n", subshell_pipe[WRITE]);
         break;
 
-    case ASH_BUSYBOX:
+    case SHELL_ASH_BUSYBOX:
         /* BusyBox ash needs a somewhat complicated precmd emulation via PS1, and it is vital
          * that BB be built with active CONFIG_ASH_EXPAND_PRMT, but this is the default anyway.
          *
@@ -1184,7 +1121,7 @@ init_subshell (void)
          *    "PRECMD=precmd; "
          *    "PS1='$(eval $PRECMD)\\u@\\h:\\w\\$ '\n",
          */
-    case DASH:
+    case SHELL_DASH:
         /* Debian ash needs a precmd emulation via PS1, similar to BusyBox ash,
          * but does not support escape sequences for user, host and cwd in prompt.
          * Attention! Make sure that the buffer for precmd is big enough.
@@ -1217,20 +1154,20 @@ init_subshell (void)
                     "}; " "PRECMD=precmd; " "PS1='$($PRECMD)$ '\n", subshell_pipe[WRITE]);
         break;
 
-    case ZSH:
+    case SHELL_ZSH:
         g_snprintf (precmd, sizeof (precmd),
                     " _mc_precmd(){ pwd>&%d;kill -STOP $$ }; precmd_functions+=(_mc_precmd)\n"
                     "PS1='%%n@%%m:%%~%%# '\n", subshell_pipe[WRITE]);
         break;
 
-    case TCSH:
+    case SHELL_TCSH:
         g_snprintf (precmd, sizeof (precmd),
                     "set echo_style=both; "
                     "set prompt='%%n@%%m:%%~%%# '; "
                     "alias precmd 'echo $cwd:q >>%s; kill -STOP $$'\n", tcsh_fifo);
         break;
 
-    case FISH:
+    case SHELL_FISH:
         /* Use fish_prompt_mc function for prompt, if not present then copy fish_prompt to it. */
         /* We also want a fancy user@host:cwd prompt here, but fish makes it very easy to also
          * use colours, which is what we will do. But first here is a simpler, uncoloured version:
@@ -1414,7 +1351,7 @@ exit_subshell (void)
 
     if (subshell_quit)
     {
-        if (mc_global.shell->type == TCSH)
+        if (mc_global.shell->type == SHELL_TCSH)
         {
             if (unlink (tcsh_fifo) == -1)
                 fprintf (stderr, "Cannot remove named pipe %s: %s\r\n",
@@ -1488,7 +1425,7 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt)
 
         bPathNotEq = strcmp (subshell_cwd, pcwd) != 0;
 
-        if (bPathNotEq && mc_global.shell->type == TCSH)
+        if (bPathNotEq && mc_global.shell->type == SHELL_TCSH)
         {
             char rp_subshell_cwd[PATH_MAX];
             char rp_current_panel_cwd[PATH_MAX];
@@ -1517,7 +1454,7 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt)
     }
 
     /* Really escape Zsh history */
-    if (mc_global.shell->type == ZSH)
+    if (mc_global.shell->type == SHELL_ZSH)
     {
         /* Per Zsh documentation last command prefixed with space lingers in the internal history
          * until the next command is entered before it vanishes. To make it vanish right away,
