@@ -490,16 +490,14 @@ feed_subshell (int how, int fail_on_error)
     int i;                      /* Loop counter */
 
     struct timeval wtime;       /* Maximum time we wait for the subshell */
-    struct timeval *wptr;
-
-    /* we wait up to 10 seconds if fail_on_error, forever otherwise */
-    wtime.tv_sec = 10;
-    wtime.tv_usec = 0;
-    wptr = fail_on_error ? &wtime : NULL;
+    int gotpwdoutput=FALSE;
 
     while (TRUE)
     {
         int maxfdp;
+
+        wtime.tv_sec = (fail_on_error && !gotpwdoutput) ? 10:0;
+        wtime.tv_usec = 10000;
 
         if (!subshell_alive)
             return FALSE;
@@ -516,7 +514,7 @@ feed_subshell (int how, int fail_on_error)
             maxfdp = max (maxfdp, STDIN_FILENO);
         }
 
-        if (select (maxfdp + 1, &read_set, NULL, NULL, wptr) == -1)
+        if (select (maxfdp + 1, &read_set, NULL, NULL, ( (ACTIVE == subshell_state && subshell_ready) ? NULL : &wtime)  ) == -1)
         {
             /* Despite using SA_RESTART, we still have to check for this */
             if (errno == EINTR)
@@ -534,11 +532,6 @@ feed_subshell (int how, int fail_on_error)
 
         if (FD_ISSET (mc_global.tty.subshell_pty, &read_set))
             /* Read from the subshell, write to stdout */
-
-            /* This loop improves performance by reducing context switches
-               by a factor of 20 or so... unfortunately, it also hangs MC
-               randomly, because of an apparent Linux bug.  Investigate. */
-            /* for (i=0; i<5; ++i)  * FIXME -- experimental */
         {
             bytes = read (mc_global.tty.subshell_pty, pty_buffer, sizeof (pty_buffer));
 
@@ -571,14 +564,7 @@ feed_subshell (int how, int fail_on_error)
 
             subshell_cwd[bytes - 1] = 0;        /* Squash the final '\n' */
 
-            synchronize ();
-
-            subshell_ready = TRUE;
-            if (subshell_state == RUNNING_COMMAND)
-            {
-                subshell_state = INACTIVE;
-                return TRUE;
-            }
+            gotpwdoutput=TRUE;
         }
 
         else if (FD_ISSET (STDIN_FILENO, &read_set))
@@ -607,9 +593,33 @@ feed_subshell (int how, int fail_on_error)
             if (pty_buffer[bytes - 1] == '\n' || pty_buffer[bytes - 1] == '\r')
                 subshell_ready = FALSE;
         }
-        else
-            return FALSE;
+        else {
+          if (fail_on_error) {
+            if (subshell_stopped && gotpwdoutput && subshell_state==RUNNING_COMMAND) {
+              break;
+            }else{
+              return FALSE;
+            }
+          }else {
+            if (subshell_stopped) {
+              if (subshell_state == ACTIVE) {
+                synchronize ();
+                subshell_ready = TRUE;
+              } else {
+                break;
+              }
+            }
+          }
+        }
     }
+
+    synchronize ();
+    subshell_ready = TRUE;
+    if (subshell_state == RUNNING_COMMAND)
+    {
+      subshell_state = INACTIVE;
+    }
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
