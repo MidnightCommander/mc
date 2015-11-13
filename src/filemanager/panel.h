@@ -146,8 +146,6 @@ typedef struct
 
 extern panelized_panel_t panelized_panel;
 
-extern panel_field_t panel_fields[];
-
 extern hook_t *select_file_hook;
 
 extern mc_fhl_t *mc_filehighlight;
