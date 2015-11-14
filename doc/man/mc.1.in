@@ -2459,7 +2459,7 @@ is substituted.
 The subshell support is a compile time option, that works with the
 shells: bash, ash (BusyBox and Debian), tcsh, zsh and fish.
 .PP
-When the subshell code is activated the Midnight Commander will
+When the subshell support is active, Midnight Commander will
 spawn a concurrent copy of your shell (the one defined in the
 .B SHELL
 variable and if it is not defined, then the one in the /etc/passwd
@@ -2480,18 +2480,21 @@ users (BusyBox or Debian) may specify startup commands in ~/.local/share/mc/ashr
 users cannot specify mc-specific startup commands at present. They have to rely on
 shell-specific startup files.
 .PP
-When the subshell code is used, you can suspend applications at any
+The following paragraphs are relevant only when the subshell support is
+active:
+.PP
+You can suspend applications at any
 time with the sequence C\-o and jump back to the Midnight Commander, if
 you interrupt an application, you will not be able to run other
 external commands until you quit the application you interrupted.
 .PP
-A special subshell feature (except Bash shell) is that Midnight Commander displays a dynamic prompt
-like "user@host:current_path> " (with known problems for fish which displays the prompt in
-full-screen mode (Ctrl-o), but not when the MC panels are visible).
+The basic prompt displayed by Midnight Commander is of the form
+"user@host:current_path$ ". When using a capable shell, like Bash, the
+prompt displayed by Midnight Commander will be the same prompt that you
+are currently using in your shell.
 .PP
-An extra added feature for Bash shell of using the subshell is that the prompt
-displayed by the Midnight Commander is the same prompt that you are
-currently using in your shell.
+(There's a known problem when using fish: the prompt is displayed only in
+full screen mode (Ctrl-o), not when the panels are visible.)
 .PP
 The
 .\"LINK2"
