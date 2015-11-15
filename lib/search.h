@@ -129,8 +129,10 @@ typedef struct mc_search_type_str_struct
 
 /*** declarations of public functions ************************************************************/
 
-mc_search_t *mc_search_new (const gchar * original, gsize original_len,
-                            const gchar * original_charset);
+mc_search_t *mc_search_new (const gchar * original, const gchar * original_charset);
+
+mc_search_t *mc_search_new_len (const gchar * original, gsize original_len,
+                                const gchar * original_charset);
 
 void mc_search_free (mc_search_t * lc_mc_search);
 

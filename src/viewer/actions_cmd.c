@@ -147,9 +147,9 @@ mcview_continue_search_cmd (WView * view)
             g_list_free_full (history, g_free);
 
 #ifdef HAVE_CHARSET
-            view->search = mc_search_new (view->last_search_string, -1, cp_source);
+            view->search = mc_search_new (view->last_search_string, cp_source);
 #else
-            view->search = mc_search_new (view->last_search_string, -1, NULL);
+            view->search = mc_search_new (view->last_search_string, NULL);
 #endif
             view->search_nroff_seq = mcview_nroff_seq_new (view);
 

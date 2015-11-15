@@ -1226,9 +1226,9 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
     edit_search_status_msg_t esm;
 
 #ifdef HAVE_CHARSET
-    srch = mc_search_new (match_expr, -1, cp_source);
+    srch = mc_search_new (match_expr, cp_source);
 #else
-    srch = mc_search_new (match_expr, -1, NULL);
+    srch = mc_search_new (match_expr, NULL);
 #endif
     if (srch == NULL)
         return 0;
@@ -2567,9 +2567,9 @@ edit_replace_cmd (WEdit * edit, int again)
     if (edit->search == NULL)
     {
 #ifdef HAVE_CHARSET
-        edit->search = mc_search_new (input1, -1, cp_source);
+        edit->search = mc_search_new (input1, cp_source);
 #else
-        edit->search = mc_search_new (input1, -1, NULL);
+        edit->search = mc_search_new (input1, NULL);
 #endif
         if (edit->search == NULL)
         {
@@ -2789,9 +2789,9 @@ edit_search_cmd (WEdit * edit, gboolean again)
             g_list_free_full (history, g_free);
 
 #ifdef HAVE_CHARSET
-            edit->search = mc_search_new (edit->last_search_string, -1, cp_source);
+            edit->search = mc_search_new (edit->last_search_string, cp_source);
 #else
-            edit->search = mc_search_new (edit->last_search_string, -1, NULL);
+            edit->search = mc_search_new (edit->last_search_string, NULL);
 #endif
             if (edit->search == NULL)
             {

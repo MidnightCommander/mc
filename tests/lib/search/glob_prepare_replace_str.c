@@ -71,7 +71,7 @@ START_PARAMETRIZED_TEST (test_glob_prepare_replace_str, test_glob_prepare_replac
     mc_search_t *s;
     char *dest_str;
 
-    s = mc_search_new (data->glob_str, -1, NULL);
+    s = mc_search_new (data->glob_str, NULL);
     s->is_case_sensitive = TRUE;
     s->search_type = MC_SEARCH_T_GLOB;
 

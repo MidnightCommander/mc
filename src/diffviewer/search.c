@@ -251,9 +251,9 @@ dview_search_cmd (WDiff * dview)
 
     mc_search_free (dview->search.handle);
 #ifdef HAVE_CHARSET
-    dview->search.handle = mc_search_new (dview->search.last_string, -1, cp_source);
+    dview->search.handle = mc_search_new (dview->search.last_string, cp_source);
 #else
-    dview->search.handle = mc_search_new (dview->search.last_string, -1, NULL);
+    dview->search.handle = mc_search_new (dview->search.last_string, NULL);
 #endif
 
     if (dview->search.handle == NULL)

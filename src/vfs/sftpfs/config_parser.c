@@ -213,7 +213,7 @@ sftpfs_fill_config_entity_from_config (FILE * ssh_config_handler,
 
     mc_return_val_if_error (mcerror, FALSE);
 
-    host_regexp = mc_search_new ("^\\s*host\\s+(.*)$", -1, DEFAULT_CHARSET);
+    host_regexp = mc_search_new ("^\\s*host\\s+(.*)$", DEFAULT_CHARSET);
     host_regexp->search_type = MC_SEARCH_T_REGEX;
     host_regexp->is_case_sensitive = FALSE;
 
@@ -256,7 +256,7 @@ sftpfs_fill_config_entity_from_config (FILE * ssh_config_handler,
             {
                 mc_search_t *pattern_regexp;
 
-                pattern_regexp = mc_search_new (host_pattern, -1, DEFAULT_CHARSET);
+                pattern_regexp = mc_search_new (host_pattern, DEFAULT_CHARSET);
                 pattern_regexp->search_type = MC_SEARCH_T_GLOB;
                 pattern_regexp->is_case_sensitive = FALSE;
                 pattern_regexp->is_entire_line = TRUE;
@@ -404,7 +404,7 @@ sftpfs_init_config_variables_patterns (void)
     for (i = 0; config_variables[i].pattern != NULL; i++)
     {
         config_variables[i].pattern_regexp =
-            mc_search_new (config_variables[i].pattern, -1, DEFAULT_CHARSET);
+            mc_search_new (config_variables[i].pattern, DEFAULT_CHARSET);
         config_variables[i].pattern_regexp->search_type = MC_SEARCH_T_REGEX;
         config_variables[i].pattern_regexp->is_case_sensitive = FALSE;
         config_variables[i].offset = structure_offsets[i];

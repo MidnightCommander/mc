@@ -1303,7 +1303,7 @@ file_mask_dialog (file_op_context_t * ctx, FileOperation operation,
             return dest_dir;
         }
 
-        ctx->search_handle = mc_search_new (source_mask, -1, NULL);
+        ctx->search_handle = mc_search_new (source_mask, NULL);
 
         if (ctx->search_handle == NULL)
         {

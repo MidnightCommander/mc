@@ -142,9 +142,9 @@ mcview_dialog_search (WView * view)
     mc_search_free (view->search);
 
 #ifdef HAVE_CHARSET
-    view->search = mc_search_new (view->last_search_string, -1, cp_source);
+    view->search = mc_search_new (view->last_search_string, cp_source);
 #else
-    view->search = mc_search_new (view->last_search_string, -1, NULL);
+    view->search = mc_search_new (view->last_search_string, NULL);
 #endif
     view->search_nroff_seq = mcview_nroff_seq_new (view);
     if (view->search != NULL)

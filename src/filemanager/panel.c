@@ -2056,7 +2056,7 @@ panel_select_ext_cmd (void)
 
     g_free (cur_file_ext);
 
-    search = mc_search_new (reg_exp, -1, NULL);
+    search = mc_search_new (reg_exp, NULL);
     search->search_type = MC_SEARCH_T_REGEX;
     search->is_case_sensitive = FALSE;
 
@@ -2524,7 +2524,7 @@ panel_select_unselect_files (WPanel * panel, const char *title, const char *hist
         return;
     }
 
-    search = mc_search_new (reg_exp, -1, NULL);
+    search = mc_search_new (reg_exp, NULL);
     search->search_type = (shell_patterns != 0) ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
     search->is_entire_line = TRUE;
     search->is_case_sensitive = case_sens != 0;
@@ -2644,7 +2644,7 @@ do_search (WPanel * panel, int c_code)
 
     reg_exp = g_strdup_printf ("%s*", panel->search_buffer);
     esc_str = strutils_escape (reg_exp, -1, ",|\\{}[]", TRUE);
-    search = mc_search_new (esc_str, -1, NULL);
+    search = mc_search_new (esc_str, NULL);
     search->search_type = MC_SEARCH_T_GLOB;
     search->is_entire_line = TRUE;
 
