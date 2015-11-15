@@ -34,7 +34,7 @@ typedef struct WMenuBar
     gboolean is_active;         /* If the menubar is in use */
     gboolean is_dropped;        /* If the menubar has dropped */
     GList *menu;                /* The actual menus */
-    size_t selected;            /* Selected menu on the top bar */
+    guint selected;             /* Selected menu on the top bar */
     unsigned long previous_widget;      /* Selected widget ID before activating menu */
 } WMenuBar;
 
