@@ -175,10 +175,10 @@ lock_extract_info (const char *str)
  * Extract user@host.domain.pid from lock file (static string)
  */
 
-static char *
+static const char *
 lock_get_info (const char *lockfname)
 {
-    int cnt;
+    ssize_t cnt;
     static char buf[BUF_SIZE];
 
     cnt = readlink (lockfname, buf, BUF_SIZE - 1);
@@ -199,7 +199,7 @@ lock_get_info (const char *lockfname)
 int
 lock_file (const vfs_path_t * fname_vpath)
 {
-    char *lockfname = NULL, *newlock, *msg, *lock;
+    char *lockfname = NULL, *newlock, *msg;
     struct stat statbuf;
     struct lock_s *lockinfo;
     gboolean is_local;
@@ -227,6 +227,8 @@ lock_file (const vfs_path_t * fname_vpath)
 
     if (lstat (lockfname, &statbuf) == 0)
     {
+        const char *lock;
+
         lock = lock_get_info (lockfname);
         if (lock == NULL)
             goto ret;
@@ -276,9 +278,9 @@ lock_file (const vfs_path_t * fname_vpath)
 int
 unlock_file (const vfs_path_t * fname_vpath)
 {
-    char *lockfname, *lock;
+    char *lockfname;
     struct stat statbuf;
-    const char *elpath;
+    const char *elpath, *lock;
 
     if (fname_vpath == NULL)
         return 0;
