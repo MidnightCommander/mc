@@ -185,12 +185,8 @@ mc_config_del_key (mc_config_t * mc_config, const char *group, const gchar * par
 {
     if (!mc_config || !group || !param)
         return FALSE;
-#if GLIB_CHECK_VERSION (2, 15, 0)
+
     return g_key_file_remove_key (mc_config->handle, group, param, NULL);
-#else
-    g_key_file_remove_key (mc_config->handle, group, param, NULL);
-    return TRUE;
-#endif
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
@@ -201,12 +197,7 @@ mc_config_del_group (mc_config_t * mc_config, const char *group)
     if (!mc_config || !group)
         return FALSE;
 
-#if GLIB_CHECK_VERSION (2, 15, 0)
     return g_key_file_remove_group (mc_config->handle, group, NULL);
-#else
-    g_key_file_remove_group (mc_config->handle, group, NULL);
-    return TRUE;
-#endif
 }
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
