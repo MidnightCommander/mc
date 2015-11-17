@@ -513,8 +513,6 @@ listbox_event (Gpm_Event * event, void *data)
         else
             listbox_select_entry (l, listbox_y_pos (l, local.y - 1));
 
-        /* We need to refresh ourselves since the dialog manager doesn't */
-        /* know about this event */
         listbox_draw (l, TRUE);
         return ret;
     }
