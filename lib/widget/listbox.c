@@ -52,6 +52,9 @@ const global_keymap_t *listbox_map = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
+/* Gives the position of the last item. */
+#define LISTBOX_LAST(l) (g_queue_is_empty ((l)->list) ? 0 : (int) g_queue_get_length ((l)->list) - 1)
+
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
@@ -215,20 +218,11 @@ listbox_check_hotkey (WListbox * l, int key)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* Selects from base the pos element */
+/* Calculates the item displayed at screen row 'y' (y==0 being the widget's 1st row). */
 static int
-listbox_select_pos (WListbox * l, int base, int pos)
+listbox_y_pos (WListbox * l, int y)
 {
-    int last = 0;
-
-    base += pos;
-
-    if (!listbox_is_empty (l))
-        last = g_queue_get_length (l->list) - 1;
-
-    base = min (base, last);
-
-    return base;
+    return min (l->top + y, LISTBOX_LAST (l));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -245,6 +239,14 @@ listbox_fwd (WListbox * l)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
+listbox_fwd_n (WListbox * l, int n)
+{
+    listbox_select_entry (l, min (l->pos + n, LISTBOX_LAST (l)));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
 listbox_back (WListbox * l)
 {
     if (l->pos <= 0)
@@ -255,13 +257,19 @@ listbox_back (WListbox * l)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+listbox_back_n (WListbox * l, int n)
+{
+    listbox_select_entry (l, max (l->pos - n, 0));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 listbox_execute_cmd (WListbox * l, unsigned long command)
 {
     cb_ret_t ret = MSG_HANDLED;
-    int i;
     Widget *w = WIDGET (l);
-    int length;
 
     if (l->list == NULL || g_queue_is_empty (l->list))
         return MSG_NOT_HANDLED;
@@ -281,18 +289,16 @@ listbox_execute_cmd (WListbox * l, unsigned long command)
         listbox_select_last (l);
         break;
     case CK_PageUp:
-        for (i = 0; (i < w->lines - 1) && (l->pos > 0); i++)
-            listbox_back (l);
+        listbox_back_n (l, w->lines - 1);
         break;
     case CK_PageDown:
-        length = g_queue_get_length (l->list);
-        for (i = 0; i < w->lines - 1 && l->pos < length - 1; i++)
-            listbox_fwd (l);
+        listbox_fwd_n (l, w->lines - 1);
         break;
     case CK_Delete:
         if (l->deletable)
         {
             gboolean is_last, is_more;
+            int length;
 
             length = g_queue_get_length (l->list);
 
@@ -488,15 +494,12 @@ listbox_event (Gpm_Event * event, void *data)
     {
         int ret = MOU_REPEAT;
         Gpm_Event local;
-        int i;
 
         local = mouse_get_local (event, w);
         if (local.y < 1)
-            for (i = -local.y; i >= 0; i--)
-                listbox_back (l);
+            listbox_back_n (l, -local.y + 1);
         else if (local.y > w->lines)
-            for (i = local.y - w->lines; i > 0; i--)
-                listbox_fwd (l);
+            listbox_fwd_n (l, local.y - w->lines);
         else if ((local.buttons & GPM_B_UP) != 0)
         {
             listbox_back (l);
@@ -508,7 +511,7 @@ listbox_event (Gpm_Event * event, void *data)
             ret = MOU_NORMAL;
         }
         else
-            listbox_select_entry (l, listbox_select_pos (l, l->top, local.y - 1));
+            listbox_select_entry (l, listbox_y_pos (l, local.y - 1));
 
         /* We need to refresh ourselves since the dialog manager doesn't */
         /* know about this event */
@@ -524,7 +527,7 @@ listbox_event (Gpm_Event * event, void *data)
 
         local = mouse_get_local (event, w);
         dlg_select_widget (l);
-        listbox_select_entry (l, listbox_select_pos (l, l->top, local.y - 1));
+        listbox_select_entry (l, listbox_y_pos (l, local.y - 1));
 
         if (l->callback != NULL)
             action = l->callback (l);
