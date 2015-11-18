@@ -228,12 +228,12 @@ listbox_y_pos (WListbox * l, int y)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-listbox_fwd (WListbox * l)
+listbox_fwd (WListbox * l, gboolean wrap)
 {
-    if ((guint) l->pos + 1 >= g_queue_get_length (l->list))
-        listbox_select_first (l);
-    else
+    if ((guint) l->pos + 1 < g_queue_get_length (l->list))
         listbox_select_entry (l, l->pos + 1);
+    else if (wrap)
+        listbox_select_first (l);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -247,12 +247,12 @@ listbox_fwd_n (WListbox * l, int n)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-listbox_back (WListbox * l)
+listbox_back (WListbox * l, gboolean wrap)
 {
-    if (l->pos <= 0)
-        listbox_select_last (l);
-    else
+    if (l->pos > 0)
         listbox_select_entry (l, l->pos - 1);
+    else if (wrap)
+        listbox_select_last (l);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -277,10 +277,10 @@ listbox_execute_cmd (WListbox * l, unsigned long command)
     switch (command)
     {
     case CK_Up:
-        listbox_back (l);
+        listbox_back (l, TRUE);
         break;
     case CK_Down:
-        listbox_fwd (l);
+        listbox_fwd (l, TRUE);
         break;
     case CK_Top:
         listbox_select_first (l);
@@ -502,12 +502,12 @@ listbox_event (Gpm_Event * event, void *data)
             listbox_fwd_n (l, local.y - w->lines);
         else if ((local.buttons & GPM_B_UP) != 0)
         {
-            listbox_back (l);
+            listbox_back (l, FALSE);
             ret = MOU_NORMAL;
         }
         else if ((local.buttons & GPM_B_DOWN) != 0)
         {
-            listbox_fwd (l);
+            listbox_fwd (l, FALSE);
             ret = MOU_NORMAL;
         }
         else
