@@ -41,6 +41,7 @@ typedef enum
 
 typedef enum
 {
+    MC_SEARCH_T_INVALID = -1,
     MC_SEARCH_T_NORMAL,
     MC_SEARCH_T_REGEX,
     MC_SEARCH_T_HEX,
