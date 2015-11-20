@@ -774,7 +774,7 @@ tree_store_mark_checked (const char *subname)
         current = tree_store_add_entry (name);
         ts.add_queue_vpath = g_list_prepend (ts.add_queue_vpath, vfs_path_clone (name));
     }
-    g_free (name);
+    vfs_path_free (name);
 
     /* Clear the deletion mark from the subdirectory and its children */
     base = current;
