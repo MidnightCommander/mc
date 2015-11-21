@@ -188,7 +188,8 @@ mc_def_ungetlocalcopy (const vfs_path_t * filename_vpath,
 int
 mc_open (const vfs_path_t * vpath, int flags, ...)
 {
-    int mode = 0, result = -1;
+    int result = -1;
+    mode_t mode = 0;
     const vfs_path_element_t *path_element;
 
     if (vpath == NULL)
@@ -199,7 +200,7 @@ mc_open (const vfs_path_t * vpath, int flags, ...)
     {
         va_list ap;
         va_start (ap, flags);
-        mode = va_arg (ap, int);
+        mode = va_arg (ap, mode_t);
         va_end (ap);
     }
 

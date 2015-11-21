@@ -1288,7 +1288,7 @@ file_mask_dialog (file_op_context_t * ctx, FileOperation operation,
         }
         else
         {
-            int i2;
+            mode_t i2;
 
             ctx->preserve = ctx->preserve_uidgid = FALSE;
             i2 = umask (0);

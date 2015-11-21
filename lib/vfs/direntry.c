@@ -987,7 +987,7 @@ struct stat *
 vfs_s_default_stat (struct vfs_class *me, mode_t mode)
 {
     static struct stat st;
-    int myumask;
+    mode_t myumask;
 
     (void) me;
 

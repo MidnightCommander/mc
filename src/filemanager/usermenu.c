@@ -162,7 +162,7 @@ static int
 test_type (WPanel * panel, char *arg)
 {
     int result = 0;             /* False by default */
-    int st_mode = panel->dir.list[panel->selected].st.st_mode;
+    mode_t st_mode = panel->dir.list[panel->selected].st.st_mode;
 
     for (; *arg != 0; arg++)
     {
