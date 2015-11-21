@@ -679,7 +679,7 @@ port_region_marked_for_delete (WInput * in)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-input_execute_cmd (WInput * in, unsigned long command)
+input_execute_cmd (WInput * in, long command)
 {
     cb_ret_t res = MSG_HANDLED;
 
@@ -1133,7 +1133,7 @@ cb_ret_t
 input_handle_char (WInput * in, int key)
 {
     cb_ret_t v;
-    unsigned long command;
+    long command;
 
     if (quote != 0)
     {
@@ -1177,7 +1177,7 @@ input_handle_char (WInput * in, int key)
 int
 input_key_is_in_map (WInput * in, int key)
 {
-    unsigned long command;
+    long command;
 
     (void) in;
 

@@ -3412,7 +3412,7 @@ edit_begin_end_macro_cmd (WEdit * edit)
     /* edit is a pointer to the widget */
     if (edit != NULL)
     {
-        unsigned long command = macro_index < 0 ? CK_MacroStartRecord : CK_MacroStopRecord;
+        long command = macro_index < 0 ? CK_MacroStartRecord : CK_MacroStopRecord;
         edit_execute_key_command (edit, command, -1);
     }
 }
@@ -3425,7 +3425,7 @@ edit_begin_end_repeat_cmd (WEdit * edit)
     /* edit is a pointer to the widget */
     if (edit != NULL)
     {
-        unsigned long command = macro_index < 0 ? CK_RepeatStartRecord : CK_RepeatStopRecord;
+        long command = macro_index < 0 ? CK_RepeatStartRecord : CK_RepeatStopRecord;
         edit_execute_key_command (edit, command, -1);
     }
 }

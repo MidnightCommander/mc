@@ -57,7 +57,7 @@ struct menu_entry_t
 {
     unsigned char first_letter;
     hotkey_t text;
-    unsigned long command;
+    long command;
     char *shortcut;
 };
 
@@ -774,7 +774,7 @@ menubar_event (Gpm_Event * event, void *data)
 /* --------------------------------------------------------------------------------------------- */
 
 menu_entry_t *
-menu_entry_create (const char *name, unsigned long command)
+menu_entry_create (const char *name, long command)
 {
     menu_entry_t *entry;
 

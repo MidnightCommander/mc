@@ -382,7 +382,7 @@ mcview_load_next_prev (WView * view, int direction)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-mcview_execute_cmd (WView * view, unsigned long command)
+mcview_execute_cmd (WView * view, long command)
 {
     int res = MSG_HANDLED;
 
@@ -546,7 +546,7 @@ mcview_execute_cmd (WView * view, unsigned long command)
 static cb_ret_t
 mcview_handle_key (WView * view, int key)
 {
-    unsigned long command;
+    long command;
 
 #ifdef HAVE_CHARSET
     key = convert_from_input_c (key);

@@ -3145,7 +3145,7 @@ dview_ok_to_exit (WDiff * dview)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-dview_execute_cmd (WDiff * dview, unsigned long command)
+dview_execute_cmd (WDiff * dview, long command)
 {
     cb_ret_t res = MSG_HANDLED;
 
@@ -3311,7 +3311,7 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
 static cb_ret_t
 dview_handle_key (WDiff * dview, int key)
 {
-    unsigned long command;
+    long command;
 
 #ifdef HAVE_CHARSET
     key = convert_from_input_c (key);

@@ -407,7 +407,7 @@ sort_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-midnight_get_shortcut (unsigned long command)
+midnight_get_shortcut (long command)
 {
     const char *ext_map;
     const char *shortcut = NULL;
@@ -1095,7 +1095,7 @@ toggle_show_hidden (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-midnight_execute_cmd (Widget * sender, unsigned long command)
+midnight_execute_cmd (Widget * sender, long command)
 {
     cb_ret_t res = MSG_HANDLED;
 
@@ -1395,7 +1395,7 @@ midnight_execute_cmd (Widget * sender, unsigned long command)
 static cb_ret_t
 midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    unsigned long command;
+    long command;
 
     switch (msg)
     {

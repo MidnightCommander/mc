@@ -64,7 +64,7 @@ typedef enum
 
 /* get string representation of shortcut assigned  with command */
 /* as menu is a widget of dialog, ask dialog about shortcut string */
-typedef char *(*dlg_shortcut_str) (unsigned long command);
+typedef char *(*dlg_shortcut_str) (long command);
 
 /* get dialog name to show in dialog list */
 typedef char *(*dlg_title_str) (const WDialog * h, size_t len);

@@ -690,7 +690,7 @@ load_keymap_from_section (const char *section_name, GArray * keymap, mc_config_t
         values = mc_config_get_string_list (cfg, section_name, *profile_keys, NULL);
         if (values != NULL)
         {
-            int action;
+            long action;
 
             action = keybind_lookup_action (*profile_keys);
             if (action > 0)

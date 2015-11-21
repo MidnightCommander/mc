@@ -3384,7 +3384,7 @@ directory_history_list (WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-panel_execute_cmd (WPanel * panel, unsigned long command)
+panel_execute_cmd (WPanel * panel, long command)
 {
     int res = MSG_HANDLED;
 

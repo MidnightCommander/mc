@@ -266,7 +266,7 @@ listbox_back_n (WListbox * l, int n)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-listbox_execute_cmd (WListbox * l, unsigned long command)
+listbox_execute_cmd (WListbox * l, long command)
 {
     cb_ret_t ret = MSG_HANDLED;
     Widget *w = WIDGET (l);
@@ -331,7 +331,7 @@ listbox_execute_cmd (WListbox * l, unsigned long command)
 static cb_ret_t
 listbox_key (WListbox * l, int key)
 {
-    unsigned long command;
+    long command;
 
     if (l->list == NULL)
         return MSG_NOT_HANDLED;

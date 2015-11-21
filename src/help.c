@@ -858,7 +858,7 @@ help_select_link (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-help_execute_cmd (unsigned long command)
+help_execute_cmd (long command)
 {
     cb_ret_t ret = MSG_HANDLED;
 
@@ -927,7 +927,7 @@ help_execute_cmd (unsigned long command)
 static cb_ret_t
 help_handle_key (WDialog * h, int c)
 {
-    unsigned long command;
+    long command;
 
     command = keybind_lookup_keymap_command (help_map, c);
     if ((command == CK_IgnoreKey) || (help_execute_cmd (command) == MSG_NOT_HANDLED))

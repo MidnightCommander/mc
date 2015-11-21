@@ -3185,7 +3185,7 @@ edit_find_bracket (WEdit * edit)
  */
 
 void
-edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_insertion)
+edit_execute_key_command (WEdit * edit, long command, int char_for_insertion)
 {
     if (command == CK_MacroStartRecord || command == CK_RepeatStartRecord
         || (macro_index < 0
@@ -3234,7 +3234,7 @@ edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_inse
    all of them. It also does not check for the Undo command.
  */
 void
-edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
+edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
 {
     Widget *w = WIDGET (edit);
 

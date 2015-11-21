@@ -42,7 +42,7 @@ typedef struct WMenuBar
 
 /*** declarations of public functions ************************************************************/
 
-menu_entry_t *menu_entry_create (const char *name, unsigned long command);
+menu_entry_t *menu_entry_create (const char *name, long command);
 void menu_entry_free (menu_entry_t * me);
 
 menu_t *create_menu (const char *name, GList * entries, const char *help_node);

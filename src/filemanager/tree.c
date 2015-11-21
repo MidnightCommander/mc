@@ -1029,7 +1029,7 @@ tree_toggle_navig (WTree * tree)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-tree_execute_cmd (WTree * tree, unsigned long command)
+tree_execute_cmd (WTree * tree, long command)
 {
     cb_ret_t res = MSG_HANDLED;
 
