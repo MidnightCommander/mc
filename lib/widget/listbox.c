@@ -339,13 +339,7 @@ listbox_key (WListbox * l, int key)
     /* focus on listbox item N by '0'..'9' keys */
     if (key >= '0' && key <= '9')
     {
-        int oldpos = l->pos;
         listbox_select_entry (l, key - '0');
-
-        /* need scroll to item? */
-        if (abs (oldpos - l->pos) > WIDGET (l)->lines)
-            l->top = l->pos;
-
         return MSG_HANDLED;
     }
 
