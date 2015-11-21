@@ -255,7 +255,7 @@ extfs_find_entry_int (struct entry *dir, const char *name, GSList * list,
     name_end = name + strlen (name);
 
     q = strchr (p, PATH_SEP);
-    if (q == '\0')
+    if (q == NULL)
         q = strchr (p, '\0');
 
     while ((pent != NULL) && (c != '\0') && (*p != '\0'))
@@ -310,7 +310,7 @@ extfs_find_entry_int (struct entry *dir, const char *name, GSList * list,
         *q = c;
         p = q + 1;
         q = strchr (p, PATH_SEP);
-        if (q == '\0')
+        if (q == NULL)
             q = strchr (p, '\0');
     }
     if (pent == NULL)
