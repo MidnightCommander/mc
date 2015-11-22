@@ -530,7 +530,7 @@ remove_entry (tree_entry * entry)
         ts.tree_last = entry->prev;
 
     /* Free the memory used by the entry */
-    g_free (entry->name);
+    vfs_path_free (entry->name);
     g_free (entry);
 
     return ret;
