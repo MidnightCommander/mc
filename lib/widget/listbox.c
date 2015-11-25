@@ -486,60 +486,55 @@ listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-listbox_event (Gpm_Event * event, void *data)
+static void
+listbox_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 {
-    WListbox *l = LISTBOX (data);
-    Widget *w = WIDGET (data);
+    WListbox *l = LISTBOX (w);
 
-    if (!mouse_global_in_widget (event, w))
-        return MOU_UNHANDLED;
-
-    /* Single click */
-    if ((event->type & GPM_DOWN) != 0)
-        dlg_select_widget (l);
-
-    if (listbox_is_empty (l))
-        return MOU_NORMAL;
-
-    if ((event->type & (GPM_DOWN | GPM_DRAG)) != 0)
+    switch (msg)
     {
-        int ret = MOU_REPEAT;
-        Gpm_Event local;
+    case MSG_MOUSE_DOWN:
+        dlg_select_widget (l);
+        listbox_select_entry (l, listbox_y_pos (l, event->y));
+        break;
 
-        local = mouse_get_local (event, w);
-        if (local.y < 1)
-            listbox_back_n (l, -local.y + 1);
-        else if (local.y > w->lines)
-            listbox_fwd_n (l, local.y - w->lines);
-        else if ((local.buttons & GPM_B_UP) != 0)
-        {
-            listbox_back (l, FALSE);
-            ret = MOU_NORMAL;
-        }
-        else if ((local.buttons & GPM_B_DOWN) != 0)
-        {
-            listbox_fwd (l, FALSE);
-            ret = MOU_NORMAL;
-        }
-        else
-            listbox_select_entry (l, listbox_y_pos (l, local.y - 1));
+    case MSG_MOUSE_SCROLL_UP:
+        listbox_back (l, FALSE);
+        break;
 
-        listbox_on_change (l);
-        return ret;
+    case MSG_MOUSE_SCROLL_DOWN:
+        listbox_fwd (l, FALSE);
+        break;
+
+    case MSG_MOUSE_DRAG:
+        event->result.repeat = TRUE;    /* It'd be functional even without this. */
+        listbox_select_entry (l, listbox_y_pos (l, event->y));
+        break;
+
+    case MSG_MOUSE_CLICK:
+        if ((event->count & GPM_DOUBLE) != 0)   /* Double click */
+        {
+            int action;
+
+            if (l->callback != NULL)
+                action = l->callback (l);
+            else
+                action = LISTBOX_DONE;
+
+            if (action == LISTBOX_DONE)
+            {
+                w->owner->ret_value = B_ENTER;
+                dlg_stop (w->owner);
+            }
+        }
+        break;
+
+    default:
+        break;
     }
 
-    /* Double click */
-    if ((event->type & (GPM_DOUBLE | GPM_UP)) == (GPM_UP | GPM_DOUBLE))
-    {
-        Gpm_Event local;
-
-        local = mouse_get_local (event, w);
-        dlg_select_widget (l);
-        listbox_run_hotkey (l, listbox_y_pos (l, local.y - 1));
-    }
-
-    return MOU_NORMAL;
+    if (msg != MSG_MOUSE_UP)
+        listbox_draw (l, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -557,7 +552,8 @@ listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn 
 
     l = g_new (WListbox, 1);
     w = WIDGET (l);
-    widget_init (w, y, x, height, width, listbox_callback, listbox_event);
+    widget_init (w, y, x, height, width, listbox_callback, NULL);
+    set_easy_mouse_callback (w, listbox_mouse_callback);
 
     l->list = NULL;
     l->top = l->pos = 0;
