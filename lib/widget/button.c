@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013, 2016
 
    This file is part of the Midnight Commander.
 
@@ -39,7 +39,6 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/tty/mouse.h"
 #include "lib/strutil.h"
 #include "lib/widget.h"
 
@@ -174,25 +173,25 @@ button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-button_event (Gpm_Event * event, void *data)
+static void
+button_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 {
-    Widget *w = WIDGET (data);
+    (void) event;
 
-    if (!mouse_global_in_widget (event, w))
-        return MOU_UNHANDLED;
-
-    if ((event->type & (GPM_DOWN | GPM_UP)) != 0)
+    switch (msg)
     {
+    case MSG_MOUSE_DOWN:
         dlg_select_widget (w);
-        if ((event->type & GPM_UP) != 0)
-        {
-            send_message (w, NULL, MSG_KEY, ' ', NULL);
-            send_message (w->owner, w, MSG_POST_KEY, ' ', NULL);
-        }
-    }
+        break;
 
-    return MOU_NORMAL;
+    case MSG_MOUSE_CLICK:
+        send_message (w, NULL, MSG_KEY, ' ', NULL);
+        send_message (w->owner, w, MSG_POST_KEY, ' ', NULL);
+        break;
+
+    default:
+        break;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -211,7 +210,8 @@ button_new (int y, int x, int action, button_flags_t flags, const char *text, bc
     b->action = action;
     b->flags = flags;
     b->text = parse_hotkey (text);
-    widget_init (w, y, x, 1, button_get_len (b), button_callback, button_event);
+    widget_init (w, y, x, 1, button_get_len (b), button_callback, NULL);
+    set_easy_mouse_callback (w, button_mouse_callback);
     b->selected = FALSE;
     b->callback = callback;
     widget_want_hotkey (w, TRUE);
