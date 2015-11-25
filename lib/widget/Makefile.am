@@ -17,6 +17,7 @@ libmcwidget_la_SOURCES = \
 	listbox.c listbox.h \
 	label.c label.h \
 	menu.c menu.h \
+	mouse.c mouse.h \
 	quick.c quick.h \
 	radio.c radio.h \
 	widget-common.c widget-common.h \

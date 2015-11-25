@@ -149,6 +149,9 @@ widget_init (Widget * w, int y, int x, int lines, int cols,
     w->mouse = mouse_handler;
     w->set_options = widget_default_set_options_callback;
     w->owner = NULL;
+    w->Mouse.callback = NULL;   /* it will be overriden in set_easy_mouse_callback() */
+    w->Mouse.capture = FALSE;
+    w->Mouse.forced_capture = FALSE;
 
     /* Almost all widgets want to put the cursor in a suitable place */
     w->options = W_WANT_CURSOR;
