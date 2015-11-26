@@ -128,6 +128,12 @@ typedef struct mc_search_type_str_struct
 
 /*** global variables defined in .c file *********************************************************/
 
+/* Error messages */
+extern const char *STR_E_NOTFOUND;
+extern const char *STR_E_UNKNOWN_TYPE;
+extern const char *STR_E_RPL_NOT_EQ_TO_FOUND;
+extern const char *STR_E_RPL_INVALID_TOKEN;
+
 /*** declarations of public functions ************************************************************/
 
 mc_search_t *mc_search_new (const gchar * original, const gchar * original_charset);

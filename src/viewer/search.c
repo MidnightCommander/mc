@@ -146,7 +146,7 @@ mcview_find (mcview_search_status_msg_t * ssm, off_t search_start, off_t search_
 
             search_start--;
         }
-        view->search->error_str = g_strdup (_("Search string not found"));
+        view->search->error_str = g_strdup (_(STR_E_NOTFOUND));
         return FALSE;
     }
     view->search_nroff_seq->index = search_start;

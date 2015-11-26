@@ -229,7 +229,7 @@ mcdiffview_do_search (WDiff * dview)
     if (!present_result)
     {
         dview->search.last_found_line = -1;
-        query_dialog (_("Search"), _("Search string not found"), D_NORMAL, 1, _("&Dismiss"));
+        query_dialog (_("Search"), _(STR_E_NOTFOUND), D_NORMAL, 1, _("&Dismiss"));
     }
 }
 

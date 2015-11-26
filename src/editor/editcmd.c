@@ -829,7 +829,7 @@ editcmd_find (edit_search_status_msg_t * esm, gsize * len)
         if (!eval_marks (edit, &start_mark, &end_mark))
         {
             edit->search->error = MC_SEARCH_E_NOTFOUND;
-            edit->search->error_str = g_strdup (_("Search string not found"));
+            edit->search->error_str = g_strdup (_(STR_E_NOTFOUND));
             return FALSE;
         }
 
@@ -850,7 +850,7 @@ editcmd_find (edit_search_status_msg_t * esm, gsize * len)
         if (start_mark >= end_mark)
         {
             edit->search->error = MC_SEARCH_E_NOTFOUND;
-            edit->search->error_str = g_strdup (_("Search string not found"));
+            edit->search->error_str = g_strdup (_(STR_E_NOTFOUND));
             return FALSE;
         }
     }
@@ -892,7 +892,7 @@ editcmd_find (edit_search_status_msg_t * esm, gsize * len)
             else
                 search_start--;
         }
-        edit->search->error_str = g_strdup (_("Search string not found"));
+        edit->search->error_str = g_strdup (_(STR_E_NOTFOUND));
     }
     else
     {
@@ -989,7 +989,7 @@ edit_do_search (WEdit * edit)
         }
 
         if (found == 0)
-            edit_error_dialog (_("Search"), _("Search string not found"));
+            edit_error_dialog (_("Search"), _(STR_E_NOTFOUND));
         else
             edit_cursor_move (edit, edit->search_start - edit->buffer.curs1);
     }
@@ -2718,7 +2718,7 @@ edit_replace_cmd (WEdit * edit, int again)
             edit_render_keypress (edit);
 
             if (times_replaced == 0)
-                query_dialog (_("Replace"), _("Search string not found"), D_NORMAL, 1, _("&OK"));
+                query_dialog (_("Replace"), _(STR_E_NOTFOUND), D_NORMAL, 1, _("&OK"));
             break;
         }
     }
