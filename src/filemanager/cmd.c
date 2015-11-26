@@ -466,8 +466,8 @@ nice_cd (const char *text, const char *xtext, const char *help,
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-configure_panel_listing (WPanel * p, int list_type, int brief_cols, int use_msformat, char *user,
-                         char *status)
+configure_panel_listing (WPanel * p, int list_type, int brief_cols, int use_msformat, char **user,
+                         char **status)
 {
     p->user_mini_status = use_msformat;
     p->list_type = list_type;
@@ -477,17 +477,14 @@ configure_panel_listing (WPanel * p, int list_type, int brief_cols, int use_msfo
     else if (list_type == list_user || use_msformat)
     {
         g_free (p->user_format);
-        p->user_format = user;
+        p->user_format = *user;
+        *user = NULL;
 
         g_free (p->user_status_format[list_type]);
-        p->user_status_format[list_type] = status;
+        p->user_status_format[list_type] = *status;
+        *status = NULL;
 
         set_panel_formats (p);
-    }
-    else
-    {
-        g_free (user);
-        g_free (status);
     }
 
     set_panel_formats (p);
@@ -1658,7 +1655,9 @@ change_listing_cmd (void)
     {
         switch_to_listing (MENU_PANEL_IDX);
         p = MENU_PANEL_IDX == 0 ? left_panel : right_panel;
-        configure_panel_listing (p, list_type, brief_cols, use_msformat, user, status);
+        configure_panel_listing (p, list_type, brief_cols, use_msformat, &user, &status);
+        g_free (user);
+        g_free (status);
     }
 }
 
