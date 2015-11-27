@@ -3688,7 +3688,10 @@ edit_set_spell_lang (void)
 
         lang = spell_dialog_lang_list_show (lang_list);
         if (lang != NULL)
+        {
             (void) aspell_set_lang (lang);
+            g_free (lang);
+        }
     }
     aspell_array_clean (lang_list);
 }
