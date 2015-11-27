@@ -3169,6 +3169,7 @@ edit_sort_cmd (WEdit * edit)
                      " > ", tmp_edit_temp_name, (char *) NULL);
     g_free (tmp_edit_temp_name);
     g_free (tmp_edit_block_name);
+    g_free (exp);
 
     e = system (tmp);
     g_free (tmp);
