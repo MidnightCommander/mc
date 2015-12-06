@@ -229,6 +229,9 @@ AC_CHECK_FUNCS([\
 	realpath
 ])
 
+dnl utimensat is supported since glibc 2.6 and specified in POSIX.1-2008
+AC_CHECK_FUNCS([utimensat])
+
 dnl getpt is a GNU Extension (glibc 2.1.x)
 AC_CHECK_FUNCS(posix_openpt, , [AC_CHECK_FUNCS(getpt)])
 AC_CHECK_FUNCS(grantpt, , [AC_CHECK_LIB(pt, grantpt)])

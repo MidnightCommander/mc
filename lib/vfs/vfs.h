@@ -10,7 +10,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <dirent.h>
-#ifdef HAVE_UTIME_H
+#ifdef HAVE_UTIMENSAT
+#include <sys/time.h>
+#elif defined (HAVE_UTIME_H)
 #include <utime.h>
 #endif
 #include <stdio.h>
@@ -97,6 +99,12 @@ typedef void (*fill_names_f) (const char *);
 
 typedef void *vfsid;
 
+#ifdef HAVE_UTIMENSAT
+typedef struct timespec mc_timesbuf_t[2];
+#else
+typedef struct utimbuf mc_timesbuf_t;
+#endif
+
 /*** enums ***************************************************************************************/
 
 /* Flags of VFS classes */
@@ -167,7 +175,7 @@ typedef struct vfs_class
 
     int (*chmod) (const vfs_path_t * vpath, mode_t mode);
     int (*chown) (const vfs_path_t * vpath, uid_t owner, gid_t group);
-    int (*utime) (const vfs_path_t * vpath, struct utimbuf * times);
+    int (*utime) (const vfs_path_t * vpath, mc_timesbuf_t * times);
 
     int (*readlink) (const vfs_path_t * vpath, char *buf, size_t size);
     int (*symlink) (const vfs_path_t * vpath1, const vfs_path_t * vpath2);
@@ -279,7 +287,7 @@ int vfs_preallocate (int dest_desc, off_t src_fsize, off_t dest_fsize);
  */
 ssize_t mc_read (int handle, void *buffer, size_t count);
 ssize_t mc_write (int handle, const void *buffer, size_t count);
-int mc_utime (const vfs_path_t * vpath, struct utimbuf *times);
+int mc_utime (const vfs_path_t * vpath, mc_timesbuf_t * times);
 int mc_readlink (const vfs_path_t * vpath, char *buf, size_t bufsiz);
 int mc_close (int handle);
 off_t mc_lseek (int fd, off_t offset, int whence);
