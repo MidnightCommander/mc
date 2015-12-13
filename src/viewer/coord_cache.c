@@ -339,7 +339,7 @@ mcview_ccache_lookup (WView * view, coord_cache_entry_t * coord, enum ccache_typ
     nroff_state = NROFF_START;
     for (; current.cc_offset < limit; current = next)
     {
-        int c, nextc;
+        int c;
 
         if (!mcview_get_byte (view, current.cc_offset, &c))
             break;
@@ -365,6 +365,8 @@ mcview_ccache_lookup (WView * view, coord_cache_entry_t * coord, enum ccache_typ
         /* and override some of them as necessary. */
         if (c == '\r')
         {
+            int nextc = -1;
+
             mcview_get_byte_indexed (view, current.cc_offset, 1, &nextc);
 
             /* Ignore '\r' if it is followed by '\r' or '\n'. If it is

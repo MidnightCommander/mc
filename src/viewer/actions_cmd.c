@@ -220,7 +220,7 @@ static cb_ret_t
 mcview_handle_editkey (WView * view, int key)
 {
     struct hexedit_change_node *node;
-    int byte_val;
+    int byte_val = -1;
 
     /* Has there been a change at this position? */
     node = view->change_list;
