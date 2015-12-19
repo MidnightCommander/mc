@@ -1738,7 +1738,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     }
 
     /* try preallocate space; if fail, try copy anyway */
-    while (vfs_preallocate (dest_desc, file_size, ctx->do_append != 0 ? sb.st_size : 0) != 0)
+    while (vfs_preallocate (dest_desc, file_size, appending ? sb.st_size : 0) != 0)
     {
         if (ctx->skip_all)
         {
