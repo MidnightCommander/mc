@@ -1648,7 +1648,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             ctx->skip_all = TRUE;
         if (return_status == FILE_SKIP)
             break;
-        ctx->do_append = 0;
+        ctx->do_append = FALSE;
         goto ret_fast;
     }
 
@@ -1688,7 +1688,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     open_flags = O_WRONLY;
     if (dst_exists)
     {
-        if (ctx->do_append != 0)
+        if (ctx->do_append)
             open_flags |= O_APPEND;
         else
             open_flags |= O_CREAT | O_TRUNC;
