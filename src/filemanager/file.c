@@ -1803,7 +1803,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             else
                 while ((n_read = mc_read (src_desc, buf, sizeof (buf))) < 0 && !ctx->skip_all)
                 {
-                    return_status = file_error (_("Cannot read source file\"%s\"\n%s"), src_path);
+                    return_status = file_error (_("Cannot read source file \"%s\"\n%s"), src_path);
                     if (return_status == FILE_RETRY)
                         continue;
                     if (return_status == FILE_SKIPALL)
