@@ -83,10 +83,10 @@ static tree_entry *tree_store_add_entry (const vfs_path_t * name);
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-tree_store_dirty (int state)
+static inline void
+tree_store_dirty (gboolean dirty)
 {
-    ts.dirty = state;
+    ts.dirty = dirty;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -247,7 +247,7 @@ tree_store_load_from (char *name)
         while (fgets (buffer, MC_MAXPATHLEN, file))
         {
             tree_entry *e;
-            int scanned;
+            gboolean scanned;
             char *lc_name;
 
             /* Skip invalid records */
@@ -357,14 +357,14 @@ tree_store_save_to (char *name)
             {
                 char *encoded = encode (current->name, common);
 
-                i = fprintf (file, "%d:%d %s\n", current->scanned, common, encoded);
+                i = fprintf (file, "%d:%d %s\n", current->scanned ? 1 : 0, common, encoded);
                 g_free (encoded);
             }
             else
             {
                 char *encoded = encode (current->name, 0);
 
-                i = fprintf (file, "%d:%s\n", current->scanned, encoded);
+                i = fprintf (file, "%d:%s\n", current->scanned ? 1 : 0, encoded);
                 g_free (encoded);
             }
 
@@ -466,7 +466,7 @@ tree_store_add_entry (const vfs_path_t * name)
     submask |= 1 << new->sublevel;
     submask &= (2 << new->sublevel) - 1;
     new->submask = submask;
-    new->mark = 0;
+    new->mark = FALSE;
 
     /* Correct the submasks of the previous entries */
     current = new->prev;
@@ -784,7 +784,7 @@ tree_store_mark_checked (const char *subname)
         size_t len;
 
         len = vfs_path_len (base->name);
-        base->mark = 0;
+        base->mark = FALSE;
         current = base->next;
         while (current != NULL && vfs_path_equal_len (current->name, base->name, len))
         {
@@ -795,7 +795,7 @@ tree_store_mark_checked (const char *subname)
             if (!ok)
                 break;
 
-            current->mark = 0;
+            current->mark = FALSE;
             current = current->next;
         }
     }
@@ -853,7 +853,7 @@ tree_store_start_check (const vfs_path_t * vpath)
         if (!ok)
             break;
 
-        current->mark = 1;
+        current->mark = TRUE;
         current = current->next;
     }
 
@@ -917,7 +917,7 @@ tree_store_rescan (const vfs_path_t * vpath)
     if (should_skip_directory (vpath))
     {
         entry = tree_store_add_entry (vpath);
-        entry->scanned = 1;
+        entry->scanned = TRUE;
         return entry;
     }
 
@@ -945,7 +945,7 @@ tree_store_rescan (const vfs_path_t * vpath)
         mc_closedir (dirp);
     }
     tree_store_end_check ();
-    entry->scanned = 1;
+    entry->scanned = TRUE;
 
     return entry;
 }
