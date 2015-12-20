@@ -207,43 +207,31 @@ decode (char *buffer)
 static int
 tree_store_load_from (char *name)
 {
-    FILE *file;
+    FILE *file = NULL;
     char buffer[MC_MAXPATHLEN + 20];
-    int do_load;
 
-    g_return_val_if_fail (name != NULL, FALSE);
+    g_return_val_if_fail (name != NULL, 0);
 
     if (ts.loaded)
-        return TRUE;
+        return 1;
 
     file = fopen (name, "r");
 
-    if (file)
+    if (file != NULL
+        && (fgets (buffer, sizeof (buffer), file) == NULL
+            || strncmp (buffer, TREE_SIGNATURE, strlen (TREE_SIGNATURE)) != 0))
     {
-        if (fgets (buffer, sizeof (buffer), file) != NULL)
-        {
-            if (strncmp (buffer, TREE_SIGNATURE, strlen (TREE_SIGNATURE)) != 0)
-            {
-                fclose (file);
-                do_load = FALSE;
-            }
-            else
-                do_load = TRUE;
-        }
-        else
-            do_load = FALSE;
+        fclose (file);
+        file = NULL;
     }
-    else
-        do_load = FALSE;
 
-    if (do_load)
+    if (file != NULL)
     {
-        char oldname[MC_MAXPATHLEN];
+        char oldname[MC_MAXPATHLEN] = "\0";
 
         ts.loaded = TRUE;
 
         /* File open -> read contents */
-        oldname[0] = 0;
         while (fgets (buffer, MC_MAXPATHLEN, file))
         {
             tree_entry *e;
@@ -306,6 +294,7 @@ tree_store_load_from (char *name)
             }
             g_free (lc_name);
         }
+
         fclose (file);
     }
 
@@ -319,7 +308,7 @@ tree_store_load_from (char *name)
         ts.loaded = TRUE;
     }
 
-    return TRUE;
+    return 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
