@@ -100,6 +100,9 @@ include d.syntax
 file ..\*\\.[fF]$ Fortran\sProgram
 include fortran.syntax
 
+file ..\*\\.go$ GoLang\sProgram
+include go.syntax
+
 file ..\*\\.[fF]9[05]$ Freeform\sFortran\sProgram
 include f90.syntax
 
