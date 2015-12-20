@@ -443,14 +443,6 @@ shell_execute (const char *command, int flags)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-exec_shell (void)
-{
-    do_execute (mc_global.shell->path, 0, 0);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
 toggle_panels (void)
 {
 #ifdef ENABLE_SUBSHELL

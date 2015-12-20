@@ -31,9 +31,6 @@ extern int pause_after_run;
 /* Execute functions that use the shell to execute */
 void shell_execute (const char *command, int flags);
 
-/* This one executes a shell */
-void exec_shell (void);
-
 /* Handle toggling panels by Ctrl-O */
 void toggle_panels (void);
 
