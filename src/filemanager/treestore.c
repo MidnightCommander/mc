@@ -661,15 +661,12 @@ tree_store_save (void)
 
     retval = tree_store_save_to (name);
     if (retval != 0)
-    {
         mc_util_restore_from_backup_if_possible (name, ".tmp");
-        g_free (name);
-        return retval;
-    }
+    else
+        mc_util_unlink_backup_if_possible (name, ".tmp");
 
-    mc_util_unlink_backup_if_possible (name, ".tmp");
     g_free (name);
-    return 0;
+    return retval;
 }
 
 /* --------------------------------------------------------------------------------------------- */
