@@ -864,6 +864,10 @@ get_compression_type (int fd, const char *name)
         }
     }
 
+    /* LZ4 format - v1.5.0 - 0x184D2204 (little endian) */
+    if (magic[0] == 0x04 && magic[1] == 0x22 && magic[2] == 0x4d && magic[3] == 0x18)
+        return COMPRESSION_LZ4;
+
     /* Support for LZMA (only utils format with magic in header).
      * This is the default format of LZMA utils 4.32.1 and later. */
 
@@ -904,6 +908,8 @@ decompress_extension (int type)
         return "/ubz" VFS_PATH_URL_DELIMITER;
     case COMPRESSION_BZIP2:
         return "/ubz2" VFS_PATH_URL_DELIMITER;
+    case COMPRESSION_LZ4:
+        return "/ulz4" VFS_PATH_URL_DELIMITER;
     case COMPRESSION_LZMA:
         return "/ulzma" VFS_PATH_URL_DELIMITER;
     case COMPRESSION_XZ:

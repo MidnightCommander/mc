@@ -7,6 +7,7 @@ use bytes;
 
 $zcat="zcat";                 # gunzip to stdout
 $bzcat="bzip2 -dc";           # bunzip2 to stdout
+$lz4cat="lz4 -dc";            # unlz4 to stdout
 $lzcat="lzma -dc";            # unlzma to stdout
 $xzcat="xz -dc";              # unxz to stdout
 $file="file";                 # "file" command
@@ -184,6 +185,8 @@ if (/gzip/) {
     exit 1 unless (open IN, "$zcat $mbox_qname|");
 } elsif (/bzip/) {
     exit 1 unless (open IN, "$bzcat $mbox_qname|");
+} elsif (/lz4/) {
+    exit 1 unless (open IN, "$lz4cat $mbox_qname|");
 } elsif (/lzma/) {
     exit 1 unless (open IN, "$lzcat $mbox_qname|");
 } elsif (/xz/) {

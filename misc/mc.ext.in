@@ -135,6 +135,11 @@ regex/\.t(ar\.lzma|lz)$
 	Open=%cd %p/utar://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.lzma
 
+# .tar.lz4, .tlz4
+regex/\.t(ar\.lz4|lz4)$
+	Open=%cd %p/utar://
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.lz4
+
 # .tar.xz, .txz
 regex/\.t(ar\.xz|xz)$
 	Open=%cd %p/utar://
@@ -189,6 +194,10 @@ shell/i/.alz
 shell/.cpio.Z
 	Open=%cd %p/ucpio://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cpio.z
+
+shell/.cpio.lz4
+	Open=%cd %p/ucpio://
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cpio.lz4
 
 shell/.cpio.xz
 	Open=%cd %p/ucpio://
@@ -359,6 +368,10 @@ regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.bz$
 regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.bz2$
 	Open=@EXTHELPERSDIR@/text.sh open man.bz2 %var{PAGER:more}
 	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.bz2 %var{PAGER:more}
+
+regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.lz4$
+	Open=@EXTHELPERSDIR@/text.sh open man.lz4 %var{PAGER:more}
+	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.lz4 %var{PAGER:more}
 
 regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.lzma$
 	Open=@EXTHELPERSDIR@/text.sh open man.lzma %var{PAGER:more}
@@ -729,6 +742,11 @@ type/^bzip
 type/^compress
 	Open=@EXTHELPERSDIR@/archive.sh view gz %var{PAGER:more}
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view gz
+
+# lz4
+regex/\.lz4$
+	Open=@EXTHELPERSDIR@/archive.sh view lz4 %var{PAGER:more}
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view lz4
 
 # lzma
 regex/\.lzma$
