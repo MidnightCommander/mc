@@ -153,10 +153,11 @@ BEGIN {
   sub("^----------   0    0    0", "-r--r--r--   1 root root", attr)
   sub(" $", "", name)
   # for Joliet UCS level 3
-  if (SEMICOLON = "YES") sub(";1$", "", name);
+  if (SEMICOLON == "YES") sub(";1$", "", name);
   ## sub(";[0-9]+$", "", name) ## would break copyout
   # skip . and ..
-  if (name ~ /^\.\.?/) next;
+  if (name == ".") next;
+  if (name == "..") next;
   printf "%s%s%s\n", attr, dir, name
 }'
 }
