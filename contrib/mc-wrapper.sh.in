@@ -12,3 +12,4 @@ fi
 
 rm -f "$MC_PWD_FILE"
 unset MC_PWD_FILE
+unset MC_USER
