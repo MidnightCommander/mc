@@ -268,8 +268,7 @@ mcview_do_search (WView * view, off_t want_search_start)
 
     off_t search_start = 0;
     off_t orig_search_start = view->search_start;
-    gboolean isFound = FALSE;
-    gboolean need_search_again = TRUE;
+    gboolean found = FALSE;
 
     size_t match_len;
 
@@ -304,7 +303,7 @@ mcview_do_search (WView * view, off_t want_search_start)
         }
     }
 
-    if (mcview_search_options.backwards && (int) search_start < 0)
+    if (mcview_search_options.backwards && search_start < 0)
         search_start = 0;
 
     /* Compute the percent steps */
@@ -331,8 +330,7 @@ mcview_do_search (WView * view, off_t want_search_start)
         if (mcview_find (&vsm, search_start, mcview_get_filesize (view), &match_len))
         {
             mcview_search_show_result (view, match_len);
-            need_search_again = FALSE;
-            isFound = TRUE;
+            found = TRUE;
             break;
         }
 
@@ -340,60 +338,44 @@ mcview_do_search (WView * view, off_t want_search_start)
             break;
 
         search_start = growbufsize - view->search->original_len;
-        if (search_start <= 0)
-        {
-            search_start = 0;
-            break;
-        }
     }
-    while (mcview_may_still_grow (view));
+    while (search_start > 0 && mcview_may_still_grow (view));
 
     status_msg_deinit (STATUS_MSG (&vsm));
 
-    if (view->search_start != 0 && !isFound && need_search_again
-        && !mcview_search_options.backwards)
+    if (orig_search_start != 0 && !found && !mcview_search_options.backwards)
     {
-        int result;
-
         view->search_start = orig_search_start;
         mcview_update (view);
 
-        result =
-            query_dialog (_("Search done"), _("Continue from beginning?"), D_NORMAL, 2, _("&Yes"),
-                          _("&No"));
-
-        if (result != 0)
-            isFound = TRUE;
+        if (query_dialog
+            (_("Search done"), _("Continue from beginning?"), D_NORMAL, 2, _("&Yes"),
+             _("&No")) != 0)
+            found = TRUE;
         else
-            search_start = 0;
-    }
-
-    if (!isFound && view->search->error_str != NULL)
-    {
-        /* continue search from beginning */
-        off_t search_end;
-
-        search_end = orig_search_start;
-        /* search_start is 0 here */
-        view->update_activate = search_start;
-
-        vsm.first = TRUE;
-        vsm.view = view;
-        vsm.offset = search_start;
-
-        status_msg_init (STATUS_MSG (&vsm), _("Search"), 1.0, simple_status_msg_init_cb,
-                         mcview_search_status_update_cb, NULL);
-
-        if (mcview_find (&vsm, search_start, search_end, &match_len))
         {
-            mcview_search_show_result (view, match_len);
-            isFound = TRUE;
-        }
+            /* continue search from beginning */
+            view->update_activate = 0;
 
-        status_msg_deinit (STATUS_MSG (&vsm));
+            vsm.first = TRUE;
+            vsm.view = view;
+            vsm.offset = 0;
+
+            status_msg_init (STATUS_MSG (&vsm), _("Search"), 1.0, simple_status_msg_init_cb,
+                             mcview_search_status_update_cb, NULL);
+
+            /* search from file begin up to initial search start position */
+            if (mcview_find (&vsm, 0, orig_search_start, &match_len))
+            {
+                mcview_search_show_result (view, match_len);
+                found = TRUE;
+            }
+
+            status_msg_deinit (STATUS_MSG (&vsm));
+        }
     }
 
-    if (!isFound && view->search->error_str != NULL)
+    if (!found && view->search->error_str != NULL)
     {
         view->search_start = orig_search_start;
         mcview_update (view);
