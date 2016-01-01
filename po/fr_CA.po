@@ -1,20 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2015-02-26 09:43+0300\n"
+"POT-Creation-Date: 2016-01-01 11:48+0300\n"
 "PO-Revision-Date: 2015-02-26 09:48+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
-"Language-Team: French (Canada) (http://www.transifex.com/projects/p/mc/language/fr_CA/)\n"
+"Language-Team: French (Canada) (http://www.transifex.com/projects/p/mc/"
+"language/fr_CA/)\n"
+"Language: fr_CA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr_CA\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
@@ -465,7 +466,12 @@ msgstr ""
 msgid "Directory cache expired for %s"
 msgstr ""
 
-msgid "bytes transferred"
+#, c-format
+msgid "%s: %s: %s %3d%% (%lld) bytes transferred"
+msgstr ""
+
+#, c-format
+msgid "%s: %s: %s %lld bytes transferre"
 msgstr ""
 
 msgid "Starting linear transfer..."
@@ -700,7 +706,7 @@ msgstr ""
 msgid "No arguments given to the viewer."
 msgstr ""
 
-msgid "Two files are required to evoke the diffviewer."
+msgid "Two files are required to envoke the diffviewer."
 msgstr ""
 
 msgid "Background protocol error"
@@ -1489,7 +1495,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2015 the Free Software Foundation"
+msgid "Copyright (C) 1996-2016 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1848,13 +1854,16 @@ msgstr ""
 msgid "&Full file list"
 msgstr ""
 
-msgid "&Brief file list"
+msgid "&Brief file list:"
 msgstr ""
 
 msgid "&Long file list"
 msgstr ""
 
 msgid "&User defined:"
+msgstr ""
+
+msgid "columns"
 msgstr ""
 
 msgid "User &mini status"
@@ -1872,8 +1881,7 @@ msgstr ""
 msgid "Sort order"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 msgid "Confirmation|&Delete"
 msgstr ""
 
@@ -2877,14 +2885,14 @@ msgid "Free space: %s/%s (%d%%)"
 msgstr ""
 
 #, c-format
-msgid "Type:      %s"
+msgid "Type:       %s"
 msgstr ""
 
 msgid "non-local vfs"
 msgstr ""
 
 #, c-format
-msgid "Device:    %s"
+msgid "Device:     %s"
 msgstr ""
 
 #, c-format
@@ -2892,16 +2900,16 @@ msgid "Filesystem: %s"
 msgstr ""
 
 #, c-format
-msgid "Accessed:  %s"
+msgid "Accessed:   %s"
 msgstr ""
 
 #, c-format
-msgid "Modified:  %s"
+msgid "Modified:   %s"
 msgstr ""
 
 #. TRANSLATORS: Time of last status change as in stat(2) man.
 #, c-format
-msgid "Changed:   %s"
+msgid "Changed:    %s"
 msgstr ""
 
 #, c-format
@@ -2909,7 +2917,7 @@ msgid "Dev. type: major %lu, minor %lu"
 msgstr ""
 
 #, c-format
-msgid "Size:      %s"
+msgid "Size:       %s"
 msgstr ""
 
 #, c-format
@@ -2919,19 +2927,19 @@ msgstr[0] ""
 msgstr[1] ""
 
 #, c-format
-msgid "Owner:     %s/%s"
+msgid "Owner:      %s/%s"
 msgstr ""
 
 #, c-format
-msgid "Links:     %d"
+msgid "Links:      %d"
 msgstr ""
 
 #, c-format
-msgid "Mode:      %s (%04o)"
+msgid "Mode:       %s (%04o)"
 msgstr ""
 
 #, c-format
-msgid "Location:  %Xh:%Xh"
+msgid "Location:   %Xh:%Xh"
 msgstr ""
 
 msgid "&Equal split"
