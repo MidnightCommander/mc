@@ -203,6 +203,7 @@ int quit = 0;
 /* Set to TRUE to suppress printing the last directory */
 int print_last_revert = FALSE;
 
+#ifdef USE_INTERNAL_EDIT
 /* index to record_macro_buf[], -1 if not recording a macro */
 int macro_index = -1;
 
@@ -210,6 +211,7 @@ int macro_index = -1;
 struct macro_action_t record_macro_buf[MAX_MACRO_LENGTH];
 
 GArray *macros_list;
+#endif /* USE_INTERNAL_EDIT */
 
 /*** file scope macro definitions ****************************************************************/
 

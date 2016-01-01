@@ -351,7 +351,9 @@ main (int argc, char *argv[])
 
     load_keymap_defs (!mc_args__nokeymap);
 
+#ifdef USE_INTERNAL_EDIT
     macros_list = g_array_new (TRUE, FALSE, sizeof (macros_t));
+#endif /* USE_INTERNAL_EDIT */
 
     tty_init_colors (mc_global.tty.disable_colors, mc_args__force_colors);
 
@@ -450,6 +452,7 @@ main (int argc, char *argv[])
 
     done_key ();
 
+#ifdef USE_INTERNAL_EDIT
     if (macros_list != NULL)
     {
         guint i;
@@ -464,6 +467,7 @@ main (int argc, char *argv[])
         }
         (void) g_array_free (macros_list, TRUE);
     }
+#endif /* USE_INTERNAL_EDIT */
 
     str_uninit_strings ();
 
