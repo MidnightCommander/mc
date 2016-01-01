@@ -14,6 +14,9 @@ do_view_action() {
     filetype=$1
 
     case "${filetype}" in
+    auto)
+        less "${MC_EXT_FILENAME}" 2>/dev/null
+        ;;
     gz)
         gzip -dc "${MC_EXT_FILENAME}" 2>/dev/null
         ;;
