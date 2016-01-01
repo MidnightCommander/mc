@@ -66,7 +66,9 @@ char *mc_args__netfs_logfile = NULL;
 char *mc_args__keymap_file = NULL;
 
 /* Debug level */
+#ifdef ENABLE_VFS_SMB
 int mc_args__debug_level = 0;
+#endif
 
 void *mc_run_param0 = NULL;
 char *mc_run_param1 = NULL;
