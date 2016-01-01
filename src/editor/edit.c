@@ -1520,7 +1520,7 @@ edit_get_bracket (WEdit * edit, gboolean in_screen, unsigned long furthest_brack
     if (!furthest_bracket_search)
         furthest_bracket_search--;
     /* not on a bracket at all */
-    if (p == NULL)
+    if (p == NULL || *p == '\0')
         return -1;
     /* the matching bracket */
     d = p[1];
