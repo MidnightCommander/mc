@@ -242,13 +242,13 @@ msgid "Right arrow"
 msgstr ""
 
 msgid "Insert"
-msgstr ""
+msgstr "Вставити"
 
 msgid "Delete"
-msgstr ""
+msgstr "Видалити"
 
 msgid "Home"
-msgstr ""
+msgstr "Домашня"
 
 msgid "End key"
 msgstr "End"
@@ -912,17 +912,17 @@ msgstr "< Оновити поточний синтаксис >"
 
 #, c-format
 msgid "Loading: %3d%%"
-msgstr ""
+msgstr "Завантаження: %3d%%"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Завантаження..."
 
 #, c-format
 msgid "Cannot open %s for reading"
 msgstr "Не вдалося відкрити %s для читання"
 
 msgid "Load file"
-msgstr ""
+msgstr "Завантажити файл"
 
 #, c-format
 msgid "Error reading %s"
@@ -952,7 +952,7 @@ msgstr "Не вдалося відкрити канал для читання: %
 
 #, c-format
 msgid "Searching %s: %3d%%"
-msgstr ""
+msgstr "Виконується пошук %s: %3d%%"
 
 #, c-format
 msgid "Searching %s"
@@ -1692,7 +1692,7 @@ msgstr "Інтерпретатор вже виконує команду"
 
 #, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
-msgstr ""
+msgstr "Введіть 'exit', щоб повернутися до Midnight Commander"
 
 msgid "Set &all"
 msgstr "Вст. &yсі"
@@ -1919,7 +1919,7 @@ msgid "&User defined:"
 msgstr "&Визначений користувачем:"
 
 msgid "columns"
-msgstr ""
+msgstr "стовпці"
 
 msgid "User &mini status"
 msgstr "Рядок &міні-статусу у форматі користувача"
@@ -2189,7 +2189,7 @@ msgid "Filter command and arguments:"
 msgstr "Введіть команду та її аргументи:"
 
 msgid "Edit file"
-msgstr ""
+msgstr "Редагувати файл"
 
 msgid "Create a new Directory"
 msgstr "Створити новий каталог"
@@ -2286,7 +2286,7 @@ msgid "Directory scanning"
 msgstr "Сканування каталогу"
 
 msgid "Setup"
-msgstr "Настройки"
+msgstr "Налаштування"
 
 #, c-format
 msgid "Setup saved to %s"
@@ -2811,7 +2811,7 @@ msgid "Target"
 msgstr "Ціль"
 
 msgid "Deleting"
-msgstr ""
+msgstr "Видалення"
 
 msgid "&Using shell patterns"
 msgstr "Використання &шаблону оболонки"
@@ -3065,7 +3065,7 @@ msgstr "Тип пристрою: major %lu, minor %lu"
 
 #, c-format
 msgid "Size:       %s"
-msgstr ""
+msgstr "Розмір:       %s"
 
 #, c-format
 msgid " (%ld block)"
@@ -3076,7 +3076,7 @@ msgstr[2] "(блоків: %ld)"
 
 #, c-format
 msgid "Owner:      %s/%s"
-msgstr ""
+msgstr "Власник:      %s/%s"
 
 #, c-format
 msgid "Links:      %d"
@@ -3084,11 +3084,11 @@ msgstr ""
 
 #, c-format
 msgid "Mode:       %s (%04o)"
-msgstr ""
+msgstr "Режим:       %s (%04o)"
 
 #, c-format
 msgid "Location:   %Xh:%Xh"
-msgstr ""
+msgstr "Розташування:   %Xh:%Xh"
 
 msgid "&Equal split"
 msgstr "&Рівні розміри"
