@@ -1,7 +1,7 @@
 /*
    X11 support for the Midnight Commander.
 
-   Copyright (C) 2005-2015
+   Copyright (C) 2005-2016
    Free Software Foundation, Inc.
 
    Written by:

@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Function for whow info on display
 
-   Copyright (C) 1994-2015
+   Copyright (C) 1994-2016
    Free Software Foundation, Inc.
 
    Written by:

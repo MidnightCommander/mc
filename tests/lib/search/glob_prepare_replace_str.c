@@ -1,7 +1,7 @@
 /*
    libmc - checks for processing esc sequences in replace string
 
-   Copyright (C) 2011-2015
+   Copyright (C) 2011-2016
    Free Software Foundation, Inc.
 
    Written by:

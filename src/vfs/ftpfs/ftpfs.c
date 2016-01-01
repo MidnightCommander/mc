@@ -1,7 +1,7 @@
 /*
    Virtual File System: FTP file system.
 
-   Copyright (C) 1995-2015
+   Copyright (C) 1995-2016
    Free Software Foundation, Inc.
 
    Written by:

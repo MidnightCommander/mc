@@ -1,7 +1,7 @@
 /*
    lib/vfs - vfs_path_t serialize/deserialize functions
 
-   Copyright (C) 2011-2015
+   Copyright (C) 2011-2016
    Free Software Foundation, Inc.
 
    Written by:

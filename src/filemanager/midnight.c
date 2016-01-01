@@ -1,7 +1,7 @@
 /*
    Main dialog (file panels) of the Midnight Commander
 
-   Copyright (C) 1994-2015
+   Copyright (C) 1994-2016
    Free Software Foundation, Inc.
 
    Written by:

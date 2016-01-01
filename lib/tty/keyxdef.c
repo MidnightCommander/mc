@@ -3,7 +3,7 @@
 /*
    Additional keyboard support routines.
 
-   Copyright (C) 1998-2015
+   Copyright (C) 1998-2016
    Free Software Foundation, Inc.
 
    Written by:

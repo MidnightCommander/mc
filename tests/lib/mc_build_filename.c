@@ -1,7 +1,7 @@
 /*
    lib/vfs - mc_build_filename() function testing
 
-   Copyright (C) 2011-2015
+   Copyright (C) 2011-2016
    Free Software Foundation, Inc.
 
    Written by:
