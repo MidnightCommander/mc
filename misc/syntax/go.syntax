@@ -1,0 +1,158 @@
+context default
+# keywords
+	keyword whole break yellow
+	keyword whole case yellow
+	keyword whole chan yellow
+	keyword whole const yellow
+	keyword whole continue yellow
+	keyword whole default yellow
+	keyword whole defer yellow
+	keyword whole else yellow
+	keyword whole fallthrough yellow
+	keyword whole for yellow
+	keyword whole func yellow
+	keyword whole go yellow
+	keyword whole goto yellow
+	keyword whole if yellow
+	keyword whole import yellow
+	keyword whole interface yellow
+	keyword whole map yellow
+	keyword whole package yellow
+	keyword whole range yellow
+	keyword whole return yellow
+	keyword whole select yellow
+	keyword whole struct yellow
+	keyword whole switch yellow
+	keyword whole type yellow
+	keyword whole var yellow
+# builtin types
+	keyword whole uint8 brightgreen
+	keyword whole uint16 brightgreen
+	keyword whole uint32 brightgreen
+	keyword whole uint64 brightgreen
+	keyword whole int8 brightgreen
+	keyword whole int16 brightgreen
+	keyword whole int32 brightgreen
+	keyword whole int64 brightgreen
+	keyword whole float32 brightgreen
+	keyword whole float64 brightgreen
+	keyword whole byte brightgreen
+	keyword whole uint brightgreen
+	keyword whole int brightgreen
+	keyword whole float brightgreen
+	keyword whole uintptr brightgreen
+	keyword whole string brightgreen
+	keyword whole bool brightgreen
+	keyword whole time brightgreen
+# builtin functions
+	keyword whole nil brown
+	keyword whole true brown
+	keyword whole false brown
+	keyword whole iota brown
+	keyword whole cap brown
+	keyword whole close brown
+	keyword whole closed brown
+	keyword whole len brown
+	keyword whole make brown
+	keyword whole new brown
+	keyword whole panic brown
+	keyword whole panicln brown
+	keyword whole print brown
+	keyword whole println brown
+# builtin packages
+	keyword whole tar brightgreen
+	keyword whole zip brightgreen
+	keyword whole bufio brightgreen
+	keyword whole bytes brightgreen
+	keyword whole cmd brightgreen
+	keyword whole compress brightgreen
+	keyword whole container brightgreen
+	keyword whole crypto brightgreen
+	keyword whole database brightgreen
+	keyword whole debug brightgreen
+	keyword whole encoding brightgreen
+	keyword whole errors brightgreen
+	keyword whole expvar brightgreen
+	keyword whole flag brightgreen
+	keyword whole fmt brightgreen
+	keyword whole hash brightgreen
+	keyword whole html brightgreen
+	keyword whole image brightgreen
+	keyword whole suffixarray brightgreen
+	keyword whole race  brightgreen
+	keyword whole singleflight brightgreen
+	keyword whole syscall brightgreen
+	keyword whole testenv brightgreen
+	keyword whole trace brightgreen
+	keyword whole io brightgreen
+	keyword whole log brightgreen
+	keyword whole math brightgreen
+	keyword whole mime brightgreen
+	keyword whole net brightgreen
+	keyword whole os brightgreen
+	keyword whole path brightgreen
+	keyword whole reflect brightgreen
+	keyword whole regexp brightgreen
+	keyword whole runtime brightgreen
+	keyword whole sort brightgreen
+	keyword whole strconv brightgreen
+	keyword whole strings brightgreen
+	keyword whole sync brightgreen
+	keyword whole testing brightgreen
+	keyword whole text brightgreen
+	keyword whole time brightgreen
+	keyword whole unicode brightgreen
+	keyword whole unsafe brightgreen
+	keyword whole vendor brightgreen
+	keyword whole unicode brightgreen
+# special functions
+	keyword whole init brown
+	keyword whole main brown
+# comment chars
+	keyword /\* green
+	keyword \*/ green
+	keyword // green
+# punctuation, operator chars
+	keyword <- brightmagenta
+	keyword \+ brightcyan
+	keyword & brightcyan
+	keyword ( brightcyan
+	keyword ) brightcyan
+	keyword - brightcyan
+	keyword | brightcyan
+	keyword < brightcyan
+	keyword [ brightcyan
+	keyword ] brightcyan
+	keyword \* brightcyan
+	keyword ^ brightcyan
+	keyword > brightcyan
+	keyword { brightcyan
+	keyword } brightcyan
+	keyword / brightcyan
+	keyword = brightcyan
+	keyword , brightcyan
+	keyword ; brightcyan
+	keyword % brightcyan
+	keyword ! brightcyan
+	keyword . brightcyan
+	keyword : brightcyan
+
+# comment
+context exclusive /\* \*/ brown
+context exclusive // \n brown
+
+# char, raw string, string
+context ' ' gray
+	keyword \\\{abfnrtv\\'"\} white
+	keyword \\\{0123\}\{01234567\}\{01234567\} white
+	keyword \\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} white
+	keyword \\u\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} white
+	keyword \\U\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} white
+context ` ` green
+context " " green
+	spellcheck
+	keyword \\\{abfnrtv\\'"\} brightgreen
+	keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
+	keyword \\x\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} brightgreen
+	keyword \\u\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} brightgreen
+	keyword \\U\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\}\{0123456789abcdefABCDEF\} brightgreen
