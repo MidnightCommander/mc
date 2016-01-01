@@ -34,10 +34,10 @@
 #define EDIT_TEXT_HORIZONTAL_OFFSET 0
 #define EDIT_TEXT_VERTICAL_OFFSET   0
 
-#define EDIT_RIGHT_EXTREME option_edit_right_extreme
-#define EDIT_LEFT_EXTREME option_edit_left_extreme
-#define EDIT_TOP_EXTREME option_edit_top_extreme
-#define EDIT_BOTTOM_EXTREME option_edit_bottom_extreme
+#define EDIT_RIGHT_EXTREME 0
+#define EDIT_LEFT_EXTREME 0
+#define EDIT_TOP_EXTREME 0
+#define EDIT_BOTTOM_EXTREME 0
 
 /* Initial size of the undo stack, in bytes */
 #define START_STACK_SIZE 32
@@ -131,11 +131,6 @@ extern int option_line_state_width;
 
 extern int option_max_undo;
 extern int option_auto_syntax;
-
-extern int option_edit_right_extreme;
-extern int option_edit_left_extreme;
-extern int option_edit_top_extreme;
-extern int option_edit_bottom_extreme;
 
 extern gboolean search_create_bookmark;
 
