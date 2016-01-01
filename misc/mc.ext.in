@@ -211,6 +211,10 @@ shell/i/.cpio
 	Open=%cd %p/ucpio://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cpio
 
+# initrd
+regex/^(initramfs.*\.img|initrd\.img(-.+)?)$
+	Open=%cd %p/ucpio://
+
 # 7zip archives (they are not man pages)
 shell/i/.7z
 	Open=%cd %p/u7z://
