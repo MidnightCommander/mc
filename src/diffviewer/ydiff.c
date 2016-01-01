@@ -1065,7 +1065,7 @@ lcsubstr (const char *s, int m, const char *t, int n, GArray * ret, int min)
         Lprev = Lcurr;
         Lcurr = L;
 #ifdef USE_MEMSET_IN_LCS
-        memset (Lcurr, 0, (n + 1) * sizeof (int));
+        memset (Lcurr, 0, (n + 1) * sizeof (*Lcurr));
 #endif
         for (j = 0; j < n; j++)
         {

@@ -83,7 +83,7 @@ sftpfs_open_socket (struct vfs_s_super *super, GError ** mcerror)
 
     tty_enable_interrupt_key ();        /* clear the interrupt flag */
 
-    memset (&hints, 0, sizeof (struct addrinfo));
+    memset (&hints, 0, sizeof (hints));
     hints.ai_family = AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
 

@@ -354,10 +354,10 @@ tar_get_next_record (struct vfs_s_super *archive, int tard)
 
     (void) archive;
 
-    n = mc_read (tard, rec_buf.charptr, RECORDSIZE);
-    if (n != RECORDSIZE)
+    n = mc_read (tard, rec_buf.charptr, sizeof (rec_buf.charptr));
+    if (n != sizeof (rec_buf.charptr))
         return NULL;            /* An error has occurred */
-    current_tar_position += RECORDSIZE;
+    current_tar_position += sizeof (rec_buf.charptr);
     return &rec_buf;
 }
 
@@ -368,8 +368,8 @@ tar_skip_n_records (struct vfs_s_super *archive, int tard, size_t n)
 {
     (void) archive;
 
-    mc_lseek (tard, n * RECORDSIZE, SEEK_CUR);
-    current_tar_position += n * RECORDSIZE;
+    mc_lseek (tard, n * sizeof (rec_buf.charptr), SEEK_CUR);
+    current_tar_position += n * sizeof (rec_buf.charptr);
 }
 
 /* --------------------------------------------------------------------------------------------- */

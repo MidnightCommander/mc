@@ -570,7 +570,7 @@ feed_subshell (int how, int fail_on_error)
         else if (FD_ISSET (subshell_pipe[READ], &read_set))
             /* Read the subshell's CWD and capture its prompt */
         {
-            bytes = read (subshell_pipe[READ], subshell_cwd, MC_MAXPATHLEN + 1);
+            bytes = read (subshell_pipe[READ], subshell_cwd, sizeof (subshell_cwd));
             if (bytes <= 0)
             {
                 tcsetattr (STDOUT_FILENO, TCSANOW, &shell_mode);

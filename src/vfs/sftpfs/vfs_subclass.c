@@ -176,7 +176,7 @@ sftpfs_cb_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_
 void
 sftpfs_init_subclass (void)
 {
-    memset (&sftpfs_subclass, 0, sizeof (struct vfs_s_subclass));
+    memset (&sftpfs_subclass, 0, sizeof (sftpfs_subclass));
     sftpfs_subclass.flags = VFS_S_REMOTE;
 }
 

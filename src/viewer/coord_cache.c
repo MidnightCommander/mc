@@ -87,14 +87,14 @@ mcview_ccache_add_entry (coord_cache_t * cache, size_t pos, const coord_cache_en
     if (cache->size == cache->capacity)
     {
         cache->capacity += CACHE_CAPACITY_DELTA;
-        cache->cache = g_realloc (cache->cache, cache->capacity * sizeof (coord_cache_entry_t *));
+        cache->cache = g_realloc (cache->cache, cache->capacity * sizeof (*cache->cache));
     }
 
     /* insert new entry */
     if (pos != cache->size)
         memmove (cache->cache[pos + 1], cache->cache[pos],
-                 (cache->size - pos) * sizeof (coord_cache_entry_t *));
-    cache->cache[pos] = g_memdup (entry, sizeof (coord_cache_entry_t));
+                 (cache->size - pos) * sizeof (*cache->cache));
+    cache->cache[pos] = g_memdup (entry, sizeof (*entry));
     cache->size++;
 }
 
@@ -181,7 +181,7 @@ coord_cache_new (void)
     cache = g_new (coord_cache_t, 1);
     cache->size = 0;
     cache->capacity = CACHE_CAPACITY_DELTA;
-    cache->cache = g_malloc0 (cache->capacity * sizeof (coord_cache_entry_t *));
+    cache->cache = g_malloc0 (cache->capacity * sizeof (*cache->cache));
 
     return cache;
 }

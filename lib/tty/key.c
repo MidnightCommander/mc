@@ -923,8 +923,10 @@ get_modifier (void)
     {
         int shift_ext_status;
 
-        if (devctl (fileno (stdin), DCMD_CHR_LINESTATUS, &mod_status, sizeof (int), NULL) == -1)
+        if (devctl (fileno (stdin), DCMD_CHR_LINESTATUS, &mod_status, sizeof (mod_status), NULL) ==
+            -1)
             return 0;
+
         shift_ext_status = mod_status & 0xffffff00UL;
         mod_status &= 0x7f;
         if (mod_status & _LINESTATUS_CON_ALT)

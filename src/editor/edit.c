@@ -2238,7 +2238,7 @@ edit_reload_line (WEdit * edit, const vfs_path_t * filename_vpath, long line)
     }
 
     edit_clean (edit);
-    memcpy (edit, e, sizeof (WEdit));
+    memcpy (edit, e, sizeof (*edit));
     g_free (e);
 
     return TRUE;

@@ -247,10 +247,12 @@ compare_files (const vfs_path_t * vpath1, const vfs_path_t * vpath2, off_t size)
             rotate_dash (TRUE);
             do
             {
-                while ((n1 = read (file1, buf1, BUFSIZ)) == -1 && errno == EINTR);
-                while ((n2 = read (file2, buf2, BUFSIZ)) == -1 && errno == EINTR);
+                while ((n1 = read (file1, buf1, sizeof (buf1))) == -1 && errno == EINTR)
+                    ;
+                while ((n2 = read (file2, buf2, sizeof (buf2))) == -1 && errno == EINTR)
+                    ;
             }
-            while (n1 == n2 && n1 == BUFSIZ && !memcmp (buf1, buf2, BUFSIZ));
+            while (n1 == n2 && n1 == sizeof (buf1) && memcmp (buf1, buf2, sizeof (buf1)) == 0);
             result = (n1 != n2) || memcmp (buf1, buf2, n1);
 #endif /* !HAVE_MMAP */
             close (file2);

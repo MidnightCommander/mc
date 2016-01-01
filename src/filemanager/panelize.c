@@ -329,7 +329,7 @@ do_external_panelize (char *command)
     while (TRUE)
     {
         clearerr (external);
-        if (fgets (line, MC_MAXPATHLEN, external) == NULL)
+        if (fgets (line, sizeof (line), external) == NULL)
         {
             if (ferror (external) && errno == EINTR)
                 continue;

@@ -399,7 +399,7 @@ fetch_hosts (const char *filename)
     if (!file)
         return;
 
-    while (fgets (buffer, 255, file) != NULL)
+    while (fgets (buffer, sizeof (buffer) - 1, file) != NULL)
     {
         /* Skip to first character. */
         for (bi = buffer; bi[0] != '\0' && str_isspace (bi); str_next_char (&bi));
@@ -1284,7 +1284,7 @@ try_complete (char *text, int *lc_start, int *lc_end, input_complete_t flags)
     try_complete_automation_state_t state;
     char **matches = NULL;
 
-    memset (&state, 0, sizeof (try_complete_automation_state_t));
+    memset (&state, 0, sizeof (state));
     state.flags = flags;
 
     SHOW_C_CTX ("try_complete");

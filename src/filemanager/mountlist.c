@@ -1726,7 +1726,7 @@ my_statfs (struct my_statfs *myfs_stats, const char *path)
 
     if (entry != NULL)
     {
-        memset (&fs_use, 0, sizeof (struct fs_usage));
+        memset (&fs_use, 0, sizeof (fs_use));
         get_fs_usage (entry->me_mountdir, NULL, &fs_use);
 
         myfs_stats->type = entry->me_dev;

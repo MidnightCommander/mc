@@ -220,7 +220,7 @@ sftpfs_fill_config_entity_from_config (FILE * ssh_config_handler,
     while (!feof (ssh_config_handler))
     {
         char *cr;
-        if (fgets (buffer, BUF_MEDIUM, ssh_config_handler) == NULL)
+        if (fgets (buffer, sizeof (buffer), ssh_config_handler) == NULL)
         {
             if (errno != 0)
             {

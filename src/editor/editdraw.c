@@ -554,7 +554,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
         cur_line = edit->start_line + row;
         if (cur_line <= (unsigned int) edit->buffer.lines)
         {
-            g_snprintf (line_stat, LINE_STATE_WIDTH + 1, "%7i ", cur_line + 1);
+            g_snprintf (line_stat, sizeof (line_stat), "%7i ", cur_line + 1);
         }
         else
         {
