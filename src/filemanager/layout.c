@@ -147,13 +147,7 @@ static int old_output_lines;
 
 /* Internal variables */
 static int equal_split;
-static int _menubar_visible;
 static int _output_lines;
-static gboolean _command_prompt;
-static int _keybar_visible;
-static int _message_visible;
-static gboolean _xterm_title;
-static int _free_space;
 
 static int height;
 
@@ -336,38 +330,42 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
         return MSG_HANDLED;
 
     case MSG_POST_KEY:
-        _menubar_visible = check_options[1].widget->state & C_BOOL;
-        _command_prompt = (check_options[2].widget->state & C_BOOL) != 0;
-        _keybar_visible = check_options[3].widget->state & C_BOOL;
-        _message_visible = check_options[4].widget->state & C_BOOL;
-        _xterm_title = (check_options[5].widget->state & C_BOOL) != 0;
-        _free_space = check_options[6].widget->state & C_BOOL;
-
-        if (mc_global.tty.console_flag != '\0')
         {
-            int minimum;
+            int _menubar_visible, _command_prompt, _keybar_visible, _message_visible;
 
-            if (_output_lines < 0)
-                _output_lines = 0;
-            height = LINES - _keybar_visible - (_command_prompt ? 1 : 0) -
-                _menubar_visible - _output_lines - _message_visible;
-            minimum = MINHEIGHT * (1 + panels_layout.horizontal_split);
-            if (height < minimum)
+            _menubar_visible = check_options[1].widget->state & C_BOOL;
+            _command_prompt = check_options[2].widget->state & C_BOOL;
+            _keybar_visible = check_options[3].widget->state & C_BOOL;
+            _message_visible = check_options[4].widget->state & C_BOOL;
+
+            if (mc_global.tty.console_flag != '\0')
             {
-                _output_lines -= minimum - height;
-                height = minimum;
-            }
-        }
-        else
-            height = LINES - _keybar_visible - (_command_prompt ? 1 : 0) -
-                _menubar_visible - _output_lines - _message_visible;
+                int minimum;
 
-        if (old_output_lines != _output_lines)
-        {
-            old_output_lines = _output_lines;
-            tty_setcolor (mc_global.tty.console_flag != '\0' ? COLOR_NORMAL : DISABLED_COLOR);
-            widget_move (h, 9, 5 + 3 + output_lines_label_len);
-            tty_printf ("%02d", _output_lines);
+                if (_output_lines < 0)
+                    _output_lines = 0;
+                height =
+                    LINES - _keybar_visible - _command_prompt - _menubar_visible - _output_lines -
+                    _message_visible;
+                minimum = MINHEIGHT * (1 + panels_layout.horizontal_split);
+                if (height < minimum)
+                {
+                    _output_lines -= minimum - height;
+                    height = minimum;
+                }
+            }
+            else
+                height =
+                    LINES - _keybar_visible - _command_prompt - _menubar_visible - _output_lines -
+                    _message_visible;
+
+            if (old_output_lines != _output_lines)
+            {
+                old_output_lines = _output_lines;
+                tty_setcolor (mc_global.tty.console_flag != '\0' ? COLOR_NORMAL : DISABLED_COLOR);
+                widget_move (h, 9, 5 + 3 + output_lines_label_len);
+                tty_printf ("%02d", _output_lines);
+            }
         }
         return MSG_HANDLED;
 
@@ -463,12 +461,6 @@ init_layout (void)
     output_lines_label = _("Output lines:");
 
     /* save old params */
-    _menubar_visible = menubar_visible;
-    _command_prompt = command_prompt;
-    _keybar_visible = mc_global.keybar_visible;
-    _message_visible = mc_global.message_visible;
-    _xterm_title = xterm_title;
-    _free_space = free_space;
     old_output_lines = -1;
     _output_lines = output_lines;
 
