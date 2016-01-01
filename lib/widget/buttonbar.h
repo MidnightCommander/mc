@@ -28,7 +28,7 @@ typedef struct WButtonBar
     struct
     {
         char *text;
-        unsigned long command;
+        long command;
         Widget *receiver;
         int end_coord;          /* cumulative width of buttons so far */
     } labels[BUTTONBAR_LABELS_NUM];

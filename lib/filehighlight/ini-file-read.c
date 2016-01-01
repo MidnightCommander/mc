@@ -2,7 +2,7 @@
    File highlight plugin.
    Reading and parse rules from ini-files
 
-   Copyright (C) 2009-2015
+   Copyright (C) 2009-2016
    Free Software Foundation, Inc.
 
    Written by:
@@ -113,7 +113,7 @@ mc_fhl_parse_get_regexp (mc_fhl_t * fhl, const gchar * group_name)
 
     mc_filter = g_new0 (mc_fhl_filter_t, 1);
     mc_filter->type = MC_FLHGH_T_FREGEXP;
-    mc_filter->search_condition = mc_search_new (regexp, -1, DEFAULT_CHARSET);
+    mc_filter->search_condition = mc_search_new (regexp, DEFAULT_CHARSET);
     mc_filter->search_condition->is_case_sensitive = TRUE;
     mc_filter->search_condition->search_type = MC_SEARCH_T_REGEX;
 
@@ -158,7 +158,7 @@ mc_fhl_parse_get_extensions (mc_fhl_t * fhl, const gchar * group_name)
 
     mc_filter = g_new0 (mc_fhl_filter_t, 1);
     mc_filter->type = MC_FLHGH_T_FREGEXP;
-    mc_filter->search_condition = mc_search_new (buf->str, buf->len, DEFAULT_CHARSET);
+    mc_filter->search_condition = mc_search_new_len (buf->str, buf->len, DEFAULT_CHARSET);
     mc_filter->search_condition->is_case_sensitive =
         mc_config_get_bool (fhl->config, group_name, "extensions_case", TRUE);
     mc_filter->search_condition->search_type = MC_SEARCH_T_REGEX;

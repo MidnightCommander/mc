@@ -1,7 +1,7 @@
 /*
    Editor low level data handling and cursor fundamentals.
 
-   Copyright (C) 1996-2015
+   Copyright (C) 1996-2016
    Free Software Foundation, Inc.
 
    Written by:
@@ -2238,7 +2238,7 @@ edit_reload_line (WEdit * edit, const vfs_path_t * filename_vpath, long line)
     }
 
     edit_clean (edit);
-    memcpy (edit, e, sizeof (WEdit));
+    memcpy (edit, e, sizeof (*edit));
     g_free (e);
 
     return TRUE;
@@ -3185,7 +3185,7 @@ edit_find_bracket (WEdit * edit)
  */
 
 void
-edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_insertion)
+edit_execute_key_command (WEdit * edit, long command, int char_for_insertion)
 {
     if (command == CK_MacroStartRecord || command == CK_RepeatStartRecord
         || (macro_index < 0
@@ -3234,7 +3234,7 @@ edit_execute_key_command (WEdit * edit, unsigned long command, int char_for_inse
    all of them. It also does not check for the Undo command.
  */
 void
-edit_execute_cmd (WEdit * edit, unsigned long command, int char_for_insertion)
+edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
 {
     Widget *w = WIDGET (edit);
 

@@ -1,7 +1,7 @@
 /*
    Dialog box features module for the Midnight Commander
 
-   Copyright (C) 1994-2015
+   Copyright (C) 1994-2014
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -272,7 +272,7 @@ refresh_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-dlg_execute_cmd (WDialog * h, unsigned long command)
+dlg_execute_cmd (WDialog * h, long command)
 {
     cb_ret_t ret = MSG_HANDLED;
     switch (command)
@@ -341,7 +341,7 @@ dlg_execute_cmd (WDialog * h, unsigned long command)
 static cb_ret_t
 dlg_handle_key (WDialog * h, int d_key)
 {
-    unsigned long command;
+    long command;
 
     command = keybind_lookup_keymap_command (dialog_map, d_key);
 

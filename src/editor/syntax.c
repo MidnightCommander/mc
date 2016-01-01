@@ -1,7 +1,7 @@
 /*
    Editor syntax highlighting.
 
-   Copyright (C) 1996-2015
+   Copyright (C) 1996-2016
    Free Software Foundation, Inc.
 
    Written by:

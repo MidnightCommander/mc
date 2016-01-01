@@ -27,13 +27,13 @@
 
 /*** enums ***************************************************************************************/
 
-enum list_types
+typedef enum
 {
     list_full,                  /* Name, size, perm/date */
     list_brief,                 /* Name */
     list_long,                  /* Like ls -l */
     list_user                   /* User defined */
-};
+} list_type_t;
 
 typedef enum
 {
@@ -93,7 +93,7 @@ typedef struct
     Widget widget;
     dir_list dir;               /* Directory contents */
 
-    enum list_types list_type;  /* listing type */
+    list_type_t list_type;      /* listing type */
     int active;                 /* If panel is currently selected */
     vfs_path_t *cwd_vpath;      /* Current Working Directory */
     vfs_path_t *lwd_vpath;      /* Last Working Directory */
@@ -145,8 +145,6 @@ typedef struct
 /*** global variables defined in .c file *********************************************************/
 
 extern panelized_panel_t panelized_panel;
-
-extern panel_field_t panel_fields[];
 
 extern hook_t *select_file_hook;
 

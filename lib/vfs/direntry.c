@@ -1,7 +1,7 @@
 /*
    Directory cache support
 
-   Copyright (C) 1998-2015
+   Copyright (C) 1998-2016
    Free Software Foundation, Inc.
 
    Written by:
@@ -696,13 +696,12 @@ static void
 vfs_s_print_stats (const char *fs_name, const char *action,
                    const char *file_name, off_t have, off_t need)
 {
-    if (need)
-        vfs_print_message (_("%s: %s: %s %3d%% %" PRIuMAX " %s"), fs_name, action,
-                           file_name, (int) ((double) have * 100 / need), (uintmax_t) have,
-                           _("bytes transferred"));
+    if (need != 0)
+        vfs_print_message (_("%s: %s: %s %3d%% (%lld) bytes transferred"), fs_name, action,
+                           file_name, (int) ((double) have * 100 / need), (long long) have);
     else
-        vfs_print_message (_("%s: %s: %s %" PRIuMAX " %s"), fs_name, action, file_name,
-                           (uintmax_t) have, _("bytes transferred"));
+        vfs_print_message (_("%s: %s: %s %lld bytes transferre"), fs_name, action, file_name,
+                           (long long) have);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -987,7 +986,7 @@ struct stat *
 vfs_s_default_stat (struct vfs_class *me, mode_t mode)
 {
     static struct stat st;
-    int myumask;
+    mode_t myumask;
 
     (void) me;
 

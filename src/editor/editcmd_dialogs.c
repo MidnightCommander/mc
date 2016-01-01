@@ -1,7 +1,7 @@
 /*
    Editor dialogs for high level editing commands
 
-   Copyright (C) 2009-2015
+   Copyright (C) 2009-2016
    Free Software Foundation, Inc.
 
    Written by:
@@ -163,9 +163,9 @@ editcmd_dialog_search_show (WEdit * edit)
     mc_search_free (edit->search);
 
 #ifdef HAVE_CHARSET
-    edit->search = mc_search_new (edit->last_search_string, -1, cp_source);
+    edit->search = mc_search_new (edit->last_search_string, cp_source);
 #else
-    edit->search = mc_search_new (edit->last_search_string, -1, NULL);
+    edit->search = mc_search_new (edit->last_search_string, NULL);
 #endif
     if (edit->search != NULL)
     {

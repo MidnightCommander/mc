@@ -1,7 +1,7 @@
 /*
    Some misc dialog boxes for the program.
 
-   Copyright (C) 1994-2015
+   Copyright (C) 1994-2016
    Free Software Foundation, Inc.
 
    Written by:
@@ -868,7 +868,8 @@ const panel_field_t *
 sort_box (dir_sort_options_t * op, const panel_field_t * sort_field)
 {
     const char **sort_orders_names;
-    gsize sort_names_num, i;
+    gsize i;
+    gsize sort_names_num = 0;
     int sort_idx = 0;
     const panel_field_t *result = NULL;
 

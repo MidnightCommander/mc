@@ -97,7 +97,7 @@ typedef struct WDiff
     int ndiff;                  /* number of hunks */
     DSRC dsrc;                  /* data source: memory or temporary file */
 
-    int view_quit:1;            /* Quit flag */
+    gboolean view_quit;         /* Quit flag */
 
     int height;
     int half1;
@@ -105,15 +105,15 @@ typedef struct WDiff
     int width1;
     int width2;
     int bias;
-    int new_frame;
+    gboolean new_frame;
     int skip_rows;
     int skip_cols;
     int display_symbols;
     int display_numbers;
-    int show_cr;
+    gboolean show_cr;
     int tab_size;
     diff_place_t ord;
-    int full;
+    gboolean full;
 
 #ifdef HAVE_CHARSET
     gboolean utf8;

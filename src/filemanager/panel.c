@@ -1,7 +1,7 @@
 /*
    Panel managing.
 
-   Copyright (C) 1994-2015
+   Copyright (C) 1994-2016
    Free Software Foundation, Inc.
 
    Written by:
@@ -63,7 +63,7 @@
 #endif
 #include "src/keybind-defaults.h"       /* global_keymap_t */
 #ifdef ENABLE_SUBSHELL
-#include "src/subshell.h"       /* do_subshell_chdir() */
+#include "src/subshell/subshell.h"      /* do_subshell_chdir() */
 #endif
 
 #include "dir.h"
@@ -107,8 +107,54 @@ static const char *string_marked (file_entry_t *, int);
 static const char *string_space (file_entry_t *, int);
 static const char *string_dot (file_entry_t *, int);
 
+mc_fhl_t *mc_filehighlight = NULL;
+
+/*** file scope macro definitions ****************************************************************/
+
+#define NORMAL          0
+#define SELECTED        1
+#define MARKED          2
+#define MARKED_SELECTED 3
+#define STATUS          5
+
+/*** file scope type declarations ****************************************************************/
+
+typedef enum
+{
+    MARK_DONT_MOVE = 0,
+    MARK_DOWN = 1,
+    MARK_FORCE_DOWN = 2,
+    MARK_FORCE_UP = 3
+} mark_act_t;
+
+/*
+ * This describes a format item.  The parse_display_format routine parses
+ * the user specified format and creates a linked list of format_e structures.
+ */
+typedef struct format_e
+{
+    struct format_e *next;
+    int requested_field_len;
+    int field_len;
+    align_crt_t just_mode;
+    gboolean expand;
+    const char *(*string_fn) (file_entry_t *, int len);
+    char *title;
+    const char *id;
+} format_e;
+
+/* File name scroll states */
+typedef enum
+{
+    FILENAME_NOSCROLL = 1,
+    FILENAME_SCROLL_LEFT = 2,
+    FILENAME_SCROLL_RIGHT = 4
+} filename_scroll_flag_t;
+
+/*** file scope variables ************************************************************************/
+
 /* *INDENT-OFF* */
-panel_field_t panel_fields[] = {
+static panel_field_t panel_fields[] = {
     {
      "unsorted", 12, TRUE, J_LEFT_FIT,
      /* TRANSLATORS: one single character to represent 'unsorted' sort mode  */
@@ -307,52 +353,6 @@ panel_field_t panel_fields[] = {
     }
 };
 /* *INDENT-ON* */
-
-mc_fhl_t *mc_filehighlight = NULL;
-
-/*** file scope macro definitions ****************************************************************/
-
-#define NORMAL          0
-#define SELECTED        1
-#define MARKED          2
-#define MARKED_SELECTED 3
-#define STATUS          5
-
-/*** file scope type declarations ****************************************************************/
-
-typedef enum
-{
-    MARK_DONT_MOVE = 0,
-    MARK_DOWN = 1,
-    MARK_FORCE_DOWN = 2,
-    MARK_FORCE_UP = 3
-} mark_act_t;
-
-/*
- * This describes a format item.  The parse_display_format routine parses
- * the user specified format and creates a linked list of format_e structures.
- */
-typedef struct format_e
-{
-    struct format_e *next;
-    int requested_field_len;
-    int field_len;
-    align_crt_t just_mode;
-    gboolean expand;
-    const char *(*string_fn) (file_entry_t *, int len);
-    char *title;
-    const char *id;
-} format_e;
-
-/* File name scroll states */
-typedef enum
-{
-    FILENAME_NOSCROLL = 1,
-    FILENAME_SCROLL_LEFT = 2,
-    FILENAME_SCROLL_RIGHT = 4
-} filename_scroll_flag_t;
-
-/*** file scope variables ************************************************************************/
 
 static char *panel_sort_up_sign = NULL;
 static char *panel_sort_down_sign = NULL;
@@ -2056,7 +2056,7 @@ panel_select_ext_cmd (void)
 
     g_free (cur_file_ext);
 
-    search = mc_search_new (reg_exp, -1, NULL);
+    search = mc_search_new (reg_exp, NULL);
     search->search_type = MC_SEARCH_T_REGEX;
     search->is_case_sensitive = FALSE;
 
@@ -2524,7 +2524,7 @@ panel_select_unselect_files (WPanel * panel, const char *title, const char *hist
         return;
     }
 
-    search = mc_search_new (reg_exp, -1, NULL);
+    search = mc_search_new (reg_exp, NULL);
     search->search_type = (shell_patterns != 0) ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
     search->is_entire_line = TRUE;
     search->is_case_sensitive = case_sens != 0;
@@ -2644,7 +2644,7 @@ do_search (WPanel * panel, int c_code)
 
     reg_exp = g_strdup_printf ("%s*", panel->search_buffer);
     esc_str = strutils_escape (reg_exp, -1, ",|\\{}[]", TRUE);
-    search = mc_search_new (esc_str, -1, NULL);
+    search = mc_search_new (esc_str, NULL);
     search->search_type = MC_SEARCH_T_GLOB;
     search->is_entire_line = TRUE;
 
@@ -3384,7 +3384,7 @@ directory_history_list (WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-panel_execute_cmd (WPanel * panel, unsigned long command)
+panel_execute_cmd (WPanel * panel, long command)
 {
     int res = MSG_HANDLED;
 

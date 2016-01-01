@@ -94,6 +94,7 @@
 #endif /* !ENABLE_NLS */
 
 #include "fs.h"
+#include "shell.h"
 
 #ifdef USE_MAINTAINER_MODE
 #include "lib/logging.h"
@@ -231,6 +232,9 @@ typedef struct
         gboolean is_right;      /* If the selected menu was the right */
     } widget;
 
+    /* The user's shell */
+    mc_shell_t *shell;
+
     struct
     {
         /* Use the specified skin */
@@ -248,14 +252,11 @@ typedef struct
 #endif                          /* !LINUX_CONS_SAVER_C */
         /* If using a subshell for evaluating commands this is true */
         gboolean use_subshell;
+
 #ifdef ENABLE_SUBSHELL
         /* File descriptors of the pseudoterminal used by the subshell */
         int subshell_pty;
 #endif                          /* !ENABLE_SUBSHELL */
-
-        /* The user's shell */
-        char *shell;
-        char *shell_realpath;
 
         /* This flag is set by xterm detection routine in function main() */
         /* It is used by function view_other_cmd() */

@@ -1,7 +1,7 @@
 /*
    Widgets for the Midnight Commander
 
-   Copyright (C) 1994-2015
+   Copyright (C) 1994-2016
    Free Software Foundation, Inc.
 
    Authors:
@@ -222,7 +222,7 @@ button_new (int y, int x, int action, button_flags_t flags, const char *text, bc
 
 /* --------------------------------------------------------------------------------------------- */
 
-const char *
+char *
 button_get_text (const WButton * b)
 {
     if (b->text.hotkey != NULL)

@@ -1,7 +1,7 @@
 /*
    Widget based utility functions.
 
-   Copyright (C) 1994-2015
+   Copyright (C) 1994-2016
    Free Software Foundation, Inc.
 
    Authors:
@@ -181,6 +181,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
     quick_widget_t *quick_widget;
     WGroupbox *g = NULL;
     WDialog *dd;
+    GList *input_labels = NULL; /* Widgets not directly requested by the user. */
     int return_val;
 
     len = str_term_width1 (I18N (quick_dlg->title)) + 6;
@@ -235,7 +236,10 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
             *quick_widget->u.input.result = NULL;
             y++;
             if (quick_widget->u.input.label_location != input_label_none)
+            {
                 quick_create_labeled_input (widgets, &y, x, quick_widget, &width);
+                input_labels = g_list_prepend (input_labels, quick_widget->u.input.label);
+            }
             else
             {
                 item.widget = WIDGET (quick_create_input (y, x, quick_widget));
@@ -606,16 +610,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
 
     dlg_destroy (dd);
 
-    /* destroy input labels created before */
-    for (i = 0; i < widgets->len; i++)
-    {
-        quick_widget_item_t *item;
-
-        item = &g_array_index (widgets, quick_widget_item_t, i);
-        if (item->quick_widget->widget_type == quick_input)
-            g_free (item->quick_widget->u.input.label);
-    }
-
+    g_list_free_full (input_labels, g_free);    /* destroy input labels created before */
     g_array_free (widgets, TRUE);
 
     return return_val;

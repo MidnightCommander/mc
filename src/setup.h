@@ -58,7 +58,7 @@ typedef struct
 
 typedef struct macro_action_t
 {
-    unsigned long action;
+    long action;
     int ch;
 } macro_action_t;
 

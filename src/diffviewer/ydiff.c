@@ -1,5 +1,5 @@
 /*
-   Copyright (C) 2007-2015
+   Copyright (C) 2007-2016
    Free Software Foundation, Inc.
 
    Written by:
@@ -1065,7 +1065,7 @@ lcsubstr (const char *s, int m, const char *t, int n, GArray * ret, int min)
         Lprev = Lcurr;
         Lcurr = L;
 #ifdef USE_MEMSET_IN_LCS
-        memset (Lcurr, 0, (n + 1) * sizeof (int));
+        memset (Lcurr, 0, (n + 1) * sizeof (*Lcurr));
 #endif
         for (j = 0; j < n; j++)
         {
@@ -1363,7 +1363,8 @@ cvt_ncpy (char *dst, int dstsize, const char **_src, size_t srcsize, int base, i
  */
 
 static int
-cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int ts, int show_cr)
+cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int ts,
+          gboolean show_cr)
 {
     int sz = 0;
 
@@ -1461,8 +1462,8 @@ cvt_mget (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int
  */
 
 static int
-cvt_mgeta (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int ts, int show_cr,
-           GArray * hdiff, diff_place_t ord, char *att)
+cvt_mgeta (const char *src, size_t srcsize, char *dst, int dstsize, int skip, int ts,
+           gboolean show_cr, GArray * hdiff, diff_place_t ord, char *att)
 {
     int sz = 0;
 
@@ -1562,7 +1563,7 @@ cvt_mgeta (const char *src, size_t srcsize, char *dst, int dstsize, int skip, in
  */
 
 static int
-cvt_fget (FBUF * f, off_t off, char *dst, size_t dstsize, int skip, int ts, int show_cr)
+cvt_fget (FBUF * f, off_t off, char *dst, size_t dstsize, int skip, int ts, gboolean show_cr)
 {
     int base = 0;
     int old_base = base;
@@ -2455,18 +2456,18 @@ dview_init (WDiff * dview, const char *args, const char *file1, const char *file
 
     dview->ndiff = ndiff;
 
-    dview->view_quit = 0;
+    dview->view_quit = FALSE;
 
     dview->bias = 0;
-    dview->new_frame = 1;
+    dview->new_frame = TRUE;
     dview->skip_rows = 0;
     dview->skip_cols = 0;
     dview->display_symbols = 0;
     dview->display_numbers = 0;
-    dview->show_cr = 1;
+    dview->show_cr = TRUE;
     dview->tab_size = 8;
     dview->ord = DIFF_LEFT;
-    dview->full = 0;
+    dview->full = FALSE;
 
     dview->search.handle = NULL;
     dview->search.last_string = NULL;
@@ -2531,7 +2532,7 @@ dview_display_file (const WDiff * dview, diff_place_t ord, int r, int c, int hei
     int skip = dview->skip_cols;
     int display_symbols = dview->display_symbols;
     int display_numbers = dview->display_numbers;
-    int show_cr = dview->show_cr;
+    gboolean show_cr = dview->show_cr;
     int tab_size = 8;
     const DIFFLN *p;
     int nwidth = display_numbers;
@@ -2861,7 +2862,7 @@ dview_update (WDiff * dview)
                 tty_draw_vline (2, width1 + xwidth, ACS_VLINE, height - 2);
             }
         }
-        dview->new_frame = 0;
+        dview->new_frame = FALSE;
     }
 
     if (width1 > 2)
@@ -3093,7 +3094,7 @@ dview_load_options (WDiff * dview)
     dview->opt.ignore_case =
         mc_config_get_bool (mc_main_config, "DiffView", "diff_ignore_case", FALSE);
 
-    dview->new_frame = 1;
+    dview->new_frame = TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3145,7 +3146,7 @@ dview_ok_to_exit (WDiff * dview)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-dview_execute_cmd (WDiff * dview, unsigned long command)
+dview_execute_cmd (WDiff * dview, long command)
 {
     cb_ret_t res = MSG_HANDLED;
 
@@ -3153,28 +3154,28 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
     {
     case CK_ShowSymbols:
         dview->display_symbols ^= 1;
-        dview->new_frame = 1;
+        dview->new_frame = TRUE;
         break;
     case CK_ShowNumbers:
         dview->display_numbers ^= calc_nwidth ((const GArray ** const) dview->a);
-        dview->new_frame = 1;
+        dview->new_frame = TRUE;
         break;
     case CK_SplitFull:
-        dview->full ^= 1;
-        dview->new_frame = 1;
+        dview->full = !dview->full;
+        dview->new_frame = TRUE;
         break;
     case CK_SplitEqual:
         if (!dview->full)
         {
             dview->bias = 0;
-            dview->new_frame = 1;
+            dview->new_frame = TRUE;
         }
         break;
     case CK_SplitMore:
         if (!dview->full)
         {
             dview_compute_split (dview, 1);
-            dview->new_frame = 1;
+            dview->new_frame = TRUE;
         }
         break;
 
@@ -3182,7 +3183,7 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
         if (!dview->full)
         {
             dview_compute_split (dview, -1);
-            dview->new_frame = 1;
+            dview->new_frame = TRUE;
         }
         break;
     case CK_Tab2:
@@ -3284,7 +3285,7 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
         view_other_cmd ();
         break;
     case CK_Quit:
-        dview->view_quit = 1;
+        dview->view_quit = TRUE;
         break;
     case CK_Save:
         dview_do_save (dview);
@@ -3311,7 +3312,7 @@ dview_execute_cmd (WDiff * dview, unsigned long command)
 static cb_ret_t
 dview_handle_key (WDiff * dview, int key)
 {
-    unsigned long command;
+    long command;
 
 #ifdef HAVE_CHARSET
     key = convert_from_input_c (key);
@@ -3343,7 +3344,7 @@ dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         return MSG_HANDLED;
 
     case MSG_DRAW:
-        dview->new_frame = 1;
+        dview->new_frame = TRUE;
         dview_update (dview);
         return MSG_HANDLED;
 

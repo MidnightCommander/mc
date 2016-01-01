@@ -41,6 +41,7 @@ typedef enum
 
 typedef enum
 {
+    MC_SEARCH_T_INVALID = -1,
     MC_SEARCH_T_NORMAL,
     MC_SEARCH_T_REGEX,
     MC_SEARCH_T_HEX,
@@ -127,10 +128,18 @@ typedef struct mc_search_type_str_struct
 
 /*** global variables defined in .c file *********************************************************/
 
+/* Error messages */
+extern const char *STR_E_NOTFOUND;
+extern const char *STR_E_UNKNOWN_TYPE;
+extern const char *STR_E_RPL_NOT_EQ_TO_FOUND;
+extern const char *STR_E_RPL_INVALID_TOKEN;
+
 /*** declarations of public functions ************************************************************/
 
-mc_search_t *mc_search_new (const gchar * original, gsize original_len,
-                            const gchar * original_charset);
+mc_search_t *mc_search_new (const gchar * original, const gchar * original_charset);
+
+mc_search_t *mc_search_new_len (const gchar * original, gsize original_len,
+                                const gchar * original_charset);
 
 void mc_search_free (mc_search_t * lc_mc_search);
 

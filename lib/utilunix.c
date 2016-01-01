@@ -1,7 +1,7 @@
 /*
    Various utilities - Unix variants
 
-   Copyright (C) 1994-2015
+   Copyright (C) 1994-2016
    Free Software Foundation, Inc.
 
    Written by:
@@ -798,7 +798,7 @@ close_error_pipe (int error, const char *text)
             return 1;
         }
         close (old_error);
-        len = read (error_pipe[0], msg, MAX_PIPE_SIZE - 1);
+        len = read (error_pipe[0], msg, sizeof (msg) - 1);
 
         if (len >= 0)
             msg[len] = 0;
@@ -1132,7 +1132,7 @@ mc_realpath (const char *path, char *resolved_path)
         }
         else
         {
-            g_snprintf (got_path, PATH_MAX, "%s", new_path);
+            g_snprintf (got_path, sizeof (got_path), "%s", new_path);
             g_free (new_path);
             new_path = got_path;
         }

@@ -10,7 +10,7 @@
    Janne Kukonlehto added much error recovery to them for being used
    in an interactive program.
 
-   Copyright (C) 1994-2015
+   Copyright (C) 1994-2016
    Free Software Foundation, Inc.
 
    Written by:
@@ -909,18 +909,18 @@ file_progress_show (file_op_context_t * ctx, off_t done, off_t total,
 
         file_eta_prepare_for_show (buffer2, ctx->eta_secs, FALSE);
         if (ctx->bps == 0)
-            g_snprintf (buffer, BUF_TINY, "%s %s", buffer2, stalled_msg);
+            g_snprintf (buffer, sizeof (buffer), "%s %s", buffer2, stalled_msg);
         else
         {
             char buffer3[BUF_TINY];
 
             file_bps_prepare_for_show (buffer3, ctx->bps);
-            g_snprintf (buffer, BUF_TINY, "%s (%s) %s", buffer2, buffer3, stalled_msg);
+            g_snprintf (buffer, sizeof (buffer), "%s (%s) %s", buffer2, buffer3, stalled_msg);
         }
     }
     else
     {
-        g_snprintf (buffer, BUF_TINY, "%s", stalled_msg);
+        g_snprintf (buffer, sizeof (buffer), "%s", stalled_msg);
     }
 
     label_set_text (ui->progress_file_label, buffer);
@@ -942,9 +942,9 @@ file_progress_show_count (file_op_context_t * ctx, size_t done, size_t total)
         return;
 
     if (ctx->progress_totals_computed)
-        g_snprintf (buffer, BUF_TINY, _("Files processed: %zu/%zu"), done, total);
+        g_snprintf (buffer, sizeof (buffer), _("Files processed: %zu/%zu"), done, total);
     else
-        g_snprintf (buffer, BUF_TINY, _("Files processed: %zu"), done);
+        g_snprintf (buffer, sizeof (buffer), _("Files processed: %zu"), done);
     label_set_text (ui->total_files_processed_label, buffer);
 }
 
@@ -991,22 +991,23 @@ file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ct
         {
             file_eta_prepare_for_show (buffer3, tctx->eta_secs, TRUE);
             if (tctx->bps == 0)
-                g_snprintf (buffer, BUF_TINY, _("Time: %s %s"), buffer2, buffer3);
+                g_snprintf (buffer, sizeof (buffer), _("Time: %s %s"), buffer2, buffer3);
             else
             {
 
                 file_bps_prepare_for_show (buffer4, (long) tctx->bps);
-                g_snprintf (buffer, BUF_TINY, _("Time: %s %s (%s)"), buffer2, buffer3, buffer4);
+                g_snprintf (buffer, sizeof (buffer), _("Time: %s %s (%s)"), buffer2, buffer3,
+                            buffer4);
             }
         }
         else
         {
             if (tctx->bps == 0)
-                g_snprintf (buffer, BUF_TINY, _("Time: %s"), buffer2);
+                g_snprintf (buffer, sizeof (buffer), _("Time: %s"), buffer2);
             else
             {
                 file_bps_prepare_for_show (buffer4, (long) tctx->bps);
-                g_snprintf (buffer, BUF_TINY, _("Time: %s (%s)"), buffer2, buffer4);
+                g_snprintf (buffer, sizeof (buffer), _("Time: %s (%s)"), buffer2, buffer4);
             }
         }
 
@@ -1017,11 +1018,11 @@ file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ct
     {
         size_trunc_len (buffer2, 5, tctx->copied_bytes, 0, panels_options.kilobyte_si);
         if (!ctx->progress_totals_computed)
-            g_snprintf (buffer, BUF_TINY, _(" Total: %s "), buffer2);
+            g_snprintf (buffer, sizeof (buffer), _(" Total: %s "), buffer2);
         else
         {
             size_trunc_len (buffer3, 5, ctx->progress_bytes, 0, panels_options.kilobyte_si);
-            g_snprintf (buffer, BUF_TINY, _(" Total: %s/%s "), buffer2, buffer3);
+            g_snprintf (buffer, sizeof (buffer), _(" Total: %s/%s "), buffer2, buffer3);
         }
 
         hline_set_text (ui->total_bytes_label, buffer);
@@ -1288,7 +1289,7 @@ file_mask_dialog (file_op_context_t * ctx, FileOperation operation,
         }
         else
         {
-            int i2;
+            mode_t i2;
 
             ctx->preserve = ctx->preserve_uidgid = FALSE;
             i2 = umask (0);
@@ -1303,7 +1304,7 @@ file_mask_dialog (file_op_context_t * ctx, FileOperation operation,
             return dest_dir;
         }
 
-        ctx->search_handle = mc_search_new (source_mask, -1, NULL);
+        ctx->search_handle = mc_search_new (source_mask, NULL);
 
         if (ctx->search_handle == NULL)
         {

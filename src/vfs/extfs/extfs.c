@@ -1,7 +1,7 @@
 /*
    Virtual File System: External file system.
 
-   Copyright (C) 1995-2015
+   Copyright (C) 1995-2016
    Free Software Foundation, Inc.
 
    Written by:
@@ -255,7 +255,7 @@ extfs_find_entry_int (struct entry *dir, const char *name, GSList * list,
     name_end = name + strlen (name);
 
     q = strchr (p, PATH_SEP);
-    if (q == '\0')
+    if (q == NULL)
         q = strchr (p, '\0');
 
     while ((pent != NULL) && (c != '\0') && (*p != '\0'))
@@ -310,7 +310,7 @@ extfs_find_entry_int (struct entry *dir, const char *name, GSList * list,
         *q = c;
         p = q + 1;
         q = strchr (p, PATH_SEP);
-        if (q == '\0')
+        if (q == NULL)
             q = strchr (p, '\0');
     }
     if (pent == NULL)
@@ -848,7 +848,7 @@ extfs_cmd (const char *str_extfs_cmd, struct archive *archive,
     g_free (quoted_archive_name);
 
     open_error_pipe ();
-    retval = my_system (EXECUTE_AS_SHELL, mc_global.tty.shell, cmd);
+    retval = my_system (EXECUTE_AS_SHELL, mc_global.shell->path, cmd);
     g_free (cmd);
     close_error_pipe (D_ERROR, NULL);
     return retval;

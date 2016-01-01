@@ -6,7 +6,7 @@
    created and destroyed.  This is required for the future vfs layer,
    it will be possible to have tree views over virtual file systems.
 
-   Copyright (C) 1994-2015
+   Copyright (C) 1994-2016
    Free Software Foundation, Inc.
 
    Written by:
@@ -1029,7 +1029,7 @@ tree_toggle_navig (WTree * tree)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-tree_execute_cmd (WTree * tree, unsigned long command)
+tree_execute_cmd (WTree * tree, long command)
 {
     cb_ret_t res = MSG_HANDLED;
 

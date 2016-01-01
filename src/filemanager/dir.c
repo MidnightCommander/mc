@@ -1,7 +1,7 @@
 /*
    Directory routines
 
-   Copyright (C) 1994-2015
+   Copyright (C) 1994-2016
    Free Software Foundation, Inc.
 
    Written by:
@@ -561,7 +561,7 @@ dir_list_init (dir_list * list)
     }
 
     fentry = &list->list[0];
-    memset (fentry, 0, sizeof (file_entry_t));
+    memset (fentry, 0, sizeof (*fentry));
     fentry->fnamelen = 2;
     fentry->fname = g_strndup ("..", fentry->fnamelen);
     fentry->f.link_to_dir = 0;

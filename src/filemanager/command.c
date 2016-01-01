@@ -4,7 +4,7 @@
    with all the magic of the command input line, we depend on some
    help from the program's callback.
 
-   Copyright (C) 1995-2015
+   Copyright (C) 1995-2016
    Free Software Foundation, Inc.
 
    Written by:
@@ -46,7 +46,7 @@
 
 #include "src/setup.h"          /* quit */
 #ifdef ENABLE_SUBSHELL
-#include "src/subshell.h"
+#include "src/subshell/subshell.h"
 #endif
 #include "src/execute.h"        /* shell_execute */
 

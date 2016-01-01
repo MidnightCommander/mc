@@ -1,7 +1,7 @@
 /*
    Setup loading/saving.
 
-   Copyright (C) 1994-2015
+   Copyright (C) 1994-2016
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -690,7 +690,7 @@ load_keymap_from_section (const char *section_name, GArray * keymap, mc_config_t
         values = mc_config_get_string_list (cfg, section_name, *profile_keys, NULL);
         if (values != NULL)
         {
-            int action;
+            long action;
 
             action = keybind_lookup_action (*profile_keys);
             if (action > 0)
@@ -1388,7 +1388,7 @@ panel_load_setup (WPanel * panel, const char *section)
     for (i = 0; i < LIST_TYPES; i++)
     {
         g_free (panel->user_status_format[i]);
-        g_snprintf (buffer2, BUF_TINY, "user_status%lld", (long long) i);
+        g_snprintf (buffer2, sizeof (buffer2), "user_status%lld", (long long) i);
         panel->user_status_format[i] =
             mc_config_get_string (mc_panels_config, section, buffer2, DEFAULT_USER_FORMAT);
     }
@@ -1424,7 +1424,7 @@ panel_save_setup (WPanel * panel, const char *section)
 
     for (i = 0; i < LIST_TYPES; i++)
     {
-        g_snprintf (buffer, BUF_TINY, "user_status%lld", (long long) i);
+        g_snprintf (buffer, sizeof (buffer), "user_status%lld", (long long) i);
         mc_config_set_string (mc_panels_config, section, buffer, panel->user_status_format[i]);
     }
 

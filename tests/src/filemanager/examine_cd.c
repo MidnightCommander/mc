@@ -1,7 +1,7 @@
 /*
    src/filemanager - examine_cd() function testing
 
-   Copyright (C) 2012-2015
+   Copyright (C) 2012-2016
    Free Software Foundation, Inc.
 
    Written by:
@@ -35,7 +35,7 @@
 #include "src/filemanager/midnight.h"
 #include "src/filemanager/tree.h"
 #ifdef ENABLE_SUBSHELL
-#include "src/subshell.h"
+#include "src/subshell/subshell.h"
 #endif /* ENABLE_SUBSHELL */
 
 #include "src/filemanager/command.c"

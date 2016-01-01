@@ -1,7 +1,7 @@
 /*
    Widgets for the Midnight Commander
 
-   Copyright (C) 1994-2015
+   Copyright (C) 1994-2016
    Free Software Foundation, Inc.
 
    Authors:
@@ -266,7 +266,7 @@ listbox_back_n (WListbox * l, int n)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-listbox_execute_cmd (WListbox * l, unsigned long command)
+listbox_execute_cmd (WListbox * l, long command)
 {
     cb_ret_t ret = MSG_HANDLED;
     Widget *w = WIDGET (l);
@@ -331,7 +331,7 @@ listbox_execute_cmd (WListbox * l, unsigned long command)
 static cb_ret_t
 listbox_key (WListbox * l, int key)
 {
-    unsigned long command;
+    long command;
 
     if (l->list == NULL)
         return MSG_NOT_HANDLED;
@@ -339,13 +339,7 @@ listbox_key (WListbox * l, int key)
     /* focus on listbox item N by '0'..'9' keys */
     if (key >= '0' && key <= '9')
     {
-        int oldpos = l->pos;
         listbox_select_entry (l, key - '0');
-
-        /* need scroll to item? */
-        if (abs (oldpos - l->pos) > WIDGET (l)->lines)
-            l->top = l->pos;
-
         return MSG_HANDLED;
     }
 
@@ -513,8 +507,6 @@ listbox_event (Gpm_Event * event, void *data)
         else
             listbox_select_entry (l, listbox_y_pos (l, local.y - 1));
 
-        /* We need to refresh ourselves since the dialog manager doesn't */
-        /* know about this event */
         listbox_draw (l, TRUE);
         return ret;
     }

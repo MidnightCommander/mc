@@ -1,7 +1,7 @@
 /*
    Chown command -- for the Midnight Commander
 
-   Copyright (C) 1994-2015
+   Copyright (C) 1994-2016
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -81,7 +81,9 @@ static WListbox *l_user, *l_group;
 /* *INDENT-OFF* */
 static struct
 {
-    int ret_cmd, flags, y, len;
+    int ret_cmd;
+    button_flags_t flags;
+    int y, len;
     const char *text;
 } chown_but[BUTTONS] = {
     { B_SETALL, NORMAL_BUTTON,  5, 0, N_("Set &all") },
@@ -92,7 +94,7 @@ static struct
 };
 
 /* summary length of three buttons */
-static unsigned int blen = 0;
+static int blen = 0;
 
 static struct {
     int y;

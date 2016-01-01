@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Callback function for some actions (hotkeys, menu)
 
-   Copyright (C) 1994-2015
+   Copyright (C) 1994-2016
    Free Software Foundation, Inc.
 
    Written by:
@@ -147,9 +147,9 @@ mcview_continue_search_cmd (WView * view)
             g_list_free_full (history, g_free);
 
 #ifdef HAVE_CHARSET
-            view->search = mc_search_new (view->last_search_string, -1, cp_source);
+            view->search = mc_search_new (view->last_search_string, cp_source);
 #else
-            view->search = mc_search_new (view->last_search_string, -1, NULL);
+            view->search = mc_search_new (view->last_search_string, NULL);
 #endif
             view->search_nroff_seq = mcview_nroff_seq_new (view);
 
@@ -220,7 +220,7 @@ static cb_ret_t
 mcview_handle_editkey (WView * view, int key)
 {
     struct hexedit_change_node *node;
-    int byte_val;
+    int byte_val = -1;
 
     /* Has there been a change at this position? */
     node = view->change_list;
@@ -382,7 +382,7 @@ mcview_load_next_prev (WView * view, int direction)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-mcview_execute_cmd (WView * view, unsigned long command)
+mcview_execute_cmd (WView * view, long command)
 {
     int res = MSG_HANDLED;
 
@@ -546,7 +546,7 @@ mcview_execute_cmd (WView * view, unsigned long command)
 static cb_ret_t
 mcview_handle_key (WView * view, int key)
 {
-    unsigned long command;
+    long command;
 
 #ifdef HAVE_CHARSET
     key = convert_from_input_c (key);

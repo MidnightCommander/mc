@@ -34,11 +34,11 @@
 enum
 {
     /* special commands */
-    CK_InsertChar = -1,
-    CK_IgnoreKey = 0,
+    CK_InsertChar = -1L,
+    CK_IgnoreKey = 0L,
 
     /* common */
-    CK_Enter = 1,
+    CK_Enter = 1L,
     CK_Up,
     CK_Down,
     CK_Left,
@@ -128,7 +128,7 @@ enum
     CK_ExtendedKeyMap,
 
     /* main commands */
-    CK_EditForceInternal = 100,
+    CK_EditForceInternal = 100L,
     CK_View,
     CK_ViewRaw,
     CK_ViewFile,
@@ -186,7 +186,7 @@ enum
     CK_SelectInvert,
 
     /* panels */
-    CK_PanelOtherCd = 200,
+    CK_PanelOtherCd = 200L,
     CK_PanelOtherCdLink,
     CK_Panelize,
     CK_CopySingle,
@@ -207,14 +207,14 @@ enum
     CK_ScrollRight,
 
     /* dialog */
-    CK_Ok = 300,
+    CK_Ok = 300L,
     CK_Cancel,
 
     /* input */
-    CK_Yank = 350,
+    CK_Yank = 350L,
 
     /* help */
-    CK_Index = 400,
+    CK_Index = 400L,
     CK_Back,
     CK_LinkNext,
     CK_LinkPrev,
@@ -222,11 +222,11 @@ enum
     CK_NodePrev,
 
     /* tree */
-    CK_Forget = 450,
+    CK_Forget = 450L,
 
     /* editor */
     /* cursor movements */
-    CK_Tab = 500,
+    CK_Tab = 500L,
     CK_Undo,
     CK_ScrollUp,
     CK_ScrollDown,
@@ -308,7 +308,7 @@ enum
     CK_Mail,
 
     /* viewer */
-    CK_WrapMode = 600,
+    CK_WrapMode = 600L,
     CK_MagicMode,
     CK_NroffMode,
     CK_HexMode,
@@ -321,7 +321,7 @@ enum
     CK_SearchBackwardContinue,
 
     /* diff viewer */
-    CK_ShowSymbols = 700,
+    CK_ShowSymbols = 700L,
     CK_SplitFull,
     CK_Tab2,
     CK_Tab3,
@@ -339,7 +339,7 @@ enum
 typedef struct name_keymap_t
 {
     const char *name;
-    unsigned long val;
+    long val;
 } name_keymap_t;
 
 typedef struct key_config_t
@@ -354,7 +354,7 @@ typedef struct key_config_t
 typedef struct global_keymap_t
 {
     long key;
-    unsigned long command;
+    long command;
     char caption[KEYMAP_SHORTCUT_LENGTH];
 } global_keymap_t;
 
@@ -362,11 +362,11 @@ typedef struct global_keymap_t
 
 /*** declarations of public functions ************************************************************/
 
-void keybind_cmd_bind (GArray * keymap, const char *keybind, unsigned long action);
-unsigned long keybind_lookup_action (const char *name);
-const char *keybind_lookup_actionname (unsigned long action);
-const char *keybind_lookup_keymap_shortcut (const global_keymap_t * keymap, unsigned long action);
-unsigned long keybind_lookup_keymap_command (const global_keymap_t * keymap, long key);
+void keybind_cmd_bind (GArray * keymap, const char *keybind, long action);
+long keybind_lookup_action (const char *name);
+const char *keybind_lookup_actionname (long action);
+const char *keybind_lookup_keymap_shortcut (const global_keymap_t * keymap, long action);
+long keybind_lookup_keymap_command (const global_keymap_t * keymap, long key);
 
 /*** inline functions ****************************************************************************/
 

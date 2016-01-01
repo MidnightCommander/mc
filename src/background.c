@@ -2,7 +2,7 @@
 
 /* Background support.
 
-   Copyright (C) 1996-2015
+   Copyright (C) 1996-2016
    Free Software Foundation, Inc.
 
    Written by:
@@ -256,7 +256,7 @@ background_attention (int fd, void *closure)
 
     if (have_ctx)
     {
-        if (read (fd, ctx, sizeof (file_op_context_t)) != sizeof (file_op_context_t))
+        if (read (fd, ctx, sizeof (*ctx)) != sizeof (*ctx))
         {
             return reading_failed (-1, data);
         }
@@ -342,9 +342,9 @@ background_attention (int fd, void *closure)
             }
 
         /* Send the result code and the value for shared variables */
-        ret = write (to_child_fd, &result, sizeof (int));
+        ret = write (to_child_fd, &result, sizeof (result));
         if (have_ctx && to_child_fd != -1)
-            ret = write (to_child_fd, ctx, sizeof (file_op_context_t));
+            ret = write (to_child_fd, ctx, sizeof (*ctx));
     }
     else if (type == Return_String)
     {
@@ -416,12 +416,12 @@ parent_call_header (void *routine, int argc, enum ReturnType type, file_op_conte
     have_ctx = (ctx != NULL);
 
     ret = write (parent_fd, &routine, sizeof (routine));
-    ret = write (parent_fd, &argc, sizeof (int));
+    ret = write (parent_fd, &argc, sizeof (argc));
     ret = write (parent_fd, &type, sizeof (type));
     ret = write (parent_fd, &have_ctx, sizeof (have_ctx));
 
     if (have_ctx)
-        ret = write (parent_fd, ctx, sizeof (file_op_context_t));
+        ret = write (parent_fd, ctx, sizeof (*ctx));
     (void) ret;
 }
 
@@ -442,13 +442,13 @@ parent_va_call (void *routine, gpointer data, int argc, va_list ap)
 
         len = va_arg (ap, int);
         value = va_arg (ap, void *);
-        ret = write (parent_fd, &len, sizeof (int));
+        ret = write (parent_fd, &len, sizeof (len));
         ret = write (parent_fd, value, len);
     }
 
-    ret = read (from_parent_fd, &i, sizeof (int));
+    ret = read (from_parent_fd, &i, sizeof (i));
     if (ctx)
-        ret = read (from_parent_fd, ctx, sizeof (file_op_context_t));
+        ret = read (from_parent_fd, ctx, sizeof (*ctx));
 
     (void) ret;
     return i;
@@ -470,14 +470,14 @@ parent_va_call_string (void *routine, int argc, va_list ap)
 
         len = va_arg (ap, int);
         value = va_arg (ap, void *);
-        if ((write (parent_fd, &len, sizeof (int)) != sizeof (int)) ||
+        if ((write (parent_fd, &len, sizeof (len)) != sizeof (len)) ||
             (write (parent_fd, value, len) != len))
         {
             return NULL;
         }
     }
 
-    if (read (from_parent_fd, &i, sizeof (int)) != sizeof (int))
+    if (read (from_parent_fd, &i, sizeof (i)) != sizeof (i))
         return NULL;
     if (!i)
         return NULL;

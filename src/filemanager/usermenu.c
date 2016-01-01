@@ -1,7 +1,7 @@
 /*
    User Menu implementation
 
-   Copyright (C) 1994-2015
+   Copyright (C) 1994-2016
    Free Software Foundation, Inc.
 
    Written by:
@@ -162,7 +162,7 @@ static int
 test_type (WPanel * panel, char *arg)
 {
     int result = 0;             /* False by default */
-    int st_mode = panel->dir.list[panel->selected].st.st_mode;
+    mode_t st_mode = panel->dir.list[panel->selected].st.st_mode;
 
     for (; *arg != 0; arg++)
     {

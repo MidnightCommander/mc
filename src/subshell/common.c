@@ -1,11 +1,35 @@
 /*
    Concurrent shell support for the Midnight Commander
 
-   Copyright (C) 1994-2015
+   Copyright (C) 1994-2016
    Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2013
+   Alexander Kriegisch <Alexander@Kriegisch.name>
+   Aliaksey Kandratsenka <alk@tut.by>
+   Andreas Mohr <and@gmx.li>
+   Andrew Borodin <aborodin@vmail.ru>
+   Andrew Borodin <borodin@borodin.zarya>
+   Andrew V. Samoilov <sav@bcs.zp.ua>
+   Chris Owen <chris@candu.co.uk>
+   Claes Nästén <me@pekdon.net>
+   Egmont Koblinger <egmont@gmail.com>
+   Enrico Weigelt, metux IT service <weigelt@metux.de>
+   Igor Urazov <z0rc3r@gmail.com>
+   Ilia Maslakov <il.smind@gmail.com>
+   Leonard den Ottolander <leonard@den.ottolander.nl>
+   Miguel de Icaza <miguel@novell.com>
+   Mikhail S. Pobolovets <styx.mp@gmail.com>
+   Norbert Warmuth <nwarmuth@privat.circular.de>
+   Patrick Winnertz <winnie@debian.org>
+   Pavel Machek <pavel@suse.cz>
+   Pavel Roskin <proski@gnu.org>
+   Pavel Tsekov <ptsekov@gmx.net>
+   Roland Illig <roland.illig@gmx.de>
+   Sergei Trofimovich <slyfox@inbox.ru>
+   Slava Zanko <slavazanko@gmail.com>, 2013,2015.
+   Timur Bakeyev <mc@bat.ru>
+   Vit Rosin <vit_r@list.ru>
 
    This file is part of the Midnight Commander.
 
@@ -61,11 +85,8 @@
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "filemanager/midnight.h"       /* current_panel */
-
-#include "consaver/cons.saver.h"        /* handle_console() */
-#include "setup.h"
 #include "subshell.h"
+#include "internal.h"
 
 /*** global variables ****************************************************************************/
 
@@ -109,17 +130,6 @@ enum
     READ = 0,
     WRITE = 1
 };
-
-/* Subshell type (gleaned from the SHELL environment variable, if available) */
-static enum
-{
-    BASH,
-    ASH_BUSYBOX,                /* BusyBox default shell (ash) */
-    DASH,                       /* Debian variant of ash */
-    TCSH,
-    ZSH,
-    FISH
-} subshell_type;
 
 /*** file scope variables ************************************************************************/
 
@@ -244,6 +254,7 @@ init_subshell_child (const char *pty_name)
     /* and the user's startup file may do a 'cd' command anyway   */
     {
         int ret;
+
         ret = chdir (mc_config_get_home_dir ());        /* FIXME? What about when we re-run the subshell? */
         (void) ret;
     }
@@ -253,18 +264,19 @@ init_subshell_child (const char *pty_name)
     if (mc_sid != -1)
     {
         char sid_str[BUF_SMALL];
+
         g_snprintf (sid_str, sizeof (sid_str), "MC_SID=%ld", (long) mc_sid);
         putenv (g_strdup (sid_str));
     }
 
-    switch (subshell_type)
+    switch (mc_global.shell->type)
     {
-    case BASH:
+    case SHELL_BASH:
         /* Do we have a custom init file ~/.local/share/mc/bashrc? */
         init_file = mc_config_get_full_path ("bashrc");
 
         /* Otherwise use ~/.bashrc */
-        if (access (init_file, R_OK) == -1)
+        if (!exist_file (init_file))
         {
             g_free (init_file);
             init_file = g_strdup (".bashrc");
@@ -276,8 +288,10 @@ init_subshell_child (const char *pty_name)
 
         /* Allow alternative readline settings for MC */
         {
-            char *input_file = mc_config_get_full_path ("inputrc");
-            if (access (input_file, R_OK) == 0)
+            char *input_file;
+
+            input_file = mc_config_get_full_path ("inputrc");
+            if (exist_file (input_file))
             {
                 putenv_str = g_strconcat ("INPUTRC=", input_file, NULL);
                 putenv (putenv_str);
@@ -287,13 +301,13 @@ init_subshell_child (const char *pty_name)
 
         break;
 
-    case ASH_BUSYBOX:
-    case DASH:
+    case SHELL_ASH_BUSYBOX:
+    case SHELL_DASH:
         /* Do we have a custom init file ~/.local/share/mc/ashrc? */
         init_file = mc_config_get_full_path ("ashrc");
 
         /* Otherwise use ~/.profile */
-        if (access (init_file, R_OK) == -1)
+        if (!exist_file (init_file))
         {
             g_free (init_file);
             init_file = g_strdup (".profile");
@@ -307,13 +321,13 @@ init_subshell_child (const char *pty_name)
         break;
 
         /* TODO: Find a way to pass initfile to TCSH, ZSH and FISH */
-    case TCSH:
-    case ZSH:
-    case FISH:
+    case SHELL_TCSH:
+    case SHELL_ZSH:
+    case SHELL_FISH:
         break;
 
     default:
-        fprintf (stderr, __FILE__ ": unimplemented subshell type %d\r\n", subshell_type);
+        fprintf (stderr, __FILE__ ": unimplemented subshell type %d\r\n", mc_global.shell->type);
         my_exit (FORK_FAILURE);
     }
 
@@ -338,24 +352,24 @@ init_subshell_child (const char *pty_name)
 
     /* Execute the subshell at last */
 
-    switch (subshell_type)
+    switch (mc_global.shell->type)
     {
-    case BASH:
-        execl (mc_global.tty.shell, "bash", "-rcfile", init_file, (char *) NULL);
+    case SHELL_BASH:
+        execl (mc_global.shell->path, "bash", "-rcfile", init_file, (char *) NULL);
         break;
 
-    case ZSH:
+    case SHELL_ZSH:
         /* Use -g to exclude cmds beginning with space from history
          * and -Z to use the line editor on non-interactive term */
-        execl (mc_global.tty.shell, "zsh", "-Z", "-g", (char *) NULL);
+        execl (mc_global.shell->path, "zsh", "-Z", "-g", (char *) NULL);
 
         break;
 
-    case ASH_BUSYBOX:
-    case DASH:
-    case TCSH:
-    case FISH:
-        execl (mc_global.tty.shell, mc_global.tty.shell, (char *) NULL);
+    case SHELL_ASH_BUSYBOX:
+    case SHELL_DASH:
+    case SHELL_TCSH:
+    case SHELL_FISH:
+        execl (mc_global.shell->path, mc_global.shell->path, (char *) NULL);
         break;
 
     default:
@@ -386,11 +400,11 @@ check_sid (void)
     int r;
 
     sid_str = getenv ("MC_SID");
-    if (!sid_str)
+    if (sid_str == NULL)
         return 0;
 
     old_sid = (pid_t) strtol (sid_str, NULL, 0);
-    if (!old_sid)
+    if (old_sid == 0)
         return 0;
 
     my_sid = getsid (0);
@@ -405,12 +419,8 @@ check_sid (void)
                       _("GNU Midnight Commander is already\n"
                         "running on this terminal.\n"
                         "Subshell support will be disabled."), D_ERROR, 2, _("&OK"), _("&Quit"));
-    if (r != 0)
-    {
-        return 2;
-    }
 
-    return 1;
+    return (r != 0) ? 2 : 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -418,7 +428,7 @@ check_sid (void)
 static void
 init_raw_mode (void)
 {
-    static int initialized = 0;
+    static gboolean initialized = FALSE;
 
     /* MC calls tty_reset_shell_mode() in pre_exec() to set the real tty to its */
     /* original settings.  However, here we need to make this tty very raw,     */
@@ -426,7 +436,7 @@ init_raw_mode (void)
     /* pty.  So, instead of changing the code for execute(), pre_exec(),        */
     /* etc, we just set up the modes we need here, before each command.         */
 
-    if (initialized == 0)       /* First time: initialise 'raw_mode' */
+    if (!initialized)           /* First time: initialise 'raw_mode' */
     {
         tcgetattr (STDOUT_FILENO, &raw_mode);
         raw_mode.c_lflag &= ~ICANON;    /* Disable line-editing chars, etc.   */
@@ -437,7 +447,7 @@ init_raw_mode (void)
         raw_mode.c_oflag &= ~OPOST;     /* Don't postprocess output           */
         raw_mode.c_cc[VTIME] = 0;       /* IE: wait forever, and return as    */
         raw_mode.c_cc[VMIN] = 1;        /* soon as a character is available   */
-        initialized = 1;
+        initialized = TRUE;
     }
 }
 
@@ -560,7 +570,7 @@ feed_subshell (int how, int fail_on_error)
         else if (FD_ISSET (subshell_pipe[READ], &read_set))
             /* Read the subshell's CWD and capture its prompt */
         {
-            bytes = read (subshell_pipe[READ], subshell_cwd, MC_MAXPATHLEN + 1);
+            bytes = read (subshell_pipe[READ], subshell_cwd, sizeof (subshell_cwd));
             if (bytes <= 0)
             {
                 tcsetattr (STDOUT_FILENO, TCSANOW, &shell_mode);
@@ -658,8 +668,9 @@ pty_open_master (char *pty_name)
 static int
 pty_open_slave (const char *pty_name)
 {
-    int pty_slave = open (pty_name, O_RDWR);
+    int pty_slave;
 
+    pty_slave = open (pty_name, O_RDWR);
     if (pty_slave == -1)
     {
         fprintf (stderr, "open (%s, O_RDWR): %s\r\n", pty_name, unix_error_string (errno));
@@ -667,7 +678,7 @@ pty_open_slave (const char *pty_name)
     }
 #if !defined(__osf__) && !defined(__linux__)
 #if defined (I_FIND) && defined (I_PUSH)
-    if (!ioctl (pty_slave, I_FIND, "ptem"))
+    if (ioctl (pty_slave, I_FIND, "ptem") == 0)
         if (ioctl (pty_slave, I_PUSH, "ptem") == -1)
         {
             fprintf (stderr, "ioctl (%d, I_PUSH, \"ptem\") failed: %s\r\n",
@@ -676,7 +687,7 @@ pty_open_slave (const char *pty_name)
             return -1;
         }
 
-    if (!ioctl (pty_slave, I_FIND, "ldterm"))
+    if (ioctl (pty_slave, I_FIND, "ldterm") == 0)
         if (ioctl (pty_slave, I_PUSH, "ldterm") == -1)
         {
             fprintf (stderr,
@@ -686,7 +697,7 @@ pty_open_slave (const char *pty_name)
             return -1;
         }
 #if !defined(sgi) && !defined(__sgi)
-    if (!ioctl (pty_slave, I_FIND, "ttcompat"))
+    if (ioctl (pty_slave, I_FIND, "ttcompat") == 0)
         if (ioctl (pty_slave, I_PUSH, "ttcompat") == -1)
         {
             fprintf (stderr,
@@ -749,8 +760,9 @@ static int
 pty_open_slave (const char *pty_name)
 {
     int pty_slave;
-    struct group *group_info = getgrnam ("tty");
+    struct group *group_info;
 
+    group_info = getgrnam ("tty");
     if (group_info != NULL)
     {
         /* The following two calls will only succeed if we are root */
@@ -769,58 +781,6 @@ pty_open_slave (const char *pty_name)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Get a subshell type and store in subshell_type variable
- *
- * @return TRUE if subtype was gotten, FALSE otherwise
- */
-
-static gboolean
-init_subshell_type (void)
-{
-    gboolean result = TRUE;
-
-    /* Find out what type of shell we have. Also consider real paths (resolved symlinks)
-     * because e.g. csh might point to tcsh, ash to dash or busybox, sh to anything. */
-
-    if (strstr (mc_global.tty.shell, "/zsh") || strstr (mc_global.tty.shell_realpath, "/zsh")
-        || getenv ("ZSH_VERSION"))
-        /* Also detects ksh symlinked to zsh */
-        subshell_type = ZSH;
-    else if (strstr (mc_global.tty.shell, "/tcsh")
-             || strstr (mc_global.tty.shell_realpath, "/tcsh"))
-        /* Also detects csh symlinked to tcsh */
-        subshell_type = TCSH;
-    else if (strstr (mc_global.tty.shell, "/fish")
-             || strstr (mc_global.tty.shell_realpath, "/fish"))
-        subshell_type = FISH;
-    else if (strstr (mc_global.tty.shell, "/dash")
-             || strstr (mc_global.tty.shell_realpath, "/dash"))
-        /* Debian ash (also found if symlinked to by ash/sh) */
-        subshell_type = DASH;
-    else if (strstr (mc_global.tty.shell_realpath, "/busybox"))
-    {
-        /* If shell is symlinked to busybox, assume it is an ash, even though theoretically
-         * it could also be a hush (a mini shell for non-MMU systems deactivated by default).
-         * For simplicity's sake we assume that busybox always contains an ash, not a hush.
-         * On embedded platforms or on server systems, /bin/sh often points to busybox.
-         * Sometimes even bash is symlinked to busybox (CONFIG_FEATURE_BASH_IS_ASH option),
-         * so we need to check busybox symlinks *before* checking for the name "bash"
-         * in order to avoid that case. */
-        subshell_type = ASH_BUSYBOX;
-    }
-    else if (strstr (mc_global.tty.shell, "/bash") || getenv ("BASH"))
-        /* If bash is not symlinked to busybox, it is safe to assume it is a real bash */
-        subshell_type = BASH;
-    else
-    {
-        mc_global.tty.use_subshell = FALSE;
-        result = FALSE;
-    }
-    return result;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
  * Set up `precmd' or equivalent for reading the subshell's CWD.
  *
  * Attention! Never forget that these are *one-liners* even though the concatenated
@@ -833,15 +793,15 @@ init_subshell_type (void)
 static void
 init_subshell_precmd (char *precmd, size_t buff_size)
 {
-
-    switch (subshell_type)
+    switch (mc_global.shell->type)
     {
-    case BASH:
+    case SHELL_BASH:
         g_snprintf (precmd, buff_size,
-                    " PROMPT_COMMAND='pwd>&%d; kill -STOP $$';\n", subshell_pipe[WRITE]);
+                    " PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND\n}'pwd>&%d;kill -STOP $$'\n"
+                    "PS1='\\u@\\h:\\w\\$ '\n", subshell_pipe[WRITE]);
         break;
 
-    case ASH_BUSYBOX:
+    case SHELL_ASH_BUSYBOX:
         /* BusyBox ash needs a somewhat complicated precmd emulation via PS1, and it is vital
          * that BB be built with active CONFIG_ASH_EXPAND_PRMT, but this is the default anyway.
          *
@@ -862,7 +822,7 @@ init_subshell_precmd (char *precmd, size_t buff_size)
          *    "PRECMD=precmd; "
          *    "PS1='$(eval $PRECMD)\\u@\\h:\\w\\$ '\n",
          */
-    case DASH:
+    case SHELL_DASH:
         /* Debian ash needs a precmd emulation via PS1, similar to BusyBox ash,
          * but does not support escape sequences for user, host and cwd in prompt.
          * Attention! Make sure that the buffer for precmd is big enough.
@@ -895,20 +855,20 @@ init_subshell_precmd (char *precmd, size_t buff_size)
                     "}; " "PRECMD=precmd; " "PS1='$($PRECMD)$ '\n", subshell_pipe[WRITE]);
         break;
 
-    case ZSH:
+    case SHELL_ZSH:
         g_snprintf (precmd, buff_size,
-                    " precmd() { pwd>&%d; kill -STOP $$; }; "
+                    " _mc_precmd(){ pwd>&%d;kill -STOP $$ }; precmd_functions+=(_mc_precmd)\n"
                     "PS1='%%n@%%m:%%~%%# '\n", subshell_pipe[WRITE]);
         break;
 
-    case TCSH:
+    case SHELL_TCSH:
         g_snprintf (precmd, buff_size,
                     "set echo_style=both; "
                     "set prompt='%%n@%%m:%%~%%# '; "
                     "alias precmd 'echo $cwd:q >>%s; kill -STOP $$'\n", tcsh_fifo);
         break;
 
-    case FISH:
+    case SHELL_FISH:
         /* We also want a fancy user@host:cwd prompt here, but fish makes it very easy to also
          * use colours, which is what we will do. But first here is a simpler, uncoloured version:
          * "function fish_prompt; "
@@ -921,14 +881,94 @@ init_subshell_precmd (char *precmd, size_t buff_size)
          * Find out how to fix this.
          */
         g_snprintf (precmd, buff_size,
-                    "function fish_prompt; "
+                    "if not functions -q fish_prompt_mc;"
+                    "functions -c fish_prompt fish_prompt_mc; end;"
+                    "function fish_prompt;"
                     "echo (whoami)@(hostname -s):(set_color $fish_color_cwd)(pwd)(set_color normal)\\$\\ ; "
-                    "echo \"$PWD\">&%d; " "kill -STOP %%self; " "end\n", subshell_pipe[WRITE]);
+                    "echo \"$PWD\">&%d; fish_prompt_mc; kill -STOP %%self; end\n",
+                    subshell_pipe[WRITE]);
         break;
 
     default:
         break;
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Carefully quote directory name to allow entering any directory safely,
+ * no matter what weird characters it may contain in its name.
+ * NOTE: Treat directory name an untrusted data, don't allow it to cause
+ * executing any commands in the shell.  Escape all control characters.
+ * Use following technique:
+ *
+ * printf(1) with format string containing a single conversion specifier,
+ * "b", and an argument which contains a copy of the string passed to 
+ * subshell_name_quote() with all characters, except digits and letters,
+ * replaced by the backslash-escape sequence \0nnn, where "nnn" is the
+ * numeric value of the character converted to octal number.
+ * 
+ *   cd "`printf "%b" 'ABC\0nnnDEF\0nnnXYZ'`"
+ *
+ */
+
+static GString *
+subshell_name_quote (const char *s)
+{
+    GString *ret;
+    const char *su, *n;
+    const char *quote_cmd_start, *quote_cmd_end;
+
+    if (mc_global.shell->type == SHELL_FISH)
+    {
+        quote_cmd_start = "(printf \"%b\" '";
+        quote_cmd_end = "')";
+    }
+    /* TODO: When BusyBox printf is fixed, get rid of this "else if", see
+       http://lists.busybox.net/pipermail/busybox/2012-March/077460.html */
+    /* else if (subshell_type == ASH_BUSYBOX)
+       {
+       quote_cmd_start = "\"`echo -en '";
+       quote_cmd_end = "'`\"";
+       } */
+    else
+    {
+        quote_cmd_start = "\"`printf \"%b\" '";
+        quote_cmd_end = "'`\"";
+    }
+
+    ret = g_string_sized_new (64);
+
+    /* Prevent interpreting leading '-' as a switch for 'cd' */
+    if (s[0] == '-')
+        g_string_append (ret, "./");
+
+    /* Copy the beginning of the command to the buffer */
+    g_string_append (ret, quote_cmd_start);
+
+    /*
+     * Print every character except digits and letters as a backslash-escape
+     * sequence of the form \0nnn, where "nnn" is the numeric value of the
+     * character converted to octal number.
+     */
+    for (su = s; su[0] != '\0'; su = n)
+    {
+        n = str_cget_next_char_safe (su);
+
+        if (str_isalnum (su))
+            g_string_append_len (ret, su, n - su);
+        else
+        {
+            int c;
+
+            for (c = 0; c < n - su; c++)
+                g_string_append_printf (ret, "\\0%03o", (unsigned char) su[c]);
+        }
+    }
+
+    g_string_append (ret, quote_cmd_end);
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -972,7 +1012,7 @@ init_subshell (void)
 
     if (mc_global.tty.subshell_pty == 0)
     {                           /* First time through */
-        if (!init_subshell_type ())
+        if (mc_global.shell->type == SHELL_NONE)
             return;
 
         /* Open a pty for talking to the subshell */
@@ -997,7 +1037,7 @@ init_subshell (void)
 
         /* Create a pipe for receiving the subshell's CWD */
 
-        if (subshell_type == TCSH)
+        if (mc_global.shell->type == SHELL_TCSH)
         {
             g_snprintf (tcsh_fifo, sizeof (tcsh_fifo), "%s/mc.pipe.%d",
                         mc_tmpdir (), (int) getpid ());
@@ -1049,114 +1089,6 @@ init_subshell (void)
 
     init_subshell_precmd (precmd, BUF_MEDIUM);
 
-    /* Set up `precmd' or equivalent for reading the subshell's CWD
-     *
-     * Attention! Never forget that these are *one-liners* even though the concatenated
-     * substrings contain line breaks and indentation for better understanding of the
-     * shell code. It is vital that each one-liner ends with a line feed character ("\n" ).
-     */
-
-    switch (subshell_type)
-    {
-    case BASH:
-        g_snprintf (precmd, sizeof (precmd),
-                    " PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND\n}'pwd>&%d;kill -STOP $$'\n"
-                    "PS1='\\u@\\h:\\w\\$ '\n", subshell_pipe[WRITE]);
-        break;
-
-    case ASH_BUSYBOX:
-        /* BusyBox ash needs a somewhat complicated precmd emulation via PS1, and it is vital
-         * that BB be built with active CONFIG_ASH_EXPAND_PRMT, but this is the default anyway.
-         *
-         * A: This leads to a stopped subshell (=frozen mc) if user calls "ash" command
-         *    "PS1='$(pwd>&%d; kill -STOP $$)\\u@\\h:\\w\\$ '\n",
-         *
-         * B: This leads to "sh: precmd: not found" in sub-subshell if user calls "ash" command
-         *    "precmd() { pwd>&%d; kill -STOP $$; }; "
-         *    "PS1='$(precmd)\\u@\\h:\\w\\$ '\n",
-         *
-         * C: This works if user calls "ash" command because in sub-subshell
-         *    PRECMD is unfedined, thus evaluated to empty string - no damage done.
-         *    Attention: BusyBox must be built with FEATURE_EDITING_FANCY_PROMPT to
-         *    permit \u, \w, \h, \$ escape sequences. Unfortunately this cannot be guaranteed,
-         *    especially on embedded systems where people try to save space, so let's use
-         *    the dash version below. It should work on virtually all systems.
-         *    "precmd() { pwd>&%d; kill -STOP $$; }; "
-         *    "PRECMD=precmd; "
-         *    "PS1='$(eval $PRECMD)\\u@\\h:\\w\\$ '\n",
-         */
-    case DASH:
-        /* Debian ash needs a precmd emulation via PS1, similar to BusyBox ash,
-         * but does not support escape sequences for user, host and cwd in prompt.
-         * Attention! Make sure that the buffer for precmd is big enough.
-         *
-         * We want to have a fancy dynamic prompt with user@host:cwd just like in the BusyBox
-         * examples above, but because replacing the home directory part of the path by "~" is
-         * complicated, it bloats the precmd to a size > BUF_SMALL (128).
-         *
-         * The following example is a little less fancy (home directory not replaced)
-         * and shows the basic workings of our prompt for easier understanding:
-         *
-         * "precmd() { "
-         *     "echo \"$USER@$(hostname -s):$PWD\"; "
-         *     "pwd>&%d; "
-         *     "kill -STOP $$; "
-         * "}; "
-         * "PRECMD=precmd; "
-         * "PS1='$($PRECMD)$ '\n",
-         */
-        g_snprintf (precmd, sizeof (precmd),
-                    "precmd() { "
-                    "if [ ! \"${PWD##$HOME}\" ]; then "
-                    "MC_PWD=\"~\"; "
-                    "else "
-                    "[ \"${PWD##$HOME/}\" = \"$PWD\" ] && MC_PWD=\"$PWD\" || MC_PWD=\"~/${PWD##$HOME/}\"; "
-                    "fi; "
-                    "echo \"$USER@$(hostname -s):$MC_PWD\"; "
-                    "pwd>&%d; "
-                    "kill -STOP $$; "
-                    "}; " "PRECMD=precmd; " "PS1='$($PRECMD)$ '\n", subshell_pipe[WRITE]);
-        break;
-
-    case ZSH:
-        g_snprintf (precmd, sizeof (precmd),
-                    " _mc_precmd(){ pwd>&%d;kill -STOP $$ }; precmd_functions+=(_mc_precmd)\n"
-                    "PS1='%%n@%%m:%%~%%# '\n", subshell_pipe[WRITE]);
-        break;
-
-    case TCSH:
-        g_snprintf (precmd, sizeof (precmd),
-                    "set echo_style=both; "
-                    "set prompt='%%n@%%m:%%~%%# '; "
-                    "alias precmd 'echo $cwd:q >>%s; kill -STOP $$'\n", tcsh_fifo);
-        break;
-
-    case FISH:
-        /* Use fish_prompt_mc function for prompt, if not present then copy fish_prompt to it. */
-        /* We also want a fancy user@host:cwd prompt here, but fish makes it very easy to also
-         * use colours, which is what we will do. But first here is a simpler, uncoloured version:
-         * "function fish_prompt; "
-         *     "echo (whoami)@(hostname -s):(pwd)\\$\\ ; "
-         *     "echo \"$PWD\">&%d; "
-         *     "kill -STOP %%self; "
-         * "end\n",
-         *
-         * TODO: fish prompt is shown when panel is hidden (Ctrl-O), but not when it is visible.
-         * Find out how to fix this.
-         */
-        g_snprintf (precmd, sizeof (precmd),
-                    "if not functions -q fish_prompt_mc;"
-                    "functions -c fish_prompt fish_prompt_mc; end;"
-                    "function fish_prompt;"
-                    "echo (whoami)@(hostname -s):(set_color $fish_color_cwd)(pwd)(set_color normal)\\$\\ ; "
-                    "echo \"$PWD\">&%d; fish_prompt_mc; kill -STOP %%self; end\n",
-                    subshell_pipe[WRITE]);
-        break;
-
-    default:
-        break;
-    }
-
     write_all (mc_global.tty.subshell_pty, precmd, strlen (precmd));
 
     /* Wait until the subshell has started up and processed the command */
@@ -1182,7 +1114,7 @@ invoke_subshell (const char *command, int how, vfs_path_t ** new_dir_vpath)
 
     /* Make the subshell change to MC's working directory */
     if (new_dir_vpath != NULL)
-        do_subshell_chdir (current_panel->cwd_vpath, TRUE);
+        do_subshell_chdir (subshell_get_cwd_from_current_panel (), TRUE);
 
     if (command == NULL)        /* The user has done "C-o" from MC */
     {
@@ -1212,16 +1144,16 @@ invoke_subshell (const char *command, int how, vfs_path_t ** new_dir_vpath)
     {
         const char *pcwd;
 
-        pcwd = vfs_translate_path (vfs_path_as_str (current_panel->cwd_vpath));
+        pcwd = vfs_translate_path (vfs_path_as_str (subshell_get_cwd_from_current_panel ()));
         if (strcmp (subshell_cwd, pcwd) != 0)
             *new_dir_vpath = vfs_path_from_str (subshell_cwd);  /* Make MC change to the subshell's CWD */
     }
 
     /* Restart the subshell if it has died by SIGHUP, SIGQUIT, etc. */
-    while (!subshell_alive && quit == 0 && mc_global.tty.use_subshell)
+    while (!subshell_alive && subshell_get_mainloop_quit () == 0 && mc_global.tty.use_subshell)
         init_subshell ();
 
-    return quit;
+    return subshell_get_mainloop_quit ();
 }
 
 
@@ -1315,7 +1247,7 @@ exit_subshell (void)
 
     if (subshell_quit)
     {
-        if (subshell_type == TCSH)
+        if (mc_global.shell->type == SHELL_TCSH)
         {
             if (unlink (tcsh_fifo) == -1)
                 fprintf (stderr, "Cannot remove named pipe %s: %s\r\n",
@@ -1331,84 +1263,6 @@ exit_subshell (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Carefully quote directory name to allow entering any directory safely,
- * no matter what weird characters it may contain in its name.
- * NOTE: Treat directory name an untrusted data, don't allow it to cause
- * executing any commands in the shell.  Escape all control characters.
- * Use following technique:
- *
- * printf(1) with format string containing a single conversion specifier,
- * "b", and an argument which contains a copy of the string passed to 
- * subshell_name_quote() with all characters, except digits and letters,
- * replaced by the backslash-escape sequence \0nnn, where "nnn" is the
- * numeric value of the character converted to octal number.
- * 
- *   cd "`printf "%b" 'ABC\0nnnDEF\0nnnXYZ'`"
- *
- */
-
-static GString *
-subshell_name_quote (const char *s)
-{
-    GString *ret;
-    const char *su, *n;
-    const char *quote_cmd_start, *quote_cmd_end;
-
-    if (subshell_type == FISH)
-    {
-        quote_cmd_start = "(printf \"%b\" '";
-        quote_cmd_end = "')";
-    }
-    /* TODO: When BusyBox printf is fixed, get rid of this "else if", see
-       http://lists.busybox.net/pipermail/busybox/2012-March/077460.html */
-    /* else if (subshell_type == ASH_BUSYBOX)
-       {
-       quote_cmd_start = "\"`echo -en '";
-       quote_cmd_end = "'`\"";
-       } */
-    else
-    {
-        quote_cmd_start = "\"`printf \"%b\" '";
-        quote_cmd_end = "'`\"";
-    }
-
-    ret = g_string_sized_new (64);
-
-    /* Prevent interpreting leading '-' as a switch for 'cd' */
-    if (s[0] == '-')
-        g_string_append (ret, "./");
-
-    /* Copy the beginning of the command to the buffer */
-    g_string_append (ret, quote_cmd_start);
-
-    /*
-     * Print every character except digits and letters as a backslash-escape
-     * sequence of the form \0nnn, where "nnn" is the numeric value of the
-     * character converted to octal number.
-     */
-    for (su = s; su[0] != '\0'; su = n)
-    {
-        n = str_cget_next_char_safe (su);
-
-        if (str_isalnum (su))
-            g_string_append_len (ret, su, n - su);
-        else
-        {
-            int c;
-
-            for (c = 0; c < n - su; c++)
-                g_string_append_printf (ret, "\\0%03o", (unsigned char) su[c]);
-        }
-    }
-
-    g_string_append (ret, quote_cmd_end);
-
-    return ret;
-}
-
-
-/* --------------------------------------------------------------------------------------------- */
 
 /** If it actually changed the directory it returns true */
 void
@@ -1416,7 +1270,7 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt)
 {
     char *pcwd;
 
-    pcwd = vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_RECODE);
+    pcwd = vfs_path_to_str_flags (subshell_get_cwd_from_current_panel (), 0, VPF_RECODE);
 
     if (!(subshell_state == INACTIVE && strcmp (subshell_cwd, pcwd) != 0))
     {
@@ -1463,35 +1317,40 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt)
 
     if (subshell_alive)
     {
-        int bPathNotEq = strcmp (subshell_cwd, pcwd);
+        gboolean bPathNotEq;
 
-        if (bPathNotEq && subshell_type == TCSH)
+        bPathNotEq = strcmp (subshell_cwd, pcwd) != 0;
+
+        if (bPathNotEq && mc_global.shell->type == SHELL_TCSH)
         {
             char rp_subshell_cwd[PATH_MAX];
             char rp_current_panel_cwd[PATH_MAX];
+            char *p_subshell_cwd, *p_current_panel_cwd;
 
-            char *p_subshell_cwd = mc_realpath (subshell_cwd, rp_subshell_cwd);
-            char *p_current_panel_cwd = mc_realpath (pcwd, rp_current_panel_cwd);
+            p_subshell_cwd = mc_realpath (subshell_cwd, rp_subshell_cwd);
+            p_current_panel_cwd = mc_realpath (pcwd, rp_current_panel_cwd);
 
             if (p_subshell_cwd == NULL)
                 p_subshell_cwd = subshell_cwd;
             if (p_current_panel_cwd == NULL)
                 p_current_panel_cwd = pcwd;
-            bPathNotEq = strcmp (p_subshell_cwd, p_current_panel_cwd);
+            bPathNotEq = strcmp (p_subshell_cwd, p_current_panel_cwd) != 0;
         }
 
         if (bPathNotEq && !DIR_IS_DOT (pcwd))
         {
             char *cwd;
 
-            cwd = vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_STRIP_PASSWORD);
+            cwd =
+                vfs_path_to_str_flags (subshell_get_cwd_from_current_panel (), 0,
+                                       VPF_STRIP_PASSWORD);
             vfs_print_message (_("Warning: Cannot change to %s.\n"), cwd);
             g_free (cwd);
         }
     }
 
     /* Really escape Zsh history */
-    if (subshell_type == ZSH)
+    if (mc_global.shell->type == SHELL_ZSH)
     {
         /* Per Zsh documentation last command prefixed with space lingers in the internal history
          * until the next command is entered before it vanishes. To make it vanish right away,
@@ -1560,27 +1419,14 @@ sigchld_handler (int sig)
             subshell_alive = FALSE;
             delete_select_channel (mc_global.tty.subshell_pty);
             if (WIFEXITED (status) && WEXITSTATUS (status) != FORK_FAILURE)
-                quit |= SUBSHELL_EXIT;  /* Exited normally */
+            {
+                int subshell_quit;
+                subshell_quit = subshell_get_mainloop_quit () | SUBSHELL_EXIT;  /* Exited normally */
+                subshell_set_mainloop_quit (subshell_quit);
+            }
         }
     }
-#ifdef __linux__
-    pid = waitpid (cons_saver_pid, &status, WUNTRACED | WNOHANG);
-
-    if (pid == cons_saver_pid)
-    {
-
-        if (WIFSTOPPED (status))
-            /* Someone has stopped cons.saver - restart it */
-            kill (pid, SIGCONT);
-        else
-        {
-            /* cons.saver has died - disable confole saving */
-            handle_console (CONSOLE_DONE);
-            mc_global.tty.console_flag = '\0';
-        }
-
-    }
-#endif /* __linux__ */
+    subshell_handle_cons_saver ();
 
     /* If we got here, some other child exited; ignore it */
 }

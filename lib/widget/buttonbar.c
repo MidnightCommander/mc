@@ -1,7 +1,7 @@
 /*
    Widgets for the Midnight Commander
 
-   Copyright (C) 1994-2015
+   Copyright (C) 1994-2016
    Free Software Foundation, Inc.
 
    Authors:
@@ -266,7 +266,7 @@ buttonbar_set_label (WButtonBar * bb, int idx, const char *text,
 {
     if ((bb != NULL) && (idx >= 1) && (idx <= BUTTONBAR_LABELS_NUM))
     {
-        unsigned long command = CK_IgnoreKey;
+        long command = CK_IgnoreKey;
 
         if (keymap != NULL)
             command = keybind_lookup_keymap_command (keymap, KEY_F (idx));

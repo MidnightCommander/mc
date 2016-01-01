@@ -1,7 +1,7 @@
 /* Virtual File System: SFTP file system.
    The VFS class functions
 
-   Copyright (C) 2011-2015
+   Copyright (C) 2011-2016
    Free Software Foundation, Inc.
 
    Written by:
@@ -675,7 +675,7 @@ sftpfs_cb_fill_names (struct vfs_class *me, fill_names_f func)
 void
 sftpfs_init_class (void)
 {
-    memset (&sftpfs_class, 0, sizeof (struct vfs_class));
+    memset (&sftpfs_class, 0, sizeof (sftpfs_class));
     sftpfs_class.name = "sftpfs";
     sftpfs_class.prefix = "sftp";
     sftpfs_class.flags = VFSF_NOLINKS;

@@ -1,7 +1,7 @@
 /*
    GLIB - Library of useful routines for C programming
 
-   Copyright (C) 2009-2015
+   Copyright (C) 2009-2016
    Free Software Foundation, Inc.
 
    Written by:
@@ -46,34 +46,8 @@
 
 /*** file scope functions ************************************************************************/
 
-/*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-
-#if ! GLIB_CHECK_VERSION (2, 16, 0)
-/**
- * g_strcmp0:
- * @str1: (allow-none): a C string or %NULL
- * @str2: (allow-none): another C string or %NULL
- *
- * Compares @str1 and @str2 like strcmp(). Handles %NULL
- * gracefully by sorting it before non-%NULL strings.
- * Comparing two %NULL pointers returns 0.
- *
- * Returns: an integer less than, equal to, or greater than zero, if @str1 is <, == or > than @str2.
- *
- * Since: 2.16
- */
-int
-g_strcmp0 (const char *str1, const char *str2)
-{
-    if (!str1)
-        return -(str1 != str2);
-    if (!str2)
-        return str1 != str2;
-    return strcmp (str1, str2);
-}
-#endif /* ! GLIB_CHECK_VERSION (2, 16, 0) */
-
+/*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 #if ! GLIB_CHECK_VERSION (2, 28, 0)
@@ -114,32 +88,5 @@ g_list_free_full (GList * list, GDestroyNotify free_func)
 }
 
 #endif /* ! GLIB_CHECK_VERSION (2, 28, 0) */
-
-/* --------------------------------------------------------------------------------------------- */
-#if ! GLIB_CHECK_VERSION (2, 22, 0)
-/**
- * Creates a new GError with the given domain and code, and a message formatted with format.
- * @param domain error domain
- * @param code error code
- * @param format printf()-style format for error message
- * @param args va_list of parameters for the message format
- * @returns a new GError
- */
-
-GError *
-g_error_new_valist (GQuark domain, gint code, const gchar * format, va_list args)
-{
-    char *message;
-    GError *ret_value;
-
-    message = g_strdup_vprintf (format, args);
-
-    ret_value = g_error_new_literal (domain, code, message);
-    g_free (message);
-
-    return ret_value;
-}
-
-#endif /* ! GLIB_CHECK_VERSION (2, 22, 0) */
 
 /* --------------------------------------------------------------------------------------------- */

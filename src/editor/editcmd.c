@@ -1,7 +1,7 @@
 /*
    Editor high level editing commands
 
-   Copyright (C) 1996-2015
+   Copyright (C) 1996-2016
    Free Software Foundation, Inc.
 
    Written by:
@@ -829,7 +829,7 @@ editcmd_find (edit_search_status_msg_t * esm, gsize * len)
         if (!eval_marks (edit, &start_mark, &end_mark))
         {
             edit->search->error = MC_SEARCH_E_NOTFOUND;
-            edit->search->error_str = g_strdup (_("Search string not found"));
+            edit->search->error_str = g_strdup (_(STR_E_NOTFOUND));
             return FALSE;
         }
 
@@ -850,7 +850,7 @@ editcmd_find (edit_search_status_msg_t * esm, gsize * len)
         if (start_mark >= end_mark)
         {
             edit->search->error = MC_SEARCH_E_NOTFOUND;
-            edit->search->error_str = g_strdup (_("Search string not found"));
+            edit->search->error_str = g_strdup (_(STR_E_NOTFOUND));
             return FALSE;
         }
     }
@@ -892,7 +892,7 @@ editcmd_find (edit_search_status_msg_t * esm, gsize * len)
             else
                 search_start--;
         }
-        edit->search->error_str = g_strdup (_("Search string not found"));
+        edit->search->error_str = g_strdup (_(STR_E_NOTFOUND));
     }
     else
     {
@@ -989,7 +989,7 @@ edit_do_search (WEdit * edit)
         }
 
         if (found == 0)
-            edit_error_dialog (_("Search"), _("Search string not found"));
+            edit_error_dialog (_("Search"), _(STR_E_NOTFOUND));
         else
             edit_cursor_move (edit, edit->search_start - edit->buffer.curs1);
     }
@@ -1226,9 +1226,9 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
     edit_search_status_msg_t esm;
 
 #ifdef HAVE_CHARSET
-    srch = mc_search_new (match_expr, -1, cp_source);
+    srch = mc_search_new (match_expr, cp_source);
 #else
-    srch = mc_search_new (match_expr, -1, NULL);
+    srch = mc_search_new (match_expr, NULL);
 #endif
     if (srch == NULL)
         return 0;
@@ -2567,9 +2567,9 @@ edit_replace_cmd (WEdit * edit, int again)
     if (edit->search == NULL)
     {
 #ifdef HAVE_CHARSET
-        edit->search = mc_search_new (input1, -1, cp_source);
+        edit->search = mc_search_new (input1, cp_source);
 #else
-        edit->search = mc_search_new (input1, -1, NULL);
+        edit->search = mc_search_new (input1, NULL);
 #endif
         if (edit->search == NULL)
         {
@@ -2718,7 +2718,7 @@ edit_replace_cmd (WEdit * edit, int again)
             edit_render_keypress (edit);
 
             if (times_replaced == 0)
-                query_dialog (_("Replace"), _("Search string not found"), D_NORMAL, 1, _("&OK"));
+                query_dialog (_("Replace"), _(STR_E_NOTFOUND), D_NORMAL, 1, _("&OK"));
             break;
         }
     }
@@ -2789,9 +2789,9 @@ edit_search_cmd (WEdit * edit, gboolean again)
             g_list_free_full (history, g_free);
 
 #ifdef HAVE_CHARSET
-            edit->search = mc_search_new (edit->last_search_string, -1, cp_source);
+            edit->search = mc_search_new (edit->last_search_string, cp_source);
 #else
-            edit->search = mc_search_new (edit->last_search_string, -1, NULL);
+            edit->search = mc_search_new (edit->last_search_string, NULL);
 #endif
             if (edit->search == NULL)
             {
@@ -3169,6 +3169,7 @@ edit_sort_cmd (WEdit * edit)
                      " > ", tmp_edit_temp_name, (char *) NULL);
     g_free (tmp_edit_temp_name);
     g_free (tmp_edit_block_name);
+    g_free (exp);
 
     e = system (tmp);
     g_free (tmp);
@@ -3412,7 +3413,7 @@ edit_begin_end_macro_cmd (WEdit * edit)
     /* edit is a pointer to the widget */
     if (edit != NULL)
     {
-        unsigned long command = macro_index < 0 ? CK_MacroStartRecord : CK_MacroStopRecord;
+        long command = macro_index < 0 ? CK_MacroStartRecord : CK_MacroStopRecord;
         edit_execute_key_command (edit, command, -1);
     }
 }
@@ -3425,7 +3426,7 @@ edit_begin_end_repeat_cmd (WEdit * edit)
     /* edit is a pointer to the widget */
     if (edit != NULL)
     {
-        unsigned long command = macro_index < 0 ? CK_RepeatStartRecord : CK_RepeatStopRecord;
+        long command = macro_index < 0 ? CK_RepeatStartRecord : CK_RepeatStopRecord;
         edit_execute_key_command (edit, command, -1);
     }
 }
@@ -3688,7 +3689,10 @@ edit_set_spell_lang (void)
 
         lang = spell_dialog_lang_list_show (lang_list);
         if (lang != NULL)
+        {
             (void) aspell_set_lang (lang);
+            g_free (lang);
+        }
     }
     aspell_array_clean (lang_list);
 }

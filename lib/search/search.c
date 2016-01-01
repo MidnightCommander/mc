@@ -2,7 +2,7 @@
    Search text engine.
    Interface functions
 
-   Copyright (C) 2009-2015
+   Copyright (C) 2009-2016
    Free Software Foundation, Inc.
 
    Written by:
@@ -53,7 +53,7 @@ static const mc_search_type_str_t mc_search__list_types[] = {
     {N_("Re&gular expression"), MC_SEARCH_T_REGEX},
     {N_("He&xadecimal"), MC_SEARCH_T_HEX},
     {N_("Wil&dcard search"), MC_SEARCH_T_GLOB},
-    {NULL, -1}
+    {NULL, MC_SEARCH_T_INVALID}
 };
 
 /*** file scope functions ************************************************************************/
@@ -127,6 +127,24 @@ mc_search__conditions_free (GPtrArray * array)
 /* Init search descriptor.
  *
  * @param original pattern to search
+ * @param original_charset charset of #original. If NULL then cp_display will be used
+ *
+ * @return new mc_search_t object. Use #mc_search_free() to free it.
+ */
+
+mc_search_t *
+mc_search_new (const gchar * original, const gchar * original_charset)
+{
+    if (original == NULL)
+        return NULL;
+
+    return mc_search_new_len (original, strlen (original), original_charset);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/* Init search descriptor.
+ *
+ * @param original pattern to search
  * @param original_len length of #original or -1 if #original is NULL-terminated
  * @param original_charset charset of #original. If NULL then cp_display will be used
  *
@@ -134,19 +152,12 @@ mc_search__conditions_free (GPtrArray * array)
  */
 
 mc_search_t *
-mc_search_new (const gchar * original, gsize original_len, const gchar * original_charset)
+mc_search_new_len (const gchar * original, gsize original_len, const gchar * original_charset)
 {
     mc_search_t *lc_mc_search;
 
-    if (original == NULL)
+    if (original == NULL || original_len == 0)
         return NULL;
-
-    if ((gssize) original_len == -1)
-    {
-        original_len = strlen (original);
-        if (original_len == 0)
-            return NULL;
-    }
 
     lc_mc_search = g_new0 (mc_search_t, 1);
     lc_mc_search->original = g_strndup (original, original_len);
@@ -415,7 +426,7 @@ mc_search (const gchar * pattern, const gchar * pattern_charset, const gchar * s
     if (str == NULL)
         return FALSE;
 
-    search = mc_search_new (pattern, -1, pattern_charset);
+    search = mc_search_new (pattern, pattern_charset);
     if (search == NULL)
         return FALSE;
 

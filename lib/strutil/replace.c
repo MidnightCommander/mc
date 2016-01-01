@@ -1,7 +1,7 @@
 /*
    Functions for replacing substrings in strings.
 
-   Copyright (C) 2013-2015
+   Copyright (C) 2013-2016
    Free Software Foundation, Inc.
 
    Written by:

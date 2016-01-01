@@ -1,7 +1,7 @@
 /*
    Widgets for the Midnight Commander
 
-   Copyright (C) 1994-2015
+   Copyright (C) 1994-2016
    Free Software Foundation, Inc.
 
    Authors:
@@ -80,8 +80,8 @@ gauge_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         {
             int gauge_len;
             int percentage, columns;
-            long total = g->max;
-            long done = g->current;
+            int total = g->max;
+            int done = g->current;
 
             if (total <= 0 || done < 0)
             {
