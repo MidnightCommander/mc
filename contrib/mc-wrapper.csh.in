@@ -18,3 +18,4 @@ endif
 
 rm -f "$MC_PWD_FILE"
 unsetenv MC_PWD_FILE
+unsetenv MC_USER
