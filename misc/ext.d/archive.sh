@@ -23,6 +23,9 @@ do_view_action() {
     bzip)
         bzip2 -dc "${MC_EXT_FILENAME}" 2>/dev/null
         ;;
+    lz4)
+        lz4 -dc "${MC_EXT_FILENAME}" 2>/dev/null
+        ;;
     lzma)
         lzma -dc "${MC_EXT_FILENAME}" 2>/dev/null
         ;;
@@ -42,6 +45,10 @@ do_view_action() {
         ;;
     tar.bzip2)
         bzip2 -dc "${MC_EXT_FILENAME}" 2>/dev/null | \
+            tar tvvf -
+        ;;
+    tar.lz4)
+        lz4 -dc "${MC_EXT_FILENAME}" 2>/dev/null | \
             tar tvvf -
         ;;
     tar.lzma)
@@ -79,6 +86,10 @@ do_view_action() {
         ;;
     cpio.z|cpio.gz)
         gzip -dc "${MC_EXT_FILENAME}" | \
+            cpio -itv 2>/dev/null
+        ;;
+    cpio.lz4)
+        lz4 -dc "${MC_EXT_FILENAME}" | \
             cpio -itv 2>/dev/null
         ;;
     cpio.xz)
@@ -123,6 +134,9 @@ do_open_action() {
         ;;
     gz)
         gz -dc "${MC_EXT_FILENAME}" | ${pager}
+        ;;
+    lz4)
+        lz4 -dc "${MC_EXT_FILENAME}" | ${pager}
         ;;
     lzma)
         lzma -dc "${MC_EXT_FILENAME}" | ${pager}
