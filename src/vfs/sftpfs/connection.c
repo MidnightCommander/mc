@@ -371,17 +371,17 @@ sftpfs_open_connection (struct vfs_s_super *super, GError ** mcerror)
 
     super_data = (sftpfs_super_data_t *) super->data;
 
-    /* Create a session instance */
-    super_data->session = libssh2_session_init ();
-    if (super_data->session == NULL)
-        return (-1);
-
     /*
      * The application code is responsible for creating the socket
      * and establishing the connection
      */
     super_data->socket_handle = sftpfs_open_socket (super, mcerror);
     if (super_data->socket_handle == -1)
+        return (-1);
+
+    /* Create a session instance */
+    super_data->session = libssh2_session_init ();
+    if (super_data->session == NULL)
         return (-1);
 
     /* ... start it up. This will trade welcome banners, exchange keys,
@@ -440,6 +440,12 @@ sftpfs_close_connection (struct vfs_s_super *super, const char *shutdown_message
     if (super_data == NULL)
         return;
 
+    if (super_data->sftp_session != NULL)
+    {
+        libssh2_sftp_shutdown (super_data->sftp_session);
+        super_data->sftp_session = NULL;
+    }
+
     if (super_data->agent != NULL)
     {
         libssh2_agent_disconnect (super_data->agent);
@@ -447,11 +453,7 @@ sftpfs_close_connection (struct vfs_s_super *super, const char *shutdown_message
         super_data->agent = NULL;
     }
 
-    if (super_data->sftp_session != NULL)
-    {
-        libssh2_sftp_shutdown (super_data->sftp_session);
-        super_data->sftp_session = NULL;
-    }
+    super_data->fingerprint = NULL;
 
     if (super_data->session != NULL)
     {
@@ -459,8 +461,6 @@ sftpfs_close_connection (struct vfs_s_super *super, const char *shutdown_message
         libssh2_session_free (super_data->session);
         super_data->session = NULL;
     }
-
-    super_data->fingerprint = NULL;
 
     if (super_data->socket_handle != -1)
     {
