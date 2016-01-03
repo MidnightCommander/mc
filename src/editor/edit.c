@@ -1526,7 +1526,7 @@ edit_get_bracket (WEdit * edit, gboolean in_screen, unsigned long furthest_brack
         inc = 1;
     /* no limit */
     if (furthest_bracket_search == 0)
-        furthest_bracket_search--; /* ULONG_MAX */
+        furthest_bracket_search--;      /* ULONG_MAX */
     for (q = edit->buffer.curs1 + inc;; q += inc)
     {
         int a;
