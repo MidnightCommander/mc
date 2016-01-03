@@ -225,6 +225,10 @@ regex/\.(diff|patch)(\.(gz|Z))$
 	Open=%cd %p/patchfs://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view gz
 
+regex/\.(diff|patch)(\.xz)$
+    Open=%cd %p/patchfs://
+    View=%view{ascii} @EXTHELPERSDIR@/archive.sh view xz
+
 # ls-lR
 regex/(^|\.)ls-?lR(\.gz|Z|bz2)$
 	Open=%cd %p/lslR://
