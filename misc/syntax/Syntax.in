@@ -45,7 +45,7 @@ include filehighlight.syntax
 file ..\*\\.e$ Eiffel\sSource\sFile
 include eiffel.syntax
 
-file ..\*\\.(diff|rej|patch)$ Diff\sOutput ^(diff|Index:)\s
+file ..\*\\.(diff|rej|patch)|COMMIT_EDITMSG$ Diff\sOutput ^(diff|Index:)\s
 include diff.syntax
 
 file ..\*\\.lsm$ LSM\sFile
