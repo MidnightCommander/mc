@@ -434,7 +434,8 @@ sftpfs_close_connection (struct vfs_s_super *super, const char *shutdown_message
 {
     sftpfs_super_data_t *super_data;
 
-    mc_return_if_error (mcerror);
+    /* no mc_return_*_if_error() here because of abort open_connection handling too */
+    (void) mcerror;
 
     super_data = (sftpfs_super_data_t *) super->data;
     if (super_data == NULL)
