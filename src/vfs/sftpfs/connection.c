@@ -174,6 +174,7 @@ sftpfs_recognize_auth_types (struct vfs_s_super *super)
     super_data->auth_type = NONE;
 
     /* check what authentication methods are available */
+    /* userauthlist is internally managed by libssh2 and freed by libssh2_session_free() */
     userauthlist = libssh2_userauth_list (super_data->session, super->path_element->user,
                                           strlen (super->path_element->user));
 
@@ -187,8 +188,6 @@ sftpfs_recognize_auth_types (struct vfs_s_super *super)
 
     if ((super_data->config_auth_type & AGENT) != 0)
         super_data->auth_type |= AGENT;
-
-    g_free (userauthlist);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -460,6 +459,7 @@ sftpfs_close_connection (struct vfs_s_super *super, const char *shutdown_message
     if (super_data->session != NULL)
     {
         libssh2_session_disconnect (super_data->session, shutdown_message);
+        libssh2_session_free (super_data->session);
         super_data->session = NULL;
     }
 
