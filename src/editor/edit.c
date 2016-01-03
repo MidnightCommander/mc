@@ -1516,17 +1516,17 @@ edit_get_bracket (WEdit * edit, gboolean in_screen, unsigned long furthest_brack
     edit_update_curs_row (edit);
     c = edit_buffer_get_current_byte (&edit->buffer);
     p = strchr (b, c);
-    /* no limit */
-    if (!furthest_bracket_search)
-        furthest_bracket_search--;
     /* not on a bracket at all */
-    if (p == NULL)
+    if (p == NULL || *p == '\0')
         return -1;
     /* the matching bracket */
     d = p[1];
     /* going left or right? */
-    if (strchr ("{[(", c))
+    if (strchr ("{[(", c) != NULL)
         inc = 1;
+    /* no limit */
+    if (furthest_bracket_search == 0)
+        furthest_bracket_search--; /* ULONG_MAX */
     for (q = edit->buffer.curs1 + inc;; q += inc)
     {
         int a;
