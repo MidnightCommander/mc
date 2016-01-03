@@ -2,83 +2,18 @@
 """
 UC1541 Virtual filesystem
 
-This extfs provides an access to disk image files for the Commodore
-VIC20/C64/C128. It requires the utility c1541 that comes bundled with Vice,
-the emulator for the VIC20, C64, C128 and other computers made by Commodore.
-
-Remarks
--------
-
-Due to different way of representing file entries on regular D64 disk images,
-there could be issues with filenames that are transferred from/to the image.
-Following rules was applied to represent a single file entry:
-
-1. An extension is attached to the end of a filename depending on a file type.
-   Possible extensions are: prg, del, seq, usr and rel.
-2. Every non-ASCII character (which could be some of characters specific to
-   PET-ASCII, or be a control character) will be replaced by dot (.), since
-   c1541 program will list them that way.
-3. Every slash character (/) will be replaced by pipe character (|).
-4. Leading space will be replaced by tilda (~).
-
-While copying from D64 image to filesystem, filenames will be stored as they
-are seen on a listing.
-
-While copying from filesystem to D64 image, filename conversion will be done:
-1. Every $ and * characters will be replaced by question mark (?)
-2. Every pipe (|) and backslash (\) characters will be replaced by slash (/)
-3. Every tilda (~) will be replaced by a space
-4. 'prg' extension will be truncated
-
-Representation of a directory can be sometimes confusing - in case when one
-copied file without extension it stays there in such form, till next access
-(after flushing VFS). Also file sizes are not accurate, since D64 directory
-entries have sizes stored as 256 bytes blocks.
-
-Configuration
--------------
-
-Here are specific for this script variable, which while set, can influence
-script behaviour:
-
-UC1541_DEBUG - if set, uc1541 will produce log in /tmp/uc1541.log file
-
-UC1541_VERBOSE - of set, script will be more verbose, i.e. error messages form
-c1541 program will be passed to Midnight Commander, so that user will be aware
-of error cause if any.
-
-UC1541_HIDE_DEL - if set, no DEL entries will be shown
-
-Changelog:
-    2.5 Fixed bug with filenames started with a '-' sign.
-    2.4 Fixed endless loop bug for reading directory in Python implemented
-        directory reader.
-    2.3 Re added and missing method _correct_fname used for writing files
-        into d64 image.
-    2.2 Fixed bug(?) with unusual sector end (marked as sector 0, not 255),
-        causing endless directory reading on random locations.
-    2.1 Fixed bug with filenames containing slash.
-    2.0 Added reading raw D64 image, and mapping for jokers. Now it is
-        possible to read files with PET-ASCII/control sequences in filenames.
-        Working with d64 images only. Added workaround for space at the
-        beginning of the filename.
-    1.2 Added configuration env variables: UC1541_VERBOSE and UC1541_HIDE_DEL.
-        First one, if set to any value, will cause that error messages from
-        c1541 program will be redirected as a failure messages visible in MC.
-        The other variable, when set to any value, cause "del" entries to be
-        not shown in the lister.
-    1.1 Added protect bits, added failsafe for argparse module
-    1.0 Initial release
-
 Author: Roman 'gryf' Dobosz <gryf73@gmail.com>
-Date: 2012-10-15
-Version: 2.5
+Date: 2014-01-04
+Version: 2.8
 Licence: BSD
+source: https://bitbucket.org/gryf/uc1541
+mirror: https://github.com/gryf/uc1541
 """
 
 import sys
 import re
 import os
+import gzip
 from subprocess import Popen, PIPE
 
 if os.getenv('UC1541_DEBUG'):
@@ -94,7 +29,7 @@ if os.getenv('UC1541_DEBUG'):
 else:
     class LOG(object):
         """
-        Dummy logger object. does nothing.
+        Dummy logger object. Does nothing.
         """
         @classmethod
         def debug(*args, **kwargs):
@@ -151,15 +86,30 @@ class D64(object):
         Init
         """
         LOG.debug('image: %s', dimage)
-        dimage = open(dimage, 'rb')
-        self.raw = dimage.read()
-        dimage.close()
-
+        self.raw = None
         self.current_sector_data = None
         self.next_sector = 0
         self.next_track = None
         self._dir_contents = []
         self._already_done = []
+
+        self._get_raw(dimage)
+
+    def _get_raw(self, dimage):
+        """Try to get contents of the D64 image either it's gzip compressed or
+        not."""
+        fobj = gzip.open(dimage)
+        # Although the common approach with gzipped files is to check the
+        # magic number, in this case there is no guarantee that first track
+        # does not contain exactly the same byte sequence as the magic number.
+        # So the only way left is to actually try to uncompress the file.
+        try:
+            self.raw = fobj.read()
+        except IOError:
+            fobj.close()
+            fobj = open(dimage)
+            self.raw = fobj.read()
+            fobj.close()
 
     def _map_filename(self, string):
         """
@@ -207,6 +157,11 @@ class D64(object):
                       self.next_sector)
 
         self.current_sector_data = self.raw[offset:offset + 256]
+
+        # Guard for reading data out of bound - that happened for discs which
+        # store only raw data, even on 18 track
+        if not self.current_sector_data:
+            return False
 
         self.next_track = ord(self.current_sector_data[0])
         self.next_sector = ord(self.current_sector_data[1])
@@ -260,7 +215,7 @@ class D64(object):
         Traverse through sectors and store entries in _dir_contents
         """
         sector = self.current_sector_data
-        for x in range(8):
+        for dummy in range(8):
             entry = sector[:32]
             ftype = ord(entry[2])
 
@@ -320,6 +275,11 @@ class Uc1541(object):
         LOG.info("List contents of %s", self.arch)
         directory = self._get_dir()
 
+        # If there is an error reading directory, show the reason to the user
+        if self.out.startswith("Error"):
+            sys.stderr.write(self.out.split("\n")[0] + "\n")
+            return 2
+
         for entry in directory:
             sys.stdout.write("%(perms)s   1 %(uid)-8d %(gid)-8d %(size)8d "
                              "Jan 01 1980 %(display_name)s\n" % entry)
@@ -372,6 +332,16 @@ class Uc1541(object):
             return self._show_error()
 
         return 0
+
+    def mkdir(self, dirname):
+        """Not supported"""
+        self.err = "D64 format doesn't support directories"
+        return self._show_error()
+
+    def run(self, fname):
+        """Not supported"""
+        self.err = "Not supported, unless you are using MC on real C64 ;)"
+        return self._show_error()
 
     def _correct_fname(self, fname):
         """
@@ -439,7 +409,7 @@ class Uc1541(object):
                 if '/' in display_name:
                     display_name = display_name.replace('/', '|')
 
-                # workaround for space and dash at the beginning of the
+                # workaround for space and dash at the beggining of the
                 # filename
                 char_map = {' ': '~',
                             '-': '_'}
@@ -466,9 +436,9 @@ class Uc1541(object):
         Pass out error output from c1541 execution
         """
         if self._verbose:
-            sys.exit(self.err)
+            return self.err
         else:
-            sys.exit(1)
+            return 1
 
     def _call_command(self, cmd, src=None, dst=None):
         """
@@ -479,27 +449,26 @@ class Uc1541(object):
             dir/list
         """
         command = ['c1541', '-attach', self.arch, '-%s' % cmd]
-        if src and dst:
+        if src:
             command.append(src)
+        if dst:
             command.append(dst)
-        elif src or dst:
-            command.append(src and src or dst)
 
         self.out, self.err = Popen(command, stdout=PIPE,
                                    stderr=PIPE).communicate()
         return not self.err
 
 
-CALL_MAP = {'list': lambda a: Uc1541(a.ARCH).list(),
-            'copyin': lambda a: Uc1541(a.ARCH).copyin(a.SRC, a.DST),
-            'copyout': lambda a: Uc1541(a.ARCH).copyout(a.SRC, a.DST),
-            'rm': lambda a: Uc1541(a.ARCH).rm(a.DST)}
+CALL_MAP = {'list': lambda a: Uc1541(a.arch).list(),
+            'copyin': lambda a: Uc1541(a.arch).copyin(a.src, a.dst),
+            'copyout': lambda a: Uc1541(a.arch).copyout(a.src, a.dst),
+            'mkdir': lambda a: Uc1541(a.arch).mkdir(a.dst),
+            'rm': lambda a: Uc1541(a.arch).rm(a.dst),
+            'run': lambda a: Uc1541(a.arch).run(a.dst)}
 
 
 def parse_args():
-    """
-    Use ArgumentParser to check for script arguments and execute.
-    """
+    """Use ArgumentParser to check for script arguments and execute."""
     parser = ArgumentParser()
     subparsers = parser.add_subparsers(help='supported commands')
     parser_list = subparsers.add_parser('list', help="List contents of D64 "
@@ -509,67 +478,79 @@ def parse_args():
     parser_copyout = subparsers.add_parser('copyout', help="Copy file out of "
                                            "D64 image")
     parser_rm = subparsers.add_parser('rm', help="Delete file from D64 image")
+    parser_mkdir = subparsers.add_parser('mkdir', help="Create directory in "
+                                         "archive")
+    parser_run = subparsers.add_parser('run', help="Execute archived file")
 
-    parser_list.add_argument('ARCH', help="D64 Image filename")
+    parser_list.add_argument('arch', help="D64 Image filename")
     parser_list.set_defaults(func=CALL_MAP['list'])
 
-    parser_copyin.add_argument('ARCH', help="D64 Image filename")
-    parser_copyin.add_argument('SRC', help="Source filename")
-    parser_copyin.add_argument('DST', help="Destination filename (to be "
+    parser_copyin.add_argument('arch', help="D64 Image filename")
+    parser_copyin.add_argument('src', help="Source filename")
+    parser_copyin.add_argument('dst', help="Destination filename (to be "
                                "written into D64 image)")
     parser_copyin.set_defaults(func=CALL_MAP['copyin'])
 
-    parser_copyout.add_argument('ARCH', help="D64 Image filename")
-    parser_copyout.add_argument('SRC', help="Source filename (to be read from"
+    parser_copyout.add_argument('arch', help="D64 Image filename")
+    parser_copyout.add_argument('src', help="Source filename (to be read from"
                                 " D64 image")
-    parser_copyout.add_argument('DST', help="Destination filename")
+    parser_copyout.add_argument('dst', help="Destination filename")
     parser_copyout.set_defaults(func=CALL_MAP['copyout'])
 
-    parser_rm.add_argument('ARCH', help="D64 Image filename")
-    parser_rm.add_argument('DST', help="File inside D64 image to be deleted")
+    parser_rm.add_argument('arch', help="D64 Image filename")
+    parser_rm.add_argument('dst', help="File inside D64 image to be deleted")
     parser_rm.set_defaults(func=CALL_MAP['rm'])
+
+    parser_mkdir.add_argument('arch', help="archive filename")
+    parser_mkdir.add_argument('dst', help="Directory name inside archive to "
+                              "be created")
+    parser_mkdir.set_defaults(func=CALL_MAP['mkdir'])
+
+    parser_run.add_argument('arch', help="archive filename")
+    parser_run.add_argument('dst', help="File to be executed")
+    parser_run.set_defaults(func=CALL_MAP['run'])
 
     args = parser.parse_args()
     return args.func(args)
 
 
 def no_parse():
-    """
-    Failsafe argument "parsing". Note, that it blindly takes positional
+    """Failsafe argument "parsing". Note, that it blindly takes positional
     arguments without checking them. In case of wrong arguments it will
-    silently exit
-    """
+    silently exit"""
     try:
-        if sys.argv[1] not in ('list', 'copyin', 'copyout', 'rm'):
+        if sys.argv[1] not in ('list', 'copyin', 'copyout', 'rm', 'mkdir',
+                               "run"):
             sys.exit(2)
     except IndexError:
         sys.exit(2)
 
     class Arg(object):
-        DST = None
-        SRC = None
-        ARCH = None
+        """Mimic argparse object"""
+        dst = None
+        src = None
+        arch = None
 
     arg = Arg()
 
     try:
-        arg.ARCH = sys.argv[2]
+        arg.arch = sys.argv[2]
         if sys.argv[1] in ('copyin', 'copyout'):
-            arg.SRC = sys.argv[3]
-            arg.DST = sys.argv[4]
-        elif sys.argv[1] == 'rm':
-            arg.DST = sys.argv[3]
+            arg.src = sys.argv[3]
+            arg.dst = sys.argv[4]
+        elif sys.argv[1] in ('rm', 'run', 'mkdir'):
+            arg.dst = sys.argv[3]
     except IndexError:
         sys.exit(2)
 
-    CALL_MAP[sys.argv[1]](arg)
+    return CALL_MAP[sys.argv[1]](arg)
 
 if __name__ == "__main__":
     LOG.debug("Script params: %s", str(sys.argv))
     try:
         from argparse import ArgumentParser
-        parse_func = parse_args
+        PARSE_FUNC = parse_args
     except ImportError:
-        parse_func = no_parse
+        PARSE_FUNC = no_parse
 
-    parse_func()
+    sys.exit(PARSE_FUNC())
