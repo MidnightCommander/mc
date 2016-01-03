@@ -74,7 +74,7 @@ mc_event_add (const gchar * event_group_name, const gchar * event_name,
     if (mc_event_grouplist == NULL || event_group_name == NULL || event_name == NULL
         || event_callback == NULL)
     {
-        mc_propagate_error (mcerror, 1, "%s", _("Check input data! Some of parameters are NULL!"));
+        mc_propagate_error (mcerror, 0, "%s", _("Check input data! Some of parameters are NULL!"));
         return FALSE;
     }
 
@@ -172,7 +172,7 @@ mc_event_get_event_group_by_name (const gchar * event_group_name, gboolean creat
                              (GDestroyNotify) mc_event_group_destroy_value);
         if (event_group == NULL)
         {
-            mc_propagate_error (mcerror, 1, _("Unable to create group '%s' for events!"),
+            mc_propagate_error (mcerror, 0, _("Unable to create group '%s' for events!"),
                                 event_group_name);
             return NULL;
         }
@@ -197,7 +197,7 @@ mc_event_get_event_by_name (GTree * event_group, const gchar * event_name, gbool
         callbacks = g_ptr_array_new ();
         if (callbacks == NULL)
         {
-            mc_propagate_error (mcerror, 1, _("Unable to create event '%s'!"), event_name);
+            mc_propagate_error (mcerror, 0, _("Unable to create event '%s'!"), event_name);
             return NULL;
         }
         g_tree_insert (event_group, g_strdup (event_name), (gpointer) callbacks);

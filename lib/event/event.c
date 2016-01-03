@@ -54,7 +54,7 @@ mc_event_init (GError ** mcerror)
 
     if (mc_event_grouplist != NULL)
     {
-        mc_propagate_error (mcerror, 1, "%s", _("Event system already initialized"));
+        mc_propagate_error (mcerror, 0, "%s", _("Event system already initialized"));
         return FALSE;
     }
 
@@ -64,7 +64,7 @@ mc_event_init (GError ** mcerror)
 
     if (mc_event_grouplist == NULL)
     {
-        mc_propagate_error (mcerror, 2, "%s", _("Failed to initialize event system"));
+        mc_propagate_error (mcerror, 0, "%s", _("Failed to initialize event system"));
         return FALSE;
     }
 
@@ -80,7 +80,7 @@ mc_event_deinit (GError ** mcerror)
 
     if (mc_event_grouplist == NULL)
     {
-        mc_propagate_error (mcerror, 3, "%s", _("Event system not initialized"));
+        mc_propagate_error (mcerror, 0, "%s", _("Event system not initialized"));
         return FALSE;
     }
 

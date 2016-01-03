@@ -248,7 +248,7 @@ sftpfs_read_file (vfs_file_handler_t * file_handler, char *buffer, size_t count,
 
     if (file_handler == NULL || file_handler->data == NULL)
     {
-        mc_propagate_error (mcerror, -1, "%s",
+        mc_propagate_error (mcerror, 0, "%s",
                             _("sftp: No file handler data present for reading file"));
         return -1;
     }

@@ -75,7 +75,7 @@ sftpfs_open_socket (struct vfs_s_super *super, GError ** mcerror)
 
     if (super->path_element->host == NULL || *super->path_element->host == '\0')
     {
-        mc_propagate_error (mcerror, -1, "%s", _("sftp: Invalid host name."));
+        mc_propagate_error (mcerror, 0, "%s", _("sftp: Invalid host name."));
         return -1;
     }
 
@@ -107,7 +107,7 @@ sftpfs_open_socket (struct vfs_s_super *super, GError ** mcerror)
 
     if (e != 0)
     {
-        mc_propagate_error (mcerror, -1, _("sftp: %s"), gai_strerror (e));
+        mc_propagate_error (mcerror, 0, _("sftp: %s"), gai_strerror (e));
         my_socket = -1;
         goto ret;
     }
@@ -134,9 +134,9 @@ sftpfs_open_socket (struct vfs_s_super *super, GError ** mcerror)
         close (my_socket);
 
         if (errno == EINTR && tty_got_interrupt ())
-            mc_propagate_error (mcerror, -1, "%s", _("sftp: connection interrupted by user"));
+            mc_propagate_error (mcerror, 0, "%s", _("sftp: connection interrupted by user"));
         else if (res->ai_next == NULL)
-            mc_propagate_error (mcerror, -1, _("sftp: connection to server failed: %s"),
+            mc_propagate_error (mcerror, 0, _("sftp: connection to server failed: %s"),
                                 unix_error_string (errno));
         else
             continue;
@@ -276,7 +276,7 @@ sftpfs_open_connection_ssh_key (struct vfs_s_super *super, GError ** mcerror)
     g_free (p);
 
     if (passwd == NULL)
-        mc_propagate_error (mcerror, -1, "%s", _("sftp: Passphrase is empty."));
+        mc_propagate_error (mcerror, 0, "%s", _("sftp: Passphrase is empty."));
     else
     {
         ret_value = (libssh2_userauth_publickey_fromfile (super_data->session,
@@ -327,7 +327,7 @@ sftpfs_open_connection_ssh_password (struct vfs_s_super *super, GError ** mcerro
     g_free (p);
 
     if (passwd == NULL)
-        mc_propagate_error (mcerror, -1, "%s", _("sftp: Password is empty."));
+        mc_propagate_error (mcerror, 0, "%s", _("sftp: Password is empty."));
     else
     {
         while ((rc = libssh2_userauth_password (super_data->session, super->path_element->user,
@@ -387,7 +387,7 @@ sftpfs_open_connection (struct vfs_s_super *super, GError ** mcerror)
     rc = libssh2_session_startup (super_data->session, super_data->socket_handle);
     if (rc != 0)
     {
-        mc_propagate_error (mcerror, -1, _("sftp: Failure establishing SSH session: (%d)"), rc);
+        mc_propagate_error (mcerror, 0, _("sftp: Failure establishing SSH session: (%d)"), rc);
         return (-1);
     }
 
