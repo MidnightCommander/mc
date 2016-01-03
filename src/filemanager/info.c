@@ -149,8 +149,13 @@ info_show_info (WInfo * info)
 
     case 16:
         widget_move (w, 16, 3);
-        if (myfs_stats.nfree == 0 && myfs_stats.nodes == 0)
+        if ((myfs_stats.nfree == 0 && myfs_stats.nodes == 0) ||
+            (myfs_stats.nfree == (uintmax_t) (-1) && myfs_stats.nodes == (uintmax_t) (-1)))
             tty_print_string (_("No node information"));
+        else if (myfs_stats.nfree == (uintmax_t) (-1))
+            tty_printf ("%s -/%" PRIuMAX, _("Free nodes:"), myfs_stats.nodes);
+        else if (myfs_stats.nodes == (uintmax_t) (-1))
+            tty_printf ("%s %" PRIuMAX "/-", _("Free nodes:"), myfs_stats.nfree);
         else
             tty_printf ("%s %" PRIuMAX "/%" PRIuMAX " (%d%%)",
                         _("Free nodes:"),
