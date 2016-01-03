@@ -506,7 +506,7 @@ msgid "%s: %s: %s %3d%% (%lld) bytes transferred"
 msgstr "%s: %s: %s %3d%% (%lld) байт передано"
 
 #, c-format
-msgid "%s: %s: %s %lld bytes transferre"
+msgid "%s: %s: %s %lld bytes transferred"
 msgstr "%s: %s: %s %lld байт передано"
 
 msgid "Starting linear transfer..."

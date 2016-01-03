@@ -614,7 +614,7 @@ msgstr ""
 
 #: lib/vfs/direntry.c:703
 #, c-format
-msgid "%s: %s: %s %lld bytes transferre"
+msgid "%s: %s: %s %lld bytes transferred"
 msgstr ""
 
 #: lib/vfs/direntry.c:1291

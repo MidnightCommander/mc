@@ -700,7 +700,7 @@ vfs_s_print_stats (const char *fs_name, const char *action,
         vfs_print_message (_("%s: %s: %s %3d%% (%lld) bytes transferred"), fs_name, action,
                            file_name, (int) ((double) have * 100 / need), (long long) have);
     else
-        vfs_print_message (_("%s: %s: %s %lld bytes transferre"), fs_name, action, file_name,
+        vfs_print_message (_("%s: %s: %s %lld bytes transferred"), fs_name, action, file_name,
                            (long long) have);
 }
 
