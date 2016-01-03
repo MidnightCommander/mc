@@ -48,7 +48,7 @@ do_view_action() {
             cat "${MC_EXT_FILENAME}"
             ;;
         *)
-            MANROFFOPT=-c MAN_KEEP_FORMATTING=1 man -P cat -l "${MC_EXT_FILENAME}"
+            MANROFFOPT=-c MAN_KEEP_FORMATTING=1 man -P cat "${MC_EXT_FILENAME}"
             ;;
         esac
         ;;
@@ -69,7 +69,7 @@ do_view_action() {
         *)
             # "man" takes care of uncompressing.
             # This way the stdin is left intact so the correct width is used.
-            MANROFFOPT=-c MAN_KEEP_FORMATTING=1 man -P cat -l "${MC_EXT_FILENAME}"
+            MANROFFOPT=-c MAN_KEEP_FORMATTING=1 man -P cat "${MC_EXT_FILENAME}"
             ;;
         esac
         ;;
