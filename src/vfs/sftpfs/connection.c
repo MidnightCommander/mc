@@ -440,9 +440,6 @@ sftpfs_close_connection (struct vfs_s_super *super, const char *shutdown_message
     if (super_data == NULL)
         return;
 
-    vfs_path_element_free (super_data->original_connection_info);
-    super_data->original_connection_info = NULL;
-
     if (super_data->agent != NULL)
     {
         libssh2_agent_disconnect (super_data->agent);
