@@ -770,6 +770,7 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
                    vfs_path_t ** script_vpath)
 {
     char *p, *q, *r, c;
+    const char *filename;
     size_t file_len;
     gboolean found = FALSE;
     gboolean error_flag = FALSE;
@@ -870,7 +871,10 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
 
     include_target = NULL;
     include_target_len = 0;
-    file_len = vfs_path_len (filename_vpath);
+
+    filename = vfs_path_get_last_path_str (filename_vpath);
+    filename = x_basename (filename);
+    file_len = strlen (filename);
 
     for (p = data; *p != '\0'; p++)
     {
@@ -917,8 +921,7 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
                 {
                     search->search_type = MC_SEARCH_T_REGEX;
                     search->is_case_sensitive = !case_insense;
-                    found =
-                        mc_search_run (search, vfs_path_as_str (filename_vpath), 0, file_len, NULL);
+                    found = mc_search_run (search, filename, 0, file_len, NULL);
                     mc_search_free (search);
                 }
             }
@@ -943,14 +946,12 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
 
                 if (*p == '.' && file_len >= (size_t) (q - p))
                 {
-                    if (cmp_func
-                        (p, vfs_path_as_str (filename_vpath) + file_len - (q - p), q - p) == 0)
+                    if (cmp_func (p, filename + file_len - (q - p), q - p) == 0)
                         found = TRUE;
                 }
                 else
                 {
-                    if ((size_t) (q - p) == file_len
-                        && cmp_func (p, vfs_path_as_str (filename_vpath), q - p) == 0)
+                    if ((size_t) (q - p) == file_len && cmp_func (p, filename, file_len) == 0)
                         found = TRUE;
                 }
             }
