@@ -1,5 +1,5 @@
 dnl Samba support
-AC_DEFUN([AC_MC_VFS_SMB],
+AC_DEFUN([mc_VFS_SMB],
 [
     AC_ARG_ENABLE([vfs-smb],
 		AS_HELP_STRING([--enable-vfs-smb], [Support for SMB filesystem @<:@no@:>@]),
@@ -14,7 +14,7 @@ AC_DEFUN([AC_MC_VFS_SMB],
 
     if test "$enable_vfs" = "yes" -a x"$enable_vfs_smb" != x"no"; then
 	enable_vfs_smb="yes"
-	AC_MC_VFS_ADDNAME([smb])
+	mc_VFS_ADDNAME([smb])
 	AC_DEFINE([ENABLE_VFS_SMB], [1], [Define to enable VFS over SMB])
     fi
 

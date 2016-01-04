@@ -1,10 +1,10 @@
-dnl MC_UNDELFS_CHECKS
+dnl mc_UNDELFS_CHECKS
 dnl    Check for ext2fs undel support.
 dnl    Set shell variable ext2fs_undel to "yes" if we have it,
 dnl    "no" otherwise.  May define ENABLE_VFS_UNDELFS for cpp.
 dnl    Will set EXT2FS_UNDEL_LIBS to required libraries.
 
-AC_DEFUN([MC_UNDELFS_CHECKS], [
+AC_DEFUN([mc_UNDELFS_CHECKS], [
   ext2fs_undel=no
   EXT2FS_UNDEL_LIBS=
   AC_CHECK_HEADERS([ext2fs/ext2_fs.h linux/ext2_fs.h], [ext2_fs_h=yes; break])
@@ -45,7 +45,7 @@ AC_DEFUN([MC_UNDELFS_CHECKS], [
 dnl
 dnl Ext2fs undelete support
 dnl
-AC_DEFUN([AC_MC_VFS_UNDELFS],
+AC_DEFUN([mc_VFS_UNDELFS],
 [
     AC_ARG_ENABLE([vfs-undelfs],
 	AS_HELP_STRING([--enable-vfs-undelfs], [Support for ext2 undelete filesystem @<:@no@:>@]),
@@ -59,11 +59,11 @@ AC_DEFUN([AC_MC_VFS_UNDELFS],
 	[enable_vfs_undelfs="no"])
 
     if test x"$enable_vfs" = x"yes" -a x"$enable_vfs_undelfs" != x"no"; then
-	MC_UNDELFS_CHECKS
+	mc_UNDELFS_CHECKS
 
 	if test x"$ext2fs_undel" = x"yes"; then
 	    enable_vfs_undelfs="yes"
-	    AC_MC_VFS_ADDNAME([undelfs])
+	    mc_VFS_ADDNAME([undelfs])
 	    AC_DEFINE(ENABLE_VFS_UNDELFS, [1], [Support for ext2 undelfs])
 	    AC_MSG_NOTICE([using ext2fs file recovery code])
 	    MCLIBS="$MCLIBS $EXT2FS_UNDEL_LIBS"

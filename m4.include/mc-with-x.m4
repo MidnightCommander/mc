@@ -1,7 +1,7 @@
 
 dnl X11 support.
 dnl Used to read keyboard modifiers when running under X11.
-AC_DEFUN([MC_WITH_X], [
+AC_DEFUN([mc_WITH_X], [
 
     AC_PATH_XTRA
 

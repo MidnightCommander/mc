@@ -1,7 +1,7 @@
 dnl
 dnl Try using termcap database and link with libtermcap if possible.
 dnl
-AC_DEFUN([MC_USE_TERMCAP], [
+AC_DEFUN([mc_USE_TERMCAP], [
 	screen_msg="$screen_msg with termcap database"
 	AC_MSG_NOTICE([using S-Lang screen library with termcap])
 	AC_DEFINE(USE_TERMCAP, 1, [Define to use termcap database])
@@ -11,7 +11,7 @@ AC_DEFUN([MC_USE_TERMCAP], [
 dnl
 dnl Check if the installed S-Lang library uses termcap
 dnl
-AC_DEFUN([MC_SLANG_TERMCAP], [
+AC_DEFUN([mc_SLANG_TERMCAP], [
     unset ac_cv_lib_termcap_tgoto
 
     AC_CACHE_CHECK([if S-Lang uses termcap], [mc_cv_slang_termcap], [
@@ -31,6 +31,6 @@ AC_DEFUN([MC_SLANG_TERMCAP], [
     ])
 
     if test x"$mc_cv_slang_termcap" = xyes; then
-	MC_USE_TERMCAP
+	mc_USE_TERMCAP
     fi
 ])

@@ -3,7 +3,7 @@ dnl Check whether the g_module_* family of functions works
 dnl on this system.  We need to know that at the compile time to
 dnl decide whether to link with X11.
 dnl
-AC_DEFUN([AC_G_MODULE_SUPPORTED], [
+AC_DEFUN([mc_G_MODULE_SUPPORTED], [
 
     g_module_supported=""
 
@@ -67,7 +67,7 @@ AC_DEFUN([AC_G_MODULE_SUPPORTED], [
 
 ])
 
-AC_DEFUN([AC_CHECK_GLIB], [
+AC_DEFUN([mc_CHECK_GLIB], [
     dnl
     dnl First try glib 2.x.
     dnl Keep this check close to the beginning, so that the users

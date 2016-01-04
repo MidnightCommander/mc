@@ -1,4 +1,4 @@
-dnl @synopsis MC_UNIT_TESTS
+dnl @synopsis mc_UNIT_TESTS
 dnl
 dnl Check if unit tests enabled
 dnl
@@ -7,7 +7,7 @@ dnl @version 2011-02-10
 dnl @license GPL
 dnl @copyright Free Software Foundation, Inc.
 
-AC_DEFUN([MC_UNIT_TESTS],[
+AC_DEFUN([mc_UNIT_TESTS],[
 
     AC_ARG_ENABLE(
         [tests],

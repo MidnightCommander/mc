@@ -1,6 +1,6 @@
 
 dnl Check the header
-AC_DEFUN([MC_CHECK_SLANG_HEADER], [
+AC_DEFUN([mc_CHECK_SLANG_HEADER], [
     AC_MSG_CHECKING([for slang/slang.h])
     AC_PREPROC_IFELSE(
         [
@@ -21,7 +21,7 @@ dnl
 dnl Check if the system S-Lang library can be used.
 dnl If not, and $1 is "strict", exit.
 dnl
-AC_DEFUN([MC_CHECK_SLANG_BY_PATH], [
+AC_DEFUN([mc_CHECK_SLANG_BY_PATH], [
 
     param_slang_inc_path=[$1]
     param_slang_lib_path=[$2]
@@ -60,7 +60,7 @@ AC_DEFUN([MC_CHECK_SLANG_BY_PATH], [
 	[
 	    AC_MSG_RESULT(no)
 
-	    MC_CHECK_SLANG_HEADER
+	    mc_CHECK_SLANG_HEADER
 	    if test x"$found_slang" = xno; then
 		error_msg_slang="S-Lang header not found"
 	    else
@@ -117,7 +117,7 @@ int main (void)
     dnl Check if termcap is needed.
     dnl This check must be done before anything is linked against S-Lang.
     if test x"$found_slang" = x"yes"; then
-        MC_SLANG_TERMCAP
+        mc_SLANG_TERMCAP
         if test x"$mc_cv_slang_termcap"  = x"yes"; then
 	    saved_CPPFLAGS="$saved_CPPFLAGS "
 	    saved_LDFLAGS="-ltermcap $saved_LDFLAGS"
@@ -154,7 +154,7 @@ int main (void)
 dnl
 dnl Use the slang library.
 dnl
-AC_DEFUN([MC_WITH_SLANG], [
+AC_DEFUN([mc_WITH_SLANG], [
     with_screen=slang
     found_slang=yes
     error_msg_slang=""
@@ -176,7 +176,7 @@ AC_DEFUN([MC_WITH_SLANG], [
     )
     if test x"$ac_slang_lib_path" != x -o x"$ac_slang_inc_path" != x; then
         echo 'checking S-Lang headers in specified place ...'
-        MC_CHECK_SLANG_BY_PATH([$ac_slang_inc_path],[$ac_slang_lib_path])
+        mc_CHECK_SLANG_BY_PATH([$ac_slang_inc_path],[$ac_slang_lib_path])
     else
         found_slang=no
         PKG_CHECK_MODULES(SLANG, [slang >= 2.0], [found_slang=yes], [:])
@@ -192,14 +192,14 @@ AC_DEFUN([MC_WITH_SLANG], [
         ac_slang_lib_path="/usr/lib"
 
         echo 'checking S-Lang headers in /usr ...'
-        MC_CHECK_SLANG_BY_PATH([$ac_slang_inc_path],[$ac_slang_lib_path])
+        mc_CHECK_SLANG_BY_PATH([$ac_slang_inc_path],[$ac_slang_lib_path])
         if test x"$found_slang" = "xno"; then
             found_slang=yes
             ac_slang_inc_path="/usr/local/include"
             ac_slang_lib_path="/usr/local/lib"
 
             echo 'checking S-Lang headers in /usr/local ...'
-            MC_CHECK_SLANG_BY_PATH( $ac_slang_inc_path , $ac_slang_lib_path )
+            mc_CHECK_SLANG_BY_PATH( $ac_slang_inc_path , $ac_slang_lib_path )
             if test x"$found_slang" = "xno"; then
                 AC_MSG_ERROR([$error_msg_slang])
             fi
@@ -208,5 +208,5 @@ AC_DEFUN([MC_WITH_SLANG], [
 
     AC_DEFINE(HAVE_SLANG, 1, [Define to use S-Lang library for screen management])
 
-    MC_CHECK_SLANG_HEADER
+    mc_CHECK_SLANG_HEADER
 ])
