@@ -69,8 +69,8 @@
 
 /*** file scope variables ************************************************************************/
 
-static int debug_flag = 0;
-static int debug_error = 0;
+static gboolean debug_flag = FALSE;
+static gboolean debug_error = FALSE;
 static char *menu = NULL;
 
 /*** file scope functions ************************************************************************/
@@ -160,7 +160,7 @@ extract_arg (char *p, char *arg, int size)
 /* Tests whether the selected file in the panel is of any of the types
    specified in argument. */
 
-static int
+static gboolean
 test_type (WPanel * panel, char *arg)
 {
     int result = 0;             /* False by default */
@@ -201,11 +201,12 @@ test_type (WPanel * panel, char *arg)
             result |= panel->marked != 0 ? 1 : 0;
             break;
         default:
-            debug_error = 1;
+            debug_error = TRUE;
             break;
         }
     }
-    return result;
+
+    return (result != 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -213,7 +214,7 @@ test_type (WPanel * panel, char *arg)
    p. Returns the point after condition. */
 
 static char *
-test_condition (WEdit * edit_widget, char *p, int *condition)
+test_condition (WEdit * edit_widget, char *p, gboolean * condition)
 {
     char arg[256];
     const mc_search_type_t search_type = easy_patterns ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
@@ -248,14 +249,14 @@ test_condition (WEdit * edit_widget, char *p, int *condition)
                 char *edit_filename;
 
                 edit_filename = edit_get_file_name (edit_widget);
-                *condition = mc_search (arg, DEFAULT_CHARSET, edit_filename, search_type) ? 1 : 0;
+                *condition = mc_search (arg, DEFAULT_CHARSET, edit_filename, search_type);
                 g_free (edit_filename);
             }
             else
 #endif
                 *condition = panel != NULL &&
                     mc_search (arg, DEFAULT_CHARSET, panel->dir.list[panel->selected].fname,
-                               search_type) ? 1 : 0;
+                               search_type);
             break;
         case 'y':              /* syntax pattern */
 #ifdef USE_INTERNAL_EDIT
@@ -267,8 +268,7 @@ test_condition (WEdit * edit_widget, char *p, int *condition)
                 if (syntax_type != NULL)
                 {
                     p = extract_arg (p, arg, sizeof (arg));
-                    *condition =
-                        mc_search (arg, DEFAULT_CHARSET, syntax_type, MC_SEARCH_T_NORMAL) ? 1 : 0;
+                    *condition = mc_search (arg, DEFAULT_CHARSET, syntax_type, MC_SEARCH_T_NORMAL);
                 }
             }
 #endif
@@ -277,25 +277,22 @@ test_condition (WEdit * edit_widget, char *p, int *condition)
             p = extract_arg (p, arg, sizeof (arg));
             *condition = panel != NULL
                 && mc_search (arg, DEFAULT_CHARSET, vfs_path_as_str (panel->cwd_vpath),
-                              search_type) ? 1 : 0;
+                              search_type);
             break;
         case 't':
             p = extract_arg (p, arg, sizeof (arg));
-            *condition = panel != NULL && test_type (panel, arg) != 0 ? 1 : 0;
+            *condition = panel != NULL && test_type (panel, arg);
             break;
         case 'x':              /* executable */
             {
                 struct stat status;
 
                 p = extract_arg (p, arg, sizeof (arg));
-                if (stat (arg, &status) == 0)
-                    *condition = is_exe (status.st_mode) ? 1 : 0;
-                else
-                    *condition = 0;
+                *condition = stat (arg, &status) == 0 && is_exe (status.st_mode);
                 break;
             }
         default:
-            debug_error = 1;
+            debug_error = TRUE;
             break;
         }                       /* switch */
     }                           /* while */
@@ -306,7 +303,7 @@ test_condition (WEdit * edit_widget, char *p, int *condition)
 /** General purpose condition debug output handler */
 
 static void
-debug_out (char *start, char *end, int cond)
+debug_out (char *start, char *end, gboolean condition)
 {
     static char *msg = NULL;
 
@@ -323,7 +320,7 @@ debug_out (char *start, char *end, int cond)
             message (D_NORMAL, _("Debug"), "%s", msg);
 
         }
-        debug_flag = 0;
+        debug_flag = FALSE;
         MC_PTR_FREE (msg);
     }
     else
@@ -338,9 +335,9 @@ debug_out (char *start, char *end, int cond)
         if (debug_error)
         {
             type = _("ERROR:");
-            debug_error = 0;
+            debug_error = FALSE;
         }
-        else if (cond)
+        else if (condition)
             type = _("True:");
         else
             type = _("False:");
@@ -359,15 +356,15 @@ debug_out (char *start, char *end, int cond)
    the point just before the end of line. */
 
 static char *
-test_line (WEdit * edit_widget, char *p, int *result)
+test_line (WEdit * edit_widget, char *p, gboolean * result)
 {
-    int condition;
     char operator;
 
     /* Repeat till end of line */
     while (*p != '\0' && *p != '\n')
     {
         char *debug_start, *debug_end;
+        gboolean condition = TRUE;
 
         /* support quote space .mnu */
         while ((*p == ' ' && *(p - 1) != '\\') || *p == '\t')
@@ -377,7 +374,7 @@ test_line (WEdit * edit_widget, char *p, int *result)
         operator = *p++;
         if (*p == '?')
         {
-            debug_flag = 1;
+            debug_flag = TRUE;
             p++;
         }
         /* support quote space .mnu */
@@ -385,7 +382,6 @@ test_line (WEdit * edit_widget, char *p, int *result)
             p++;
         if (*p == '\0' || *p == '\n')
             break;
-        condition = 1;          /* True by default */
 
         debug_start = p;
         p = test_condition (edit_widget, p, &condition);
@@ -401,13 +397,13 @@ test_line (WEdit * edit_widget, char *p, int *result)
             *result = condition;
             break;
         case '&':              /* Logical and */
-            *result &= condition;
+            *result = *result && condition;
             break;
         case '|':              /* Logical or */
-            *result |= condition;
+            *result = *result || condition;
             break;
         default:
-            debug_error = 1;
+            debug_error = TRUE;
             break;
         }                       /* switch */
         /* Add one debug statement */
@@ -415,7 +411,7 @@ test_line (WEdit * edit_widget, char *p, int *result)
 
     }                           /* while (*p != '\n') */
     /* Report debug message */
-    debug_out (NULL, NULL, 1);
+    debug_out (NULL, NULL, TRUE);
 
     if (*p == '\0' || *p == '\n')
         str_prev_char (&p);
@@ -430,13 +426,13 @@ execute_menu_command (WEdit * edit_widget, const char *commands, gboolean show_p
 {
     FILE *cmd_file;
     int cmd_file_fd;
-    int expand_prefix_found = 0;
+    gboolean expand_prefix_found = FALSE;
     char *parameter = NULL;
     gboolean do_quote = FALSE;
     char lc_prompt[80];
     int col;
     vfs_path_t *file_name_vpath;
-    int run_view = 0;
+    gboolean run_view = FALSE;
 
     /* Skip menu entry title line */
     commands = strchr (commands, '\n');
@@ -504,9 +500,9 @@ execute_menu_command (WEdit * edit_widget, const char *commands, gboolean show_p
             else if (parameter < lc_prompt + sizeof (lc_prompt) - 1)
                 *parameter++ = *commands;
         }
-        else if (expand_prefix_found != 0)
+        else if (expand_prefix_found)
         {
-            expand_prefix_found = 0;
+            expand_prefix_found = FALSE;
             if (g_ascii_isdigit ((gchar) * commands))
             {
                 do_quote = (atoi (commands) != 0);
@@ -534,12 +530,12 @@ execute_menu_command (WEdit * edit_widget, const char *commands, gboolean show_p
                 if (i != 0)
                 {
                     commands += i;
-                    run_view = 1;
+                    run_view = TRUE;
                 }
                 else
                 {
                     do_quote = TRUE;    /* Default: Quote expanded macro */
-                    expand_prefix_found = 1;
+                    expand_prefix_found = TRUE;
                 }
             }
             else
@@ -584,21 +580,21 @@ execute_menu_command (WEdit * edit_widget, const char *commands, gboolean show_p
  **     Q. Should we apply this routine to system and home menu (and .ext files)?
  */
 
-static int
+static gboolean
 menu_file_own (char *path)
 {
     struct stat st;
 
     if (stat (path, &st) == 0 && (st.st_uid == 0 || (st.st_uid == geteuid ()) != 0)
         && ((st.st_mode & (S_IWGRP | S_IWOTH)) == 0))
-        return 1;
+        return TRUE;
 
     if (verbose)
         message (D_NORMAL, _("Warning -- ignoring file"),
                  _("File %s is not owned by root or you or is world writable.\n"
                    "Using it may compromise your security"), path);
 
-    return 0;
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -925,7 +921,8 @@ user_menu_cmd (struct WEdit * edit_widget, const char *menu_file, int selected_e
     char *p;
     char *data, **entries;
     int max_cols, menu_lines, menu_limit;
-    int col, i, accept_entry = 1;
+    int col, i;
+    gboolean accept_entry = TRUE;
     int selected, old_patterns;
     gboolean res = FALSE;
     gboolean interactive = TRUE;
@@ -1021,7 +1018,7 @@ user_menu_cmd (struct WEdit * edit_widget, const char *menu_file, int selected_e
                 if (selected_entry >= 0 && strncmp (p, "#silent", 7) == 0)
                     interactive = FALSE;
                 /* A commented menu entry */
-                accept_entry = 1;
+                accept_entry = TRUE;
             }
             else if (*p == '+')
             {
@@ -1062,7 +1059,7 @@ user_menu_cmd (struct WEdit * edit_widget, const char *menu_file, int selected_e
                 if (accept_entry)
                     entries[menu_lines] = p;
                 else
-                    accept_entry = 1;
+                    accept_entry = TRUE;
             }
         }
         if (*p == '\n')
@@ -1070,7 +1067,7 @@ user_menu_cmd (struct WEdit * edit_widget, const char *menu_file, int selected_e
             if (entries[menu_lines] != NULL)
             {
                 menu_lines++;
-                accept_entry = 1;
+                accept_entry = TRUE;
             }
             max_cols = max (max_cols, col);
             col = 0;
