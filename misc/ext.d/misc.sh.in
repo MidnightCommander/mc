@@ -59,9 +59,6 @@ do_open_action() {
     filetype=$1
 
     case "${filetype}" in
-    imakefile)
-        xmkmf -a
-        ;;
     dbf)
         dbview "${MC_EXT_FILENAME}"
         ;;
