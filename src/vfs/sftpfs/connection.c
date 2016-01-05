@@ -107,13 +107,15 @@ sftpfs_open_socket (struct vfs_s_super *super, GError ** mcerror)
 
     if (e != 0)
     {
-        mc_propagate_error (mcerror, 0, _("sftp: %s"), gai_strerror (e));
+        mc_propagate_error (mcerror, e, _("sftp: %s"), gai_strerror (e));
         my_socket = -1;
         goto ret;
     }
 
     for (curr_res = res; curr_res != NULL; curr_res = curr_res->ai_next)
     {
+        int save_errno;
+
         my_socket = socket (curr_res->ai_family, curr_res->ai_socktype, curr_res->ai_protocol);
 
         if (my_socket < 0)
@@ -131,13 +133,15 @@ sftpfs_open_socket (struct vfs_s_super *super, GError ** mcerror)
         if (connect (my_socket, curr_res->ai_addr, curr_res->ai_addrlen) >= 0)
             break;
 
+        save_errno = errno;
+
         close (my_socket);
 
-        if (errno == EINTR && tty_got_interrupt ())
+        if (save_errno == EINTR && tty_got_interrupt ())
             mc_propagate_error (mcerror, 0, "%s", _("sftp: connection interrupted by user"));
         else if (res->ai_next == NULL)
-            mc_propagate_error (mcerror, 0, _("sftp: connection to server failed: %s"),
-                                unix_error_string (errno));
+            mc_propagate_error (mcerror, save_errno, _("sftp: connection to server failed: %s"),
+                                unix_error_string (save_errno));
         else
             continue;
 
@@ -387,7 +391,7 @@ sftpfs_open_connection (struct vfs_s_super *super, GError ** mcerror)
     rc = libssh2_session_startup (super_data->session, super_data->socket_handle);
     if (rc != 0)
     {
-        mc_propagate_error (mcerror, 0, _("sftp: Failure establishing SSH session: (%d)"), rc);
+        mc_propagate_error (mcerror, rc, "%s", _("sftp: Failure establishing SSH session"));
         return (-1);
     }
 
