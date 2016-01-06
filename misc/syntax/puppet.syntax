@@ -1,5 +1,6 @@
 # Puppet syntax file for GNU Midnight Commander
-# Author: Sergey Zhuga <sergey.zhuga@gmail.com>
+# Authors: Sergey Zhuga <sergey.zhuga@gmail.com>
+#          Phil Friderici <phil.friderici@i-tee.de>
 
 context default
 
@@ -14,6 +15,14 @@ context default
   keyword <-  yellow
   keyword <~  yellow
   keyword =   yellow
+
+# Exported/Virtual Resources & Collectors
+
+  keyword @   yellow
+  keyword |>  yellow
+  keyword |>> yellow
+  keyword <<| yellow
+  keyword <|  yellow
 
 # Braces
 
@@ -32,6 +41,8 @@ context default
   keyword whole FALSE brightred
   keyword whole nil   brightred
   keyword whole NIL   brightred
+  keyword whole undef brightred
+  keyword whole UNDEF brightred
   keyword whole true  brightred
   keyword whole TRUE  brightred
 
@@ -45,6 +56,7 @@ context default
 
 # Parameters
 
+  keyword whole absent magenta
   keyword whole aclinherit magenta
   keyword whole aclmode magenta
   keyword whole action_url magenta
@@ -133,7 +145,6 @@ context default
   keyword whole en_address magenta
   keyword whole encapsulation magenta
   keyword whole ensure magenta
-  keyword whole environment magenta
   keyword whole escalation_options magenta
   keyword whole escalation_period magenta
   keyword whole etherchannel magenta
@@ -380,6 +391,8 @@ context default
   keyword whole audit brightmagenta
   keyword whole before brightmagenta
   keyword whole check brightmagenta
+  keyword whole consume brightmagenta
+  keyword whole export brightmagenta
   keyword whole loglevel brightmagenta
   keyword whole noop brightmagenta
   keyword whole notify brightmagenta
@@ -443,27 +456,45 @@ context default
 # Functions
 
   keyword whole alert brightred
+  keyword whole assert_type brightred
+  keyword whole contain brightred
   keyword whole create_resources brightred
   keyword whole crit brightred
   keyword whole debug brightred
   keyword whole defined brightred
+  keyword whole digest brightred
+  keyword whole each brightred
   keyword whole emerg brightred
+  keyword whole epp brightred
   keyword whole err brightred
   keyword whole extlookup brightred
   keyword whole fail brightred
   keyword whole file brightred
+  keyword whole filter brightred
   keyword whole fqdn_rand brightred
   keyword whole generate brightred
+  keyword whole hiera brightred
+  keyword whole hiera_array brightred
+  keyword whole hiera_hash brightred
+  keyword whole hiera_include brightred
+  keyword whole include brightred
   keyword whole info brightred
+  keyword whole inline_epp brightred
   keyword whole inline_template brightred
+  keyword whole lookup brightred
+  keyword whole map brightred
+  keyword whole match brightred
   keyword whole md5 brightred
   keyword whole notice brightred
   keyword whole realize brightred
+  keyword whole reduce brightred
   keyword whole regsubst brightred
   keyword whole require brightred
   keyword whole search brightred
+  keyword whole scanf brightred
   keyword whole sha1 brightred
   keyword whole shellquote brightred
+  keyword whole slice brightred
   keyword whole split brightred
   keyword whole sprintf brightred
   keyword whole tag brightred
@@ -471,19 +502,38 @@ context default
   keyword whole template brightred
   keyword whole versioncmp brightred
   keyword whole warning brightred
+  keyword whole with brightred
 
-# Reserved words
+# Conditional Statements and Expressions
 
-  keyword whole absent yellow
+  keyword whole ? yellow
   keyword whole and yellow
   keyword whole case yellow
-  keyword whole class yellow
   keyword whole default yellow
-  keyword whole define yellow
-  keyword whole directory yellow
   keyword whole else yellow
   keyword whole elsif yellow
   keyword whole if yellow
+  keyword whole in yellow
+  keyword whole or yellow
+
+# Reserved words (reserved for future use)
+
+  keyword whole application yellow
+  keyword whole attr yellow
+  keyword whole consumes yellow
+  keyword whole environment yellow
+  keyword whole function yellow
+  keyword whole import yellow
+  keyword whole private yellow
+  keyword whole produces yellow
+  keyword whole type yellow
+
+# Language keywords
+
+  keyword whole absent yellow
+  keyword whole class red
+  keyword whole define yellow
+  keyword whole directory yellow
   keyword whole include yellow
   keyword whole inherits yellow
   keyword whole installed yellow
@@ -491,9 +541,126 @@ context default
   keyword whole link yellow
   keyword whole node yellow
   keyword whole on_failure yellow
-  keyword whole or yellow
   keyword whole present yellow
   keyword whole running yellow
+
+# Stdlib 4.10.0 Types
+
+  keyword whole file_line red
+
+# Stdlib 4.10.0 Functions
+
+  keyword whole abs brightred
+  keyword whole any2array brightred
+  keyword whole base64 brightred
+  keyword whole basename brightred
+  keyword whole bool2num brightred
+  keyword whole bool2str brightred
+  keyword whole capitalize brightred
+  keyword whole ceiling brightred
+  keyword whole chomp brightred
+  keyword whole chop brightred
+  keyword whole clamp brightred
+  keyword whole concat brightred
+  keyword whole convert_base brightred
+  keyword whole count brightred
+  keyword whole defined_with_params brightred
+  keyword whole delete brightred
+  keyword whole delete_at brightred
+  keyword whole delete_values brightred
+  keyword whole delete_undef_values brightred
+  keyword whole difference brightred
+  keyword whole dirname brightred
+  keyword whole dos2unix brightred
+  keyword whole downcase brightred
+  keyword whole empty brightred
+  keyword whole ensure_packages brightred
+  keyword whole ensure_resource brightred
+  keyword whole flatten brightred
+  keyword whole floor brightred
+  keyword whole fqdn_rand_string brightred
+  keyword whole fqdn_rotate brightred
+  keyword whole get_module_path brightred
+  keyword whole getparam brightred
+  keyword whole getvar brightred
+  keyword whole grep brightred
+  keyword whole has_interface_with brightred
+  keyword whole has_ip_address brightred
+  keyword whole has_ip_network brightred
+  keyword whole has_key brightred
+  keyword whole hash brightred
+  keyword whole intersection brightred
+  keyword whole is_a brightred
+  keyword whole is_absolute_path brightred
+  keyword whole is_array brightred
+  keyword whole is_bool brightred
+  keyword whole is_domain_name brightred
+  keyword whole is_float brightred
+  keyword whole is_function_available brightred
+  keyword whole is_hash brightred
+  keyword whole is_integer brightred
+  keyword whole is_ip_address brightred
+  keyword whole is_mac_address brightred
+  keyword whole is_numeric brightred
+  keyword whole is_string brightred
+  keyword whole join brightred
+  keyword whole join_keys_to_values brightred
+  keyword whole keys brightred
+  keyword whole loadyaml brightred
+  keyword whole load_module_metadata brightred
+  keyword whole lstrip brightred
+  keyword whole max brightred
+  keyword whole member brightred
+  keyword whole merge brightred
+  keyword whole min brightred
+  keyword whole num2bool brightred
+  keyword whole parsejson brightred
+  keyword whole parseyaml brightred
+  keyword whole pick brightred
+  keyword whole pick_default brightred
+  keyword whole prefix brightred
+  keyword whole assert_private brightred
+  keyword whole pw_hash brightred
+  keyword whole range brightred
+  keyword whole reject brightred
+  keyword whole reverse brightred
+  keyword whole rstrip brightred
+  keyword whole seeded_rand brightred
+  keyword whole shuffle brightred
+  keyword whole size brightred
+  keyword whole sort brightred
+  keyword whole squeeze brightred
+  keyword whole str2bool brightred
+  keyword whole str2saltedsha512 brightred
+  keyword whole strftime brightred
+  keyword whole strip brightred
+  keyword whole suffix brightred
+  keyword whole swapcase brightred
+  keyword whole time brightred
+  keyword whole to_bytes brightred
+  keyword whole try_get_value brightred
+  keyword whole type3x brightred
+  keyword whole type_of brightred
+  keyword whole union brightred
+  keyword whole unique brightred
+  keyword whole unix2dos brightred
+  keyword whole upcase brightred
+  keyword whole uriescape brightred
+  keyword whole validate_absolute_path brightred
+  keyword whole validate_array brightred
+  keyword whole validate_augeas brightred
+  keyword whole validate_bool brightred
+  keyword whole validate_cmd brightred
+  keyword whole validate_hash brightred
+  keyword whole validate_integer brightred
+  keyword whole validate_ip_address brightred
+  keyword whole validate_numeric brightred
+  keyword whole validate_re brightred
+  keyword whole validate_slength brightred
+  keyword whole validate_string brightred
+  keyword whole values brightred
+  keyword whole values_at brightred
+  keyword whole zip brightred
 
 # Other contexts
 
