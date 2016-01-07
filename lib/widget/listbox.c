@@ -466,8 +466,10 @@ listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 
     case MSG_FOCUS:
     case MSG_UNFOCUS:
+        l->focused = msg == MSG_FOCUS;
+        /* fall through */
     case MSG_DRAW:
-        listbox_draw (l, msg != MSG_UNFOCUS);
+        listbox_draw (l, l->focused);
         return MSG_HANDLED;
 
     case MSG_DESTROY:
@@ -563,6 +565,7 @@ listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn 
     l->callback = callback;
     l->allow_duplicates = TRUE;
     l->scrollbar = !mc_global.tty.slow_terminal;
+    l->focused = FALSE;
     widget_want_hotkey (w, TRUE);
     widget_want_cursor (w, FALSE);
 
