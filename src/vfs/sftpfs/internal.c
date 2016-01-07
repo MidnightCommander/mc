@@ -185,6 +185,10 @@ sftpfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
         if (res >= 0)
             break;
 
+        if (res == LIBSSH2_ERROR_SFTP_PROTOCOL &&
+            libssh2_sftp_last_error (super_data->sftp_session) == LIBSSH2_FX_PERMISSION_DENIED)
+            return -EACCES;
+
         if (res != LIBSSH2_ERROR_EAGAIN)
         {
             sftpfs_ssherror_to_gliberror (super_data, res, mcerror);
@@ -269,6 +273,10 @@ sftpfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
                                   LIBSSH2_SFTP_STAT, &attrs);
         if (res >= 0)
             break;
+
+        if (res == LIBSSH2_ERROR_SFTP_PROTOCOL &&
+            libssh2_sftp_last_error (super_data->sftp_session) == LIBSSH2_FX_PERMISSION_DENIED)
+            return -EACCES;
 
         if (res != LIBSSH2_ERROR_EAGAIN)
         {
@@ -488,6 +496,10 @@ sftpfs_chmod (const vfs_path_t * vpath, mode_t mode, GError ** mcerror)
                                   LIBSSH2_SFTP_LSTAT, &attrs);
         if (res >= 0)
             break;
+
+        if (res == LIBSSH2_ERROR_SFTP_PROTOCOL &&
+            libssh2_sftp_last_error (super_data->sftp_session) == LIBSSH2_FX_PERMISSION_DENIED)
+            return -EACCES;
 
         if (res != LIBSSH2_ERROR_EAGAIN)
         {
