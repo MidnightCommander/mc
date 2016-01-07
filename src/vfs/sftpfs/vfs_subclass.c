@@ -104,6 +104,7 @@ sftpfs_cb_open_connection (struct vfs_s_super *super,
     }
 
     sftpfs_super_data = g_new0 (sftpfs_super_data_t, 1);
+    sftpfs_super_data->socket_handle = -1;
     sftpfs_super_data->original_connection_info = vfs_path_element_clone (vpath_element);
     super->data = sftpfs_super_data;
     super->path_element = vfs_path_element_clone (vpath_element);
