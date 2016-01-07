@@ -65,7 +65,11 @@ sftpfs_ssherror_to_gliberror (sftpfs_super_data_t * super_data, int libssh_errno
     mc_return_if_error (mcerror);
 
     libssh2_session_last_error (super_data->session, &err, &err_len, 1);
-    mc_propagate_error (mcerror, libssh_errno, "%s", err);
+    if (libssh_errno == LIBSSH2_ERROR_SFTP_PROTOCOL && super_data->sftp_session != NULL)
+        mc_propagate_error (mcerror, libssh_errno, "%s %lu", err,
+                            libssh2_sftp_last_error (super_data->sftp_session));
+    else
+        mc_propagate_error (mcerror, libssh_errno, "%s", err);
     g_free (err);
 }
 
