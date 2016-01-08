@@ -341,6 +341,10 @@ sub print_file {
 	if ($platform ne 'unx') {
 		$perms = ($filename =~ /\/$/ ? 'drwxr-xr-x' : '-rw-r--r--');
 	}
+	# adjust abnormal perms on directory
+	if ($platform eq 'unx' && $filename =~ /\/$/ && $perms =~ /^\?(.*)$/) {
+		$perms = 'd'.$1;
+	}
 	printf "%-10s    1 %-8d %-8d %8s %s/%s/%s %s:%s:%s %s", $perms, $<,
 		$(, $realsize, $mon, $day, $year, $hours, $mins, $secs, $filename;
 	if ($platform eq 'unx' && $perms =~ /^l/) {
