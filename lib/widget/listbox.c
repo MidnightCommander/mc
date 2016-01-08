@@ -386,6 +386,39 @@ listbox_append_item (WListbox * l, WLEntry * e, listbox_append_t pos)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* Call this whenever the user changes the selected item. */
+static void
+listbox_on_change (WListbox * l)
+{
+    listbox_draw (l, TRUE);
+    send_message (WIDGET (l)->owner, l, MSG_ACTION, l->pos, NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+listbox_run_hotkey (WListbox * l, int pos)
+{
+    WDialog *h = WIDGET (l)->owner;
+    int action;
+
+    listbox_select_entry (l, pos);
+    listbox_on_change (l);
+
+    if (l->callback != NULL)
+        action = l->callback (l);
+    else
+        action = LISTBOX_DONE;
+
+    if (action == LISTBOX_DONE)
+    {
+        h->ret_value = B_ENTER;
+        dlg_stop (h);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static inline void
 listbox_destroy (WListbox * l)
 {
@@ -398,7 +431,6 @@ static cb_ret_t
 listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WListbox *l = LISTBOX (w);
-    WDialog *h = w->owner;
     cb_ret_t ret_code;
 
     switch (msg)
@@ -408,25 +440,13 @@ listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 
     case MSG_HOTKEY:
         {
-            int pos, action;
+            int pos;
 
             pos = listbox_check_hotkey (l, parm);
             if (pos < 0)
                 return MSG_NOT_HANDLED;
 
-            listbox_select_entry (l, pos);
-            send_message (h, w, MSG_ACTION, l->pos, NULL);
-
-            if (l->callback != NULL)
-                action = l->callback (l);
-            else
-                action = LISTBOX_DONE;
-
-            if (action == LISTBOX_DONE)
-            {
-                h->ret_value = B_ENTER;
-                dlg_stop (h);
-            }
+            listbox_run_hotkey (l, pos);
 
             return MSG_HANDLED;
         }
@@ -434,10 +454,7 @@ listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
     case MSG_KEY:
         ret_code = listbox_key (l, parm);
         if (ret_code != MSG_NOT_HANDLED)
-        {
-            listbox_draw (l, TRUE);
-            send_message (h, w, MSG_ACTION, l->pos, NULL);
-        }
+            listbox_on_change (l);
         return ret_code;
 
     case MSG_ACTION:
@@ -445,13 +462,14 @@ listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 
     case MSG_CURSOR:
         widget_move (l, l->cursor_y, 0);
-        send_message (h, w, MSG_ACTION, l->pos, NULL);
         return MSG_HANDLED;
 
     case MSG_FOCUS:
     case MSG_UNFOCUS:
+        l->focused = msg == MSG_FOCUS;
+        /* fall through */
     case MSG_DRAW:
-        listbox_draw (l, msg != MSG_UNFOCUS);
+        listbox_draw (l, l->focused);
         return MSG_HANDLED;
 
     case MSG_DESTROY:
@@ -507,7 +525,7 @@ listbox_event (Gpm_Event * event, void *data)
         else
             listbox_select_entry (l, listbox_y_pos (l, local.y - 1));
 
-        listbox_draw (l, TRUE);
+        listbox_on_change (l);
         return ret;
     }
 
@@ -515,22 +533,10 @@ listbox_event (Gpm_Event * event, void *data)
     if ((event->type & (GPM_DOUBLE | GPM_UP)) == (GPM_UP | GPM_DOUBLE))
     {
         Gpm_Event local;
-        int action;
 
         local = mouse_get_local (event, w);
         dlg_select_widget (l);
-        listbox_select_entry (l, listbox_y_pos (l, local.y - 1));
-
-        if (l->callback != NULL)
-            action = l->callback (l);
-        else
-            action = LISTBOX_DONE;
-
-        if (action == LISTBOX_DONE)
-        {
-            w->owner->ret_value = B_ENTER;
-            dlg_stop (w->owner);
-        }
+        listbox_run_hotkey (l, listbox_y_pos (l, local.y - 1));
     }
 
     return MOU_NORMAL;
@@ -559,6 +565,7 @@ listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn 
     l->callback = callback;
     l->allow_duplicates = TRUE;
     l->scrollbar = !mc_global.tty.slow_terminal;
+    l->focused = FALSE;
     widget_want_hotkey (w, TRUE);
     widget_want_cursor (w, FALSE);
 

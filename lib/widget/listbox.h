@@ -52,6 +52,7 @@ typedef struct WListbox
     gboolean allow_duplicates;  /* Do we allow duplicates on the list? */
     gboolean scrollbar;         /* Draw a scrollbar? */
     gboolean deletable;         /* Can list entries be deleted? */
+    gboolean focused;           /* Listbox is focused */
     lcback_fn callback;         /* The callback function */
     int cursor_x, cursor_y;     /* Cache the values */
 } WListbox;

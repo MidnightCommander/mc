@@ -335,10 +335,8 @@ add_name_to_list (const char *path)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-hotlist_button_callback (WButton * button, int action)
+hotlist_run_cmd (int action)
 {
-    (void) button;
-
     switch (action)
     {
     case B_MOVE:
@@ -489,6 +487,19 @@ hotlist_button_callback (WButton * button, int action)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static int
+hotlist_button_callback (WButton * button, int action)
+{
+    int ret;
+
+    (void) button;
+    ret = hotlist_run_cmd (action);
+    update_path_name ();
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static inline cb_ret_t
 hotlist_handle_key (WDialog * h, int key)
 {
@@ -565,21 +576,29 @@ hotlist_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 
     switch (msg)
     {
+    case MSG_INIT:
+        update_path_name ();
+        return MSG_HANDLED;
+
     case MSG_UNHANDLED_KEY:
         return hotlist_handle_key (h, parm);
 
     case MSG_POST_KEY:
-        dlg_select_widget (h == hotlist_dlg ? l_hotlist : l_movelist);
         /* always stay on hotlist */
-        /* fall through */
-
-    case MSG_INIT:
-        update_path_name ();
+        dlg_select_widget (h == hotlist_dlg ? l_hotlist : l_movelist);
         return MSG_HANDLED;
 
     case MSG_RESIZE:
         /* simply call dlg_set_size() with new size */
         dlg_set_size (h, LINES - (h == hotlist_dlg ? 2 : 6), COLS - 6);
+        return MSG_HANDLED;
+
+    case MSG_ACTION:
+        if (sender == NULL)
+            return MSG_NOT_HANDLED;
+
+        /* The listbox tells us the item has changed. */
+        update_path_name ();
         return MSG_HANDLED;
 
     default:

@@ -113,9 +113,14 @@ panelize_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
     switch (msg)
     {
     case MSG_INIT:
-    case MSG_POST_KEY:
-    case MSG_FOCUS:
-        tty_setcolor (MENU_ENTRY_COLOR);
+        update_command ();
+        return MSG_HANDLED;
+
+    case MSG_ACTION:
+        if (sender == NULL)
+            return MSG_NOT_HANDLED;
+
+        /* The listbox tells us the item has changed. */
         update_command ();
         return MSG_HANDLED;
 
