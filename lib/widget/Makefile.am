@@ -22,4 +22,4 @@ libmcwidget_la_SOURCES = \
 	widget-common.c widget-common.h \
 	wtools.c wtools.h
 
-AM_CPPFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS) $(PCRE_CPPFLAGS)
+AM_CPPFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS)
