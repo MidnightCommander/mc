@@ -303,8 +303,9 @@ tar_open_archive_int (struct vfs_class *me, const vfs_path_t * vpath, struct vfs
 
     /* Find out the method to handle this tar file */
     type = get_compression_type (result, archive->name);
-    mc_lseek (result, 0, SEEK_SET);
-    if (type != COMPRESSION_NONE)
+    if (type == COMPRESSION_NONE)
+        mc_lseek (result, 0, SEEK_SET);
+    else
     {
         char *s;
         vfs_path_t *tmp_vpath;
