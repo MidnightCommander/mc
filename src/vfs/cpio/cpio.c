@@ -234,7 +234,9 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const vfs_
     arch->deferred = NULL;
 
     type = get_compression_type (fd, super->name);
-    if (type != COMPRESSION_NONE)
+    if (type == COMPRESSION_NONE)
+        mc_lseek (fd, 0, SEEK_SET);
+    else
     {
         char *s;
         vfs_path_t *tmp_vpath;
