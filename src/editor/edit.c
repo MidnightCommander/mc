@@ -130,6 +130,7 @@ static const struct edit_filters
     /* *INDENT-OFF* */
     { "xz -cd %s 2>&1", "xz > %s", ".xz"},
     { "lz4 -cd %s 2>&1", "lz4 > %s", ".lz4" },
+    { "lzip -cd %s 2>&1", "lzip > %s", ".lz"},
     { "lzma -cd %s 2>&1", "lzma > %s", ".lzma" },
     { "bzip2 -cd %s 2>&1", "bzip2 > %s", ".bz2" },
     { "gzip -cd %s 2>&1", "gzip > %s", ".gz" },
