@@ -210,6 +210,7 @@ sftpfs_fill_config_entity_from_config (FILE * ssh_config_handler,
     gboolean host_block_hit = FALSE;
     gboolean pattern_block_hit = FALSE;
     mc_search_t *host_regexp;
+    gboolean ok = TRUE;
 
     mc_return_val_if_error (mcerror, FALSE);
 
@@ -217,21 +218,28 @@ sftpfs_fill_config_entity_from_config (FILE * ssh_config_handler,
     host_regexp->search_type = MC_SEARCH_T_REGEX;
     host_regexp->is_case_sensitive = FALSE;
 
-    while (!feof (ssh_config_handler))
+    while (TRUE)
     {
         char *cr;
+
         if (fgets (buffer, sizeof (buffer), ssh_config_handler) == NULL)
         {
-            if (errno != 0)
+            int e;
+
+            e = errno;
+
+            if (!feof (ssh_config_handler))
             {
-                mc_propagate_error (mcerror, errno,
+                mc_propagate_error (mcerror, e,
                                     _("sftp: an error occurred while reading %s: %s"),
-                                    SFTPFS_SSH_CONFIG, strerror (errno));
-                mc_search_free (host_regexp);
-                return FALSE;
+                                    SFTPFS_SSH_CONFIG, strerror (e));
+                ok = FALSE;
+                goto done;
             }
+
             break;
         }
+
         cr = strrchr (buffer, '\n');
         if (cr != NULL)
             *cr = '\0';
@@ -243,7 +251,7 @@ sftpfs_fill_config_entity_from_config (FILE * ssh_config_handler,
 
             /* if previous host block exactly describe our connection */
             if (host_block_hit)
-                return TRUE;
+                goto done;
 
             host_pattern_offset = mc_search_getstart_result_by_num (host_regexp, 1);
             host_pattern = &buffer[host_pattern_offset];
@@ -271,8 +279,10 @@ sftpfs_fill_config_entity_from_config (FILE * ssh_config_handler,
             sftpfs_fill_config_entity_from_string (config_entity, buffer);
         }
     }
+
+  done:
     mc_search_free (host_regexp);
-    return TRUE;
+    return ok;
 }
 
 /* --------------------------------------------------------------------------------------------- */
