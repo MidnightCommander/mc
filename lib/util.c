@@ -583,7 +583,8 @@ extension (const char *filename)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-load_mc_home_file (const char *from, const char *filename, char **allocated_filename)
+load_mc_home_file (const char *from, const char *filename, char **allocated_filename,
+                   size_t * length)
 {
     char *hintfile_base, *hintfile;
     char *lang;
@@ -593,18 +594,18 @@ load_mc_home_file (const char *from, const char *filename, char **allocated_file
     lang = guess_message_value ();
 
     hintfile = g_strconcat (hintfile_base, ".", lang, (char *) NULL);
-    if (!g_file_get_contents (hintfile, &data, NULL, NULL))
+    if (!g_file_get_contents (hintfile, &data, length, NULL))
     {
         /* Fall back to the two-letter language code */
         if (lang[0] != '\0' && lang[1] != '\0')
             lang[2] = '\0';
         g_free (hintfile);
         hintfile = g_strconcat (hintfile_base, ".", lang, (char *) NULL);
-        if (!g_file_get_contents (hintfile, &data, NULL, NULL))
+        if (!g_file_get_contents (hintfile, &data, length, NULL))
         {
             g_free (hintfile);
             hintfile = hintfile_base;
-            g_file_get_contents (hintfile_base, &data, NULL, NULL);
+            g_file_get_contents (hintfile_base, &data, length, NULL);
         }
     }
 

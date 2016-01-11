@@ -1337,7 +1337,7 @@ char *
 get_random_hint (int force)
 {
     char *data, *result = NULL, *eop;
-    int len;
+    size_t len;
     int start;
     static int last_sec;
     static struct timeval tv;
@@ -1349,13 +1349,12 @@ get_random_hint (int force)
         return g_strdup ("");
     last_sec = tv.tv_sec;
 
-    data = load_mc_home_file (mc_global.share_data_dir, MC_HINT, NULL);
+    data = load_mc_home_file (mc_global.share_data_dir, MC_HINT, NULL, &len);
     if (data == NULL)
         return NULL;
 
     /* get a random entry */
     srand (tv.tv_sec);
-    len = strlen (data);
     start = rand () % (len - 1);
 
     /* Search the start of paragraph */
