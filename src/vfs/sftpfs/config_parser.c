@@ -79,17 +79,18 @@ static struct
     size_t offset;
 } config_variables[] =
 {
-    {"^\\s*User\\s+(.*)$", NULL, STRING, 0},
-    {"^\\s*HostName\\s+(.*)$", NULL, STRING, 0},
-    {"^\\s*IdentitiesOnly\\s+(.*)$", NULL, BOOLEAN, 0},
-    {"^\\s*IdentityFile\\s+(.*)$", NULL, FILENAME, 0},
-    {"^\\s*Port\\s+(.*)$", NULL, INTEGER, 0},
-    {"^\\s*PasswordAuthentication\\s+(.*)$", NULL, BOOLEAN, 0},
-    {"^\\s*PubkeyAuthentication\\s+(.*)$", NULL, STRING, 0},
+    {"^\\s*User\\s+(.*)$", NULL, STRING, offsetof (sftpfs_ssh_config_entity_t, user)},
+    {"^\\s*HostName\\s+(.*)$", NULL, STRING, offsetof (sftpfs_ssh_config_entity_t, real_host)},
+    {"^\\s*IdentitiesOnly\\s+(.*)$", NULL, BOOLEAN, offsetof (sftpfs_ssh_config_entity_t, identities_only)},
+    {"^\\s*IdentityFile\\s+(.*)$", NULL, FILENAME, offsetof (sftpfs_ssh_config_entity_t, identity_file)},
+    {"^\\s*Port\\s+(.*)$", NULL, INTEGER, offsetof (sftpfs_ssh_config_entity_t, port)},
+    {"^\\s*PasswordAuthentication\\s+(.*)$", NULL, BOOLEAN, offsetof (sftpfs_ssh_config_entity_t, password_auth)},
+    {"^\\s*PubkeyAuthentication\\s+(.*)$", NULL, STRING, offsetof (sftpfs_ssh_config_entity_t, pubkey_auth)},
     {NULL, NULL, 0, 0}
 };
 /* *INDENT-ON* */
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -131,9 +132,8 @@ sftpfs_correct_file_name (const char *filename)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* FIXME: is pointer arith correct here? */
 #define POINTER_TO_STRUCTURE_MEMBER(type)  \
-    ((type) (config_entity + (off_t) config_variables[i].offset))
+    ((type) ((char *) config_entity + (size_t) config_variables[i].offset))
 
 /**
  * Parse string and filling one config entity by parsed data.
@@ -399,16 +399,6 @@ sftpfs_fill_connection_data_from_config (struct vfs_s_super *super, GError ** mc
 void
 sftpfs_init_config_variables_patterns (void)
 {
-    size_t structure_offsets[] = {
-        offsetof (sftpfs_ssh_config_entity_t, user),
-        offsetof (sftpfs_ssh_config_entity_t, real_host),
-        offsetof (sftpfs_ssh_config_entity_t, identities_only),
-        offsetof (sftpfs_ssh_config_entity_t, identity_file),
-        offsetof (sftpfs_ssh_config_entity_t, port),
-        offsetof (sftpfs_ssh_config_entity_t, password_auth),
-        offsetof (sftpfs_ssh_config_entity_t, pubkey_auth)
-    };
-
     int i;
 
     for (i = 0; config_variables[i].pattern != NULL; i++)
@@ -417,7 +407,6 @@ sftpfs_init_config_variables_patterns (void)
             mc_search_new (config_variables[i].pattern, DEFAULT_CHARSET);
         config_variables[i].pattern_regexp->search_type = MC_SEARCH_T_REGEX;
         config_variables[i].pattern_regexp->is_case_sensitive = FALSE;
-        config_variables[i].offset = structure_offsets[i];
     }
 }
 
