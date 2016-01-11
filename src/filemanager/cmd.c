@@ -1246,61 +1246,62 @@ link_cmd (link_type_t link_type)
 void
 edit_symlink_cmd (void)
 {
-    if (S_ISLNK (selection (current_panel)->st.st_mode))
+    const file_entry_t *fe;
+    const char *p;
+
+    fe = selection (current_panel);
+    p = fe->fname;
+
+    if (!S_ISLNK (fe->st.st_mode))
+        message (D_ERROR, MSG_ERROR, _("'%s' is not a symbolic link"), p);
+    else
     {
         char buffer[MC_MAXPATHLEN];
-        char *p = NULL;
         int i;
-        char *q;
-        vfs_path_t *p_vpath;
 
-        p = selection (current_panel)->fname;
-        p_vpath = vfs_path_from_str (p);
-
-        q = g_strdup_printf (_("Symlink '%s\' points to:"), str_trunc (p, 32));
-
-        i = readlink (p, buffer, MC_MAXPATHLEN - 1);
+        i = readlink (p, buffer, sizeof (buffer) - 1);
         if (i > 0)
         {
-            char *dest;
+            char *q, *dest;
 
-            buffer[i] = 0;
+            buffer[i] = '\0';
+
+            q = g_strdup_printf (_("Symlink '%s\' points to:"), str_trunc (p, 32));
             dest =
                 input_expand_dialog (_("Edit symlink"), q, MC_HISTORY_FM_EDIT_LINK, buffer,
                                      INPUT_COMPLETE_FILENAMES);
-            if (dest)
-            {
-                if (*dest && strcmp (buffer, dest))
-                {
-                    save_cwds_stat ();
-                    if (mc_unlink (p_vpath) == -1)
-                    {
-                        message (D_ERROR, MSG_ERROR, _("edit symlink, unable to remove %s: %s"),
-                                 p, unix_error_string (errno));
-                    }
-                    else
-                    {
-                        vfs_path_t *dest_vpath;
+            g_free (q);
 
-                        dest_vpath = vfs_path_from_str_flags (dest, VPF_NO_CANON);
-                        if (mc_symlink (dest_vpath, p_vpath) == -1)
-                            message (D_ERROR, MSG_ERROR, _("edit symlink: %s"),
-                                     unix_error_string (errno));
-                        vfs_path_free (dest_vpath);
-                    }
-                    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-                    repaint_screen ();
+            if (dest != NULL && *dest != '\0' && strcmp (buffer, dest) != 0)
+            {
+                vfs_path_t *p_vpath;
+
+                p_vpath = vfs_path_from_str (p);
+
+                save_cwds_stat ();
+
+                if (mc_unlink (p_vpath) == -1)
+                    message (D_ERROR, MSG_ERROR, _("edit symlink, unable to remove %s: %s"), p,
+                             unix_error_string (errno));
+                else
+                {
+                    vfs_path_t *dest_vpath;
+
+                    dest_vpath = vfs_path_from_str_flags (dest, VPF_NO_CANON);
+                    if (mc_symlink (dest_vpath, p_vpath) == -1)
+                        message (D_ERROR, MSG_ERROR, _("edit symlink: %s"),
+                                 unix_error_string (errno));
+                    vfs_path_free (dest_vpath);
                 }
-                g_free (dest);
+
+                vfs_path_free (p_vpath);
+
+                update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+                repaint_screen ();
             }
+
+            g_free (dest);
         }
-        g_free (q);
-        vfs_path_free (p_vpath);
-    }
-    else
-    {
-        message (D_ERROR, MSG_ERROR, _("'%s' is not a symbolic link"),
-                 selection (current_panel)->fname);
     }
 }
 
