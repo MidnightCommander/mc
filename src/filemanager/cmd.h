@@ -83,7 +83,7 @@ void swap_cmd (void);
 void view_other_cmd (void);
 void quick_cd_cmd (void);
 void save_setup_cmd (void);
-char *get_random_hint (int force);
+char *get_random_hint (gboolean force);
 void user_file_menu_cmd (void);
 void info_cmd (void);
 void listing_cmd (void);

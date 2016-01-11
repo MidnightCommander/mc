@@ -1334,11 +1334,10 @@ user_file_menu_cmd (void)
  */
 
 char *
-get_random_hint (int force)
+get_random_hint (gboolean force)
 {
     char *data, *result = NULL, *eop;
-    size_t len;
-    int start;
+    size_t len, start;
     static int last_sec;
     static struct timeval tv;
     GIConv conv;
@@ -1355,7 +1354,7 @@ get_random_hint (int force)
 
     /* get a random entry */
     srand (tv.tv_sec);
-    start = rand () % (len - 1);
+    start = ((size_t) rand ()) % (len - 1);
 
     /* Search the start of paragraph */
     for (; start != 0; start--)
@@ -1384,7 +1383,7 @@ get_random_hint (int force)
     {
         GString *buffer;
 
-        buffer = g_string_new ("");
+        buffer = g_string_sized_new (len - start);
         if (str_convert (conv, &data[start], buffer) != ESTR_FAILURE)
             result = g_string_free (buffer, FALSE);
         else
@@ -1392,7 +1391,7 @@ get_random_hint (int force)
         str_close_conv (conv);
     }
     else
-        result = g_strdup (&data[start]);
+        result = g_strndup (data + start, len - start);
 
     g_free (data);
     return result;
