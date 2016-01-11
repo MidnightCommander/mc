@@ -31,7 +31,7 @@
 #include "lib/strutil.h"
 #include "lib/util.h"
 
-#include "src/filemanager/cmd.h"
+#include "src/filemanager/midnight.h"
 
 
 /* --------------------------------------------------------------------------------------------- */
@@ -178,7 +178,7 @@ main (void)
 
     suite_add_tcase (s, tc_core);
     sr = srunner_create (s);
-    srunner_set_log (sr, "cmd__get_random_hint.log");
+    srunner_set_log (sr, "get_random_hint.log");
     srunner_run_all (sr, CK_ENV);
     number_failed = srunner_ntests_failed (sr);
     srunner_free (sr);

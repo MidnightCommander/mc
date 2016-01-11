@@ -48,7 +48,6 @@
 #include <stdlib.h>
 #include <pwd.h>
 #include <grp.h>
-#include <sys/time.h>
 
 #include "lib/global.h"
 
@@ -1326,75 +1325,6 @@ void
 user_file_menu_cmd (void)
 {
     (void) user_menu_cmd (NULL, NULL, -1);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Return a random hint.  If force is not 0, ignore the timeout.
- */
-
-char *
-get_random_hint (gboolean force)
-{
-    char *data, *result = NULL, *eop;
-    size_t len, start;
-    static int last_sec;
-    static struct timeval tv;
-    GIConv conv;
-
-    /* Do not change hints more often than one minute */
-    gettimeofday (&tv, NULL);
-    if (!force && !(tv.tv_sec > last_sec + 60))
-        return g_strdup ("");
-    last_sec = tv.tv_sec;
-
-    data = load_mc_home_file (mc_global.share_data_dir, MC_HINT, NULL, &len);
-    if (data == NULL)
-        return NULL;
-
-    /* get a random entry */
-    srand (tv.tv_sec);
-    start = ((size_t) rand ()) % (len - 1);
-
-    /* Search the start of paragraph */
-    for (; start != 0; start--)
-        if (data[start] == '\n' && data[start + 1] == '\n')
-        {
-            start += 2;
-            break;
-        }
-
-    /* Search the end of paragraph */
-    for (eop = data + start; *eop != '\0'; eop++)
-    {
-        if (*eop == '\n' && *(eop + 1) == '\n')
-        {
-            *eop = '\0';
-            break;
-        }
-        if (*eop == '\n')
-            *eop = ' ';
-    }
-
-    /* hint files are stored in utf-8 */
-    /* try convert hint file from utf-8 to terminal encoding */
-    conv = str_crt_conv_from ("UTF-8");
-    if (conv != INVALID_CONV)
-    {
-        GString *buffer;
-
-        buffer = g_string_sized_new (len - start);
-        if (str_convert (conv, &data[start], buffer) != ESTR_FAILURE)
-            result = g_string_free (buffer, FALSE);
-        else
-            g_string_free (buffer, TRUE);
-        str_close_conv (conv);
-    }
-    else
-        result = g_strndup (data + start, len - start);
-
-    g_free (data);
-    return result;
 }
 
 /* --------------------------------------------------------------------------------------------- */

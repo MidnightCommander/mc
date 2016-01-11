@@ -23,11 +23,11 @@ endif
 EXTRA_DIST = hints/mc.hint
 
 TESTS = \
-	cmd__get_random_hint \
 	do_cd_command \
 	examine_cd \
 	exec_get_export_variables_ext \
-	filegui_is_wildcarded
+	filegui_is_wildcarded \
+	get_random_hint
 
 check_PROGRAMS = $(TESTS)
 
@@ -40,8 +40,8 @@ examine_cd_SOURCES = \
 exec_get_export_variables_ext_SOURCES = \
 	exec_get_export_variables_ext.c
 
-cmd__get_random_hint_SOURCES = \
-	cmd__get_random_hint.c
+get_random_hint_SOURCES = \
+	get_random_hint.c
 
 filegui_is_wildcarded_SOURCES = \
 	filegui_is_wildcarded.c
