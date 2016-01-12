@@ -39,7 +39,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/time.h>           /* gettimeofday() */
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
@@ -1664,24 +1663,23 @@ midnight_set_buttonbar (WButtonBar * b)
 char *
 get_random_hint (gboolean force)
 {
+    static const guint64 update_period = 60 * G_USEC_PER_SEC;
+    static guint64 tv = 0;
+
     char *data, *result = NULL, *eop;
     size_t len, start;
-    static int last_sec;
-    static struct timeval tv;
     GIConv conv;
 
     /* Do not change hints more often than one minute */
-    gettimeofday (&tv, NULL);
-    if (!force && !(tv.tv_sec > last_sec + 60))
+    if (!force && !mc_time_elapsed (&tv, update_period))
         return g_strdup ("");
-    last_sec = tv.tv_sec;
 
     data = load_mc_home_file (mc_global.share_data_dir, MC_HINT, NULL, &len);
     if (data == NULL)
         return NULL;
 
     /* get a random entry */
-    srand (tv.tv_sec);
+    srand ((unsigned int) (tv / G_USEC_PER_SEC));
     start = ((size_t) rand ()) % (len - 1);
 
     /* Search the start of paragraph */
