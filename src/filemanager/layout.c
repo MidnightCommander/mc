@@ -628,7 +628,7 @@ layout_change (void)
        how the panel are split (horizontal/vertical),
        and a change of menu visibility. */
     update_menu ();
-    load_hint (1);
+    load_hint (TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
