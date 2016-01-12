@@ -211,6 +211,10 @@ shell/i/.cpio
 	Open=%cd %p/ucpio://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cpio
 
+# initrd
+regex/^(initramfs.*\.img|initrd\.img(-.+)?)$
+	Open=%cd %p/ucpio://
+
 # 7zip archives (they are not man pages)
 shell/i/.7z
 	Open=%cd %p/u7z://
@@ -634,15 +638,15 @@ shell/.class
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view javaclass
 
 # Makefile
-regex/[Mm]akefile$
+regex/^[Mm]akefile$
 	Open=make -f %f %{Enter parameters}
 
 # Imakefile
 shell/Imakefile
-	Open=@EXTHELPERSDIR@/misc.sh open imakefile
+	Open=xmkmf -a
 
 # Makefile.PL (MakeMaker)
-regex/^Makefile.(PL|pl)$
+regex/^Makefile\.(PL|pl)$
 	Open=%var{PERL:perl} %f
 
 # sqlite3.db
