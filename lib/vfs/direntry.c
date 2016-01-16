@@ -92,8 +92,6 @@ struct dirhandle
 
 /*** file scope variables ************************************************************************/
 
-static volatile int total_inodes = 0, total_entries = 0;
-
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -891,7 +889,6 @@ vfs_s_new_inode (struct vfs_class *me, struct vfs_s_super *super, struct stat *i
     ino->st.st_dev = MEDATA->rdev;
 
     super->ino_usage++;
-    total_inodes++;
 
     CALL (init_inode) (me, ino);
 
@@ -923,7 +920,6 @@ vfs_s_free_inode (struct vfs_class *me, struct vfs_s_inode *ino)
         unlink (ino->localname);
         g_free (ino->localname);
     }
-    total_inodes--;
     ino->super->ino_usage--;
     g_free (ino);
 }
@@ -936,7 +932,6 @@ vfs_s_new_entry (struct vfs_class *me, const char *name, struct vfs_s_inode *ino
     struct vfs_s_entry *entry;
 
     entry = g_new0 (struct vfs_s_entry, 1);
-    total_entries++;
 
     entry->name = g_strdup (name);
     entry->ino = inode;
@@ -963,7 +958,6 @@ vfs_s_free_entry (struct vfs_class *me, struct vfs_s_entry *ent)
         vfs_s_free_inode (me, ent->ino);
     }
 
-    total_entries--;
     g_free (ent);
 }
 
