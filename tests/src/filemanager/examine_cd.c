@@ -71,7 +71,7 @@ quiet_quit_cmd (void)
 }
 
 char *
-expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
+expand_format (const struct WEdit *edit_widget, char c, gboolean do_quote)
 {
     (void) edit_widget;
     (void) c;
