@@ -31,6 +31,7 @@
 #include <config.h>
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/stat.h>
 #include <inttypes.h>           /* PRIuMAX */
 
@@ -108,6 +109,8 @@ info_show_info (WInfo * info)
     static const char *file_label;
     GString *buff;
     struct stat st;
+    char rp_cwd[PATH_MAX];
+    const char *p_rp_cwd;
 
     if (!is_idle ())
         return;
@@ -124,7 +127,12 @@ info_show_info (WInfo * info)
     if (get_current_type () != view_listing)
         return;
 
-    my_statfs (&myfs_stats, vfs_path_as_str (current_panel->cwd_vpath));
+    /* don't rely on vpath CWD when cd_symlinks enabled */
+    p_rp_cwd = mc_realpath (vfs_path_as_str (current_panel->cwd_vpath), rp_cwd);
+    if (p_rp_cwd == NULL)
+        p_rp_cwd = vfs_path_as_str (current_panel->cwd_vpath);
+
+    my_statfs (&myfs_stats, p_rp_cwd);
 
     st = current_panel->dir.list[current_panel->selected].st;
 
