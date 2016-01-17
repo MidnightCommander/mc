@@ -144,10 +144,7 @@ const char *setup_init (void);
 void load_setup (void);
 gboolean save_setup (gboolean save_options, gboolean save_panel_options);
 void done_setup (void);
-void save_config (void);
 void setup_save_config_show_error (const char *filename, GError ** mcerror);
-
-void save_layout (void);
 
 void load_key_defs (void);
 #ifdef ENABLE_VFS_FTP
@@ -159,9 +156,6 @@ void free_keymap_defs (void);
 
 void panel_load_setup (WPanel * panel, const char *section);
 void panel_save_setup (WPanel * panel, const char *section);
-
-void panels_load_options (void);
-void panels_save_options (void);
 
 /*** inline functions ****************************************************************************/
 
