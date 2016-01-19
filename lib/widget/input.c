@@ -41,7 +41,6 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/tty/mouse.h"
 #include "lib/tty/key.h"        /* XCTRL and ALT macros  */
 #include "lib/fileloc.h"
 #include "lib/skin.h"
@@ -909,59 +908,63 @@ input_destroy (WInput * in)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Calculates the buffer index (aka "point") corresponding to some screen coordinate.
+ */
 static int
-input_event (Gpm_Event * event, void *data)
+input_screen_to_point (const WInput * in, int x)
 {
-    /* save point between GPM_DOWN and GPM_DRAG */
+    x += in->term_first_shown;
+
+    if (x < 0)
+        return 0;
+
+    if (x < str_term_width1 (in->buffer))
+        return str_column_to_pos (in->buffer, x);
+
+    return str_length (in->buffer);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+input_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+{
+    /* save point between MSG_MOUSE_DOWN and MSG_MOUSE_DRAG */
     static int prev_point = 0;
+    WInput *in = INPUT (w);
 
-    WInput *in = INPUT (data);
-    Widget *w = WIDGET (data);
-
-    if (!mouse_global_in_widget (event, w))
-        return MOU_UNHANDLED;
-
-    if ((event->type & GPM_DOWN) != 0)
+    switch (msg)
     {
-        in->first = FALSE;
-        input_mark_cmd (in, FALSE);
-    }
-
-    if ((event->type & (GPM_DOWN | GPM_DRAG)) != 0)
-    {
-        Gpm_Event local;
-
-        local = mouse_get_local (event, w);
-
+    case MSG_MOUSE_DOWN:
         dlg_select_widget (w);
+        in->first = FALSE;
 
-        if (local.x >= w->cols - HISTORY_BUTTON_WIDTH + 1 && should_show_history_button (in))
+        if (event->x >= w->cols - HISTORY_BUTTON_WIDTH && should_show_history_button (in))
             do_show_hist (in);
         else
         {
-            if (local.x + in->term_first_shown - 1 < str_term_width1 (in->buffer))
-                in->point = str_column_to_pos (in->buffer, local.x + in->term_first_shown - 1);
-            else
-                in->point = str_length (in->buffer);
-
-            /* save point for the possible following GPM_DRAG action */
-            if ((event->type & GPM_DOWN) != 0)
-                prev_point = in->point;
+            input_mark_cmd (in, FALSE);
+            input_set_point (in, input_screen_to_point (in, event->x));
+            /* save point for the possible following MSG_MOUSE_DRAG action */
+            prev_point = in->point;
         }
+        break;
+
+    case MSG_MOUSE_DRAG:
+        /* start point: set marker using point before first MSG_MOUSE_DRAG action */
+        if (in->mark < 0)
+            in->mark = prev_point;
+
+        input_set_point (in, input_screen_to_point (in, event->x));
+        break;
+
+    default:
+        /* don't create highlight region of 0 length */
+        if (in->mark == in->point)
+            input_mark_cmd (in, FALSE);
+        break;
     }
-
-    /* start point: set marker using point before first GPM_DRAG action */
-    if (in->mark < 0 && (event->type & GPM_DRAG) != 0)
-        in->mark = prev_point;
-
-    /* don't create highlight region of 0 length */
-    if (in->mark == in->point)
-        input_mark_cmd (in, FALSE);
-
-    if ((event->type & (GPM_DOWN | GPM_DRAG)) != 0)
-        input_update (in, TRUE);
-
-    return MOU_NORMAL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1006,7 +1009,8 @@ input_new (int y, int x, const int *colors, int width, const char *def_text,
 
     in = g_new (WInput, 1);
     w = WIDGET (in);
-    widget_init (w, y, x, 1, width, input_callback, input_event);
+    widget_init (w, y, x, 1, width, input_callback, NULL);
+    set_easy_mouse_callback (w, input_mouse_callback);
     w->options |= W_IS_INPUT;
     w->set_options = input_set_options_callback;
 
