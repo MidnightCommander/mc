@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013, 2016
 
    This file is part of the Midnight Commander.
 
@@ -40,7 +40,6 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/tty/mouse.h"
 #include "lib/tty/key.h"        /* XCTRL and ALT macros  */
 #include "lib/skin.h"
 #include "lib/strutil.h"
@@ -216,27 +215,25 @@ buttonbar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-buttonbar_event (Gpm_Event * event, void *data)
+static void
+buttonbar_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 {
-    Widget *w = WIDGET (data);
-
-    if (!mouse_global_in_widget (event, w))
-        return MOU_UNHANDLED;
-
-    if ((event->type & GPM_UP) != 0)
+    switch (msg)
     {
-        WButtonBar *bb = BUTTONBAR (data);
-        Gpm_Event local;
-        int button;
+    case MSG_MOUSE_CLICK:
+        {
+            WButtonBar *bb = BUTTONBAR (w);
+            int button;
 
-        local = mouse_get_local (event, w);
-        button = buttonbar_get_button_by_x_coord (bb, local.x - 1);
-        if (button >= 0)
-            buttonbar_call (bb, button);
+            button = buttonbar_get_button_by_x_coord (bb, event->x);
+            if (button >= 0)
+                buttonbar_call (bb, button);
+            break;
+        }
+
+    default:
+        break;
     }
-
-    return MOU_NORMAL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -251,7 +248,8 @@ buttonbar_new (gboolean visible)
 
     bb = g_new0 (WButtonBar, 1);
     w = WIDGET (bb);
-    widget_init (w, LINES - 1, 0, 1, COLS, buttonbar_callback, buttonbar_event);
+    widget_init (w, LINES - 1, 0, 1, COLS, buttonbar_callback, NULL);
+    set_easy_mouse_callback (w, buttonbar_mouse_callback);
 
     w->pos_flags = WPOS_KEEP_HORZ | WPOS_KEEP_BOTTOM;
     bb->visible = visible;
