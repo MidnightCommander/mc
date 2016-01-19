@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013, 2016
 
    This file is part of the Midnight Commander.
 
@@ -39,7 +39,6 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/tty/mouse.h"
 #include "lib/skin.h"
 #include "lib/strutil.h"
 #include "lib/util.h"           /* Q_() */
@@ -397,13 +396,9 @@ listbox_on_change (WListbox * l)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-listbox_run_hotkey (WListbox * l, int pos)
+listbox_do_action (WListbox * l)
 {
-    WDialog *h = WIDGET (l)->owner;
     int action;
-
-    listbox_select_entry (l, pos);
-    listbox_on_change (l);
 
     if (l->callback != NULL)
         action = l->callback (l);
@@ -412,9 +407,21 @@ listbox_run_hotkey (WListbox * l, int pos)
 
     if (action == LISTBOX_DONE)
     {
+        WDialog *h = WIDGET (l)->owner;
+
         h->ret_value = B_ENTER;
         dlg_stop (h);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+listbox_run_hotkey (WListbox * l, int pos)
+{
+    listbox_select_entry (l, pos);
+    listbox_on_change (l);
+    listbox_do_action (l);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -490,6 +497,9 @@ static void
 listbox_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 {
     WListbox *l = LISTBOX (w);
+    int old_pos;
+
+    old_pos = l->pos;
 
     switch (msg)
     {
@@ -512,29 +522,18 @@ listbox_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
         break;
 
     case MSG_MOUSE_CLICK:
-        if ((event->count & GPM_DOUBLE) != 0)   /* Double click */
-        {
-            int action;
-
-            if (l->callback != NULL)
-                action = l->callback (l);
-            else
-                action = LISTBOX_DONE;
-
-            if (action == LISTBOX_DONE)
-            {
-                w->owner->ret_value = B_ENTER;
-                dlg_stop (w->owner);
-            }
-        }
+        /* We don't call listbox_select_entry() here: MSG_MOUSE_DOWN/DRAG did this already. */
+        if (event->count == GPM_DOUBLE) /* Double click */
+            listbox_do_action (l);
         break;
 
     default:
         break;
     }
 
-    if (msg != MSG_MOUSE_UP)
-        listbox_draw (l, TRUE);
+    /* If the selection has changed, we redraw the widget and notify the dialog. */
+    if (l->pos != old_pos)
+        listbox_on_change (l);
 }
 
 /* --------------------------------------------------------------------------------------------- */
