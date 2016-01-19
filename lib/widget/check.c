@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013, 2016
 
    This file is part of the Midnight Commander.
 
@@ -39,7 +39,6 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/tty/mouse.h"
 #include "lib/widget.h"
 
 /*** global variables ****************************************************************************/
@@ -104,26 +103,25 @@ check_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-check_event (Gpm_Event * event, void *data)
+static void
+check_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 {
-    Widget *w = WIDGET (data);
+    (void) event;
 
-    if (!mouse_global_in_widget (event, w))
-        return MOU_UNHANDLED;
-
-    if ((event->type & (GPM_DOWN | GPM_UP)) != 0)
+    switch (msg)
     {
+    case MSG_MOUSE_DOWN:
         dlg_select_widget (w);
-        if ((event->type & GPM_UP) != 0)
-        {
-            send_message (w, NULL, MSG_KEY, ' ', NULL);
-            send_message (w, NULL, MSG_FOCUS, 0, NULL);
-            send_message (w->owner, w, MSG_POST_KEY, ' ', NULL);
-        }
-    }
+        break;
 
-    return MOU_NORMAL;
+    case MSG_MOUSE_CLICK:
+        send_message (w, NULL, MSG_KEY, ' ', NULL);
+        send_message (w->owner, w, MSG_POST_KEY, ' ', NULL);
+        break;
+
+    default:
+        break;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -139,8 +137,9 @@ check_new (int y, int x, int state, const char *text)
     c = g_new (WCheck, 1);
     w = WIDGET (c);
     c->text = parse_hotkey (text);
-    widget_init (w, y, x, 1, 4 + hotkey_width (c->text), check_callback, check_event);
     /* 4 is width of "[X] " */
+    widget_init (w, y, x, 1, 4 + hotkey_width (c->text), check_callback, NULL);
+    set_easy_mouse_callback (w, check_mouse_callback);
     c->state = state ? C_BOOL : 0;
     widget_want_hotkey (w, TRUE);
 
