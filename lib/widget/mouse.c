@@ -86,16 +86,13 @@ easy_mouse_translator (Gpm_Event * event, void *data)
     gboolean run_click = FALSE;
     mouse_msg_t msg = MSG_MOUSE_NONE;
 
-    in_widget = mouse_global_in_widget (event, w);
-
     /*
      * Very special widgets may want to control area outside their bounds.
      * For such widgets you will have to turn on the 'forced_capture' flag.
      * You'll also need, in your mouse handler, to inform the system of
      * events you want to pass on by setting 'event->result.abort' to TRUE.
      */
-    if (w->Mouse.forced_capture)
-        in_widget = TRUE;
+    in_widget = w->Mouse.forced_capture || mouse_global_in_widget (event, w);
 
     if ((event->type & GPM_DOWN) != 0)
     {
