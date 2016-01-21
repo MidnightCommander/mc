@@ -128,7 +128,7 @@ configure_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
 {
     switch (msg)
     {
-    case MSG_ACTION:
+    case MSG_NOTIFY:
         /* message from "Single press" checkbutton */
         if (sender != NULL && sender->id == configure_old_esc_mode_id)
         {
@@ -250,7 +250,7 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
 
     switch (msg)
     {
-    case MSG_ACTION:
+    case MSG_NOTIFY:
         if (sender != NULL && sender->id == panel_listing_types_id)
         {
             WCheck *ch;
@@ -371,7 +371,7 @@ confvfs_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 {
     switch (msg)
     {
-    case MSG_ACTION:
+    case MSG_NOTIFY:
         /* message from "Always use ftp proxy" checkbutton */
         if (sender != NULL && sender->id == ftpfs_always_use_proxy_id)
         {

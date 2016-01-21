@@ -577,6 +577,7 @@ hotlist_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
     switch (msg)
     {
     case MSG_INIT:
+    case MSG_NOTIFY:           /* MSG_NOTIFY is fired by the listbox to tell us the item has changed. */
         update_path_name ();
         return MSG_HANDLED;
 
@@ -591,14 +592,6 @@ hotlist_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
     case MSG_RESIZE:
         /* simply call dlg_set_size() with new size */
         dlg_set_size (h, LINES - (h == hotlist_dlg ? 2 : 6), COLS - 6);
-        return MSG_HANDLED;
-
-    case MSG_ACTION:
-        if (sender == NULL)
-            return MSG_NOT_HANDLED;
-
-        /* The listbox tells us the item has changed. */
-        update_path_name ();
         return MSG_HANDLED;
 
     default:

@@ -220,16 +220,12 @@ chmod_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
     switch (msg)
     {
-    case MSG_ACTION:
+    case MSG_NOTIFY:
         {
             /* handle checkboxes */
             int i;
 
-            /* close dialog due to SIGINT (ctrl-g) */
-            if (sender == NULL && parm == CK_Cancel)
-                return MSG_NOT_HANDLED;
-
-            /* whether action was sent by checkbox? */
+            /* whether notification was sent by checkbox? */
             for (i = 0; i < check_perm_num; i++)
                 if (sender == WIDGET (check_perm[i].check))
                     break;
