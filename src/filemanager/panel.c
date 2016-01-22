@@ -8,7 +8,7 @@
    Miguel de Icaza, 1995
    Timur Bakeyev, 1997, 1999
    Slava Zanko <slavazanko@gmail.com>, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2013-2015
+   Andrew Borodin <aborodin@vmail.ru>, 2013-2016
 
    This file is part of the Midnight Commander.
 
@@ -40,7 +40,6 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/tty/mouse.h"      /* For Gpm_Event */
 #include "lib/tty/key.h"        /* XCTRL and ALT macros  */
 #include "lib/skin.h"
 #include "lib/strescape.h"
@@ -3718,11 +3717,11 @@ mouse_set_mark (WPanel * panel)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-mark_if_marking (WPanel * panel, Gpm_Event * event)
+mark_if_marking (WPanel * panel, const mouse_event_t * event)
 {
     if ((event->buttons & GPM_B_RIGHT) != 0)
     {
-        if ((event->type & GPM_DOWN) != 0)
+        if (event->msg == MSG_MOUSE_DOWN)
             mouse_toggle_mark (panel);
         else
             mouse_set_mark (panel);
@@ -3788,142 +3787,138 @@ mouse_sort_col (WPanel * panel, int x)
     panel_set_sort_order (panel, col_sort_format);
 }
 
-
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Mouse callback of the panel minus repainting.
- */
-static int
-panel_event (Gpm_Event * event, void *data)
+
+static void
+panel_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 {
-    WPanel *panel = PANEL (data);
-    Widget *w = WIDGET (data);
+    WPanel *panel = PANEL (w);
+    gboolean is_active;
 
-    int lines;
-    const gboolean is_active = widget_is_active (panel);
-    const gboolean mouse_down = (event->type & GPM_DOWN) != 0;
-    Gpm_Event local;
+    is_active = widget_is_active (w);
 
-    if (!mouse_global_in_widget (event, WIDGET (data)))
-        return MOU_UNHANDLED;
-
-    local = mouse_get_local (event, w);
-
-    /* 1st line */
-    if (local.y == 1)
+    switch (msg)
     {
-        /* "<" button */
-        if (mouse_down && local.x == 2)
+    case MSG_MOUSE_DOWN:
+        if (event->y == 0)
         {
-            directory_history_prev (panel);
-            goto finish;
+            /* top frame */
+            if (event->x == 1)
+                /* "<" button */
+                directory_history_prev (panel);
+            else if (event->x == w->cols - 2)
+                /* ">" button */
+                directory_history_next (panel);
+            else if (event->x >= w->cols - 5 && event->x <= w->cols - 3)
+                /* "^" button */
+                directory_history_list (panel);
+            else if (event->x == w->cols - 6)
+                /* "." button show/hide hidden files */
+                send_message (midnight_dlg, NULL, MSG_ACTION, CK_ShowHidden, NULL);
+            else
+            {
+                /* no other events on 1st line, return MOU_UNHANDLED */
+                event->result.abort = TRUE;
+                /* avoid extra panel redraw */
+                panel->dirty = 0;
+            }
+            break;
         }
 
-        /* ">" button */
-        if (mouse_down && local.x == w->cols - 1)
+        if (event->y == 1)
         {
-            directory_history_next (panel);
-            goto finish;
+            /* sort on clicked column */
+            mouse_sort_col (panel, event->x + 1);
+            break;
         }
 
-        /* "^" button */
-        if (mouse_down && local.x >= w->cols - 4 && local.x <= w->cols - 2)
+        if (!is_active)
+            change_panel ();
+        /* fall through */
+
+    case MSG_MOUSE_DRAG:
         {
-            directory_history_list (panel);
-            goto finish;
-        }
+            int y, my_index;
 
-        /* "." button show/hide hidden files */
-        if (mouse_down && local.x == w->cols - 5)
+            y = event->y - 1;
+
+            if (panel->top_file + y > panel->dir.len)
+                my_index = panel->dir.len - 1;
+            else
+            {
+                my_index = panel->top_file + y - 1;
+
+                if (panel->list_type == list_brief && panel->list_cols > 1)
+                {
+                    int width, lines;
+
+                    width = (w->cols - 2) / panel->list_cols;
+                    lines = panel_lines (panel);
+                    my_index += lines * (event->x / width);
+                }
+
+                if (my_index >= panel->dir.len)
+                    my_index = panel->dir.len - 1;
+            }
+
+            if (my_index != panel->selected)
+            {
+                unselect_item (panel);
+                panel->selected = my_index;
+                select_item (panel);
+            }
+
+            /* This one is new */
+            mark_if_marking (panel, event);
+        }
+        break;
+
+    case MSG_MOUSE_UP:
+        break;
+
+    case MSG_MOUSE_CLICK:
+        if ((event->count & GPM_DOUBLE) != 0)
         {
-            send_message (midnight_dlg, NULL, MSG_ACTION, CK_ShowHidden, NULL);
-            goto finish;
+            int y, lines;
+
+            y = event->y - 1;
+            lines = panel_lines (panel);
+
+            if (y <= lines)
+                do_enter (panel);
         }
+        break;
 
-        /* no other events on 1st line */
-        return MOU_UNHANDLED;
-    }
+    case MSG_MOUSE_MOVE:
+        break;
 
-    /* sort on clicked column; don't handle wheel events */
-    if (mouse_down && (local.buttons & (GPM_B_UP | GPM_B_DOWN)) == 0 && local.y == 2)
-    {
-        mouse_sort_col (panel, local.x);
-        goto finish;
-    }
-
-    /* Mouse wheel events */
-    if (mouse_down && (local.buttons & GPM_B_UP) != 0)
-    {
+    case MSG_MOUSE_SCROLL_UP:
         if (is_active)
         {
-            if (panels_options.mouse_move_pages && (panel->top_file > 0))
+            if (panels_options.mouse_move_pages && panel->top_file > 0)
                 prev_page (panel);
             else                /* We are in first page */
                 move_up (panel);
         }
-        goto finish;
-    }
+        break;
 
-    if (mouse_down && (local.buttons & GPM_B_DOWN) != 0)
-    {
+    case MSG_MOUSE_SCROLL_DOWN:
         if (is_active)
         {
             if (panels_options.mouse_move_pages
-                && (panel->top_file + panel_items (panel) < panel->dir.len))
+                && panel->top_file + panel_items (panel) < panel->dir.len)
                 next_page (panel);
             else                /* We are in last page */
                 move_down (panel);
         }
-        goto finish;
+        break;
+
+    default:
+        break;
     }
 
-    lines = panel_lines (panel);
-
-    local.y -= 2;
-    if ((local.type & (GPM_DOWN | GPM_DRAG)) != 0)
-    {
-        int my_index;
-
-        if (!is_active)
-            change_panel ();
-
-        if (panel->top_file + local.y > panel->dir.len)
-            my_index = panel->dir.len - 1;
-        else
-        {
-            my_index = panel->top_file + local.y - 1;
-
-            if (panel->list_type == list_brief && panel->list_cols > 1)
-            {
-                int width;
-
-                width = (w->cols - 2) / panel->list_cols;
-                my_index += lines * ((local.x - 1) / width);
-            }
-
-            if (my_index >= panel->dir.len)
-                my_index = panel->dir.len - 1;
-        }
-
-        if (my_index != panel->selected)
-        {
-            unselect_item (panel);
-            panel->selected = my_index;
-            select_item (panel);
-        }
-
-        /* This one is new */
-        mark_if_marking (panel, &local);
-    }
-    else if ((local.type & (GPM_UP | GPM_DOUBLE)) == (GPM_UP | GPM_DOUBLE) &&
-             local.y > 0 && local.y <= lines)
-        do_enter (panel);
-
-  finish:
     if (panel->dirty)
         widget_redraw (w);
-
-    return MOU_NORMAL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -4261,7 +4256,8 @@ panel_new_with_dir (const char *panel_name, const vfs_path_t * vpath)
     panel = g_new0 (WPanel, 1);
     w = WIDGET (panel);
     /* No know sizes of the panel at startup */
-    widget_init (w, 0, 0, 0, 0, panel_callback, panel_event);
+    widget_init (w, 0, 0, 0, 0, panel_callback, NULL);
+    set_easy_mouse_callback (w, panel_mouse_callback);
     /* We do not want the cursor */
     widget_want_cursor (w, FALSE);
 
