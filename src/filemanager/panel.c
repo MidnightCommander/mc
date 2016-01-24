@@ -3838,15 +3838,16 @@ panel_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 
     case MSG_MOUSE_DRAG:
         {
-            int y, my_index;
+            int y, last, my_index;
 
-            y = event->y - 1;
+            last = panel->dir.len - 1;
+            y = event->y - 2;
 
-            if (panel->top_file + y > panel->dir.len)
-                my_index = panel->dir.len - 1;
+            if (panel->top_file + y > last)
+                my_index = last;
             else
             {
-                my_index = panel->top_file + y - 1;
+                my_index = panel->top_file + y;
 
                 if (panel->list_type == list_brief && panel->list_cols > 1)
                 {
@@ -3857,8 +3858,8 @@ panel_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
                     my_index += lines * (event->x / width);
                 }
 
-                if (my_index >= panel->dir.len)
-                    my_index = panel->dir.len - 1;
+                if (my_index > last)
+                    my_index = last;
             }
 
             if (my_index != panel->selected)
