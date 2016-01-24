@@ -476,7 +476,8 @@ configure_panel_listing (WPanel * p, int list_type, int brief_cols, int use_msfo
 
     if (list_type == list_brief)
         p->brief_cols = brief_cols;
-    else if (list_type == list_user || use_msformat)
+
+    if (list_type == list_user || use_msformat)
     {
         g_free (p->user_format);
         p->user_format = *user;
