@@ -1559,6 +1559,8 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole lsmod cyan
     keyword whole lspci cyan
     keyword whole lsusb cyan
+    keyword whole lzip cyan
+    keyword whole lziprecover cyan
     keyword whole lynx cyan
     keyword whole MAKEDEV cyan
     keyword whole MAKEFLOPPIES cyan

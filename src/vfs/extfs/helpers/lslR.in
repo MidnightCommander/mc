@@ -12,6 +12,7 @@ AWK=@AWK@
 
 mclslRfs_list () {
 case "$1" in
+  *.lz)  MYCAT="lzip -dc";;
   *.lz4) MYCAT="lz4 -dc";;
   *.lzma) MYCAT="lzma -dc";;
   *.xz)  MYCAT="xz -dc";;

@@ -868,13 +868,17 @@ get_compression_type (int fd, const char *name)
     if (magic[0] == 0x04 && magic[1] == 0x22 && magic[2] == 0x4d && magic[3] == 0x18)
         return COMPRESSION_LZ4;
 
-    /* Support for LZMA (only utils format with magic in header).
-     * This is the default format of LZMA utils 4.32.1 and later. */
-
     if (mc_read (fd, (char *) magic + 4, 2) != 2)
         return COMPRESSION_NONE;
 
-    /* LZMA utils format */
+    /* LZIP files */
+    if (magic[0] == 'L'
+        && magic[1] == 'Z'
+        && magic[2] == 'I' && magic[3] == 'P' && (magic[4] == 0x00 || magic[4] == 0x01))
+        return COMPRESSION_LZIP;
+
+    /* Support for LZMA (only utils format with magic in header).
+     * This is the default format of LZMA utils 4.32.1 and later. */
     if (magic[0] == 0xFF
         && magic[1] == 'L'
         && magic[2] == 'Z' && magic[3] == 'M' && magic[4] == 'A' && magic[5] == 0x00)
@@ -908,6 +912,8 @@ decompress_extension (int type)
         return "/ubz" VFS_PATH_URL_DELIMITER;
     case COMPRESSION_BZIP2:
         return "/ubz2" VFS_PATH_URL_DELIMITER;
+    case COMPRESSION_LZIP:
+        return "/ulz" VFS_PATH_URL_DELIMITER;
     case COMPRESSION_LZ4:
         return "/ulz4" VFS_PATH_URL_DELIMITER;
     case COMPRESSION_LZMA:

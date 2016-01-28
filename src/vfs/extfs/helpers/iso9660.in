@@ -121,6 +121,7 @@ test_iso () {
 mcisofs_list () {
     # left as a reminder to implement compressed image support =)
     case "$1" in
+      *.lz)  MYCAT="lzip -dc";;
       *.lz4) MYCAT="lz4 -dc";;
       *.lzma) MYCAT="lzma -dc";;
       *.xz)  MYCAT="xz -dc";;

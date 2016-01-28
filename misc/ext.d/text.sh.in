@@ -22,6 +22,9 @@ get_unpacker() {
     man.bz2)
         unpacker="bzip2 -dc"
         ;;
+    man.lz)
+        unpacker="lzip -dc"
+        ;;
     man.lz4)
         unpacker="lz4 -dc"
         ;;
@@ -61,7 +64,7 @@ do_view_action() {
     nroff.ms)
         nroff @MAN_FLAGS@ -ms "${MC_EXT_FILENAME}"
         ;;
-    man.gz|man.bz|man.bz2|man.lz4|man.lzma|man.xz)
+    man.gz|man.bz|man.bz2|man.lz|man.lz4|man.lzma|man.xz)
         case "${MC_EXT_FILENAME}" in
         */log/*|*/logs/*)
             ${unpacker} "${MC_EXT_FILENAME}"
@@ -108,7 +111,7 @@ do_open_action() {
     nroff.ms)
         nroff @MAN_FLAGS@ -ms "${MC_EXT_FILENAME}" | ${pager}
         ;;
-    man.gz|man.bz|man.bz2|man.lz4|man.lzma|man.xz)
+    man.gz|man.bz|man.bz2|man.lz|man.lz4|man.lzma|man.xz)
         case "${MC_EXT_FILENAME}" in
         */log/*|*/logs/*)
             ${unpacker} "${MC_EXT_FILENAME}"
