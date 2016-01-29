@@ -65,7 +65,7 @@
 struct WInfo
 {
     Widget widget;
-    int ready;
+    gboolean ready;
 };
 
 /*** file scope variables ************************************************************************/
@@ -290,7 +290,7 @@ info_hook (void *data)
     if (widget_overlapped (WIDGET (info), other_widget))
         return;
 
-    info->ready = 1;
+    info->ready = TRUE;
     info_show_info (info);
 }
 
@@ -306,7 +306,7 @@ info_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
     case MSG_INIT:
         init_my_statfs ();
         add_hook (&select_file_hook, info_hook, info);
-        info->ready = 0;
+        info->ready = FALSE;
         return MSG_HANDLED;
 
     case MSG_DRAW:
