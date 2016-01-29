@@ -39,7 +39,6 @@
 #include "lib/unixcompat.h"
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"        /* is_idle() */
-#include "lib/tty/mouse.h"      /* Gpm_Event */
 #include "lib/skin.h"
 #include "lib/strutil.h"
 #include "lib/timefmt.h"        /* file_date() */
