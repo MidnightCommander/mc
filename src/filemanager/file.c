@@ -1237,7 +1237,7 @@ erase_dir_iff_empty (file_op_context_t * ctx, const vfs_path_t * vpath, size_t c
  * entry if there is one.
  */
 
-static char *
+static const char *
 panel_get_file (WPanel * panel)
 {
     if (get_current_type () == view_tree)
@@ -1247,7 +1247,7 @@ panel_get_file (WPanel * panel)
 
         tree = (WTree *) get_panel_widget (get_current_index ());
         selected_name = tree_selected_name (tree);
-        return g_strdup (vfs_path_as_str (selected_name));
+        return vfs_path_as_str (selected_name);
     }
 
     if (panel->marked != 0)
@@ -1256,9 +1256,10 @@ panel_get_file (WPanel * panel)
 
         for (i = 0; i < panel->dir.len; i++)
             if (panel->dir.list[i].f.marked)
-                return g_strdup (panel->dir.list[i].fname);
+                return panel->dir.list[i].fname;
     }
-    return g_strdup (panel->dir.list[panel->selected].fname);
+
+    return panel->dir.list[panel->selected].fname;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2595,12 +2596,10 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     const gboolean single_entry = force_single || (panel->marked <= 1)
         || (get_current_type () == view_tree);
 
-    char *source = NULL;
+    const char *source = NULL;
 #ifdef WITH_FULL_PATHS
     vfs_path_t *source_with_vpath = NULL;
-#else
-#define source_with_path source
-#endif /* !WITH_FULL_PATHS */
+#endif /* WITH_FULL_PATHS */
     char *dest = NULL;
     vfs_path_t *dest_vpath = NULL;
     char *temp = NULL;
@@ -2632,13 +2631,12 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         vfs_path_t *source_vpath;
 
         if (force_single)
-            source = g_strdup (selection (panel)->fname);
+            source = selection (panel)->fname;
         else
             source = panel_get_file (panel);
 
         if (DIR_IS_DOTDOT (source))
         {
-            g_free (source);
             message (D_ERROR, MSG_ERROR, _("Cannot operate on \"..\"!"));
             return FALSE;
         }
@@ -2662,7 +2660,6 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 update_panels (flags, UP_KEEPSEL);
             }
             vfs_path_free (source_vpath);
-            g_free (source);
             return FALSE;
         }
         vfs_path_free (source_vpath);
@@ -2673,32 +2670,32 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     /* Show confirmation dialog */
     if (operation != OP_DELETE)
     {
-        char *tmp_dest_dir, *dest_dir;
+        const char *tmp_dest_dir;
+        char *dest_dir;
         char *format;
 
         /* Forced single operations default to the original name */
         if (force_single)
-            tmp_dest_dir = g_strdup (source);
+            tmp_dest_dir = source;
         else if (get_other_type () == view_listing)
-            tmp_dest_dir = g_strdup (vfs_path_as_str (other_panel->cwd_vpath));
+            tmp_dest_dir = vfs_path_as_str (other_panel->cwd_vpath);
         else
-            tmp_dest_dir = g_strdup (vfs_path_as_str (panel->cwd_vpath));
+            tmp_dest_dir = vfs_path_as_str (panel->cwd_vpath);
         /*
          * Add trailing backslash only when do non-local ops.
          * It saves user from occasional file renames (when destination
          * dir is deleted)
          */
-        if (!force_single && tmp_dest_dir[0] != '\0'
+        if (!force_single && tmp_dest_dir != NULL && tmp_dest_dir[0] != '\0'
             && !IS_PATH_SEP (tmp_dest_dir[strlen (tmp_dest_dir) - 1]))
         {
             /* add trailing separator */
             dest_dir = g_strconcat (tmp_dest_dir, PATH_SEP_STR, (char *) NULL);
-            g_free (tmp_dest_dir);
         }
         else
         {
             /* just copy */
-            dest_dir = tmp_dest_dir;
+            dest_dir = g_strdup (tmp_dest_dir);
         }
         if (dest_dir == NULL)
         {
@@ -2710,9 +2707,10 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         format =
             panel_operate_generate_prompt (panel, operation, source != NULL ? &src_stat : NULL);
 
-        dest = file_mask_dialog (ctx, operation, source != NULL, format,
-                                 source != NULL ? (void *) source
-                                 : (void *) &panel->marked, dest_dir, &do_bg);
+        dest =
+            file_mask_dialog (ctx, operation, source != NULL, format,
+                              source != NULL ? source : (const void *) &panel->marked, dest_dir,
+                              &do_bg);
 
         g_free (format);
         g_free (dest_dir);
@@ -3089,7 +3087,6 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     file_op_total_context_destroy (tctx);
   ret_fast:
     file_op_context_destroy (ctx);
-    g_free (source);
 
     return ret_val;
 }
