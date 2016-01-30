@@ -785,7 +785,8 @@ put_other_link (void)
 static void
 put_prog_name (void)
 {
-    char *tmp;
+    const char *tmp;
+
     if (!command_prompt)
         return;
 
@@ -796,13 +797,12 @@ put_prog_name (void)
 
         tree = (WTree *) get_panel_widget (get_current_index ());
         selected_name = tree_selected_name (tree);
-        tmp = g_strdup (vfs_path_as_str (selected_name));
+        tmp = vfs_path_as_str (selected_name);
     }
     else
-        tmp = g_strdup (selection (current_panel)->fname);
+        tmp = selection (current_panel)->fname;
 
     command_insert (cmdline, tmp, TRUE);
-    g_free (tmp);
 }
 
 /* --------------------------------------------------------------------------------------------- */
