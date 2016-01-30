@@ -2628,41 +2628,48 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 
     if (single_entry)
     {
-        vfs_path_t *source_vpath;
+        gboolean ok;
 
         if (force_single)
             source = selection (panel)->fname;
         else
             source = panel_get_file (panel);
 
-        if (DIR_IS_DOTDOT (source))
-        {
+        ok = !DIR_IS_DOTDOT (source);
+
+        if (!ok)
             message (D_ERROR, MSG_ERROR, _("Cannot operate on \"..\"!"));
-            return FALSE;
-        }
-
-        source_vpath = vfs_path_from_str (source);
-        /* Update stat to get actual info */
-        if (mc_lstat (source_vpath, &src_stat) != 0)
+        else
         {
-            message (D_ERROR, MSG_ERROR, _("Cannot stat \"%s\"\n%s"),
-                     path_trunc (source, 30), unix_error_string (errno));
+            vfs_path_t *source_vpath;
 
-            /* Directory was changed outside MC. Reload it forced */
-            if (!panel->is_panelized)
+            source_vpath = vfs_path_from_str (source);
+
+            /* Update stat to get actual info */
+            ok = mc_lstat (source_vpath, &src_stat) == 0;
+            if (!ok)
             {
-                panel_update_flags_t flags = UP_RELOAD;
+                message (D_ERROR, MSG_ERROR, _("Cannot stat \"%s\"\n%s"),
+                         path_trunc (source, 30), unix_error_string (errno));
 
-                /* don't update panelized panel */
-                if (get_other_type () == view_listing && other_panel->is_panelized)
-                    flags |= UP_ONLY_CURRENT;
+                /* Directory was changed outside MC. Reload it forced */
+                if (!panel->is_panelized)
+                {
+                    panel_update_flags_t flags = UP_RELOAD;
 
-                update_panels (flags, UP_KEEPSEL);
+                    /* don't update panelized panel */
+                    if (get_other_type () == view_listing && other_panel->is_panelized)
+                        flags |= UP_ONLY_CURRENT;
+
+                    update_panels (flags, UP_KEEPSEL);
+                }
             }
+
             vfs_path_free (source_vpath);
-            return FALSE;
         }
-        vfs_path_free (source_vpath);
+
+        if (!ok)
+            return FALSE;
     }
 
     ctx = file_op_context_new (operation);
