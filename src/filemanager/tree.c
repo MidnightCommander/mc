@@ -1301,7 +1301,7 @@ tree_chdir (WTree * tree, const char *dir)
 /* --------------------------------------------------------------------------------------------- */
 /** Return name of the currently selected entry */
 
-vfs_path_t *
+const vfs_path_t *
 tree_selected_name (const WTree * tree)
 {
     return tree->selected_ptr->name;

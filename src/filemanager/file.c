@@ -1243,7 +1243,7 @@ panel_get_file (WPanel * panel)
     if (get_current_type () == view_tree)
     {
         WTree *tree;
-        vfs_path_t *selected_name;
+        const vfs_path_t *selected_name;
 
         tree = (WTree *) get_panel_widget (get_current_index ());
         selected_name = tree_selected_name (tree);

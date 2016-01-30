@@ -1033,6 +1033,7 @@ tree_box (const char *current_dir)
     if (dlg_run (dlg) == B_ENTER)
     {
         const vfs_path_t *selected_name;
+
         selected_name = tree_selected_name (mytree);
         val = g_strdup (vfs_path_as_str (selected_name));
     }
