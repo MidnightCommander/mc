@@ -2662,6 +2662,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 update_panels (flags, UP_KEEPSEL);
             }
             vfs_path_free (source_vpath);
+            g_free (source);
             return FALSE;
         }
         vfs_path_free (source_vpath);
