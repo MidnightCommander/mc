@@ -751,7 +751,7 @@ put_link (WPanel * panel)
         int i;
 
         vpath = vfs_path_append_new (panel->cwd_vpath, selection (panel)->fname, NULL);
-        i = mc_readlink (vpath, buffer, MC_MAXPATHLEN - 1);
+        i = mc_readlink (vpath, buffer, sizeof (buffer) - 1);
         vfs_path_free (vpath);
 
         if (i > 0)
