@@ -732,7 +732,7 @@ expand_format (const struct WEdit *edit_widget, char c, gboolean do_quote)
 {
     WPanel *panel = NULL;
     char *(*quote_func) (const char *, gboolean);
-    char *fname = NULL;
+    const char *fname = NULL;
     char *result;
     char c_lc;
 
@@ -754,12 +754,12 @@ expand_format (const struct WEdit *edit_widget, char c, gboolean do_quote)
                 return g_strdup ("");
             panel = other_panel;
         }
-        fname = g_strdup (panel->dir.list[panel->selected].fname);
+        fname = panel->dir.list[panel->selected].fname;
         break;
 
 #ifdef USE_INTERNAL_EDIT
     case MC_RUN_EDITOR:
-        fname = g_strdup (edit_get_file_name (edit_widget));
+        fname = edit_get_file_name (edit_widget);
         break;
 #endif
 
@@ -904,7 +904,6 @@ expand_format (const struct WEdit *edit_widget, char c, gboolean do_quote)
     result = g_strdup ("% ");
     result[1] = c;
   ret:
-    g_free (fname);
     return result;
 }
 
