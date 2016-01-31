@@ -1262,10 +1262,10 @@ edit_files (const GList * files)
 
 /* --------------------------------------------------------------------------------------------- */
 
-char *
+const char *
 edit_get_file_name (const WEdit * edit)
 {
-    return g_strdup (vfs_path_as_str (edit->filename_vpath));
+    return vfs_path_as_str (edit->filename_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */

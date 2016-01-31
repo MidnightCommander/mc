@@ -246,11 +246,10 @@ test_condition (const WEdit * edit_widget, char *p, gboolean * condition)
 #ifdef USE_INTERNAL_EDIT
             if (edit_widget != NULL)
             {
-                char *edit_filename;
+                const char *edit_filename;
 
                 edit_filename = edit_get_file_name (edit_widget);
                 *condition = mc_search (arg, DEFAULT_CHARSET, edit_filename, search_type);
-                g_free (edit_filename);
             }
             else
 #endif
@@ -760,7 +759,7 @@ expand_format (const struct WEdit *edit_widget, char c, gboolean do_quote)
 
 #ifdef USE_INTERNAL_EDIT
     case MC_RUN_EDITOR:
-        fname = edit_get_file_name (edit_widget);
+        fname = g_strdup (edit_get_file_name (edit_widget));
         break;
 #endif
 

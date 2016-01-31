@@ -70,7 +70,7 @@ void edit_stack_free (void);
 gboolean edit_file (const vfs_path_t * file_vpath, long line);
 gboolean edit_files (const GList * files);
 
-char *edit_get_file_name (const WEdit * edit);
+const char *edit_get_file_name (const WEdit * edit);
 long edit_get_curs_col (const WEdit * edit);
 const char *edit_get_syntax_type (const WEdit * edit);
 
