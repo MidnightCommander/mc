@@ -5,7 +5,7 @@
    Written by:
    Daniel Borca <dborca@yahoo.com>, 2007
    Slava Zanko <slavazanko@gmail.com>, 2010, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2010, 2012, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2010, 2012, 2013, 2016
    Ilia Maslakov <il.smind@gmail.com>, 2010
 
    This file is part of the Midnight Commander.
@@ -2980,37 +2980,6 @@ dview_labels (WDiff * dview)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-dview_event (Gpm_Event * event, void *data)
-{
-    WDiff *dview = (WDiff *) data;
-
-    if (!mouse_global_in_widget (event, data))
-        return MOU_UNHANDLED;
-
-    /* We are not interested in release events */
-    if ((event->type & (GPM_DOWN | GPM_DRAG)) == 0)
-        return MOU_NORMAL;
-
-    /* Wheel events */
-    if ((event->buttons & GPM_B_UP) != 0 && (event->type & GPM_DOWN) != 0)
-    {
-        dview->skip_rows -= 2;
-        dview->search.last_accessed_num_line = dview->skip_rows;
-        dview_update (dview);
-    }
-    else if ((event->buttons & GPM_B_DOWN) != 0 && (event->type & GPM_DOWN) != 0)
-    {
-        dview->skip_rows += 2;
-        dview->search.last_accessed_num_line = dview->skip_rows;
-        dview_update (dview);
-    }
-
-    return MOU_NORMAL;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static gboolean
 dview_save (WDiff * dview)
 {
@@ -3377,6 +3346,33 @@ dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 /* --------------------------------------------------------------------------------------------- */
 
 static void
+dview_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+{
+    WDiff *dview = (WDiff *) w;
+
+    (void) event;
+
+    switch (msg)
+    {
+    case MSG_MOUSE_SCROLL_UP:
+    case MSG_MOUSE_SCROLL_DOWN:
+        if (msg == MSG_MOUSE_SCROLL_UP)
+            dview->skip_rows -= 2;
+        else
+            dview->skip_rows += 2;
+
+        dview->search.last_accessed_num_line = dview->skip_rows;
+        dview_update (dview);
+        break;
+
+    default:
+        break;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
 dview_adjust_size (WDialog * h)
 {
     WDiff *dview;
@@ -3466,7 +3462,8 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
 
     dview = g_new0 (WDiff, 1);
     w = WIDGET (dview);
-    widget_init (w, 0, 0, LINES - 1, COLS, dview_callback, dview_event);
+    widget_init (w, 0, 0, LINES - 1, COLS, dview_callback, NULL);
+    set_easy_mouse_callback (w, dview_mouse_callback);
     widget_want_cursor (w, FALSE);
 
     add_widget (dview_dlg, dview);
