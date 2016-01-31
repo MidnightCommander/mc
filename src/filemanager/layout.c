@@ -980,13 +980,7 @@ set_display_type (int num, panel_view_mode_t type)
     /* Restoring saved path from panels.ini for nonlist panel */
     /* when it's first creation (for example view_info) */
     if (old_widget == NULL && type != view_listing)
-    {
-        char *panel_dir;
-
-        panel_dir = _vfs_get_cwd ();
-        panels[num].last_saved_dir = g_strdup (panel_dir);
-        g_free (panel_dir);
-    }
+        panels[num].last_saved_dir = _vfs_get_cwd ();
 
     switch (type)
     {
