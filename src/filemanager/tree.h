@@ -26,10 +26,10 @@ struct WDialog;
 
 WTree *tree_new (int y, int x, int lines, int cols, gboolean is_panel);
 
-void tree_chdir (WTree * tree, const char *dir);
+void tree_chdir (WTree * tree, const vfs_path_t * dir);
 const vfs_path_t *tree_selected_name (const WTree * tree);
 
-void sync_tree (const char *pathname);
+void sync_tree (const vfs_path_t * vpath);
 
 WTree *find_tree (struct WDialog *h);
 

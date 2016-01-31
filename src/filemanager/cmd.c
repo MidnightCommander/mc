@@ -1108,11 +1108,17 @@ hotlist_cmd (void)
     char *target;
 
     target = hotlist_show (LIST_HOTLIST);
-    if (!target)
+    if (target == NULL)
         return;
 
     if (get_current_type () == view_tree)
-        tree_chdir (the_tree, target);
+    {
+        vfs_path_t *vpath;
+
+        vpath = vfs_path_from_str (target);
+        tree_chdir (the_tree, vpath);
+        vfs_path_free (vpath);
+    }
     else
     {
         vfs_path_t *deprecated_vpath;

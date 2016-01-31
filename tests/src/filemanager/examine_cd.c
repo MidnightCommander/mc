@@ -101,9 +101,9 @@ shell_execute (const char *command, int flags)
 }
 
 void
-sync_tree (const char *pathname)
+sync_tree (const vfs_path_t * vpath)
 {
-    (void) pathname;
+    (void) vpath;
 }
 
 /* --------------------------------------------------------------------------------------------- */
