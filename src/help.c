@@ -57,7 +57,6 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/tty/mouse.h"
 #include "lib/skin.h"
 #include "lib/strutil.h"
 #include "lib/fileloc.h"
@@ -598,88 +597,6 @@ help_show (WDialog * h, const char *paint_start)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-static int
-help_event (Gpm_Event * event, void *vp)
-{
-    Widget *w = WIDGET (vp);
-    GSList *current_area;
-    Gpm_Event local;
-
-    if (!mouse_global_in_widget (event, w))
-        return MOU_UNHANDLED;
-
-    if ((event->type & GPM_UP) == 0)
-        return MOU_NORMAL;
-
-    local = mouse_get_local (event, w);
-
-    /* The event is relative to the dialog window, adjust it: */
-    local.x -= 2;
-    local.y -= 2;
-
-    if ((local.buttons & GPM_B_RIGHT) != 0)
-    {
-        currentpoint = history[history_ptr].page;
-        selected_item = history[history_ptr].link;
-        history_ptr--;
-        if (history_ptr < 0)
-            history_ptr = HISTORY_SIZE - 1;
-
-        send_message (w->owner, NULL, MSG_DRAW, 0, NULL);
-        return MOU_NORMAL;
-    }
-
-    /* Test whether the mouse click is inside one of the link areas */
-    for (current_area = link_area; current_area != NULL; current_area = g_slist_next (current_area))
-    {
-        Link_Area *la = (Link_Area *) current_area->data;
-
-        /* Test one line link area */
-        if (local.y == la->y1 && local.x >= la->x1 && local.y == la->y2 && local.x <= la->x2)
-            break;
-
-        /* Test two line link area */
-        if (la->y1 + 1 == la->y2)
-        {
-            /* The first line */
-            if (local.y == la->y1 && local.x >= la->x1)
-                break;
-            /* The second line */
-            if (local.y == la->y2 && local.x <= la->x2)
-                break;
-        }
-        /* Mouse will not work with link areas of more than two lines */
-    }
-
-    /* Test whether a link area was found */
-    if (current_area != NULL)
-    {
-        Link_Area *la = (Link_Area *) current_area->data;
-
-        /* The click was inside a link area -> follow the link */
-        history_ptr = (history_ptr + 1) % HISTORY_SIZE;
-        history[history_ptr].page = currentpoint;
-        history[history_ptr].link = la->link_name;
-        currentpoint = help_follow_link (currentpoint, la->link_name);
-        selected_item = NULL;
-    }
-    else if (local.y < 0)
-        move_backward (help_lines - 1);
-    else if (local.y >= help_lines)
-        move_forward (help_lines - 1);
-    else if (local.y < help_lines / 2)
-        move_backward (1);
-    else
-        move_forward (1);
-
-    /* Show the new node */
-    send_message (w->owner, NULL, MSG_DRAW, 0, NULL);
-
-    return MOU_NORMAL;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /** show help */
 
 static void
@@ -1031,13 +948,83 @@ md_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+help_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+{
+    int x, y;
+    GSList *current_area;
+
+    if (msg != MSG_MOUSE_CLICK)
+        return;
+
+    if ((event->buttons & GPM_B_RIGHT) != 0)
+    {
+        /* Right button click */
+        help_back (whelp);
+        return;
+    }
+
+    /* Left bytton click */
+
+    /* The event is relative to the dialog window, adjust it: */
+    x = event->x - 1;
+    y = event->y - 1;
+
+    /* Test whether the mouse click is inside one of the link areas */
+    for (current_area = link_area; current_area != NULL; current_area = g_slist_next (current_area))
+    {
+        Link_Area *la = (Link_Area *) current_area->data;
+
+        /* Test one line link area */
+        if (y == la->y1 && x >= la->x1 && y == la->y2 && x <= la->x2)
+            break;
+
+        /* Test two line link area */
+        if (la->y1 + 1 == la->y2)
+        {
+            /* The first line || The second line */
+            if ((y == la->y1 && x >= la->x1) || (y == la->y2 && x <= la->x2))
+                break;
+        }
+        /* Mouse will not work with link areas of more than two lines */
+    }
+
+    /* Test whether a link area was found */
+    if (current_area != NULL)
+    {
+        Link_Area *la = (Link_Area *) current_area->data;
+
+        /* The click was inside a link area -> follow the link */
+        history_ptr = (history_ptr + 1) % HISTORY_SIZE;
+        history[history_ptr].page = currentpoint;
+        history[history_ptr].link = la->link_name;
+        currentpoint = help_follow_link (currentpoint, la->link_name);
+        selected_item = NULL;
+    }
+    else if (y < 0)
+        move_backward (help_lines - 1);
+    else if (y >= help_lines)
+        move_forward (help_lines - 1);
+    else if (y < help_lines / 2)
+        move_backward (1);
+    else
+        move_forward (1);
+
+    /* Show the new node */
+    send_message (w->owner, NULL, MSG_DRAW, 0, NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static Widget *
 mousedispatch_new (int y, int x, int yl, int xl)
 {
     Widget *w;
 
-    w = g_new (Widget, 1);
-    widget_init (w, y, x, yl, xl, md_callback, help_event);
+    w = g_new0 (Widget, 1);
+    widget_init (w, y, x, yl, xl, md_callback, NULL);
+    set_easy_mouse_callback (w, help_mouse_callback);
+
     return w;
 }
 
