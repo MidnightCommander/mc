@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-01-01 11:48+0300\n"
+"POT-Creation-Date: 2016-02-02 09:44+0300\n"
 "PO-Revision-Date: 2015-06-07 11:33+0000\n"
 "Last-Translator: Rezső Páder <rezso@rezso.net>\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
@@ -492,7 +492,7 @@ msgid "%s: %s: %s %3d%% (%lld) bytes transferred"
 msgstr ""
 
 #, fuzzy, c-format
-msgid "%s: %s: %s %lld bytes transferre"
+msgid "%s: %s: %s %lld bytes transferred"
 msgstr "bájt átvive"
 
 msgid "Starting linear transfer..."
@@ -574,10 +574,6 @@ msgstr "Háttérfolyamat:"
 
 msgid "Error"
 msgstr "Hiba"
-
-#, c-format
-msgid "%d: %s"
-msgstr "%d: %s"
 
 msgid "&Abort"
 msgstr "&Megszakítás"
@@ -4162,8 +4158,8 @@ msgstr "sftp: Adja meg %s jelszavát"
 msgid "sftp: Password is empty."
 msgstr "sftp: a jelszó üres."
 
-#, c-format
-msgid "sftp: Failure establishing SSH session: (%d)"
+#, fuzzy
+msgid "sftp: Failure establishing SSH session"
 msgstr "stp: Hiba lépett fel az ssh kapcsolat létrehozása közben : (%d)"
 
 msgid "sftp: No file handler data present for reading file"
@@ -4412,3 +4408,6 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
+
+#~ msgid "%d: %s"
+#~ msgstr "%d: %s"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-01-01 11:48+0300\n"
+"POT-Creation-Date: 2016-02-02 09:44+0300\n"
 "PO-Revision-Date: 2015-06-29 03:41+0000\n"
 "Last-Translator: Vitalie Ciubotaru <vitalie@ciubotaru.tk>\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
@@ -494,7 +494,7 @@ msgid "%s: %s: %s %3d%% (%lld) bytes transferred"
 msgstr ""
 
 #, fuzzy, c-format
-msgid "%s: %s: %s %lld bytes transferre"
+msgid "%s: %s: %s %lld bytes transferred"
 msgstr "octeți transferați"
 
 msgid "Starting linear transfer..."
@@ -576,10 +576,6 @@ msgstr "Sarcină în fundal:"
 
 msgid "Error"
 msgstr "Eroare"
-
-#, c-format
-msgid "%d: %s"
-msgstr "%d: %s"
 
 msgid "&Abort"
 msgstr "&Anulează"
@@ -4141,8 +4137,8 @@ msgstr "sftp: Introdu parola pentru %s "
 msgid "sftp: Password is empty."
 msgstr "sftp: Parola este goală."
 
-#, c-format
-msgid "sftp: Failure establishing SSH session: (%d)"
+#, fuzzy
+msgid "sftp: Failure establishing SSH session"
 msgstr "sftp: Eroare la stabilirea unei sesiuni SSH: (%d)"
 
 msgid "sftp: No file handler data present for reading file"
@@ -4393,3 +4389,6 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
+
+#~ msgid "%d: %s"
+#~ msgstr "%d: %s"

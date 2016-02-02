@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-01-01 11:48+0300\n"
+"POT-Creation-Date: 2016-02-02 09:44+0300\n"
 "PO-Revision-Date: 2015-09-27 16:38+0000\n"
 "Last-Translator: Ronny Hößrich\n"
 "Language-Team: German (http://www.transifex.com/mc/mc/language/de/)\n"
@@ -502,7 +502,7 @@ msgid "%s: %s: %s %3d%% (%lld) bytes transferred"
 msgstr ""
 
 #, fuzzy, c-format
-msgid "%s: %s: %s %lld bytes transferre"
+msgid "%s: %s: %s %lld bytes transferred"
 msgstr "Bytes übertragen"
 
 msgid "Starting linear transfer..."
@@ -584,10 +584,6 @@ msgstr "Hintergrundprozess:"
 
 msgid "Error"
 msgstr "Fehler"
-
-#, c-format
-msgid "%d: %s"
-msgstr "%d: %s"
 
 msgid "&Abort"
 msgstr "&Abbrechen"
@@ -4178,8 +4174,8 @@ msgstr "sftp: Passwort für %s eingeben"
 msgid "sftp: Password is empty."
 msgstr "sftp: Passwort ist leer."
 
-#, c-format
-msgid "sftp: Failure establishing SSH session: (%d)"
+#, fuzzy
+msgid "sftp: Failure establishing SSH session"
 msgstr "sftp: Fehler beim Herstellen der SSH Sitzung: (%d)"
 
 msgid "sftp: No file handler data present for reading file"
@@ -4432,3 +4428,6 @@ msgstr "Am Anfang fortsetzen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kann keine lokale Kopie von /ftp://some.host/editme.txt anlegen"
+
+#~ msgid "%d: %s"
+#~ msgstr "%d: %s"

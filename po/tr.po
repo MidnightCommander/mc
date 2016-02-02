@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-01-01 11:48+0300\n"
+"POT-Creation-Date: 2016-02-02 09:44+0300\n"
 "PO-Revision-Date: 2015-09-14 12:38+0000\n"
 "Last-Translator: yusuf aydemir <yusuf.aydemir@pisilinux.org>\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
@@ -496,7 +496,7 @@ msgid "%s: %s: %s %3d%% (%lld) bytes transferred"
 msgstr ""
 
 #, fuzzy, c-format
-msgid "%s: %s: %s %lld bytes transferre"
+msgid "%s: %s: %s %lld bytes transferred"
 msgstr "Aktarılan toplam bayt"
 
 msgid "Starting linear transfer..."
@@ -578,10 +578,6 @@ msgstr "Artalan işlemi:"
 
 msgid "Error"
 msgstr "Hata"
-
-#, c-format
-msgid "%d: %s"
-msgstr "%d: %s"
 
 msgid "&Abort"
 msgstr "İ&ptal"
@@ -4171,8 +4167,8 @@ msgstr "sftp: %s için parola girin "
 msgid "sftp: Password is empty."
 msgstr "sftp: Parola boş."
 
-#, c-format
-msgid "sftp: Failure establishing SSH session: (%d)"
+#, fuzzy
+msgid "sftp: Failure establishing SSH session"
 msgstr "sftp: SSH oturumu oluşturma başarısız: (%d)"
 
 msgid "sftp: No file handler data present for reading file"
@@ -4425,3 +4421,6 @@ msgstr "Başından devam edilsin mi?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr " /ftp://some.host/editme.txt 'in yerel kopyası alınamadı"
+
+#~ msgid "%d: %s"
+#~ msgstr "%d: %s"
