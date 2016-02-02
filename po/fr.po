@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-01-01 11:48+0300\n"
+"POT-Creation-Date: 2016-02-02 09:44+0300\n"
 "PO-Revision-Date: 2015-07-25 23:07+0000\n"
 "Last-Translator: Scoubidou <david.vantyghem@free.fr>\n"
 "Language-Team: French (http://www.transifex.com/mc/mc/language/fr/)\n"
@@ -485,7 +485,7 @@ msgid "%s: %s: %s %3d%% (%lld) bytes transferred"
 msgstr ""
 
 #, fuzzy, c-format
-msgid "%s: %s: %s %lld bytes transferre"
+msgid "%s: %s: %s %lld bytes transferred"
 msgstr "octets transférés"
 
 msgid "Starting linear transfer..."
@@ -567,10 +567,6 @@ msgstr "Processus en tâche de fond:"
 
 msgid "Error"
 msgstr "Erreur"
-
-#, c-format
-msgid "%d: %s"
-msgstr ""
 
 msgid "&Abort"
 msgstr "&Interrompre"
@@ -4078,8 +4074,8 @@ msgstr "sftp: Saisir le mot de passe pour %s"
 msgid "sftp: Password is empty."
 msgstr "sftp: Mot de passe vide."
 
-#, c-format
-msgid "sftp: Failure establishing SSH session: (%d)"
+#, fuzzy
+msgid "sftp: Failure establishing SSH session"
 msgstr "sftp: Impossible d'établir une session SSH (%d)"
 
 msgid "sftp: No file handler data present for reading file"

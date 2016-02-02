@@ -110,7 +110,7 @@ mc_serialize_str (const char prefix, const char *data, GError ** error)
 {
     if (data == NULL)
     {
-        g_set_error (error, MC_ERROR, -1, "mc_serialize_str(): Input data is NULL.");
+        g_set_error (error, MC_ERROR, 0, "mc_serialize_str(): Input data is NULL.");
         return NULL;
     }
     return g_strdup_printf ("%c%zd" SRLZ_DELIM_S "%s", prefix, strlen (data), data);
@@ -135,14 +135,13 @@ mc_deserialize_str (const char prefix, const char *data, GError ** error)
 
     if ((data == NULL) || (strlen (data) == 0))
     {
-        g_set_error (error, MC_ERROR, -1, FUNC_NAME ": Input data is NULL or empty.");
+        g_set_error (error, MC_ERROR, 0, FUNC_NAME ": Input data is NULL or empty.");
         return NULL;
     }
 
     if (*data != prefix)
     {
-        g_set_error (error, MC_ERROR, -2, FUNC_NAME ": String prefix doesn't equal to '%c'",
-                     prefix);
+        g_set_error (error, MC_ERROR, 0, FUNC_NAME ": String prefix doesn't equal to '%c'", prefix);
         return NULL;
     }
 
@@ -154,14 +153,14 @@ mc_deserialize_str (const char prefix, const char *data, GError ** error)
         semi_ptr = strchr (data + 1, SRLZ_DELIM_C);
         if (semi_ptr == NULL)
         {
-            g_set_error (error, MC_ERROR, -3,
+            g_set_error (error, MC_ERROR, 0,
                          FUNC_NAME ": Length delimiter '%c' doesn't exists", SRLZ_DELIM_C);
             return NULL;
         }
         semi_offset = semi_ptr - (data + 1);
         if (semi_offset >= BUF_TINY)
         {
-            g_set_error (error, MC_ERROR, -3, FUNC_NAME ": Too big string length");
+            g_set_error (error, MC_ERROR, 0, FUNC_NAME ": Too big string length");
             return NULL;
         }
         strncpy (buffer, data + 1, semi_offset);
@@ -172,7 +171,7 @@ mc_deserialize_str (const char prefix, const char *data, GError ** error)
 
     if (data_len > strlen (data))
     {
-        g_set_error (error, MC_ERROR, -3,
+        g_set_error (error, MC_ERROR, 0,
                      FUNC_NAME
                      ": Specified data length (%zd) is greater than actual data length (%zd)",
                      data_len, strlen (data));

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-01-01 11:48+0300\n"
+"POT-Creation-Date: 2016-02-02 09:44+0300\n"
 "PO-Revision-Date: 2015-07-12 11:24+0000\n"
 "Last-Translator: Kristjan Räts <kristjanrats@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
@@ -493,7 +493,7 @@ msgid "%s: %s: %s %3d%% (%lld) bytes transferred"
 msgstr ""
 
 #, fuzzy, c-format
-msgid "%s: %s: %s %lld bytes transferre"
+msgid "%s: %s: %s %lld bytes transferred"
 msgstr "baiti saadetud"
 
 msgid "Starting linear transfer..."
@@ -575,10 +575,6 @@ msgstr "Taustaprotsess:"
 
 msgid "Error"
 msgstr "Viga"
-
-#, c-format
-msgid "%d: %s"
-msgstr "%d: %s"
 
 msgid "&Abort"
 msgstr "&Katkesta"
@@ -4155,8 +4151,8 @@ msgstr "sftp: sisesta parool masinale %s"
 msgid "sftp: Password is empty."
 msgstr "sftp: parool on tühi."
 
-#, c-format
-msgid "sftp: Failure establishing SSH session: (%d)"
+#, fuzzy
+msgid "sftp: Failure establishing SSH session"
 msgstr "sftp: SSH ühenduse loomine nurjus: (%d)"
 
 msgid "sftp: No file handler data present for reading file"
@@ -4409,3 +4405,6 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
+
+#~ msgid "%d: %s"
+#~ msgstr "%d: %s"

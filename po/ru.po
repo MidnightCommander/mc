@@ -12,14 +12,14 @@
 # Ilia Maslakov <il.smind@gmail.com>, 2009
 # Slava Zanko <slavazanko@gmail.com>, 2009, 2011
 # NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
-# Andrew Borodin <aborodin@vmail.ru>, 2009-2016.
+# Andrew Borodin <aborodin@vmail.ru>, 2009-2016
 # Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
 # AlexL <loginov.alex.valer@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-01-01 11:48+0300\n"
+"POT-Creation-Date: 2016-02-02 09:44+0300\n"
 "PO-Revision-Date: 2015-11-10 21:56+0300\n"
 "Last-Translator: Andrew Borodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
@@ -588,10 +588,6 @@ msgstr "Фоновый процесс:"
 
 msgid "Error"
 msgstr "Ошибка"
-
-#, c-format
-msgid "%d: %s"
-msgstr "%d: %s"
 
 msgid "&Abort"
 msgstr "&Прервать"
@@ -4185,9 +4181,8 @@ msgstr "sftp: введите пароль для %s "
 msgid "sftp: Password is empty."
 msgstr "sftp: пароль пуст."
 
-#, c-format
-msgid "sftp: Failure establishing SSH session: (%d)"
-msgstr "sftp: сбой установки SSH-сессии: (%d)"
+msgid "sftp: Failure establishing SSH session"
+msgstr "sftp: сбой установки SSH-сессии"
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: нет обработчика считываемого файла"

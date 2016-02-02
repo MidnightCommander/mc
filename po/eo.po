@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-01-01 11:48+0300\n"
+"POT-Creation-Date: 2016-02-02 09:44+0300\n"
 "PO-Revision-Date: 2015-06-20 23:14+0000\n"
 "Last-Translator: Keith Bowes <zooplah@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
@@ -493,7 +493,7 @@ msgid "%s: %s: %s %3d%% (%lld) bytes transferred"
 msgstr ""
 
 #, fuzzy, c-format
-msgid "%s: %s: %s %lld bytes transferre"
+msgid "%s: %s: %s %lld bytes transferred"
 msgstr "bajtoj transigitaj"
 
 msgid "Starting linear transfer..."
@@ -575,10 +575,6 @@ msgstr "Fona procezo:"
 
 msgid "Error"
 msgstr "Eraro"
-
-#, c-format
-msgid "%d: %s"
-msgstr "%d: %s"
 
 msgid "&Abort"
 msgstr "Ĉ&esigi"
@@ -4163,8 +4159,8 @@ msgstr "sftp: Enmetu pasvorton por %s"
 msgid "sftp: Password is empty."
 msgstr "sftp: Pasvorto estas vaka."
 
-#, c-format
-msgid "sftp: Failure establishing SSH session: (%d)"
+#, fuzzy
+msgid "sftp: Failure establishing SSH session"
 msgstr "sftp: Malsukcesis starigi SSH-seancon: (%d)"
 
 msgid "sftp: No file handler data present for reading file"
@@ -4417,3 +4413,6 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
+
+#~ msgid "%d: %s"
+#~ msgstr "%d: %s"

@@ -648,7 +648,7 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean c
         localfile_vpath = mc_getlocalcopy (filename_vpath);
         if (localfile_vpath == NULL)
         {
-            mc_propagate_error (mcerror, -1, _("Cannot fetch a local copy of %s"),
+            mc_propagate_error (mcerror, 0, _("Cannot fetch a local copy of %s"),
                                 vfs_path_as_str (filename_vpath));
             return FALSE;
         }
@@ -715,7 +715,7 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean c
 
     if (got_data == -1)
     {
-        mc_propagate_error (mcerror, -1, "%s", _("Pipe failed"));
+        mc_propagate_error (mcerror, 0, "%s", _("Pipe failed"));
         return FALSE;
     }
 
@@ -733,7 +733,7 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean c
         }
         else
         {
-            mc_propagate_error (mcerror, -1, "%s", _("Regular expression error"));
+            mc_propagate_error (mcerror, 0, "%s", _("Regular expression error"));
         }
     }
 

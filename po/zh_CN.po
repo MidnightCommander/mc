@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-01-01 11:48+0300\n"
+"POT-Creation-Date: 2016-02-02 09:44+0300\n"
 "PO-Revision-Date: 2015-06-04 08:38+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/mc/mc/language/"
@@ -495,7 +495,7 @@ msgid "%s: %s: %s %3d%% (%lld) bytes transferred"
 msgstr ""
 
 #, fuzzy, c-format
-msgid "%s: %s: %s %lld bytes transferre"
+msgid "%s: %s: %s %lld bytes transferred"
 msgstr "已传输字节数"
 
 msgid "Starting linear transfer..."
@@ -577,10 +577,6 @@ msgstr "后台进程: "
 
 msgid "Error"
 msgstr "错误"
-
-#, c-format
-msgid "%d: %s"
-msgstr ""
 
 msgid "&Abort"
 msgstr "中止(&A)"
@@ -4122,8 +4118,8 @@ msgstr "sftp: 请输入 %s 的密码 "
 msgid "sftp: Password is empty."
 msgstr "sftp: 密码为空。"
 
-#, c-format
-msgid "sftp: Failure establishing SSH session: (%d)"
+#, fuzzy
+msgid "sftp: Failure establishing SSH session"
 msgstr "sftp: SSH 会话建立失败: (%d)"
 
 msgid "sftp: No file handler data present for reading file"
