@@ -10,6 +10,8 @@
 #ifndef MC__WIDGET_MOUSE_H
 #define MC__WIDGET_MOUSE_H
 
+#include "lib/tty/mouse.h"      /* Gpm_Event */
+
 /*** enums ***************************************************************************************/
 
 /* Mouse messages */
@@ -61,6 +63,10 @@ typedef void (*easy_mouse_callback) (Widget * w, mouse_msg_t msg, mouse_event_t 
 
 /* Installs an easy callback on a widget. */
 void set_easy_mouse_callback (Widget * w, easy_mouse_callback cb);
+/* Translate GPM event to high-level event */
+mouse_event_t mouse_translate_event (Widget * w, Gpm_Event * event, gboolean * click);
+/* Process high-level mouse event */
+int mouse_process_event (Widget * w, mouse_event_t * event, gboolean click);
 
 /*** inline functions ****************************************************************************/
 

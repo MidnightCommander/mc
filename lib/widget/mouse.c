@@ -32,6 +32,8 @@
 #include "lib/global.h"
 #include "lib/widget.h"
 
+#include "lib/widget/mouse.h"
+
 /*** global variables ****************************************************************************/
 
 /*** file scope macro definitions ****************************************************************/
@@ -82,10 +84,49 @@ static int
 easy_mouse_translator (Gpm_Event * event, void *data)
 {
     Widget *w = WIDGET (data);
+    gboolean run_click;
+    mouse_event_t me;
 
+    me = mouse_translate_event (w, event, &run_click);
+
+    return mouse_process_event (w, &me, run_click);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Use this to install an "easy mouse callback".
+ *
+ * (The mouse callback widget_init() accepts is a low-level one; you can
+ * pass NULL to it. In the future we'll probably do the opposite: have
+ * widget_init() accept the "easy" callback.)
+ */
+void
+set_easy_mouse_callback (Widget * w, easy_mouse_callback cb)
+{
+    w->mouse = easy_mouse_translator;
+    w->Mouse.callback = cb;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Translate GPM event to high-level event,
+ *
+ * @param w Widget object
+ * @param event GPM event
+ * @param click whether mouse click was raised or not
+ *
+ * @return high level mouse event
+ */
+mouse_event_t
+mouse_translate_event (Widget * w, Gpm_Event * event, gboolean * click)
+{
     gboolean in_widget;
-    gboolean run_click = FALSE;
     mouse_msg_t msg = MSG_MOUSE_NONE;
+    mouse_event_t local;
 
     /*
      * Very special widgets may want to control area outside their bounds.
@@ -94,6 +135,8 @@ easy_mouse_translator (Gpm_Event * event, void *data)
      * events you want to pass on by setting 'event->result.abort' to TRUE.
      */
     in_widget = w->Mouse.forced_capture || mouse_global_in_widget (event, w);
+
+    *click = FALSE;
 
     if ((event->type & GPM_DOWN) != 0)
     {
@@ -129,7 +172,7 @@ easy_mouse_translator (Gpm_Event * event, void *data)
             msg = MSG_MOUSE_UP;
 
             if (in_widget)
-                run_click = !was_drag;
+                *click = !was_drag;
 
             /*
              * When using xterm, event->buttons reports the buttons' state
@@ -155,41 +198,41 @@ easy_mouse_translator (Gpm_Event * event, void *data)
     }
 
     if (msg != MSG_MOUSE_NONE)
-    {
-        mouse_event_t local;
-
-        /* Rememer the current state for next event. */
+        /* Remember the current state for next event. */
         was_drag = ((event->type & GPM_DRAG) != 0);
 
-        init_mouse_event (&local, msg, event, w);
+    init_mouse_event (&local, msg, event, w);
 
-        w->Mouse.callback (w, msg, &local);
-        if (run_click)
-            w->Mouse.callback (w, MSG_MOUSE_CLICK, &local);
-
-        if (!local.result.abort)
-            return local.result.repeat ? MOU_REPEAT : MOU_NORMAL;
-    }
-
-    return MOU_UNHANDLED;
+    return local;
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
 
 /**
- * Use this to install an "easy mouse callback".
+ * Call widget mouse handler to process high-level mouse event.
  *
- * (The mouse callback widget_init() accepts is a low-level one; you can
- * pass NULL to it. In the future we'll probably do the opposite: have
- * widget_init() accept the "easy" callback.)
+ * @param w Widget object
+ * @param high level mouse event
+ * @param click whether mouse click was raised or not
+ *
+ * @return result of mouse event handling
  */
-void
-set_easy_mouse_callback (Widget * w, easy_mouse_callback cb)
+int
+mouse_process_event (Widget * w, mouse_event_t * event, gboolean click)
 {
-    w->mouse = easy_mouse_translator;
-    w->Mouse.callback = cb;
+    int ret = MOU_UNHANDLED;
+
+    if (event->msg != MSG_MOUSE_NONE)
+    {
+        w->Mouse.callback (w, event->msg, event);
+        if (click)
+            w->Mouse.callback (w, MSG_MOUSE_CLICK, event);
+
+        if (!event->result.abort)
+            ret = event->result.repeat ? MOU_REPEAT : MOU_NORMAL;
+    }
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
