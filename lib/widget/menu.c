@@ -656,6 +656,9 @@ menubar_mouse_on_menu (const WMenuBar * menubar, int y, int x)
     menu_t *menu;
     int left_x, right_x, bottom_y;
 
+    if (!menubar->is_dropped)
+        return FALSE;
+
     menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
     left_x = menu->start_x;
     right_x = left_x + menu->max_entry_len + 3;
@@ -696,12 +699,16 @@ static void
 menubar_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 {
     WMenuBar *menubar = MENUBAR (w);
+    gboolean mouse_on_drop;
+
+    mouse_on_drop = menubar_mouse_on_menu (menubar, event->y, event->x);
 
     switch (msg)
     {
     case MSG_MOUSE_DOWN:
         if (event->y == 0)
         {
+            /* events on menubar */
             unsigned int selected;
 
             selected = menubar_get_menu_by_x_coord (menubar, event->x);
@@ -711,54 +718,45 @@ menubar_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
                 /* menu bar is not active -- activate it */
                 menubar->previous_widget = dlg_get_current_widget_id (w->owner);
                 menubar->is_active = TRUE;
-                menubar_drop (menubar, selected);
                 dlg_select_widget (w);
             }
-            else if (selected != menubar->selected)
-            {
-                menubar_remove (menubar);
-                menubar_drop (menubar, selected);
-            }
+
+            menubar_remove (menubar);   /* if already shown */
+            menubar_drop (menubar, selected);
         }
-        else
+        else if (mouse_on_drop)
             menubar_change_selected_item (menubar, event->y);
+        else
+        {
+            /* mouse click outside menubar or dropdown -- close menu */
+            menubar_finish (menubar);
+
+            /*
+             * @FIXME.
+             *
+             * Unless we clear the 'capture' flag, we'll receive MSG_MOUSE_DRAG
+             * events belonging to this click (in case the user drags the mouse,
+             * of course).
+             *
+             * For the time being, we mark this with FIXME as this flag should
+             * preferably be regarded as "implementation detail" and not be
+             * touched by us. We should think of some other way of communicating
+             * this to the system.
+             */
+            w->Mouse.capture = FALSE;
+        }
         break;
 
     case MSG_MOUSE_CLICK:
-        if (event->y == 0)
-        {
-            /* events on menubar */
-            unsigned int selected;
-
-            selected = menubar_get_menu_by_x_coord (menubar, event->x);
-
-            if (selected != menubar->selected)
-            {
-                menubar_remove (menubar);
-                menubar_drop (menubar, selected);
-            }
-        }
-        else if (!menubar->is_dropped)
-        {
-            if (event->y > 0)
-            {
-                /* mouse click below menubar -- close menu */
-                menubar_finish (menubar);
-            }
-            else
-            {
-                /* show drop-down menu */
-                menubar_drop (menubar, menubar_get_menu_by_x_coord (menubar, event->x));
-            }
-        }
-        else if ((event->buttons & GPM_B_MIDDLE) != 0)
+        if ((event->buttons & GPM_B_MIDDLE) != 0 && event->y > 0 && menubar->is_dropped)
         {
             /* middle click -- everywhere */
             menubar_execute (menubar);
         }
-        else if (menubar_mouse_on_menu (menubar, event->y, event->x))
+        else if (mouse_on_drop)
             menubar_execute (menubar);
-        else
+        else if (event->y > 0)
+            /* releasing the mouse button outside the menu -- close menu */
             menubar_finish (menubar);
         break;
 
@@ -768,7 +766,7 @@ menubar_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
             menubar_remove (menubar);
             menubar_drop (menubar, menubar_get_menu_by_x_coord (menubar, event->x));
         }
-        else
+        else if (mouse_on_drop)
             menubar_change_selected_item (menubar, event->y);
         break;
 
@@ -784,10 +782,9 @@ menubar_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
                 else
                     menubar_right (menubar);
             }
-            else if (menubar_mouse_on_menu (menubar, event->y, event->x))
+            else if (mouse_on_drop)
             {
                 /* drop-down menu: up/down */
-                /* ignore events below drop-down menu */
                 if (msg == MSG_MOUSE_SCROLL_UP)
                     menubar_up (menubar);
                 else
