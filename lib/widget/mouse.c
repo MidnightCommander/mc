@@ -41,6 +41,7 @@
 /*** file scope variables ************************************************************************/
 
 static int last_buttons_down;
+static gboolean was_drag = FALSE;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -128,7 +129,7 @@ easy_mouse_translator (Gpm_Event * event, void *data)
             msg = MSG_MOUSE_UP;
 
             if (in_widget)
-                run_click = TRUE;
+                run_click = !was_drag;
 
             /*
              * When using xterm, event->buttons reports the buttons' state
@@ -156,6 +157,9 @@ easy_mouse_translator (Gpm_Event * event, void *data)
     if (msg != MSG_MOUSE_NONE)
     {
         mouse_event_t local;
+
+        /* Rememer the current state for next event. */
+        was_drag = ((event->type & GPM_DRAG) != 0);
 
         init_mouse_event (&local, msg, event, w);
 
