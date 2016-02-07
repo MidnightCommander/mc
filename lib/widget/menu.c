@@ -698,6 +698,8 @@ menubar_change_selected_item (WMenuBar * menubar, int y)
 static void
 menubar_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 {
+    static gboolean was_drag = FALSE;
+
     WMenuBar *menubar = MENUBAR (w);
     gboolean mouse_on_drop;
 
@@ -706,6 +708,8 @@ menubar_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     switch (msg)
     {
     case MSG_MOUSE_DOWN:
+        was_drag = FALSE;
+
         if (event->y == 0)
         {
             /* events on menubar */
@@ -747,7 +751,15 @@ menubar_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
         }
         break;
 
+    case MSG_MOUSE_UP:
+        if (was_drag && mouse_on_drop)
+            menubar_execute (menubar);
+        was_drag = FALSE;
+        break;
+
     case MSG_MOUSE_CLICK:
+        was_drag = FALSE;
+
         if ((event->buttons & GPM_B_MIDDLE) != 0 && event->y > 0 && menubar->is_dropped)
         {
             /* middle click -- everywhere */
@@ -768,10 +780,14 @@ menubar_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
         }
         else if (mouse_on_drop)
             menubar_change_selected_item (menubar, event->y);
+
+        was_drag = TRUE;
         break;
 
     case MSG_MOUSE_SCROLL_UP:
     case MSG_MOUSE_SCROLL_DOWN:
+        was_drag = FALSE;
+
         if (menubar->is_active)
         {
             if (event->y == 0)
@@ -794,6 +810,7 @@ menubar_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
         break;
 
     default:
+        was_drag = FALSE;
         break;
     }
 }
