@@ -455,6 +455,9 @@ shell/.xpm
 shell/.ico
 	Include=image
 
+shell/.webp
+	Include=image
+
 shell/i/.svg
 	View=%view{ascii} @EXTHELPERSDIR@/image.sh view svg
 	Open=@EXTHELPERSDIR@/image.sh open svg
