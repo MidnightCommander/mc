@@ -416,6 +416,20 @@ find_check_regexp (const char *r)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+find_toggle_enable_params (void)
+{
+    gboolean disable = in_name->buffer[0] == '\0';
+
+    widget_disable (WIDGET (file_pattern_cbox), disable);
+    widget_disable (WIDGET (file_case_sens_cbox), disable);
+#ifdef HAVE_CHARSET
+    widget_disable (WIDGET (file_all_charsets_cbox), disable);
+#endif
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /**
  * Callback for the parameter dialog.
  * Validate regex, prevent closing the dialog if it's invalid.
@@ -424,10 +438,21 @@ find_check_regexp (const char *r)
 static cb_ret_t
 find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
+    /* FIXME: HACK: use first draw of dialog to resolve widget state dependencies.
+     * Use this time moment to check input field content. We can't do that in MSG_INIT
+     * because history is not loaded yet.
+     * Probably, we want new MSG_ACTIVATE message as complement to MSG_VALIDATE one.
+     */
+    static gboolean first_draw = TRUE;
+
     WDialog *h = DIALOG (w);
 
     switch (msg)
     {
+    case MSG_INIT:
+        first_draw = TRUE;
+        return MSG_HANDLED;
+
     case MSG_ACTION:
         if (sender == WIDGET (content_use_cbox))
         {
@@ -456,7 +481,6 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
 
         return MSG_NOT_HANDLED;
 
-
     case MSG_VALIDATE:
         if (h->ret_value != B_ENTER)
             return MSG_HANDLED;
@@ -482,6 +506,18 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         }
 
         return MSG_HANDLED;
+
+    case MSG_POST_KEY:
+        if (h->current->data == in_name)
+            find_toggle_enable_params ();
+        return MSG_HANDLED;
+
+    case MSG_DRAW:
+        if (first_draw)
+            find_toggle_enable_params ();
+
+        first_draw = FALSE;
+        /* fall through to call MSG_DRAW default handler */
 
     default:
         return dlg_default_callback (w, sender, msg, parm, data);
