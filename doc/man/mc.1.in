@@ -90,7 +90,8 @@ as an alias to the appropriate shell script.
 .I \-s, \-\-slow
 Set alternative mode drawing of frameworks.
 If the section [Lines] is not filled, the symbol for the pseudographics
-frame is a space, otherwise the frame characters are taken from follow params.
+frame is a space, otherwise the frame characters are taken from following
+parameters.
 
 .B You can redefine the following variables:
 .TP
@@ -2122,8 +2123,8 @@ You can specify how the
 .\"LINK2"
 Quick search
 .\"Quick search"
-mode should works: case insensitively, case sensitively or be matched
-to the the panel sort order: case sensitive or not.
+mode should work: case insensitively, case sensitively or be matched
+to the panel sort order: case sensitive or not.
 .\"NODE "    Confirmation"
 .SH "    Confirmation"
 In this dialog you configure the confirmation options for file deletion,
@@ -3999,7 +4000,7 @@ list of extensions of files. Separated by ';' sign.
 .TP
 .I extensions_case
 (make sense only with 'extensions' parameter) make 'extensions'
-rule case sentitive (true) or not (false).
+rule case sensitive (true) or not (false).
 .PP
 `type' key may have values:
 .nf
