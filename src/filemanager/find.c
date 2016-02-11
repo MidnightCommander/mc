@@ -430,6 +430,23 @@ find_toggle_enable_params (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+find_toggle_enable_content (void)
+{
+    gboolean disable = !(content_use_cbox->state & C_BOOL)
+
+    widget_disable (WIDGET (in_with), disable);
+    widget_disable (WIDGET (content_regexp_cbox), disable);
+    widget_disable (WIDGET (content_case_sens_cbox), disable);
+#ifdef HAVE_CHARSET
+    widget_disable (WIDGET (content_all_charsets_cbox), disable);
+#endif
+    widget_disable (WIDGET (content_whole_words_cbox), disable);
+    widget_disable (WIDGET (content_first_hit_cbox), disable);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /**
  * Callback for the parameter dialog.
  * Validate regex, prevent closing the dialog if it's invalid.
@@ -461,16 +478,7 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
     case MSG_ACTION:
         if (sender == WIDGET (content_use_cbox))
         {
-            gboolean disable = !(content_use_cbox->state & C_BOOL);
-
-            widget_disable (WIDGET (in_with), disable);
-            widget_disable (WIDGET (content_first_hit_cbox), disable);
-            widget_disable (WIDGET (content_regexp_cbox), disable);
-            widget_disable (WIDGET (content_case_sens_cbox), disable);
-#ifdef HAVE_CHARSET
-            widget_disable (WIDGET (content_all_charsets_cbox), disable);
-#endif
-            widget_disable (WIDGET (content_whole_words_cbox), disable);
+            find_toggle_enable_content ();
 
             return MSG_HANDLED;
         }
@@ -519,7 +527,10 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
 
     case MSG_DRAW:
         if (first_draw)
+        {
             find_toggle_enable_params ();
+            find_toggle_enable_content ();
+        }
 
         first_draw = FALSE;
         /* fall through to call MSG_DRAW default handler */
@@ -585,8 +596,6 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
     /* column width */
     int cw;
 
-    gboolean disable;
-
 #ifdef ENABLE_NLS
     {
         size_t i;
@@ -651,8 +660,6 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
     if (in_start_dir == NULL)
         in_start_dir = g_strdup (".");
 
-    disable = !options.content_use;
-
     find_dlg =
         dlg_create (TRUE, 0, 0, lines, cols, dialog_colors, find_parm_callback, NULL, "[Find File]",
                     _("Find File"), DLG_CENTER);
@@ -678,7 +685,6 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
         input_new (y1++, x1, input_colors, cols - 6,
                    options.ignore_dirs != NULL ? options.ignore_dirs : "", "ignoredirs",
                    INPUT_COMPLETE_CD | INPUT_COMPLETE_FILENAMES);
-    widget_disable (WIDGET (in_ignore), !options.ignore_dirs_enable);
     add_widget (find_dlg, in_ignore);
 
     add_widget (find_dlg, hline_new (y1++, -1, -1));
@@ -699,7 +705,6 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
         input_new (y2++, x2, input_colors, cw, INPUT_LAST_TEXT,
                    MC_HISTORY_SHARED_SEARCH, INPUT_COMPLETE_NONE);
     in_with->label = content_label;
-    widget_disable (WIDGET (in_with), disable);
     add_widget (find_dlg, in_with);
 
     content_use_cbox = check_new (y2++, x2, options.content_use, content_use_label);
@@ -726,28 +731,23 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
 
     /* Continue 2nd column */
     content_regexp_cbox = check_new (y2++, x2, options.content_regexp, content_regexp_label);
-    widget_disable (WIDGET (content_regexp_cbox), disable);
     add_widget (find_dlg, content_regexp_cbox);
 
     content_case_sens_cbox = check_new (y2++, x2, options.content_case_sens, content_case_label);
-    widget_disable (WIDGET (content_case_sens_cbox), disable);
     add_widget (find_dlg, content_case_sens_cbox);
 
 #ifdef HAVE_CHARSET
     content_all_charsets_cbox =
         check_new (y2++, x2, options.content_all_charsets, content_all_charsets_label);
-    widget_disable (WIDGET (content_all_charsets_cbox), disable);
     add_widget (find_dlg, content_all_charsets_cbox);
 #endif
 
     content_whole_words_cbox =
         check_new (y2++, x2, options.content_whole_words, content_whole_words_label);
-    widget_disable (WIDGET (content_whole_words_cbox), disable);
     add_widget (find_dlg, content_whole_words_cbox);
 
     content_first_hit_cbox =
         check_new (y2++, x2, options.content_first_hit, content_first_hit_label);
-    widget_disable (WIDGET (content_first_hit_cbox), disable);
     add_widget (find_dlg, content_first_hit_cbox);
 
     /* buttons */
