@@ -104,6 +104,7 @@ sftpfs_cb_open_connection (struct vfs_s_super *super,
     }
 
     sftpfs_super_data = g_new0 (sftpfs_super_data_t, 1);
+    sftpfs_super_data->socket_handle = LIBSSH2_INVALID_SOCKET;
     sftpfs_super_data->original_connection_info = vfs_path_element_clone (vpath_element);
     super->data = sftpfs_super_data;
     super->path_element = vfs_path_element_clone (vpath_element);
@@ -137,11 +138,18 @@ static void
 sftpfs_cb_close_connection (struct vfs_class *me, struct vfs_s_super *super)
 {
     GError *mcerror = NULL;
+    sftpfs_super_data_t *sftpfs_super_data;
 
     (void) me;
     sftpfs_close_connection (super, "Normal Shutdown", &mcerror);
+
+    sftpfs_super_data = (sftpfs_super_data_t *) super->data;
+    if (sftpfs_super_data != NULL)
+        vfs_path_element_free (sftpfs_super_data->original_connection_info);
+
     mc_error_message (&mcerror, NULL);
-    g_free (super->data);
+
+    g_free (sftpfs_super_data);
 }
 
 /* --------------------------------------------------------------------------------------------- */
