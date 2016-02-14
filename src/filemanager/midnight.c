@@ -1566,20 +1566,8 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         return MSG_HANDLED;
 
     case MSG_ACTION:
-        /* shortcut */
-        if (sender == NULL)
-            return midnight_execute_cmd (NULL, parm);
-        /* message from menu */
-        if (sender == WIDGET (the_menubar))
-            return midnight_execute_cmd (sender, parm);
-        /* message from buttonbar */
-        if (sender == WIDGET (the_bar))
-        {
-            if (data != NULL)
-                return send_message (data, NULL, MSG_ACTION, parm, NULL);
-            return midnight_execute_cmd (sender, parm);
-        }
-        return MSG_NOT_HANDLED;
+        /* Handle shortcuts, menu, and buttonbar. */
+        return midnight_execute_cmd (sender, parm);
 
     case MSG_END:
         panel_deinit ();
