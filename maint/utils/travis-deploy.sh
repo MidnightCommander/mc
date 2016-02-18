@@ -26,20 +26,45 @@
 set -e
 set -x
 
-mkdir HTML && cd HTML
+GLOBAL_VERSION="6.5.2"
+GLOBAL_URL="http://ftp.gnu.org/pub/gnu/global/global-${GLOBAL_VERSION}.tar.gz"
+HTAGSFIX_URL="https://github.com/mooffie/htagsfix/raw/master/htagsfix"
 
-echo "source.midnight-commander.org" > CNAME
-echo "It works!" > index.html
+mkdir CVS && pushd CVS # ignored by GLOBAL's indexer
+
+    wget ${GLOBAL_URL}
+    tar zxvf global-${GLOBAL_VERSION}.tar.gz > /dev/null 2>&1
+
+    pushd global-${GLOBAL_VERSION}
+        ./configure --prefix=$(pwd)/install
+        make
+        make install
+    popd
+
+    export PATH="$(pwd)/global-${GLOBAL_VERSION}/install/bin:$PATH"
+
+popd
+
+gtags -v > /dev/null 2>&1
+
+htags --suggest > /dev/null 2>&1
+
+wget --no-check-certificate ${HTAGSFIX_URL}
+
+ruby htagsfix > /dev/null 2>&1
+
+cd HTML
 
 touch .nojekyll
+echo "source.midnight-commander.org" > CNAME
 
 git init
 
 git config user.name "Travis CI"
 git config user.email "travis@midnight-commander.org"
 
-git add .
-git commit -m "Deploy to GitHub Pages"
+git add . > /dev/null 2>&1
+git commit -m "Deploy to GitHub Pages" > /dev/null 2>&1
 
 git push --force --quiet git@github.com:MidnightCommander/source.git master:gh-pages > /dev/null 2>&1
 

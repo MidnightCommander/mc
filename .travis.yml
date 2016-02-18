@@ -8,6 +8,7 @@ install:
   - sudo apt-get update -qq
   - sudo apt-get install -y autoconf gettext autopoint libtool check indent
   - sudo apt-get install -y e2fslibs-dev libaspell-dev libglib2.0-dev libgpm-dev libncurses5-dev libslang2-dev libssh2-1-dev libx11-dev unzip
+  - sudo apt-get install -y wget exuberant-ctags python-pygments ruby
 
 script:
   - ./maint/utils/check-indent.sh
