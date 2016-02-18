@@ -13,3 +13,15 @@ script:
   - ./maint/utils/check-indent.sh
   - ./autogen.sh
   - ./maint/utils/travis-build.sh
+
+after_success:
+  - openssl aes-256-cbc -K $encrypted_036881b9e9dd_key -iv $encrypted_036881b9e9dd_iv -in ./maint/utils/deploy-key.enc -out $HOME/.ssh/deploy-key -d
+  - chmod 600 $HOME/.ssh/deploy-key
+  - echo "Host github.com" >> $HOME/.ssh/config
+  - echo "  IdentityFile ~/.ssh/deploy-key" >> $HOME/.ssh/config
+
+deploy:
+  provider: script
+  script: ./maint/utils/travis-deploy.sh
+  on:
+    branch: master
