@@ -263,7 +263,7 @@ compare_word_to_right (const WEdit * edit, off_t i, const char *text,
     if ((line_start != 0 && c != '\n') || (whole_left != NULL && strchr (whole_left, c) != NULL))
         return -1;
 
-    for (p = (unsigned char *) text, q = p + strlen ((char *) p); p < q; p++, i++)
+    for (p = (const unsigned char *) text, q = p + strlen ((const char *) p); p < q; p++, i++)
     {
         switch (*p)
         {
@@ -295,7 +295,7 @@ compare_word_to_right (const WEdit * edit, off_t i, const char *text,
                     if (*p == *text && p[1] == '\0')    /* handle eg '+' and @+@ keywords properly */
                         break;
                 }
-                if (j != 0 && strchr ((char *) p + 1, c) != NULL)       /* c exists further down, so it will get matched later */
+                if (j != 0 && strchr ((const char *) p + 1, c) != NULL) /* c exists further down, so it will get matched later */
                     break;
                 if (c == '\n' || c == '\t' || c == ' ' ||
                     (whole_right != NULL && strchr (whole_right, c) == NULL))
@@ -443,7 +443,7 @@ apply_rules_going_right (WEdit * edit, off_t i)
         p = r->keyword_first_chars;
 
         if (p != NULL)
-            while (*(p = xx_strchr (edit, (unsigned char *) p + 1, c)) != '\0')
+            while (*(p = xx_strchr (edit, (const unsigned char *) p + 1, c)) != '\0')
             {
                 syntax_keyword_t *k;
                 int count;
@@ -544,7 +544,7 @@ apply_rules_going_right (WEdit * edit, off_t i)
         r = CONTEXT_RULE (g_ptr_array_index (edit->rules, _rule.context));
         p = r->keyword_first_chars;
 
-        while (*(p = xx_strchr (edit, (unsigned char *) p + 1, c)) != '\0')
+        while (*(p = xx_strchr (edit, (const unsigned char *) p + 1, c)) != '\0')
         {
             syntax_keyword_t *k;
             int count;
