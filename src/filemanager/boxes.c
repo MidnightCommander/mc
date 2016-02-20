@@ -1139,7 +1139,7 @@ configure_vfs (void)
 char *
 cd_dialog (void)
 {
-    const Widget *w = WIDGET (current_panel);
+    const Widget *w = CONST_WIDGET (current_panel);
     char *my_str;
 
     quick_widget_t quick_widgets[] = {

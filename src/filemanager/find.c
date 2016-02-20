@@ -1228,7 +1228,7 @@ find_rotate_dash (const WDialog * h, gboolean show)
 {
     static size_t pos = 0;
     static const char rotating_dash[4] = "|/-\\";
-    const Widget *w = WIDGET (h);
+    const Widget *w = CONST_WIDGET (h);
 
     if (!verbose)
         return;
@@ -1458,7 +1458,7 @@ view_edit_currently_selected_file (gboolean unparsed_view, gboolean edit)
 static void
 find_calc_button_locations (const WDialog * h, gboolean all_buttons)
 {
-    const int cols = WIDGET (h)->cols;
+    const int cols = CONST_WIDGET (h)->cols;
 
     int l1, l2;
 
@@ -1489,7 +1489,7 @@ find_relocate_buttons (const WDialog * h, gboolean all_buttons)
     find_calc_button_locations (h, all_buttons);
 
     for (i = 0; i < fbuts_num; i++)
-        fbuts[i].button->x = WIDGET (h)->x + fbuts[i].x;
+        fbuts[i].button->x = CONST_WIDGET (h)->x + fbuts[i].x;
 }
 
 /* --------------------------------------------------------------------------------------------- */

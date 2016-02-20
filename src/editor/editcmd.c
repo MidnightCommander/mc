@@ -1487,7 +1487,7 @@ edit_syntax_onoff_cb (void *data, void *user_data)
 {
     (void) user_data;
 
-    if (edit_widget_is_editor ((const Widget *) data))
+    if (edit_widget_is_editor (CONST_WIDGET (data)))
     {
         WEdit *edit = (WEdit *) data;
 
@@ -1511,7 +1511,7 @@ edit_redraw_page_cb (void *data, void *user_data)
 {
     (void) user_data;
 
-    if (edit_widget_is_editor ((const Widget *) data))
+    if (edit_widget_is_editor (CONST_WIDGET (data)))
         ((WEdit *) data)->force |= REDRAW_PAGE;
 }
 
@@ -2244,7 +2244,7 @@ edit_close_cmd (WEdit * edit)
 
         del_widget (edit);
 
-        if (edit_widget_is_editor (WIDGET (h->current->data)))
+        if (edit_widget_is_editor (CONST_WIDGET (h->current->data)))
             edit = (WEdit *) h->current->data;
         else
         {

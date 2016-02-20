@@ -348,7 +348,7 @@ edit_status_window (WEdit * edit)
 static inline void
 edit_draw_frame (const WEdit * edit, int color, gboolean active)
 {
-    const Widget *w = (const Widget *) edit;
+    const Widget *w = CONST_WIDGET (edit);
 
     /* draw a frame around edit area */
     tty_setcolor (color);
@@ -374,7 +374,7 @@ edit_draw_frame (const WEdit * edit, int color, gboolean active)
 static inline void
 edit_draw_window_icons (const WEdit * edit, int color)
 {
-    const Widget *w = WIDGET (edit);
+    const Widget *w = CONST_WIDGET (edit);
     char tmp[17];
 
     tty_setcolor (color);
