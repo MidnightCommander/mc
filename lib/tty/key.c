@@ -1208,8 +1208,8 @@ s_dispose (SelectList * sel)
 static int
 key_code_comparator_by_name (const void *p1, const void *p2)
 {
-    const key_code_name_t *n1 = *(const key_code_name_t **) p1;
-    const key_code_name_t *n2 = *(const key_code_name_t **) p2;
+    const key_code_name_t *n1 = *(const key_code_name_t * const *) p1;
+    const key_code_name_t *n2 = *(const key_code_name_t * const *) p2;
 
     return g_ascii_strcasecmp (n1->name, n2->name);
 }
@@ -1219,8 +1219,8 @@ key_code_comparator_by_name (const void *p1, const void *p2)
 static int
 key_code_comparator_by_code (const void *p1, const void *p2)
 {
-    const key_code_name_t *n1 = *(const key_code_name_t **) p1;
-    const key_code_name_t *n2 = *(const key_code_name_t **) p2;
+    const key_code_name_t *n1 = *(const key_code_name_t * const *) p1;
+    const key_code_name_t *n2 = *(const key_code_name_t * const *) p2;
 
     return n1->code - n2->code;
 }
@@ -1259,7 +1259,7 @@ lookup_keyname (const char *name, int *idx)
     {
         const key_code_name_t key = { 0, name, NULL, NULL };
         const key_code_name_t *keyp = &key;
-        key_code_name_t **res;
+        const key_code_name_t **res;
 
         if (name[1] == '\0')
         {
@@ -1274,7 +1274,7 @@ lookup_keyname (const char *name, int *idx)
 
         if (res != NULL)
         {
-            *idx = (int) (res - (key_code_name_t **) key_conv_tab_sorted);
+            *idx = (int) (res - key_conv_tab_sorted);
             return (*res)->code;
         }
     }
@@ -1292,7 +1292,7 @@ lookup_keycode (const long code, int *idx)
     {
         const key_code_name_t key = { code, NULL, NULL, NULL };
         const key_code_name_t *keyp = &key;
-        key_code_name_t **res;
+        const key_code_name_t **res;
 
         sort_key_conv_tab (KEY_SORTBYCODE);
 
@@ -1301,7 +1301,7 @@ lookup_keycode (const long code, int *idx)
 
         if (res != NULL)
         {
-            *idx = (int) (res - (key_code_name_t **) key_conv_tab_sorted);
+            *idx = (int) (res - key_conv_tab_sorted);
             return TRUE;
         }
     }
@@ -1464,6 +1464,7 @@ long
 lookup_key (const char *name, char **label)
 {
     char **lc_keys, **p;
+    char *cname;
     int k = -1;
     int key = 0;
     int lc_index = -1;
@@ -1475,9 +1476,9 @@ lookup_key (const char *name, char **label)
     if (name == NULL)
         return 0;
 
-    name = g_strstrip (g_strdup (name));
-    lc_keys = g_strsplit_set (name, "-+ ", -1);
-    g_free ((char *) name);
+    cname = g_strstrip (g_strdup (name));
+    lc_keys = g_strsplit_set (cname, "-+ ", -1);
+    g_free (cname);
 
     for (p = lc_keys; p != NULL && *p != NULL; p++)
     {
