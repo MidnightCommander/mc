@@ -649,7 +649,7 @@ char *
 tty_tgetstr (const char *cap)
 {
     char *unused = NULL;
-    return tgetstr ((char *) cap, &unused);
+    return tgetstr (cap, &unused);
 }
 
 /* --------------------------------------------------------------------------------------------- */
