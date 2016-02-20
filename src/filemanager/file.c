@@ -228,7 +228,7 @@ static char *
 transform_source (file_op_context_t * ctx, const vfs_path_t * source_vpath)
 {
     char *s, *q;
-    char *fnsource;
+    const char *fnsource;
 
     s = g_strdup (vfs_path_as_str (source_vpath));
 
@@ -238,7 +238,7 @@ transform_source (file_op_context_t * ctx, const vfs_path_t * source_vpath)
         if (*q == '\n')
             *q = ' ';
 
-    fnsource = (char *) x_basename (s);
+    fnsource = x_basename (s);
 
     if (mc_search_run (ctx->search_handle, fnsource, 0, strlen (fnsource), NULL))
     {
@@ -1423,10 +1423,10 @@ panel_operate_generate_prompt (const WPanel * panel, FileOperation operation,
      *       "Delete %d files/directories?"
      */
 
-    sp = (char *) (src_stat != NULL ? one_format : many_format);
+    cp = (src_stat != NULL ? one_format : many_format);
 
     /* 1. Substitute %o */
-    format_string = str_replace_all (sp, "%o", op_names1[(int) operation]);
+    format_string = str_replace_all (cp, "%o", op_names1[(int) operation]);
 
     /* 2. Substitute %n */
     cp = operation == OP_DELETE ? "\n" : " ";
