@@ -853,7 +853,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-push_directory (const vfs_path_t * dir)
+push_directory (vfs_path_t * dir)
 {
     g_queue_push_head (&dir_queue, (void *) dir);
 }
