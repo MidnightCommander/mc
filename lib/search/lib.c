@@ -97,7 +97,8 @@ gchar *
 mc_search__get_one_symbol (const char *charset, const char *str, gsize str_len,
                            gboolean * just_letters)
 {
-    gchar *converted_str, *next_char;
+    gchar *converted_str;
+    const gchar *next_char;
 
     gsize tmp_len;
 #ifdef HAVE_CHARSET
@@ -114,7 +115,7 @@ mc_search__get_one_symbol (const char *charset, const char *str, gsize str_len,
     converted_str = g_strndup (str, str_len);
 #endif
 
-    next_char = (char *) str_cget_next_char (converted_str);
+    next_char = str_cget_next_char (converted_str);
 
     tmp_len = next_char - converted_str;
 
