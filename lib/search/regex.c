@@ -927,9 +927,8 @@ mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
              */
             while (TRUE)
             {
-                char current_chr;
+                const char current_chr = ((const char *) user_data)[current_pos];
 
-                current_chr = ((char *) user_data)[current_pos];
                 if (current_chr == '\0')
                     break;
 
@@ -940,7 +939,7 @@ mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
             }
 
             /* use virtual_pos as index of start of current chunk */
-            g_string_append_len (lc_mc_search->regex_buffer, (char *) user_data + virtual_pos,
+            g_string_append_len (lc_mc_search->regex_buffer, (const char *) user_data + virtual_pos,
                                  current_pos - virtual_pos);
             virtual_pos = current_pos;
         }
