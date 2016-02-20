@@ -998,6 +998,7 @@ load_setup (void)
 
 #ifdef HAVE_CHARSET
     char *buffer;
+    const char *cbuffer;
 
     load_codepages_list ();
 #endif /* HAVE_CHARSET */
@@ -1118,9 +1119,9 @@ load_setup (void)
         is_autodetect_codeset_enabled = TRUE;
 
     g_free (init_translation_table (mc_global.source_codepage, mc_global.display_codepage));
-    buffer = (char *) get_codepage_id (mc_global.display_codepage);
-    if (buffer != NULL)
-        mc_global.utf8_display = str_isutf8 (buffer);
+    cbuffer = get_codepage_id (mc_global.display_codepage);
+    if (cbuffer != NULL)
+        mc_global.utf8_display = str_isutf8 (cbuffer);
 #endif /* HAVE_CHARSET */
 
 #ifdef HAVE_ASPELL
