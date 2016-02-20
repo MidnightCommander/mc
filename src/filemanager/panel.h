@@ -180,12 +180,12 @@ void do_file_mark (WPanel * panel, int idx, int val);
 gboolean do_panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_type);
 
 gsize panel_get_num_of_sortable_fields (void);
-const char **panel_get_sortable_fields (gsize *);
+char **panel_get_sortable_fields (gsize *);
 const panel_field_t *panel_get_field_by_id (const char *);
 const panel_field_t *panel_get_field_by_title (const char *);
 const panel_field_t *panel_get_field_by_title_hotkey (const char *);
 gsize panel_get_num_of_user_possible_fields (void);
-const char **panel_get_user_possible_fields (gsize *);
+char **panel_get_user_possible_fields (gsize *);
 void panel_set_cwd (WPanel * panel, const vfs_path_t * vpath);
 void panel_set_lwd (WPanel * panel, const vfs_path_t * vpath);
 
