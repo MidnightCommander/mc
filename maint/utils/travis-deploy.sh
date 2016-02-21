@@ -30,7 +30,7 @@ GLOBAL_VERSION="6.5.2"
 GLOBAL_URL="http://ftp.gnu.org/pub/gnu/global/global-${GLOBAL_VERSION}.tar.gz"
 HTAGSFIX_URL="https://github.com/mooffie/htagsfix/raw/master/htagsfix"
 
-mkdir CVS && pushd CVS # ignored by GLOBAL's indexer
+mkdir .global && pushd .global # ignored by GLOBAL's indexer
 
     wget ${GLOBAL_URL}
     tar zxvf global-${GLOBAL_VERSION}.tar.gz > /dev/null 2>&1
@@ -47,7 +47,7 @@ popd
 
 gtags -v > /dev/null 2>&1
 
-htags --suggest > /dev/null 2>&1
+htags --suggest -t "Welcome to the Midnight Commander source tour!" > /dev/null 2>&1
 
 wget --no-check-certificate ${HTAGSFIX_URL}
 
