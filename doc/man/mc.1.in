@@ -1419,6 +1419,9 @@ for. It is interpeted as a shell pattern or as a regular expression
 depending on the state of the "Using shell patterns" checkbox. An empty
 value is valid and matches any file name.
 .PP
+The "Content" input field contains a string to search for within the
+files. Leave this field empty to disable searching file contents.
+.PP
 Option "Whole words" allows select only those files containing matches that
 form whole words. Like grep \-w.
 .PP
