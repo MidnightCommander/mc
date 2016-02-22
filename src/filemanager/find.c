@@ -717,6 +717,10 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
     add_widget (find_dlg, skip_hidden_cbox);
 
     /* Continue 2nd column */
+    content_whole_words_cbox =
+        check_new (y2++, x2, options.content_whole_words, content_whole_words_label);
+    add_widget (find_dlg, content_whole_words_cbox);
+
     content_regexp_cbox = check_new (y2++, x2, options.content_regexp, content_regexp_label);
     add_widget (find_dlg, content_regexp_cbox);
 
@@ -728,10 +732,6 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
         check_new (y2++, x2, options.content_all_charsets, content_all_charsets_label);
     add_widget (find_dlg, content_all_charsets_cbox);
 #endif
-
-    content_whole_words_cbox =
-        check_new (y2++, x2, options.content_whole_words, content_whole_words_label);
-    add_widget (find_dlg, content_whole_words_cbox);
 
     content_first_hit_cbox =
         check_new (y2++, x2, options.content_first_hit, content_first_hit_label);
