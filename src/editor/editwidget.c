@@ -404,70 +404,6 @@ edit_get_title (const WDialog * h, size_t len)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Handle mouse events of editor screen.
- *
- * @param event mouse event
- * @param data editor screen
- * @return MOU_NORMAL if event was handled, MOU_UNHANDLED otherwise
- */
-
-static int
-edit_dialog_event (Gpm_Event * event, void *data)
-{
-    WDialog *h = DIALOG (data);
-    Widget *w;
-    Widget *wh = WIDGET (h);
-    int ret = MOU_UNHANDLED;
-
-    w = WIDGET (find_menubar (h));
-
-    if (event->y == wh->y + 1 && (event->type & GPM_DOWN) != 0 && !MENUBAR (w)->is_active)
-    {
-        /* menubar */
-
-        GList *l;
-        GList *top = NULL;
-        int x;
-
-        /* Try find top fullscreen window */
-        for (l = h->widgets; l != NULL; l = g_list_next (l))
-            if (edit_widget_is_editor (WIDGET (l->data)) && ((WEdit *) l->data)->fullscreen)
-                top = l;
-
-        /* Handle fullscreen/close buttons in the top line */
-        x = wh->x + wh->cols + 1 - 6;
-
-        if (top != NULL && event->x >= x)
-        {
-            WEdit *e;
-
-            e = (WEdit *) top->data;
-            x = event->x - x;
-
-            if (top != h->current)
-            {
-                /* Window is not active. Activate it */
-                dlg_set_top_widget (e);
-            }
-
-            /* Handle buttons */
-            if (x <= 2)
-                edit_toggle_fullscreen (e);
-            else
-                send_message (h, NULL, MSG_ACTION, CK_Close, NULL);
-
-            ret = MOU_NORMAL;
-        }
-
-        if (ret == MOU_UNHANDLED)
-            dlg_select_widget (w);
-    }
-
-    return ret;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 edit_dialog_command_execute (WDialog * h, long command)
@@ -925,6 +861,71 @@ edit_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Handle mouse events of editor screen.
+ *
+ * @param w Widget object (the editor)
+ * @param msg mouse event message
+ * @param event mouse event data
+ */
+static void
+edit_dialog_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+{
+    gboolean unhandled = TRUE;
+
+    if (msg == MSG_MOUSE_DOWN && event->y == 0)
+    {
+        WDialog *h = DIALOG (w);
+        WMenuBar *b;
+
+        b = find_menubar (h);
+
+        if (!b->is_active)
+        {
+            /* menubar */
+
+            GList *l;
+            GList *top = NULL;
+            int x;
+
+            /* Try find top fullscreen window */
+            for (l = h->widgets; l != NULL; l = g_list_next (l))
+                if (edit_widget_is_editor (WIDGET (l->data)) && ((WEdit *) l->data)->fullscreen)
+                    top = l;
+
+            /* Handle fullscreen/close buttons in the top line */
+            x = w->cols - 5;
+
+            if (top != NULL && event->x >= x)
+            {
+                WEdit *e = (WEdit *) top->data;
+
+                if (top != h->current)
+                {
+                    /* Window is not active. Activate it */
+                    dlg_set_top_widget (e);
+                }
+
+                /* Handle buttons */
+                if (event->x - x <= 2)
+                    edit_toggle_fullscreen (e);
+                else
+                    send_message (h, NULL, MSG_ACTION, CK_Close, NULL);
+
+                unhandled = FALSE;
+            }
+
+            if (unhandled)
+                dlg_select_widget (b);
+        }
+    }
+
+    /* Continue handling of unhandled event in window or menu */
+    event->result.abort = unhandled;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 edit_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
@@ -1219,8 +1220,9 @@ edit_files (const GList * files)
 
     /* Create a new dialog and add it widgets to it */
     edit_dlg =
-        dlg_create (FALSE, 0, 0, LINES, COLS, NULL, edit_dialog_callback, edit_dialog_event,
+        dlg_create (FALSE, 0, 0, LINES, COLS, NULL, edit_dialog_callback, NULL,
                     "[Internal File Editor]", NULL, DLG_WANT_TAB);
+    set_easy_mouse_callback (WIDGET (edit_dlg), edit_dialog_mouse_callback);
 
     edit_dlg->get_shortcut = edit_get_shortcut;
     edit_dlg->get_title = edit_get_title;
