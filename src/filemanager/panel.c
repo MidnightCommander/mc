@@ -3557,6 +3557,7 @@ panel_execute_cmd (WPanel * panel, long command)
         panel_set_sort_type_by_id (panel, "mtime");
         break;
     default:
+        res = MSG_NOT_HANDLED;
         break;
     }
 
