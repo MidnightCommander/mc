@@ -1576,42 +1576,6 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-static int
-midnight_event (Gpm_Event * event, void *data)
-{
-    Widget *wh = WIDGET (data);
-    int ret = MOU_UNHANDLED;
-
-    if (event->y == wh->y + 1)
-    {
-        /* menubar */
-        if (menubar_visible || the_menubar->is_active)
-            ret = WIDGET (the_menubar)->mouse (event, the_menubar);
-        else
-        {
-            Widget *w;
-
-            w = get_panel_widget (0);
-            if (w->mouse != NULL)
-                ret = w->mouse (event, w);
-
-            if (ret == MOU_UNHANDLED)
-            {
-                w = get_panel_widget (1);
-                if (w->mouse != NULL)
-                    ret = w->mouse (event, w);
-            }
-
-            if (ret == MOU_UNHANDLED)
-                ret = WIDGET (the_menubar)->mouse (event, the_menubar);
-        }
-    }
-
-    return ret;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1793,8 +1757,8 @@ do_nc (void)
     edit_stack_init ();
 #endif
 
-    midnight_dlg = dlg_create (FALSE, 0, 0, LINES, COLS, dialog_colors, midnight_callback,
-                               midnight_event, "[main]", NULL, DLG_NONE);
+    midnight_dlg = dlg_create (FALSE, 0, 0, LINES, COLS, dialog_colors, midnight_callback, NULL,
+                               "[main]", NULL, DLG_NONE);
 
     /* Check if we were invoked as an editor or file viewer */
     if (mc_global.mc_run_mode != MC_RUN_FULL)

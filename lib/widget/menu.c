@@ -309,6 +309,10 @@ menubar_finish (WMenuBar * menubar)
     w->lines = 1;
     widget_want_hotkey (w, 0);
 
+    /* Move the menubar to the bottom so that widgets displayed on top of
+     * an "invisible" menubar get the first chance to respond to mouse events. */
+    dlg_set_bottom_widget (w);
+
     dlg_select_by_id (w->owner, menubar->previous_widget);
     do_refresh ();
 }
@@ -716,15 +720,7 @@ menubar_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
             unsigned int selected;
 
             selected = menubar_get_menu_by_x_coord (menubar, event->x);
-
-            if (!menubar->is_active)
-            {
-                /* menu bar is not active -- activate it */
-                menubar->previous_widget = dlg_get_current_widget_id (w->owner);
-                menubar->is_active = TRUE;
-                dlg_select_widget (w);
-            }
-
+            menubar_activate (menubar, TRUE, selected);
             menubar_remove (menubar);   /* if already shown */
             menubar_drop (menubar, selected);
         }
@@ -1019,7 +1015,10 @@ menubar_activate (WMenuBar * menubar, gboolean dropped, int which)
             menubar->selected = (guint) which;
 
         menubar->previous_widget = dlg_get_current_widget_id (w->owner);
-        dlg_select_widget (w);
+
+        /* Bring it to the top so it receives all mouse events before any other widget.
+         * See also comment in menubar_finish(). */
+        dlg_set_top_widget (w);
     }
 }
 
