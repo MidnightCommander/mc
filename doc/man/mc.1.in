@@ -1435,8 +1435,8 @@ file. The Again button will ask for the parameters for a new
 search. The Quit button quits the search operation. The Panelize
 button will place the found files to the current directory panel so
 that you can do additional operations on them (view, copy, move,
-delete and so on). After panelizing you can press C\-r to return to the
-normal file listing.
+delete and so on). To return to the normal file listing, change directory
+to "..".
 .PP
 The 'Enable ignore directories' checkbox and input field below it
 allow to set up the list of directories that should be skip during the search
