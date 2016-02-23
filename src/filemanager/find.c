@@ -441,7 +441,12 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
     /* FIXME: HACK: use first draw of dialog to resolve widget state dependencies.
      * Use this time moment to check input field content. We can't do that in MSG_INIT
      * because history is not loaded yet.
-     * Probably, we want new MSG_ACTIVATE message as complement to MSG_VALIDATE one.
+     * Probably, we want new MSG_ACTIVATE message as complement to MSG_VALIDATE one. Or
+     * we could name it MSG_POST_INIT.
+     *
+     * In one or two other places we use MSG_IDLE instead of MSG_DRAW for a similar
+     * purpose. We should remember to fix those places too when we introduce the new
+     * message.
      */
     static gboolean first_draw = TRUE;
 
