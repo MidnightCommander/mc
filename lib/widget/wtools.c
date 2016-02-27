@@ -588,7 +588,7 @@ status_msg_init (status_msg_t * sm, const char *title, double delay, status_msg_
     sm->dlg = dlg_create (TRUE, 0, 0, 7, min (max (40, COLS / 2), COLS), dialog_colors,
                           NULL, NULL, NULL, title, DLG_CENTER);
     sm->start = start;
-    sm->delay = delay * G_USEC_PER_SEC;
+    sm->delay = (guint64) (delay * G_USEC_PER_SEC);
     sm->block = FALSE;
 
     sm->init = init_cb;
