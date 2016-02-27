@@ -107,7 +107,7 @@ while read p l u g a i m d y n n2 n3; do
             n=$n" "$n2" "$n3
         fi
         echo "P$p $u $g"
-        echo "S$s"
+        echo "E$a$i"
         echo "d$m $d $y"
         echo ":"$n
         echo
@@ -138,6 +138,10 @@ while((my $filename = readdir (DIR))){
         my $linkname = readlink ("$dirname/$filename");
         $linkname =~ $strutils_shell_escape_regex;
         printf("R%%o %%o $uid.$gid\nS$size\nd$mloctime\n:\"%%s\" -> \"%%s\"\n\n", S_IMODE($mode), S_IFMT($mode), $e_filename, $linkname);
+    } elseif (S_ISCHR ($mode) || S_ISBLK ($mode)) {
+        my $minor = $rdev % 256;
+        my $major = int( $rdev / 256 );
+        printf("R%%o %%o $uid.$gid\nE$major,$minor\nd$mloctime\n:\"%%s\"\n\n", S_IMODE($mode), S_IFMT($mode), $e_filename);
     } else {
         printf("R%%o %%o $uid.$gid\nS$size\nd$mloctime\n:\"%%s\"\n\n", S_IMODE($mode), S_IFMT($mode), $e_filename);
     }
