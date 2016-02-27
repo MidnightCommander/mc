@@ -443,7 +443,7 @@ mc_error_message (GError ** mcerror, int *code)
     if ((*mcerror)->code == 0)
         message (D_ERROR, MSG_ERROR, "%s", (*mcerror)->message);
     else
-        message (D_ERROR, MSG_ERROR, "%s (%d)", (*mcerror)->message, (*mcerror)->code);
+        message (D_ERROR, MSG_ERROR, _("%s (%d)"), (*mcerror)->message, (*mcerror)->code);
 
     if (code != NULL)
         *code = (*mcerror)->code;
