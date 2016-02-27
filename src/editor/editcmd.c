@@ -794,7 +794,7 @@ edit_search_fix_search_start_if_selection (WEdit * edit)
     if (!edit_search_options.only_in_selection)
         return;
 
-    if (!eval_marks (edit, &start_mark, &end_mark) != 0)
+    if (!eval_marks (edit, &start_mark, &end_mark))
         return;
 
     if (edit_search_options.backwards)
