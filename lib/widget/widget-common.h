@@ -60,6 +60,7 @@ typedef enum
 /* Widget options */
 typedef enum
 {
+    W_DEFAULT = (0 << 0),
     W_WANT_HOTKEY = (1 << 1),
     W_WANT_CURSOR = (1 << 2),
     W_WANT_IDLE = (1 << 3),
