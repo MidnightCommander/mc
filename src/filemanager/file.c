@@ -1648,7 +1648,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             ctx->skip_all = TRUE;
         if (return_status == FILE_SKIP)
             break;
-        ctx->do_append = 0;
+        ctx->do_append = FALSE;
         goto ret_fast;
     }
 
@@ -1688,7 +1688,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     open_flags = O_WRONLY;
     if (dst_exists)
     {
-        if (ctx->do_append != 0)
+        if (ctx->do_append)
             open_flags |= O_APPEND;
         else
             open_flags |= O_CREAT | O_TRUNC;
@@ -1738,7 +1738,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     }
 
     /* try preallocate space; if fail, try copy anyway */
-    while (vfs_preallocate (dest_desc, file_size, ctx->do_append != 0 ? sb.st_size : 0) != 0)
+    while (vfs_preallocate (dest_desc, file_size, appending ? sb.st_size : 0) != 0)
     {
         if (ctx->skip_all)
         {
@@ -1803,7 +1803,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             else
                 while ((n_read = mc_read (src_desc, buf, sizeof (buf))) < 0 && !ctx->skip_all)
                 {
-                    return_status = file_error (_("Cannot read source file\"%s\"\n%s"), src_path);
+                    return_status = file_error (_("Cannot read source file \"%s\"\n%s"), src_path);
                     if (return_status == FILE_RETRY)
                         continue;
                     if (return_status == FILE_SKIPALL)
