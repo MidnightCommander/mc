@@ -52,6 +52,7 @@ dnl    mc_CHECK_ONE_CFLAG([-fno-stack-protector])
 esac
 
 dnl Sorted -W options:
+    mc_CHECK_ONE_CFLAG([-Wassign-enum])
     mc_CHECK_ONE_CFLAG([-Wbad-function-cast])
     mc_CHECK_ONE_CFLAG([-Wcomment])
     mc_CHECK_ONE_CFLAG([-Wconditional-uninitialized])
