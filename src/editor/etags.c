@@ -188,7 +188,6 @@ etags_set_definition_hash (const char *tagfile, const char *start_path,
     char *chekedstr = NULL;
 
     int num = 0;                /* returned value */
-    int pos;
     char *filename = NULL;
 
     if (!match_func || !tagfile)
@@ -210,12 +209,15 @@ etags_set_definition_hash (const char *tagfile, const char *start_path,
             }
             break;
         case in_filename:
-            pos = strcspn (buf, ",");
-            g_free (filename);
-            filename = g_malloc (pos + 2);
-            g_strlcpy (filename, (char *) buf, pos + 1);
-            state = in_define;
-            break;
+            {
+                size_t pos;
+
+                pos = strcspn (buf, ",");
+                g_free (filename);
+                filename = g_strndup (buf, pos + 1);
+                state = in_define;
+                break;
+            }
         case in_define:
             if (buf[0] == 0x0C)
             {
