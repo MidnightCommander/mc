@@ -90,6 +90,7 @@ int option_line_state = 0;
 int option_line_state_width = 0;
 gboolean option_cursor_after_inserted_block = FALSE;
 int option_state_full_filename = 0;
+int option_autodetect_lb = 0;
 
 int option_edit_right_extreme = 0;
 int option_edit_left_extreme = 0;
@@ -113,6 +114,8 @@ const char VERTICAL_MAGIC[] = { '\1', '\1', '\1', '\1', '\n' };
 #define TEMP_BUF_LEN 1024
 
 #define space_width 1
+
+#define DETECT_LB_TYPE_BUFLEN BUF_MEDIUM
 
 /*** file scope type declarations ****************************************************************/
 
@@ -381,6 +384,81 @@ check_file_access (WEdit * edit, const vfs_path_t * filename_vpath, struct stat 
 /* --------------------------------------------------------------------------------------------- */
 
 /**
+ * detect type of line breaks
+ *
+ */
+/* --------------------------------------------------------------------------------------------- */
+
+static LineBreaks
+detect_lb_type_buf (unsigned char *p, ssize_t sz)
+{
+    LineBreaks detected_lb = LB_ASIS;
+
+    /* If there was error or file too short, give up */
+    if (sz <= 2)
+        return LB_ASIS;
+
+    p[(size_t) sz] = '\0';
+    /* Avoid ambiguity of our buffer breaking CR LF sequence */
+    if (p[sz - 1] == '\r') {
+        p[--sz] = '\0';
+    }
+
+    for (; sz--; p++) {
+        LineBreaks new_lb = LB_ASIS;
+        if (*p == '\r') {
+            if (p[1] == '\n') {
+                sz--; p++;
+                new_lb = LB_WIN;
+            } else {
+                new_lb = LB_MAC;
+            }
+        } else if (*p == '\n') {
+            /* LF CR is anomaly for text file, give up */
+            if (p[1] == '\r')
+                return LB_ASIS;
+            new_lb = LB_UNIX;
+        } else if (*p < 0x20 && *p != '\t' && *p != '\f') {
+            /* The only common special char in text files is  tab, much
+               less commonly - form feed. Anything else - give up. */
+            return LB_ASIS;
+        }
+
+        /* If we detected a new lb, and it doesn't match previously
+           detected, give up */
+        if (new_lb != LB_ASIS) {
+            if (detected_lb != LB_ASIS && detected_lb != new_lb) {
+                return LB_ASIS;
+            }
+            detected_lb = new_lb;
+        }
+    }
+
+    /* LB_UNIX means that within buffer, we saw only LF breaks, but
+       we cannot be sure about entire file. So, go conservative route
+       and don't report to user in UI that this file has unix line
+       breaks. */
+    return detected_lb == LB_UNIX ? LB_ASIS : detected_lb;
+}
+
+static LineBreaks
+detect_lb_type (const vfs_path_t *filename_vpath)
+{
+    unsigned char buf[BUF_LARGE];
+    ssize_t file, sz;
+
+    file = mc_open (filename_vpath, O_RDONLY | O_BINARY);
+    if (file == -1)
+        return LB_ASIS;
+
+    sz = mc_read (file, buf, sizeof (buf) - 1);
+    mc_close (file);
+
+    return detect_lb_type_buf (buf, sz);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Open the file and load it into the buffers, either directly or using
  * a filter.  Return TRUE on success, FALSE on error.
  *
@@ -396,6 +474,7 @@ static gboolean
 edit_load_file (WEdit * edit)
 {
     gboolean fast_load = TRUE;
+    LineBreaks lb_type = LB_ASIS;
 
     /* Cannot do fast load if a filter is used */
     if (edit_find_filter (edit->filename_vpath) >= 0)
@@ -420,6 +499,11 @@ edit_load_file (WEdit * edit)
             edit_clean (edit);
             return FALSE;
         }
+        if (option_autodetect_lb)
+            lb_type = detect_lb_type (edit->filename_vpath);
+
+        if (lb_type != LB_ASIS && lb_type != LB_UNIX)
+            fast_load = FALSE;
     }
     else
     {
@@ -445,7 +529,7 @@ edit_load_file (WEdit * edit)
             && *(vfs_path_get_by_index (edit->filename_vpath, 0)->path) != '\0')
         {
             edit->undo_stack_disable = 1;
-            if (edit_insert_file (edit, edit->filename_vpath) < 0)
+            if (edit_insert_file (edit, edit->filename_vpath, lb_type) < 0)
             {
                 edit_clean (edit);
                 return FALSE;
@@ -453,7 +537,7 @@ edit_load_file (WEdit * edit)
             edit->undo_stack_disable = 0;
         }
     }
-    edit->lb = LB_ASIS;
+    edit->lb = lb_type;
     return TRUE;
 }
 
@@ -1785,7 +1869,7 @@ user_menu (WEdit * edit, const char *menu_file, int selected_entry)
         {
             off_t ins_len;
 
-            ins_len = edit_insert_file (edit, block_file_vpath);
+            ins_len = edit_insert_file (edit, block_file_vpath, LB_ASIS);
             if (!nomark && ins_len > 0)
                 edit_set_markers (edit, start_mark, start_mark + ins_len, 0, 0);
         }
@@ -1939,7 +2023,7 @@ is_break_char (char c)
 /** inserts a file at the cursor, returns count of inserted bytes on success */
 
 off_t
-edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
+edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath, LineBreaks lb_type)
 {
     char *p;
     off_t current;
@@ -2029,7 +2113,19 @@ edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath)
             while ((blocklen = mc_read (file, (char *) buf, TEMP_BUF_LEN)) > 0)
             {
                 for (i = 0; i < blocklen; i++)
-                    edit_insert (edit, buf[i]);
+                {
+                    if (buf[i] == '\r')
+                    {
+                        if (lb_type == LB_MAC)
+                            edit_insert (edit, '\n');
+                        else if (lb_type == LB_WIN)
+                            /* just skip */ ;
+                        else
+                            edit_insert (edit, '\r');
+                    }
+                    else
+                        edit_insert (edit, buf[i]);
+                }
             }
             /* highlight inserted text then not persistent blocks */
             if (!option_persistent_selections && edit->modified)

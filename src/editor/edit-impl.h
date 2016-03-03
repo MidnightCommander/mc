@@ -221,7 +221,7 @@ gboolean edit_save_block (WEdit * edit, const char *filename, off_t start, off_t
 gboolean edit_save_block_cmd (WEdit * edit);
 gboolean edit_insert_file_cmd (WEdit * edit);
 
-off_t edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath);
+off_t edit_insert_file (WEdit * edit, const vfs_path_t * filename_vpath, LineBreaks lb_type);
 gboolean edit_load_back_cmd (WEdit * edit);
 gboolean edit_load_forward_cmd (WEdit * edit);
 void edit_block_process_cmd (WEdit * edit, int macro_number);

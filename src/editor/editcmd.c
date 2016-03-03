@@ -474,7 +474,9 @@ edit_get_save_file_as (WEdit * edit)
     {
         char *fname;
 
-        edit->lb = cur_lb;
+        /* Don't change current LB type (possibly autodetected), unless user asked to. */
+        if (cur_lb != LB_ASIS)
+            edit->lb = cur_lb;
         fname = tilde_expand (filename_res);
         g_free (filename_res);
         ret_vpath = vfs_path_from_str (fname);
@@ -3017,7 +3019,7 @@ edit_paste_from_X_buf_cmd (WEdit * edit)
     /* try use external clipboard utility */
     mc_event_raise (MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", NULL);
     tmp = mc_config_get_full_vpath (EDIT_CLIP_FILE);
-    ret = (edit_insert_file (edit, tmp) >= 0);
+    ret = (edit_insert_file (edit, tmp, LB_ASIS) >= 0);
     vfs_path_free (tmp);
 
     return ret;
@@ -3122,7 +3124,7 @@ edit_insert_file_cmd (WEdit * edit)
         vfs_path_t *exp_vpath;
 
         exp_vpath = vfs_path_from_str (exp);
-        ret = (edit_insert_file (edit, exp_vpath) >= 0);
+        ret = (edit_insert_file (edit, exp_vpath, LB_ASIS) >= 0);
         vfs_path_free (exp_vpath);
 
         if (!ret)
@@ -3198,7 +3200,7 @@ edit_sort_cmd (WEdit * edit)
         vfs_path_t *tmp_vpath;
 
         tmp_vpath = mc_config_get_full_vpath (EDIT_TEMP_FILE);
-        edit_insert_file (edit, tmp_vpath);
+        edit_insert_file (edit, tmp_vpath, LB_ASIS);
         vfs_path_free (tmp_vpath);
     }
     return 0;
@@ -3245,7 +3247,7 @@ edit_ext_cmd (WEdit * edit)
         vfs_path_t *tmp_vpath;
 
         tmp_vpath = mc_config_get_full_vpath (EDIT_TEMP_FILE);
-        edit_insert_file (edit, tmp_vpath);
+        edit_insert_file (edit, tmp_vpath, LB_ASIS);
         vfs_path_free (tmp_vpath);
     }
     return 0;

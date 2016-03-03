@@ -37,6 +37,7 @@ extern int option_auto_para_formatting;
 extern int option_fill_tabs_with_spaces;
 extern int option_return_does_auto_indent;
 extern int option_backspace_through_tabs;
+extern int option_autodetect_lb;
 extern int option_fake_half_tabs;
 extern int option_persistent_selections;
 extern int option_drop_selection_on_copy;

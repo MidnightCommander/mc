@@ -338,6 +338,7 @@ static const struct
     { "editor_word_wrap_line_length", &option_word_wrap_line_length },
     { "editor_fill_tabs_with_spaces", &option_fill_tabs_with_spaces },
     { "editor_return_does_auto_indent", &option_return_does_auto_indent },
+    { "editor_autodetect_linebreak", &option_autodetect_lb },
     { "editor_backspace_through_tabs", &option_backspace_through_tabs },
     { "editor_fake_half_tabs", &option_fake_half_tabs },
     { "editor_option_save_mode", &option_save_mode },
