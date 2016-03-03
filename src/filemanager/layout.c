@@ -1006,7 +1006,7 @@ set_display_type (int num, panel_view_mode_t type)
         else
             file_name = "";
 
-        mcview_load ((struct WView *) new_widget, 0, file_name, 0, 0, 0);
+        mcview_load ((WView *) new_widget, 0, file_name, 0, 0, 0);
         break;
 
     default:
@@ -1199,7 +1199,7 @@ get_display_type (int idx)
 
 /* --------------------------------------------------------------------------------------------- */
 
-struct Widget *
+Widget *
 get_panel_widget (int idx)
 {
     return panels[idx].widget;

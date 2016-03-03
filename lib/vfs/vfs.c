@@ -63,13 +63,13 @@
 extern struct dirent *mc_readdir_result;
 extern GPtrArray *vfs__classes_list;
 extern GString *vfs_str_buffer;
-extern struct vfs_class *current_vfs;
+extern vfs_class *current_vfs;
 
 /*** global variables ****************************************************************************/
 
 GPtrArray *vfs__classes_list = NULL;
 GString *vfs_str_buffer = NULL;
-struct vfs_class *current_vfs = NULL;
+vfs_class *current_vfs = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -86,7 +86,7 @@ struct vfs_class *current_vfs = NULL;
 struct vfs_openfile
 {
     int handle;
-    struct vfs_class *vclass;
+    vfs_class *vclass;
     void *fsinfo;
 };
 

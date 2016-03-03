@@ -728,7 +728,7 @@ check_format_var (const char *p, char **v)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-expand_format (const struct WEdit *edit_widget, char c, gboolean do_quote)
+expand_format (const WEdit * edit_widget, char c, gboolean do_quote)
 {
     WPanel *panel = NULL;
     char *(*quote_func) (const char *, gboolean);
@@ -914,7 +914,7 @@ expand_format (const struct WEdit *edit_widget, char c, gboolean do_quote)
  */
 
 gboolean
-user_menu_cmd (const struct WEdit * edit_widget, const char *menu_file, int selected_entry)
+user_menu_cmd (const WEdit * edit_widget, const char *menu_file, int selected_entry)
 {
     char *p;
     char *data, **entries;

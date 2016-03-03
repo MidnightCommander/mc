@@ -105,7 +105,7 @@ struct Widget
     widget_cb_fn callback;
     mouse_h mouse;
     void (*set_options) (Widget * w, widget_options_t options, gboolean enable);
-    struct WDialog *owner;
+    WDialog *owner;
 };
 
 /* structure for label (caption) with hotkey, if original text does not contain

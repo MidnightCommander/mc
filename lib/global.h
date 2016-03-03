@@ -163,6 +163,8 @@
 
 #define DEFAULT_CHARSET "ASCII"
 
+#include "lib/timer.h"          /* mc_timer_t */
+
 /*** enums ***************************************************************************************/
 
 /* run mode and params */
@@ -180,7 +182,7 @@ typedef struct
 {
     mc_run_mode_t mc_run_mode;
     /* global timer */
-    struct mc_timer_t *timer;
+    mc_timer_t *timer;
     /* Used so that widgets know if they are being destroyed or shut down */
     gboolean midnight_shutdown;
 

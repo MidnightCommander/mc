@@ -20,8 +20,6 @@ typedef struct WTree WTree;
 extern WTree *the_tree;
 extern int xtree_mode;
 
-struct WDialog;
-
 /*** declarations of public functions ************************************************************/
 
 WTree *tree_new (int y, int x, int lines, int cols, gboolean is_panel);
@@ -31,7 +29,7 @@ const vfs_path_t *tree_selected_name (const WTree * tree);
 
 void sync_tree (const vfs_path_t * vpath);
 
-WTree *find_tree (struct WDialog *h);
+WTree *find_tree (WDialog * h);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__TREE_H */

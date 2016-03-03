@@ -115,7 +115,7 @@ query_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
 /* --------------------------------------------------------------------------------------------- */
 /** Create message dialog */
 
-static struct WDialog *
+static WDialog *
 do_create_message (int flags, const char *title, const char *text)
 {
     char *p;
@@ -378,7 +378,7 @@ query_set_sel (int new_sel)
  * dlg_destroy() to dismiss it.  Not safe to call from background.
  */
 
-struct WDialog *
+WDialog *
 create_message (int flags, const char *title, const char *text, ...)
 {
     va_list args;

@@ -189,7 +189,7 @@ void update_cursor (WDialog * h);
 /* --------------------------------------------------------------------------------------------- */
 
 static inline unsigned long
-dlg_get_current_widget_id (const struct WDialog *h)
+dlg_get_current_widget_id (const WDialog * h)
 {
     return WIDGET (h->current->data)->id;
 }

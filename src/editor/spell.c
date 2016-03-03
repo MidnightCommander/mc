@@ -57,38 +57,36 @@ typedef struct aspell_struct
 static GModule *spell_module = NULL;
 static spell_t *global_speller = NULL;
 
-static struct AspellConfig *(*mc_new_aspell_config) (void);
-static int (*mc_aspell_config_replace) (struct AspellConfig * ths, const char *key,
-                                        const char *value);
-static struct AspellCanHaveError *(*mc_new_aspell_speller) (struct AspellConfig * config);
-static unsigned int (*mc_aspell_error_number) (const struct AspellCanHaveError * ths);
-static const char *(*mc_aspell_speller_error_message) (const struct AspellSpeller * ths);
-static const struct AspellError *(*mc_aspell_speller_error) (const struct AspellSpeller * ths);
+static AspellConfig *(*mc_new_aspell_config) (void);
+static int (*mc_aspell_config_replace) (AspellConfig * ths, const char *key, const char *value);
+static AspellCanHaveError *(*mc_new_aspell_speller) (AspellConfig * config);
+static unsigned int (*mc_aspell_error_number) (const AspellCanHaveError * ths);
+static const char *(*mc_aspell_speller_error_message) (const AspellSpeller * ths);
+static const AspellError *(*mc_aspell_speller_error) (const AspellSpeller * ths);
 
-static struct AspellSpeller *(*mc_to_aspell_speller) (struct AspellCanHaveError * obj);
-static int (*mc_aspell_speller_check) (struct AspellSpeller * ths, const char *word, int word_size);
-static const struct AspellWordList *(*mc_aspell_speller_suggest) (struct AspellSpeller * ths,
-                                                                  const char *word, int word_size);
-static struct AspellStringEnumeration *(*mc_aspell_word_list_elements) (const struct AspellWordList
-                                                                        * ths);
-static const char *(*mc_aspell_config_retrieve) (struct AspellConfig * ths, const char *key);
-static void (*mc_delete_aspell_speller) (struct AspellSpeller * ths);
-static void (*mc_delete_aspell_config) (struct AspellConfig * ths);
-static void (*mc_delete_aspell_can_have_error) (struct AspellCanHaveError * ths);
-static const char *(*mc_aspell_error_message) (const struct AspellCanHaveError * ths);
-static void (*mc_delete_aspell_string_enumeration) (struct AspellStringEnumeration * ths);
-static struct AspellDictInfoEnumeration *(*mc_aspell_dict_info_list_elements)
-    (const struct AspellDictInfoList * ths);
-static struct AspellDictInfoList *(*mc_get_aspell_dict_info_list) (struct AspellConfig * config);
-static const struct AspellDictInfo *(*mc_aspell_dict_info_enumeration_next)
-    (struct AspellDictInfoEnumeration * ths);
-static const char *(*mc_aspell_string_enumeration_next) (struct AspellStringEnumeration * ths);
-static void (*mc_delete_aspell_dict_info_enumeration) (struct AspellDictInfoEnumeration * ths);
-static unsigned int (*mc_aspell_word_list_size) (const struct AspellWordList * ths);
-static const struct AspellError *(*mc_aspell_error) (const struct AspellCanHaveError * ths);
-static int (*mc_aspell_speller_add_to_personal) (struct AspellSpeller * ths, const char *word,
+static AspellSpeller *(*mc_to_aspell_speller) (AspellCanHaveError * obj);
+static int (*mc_aspell_speller_check) (AspellSpeller * ths, const char *word, int word_size);
+static const AspellWordList *(*mc_aspell_speller_suggest) (AspellSpeller * ths,
+                                                           const char *word, int word_size);
+static AspellStringEnumeration *(*mc_aspell_word_list_elements) (const struct AspellWordList * ths);
+static const char *(*mc_aspell_config_retrieve) (AspellConfig * ths, const char *key);
+static void (*mc_delete_aspell_speller) (AspellSpeller * ths);
+static void (*mc_delete_aspell_config) (AspellConfig * ths);
+static void (*mc_delete_aspell_can_have_error) (AspellCanHaveError * ths);
+static const char *(*mc_aspell_error_message) (const AspellCanHaveError * ths);
+static void (*mc_delete_aspell_string_enumeration) (AspellStringEnumeration * ths);
+static AspellDictInfoEnumeration *(*mc_aspell_dict_info_list_elements)
+    (const AspellDictInfoList * ths);
+static AspellDictInfoList *(*mc_get_aspell_dict_info_list) (AspellConfig * config);
+static const AspellDictInfo *(*mc_aspell_dict_info_enumeration_next)
+    (AspellDictInfoEnumeration * ths);
+static const char *(*mc_aspell_string_enumeration_next) (AspellStringEnumeration * ths);
+static void (*mc_delete_aspell_dict_info_enumeration) (AspellDictInfoEnumeration * ths);
+static unsigned int (*mc_aspell_word_list_size) (const AspellWordList * ths);
+static const AspellError *(*mc_aspell_error) (const AspellCanHaveError * ths);
+static int (*mc_aspell_speller_add_to_personal) (AspellSpeller * ths, const char *word,
                                                  int word_size);
-static int (*mc_aspell_speller_save_all_word_lists) (struct AspellSpeller * ths);
+static int (*mc_aspell_speller_save_all_word_lists) (AspellSpeller * ths);
 
 static struct
 {

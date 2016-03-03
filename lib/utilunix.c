@@ -974,7 +974,7 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                     && strncmp (s - url_delim_len, VFS_PATH_URL_DELIMITER, url_delim_len) == 0)
                 {
                     char *vfs_prefix = s - url_delim_len;
-                    struct vfs_class *vclass;
+                    vfs_class *vclass;
 
                     while (vfs_prefix > lpath && !IS_PATH_SEP (*--vfs_prefix))
                         ;

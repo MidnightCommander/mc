@@ -281,7 +281,7 @@ info_show_info (WInfo * info)
 static void
 info_hook (void *data)
 {
-    struct WInfo *info = (struct WInfo *) data;
+    WInfo *info = (WInfo *) data;
     Widget *other_widget;
 
     other_widget = get_panel_widget (get_current_index ());
@@ -299,7 +299,7 @@ info_hook (void *data)
 static cb_ret_t
 info_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    struct WInfo *info = (struct WInfo *) w;
+    WInfo *info = (WInfo *) w;
 
     switch (msg)
     {

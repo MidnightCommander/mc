@@ -74,7 +74,7 @@
 
 /*** file scope variables ************************************************************************/
 
-static struct WDialog *ch_dlg;
+static WDialog *ch_dlg;
 
 static struct
 {

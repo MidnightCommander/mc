@@ -1319,7 +1319,7 @@ sync_tree (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 WTree *
-find_tree (struct WDialog *h)
+find_tree (WDialog * h)
 {
     return (WTree *) find_widget_type (h, tree_callback);
 }

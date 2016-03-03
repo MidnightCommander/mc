@@ -76,7 +76,7 @@ static int parent_fd;
 /* File descriptor for messages from our parent */
 static int from_parent_fd;
 
-struct TaskList *task_list = NULL;
+TaskList *task_list = NULL;
 
 static int background_attention (int fd, void *closure);
 
@@ -211,7 +211,7 @@ background_attention (int fd, void *closure)
     int argc, i, status;
     char *data[MAXCALLARGS];
     ssize_t bytes, ret;
-    struct TaskList *p;
+    TaskList *p;
     int to_child_fd = -1;
     enum ReturnType type;
 

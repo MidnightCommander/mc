@@ -84,11 +84,11 @@ int visible_tabs = 1, visible_tws = 1;
 
 /*** file scope type declarations ****************************************************************/
 
-struct line_s
+typedef struct
 {
     unsigned int ch;
     unsigned int style;
-};
+} line_s;
 
 /*** file scope variables ************************************************************************/
 
@@ -390,11 +390,11 @@ edit_draw_window_icons (const WEdit * edit, int color)
 
 static inline void
 print_to_widget (WEdit * edit, long row, int start_col, int start_col_real,
-                 long end_col, struct line_s line[], char *status, int bookmarked)
+                 long end_col, line_s line[], char *status, int bookmarked)
 {
     Widget *w = WIDGET (edit);
 
-    struct line_s *p;
+    line_s *p;
 
     int x = start_col_real;
     int x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width;
@@ -512,8 +512,8 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
 {
     Widget *w = WIDGET (edit);
 
-    struct line_s line[MAX_LINE_LEN];
-    struct line_s *p = line;
+    line_s line[MAX_LINE_LEN];
+    line_s *p = line;
 
     off_t m1 = 0, m2 = 0, q;
     int col, start_col_real;
