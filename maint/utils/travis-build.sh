@@ -33,6 +33,18 @@ function do_build() {
     make install
 }
 
+# Build distribution archive
+mkdir -p distrib && cd $_
+
+../configure
+make dist-bzip2
+
+DISTFILE=$(ls mc-*.tar.bz2)
+DISTDIR=$(echo $DISTFILE | sed 's/\.tar\.bz2$//g')
+
+tar -xjf $DISTFILE
+cd $DISTDIR
+
 # Build default configuration (S-Lang)
 mkdir -p build-default && pushd $_
 
