@@ -54,6 +54,7 @@ mkdir -p build-default && pushd $_
     --enable-maintainer-mode \
     --enable-mclib \
     --enable-charset \
+    --enable-aspell \
     --enable-tests \
     --enable-werror
 
@@ -70,6 +71,7 @@ mkdir -p build-ncurses && pushd $_
     --enable-maintainer-mode \
     --enable-mclib \
     --enable-charset \
+    --enable-aspell \
     --enable-tests \
     --enable-werror
 
@@ -85,6 +87,7 @@ mkdir -p build-all-disabled && pushd $_
     --disable-maintainer-mode \
     --disable-mclib \
     --disable-charset \
+    --disable-aspell \
     --disable-largefile \
     --disable-nls \
     --disable-vfs \
@@ -92,6 +95,8 @@ mkdir -p build-all-disabled && pushd $_
     --without-mmap \
     --without-x \
     --without-gpm-mouse \
+    --without-internal-edit \
+    --without-diff-viewer \
     --without-subshell \
     --enable-tests \
     --enable-werror
