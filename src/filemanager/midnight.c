@@ -45,6 +45,7 @@
 #include <pwd.h>                /* for username in xterm title */
 
 #include "lib/global.h"
+#include "lib/fileloc.h"        /* MC_HINT */
 
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"        /* KEY_M_* masks */
