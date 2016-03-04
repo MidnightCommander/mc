@@ -92,6 +92,8 @@ mkdir -p build-all-disabled && pushd $_
     --without-mmap \
     --without-x \
     --without-gpm-mouse \
+    --without-internal-edit \
+    --without-diff-viewer \
     --without-subshell \
     --enable-tests \
     --enable-werror
