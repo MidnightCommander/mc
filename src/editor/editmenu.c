@@ -286,7 +286,7 @@ edit_drop_menu_cmd (WDialog * h, int which)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-edit_init_menu (struct WMenuBar *menubar)
+edit_init_menu (WMenuBar * menubar)
 {
     menubar_add_menu (menubar,
                       create_menu (_("&File"), create_file_menu (), "[Internal File Editor]"));

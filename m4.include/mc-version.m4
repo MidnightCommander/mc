@@ -1,4 +1,4 @@
-dnl @synopsis MC_VERSION
+dnl @synopsis mc_VERSION
 dnl
 dnl Get current version of Midnight Commander from git tags
 dnl
@@ -7,7 +7,7 @@ dnl @version 2009-12-30
 dnl @license GPL
 dnl @copyright Free Software Foundation, Inc.
 
-AC_DEFUN([MC_VERSION],[
+AC_DEFUN([mc_VERSION],[
     if test ! -f ${srcdir}/version.h; then
         ${srcdir}/maint/utils/version.sh ${srcdir}
     fi

@@ -12,7 +12,7 @@
 #define QUICK_CHECKBOX(txt, st, id_)                                            \
 {                                                                               \
     .widget_type = quick_checkbox,                                              \
-    .options = 0,                                                               \
+    .options = W_DEFAULT,                                                       \
     .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = id_,                                                                  \
     .u = {                                                                      \
@@ -26,7 +26,7 @@
 #define QUICK_BUTTON(txt, act, cb, id_)                                         \
 {                                                                               \
     .widget_type = quick_button,                                                \
-    .options = 0,                                                               \
+    .options = W_DEFAULT,                                                       \
     .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = id_,                                                                  \
     .u = {                                                                      \
@@ -41,7 +41,7 @@
 #define QUICK_INPUT(txt, hname, res, id_, is_passwd_, strip_passwd_, completion_flags_) \
 {                                                                               \
     .widget_type = quick_input,                                                 \
-    .options = 0,                                                               \
+    .options = W_DEFAULT,                                                       \
     .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = id_,                                                                  \
     .u = {                                                                      \
@@ -62,7 +62,7 @@
 #define QUICK_LABELED_INPUT(label_, label_loc, txt, hname, res, id_, is_passwd_, strip_passwd_, completion_flags_) \
 {                                                                               \
     .widget_type = quick_input,                                                 \
-    .options = 0,                                                               \
+    .options = W_DEFAULT,                                                       \
     .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = id_,                                                                  \
     .u = {                                                                      \
@@ -83,7 +83,7 @@
 #define QUICK_LABEL(txt, id_)                                                   \
 {                                                                               \
     .widget_type = quick_label,                                                 \
-    .options = 0,                                                               \
+    .options = W_DEFAULT,                                                       \
     .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = id_,                                                                  \
     .u = {                                                                      \
@@ -97,7 +97,7 @@
 #define QUICK_RADIO(cnt, items_, val, id_)                                      \
 {                                                                               \
     .widget_type = quick_radio,                                                 \
-    .options = 0,                                                               \
+    .options = W_DEFAULT,                                                       \
     .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = id_,                                                                  \
     .u = {                                                                      \
@@ -112,7 +112,7 @@
 #define QUICK_START_GROUPBOX(t)                                                 \
 {                                                                               \
     .widget_type = quick_start_groupbox,                                        \
-    .options = 0,                                                               \
+    .options = W_DEFAULT,                                                       \
     .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = NULL,                                                                 \
     .u = {                                                                      \
@@ -125,7 +125,7 @@
 #define QUICK_STOP_GROUPBOX                                                     \
 {                                                                               \
     .widget_type = quick_stop_groupbox,                                         \
-    .options = 0,                                                               \
+    .options = W_DEFAULT,                                                       \
     .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = NULL,                                                                 \
     .u = {                                                                      \
@@ -140,7 +140,7 @@
 #define QUICK_SEPARATOR(line_)                                                  \
 {                                                                               \
     .widget_type = quick_separator,                                             \
-    .options = 0,                                                               \
+    .options = W_DEFAULT,                                                       \
     .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = NULL,                                                                 \
     .u = {                                                                      \
@@ -154,7 +154,7 @@
 #define QUICK_START_COLUMNS                                                     \
 {                                                                               \
     .widget_type = quick_start_columns,                                         \
-    .options = 0,                                                               \
+    .options = W_DEFAULT,                                                       \
     .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = NULL,                                                                 \
     .u = {                                                                      \
@@ -169,7 +169,7 @@
 #define QUICK_NEXT_COLUMN                                                       \
 {                                                                               \
     .widget_type = quick_next_column,                                           \
-    .options = 0,                                                               \
+    .options = W_DEFAULT,                                                       \
     .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = NULL,                                                                 \
     .u = {                                                                      \
@@ -184,7 +184,7 @@
 #define QUICK_STOP_COLUMNS                                                      \
 {                                                                               \
     .widget_type = quick_stop_columns,                                          \
-    .options = 0,                                                               \
+    .options = W_DEFAULT,                                                       \
     .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = NULL,                                                                 \
     .u = {                                                                      \
@@ -199,7 +199,7 @@
 #define QUICK_START_BUTTONS(space_, line_)                                      \
 {                                                                               \
     .widget_type = quick_buttons,                                               \
-    .options = 0,                                                               \
+    .options = W_DEFAULT,                                                       \
     .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = NULL,                                                                 \
     .u = {                                                                      \
@@ -218,7 +218,7 @@
 #define QUICK_END                                                               \
 {                                                                               \
     .widget_type = quick_end,                                                   \
-    .options = 0,                                                               \
+    .options = W_DEFAULT,                                                       \
     .pos_flags = WPOS_KEEP_DEFAULT,                                             \
     .id = NULL,                                                                 \
     .u = {                                                                      \

@@ -1,7 +1,7 @@
 dnl
 dnl Internal editor support.
 dnl
-AC_DEFUN([MC_WITH_INTERNAL_EDIT], [
+AC_DEFUN([mc_WITH_INTERNAL_EDIT], [
 
     AC_ARG_WITH([internal_edit],
         AS_HELP_STRING([--with-internal-edit], [Enable internal editor @<:@yes@:>@]))

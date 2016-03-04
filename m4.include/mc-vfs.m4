@@ -1,4 +1,4 @@
-AC_DEFUN([AC_MC_VFS_ADDNAME],
+AC_DEFUN([mc_VFS_ADDNAME],
 [
     if test x"$vfs_flags" = "x" ; then
 	vfs_flags="$1"
@@ -19,7 +19,7 @@ m4_include([m4.include/vfs/mc-vfs-tarfs.m4])
 m4_include([m4.include/vfs/mc-vfs-cpiofs.m4])
 m4_include([m4.include/vfs/mc-vfs-samba.m4])
 
-dnl MC_VFS_CHECKS
+dnl mc_VFS_CHECKS
 dnl   Check for various functions needed by libvfs.
 dnl   This has various effects:
 dnl     Sets MC_VFS_LIBS to libraries required
@@ -28,7 +28,7 @@ dnl     Sets shell variable enable_vfs to yes (default, --with-vfs) or
 dnl        "no" (--without-vfs).
 
 dnl Private define
-AC_DEFUN([MC_ENABLE_VFS_NET],
+AC_DEFUN([mc_ENABLE_VFS_NET],
 [
     dnl FIXME: network checks should probably be in their own macro.
     AC_REQUIRE_SOCKET
@@ -48,7 +48,7 @@ AC_DEFUN([MC_ENABLE_VFS_NET],
     fi
 ])
 
-AC_DEFUN([AC_MC_VFS_CHECKS],
+AC_DEFUN([mc_VFS_CHECKS],
 [
     vfs_type="normal"
 
@@ -69,20 +69,20 @@ AC_DEFUN([AC_MC_VFS_CHECKS],
 	AC_DEFINE(ENABLE_VFS, [1], [Define to enable VFS support])
     fi
 
-    AC_MC_VFS_CPIOFS
-    AC_MC_VFS_TARFS
-    AC_MC_VFS_SFS
-    AC_MC_VFS_EXTFS
-    AC_MC_VFS_UNDELFS
-    AC_MC_VFS_FTP
-    AC_MC_VFS_SFTP
-    AC_MC_VFS_FISH
-    AC_MC_VFS_SMB
+    mc_VFS_CPIOFS
+    mc_VFS_EXTFS
+    mc_VFS_FISH
+    mc_VFS_FTP
+    mc_VFS_SFS
+    mc_VFS_SFTP
+    mc_VFS_SMB
+    mc_VFS_TARFS
+    mc_VFS_UNDELFS
 
     AM_CONDITIONAL(ENABLE_VFS, [test x"$enable_vfs" = x"yes"])
 
     if test x"$enable_vfs_ftp" = x"yes" -o x"$enable_vfs_fish" = x"yes" -o x"$enable_vfs_smb" = x"yes"; then
-	MC_ENABLE_VFS_NET
+	mc_ENABLE_VFS_NET
     fi
 
     AM_CONDITIONAL([ENABLE_VFS_NET], [test x"$enable_vfs_net" = x"yes"])

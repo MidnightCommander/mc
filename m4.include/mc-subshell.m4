@@ -1,7 +1,7 @@
 dnl
 dnl Subshell support.
 dnl
-AC_DEFUN([MC_SUBSHELL], [
+AC_DEFUN([mc_SUBSHELL], [
 
     AC_MSG_CHECKING([for subshell support])
     AC_ARG_WITH(subshell,

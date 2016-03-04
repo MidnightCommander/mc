@@ -711,7 +711,7 @@ static cb_ret_t
 edit_dialog_command_execute (WDialog * h, long command)
 {
     Widget *wh = WIDGET (h);
-    gboolean ret = MSG_HANDLED;
+    cb_ret_t ret = MSG_HANDLED;
 
     switch (command)
     {
@@ -854,7 +854,7 @@ edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch)
                 if (!edit->utf8)
                     char_for_insertion = c;
                 else
-                    char_for_insertion = convert_from_8bit_to_utf_c2 ((unsigned char) x_key);
+                    char_for_insertion = convert_from_8bit_to_utf_c2 ((char) x_key);
                 goto fin;
             }
         }
@@ -1262,10 +1262,10 @@ edit_files (const GList * files)
 
 /* --------------------------------------------------------------------------------------------- */
 
-char *
+const char *
 edit_get_file_name (const WEdit * edit)
 {
-    return g_strdup (vfs_path_as_str (edit->filename_vpath));
+    return vfs_path_as_str (edit->filename_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */

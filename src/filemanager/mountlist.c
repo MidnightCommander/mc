@@ -264,12 +264,14 @@ me_remote (char const *fs_name, char const *fs_type)
 #endif
 #ifndef ME_REMOTE
 /* A file system is 'remote' if its Fs_name contains a ':'
-   or if (it is of type (smbfs or cifs) and its Fs_name starts with '//').  */
+   or if (it is of type (smbfs or cifs) and its Fs_name starts with '//')
+   or Fs_name is equal to "-hosts" (used by autofs to mount remote fs).  */
 #define ME_REMOTE(Fs_name, Fs_type) \
     (strchr (Fs_name, ':') != NULL \
      || ((Fs_name)[0] == '/' \
          && (Fs_name)[1] == '/' \
-         && (strcmp (Fs_type, "smbfs") == 0 || strcmp (Fs_type, "cifs") == 0)))
+         && (strcmp (Fs_type, "smbfs") == 0 || strcmp (Fs_type, "cifs") == 0)) \
+     || (strcmp("-hosts", Fs_name) == 0))
 #endif
 
 /* Many space usage primitives use all 1 bits to denote a value that is
@@ -640,12 +642,10 @@ unescape_tab (char *str)
 /* --------------------------------------------------------------------------------------------- */
 
 /* Return a list of the currently mounted file systems, or NULL on error.
-   Add each entry to the tail of the list so that they stay in order.
-   If NEED_FS_TYPE is true, ensure that the file system type fields in
-   the returned list are valid.  Otherwise, they might not be.  */
+   Add each entry to the tail of the list so that they stay in order. */
 
 static GSList *
-read_file_system_list (int need_fs_type)
+read_file_system_list (void)
 {
     GSList *mount_list = NULL;
     struct mount_entry *me;
@@ -1057,7 +1057,6 @@ read_file_system_list (int need_fs_type)
             me->me_type = "";
             me->me_type_malloced = 0;
 #ifdef GETFSTYP                 /* SVR3.  */
-            if (need_fs_type)
             {
                 struct statfs fsd;
                 char typebuf[FSTYPSZ];
@@ -1290,8 +1289,6 @@ read_file_system_list (int need_fs_type)
     }
 #endif /* MOUNTED_INTERIX_STATVFS */
 
-    (void) need_fs_type;        /* avoid argument-unused warning */
-
     return g_slist_reverse (mount_list);
 
   free_then_fail:
@@ -1318,7 +1315,7 @@ read_file_system_list (int need_fs_type)
  */
 
 static GSList *
-read_file_system_list (int need_fs_type, int all_fs)
+read_file_system_list (void)
 {
     struct _disk_entry de;
     struct statfs fs;
@@ -1694,7 +1691,7 @@ init_my_statfs (void)
 {
 #ifdef HAVE_INFOMOUNT_LIST
     free_my_statfs ();
-    mc_mount_list = read_file_system_list (1);
+    mc_mount_list = read_file_system_list ();
 #endif /* HAVE_INFOMOUNT_LIST */
 }
 
@@ -1754,7 +1751,7 @@ my_statfs (struct my_statfs *myfs_stats, const char *path)
         struct mount_entry *entry;
     struct fs_usage fs_use;
 
-    entry = read_file_system_list (0, 0);
+    entry = read_file_system_list ();
     if (entry != NULL)
     {
         get_fs_usage (entry->me_mountdir, NULL, &fs_use);

@@ -214,10 +214,14 @@ tree_destroy (WTree * tree)
 static void
 load_tree (WTree * tree)
 {
+    vfs_path_t *vpath;
+
     tree_store_load ();
 
     tree->selected_ptr = tree->store->tree_first;
-    tree_chdir (tree, mc_config_get_home_dir ());
+    vpath = vfs_path_from_str (mc_config_get_home_dir ());
+    tree_chdir (tree, vpath);
+    vfs_path_free (vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1283,25 +1287,22 @@ tree_new (int y, int x, int lines, int cols, gboolean is_panel)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-tree_chdir (WTree * tree, const char *dir)
+tree_chdir (WTree * tree, const vfs_path_t * dir)
 {
-    vfs_path_t *vpath;
     tree_entry *current;
 
-    vpath = vfs_path_from_str (dir);
-    current = tree_store_whereis (vpath);
+    current = tree_store_whereis (dir);
     if (current != NULL)
     {
         tree->selected_ptr = current;
         tree_check_focus (tree);
     }
-    vfs_path_free (vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 /** Return name of the currently selected entry */
 
-vfs_path_t *
+const vfs_path_t *
 tree_selected_name (const WTree * tree)
 {
     return tree->selected_ptr->name;
@@ -1310,15 +1311,15 @@ tree_selected_name (const WTree * tree)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-sync_tree (const char *path)
+sync_tree (const vfs_path_t * vpath)
 {
-    tree_chdir (the_tree, path);
+    tree_chdir (the_tree, vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 WTree *
-find_tree (struct WDialog *h)
+find_tree (WDialog * h)
 {
     return (WTree *) find_widget_type (h, tree_callback);
 }

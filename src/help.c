@@ -1080,7 +1080,7 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
     if (event_data->filename != NULL)
         g_file_get_contents (event_data->filename, &filedata, NULL, NULL);
     else
-        filedata = load_mc_home_file (mc_global.share_data_dir, MC_HELP, &hlpfile);
+        filedata = load_mc_home_file (mc_global.share_data_dir, MC_HELP, &hlpfile, NULL);
 
     if (filedata == NULL)
         message (D_ERROR, MSG_ERROR, _("Cannot open file %s\n%s"),

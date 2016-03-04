@@ -16,8 +16,8 @@
 
 typedef struct
 {
-    struct WDialog *dlg;
-    struct WListbox *list;
+    WDialog *dlg;
+    WListbox *list;
 } Listbox;
 
 /*** global variables defined in .c file *********************************************************/

@@ -694,7 +694,7 @@ static void
 ftpfs_load_no_proxy_list (void)
 {
     /* FixMe: shouldn't be hardcoded!!! */
-    static char *mc_file = NULL;
+    char *mc_file;
 
     mc_file = g_build_filename (mc_global.sysconfig_dir, "mc.no_proxy", (char *) NULL);
     if (exist_file (mc_file))

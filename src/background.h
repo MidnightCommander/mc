@@ -31,7 +31,7 @@ typedef struct TaskList
 
 /*** global variables defined in .c file *********************************************************/
 
-extern struct TaskList *task_list;
+extern TaskList *task_list;
 
 /*** declarations of public functions ************************************************************/
 

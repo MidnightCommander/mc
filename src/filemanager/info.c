@@ -39,7 +39,6 @@
 #include "lib/unixcompat.h"
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"        /* is_idle() */
-#include "lib/tty/mouse.h"      /* Gpm_Event */
 #include "lib/skin.h"
 #include "lib/strutil.h"
 #include "lib/timefmt.h"        /* file_date() */
@@ -66,7 +65,7 @@
 struct WInfo
 {
     Widget widget;
-    int ready;
+    gboolean ready;
 };
 
 /*** file scope variables ************************************************************************/
@@ -282,7 +281,7 @@ info_show_info (WInfo * info)
 static void
 info_hook (void *data)
 {
-    struct WInfo *info = (struct WInfo *) data;
+    WInfo *info = (WInfo *) data;
     Widget *other_widget;
 
     other_widget = get_panel_widget (get_current_index ());
@@ -291,7 +290,7 @@ info_hook (void *data)
     if (widget_overlapped (WIDGET (info), other_widget))
         return;
 
-    info->ready = 1;
+    info->ready = TRUE;
     info_show_info (info);
 }
 
@@ -300,14 +299,14 @@ info_hook (void *data)
 static cb_ret_t
 info_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    struct WInfo *info = (struct WInfo *) w;
+    WInfo *info = (WInfo *) w;
 
     switch (msg)
     {
     case MSG_INIT:
         init_my_statfs ();
         add_hook (&select_file_hook, info_hook, info);
-        info->ready = 0;
+        info->ready = FALSE;
         return MSG_HANDLED;
 
     case MSG_DRAW:

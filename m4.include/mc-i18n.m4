@@ -1,4 +1,4 @@
-dnl @synopsis MC_DOC_LINGUAS
+dnl @synopsis mc_I18N
 dnl
 dnl Check if environment is ready for get translations of docs from transifex
 dnl
@@ -7,7 +7,7 @@ dnl @version 2011-02-10
 dnl @license GPL
 dnl @copyright Free Software Foundation, Inc.
 
-AC_DEFUN([MC_I18N],[
+AC_DEFUN([mc_I18N],[
 
     if test "x$USE_INCLUDED_LIBINTL" = xyes; then
         CPPFLAGS="$CPPFLAGS -I\$(top_builddir)/intl -I\$(top_srcdir)/intl"

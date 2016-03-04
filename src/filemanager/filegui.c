@@ -343,9 +343,9 @@ static void
 file_frmt_time (char *buffer, double eta_secs)
 {
     int eta_hours, eta_mins, eta_s;
-    eta_hours = eta_secs / (60 * 60);
-    eta_mins = (eta_secs - (eta_hours * 60 * 60)) / 60;
-    eta_s = eta_secs - (eta_hours * 60 * 60 + eta_mins * 60);
+    eta_hours = (int) (eta_secs / (60 * 60));
+    eta_mins = (int) ((eta_secs - (eta_hours * 60 * 60)) / 60);
+    eta_s = (int) (eta_secs - (eta_hours * 60 * 60 + eta_mins * 60));
     g_snprintf (buffer, BUF_TINY, _("%d:%02d.%02d"), eta_hours, eta_mins, eta_s);
 }
 

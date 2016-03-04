@@ -23,7 +23,7 @@ gitfs_list()
 
 gitfs_copyout()
 {
-    echo -e "$2" > "$4"
+    printf "%s\n" "$2" > "$4"
     b=`echo "$prefix"| wc -c`
     b=`expr "$b" + 1`
     # remove prefix from file name

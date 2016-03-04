@@ -203,6 +203,7 @@ int quit = 0;
 /* Set to TRUE to suppress printing the last directory */
 int print_last_revert = FALSE;
 
+#ifdef USE_INTERNAL_EDIT
 /* index to record_macro_buf[], -1 if not recording a macro */
 int macro_index = -1;
 
@@ -210,6 +211,7 @@ int macro_index = -1;
 struct macro_action_t record_macro_buf[MAX_MACRO_LENGTH];
 
 GArray *macros_list;
+#endif /* USE_INTERNAL_EDIT */
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -820,6 +822,91 @@ panel_save_type (const char *section, panel_view_mode_t type)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Load panels options from [Panels] section.
+ */
+static void
+panels_load_options (void)
+{
+    if (mc_config_has_group (mc_main_config, CONFIG_PANELS_SECTION))
+    {
+        size_t i;
+        int qmode;
+
+        for (i = 0; panels_ini_options[i].opt_name != NULL; i++)
+            *panels_ini_options[i].opt_addr =
+                mc_config_get_bool (mc_main_config, CONFIG_PANELS_SECTION,
+                                    panels_ini_options[i].opt_name,
+                                    *panels_ini_options[i].opt_addr);
+
+        qmode = mc_config_get_int (mc_main_config, CONFIG_PANELS_SECTION,
+                                   "quick_search_mode", (int) panels_options.qsearch_mode);
+        if (qmode < 0)
+            panels_options.qsearch_mode = QSEARCH_CASE_INSENSITIVE;
+        else if (qmode >= QSEARCH_NUM)
+            panels_options.qsearch_mode = QSEARCH_PANEL_CASE;
+        else
+            panels_options.qsearch_mode = (qsearch_mode_t) qmode;
+
+        panels_options.select_flags =
+            mc_config_get_int (mc_main_config, CONFIG_PANELS_SECTION, "select_flags",
+                               (int) panels_options.select_flags);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Save panels options in [Panels] section.
+ */
+static void
+panels_save_options (void)
+{
+    size_t i;
+
+    for (i = 0; panels_ini_options[i].opt_name != NULL; i++)
+        mc_config_set_bool (mc_main_config, CONFIG_PANELS_SECTION,
+                            panels_ini_options[i].opt_name, *panels_ini_options[i].opt_addr);
+
+    mc_config_set_int (mc_main_config, CONFIG_PANELS_SECTION,
+                       "quick_search_mode", (int) panels_options.qsearch_mode);
+    mc_config_set_int (mc_main_config, CONFIG_PANELS_SECTION,
+                       "select_flags", (int) panels_options.select_flags);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+save_config (void)
+{
+    size_t i;
+
+    /* Save integer options */
+    for (i = 0; int_options[i].opt_name != NULL; i++)
+        mc_config_set_int (mc_main_config, CONFIG_APP_SECTION, int_options[i].opt_name,
+                           *int_options[i].opt_addr);
+
+    /* Save string options */
+    for (i = 0; str_options[i].opt_name != NULL; i++)
+        mc_config_set_string (mc_main_config, CONFIG_APP_SECTION, str_options[i].opt_name,
+                              *str_options[i].opt_addr);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+save_layout (void)
+{
+    size_t i;
+
+    /* Save integer options */
+    for (i = 0; layout[i].opt_name != NULL; i++)
+        mc_config_set_int (mc_main_config, CONFIG_LAYOUT_SECTION, layout[i].opt_name,
+                           *layout[i].opt_addr);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /* save panels.ini */
 static void
 save_panel_types (void)
@@ -1146,23 +1233,6 @@ done_setup (void)
 #endif /* HAVE_ASPELL */
 }
 
-/* --------------------------------------------------------------------------------------------- */
-
-void
-save_config (void)
-{
-    size_t i;
-
-    /* Save integer options */
-    for (i = 0; int_options[i].opt_name != NULL; i++)
-        mc_config_set_int (mc_main_config, CONFIG_APP_SECTION, int_options[i].opt_name,
-                           *int_options[i].opt_addr);
-
-    /* Save string options */
-    for (i = 0; str_options[i].opt_name != NULL; i++)
-        mc_config_set_string (mc_main_config, CONFIG_APP_SECTION, str_options[i].opt_name,
-                              *str_options[i].opt_addr);
-}
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1177,18 +1247,6 @@ setup_save_config_show_error (const char *filename, GError ** mcerror)
     }
 }
 
-/* --------------------------------------------------------------------------------------------- */
-
-void
-save_layout (void)
-{
-    size_t i;
-
-    /* Save integer options */
-    for (i = 0; layout[i].opt_name != NULL; i++)
-        mc_config_set_int (mc_main_config, CONFIG_LAYOUT_SECTION, layout[i].opt_name,
-                           *layout[i].opt_addr);
-}
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1431,58 +1489,5 @@ panel_save_setup (WPanel * panel, const char *section)
     mc_config_set_int (mc_panels_config, section, "user_mini_status", panel->user_mini_status);
 }
 
-/* --------------------------------------------------------------------------------------------- */
-
-/**
-  Load panels options from [Panels] section.
-*/
-void
-panels_load_options (void)
-{
-    if (mc_config_has_group (mc_main_config, CONFIG_PANELS_SECTION))
-    {
-        size_t i;
-        int qmode;
-
-        for (i = 0; panels_ini_options[i].opt_name != NULL; i++)
-            *panels_ini_options[i].opt_addr =
-                mc_config_get_bool (mc_main_config, CONFIG_PANELS_SECTION,
-                                    panels_ini_options[i].opt_name,
-                                    *panels_ini_options[i].opt_addr);
-
-        qmode = mc_config_get_int (mc_main_config, CONFIG_PANELS_SECTION,
-                                   "quick_search_mode", (int) panels_options.qsearch_mode);
-        if (qmode < 0)
-            panels_options.qsearch_mode = QSEARCH_CASE_INSENSITIVE;
-        else if (qmode >= QSEARCH_NUM)
-            panels_options.qsearch_mode = QSEARCH_PANEL_CASE;
-        else
-            panels_options.qsearch_mode = (qsearch_mode_t) qmode;
-
-        panels_options.select_flags =
-            mc_config_get_int (mc_main_config, CONFIG_PANELS_SECTION, "select_flags",
-                               (int) panels_options.select_flags);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
-  Save panels options in [Panels] section.
-*/
-void
-panels_save_options (void)
-{
-    size_t i;
-
-    for (i = 0; panels_ini_options[i].opt_name != NULL; i++)
-        mc_config_set_bool (mc_main_config, CONFIG_PANELS_SECTION,
-                            panels_ini_options[i].opt_name, *panels_ini_options[i].opt_addr);
-
-    mc_config_set_int (mc_main_config, CONFIG_PANELS_SECTION,
-                       "quick_search_mode", (int) panels_options.qsearch_mode);
-    mc_config_set_int (mc_main_config, CONFIG_PANELS_SECTION,
-                       "select_flags", (int) panels_options.select_flags);
-}
 
 /* --------------------------------------------------------------------------------------------- */

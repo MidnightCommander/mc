@@ -66,7 +66,9 @@ char *mc_args__netfs_logfile = NULL;
 char *mc_args__keymap_file = NULL;
 
 /* Debug level */
+#ifdef ENABLE_VFS_SMB
 int mc_args__debug_level = 0;
+#endif
 
 void *mc_run_param0 = NULL;
 char *mc_run_param1 = NULL;
@@ -469,6 +471,42 @@ parse_mc_v_argument (const gchar * option_name, const gchar * value, gpointer da
 
 /* --------------------------------------------------------------------------------------------- */
 /**
+ * Create mcedit_arg_t object from vfs_path_t object and the line number.
+ *
+ * @param file_vpath  file path object
+ * @param line_number line number. If value is 0, try to restore saved position.
+ * @return mcedit_arg_t object
+ */
+
+static mcedit_arg_t *
+mcedit_arg_vpath_new (vfs_path_t * file_vpath, long line_number)
+{
+    mcedit_arg_t *arg;
+
+    arg = g_new (mcedit_arg_t, 1);
+    arg->file_vpath = file_vpath;
+    arg->line_number = line_number;
+
+    return arg;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Create mcedit_arg_t object from file name and the line number.
+ *
+ * @param file_name   file name
+ * @param line_number line number. If value is 0, try to restore saved position.
+ * @return mcedit_arg_t object
+ */
+
+static mcedit_arg_t *
+mcedit_arg_new (const char *file_name, long line_number)
+{
+    return mcedit_arg_vpath_new (vfs_path_from_str (file_name), line_number);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Get list of filenames (and line numbers) from command line, when mc called as editor
  *
  * @param argc count of all arguments
@@ -789,42 +827,6 @@ mc_setup_by_args (int argc, char **argv, GError ** mcerror)
     }
 
     return TRUE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Create mcedit_arg_t object from file name and the line number.
- *
- * @param file_name   file name
- * @param line_number line number. If value is 0, try to restore saved position.
- * @return mcedit_arg_t object
- */
-
-mcedit_arg_t *
-mcedit_arg_new (const char *file_name, long line_number)
-{
-    return mcedit_arg_vpath_new (vfs_path_from_str (file_name), line_number);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Create mcedit_arg_t object from vfs_path_t object and the line number.
- *
- * @param file_vpath  file path object
- * @param line_number line number. If value is 0, try to restore saved position.
- * @return mcedit_arg_t object
- */
-
-mcedit_arg_t *
-mcedit_arg_vpath_new (vfs_path_t * file_vpath, long line_number)
-{
-    mcedit_arg_t *arg;
-
-    arg = g_new (mcedit_arg_t, 1);
-    arg->file_vpath = file_vpath;
-    arg->line_number = line_number;
-
-    return arg;
 }
 
 /* --------------------------------------------------------------------------------------------- */

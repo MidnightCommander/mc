@@ -48,7 +48,6 @@
 #include <stdlib.h>
 #include <pwd.h>
 #include <grp.h>
-#include <sys/time.h>
 
 #include "lib/global.h"
 
@@ -1109,11 +1108,17 @@ hotlist_cmd (void)
     char *target;
 
     target = hotlist_show (LIST_HOTLIST);
-    if (!target)
+    if (target == NULL)
         return;
 
     if (get_current_type () == view_tree)
-        tree_chdir (the_tree, target);
+    {
+        vfs_path_t *vpath;
+
+        vpath = vfs_path_from_str (target);
+        tree_chdir (the_tree, vpath);
+        vfs_path_free (vpath);
+    }
     else
     {
         vfs_path_t *deprecated_vpath;
@@ -1247,61 +1252,62 @@ link_cmd (link_type_t link_type)
 void
 edit_symlink_cmd (void)
 {
-    if (S_ISLNK (selection (current_panel)->st.st_mode))
+    const file_entry_t *fe;
+    const char *p;
+
+    fe = selection (current_panel);
+    p = fe->fname;
+
+    if (!S_ISLNK (fe->st.st_mode))
+        message (D_ERROR, MSG_ERROR, _("'%s' is not a symbolic link"), p);
+    else
     {
         char buffer[MC_MAXPATHLEN];
-        char *p = NULL;
         int i;
-        char *q;
-        vfs_path_t *p_vpath;
 
-        p = selection (current_panel)->fname;
-        p_vpath = vfs_path_from_str (p);
-
-        q = g_strdup_printf (_("Symlink '%s\' points to:"), str_trunc (p, 32));
-
-        i = readlink (p, buffer, MC_MAXPATHLEN - 1);
+        i = readlink (p, buffer, sizeof (buffer) - 1);
         if (i > 0)
         {
-            char *dest;
+            char *q, *dest;
 
-            buffer[i] = 0;
+            buffer[i] = '\0';
+
+            q = g_strdup_printf (_("Symlink '%s\' points to:"), str_trunc (p, 32));
             dest =
                 input_expand_dialog (_("Edit symlink"), q, MC_HISTORY_FM_EDIT_LINK, buffer,
                                      INPUT_COMPLETE_FILENAMES);
-            if (dest)
-            {
-                if (*dest && strcmp (buffer, dest))
-                {
-                    save_cwds_stat ();
-                    if (mc_unlink (p_vpath) == -1)
-                    {
-                        message (D_ERROR, MSG_ERROR, _("edit symlink, unable to remove %s: %s"),
-                                 p, unix_error_string (errno));
-                    }
-                    else
-                    {
-                        vfs_path_t *dest_vpath;
+            g_free (q);
 
-                        dest_vpath = vfs_path_from_str_flags (dest, VPF_NO_CANON);
-                        if (mc_symlink (dest_vpath, p_vpath) == -1)
-                            message (D_ERROR, MSG_ERROR, _("edit symlink: %s"),
-                                     unix_error_string (errno));
-                        vfs_path_free (dest_vpath);
-                    }
-                    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-                    repaint_screen ();
+            if (dest != NULL && *dest != '\0' && strcmp (buffer, dest) != 0)
+            {
+                vfs_path_t *p_vpath;
+
+                p_vpath = vfs_path_from_str (p);
+
+                save_cwds_stat ();
+
+                if (mc_unlink (p_vpath) == -1)
+                    message (D_ERROR, MSG_ERROR, _("edit symlink, unable to remove %s: %s"), p,
+                             unix_error_string (errno));
+                else
+                {
+                    vfs_path_t *dest_vpath;
+
+                    dest_vpath = vfs_path_from_str_flags (dest, VPF_NO_CANON);
+                    if (mc_symlink (dest_vpath, p_vpath) == -1)
+                        message (D_ERROR, MSG_ERROR, _("edit symlink: %s"),
+                                 unix_error_string (errno));
+                    vfs_path_free (dest_vpath);
                 }
-                g_free (dest);
+
+                vfs_path_free (p_vpath);
+
+                update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+                repaint_screen ();
             }
+
+            g_free (dest);
         }
-        g_free (q);
-        vfs_path_free (p_vpath);
-    }
-    else
-    {
-        message (D_ERROR, MSG_ERROR, _("'%s' is not a symbolic link"),
-                 selection (current_panel)->fname);
     }
 }
 
@@ -1326,77 +1332,6 @@ void
 user_file_menu_cmd (void)
 {
     (void) user_menu_cmd (NULL, NULL, -1);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Return a random hint.  If force is not 0, ignore the timeout.
- */
-
-char *
-get_random_hint (int force)
-{
-    char *data, *result = NULL, *eop;
-    int len;
-    int start;
-    static int last_sec;
-    static struct timeval tv;
-    GIConv conv;
-
-    /* Do not change hints more often than one minute */
-    gettimeofday (&tv, NULL);
-    if (!force && !(tv.tv_sec > last_sec + 60))
-        return g_strdup ("");
-    last_sec = tv.tv_sec;
-
-    data = load_mc_home_file (mc_global.share_data_dir, MC_HINT, NULL);
-    if (data == NULL)
-        return NULL;
-
-    /* get a random entry */
-    srand (tv.tv_sec);
-    len = strlen (data);
-    start = rand () % (len - 1);
-
-    /* Search the start of paragraph */
-    for (; start != 0; start--)
-        if (data[start] == '\n' && data[start + 1] == '\n')
-        {
-            start += 2;
-            break;
-        }
-
-    /* Search the end of paragraph */
-    for (eop = data + start; *eop != '\0'; eop++)
-    {
-        if (*eop == '\n' && *(eop + 1) == '\n')
-        {
-            *eop = '\0';
-            break;
-        }
-        if (*eop == '\n')
-            *eop = ' ';
-    }
-
-    /* hint files are stored in utf-8 */
-    /* try convert hint file from utf-8 to terminal encoding */
-    conv = str_crt_conv_from ("UTF-8");
-    if (conv != INVALID_CONV)
-    {
-        GString *buffer;
-
-        buffer = g_string_new ("");
-        if (str_convert (conv, &data[start], buffer) != ESTR_FAILURE)
-            result = g_string_free (buffer, FALSE);
-        else
-            g_string_free (buffer, TRUE);
-        str_close_conv (conv);
-    }
-    else
-        result = g_strdup (&data[start]);
-
-    g_free (data);
-    return result;
 }
 
 /* --------------------------------------------------------------------------------------------- */

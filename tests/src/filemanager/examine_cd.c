@@ -71,7 +71,7 @@ quiet_quit_cmd (void)
 }
 
 char *
-expand_format (struct WEdit *edit_widget, char c, gboolean do_quote)
+expand_format (const WEdit * edit_widget, char c, gboolean do_quote)
 {
     (void) edit_widget;
     (void) c;
@@ -101,9 +101,9 @@ shell_execute (const char *command, int flags)
 }
 
 void
-sync_tree (const char *pathname)
+sync_tree (const vfs_path_t * vpath)
 {
-    (void) pathname;
+    (void) vpath;
 }
 
 /* --------------------------------------------------------------------------------------------- */

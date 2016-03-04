@@ -147,13 +147,7 @@ static int old_output_lines;
 
 /* Internal variables */
 static int equal_split;
-static int _menubar_visible;
 static int _output_lines;
-static gboolean _command_prompt;
-static int _keybar_visible;
-static int _message_visible;
-static gboolean _xterm_title;
-static int _free_space;
 
 static int height;
 
@@ -336,38 +330,42 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
         return MSG_HANDLED;
 
     case MSG_POST_KEY:
-        _menubar_visible = check_options[1].widget->state & C_BOOL;
-        _command_prompt = (check_options[2].widget->state & C_BOOL) != 0;
-        _keybar_visible = check_options[3].widget->state & C_BOOL;
-        _message_visible = check_options[4].widget->state & C_BOOL;
-        _xterm_title = (check_options[5].widget->state & C_BOOL) != 0;
-        _free_space = check_options[6].widget->state & C_BOOL;
-
-        if (mc_global.tty.console_flag != '\0')
         {
-            int minimum;
+            int _menubar_visible, _command_prompt, _keybar_visible, _message_visible;
 
-            if (_output_lines < 0)
-                _output_lines = 0;
-            height = LINES - _keybar_visible - (_command_prompt ? 1 : 0) -
-                _menubar_visible - _output_lines - _message_visible;
-            minimum = MINHEIGHT * (1 + panels_layout.horizontal_split);
-            if (height < minimum)
+            _menubar_visible = check_options[1].widget->state & C_BOOL;
+            _command_prompt = check_options[2].widget->state & C_BOOL;
+            _keybar_visible = check_options[3].widget->state & C_BOOL;
+            _message_visible = check_options[4].widget->state & C_BOOL;
+
+            if (mc_global.tty.console_flag != '\0')
             {
-                _output_lines -= minimum - height;
-                height = minimum;
-            }
-        }
-        else
-            height = LINES - _keybar_visible - (_command_prompt ? 1 : 0) -
-                _menubar_visible - _output_lines - _message_visible;
+                int minimum;
 
-        if (old_output_lines != _output_lines)
-        {
-            old_output_lines = _output_lines;
-            tty_setcolor (mc_global.tty.console_flag != '\0' ? COLOR_NORMAL : DISABLED_COLOR);
-            widget_move (h, 9, 5 + 3 + output_lines_label_len);
-            tty_printf ("%02d", _output_lines);
+                if (_output_lines < 0)
+                    _output_lines = 0;
+                height =
+                    LINES - _keybar_visible - _command_prompt - _menubar_visible - _output_lines -
+                    _message_visible;
+                minimum = MINHEIGHT * (1 + panels_layout.horizontal_split);
+                if (height < minimum)
+                {
+                    _output_lines -= minimum - height;
+                    height = minimum;
+                }
+            }
+            else
+                height =
+                    LINES - _keybar_visible - _command_prompt - _menubar_visible - _output_lines -
+                    _message_visible;
+
+            if (old_output_lines != _output_lines)
+            {
+                old_output_lines = _output_lines;
+                tty_setcolor (mc_global.tty.console_flag != '\0' ? COLOR_NORMAL : DISABLED_COLOR);
+                widget_move (h, 9, 5 + 3 + output_lines_label_len);
+                tty_printf ("%02d", _output_lines);
+            }
         }
         return MSG_HANDLED;
 
@@ -463,12 +461,6 @@ init_layout (void)
     output_lines_label = _("Output lines:");
 
     /* save old params */
-    _menubar_visible = menubar_visible;
-    _command_prompt = command_prompt;
-    _keybar_visible = mc_global.keybar_visible;
-    _message_visible = mc_global.message_visible;
-    _xterm_title = xterm_title;
-    _free_space = free_space;
     old_output_lines = -1;
     _output_lines = output_lines;
 
@@ -636,7 +628,7 @@ layout_change (void)
        how the panel are split (horizontal/vertical),
        and a change of menu visibility. */
     update_menu ();
-    load_hint (1);
+    load_hint (TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -988,13 +980,7 @@ set_display_type (int num, panel_view_mode_t type)
     /* Restoring saved path from panels.ini for nonlist panel */
     /* when it's first creation (for example view_info) */
     if (old_widget == NULL && type != view_listing)
-    {
-        char *panel_dir;
-
-        panel_dir = _vfs_get_cwd ();
-        panels[num].last_saved_dir = g_strdup (panel_dir);
-        g_free (panel_dir);
-    }
+        panels[num].last_saved_dir = _vfs_get_cwd ();
 
     switch (type)
     {
@@ -1020,7 +1006,7 @@ set_display_type (int num, panel_view_mode_t type)
         else
             file_name = "";
 
-        mcview_load ((struct WView *) new_widget, 0, file_name, 0, 0, 0);
+        mcview_load ((WView *) new_widget, 0, file_name, 0, 0, 0);
         break;
 
     default:
@@ -1213,7 +1199,7 @@ get_display_type (int idx)
 
 /* --------------------------------------------------------------------------------------------- */
 
-struct Widget *
+Widget *
 get_panel_widget (int idx)
 {
     return panels[idx].widget;

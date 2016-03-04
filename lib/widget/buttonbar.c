@@ -262,7 +262,7 @@ buttonbar_new (gboolean visible)
 
 void
 buttonbar_set_label (WButtonBar * bb, int idx, const char *text,
-                     const struct global_keymap_t *keymap, const Widget * receiver)
+                     const global_keymap_t * keymap, const Widget * receiver)
 {
     if ((bb != NULL) && (idx >= 1) && (idx <= BUTTONBAR_LABELS_NUM))
     {

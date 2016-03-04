@@ -115,7 +115,7 @@ query_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
 /* --------------------------------------------------------------------------------------------- */
 /** Create message dialog */
 
-static struct WDialog *
+static WDialog *
 do_create_message (int flags, const char *title, const char *text)
 {
     char *p;
@@ -378,7 +378,7 @@ query_set_sel (int new_sel)
  * dlg_destroy() to dismiss it.  Not safe to call from background.
  */
 
-struct WDialog *
+WDialog *
 create_message (int flags, const char *title, const char *text, ...)
 {
     va_list args;
@@ -443,7 +443,7 @@ mc_error_message (GError ** mcerror, int *code)
     if ((*mcerror)->code == 0)
         message (D_ERROR, MSG_ERROR, "%s", (*mcerror)->message);
     else
-        message (D_ERROR, MSG_ERROR, "%s (%d)", (*mcerror)->message, (*mcerror)->code);
+        message (D_ERROR, MSG_ERROR, _("%s (%d)"), (*mcerror)->message, (*mcerror)->code);
 
     if (code != NULL)
         *code = (*mcerror)->code;
@@ -588,7 +588,7 @@ status_msg_init (status_msg_t * sm, const char *title, double delay, status_msg_
     sm->dlg = dlg_create (TRUE, 0, 0, 7, min (max (40, COLS / 2), COLS), dialog_colors,
                           NULL, NULL, NULL, title, DLG_CENTER);
     sm->start = start;
-    sm->delay = delay * G_USEC_PER_SEC;
+    sm->delay = (guint64) (delay * G_USEC_PER_SEC);
     sm->block = FALSE;
 
     sm->init = init_cb;

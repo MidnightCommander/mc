@@ -2,15 +2,15 @@ dnl
 dnl Support for background operations
 dnl
 
-AC_DEFUN([MC_BACKGROUND],
+AC_DEFUN([mc_BACKGROUND],
 [
     AC_ARG_ENABLE([background],
     AS_HELP_STRING([--enable-background], [Support for background file operations [yes]]),
     [
         if test "x$enableval" = xno; then
-        enable_background=no
+            enable_background=no
         else
-        enable_background=yes
+            enable_background=yes
         fi
     ],
     [enable_background=yes])

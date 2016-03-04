@@ -1,8 +1,8 @@
-dnl AC_MC_EXTFS_CHECKS
+dnl mc_EXTFS_CHECKS
 dnl    Check for tools used in extfs scripts.
 
 dnl FIXME: make this configurable
-AC_DEFUN([AC_MC_EXTFS_CHECKS], [
+AC_DEFUN([mc_EXTFS_CHECKS], [
     AC_PATH_PROG([ZIP], [zip], [/usr/bin/zip])
     AC_PATH_PROG([UNZIP], [unzip], [/usr/bin/unzip])
     AC_CACHE_CHECK([for zipinfo code in unzip], [mc_cv_have_zipinfo],
@@ -20,14 +20,14 @@ AC_DEFUN([AC_MC_EXTFS_CHECKS], [
 
 
 dnl Enable Extfs (classic)
-AC_DEFUN([AC_MC_VFS_EXTFS],
+AC_DEFUN([mc_VFS_EXTFS],
 [
     AC_ARG_ENABLE([vfs-extfs],
 		    AS_HELP_STRING([--enable-vfs-extfs], [Support for extfs filesystem @<:@yes@:>@]))
     if test "$enable_vfs" = "yes" -a x"$enable_vfs_extfs" != x"no"; then
-	AC_MC_EXTFS_CHECKS
+	mc_EXTFS_CHECKS
 	enable_vfs_extfs="yes"
-	AC_MC_VFS_ADDNAME([extfs])
+	mc_VFS_ADDNAME([extfs])
 	AC_DEFINE([ENABLE_VFS_EXTFS], [1], [Support for extfs])
     fi
     AM_CONDITIONAL(ENABLE_VFS_EXTFS, [test "$enable_vfs" = "yes" -a x"$enable_vfs_extfs" = x"yes"])

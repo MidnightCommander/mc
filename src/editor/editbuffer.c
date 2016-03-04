@@ -401,7 +401,7 @@ edit_buffer_get_word_from_pos (const edit_buffer_t * buf, off_t start_pos, off_t
                                gsize * cut)
 {
     off_t word_start;
-    long cut_len = 0;
+    gsize cut_len = 0;
     GString *match_expr;
     int c1, c2;
 
@@ -513,9 +513,11 @@ edit_buffer_delete (edit_buffer_t * buf)
 
     if (i == 0)
     {
-        i = buf->b2->len - 1;
-        b = g_ptr_array_index (buf->b2, i);
-        g_ptr_array_remove_index (buf->b2, i);
+        guint j;
+
+        j = buf->b2->len - 1;
+        b = g_ptr_array_index (buf->b2, j);
+        g_ptr_array_remove_index (buf->b2, j);
         g_free (b);
     }
 
@@ -549,9 +551,11 @@ edit_buffer_backspace (edit_buffer_t * buf)
 
     if (i == 0)
     {
-        i = buf->b1->len - 1;
-        b = g_ptr_array_index (buf->b1, i);
-        g_ptr_array_remove_index (buf->b1, i);
+        guint j;
+
+        j = buf->b1->len - 1;
+        b = g_ptr_array_index (buf->b1, j);
+        g_ptr_array_remove_index (buf->b1, j);
         g_free (b);
     }
 
@@ -559,7 +563,6 @@ edit_buffer_backspace (edit_buffer_t * buf)
 
     return c;
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
 /**

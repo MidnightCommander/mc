@@ -91,10 +91,6 @@ int option_line_state_width = 0;
 gboolean option_cursor_after_inserted_block = FALSE;
 int option_state_full_filename = 0;
 
-int option_edit_right_extreme = 0;
-int option_edit_left_extreme = 0;
-int option_edit_top_extreme = 0;
-int option_edit_bottom_extreme = 0;
 int enable_show_tabs_tws = 1;
 int option_check_nl_at_eof = 0;
 int option_group_undo = 0;
@@ -876,7 +872,7 @@ edit_cursor_to_eol (WEdit * edit)
 static unsigned long
 my_type_of (int c)
 {
-    int x, r = 0;
+    unsigned long x, r = 0;
     const char *p, *q;
     const char option_chars_move_whole_word[] =
         "!=&|<>^~ !:;, !'!`!.?!\"!( !) !{ !} !Aa0 !+-*/= |<> ![ !] !\\#! ";
@@ -1685,7 +1681,7 @@ edit_insert_column_from_file (WEdit * edit, int file, off_t * start_pos, off_t *
                               long *col1, long *col2)
 {
     off_t cursor;
-    int col;
+    long col;
     off_t blocklen = -1, width = 0;
     unsigned char *data;
 
@@ -2359,7 +2355,7 @@ edit_push_undo_action (WEdit * edit, long c)
         && spm1 != edit->undo_stack_bottom
         && ((sp - 2) & edit->undo_stack_size_mask) != edit->undo_stack_bottom)
     {
-        int d;
+        long d;
         if (edit->undo_stack[spm1] < 0)
         {
             d = edit->undo_stack[(sp - 2) & edit->undo_stack_size_mask];
@@ -2438,7 +2434,7 @@ edit_push_redo_action (WEdit * edit, long c)
         && spm1 != edit->redo_stack_bottom
         && ((sp - 2) & edit->redo_stack_size_mask) != edit->redo_stack_bottom)
     {
-        int d;
+        long d;
         if (edit->redo_stack[spm1] < 0)
         {
             d = edit->redo_stack[(sp - 2) & edit->redo_stack_size_mask];
@@ -2969,7 +2965,7 @@ edit_move_to_prev_col (WEdit * edit, off_t p)
             fake_half_tabs = HALF_TAB_SIZE * space_width;
             if (fake_half_tabs != 0 && edit->curs_col % fake_half_tabs != 0)
             {
-                int q;
+                long q;
 
                 q = edit->curs_col;
                 edit->curs_col -= (edit->curs_col % fake_half_tabs);

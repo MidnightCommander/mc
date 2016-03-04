@@ -9,4 +9,4 @@ libmcskin_la_SOURCES = \
 	lines.c \
 	internal.h
 
-AM_CPPFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS) $(PCRE_CPPFLAGS)
+AM_CPPFLAGS = -I$(top_srcdir) $(GLIB_CFLAGS)

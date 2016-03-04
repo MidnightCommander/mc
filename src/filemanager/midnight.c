@@ -751,7 +751,7 @@ put_link (WPanel * panel)
         int i;
 
         vpath = vfs_path_append_new (panel->cwd_vpath, selection (panel)->fname, NULL);
-        i = mc_readlink (vpath, buffer, MC_MAXPATHLEN - 1);
+        i = mc_readlink (vpath, buffer, sizeof (buffer) - 1);
         vfs_path_free (vpath);
 
         if (i > 0)
@@ -785,24 +785,24 @@ put_other_link (void)
 static void
 put_prog_name (void)
 {
-    char *tmp;
+    const char *tmp;
+
     if (!command_prompt)
         return;
 
     if (get_current_type () == view_tree)
     {
         WTree *tree;
-        vfs_path_t *selected_name;
+        const vfs_path_t *selected_name;
 
         tree = (WTree *) get_panel_widget (get_current_index ());
         selected_name = tree_selected_name (tree);
-        tmp = g_strdup (vfs_path_as_str (selected_name));
+        tmp = vfs_path_as_str (selected_name);
     }
     else
-        tmp = g_strdup (selection (current_panel)->fname);
+        tmp = selection (current_panel)->fname;
 
     command_insert (cmdline, tmp, TRUE);
-    g_free (tmp);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1405,7 +1405,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         return MSG_HANDLED;
 
     case MSG_DRAW:
-        load_hint (1);
+        load_hint (TRUE);
         /* We handle the special case of the output lines */
         if (mc_global.tty.console_flag != '\0' && output_lines)
             show_console_contents (output_start_y,
@@ -1654,6 +1654,75 @@ midnight_set_buttonbar (WButtonBar * b)
     buttonbar_set_label (b, 9, Q_ ("ButtonBar|PullDn"), main_map, NULL);
     buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), main_map, NULL);
 }
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Return a random hint.  If force is TRUE, ignore the timeout.
+ */
+
+char *
+get_random_hint (gboolean force)
+{
+    static const guint64 update_period = 60 * G_USEC_PER_SEC;
+    static guint64 tv = 0;
+
+    char *data, *result = NULL, *eop;
+    size_t len, start;
+    GIConv conv;
+
+    /* Do not change hints more often than one minute */
+    if (!force && !mc_time_elapsed (&tv, update_period))
+        return g_strdup ("");
+
+    data = load_mc_home_file (mc_global.share_data_dir, MC_HINT, NULL, &len);
+    if (data == NULL)
+        return NULL;
+
+    /* get a random entry */
+    srand ((unsigned int) (tv / G_USEC_PER_SEC));
+    start = ((size_t) rand ()) % (len - 1);
+
+    /* Search the start of paragraph */
+    for (; start != 0; start--)
+        if (data[start] == '\n' && data[start + 1] == '\n')
+        {
+            start += 2;
+            break;
+        }
+
+    /* Search the end of paragraph */
+    for (eop = data + start; *eop != '\0'; eop++)
+    {
+        if (*eop == '\n' && *(eop + 1) == '\n')
+        {
+            *eop = '\0';
+            break;
+        }
+        if (*eop == '\n')
+            *eop = ' ';
+    }
+
+    /* hint files are stored in utf-8 */
+    /* try convert hint file from utf-8 to terminal encoding */
+    conv = str_crt_conv_from ("UTF-8");
+    if (conv != INVALID_CONV)
+    {
+        GString *buffer;
+
+        buffer = g_string_sized_new (len - start);
+        if (str_convert (conv, &data[start], buffer) != ESTR_FAILURE)
+            result = g_string_free (buffer, FALSE);
+        else
+            g_string_free (buffer, TRUE);
+        str_close_conv (conv);
+    }
+    else
+        result = g_strndup (data + start, len - start);
+
+    g_free (data);
+    return result;
+}
+
 
 /* --------------------------------------------------------------------------------------------- */
 /**

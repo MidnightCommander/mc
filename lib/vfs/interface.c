@@ -61,7 +61,7 @@
 
 /* TODO: move it to separate private .h */
 extern GString *vfs_str_buffer;
-extern struct vfs_class *current_vfs;
+extern vfs_class *current_vfs;
 extern struct dirent *mc_readdir_result;
 
 /*** global variables ****************************************************************************/

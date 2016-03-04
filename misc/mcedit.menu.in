@@ -471,13 +471,13 @@ o       Open bash to next free console
 u       Upper case selection
         TMPFILE=`mktemp ${MC_TMPDIR:-/tmp}/up.XXXXXX` || exit 1
         cat %b > $TMPFILE
-        cat $TMPFILE| sed 's/\(.*\)/\U\1/' >%b
+        sed 's/\(.*\)/\U\1/' $TMPFILE >%b
         rm -f $TMPFILE
 
 l       Lower case selection
         TMPFILE=`mktemp ${MC_TMPDIR:-/tmp}/up.XXXXXX` || exit 1
         cat %b > $TMPFILE
-        cat $TMPFILE| sed 's/\(.*\)/\U\1/' >%b
+        sed 's/\(.*\)/\L\1/' $TMPFILE >%b
         rm -f $TMPFILE
 
 #-------------------------- End of common section -----------------------------

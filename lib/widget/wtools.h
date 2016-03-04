@@ -78,8 +78,8 @@ void query_set_sel (int new_sel);
 
 /* Create message box but don't dismiss it yet, not background safe */
 /* *INDENT-OFF* */
-struct WDialog *create_message (int flags, const char *title, const char *text, ...)
-                G_GNUC_PRINTF (3, 4);
+WDialog *create_message (int flags, const char *title, const char *text, ...)
+        G_GNUC_PRINTF (3, 4);
 
 /* Show message box, background safe */
 void message (int flags, const char *title, const char *text, ...) G_GNUC_PRINTF (3, 4);

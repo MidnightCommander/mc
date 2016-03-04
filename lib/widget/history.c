@@ -165,7 +165,7 @@ history_get (const char *input_name)
  * Load history from the mc_config
  */
 GList *
-history_load (struct mc_config_t * cfg, const char *name)
+history_load (mc_config_t * cfg, const char *name)
 {
     size_t i;
     GList *hist = NULL;
@@ -228,7 +228,7 @@ history_load (struct mc_config_t * cfg, const char *name)
   * Save history to the mc_config, but don't save config to file
   */
 void
-history_save (struct mc_config_t *cfg, const char *name, GList * h)
+history_save (mc_config_t * cfg, const char *name, GList * h)
 {
     GIConv conv = INVALID_CONV;
     GString *buffer;

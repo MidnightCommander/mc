@@ -794,7 +794,7 @@ edit_search_fix_search_start_if_selection (WEdit * edit)
     if (!edit_search_options.only_in_selection)
         return;
 
-    if (!eval_marks (edit, &start_mark, &end_mark) != 0)
+    if (!eval_marks (edit, &start_mark, &end_mark))
         return;
 
     if (edit_search_options.backwards)
@@ -2331,8 +2331,8 @@ void
 edit_block_copy_cmd (WEdit * edit)
 {
     off_t start_mark, end_mark, current = edit->buffer.curs1;
-    off_t mark1, mark2;
-    long c1, c2;
+    off_t mark1 = 0, mark2 = 0;
+    long c1 = 0, c2 = 0;
     off_t size;
     unsigned char *copy_buf;
 

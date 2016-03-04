@@ -69,11 +69,11 @@
 
 /*** file scope type declarations ****************************************************************/
 
-struct lock_s
+typedef struct
 {
     char *who;
     pid_t pid;
-};
+} lock_s;
 
 /*** file scope variables ************************************************************************/
 
@@ -135,13 +135,13 @@ lock_build_symlink_name (const vfs_path_t * fname_vpath)
  * Extract pid from user@host.domain.pid string
  */
 
-static struct lock_s *
+static lock_s *
 lock_extract_info (const char *str)
 {
     size_t i, len;
     const char *p, *s;
     static char pid[PID_BUF_SIZE], who[BUF_SIZE];
-    static struct lock_s lock;
+    static lock_s lock;
 
     len = strlen (str);
 
@@ -201,7 +201,7 @@ lock_file (const vfs_path_t * fname_vpath)
 {
     char *lockfname = NULL, *newlock, *msg;
     struct stat statbuf;
-    struct lock_s *lockinfo;
+    lock_s *lockinfo;
     gboolean is_local;
     gboolean symlink_ok = FALSE;
     const char *elpath;

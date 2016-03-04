@@ -371,36 +371,40 @@ mcview_load (WView * view, const char *command, const char *file, int start_line
         }
         else
         {
-            int type;
-
-            type = get_compression_type (fd, file);
-
-            if (view->magic_mode && (type != COMPRESSION_NONE))
+            if (view->magic_mode)
             {
-                char *tmp_filename;
-                vfs_path_t *vpath1;
-                int fd1;
+                int type;
 
-                tmp_filename = g_strconcat (file, decompress_extension (type), (char *) NULL);
-                vpath1 = vfs_path_from_str (tmp_filename);
-                fd1 = mc_open (vpath1, O_RDONLY | O_NONBLOCK);
-                if (fd1 == -1)
-                {
-                    g_snprintf (tmp, sizeof (tmp), _("Cannot open \"%s\" in parse mode\n%s"),
-                                file, unix_error_string (errno));
-                    mcview_close_datasource (view);
-                    mcview_show_error (view, tmp);
-                }
-                else
-                {
-                    mc_close (fd);
-                    fd = fd1;
-                    mc_fstat (fd, &st);
-                }
-                vfs_path_free (vpath1);
+                type = get_compression_type (fd, file);
 
-                g_free (tmp_filename);
+                if (type != COMPRESSION_NONE)
+                {
+                    char *tmp_filename;
+                    vfs_path_t *vpath1;
+                    int fd1;
+
+                    tmp_filename = g_strconcat (file, decompress_extension (type), (char *) NULL);
+                    vpath1 = vfs_path_from_str (tmp_filename);
+                    g_free (tmp_filename);
+                    fd1 = mc_open (vpath1, O_RDONLY | O_NONBLOCK);
+                    vfs_path_free (vpath1);
+
+                    if (fd1 == -1)
+                    {
+                        g_snprintf (tmp, sizeof (tmp), _("Cannot open \"%s\" in parse mode\n%s"),
+                                    file, unix_error_string (errno));
+                        mcview_close_datasource (view);
+                        mcview_show_error (view, tmp);
+                    }
+                    else
+                    {
+                        mc_close (fd);
+                        fd = fd1;
+                        mc_fstat (fd, &st);
+                    }
+                }
             }
+
             mcview_set_datasource_file (view, fd, &st);
         }
         retval = TRUE;

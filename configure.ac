@@ -9,7 +9,7 @@ AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_AUX_DIR(config)
 AC_CONFIG_SRCDIR(src/main.c)
 AC_CONFIG_HEADERS(config.h)
-MC_VERSION
+mc_VERSION
 AM_INIT_AUTOMAKE(mc, ${VERSION} )
 dnl Enable silent rules by default (if yes)
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
@@ -28,7 +28,7 @@ dnl ############################################################################
 AC_PROG_CC_STDC
 AM_PROG_CC_C_O
 
-MC_CHECK_CFLAGS
+mc_CHECK_CFLAGS
 
 CFLAGS_OPTS=""
 if test "x$CFLAGS" = "x"; then
@@ -42,7 +42,7 @@ fi
 AC_ARG_ENABLE([werror],
     AS_HELP_STRING([--enable-werror], [Handle all compiler warnings as errors]))
 if test "x$enable_werror" = xyes; then
-    MC_CHECK_ONE_CFLAG([-Werror])
+    mc_CHECK_ONE_CFLAG([-Werror])
 fi
 
 AC_PROG_LIBTOOL
@@ -137,19 +137,19 @@ dnl Check for other tools
 dnl ############################################################################
 
 AC_CHECK_TOOL(AR, ar, ar)
-MC_UNIT_TESTS
+mc_UNIT_TESTS
 
 
 dnl ############################################################################
 dnl Check for main libraies
 dnl ############################################################################
 
-AC_CHECK_GLIB
-AC_G_MODULE_SUPPORTED
-MC_WITH_SCREEN
-MC_CHECK_SEARCH_TYPE
+mc_CHECK_GLIB
+mc_G_MODULE_SUPPORTED
+mc_WITH_SCREEN
+mc_CHECK_SEARCH_TYPE
 dnl X11 support. Used to read keyboard modifiers when running under X11.
-MC_WITH_X
+mc_WITH_X
 
 
 dnl ############################################################################
@@ -266,7 +266,7 @@ dnl ############################################################################
 AM_GNU_GETTEXT(no-libtool, need-ngettext)
 AM_GNU_GETTEXT_VERSION(0.14.3)
 
-MC_I18N
+mc_I18N
 
 dnl ############################################################################
 dnl OS specific flags
@@ -384,7 +384,7 @@ dnl ############################################################################
 dnl MC options
 dnl ############################################################################
 
-MC_WITH_INTERNAL_EDIT
+mc_WITH_INTERNAL_EDIT
 
 dnl Diff viewer support.
 AC_ARG_WITH([diff_viewer],
@@ -399,9 +399,9 @@ else
 	diff_msg="no"
 fi
 
-MC_SUBSHELL
-MC_BACKGROUND
-AC_MC_VFS_CHECKS
+mc_SUBSHELL
+mc_BACKGROUND
+mc_VFS_CHECKS
 
 dnl ############################################################################
 dnl Directories

@@ -70,7 +70,7 @@ int get_current_index (void);
 int get_other_index (void);
 const char *get_nth_panel_name (int num);
 
-struct Widget *get_panel_widget (int idx);
+Widget *get_panel_widget (int idx);
 
 WPanel *get_other_panel (void);
 

@@ -25,7 +25,9 @@ extern gboolean mc_args__nokeymap;
 extern char *mc_args__last_wd_file;
 extern char *mc_args__netfs_logfile;
 extern char *mc_args__keymap_file;
+#ifdef ENABLE_VFS_SMB
 extern int mc_args__debug_level;
+#endif
 
 /*
  * MC_RUN_FULL: dir for left panel
@@ -48,8 +50,6 @@ gboolean mc_args_parse (int *argc, char ***argv, const char *translation_domain,
 gboolean mc_args_show_info (void);
 gboolean mc_setup_by_args (int argc, char **argv, GError ** mcerror);
 
-mcedit_arg_t *mcedit_arg_new (const char *file_name, long line_number);
-mcedit_arg_t *mcedit_arg_vpath_new (vfs_path_t * file_vpath, long line_number);
 void mcedit_arg_free (mcedit_arg_t * arg);
 
 /*** inline functions ****************************************************************************/

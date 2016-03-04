@@ -3270,7 +3270,7 @@ _do_panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_
                    &panel->sort_info, panel->filter);
     try_to_select (panel, get_parent_dir_name (panel->cwd_vpath, olddir_vpath));
 
-    load_hint (0);
+    load_hint (FALSE);
     panel->dirty = 1;
     update_xterm_title_path ();
 
@@ -3557,6 +3557,7 @@ panel_execute_cmd (WPanel * panel, long command)
         panel_set_sort_type_by_id (panel, "mtime");
         break;
     default:
+        res = MSG_NOT_HANDLED;
         break;
     }
 
