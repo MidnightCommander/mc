@@ -40,7 +40,7 @@ mkdir -p distrib && cd $_
 make dist-bzip2
 
 DISTFILE=$(ls mc-*.tar.bz2)
-DISTDIR=$(echo $DISTFILE | sed 's/\.tar\.bz2$//g')
+DISTDIR=$(basename "$DISTFILE" .tar.bz2)
 
 tar -xjf $DISTFILE
 cd $DISTDIR
