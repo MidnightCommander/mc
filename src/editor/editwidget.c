@@ -742,13 +742,14 @@ edit_dialog_command_execute (WDialog * h, long command)
         break;
     case CK_Quit:
     case CK_Cancel:
+        /* don't close editor due to SIGINT, but stop move/resize window */
         {
             Widget *w = WIDGET (h->current->data);
 
-            if (!edit_widget_is_editor (w) || ((WEdit *) w)->drag_state == MCEDIT_DRAG_NORMAL)
-                dlg_stop (h);
-            else
+            if (edit_widget_is_editor (w) && ((WEdit *) w)->drag_state != MCEDIT_DRAG_NORMAL)
                 edit_restore_size ((WEdit *) w);
+            else if (command == CK_Quit)
+                dlg_stop (h);
         }
         break;
     case CK_About:
