@@ -14,12 +14,10 @@ endif
 
 SCRIPTS_IN = \
 	mc.menu.in \
-	mc.menu.sr.in \
 	mcedit.menu.in
 
 SCRIPTS_OUT = \
 	mc.menu \
-	mc.menu.sr \
 	mcedit.menu
 
 LIBFILES_CONST = \
