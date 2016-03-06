@@ -743,7 +743,7 @@ menubar_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
              * touched by us. We should think of some other way of communicating
              * this to the system.
              */
-            w->Mouse.capture = FALSE;
+            w->mouse.capture = FALSE;
         }
         break;
 
@@ -891,8 +891,7 @@ menubar_new (int y, int x, int cols, GList * menu, gboolean visible)
 
     menubar = g_new0 (WMenuBar, 1);
     w = WIDGET (menubar);
-    widget_init (w, y, x, 1, cols, menubar_callback, NULL);
-    set_easy_mouse_callback (w, menubar_mouse_callback);
+    widget_init (w, y, x, 1, cols, menubar_callback, menubar_mouse_callback);
 
     menubar->is_visible = visible;
     widget_want_cursor (w, FALSE);

@@ -42,16 +42,19 @@
 
 /*** file scope variables ************************************************************************/
 
-static int last_buttons_down;
-static gboolean was_drag = FALSE;
-
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Constructs a mouse event structure. The is the high-level type used
- * with "easy callbacks".
+ * Constructs a mouse event structure.
+ *
+ * It receives a Gpm_Event event and translates it into a higher level protocol.
+ *
+ * Tip: for details on the C mouse API, see MC's lib/tty/mouse.h,
+ * or GPM's excellent 'info' manual:
+ *
+ *    http://www.fifi.org/cgi-bin/info2www?(gpm)Event+Types
  */
 static void
 init_mouse_event (mouse_event_t * event, mouse_msg_t msg, const Gpm_Event * global_gpm,
@@ -67,49 +70,7 @@ init_mouse_event (mouse_event_t * event, mouse_msg_t msg, const Gpm_Event * glob
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-/**
- * This is the low-level mouse handler that's in use when you install
- * an "easy callback".
- *
- * It receives a Gpm_Event event and translates it into a higher level
- * protocol with which it feeds your "easy callback".
- *
- * Tip: for details on the C mouse API, see MC's lib/tty/mouse.h,
- * or GPM's excellent 'info' manual:
- *
- *    http://www.fifi.org/cgi-bin/info2www?(gpm)Event+Types
- */
-static int
-easy_mouse_translator (Gpm_Event * event, void *data)
-{
-    Widget *w = WIDGET (data);
-    gboolean run_click;
-    mouse_event_t me;
-
-    me = mouse_translate_event (w, event, &run_click);
-
-    return mouse_process_event (w, &me, run_click);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Use this to install an "easy mouse callback".
- *
- * (The mouse callback widget_init() accepts is a low-level one; you can
- * pass NULL to it. In the future we'll probably do the opposite: have
- * widget_init() accept the "easy" callback.)
- */
-void
-set_easy_mouse_callback (Widget * w, easy_mouse_callback cb)
-{
-    w->mouse = easy_mouse_translator;
-    w->Mouse.callback = cb;
-}
-
 /* --------------------------------------------------------------------------------------------- */
 
 /**
@@ -134,7 +95,7 @@ mouse_translate_event (Widget * w, Gpm_Event * event, gboolean * click)
      * You'll also need, in your mouse handler, to inform the system of
      * events you want to pass on by setting 'event->result.abort' to TRUE.
      */
-    in_widget = w->Mouse.forced_capture || mouse_global_in_widget (event, w);
+    in_widget = w->mouse.forced_capture || mouse_global_in_widget (event, w);
 
     *click = FALSE;
 
@@ -154,10 +115,10 @@ mouse_translate_event (Widget * w, Gpm_Event * event, gboolean * click)
                  * buttons doesn't make sense as they don't generate a
                  * mouse_up event, which means we'd never get uncaptured.)
                  */
-                w->Mouse.capture = TRUE;
+                w->mouse.capture = TRUE;
                 msg = MSG_MOUSE_DOWN;
 
-                last_buttons_down = event->buttons;
+                w->mouse.last_buttons_down = event->buttons;
             }
         }
     }
@@ -166,13 +127,13 @@ mouse_translate_event (Widget * w, Gpm_Event * event, gboolean * click)
         /* We trigger the mouse_up event even when !in_widget. That's
          * because, for example, a paint application should stop drawing
          * lines when the button is released even outside the canvas. */
-        if (w->Mouse.capture)
+        if (w->mouse.capture)
         {
-            w->Mouse.capture = FALSE;
+            w->mouse.capture = FALSE;
             msg = MSG_MOUSE_UP;
 
             if (in_widget)
-                *click = !was_drag;
+                *click = !w->mouse.was_drag;
 
             /*
              * When using xterm, event->buttons reports the buttons' state
@@ -183,12 +144,12 @@ mouse_translate_event (Widget * w, Gpm_Event * event, gboolean * click)
              * The following makes xterm behave effectively like GPM:
              */
             if (event->buttons == 0)
-                event->buttons = last_buttons_down;
+                event->buttons = w->mouse.last_buttons_down;
         }
     }
     else if ((event->type & GPM_DRAG) != 0)
     {
-        if (w->Mouse.capture)
+        if (w->mouse.capture)
             msg = MSG_MOUSE_DRAG;
     }
     else if ((event->type & GPM_MOVE) != 0)
@@ -199,7 +160,7 @@ mouse_translate_event (Widget * w, Gpm_Event * event, gboolean * click)
 
     if (msg != MSG_MOUSE_NONE)
         /* Remember the current state for next event. */
-        was_drag = ((event->type & GPM_DRAG) != 0);
+        w->mouse.was_drag = ((event->type & GPM_DRAG) != 0);
 
     init_mouse_event (&local, msg, event, w);
 
@@ -224,9 +185,9 @@ mouse_process_event (Widget * w, mouse_event_t * event, gboolean click)
 
     if (event->msg != MSG_MOUSE_NONE)
     {
-        w->Mouse.callback (w, event->msg, event);
+        w->mouse_callback (w, event->msg, event);
         if (click)
-            w->Mouse.callback (w, MSG_MOUSE_CLICK, event);
+            w->mouse_callback (w, MSG_MOUSE_CLICK, event);
 
         if (!event->result.abort)
             ret = event->result.repeat ? MOU_REPEAT : MOU_NORMAL;

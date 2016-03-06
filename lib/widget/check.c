@@ -138,8 +138,7 @@ check_new (int y, int x, int state, const char *text)
     w = WIDGET (c);
     c->text = parse_hotkey (text);
     /* 4 is width of "[X] " */
-    widget_init (w, y, x, 1, 4 + hotkey_width (c->text), check_callback, NULL);
-    set_easy_mouse_callback (w, check_mouse_callback);
+    widget_init (w, y, x, 1, 4 + hotkey_width (c->text), check_callback, check_mouse_callback);
     c->state = state ? C_BOOL : 0;
     widget_want_hotkey (w, TRUE);
 

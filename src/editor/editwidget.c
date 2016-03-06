@@ -214,7 +214,7 @@ edit_restore_size (WEdit * edit)
     Widget *w = WIDGET (edit);
 
     edit->drag_state = MCEDIT_DRAG_NONE;
-    w->Mouse.forced_capture = FALSE;
+    w->mouse.forced_capture = FALSE;
     widget_set_size (w, edit->y_prev, edit->x_prev, edit->lines_prev, edit->cols_prev);
     dlg_redraw (w->owner);
 }
@@ -1220,9 +1220,8 @@ edit_files (const GList * files)
 
     /* Create a new dialog and add it widgets to it */
     edit_dlg =
-        dlg_create (FALSE, 0, 0, LINES, COLS, NULL, edit_dialog_callback, NULL,
-                    "[Internal File Editor]", NULL, DLG_WANT_TAB);
-    set_easy_mouse_callback (WIDGET (edit_dlg), edit_dialog_mouse_callback);
+        dlg_create (FALSE, 0, 0, LINES, COLS, NULL, edit_dialog_callback,
+                    edit_dialog_mouse_callback, "[Internal File Editor]", NULL, DLG_WANT_TAB);
 
     edit_dlg->get_shortcut = edit_get_shortcut;
     edit_dlg->get_title = edit_get_title;
@@ -1355,7 +1354,7 @@ edit_add_window (WDialog * h, int y, int x, int lines, int cols, const vfs_path_
 
     w = WIDGET (edit);
     w->callback = edit_callback;
-    set_easy_mouse_callback (w, edit_mouse_callback);
+    w->mouse_callback = edit_mouse_callback;
 
     add_widget (h, w);
     dlg_redraw (h);
@@ -1381,7 +1380,7 @@ edit_handle_move_resize (WEdit * edit, long command)
     if (edit->fullscreen)
     {
         edit->drag_state = MCEDIT_DRAG_NONE;
-        w->Mouse.forced_capture = FALSE;
+        w->mouse.forced_capture = FALSE;
         return ret;
     }
 
@@ -1475,7 +1474,7 @@ edit_handle_move_resize (WEdit * edit, long command)
      * "Anywhere" means: inside or outside the window. We make this happen
      * with the 'forced_capture' flag.
      */
-    w->Mouse.forced_capture = (edit->drag_state != MCEDIT_DRAG_NONE);
+    w->mouse.forced_capture = (edit->drag_state != MCEDIT_DRAG_NONE);
 
     return ret;
 }

@@ -14,7 +14,6 @@
 #include "lib/global.h"
 #include "lib/hook.h"           /* hook_t */
 #include "lib/keybind.h"        /* global_keymap_t */
-#include "lib/tty/mouse.h"      /* mouse_h */
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -128,7 +127,7 @@ extern const global_keymap_t *dialog_map;
 
 /* Creates a dialog head  */
 WDialog *dlg_create (gboolean modal, int y1, int x1, int lines, int cols,
-                     const int *colors, widget_cb_fn callback, mouse_h mouse_handler,
+                     const int *colors, widget_cb_fn callback, widget_mouse_cb_fn mouse_callback,
                      const char *help_ctx, const char *title, dlg_flags_t flags);
 
 void dlg_set_default_colors (void);

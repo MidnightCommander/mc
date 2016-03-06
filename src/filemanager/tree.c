@@ -1279,8 +1279,7 @@ tree_new (int y, int x, int lines, int cols, gboolean is_panel)
     tree = g_new (WTree, 1);
     w = WIDGET (tree);
 
-    widget_init (w, y, x, lines, cols, tree_callback, NULL);
-    set_easy_mouse_callback (w, tree_mouse_callback);
+    widget_init (w, y, x, lines, cols, tree_callback, tree_mouse_callback);
     tree->is_panel = is_panel;
     tree->selected_ptr = 0;
 

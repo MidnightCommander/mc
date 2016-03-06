@@ -210,8 +210,7 @@ button_new (int y, int x, int action, button_flags_t flags, const char *text, bc
     b->action = action;
     b->flags = flags;
     b->text = parse_hotkey (text);
-    widget_init (w, y, x, 1, button_get_len (b), button_callback, NULL);
-    set_easy_mouse_callback (w, button_mouse_callback);
+    widget_init (w, y, x, 1, button_get_len (b), button_callback, button_mouse_callback);
     b->selected = FALSE;
     b->callback = callback;
     widget_want_hotkey (w, TRUE);

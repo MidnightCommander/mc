@@ -192,8 +192,7 @@ mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
     WView *view;
 
     view = g_new0 (WView, 1);
-    widget_init (WIDGET (view), y, x, lines, cols, mcview_callback, NULL);
-    set_easy_mouse_callback (WIDGET (view), mcview_mouse_callback);
+    widget_init (WIDGET (view), y, x, lines, cols, mcview_callback, mcview_mouse_callback);
 
     view->hex_mode = FALSE;
     view->hexedit_mode = FALSE;

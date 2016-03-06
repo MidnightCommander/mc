@@ -1022,8 +1022,7 @@ mousedispatch_new (int y, int x, int yl, int xl)
     Widget *w;
 
     w = g_new0 (Widget, 1);
-    widget_init (w, y, x, yl, xl, md_callback, NULL);
-    set_easy_mouse_callback (w, help_mouse_callback);
+    widget_init (w, y, x, yl, xl, md_callback, help_mouse_callback);
 
     return w;
 }

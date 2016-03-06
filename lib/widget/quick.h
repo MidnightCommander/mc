@@ -335,7 +335,7 @@ typedef struct
     const char *help;
     quick_widget_t *widgets;
     widget_cb_fn callback;
-    mouse_h mouse;
+    widget_mouse_cb_fn mouse_callback;
 } quick_dialog_t;
 
 /*** global variables defined in .c file *********************************************************/

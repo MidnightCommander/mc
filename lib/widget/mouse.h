@@ -53,16 +53,10 @@ typedef struct
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
-/* A callback to respond to mouse events.
- * Note: We embed "easy" in it to distinguish it from the old-style callbacks we still use. */
-typedef void (*easy_mouse_callback) (Widget * w, mouse_msg_t msg, mouse_event_t * event);
-
 /*** global variables defined in .c file *********************************************************/
 
 /*** declarations of public functions ************************************************************/
 
-/* Installs an easy callback on a widget. */
-void set_easy_mouse_callback (Widget * w, easy_mouse_callback cb);
 /* Translate GPM event to high-level event */
 mouse_event_t mouse_translate_event (Widget * w, Gpm_Event * event, gboolean * click);
 /* Process high-level mouse event */

@@ -1009,8 +1009,7 @@ input_new (int y, int x, const int *colors, int width, const char *def_text,
 
     in = g_new (WInput, 1);
     w = WIDGET (in);
-    widget_init (w, y, x, 1, width, input_callback, NULL);
-    set_easy_mouse_callback (w, input_mouse_callback);
+    widget_init (w, y, x, 1, width, input_callback, input_mouse_callback);
     w->options |= W_IS_INPUT;
     w->set_options = input_set_options_callback;
 

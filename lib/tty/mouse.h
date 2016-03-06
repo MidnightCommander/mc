@@ -89,9 +89,6 @@ typedef struct Gpm_Event
 } Gpm_Event;
 #endif /* !HAVE_LIBGPM */
 
-/* Mouse callback */
-typedef int (*mouse_h) (Gpm_Event *, void *);
-
 /*** global variables defined in .c file *********************************************************/
 
 /* Type of the currently used mouse */

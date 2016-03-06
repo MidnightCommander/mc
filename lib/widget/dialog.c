@@ -40,9 +40,11 @@
 #include "lib/skin.h"
 #include "lib/tty/key.h"
 #include "lib/strutil.h"
-#include "lib/widget.h"
 #include "lib/fileloc.h"        /* MC_HISTORY_FILE */
 #include "lib/event.h"          /* mc_event_raise() */
+
+#include "lib/widget.h"
+#include "lib/widget/mouse.h"
 
 /*** global variables ****************************************************************************/
 
@@ -356,6 +358,22 @@ dlg_handle_key (WDialog * h, int d_key)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * This is the low-level mouse handler.
+ * It receives a Gpm_Event event and translates it into a higher level protocol.
+ */
+static int
+dlg_mouse_translator (Gpm_Event * event, Widget * w)
+{
+    gboolean run_click;
+    mouse_event_t me;
+
+    me = mouse_translate_event (w, event, &run_click);
+
+    return mouse_process_event (w, &me, run_click);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 dlg_mouse_event (WDialog * h, Gpm_Event * event)
@@ -373,11 +391,11 @@ dlg_mouse_event (WDialog * h, Gpm_Event * event)
         return MOU_NORMAL;
     }
 
-    if (wh->mouse != NULL)
+    if (wh->mouse_callback != NULL)
     {
         int mou;
 
-        mou = wh->mouse (event, wh);
+        mou = dlg_mouse_translator (event, wh);
         if (mou != MOU_UNHANDLED)
             return mou;
     }
@@ -388,12 +406,12 @@ dlg_mouse_event (WDialog * h, Gpm_Event * event)
     {
         Widget *w = WIDGET (p->data);
 
-        if ((w->options & W_DISABLED) == 0 && w->mouse != NULL)
+        if ((w->options & W_DISABLED) == 0 && w->mouse_callback != NULL)
         {
             /* put global cursor position to the widget */
             int ret;
 
-            ret = w->mouse (event, w);
+            ret = dlg_mouse_translator (event, w);
             if (ret != MOU_UNHANDLED)
                 return ret;
         }
@@ -771,7 +789,7 @@ dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
 
 WDialog *
 dlg_create (gboolean modal, int y1, int x1, int lines, int cols,
-            const int *colors, widget_cb_fn callback, mouse_h mouse_handler,
+            const int *colors, widget_cb_fn callback, widget_mouse_cb_fn mouse_callback,
             const char *help_ctx, const char *title, dlg_flags_t flags)
 {
     WDialog *new_d;
@@ -780,7 +798,7 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols,
     new_d = g_new0 (WDialog, 1);
     w = WIDGET (new_d);
     widget_init (w, y1, x1, lines, cols, (callback != NULL) ? callback : dlg_default_callback,
-                 mouse_handler);
+                 mouse_callback);
     widget_want_cursor (w, FALSE);
 
     new_d->state = DLG_CONSTRUCT;
@@ -1245,11 +1263,8 @@ dlg_process_event (WDialog * h, int key, Gpm_Event * event)
         if (tty_got_interrupt ())
             if (send_message (h, NULL, MSG_ACTION, CK_Cancel, NULL) != MSG_HANDLED)
                 dlg_execute_cmd (h, CK_Cancel);
-
-        return;
     }
-
-    if (key == EV_MOUSE)
+    else if (key == EV_MOUSE)
         h->mouse_status = dlg_mouse_event (h, event);
     else
         dlg_key_event (h, key);
