@@ -512,7 +512,6 @@ contrib/dist/prototype
 misc/Makefile
 misc/mc.menu
 misc/mcedit.menu
-misc/mc.menu.sr
 misc/skins/Makefile
 misc/ext.d/Makefile
 misc/ext.d/doc.sh
