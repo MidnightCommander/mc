@@ -998,3 +998,29 @@ find_menubar (const WDialog * h)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Activate menu bar.
+ *
+ * @param menubar menu bar object
+ * @param dropped whether dropdown menus should be drooped or not
+ * @which number of active dropdown menu
+ */
+void
+menubar_activate (WMenuBar * menubar, gboolean dropped, int which)
+{
+    Widget *w = WIDGET (menubar);
+
+    if (!menubar->is_active)
+    {
+        menubar->is_active = TRUE;
+        menubar->is_dropped = dropped;
+        if (which >= 0)
+            menubar->selected = (guint) which;
+
+        menubar->previous_widget = dlg_get_current_widget_id (w->owner);
+        dlg_select_widget (w);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */

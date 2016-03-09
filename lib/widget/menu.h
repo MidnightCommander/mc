@@ -56,6 +56,8 @@ void menubar_arrange (WMenuBar * menubar);
 
 WMenuBar *find_menubar (const WDialog * h);
 
+void menubar_activate (WMenuBar * menubar, gboolean dropped, int which);
+
 /*** inline functions ****************************************************************************/
 
 static inline void
