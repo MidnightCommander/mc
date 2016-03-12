@@ -1,31 +1,32 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Daniel <danicases@gmail.com>, 2011
 # Daniel <danicases@gmail.com>, 2011-2012
 # Daniel <danicases@gmail.com>, 2012
 # el_libre como el chaval <el.libre@gmail.com>, 2011
+# Marc Tormo i Bochaca <mtbochaca@gmail.com>, 2015
 # Martin Steghöfer <martin@steghoefer.eu>, 2015
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-02-02 09:44+0300\n"
-"PO-Revision-Date: 2015-06-04 08:38+0000\n"
+"POT-Creation-Date: 2016-03-04 09:25+0300\n"
+"PO-Revision-Date: 2016-03-06 21:29+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
-"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ca\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
-msgstr ""
+msgstr "Atenció: no es pot carregar la llista de pàgines de codis "
 
 msgid "7-bit ASCII"
 msgstr "7-bit ASCII"
@@ -35,13 +36,13 @@ msgid "Cannot translate from %s to %s"
 msgstr "No es pot traduir de %s a %s"
 
 msgid "Event system already initialized"
-msgstr "Ja s'ha inicialitzat l'event de sistema"
+msgstr "Ja s'ha inicialitzat el sistema d'esdeveniments"
 
 msgid "Failed to initialize event system"
-msgstr "No s'ha pogut inicialitzar l'event de sistema"
+msgstr "No s'ha pogut inicialitzar el sistema d'esdeveniments "
 
 msgid "Event system not initialized"
-msgstr ""
+msgstr "El sistema d'esdeveniments no s'ha inicialitzat "
 
 msgid "Check input data! Some of parameters are NULL!"
 msgstr ""
@@ -59,10 +60,7 @@ msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
-msgstr ""
-"Arxiu \"%s\" ja s'està editant.\n"
-"Usuari: %s\n"
-"ID del Procés: %d"
+msgstr "Arxiu \"%s\" ja s'està editant.\nUsuari: %s\nID del Procés: %d"
 
 msgid "File locked"
 msgstr "Arxiu bloquejat"
@@ -233,7 +231,7 @@ msgid "Insert"
 msgstr "Ins"
 
 msgid "Delete"
-msgstr "Supr"
+msgstr "Esborrar "
 
 msgid "Home"
 msgstr "Inici"
@@ -435,9 +433,7 @@ msgstr "La variable d'entorn TERM no esta definida!\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr ""
-"La mida de la pantalla %dx%d no es pot utilitzar.\n"
-"Reviseu la variable d'entorn TERM.\n"
+msgstr "La mida de la pantalla %dx%d no es pot utilitzar.\nReviseu la variable d'entorn TERM.\n"
 
 msgid "Cannot create pipe descriptor"
 msgstr ""
@@ -452,18 +448,13 @@ msgstr ""
 msgid ""
 "Unexpected error in select() reading data from a child process:\n"
 "%s"
-msgstr ""
-"S'ha produït un error inesperat a select() en llegir dades des d'un procés "
-"fill:\n"
-"%s"
+msgstr "S'ha produït un error inesperat a select() en llegir dades des d'un procés fill:\n%s"
 
 #, c-format
 msgid ""
 "Unexpected error in waitpid():\n"
 "%s"
-msgstr ""
-"S'ha produït un error inesperat en waitpid():\n"
-"%s"
+msgstr "S'ha produït un error inesperat en waitpid():\n%s"
 
 msgid "Warning"
 msgstr "Avís"
@@ -485,9 +476,9 @@ msgstr "El directori de la memòria cau ha caducat per %s"
 msgid "%s: %s: %s %3d%% (%lld) bytes transferred"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "%s: %s: %s %lld bytes transferred"
-msgstr "bytes transferits"
+msgstr ""
 
 msgid "Starting linear transfer..."
 msgstr "S'està iniciant la transferència lineal..."
@@ -568,6 +559,10 @@ msgstr "Procés de fons:"
 
 msgid "Error"
 msgstr "S'ha produït un error"
+
+#, c-format
+msgid "%s (%d)"
+msgstr ""
 
 msgid "&Abort"
 msgstr "a&Vorta"
@@ -699,11 +694,7 @@ msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
-msgstr ""
-"\n"
-"Si us plau, envieu tots els informes de problemes (inclouent el resultat de "
-"'mc -V')\n"
-"a www.midnight-commander.org en forma de tiquets.\n"
+msgstr "\nSi us plau, envieu tots els informes de problemes (inclouent el resultat de 'mc -V')\na www.midnight-commander.org en forma de tiquets.\n"
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
@@ -818,7 +809,7 @@ msgid "Diff Options"
 msgstr ""
 
 msgid "Edit"
-msgstr "Edita"
+msgstr "Editar"
 
 msgid "Edit is disabled"
 msgstr ""
@@ -922,9 +913,7 @@ msgstr "\"%s\" no és un fitxer estàndard"
 msgid ""
 "File \"%s\" is too large.\n"
 "Open it anyway?"
-msgstr ""
-"El fitxer \"%s\" és massa gran.\n"
-"Voleu obrir-lo igualment?"
+msgstr "El fitxer \"%s\" és massa gran.\nVoleu obrir-lo igualment?"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1070,7 +1059,7 @@ msgid "&System wide"
 msgstr "Per a tot el &sistema"
 
 msgid "Menu edit"
-msgstr "Menú edita"
+msgstr "Menú edició"
 
 msgid "Which menu file do you want to edit?"
 msgstr ""
@@ -1086,13 +1075,13 @@ msgid "%ld replacements made"
 msgstr "S'han fet %ld modificacions."
 
 msgid "[NoName]"
-msgstr ""
+msgstr "[SenseNom]"
 
 #, c-format
 msgid ""
 "File %s was modified.\n"
 "Save before close?"
-msgstr ""
+msgstr "El fitxer %s s'ha modificat.\nDesar abans de tancar?"
 
 msgid "Close file"
 msgstr "Tanca el fitxer"
@@ -1101,8 +1090,7 @@ msgstr "Tanca el fitxer"
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file %s?"
-msgstr ""
-"S'està apagant el Midnight Commander. Voleu desar el fitxer modificat \"%s\"?"
+msgstr "S'està apagant el Midnight Commander. Voleu desar el fitxer modificat \"%s\"?"
 
 msgid "This function is not implemented"
 msgstr "Funció no implementada"
@@ -1157,7 +1145,7 @@ msgid "Enter shell command(s):"
 msgstr ""
 
 msgid "External command"
-msgstr ""
+msgstr "Ordre externa "
 
 msgid "Cannot execute command"
 msgstr "No es pot executar l'ordre"
@@ -1181,7 +1169,7 @@ msgid "Insert literal"
 msgstr "Insereix literal"
 
 msgid "Press any key:"
-msgstr ""
+msgstr "Premeu una tecla: "
 
 msgid ""
 "Current text was modified without a file save.\n"
@@ -1278,7 +1266,7 @@ msgid "Mo&ve"
 msgstr "&Mou"
 
 msgid "&Delete"
-msgstr "&Suprimeix"
+msgstr "&Esborrar"
 
 msgid "Co&py to clipfile"
 msgstr "Co&pia a l'arxiu portaretalls"
@@ -1425,7 +1413,7 @@ msgid "&File"
 msgstr "&Fitxer"
 
 msgid "&Edit"
-msgstr "&Edita"
+msgstr "&Editar"
 
 msgid "&Search"
 msgstr "Ce&rca"
@@ -1640,9 +1628,7 @@ msgstr ""
 msgid ""
 "Cannot open file %s\n"
 "%s"
-msgstr ""
-"No es pot obrir el fitxer  %s\n"
-"%s"
+msgstr "No es pot obrir el fitxer  %s\n%s"
 
 #, c-format
 msgid "Error in file %s on line %d"
@@ -1901,7 +1887,8 @@ msgstr "in&Verteix"
 msgid "Sort order"
 msgstr "Ordre de classificació"
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
+#. prefix
 msgid "Confirmation|&Delete"
 msgstr ""
 
@@ -2203,6 +2190,10 @@ msgid ""
 msgstr ""
 
 #, c-format
+msgid "'%s' is not a symbolic link"
+msgstr "'%s' no és cap enllaç simbòlic"
+
+#, c-format
 msgid "Symlink '%s' points to:"
 msgstr ""
 
@@ -2216,10 +2207,6 @@ msgstr ""
 #, c-format
 msgid "edit symlink: %s"
 msgstr ""
-
-#, c-format
-msgid "'%s' is not a symbolic link"
-msgstr "'%s' no és cap enllaç simbòlic"
 
 msgid "FTP to machine"
 msgstr ""
@@ -2413,9 +2400,7 @@ msgstr ""
 msgid ""
 "Cannot remove file \"%s\"\n"
 "%s"
-msgstr ""
-"No es pot esborrar el fitxer \"%s\"\n"
-"%s"
+msgstr "No es pot esborrar el fitxer \"%s\"\n%s"
 
 #, c-format
 msgid ""
@@ -2494,7 +2479,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot read source file\"%s\"\n"
+"Cannot read source file \"%s\"\n"
 "%s"
 msgstr ""
 
@@ -2573,17 +2558,13 @@ msgstr ""
 msgid ""
 "Cannot overwrite file \"%s\"\n"
 "%s"
-msgstr ""
-"No es pot sobreescriure el fitxer \"%s\"\n"
-"%s"
+msgstr "No es pot sobreescriure el fitxer \"%s\"\n%s"
 
 #, c-format
 msgid ""
 "Cannot move directory \"%s\" to \"%s\"\n"
 "%s"
-msgstr ""
-"No es pot moure el directori \"%s\" a \"%s\"\n"
-"%s"
+msgstr "No es pot moure el directori \"%s\" a \"%s\"\n%s"
 
 #, c-format
 msgid "Directories: %zd, total size: %s"
@@ -3317,7 +3298,7 @@ msgid "[dev]"
 msgstr "[dev]"
 
 msgid "UP--DIR"
-msgstr "UP--DIR"
+msgstr "DIR--AMUNT"
 
 msgid "SYMLINK"
 msgstr "SYMLINK"
@@ -3362,9 +3343,7 @@ msgid "Do you really want to execute?"
 msgstr "Estàs segur que ho vols executar?"
 
 msgid "User supplied format looks invalid, reverting to default."
-msgstr ""
-"El format facilitat per l'usuari sembla que és invàlid, s'està tornant al "
-"format per defecte."
+msgstr "El format facilitat per l'usuari sembla que és invàlid, s'està tornant al format per defecte."
 
 msgid "&Add new"
 msgstr "Afegeix un &nou"
@@ -3409,9 +3388,7 @@ msgstr "Cerca programes SUID i SGID"
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-msgstr ""
-"No puc obrir el fitxer %s per escriure:\n"
-"%s\n"
+msgstr "No puc obrir el fitxer %s per escriure:\n%s\n"
 
 #, c-format
 msgid "Copy \"%s\" directory to:"
@@ -3450,9 +3427,7 @@ msgstr ""
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-msgstr ""
-"No puc escriure al fitxer %s:\n"
-"%s\n"
+msgstr "No puc escriure al fitxer %s:\n%s\n"
 
 msgid "Debug"
 msgstr "Depura"
@@ -3476,9 +3451,7 @@ msgstr ""
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
 "Using it may compromise your security"
-msgstr ""
-"El fitxer %s no pertany ni a l'arrel ni a vostè, o bé és modificable per\n"
-"qualsevol. Usar-lo podria comprometre la seguretat"
+msgstr "El fitxer %s no pertany ni a l'arrel ni a vostè, o bé és modificable per\nqualsevol. Usar-lo podria comprometre la seguretat"
 
 msgid "Format error on file Extensions File"
 msgstr ""
@@ -3499,14 +3472,14 @@ msgid "User menu"
 msgstr "Menú d'usuari"
 
 msgid "Help file format error\n"
-msgstr ""
+msgstr "Error de format en el fitxer d'ajuda\n"
 
 msgid "Internal bug: Double start of link area"
 msgstr ""
 
 #, c-format
 msgid "Cannot find node %s in help file"
-msgstr ""
+msgstr "No es pot trobar el node %s al fitxer d'ajuda"
 
 msgid "Help"
 msgstr "Ajuda"
@@ -3533,15 +3506,7 @@ msgid ""
 "\n"
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
-msgstr ""
-"Per favor, premeu la tecla %s\n"
-"i espereu fins que desaparegui aquest missatge.\n"
-"\n"
-"Aleshores, premeu-la de nou per veure si\n"
-"apareix \"D'acord\" vora el seu botó.\n"
-"\n"
-"Si voleu sortir, premeu un cop la tecla\n"
-"d'Escapada i espereu."
+msgstr "Per favor, premeu la tecla %s\ni espereu fins que desaparegui aquest missatge.\n\nAleshores, premeu-la de nou per veure si\napareix \"D'acord\" vora el seu botó.\n\nSi voleu sortir, premeu un cop la tecla\nd'Escapada i espereu."
 
 msgid "Cannot accept this key"
 msgstr ""
@@ -3557,9 +3522,7 @@ msgstr "D'acord"
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
-msgstr ""
-"Sembla que les tecles ja\n"
-"funcionen bé. Això és perfecte."
+msgstr "Sembla que les tecles ja\nfuncionen bé. Això és perfecte."
 
 msgid "&Discard"
 msgstr "&Descarta"
@@ -3567,9 +3530,7 @@ msgstr "&Descarta"
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
-msgstr ""
-"Genial! Teniu una base de dades de terminals\n"
-"completa! Totes les tecles funcionen."
+msgstr "Genial! Teniu una base de dades de terminals\ncompleta! Totes les tecles funcionen."
 
 msgid ""
 "Press all the keys mentioned here. After you have done it, check\n"
@@ -3609,9 +3570,7 @@ msgstr "%b %e %H:%M"
 msgid ""
 "Cannot save file %s:\n"
 "%s"
-msgstr ""
-"No es pot desar el fitxer %s:\n"
-"%s"
+msgstr "No es pot desar el fitxer %s:\n%s"
 
 msgid ""
 "GNU Midnight Commander is already\n"
@@ -3652,8 +3611,7 @@ msgid "With support for background operations\n"
 msgstr "Amb suport per a operacions en segon pla\n"
 
 msgid "With mouse support on xterm and Linux console\n"
-msgstr ""
-"Amb possibilitat d'utilitzar el ratolí en l'xterm i la consola de Linux\n"
+msgstr "Amb possibilitat d'utilitzar el ratolí en l'xterm i la consola de Linux\n"
 
 msgid "With mouse support on xterm\n"
 msgstr "Amb possibilitat d'utilitzar el ratolí en l'xterm.\n"
@@ -3707,17 +3665,13 @@ msgstr "Directori de memòria cau:"
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr ""
-"No s'ha pogut obrir l'arxiu cpio\n"
-"%s"
+msgstr "No s'ha pogut obrir l'arxiu cpio\n%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr ""
-"S'ha anticipat el final de l'arxiu de tipus cpio\n"
-"%s"
+msgstr "S'ha anticipat el final de l'arxiu de tipus cpio\n%s"
 
 #, c-format
 msgid ""
@@ -3725,11 +3679,7 @@ msgid ""
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr ""
-"Enllaços inconsistents de\n"
-"%s\n"
-"a l'arxiu cpio\n"
-"%s"
+msgstr "Enllaços inconsistents de\n%s\na l'arxiu cpio\n%s"
 
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -3739,25 +3689,19 @@ msgstr "%s conté registres duplicats! S'estan ometent!"
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
-msgstr ""
-"S'ha trobat una capçalera corrupta d'arxiu cpio a \n"
-"%s"
+msgstr "S'ha trobat una capçalera corrupta d'arxiu cpio a \n%s"
 
 #, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr ""
-"Fí de fitxer inesperat a\n"
-"%s"
+msgstr "Fí de fitxer inesperat a\n%s"
 
 #, c-format
 msgid ""
 "Cannot open %s archive\n"
 "%s"
-msgstr ""
-"No s'ha pogut obrir l'arxiu %s\n"
-"%s"
+msgstr "No s'ha pogut obrir l'arxiu %s\n%s"
 
 msgid "Inconsistent extfs archive"
 msgstr "L'arxiu extfs no és consistent"
@@ -3934,17 +3878,13 @@ msgstr ""
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
-msgstr ""
-"Avís: línia no vàlida a %s:\n"
-"%s\n"
+msgstr "Avís: línia no vàlida a %s:\n%s\n"
 
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
-msgstr ""
-"Avís: Senyalador %c no vàlid a %s:\n"
-"%s\n"
+msgstr "Avís: Senyalador %c no vàlid a %s:\n%s\n"
 
 #, c-format
 msgid "sftp: an error occurred while reading %s: %s"
@@ -4029,9 +3969,7 @@ msgstr ""
 msgid ""
 "Cannot open tar archive\n"
 "%s"
-msgstr ""
-"No s'ha pogut obrir l'arxiu tar\n"
-"%s"
+msgstr "No s'ha pogut obrir l'arxiu tar\n%s"
 
 msgid "Inconsistent tar archive"
 msgstr "L'arxiu tar no és consistent"
@@ -4043,9 +3981,7 @@ msgstr "Fí de fitxer inesperat a l'arxiu"
 msgid ""
 "%s\n"
 "doesn't look like a tar archive."
-msgstr ""
-"%s\n"
-"no sembla un arxiu tar"
+msgstr "%s\nno sembla un arxiu tar"
 
 msgid "undelfs: error"
 msgstr "undelfs: error"
@@ -4066,8 +4002,7 @@ msgstr ""
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr ""
-"undelfs: s'està carregant la informació dels fitxers esborrats %d inodes"
+msgstr "undelfs: s'està carregant la informació dels fitxers esborrats %d inodes"
 
 #, c-format
 msgid "while calling ext2_block_iterate %d"
@@ -4194,9 +4129,7 @@ msgstr ""
 msgid ""
 "Cannot save file:\n"
 "%s"
-msgstr ""
-"No es pot desar el fitxer :\n"
-"%s"
+msgstr "No es pot desar el fitxer :\n%s"
 
 msgid "View: "
 msgstr "Visualitza:"
@@ -4205,9 +4138,7 @@ msgstr "Visualitza:"
 msgid ""
 "Cannot open \"%s\"\n"
 "%s"
-msgstr ""
-"No es pot obrir \"%s\"\n"
-"%s"
+msgstr "No es pot obrir \"%s\"\n%s"
 
 msgid "Cannot view: not a regular file"
 msgstr ""
@@ -4226,6 +4157,3 @@ msgstr "Continuar des del començament?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "%d: %s"
-#~ msgstr "%d: %s"
