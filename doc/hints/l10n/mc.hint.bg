@@ -1,93 +1,118 @@
-Hint: Use C-x t to copy tagged file names to the command line.
+Подсказка: Използвайте C-x за копиране на файлови имена с тагове на
+командния ред.
 
-Hint: Use C-x p to copy the current pathname to the command line.
+Подсказка: Използвайте C-x p за копиране на сегашния път на командния ред.
 
-Hint: Completion: use M-Tab (or Esc+Tab).  Type it twice to get a list.
+Подсказка: Довършване: използвайте M-Tab (или Esc+Tab). Натиснете го
+повторно за получаване на списък.
 
-Hint: Use M-p and M-n to access the command history.
+Подсказка: Използвайте M-p и M-n за достъп до командната история.
 
-Hint: Need to quote a character? Use Control-q and the character.
+Подсказка: Нуждаете се да използвате символ буквално? Използвайте Control-q
+и символа.
 
-Hint: Tired of these messages? Turn them off from the Options/Layout menu.
+Подсказка: Уморените сте от тези съобщения? Изключете ги от меню
+Настройки/Подредба.
 
-Hint: Selecting directories: add a slash to the end of the matching pattern.
+Подсказка: Избиране на директории: добавете наклонена черта на края на
+поредицата от метасимволи.
 
-Hint: If your terminal lacks functions keys, use the ESC+number sequence.
+Подсказка: Ако вашия терминал няма ф-ве, използвайте последователността
+ESC+число.
 
-Hint: The homepage of GNU Midnight Commander:
+Подсказка: Главната страница на GNU Midnight Commander:
 http://www.midnight-commander.org/
 
-Hint: Please send any bug reports to mc-devel@gnome.org
+Подсказка: Моля изпращайте всякакви доклади за бъгове на mc-devel@gnome.org
 
-Hint: Tab changes your current panel.
+Подсказка: Tab-а променя сегашния ви панел.
 
-Hint: VFS coolness: tap enter on a tar file to examine its contents.
+Подсказка: ВФС якост: настинете enter на tar файл, за да разгледате
+съдържанието му.
 
-Hint: We also have a nice manual page.
+Подсказка: Също така имаме приятно ръководство на потребителя.
 
 Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
-Hint: % macros work even on the command line.
+Подсказка: % макроси работят дори и на командния ред.
 
-Hint: M-! will allow you to execute programs and see the output in the
-viewer.
+Подсказка: M-! ще ви позволи да изпълните програми и да видите изходната
+информация във визуализатора.
 
-Hint: The file listing format can be customized; do "man mc" for details.
+Подсказка: Формата за показване на файлове може да се променя; изпълнете
+"man mc" за детайли.
 
-Hint: %D/%T expands to the tagged files in the opposite directory.
+Подсказка: %D/%T се заменя с файлове с тагове в обратната директория.
 
-Hint: Want your plain shell? Press C-o, and get back to MC with C-o again.
+Подсказка: Искате чиста shell? Натиснете C-o, и се отново върнете обратно в
+MC с C-o .
 
-Hint: Setting the CDPATH variable can save you keystrokes in cd commands.
+Подсказка: Задаването на променливата CDPATH може да ви спести клавишни
+натискания при cd командите.
 
-Hint: If you want to see your .* files, say so in the Configuration dialog.
+Подсказка: Ако искате да виждате вашите .* файлове, кажете така в
+Конфигурационния диалог.
 
-Hint: Want to see your *~ backup files? Set it in the Configuration dialog.
+Подсказка: Искате да виждате вашите *~ резервни файлове? Задайте ги в
+Конфигурационния диалог.
 
-Hint: Completion works on all input lines in all dialogs. Just press M-Tab.
+Подсказка: Довършването работи върху всички входящи файлове във всички
+диалози. Просто натиснете
 
-Hint: On slow terminals the -s flag may help.
+Подсказка: На бавни терминали флага -s може да помогне.
 
-Hint: Find File: you can work on the files found using the Panelize button.
+Подсказка: Намиране на файл: можете да работите върху намерените файлове,
+използвайки бутона Панелизация.
 
-Hint: Want to do complex searches? Use the External Panelize command.
+Подсказка: Искате сложни търсения? Използвайте командата за Външна
+Панелизация.
 
-Hint: To change directory halfway through typing a command, use M-c (quick
-cd).
+Подсказка: За промяна на директория по време на писане чрез команда,
+използвайте M-c (бързо търсене).
 
-Note: Shell commands will not work when you are on a non-local file system.
+Забележка: Командите на shell-а няма да работят, когато сте на не-локална
+файлова система.
 
-Hint: Bring text back from the dead with C-y.
+Подсказка: Съживете текст с
 
-Hint: Are some of your keys not working? Look at Options/Learn keys.
+Подсказка: Не работят ли някои от клавишите ви? Погледнете в
+Настройки/Изучаване на клавиши.
 
-Hint: To look at the output of a command in the viewer, use M-!
+Подсказка: За да разглеждате изходната информация на команда във
+визуализатор, използвайте
 
-Hint: F13 (or Shift-F3) invokes the viewer in raw mode.
+Подсказка: F13 (или Shift-F3) отваря визуализатора в raw режим.
 
-Hint: You may specify the editor for F4 with the shell variable EDITOR.
+Подсказка: Можете да зададете редактор чрез F4 със специалната променлива на
+shell-а EDITOR.
 
-Hint: You may specify the external viewer with the shell vars VIEWER or
-PAGER.
+Подсказка: Можете да зададете външен визуализатор с променливите на shell-а
+VIEWER и
 
-Hint: You can disable all requests for confirmation in Options/Confirmation.
+Подсказка: Можете да деактивирате всички запитвания за потвърждение чрез
+Настройки/Потвърждаване.
 
 Hint: Leap to frequently used directories in a single bound with C-.
 
-Hint: You can do anonymous FTP with mc by typing 'cd ftp://machine.edu'
+Подсказка: Можете да извършвате анонимно FTP с mc чрез написването на 'cd
+ftp://machine.edu'
 
-Hint: FTP is built in the Midnight Commander, check the File/FTP link menu.
+Подсказка: FTP е вграден в Midnight Commander-а, проверете менюто Файл/FTP
+връзка.
 
-Hint: M-t changes quickly the listing mode.
+Подсказка: M-t променя бързо режима на показване на списъка.
 
-Hint: You can specify the username when doing ftps: 'cd
-ftp://user@machine.edu'
+Подсказка: Можете да зададете потребителското име, когато направите ftps:
+\&'cd ftp://user@machine.edu'
 
-Hint: You can browse RPM files by tapping enter on top of an rpm file.
+Подсказка: Можете на разглеждате RPM файлове чрез натискане на enter върху
+rmp файл.
 
-Hint: To mark directories on the select dialog box, append a slash.
+Подсказка: Може да маркирате директории на диалога за селекция, добавете
+наклонена черта.
 
-Hint: To use the mouse cut and paste may require holding the shift key
+Подсказка: За използването мишката за отрежи и постави може да е нужно да
+задържите клавиша shift
 
 Hint: Key frequently visited ftp sites in the hotlist: type C-.
 
