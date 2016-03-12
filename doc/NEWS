@@ -1,3 +1,58 @@
+Version 4.8.16
+
+- Core
+  * Support for ash + bugfixes for bash, fish (#2742)
+  * Find file: empty file name matches any file name (#3593)
+  * Find file: empty value of "Content" is used instead of "Search for content" checkbox to disable search for content (#3594)
+  * Listbox: don't wraparound on mouse scroll (#3554)
+  * Internals:
+    * Listbox: various fixups (#3569: #3562, #3563, #3565, #3161)
+    * Split MSG_ACTION into MSG_ACTION and MSG_NOTIFY (#3566)
+
+- VFS
+  * Support lzip compression format (#2673, #1541)
+  * Support lz4 compression format (#3523)
+  * patchfs: support xz compression (#3443)
+  * Update uc1541 version (#3527)
+  * Add mc.ext patterns for initramfs / initrd (#3115)
+
+- Editor
+  * Add golang syntax (MidnightCommander/mc#84)
+  * Update Puppet syntax (MidnightCommander/mc#86)
+
+- Misc
+  * Code cleanup (#3555, #3547, #3587)
+  * Better subshell documentation (#3556)
+  * Fixes to the English man pages by Denys Vlasenko
+
+- Fixes
+  * Insufficient quoting in `mc.menu` (#2947)
+  * Broken ./configure --without-internal-edit (#3601)
+  * Memory leaks (#3547, #3561, #3567, #3572)
+  * No preallocation if appending during file copy (#3577)
+  * Cannot set mini-format for "brief" listing type (#3588)
+  * Info panel: incorrect inode information in some cases (#3214)
+  * Info panel: wrong device name with symbolic link (#3412)
+  * Info panel: buffer overflow (#3582)
+  * Regression: match filename, not full path in mc.ext (#3578)
+  * Broken case insensitive search in non-unicode locale (#3491)
+  * Error message prefixed with no sense "0:" (#3269)
+  * mcedit: buffer overflow (#3579)
+  * mcedit: "Lower case selection" command in User Menu (#3586)
+  * mcedit: close on ctrl-g (#3557)
+  * mcview: "Not found" result isn't reported in some cases (#3543)
+  * VFS: isofs doesn't show .dotfiles (#3537)
+  * VFS: isofs: cannot copy file from iso when Joliet without RockRidge is used (#2851)
+  * VFS: extfs/unzip: enter into zip file fails with "inconsistent extfs archive" (#3433)
+  * VFS: SFTP: various bugs (#3581)
+  * VFS: FISH: provide major/minor info for block/char devices (#3599)
+  * Bashism in gitfs+ extfs helper (#3379)
+  * Non-portable invocation of man (#3509)
+  * mc-wrapper leaves MC_USER set (#3550)
+  * Broken silent opening of files in background (#3574)
+  * Run `identify` on JPEGs even if `exif` is not installed (#3568)
+
+
 Version 4.8.15
 
 - Core
