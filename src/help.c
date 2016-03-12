@@ -966,17 +966,8 @@ help_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
         return help_handle_key (h, parm);
 
     case MSG_ACTION:
-        /* shortcut */
-        if (sender == NULL)
-            return help_execute_cmd (parm);
-        /* message from buttonbar */
-        if (sender == WIDGET (find_buttonbar (h)))
-        {
-            if (data != NULL)
-                return send_message (data, NULL, MSG_ACTION, parm, NULL);
-            return help_execute_cmd (parm);
-        }
-        return MSG_NOT_HANDLED;
+        /* Handle shortcuts and buttonbar. */
+        return help_execute_cmd (parm);
 
     default:
         return dlg_default_callback (w, sender, msg, parm, data);

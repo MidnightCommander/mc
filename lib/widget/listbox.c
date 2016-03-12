@@ -391,7 +391,7 @@ static void
 listbox_on_change (WListbox * l)
 {
     listbox_draw (l, TRUE);
-    send_message (WIDGET (l)->owner, l, MSG_ACTION, l->pos, NULL);
+    send_message (WIDGET (l)->owner, l, MSG_NOTIFY, l->pos, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

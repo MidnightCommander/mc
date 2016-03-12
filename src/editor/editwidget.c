@@ -1021,27 +1021,20 @@ edit_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
         return MSG_HANDLED;
 
     case MSG_ACTION:
-        /* shortcut */
-        if (sender == NULL)
-            return edit_dialog_command_execute (h, parm);
-        /* message from menu */
-        menubar = find_menubar (h);
-        if (sender == WIDGET (menubar))
         {
-            if (edit_dialog_command_execute (h, parm) == MSG_HANDLED)
-                return MSG_HANDLED;
-            /* try send command to the current window */
-            return send_message (h->current->data, NULL, MSG_ACTION, parm, NULL);
+            /* Handle shortcuts, menu, and buttonbar. */
+
+            cb_ret_t result;
+
+            result = edit_dialog_command_execute (h, parm);
+
+            /* We forward any commands coming from the menu, and which haven't been
+               handled by the dialog, to the focused WEdit window. */
+            if (result == MSG_NOT_HANDLED && sender == WIDGET (find_menubar (h)))
+                result = send_message (h->current->data, NULL, MSG_ACTION, parm, NULL);
+
+            return result;
         }
-        /* message from buttonbar */
-        buttonbar = find_buttonbar (h);
-        if (sender == WIDGET (buttonbar))
-        {
-            if (data != NULL)
-                return send_message (data, NULL, MSG_ACTION, parm, NULL);
-            return edit_dialog_command_execute (h, parm);
-        }
-        return MSG_NOT_HANDLED;
 
     case MSG_KEY:
         {

@@ -470,7 +470,7 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         first_draw = TRUE;
         return MSG_HANDLED;
 
-    case MSG_ACTION:
+    case MSG_NOTIFY:
         if (sender == WIDGET (ignore_dirs_cbox))
         {
             gboolean disable = !(ignore_dirs_cbox->state & C_BOOL);

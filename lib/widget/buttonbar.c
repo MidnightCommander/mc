@@ -148,9 +148,12 @@ buttonbar_call (WButtonBar * bb, int i)
 {
     cb_ret_t ret = MSG_NOT_HANDLED;
     Widget *w = WIDGET (bb);
+    Widget *target;
+
+    target = (bb->labels[i].receiver != NULL) ? bb->labels[i].receiver : WIDGET (w->owner);
 
     if ((bb != NULL) && (bb->labels[i].command != CK_IgnoreKey))
-        ret = send_message (w->owner, w, MSG_ACTION, bb->labels[i].command, bb->labels[i].receiver);
+        ret = send_message (target, w, MSG_ACTION, bb->labels[i].command, NULL);
     return ret;
 }
 

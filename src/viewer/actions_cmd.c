@@ -724,19 +724,11 @@ mcview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
         return MSG_HANDLED;
 
     case MSG_ACTION:
-        /* shortcut */
-        if (sender == NULL)
-            return mcview_execute_cmd (NULL, parm);
-        /* message from buttonbar */
-        if (sender == WIDGET (find_buttonbar (h)))
-        {
-            if (data != NULL)
-                return send_message (data, NULL, MSG_ACTION, parm, NULL);
+        /* Handle shortcuts. */
 
-            view = (WView *) find_widget_type (h, mcview_callback);
-            return mcview_execute_cmd (view, parm);
-        }
-        return MSG_NOT_HANDLED;
+        /* Note: the buttonbar sends messages directly to the the WView, not to
+         * here, which is why we can pass NULL in the following call. */
+        return mcview_execute_cmd (NULL, parm);
 
     case MSG_VALIDATE:
         view = (WView *) find_widget_type (h, mcview_callback);
