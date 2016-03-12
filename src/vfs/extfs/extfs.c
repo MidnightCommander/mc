@@ -308,6 +308,8 @@ extfs_find_entry_int (struct entry *dir, const char *name, GSList * list,
         }
         /* Next iteration */
         *q = c;
+        if (c == '\0')
+            break;
         p = q + 1;
         q = strchr (p, PATH_SEP);
         if (q == NULL)
