@@ -45,6 +45,7 @@
 #include "lib/tty/key.h"        /* is_idle() */
 #include "lib/tty/color.h"      /* tty_setcolor() */
 #include "lib/skin.h"
+#include "lib/fileloc.h"        /* EDIT_DIR */
 #include "lib/strutil.h"        /* str_term_trim() */
 #include "lib/util.h"           /* mc_build_filename() */
 #include "lib/widget.h"

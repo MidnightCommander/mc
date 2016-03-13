@@ -55,6 +55,7 @@
 #include "lib/mcconfig.h"
 #include "lib/skin.h"
 #include "lib/strutil.h"        /* utf string functions */
+#include "lib/fileloc.h"
 #include "lib/lock.h"
 #include "lib/util.h"           /* tilde_expand() */
 #include "lib/vfs/vfs.h"

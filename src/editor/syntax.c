@@ -56,6 +56,7 @@
 #include "lib/global.h"
 #include "lib/search.h"         /* search engine */
 #include "lib/skin.h"
+#include "lib/fileloc.h"        /* EDIT_DIR, EDIT_SYNTAX_FILE */
 #include "lib/strutil.h"        /* utf string functions */
 #include "lib/util.h"
 #include "lib/widget.h"         /* message() */

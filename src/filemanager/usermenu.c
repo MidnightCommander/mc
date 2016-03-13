@@ -37,6 +37,7 @@
 #include <string.h>
 
 #include "lib/global.h"
+#include "lib/fileloc.h"
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
 #include "lib/search.h"

@@ -49,6 +49,7 @@
 #include "lib/tty/tty.h"        /* attrset() */
 #include "lib/tty/key.h"        /* is_idle() */
 #include "lib/skin.h"           /* EDITOR_NORMAL_COLOR */
+#include "lib/fileloc.h"        /* EDIT_BLOCK_FILE */
 #include "lib/vfs/vfs.h"
 #include "lib/strutil.h"        /* utf string functions */
 #include "lib/util.h"           /* load_file_position(), save_file_position() */
