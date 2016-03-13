@@ -136,18 +136,10 @@ mc_shell_get_from_env (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * Get a shell type and store in mc_shell->type variable
- */
 
-static gboolean
-mc_shell_recognize_and_fill_type (mc_shell_t * mc_shell)
+static void
+mc_shell_recognize_real_path (mc_shell_t * mc_shell)
 {
-    gboolean result = TRUE;
-
-    /* Find out what type of shell we have. Also consider real paths (resolved symlinks)
-     * because e.g. csh might point to tcsh, ash to dash or busybox, sh to anything. */
-
     if (strstr (mc_shell->path, "/zsh") != NULL || strstr (mc_shell->real_path, "/zsh") != NULL
         || getenv ("ZSH_VERSION") != NULL)
     {
@@ -187,7 +179,16 @@ mc_shell_recognize_and_fill_type (mc_shell_t * mc_shell)
         mc_shell->type = SHELL_ASH_BUSYBOX;
         mc_shell->name = mc_shell->path;
     }
-    else if (strstr (mc_shell->path, "/bash") != NULL || getenv ("BASH") != NULL)
+    else
+        mc_shell->type = SHELL_NONE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+mc_shell_recognize_path (mc_shell_t * mc_shell)
+{
+    if (strstr (mc_shell->path, "/bash") != NULL || getenv ("BASH") != NULL)
     {
         /* If bash is not symlinked to busybox, it is safe to assume it is a real bash */
         mc_shell->type = SHELL_BASH;
@@ -206,12 +207,7 @@ mc_shell_recognize_and_fill_type (mc_shell_t * mc_shell)
         mc_shell->name = "ash";
     }
     else
-    {
         mc_shell->type = SHELL_NONE;
-        mc_global.tty.use_subshell = FALSE;
-        result = FALSE;
-    }
-    return result;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -230,9 +226,16 @@ mc_shell_init (void)
 
     mc_shell->real_path = mc_realpath (mc_shell->path, rp_shell);
 
-    if (!mc_shell_recognize_and_fill_type (mc_shell))
-        mc_global.tty.use_subshell = FALSE;
+    /* Find out what type of shell we have. Also consider real paths (resolved symlinks)
+     * because e.g. csh might point to tcsh, ash to dash or busybox, sh to anything. */
 
+    if (mc_shell->real_path != NULL)
+        mc_shell_recognize_real_path (mc_shell);
+
+    if (mc_shell->type == SHELL_NONE)
+        mc_shell_recognize_path (mc_shell);
+
+    mc_global.tty.use_subshell = mc_shell->type != SHELL_NONE;
     mc_global.shell = mc_shell;
 }
 
