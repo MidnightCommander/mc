@@ -188,21 +188,19 @@ mc_shell_recognize_real_path (mc_shell_t * mc_shell)
 static void
 mc_shell_recognize_path (mc_shell_t * mc_shell)
 {
+    /* If shell is not symlinked to busybox, it is safe to assume it is a real shell */
     if (strstr (mc_shell->path, "/bash") != NULL || getenv ("BASH") != NULL)
     {
-        /* If bash is not symlinked to busybox, it is safe to assume it is a real bash */
         mc_shell->type = SHELL_BASH;
         mc_shell->name = "bash";
     }
     else if (strstr (mc_shell->path, "/sh") != NULL || getenv ("SH") != NULL)
     {
-        /* If bash is not symlinked to busybox, it is safe to assume it is a real bash */
         mc_shell->type = SHELL_SH;
         mc_shell->name = "sh";
     }
     else if (strstr (mc_shell->path, "/ash") != NULL || getenv ("ASH") != NULL)
     {
-        /* If bash is not symlinked to busybox, it is safe to assume it is a real bash */
         mc_shell->type = SHELL_ASH_BUSYBOX;
         mc_shell->name = "ash";
     }
