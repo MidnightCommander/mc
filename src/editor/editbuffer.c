@@ -457,6 +457,9 @@ edit_buffer_insert (edit_buffer_t * buf, int c)
 
     /* update cursor position */
     buf->curs1++;
+
+    /* update file length */
+    buf->size++;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -486,6 +489,9 @@ edit_buffer_insert_ahead (edit_buffer_t * buf, int c)
 
     /* update cursor position */
     buf->curs2++;
+
+    /* update file length */
+    buf->size++;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -522,6 +528,9 @@ edit_buffer_delete (edit_buffer_t * buf)
     }
 
     buf->curs2 = prev;
+
+    /* update file length */
+    buf->size--;
 
     return c;
 }
@@ -560,6 +569,9 @@ edit_buffer_backspace (edit_buffer_t * buf)
     }
 
     buf->curs1 = prev;
+
+    /* update file length */
+    buf->size--;
 
     return c;
 }

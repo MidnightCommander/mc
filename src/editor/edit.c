@@ -2528,9 +2528,6 @@ edit_insert (WEdit * edit, int c)
     edit->last_get_rule += (edit->last_get_rule > edit->buffer.curs1) ? 1 : 0;
 
     edit_buffer_insert (&edit->buffer, c);
-
-    /* update file length */
-    edit->buffer.size++;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2563,8 +2560,6 @@ edit_insert_ahead (WEdit * edit, int c)
     edit->last_get_rule += (edit->last_get_rule >= edit->buffer.curs1) ? 1 : 0;
 
     edit_buffer_insert_ahead (&edit->buffer, c);
-
-    edit->buffer.size++;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2621,7 +2616,6 @@ edit_delete (WEdit * edit, gboolean byte_delete)
 
         p = edit_buffer_delete (&edit->buffer);
 
-        edit->buffer.size--;
         edit_push_undo_action (edit, p + 256);
     }
 
@@ -2682,7 +2676,6 @@ edit_backspace (WEdit * edit, gboolean byte_delete)
 
         p = edit_buffer_backspace (&edit->buffer);
 
-        edit->buffer.size--;
         edit_push_undo_action (edit, p);
     }
     edit_modification (edit);
