@@ -54,8 +54,9 @@ void edit_buffer_insert_ahead (edit_buffer_t * buf, int c);
 int edit_buffer_delete (edit_buffer_t * buf);
 int edit_buffer_backspace (edit_buffer_t * buf);
 
-off_t edit_buffer_move_forward (const edit_buffer_t * buf, off_t current, long lines, off_t upto);
-off_t edit_buffer_move_backward (const edit_buffer_t * buf, off_t current, long lines);
+off_t edit_buffer_get_forward_offset (const edit_buffer_t * buf, off_t current, long lines,
+                                      off_t upto);
+off_t edit_buffer_get_backward_offset (const edit_buffer_t * buf, off_t current, long lines);
 
 off_t edit_buffer_read_file (edit_buffer_t * buf, int fd, off_t size,
                              edit_buffer_read_file_status_msg_t * sm, gboolean * aborted);

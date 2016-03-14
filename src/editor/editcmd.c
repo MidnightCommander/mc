@@ -543,7 +543,7 @@ edit_delete_column_of_text (WEdit * edit)
     long b, c, d;
 
     eval_marks (edit, &m1, &m2);
-    n = edit_buffer_move_forward (&edit->buffer, m1, 0, m2) + 1;
+    n = edit_buffer_get_forward_offset (&edit->buffer, m1, 0, m2) + 1;
     c = (long) edit_move_forward3 (edit, edit_buffer_get_bol (&edit->buffer, m1), 0, m1);
     d = (long) edit_move_forward3 (edit, edit_buffer_get_bol (&edit->buffer, m2), 0, m2);
     b = max (min (c, d), min (edit->column1, edit->column2));
@@ -569,8 +569,8 @@ edit_delete_column_of_text (WEdit * edit)
         if (n)
             /* move to next line except on the last delete */
             edit_cursor_move (edit,
-                              edit_buffer_move_forward (&edit->buffer, edit->buffer.curs1, 1,
-                                                        0) - edit->buffer.curs1);
+                              edit_buffer_get_forward_offset (&edit->buffer, edit->buffer.curs1, 1,
+                                                              0) - edit->buffer.curs1);
     }
 }
 

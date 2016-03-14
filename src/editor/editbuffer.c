@@ -591,7 +591,7 @@ edit_buffer_backspace (edit_buffer_t * buf)
  */
 
 off_t
-edit_buffer_move_forward (const edit_buffer_t * buf, off_t current, long lines, off_t upto)
+edit_buffer_get_forward_offset (const edit_buffer_t * buf, off_t current, long lines, off_t upto)
 {
     if (upto != 0)
         return (off_t) edit_buffer_count_lines (buf, current, upto);
@@ -623,7 +623,7 @@ edit_buffer_move_forward (const edit_buffer_t * buf, off_t current, long lines, 
  */
 
 off_t
-edit_buffer_move_backward (const edit_buffer_t * buf, off_t current, long lines)
+edit_buffer_get_backward_offset (const edit_buffer_t * buf, off_t current, long lines)
 {
     lines = max (lines, 0);
     current = edit_buffer_get_bol (buf, current);

@@ -918,13 +918,13 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
         if ((force & REDRAW_PAGE) != 0)
         {
             row = start_row;
-            b = edit_buffer_move_forward (&edit->buffer, edit->start_display, start_row, 0);
+            b = edit_buffer_get_forward_offset (&edit->buffer, edit->start_display, start_row, 0);
             while (row <= end_row)
             {
                 if (key_pending (edit))
                     return;
                 edit_draw_this_line (edit, b, row, start_column, end_column);
-                b = edit_buffer_move_forward (&edit->buffer, b, 1, 0);
+                b = edit_buffer_get_forward_offset (&edit->buffer, b, 1, 0);
                 row++;
             }
         }
@@ -943,7 +943,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
                     if (key_pending (edit))
                         return;
                     edit_draw_this_line (edit, b, row, start_column, end_column);
-                    b = edit_buffer_move_forward (&edit->buffer, b, 1, 0);
+                    b = edit_buffer_get_forward_offset (&edit->buffer, b, 1, 0);
                 }
             }
 
@@ -959,13 +959,13 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
             if ((force & REDRAW_AFTER_CURSOR) != 0 && end_row > curs_row)
             {
                 row = curs_row + 1 < start_row ? start_row : curs_row + 1;
-                b = edit_buffer_move_forward (&edit->buffer, b, 1, 0);
+                b = edit_buffer_get_forward_offset (&edit->buffer, b, 1, 0);
                 while (row <= end_row)
                 {
                     if (key_pending (edit))
                         return;
                     edit_draw_this_line (edit, b, row, start_column, end_column);
-                    b = edit_buffer_move_forward (&edit->buffer, b, 1, 0);
+                    b = edit_buffer_get_forward_offset (&edit->buffer, b, 1, 0);
                     row++;
                 }
             }
@@ -973,8 +973,9 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
             if ((force & REDRAW_LINE_ABOVE) != 0 && curs_row >= 1)
             {
                 row = curs_row - 1;
-                b = edit_buffer_move_backward (&edit->buffer,
-                                               edit_buffer_get_current_bol (&edit->buffer), 1);
+                b = edit_buffer_get_backward_offset (&edit->buffer,
+                                                     edit_buffer_get_current_bol (&edit->buffer),
+                                                     1);
                 if (row >= start_row && row <= end_row)
                 {
                     if (key_pending (edit))
@@ -987,7 +988,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
             {
                 row = curs_row + 1;
                 b = edit_buffer_get_current_bol (&edit->buffer);
-                b = edit_buffer_move_forward (&edit->buffer, b, 1, 0);
+                b = edit_buffer_get_forward_offset (&edit->buffer, b, 1, 0);
                 if (row >= start_row && row <= end_row)
                 {
                     if (key_pending (edit))

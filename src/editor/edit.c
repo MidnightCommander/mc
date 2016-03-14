@@ -711,12 +711,12 @@ edit_find_line (WEdit * edit, long line)
         i = 3 + (rand () % (N_LINE_CACHES - 3));
     if (line > edit->line_numbers[j])
         edit->line_offsets[i] =
-            edit_buffer_move_forward (&edit->buffer, edit->line_offsets[j],
-                                      line - edit->line_numbers[j], 0);
+            edit_buffer_get_forward_offset (&edit->buffer, edit->line_offsets[j],
+                                            line - edit->line_numbers[j], 0);
     else
         edit->line_offsets[i] =
-            edit_buffer_move_backward (&edit->buffer, edit->line_offsets[j],
-                                       edit->line_numbers[j] - line);
+            edit_buffer_get_backward_offset (&edit->buffer, edit->line_offsets[j],
+                                             edit->line_numbers[j] - line);
     edit->line_numbers[i] = line;
     return edit->line_offsets[i];
 }
@@ -1068,8 +1068,8 @@ edit_move_updown (WEdit * edit, long lines, gboolean do_scroll, gboolean directi
             edit_scroll_downward (edit, lines);
     }
     p = edit_buffer_get_current_bol (&edit->buffer);
-    p = direction ? edit_buffer_move_backward (&edit->buffer, p, lines) :
-        edit_buffer_move_forward (&edit->buffer, p, lines, 0);
+    p = direction ? edit_buffer_get_backward_offset (&edit->buffer, p, lines) :
+        edit_buffer_get_forward_offset (&edit->buffer, p, lines, 0);
     edit_cursor_move (edit, p - edit->buffer.curs1);
     edit_move_to_prev_col (edit, p);
 
@@ -1383,7 +1383,7 @@ edit_auto_indent (WEdit * edit)
 
     p = edit->buffer.curs1;
     /* use the previous line as a template */
-    p = edit_buffer_move_backward (&edit->buffer, p, 1);
+    p = edit_buffer_get_backward_offset (&edit->buffer, p, 1);
     /* copy the leading whitespace of the line */
     while (TRUE)
     {                           /* no range check - the line _is_ \n-terminated */
@@ -2862,7 +2862,8 @@ edit_scroll_upward (WEdit * edit, long i)
     if (i != 0)
     {
         edit->start_line -= i;
-        edit->start_display = edit_buffer_move_backward (&edit->buffer, edit->start_display, i);
+        edit->start_display =
+            edit_buffer_get_backward_offset (&edit->buffer, edit->start_display, i);
         edit->force |= REDRAW_PAGE;
         edit->force &= (0xfff - REDRAW_CHAR_ONLY);
     }
@@ -2883,7 +2884,8 @@ edit_scroll_downward (WEdit * edit, long i)
         if (i > lines_below)
             i = lines_below;
         edit->start_line += i;
-        edit->start_display = edit_buffer_move_forward (&edit->buffer, edit->start_display, i, 0);
+        edit->start_display =
+            edit_buffer_get_forward_offset (&edit->buffer, edit->start_display, i, 0);
         edit->force |= REDRAW_PAGE;
         edit->force &= (0xfff - REDRAW_CHAR_ONLY);
     }
