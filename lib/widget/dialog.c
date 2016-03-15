@@ -1042,7 +1042,7 @@ find_widget_type (const WDialog * h, widget_cb_fn callback)
 {
     GList *w;
 
-    w = g_list_find_custom (h->widgets, callback, dlg_find_widget_callback);
+    w = g_list_find_custom (h->widgets, (gconstpointer) callback, dlg_find_widget_callback);
 
     return (w == NULL) ? NULL : WIDGET (w->data);
 }
