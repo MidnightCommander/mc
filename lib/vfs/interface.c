@@ -200,7 +200,10 @@ mc_open (const vfs_path_t * vpath, int flags, ...)
     {
         va_list ap;
         va_start (ap, flags);
-        mode = va_arg (ap, mode_t);
+        /* We have to use PROMOTED_MODE_T instead of mode_t. Doing 'va_arg (ap, mode_t)'
+         * fails on systems where 'mode_t' is smaller than 'int' because of C's "default
+         * argument promotions". */
+        mode = va_arg (ap, PROMOTED_MODE_T);
         va_end (ap);
     }
 
