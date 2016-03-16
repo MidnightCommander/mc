@@ -230,9 +230,11 @@ context default
     keyword whole max yellow
     keyword whole max0 yellow
     keyword whole max1 yellow
+    keyword whole maxval yellow
     keyword whole min yellow
     keyword whole min0 yellow
     keyword whole min1 yellow
+    keyword whole minval yellow
     keyword whole mod yellow
     keyword whole nint yellow
     keyword whole product yellow
@@ -267,7 +269,8 @@ context default
     keyword '*' green
     keyword "*" green
 
-context &\n & black cyan
+#context &\n \n black cyan
+    keyword &\n black cyan
 
 context format( ) green
 
