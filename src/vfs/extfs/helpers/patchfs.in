@@ -80,10 +80,10 @@ sub myin
     my ($qfname)=(quotemeta $_[0]);
 
     $_=`$fileutil $qfname`;
-    } elsif (/^'*lzip/) {
-	return "$lzip -dc $qfname";
     if (/^'*lz4/) {
 	return "$lz4 -dc $qfname";
+    } elsif (/^'*lzip/) {
+	return "$lzip -dc $qfname";
     } elsif (/^'*lzma/) {
 	return "$lzma -dc $qfname";
     } elsif (/^'*xz/) {
@@ -104,10 +104,10 @@ sub myout
     my ($sep) = $append ? '>>' : '>';
 
     $_=`$fileutil $qfname`;
-    } elsif (/^'*lzip/) {
-	return "$lzip -c $sep $qfname";
     if (/^'*lz4/) {
 	return "$lz4 -c $sep $qfname";
+    } elsif (/^'*lzip/) {
+	return "$lzip -c $sep $qfname";
     } elsif (/^'*lzma/) {
 	return "$lzma -c $sep $qfname";
     } elsif (/^'*xz/) {
