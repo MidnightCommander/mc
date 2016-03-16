@@ -154,6 +154,12 @@ mc_shell_recognize_real_path (mc_shell_t * mc_shell)
         mc_shell->type = SHELL_TCSH;
         mc_shell->name = "tcsh";
     }
+    else if (strstr (mc_shell->path, "/csh") != NULL
+             || strstr (mc_shell->real_path, "/csh") != NULL)
+    {
+        mc_shell->type = SHELL_TCSH;
+        mc_shell->name = "csh";
+    }
     else if (strstr (mc_shell->path, "/fish") != NULL
              || strstr (mc_shell->real_path, "/fish") != NULL)
     {
