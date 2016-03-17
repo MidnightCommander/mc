@@ -35,12 +35,13 @@ my $cmd_delete = "$app_zip -d";
 my $cmd_extract = "$app_unzip -p";
 
 # -rw-r--r--  2.2 unx     2891 tx     1435 defN 20000330.211927 ./edit.html
-# (perm) (?) (?) (size) (?) (zippedsize) (method) (yyyy)(mm)(dd)(HH)(MM) (fname)
+# (perm) (?) (?) (size) (?) (zippedsize) (method) (yyyy)(mm)(dd).(HH)(MM)(SS) (fname)
 my $regex_zipinfo_line = qr"^(\S{7,10})\s+(\d+\.\d+)\s+(\S+)\s+(\d+)\s+(\S\S)\s+(\d+)\s+(\S{4})\s+(\d{4})(\d\d)(\d\d)\.(\d\d)(\d\d)(\d\d)\s(.*)$";
 
 #     2891  Defl:N     1435  50%  03-30-00 21:19  50cbaaf8  ./edit.html
-# (size) (method) (zippedsize) (zipratio) (mm)(dd)(yy|yyyy)(HH)(MM) (cksum) (fname)
-my $regex_nonzipinfo_line = qr"^\s*(\d+)\s+(\S+)\s+(\d+)\s+(-?\d+\%)\s+(\d?\d)-(\d?\d)-(\d+)\s+(\d?\d):(\d\d)\s+([0-9a-f]+)\s\s(.*)$";
+# (size) (method) (zippedsize) (zipratio) (mm)-(dd)-(yy|yyyy) (HH):(MM) (cksum) (fname)
+#                                       or: (yyyy)-(mm)-(dd)
+my $regex_nonzipinfo_line = qr"^\s*(\d+)\s+(\S+)\s+(\d+)\s+(-?\d+\%)\s+(\d+)-(\d?\d)-(\d+)\s+(\d?\d):(\d\d)\s+([0-9a-f]+)\s\s(.*)$";
 
 #
 # Main code
@@ -261,9 +262,15 @@ sub mczipfs_list {
 			chomp;
 			my @match = /$regex_nonzipinfo_line/;
 			next if ($#match != 10);
+
+			# Massage the date.
+			my ($year, $month, $day) = $match[4] > 12
+			                             ? ($match[4], $match[5], $match[6])   # 4,5,6 = Y,M,D
+			                             : ($match[6], $match[4], $match[5]);  # 4,5,6 = M,D,Y
+			$year += ($year < 70 ? 2000 : 1900) if $year < 100;  # Fix 2-digit year.
+
 			my @rmatch = ('', '', 'unknown', $match[0], '', $match[2], $match[1],
-					$match[6] > 100 ? $match[6] : $match[6] + ($match[6] < 70 ? 2000 : 1900), $match[4], $match[5],
-					$match[7], $match[8], "00", $match[10]);
+					$year, $month, $day, $match[7], $match[8], "00", $match[10]);
 			&checked_print_file(@rmatch);
 		}
 	}
