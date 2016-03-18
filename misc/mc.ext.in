@@ -223,6 +223,7 @@ shell/i/.cpio
 # initrd
 regex/^(initramfs.*\.img|initrd(-.+)?\.img(-.+)?)$
 	Open=%cd %p/ucpio://
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cpio
 
 # 7zip archives (they are not man pages)
 shell/i/.7z
