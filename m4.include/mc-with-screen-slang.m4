@@ -204,7 +204,7 @@ AC_DEFUN([mc_WITH_SLANG], [
     fi
 
     screen_type=slang
-    screen_msg="S-Lang library"
+    screen_msg="S-Lang"
     AC_DEFINE(HAVE_SLANG, 1, [Define to use S-Lang library for screen management])
 
     mc_CHECK_SLANG_HEADER
