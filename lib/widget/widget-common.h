@@ -112,10 +112,13 @@ struct Widget
     /* Mouse-related fields. */
     struct
     {
+        /* Public members: */
+        gboolean forced_capture;        /* Overrides the 'capture' member. Set explicitly by the programmer. */
+
+        /* Implementation details: */
         gboolean capture;       /* Whether the widget "owns" the mouse. */
-        gboolean forced_capture;        /* Overrides the above. Set explicitly by the programmer. */
+        mouse_msg_t last_msg;   /* The previous event type processed. */
         int last_buttons_down;
-        gboolean was_drag;
     } mouse;
 };
 

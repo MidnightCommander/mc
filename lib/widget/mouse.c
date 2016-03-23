@@ -78,12 +78,11 @@ init_mouse_event (mouse_event_t * event, mouse_msg_t msg, const Gpm_Event * glob
  *
  * @param w Widget object
  * @param event GPM event
- * @param click whether mouse click was raised or not
  *
  * @return high level mouse event
  */
 mouse_event_t
-mouse_translate_event (Widget * w, Gpm_Event * event, gboolean * click)
+mouse_translate_event (Widget * w, Gpm_Event * event)
 {
     gboolean in_widget;
     mouse_msg_t msg = MSG_MOUSE_NONE;
@@ -96,8 +95,6 @@ mouse_translate_event (Widget * w, Gpm_Event * event, gboolean * click)
      * events you want to pass on by setting 'event->result.abort' to TRUE.
      */
     in_widget = w->mouse.forced_capture || mouse_global_in_widget (event, w);
-
-    *click = FALSE;
 
     if ((event->type & GPM_DOWN) != 0)
     {
@@ -132,9 +129,6 @@ mouse_translate_event (Widget * w, Gpm_Event * event, gboolean * click)
             w->mouse.capture = FALSE;
             msg = MSG_MOUSE_UP;
 
-            if (in_widget)
-                *click = !w->mouse.was_drag;
-
             /*
              * When using xterm, event->buttons reports the buttons' state
              * after the event occurred (meaning that event->buttons is zero,
@@ -158,10 +152,6 @@ mouse_translate_event (Widget * w, Gpm_Event * event, gboolean * click)
             msg = MSG_MOUSE_MOVE;
     }
 
-    if (msg != MSG_MOUSE_NONE)
-        /* Remember the current state for next event. */
-        w->mouse.was_drag = ((event->type & GPM_DRAG) != 0);
-
     init_mouse_event (&local, msg, event, w);
 
     return local;
@@ -172,22 +162,32 @@ mouse_translate_event (Widget * w, Gpm_Event * event, gboolean * click)
 /**
  * Call widget mouse handler to process high-level mouse event.
  *
+ * Besides sending to the widget the event itself, this function may also
+ * send one or more pseudo events. Currently, MSG_MOUSE_CLICK is the only
+ * pseudo event in existence but in the future (e.g., with the introduction
+ * of a drag-drop API) there may be more.
+ *
  * @param w Widget object
- * @param high level mouse event
- * @param click whether mouse click was raised or not
+ * @param event high level mouse event
  *
  * @return result of mouse event handling
  */
 int
-mouse_process_event (Widget * w, mouse_event_t * event, gboolean click)
+mouse_process_event (Widget * w, mouse_event_t * event)
 {
     int ret = MOU_UNHANDLED;
 
     if (event->msg != MSG_MOUSE_NONE)
     {
         w->mouse_callback (w, event->msg, event);
-        if (click)
+
+        /* Upon releasing the mouse button: if the mouse hasn't been dragged
+         * since the MSG_MOUSE_DOWN, we also trigger a click. */
+        if (event->msg == MSG_MOUSE_UP && w->mouse.last_msg == MSG_MOUSE_DOWN)
             w->mouse_callback (w, MSG_MOUSE_CLICK, event);
+
+        /* Record the current event type for the benefit of the next event. */
+        w->mouse.last_msg = event->msg;
 
         if (!event->result.abort)
             ret = event->result.repeat ? MOU_REPEAT : MOU_NORMAL;

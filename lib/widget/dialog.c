@@ -365,12 +365,11 @@ dlg_handle_key (WDialog * h, int d_key)
 static int
 dlg_mouse_translator (Gpm_Event * event, Widget * w)
 {
-    gboolean run_click;
     mouse_event_t me;
 
-    me = mouse_translate_event (w, event, &run_click);
+    me = mouse_translate_event (w, event);
 
-    return mouse_process_event (w, &me, run_click);
+    return mouse_process_event (w, &me);
 }
 
 /* --------------------------------------------------------------------------------------------- */
