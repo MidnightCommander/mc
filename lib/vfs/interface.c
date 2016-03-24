@@ -515,9 +515,14 @@ mc_readdir (DIR * dirp)
 int
 mc_closedir (DIR * dirp)
 {
-    int handle = *(int *) dirp;
+    int handle;
     struct vfs_class *vfs;
     int result = -1;
+
+    if (dirp == NULL)
+        return result;
+
+    handle = *(int *) dirp;
 
     vfs = vfs_class_find_by_handle (handle);
     if (vfs != NULL)
