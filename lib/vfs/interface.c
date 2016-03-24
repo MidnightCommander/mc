@@ -294,24 +294,29 @@ mc_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 
 /* *INDENT-OFF* */
 
-#define MC_HANDLEOP(name, inarg, callarg) \
-ssize_t mc_##name inarg \
+#define MC_HANDLEOP(name) \
+ssize_t mc_##name (int handle, C void *buf, size_t count) \
 { \
     struct vfs_class *vfs; \
+    void *fsinfo = NULL; \
     int result; \
     if (handle == -1) \
         return -1; \
-    vfs = vfs_class_find_by_handle (handle); \
+    vfs = vfs_class_find_by_handle (handle, &fsinfo); \
     if (vfs == NULL) \
         return -1; \
-    result = vfs->name != NULL ? vfs->name callarg : -1; \
+    result = vfs->name != NULL ? vfs->name (fsinfo, buf, count) : -1; \
     if (result == -1) \
         errno = vfs->name != NULL ? vfs_ferrno (vfs) : E_NOTSUPP; \
     return result; \
 }
 
-MC_HANDLEOP (read, (int handle, void *buffer, size_t count), (vfs_class_data_find_by_handle (handle), buffer, count))
-MC_HANDLEOP (write, (int handle, const void *buf, size_t nbyte), (vfs_class_data_find_by_handle (handle), buf, nbyte))
+#define C
+MC_HANDLEOP (read)
+#undef C
+#define C const
+MC_HANDLEOP (write)
+#undef C
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -353,12 +358,14 @@ MC_RENAMEOP (rename)
 int
 mc_ctl (int handle, int ctlop, void *arg)
 {
-    struct vfs_class *vfs = vfs_class_find_by_handle (handle);
+    struct vfs_class *vfs;
+    void *fsinfo = NULL;
 
+    vfs = vfs_class_find_by_handle (handle, &fsinfo);
     if (vfs == NULL)
         return 0;
 
-    return vfs->ctl ? (*vfs->ctl) (vfs_class_data_find_by_handle (handle), ctlop, arg) : 0;
+    return vfs->ctl != NULL ? vfs->ctl (fsinfo, ctlop, arg) : 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -387,13 +394,14 @@ int
 mc_close (int handle)
 {
     struct vfs_class *vfs;
+    void *fsinfo = NULL;
     int result;
 
-    if (handle == -1 || !vfs_class_data_find_by_handle (handle))
+    if (handle == -1)
         return -1;
 
-    vfs = vfs_class_find_by_handle (handle);
-    if (vfs == NULL)
+    vfs = vfs_class_find_by_handle (handle, &fsinfo);
+    if (vfs == NULL || fsinfo == NULL)
         return -1;
 
     if (handle < 3)
@@ -401,7 +409,7 @@ mc_close (int handle)
 
     if (!vfs->close)
         vfs_die ("VFS must support close.\n");
-    result = (*vfs->close) (vfs_class_data_find_by_handle (handle));
+    result = (*vfs->close) (fsinfo);
     vfs_free_handle (handle);
     if (result == -1)
         errno = vfs_ferrno (vfs);
@@ -460,6 +468,7 @@ mc_readdir (DIR * dirp)
 {
     int handle;
     struct vfs_class *vfs;
+    void *fsinfo = NULL;
     struct dirent *entry = NULL;
     vfs_path_element_t *vfs_path_element;
 
@@ -485,11 +494,11 @@ mc_readdir (DIR * dirp)
     }
     handle = *(int *) dirp;
 
-    vfs = vfs_class_find_by_handle (handle);
-    if (vfs == NULL)
+    vfs = vfs_class_find_by_handle (handle, &fsinfo);
+    if (vfs == NULL || fsinfo == NULL)
         return NULL;
 
-    vfs_path_element = vfs_class_data_find_by_handle (handle);
+    vfs_path_element = (vfs_path_element_t *) fsinfo;
     if (vfs->readdir)
     {
         entry = (*vfs->readdir) (vfs_path_element->dir.info);
@@ -517,6 +526,7 @@ mc_closedir (DIR * dirp)
 {
     int handle;
     struct vfs_class *vfs;
+    void *fsinfo = NULL;
     int result = -1;
 
     if (dirp == NULL)
@@ -524,11 +534,10 @@ mc_closedir (DIR * dirp)
 
     handle = *(int *) dirp;
 
-    vfs = vfs_class_find_by_handle (handle);
-    if (vfs != NULL)
+    vfs = vfs_class_find_by_handle (handle, &fsinfo);
+    if (vfs != NULL && fsinfo != NULL)
     {
-        vfs_path_element_t *vfs_path_element;
-        vfs_path_element = vfs_class_data_find_by_handle (handle);
+        vfs_path_element_t *vfs_path_element = (vfs_path_element_t *) fsinfo;
 
 #ifdef HAVE_CHARSET
         if (vfs_path_element->dir.converter != str_cnv_from_term)
@@ -598,16 +607,17 @@ int
 mc_fstat (int handle, struct stat *buf)
 {
     struct vfs_class *vfs;
+    void *fsinfo = NULL;
     int result;
 
     if (handle == -1)
         return -1;
 
-    vfs = vfs_class_find_by_handle (handle);
+    vfs = vfs_class_find_by_handle (handle, &fsinfo);
     if (vfs == NULL)
         return -1;
 
-    result = vfs->fstat ? (*vfs->fstat) (vfs_class_data_find_by_handle (handle), buf) : -1;
+    result = vfs->fstat ? (*vfs->fstat) (fsinfo, buf) : -1;
     if (result == -1)
         errno = vfs->fstat ? vfs_ferrno (vfs) : E_NOTSUPP;
     return result;
@@ -751,16 +761,17 @@ off_t
 mc_lseek (int fd, off_t offset, int whence)
 {
     struct vfs_class *vfs;
+    void *fsinfo = NULL;
     off_t result;
 
     if (fd == -1)
         return -1;
 
-    vfs = vfs_class_find_by_handle (fd);
+    vfs = vfs_class_find_by_handle (fd, &fsinfo);
     if (vfs == NULL)
         return -1;
 
-    result = vfs->lseek ? (*vfs->lseek) (vfs_class_data_find_by_handle (fd), offset, whence) : -1;
+    result = vfs->lseek ? (*vfs->lseek) (fsinfo, offset, whence) : -1;
     if (result == -1)
         errno = vfs->lseek ? vfs_ferrno (vfs) : E_NOTSUPP;
     return result;

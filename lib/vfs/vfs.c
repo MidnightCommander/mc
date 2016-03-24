@@ -225,29 +225,22 @@ vfs_free_handle (int handle)
 
 
 /* --------------------------------------------------------------------------------------------- */
-/** Find private file data by file handle */
-
-void *
-vfs_class_data_find_by_handle (int handle)
-{
-    struct vfs_openfile *h;
-
-    h = vfs_get_openfile (handle);
-
-    return h == NULL ? NULL : h->fsinfo;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /** Find VFS class by file handle */
 
 struct vfs_class *
-vfs_class_find_by_handle (int handle)
+vfs_class_find_by_handle (int handle, void **fsinfo)
 {
     struct vfs_openfile *h;
 
     h = vfs_get_openfile (handle);
 
-    return h == NULL ? NULL : h->vclass;
+    if (h == NULL)
+        return NULL;
+
+    if (fsinfo != NULL)
+        *fsinfo = h->fsinfo;
+
+    return h->vclass;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -636,24 +629,20 @@ vfs_preallocate (int dest_vfs_fd, off_t src_fsize, off_t dest_fsize)
     return 0;
 
 #else /* HAVE_POSIX_FALLOCATE */
-    int *dest_fd;
+    void *dest_fd = NULL;
     struct vfs_class *dest_class;
 
     if (!mc_global.vfs.preallocate_space)
         return 0;
 
-    dest_class = vfs_class_find_by_handle (dest_vfs_fd);
-    if ((dest_class->flags & VFSF_LOCAL) == 0)
-        return 0;
-
-    dest_fd = (int *) vfs_class_data_find_by_handle (dest_vfs_fd);
-    if (dest_fd == NULL)
-        return 0;
-
     if (src_fsize == 0)
         return 0;
 
-    return posix_fallocate (*dest_fd, dest_fsize, src_fsize - dest_fsize);
+    dest_class = vfs_class_find_by_handle (dest_vfs_fd, &dest_fd);
+    if ((dest_class->flags & VFSF_LOCAL) == 0 || dest_fd == NULL)
+        return 0;
+
+    return posix_fallocate (*(int *) dest_fd, dest_fsize, src_fsize - dest_fsize);
 
 #endif /* HAVE_POSIX_FALLOCATE */
 }
