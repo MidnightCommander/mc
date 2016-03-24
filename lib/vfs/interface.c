@@ -604,7 +604,7 @@ mc_fstat (int handle, struct stat *buf)
 
     result = vfs->fstat ? (*vfs->fstat) (vfs_class_data_find_by_handle (handle), buf) : -1;
     if (result == -1)
-        errno = vfs->name ? vfs_ferrno (vfs) : E_NOTSUPP;
+        errno = vfs->fstat ? vfs_ferrno (vfs) : E_NOTSUPP;
     return result;
 }
 
