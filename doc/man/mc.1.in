@@ -1415,7 +1415,7 @@ directory tree
 figure.
 .PP
 The "File name" input field contains a filename pattern to be searched
-for. It is interpeted as a shell pattern or as a regular expression
+for. It is interpreted as a shell pattern or as a regular expression
 depending on the state of the "Using shell patterns" checkbox. An empty
 value is valid and matches any file name.
 .PP
