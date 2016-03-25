@@ -224,7 +224,7 @@ handle_cdpath (const char *path)
             {
                 vfs_path_t *r_vpath;
 
-                r_vpath = vfs_path_build_filename (p, path, NULL);
+                r_vpath = vfs_path_build_filename (p, path, (char *) NULL);
                 result = do_cd (r_vpath, cd_parse_command);
                 vfs_path_free (r_vpath);
             }
@@ -426,7 +426,9 @@ do_cd_command (char *orig_cmd)
             if (IS_PATH_SEP (cmd[operand_pos]))
                 new_vpath = vfs_path_from_str (cmd + operand_pos);
             else
-                new_vpath = vfs_path_append_new (current_panel->cwd_vpath, cmd + operand_pos, NULL);
+                new_vpath =
+                    vfs_path_append_new (current_panel->cwd_vpath, cmd + operand_pos,
+                                         (char *) NULL);
 
             sync_tree (new_vpath);
         }

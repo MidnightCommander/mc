@@ -332,8 +332,8 @@ compare_dir (WPanel * panel, WPanel * other, enum CompareMode mode)
             {
                 vfs_path_t *src_name, *dst_name;
 
-                src_name = vfs_path_append_new (panel->cwd_vpath, source->fname, NULL);
-                dst_name = vfs_path_append_new (other->cwd_vpath, target->fname, NULL);
+                src_name = vfs_path_append_new (panel->cwd_vpath, source->fname, (char *) NULL);
+                dst_name = vfs_path_append_new (other->cwd_vpath, target->fname, (char *) NULL);
                 if (compare_files (src_name, dst_name, source->st.st_size))
                     do_file_mark (panel, i, 1);
                 vfs_path_free (src_name);
@@ -370,10 +370,10 @@ do_link (link_type_t link_type, const char *fname)
 
         /* suggest the full path for symlink, and either the full or
            relative path to the file it points to  */
-        s = vfs_path_append_new (current_panel->cwd_vpath, fname, NULL);
+        s = vfs_path_append_new (current_panel->cwd_vpath, fname, (char *) NULL);
 
         if (get_other_type () == view_listing)
-            d = vfs_path_append_new (other_panel->cwd_vpath, fname, NULL);
+            d = vfs_path_append_new (other_panel->cwd_vpath, fname, (char *) NULL);
         else
             d = vfs_path_from_str (fname);
 
@@ -874,7 +874,7 @@ mkdir_cmd (void)
             if (dir[0] == '\\' && dir[1] == '~')
                 tmpdir = dir + 1;
 
-            absdir = vfs_path_append_new (current_panel->cwd_vpath, tmpdir, NULL);
+            absdir = vfs_path_append_new (current_panel->cwd_vpath, tmpdir, (char *) NULL);
         }
 
         save_cwds_stat ();
@@ -975,7 +975,7 @@ ext_cmd (void)
                             _("Which extension file you want to edit?"), D_NORMAL, 2,
                             _("&User"), _("&System Wide"));
     }
-    extdir_vpath = vfs_path_build_filename (mc_global.sysconfig_dir, MC_LIB_EXT, NULL);
+    extdir_vpath = vfs_path_build_filename (mc_global.sysconfig_dir, MC_LIB_EXT, (char *) NULL);
 
     if (dir == 0)
     {
@@ -991,7 +991,8 @@ ext_cmd (void)
         if (!exist_file (vfs_path_get_last_path_str (extdir_vpath)))
         {
             vfs_path_free (extdir_vpath);
-            extdir_vpath = vfs_path_build_filename (mc_global.share_data_dir, MC_LIB_EXT, NULL);
+            extdir_vpath =
+                vfs_path_build_filename (mc_global.share_data_dir, MC_LIB_EXT, (char *) NULL);
         }
         do_edit (extdir_vpath);
     }
@@ -1014,12 +1015,14 @@ edit_mc_menu_cmd (void)
                         _("Which menu file do you want to edit?"),
                         D_NORMAL, geteuid ()? 2 : 3, _("&Local"), _("&User"), _("&System Wide"));
 
-    menufile_vpath = vfs_path_build_filename (mc_global.sysconfig_dir, MC_GLOBAL_MENU, NULL);
+    menufile_vpath =
+        vfs_path_build_filename (mc_global.sysconfig_dir, MC_GLOBAL_MENU, (char *) NULL);
 
     if (!exist_file (vfs_path_get_last_path_str (menufile_vpath)))
     {
         vfs_path_free (menufile_vpath);
-        menufile_vpath = vfs_path_build_filename (mc_global.share_data_dir, MC_GLOBAL_MENU, NULL);
+        menufile_vpath =
+            vfs_path_build_filename (mc_global.share_data_dir, MC_GLOBAL_MENU, (char *) NULL);
     }
 
     switch (dir)
@@ -1036,11 +1039,13 @@ edit_mc_menu_cmd (void)
         break;
 
     case 2:
-        buffer_vpath = vfs_path_build_filename (mc_global.sysconfig_dir, MC_GLOBAL_MENU, NULL);
+        buffer_vpath =
+            vfs_path_build_filename (mc_global.sysconfig_dir, MC_GLOBAL_MENU, (char *) NULL);
         if (!exist_file (vfs_path_get_last_path_str (buffer_vpath)))
         {
             vfs_path_free (buffer_vpath);
-            buffer_vpath = vfs_path_build_filename (mc_global.share_data_dir, MC_GLOBAL_MENU, NULL);
+            buffer_vpath =
+                vfs_path_build_filename (mc_global.share_data_dir, MC_GLOBAL_MENU, (char *) NULL);
         }
         break;
 
@@ -1071,7 +1076,8 @@ edit_fhl_cmd (void)
                             _("Which highlighting file you want to edit?"), D_NORMAL, 2,
                             _("&User"), _("&System Wide"));
     }
-    fhlfile_vpath = vfs_path_build_filename (mc_global.sysconfig_dir, MC_FHL_INI_FILE, NULL);
+    fhlfile_vpath =
+        vfs_path_build_filename (mc_global.sysconfig_dir, MC_FHL_INI_FILE, (char *) NULL);
 
     if (dir == 0)
     {
@@ -1088,7 +1094,7 @@ edit_fhl_cmd (void)
         {
             vfs_path_free (fhlfile_vpath);
             fhlfile_vpath =
-                vfs_path_build_filename (mc_global.sysconfig_dir, MC_FHL_INI_FILE, NULL);
+                vfs_path_build_filename (mc_global.sysconfig_dir, MC_FHL_INI_FILE, (char *) NULL);
         }
         do_edit (fhlfile_vpath);
     }

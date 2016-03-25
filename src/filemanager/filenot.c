@@ -92,7 +92,7 @@ my_mkdir_rec (const vfs_path_t * s_vpath, mode_t mode)
         return (-1);
     }
 
-    q = vfs_path_append_new (s_vpath, "..", NULL);
+    q = vfs_path_append_new (s_vpath, "..", (char *) NULL);
     result = my_mkdir_rec (q, mode);
     vfs_path_free (q);
 

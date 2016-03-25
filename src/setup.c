@@ -451,9 +451,9 @@ load_setup_get_full_config_name (const char *subdir, const char *config_file_nam
         return NULL;
 
     if (subdir != NULL)
-        ret = g_build_filename (mc_config_get_path (), subdir, lc_basename, NULL);
+        ret = g_build_filename (mc_config_get_path (), subdir, lc_basename, (char *) NULL);
     else
-        ret = g_build_filename (mc_config_get_path (), lc_basename, NULL);
+        ret = g_build_filename (mc_config_get_path (), lc_basename, (char *) NULL);
 
     if (exist_file (ret))
     {
@@ -464,9 +464,9 @@ load_setup_get_full_config_name (const char *subdir, const char *config_file_nam
     g_free (ret);
 
     if (subdir != NULL)
-        ret = g_build_filename (mc_global.sysconfig_dir, subdir, lc_basename, NULL);
+        ret = g_build_filename (mc_global.sysconfig_dir, subdir, lc_basename, (char *) NULL);
     else
-        ret = g_build_filename (mc_global.sysconfig_dir, lc_basename, NULL);
+        ret = g_build_filename (mc_global.sysconfig_dir, lc_basename, (char *) NULL);
 
     if (exist_file (ret))
     {
@@ -477,9 +477,9 @@ load_setup_get_full_config_name (const char *subdir, const char *config_file_nam
     g_free (ret);
 
     if (subdir != NULL)
-        ret = g_build_filename (mc_global.share_data_dir, subdir, lc_basename, NULL);
+        ret = g_build_filename (mc_global.share_data_dir, subdir, lc_basename, (char *) NULL);
     else
-        ret = g_build_filename (mc_global.share_data_dir, lc_basename, NULL);
+        ret = g_build_filename (mc_global.share_data_dir, lc_basename, (char *) NULL);
 
     g_free (lc_basename);
 
@@ -730,11 +730,12 @@ load_setup_get_keymap_profile_config (gboolean load_from_file)
     /* load and merge global keymaps */
 
     /* 1) /usr/share/mc (mc_global.share_data_dir) */
-    share_keymap = g_build_filename (mc_global.share_data_dir, GLOBAL_KEYMAP_FILE, NULL);
+    share_keymap = g_build_filename (mc_global.share_data_dir, GLOBAL_KEYMAP_FILE, (char *) NULL);
     load_setup_init_config_from_file (&keymap_config, share_keymap, TRUE);
 
     /* 2) /etc/mc (mc_global.sysconfig_dir) */
-    sysconfig_keymap = g_build_filename (mc_global.sysconfig_dir, GLOBAL_KEYMAP_FILE, NULL);
+    sysconfig_keymap =
+        g_build_filename (mc_global.sysconfig_dir, GLOBAL_KEYMAP_FILE, (char *) NULL);
     load_setup_init_config_from_file (&keymap_config, sysconfig_keymap, TRUE);
 
     /* then load and merge one of user-defined keymap */
@@ -961,7 +962,7 @@ setup_init (void)
         {
             char *inifile;
 
-            inifile = mc_build_filename (mc_global.sysconfig_dir, "mc.ini", NULL);
+            inifile = mc_build_filename (mc_global.sysconfig_dir, "mc.ini", (char *) NULL);
             if (exist_file (inifile))
             {
                 g_free (profile);
@@ -970,7 +971,7 @@ setup_init (void)
             else
             {
                 g_free (inifile);
-                inifile = mc_build_filename (mc_global.share_data_dir, "mc.ini", NULL);
+                inifile = mc_build_filename (mc_global.share_data_dir, "mc.ini", (char *) NULL);
                 if (!exist_file (inifile))
                     g_free (inifile);
                 else

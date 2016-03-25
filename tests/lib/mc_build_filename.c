@@ -56,31 +56,31 @@ run_mc_build_filename (int iteration)
     switch (iteration)
     {
     case 0:
-        return mc_build_filename ("test", "path", NULL);
+        return mc_build_filename ("test", "path", (char *) NULL);
     case 1:
-        return mc_build_filename ("/test", "path/", NULL);
+        return mc_build_filename ("/test", "path/", (char *) NULL);
     case 2:
-        return mc_build_filename ("/test", "pa/th", NULL);
+        return mc_build_filename ("/test", "pa/th", (char *) NULL);
     case 3:
-        return mc_build_filename ("/test", "#vfsprefix:", "path  ", NULL);
+        return mc_build_filename ("/test", "#vfsprefix:", "path  ", (char *) NULL);
     case 4:
-        return mc_build_filename ("/test", "vfsprefix://", "path  ", NULL);
+        return mc_build_filename ("/test", "vfsprefix://", "path  ", (char *) NULL);
     case 5:
-        return mc_build_filename ("/test", "vfs/../prefix:///", "p\\///ath", NULL);
+        return mc_build_filename ("/test", "vfs/../prefix:///", "p\\///ath", (char *) NULL);
     case 6:
-        return mc_build_filename ("/test", "path", "..", "/test", "path/", NULL);
+        return mc_build_filename ("/test", "path", "..", "/test", "path/", (char *) NULL);
     case 7:
-        return mc_build_filename ("", "path", NULL);
+        return mc_build_filename ("", "path", (char *) NULL);
     case 8:
-        return mc_build_filename ("", "/path", NULL);
+        return mc_build_filename ("", "/path", (char *) NULL);
     case 9:
-        return mc_build_filename ("path", "", NULL);
+        return mc_build_filename ("path", "", (char *) NULL);
     case 10:
-        return mc_build_filename ("/path", "", NULL);
+        return mc_build_filename ("/path", "", (char *) NULL);
     case 11:
-        return mc_build_filename ("pa", "", "th", NULL);
+        return mc_build_filename ("pa", "", "th", (char *) NULL);
     case 12:
-        return mc_build_filename ("/pa", "", "/th", NULL);
+        return mc_build_filename ("/pa", "", "/th", (char *) NULL);
     default:
         return NULL;
     }

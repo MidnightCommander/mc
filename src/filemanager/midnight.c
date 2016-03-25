@@ -748,7 +748,7 @@ put_link (WPanel * panel)
         vfs_path_t *vpath;
         int i;
 
-        vpath = vfs_path_append_new (panel->cwd_vpath, selection (panel)->fname, NULL);
+        vpath = vfs_path_append_new (panel->cwd_vpath, selection (panel)->fname, (char *) NULL);
         i = mc_readlink (vpath, buffer, sizeof (buffer) - 1);
         vfs_path_free (vpath);
 
@@ -966,7 +966,7 @@ prepend_cwd_on_local (const char *filename)
 
     vfs_path_free (vpath);
 
-    return vfs_path_append_new (vfs_get_raw_current_dir (), filename, NULL);
+    return vfs_path_append_new (vfs_get_raw_current_dir (), filename, (char *) NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

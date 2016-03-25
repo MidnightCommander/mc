@@ -419,7 +419,7 @@ do_panelize_cd (WPanel * panel)
 
             tmp_vpath =
                 vfs_path_append_new (panelized_panel.root_vpath, panelized_panel.list.list[i].fname,
-                                     NULL);
+                                     (char *) NULL);
             fname = vfs_path_as_str (tmp_vpath);
             list->list[i].fnamelen = strlen (fname);
             list->list[i].fname = g_strndup (fname, list->list[i].fnamelen);

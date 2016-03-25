@@ -209,7 +209,7 @@ handle_console_linux (console_action_t action)
                     char *mc_conssaver;
 
                     /* Exec the console save/restore handler */
-                    mc_conssaver = mc_build_filename (SAVERDIR, "cons.saver", NULL);
+                    mc_conssaver = mc_build_filename (SAVERDIR, "cons.saver", (char *) NULL);
                     execl (mc_conssaver, "cons.saver", tty_name, (char *) NULL);
                 }
                 /* Console is not a tty or execl() failed */

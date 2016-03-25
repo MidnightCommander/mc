@@ -223,7 +223,7 @@ input_history_strip_password (char *url)
         return g_strdup (url);
     *colon = '\0';
 
-    return g_strconcat (url, at, NULL);
+    return g_strconcat (url, at, (char *) NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

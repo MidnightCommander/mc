@@ -745,9 +745,9 @@ tree_store_mark_checked (const char *subname)
 
     cname = vfs_path_as_str (ts.check_name);
     if (IS_PATH_SEP (cname[0]) && cname[1] == '\0')
-        name = vfs_path_build_filename (PATH_SEP_STR, subname, NULL);
+        name = vfs_path_build_filename (PATH_SEP_STR, subname, (char *) NULL);
     else
-        name = vfs_path_append_new (ts.check_name, subname, NULL);
+        name = vfs_path_append_new (ts.check_name, subname, (char *) NULL);
 
     /* Search for the subdirectory */
     current = ts.check_start;
@@ -923,7 +923,7 @@ tree_store_rescan (const vfs_path_t * vpath)
             if (DIR_IS_DOT (dp->d_name) || DIR_IS_DOTDOT (dp->d_name))
                 continue;
 
-            tmp_vpath = vfs_path_append_new (vpath, dp->d_name, NULL);
+            tmp_vpath = vfs_path_append_new (vpath, dp->d_name, (char *) NULL);
             if (mc_lstat (tmp_vpath, &buf) != -1 && S_ISDIR (buf.st_mode))
                 tree_store_mark_checked (dp->d_name);
             vfs_path_free (tmp_vpath);

@@ -1207,15 +1207,15 @@ edit_files (const GList * files)
     {
         char *dir;
 
-        dir = mc_build_filename (mc_config_get_cache_path (), EDIT_DIR, NULL);
+        dir = mc_build_filename (mc_config_get_cache_path (), EDIT_DIR, (char *) NULL);
         made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
         g_free (dir);
 
-        dir = mc_build_filename (mc_config_get_path (), EDIT_DIR, NULL);
+        dir = mc_build_filename (mc_config_get_path (), EDIT_DIR, (char *) NULL);
         made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
         g_free (dir);
 
-        dir = mc_build_filename (mc_config_get_data_path (), EDIT_DIR, NULL);
+        dir = mc_build_filename (mc_config_get_data_path (), EDIT_DIR, (char *) NULL);
         made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
         g_free (dir);
     }

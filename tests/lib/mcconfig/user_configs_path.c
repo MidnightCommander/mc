@@ -203,7 +203,8 @@ START_PARAMETRIZED_TEST (test_user_config_paths, test_user_config_paths_ds)
         char *expected_file_path;
 
         expected_file_path =
-            g_build_filename (data->input_base_dir, MC_USERCONF_DIR, data->input_file_name, NULL);
+            g_build_filename (data->input_base_dir, MC_USERCONF_DIR, data->input_file_name,
+                              (char *) NULL);
         mctest_assert_str_eq (actual_result, expected_file_path);
         g_free (expected_file_path);
     }

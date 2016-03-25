@@ -152,14 +152,14 @@ vfs_canon (const char *path)
                encoding prefix placed at start of string without the leading slash
                should be autofixed by adding the leading slash
              */
-            local = mc_build_filename (PATH_SEP_STR, path, NULL);
+            local = mc_build_filename (PATH_SEP_STR, path, (char *) NULL);
         }
         else
         {
             const char *curr_dir;
 
             curr_dir = vfs_get_current_dir ();
-            local = mc_build_filename (curr_dir, path, NULL);
+            local = mc_build_filename (curr_dir, path, (char *) NULL);
         }
         result = vfs_canon (local);
         g_free (local);
@@ -1272,7 +1272,7 @@ vfs_path_append_new (const vfs_path_t * vpath, const char *first_element, ...)
     va_end (args);
 
     result_str = vfs_path_as_str (vpath);
-    ret_vpath = vfs_path_build_filename (result_str, str_path, NULL);
+    ret_vpath = vfs_path_build_filename (result_str, str_path, (char *) NULL);
     g_free (str_path);
 
     return ret_vpath;

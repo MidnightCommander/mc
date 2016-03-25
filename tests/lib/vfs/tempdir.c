@@ -104,7 +104,7 @@ START_TEST (test_mc_mkstemps)
 
     /* when */
     fd = mc_mkstemps (&pname_vpath, "mctest-", NULL);
-    begin_pname = g_build_filename (mc_tmpdir (), "mctest-", NULL);
+    begin_pname = g_build_filename (mc_tmpdir (), "mctest-", (char *) NULL);
 
     /* then */
     close (fd);

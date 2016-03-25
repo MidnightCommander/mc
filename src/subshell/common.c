@@ -293,7 +293,7 @@ init_subshell_child (const char *pty_name)
             input_file = mc_config_get_full_path ("inputrc");
             if (exist_file (input_file))
             {
-                putenv_str = g_strconcat ("INPUTRC=", input_file, NULL);
+                putenv_str = g_strconcat ("INPUTRC=", input_file, (char *) NULL);
                 putenv (putenv_str);
             }
             g_free (input_file);
@@ -314,7 +314,7 @@ init_subshell_child (const char *pty_name)
         }
 
         /* Put init file to ENV variable used by ash */
-        putenv_str = g_strconcat ("ENV=", init_file, NULL);
+        putenv_str = g_strconcat ("ENV=", init_file, (char *) NULL);
         putenv (putenv_str);
         /* Do not use "g_free (putenv_str)" here, otherwise ENV will be undefined! */
 

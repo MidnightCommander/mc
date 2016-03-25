@@ -208,7 +208,7 @@ dir_get_dotdot_stat (const vfs_path_t * vpath, struct stat *st)
         {
             vfs_path_t *tmp_vpath;
 
-            tmp_vpath = vfs_path_append_new (vpath, "..", NULL);
+            tmp_vpath = vfs_path_append_new (vpath, "..", (char *) NULL);
             ret = mc_stat (tmp_vpath, st) == 0;
             vfs_path_free (tmp_vpath);
         }

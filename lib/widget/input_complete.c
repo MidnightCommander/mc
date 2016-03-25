@@ -649,7 +649,7 @@ command_completion_function (const char *_text, int state, input_complete_t flag
                 if (cur_path >= path_end)
                     break;
                 expanded = tilde_expand (*cur_path ? cur_path : ".");
-                cur_word = mc_build_filename (expanded, text, NULL);
+                cur_word = mc_build_filename (expanded, text, (char *) NULL);
                 g_free (expanded);
                 canonicalize_pathname (cur_word);
                 cur_path = strchr (cur_path, 0) + 1;
@@ -943,7 +943,7 @@ try_complete_all_possible (try_complete_automation_state_t * state, char *text, 
                     *s = '\0';
                     if (*cdpath != '\0')
                     {
-                        state->r = mc_build_filename (cdpath, state->word, NULL);
+                        state->r = mc_build_filename (cdpath, state->word, (char *) NULL);
                         SHOW_C_CTX ("try_complete:filename_subst_2");
                         matches =
                             completion_matches (state->r, filename_completion_function,
