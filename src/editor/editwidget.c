@@ -819,80 +819,6 @@ edit_update_cursor (WEdit * edit, const mouse_event_t * event)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-static inline void
-edit_mouse_move_resize (WEdit * edit, mouse_event_t event)
-{
-    Widget *w = WIDGET (edit);
-    Gpm_Event gevent;
-
-    /* init with 1-based global coordinates */
-    gevent.y = w->y + event.y + 1;
-    gevent.x = w->x + event.x + 1;
-
-    while (edit->drag_state != MCEDIT_DRAG_NORMAL)
-    {
-        int c;
-        gboolean click = FALSE; /* unused */
-
-        if (event.msg == MSG_MOUSE_UP)
-            goto finish;
-
-        /* resize or move */
-        if (!edit->fullscreen)
-        {
-            Widget *h = WIDGET (w->owner);
-
-            if (edit->drag_state == MCEDIT_DRAG_MOVE)
-            {
-                /* make 0-based */
-                gevent.y--;
-                gevent.x--;
-
-                gevent.y = max (gevent.y, h->y + 1);    /* status line */
-                gevent.y = min (gevent.y, h->y + h->lines - 2); /* buttonbar */
-                gevent.x = max (gevent.x, h->x);
-                gevent.x = min (gevent.x, h->x + h->cols - 1);
-
-                /* don't use widget_set_size() here to avoid double draw  */
-                w->y = gevent.y;
-                w->x = gevent.x - edit->drag_state_start;
-                edit->force |= REDRAW_COMPLETELY;
-            }
-            else if (edit->drag_state == MCEDIT_DRAG_RESIZE)
-            {
-                gevent.y = min (gevent.y, h->y + h->lines - 1); /* buttonbar */
-                gevent.x = min (gevent.x, h->x + h->cols);
-                gevent = mouse_get_local (&gevent, w);
-
-                /* don't use widget_set_size() here to avoid double draw  */
-                w->lines = max (WINDOW_MIN_LINES, gevent.y);
-                w->cols = max (WINDOW_MIN_COLS, gevent.x);
-                edit->force |= REDRAW_COMPLETELY;
-            }
-
-            dlg_redraw (w->owner);
-        }
-
-        /* Get next event.
-         * Don't use standard way in order to continue event handling
-         * outside of widget */
-        c = tty_get_event (&gevent, FALSE, TRUE);
-        if (c == EV_MOUSE)
-            event = mouse_translate_event (w, &gevent, &click);
-        else
-        {
-          finish:
-            /* redraw frame */
-            edit->drag_state = MCEDIT_DRAG_NORMAL;
-            edit->force |= REDRAW_COMPLETELY;
-            edit_update_screen (edit);
-            w->Mouse.forced_capture = FALSE;
-        }
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /** Callback for the edit dialog */
 
 static cb_ret_t
@@ -1075,6 +1001,60 @@ edit_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
 /* --------------------------------------------------------------------------------------------- */
 
 /**
+ * Handle move/resize mouse events.
+ */
+static void
+edit_mouse_handle_move_resize (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+{
+    WEdit *edit = (WEdit *) (w);
+    Widget *h = WIDGET (w->owner);
+    int global_x, global_y;
+
+    if (msg == MSG_MOUSE_UP)
+    {
+        /* Exit move/resize mode. */
+        edit_execute_cmd (edit, CK_Enter, -1);
+        return;
+    }
+
+    if (msg != MSG_MOUSE_DRAG)
+        /**
+         * We ignore any other events. Specifically, MSG_MOUSE_DOWN.
+         *
+         * When the move/resize is initiated by the menu, we let the user
+         * stop it by clicking with the mouse. Which is why we don't want
+         * a mouse down to affect the window.
+         */
+        return;
+
+    /* Convert point to global coordinates for easier calculations. */
+    global_x = event->x + w->x;
+    global_y = event->y + w->y;
+
+    /* Clamp the point to the dialog's client area. */
+    global_y = CLAMP (global_y, h->y + 1, h->y + h->lines - 2); /* Status line, buttonbar */
+    global_x = CLAMP (global_x, h->x, h->x + h->cols - 1);      /* Currently a no-op, as the dialog has no left/right margins. */
+
+    if (edit->drag_state == MCEDIT_DRAG_MOVE)
+    {
+        w->y = global_y;
+        w->x = global_x - edit->drag_state_start;
+    }
+    else if (edit->drag_state == MCEDIT_DRAG_RESIZE)
+    {
+        w->lines = max (WINDOW_MIN_LINES, global_y - w->y + 1);
+        w->cols = max (WINDOW_MIN_COLS, global_x - w->x + 1);
+    }
+
+    edit->force |= REDRAW_COMPLETELY;   /* Not really needed as WEdit's MSG_DRAW already does this. */
+
+    /* We draw the whole dialog because dragging/resizing exposes area beneath. */
+    dlg_redraw (w->owner);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
  * Handle mouse events of editor window
  *
  * @param w Widget object (the editor window)
@@ -1093,13 +1073,16 @@ edit_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     close_x = (w->cols - 1) - dx - 1;
     toggle_fullscreen_x = close_x - 3;
 
+    if (edit->drag_state != MCEDIT_DRAG_NORMAL)
+    {
+        /* window is being resized/moved */
+        edit_mouse_handle_move_resize (w, msg, event);
+        return;
+    }
+
     switch (msg)
     {
     case MSG_MOUSE_DOWN:
-        if (w->Mouse.forced_capture)
-            /* window is being resized/moved by keys */
-            break;
-
         dlg_set_top_widget (w);
         edit_update_curs_row (edit);
         edit_update_curs_col (edit);
@@ -1115,10 +1098,8 @@ edit_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
                 else
                 {
                     /* start window move */
+                    edit_execute_cmd (edit, CK_WindowMove, -1);
                     edit->drag_state_start = event->x;
-                    edit->drag_state = MCEDIT_DRAG_MOVE;
-                    edit->force |= REDRAW_COMPLETELY;
-                    edit_update_screen (edit);
                 }
                 break;
             }
@@ -1126,25 +1107,19 @@ edit_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
             if (event->y == w->lines - 1 && event->x == w->cols - 1)
             {
                 /* bottom-right corner -- start window resize */
-                edit->drag_state = MCEDIT_DRAG_RESIZE;
-                edit->force |= REDRAW_COMPLETELY;
-                edit_update_screen (edit);
+                edit_execute_cmd (edit, CK_WindowResize, -1);
                 break;
             }
         }
 
-        /* fall throught to start/stop text selection */
+        /* fall through to start/stop text selection */
 
     case MSG_MOUSE_UP:
-        edit->drag_state = MCEDIT_DRAG_NORMAL;
         edit_update_cursor (edit, event);
         edit_total_update (edit);
-        w->Mouse.forced_capture = FALSE;
         break;
 
     case MSG_MOUSE_CLICK:
-        edit->drag_state = MCEDIT_DRAG_NORMAL;
-
         if (event->y == 0)
         {
             if (event->x == close_x)
@@ -1152,13 +1127,8 @@ edit_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
             else if (event->x == toggle_fullscreen_x)
                 edit_toggle_fullscreen (edit);
             else if (!edit->fullscreen && event->count == GPM_DOUBLE)
-            {
                 /* double click on top line (toggle fullscreen) */
                 edit_toggle_fullscreen (edit);
-                edit->drag_state = MCEDIT_DRAG_NORMAL;
-                edit->force |= REDRAW_COMPLETELY;
-                edit_update_screen (edit);
-            }
         }
         else if (event->count == GPM_DOUBLE)
         {
@@ -1175,13 +1145,8 @@ edit_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
         break;
 
     case MSG_MOUSE_DRAG:
-        if (edit->drag_state == MCEDIT_DRAG_NORMAL)
-        {
-            edit_update_cursor (edit, event);
-            edit_total_update (edit);
-        }
-        else
-            edit_mouse_move_resize (edit, *event);
+        edit_update_cursor (edit, event);
+        edit_total_update (edit);
         break;
 
     case MSG_MOUSE_SCROLL_UP:
@@ -1402,7 +1367,7 @@ edit_add_window (WDialog * h, int y, int x, int lines, int cols, const vfs_path_
  *
  * @param edit    editor object
  * @param command action id
- * @return TRUE if mouse actions was handled, FALSE otherwise
+ * @return TRUE if the action was handled, FALSE otherwise
  */
 
 gboolean
@@ -1427,11 +1392,19 @@ edit_handle_move_resize (WEdit * edit, long command)
         case CK_WindowMove:
             edit->drag_state = MCEDIT_DRAG_MOVE;
             edit_save_size (edit);
+            edit_status (edit, TRUE);   /* redraw frame and status */
+            /**
+             * If a user initiates a move by the menu, not by the mouse, we
+             * make a subsequent mouse drag pull the frame from its middle.
+             * (We can instead choose '0' to pull it from the corner.)
+             */
+            edit->drag_state_start = w->cols / 2;
             ret = TRUE;
             break;
         case CK_WindowResize:
             edit->drag_state = MCEDIT_DRAG_RESIZE;
             edit_save_size (edit);
+            edit_status (edit, TRUE);   /* redraw frame and status */
             ret = TRUE;
             break;
         default:
@@ -1456,8 +1429,7 @@ edit_handle_move_resize (WEdit * edit, long command)
         case CK_Enter:
         case CK_WindowMove:
             edit->drag_state = MCEDIT_DRAG_NORMAL;
-            /* redraw frame and status */
-            edit_status (edit, TRUE);
+            edit_status (edit, TRUE);   /* redraw frame and status */
         default:
             ret = TRUE;
             break;
@@ -1481,8 +1453,7 @@ edit_handle_move_resize (WEdit * edit, long command)
         case CK_Enter:
         case CK_WindowResize:
             edit->drag_state = MCEDIT_DRAG_NORMAL;
-            /* redraw frame and status */
-            edit_status (edit, TRUE);
+            edit_status (edit, TRUE);   /* redraw frame and status */
         default:
             ret = TRUE;
             break;
@@ -1493,8 +1464,16 @@ edit_handle_move_resize (WEdit * edit, long command)
         break;
     }
 
-    /* allow stop resize/move by mouse click outside window */
-    w->Mouse.forced_capture = ret;
+    /**
+     * - We let the user stop a resize/move operation by clicking with the
+     *   mouse anywhere. ("clicking" = pressing and releasing a button.)
+     * - We let the user perform a resize/move operation by a mouse drag
+     *   initiated anywhere.
+     *
+     * "Anywhere" means: inside or outside the window. We make this happen
+     * with the 'forced_capture' flag.
+     */
+    w->Mouse.forced_capture = (edit->drag_state != MCEDIT_DRAG_NORMAL);
 
     return ret;
 }
