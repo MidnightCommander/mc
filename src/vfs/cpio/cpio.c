@@ -469,28 +469,35 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
     }
     else
     {                           /* !entry */
-        if (inode == NULL)
+        /* root == NULL can be in the following case:
+         * a/b/c -> d
+         * where 'a/b' is the stale link and therefore root of 'c' cannot be found in the archive
+         */
+        if (root != NULL)
         {
-            inode = vfs_s_new_inode (me, super, st);
-            if ((st->st_nlink > 0) && ((arch->type == CPIO_NEWC) || (arch->type == CPIO_CRC)))
+            if (inode == NULL)
             {
-                /* For case of hardlinked files */
-                defer_inode *i;
+                inode = vfs_s_new_inode (me, super, st);
+                if ((st->st_nlink > 0) && ((arch->type == CPIO_NEWC) || (arch->type == CPIO_CRC)))
+                {
+                    /* For case of hardlinked files */
+                    defer_inode *i;
 
-                i = g_new (defer_inode, 1);
-                i->inumber = st->st_ino;
-                i->device = st->st_dev;
-                i->inode = inode;
+                    i = g_new (defer_inode, 1);
+                    i->inumber = st->st_ino;
+                    i->device = st->st_dev;
+                    i->inode = inode;
 
-                arch->deferred = g_slist_prepend (arch->deferred, i);
+                    arch->deferred = g_slist_prepend (arch->deferred, i);
+                }
             }
+
+            if (st->st_size != 0)
+                inode->data_offset = CPIO_POS (super);
+
+            entry = vfs_s_new_entry (me, tn, inode);
+            vfs_s_insert_entry (me, root, entry);
         }
-
-        if (st->st_size != 0)
-            inode->data_offset = CPIO_POS (super);
-
-        entry = vfs_s_new_entry (me, tn, inode);
-        vfs_s_insert_entry (me, root, entry);
 
         g_free (name);
 
@@ -498,15 +505,21 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
             CPIO_SEEK_CUR (super, st->st_size);
         else
         {
-            inode->linkname = g_malloc (st->st_size + 1);
-
-            if (mc_read (arch->fd, inode->linkname, st->st_size) < st->st_size)
+            if (inode != NULL)
             {
-                inode->linkname[0] = '\0';
-                return STATUS_EOF;
+                /* FIXME: do we must read from arch->fd in case of inode != NULL only or in any case? */
+
+                inode->linkname = g_malloc (st->st_size + 1);
+
+                if (mc_read (arch->fd, inode->linkname, st->st_size) < st->st_size)
+                {
+                    inode->linkname[0] = '\0';
+                    return STATUS_EOF;
+                }
+
+                inode->linkname[st->st_size] = '\0';    /* Linkname stored without terminating \0 !!! */
             }
 
-            inode->linkname[st->st_size] = '\0';        /* Linkname stored without terminating \0 !!! */
             CPIO_POS (super) += st->st_size;
             cpio_skip_padding (super);
         }
