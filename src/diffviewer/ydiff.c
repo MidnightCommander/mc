@@ -581,7 +581,7 @@ dview_get_byte (char *str, gboolean * result)
  */
 
 static int
-dview_get_utf (char *str, int *char_length, gboolean * result)
+dview_get_utf (const char *str, int *char_length, gboolean * result)
 {
     int res = -1;
     gunichar ch;
