@@ -293,7 +293,7 @@ is_in_linklist (const GSList * lp, const vfs_path_t * vpath, const struct stat *
 
     class = vfs_path_get_last_path_vfs (vpath);
 
-    for (; lp != NULL; lp = g_slist_next (lp))
+    for (; lp != NULL; lp = (const GSList *) g_slist_next (lp))
     {
         const struct link *lnk = (const struct link *) lp->data;
 
