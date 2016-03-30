@@ -277,7 +277,7 @@ str_8bit_vfs_convert_to (GIConv coder, const char *string, int size, GString * b
     if (coder == str_cnv_not_convert)
         g_string_append_len (buffer, string, size);
     else
-        result = str_nconvert (coder, (char *) string, size, buffer);
+        result = str_nconvert (coder, string, size, buffer);
 
     return result;
 }
