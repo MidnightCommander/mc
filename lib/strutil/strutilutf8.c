@@ -44,7 +44,7 @@ struct utf8_tool
 {
     char *actual;
     size_t remain;
-    const char *cheked;
+    const char *checked;
     int ident;
     gboolean compose;
 };
@@ -538,12 +538,12 @@ utf8_tool_copy_chars_to_end (struct utf8_tool *tool)
 {
     tool->compose = FALSE;
 
-    while (tool->cheked[0] != '\0')
+    while (tool->checked[0] != '\0')
     {
         gunichar uni;
         size_t left;
 
-        uni = g_utf8_get_char (tool->cheked);
+        uni = g_utf8_get_char (tool->checked);
         tool->compose = tool->compose || str_unichar_iscombiningmark (uni);
         left = g_unichar_to_utf8 (uni, NULL);
         if (tool->remain <= left)
@@ -551,7 +551,7 @@ utf8_tool_copy_chars_to_end (struct utf8_tool *tool)
         left = g_unichar_to_utf8 (uni, tool->actual);
         tool->actual += left;
         tool->remain -= left;
-        tool->cheked = g_utf8_next_char (tool->cheked);
+        tool->checked = g_utf8_next_char (tool->checked);
     }
 
     return TRUE;
@@ -566,13 +566,13 @@ utf8_tool_copy_chars_to (struct utf8_tool *tool, int to_ident)
 {
     tool->compose = FALSE;
 
-    while (tool->cheked[0] != '\0')
+    while (tool->checked[0] != '\0')
     {
         gunichar uni;
         size_t left;
         int w = 0;
 
-        uni = g_utf8_get_char (tool->cheked);
+        uni = g_utf8_get_char (tool->checked);
         if (str_unichar_iscombiningmark (uni))
             tool->compose = TRUE;
         else
@@ -590,7 +590,7 @@ utf8_tool_copy_chars_to (struct utf8_tool *tool, int to_ident)
         left = g_unichar_to_utf8 (uni, tool->actual);
         tool->actual += left;
         tool->remain -= left;
-        tool->cheked = g_utf8_next_char (tool->cheked);
+        tool->checked = g_utf8_next_char (tool->checked);
         tool->ident += w;
     }
 
@@ -638,23 +638,23 @@ utf8_tool_skip_chars_to (struct utf8_tool *tool, int to_ident)
 {
     gunichar uni;
 
-    while (to_ident > tool->ident && tool->cheked[0] != '\0')
+    while (to_ident > tool->ident && tool->checked[0] != '\0')
     {
-        uni = g_utf8_get_char (tool->cheked);
+        uni = g_utf8_get_char (tool->checked);
         if (!str_unichar_iscombiningmark (uni))
         {
             tool->ident++;
             if (g_unichar_iswide (uni))
                 tool->ident++;
         }
-        tool->cheked = g_utf8_next_char (tool->cheked);
+        tool->checked = g_utf8_next_char (tool->checked);
     }
 
-    uni = g_utf8_get_char (tool->cheked);
+    uni = g_utf8_get_char (tool->checked);
     while (str_unichar_iscombiningmark (uni))
     {
-        tool->cheked = g_utf8_next_char (tool->cheked);
-        uni = g_utf8_get_char (tool->cheked);
+        tool->checked = g_utf8_next_char (tool->checked);
+        uni = g_utf8_get_char (tool->checked);
     }
 
     return TRUE;
@@ -682,7 +682,7 @@ str_utf8_fit_to_term (const char *text, int width, align_crt_t just_mode)
     struct utf8_tool tool;
 
     pre_form = str_utf8_make_make_term_form (text, (size_t) (-1));
-    tool.cheked = pre_form->text;
+    tool.checked = pre_form->text;
     tool.actual = result;
     tool.remain = sizeof (result);
     tool.compose = FALSE;
@@ -762,7 +762,7 @@ str_utf8_term_trim (const char *text, int width)
 
     pre_form = str_utf8_make_make_term_form (text, (size_t) (-1));
 
-    tool.cheked = pre_form->text;
+    tool.checked = pre_form->text;
     tool.actual = result;
     tool.remain = sizeof (result);
     tool.compose = FALSE;
@@ -833,7 +833,7 @@ str_utf8_term_substring (const char *text, int start, int width)
 
     pre_form = str_utf8_make_make_term_form (text, (size_t) (-1));
 
-    tool.cheked = pre_form->text;
+    tool.checked = pre_form->text;
     tool.actual = result;
     tool.remain = sizeof (result);
     tool.compose = FALSE;
@@ -864,7 +864,7 @@ str_utf8_trunc (const char *text, int width)
 
     pre_form = str_utf8_make_make_term_form (text, (size_t) (-1));
 
-    tool.cheked = pre_form->text;
+    tool.checked = pre_form->text;
     tool.actual = result;
     tool.remain = sizeof (result);
     tool.compose = FALSE;
