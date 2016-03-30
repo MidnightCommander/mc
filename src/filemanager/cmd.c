@@ -672,7 +672,7 @@ view_filtered_cmd (void)
     char *command;
     const char *initial_command;
 
-    if (cmdline->buffer[0] == '\0')
+    if (input_is_empty (cmdline))
         initial_command = selection (current_panel)->fname;
     else
         initial_command = cmdline->buffer;

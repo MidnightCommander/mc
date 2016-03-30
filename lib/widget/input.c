@@ -1219,6 +1219,14 @@ input_assign_text (WInput * in, const char *text)
 
 /* --------------------------------------------------------------------------------------------- */
 
+gboolean
+input_is_empty (const WInput * in)
+{
+    return (in == NULL || in->buffer == NULL || in->buffer[0] == '\0');
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /* Inserts text in input line */
 void
 input_insert (WInput * in, const char *text, gboolean insert_extra_space)

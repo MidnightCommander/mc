@@ -802,7 +802,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
                 *pattern = g_strdup (in_name->buffer);
             else
                 *pattern = g_strdup (options.file_pattern ? "*" : ".*");
-            *start_dir = in_start->buffer[0] != '\0' ? in_start->buffer : (char *) ".";
+            *start_dir = !input_is_empty (in_start) ? in_start->buffer : (char *) ".";
             if (in_start_dir != INPUT_LAST_TEXT)
                 g_free (in_start_dir);
             in_start_dir = g_strdup (*start_dir);

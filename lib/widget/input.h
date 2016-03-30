@@ -92,6 +92,7 @@ void input_set_default_colors (void);
 cb_ret_t input_handle_char (WInput * in, int key);
 int input_key_is_in_map (WInput * in, int key);
 void input_assign_text (WInput * in, const char *text);
+gboolean input_is_empty (const WInput * in);
 void input_insert (WInput * in, const char *text, gboolean insert_extra_space);
 void input_set_point (WInput * in, int pos);
 void input_update (WInput * in, gboolean clear_first);

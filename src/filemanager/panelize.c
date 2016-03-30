@@ -256,7 +256,7 @@ add2panelize (char *label, char *command)
 static void
 add2panelize_cmd (void)
 {
-    if (pname->buffer != NULL && *pname->buffer != '\0')
+    if (!input_is_empty (pname))
     {
         char *label;
 
@@ -501,8 +501,6 @@ cd_panelize_cmd (void)
 void
 external_panelize (void)
 {
-    char *target = NULL;
-
     if (!vfs_current_is_local ())
     {
         message (D_ERROR, MSG_ERROR, _("Cannot run external panelize in a non-local directory"));
@@ -533,11 +531,11 @@ external_panelize (void)
         }
 
     case B_ENTER:
-        target = pname->buffer;
-        if (target != NULL && *target)
+        if (!input_is_empty (pname))
         {
-            char *cmd = g_strdup (target);
+            char *cmd;
 
+            cmd = g_strdup (pname->buffer);
             dlg_destroy (panelize_dlg);
             do_external_panelize (cmd);
             g_free (cmd);
