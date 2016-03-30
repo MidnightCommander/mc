@@ -264,7 +264,7 @@ off_t mcview_get_filesize (WView *);
 void mcview_update_filesize (WView * view);
 char *mcview_get_ptr_file (WView *, off_t);
 char *mcview_get_ptr_string (WView *, off_t);
-int mcview_get_utf (WView *, off_t, int *, gboolean *);
+gboolean mcview_get_utf (WView * view, off_t byte_index, int *ch, int *ch_len);
 gboolean mcview_get_byte_string (WView *, off_t, int *);
 gboolean mcview_get_byte_none (WView *, off_t, int *);
 void mcview_set_byte (WView *, off_t, byte);
