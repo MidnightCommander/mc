@@ -355,7 +355,7 @@ edit_draw_frame (const WEdit * edit, int color, gboolean active)
     /* draw double frame for active window if skin supports that */
     tty_draw_box (w->y, w->x, w->lines, w->cols, !active);
     /* draw a drag marker */
-    if (edit->drag_state == MCEDIT_DRAG_NORMAL)
+    if (edit->drag_state == MCEDIT_DRAG_NONE)
     {
         tty_setcolor (EDITOR_FRAME_DRAG);
         widget_move (w, w->lines - 1, w->cols - 1);
@@ -1050,7 +1050,7 @@ edit_status (WEdit * edit, gboolean active)
     }
     else
     {
-        color = edit->drag_state != MCEDIT_DRAG_NORMAL ? EDITOR_FRAME_DRAG : active ?
+        color = edit->drag_state != MCEDIT_DRAG_NONE ? EDITOR_FRAME_DRAG : active ?
             EDITOR_FRAME_ACTIVE : EDITOR_FRAME;
         edit_draw_frame (edit, color, active);
         edit_status_window (edit);

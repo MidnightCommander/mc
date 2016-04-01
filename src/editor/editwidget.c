@@ -213,7 +213,7 @@ edit_restore_size (WEdit * edit)
 {
     Widget *w = WIDGET (edit);
 
-    edit->drag_state = MCEDIT_DRAG_NORMAL;
+    edit->drag_state = MCEDIT_DRAG_NONE;
     w->Mouse.forced_capture = FALSE;
     widget_set_size (w, edit->y_prev, edit->x_prev, edit->lines_prev, edit->cols_prev);
     dlg_redraw (w->owner);
@@ -444,7 +444,7 @@ edit_dialog_command_execute (WDialog * h, long command)
         {
             Widget *w = WIDGET (h->current->data);
 
-            if (edit_widget_is_editor (w) && ((WEdit *) w)->drag_state != MCEDIT_DRAG_NORMAL)
+            if (edit_widget_is_editor (w) && ((WEdit *) w)->drag_state != MCEDIT_DRAG_NONE)
                 edit_restore_size ((WEdit *) w);
             else if (command == CK_Quit)
                 dlg_stop (h);
@@ -647,7 +647,7 @@ edit_quit (WDialog * h)
         {
             e = (WEdit *) l->data;
 
-            if (e->drag_state != MCEDIT_DRAG_NORMAL)
+            if (e->drag_state != MCEDIT_DRAG_NONE)
             {
                 edit_restore_size (e);
                 return;
@@ -1074,7 +1074,7 @@ edit_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     close_x = (w->cols - 1) - dx - 1;
     toggle_fullscreen_x = close_x - 3;
 
-    if (edit->drag_state != MCEDIT_DRAG_NORMAL)
+    if (edit->drag_state != MCEDIT_DRAG_NONE)
     {
         /* window is being resized/moved */
         edit_mouse_handle_move_resize (w, msg, event);
@@ -1380,14 +1380,14 @@ edit_handle_move_resize (WEdit * edit, long command)
 
     if (edit->fullscreen)
     {
-        edit->drag_state = MCEDIT_DRAG_NORMAL;
+        edit->drag_state = MCEDIT_DRAG_NONE;
         w->Mouse.forced_capture = FALSE;
         return ret;
     }
 
     switch (edit->drag_state)
     {
-    case MCEDIT_DRAG_NORMAL:
+    case MCEDIT_DRAG_NONE:
         /* possible start move/resize */
         switch (command)
         {
@@ -1430,7 +1430,7 @@ edit_handle_move_resize (WEdit * edit, long command)
             break;
         case CK_Enter:
         case CK_WindowMove:
-            edit->drag_state = MCEDIT_DRAG_NORMAL;
+            edit->drag_state = MCEDIT_DRAG_NONE;
             edit_status (edit, TRUE);   /* redraw frame and status */
         default:
             ret = TRUE;
@@ -1454,7 +1454,7 @@ edit_handle_move_resize (WEdit * edit, long command)
             break;
         case CK_Enter:
         case CK_WindowResize:
-            edit->drag_state = MCEDIT_DRAG_NORMAL;
+            edit->drag_state = MCEDIT_DRAG_NONE;
             edit_status (edit, TRUE);   /* redraw frame and status */
         default:
             ret = TRUE;
@@ -1475,7 +1475,7 @@ edit_handle_move_resize (WEdit * edit, long command)
      * "Anywhere" means: inside or outside the window. We make this happen
      * with the 'forced_capture' flag.
      */
-    w->Mouse.forced_capture = (edit->drag_state != MCEDIT_DRAG_NORMAL);
+    w->Mouse.forced_capture = (edit->drag_state != MCEDIT_DRAG_NONE);
 
     return ret;
 }
