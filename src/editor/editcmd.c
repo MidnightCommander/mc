@@ -2501,7 +2501,7 @@ edit_block_delete_cmd (WEdit * edit)
 /** call with edit = 0 before shutdown to close memory leaks */
 
 void
-edit_replace_cmd (WEdit * edit, int again)
+edit_replace_cmd (WEdit * edit, gboolean again)
 {
     /* 1 = search string, 2 = replace with */
     static char *saved1 = NULL; /* saved default[123] */
@@ -2525,7 +2525,7 @@ edit_replace_cmd (WEdit * edit, int again)
     edit->force |= REDRAW_COMPLETELY;
 
     if (again && !saved1 && !saved2)
-        again = 0;
+        again = FALSE;
 
     if (again)
     {

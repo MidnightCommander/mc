@@ -194,7 +194,7 @@ void edit_mark_current_word_cmd (WEdit * edit);
 void edit_mark_current_line_cmd (WEdit * edit);
 void edit_set_markers (WEdit * edit, off_t m1, off_t m2, long c1, long c2);
 void edit_push_markers (WEdit * edit);
-void edit_replace_cmd (WEdit * edit, int again);
+void edit_replace_cmd (WEdit * edit, gboolean again);
 void edit_search_cmd (WEdit * edit, gboolean again);
 mc_search_cbret_t edit_search_cmd_callback (const void *user_data, gsize char_offset,
                                             int *current_char);
