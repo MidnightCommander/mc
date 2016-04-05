@@ -799,7 +799,7 @@ static void
 edit_begin_page (WEdit * edit)
 {
     edit_update_curs_row (edit);
-    edit_move_up (edit, edit->curs_row, 0);
+    edit_move_up (edit, edit->curs_row, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -808,7 +808,7 @@ static void
 edit_end_page (WEdit * edit)
 {
     edit_update_curs_row (edit);
-    edit_move_down (edit, WIDGET (edit)->lines - edit->curs_row - 1, 0);
+    edit_move_down (edit, WIDGET (edit)->lines - edit->curs_row - 1, FALSE);
 }
 
 
@@ -836,7 +836,7 @@ edit_move_to_bottom (WEdit * edit)
 {
     if (edit->buffer.curs_line < edit->buffer.lines)
     {
-        edit_move_down (edit, edit->buffer.lines - edit->curs_row, 0);
+        edit_move_down (edit, edit->buffer.lines - edit->curs_row, FALSE);
         edit->start_display = edit->buffer.size;
         edit->start_line = edit->buffer.lines;
         edit_scroll_upward (edit, WIDGET (edit)->lines - 1);
@@ -2999,9 +2999,9 @@ void
 edit_move_to_line (WEdit * e, long line)
 {
     if (line < e->buffer.curs_line)
-        edit_move_up (e, e->buffer.curs_line - line, 0);
+        edit_move_up (e, e->buffer.curs_line - line, FALSE);
     else
-        edit_move_down (e, line - e->buffer.curs_line, 0);
+        edit_move_down (e, line - e->buffer.curs_line, FALSE);
     edit_scroll_screen_over_cursor (e);
 }
 
@@ -3523,13 +3523,13 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
         edit->column_highlight = 1;
     case CK_PageUp:
     case CK_MarkPageUp:
-        edit_move_up (edit, w->lines - 1, 1);
+        edit_move_up (edit, w->lines - 1, TRUE);
         break;
     case CK_MarkColumnPageDown:
         edit->column_highlight = 1;
     case CK_PageDown:
     case CK_MarkPageDown:
-        edit_move_down (edit, w->lines - 1, 1);
+        edit_move_down (edit, w->lines - 1, TRUE);
         break;
     case CK_MarkColumnLeft:
         edit->column_highlight = 1;
@@ -3580,37 +3580,37 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
         edit->column_highlight = 1;
     case CK_Up:
     case CK_MarkUp:
-        edit_move_up (edit, 1, 0);
+        edit_move_up (edit, 1, FALSE);
         break;
     case CK_MarkColumnDown:
         edit->column_highlight = 1;
     case CK_Down:
     case CK_MarkDown:
-        edit_move_down (edit, 1, 0);
+        edit_move_down (edit, 1, FALSE);
         break;
     case CK_MarkColumnParagraphUp:
         edit->column_highlight = 1;
     case CK_ParagraphUp:
     case CK_MarkParagraphUp:
-        edit_move_up_paragraph (edit, 0);
+        edit_move_up_paragraph (edit, FALSE);
         break;
     case CK_MarkColumnParagraphDown:
         edit->column_highlight = 1;
     case CK_ParagraphDown:
     case CK_MarkParagraphDown:
-        edit_move_down_paragraph (edit, 0);
+        edit_move_down_paragraph (edit, FALSE);
         break;
     case CK_MarkColumnScrollUp:
         edit->column_highlight = 1;
     case CK_ScrollUp:
     case CK_MarkScrollUp:
-        edit_move_up (edit, 1, 1);
+        edit_move_up (edit, 1, TRUE);
         break;
     case CK_MarkColumnScrollDown:
         edit->column_highlight = 1;
     case CK_ScrollDown:
     case CK_MarkScrollDown:
-        edit_move_down (edit, 1, 1);
+        edit_move_down (edit, 1, TRUE);
         break;
     case CK_Home:
     case CK_MarkToHome:

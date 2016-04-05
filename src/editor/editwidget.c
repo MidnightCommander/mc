@@ -736,9 +736,9 @@ edit_update_cursor (WEdit * edit, const mouse_event_t * event)
     }
 
     if (y > edit->curs_row)
-        edit_move_down (edit, y - edit->curs_row, 0);
+        edit_move_down (edit, y - edit->curs_row, FALSE);
     else if (y < edit->curs_row)
-        edit_move_up (edit, edit->curs_row - y, 0);
+        edit_move_up (edit, edit->curs_row - y, FALSE);
     else
         edit_move_to_prev_col (edit, edit_buffer_get_current_bol (&edit->buffer));
 
@@ -1153,12 +1153,12 @@ edit_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
         break;
 
     case MSG_MOUSE_SCROLL_UP:
-        edit_move_up (edit, 2, 1);
+        edit_move_up (edit, 2, TRUE);
         edit_total_update (edit);
         break;
 
     case MSG_MOUSE_SCROLL_DOWN:
-        edit_move_down (edit, 2, 1);
+        edit_move_down (edit, 2, TRUE);
         edit_total_update (edit);
         break;
 
