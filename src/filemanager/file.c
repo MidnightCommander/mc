@@ -1486,7 +1486,6 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     gid_t src_gid = (gid_t) (-1);
 
     int src_desc, dest_desc = -1;
-    int n_read, n_written;
     mode_t src_mode = 0;        /* The mode of the source file */
     struct stat src_stat, dst_stat;
     struct utimbuf utb;
@@ -1496,7 +1495,6 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     struct timeval tv_transfer_start;
     dest_status_t dst_status = DEST_NONE;
     int open_flags;
-    gboolean is_first_time = TRUE;
     vfs_path_t *src_vpath = NULL, *dst_vpath = NULL;
     char *buf = NULL;
 
@@ -1793,6 +1791,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         struct timeval tv_current, tv_last_update, tv_last_input;
         int secs, update_secs;
         const char *stalled_msg = "";
+        gboolean is_first_time = TRUE;
 
         tv_last_update = tv_transfer_start;
 
@@ -1801,10 +1800,10 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
 
         while (TRUE)
         {
+            ssize_t n_read = -1, n_written;
+
             /* src_read */
-            if (mc_ctl (src_desc, VFS_CTL_IS_NOTREADY, 0))
-                n_read = -1;
-            else
+            if (mc_ctl (src_desc, VFS_CTL_IS_NOTREADY, 0) == 0)
                 while ((n_read = mc_read (src_desc, buf, bufsize)) < 0 && !ctx->skip_all)
                 {
                     return_status = file_error (_("Cannot read source file \"%s\"\n%s"), src_path);
@@ -1814,6 +1813,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
                         ctx->skip_all = TRUE;
                     goto ret;
                 }
+
             if (n_read == 0)
                 break;
 
@@ -1822,6 +1822,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             if (n_read > 0)
             {
                 char *t = buf;
+
                 n_read_total += n_read;
 
                 /* Windows NT ftp servers report that files have no
@@ -1833,7 +1834,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
                 gettimeofday (&tv_last_input, NULL);
 
                 /* dst_write */
-                while ((n_written = mc_write (dest_desc, t, n_read)) < n_read)
+                while ((n_written = mc_write (dest_desc, t, (size_t) n_read)) < n_read)
                 {
                     gboolean write_errno_nospace;
 
