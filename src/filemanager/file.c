@@ -82,6 +82,7 @@
 #include "tree.h"
 #include "midnight.h"           /* current_panel */
 #include "layout.h"             /* rotate_dash() */
+#include "ioblksize.h"          /* io_blksize() */
 
 #include "file.h"
 
@@ -1497,6 +1498,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     int open_flags;
     gboolean is_first_time = TRUE;
     vfs_path_t *src_vpath = NULL, *dst_vpath = NULL;
+    char *buf = NULL;
 
     /* FIXME: We should not be using global variables! */
     ctx->do_reget = 0;
@@ -1787,6 +1789,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         goto ret;
 
     {
+        size_t bufsize;
         off_t n_read_total = 0;
         struct timeval tv_current, tv_last_update, tv_last_input;
         int secs, update_secs;
@@ -1794,15 +1797,16 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
 
         tv_last_update = tv_transfer_start;
 
+        bufsize = io_blksize (sb);
+        buf = g_malloc (bufsize);
+
         while (TRUE)
         {
-            char buf[BUF_8K];
-
             /* src_read */
             if (mc_ctl (src_desc, VFS_CTL_IS_NOTREADY, 0))
                 n_read = -1;
             else
-                while ((n_read = mc_read (src_desc, buf, sizeof (buf))) < 0 && !ctx->skip_all)
+                while ((n_read = mc_read (src_desc, buf, bufsize)) < 0 && !ctx->skip_all)
                 {
                     return_status = file_error (_("Cannot read source file \"%s\"\n%s"), src_path);
                     if (return_status == FILE_RETRY)
@@ -1915,6 +1919,8 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     dst_status = DEST_FULL;     /* copy successful, don't remove target file */
 
   ret:
+    g_free (buf);
+
     rotate_dash (FALSE);
     while (src_desc != -1 && mc_close (src_desc) < 0 && !ctx->skip_all)
     {
