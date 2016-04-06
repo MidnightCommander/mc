@@ -1786,9 +1786,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     return_status = check_progress_buttons (ctx);
     mc_refresh ();
 
-    if (return_status != FILE_CONT)
-        goto ret;
-
+    if (return_status == FILE_CONT)
     {
         size_t bufsize;
         off_t n_read_total = 0;
@@ -1915,9 +1913,9 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
                 goto ret;
             }
         }
-    }
 
-    dst_status = DEST_FULL;     /* copy successful, don't remove target file */
+        dst_status = DEST_FULL; /* copy successful, don't remove target file */
+    }
 
   ret:
     g_free (buf);
