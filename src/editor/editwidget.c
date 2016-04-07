@@ -327,7 +327,7 @@ edit_window_list (const WDialog * h)
     int i = 0;
     int rv;
 
-    lines = min ((size_t) (LINES * 2 / 3), dlg_num);
+    lines = MIN ((size_t) (LINES * 2 / 3), dlg_num);
     cols = COLS * 2 / 3;
 
     listbox = create_listbox_window (lines, cols, _("Open files"), "[Open files]");
@@ -1045,8 +1045,8 @@ edit_mouse_handle_move_resize (Widget * w, mouse_msg_t msg, mouse_event_t * even
     }
     else if (edit->drag_state == MCEDIT_DRAG_RESIZE)
     {
-        w->lines = max (WINDOW_MIN_LINES, global_y - w->y + 1);
-        w->cols = max (WINDOW_MIN_COLS, global_x - w->x + 1);
+        w->lines = MAX (WINDOW_MIN_LINES, global_y - w->y + 1);
+        w->cols = MAX (WINDOW_MIN_COLS, global_x - w->x + 1);
     }
 
     edit->force |= REDRAW_COMPLETELY;   /* Not really needed as WEdit's MSG_DRAW already does this. */

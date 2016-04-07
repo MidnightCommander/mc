@@ -968,7 +968,7 @@ insert_text (WInput * in, char *text, ssize_t size)
     int buff_len;
 
     buff_len = str_length (in->buffer);
-    size = min (size, (ssize_t) strlen (text)) + start - end;
+    size = MIN (size, (ssize_t) strlen (text)) + start - end;
     if (strlen (in->buffer) + size >= (size_t) in->current_max_size)
     {
         /* Expand the buffer */

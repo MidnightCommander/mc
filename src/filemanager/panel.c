@@ -831,9 +831,9 @@ format_file (WPanel * panel, int file_index, int width, int attr, gboolean issta
                 *field_length = len + 1;
 
                 str_len = str_length (txt);
-                i = max (0, str_len - len);
-                panel->max_shift = max (panel->max_shift, i);
-                i = min (panel->content_shift, i);
+                i = MAX (0, str_len - len);
+                panel->max_shift = MAX (panel->max_shift, i);
+                i = MIN (panel->content_shift, i);
 
                 if (i > -1)
                 {
@@ -1310,7 +1310,7 @@ show_dir (const WPanel * panel)
         tty_setcolor (REVERSE_COLOR);
 
     tmp = panel_correct_path_to_show (panel);
-    tty_printf (" %s ", str_term_trim (tmp, min (max (w->cols - 12, 0), w->cols)));
+    tty_printf (" %s ", str_term_trim (tmp, MIN (MAX (w->cols - 12, 0), w->cols)));
     g_free (tmp);
 
     if (!panels_options.show_mini_info)
@@ -2453,7 +2453,7 @@ mark_file_right (WPanel * panel)
         state_mark = selection (panel)->f.marked ? 0 : 1;
 
     lines = panel_lines (panel);
-    lines = min (lines, panel->dir.len - panel->selected - 1);
+    lines = MIN (lines, panel->dir.len - panel->selected - 1);
     for (; lines != 0; lines--)
     {
         do_file_mark (panel, panel->selected, state_mark);
@@ -2473,7 +2473,7 @@ mark_file_left (WPanel * panel)
         state_mark = selection (panel)->f.marked ? 0 : 1;
 
     lines = panel_lines (panel);
-    lines = min (lines, panel->selected + 1);
+    lines = MIN (lines, panel->selected + 1);
     for (; lines != 0; lines--)
     {
         do_file_mark (panel, panel->selected, state_mark);

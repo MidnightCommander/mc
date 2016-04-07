@@ -638,7 +638,7 @@ dview_str_utf8_offset_to_pos (const char *text, size_t length)
         result = g_utf8_offset_to_pointer (tmpbuf, length) - tmpbuf;
         g_free (buffer);
     }
-    return max (length, (size_t) result);
+    return MAX (length, (size_t) result);
 }
 #endif /*HAVE_CHARSET */
 
@@ -1567,7 +1567,7 @@ cvt_fget (FBUF * f, off_t off, char *dst, size_t dstsize, int skip, int ts, gboo
     size_t sz;
     int lastch = '\0';
     const char *q = NULL;
-    char tmp[BUFSIZ];           /* XXX capacity must be >= max{dstsize + 1, amount} */
+    char tmp[BUFSIZ];           /* XXX capacity must be >= MAX{dstsize + 1, amount} */
     char cvt[BUFSIZ];           /* XXX capacity must be >= MAX_TAB_WIDTH * amount */
 
     if (sizeof (tmp) < amount || sizeof (tmp) <= dstsize || sizeof (cvt) < 8 * amount)
@@ -2016,9 +2016,9 @@ get_current_hunk (WDiff * dview, int *start_line1, int *end_line1, int *start_li
             l0 = ((DIFFLN *) & g_array_index (a0, DIFFLN, pos))->line;
             l1 = ((DIFFLN *) & g_array_index (a1, DIFFLN, pos))->line;
             if (l0 > 0)
-                *end_line1 = max (*start_line1, l0);
+                *end_line1 = MAX (*start_line1, l0);
             if (l1 > 0)
-                *end_line2 = max (*start_line2, l1);
+                *end_line2 = MAX (*start_line2, l1);
             pos++;
         }
     }

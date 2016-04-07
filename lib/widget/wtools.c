@@ -299,7 +299,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
 
     /* count coordinates */
     str_msg_term_size (text, &lines, &cols);
-    cols = 6 + max (win_len, max (str_term_width1 (header), cols));
+    cols = 6 + MAX (win_len, MAX (str_term_width1 (header), cols));
     lines += 4 + (count > 0 ? 2 : 0);
 
     /* prepare dialog */
@@ -585,7 +585,7 @@ status_msg_init (status_msg_t * sm, const char *title, double delay, status_msg_
 
     start = mc_timer_elapsed (mc_global.timer);
 
-    sm->dlg = dlg_create (TRUE, 0, 0, 7, min (max (40, COLS / 2), COLS), dialog_colors,
+    sm->dlg = dlg_create (TRUE, 0, 0, 7, MIN (MAX (40, COLS / 2), COLS), dialog_colors,
                           NULL, NULL, NULL, title, DLG_CENTER);
     sm->start = start;
     sm->delay = (guint64) (delay * G_USEC_PER_SEC);
@@ -697,7 +697,7 @@ simple_status_msg_init_cb (status_msg_t * sm)
 #endif
 
     b_width = str_term_width1 (b_name) + 4;
-    wd_width = max (wd->cols, b_width + 6);
+    wd_width = MAX (wd->cols, b_width + 6);
 
     y = 2;
     ssm->label = label_new (y++, 3, "");

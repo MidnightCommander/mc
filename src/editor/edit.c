@@ -159,7 +159,7 @@ edit_load_status_update_cb (status_msg_t * sm)
         int wd_width;
         Widget *lw = WIDGET (ssm->label);
 
-        wd_width = max (wd->cols, lw->cols + 6);
+        wd_width = MAX (wd->cols, lw->cols + 6);
         widget_set_size (wd, wd->y, wd->x, wd->lines, wd_width);
         widget_set_size (lw, lw->y, wd->x + (wd->cols - lw->cols) / 2, lw->lines, lw->cols);
         rsm->first = FALSE;
@@ -3099,7 +3099,7 @@ edit_mark_current_word_cmd (WEdit * edit)
         if ((my_type_of (c1) & my_type_of (c2)) == 0)
             break;
     }
-    edit->mark2 = min (pos + 1, edit->buffer.size);
+    edit->mark2 = MIN (pos + 1, edit->buffer.size);
 
     edit->force |= REDRAW_LINE_ABOVE | REDRAW_AFTER_CURSOR;
 }

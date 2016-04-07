@@ -157,7 +157,7 @@ chmod_i18n (void)
     for (i = 0; i < check_perm_num; i++)
     {
         len = str_term_width1 (check_perm[i].text);
-        check_perm_len = max (check_perm_len, len);
+        check_perm_len = MAX (check_perm_len, len);
     }
 
     check_perm_len += 1 + 3 + 1;        /* mark, [x] and space */
@@ -165,7 +165,7 @@ chmod_i18n (void)
     for (i = 0; i < file_info_labels_num; i++)
     {
         len = str_term_width1 (file_info_labels[i]) + 2;        /* spaces around */
-        file_info_labels_len = max (file_info_labels_len, len);
+        file_info_labels_len = MAX (file_info_labels_len, len);
     }
 
     for (i = 0; i < chmod_but_num; i++)
@@ -292,7 +292,7 @@ init_chmod (const char *fname, const struct stat *sf_stat)
     perm_gb_len = check_perm_len + 2;
     file_gb_len = file_info_labels_len + 2;
     cols = str_term_width1 (fname) + 2 + 1;
-    file_gb_len = max (file_gb_len, cols);
+    file_gb_len = MAX (file_gb_len, cols);
 
     lines = single_set ? 20 : 23;
     cols = perm_gb_len + file_gb_len + 1 + 6;

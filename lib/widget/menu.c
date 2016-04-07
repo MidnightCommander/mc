@@ -96,7 +96,7 @@ menu_arrange (menu_t * menu, dlg_shortcut_str get_shortcut)
                 size_t len;
 
                 len = (size_t) hotkey_width (entry->text);
-                menu->max_hotkey_len = max (menu->max_hotkey_len, len);
+                menu->max_hotkey_len = MAX (menu->max_hotkey_len, len);
 
                 if (get_shortcut != NULL)
                     entry->shortcut = get_shortcut (entry->command);
@@ -104,7 +104,7 @@ menu_arrange (menu_t * menu, dlg_shortcut_str get_shortcut)
                 if (entry->shortcut != NULL)
                 {
                     len = (size_t) str_term_width1 (entry->shortcut);
-                    max_shortcut_len = max (max_shortcut_len, len);
+                    max_shortcut_len = MAX (max_shortcut_len, len);
                 }
             }
         }

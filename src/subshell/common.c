@@ -519,11 +519,11 @@ feed_subshell (int how, int fail_on_error)
         FD_ZERO (&read_set);
         FD_SET (mc_global.tty.subshell_pty, &read_set);
         FD_SET (subshell_pipe[READ], &read_set);
-        maxfdp = max (mc_global.tty.subshell_pty, subshell_pipe[READ]);
+        maxfdp = MAX (mc_global.tty.subshell_pty, subshell_pipe[READ]);
         if (how == VISIBLY)
         {
             FD_SET (STDIN_FILENO, &read_set);
-            maxfdp = max (maxfdp, STDIN_FILENO);
+            maxfdp = MAX (maxfdp, STDIN_FILENO);
         }
 
         if (select (maxfdp + 1, &read_set, NULL, NULL, wptr) == -1)

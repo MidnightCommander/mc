@@ -1235,7 +1235,7 @@ jobs_cmd (void)
     }
 
     x += (int) n_but - 1;
-    cols = max (cols, x + 6);
+    cols = MAX (cols, x + 6);
 
     jobs_dlg = dlg_create (TRUE, 0, 0, lines, cols, dialog_colors, NULL, NULL,
                            "[Background jobs]", _("Background jobs"), DLG_CENTER);

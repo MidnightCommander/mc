@@ -603,8 +603,8 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
                         long c1, c2;
 
                         x = (long) edit_move_forward3 (edit, b, 0, q);
-                        c1 = min (edit->column1, edit->column2);
-                        c2 = max (edit->column1, edit->column2);
+                        c1 = MIN (edit->column1, edit->column2);
+                        c2 = MAX (edit->column1, edit->column2);
                         if (x >= c1 && x < c2)
                             p->style |= MOD_MARKED;
                     }
@@ -1092,8 +1092,8 @@ edit_scroll_screen_over_cursor (WEdit * edit)
     t_extreme = EDIT_TOP_EXTREME;
     if (edit->found_len != 0)
     {
-        b_extreme = max (w->lines / 4, b_extreme);
-        t_extreme = max (w->lines / 4, t_extreme);
+        b_extreme = MAX (w->lines / 4, b_extreme);
+        t_extreme = MAX (w->lines / 4, t_extreme);
     }
     if (b_extreme + t_extreme + 1 > w->lines)
     {

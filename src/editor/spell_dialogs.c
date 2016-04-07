@@ -99,15 +99,15 @@ spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word
     cancel_button = button_new (11, 28, B_CANCEL, NORMAL_BUTTON, _("&Cancel"), 0);
     cancel_len = button_get_len (cancel_button);
 
-    max_btn_len = max (replace_len, skip_len);
-    max_btn_len = max (max_btn_len, cancel_len);
+    max_btn_len = MAX (replace_len, skip_len);
+    max_btn_len = MAX (max_btn_len, cancel_len);
 
     lang_label = g_strdup_printf ("%s: %s", _("Language"), aspell_get_lang ());
     word_label = g_strdup_printf ("%s: %s", _("Misspelled"), word);
     word_label_len = str_term_width1 (word_label) + 5;
 
     sug_dlg_w += max_btn_len;
-    sug_dlg_w = max (sug_dlg_w, word_label_len) + 1;
+    sug_dlg_w = MAX (sug_dlg_w, word_label_len) + 1;
 
     sug_dlg = dlg_create (TRUE, ypos, xpos, sug_dlg_h, sug_dlg_w,
                           dialog_colors, NULL, NULL, "[ASpell]", _("Check word"), DLG_COMPACT);

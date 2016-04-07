@@ -287,7 +287,7 @@ dir_list_grow (dir_list * list, int delta)
         list->size = size;
     }
 
-    list->len = clear_flag ? 0 : min (list->len, size);
+    list->len = clear_flag ? 0 : MIN (list->len, size);
 
     return TRUE;
 }

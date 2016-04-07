@@ -66,17 +66,17 @@ create_listbox_window_centered (int center_y, int center_x, int lines, int cols,
     dlg_flags_t dlg_flags = DLG_TRYUP;
 
     /* Adjust sizes */
-    lines = min (lines, LINES - 6);
+    lines = MIN (lines, LINES - 6);
 
     if (title != NULL)
     {
         int len;
 
         len = str_term_width1 (title) + 4;
-        cols = max (cols, len);
+        cols = MAX (cols, len);
     }
 
-    cols = min (cols, COLS - 6);
+    cols = MIN (cols, COLS - 6);
 
     /* adjust position */
     if ((center_y < 0) || (center_x < 0))

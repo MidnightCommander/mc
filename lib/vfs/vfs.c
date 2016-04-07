@@ -147,7 +147,7 @@ _vfs_translate_path (const char *path, int size, GIConv defcnv, GString * buffer
             slash = NULL;
 
         ms = (slash != NULL) ? slash - semi : (int) strlen (semi);
-        ms = min ((unsigned int) ms, sizeof (encoding) - 1);
+        ms = MIN ((unsigned int) ms, sizeof (encoding) - 1);
         /* limit encoding size (ms) to path size (size) */
         if (semi + ms > path + size)
             ms = path + size - semi;

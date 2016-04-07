@@ -330,8 +330,8 @@ edit_buffer_count_lines (const edit_buffer_t * buf, off_t first, off_t last)
 {
     long lines = 0;
 
-    first = max (first, 0);
-    last = min (last, buf->size);
+    first = MAX (first, 0);
+    last = MIN (last, buf->size);
 
     while (first < last)
         if (edit_buffer_get_byte (buf, first++) == '\n')
@@ -596,7 +596,7 @@ edit_buffer_get_forward_offset (const edit_buffer_t * buf, off_t current, long l
     if (upto != 0)
         return (off_t) edit_buffer_count_lines (buf, current, upto);
 
-    lines = max (lines, 0);
+    lines = MAX (lines, 0);
 
     while (lines-- != 0)
     {
@@ -625,7 +625,7 @@ edit_buffer_get_forward_offset (const edit_buffer_t * buf, off_t current, long l
 off_t
 edit_buffer_get_backward_offset (const edit_buffer_t * buf, off_t current, long lines)
 {
-    lines = max (lines, 0);
+    lines = MAX (lines, 0);
     current = edit_buffer_get_bol (buf, current);
 
     while (lines-- != 0 && current != 0)

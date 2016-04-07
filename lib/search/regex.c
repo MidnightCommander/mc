@@ -168,7 +168,7 @@ mc_search__cond_struct_new_regex_accum_append (const char *charset, GString * st
 
         one_char =
             mc_search__get_one_symbol (charset, &(str_from->str[loop]),
-                                       min (str_from->len - loop, 6), &just_letters);
+                                       MIN (str_from->len - loop, 6), &just_letters);
         one_char_len = strlen (one_char);
 
         if (one_char_len == 0)

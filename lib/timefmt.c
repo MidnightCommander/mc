@@ -101,14 +101,14 @@ i18n_checktimelength (void)
         {
             strftime (buf, sizeof (buf) - 1, user_recent_timeformat, lt);
             tlen = (size_t) str_term_width1 (buf);
-            length = max (tlen, length);
+            length = MAX (tlen, length);
             strftime (buf, sizeof (buf) - 1, user_old_timeformat, lt);
             tlen = (size_t) str_term_width1 (buf);
-            length = max (tlen, length);
+            length = MAX (tlen, length);
         }
 
         tlen = (size_t) str_term_width1 (_(INVALID_TIME_TEXT));
-        length = max (tlen, length);
+        length = MAX (tlen, length);
     }
 
     /* Don't handle big differences. Use standard value (email bug, please) */

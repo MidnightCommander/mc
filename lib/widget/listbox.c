@@ -221,7 +221,7 @@ listbox_check_hotkey (WListbox * l, int key)
 static int
 listbox_y_pos (WListbox * l, int y)
 {
-    return min (l->top + y, LISTBOX_LAST (l));
+    return MIN (l->top + y, LISTBOX_LAST (l));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -240,7 +240,7 @@ listbox_fwd (WListbox * l, gboolean wrap)
 static void
 listbox_fwd_n (WListbox * l, int n)
 {
-    listbox_select_entry (l, min (l->pos + n, LISTBOX_LAST (l)));
+    listbox_select_entry (l, MIN (l->pos + n, LISTBOX_LAST (l)));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -259,7 +259,7 @@ listbox_back (WListbox * l, gboolean wrap)
 static void
 listbox_back_n (WListbox * l, int n)
 {
-    listbox_select_entry (l, max (l->pos - n, 0));
+    listbox_select_entry (l, MAX (l->pos - n, 0));
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -165,7 +165,7 @@ init_panelize (void)
     }
 
     panelize_cols = COLS - 6;
-    panelize_cols = max (panelize_cols, blen + 4);
+    panelize_cols = MAX (panelize_cols, blen + 4);
 
     panelize_dlg =
         dlg_create (TRUE, 0, 0, 20, panelize_cols, dialog_colors, panelize_callback, NULL,

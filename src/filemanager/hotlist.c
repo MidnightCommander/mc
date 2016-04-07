@@ -697,7 +697,7 @@ init_i18n_stuff (int list_type, int cols)
         (len[0])--;
         (len[1])--;
 
-        cols = max (cols, max (len[0], len[1]));
+        cols = MAX (cols, MAX (len[0], len[1]));
 
         /* arrange buttons */
         for (i = 0; i < hotlist_but_num; i++)

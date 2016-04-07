@@ -145,7 +145,7 @@ edit_search_status_update_cb (status_msg_t * sm)
         int wd_width;
         Widget *lw = WIDGET (ssm->label);
 
-        wd_width = max (wd->cols, lw->cols + 6);
+        wd_width = MAX (wd->cols, lw->cols + 6);
         widget_set_size (wd, wd->y, wd->x, wd->lines, wd_width);
         widget_set_size (lw, lw->y, wd->x + (wd->cols - lw->cols) / 2, lw->lines, lw->cols);
         esm->first = FALSE;
@@ -546,8 +546,8 @@ edit_delete_column_of_text (WEdit * edit)
     n = edit_buffer_get_forward_offset (&edit->buffer, m1, 0, m2) + 1;
     c = (long) edit_move_forward3 (edit, edit_buffer_get_bol (&edit->buffer, m1), 0, m1);
     d = (long) edit_move_forward3 (edit, edit_buffer_get_bol (&edit->buffer, m2), 0, m2);
-    b = max (min (c, d), min (edit->column1, edit->column2));
-    c = max (c, max (edit->column1, edit->column2));
+    b = MAX (MIN (c, d), MIN (edit->column1, edit->column2));
+    c = MAX (c, MAX (edit->column1, edit->column2));
 
     while (n--)
     {
@@ -601,8 +601,8 @@ edit_block_delete (WEdit * edit)
             return 1;
         }
     }
-    c1 = min (edit->column1, edit->column2);
-    c2 = max (edit->column1, edit->column2);
+    c1 = MIN (edit->column1, edit->column2);
+    c2 = MAX (edit->column1, edit->column2);
     edit->column1 = c1;
     edit->column2 = c2;
 
@@ -858,7 +858,7 @@ editcmd_find (edit_search_status_msg_t * esm, gsize * len)
     else
     {
         if (edit_search_options.backwards)
-            end_mark = max (1, edit->buffer.curs1) - 1;
+            end_mark = MAX (1, edit->buffer.curs1) - 1;
     }
 
     /* search */
@@ -1288,7 +1288,7 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
         {
             if (strncmp
                 ((char *) &compl[i]->str[word_len],
-                 (char *) &temp->str[word_len], max (len, compl[i]->len) - word_len) == 0)
+                 (char *) &temp->str[word_len], MAX (len, compl[i]->len) - word_len) == 0)
             {
                 GString *this = compl[i];
                 for (++i; i < *num; i++)
@@ -2290,13 +2290,13 @@ eval_marks (WEdit * edit, off_t * start_mark, off_t * end_mark)
 
     if (edit->mark2 >= 0)
     {
-        *start_mark = min (edit->mark1, edit->mark2);
-        *end_mark = max (edit->mark1, edit->mark2);
+        *start_mark = MIN (edit->mark1, edit->mark2);
+        *end_mark = MAX (edit->mark1, edit->mark2);
     }
     else
     {
-        *start_mark = min (edit->mark1, end_mark_curs);
-        *end_mark = max (edit->mark1, end_mark_curs);
+        *start_mark = MIN (edit->mark1, end_mark_curs);
+        *end_mark = MAX (edit->mark1, end_mark_curs);
         edit->column2 = edit->curs_col + edit->over_col;
     }
 
@@ -2313,8 +2313,8 @@ eval_marks (WEdit * edit, off_t * start_mark, off_t * end_mark)
         start_eol = edit_buffer_get_eol (&edit->buffer, start_bol - 1) + 1;
         end_bol = edit_buffer_get_bol (&edit->buffer, *end_mark);
         end_eol = edit_buffer_get_eol (&edit->buffer, *end_mark);
-        col1 = min (edit->column1, edit->column2);
-        col2 = max (edit->column1, edit->column2);
+        col1 = MIN (edit->column1, edit->column2);
+        col2 = MAX (edit->column1, edit->column2);
 
         diff1 = edit_move_forward3 (edit, start_bol, col2, 0) -
             edit_move_forward3 (edit, start_bol, col1, 0);
@@ -2323,8 +2323,8 @@ eval_marks (WEdit * edit, off_t * start_mark, off_t * end_mark)
 
         *start_mark -= diff1;
         *end_mark += diff2;
-        *start_mark = max (*start_mark, start_eol);
-        *end_mark = min (*end_mark, end_eol);
+        *start_mark = MAX (*start_mark, start_eol);
+        *end_mark = MIN (*end_mark, end_eol);
     }
     return TRUE;
 }
@@ -2407,8 +2407,8 @@ edit_block_move_cmd (WEdit * edit)
         long c1, c2, b_width;
         long x, x2;
 
-        c1 = min (edit->column1, edit->column2);
-        c2 = max (edit->column1, edit->column2);
+        c1 = MIN (edit->column1, edit->column2);
+        c2 = MAX (edit->column1, edit->column2);
         b_width = c2 - c1;
 
         edit_update_curs_col (edit);
@@ -2435,7 +2435,7 @@ edit_block_move_cmd (WEdit * edit)
         /* remove current selection */
         edit_block_delete_cmd (edit);
 
-        edit->over_col = max (0, edit->over_col - b_width);
+        edit->over_col = MAX (0, edit->over_col - b_width);
         /* calculate the cursor pos after delete block */
         current = edit_move_forward3 (edit, edit_buffer_get_current_bol (&edit->buffer), x, 0);
         edit_cursor_move (edit, current - edit->buffer.curs1);
@@ -2940,7 +2940,7 @@ edit_save_block (WEdit * edit, const char *filename, off_t start, off_t finish)
         buf = g_malloc0 (TEMP_BUF_LEN);
         while (start != finish)
         {
-            end = min (finish, start + TEMP_BUF_LEN);
+            end = MIN (finish, start + TEMP_BUF_LEN);
             for (; i < end; i++)
                 buf[i - start] = edit_buffer_get_byte (&edit->buffer, i);
             len -= mc_write (file, (char *) buf, end - start);

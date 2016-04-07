@@ -1069,7 +1069,7 @@ user_menu_cmd (const WEdit * edit_widget, const char *menu_file, int selected_en
                 menu_lines++;
                 accept_entry = TRUE;
             }
-            max_cols = max (max_cols, col);
+            max_cols = MAX (max_cols, col);
             col = 0;
         }
         else
@@ -1093,7 +1093,7 @@ user_menu_cmd (const WEdit * edit_widget, const char *menu_file, int selected_en
         {
             Listbox *listbox;
 
-            max_cols = min (max (max_cols, col), MAX_ENTRY_LEN);
+            max_cols = MIN (MAX (max_cols, col), MAX_ENTRY_LEN);
 
             /* Create listbox */
             listbox = create_listbox_window (menu_lines, max_cols + 2, _("User menu"),

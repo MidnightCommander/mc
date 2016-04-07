@@ -230,7 +230,7 @@ dialog_switch_list (void)
     if (mc_global.midnight_shutdown || mc_current == NULL)
         return;
 
-    lines = min ((size_t) (LINES * 2 / 3), dlg_num);
+    lines = MIN ((size_t) (LINES * 2 / 3), dlg_num);
     cols = COLS * 2 / 3;
 
     listbox = create_listbox_window (lines, cols, _("Screens"), "[Screen selector]");

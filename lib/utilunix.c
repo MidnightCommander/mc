@@ -604,7 +604,7 @@ mc_pread (mc_pipe_t * p, GError ** error)
     if (read_err)
     {
         FD_SET (p->err.fd, &fds);
-        maxfd = max (maxfd, p->err.fd);
+        maxfd = MAX (maxfd, p->err.fd);
     }
 
     /* no timeout */

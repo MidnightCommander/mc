@@ -302,7 +302,7 @@ init_learn (void)
 
         label = _(key_name_conv_tab[i].longname);
         padding = 16 - str_term_width1 (label);
-        padding = max (0, padding);
+        padding = MAX (0, padding);
         g_snprintf (buffer, sizeof (buffer), "%s%*s", label, padding, "");
 
         learnkeys[i].button =

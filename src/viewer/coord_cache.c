@@ -81,7 +81,7 @@ mcview_ccache_add_entry (coord_cache_t * cache, size_t pos, const coord_cache_en
     if ((cache == NULL) || (entry == NULL))
         return;
 
-    pos = min (pos, cache->size);
+    pos = MIN (pos, cache->size);
 
     /* increase cache capacity if needed */
     if (cache->size == cache->capacity)

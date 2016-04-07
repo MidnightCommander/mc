@@ -284,12 +284,12 @@ mcview_compute_areas (WView * view)
     /* Compute the heights of the areas */
     rest = view_area.height;
 
-    height = min (rest, 1);
+    height = MIN (rest, 1);
     view->status_area.height = height;
     rest -= height;
 
     height = (ruler == RULER_NONE || view->hex_mode) ? 0 : 2;
-    height = min (rest, height);
+    height = MIN (rest, height);
     view->ruler_area.height = height;
     rest -= height;
 

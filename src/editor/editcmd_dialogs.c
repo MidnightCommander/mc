@@ -317,7 +317,7 @@ editcmd_dialog_raw_key_query (const char *heading, const char *query, gboolean c
 
     w = str_term_width1 (heading) + 6;
     wq = str_term_width1 (query);
-    w = max (w, wq + 3 * 2 + 1 + 2);
+    w = MAX (w, wq + 3 * 2 + 1 + 2);
 
     raw_dlg =
         dlg_create (TRUE, 0, 0, cancel ? 7 : 5, w, dialog_colors, editcmd_dialog_raw_key_query_cb,

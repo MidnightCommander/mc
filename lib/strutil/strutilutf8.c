@@ -358,7 +358,7 @@ str_utf8_length2 (const char *text, int size)
     {
         if (start != end)
         {
-            result += g_utf8_strlen (start, min (end - start, size));
+            result += g_utf8_strlen (start, MIN (end - start, size));
             size -= end - start;
         }
         result += (size > 0);
@@ -369,7 +369,7 @@ str_utf8_length2 (const char *text, int size)
     if (start == text)
         result = g_utf8_strlen (text, size);
     else if (start[0] != '\0' && start != end && size > 0)
-        result += g_utf8_strlen (start, min (end - start, size));
+        result += g_utf8_strlen (start, MIN (end - start, size));
 
     return result;
 }
@@ -1198,7 +1198,7 @@ str_utf8_ncompare (const char *t1, const char *t2)
 
     l1 = strlen (n1);
     l2 = strlen (n2);
-    result = strncmp (n1, n2, min (l1, l2));
+    result = strncmp (n1, n2, MIN (l1, l2));
 
     g_free (n1);
     g_free (n2);
@@ -1239,7 +1239,7 @@ str_utf8_ncasecmp (const char *t1, const char *t2)
 
     l1 = strlen (n1);
     l2 = strlen (n2);
-    result = strncmp (n1, n2, min (l1, l2));
+    result = strncmp (n1, n2, MIN (l1, l2));
 
     g_free (n1);
     g_free (n2);

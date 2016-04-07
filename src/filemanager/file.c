@@ -2498,7 +2498,7 @@ dirsize_status_init_cb (status_msg_t * sm)
     if (dsm->allow_skip)
         b_width += str_term_width1 (b2_name) + 4 + 1;
 
-    ui_width = max (COLS / 2, b_width + 6);
+    ui_width = MAX (COLS / 2, b_width + 6);
     dsm->dirname = label_new (2, 3, "");
     add_widget (sm->dlg, dsm->dirname);
     dsm->count_size = label_new (3, 3, "");

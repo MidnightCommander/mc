@@ -424,7 +424,7 @@ mcview_load (WView * view, const char *command, const char *file, int start_line
         if (max_offset < 0)
             new_offset = 0;
         else
-            new_offset = min (new_offset, max_offset);
+            new_offset = MIN (new_offset, max_offset);
         if (!view->hex_mode)
         {
             view->dpy_start = mcview_bol (view, new_offset, 0);
