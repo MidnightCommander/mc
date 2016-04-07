@@ -80,5 +80,7 @@ enum { IO_BUFSIZE = 128 * 1024 };
 static inline size_t
 io_blksize (struct stat sb)
 {
-    return MAX (IO_BUFSIZE, ST_BLKSIZE (sb));
+    size_t blksize = ST_BLKSIZE (sb);
+
+    return MAX (IO_BUFSIZE, blksize);
 }
