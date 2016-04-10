@@ -132,7 +132,7 @@ listbox_draw (WListbox * l, gboolean focused)
 {
     Widget *w = WIDGET (l);
     const WDialog *h = w->owner;
-    const gboolean disabled = (w->options & W_DISABLED) != 0;
+    const gboolean disabled = (w->options & WOP_DISABLED) != 0;
     const int normalc = disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL];
     /* *INDENT-OFF* */
     int selc = disabled

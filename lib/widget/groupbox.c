@@ -71,7 +71,7 @@ groupbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 
             gboolean disabled;
 
-            disabled = (w->options & W_DISABLED) != 0;
+            disabled = (w->options & WOP_DISABLED) != 0;
             tty_setcolor (disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL]);
             tty_draw_box (w->y, w->x, w->lines, w->cols, TRUE);
 

@@ -155,7 +155,7 @@ widget_init (Widget * w, int y, int x, int lines, int cols,
     w->mouse.last_buttons_down = 0;
 
     /* Almost all widgets want to put the cursor in a suitable place */
-    w->options = W_WANT_CURSOR;
+    w->options = WOP_WANT_CURSOR;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -202,7 +202,7 @@ widget_default_set_options (Widget * w, widget_options_t options, gboolean enabl
     else
         w->options &= ~options;
 
-    if (w->owner != NULL && (options & W_DISABLED) != 0)
+    if (w->owner != NULL && (options & WOP_DISABLED) != 0)
         send_message (w, NULL, MSG_DRAW, 0, NULL);
 }
 
@@ -241,7 +241,7 @@ widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey)
     WDialog *h = w->owner;
     int color;
 
-    if ((w->options & W_DISABLED) != 0)
+    if ((w->options & WOP_DISABLED) != 0)
         color = DISABLED_COLOR;
     else if (hotkey)
     {

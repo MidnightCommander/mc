@@ -103,7 +103,7 @@ static void
 draw_history_button (WInput * in)
 {
     char c;
-    gboolean disabled = (WIDGET (in)->options & W_DISABLED) != 0;
+    gboolean disabled = (WIDGET (in)->options & WOP_DISABLED) != 0;
 
     if (g_list_next (in->history.current) == NULL)
         c = '^';
@@ -1010,7 +1010,7 @@ input_new (int y, int x, const int *colors, int width, const char *def_text,
     in = g_new (WInput, 1);
     w = WIDGET (in);
     widget_init (w, y, x, 1, width, input_callback, input_mouse_callback);
-    w->options |= W_IS_INPUT;
+    w->options |= WOP_IS_INPUT;
     w->set_options = input_set_options;
 
     in->color = colors;
@@ -1295,7 +1295,7 @@ input_update (WInput * in, gboolean clear_first)
     if (has_history != 0)
         draw_history_button (in);
 
-    if ((w->options & W_DISABLED) != 0)
+    if ((w->options & WOP_DISABLED) != 0)
         tty_setcolor (DISABLED_COLOR);
     else if (in->first)
         tty_setcolor (in->color[WINPUTC_UNCHANGED]);

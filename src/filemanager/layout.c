@@ -538,7 +538,7 @@ init_layout (void)
 
     /* "Console output" groupbox */
     {
-        const int disabled = mc_global.tty.console_flag != '\0' ? 0 : W_DISABLED;
+        const int disabled = mc_global.tty.console_flag != '\0' ? 0 : WOP_DISABLED;
         Widget *w;
 
         w = WIDGET (groupbox_new (8, 3, 3, l1, title2));

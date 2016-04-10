@@ -16,10 +16,10 @@
 
 #define widget_move(w, _y, _x) tty_gotoyx (CONST_WIDGET(w)->y + (_y), CONST_WIDGET(w)->x + (_x))
 /* Sets/clear the specified flag in the options field */
-#define widget_want_cursor(w,i) widget_set_options(w, W_WANT_CURSOR, i)
-#define widget_want_hotkey(w,i) widget_set_options(w, W_WANT_HOTKEY, i)
-#define widget_want_idle(w,i) widget_set_options(w, W_WANT_IDLE, i)
-#define widget_disable(w,i) widget_set_options(w, W_DISABLED, i)
+#define widget_want_cursor(w,i) widget_set_options(w, WOP_WANT_CURSOR, i)
+#define widget_want_hotkey(w,i) widget_set_options(w, WOP_WANT_HOTKEY, i)
+#define widget_want_idle(w,i) widget_set_options(w, WOP_WANT_IDLE, i)
+#define widget_disable(w,i) widget_set_options(w, WOP_DISABLED, i)
 
 /*** enums ***************************************************************************************/
 
@@ -62,12 +62,12 @@ typedef enum
 /* Widget options */
 typedef enum
 {
-    W_DEFAULT = (0 << 0),
-    W_WANT_HOTKEY = (1 << 1),
-    W_WANT_CURSOR = (1 << 2),
-    W_WANT_IDLE = (1 << 3),
-    W_IS_INPUT = (1 << 4),
-    W_DISABLED = (1 << 5)       /* Widget cannot be selected */
+    WOP_DEFAULT = (0 << 0),
+    WOP_WANT_HOTKEY = (1 << 1),
+    WOP_WANT_CURSOR = (1 << 2),
+    WOP_WANT_IDLE = (1 << 3),
+    WOP_IS_INPUT = (1 << 4),
+    WOP_DISABLED = (1 << 5)     /* Widget cannot be selected */
 } widget_options_t;
 
 /* Flags for widget repositioning on dialog resize */

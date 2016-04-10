@@ -247,7 +247,7 @@ do_select_widget (WDialog * h, GList * w, select_dir_t dir)
             break;
         }
     }
-    while (h->current != w /* && (WIDGET (h->current->data)->options & W_DISABLED) == 0 */ );
+    while (h->current != w /* && (WIDGET (h->current->data)->options & WOP_DISABLED) == 0 */ );
 
     if (widget_overlapped (w0, WIDGET (h->current->data)))
     {
@@ -405,7 +405,7 @@ dlg_mouse_event (WDialog * h, Gpm_Event * event)
     {
         Widget *w = WIDGET (p->data);
 
-        if ((w->options & W_DISABLED) == 0 && w->mouse_callback != NULL)
+        if ((w->options & WOP_DISABLED) == 0 && w->mouse_callback != NULL)
         {
             /* put global cursor position to the widget */
             int ret;
@@ -445,10 +445,10 @@ dlg_try_hotkey (WDialog * h, int d_key)
 
     current = WIDGET (h->current->data);
 
-    if ((current->options & W_DISABLED) != 0)
+    if ((current->options & WOP_DISABLED) != 0)
         return MSG_NOT_HANDLED;
 
-    if (current->options & W_IS_INPUT)
+    if ((current->options & WOP_IS_INPUT) != 0)
     {
         /* skip ascii control characters, anything else can valid character in
          * some encoding */
@@ -462,7 +462,7 @@ dlg_try_hotkey (WDialog * h, int d_key)
         d_key = g_ascii_tolower (c);
 
     handled = MSG_NOT_HANDLED;
-    if ((current->options & W_WANT_HOTKEY) != 0)
+    if ((current->options & WOP_WANT_HOTKEY) != 0)
         handled = send_message (current, NULL, MSG_HOTKEY, d_key, NULL);
 
     /* If not used, send hotkey to other widgets */
@@ -476,7 +476,7 @@ dlg_try_hotkey (WDialog * h, int d_key)
     {
         current = WIDGET (hot_cur->data);
 
-        if ((current->options & W_WANT_HOTKEY) != 0 && (current->options & W_DISABLED) == 0)
+        if ((current->options & WOP_WANT_HOTKEY) != 0 && (current->options & WOP_DISABLED) == 0)
             handled = send_message (current, NULL, MSG_HOTKEY, d_key, NULL);
 
         if (handled == MSG_NOT_HANDLED)
@@ -569,7 +569,7 @@ frontend_dlg_run (WDialog * h)
             if (idle_hook)
                 execute_hooks (idle_hook);
 
-            while ((WIDGET (h)->options & W_WANT_IDLE) != 0 && is_idle ())
+            while ((WIDGET (h)->options & WOP_WANT_IDLE) != 0 && is_idle ())
                 send_message (h, NULL, MSG_IDLE, 0, NULL);
 
             /* Allow terminating the dialog from the idle handler */
@@ -790,7 +790,7 @@ dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
         return MSG_NOT_HANDLED;
 
     case MSG_IDLE:
-        dlg_broadcast_msg_to (h, MSG_IDLE, FALSE, W_WANT_IDLE);
+        dlg_broadcast_msg_to (h, MSG_IDLE, FALSE, WOP_WANT_IDLE);
         return MSG_HANDLED;
 
     case MSG_RESIZE:
@@ -1048,7 +1048,7 @@ dlg_focus (WDialog * h)
     {
         Widget *current = WIDGET (h->current->data);
 
-        if (((current->options & W_DISABLED) == 0)
+        if (((current->options & WOP_DISABLED) == 0)
             && (send_message (current, NULL, MSG_FOCUS, 0, NULL) == MSG_HANDLED))
         {
             send_message (h, current, MSG_FOCUS, 0, NULL);
@@ -1166,7 +1166,7 @@ update_cursor (WDialog * h)
 
         w = WIDGET (p->data);
 
-        if (((w->options & W_DISABLED) == 0) && ((w->options & W_WANT_CURSOR) != 0))
+        if (((w->options & WOP_DISABLED) == 0) && ((w->options & WOP_WANT_CURSOR) != 0))
             send_message (w, NULL, MSG_CURSOR, 0, NULL);
         else
             do
@@ -1177,7 +1177,7 @@ update_cursor (WDialog * h)
 
                 w = WIDGET (p->data);
 
-                if (((w->options & W_DISABLED) == 0) && ((w->options & W_WANT_CURSOR) != 0))
+                if (((w->options & WOP_DISABLED) == 0) && ((w->options & WOP_WANT_CURSOR) != 0))
                     if (send_message (w, NULL, MSG_CURSOR, 0, NULL) == MSG_HANDLED)
                         break;
             }

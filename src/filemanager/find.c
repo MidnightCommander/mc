@@ -955,7 +955,7 @@ check_find_events (WDialog * h)
             /* dialog terminated */
             return FIND_ABORT;
         }
-        if ((WIDGET (h)->options & W_WANT_IDLE) == 0)
+        if ((WIDGET (h)->options & WOP_WANT_IDLE) == 0)
         {
             /* searching suspended */
             return FIND_SUSPEND;
