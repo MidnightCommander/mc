@@ -138,10 +138,10 @@ static gboolean ctl_x_map_enabled = FALSE;
 static void
 stop_dialogs (void)
 {
-    midnight_dlg->state = DLG_CLOSED;
+    dlg_stop (midnight_dlg);
 
     if ((top_dlg != NULL) && (top_dlg->data != NULL))
-        DIALOG (top_dlg->data)->state = DLG_CLOSED;
+        dlg_stop (DIALOG (top_dlg->data));
 }
 
 /* --------------------------------------------------------------------------------------------- */

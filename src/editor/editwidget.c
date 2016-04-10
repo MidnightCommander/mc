@@ -641,7 +641,8 @@ edit_quit (WDialog * h)
     GList *l;
     WEdit *e = NULL;
 
-    h->state = DLG_ACTIVE;      /* don't stop the dialog before final decision */
+    /* don't stop the dialog before final decision */
+    widget_set_state (WIDGET (h), WST_ACTIVE, TRUE);
 
     for (l = h->widgets; l != NULL; l = g_list_next (l))
         if (edit_widget_is_editor (CONST_WIDGET (l->data)))
@@ -665,7 +666,7 @@ edit_quit (WDialog * h)
 
     /* no editors in dialog at all or no any file required to be saved */
     if (e == NULL || l == NULL)
-        h->state = DLG_CLOSED;
+        dlg_stop (h);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1249,7 +1250,7 @@ edit_files (const GList * files)
     if (ok)
         dlg_run (edit_dlg);
 
-    if (!ok || edit_dlg->state == DLG_CLOSED)
+    if (!ok || widget_get_state (WIDGET (edit_dlg), WST_CLOSED))
         dlg_destroy (edit_dlg);
 
     return ok;

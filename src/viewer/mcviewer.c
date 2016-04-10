@@ -249,9 +249,9 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
     if (succeeded)
         dlg_run (view_dlg);
     else
-        view_dlg->state = DLG_CLOSED;
+        dlg_stop (view_dlg);
 
-    if (view_dlg->state == DLG_CLOSED)
+    if (widget_get_state (WIDGET (view_dlg), WST_CLOSED))
         dlg_destroy (view_dlg);
 
     return succeeded;

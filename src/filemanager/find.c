@@ -498,7 +498,8 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         if (!(file_pattern_cbox->state & C_BOOL)
             && (in_name->buffer[0] != '\0') && !find_check_regexp (in_name->buffer))
         {
-            h->state = DLG_ACTIVE;      /* Don't stop the dialog */
+            /* Don't stop the dialog */
+            widget_set_state (WIDGET (h), WST_ACTIVE, TRUE);
             message (D_ERROR, MSG_ERROR, _("Malformed regular expression"));
             dlg_select_widget (in_name);
             return MSG_HANDLED;
@@ -508,7 +509,8 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         if ((content_regexp_cbox->state & C_BOOL) && (in_with->buffer[0] != '\0')
             && !find_check_regexp (in_with->buffer))
         {
-            h->state = DLG_ACTIVE;      /* Don't stop the dialog */
+            /* Don't stop the dialog */
+            widget_set_state (WIDGET (h), WST_ACTIVE, TRUE);
             message (D_ERROR, MSG_ERROR, _("Malformed regular expression"));
             dlg_select_widget (in_with);
             return MSG_HANDLED;

@@ -1260,7 +1260,7 @@ input_update (WInput * in, gboolean clear_first)
         return;
 
     /* don't draw widget not put into dialog */
-    if (w->owner == NULL || w->owner->state != DLG_ACTIVE)
+    if (w->owner == NULL || !widget_get_state (WIDGET (w->owner), WST_ACTIVE))
         return;
 
     if (should_show_history_button (in))

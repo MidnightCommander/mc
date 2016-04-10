@@ -72,7 +72,7 @@ dialog_switch_suspend (void *data, void *user_data)
     (void) user_data;
 
     if (data != mc_current->data)
-        DIALOG (data)->state = DLG_SUSPENDED;
+        widget_set_state (WIDGET (data), WST_SUSPENDED, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -95,7 +95,7 @@ dialog_switch_goto (GList * dlg)
         else
         {
             /* switch from editor, viewer, etc to another dialog */
-            old->state = DLG_SUSPENDED;
+            widget_set_state (WIDGET (old), WST_SUSPENDED, TRUE);
 
             if (DIALOG (dlg->data) != midnight_dlg)
                 /* switch to another editor, viewer, etc */
@@ -104,7 +104,7 @@ dialog_switch_goto (GList * dlg)
             else
             {
                 /* switch to panels */
-                midnight_dlg->state = DLG_ACTIVE;
+                widget_set_state (WIDGET (midnight_dlg), WST_ACTIVE, TRUE);
                 do_refresh ();
             }
         }
@@ -119,7 +119,8 @@ dlg_resize_cb (void *data, void *user_data)
     WDialog *d = data;
 
     (void) user_data;
-    if (d->state == DLG_ACTIVE)
+
+    if (widget_get_state (WIDGET (d), WST_ACTIVE))
         send_message (d, NULL, MSG_RESIZE, 0, NULL);
     else
         d->winch_pending = TRUE;
@@ -170,7 +171,7 @@ dialog_switch_remove (WDialog * h)
 
     /* resume forced the current screen */
     if (mc_current != NULL)
-        DIALOG (mc_current->data)->state = DLG_ACTIVE;
+        widget_set_state (WIDGET (mc_current->data), WST_ACTIVE, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -273,11 +274,12 @@ dialog_switch_process_pending (void)
     while (dialog_switch_pending)
     {
         WDialog *h = DIALOG (mc_current->data);
+        Widget *wh = WIDGET (h);
 
         dialog_switch_pending = FALSE;
-        h->state = DLG_SUSPENDED;
+        widget_set_state (wh, WST_SUSPENDED, TRUE);
         ret = dlg_run (h);
-        if (h->state == DLG_CLOSED)
+        if (widget_get_state (wh, WST_CLOSED))
         {
             dlg_destroy (h);
 

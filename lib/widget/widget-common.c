@@ -226,6 +226,19 @@ widget_set_state (Widget * w, widget_state_t state, gboolean enable)
     else
         w->state &= ~state;
 
+    if (enable)
+    {
+        /* exclusive bits */
+        if ((state & WST_CONSTRUCT) != 0)
+            w->state &= ~(WST_ACTIVE | WST_SUSPENDED | WST_CLOSED);
+        else if ((state & WST_ACTIVE) != 0)
+            w->state &= ~(WST_CONSTRUCT | WST_SUSPENDED | WST_CLOSED);
+        else if ((state & WST_SUSPENDED) != 0)
+            w->state &= ~(WST_CONSTRUCT | WST_ACTIVE | WST_CLOSED);
+        else if ((state & WST_CLOSED) != 0)
+            w->state &= ~(WST_CONSTRUCT | WST_ACTIVE | WST_SUSPENDED);
+    }
+
     if (w->owner == NULL)
         return FALSE;
 
@@ -317,7 +330,7 @@ widget_redraw (Widget * w)
     {
         WDialog *h = w->owner;
 
-        if (h != NULL && h->state == DLG_ACTIVE)
+        if (h != NULL && widget_get_state (WIDGET (h), WST_ACTIVE))
             w->callback (w, NULL, MSG_DRAW, 0, NULL);
     }
 }

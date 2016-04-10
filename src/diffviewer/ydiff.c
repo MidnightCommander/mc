@@ -1,4 +1,6 @@
 /*
+   File difference viewer
+
    Copyright (C) 2007-2016
    Free Software Foundation, Inc.
 
@@ -3388,7 +3390,7 @@ dview_adjust_size (WDialog * h)
 static cb_ret_t
 dview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WDiff *dview = (WDiff *) data;
+    WDiff *dview;
     WDialog *h = DIALOG (w);
 
     switch (msg)
@@ -3406,9 +3408,10 @@ dview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, 
 
     case MSG_VALIDATE:
         dview = (WDiff *) find_widget_type (h, dview_callback);
-        h->state = DLG_ACTIVE;  /* don't stop the dialog before final decision */
+        /* don't stop the dialog before final decision */
+        widget_set_state (w, WST_ACTIVE, TRUE);
         if (dview_ok_to_exit (dview))
-            h->state = DLG_CLOSED;
+            dlg_stop (h);
         return MSG_HANDLED;
 
     default:
@@ -3475,7 +3478,7 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
     if (error == 0)
         dlg_run (dview_dlg);
 
-    if ((error != 0) || (dview_dlg->state == DLG_CLOSED))
+    if (error != 0 || widget_get_state (WIDGET (dview_dlg), WST_CLOSED))
         dlg_destroy (dview_dlg);
 
     return error == 0 ? 1 : 0;

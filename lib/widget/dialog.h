@@ -39,15 +39,6 @@ typedef enum
     DLG_WANT_TAB = (1 << 3)     /* Should the tab key be sent to the dialog? */
 } dlg_flags_t;
 
-/* Dialog state */
-typedef enum
-{
-    DLG_CONSTRUCT = 0,          /* Dialog has been constructed but not run yet */
-    DLG_ACTIVE = 1,             /* Dialog is visible and active */
-    DLG_SUSPENDED = 2,          /* Dialog is suspended */
-    DLG_CLOSED = 3              /* Dialog is closed */
-} dlg_state_t;
-
 /* Dialog color constants */
 typedef enum
 {
@@ -90,7 +81,6 @@ struct WDialog
     int ret_value;              /* Result of dlg_run() */
 
     /* Internal flags */
-    dlg_state_t state;
     gboolean fullscreen;        /* Parents dialogs don't need refresh */
     gboolean winch_pending;     /* SIGWINCH signal has been got. Resize dialog after rise */
     int mouse_status;           /* For the autorepeat status of the mouse */

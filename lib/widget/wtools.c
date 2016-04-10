@@ -648,7 +648,7 @@ status_msg_common_update (status_msg_t * sm)
     if (sm->dlg == NULL)
         return B_ENTER;
 
-    if (sm->dlg->state != DLG_ACTIVE)
+    if (widget_get_state (WIDGET (sm->dlg), WST_CONSTRUCT))
     {
         /* dialog is not shown yet */
 

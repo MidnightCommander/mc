@@ -75,7 +75,12 @@ typedef enum
 {
     WST_DEFAULT = (0 << 0),
     WST_DISABLED = (1 << 0),    /* Widget cannot be selected */
-    WST_IDLE = (1 << 1)         /* @FIXME@: we want more correct name here */
+    WST_IDLE = (1 << 1),        /* @FIXME@: we want more correct name here */
+
+    WST_CONSTRUCT = (1 << 15),  /* Dialog has been constructed but not run yet */
+    WST_ACTIVE = (1 << 16),     /* Dialog is visible and active */
+    WST_SUSPENDED = (1 << 17),  /* Dialog is suspended */
+    WST_CLOSED = (1 << 18)      /* Dialog is closed */
 } widget_state_t;
 
 /* Flags for widget repositioning on dialog resize */
