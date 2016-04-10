@@ -186,5 +186,20 @@ send_message (void *w, void *sender, widget_msg_t msg, int parm, void *data)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+  * Check whether one or several option flags are set or not.
+  * @param w widget
+  * @param options widget option flags
+  *
+  * @return TRUE if all requested option flags are set, FALSE otherwise.
+  */
+
+static inline gboolean
+widget_get_options (const Widget * w, widget_options_t options)
+{
+    return ((w->options & options) == options);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 #endif /* MC__WIDGET_INTERNAL_H */

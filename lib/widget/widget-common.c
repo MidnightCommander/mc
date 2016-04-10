@@ -241,7 +241,7 @@ widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey)
     WDialog *h = w->owner;
     int color;
 
-    if ((w->options & WOP_DISABLED) != 0)
+    if (widget_get_options (w, WOP_DISABLED))
         color = DISABLED_COLOR;
     else if (hotkey)
     {

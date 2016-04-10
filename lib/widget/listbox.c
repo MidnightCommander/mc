@@ -132,21 +132,23 @@ listbox_draw (WListbox * l, gboolean focused)
 {
     Widget *w = WIDGET (l);
     const WDialog *h = w->owner;
-    const gboolean disabled = (w->options & WOP_DISABLED) != 0;
-    const int normalc = disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL];
-    /* *INDENT-OFF* */
-    int selc = disabled
-        ? DISABLED_COLOR
-        : focused
-            ? h->color[DLG_COLOR_HOT_FOCUS] 
-            : h->color[DLG_COLOR_FOCUS];
-    /* *INDENT-ON* */
-
+    gboolean disabled;
+    int normalc, selc;
     int length = 0;
     GList *le = NULL;
     int pos;
     int i;
     int sel_line = -1;
+
+    disabled = widget_get_options (w, WOP_DISABLED);
+    normalc = disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL];
+    /* *INDENT-OFF* */
+    selc = disabled
+        ? DISABLED_COLOR
+        : focused
+            ? h->color[DLG_COLOR_HOT_FOCUS] 
+            : h->color[DLG_COLOR_FOCUS];
+    /* *INDENT-ON* */
 
     if (l->list != NULL)
     {

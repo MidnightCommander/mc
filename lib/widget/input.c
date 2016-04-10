@@ -103,7 +103,7 @@ static void
 draw_history_button (WInput * in)
 {
     char c;
-    gboolean disabled = (WIDGET (in)->options & WOP_DISABLED) != 0;
+    gboolean disabled;
 
     if (g_list_next (in->history.current) == NULL)
         c = '^';
@@ -113,6 +113,7 @@ draw_history_button (WInput * in)
         c = '|';
 
     widget_move (in, 0, WIDGET (in)->cols - HISTORY_BUTTON_WIDTH);
+    disabled = widget_get_options (WIDGET (in), WOP_DISABLED);
     tty_setcolor (disabled ? DISABLED_COLOR : in->color[WINPUTC_HISTORY]);
 
 #ifdef LARGE_HISTORY_BUTTON
@@ -1295,7 +1296,7 @@ input_update (WInput * in, gboolean clear_first)
     if (has_history != 0)
         draw_history_button (in);
 
-    if ((w->options & WOP_DISABLED) != 0)
+    if (widget_get_options (w, WOP_DISABLED))
         tty_setcolor (DISABLED_COLOR);
     else if (in->first)
         tty_setcolor (in->color[WINPUTC_UNCHANGED]);
