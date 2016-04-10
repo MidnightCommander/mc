@@ -144,23 +144,30 @@ show_version (void)
 
     printf (_ ("GNU Midnight Commander %s\n"), mc_global.mc_version);
 
-    printf (_ ("Built with GLib %d.%d.%d\n"), GLIB_MAJOR_VERSION, GLIB_MINOR_VERSION,
-            GLIB_MICRO_VERSION);
+    printf (_ ("Built with GLib %d.%d.%d (using GLib %u.%u.%u)\n"), GLIB_MAJOR_VERSION,
+            GLIB_MINOR_VERSION, GLIB_MICRO_VERSION, glib_major_version, glib_minor_version,
+            glib_micro_version);
 
 #ifdef HAVE_SLANG
-    printf (_ ("Built with S-Lang %s with terminfo database\n"), SLANG_VERSION_STRING);
-#elif defined(USE_NCURSES)
-#    ifdef NCURSES_VERSION
-    printf (_ ("Built with ncurses %s\n"), NCURSES_VERSION);
-#    else
-    puts (_ ("Built with ncurses (unknown version)"));
+    printf (_ ("Built with S-Lang"));
+#    ifdef SLANG_VERSION_STRING
+    printf (" %s", SLANG_VERSION_STRING);
+#    elif defined SLANG_VERSION
+    printf (" %d", SLANG_VERSION);
+#    endif /* SLANG_VERSION_STRING || SLANG_VERSION */
+    printf (_ (" and terminfo database (using S-Lang %s)\n"), SLang_Version_String);
+#elif defined HAVE_NCURSES
+    printf (_ ("Built with %s"), NCURSES_LIB_DISPLAYNAME);
+#    ifdef NCURSES_VERSION_MAJOR
+    printf (" %d", NCURSES_VERSION_MAJOR);
+#        ifdef NCURSES_VERSION_MINOR
+    printf (".%d", NCURSES_VERSION_MINOR);
+#        endif
+#    endif /* NCURSES_VERSION_MAJOR */
+#    ifdef NCURSES_VERSION_PATCH
+    printf (".%d", NCURSES_VERSION_PATCH);
 #    endif
-#elif defined(USE_NCURSESW)
-#    ifdef NCURSES_VERSION
-    printf (_ ("Built with ncursesw %s\n"), NCURSES_VERSION);
-#    else
-    puts (_ ("Built with ncursesw (unknown version)"));
-#    endif
+    printf (_ (" (using %s)\n"), curses_version ());
 #else
 #    error "Cannot compile mc without S-Lang or ncurses"
 #endif
