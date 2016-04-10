@@ -43,10 +43,6 @@
 #include "lib/strutil.h"  // str_term_form
 #include "lib/util.h"
 
-#ifndef WANT_TERM_H
-#    define WANT_TERM_H
-#endif
-
 #include "tty-internal.h"  // mc_tty_normalize_from_utf8()
 #include "tty.h"
 #include "color.h"  // tty_setcolor
@@ -56,12 +52,12 @@
 #include "win.h"
 
 /* include at last !!! */
-#ifdef WANT_TERM_H
-#    ifdef HAVE_NCURSES_TERM_H
-#        include <ncurses/term.h>
-#    else
-#        include <term.h>
-#    endif
+#ifdef HAVE_NCURSESW_TERM_H
+#    include <ncursesw/term.h>
+#elif defined HAVE_NCURSES_TERM_H
+#    include <ncurses/term.h>
+#else
+#    include <term.h>
 #endif
 
 /*** global variables ****************************************************************************/
