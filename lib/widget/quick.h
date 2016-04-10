@@ -269,6 +269,7 @@ struct quick_widget_t
     quick_t widget_type;
 
     widget_options_t options;
+    widget_state_t state;
     widget_pos_flags_t pos_flags;
     unsigned long *id;
 

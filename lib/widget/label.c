@@ -81,7 +81,7 @@ label_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             if (l->text == NULL)
                 return MSG_HANDLED;
 
-            disabled = widget_get_options (w, WOP_DISABLED);
+            disabled = widget_get_state (w, WST_DISABLED);
 
             if (l->transparent)
                 tty_setcolor (disabled ? DISABLED_COLOR : DEFAULT_COLOR);

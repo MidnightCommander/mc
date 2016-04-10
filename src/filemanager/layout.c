@@ -538,21 +538,23 @@ init_layout (void)
 
     /* "Console output" groupbox */
     {
-        const int disabled = mc_global.tty.console_flag != '\0' ? 0 : WOP_DISABLED;
+        widget_state_t disabled;
         Widget *w;
 
+        disabled = mc_global.tty.console_flag != '\0' ? 0 : WST_DISABLED;
+
         w = WIDGET (groupbox_new (8, 3, 3, l1, title2));
-        w->options |= disabled;
+        w->state |= disabled;
         add_widget (layout_dlg, w);
 
         w = WIDGET (button_new (9, output_lines_label_len + 5, B_PLUS,
                                 NARROW_BUTTON, "&+", bplus_cback));
-        w->options |= disabled;
+        w->state |= disabled;
         add_widget (layout_dlg, w);
 
         w = WIDGET (button_new (9, output_lines_label_len + 5 + 5, B_MINUS,
                                 NARROW_BUTTON, "&-", bminus_cback));
-        w->options |= disabled;
+        w->state |= disabled;
         add_widget (layout_dlg, w);
     }
 

@@ -140,7 +140,7 @@ listbox_draw (WListbox * l, gboolean focused)
     int i;
     int sel_line = -1;
 
-    disabled = widget_get_options (w, WOP_DISABLED);
+    disabled = widget_get_state (w, WST_DISABLED);
     normalc = disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL];
     /* *INDENT-OFF* */
     selc = disabled

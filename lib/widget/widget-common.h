@@ -19,7 +19,7 @@
 #define widget_want_cursor(w,i) widget_set_options(w, WOP_WANT_CURSOR, i)
 #define widget_want_hotkey(w,i) widget_set_options(w, WOP_WANT_HOTKEY, i)
 #define widget_want_idle(w,i) widget_set_options(w, WOP_WANT_IDLE, i)
-#define widget_disable(w,i) widget_set_options(w, WOP_DISABLED, i)
+#define widget_disable(w,i) widget_set_state(w, WST_DISABLED, i)
 
 /*** enums ***************************************************************************************/
 
@@ -29,6 +29,8 @@ typedef enum
     MSG_INIT = 0,               /* Initialize widget */
     MSG_FOCUS,                  /* Draw widget in focused state or widget has got focus */
     MSG_UNFOCUS,                /* Draw widget in unfocused state or widget has been unfocused */
+    MSG_ENABLE,                 /* Change state to enabled */
+    MSG_DISABLE,                /* Change state to disabled */
     MSG_DRAW,                   /* Draw widget on screen */
     MSG_KEY,                    /* Sent to widgets on key press */
     MSG_HOTKEY,                 /* Sent to widget to catch preprocess key */
@@ -66,14 +68,14 @@ typedef enum
     WOP_WANT_HOTKEY = (1 << 1),
     WOP_WANT_CURSOR = (1 << 2),
     WOP_WANT_IDLE = (1 << 3),
-    WOP_IS_INPUT = (1 << 4),
-    WOP_DISABLED = (1 << 5)     /* Widget cannot be selected */
+    WOP_IS_INPUT = (1 << 4)
 } widget_options_t;
 
 /* Widget state */
 typedef enum
 {
     WST_DEFAULT = (0 << 0),
+    WST_DISABLED = (1 << 0)     /* Widget cannot be selected */
 } widget_state_t;
 
 /* Flags for widget repositioning on dialog resize */
@@ -109,12 +111,12 @@ struct Widget
 {
     int x, y;
     int cols, lines;
-    widget_options_t options;
     widget_pos_flags_t pos_flags;       /* repositioning flags */
+    widget_options_t options;
+    widget_state_t state;
     unsigned int id;            /* Number of the widget, starting with 0 */
     widget_cb_fn callback;
     widget_mouse_cb_fn mouse_callback;
-    void (*set_options) (Widget * w, widget_options_t options, gboolean enable);
     WDialog *owner;
     /* Mouse-related fields. */
     struct
@@ -159,8 +161,8 @@ void widget_init (Widget * w, int y, int x, int lines, int cols,
 /* Default callback for widgets */
 cb_ret_t widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
                                   void *data);
-void widget_default_set_options (Widget * w, widget_options_t options, gboolean enable);
 void widget_set_options (Widget * w, widget_options_t options, gboolean enable);
+gboolean widget_set_state (Widget * w, widget_state_t state, gboolean enable);
 void widget_set_size (Widget * widget, int y, int x, int lines, int cols);
 /* select color for widget in dependance of state */
 void widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey);

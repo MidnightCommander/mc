@@ -538,15 +538,15 @@ configure_box (void)
         g_snprintf (time_out, sizeof (time_out), "%d", old_esc_mode_timeout);
 
 #ifndef USE_INTERNAL_EDIT
-        quick_widgets[17].options = WOP_DISABLED;
+        quick_widgets[17].state = WST_DISABLED;
 #endif
 
         if (!old_esc_mode)
-            quick_widgets[10].options = quick_widgets[11].options = WOP_DISABLED;
+            quick_widgets[10].state = quick_widgets[11].state = WST_DISABLED;
 
 #ifndef HAVE_POSIX_FALLOCATE
         mc_global.vfs.preallocate_space = FALSE;
-        quick_widgets[7].options = WOP_DISABLED;
+        quick_widgets[7].state = WST_DISABLED;
 #endif
 
         if (quick_dialog (&qdlg) == B_ENTER)
@@ -761,13 +761,13 @@ panel_listing_box (WPanel * panel, int num, char **userp, char **minip, int *use
         g_snprintf (panel_brief_cols_in, sizeof (panel_brief_cols_in), "%d", panel->brief_cols);
 
         if ((int) panel->list_type != panel_listing_brief_idx)
-            quick_widgets[4].options = WOP_DISABLED;
+            quick_widgets[4].state = WST_DISABLED;
 
         if ((int) panel->list_type != panel_listing_user_idx)
-            quick_widgets[6].options = WOP_DISABLED;
+            quick_widgets[6].state = WST_DISABLED;
 
         if (!mini_user_status)
-            quick_widgets[9].options = WOP_DISABLED;
+            quick_widgets[9].state = WST_DISABLED;
 
         if (quick_dialog (&qdlg) == B_CANCEL)
             result = -1;
@@ -1109,7 +1109,7 @@ configure_vfs (void)
 
 #ifdef ENABLE_VFS_FTP
         if (!ftpfs_always_use_proxy)
-            quick_widgets[5].options = WOP_DISABLED;
+            quick_widgets[5].state = WST_DISABLED;
 #endif
 
         if (quick_dialog (&qdlg) != B_CANCEL)
