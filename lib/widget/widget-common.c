@@ -147,7 +147,7 @@ widget_init (Widget * w, int y, int x, int lines, int cols,
     w->pos_flags = WPOS_KEEP_DEFAULT;
     w->callback = callback;
     w->mouse_callback = mouse_callback;
-    w->set_options = widget_default_set_options_callback;
+    w->set_options = widget_default_set_options;
     w->owner = NULL;
     w->mouse.forced_capture = FALSE;
     w->mouse.capture = FALSE;
@@ -195,7 +195,7 @@ widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
  * @param enable  TRUE if specified options should be added, FALSE if options should be removed
  */
 void
-widget_default_set_options_callback (Widget * w, widget_options_t options, gboolean enable)
+widget_default_set_options (Widget * w, widget_options_t options, gboolean enable)
 {
     if (enable)
         w->options |= options;
