@@ -70,6 +70,12 @@ typedef enum
     WOP_DISABLED = (1 << 5)     /* Widget cannot be selected */
 } widget_options_t;
 
+/* Widget state */
+typedef enum
+{
+    WST_DEFAULT = (0 << 0),
+} widget_state_t;
+
 /* Flags for widget repositioning on dialog resize */
 typedef enum
 {
@@ -198,6 +204,22 @@ static inline gboolean
 widget_get_options (const Widget * w, widget_options_t options)
 {
     return ((w->options & options) == options);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+  * Check whether one or several state flags are set or not.
+  * @param w widget
+  * @param state widget state flags
+  *
+  * @return TRUE if all requested state flags are set, FALSE otherwise.
+  */
+
+static inline gboolean
+widget_get_state (const Widget * w, widget_state_t state)
+{
+    return ((w->state & state) == state);
 }
 
 /* --------------------------------------------------------------------------------------------- */
