@@ -18,7 +18,7 @@
 /* Sets/clear the specified flag in the options field */
 #define widget_want_cursor(w,i) widget_set_options(w, WOP_WANT_CURSOR, i)
 #define widget_want_hotkey(w,i) widget_set_options(w, WOP_WANT_HOTKEY, i)
-#define widget_want_idle(w,i) widget_set_options(w, WOP_WANT_IDLE, i)
+#define widget_idle(w,i) widget_set_state(w, WST_IDLE, i)
 #define widget_disable(w,i) widget_set_state(w, WST_DISABLED, i)
 
 /*** enums ***************************************************************************************/
@@ -67,15 +67,15 @@ typedef enum
     WOP_DEFAULT = (0 << 0),
     WOP_WANT_HOTKEY = (1 << 1),
     WOP_WANT_CURSOR = (1 << 2),
-    WOP_WANT_IDLE = (1 << 3),
-    WOP_IS_INPUT = (1 << 4)
+    WOP_IS_INPUT = (1 << 3)
 } widget_options_t;
 
 /* Widget state */
 typedef enum
 {
     WST_DEFAULT = (0 << 0),
-    WST_DISABLED = (1 << 0)     /* Widget cannot be selected */
+    WST_DISABLED = (1 << 0),    /* Widget cannot be selected */
+    WST_IDLE = (1 << 1)         /* @FIXME@: we want more correct name here */
 } widget_state_t;
 
 /* Flags for widget repositioning on dialog resize */

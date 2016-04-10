@@ -119,7 +119,7 @@ dlg_widget_prev (WDialog * h, GList * l)
  */
 
 static void
-dlg_broadcast_msg_to (WDialog * h, widget_msg_t msg, gboolean reverse, int flags)
+dlg_broadcast_msg_to (WDialog * h, widget_msg_t msg, gboolean reverse, widget_options_t flags)
 {
     GList *p, *first;
 
@@ -570,7 +570,7 @@ frontend_dlg_run (WDialog * h)
             if (idle_hook)
                 execute_hooks (idle_hook);
 
-            while (widget_get_options (WIDGET (h), WOP_WANT_IDLE) && is_idle ())
+            while (widget_get_state (WIDGET (h), WST_IDLE) && is_idle ())
                 send_message (h, NULL, MSG_IDLE, 0, NULL);
 
             /* Allow terminating the dialog from the idle handler */
@@ -791,7 +791,8 @@ dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
         return MSG_NOT_HANDLED;
 
     case MSG_IDLE:
-        dlg_broadcast_msg_to (h, MSG_IDLE, FALSE, WOP_WANT_IDLE);
+        /* we don't want endless loop */
+        widget_idle (w, FALSE);
         return MSG_HANDLED;
 
     case MSG_RESIZE:

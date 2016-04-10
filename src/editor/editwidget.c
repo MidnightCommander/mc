@@ -835,7 +835,7 @@ edit_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
              * So let's trigger an IDLE signal.
              */
             if (!is_idle ())
-                widget_want_idle (w, TRUE);
+                widget_idle (w, TRUE);
             return ret;
         }
 
@@ -852,7 +852,7 @@ edit_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
         return MSG_HANDLED;
 
     case MSG_IDLE:
-        widget_want_idle (w, FALSE);
+        widget_idle (w, FALSE);
         return send_message (h->current->data, NULL, MSG_IDLE, 0, NULL);
 
     default:

@@ -1421,7 +1421,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 
     case MSG_IDLE:
         /* We only need the first idle event to show user menu after start */
-        widget_want_idle (w, FALSE);
+        widget_idle (w, FALSE);
 
         if (boot_current_is_left)
             dlg_select_widget (get_panel_widget (0));
@@ -1769,7 +1769,7 @@ do_nc (void)
     else
     {
         /* We only need the first idle event to show user menu after start */
-        widget_want_idle (WIDGET (midnight_dlg), TRUE);
+        widget_idle (WIDGET (midnight_dlg), TRUE);
 
         setup_mc ();
         mc_filehighlight = mc_fhl_new (TRUE);
