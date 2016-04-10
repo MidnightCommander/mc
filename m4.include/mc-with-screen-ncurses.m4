@@ -1,214 +1,125 @@
-dnl check for ncurses in user supplied path
-AC_DEFUN([mc_CHECK_NCURSES_BY_PATH], [
-
-    ac_ncurses_inc_path=[$1]
-    ac_ncurses_lib_path=[$2]
-
-    if test x"$ac_ncurses_inc_path" != x; then
-        ac_ncurses_inc_path="-I"$ac_ncurses_inc_path
-    fi
-
-    if test x"$ac_ncurses_lib_path" != x; then
-        ac_ncurses_lib_path="-L"$ac_ncurses_lib_path
-    fi
-
-    saved_CPPFLAGS="$CPPFLAGS"
-    saved_LDFLAGS="$LDFLAGS"
-    CPPFLAGS="$CPPFLAGS $ac_ncurses_inc_path"
-    LDFLAGS="$LDFLAGS $ac_ncurses_lib_path"
-
-    dnl Check for the headers
-    dnl Both headers should be in the same directory
-    dnl AIX term.h is unusable for mc
-    AC_MSG_CHECKING([for ncurses/ncurses.h and ncurses/term.h])
-    AC_PREPROC_IFELSE(
-        [
-            AC_LANG_PROGRAM([[#include <ncurses/ncurses.h>
-                              #include <ncurses/term.h>
-                            ]],[[return 0;]])
-        ],
-        [
-            AC_MSG_RESULT(yes)
-            if test x"$ac_ncurses_inc_path" = x; then
-                ac_ncurses_inc_path="-I/usr/include"
-            fi
-            if test x"$ac_ncurses_lib_path" = x; then
-              ac_ncurses_lib_path="-L/usr/lib"
-            fi
-            found_ncurses=yes
-            AC_DEFINE(HAVE_NCURSES_NCURSES_H, 1,
-                      [Define to 1 if you have the <ncurses/ncurses.h> header file.])
-            AC_DEFINE(HAVE_NCURSES_TERM_H, 1,
-                      [Define to 1 if you have the <ncurses/term.h> header file.])
-        ],
-        [
-            AC_MSG_RESULT(no)
-            found_ncurses=no
-            error_msg_ncurses="ncurses header not found"
-        ],
-    )
-
-    if test x"$found_ncurses" = x"yes"; then
-        screen_type=ncurses
-        screen_msg="NCurses"
-
-        AC_DEFINE(HAVE_NCURSES, 1,
-                  [Define to use ncurses library for screen management])
-
-        MCLIBS="$MCLIBS $ac_ncurses_lib_path"
-    else
-        CPPFLAGS="$saved_CPPFLAGS"
-        LDFLAGS="$saved_LDPFLAGS"
-        AC_MSG_ERROR([$error_msg_ncurses])
-    fi
-])
-
 dnl
-dnl Use the ncurses library.  It can only be requested explicitly,
+dnl Use the NCurses library.  It can only be requested explicitly,
 dnl so just fail if anything goes wrong.
 dnl
-dnl If ncurses exports the ESCDELAY variable it should be set to 0
-dnl or you'll have to press Esc three times to dismiss a dialog box.
+dnl Search order:
+dnl 1) system path   (adjust by --with-ncurses-libdir=<DIR>, --with-ncurses-includedir=<DIR>)
+dnl 2) pkg-config    (adjust by NCURSES_LIBS, NCURSES_CFLAGS)
 dnl
+dnl Preference:
+dnl ncursesw > ncurses
+dnl
+dnl Rules:
+dnl LIBS can be prepended
+dnl CFLAGS can be appended (compiler optimizations and directives look at the last options)
+dnl CPPFLAGS can be prepended (header search paths options look at the first path)
+dnl
+
 AC_DEFUN([mc_WITH_NCURSES], [
-    dnl has_colors() is specific to ncurses, it's not in the old curses
     save_LIBS="$LIBS"
-    ncursesw_found=
+    save_CFLAGS="$CFLAGS"
+    save_CPPFLAGS="$CPPFLAGS"
+    save_MCLIBS="$MCLIBS"
 
-    dnl get the user supplied include path
-    AC_ARG_WITH([ncurses-includes],
-        AS_HELP_STRING([--with-ncurses-includes=@<:@DIR@:>@],
-            [set path to ncurses includes @<:@default=/usr/include@:>@; make sense only if --with-screen=ncurses; for /usr/local/include/ncurses specify /usr/local/include]
-        ),
-        [ac_ncurses_inc_path="$withval"],
-        [ac_ncurses_inc_path=""]
-    )
+    AC_MSG_CHECKING([for specific NCurses libdir])
+    AC_ARG_WITH([ncurses-libdir],
+        [AS_HELP_STRING([--with-ncurses-libdir=@<:@DIR@:>@], [Path to NCurses library files])],
+        [AS_IF([test ! -d "$withval"], [AC_MSG_ERROR([NCurses libdir path "$withval" not found])])
+        LIBS="-L$withval $LIBS"
+        LDFLAGS="-L$withval $LIBS"
+        MCLIBS="-L$withval $MCLIBS"],
+        [with_ncurses_libdir=no])
+    AC_MSG_RESULT([$with_ncurses_libdir])
 
-    dnl get the user supplied lib path
-    AC_ARG_WITH([ncurses-libs],
-        AS_HELP_STRING([--with-ncurses-libs=@<:@DIR@:>@],
-            [set path to ncurses library @<:@default=/usr/lib@:>@; make sense only if --with-screen=ncurses]
-        ),
-        [ac_ncurses_lib_path="$withval"],
-        [ac_ncurses_lib_path=""]
-    )
+    AC_MSG_CHECKING([for specific NCurses includedir])
+    AC_ARG_WITH([ncurses-includedir],
+        [AS_HELP_STRING([--with-ncurses-includedir=@<:@DIR@:>@], [Path to NCurses header files])],
+        [AS_IF([test ! -d "$withval"], [AC_MSG_ERROR([NCurses includedir path "$withval" not found])])
+        CFLAGS="$save_CFLAGS -I$withval"],
+        [with_ncurses_includedir=no])
+    AC_MSG_RESULT([$with_ncurses_includedir])
 
-    dnl we need at least the inc path, the lib may be in a std location
-    if test x"$ac_ncurses_inc_path" != x; then
-        dnl check the user supplied location
-        mc_CHECK_NCURSES_BY_PATH([$ac_ncurses_inc_path],[$ac_ncurses_lib_path])
+    dnl
+    dnl Check ncurses library
+    dnl
+    dnl has_colors is specific to ncurses, it's not in the old curses
+    dnl search in default linker path and LDFLAGS -L options
+    AC_SEARCH_LIBS([has_colors], [ncursesw ncurses],
+        [AS_CASE(["$ac_cv_search_has_colors"],
+            ["-lncursesw"], [screen_msg="NCursesw"],
+            ["-lncurses"], [screen_msg="NCurses"],
+            ["none required"], [screen_msg="NCurses static"], dnl or system native? Who knows
+            [AC_MSG_ERROR([Unknown ac_cv_search_has_colors option "$ac_cv_search_has_colors"])])
+        ],
+        dnl 2. Library not found by system path, try pkg-config
+        [PKG_CHECK_MODULES([NCURSES], [ncursesw],
+            [   LIBS="$NCURSES_LIBS $save_LIBS"
+                MCLIBS="$NCURSES_LIBS $save_MCLIBS"
+                CFLAGS="$save_CFLAGS $NCURSES_CFLAGS"
+                screen_msg="NCursesw"
+                AC_CHECK_FUNC([has_colors], [], dnl Always validate pkg-config result
+                    [AC_MSG_ERROR([NCursesw pkg-config insufficient])])
+            ],
+            [PKG_CHECK_MODULES([NCURSES], [ncurses],
+                [   LIBS="$NCURSES_LIBS $save_LIBS"
+                    MCLIBS="$NCURSES_LIBS $save_MCLIBS"
+                    CFLAGS="$save_CFLAGS $NCURSES_CFLAGS"
+                    screen_msg="NCurses"
+                    AC_CHECK_FUNC([has_colors], [], dnl Always validate pkg-config result
+                        [AC_MSG_ERROR([NCurses pkg-config insufficient])])
+                ],
+                [AC_MSG_ERROR([(N)Curses(w) library not found by system path neither pkg-config])])
+            ])
+        ])
 
-        LIBS="$MCLIBS"
-        AC_SEARCH_LIBS([has_colors], [ncurses], [], 
-                       [AC_MSG_ERROR([Cannot find ncurses library])])
-        AC_SEARCH_LIBS([stdscr], [tinfo], [],
-                       [AC_MSG_ERROR([Cannot find a library providing stdscr])])
-        MCLIBS="$LIBS"
+    AC_SEARCH_LIBS([stdscr], [tinfow tinfo], [],
+        dnl 2. Library not found by system path, try pkg-config
+        [PKG_CHECK_MODULES([TINFOW], [tinfow], [],
+            [AC_CHECK_FUNC([stdscr], [], dnl Always validate pkg-config result
+                [AC_MSG_ERROR([Tinfow pkg-config insufficient])])],
+            [PKG_CHECK_MODULES([TINFO], [tinfo],
+                [AC_CHECK_FUNC([stdscr], [], dnl Always validate pkg-config result
+                    [AC_MSG_ERROR([Tinfo pkg-config insufficient])])],
+                [AC_MSG_ERROR([Tinfo(w) library not found by system path neither pkg-config])])
+            ])
+        ])
 
-        screen_type=ncurses
-        screen_msg="NCurses"
-        AC_DEFINE(USE_NCURSES, 1, 
-                  [Define to use ncurses for screen management])
-    else
-        LIBS="$MCLIBS"
-        AC_SEARCH_LIBS([addwstr], [ncursesw ncurses curses], [ncursesw_found=yes],
-                       [AC_MSG_WARN([Cannot find ncurses library, that support wide characters])])
-        MCLIBS="$LIBS"
+    AC_CHECK_FUNC([addwstr], [],
+        [AC_MSG_WARN([NCurses(w) library found without wide characters support])])
 
-        if test x"$ncursesw_found" = "x"; then
-            LIBS="$MCLIBS"
-            AC_SEARCH_LIBS([has_colors], [ncurses curses], [], 
-                           [AC_MSG_ERROR([Cannot find ncurses library])])
-            MCLIBS="$LIBS"
-        fi
-        LIBS="$MCLIBS"
-        AC_SEARCH_LIBS([stdscr], [tinfow tinfo], [],
-                       [AC_MSG_ERROR([Cannot find a library providing stdscr])])
-        MCLIBS="$LIBS"
+    dnl
+    dnl Check ncurses header
+    dnl
+    dnl Set CPPFLAGS to avoid AC_CHECK_HEADERS warning "accepted by the compiler, rejected by the preprocessor!"
+    CPPFLAGS="$CFLAGS"
+    dnl first match wins, using break
+    AC_CHECK_HEADERS([ncursesw/ncurses.h ncursesw/curses.h ncurses/ncurses.h ncurses/curses.h ncurses.h curses.h],
+        [ncurses_h_found=yes; break],
+        [ncurses_h_found=no])
 
-        dnl Check the header
-        ncurses_h_found=
-        AC_CHECK_HEADERS([ncursesw/curses.h ncurses/curses.h ncurses.h curses.h], 
-                         [ncurses_h_found=yes; break])
+    AS_IF([test x"$ncurses_h_found" != xyes],
+        [AC_MSG_ERROR([NCurses(w) header file not found])])
 
-        if test x"$ncurses_h_found" = "x"; then
-            AC_MSG_ERROR([Cannot find ncurses header file])
-        fi
+    AC_CHECK_HEADERS([ncursesw/term.h ncurses/term.h term.h],
+        [ncurses_term_h_found=yes; break],
+        [ncurses_term_h_found=no])
 
-        AC_CHECK_HEADERS([ncurses/term.h])
+    AS_IF([test x"$ncurses_term_h_found" != xyes],
+        [AC_MSG_ERROR([NCurses(w) term.h header file not found])])
 
-        screen_type=ncurses
-        screen_msg="NCurses"
-        AC_DEFINE(USE_NCURSES, 1, 
-                  [Define to use ncurses for screen management])
-    fi
+    dnl If ncurses exports the ESCDELAY variable it should be set to 0
+    dnl or you'll have to press Esc three times to dismiss a dialog box.
+    AC_CACHE_CHECK([for ESCDELAY variable], [mc_cv_ncurses_escdelay],
+        [AC_LINK_IFELSE(
+            [AC_LANG_PROGRAM([[extern int ESCDELAY;]],[[ESCDELAY = 0;]])],
+            [mc_cv_ncurses_escdelay=yes], [mc_cv_ncurses_escdelay=no])
+        ])
 
-    dnl check for ESCDELAY
-    AC_CACHE_CHECK([for ESCDELAY variable],
-                   [mc_cv_ncurses_escdelay],
-                   [AC_LINK_IFELSE([AC_LANG_PROGRAM([], [[
-                        extern int ESCDELAY;
-                        ESCDELAY = 0;
-                        ]])],
-                        [mc_cv_ncurses_escdelay=yes],
-                        [mc_cv_ncurses_escdelay=no])
-    ])
-    if test x"$mc_cv_ncurses_escdelay" = xyes; then
-        AC_DEFINE(HAVE_ESCDELAY, 1, 
-                  [Define if ncurses has ESCDELAY variable])
-    fi
-
-    dnl check for resizeterm
-    AC_CHECK_FUNCS(resizeterm)
-    LIBS="$save_LIBS"
-])
-
-dnl
-dnl Use the ncursesw library.  It can only be requested explicitly,
-dnl so just fail if anything goes wrong.
-dnl
-dnl If ncursesw exports the ESCDELAY variable it should be set to 0
-dnl or you'll have to press Esc three times to dismiss a dialog box.
-dnl
-
-AC_DEFUN([mc_WITH_NCURSESW], [
-    dnl has_colors() is specific to ncurses, it's not in the old curses
-    save_LIBS="$LIBS"
-    LIBS=
-    AC_SEARCH_LIBS([has_colors], [ncursesw], [MCLIBS="$MCLIBS $LIBS"],
-		   [AC_MSG_ERROR([Cannot find ncursesw library])])
-    AC_SEARCH_LIBS([stdscr], [tinfow ncursesw], [MCLIBS="$MCLIBS $LIBS"],
-           [AC_MSG_ERROR([Cannot find a library providing stdscr])])
-
-
-    dnl Check the header
-    ncurses_h_found=
-    AC_CHECK_HEADERS([ncursesw/curses.h],
-		     [ncursesw_h_found=yes; break])
-
-    if test  x"$ncursesw_h_found" = "x"; then
-	AC_MSG_ERROR([Cannot find ncursesw header file])
-    fi
-
-    screen_type=ncursesw
-    screen_msg="NCursesw"
-    AC_DEFINE(USE_NCURSESW, 1,
-	      [Define to use ncursesw for screen management])
-
-    AC_CACHE_CHECK([for ESCDELAY variable],
-		   [mc_cv_ncursesw_escdelay],
-		   [AC_LINK_IFELSE([AC_LANG_PROGRAM([], [[
-			extern int ESCDELAY;
-			ESCDELAY = 0;
-			]])],
-			[mc_cv_ncursesw_escdelay=yes],
-			[mc_cv_ncursesw_escdelay=no])
-    ])
-    if test x"$mc_cv_ncursesw_escdelay" = xyes; then
-	AC_DEFINE(HAVE_ESCDELAY, 1,
-		  [Define if ncursesw has ESCDELAY variable])
-    fi
+    AS_IF([test x"$mc_cv_ncurses_escdelay" = xyes],
+        [AC_DEFINE([HAVE_ESCDELAY], [1], [Define if NCurses(w) has ESCDELAY variable])])
 
     AC_CHECK_FUNCS(resizeterm)
-    LIBS="$save_LIBS"
+
+    AC_DEFINE([HAVE_NCURSES], [1], [Define to use NCurses for screen management])
+    AC_DEFINE_UNQUOTED([NCURSES_LIB_DISPLAYNAME], ["$screen_msg"], [Define NCurses library display name])
 ])
