@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2013, 2016
 
    This file is part of the Midnight Commander.
 
@@ -39,7 +39,6 @@
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"
-#include "lib/tty/mouse.h"
 #include "lib/skin.h"
 #include "lib/strutil.h"
 #include "lib/util.h"           /* Q_() */
@@ -397,13 +396,9 @@ listbox_on_change (WListbox * l)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-listbox_run_hotkey (WListbox * l, int pos)
+listbox_do_action (WListbox * l)
 {
-    WDialog *h = WIDGET (l)->owner;
     int action;
-
-    listbox_select_entry (l, pos);
-    listbox_on_change (l);
 
     if (l->callback != NULL)
         action = l->callback (l);
@@ -412,9 +407,21 @@ listbox_run_hotkey (WListbox * l, int pos)
 
     if (action == LISTBOX_DONE)
     {
+        WDialog *h = WIDGET (l)->owner;
+
         h->ret_value = B_ENTER;
         dlg_stop (h);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+listbox_run_hotkey (WListbox * l, int pos)
+{
+    listbox_select_entry (l, pos);
+    listbox_on_change (l);
+    listbox_do_action (l);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -486,60 +493,47 @@ listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-listbox_event (Gpm_Event * event, void *data)
+static void
+listbox_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 {
-    WListbox *l = LISTBOX (data);
-    Widget *w = WIDGET (data);
+    WListbox *l = LISTBOX (w);
+    int old_pos;
 
-    if (!mouse_global_in_widget (event, w))
-        return MOU_UNHANDLED;
+    old_pos = l->pos;
 
-    /* Single click */
-    if ((event->type & GPM_DOWN) != 0)
-        dlg_select_widget (l);
-
-    if (listbox_is_empty (l))
-        return MOU_NORMAL;
-
-    if ((event->type & (GPM_DOWN | GPM_DRAG)) != 0)
+    switch (msg)
     {
-        int ret = MOU_REPEAT;
-        Gpm_Event local;
+    case MSG_MOUSE_DOWN:
+        dlg_select_widget (l);
+        listbox_select_entry (l, listbox_y_pos (l, event->y));
+        break;
 
-        local = mouse_get_local (event, w);
-        if (local.y < 1)
-            listbox_back_n (l, -local.y + 1);
-        else if (local.y > w->lines)
-            listbox_fwd_n (l, local.y - w->lines);
-        else if ((local.buttons & GPM_B_UP) != 0)
-        {
-            listbox_back (l, FALSE);
-            ret = MOU_NORMAL;
-        }
-        else if ((local.buttons & GPM_B_DOWN) != 0)
-        {
-            listbox_fwd (l, FALSE);
-            ret = MOU_NORMAL;
-        }
-        else
-            listbox_select_entry (l, listbox_y_pos (l, local.y - 1));
+    case MSG_MOUSE_SCROLL_UP:
+        listbox_back (l, FALSE);
+        break;
 
+    case MSG_MOUSE_SCROLL_DOWN:
+        listbox_fwd (l, FALSE);
+        break;
+
+    case MSG_MOUSE_DRAG:
+        event->result.repeat = TRUE;    /* It'd be functional even without this. */
+        listbox_select_entry (l, listbox_y_pos (l, event->y));
+        break;
+
+    case MSG_MOUSE_CLICK:
+        /* We don't call listbox_select_entry() here: MSG_MOUSE_DOWN/DRAG did this already. */
+        if (event->count == GPM_DOUBLE) /* Double click */
+            listbox_do_action (l);
+        break;
+
+    default:
+        break;
+    }
+
+    /* If the selection has changed, we redraw the widget and notify the dialog. */
+    if (l->pos != old_pos)
         listbox_on_change (l);
-        return ret;
-    }
-
-    /* Double click */
-    if ((event->type & (GPM_DOUBLE | GPM_UP)) == (GPM_UP | GPM_DOUBLE))
-    {
-        Gpm_Event local;
-
-        local = mouse_get_local (event, w);
-        dlg_select_widget (l);
-        listbox_run_hotkey (l, listbox_y_pos (l, local.y - 1));
-    }
-
-    return MOU_NORMAL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -557,7 +551,7 @@ listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn 
 
     l = g_new (WListbox, 1);
     w = WIDGET (l);
-    widget_init (w, y, x, height, width, listbox_callback, listbox_event);
+    widget_init (w, y, x, height, width, listbox_callback, listbox_mouse_callback);
 
     l->list = NULL;
     l->top = l->pos = 0;

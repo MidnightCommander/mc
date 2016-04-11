@@ -40,9 +40,11 @@
 #include "lib/skin.h"
 #include "lib/tty/key.h"
 #include "lib/strutil.h"
-#include "lib/widget.h"
 #include "lib/fileloc.h"        /* MC_HISTORY_FILE */
 #include "lib/event.h"          /* mc_event_raise() */
+
+#include "lib/widget.h"
+#include "lib/widget/mouse.h"
 
 /*** global variables ****************************************************************************/
 
@@ -356,13 +358,28 @@ dlg_handle_key (WDialog * h, int d_key)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * This is the low-level mouse handler.
+ * It receives a Gpm_Event event and translates it into a higher level protocol.
+ */
+static int
+dlg_mouse_translator (Gpm_Event * event, Widget * w)
+{
+    mouse_event_t me;
+
+    me = mouse_translate_event (w, event);
+
+    return mouse_process_event (w, &me);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static int
 dlg_mouse_event (WDialog * h, Gpm_Event * event)
 {
     Widget *wh = WIDGET (h);
 
-    GList *p, *first;
+    GList *p;
 
     /* close the dialog by mouse left click out of dialog area */
     if (mouse_close_dialog && !h->fullscreen && ((event->buttons & GPM_B_LEFT) != 0)
@@ -373,35 +390,34 @@ dlg_mouse_event (WDialog * h, Gpm_Event * event)
         return MOU_NORMAL;
     }
 
-    if (wh->mouse != NULL)
+    if (wh->mouse_callback != NULL)
     {
         int mou;
 
-        mou = wh->mouse (event, wh);
+        mou = dlg_mouse_translator (event, wh);
         if (mou != MOU_UNHANDLED)
             return mou;
     }
 
-    first = h->current;
-    p = first;
-
+    /* send the event to widgets in reverse Z-order */
+    p = g_list_last (h->widgets);
     do
     {
         Widget *w = WIDGET (p->data);
 
-        p = dlg_widget_prev (h, p);
-
-        if ((w->options & W_DISABLED) == 0 && w->mouse != NULL)
+        if ((w->options & W_DISABLED) == 0 && w->mouse_callback != NULL)
         {
             /* put global cursor position to the widget */
             int ret;
 
-            ret = w->mouse (event, w);
+            ret = dlg_mouse_translator (event, w);
             if (ret != MOU_UNHANDLED)
                 return ret;
         }
+
+        p = g_list_previous (p);
     }
-    while (p != first);
+    while (p != NULL);
 
     return MOU_UNHANDLED;
 }
@@ -772,7 +788,7 @@ dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
 
 WDialog *
 dlg_create (gboolean modal, int y1, int x1, int lines, int cols,
-            const int *colors, widget_cb_fn callback, mouse_h mouse_handler,
+            const int *colors, widget_cb_fn callback, widget_mouse_cb_fn mouse_callback,
             const char *help_ctx, const char *title, dlg_flags_t flags)
 {
     WDialog *new_d;
@@ -781,7 +797,7 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols,
     new_d = g_new0 (WDialog, 1);
     w = WIDGET (new_d);
     widget_init (w, y1, x1, lines, cols, (callback != NULL) ? callback : dlg_default_callback,
-                 mouse_handler);
+                 mouse_callback);
     widget_want_cursor (w, FALSE);
 
     new_d->state = DLG_CONSTRUCT;
@@ -1072,12 +1088,8 @@ dlg_select_widget (void *w)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/**
- * Set widget at top of widget list and make it current.
- */
-
-void
-dlg_set_top_widget (void *w)
+static void
+dlg_set_top_or_bottom_widget (void *w, gboolean set_top)
 {
     Widget *widget = WIDGET (w);
     WDialog *h = widget->owner;
@@ -1088,13 +1100,37 @@ dlg_set_top_widget (void *w)
         abort ();               /* widget is not in dialog, this should not happen */
 
     /* unfocus prevoius widget and focus current one before widget reordering */
-    if (h->state == DLG_ACTIVE)
+    if (set_top && h->state == DLG_ACTIVE)
         do_select_widget (h, l, SELECT_EXACT);
 
     /* widget reordering */
     h->widgets = g_list_remove_link (h->widgets, l);
-    h->widgets = g_list_concat (h->widgets, l);
-    h->current = l;
+    if (set_top)
+        h->widgets = g_list_concat (h->widgets, l);
+    else
+        h->widgets = g_list_concat (l, h->widgets);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Set widget at top of widget list and make it current.
+ */
+
+void
+dlg_set_top_widget (void *w)
+{
+    dlg_set_top_or_bottom_widget (w, TRUE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Set widget at bottom of widget list.
+ */
+
+void
+dlg_set_bottom_widget (void *w)
+{
+    dlg_set_top_or_bottom_widget (w, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1226,11 +1262,8 @@ dlg_process_event (WDialog * h, int key, Gpm_Event * event)
         if (tty_got_interrupt ())
             if (send_message (h, NULL, MSG_ACTION, CK_Cancel, NULL) != MSG_HANDLED)
                 dlg_execute_cmd (h, CK_Cancel);
-
-        return;
     }
-
-    if (key == EV_MOUSE)
+    else if (key == EV_MOUSE)
         h->mouse_status = dlg_mouse_event (h, event);
     else
         dlg_key_event (h, key);

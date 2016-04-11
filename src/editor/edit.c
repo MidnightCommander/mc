@@ -2100,7 +2100,7 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
         edit_save_size (edit);
     }
 
-    edit->drag_state = MCEDIT_DRAG_NORMAL;
+    edit->drag_state = MCEDIT_DRAG_NONE;
 
     edit->stat1.st_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
     edit->stat1.st_uid = getuid ();

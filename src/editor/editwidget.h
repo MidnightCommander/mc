@@ -50,13 +50,13 @@ struct edit_syntax_rule_t
 
 /*
  * State of WEdit window
- * MCEDIT_DRAG_NORMAL - window is in normal mode
+ * MCEDIT_DRAG_NONE   - window is in normal mode
  * MCEDIT_DRAG_MOVE   - window is being moved
  * MCEDIT_DRAG_RESIZE - window is being resized
  */
 typedef enum
 {
-    MCEDIT_DRAG_NORMAL = 0,
+    MCEDIT_DRAG_NONE = 0,
     MCEDIT_DRAG_MOVE,
     MCEDIT_DRAG_RESIZE
 } mcedit_drag_state_t;

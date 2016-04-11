@@ -5,7 +5,7 @@
    Free Software Foundation, Inc.
 
    Written by:
-   Andrew Borodin <aborodin@vmail.ru>, 2012, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2012, 2013, 2016
 
    This file is part of the Midnight Commander.
 
@@ -38,7 +38,6 @@
 
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
-#include "lib/tty/mouse.h"
 #include "lib/tty/key.h"        /* key macros */
 #include "lib/strutil.h"
 #include "lib/widget.h"
@@ -309,6 +308,10 @@ menubar_finish (WMenuBar * menubar)
     menubar->is_active = FALSE;
     w->lines = 1;
     widget_want_hotkey (w, 0);
+
+    /* Move the menubar to the bottom so that widgets displayed on top of
+     * an "invisible" menubar get the first chance to respond to mouse events. */
+    dlg_set_bottom_widget (w);
 
     dlg_select_by_id (w->owner, menubar->previous_widget);
     do_refresh ();
@@ -631,142 +634,181 @@ menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-menubar_event (Gpm_Event * event, void *data)
+static unsigned int
+menubar_get_menu_by_x_coord (const WMenuBar * menubar, int x)
 {
-    WMenuBar *menubar = MENUBAR (data);
-    Widget *w = WIDGET (data);
-    gboolean was_active = TRUE;
-    int left_x, right_x, bottom_y;
+    unsigned int i;
+    GList *menu;
+
+    for (i = 0, menu = menubar->menu;
+         menu != NULL && x > MENU (menu->data)->start_x; i++, menu = g_list_next (menu))
+        ;
+
+    /* Don't set the invalid value -1 */
+    if (i != 0)
+        i--;
+
+    return i;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+menubar_mouse_on_menu (const WMenuBar * menubar, int y, int x)
+{
+    Widget *w = WIDGET (menubar);
     menu_t *menu;
-    Gpm_Event local;
-
-    if (!mouse_global_in_widget (event, w))
-        return MOU_UNHANDLED;
-
-    /* ignore unsupported events */
-    if ((event->type & (GPM_UP | GPM_DOWN | GPM_DRAG)) == 0)
-        return MOU_NORMAL;
-
-    /* ignore wheel events if menu is inactive */
-    if (!menubar->is_active && ((event->buttons & (GPM_B_MIDDLE | GPM_B_UP | GPM_B_DOWN)) != 0))
-        return MOU_NORMAL;
-
-    local = mouse_get_local (event, w);
-
-    if (local.y == 1 && (local.type & GPM_UP) != 0)
-        return MOU_NORMAL;
+    int left_x, right_x, bottom_y;
 
     if (!menubar->is_dropped)
-    {
-        if (local.y > 1)
-        {
-            /* mouse click below menubar -- close menu and send focus to widget under mouse */
-            menubar_finish (menubar);
-            return MOU_UNHANDLED;
-        }
+        return FALSE;
 
-        menubar->previous_widget = dlg_get_current_widget_id (w->owner);
-        menubar->is_active = TRUE;
-        menubar->is_dropped = TRUE;
-        was_active = FALSE;
-    }
-
-    /* Mouse operations on the menubar */
-    if (local.y == 1 || !was_active)
-    {
-        /* wheel events on menubar */
-        if ((local.buttons & GPM_B_UP) != 0)
-            menubar_left (menubar);
-        else if ((local.buttons & GPM_B_DOWN) != 0)
-            menubar_right (menubar);
-        else
-        {
-            const unsigned int len = g_list_length (menubar->menu);
-            unsigned int new_selection = 0;
-
-            while ((new_selection < len)
-                   && (local.x > MENU (g_list_nth_data (menubar->menu, new_selection))->start_x))
-                new_selection++;
-
-            if (new_selection != 0)     /* Don't set the invalid value -1 */
-                new_selection--;
-
-            if (!was_active)
-            {
-                menubar->selected = new_selection;
-                dlg_select_widget (menubar);
-            }
-            else
-            {
-                menubar_remove (menubar);
-                menubar->selected = new_selection;
-            }
-            menubar_draw (menubar);
-        }
-        return MOU_NORMAL;
-    }
-
-    if (!menubar->is_dropped || (local.y < 2))
-        return MOU_NORMAL;
-
-    /* middle click -- everywhere */
-    if (((local.buttons & GPM_B_MIDDLE) != 0) && ((local.type & GPM_DOWN) != 0))
-    {
-        menubar_execute (menubar);
-        return MOU_NORMAL;
-    }
-
-    /* the mouse operation is on the menus or it is not */
     menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
     left_x = menu->start_x;
     right_x = left_x + menu->max_entry_len + 3;
     if (right_x > w->cols)
     {
-        left_x = w->cols - menu->max_entry_len - 3;
+        left_x = w->cols - (menu->max_entry_len + 3);
         right_x = w->cols;
     }
 
-    bottom_y = g_list_length (menu->entries) + 3;
+    bottom_y = g_list_length (menu->entries) + 2;       /* skip bar and top frame */
 
-    if ((local.x >= left_x) && (local.x <= right_x) && (local.y <= bottom_y))
+    return (x >= left_x && x < right_x && y > 1 && y < bottom_y);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+menubar_change_selected_item (WMenuBar * menubar, int y)
+{
+    menu_t *menu;
+    menu_entry_t *entry;
+
+    y -= 2;                     /* skip bar and top frame */
+    menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
+    entry = MENUENTRY (g_list_nth_data (menu->entries, y));
+
+    if (entry != NULL && entry->command != CK_IgnoreKey)
     {
-        int pos = local.y - 3;
-        const menu_entry_t *entry = MENUENTRY (g_list_nth_data (menu->entries, pos));
-
-        /* mouse wheel */
-        if ((local.buttons & GPM_B_UP) != 0 && (local.type & GPM_DOWN) != 0)
-        {
-            menubar_up (menubar);
-            return MOU_NORMAL;
-        }
-        if ((local.buttons & GPM_B_DOWN) != 0 && (local.type & GPM_DOWN) != 0)
-        {
-            menubar_down (menubar);
-            return MOU_NORMAL;
-        }
-
-        /* ignore events above and below dropped down menu */
-        if ((pos < 0) || (pos >= bottom_y - 3))
-            return MOU_NORMAL;
-
-        if ((entry != NULL) && (entry->command != CK_IgnoreKey))
-        {
-            menubar_paint_idx (menubar, menu->selected, MENU_ENTRY_COLOR);
-            menu->selected = pos;
-            menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
-
-            if ((event->type & GPM_UP) != 0)
-                menubar_execute (menubar);
-        }
+        menubar_paint_idx (menubar, menu->selected, MENU_ENTRY_COLOR);
+        menu->selected = y;
+        menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
     }
-    else if (((local.type & GPM_DOWN) != 0) && ((local.buttons & (GPM_B_UP | GPM_B_DOWN)) == 0))
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+menubar_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+{
+    static gboolean was_drag = FALSE;
+
+    WMenuBar *menubar = MENUBAR (w);
+    gboolean mouse_on_drop;
+
+    mouse_on_drop = menubar_mouse_on_menu (menubar, event->y, event->x);
+
+    switch (msg)
     {
-        /* use click not wheel to close menu */
-        menubar_finish (menubar);
-    }
+    case MSG_MOUSE_DOWN:
+        was_drag = FALSE;
 
-    return MOU_NORMAL;
+        if (event->y == 0)
+        {
+            /* events on menubar */
+            unsigned int selected;
+
+            selected = menubar_get_menu_by_x_coord (menubar, event->x);
+            menubar_activate (menubar, TRUE, selected);
+            menubar_remove (menubar);   /* if already shown */
+            menubar_drop (menubar, selected);
+        }
+        else if (mouse_on_drop)
+            menubar_change_selected_item (menubar, event->y);
+        else
+        {
+            /* mouse click outside menubar or dropdown -- close menu */
+            menubar_finish (menubar);
+
+            /*
+             * @FIXME.
+             *
+             * Unless we clear the 'capture' flag, we'll receive MSG_MOUSE_DRAG
+             * events belonging to this click (in case the user drags the mouse,
+             * of course).
+             *
+             * For the time being, we mark this with FIXME as this flag should
+             * preferably be regarded as "implementation detail" and not be
+             * touched by us. We should think of some other way of communicating
+             * this to the system.
+             */
+            w->mouse.capture = FALSE;
+        }
+        break;
+
+    case MSG_MOUSE_UP:
+        if (was_drag && mouse_on_drop)
+            menubar_execute (menubar);
+        was_drag = FALSE;
+        break;
+
+    case MSG_MOUSE_CLICK:
+        was_drag = FALSE;
+
+        if ((event->buttons & GPM_B_MIDDLE) != 0 && event->y > 0 && menubar->is_dropped)
+        {
+            /* middle click -- everywhere */
+            menubar_execute (menubar);
+        }
+        else if (mouse_on_drop)
+            menubar_execute (menubar);
+        else if (event->y > 0)
+            /* releasing the mouse button outside the menu -- close menu */
+            menubar_finish (menubar);
+        break;
+
+    case MSG_MOUSE_DRAG:
+        if (event->y == 0)
+        {
+            menubar_remove (menubar);
+            menubar_drop (menubar, menubar_get_menu_by_x_coord (menubar, event->x));
+        }
+        else if (mouse_on_drop)
+            menubar_change_selected_item (menubar, event->y);
+
+        was_drag = TRUE;
+        break;
+
+    case MSG_MOUSE_SCROLL_UP:
+    case MSG_MOUSE_SCROLL_DOWN:
+        was_drag = FALSE;
+
+        if (menubar->is_active)
+        {
+            if (event->y == 0)
+            {
+                /* menubar: left/right */
+                if (msg == MSG_MOUSE_SCROLL_UP)
+                    menubar_left (menubar);
+                else
+                    menubar_right (menubar);
+            }
+            else if (mouse_on_drop)
+            {
+                /* drop-down menu: up/down */
+                if (msg == MSG_MOUSE_SCROLL_UP)
+                    menubar_up (menubar);
+                else
+                    menubar_down (menubar);
+            }
+        }
+        break;
+
+    default:
+        was_drag = FALSE;
+        break;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -849,7 +891,7 @@ menubar_new (int y, int x, int cols, GList * menu, gboolean visible)
 
     menubar = g_new0 (WMenuBar, 1);
     w = WIDGET (menubar);
-    widget_init (w, y, x, 1, cols, menubar_callback, menubar_event);
+    widget_init (w, y, x, 1, cols, menubar_callback, menubar_mouse_callback);
 
     menubar->is_visible = visible;
     widget_want_cursor (w, FALSE);
@@ -948,6 +990,35 @@ WMenuBar *
 find_menubar (const WDialog * h)
 {
     return MENUBAR (find_widget_type (h, menubar_callback));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Activate menu bar.
+ *
+ * @param menubar menu bar object
+ * @param dropped whether dropdown menus should be drooped or not
+ * @which number of active dropdown menu
+ */
+void
+menubar_activate (WMenuBar * menubar, gboolean dropped, int which)
+{
+    Widget *w = WIDGET (menubar);
+
+    if (!menubar->is_active)
+    {
+        menubar->is_active = TRUE;
+        menubar->is_dropped = dropped;
+        if (which >= 0)
+            menubar->selected = (guint) which;
+
+        menubar->previous_widget = dlg_get_current_widget_id (w->owner);
+
+        /* Bring it to the top so it receives all mouse events before any other widget.
+         * See also comment in menubar_finish(). */
+        dlg_set_top_widget (w);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

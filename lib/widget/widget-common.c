@@ -138,7 +138,7 @@ hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused)
 
 void
 widget_init (Widget * w, int y, int x, int lines, int cols,
-             widget_cb_fn callback, mouse_h mouse_handler)
+             widget_cb_fn callback, widget_mouse_cb_fn mouse_callback)
 {
     w->x = x;
     w->y = y;
@@ -146,9 +146,13 @@ widget_init (Widget * w, int y, int x, int lines, int cols,
     w->lines = lines;
     w->pos_flags = WPOS_KEEP_DEFAULT;
     w->callback = callback;
-    w->mouse = mouse_handler;
+    w->mouse_callback = mouse_callback;
     w->set_options = widget_default_set_options_callback;
     w->owner = NULL;
+    w->mouse.forced_capture = FALSE;
+    w->mouse.capture = FALSE;
+    w->mouse.last_msg = MSG_MOUSE_NONE;
+    w->mouse.last_buttons_down = 0;
 
     /* Almost all widgets want to put the cursor in a suitable place */
     w->options = W_WANT_CURSOR;

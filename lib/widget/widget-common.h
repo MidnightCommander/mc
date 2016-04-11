@@ -7,6 +7,7 @@
 #define MC__WIDGET_INTERNAL_H
 
 #include "lib/tty/mouse.h"
+#include "lib/widget/mouse.h"   /* mouse_msg_t, mouse_event_t */
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -93,6 +94,8 @@ typedef enum
 /* Widget callback */
 typedef cb_ret_t (*widget_cb_fn) (Widget * widget, Widget * sender, widget_msg_t msg, int parm,
                                   void *data);
+/* Widget mouse callback */
+typedef void (*widget_mouse_cb_fn) (Widget * w, mouse_msg_t msg, mouse_event_t * event);
 
 /* Every Widget must have this as its first element */
 struct Widget
@@ -103,9 +106,20 @@ struct Widget
     widget_pos_flags_t pos_flags;       /* repositioning flags */
     unsigned int id;            /* Number of the widget, starting with 0 */
     widget_cb_fn callback;
-    mouse_h mouse;
+    widget_mouse_cb_fn mouse_callback;
     void (*set_options) (Widget * w, widget_options_t options, gboolean enable);
     WDialog *owner;
+    /* Mouse-related fields. */
+    struct
+    {
+        /* Public members: */
+        gboolean forced_capture;        /* Overrides the 'capture' member. Set explicitly by the programmer. */
+
+        /* Implementation details: */
+        gboolean capture;       /* Whether the widget "owns" the mouse. */
+        mouse_msg_t last_msg;   /* The previous event type processed. */
+        int last_buttons_down;
+    } mouse;
 };
 
 /* structure for label (caption) with hotkey, if original text does not contain
@@ -134,7 +148,7 @@ void hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused);
 
 /* widget initialization */
 void widget_init (Widget * w, int y, int x, int lines, int cols,
-                  widget_cb_fn callback, mouse_h mouse_handler);
+                  widget_cb_fn callback, widget_mouse_cb_fn mouse_callback);
 /* Default callback for widgets */
 cb_ret_t widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
                                   void *data);

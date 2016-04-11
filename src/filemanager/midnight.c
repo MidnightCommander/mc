@@ -368,10 +368,7 @@ init_menu (void)
 static void
 menu_last_selected_cmd (void)
 {
-    the_menubar->is_active = TRUE;
-    the_menubar->is_dropped = (drop_menus != 0);
-    the_menubar->previous_widget = dlg_get_current_widget_id (midnight_dlg);
-    dlg_select_widget (the_menubar);
+    menubar_activate (the_menubar, drop_menus != 0, -1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -379,14 +376,14 @@ menu_last_selected_cmd (void)
 static void
 menu_cmd (void)
 {
-    if (the_menubar->is_active)
-        return;
+    int selected;
 
     if ((get_current_index () == 0) == (current_panel->active != 0))
-        the_menubar->selected = 0;
+        selected = 0;
     else
-        the_menubar->selected = g_list_length (the_menubar->menu) - 1;
-    menu_last_selected_cmd ();
+        selected = g_list_length (the_menubar->menu) - 1;
+
+    menubar_activate (the_menubar, drop_menus != 0, selected);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1579,42 +1576,6 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-static int
-midnight_event (Gpm_Event * event, void *data)
-{
-    Widget *wh = WIDGET (data);
-    int ret = MOU_UNHANDLED;
-
-    if (event->y == wh->y + 1)
-    {
-        /* menubar */
-        if (menubar_visible || the_menubar->is_active)
-            ret = WIDGET (the_menubar)->mouse (event, the_menubar);
-        else
-        {
-            Widget *w;
-
-            w = get_panel_widget (0);
-            if (w->mouse != NULL)
-                ret = w->mouse (event, w);
-
-            if (ret == MOU_UNHANDLED)
-            {
-                w = get_panel_widget (1);
-                if (w->mouse != NULL)
-                    ret = w->mouse (event, w);
-            }
-
-            if (ret == MOU_UNHANDLED)
-                ret = WIDGET (the_menubar)->mouse (event, the_menubar);
-        }
-    }
-
-    return ret;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1796,8 +1757,8 @@ do_nc (void)
     edit_stack_init ();
 #endif
 
-    midnight_dlg = dlg_create (FALSE, 0, 0, LINES, COLS, dialog_colors, midnight_callback,
-                               midnight_event, "[main]", NULL, DLG_NONE);
+    midnight_dlg = dlg_create (FALSE, 0, 0, LINES, COLS, dialog_colors, midnight_callback, NULL,
+                               "[main]", NULL, DLG_NONE);
 
     /* Check if we were invoked as an editor or file viewer */
     if (mc_global.mc_run_mode != MC_RUN_FULL)
