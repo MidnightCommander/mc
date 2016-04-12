@@ -892,9 +892,10 @@ menubar_new (int y, int x, int cols, GList * menu, gboolean visible)
     menubar = g_new0 (WMenuBar, 1);
     w = WIDGET (menubar);
     widget_init (w, y, x, 1, cols, menubar_callback, menubar_mouse_callback);
+    w->options |= WOP_TOP_SELECT;
+    widget_want_cursor (w, FALSE);
 
     menubar->is_visible = visible;
-    widget_want_cursor (w, FALSE);
     menubar_set_menu (menubar, menu);
 
     return menubar;
@@ -1017,7 +1018,7 @@ menubar_activate (WMenuBar * menubar, gboolean dropped, int which)
 
         /* Bring it to the top so it receives all mouse events before any other widget.
          * See also comment in menubar_finish(). */
-        dlg_set_top_widget (w);
+        dlg_select_widget (w);
     }
 }
 

@@ -2262,7 +2262,7 @@ edit_close_cmd (WEdit * edit)
         {
             edit = find_editor (h);
             if (edit != NULL)
-                dlg_set_top_widget (edit);
+                dlg_select_widget (edit);
         }
     }
 

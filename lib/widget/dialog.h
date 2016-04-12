@@ -159,7 +159,6 @@ void dlg_stop (WDialog * h);
 
 /* Widget selection */
 void dlg_select_widget (void *w);
-void dlg_set_top_widget (void *w);
 void dlg_set_bottom_widget (void *w);
 void dlg_one_up (WDialog * h);
 void dlg_one_down (WDialog * h);

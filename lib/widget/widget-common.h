@@ -67,7 +67,8 @@ typedef enum
     WOP_DEFAULT = (0 << 0),
     WOP_WANT_HOTKEY = (1 << 1),
     WOP_WANT_CURSOR = (1 << 2),
-    WOP_IS_INPUT = (1 << 3)
+    WOP_IS_INPUT = (1 << 3),
+    WOP_TOP_SELECT = (1 << 4)
 } widget_options_t;
 
 /* Widget state */

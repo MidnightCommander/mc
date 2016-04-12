@@ -356,7 +356,7 @@ edit_window_list (const WDialog * h)
     if (rv >= 0)
     {
         w = g_list_nth (h->widgets, rv + offset);
-        dlg_set_top_widget (w->data);
+        dlg_select_widget (w->data);
     }
 }
 
@@ -485,11 +485,11 @@ edit_dialog_command_execute (WDialog * h, long command)
         break;
     case CK_WindowNext:
         dlg_one_down (h);
-        dlg_set_top_widget (h->current->data);
+        dlg_select_widget (h->current->data);
         break;
     case CK_WindowPrev:
         dlg_one_up (h);
-        dlg_set_top_widget (h->current->data);
+        dlg_select_widget (h->current->data);
         break;
     case CK_Options:
         edit_options_dialog (h);
@@ -906,7 +906,7 @@ edit_dialog_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
                 if (top != h->current)
                 {
                     /* Window is not active. Activate it */
-                    dlg_set_top_widget (e);
+                    dlg_select_widget (e);
                 }
 
                 /* Handle buttons */
@@ -1087,7 +1087,7 @@ edit_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     switch (msg)
     {
     case MSG_MOUSE_DOWN:
-        dlg_set_top_widget (w);
+        dlg_select_widget (w);
         edit_update_curs_row (edit);
         edit_update_curs_col (edit);
 

@@ -833,6 +833,7 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols,
     widget_init (w, y1, x1, lines, cols, (callback != NULL) ? callback : dlg_default_callback,
                  mouse_callback);
     widget_want_cursor (w, FALSE);
+    w->options |= WOP_TOP_SELECT;
     w->state |= WST_CONSTRUCT;
 
     new_d->modal = modal;
@@ -1120,18 +1121,10 @@ dlg_select_widget (void *w)
     Widget *widget = WIDGET (w);
     WDialog *h = widget->owner;
 
-    do_select_widget (h, g_list_find (h->widgets, widget), SELECT_EXACT);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Set widget at top of widget list and make it current.
- */
-
-void
-dlg_set_top_widget (void *w)
-{
-    dlg_set_top_or_bottom_widget (w, TRUE);
+    if (widget_get_options (widget, WOP_TOP_SELECT))
+        dlg_set_top_or_bottom_widget (w, TRUE);
+    else
+        do_select_widget (h, g_list_find (h->widgets, widget), SELECT_EXACT);
 }
 
 /* --------------------------------------------------------------------------------------------- */
