@@ -186,6 +186,7 @@
 
 #include "lib/global.h"
 #include "lib/strutil.h"        /* str_verscmp() */
+#include "lib/unixcompat.h"     /* makedev */
 #include "mountlist.h"
 
 /*** global variables ****************************************************************************/
