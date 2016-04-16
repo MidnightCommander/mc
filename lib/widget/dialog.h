@@ -71,7 +71,6 @@ struct WDialog
     Widget widget;
 
     /* Set by the user */
-    gboolean modal;             /* type of dialog: modal or not */
     dlg_flags_t flags;          /* User flags */
     const char *help_ctx;       /* Name of the help entry */
     const int *color;           /* Color set. Unused in viewer and editor */

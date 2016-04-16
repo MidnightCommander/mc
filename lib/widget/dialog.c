@@ -319,19 +319,19 @@ dlg_execute_cmd (WDialog * h, long command)
         break;
 
     case CK_ScreenList:
-        if (!h->modal)
+        if (!widget_get_state (WIDGET (h), WST_MODAL))
             dialog_switch_list ();
         else
             ret = MSG_NOT_HANDLED;
         break;
     case CK_ScreenNext:
-        if (!h->modal)
+        if (!widget_get_state (WIDGET (h), WST_MODAL))
             dialog_switch_next ();
         else
             ret = MSG_NOT_HANDLED;
         break;
     case CK_ScreenPrev:
-        if (!h->modal)
+        if (!widget_get_state (WIDGET (h), WST_MODAL))
             dialog_switch_prev ();
         else
             ret = MSG_NOT_HANDLED;
@@ -559,7 +559,7 @@ frontend_dlg_run (WDialog * h)
     event.x = -1;
 
     /* close opened editors, viewers, etc */
-    if (!h->modal && mc_global.midnight_shutdown)
+    if (!widget_get_state (wh, WST_MODAL) && mc_global.midnight_shutdown)
     {
         send_message (h, NULL, MSG_VALIDATE, 0, NULL);
         return;
@@ -834,9 +834,11 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols,
                  mouse_callback);
     widget_want_cursor (w, FALSE);
     w->options |= WOP_TOP_SELECT;
-    w->state |= WST_CONSTRUCT;
 
-    new_d->modal = modal;
+    w->state |= WST_CONSTRUCT;
+    if (modal)
+        w->state |= WST_MODAL;
+
     new_d->color = colors;
     new_d->help_ctx = help_ctx;
     new_d->flags = flags;
@@ -1229,8 +1231,8 @@ dlg_init (WDialog * h)
 {
     Widget *wh = WIDGET (h);
 
-    if (top_dlg != NULL && DIALOG (top_dlg->data)->modal)
-        h->modal = TRUE;
+    if (top_dlg != NULL && widget_get_state (WIDGET (top_dlg->data), WST_MODAL))
+        widget_set_state (wh, WST_MODAL, TRUE);
 
     /* add dialog to the stack */
     top_dlg = g_list_prepend (top_dlg, h);
@@ -1238,7 +1240,7 @@ dlg_init (WDialog * h)
     /* Initialize dialog manager and widgets */
     if (widget_get_state (wh, WST_CONSTRUCT))
     {
-        if (!h->modal)
+        if (!widget_get_state (wh, WST_MODAL))
             dialog_switch_add (h);
 
         send_message (h, NULL, MSG_INIT, 0, NULL);
@@ -1287,7 +1289,7 @@ dlg_run_done (WDialog * h)
     if (widget_get_state (WIDGET (h), WST_CLOSED))
     {
         send_message (h, h->current->data, MSG_END, 0, NULL);
-        if (!h->modal)
+        if (!widget_get_state (WIDGET (h), WST_MODAL))
             dialog_switch_remove (h);
     }
 }

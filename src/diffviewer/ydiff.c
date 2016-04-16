@@ -2890,10 +2890,13 @@ dview_edit (WDiff * dview, diff_place_t ord)
     }
 
     h = WIDGET (dview)->owner;
-    h_modal = h->modal;
+    h_modal = widget_get_state (WIDGET (h), WST_MODAL);
 
     get_line_numbers (dview->a[ord], dview->skip_rows, &linenum, &lineofs);
-    h->modal = TRUE;            /* not allow edit file in several editors */
+
+    /* disallow edit file in several editors */
+    widget_set_state (WIDGET (h), WST_MODAL, TRUE);
+
     {
         vfs_path_t *tmp_vpath;
 
@@ -2901,7 +2904,8 @@ dview_edit (WDiff * dview, diff_place_t ord)
         edit_file_at_line (tmp_vpath, use_internal_edit != 0, linenum);
         vfs_path_free (tmp_vpath);
     }
-    h->modal = h_modal;
+
+    widget_set_state (WIDGET (h), WST_MODAL, h_modal);
     dview_redo (dview);
     dview_update (dview);
 }
