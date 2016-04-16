@@ -805,7 +805,7 @@ panel_listing_box (WPanel * panel, int num, char **userp, char **minip, int *use
 const panel_field_t *
 sort_box (dir_sort_options_t * op, const panel_field_t * sort_field)
 {
-    const char **sort_orders_names;
+    char **sort_orders_names;
     gsize i;
     gsize sort_names_num = 0;
     int sort_idx = 0;
@@ -824,7 +824,7 @@ sort_box (dir_sort_options_t * op, const panel_field_t * sort_field)
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
             QUICK_START_COLUMNS,
-                QUICK_RADIO (sort_names_num, sort_orders_names, &sort_idx, NULL),
+                QUICK_RADIO (sort_names_num, (const char **) sort_orders_names, &sort_idx, NULL),
             QUICK_NEXT_COLUMN,
                 QUICK_CHECKBOX (N_("Executable &first"), &op->exec_first, NULL),
                 QUICK_CHECKBOX (N_("Cas&e sensitive"), &op->case_sensitive, NULL),
@@ -848,7 +848,7 @@ sort_box (dir_sort_options_t * op, const panel_field_t * sort_field)
             result = sort_field;
     }
 
-    g_strfreev ((gchar **) sort_orders_names);
+    g_strfreev (sort_orders_names);
 
     return result;
 }
@@ -1139,7 +1139,7 @@ configure_vfs (void)
 char *
 cd_dialog (void)
 {
-    const Widget *w = WIDGET (current_panel);
+    const Widget *w = CONST_WIDGET (current_panel);
     char *my_str;
 
     quick_widget_t quick_widgets[] = {

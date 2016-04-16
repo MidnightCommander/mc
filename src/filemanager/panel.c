@@ -405,7 +405,7 @@ static int
 panel_lines (const WPanel * p)
 {
     /* 3 lines are: top frame, column header, botton frame */
-    return (WIDGET (p)->lines - 3 - (panels_options.show_mini_info ? 2 : 0));
+    return (CONST_WIDGET (p)->lines - 3 - (panels_options.show_mini_info ? 2 : 0));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1066,9 +1066,10 @@ paint_dir (WPanel * panel)
 static void
 display_total_marked_size (const WPanel * panel, int y, int x, gboolean size_only)
 {
-    Widget *w = WIDGET (panel);
+    const Widget *w = CONST_WIDGET (panel);
 
-    char buffer[BUF_SMALL], b_bytes[BUF_SMALL], *buf;
+    char buffer[BUF_SMALL], b_bytes[BUF_SMALL];
+    const char *buf;
     int cols;
 
     if (panel->marked <= 0)
@@ -1090,7 +1091,7 @@ display_total_marked_size (const WPanel * panel, int y, int x, gboolean size_onl
                     b_bytes, panel->marked);
 
     /* don't forget spaces around buffer content */
-    buf = (char *) str_trunc (buf, cols - 4);
+    buf = str_trunc (buf, cols - 4);
 
     if (x < 0)
         /* center in panel */
@@ -1112,7 +1113,7 @@ mini_info_separator (const WPanel * panel)
 {
     if (panels_options.show_mini_info)
     {
-        Widget *w = WIDGET (panel);
+        const Widget *w = CONST_WIDGET (panel);
         int y;
 
         y = panel_lines (panel) + 2;
@@ -1155,7 +1156,7 @@ show_free_space (const WPanel * panel)
 
     if (myfs_stats.avail != 0 || myfs_stats.total != 0)
     {
-        Widget *w = WIDGET (panel);
+        const Widget *w = CONST_WIDGET (panel);
         char buffer1[6], buffer2[6], tmp[BUF_SMALL];
 
         size_trunc_len (buffer1, sizeof (buffer1) - 1, myfs_stats.avail, 1,
@@ -1256,7 +1257,7 @@ panel_get_encoding_info_str (const WPanel * panel)
 static void
 show_dir (const WPanel * panel)
 {
-    Widget *w = WIDGET (panel);
+    const Widget *w = CONST_WIDGET (panel);
 
     gchar *tmp;
 
@@ -1554,7 +1555,7 @@ panel_get_title_without_hotkey (const char *title)
 static void
 panel_print_header (const WPanel * panel)
 {
-    Widget *w = WIDGET (panel);
+    const Widget *w = CONST_WIDGET (panel);
 
     int y, x;
     int i;
@@ -4852,7 +4853,7 @@ panel_get_num_of_sortable_fields (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-const char **
+char **
 panel_get_sortable_fields (gsize * array_size)
 {
     char **ret;
@@ -4873,7 +4874,7 @@ panel_get_sortable_fields (gsize * array_size)
         if (panel_fields[i].is_user_choice)
             ret[lc_index++] = g_strdup (_(panel_fields[i].title_hotkey));
 
-    return (const char **) ret;
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -4940,7 +4941,7 @@ panel_get_num_of_user_possible_fields (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-const char **
+char **
 panel_get_user_possible_fields (gsize * array_size)
 {
     char **ret;
@@ -4961,7 +4962,7 @@ panel_get_user_possible_fields (gsize * array_size)
         if (panel_fields[i].use_in_user_format)
             ret[lc_index++] = g_strdup (_(panel_fields[i].title_hotkey));
 
-    return (const char **) ret;
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */

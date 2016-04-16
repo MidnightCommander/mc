@@ -186,7 +186,7 @@ mcview_search_show_result (WView * view, size_t match_len)
 mc_search_cbret_t
 mcview_search_cmd_callback (const void *user_data, gsize char_offset, int *current_char)
 {
-    WView *view = ((mcview_search_status_msg_t *) user_data)->view;
+    WView *view = ((const mcview_search_status_msg_t *) user_data)->view;
 
     /*    view_read_continue (view, &view->search_onechar_info); *//* AB:FIXME */
     if (!view->text_nroff_mode)

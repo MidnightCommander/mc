@@ -289,6 +289,8 @@ mc_config_init_config_paths (GError ** mcerror)
     char *dir;
 #if MC_HOMEDIR_XDG == 0
     char *defined_userconf_dir;
+#else
+    const char *cdir;
 #endif
 
     mc_return_if_error (mcerror);
@@ -316,9 +318,9 @@ mc_config_init_config_paths (GError ** mcerror)
     }
     else
     {
-        dir = (char *) g_get_user_config_dir ();
-        if (dir != NULL && *dir != '\0')
-            mc_config_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, mcerror);
+        cdir = g_get_user_config_dir ();
+        if (cdir != NULL && *cdir != '\0')
+            mc_config_str = mc_config_init_one_config_path (cdir, MC_USERCONF_DIR, mcerror);
         else
         {
             dir = g_build_filename (homedir, ".config", (char *) NULL);
@@ -326,9 +328,9 @@ mc_config_init_config_paths (GError ** mcerror)
             g_free (dir);
         }
 
-        dir = (char *) g_get_user_cache_dir ();
-        if (dir != NULL && *dir != '\0')
-            mc_cache_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, mcerror);
+        cdir = g_get_user_cache_dir ();
+        if (cdir != NULL && *cdir != '\0')
+            mc_cache_str = mc_config_init_one_config_path (cdir, MC_USERCONF_DIR, mcerror);
         else
         {
             dir = g_build_filename (homedir, ".cache", (char *) NULL);
@@ -336,9 +338,9 @@ mc_config_init_config_paths (GError ** mcerror)
             g_free (dir);
         }
 
-        dir = (char *) g_get_user_data_dir ();
-        if (dir != NULL && *dir != '\0')
-            mc_data_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, mcerror);
+        cdir = g_get_user_data_dir ();
+        if (cdir != NULL && *cdir != '\0')
+            mc_data_str = mc_config_init_one_config_path (cdir, MC_USERCONF_DIR, mcerror);
         else
         {
             dir = g_build_filename (homedir, ".local", "share", (char *) NULL);

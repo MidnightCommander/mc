@@ -805,11 +805,11 @@ vfs_path_elements_count (const vfs_path_t * vpath)
  */
 
 void
-vfs_path_add_element (const vfs_path_t * vpath, const vfs_path_element_t * path_element)
+vfs_path_add_element (vfs_path_t * vpath, const vfs_path_element_t * path_element)
 {
     g_array_append_val (vpath->path, path_element);
     g_free (vpath->str);
-    ((vfs_path_t *) vpath)->str = vfs_path_to_str_flags (vpath, 0, VPF_NONE);
+    vpath->str = vfs_path_to_str_flags (vpath, 0, VPF_NONE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

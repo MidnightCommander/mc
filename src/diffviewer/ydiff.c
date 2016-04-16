@@ -581,7 +581,7 @@ dview_get_byte (char *str, gboolean * result)
  */
 
 static int
-dview_get_utf (char *str, int *char_length, gboolean * result)
+dview_get_utf (const char *str, int *char_length, gboolean * result)
 {
     int res = -1;
     gunichar ch;
@@ -1915,7 +1915,7 @@ get_line_numbers (const GArray * a, size_t pos, int *linenum, int *lineofs)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-calc_nwidth (const GArray ** const a)
+calc_nwidth (const GArray * const *a)
 {
     int l1, o1;
     int l2, o2;
@@ -2795,7 +2795,7 @@ dview_redo (WDiff * dview)
         int old;
 
         old = dview->display_numbers;
-        dview->display_numbers = calc_nwidth ((const GArray **) dview->a);
+        dview->display_numbers = calc_nwidth ((const GArray * const *) dview->a);
         dview->new_frame = (old != dview->display_numbers);
     }
     dview_reread (dview);
@@ -3043,7 +3043,7 @@ dview_load_options (WDiff * dview)
         dview->display_symbols = 1;
     show_numbers = mc_config_get_bool (mc_main_config, "DiffView", "show_numbers", FALSE);
     if (show_numbers)
-        dview->display_numbers = calc_nwidth ((const GArray ** const) dview->a);
+        dview->display_numbers = calc_nwidth ((const GArray * const *) dview->a);
     tab_size = mc_config_get_int (mc_main_config, "DiffView", "tab_size", 8);
     if (tab_size > 0 && tab_size < 9)
         dview->tab_size = tab_size;
@@ -3126,7 +3126,7 @@ dview_execute_cmd (WDiff * dview, long command)
         dview->new_frame = TRUE;
         break;
     case CK_ShowNumbers:
-        dview->display_numbers ^= calc_nwidth ((const GArray ** const) dview->a);
+        dview->display_numbers ^= calc_nwidth ((const GArray * const *) dview->a);
         dview->new_frame = TRUE;
         break;
     case CK_SplitFull:

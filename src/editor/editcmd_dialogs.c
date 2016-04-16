@@ -346,7 +346,7 @@ editcmd_dialog_raw_key_query (const char *heading, const char *query, gboolean c
 char *
 editcmd_dialog_completion_show (const WEdit * edit, int max_len, GString ** compl, int num_compl)
 {
-    const Widget *we = WIDGET (edit);
+    const Widget *we = CONST_WIDGET (edit);
     int start_x, start_y, offset, i;
     char *curr = NULL;
     WDialog *compl_dlg;

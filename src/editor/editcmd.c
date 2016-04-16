@@ -909,7 +909,7 @@ editcmd_find (edit_search_status_msg_t * esm, gsize * len)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-edit_replace_cmd__conv_to_display (char *str)
+edit_replace_cmd__conv_to_display (const char *str)
 {
 #ifdef HAVE_CHARSET
     GString *tmp;
@@ -1487,7 +1487,7 @@ edit_syntax_onoff_cb (void *data, void *user_data)
 {
     (void) user_data;
 
-    if (edit_widget_is_editor ((const Widget *) data))
+    if (edit_widget_is_editor (CONST_WIDGET (data)))
     {
         WEdit *edit = (WEdit *) data;
 
@@ -1511,7 +1511,7 @@ edit_redraw_page_cb (void *data, void *user_data)
 {
     (void) user_data;
 
-    if (edit_widget_is_editor ((const Widget *) data))
+    if (edit_widget_is_editor (CONST_WIDGET (data)))
         ((WEdit *) data)->force |= REDRAW_PAGE;
 }
 
@@ -2244,7 +2244,7 @@ edit_close_cmd (WEdit * edit)
 
         del_widget (edit);
 
-        if (edit_widget_is_editor (WIDGET (h->current->data)))
+        if (edit_widget_is_editor (CONST_WIDGET (h->current->data)))
             edit = (WEdit *) h->current->data;
         else
         {
@@ -2532,8 +2532,8 @@ edit_replace_cmd (WEdit * edit, int again)
     {
         char *tmp_inp1, *tmp_inp2;
 
-        disp1 = edit_replace_cmd__conv_to_display (saved1 ? saved1 : (char *) "");
-        disp2 = edit_replace_cmd__conv_to_display (saved2 ? saved2 : (char *) "");
+        disp1 = edit_replace_cmd__conv_to_display (saved1 ? saved1 : "");
+        disp2 = edit_replace_cmd__conv_to_display (saved2 ? saved2 : "");
 
         edit_push_undo_action (edit, KEY_PRESS + edit->start_display);
 
@@ -2744,7 +2744,7 @@ edit_replace_cmd (WEdit * edit, int again)
 mc_search_cbret_t
 edit_search_cmd_callback (const void *user_data, gsize char_offset, int *current_char)
 {
-    WEdit *edit = ((edit_search_status_msg_t *) user_data)->edit;
+    WEdit *edit = ((const edit_search_status_msg_t *) user_data)->edit;
 
     *current_char = edit_buffer_get_byte (&edit->buffer, (off_t) char_offset);
     return MC_SEARCH_CB_OK;

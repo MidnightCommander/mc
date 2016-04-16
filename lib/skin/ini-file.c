@@ -58,14 +58,16 @@ mc_skin_get_list_from_dir (const gchar * base_dir, GPtrArray * list)
 
     if (dir != NULL)
     {
-        while ((name = (gchar *) g_dir_read_name (dir)) != NULL)
+        const gchar *cname;
+
+        while ((cname = g_dir_read_name (dir)) != NULL)
         {
             gchar *sname;
             size_t slen;
             unsigned int i;
 
-            slen = strlen (name);
-            sname = g_strndup (name, slen);
+            slen = strlen (cname);
+            sname = g_strndup (cname, slen);
 
             if (slen > 4 && strcmp (sname + slen - 4, ".ini") == 0)
                 sname[slen - 4] = '\0';
@@ -89,10 +91,7 @@ mc_skin_get_list_from_dir (const gchar * base_dir, GPtrArray * list)
 static int
 string_array_comparator (gconstpointer a, gconstpointer b)
 {
-    char *aa = *(char **) a;
-    char *bb = *(char **) b;
-
-    return strcmp (aa, bb);
+    return strcmp (*(char *const *) a, *(char *const *) b);
 }
 
 /* --------------------------------------------------------------------------------------------- */

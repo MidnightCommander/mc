@@ -201,8 +201,8 @@ dlg_unfocus (WDialog * h)
 static int
 dlg_find_widget_callback (const void *a, const void *b)
 {
-    const Widget *w = WIDGET (a);
-    widget_cb_fn f = (widget_cb_fn) b;
+    const Widget *w = CONST_WIDGET (a);
+    const widget_cb_fn f = b;
 
     return (w->callback == f) ? 0 : 1;
 }
@@ -595,7 +595,7 @@ frontend_dlg_run (WDialog * h)
 static int
 dlg_find_widget_by_id (gconstpointer a, gconstpointer b)
 {
-    Widget *w = WIDGET (a);
+    const Widget *w = CONST_WIDGET (a);
     unsigned long id = GPOINTER_TO_UINT (b);
 
     return w->id == id ? 0 : 1;

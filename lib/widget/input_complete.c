@@ -685,7 +685,7 @@ command_completion_function (const char *_text, int state, input_complete_t flag
 static int
 match_compare (const void *a, const void *b)
 {
-    return strcmp (*(char **) a, *(char **) b);
+    return strcmp (*(char *const *) a, *(char *const *) b);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -799,7 +799,7 @@ completion_matches (const char *text, CompletionFunction entry_function, input_c
 static gboolean
 check_is_cd (const char *text, int lc_start, input_complete_t flags)
 {
-    char *p, *q;
+    const char *p, *q;
 
     SHOW_C_CTX ("check_is_cd");
 
@@ -807,10 +807,10 @@ check_is_cd (const char *text, int lc_start, input_complete_t flags)
         return FALSE;
 
     /* Skip initial spaces */
-    p = (char *) text;
-    q = (char *) text + lc_start;
+    p = text;
+    q = text + lc_start;
     while (p < q && p[0] != '\0' && str_isspace (p))
-        str_next_char (&p);
+        str_cnext_char (&p);
 
     /* Check if the command is "cd" and the cursor is after it */
     return (p[0] == 'c' && p[1] == 'd' && str_isspace (p + 2) && p + 2 < q);

@@ -332,7 +332,7 @@ edit_window_list (const WDialog * h)
     listbox = create_listbox_window (lines, cols, _("Open files"), "[Open files]");
 
     for (w = h->widgets; w != NULL; w = g_list_next (w))
-        if (edit_widget_is_editor (WIDGET (w->data)))
+        if (edit_widget_is_editor (CONST_WIDGET (w->data)))
         {
             WEdit *e = (WEdit *) w->data;
             char *fname;
@@ -427,7 +427,7 @@ edit_dialog_command_execute (WDialog * h, long command)
         break;
     case CK_Close:
         /* if there are no opened files anymore, close MC editor */
-        if (edit_widget_is_editor (WIDGET (h->current->data)) &&
+        if (edit_widget_is_editor (CONST_WIDGET (h->current->data)) &&
             edit_close_cmd ((WEdit *) h->current->data) && find_editor (h) == NULL)
             dlg_stop (h);
         break;
@@ -476,7 +476,7 @@ edit_dialog_command_execute (WDialog * h, long command)
         break;
     case CK_WindowMove:
     case CK_WindowResize:
-        if (edit_widget_is_editor (WIDGET (h->current->data)))
+        if (edit_widget_is_editor (CONST_WIDGET (h->current->data)))
             edit_handle_move_resize ((WEdit *) h->current->data, command);
         break;
     case CK_WindowList:
@@ -643,7 +643,7 @@ edit_quit (WDialog * h)
     h->state = DLG_ACTIVE;      /* don't stop the dialog before final decision */
 
     for (l = h->widgets; l != NULL; l = g_list_next (l))
-        if (edit_widget_is_editor (WIDGET (l->data)))
+        if (edit_widget_is_editor (CONST_WIDGET (l->data)))
         {
             e = (WEdit *) l->data;
 
@@ -890,7 +890,8 @@ edit_dialog_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 
             /* Try find top fullscreen window */
             for (l = h->widgets; l != NULL; l = g_list_next (l))
-                if (edit_widget_is_editor (WIDGET (l->data)) && ((WEdit *) l->data)->fullscreen)
+                if (edit_widget_is_editor (CONST_WIDGET (l->data))
+                    && ((WEdit *) l->data)->fullscreen)
                     top = l;
 
             /* Handle fullscreen/close buttons in the top line */
@@ -1266,7 +1267,7 @@ edit_get_file_name (const WEdit * edit)
 WEdit *
 find_editor (const WDialog * h)
 {
-    if (edit_widget_is_editor (WIDGET (h->current->data)))
+    if (edit_widget_is_editor (CONST_WIDGET (h->current->data)))
         return (WEdit *) h->current->data;
     return (WEdit *) find_widget_type (h, edit_callback);
 }

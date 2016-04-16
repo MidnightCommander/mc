@@ -91,7 +91,7 @@ get_history_length (const GList * history)
 {
     size_t len = 0;
 
-    for (; history != NULL; history = g_list_previous (history))
+    for (; history != NULL; history = (const GList *) g_list_previous (history))
         len++;
 
     return len;
