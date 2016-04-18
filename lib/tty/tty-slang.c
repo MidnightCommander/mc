@@ -174,7 +174,7 @@ slang_reset_softkeys (void)
         char *send;
 
         g_snprintf (tmp, sizeof (tmp), "k%d", key);
-        send = (char *) SLtt_tgetstr (tmp);
+        send = SLtt_tgetstr (tmp);
         if (send != NULL)
         {
             g_snprintf (tmp, sizeof (tmp), ESC_STR "&f%dk%dd%dL%s%s", key,
@@ -191,7 +191,7 @@ do_define_key (int code, const char *strcap)
 {
     char *seq;
 
-    seq = (char *) SLtt_tgetstr ((char *) strcap);
+    seq = SLtt_tgetstr ((SLFUTURE_CONST char *) strcap);
     if (seq != NULL)
         define_sequence (code, seq, MCKEY_NOACTION);
 }
@@ -353,7 +353,7 @@ tty_shutdown (void)
     /* Load the op capability to reset the colors to those that were 
      * active when the program was started up 
      */
-    op_cap = SLtt_tgetstr ((char *) "op");
+    op_cap = SLtt_tgetstr ((SLFUTURE_CONST char *) "op");
     if (op_cap != NULL)
     {
         fputs (op_cap, stdout);
@@ -448,7 +448,7 @@ tty_keypad (gboolean set)
 {
     char *keypad_string;
 
-    keypad_string = (char *) SLtt_tgetstr ((char *) (set ? "ks" : "ke"));
+    keypad_string = SLtt_tgetstr ((SLFUTURE_CONST char *) (set ? "ks" : "ke"));
     if (keypad_string != NULL)
         SLtt_write_string (keypad_string);
     if (set && reset_hp_softkeys)
@@ -743,7 +743,7 @@ tty_printf (const char *fmt, ...)
 char *
 tty_tgetstr (const char *cap)
 {
-    return SLtt_tgetstr ((char *) cap);
+    return SLtt_tgetstr ((SLFUTURE_CONST char *) cap);
 }
 
 /* --------------------------------------------------------------------------------------------- */
