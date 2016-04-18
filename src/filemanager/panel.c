@@ -2081,6 +2081,23 @@ panel_select_ext_cmd (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static int
+panel_selected_at_half (const WPanel * panel)
+{
+    int lines, top;
+
+    lines = panel_lines (panel);
+
+    /* define top file of column */
+    top = panel->top_file;
+    if (panel->list_cols > 1)
+        top += lines * ((panel->selected - top) / lines);
+
+    return (panel->selected - top - lines / 2);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 move_down (WPanel * panel)
 {
@@ -2102,7 +2119,7 @@ move_down (WPanel * panel)
             panel->top_file = panel->dir.len - items;
         paint_dir (panel);
     }
-    else if (panels_options.scroll_center && (panel->selected - panel->top_file) > (items / 2))
+    else if (panels_options.scroll_center && panel_selected_at_half (panel) > 0)
     {
         /* Scroll window when cursor is halfway down */
         panel->top_file++;
@@ -2131,8 +2148,7 @@ move_up (WPanel * panel)
             panel->top_file = 0;
         paint_dir (panel);
     }
-    else if (panels_options.scroll_center
-             && (panel->selected - panel->top_file) < (panel_items (panel) / 2))
+    else if (panels_options.scroll_center && panel_selected_at_half (panel) < 0)
     {
         /* Scroll window when cursor is halfway up */
         panel->top_file--;

@@ -2094,7 +2094,7 @@ will just scroll a file at a time.
 .PP
 .I Center scrolling.
 If set, panel will scroll when the cursor reaches the middle of the
-panel, only hitting the top or bottom of the panel when actually on
+panel column, only hitting the top or bottom of the panel when actually on
 the first or last file. This behavior applies when scrolling one file
 at a time, and does not apply to the page up/down keys.
 .PP
