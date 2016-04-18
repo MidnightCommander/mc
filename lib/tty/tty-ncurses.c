@@ -673,7 +673,8 @@ char *
 tty_tgetstr (const char *cap)
 {
     char *unused = NULL;
-    return tgetstr (cap, &unused);
+
+    return tgetstr ((NCURSES_CONST char *) cap, &unused);
 }
 
 /* --------------------------------------------------------------------------------------------- */
