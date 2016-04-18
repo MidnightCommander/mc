@@ -2102,6 +2102,13 @@ move_down (WPanel * panel)
             panel->top_file = panel->dir.len - items;
         paint_dir (panel);
     }
+    else if (panels_options.scroll_center && (panel->selected - panel->top_file) > (items / 2))
+    {
+        /* Scroll window when cursor is halfway down */
+        panel->top_file++;
+        if (panel->top_file > panel->dir.len - items)
+            panel->top_file = panel->dir.len - items;
+    }
     select_item (panel);
 }
 
@@ -2123,6 +2130,14 @@ move_up (WPanel * panel)
         if (panel->top_file < 0)
             panel->top_file = 0;
         paint_dir (panel);
+    }
+    else if (panels_options.scroll_center
+             && (panel->selected - panel->top_file) < (panel_items (panel) / 2))
+    {
+        /* Scroll window when cursor is halfway up */
+        panel->top_file--;
+        if (panel->top_file < 0)
+            panel->top_file = 0;
     }
     select_item (panel);
 }

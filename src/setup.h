@@ -48,6 +48,7 @@ typedef struct
     gboolean navigate_with_arrows;      /* If TRUE: l&r arrows are used to chdir if the input line is empty */
     gboolean scroll_pages;      /* If TRUE, panel is scrolled by half the display when the cursor reaches
                                    the end or the beginning of the panel */
+    gboolean scroll_center;     /* If TRUE, scroll when the cursor hits the middle of the panel */
     gboolean mouse_move_pages;  /* Scroll page/item using mouse wheel */
     gboolean filetype_mode;     /* If TRUE then add per file type hilighting */
     gboolean permission_mode;   /* If TRUE, we use permission hilighting */
