@@ -1106,12 +1106,14 @@ char *
 mc_realpath (const char *path, char *resolved_path)
 {
     char copy_path[PATH_MAX];
-    char link_path[PATH_MAX];
     char got_path[PATH_MAX];
     char *new_path = got_path;
     char *max_path;
+#ifdef S_IFLNK
+    char link_path[PATH_MAX];
     int readlinks = 0;
     int n;
+#endif /* S_IFLNK */
 
     /* Make a copy of the source path since we may need to modify it. */
     if (strlen (path) >= PATH_MAX - 2)
