@@ -53,7 +53,7 @@ static char rp_shell[PATH_MAX];
 /**
  * Get a system shell.
  *
- * @return newly allocated string with shell name
+ * @return newly allocated mc_shell_t object with shell name
  */
 
 static mc_shell_t *
