@@ -82,6 +82,7 @@
 #include "tree.h"
 #include "midnight.h"           /* current_panel */
 #include "layout.h"             /* rotate_dash() */
+#include "ioblksize.h"          /* io_blksize() */
 
 #include "file.h"
 
@@ -1485,9 +1486,8 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     gid_t src_gid = (gid_t) (-1);
 
     int src_desc, dest_desc = -1;
-    int n_read, n_written;
     mode_t src_mode = 0;        /* The mode of the source file */
-    struct stat sb, sb2;
+    struct stat src_stat, dst_stat;
     struct utimbuf utb;
     gboolean dst_exists = FALSE, appending = FALSE;
     off_t file_size = -1;
@@ -1495,8 +1495,8 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     struct timeval tv_transfer_start;
     dest_status_t dst_status = DEST_NONE;
     int open_flags;
-    gboolean is_first_time = TRUE;
     vfs_path_t *src_vpath = NULL, *dst_vpath = NULL;
+    char *buf = NULL;
 
     /* FIXME: We should not be using global variables! */
     ctx->do_reget = 0;
@@ -1516,9 +1516,9 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
 
     mc_refresh ();
 
-    while (mc_stat (dst_vpath, &sb2) == 0)
+    while (mc_stat (dst_vpath, &dst_stat) == 0)
     {
-        if (S_ISDIR (sb2.st_mode))
+        if (S_ISDIR (dst_stat.st_mode))
         {
             if (ctx->skip_all)
                 return_status = FILE_SKIPALL;
@@ -1537,7 +1537,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         break;
     }
 
-    while ((*ctx->stat_func) (src_vpath, &sb) != 0)
+    while ((*ctx->stat_func) (src_vpath, &src_stat) != 0)
     {
         if (ctx->skip_all)
             return_status = FILE_SKIPALL;
@@ -1555,7 +1555,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     if (dst_exists)
     {
         /* Destination already exists */
-        if (sb.st_dev == sb2.st_dev && sb.st_ino == sb2.st_ino)
+        if (src_stat.st_dev == dst_stat.st_dev && src_stat.st_ino == dst_stat.st_ino)
         {
             return_status = warn_same_file (_("\"%s\"\nand\n\"%s\"\nare the same file"),
                                             src_path, dst_path);
@@ -1566,7 +1566,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         if (tctx->ask_overwrite)
         {
             ctx->do_reget = 0;
-            return_status = query_replace (ctx, dst_path, &sb, &sb2);
+            return_status = query_replace (ctx, dst_path, &src_stat, &dst_stat);
             if (return_status != FILE_CONT)
                 goto ret_fast;
         }
@@ -1575,23 +1575,24 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     if (!ctx->do_append)
     {
         /* Check the hardlinks */
-        if (!ctx->follow_links && sb.st_nlink > 1 && check_hardlinks (src_vpath, dst_vpath, &sb))
+        if (!ctx->follow_links && src_stat.st_nlink > 1
+            && check_hardlinks (src_vpath, dst_vpath, &src_stat))
         {
             /* We have made a hardlink - no more processing is necessary */
             return_status = FILE_CONT;
             goto ret_fast;
         }
 
-        if (S_ISLNK (sb.st_mode))
+        if (S_ISLNK (src_stat.st_mode))
         {
             return_status = make_symlink (ctx, src_path, dst_path);
             goto ret_fast;
         }
 
-        if (S_ISCHR (sb.st_mode) || S_ISBLK (sb.st_mode) ||
-            S_ISFIFO (sb.st_mode) || S_ISNAM (sb.st_mode) || S_ISSOCK (sb.st_mode))
+        if (S_ISCHR (src_stat.st_mode) || S_ISBLK (src_stat.st_mode) || S_ISFIFO (src_stat.st_mode)
+            || S_ISNAM (src_stat.st_mode) || S_ISSOCK (src_stat.st_mode))
         {
-            while (mc_mknod (dst_vpath, sb.st_mode & ctx->umask_kill, sb.st_rdev) < 0
+            while (mc_mknod (dst_vpath, src_stat.st_mode & ctx->umask_kill, src_stat.st_rdev) < 0
                    && !ctx->skip_all)
             {
                 return_status = file_error (_("Cannot create special file \"%s\"\n%s"), dst_path);
@@ -1603,8 +1604,8 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             }
             /* Success */
 
-            while (ctx->preserve_uidgid && mc_chown (dst_vpath, sb.st_uid, sb.st_gid) != 0
-                   && !ctx->skip_all)
+            while (ctx->preserve_uidgid
+                   && mc_chown (dst_vpath, src_stat.st_uid, src_stat.st_gid) != 0 && !ctx->skip_all)
             {
                 temp_status = file_error (_("Cannot chown target file \"%s\"\n%s"), dst_path);
                 if (temp_status == FILE_SKIP)
@@ -1618,7 +1619,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
                 }
             }
 
-            while (ctx->preserve && mc_chmod (dst_vpath, sb.st_mode & ctx->umask_kill) != 0
+            while (ctx->preserve && mc_chmod (dst_vpath, src_stat.st_mode & ctx->umask_kill) != 0
                    && !ctx->skip_all)
             {
                 temp_status = file_error (_("Cannot chmod target file \"%s\"\n%s"), dst_path);
@@ -1663,7 +1664,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         }
     }
 
-    while (mc_fstat (src_desc, &sb) != 0)
+    while (mc_fstat (src_desc, &src_stat) != 0)
     {
         if (ctx->skip_all)
             return_status = FILE_SKIPALL;
@@ -1679,12 +1680,12 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         goto ret;
     }
 
-    src_mode = sb.st_mode;
-    src_uid = sb.st_uid;
-    src_gid = sb.st_gid;
-    utb.actime = sb.st_atime;
-    utb.modtime = sb.st_mtime;
-    file_size = sb.st_size;
+    src_mode = src_stat.st_mode;
+    src_uid = src_stat.st_uid;
+    src_gid = src_stat.st_gid;
+    utb.actime = src_stat.st_atime;
+    utb.modtime = src_stat.st_mtime;
+    file_size = src_stat.st_size;
 
     open_flags = O_WRONLY;
     if (dst_exists)
@@ -1723,7 +1724,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     ctx->do_append = FALSE;
 
     /* Find out the optimal buffer size.  */
-    while (mc_fstat (dest_desc, &sb) != 0)
+    while (mc_fstat (dest_desc, &dst_stat) != 0)
     {
         if (ctx->skip_all)
             return_status = FILE_SKIPALL;
@@ -1739,7 +1740,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     }
 
     /* try preallocate space; if fail, try copy anyway */
-    while (vfs_preallocate (dest_desc, file_size, appending ? sb.st_size : 0) != 0)
+    while (vfs_preallocate (dest_desc, file_size, appending ? dst_stat.st_size : 0) != 0)
     {
         if (ctx->skip_all)
         {
@@ -1783,26 +1784,27 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     return_status = check_progress_buttons (ctx);
     mc_refresh ();
 
-    if (return_status != FILE_CONT)
-        goto ret;
-
+    if (return_status == FILE_CONT)
     {
+        size_t bufsize;
         off_t n_read_total = 0;
         struct timeval tv_current, tv_last_update, tv_last_input;
         int secs, update_secs;
         const char *stalled_msg = "";
+        gboolean is_first_time = TRUE;
 
         tv_last_update = tv_transfer_start;
 
+        bufsize = io_blksize (dst_stat);
+        buf = g_malloc (bufsize);
+
         while (TRUE)
         {
-            char buf[BUF_8K];
+            ssize_t n_read = -1, n_written;
 
             /* src_read */
-            if (mc_ctl (src_desc, VFS_CTL_IS_NOTREADY, 0))
-                n_read = -1;
-            else
-                while ((n_read = mc_read (src_desc, buf, sizeof (buf))) < 0 && !ctx->skip_all)
+            if (mc_ctl (src_desc, VFS_CTL_IS_NOTREADY, 0) == 0)
+                while ((n_read = mc_read (src_desc, buf, bufsize)) < 0 && !ctx->skip_all)
                 {
                     return_status = file_error (_("Cannot read source file \"%s\"\n%s"), src_path);
                     if (return_status == FILE_RETRY)
@@ -1811,6 +1813,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
                         ctx->skip_all = TRUE;
                     goto ret;
                 }
+
             if (n_read == 0)
                 break;
 
@@ -1819,6 +1822,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             if (n_read > 0)
             {
                 char *t = buf;
+
                 n_read_total += n_read;
 
                 /* Windows NT ftp servers report that files have no
@@ -1830,7 +1834,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
                 gettimeofday (&tv_last_input, NULL);
 
                 /* dst_write */
-                while ((n_written = mc_write (dest_desc, t, n_read)) < n_read)
+                while ((n_written = mc_write (dest_desc, t, (size_t) n_read)) < n_read)
                 {
                     gboolean write_errno_nospace;
 
@@ -1910,11 +1914,13 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
                 goto ret;
             }
         }
+
+        dst_status = DEST_FULL; /* copy successful, don't remove target file */
     }
 
-    dst_status = DEST_FULL;     /* copy successful, don't remove target file */
-
   ret:
+    g_free (buf);
+
     rotate_dash (FALSE);
     while (src_desc != -1 && mc_close (src_desc) < 0 && !ctx->skip_all)
     {

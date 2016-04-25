@@ -17,6 +17,7 @@ libmcfilemanager_la_SOURCES = \
 	find.c find.h \
 	hotlist.c hotlist.h \
 	info.c info.h \
+	ioblksize.h \
 	layout.c layout.h \
 	midnight.h midnight.c \
 	mountlist.c mountlist.h \

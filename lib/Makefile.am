@@ -41,6 +41,7 @@ libmc_la_SOURCES = \
 	lock.c lock.h \
 	serialize.c serialize.h \
 	shell.c shell.h \
+	stat-size.h \
 	timefmt.c timefmt.h \
 	timer.c timer.h
 
