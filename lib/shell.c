@@ -76,6 +76,8 @@ mc_shell_get_installed_in_system (void)
         mc_shell->path = g_strdup ("/bin/zsh");
     else if (access ("/bin/tcsh", X_OK) == 0)
         mc_shell->path = g_strdup ("/bin/tcsh");
+    else if (access ("/bin/csh", X_OK) == 0)
+        mc_shell->path = g_strdup ("/bin/csh");
     /* No fish as fallback because it is so much different from other shells and
      * in a way exotic (even though user-friendly by name) that we should not
      * present it as a subshell without the user's explicit intention. We rather
@@ -153,6 +155,12 @@ mc_shell_recognize_real_path (mc_shell_t * mc_shell)
         /* Also detects csh symlinked to tcsh */
         mc_shell->type = SHELL_TCSH;
         mc_shell->name = "tcsh";
+    }
+    else if (strstr (mc_shell->path, "/csh") != NULL
+             || strstr (mc_shell->real_path, "/csh") != NULL)
+    {
+        mc_shell->type = SHELL_TCSH;
+        mc_shell->name = "csh";
     }
     else if (strstr (mc_shell->path, "/fish") != NULL
              || strstr (mc_shell->real_path, "/fish") != NULL)
