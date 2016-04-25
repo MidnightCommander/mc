@@ -21,11 +21,6 @@ test -z "$srcdir" && srcdir=.
 # Some shells don't propagate "set -e" to subshells.
 set -e
 
-$AUTOPOINT --version >/dev/null 2>&1
-if test $? -ne 0;  then
-    AUTOPOINT=maint/utils/autopoint
-fi
-
 cd "$srcdir"
 
 # The autoconf cache (version after 2.52) is not reliable yet.
