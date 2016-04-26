@@ -3007,9 +3007,9 @@ static void
 dview_save_options (WDiff * dview)
 {
     mc_config_set_bool (mc_global.main_config, "DiffView", "show_symbols",
-                        dview->display_symbols != 0 ? TRUE : FALSE);
+                        dview->display_symbols != 0);
     mc_config_set_bool (mc_global.main_config, "DiffView", "show_numbers",
-                        dview->display_numbers != 0 ? TRUE : FALSE);
+                        dview->display_numbers != 0);
     mc_config_set_int (mc_global.main_config, "DiffView", "tab_size", dview->tab_size);
 
     mc_config_set_int (mc_global.main_config, "DiffView", "diff_quality", dview->opt.quality);
