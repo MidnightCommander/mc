@@ -23,9 +23,6 @@ typedef struct mc_config_t
 
 /*** global variables defined in .c file *********************************************************/
 
-extern mc_config_t *mc_main_config;
-extern mc_config_t *mc_panels_config;
-
 /*** declarations of public functions ************************************************************/
 
 /* mcconfig/common.c: */

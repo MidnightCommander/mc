@@ -32,8 +32,6 @@
 
 #include "src/vfs/local/local.c"
 
-const char *mc_config_get_home_dir (void);
-
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Mock */

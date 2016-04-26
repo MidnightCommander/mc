@@ -34,9 +34,6 @@
 
 /*** global variables **************************************************/
 
-mc_config_t *mc_main_config;
-mc_config_t *mc_panels_config;
-
 /*** file scope macro definitions **************************************/
 
 /*** file scope type declarations **************************************/

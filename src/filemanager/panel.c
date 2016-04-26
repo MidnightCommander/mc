@@ -4316,7 +4316,7 @@ panel_new_with_dir (const char *panel_name, const vfs_path_t * vpath)
     panel->frame_size = frame_half;
 
     section = g_strconcat ("Temporal:", panel->panel_name, (char *) NULL);
-    if (!mc_config_has_group (mc_main_config, section))
+    if (!mc_config_has_group (mc_global.main_config, section))
     {
         g_free (section);
         section = g_strdup (panel->panel_name);

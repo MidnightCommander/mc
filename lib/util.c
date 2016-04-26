@@ -1216,7 +1216,7 @@ save_file_position (const vfs_path_t * filename_vpath, long line, long column, o
     gboolean src_error = FALSE;
 
     if (filepos_max_saved_entries == 0)
-        filepos_max_saved_entries = mc_config_get_int (mc_main_config, CONFIG_APP_SECTION,
+        filepos_max_saved_entries = mc_config_get_int (mc_global.main_config, CONFIG_APP_SECTION,
                                                        "filepos_max_saved_entries", 1024);
 
     fn = mc_config_get_full_path (MC_FILEPOS_FILE);

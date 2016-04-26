@@ -95,6 +95,7 @@
 
 #include "fs.h"
 #include "shell.h"
+#include "mcconfig.h"
 
 #ifdef USE_MAINTAINER_MODE
 #include "lib/logging.h"
@@ -180,6 +181,9 @@ typedef struct
     char *sysconfig_dir;
     /* share_data_dir: Area for default settings from developers */
     char *share_data_dir;
+
+    mc_config_t *main_config;
+    mc_config_t *panels_config;
 
 #ifdef HAVE_CHARSET
     /* Numbers of (file I/O) and (input/display) codepages. -1 if not selected */

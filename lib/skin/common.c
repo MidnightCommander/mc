@@ -76,7 +76,7 @@ mc_skin_get_default_name (void)
         return g_strdup (tmp_str);
 
     /*  from config. Or 'default' if no present in config */
-    return mc_config_get_string (mc_main_config, CONFIG_APP_SECTION, "skin", "default");
+    return mc_config_get_string (mc_global.main_config, CONFIG_APP_SECTION, "skin", "default");
 }
 
 /* --------------------------------------------------------------------------------------------- */

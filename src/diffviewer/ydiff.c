@@ -3006,23 +3006,24 @@ dview_do_save (WDiff * dview)
 static void
 dview_save_options (WDiff * dview)
 {
-    mc_config_set_bool (mc_main_config, "DiffView", "show_symbols",
+    mc_config_set_bool (mc_global.main_config, "DiffView", "show_symbols",
                         dview->display_symbols != 0 ? TRUE : FALSE);
-    mc_config_set_bool (mc_main_config, "DiffView", "show_numbers",
+    mc_config_set_bool (mc_global.main_config, "DiffView", "show_numbers",
                         dview->display_numbers != 0 ? TRUE : FALSE);
-    mc_config_set_int (mc_main_config, "DiffView", "tab_size", dview->tab_size);
+    mc_config_set_int (mc_global.main_config, "DiffView", "tab_size", dview->tab_size);
 
-    mc_config_set_int (mc_main_config, "DiffView", "diff_quality", dview->opt.quality);
+    mc_config_set_int (mc_global.main_config, "DiffView", "diff_quality", dview->opt.quality);
 
-    mc_config_set_bool (mc_main_config, "DiffView", "diff_ignore_tws",
+    mc_config_set_bool (mc_global.main_config, "DiffView", "diff_ignore_tws",
                         dview->opt.strip_trailing_cr);
-    mc_config_set_bool (mc_main_config, "DiffView", "diff_ignore_all_space",
+    mc_config_set_bool (mc_global.main_config, "DiffView", "diff_ignore_all_space",
                         dview->opt.ignore_all_space);
-    mc_config_set_bool (mc_main_config, "DiffView", "diff_ignore_space_change",
+    mc_config_set_bool (mc_global.main_config, "DiffView", "diff_ignore_space_change",
                         dview->opt.ignore_space_change);
-    mc_config_set_bool (mc_main_config, "DiffView", "diff_tab_expansion",
+    mc_config_set_bool (mc_global.main_config, "DiffView", "diff_tab_expansion",
                         dview->opt.ignore_tab_expansion);
-    mc_config_set_bool (mc_main_config, "DiffView", "diff_ignore_case", dview->opt.ignore_case);
+    mc_config_set_bool (mc_global.main_config, "DiffView", "diff_ignore_case",
+                        dview->opt.ignore_case);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3033,30 +3034,30 @@ dview_load_options (WDiff * dview)
     gboolean show_numbers, show_symbols;
     int tab_size;
 
-    show_symbols = mc_config_get_bool (mc_main_config, "DiffView", "show_symbols", FALSE);
+    show_symbols = mc_config_get_bool (mc_global.main_config, "DiffView", "show_symbols", FALSE);
     if (show_symbols)
         dview->display_symbols = 1;
-    show_numbers = mc_config_get_bool (mc_main_config, "DiffView", "show_numbers", FALSE);
+    show_numbers = mc_config_get_bool (mc_global.main_config, "DiffView", "show_numbers", FALSE);
     if (show_numbers)
         dview->display_numbers = calc_nwidth ((const GArray * const *) dview->a);
-    tab_size = mc_config_get_int (mc_main_config, "DiffView", "tab_size", 8);
+    tab_size = mc_config_get_int (mc_global.main_config, "DiffView", "tab_size", 8);
     if (tab_size > 0 && tab_size < 9)
         dview->tab_size = tab_size;
     else
         dview->tab_size = 8;
 
-    dview->opt.quality = mc_config_get_int (mc_main_config, "DiffView", "diff_quality", 0);
+    dview->opt.quality = mc_config_get_int (mc_global.main_config, "DiffView", "diff_quality", 0);
 
     dview->opt.strip_trailing_cr =
-        mc_config_get_bool (mc_main_config, "DiffView", "diff_ignore_tws", FALSE);
+        mc_config_get_bool (mc_global.main_config, "DiffView", "diff_ignore_tws", FALSE);
     dview->opt.ignore_all_space =
-        mc_config_get_bool (mc_main_config, "DiffView", "diff_ignore_all_space", FALSE);
+        mc_config_get_bool (mc_global.main_config, "DiffView", "diff_ignore_all_space", FALSE);
     dview->opt.ignore_space_change =
-        mc_config_get_bool (mc_main_config, "DiffView", "diff_ignore_space_change", FALSE);
+        mc_config_get_bool (mc_global.main_config, "DiffView", "diff_ignore_space_change", FALSE);
     dview->opt.ignore_tab_expansion =
-        mc_config_get_bool (mc_main_config, "DiffView", "diff_tab_expansion", FALSE);
+        mc_config_get_bool (mc_global.main_config, "DiffView", "diff_tab_expansion", FALSE);
     dview->opt.ignore_case =
-        mc_config_get_bool (mc_main_config, "DiffView", "diff_ignore_case", FALSE);
+        mc_config_get_bool (mc_global.main_config, "DiffView", "diff_ignore_case", FALSE);
 
     dview->new_frame = TRUE;
 }

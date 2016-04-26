@@ -558,7 +558,7 @@ load_panelize (void)
 {
     char **keys;
 
-    keys = mc_config_get_keys (mc_main_config, panelize_section, NULL);
+    keys = mc_config_get_keys (mc_global.main_config, panelize_section, NULL);
 
     add2panelize (g_strdup (_("Other command")), g_strdup (""));
 
@@ -594,8 +594,8 @@ load_panelize (void)
             }
 
             add2panelize (g_string_free (buffer, FALSE),
-                          mc_config_get_string (mc_main_config, panelize_section, *profile_keys,
-                                                ""));
+                          mc_config_get_string (mc_global.main_config, panelize_section,
+                                                *profile_keys, ""));
         }
 
         str_close_conv (conv);
@@ -611,11 +611,11 @@ save_panelize (void)
 {
     struct panelize *current = panelize;
 
-    mc_config_del_group (mc_main_config, panelize_section);
+    mc_config_del_group (mc_global.main_config, panelize_section);
     for (; current; current = current->next)
     {
         if (strcmp (current->label, _("Other command")))
-            mc_config_set_string (mc_main_config,
+            mc_config_set_string (mc_global.main_config,
                                   panelize_section, current->label, current->command);
     }
 }

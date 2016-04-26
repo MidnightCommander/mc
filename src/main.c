@@ -108,7 +108,7 @@ check_codeset (void)
             if (mc_global.display_codepage == -1)
                 mc_global.display_codepage = 0;
 
-            mc_config_set_string (mc_main_config, CONFIG_MISC_SECTION, "display_codepage",
+            mc_config_set_string (mc_global.main_config, CONFIG_MISC_SECTION, "display_codepage",
                                   cp_display);
         }
     }
@@ -287,7 +287,7 @@ main (int argc, char *argv[])
         char *buffer;
         vfs_path_t *vpath;
 
-        buffer = mc_config_get_string (mc_panels_config, "Dirs", "other_dir", ".");
+        buffer = mc_config_get_string (mc_global.panels_config, "Dirs", "other_dir", ".");
         vpath = vfs_path_from_str (buffer);
         if (vfs_file_is_local (vpath))
             saved_other_dir = buffer;

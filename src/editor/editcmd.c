@@ -1235,7 +1235,7 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
         return 0;
 
     entire_file =
-        mc_config_get_bool (mc_main_config, CONFIG_APP_SECTION,
+        mc_config_get_bool (mc_global.main_config, CONFIG_APP_SECTION,
                             "editor_wordcompletion_collect_entire_file", 0);
 
     last_byte = entire_file ? edit->buffer.size : word_start;
