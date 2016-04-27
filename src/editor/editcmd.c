@@ -829,8 +829,7 @@ editcmd_find (edit_search_status_msg_t * esm, gsize * len)
     {
         if (!eval_marks (edit, &start_mark, &end_mark))
         {
-            edit->search->error = MC_SEARCH_E_NOTFOUND;
-            edit->search->error_str = g_strdup (_(STR_E_NOTFOUND));
+            mc_search_set_error (edit->search, MC_SEARCH_E_NOTFOUND, "%s", _(STR_E_NOTFOUND));
             return FALSE;
         }
 
@@ -850,8 +849,7 @@ editcmd_find (edit_search_status_msg_t * esm, gsize * len)
                 edit_calculate_end_of_previous_line (&edit->buffer, end_mark, end_string_symbol);
         if (start_mark >= end_mark)
         {
-            edit->search->error = MC_SEARCH_E_NOTFOUND;
-            edit->search->error_str = g_strdup (_(STR_E_NOTFOUND));
+            mc_search_set_error (edit->search, MC_SEARCH_E_NOTFOUND, "%s", _(STR_E_NOTFOUND));
             return FALSE;
         }
     }
@@ -893,7 +891,8 @@ editcmd_find (edit_search_status_msg_t * esm, gsize * len)
             else
                 search_start--;
         }
-        edit->search->error_str = g_strdup (_(STR_E_NOTFOUND));
+
+        mc_search_set_error (edit->search, MC_SEARCH_E_NOTFOUND, "%s", _(STR_E_NOTFOUND));
     }
     else
     {

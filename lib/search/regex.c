@@ -322,6 +322,7 @@ mc_search__regex_found_cond_one (mc_search_t * lc_mc_search, mc_search_regex_t *
         if (mcerror != NULL)
         {
             lc_mc_search->error = MC_SEARCH_E_REGEX;
+            g_free (lc_mc_search->error_str);
             lc_mc_search->error_str =
                 str_conv_gerror_message (mcerror, _("Regular expression error"));
             g_error_free (mcerror);
@@ -816,6 +817,7 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_
         if (mcerror != NULL)
         {
             lc_mc_search->error = MC_SEARCH_E_REGEX_COMPILE;
+            g_free (lc_mc_search->error_str);
             lc_mc_search->error_str =
                 str_conv_gerror_message (mcerror, _("Regular expression error"));
             g_error_free (mcerror);
@@ -848,21 +850,15 @@ mc_search__cond_struct_new_init_regex (const char *charset, mc_search_t * lc_mc_
             pcre_compile (mc_search_cond->str->str, pcre_options, &error, &erroffset, NULL);
         if (mc_search_cond->regex_handle == NULL)
         {
-            lc_mc_search->error = MC_SEARCH_E_REGEX_COMPILE;
-            lc_mc_search->error_str = g_strdup (error);
+            mc_search_set_error (lc_mc_search, MC_SEARCH_E_REGEX_COMPILE, "%s", error);
             return;
         }
         lc_mc_search->regex_match_info = pcre_study (mc_search_cond->regex_handle, 0, &error);
-        if (lc_mc_search->regex_match_info == NULL)
+        if (lc_mc_search->regex_match_info == NULL && error != NULL)
         {
-            if (error != NULL)
-            {
-                lc_mc_search->error = MC_SEARCH_E_REGEX_COMPILE;
-                lc_mc_search->error_str = g_strdup (error);
-                g_free (mc_search_cond->regex_handle);
-                mc_search_cond->regex_handle = NULL;
-                return;
-            }
+            mc_search_set_error (lc_mc_search, MC_SEARCH_E_REGEX_COMPILE, "%s", error);
+            MC_PTR_FREE (mc_search_cond->regex_handle);
+            return;
         }
 #endif /* SEARCH_TYPE_GLIB */
     }
@@ -975,12 +971,11 @@ mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
 
     g_string_free (lc_mc_search->regex_buffer, TRUE);
     lc_mc_search->regex_buffer = NULL;
-    lc_mc_search->error = MC_SEARCH_E_NOTFOUND;
 
-    if (ret != MC_SEARCH_CB_ABORT)
-        lc_mc_search->error_str = g_strdup (_(STR_E_NOTFOUND));
+    if (ret == MC_SEARCH_CB_ABORT)
+        mc_search_set_error (lc_mc_search, MC_SEARCH_E_NOTFOUND, NULL);
     else
-        lc_mc_search->error_str = NULL;
+        mc_search_set_error (lc_mc_search, MC_SEARCH_E_NOTFOUND, "%s", _(STR_E_NOTFOUND));
 
     return FALSE;
 }
@@ -1006,8 +1001,8 @@ mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * repla
     if (num_replace_tokens > lc_mc_search->num_results - 1
         || num_replace_tokens > MC_SEARCH__NUM_REPLACE_ARGS)
     {
-        lc_mc_search->error = MC_SEARCH_E_REGEX_REPLACE;
-        lc_mc_search->error_str = g_strdup (_(STR_E_RPL_NOT_EQ_TO_FOUND));
+        mc_search_set_error (lc_mc_search, MC_SEARCH_E_REGEX_REPLACE, "%s",
+                             _(STR_E_RPL_NOT_EQ_TO_FOUND));
         return NULL;
     }
 
@@ -1063,8 +1058,8 @@ mc_search_regex_prepare_replace_str (mc_search_t * lc_mc_search, GString * repla
         if (lc_index > lc_mc_search->num_results)
         {
             g_string_free (ret, TRUE);
-            lc_mc_search->error = MC_SEARCH_E_REGEX_REPLACE;
-            lc_mc_search->error_str = g_strdup_printf (_(STR_E_RPL_INVALID_TOKEN), lc_index);
+            mc_search_set_error (lc_mc_search, MC_SEARCH_E_REGEX_REPLACE,
+                                 _(STR_E_RPL_INVALID_TOKEN), lc_index);
             return NULL;
         }
 

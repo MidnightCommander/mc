@@ -31,7 +31,7 @@ typedef mc_search_cbret_t (*mc_update_fn) (const void *user_data, gsize char_off
 
 typedef enum
 {
-    MC_SEARCH_E_OK,
+    MC_SEARCH_E_OK = 0,
     MC_SEARCH_E_INPUT,
     MC_SEARCH_E_REGEX_COMPILE,
     MC_SEARCH_E_REGEX,
@@ -164,5 +164,10 @@ gboolean mc_search (const gchar * pattern, const gchar * pattern_charset, const 
 
 int mc_search_getstart_result_by_num (mc_search_t *, int);
 int mc_search_getend_result_by_num (mc_search_t *, int);
+
+/* *INDENT-OFF* */
+void mc_search_set_error (mc_search_t * mc_search, mc_search_error_t code, const gchar * format, ...)
+     G_GNUC_PRINTF (3, 4);
+/* *INDENT-ON* */
 
 #endif
