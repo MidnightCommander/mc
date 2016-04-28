@@ -538,9 +538,9 @@ hostname_completion_function (const char *text, int state, input_complete_t flag
  */
 
 static char *
-command_completion_function (const char *_text, int state, input_complete_t flags)
+command_completion_function (const char *text, int state, input_complete_t flags)
 {
-    char *text;
+    char *u_text;
     static const char *path_end;
     static gboolean isabsolute;
     static int phase;
@@ -565,23 +565,22 @@ command_completion_function (const char *_text, int state, input_complete_t flag
     };
     char *p, *found;
 
-    /* cppcheck-suppress uninitvar */
     SHOW_C_CTX ("command_completion_function");
 
     if (!(flags & INPUT_COMPLETE_COMMANDS))
         return 0;
 
-    text = strutils_shell_unescape (_text);
+    u_text = strutils_shell_unescape (text);
     flags &= ~INPUT_COMPLETE_SHELL_ESC;
 
     if (state == 0)
     {                           /* Initialize us a little bit */
-        isabsolute = strchr (text, PATH_SEP) != NULL;
+        isabsolute = strchr (u_text, PATH_SEP) != NULL;
         if (!isabsolute)
         {
             words = bash_reserved;
             phase = 0;
-            text_len = strlen (text);
+            text_len = strlen (u_text);
 
             if (path == NULL)
             {
@@ -601,7 +600,7 @@ command_completion_function (const char *_text, int state, input_complete_t flag
 
     if (isabsolute)
     {
-        p = filename_completion_function (text, state, flags);
+        p = filename_completion_function (u_text, state, flags);
 
         if (p != NULL)
         {
@@ -611,7 +610,7 @@ command_completion_function (const char *_text, int state, input_complete_t flag
             g_free (temp_p);
         }
 
-        g_free (text);
+        g_free (u_text);
         return p;
     }
 
@@ -620,18 +619,18 @@ command_completion_function (const char *_text, int state, input_complete_t flag
     {
     case 0:                    /* Reserved words */
         for (; *words != NULL; words++)
-            if (strncmp (*words, text, text_len) == 0)
+            if (strncmp (*words, u_text, text_len) == 0)
             {
-                g_free (text);
+                g_free (u_text);
                 return g_strdup (*(words++));
             }
         phase++;
         words = bash_builtins;
     case 1:                    /* Builtin commands */
         for (; *words != NULL; words++)
-            if (strncmp (*words, text, text_len) == 0)
+            if (strncmp (*words, u_text, text_len) == 0)
             {
-                g_free (text);
+                g_free (u_text);
                 return g_strdup (*(words++));
             }
         phase++;
@@ -649,7 +648,7 @@ command_completion_function (const char *_text, int state, input_complete_t flag
                 if (cur_path >= path_end)
                     break;
                 expanded = tilde_expand (*cur_path ? cur_path : ".");
-                cur_word = mc_build_filename (expanded, text, (char *) NULL);
+                cur_word = mc_build_filename (expanded, u_text, (char *) NULL);
                 g_free (expanded);
                 canonicalize_pathname (cur_word);
                 cur_path = strchr (cur_path, 0) + 1;
@@ -676,7 +675,7 @@ command_completion_function (const char *_text, int state, input_complete_t flag
         }
     }
 
-    g_free (text);
+    g_free (u_text);
     return found;
 }
 
