@@ -265,8 +265,8 @@ dnl ############################################################################
 dnl Internationalization
 dnl ############################################################################
 
-AM_GNU_GETTEXT(no-libtool, need-ngettext)
-AM_GNU_GETTEXT_VERSION(0.14.3)
+AM_GNU_GETTEXT([no-libtool], [need-ngettext])
+AM_GNU_GETTEXT_VERSION([0.18.1])
 
 mc_I18N
 
