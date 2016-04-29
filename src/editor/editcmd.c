@@ -2613,10 +2613,10 @@ edit_replace_cmd (WEdit * edit, gboolean again)
         if (!editcmd_find (&esm, &len))
         {
             if (!(edit->search->error == MC_SEARCH_E_OK ||
-                  (once_found && edit->search->error == MC_SEARCH_E_NOTFOUND)))
-            {
+                  (once_found && edit->search->error == MC_SEARCH_E_NOTFOUND))
+                && edit->search->error_str != NULL)
                 edit_query_dialog (_("Search"), edit->search->error_str);
-            }
+
             break;
         }
         once_found = TRUE;
@@ -2680,7 +2680,9 @@ edit_replace_cmd (WEdit * edit, gboolean again)
 
             if (edit->search->error != MC_SEARCH_E_OK)
             {
-                edit_error_dialog (_("Replace"), edit->search->error_str);
+                if (edit->search->error_str != NULL)
+                    edit_error_dialog (_("Replace"), edit->search->error_str);
+
                 g_string_free (repl_str, TRUE);
                 break;
             }
