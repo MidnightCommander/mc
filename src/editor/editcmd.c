@@ -869,17 +869,20 @@ editcmd_find (edit_search_status_msg_t * esm, gsize * len)
 
         while (search_start >= start_mark)
         {
+            gboolean ok;
+
             if (search_end > (off_t) (search_start + edit->search->original_len)
                 && mc_search_is_fixed_search_str (edit->search))
-            {
                 search_end = search_start + edit->search->original_len;
-            }
-            if (mc_search_run (edit->search, (void *) esm, search_start, search_end, len)
-                && edit->search->normal_offset == search_start)
-            {
-                return TRUE;
-            }
 
+            ok = mc_search_run (edit->search, (void *) esm, search_start, search_end, len);
+
+            if (ok && edit->search->normal_offset == search_start)
+                return TRUE;
+
+            /* Abort search. */
+            if (!ok && edit->search->error == MC_SEARCH_E_ABORT)
+                return FALSE;
 
             if ((edit->search_line_type & AT_START_LINE) != 0)
                 search_start =
