@@ -36,7 +36,8 @@ typedef enum
     MC_SEARCH_E_REGEX_COMPILE,
     MC_SEARCH_E_REGEX,
     MC_SEARCH_E_REGEX_REPLACE,
-    MC_SEARCH_E_NOTFOUND
+    MC_SEARCH_E_NOTFOUND,
+    MC_SEARCH_E_ABORT
 } mc_search_error_t;
 
 typedef enum
@@ -53,7 +54,8 @@ enum mc_search_cbret_t
     MC_SEARCH_CB_OK = 0,
     MC_SEARCH_CB_INVALID = -1,
     MC_SEARCH_CB_ABORT = -2,
-    MC_SEARCH_CB_SKIP = -3
+    MC_SEARCH_CB_SKIP = -3,
+    MC_SEARCH_CB_NOTFOUND = -4
 };
 
 /*** structures declarations (and typedefs of structures)*****************************************/

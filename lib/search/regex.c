@@ -872,7 +872,7 @@ gboolean
 mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
                       gsize start_search, gsize end_search, gsize * found_len)
 {
-    mc_search_cbret_t ret = MC_SEARCH_CB_ABORT;
+    mc_search_cbret_t ret = MC_SEARCH_CB_NOTFOUND;
     gsize current_pos, virtual_pos;
     gint start_pos;
     gint end_pos;
@@ -965,7 +965,7 @@ mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
             ((lc_mc_search->update_fn) (user_data, current_pos) == MC_SEARCH_CB_ABORT))
             ret = MC_SEARCH_CB_ABORT;
 
-        if (ret == MC_SEARCH_CB_ABORT)
+        if (ret == MC_SEARCH_CB_ABORT || ret == MC_SEARCH_CB_NOTFOUND)
             break;
     }
 
@@ -973,7 +973,7 @@ mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
     lc_mc_search->regex_buffer = NULL;
 
     if (ret == MC_SEARCH_CB_ABORT)
-        mc_search_set_error (lc_mc_search, MC_SEARCH_E_NOTFOUND, NULL);
+        mc_search_set_error (lc_mc_search, MC_SEARCH_E_ABORT, NULL);
     else
         mc_search_set_error (lc_mc_search, MC_SEARCH_E_NOTFOUND, "%s", _(STR_E_NOTFOUND));
 
