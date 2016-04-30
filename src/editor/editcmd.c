@@ -837,27 +837,24 @@ editcmd_find (edit_search_status_msg_t * esm, gsize * len)
         if ((edit->search_line_type & AT_START_LINE) != 0
             && (start_mark != 0
                 || edit_buffer_get_byte (&edit->buffer, start_mark - 1) != end_string_symbol))
-        {
             start_mark =
                 edit_calculate_start_of_next_line (&edit->buffer, start_mark, edit->buffer.size,
                                                    end_string_symbol);
-        }
+
         if ((edit->search_line_type & AT_END_LINE) != 0
             && (end_mark - 1 != edit->buffer.size
                 || edit_buffer_get_byte (&edit->buffer, end_mark) != end_string_symbol))
             end_mark =
                 edit_calculate_end_of_previous_line (&edit->buffer, end_mark, end_string_symbol);
+
         if (start_mark >= end_mark)
         {
             mc_search_set_error (edit->search, MC_SEARCH_E_NOTFOUND, "%s", _(STR_E_NOTFOUND));
             return FALSE;
         }
     }
-    else
-    {
-        if (edit_search_options.backwards)
-            end_mark = MAX (1, edit->buffer.curs1) - 1;
-    }
+    else if (edit_search_options.backwards)
+        end_mark = MAX (1, edit->buffer.curs1) - 1;
 
     /* search */
     if (edit_search_options.backwards)
@@ -893,17 +890,16 @@ editcmd_find (edit_search_status_msg_t * esm, gsize * len)
         }
 
         mc_search_set_error (edit->search, MC_SEARCH_E_NOTFOUND, "%s", _(STR_E_NOTFOUND));
+        return FALSE;
     }
-    else
-    {
-        /* forward search */
-        if ((edit->search_line_type & AT_START_LINE) != 0 && search_start != start_mark)
-            search_start =
-                edit_calculate_start_of_next_line (&edit->buffer, search_start, end_mark,
-                                                   end_string_symbol);
-        return mc_search_run (edit->search, (void *) esm, search_start, end_mark, len);
-    }
-    return FALSE;
+
+    /* forward search */
+    if ((edit->search_line_type & AT_START_LINE) != 0 && search_start != start_mark)
+        search_start =
+            edit_calculate_start_of_next_line (&edit->buffer, search_start, end_mark,
+                                               end_string_symbol);
+
+    return mc_search_run (edit->search, (void *) esm, search_start, end_mark, len);
 }
 
 /* --------------------------------------------------------------------------------------------- */
