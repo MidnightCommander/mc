@@ -34,6 +34,7 @@
 #include "lib/strutil.h"
 #include "lib/search.h"
 #include "lib/strescape.h"
+#include "lib/util.h"           /* MC_PTR_FREE */
 
 #include "internal.h"
 
@@ -972,10 +973,8 @@ mc_search__run_regex (mc_search_t * lc_mc_search, const void *user_data,
     g_string_free (lc_mc_search->regex_buffer, TRUE);
     lc_mc_search->regex_buffer = NULL;
 
-    if (ret == MC_SEARCH_CB_ABORT)
-        mc_search_set_error (lc_mc_search, MC_SEARCH_E_ABORT, NULL);
-    else
-        mc_search_set_error (lc_mc_search, MC_SEARCH_E_NOTFOUND, "%s", _(STR_E_NOTFOUND));
+    MC_PTR_FREE (lc_mc_search->error_str);
+    lc_mc_search->error = ret == MC_SEARCH_CB_ABORT ? MC_SEARCH_E_ABORT : MC_SEARCH_E_NOTFOUND;
 
     return FALSE;
 }

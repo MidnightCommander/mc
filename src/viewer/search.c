@@ -365,7 +365,7 @@ mcview_do_search (WView * view, off_t want_search_start)
             break;
         }
 
-        if (view->search->error_str == NULL)
+        if (view->search->error == MC_SEARCH_E_ABORT || view->search->error == MC_SEARCH_E_NOTFOUND)
             break;
 
         search_start = growbufsize - view->search->original_len;
@@ -406,11 +406,17 @@ mcview_do_search (WView * view, off_t want_search_start)
         }
     }
 
-    if (!found && view->search->error_str != NULL)
+    if (!found
+        && (view->search->error == MC_SEARCH_E_ABORT
+            || view->search->error == MC_SEARCH_E_NOTFOUND))
     {
         view->search_start = orig_search_start;
         mcview_update (view);
-        query_dialog (_("Search"), view->search->error_str, D_NORMAL, 1, _("&Dismiss"));
+
+        if (view->search->error == MC_SEARCH_E_NOTFOUND)
+            query_dialog (_("Search"), _(STR_E_NOTFOUND), D_NORMAL, 1, _("&Dismiss"));
+        else if (view->search->error_str != NULL)
+            query_dialog (_("Search"), view->search->error_str, D_NORMAL, 1, _("&Dismiss"));
     }
     view->dirty++;
 }

@@ -946,6 +946,17 @@ edit_replace_cmd__conv_to_input (char *str)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
+edit_show_search_error (const WEdit * edit, const char *title)
+{
+    if (edit->search->error == MC_SEARCH_E_NOTFOUND)
+        edit_query_dialog (title, _(STR_E_NOTFOUND));
+    else if (edit->search->error_str != NULL)
+        edit_query_dialog (title, edit->search->error_str);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
 edit_do_search (WEdit * edit)
 {
     edit_search_status_msg_t esm;
@@ -1017,8 +1028,7 @@ edit_do_search (WEdit * edit)
         else
         {
             edit->search_start = edit->buffer.curs1;
-            if (edit->search->error_str != NULL)
-                edit_query_dialog (_("Search"), edit->search->error_str);
+            edit_show_search_error (edit, _("Search"));
         }
     }
 
@@ -2612,9 +2622,8 @@ edit_replace_cmd (WEdit * edit, gboolean again)
         if (!editcmd_find (&esm, &len))
         {
             if (!(edit->search->error == MC_SEARCH_E_OK ||
-                  (once_found && edit->search->error == MC_SEARCH_E_NOTFOUND))
-                && edit->search->error_str != NULL)
-                edit_query_dialog (_("Search"), edit->search->error_str);
+                  (once_found && edit->search->error == MC_SEARCH_E_NOTFOUND)))
+                edit_show_search_error (edit, _("Search"));
 
             break;
         }
@@ -2679,9 +2688,7 @@ edit_replace_cmd (WEdit * edit, gboolean again)
 
             if (edit->search->error != MC_SEARCH_E_OK)
             {
-                if (edit->search->error_str != NULL)
-                    edit_error_dialog (_("Replace"), edit->search->error_str);
-
+                edit_show_search_error (edit, _("Replace"));
                 g_string_free (repl_str, TRUE);
                 break;
             }
