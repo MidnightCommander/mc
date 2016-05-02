@@ -103,13 +103,16 @@ mcview_search_status_update_cb (status_msg_t * sm)
 static void
 mcview_search_update_steps (WView * view)
 {
-    off_t filesize = mcview_get_filesize (view);
-    if (filesize != 0)
-        view->update_steps = 40000;
-    else                        /* viewing a data stream, not a file */
-        view->update_steps = filesize / 100;
+    off_t filesize;
 
-    /* Do not update the percent display but every 20 ks */
+    filesize = mcview_get_filesize (view);
+
+    if (filesize != 0)
+        view->update_steps = filesize / 100;
+    else                        /* viewing a data stream, not a file */
+        view->update_steps = 40000;
+
+    /* Do not update the percent display but every 20 kb */
     if (view->update_steps < 20000)
         view->update_steps = 20000;
 }
