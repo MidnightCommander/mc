@@ -231,6 +231,30 @@ tty_shutdown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
+tty_enter_ca_mode (void)
+{
+    if (mc_global.tty.xterm_flag && smcup != NULL)
+    {
+        fprintf (stdout, /* ESC_STR ")0" */ ESC_STR "7" ESC_STR "[?47h");
+        fflush (stdout);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+tty_exit_ca_mode (void)
+{
+    if (mc_global.tty.xterm_flag && rmcup != NULL)
+    {
+        fprintf (stdout, ESC_STR "[?47l" ESC_STR "8" ESC_STR "[m");
+        fflush (stdout);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
 tty_change_screen_size (void)
 {
 #if defined(TIOCGWINSZ) && NCURSES_VERSION_MAJOR >= 4

@@ -364,6 +364,22 @@ tty_shutdown (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
+tty_enter_ca_mode (void)
+{
+    /* S-Lang handles alternate screen switching and cursor position saving */
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+tty_exit_ca_mode (void)
+{
+    /* S-Lang handles alternate screen switching and cursor position restoring */
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
 tty_change_screen_size (void)
 {
     SLtt_get_screen_size ();
