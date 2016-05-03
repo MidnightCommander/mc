@@ -493,7 +493,7 @@ synchronize (void)
 /** Feed the subshell our keyboard input until it says it's finished */
 
 static gboolean
-feed_subshell (int how, int fail_on_error)
+feed_subshell (int how, gboolean fail_on_error)
 {
     fd_set read_set;            /* For 'select' */
     int bytes;                  /* For the return value from 'read' */
