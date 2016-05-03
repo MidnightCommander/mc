@@ -65,12 +65,6 @@ extern int mc_tty_frm[];
 
 extern char *tty_tgetstr (const char *name);
 
-/* {{{ Input }}} */
-
-#ifdef HAVE_SLANG
-extern int reset_hp_softkeys;
-#endif
-
 /*** declarations of public functions ************************************************************/
 
 extern void tty_beep (void);

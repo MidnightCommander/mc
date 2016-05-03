@@ -41,6 +41,8 @@ enum
 
 /*** global variables defined in .c file *********************************************************/
 
+extern int reset_hp_softkeys;
+
 /*** declarations of public functions ************************************************************/
 
 /*** inline functions ****************************************************************************/
