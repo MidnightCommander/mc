@@ -93,7 +93,7 @@ anything_ready (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-do_enter_ca_mode (void)
+tty_enter_ca_mode (void)
 {
     if (mc_global.tty.xterm_flag && smcup != NULL)
     {
@@ -105,7 +105,7 @@ do_enter_ca_mode (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-do_exit_ca_mode (void)
+tty_exit_ca_mode (void)
 {
     if (mc_global.tty.xterm_flag && rmcup != NULL)
     {

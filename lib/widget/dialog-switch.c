@@ -36,7 +36,7 @@
 #include "lib/tty/tty.h"        /* LINES, COLS */
 #include "lib/tty/color.h"      /* tty_set_normal_attrs() */
 #ifdef HAVE_SLANG
-#include "lib/tty/win.h"        /* do_enter_ca_mode() */
+#include "lib/tty/win.h"        /* tty_enter_ca_mode() */
 #endif
 #include "lib/widget.h"
 #include "lib/event.h"
@@ -372,7 +372,7 @@ dialog_change_screen_size (void)
     tty_change_screen_size ();
 
 #ifdef HAVE_SLANG
-    do_enter_ca_mode ();
+    tty_enter_ca_mode ();
     tty_keypad (TRUE);
     tty_nodelay (FALSE);
 #endif

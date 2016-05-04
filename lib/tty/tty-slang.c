@@ -326,8 +326,8 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     SLsmg_init_smg ();
     if (!mouse_enable)
         use_mouse_p = MOUSE_DISABLED;
-    tty_init_xterm_support (is_xterm);  /* do it before do_enter_ca_mode() call */
-    do_enter_ca_mode ();
+    tty_init_xterm_support (is_xterm);  /* do it before tty_enter_ca_mode() call */
+    tty_enter_ca_mode ();
     tty_keypad (TRUE);
     tty_nodelay (FALSE);
 
@@ -347,7 +347,7 @@ tty_shutdown (void)
     tty_noraw_mode ();
     tty_keypad (FALSE);
     tty_reset_screen ();
-    do_exit_ca_mode ();
+    tty_exit_ca_mode ();
     SLang_reset_tty ();
 
     /* Load the op capability to reset the colors to those that were 
