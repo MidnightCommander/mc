@@ -204,8 +204,8 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
 
     if (!mouse_enable)
         use_mouse_p = MOUSE_DISABLED;
-    tty_init_xterm_support (is_xterm);  /* do it before do_enter_ca_mode() call */
-    do_enter_ca_mode ();
+    tty_init_xterm_support (is_xterm);  /* do it before tty_enter_ca_mode() call */
+    tty_enter_ca_mode ();
     tty_raw_mode ();
     noecho ();
     keypad (stdscr, TRUE);
@@ -225,7 +225,31 @@ tty_shutdown (void)
     tty_noraw_mode ();
     tty_keypad (FALSE);
     tty_reset_screen ();
-    do_exit_ca_mode ();
+    tty_exit_ca_mode ();
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+tty_enter_ca_mode (void)
+{
+    if (mc_global.tty.xterm_flag && smcup != NULL)
+    {
+        fprintf (stdout, /* ESC_STR ")0" */ ESC_STR "7" ESC_STR "[?47h");
+        fflush (stdout);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+tty_exit_ca_mode (void)
+{
+    if (mc_global.tty.xterm_flag && rmcup != NULL)
+    {
+        fprintf (stdout, ESC_STR "[?47l" ESC_STR "8" ESC_STR "[m");
+        fflush (stdout);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

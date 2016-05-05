@@ -53,7 +53,6 @@
 
 #include "lib/tty/tty.h"        /* LINES, tty_touch_screen() */
 #include "lib/tty/key.h"        /* ALT() macro */
-#include "lib/tty/win.h"        /* do_enter_ca_mode() */
 #include "lib/mcconfig.h"
 #include "lib/filehighlight.h"  /* MC_FHL_INI_FILE */
 #include "lib/vfs/vfs.h"

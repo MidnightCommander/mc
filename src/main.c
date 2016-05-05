@@ -383,7 +383,7 @@ main (int argc, char *argv[])
        w/o Shift button in subshell in the native console */
     init_mouse ();
 
-    /* Done after do_enter_ca_mode (tty_init) because in VTE bracketed mode is
+    /* Done after tty_enter_ca_mode (tty_init) because in VTE bracketed mode is
        separate for the normal and alternate screens */
     enable_bracketed_paste ();
 

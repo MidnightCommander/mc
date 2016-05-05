@@ -93,30 +93,6 @@ anything_ready (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-do_enter_ca_mode (void)
-{
-    if (mc_global.tty.xterm_flag && smcup != NULL)
-    {
-        fprintf (stdout, /* ESC_STR ")0" */ ESC_STR "7" ESC_STR "[?47h");
-        fflush (stdout);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-do_exit_ca_mode (void)
-{
-    if (mc_global.tty.xterm_flag && rmcup != NULL)
-    {
-        fprintf (stdout, ESC_STR "[?47l" ESC_STR "8" ESC_STR "[m");
-        fflush (stdout);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
 show_rxvt_contents (int starty, unsigned char y1, unsigned char y2)
 {
     unsigned char *k;
