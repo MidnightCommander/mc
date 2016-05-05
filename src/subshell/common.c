@@ -531,7 +531,7 @@ feed_subshell (int how, int fail_on_error)
             /* Despite using SA_RESTART, we still have to check for this */
             if (errno == EINTR)
             {
-                if (mc_global.tty.winch_flag != 0)
+                if (how == QUIETLY && mc_global.tty.winch_flag != 0)
                     tty_change_screen_size ();
 
                 continue;       /* try all over again */
