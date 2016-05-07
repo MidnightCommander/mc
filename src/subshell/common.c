@@ -293,7 +293,7 @@ init_subshell_child (const char *pty_name)
             input_file = mc_config_get_full_path ("inputrc");
             if (exist_file (input_file))
             {
-                putenv_str = g_strconcat ("INPUTRC=", input_file, NULL);
+                putenv_str = g_strconcat ("INPUTRC=", input_file, (char *) NULL);
                 putenv (putenv_str);
             }
             g_free (input_file);
@@ -314,7 +314,7 @@ init_subshell_child (const char *pty_name)
         }
 
         /* Put init file to ENV variable used by ash */
-        putenv_str = g_strconcat ("ENV=", init_file, NULL);
+        putenv_str = g_strconcat ("ENV=", init_file, (char *) NULL);
         putenv (putenv_str);
         /* Do not use "g_free (putenv_str)" here, otherwise ENV will be undefined! */
 
@@ -493,7 +493,7 @@ synchronize (void)
 /** Feed the subshell our keyboard input until it says it's finished */
 
 static gboolean
-feed_subshell (int how, int fail_on_error)
+feed_subshell (int how, gboolean fail_on_error)
 {
     fd_set read_set;            /* For 'select' */
     int bytes;                  /* For the return value from 'read' */
@@ -519,11 +519,11 @@ feed_subshell (int how, int fail_on_error)
         FD_ZERO (&read_set);
         FD_SET (mc_global.tty.subshell_pty, &read_set);
         FD_SET (subshell_pipe[READ], &read_set);
-        maxfdp = max (mc_global.tty.subshell_pty, subshell_pipe[READ]);
+        maxfdp = MAX (mc_global.tty.subshell_pty, subshell_pipe[READ]);
         if (how == VISIBLY)
         {
             FD_SET (STDIN_FILENO, &read_set);
-            maxfdp = max (maxfdp, STDIN_FILENO);
+            maxfdp = MAX (maxfdp, STDIN_FILENO);
         }
 
         if (select (maxfdp + 1, &read_set, NULL, NULL, wptr) == -1)

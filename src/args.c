@@ -177,7 +177,7 @@ static const GOptionEntry argument_main_table[] = {
     {
      /* handle arguments manually */
      "view", 'v', G_OPTION_FLAG_IN_MAIN | G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK,
-     parse_mc_v_argument,
+     (gpointer) parse_mc_v_argument,
      N_("Launches the file viewer on a file"),
      "<file>"
     },
@@ -185,7 +185,7 @@ static const GOptionEntry argument_main_table[] = {
     {
      /* handle arguments manually */
      "edit", 'e', G_OPTION_FLAG_IN_MAIN | G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK,
-     parse_mc_e_argument,
+     (gpointer) parse_mc_e_argument,
      N_("Edit files"),
      "<file> ..." },
 

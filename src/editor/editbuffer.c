@@ -330,8 +330,8 @@ edit_buffer_count_lines (const edit_buffer_t * buf, off_t first, off_t last)
 {
     long lines = 0;
 
-    first = max (first, 0);
-    last = min (last, buf->size);
+    first = MAX (first, 0);
+    last = MIN (last, buf->size);
 
     while (first < last)
         if (edit_buffer_get_byte (buf, first++) == '\n')
@@ -457,6 +457,9 @@ edit_buffer_insert (edit_buffer_t * buf, int c)
 
     /* update cursor position */
     buf->curs1++;
+
+    /* update file length */
+    buf->size++;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -486,6 +489,9 @@ edit_buffer_insert_ahead (edit_buffer_t * buf, int c)
 
     /* update cursor position */
     buf->curs2++;
+
+    /* update file length */
+    buf->size++;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -522,6 +528,9 @@ edit_buffer_delete (edit_buffer_t * buf)
     }
 
     buf->curs2 = prev;
+
+    /* update file length */
+    buf->size--;
 
     return c;
 }
@@ -561,6 +570,9 @@ edit_buffer_backspace (edit_buffer_t * buf)
 
     buf->curs1 = prev;
 
+    /* update file length */
+    buf->size--;
+
     return c;
 }
 
@@ -579,12 +591,12 @@ edit_buffer_backspace (edit_buffer_t * buf)
  */
 
 off_t
-edit_buffer_move_forward (const edit_buffer_t * buf, off_t current, long lines, off_t upto)
+edit_buffer_get_forward_offset (const edit_buffer_t * buf, off_t current, long lines, off_t upto)
 {
     if (upto != 0)
         return (off_t) edit_buffer_count_lines (buf, current, upto);
 
-    lines = max (lines, 0);
+    lines = MAX (lines, 0);
 
     while (lines-- != 0)
     {
@@ -611,9 +623,9 @@ edit_buffer_move_forward (const edit_buffer_t * buf, off_t current, long lines, 
  */
 
 off_t
-edit_buffer_move_backward (const edit_buffer_t * buf, off_t current, long lines)
+edit_buffer_get_backward_offset (const edit_buffer_t * buf, off_t current, long lines)
 {
-    lines = max (lines, 0);
+    lines = MAX (lines, 0);
     current = edit_buffer_get_bol (buf, current);
 
     while (lines-- != 0 && current != 0)

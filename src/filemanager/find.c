@@ -284,27 +284,29 @@ find_load_options (void)
     loaded = TRUE;
 
     options.file_case_sens =
-        mc_config_get_bool (mc_main_config, "FindFile", "file_case_sens", TRUE);
+        mc_config_get_bool (mc_global.main_config, "FindFile", "file_case_sens", TRUE);
     options.file_pattern =
-        mc_config_get_bool (mc_main_config, "FindFile", "file_shell_pattern", TRUE);
-    options.find_recurs = mc_config_get_bool (mc_main_config, "FindFile", "file_find_recurs", TRUE);
+        mc_config_get_bool (mc_global.main_config, "FindFile", "file_shell_pattern", TRUE);
+    options.find_recurs =
+        mc_config_get_bool (mc_global.main_config, "FindFile", "file_find_recurs", TRUE);
     options.skip_hidden =
-        mc_config_get_bool (mc_main_config, "FindFile", "file_skip_hidden", FALSE);
+        mc_config_get_bool (mc_global.main_config, "FindFile", "file_skip_hidden", FALSE);
     options.file_all_charsets =
-        mc_config_get_bool (mc_main_config, "FindFile", "file_all_charsets", FALSE);
+        mc_config_get_bool (mc_global.main_config, "FindFile", "file_all_charsets", FALSE);
     options.content_case_sens =
-        mc_config_get_bool (mc_main_config, "FindFile", "content_case_sens", TRUE);
+        mc_config_get_bool (mc_global.main_config, "FindFile", "content_case_sens", TRUE);
     options.content_regexp =
-        mc_config_get_bool (mc_main_config, "FindFile", "content_regexp", FALSE);
+        mc_config_get_bool (mc_global.main_config, "FindFile", "content_regexp", FALSE);
     options.content_first_hit =
-        mc_config_get_bool (mc_main_config, "FindFile", "content_first_hit", FALSE);
+        mc_config_get_bool (mc_global.main_config, "FindFile", "content_first_hit", FALSE);
     options.content_whole_words =
-        mc_config_get_bool (mc_main_config, "FindFile", "content_whole_words", FALSE);
+        mc_config_get_bool (mc_global.main_config, "FindFile", "content_whole_words", FALSE);
     options.content_all_charsets =
-        mc_config_get_bool (mc_main_config, "FindFile", "content_all_charsets", FALSE);
+        mc_config_get_bool (mc_global.main_config, "FindFile", "content_all_charsets", FALSE);
     options.ignore_dirs_enable =
-        mc_config_get_bool (mc_main_config, "FindFile", "ignore_dirs_enable", TRUE);
-    options.ignore_dirs = mc_config_get_string (mc_main_config, "FindFile", "ignore_dirs", "");
+        mc_config_get_bool (mc_global.main_config, "FindFile", "ignore_dirs_enable", TRUE);
+    options.ignore_dirs =
+        mc_config_get_string (mc_global.main_config, "FindFile", "ignore_dirs", "");
 
     if (options.ignore_dirs[0] == '\0')
         MC_PTR_FREE (options.ignore_dirs);
@@ -315,21 +317,27 @@ find_load_options (void)
 static void
 find_save_options (void)
 {
-    mc_config_set_bool (mc_main_config, "FindFile", "file_case_sens", options.file_case_sens);
-    mc_config_set_bool (mc_main_config, "FindFile", "file_shell_pattern", options.file_pattern);
-    mc_config_set_bool (mc_main_config, "FindFile", "file_find_recurs", options.find_recurs);
-    mc_config_set_bool (mc_main_config, "FindFile", "file_skip_hidden", options.skip_hidden);
-    mc_config_set_bool (mc_main_config, "FindFile", "file_all_charsets", options.file_all_charsets);
-    mc_config_set_bool (mc_main_config, "FindFile", "content_case_sens", options.content_case_sens);
-    mc_config_set_bool (mc_main_config, "FindFile", "content_regexp", options.content_regexp);
-    mc_config_set_bool (mc_main_config, "FindFile", "content_first_hit", options.content_first_hit);
-    mc_config_set_bool (mc_main_config, "FindFile", "content_whole_words",
+    mc_config_set_bool (mc_global.main_config, "FindFile", "file_case_sens",
+                        options.file_case_sens);
+    mc_config_set_bool (mc_global.main_config, "FindFile", "file_shell_pattern",
+                        options.file_pattern);
+    mc_config_set_bool (mc_global.main_config, "FindFile", "file_find_recurs", options.find_recurs);
+    mc_config_set_bool (mc_global.main_config, "FindFile", "file_skip_hidden", options.skip_hidden);
+    mc_config_set_bool (mc_global.main_config, "FindFile", "file_all_charsets",
+                        options.file_all_charsets);
+    mc_config_set_bool (mc_global.main_config, "FindFile", "content_case_sens",
+                        options.content_case_sens);
+    mc_config_set_bool (mc_global.main_config, "FindFile", "content_regexp",
+                        options.content_regexp);
+    mc_config_set_bool (mc_global.main_config, "FindFile", "content_first_hit",
+                        options.content_first_hit);
+    mc_config_set_bool (mc_global.main_config, "FindFile", "content_whole_words",
                         options.content_whole_words);
-    mc_config_set_bool (mc_main_config, "FindFile", "content_all_charsets",
+    mc_config_set_bool (mc_global.main_config, "FindFile", "content_all_charsets",
                         options.content_all_charsets);
-    mc_config_set_bool (mc_main_config, "FindFile", "ignore_dirs_enable",
+    mc_config_set_bool (mc_global.main_config, "FindFile", "ignore_dirs_enable",
                         options.ignore_dirs_enable);
-    mc_config_set_string (mc_main_config, "FindFile", "ignore_dirs", options.ignore_dirs);
+    mc_config_set_string (mc_global.main_config, "FindFile", "ignore_dirs", options.ignore_dirs);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -802,7 +810,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
                 *pattern = g_strdup (in_name->buffer);
             else
                 *pattern = g_strdup (options.file_pattern ? "*" : ".*");
-            *start_dir = in_start->buffer[0] != '\0' ? in_start->buffer : (char *) ".";
+            *start_dir = !input_is_empty (in_start) ? in_start->buffer : (char *) ".";
             if (in_start_dir != INPUT_LAST_TEXT)
                 g_free (in_start_dir);
             in_start_dir = g_strdup (*start_dir);

@@ -1371,7 +1371,7 @@ smbfs_get_path (smbfs_connection ** sc, const vfs_path_t * vpath)
         {
             char *s;
 
-            s = mc_build_filename ((*sc)->home, remote_path + 3 - f, NULL);
+            s = mc_build_filename ((*sc)->home, remote_path + 3 - f, (char *) NULL);
             g_free (remote_path);
             remote_path = s;
         }

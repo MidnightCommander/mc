@@ -228,7 +228,7 @@ update_split (const WDialog * h)
         check_options[0].widget->state = panels_layout.vertical_equal ? 1 : 0;
     widget_redraw (WIDGET (check_options[0].widget));
 
-    tty_setcolor (check_options[0].widget->state & C_BOOL ? DISABLED_COLOR : COLOR_NORMAL);
+    tty_setcolor ((check_options[0].widget->state & C_BOOL) ? DISABLED_COLOR : COLOR_NORMAL);
 
     widget_move (h, 6, 5);
     if (panels_layout.horizontal_split)
@@ -1088,7 +1088,7 @@ swap_panels (void)
     panel2 = PANEL (panels[1].widget);
 
     if (panels[0].type == view_listing && panels[1].type == view_listing &&
-        !mc_config_get_bool (mc_main_config, CONFIG_PANELS_SECTION, "simple_swap", FALSE))
+        !mc_config_get_bool (mc_global.main_config, CONFIG_PANELS_SECTION, "simple_swap", FALSE))
     {
         WPanel panel;
 

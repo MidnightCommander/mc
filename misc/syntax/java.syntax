@@ -2,9 +2,14 @@
 #
 # Authors:
 # lol_zimmerli%headbanger.ch@mail.headbanger.ch, 1999
+#
+# 2016-03-21  Konrad Twardowski
+# * Added missing keywords: _ assert strictfp
 
 context default
+    keyword whole _ yellow
     keyword whole abstract yellow
+    keyword whole assert yellow
     keyword whole boolean yellow
     keyword whole break yellow
     keyword whole byte yellow
@@ -58,6 +63,7 @@ context default
     keyword whole return yellow
     keyword whole short yellow
     keyword whole static yellow
+    keyword whole strictfp yellow
     keyword whole super yellow
     keyword whole switch yellow
     keyword whole synchronized yellow

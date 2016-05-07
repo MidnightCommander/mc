@@ -45,6 +45,7 @@
 #include "lib/tty/key.h"        /* is_idle() */
 #include "lib/tty/color.h"      /* tty_setcolor() */
 #include "lib/skin.h"
+#include "lib/fileloc.h"        /* EDIT_DIR */
 #include "lib/strutil.h"        /* str_term_trim() */
 #include "lib/util.h"           /* mc_build_filename() */
 #include "lib/widget.h"
@@ -326,7 +327,7 @@ edit_window_list (const WDialog * h)
     int i = 0;
     int rv;
 
-    lines = min ((size_t) (LINES * 2 / 3), dlg_num);
+    lines = MIN ((size_t) (LINES * 2 / 3), dlg_num);
     cols = COLS * 2 / 3;
 
     listbox = create_listbox_window (lines, cols, _("Open files"), "[Open files]");
@@ -735,9 +736,9 @@ edit_update_cursor (WEdit * edit, const mouse_event_t * event)
     }
 
     if (y > edit->curs_row)
-        edit_move_down (edit, y - edit->curs_row, 0);
+        edit_move_down (edit, y - edit->curs_row, FALSE);
     else if (y < edit->curs_row)
-        edit_move_up (edit, edit->curs_row - y, 0);
+        edit_move_up (edit, edit->curs_row - y, FALSE);
     else
         edit_move_to_prev_col (edit, edit_buffer_get_current_bol (&edit->buffer));
 
@@ -1044,8 +1045,8 @@ edit_mouse_handle_move_resize (Widget * w, mouse_msg_t msg, mouse_event_t * even
     }
     else if (edit->drag_state == MCEDIT_DRAG_RESIZE)
     {
-        w->lines = max (WINDOW_MIN_LINES, global_y - w->y + 1);
-        w->cols = max (WINDOW_MIN_COLS, global_x - w->x + 1);
+        w->lines = MAX (WINDOW_MIN_LINES, global_y - w->y + 1);
+        w->cols = MAX (WINDOW_MIN_COLS, global_x - w->x + 1);
     }
 
     edit->force |= REDRAW_COMPLETELY;   /* Not really needed as WEdit's MSG_DRAW already does this. */
@@ -1152,12 +1153,12 @@ edit_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
         break;
 
     case MSG_MOUSE_SCROLL_UP:
-        edit_move_up (edit, 2, 1);
+        edit_move_up (edit, 2, TRUE);
         edit_total_update (edit);
         break;
 
     case MSG_MOUSE_SCROLL_DOWN:
-        edit_move_down (edit, 2, 1);
+        edit_move_down (edit, 2, TRUE);
         edit_total_update (edit);
         break;
 
@@ -1206,15 +1207,15 @@ edit_files (const GList * files)
     {
         char *dir;
 
-        dir = mc_build_filename (mc_config_get_cache_path (), EDIT_DIR, NULL);
+        dir = mc_build_filename (mc_config_get_cache_path (), EDIT_DIR, (char *) NULL);
         made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
         g_free (dir);
 
-        dir = mc_build_filename (mc_config_get_path (), EDIT_DIR, NULL);
+        dir = mc_build_filename (mc_config_get_path (), EDIT_DIR, (char *) NULL);
         made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
         g_free (dir);
 
-        dir = mc_build_filename (mc_config_get_data_path (), EDIT_DIR, NULL);
+        dir = mc_build_filename (mc_config_get_data_path (), EDIT_DIR, (char *) NULL);
         made_directory = (mkdir (dir, 0700) != -1 || errno == EEXIST);
         g_free (dir);
     }

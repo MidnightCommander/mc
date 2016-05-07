@@ -831,9 +831,9 @@ format_file (WPanel * panel, int file_index, int width, int attr, gboolean issta
                 *field_length = len + 1;
 
                 str_len = str_length (txt);
-                i = max (0, str_len - len);
-                panel->max_shift = max (panel->max_shift, i);
-                i = min (panel->content_shift, i);
+                i = MAX (0, str_len - len);
+                panel->max_shift = MAX (panel->max_shift, i);
+                i = MIN (panel->content_shift, i);
 
                 if (i > -1)
                 {
@@ -1008,7 +1008,8 @@ display_mini_info (WPanel * panel)
         int len;
 
         lc_link_vpath =
-            vfs_path_append_new (panel->cwd_vpath, panel->dir.list[panel->selected].fname, NULL);
+            vfs_path_append_new (panel->cwd_vpath, panel->dir.list[panel->selected].fname,
+                                 (char *) NULL);
         len = mc_readlink (lc_link_vpath, link_target, MC_MAXPATHLEN - 1);
         vfs_path_free (lc_link_vpath);
         if (len > 0)
@@ -1309,7 +1310,7 @@ show_dir (const WPanel * panel)
         tty_setcolor (REVERSE_COLOR);
 
     tmp = panel_correct_path_to_show (panel);
-    tty_printf (" %s ", str_term_trim (tmp, min (max (w->cols - 12, 0), w->cols)));
+    tty_printf (" %s ", str_term_trim (tmp, MIN (MAX (w->cols - 12, 0), w->cols)));
     g_free (tmp);
 
     if (!panels_options.show_mini_info)
@@ -2452,7 +2453,7 @@ mark_file_right (WPanel * panel)
         state_mark = selection (panel)->f.marked ? 0 : 1;
 
     lines = panel_lines (panel);
-    lines = min (lines, panel->dir.len - panel->selected - 1);
+    lines = MIN (lines, panel->dir.len - panel->selected - 1);
     for (; lines != 0; lines--)
     {
         do_file_mark (panel, panel->selected, state_mark);
@@ -2472,7 +2473,7 @@ mark_file_left (WPanel * panel)
         state_mark = selection (panel)->f.marked ? 0 : 1;
 
     lines = panel_lines (panel);
-    lines = min (lines, panel->selected + 1);
+    lines = MIN (lines, panel->selected + 1);
     for (; lines != 0; lines--)
     {
         do_file_mark (panel, panel->selected, state_mark);
@@ -2771,7 +2772,7 @@ do_enter_on_file_entry (file_entry_t * fe)
         return TRUE;
     }
 
-    full_name_vpath = vfs_path_append_new (current_panel->cwd_vpath, fe->fname, NULL);
+    full_name_vpath = vfs_path_append_new (current_panel->cwd_vpath, fe->fname, (char *) NULL);
 
     /* Try associated command */
     ok = regex_command (full_name_vpath, "Open") != 0;
@@ -2780,7 +2781,7 @@ do_enter_on_file_entry (file_entry_t * fe)
         return TRUE;
 
     /* Check if the file is executable */
-    full_name_vpath = vfs_path_append_new (current_panel->cwd_vpath, fe->fname, NULL);
+    full_name_vpath = vfs_path_append_new (current_panel->cwd_vpath, fe->fname, (char *) NULL);
     ok = (is_exe (fe->st.st_mode) && if_link_is_exe (full_name_vpath, fe));
     vfs_path_free (full_name_vpath);
     if (!ok)
@@ -2799,7 +2800,7 @@ do_enter_on_file_entry (file_entry_t * fe)
         int ret;
         vfs_path_t *tmp_vpath;
 
-        tmp_vpath = vfs_path_append_new (vfs_get_raw_current_dir (), fe->fname, NULL);
+        tmp_vpath = vfs_path_append_new (vfs_get_raw_current_dir (), fe->fname, (char *) NULL);
         ret = mc_setctl (tmp_vpath, VFS_SETCTL_RUN, NULL);
         vfs_path_free (tmp_vpath);
         /* We took action only if the dialog was shown or the execution
@@ -2846,7 +2847,7 @@ chdir_other_panel (WPanel * panel)
         set_display_type (get_other_index (), view_listing);
 
     if (S_ISDIR (entry->st.st_mode) || entry->f.link_to_dir)
-        new_dir_vpath = vfs_path_append_new (panel->cwd_vpath, entry->fname, NULL);
+        new_dir_vpath = vfs_path_append_new (panel->cwd_vpath, entry->fname, (char *) NULL);
     else
     {
         new_dir_vpath = vfs_path_append_new (panel->cwd_vpath, "..", (char *) NULL);
@@ -2931,7 +2932,7 @@ chdir_to_readlink (WPanel * panel)
     if (IS_PATH_SEP (*buffer))
         new_dir_vpath = vfs_path_from_str (buffer);
     else
-        new_dir_vpath = vfs_path_append_new (panel->cwd_vpath, buffer, NULL);
+        new_dir_vpath = vfs_path_append_new (panel->cwd_vpath, buffer, (char *) NULL);
 
     change_panel ();
     do_cd (new_dir_vpath, cd_exact);
@@ -4162,7 +4163,8 @@ panel_recursive_cd_to_parent (const vfs_path_t * vpath)
 
         tmp_vpath = vfs_path_vtokens_get (cwd_vpath, 0, -1);
         vfs_path_free (cwd_vpath);
-        cwd_vpath = vfs_path_build_filename (PATH_SEP_STR, vfs_path_as_str (tmp_vpath), NULL);
+        cwd_vpath =
+            vfs_path_build_filename (PATH_SEP_STR, vfs_path_as_str (tmp_vpath), (char *) NULL);
         vfs_path_free (tmp_vpath);
     }
 
@@ -4314,7 +4316,7 @@ panel_new_with_dir (const char *panel_name, const vfs_path_t * vpath)
     panel->frame_size = frame_half;
 
     section = g_strconcat ("Temporal:", panel->panel_name, (char *) NULL);
-    if (!mc_config_has_group (mc_main_config, section))
+    if (!mc_config_has_group (mc_global.main_config, section))
     {
         g_free (section);
         section = g_strdup (panel->panel_name);

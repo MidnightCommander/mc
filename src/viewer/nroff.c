@@ -60,13 +60,12 @@
 static gboolean
 mcview_nroff_get_char (mcview_nroff_t * nroff, int *ret_val, off_t nroff_index)
 {
-    int c;
+    int c = 0;
+
 #ifdef HAVE_CHARSET
     if (nroff->view->utf8)
     {
-        gboolean utf_result;
-        c = mcview_get_utf (nroff->view, nroff_index, &nroff->char_length, &utf_result);
-        if (!utf_result)
+        if (!mcview_get_utf (nroff->view, nroff_index, &c, &nroff->char_length))
         {
             /* we need got symbol in any case */
             nroff->char_length = 1;

@@ -165,7 +165,7 @@ init_panelize (void)
     }
 
     panelize_cols = COLS - 6;
-    panelize_cols = max (panelize_cols, blen + 4);
+    panelize_cols = MAX (panelize_cols, blen + 4);
 
     panelize_dlg =
         dlg_create (TRUE, 0, 0, 20, panelize_cols, dialog_colors, panelize_callback, NULL,
@@ -256,7 +256,7 @@ add2panelize (char *label, char *command)
 static void
 add2panelize_cmd (void)
 {
-    if (pname->buffer != NULL && *pname->buffer != '\0')
+    if (!input_is_empty (pname))
     {
         char *label;
 
@@ -419,7 +419,7 @@ do_panelize_cd (WPanel * panel)
 
             tmp_vpath =
                 vfs_path_append_new (panelized_panel.root_vpath, panelized_panel.list.list[i].fname,
-                                     NULL);
+                                     (char *) NULL);
             fname = vfs_path_as_str (tmp_vpath);
             list->list[i].fnamelen = strlen (fname);
             list->list[i].fname = g_strndup (fname, list->list[i].fnamelen);
@@ -501,8 +501,6 @@ cd_panelize_cmd (void)
 void
 external_panelize (void)
 {
-    char *target = NULL;
-
     if (!vfs_current_is_local ())
     {
         message (D_ERROR, MSG_ERROR, _("Cannot run external panelize in a non-local directory"));
@@ -533,11 +531,11 @@ external_panelize (void)
         }
 
     case B_ENTER:
-        target = pname->buffer;
-        if (target != NULL && *target)
+        if (!input_is_empty (pname))
         {
-            char *cmd = g_strdup (target);
+            char *cmd;
 
+            cmd = g_strdup (pname->buffer);
             dlg_destroy (panelize_dlg);
             do_external_panelize (cmd);
             g_free (cmd);
@@ -560,7 +558,7 @@ load_panelize (void)
 {
     char **keys;
 
-    keys = mc_config_get_keys (mc_main_config, panelize_section, NULL);
+    keys = mc_config_get_keys (mc_global.main_config, panelize_section, NULL);
 
     add2panelize (g_strdup (_("Other command")), g_strdup (""));
 
@@ -596,8 +594,8 @@ load_panelize (void)
             }
 
             add2panelize (g_string_free (buffer, FALSE),
-                          mc_config_get_string (mc_main_config, panelize_section, *profile_keys,
-                                                ""));
+                          mc_config_get_string (mc_global.main_config, panelize_section,
+                                                *profile_keys, ""));
         }
 
         str_close_conv (conv);
@@ -613,11 +611,11 @@ save_panelize (void)
 {
     struct panelize *current = panelize;
 
-    mc_config_del_group (mc_main_config, panelize_section);
+    mc_config_del_group (mc_global.main_config, panelize_section);
     for (; current; current = current->next)
     {
         if (strcmp (current->label, _("Other command")))
-            mc_config_set_string (mc_main_config,
+            mc_config_set_string (mc_global.main_config,
                                   panelize_section, current->label, current->command);
     }
 }

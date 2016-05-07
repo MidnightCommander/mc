@@ -87,13 +87,13 @@ history_dlg_reposition (WDialog * dlg_head)
 
     if (he <= y || y > (LINES - 6))
     {
-        he = min (he, y - 1);
+        he = MIN (he, y - 1);
         y -= he;
     }
     else
     {
         y++;
-        he = min (he, LINES - y);
+        he = MIN (he, LINES - y);
     }
 
     if (data->widget->x > 2)
@@ -103,7 +103,7 @@ history_dlg_reposition (WDialog * dlg_head)
 
     if ((wi + x) > COLS)
     {
-        wi = min (wi, COLS);
+        wi = MIN (wi, COLS);
         x = COLS - wi;
     }
 
@@ -305,7 +305,7 @@ history_show (GList ** history, Widget * widget, int current)
         size_t i;
 
         i = str_term_width1 ((char *) z->data);
-        maxlen = max (maxlen, i);
+        maxlen = MAX (maxlen, i);
         count++;
 
         entry = g_new0 (WLEntry, 1);

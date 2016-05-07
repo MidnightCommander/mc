@@ -631,7 +631,7 @@ tty_print_string (const char *s)
     s = str_term_form (s);
     len = str_term_width1 (s);
 
-    /* line is upper or below the screen or entire line is before or after scrren */
+    /* line is upper or below the screen or entire line is before or after screen */
     if (mc_curs_row < 0 || mc_curs_row >= LINES || mc_curs_col + len <= 0 || mc_curs_col >= COLS)
     {
         mc_curs_col += len;
@@ -673,7 +673,8 @@ char *
 tty_tgetstr (const char *cap)
 {
     char *unused = NULL;
-    return tgetstr (cap, &unused);
+
+    return tgetstr ((NCURSES_CONST char *) cap, &unused);
 }
 
 /* --------------------------------------------------------------------------------------------- */

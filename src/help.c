@@ -73,7 +73,7 @@
 
 #define MAXLINKNAME 80
 #define HISTORY_SIZE 20
-#define HELP_WINDOW_WIDTH min(80, COLS - 16)
+#define HELP_WINDOW_WIDTH MIN(80, COLS - 16)
 
 #define STRING_LINK_START       "\01"
 #define STRING_LINK_POINTER     "\02"
@@ -867,7 +867,7 @@ help_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
         {
             WButtonBar *bb;
 
-            help_lines = min (LINES - 4, max (2 * LINES / 3, 18));
+            help_lines = MIN (LINES - 4, MAX (2 * LINES / 3, 18));
             dlg_set_size (h, help_lines + 4, HELP_WINDOW_WIDTH + 4);
             bb = find_buttonbar (h);
             widget_set_size (WIDGET (bb), LINES - 1, 0, 1, COLS);
@@ -1093,7 +1093,7 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
         }
     }
 
-    help_lines = min (LINES - 4, max (2 * LINES / 3, 18));
+    help_lines = MIN (LINES - 4, MAX (2 * LINES / 3, 18));
 
     whelp =
         dlg_create (TRUE, 0, 0, help_lines + 4, HELP_WINDOW_WIDTH + 4,

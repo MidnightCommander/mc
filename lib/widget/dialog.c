@@ -602,6 +602,31 @@ dlg_find_widget_by_id (gconstpointer a, gconstpointer b)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+dlg_set_top_or_bottom_widget (void *w, gboolean set_top)
+{
+    Widget *widget = WIDGET (w);
+    WDialog *h = widget->owner;
+    GList *l;
+
+    l = g_list_find (h->widgets, w);
+    if (l == NULL)
+        abort ();               /* widget is not in dialog, this should not happen */
+
+    /* unfocus prevoius widget and focus current one before widget reordering */
+    if (set_top && h->state == DLG_ACTIVE)
+        do_select_widget (h, l, SELECT_EXACT);
+
+    /* widget reordering */
+    h->widgets = g_list_remove_link (h->widgets, l);
+    if (set_top)
+        h->widgets = g_list_concat (h->widgets, l);
+    else
+        h->widgets = g_list_concat (l, h->widgets);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1042,7 +1067,7 @@ find_widget_type (const WDialog * h, widget_cb_fn callback)
 {
     GList *w;
 
-    w = g_list_find_custom (h->widgets, callback, dlg_find_widget_callback);
+    w = g_list_find_custom (h->widgets, (gconstpointer) callback, dlg_find_widget_callback);
 
     return (w == NULL) ? NULL : WIDGET (w->data);
 }
@@ -1084,31 +1109,6 @@ dlg_select_widget (void *w)
     WDialog *h = widget->owner;
 
     do_select_widget (h, g_list_find (h->widgets, widget), SELECT_EXACT);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-dlg_set_top_or_bottom_widget (void *w, gboolean set_top)
-{
-    Widget *widget = WIDGET (w);
-    WDialog *h = widget->owner;
-    GList *l;
-
-    l = g_list_find (h->widgets, w);
-    if (l == NULL)
-        abort ();               /* widget is not in dialog, this should not happen */
-
-    /* unfocus prevoius widget and focus current one before widget reordering */
-    if (set_top && h->state == DLG_ACTIVE)
-        do_select_widget (h, l, SELECT_EXACT);
-
-    /* widget reordering */
-    h->widgets = g_list_remove_link (h->widgets, l);
-    if (set_top)
-        h->widgets = g_list_concat (h->widgets, l);
-    else
-        h->widgets = g_list_concat (l, h->widgets);
 }
 
 /* --------------------------------------------------------------------------------------------- */

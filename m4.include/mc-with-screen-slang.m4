@@ -137,9 +137,6 @@ int main (void)
     fi
 
     if test x"$found_slang" = x"yes"; then
-        screen_type=slang
-        screen_msg="S-Lang library"
-
         MCLIBS="$ac_slang_lib_path -lslang $MCLIBS"
         dnl do not reset CPPFLAGS
         dnl if CPPFLAGS are reset then cpp does not find the specified header
@@ -206,6 +203,8 @@ AC_DEFUN([mc_WITH_SLANG], [
         fi
     fi
 
+    screen_type=slang
+    screen_msg="S-Lang"
     AC_DEFINE(HAVE_SLANG, 1, [Define to use S-Lang library for screen management])
 
     mc_CHECK_SLANG_HEADER

@@ -37,6 +37,7 @@
 #include <string.h>
 
 #include "lib/global.h"
+#include "lib/fileloc.h"
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
 #include "lib/search.h"
@@ -956,21 +957,22 @@ user_menu_cmd (const WEdit * edit_widget, const char *menu_file, int selected_en
             g_free (menu);
             menu =
                 mc_build_filename (mc_config_get_home_dir (),
-                                   edit_widget != NULL ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU, NULL);
+                                   edit_widget != NULL ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU,
+                                   (char *) NULL);
             if (!exist_file (menu))
             {
                 g_free (menu);
                 menu =
                     mc_build_filename (mc_global.sysconfig_dir,
                                        edit_widget != NULL ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU,
-                                       NULL);
+                                       (char *) NULL);
                 if (!exist_file (menu))
                 {
                     g_free (menu);
                     menu =
                         mc_build_filename (mc_global.share_data_dir,
                                            edit_widget != NULL ? EDIT_GLOBAL_MENU : MC_GLOBAL_MENU,
-                                           NULL);
+                                           (char *) NULL);
                 }
             }
         }
@@ -1067,7 +1069,7 @@ user_menu_cmd (const WEdit * edit_widget, const char *menu_file, int selected_en
                 menu_lines++;
                 accept_entry = TRUE;
             }
-            max_cols = max (max_cols, col);
+            max_cols = MAX (max_cols, col);
             col = 0;
         }
         else
@@ -1091,7 +1093,7 @@ user_menu_cmd (const WEdit * edit_widget, const char *menu_file, int selected_en
         {
             Listbox *listbox;
 
-            max_cols = min (max (max_cols, col), MAX_ENTRY_LEN);
+            max_cols = MIN (MAX (max_cols, col), MAX_ENTRY_LEN);
 
             /* Create listbox */
             listbox = create_listbox_window (menu_lines, max_cols + 2, _("User menu"),

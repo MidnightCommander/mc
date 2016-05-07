@@ -265,9 +265,7 @@ int vfs_ferrno (struct vfs_class *vfs);
 
 int vfs_new_handle (struct vfs_class *vclass, void *fsinfo);
 
-struct vfs_class *vfs_class_find_by_handle (int handle);
-
-void *vfs_class_data_find_by_handle (int handle);
+struct vfs_class *vfs_class_find_by_handle (int handle, void **fsinfo);
 
 void vfs_free_handle (int handle);
 

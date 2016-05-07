@@ -560,7 +560,7 @@ do_compute_dir_size (const vfs_path_t * dirname_vpath, dirsize_status_msg_t * ds
         if (DIR_IS_DOT (dirent->d_name) || DIR_IS_DOTDOT (dirent->d_name))
             continue;
 
-        tmp_vpath = vfs_path_append_new (dirname_vpath, dirent->d_name, NULL);
+        tmp_vpath = vfs_path_append_new (dirname_vpath, dirent->d_name, (char *) NULL);
 
         res = mc_lstat (tmp_vpath, &s);
         if (res == 0)
@@ -1128,7 +1128,7 @@ recursive_erase (file_op_total_context_t * tctx, file_op_context_t * ctx, const 
         if (DIR_IS_DOT (next->d_name) || DIR_IS_DOTDOT (next->d_name))
             continue;
 
-        tmp_vpath = vfs_path_append_new (vpath, next->d_name, NULL);
+        tmp_vpath = vfs_path_append_new (vpath, next->d_name, (char *) NULL);
         if (mc_lstat (tmp_vpath, &buf) != 0)
         {
             mc_closedir (reading);
@@ -1294,7 +1294,7 @@ panel_compute_totals (const WPanel * panel, dirsize_status_msg_t * sm, size_t * 
             vfs_path_t *p;
             FileProgressStatus status;
 
-            p = vfs_path_append_new (panel->cwd_vpath, panel->dir.list[i].fname, NULL);
+            p = vfs_path_append_new (panel->cwd_vpath, panel->dir.list[i].fname, (char *) NULL);
             status = compute_dir_size (p, sm, &dir_count, ret_count, ret_total, compute_symlinks);
             vfs_path_free (p);
 
@@ -2142,7 +2142,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
             vfs_path_t *tmp;
 
             tmp = dst_vpath;
-            dst_vpath = vfs_path_append_new (dst_vpath, x_basename (s), NULL);
+            dst_vpath = vfs_path_append_new (dst_vpath, x_basename (s), (char *) NULL);
             vfs_path_free (tmp);
 
         }
@@ -2210,7 +2210,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
             continue;
 
         /* get the filename and add it to the src directory */
-        path = mc_build_filename (s, next->d_name, NULL);
+        path = mc_build_filename (s, next->d_name, (char *) NULL);
         tmp_vpath = vfs_path_from_str (path);
 
         (*ctx->stat_func) (tmp_vpath, &buf);
@@ -2218,7 +2218,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
         {
             char *mdpath;
 
-            mdpath = mc_build_filename (d, next->d_name, NULL);
+            mdpath = mc_build_filename (d, next->d_name, (char *) NULL);
             /*
              * From here, we just intend to recursively copy subdirs, not
              * the double functionality of copying different when the target
@@ -2233,7 +2233,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
         {
             char *dest_file;
 
-            dest_file = mc_build_filename (d, x_basename (path), NULL);
+            dest_file = mc_build_filename (d, x_basename (path), (char *) NULL);
             return_status = copy_file_file (tctx, ctx, path, dest_file);
             g_free (dest_file);
         }
@@ -2331,7 +2331,7 @@ move_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
         vfs_path_t *tmp;
 
         tmp = dst_vpath;
-        dst_vpath = vfs_path_append_new (dst_vpath, x_basename (s), NULL);
+        dst_vpath = vfs_path_append_new (dst_vpath, x_basename (s), (char *) NULL);
         vfs_path_free (tmp);
     }
 
@@ -2498,7 +2498,7 @@ dirsize_status_init_cb (status_msg_t * sm)
     if (dsm->allow_skip)
         b_width += str_term_width1 (b2_name) + 4 + 1;
 
-    ui_width = max (COLS / 2, b_width + 6);
+    ui_width = MAX (COLS / 2, b_width + 6);
     dsm->dirname = label_new (2, 3, "");
     add_widget (sm->dlg, dsm->dirname);
     dsm->count_size = label_new (3, 3, "");
@@ -2877,7 +2877,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                         goto clean_up;
                     }
 
-                    temp2 = mc_build_filename (repl_dest, temp, NULL);
+                    temp2 = mc_build_filename (repl_dest, temp, (char *) NULL);
                     g_free (temp);
                     g_free (repl_dest);
                     g_free (dest);
@@ -2988,7 +2988,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                             goto clean_up;
                         }
 
-                        temp2 = mc_build_filename (repl_dest, temp, NULL);
+                        temp2 = mc_build_filename (repl_dest, temp, (char *) NULL);
                         g_free (temp);
                         g_free (repl_dest);
                         source_with_path_str =

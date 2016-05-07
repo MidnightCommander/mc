@@ -233,7 +233,8 @@ execute_get_opts_from_cfg (const char *command, const char *default_str)
     char *str_from_config;
 
     str_from_config =
-        mc_config_get_string_raw (mc_main_config, CONFIG_EXT_EDITOR_VIEWER_SECTION, command, NULL);
+        mc_config_get_string_raw (mc_global.main_config, CONFIG_EXT_EDITOR_VIEWER_SECTION, command,
+                                  NULL);
 
     if (str_from_config == NULL)
     {

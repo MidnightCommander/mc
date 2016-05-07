@@ -49,6 +49,7 @@
 #include "lib/tty/tty.h"        /* attrset() */
 #include "lib/tty/key.h"        /* is_idle() */
 #include "lib/skin.h"           /* EDITOR_NORMAL_COLOR */
+#include "lib/fileloc.h"        /* EDIT_BLOCK_FILE */
 #include "lib/vfs/vfs.h"
 #include "lib/strutil.h"        /* utf string functions */
 #include "lib/util.h"           /* load_file_position(), save_file_position() */
@@ -158,7 +159,7 @@ edit_load_status_update_cb (status_msg_t * sm)
         int wd_width;
         Widget *lw = WIDGET (ssm->label);
 
-        wd_width = max (wd->cols, lw->cols + 6);
+        wd_width = MAX (wd->cols, lw->cols + 6);
         widget_set_size (wd, wd->y, wd->x, wd->lines, wd_width);
         widget_set_size (lw, lw->y, wd->x + (wd->cols - lw->cols) / 2, lw->lines, lw->cols);
         rsm->first = FALSE;
@@ -710,12 +711,12 @@ edit_find_line (WEdit * edit, long line)
         i = 3 + (rand () % (N_LINE_CACHES - 3));
     if (line > edit->line_numbers[j])
         edit->line_offsets[i] =
-            edit_buffer_move_forward (&edit->buffer, edit->line_offsets[j],
-                                      line - edit->line_numbers[j], 0);
+            edit_buffer_get_forward_offset (&edit->buffer, edit->line_offsets[j],
+                                            line - edit->line_numbers[j], 0);
     else
         edit->line_offsets[i] =
-            edit_buffer_move_backward (&edit->buffer, edit->line_offsets[j],
-                                       edit->line_numbers[j] - line);
+            edit_buffer_get_backward_offset (&edit->buffer, edit->line_offsets[j],
+                                             edit->line_numbers[j] - line);
     edit->line_numbers[i] = line;
     return edit->line_offsets[i];
 }
@@ -798,7 +799,7 @@ static void
 edit_begin_page (WEdit * edit)
 {
     edit_update_curs_row (edit);
-    edit_move_up (edit, edit->curs_row, 0);
+    edit_move_up (edit, edit->curs_row, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -807,7 +808,7 @@ static void
 edit_end_page (WEdit * edit)
 {
     edit_update_curs_row (edit);
-    edit_move_down (edit, WIDGET (edit)->lines - edit->curs_row - 1, 0);
+    edit_move_down (edit, WIDGET (edit)->lines - edit->curs_row - 1, FALSE);
 }
 
 
@@ -835,7 +836,7 @@ edit_move_to_bottom (WEdit * edit)
 {
     if (edit->buffer.curs_line < edit->buffer.lines)
     {
-        edit_move_down (edit, edit->buffer.lines - edit->curs_row, 0);
+        edit_move_down (edit, edit->buffer.lines - edit->curs_row, FALSE);
         edit->start_display = edit->buffer.size;
         edit->start_line = edit->buffer.lines;
         edit_scroll_upward (edit, WIDGET (edit)->lines - 1);
@@ -1067,8 +1068,8 @@ edit_move_updown (WEdit * edit, long lines, gboolean do_scroll, gboolean directi
             edit_scroll_downward (edit, lines);
     }
     p = edit_buffer_get_current_bol (&edit->buffer);
-    p = direction ? edit_buffer_move_backward (&edit->buffer, p, lines) :
-        edit_buffer_move_forward (&edit->buffer, p, lines, 0);
+    p = direction ? edit_buffer_get_backward_offset (&edit->buffer, p, lines) :
+        edit_buffer_get_forward_offset (&edit->buffer, p, lines, 0);
     edit_cursor_move (edit, p - edit->buffer.curs1);
     edit_move_to_prev_col (edit, p);
 
@@ -1382,7 +1383,7 @@ edit_auto_indent (WEdit * edit)
 
     p = edit->buffer.curs1;
     /* use the previous line as a template */
-    p = edit_buffer_move_backward (&edit->buffer, p, 1);
+    p = edit_buffer_get_backward_offset (&edit->buffer, p, 1);
     /* copy the leading whitespace of the line */
     while (TRUE)
     {                           /* no range check - the line _is_ \n-terminated */
@@ -2527,9 +2528,6 @@ edit_insert (WEdit * edit, int c)
     edit->last_get_rule += (edit->last_get_rule > edit->buffer.curs1) ? 1 : 0;
 
     edit_buffer_insert (&edit->buffer, c);
-
-    /* update file length */
-    edit->buffer.size++;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2562,8 +2560,6 @@ edit_insert_ahead (WEdit * edit, int c)
     edit->last_get_rule += (edit->last_get_rule >= edit->buffer.curs1) ? 1 : 0;
 
     edit_buffer_insert_ahead (&edit->buffer, c);
-
-    edit->buffer.size++;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2620,7 +2616,6 @@ edit_delete (WEdit * edit, gboolean byte_delete)
 
         p = edit_buffer_delete (&edit->buffer);
 
-        edit->buffer.size--;
         edit_push_undo_action (edit, p + 256);
     }
 
@@ -2681,7 +2676,6 @@ edit_backspace (WEdit * edit, gboolean byte_delete)
 
         p = edit_buffer_backspace (&edit->buffer);
 
-        edit->buffer.size--;
         edit_push_undo_action (edit, p);
     }
     edit_modification (edit);
@@ -2868,7 +2862,8 @@ edit_scroll_upward (WEdit * edit, long i)
     if (i != 0)
     {
         edit->start_line -= i;
-        edit->start_display = edit_buffer_move_backward (&edit->buffer, edit->start_display, i);
+        edit->start_display =
+            edit_buffer_get_backward_offset (&edit->buffer, edit->start_display, i);
         edit->force |= REDRAW_PAGE;
         edit->force &= (0xfff - REDRAW_CHAR_ONLY);
     }
@@ -2889,7 +2884,8 @@ edit_scroll_downward (WEdit * edit, long i)
         if (i > lines_below)
             i = lines_below;
         edit->start_line += i;
-        edit->start_display = edit_buffer_move_forward (&edit->buffer, edit->start_display, i, 0);
+        edit->start_display =
+            edit_buffer_get_forward_offset (&edit->buffer, edit->start_display, i, 0);
         edit->force |= REDRAW_PAGE;
         edit->force &= (0xfff - REDRAW_CHAR_ONLY);
     }
@@ -3003,9 +2999,9 @@ void
 edit_move_to_line (WEdit * e, long line)
 {
     if (line < e->buffer.curs_line)
-        edit_move_up (e, e->buffer.curs_line - line, 0);
+        edit_move_up (e, e->buffer.curs_line - line, FALSE);
     else
-        edit_move_down (e, line - e->buffer.curs_line, 0);
+        edit_move_down (e, line - e->buffer.curs_line, FALSE);
     edit_scroll_screen_over_cursor (e);
 }
 
@@ -3103,7 +3099,7 @@ edit_mark_current_word_cmd (WEdit * edit)
         if ((my_type_of (c1) & my_type_of (c2)) == 0)
             break;
     }
-    edit->mark2 = min (pos + 1, edit->buffer.size);
+    edit->mark2 = MIN (pos + 1, edit->buffer.size);
 
     edit->force |= REDRAW_LINE_ABOVE | REDRAW_AFTER_CURSOR;
 }
@@ -3527,13 +3523,13 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
         edit->column_highlight = 1;
     case CK_PageUp:
     case CK_MarkPageUp:
-        edit_move_up (edit, w->lines - 1, 1);
+        edit_move_up (edit, w->lines - 1, TRUE);
         break;
     case CK_MarkColumnPageDown:
         edit->column_highlight = 1;
     case CK_PageDown:
     case CK_MarkPageDown:
-        edit_move_down (edit, w->lines - 1, 1);
+        edit_move_down (edit, w->lines - 1, TRUE);
         break;
     case CK_MarkColumnLeft:
         edit->column_highlight = 1;
@@ -3584,37 +3580,37 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
         edit->column_highlight = 1;
     case CK_Up:
     case CK_MarkUp:
-        edit_move_up (edit, 1, 0);
+        edit_move_up (edit, 1, FALSE);
         break;
     case CK_MarkColumnDown:
         edit->column_highlight = 1;
     case CK_Down:
     case CK_MarkDown:
-        edit_move_down (edit, 1, 0);
+        edit_move_down (edit, 1, FALSE);
         break;
     case CK_MarkColumnParagraphUp:
         edit->column_highlight = 1;
     case CK_ParagraphUp:
     case CK_MarkParagraphUp:
-        edit_move_up_paragraph (edit, 0);
+        edit_move_up_paragraph (edit, FALSE);
         break;
     case CK_MarkColumnParagraphDown:
         edit->column_highlight = 1;
     case CK_ParagraphDown:
     case CK_MarkParagraphDown:
-        edit_move_down_paragraph (edit, 0);
+        edit_move_down_paragraph (edit, FALSE);
         break;
     case CK_MarkColumnScrollUp:
         edit->column_highlight = 1;
     case CK_ScrollUp:
     case CK_MarkScrollUp:
-        edit_move_up (edit, 1, 1);
+        edit_move_up (edit, 1, TRUE);
         break;
     case CK_MarkColumnScrollDown:
         edit->column_highlight = 1;
     case CK_ScrollDown:
     case CK_MarkScrollDown:
-        edit_move_down (edit, 1, 1);
+        edit_move_down (edit, 1, TRUE);
         break;
     case CK_Home:
     case CK_MarkToHome:
@@ -3819,10 +3815,10 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
         edit_search_cmd (edit, TRUE);
         break;
     case CK_Replace:
-        edit_replace_cmd (edit, 0);
+        edit_replace_cmd (edit, FALSE);
         break;
     case CK_ReplaceContinue:
-        edit_replace_cmd (edit, 1);
+        edit_replace_cmd (edit, TRUE);
         break;
     case CK_Complete:
         /* if text marked shift block */

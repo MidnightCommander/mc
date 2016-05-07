@@ -603,8 +603,8 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
                         long c1, c2;
 
                         x = (long) edit_move_forward3 (edit, b, 0, q);
-                        c1 = min (edit->column1, edit->column2);
-                        c2 = max (edit->column1, edit->column2);
+                        c1 = MIN (edit->column1, edit->column2);
+                        c2 = MAX (edit->column1, edit->column2);
                         if (x >= c1 && x < c2)
                             p->style |= MOD_MARKED;
                     }
@@ -918,13 +918,13 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
         if ((force & REDRAW_PAGE) != 0)
         {
             row = start_row;
-            b = edit_buffer_move_forward (&edit->buffer, edit->start_display, start_row, 0);
+            b = edit_buffer_get_forward_offset (&edit->buffer, edit->start_display, start_row, 0);
             while (row <= end_row)
             {
                 if (key_pending (edit))
                     return;
                 edit_draw_this_line (edit, b, row, start_column, end_column);
-                b = edit_buffer_move_forward (&edit->buffer, b, 1, 0);
+                b = edit_buffer_get_forward_offset (&edit->buffer, b, 1, 0);
                 row++;
             }
         }
@@ -943,7 +943,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
                     if (key_pending (edit))
                         return;
                     edit_draw_this_line (edit, b, row, start_column, end_column);
-                    b = edit_buffer_move_forward (&edit->buffer, b, 1, 0);
+                    b = edit_buffer_get_forward_offset (&edit->buffer, b, 1, 0);
                 }
             }
 
@@ -959,13 +959,13 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
             if ((force & REDRAW_AFTER_CURSOR) != 0 && end_row > curs_row)
             {
                 row = curs_row + 1 < start_row ? start_row : curs_row + 1;
-                b = edit_buffer_move_forward (&edit->buffer, b, 1, 0);
+                b = edit_buffer_get_forward_offset (&edit->buffer, b, 1, 0);
                 while (row <= end_row)
                 {
                     if (key_pending (edit))
                         return;
                     edit_draw_this_line (edit, b, row, start_column, end_column);
-                    b = edit_buffer_move_forward (&edit->buffer, b, 1, 0);
+                    b = edit_buffer_get_forward_offset (&edit->buffer, b, 1, 0);
                     row++;
                 }
             }
@@ -973,8 +973,9 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
             if ((force & REDRAW_LINE_ABOVE) != 0 && curs_row >= 1)
             {
                 row = curs_row - 1;
-                b = edit_buffer_move_backward (&edit->buffer,
-                                               edit_buffer_get_current_bol (&edit->buffer), 1);
+                b = edit_buffer_get_backward_offset (&edit->buffer,
+                                                     edit_buffer_get_current_bol (&edit->buffer),
+                                                     1);
                 if (row >= start_row && row <= end_row)
                 {
                     if (key_pending (edit))
@@ -987,7 +988,7 @@ render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
             {
                 row = curs_row + 1;
                 b = edit_buffer_get_current_bol (&edit->buffer);
-                b = edit_buffer_move_forward (&edit->buffer, b, 1, 0);
+                b = edit_buffer_get_forward_offset (&edit->buffer, b, 1, 0);
                 if (row >= start_row && row <= end_row)
                 {
                     if (key_pending (edit))
@@ -1091,8 +1092,8 @@ edit_scroll_screen_over_cursor (WEdit * edit)
     t_extreme = EDIT_TOP_EXTREME;
     if (edit->found_len != 0)
     {
-        b_extreme = max (w->lines / 4, b_extreme);
-        t_extreme = max (w->lines / 4, t_extreme);
+        b_extreme = MAX (w->lines / 4, b_extreme);
+        t_extreme = MAX (w->lines / 4, t_extreme);
     }
     if (b_extreme + t_extreme + 1 > w->lines)
     {

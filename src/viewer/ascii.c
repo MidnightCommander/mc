@@ -354,11 +354,9 @@ mcview_get_next_char (WView * view, mcview_state_machine_t * state, int *c)
 #ifdef HAVE_CHARSET
     if (view->utf8)
     {
-        gboolean result;
-        int char_length;
+        int char_length = 0;
 
-        *c = mcview_get_utf (view, state->offset, &char_length, &result);
-        if (!result)
+        if (!mcview_get_utf (view, state->offset, c, &char_length))
             return FALSE;
         /* Pretend EOF if we crossed force_max */
         if (view->force_max >= 0 && state->offset + char_length > view->force_max)

@@ -95,21 +95,11 @@
 
 #include "fs.h"
 #include "shell.h"
+#include "mcconfig.h"
 
 #ifdef USE_MAINTAINER_MODE
 #include "lib/logging.h"
 #endif
-
-#ifdef min
-#undef min
-#endif
-
-#ifdef max
-#undef max
-#endif
-
-#define min(x, y) ((x) > (y) ? (y) : (x))
-#define max(x, y) ((x) > (y) ? (x) : (y))
 
 /* Just for keeping Your's brains from invention a proper size of the buffer :-) */
 #define BUF_10K 10240L
@@ -191,6 +181,9 @@ typedef struct
     char *sysconfig_dir;
     /* share_data_dir: Area for default settings from developers */
     char *share_data_dir;
+
+    mc_config_t *main_config;
+    mc_config_t *panels_config;
 
 #ifdef HAVE_CHARSET
     /* Numbers of (file I/O) and (input/display) codepages. -1 if not selected */

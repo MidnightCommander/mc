@@ -118,7 +118,7 @@ vfs_s_automake (struct vfs_class *me, struct vfs_s_inode *dir, char *path, int f
     if (sep != NULL)
         *sep = '\0';
 
-    res = vfs_s_generate_entry (me, path, dir, flags & FL_MKDIR ? (0777 | S_IFDIR) : 0777);
+    res = vfs_s_generate_entry (me, path, dir, (flags & FL_MKDIR) != 0 ? (0777 | S_IFDIR) : 0777);
     vfs_s_insert_entry (me, dir, res);
 
     if (sep != NULL)
@@ -383,13 +383,14 @@ vfs_s_inode_from_path (const vfs_path_t * vpath, int flags)
 
     ino =
         vfs_s_find_inode (path_element->class, super, q,
-                          flags & FL_FOLLOW ? LINK_FOLLOW : LINK_NO_FOLLOW, flags & ~FL_FOLLOW);
+                          (flags & FL_FOLLOW) != 0 ? LINK_FOLLOW : LINK_NO_FOLLOW,
+                          flags & ~FL_FOLLOW);
     if ((!ino) && (!*q))
         /* We are asking about / directory of ftp server: assume it exists */
         ino =
             vfs_s_find_inode (path_element->class, super, q,
-                              flags & FL_FOLLOW ? LINK_FOLLOW :
-                              LINK_NO_FOLLOW, FL_DIR | (flags & ~FL_FOLLOW));
+                              (flags & FL_FOLLOW) != 0 ? LINK_FOLLOW : LINK_NO_FOLLOW,
+                              FL_DIR | (flags & ~FL_FOLLOW));
     return ino;
 }
 

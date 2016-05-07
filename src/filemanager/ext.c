@@ -805,11 +805,12 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
         {
             g_free (extension_file);
           check_stock_mc_ext:
-            extension_file = mc_build_filename (mc_global.sysconfig_dir, MC_LIB_EXT, NULL);
+            extension_file = mc_build_filename (mc_global.sysconfig_dir, MC_LIB_EXT, (char *) NULL);
             if (!exist_file (extension_file))
             {
                 g_free (extension_file);
-                extension_file = mc_build_filename (mc_global.share_data_dir, MC_LIB_EXT, NULL);
+                extension_file =
+                    mc_build_filename (mc_global.share_data_dir, MC_LIB_EXT, (char *) NULL);
             }
             mc_user_ext = FALSE;
         }

@@ -41,7 +41,7 @@ static char *ini_filename;
 static void
 config_object__init (void)
 {
-    ini_filename = g_build_filename (WORKDIR, "config_string.ini", NULL);
+    ini_filename = g_build_filename (WORKDIR, "config_string.ini", (char *) NULL);
     unlink (ini_filename);
 
     mc_config = mc_config_init (ini_filename, FALSE);

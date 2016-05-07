@@ -151,17 +151,12 @@ mcview_get_ptr_file (WView * view, off_t byte_index)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
-mcview_get_utf (WView * view, off_t byte_index, int *char_length, gboolean * result)
+gboolean
+mcview_get_utf (WView * view, off_t byte_index, int *ch, int *ch_len)
 {
     gchar *str = NULL;
-    int res = -1;
-    gunichar ch;
-    gchar *next_ch = NULL;
+    int res;
     gchar utf8buf[UTF8_CHAR_LEN + 1];
-
-    *char_length = 0;
-    *result = FALSE;
 
     switch (view->datasource)
     {
@@ -180,8 +175,10 @@ mcview_get_utf (WView * view, off_t byte_index, int *char_length, gboolean * res
         break;
     }
 
+    *ch = 0;
+
     if (str == NULL)
-        return 0;
+        return FALSE;
 
     res = g_utf8_get_char_validated (str, -1);
 
@@ -189,6 +186,7 @@ mcview_get_utf (WView * view, off_t byte_index, int *char_length, gboolean * res
     {
         /* Retry with explicit bytes to make sure it's not a buffer boundary */
         int i;
+
         for (i = 0; i < UTF8_CHAR_LEN; i++)
         {
             if (mcview_get_byte (view, byte_index + i, &res))
@@ -206,18 +204,20 @@ mcview_get_utf (WView * view, off_t byte_index, int *char_length, gboolean * res
 
     if (res < 0)
     {
-        ch = *str;
-        *char_length = 1;
+        *ch = (unsigned char) (*str);
+        *ch_len = 1;
     }
     else
     {
-        ch = res;
+        gchar *next_ch = NULL;
+
+        *ch = res;
         /* Calculate UTF-8 char length */
         next_ch = g_utf8_next_char (str);
-        *char_length = next_ch - str;
+        *ch_len = next_ch - str;
     }
-    *result = TRUE;
-    return ch;
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

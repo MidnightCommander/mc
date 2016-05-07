@@ -836,7 +836,7 @@ chown_advanced_cmd (void)
     /* Number of files at startup */
     int files_on_begin;
 
-    files_on_begin = max (1, current_panel->marked);
+    files_on_begin = MAX (1, current_panel->marked);
 
     do
     {                           /* do while any files remaining */

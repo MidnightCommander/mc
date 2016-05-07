@@ -14,7 +14,6 @@
 #define MC__EDIT_H
 
 #include "lib/global.h"         /* PATH_SEP_STR */
-#include "lib/fileloc.h"
 #include "lib/vfs/vfs.h"        /* vfs_path_t */
 
 /*** typedefs(not structures) and defined constants **********************************************/

@@ -186,7 +186,7 @@ radio_new (int y, int x, int count, const char **texts)
 
         r->texts[i] = parse_hotkey (texts[i]);
         width = hotkey_width (r->texts[i]);
-        wmax = max (width, wmax);
+        wmax = MAX (width, wmax);
     }
 
     /* 4 is width of "(*) " */

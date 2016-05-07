@@ -302,7 +302,7 @@ init_learn (void)
 
         label = _(key_name_conv_tab[i].longname);
         padding = 16 - str_term_width1 (label);
-        padding = max (0, padding);
+        padding = MAX (0, padding);
         g_snprintf (buffer, sizeof (buffer), "%s%*s", label, padding, "");
 
         learnkeys[i].button =
@@ -361,8 +361,8 @@ learn_save (void)
             char *esc_str;
 
             esc_str = strutils_escape (learnkeys[i].sequence, -1, ";\\", TRUE);
-            mc_config_set_string_raw_value (mc_main_config, section, key_name_conv_tab[i].name,
-                                            esc_str);
+            mc_config_set_string_raw_value (mc_global.main_config, section,
+                                            key_name_conv_tab[i].name, esc_str);
             g_free (esc_str);
 
             profile_changed = TRUE;
@@ -375,7 +375,7 @@ learn_save (void)
      * disk is much worse.
      */
     if (profile_changed)
-        mc_config_save_file (mc_main_config, NULL);
+        mc_config_save_file (mc_global.main_config, NULL);
 
     g_free (section);
 }

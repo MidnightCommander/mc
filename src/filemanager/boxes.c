@@ -585,7 +585,8 @@ appearance_box (void)
         };
 
         if (quick_dialog (&qdlg) == B_ENTER)
-            mc_config_set_string (mc_main_config, CONFIG_APP_SECTION, "skin", current_skin_name);
+            mc_config_set_string (mc_global.main_config, CONFIG_APP_SECTION, "skin",
+                                  current_skin_name);
         else
             skin_apply (NULL);
     }
@@ -602,7 +603,7 @@ panel_options_box (void)
 {
     int simple_swap;
 
-    simple_swap = mc_config_get_bool (mc_main_config, CONFIG_PANELS_SECTION,
+    simple_swap = mc_config_get_bool (mc_global.main_config, CONFIG_PANELS_SECTION,
                                       "simple_swap", FALSE) ? 1 : 0;
     {
         const char *qsearch_options[] = {
@@ -662,7 +663,7 @@ panel_options_box (void)
             return;
     }
 
-    mc_config_set_bool (mc_main_config, CONFIG_PANELS_SECTION,
+    mc_config_set_bool (mc_global.main_config, CONFIG_PANELS_SECTION,
                         "simple_swap", (gboolean) (simple_swap & C_BOOL));
 
     if (!panels_options.fast_reload_msg_shown && panels_options.fast_reload)
@@ -700,7 +701,7 @@ panel_listing_box (WPanel * panel, int num, char **userp, char **minip, int *use
         for (i = 0; i < LIST_TYPES; i++)
             panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
         section = g_strconcat ("Temporal:", p, (char *) NULL);
-        if (!mc_config_has_group (mc_main_config, section))
+        if (!mc_config_has_group (mc_global.main_config, section))
         {
             g_free (section);
             section = g_strdup (p);
@@ -1235,7 +1236,7 @@ jobs_cmd (void)
     }
 
     x += (int) n_but - 1;
-    cols = max (cols, x + 6);
+    cols = MAX (cols, x + 6);
 
     jobs_dlg = dlg_create (TRUE, 0, 0, lines, cols, dialog_colors, NULL, NULL,
                            "[Background jobs]", _("Background jobs"), DLG_CENTER);

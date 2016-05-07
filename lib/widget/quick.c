@@ -104,7 +104,7 @@ quick_create_labeled_input (GArray * widgets, int *y, int x, quick_widget_t * qu
         in.quick_widget = quick_widget;
         g_array_append_val (widgets, in);
 
-        *width = max (label.widget->cols, in.widget->cols);
+        *width = MAX (label.widget->cols, in.widget->cols);
         break;
 
     case input_label_left:
@@ -140,7 +140,7 @@ quick_create_labeled_input (GArray * widgets, int *y, int x, quick_widget_t * qu
         *y += label.widget->lines - 1;
         g_array_append_val (widgets, label);
 
-        *width = max (label.widget->cols, in.widget->cols);
+        *width = MAX (label.widget->cols, in.widget->cols);
         break;
 
     default:
@@ -185,7 +185,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
     int return_val;
 
     len = str_term_width1 (I18N (quick_dlg->title)) + 6;
-    quick_dlg->cols = max (quick_dlg->cols, len);
+    quick_dlg->cols = MAX (quick_dlg->cols, len);
 
     y = 1;
     x = x1;
@@ -210,9 +210,9 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
             if (g != NULL)
                 width += 2;
             if (two_columns)
-                width2 = max (width2, width);
+                width2 = MAX (width2, width);
             else
-                width1 = max (width1, width);
+                width1 = MAX (width1, width);
             break;
 
         case quick_button:
@@ -227,9 +227,9 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
             if (g != NULL)
                 width += 2;
             if (two_columns)
-                width2 = max (width2, width);
+                width2 = MAX (width2, width);
             else
-                width1 = max (width1, width);
+                width1 = MAX (width1, width);
             break;
 
         case quick_input:
@@ -249,9 +249,9 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
             if (g != NULL)
                 width += 2;
             if (two_columns)
-                width2 = max (width2, width);
+                width2 = MAX (width2, width);
             else
-                width1 = max (width1, width);
+                width1 = MAX (width1, width);
             break;
 
         case quick_label:
@@ -262,9 +262,9 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
             if (g != NULL)
                 width += 2;
             if (two_columns)
-                width2 = max (width2, width);
+                width2 = MAX (width2, width);
             else
-                width1 = max (width1, width);
+                width1 = MAX (width1, width);
             break;
 
         case quick_radio:
@@ -288,9 +288,9 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
                 if (g != NULL)
                     width += 2;
                 if (two_columns)
-                    width2 = max (width2, width);
+                    width2 = MAX (width2, width);
                 else
-                    width1 = max (width1, width);
+                    width1 = MAX (width1, width);
             }
             break;
 
@@ -339,7 +339,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
 
         case quick_stop_columns:
             x = x1;
-            y = max (y1, y);
+            y = MAX (y1, y);
             g_array_append_val (widgets, item);
             two_columns = FALSE;
             break;
@@ -383,7 +383,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
     }
 
     /* adjust dialog width */
-    quick_dlg->cols = max (quick_dlg->cols, blen + 6);
+    quick_dlg->cols = MAX (quick_dlg->cols, blen + 6);
     if (have_groupbox)
     {
         if (width1 != 0)
@@ -397,10 +397,10 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
     {
         len = width2 * 2 + 7;
         if (width1 != 0)
-            len = max (len, width1 + 6);
+            len = MAX (len, width1 + 6);
     }
 
-    quick_dlg->cols = max (quick_dlg->cols, len);
+    quick_dlg->cols = MAX (quick_dlg->cols, len);
     width1 = quick_dlg->cols - 6;
     width2 = (quick_dlg->cols - 7) / 2;
 
