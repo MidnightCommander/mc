@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-02-02 09:44+0300\n"
+"POT-Creation-Date: 2016-05-07 18:23+0300\n"
 "PO-Revision-Date: 2016-01-08 21:48+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -578,6 +578,10 @@ msgstr "Processo in background:"
 
 msgid "Error"
 msgstr "Errore"
+
+#, fuzzy, c-format
+msgid "%s (%d)"
+msgstr "Tempo: %s (%s)"
 
 msgid "&Abort"
 msgstr "&Annulla"
@@ -1912,6 +1916,10 @@ msgstr "Navigazione stile Lyn&x"
 msgid "Pa&ge scrolling"
 msgstr "Scorrimento pa&gine"
 
+#, fuzzy
+msgid "Center &scrolling"
+msgstr "Scorrimento pa&gine"
+
 msgid "&Mouse page scrolling"
 msgstr "Scorrimento pagine &mouse"
 
@@ -2281,6 +2289,10 @@ msgstr ""
 "i pannelli non possono essere nascosti."
 
 #, c-format
+msgid "'%s' is not a symbolic link"
+msgstr "\"%s\" non è un coll. simbolico"
+
+#, c-format
 msgid "Symlink '%s' points to:"
 msgstr "Il coll. simb. \"%s\" punta a:"
 
@@ -2294,10 +2306,6 @@ msgstr "modifica collegamento simb., impossibile rimuovere %s: %s"
 #, c-format
 msgid "edit symlink: %s"
 msgstr "modifica del collegamento simb.: %s"
-
-#, c-format
-msgid "'%s' is not a symbolic link"
-msgstr "\"%s\" non è un coll. simbolico"
 
 msgid "FTP to machine"
 msgstr "Connessione FTP"
@@ -2625,9 +2633,9 @@ msgstr ""
 "Impossibile preallocare lo spazio per il file obiettivo \"%s\"\n"
 "%s"
 
-#, c-format
+#, fuzzy, c-format
 msgid ""
-"Cannot read source file\"%s\"\n"
+"Cannot read source file \"%s\"\n"
 "%s"
 msgstr ""
 "Impossibile leggere il file sorgente \"%s\"\n"
