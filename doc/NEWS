@@ -1,3 +1,39 @@
+Version 4.8.17
+
+- Core
+  * Minimal version of Gettext is 0.18.1 (#1885)
+  * Optimization of copy/move operations (use adaptive buffer as in coreutils) (#2193)
+  * Recognize csh as tcsh (#2742)
+  * Сentered scrolling of file panel (#3130)
+  * Internals:
+    * Switch to new high-level mouse API (#3571)
+
+- VFS
+  * FISH helpers: remove executable bit (#3610)
+
+- Editor
+  * Improvements of syntax highlighting:
+    * F90 (#3618)
+    * Java (MidnightCommander/mc#95)
+
+- Misc
+  * Code cleanup (#3598, #3607)
+  * Install mc.keymap as a symlink to mc.default.keymap (#3609)
+  * File highlight: add more common file formats
+
+- Fixes
+  * Segfault due to incorrect value of SHELL environment variable (#3606)
+  * Segfault when copying files under FreeBSD 9.3 (#3617)
+  * Segfault when entering into some cpio archives (#3621)
+  * Subshell output lost on window resize under tmux, GNU screen (#3639)
+  * Subshell cursor position lost after window resizing (#3640)
+  * Listbox no longer scrolls when dragging outside widget (#3559)
+  * VFS: extfs: incorrect date parsing in unzip (#3622)
+  * VFS: extfs: buffer overflow (#3605)
+  * VFS: patchfs: syntax error (#3620)
+  * VFS: fish: mistakes in ls Perl helper (#3611)
+
+
 Version 4.8.16
 
 - Core
