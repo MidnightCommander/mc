@@ -147,7 +147,6 @@ label_new (int y, int x, const char *text)
     l->text = g_strdup (text);
     l->auto_adjust_cols = TRUE;
     l->transparent = FALSE;
-    widget_want_cursor (w, FALSE);
     widget_want_hotkey (w, FALSE);
 
     return l;

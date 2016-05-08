@@ -153,8 +153,7 @@ widget_init (Widget * w, int y, int x, int lines, int cols,
     w->mouse.last_msg = MSG_MOUSE_NONE;
     w->mouse.last_buttons_down = 0;
 
-    /* Almost all widgets want to put the cursor in a suitable place */
-    w->options = WOP_WANT_CURSOR;
+    w->options = WOP_DEFAULT;
     w->state = WST_DEFAULT;
 }
 

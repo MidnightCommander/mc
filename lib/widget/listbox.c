@@ -563,7 +563,6 @@ listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn 
     l->scrollbar = !mc_global.tty.slow_terminal;
     l->focused = FALSE;
     widget_want_hotkey (w, TRUE);
-    widget_want_cursor (w, FALSE);
 
     return l;
 }

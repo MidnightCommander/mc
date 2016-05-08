@@ -832,7 +832,6 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols,
     w = WIDGET (new_d);
     widget_init (w, y1, x1, lines, cols, (callback != NULL) ? callback : dlg_default_callback,
                  mouse_callback);
-    widget_want_cursor (w, FALSE);
     w->options |= WOP_TOP_SELECT;
 
     w->state |= WST_CONSTRUCT;

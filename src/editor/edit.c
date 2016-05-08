@@ -2097,6 +2097,7 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
         to_free = TRUE;
 
         widget_init (WIDGET (edit), y, x, lines, cols, NULL, NULL);
+        widget_want_cursor (WIDGET (edit), TRUE);
         widget_set_options (WIDGET (edit), WOP_TOP_SELECT, TRUE);
         edit->fullscreen = TRUE;
         edit_save_size (edit);

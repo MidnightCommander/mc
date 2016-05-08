@@ -213,6 +213,7 @@ button_new (int y, int x, int action, button_flags_t flags, const char *text, bc
     widget_init (w, y, x, 1, button_get_len (b), button_callback, button_mouse_callback);
     b->selected = FALSE;
     b->callback = callback;
+    widget_want_cursor (w, TRUE);
     widget_want_hotkey (w, TRUE);
     b->hotpos = (b->text.hotkey != NULL) ? str_term_width1 (b->text.start) : -1;
 

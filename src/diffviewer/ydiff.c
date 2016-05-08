@@ -3466,7 +3466,6 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
     dview = g_new0 (WDiff, 1);
     w = WIDGET (dview);
     widget_init (w, 0, 0, LINES - 1, COLS, dview_callback, dview_mouse_callback);
-    widget_want_cursor (w, FALSE);
 
     add_widget (dview_dlg, dview);
     add_widget (dview_dlg, buttonbar_new (TRUE));

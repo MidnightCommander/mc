@@ -893,7 +893,6 @@ menubar_new (int y, int x, int cols, GList * menu, gboolean visible)
     w = WIDGET (menubar);
     widget_init (w, y, x, 1, cols, menubar_callback, menubar_mouse_callback);
     w->options |= WOP_TOP_SELECT;
-    widget_want_cursor (w, FALSE);
 
     menubar->is_visible = visible;
     menubar_set_menu (menubar, menu);

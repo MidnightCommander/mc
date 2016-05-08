@@ -195,6 +195,7 @@ radio_new (int y, int x, int count, const char **texts)
     r->pos = 0;
     r->sel = 0;
     r->count = count;
+    widget_want_cursor (w, TRUE);
     widget_want_hotkey (w, TRUE);
 
     return r;
