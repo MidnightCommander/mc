@@ -274,8 +274,8 @@ init_learn (void)
     do_refresh ();
 
     learn_dlg =
-        dlg_create (TRUE, 0, 0, dlg_height, dlg_width, dialog_colors, learn_callback, NULL,
-                    "[Learn keys]", learn_title, DLG_CENTER);
+        dlg_create (TRUE, 0, 0, dlg_height, dlg_width, WPOS_CENTER, FALSE, dialog_colors,
+                    learn_callback, NULL, "[Learn keys]", learn_title);
 
     /* find first unshown button */
     for (key = key_name_conv_tab, learn_total = 0;

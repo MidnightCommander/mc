@@ -109,8 +109,8 @@ spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word
     sug_dlg_w += max_btn_len;
     sug_dlg_w = MAX (sug_dlg_w, word_label_len) + 1;
 
-    sug_dlg = dlg_create (TRUE, ypos, xpos, sug_dlg_h, sug_dlg_w,
-                          dialog_colors, NULL, NULL, "[ASpell]", _("Check word"), DLG_COMPACT);
+    sug_dlg = dlg_create (TRUE, ypos, xpos, sug_dlg_h, sug_dlg_w, WPOS_KEEP_DEFAULT, TRUE,
+                          dialog_colors, NULL, NULL, "[ASpell]", _("Check word"));
 
     add_widget (sug_dlg, label_new (1, 2, lang_label));
     add_widget (sug_dlg, label_new (3, 2, word_label));

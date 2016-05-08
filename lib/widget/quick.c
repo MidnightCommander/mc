@@ -406,13 +406,13 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
     width2 = (quick_dlg->cols - 7) / 2;
 
     if (quick_dlg->x == -1 || quick_dlg->y == -1)
-        dd = dlg_create (TRUE, 0, 0, y + 3, quick_dlg->cols,
+        dd = dlg_create (TRUE, 0, 0, y + 3, quick_dlg->cols, WPOS_CENTER | WPOS_TRYUP, FALSE,
                          dialog_colors, quick_dlg->callback, quick_dlg->mouse_callback,
-                         quick_dlg->help, quick_dlg->title, DLG_CENTER | DLG_TRYUP);
+                         quick_dlg->help, quick_dlg->title);
     else
         dd = dlg_create (TRUE, quick_dlg->y, quick_dlg->x, y + 3, quick_dlg->cols,
-                         dialog_colors, quick_dlg->callback, quick_dlg->mouse_callback,
-                         quick_dlg->help, quick_dlg->title, DLG_NONE);
+                         WPOS_KEEP_DEFAULT, FALSE, dialog_colors, quick_dlg->callback,
+                         quick_dlg->mouse_callback, quick_dlg->help, quick_dlg->title);
 
     /* add widgets into the dialog */
     x2 = x1 + width2 + 1;

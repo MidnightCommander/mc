@@ -3460,8 +3460,8 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
 
     /* Create dialog and widgets, put them on the dialog */
     dview_dlg =
-        dlg_create (FALSE, 0, 0, LINES, COLS, NULL, dview_dialog_callback, NULL,
-                    "[Diff Viewer]", NULL, DLG_NONE);
+        dlg_create (FALSE, 0, 0, 1, 1, WPOS_FULLSCREEN, FALSE, NULL, dview_dialog_callback, NULL,
+                    "[Diff Viewer]", NULL);
     widget_want_tab (WIDGET (dview_dlg), TRUE);
 
     dview = g_new0 (WDiff, 1);

@@ -1223,8 +1223,8 @@ edit_files (const GList * files)
 
     /* Create a new dialog and add it widgets to it */
     edit_dlg =
-        dlg_create (FALSE, 0, 0, LINES, COLS, NULL, edit_dialog_callback,
-                    edit_dialog_mouse_callback, "[Internal File Editor]", NULL, DLG_NONE);
+        dlg_create (FALSE, 0, 0, 1, 1, WPOS_FULLSCREEN, FALSE, NULL, edit_dialog_callback,
+                    edit_dialog_mouse_callback, "[Internal File Editor]", NULL);
     widget_want_tab (WIDGET (edit_dlg), TRUE);
 
     edit_dlg->get_shortcut = edit_get_shortcut;

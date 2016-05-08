@@ -29,15 +29,6 @@
 
 /*** enums ***************************************************************************************/
 
-/* Flags for dlg_create */
-typedef enum
-{
-    DLG_NONE = 0,               /* No options */
-    DLG_CENTER = (1 << 0),      /* Center the dialog */
-    DLG_TRYUP = (1 << 1),       /* Try to move two lines up the dialog */
-    DLG_COMPACT = (1 << 2)      /* Suppress spaces around the frame */
-} dlg_flags_t;
-
 /* Dialog color constants */
 typedef enum
 {
@@ -70,7 +61,7 @@ struct WDialog
     Widget widget;
 
     /* Set by the user */
-    dlg_flags_t flags;          /* User flags */
+    gboolean compact;           /* Suppress spaces around the frame */
     const char *help_ctx;       /* Name of the help entry */
     const int *color;           /* Color set. Unused in viewer and editor */
     char *title;                /* Title of the dialog */
@@ -79,7 +70,6 @@ struct WDialog
     int ret_value;              /* Result of dlg_run() */
 
     /* Internal flags */
-    gboolean fullscreen;        /* Parents dialogs don't need refresh */
     gboolean winch_pending;     /* SIGWINCH signal has been got. Resize dialog after rise */
     int mouse_status;           /* For the autorepeat status of the mouse */
 
@@ -115,8 +105,9 @@ extern const global_keymap_t *dialog_map;
 
 /* Creates a dialog head  */
 WDialog *dlg_create (gboolean modal, int y1, int x1, int lines, int cols,
+                     widget_pos_flags_t pos_flags, gboolean compact,
                      const int *colors, widget_cb_fn callback, widget_mouse_cb_fn mouse_callback,
-                     const char *help_ctx, const char *title, dlg_flags_t flags);
+                     const char *help_ctx, const char *title);
 
 void dlg_set_default_colors (void);
 

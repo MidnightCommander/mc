@@ -388,8 +388,9 @@ dlg_mouse_event (WDialog * h, Gpm_Event * event)
     GList *p;
 
     /* close the dialog by mouse left click out of dialog area */
-    if (mouse_close_dialog && !h->fullscreen && ((event->buttons & GPM_B_LEFT) != 0)
-        && ((event->type & GPM_DOWN) != 0) && !mouse_global_in_widget (event, wh))
+    if (mouse_close_dialog && (wh->pos_flags & WPOS_FULLSCREEN) == 0
+        && ((event->buttons & GPM_B_LEFT) != 0) && ((event->type & GPM_DOWN) != 0)
+        && !mouse_global_in_widget (event, wh))
     {
         h->ret_value = B_CANCEL;
         dlg_stop (h);
@@ -649,7 +650,7 @@ dlg_default_repaint (WDialog * h)
     if (!widget_get_state (wh, WST_ACTIVE))
         return;
 
-    space = (h->flags & DLG_COMPACT) ? 0 : 1;
+    space = h->compact ? 0 : 1;
 
     tty_setcolor (h->color[DLG_COLOR_NORMAL]);
     dlg_erase (h);
@@ -755,21 +756,35 @@ dlg_set_position (WDialog * h, int y, int x, int lines, int cols)
 void
 dlg_set_size (WDialog * h, int lines, int cols)
 {
-    int x = WIDGET (h)->x;
-    int y = WIDGET (h)->y;
+    Widget *w = WIDGET (h);
+    int x, y;
 
-    if ((h->flags & DLG_CENTER) != 0)
+    if ((w->pos_flags & WPOS_FULLSCREEN) != 0)
     {
-        y = (LINES - lines) / 2;
-        x = (COLS - cols) / 2;
+        y = 0;
+        x = 0;
+        lines = LINES;
+        cols = COLS;
     }
-
-    if ((h->flags & DLG_TRYUP) != 0)
+    else
     {
-        if (y > 3)
-            y -= 2;
-        else if (y == 3)
-            y = 2;
+        if ((w->pos_flags & WPOS_CENTER_HORZ) != 0)
+            x = (COLS - cols) / 2;
+        else
+            x = w->x;
+
+        if ((w->pos_flags & WPOS_CENTER_VERT) != 0)
+            y = (LINES - lines) / 2;
+        else
+            y = w->y;
+
+        if ((w->pos_flags & WPOS_TRYUP) != 0)
+        {
+            if (y > 3)
+                y -= 2;
+            else if (y == 3)
+                y = 2;
+        }
     }
 
     dlg_set_position (h, y, x, lines, cols);
@@ -806,7 +821,7 @@ dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
         /* this is default resizing mechanism */
         /* the main idea of this code is to resize dialog
            according to flags (if any of flags require automatic
-           resizing, like DLG_CENTER, end after that reposition
+           resizing, like WPOS_CENTER, end after that reposition
            controls in dialog according to flags of widget) */
         dlg_set_size (h, w->lines, w->cols);
         return MSG_HANDLED;
@@ -821,17 +836,26 @@ dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
 /* --------------------------------------------------------------------------------------------- */
 
 WDialog *
-dlg_create (gboolean modal, int y1, int x1, int lines, int cols,
-            const int *colors, widget_cb_fn callback, widget_mouse_cb_fn mouse_callback,
-            const char *help_ctx, const char *title, dlg_flags_t flags)
+dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flags_t pos_flags,
+            gboolean compact, const int *colors, widget_cb_fn callback,
+            widget_mouse_cb_fn mouse_callback, const char *help_ctx, const char *title)
 {
     WDialog *new_d;
     Widget *w;
+
+    if ((pos_flags & WPOS_FULLSCREEN) != 0)
+    {
+        y1 = 0;
+        x1 = 0;
+        lines = LINES;
+        cols = COLS;
+    }
 
     new_d = g_new0 (WDialog, 1);
     w = WIDGET (new_d);
     widget_init (w, y1, x1, lines, cols, (callback != NULL) ? callback : dlg_default_callback,
                  mouse_callback);
+    w->pos_flags = pos_flags;
     w->options |= WOP_TOP_SELECT;
 
     w->state |= WST_CONSTRUCT;
@@ -840,11 +864,10 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols,
 
     new_d->color = colors;
     new_d->help_ctx = help_ctx;
-    new_d->flags = flags;
+    new_d->compact = compact;
     new_d->data = NULL;
 
     dlg_set_size (new_d, lines, cols);
-    new_d->fullscreen = (w->x == 0 && w->y == 0 && w->cols == COLS && w->lines == LINES);
 
     new_d->mouse_status = MOU_UNHANDLED;
 
@@ -1029,7 +1052,7 @@ do_refresh (void)
     {
         /* Search first fullscreen dialog */
         for (; d != NULL; d = g_list_next (d))
-            if (d->data != NULL && DIALOG (d->data)->fullscreen)
+            if (d->data != NULL && (WIDGET (d->data)->pos_flags & WPOS_FULLSCREEN) != 0)
                 break;
         /* back to top dialog */
         for (; d != NULL; d = g_list_previous (d))

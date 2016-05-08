@@ -542,8 +542,8 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
 
     /* FIXME - missing help node */
     ui->replace_dlg =
-        dlg_create (TRUE, 0, 0, rd_ylen, rd_xlen, alarm_colors, NULL, NULL, "[Replace]", title,
-                    DLG_CENTER);
+        dlg_create (TRUE, 0, 0, rd_ylen, rd_xlen, WPOS_CENTER, FALSE, alarm_colors, NULL, NULL,
+                    "[Replace]", title);
 
     /* prompt */
     ADD_RD_LABEL (0, "", "", y++);
@@ -746,8 +746,8 @@ file_op_context_create_ui (file_op_context_t * ctx, gboolean with_eta,
     ui->replace_result = REPLACE_YES;
 
     ui->op_dlg =
-        dlg_create (TRUE, 0, 0, dlg_height, dlg_width, dialog_colors, NULL, NULL, NULL,
-                    op_names[ctx->operation], DLG_CENTER);
+        dlg_create (TRUE, 0, 0, dlg_height, dlg_width, WPOS_CENTER, FALSE, dialog_colors, NULL,
+                    NULL, NULL, op_names[ctx->operation]);
 
     if (dialog_type != FILEGUI_DIALOG_DELETE_ITEM)
     {

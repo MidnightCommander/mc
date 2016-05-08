@@ -661,8 +661,8 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
         in_start_dir = g_strdup (".");
 
     find_dlg =
-        dlg_create (TRUE, 0, 0, lines, cols, dialog_colors, find_parm_callback, NULL, "[Find File]",
-                    _("Find File"), DLG_CENTER);
+        dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, find_parm_callback,
+                    NULL, "[Find File]", _("Find File"));
 
     x1 = 3;
     x2 = cols / 2 + 1;
@@ -1615,8 +1615,8 @@ setup_gui (void)
     cols = COLS - 16;
 
     find_dlg =
-        dlg_create (TRUE, 0, 0, lines, cols, dialog_colors, find_callback, NULL, "[Find File]",
-                    _("Find File"), DLG_CENTER);
+        dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, find_callback, NULL,
+                    "[Find File]", _("Find File"));
 
     find_calc_button_locations (find_dlg, TRUE);
 

@@ -90,21 +90,26 @@ typedef enum
 /* Flags for widget repositioning on dialog resize */
 typedef enum
 {
-    WPOS_CENTER_HORZ = (1 << 0),        /* center widget in horizontal */
-    WPOS_CENTER_VERT = (1 << 1),        /* center widget in vertical */
-    WPOS_KEEP_LEFT = (1 << 2),  /* keep widget distance to left border of dialog */
-    WPOS_KEEP_RIGHT = (1 << 3), /* keep widget distance to right border of dialog */
-    WPOS_KEEP_TOP = (1 << 4),   /* keep widget distance to top border of dialog */
-    WPOS_KEEP_BOTTOM = (1 << 5),        /* keep widget distance to bottom border of dialog */
+    WPOS_FULLSCREEN = (1 << 0), /* widget occupies the whole screen */
+    WPOS_CENTER_HORZ = (1 << 1),        /* center widget in horizontal */
+    WPOS_CENTER_VERT = (1 << 2),        /* center widget in vertical */
+    WPOS_CENTER = WPOS_CENTER_HORZ | WPOS_CENTER_VERT,  /* center widget */
+    WPOS_TRYUP = (1 << 3),      /* try to move two lines up the widget */
+    WPOS_KEEP_LEFT = (1 << 4),  /* keep widget distance to left border of dialog */
+    WPOS_KEEP_RIGHT = (1 << 5), /* keep widget distance to right border of dialog */
+    WPOS_KEEP_TOP = (1 << 6),   /* keep widget distance to top border of dialog */
+    WPOS_KEEP_BOTTOM = (1 << 7),        /* keep widget distance to bottom border of dialog */
     WPOS_KEEP_HORZ = WPOS_KEEP_LEFT | WPOS_KEEP_RIGHT,
     WPOS_KEEP_VERT = WPOS_KEEP_TOP | WPOS_KEEP_BOTTOM,
     WPOS_KEEP_ALL = WPOS_KEEP_HORZ | WPOS_KEEP_VERT,
     WPOS_KEEP_DEFAULT = WPOS_KEEP_LEFT | WPOS_KEEP_TOP
 } widget_pos_flags_t;
-/* NOTE: if WPOS_CENTER_HORZ flag is used, other horizontal flags (WPOS_KEEP_LEFT, WPOS_KEEP_RIGHT,
- * and WPOS_KEEP_HORZ are ignored).
+/* NOTES:
+ * If WPOS_FULLSCREEN is set then all other position flags are ignored.
+ * If WPOS_CENTER_HORZ flag is used, other horizontal flags (WPOS_KEEP_LEFT, WPOS_KEEP_RIGHT,
+ * and WPOS_KEEP_HORZ) are ignored.
  * If WPOS_CENTER_VERT flag is used, other horizontal flags (WPOS_KEEP_TOP, WPOS_KEEP_BOTTOM,
- * and WPOS_KEEP_VERT are ignored).
+ * and WPOS_KEEP_VERT) are ignored.
  */
 
 /*** structures declarations (and typedefs of structures)*****************************************/

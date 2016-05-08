@@ -67,7 +67,7 @@ hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         {
             Widget *wo = WIDGET (h);
 
-            if (((h->flags & DLG_COMPACT) != 0))
+            if (h->compact)
             {
                 w->x = wo->x;
                 w->cols = wo->cols;
