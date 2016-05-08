@@ -18,6 +18,7 @@
 /* Sets/clear the specified flag in the options field */
 #define widget_want_cursor(w,i) widget_set_options(w, WOP_WANT_CURSOR, i)
 #define widget_want_hotkey(w,i) widget_set_options(w, WOP_WANT_HOTKEY, i)
+#define widget_want_tab(w,i) widget_set_options(w, WOP_WANT_TAB, i)
 #define widget_idle(w,i) widget_set_state(w, WST_IDLE, i)
 #define widget_disable(w,i) widget_set_state(w, WST_DISABLED, i)
 
@@ -67,8 +68,9 @@ typedef enum
     WOP_DEFAULT = (0 << 0),
     WOP_WANT_HOTKEY = (1 << 1),
     WOP_WANT_CURSOR = (1 << 2),
-    WOP_IS_INPUT = (1 << 3),
-    WOP_TOP_SELECT = (1 << 4)
+    WOP_WANT_TAB = (1 << 3),    /* Should the tab key be sent to the dialog? */
+    WOP_IS_INPUT = (1 << 4),
+    WOP_TOP_SELECT = (1 << 5)
 } widget_options_t;
 
 /* Widget state */

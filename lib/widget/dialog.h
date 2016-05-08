@@ -35,8 +35,7 @@ typedef enum
     DLG_NONE = 0,               /* No options */
     DLG_CENTER = (1 << 0),      /* Center the dialog */
     DLG_TRYUP = (1 << 1),       /* Try to move two lines up the dialog */
-    DLG_COMPACT = (1 << 2),     /* Suppress spaces around the frame */
-    DLG_WANT_TAB = (1 << 3)     /* Should the tab key be sent to the dialog? */
+    DLG_COMPACT = (1 << 2)      /* Suppress spaces around the frame */
 } dlg_flags_t;
 
 /* Dialog color constants */

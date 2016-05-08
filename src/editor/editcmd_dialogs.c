@@ -321,7 +321,8 @@ editcmd_dialog_raw_key_query (const char *heading, const char *query, gboolean c
 
     raw_dlg =
         dlg_create (TRUE, 0, 0, cancel ? 7 : 5, w, dialog_colors, editcmd_dialog_raw_key_query_cb,
-                    NULL, NULL, heading, DLG_CENTER | DLG_TRYUP | DLG_WANT_TAB);
+                    NULL, NULL, heading, DLG_CENTER | DLG_TRYUP);
+    widget_want_tab (WIDGET (raw_dlg), TRUE);
 
     add_widget (raw_dlg, label_new (y, 3, query));
     add_widget (raw_dlg, input_new (y++, 3 + wq + 1, input_colors,

@@ -3461,7 +3461,8 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
     /* Create dialog and widgets, put them on the dialog */
     dview_dlg =
         dlg_create (FALSE, 0, 0, LINES, COLS, NULL, dview_dialog_callback, NULL,
-                    "[Diff Viewer]", NULL, DLG_WANT_TAB);
+                    "[Diff Viewer]", NULL, DLG_NONE);
+    widget_want_tab (WIDGET (dview_dlg), TRUE);
 
     dview = g_new0 (WDiff, 1);
     w = WIDGET (dview);

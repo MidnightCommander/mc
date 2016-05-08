@@ -510,7 +510,7 @@ dlg_key_event (WDialog * h, int d_key)
         h->current = h->widgets;
 
     /* TAB used to cycle */
-    if ((h->flags & DLG_WANT_TAB) == 0)
+    if (!widget_get_options (WIDGET (h), WOP_WANT_TAB))
     {
         if (d_key == '\t')
         {
