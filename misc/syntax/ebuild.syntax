@@ -75,6 +75,8 @@ context default
     keyword whole dosed yellow
     keyword whole dosym yellow
     keyword whole eaclocal yellow
+    keyword whole eapply yellow
+    keyword whole eapply_user yellow
     keyword whole eautoconf yellow
     keyword whole eautoreconf yellow
     keyword whole eautomake yellow
