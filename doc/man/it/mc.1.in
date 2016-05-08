@@ -32,8 +32,8 @@ mc \- interfaccia visuale per sistemi tipo Unix.
 .\"NODE "DESCRIPTION"
 .SH "DESCRIZIONE"
 Il Midnight Commander è un file manager per sistemi operativi di tipo Unix.  
-.\"NODE "OPTIONS"
 .\"DONT_SPLIT"
+.\"NODE "OPTIONS"
 .SH "OPZIONI"
 .TP
 .I "\-a"
