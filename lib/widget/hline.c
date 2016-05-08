@@ -136,7 +136,6 @@ hline_new (int y, int x, int width)
     l->text = NULL;
     l->auto_adjust_cols = (width < 0);
     l->transparent = FALSE;
-    widget_want_hotkey (w, FALSE);
 
     return l;
 }

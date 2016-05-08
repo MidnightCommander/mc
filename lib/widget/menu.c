@@ -307,7 +307,7 @@ menubar_finish (WMenuBar * menubar)
     menubar->is_dropped = FALSE;
     menubar->is_active = FALSE;
     w->lines = 1;
-    widget_want_hotkey (w, 0);
+    widget_want_hotkey (w, FALSE);
 
     /* Move the menubar to the bottom so that widgets displayed on top of
      * an "invisible" menubar get the first chance to respond to mouse events. */
@@ -588,7 +588,7 @@ menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         w->lines = LINES;
 
         /* Trick to get all of the hotkeys */
-        widget_want_hotkey (w, 1);
+        widget_want_hotkey (w, TRUE);
         menubar_draw (menubar);
         return MSG_HANDLED;
 
