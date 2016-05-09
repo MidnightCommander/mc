@@ -241,7 +241,9 @@ mc_shell_init (void)
     if (mc_shell->type == SHELL_NONE)
         mc_shell_recognize_path (mc_shell);
 
-    mc_global.tty.use_subshell = mc_shell->type != SHELL_NONE;
+    if (mc_shell->type == SHELL_NONE)
+        mc_global.tty.use_subshell = FALSE;
+
     mc_global.shell = mc_shell;
 }
 
