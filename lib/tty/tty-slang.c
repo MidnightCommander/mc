@@ -83,6 +83,8 @@ static struct termios new_mode;
 /* Controls whether we should wait for input in tty_lowlevel_getch */
 static gboolean no_slang_delay;
 
+static gboolean slsmg_active = FALSE;
+
 /* This table describes which capabilities we want and which values we
  * assign to them.
  */
@@ -329,6 +331,7 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     tty_display_8bit (FALSE);
 
     SLsmg_init_smg ();
+    slsmg_active = TRUE;
     if (!mouse_enable)
         use_mouse_p = MOUSE_DISABLED;
     tty_init_xterm_support (is_xterm);  /* do it before tty_enter_ca_mode() call */
@@ -354,6 +357,7 @@ tty_shutdown (void)
     tty_reset_screen ();
     tty_exit_ca_mode ();
     SLang_reset_tty ();
+    slsmg_active = FALSE;
 
     /* Load the op capability to reset the colors to those that were 
      * active when the program was started up 
@@ -388,7 +392,8 @@ void
 tty_change_screen_size (void)
 {
     SLtt_get_screen_size ();
-    SLsmg_reinit_smg ();
+    if (slsmg_active)
+        SLsmg_reinit_smg ();
 
 #ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
@@ -404,6 +409,7 @@ tty_reset_prog_mode (void)
 {
     tcsetattr (SLang_TT_Read_FD, TCSANOW, &new_mode);
     SLsmg_init_smg ();
+    slsmg_active = TRUE;
     SLsmg_touch_lines (0, LINES);
 }
 
@@ -504,6 +510,7 @@ int
 tty_reset_screen (void)
 {
     SLsmg_reset_smg ();
+    slsmg_active = FALSE;
     return 0;                   /* OK */
 }
 
