@@ -408,7 +408,7 @@ show_console_contents_freebsd (int starty, unsigned char begin_line, unsigned ch
     for (line = begin_line; line <= end_line; line++)
     {
         tty_gotoyx (starty + line - begin_line, 0);
-        for (col = 0; col < min (COLS, screen_info.mv_csz); col++)
+        for (col = 0; col < MIN (COLS, screen_info.mv_csz); col++)
         {
             c = screen_shot.buf[line * screen_info.mv_csz + col] & 0xFF;
             tty_print_char (c);
