@@ -416,7 +416,8 @@ make_symlink (file_op_context_t * ctx, const char *src_path, const char *dst_pat
         }
         goto ret;
     }
-    link_target[len] = 0;
+
+    link_target[len] = '\0';
 
     if (ctx->stable_symlinks && !(vfs_file_is_local (src_vpath) && vfs_file_is_local (dst_vpath)))
     {
@@ -428,9 +429,10 @@ make_symlink (file_op_context_t * ctx, const char *src_path, const char *dst_pat
 
     if (ctx->stable_symlinks && !g_path_is_absolute (link_target))
     {
-        const char *r = strrchr (src_path, PATH_SEP);
+        const char *r;
 
-        if (r)
+        r = strrchr (src_path, PATH_SEP);
+        if (r != NULL)
         {
             char *p;
             vfs_path_t *q;
@@ -455,7 +457,7 @@ make_symlink (file_op_context_t * ctx, const char *src_path, const char *dst_pat
                 s = diff_two_paths (tmp_vpath1, tmp_vpath2);
                 vfs_path_free (tmp_vpath1);
                 vfs_path_free (tmp_vpath2);
-                if (s)
+                if (s != NULL)
                 {
                     g_strlcpy (link_target, s, sizeof (link_target));
                     g_free (s);
