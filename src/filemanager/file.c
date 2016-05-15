@@ -418,16 +418,12 @@ make_symlink (file_op_context_t * ctx, const char *src_path, const char *dst_pat
     }
     link_target[len] = 0;
 
-    if (ctx->stable_symlinks)
+    if (ctx->stable_symlinks && !(vfs_file_is_local (src_vpath) && vfs_file_is_local (dst_vpath)))
     {
-
-        if (!vfs_file_is_local (src_vpath) || !vfs_file_is_local (dst_vpath))
-        {
-            message (D_ERROR, MSG_ERROR,
-                     _("Cannot make stable symlinks across"
-                       "non-local filesystems:\n\nOption Stable Symlinks will be disabled"));
-            ctx->stable_symlinks = FALSE;
-        }
+        message (D_ERROR, MSG_ERROR,
+                 _("Cannot make stable symlinks across"
+                   "non-local filesystems:\n\nOption Stable Symlinks will be disabled"));
+        ctx->stable_symlinks = FALSE;
     }
 
     if (ctx->stable_symlinks && !g_path_is_absolute (link_target))
@@ -483,16 +479,14 @@ make_symlink (file_op_context_t * ctx, const char *src_path, const char *dst_pat
      * if dst_exists, it is obvious that this had failed.
      * We can delete the old symlink and try again...
      */
-    if (dst_is_symlink)
+    if (dst_is_symlink && mc_unlink (dst_vpath) == 0
+        && mc_symlink (link_target_vpath, dst_vpath) == 0)
     {
-        if (mc_unlink (dst_vpath) == 0)
-            if (mc_symlink (link_target_vpath, dst_vpath) == 0)
-            {
-                /* Success */
-                return_status = FILE_CONT;
-                goto ret;
-            }
+        /* Success */
+        return_status = FILE_CONT;
+        goto ret;
     }
+
     if (ctx->skip_all)
         return_status = FILE_SKIPALL;
     else
