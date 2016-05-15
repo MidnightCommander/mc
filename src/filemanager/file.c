@@ -401,7 +401,7 @@ make_symlink (file_op_context_t * ctx, const char *src_path, const char *dst_pat
     dst_is_symlink = (mc_lstat (dst_vpath, &sb) == 0) && S_ISLNK (sb.st_mode);
 
   retry_src_readlink:
-    len = mc_readlink (src_vpath, link_target, MC_MAXPATHLEN - 1);
+    len = mc_readlink (src_vpath, link_target, sizeof (link_target) - 1);
     if (len < 0)
     {
         if (ctx->skip_all)
@@ -450,7 +450,6 @@ make_symlink (file_op_context_t * ctx, const char *src_path, const char *dst_pat
 
                 tmp_vpath1 = vfs_path_vtokens_get (q, -1, 1);
                 s = g_strconcat (p, link_target, (char *) NULL);
-                g_free (p);
                 g_strlcpy (link_target, s, sizeof (link_target));
                 g_free (s);
                 tmp_vpath2 = vfs_path_from_str (link_target);
@@ -463,8 +462,7 @@ make_symlink (file_op_context_t * ctx, const char *src_path, const char *dst_pat
                     g_free (s);
                 }
             }
-            else
-                g_free (p);
+            g_free (p);
             vfs_path_free (q);
         }
     }
