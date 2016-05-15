@@ -361,7 +361,7 @@ check_hardlinks (const vfs_path_t * src_vpath, const vfs_path_t * dst_vpath, str
         }
     }
 
-    lnk = g_new0 (struct link, 1);
+    lnk = g_try_new0 (struct link, 1);
     if (lnk != NULL)
     {
         lnk->vfs = my_vfs;
