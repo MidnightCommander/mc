@@ -353,7 +353,7 @@ variable_completion_function (const char *text, int state, input_complete_t flag
     static char **env_p = NULL;
     static gboolean isbrace = FALSE;
     static size_t varlen = 0;
-    const char *p;
+    const char *p = NULL;
 
     (void) flags;
     SHOW_C_CTX ("variable_completion_function");
