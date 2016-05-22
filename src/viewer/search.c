@@ -103,15 +103,22 @@ mcview_search_status_update_cb (status_msg_t * sm)
 static void
 mcview_search_update_steps (WView * view)
 {
-    off_t filesize = mcview_get_filesize (view);
-    if (filesize != 0)
-        view->update_steps = 40000;
-    else                        /* viewing a data stream, not a file */
-        view->update_steps = filesize / 100;
+    off_t filesize;
 
-    /* Do not update the percent display but every 20 ks */
+    filesize = mcview_get_filesize (view);
+
+    if (filesize != 0)
+        view->update_steps = filesize / 100;
+    else                        /* viewing a data stream, not a file */
+        view->update_steps = 40000;
+
+    /* Do not update the percent display but every 20 kb */
     if (view->update_steps < 20000)
         view->update_steps = 20000;
+
+    /* Make interrupt more responsive */
+    if (view->update_steps > 40000)
+        view->update_steps = 40000;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -129,6 +136,8 @@ mcview_find (mcview_search_status_msg_t * ssm, off_t search_start, off_t search_
         search_end = mcview_get_filesize (view);
         while (search_start >= 0)
         {
+            gboolean ok;
+
             view->search_nroff_seq->index = search_start;
             mcview_nroff_seq_info (view->search_nroff_seq);
 
@@ -136,17 +145,22 @@ mcview_find (mcview_search_status_msg_t * ssm, off_t search_start, off_t search_
                 && mc_search_is_fixed_search_str (view->search))
                 search_end = search_start + view->search->original_len;
 
-            if (mc_search_run (view->search, (void *) ssm, search_start, search_end, len)
-                && view->search->normal_offset == search_start)
+            ok = mc_search_run (view->search, (void *) ssm, search_start, search_end, len);
+            if (ok && view->search->normal_offset == search_start)
             {
                 if (view->text_nroff_mode)
                     view->search->normal_offset++;
                 return TRUE;
             }
 
+            /* Abort search. */
+            if (!ok && view->search->error == MC_SEARCH_E_ABORT)
+                return FALSE;
+
             search_start--;
         }
-        view->search->error_str = g_strdup (_(STR_E_NOTFOUND));
+
+        mc_search_set_error (view->search, MC_SEARCH_E_NOTFOUND, "%s", _(STR_E_NOTFOUND));
         return FALSE;
     }
     view->search_nroff_seq->index = search_start;
@@ -243,16 +257,33 @@ mcview_search_update_cmd_callback (const void *user_data, gsize char_offset)
 {
     status_msg_t *sm = STATUS_MSG (user_data);
     mcview_search_status_msg_t *vsm = (mcview_search_status_msg_t *) user_data;
+    WView *view = vsm->view;
+    gboolean do_update = FALSE;
     mc_search_cbret_t result = MC_SEARCH_CB_OK;
 
     vsm->offset = (off_t) char_offset;
-    if (vsm->offset >= vsm->view->update_activate)
-    {
-        vsm->view->update_activate += vsm->view->update_steps;
 
-        if (sm->update (sm) == B_CANCEL)
-            result = MC_SEARCH_CB_ABORT;
+    if (mcview_search_options.backwards)
+    {
+        if (vsm->offset <= view->update_activate)
+        {
+            view->update_activate -= view->update_steps;
+
+            do_update = TRUE;
+        }
     }
+    else
+    {
+        if (vsm->offset >= view->update_activate)
+        {
+            view->update_activate += view->update_steps;
+
+            do_update = TRUE;
+        }
+    }
+
+    if (do_update && sm->update (sm) == B_CANCEL)
+        result = MC_SEARCH_CB_ABORT;
 
     /* may be in future return from this callback will change current position in searching block. */
 
@@ -334,7 +365,7 @@ mcview_do_search (WView * view, off_t want_search_start)
             break;
         }
 
-        if (view->search->error_str == NULL)
+        if (view->search->error == MC_SEARCH_E_ABORT || view->search->error == MC_SEARCH_E_NOTFOUND)
             break;
 
         search_start = growbufsize - view->search->original_len;
@@ -375,11 +406,17 @@ mcview_do_search (WView * view, off_t want_search_start)
         }
     }
 
-    if (!found && view->search->error_str != NULL)
+    if (!found
+        && (view->search->error == MC_SEARCH_E_ABORT
+            || view->search->error == MC_SEARCH_E_NOTFOUND))
     {
         view->search_start = orig_search_start;
         mcview_update (view);
-        query_dialog (_("Search"), view->search->error_str, D_NORMAL, 1, _("&Dismiss"));
+
+        if (view->search->error == MC_SEARCH_E_NOTFOUND)
+            query_dialog (_("Search"), _(STR_E_NOTFOUND), D_NORMAL, 1, _("&Dismiss"));
+        else if (view->search->error_str != NULL)
+            query_dialog (_("Search"), view->search->error_str, D_NORMAL, 1, _("&Dismiss"));
     }
     view->dirty++;
 }

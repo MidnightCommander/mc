@@ -246,7 +246,9 @@ transform_source (file_op_context_t * ctx, const vfs_path_t * source_vpath)
         q = mc_search_prepare_replace_str2 (ctx->search_handle, ctx->dest_mask);
         if (ctx->search_handle->error != MC_SEARCH_E_OK)
         {
-            message (D_ERROR, MSG_ERROR, "%s", ctx->search_handle->error_str);
+            if (ctx->search_handle->error_str != NULL)
+                message (D_ERROR, MSG_ERROR, "%s", ctx->search_handle->error_str);
+
             q = NULL;
             transform_error = FILE_ABORT;
         }
@@ -2872,7 +2874,9 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                     repl_dest = mc_search_prepare_replace_str2 (ctx->search_handle, dest);
                     if (ctx->search_handle->error != MC_SEARCH_E_OK)
                     {
-                        message (D_ERROR, MSG_ERROR, "%s", ctx->search_handle->error_str);
+                        if (ctx->search_handle->error_str != NULL)
+                            message (D_ERROR, MSG_ERROR, "%s", ctx->search_handle->error_str);
+
                         g_free (repl_dest);
                         goto clean_up;
                     }
@@ -2983,7 +2987,9 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                         repl_dest = mc_search_prepare_replace_str2 (ctx->search_handle, dest);
                         if (ctx->search_handle->error != MC_SEARCH_E_OK)
                         {
-                            message (D_ERROR, MSG_ERROR, "%s", ctx->search_handle->error_str);
+                            if (ctx->search_handle->error_str != NULL)
+                                message (D_ERROR, MSG_ERROR, "%s", ctx->search_handle->error_str);
+
                             g_free (repl_dest);
                             goto clean_up;
                         }

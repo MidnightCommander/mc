@@ -829,8 +829,7 @@ editcmd_find (edit_search_status_msg_t * esm, gsize * len)
     {
         if (!eval_marks (edit, &start_mark, &end_mark))
         {
-            edit->search->error = MC_SEARCH_E_NOTFOUND;
-            edit->search->error_str = g_strdup (_(STR_E_NOTFOUND));
+            mc_search_set_error (edit->search, MC_SEARCH_E_NOTFOUND, "%s", _(STR_E_NOTFOUND));
             return FALSE;
         }
 
@@ -838,28 +837,24 @@ editcmd_find (edit_search_status_msg_t * esm, gsize * len)
         if ((edit->search_line_type & AT_START_LINE) != 0
             && (start_mark != 0
                 || edit_buffer_get_byte (&edit->buffer, start_mark - 1) != end_string_symbol))
-        {
             start_mark =
                 edit_calculate_start_of_next_line (&edit->buffer, start_mark, edit->buffer.size,
                                                    end_string_symbol);
-        }
+
         if ((edit->search_line_type & AT_END_LINE) != 0
             && (end_mark - 1 != edit->buffer.size
                 || edit_buffer_get_byte (&edit->buffer, end_mark) != end_string_symbol))
             end_mark =
                 edit_calculate_end_of_previous_line (&edit->buffer, end_mark, end_string_symbol);
+
         if (start_mark >= end_mark)
         {
-            edit->search->error = MC_SEARCH_E_NOTFOUND;
-            edit->search->error_str = g_strdup (_(STR_E_NOTFOUND));
+            mc_search_set_error (edit->search, MC_SEARCH_E_NOTFOUND, "%s", _(STR_E_NOTFOUND));
             return FALSE;
         }
     }
-    else
-    {
-        if (edit_search_options.backwards)
-            end_mark = MAX (1, edit->buffer.curs1) - 1;
-    }
+    else if (edit_search_options.backwards)
+        end_mark = MAX (1, edit->buffer.curs1) - 1;
 
     /* search */
     if (edit_search_options.backwards)
@@ -874,17 +869,20 @@ editcmd_find (edit_search_status_msg_t * esm, gsize * len)
 
         while (search_start >= start_mark)
         {
+            gboolean ok;
+
             if (search_end > (off_t) (search_start + edit->search->original_len)
                 && mc_search_is_fixed_search_str (edit->search))
-            {
                 search_end = search_start + edit->search->original_len;
-            }
-            if (mc_search_run (edit->search, (void *) esm, search_start, search_end, len)
-                && edit->search->normal_offset == search_start)
-            {
-                return TRUE;
-            }
 
+            ok = mc_search_run (edit->search, (void *) esm, search_start, search_end, len);
+
+            if (ok && edit->search->normal_offset == search_start)
+                return TRUE;
+
+            /* Abort search. */
+            if (!ok && edit->search->error == MC_SEARCH_E_ABORT)
+                return FALSE;
 
             if ((edit->search_line_type & AT_START_LINE) != 0)
                 search_start =
@@ -893,18 +891,18 @@ editcmd_find (edit_search_status_msg_t * esm, gsize * len)
             else
                 search_start--;
         }
-        edit->search->error_str = g_strdup (_(STR_E_NOTFOUND));
+
+        mc_search_set_error (edit->search, MC_SEARCH_E_NOTFOUND, "%s", _(STR_E_NOTFOUND));
+        return FALSE;
     }
-    else
-    {
-        /* forward search */
-        if ((edit->search_line_type & AT_START_LINE) != 0 && search_start != start_mark)
-            search_start =
-                edit_calculate_start_of_next_line (&edit->buffer, search_start, end_mark,
-                                                   end_string_symbol);
-        return mc_search_run (edit->search, (void *) esm, search_start, end_mark, len);
-    }
-    return FALSE;
+
+    /* forward search */
+    if ((edit->search_line_type & AT_START_LINE) != 0 && search_start != start_mark)
+        search_start =
+            edit_calculate_start_of_next_line (&edit->buffer, search_start, end_mark,
+                                               end_string_symbol);
+
+    return mc_search_run (edit->search, (void *) esm, search_start, end_mark, len);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -943,6 +941,17 @@ edit_replace_cmd__conv_to_input (char *str)
     }
 #endif
     return g_strdup (str);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+edit_show_search_error (const WEdit * edit, const char *title)
+{
+    if (edit->search->error == MC_SEARCH_E_NOTFOUND)
+        edit_query_dialog (title, _(STR_E_NOTFOUND));
+    else if (edit->search->error_str != NULL)
+        edit_query_dialog (title, edit->search->error_str);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1019,8 +1028,7 @@ edit_do_search (WEdit * edit)
         else
         {
             edit->search_start = edit->buffer.curs1;
-            if (edit->search->error_str != NULL)
-                edit_query_dialog (_("Search"), edit->search->error_str);
+            edit_show_search_error (edit, _("Search"));
         }
     }
 
@@ -2615,9 +2623,8 @@ edit_replace_cmd (WEdit * edit, gboolean again)
         {
             if (!(edit->search->error == MC_SEARCH_E_OK ||
                   (once_found && edit->search->error == MC_SEARCH_E_NOTFOUND)))
-            {
-                edit_query_dialog (_("Search"), edit->search->error_str);
-            }
+                edit_show_search_error (edit, _("Search"));
+
             break;
         }
         once_found = TRUE;
@@ -2681,7 +2688,7 @@ edit_replace_cmd (WEdit * edit, gboolean again)
 
             if (edit->search->error != MC_SEARCH_E_OK)
             {
-                edit_error_dialog (_("Replace"), edit->search->error_str);
+                edit_show_search_error (edit, _("Replace"));
                 g_string_free (repl_str, TRUE);
                 break;
             }

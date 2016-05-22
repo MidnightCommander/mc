@@ -27,6 +27,7 @@
 
 #include <config.h>
 
+#include <stdarg.h>
 #include <stdlib.h>
 #include <sys/types.h>
 
@@ -272,8 +273,7 @@ mc_search_run (mc_search_t * lc_mc_search, const void *user_data,
         return FALSE;
     if (!mc_search_is_type_avail (lc_mc_search->search_type))
     {
-        lc_mc_search->error = MC_SEARCH_E_INPUT;
-        lc_mc_search->error_str = g_strdup (_(STR_E_UNKNOWN_TYPE));
+        mc_search_set_error (lc_mc_search, MC_SEARCH_E_INPUT, "%s", _(STR_E_UNKNOWN_TYPE));
         return FALSE;
     }
 #ifdef SEARCH_TYPE_GLIB
@@ -284,8 +284,7 @@ mc_search_run (mc_search_t * lc_mc_search, const void *user_data,
     }
 #endif /* SEARCH_TYPE_GLIB */
 
-    lc_mc_search->error = MC_SEARCH_E_OK;
-    MC_PTR_FREE (lc_mc_search->error_str);
+    mc_search_set_error (lc_mc_search, MC_SEARCH_E_OK, NULL);
 
     if ((lc_mc_search->conditions == NULL) && !mc_search_prepare (lc_mc_search))
         return FALSE;
@@ -483,6 +482,32 @@ mc_search_getend_result_by_num (mc_search_t * lc_mc_search, int lc_index)
 #else /* SEARCH_TYPE_GLIB */
     return lc_mc_search->iovector[lc_index * 2 + 1];
 #endif /* SEARCH_TYPE_GLIB */
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Replace an old error code and message of an mc_search_t object.
+ *
+ * @param mc_search mc_search_t object
+ * @param code error code, one of mc_search_error_t values
+ * @param format format of error message. If NULL, the old error string is free'd and become NULL
+ */
+
+void
+mc_search_set_error (mc_search_t * mc_search, mc_search_error_t code, const gchar * format, ...)
+{
+    mc_search->error = code;
+
+    MC_PTR_FREE (mc_search->error_str);
+
+    if (format != NULL)
+    {
+        va_list args;
+
+        va_start (args, format);
+        mc_search->error_str = g_strdup_vprintf (format, args);
+        va_end (args);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
