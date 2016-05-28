@@ -510,7 +510,7 @@ mc_pipe_t *
 mc_popen (const char *command, GError ** error)
 {
     mc_pipe_t *p;
-    char **argv;
+    const char *const argv[] = { "/bin/sh", "sh", "-c", command, "\0" };
 
     p = g_try_new (mc_pipe_t, 1);
     if (p == NULL)
@@ -520,23 +520,14 @@ mc_popen (const char *command, GError ** error)
         goto ret_err;
     }
 
-    if (!g_shell_parse_argv (command, NULL, &argv, error))
-    {
-        mc_replace_error (error, MC_PIPE_ERROR_PARSE_COMMAND, "%s",
-                          _("Cannot parse command for pipe"));
-        goto ret_err;
-    }
-
     if (!g_spawn_async_with_pipes
-        (NULL, argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD | G_SPAWN_SEARCH_PATH, NULL, NULL,
-         &p->child_pid, NULL, &p->out.fd, &p->err.fd, error))
+        (NULL, (gchar **) argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD | G_SPAWN_FILE_AND_ARGV_ZERO,
+         NULL, NULL, &p->child_pid, NULL, &p->out.fd, &p->err.fd, error))
     {
         mc_replace_error (error, MC_PIPE_ERROR_CREATE_PIPE_STREAM, "%s",
                           _("Cannot create pipe streams"));
         goto ret_err;
     }
-
-    g_strfreev (argv);
 
     p->out.buf[0] = '\0';
     p->out.len = MC_PIPE_BUFSIZE;
