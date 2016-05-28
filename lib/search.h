@@ -168,7 +168,7 @@ int mc_search_getstart_result_by_num (mc_search_t *, int);
 int mc_search_getend_result_by_num (mc_search_t *, int);
 
 /* *INDENT-OFF* */
-void mc_search_set_error (mc_search_t * mc_search, mc_search_error_t code, const gchar * format, ...)
+void mc_search_set_error (mc_search_t * lc_mc_search, mc_search_error_t code, const gchar * format, ...)
      G_GNUC_PRINTF (3, 4);
 /* *INDENT-ON* */
 

@@ -494,18 +494,18 @@ mc_search_getend_result_by_num (mc_search_t * lc_mc_search, int lc_index)
  */
 
 void
-mc_search_set_error (mc_search_t * mc_search, mc_search_error_t code, const gchar * format, ...)
+mc_search_set_error (mc_search_t * lc_mc_search, mc_search_error_t code, const gchar * format, ...)
 {
-    mc_search->error = code;
+    lc_mc_search->error = code;
 
-    MC_PTR_FREE (mc_search->error_str);
+    MC_PTR_FREE (lc_mc_search->error_str);
 
     if (format != NULL)
     {
         va_list args;
 
         va_start (args, format);
-        mc_search->error_str = g_strdup_vprintf (format, args);
+        lc_mc_search->error_str = g_strdup_vprintf (format, args);
         va_end (args);
     }
 }
