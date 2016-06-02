@@ -107,7 +107,7 @@ history_dlg_reposition (WDialog * dlg_head)
         x = COLS - wi;
     }
 
-    dlg_set_position (dlg_head, y, x, y + he, x + wi);
+    dlg_set_position (dlg_head, y, x, he, wi);
 
     return MSG_HANDLED;
 }

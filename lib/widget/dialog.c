@@ -667,7 +667,7 @@ dlg_default_repaint (WDialog * h)
 /** this function allows to set dialog position */
 
 void
-dlg_set_position (WDialog * h, int y1, int x1, int y2, int x2)
+dlg_set_position (WDialog * h, int y, int x, int lines, int cols)
 {
     Widget *wh = WIDGET (h);
 
@@ -681,10 +681,10 @@ dlg_set_position (WDialog * h, int y1, int x1, int y2, int x2)
     oc = wh->cols;
     ol = wh->lines;
 
-    wh->x = x1;
-    wh->y = y1;
-    wh->lines = y2 - y1;
-    wh->cols = x2 - x1;
+    wh->x = x;
+    wh->y = y;
+    wh->lines = lines;
+    wh->cols = cols;
 
     /* dialog is empty */
     if (h->widgets == NULL)
@@ -715,36 +715,36 @@ dlg_set_position (WDialog * h, int y1, int x1, int y2, int x2)
                one direction - it should be sized */
 
             Widget *c = WIDGET (w->data);
-            int x = c->x;
-            int y = c->y;
-            int cols = c->cols;
-            int lines = c->lines;
+            int cx = c->x;
+            int cy = c->y;
+            int ccols = c->cols;
+            int clines = c->lines;
 
             if ((c->pos_flags & WPOS_CENTER_HORZ) != 0)
-                x = wh->x + (wh->cols - c->cols) / 2;
+                cx = wh->x + (wh->cols - c->cols) / 2;
             else if ((c->pos_flags & WPOS_KEEP_LEFT) != 0 && (c->pos_flags & WPOS_KEEP_RIGHT) != 0)
             {
-                x += shift_x;
-                cols += scale_x;
+                cx += shift_x;
+                ccols += scale_x;
             }
             else if ((c->pos_flags & WPOS_KEEP_LEFT) != 0)
-                x += shift_x;
+                cx += shift_x;
             else if ((c->pos_flags & WPOS_KEEP_RIGHT) != 0)
-                x += shift_x + scale_x;
+                cx += shift_x + scale_x;
 
             if ((c->pos_flags & WPOS_CENTER_VERT) != 0)
-                y = wh->y + (wh->lines - c->lines) / 2;
+                cy = wh->y + (wh->lines - c->lines) / 2;
             else if ((c->pos_flags & WPOS_KEEP_TOP) != 0 && (c->pos_flags & WPOS_KEEP_BOTTOM) != 0)
             {
-                y += shift_y;
-                lines += scale_y;
+                cy += shift_y;
+                clines += scale_y;
             }
             else if ((c->pos_flags & WPOS_KEEP_TOP) != 0)
-                y += shift_y;
+                cy += shift_y;
             else if ((c->pos_flags & WPOS_KEEP_BOTTOM) != 0)
-                y += shift_y + scale_y;
+                cy += shift_y + scale_y;
 
-            widget_set_size (c, y, x, lines, cols);
+            widget_set_size (c, cy, cx, clines, ccols);
         }
     }
 }
@@ -772,7 +772,7 @@ dlg_set_size (WDialog * h, int lines, int cols)
             y = 2;
     }
 
-    dlg_set_position (h, y, x, y + lines, x + cols);
+    dlg_set_position (h, y, x, lines, cols);
 }
 
 /* --------------------------------------------------------------------------------------------- */

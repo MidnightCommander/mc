@@ -101,7 +101,7 @@ query_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
             xpos = COLS / 2 - w->cols / 2;
 
             /* set position */
-            dlg_set_position (h, ypos, xpos, ypos + w->lines, xpos + w->cols);
+            dlg_set_position (h, ypos, xpos, w->lines, w->cols);
 
             return MSG_HANDLED;
         }

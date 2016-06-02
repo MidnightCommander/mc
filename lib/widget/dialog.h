@@ -130,7 +130,7 @@ void del_widget (void *w);
    according to dialog flags */
 void dlg_set_size (WDialog * h, int lines, int cols);
 /* this function allows to set dialog position */
-void dlg_set_position (WDialog * h, int y1, int x1, int y2, int x2);
+void dlg_set_position (WDialog * h, int y, int x, int lines, int cols);
 
 void dlg_init (WDialog * h);
 int dlg_run (WDialog * d);
