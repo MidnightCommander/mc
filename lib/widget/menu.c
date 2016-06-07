@@ -308,6 +308,7 @@ menubar_finish (WMenuBar * menubar)
     menubar->is_active = FALSE;
     w->lines = 1;
     widget_want_hotkey (w, FALSE);
+    widget_set_options (w, WOP_SELECTABLE, FALSE);
 
     /* Move the menubar to the bottom so that widgets displayed on top of
      * an "invisible" menubar get the first chance to respond to mouse events. */
@@ -892,8 +893,9 @@ menubar_new (int y, int x, int cols, GList * menu, gboolean visible)
     menubar = g_new0 (WMenuBar, 1);
     w = WIDGET (menubar);
     widget_init (w, y, x, 1, cols, menubar_callback, menubar_mouse_callback);
+    /* initially, menubar is not selectable */
+    widget_set_options (w, WOP_SELECTABLE, FALSE);
     w->options |= WOP_TOP_SELECT;
-
     menubar->is_visible = visible;
     menubar_set_menu (menubar, menu);
 
@@ -1008,6 +1010,8 @@ menubar_activate (WMenuBar * menubar, gboolean dropped, int which)
 
     if (!menubar->is_active)
     {
+        widget_set_options (w, WOP_SELECTABLE, TRUE);
+
         menubar->is_active = TRUE;
         menubar->is_dropped = dropped;
         if (which >= 0)
