@@ -4282,7 +4282,7 @@ panel_new_with_dir (const char *panel_name, const vfs_path_t * vpath)
     w = WIDGET (panel);
     /* No know sizes of the panel at startup */
     widget_init (w, 0, 0, 0, 0, panel_callback, panel_mouse_callback);
-    widget_set_options (w, WOP_TOP_SELECT, TRUE);
+    w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
 
     if (vpath != NULL)
     {

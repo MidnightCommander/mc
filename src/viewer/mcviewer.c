@@ -195,7 +195,7 @@ mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
     view = g_new0 (WView, 1);
     w = WIDGET (view);
     widget_init (w, y, x, lines, cols, mcview_callback, mcview_mouse_callback);
-    widget_set_options (w, WOP_TOP_SELECT, TRUE);
+    w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
 
     view->hex_mode = FALSE;
     view->hexedit_mode = FALSE;

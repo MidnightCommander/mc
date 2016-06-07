@@ -992,7 +992,7 @@ input_new (int y, int x, const int *colors, int width, const char *def_text,
     in = g_new (WInput, 1);
     w = WIDGET (in);
     widget_init (w, y, x, 1, width, input_callback, input_mouse_callback);
-    w->options |= WOP_IS_INPUT | WOP_WANT_CURSOR;
+    w->options |= WOP_SELECTABLE | WOP_IS_INPUT | WOP_WANT_CURSOR;
 
     in->color = colors;
     in->first = TRUE;

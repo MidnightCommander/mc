@@ -66,10 +66,11 @@ typedef enum
 typedef enum
 {
     WOP_DEFAULT = (0 << 0),
-    WOP_WANT_HOTKEY = (1 << 1),
-    WOP_WANT_CURSOR = (1 << 2),
-    WOP_WANT_TAB = (1 << 3),    /* Should the tab key be sent to the dialog? */
-    WOP_IS_INPUT = (1 << 4),
+    WOP_WANT_HOTKEY = (1 << 0),
+    WOP_WANT_CURSOR = (1 << 1),
+    WOP_WANT_TAB = (1 << 2),    /* Should the tab key be sent to the dialog? */
+    WOP_IS_INPUT = (1 << 3),
+    WOP_SELECTABLE = (1 << 4),
     WOP_TOP_SELECT = (1 << 5)
 } widget_options_t;
 

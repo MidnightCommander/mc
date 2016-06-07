@@ -139,9 +139,8 @@ check_new (int y, int x, int state, const char *text)
     c->text = parse_hotkey (text);
     /* 4 is width of "[X] " */
     widget_init (w, y, x, 1, 4 + hotkey_width (c->text), check_callback, check_mouse_callback);
+    w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR | WOP_WANT_HOTKEY;
     c->state = state ? C_BOOL : 0;
-    widget_want_cursor (w, TRUE);
-    widget_want_hotkey (w, TRUE);
 
     return c;
 }

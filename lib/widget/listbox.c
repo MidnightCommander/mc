@@ -563,6 +563,7 @@ listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn 
     l = g_new (WListbox, 1);
     w = WIDGET (l);
     widget_init (w, y, x, height, width, listbox_callback, listbox_mouse_callback);
+    w->options |= WOP_SELECTABLE | WOP_WANT_HOTKEY;
 
     l->list = NULL;
     l->top = l->pos = 0;
@@ -571,7 +572,6 @@ listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn 
     l->allow_duplicates = TRUE;
     l->scrollbar = !mc_global.tty.slow_terminal;
     l->focused = FALSE;
-    widget_want_hotkey (w, TRUE);
 
     return l;
 }

@@ -1023,7 +1023,7 @@ mousedispatch_new (int y, int x, int yl, int xl)
 
     w = g_new0 (Widget, 1);
     widget_init (w, y, x, yl, xl, md_callback, help_mouse_callback);
-    widget_want_cursor (w, TRUE);
+    w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR;
 
     return w;
 }
