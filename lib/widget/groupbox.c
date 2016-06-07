@@ -62,9 +62,6 @@ groupbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
     case MSG_INIT:
         return MSG_HANDLED;
 
-    case MSG_FOCUS:
-        return MSG_NOT_HANDLED;
-
     case MSG_DRAW:
         {
             WDialog *h = w->owner;

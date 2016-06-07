@@ -1079,7 +1079,8 @@ dlg_focus (WDialog * h)
         {
             Widget *current = WIDGET (h->current->data);
 
-            if (!widget_get_state (current, WST_DISABLED)
+            if (widget_get_options (current, WOP_SELECTABLE)
+                && !widget_get_state (current, WST_DISABLED)
                 && (send_message (current, NULL, MSG_FOCUS, 0, NULL) == MSG_HANDLED))
             {
                 send_message (h, current, MSG_FOCUS, 0, NULL);

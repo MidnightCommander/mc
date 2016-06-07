@@ -67,10 +67,6 @@ label_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     case MSG_INIT:
         return MSG_HANDLED;
 
-        /* We don't want to get the focus */
-    case MSG_FOCUS:
-        return MSG_NOT_HANDLED;
-
     case MSG_DRAW:
         {
             char *p = l->text;

@@ -80,10 +80,6 @@ hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         }
         return MSG_HANDLED;
 
-    case MSG_FOCUS:
-        /* We don't want to get the focus */
-        return MSG_NOT_HANDLED;
-
     case MSG_DRAW:
         if (l->transparent)
             tty_setcolor (DEFAULT_COLOR);
