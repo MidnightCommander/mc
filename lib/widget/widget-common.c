@@ -213,12 +213,12 @@ widget_set_options (Widget * w, widget_options_t options, gboolean enable)
  * @param state  widget state flag to modify
  * @param enable specifies whether to turn the flag on (TRUE) or off (FALSE).
  *               Only one flag per call can be modified.
- * @return       TRUE if set was handled successfully, FALSE otherwise
+ * @return       MSG_HANDLED if set was handled successfully, MSG_NOT_HANDLED otherwise.
  */
-gboolean
+cb_ret_t
 widget_set_state (Widget * w, widget_state_t state, gboolean enable)
 {
-    gboolean ret = TRUE;
+    gboolean ret = MSG_HANDLED;
 
     if (enable)
         w->state |= state;
@@ -239,15 +239,14 @@ widget_set_state (Widget * w, widget_state_t state, gboolean enable)
     }
 
     if (w->owner == NULL)
-        return FALSE;
+        return MSG_NOT_HANDLED;
 
     switch (state)
     {
     case WST_DISABLED:
-        if (send_message (w, NULL, enable ? MSG_DISABLE : MSG_ENABLE, 0, NULL) != MSG_HANDLED)
-            ret = FALSE;
-        if (ret)
-            send_message (w, NULL, MSG_DRAW, 0, NULL);
+        ret = send_message (w, NULL, enable ? MSG_DISABLE : MSG_ENABLE, 0, NULL);
+        if (ret == MSG_HANDLED)
+            ret = send_message (w, NULL, MSG_DRAW, 0, NULL);
         break;
 
     default:
