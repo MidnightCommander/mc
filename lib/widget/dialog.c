@@ -81,6 +81,15 @@ typedef enum
     SELECT_EXACT                /* use current widget */
 } select_dir_t;
 
+/* Control widget positions in dialog */
+typedef struct
+{
+    int shift_x;
+    int scale_x;
+    int shift_y;
+    int scale_y;
+} widget_shift_scale_t;
+
 /*** file scope variables ************************************************************************/
 
 /*** file scope functions ************************************************************************/
@@ -631,6 +640,50 @@ dlg_find_widget_by_id (gconstpointer a, gconstpointer b)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+static void
+dlg_widget_set_position (gpointer data, gpointer user_data)
+{
+    /* there are, mainly, 2 generally possible situations:
+     * 1. control sticks to one side - it should be moved
+     * 2. control sticks to two sides of one direction - it should be sized
+     */
+
+    Widget *c = WIDGET (data);
+    Widget *wh = WIDGET (c->owner);
+    const widget_shift_scale_t *wss = (const widget_shift_scale_t *) user_data;
+    int x = c->x;
+    int y = c->y;
+    int cols = c->cols;
+    int lines = c->lines;
+
+    if ((c->pos_flags & WPOS_CENTER_HORZ) != 0)
+        x = wh->x + (wh->cols - c->cols) / 2;
+    else if ((c->pos_flags & WPOS_KEEP_LEFT) != 0 && (c->pos_flags & WPOS_KEEP_RIGHT) != 0)
+    {
+        x += wss->shift_x;
+        cols += wss->scale_x;
+    }
+    else if ((c->pos_flags & WPOS_KEEP_LEFT) != 0)
+        x += wss->shift_x;
+    else if ((c->pos_flags & WPOS_KEEP_RIGHT) != 0)
+        x += wss->shift_x + wss->scale_x;
+
+    if ((c->pos_flags & WPOS_CENTER_VERT) != 0)
+        y = wh->y + (wh->lines - c->lines) / 2;
+    else if ((c->pos_flags & WPOS_KEEP_TOP) != 0 && (c->pos_flags & WPOS_KEEP_BOTTOM) != 0)
+    {
+        y += wss->shift_y;
+        lines += wss->scale_y;
+    }
+    else if ((c->pos_flags & WPOS_KEEP_TOP) != 0)
+        y += wss->shift_y;
+    else if ((c->pos_flags & WPOS_KEEP_BOTTOM) != 0)
+        y += wss->shift_y + wss->scale_y;
+
+    widget_set_size (c, y, x, lines, cols);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static void
 dlg_adjust_position (const WDialog * h, int *y, int *x, int *lines, int *cols)
@@ -702,10 +755,10 @@ void
 dlg_set_position (WDialog * h, int y, int x, int lines, int cols)
 {
     Widget *wh = WIDGET (h);
+    widget_shift_scale_t wss;
 
     /* save old positions, will be used to reposition childs */
     int ox, oy, oc, ol;
-    int shift_x, shift_y, scale_x, scale_y;
 
     /* save old positions, will be used to reposition childs */
     ox = wh->x;
@@ -726,59 +779,13 @@ dlg_set_position (WDialog * h, int y, int x, int lines, int cols)
         h->current = h->widgets;
 
     /* values by which controls should be moved */
-    shift_x = wh->x - ox;
-    shift_y = wh->y - oy;
-    scale_x = wh->cols - oc;
-    scale_y = wh->lines - ol;
+    wss.shift_x = wh->x - ox;
+    wss.scale_x = wh->cols - oc;
+    wss.shift_y = wh->y - oy;
+    wss.scale_y = wh->lines - ol;
 
-    if ((shift_x != 0) || (shift_y != 0) || (scale_x != 0) || (scale_y != 0))
-    {
-        GList *w;
-
-        for (w = h->widgets; w != NULL; w = g_list_next (w))
-        {
-            /* there are, mainly, 2 generally possible
-               situations:
-
-               1. control sticks to one side - it
-               should be moved
-
-               2. control sticks to two sides of
-               one direction - it should be sized */
-
-            Widget *c = WIDGET (w->data);
-            int cx = c->x;
-            int cy = c->y;
-            int ccols = c->cols;
-            int clines = c->lines;
-
-            if ((c->pos_flags & WPOS_CENTER_HORZ) != 0)
-                cx = wh->x + (wh->cols - c->cols) / 2;
-            else if ((c->pos_flags & WPOS_KEEP_LEFT) != 0 && (c->pos_flags & WPOS_KEEP_RIGHT) != 0)
-            {
-                cx += shift_x;
-                ccols += scale_x;
-            }
-            else if ((c->pos_flags & WPOS_KEEP_LEFT) != 0)
-                cx += shift_x;
-            else if ((c->pos_flags & WPOS_KEEP_RIGHT) != 0)
-                cx += shift_x + scale_x;
-
-            if ((c->pos_flags & WPOS_CENTER_VERT) != 0)
-                cy = wh->y + (wh->lines - c->lines) / 2;
-            else if ((c->pos_flags & WPOS_KEEP_TOP) != 0 && (c->pos_flags & WPOS_KEEP_BOTTOM) != 0)
-            {
-                cy += shift_y;
-                clines += scale_y;
-            }
-            else if ((c->pos_flags & WPOS_KEEP_TOP) != 0)
-                cy += shift_y;
-            else if ((c->pos_flags & WPOS_KEEP_BOTTOM) != 0)
-                cy += shift_y + scale_y;
-
-            widget_set_size (c, cy, cx, clines, ccols);
-        }
-    }
+    if (wss.shift_x != 0 || wss.shift_y != 0 || wss.scale_x != 0 || wss.scale_y != 0)
+        g_list_foreach (h->widgets, dlg_widget_set_position, &wss);
 }
 
 /* --------------------------------------------------------------------------------------------- */
