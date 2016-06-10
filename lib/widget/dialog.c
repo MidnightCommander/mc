@@ -631,6 +631,42 @@ dlg_find_widget_by_id (gconstpointer a, gconstpointer b)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+dlg_adjust_position (const WDialog * h, int *y, int *x, int *lines, int *cols)
+{
+    const Widget *w = CONST_WIDGET (h);
+
+    if ((w->pos_flags & WPOS_FULLSCREEN) != 0)
+    {
+        *y = 0;
+        *x = 0;
+        *lines = LINES;
+        *cols = COLS;
+    }
+    else
+    {
+        if ((w->pos_flags & WPOS_CENTER_HORZ) != 0)
+            *x = (COLS - *cols) / 2;
+        else
+            *x = w->x;
+
+        if ((w->pos_flags & WPOS_CENTER_VERT) != 0)
+            *y = (LINES - *lines) / 2;
+        else
+            *y = w->y;
+
+        if ((w->pos_flags & WPOS_TRYUP) != 0)
+        {
+            if (*y > 3)
+                *y -= 2;
+            else if (*y == 3)
+                *y = 2;
+        }
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -751,37 +787,9 @@ dlg_set_position (WDialog * h, int y, int x, int lines, int cols)
 void
 dlg_set_size (WDialog * h, int lines, int cols)
 {
-    Widget *w = WIDGET (h);
-    int x, y;
+    int x = 0, y = 0;
 
-    if ((w->pos_flags & WPOS_FULLSCREEN) != 0)
-    {
-        y = 0;
-        x = 0;
-        lines = LINES;
-        cols = COLS;
-    }
-    else
-    {
-        if ((w->pos_flags & WPOS_CENTER_HORZ) != 0)
-            x = (COLS - cols) / 2;
-        else
-            x = w->x;
-
-        if ((w->pos_flags & WPOS_CENTER_VERT) != 0)
-            y = (LINES - lines) / 2;
-        else
-            y = w->y;
-
-        if ((w->pos_flags & WPOS_TRYUP) != 0)
-        {
-            if (y > 3)
-                y -= 2;
-            else if (y == 3)
-                y = 2;
-        }
-    }
-
+    dlg_adjust_position (h, &y, &x, &lines, &cols);
     dlg_set_position (h, y, x, lines, cols);
 }
 
@@ -838,19 +846,13 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
     WDialog *new_d;
     Widget *w;
 
-    if ((pos_flags & WPOS_FULLSCREEN) != 0)
-    {
-        y1 = 0;
-        x1 = 0;
-        lines = LINES;
-        cols = COLS;
-    }
-
     new_d = g_new0 (WDialog, 1);
     w = WIDGET (new_d);
+    w->pos_flags = pos_flags;   /* required for dlg_adjust_position() */
+    dlg_adjust_position (new_d, &y1, &x1, &lines, &cols);
     widget_init (w, y1, x1, lines, cols, (callback != NULL) ? callback : dlg_default_callback,
                  mouse_callback);
-    w->pos_flags = pos_flags;
+    w->pos_flags = pos_flags;   /* restore after widget_init() */
     w->options |= WOP_TOP_SELECT;
 
     w->state |= WST_CONSTRUCT;
@@ -861,8 +863,6 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
     new_d->help_ctx = help_ctx;
     new_d->compact = compact;
     new_d->data = NULL;
-
-    dlg_set_size (new_d, lines, cols);
 
     new_d->mouse_status = MOU_UNHANDLED;
 
