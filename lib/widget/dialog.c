@@ -119,7 +119,7 @@ dlg_widget_prev (WDialog * h, GList * l)
  */
 
 static void
-dlg_broadcast_msg_to (WDialog * h, widget_msg_t msg, gboolean reverse, int flags)
+dlg_broadcast_msg_to (WDialog * h, widget_msg_t msg, gboolean reverse, widget_options_t flags)
 {
     GList *p, *first;
 
@@ -182,14 +182,20 @@ static gboolean
 dlg_unfocus (WDialog * h)
 {
     /* we can unfocus disabled widget */
-    if ((h->current != NULL) && (h->state == DLG_CONSTRUCT || h->state == DLG_ACTIVE))
+    if (h->current != NULL)
     {
-        Widget *current = WIDGET (h->current->data);
+        Widget *wh = WIDGET (h);
 
-        if (send_message (current, NULL, MSG_UNFOCUS, 0, NULL) == MSG_HANDLED)
+        if (widget_get_state (wh, WST_CONSTRUCT) || widget_get_state (wh, WST_ACTIVE))
         {
-            send_message (h, current, MSG_UNFOCUS, 0, NULL);
-            return TRUE;
+            Widget *current = WIDGET (h->current->data);
+
+            if (send_message (current, NULL, MSG_UNFOCUS, 0, NULL) == MSG_HANDLED)
+            {
+                send_message (h, current, MSG_UNFOCUS, 0, NULL);
+                return TRUE;
+            }
+
         }
     }
 
@@ -247,7 +253,7 @@ do_select_widget (WDialog * h, GList * w, select_dir_t dir)
             break;
         }
     }
-    while (h->current != w /* && (WIDGET (h->current->data)->options & W_DISABLED) == 0 */ );
+    while (h->current != w);
 
     if (widget_overlapped (w0, WIDGET (h->current->data)))
     {
@@ -313,19 +319,19 @@ dlg_execute_cmd (WDialog * h, long command)
         break;
 
     case CK_ScreenList:
-        if (!h->modal)
+        if (!widget_get_state (WIDGET (h), WST_MODAL))
             dialog_switch_list ();
         else
             ret = MSG_NOT_HANDLED;
         break;
     case CK_ScreenNext:
-        if (!h->modal)
+        if (!widget_get_state (WIDGET (h), WST_MODAL))
             dialog_switch_next ();
         else
             ret = MSG_NOT_HANDLED;
         break;
     case CK_ScreenPrev:
-        if (!h->modal)
+        if (!widget_get_state (WIDGET (h), WST_MODAL))
             dialog_switch_prev ();
         else
             ret = MSG_NOT_HANDLED;
@@ -382,8 +388,9 @@ dlg_mouse_event (WDialog * h, Gpm_Event * event)
     GList *p;
 
     /* close the dialog by mouse left click out of dialog area */
-    if (mouse_close_dialog && !h->fullscreen && ((event->buttons & GPM_B_LEFT) != 0)
-        && ((event->type & GPM_DOWN) != 0) && !mouse_global_in_widget (event, wh))
+    if (mouse_close_dialog && (wh->pos_flags & WPOS_FULLSCREEN) == 0
+        && ((event->buttons & GPM_B_LEFT) != 0) && ((event->type & GPM_DOWN) != 0)
+        && !mouse_global_in_widget (event, wh))
     {
         h->ret_value = B_CANCEL;
         dlg_stop (h);
@@ -405,7 +412,7 @@ dlg_mouse_event (WDialog * h, Gpm_Event * event)
     {
         Widget *w = WIDGET (p->data);
 
-        if ((w->options & W_DISABLED) == 0 && w->mouse_callback != NULL)
+        if (!widget_get_state (w, WST_DISABLED) && w->mouse_callback != NULL)
         {
             /* put global cursor position to the widget */
             int ret;
@@ -445,10 +452,10 @@ dlg_try_hotkey (WDialog * h, int d_key)
 
     current = WIDGET (h->current->data);
 
-    if ((current->options & W_DISABLED) != 0)
+    if (widget_get_state (current, WST_DISABLED))
         return MSG_NOT_HANDLED;
 
-    if (current->options & W_IS_INPUT)
+    if (widget_get_options (current, WOP_IS_INPUT))
     {
         /* skip ascii control characters, anything else can valid character in
          * some encoding */
@@ -462,7 +469,7 @@ dlg_try_hotkey (WDialog * h, int d_key)
         d_key = g_ascii_tolower (c);
 
     handled = MSG_NOT_HANDLED;
-    if ((current->options & W_WANT_HOTKEY) != 0)
+    if (widget_get_options (current, WOP_WANT_HOTKEY))
         handled = send_message (current, NULL, MSG_HOTKEY, d_key, NULL);
 
     /* If not used, send hotkey to other widgets */
@@ -476,7 +483,8 @@ dlg_try_hotkey (WDialog * h, int d_key)
     {
         current = WIDGET (hot_cur->data);
 
-        if ((current->options & W_WANT_HOTKEY) != 0 && (current->options & W_DISABLED) == 0)
+        if (widget_get_options (current, WOP_WANT_HOTKEY)
+            && !widget_get_state (current, WST_DISABLED))
             handled = send_message (current, NULL, MSG_HOTKEY, d_key, NULL);
 
         if (handled == MSG_NOT_HANDLED)
@@ -503,7 +511,7 @@ dlg_key_event (WDialog * h, int d_key)
         h->current = h->widgets;
 
     /* TAB used to cycle */
-    if ((h->flags & DLG_WANT_TAB) == 0)
+    if (!widget_get_options (WIDGET (h), WOP_WANT_TAB))
     {
         if (d_key == '\t')
         {
@@ -546,18 +554,19 @@ dlg_key_event (WDialog * h, int d_key)
 static void
 frontend_dlg_run (WDialog * h)
 {
+    Widget *wh = WIDGET (h);
     Gpm_Event event;
 
     event.x = -1;
 
     /* close opened editors, viewers, etc */
-    if (!h->modal && mc_global.midnight_shutdown)
+    if (!widget_get_state (wh, WST_MODAL) && mc_global.midnight_shutdown)
     {
         send_message (h, NULL, MSG_VALIDATE, 0, NULL);
         return;
     }
 
-    while (h->state == DLG_ACTIVE)
+    while (widget_get_state (wh, WST_ACTIVE))
     {
         int d_key;
 
@@ -569,11 +578,11 @@ frontend_dlg_run (WDialog * h)
             if (idle_hook)
                 execute_hooks (idle_hook);
 
-            while ((WIDGET (h)->options & W_WANT_IDLE) != 0 && is_idle ())
-                send_message (h, NULL, MSG_IDLE, 0, NULL);
+            while (widget_get_state (wh, WST_IDLE) && is_idle ())
+                send_message (wh, NULL, MSG_IDLE, 0, NULL);
 
             /* Allow terminating the dialog from the idle handler */
-            if (h->state != DLG_ACTIVE)
+            if (!widget_get_state (wh, WST_ACTIVE))
                 break;
         }
 
@@ -585,7 +594,7 @@ frontend_dlg_run (WDialog * h)
 
         dlg_process_event (h, d_key, &event);
 
-        if (h->state == DLG_CLOSED)
+        if (widget_get_state (wh, WST_CLOSED))
             send_message (h, NULL, MSG_VALIDATE, 0, NULL);
     }
 }
@@ -615,7 +624,7 @@ dlg_set_top_or_bottom_widget (void *w, gboolean set_top)
         abort ();               /* widget is not in dialog, this should not happen */
 
     /* unfocus prevoius widget and focus current one before widget reordering */
-    if (set_top && h->state == DLG_ACTIVE)
+    if (set_top && widget_get_state (WIDGET (h), WST_ACTIVE))
         do_select_widget (h, l, SELECT_EXACT);
 
     /* widget reordering */
@@ -638,10 +647,10 @@ dlg_default_repaint (WDialog * h)
 
     int space;
 
-    if (h->state != DLG_ACTIVE)
+    if (!widget_get_state (wh, WST_ACTIVE))
         return;
 
-    space = (h->flags & DLG_COMPACT) ? 0 : 1;
+    space = h->compact ? 0 : 1;
 
     tty_setcolor (h->color[DLG_COLOR_NORMAL]);
     dlg_erase (h);
@@ -659,7 +668,7 @@ dlg_default_repaint (WDialog * h)
 /** this function allows to set dialog position */
 
 void
-dlg_set_position (WDialog * h, int y1, int x1, int y2, int x2)
+dlg_set_position (WDialog * h, int y, int x, int lines, int cols)
 {
     Widget *wh = WIDGET (h);
 
@@ -673,10 +682,10 @@ dlg_set_position (WDialog * h, int y1, int x1, int y2, int x2)
     oc = wh->cols;
     ol = wh->lines;
 
-    wh->x = x1;
-    wh->y = y1;
-    wh->lines = y2 - y1;
-    wh->cols = x2 - x1;
+    wh->x = x;
+    wh->y = y;
+    wh->lines = lines;
+    wh->cols = cols;
 
     /* dialog is empty */
     if (h->widgets == NULL)
@@ -707,36 +716,36 @@ dlg_set_position (WDialog * h, int y1, int x1, int y2, int x2)
                one direction - it should be sized */
 
             Widget *c = WIDGET (w->data);
-            int x = c->x;
-            int y = c->y;
-            int cols = c->cols;
-            int lines = c->lines;
+            int cx = c->x;
+            int cy = c->y;
+            int ccols = c->cols;
+            int clines = c->lines;
 
             if ((c->pos_flags & WPOS_CENTER_HORZ) != 0)
-                x = wh->x + (wh->cols - c->cols) / 2;
+                cx = wh->x + (wh->cols - c->cols) / 2;
             else if ((c->pos_flags & WPOS_KEEP_LEFT) != 0 && (c->pos_flags & WPOS_KEEP_RIGHT) != 0)
             {
-                x += shift_x;
-                cols += scale_x;
+                cx += shift_x;
+                ccols += scale_x;
             }
             else if ((c->pos_flags & WPOS_KEEP_LEFT) != 0)
-                x += shift_x;
+                cx += shift_x;
             else if ((c->pos_flags & WPOS_KEEP_RIGHT) != 0)
-                x += shift_x + scale_x;
+                cx += shift_x + scale_x;
 
             if ((c->pos_flags & WPOS_CENTER_VERT) != 0)
-                y = wh->y + (wh->lines - c->lines) / 2;
+                cy = wh->y + (wh->lines - c->lines) / 2;
             else if ((c->pos_flags & WPOS_KEEP_TOP) != 0 && (c->pos_flags & WPOS_KEEP_BOTTOM) != 0)
             {
-                y += shift_y;
-                lines += scale_y;
+                cy += shift_y;
+                clines += scale_y;
             }
             else if ((c->pos_flags & WPOS_KEEP_TOP) != 0)
-                y += shift_y;
+                cy += shift_y;
             else if ((c->pos_flags & WPOS_KEEP_BOTTOM) != 0)
-                y += shift_y + scale_y;
+                cy += shift_y + scale_y;
 
-            widget_set_size (c, y, x, lines, cols);
+            widget_set_size (c, cy, cx, clines, ccols);
         }
     }
 }
@@ -747,24 +756,38 @@ dlg_set_position (WDialog * h, int y1, int x1, int y2, int x2)
 void
 dlg_set_size (WDialog * h, int lines, int cols)
 {
-    int x = WIDGET (h)->x;
-    int y = WIDGET (h)->y;
+    Widget *w = WIDGET (h);
+    int x, y;
 
-    if ((h->flags & DLG_CENTER) != 0)
+    if ((w->pos_flags & WPOS_FULLSCREEN) != 0)
     {
-        y = (LINES - lines) / 2;
-        x = (COLS - cols) / 2;
+        y = 0;
+        x = 0;
+        lines = LINES;
+        cols = COLS;
+    }
+    else
+    {
+        if ((w->pos_flags & WPOS_CENTER_HORZ) != 0)
+            x = (COLS - cols) / 2;
+        else
+            x = w->x;
+
+        if ((w->pos_flags & WPOS_CENTER_VERT) != 0)
+            y = (LINES - lines) / 2;
+        else
+            y = w->y;
+
+        if ((w->pos_flags & WPOS_TRYUP) != 0)
+        {
+            if (y > 3)
+                y -= 2;
+            else if (y == 3)
+                y = 2;
+        }
     }
 
-    if ((h->flags & DLG_TRYUP) != 0)
-    {
-        if (y > 3)
-            y -= 2;
-        else if (y == 3)
-            y = 2;
-    }
-
-    dlg_set_position (h, y, x, y + lines, x + cols);
+    dlg_set_position (h, y, x, lines, cols);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -790,14 +813,15 @@ dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
         return MSG_NOT_HANDLED;
 
     case MSG_IDLE:
-        dlg_broadcast_msg_to (h, MSG_IDLE, FALSE, W_WANT_IDLE);
+        /* we don't want endless loop */
+        widget_idle (w, FALSE);
         return MSG_HANDLED;
 
     case MSG_RESIZE:
         /* this is default resizing mechanism */
         /* the main idea of this code is to resize dialog
            according to flags (if any of flags require automatic
-           resizing, like DLG_CENTER, end after that reposition
+           resizing, like WPOS_CENTER, end after that reposition
            controls in dialog according to flags of widget) */
         dlg_set_size (h, w->lines, w->cols);
         return MSG_HANDLED;
@@ -812,28 +836,38 @@ dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
 /* --------------------------------------------------------------------------------------------- */
 
 WDialog *
-dlg_create (gboolean modal, int y1, int x1, int lines, int cols,
-            const int *colors, widget_cb_fn callback, widget_mouse_cb_fn mouse_callback,
-            const char *help_ctx, const char *title, dlg_flags_t flags)
+dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flags_t pos_flags,
+            gboolean compact, const int *colors, widget_cb_fn callback,
+            widget_mouse_cb_fn mouse_callback, const char *help_ctx, const char *title)
 {
     WDialog *new_d;
     Widget *w;
+
+    if ((pos_flags & WPOS_FULLSCREEN) != 0)
+    {
+        y1 = 0;
+        x1 = 0;
+        lines = LINES;
+        cols = COLS;
+    }
 
     new_d = g_new0 (WDialog, 1);
     w = WIDGET (new_d);
     widget_init (w, y1, x1, lines, cols, (callback != NULL) ? callback : dlg_default_callback,
                  mouse_callback);
-    widget_want_cursor (w, FALSE);
+    w->pos_flags = pos_flags;
+    w->options |= WOP_TOP_SELECT;
 
-    new_d->state = DLG_CONSTRUCT;
-    new_d->modal = modal;
+    w->state |= WST_CONSTRUCT;
+    if (modal)
+        w->state |= WST_MODAL;
+
     new_d->color = colors;
     new_d->help_ctx = help_ctx;
-    new_d->flags = flags;
+    new_d->compact = compact;
     new_d->data = NULL;
 
     dlg_set_size (new_d, lines, cols);
-    new_d->fullscreen = (w->x == 0 && w->y == 0 && w->cols == COLS && w->lines == LINES);
 
     new_d->mouse_status = MOU_UNHANDLED;
 
@@ -883,12 +917,10 @@ dlg_set_default_colors (void)
 void
 dlg_erase (WDialog * h)
 {
-    if ((h != NULL) && (h->state == DLG_ACTIVE))
-    {
-        Widget *wh = WIDGET (h);
+    Widget *wh = WIDGET (h);
 
+    if (wh != NULL && widget_get_state (wh, WST_ACTIVE))
         tty_fill_region (wh->y, wh->x, wh->lines, wh->cols, ' ');
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -944,7 +976,7 @@ add_widget_autopos (WDialog * h, void *w, widget_pos_flags_t pos_flags, const vo
     }
 
     /* widget has been added in runtime */
-    if (h->state == DLG_ACTIVE)
+    if (widget_get_state (wh, WST_ACTIVE))
     {
         send_message (widget, NULL, MSG_INIT, 0, NULL);
         send_message (widget, NULL, MSG_DRAW, 0, NULL);
@@ -997,7 +1029,7 @@ del_widget (void *w)
     g_list_free_1 (d);
 
     /* widget has been deleted in runtime */
-    if (h->state == DLG_ACTIVE)
+    if (widget_get_state (WIDGET (h), WST_ACTIVE))
     {
         dlg_redraw (h);
         dlg_focus (h);
@@ -1020,7 +1052,7 @@ do_refresh (void)
     {
         /* Search first fullscreen dialog */
         for (; d != NULL; d = g_list_next (d))
-            if (d->data != NULL && DIALOG (d->data)->fullscreen)
+            if (d->data != NULL && (WIDGET (d->data)->pos_flags & WPOS_FULLSCREEN) != 0)
                 break;
         /* back to top dialog */
         for (; d != NULL; d = g_list_previous (d))
@@ -1044,15 +1076,20 @@ gboolean
 dlg_focus (WDialog * h)
 {
     /* cannot focus disabled widget */
-    if ((h->current != NULL) && (h->state == DLG_CONSTRUCT || h->state == DLG_ACTIVE))
+    if (h->current != NULL)
     {
-        Widget *current = WIDGET (h->current->data);
+        Widget *wh = WIDGET (h);
 
-        if (((current->options & W_DISABLED) == 0)
-            && (send_message (current, NULL, MSG_FOCUS, 0, NULL) == MSG_HANDLED))
+        if (widget_get_state (wh, WST_CONSTRUCT) || widget_get_state (wh, WST_ACTIVE))
         {
-            send_message (h, current, MSG_FOCUS, 0, NULL);
-            return TRUE;
+            Widget *current = WIDGET (h->current->data);
+
+            if (!widget_get_state (current, WST_DISABLED)
+                && (send_message (current, NULL, MSG_FOCUS, 0, NULL) == MSG_HANDLED))
+            {
+                send_message (h, current, MSG_FOCUS, 0, NULL);
+                return TRUE;
+            }
         }
     }
 
@@ -1108,18 +1145,10 @@ dlg_select_widget (void *w)
     Widget *widget = WIDGET (w);
     WDialog *h = widget->owner;
 
-    do_select_widget (h, g_list_find (h->widgets, widget), SELECT_EXACT);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Set widget at top of widget list and make it current.
- */
-
-void
-dlg_set_top_widget (void *w)
-{
-    dlg_set_top_or_bottom_widget (w, TRUE);
+    if (widget_get_options (widget, WOP_TOP_SELECT))
+        dlg_set_top_or_bottom_widget (w, TRUE);
+    else
+        do_select_widget (h, g_list_find (h->widgets, widget), SELECT_EXACT);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1160,13 +1189,13 @@ update_cursor (WDialog * h)
 {
     GList *p = h->current;
 
-    if ((p != NULL) && (h->state == DLG_ACTIVE))
+    if (p != NULL && widget_get_state (WIDGET (h), WST_ACTIVE))
     {
         Widget *w;
 
         w = WIDGET (p->data);
 
-        if (((w->options & W_DISABLED) == 0) && ((w->options & W_WANT_CURSOR) != 0))
+        if (!widget_get_state (w, WST_DISABLED) && widget_get_options (w, WOP_WANT_CURSOR))
             send_message (w, NULL, MSG_CURSOR, 0, NULL);
         else
             do
@@ -1177,9 +1206,9 @@ update_cursor (WDialog * h)
 
                 w = WIDGET (p->data);
 
-                if (((w->options & W_DISABLED) == 0) && ((w->options & W_WANT_CURSOR) != 0))
-                    if (send_message (w, NULL, MSG_CURSOR, 0, NULL) == MSG_HANDLED)
-                        break;
+                if (!widget_get_state (w, WST_DISABLED) && widget_get_options (w, WOP_WANT_CURSOR)
+                    && send_message (w, NULL, MSG_CURSOR, 0, NULL) == MSG_HANDLED)
+                    break;
             }
             while (TRUE);
     }
@@ -1194,7 +1223,7 @@ update_cursor (WDialog * h)
 void
 dlg_redraw (WDialog * h)
 {
-    if (h->state != DLG_ACTIVE)
+    if (!widget_get_state (WIDGET (h), WST_ACTIVE))
         return;
 
     if (h->winch_pending)
@@ -1213,7 +1242,7 @@ dlg_redraw (WDialog * h)
 void
 dlg_stop (WDialog * h)
 {
-    h->state = DLG_CLOSED;
+    widget_set_state (WIDGET (h), WST_CLOSED, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1222,16 +1251,18 @@ dlg_stop (WDialog * h)
 void
 dlg_init (WDialog * h)
 {
-    if (top_dlg != NULL && DIALOG (top_dlg->data)->modal)
-        h->modal = TRUE;
+    Widget *wh = WIDGET (h);
+
+    if (top_dlg != NULL && widget_get_state (WIDGET (top_dlg->data), WST_MODAL))
+        widget_set_state (wh, WST_MODAL, TRUE);
 
     /* add dialog to the stack */
     top_dlg = g_list_prepend (top_dlg, h);
 
     /* Initialize dialog manager and widgets */
-    if (h->state == DLG_CONSTRUCT)
+    if (widget_get_state (wh, WST_CONSTRUCT))
     {
-        if (!h->modal)
+        if (!widget_get_state (wh, WST_MODAL))
             dialog_switch_add (h);
 
         send_message (h, NULL, MSG_INIT, 0, NULL);
@@ -1239,7 +1270,7 @@ dlg_init (WDialog * h)
         dlg_read_history (h);
     }
 
-    h->state = DLG_ACTIVE;
+    widget_set_state (wh, WST_ACTIVE, TRUE);
 
     /* first send MSG_DRAW to dialog itself and all widgets... */
     dlg_redraw (h);
@@ -1277,10 +1308,10 @@ dlg_run_done (WDialog * h)
 {
     top_dlg = g_list_remove (top_dlg, h);
 
-    if (h->state == DLG_CLOSED)
+    if (widget_get_state (WIDGET (h), WST_CLOSED))
     {
         send_message (h, h->current->data, MSG_END, 0, NULL);
-        if (!h->modal)
+        if (!widget_get_state (WIDGET (h), WST_MODAL))
             dialog_switch_remove (h);
     }
 }

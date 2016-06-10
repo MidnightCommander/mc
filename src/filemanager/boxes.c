@@ -198,8 +198,8 @@ sel_skin_button (WButton * button, int action)
     lxx = COLS / 2;
     lyy = (LINES - 13) / 2;
     skin_dlg =
-        dlg_create (TRUE, lyy, lxx, 13, 24, dialog_colors, NULL, NULL, "[Appearance]", _("Skins"),
-                    DLG_COMPACT);
+        dlg_create (TRUE, lyy, lxx, 13, 24, WPOS_KEEP_DEFAULT, TRUE, dialog_colors, NULL, NULL,
+                    "[Appearance]", _("Skins"));
 
     skin_list = listbox_new (1, 1, 11, 22, FALSE, NULL);
     skin_name = "default";
@@ -538,15 +538,15 @@ configure_box (void)
         g_snprintf (time_out, sizeof (time_out), "%d", old_esc_mode_timeout);
 
 #ifndef USE_INTERNAL_EDIT
-        quick_widgets[17].options = W_DISABLED;
+        quick_widgets[17].state = WST_DISABLED;
 #endif
 
         if (!old_esc_mode)
-            quick_widgets[10].options = quick_widgets[11].options = W_DISABLED;
+            quick_widgets[10].state = quick_widgets[11].state = WST_DISABLED;
 
 #ifndef HAVE_POSIX_FALLOCATE
         mc_global.vfs.preallocate_space = FALSE;
-        quick_widgets[7].options = W_DISABLED;
+        quick_widgets[7].state = WST_DISABLED;
 #endif
 
         if (quick_dialog (&qdlg) == B_ENTER)
@@ -761,13 +761,13 @@ panel_listing_box (WPanel * panel, int num, char **userp, char **minip, int *use
         g_snprintf (panel_brief_cols_in, sizeof (panel_brief_cols_in), "%d", panel->brief_cols);
 
         if ((int) panel->list_type != panel_listing_brief_idx)
-            quick_widgets[4].options = W_DISABLED;
+            quick_widgets[4].state = WST_DISABLED;
 
         if ((int) panel->list_type != panel_listing_user_idx)
-            quick_widgets[6].options = W_DISABLED;
+            quick_widgets[6].state = WST_DISABLED;
 
         if (!mini_user_status)
-            quick_widgets[9].options = W_DISABLED;
+            quick_widgets[9].state = WST_DISABLED;
 
         if (quick_dialog (&qdlg) == B_CANCEL)
             result = -1;
@@ -1020,8 +1020,8 @@ tree_box (const char *current_dir)
     (void) current_dir;
 
     /* Create the components */
-    dlg = dlg_create (TRUE, 0, 0, LINES - 9, COLS - 20, dialog_colors, tree_callback, NULL,
-                      "[Directory Tree]", _("Directory tree"), DLG_CENTER);
+    dlg = dlg_create (TRUE, 0, 0, LINES - 9, COLS - 20, WPOS_CENTER, FALSE, dialog_colors,
+                      tree_callback, NULL, "[Directory Tree]", _("Directory tree"));
     wd = WIDGET (dlg);
 
     mytree = tree_new (2, 2, wd->lines - 6, wd->cols - 5, FALSE);
@@ -1109,7 +1109,7 @@ configure_vfs (void)
 
 #ifdef ENABLE_VFS_FTP
         if (!ftpfs_always_use_proxy)
-            quick_widgets[5].options = W_DISABLED;
+            quick_widgets[5].state = WST_DISABLED;
 #endif
 
         if (quick_dialog (&qdlg) != B_CANCEL)
@@ -1240,8 +1240,8 @@ jobs_cmd (void)
     x += (int) n_but - 1;
     cols = MAX (cols, x + 6);
 
-    jobs_dlg = dlg_create (TRUE, 0, 0, lines, cols, dialog_colors, NULL, NULL,
-                           "[Background jobs]", _("Background jobs"), DLG_CENTER);
+    jobs_dlg = dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, NULL, NULL,
+                           "[Background jobs]", _("Background jobs"));
 
     bg_list = listbox_new (2, 2, lines - 6, cols - 6, FALSE, NULL);
     jobs_fill_listbox (bg_list);

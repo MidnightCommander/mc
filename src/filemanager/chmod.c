@@ -305,8 +305,8 @@ init_chmod (const char *fname, const struct stat *sf_stat)
     }
 
     ch_dlg =
-        dlg_create (TRUE, 0, 0, lines, cols, dialog_colors,
-                    chmod_callback, NULL, "[Chmod]", _("Chmod command"), DLG_CENTER);
+        dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors,
+                    chmod_callback, NULL, "[Chmod]", _("Chmod command"));
 
     add_widget (ch_dlg, groupbox_new (PY, PX, check_perm_num + 2, perm_gb_len, _("Permission")));
 

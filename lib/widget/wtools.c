@@ -70,7 +70,7 @@ query_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
     switch (msg)
     {
     case MSG_RESIZE:
-        if ((h->flags & DLG_CENTER) == 0)
+        if ((w->pos_flags & WPOS_CENTER) == 0)
         {
             WDialog *prev_dlg = NULL;
             int ypos, xpos;
@@ -93,7 +93,7 @@ query_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
             }
 
             /* if previous dialog is not fullscreen'd -- overlap it */
-            if (prev_dlg == NULL || prev_dlg->fullscreen)
+            if (prev_dlg == NULL || (WIDGET (prev_dlg)->pos_flags & WPOS_FULLSCREEN) != 0)
                 ypos = LINES / 3 - (w->lines - 3) / 2;
             else
                 ypos = WIDGET (prev_dlg)->y + 2;
@@ -101,7 +101,7 @@ query_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
             xpos = COLS / 2 - w->cols / 2;
 
             /* set position */
-            dlg_set_position (h, ypos, xpos, ypos + w->lines, xpos + w->cols);
+            dlg_set_position (h, ypos, xpos, w->lines, w->cols);
 
             return MSG_HANDLED;
         }
@@ -279,7 +279,8 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
     int result = -1;
     int cols, lines;
     const int *query_colors = (flags & D_ERROR) != 0 ? alarm_colors : dialog_colors;
-    dlg_flags_t dlg_flags = (flags & D_CENTER) != 0 ? (DLG_CENTER | DLG_TRYUP) : DLG_NONE;
+    widget_pos_flags_t pos_flags =
+        (flags & D_CENTER) != 0 ? (WPOS_CENTER | WPOS_TRYUP) : WPOS_KEEP_DEFAULT;
 
     if (header == MSG_ERROR)
         header = _("Error");
@@ -304,8 +305,8 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
 
     /* prepare dialog */
     query_dlg =
-        dlg_create (TRUE, 0, 0, lines, cols, query_colors, query_default_callback, NULL,
-                    "[QueryBox]", header, dlg_flags);
+        dlg_create (TRUE, 0, 0, lines, cols, pos_flags, FALSE, query_colors, query_default_callback,
+                    NULL, "[QueryBox]", header);
 
     if (count > 0)
     {
@@ -585,8 +586,8 @@ status_msg_init (status_msg_t * sm, const char *title, double delay, status_msg_
 
     start = mc_timer_elapsed (mc_global.timer);
 
-    sm->dlg = dlg_create (TRUE, 0, 0, 7, MIN (MAX (40, COLS / 2), COLS), dialog_colors,
-                          NULL, NULL, NULL, title, DLG_CENTER);
+    sm->dlg = dlg_create (TRUE, 0, 0, 7, MIN (MAX (40, COLS / 2), COLS), WPOS_CENTER, FALSE,
+                          dialog_colors, NULL, NULL, NULL, title);
     sm->start = start;
     sm->delay = (guint64) (delay * G_USEC_PER_SEC);
     sm->block = FALSE;
@@ -648,7 +649,7 @@ status_msg_common_update (status_msg_t * sm)
     if (sm->dlg == NULL)
         return B_ENTER;
 
-    if (sm->dlg->state != DLG_ACTIVE)
+    if (widget_get_state (WIDGET (sm->dlg), WST_CONSTRUCT))
     {
         /* dialog is not shown yet */
 

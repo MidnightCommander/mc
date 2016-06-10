@@ -147,15 +147,14 @@ widget_init (Widget * w, int y, int x, int lines, int cols,
     w->pos_flags = WPOS_KEEP_DEFAULT;
     w->callback = callback;
     w->mouse_callback = mouse_callback;
-    w->set_options = widget_default_set_options_callback;
     w->owner = NULL;
     w->mouse.forced_capture = FALSE;
     w->mouse.capture = FALSE;
     w->mouse.last_msg = MSG_MOUSE_NONE;
     w->mouse.last_buttons_down = 0;
 
-    /* Almost all widgets want to put the cursor in a suitable place */
-    w->options = W_WANT_CURSOR;
+    w->options = WOP_DEFAULT;
+    w->state = WST_DEFAULT;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -174,6 +173,8 @@ widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
     case MSG_INIT:
     case MSG_FOCUS:
     case MSG_UNFOCUS:
+    case MSG_ENABLE:
+    case MSG_DISABLE:
     case MSG_DRAW:
     case MSG_DESTROY:
     case MSG_CURSOR:
@@ -188,37 +189,72 @@ widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Callback for applying new options to widget.
- *
- * @param w       widget
- * @param options options set
- * @param enable  TRUE if specified options should be added, FALSE if options should be removed
- */
-void
-widget_default_set_options_callback (Widget * w, widget_options_t options, gboolean enable)
-{
-    if (enable)
-        w->options |= options;
-    else
-        w->options &= ~options;
-
-    if (w->owner != NULL && (options & W_DISABLED) != 0)
-        send_message (w, NULL, MSG_DRAW, 0, NULL);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
  * Apply new options to widget.
  *
  * @param w       widget
- * @param options options set
+ * @param options widget option flags to modify. Several flags per call can be modified.
  * @param enable  TRUE if specified options should be added, FALSE if options should be removed
  */
 void
 widget_set_options (Widget * w, widget_options_t options, gboolean enable)
 {
-    w->set_options (w, options, enable);
+    if (enable)
+        w->options |= options;
+    else
+        w->options &= ~options;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Modify state of widget.
+ *
+ * @param w      widget
+ * @param state  widget state flag to modify
+ * @param enable specifies whether to turn the flag on (TRUE) or off (FALSE).
+ *               Only one flag per call can be modified.
+ * @return       TRUE if set was handled successfully, FALSE otherwise
+ */
+gboolean
+widget_set_state (Widget * w, widget_state_t state, gboolean enable)
+{
+    gboolean ret = TRUE;
+
+    if (enable)
+        w->state |= state;
+    else
+        w->state &= ~state;
+
+    if (enable)
+    {
+        /* exclusive bits */
+        if ((state & WST_CONSTRUCT) != 0)
+            w->state &= ~(WST_ACTIVE | WST_SUSPENDED | WST_CLOSED);
+        else if ((state & WST_ACTIVE) != 0)
+            w->state &= ~(WST_CONSTRUCT | WST_SUSPENDED | WST_CLOSED);
+        else if ((state & WST_SUSPENDED) != 0)
+            w->state &= ~(WST_CONSTRUCT | WST_ACTIVE | WST_CLOSED);
+        else if ((state & WST_CLOSED) != 0)
+            w->state &= ~(WST_CONSTRUCT | WST_ACTIVE | WST_SUSPENDED);
+    }
+
+    if (w->owner == NULL)
+        return FALSE;
+
+    switch (state)
+    {
+    case WST_DISABLED:
+        if (send_message (w, NULL, enable ? MSG_DISABLE : MSG_ENABLE, 0, NULL) != MSG_HANDLED)
+            ret = FALSE;
+        if (ret)
+            send_message (w, NULL, MSG_DRAW, 0, NULL);
+        break;
+
+    default:
+        break;
+    }
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -241,7 +277,7 @@ widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey)
     WDialog *h = w->owner;
     int color;
 
-    if ((w->options & W_DISABLED) != 0)
+    if (widget_get_state (w, WST_DISABLED))
         color = DISABLED_COLOR;
     else if (hotkey)
     {
@@ -293,7 +329,7 @@ widget_redraw (Widget * w)
     {
         WDialog *h = w->owner;
 
-        if (h != NULL && h->state == DLG_ACTIVE)
+        if (h != NULL && widget_get_state (WIDGET (h), WST_ACTIVE))
             w->callback (w, NULL, MSG_DRAW, 0, NULL);
     }
 }

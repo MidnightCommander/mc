@@ -307,7 +307,7 @@ menubar_finish (WMenuBar * menubar)
     menubar->is_dropped = FALSE;
     menubar->is_active = FALSE;
     w->lines = 1;
-    widget_want_hotkey (w, 0);
+    widget_want_hotkey (w, FALSE);
 
     /* Move the menubar to the bottom so that widgets displayed on top of
      * an "invisible" menubar get the first chance to respond to mouse events. */
@@ -588,7 +588,7 @@ menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         w->lines = LINES;
 
         /* Trick to get all of the hotkeys */
-        widget_want_hotkey (w, 1);
+        widget_want_hotkey (w, TRUE);
         menubar_draw (menubar);
         return MSG_HANDLED;
 
@@ -892,9 +892,9 @@ menubar_new (int y, int x, int cols, GList * menu, gboolean visible)
     menubar = g_new0 (WMenuBar, 1);
     w = WIDGET (menubar);
     widget_init (w, y, x, 1, cols, menubar_callback, menubar_mouse_callback);
+    w->options |= WOP_TOP_SELECT;
 
     menubar->is_visible = visible;
-    widget_want_cursor (w, FALSE);
     menubar_set_menu (menubar, menu);
 
     return menubar;
@@ -1017,7 +1017,7 @@ menubar_activate (WMenuBar * menubar, gboolean dropped, int which)
 
         /* Bring it to the top so it receives all mouse events before any other widget.
          * See also comment in menubar_finish(). */
-        dlg_set_top_widget (w);
+        dlg_select_widget (w);
     }
 }
 

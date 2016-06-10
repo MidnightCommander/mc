@@ -90,6 +90,7 @@ quick_create_labeled_input (GArray * widgets, int *y, int x, quick_widget_t * qu
     label.quick_widget = g_new0 (quick_widget_t, 1);
     label.quick_widget->widget_type = quick_label;
     label.quick_widget->options = quick_widget->options;
+    label.quick_widget->state = quick_widget->state;
     /* FIXME: this should be turned in depend of label_location */
     label.quick_widget->pos_flags = quick_widget->pos_flags;
 
@@ -405,13 +406,13 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
     width2 = (quick_dlg->cols - 7) / 2;
 
     if (quick_dlg->x == -1 || quick_dlg->y == -1)
-        dd = dlg_create (TRUE, 0, 0, y + 3, quick_dlg->cols,
+        dd = dlg_create (TRUE, 0, 0, y + 3, quick_dlg->cols, WPOS_CENTER | WPOS_TRYUP, FALSE,
                          dialog_colors, quick_dlg->callback, quick_dlg->mouse_callback,
-                         quick_dlg->help, quick_dlg->title, DLG_CENTER | DLG_TRYUP);
+                         quick_dlg->help, quick_dlg->title);
     else
         dd = dlg_create (TRUE, quick_dlg->y, quick_dlg->x, y + 3, quick_dlg->cols,
-                         dialog_colors, quick_dlg->callback, quick_dlg->mouse_callback,
-                         quick_dlg->help, quick_dlg->title, DLG_NONE);
+                         WPOS_KEEP_DEFAULT, FALSE, dialog_colors, quick_dlg->callback,
+                         quick_dlg->mouse_callback, quick_dlg->help, quick_dlg->title);
 
     /* add widgets into the dialog */
     x2 = x1 + width2 + 1;
@@ -562,6 +563,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
 
             /* add widget into dialog */
             item->widget->options |= item->quick_widget->options;       /* FIXME: cannot reset flags, setup only */
+            item->widget->state |= item->quick_widget->state;   /* FIXME: cannot reset flags, setup only */
             id = add_widget_autopos (dd, item->widget, item->quick_widget->pos_flags, NULL);
             if (item->quick_widget->id != NULL)
                 *item->quick_widget->id = id;

@@ -138,10 +138,10 @@ static gboolean ctl_x_map_enabled = FALSE;
 static void
 stop_dialogs (void)
 {
-    midnight_dlg->state = DLG_CLOSED;
+    dlg_stop (midnight_dlg);
 
     if ((top_dlg != NULL) && (top_dlg->data != NULL))
-        DIALOG (top_dlg->data)->state = DLG_CLOSED;
+        dlg_stop (DIALOG (top_dlg->data));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1421,7 +1421,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 
     case MSG_IDLE:
         /* We only need the first idle event to show user menu after start */
-        widget_want_idle (w, FALSE);
+        widget_idle (w, FALSE);
 
         if (boot_current_is_left)
             dlg_select_widget (get_panel_widget (0));
@@ -1757,8 +1757,8 @@ do_nc (void)
     edit_stack_init ();
 #endif
 
-    midnight_dlg = dlg_create (FALSE, 0, 0, LINES, COLS, dialog_colors, midnight_callback, NULL,
-                               "[main]", NULL, DLG_NONE);
+    midnight_dlg = dlg_create (FALSE, 0, 0, 1, 1, WPOS_FULLSCREEN, FALSE, dialog_colors,
+                               midnight_callback, NULL, "[main]", NULL);
 
     /* Check if we were invoked as an editor or file viewer */
     if (mc_global.mc_run_mode != MC_RUN_FULL)
@@ -1769,7 +1769,7 @@ do_nc (void)
     else
     {
         /* We only need the first idle event to show user menu after start */
-        widget_want_idle (WIDGET (midnight_dlg), TRUE);
+        widget_idle (WIDGET (midnight_dlg), TRUE);
 
         setup_mc ();
         mc_filehighlight = mc_fhl_new (TRUE);

@@ -253,7 +253,6 @@ buttonbar_new (gboolean visible)
     w->pos_flags = WPOS_KEEP_HORZ | WPOS_KEEP_BOTTOM;
     bb->visible = visible;
     widget_want_hotkey (w, TRUE);
-    widget_want_cursor (w, FALSE);
 
     return bb;
 }

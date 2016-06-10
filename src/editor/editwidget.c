@@ -356,7 +356,7 @@ edit_window_list (const WDialog * h)
     if (rv >= 0)
     {
         w = g_list_nth (h->widgets, rv + offset);
-        dlg_set_top_widget (w->data);
+        dlg_select_widget (w->data);
     }
 }
 
@@ -485,11 +485,11 @@ edit_dialog_command_execute (WDialog * h, long command)
         break;
     case CK_WindowNext:
         dlg_one_down (h);
-        dlg_set_top_widget (h->current->data);
+        dlg_select_widget (h->current->data);
         break;
     case CK_WindowPrev:
         dlg_one_up (h);
-        dlg_set_top_widget (h->current->data);
+        dlg_select_widget (h->current->data);
         break;
     case CK_Options:
         edit_options_dialog (h);
@@ -641,7 +641,8 @@ edit_quit (WDialog * h)
     GList *l;
     WEdit *e = NULL;
 
-    h->state = DLG_ACTIVE;      /* don't stop the dialog before final decision */
+    /* don't stop the dialog before final decision */
+    widget_set_state (WIDGET (h), WST_ACTIVE, TRUE);
 
     for (l = h->widgets; l != NULL; l = g_list_next (l))
         if (edit_widget_is_editor (CONST_WIDGET (l->data)))
@@ -665,7 +666,7 @@ edit_quit (WDialog * h)
 
     /* no editors in dialog at all or no any file required to be saved */
     if (e == NULL || l == NULL)
-        h->state = DLG_CLOSED;
+        dlg_stop (h);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -835,7 +836,7 @@ edit_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
              * So let's trigger an IDLE signal.
              */
             if (!is_idle ())
-                widget_want_idle (w, TRUE);
+                widget_idle (w, TRUE);
             return ret;
         }
 
@@ -852,7 +853,7 @@ edit_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
         return MSG_HANDLED;
 
     case MSG_IDLE:
-        widget_want_idle (w, FALSE);
+        widget_idle (w, FALSE);
         return send_message (h->current->data, NULL, MSG_IDLE, 0, NULL);
 
     default:
@@ -905,7 +906,7 @@ edit_dialog_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
                 if (top != h->current)
                 {
                     /* Window is not active. Activate it */
-                    dlg_set_top_widget (e);
+                    dlg_select_widget (e);
                 }
 
                 /* Handle buttons */
@@ -1086,7 +1087,7 @@ edit_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     switch (msg)
     {
     case MSG_MOUSE_DOWN:
-        dlg_set_top_widget (w);
+        dlg_select_widget (w);
         edit_update_curs_row (edit);
         edit_update_curs_col (edit);
 
@@ -1222,8 +1223,9 @@ edit_files (const GList * files)
 
     /* Create a new dialog and add it widgets to it */
     edit_dlg =
-        dlg_create (FALSE, 0, 0, LINES, COLS, NULL, edit_dialog_callback,
-                    edit_dialog_mouse_callback, "[Internal File Editor]", NULL, DLG_WANT_TAB);
+        dlg_create (FALSE, 0, 0, 1, 1, WPOS_FULLSCREEN, FALSE, NULL, edit_dialog_callback,
+                    edit_dialog_mouse_callback, "[Internal File Editor]", NULL);
+    widget_want_tab (WIDGET (edit_dlg), TRUE);
 
     edit_dlg->get_shortcut = edit_get_shortcut;
     edit_dlg->get_title = edit_get_title;
@@ -1249,7 +1251,7 @@ edit_files (const GList * files)
     if (ok)
         dlg_run (edit_dlg);
 
-    if (!ok || edit_dlg->state == DLG_CLOSED)
+    if (!ok || widget_get_state (WIDGET (edit_dlg), WST_CLOSED))
         dlg_destroy (edit_dlg);
 
     return ok;

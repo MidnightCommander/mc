@@ -1,4 +1,6 @@
 /*
+   File difference viewer
+
    Copyright (C) 2007-2016
    Free Software Foundation, Inc.
 
@@ -2888,10 +2890,13 @@ dview_edit (WDiff * dview, diff_place_t ord)
     }
 
     h = WIDGET (dview)->owner;
-    h_modal = h->modal;
+    h_modal = widget_get_state (WIDGET (h), WST_MODAL);
 
     get_line_numbers (dview->a[ord], dview->skip_rows, &linenum, &lineofs);
-    h->modal = TRUE;            /* not allow edit file in several editors */
+
+    /* disallow edit file in several editors */
+    widget_set_state (WIDGET (h), WST_MODAL, TRUE);
+
     {
         vfs_path_t *tmp_vpath;
 
@@ -2899,7 +2904,8 @@ dview_edit (WDiff * dview, diff_place_t ord)
         edit_file_at_line (tmp_vpath, use_internal_edit != 0, linenum);
         vfs_path_free (tmp_vpath);
     }
-    h->modal = h_modal;
+
+    widget_set_state (WIDGET (h), WST_MODAL, h_modal);
     dview_redo (dview);
     dview_update (dview);
 }
@@ -3388,7 +3394,7 @@ dview_adjust_size (WDialog * h)
 static cb_ret_t
 dview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WDiff *dview = (WDiff *) data;
+    WDiff *dview;
     WDialog *h = DIALOG (w);
 
     switch (msg)
@@ -3406,9 +3412,10 @@ dview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, 
 
     case MSG_VALIDATE:
         dview = (WDiff *) find_widget_type (h, dview_callback);
-        h->state = DLG_ACTIVE;  /* don't stop the dialog before final decision */
+        /* don't stop the dialog before final decision */
+        widget_set_state (w, WST_ACTIVE, TRUE);
         if (dview_ok_to_exit (dview))
-            h->state = DLG_CLOSED;
+            dlg_stop (h);
         return MSG_HANDLED;
 
     default:
@@ -3453,13 +3460,13 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
 
     /* Create dialog and widgets, put them on the dialog */
     dview_dlg =
-        dlg_create (FALSE, 0, 0, LINES, COLS, NULL, dview_dialog_callback, NULL,
-                    "[Diff Viewer]", NULL, DLG_WANT_TAB);
+        dlg_create (FALSE, 0, 0, 1, 1, WPOS_FULLSCREEN, FALSE, NULL, dview_dialog_callback, NULL,
+                    "[Diff Viewer]", NULL);
+    widget_want_tab (WIDGET (dview_dlg), TRUE);
 
     dview = g_new0 (WDiff, 1);
     w = WIDGET (dview);
     widget_init (w, 0, 0, LINES - 1, COLS, dview_callback, dview_mouse_callback);
-    widget_want_cursor (w, FALSE);
 
     add_widget (dview_dlg, dview);
     add_widget (dview_dlg, buttonbar_new (TRUE));
@@ -3475,7 +3482,7 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
     if (error == 0)
         dlg_run (dview_dlg);
 
-    if ((error != 0) || (dview_dlg->state == DLG_CLOSED))
+    if (error != 0 || widget_get_state (WIDGET (dview_dlg), WST_CLOSED))
         dlg_destroy (dview_dlg);
 
     return error == 0 ? 1 : 0;

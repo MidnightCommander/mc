@@ -339,8 +339,6 @@ info_new (int y, int x, int lines, int cols)
     info = g_new (struct WInfo, 1);
     w = WIDGET (info);
     widget_init (w, y, x, lines, cols, info_callback, NULL);
-    /* We do not want the cursor */
-    widget_want_cursor (w, FALSE);
 
     return info;
 }

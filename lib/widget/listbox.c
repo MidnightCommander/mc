@@ -132,21 +132,23 @@ listbox_draw (WListbox * l, gboolean focused)
 {
     Widget *w = WIDGET (l);
     const WDialog *h = w->owner;
-    const gboolean disabled = (w->options & W_DISABLED) != 0;
-    const int normalc = disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL];
-    /* *INDENT-OFF* */
-    int selc = disabled
-        ? DISABLED_COLOR
-        : focused
-            ? h->color[DLG_COLOR_HOT_FOCUS] 
-            : h->color[DLG_COLOR_FOCUS];
-    /* *INDENT-ON* */
-
+    gboolean disabled;
+    int normalc, selc;
     int length = 0;
     GList *le = NULL;
     int pos;
     int i;
     int sel_line = -1;
+
+    disabled = widget_get_state (w, WST_DISABLED);
+    normalc = disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL];
+    /* *INDENT-OFF* */
+    selc = disabled
+        ? DISABLED_COLOR
+        : focused
+            ? h->color[DLG_COLOR_HOT_FOCUS] 
+            : h->color[DLG_COLOR_FOCUS];
+    /* *INDENT-ON* */
 
     if (l->list != NULL)
     {
@@ -561,7 +563,6 @@ listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn 
     l->scrollbar = !mc_global.tty.slow_terminal;
     l->focused = FALSE;
     widget_want_hotkey (w, TRUE);
-    widget_want_cursor (w, FALSE);
 
     return l;
 }

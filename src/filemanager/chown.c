@@ -213,8 +213,8 @@ init_chown (void)
     lines = GH + 4 + (single_set ? 2 : 4);
 
     ch_dlg =
-        dlg_create (TRUE, 0, 0, lines, cols, dialog_colors, chown_callback, NULL, "[Chown]",
-                    _("Chown command"), DLG_CENTER);
+        dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, chown_callback,
+                    NULL, "[Chown]", _("Chown command"));
 
     add_widget (ch_dlg, groupbox_new (2, 3, GH, GW, _("User name")));
     l_user = listbox_new (3, 4, GH - 2, GW - 2, FALSE, NULL);

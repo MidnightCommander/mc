@@ -103,7 +103,7 @@ static void
 draw_history_button (WInput * in)
 {
     char c;
-    gboolean disabled = (WIDGET (in)->options & W_DISABLED) != 0;
+    gboolean disabled;
 
     if (g_list_next (in->history.current) == NULL)
         c = '^';
@@ -113,6 +113,7 @@ draw_history_button (WInput * in)
         c = '|';
 
     widget_move (in, 0, WIDGET (in)->cols - HISTORY_BUTTON_WIDTH);
+    disabled = widget_get_state (WIDGET (in), WST_DISABLED);
     tty_setcolor (disabled ? DISABLED_COLOR : in->color[WINPUTC_HISTORY]);
 
 #ifdef LARGE_HISTORY_BUTTON
@@ -968,25 +969,6 @@ input_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-/**
- * Callback for applying new options to input widget.
- *
- * @param w       widget
- * @param options options set
- * @param enable  TRUE if specified options should be added, FALSE if options should be removed
- */
-static void
-input_set_options_callback (Widget * w, widget_options_t options, gboolean enable)
-{
-    WInput *in = INPUT (w);
-
-    widget_default_set_options_callback (w, options, enable);
-    if (in->label != NULL)
-        widget_set_options (WIDGET (in->label), options, enable);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1010,8 +992,7 @@ input_new (int y, int x, const int *colors, int width, const char *def_text,
     in = g_new (WInput, 1);
     w = WIDGET (in);
     widget_init (w, y, x, 1, width, input_callback, input_mouse_callback);
-    w->options |= W_IS_INPUT;
-    w->set_options = input_set_options_callback;
+    w->options |= WOP_IS_INPUT | WOP_WANT_CURSOR;
 
     in->color = colors;
     in->first = TRUE;
@@ -1065,6 +1046,8 @@ input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         mc_event_add (w->owner->event_group, MCEVENT_HISTORY_LOAD, input_load_history, w, NULL);
         /* subscribe to "history_save" event */
         mc_event_add (w->owner->event_group, MCEVENT_HISTORY_SAVE, input_save_history, w, NULL);
+        if (in->label != NULL)
+            widget_set_state (WIDGET (in->label), WST_DISABLED, widget_get_state (w, WST_DISABLED));
         return MSG_HANDLED;
 
     case MSG_KEY:
@@ -1100,6 +1083,12 @@ input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     case MSG_UNFOCUS:
     case MSG_DRAW:
         input_update (in, FALSE);
+        return MSG_HANDLED;
+
+    case MSG_ENABLE:
+    case MSG_DISABLE:
+        if (in->label != NULL)
+            widget_set_state (WIDGET (in->label), WST_DISABLED, msg == MSG_DISABLE);
         return MSG_HANDLED;
 
     case MSG_CURSOR:
@@ -1271,7 +1260,7 @@ input_update (WInput * in, gboolean clear_first)
         return;
 
     /* don't draw widget not put into dialog */
-    if (w->owner == NULL || w->owner->state != DLG_ACTIVE)
+    if (w->owner == NULL || !widget_get_state (WIDGET (w->owner), WST_ACTIVE))
         return;
 
     if (should_show_history_button (in))
@@ -1295,7 +1284,7 @@ input_update (WInput * in, gboolean clear_first)
     if (has_history != 0)
         draw_history_button (in);
 
-    if ((w->options & W_DISABLED) != 0)
+    if (widget_get_state (w, WST_DISABLED))
         tty_setcolor (DISABLED_COLOR);
     else if (in->first)
         tty_setcolor (in->color[WINPUTC_UNCHANGED]);

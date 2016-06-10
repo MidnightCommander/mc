@@ -1023,6 +1023,7 @@ mousedispatch_new (int y, int x, int yl, int xl)
 
     w = g_new0 (Widget, 1);
     widget_init (w, y, x, yl, xl, md_callback, help_mouse_callback);
+    widget_want_cursor (w, TRUE);
 
     return w;
 }
@@ -1096,9 +1097,9 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
     help_lines = MIN (LINES - 4, MAX (2 * LINES / 3, 18));
 
     whelp =
-        dlg_create (TRUE, 0, 0, help_lines + 4, HELP_WINDOW_WIDTH + 4,
-                    help_colors, help_callback, NULL, "[Help]", _("Help"),
-                    DLG_TRYUP | DLG_CENTER | DLG_WANT_TAB);
+        dlg_create (TRUE, 0, 0, help_lines + 4, WPOS_CENTER | WPOS_TRYUP, FALSE,
+                    HELP_WINDOW_WIDTH + 4, help_colors, help_callback, NULL, "[Help]", _("Help"));
+    widget_want_tab (WIDGET (whelp), TRUE);
 
     selected_item = search_string_node (main_node, STRING_LINK_START) - 1;
     currentpoint = main_node + 1;       /* Skip the newline following the start of the node */

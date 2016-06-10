@@ -67,7 +67,7 @@ hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         {
             Widget *wo = WIDGET (h);
 
-            if (((h->flags & DLG_COMPACT) != 0))
+            if (h->compact)
             {
                 w->x = wo->x;
                 w->cols = wo->cols;
@@ -136,8 +136,6 @@ hline_new (int y, int x, int width)
     l->text = NULL;
     l->auto_adjust_cols = (width < 0);
     l->transparent = FALSE;
-    widget_want_cursor (w, FALSE);
-    widget_want_hotkey (w, FALSE);
 
     return l;
 }

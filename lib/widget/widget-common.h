@@ -16,10 +16,11 @@
 
 #define widget_move(w, _y, _x) tty_gotoyx (CONST_WIDGET(w)->y + (_y), CONST_WIDGET(w)->x + (_x))
 /* Sets/clear the specified flag in the options field */
-#define widget_want_cursor(w,i) widget_set_options(w, W_WANT_CURSOR, i)
-#define widget_want_hotkey(w,i) widget_set_options(w, W_WANT_HOTKEY, i)
-#define widget_want_idle(w,i) widget_set_options(w, W_WANT_IDLE, i)
-#define widget_disable(w,i) widget_set_options(w, W_DISABLED, i)
+#define widget_want_cursor(w,i) widget_set_options(w, WOP_WANT_CURSOR, i)
+#define widget_want_hotkey(w,i) widget_set_options(w, WOP_WANT_HOTKEY, i)
+#define widget_want_tab(w,i) widget_set_options(w, WOP_WANT_TAB, i)
+#define widget_idle(w,i) widget_set_state(w, WST_IDLE, i)
+#define widget_disable(w,i) widget_set_state(w, WST_DISABLED, i)
 
 /*** enums ***************************************************************************************/
 
@@ -29,6 +30,8 @@ typedef enum
     MSG_INIT = 0,               /* Initialize widget */
     MSG_FOCUS,                  /* Draw widget in focused state or widget has got focus */
     MSG_UNFOCUS,                /* Draw widget in unfocused state or widget has been unfocused */
+    MSG_ENABLE,                 /* Change state to enabled */
+    MSG_DISABLE,                /* Change state to disabled */
     MSG_DRAW,                   /* Draw widget on screen */
     MSG_KEY,                    /* Sent to widgets on key press */
     MSG_HOTKEY,                 /* Sent to widget to catch preprocess key */
@@ -62,32 +65,51 @@ typedef enum
 /* Widget options */
 typedef enum
 {
-    W_DEFAULT = (0 << 0),
-    W_WANT_HOTKEY = (1 << 1),
-    W_WANT_CURSOR = (1 << 2),
-    W_WANT_IDLE = (1 << 3),
-    W_IS_INPUT = (1 << 4),
-    W_DISABLED = (1 << 5)       /* Widget cannot be selected */
+    WOP_DEFAULT = (0 << 0),
+    WOP_WANT_HOTKEY = (1 << 1),
+    WOP_WANT_CURSOR = (1 << 2),
+    WOP_WANT_TAB = (1 << 3),    /* Should the tab key be sent to the dialog? */
+    WOP_IS_INPUT = (1 << 4),
+    WOP_TOP_SELECT = (1 << 5)
 } widget_options_t;
+
+/* Widget state */
+typedef enum
+{
+    WST_DEFAULT = (0 << 0),
+    WST_DISABLED = (1 << 0),    /* Widget cannot be selected */
+    WST_IDLE = (1 << 1),
+    WST_MODAL = (1 << 2),       /* Widget (dialog) is modal */
+
+    WST_CONSTRUCT = (1 << 15),  /* Dialog has been constructed but not run yet */
+    WST_ACTIVE = (1 << 16),     /* Dialog is visible and active */
+    WST_SUSPENDED = (1 << 17),  /* Dialog is suspended */
+    WST_CLOSED = (1 << 18)      /* Dialog is closed */
+} widget_state_t;
 
 /* Flags for widget repositioning on dialog resize */
 typedef enum
 {
-    WPOS_CENTER_HORZ = (1 << 0),        /* center widget in horizontal */
-    WPOS_CENTER_VERT = (1 << 1),        /* center widget in vertical */
-    WPOS_KEEP_LEFT = (1 << 2),  /* keep widget distance to left border of dialog */
-    WPOS_KEEP_RIGHT = (1 << 3), /* keep widget distance to right border of dialog */
-    WPOS_KEEP_TOP = (1 << 4),   /* keep widget distance to top border of dialog */
-    WPOS_KEEP_BOTTOM = (1 << 5),        /* keep widget distance to bottom border of dialog */
+    WPOS_FULLSCREEN = (1 << 0), /* widget occupies the whole screen */
+    WPOS_CENTER_HORZ = (1 << 1),        /* center widget in horizontal */
+    WPOS_CENTER_VERT = (1 << 2),        /* center widget in vertical */
+    WPOS_CENTER = WPOS_CENTER_HORZ | WPOS_CENTER_VERT,  /* center widget */
+    WPOS_TRYUP = (1 << 3),      /* try to move two lines up the widget */
+    WPOS_KEEP_LEFT = (1 << 4),  /* keep widget distance to left border of dialog */
+    WPOS_KEEP_RIGHT = (1 << 5), /* keep widget distance to right border of dialog */
+    WPOS_KEEP_TOP = (1 << 6),   /* keep widget distance to top border of dialog */
+    WPOS_KEEP_BOTTOM = (1 << 7),        /* keep widget distance to bottom border of dialog */
     WPOS_KEEP_HORZ = WPOS_KEEP_LEFT | WPOS_KEEP_RIGHT,
     WPOS_KEEP_VERT = WPOS_KEEP_TOP | WPOS_KEEP_BOTTOM,
     WPOS_KEEP_ALL = WPOS_KEEP_HORZ | WPOS_KEEP_VERT,
     WPOS_KEEP_DEFAULT = WPOS_KEEP_LEFT | WPOS_KEEP_TOP
 } widget_pos_flags_t;
-/* NOTE: if WPOS_CENTER_HORZ flag is used, other horizontal flags (WPOS_KEEP_LEFT, WPOS_KEEP_RIGHT,
- * and WPOS_KEEP_HORZ are ignored).
+/* NOTES:
+ * If WPOS_FULLSCREEN is set then all other position flags are ignored.
+ * If WPOS_CENTER_HORZ flag is used, other horizontal flags (WPOS_KEEP_LEFT, WPOS_KEEP_RIGHT,
+ * and WPOS_KEEP_HORZ) are ignored.
  * If WPOS_CENTER_VERT flag is used, other horizontal flags (WPOS_KEEP_TOP, WPOS_KEEP_BOTTOM,
- * and WPOS_KEEP_VERT are ignored).
+ * and WPOS_KEEP_VERT) are ignored.
  */
 
 /*** structures declarations (and typedefs of structures)*****************************************/
@@ -103,12 +125,12 @@ struct Widget
 {
     int x, y;
     int cols, lines;
-    widget_options_t options;
     widget_pos_flags_t pos_flags;       /* repositioning flags */
+    widget_options_t options;
+    widget_state_t state;
     unsigned int id;            /* Number of the widget, starting with 0 */
     widget_cb_fn callback;
     widget_mouse_cb_fn mouse_callback;
-    void (*set_options) (Widget * w, widget_options_t options, gboolean enable);
     WDialog *owner;
     /* Mouse-related fields. */
     struct
@@ -153,8 +175,8 @@ void widget_init (Widget * w, int y, int x, int lines, int cols,
 /* Default callback for widgets */
 cb_ret_t widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
                                   void *data);
-void widget_default_set_options_callback (Widget * w, widget_options_t options, gboolean enable);
 void widget_set_options (Widget * w, widget_options_t options, gboolean enable);
+gboolean widget_set_state (Widget * w, widget_state_t state, gboolean enable);
 void widget_set_size (Widget * widget, int y, int x, int lines, int cols);
 /* select color for widget in dependance of state */
 void widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey);
@@ -183,6 +205,37 @@ send_message (void *w, void *sender, widget_msg_t msg, int parm, void *data)
         ret = WIDGET (w)->callback (WIDGET (w), WIDGET (sender), msg, parm, data);
 
     return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+  * Check whether one or several option flags are set or not.
+  * @param w widget
+  * @param options widget option flags
+  *
+  * @return TRUE if all requested option flags are set, FALSE otherwise.
+  */
+
+static inline gboolean
+widget_get_options (const Widget * w, widget_options_t options)
+{
+    return ((w->options & options) == options);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+  * Check whether one or several state flags are set or not.
+  * @param w widget
+  * @param state widget state flags
+  *
+  * @return TRUE if all requested state flags are set, FALSE otherwise.
+  */
+
+static inline gboolean
+widget_get_state (const Widget * w, widget_state_t state)
+{
+    return ((w->state & state) == state);
 }
 
 /* --------------------------------------------------------------------------------------------- */

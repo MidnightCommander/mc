@@ -510,8 +510,8 @@ init_layout (void)
     width = max (l1 * 2 + 7, b);
 
     layout_dlg =
-        dlg_create (TRUE, 0, 0, 15, width, dialog_colors, layout_callback, NULL, "[Layout]",
-                    _("Layout"), DLG_CENTER);
+        dlg_create (TRUE, 0, 0, 15, width, WPOS_CENTER, FALSE, dialog_colors, layout_callback, NULL,
+                    "[Layout]", _("Layout"));
 
 #define XTRACT(i) *check_options[i].variable, check_options[i].text
 
@@ -538,21 +538,23 @@ init_layout (void)
 
     /* "Console output" groupbox */
     {
-        const int disabled = mc_global.tty.console_flag != '\0' ? 0 : W_DISABLED;
+        widget_state_t disabled;
         Widget *w;
 
+        disabled = mc_global.tty.console_flag != '\0' ? 0 : WST_DISABLED;
+
         w = WIDGET (groupbox_new (8, 3, 3, l1, title2));
-        w->options |= disabled;
+        w->state |= disabled;
         add_widget (layout_dlg, w);
 
         w = WIDGET (button_new (9, output_lines_label_len + 5, B_PLUS,
                                 NARROW_BUTTON, "&+", bplus_cback));
-        w->options |= disabled;
+        w->state |= disabled;
         add_widget (layout_dlg, w);
 
         w = WIDGET (button_new (9, output_lines_label_len + 5 + 5, B_MINUS,
                                 NARROW_BUTTON, "&-", bminus_cback));
-        w->options |= disabled;
+        w->state |= disabled;
         add_widget (layout_dlg, w);
     }
 

@@ -353,7 +353,7 @@ add_to_list (const char *text, void *data)
 static inline void
 stop_idle (void *data)
 {
-    widget_want_idle (WIDGET (data), FALSE);
+    widget_idle (WIDGET (data), FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -498,7 +498,8 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         if (!(file_pattern_cbox->state & C_BOOL)
             && (in_name->buffer[0] != '\0') && !find_check_regexp (in_name->buffer))
         {
-            h->state = DLG_ACTIVE;      /* Don't stop the dialog */
+            /* Don't stop the dialog */
+            widget_set_state (WIDGET (h), WST_ACTIVE, TRUE);
             message (D_ERROR, MSG_ERROR, _("Malformed regular expression"));
             dlg_select_widget (in_name);
             return MSG_HANDLED;
@@ -508,7 +509,8 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         if ((content_regexp_cbox->state & C_BOOL) && (in_with->buffer[0] != '\0')
             && !find_check_regexp (in_with->buffer))
         {
-            h->state = DLG_ACTIVE;      /* Don't stop the dialog */
+            /* Don't stop the dialog */
+            widget_set_state (WIDGET (h), WST_ACTIVE, TRUE);
             message (D_ERROR, MSG_ERROR, _("Malformed regular expression"));
             dlg_select_widget (in_with);
             return MSG_HANDLED;
@@ -659,8 +661,8 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
         in_start_dir = g_strdup (".");
 
     find_dlg =
-        dlg_create (TRUE, 0, 0, lines, cols, dialog_colors, find_parm_callback, NULL, "[Find File]",
-                    _("Find File"), DLG_CENTER);
+        dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, find_parm_callback,
+                    NULL, "[Find File]", _("Find File"));
 
     x1 = 3;
     x2 = cols / 2 + 1;
@@ -955,7 +957,7 @@ check_find_events (WDialog * h)
             /* dialog terminated */
             return FIND_ABORT;
         }
-        if ((WIDGET (h)->options & W_WANT_IDLE) == 0)
+        if (!widget_get_state (WIDGET (h), WST_IDLE))
         {
             /* searching suspended */
             return FIND_SUSPEND;
@@ -1545,7 +1547,7 @@ start_stop (WButton * button, int action)
     (void) action;
 
     running = is_start;
-    widget_want_idle (WIDGET (find_dlg), running);
+    widget_idle (WIDGET (find_dlg), running);
     is_start = !is_start;
 
     status_update (is_start ? _("Stopped") : _("Searching"));
@@ -1613,8 +1615,8 @@ setup_gui (void)
     cols = COLS - 16;
 
     find_dlg =
-        dlg_create (TRUE, 0, 0, lines, cols, dialog_colors, find_callback, NULL, "[Find File]",
-                    _("Find File"), DLG_CENTER);
+        dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, find_callback, NULL,
+                    "[Find File]", _("Find File"));
 
     find_calc_button_locations (find_dlg, TRUE);
 
@@ -1681,7 +1683,7 @@ run_process (void)
 
     resuming = FALSE;
 
-    widget_want_idle (WIDGET (find_dlg), TRUE);
+    widget_idle (WIDGET (find_dlg), TRUE);
     ret = dlg_run (find_dlg);
 
     mc_search_free (search_file_handle);
@@ -1697,7 +1699,7 @@ run_process (void)
 static void
 kill_gui (void)
 {
-    widget_want_idle (WIDGET (find_dlg), FALSE);
+    widget_idle (WIDGET (find_dlg), FALSE);
     dlg_destroy (find_dlg);
 }
 

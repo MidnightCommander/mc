@@ -759,8 +759,8 @@ init_hotlist (hotlist_t list_type)
     }
 
     hotlist_dlg =
-        dlg_create (TRUE, 0, 0, lines, cols, dialog_colors, hotlist_callback, NULL, help_node,
-                    title, DLG_CENTER);
+        dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, hotlist_callback,
+                    NULL, help_node, title);
 
     y = UY;
     hotlist_group = groupbox_new (y, UX, lines - 10 + dh, cols - 2 * UX, _("Top level group"));
@@ -827,8 +827,8 @@ init_movelist (struct hotlist *item)
     hdr = g_strdup_printf (_("Moving %s"), item->label);
 
     movelist_dlg =
-        dlg_create (TRUE, 0, 0, lines, cols, dialog_colors, hotlist_callback, NULL, "[Hotlist]",
-                    hdr, DLG_CENTER);
+        dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, hotlist_callback,
+                    NULL, "[Hotlist]", hdr);
 
     g_free (hdr);
 

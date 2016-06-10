@@ -63,7 +63,7 @@ create_listbox_window_centered (int center_y, int center_x, int lines, int cols,
 
     int xpos = 0, ypos = 0;
     Listbox *listbox;
-    dlg_flags_t dlg_flags = DLG_TRYUP;
+    widget_pos_flags_t pos_flags = WPOS_TRYUP;
 
     /* Adjust sizes */
     lines = MIN (lines, LINES - 6);
@@ -80,7 +80,7 @@ create_listbox_window_centered (int center_y, int center_x, int lines, int cols,
 
     /* adjust position */
     if ((center_y < 0) || (center_x < 0))
-        dlg_flags |= DLG_CENTER;
+        pos_flags |= WPOS_CENTER;
     else
     {
         /* Actually, this this is not used in MC. */
@@ -105,8 +105,8 @@ create_listbox_window_centered (int center_y, int center_x, int lines, int cols,
     listbox = g_new (Listbox, 1);
 
     listbox->dlg =
-        dlg_create (TRUE, ypos, xpos, lines + space, cols + space,
-                    listbox_colors, NULL, NULL, help, title, dlg_flags);
+        dlg_create (TRUE, ypos, xpos, lines + space, cols + space, pos_flags, FALSE, listbox_colors,
+                    NULL, NULL, help, title);
 
     listbox->list = listbox_new (2, 2, lines, cols, FALSE, NULL);
     add_widget (listbox->dlg, listbox->list);

@@ -340,8 +340,8 @@ do_enter_key (WDialog * h, int f_pos)
         chl_end = FALSE;
 
         chl_dlg =
-            dlg_create (TRUE, lyy, lxx, 13, 17, dialog_colors, chl_callback, NULL,
-                        "[Advanced Chown]", title, DLG_COMPACT);
+            dlg_create (TRUE, lyy, lxx, 13, 17, WPOS_KEEP_DEFAULT, TRUE, dialog_colors,
+                        chl_callback, NULL, "[Advanced Chown]", title);
 
         /* get new listboxes */
         chl_list = listbox_new (1, 1, 11, 15, FALSE, NULL);
@@ -674,8 +674,8 @@ init_chown_advanced (void)
         dlg_h += 2;
 
     ch_dlg =
-        dlg_create (TRUE, 0, 0, dlg_h, dlg_w, dialog_colors, advanced_chown_callback, NULL,
-                    "[Advanced Chown]", _("Chown advanced command"), DLG_CENTER);
+        dlg_create (TRUE, 0, 0, dlg_h, dlg_w, WPOS_CENTER, FALSE, dialog_colors,
+                    advanced_chown_callback, NULL, "[Advanced Chown]", _("Chown advanced command"));
 
 
     l_filename = label_new (2, 3, "");
