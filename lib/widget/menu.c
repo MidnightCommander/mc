@@ -574,6 +574,25 @@ menubar_handle_key (WMenuBar * menubar, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
+menubar_refresh (WMenuBar * menubar)
+{
+    Widget *w = WIDGET (menubar);
+
+    if (!menubar->is_active)
+        return MSG_NOT_HANDLED;
+
+    /* Trick to get all the mouse events */
+    w->lines = LINES;
+
+    /* Trick to get all of the hotkeys */
+    widget_want_hotkey (w, TRUE);
+    menubar_draw (menubar);
+    return MSG_HANDLED;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
 menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WMenuBar *menubar = MENUBAR (w);
@@ -582,16 +601,10 @@ menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
     {
         /* We do not want the focus unless we have been activated */
     case MSG_FOCUS:
-        if (!menubar->is_active)
-            return MSG_NOT_HANDLED;
+        return menubar_refresh (menubar);
 
-        /* Trick to get all the mouse events */
-        w->lines = LINES;
-
-        /* Trick to get all of the hotkeys */
-        widget_want_hotkey (w, TRUE);
-        menubar_draw (menubar);
-        return MSG_HANDLED;
+    case MSG_UNFOCUS:
+        return menubar->is_active ? MSG_NOT_HANDLED : MSG_HANDLED;
 
         /* We don't want the buttonbar to activate while using the menubar */
     case MSG_HOTKEY:
@@ -607,22 +620,17 @@ menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         /* Put the cursor in a suitable place */
         return MSG_NOT_HANDLED;
 
-    case MSG_UNFOCUS:
-        return menubar->is_active ? MSG_NOT_HANDLED : MSG_HANDLED;
-
     case MSG_DRAW:
         if (menubar->is_visible)
-        {
             menubar_draw (menubar);
-            return MSG_HANDLED;
-        }
-        /* fall through */
+        else
+            menubar_refresh (menubar);
+        return MSG_HANDLED;
 
     case MSG_RESIZE:
         /* try show menu after screen resize */
-        send_message (w, sender, MSG_FOCUS, 0, data);
+        menubar_refresh (menubar);
         return MSG_HANDLED;
-
 
     case MSG_DESTROY:
         menubar_set_menu (menubar, NULL);
