@@ -479,7 +479,7 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         return MSG_HANDLED;
 
     case MSG_NOTIFY:
-        if (sender == WIDGET (ignore_dirs_cbox))
+        if (sender == WIDGET (ignore_dirs_cbox) && parm == (int) MSG_FOCUS)
         {
             gboolean disable = !(ignore_dirs_cbox->state & C_BOOL);
 

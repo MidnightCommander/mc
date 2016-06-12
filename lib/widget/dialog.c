@@ -195,17 +195,9 @@ dlg_unfocus (WDialog * h)
     {
         Widget *wh = WIDGET (h);
 
-        if (widget_get_state (wh, WST_CONSTRUCT) || widget_get_state (wh, WST_ACTIVE))
-        {
-            Widget *current = WIDGET (h->current->data);
-
-            if (send_message (current, NULL, MSG_UNFOCUS, 0, NULL) == MSG_HANDLED)
-            {
-                send_message (h, current, MSG_UNFOCUS, 0, NULL);
-                return TRUE;
-            }
-
-        }
+        if ((widget_get_state (wh, WST_CONSTRUCT) || widget_get_state (wh, WST_ACTIVE))
+            && widget_set_state (WIDGET (h->current->data), WST_FOCUSED, FALSE) == MSG_HANDLED)
+            return TRUE;
     }
 
     return FALSE;
@@ -287,7 +279,7 @@ do_select_widget (WDialog * h, GList * w, select_dir_t dir)
     if (widget_overlapped (w0, WIDGET (h->current->data)))
     {
         send_message (h->current->data, NULL, MSG_DRAW, 0, NULL);
-        send_message (h->current->data, NULL, MSG_FOCUS, 0, NULL);
+        widget_set_state (WIDGET (h->current->data), WST_FOCUSED, TRUE);
     }
 }
 
@@ -855,7 +847,7 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
     w->pos_flags = pos_flags;
     w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
 
-    w->state |= WST_CONSTRUCT;
+    w->state |= WST_CONSTRUCT | WST_FOCUSED;
     if (modal)
         w->state |= WST_MODAL;
 
@@ -975,7 +967,7 @@ add_widget_autopos (WDialog * h, void *w, widget_pos_flags_t pos_flags, const vo
     {
         send_message (widget, NULL, MSG_INIT, 0, NULL);
         send_message (widget, NULL, MSG_DRAW, 0, NULL);
-        send_message (widget, NULL, MSG_FOCUS, 0, NULL);
+        widget_set_state (widget, WST_FOCUSED, TRUE);
     }
 
     return widget->id;
@@ -1081,11 +1073,8 @@ dlg_focus (WDialog * h)
 
             if (widget_get_options (current, WOP_SELECTABLE)
                 && !widget_get_state (current, WST_DISABLED)
-                && (send_message (current, NULL, MSG_FOCUS, 0, NULL) == MSG_HANDLED))
-            {
-                send_message (h, current, MSG_FOCUS, 0, NULL);
+                && widget_set_state (current, WST_FOCUSED, TRUE) == MSG_HANDLED)
                 return TRUE;
-            }
         }
     }
 

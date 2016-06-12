@@ -279,7 +279,7 @@ update_mode (WDialog * h)
 {
     print_flags ();
     chown_info_update ();
-    send_message (h->current->data, NULL, MSG_FOCUS, 0, NULL);
+    widget_set_state (WIDGET (h->current->data), WST_FOCUSED, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -546,7 +546,7 @@ advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
             x_toggle ^= (1 << parm);
             update_mode (h);
             dlg_broadcast_msg (h, MSG_DRAW);
-            send_message (h->current->data, NULL, MSG_FOCUS, 0, NULL);
+            widget_set_state (WIDGET (h->current->data), WST_FOCUSED, TRUE);
             break;
 
         case XCTRL ('x'):
@@ -562,7 +562,7 @@ advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
             x_toggle ^= (1 << parm);
             update_mode (h);
             dlg_broadcast_msg (h, MSG_DRAW);
-            send_message (h->current->data, NULL, MSG_FOCUS, 0, NULL);
+            widget_set_state (WIDGET (h->current->data), WST_FOCUSED, TRUE);
             break;
 
         case 'x':

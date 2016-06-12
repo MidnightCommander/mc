@@ -81,6 +81,7 @@ typedef enum
     WST_DISABLED = (1 << 0),    /* Widget cannot be selected */
     WST_IDLE = (1 << 1),
     WST_MODAL = (1 << 2),       /* Widget (dialog) is modal */
+    WST_FOCUSED = (1 << 3),
 
     WST_CONSTRUCT = (1 << 15),  /* Dialog has been constructed but not run yet */
     WST_ACTIVE = (1 << 16),     /* Dialog is visible and active */

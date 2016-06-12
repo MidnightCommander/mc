@@ -84,8 +84,7 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         {
         case ' ':
             r->sel = r->pos;
-            send_message (w, sender, MSG_FOCUS, ' ', data);
-            send_message (w->owner, w, MSG_NOTIFY, 0, NULL);
+            widget_set_state (w, WST_FOCUSED, TRUE);
             return MSG_HANDLED;
 
         case KEY_UP:
@@ -109,9 +108,8 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         }
 
     case MSG_CURSOR:
-        send_message (w, sender, MSG_FOCUS, ' ', data);
         widget_move (r, r->pos, 1);
-        send_message (w->owner, w, MSG_NOTIFY, 0, NULL);
+        widget_set_state (w, WST_FOCUSED, TRUE);
         return MSG_HANDLED;
 
     case MSG_UNFOCUS:
