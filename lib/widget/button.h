@@ -32,7 +32,6 @@ typedef struct WButton
 {
     Widget widget;
     int action;                 /* what to do when pressed */
-    gboolean selected;          /* button state */
 
     button_flags_t flags;       /* button flags */
     hotkey_t text;              /* text of button, contain hotkey too */
