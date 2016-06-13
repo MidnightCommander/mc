@@ -99,7 +99,6 @@ struct WTree
     char search_buffer[MC_MAXFILENAMELEN];      /* Current search string */
     tree_entry **tree_shown;    /* Entries currently on screen */
     int is_panel;               /* panel or plain widget flag */
-    int active;                 /* if it's currently selected */
     int searching;              /* Are we on searching mode? */
     int topdiff;                /* The difference between the topmost
                                    shown and the selected */
@@ -348,7 +347,7 @@ show_tree (WTree * tree)
             continue;
 
         if (tree->is_panel)
-            tty_setcolor (tree->active && current == tree->selected_ptr
+            tty_setcolor (widget_get_state (w, WST_FOCUSED) && current == tree->selected_ptr
                           ? SELECTED_COLOR : NORMAL_COLOR);
         else
             tty_setcolor (current == tree->selected_ptr ? TREE_CURRENTC (h) : TREE_NORMALC (h));
@@ -1156,7 +1155,6 @@ tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
         return MSG_HANDLED;
 
     case MSG_FOCUS:
-        tree->active = 1;
         buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), tree_map, w);
         buttonbar_set_label (b, 2, Q_ ("ButtonBar|Rescan"), tree_map, w);
         buttonbar_set_label (b, 3, Q_ ("ButtonBar|Forget"), tree_map, w);
@@ -1182,7 +1180,6 @@ tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
            selected item */
 
     case MSG_UNFOCUS:
-        tree->active = 0;
         tree->searching = 0;
         show_tree (tree);
         return MSG_HANDLED;
@@ -1227,7 +1224,7 @@ tree_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
             /* return MOU_UNHANDLED */
             event->result.abort = TRUE;
         }
-        else if (!tree->active)
+        else if (!widget_get_state (w, WST_FOCUSED))
             change_panel ();
         break;
 
@@ -1294,7 +1291,6 @@ tree_new (int y, int x, int lines, int cols, gboolean is_panel)
     tree->search_buffer[0] = 0;
     tree->topdiff = w->lines / 2;
     tree->searching = 0;
-    tree->active = 0;
 
     load_tree (tree);
     return tree;
