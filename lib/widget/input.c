@@ -1078,7 +1078,6 @@ input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     case MSG_ACTION:
         return input_execute_cmd (in, parm);
 
-    case MSG_RESIZE:
     case MSG_DRAW:
         input_update (in, FALSE);
         return MSG_HANDLED;
