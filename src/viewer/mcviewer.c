@@ -100,7 +100,7 @@ mcview_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
                 break;
             }
 
-            if (!view->active)
+            if (!widget_get_state (w, WST_FOCUSED))
             {
                 /* Grab focus */
                 change_panel ();
@@ -205,7 +205,6 @@ mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
     view->text_wrap_mode = FALSE;
     view->magic_mode = FALSE;
 
-    view->active = FALSE;
     view->dpy_frame_size = is_panel ? 1 : 0;
     view->converter = str_cnv_from_term;
 

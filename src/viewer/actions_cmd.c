@@ -683,13 +683,8 @@ mcview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
         return i;
 
     case MSG_FOCUS:
-        view->active = TRUE;
         view->dpy_bbar_dirty = TRUE;
         mcview_update (view);
-        return MSG_HANDLED;
-
-    case MSG_UNFOCUS:
-        view->active = FALSE;
         return MSG_HANDLED;
 
     case MSG_DESTROY:
