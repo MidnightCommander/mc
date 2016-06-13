@@ -573,21 +573,20 @@ menubar_handle_key (WMenuBar * menubar, int key)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static cb_ret_t
+static gboolean
 menubar_refresh (WMenuBar * menubar)
 {
     Widget *w = WIDGET (menubar);
 
     if (!menubar->is_active)
-        return MSG_NOT_HANDLED;
+        return FALSE;
 
     /* Trick to get all the mouse events */
     w->lines = LINES;
 
     /* Trick to get all of the hotkeys */
     widget_want_hotkey (w, TRUE);
-    menubar_draw (menubar);
-    return MSG_HANDLED;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -601,7 +600,12 @@ menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
     {
         /* We do not want the focus unless we have been activated */
     case MSG_FOCUS:
-        return menubar_refresh (menubar);
+        if (menubar_refresh (menubar))
+        {
+            menubar_draw (menubar);
+            return MSG_HANDLED;
+        }
+        return MSG_NOT_HANDLED;
 
     case MSG_UNFOCUS:
         return menubar->is_active ? MSG_NOT_HANDLED : MSG_HANDLED;
@@ -621,10 +625,8 @@ menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         return MSG_NOT_HANDLED;
 
     case MSG_DRAW:
-        if (menubar->is_visible)
+        if (menubar->is_visible || menubar_refresh (menubar))
             menubar_draw (menubar);
-        else
-            menubar_refresh (menubar);
         return MSG_HANDLED;
 
     case MSG_RESIZE:
