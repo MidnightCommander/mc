@@ -3683,9 +3683,7 @@ panel_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
         update_xterm_title_path ();
         select_item (panel);
-        show_dir (panel);
         paint_dir (panel);
-        panel->dirty = 0;
 
         bb = find_buttonbar (w->owner);
         midnight_set_buttonbar (bb);
@@ -3696,7 +3694,6 @@ panel_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         /* Janne: look at this for the multiple panel options */
         stop_search (panel);
         panel->active = 0;
-        show_dir (panel);
         unselect_item (panel);
         return MSG_HANDLED;
 

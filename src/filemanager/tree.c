@@ -973,10 +973,15 @@ tree_start_search (WTree * tree)
 static void
 tree_toggle_navig (WTree * tree)
 {
+    WButtonBar *b;
+
     tree_navigation_flag = !tree_navigation_flag;
-    buttonbar_set_label (find_buttonbar (WIDGET (tree)->owner), 4,
-                         tree_navigation_flag ? Q_ ("ButtonBar|Static")
-                         : Q_ ("ButtonBar|Dynamc"), tree_map, WIDGET (tree));
+
+    b = find_buttonbar (WIDGET (tree)->owner);
+    buttonbar_set_label (b, 4,
+                         tree_navigation_flag ? Q_ ("ButtonBar|Static") : Q_ ("ButtonBar|Dynamc"),
+                         tree_map, WIDGET (tree));
+    widget_redraw (WIDGET (b));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1145,16 +1150,22 @@ tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
 {
     WTree *tree = (WTree *) w;
     WDialog *h = w->owner;
-    WButtonBar *b = find_buttonbar (h);
+    WButtonBar *b;
 
     switch (msg)
     {
     case MSG_DRAW:
         tree_frame (h, tree);
         show_tree (tree);
+        if (widget_get_state (w, WST_FOCUSED))
+        {
+            b = find_buttonbar (h);
+            widget_redraw (WIDGET (b));
+        }
         return MSG_HANDLED;
 
     case MSG_FOCUS:
+        b = find_buttonbar (h);
         buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), tree_map, w);
         buttonbar_set_label (b, 2, Q_ ("ButtonBar|Rescan"), tree_map, w);
         buttonbar_set_label (b, 3, Q_ ("ButtonBar|Forget"), tree_map, w);
@@ -1166,22 +1177,14 @@ tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
         /* FIXME: mkdir is currently defunct */
         buttonbar_set_label (b, 7, Q_ ("ButtonBar|Mkdir"), tree_map, w);
 #else
-        buttonbar_clear_label (b, 7, WIDGET (tree));
+        buttonbar_clear_label (b, 7, w);
 #endif
         buttonbar_set_label (b, 8, Q_ ("ButtonBar|Rmdir"), tree_map, w);
-        widget_redraw (WIDGET (b));
 
-        /* FIXME: Should find a better way of only displaying the
-           currently selected item */
-        show_tree (tree);
         return MSG_HANDLED;
-
-        /* FIXME: Should find a better way of changing the color of the
-           selected item */
 
     case MSG_UNFOCUS:
         tree->searching = 0;
-        show_tree (tree);
         return MSG_HANDLED;
 
     case MSG_KEY:

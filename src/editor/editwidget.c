@@ -936,16 +936,11 @@ edit_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
     {
     case MSG_FOCUS:
         edit_set_buttonbar (e, find_buttonbar (w->owner));
-        /* fall through */
+        return MSG_HANDLED;
 
     case MSG_DRAW:
         e->force |= REDRAW_COMPLETELY;
         edit_update_screen (e);
-        return MSG_HANDLED;
-
-    case MSG_UNFOCUS:
-        /* redraw frame and status */
-        edit_status (e, FALSE);
         return MSG_HANDLED;
 
     case MSG_KEY:
@@ -1296,7 +1291,7 @@ edit_update_screen (WEdit * e)
 
     edit_scroll_screen_over_cursor (e);
     edit_update_curs_col (e);
-    edit_status (e, (void *) e == h->current->data);
+    edit_status (e, widget_get_state (WIDGET (e), WST_FOCUSED));
 
     /* pop all events for this window for internal handling */
     if (!is_idle ())
@@ -1359,6 +1354,7 @@ edit_add_window (WDialog * h, int y, int x, int lines, int cols, const vfs_path_
     w->mouse_callback = edit_mouse_callback;
 
     add_widget (h, w);
+    edit_set_buttonbar (edit, find_buttonbar (h));
     dlg_redraw (h);
 
     return TRUE;

@@ -482,8 +482,6 @@ listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         widget_move (l, l->cursor_y, 0);
         return MSG_HANDLED;
 
-    case MSG_FOCUS:
-    case MSG_UNFOCUS:
     case MSG_DRAW:
         listbox_draw (l, widget_get_state (w, WST_FOCUSED));
         return MSG_HANDLED;

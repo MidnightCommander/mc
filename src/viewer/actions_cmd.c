@@ -684,6 +684,7 @@ mcview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
 
     case MSG_FOCUS:
         view->dpy_bbar_dirty = TRUE;
+        /* TODO: get rid of draw here before MSG_DRAW */
         mcview_update (view);
         return MSG_HANDLED;
 

@@ -83,14 +83,17 @@ check_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         widget_move (w, 0, 1);
         return MSG_HANDLED;
 
-    case MSG_FOCUS:
-    case MSG_UNFOCUS:
     case MSG_DRAW:
-        widget_selectcolor (w, msg == MSG_FOCUS, FALSE);
-        widget_move (w, 0, 0);
-        tty_print_string ((c->state & C_BOOL) ? "[x] " : "[ ] ");
-        hotkey_draw (w, c->text, msg == MSG_FOCUS);
-        return MSG_HANDLED;
+        {
+            gboolean focused;
+
+            focused = widget_get_state (w, WST_FOCUSED);
+            widget_selectcolor (w, focused, FALSE);
+            widget_move (w, 0, 0);
+            tty_print_string ((c->state & C_BOOL) ? "[x] " : "[ ] ");
+            hotkey_draw (w, c->text, focused);
+            return MSG_HANDLED;
+        }
 
     case MSG_DESTROY:
         release_hotkey (c->text);

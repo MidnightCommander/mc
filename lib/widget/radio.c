@@ -108,24 +108,27 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         }
 
     case MSG_CURSOR:
-        widget_move (r, r->pos, 1);
         widget_set_state (w, WST_FOCUSED, TRUE);
+        widget_move (r, r->pos, 1);
         return MSG_HANDLED;
 
-    case MSG_UNFOCUS:
-    case MSG_FOCUS:
     case MSG_DRAW:
-        for (i = 0; i < r->count; i++)
         {
-            const gboolean focused = (i == r->pos && msg == MSG_FOCUS);
+            gboolean focused;
 
-            widget_selectcolor (w, focused, FALSE);
-            widget_move (r, i, 0);
-            tty_draw_hline (w->y + i, w->x, ' ', w->cols);
-            tty_print_string ((r->sel == i) ? "(*) " : "( ) ");
-            hotkey_draw (w, r->texts[i], focused);
+            focused = widget_get_state (w, WST_FOCUSED);
+
+            for (i = 0; i < r->count; i++)
+            {
+                widget_selectcolor (w, i == r->pos && focused, FALSE);
+                widget_move (w, i, 0);
+                tty_draw_hline (w->y + i, w->x, ' ', w->cols);
+                tty_print_string ((r->sel == i) ? "(*) " : "( ) ");
+                hotkey_draw (w, r->texts[i], i == r->pos && focused);
+            }
+
+            return MSG_HANDLED;
         }
-        return MSG_HANDLED;
 
     case MSG_DESTROY:
         for (i = 0; i < r->count; i++)

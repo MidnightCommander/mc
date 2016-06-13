@@ -277,10 +277,7 @@ do_select_widget (WDialog * h, GList * w, select_dir_t dir)
         dlg_reorder_widgets (h->current, TRUE);
 
     if (widget_overlapped (w0, WIDGET (h->current->data)))
-    {
-        send_message (h->current->data, NULL, MSG_DRAW, 0, NULL);
         widget_set_state (WIDGET (h->current->data), WST_FOCUSED, TRUE);
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -966,7 +963,6 @@ add_widget_autopos (WDialog * h, void *w, widget_pos_flags_t pos_flags, const vo
     if (widget_get_state (wh, WST_ACTIVE))
     {
         send_message (widget, NULL, MSG_INIT, 0, NULL);
-        send_message (widget, NULL, MSG_DRAW, 0, NULL);
         widget_set_state (widget, WST_FOCUSED, TRUE);
     }
 

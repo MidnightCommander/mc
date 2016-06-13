@@ -117,8 +117,6 @@ button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
         widget_move (w, 0, b->hotpos + off);
         return MSG_HANDLED;
 
-    case MSG_UNFOCUS:
-    case MSG_FOCUS:
     case MSG_DRAW:
         {
             gboolean focused;
