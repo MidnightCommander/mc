@@ -162,6 +162,12 @@ void do_refresh (void);
 /* Used in load_prompt() */
 void update_cursor (WDialog * h);
 
+void dlg_set_current_widget_next (WDialog * h);
+void dlg_set_current_widget_prev (WDialog * h);
+
+GList *dlg_get_widget_next_of (GList * w);
+GList *dlg_get_widget_prev_of (GList * w);
+
 /* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
