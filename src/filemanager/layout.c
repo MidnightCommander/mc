@@ -651,6 +651,8 @@ layout_box (void)
         for (i = 0; i < (size_t) LAYOUT_OPTIONS_COUNT; i++)
             if (check_options[i].widget != NULL)
                 *check_options[i].variable = check_options[i].widget->state & C_BOOL;
+
+        output_lines = _output_lines;
     }
     else
     {
