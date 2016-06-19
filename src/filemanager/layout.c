@@ -659,7 +659,7 @@ layout_box (void)
         /* restore layout */
         panels_layout = old_layout;
         output_lines = old_output_lines;
-        update_split (layout_dlg);
+        check_split (&panels_layout);   /* FIXME: is it really needed? */
     }
 
     dlg_destroy (layout_dlg);
