@@ -746,6 +746,7 @@ tree_move (WTree * tree, const char *default_dest)
     struct stat buf;
     file_op_context_t *ctx;
     file_op_total_context_t *tctx;
+    vfs_path_t *dest_vpath = NULL;
 
     if (tree->selected_ptr == NULL)
         return;
@@ -759,7 +760,9 @@ tree_move (WTree * tree, const char *default_dest)
     if (dest == NULL || *dest == '\0')
         goto ret;
 
-    if (stat (dest, &buf))
+    dest_vpath = vfs_path_from_str (dest);
+
+    if (mc_stat (dest_vpath, &buf))
     {
         message (D_ERROR, MSG_ERROR, _("Cannot stat the destination\n%s"),
                  unix_error_string (errno));
@@ -780,6 +783,7 @@ tree_move (WTree * tree, const char *default_dest)
     file_op_context_destroy (ctx);
 
   ret:
+    vfs_path_free (dest_vpath);
     g_free (dest);
 }
 
