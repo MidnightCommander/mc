@@ -198,7 +198,7 @@ menubar_draw_drop (WMenuBar * menubar)
 static void
 menubar_set_color (WMenuBar * menubar, gboolean current, gboolean hotkey)
 {
-    if (!menubar->is_active)
+    if (!widget_get_state (WIDGET (menubar), WST_FOCUSED))
         tty_setcolor (MENU_INACTIVE_COLOR);
     else if (current)
         tty_setcolor (hotkey ? MENU_HOTSEL_COLOR : MENU_SELECTED_COLOR);
@@ -215,7 +215,7 @@ menubar_draw (WMenuBar * menubar)
     GList *i;
 
     /* First draw the complete menubar */
-    tty_setcolor (menubar->is_active ? MENU_ENTRY_COLOR : MENU_INACTIVE_COLOR);
+    tty_setcolor (widget_get_state (w, WST_FOCUSED) ? MENU_ENTRY_COLOR : MENU_INACTIVE_COLOR);
     tty_draw_hline (w->y, w->x, ' ', w->cols);
 
     /* Now each one of the entries */
@@ -304,8 +304,8 @@ menubar_finish (WMenuBar * menubar)
 {
     Widget *w = WIDGET (menubar);
 
+    widget_set_state (w, WST_FOCUSED, FALSE);
     menubar->is_dropped = FALSE;
-    menubar->is_active = FALSE;
     w->lines = 1;
     widget_want_hotkey (w, FALSE);
     widget_set_options (w, WOP_SELECTABLE, FALSE);
@@ -578,7 +578,7 @@ menubar_refresh (WMenuBar * menubar)
 {
     Widget *w = WIDGET (menubar);
 
-    if (!menubar->is_active)
+    if (!widget_get_state (w, WST_FOCUSED))
         return FALSE;
 
     /* Trick to get all the mouse events */
@@ -587,6 +587,15 @@ menubar_refresh (WMenuBar * menubar)
     /* Trick to get all of the hotkeys */
     widget_want_hotkey (w, TRUE);
     return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+menubar_free_menu (WMenuBar * menubar)
+{
+    if (menubar->menu != NULL)
+        g_list_free_full (menubar->menu, (GDestroyNotify) destroy_menu);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -608,12 +617,12 @@ menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         return MSG_NOT_HANDLED;
 
     case MSG_UNFOCUS:
-        return menubar->is_active ? MSG_NOT_HANDLED : MSG_HANDLED;
+        return widget_get_state (w, WST_FOCUSED) ? MSG_NOT_HANDLED : MSG_HANDLED;
 
         /* We don't want the buttonbar to activate while using the menubar */
     case MSG_HOTKEY:
     case MSG_KEY:
-        if (menubar->is_active)
+        if (widget_get_state (w, WST_FOCUSED))
         {
             menubar_handle_key (menubar, parm);
             return MSG_HANDLED;
@@ -635,7 +644,7 @@ menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         return MSG_HANDLED;
 
     case MSG_DESTROY:
-        menubar_set_menu (menubar, NULL);
+        menubar_free_menu (menubar);
         return MSG_HANDLED;
 
     default:
@@ -795,7 +804,7 @@ menubar_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     case MSG_MOUSE_SCROLL_DOWN:
         was_drag = FALSE;
 
-        if (menubar->is_active)
+        if (widget_get_state (w, WST_FOCUSED))
         {
             if (event->y == 0)
             {
@@ -918,15 +927,13 @@ void
 menubar_set_menu (WMenuBar * menubar, GList * menu)
 {
     /* delete previous menu */
-    if (menubar->menu != NULL)
-        g_list_free_full (menubar->menu, (GDestroyNotify) destroy_menu);
-
+    menubar_free_menu (menubar);
     /* add new menu */
-    menubar->is_active = FALSE;
     menubar->is_dropped = FALSE;
     menubar->menu = menu;
     menubar->selected = 0;
     menubar_arrange (menubar);
+    widget_set_state (WIDGET (menubar), WST_FOCUSED, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1018,11 +1025,11 @@ menubar_activate (WMenuBar * menubar, gboolean dropped, int which)
 {
     Widget *w = WIDGET (menubar);
 
-    if (!menubar->is_active)
+    if (!widget_get_state (w, WST_FOCUSED))
     {
         widget_set_options (w, WOP_SELECTABLE, TRUE);
 
-        menubar->is_active = TRUE;
+        widget_set_state (w, WST_FOCUSED, TRUE);         /* FIXME: unneeded? */
         menubar->is_dropped = dropped;
         if (which >= 0)
             menubar->selected = (guint) which;

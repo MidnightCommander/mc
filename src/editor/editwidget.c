@@ -880,7 +880,7 @@ edit_dialog_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 
         b = find_menubar (h);
 
-        if (!b->is_active)
+        if (!widget_get_state (WIDGET (b), WST_FOCUSED))
         {
             /* menubar */
 

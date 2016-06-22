@@ -31,7 +31,6 @@ typedef struct WMenuBar
     Widget widget;
 
     gboolean is_visible;        /* If the menubar is visible */
-    gboolean is_active;         /* If the menubar is in use */
     gboolean is_dropped;        /* If the menubar has dropped */
     GList *menu;                /* The actual menus */
     guint selected;             /* Selected menu on the top bar */
