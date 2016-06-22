@@ -3184,6 +3184,11 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 goto clean_up;
         }
 
+        /* TODO: the good way is required to skip directories scanning in case of rename/move
+         * of several directories. Since reqular expression can be used for destination,
+         * some directory movements can be a cross-filesystem and directory scanning is useful
+         * for those directories only. */
+
         if (panel_operate_init_totals (panel, NULL, NULL, ctx, dialog_type) == FILE_CONT)
         {
             /* Loop for every file, perform the actual copy operation */
