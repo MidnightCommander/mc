@@ -739,21 +739,25 @@ setup_panels (void)
     check_split (&panels_layout);
     start_y = menubar_visible;
 
-    /* The column computing is deferred until panel_do_cols */
+    /* update columns first... */
+    panel_do_cols (0);
+    panel_do_cols (1);
+
+    /* ...then rows and origin */
     if (panels_layout.horizontal_split)
     {
-        widget_set_size (panels[0].widget, start_y, 0, panels_layout.top_panel_size, 0);
+        widget_set_size (panels[0].widget, start_y, 0, panels_layout.top_panel_size,
+                         panels[0].widget->cols);
         widget_set_size (panels[1].widget, start_y + panels_layout.top_panel_size, 0,
-                         height - panels_layout.top_panel_size, 0);
+                         height - panels_layout.top_panel_size, panels[1].widget->cols);
     }
     else
     {
-        widget_set_size (panels[0].widget, start_y, 0, height, 0);
-        widget_set_size (panels[1].widget, start_y, panels_layout.left_panel_size, height, 0);
+        widget_set_size (panels[0].widget, start_y, 0, height, panels[0].widget->cols);
+        widget_set_size (panels[1].widget, start_y, panels_layout.left_panel_size, height,
+                         panels[1].widget->cols);
     }
 
-    panel_do_cols (0);
-    panel_do_cols (1);
 
     widget_set_size (WIDGET (the_menubar), 0, 0, 1, COLS);
 
