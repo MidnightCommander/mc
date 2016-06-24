@@ -55,6 +55,7 @@ extern panels_layout_t panels_layout;
 /*** declarations of public functions ************************************************************/
 void layout_change (void);
 void layout_box (void);
+void panel_update_cols (Widget * widget, panel_display_t frame_size);
 void setup_panels (void);
 void panels_split_equal (void);
 void panels_split_more (void);

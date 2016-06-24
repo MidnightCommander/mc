@@ -4488,45 +4488,6 @@ set_panel_formats (WPanel * p)
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
-panel_update_cols (Widget * widget, panel_display_t frame_size)
-{
-    int cols, origin;
-
-    /* don't touch panel if it is not in dialog yet */
-    /* if panel is not in dialog it is not in widgets list
-       and cannot be compared with get_panel_widget() result */
-    if (widget->owner == NULL)
-        return;
-
-    if (panels_layout.horizontal_split)
-    {
-        widget->cols = COLS;
-        return;
-    }
-
-    if (frame_size == frame_full)
-    {
-        cols = COLS;
-        origin = 0;
-    }
-    else if (widget == get_panel_widget (0))
-    {
-        cols = panels_layout.left_panel_size;
-        origin = 0;
-    }
-    else
-    {
-        cols = COLS - panels_layout.left_panel_size;
-        origin = panels_layout.left_panel_size;
-    }
-
-    widget->cols = cols;
-    widget->x = origin;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 /* Select current item and readjust the panel */
 void
 select_item (WPanel * panel)
