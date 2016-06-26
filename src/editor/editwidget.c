@@ -485,11 +485,9 @@ edit_dialog_command_execute (WDialog * h, long command)
         break;
     case CK_WindowNext:
         dlg_one_down (h);
-        dlg_select_widget (h->current->data);
         break;
     case CK_WindowPrev:
         dlg_one_up (h);
-        dlg_select_widget (h->current->data);
         break;
     case CK_Options:
         edit_options_dialog (h);

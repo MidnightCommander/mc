@@ -260,6 +260,12 @@ do_select_widget (WDialog * h, GList * w, select_dir_t dir)
         send_message (h->current->data, NULL, MSG_DRAW, 0, NULL);
         send_message (h->current->data, NULL, MSG_FOCUS, 0, NULL);
     }
+
+    if (widget_get_options (WIDGET (h->current->data), WOP_TOP_SELECT))
+    {
+        h->widgets = g_list_remove_link (h->widgets, h->current);
+        h->widgets = g_list_concat (h->widgets, h->current);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1145,10 +1151,7 @@ dlg_select_widget (void *w)
     Widget *widget = WIDGET (w);
     WDialog *h = widget->owner;
 
-    if (widget_get_options (widget, WOP_TOP_SELECT))
-        dlg_set_top_or_bottom_widget (w, TRUE);
-    else
-        do_select_widget (h, g_list_find (h->widgets, widget), SELECT_EXACT);
+    do_select_widget (h, g_list_find (h->widgets, widget), SELECT_EXACT);
 }
 
 /* --------------------------------------------------------------------------------------------- */
