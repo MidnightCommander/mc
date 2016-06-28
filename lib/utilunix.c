@@ -510,7 +510,7 @@ mc_pipe_t *
 mc_popen (const char *command, GError ** error)
 {
     mc_pipe_t *p;
-    const char *const argv[] = { "/bin/sh", "sh", "-c", command, "\0" };
+    const char *const argv[] = { "/bin/sh", "sh", "-c", command, NULL };
 
     p = g_try_new (mc_pipe_t, 1);
     if (p == NULL)
