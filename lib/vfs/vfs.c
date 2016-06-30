@@ -203,6 +203,19 @@ vfs_get_openfile (int handle)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+vfs_test_current_dir (const vfs_path_t * vpath)
+{
+    struct stat my_stat, my_stat2;
+
+    return (mc_global.vfs.cd_symlinks && mc_stat (vpath, &my_stat) == 0
+            && mc_stat (vfs_get_raw_current_dir (), &my_stat2) == 0
+            && my_stat.st_ino == my_stat2.st_ino && my_stat.st_dev == my_stat2.st_dev);
+}
+
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /** Free open file data for given file handle */
@@ -554,12 +567,7 @@ vfs_setup_cwd (void)
 
         if (tmp_vpath != NULL)
         {
-            struct stat my_stat, my_stat2;
-
-            if (mc_global.vfs.cd_symlinks
-                && mc_stat (tmp_vpath, &my_stat) == 0
-                && mc_stat (vfs_get_raw_current_dir (), &my_stat2) == 0
-                && my_stat.st_ino == my_stat2.st_ino && my_stat.st_dev == my_stat2.st_dev)
+            if (vfs_test_current_dir (tmp_vpath))
                 vfs_set_raw_current_dir (tmp_vpath);
             else
                 vfs_path_free (tmp_vpath);
@@ -575,14 +583,11 @@ vfs_setup_cwd (void)
         g_free (current_dir);
 
         if (tmp_vpath != NULL)
-        {                       /* One of the directories in the path is not readable */
-            struct stat my_stat, my_stat2;
+        {
+            /* One of directories in the path is not readable */
 
             /* Check if it is O.K. to use the current_dir */
-            if (!(mc_global.vfs.cd_symlinks
-                  && mc_stat (tmp_vpath, &my_stat) == 0
-                  && mc_stat (vfs_get_raw_current_dir (), &my_stat2) == 0
-                  && my_stat.st_ino == my_stat2.st_ino && my_stat.st_dev == my_stat2.st_dev))
+            if (!vfs_test_current_dir (tmp_vpath))
                 vfs_set_raw_current_dir (tmp_vpath);
             else
                 vfs_path_free (tmp_vpath);
