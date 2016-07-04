@@ -651,13 +651,15 @@ layout_box (void)
         for (i = 0; i < (size_t) LAYOUT_OPTIONS_COUNT; i++)
             if (check_options[i].widget != NULL)
                 *check_options[i].variable = check_options[i].widget->state & C_BOOL;
+
+        output_lines = _output_lines;
     }
     else
     {
         /* restore layout */
         panels_layout = old_layout;
         output_lines = old_output_lines;
-        update_split (layout_dlg);
+        check_split (&panels_layout);   /* FIXME: is it really needed? */
     }
 
     dlg_destroy (layout_dlg);
