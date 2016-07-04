@@ -88,7 +88,6 @@ typedef int (*select_fn) (int fd, void *info);
 /* Channel manipulation */
 void add_select_channel (int fd, select_fn callback, void *info);
 void delete_select_channel (int fd);
-void remove_select_channel (int fd);
 
 /* Activate/deactivate the channel checking */
 void channels_up (void);
