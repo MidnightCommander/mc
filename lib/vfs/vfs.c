@@ -321,24 +321,24 @@ vfs_register_class (struct vfs_class * vfs)
 char *
 vfs_strip_suffix_from_filename (const char *filename)
 {
-    char *semi, *p, *vfs_prefix;
+    char *semi, *p;
 
     if (filename == NULL)
         vfs_die ("vfs_strip_suffix_from_path got NULL: impossible");
 
     p = g_strdup (filename);
     semi = g_strrstr (p, VFS_PATH_URL_DELIMITER);
-    if (semi == NULL)
-        return p;
-
-    *semi = '\0';
-    vfs_prefix = strrchr (p, PATH_SEP);
-    if (vfs_prefix == NULL)
+    if (semi != NULL)
     {
-        *semi = *VFS_PATH_URL_DELIMITER;
-        return p;
+        char *vfs_prefix;
+
+        *semi = '\0';
+        vfs_prefix = strrchr (p, PATH_SEP);
+        if (vfs_prefix == NULL)
+            *semi = *VFS_PATH_URL_DELIMITER;
+        else
+            *vfs_prefix = '\0';
     }
-    *vfs_prefix = '\0';
 
     return p;
 }
