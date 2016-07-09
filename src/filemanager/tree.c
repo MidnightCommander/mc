@@ -1280,6 +1280,7 @@ tree_new (int y, int x, int lines, int cols, gboolean is_panel)
     w = WIDGET (tree);
 
     widget_init (w, y, x, lines, cols, tree_callback, tree_mouse_callback);
+    widget_set_options (w, WOP_TOP_SELECT, TRUE);
     tree->is_panel = is_panel;
     tree->selected_ptr = 0;
 

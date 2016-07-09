@@ -214,6 +214,23 @@ dlg_find_widget_callback (const void *a, const void *b)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Put widget on top or bottom of Z-order.
+ */
+static void
+dlg_reorder_widgets (GList * l, gboolean set_top)
+{
+    WDialog *h = WIDGET (l->data)->owner;
+
+    h->widgets = g_list_remove_link (h->widgets, l);
+    if (set_top)
+        h->widgets = g_list_concat (h->widgets, l);
+    else
+        h->widgets = g_list_concat (l, h->widgets);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /**
  * Try to select another widget.  If forward is set, follow tab order.
  * Otherwise go to the previous widget.
@@ -254,6 +271,9 @@ do_select_widget (WDialog * h, GList * w, select_dir_t dir)
         }
     }
     while (h->current != w);
+
+    if (widget_get_options (WIDGET (h->current->data), WOP_TOP_SELECT))
+        dlg_reorder_widgets (h->current, TRUE);
 
     if (widget_overlapped (w0, WIDGET (h->current->data)))
     {
@@ -608,31 +628,6 @@ dlg_find_widget_by_id (gconstpointer a, gconstpointer b)
     unsigned long id = GPOINTER_TO_UINT (b);
 
     return w->id == id ? 0 : 1;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-dlg_set_top_or_bottom_widget (void *w, gboolean set_top)
-{
-    Widget *widget = WIDGET (w);
-    WDialog *h = widget->owner;
-    GList *l;
-
-    l = g_list_find (h->widgets, w);
-    if (l == NULL)
-        abort ();               /* widget is not in dialog, this should not happen */
-
-    /* unfocus prevoius widget and focus current one before widget reordering */
-    if (set_top && widget_get_state (WIDGET (h), WST_ACTIVE))
-        do_select_widget (h, l, SELECT_EXACT);
-
-    /* widget reordering */
-    h->widgets = g_list_remove_link (h->widgets, l);
-    if (set_top)
-        h->widgets = g_list_concat (h->widgets, l);
-    else
-        h->widgets = g_list_concat (l, h->widgets);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1145,10 +1140,7 @@ dlg_select_widget (void *w)
     Widget *widget = WIDGET (w);
     WDialog *h = widget->owner;
 
-    if (widget_get_options (widget, WOP_TOP_SELECT))
-        dlg_set_top_or_bottom_widget (w, TRUE);
-    else
-        do_select_widget (h, g_list_find (h->widgets, widget), SELECT_EXACT);
+    do_select_widget (h, g_list_find (h->widgets, widget), SELECT_EXACT);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1159,7 +1151,10 @@ dlg_select_widget (void *w)
 void
 dlg_set_bottom_widget (void *w)
 {
-    dlg_set_top_or_bottom_widget (w, FALSE);
+    Widget *widget = WIDGET (w);
+    WDialog *h = widget->owner;
+
+    dlg_reorder_widgets (g_list_find (h->widgets, widget), FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
