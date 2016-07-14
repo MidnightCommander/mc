@@ -124,7 +124,7 @@ include properties.syntax
 file ..\*\\.(cs|CS)$ C\#\sProgram
 include cs.syntax
 
-file ..\*\\.(js|JS)$ JavaScript\sProgram
+file ..\*\\.(js|JS)$ JavaScript\sProgram ^#!.\*[\s/](node|nodejs)\\b
 include js.syntax
 
 file ..\*\\.(as|AS)$ ActionScript\sProgram
