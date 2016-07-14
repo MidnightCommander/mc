@@ -3970,23 +3970,11 @@ reload_panelized (WPanel * panel)
     {
         vfs_path_t *vpath;
 
-        if (list->list[i].f.marked)
-        {
-            /* Unmark the file in advance. In case the following mc_lstat
-             * fails we are done, else we have to mark the file again
-             * (Note: do_file_mark depends on a valid "list->list [i].buf").
-             * IMO that's the best way to update the panel's summary status
-             * -- Norbert
-             */
-            do_file_mark (panel, i, 0);
-        }
         vpath = vfs_path_from_str (list->list[i].fname);
         if (mc_lstat (vpath, &list->list[i].st) != 0)
             g_free (list->list[i].fname);
         else
         {
-            if (list->list[i].f.marked)
-                do_file_mark (panel, i, 1);
             if (j != i)
                 list->list[j] = list->list[i];
             j++;
@@ -3997,6 +3985,8 @@ reload_panelized (WPanel * panel)
         dir_list_init (list);
     else
         list->len = j;
+
+    recalculate_panel_summary (panel);
 
     if (panel != current_panel)
         (void) mc_chdir (current_panel->cwd_vpath);
