@@ -99,13 +99,6 @@ int option_drop_selection_on_copy = 1;
 
 #define TEMP_BUF_LEN 1024
 
-#define INPUT_INDEX 9
-
-/* thanks to  Liviu Daia <daia@stoilow.imar.ro>  for getting this
-   (and the above) routines to work properly - paul */
-
-#define is_digit(x) ((x) >= '0' && (x) <= '9')
-
 #define MAX_WORD_COMPLETIONS 100        /* in listbox */
 
 /*** file scope type declarations ****************************************************************/

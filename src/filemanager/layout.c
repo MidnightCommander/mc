@@ -1140,10 +1140,6 @@ swap_panels (void)
         WPanel panel;
 
 #define panelswap(x) panel.x = panel1->x; panel1->x = panel2->x; panel2->x = panel.x;
-
-#define panelswapstr(e) strcpy (panel.e, panel1->e); \
-                        strcpy (panel1->e, panel2->e); \
-                        strcpy (panel2->e, panel.e);
         /* Change content and related stuff */
         panelswap (dir);
         panelswap (active);
@@ -1156,7 +1152,6 @@ swap_panels (void)
         panelswap (selected);
         panelswap (is_panelized);
         panelswap (dir_stat);
-#undef panelswapstr
 #undef panelswap
 
         panel1->searching = FALSE;

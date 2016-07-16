@@ -74,13 +74,6 @@ int option_auto_syntax = 1;
 /* bytes */
 #define SYNTAX_MARKER_DENSITY 512
 
-#define TRANSIENT_WORD_TIME_OUT 60
-
-#define UNKNOWN_FORMAT "unknown"
-
-#define MAX_WORDS_PER_CONTEXT   1024
-#define MAX_CONTEXTS            128
-
 #define RULE_ON_LEFT_BORDER 1
 #define RULE_ON_RIGHT_BORDER 2
 

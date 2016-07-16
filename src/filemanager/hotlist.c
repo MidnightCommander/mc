@@ -71,10 +71,6 @@
 #define UX 3
 #define UY 2
 
-#define BX UX
-#define BY (LINES - 6)
-
-#define LABELS          3
 #define B_ADD_CURRENT   B_USER
 #define B_REMOVE        (B_USER + 1)
 #define B_NEW_GROUP     (B_USER + 2)

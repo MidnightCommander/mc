@@ -79,8 +79,6 @@ vfs_class *current_vfs = NULL;
 
 #define VFS_FIRST_HANDLE 100
 
-#define ISSLASH(a) (a == '\0' || IS_PATH_SEP (a))
-
 /*** file scope type declarations ****************************************************************/
 
 struct vfs_openfile

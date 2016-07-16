@@ -71,7 +71,6 @@ extern char **environ;
 #endif /* DO_CMPLETION_DEBUG */
 
 #define whitespace(c) ((c) == ' ' || (c) == '\t')
-#define cr_whitespace(c) (whitespace (c) || (c) == '\n' || (c) == '\r')
 
 #define DO_INSERTION 1
 #define DO_QUERY     2
