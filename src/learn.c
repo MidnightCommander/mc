@@ -213,10 +213,10 @@ learn_check_key (int c)
     case 'l':
         return learn_move (TRUE);
     case 'j':
-        dlg_one_down (learn_dlg);
+        dlg_select_next_widget (learn_dlg);
         return TRUE;
     case 'k':
-        dlg_one_up (learn_dlg);
+        dlg_select_prev_widget (learn_dlg);
         return TRUE;
     default:
         break;

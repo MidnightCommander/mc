@@ -312,11 +312,11 @@ dlg_execute_cmd (WDialog * h, long command)
 
     case CK_Up:
     case CK_Left:
-        dlg_one_up (h);
+        dlg_select_prev_widget (h);
         break;
     case CK_Down:
     case CK_Right:
-        dlg_one_down (h);
+        dlg_select_next_widget (h);
         break;
 
     case CK_Help:
@@ -531,12 +531,12 @@ dlg_key_event (WDialog * h, int d_key)
     {
         if (d_key == '\t')
         {
-            dlg_one_down (h);
+            dlg_select_next_widget (h);
             return;
         }
         else if ((d_key & ~(KEY_M_SHIFT | KEY_M_CTRL)) == '\t')
         {
-            dlg_one_up (h);
+            dlg_select_prev_widget (h);
             return;
         }
     }
@@ -1145,7 +1145,7 @@ dlg_set_bottom_widget (void *w)
 /** Try to select previous widget in the tab order */
 
 void
-dlg_one_up (WDialog * h)
+dlg_select_prev_widget (WDialog * h)
 {
     if (h->widgets != NULL)
         do_select_widget (h, dlg_get_widget_prev_of (h->current), SELECT_PREV);
@@ -1155,7 +1155,7 @@ dlg_one_up (WDialog * h)
 /** Try to select next widget in the tab order */
 
 void
-dlg_one_down (WDialog * h)
+dlg_select_next_widget (WDialog * h)
 {
     if (h->widgets != NULL)
         do_select_widget (h, dlg_get_widget_next_of (h->current), SELECT_NEXT);

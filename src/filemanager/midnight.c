@@ -1709,7 +1709,7 @@ void
 change_panel (void)
 {
     input_free_completions (cmdline);
-    dlg_one_down (midnight_dlg);
+    dlg_select_next_widget (midnight_dlg);
 }
 
 /* --------------------------------------------------------------------------------------------- */

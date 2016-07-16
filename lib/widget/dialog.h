@@ -149,8 +149,8 @@ void dlg_stop (WDialog * h);
 /* Widget selection */
 void dlg_select_widget (void *w);
 void dlg_set_bottom_widget (void *w);
-void dlg_one_up (WDialog * h);
-void dlg_one_down (WDialog * h);
+void dlg_select_prev_widget (WDialog * h);
+void dlg_select_next_widget (WDialog * h);
 gboolean dlg_focus (WDialog * h);
 Widget *find_widget_type (const WDialog * h, widget_cb_fn callback);
 Widget *dlg_find_by_id (const WDialog * h, unsigned long id);

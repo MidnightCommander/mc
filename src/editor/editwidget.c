@@ -484,10 +484,10 @@ edit_dialog_command_execute (WDialog * h, long command)
         edit_window_list (h);
         break;
     case CK_WindowNext:
-        dlg_one_down (h);
+        dlg_select_next_widget (h);
         break;
     case CK_WindowPrev:
-        dlg_one_up (h);
+        dlg_select_prev_widget (h);
         break;
     case CK_Options:
         edit_options_dialog (h);

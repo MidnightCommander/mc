@@ -408,14 +408,14 @@ do_enter_key (WDialog * h, int f_pos)
             {
                 if (!is_owner)
                     chl_end = TRUE;
-                dlg_one_up (ch_dlg);
+                dlg_select_prev_widget (ch_dlg);
                 f_pos--;
             }
             else if (result == KEY_RIGHT)
             {
                 if (is_owner)
                     chl_end = TRUE;
-                dlg_one_down (ch_dlg);
+                dlg_select_next_widget (ch_dlg);
                 f_pos++;
             }
         }
@@ -613,7 +613,7 @@ advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
                 update_mode (h);
                 send_message (h, sender, MSG_KEY, KEY_RIGHT, NULL);
                 if (flag_pos > 8 || (flag_pos % 3) == 0)
-                    dlg_one_down (h);
+                    dlg_select_next_widget (h);
             }
             break;
 
