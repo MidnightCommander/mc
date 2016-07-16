@@ -53,7 +53,63 @@
 
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+widget_do_focus (Widget * w, gboolean enable)
+{
+    if (w != NULL && widget_get_state (WIDGET (w->owner), WST_FOCUSED))
+        widget_set_state (w, WST_FOCUSED, enable);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Focus specified widget in it's owner.
+ *
+ * @param w widget to be focused.
+ */
+
+static void
+widget_focus (Widget * w)
+{
+    WDialog *h = DIALOG (w->owner);
+
+    if (h == NULL)
+        return;
+
+    if (WIDGET (h->current->data) != w)
+    {
+        widget_do_focus (WIDGET (h->current->data), FALSE);
+        /* Test if focus lost was allowed and focus has really been loose */
+        if (h->current == NULL || !widget_get_state (WIDGET (h->current->data), WST_FOCUSED))
+        {
+            widget_do_focus (w, TRUE);
+            h->current = dlg_find (h, w);
+        }
+    }
+    else if (!widget_get_state (w, WST_FOCUSED))
+        widget_do_focus (w, TRUE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Put widget on top or bottom of Z-order.
+ */
+static void
+widget_reorder (GList * l, gboolean set_top)
+{
+    WDialog *h = WIDGET (l->data)->owner;
+
+    h->widgets = g_list_remove_link (h->widgets, l);
+    if (set_top)
+        h->widgets = g_list_concat (h->widgets, l);
+    else
+        h->widgets = g_list_concat (l, h->widgets);
+}
+
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -387,7 +443,50 @@ widget_replace (Widget * old_w, Widget * new_w)
     if (should_focus)
         widget_select (new_w);
 
-    widget_redraw (new_w);
+    /* draw inactive widget */
+    if (!widget_get_state (new_w, WST_FOCUSED))
+        widget_redraw (new_w);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Select specified widget in it's owner.
+ *
+ * @param w widget to be selected
+ */
+
+void
+widget_select (Widget * w)
+{
+    WDialog *h;
+
+    if (!widget_get_options (w, WOP_SELECTABLE))
+        return;
+
+    h = w->owner;
+    if (h != NULL)
+    {
+        if (widget_get_options (w, WOP_TOP_SELECT))
+        {
+            GList *l;
+
+            l = dlg_find (h, w);
+            widget_reorder (l, TRUE);
+        }
+
+        widget_focus (w);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Set widget at bottom of widget list.
+ */
+
+void
+widget_set_bottom (Widget * w)
+{
+    widget_reorder (dlg_find (w->owner, w), FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

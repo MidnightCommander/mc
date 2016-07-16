@@ -400,7 +400,7 @@ do_enter_key (WDialog * h, int f_pos)
                     ch_flags[f_pos + 6] = '+';
                     update_ownership ();
                 }
-                dlg_focus (h);
+                dlg_select_current_widget (h);
                 if (ok)
                     print_flags ();
             }
