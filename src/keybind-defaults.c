@@ -100,6 +100,8 @@ static const global_keymap_ini_t default_main_keymap[] = {
     /* Copy useful information to the command line */
     {"PutCurrentPath", "alt-a"},
     {"PutOtherPath", "alt-shift-a"},
+    {"PutCurrentSelected", "alt-enter; ctrl-enter"},
+    {"PutCurrentFullSelected", "ctrl-shift-enter"},
     {"CdQuick", "alt-c"},
     /* To access the directory hotlist */
     {"HotList", "ctrl-backslash"},

@@ -781,7 +781,7 @@ put_other_link (void)
 
 /** Insert the selected file name into the input line */
 static void
-put_prog_name (void)
+put_current_selected (void)
 {
     const char *tmp;
 
@@ -1139,6 +1139,13 @@ midnight_execute_cmd (Widget * sender, long command)
     case CK_PutCurrentPath:
         midnight_put_panel_path (current_panel);
         break;
+    case CK_PutCurrentSelected:
+        put_current_selected ();
+        break;
+    case CK_PutCurrentFullSelected:
+        midnight_put_panel_path (current_panel);
+        put_current_selected ();
+        break;
     case CK_PutCurrentLink:
         put_current_link ();
         break;
@@ -1474,21 +1481,6 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 
             input_insert (cmdline, "", FALSE);
             cmdline->point = 0;
-        }
-
-        /* Ctrl-Enter and Alt-Enter */
-        if (((parm & ~(KEY_M_CTRL | KEY_M_ALT)) == '\n') && (parm & (KEY_M_CTRL | KEY_M_ALT)))
-        {
-            put_prog_name ();
-            return MSG_HANDLED;
-        }
-
-        /* Ctrl-Shift-Enter */
-        if (parm == (KEY_M_CTRL | KEY_M_SHIFT | '\n'))
-        {
-            midnight_put_panel_path (current_panel);
-            put_prog_name ();
-            return MSG_HANDLED;
         }
 
         if ((!mc_global.tty.alternate_plus_minus

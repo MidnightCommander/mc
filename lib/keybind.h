@@ -178,6 +178,8 @@ enum
     CK_LinkSymbolicRelative,
     CK_PutCurrentPath,
     CK_PutOtherPath,
+    CK_PutCurrentSelected,
+    CK_PutCurrentFullSelected,
     CK_PutCurrentTagged,
     CK_PutOtherTagged,
     CK_Select,
