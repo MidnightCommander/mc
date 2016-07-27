@@ -1079,13 +1079,9 @@ display_total_marked_size (const WPanel * panel, int y, int x, gboolean size_onl
     buf = size_only ? b_bytes : buffer;
     cols = w->cols - 2;
 
-    /*
-     * This is a trick to use two ngettext() calls in one sentence.
-     * First make "N bytes", then insert it into "X in M files".
-     */
-    g_snprintf (b_bytes, sizeof (b_bytes),
-                ngettext ("%s byte", "%s bytes", panel->total),
-                size_trunc_sep (panel->total, panels_options.kilobyte_si));
+    g_strlcpy (b_bytes, size_trunc_sep (panel->total, panels_options.kilobyte_si),
+               sizeof (b_bytes));
+
     if (!size_only)
         g_snprintf (buffer, sizeof (buffer),
                     ngettext ("%s in %d file", "%s in %d files", panel->marked),
