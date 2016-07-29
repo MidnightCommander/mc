@@ -54,12 +54,6 @@ const char *cp_source = NULL;
 
 #define OTHER_8BIT "Other_8_bit"
 
-/*
- * FIXME: This assumes that ASCII is always the first encoding
- * in mc.charsets
- */
-#define CP_ASCII 0
-
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/

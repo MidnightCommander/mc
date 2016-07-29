@@ -63,7 +63,6 @@
 #define UX 3
 #define UY 2
 
-#define LABELS   3
 #define B_ADD    B_USER
 #define B_REMOVE (B_USER + 1)
 

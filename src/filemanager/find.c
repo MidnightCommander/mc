@@ -873,7 +873,7 @@ push_directory (vfs_path_t * dir)
 static inline vfs_path_t *
 pop_directory (void)
 {
-    return (vfs_path_t *) g_queue_pop_tail (&dir_queue);
+    return (vfs_path_t *) g_queue_pop_head (&dir_queue);
 }
 
 /* --------------------------------------------------------------------------------------------- */

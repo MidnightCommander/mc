@@ -52,7 +52,7 @@ const global_keymap_t *listbox_map = NULL;
 /*** file scope macro definitions ****************************************************************/
 
 /* Gives the position of the last item. */
-#define LISTBOX_LAST(l) (g_queue_is_empty ((l)->list) ? 0 : (int) g_queue_get_length ((l)->list) - 1)
+#define LISTBOX_LAST(l) (listbox_is_empty (l) ? 0 : (int) g_queue_get_length ((l)->list) - 1)
 
 /*** file scope type declarations ****************************************************************/
 
@@ -231,10 +231,13 @@ listbox_y_pos (WListbox * l, int y)
 static void
 listbox_fwd (WListbox * l, gboolean wrap)
 {
-    if ((guint) l->pos + 1 < g_queue_get_length (l->list))
-        listbox_select_entry (l, l->pos + 1);
-    else if (wrap)
-        listbox_select_first (l);
+    if (!listbox_is_empty (l))
+    {
+        if ((guint) l->pos + 1 < g_queue_get_length (l->list))
+            listbox_select_entry (l, l->pos + 1);
+        else if (wrap)
+            listbox_select_first (l);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -250,10 +253,13 @@ listbox_fwd_n (WListbox * l, int n)
 static void
 listbox_back (WListbox * l, gboolean wrap)
 {
-    if (l->pos > 0)
-        listbox_select_entry (l, l->pos - 1);
-    else if (wrap)
-        listbox_select_last (l);
+    if (!listbox_is_empty (l))
+    {
+        if (l->pos > 0)
+            listbox_select_entry (l, l->pos - 1);
+        else if (wrap)
+            listbox_select_last (l);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -401,6 +407,9 @@ static void
 listbox_do_action (WListbox * l)
 {
     int action;
+
+    if (listbox_is_empty (l))
+        return;
 
     if (l->callback != NULL)
         action = l->callback (l);

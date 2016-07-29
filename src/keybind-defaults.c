@@ -102,7 +102,7 @@ static const global_keymap_ini_t default_main_keymap[] = {
     {"PutOtherPath", "alt-shift-a"},
     {"CdQuick", "alt-c"},
     /* To access the directory hotlist */
-    {"HotList", "ctrl-backspace"},
+    {"HotList", "ctrl-backslash"},
     /* Suspend */
     {"Suspend", "ctrl-z"},
     /* The filtered view command */

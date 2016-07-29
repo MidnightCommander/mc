@@ -361,7 +361,7 @@ check_hardlinks (const vfs_path_t * src_vpath, const vfs_path_t * dst_vpath, str
         }
     }
 
-    lnk = g_new0 (struct link, 1);
+    lnk = g_try_new0 (struct link, 1);
     if (lnk != NULL)
     {
         lnk->vfs = my_vfs;
@@ -401,7 +401,7 @@ make_symlink (file_op_context_t * ctx, const char *src_path, const char *dst_pat
     dst_is_symlink = (mc_lstat (dst_vpath, &sb) == 0) && S_ISLNK (sb.st_mode);
 
   retry_src_readlink:
-    len = mc_readlink (src_vpath, link_target, MC_MAXPATHLEN - 1);
+    len = mc_readlink (src_vpath, link_target, sizeof (link_target) - 1);
     if (len < 0)
     {
         if (ctx->skip_all)
@@ -416,25 +416,23 @@ make_symlink (file_op_context_t * ctx, const char *src_path, const char *dst_pat
         }
         goto ret;
     }
-    link_target[len] = 0;
 
-    if (ctx->stable_symlinks)
+    link_target[len] = '\0';
+
+    if (ctx->stable_symlinks && !(vfs_file_is_local (src_vpath) && vfs_file_is_local (dst_vpath)))
     {
-
-        if (!vfs_file_is_local (src_vpath) || !vfs_file_is_local (dst_vpath))
-        {
-            message (D_ERROR, MSG_ERROR,
-                     _("Cannot make stable symlinks across"
-                       "non-local filesystems:\n\nOption Stable Symlinks will be disabled"));
-            ctx->stable_symlinks = FALSE;
-        }
+        message (D_ERROR, MSG_ERROR,
+                 _("Cannot make stable symlinks across"
+                   "non-local filesystems:\n\nOption Stable Symlinks will be disabled"));
+        ctx->stable_symlinks = FALSE;
     }
 
     if (ctx->stable_symlinks && !g_path_is_absolute (link_target))
     {
-        const char *r = strrchr (src_path, PATH_SEP);
+        const char *r;
 
-        if (r)
+        r = strrchr (src_path, PATH_SEP);
+        if (r != NULL)
         {
             char *p;
             vfs_path_t *q;
@@ -452,21 +450,19 @@ make_symlink (file_op_context_t * ctx, const char *src_path, const char *dst_pat
 
                 tmp_vpath1 = vfs_path_vtokens_get (q, -1, 1);
                 s = g_strconcat (p, link_target, (char *) NULL);
-                g_free (p);
                 g_strlcpy (link_target, s, sizeof (link_target));
                 g_free (s);
                 tmp_vpath2 = vfs_path_from_str (link_target);
                 s = diff_two_paths (tmp_vpath1, tmp_vpath2);
                 vfs_path_free (tmp_vpath1);
                 vfs_path_free (tmp_vpath2);
-                if (s)
+                if (s != NULL)
                 {
                     g_strlcpy (link_target, s, sizeof (link_target));
                     g_free (s);
                 }
             }
-            else
-                g_free (p);
+            g_free (p);
             vfs_path_free (q);
         }
     }
@@ -483,16 +479,14 @@ make_symlink (file_op_context_t * ctx, const char *src_path, const char *dst_pat
      * if dst_exists, it is obvious that this had failed.
      * We can delete the old symlink and try again...
      */
-    if (dst_is_symlink)
+    if (dst_is_symlink && mc_unlink (dst_vpath) == 0
+        && mc_symlink (link_target_vpath, dst_vpath) == 0)
     {
-        if (mc_unlink (dst_vpath) == 0)
-            if (mc_symlink (link_target_vpath, dst_vpath) == 0)
-            {
-                /* Success */
-                return_status = FILE_CONT;
-                goto ret;
-            }
+        /* Success */
+        return_status = FILE_CONT;
+        goto ret;
     }
+
     if (ctx->skip_all)
         return_status = FILE_SKIPALL;
     else

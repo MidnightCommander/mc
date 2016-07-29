@@ -152,7 +152,6 @@ int ftpfs_ignore_chattr_errors = 1;
 #define MAXHOSTNAMELEN 64
 #endif
 
-#define UPLOAD_ZERO_LENGTH_FILE
 #define SUP ((ftp_super_data_t *) super->data)
 #define FH_SOCK ((ftp_fh_data_t *) fh->data)->sock
 

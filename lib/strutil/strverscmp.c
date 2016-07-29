@@ -36,6 +36,8 @@
 
 /*** file scope macro definitions ****************************************************************/
 
+#ifndef HAVE_STRVERSCMP
+
 /* states: S_N: normal, S_I: comparing integral part, S_F: comparing
    fractionnal parts, S_Z: idem but with leading Zeroes only */
 #define  S_N    0x0
@@ -46,6 +48,8 @@
 /* result_type: CMP: return diff; LEN: compare using len_diff/diff */
 #define  CMP    2
 #define  LEN    3
+
+#endif /* HAVE_STRVERSCMP */
 
 /*** file scope type declarations ****************************************************************/
 

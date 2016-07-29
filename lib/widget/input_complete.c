@@ -71,7 +71,6 @@ extern char **environ;
 #endif /* DO_CMPLETION_DEBUG */
 
 #define whitespace(c) ((c) == ' ' || (c) == '\t')
-#define cr_whitespace(c) (whitespace (c) || (c) == '\n' || (c) == '\r')
 
 #define DO_INSERTION 1
 #define DO_QUERY     2
@@ -353,7 +352,7 @@ variable_completion_function (const char *text, int state, input_complete_t flag
     static char **env_p = NULL;
     static gboolean isbrace = FALSE;
     static size_t varlen = 0;
-    const char *p;
+    const char *p = NULL;
 
     (void) flags;
     SHOW_C_CTX ("variable_completion_function");

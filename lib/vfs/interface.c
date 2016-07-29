@@ -362,10 +362,8 @@ mc_ctl (int handle, int ctlop, void *arg)
     void *fsinfo = NULL;
 
     vfs = vfs_class_find_by_handle (handle, &fsinfo);
-    if (vfs == NULL)
-        return 0;
 
-    return vfs->ctl != NULL ? vfs->ctl (fsinfo, ctlop, arg) : 0;
+    return (vfs == NULL || vfs->ctl == NULL) ? 0 : vfs->ctl (fsinfo, ctlop, arg);
 }
 
 /* --------------------------------------------------------------------------------------------- */

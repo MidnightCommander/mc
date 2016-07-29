@@ -98,9 +98,11 @@
 
 /*** file scope macro definitions ****************************************************************/
 
+#ifdef HAVE_MMAP
 #ifndef MAP_FILE
 #define MAP_FILE 0
 #endif
+#endif /* HAVE_MMAP */
 
 /*** file scope type declarations ****************************************************************/
 

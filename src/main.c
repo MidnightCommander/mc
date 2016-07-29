@@ -402,6 +402,10 @@ main (int argc, char *argv[])
     else
         exit_code = do_nc ()? EXIT_SUCCESS : EXIT_FAILURE;
 
+    disable_bracketed_paste ();
+
+    disable_mouse ();
+
     /* Save the tree store */
     (void) tree_store_save ();
 

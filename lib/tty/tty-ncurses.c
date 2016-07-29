@@ -221,8 +221,6 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
 void
 tty_shutdown (void)
 {
-    disable_mouse ();
-    disable_bracketed_paste ();
     tty_reset_shell_mode ();
     tty_noraw_mode ();
     tty_keypad (FALSE);

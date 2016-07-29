@@ -172,9 +172,6 @@ int classic_progressbar = 1;
 
 /*** file scope macro definitions ****************************************************************/
 
-/* Hack: the vfs code should not rely on this */
-#define WITH_FULL_PATHS 1
-
 #define truncFileString(dlg, s)       str_trunc (s, WIDGET (dlg)->cols - 10)
 #define truncFileStringSecure(dlg, s) path_trunc (s, WIDGET (dlg)->cols - 10)
 
