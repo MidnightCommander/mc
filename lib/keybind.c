@@ -205,6 +205,8 @@ static name_keymap_t command_names[] = {
     {"SplitLess", CK_SplitLess},
     {"PutCurrentPath", CK_PutCurrentPath},
     {"PutOtherPath", CK_PutOtherPath},
+    {"PutCurrentSelected", CK_PutCurrentSelected},
+    {"PutCurrentFullSelected", CK_PutCurrentFullSelected},
     {"PutCurrentTagged", CK_PutCurrentTagged},
     {"PutOtherTagged", CK_PutOtherTagged},
     {"Select", CK_Select},
