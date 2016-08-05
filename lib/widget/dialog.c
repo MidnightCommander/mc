@@ -289,6 +289,12 @@ do_select_widget (WDialog * h, GList * w, select_dir_t dir)
         send_message (h->current->data, NULL, MSG_DRAW, 0, NULL);
         send_message (h->current->data, NULL, MSG_FOCUS, 0, NULL);
     }
+
+    if (widget_get_options (WIDGET (h->current->data), WOP_TOP_SELECT))
+    {
+        h->widgets = g_list_remove_link (h->widgets, h->current);
+        h->widgets = g_list_concat (h->widgets, h->current);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
