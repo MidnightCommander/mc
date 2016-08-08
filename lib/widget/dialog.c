@@ -701,13 +701,9 @@ dlg_adjust_position (const WDialog * h, int *y, int *x, int *lines, int *cols)
     {
         if ((w->pos_flags & WPOS_CENTER_HORZ) != 0)
             *x = (COLS - *cols) / 2;
-        else
-            *x = w->x;
 
         if ((w->pos_flags & WPOS_CENTER_VERT) != 0)
             *y = (LINES - *lines) / 2;
-        else
-            *y = w->y;
 
         if ((w->pos_flags & WPOS_TRYUP) != 0)
         {
