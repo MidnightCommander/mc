@@ -312,7 +312,7 @@ menubar_finish (WMenuBar * menubar)
 
     /* Move the menubar to the bottom so that widgets displayed on top of
      * an "invisible" menubar get the first chance to respond to mouse events. */
-    dlg_set_bottom_widget (w);
+    widget_set_bottom (w);
 
     dlg_select_by_id (w->owner, menubar->previous_widget);
     do_refresh ();

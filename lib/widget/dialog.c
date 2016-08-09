@@ -1132,12 +1132,11 @@ widget_select (Widget * w)
  */
 
 void
-dlg_set_bottom_widget (void *w)
+widget_set_bottom (Widget * w)
 {
-    Widget *widget = WIDGET (w);
-    WDialog *h = widget->owner;
+    WDialog *h = w->owner;
 
-    dlg_reorder_widgets (g_list_find (h->widgets, widget), FALSE);
+    dlg_reorder_widgets (g_list_find (h->widgets, w), FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
