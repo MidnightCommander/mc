@@ -1401,21 +1401,20 @@ ftpfs_open_data_connection (struct vfs_class *me, struct vfs_s_super *super, con
         close (s);
         ERRNOR (EPERM, -1);
     }
-    tty_enable_interrupt_key ();
+
     if (SUP->use_passive_connection)
         data = s;
     else
     {
+        tty_enable_interrupt_key ();
         data = accept (s, (struct sockaddr *) &from, &fromlen);
         if (data < 0)
-        {
             ftpfs_errno = errno;
-            close (s);
-            return -1;
-        }
+        tty_disable_interrupt_key ();
         close (s);
+        if (data < 0)
+            return -1;
     }
-    tty_disable_interrupt_key ();
     SUP->ctl_connection_busy = 1;
     return data;
 }
