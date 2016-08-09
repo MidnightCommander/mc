@@ -340,7 +340,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
         send_message (query_dlg, NULL, MSG_RESIZE, 0, NULL);
 
         if (defbutton != NULL)
-            dlg_select_widget (defbutton);
+            widget_select (WIDGET (defbutton));
 
         /* run dialog and make result */
         switch (dlg_run (query_dlg))

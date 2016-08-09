@@ -1431,9 +1431,9 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         widget_idle (w, FALSE);
 
         if (boot_current_is_left)
-            dlg_select_widget (get_panel_widget (0));
+            widget_select (get_panel_widget (0));
         else
-            dlg_select_widget (get_panel_widget (1));
+            widget_select (get_panel_widget (1));
 
         if (auto_menu)
             midnight_execute_cmd (NULL, CK_UserMenu);

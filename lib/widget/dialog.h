@@ -147,7 +147,7 @@ void dlg_erase (WDialog * h);
 void dlg_stop (WDialog * h);
 
 /* Widget selection */
-void dlg_select_widget (void *w);
+void widget_select (Widget * w);
 void dlg_set_bottom_widget (void *w);
 void dlg_select_prev_widget (WDialog * h);
 void dlg_select_next_widget (WDialog * h);

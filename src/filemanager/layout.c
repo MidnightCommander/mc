@@ -577,7 +577,7 @@ init_layout (void)
                 button_new (12, (width - b) / 2 + b1 + 1, B_CANCEL, NORMAL_BUTTON,
                             cancel_button, 0));
 
-    dlg_select_widget (radio_widget);
+    widget_select (WIDGET (radio_widget));
 
     return layout_dlg;
 }
@@ -1170,9 +1170,9 @@ swap_panels (void)
         }
 
         if (widget_is_active (panels[0].widget))
-            dlg_select_widget (panels[1].widget);
+            widget_select (panels[1].widget);
         else if (widget_is_active (panels[1].widget))
-            dlg_select_widget (panels[0].widget);
+            widget_select (panels[0].widget);
     }
     else
     {

@@ -582,7 +582,7 @@ hotlist_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 
     case MSG_POST_KEY:
         /* always stay on hotlist */
-        dlg_select_widget (h == hotlist_dlg ? l_hotlist : l_movelist);
+        widget_select (h == hotlist_dlg ? WIDGET (l_hotlist) : WIDGET (l_movelist));
         return MSG_HANDLED;
 
     case MSG_RESIZE:
@@ -801,7 +801,7 @@ init_hotlist (hotlist_t list_type)
                                             hotlist_but[i].text, hotlist_button_callback),
                                 hotlist_but[i].pos_flags, NULL);
 
-    dlg_select_widget (l_hotlist);
+    widget_select (WIDGET (l_hotlist));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -852,7 +852,7 @@ init_movelist (struct hotlist *item)
                                             hotlist_but[i].text, hotlist_button_callback),
                                 hotlist_but[i].pos_flags, NULL);
 
-    dlg_select_widget (l_movelist);
+    widget_select (WIDGET (l_movelist));
 }
 
 /* --------------------------------------------------------------------------------------------- */

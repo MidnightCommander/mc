@@ -181,7 +181,7 @@ button_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     switch (msg)
     {
     case MSG_MOUSE_DOWN:
-        dlg_select_widget (w);
+        widget_select (w);
         break;
 
     case MSG_MOUSE_CLICK:

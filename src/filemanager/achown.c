@@ -733,7 +733,7 @@ init_chown_advanced (void)
                                                        chown_advanced_but[i].flags,
                                                        chown_advanced_but[i].text, NULL));
 
-    dlg_select_widget (b_att[0]);
+    widget_select (WIDGET (b_att[0]));
 }
 
 /* --------------------------------------------------------------------------------------------- */

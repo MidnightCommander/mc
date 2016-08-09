@@ -385,7 +385,7 @@ widget_replace (Widget * old_w, Widget * new_w)
     send_message (new_w, NULL, MSG_INIT, 0, NULL);
 
     if (should_focus)
-        dlg_select_widget (new_w);
+        widget_select (new_w);
 
     widget_redraw (new_w);
 }

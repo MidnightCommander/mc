@@ -205,7 +205,7 @@ init_panelize (void)
         x += button_get_len (b) + 1;
     }
 
-    dlg_select_widget (l_panelize);
+    widget_select (WIDGET (l_panelize));
 }
 
 /* --------------------------------------------------------------------------------------------- */

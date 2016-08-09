@@ -938,7 +938,7 @@ input_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     switch (msg)
     {
     case MSG_MOUSE_DOWN:
-        dlg_select_widget (w);
+        widget_select (w);
         in->first = FALSE;
 
         if (event->x >= w->cols - HISTORY_BUTTON_WIDTH && should_show_history_button (in))

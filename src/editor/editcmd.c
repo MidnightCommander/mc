@@ -2255,7 +2255,7 @@ edit_close_cmd (WEdit * edit)
         {
             edit = find_editor (h);
             if (edit != NULL)
-                dlg_select_widget (edit);
+                widget_select (WIDGET (edit));
         }
     }
 

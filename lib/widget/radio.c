@@ -150,7 +150,7 @@ radio_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     {
     case MSG_MOUSE_DOWN:
         RADIO (w)->pos = event->y;
-        dlg_select_widget (w);
+        widget_select (w);
         break;
 
     case MSG_MOUSE_CLICK:

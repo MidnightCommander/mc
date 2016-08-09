@@ -2507,7 +2507,7 @@ dirsize_status_init_cb (status_msg_t * sm)
     {
         dsm->skip_button = WIDGET (button_new (5, 3, FILE_SKIP, NORMAL_BUTTON, b2_name, NULL));
         add_widget (sm->dlg, dsm->skip_button);
-        dlg_select_widget (dsm->skip_button);
+        widget_select (dsm->skip_button);
     }
 
     widget_set_size (wd, wd->y, wd->x, 8, ui_width);

@@ -356,7 +356,7 @@ edit_window_list (const WDialog * h)
     if (rv >= 0)
     {
         w = g_list_nth (h->widgets, rv + offset);
-        dlg_select_widget (w->data);
+        widget_select (w->data);
     }
 }
 
@@ -655,7 +655,7 @@ edit_quit (WDialog * h)
 
             if (e->modified)
             {
-                dlg_select_widget (e);
+                widget_select (WIDGET (e));
 
                 if (!edit_ok_to_exit (e))
                     return;
@@ -904,7 +904,7 @@ edit_dialog_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
                 if (top != h->current)
                 {
                     /* Window is not active. Activate it */
-                    dlg_select_widget (e);
+                    widget_select (WIDGET (e));
                 }
 
                 /* Handle buttons */
@@ -1080,7 +1080,7 @@ edit_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     switch (msg)
     {
     case MSG_MOUSE_DOWN:
-        dlg_select_widget (w);
+        widget_select (w);
         edit_update_curs_row (edit);
         edit_update_curs_col (edit);
 

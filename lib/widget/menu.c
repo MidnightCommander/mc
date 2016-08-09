@@ -1038,7 +1038,7 @@ menubar_activate (WMenuBar * menubar, gboolean dropped, int which)
 
         /* Bring it to the top so it receives all mouse events before any other widget.
          * See also comment in menubar_finish(). */
-        dlg_select_widget (w);
+        widget_select (w);
     }
 }
 

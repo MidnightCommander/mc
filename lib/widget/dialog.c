@@ -1110,7 +1110,7 @@ dlg_select_by_id (const WDialog * h, unsigned long id)
 
     w = dlg_find_by_id (h, id);
     if (w != NULL)
-        dlg_select_widget (w);
+        widget_select (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1119,12 +1119,11 @@ dlg_select_by_id (const WDialog * h, unsigned long id)
  */
 
 void
-dlg_select_widget (void *w)
+widget_select (Widget * w)
 {
-    Widget *widget = WIDGET (w);
-    WDialog *h = widget->owner;
+    WDialog *h = w->owner;
 
-    do_select_widget (h, g_list_find (h->widgets, widget), SELECT_EXACT);
+    do_select_widget (h, g_list_find (h->widgets, w), SELECT_EXACT);
 }
 
 /* --------------------------------------------------------------------------------------------- */

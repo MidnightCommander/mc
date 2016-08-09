@@ -276,7 +276,7 @@ init_chown (void)
                             chown_but[i].flags, chown_but[i].text, NULL));
 
     /* select first listbox */
-    dlg_select_widget (l_user);
+    widget_select (WIDGET (l_user));
 
     return ch_dlg;
 }

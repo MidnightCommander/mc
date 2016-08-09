@@ -365,7 +365,7 @@ init_chmod (const char *fname, const struct stat *sf_stat)
                             chmod_but[i].flags, chmod_but[i].text, NULL));
 
     /* select first checkbox */
-    dlg_select_widget (check_perm[0].check);
+    widget_select (WIDGET (check_perm[0].check));
 
     return ch_dlg;
 }

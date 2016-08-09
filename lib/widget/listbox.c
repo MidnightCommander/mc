@@ -511,7 +511,7 @@ listbox_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     switch (msg)
     {
     case MSG_MOUSE_DOWN:
-        dlg_select_widget (l);
+        widget_select (w);
         listbox_select_entry (l, listbox_y_pos (l, event->y));
         break;
 
