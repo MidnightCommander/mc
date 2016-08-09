@@ -1370,13 +1370,21 @@ ftpfs_open_data_connection (struct vfs_class *me, struct vfs_s_super *super, con
         return -1;
 
     if (ftpfs_changetype (me, super, isbinary) == -1)
+    {
+        close (s);
         return -1;
+    }
+
     if (reget > 0)
     {
         j = ftpfs_command (me, super, WAIT_REPLY, "REST %d", reget);
         if (j != CONTINUE)
+        {
+            close (s);
             return -1;
+        }
     }
+
     if (remote)
     {
         char *remote_path = ftpfs_translate_path (me, super, remote);
@@ -1389,7 +1397,10 @@ ftpfs_open_data_connection (struct vfs_class *me, struct vfs_s_super *super, con
         j = ftpfs_command (me, super, WAIT_REPLY, "%s", cmd);
 
     if (j != PRELIM)
+    {
+        close (s);
         ERRNOR (EPERM, -1);
+    }
     tty_enable_interrupt_key ();
     if (SUP->use_passive_connection)
         data = s;
