@@ -462,6 +462,10 @@ nice_cd (const char *text, const char *xtext, const char *help,
         vfs_path_free (cd_vpath);
     }
     g_free (cd_path);
+
+    /* In case of passive panel, restore current VFS directory that was changed in do_panel_cd() */
+    if (MENU_PANEL != current_panel)
+        (void) mc_chdir (current_panel->cwd_vpath);
 }
 #endif /* ENABLE_VFS_UNDELFS || ENABLE_VFS_NET */
 
