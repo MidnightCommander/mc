@@ -340,7 +340,7 @@ fish_pipeopen (struct vfs_s_super *super, const char *path, const char *argv[])
         res = open ("/dev/null", O_WRONLY);
         close (fileset2[0]);
         close (fileset2[1]);
-        execvp (path, const_cast (char **, argv));
+        execvp (path, (char **) argv);
         my_exit (3);
     }
 }
