@@ -526,10 +526,10 @@ string_file_size (file_entry_t * fe, int len)
 static const char *
 string_file_size_brief (file_entry_t * fe, int len)
 {
-    if (S_ISLNK (fe->st.st_mode) && !fe->f.link_to_dir)
+    if (S_ISLNK (fe->st.st_mode) && !link_isdir (fe))
         return _("SYMLINK");
 
-    if ((S_ISDIR (fe->st.st_mode) || fe->f.link_to_dir) && !DIR_IS_DOTDOT (fe->fname))
+    if ((S_ISDIR (fe->st.st_mode) || link_isdir (fe)) && !DIR_IS_DOTDOT (fe->fname))
         return _("SUB-DIR");
 
     return string_file_size (fe, len);
@@ -549,7 +549,7 @@ string_file_type (file_entry_t * fe, int len)
         buffer[0] = PATH_SEP;
     else if (S_ISLNK (fe->st.st_mode))
     {
-        if (fe->f.link_to_dir)
+        if (link_isdir (fe))
             buffer[0] = '~';
         else if (fe->f.stale_link)
             buffer[0] = '!';
@@ -2877,7 +2877,7 @@ chdir_other_panel (WPanel * panel)
     if (get_other_type () != view_listing)
         set_display_type (get_other_index (), view_listing);
 
-    if (S_ISDIR (entry->st.st_mode) || entry->f.link_to_dir)
+    if (S_ISDIR (entry->st.st_mode) || link_isdir (entry))
         new_dir_vpath = vfs_path_append_new (panel->cwd_vpath, entry->fname, (char *) NULL);
     else
     {

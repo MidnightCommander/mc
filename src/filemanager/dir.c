@@ -55,9 +55,9 @@
 /*** file scope macro definitions ****************************************************************/
 
 #define MY_ISDIR(x) (\
-    (is_exe (x->st.st_mode) && !(S_ISDIR (x->st.st_mode) || x->f.link_to_dir) && exec_first) \
+    (is_exe (x->st.st_mode) && !(S_ISDIR (x->st.st_mode) || link_isdir (x)) && exec_first) \
         ? 1 \
-        : ( (S_ISDIR (x->st.st_mode) || x->f.link_to_dir) ? 2 : 0) )
+        : ( (S_ISDIR (x->st.st_mode) || link_isdir (x)) ? 2 : 0) )
 
 /*** file scope type declarations ****************************************************************/
 
