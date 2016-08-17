@@ -364,6 +364,30 @@ vfs_s_free_super (struct vfs_class *me, struct vfs_s_super *super)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static vfs_file_handler_t *
+vfs_s_new_fh (struct vfs_s_inode *ino, gboolean changed)
+{
+    vfs_file_handler_t *fh;
+
+    fh = g_new0 (vfs_file_handler_t, 1);
+    vfs_s_init_fh (fh, ino, changed);
+
+    return fh;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+vfs_s_free_fh (struct vfs_s_subclass *s, vfs_file_handler_t * fh)
+{
+    if (s->fh_free != NULL)
+        s->fh_free (fh);
+
+    g_free (fh);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /* Support of archives */
 /* ------------------------ readdir & friends ----------------------------- */
 
@@ -663,9 +687,8 @@ vfs_s_close (void *fh)
         close (FH->handle);
 
     vfs_s_free_inode (me, FH->ino);
-    if (MEDATA->fh_free_data != NULL)
-        MEDATA->fh_free_data (fh);
-    g_free (fh);
+    vfs_s_free_fh (MEDATA, fh);
+
     return res;
 }
 
@@ -1229,6 +1252,17 @@ vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+void
+vfs_s_init_fh (vfs_file_handler_t * fh, struct vfs_s_inode *ino, gboolean changed)
+{
+    fh->ino = ino;
+    fh->handle = -1;
+    fh->changed = changed;
+    fh->linear = LS_NOT_LINEAR;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /* --------------------------- stat and friends ---------------------------- */
 
 void *
@@ -1307,13 +1341,7 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
         return NULL;
     }
 
-    fh = g_new (vfs_file_handler_t, 1);
-    fh->pos = 0;
-    fh->ino = ino;
-    fh->handle = -1;
-    fh->changed = was_changed;
-    fh->linear = LS_NOT_LINEAR;
-    fh->data = NULL;
+    fh = s->fh_new != NULL ? s->fh_new (ino, was_changed) : vfs_s_new_fh (ino, was_changed);
 
     if (IS_LINEAR (flags))
     {
@@ -1327,9 +1355,7 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
     {
         if (s->fh_open != NULL && s->fh_open (path_element->class, fh, flags, mode) != 0)
         {
-            if (s->fh_free_data != NULL)
-                s->fh_free_data (fh);
-            g_free (fh);
+            vfs_s_free_fh (s, fh);
             return NULL;
         }
     }
@@ -1339,7 +1365,7 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
         fh->handle = open (fh->ino->localname, NO_LINEAR (flags), mode);
         if (fh->handle == -1)
         {
-            g_free (fh);
+            vfs_s_free_fh (s, fh);
             path_element->class->verrno = errno;
             return NULL;
         }
@@ -1388,16 +1414,12 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
     int handle;
     ssize_t n;
     off_t stat_size = ino->st.st_size;
-    vfs_file_handler_t fh;
+    vfs_file_handler_t *fh = NULL;
     vfs_path_t *tmp_vpath;
+    struct vfs_s_subclass *s = MEDATA;
 
-    if ((MEDATA->flags & VFS_S_USETMP) == 0)
+    if ((s->flags & VFS_S_USETMP) == 0)
         return (-1);
-
-    memset (&fh, 0, sizeof (fh));
-
-    fh.ino = ino;
-    fh.handle = -1;
 
     handle = vfs_mkstemps (&tmp_vpath, me->name, ino->ent->name);
     ino->localname = g_strdup (vfs_path_as_str (tmp_vpath));
@@ -1408,14 +1430,16 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
         goto error_4;
     }
 
-    if (MEDATA->linear_start (me, &fh, 0) == 0)
+    fh = s->fh_new != NULL ? s->fh_new (ino, FALSE) : vfs_s_new_fh (ino, FALSE);
+
+    if (s->linear_start (me, fh, 0) == 0)
         goto error_3;
 
     /* Clear the interrupt status */
     tty_got_interrupt ();
     tty_enable_interrupt_key ();
 
-    while ((n = MEDATA->linear_read (me, &fh, buffer, sizeof (buffer))) != 0)
+    while ((n = s->linear_read (me, fh, buffer, sizeof (buffer))) != 0)
     {
         int t;
 
@@ -1436,22 +1460,23 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
             goto error_1;
         }
     }
-    MEDATA->linear_close (me, &fh);
+    s->linear_close (me, fh);
     close (handle);
 
     tty_disable_interrupt_key ();
-    g_free (fh.data);
+    vfs_s_free_fh (s, fh);
     return 0;
 
   error_1:
-    MEDATA->linear_close (me, &fh);
+    s->linear_close (me, fh);
   error_3:
     tty_disable_interrupt_key ();
     close (handle);
     unlink (ino->localname);
   error_4:
     MC_PTR_FREE (ino->localname);
-    g_free (fh.data);
+    if (fh != NULL)
+        vfs_s_free_fh (s, fh);
     return (-1);
 }
 

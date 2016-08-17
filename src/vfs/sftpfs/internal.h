@@ -89,6 +89,8 @@ int sftpfs_open_connection (struct vfs_s_super *super, GError ** mcerror);
 void sftpfs_close_connection (struct vfs_s_super *super, const char *shutdown_message,
                               GError ** mcerror);
 
+vfs_file_handler_t *sftpfs_fh_new (struct vfs_s_inode *ino, gboolean changed);
+
 void *sftpfs_opendir (const vfs_path_t * vpath, GError ** mcerror);
 void *sftpfs_readdir (void *data, GError ** mcerror);
 int sftpfs_closedir (void *data, GError ** mcerror);
