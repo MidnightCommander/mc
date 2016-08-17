@@ -21,6 +21,8 @@
 #define LIBSSH2_INVALID_SOCKET -1
 #endif
 
+#define SUP ((sftpfs_super_data_t *) super)
+
 /*** enums ***************************************************************************************/
 
 typedef enum
@@ -35,6 +37,8 @@ typedef enum
 
 typedef struct
 {
+    struct vfs_s_super base;
+
     sftpfs_auth_type_t auth_type;
     sftpfs_auth_type_t config_auth_type;
 

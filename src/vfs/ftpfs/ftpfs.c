@@ -153,8 +153,8 @@ gboolean ftpfs_ignore_chattr_errors = TRUE;
 #define MAXHOSTNAMELEN 64
 #endif
 
-#define SUP ((ftp_super_data_t *) super->data)
-#define FH_SOCK ((ftp_fh_data_t *) fh->data)->sock
+#define SUP ((ftp_super_data_t *) super)
+#define FH_SOCK ((ftp_fh_data_t *) fh)->sock
 
 #ifndef INADDR_NONE
 #define INADDR_NONE 0xffffffff
@@ -203,6 +203,8 @@ typedef enum
 
 typedef struct
 {
+    struct vfs_s_super base;    /* base class */
+
     int sock;
 
     char *proxy;                /* proxy server, NULL if no proxy */
@@ -559,6 +561,24 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
 
 /* --------------------------------------------------------------------------------------------- */
 
+static struct vfs_s_super *
+ftpfs_new_archive (struct vfs_class *me)
+{
+    ftp_super_data_t *arch;
+
+    arch = g_new0 (ftp_super_data_t, 1);
+    arch->base.me = me;
+    arch->base.name = g_strdup (PATH_SEP_STR);
+    arch->sock = -1;
+    arch->use_passive_connection = ftpfs_use_passive_connections;
+    arch->strict = ftpfs_use_unix_list_options ? RFC_AUTODETECT : RFC_STRICT;
+    arch->isbinary = TYPE_UNKNOWN;
+
+    return VFS_SUPER (arch);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 ftpfs_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 {
@@ -569,7 +589,6 @@ ftpfs_free_archive (struct vfs_class *me, struct vfs_s_super *super)
         close (SUP->sock);
     }
     g_free (SUP->current_dir);
-    MC_PTR_FREE (super->data);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -999,18 +1018,9 @@ ftpfs_open_archive (struct vfs_s_super *super,
 {
     (void) vpath;
 
-    super->data = g_new0 (ftp_super_data_t, 1);
-
     super->path_element = ftpfs_correct_url_parameters (vpath_element);
-    SUP->proxy = NULL;
     if (ftpfs_check_proxy (super->path_element->host))
         SUP->proxy = ftpfs_proxy_host;
-    SUP->use_passive_connection = ftpfs_use_passive_connections;
-    SUP->strict = ftpfs_use_unix_list_options ? RFC_AUTODETECT : RFC_STRICT;
-    SUP->isbinary = TYPE_UNKNOWN;
-    SUP->remote_is_amiga = 0;
-    SUP->ctl_connection_busy = 0;
-    super->name = g_strdup (PATH_SEP_STR);
     super->root =
         vfs_s_new_inode (vpath_element->class, super, ftpfs_default_stat (vpath_element->class));
 
@@ -2219,7 +2229,7 @@ ftpfs_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t 
          * to local temporary file and stored to ftp server
          * by vfs_s_close later
          */
-        if (((ftp_super_data_t *) (FH_SUPER->data))->ctl_connection_busy)
+        if (((ftp_super_data_t *) FH_SUPER)->ctl_connection_busy)
         {
             if (!fh->ino->localname)
             {
@@ -2281,7 +2291,7 @@ ftpfs_fh_close (struct vfs_class *me, vfs_file_handler_t * fh)
 {
     if (fh->handle != -1 && !fh->ino->localname)
     {
-        ftp_super_data_t *ftp = (ftp_super_data_t *) fh->ino->super->data;
+        ftp_super_data_t *ftp = (ftp_super_data_t *) fh->ino->super;
 
         close (fh->handle);
         fh->handle = -1;
@@ -2644,6 +2654,7 @@ init_ftpfs (void)
 
     ftpfs_subclass.flags = VFS_S_REMOTE | VFS_S_USETMP;
     ftpfs_subclass.archive_same = ftpfs_archive_same;
+    ftpfs_subclass.new_archive = ftpfs_new_archive;
     ftpfs_subclass.open_archive = ftpfs_open_archive;
     ftpfs_subclass.free_archive = ftpfs_free_archive;
     ftpfs_subclass.fh_open = ftpfs_fh_open;
