@@ -36,6 +36,8 @@
 
 #define VFS_SUBCLASS(a) ((struct vfs_s_subclass *) (a))
 
+#define VFS_SUPER(a) ((struct vfs_s_super *) (a))
+
 #define FH ((vfs_file_handler_t *) fh)
 #define FH_SUPER FH->ino->super
 
@@ -63,8 +65,6 @@ struct vfs_s_super
 #ifdef ENABLE_VFS_NET
     vfs_path_element_t *path_element;
 #endif                          /* ENABLE_VFS_NET */
-
-    void *data;                 /* This is for filesystem-specific use */
 };
 
 /*
@@ -126,6 +126,7 @@ struct vfs_s_subclass
     void *(*archive_check) (const vfs_path_t * vpath);  /* optional */
     int (*archive_same) (const vfs_path_element_t * vpath_element, struct vfs_s_super * psup,
                          const vfs_path_t * vpath, void *cookie);
+    struct vfs_s_super *(*new_archive) (struct vfs_class * me);
     int (*open_archive) (struct vfs_s_super * psup,
                          const vfs_path_t * vpath, const vfs_path_element_t * vpath_element);
     void (*free_archive) (struct vfs_class * me, struct vfs_s_super * psup);

@@ -21,6 +21,8 @@
 #define LIBSSH2_INVALID_SOCKET -1
 #endif
 
+#define SUP ((sftpfs_super_t *) super)
+
 /*** enums ***************************************************************************************/
 
 typedef enum
@@ -35,6 +37,8 @@ typedef enum
 
 typedef struct
 {
+    struct vfs_s_super base;
+
     sftpfs_auth_type_t auth_type;
     sftpfs_auth_type_t config_auth_type;
 
@@ -49,7 +53,7 @@ typedef struct
     int socket_handle;
     const char *fingerprint;
     vfs_path_element_t *original_connection_info;
-} sftpfs_super_data_t;
+} sftpfs_super_t;
 
 /*** global variables defined in .c file *********************************************************/
 
@@ -65,9 +69,8 @@ void sftpfs_init_config_variables_patterns (void);
 void sftpfs_deinit_config_variables_patterns (void);
 
 gboolean sftpfs_is_sftp_error (LIBSSH2_SFTP * sftp_session, int sftp_res, int sftp_error);
-void sftpfs_ssherror_to_gliberror (sftpfs_super_data_t * super_data, int libssh_errno,
-                                   GError ** mcerror);
-gboolean sftpfs_waitsocket (sftpfs_super_data_t * super_data, int sftp_res, GError ** mcerror);
+void sftpfs_ssherror_to_gliberror (sftpfs_super_t * super, int libssh_errno, GError ** mcerror);
+gboolean sftpfs_waitsocket (sftpfs_super_t * super, int sftp_res, GError ** mcerror);
 
 const char *sftpfs_fix_filename (const char *file_name, unsigned int *length);
 void sftpfs_attr_to_stat (const LIBSSH2_SFTP_ATTRIBUTES * attrs, struct stat *s);

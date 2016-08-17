@@ -354,21 +354,18 @@ sftpfs_get_config_entity (const vfs_path_element_t * vpath_element, GError ** mc
 void
 sftpfs_fill_connection_data_from_config (struct vfs_s_super *super, GError ** mcerror)
 {
-    sftpfs_super_data_t *super_data;
+    sftpfs_super_t *sftpfs_super = SUP;
     sftpfs_ssh_config_entity_t *config_entity;
 
     mc_return_if_error (mcerror);
-
-    super_data = (sftpfs_super_data_t *) super->data;
 
     config_entity = sftpfs_get_config_entity (super->path_element, mcerror);
     if (config_entity == NULL)
         return;
 
-    super_data->config_auth_type = NONE;
-    super_data->config_auth_type |= (config_entity->pubkey_auth) ? PUBKEY : 0;
-    super_data->config_auth_type |= (config_entity->identities_only) ? 0 : AGENT;
-    super_data->config_auth_type |= (config_entity->password_auth) ? PASSWORD : 0;
+    sftpfs_super->config_auth_type = (config_entity->pubkey_auth) ? PUBKEY : 0;
+    sftpfs_super->config_auth_type |= (config_entity->identities_only) ? 0 : AGENT;
+    sftpfs_super->config_auth_type |= (config_entity->password_auth) ? PASSWORD : 0;
 
     if (super->path_element->port == 0)
         super->path_element->port = config_entity->port;
@@ -384,8 +381,8 @@ sftpfs_fill_connection_data_from_config (struct vfs_s_super *super, GError ** mc
 
     if (config_entity->identity_file != NULL)
     {
-        super_data->privkey = g_strdup (config_entity->identity_file);
-        super_data->pubkey = g_strdup_printf ("%s.pub", config_entity->identity_file);
+        sftpfs_super->privkey = g_strdup (config_entity->identity_file);
+        sftpfs_super->pubkey = g_strdup_printf ("%s.pub", config_entity->identity_file);
     }
 
     sftpfs_ssh_config_entity_free (config_entity);

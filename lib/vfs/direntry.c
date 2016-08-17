@@ -830,7 +830,7 @@ vfs_s_nothingisopen (vfsid id)
 static void
 vfs_s_free (vfsid id)
 {
-    vfs_s_free_super (((struct vfs_s_super *) id)->me, (struct vfs_s_super *) id);
+    vfs_s_free_super (VFS_SUPER (id)->me, VFS_SUPER (id));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1098,7 +1098,7 @@ vfs_get_super_by_vpath (const vfs_path_t * vpath)
     {
         int i;
 
-        super = (struct vfs_s_super *) iter->data;
+        super = VFS_SUPER (iter->data);
 
         /* 0 == other, 1 == same, return it, 2 == other but stop scanning */
         i = subclass->archive_same (path_element, super, vpath_archive, cookie);
@@ -1149,8 +1149,10 @@ vfs_s_get_path (const vfs_path_t * vpath, struct vfs_s_super **archive, int flag
         return NULL;
     }
 
-    super = vfs_s_new_super (path_element->class);
     subclass = VFS_SUBCLASS (path_element->class);
+
+    super = subclass->new_archive != NULL ?
+        subclass->new_archive (path_element->class) : vfs_s_new_super (path_element->class);
 
     if (subclass->open_archive != NULL)
     {

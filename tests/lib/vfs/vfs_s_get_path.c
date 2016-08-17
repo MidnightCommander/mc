@@ -53,7 +53,6 @@ test1_mock_open_archive (struct vfs_s_super *super, const vfs_path_t * vpath,
     mctest_assert_str_eq (vfs_path_as_str (vpath), "/" ETALON_VFS_URL_NAME ARCH_NAME);
 
     super->name = g_strdup (vfs_path_as_str (vpath));
-    super->data = g_new (char *, 1);
     root = vfs_s_new_inode (vpath_element->class, super, NULL);
     super->root = root;
     return 0;
