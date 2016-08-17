@@ -34,9 +34,9 @@
 
 #define ERRNOR(a, b) do { me->verrno = a; return b; } while (0)
 
-#define MEDATA ((struct vfs_s_subclass *) me->data)
+#define MEDATA ((struct vfs_s_subclass *) me)
 
-#define VFSDATA(a) ((a->class != NULL) ? (struct vfs_s_subclass *) a->class->data : NULL)
+#define VFS_SUBCLASS(a) ((struct vfs_s_subclass *) a->class)
 
 #define FH ((vfs_file_handler_t *) fh)
 #define FH_SUPER FH->ino->super
@@ -116,10 +116,12 @@ typedef struct
 
 /*
  * One of our subclasses (tar, cpio, fish, ftpfs) with data and methods.
- * Extends vfs_class.  Stored in the "data" field of vfs_class.
+ * Extends vfs_class.
  */
 struct vfs_s_subclass
 {
+    struct vfs_class base;      /* base class */
+
     GList *supers;
     int inode_counter;
     vfs_subclass_flags_t flags; /* whether the subclass is remove, read-only etc */
@@ -179,7 +181,7 @@ struct vfs_s_inode *vfs_s_find_inode (struct vfs_class *me,
 struct vfs_s_inode *vfs_s_find_root (struct vfs_class *me, struct vfs_s_entry *entry);
 
 /* outside interface */
-void vfs_s_init_class (struct vfs_class *vclass, struct vfs_s_subclass *sub);
+void vfs_s_init_class (struct vfs_s_subclass *sub);
 const char *vfs_s_get_path (const vfs_path_t * vpath, struct vfs_s_super **archive, int flags);
 struct vfs_s_super *vfs_get_super_by_vpath (const vfs_path_t * vpath);
 

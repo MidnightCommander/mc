@@ -222,7 +222,8 @@ typedef struct
 
 /*** file scope variables ************************************************************************/
 
-static struct vfs_class vfs_tarfs_ops;
+static struct vfs_s_subclass tarfs_subclass;
+static struct vfs_class *vfs_tarfs_ops = (struct vfs_class *) &tarfs_subclass;
 
 /* As we open one archive at a time, it is safe to have this static */
 static off_t current_tar_position = 0;
@@ -878,12 +879,12 @@ tar_super_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *pa
     if (((tar_super_data_t *) parc->data)->st.st_mtime < archive_stat->st_mtime)
     {
         /* Yes, reload! */
-        (*vfs_tarfs_ops.free) ((vfsid) parc);
-        vfs_rmstamp (&vfs_tarfs_ops, (vfsid) parc);
+        vfs_tarfs_ops->free ((vfsid) parc);
+        vfs_rmstamp (vfs_tarfs_ops, (vfsid) parc);
         return 2;
     }
     /* Hasn't been modified, give it a new timeout */
-    vfs_stamp (&vfs_tarfs_ops, (vfsid) parc);
+    vfs_stamp (vfs_tarfs_ops, (vfsid) parc);
     return 1;
 }
 
@@ -930,8 +931,6 @@ tar_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mo
 void
 init_tarfs (void)
 {
-    static struct vfs_s_subclass tarfs_subclass;
-
     tarfs_subclass.flags = VFS_S_READONLY;      /* FIXME: tarfs used own temp files */
     tarfs_subclass.archive_check = tar_super_check;
     tarfs_subclass.archive_same = tar_super_same;
@@ -939,12 +938,12 @@ init_tarfs (void)
     tarfs_subclass.free_archive = tar_free_archive;
     tarfs_subclass.fh_open = tar_fh_open;
 
-    vfs_s_init_class (&vfs_tarfs_ops, &tarfs_subclass);
-    vfs_tarfs_ops.name = "tarfs";
-    vfs_tarfs_ops.prefix = "utar";
-    vfs_tarfs_ops.read = tar_read;
-    vfs_tarfs_ops.setctl = NULL;
-    vfs_register_class (&vfs_tarfs_ops);
+    vfs_s_init_class (&tarfs_subclass);
+    vfs_tarfs_ops->name = "tarfs";
+    vfs_tarfs_ops->prefix = "utar";
+    vfs_tarfs_ops->read = tar_read;
+    vfs_tarfs_ops->setctl = NULL;
+    vfs_register_class (vfs_tarfs_ops);
 }
 
 /* --------------------------------------------------------------------------------------------- */

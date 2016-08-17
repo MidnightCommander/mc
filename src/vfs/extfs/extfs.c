@@ -60,6 +60,7 @@
 
 #include "lib/vfs/vfs.h"
 #include "lib/vfs/utilvfs.h"
+#include "lib/vfs/xdirentry.h"
 #include "lib/vfs/gc.h"         /* vfs_rmstamp */
 
 #include "extfs.h"
@@ -138,7 +139,9 @@ static GArray *extfs_plugins = NULL;
 static gboolean errloop;
 static gboolean notadir;
 
-static struct vfs_class vfs_extfs_ops;
+static struct vfs_s_subclass extfs_subclass;
+static struct vfs_class *vfs_extfs_ops = (struct vfs_class *) &extfs_subclass;
+
 static struct archive *first_archive = NULL;
 static int my_errno = 0;
 
@@ -689,7 +692,7 @@ extfs_get_path_int (const vfs_path_t * vpath, struct archive **archive, gboolean
         {
             if (strcmp (parc->name, archive_name) == 0)
             {
-                vfs_stamp (&vfs_extfs_ops, (vfsid) parc);
+                vfs_stamp (vfs_extfs_ops, (vfsid) parc);
                 g_free (archive_name);
                 goto return_success;
             }
@@ -960,7 +963,7 @@ extfs_open (const vfs_path_t * vpath, int flags, mode_t mode)
     extfs_info->local_handle = local_handle;
 
     /* i.e. we had no open files and now we have one */
-    vfs_rmstamp (&vfs_extfs_ops, (vfsid) archive);
+    vfs_rmstamp (vfs_extfs_ops, (vfsid) archive);
     archive->fd_usage++;
     return extfs_info;
 }
@@ -1003,7 +1006,7 @@ extfs_close (void *data)
     }
 
     if (--file->archive->fd_usage == 0)
-        vfs_stamp_create (&vfs_extfs_ops, file->archive);
+        vfs_stamp_create (vfs_extfs_ops, file->archive);
 
     g_free (data);
     if (errno_code != 0)
@@ -1724,37 +1727,40 @@ extfs_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
 void
 init_extfs (void)
 {
-    vfs_extfs_ops.name = "extfs";
-    vfs_extfs_ops.init = extfs_init;
-    vfs_extfs_ops.done = extfs_done;
-    vfs_extfs_ops.fill_names = extfs_fill_names;
-    vfs_extfs_ops.which = extfs_which;
-    vfs_extfs_ops.open = extfs_open;
-    vfs_extfs_ops.close = extfs_close;
-    vfs_extfs_ops.read = extfs_read;
-    vfs_extfs_ops.write = extfs_write;
-    vfs_extfs_ops.opendir = extfs_opendir;
-    vfs_extfs_ops.readdir = extfs_readdir;
-    vfs_extfs_ops.closedir = extfs_closedir;
-    vfs_extfs_ops.stat = extfs_stat;
-    vfs_extfs_ops.lstat = extfs_lstat;
-    vfs_extfs_ops.fstat = extfs_fstat;
-    vfs_extfs_ops.chmod = extfs_chmod;
-    vfs_extfs_ops.chown = extfs_chown;
-    vfs_extfs_ops.readlink = extfs_readlink;
-    vfs_extfs_ops.unlink = extfs_unlink;
-    vfs_extfs_ops.chdir = extfs_chdir;
-    vfs_extfs_ops.ferrno = extfs_errno;
-    vfs_extfs_ops.lseek = extfs_lseek;
-    vfs_extfs_ops.getid = extfs_getid;
-    vfs_extfs_ops.nothingisopen = extfs_nothingisopen;
-    vfs_extfs_ops.free = extfs_free;
-    vfs_extfs_ops.getlocalcopy = extfs_getlocalcopy;
-    vfs_extfs_ops.ungetlocalcopy = extfs_ungetlocalcopy;
-    vfs_extfs_ops.mkdir = extfs_mkdir;
-    vfs_extfs_ops.rmdir = extfs_rmdir;
-    vfs_extfs_ops.setctl = extfs_setctl;
-    vfs_register_class (&vfs_extfs_ops);
+    memset (&extfs_subclass, 0, sizeof (extfs_subclass));
+    vfs_s_init_class (&extfs_subclass);
+
+    vfs_extfs_ops->name = "extfs";
+    vfs_extfs_ops->init = extfs_init;
+    vfs_extfs_ops->done = extfs_done;
+    vfs_extfs_ops->fill_names = extfs_fill_names;
+    vfs_extfs_ops->which = extfs_which;
+    vfs_extfs_ops->open = extfs_open;
+    vfs_extfs_ops->close = extfs_close;
+    vfs_extfs_ops->read = extfs_read;
+    vfs_extfs_ops->write = extfs_write;
+    vfs_extfs_ops->opendir = extfs_opendir;
+    vfs_extfs_ops->readdir = extfs_readdir;
+    vfs_extfs_ops->closedir = extfs_closedir;
+    vfs_extfs_ops->stat = extfs_stat;
+    vfs_extfs_ops->lstat = extfs_lstat;
+    vfs_extfs_ops->fstat = extfs_fstat;
+    vfs_extfs_ops->chmod = extfs_chmod;
+    vfs_extfs_ops->chown = extfs_chown;
+    vfs_extfs_ops->readlink = extfs_readlink;
+    vfs_extfs_ops->unlink = extfs_unlink;
+    vfs_extfs_ops->chdir = extfs_chdir;
+    vfs_extfs_ops->ferrno = extfs_errno;
+    vfs_extfs_ops->lseek = extfs_lseek;
+    vfs_extfs_ops->getid = extfs_getid;
+    vfs_extfs_ops->nothingisopen = extfs_nothingisopen;
+    vfs_extfs_ops->free = extfs_free;
+    vfs_extfs_ops->getlocalcopy = extfs_getlocalcopy;
+    vfs_extfs_ops->ungetlocalcopy = extfs_ungetlocalcopy;
+    vfs_extfs_ops->mkdir = extfs_mkdir;
+    vfs_extfs_ops->rmdir = extfs_rmdir;
+    vfs_extfs_ops->setctl = extfs_setctl;
+    vfs_register_class (vfs_extfs_ops);
 }
 
 /* --------------------------------------------------------------------------------------------- */
