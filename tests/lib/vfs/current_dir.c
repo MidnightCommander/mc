@@ -34,7 +34,7 @@
 #include "src/vfs/local/local.c"
 
 static struct vfs_s_subclass test_subclass;
-static struct vfs_class vfs_test_ops;
+static struct vfs_class *vfs_test_ops = (struct vfs_class *) &test_subclass;
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -59,12 +59,12 @@ setup (void)
     init_localfs ();
     vfs_setup_work_dir ();
 
-    vfs_s_init_class (&vfs_test_ops, &test_subclass);
+    memset (&test_subclass, 0, sizeof (test_subclass));
+    vfs_s_init_class (&test_subclass);
 
-    vfs_test_ops.name = "testfs";
-    vfs_test_ops.prefix = "test";
-    vfs_test_ops.chdir = test_chdir;
-
+    vfs_test_ops->name = "testfs";
+    vfs_test_ops->prefix = "test";
+    vfs_test_ops->chdir = test_chdir;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -165,10 +165,10 @@ START_PARAMETRIZED_TEST (test_cd, test_cd_ds)
     /* given */
     vfs_path_t *vpath;
 
-    vfs_test_ops.flags = data->input_class_flags;
+    vfs_test_ops->flags = data->input_class_flags;
     test_subclass.flags = data->input_subclass_flags;
 
-    vfs_register_class (&vfs_test_ops);
+    vfs_register_class (vfs_test_ops);
     vfs_set_raw_current_dir (vfs_path_from_str (data->input_initial_path));
 
     vpath = vfs_path_from_str (data->input_cd_path);
@@ -186,7 +186,7 @@ START_PARAMETRIZED_TEST (test_cd, test_cd_ds)
     }
     vfs_path_free (vpath);
 
-    vfs_unregister_class (&vfs_test_ops);
+    vfs_unregister_class (vfs_test_ops);
 }
 /* *INDENT-OFF* */
 END_PARAMETRIZED_TEST

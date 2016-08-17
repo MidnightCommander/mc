@@ -155,7 +155,8 @@ typedef struct
 
 static char reply_str[80];
 
-static struct vfs_class vfs_fish_ops;
+static struct vfs_s_subclass fish_subclass;
+static struct vfs_class *vfs_fish_ops = (struct vfs_class *) &fish_subclass;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -343,7 +344,7 @@ fish_send_command (struct vfs_class *me, struct vfs_s_super *super, int flags, c
     va_start (ap, vars);
     r = fish_command_va (me, super, WAIT_REPLY, scr, vars, ap);
     va_end (ap);
-    vfs_stamp_create (&vfs_fish_ops, super);
+    vfs_stamp_create (vfs_fish_ops, super);
 
     if (r != COMPLETE)
         ERRNOR (E_REMOTE, -1);
@@ -1700,7 +1701,7 @@ fish_fill_names (struct vfs_class *me, fill_names_f func)
         }
 
         name =
-            g_strconcat (vfs_fish_ops.prefix, VFS_PATH_URL_DELIMITER,
+            g_strconcat (vfs_fish_ops->prefix, VFS_PATH_URL_DELIMITER,
                          super->path_element->user, "@", super->path_element->host, flags,
                          PATH_SEP_STR, super->path_element->path, (char *) NULL);
         func (name);
@@ -1728,9 +1729,9 @@ fish_open (const vfs_path_t * vpath, int flags, mode_t mode)
 void
 init_fish (void)
 {
-    static struct vfs_s_subclass fish_subclass;
-
     tcp_init ();
+
+    memset (&fish_subclass, 0, sizeof (fish_subclass));
 
     fish_subclass.flags = VFS_S_REMOTE | VFS_S_USETMP;
     fish_subclass.archive_same = fish_archive_same;
@@ -1744,25 +1745,25 @@ init_fish (void)
     fish_subclass.linear_read = fish_linear_read;
     fish_subclass.linear_close = fish_linear_close;
 
-    vfs_s_init_class (&vfs_fish_ops, &fish_subclass);
-    vfs_fish_ops.name = "fish";
-    vfs_fish_ops.prefix = "sh";
-    vfs_fish_ops.fill_names = fish_fill_names;
-    vfs_fish_ops.stat = fish_stat;
-    vfs_fish_ops.lstat = fish_lstat;
-    vfs_fish_ops.fstat = fish_fstat;
-    vfs_fish_ops.chmod = fish_chmod;
-    vfs_fish_ops.chown = fish_chown;
-    vfs_fish_ops.utime = fish_utime;
-    vfs_fish_ops.open = fish_open;
-    vfs_fish_ops.symlink = fish_symlink;
-    vfs_fish_ops.link = fish_link;
-    vfs_fish_ops.unlink = fish_unlink;
-    vfs_fish_ops.rename = fish_rename;
-    vfs_fish_ops.mkdir = fish_mkdir;
-    vfs_fish_ops.rmdir = fish_rmdir;
-    vfs_fish_ops.ctl = fish_ctl;
-    vfs_register_class (&vfs_fish_ops);
+    vfs_s_init_class (&fish_subclass);
+    vfs_fish_ops->name = "fish";
+    vfs_fish_ops->prefix = "sh";
+    vfs_fish_ops->fill_names = fish_fill_names;
+    vfs_fish_ops->stat = fish_stat;
+    vfs_fish_ops->lstat = fish_lstat;
+    vfs_fish_ops->fstat = fish_fstat;
+    vfs_fish_ops->chmod = fish_chmod;
+    vfs_fish_ops->chown = fish_chown;
+    vfs_fish_ops->utime = fish_utime;
+    vfs_fish_ops->open = fish_open;
+    vfs_fish_ops->symlink = fish_symlink;
+    vfs_fish_ops->link = fish_link;
+    vfs_fish_ops->unlink = fish_unlink;
+    vfs_fish_ops->rename = fish_rename;
+    vfs_fish_ops->mkdir = fish_mkdir;
+    vfs_fish_ops->rmdir = fish_rmdir;
+    vfs_fish_ops->ctl = fish_ctl;
+    vfs_register_class (vfs_fish_ops);
 }
 
 /* --------------------------------------------------------------------------------------------- */

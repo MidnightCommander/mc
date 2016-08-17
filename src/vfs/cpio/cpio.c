@@ -143,7 +143,8 @@ typedef struct
 
 /*** file scope variables ************************************************************************/
 
-static struct vfs_class vfs_cpiofs_ops;
+static struct vfs_s_subclass cpio_subclass;
+static struct vfs_class *vfs_cpiofs_ops = (struct vfs_class *) &cpio_subclass;
 
 static off_t cpio_position;
 
@@ -828,12 +829,12 @@ cpio_super_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *p
         && ((cpio_super_data_t *) parc->data)->st.st_mtime < archive_stat->st_mtime)
     {
         /* Yes, reload! */
-        (*vfs_cpiofs_ops.free) ((vfsid) parc);
-        vfs_rmstamp (&vfs_cpiofs_ops, (vfsid) parc);
+        vfs_cpiofs_ops->free ((vfsid) parc);
+        vfs_rmstamp (vfs_cpiofs_ops, (vfsid) parc);
         return 2;
     }
     /* Hasn't been modified, give it a new timeout */
-    vfs_stamp (&vfs_cpiofs_ops, (vfsid) parc);
+    vfs_stamp (vfs_cpiofs_ops, (vfsid) parc);
     return 1;
 }
 
@@ -881,7 +882,7 @@ cpio_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t m
 void
 init_cpiofs (void)
 {
-    static struct vfs_s_subclass cpio_subclass;
+    memset (&cpio_subclass, 0, sizeof (cpio_subclass));
 
     cpio_subclass.flags = VFS_S_READONLY;       /* FIXME: cpiofs used own temp files */
     cpio_subclass.archive_check = cpio_super_check;
@@ -890,12 +891,12 @@ init_cpiofs (void)
     cpio_subclass.free_archive = cpio_free_archive;
     cpio_subclass.fh_open = cpio_fh_open;
 
-    vfs_s_init_class (&vfs_cpiofs_ops, &cpio_subclass);
-    vfs_cpiofs_ops.name = "cpiofs";
-    vfs_cpiofs_ops.prefix = "ucpio";
-    vfs_cpiofs_ops.read = cpio_read;
-    vfs_cpiofs_ops.setctl = NULL;
-    vfs_register_class (&vfs_cpiofs_ops);
+    vfs_s_init_class (&cpio_subclass);
+    vfs_cpiofs_ops->name = "cpiofs";
+    vfs_cpiofs_ops->prefix = "ucpio";
+    vfs_cpiofs_ops->read = cpio_read;
+    vfs_cpiofs_ops->setctl = NULL;
+    vfs_register_class (vfs_cpiofs_ops);
 }
 
 /* --------------------------------------------------------------------------------------------- */

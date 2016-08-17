@@ -65,6 +65,7 @@
 #include "helpers/include/includes.h"
 
 #include "lib/vfs/vfs.h"
+#include "lib/vfs/xdirentry.h"  /* vfs_s_subclass */
 #include "lib/vfs/netutil.h"
 #include "lib/vfs/utilvfs.h"
 
@@ -136,7 +137,9 @@ static gboolean got_user = FALSE;
 static gboolean got_pass = FALSE;
 static pstring password;
 static pstring username;
-static struct vfs_class vfs_smbfs_ops;
+
+static struct vfs_s_subclass smbfs_subclass;
+static struct vfs_class *vfs_smbfs_ops = (struct vfs_class *) &smbfs_subclass;
 
 static struct _smbfs_connection
 {
@@ -1345,7 +1348,7 @@ smbfs_get_path (smbfs_connection ** sc, const vfs_path_t * vpath)
 
     DEBUG (3, ("smbfs_get_path(%s)\n", path));
 
-    if (path_element->class != &vfs_smbfs_ops)
+    if (path_element->class != vfs_smbfs_ops)
         return NULL;
 
     while (*path == '/')        /* '/' leading server name */
@@ -1745,7 +1748,7 @@ smbfs_stat (const vfs_path_t * vpath, struct stat *buf)
 
     /* check if stating server */
     p = path_element->path;
-    if (path_element->class != &vfs_smbfs_ops)
+    if (path_element->class != vfs_smbfs_ops)
         return -1;
 
     while (*p == '/')           /* '/' leading server name */
@@ -1981,7 +1984,7 @@ smbfs_forget (const vfs_path_t * vpath)
     const char *path;
 
     path_element = vfs_path_get_by_index (vpath, -1);
-    if (path_element->class != &vfs_smbfs_ops)
+    if (path_element->class != vfs_smbfs_ops)
         return;
 
     path = path_element->path;
@@ -2238,38 +2241,40 @@ init_smbfs (void)
 {
     tcp_init ();
 
-    vfs_smbfs_ops.name = "smbfs";
-    vfs_smbfs_ops.prefix = "smb";
-    vfs_smbfs_ops.flags = VFSF_NOLINKS;
-    vfs_smbfs_ops.init = smbfs_init;
-    vfs_smbfs_ops.fill_names = smbfs_fill_names;
-    vfs_smbfs_ops.open = smbfs_open;
-    vfs_smbfs_ops.close = smbfs_close;
-    vfs_smbfs_ops.read = smbfs_read;
-    vfs_smbfs_ops.write = smbfs_write;
-    vfs_smbfs_ops.opendir = smbfs_opendir;
-    vfs_smbfs_ops.readdir = smbfs_readdir;
-    vfs_smbfs_ops.closedir = smbfs_closedir;
-    vfs_smbfs_ops.stat = smbfs_stat;
-    vfs_smbfs_ops.lstat = smbfs_lstat;
-    vfs_smbfs_ops.fstat = smbfs_fstat;
-    vfs_smbfs_ops.chmod = smbfs_chmod;
-    vfs_smbfs_ops.chown = smbfs_chown;
-    vfs_smbfs_ops.utime = smbfs_utime;
-    vfs_smbfs_ops.readlink = smbfs_readlink;
-    vfs_smbfs_ops.symlink = smbfs_symlink;
-    vfs_smbfs_ops.link = smbfs_link;
-    vfs_smbfs_ops.unlink = smbfs_unlink;
-    vfs_smbfs_ops.rename = smbfs_rename;
-    vfs_smbfs_ops.chdir = smbfs_chdir;
-    vfs_smbfs_ops.ferrno = smbfs_errno;
-    vfs_smbfs_ops.lseek = smbfs_lseek;
-    vfs_smbfs_ops.mknod = smbfs_mknod;
-    vfs_smbfs_ops.free = smbfs_free;
-    vfs_smbfs_ops.mkdir = smbfs_mkdir;
-    vfs_smbfs_ops.rmdir = smbfs_rmdir;
-    vfs_smbfs_ops.setctl = smbfs_setctl;
-    vfs_register_class (&vfs_smbfs_ops);
+    memset (&smbfs_subclass, 0, sizeof (smbfs_subclass));
+
+    vfs_smbfs_ops->name = "smbfs";
+    vfs_smbfs_ops->prefix = "smb";
+    vfs_smbfs_ops->flags = VFSF_NOLINKS;
+    vfs_smbfs_ops->init = smbfs_init;
+    vfs_smbfs_ops->fill_names = smbfs_fill_names;
+    vfs_smbfs_ops->open = smbfs_open;
+    vfs_smbfs_ops->close = smbfs_close;
+    vfs_smbfs_ops->read = smbfs_read;
+    vfs_smbfs_ops->write = smbfs_write;
+    vfs_smbfs_ops->opendir = smbfs_opendir;
+    vfs_smbfs_ops->readdir = smbfs_readdir;
+    vfs_smbfs_ops->closedir = smbfs_closedir;
+    vfs_smbfs_ops->stat = smbfs_stat;
+    vfs_smbfs_ops->lstat = smbfs_lstat;
+    vfs_smbfs_ops->fstat = smbfs_fstat;
+    vfs_smbfs_ops->chmod = smbfs_chmod;
+    vfs_smbfs_ops->chown = smbfs_chown;
+    vfs_smbfs_ops->utime = smbfs_utime;
+    vfs_smbfs_ops->readlink = smbfs_readlink;
+    vfs_smbfs_ops->symlink = smbfs_symlink;
+    vfs_smbfs_ops->link = smbfs_link;
+    vfs_smbfs_ops->unlink = smbfs_unlink;
+    vfs_smbfs_ops->rename = smbfs_rename;
+    vfs_smbfs_ops->chdir = smbfs_chdir;
+    vfs_smbfs_ops->ferrno = smbfs_errno;
+    vfs_smbfs_ops->lseek = smbfs_lseek;
+    vfs_smbfs_ops->mknod = smbfs_mknod;
+    vfs_smbfs_ops->free = smbfs_free;
+    vfs_smbfs_ops->mkdir = smbfs_mkdir;
+    vfs_smbfs_ops->rmdir = smbfs_rmdir;
+    vfs_smbfs_ops->setctl = smbfs_setctl;
+    vfs_register_class (vfs_smbfs_ops);
 }
 
 /* --------------------------------------------------------------------------------------------- */

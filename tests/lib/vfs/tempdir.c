@@ -39,10 +39,6 @@
 
 #include "src/vfs/local/local.c"
 
-
-struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
-struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
-
 /* --------------------------------------------------------------------------------------------- */
 
 /* @Before */

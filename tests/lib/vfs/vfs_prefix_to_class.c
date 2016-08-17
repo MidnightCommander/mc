@@ -34,7 +34,9 @@
 #include "src/vfs/local/local.c"
 
 struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
-struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
+static struct vfs_class *vfs_test_ops1 = (struct vfs_class *) &test_subclass1;
+static struct vfs_class *vfs_test_ops2 = (struct vfs_class *) &test_subclass2;
+static struct vfs_class *vfs_test_ops3 = (struct vfs_class *) &test_subclass3;
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -62,24 +64,26 @@ setup (void)
     init_localfs ();
     vfs_setup_work_dir ();
 
+    memset (&test_subclass1, 0, sizeof (test_subclass1));
     test_subclass1.flags = VFS_S_REMOTE;
-    vfs_s_init_class (&vfs_test_ops1, &test_subclass1);
-    vfs_test_ops1.name = "testfs1";
-    vfs_test_ops1.flags = VFSF_NOLINKS;
-    vfs_test_ops1.prefix = "test1:";
-    vfs_test_ops1.which = test_which;
-    vfs_register_class (&vfs_test_ops1);
+    vfs_s_init_class (&test_subclass1);
+    vfs_test_ops1->name = "testfs1";
+    vfs_test_ops1->flags = VFSF_NOLINKS;
+    vfs_test_ops1->prefix = "test1:";
+    vfs_test_ops1->which = test_which;
+    vfs_register_class (vfs_test_ops1);
 
-    vfs_s_init_class (&vfs_test_ops2, &test_subclass2);
-    vfs_test_ops2.name = "testfs2";
-    vfs_test_ops2.prefix = "test2:";
-    vfs_register_class (&vfs_test_ops2);
+    memset (&test_subclass2, 0, sizeof (test_subclass2));
+    vfs_s_init_class (&test_subclass2);
+    vfs_test_ops2->name = "testfs2";
+    vfs_test_ops2->prefix = "test2:";
+    vfs_register_class (vfs_test_ops2);
 
-    vfs_s_init_class (&vfs_test_ops3, &test_subclass3);
-    vfs_test_ops3.name = "testfs3";
-    vfs_test_ops3.prefix = "test3:";
-    vfs_register_class (&vfs_test_ops3);
-
+    memset (&test_subclass3, 0, sizeof (test_subclass3));
+    vfs_s_init_class (&test_subclass3);
+    vfs_test_ops3->name = "testfs3";
+    vfs_test_ops3->prefix = "test3:";
+    vfs_register_class (vfs_test_ops3);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -104,27 +108,27 @@ static const struct test_vfs_prefix_to_class_ds
 {
     { /* 0 */
         "test_1:",
-        &vfs_test_ops1
+        (struct vfs_class *) &test_subclass1
     },
     { /* 1 */
         "test_2:",
-        &vfs_test_ops1
+        (struct vfs_class *) &test_subclass1
     },
     { /* 2 */
         "test_3:",
-        &vfs_test_ops1
+        (struct vfs_class *) &test_subclass1
     },
     { /* 3 */
         "test_4:",
-        &vfs_test_ops1
+        (struct vfs_class *) &test_subclass1
     },
     { /* 4 */
         "test2:",
-        &vfs_test_ops2
+        (struct vfs_class *) &test_subclass2
     },
     { /* 5 */
         "test3:",
-        &vfs_test_ops3
+        (struct vfs_class *) &test_subclass3
     },
     {
         "test1:",

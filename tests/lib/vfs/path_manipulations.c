@@ -38,31 +38,36 @@
 
 
 struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
-struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
+static struct vfs_class *vfs_test_ops1 = (struct vfs_class *) &test_subclass1;
+static struct vfs_class *vfs_test_ops2 = (struct vfs_class *) &test_subclass2;
+static struct vfs_class *vfs_test_ops3 = (struct vfs_class *) &test_subclass3;
 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
 init_test_classes (void)
 {
+    memset (&test_subclass1, 0, sizeof (test_subclass1));
     test_subclass1.flags = VFS_S_REMOTE;
-    vfs_s_init_class (&vfs_test_ops1, &test_subclass1);
+    vfs_s_init_class (&test_subclass1);
 
-    vfs_test_ops1.name = "testfs1";
-    vfs_test_ops1.flags = VFSF_NOLINKS;
-    vfs_test_ops1.prefix = "test1";
-    vfs_register_class (&vfs_test_ops1);
+    vfs_test_ops1->name = "testfs1";
+    vfs_test_ops1->flags = VFSF_NOLINKS;
+    vfs_test_ops1->prefix = "test1";
+    vfs_register_class (vfs_test_ops1);
 
-    vfs_s_init_class (&vfs_test_ops2, &test_subclass2);
-    vfs_test_ops2.name = "testfs2";
-    vfs_test_ops2.prefix = "test2";
-    vfs_register_class (&vfs_test_ops2);
+    memset (&test_subclass2, 0, sizeof (test_subclass2));
+    vfs_s_init_class (&test_subclass2);
+    vfs_test_ops2->name = "testfs2";
+    vfs_test_ops2->prefix = "test2";
+    vfs_register_class (vfs_test_ops2);
 
-    vfs_s_init_class (&vfs_test_ops3, &test_subclass3);
-    vfs_test_ops3.name = "testfs3";
-    vfs_test_ops3.prefix = "test3";
-    vfs_test_ops3.flags = VFSF_LOCAL;
-    vfs_register_class (&vfs_test_ops3);
+    memset (&test_subclass3, 0, sizeof (test_subclass3));
+    vfs_s_init_class (&test_subclass3);
+    vfs_test_ops3->name = "testfs3";
+    vfs_test_ops3->flags = VFSF_LOCAL;
+    vfs_test_ops3->prefix = "test3";
+    vfs_register_class (vfs_test_ops3);
 }
 
 /* --------------------------------------------------------------------------------------------- */

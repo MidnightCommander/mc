@@ -34,7 +34,7 @@
 
 
 struct vfs_s_subclass test_subclass1;
-struct vfs_class vfs_test_ops1;
+static struct vfs_class *vfs_test_ops1 = (struct vfs_class *) &test_subclass1;
 
 static int test_chdir (const vfs_path_t * vpath);
 
@@ -71,25 +71,25 @@ test_chdir__deinit (void)
 static void
 setup (void)
 {
-
     str_init_strings (NULL);
 
     vfs_init ();
     init_localfs ();
     vfs_setup_work_dir ();
 
+    memset (&test_subclass1, 0, sizeof (test_subclass1));
     test_subclass1.flags = VFS_S_REMOTE;
-    vfs_s_init_class (&vfs_test_ops1, &test_subclass1);
+    vfs_s_init_class (&test_subclass1);
 
-    vfs_test_ops1.name = "testfs1";
-    vfs_test_ops1.flags = VFSF_NOLINKS;
-    vfs_test_ops1.prefix = "test1";
-    vfs_test_ops1.chdir = test_chdir;
-    vfs_register_class (&vfs_test_ops1);
+    vfs_test_ops1->name = "testfs1";
+    vfs_test_ops1->flags = VFSF_NOLINKS;
+    vfs_test_ops1->prefix = "test1";
+    vfs_test_ops1->chdir = test_chdir;
+    vfs_register_class (vfs_test_ops1);
 
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
 
-    vfs_local_ops.chdir = test_chdir;
+    vfs_local_ops->chdir = test_chdir;
 
     test_chdir__init ();
 }
