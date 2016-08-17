@@ -2147,9 +2147,9 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
     edit_get_syntax_color (edit, -1);
 
     /* load saved cursor position */
-    if ((line == 0) && option_save_position)
+    if (option_save_position)
         edit_load_position (edit);
-    else
+    if (line != 0)
     {
         if (line <= 0)
             line = 1;
