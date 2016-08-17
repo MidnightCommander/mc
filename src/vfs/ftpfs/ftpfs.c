@@ -154,7 +154,8 @@ gboolean ftpfs_ignore_chattr_errors = TRUE;
 #endif
 
 #define FTP_SUPER(super) ((ftp_super_t *) (super))
-#define FH_SOCK ((ftp_fh_data_t *) fh)->sock
+#define FTP_FH ((ftp_file_handler_t *) fh)
+#define FH_SOCK FTP_FH->sock
 
 #ifndef INADDR_NONE
 #define INADDR_NONE 0xffffffff
@@ -224,9 +225,11 @@ typedef struct
 
 typedef struct
 {
+    vfs_file_handler_t base;    /* base class */
+
     int sock;
     int append;
-} ftp_fh_data_t;
+} ftp_file_handler_t;
 
 /*** file scope variables ************************************************************************/
 
@@ -1865,7 +1868,7 @@ ftpfs_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, cha
     char *w_buf;
     struct vfs_s_super *super = FH_SUPER;
     ftp_super_t *ftp_super = FTP_SUPER (super);
-    ftp_fh_data_t *ftp = (ftp_fh_data_t *) fh->data;
+    ftp_file_handler_t *ftp = FTP_FH;
 
     h = open (localname, O_RDONLY);
     if (h == -1)
@@ -1949,9 +1952,6 @@ ftpfs_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
 {
     char *name;
 
-    if (fh->data == NULL)
-        fh->data = g_new0 (ftp_fh_data_t, 1);
-
     name = vfs_s_fullpath (me, fh->ino);
     if (name == NULL)
         return 0;
@@ -1960,7 +1960,7 @@ ftpfs_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
     if (FH_SOCK == -1)
         ERRNOR (EACCES, 0);
     fh->linear = LS_LINEAR_OPEN;
-    ((ftp_fh_data_t *) fh->data)->append = 0;
+    FTP_FH->append = 0;
     return 1;
 }
 
@@ -2021,7 +2021,7 @@ ftpfs_ctl (void *fh, int ctlop, void *arg)
             if (FH->linear == LS_LINEAR_CLOSED || FH->linear == LS_LINEAR_PREOPEN)
                 return 0;
 
-            v = vfs_s_select_on_two (((ftp_fh_data_t *) (FH->data))->sock, 0);
+            v = vfs_s_select_on_two (FH_SOCK, 0);
             return (((v < 0) && (errno == EINTR)) || v == 0) ? 1 : 0;
         }
     default:
@@ -2213,11 +2213,16 @@ ftpfs_rmdir (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-ftpfs_fh_free_data (vfs_file_handler_t * fh)
+static vfs_file_handler_t *
+ftpfs_fh_new (struct vfs_s_inode *ino, gboolean changed)
 {
-    if (fh != NULL)
-        MC_PTR_FREE (fh->data);
+    ftp_file_handler_t *fh;
+
+    fh = g_new0 (ftp_file_handler_t, 1);
+    vfs_s_init_fh ((vfs_file_handler_t *) fh, ino, changed);
+    fh->sock = -1;
+
+    return FH;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2225,12 +2230,10 @@ ftpfs_fh_free_data (vfs_file_handler_t * fh)
 static int
 ftpfs_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mode)
 {
-    ftp_fh_data_t *ftp;
+    ftp_file_handler_t *ftp = FTP_FH;
 
     (void) mode;
 
-    fh->data = g_new0 (ftp_fh_data_t, 1);
-    ftp = (ftp_fh_data_t *) fh->data;
     /* File will be written only, so no need to retrieve it from ftp server */
     if (((flags & O_WRONLY) == O_WRONLY) && ((flags & (O_RDONLY | O_RDWR)) == 0))
     {
@@ -2296,7 +2299,6 @@ ftpfs_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t 
     return 0;
 
   fail:
-    ftpfs_fh_free_data (fh);
     return -1;
 }
 
@@ -2685,9 +2687,9 @@ init_ftpfs (void)
     ftpfs_subclass.new_archive = ftpfs_new_archive;
     ftpfs_subclass.open_archive = ftpfs_open_archive;
     ftpfs_subclass.free_archive = ftpfs_free_archive;
+    ftpfs_subclass.fh_new = ftpfs_fh_new;
     ftpfs_subclass.fh_open = ftpfs_fh_open;
     ftpfs_subclass.fh_close = ftpfs_fh_close;
-    ftpfs_subclass.fh_free_data = ftpfs_fh_free_data;
     ftpfs_subclass.dir_load = ftpfs_dir_load;
     ftpfs_subclass.file_store = ftpfs_file_store;
     ftpfs_subclass.linear_start = ftpfs_linear_start;

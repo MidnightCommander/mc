@@ -88,21 +88,21 @@ int sftpfs_open_connection (struct vfs_s_super *super, GError ** mcerror);
 void sftpfs_close_connection (struct vfs_s_super *super, const char *shutdown_message,
                               GError ** mcerror);
 
+vfs_file_handler_t *sftpfs_fh_new (struct vfs_s_inode *ino, gboolean changed);
+
 void *sftpfs_opendir (const vfs_path_t * vpath, GError ** mcerror);
 void *sftpfs_readdir (void *data, GError ** mcerror);
 int sftpfs_closedir (void *data, GError ** mcerror);
 int sftpfs_mkdir (const vfs_path_t * vpath, mode_t mode, GError ** mcerror);
 int sftpfs_rmdir (const vfs_path_t * vpath, GError ** mcerror);
 
-gboolean sftpfs_open_file (vfs_file_handler_t * file_handler, int flags, mode_t mode,
+gboolean sftpfs_open_file (vfs_file_handler_t * fh, int flags, mode_t mode, GError ** mcerror);
+ssize_t sftpfs_read_file (vfs_file_handler_t * fh, char *buffer, size_t count, GError ** mcerror);
+ssize_t sftpfs_write_file (vfs_file_handler_t * fh, const char *buffer, size_t count,
                            GError ** mcerror);
-ssize_t sftpfs_read_file (vfs_file_handler_t * file_handler, char *buffer, size_t count,
-                          GError ** mcerror);
-ssize_t sftpfs_write_file (vfs_file_handler_t * file_handler, const char *buffer, size_t count,
-                           GError ** mcerror);
-int sftpfs_close_file (vfs_file_handler_t * file_handler, GError ** mcerror);
+int sftpfs_close_file (vfs_file_handler_t * fh, GError ** mcerror);
 int sftpfs_fstat (void *data, struct stat *buf, GError ** mcerror);
-off_t sftpfs_lseek (vfs_file_handler_t * file_handler, off_t offset, int whence, GError ** mcerror);
+off_t sftpfs_lseek (vfs_file_handler_t * fh, off_t offset, int whence, GError ** mcerror);
 
 /*** inline functions ****************************************************************************/
 

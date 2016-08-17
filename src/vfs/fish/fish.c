@@ -118,6 +118,7 @@ int fish_directory_timeout = 900;
 #define FISH_HAVE_TAIL        64
 
 #define FISH_SUPER(super) ((fish_super_t *) (super))
+#define FISH_FH ((fish_file_handler_t *) fh)
 
 /*** file scope type declarations ****************************************************************/
 
@@ -148,10 +149,12 @@ typedef struct
 
 typedef struct
 {
+    vfs_file_handler_t base;    /* base class */
+
     off_t got;
     off_t total;
     gboolean append;
-} fish_fh_data_t;
+} fish_file_handler_t;
 
 /*** file scope variables ************************************************************************/
 
@@ -965,7 +968,7 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 static int
 fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char *localname)
 {
-    fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
+    fish_file_handler_t *fish = FISH_FH;
     struct vfs_s_super *super = FH_SUPER;
     fish_super_t *fish_super = FISH_SUPER (super);
     int code;
@@ -1077,15 +1080,10 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
 static int
 fish_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
 {
-    fish_fh_data_t *fish;
+    fish_file_handler_t *fish = FISH_FH;
     struct vfs_s_super *super = FH_SUPER;
     char *name;
     char *quoted_name;
-
-    if (fh->data == NULL)
-        fh->data = g_new0 (fish_fh_data_t, 1);
-
-    fish = (fish_fh_data_t *) fh->data;
 
     name = vfs_s_fullpath (me, fh->ino);
     if (name == NULL)
@@ -1127,7 +1125,7 @@ fish_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
 static void
 fish_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
 {
-    fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
+    fish_file_handler_t *fish = FISH_FH;
     struct vfs_s_super *super = FH_SUPER;
     char buffer[BUF_8K];
     ssize_t n;
@@ -1158,7 +1156,7 @@ fish_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
 static ssize_t
 fish_linear_read (struct vfs_class *me, vfs_file_handler_t * fh, void *buf, size_t len)
 {
-    fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
+    fish_file_handler_t *fish = FISH_FH;
     struct vfs_s_super *super = FH_SUPER;
     ssize_t n = 0;
 
@@ -1186,7 +1184,7 @@ fish_linear_read (struct vfs_class *me, vfs_file_handler_t * fh, void *buf, size
 static void
 fish_linear_close (struct vfs_class *me, vfs_file_handler_t * fh)
 {
-    fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
+    fish_file_handler_t *fish = FISH_FH;
 
     if (fish->total != fish->got)
         fish_linear_abort (me, fh);
@@ -1637,11 +1635,15 @@ fish_rmdir (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-fish_fh_free_data (vfs_file_handler_t * fh)
+static vfs_file_handler_t *
+fish_fh_new (struct vfs_s_inode *ino, gboolean changed)
 {
-    if (fh != NULL)
-        MC_PTR_FREE (fh->data);
+    fish_file_handler_t *fh;
+
+    fh = g_new0 (fish_file_handler_t, 1);
+    vfs_s_init_fh ((vfs_file_handler_t *) fh, ino, changed);
+
+    return FH;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1649,12 +1651,9 @@ fish_fh_free_data (vfs_file_handler_t * fh)
 static int
 fish_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mode)
 {
-    fish_fh_data_t *fish;
+    fish_file_handler_t *fish = FISH_FH;
 
     (void) mode;
-
-    fh->data = g_new0 (fish_fh_data_t, 1);
-    fish = (fish_fh_data_t *) fh->data;
 
     /* File will be written only, so no need to retrieve it */
     if (((flags & O_WRONLY) == O_WRONLY) && ((flags & (O_RDONLY | O_RDWR)) == 0))
@@ -1687,7 +1686,6 @@ fish_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t m
     return 0;
 
   fail:
-    fish_fh_free_data (fh);
     return -1;
 }
 
@@ -1774,8 +1772,8 @@ init_fish (void)
     fish_subclass.new_archive = fish_new_archive;
     fish_subclass.open_archive = fish_open_archive;
     fish_subclass.free_archive = fish_free_archive;
+    fish_subclass.fh_new = fish_fh_new;
     fish_subclass.fh_open = fish_fh_open;
-    fish_subclass.fh_free_data = fish_fh_free_data;
     fish_subclass.dir_load = fish_dir_load;
     fish_subclass.file_store = fish_file_store;
     fish_subclass.linear_start = fish_linear_start;

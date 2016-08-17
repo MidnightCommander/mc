@@ -93,7 +93,7 @@ sftpfs_cb_done (struct vfs_class *me)
 static void *
 sftpfs_cb_open (const vfs_path_t * vpath, int flags, mode_t mode)
 {
-    vfs_file_handler_t *file_handler;
+    vfs_file_handler_t *fh;
     const vfs_path_element_t *path_element;
     struct vfs_s_super *super;
     const char *path_super;
@@ -143,25 +143,19 @@ sftpfs_cb_open (const vfs_path_t * vpath, int flags, mode_t mode)
         return NULL;
     }
 
-    file_handler = g_new0 (vfs_file_handler_t, 1);
-    file_handler->pos = 0;
-    file_handler->ino = path_inode;
-    file_handler->handle = -1;
-    file_handler->changed = is_changed;
-    file_handler->linear = LS_NOT_LINEAR;
-    file_handler->data = NULL;
+    fh = sftpfs_fh_new (path_inode, is_changed);
 
-    if (!sftpfs_open_file (file_handler, flags, mode, &mcerror))
+    if (!sftpfs_open_file (fh, flags, mode, &mcerror))
     {
         mc_error_message (&mcerror, NULL);
-        g_free (file_handler);
+        g_free (fh);
         return NULL;
     }
 
     vfs_rmstamp (path_element->class, (vfsid) super);
     super->fd_usage++;
-    file_handler->ino->st.st_nlink++;
-    return file_handler;
+    fh->ino->st.st_nlink++;
+    return fh;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -487,22 +481,21 @@ sftpfs_cb_close (void *data)
     int rc;
     GError *mcerror = NULL;
     struct vfs_s_super *super;
-    vfs_file_handler_t *file_handler = (vfs_file_handler_t *) data;
+    vfs_file_handler_t *fh = (vfs_file_handler_t *) data;
 
-    super = file_handler->ino->super;
+    super = fh->ino->super;
 
     super->fd_usage--;
     if (super->fd_usage == 0)
         vfs_stamp_create (sftpfs_class, super);
 
-    rc = sftpfs_close_file (file_handler, &mcerror);
+    rc = sftpfs_close_file (fh, &mcerror);
     mc_error_message (&mcerror, NULL);
 
-    if (file_handler->handle != -1)
-        close (file_handler->handle);
+    if (fh->handle != -1)
+        close (fh->handle);
 
-    vfs_s_free_inode (sftpfs_class, file_handler->ino);
-    g_free (file_handler);
+    vfs_s_free_inode (sftpfs_class, fh->ino);
 
     return rc;
 }
@@ -580,10 +573,10 @@ static off_t
 sftpfs_cb_lseek (void *data, off_t offset, int whence)
 {
     off_t ret_offset;
-    vfs_file_handler_t *file_handler = (vfs_file_handler_t *) data;
+    vfs_file_handler_t *fh = (vfs_file_handler_t *) data;
     GError *mcerror = NULL;
 
-    ret_offset = sftpfs_lseek (file_handler, offset, whence, &mcerror);
+    ret_offset = sftpfs_lseek (fh, offset, whence, &mcerror);
     mc_error_message (&mcerror, NULL);
     return ret_offset;
 }

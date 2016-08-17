@@ -39,14 +39,18 @@
 
 /*** file scope macro definitions ****************************************************************/
 
+#define SFTP_FH ((sftpfs_file_handler_t *) fh)
+
 /*** file scope type declarations ****************************************************************/
 
 typedef struct
 {
+    vfs_file_handler_t base;    /* base class */
+
     LIBSSH2_SFTP_HANDLE *handle;
     int flags;
     mode_t mode;
-} sftpfs_file_handler_data_t;
+} sftpfs_file_handler_t;
 
 /*** file scope variables ************************************************************************/
 
@@ -56,24 +60,23 @@ typedef struct
 /**
  * Reopen file by file handle.
  *
- * @param file_handler the file handler data
- * @param mcerror      pointer to the error handler
+ * @param fh      the file handler
+ * @param mcerror pointer to the error handler
  */
 static void
-sftpfs_reopen (vfs_file_handler_t * file_handler, GError ** mcerror)
+sftpfs_reopen (vfs_file_handler_t * fh, GError ** mcerror)
 {
-    sftpfs_file_handler_data_t *file_handler_data;
+    sftpfs_file_handler_t *file = SFTP_FH;
     int flags;
     mode_t mode;
 
     g_return_if_fail (mcerror == NULL || *mcerror == NULL);
 
-    file_handler_data = (sftpfs_file_handler_data_t *) file_handler->data;
-    flags = file_handler_data->flags;
-    mode = file_handler_data->mode;
+    flags = file->flags;
+    mode = file->mode;
 
-    sftpfs_close_file (file_handler, mcerror);
-    sftpfs_open_file (file_handler, flags, mode, mcerror);
+    sftpfs_close_file (fh, mcerror);
+    sftpfs_open_file (fh, flags, mode, mcerror);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -96,35 +99,45 @@ sftpfs_file__handle_error (sftpfs_super_t * super, int sftp_res, GError ** mcerr
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
+
+vfs_file_handler_t *
+sftpfs_fh_new (struct vfs_s_inode * ino, gboolean changed)
+{
+    sftpfs_file_handler_t *fh;
+
+    fh = g_new0 (sftpfs_file_handler_t, 1);
+    vfs_s_init_fh ((vfs_file_handler_t *) fh, ino, changed);
+
+    return FH;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /**
  * Open new SFTP file.
  *
- * @param file_handler the file handler data
- * @param flags        flags (see man 2 open)
- * @param mode         mode (see man 2 open)
- * @param mcerror      pointer to the error handler
+ * @param fh      the file handler
+ * @param flags   flags (see man 2 open)
+ * @param mode    mode (see man 2 open)
+ * @param mcerror pointer to the error handler
  * @return TRUE if connection was created successfully, FALSE otherwise
  */
 
 gboolean
-sftpfs_open_file (vfs_file_handler_t * file_handler, int flags, mode_t mode, GError ** mcerror)
+sftpfs_open_file (vfs_file_handler_t * fh, int flags, mode_t mode, GError ** mcerror)
 {
     unsigned long sftp_open_flags = 0;
     int sftp_open_mode = 0;
     gboolean do_append = FALSE;
-    sftpfs_file_handler_data_t *file_handler_data;
-    sftpfs_super_t *super;
+    sftpfs_file_handler_t *file = SFTP_FH;
+    sftpfs_super_t *super = SFTP_SUPER (fh->ino->super);
     char *name;
 
     (void) mode;
     mc_return_val_if_error (mcerror, FALSE);
 
-    name = vfs_s_fullpath (sftpfs_class, file_handler->ino);
+    name = vfs_s_fullpath (sftpfs_class, fh->ino);
     if (name == NULL)
         return FALSE;
-
-    super = SFTP_SUPER (file_handler->ino->super);
-    file_handler_data = g_new0 (sftpfs_file_handler_data_t, 1);
 
     if ((flags & O_CREAT) != 0 || (flags & O_WRONLY) != 0)
     {
@@ -151,10 +164,10 @@ sftpfs_open_file (vfs_file_handler_t * file_handler, int flags, mode_t mode, GEr
 
         fixfname = sftpfs_fix_filename (name, &fixfname_len);
 
-        file_handler_data->handle =
+        file->handle =
             libssh2_sftp_open_ex (super->sftp_session, fixfname, fixfname_len, sftp_open_flags,
                                   sftp_open_mode, LIBSSH2_SFTP_OPENFILE);
-        if (file_handler_data->handle != NULL)
+        if (file->handle != NULL)
             break;
 
         libssh_errno = libssh2_session_last_errno (super->session);
@@ -162,16 +175,15 @@ sftpfs_open_file (vfs_file_handler_t * file_handler, int flags, mode_t mode, GEr
         {
             sftpfs_ssherror_to_gliberror (super, libssh_errno, mcerror);
             g_free (name);
-            g_free (file_handler_data);
+            g_free (file);
             return FALSE;
         }
     }
 
     g_free (name);
 
-    file_handler_data->flags = flags;
-    file_handler_data->mode = mode;
-    file_handler->data = file_handler_data;
+    file->flags = flags;
+    file->mode = mode;
 
     if (do_append)
     {
@@ -190,8 +202,8 @@ sftpfs_open_file (vfs_file_handler_t * file_handler, int flags, mode_t mode, GEr
            [1] http://stackoverflow.com/questions/13373695/how-to-remove-the-warning-in-gcc-4-6-missing-initializer-wmissing-field-initi/27461062#27461062
          */
 
-        if (sftpfs_fstat (file_handler, &file_info, mcerror) == 0)
-            libssh2_sftp_seek64 (file_handler_data->handle, file_info.st_size);
+        if (sftpfs_fstat (fh, &file_info, mcerror) == 0)
+            libssh2_sftp_seek64 (file->handle, file_info.st_size);
     }
     return TRUE;
 }
@@ -200,7 +212,7 @@ sftpfs_open_file (vfs_file_handler_t * file_handler, int flags, mode_t mode, GEr
 /**
  * Stats the file specified by the file descriptor.
  *
- * @param data    file data handler
+ * @param data    file handler
  * @param buf     buffer for store stat-info
  * @param mcerror pointer to the error handler
  * @return 0 if success, negative value otherwise
@@ -212,7 +224,7 @@ sftpfs_fstat (void *data, struct stat *buf, GError ** mcerror)
     int res;
     LIBSSH2_SFTP_ATTRIBUTES attrs;
     vfs_file_handler_t *fh = (vfs_file_handler_t *) data;
-    sftpfs_file_handler_data_t *sftpfs_fh = fh->data;
+    sftpfs_file_handler_t *sftpfs_fh = (sftpfs_file_handler_t *) data;
     struct vfs_s_super *super = fh->ino->super;
     sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
 
@@ -242,40 +254,39 @@ sftpfs_fstat (void *data, struct stat *buf, GError ** mcerror)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Read up to 'count' bytes from the file descriptor 'file_handler' to the buffer starting at 'buffer'.
+ * Read up to 'count' bytes from the file descriptor 'fh' to the buffer starting at 'buffer'.
  *
- * @param file_handler file data handler
- * @param buffer       buffer for data
- * @param count        data size
- * @param mcerror      pointer to the error handler
+ * @param fh      file handler
+ * @param buffer  buffer for data
+ * @param count   data size
+ * @param mcerror pointer to the error handler
  *
  * @return 0 on success, negative value otherwise
  */
 
 ssize_t
-sftpfs_read_file (vfs_file_handler_t * file_handler, char *buffer, size_t count, GError ** mcerror)
+sftpfs_read_file (vfs_file_handler_t * fh, char *buffer, size_t count, GError ** mcerror)
 {
     ssize_t rc;
-    sftpfs_file_handler_data_t *file_handler_data;
+    sftpfs_file_handler_t *file = SFTP_FH;
     sftpfs_super_t *super;
 
     mc_return_val_if_error (mcerror, -1);
 
-    if (file_handler == NULL || file_handler->data == NULL)
+    if (fh == NULL)
     {
         mc_propagate_error (mcerror, 0, "%s",
                             _("sftp: No file handler data present for reading file"));
         return -1;
     }
 
-    file_handler_data = file_handler->data;
-    super = SFTP_SUPER (file_handler->ino->super);
+    super = SFTP_SUPER (fh->ino->super);
 
     do
     {
         int err;
 
-        rc = libssh2_sftp_read (file_handler_data->handle, buffer, count);
+        rc = libssh2_sftp_read (file->handle, buffer, count);
         if (rc >= 0)
             break;
 
@@ -285,7 +296,7 @@ sftpfs_read_file (vfs_file_handler_t * file_handler, char *buffer, size_t count,
     }
     while (rc == LIBSSH2_ERROR_EAGAIN);
 
-    file_handler->pos = (off_t) libssh2_sftp_tell64 (file_handler_data->handle);
+    fh->pos = (off_t) libssh2_sftp_tell64 (file->handle);
 
     return rc;
 }
@@ -293,36 +304,32 @@ sftpfs_read_file (vfs_file_handler_t * file_handler, char *buffer, size_t count,
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Write up to 'count' bytes from  the buffer starting at 'buffer' to the descriptor 'file_handler'.
+ * Write up to 'count' bytes from  the buffer starting at 'buffer' to the descriptor 'fh'.
  *
- * @param file_handler file data handler
- * @param buffer       buffer for data
- * @param count        data size
- * @param mcerror      pointer to the error handler
+ * @param fh      file handler
+ * @param buffer  buffer for data
+ * @param count   data size
+ * @param mcerror pointer to the error handler
  *
  * @return 0 on success, negative value otherwise
  */
 
 ssize_t
-sftpfs_write_file (vfs_file_handler_t * file_handler, const char *buffer, size_t count,
-                   GError ** mcerror)
+sftpfs_write_file (vfs_file_handler_t * fh, const char *buffer, size_t count, GError ** mcerror)
 {
     ssize_t rc;
-    sftpfs_file_handler_data_t *file_handler_data;
-    sftpfs_super_t *super;
+    sftpfs_file_handler_t *file = SFTP_FH;
+    sftpfs_super_t *super = SFTP_SUPER (fh->ino->super);
 
     mc_return_val_if_error (mcerror, -1);
 
-    file_handler_data = (sftpfs_file_handler_data_t *) file_handler->data;
-    super = SFTP_SUPER (file_handler->ino->super);
-
-    file_handler->pos = (off_t) libssh2_sftp_tell64 (file_handler_data->handle);
+    fh->pos = (off_t) libssh2_sftp_tell64 (file->handle);
 
     do
     {
         int err;
 
-        rc = libssh2_sftp_write (file_handler_data->handle, buffer, count);
+        rc = libssh2_sftp_write (file->handle, buffer, count);
         if (rc >= 0)
             break;
 
@@ -340,28 +347,22 @@ sftpfs_write_file (vfs_file_handler_t * file_handler, const char *buffer, size_t
 /**
  * Close a file descriptor.
  *
- * @param file_handler    file data handler
- * @param mcerror         pointer to the error handler
+ * @param fh      file handler
+ * @param mcerror pointer to the error handler
  *
  * @return 0 on success, negative value otherwise
  */
 
 int
-sftpfs_close_file (vfs_file_handler_t * file_handler, GError ** mcerror)
+sftpfs_close_file (vfs_file_handler_t * fh, GError ** mcerror)
 {
-    sftpfs_file_handler_data_t *file_handler_data;
-    int ret = -1;
+    int ret;
 
     mc_return_val_if_error (mcerror, -1);
 
-    file_handler_data = (sftpfs_file_handler_data_t *) file_handler->data;
-    if (file_handler_data != NULL)
-    {
-        ret = libssh2_sftp_close (file_handler_data->handle);
-        g_free (file_handler_data);
-    }
+    ret = libssh2_sftp_close (SFTP_FH->handle);
 
-    return ret;
+    return ret == 0 ? 0 : -1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -369,18 +370,18 @@ sftpfs_close_file (vfs_file_handler_t * file_handler, GError ** mcerror)
 /**
  * Reposition the offset of the open file associated with the file descriptor.
  *
- * @param file_handler   file data handler
- * @param offset         file offset
- * @param whence         method of seek (at begin, at current, at end)
- * @param mcerror        pointer to the error handler
+ * @param fh      file handler
+ * @param offset  file offset
+ * @param whence  method of seek (at begin, at current, at end)
+ * @param mcerror pointer to the error handler
  *
  * @return 0 on success, negative value otherwise
  */
 
 off_t
-sftpfs_lseek (vfs_file_handler_t * file_handler, off_t offset, int whence, GError ** mcerror)
+sftpfs_lseek (vfs_file_handler_t * fh, off_t offset, int whence, GError ** mcerror)
 {
-    sftpfs_file_handler_data_t *file_handler_data;
+    sftpfs_file_handler_t *file = SFTP_FH;
 
     mc_return_val_if_error (mcerror, 0);
 
@@ -391,34 +392,32 @@ sftpfs_lseek (vfs_file_handler_t * file_handler, off_t offset, int whence, GErro
            "You MUST NOT seek during writing or reading a file with SFTP, as the internals use
            outstanding packets and changing the "file position" during transit will results in
            badness." */
-        if (file_handler->pos > offset || offset == 0)
+        if (fh->pos > offset || offset == 0)
         {
-            sftpfs_reopen (file_handler, mcerror);
+            sftpfs_reopen (fh, mcerror);
             mc_return_val_if_error (mcerror, 0);
         }
-        file_handler->pos = offset;
+        fh->pos = offset;
         break;
     case SEEK_CUR:
-        file_handler->pos += offset;
+        fh->pos += offset;
         break;
     case SEEK_END:
-        if (file_handler->pos > file_handler->ino->st.st_size - offset)
+        if (fh->pos > fh->ino->st.st_size - offset)
         {
-            sftpfs_reopen (file_handler, mcerror);
+            sftpfs_reopen (fh, mcerror);
             mc_return_val_if_error (mcerror, 0);
         }
-        file_handler->pos = file_handler->ino->st.st_size - offset;
+        fh->pos = fh->ino->st.st_size - offset;
         break;
     default:
         break;
     }
 
-    file_handler_data = (sftpfs_file_handler_data_t *) file_handler->data;
+    libssh2_sftp_seek64 (file->handle, fh->pos);
+    fh->pos = (off_t) libssh2_sftp_tell64 (file->handle);
 
-    libssh2_sftp_seek64 (file_handler_data->handle, file_handler->pos);
-    file_handler->pos = (off_t) libssh2_sftp_tell64 (file_handler_data->handle);
-
-    return file_handler->pos;
+    return fh->pos;
 }
 
 /* --------------------------------------------------------------------------------------------- */
