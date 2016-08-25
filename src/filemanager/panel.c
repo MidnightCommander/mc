@@ -195,7 +195,7 @@ static panel_field_t panel_fields[] = {
     }
     ,
     {
-     "size", 7, FALSE, J_RIGHT,
+     "size", 8, FALSE, J_RIGHT,
      /* TRANSLATORS: one single character to represent 'size' sort mode  */
      /* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
      N_("sort|s"),
@@ -205,7 +205,7 @@ static panel_field_t panel_fields[] = {
     }
     ,
     {
-     "bsize", 7, FALSE, J_RIGHT,
+     "bsize", 8, FALSE, J_RIGHT,
      "",
      N_("Block Size"), FALSE, FALSE,
      string_file_size_brief,
@@ -515,7 +515,8 @@ string_file_size (file_entry_t * fe, int len)
         format_device_number (buffer, len + 1, fe->st.st_rdev);
     else
 #endif
-        size_trunc_len (buffer, (unsigned int) len, fe->st.st_size, 0, panels_options.kilobyte_si);
+        size_trunc_len (buffer, (unsigned int) (len + 3), fe->st.st_size, 0,
+                        panels_options.kilobyte_si);
 
     return buffer;
 }
@@ -1154,7 +1155,7 @@ show_free_space (const WPanel * panel)
     if (myfs_stats.avail != 0 || myfs_stats.total != 0)
     {
         const Widget *w = CONST_WIDGET (panel);
-        char buffer1[6], buffer2[6], tmp[BUF_SMALL];
+        char buffer1[12], buffer2[12], tmp[BUF_SMALL];
 
         size_trunc_len (buffer1, sizeof (buffer1) - 1, myfs_stats.avail, 1,
                         panels_options.kilobyte_si);

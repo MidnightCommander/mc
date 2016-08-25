@@ -448,23 +448,26 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
      */
 #endif
     };
-    /* *INDENT-ON* */
-    static const char *const suffix[] = { "", "K", "M", "G", "T", "P", "E", "Z", "Y", NULL };
-    static const char *const suffix_lc[] = { "", "k", "m", "g", "t", "p", "e", "z", "y", NULL };
 
-    const char *const *sfx = use_si ? suffix_lc : suffix;
+    static const char *const units_iec[] = { N_("B"), N_("KiB"), N_("MiB"), N_("GiB"), N_("TiB"),
+                                             N_("PiB"), N_("EiB"), N_("ZiB"), N_("YiB"), NULL };
+    static const char *const units_si[] = { N_("B"), N_("kB"), N_("MB"), N_("GB"), N_("TB"),
+                                            N_("PB"), N_("EB"), N_("ZB"), N_("YB"), NULL };
+    /* *INDENT-ON* */
+
+    const char *const *sfx = use_si ? units_si : units_iec;
     int j = 0;
 
     if (len == 0)
         len = 9;
 #if SIZEOF_UINTMAX_T == 8
     /* 20 decimal digits are required to represent 8 bytes */
-    else if (len > 19)
-        len = 19;
+    else if (len > 21)
+        len = 21;
 #else
     /* 10 decimal digits are required to represent 4 bytes */
-    else if (len > 9)
-        len = 9;
+    else if (len > 11)
+        len = 11;
 #endif
 
     /*
@@ -489,20 +492,25 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
         {
             if (j == units)
             {
-                /* Empty files will print "0" even with minimal width.  */
-                g_snprintf (buffer, len + 1, "%s", "0");
+                /* Empty files will print "0 B" even with minimal width.  */
+                g_snprintf (buffer, len + 1, "0 %s", _("B"));
             }
             else
             {
-                /* Use "~K" or just "K" if len is 1.  Use "B" for bytes.  */
-                g_snprintf (buffer, len + 1, (len > 1) ? "~%s" : "%s", (j > 1) ? sfx[j - 1] : "B");
+                /* Use "~KiB/kB" or just "KiB/kB" if len is 1.  Use "B" for bytes.  */
+                g_snprintf (buffer, len + 1, (len > 1) ? "~%s" : "%s",
+                            (j > 1) ? _(sfx[j - 1]) : _("B"));
             }
             break;
         }
 
-        if (size < power10[len - (j > 0 ? 1 : 0)])
+        /*
+         * Offset calculation: 1 for space + 2*3 bytes for scaled units as multibyte
+         * encoding with UTF-8 for non-Latin scripts.
+         */
+        if (size < power10[len - (1 + 6)])
         {
-            g_snprintf (buffer, len + 1, "%" PRIuMAX "%s", size, sfx[j]);
+            g_snprintf (buffer, len + 1, "%" PRIuMAX " %s", size, _(sfx[j]));
             break;
         }
 
