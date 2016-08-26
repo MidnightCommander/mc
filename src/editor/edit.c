@@ -455,10 +455,16 @@ edit_load_file (WEdit * edit)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Restore saved cursor position in the file */
+/**
+ * Restore saved cursor position and/or bookmarks in the file
+ *
+ * @param edit editor object
+ * @param load_position If TRUE, load bookmarks and cursor position and aply them.
+ *                      If FALSE, load bookmarks only.
+ */
 
 static void
-edit_load_position (WEdit * edit)
+edit_load_position (WEdit * edit, gboolean load_position)
 {
     long line, column;
     off_t offset;
@@ -468,6 +474,11 @@ edit_load_position (WEdit * edit)
         return;
 
     load_file_position (edit->filename_vpath, &line, &column, &offset, &edit->serialized_bookmarks);
+    /* apply bookmarks in any case */
+    book_mark_restore (edit, BOOK_MARK_COLOR);
+
+    if (!load_position)
+        return;
 
     if (line > 0)
     {
@@ -480,8 +491,6 @@ edit_load_position (WEdit * edit)
         line = edit->buffer.curs_line;
         edit->search_start = edit->buffer.curs1;
     }
-
-    book_mark_restore (edit, BOOK_MARK_COLOR);
 
     edit_move_to_prev_col (edit, edit_buffer_get_current_bol (&edit->buffer));
     edit_move_display (edit, line - (WIDGET (edit)->lines / 2));
@@ -2146,11 +2155,12 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
     edit_load_syntax (edit, NULL, NULL);
     edit_get_syntax_color (edit, -1);
 
-    /* load saved cursor position */
+    /* load saved cursor position and/or boolmarks */
     if ((line == 0) && option_save_position)
-        edit_load_position (edit);
+        edit_load_position (edit, TRUE);
     else
     {
+        edit_load_position (edit, FALSE);
         if (line <= 0)
             line = 1;
         edit_move_display (edit, line - 1);
