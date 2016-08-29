@@ -262,5 +262,8 @@ include lkr.syntax
 file .\*\\.pp$ Puppet\smanifest\sfile
 include puppet.syntax
 
+file .\*\\.(glsl|vert|frag|geom)$ GLSL\sProgram
+include glsl.syntax
+
 file .\* unknown
 include unknown.syntax

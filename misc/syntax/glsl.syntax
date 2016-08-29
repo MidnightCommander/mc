@@ -1,0 +1,452 @@
+# GLSL syntax file
+
+# Authors:
+#    Sergey Sharybin <sergey.vfx@gmail.com>
+#
+# Based on glsl-mode.el from
+#    Xavier.Decoret@imag.fr
+#    Jim Hourihan <jimhourihan ~at~ gmail.com>
+
+context default
+
+# Types
+
+    keyword whole float yellow
+    keyword whole double yellow
+    keyword whole int yellow
+    keyword whole void yellow
+    keyword whole bool yellow
+    keyword whole true yellow
+    keyword whole false yellow
+    keyword whole mat2 yellow
+    keyword whole mat3 yellow
+    keyword whole mat4 yellow
+    keyword whole dmat2 yellow
+    keyword whole dmat3 yellow
+    keyword whole dmat4 yellow
+    keyword whole mat2x2 yellow
+    keyword whole mat2x3 yellow
+    keyword whole mat2x4 yellow
+    keyword whole dmat2x2 yellow
+    keyword whole dmat2x3 yellow
+    keyword whole dmat2x4 yellow
+    keyword whole mat3x2 yellow
+    keyword whole mat3x3 yellow
+    keyword whole mat3x4 yellow
+    keyword whole dmat3x2 yellow
+    keyword whole dmat3x3 yellow
+    keyword whole dmat3x4 yellow
+    keyword whole mat4x2 yellow
+    keyword whole mat4x3 yellow
+    keyword whole mat4x4 yellow
+    keyword whole dmat4x2 yellow
+    keyword whole dmat4x3 yellow
+    keyword whole dmat4x4 yellow
+    keyword whole vec2 yellow
+    keyword whole vec3 yellow
+    keyword whole vec4 yellow
+    keyword whole ivec2 yellow
+    keyword whole ivec3 yellow
+    keyword whole ivec4 yellow
+    keyword whole bvec2 yellow
+    keyword whole bvec3 yellow
+    keyword whole bvec4 yellow
+    keyword whole dvec2 yellow
+    keyword whole dvec3 yellow
+    keyword whole dvec4 yellow
+    keyword whole uint yellow
+    keyword whole uvec2 yellow
+    keyword whole uvec3 yellow
+    keyword whole uvec4 yellow
+    keyword whole sampler1D yellow
+    keyword whole sampler2D yellow
+    keyword whole sampler3D yellow
+    keyword whole samplerCube yellow
+    keyword whole sampler1DShadow yellow
+    keyword whole sampler2DShadow yellow
+    keyword whole samplerCubeShadow yellow
+    keyword whole sampler1DArray yellow
+    keyword whole sampler2DArray yellow
+    keyword whole sampler1DArrayShadow yellow
+    keyword whole sampler2DArrayShadow yellow
+    keyword whole isampler1D yellow
+    keyword whole isampler2D yellow
+    keyword whole isampler3D yellow
+    keyword whole isamplerCube yellow
+    keyword whole isampler1DArray yellow
+    keyword whole isampler2DArray yellow
+    keyword whole usampler1D yellow
+    keyword whole usampler2D yellow
+    keyword whole usampler3D yellow
+    keyword whole usamplerCube yellow
+    keyword whole usampler1DArray yellow
+    keyword whole usampler2DArray yellow
+    keyword whole sampler2DRect yellow
+    keyword whole sampler2DRectShadow yellow
+    keyword whole isampler2DRect yellow
+    keyword whole usampler2DRect yellow
+    keyword whole samplerBuffer yellow
+    keyword whole isamplerBuffer yellow
+    keyword whole usamplerBuffer yellow
+    keyword whole sampler2DMS yellow
+    keyword whole isampler2DMS yellow
+    keyword whole usampler2DMS yellow
+    keyword whole sampler2DMSArray yellow
+    keyword whole isampler2DMSArray yellow
+    keyword whole usampler2DMSArray yellow
+    keyword whole samplerCubeArray yellow
+    keyword whole samplerCubeArrayShadow yellow
+    keyword whole isamplerCubeArray yellow
+    keyword whole usamplerCubeArray yellow
+    keyword whole image1D yellow
+    keyword whole iimage1D yellow
+    keyword whole uimage1D yellow
+    keyword whole image2D yellow
+    keyword whole iimage2D yellow
+    keyword whole uimage2D yellow
+    keyword whole image3D yellow
+    keyword whole iimage3D yellow
+    keyword whole uimage3D yellow
+    keyword whole image2DRect yellow
+    keyword whole iimage2DRect yellow
+    keyword whole uimage2DRect yellow
+    keyword whole imageCube yellow
+    keyword whole iimageCube yellow
+    keyword whole uimageCube yellow
+    keyword whole imageBuffer yellow
+    keyword whole iimageBuffer yellow
+    keyword whole uimageBuffer yellow
+    keyword whole image1DArray yellow
+    keyword whole iimage1DArray yellow
+    keyword whole uimage1DArray yellow
+    keyword whole image2DArray yellow
+    keyword whole iimage2DArray yellow
+    keyword whole uimage2DArray yellow
+    keyword whole imageCubeArray yellow
+    keyword whole iimageCubeArray yellow
+    keyword whole uimageCubeArray yellow
+    keyword whole image2DMS yellow
+    keyword whole iimage2DMS yellow
+    keyword whole uimage2DMS yellow
+    keyword whole image2DMSArray yellow
+    keyword whole iimage2DMSArray yellow
+    keyword whole uimage2DMSArray yellow
+    keyword whole long yellow
+    keyword whole short yellow
+    keyword whole half yellow
+    keyword whole fixed yellow
+    keyword whole unsigned yellow
+    keyword whole hvec2 yellow
+    keyword whole hvec3 yellow
+    keyword whole hvec4 yellow
+    keyword whole fvec2 yellow
+    keyword whole fvec3 yellow
+    keyword whole fvec4 yellow
+    keyword whole sampler3DRect yellow
+
+# Modifiers
+
+    keyword whole attribute yellow
+    keyword whole const yellow
+    keyword whole uniform yellow
+    keyword whole varying yellow
+    keyword whole buffer yellow
+    keyword whole shared yellow
+    keyword whole coherent yellow
+    keyword whole volatile yellow
+    keyword whole restrict yellow
+    keyword whole readonly yellow
+    keyword whole writeonly yellow
+    keyword whole atomic_uint yellow
+    keyword whole layout yellow
+    keyword whole centroid yellow
+    keyword whole flat yellow
+    keyword whole smooth yellow
+    keyword whole noperspective yellow
+    keyword whole patch yellow
+    keyword whole sample yellow
+    keyword whole break yellow
+    keyword whole continue yellow
+    keyword whole do yellow
+    keyword whole for yellow
+    keyword whole while yellow
+    keyword whole switch yellow
+    keyword whole case yellow
+    keyword whole default yellow
+    keyword whole if yellow
+    keyword whole else yellow
+    keyword whole subroutine yellow
+    keyword whole in yellow
+    keyword whole out yellow
+    keyword whole inout yellow
+    keyword whole invariant yellow
+    keyword whole discard yellow
+    keyword whole return yellow
+    keyword whole lowp yellow
+    keyword whole mediump yellow
+    keyword whole highp yellow
+    keyword whole precision yellow
+    keyword whole struct yellow
+    keyword whole common yellow
+    keyword whole partition yellow
+    keyword whole active yellow
+    keyword whole asm yellow
+    keyword whole class yellow
+    keyword whole union yellow
+    keyword whole enum yellow
+    keyword whole typedef yellow
+    keyword whole template yellow
+    keyword whole this yellow
+    keyword whole packed yellow
+    keyword whole resource yellow
+    keyword whole goto yellow
+    keyword whole inline yellow
+    keyword whole noinline yellow
+    keyword whole public yellow
+    keyword whole static yellow
+    keyword whole extern yellow
+    keyword whole external yellow
+    keyword whole interface yellow
+    keyword whole superp yellow
+    keyword whole input yellow
+    keyword whole output yellow
+    keyword whole filter yellow
+    keyword whole sizeof yellow
+    keyword whole cast yellow
+    keyword whole namespace yellow
+    keyword whole using yellow
+    keyword whole row major yellow
+    keyword whole early_fragment_tests yellow
+
+# Deprecated
+    keyword whole varying brightred
+    keyword whole attribute brightred
+
+# Built-in
+    keyword whole abs brightmagenta
+    keyword whole acos brightmagenta
+    keyword whole acosh brightmagenta
+    keyword whole all brightmagenta
+    keyword whole any brightmagenta
+    keyword whole asin brightmagenta
+    keyword whole asinh brightmagenta
+    keyword whole atan brightmagenta
+    keyword whole atanh brightmagenta
+    keyword whole atomicCounter brightmagenta
+    keyword whole atomicCounterDecrement brightmagenta
+    keyword whole atomicCounterIncrement brightmagenta
+    keyword whole barrier brightmagenta
+    keyword whole bitCount brightmagenta
+    keyword whole bitfieldExtract brightmagenta
+    keyword whole bitfieldInsert brightmagenta
+    keyword whole bitfieldReverse brightmagenta
+    keyword whole ceil brightmagenta
+    keyword whole clamp brightmagenta
+    keyword whole cos brightmagenta
+    keyword whole cosh brightmagenta
+    keyword whole cross brightmagenta
+    keyword whole degrees brightmagenta
+    keyword whole determinant brightmagenta
+    keyword whole dFdx brightmagenta
+    keyword whole dFdy brightmagenta
+    keyword whole dFdyFine brightmagenta
+    keyword whole dFdxFine brightmagenta
+    keyword whole dFdyCoarse brightmagenta
+    keyword whole dFdxCourse brightmagenta
+    keyword whole fwidthFine brightmagenta
+    keyword whole fwidthCoarse brightmagenta
+    keyword whole distance brightmagenta
+    keyword whole dot brightmagenta
+    keyword whole EmitStreamVertex brightmagenta
+    keyword whole EmitVertex brightmagenta
+    keyword whole EndPrimitive brightmagenta
+    keyword whole EndStreamPrimitive brightmagenta
+    keyword whole equal brightmagenta
+    keyword whole exp brightmagenta
+    keyword whole exp2 brightmagenta
+    keyword whole faceforward brightmagenta
+    keyword whole findLSB brightmagenta
+    keyword whole findMSB brightmagenta
+    keyword whole floatBitsToInt brightmagenta
+    keyword whole floatBitsToUint brightmagenta
+    keyword whole floor brightmagenta
+    keyword whole fma brightmagenta
+    keyword whole fract brightmagenta
+    keyword whole frexp brightmagenta
+    keyword whole fwidth brightmagenta
+    keyword whole greaterThan brightmagenta
+    keyword whole greaterThanEqual brightmagenta
+    keyword whole imageAtomicAdd brightmagenta
+    keyword whole imageAtomicAnd brightmagenta
+    keyword whole imageAtomicCompSwap brightmagenta
+    keyword whole imageAtomicExchange brightmagenta
+    keyword whole imageAtomicMax brightmagenta
+    keyword whole imageAtomicMin brightmagenta
+    keyword whole imageAtomicOr brightmagenta
+    keyword whole imageAtomicXor brightmagenta
+    keyword whole imageLoad brightmagenta
+    keyword whole imageSize brightmagenta
+    keyword whole imageStore brightmagenta
+    keyword whole imulExtended brightmagenta
+    keyword whole intBitsToFloat brightmagenta
+    keyword whole imageSamples brightmagenta
+    keyword whole interpolateAtCentroid brightmagenta
+    keyword whole interpolateAtOffset brightmagenta
+    keyword whole interpolateAtSample brightmagenta
+    keyword whole inverse brightmagenta
+    keyword whole inversesqrt brightmagenta
+    keyword whole isinf brightmagenta
+    keyword whole isnan brightmagenta
+    keyword whole ldexp brightmagenta
+    keyword whole length brightmagenta
+    keyword whole lessThan brightmagenta
+    keyword whole lessThanEqual brightmagenta
+    keyword whole log brightmagenta
+    keyword whole log2 brightmagenta
+    keyword whole matrixCompMult brightmagenta
+    keyword whole max brightmagenta
+    keyword whole memoryBarrier brightmagenta
+    keyword whole min brightmagenta
+    keyword whole mix brightmagenta
+    keyword whole mod brightmagenta
+    keyword whole modf brightmagenta
+    keyword whole noise brightmagenta
+    keyword whole normalize brightmagenta
+    keyword whole not brightmagenta
+    keyword whole notEqual brightmagenta
+    keyword whole outerProduct brightmagenta
+    keyword whole packDouble2x32 brightmagenta
+    keyword whole packHalf2x16 brightmagenta
+    keyword whole packSnorm2x16 brightmagenta
+    keyword whole packSnorm4x8 brightmagenta
+    keyword whole packUnorm2x16 brightmagenta
+    keyword whole packUnorm4x8 brightmagenta
+    keyword whole pow brightmagenta
+    keyword whole radians brightmagenta
+    keyword whole reflect brightmagenta
+    keyword whole refract brightmagenta
+    keyword whole round brightmagenta
+    keyword whole roundEven brightmagenta
+    keyword whole sign brightmagenta
+    keyword whole sin brightmagenta
+    keyword whole sinh brightmagenta
+    keyword whole smoothstep brightmagenta
+    keyword whole sqrt brightmagenta
+    keyword whole step brightmagenta
+    keyword whole tan brightmagenta
+    keyword whole tanh brightmagenta
+    keyword whole texelFetch brightmagenta
+    keyword whole texelFetchOffset brightmagenta
+    keyword whole texture brightmagenta
+    keyword whole textureGather brightmagenta
+    keyword whole textureGatherOffset brightmagenta
+    keyword whole textureGatherOffsets brightmagenta
+    keyword whole textureGrad brightmagenta
+    keyword whole textureGradOffset brightmagenta
+    keyword whole textureLod brightmagenta
+    keyword whole textureLodOffset brightmagenta
+    keyword whole textureOffset brightmagenta
+    keyword whole textureProj brightmagenta
+    keyword whole textureProjGrad brightmagenta
+    keyword whole textureProjGradOffset brightmagenta
+    keyword whole textureProjLod brightmagenta
+    keyword whole textureProjLodOffset brightmagenta
+    keyword whole textureProjOffset brightmagenta
+    keyword whole textureQueryLevels brightmagenta
+    keyword whole textureQueryLod brightmagenta
+    keyword whole textureSize brightmagenta
+    keyword whole transpose brightmagenta
+    keyword whole trunc brightmagenta
+    keyword whole uaddCarry brightmagenta
+    keyword whole uintBitsToFloat brightmagenta
+    keyword whole umulExtended brightmagenta
+    keyword whole unpackDouble2x32 brightmagenta
+    keyword whole unpackHalf2x16 brightmagenta
+    keyword whole unpackSnorm2x16 brightmagenta
+    keyword whole unpackSnorm4x8 brightmagenta
+    keyword whole unpackUnorm2x16 brightmagenta
+    keyword whole unpackUnorm4x8 brightmagenta
+    keyword whole usubBorrow brightmagenta
+
+# Deprecated built-in
+    keyword whole texture1D magenta
+    keyword whole texture1DProj magenta
+    keyword whole texture1DLod magenta
+    keyword whole texture1DProjLod magenta
+    keyword whole texture2D magenta
+    keyword whole texture2DProj magenta
+    keyword whole texture2DLod magenta
+    keyword whole texture2DProjLod magenta
+    keyword whole texture2DRect magenta
+    keyword whole texture2DRectProj magenta
+    keyword whole texture3D magenta
+    keyword whole texture3DProj magenta
+    keyword whole texture3DLod magenta
+    keyword whole texture3DProjLod magenta
+    keyword whole shadow1D magenta
+    keyword whole shadow1DProj magenta
+    keyword whole shadow1DLod magenta
+    keyword whole shadow1DProjLod magenta
+    keyword whole shadow2D magenta
+    keyword whole shadow2DProj magenta
+    keyword whole shadow2DLod magenta
+    keyword whole shadow2DProjLod magenta
+    keyword whole textureCube magenta
+    keyword whole textureCubeLod magenta
+
+# Deprecated variables
+
+    keyword whole gl_FragColor red
+    keyword whole gl_FragData red
+    keyword whole gl_MaxVarying red
+    keyword whole gl_MaxVaryingFloats red
+    keyword whole gl_MaxVaryingComponents red
+
+# Comments
+    keyword /\* brown
+    keyword \*/ brown
+    keyword // brown
+
+# Preprocessor
+    keyword # brightred
+
+# Punctuation
+    keyword > white
+    keyword < white
+    keyword \+ white
+    keyword - white
+    keyword \* white
+    keyword / white
+    keyword % white
+    keyword = white
+    keyword != white
+    keyword == white
+    keyword & white
+    keyword | white
+    keyword :: white
+    keyword -> white
+    keyword { brightcyan
+    keyword } brightcyan
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword [ brightcyan
+    keyword ] brightcyan
+    keyword , brightcyan
+    keyword : brightcyan
+    keyword ; brightmagenta
+
+context exclusive # \n brightred
+    keyword \\\n yellow
+    keyword /\**\*/ brown
+    keyword //*\n brown
+    keyword "+" red
+    keyword <+> red
+context exclusive /\* \*/ brown
+    spellcheck
+context exclusive // \n brown
+    spellcheck
+
+context " " green
+    spellcheck
+context ' ' brightgreen
+    spellcheck

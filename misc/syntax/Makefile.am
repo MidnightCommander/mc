@@ -30,6 +30,7 @@ SYNTAXFILES =			\
 	f90.syntax		\
 	filehighlight.syntax	\
 	fortran.syntax		\
+	glsl.syntax		\
 	go.syntax		\
 	haskell.syntax		\
 	html.syntax		\
