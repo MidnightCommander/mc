@@ -1750,7 +1750,7 @@ edit_save_as_cmd (WEdit * edit)
                  * Allow user to write into saved (under another name) file
                  * even if original file had r/o user permissions.
                  */
-                edit->stat1.st_mode |= S_IWRITE;
+                edit->stat1.st_mode |= S_IWUSR;
             }
 
             rv = edit_save_file (edit, exp_vpath);
