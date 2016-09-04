@@ -2030,10 +2030,9 @@ If enabled, one line of status information about the currently selected item
 is shown at the bottom of the panels. Enabled by default.
 .PP
 .I Use SI size units.
-If this option is enabled, Midnight Commander will use SI units (powers of 1000)
-when displaying any byte sizes. The suffixes (k, m ...) are shown in lowercase.
-If disabled (default), Midnight Commander will use binary units (powers of 1024)
-and the suffixes are shown in upper case (K, M ...)
+If this option is enabled, Midnight Commander will use SI prefixes (base 10)
+when displaying any byte sizes. If disabled (default), Midnight Commander will
+use IEC prefixes (base 2).
 .PP
 .I Mix all files.
 If this option is enabled, all files and directories are shown mixed

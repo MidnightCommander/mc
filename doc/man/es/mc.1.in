@@ -2026,12 +2026,10 @@ con información sobre el archivo seleccionado en cada momento. Por defecto,
 está activado.
 .PP
 .I Tamaños en unidades SI.
-Mostrar tamaños de archivos en bytes con unidades derivadas según el SI,
-Sistema Internacional de Unidades, o sea, en potencias de 1000.  Los prefijos
-(k, m ...) se muestran en minúsculas.  Por defecto, está desactivada: los
-tamaños se calculan según el modelo binario tradicional, empleando múltiplos
-de 1024 (2 elevado a 10) y los prefijos aparecen en mayúsculas (K, M, etc).
-Véase al respecto ISO/IEC 80000-13.
+Mostrar tamaños de archivos en bytes con prefijos según el SI, Sistema
+Internacional de Unidades, o sea, en base de 10. Por defecto, está
+desactivada: los tamaños se calculan con prefijos según el IEC, empleando
+base de 2. Véase al respecto ISO/IEC 80000-13.
 .PP
 .I Mezclar Archivos y Directorios.
 Cuando esta opción está habilitada, todos los archivos y directorios
