@@ -3691,7 +3691,7 @@ or without it). Search of skin\-file will occur in (to the first one found):
 .B ~/.local/share/mc/skins/
 .br
 2)
-.B @sysconfdir@/mc/skins/
+.B %sysconfdir%/mc/skins/
 .br
 3)
 .B %prefix%/share/mc/skins/
