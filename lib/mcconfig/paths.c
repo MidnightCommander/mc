@@ -289,8 +289,6 @@ mc_config_init_config_paths (GError ** mcerror)
     char *dir;
 #if MC_HOMEDIR_XDG == 0
     char *defined_userconf_dir;
-#else
-    const char *cdir;
 #endif
 
     mc_return_if_error (mcerror);
@@ -318,35 +316,12 @@ mc_config_init_config_paths (GError ** mcerror)
     }
     else
     {
-        cdir = g_get_user_config_dir ();
-        if (cdir != NULL && *cdir != '\0')
-            mc_config_str = mc_config_init_one_config_path (cdir, MC_USERCONF_DIR, mcerror);
-        else
-        {
-            dir = g_build_filename (homedir, ".config", (char *) NULL);
-            mc_config_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, mcerror);
-            g_free (dir);
-        }
-
-        cdir = g_get_user_cache_dir ();
-        if (cdir != NULL && *cdir != '\0')
-            mc_cache_str = mc_config_init_one_config_path (cdir, MC_USERCONF_DIR, mcerror);
-        else
-        {
-            dir = g_build_filename (homedir, ".cache", (char *) NULL);
-            mc_cache_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, mcerror);
-            g_free (dir);
-        }
-
-        cdir = g_get_user_data_dir ();
-        if (cdir != NULL && *cdir != '\0')
-            mc_data_str = mc_config_init_one_config_path (cdir, MC_USERCONF_DIR, mcerror);
-        else
-        {
-            dir = g_build_filename (homedir, ".local", "share", (char *) NULL);
-            mc_data_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, mcerror);
-            g_free (dir);
-        }
+        mc_config_str =
+            mc_config_init_one_config_path (g_get_user_config_dir (), MC_USERCONF_DIR, mcerror);
+        mc_cache_str =
+            mc_config_init_one_config_path (g_get_user_cache_dir (), MC_USERCONF_DIR, mcerror);
+        mc_data_str =
+            mc_config_init_one_config_path (g_get_user_data_dir (), MC_USERCONF_DIR, mcerror);
     }
 
     mc_config_fix_migrated_rules ();
@@ -418,6 +393,10 @@ mc_config_get_home_dir (void)
     if (homedir == NULL)
     {
         homedir = g_getenv ("MC_HOME");
+        /* Prior to GLib 2.36, g_get_home_dir() ignores $HOME, which is why
+         * we read it ourselves. As that function's documentation explains,
+         * using $HOME is good for compatibility with other programs and
+         * for running from test frameworks. */
         if (homedir == NULL || *homedir == '\0')
             homedir = g_getenv ("HOME");
         else
