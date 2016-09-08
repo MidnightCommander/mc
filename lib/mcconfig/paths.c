@@ -51,7 +51,6 @@ static char *mc_config_str = NULL;
 static char *mc_cache_str = NULL;
 static char *mc_data_str = NULL;
 
-static const char *homedir = NULL;
 /* value of $MC_HOME */
 static const char *mc_home = NULL;
 
@@ -296,7 +295,7 @@ mc_config_init_config_paths (GError ** mcerror)
     if (xdg_vars_initialized)
         return;
 
-    /* init mc_home and homedir if not yet */
+    /* init mc_home if not yet */
     (void) mc_config_get_home_dir ();
 
 #if MC_HOMEDIR_XDG
@@ -390,6 +389,8 @@ mc_config_get_cache_path (void)
 const char *
 mc_config_get_home_dir (void)
 {
+    static const char *homedir = NULL;
+
     if (homedir == NULL)
     {
         homedir = g_getenv ("MC_HOME");
