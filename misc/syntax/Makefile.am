@@ -15,6 +15,7 @@ SYNTAXFILES =			\
 	cmake.syntax		\
 	cs.syntax		\
 	css.syntax		\
+	cuda.syntax		\
 	cxx.syntax		\
 	d.syntax		\
 	dlink.syntax		\

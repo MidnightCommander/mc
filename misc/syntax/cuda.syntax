@@ -1,0 +1,159 @@
+# Cuda syntax file
+
+# Authors:
+#    Sergey Sharybin <sergey.vfx@gmail.com>
+#
+# Based on cxx.syntax file with some extra keywords to be
+# highlighted,
+
+context default
+    keyword whole auto yellow
+    keyword whole break yellow
+    keyword whole case yellow
+    keyword whole char yellow
+    keyword whole const yellow
+    keyword whole continue yellow
+    keyword whole default yellow
+    keyword whole do yellow
+    keyword whole double yellow
+    keyword whole else yellow
+    keyword whole enum yellow
+    keyword whole extern yellow
+    keyword whole float yellow
+    keyword whole for yellow
+    keyword whole goto yellow
+    keyword whole if yellow
+    keyword whole int yellow
+    keyword whole long yellow
+    keyword whole register yellow
+    keyword whole return yellow
+    keyword whole short yellow
+    keyword whole signed yellow
+    keyword whole sizeof yellow
+    keyword whole static yellow
+    keyword whole struct yellow
+    keyword whole switch yellow
+    keyword whole typedef yellow
+    keyword whole union yellow
+    keyword whole unsigned yellow
+    keyword whole void yellow
+    keyword whole volatile yellow
+    keyword whole while yellow
+    keyword whole asm yellow
+    keyword whole catch yellow
+    keyword whole class yellow
+    keyword whole friend yellow
+    keyword whole delete yellow
+    keyword whole inline yellow
+    keyword whole new yellow
+    keyword whole operator yellow
+    keyword whole private yellow
+    keyword whole protected yellow
+    keyword whole public yellow
+    keyword whole this yellow
+    keyword whole throw yellow
+    keyword whole template yellow
+    keyword whole try yellow
+    keyword whole virtual yellow
+    keyword whole bool yellow
+    keyword whole const_cast yellow
+    keyword whole dynamic_cast yellow
+    keyword whole explicit yellow
+    keyword whole false yellow
+    keyword whole mutable yellow
+    keyword whole namespace yellow
+    keyword whole reinterpret_cast yellow
+    keyword whole static_cast yellow
+    keyword whole true yellow
+    keyword whole typeid yellow
+    keyword whole typename yellow
+    keyword whole using yellow
+    keyword whole wchar_t yellow
+    keyword whole ... yellow
+    keyword whole linestart \{\s\t\}\[\s\t\]#*\n brightmagenta
+
+# Function type qualifiers
+    keyword whole __device__ white
+    keyword whole __global__ white
+    keyword whole __host__ white
+
+    keyword whole __noinline__ white
+    keyword whole __forceinline__ white
+
+# Variable type qualifiers
+    keyword whole __constant__ white
+    keyword whole __shared__ white
+    keyword whole __managed__ white
+    keyword whole __restrict__ white
+
+# Built-in variables
+    keyword whole threadIdx white
+    keyword whole blockIdx white
+    keyword whole blockDim white
+    keyword whole gridDim white
+    keyword whole warpSize white
+
+# Synchronization
+    keyword whole __syncthreads white
+    keyword whole __threadfence white
+
+    keyword /\* brown
+    keyword \*/ brown
+    keyword // brown
+
+    keyword '\\\{"abtnvfr\}' brightgreen
+    keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen
+    keyword '\\'' brightgreen
+    keyword '\\\\' brightgreen
+    keyword '\\0' brightgreen
+    keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' brightgreen
+
+    keyword > yellow
+    keyword < yellow
+    keyword \+ yellow
+    keyword - yellow
+    keyword \* yellow
+    keyword / yellow
+    keyword % yellow
+    keyword = yellow
+    keyword != yellow
+    keyword == yellow
+    keyword { brightcyan
+    keyword } brightcyan
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword [ brightcyan
+    keyword ] brightcyan
+    keyword , brightcyan
+    keyword : brightcyan
+    keyword ? brightcyan
+    keyword ; brightmagenta
+
+context exclusive /\* \*/ brown
+    spellcheck
+
+context exclusive // \n brown
+    spellcheck
+
+context linestart # \n brightred
+    keyword \\\n yellow
+    keyword /\**\*/ brown
+    keyword //*\n brown
+    keyword "+" red
+    keyword <+> red
+
+context " " green
+    spellcheck
+    keyword \\" brightgreen
+    keyword %% brightgreen
+    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} brightgreen
+    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} brightgreen
+    keyword %\[hl\]n brightgreen
+    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s brightgreen
+    keyword %[*] brightgreen
+    keyword %c brightgreen
+    keyword %p brightgreen
+    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
+    keyword \\\\ brightgreen
+    keyword \\' brightgreen
+    keyword \\\{abtnvfr\} brightgreen
