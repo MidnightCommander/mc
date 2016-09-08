@@ -107,6 +107,8 @@ const char *mc_config_get_cache_path (void);
 
 const char *mc_config_get_path (void);
 
+const char *mc_config_get_profile_root (void);
+
 const char *mc_config_get_home_dir (void);
 
 char *mc_config_get_full_path (const char *config_name);
