@@ -66,10 +66,11 @@ typedef enum
 typedef enum
 {
     WOP_DEFAULT = (0 << 0),
-    WOP_WANT_HOTKEY = (1 << 1),
-    WOP_WANT_CURSOR = (1 << 2),
-    WOP_WANT_TAB = (1 << 3),    /* Should the tab key be sent to the dialog? */
-    WOP_IS_INPUT = (1 << 4),
+    WOP_WANT_HOTKEY = (1 << 0),
+    WOP_WANT_CURSOR = (1 << 1),
+    WOP_WANT_TAB = (1 << 2),    /* Should the tab key be sent to the dialog? */
+    WOP_IS_INPUT = (1 << 3),
+    WOP_SELECTABLE = (1 << 4),
     WOP_TOP_SELECT = (1 << 5)
 } widget_options_t;
 
@@ -80,6 +81,7 @@ typedef enum
     WST_DISABLED = (1 << 0),    /* Widget cannot be selected */
     WST_IDLE = (1 << 1),
     WST_MODAL = (1 << 2),       /* Widget (dialog) is modal */
+    WST_FOCUSED = (1 << 3),
 
     WST_CONSTRUCT = (1 << 15),  /* Dialog has been constructed but not run yet */
     WST_ACTIVE = (1 << 16),     /* Dialog is visible and active */
@@ -176,7 +178,7 @@ void widget_init (Widget * w, int y, int x, int lines, int cols,
 cb_ret_t widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
                                   void *data);
 void widget_set_options (Widget * w, widget_options_t options, gboolean enable);
-gboolean widget_set_state (Widget * w, widget_state_t state, gboolean enable);
+cb_ret_t widget_set_state (Widget * w, widget_state_t state, gboolean enable);
 void widget_set_size (Widget * widget, int y, int x, int lines, int cols);
 /* select color for widget in dependance of state */
 void widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey);
@@ -185,6 +187,8 @@ void widget_erase (Widget * w);
 gboolean widget_is_active (const void *w);
 gboolean widget_overlapped (const Widget * a, const Widget * b);
 void widget_replace (Widget * old, Widget * new);
+void widget_select (Widget * w);
+void widget_set_bottom (Widget * w);
 
 /* get mouse pointer location within widget */
 Gpm_Event mouse_get_local (const Gpm_Event * global, const Widget * w);

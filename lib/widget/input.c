@@ -938,7 +938,7 @@ input_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     switch (msg)
     {
     case MSG_MOUSE_DOWN:
-        dlg_select_widget (w);
+        widget_select (w);
         in->first = FALSE;
 
         if (event->x >= w->cols - HISTORY_BUTTON_WIDTH && should_show_history_button (in))
@@ -992,7 +992,7 @@ input_new (int y, int x, const int *colors, int width, const char *def_text,
     in = g_new (WInput, 1);
     w = WIDGET (in);
     widget_init (w, y, x, 1, width, input_callback, input_mouse_callback);
-    w->options |= WOP_IS_INPUT | WOP_WANT_CURSOR;
+    w->options |= WOP_SELECTABLE | WOP_IS_INPUT | WOP_WANT_CURSOR;
 
     in->color = colors;
     in->first = TRUE;
@@ -1078,9 +1078,6 @@ input_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     case MSG_ACTION:
         return input_execute_cmd (in, parm);
 
-    case MSG_RESIZE:
-    case MSG_FOCUS:
-    case MSG_UNFOCUS:
     case MSG_DRAW:
         input_update (in, FALSE);
         return MSG_HANDLED;

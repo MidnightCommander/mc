@@ -849,7 +849,7 @@ file_op_context_create_ui (file_op_context_t * ctx, gboolean with_eta,
 
     place_progress_buttons (ui->op_dlg, FALSE);
 
-    dlg_select_widget (progress_buttons[0].w);
+    widget_select (progress_buttons[0].w);
 
     /* We will manage the dialog without any help, that's why
        we have to call dlg_init */

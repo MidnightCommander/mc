@@ -124,7 +124,7 @@ learn_button (WButton * button, int action)
     dlg_run_done (d);
     dlg_destroy (d);
 
-    dlg_select_widget (learnkeys[action - B_USER].button);
+    widget_select (learnkeys[action - B_USER].button);
 
     return 0;                   /* Do not kill learn_dlg */
 }
@@ -156,7 +156,7 @@ learn_move (gboolean right)
                 else
                     i += (totalcols - 1) * ROWS;
             }
-            dlg_select_widget (learnkeys[i].button);
+            widget_select (learnkeys[i].button);
             return TRUE;
         }
 
@@ -175,7 +175,7 @@ learn_check_key (int c)
         if (key_name_conv_tab[i].code != c || learnkeys[i].ok)
             continue;
 
-        dlg_select_widget (learnkeys[i].button);
+        widget_select (learnkeys[i].button);
         /* TRANSLATORS: This label appears near learned keys.  Keep it short.  */
         label_set_text (LABEL (learnkeys[i].label), _("OK"));
         learnkeys[i].ok = TRUE;
@@ -213,10 +213,10 @@ learn_check_key (int c)
     case 'l':
         return learn_move (TRUE);
     case 'j':
-        dlg_one_down (learn_dlg);
+        dlg_select_next_widget (learn_dlg);
         return TRUE;
     case 'k':
-        dlg_one_up (learn_dlg);
+        dlg_select_prev_widget (learn_dlg);
         return TRUE;
     default:
         break;

@@ -53,7 +53,63 @@
 
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+widget_do_focus (Widget * w, gboolean enable)
+{
+    if (w != NULL && widget_get_state (WIDGET (w->owner), WST_FOCUSED))
+        widget_set_state (w, WST_FOCUSED, enable);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Focus specified widget in it's owner.
+ *
+ * @param w widget to be focused.
+ */
+
+static void
+widget_focus (Widget * w)
+{
+    WDialog *h = DIALOG (w->owner);
+
+    if (h == NULL)
+        return;
+
+    if (WIDGET (h->current->data) != w)
+    {
+        widget_do_focus (WIDGET (h->current->data), FALSE);
+        /* Test if focus lost was allowed and focus has really been loose */
+        if (h->current == NULL || !widget_get_state (WIDGET (h->current->data), WST_FOCUSED))
+        {
+            widget_do_focus (w, TRUE);
+            h->current = dlg_find (h, w);
+        }
+    }
+    else if (!widget_get_state (w, WST_FOCUSED))
+        widget_do_focus (w, TRUE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Put widget on top or bottom of Z-order.
+ */
+static void
+widget_reorder (GList * l, gboolean set_top)
+{
+    WDialog *h = WIDGET (l->data)->owner;
+
+    h->widgets = g_list_remove_link (h->widgets, l);
+    if (set_top)
+        h->widgets = g_list_concat (h->widgets, l);
+    else
+        h->widgets = g_list_concat (l, h->widgets);
+}
+
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -213,12 +269,12 @@ widget_set_options (Widget * w, widget_options_t options, gboolean enable)
  * @param state  widget state flag to modify
  * @param enable specifies whether to turn the flag on (TRUE) or off (FALSE).
  *               Only one flag per call can be modified.
- * @return       TRUE if set was handled successfully, FALSE otherwise
+ * @return       MSG_HANDLED if set was handled successfully, MSG_NOT_HANDLED otherwise.
  */
-gboolean
+cb_ret_t
 widget_set_state (Widget * w, widget_state_t state, gboolean enable)
 {
-    gboolean ret = TRUE;
+    gboolean ret = MSG_HANDLED;
 
     if (enable)
         w->state |= state;
@@ -239,15 +295,29 @@ widget_set_state (Widget * w, widget_state_t state, gboolean enable)
     }
 
     if (w->owner == NULL)
-        return FALSE;
+        return MSG_NOT_HANDLED;
 
     switch (state)
     {
     case WST_DISABLED:
-        if (send_message (w, NULL, enable ? MSG_DISABLE : MSG_ENABLE, 0, NULL) != MSG_HANDLED)
-            ret = FALSE;
-        if (ret)
-            send_message (w, NULL, MSG_DRAW, 0, NULL);
+        ret = send_message (w, NULL, enable ? MSG_DISABLE : MSG_ENABLE, 0, NULL);
+        if (ret == MSG_HANDLED && widget_get_state (WIDGET (w->owner), WST_ACTIVE))
+            ret = send_message (w, NULL, MSG_DRAW, 0, NULL);
+        break;
+
+    case WST_FOCUSED:
+        {
+            widget_msg_t msg;
+
+            msg = enable ? MSG_FOCUS : MSG_UNFOCUS;
+            ret = send_message (w, NULL, msg, 0, NULL);
+            if (ret == MSG_HANDLED && widget_get_state (WIDGET (w->owner), WST_ACTIVE))
+            {
+                send_message (w, NULL, MSG_DRAW, 0, NULL);
+                /* Notify owner that focus was moved from one widget to another */
+                send_message (w->owner, w, MSG_NOTIFY, (int) msg, NULL);
+            }
+        }
         break;
 
     default:
@@ -267,6 +337,8 @@ widget_set_size (Widget * widget, int y, int x, int lines, int cols)
     widget->cols = cols;
     widget->lines = lines;
     send_message (widget, NULL, MSG_RESIZE, 0, NULL);
+    if (widget->owner != NULL && widget_get_state (WIDGET (widget->owner), WST_ACTIVE))
+        send_message (widget, NULL, MSG_DRAW, 0, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -369,9 +441,52 @@ widget_replace (Widget * old_w, Widget * new_w)
     send_message (new_w, NULL, MSG_INIT, 0, NULL);
 
     if (should_focus)
-        dlg_select_widget (new_w);
+        widget_select (new_w);
 
-    widget_redraw (new_w);
+    /* draw inactive widget */
+    if (!widget_get_state (new_w, WST_FOCUSED))
+        widget_redraw (new_w);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Select specified widget in it's owner.
+ *
+ * @param w widget to be selected
+ */
+
+void
+widget_select (Widget * w)
+{
+    WDialog *h;
+
+    if (!widget_get_options (w, WOP_SELECTABLE))
+        return;
+
+    h = w->owner;
+    if (h != NULL)
+    {
+        if (widget_get_options (w, WOP_TOP_SELECT))
+        {
+            GList *l;
+
+            l = dlg_find (h, w);
+            widget_reorder (l, TRUE);
+        }
+
+        widget_focus (w);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Set widget at bottom of widget list.
+ */
+
+void
+widget_set_bottom (Widget * w)
+{
+    widget_reorder (dlg_find (w->owner, w), FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

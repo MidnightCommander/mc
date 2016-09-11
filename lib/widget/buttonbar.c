@@ -166,9 +166,6 @@ buttonbar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
 
     switch (msg)
     {
-    case MSG_FOCUS:
-        return MSG_NOT_HANDLED;
-
     case MSG_HOTKEY:
         for (i = 0; i < BUTTONBAR_LABELS_NUM; i++)
             if (parm == KEY_F (i + 1) && buttonbar_call (bb, i))

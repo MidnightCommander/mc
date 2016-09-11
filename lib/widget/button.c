@@ -117,50 +117,50 @@ button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
         widget_move (w, 0, b->hotpos + off);
         return MSG_HANDLED;
 
-    case MSG_UNFOCUS:
-    case MSG_FOCUS:
     case MSG_DRAW:
-        if (msg == MSG_UNFOCUS)
-            b->selected = FALSE;
-        else if (msg == MSG_FOCUS)
-            b->selected = TRUE;
-
-        widget_selectcolor (w, b->selected, FALSE);
-        widget_move (w, 0, 0);
-
-        switch (b->flags)
         {
-        case DEFPUSH_BUTTON:
-            tty_print_string ("[< ");
-            break;
-        case NORMAL_BUTTON:
-            tty_print_string ("[ ");
-            break;
-        case NARROW_BUTTON:
-            tty_print_string ("[");
-            break;
-        case HIDDEN_BUTTON:
-        default:
+            gboolean focused;
+
+            focused = widget_get_state (w, WST_FOCUSED);
+
+            widget_selectcolor (w, focused, FALSE);
+            widget_move (w, 0, 0);
+
+            switch (b->flags)
+            {
+            case DEFPUSH_BUTTON:
+                tty_print_string ("[< ");
+                break;
+            case NORMAL_BUTTON:
+                tty_print_string ("[ ");
+                break;
+            case NARROW_BUTTON:
+                tty_print_string ("[");
+                break;
+            case HIDDEN_BUTTON:
+            default:
+                return MSG_HANDLED;
+            }
+
+            hotkey_draw (w, b->text, focused);
+
+            switch (b->flags)
+            {
+            case DEFPUSH_BUTTON:
+                tty_print_string (" >]");
+                break;
+            case NORMAL_BUTTON:
+                tty_print_string (" ]");
+                break;
+            case NARROW_BUTTON:
+                tty_print_string ("]");
+                break;
+            default:
+                break;
+            }
+
             return MSG_HANDLED;
         }
-
-        hotkey_draw (w, b->text, b->selected);
-
-        switch (b->flags)
-        {
-        case DEFPUSH_BUTTON:
-            tty_print_string (" >]");
-            break;
-        case NORMAL_BUTTON:
-            tty_print_string (" ]");
-            break;
-        case NARROW_BUTTON:
-            tty_print_string ("]");
-            break;
-        default:
-            break;
-        }
-        return MSG_HANDLED;
 
     case MSG_DESTROY:
         release_hotkey (b->text);
@@ -181,7 +181,7 @@ button_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     switch (msg)
     {
     case MSG_MOUSE_DOWN:
-        dlg_select_widget (w);
+        widget_select (w);
         break;
 
     case MSG_MOUSE_CLICK:
@@ -211,10 +211,8 @@ button_new (int y, int x, int action, button_flags_t flags, const char *text, bc
     b->flags = flags;
     b->text = parse_hotkey (text);
     widget_init (w, y, x, 1, button_get_len (b), button_callback, button_mouse_callback);
-    b->selected = FALSE;
+    w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR | WOP_WANT_HOTKEY;
     b->callback = callback;
-    widget_want_cursor (w, TRUE);
-    widget_want_hotkey (w, TRUE);
     b->hotpos = (b->text.hotkey != NULL) ? str_term_width1 (b->text.start) : -1;
 
     return b;

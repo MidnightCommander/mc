@@ -153,7 +153,6 @@ struct WView
     coord_cache_t *coord_cache; /* Cache for mapping offsets to cursor positions */
 
     /* Display information */
-    gboolean active;            /* Active or not in QuickView mode */
     screen_dimen dpy_frame_size;        /* Size of the frame surrounding the real viewer */
     off_t dpy_start;            /* Offset of the displayed data (start of the paragraph in non-hex mode) */
     off_t dpy_end;              /* Offset after the displayed data */

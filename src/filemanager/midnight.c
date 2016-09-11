@@ -1431,9 +1431,9 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         widget_idle (w, FALSE);
 
         if (boot_current_is_left)
-            dlg_select_widget (get_panel_widget (0));
+            widget_select (get_panel_widget (0));
         else
-            dlg_select_widget (get_panel_widget (1));
+            widget_select (get_panel_widget (1));
 
         if (auto_menu)
             midnight_execute_cmd (NULL, CK_UserMenu);
@@ -1449,7 +1449,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         }
 
         /* FIXME: should handle all menu shortcuts before this point */
-        if (the_menubar->is_active)
+        if (widget_get_state (WIDGET (the_menubar), WST_FOCUSED))
             return MSG_NOT_HANDLED;
 
         if (parm == '\t')
@@ -1550,7 +1550,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         }
 
     case MSG_POST_KEY:
-        if (!the_menubar->is_active)
+        if (!widget_get_state (WIDGET (the_menubar), WST_FOCUSED))
             update_dirty_panels ();
         return MSG_HANDLED;
 
@@ -1709,7 +1709,7 @@ void
 change_panel (void)
 {
     input_free_completions (cmdline);
-    dlg_one_down (midnight_dlg);
+    dlg_select_next_widget (midnight_dlg);
 }
 
 /* --------------------------------------------------------------------------------------------- */

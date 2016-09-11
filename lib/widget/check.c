@@ -75,22 +75,25 @@ check_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             return MSG_NOT_HANDLED;
         c->state ^= C_BOOL;
         c->state ^= C_CHANGE;
-        send_message (w, sender, MSG_FOCUS, ' ', data);
-        send_message (w->owner, w, MSG_NOTIFY, 0, NULL);
+        widget_redraw (w);
+        send_message (w->owner, w, MSG_NOTIFY, (int) MSG_KEY, NULL);
         return MSG_HANDLED;
 
     case MSG_CURSOR:
         widget_move (w, 0, 1);
         return MSG_HANDLED;
 
-    case MSG_FOCUS:
-    case MSG_UNFOCUS:
     case MSG_DRAW:
-        widget_selectcolor (w, msg == MSG_FOCUS, FALSE);
-        widget_move (w, 0, 0);
-        tty_print_string ((c->state & C_BOOL) ? "[x] " : "[ ] ");
-        hotkey_draw (w, c->text, msg == MSG_FOCUS);
-        return MSG_HANDLED;
+        {
+            gboolean focused;
+
+            focused = widget_get_state (w, WST_FOCUSED);
+            widget_selectcolor (w, focused, FALSE);
+            widget_move (w, 0, 0);
+            tty_print_string ((c->state & C_BOOL) ? "[x] " : "[ ] ");
+            hotkey_draw (w, c->text, focused);
+            return MSG_HANDLED;
+        }
 
     case MSG_DESTROY:
         release_hotkey (c->text);
@@ -111,7 +114,7 @@ check_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     switch (msg)
     {
     case MSG_MOUSE_DOWN:
-        dlg_select_widget (w);
+        widget_select (w);
         break;
 
     case MSG_MOUSE_CLICK:
@@ -139,9 +142,8 @@ check_new (int y, int x, int state, const char *text)
     c->text = parse_hotkey (text);
     /* 4 is width of "[X] " */
     widget_init (w, y, x, 1, 4 + hotkey_width (c->text), check_callback, check_mouse_callback);
+    w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR | WOP_WANT_HOTKEY;
     c->state = state ? C_BOOL : 0;
-    widget_want_cursor (w, TRUE);
-    widget_want_hotkey (w, TRUE);
 
     return c;
 }

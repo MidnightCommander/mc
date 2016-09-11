@@ -279,7 +279,7 @@ update_mode (WDialog * h)
 {
     print_flags ();
     chown_info_update ();
-    send_message (h->current->data, NULL, MSG_FOCUS, 0, NULL);
+    widget_set_state (WIDGET (h->current->data), WST_FOCUSED, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -400,7 +400,7 @@ do_enter_key (WDialog * h, int f_pos)
                     ch_flags[f_pos + 6] = '+';
                     update_ownership ();
                 }
-                dlg_focus (h);
+                dlg_select_current_widget (h);
                 if (ok)
                     print_flags ();
             }
@@ -408,14 +408,14 @@ do_enter_key (WDialog * h, int f_pos)
             {
                 if (!is_owner)
                     chl_end = TRUE;
-                dlg_one_up (ch_dlg);
+                dlg_select_prev_widget (ch_dlg);
                 f_pos--;
             }
             else if (result == KEY_RIGHT)
             {
                 if (is_owner)
                     chl_end = TRUE;
-                dlg_one_down (ch_dlg);
+                dlg_select_next_widget (ch_dlg);
                 f_pos++;
             }
         }
@@ -546,7 +546,7 @@ advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
             x_toggle ^= (1 << parm);
             update_mode (h);
             dlg_broadcast_msg (h, MSG_DRAW);
-            send_message (h->current->data, NULL, MSG_FOCUS, 0, NULL);
+            widget_set_state (WIDGET (h->current->data), WST_FOCUSED, TRUE);
             break;
 
         case XCTRL ('x'):
@@ -562,7 +562,7 @@ advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
             x_toggle ^= (1 << parm);
             update_mode (h);
             dlg_broadcast_msg (h, MSG_DRAW);
-            send_message (h->current->data, NULL, MSG_FOCUS, 0, NULL);
+            widget_set_state (WIDGET (h->current->data), WST_FOCUSED, TRUE);
             break;
 
         case 'x':
@@ -613,7 +613,7 @@ advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
                 update_mode (h);
                 send_message (h, sender, MSG_KEY, KEY_RIGHT, NULL);
                 if (flag_pos > 8 || (flag_pos % 3) == 0)
-                    dlg_one_down (h);
+                    dlg_select_next_widget (h);
             }
             break;
 
@@ -733,7 +733,7 @@ init_chown_advanced (void)
                                                        chown_advanced_but[i].flags,
                                                        chown_advanced_but[i].text, NULL));
 
-    dlg_select_widget (b_att[0]);
+    widget_select (WIDGET (b_att[0]));
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -356,7 +356,7 @@ edit_window_list (const WDialog * h)
     if (rv >= 0)
     {
         w = g_list_nth (h->widgets, rv + offset);
-        dlg_select_widget (w->data);
+        widget_select (w->data);
     }
 }
 
@@ -484,10 +484,10 @@ edit_dialog_command_execute (WDialog * h, long command)
         edit_window_list (h);
         break;
     case CK_WindowNext:
-        dlg_one_down (h);
+        dlg_select_next_widget (h);
         break;
     case CK_WindowPrev:
-        dlg_one_up (h);
+        dlg_select_prev_widget (h);
         break;
     case CK_Options:
         edit_options_dialog (h);
@@ -655,7 +655,7 @@ edit_quit (WDialog * h)
 
             if (e->modified)
             {
-                dlg_select_widget (e);
+                widget_select (WIDGET (e));
 
                 if (!edit_ok_to_exit (e))
                     return;
@@ -880,7 +880,7 @@ edit_dialog_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 
         b = find_menubar (h);
 
-        if (!b->is_active)
+        if (!widget_get_state (WIDGET (b), WST_FOCUSED))
         {
             /* menubar */
 
@@ -904,7 +904,7 @@ edit_dialog_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
                 if (top != h->current)
                 {
                     /* Window is not active. Activate it */
-                    dlg_select_widget (e);
+                    widget_select (WIDGET (e));
                 }
 
                 /* Handle buttons */
@@ -936,16 +936,11 @@ edit_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
     {
     case MSG_FOCUS:
         edit_set_buttonbar (e, find_buttonbar (w->owner));
-        /* fall through */
+        return MSG_HANDLED;
 
     case MSG_DRAW:
         e->force |= REDRAW_COMPLETELY;
         edit_update_screen (e);
-        return MSG_HANDLED;
-
-    case MSG_UNFOCUS:
-        /* redraw frame and status */
-        edit_status (e, FALSE);
         return MSG_HANDLED;
 
     case MSG_KEY:
@@ -1085,7 +1080,7 @@ edit_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     switch (msg)
     {
     case MSG_MOUSE_DOWN:
-        dlg_select_widget (w);
+        widget_select (w);
         edit_update_curs_row (edit);
         edit_update_curs_col (edit);
 
@@ -1296,7 +1291,7 @@ edit_update_screen (WEdit * e)
 
     edit_scroll_screen_over_cursor (e);
     edit_update_curs_col (e);
-    edit_status (e, (void *) e == h->current->data);
+    edit_status (e, widget_get_state (WIDGET (e), WST_FOCUSED));
 
     /* pop all events for this window for internal handling */
     if (!is_idle ())
@@ -1359,6 +1354,7 @@ edit_add_window (WDialog * h, int y, int x, int lines, int cols, const vfs_path_
     w->mouse_callback = edit_mouse_callback;
 
     add_widget (h, w);
+    edit_set_buttonbar (edit, find_buttonbar (h));
     dlg_redraw (h);
 
     return TRUE;

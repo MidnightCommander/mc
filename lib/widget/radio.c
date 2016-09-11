@@ -84,8 +84,7 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         {
         case ' ':
             r->sel = r->pos;
-            send_message (w, sender, MSG_FOCUS, ' ', data);
-            send_message (w->owner, w, MSG_NOTIFY, 0, NULL);
+            widget_set_state (w, WST_FOCUSED, TRUE);
             return MSG_HANDLED;
 
         case KEY_UP:
@@ -109,25 +108,27 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         }
 
     case MSG_CURSOR:
-        send_message (w, sender, MSG_FOCUS, ' ', data);
+        widget_set_state (w, WST_FOCUSED, TRUE);
         widget_move (r, r->pos, 1);
-        send_message (w->owner, w, MSG_NOTIFY, 0, NULL);
         return MSG_HANDLED;
 
-    case MSG_UNFOCUS:
-    case MSG_FOCUS:
     case MSG_DRAW:
-        for (i = 0; i < r->count; i++)
         {
-            const gboolean focused = (i == r->pos && msg == MSG_FOCUS);
+            gboolean focused;
 
-            widget_selectcolor (w, focused, FALSE);
-            widget_move (r, i, 0);
-            tty_draw_hline (w->y + i, w->x, ' ', w->cols);
-            tty_print_string ((r->sel == i) ? "(*) " : "( ) ");
-            hotkey_draw (w, r->texts[i], focused);
+            focused = widget_get_state (w, WST_FOCUSED);
+
+            for (i = 0; i < r->count; i++)
+            {
+                widget_selectcolor (w, i == r->pos && focused, FALSE);
+                widget_move (w, i, 0);
+                tty_draw_hline (w->y + i, w->x, ' ', w->cols);
+                tty_print_string ((r->sel == i) ? "(*) " : "( ) ");
+                hotkey_draw (w, r->texts[i], i == r->pos && focused);
+            }
+
+            return MSG_HANDLED;
         }
-        return MSG_HANDLED;
 
     case MSG_DESTROY:
         for (i = 0; i < r->count; i++)
@@ -149,7 +150,7 @@ radio_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     {
     case MSG_MOUSE_DOWN:
         RADIO (w)->pos = event->y;
-        dlg_select_widget (w);
+        widget_select (w);
         break;
 
     case MSG_MOUSE_CLICK:
@@ -191,12 +192,11 @@ radio_new (int y, int x, int count, const char **texts)
 
     /* 4 is width of "(*) " */
     widget_init (w, y, x, count, 4 + wmax, radio_callback, radio_mouse_callback);
+    w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR | WOP_WANT_HOTKEY;
     r->state = 1;
     r->pos = 0;
     r->sel = 0;
     r->count = count;
-    widget_want_cursor (w, TRUE);
-    widget_want_hotkey (w, TRUE);
 
     return r;
 }

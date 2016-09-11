@@ -99,7 +99,6 @@ struct WTree
     char search_buffer[MC_MAXFILENAMELEN];      /* Current search string */
     tree_entry **tree_shown;    /* Entries currently on screen */
     int is_panel;               /* panel or plain widget flag */
-    int active;                 /* if it's currently selected */
     int searching;              /* Are we on searching mode? */
     int topdiff;                /* The difference between the topmost
                                    shown and the selected */
@@ -348,7 +347,7 @@ show_tree (WTree * tree)
             continue;
 
         if (tree->is_panel)
-            tty_setcolor (tree->active && current == tree->selected_ptr
+            tty_setcolor (widget_get_state (w, WST_FOCUSED) && current == tree->selected_ptr
                           ? SELECTED_COLOR : NORMAL_COLOR);
         else
             tty_setcolor (current == tree->selected_ptr ? TREE_CURRENTC (h) : TREE_NORMALC (h));
@@ -974,10 +973,15 @@ tree_start_search (WTree * tree)
 static void
 tree_toggle_navig (WTree * tree)
 {
+    WButtonBar *b;
+
     tree_navigation_flag = !tree_navigation_flag;
-    buttonbar_set_label (find_buttonbar (WIDGET (tree)->owner), 4,
-                         tree_navigation_flag ? Q_ ("ButtonBar|Static")
-                         : Q_ ("ButtonBar|Dynamc"), tree_map, WIDGET (tree));
+
+    b = find_buttonbar (WIDGET (tree)->owner);
+    buttonbar_set_label (b, 4,
+                         tree_navigation_flag ? Q_ ("ButtonBar|Static") : Q_ ("ButtonBar|Dynamc"),
+                         tree_map, WIDGET (tree));
+    widget_redraw (WIDGET (b));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1146,17 +1150,22 @@ tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
 {
     WTree *tree = (WTree *) w;
     WDialog *h = w->owner;
-    WButtonBar *b = find_buttonbar (h);
+    WButtonBar *b;
 
     switch (msg)
     {
     case MSG_DRAW:
         tree_frame (h, tree);
         show_tree (tree);
+        if (widget_get_state (w, WST_FOCUSED))
+        {
+            b = find_buttonbar (h);
+            widget_redraw (WIDGET (b));
+        }
         return MSG_HANDLED;
 
     case MSG_FOCUS:
-        tree->active = 1;
+        b = find_buttonbar (h);
         buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), tree_map, w);
         buttonbar_set_label (b, 2, Q_ ("ButtonBar|Rescan"), tree_map, w);
         buttonbar_set_label (b, 3, Q_ ("ButtonBar|Forget"), tree_map, w);
@@ -1168,23 +1177,14 @@ tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
         /* FIXME: mkdir is currently defunct */
         buttonbar_set_label (b, 7, Q_ ("ButtonBar|Mkdir"), tree_map, w);
 #else
-        buttonbar_clear_label (b, 7, WIDGET (tree));
+        buttonbar_clear_label (b, 7, w);
 #endif
         buttonbar_set_label (b, 8, Q_ ("ButtonBar|Rmdir"), tree_map, w);
-        widget_redraw (WIDGET (b));
 
-        /* FIXME: Should find a better way of only displaying the
-           currently selected item */
-        show_tree (tree);
         return MSG_HANDLED;
 
-        /* FIXME: Should find a better way of changing the color of the
-           selected item */
-
     case MSG_UNFOCUS:
-        tree->active = 0;
         tree->searching = 0;
-        show_tree (tree);
         return MSG_HANDLED;
 
     case MSG_KEY:
@@ -1227,7 +1227,7 @@ tree_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
             /* return MOU_UNHANDLED */
             event->result.abort = TRUE;
         }
-        else if (!tree->active)
+        else if (!widget_get_state (w, WST_FOCUSED))
             change_panel ();
         break;
 
@@ -1284,7 +1284,7 @@ tree_new (int y, int x, int lines, int cols, gboolean is_panel)
     w = WIDGET (tree);
 
     widget_init (w, y, x, lines, cols, tree_callback, tree_mouse_callback);
-    widget_set_options (w, WOP_TOP_SELECT, TRUE);
+    w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
     tree->is_panel = is_panel;
     tree->selected_ptr = 0;
 
@@ -1294,7 +1294,6 @@ tree_new (int y, int x, int lines, int cols, gboolean is_panel)
     tree->search_buffer[0] = 0;
     tree->topdiff = w->lines / 2;
     tree->searching = 0;
-    tree->active = 0;
 
     load_tree (tree);
     return tree;

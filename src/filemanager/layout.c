@@ -370,7 +370,7 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
         return MSG_HANDLED;
 
     case MSG_NOTIFY:
-        if (sender == WIDGET (radio_widget))
+        if (sender == WIDGET (radio_widget) && parm == (int) MSG_FOCUS)
         {
             if (panels_layout.horizontal_split != radio_widget->sel)
             {
@@ -404,7 +404,7 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
             return MSG_HANDLED;
         }
 
-        if (sender == WIDGET (check_options[0].widget))
+        if (sender == WIDGET (check_options[0].widget) && parm == (int) MSG_FOCUS)
         {
             int eq;
 
@@ -577,7 +577,7 @@ init_layout (void)
                 button_new (12, (width - b) / 2 + b1 + 1, B_CANCEL, NORMAL_BUTTON,
                             cancel_button, 0));
 
-    dlg_select_widget (radio_widget);
+    widget_select (WIDGET (radio_widget));
 
     return layout_dlg;
 }
@@ -1170,9 +1170,9 @@ swap_panels (void)
         }
 
         if (widget_is_active (panels[0].widget))
-            dlg_select_widget (panels[1].widget);
+            widget_select (panels[1].widget);
         else if (widget_is_active (panels[1].widget))
-            dlg_select_widget (panels[0].widget);
+            widget_select (panels[0].widget);
     }
     else
     {

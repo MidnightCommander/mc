@@ -479,7 +479,7 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         return MSG_HANDLED;
 
     case MSG_NOTIFY:
-        if (sender == WIDGET (ignore_dirs_cbox))
+        if (sender == WIDGET (ignore_dirs_cbox) && parm == (int) MSG_FOCUS)
         {
             gboolean disable = !(ignore_dirs_cbox->state & C_BOOL);
 
@@ -501,7 +501,7 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
             /* Don't stop the dialog */
             widget_set_state (WIDGET (h), WST_ACTIVE, TRUE);
             message (D_ERROR, MSG_ERROR, _("Malformed regular expression"));
-            dlg_select_widget (in_name);
+            widget_select (WIDGET (in_name));
             return MSG_HANDLED;
         }
 
@@ -512,7 +512,7 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
             /* Don't stop the dialog */
             widget_set_state (WIDGET (h), WST_ACTIVE, TRUE);
             message (D_ERROR, MSG_ERROR, _("Malformed regular expression"));
-            dlg_select_widget (in_with);
+            widget_select (WIDGET (in_with));
             return MSG_HANDLED;
         }
 
@@ -755,7 +755,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
     add_widget (find_dlg, button_new (y1, x1 + b1 + 1, B_CANCEL, NORMAL_BUTTON, buts[2], NULL));
 
   find_par_start:
-    dlg_select_widget (in_name);
+    widget_select (WIDGET (in_name));
 
     switch (dlg_run (find_dlg))
     {
@@ -1652,7 +1652,7 @@ setup_gui (void)
             y++;
     }
 
-    dlg_select_widget (find_list);
+    widget_select (WIDGET (find_list));
 }
 
 /* --------------------------------------------------------------------------------------------- */

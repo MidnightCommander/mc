@@ -147,12 +147,10 @@ void dlg_erase (WDialog * h);
 void dlg_stop (WDialog * h);
 
 /* Widget selection */
-void dlg_select_widget (void *w);
-void dlg_set_bottom_widget (void *w);
-void dlg_one_up (WDialog * h);
-void dlg_one_down (WDialog * h);
-gboolean dlg_focus (WDialog * h);
+void dlg_select_prev_widget (WDialog * h);
+void dlg_select_next_widget (WDialog * h);
 Widget *find_widget_type (const WDialog * h, widget_cb_fn callback);
+GList *dlg_find (const WDialog * h, const Widget * w);
 Widget *dlg_find_by_id (const WDialog * h, unsigned long id);
 void dlg_select_by_id (const WDialog * h, unsigned long id);
 
@@ -162,6 +160,12 @@ void do_refresh (void);
 /* Used in load_prompt() */
 void update_cursor (WDialog * h);
 
+void dlg_set_current_widget_next (WDialog * h);
+void dlg_set_current_widget_prev (WDialog * h);
+
+GList *dlg_get_widget_next_of (GList * w);
+GList *dlg_get_widget_prev_of (GList * w);
+
 /* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -170,6 +174,21 @@ static inline unsigned long
 dlg_get_current_widget_id (const WDialog * h)
 {
     return WIDGET (h->current->data)->id;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Select current widget in the Dialog.
+ *
+ * @param h WDialog object
+ */
+
+static inline void
+dlg_select_current_widget (WDialog * h)
+{
+    if (h->current != NULL)
+        widget_select (WIDGET (h->current->data));
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -482,12 +482,8 @@ listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         widget_move (l, l->cursor_y, 0);
         return MSG_HANDLED;
 
-    case MSG_FOCUS:
-    case MSG_UNFOCUS:
-        l->focused = msg == MSG_FOCUS;
-        /* fall through */
     case MSG_DRAW:
-        listbox_draw (l, l->focused);
+        listbox_draw (l, widget_get_state (w, WST_FOCUSED));
         return MSG_HANDLED;
 
     case MSG_DESTROY:
@@ -515,7 +511,7 @@ listbox_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     switch (msg)
     {
     case MSG_MOUSE_DOWN:
-        dlg_select_widget (l);
+        widget_select (w);
         listbox_select_entry (l, listbox_y_pos (l, event->y));
         break;
 
@@ -563,6 +559,7 @@ listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn 
     l = g_new (WListbox, 1);
     w = WIDGET (l);
     widget_init (w, y, x, height, width, listbox_callback, listbox_mouse_callback);
+    w->options |= WOP_SELECTABLE | WOP_WANT_HOTKEY;
 
     l->list = NULL;
     l->top = l->pos = 0;
@@ -570,8 +567,6 @@ listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn 
     l->callback = callback;
     l->allow_duplicates = TRUE;
     l->scrollbar = !mc_global.tty.slow_terminal;
-    l->focused = FALSE;
-    widget_want_hotkey (w, TRUE);
 
     return l;
 }

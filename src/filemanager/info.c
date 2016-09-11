@@ -313,9 +313,6 @@ info_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
         info_hook (info);
         return MSG_HANDLED;
 
-    case MSG_FOCUS:
-        return MSG_NOT_HANDLED;
-
     case MSG_DESTROY:
         delete_hook (&select_file_hook, info_hook);
         free_my_statfs ();
