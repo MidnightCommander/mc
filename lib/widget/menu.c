@@ -1029,7 +1029,7 @@ menubar_activate (WMenuBar * menubar, gboolean dropped, int which)
     {
         widget_set_options (w, WOP_SELECTABLE, TRUE);
 
-        widget_set_state (w, WST_FOCUSED, TRUE);         /* FIXME: unneeded? */
+        widget_set_state (w, WST_FOCUSED, TRUE);        /* FIXME: unneeded? */
         menubar->is_dropped = dropped;
         if (which >= 0)
             menubar->selected = (guint) which;
