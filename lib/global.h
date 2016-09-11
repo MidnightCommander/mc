@@ -135,9 +135,6 @@
 /* one caused by typing 'exit' or 'logout' in the subshell */
 #define SUBSHELL_EXIT 128
 
-/* C++ style type casts */
-#define const_cast(m_type, m_expr) ((m_type) (m_expr))
-
 #if 0
 #ifdef MC_ENABLE_DEBUGGING_CODE
 #undef NDEBUG

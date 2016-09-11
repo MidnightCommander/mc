@@ -20,6 +20,11 @@
 #include <ncursesw/curses.h>
 #endif /* USE_NCURSESW */
 
+/* netbsd-libcurses doesn't define NCURSES_CONST */
+#ifndef NCURSES_CONST
+#define NCURSES_CONST const
+#endif
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /*** enums ***************************************************************************************/

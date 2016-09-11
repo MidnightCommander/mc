@@ -245,24 +245,23 @@ fish_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, c
     FILE *logfile = MEDATA->logfile;
 
     va_start (ap, fmt);
-
     str = g_strdup_vprintf (fmt, ap);
     va_end (ap);
 
-    if (logfile)
+    if (logfile != NULL)
     {
         size_t ret;
+
         ret = fwrite (str, strlen (str), 1, logfile);
         ret = fflush (logfile);
         (void) ret;
     }
 
     tty_enable_interrupt_key ();
-
     status = write (SUP->sockw, str, strlen (str));
     g_free (str);
-
     tty_disable_interrupt_key ();
+
     if (status < 0)
         return TRANSIENT;
 
@@ -340,7 +339,7 @@ fish_pipeopen (struct vfs_s_super *super, const char *path, const char *argv[])
         res = open ("/dev/null", O_WRONLY);
         close (fileset2[0]);
         close (fileset2[1]);
-        execvp (path, const_cast (char **, argv));
+        execvp (path, (char **) argv);
         my_exit (3);
     }
 }
@@ -403,7 +402,6 @@ fish_info (struct vfs_class *me, struct vfs_s_super *super)
     ERRNOR (E_PROTO, FALSE);
 }
 
-
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -459,7 +457,7 @@ fish_open_archive_talk (struct vfs_class *me, struct vfs_s_super *super)
 
     printf ("\n%s\n", _("fish: Waiting for initial line..."));
 
-    if (!vfs_s_get_line (me, SUP->sockr, answer, sizeof (answer), ':'))
+    if (vfs_s_get_line (me, SUP->sockr, answer, sizeof (answer), ':') == 0)
         return FALSE;
 
     if (strstr (answer, "assword") != NULL)
@@ -474,13 +472,13 @@ fish_open_archive_talk (struct vfs_class *me, struct vfs_s_super *super)
         if (super->path_element->password == NULL)
         {
             char *p, *op;
+
             p = g_strdup_printf (_("fish: Password is required for %s"), super->path_element->user);
             op = vfs_get_password (p);
             g_free (p);
             if (op == NULL)
                 return FALSE;
             super->path_element->password = op;
-
         }
 
         printf ("\n%s\n", _("fish: Sending password..."));
@@ -504,6 +502,7 @@ static int
 fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 {
     gboolean ftalk;
+
     /* hide panels */
     pre_exec ();
 
@@ -658,10 +657,8 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
      * Simple FISH debug interface :]
      */
 #if 0
-    if (!(MEDATA->logfile))
-    {
+    if (MEDATA->logfile == NULL)
         MEDATA->logfile = fopen ("/tmp/mc-FISH.sh", "w");
-    }
 #endif
     logfile = MEDATA->logfile;
 
@@ -675,6 +672,7 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     g_free (shell_commands);
     g_free (quoted_path);
     ent = vfs_s_generate_entry (me, NULL, dir, 0);
+
     while (TRUE)
     {
         int res;
@@ -687,17 +685,17 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
             me->verrno = ECONNRESET;
             goto error;
         }
-        if (logfile)
+        if (logfile != NULL)
         {
             fputs (buffer, logfile);
             fputs ("\n", logfile);
             fflush (logfile);
         }
-        if (!strncmp (buffer, "### ", 4))
+        if (strncmp (buffer, "### ", 4) == 0)
             break;
-        if ((!buffer[0]))
+        if (buffer[0] == '\0')
         {
-            if (ent->name)
+            if (ent->name != NULL)
             {
                 vfs_s_insert_entry (me, dir, ent);
                 ent = vfs_s_generate_entry (me, NULL, dir, 0);
@@ -718,7 +716,7 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 
                 filename_bound = filename + strlen (filename);
 
-                if (!strcmp (data_start, "\".\"") || !strcmp (data_start, "\"..\""))
+                if (strcmp (data_start, "\".\"") == 0 || strcmp (data_start, "\"..\"") == 0)
                     break;      /* We'll do "." and ".." ourselves */
 
                 if (S_ISLNK (ST.st_mode))
@@ -736,7 +734,7 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
                         ++filename;
 
                     linkname = strstr (filename, "\" -> \"");
-                    if (!linkname)
+                    if (linkname == NULL)
                     {
                         /* broken client, or smth goes wrong */
                         linkname = filename_bound;
@@ -788,6 +786,7 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
         case 'P':
             {
                 size_t skipped;
+
                 vfs_parse_filemode (buffer + 1, &skipped, &ST.st_mode);
                 break;
             }
@@ -798,13 +797,14 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
                    we expect: Roctal-filemode octal-filetype uid.gid
                  */
                 size_t skipped;
+
                 vfs_parse_raw_filemode (buffer + 1, &skipped, &ST.st_mode);
                 break;
             }
         case 'd':
             {
                 vfs_split_text (buffer + 1);
-                if (!vfs_parse_filedate (0, &ST.st_ctime))
+                if (vfs_parse_filedate (0, &ST.st_ctime) == 0)
                     break;
                 ST.st_atime = ST.st_mtime = ST.st_ctime;
             }
@@ -812,6 +812,7 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
         case 'D':
             {
                 struct tm tim;
+
                 /* cppcheck-suppress invalidscanf */
                 if (sscanf (buffer + 1, "%d %d %d %d %d %d", &tim.tm_year, &tim.tm_mon,
                             &tim.tm_mday, &tim.tm_hour, &tim.tm_min, &tim.tm_sec) != 6)
@@ -822,6 +823,7 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
         case 'E':
             {
                 int maj, min;
+
                 /* cppcheck-suppress invalidscanf */
                 if (sscanf (buffer + 1, "%d,%d", &maj, &min) != 2)
                     break;
@@ -1105,7 +1107,9 @@ fish_ctl (void *fh, int ctlop, void *arg)
     (void) arg;
     (void) fh;
     (void) ctlop;
+
     return 0;
+
 #if 0
     switch (ctlop)
     {
@@ -1113,15 +1117,14 @@ fish_ctl (void *fh, int ctlop, void *arg)
         {
             int v;
 
-            if (!FH->linear)
+            if (FH->linear == 0)
                 vfs_die ("You may not do this");
             if (FH->linear == LS_LINEAR_CLOSED || FH->linear == LS_LINEAR_PREOPEN)
                 return 0;
 
             v = vfs_s_select_on_two (FH_SUPER->u.fish.sockr, 0);
-            if (((v < 0) && (errno == EINTR)) || v == 0)
-                return 1;
-            return 0;
+
+            return (((v < 0) && (errno == EINTR)) || v == 0) ? 1 : 0;
         }
     default:
         return 0;
@@ -1140,7 +1143,7 @@ fish_send_command (struct vfs_class *me, struct vfs_s_super *super, const char *
     vfs_stamp_create (&vfs_fish_ops, super);
     if (r != COMPLETE)
         ERRNOR (E_REMOTE, -1);
-    if (flags & OPT_FLUSH)
+    if ((flags & OPT_FLUSH) != 0)
         vfs_s_invalidate (me, super);
     return 0;
 }
@@ -1326,7 +1329,6 @@ fish_utime (const vfs_path_t * vpath, struct utimbuf *times)
     gchar *shell_commands = NULL;
     char utcmtime[16], utcatime[16];
     struct tm *gmt;
-
     char buf[BUF_LARGE];
     const char *crpath;
     char *rpath;
@@ -1366,7 +1368,6 @@ static int
 fish_unlink (const vfs_path_t * vpath)
 {
     gchar *shell_commands = NULL;
-
     char buf[BUF_LARGE];
     const char *crpath;
     char *rpath;
@@ -1394,7 +1395,6 @@ static int
 fish_exists (const vfs_path_t * vpath)
 {
     gchar *shell_commands = NULL;
-
     char buf[BUF_LARGE];
     const char *crpath;
     char *rpath;
@@ -1450,7 +1450,7 @@ fish_mkdir (const vfs_path_t * vpath, mode_t mode)
     if (ret_code != 0)
         return ret_code;
 
-    if (!fish_exists (vpath))
+    if (fish_exists (vpath) == 0)
     {
         path_element->class->verrno = EACCES;
         return -1;
@@ -1513,7 +1513,7 @@ fish_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t m
         if ((flags & O_APPEND) != 0)
             fish->append = TRUE;
 
-        if (!fh->ino->localname)
+        if (fh->ino->localname == NULL)
         {
             vfs_path_t *vpath;
             int tmp_handle;
@@ -1530,9 +1530,9 @@ fish_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t m
         }
         return 0;
     }
-    if (!fh->ino->localname && vfs_s_retrieve_file (me, fh->ino) == -1)
+    if (fh->ino->localname == NULL && vfs_s_retrieve_file (me, fh->ino) == -1)
         goto fail;
-    if (!fh->ino->localname)
+    if (fh->ino->localname == NULL)
         vfs_die ("retrieve_file failed to fill in localname");
     return 0;
 
