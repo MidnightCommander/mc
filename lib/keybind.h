@@ -39,6 +39,7 @@ enum
 
     /* common */
     CK_Enter = 1L,
+    CK_ChangePanel,
     CK_Up,
     CK_Down,
     CK_Left,
