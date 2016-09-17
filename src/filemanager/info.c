@@ -190,7 +190,7 @@ info_show_info (WInfo * info)
         tty_printf (_("Type:       %s"),
                     myfs_stats.typename ? myfs_stats.typename : _("non-local vfs"));
         if (myfs_stats.type != 0xffff && myfs_stats.type != -1)
-            tty_printf (" (%Xh)", myfs_stats.type);
+            tty_printf (" (%Xh)", (unsigned int) myfs_stats.type);
 
     case 13:
         widget_move (w, 13, 3);
@@ -236,7 +236,7 @@ info_show_info (WInfo * info)
             size_trunc_len (buffer, 9, st.st_size, 0, panels_options.kilobyte_si);
             tty_printf (_("Size:       %s"), buffer);
 #ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-            tty_printf (ngettext (" (%ld block)", " (%ld blocks)",
+            tty_printf (ngettext (" (%lu block)", " (%lu blocks)",
                                   (unsigned long) st.st_blocks), (unsigned long) st.st_blocks);
 #endif
         }
@@ -256,7 +256,7 @@ info_show_info (WInfo * info)
 
     case 4:
         widget_move (w, 4, 3);
-        tty_printf (_("Location:   %Xh:%Xh"), (int) st.st_dev, (int) st.st_ino);
+        tty_printf (_("Location:   %Xh:%Xh"), (unsigned int) st.st_dev, (unsigned int) st.st_ino);
 
     case 3:
         {
