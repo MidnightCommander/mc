@@ -113,7 +113,7 @@ mc_serialize_str (const char prefix, const char *data, GError ** error)
         g_set_error (error, MC_ERROR, 0, "mc_serialize_str(): Input data is NULL.");
         return NULL;
     }
-    return g_strdup_printf ("%c%zd" SRLZ_DELIM_S "%s", prefix, strlen (data), data);
+    return g_strdup_printf ("%c%zu" SRLZ_DELIM_S "%s", prefix, strlen (data), data);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -173,7 +173,7 @@ mc_deserialize_str (const char prefix, const char *data, GError ** error)
     {
         g_set_error (error, MC_ERROR, 0,
                      FUNC_NAME
-                     ": Specified data length (%zd) is greater than actual data length (%zd)",
+                     ": Specified data length (%zu) is greater than actual data length (%zu)",
                      data_len, strlen (data));
         return NULL;
     }
@@ -266,7 +266,7 @@ mc_serialize_config (const mc_config_t * data, GError ** error)
 
 #define FUNC_NAME "mc_deserialize_config()"
 #define prepend_error_and_exit() { \
-    prepend_error_message (error, FUNC_NAME " at %zd", current_position + 1); \
+    prepend_error_message (error, FUNC_NAME " at %zu", current_position + 1); \
                 mc_config_deinit (ret_data); \
                 return NULL; \
 }
