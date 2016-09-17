@@ -1649,7 +1649,7 @@ edit_move_block_to_left (WEdit * edit)
         if (next_char == '\t')
             edit_delete (edit, TRUE);
         else if (next_char == ' ')
-            for (i = 1; i <= del_tab_width; i++)
+            for (i = 0; i < del_tab_width; i++)
             {
                 if (next_char == ' ')
                     edit_delete (edit, TRUE);
