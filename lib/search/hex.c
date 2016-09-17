@@ -73,16 +73,17 @@ mc_search__hex_translate_to_regex (const GString * astr)
 
     while (loop < tmp_str_len)
     {
-        int val, ptr;
+        unsigned int val;
+        int ptr;
 
         /* cppcheck-suppress invalidscanf */
         if (sscanf (tmp_str + loop, "%x%n", &val, &ptr))
         {
-            if (val < -128 || val > 255)
+            if (val > 255)
                 loop++;
             else
             {
-                g_string_append_printf (buff, "\\x%02X", (unsigned char) val);
+                g_string_append_printf (buff, "\\x%02X", val);
                 loop += ptr;
             }
         }
