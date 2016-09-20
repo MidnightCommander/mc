@@ -56,7 +56,7 @@ Force xterm mode.  Used when running on xterm\-capable terminals (two
 screen modes, and able to send mouse escape sequences).
 .SH FEATURES
 The internal file editor is a full\-featured windowed editor.  It can
-edit several files at the same time. Maximim size of each file is 64
+edit several files at the same time. Maximum size of each file is 64
 megabytes. It is possible to edit binary files. The features it presently
 supports are: block copy, move, delete, cut, paste; key for key undo;
 pull\-down menus; file insertion; macro commands; regular expression

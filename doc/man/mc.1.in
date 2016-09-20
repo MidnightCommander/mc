@@ -338,7 +338,7 @@ the input lines in the query dialogs.
 .\"NODE "  Keys_redefine"
 .SH "  Redefine hotkey bindings"
 Hotkey bindings may be read from external file (keymap\-file).
-Initially, Mignight Commander creates key bindings using keymap defined
+Initially, Midnight Commander creates key bindings using keymap defined
 in the source code. Then, two files
 .B %prefix%/share/mc/mc.keymap
 and
@@ -1862,7 +1862,7 @@ is interpreted as a cancel key (ESC ESC).
 .PP
 .I Timeout.
 This options is used to setup the time interval (in microseconds)
-for single press of ESC key. By default, this inrerval is one second
+for single press of ESC key. By default, this interval is one second
 (1000000 microseconds). Also the timeout can be set via KEYBOARD_KEY_TIMEOUT_US
 environment variable (also in microseconds), which has higher priority
 than Timeout option value.
