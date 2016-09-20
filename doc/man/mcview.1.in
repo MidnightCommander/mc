@@ -36,7 +36,7 @@ Display the compiled\-in search paths for Midnight Commander files.
 .TP
 .I "\-t"
 Used only if the code was compiled with S\-Lang and terminfo: it makes
-the Midnight Commander use the value of the
+Midnight Commander use the value of the
 .B TERMCAP
 variable for the terminal information instead of the information on
 the system wide terminal database
@@ -72,7 +72,7 @@ the user's own ~/.config/mc/ini file is missing.
 .PP
 .I %prefix%/share/mc/mc.lib
 .IP
-Global settings for the Midnight Commander.  Settings in this file
+Global settings for Midnight Commander. Settings in this file
 affect all users, whether they have ~/.config/mc/ini or not.
 .PP
 .I ~/.config/mc/ini
@@ -83,7 +83,7 @@ here instead of the system\-wide startup file.
 .SH LICENSE
 This program is distributed under the terms of the GNU General Public
 License as published by the Free Software Foundation.  See the built\-in
-help of the Midnight Commander for details on the License and the lack
+help of Midnight Commander for details on the License and the lack
 of warranty.
 .SH AVAILABILITY
 The latest version of this program can be found at

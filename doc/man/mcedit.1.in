@@ -640,7 +640,7 @@ very useful for scanning strings, and whitespace.
 The editor also displays non\-us characters (160+).  When editing
 binary files, you should set
 .B display bits
-to 7 bits in the Midnight Commander options menu to keep the spacing
+to 7 bits in Midnight Commander's options menu to keep the spacing
 clean.
 .SH FILES
 .I %prefix%/share/mc/mc.hlp
@@ -654,7 +654,7 @@ the user's own ~/.config/mc/ini file is missing.
 .PP
 .I %prefix%/share/mc/mc.lib
 .IP
-Global settings for the Midnight Commander.  Settings in this file
+Global settings for Midnight Commander. Settings in this file
 affect all users, whether they have ~/.config/mc/ini or not.
 .PP
 .I %prefix%/share/mc/syntax/*
@@ -674,7 +674,7 @@ user's own syntax files are located.
 .SH LICENSE
 This program is distributed under the terms of the GNU General Public
 License as published by the Free Software Foundation.  See the built\-in
-help of the Midnight Commander for details on the License and the lack
+help of Midnight Commander for details on the License and the lack
 of warranty.
 .SH AVAILABILITY
 The latest version of this program can be found at
@@ -683,6 +683,6 @@ http://ftp.midnight\-commander.org/.
 cooledit(1), mc(1), gpm(1), terminfo(1), scanf(3).
 .SH AUTHORS
 Paul Sheer (psheer@obsidian.co.za) is the original author of
-the Midnight Commander's internal editor.
+Midnight Commander's internal editor.
 .SH BUGS
 Bugs should be reported to http://www.midnight\-commander.org/.
