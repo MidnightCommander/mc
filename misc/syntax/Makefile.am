@@ -53,6 +53,7 @@ SYNTAXFILES =			\
 	named.syntax		\
 	nemerle.syntax		\
 	nroff.syntax		\
+	opencl.syntax		\
 	octave.syntax		\
 	pascal.syntax		\
 	perl.syntax		\
