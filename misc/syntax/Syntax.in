@@ -136,7 +136,7 @@ include aspx.syntax
 file ..\*\\.st$ SmallTalk\sProgram
 include smalltalk.syntax
 
-file ..\*\\.(lisp|lsp|el|cl)$ Lisp\sProgram
+file ..\*\\.(lisp|lsp|el)$ Lisp\sProgram
 include lisp.syntax
 
 file ..\*\\.(ml|mli|mly|mll|mlp)$ ML\sProgram
