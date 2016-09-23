@@ -12,6 +12,7 @@ LIBS = @CHECK_LIBS@ $(top_builddir)/lib/libmc.la @PCRE_LIBS@
 TESTS = \
 	glob_prepare_replace_str \
 	glob_translate_to_regex \
+	hex_translate_to_regex \
 	regex_replace_esc_seq \
 	regex_process_escape_sequence \
 	translate_replace_glob_to_regex
@@ -32,3 +33,6 @@ translate_replace_glob_to_regex_SOURCES = \
 
 glob_translate_to_regex_SOURCES = \
 	glob_translate_to_regex.c
+
+hex_translate_to_regex_SOURCES = \
+	hex_translate_to_regex.c
