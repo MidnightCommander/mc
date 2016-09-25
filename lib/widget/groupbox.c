@@ -62,17 +62,17 @@ groupbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
     case MSG_INIT:
         return MSG_HANDLED;
 
-	case MSG_HOTKEY:
-		if (g->title.hotkey != NULL)
-		{
-			if (g_ascii_tolower ((gchar) g->title.hotkey[0]) == parm)
-			{
-				/* select next widget in this groupbox */
-				dlg_select_by_id (w->owner, (w->id + 1));
-				return MSG_HANDLED;
-			}
-		}
-		return MSG_NOT_HANDLED;
+    case MSG_HOTKEY:
+        if (g->title.hotkey != NULL)
+        {
+            if (g_ascii_tolower ((gchar) g->title.hotkey[0]) == parm)
+            {
+                /* select next widget in this groupbox */
+                dlg_select_by_id (w->owner, (w->id + 1));
+                return MSG_HANDLED;
+            }
+        }
+        return MSG_NOT_HANDLED;
 
     case MSG_DRAW:
         {
@@ -88,7 +88,7 @@ groupbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
             {
                 tty_setcolor (disabled ? DISABLED_COLOR : h->color[DLG_COLOR_TITLE]);
                 widget_move (w, 0, 1);
-				hotkey_draw (w, g->title, FALSE);
+                hotkey_draw (w, g->title, FALSE);
             }
             return MSG_HANDLED;
         }
@@ -128,7 +128,7 @@ groupbox_new (int y, int x, int height, int width, const char *title)
 void
 groupbox_set_title (WGroupbox * g, const char *title)
 {
-	release_hotkey (g->title);
+    release_hotkey (g->title);
 
     /* Strip existing spaces, add one space before and after the title */
     if (title != NULL && *title != '\0')

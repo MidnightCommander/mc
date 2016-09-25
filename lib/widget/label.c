@@ -66,14 +66,14 @@ label_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     {
     case MSG_INIT:
         return MSG_HANDLED;
-	
-	case MSG_HOTKEY:
+
+    case MSG_HOTKEY:
         if (l->text.hotkey != NULL)
         {
             if (g_ascii_tolower ((gchar) l->text.hotkey[0]) == parm)
             {
                 /* select next widget after this label */
-				dlg_select_by_id (w->owner, (w->id + 1));
+                dlg_select_by_id (w->owner, (w->id + 1));
                 return MSG_HANDLED;
             }
         }
@@ -98,13 +98,13 @@ label_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             else
                 tty_setcolor (disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL]);
 
-			/* if there is a hotkey, we assume that text will be a one liner */
-			if (l->text.hotkey != NULL)
-			{
-				widget_move (w, 0, 0);
-				hotkey_draw (w, l->text, focused);
-				return MSG_HANDLED;
-			}
+            /* if there is a hotkey, we assume that text will be a one liner */
+            if (l->text.hotkey != NULL)
+            {
+                widget_move (w, 0, 0);
+                hotkey_draw (w, l->text, focused);
+                return MSG_HANDLED;
+            }
 
             align = (w->pos_flags & WPOS_CENTER_HORZ) != 0 ? J_CENTER_LEFT : J_LEFT;
 
