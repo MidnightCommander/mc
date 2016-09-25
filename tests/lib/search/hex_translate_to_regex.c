@@ -34,32 +34,50 @@ static const struct test_hex_translate_to_regex_ds
 {
     const char *input_value;
     const char *expected_result;
+    mc_search_hex_parse_error_t expected_error;
 } test_hex_translate_to_regex_ds[] =
 {
     {
         /* Simplest case */
         "12 34",
-        "\\x12\\x34"
+        "\\x12\\x34",
+        MC_SEARCH_HEX_E_OK
     },
     {
         /* Prefixes (0x, 0X) */
         "0x12 0X34",
-        "\\x12\\x34"
+        "\\x12\\x34",
+        MC_SEARCH_HEX_E_OK
     },
     {
         /* Prefix "0" doesn't signify octal! Numbers are always interpreted in hex. */
         "012",
-        "\\x12"
+        "\\x12",
+        MC_SEARCH_HEX_E_OK
     },
     {
         /* Extra whitespace (but not trailing one) */
         "  12  34",
-        "\\x12\\x34"
+        "\\x12\\x34",
+        MC_SEARCH_HEX_E_OK
     },
     {
         /* Min/max values */
         "0 ff",
-        "\\x00\\xFF"
+        "\\x00\\xFF",
+        MC_SEARCH_HEX_E_OK
+    },
+    {
+        /* Error: Number out of range */
+        "100",
+        NULL,
+        MC_SEARCH_HEX_E_NUM_OUT_OF_RANGE
+    },
+    {
+        /* Error: Number out of range (negative) */
+        "-1",
+        NULL,
+        MC_SEARCH_HEX_E_NUM_OUT_OF_RANGE
     },
 };
 /* *INDENT-ON* */
@@ -70,18 +88,26 @@ START_PARAMETRIZED_TEST (test_hex_translate_to_regex, test_hex_translate_to_rege
 /* *INDENT-ON* */
 {
     GString *tmp, *dest_str;
+    mc_search_hex_parse_error_t error;
 
     /* given */
     tmp = g_string_new (data->input_value);
 
     /* when */
-    dest_str = mc_search__hex_translate_to_regex (tmp);
+    dest_str = mc_search__hex_translate_to_regex (tmp, &error, NULL);
 
-    /* then */
     g_string_free (tmp, TRUE);
 
-    mctest_assert_str_eq (dest_str->str, data->expected_result);
-    g_string_free (dest_str, TRUE);
+    /* then */
+    if (dest_str != NULL)
+    {
+        mctest_assert_str_eq (dest_str->str, data->expected_result);
+        g_string_free (dest_str, TRUE);
+    }
+    else
+    {
+        mctest_assert_int_eq (error, data->expected_error);
+    }
 }
 /* *INDENT-OFF* */
 END_PARAMETRIZED_TEST

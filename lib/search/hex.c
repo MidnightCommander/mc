@@ -39,6 +39,12 @@
 
 /*** file scope macro definitions ****************************************************************/
 
+typedef enum
+{
+    MC_SEARCH_HEX_E_OK,
+    MC_SEARCH_HEX_E_NUM_OUT_OF_RANGE
+} mc_search_hex_parse_error_t;
+
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
@@ -46,12 +52,14 @@
 /*** file scope functions ************************************************************************/
 
 static GString *
-mc_search__hex_translate_to_regex (const GString * astr)
+mc_search__hex_translate_to_regex (const GString * astr, mc_search_hex_parse_error_t * error_ptr,
+                                   int *error_pos_ptr)
 {
     GString *buff;
     gchar *tmp_str, *tmp_str2;
     gsize tmp_str_len;
     gsize loop = 0;
+    mc_search_hex_parse_error_t error = MC_SEARCH_HEX_E_OK;
 
     buff = g_string_sized_new (64);
     tmp_str = g_strndup (astr->str, astr->len);
@@ -71,7 +79,7 @@ mc_search__hex_translate_to_regex (const GString * astr)
     g_strchug (tmp_str);        /* trim leadind whitespaces */
     tmp_str_len = strlen (tmp_str);
 
-    while (loop < tmp_str_len)
+    while (loop < tmp_str_len && error == MC_SEARCH_HEX_E_OK)
     {
         unsigned int val;
         int ptr;
@@ -80,7 +88,7 @@ mc_search__hex_translate_to_regex (const GString * astr)
         if (sscanf (tmp_str + loop, "%x%n", &val, &ptr))
         {
             if (val > 255)
-                loop++;
+                error = MC_SEARCH_HEX_E_NUM_OUT_OF_RANGE;
             else
             {
                 g_string_append_printf (buff, "\\x%02X", val);
@@ -109,6 +117,16 @@ mc_search__hex_translate_to_regex (const GString * astr)
 
     g_free (tmp_str);
 
+    if (error != MC_SEARCH_HEX_E_OK)
+    {
+        g_string_free (buff, TRUE);
+        if (error_ptr != NULL)
+            *error_ptr = error;
+        if (error_pos_ptr != NULL)
+            *error_pos_ptr = loop;
+        return NULL;
+    }
+
     return buff;
 }
 
@@ -119,13 +137,36 @@ mc_search__cond_struct_new_init_hex (const char *charset, mc_search_t * lc_mc_se
                                      mc_search_cond_t * mc_search_cond)
 {
     GString *tmp;
+    mc_search_hex_parse_error_t error = MC_SEARCH_HEX_E_OK;
+    int error_pos = 0;
 
     g_string_ascii_down (mc_search_cond->str);
-    tmp = mc_search__hex_translate_to_regex (mc_search_cond->str);
-    g_string_free (mc_search_cond->str, TRUE);
-    mc_search_cond->str = tmp;
+    tmp = mc_search__hex_translate_to_regex (mc_search_cond->str, &error, &error_pos);
+    if (tmp != NULL)
+    {
+        g_string_free (mc_search_cond->str, TRUE);
+        mc_search_cond->str = tmp;
+        mc_search__cond_struct_new_init_regex (charset, lc_mc_search, mc_search_cond);
+    }
+    else
+    {
+        const char *desc;
 
-    mc_search__cond_struct_new_init_regex (charset, lc_mc_search, mc_search_cond);
+        switch (error)
+        {
+        case MC_SEARCH_HEX_E_NUM_OUT_OF_RANGE:
+            desc =
+                _
+                ("Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in hex)");
+            break;
+        default:
+            desc = "";
+        }
+
+        lc_mc_search->error = MC_SEARCH_E_INPUT;
+        lc_mc_search->error_str =
+            g_strdup_printf (_("Hex pattern error at position %d:\n%s."), error_pos + 1, desc);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
