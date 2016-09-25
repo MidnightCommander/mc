@@ -173,6 +173,27 @@ hotkey_width (const hotkey_t hotkey)
 
 /* --------------------------------------------------------------------------------------------- */
 
+char *
+get_hotkey_text (const hotkey_t hotkey)
+{
+    int hk_width;
+    char *temp;
+
+    hk_width = hotkey_width (hotkey);
+    temp = g_malloc (hk_width + 1);
+
+    strcpy (temp, hotkey.start);
+
+    if (hotkey.hotkey != NULL)
+        strcat (temp, hotkey.hotkey);
+    if (hotkey.end != NULL)
+        strcat (temp, hotkey.end);
+
+    return temp;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 void
 hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused)
 {

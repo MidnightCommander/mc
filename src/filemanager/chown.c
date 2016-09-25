@@ -216,7 +216,7 @@ init_chown (void)
         dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, chown_callback,
                     NULL, "[Chown]", _("Chown command"));
 
-    add_widget (ch_dlg, groupbox_new (2, 3, GH, GW, _("User name")));
+    add_widget (ch_dlg, groupbox_new (2, 3, GH, GW, _("&User name")));
     l_user = listbox_new (3, 4, GH - 2, GW - 2, FALSE, NULL);
     add_widget (ch_dlg, l_user);
     /* add field for unknown names (numbers) */
@@ -227,7 +227,7 @@ init_chown (void)
         listbox_add_item (l_user, LISTBOX_APPEND_SORTED, 0, l_pass->pw_name, NULL, FALSE);
     endpwent ();
 
-    add_widget (ch_dlg, groupbox_new (2, 4 + GW, GH, GW, _("Group name")));
+    add_widget (ch_dlg, groupbox_new (2, 4 + GW, GH, GW, _("&Group name")));
     l_group = listbox_new (3, 5 + GW, GH - 2, GW - 2, FALSE, NULL);
     add_widget (ch_dlg, l_group);
     /* add field for unknown names (numbers) */

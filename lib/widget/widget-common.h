@@ -168,6 +168,8 @@ hotkey_t parse_hotkey (const char *text);
 void release_hotkey (const hotkey_t hotkey);
 /* return width on terminal of hotkey */
 int hotkey_width (const hotkey_t hotkey);
+/* get text of hotkey as one string */
+char * get_hotkey_text (const hotkey_t hotkey);
 /* draw hotkey of widget */
 void hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused);
 
