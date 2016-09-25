@@ -58,26 +58,13 @@ mc_search__hex_translate_to_regex (const GString * astr, mc_search_hex_parse_err
                                    int *error_pos_ptr)
 {
     GString *buff;
-    gchar *tmp_str, *tmp_str2;
+    gchar *tmp_str;
     gsize tmp_str_len;
     gsize loop = 0;
     mc_search_hex_parse_error_t error = MC_SEARCH_HEX_E_OK;
 
     buff = g_string_sized_new (64);
     tmp_str = g_strndup (astr->str, astr->len);
-    tmp_str2 = tmp_str;
-
-    /* remove 0x prefices */
-    while (TRUE)
-    {
-        tmp_str2 = strstr (tmp_str2, "0x");
-        if (tmp_str2 == NULL)
-            break;
-
-        *tmp_str2++ = ' ';
-        *tmp_str2++ = ' ';
-    }
-
     tmp_str_len = strlen (tmp_str);
 
     while (loop < tmp_str_len && error == MC_SEARCH_HEX_E_OK)
@@ -90,6 +77,11 @@ mc_search__hex_translate_to_regex (const GString * astr, mc_search_hex_parse_err
             /* Eat-up whitespace between tokens. */
             while (g_ascii_isspace (tmp_str[loop]))
                 loop++;
+        }
+        else if (tmp_str[loop] == '0' && (tmp_str[loop + 1] == 'x' || tmp_str[loop + 1] == 'X'))
+        {
+            /* Skip 0x prefixes. */
+            loop += 2;
         }
         /* cppcheck-suppress invalidscanf */
         else if (sscanf (tmp_str + loop, "%x%n", &val, &ptr) == 1)
