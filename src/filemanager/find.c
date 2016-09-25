@@ -568,7 +568,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
     gboolean return_value;
 
     /* file name */
-    const char *file_name_label = N_("File name:");
+    const char *file_name_label = N_("File na&me:");
     const char *file_recurs_label = N_("&Find recursively");
     const char *file_pattern_label = N_("&Using shell patterns");
 #ifdef HAVE_CHARSET
@@ -578,7 +578,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
     const char *file_skip_hidden_label = N_("S&kip hidden");
 
     /* file content */
-    const char *content_content_label = N_("Content:");
+    const char *content_content_label = N_("Cont&ent:");
     const char *content_use_label = N_("Sea&rch for content");
     const char *content_regexp_label = N_("Re&gular expression");
     const char *content_case_label = N_("Case sens&itive");
@@ -669,7 +669,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
     cw = (cols - 7) / 2;
     y1 = 2;
 
-    add_widget (find_dlg, label_new (y1++, x1, _("Start at:")));
+    add_widget (find_dlg, label_new (y1++, x1, _("Sta&rt at:")));
     in_start =
         input_new (y1, x1, input_colors, cols - b0 - 7, in_start_dir, "start",
                    INPUT_COMPLETE_CD | INPUT_COMPLETE_FILENAMES);
