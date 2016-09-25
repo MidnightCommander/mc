@@ -58,14 +58,14 @@ mc_search__hex_translate_to_regex (const GString * astr, mc_search_hex_parse_err
                                    int *error_pos_ptr)
 {
     GString *buff;
-    gchar *tmp_str;
+    const char *tmp_str;
     gsize tmp_str_len;
     gsize loop = 0;
     mc_search_hex_parse_error_t error = MC_SEARCH_HEX_E_OK;
 
     buff = g_string_sized_new (64);
-    tmp_str = g_strndup (astr->str, astr->len);
-    tmp_str_len = strlen (tmp_str);
+    tmp_str = astr->str;
+    tmp_str_len = astr->len;
 
     while (loop < tmp_str_len && error == MC_SEARCH_HEX_E_OK)
     {
@@ -118,8 +118,6 @@ mc_search__hex_translate_to_regex (const GString * astr, mc_search_hex_parse_err
         else
             error = MC_SEARCH_HEX_E_INVALID_CHARACTER;
     }
-
-    g_free (tmp_str);
 
     if (error != MC_SEARCH_HEX_E_OK)
     {
