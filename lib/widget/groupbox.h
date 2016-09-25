@@ -17,7 +17,7 @@
 typedef struct WGroupbox
 {
     Widget widget;
-    char *title;
+    hotkey_t title;
 } WGroupbox;
 
 /*** global variables defined in .c file *********************************************************/

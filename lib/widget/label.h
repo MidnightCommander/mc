@@ -18,7 +18,7 @@ typedef struct
 {
     Widget widget;
     gboolean auto_adjust_cols;  /* compute widget.cols from strlen(text)? */
-    char *text;
+    hotkey_t text;
     gboolean transparent;       /* Paint in the default color fg/bg */
 } WLabel;
 

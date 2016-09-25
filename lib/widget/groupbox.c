@@ -62,6 +62,18 @@ groupbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
     case MSG_INIT:
         return MSG_HANDLED;
 
+	case MSG_HOTKEY:
+		if (g->title.hotkey != NULL)
+		{
+			if (g_ascii_tolower ((gchar) g->title.hotkey[0]) == parm)
+			{
+				/* select next widget in this groupbox */
+				dlg_select_by_id (w->owner, (w->id + 1));
+				return MSG_HANDLED;
+			}
+		}
+		return MSG_NOT_HANDLED;
+
     case MSG_DRAW:
         {
             WDialog *h = w->owner;
@@ -72,17 +84,17 @@ groupbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
             tty_setcolor (disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL]);
             tty_draw_box (w->y, w->x, w->lines, w->cols, TRUE);
 
-            if (g->title != NULL)
+            if ((get_hotkey_text (g->title)) != NULL)
             {
                 tty_setcolor (disabled ? DISABLED_COLOR : h->color[DLG_COLOR_TITLE]);
                 widget_move (w, 0, 1);
-                tty_print_string (g->title);
+				hotkey_draw (w, g->title, FALSE);
             }
             return MSG_HANDLED;
         }
 
     case MSG_DESTROY:
-        g_free (g->title);
+        release_hotkey (g->title);
         return MSG_HANDLED;
 
     default:
@@ -102,9 +114,10 @@ groupbox_new (int y, int x, int height, int width, const char *title)
 
     g = g_new (WGroupbox, 1);
     w = WIDGET (g);
+    g->title = parse_hotkey (title);
     widget_init (w, y, x, height, width, groupbox_callback, NULL);
 
-    g->title = NULL;
+    w->options |= WOP_WANT_HOTKEY;
     groupbox_set_title (g, title);
 
     return g;
@@ -115,7 +128,7 @@ groupbox_new (int y, int x, int height, int width, const char *title)
 void
 groupbox_set_title (WGroupbox * g, const char *title)
 {
-    MC_PTR_FREE (g->title);
+	release_hotkey (g->title);
 
     /* Strip existing spaces, add one space before and after the title */
     if (title != NULL && *title != '\0')
@@ -123,7 +136,7 @@ groupbox_set_title (WGroupbox * g, const char *title)
         char *t;
 
         t = g_strstrip (g_strdup (title));
-        g->title = g_strconcat (" ", t, " ", (char *) NULL);
+        g->title = parse_hotkey (g_strconcat (" ", t, " ", (char *) NULL));
         g_free (t);
     }
 

@@ -66,23 +66,45 @@ label_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     {
     case MSG_INIT:
         return MSG_HANDLED;
+	
+	case MSG_HOTKEY:
+        if (l->text.hotkey != NULL)
+        {
+            if (g_ascii_tolower ((gchar) l->text.hotkey[0]) == parm)
+            {
+                /* select next widget after this label */
+				dlg_select_by_id (w->owner, (w->id + 1));
+                return MSG_HANDLED;
+            }
+        }
+        return MSG_NOT_HANDLED;
 
     case MSG_DRAW:
         {
-            char *p = l->text;
+            char *p = get_hotkey_text (l->text);
             int y = 0;
             gboolean disabled;
+            gboolean focused;
             align_crt_t align;
 
-            if (l->text == NULL)
+            if (p == NULL)
                 return MSG_HANDLED;
 
             disabled = widget_get_state (w, WST_DISABLED);
+            focused = widget_get_state (w, WST_FOCUSED);
 
             if (l->transparent)
                 tty_setcolor (disabled ? DISABLED_COLOR : DEFAULT_COLOR);
             else
                 tty_setcolor (disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL]);
+
+			/* if there is a hotkey, we assume that text will be a one liner */
+			if (l->text.hotkey != NULL)
+			{
+				widget_move (w, 0, 0);
+				hotkey_draw (w, l->text, focused);
+				return MSG_HANDLED;
+			}
 
             align = (w->pos_flags & WPOS_CENTER_HORZ) != 0 ? J_CENTER_LEFT : J_LEFT;
 
@@ -90,7 +112,6 @@ label_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             {
                 char *q;
                 char c = '\0';
-
 
                 q = strchr (p, '\n');
                 if (q != NULL)
@@ -109,11 +130,12 @@ label_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                 p = q + 1;
                 y++;
             }
+
             return MSG_HANDLED;
         }
 
     case MSG_DESTROY:
-        g_free (l->text);
+        release_hotkey (l->text);
         return MSG_HANDLED;
 
     default:
@@ -138,9 +160,9 @@ label_new (int y, int x, const char *text)
 
     l = g_new (WLabel, 1);
     w = WIDGET (l);
+    l->text = parse_hotkey (text);
     widget_init (w, y, x, lines, cols, label_callback, NULL);
-
-    l->text = g_strdup (text);
+    w->options |= WOP_WANT_HOTKEY;
     l->auto_adjust_cols = TRUE;
     l->transparent = FALSE;
 
@@ -155,17 +177,18 @@ label_set_text (WLabel * label, const char *text)
     Widget *w = WIDGET (label);
     int newcols = w->cols;
     int newlines;
+    char *temp_str = get_hotkey_text (label->text);
 
-    if (label->text != NULL && text != NULL && strcmp (label->text, text) == 0)
+    if (temp_str != NULL && text != NULL && strcmp (temp_str, text) == 0)
         return;                 /* Flickering is not nice */
 
-    g_free (label->text);
+    release_hotkey (label->text);
 
     if (text == NULL)
-        label->text = NULL;
+        label->text = parse_hotkey (NULL);
     else
     {
-        label->text = g_strdup (text);
+        label->text = parse_hotkey (text);
         if (label->auto_adjust_cols)
         {
             str_msg_term_size (text, &newlines, &newcols);
@@ -180,6 +203,8 @@ label_set_text (WLabel * label, const char *text)
 
     if (newcols < w->cols)
         w->cols = newcols;
+
+    g_free (temp_str);
 }
 
 /* --------------------------------------------------------------------------------------------- */
