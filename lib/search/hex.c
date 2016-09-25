@@ -85,7 +85,7 @@ mc_search__hex_translate_to_regex (const GString * astr, mc_search_hex_parse_err
         int ptr;
 
         /* cppcheck-suppress invalidscanf */
-        if (sscanf (tmp_str + loop, "%x%n", &val, &ptr))
+        if (sscanf (tmp_str + loop, "%x%n", &val, &ptr) == 1)
         {
             if (val > 255)
                 error = MC_SEARCH_HEX_E_NUM_OUT_OF_RANGE;

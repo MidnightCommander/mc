@@ -56,8 +56,8 @@ static const struct test_hex_translate_to_regex_ds
         MC_SEARCH_HEX_E_OK
     },
     {
-        /* Extra whitespace (but not trailing one) */
-        "  12  34",
+        /* Extra whitespace */
+        "  12  34  ",
         "\\x12\\x34",
         MC_SEARCH_HEX_E_OK
     },
