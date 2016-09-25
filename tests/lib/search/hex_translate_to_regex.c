@@ -85,6 +85,63 @@ static const struct test_hex_translate_to_regex_ds
         NULL,
         MC_SEARCH_HEX_E_INVALID_CHARACTER
     },
+    /*
+     * Quotes.
+     */
+    {
+        " \"abc\" ",
+        "abc",
+        MC_SEARCH_HEX_E_OK
+    },
+    {
+        /* Preserve upper/lower case */
+        "\"aBc\"",
+        "aBc",
+        MC_SEARCH_HEX_E_OK
+    },
+    {
+        " 12\"abc\"34 ",
+        "\\x12abc\\x34",
+        MC_SEARCH_HEX_E_OK
+    },
+    {
+        "\"a\"\"b\"",
+        "ab",
+        MC_SEARCH_HEX_E_OK
+    },
+    /* Empty quotes */
+    {
+        "\"\"",
+        "",
+        MC_SEARCH_HEX_E_OK
+    },
+    {
+        "12 \"\"",
+        "\\x12",
+        MC_SEARCH_HEX_E_OK
+    },
+    /* Error: Unmatched quotes */
+    {
+        "\"a",
+        NULL,
+        MC_SEARCH_HEX_E_UNMATCHED_QUOTES
+    },
+    {
+        "\"",
+        NULL,
+        MC_SEARCH_HEX_E_UNMATCHED_QUOTES
+    },
+    /* Escaped quotes */
+    {
+        "\"a\\\"b\"",
+        "a\"b",
+        MC_SEARCH_HEX_E_OK
+    },
+    {
+        "\"a\\\\b\"",
+        "a\\b",
+        MC_SEARCH_HEX_E_OK
+    },
 };
 /* *INDENT-ON* */
 

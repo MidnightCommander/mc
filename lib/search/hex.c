@@ -43,7 +43,8 @@ typedef enum
 {
     MC_SEARCH_HEX_E_OK,
     MC_SEARCH_HEX_E_NUM_OUT_OF_RANGE,
-    MC_SEARCH_HEX_E_INVALID_CHARACTER
+    MC_SEARCH_HEX_E_INVALID_CHARACTER,
+    MC_SEARCH_HEX_E_UNMATCHED_QUOTES
 } mc_search_hex_parse_error_t;
 
 /*** file scope type declarations ****************************************************************/
@@ -101,21 +102,26 @@ mc_search__hex_translate_to_regex (const GString * astr, mc_search_hex_parse_err
                 loop += ptr;
             }
         }
-        else if (*(tmp_str + loop) == '"')
+        else if (tmp_str[loop] == '"')
         {
-            gsize loop2 = 0;
+            gsize loop2;
 
-            loop++;
-            while (loop + loop2 < tmp_str_len)
+            loop2 = loop + 1;
+
+            while (loop2 < tmp_str_len)
             {
-                if (*(tmp_str + loop + loop2) == '"' &&
-                    !strutils_is_char_escaped (tmp_str, tmp_str + loop + loop2))
+                if (tmp_str[loop2] == '"')
                     break;
+                if (tmp_str[loop2] == '\\' && loop2 + 1 < tmp_str_len)
+                    loop2++;
+                g_string_append_c (buff, tmp_str[loop2]);
                 loop2++;
             }
 
-            g_string_append_len (buff, tmp_str + loop, loop2 - 1);
-            loop += loop2;
+            if (tmp_str[loop2] == '\0')
+                error = MC_SEARCH_HEX_E_UNMATCHED_QUOTES;
+            else
+                loop = loop2 + 1;
         }
         else
             error = MC_SEARCH_HEX_E_INVALID_CHARACTER;
@@ -146,7 +152,6 @@ mc_search__cond_struct_new_init_hex (const char *charset, mc_search_t * lc_mc_se
     mc_search_hex_parse_error_t error = MC_SEARCH_HEX_E_OK;
     int error_pos = 0;
 
-    g_string_ascii_down (mc_search_cond->str);
     tmp = mc_search__hex_translate_to_regex (mc_search_cond->str, &error, &error_pos);
     if (tmp != NULL)
     {
@@ -167,6 +172,9 @@ mc_search__cond_struct_new_init_hex (const char *charset, mc_search_t * lc_mc_se
             break;
         case MC_SEARCH_HEX_E_INVALID_CHARACTER:
             desc = _("Invalid character");
+            break;
+        case MC_SEARCH_HEX_E_UNMATCHED_QUOTES:
+            desc = _("Unmatched quotes character");
             break;
         default:
             desc = "";
