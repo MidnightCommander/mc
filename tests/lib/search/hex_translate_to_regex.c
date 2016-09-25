@@ -79,6 +79,12 @@ static const struct test_hex_translate_to_regex_ds
         NULL,
         MC_SEARCH_HEX_E_NUM_OUT_OF_RANGE
     },
+    {
+        /* Error: Invalid characters */
+        "1 z 2",
+        NULL,
+        MC_SEARCH_HEX_E_INVALID_CHARACTER
+    },
 };
 /* *INDENT-ON* */
 

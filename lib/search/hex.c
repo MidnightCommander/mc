@@ -42,7 +42,8 @@
 typedef enum
 {
     MC_SEARCH_HEX_E_OK,
-    MC_SEARCH_HEX_E_NUM_OUT_OF_RANGE
+    MC_SEARCH_HEX_E_NUM_OUT_OF_RANGE,
+    MC_SEARCH_HEX_E_INVALID_CHARACTER
 } mc_search_hex_parse_error_t;
 
 /*** file scope type declarations ****************************************************************/
@@ -76,7 +77,6 @@ mc_search__hex_translate_to_regex (const GString * astr, mc_search_hex_parse_err
         *tmp_str2++ = ' ';
     }
 
-    g_strchug (tmp_str);        /* trim leadind whitespaces */
     tmp_str_len = strlen (tmp_str);
 
     while (loop < tmp_str_len && error == MC_SEARCH_HEX_E_OK)
@@ -84,8 +84,14 @@ mc_search__hex_translate_to_regex (const GString * astr, mc_search_hex_parse_err
         unsigned int val;
         int ptr;
 
+        if (g_ascii_isspace (tmp_str[loop]))
+        {
+            /* Eat-up whitespace between tokens. */
+            while (g_ascii_isspace (tmp_str[loop]))
+                loop++;
+        }
         /* cppcheck-suppress invalidscanf */
-        if (sscanf (tmp_str + loop, "%x%n", &val, &ptr) == 1)
+        else if (sscanf (tmp_str + loop, "%x%n", &val, &ptr) == 1)
         {
             if (val > 255)
                 error = MC_SEARCH_HEX_E_NUM_OUT_OF_RANGE;
@@ -112,7 +118,7 @@ mc_search__hex_translate_to_regex (const GString * astr, mc_search_hex_parse_err
             loop += loop2;
         }
         else
-            loop++;
+            error = MC_SEARCH_HEX_E_INVALID_CHARACTER;
     }
 
     g_free (tmp_str);
@@ -158,6 +164,9 @@ mc_search__cond_struct_new_init_hex (const char *charset, mc_search_t * lc_mc_se
             desc =
                 _
                 ("Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in hex)");
+            break;
+        case MC_SEARCH_HEX_E_INVALID_CHARACTER:
+            desc = _("Invalid character");
             break;
         default:
             desc = "";
