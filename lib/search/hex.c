@@ -58,33 +58,33 @@ mc_search__hex_translate_to_regex (const GString * astr, mc_search_hex_parse_err
                                    int *error_pos_ptr)
 {
     GString *buff;
-    const char *tmp_str;
-    gsize tmp_str_len;
+    const char *str;
+    gsize str_len;
     gsize loop = 0;
     mc_search_hex_parse_error_t error = MC_SEARCH_HEX_E_OK;
 
     buff = g_string_sized_new (64);
-    tmp_str = astr->str;
-    tmp_str_len = astr->len;
+    str = astr->str;
+    str_len = astr->len;
 
-    while (loop < tmp_str_len && error == MC_SEARCH_HEX_E_OK)
+    while (loop < str_len && error == MC_SEARCH_HEX_E_OK)
     {
         unsigned int val;
         int ptr;
 
-        if (g_ascii_isspace (tmp_str[loop]))
+        if (g_ascii_isspace (str[loop]))
         {
             /* Eat-up whitespace between tokens. */
-            while (g_ascii_isspace (tmp_str[loop]))
+            while (g_ascii_isspace (str[loop]))
                 loop++;
         }
-        else if (tmp_str[loop] == '0' && (tmp_str[loop + 1] == 'x' || tmp_str[loop + 1] == 'X'))
+        else if (str[loop] == '0' && (str[loop + 1] == 'x' || str[loop + 1] == 'X'))
         {
             /* Skip 0x prefixes. */
             loop += 2;
         }
         /* cppcheck-suppress invalidscanf */
-        else if (sscanf (tmp_str + loop, "%x%n", &val, &ptr) == 1)
+        else if (sscanf (str + loop, "%x%n", &val, &ptr) == 1)
         {
             if (val > 255)
                 error = MC_SEARCH_HEX_E_NUM_OUT_OF_RANGE;
@@ -94,23 +94,23 @@ mc_search__hex_translate_to_regex (const GString * astr, mc_search_hex_parse_err
                 loop += ptr;
             }
         }
-        else if (tmp_str[loop] == '"')
+        else if (str[loop] == '"')
         {
             gsize loop2;
 
             loop2 = loop + 1;
 
-            while (loop2 < tmp_str_len)
+            while (loop2 < str_len)
             {
-                if (tmp_str[loop2] == '"')
+                if (str[loop2] == '"')
                     break;
-                if (tmp_str[loop2] == '\\' && loop2 + 1 < tmp_str_len)
+                if (str[loop2] == '\\' && loop2 + 1 < str_len)
                     loop2++;
-                g_string_append_c (buff, tmp_str[loop2]);
+                g_string_append_c (buff, str[loop2]);
                 loop2++;
             }
 
-            if (tmp_str[loop2] == '\0')
+            if (str[loop2] == '\0')
                 error = MC_SEARCH_HEX_E_UNMATCHED_QUOTES;
             else
                 loop = loop2 + 1;
