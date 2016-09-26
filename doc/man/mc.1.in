@@ -2893,10 +2893,13 @@ the quotes.  Each number matches one byte.  You can mix quoted text
 with constants like this:
 .PP
 .nf
-"String" \-1 0xBB 012 "more text"
+"String" 34 0xBB 012 "more text"
 .fi
 .PP
-Note that 012 is an octal number.  \-1 is converted to 0xFF.
+Numbers are always interpreted in hex. In the example above, "34" is
+interpreted as 0x34. The prefix "0x" isn't really needed: we could type
+"BB" instead of "0xBB". And "012" is interpreted as 0x12, not as an octal
+number.
 .PP
 Here is a listing of the actions associated with each key that the
 Midnight Commander handles in the internal file viewer.
