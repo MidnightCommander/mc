@@ -29,6 +29,8 @@ struct WGroup
     /* Group members */
     GList *widgets;             /* widgets list */
     GList *current;             /* Currently active widget */
+
+    gboolean winch_pending;     /* SIGWINCH signal has been got. Resize group after rise */
 };
 
 /*** global variables defined in .c file *********************************************************/

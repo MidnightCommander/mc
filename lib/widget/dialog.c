@@ -1068,12 +1068,14 @@ update_cursor (WDialog * h)
 void
 dlg_draw (WDialog * h)
 {
+    WGroup *g = GROUP (h);
+
     if (!widget_get_state (WIDGET (h), WST_ACTIVE))
         return;
 
-    if (h->winch_pending)
+    if (g->winch_pending)
     {
-        h->winch_pending = FALSE;
+        g->winch_pending = FALSE;
         send_message (h, NULL, MSG_RESIZE, 0, NULL);
     }
 

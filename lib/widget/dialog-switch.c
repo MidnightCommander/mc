@@ -119,7 +119,7 @@ dialog_switch_resize (WDialog * d)
     if (widget_get_state (WIDGET (d), WST_ACTIVE))
         send_message (d, NULL, MSG_RESIZE, 0, NULL);
     else
-        d->winch_pending = TRUE;
+        GROUP (d)->winch_pending = TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -293,7 +293,7 @@ dialog_switch_got_winch (void)
 
     for (dlg = mc_dialogs; dlg != NULL; dlg = g_list_next (dlg))
         if (dlg != mc_current)
-            DIALOG (dlg->data)->winch_pending = TRUE;
+            GROUP (dlg->data)->winch_pending = TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
