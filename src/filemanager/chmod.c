@@ -263,7 +263,7 @@ chmod_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             {
                 chmod_toggle_select (h, i);
                 if (parm == KEY_IC)
-                    dlg_select_next_widget (h);
+                    group_select_next_widget (GROUP (h));
                 return MSG_HANDLED;
             }
         }

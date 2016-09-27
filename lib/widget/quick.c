@@ -571,7 +571,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
     }
 
     while (nskip-- != 0)
-        dlg_set_current_widget_next (dd);
+        group_set_current_widget_next (GROUP (dd));
 
     return_val = dlg_run (dd);
 

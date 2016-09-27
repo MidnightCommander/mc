@@ -489,6 +489,7 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
 
     file_op_context_ui_t *ui = ctx->ui;
     Widget *wd;
+    WGroup *g;
     const char *title;
 
     vfs_path_t *p;
@@ -638,6 +639,7 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
         dlg_create (TRUE, 0, 0, dlg_height, dlg_width, WPOS_CENTER, FALSE, alarm_colors, NULL, NULL,
                     "[Replace]", title);
     wd = WIDGET (ui->replace_dlg);
+    g = GROUP (ui->replace_dlg);
 
     /* file info */
     for (i = 0; i <= 7; i++)
@@ -663,7 +665,7 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
 
     ADD_BUTTON (20);            /* Abort */
 
-    dlg_select_by_id (ui->replace_dlg, safe_overwrite ? no_id : yes_id);
+    group_select_widget_by_id (g, safe_overwrite ? no_id : yes_id);
 
     result = dlg_run (ui->replace_dlg);
 

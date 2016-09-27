@@ -333,6 +333,7 @@ static cb_ret_t
 perm_button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WButton *b = BUTTON (w);
+    WGroup *g = w->owner;
     int i = 0;
     int f_pos;
 
@@ -365,10 +366,10 @@ perm_button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
         case '+':
             flag_pos = f_pos * 3 + b->hotpos;
             ch_flags[flag_pos] = parm;
-            update_mode (w->owner);
+            update_mode (g);
             send_message (w, NULL, MSG_KEY, KEY_RIGHT, NULL);
             if (b->hotpos == 2)
-                dlg_select_next_widget (DIALOG (w->owner));
+                group_select_next_widget (g);
             break;
 
         case XCTRL ('f'):
@@ -426,7 +427,7 @@ perm_button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
             b->hotpos = i;
             flag_pos = f_pos * 3 + i;
             ch_flags[flag_pos] = '=';
-            update_mode (w->owner);
+            update_mode (g);
             break;
 
         default:
@@ -528,7 +529,8 @@ user_group_button_cb (WButton * button, int action)
 
     do
     {
-        WDialog *h = DIALOG (w->owner);
+        WGroup *g = w->owner;
+        WDialog *h = DIALOG (h);
         Widget *wh = WIDGET (h);
 
         gboolean is_owner = (f_pos == BUTTONS_PERM - 2);
@@ -619,12 +621,12 @@ user_group_button_cb (WButton * button, int action)
                 }
 
                 if (!ok)
-                    dlg_select_current_widget (h);
+                    group_select_current_widget (g);
                 else
                 {
                     ch_flags[f_pos + 6] = '+';
                     update_ownership ();
-                    dlg_select_current_widget (h);
+                    group_select_current_widget (g);
                     print_flags (h);
                 }
             }
@@ -633,14 +635,14 @@ user_group_button_cb (WButton * button, int action)
             {
                 if (!is_owner)
                     chl_end = TRUE;
-                dlg_select_prev_widget (h);
+                group_select_prev_widget (g);
                 f_pos--;
             }
             else if (result == KEY_RIGHT)
             {
                 if (is_owner)
                     chl_end = TRUE;
-                dlg_select_next_widget (h);
+                group_select_next_widget (g);
                 f_pos++;
             }
         }

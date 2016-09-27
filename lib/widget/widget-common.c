@@ -540,9 +540,10 @@ widget_replace (Widget * old_w, Widget * new_w)
     {
         GList *l;
 
-        for (l = dlg_get_widget_next_of (holder);
+        for (l = group_get_widget_next_of (holder);
              !widget_get_options (WIDGET (l->data), WOP_SELECTABLE)
-             && !widget_get_state (WIDGET (l->data), WST_DISABLED); l = dlg_get_widget_next_of (l))
+             && !widget_get_state (WIDGET (l->data), WST_DISABLED);
+             l = group_get_widget_next_of (l))
             ;
 
         widget_select (WIDGET (l->data));

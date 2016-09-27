@@ -90,60 +90,6 @@ typedef struct
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-static GList *
-dlg_get_next_or_prev_of (const GList * list, gboolean next)
-{
-    GList *l = NULL;
-
-    if (list != NULL)
-    {
-        const WGroup *owner = CONST_WIDGET (list->data)->owner;
-
-        if (owner != NULL)
-        {
-            if (next)
-            {
-                l = g_list_next (list);
-                if (l == NULL)
-                    l = owner->widgets;
-            }
-            else
-            {
-                l = g_list_previous (list);
-                if (l == NULL)
-                    l = g_list_last (owner->widgets);
-            }
-        }
-    }
-
-    return l;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
-dlg_select_next_or_prev (WDialog * h, gboolean next)
-{
-    WGroup *g = GROUP (h);
-
-    if (g->widgets != NULL && g->current != NULL)
-    {
-        GList *l = g->current;
-        Widget *w;
-
-        do
-        {
-            l = dlg_get_next_or_prev_of (l, next);
-            w = WIDGET (l->data);
-        }
-        while ((widget_get_state (w, WST_DISABLED) || !widget_get_options (w, WOP_SELECTABLE))
-               && l != g->current);
-
-        widget_select (l->data);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /**
  * broadcast a message to all the widgets in a dialog that have
  * the options set to flags. If flags is zero, the message is sent
@@ -162,14 +108,21 @@ dlg_broadcast_msg_to (WDialog * h, widget_msg_t msg, gboolean reverse, widget_op
     if (g->current == NULL)
         g->current = g->widgets;
 
-    p = dlg_get_next_or_prev_of (g->current, !reverse);
+    if (reverse)
+        p = group_get_widget_prev_of (g->current);
+    else
+        p = group_get_widget_next_of (g->current);
+
     first = p;
 
     do
     {
         Widget *w = WIDGET (p->data);
 
-        p = dlg_get_next_or_prev_of (p, !reverse);
+        if (reverse)
+            p = group_get_widget_prev_of (p);
+        else
+            p = group_get_widget_next_of (p);
 
         if ((flags == 0) || ((flags & w->options) != 0))
             send_message (w, NULL, msg, 0, NULL);
@@ -233,6 +186,7 @@ refresh_cmd (void)
 static cb_ret_t
 dlg_execute_cmd (WDialog * h, long command)
 {
+    WGroup *g = GROUP (h);
     cb_ret_t ret = MSG_HANDLED;
 
     if (send_message (h, NULL, MSG_ACTION, command, NULL) == MSG_HANDLED)
@@ -251,11 +205,11 @@ dlg_execute_cmd (WDialog * h, long command)
 
     case CK_Up:
     case CK_Left:
-        dlg_select_prev_widget (h);
+        group_select_prev_widget (g);
         break;
     case CK_Down:
     case CK_Right:
-        dlg_select_next_widget (h);
+        group_select_next_widget (g);
         break;
 
     case CK_Help:
@@ -430,7 +384,7 @@ dlg_try_hotkey (WDialog * h, int d_key)
     if (handled == MSG_HANDLED)
         return MSG_HANDLED;
 
-    hot_cur = dlg_get_widget_next_of (g->current);
+    hot_cur = group_get_widget_next_of (g->current);
 
     /* send it to all widgets */
     while (g->current != hot_cur && handled == MSG_NOT_HANDLED)
@@ -442,7 +396,7 @@ dlg_try_hotkey (WDialog * h, int d_key)
             handled = send_message (current, NULL, MSG_HOTKEY, d_key, NULL);
 
         if (handled == MSG_NOT_HANDLED)
-            hot_cur = dlg_get_widget_next_of (hot_cur);
+            hot_cur = group_get_widget_next_of (hot_cur);
     }
 
     if (handled == MSG_HANDLED)
@@ -470,12 +424,12 @@ dlg_key_event (WDialog * h, int d_key)
     {
         if (d_key == '\t')
         {
-            dlg_select_next_widget (h);
+            group_select_next_widget (g);
             return;
         }
         else if ((d_key & ~(KEY_M_SHIFT | KEY_M_CTRL)) == '\t')
         {
-            dlg_select_prev_widget (h);
+            group_select_prev_widget (g);
             return;
         }
     }
@@ -912,7 +866,7 @@ del_widget (void *w)
 
     d = g_list_find (g->widgets, w);
     if (d == g->current)
-        dlg_set_current_widget_next (h);
+        group_set_current_widget_next (g);
 
     g->widgets = g_list_remove_link (g->widgets, d);
     if (g->widgets == NULL)
@@ -922,7 +876,7 @@ del_widget (void *w)
     if (widget_get_state (WIDGET (h), WST_ACTIVE))
     {
         dlg_draw (h);
-        dlg_select_current_widget (h);
+        group_select_current_widget (g);
     }
 
     WIDGET (w)->owner = NULL;
@@ -998,37 +952,6 @@ dlg_find_by_id (const WDialog * h, unsigned long id)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Find the widget with the given id in the dialog h and select it */
-
-void
-dlg_select_by_id (const WDialog * h, unsigned long id)
-{
-    Widget *w;
-
-    w = dlg_find_by_id (h, id);
-    if (w != NULL)
-        widget_select (w);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** Try to select previous widget in the tab order */
-
-void
-dlg_select_prev_widget (WDialog * h)
-{
-    dlg_select_next_or_prev (h, FALSE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** Try to select next widget in the tab order */
-
-void
-dlg_select_next_widget (WDialog * h)
-{
-    dlg_select_next_or_prev (h, TRUE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 void
 update_cursor (WDialog * h)
@@ -1045,7 +968,7 @@ update_cursor (WDialog * h)
         else
             do
             {
-                p = dlg_get_widget_next_of (p);
+                p = group_get_widget_next_of (p);
                 if (p == g->current)
                     break;
 
@@ -1121,7 +1044,7 @@ dlg_init (WDialog * h)
     /* Select the first widget that takes focus */
     while (g->current != NULL && !widget_get_options (WIDGET (g->current->data), WOP_SELECTABLE)
            && !widget_get_state (WIDGET (g->current->data), WST_DISABLED))
-        dlg_set_current_widget_next (h);
+        group_set_current_widget_next (g);
 
     widget_set_state (wh, WST_ACTIVE, TRUE);
     dlg_draw (h);
@@ -1279,70 +1202,6 @@ dlg_get_title (const WDialog * h, size_t len)
         t = g_strdup ("");
 
     return t;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Switch current widget to widget after current in dialog.
- *
- * @param h WDialog widget
- */
-
-void
-dlg_set_current_widget_next (WDialog * h)
-{
-    WGroup *g = GROUP (h);
-
-    g->current = dlg_get_next_or_prev_of (g->current, TRUE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Switch current widget to widget before current in dialog.
- *
- * @param h WDialog widget
- */
-
-void
-dlg_set_current_widget_prev (WDialog * h)
-{
-    WGroup *g = GROUP (h);
-
-    g->current = dlg_get_next_or_prev_of (g->current, FALSE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Get widget that is after specified widget in dialog.
- *
- * @param w widget holder
- *
- * @return widget that is after "w" or NULL if "w" is NULL or widget doesn't have owner
- */
-
-GList *
-dlg_get_widget_next_of (GList * w)
-{
-    return dlg_get_next_or_prev_of (w, TRUE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Get widget that is before specified widget in dialog.
- *
- * @param w widget holder
- *
- * @return widget that is before "w" or NULL if "w" is NULL or widget doesn't have owner
- */
-
-GList *
-dlg_get_widget_prev_of (GList * w)
-{
-    return dlg_get_next_or_prev_of (w, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

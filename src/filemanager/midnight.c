@@ -1775,7 +1775,7 @@ void
 change_panel (void)
 {
     input_free_completions (cmdline);
-    dlg_select_next_widget (midnight_dlg);
+    group_select_next_widget (GROUP (midnight_dlg));
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -317,7 +317,7 @@ menubar_finish (WMenuBar * menubar)
      * an "invisible" menubar get the first chance to respond to mouse events. */
     widget_set_bottom (w);
 
-    dlg_select_by_id (DIALOG (w->owner), menubar->previous_widget);
+    group_select_widget_by_id (w->owner, menubar->previous_widget);
     do_refresh ();
 }
 
