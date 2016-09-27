@@ -523,9 +523,9 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         return MSG_HANDLED;
 
     case MSG_POST_KEY:
-        if (h->current->data == in_name)
+        if (GROUP (h)->current->data == in_name)
             find_toggle_enable_params ();
-        else if (h->current->data == in_with)
+        else if (GROUP (h)->current->data == in_with)
         {
             content_is_empty = input_is_empty (in_with);
             find_toggle_enable_content ();
@@ -1594,8 +1594,8 @@ start_stop (WButton * button, int action)
     status_update (is_start ? _("Stopped") : _("Searching"));
     button_set_text (button, fbuts[is_start ? 3 : 2].text);
 
-    find_relocate_buttons (w->owner, FALSE);
-    dlg_draw (w->owner);
+    find_relocate_buttons (DIALOG (w->owner), FALSE);
+    dlg_draw (DIALOG (w->owner));
 
     return 0;
 }

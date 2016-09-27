@@ -249,7 +249,7 @@ tree_show_mini_info (WTree * tree, int tree_lines, int tree_cols)
     else
     {
         /* Show full name of selected directory */
-        WDialog *h = w->owner;
+        WDialog *h = DIALOG (w->owner);
 
         tty_setcolor (tree->is_panel ? NORMAL_COLOR : TREE_NORMALC (h));
         tty_draw_hline (w->y + line, w->x + 1, ' ', tree_cols);
@@ -265,7 +265,7 @@ static void
 show_tree (WTree * tree)
 {
     Widget *w = WIDGET (tree);
-    WDialog *h = w->owner;
+    WDialog *h = DIALOG (w->owner);
     tree_entry *current;
     int i, j;
     int topsublevel = 0;
@@ -591,7 +591,7 @@ tree_chdir_sel (WTree * tree)
     }
     else
     {
-        WDialog *h = WIDGET (tree)->owner;
+        WDialog *h = DIALOG (WIDGET (tree)->owner);
 
         h->ret_value = B_ENTER;
         dlg_stop (h);
@@ -975,7 +975,7 @@ tree_toggle_navig (WTree * tree)
 
     tree_navigation_flag = !tree_navigation_flag;
 
-    b = find_buttonbar (WIDGET (tree)->owner);
+    b = find_buttonbar (DIALOG (WIDGET (tree)->owner));
     buttonbar_set_label (b, 4,
                          tree_navigation_flag ? Q_ ("ButtonBar|Static") : Q_ ("ButtonBar|Dynamc"),
                          tree_map, WIDGET (tree));
@@ -1044,7 +1044,7 @@ tree_execute_cmd (WTree * tree, long command)
         break;
     case CK_Quit:
         if (!tree->is_panel)
-            dlg_stop (WIDGET (tree)->owner);
+            dlg_stop (DIALOG (WIDGET (tree)->owner));
         return res;
     default:
         res = MSG_NOT_HANDLED;
@@ -1147,7 +1147,7 @@ static cb_ret_t
 tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WTree *tree = (WTree *) w;
-    WDialog *h = w->owner;
+    WDialog *h = DIALOG (w->owner);
     WButtonBar *b;
 
     switch (msg)

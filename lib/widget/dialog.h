@@ -42,6 +42,8 @@ typedef enum
 
 /*** typedefs(not structures) ********************************************************************/
 
+typedef struct WDialog WDialog;
+
 /* get string representation of shortcut assigned  with command */
 /* as menu is a widget of dialog, ask dialog about shortcut string */
 typedef char *(*dlg_shortcut_str) (long command);
@@ -58,7 +60,7 @@ typedef cb_ret_t (*menu_exec_fn) (int command);
 
 struct WDialog
 {
-    Widget widget;
+    WGroup group;               /* base class */
 
     /* Set by the user */
     gboolean compact;           /* Suppress spaces around the frame */
@@ -74,8 +76,6 @@ struct WDialog
     int mouse_status;           /* For the autorepeat status of the mouse */
 
     /* Internal variables */
-    GList *widgets;             /* widgets list */
-    GList *current;             /* Currently active widget */
     unsigned long widget_id;    /* maximum id of all widgets */
     void *data;                 /* Data can be passed to dialog */
     char *event_group;          /* Name of event group for this dialog */
@@ -174,7 +174,7 @@ GList *dlg_get_widget_prev_of (GList * w);
 static inline unsigned long
 dlg_get_current_widget_id (const WDialog * h)
 {
-    return WIDGET (h->current->data)->id;
+    return WIDGET (GROUP (h)->current->data)->id;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -188,8 +188,8 @@ dlg_get_current_widget_id (const WDialog * h)
 static inline void
 dlg_select_current_widget (WDialog * h)
 {
-    if (h->current != NULL)
-        widget_select (WIDGET (h->current->data));
+    if (GROUP (h)->current != NULL)
+        widget_select (WIDGET (GROUP (h)->current->data));
 }
 
 /* --------------------------------------------------------------------------------------------- */

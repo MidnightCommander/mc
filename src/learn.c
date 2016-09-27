@@ -138,7 +138,7 @@ learn_move (gboolean right)
 
     totalcols = (learn_total - 1) / ROWS + 1;
     for (i = 0; i < learn_total; i++)
-        if (learnkeys[i].button == WIDGET (learn_dlg->current->data))
+        if (learnkeys[i].button == WIDGET (GROUP (learn_dlg)->current->data))
         {
             if (right)
             {

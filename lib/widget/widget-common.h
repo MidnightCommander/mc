@@ -134,7 +134,7 @@ struct Widget
     unsigned int id;            /* Number of the widget, starting with 0 */
     widget_cb_fn callback;
     widget_mouse_cb_fn mouse_callback;
-    WDialog *owner;
+    WGroup *owner;
     /* Mouse-related fields. */
     struct
     {

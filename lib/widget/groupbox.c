@@ -61,7 +61,7 @@ groupbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
     {
     case MSG_DRAW:
         {
-            WDialog *h = w->owner;
+            WDialog *h = DIALOG (w->owner);
 
             gboolean disabled;
 

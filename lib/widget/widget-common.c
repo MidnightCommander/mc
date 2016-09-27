@@ -74,19 +74,19 @@ widget_do_focus (Widget * w, gboolean enable)
 static void
 widget_focus (Widget * w)
 {
-    WDialog *h = DIALOG (w->owner);
+    WGroup *g = w->owner;
 
-    if (h == NULL)
+    if (g == NULL)
         return;
 
-    if (WIDGET (h->current->data) != w)
+    if (WIDGET (g->current->data) != w)
     {
-        widget_do_focus (WIDGET (h->current->data), FALSE);
+        widget_do_focus (WIDGET (g->current->data), FALSE);
         /* Test if focus lost was allowed and focus has really been loose */
-        if (h->current == NULL || !widget_get_state (WIDGET (h->current->data), WST_FOCUSED))
+        if (g->current == NULL || !widget_get_state (WIDGET (g->current->data), WST_FOCUSED))
         {
             widget_do_focus (w, TRUE);
-            h->current = dlg_find (h, w);
+            g->current = dlg_find (DIALOG (g), w);
         }
     }
     else if (!widget_get_state (w, WST_FOCUSED))
@@ -101,13 +101,13 @@ widget_focus (Widget * w)
 static void
 widget_reorder (GList * l, gboolean set_top)
 {
-    WDialog *h = WIDGET (l->data)->owner;
+    WGroup *g = WIDGET (l->data)->owner;
 
-    h->widgets = g_list_remove_link (h->widgets, l);
+    g->widgets = g_list_remove_link (g->widgets, l);
     if (set_top)
-        h->widgets = g_list_concat (h->widgets, l);
+        g->widgets = g_list_concat (g->widgets, l);
     else
-        h->widgets = g_list_concat (l, h->widgets);
+        g->widgets = g_list_concat (l, g->widgets);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -441,7 +441,7 @@ widget_set_size (Widget * widget, int y, int x, int lines, int cols)
 void
 widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey)
 {
-    WDialog *h = w->owner;
+    WDialog *h = DIALOG (w->owner);
     int color;
 
     if (widget_get_state (w, WST_DISABLED))
@@ -494,9 +494,9 @@ widget_draw (Widget * w)
 {
     if (w != NULL)
     {
-        WDialog *h = w->owner;
+        WGroup *g = w->owner;
 
-        if (h != NULL && widget_get_state (WIDGET (h), WST_ACTIVE))
+        if (g != NULL && widget_get_state (WIDGET (g), WST_ACTIVE))
             w->callback (w, NULL, MSG_DRAW, 0, NULL);
     }
 }
@@ -512,21 +512,21 @@ widget_draw (Widget * w)
 void
 widget_replace (Widget * old_w, Widget * new_w)
 {
-    WDialog *h = old_w->owner;
+    WGroup *g = old_w->owner;
     gboolean should_focus = FALSE;
     GList *holder;
 
-    if (h->widgets == NULL)
+    if (g->widgets == NULL)
         return;
 
-    if (h->current == NULL)
-        h->current = h->widgets;
+    if (g->current == NULL)
+        g->current = g->widgets;
 
     /* locate widget position in the list */
-    if (old_w == h->current->data)
-        holder = h->current;
+    if (old_w == g->current->data)
+        holder = g->current;
     else
-        holder = g_list_find (h->widgets, old_w);
+        holder = g_list_find (g->widgets, old_w);
 
     /* if old widget is focused, we should focus the new one... */
     if (widget_get_state (old_w, WST_FOCUSED))
@@ -549,7 +549,7 @@ widget_replace (Widget * old_w, Widget * new_w)
     }
 
     /* replace widget */
-    new_w->owner = h;
+    new_w->owner = g;
     new_w->id = old_w->id;
     holder->data = new_w;
 
@@ -580,7 +580,7 @@ widget_select (Widget * w)
     if (!widget_get_options (w, WOP_SELECTABLE))
         return;
 
-    h = w->owner;
+    h = DIALOG (w->owner);
     if (h != NULL)
     {
         if (widget_get_options (w, WOP_TOP_SELECT))
@@ -603,7 +603,7 @@ widget_select (Widget * w)
 void
 widget_set_bottom (Widget * w)
 {
-    widget_reorder (dlg_find (w->owner, w), FALSE);
+    widget_reorder (dlg_find (DIALOG (w->owner), w), FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

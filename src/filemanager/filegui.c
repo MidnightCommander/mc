@@ -411,7 +411,8 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
 
 #define ADD_LABEL(i) \
     add_widget_autopos (ui->replace_dlg, W(i), dlg_widgets[i].pos_flags, \
-                        ui->replace_dlg->current != NULL ? ui->replace_dlg->current->data : NULL)
+                        GROUP (ui->replace_dlg)->current != NULL ? \
+                        GROUP (ui->replace_dlg)->current->data : NULL)
 
 #define NEW_BUTTON(i) \
     W(i) = WIDGET (button_new (dlg_widgets[i].y, dlg_widgets[i].x, \

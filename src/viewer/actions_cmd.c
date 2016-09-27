@@ -577,7 +577,7 @@ mcview_execute_cmd (WView * view, long command)
         break;
     case CK_Quit:
         if (!mcview_is_in_panel (view))
-            dlg_stop (WIDGET (view)->owner);
+            dlg_stop (DIALOG (WIDGET (view)->owner));
         break;
     case CK_Cancel:
         /* don't close viewer due to SIGINT */

@@ -279,7 +279,7 @@ b_left_right_cback (WButton * button, int action)
             panels_layout.left_panel_size--;
     }
 
-    update_split (WIDGET (button)->owner);
+    update_split (DIALOG (WIDGET (button)->owner));
     layout_change ();
     do_refresh ();
     return 0;

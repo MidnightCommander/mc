@@ -257,7 +257,7 @@ menubar_draw (const WMenuBar * menubar)
 static void
 menubar_remove (WMenuBar * menubar)
 {
-    WDialog *h;
+    WGroup *g;
 
     if (!menubar->is_dropped)
         return;
@@ -266,15 +266,15 @@ menubar_remove (WMenuBar * menubar)
        of overlapped widgets. This is useful in multi-window editor.
        In general, menubar should be a special object, not an ordinary widget
        in the current dialog. */
-    h = WIDGET (menubar)->owner;
-    h->current = g_list_find (h->widgets, dlg_find_by_id (h, menubar->previous_widget));
+    g = WIDGET (menubar)->owner;
+    g->current = g_list_find (g->widgets, dlg_find_by_id (DIALOG (g), menubar->previous_widget));
 
     menubar->is_dropped = FALSE;
     do_refresh ();
     menubar->is_dropped = TRUE;
 
     /* restore current widget */
-    h->current = g_list_find (h->widgets, menubar);
+    g->current = g_list_find (g->widgets, menubar);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -317,7 +317,7 @@ menubar_finish (WMenuBar * menubar)
      * an "invisible" menubar get the first chance to respond to mouse events. */
     widget_set_bottom (w);
 
-    dlg_select_by_id (w->owner, menubar->previous_widget);
+    dlg_select_by_id (DIALOG (w->owner), menubar->previous_widget);
     do_refresh ();
 }
 
@@ -974,7 +974,7 @@ menubar_add_menu (WMenuBar * menubar, menu_t * menu)
 {
     if (menu != NULL)
     {
-        menu_arrange (menu, WIDGET (menubar)->owner->get_shortcut);
+        menu_arrange (menu, DIALOG (WIDGET (menubar)->owner)->get_shortcut);
         menubar->menu = g_list_append (menubar->menu, menu);
     }
 
@@ -1065,7 +1065,7 @@ menubar_activate (WMenuBar * menubar, gboolean dropped, int which)
         if (which >= 0)
             menubar->selected = (guint) which;
 
-        menubar->previous_widget = dlg_get_current_widget_id (w->owner);
+        menubar->previous_widget = dlg_get_current_widget_id (DIALOG (w->owner));
 
         /* Bring it to the top so it receives all mouse events before any other widget.
          * See also comment in menubar_finish(). */

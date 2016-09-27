@@ -197,7 +197,7 @@ edit_options_dialog (WDialog * h)
     old_syntax_hl = option_syntax_highlighting;
 
     if (!option_cursor_beyond_eol)
-        g_list_foreach (h->widgets, edit_reset_over_col, NULL);
+        g_list_foreach (GROUP (h)->widgets, edit_reset_over_col, NULL);
 
     if (p != NULL)
     {
@@ -233,7 +233,7 @@ edit_options_dialog (WDialog * h)
 
     /* Load or unload syntax rules if the option has changed */
     if (option_syntax_highlighting != old_syntax_hl)
-        g_list_foreach (h->widgets, edit_reload_syntax, NULL);
+        g_list_foreach (GROUP (h)->widgets, edit_reload_syntax, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

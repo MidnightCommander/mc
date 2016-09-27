@@ -2882,7 +2882,7 @@ dview_update (WDiff * dview)
 static void
 dview_edit (WDiff * dview, diff_place_t ord)
 {
-    WDialog *h;
+    Widget *h;
     gboolean h_modal;
     int linenum, lineofs;
 
@@ -2892,13 +2892,13 @@ dview_edit (WDiff * dview, diff_place_t ord)
         return;
     }
 
-    h = WIDGET (dview)->owner;
-    h_modal = widget_get_state (WIDGET (h), WST_MODAL);
+    h = WIDGET (WIDGET (dview)->owner);
+    h_modal = widget_get_state (h, WST_MODAL);
 
     get_line_numbers (dview->a[ord], dview->skip_rows, &linenum, &lineofs);
 
     /* disallow edit file in several editors */
-    widget_set_state (WIDGET (h), WST_MODAL, TRUE);
+    widget_set_state (h, WST_MODAL, TRUE);
 
     {
         vfs_path_t *tmp_vpath;
@@ -2908,7 +2908,7 @@ dview_edit (WDiff * dview, diff_place_t ord)
         vfs_path_free (tmp_vpath);
     }
 
-    widget_set_state (WIDGET (h), WST_MODAL, h_modal);
+    widget_set_state (h, WST_MODAL, h_modal);
     dview_redo (dview);
     dview_update (dview);
 }
@@ -2965,13 +2965,10 @@ dview_goto_cmd (WDiff * dview, diff_place_t ord)
 static void
 dview_labels (WDiff * dview)
 {
-    Widget *d;
-    WDialog *h;
+    Widget *d = WIDGET (dview);
     WButtonBar *b;
 
-    d = WIDGET (dview);
-    h = d->owner;
-    b = find_buttonbar (h);
+    b = find_buttonbar (DIALOG (d->owner));
 
     buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), diff_map, d);
     buttonbar_set_label (b, 2, Q_ ("ButtonBar|Save"), diff_map, d);
@@ -3306,7 +3303,7 @@ static cb_ret_t
 dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WDiff *dview = (WDiff *) w;
-    WDialog *h = w->owner;
+    WDialog *h = DIALOG (w->owner);
     cb_ret_t i;
 
     switch (msg)

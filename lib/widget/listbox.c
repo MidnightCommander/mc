@@ -131,7 +131,7 @@ static void
 listbox_draw (WListbox * l, gboolean focused)
 {
     Widget *w = WIDGET (l);
-    const WDialog *h = w->owner;
+    const WDialog *h = DIALOG (w->owner);
     gboolean disabled;
     int normalc, selc;
     int length = 0;
@@ -423,7 +423,7 @@ listbox_do_action (WListbox * l)
 
     if (action == LISTBOX_DONE)
     {
-        WDialog *h = WIDGET (l)->owner;
+        WDialog *h = DIALOG (WIDGET (l)->owner);
 
         h->ret_value = B_ENTER;
         dlg_stop (h);

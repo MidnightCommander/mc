@@ -621,7 +621,7 @@ hotlist_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 static lcback_ret_t
 hotlist_listbox_callback (WListbox * list)
 {
-    WDialog *dlg = WIDGET (list)->owner;
+    WDialog *dlg = DIALOG (WIDGET (list)->owner);
 
     if (!listbox_is_empty (list))
     {

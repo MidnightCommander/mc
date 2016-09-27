@@ -1559,7 +1559,7 @@ void
 edit_syntax_onoff_cmd (WDialog * h)
 {
     option_syntax_highlighting = !option_syntax_highlighting;
-    g_list_foreach (h->widgets, edit_syntax_onoff_cb, NULL);
+    g_list_foreach (GROUP (h)->widgets, edit_syntax_onoff_cb, NULL);
     dlg_draw (h);
 }
 
@@ -1574,7 +1574,7 @@ void
 edit_show_tabs_tws_cmd (WDialog * h)
 {
     enable_show_tabs_tws = !enable_show_tabs_tws;
-    g_list_foreach (h->widgets, edit_redraw_page_cb, NULL);
+    g_list_foreach (GROUP (h)->widgets, edit_redraw_page_cb, NULL);
     dlg_draw (h);
 }
 
@@ -1589,7 +1589,7 @@ void
 edit_show_margin_cmd (WDialog * h)
 {
     show_right_margin = !show_right_margin;
-    g_list_foreach (h->widgets, edit_redraw_page_cb, NULL);
+    g_list_foreach (GROUP (h)->widgets, edit_redraw_page_cb, NULL);
     dlg_draw (h);
 }
 
@@ -1605,7 +1605,7 @@ edit_show_numbers_cmd (WDialog * h)
 {
     option_line_state = !option_line_state;
     option_line_state_width = option_line_state ? LINE_STATE_WIDTH : 0;
-    g_list_foreach (h->widgets, edit_redraw_page_cb, NULL);
+    g_list_foreach (GROUP (h)->widgets, edit_redraw_page_cb, NULL);
     dlg_draw (h);
 }
 
@@ -2262,7 +2262,8 @@ edit_close_cmd (WEdit * edit)
 
     if (ret)
     {
-        WDialog *h = WIDGET (edit)->owner;
+        WGroup *g = WIDGET (edit)->owner;
+        WDialog *h = DIALOG (g);
 
         if (edit->locked != 0)
             unlock_file (edit->filename_vpath);
@@ -2270,8 +2271,8 @@ edit_close_cmd (WEdit * edit)
         del_widget (edit);
         widget_destroy (WIDGET (edit));
 
-        if (edit_widget_is_editor (CONST_WIDGET (h->current->data)))
-            edit = (WEdit *) h->current->data;
+        if (edit_widget_is_editor (CONST_WIDGET (g->current->data)))
+            edit = (WEdit *) (g->current->data);
         else
         {
             edit = find_editor (h);

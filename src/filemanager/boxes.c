@@ -355,7 +355,7 @@ sel_charset_button (WButton * button, int action)
             cpname = _("7-bit ASCII");  /* FIXME */
 
         button_set_text (button, cpname);
-        dlg_draw (WIDGET (button)->owner);
+        dlg_draw (DIALOG (WIDGET (button)->owner));
     }
 
     return 0;
@@ -484,7 +484,7 @@ task_cb (WButton * button, int action)
     jobs_fill_listbox (bg_list);
 
     /* This can be optimized to just redraw this widget :-) */
-    dlg_draw (WIDGET (button)->owner);
+    dlg_draw (DIALOG (WIDGET (button)->owner));
 
     return 0;
 }

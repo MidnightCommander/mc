@@ -78,10 +78,11 @@ static enum ruler_type
 static void
 mcview_set_buttonbar (WView * view)
 {
-    WDialog *h = WIDGET (view)->owner;
-    WButtonBar *b = find_buttonbar (h);
+    WDialog *h = DIALOG (WIDGET (view)->owner);
+    WButtonBar *b;
     const global_keymap_t *keymap = view->mode_flags.hex ? viewer_hex_map : viewer_map;
 
+    b = find_buttonbar (h);
     buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), keymap, WIDGET (view));
 
     if (view->mode_flags.hex)
@@ -204,7 +205,7 @@ mcview_update (WView * view)
     {
         view->dpy_bbar_dirty = FALSE;
         mcview_set_buttonbar (view);
-        widget_draw (WIDGET (find_buttonbar (WIDGET (view)->owner)));
+        widget_draw (WIDGET (find_buttonbar (DIALOG (WIDGET (view)->owner))));
     }
 
     if (view->dirty > dirt_limit)

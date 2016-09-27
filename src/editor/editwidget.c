@@ -193,7 +193,7 @@ edit_restore_size (WEdit * edit)
     edit->drag_state = MCEDIT_DRAG_NONE;
     w->mouse.forced_capture = FALSE;
     widget_set_size (w, edit->y_prev, edit->x_prev, edit->lines_prev, edit->cols_prev);
-    dlg_draw (w->owner);
+    dlg_draw (DIALOG (w->owner));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -233,7 +233,7 @@ edit_window_move (WEdit * edit, long command)
     }
 
     edit->force |= REDRAW_PAGE;
-    dlg_draw (w->owner);
+    dlg_draw (DIALOG (w->owner));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -273,7 +273,7 @@ edit_window_resize (WEdit * edit, long command)
     }
 
     edit->force |= REDRAW_COMPLETELY;
-    dlg_draw (w->owner);
+    dlg_draw (DIALOG (w->owner));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -295,7 +295,9 @@ get_hotkey (int n)
 static void
 edit_window_list (const WDialog * h)
 {
-    const size_t dlg_num = g_list_length (h->widgets) - 2;      /* 2 = skip menu and buttonbar */
+    const WGroup *g = CONST_GROUP (h);
+    const size_t offset = 2;    /* skip menu and buttonbar */
+    const size_t dlg_num = g_list_length (g->widgets) - offset;
     int lines, cols;
     Listbox *listbox;
     GList *w;
@@ -307,7 +309,7 @@ edit_window_list (const WDialog * h)
 
     listbox = create_listbox_window (lines, cols, _("Open files"), "[Open files]");
 
-    for (w = h->widgets; w != NULL; w = g_list_next (w))
+    for (w = g->widgets; w != NULL; w = g_list_next (w))
         if (edit_widget_is_editor (CONST_WIDGET (w->data)))
         {
             WEdit *e = (WEdit *) w->data;
@@ -325,7 +327,7 @@ edit_window_list (const WDialog * h)
             g_free (fname);
         }
 
-    selected = run_listbox_with_data (listbox, h->current->data);
+    selected = run_listbox_with_data (listbox, g->current->data);
     if (selected != NULL)
         widget_select (WIDGET (selected));
 }
@@ -379,6 +381,7 @@ edit_get_title (const WDialog * h, size_t len)
 static cb_ret_t
 edit_dialog_command_execute (WDialog * h, long command)
 {
+    WGroup *g = GROUP (h);
     Widget *wh = WIDGET (h);
     cb_ret_t ret = MSG_HANDLED;
 
@@ -401,8 +404,8 @@ edit_dialog_command_execute (WDialog * h, long command)
         break;
     case CK_Close:
         /* if there are no opened files anymore, close MC editor */
-        if (edit_widget_is_editor (CONST_WIDGET (h->current->data)) &&
-            edit_close_cmd ((WEdit *) h->current->data) && find_editor (h) == NULL)
+        if (edit_widget_is_editor (CONST_WIDGET (g->current->data)) &&
+            edit_close_cmd ((WEdit *) g->current->data) && find_editor (h) == NULL)
             dlg_stop (h);
         break;
     case CK_Help:
@@ -416,7 +419,7 @@ edit_dialog_command_execute (WDialog * h, long command)
     case CK_Cancel:
         /* don't close editor due to SIGINT, but stop move/resize window */
         {
-            Widget *w = WIDGET (h->current->data);
+            Widget *w = WIDGET (g->current->data);
 
             if (edit_widget_is_editor (w) && ((WEdit *) w)->drag_state != MCEDIT_DRAG_NONE)
                 edit_restore_size ((WEdit *) w);
@@ -450,8 +453,8 @@ edit_dialog_command_execute (WDialog * h, long command)
         break;
     case CK_WindowMove:
     case CK_WindowResize:
-        if (edit_widget_is_editor (CONST_WIDGET (h->current->data)))
-            edit_handle_move_resize ((WEdit *) h->current->data, command);
+        if (edit_widget_is_editor (CONST_WIDGET (g->current->data)))
+            edit_handle_move_resize ((WEdit *) g->current->data, command);
         break;
     case CK_WindowList:
         edit_window_list (h);
@@ -618,7 +621,7 @@ edit_quit (WDialog * h)
     widget_set_state (WIDGET (h), WST_ACTIVE, TRUE);
 
     /* check window state and get modified files */
-    for (l = h->widgets; l != NULL; l = g_list_next (l))
+    for (l = GROUP (h)->widgets; l != NULL; l = g_list_next (l))
         if (edit_widget_is_editor (CONST_WIDGET (l->data)))
         {
             e = (WEdit *) l->data;
@@ -746,6 +749,7 @@ edit_update_cursor (WEdit * edit, const mouse_event_t * event)
 static cb_ret_t
 edit_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
+    WGroup *g = GROUP (w);
     WDialog *h = DIALOG (w);
 
     switch (msg)
@@ -776,14 +780,14 @@ edit_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
             /* We forward any commands coming from the menu, and which haven't been
                handled by the dialog, to the focused WEdit window. */
             if (result == MSG_NOT_HANDLED && sender == WIDGET (find_menubar (h)))
-                result = send_message (h->current->data, NULL, MSG_ACTION, parm, NULL);
+                result = send_message (g->current->data, NULL, MSG_ACTION, parm, NULL);
 
             return result;
         }
 
     case MSG_KEY:
         {
-            Widget *we = WIDGET (h->current->data);
+            Widget *we = WIDGET (g->current->data);
             cb_ret_t ret = MSG_NOT_HANDLED;
 
             if (edit_widget_is_editor (we))
@@ -834,7 +838,7 @@ edit_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
 
     case MSG_IDLE:
         widget_idle (w, FALSE);
-        return send_message (h->current->data, NULL, MSG_IDLE, 0, NULL);
+        return send_message (g->current->data, NULL, MSG_IDLE, 0, NULL);
 
     default:
         return dlg_default_callback (w, sender, msg, parm, data);
@@ -857,6 +861,7 @@ edit_dialog_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 
     if (msg == MSG_MOUSE_DOWN && event->y == 0)
     {
+        WGroup *g = GROUP (w);
         WDialog *h = DIALOG (w);
         WMenuBar *b;
 
@@ -871,7 +876,7 @@ edit_dialog_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
             int x;
 
             /* Try find top fullscreen window */
-            for (l = h->widgets; l != NULL; l = g_list_next (l))
+            for (l = g->widgets; l != NULL; l = g_list_next (l))
                 if (edit_widget_is_editor (CONST_WIDGET (l->data))
                     && ((WEdit *) l->data)->fullscreen)
                     top = l;
@@ -883,7 +888,7 @@ edit_dialog_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
             {
                 WEdit *e = (WEdit *) top->data;
 
-                if (top != h->current)
+                if (top != g->current)
                 {
                     /* Window is not active. Activate it */
                     widget_select (WIDGET (e));
@@ -917,7 +922,7 @@ edit_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
     switch (msg)
     {
     case MSG_FOCUS:
-        edit_set_buttonbar (e, find_buttonbar (w->owner));
+        edit_set_buttonbar (e, find_buttonbar (DIALOG (w->owner)));
         return MSG_HANDLED;
 
     case MSG_DRAW:
@@ -1029,7 +1034,7 @@ edit_mouse_handle_move_resize (Widget * w, mouse_msg_t msg, mouse_event_t * even
     edit->force |= REDRAW_COMPLETELY;   /* Not really needed as WEdit's MSG_DRAW already does this. */
 
     /* We draw the whole dialog because dragging/resizing exposes area beneath. */
-    dlg_draw (w->owner);
+    dlg_draw (DIALOG (w->owner));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1260,8 +1265,10 @@ edit_get_file_name (const WEdit * edit)
 WEdit *
 find_editor (const WDialog * h)
 {
-    if (edit_widget_is_editor (CONST_WIDGET (h->current->data)))
-        return (WEdit *) h->current->data;
+    const WGroup *g = CONST_GROUP (h);
+
+    if (edit_widget_is_editor (CONST_WIDGET (g->current->data)))
+        return (WEdit *) g->current->data;
     return (WEdit *) find_widget_type (h, edit_callback);
 }
 
@@ -1284,8 +1291,6 @@ edit_widget_is_editor (const Widget * w)
 void
 edit_update_screen (WEdit * e)
 {
-    WDialog *h = WIDGET (e)->owner;
-
     edit_scroll_screen_over_cursor (e);
     edit_update_curs_col (e);
     edit_status (e, widget_get_state (WIDGET (e), WST_FOCUSED));
@@ -1300,7 +1305,7 @@ edit_update_screen (WEdit * e)
         edit_render_keypress (e);
     }
 
-    widget_draw (WIDGET (find_buttonbar (h)));
+    widget_draw (WIDGET (find_buttonbar (DIALOG (WIDGET (e)->owner))));
 }
 
 /* --------------------------------------------------------------------------------------------- */
