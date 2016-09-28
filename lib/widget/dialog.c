@@ -641,10 +641,8 @@ dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
         return MSG_HANDLED;
 
     default:
-        break;
+        return group_default_callback (w, sender, msg, parm, data);
     }
-
-    return MSG_NOT_HANDLED;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -660,8 +658,9 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
     new_d = g_new0 (WDialog, 1);
     w = WIDGET (new_d);
     widget_adjust_position (pos_flags, &y1, &x1, &lines, &cols);
-    widget_init (w, y1, x1, lines, cols, (callback != NULL) ? callback : dlg_default_callback,
-                 mouse_callback);
+    group_init (GROUP (new_d), y1, x1, lines, cols,
+                callback != NULL ? callback : dlg_default_callback, mouse_callback);
+
     w->pos_flags = pos_flags;
     w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
 
@@ -865,7 +864,7 @@ dlg_init (WDialog * h)
             dialog_switch_add (h);
 
         send_message (h, NULL, MSG_INIT, 0, NULL);
-        group_send_broadcast_msg (g, MSG_INIT);
+        group_default_callback (wh, NULL, MSG_INIT, 0, NULL);
         dlg_read_history (h);
     }
 
@@ -944,12 +943,9 @@ dlg_run (WDialog * h)
 void
 dlg_destroy (WDialog * h)
 {
-    WGroup *g = GROUP (h);
-
     /* if some widgets have history, save all history at one moment here */
     dlg_save_history (h);
-    g_list_foreach (g->widgets, (GFunc) widget_destroy, NULL);
-    g_list_free (g->widgets);
+    group_default_callback (WIDGET (h), NULL, MSG_DESTROY, 0, NULL);
     mc_event_group_del (h->event_group);
     g_free (h->event_group);
     g_free (h->title);

@@ -37,6 +37,12 @@ struct WGroup
 
 /*** declarations of public functions ************************************************************/
 
+void group_init (WGroup * g, int y1, int x1, int lines, int cols, widget_cb_fn callback,
+                 widget_mouse_cb_fn mouse_callback);
+/* Default callback for groups */
+cb_ret_t group_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
+                                 void *data);
+
 unsigned long group_add_widget_autopos (WGroup * g, void *w, widget_pos_flags_t pos_flags,
                                         const void *before);
 void group_remove_widget (void *w);

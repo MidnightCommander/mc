@@ -483,6 +483,7 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
     switch (msg)
     {
     case MSG_INIT:
+        group_default_callback (w, NULL, MSG_INIT, 0, NULL);
         first_draw = TRUE;
         return MSG_HANDLED;
 
@@ -1551,6 +1552,7 @@ find_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
     switch (msg)
     {
     case MSG_INIT:
+        group_default_callback (w, NULL, MSG_INIT, 0, NULL);
         find_adjust_header (h);
         return MSG_HANDLED;
 

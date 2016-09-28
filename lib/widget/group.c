@@ -49,6 +49,16 @@
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+group_widget_init (void *data, void *user_data)
+{
+    (void) user_data;
+
+    send_message (WIDGET (data), NULL, MSG_INIT, 0, NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static GList *
 group_get_next_or_prev_of (GList * list, gboolean next)
 {
@@ -143,6 +153,53 @@ group_send_broadcast_msg_custom (WGroup * g, widget_msg_t msg, gboolean reverse,
 /* --------------------------------------------------------------------------------------------- */
 
 /**
+ * Initialize group.
+ *
+ * @param g WGroup widget
+ * @param y1 y-coordinate of top-left corner
+ * @param x1 x-coordinate of top-left corner
+ * @param lines group height
+ * @param cols group width
+ * @param callback group callback
+ * @param mouse_callback group mouse handler
+ */
+
+void
+group_init (WGroup * g, int y1, int x1, int lines, int cols, widget_cb_fn callback,
+            widget_mouse_cb_fn mouse_callback)
+{
+    Widget *w = WIDGET (g);
+
+    widget_init (w, y1, x1, lines, cols, callback != NULL ? callback : group_default_callback,
+                 mouse_callback);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+cb_ret_t
+group_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+{
+    WGroup *g = GROUP (w);
+
+    switch (msg)
+    {
+    case MSG_INIT:
+        g_list_foreach (g->widgets, group_widget_init, NULL);
+        return MSG_HANDLED;
+
+    case MSG_DESTROY:
+        g_list_foreach (g->widgets, (GFunc) widget_destroy, NULL);
+        g_list_free (g->widgets);
+        return MSG_HANDLED;
+
+    default:
+        return widget_default_callback (w, sender, msg, parm, data);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
  * Insert widget to group before specified widget with specified positioning.
  * Make the inserted widget current.
  *
@@ -200,7 +257,7 @@ group_add_widget_autopos (WGroup * g, void *w, widget_pos_flags_t pos_flags, con
     /* widget has been added at runtime */
     if (widget_get_state (wg, WST_ACTIVE))
     {
-        send_message (ww, NULL, MSG_INIT, 0, NULL);
+        group_widget_init (ww, NULL);
         widget_select (ww);
     }
     else
