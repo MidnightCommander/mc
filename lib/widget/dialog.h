@@ -128,8 +128,6 @@ char *dlg_get_title (const WDialog * h, size_t len);
 
 void dlg_draw (WDialog * h);
 
-void dlg_broadcast_msg (WDialog * h, widget_msg_t message);
-
 /* Default callback for dialogs */
 cb_ret_t dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data);
 

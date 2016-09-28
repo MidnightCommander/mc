@@ -91,48 +91,6 @@ typedef struct
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * broadcast a message to all the widgets in a dialog that have
- * the options set to flags. If flags is zero, the message is sent
- * to all widgets.
- */
-
-static void
-dlg_broadcast_msg_to (WDialog * h, widget_msg_t msg, gboolean reverse, widget_options_t flags)
-{
-    GList *p, *first;
-    WGroup *g = GROUP (h);
-
-    if (g->widgets == NULL)
-        return;
-
-    if (g->current == NULL)
-        g->current = g->widgets;
-
-    if (reverse)
-        p = group_get_widget_prev_of (g->current);
-    else
-        p = group_get_widget_next_of (g->current);
-
-    first = p;
-
-    do
-    {
-        Widget *w = WIDGET (p->data);
-
-        if (reverse)
-            p = group_get_widget_prev_of (p);
-        else
-            p = group_get_widget_next_of (p);
-
-        if ((flags == 0) || ((flags & w->options) != 0))
-            send_message (w, NULL, msg, 0, NULL);
-    }
-    while (first != p);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
   * Read histories from the ${XDG_CACHE_HOME}/mc/history file
   */
 static void
@@ -786,15 +744,6 @@ do_refresh (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** broadcast a message to all the widgets in a dialog */
-
-void
-dlg_broadcast_msg (WDialog * h, widget_msg_t msg)
-{
-    dlg_broadcast_msg_to (h, msg, FALSE, 0);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /** Find the widget with the given callback in the dialog h */
 
 Widget *
@@ -882,7 +831,7 @@ dlg_draw (WDialog * h)
     }
 
     send_message (h, NULL, MSG_DRAW, 0, NULL);
-    dlg_broadcast_msg (h, MSG_DRAW);
+    group_send_broadcast_msg (g, MSG_DRAW);
     update_cursor (h);
 }
 
@@ -916,7 +865,7 @@ dlg_init (WDialog * h)
             dialog_switch_add (h);
 
         send_message (h, NULL, MSG_INIT, 0, NULL);
-        dlg_broadcast_msg (h, MSG_INIT);
+        group_send_broadcast_msg (g, MSG_INIT);
         dlg_read_history (h);
     }
 

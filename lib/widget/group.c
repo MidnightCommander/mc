@@ -101,6 +101,44 @@ group_select_next_or_prev (WGroup * g, gboolean next)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Send broadcast message to all widgets in the group that have specified options.
+ *
+ * @param g WGroup object
+ * @param msg message sent to widgets
+ * @param reverse if TRUE, send message in reverse order, FALSE -- in direct one.
+ * @param options if WOP_DEFAULT, the message is sent to all widgets. Else message is sent to widgets
+ *                that have specified options.
+ */
+
+static void
+group_send_broadcast_msg_custom (WGroup * g, widget_msg_t msg, gboolean reverse,
+                                 widget_options_t options)
+{
+    GList *p, *first;
+
+    if (g->widgets == NULL)
+        return;
+
+    if (g->current == NULL)
+        g->current = g->widgets;
+
+    p = group_get_next_or_prev_of (g->current, !reverse);
+    first = p;
+
+    do
+    {
+        Widget *w = WIDGET (p->data);
+
+        p = group_get_next_or_prev_of (p, !reverse);
+
+        if (options == WOP_DEFAULT || (options & w->options) != 0)
+            send_message (w, NULL, msg, 0, NULL);
+    }
+    while (first != p);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -307,6 +345,20 @@ group_select_widget_by_id (const WGroup * g, unsigned long id)
     w = dlg_find_by_id (DIALOG (g), id);
     if (w != NULL)
         widget_select (w);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Send broadcast message to all widgets in the group.
+ *
+ * @param g WGroup object
+ * @param msg message sent to widgets
+ */
+
+void
+group_send_broadcast_msg (WGroup * g, widget_msg_t msg)
+{
+    group_send_broadcast_msg_custom (g, msg, FALSE, WOP_DEFAULT);
 }
 
 /* --------------------------------------------------------------------------------------------- */

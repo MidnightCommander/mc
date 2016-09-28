@@ -53,6 +53,8 @@ void group_select_prev_widget (WGroup * g);
 
 void group_select_widget_by_id (const WGroup * g, unsigned long id);
 
+void group_send_broadcast_msg (WGroup * g, widget_msg_t message);
+
 /* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */

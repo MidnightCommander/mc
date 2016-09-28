@@ -688,7 +688,7 @@ advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
                 ch_flags[i * 3 + parm - 3] = (x_toggle & (1 << parm)) ? '-' : '+';
             x_toggle ^= (1 << parm);
             update_mode (g);
-            dlg_broadcast_msg (h, MSG_DRAW);
+            group_send_broadcast_msg (g, MSG_DRAW);
             break;
 
         case XCTRL ('x'):
@@ -705,7 +705,7 @@ advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
                 ch_flags[i * 3 + parm] = (x_toggle & (1 << parm)) ? '-' : '+';
             x_toggle ^= (1 << parm);
             update_mode (g);
-            dlg_broadcast_msg (h, MSG_DRAW);
+            group_send_broadcast_msg (g, MSG_DRAW);
             break;
 
         default:
