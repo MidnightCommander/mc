@@ -174,7 +174,6 @@ group_add_widget_autopos (WGroup * g, void *w, widget_pos_flags_t pos_flags, con
 
     ww->owner = g;
     ww->pos_flags = pos_flags;
-    ww->id = g->widget_id++;
 
     if (g->widgets == NULL || before == NULL)
     {

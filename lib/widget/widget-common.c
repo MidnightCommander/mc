@@ -53,8 +53,30 @@
 
 /*** file scope variables ************************************************************************/
 
+/* maximum value of used widget ID */
+static unsigned long widget_id = 0;
+
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Calc widget ID,
+ * Widget ID is uniq for each widget created during MC session (like PID in OS).
+ *
+ * @return widget ID.
+ */
+static unsigned long
+widget_set_id (void)
+{
+    unsigned long id;
+
+    id = widget_id++;
+    /* TODO IF NEEDED: if id is already used, find next free id. */
+
+    return id;
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -252,6 +274,7 @@ void
 widget_init (Widget * w, int y, int x, int lines, int cols,
              widget_cb_fn callback, widget_mouse_cb_fn mouse_callback)
 {
+    w->id = widget_set_id ();
     w->x = x;
     w->y = y;
     w->cols = cols;

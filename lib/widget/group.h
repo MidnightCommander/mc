@@ -30,7 +30,6 @@ struct WGroup
     GList *widgets;             /* widgets list */
     GList *current;             /* Currently active widget */
 
-    unsigned long widget_id;    /* maximum id of all widgets */
     gboolean winch_pending;     /* SIGWINCH signal has been got. Resize group after rise */
 };
 

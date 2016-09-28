@@ -131,7 +131,7 @@ struct Widget
     widget_pos_flags_t pos_flags;       /* repositioning flags */
     widget_options_t options;
     widget_state_t state;
-    unsigned int id;            /* Number of the widget, starting with 0 */
+    unsigned long id;           /* uniq widget ID */
     widget_cb_fn callback;
     widget_mouse_cb_fn mouse_callback;
     WGroup *owner;
