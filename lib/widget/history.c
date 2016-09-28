@@ -230,7 +230,7 @@ history_show (history_descriptor_t * hd)
 
     /* this call makes list stick to all sides of dialog, effectively make
        it be resized with dialog */
-    add_widget_autopos (query_dlg, hd->listbox, WPOS_KEEP_ALL, NULL);
+    group_add_widget_autopos (GROUP (query_dlg), hd->listbox, WPOS_KEEP_ALL, NULL);
 
     /* to avoid diplicating of (calculating sizes in two places)
        code, call history_dlg_callback function here, to set dialog and

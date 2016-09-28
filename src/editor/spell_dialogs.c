@@ -72,6 +72,7 @@ spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word
     int res;
     char *curr = NULL;
     WDialog *sug_dlg;
+    WGroup *g;
     WListbox *sug_list;
     int max_btn_len = 0;
     int replace_len;
@@ -111,22 +112,23 @@ spell_dialog_spell_suggest_show (WEdit * edit, const char *word, char **new_word
 
     sug_dlg = dlg_create (TRUE, ypos, xpos, sug_dlg_h, sug_dlg_w, WPOS_KEEP_DEFAULT, TRUE,
                           dialog_colors, NULL, NULL, "[ASpell]", _("Check word"));
+    g = GROUP (sug_dlg);
 
-    add_widget (sug_dlg, label_new (1, 2, lang_label));
-    add_widget (sug_dlg, label_new (3, 2, word_label));
+    group_add_widget (g, label_new (1, 2, lang_label));
+    group_add_widget (g, label_new (3, 2, word_label));
 
-    add_widget (sug_dlg, groupbox_new (4, 2, sug_dlg_h - 5, 25, _("Suggest")));
+    group_add_widget (g, groupbox_new (4, 2, sug_dlg_h - 5, 25, _("Suggest")));
 
     sug_list = listbox_new (5, 2, sug_dlg_h - 7, 24, FALSE, NULL);
     for (i = 0; i < suggest->len; i++)
         listbox_add_item (sug_list, LISTBOX_APPEND_AT_END, 0, g_array_index (suggest, char *, i),
                           NULL, FALSE);
-    add_widget (sug_dlg, sug_list);
+    group_add_widget (g, sug_list);
 
-    add_widget (sug_dlg, add_btn);
-    add_widget (sug_dlg, replace_btn);
-    add_widget (sug_dlg, skip_btn);
-    add_widget (sug_dlg, cancel_button);
+    group_add_widget (g, add_btn);
+    group_add_widget (g, replace_btn);
+    group_add_widget (g, skip_btn);
+    group_add_widget (g, cancel_button);
 
     res = dlg_run (sug_dlg);
     if (res == B_ENTER)

@@ -1049,6 +1049,7 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
         HELP_TITLE_COLOR        /* title color */
     };
 
+    WGroup *g;
     WButtonBar *help_bar;
     Widget *md;
     char *hlpfile = NULL;
@@ -1103,6 +1104,7 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
     whelp =
         dlg_create (TRUE, 0, 0, help_lines + 4, HELP_WINDOW_WIDTH + 4, WPOS_CENTER | WPOS_TRYUP,
                     FALSE, help_colors, help_callback, NULL, "[Help]", _("Help"));
+    g = GROUP (whelp);
     widget_want_tab (WIDGET (whelp), TRUE);
 
     selected_item = search_string_node (main_node, STRING_LINK_START) - 1;
@@ -1121,8 +1123,8 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
 
     md = mousedispatch_new (1, 1, help_lines, HELP_WINDOW_WIDTH - 2);
 
-    add_widget (whelp, md);
-    add_widget (whelp, help_bar);
+    group_add_widget (g, md);
+    group_add_widget (g, help_bar);
 
     buttonbar_set_label (help_bar, 1, Q_ ("ButtonBar|Help"), help_map, NULL);
     buttonbar_set_label (help_bar, 2, Q_ ("ButtonBar|Index"), help_map, NULL);

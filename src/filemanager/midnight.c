@@ -917,34 +917,36 @@ done_mc (void)
 static void
 create_file_manager (void)
 {
+    WGroup *g = GROUP (midnight_dlg);
+
     midnight_dlg->get_shortcut = midnight_get_shortcut;
     midnight_dlg->get_title = midnight_get_title;
     /* allow rebind tab */
     widget_want_tab (WIDGET (midnight_dlg), TRUE);
 
     the_menubar = menubar_new (NULL, menubar_visible);
-    add_widget (midnight_dlg, the_menubar);
+    group_add_widget (g, the_menubar);
     init_menu ();
 
     create_panels ();
-    add_widget (midnight_dlg, get_panel_widget (0));
-    add_widget (midnight_dlg, get_panel_widget (1));
+    group_add_widget (g, get_panel_widget (0));
+    group_add_widget (g, get_panel_widget (1));
 
     the_hint = label_new (0, 0, 0);
     the_hint->transparent = TRUE;
     the_hint->auto_adjust_cols = 0;
     WIDGET (the_hint)->cols = COLS;
-    add_widget (midnight_dlg, the_hint);
+    group_add_widget (g, the_hint);
 
     cmdline = command_new (0, 0, 0);
-    add_widget (midnight_dlg, cmdline);
+    group_add_widget (g, cmdline);
 
     the_prompt = label_new (0, 0, mc_prompt);
     the_prompt->transparent = TRUE;
-    add_widget (midnight_dlg, the_prompt);
+    group_add_widget (g, the_prompt);
 
     the_bar = buttonbar_new (mc_global.keybar_visible);
-    add_widget (midnight_dlg, the_bar);
+    group_add_widget (g, the_bar);
     midnight_set_buttonbar (the_bar);
 }
 

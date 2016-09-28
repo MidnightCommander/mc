@@ -1192,6 +1192,7 @@ edit_files (const GList * files)
 {
     static gboolean made_directory = FALSE;
     WDialog *edit_dlg;
+    WGroup *g;
     WMenuBar *menubar;
     Widget *w, *wd;
     const GList *file;
@@ -1224,13 +1225,15 @@ edit_files (const GList * files)
     edit_dlg->get_shortcut = edit_get_shortcut;
     edit_dlg->get_title = edit_get_title;
 
+    g = GROUP (edit_dlg);
+
     menubar = menubar_new (NULL, TRUE);
     w = WIDGET (menubar);
-    add_widget_autopos (edit_dlg, w, w->pos_flags, NULL);
+    group_add_widget_autopos (g, w, w->pos_flags, NULL);
     edit_init_menu (menubar);
 
     w = WIDGET (buttonbar_new (TRUE));
-    add_widget_autopos (edit_dlg, w, w->pos_flags, NULL);
+    group_add_widget_autopos (g, w, w->pos_flags, NULL);
 
     for (file = files; file != NULL; file = g_list_next (file))
     {
@@ -1355,7 +1358,7 @@ edit_add_window (WDialog * h, int y, int x, int lines, int cols, const vfs_path_
     w->callback = edit_callback;
     w->mouse_callback = edit_mouse_callback;
 
-    add_widget_autopos (h, w, WPOS_KEEP_ALL, NULL);
+    group_add_widget_autopos (GROUP (h), w, WPOS_KEEP_ALL, NULL);
     edit_set_buttonbar (edit, find_buttonbar (h));
     dlg_draw (h);
 

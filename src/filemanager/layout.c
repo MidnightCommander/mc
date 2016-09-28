@@ -481,6 +481,7 @@ static WDialog *
 layout_dlg_create (void)
 {
     WDialog *layout_dlg;
+    WGroup *g;
     int l1 = 0, width;
     int b1, b2, b;
     size_t i;
@@ -547,29 +548,30 @@ layout_dlg_create (void)
     layout_dlg =
         dlg_create (TRUE, 0, 0, 15, width, WPOS_CENTER, FALSE, dialog_colors, layout_callback, NULL,
                     "[Layout]", _("Layout"));
+    g = GROUP (layout_dlg);
 
 #define XTRACT(i) (*check_options[i].variable != 0), check_options[i].text
 
     /* "Panel split" groupbox */
-    add_widget (layout_dlg, groupbox_new (2, 3, 6, l1, title1));
+    group_add_widget (g, groupbox_new (2, 3, 6, l1, title1));
 
     radio_widget = radio_new (3, 5, 2, s_split_direction);
     radio_widget->sel = panels_layout.horizontal_split ? 1 : 0;
-    add_widget (layout_dlg, radio_widget);
+    group_add_widget (g, radio_widget);
 
     check_options[0].widget = check_new (5, 5, XTRACT (0));
-    add_widget (layout_dlg, check_options[0].widget);
+    group_add_widget (g, check_options[0].widget);
 
     equal_split = panels_layout.horizontal_split ?
         panels_layout.horizontal_equal : panels_layout.vertical_equal;
 
     bleft_widget = button_new (6, 8, B_2LEFT, NARROW_BUTTON, "&<", b_left_right_cback);
     widget_disable (WIDGET (bleft_widget), equal_split);
-    add_widget (layout_dlg, bleft_widget);
+    group_add_widget (g, bleft_widget);
 
     bright_widget = button_new (6, 14, B_2RIGHT, NARROW_BUTTON, "&>", b_left_right_cback);
     widget_disable (WIDGET (bright_widget), equal_split);
-    add_widget (layout_dlg, bright_widget);
+    group_add_widget (g, bright_widget);
 
     /* "Console output" groupbox */
     {
@@ -580,37 +582,36 @@ layout_dlg_create (void)
 
         w = WIDGET (groupbox_new (8, 3, 3, l1, title2));
         w->state |= disabled;
-        add_widget (layout_dlg, w);
+        group_add_widget (g, w);
 
         w = WIDGET (button_new (9, output_lines_label_len + 5, B_PLUS,
                                 NARROW_BUTTON, "&+", bplus_cback));
         w->state |= disabled;
-        add_widget (layout_dlg, w);
+        group_add_widget (g, w);
 
         w = WIDGET (button_new (9, output_lines_label_len + 5 + 5, B_MINUS,
                                 NARROW_BUTTON, "&-", bminus_cback));
         w->state |= disabled;
-        add_widget (layout_dlg, w);
+        group_add_widget (g, w);
     }
 
     /* "Other options" groupbox */
-    add_widget (layout_dlg, groupbox_new (2, 4 + l1, 9, l1, title3));
+    group_add_widget (g, groupbox_new (2, 4 + l1, 9, l1, title3));
 
     for (i = 1; i < (size_t) LAYOUT_OPTIONS_COUNT; i++)
     {
         check_options[i].widget = check_new (i + 2, 6 + l1, XTRACT (i));
-        add_widget (layout_dlg, check_options[i].widget);
+        group_add_widget (g, check_options[i].widget);
     }
 
 #undef XTRACT
 
-    add_widget (layout_dlg, hline_new (11, -1, -1));
+    group_add_widget (g, hline_new (11, -1, -1));
     /* buttons */
-    add_widget (layout_dlg,
-                button_new (12, (width - b) / 2, B_ENTER, DEFPUSH_BUTTON, ok_button, 0));
-    add_widget (layout_dlg,
-                button_new (12, (width - b) / 2 + b1 + 1, B_CANCEL, NORMAL_BUTTON,
-                            cancel_button, 0));
+    group_add_widget (g, button_new (12, (width - b) / 2, B_ENTER, DEFPUSH_BUTTON, ok_button, 0));
+    group_add_widget (g,
+                      button_new (12, (width - b) / 2 + b1 + 1, B_CANCEL, NORMAL_BUTTON,
+                                  cancel_button, 0));
 
     widget_select (WIDGET (radio_widget));
 

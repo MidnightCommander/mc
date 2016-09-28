@@ -235,6 +235,7 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
     WView *lc_mcview;
     WDialog *view_dlg;
     Widget *vw, *b;
+    WGroup *g;
 
     /* Create dialog and widgets, put them on the dialog */
     view_dlg = dlg_create (FALSE, 0, 0, 1, 1, WPOS_FULLSCREEN, FALSE, NULL, mcview_dialog_callback,
@@ -242,11 +243,13 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
     vw = WIDGET (view_dlg);
     widget_want_tab (vw, TRUE);
 
+    g = GROUP (view_dlg);
+
     lc_mcview = mcview_new (vw->y, vw->x, vw->lines - 1, vw->cols, FALSE);
-    add_widget_autopos (view_dlg, lc_mcview, WPOS_KEEP_ALL, NULL);
+    group_add_widget_autopos (g, lc_mcview, WPOS_KEEP_ALL, NULL);
 
     b = WIDGET (buttonbar_new (TRUE));
-    add_widget_autopos (view_dlg, b, b->pos_flags, NULL);
+    group_add_widget_autopos (g, b, b->pos_flags, NULL);
 
     view_dlg->get_title = mcview_get_title;
 

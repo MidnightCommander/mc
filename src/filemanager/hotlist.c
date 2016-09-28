@@ -750,6 +750,7 @@ init_hotlist (hotlist_t list_type)
     int lines, cols;
     int y;
     int dh = 0;
+    WGroup *g;
     WGroupbox *path_box;
     Widget *hotlist_widget;
 
@@ -775,11 +776,12 @@ init_hotlist (hotlist_t list_type)
     hotlist_dlg =
         dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, hotlist_callback,
                     NULL, help_node, title);
+    g = GROUP (hotlist_dlg);
 
     y = UY;
     hotlist_group = groupbox_new (y, UX, lines - 10 + dh, cols - 2 * UX, _("Top level group"));
     hotlist_widget = WIDGET (hotlist_group);
-    add_widget_autopos (hotlist_dlg, hotlist_widget, WPOS_KEEP_ALL, NULL);
+    group_add_widget_autopos (g, hotlist_widget, WPOS_KEEP_ALL, NULL);
 
     l_hotlist =
         listbox_new (y + 1, UX + 1, hotlist_widget->lines - 2, hotlist_widget->cols - 2, FALSE,
@@ -798,26 +800,26 @@ init_hotlist (hotlist_t list_type)
         fill_listbox (l_hotlist);
 
     /* insert before groupbox to view scrollbar */
-    add_widget_autopos (hotlist_dlg, l_hotlist, WPOS_KEEP_ALL, NULL);
+    group_add_widget_autopos (g, l_hotlist, WPOS_KEEP_ALL, NULL);
 
     y += hotlist_widget->lines;
 
     path_box = groupbox_new (y, UX, 3, hotlist_widget->cols, _("Directory path"));
-    add_widget_autopos (hotlist_dlg, path_box, WPOS_KEEP_BOTTOM | WPOS_KEEP_HORZ, NULL);
+    group_add_widget_autopos (g, path_box, WPOS_KEEP_BOTTOM | WPOS_KEEP_HORZ, NULL);
 
     pname = label_new (y + 1, UX + 2, "");
-    add_widget_autopos (hotlist_dlg, pname, WPOS_KEEP_BOTTOM | WPOS_KEEP_LEFT, NULL);
+    group_add_widget_autopos (g, pname, WPOS_KEEP_BOTTOM | WPOS_KEEP_LEFT, NULL);
     y += WIDGET (path_box)->lines;
 
-    add_widget_autopos (hotlist_dlg, hline_new (y++, -1, -1), WPOS_KEEP_BOTTOM, NULL);
+    group_add_widget_autopos (g, hline_new (y++, -1, -1), WPOS_KEEP_BOTTOM, NULL);
 
     for (i = 0; i < hotlist_but_num; i++)
         if ((hotlist_but[i].type & list_type) != 0)
-            add_widget_autopos (hotlist_dlg,
-                                button_new (y + hotlist_but[i].y, UX + hotlist_but[i].x,
-                                            hotlist_but[i].ret_cmd, hotlist_but[i].flags,
-                                            hotlist_but[i].text, hotlist_button_callback),
-                                hotlist_but[i].pos_flags, NULL);
+            group_add_widget_autopos (g,
+                                      button_new (y + hotlist_but[i].y, UX + hotlist_but[i].x,
+                                                  hotlist_but[i].ret_cmd, hotlist_but[i].flags,
+                                                  hotlist_but[i].text, hotlist_button_callback),
+                                      hotlist_but[i].pos_flags, NULL);
 
     widget_select (WIDGET (l_hotlist));
 }
@@ -831,6 +833,7 @@ init_movelist (struct hotlist *item)
     char *hdr;
     int lines, cols;
     int y;
+    WGroup *g;
     Widget *movelist_widget;
 
     do_refresh ();
@@ -843,32 +846,33 @@ init_movelist (struct hotlist *item)
     movelist_dlg =
         dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, hotlist_callback,
                     NULL, "[Hotlist]", hdr);
+    g = GROUP (movelist_dlg);
 
     g_free (hdr);
 
     y = UY;
     movelist_group = groupbox_new (y, UX, lines - 7, cols - 2 * UX, _("Directory label"));
     movelist_widget = WIDGET (movelist_group);
-    add_widget_autopos (movelist_dlg, movelist_widget, WPOS_KEEP_ALL, NULL);
+    group_add_widget_autopos (g, movelist_widget, WPOS_KEEP_ALL, NULL);
 
     l_movelist =
         listbox_new (y + 1, UX + 1, movelist_widget->lines - 2, movelist_widget->cols - 2, FALSE,
                      hotlist_listbox_callback);
     fill_listbox (l_movelist);
     /* insert before groupbox to view scrollbar */
-    add_widget_autopos (movelist_dlg, l_movelist, WPOS_KEEP_ALL, NULL);
+    group_add_widget_autopos (g, l_movelist, WPOS_KEEP_ALL, NULL);
 
     y += movelist_widget->lines;
 
-    add_widget_autopos (movelist_dlg, hline_new (y++, -1, -1), WPOS_KEEP_BOTTOM, NULL);
+    group_add_widget_autopos (g, hline_new (y++, -1, -1), WPOS_KEEP_BOTTOM, NULL);
 
     for (i = 0; i < hotlist_but_num; i++)
         if ((hotlist_but[i].type & LIST_MOVELIST) != 0)
-            add_widget_autopos (movelist_dlg,
-                                button_new (y + hotlist_but[i].y, UX + hotlist_but[i].x,
-                                            hotlist_but[i].ret_cmd, hotlist_but[i].flags,
-                                            hotlist_but[i].text, hotlist_button_callback),
-                                hotlist_but[i].pos_flags, NULL);
+            group_add_widget_autopos (g,
+                                      button_new (y + hotlist_but[i].y, UX + hotlist_but[i].x,
+                                                  hotlist_but[i].ret_cmd, hotlist_but[i].flags,
+                                                  hotlist_but[i].text, hotlist_button_callback),
+                                      hotlist_but[i].pos_flags, NULL);
 
     widget_select (WIDGET (l_movelist));
 }

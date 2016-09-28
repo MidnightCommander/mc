@@ -250,7 +250,7 @@ sel_skin_button (WButton * button, int action)
     }
 
     /* make list stick to all sides of dialog, effectively make it be resized with dialog */
-    add_widget_autopos (skin_dlg, skin_list, WPOS_KEEP_ALL, NULL);
+    group_add_widget_autopos (GROUP (skin_dlg), skin_list, WPOS_KEEP_ALL, NULL);
 
     result = dlg_run (skin_dlg);
     if (result == B_ENTER)
@@ -1024,6 +1024,7 @@ tree_box (const char *current_dir)
 {
     WTree *mytree;
     WDialog *dlg;
+    WGroup *g;
     Widget *wd;
     char *val = NULL;
     WButtonBar *bar;
@@ -1033,13 +1034,14 @@ tree_box (const char *current_dir)
     /* Create the components */
     dlg = dlg_create (TRUE, 0, 0, LINES - 9, COLS - 20, WPOS_CENTER, FALSE, dialog_colors,
                       tree_callback, NULL, "[Directory Tree]", _("Directory tree"));
+    g = GROUP (dlg);
     wd = WIDGET (dlg);
 
     mytree = tree_new (2, 2, wd->lines - 6, wd->cols - 5, FALSE);
-    add_widget_autopos (dlg, mytree, WPOS_KEEP_ALL, NULL);
-    add_widget_autopos (dlg, hline_new (wd->lines - 4, 1, -1), WPOS_KEEP_BOTTOM, NULL);
+    group_add_widget_autopos (g, mytree, WPOS_KEEP_ALL, NULL);
+    group_add_widget_autopos (g, hline_new (wd->lines - 4, 1, -1), WPOS_KEEP_BOTTOM, NULL);
     bar = buttonbar_new (TRUE);
-    add_widget (dlg, bar);
+    group_add_widget (g, bar);
     /* restore ButtonBar coordinates after add_widget() */
     WIDGET (bar)->x = 0;
     WIDGET (bar)->y = LINES - 1;
@@ -1232,6 +1234,7 @@ jobs_box (void)
     const size_t n_but = G_N_ELEMENTS (job_but);
 
     WDialog *jobs_dlg;
+    WGroup *g;
     int cols = 60;
     int lines = 15;
     int x = 0;
@@ -1253,19 +1256,19 @@ jobs_box (void)
 
     jobs_dlg = dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, NULL, NULL,
                            "[Background jobs]", _("Background jobs"));
+    g = GROUP (jobs_dlg);
 
     bg_list = listbox_new (2, 2, lines - 6, cols - 6, FALSE, NULL);
     jobs_fill_listbox (bg_list);
-    add_widget (jobs_dlg, bg_list);
+    group_add_widget (g, bg_list);
 
-    add_widget (jobs_dlg, hline_new (lines - 4, -1, -1));
+    group_add_widget (g, hline_new (lines - 4, -1, -1));
 
     x = (cols - x) / 2;
     for (i = 0; i < n_but; i++)
     {
-        add_widget (jobs_dlg,
-                    button_new (lines - 3, x, job_but[i].value, job_but[i].flags, job_but[i].name,
-                                job_but[i].callback));
+        group_add_widget (g, button_new (lines - 3, x, job_but[i].value, job_but[i].flags,
+                                         job_but[i].name, job_but[i].callback));
         x += job_but[i].len + 1;
     }
 

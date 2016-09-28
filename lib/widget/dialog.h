@@ -75,7 +75,6 @@ struct WDialog
     int mouse_status;           /* For the autorepeat status of the mouse */
 
     /* Internal variables */
-    unsigned long widget_id;    /* maximum id of all widgets */
     void *data;                 /* Data can be passed to dialog */
     char *event_group;          /* Name of event group for this dialog */
 
@@ -109,12 +108,6 @@ WDialog *dlg_create (gboolean modal, int y1, int x1, int lines, int cols,
                      const char *help_ctx, const char *title);
 
 void dlg_set_default_colors (void);
-
-unsigned long add_widget_autopos (WDialog * dest, void *w, widget_pos_flags_t pos_flags,
-                                  const void *before);
-unsigned long add_widget (WDialog * dest, void *w);
-unsigned long add_widget_before (WDialog * h, void *w, void *before);
-void del_widget (void *w);
 
 /* sets size of dialog, leaving positioning to automatic mehtods
    according to dialog flags */

@@ -29,6 +29,7 @@
 
 #include <config.h>
 
+#include <assert.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -101,6 +102,110 @@ group_select_next_or_prev (WGroup * g, gboolean next)
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Insert widget to group before specified widget with specified positioning.
+ * Make the inserted widget current.
+ *
+ * @param g WGroup object
+ * @param w widget to be added
+ * @pos positioning flags
+ * @param before add @w before this widget
+ *
+ * @return widget ID
+ */
+
+unsigned long
+group_add_widget_autopos (WGroup * g, void *w, widget_pos_flags_t pos_flags, const void *before)
+{
+    Widget *wg = WIDGET (g);
+    Widget *ww = WIDGET (w);
+    GList *new_current;
+
+    /* Don't accept NULL widget. This shouldn't happen */
+    assert (ww != NULL);
+
+    if ((pos_flags & WPOS_CENTER_HORZ) != 0)
+        ww->x = (wg->cols - ww->cols) / 2;
+    ww->x += wg->x;
+
+    if ((pos_flags & WPOS_CENTER_VERT) != 0)
+        ww->y = (wg->lines - ww->lines) / 2;
+    ww->y += wg->y;
+
+    ww->owner = g;
+    ww->pos_flags = pos_flags;
+    ww->id = g->widget_id++;
+
+    if (g->widgets == NULL || before == NULL)
+    {
+        g->widgets = g_list_append (g->widgets, ww);
+        new_current = g_list_last (g->widgets);
+    }
+    else
+    {
+        GList *b;
+
+        b = g_list_find (g->widgets, before);
+
+        /* don't accept widget not from group. This shouldn't happen */
+        assert (b != NULL);
+
+        b = g_list_next (b);
+        g->widgets = g_list_insert_before (g->widgets, b, ww);
+        if (b != NULL)
+            new_current = g_list_previous (b);
+        else
+            new_current = g_list_last (g->widgets);
+    }
+
+    /* widget has been added at runtime */
+    if (widget_get_state (wg, WST_ACTIVE))
+    {
+        send_message (ww, NULL, MSG_INIT, 0, NULL);
+        widget_select (ww);
+    }
+    else
+        g->current = new_current;
+
+    return ww->id;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Delete widget from group.
+ *
+ * @param w Widget object
+ */
+void
+group_del_widget (void *w)
+{
+    WGroup *g;
+    GList *d;
+
+    /* Don't accept NULL widget. This shouldn't happen */
+    assert (w != NULL);
+
+    g = WIDGET (w)->owner;
+
+    d = g_list_find (g->widgets, w);
+    if (d == g->current)
+        group_set_current_widget_next (g);
+
+    g->widgets = g_list_remove_link (g->widgets, d);
+    if (g->widgets == NULL)
+        g->current = NULL;
+
+    /* widget has been deleted at runtime */
+    if (widget_get_state (WIDGET (g), WST_ACTIVE))
+    {
+        dlg_draw (DIALOG (g));          /* FIXME */
+        group_select_current_widget (g);
+    }
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 /**

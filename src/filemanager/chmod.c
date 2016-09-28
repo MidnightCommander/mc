@@ -281,6 +281,7 @@ chmod_init (const char *fname, const struct stat *sf_stat)
 {
     gboolean single_set;
     WDialog *ch_dlg;
+    WGroup *g;
     int lines, cols;
     int i, y;
     int perm_gb_len;
@@ -309,61 +310,61 @@ chmod_init (const char *fname, const struct stat *sf_stat)
     ch_dlg =
         dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors,
                     chmod_callback, NULL, "[Chmod]", _("Chmod command"));
+    g = GROUP (ch_dlg);
 
-    add_widget (ch_dlg, groupbox_new (PY, PX, BUTTONS_PERM + 2, perm_gb_len, _("Permission")));
+    group_add_widget (g, groupbox_new (PY, PX, BUTTONS_PERM + 2, perm_gb_len, _("Permission")));
 
     for (i = 0; i < BUTTONS_PERM; i++)
     {
         check_perm[i].check = check_new (PY + i + 1, PX + 2, (ch_mode & check_perm[i].mode) != 0,
                                          check_perm[i].text);
-        add_widget (ch_dlg, check_perm[i].check);
+        group_add_widget (g, check_perm[i].check);
     }
 
     file_gb = groupbox_new (PY, PX + perm_gb_len + 1, BUTTONS_PERM + 2, file_gb_len, _("File"));
-    add_widget (ch_dlg, file_gb);
+    group_add_widget (g, file_gb);
 
     /* Set the labels */
     y = PY + 2;
     cols = PX + perm_gb_len + 3;
     c_fname = str_trunc (fname, file_gb_len - 3);
-    add_widget (ch_dlg, label_new (y, cols, c_fname));
+    group_add_widget (g, label_new (y, cols, c_fname));
     g_snprintf (buffer, sizeof (buffer), "%o", (unsigned int) ch_mode);
     statl = label_new (y + 2, cols, buffer);
-    add_widget (ch_dlg, statl);
+    group_add_widget (g, statl);
     c_fown = str_trunc (get_owner (sf_stat->st_uid), file_gb_len - 3);
-    add_widget (ch_dlg, label_new (y + 4, cols, c_fown));
+    group_add_widget (g, label_new (y + 4, cols, c_fown));
     c_fgrp = str_trunc (get_group (sf_stat->st_gid), file_gb_len - 3);
-    add_widget (ch_dlg, label_new (y + 6, cols, c_fgrp));
+    group_add_widget (g, label_new (y + 6, cols, c_fgrp));
 
     if (!single_set)
     {
         i = 0;
-        add_widget (ch_dlg, hline_new (lines - chmod_but[i].y - 1, -1, -1));
+
+        group_add_widget (g, hline_new (lines - chmod_but[i].y - 1, -1, -1));
+
         for (; i < BUTTONS - 2; i++)
         {
             y = lines - chmod_but[i].y;
-            add_widget (ch_dlg,
-                        button_new (y, WIDGET (ch_dlg)->cols / 2 - chmod_but[i].len,
-                                    chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text,
-                                    NULL));
+            group_add_widget (g, button_new (y, WIDGET (ch_dlg)->cols / 2 - chmod_but[i].len,
+                                             chmod_but[i].ret_cmd, chmod_but[i].flags,
+                                             chmod_but[i].text, NULL));
             i++;
-            add_widget (ch_dlg,
-                        button_new (y, WIDGET (ch_dlg)->cols / 2 + 1,
-                                    chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text,
-                                    NULL));
+            group_add_widget (g, button_new (y, WIDGET (ch_dlg)->cols / 2 + 1,
+                                             chmod_but[i].ret_cmd, chmod_but[i].flags,
+                                             chmod_but[i].text, NULL));
         }
     }
 
     i = BUTTONS - 2;
     y = lines - chmod_but[i].y;
-    add_widget (ch_dlg, hline_new (y - 1, -1, -1));
-    add_widget (ch_dlg,
-                button_new (y, WIDGET (ch_dlg)->cols / 2 - chmod_but[i].len, chmod_but[i].ret_cmd,
-                            chmod_but[i].flags, chmod_but[i].text, NULL));
+    group_add_widget (g, hline_new (y - 1, -1, -1));
+    group_add_widget (g, button_new (y, WIDGET (ch_dlg)->cols / 2 - chmod_but[i].len,
+                                     chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text,
+                                     NULL));
     i++;
-    add_widget (ch_dlg,
-                button_new (y, WIDGET (ch_dlg)->cols / 2 + 1, chmod_but[i].ret_cmd,
-                            chmod_but[i].flags, chmod_but[i].text, NULL));
+    group_add_widget (g, button_new (y, WIDGET (ch_dlg)->cols / 2 + 1, chmod_but[i].ret_cmd,
+                                     chmod_but[i].flags, chmod_but[i].text, NULL));
 
     /* select first checkbox */
     widget_select (WIDGET (check_perm[0].check));

@@ -3102,6 +3102,7 @@ void
 dirsize_status_init_cb (status_msg_t * sm)
 {
     dirsize_status_msg_t *dsm = (dirsize_status_msg_t *) sm;
+    WGroup *gd = GROUP (sm->dlg);
     Widget *wd = WIDGET (sm->dlg);
 
     const char *b1_name = N_("&Abort");
@@ -3119,17 +3120,17 @@ dirsize_status_init_cb (status_msg_t * sm)
 
     ui_width = MAX (COLS / 2, b_width + 6);
     dsm->dirname = label_new (2, 3, "");
-    add_widget (sm->dlg, dsm->dirname);
+    group_add_widget (gd, dsm->dirname);
     dsm->count_size = label_new (3, 3, "");
-    add_widget (sm->dlg, dsm->count_size);
-    add_widget (sm->dlg, hline_new (4, -1, -1));
+    group_add_widget (gd, dsm->count_size);
+    group_add_widget (gd, hline_new (4, -1, -1));
 
     dsm->abort_button = WIDGET (button_new (5, 3, FILE_ABORT, NORMAL_BUTTON, b1_name, NULL));
-    add_widget (sm->dlg, dsm->abort_button);
+    group_add_widget (gd, dsm->abort_button);
     if (dsm->allow_skip)
     {
         dsm->skip_button = WIDGET (button_new (5, 3, FILE_SKIP, NORMAL_BUTTON, b2_name, NULL));
-        add_widget (sm->dlg, dsm->skip_button);
+        group_add_widget (gd, dsm->skip_button);
         widget_select (dsm->skip_button);
     }
 

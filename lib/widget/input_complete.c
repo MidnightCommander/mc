@@ -1268,7 +1268,7 @@ complete_engine (WInput * in, int what_to_do)
             query_dlg = dlg_create (TRUE, y, x, query_height, query_width, WPOS_KEEP_DEFAULT, TRUE,
                                     dialog_colors, query_callback, NULL, "[Completion]", NULL);
             query_list = listbox_new (1, 1, h - 2, w - 2, FALSE, NULL);
-            add_widget (query_dlg, query_list);
+            group_add_widget (GROUP (query_dlg), query_list);
 
             for (p = in->completions + 1; *p != NULL; p++)
                 listbox_add_item (query_list, LISTBOX_APPEND_AT_END, 0, *p, NULL, FALSE);

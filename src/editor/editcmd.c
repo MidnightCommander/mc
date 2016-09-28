@@ -2268,7 +2268,7 @@ edit_close_cmd (WEdit * edit)
         if (edit->locked != 0)
             unlock_file (edit->filename_vpath);
 
-        del_widget (edit);
+        group_del_widget (edit);
         widget_destroy (WIDGET (edit));
 
         if (edit_widget_is_editor (CONST_WIDGET (g->current->data)))

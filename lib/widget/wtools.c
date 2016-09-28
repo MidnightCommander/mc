@@ -273,6 +273,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
 {
     va_list ap;
     WDialog *query_dlg;
+    WGroup *g;
     WButton *button;
     int win_len = 0;
     int i;
@@ -291,6 +292,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
         for (i = 0; i < count; i++)
         {
             char *cp = va_arg (ap, char *);
+
             win_len += str_term_width1 (cp) + 6;
             if (strchr (cp, '&') != NULL)
                 win_len--;
@@ -307,14 +309,15 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
     query_dlg =
         dlg_create (TRUE, 0, 0, lines, cols, pos_flags, FALSE, query_colors, query_default_callback,
                     NULL, "[QueryBox]", header);
+    g = GROUP (query_dlg);
 
     if (count > 0)
     {
         WButton *defbutton = NULL;
 
-        add_widget_autopos (query_dlg, label_new (2, 3, text), WPOS_KEEP_TOP | WPOS_CENTER_HORZ,
-                            NULL);
-        add_widget (query_dlg, hline_new (lines - 4, -1, -1));
+        group_add_widget_autopos (g, label_new (2, 3, text), WPOS_KEEP_TOP | WPOS_CENTER_HORZ,
+                                  NULL);
+        group_add_widget (g, hline_new (lines - 4, -1, -1));
 
         cols = (cols - win_len - 2) / 2 + 2;
         va_start (ap, count);
@@ -329,7 +332,7 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
                 xpos--;
 
             button = button_new (lines - 3, cols, B_USER + i, NORMAL_BUTTON, cur_name, NULL);
-            add_widget (query_dlg, button);
+            group_add_widget (g, button);
             cols += xpos;
             if (i == sel_pos)
                 defbutton = button;
@@ -356,9 +359,9 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
     }
     else
     {
-        add_widget_autopos (query_dlg, label_new (2, 3, text), WPOS_KEEP_TOP | WPOS_CENTER_HORZ,
-                            NULL);
-        add_widget (query_dlg, button_new (0, 0, 0, HIDDEN_BUTTON, "-", NULL));
+        group_add_widget_autopos (g, label_new (2, 3, text), WPOS_KEEP_TOP | WPOS_CENTER_HORZ,
+                                  NULL);
+        group_add_widget (g, button_new (0, 0, 0, HIDDEN_BUTTON, "-", NULL));
         last_query_dlg = query_dlg;
     }
     sel_pos = 0;
@@ -687,6 +690,7 @@ simple_status_msg_init_cb (status_msg_t * sm)
 {
     simple_status_msg_t *ssm = SIMPLE_STATUS_MSG (sm);
     Widget *wd = WIDGET (sm->dlg);
+    WGroup *wg = GROUP (sm->dlg);
 
     const char *b_name = N_("&Abort");
     int b_width;
@@ -702,10 +706,10 @@ simple_status_msg_init_cb (status_msg_t * sm)
 
     y = 2;
     ssm->label = label_new (y++, 3, "");
-    add_widget_autopos (sm->dlg, ssm->label, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, NULL);
-    add_widget (sm->dlg, hline_new (y++, -1, -1));
+    group_add_widget_autopos (wg, ssm->label, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, NULL);
+    group_add_widget (wg, hline_new (y++, -1, -1));
     b = WIDGET (button_new (y++, 3, B_CANCEL, NORMAL_BUTTON, b_name, NULL));
-    add_widget_autopos (sm->dlg, b, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, NULL);
+    group_add_widget_autopos (wg, b, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, NULL);
 
     widget_set_size (wd, wd->y, wd->x, y + 2, wd_width);
 }

@@ -192,6 +192,7 @@ chown_init (void)
 {
     int single_set;
     WDialog *ch_dlg;
+    WGroup *g;
     int lines, cols;
     int i, y;
     struct passwd *l_pass;
@@ -204,10 +205,11 @@ chown_init (void)
     ch_dlg =
         dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, chown_callback,
                     NULL, "[Chown]", _("Chown command"));
+    g = GROUP (ch_dlg);
 
-    add_widget (ch_dlg, groupbox_new (2, 3, GH, GW, _("User name")));
+    group_add_widget (g, groupbox_new (2, 3, GH, GW, _("User name")));
     l_user = listbox_new (3, 4, GH - 2, GW - 2, FALSE, NULL);
-    add_widget (ch_dlg, l_user);
+    group_add_widget (g, l_user);
     /* add field for unknown names (numbers) */
     listbox_add_item (l_user, LISTBOX_APPEND_AT_END, 0, _("<Unknown user>"), NULL, FALSE);
     /* get and put user names in the listbox */
@@ -216,9 +218,9 @@ chown_init (void)
         listbox_add_item (l_user, LISTBOX_APPEND_SORTED, 0, l_pass->pw_name, NULL, FALSE);
     endpwent ();
 
-    add_widget (ch_dlg, groupbox_new (2, 4 + GW, GH, GW, _("Group name")));
+    group_add_widget (g, groupbox_new (2, 4 + GW, GH, GW, _("Group name")));
     l_group = listbox_new (3, 5 + GW, GH - 2, GW - 2, FALSE, NULL);
-    add_widget (ch_dlg, l_group);
+    group_add_widget (g, l_group);
     /* add field for unknown names (numbers) */
     listbox_add_item (l_group, LISTBOX_APPEND_AT_END, 0, _("<Unknown group>"), NULL, FALSE);
     /* get and put group names in the listbox */
@@ -227,42 +229,40 @@ chown_init (void)
         listbox_add_item (l_group, LISTBOX_APPEND_SORTED, 0, l_grp->gr_name, NULL, FALSE);
     endgrent ();
 
-    add_widget (ch_dlg, groupbox_new (2, 5 + GW * 2, GH, GW, _("File")));
+    group_add_widget (g, groupbox_new (2, 5 + GW * 2, GH, GW, _("File")));
     /* add widgets for the file information */
     for (i = 0; i < LABELS; i++)
     {
         chown_label[i].l = label_new (chown_label[i].y, 7 + GW * 2, "");
-        add_widget (ch_dlg, chown_label[i].l);
+        group_add_widget (g, chown_label[i].l);
     }
 
     if (single_set == 0)
     {
         int x;
 
-        add_widget (ch_dlg, hline_new (lines - chown_but[0].y - 1, -1, -1));
+        group_add_widget (g, hline_new (lines - chown_but[0].y - 1, -1, -1));
 
         y = lines - chown_but[0].y;
         x = (cols - blen) / 2;
 
         for (i = 0; i < BUTTONS - 2; i++)
         {
-            add_widget (ch_dlg,
-                        button_new (y, x, chown_but[i].ret_cmd, chown_but[i].flags,
-                                    chown_but[i].text, NULL));
+            group_add_widget (g, button_new (y, x, chown_but[i].ret_cmd, chown_but[i].flags,
+                                             chown_but[i].text, NULL));
             x += chown_but[i].len + 1;
         }
     }
 
     i = BUTTONS - 2;
     y = lines - chown_but[i].y;
-    add_widget (ch_dlg, hline_new (y - 1, -1, -1));
-    add_widget (ch_dlg,
-                button_new (y, WIDGET (ch_dlg)->cols / 2 - chown_but[i].len, chown_but[i].ret_cmd,
-                            chown_but[i].flags, chown_but[i].text, NULL));
+    group_add_widget (g, hline_new (y - 1, -1, -1));
+    group_add_widget (g, button_new (y, WIDGET (ch_dlg)->cols / 2 - chown_but[i].len,
+                                     chown_but[i].ret_cmd, chown_but[i].flags, chown_but[i].text,
+                                     NULL));
     i++;
-    add_widget (ch_dlg,
-                button_new (y, WIDGET (ch_dlg)->cols / 2 + 1, chown_but[i].ret_cmd,
-                            chown_but[i].flags, chown_but[i].text, NULL));
+    group_add_widget (g, button_new (y, WIDGET (ch_dlg)->cols / 2 + 1, chown_but[i].ret_cmd,
+                                     chown_but[i].flags, chown_but[i].text, NULL));
 
     /* select first listbox */
     widget_select (WIDGET (l_user));

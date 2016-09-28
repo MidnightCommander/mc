@@ -565,6 +565,8 @@ static gboolean
 find_parameters (char **start_dir, ssize_t * start_dir_len,
                  char **ignore_dirs, char **pattern, char **content)
 {
+    WGroup *g;
+
     /* Size of the find parameters window */
 #ifdef HAVE_CHARSET
     const int lines = 18;
@@ -671,96 +673,97 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
     find_dlg =
         dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, find_parm_callback,
                     NULL, "[Find File]", _("Find File"));
+    g = GROUP (find_dlg);
 
     x1 = 3;
     x2 = cols / 2 + 1;
     cw = (cols - 7) / 2;
     y1 = 2;
 
-    add_widget (find_dlg, label_new (y1++, x1, _("Start at:")));
+    group_add_widget (g, label_new (y1++, x1, _("Start at:")));
     in_start =
         input_new (y1, x1, input_colors, cols - b0 - 7, in_start_dir, "start",
                    INPUT_COMPLETE_CD | INPUT_COMPLETE_FILENAMES);
-    add_widget (find_dlg, in_start);
+    group_add_widget (g, in_start);
 
-    add_widget (find_dlg, button_new (y1++, cols - b0 - 3, B_TREE, NORMAL_BUTTON, buts[0], NULL));
+    group_add_widget (g, button_new (y1++, cols - b0 - 3, B_TREE, NORMAL_BUTTON, buts[0], NULL));
 
     ignore_dirs_cbox =
         check_new (y1++, x1, options.ignore_dirs_enable, _("Ena&ble ignore directories:"));
-    add_widget (find_dlg, ignore_dirs_cbox);
+    group_add_widget (g, ignore_dirs_cbox);
 
     in_ignore =
         input_new (y1++, x1, input_colors, cols - 6,
                    options.ignore_dirs != NULL ? options.ignore_dirs : "", "ignoredirs",
                    INPUT_COMPLETE_CD | INPUT_COMPLETE_FILENAMES);
-    add_widget (find_dlg, in_ignore);
+    group_add_widget (g, in_ignore);
 
-    add_widget (find_dlg, hline_new (y1++, -1, -1));
+    group_add_widget (g, hline_new (y1++, -1, -1));
 
     y2 = y1;
 
     /* Start 1st column */
-    add_widget (find_dlg, label_new (y1++, x1, file_name_label));
+    group_add_widget (g, label_new (y1++, x1, file_name_label));
     in_name =
         input_new (y1++, x1, input_colors, cw, INPUT_LAST_TEXT, "name",
                    INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD);
-    add_widget (find_dlg, in_name);
+    group_add_widget (g, in_name);
 
     /* Start 2nd column */
     content_label = label_new (y2++, x2, content_content_label);
-    add_widget (find_dlg, content_label);
+    group_add_widget (g, content_label);
     in_with =
         input_new (y2++, x2, input_colors, cw, content_is_empty ? "" : INPUT_LAST_TEXT,
                    MC_HISTORY_SHARED_SEARCH, INPUT_COMPLETE_NONE);
     in_with->label = content_label;
-    add_widget (find_dlg, in_with);
+    group_add_widget (g, in_with);
 
     /* Continue 1st column */
     recursively_cbox = check_new (y1++, x1, options.find_recurs, file_recurs_label);
-    add_widget (find_dlg, recursively_cbox);
+    group_add_widget (g, recursively_cbox);
 
     file_pattern_cbox = check_new (y1++, x1, options.file_pattern, file_pattern_label);
-    add_widget (find_dlg, file_pattern_cbox);
+    group_add_widget (g, file_pattern_cbox);
 
     file_case_sens_cbox = check_new (y1++, x1, options.file_case_sens, file_case_label);
-    add_widget (find_dlg, file_case_sens_cbox);
+    group_add_widget (g, file_case_sens_cbox);
 
 #ifdef HAVE_CHARSET
     file_all_charsets_cbox =
         check_new (y1++, x1, options.file_all_charsets, file_all_charsets_label);
-    add_widget (find_dlg, file_all_charsets_cbox);
+    group_add_widget (g, file_all_charsets_cbox);
 #endif
 
     skip_hidden_cbox = check_new (y1++, x1, options.skip_hidden, file_skip_hidden_label);
-    add_widget (find_dlg, skip_hidden_cbox);
+    group_add_widget (g, skip_hidden_cbox);
 
     /* Continue 2nd column */
     content_whole_words_cbox =
         check_new (y2++, x2, options.content_whole_words, content_whole_words_label);
-    add_widget (find_dlg, content_whole_words_cbox);
+    group_add_widget (g, content_whole_words_cbox);
 
     content_regexp_cbox = check_new (y2++, x2, options.content_regexp, content_regexp_label);
-    add_widget (find_dlg, content_regexp_cbox);
+    group_add_widget (g, content_regexp_cbox);
 
     content_case_sens_cbox = check_new (y2++, x2, options.content_case_sens, content_case_label);
-    add_widget (find_dlg, content_case_sens_cbox);
+    group_add_widget (g, content_case_sens_cbox);
 
 #ifdef HAVE_CHARSET
     content_all_charsets_cbox =
         check_new (y2++, x2, options.content_all_charsets, content_all_charsets_label);
-    add_widget (find_dlg, content_all_charsets_cbox);
+    group_add_widget (g, content_all_charsets_cbox);
 #endif
 
     content_first_hit_cbox =
         check_new (y2++, x2, options.content_first_hit, content_first_hit_label);
-    add_widget (find_dlg, content_first_hit_cbox);
+    group_add_widget (g, content_first_hit_cbox);
 
     /* buttons */
     y1 = max (y1, y2);
     x1 = (cols - b12) / 2;
-    add_widget (find_dlg, hline_new (y1++, -1, -1));
-    add_widget (find_dlg, button_new (y1, x1, B_ENTER, DEFPUSH_BUTTON, buts[1], NULL));
-    add_widget (find_dlg, button_new (y1, x1 + b1 + 1, B_CANCEL, NORMAL_BUTTON, buts[2], NULL));
+    group_add_widget (g, hline_new (y1++, -1, -1));
+    group_add_widget (g, button_new (y1, x1, B_ENTER, DEFPUSH_BUTTON, buts[1], NULL));
+    group_add_widget (g, button_new (y1, x1 + b1 + 1, B_CANCEL, NORMAL_BUTTON, buts[2], NULL));
 
   find_par_start:
     widget_select (WIDGET (in_name));
@@ -1631,6 +1634,7 @@ find_do_edit_file (WButton * button, int action)
 static void
 setup_gui (void)
 {
+    WGroup *g;
     size_t i;
     int lines, cols;
     int y;
@@ -1658,23 +1662,24 @@ setup_gui (void)
     find_dlg =
         dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, find_callback, NULL,
                     "[Find File]", NULL);
+    g = GROUP (find_dlg);
 
     find_calc_button_locations (find_dlg, TRUE);
 
     y = 2;
     find_list = listbox_new (y, 2, lines - 10, cols - 4, FALSE, NULL);
-    add_widget_autopos (find_dlg, find_list, WPOS_KEEP_ALL, NULL);
+    group_add_widget_autopos (g, find_list, WPOS_KEEP_ALL, NULL);
     y += WIDGET (find_list)->lines;
 
-    add_widget_autopos (find_dlg, hline_new (y++, -1, -1), WPOS_KEEP_BOTTOM, NULL);
+    group_add_widget_autopos (g, hline_new (y++, -1, -1), WPOS_KEEP_BOTTOM, NULL);
 
     found_num_label = label_new (y++, 4, "");
-    add_widget_autopos (find_dlg, found_num_label, WPOS_KEEP_BOTTOM, NULL);
+    group_add_widget_autopos (g, found_num_label, WPOS_KEEP_BOTTOM, NULL);
 
     status_label = label_new (y++, 4, _("Searching"));
-    add_widget_autopos (find_dlg, status_label, WPOS_KEEP_BOTTOM, NULL);
+    group_add_widget_autopos (g, status_label, WPOS_KEEP_BOTTOM, NULL);
 
-    add_widget_autopos (find_dlg, hline_new (y++, -1, -1), WPOS_KEEP_BOTTOM, NULL);
+    group_add_widget_autopos (g, hline_new (y++, -1, -1), WPOS_KEEP_BOTTOM, NULL);
 
     for (i = 0; i < fbuts_num; i++)
     {
@@ -1686,7 +1691,7 @@ setup_gui (void)
                 WIDGET (button_new
                         (y, fbuts[i].x, fbuts[i].ret_cmd, fbuts[i].flags, fbuts[i].text,
                          fbuts[i].callback));
-            add_widget_autopos (find_dlg, fbuts[i].button, WPOS_KEEP_BOTTOM, NULL);
+            group_add_widget_autopos (g, fbuts[i].button, WPOS_KEEP_BOTTOM, NULL);
         }
 
         if (i == quit_button)

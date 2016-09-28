@@ -141,6 +141,8 @@ init_panelize (void)
         /* *INDENT-ON* */
     };
 
+    WGroup *g;
+
     size_t i;
     int blen;
     int panelize_cols;
@@ -169,27 +171,28 @@ init_panelize (void)
     panelize_dlg =
         dlg_create (TRUE, 0, 0, 20, panelize_cols, WPOS_CENTER, FALSE, dialog_colors,
                     panelize_callback, NULL, "[External panelize]", _("External panelize"));
+    g = GROUP (panelize_dlg);
 
     /* add listbox to the dialogs */
     y = UY;
-    add_widget (panelize_dlg, groupbox_new (y++, UX, 12, panelize_cols - UX * 2, ""));
+    group_add_widget (g, groupbox_new (y++, UX, 12, panelize_cols - UX * 2, ""));
 
     l_panelize = listbox_new (y, UX + 1, 10, panelize_cols - UX * 2 - 2, FALSE, NULL);
     for (current = panelize; current != NULL; current = current->next)
         listbox_add_item (l_panelize, LISTBOX_APPEND_AT_END, 0, current->label, current, FALSE);
     listbox_select_entry (l_panelize, listbox_search_text (l_panelize, _("Other command")));
-    add_widget (panelize_dlg, l_panelize);
+    group_add_widget (g, l_panelize);
 
     y += WIDGET (l_panelize)->lines + 1;
-    add_widget (panelize_dlg, label_new (y++, UX, _("Command")));
+    group_add_widget (g, label_new (y++, UX, _("Command")));
     pname =
         input_new (y++, UX, input_colors, panelize_cols - UX * 2, "", "in",
                    INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_HOSTNAMES | INPUT_COMPLETE_COMMANDS |
                    INPUT_COMPLETE_VARIABLES | INPUT_COMPLETE_USERNAMES | INPUT_COMPLETE_CD |
                    INPUT_COMPLETE_SHELL_ESC);
-    add_widget (panelize_dlg, pname);
+    group_add_widget (g, pname);
 
-    add_widget (panelize_dlg, hline_new (y++, -1, -1));
+    group_add_widget (g, hline_new (y++, -1, -1));
 
     x = (panelize_cols - blen) / 2;
     for (i = 0; i < G_N_ELEMENTS (panelize_but); i++)
@@ -198,7 +201,7 @@ init_panelize (void)
 
         b = button_new (y, x,
                         panelize_but[i].ret_cmd, panelize_but[i].flags, panelize_but[i].text, NULL);
-        add_widget (panelize_dlg, b);
+        group_add_widget (g, b);
 
         x += button_get_len (b) + 1;
     }

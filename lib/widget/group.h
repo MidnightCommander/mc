@@ -30,12 +30,17 @@ struct WGroup
     GList *widgets;             /* widgets list */
     GList *current;             /* Currently active widget */
 
+    unsigned long widget_id;    /* maximum id of all widgets */
     gboolean winch_pending;     /* SIGWINCH signal has been got. Resize group after rise */
 };
 
 /*** global variables defined in .c file *********************************************************/
 
 /*** declarations of public functions ************************************************************/
+
+unsigned long group_add_widget_autopos (WGroup * g, void *w, widget_pos_flags_t pos_flags,
+                                        const void *before);
+void group_del_widget (void *w);
 
 void group_set_current_widget_next (WGroup * g);
 void group_set_current_widget_prev (WGroup * g);
@@ -53,9 +58,43 @@ void group_select_widget_by_id (const WGroup * g, unsigned long id);
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Select current widget in the group.
+ * Add widget to group before current widget.
  *
  * @param g WGroup object
+ * @param w widget to be added
+ *
+ * @return widget ID
+ */
+
+static inline unsigned long
+group_add_widget (WGroup * g, void *w)
+{
+    return group_add_widget_autopos (g, w, WPOS_KEEP_DEFAULT,
+                                     g->current != NULL ? g->current->data : NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Add widget to group before specified widget.
+ *
+ * @param g WGroup object
+ * @param w widget to be added
+ * @param before add @w before this widget
+ *
+ * @return widget ID
+ */
+
+static inline unsigned long
+group_add_widget_before (WGroup * g, void *w, void *before)
+{
+    return group_add_widget_autopos (g, w, WPOS_KEEP_DEFAULT, before);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Select current widget in the Dialog.
+ *
+ * @param h WDialog object
  */
 
 static inline void
