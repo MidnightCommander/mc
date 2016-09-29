@@ -136,7 +136,7 @@ configure_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
             Widget *ww;
 
             /* input line */
-            ww = dlg_find_by_id (DIALOG (w), configure_time_out_id);
+            ww = widget_find_by_id (w, configure_time_out_id);
             widget_disable (ww, not_single);
 
             return MSG_HANDLED;
@@ -274,8 +274,6 @@ sel_skin_button (WButton * button, int action)
 static cb_ret_t
 panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WDialog *h = DIALOG (w);
-
     switch (msg)
     {
     case MSG_NOTIFY:
@@ -284,10 +282,10 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
             WCheck *ch;
             WInput *in1, *in2, *in3;
 
-            in1 = INPUT (dlg_find_by_id (h, panel_user_format_id));
-            in2 = INPUT (dlg_find_by_id (h, panel_brief_cols_id));
-            ch = CHECK (dlg_find_by_id (h, mini_user_status_id));
-            in3 = INPUT (dlg_find_by_id (h, mini_user_format_id));
+            in1 = INPUT (widget_find_by_id (w, panel_user_format_id));
+            in2 = INPUT (widget_find_by_id (w, panel_brief_cols_id));
+            ch = CHECK (widget_find_by_id (w, mini_user_status_id));
+            in3 = INPUT (widget_find_by_id (w, mini_user_format_id));
 
             if (!ch->state)
                 input_assign_text (in3, status_format[RADIO (sender)->sel]);
@@ -303,7 +301,7 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
         {
             WInput *in;
 
-            in = INPUT (dlg_find_by_id (h, mini_user_format_id));
+            in = INPUT (widget_find_by_id (w, mini_user_format_id));
 
             if (CHECK (sender)->state)
             {
@@ -314,7 +312,7 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
             {
                 WRadio *r;
 
-                r = RADIO (dlg_find_by_id (h, panel_list_formats_id));
+                r = RADIO (widget_find_by_id (w, panel_list_formats_id));
                 widget_disable (WIDGET (in), TRUE);
                 input_assign_text (in, status_format[r->sel]);
             }
@@ -407,7 +405,7 @@ confvfs_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
             Widget *wi;
 
             /* input */
-            wi = dlg_find_by_id (DIALOG (w), ftpfs_proxy_host_id);
+            wi = widget_find_by_id (w, ftpfs_proxy_host_id);
             widget_disable (wi, not_use);
             return MSG_HANDLED;
         }

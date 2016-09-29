@@ -1272,7 +1272,7 @@ find_editor (const WDialog * h)
 
     if (edit_widget_is_editor (CONST_WIDGET (g->current->data)))
         return (WEdit *) g->current->data;
-    return (WEdit *) find_widget_type (h, edit_callback);
+    return (WEdit *) widget_find_by_type (CONST_WIDGET (h), edit_callback);
 }
 
 /* --------------------------------------------------------------------------------------------- */

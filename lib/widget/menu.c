@@ -257,7 +257,7 @@ menubar_draw (const WMenuBar * menubar)
 static void
 menubar_remove (WMenuBar * menubar)
 {
-    WGroup *g;
+    Widget *g;
 
     if (!menubar->is_dropped)
         return;
@@ -266,15 +266,15 @@ menubar_remove (WMenuBar * menubar)
        of overlapped widgets. This is useful in multi-window editor.
        In general, menubar should be a special object, not an ordinary widget
        in the current dialog. */
-    g = WIDGET (menubar)->owner;
-    g->current = g_list_find (g->widgets, dlg_find_by_id (DIALOG (g), menubar->previous_widget));
+    g = WIDGET (WIDGET (menubar)->owner);
+    GROUP (g)->current = widget_find (g, widget_find_by_id (g, menubar->previous_widget));
 
     menubar->is_dropped = FALSE;
     do_refresh ();
     menubar->is_dropped = TRUE;
 
     /* restore current widget */
-    g->current = g_list_find (g->widgets, menubar);
+    GROUP (g)->current = widget_find (g, WIDGET (menubar));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1039,7 +1039,7 @@ menubar_arrange (WMenuBar * menubar)
 WMenuBar *
 find_menubar (const WDialog * h)
 {
-    return MENUBAR (find_widget_type (h, menubar_callback));
+    return MENUBAR (widget_find_by_type (CONST_WIDGET (h), menubar_callback));
 }
 
 /* --------------------------------------------------------------------------------------------- */

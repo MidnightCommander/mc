@@ -1332,9 +1332,9 @@ sync_tree (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 WTree *
-find_tree (WDialog * h)
+find_tree (const WDialog * h)
 {
-    return (WTree *) find_widget_type (h, tree_callback);
+    return (WTree *) widget_find_by_type (CONST_WIDGET (h), tree_callback);
 }
 
 /* --------------------------------------------------------------------------------------------- */

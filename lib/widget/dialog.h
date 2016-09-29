@@ -137,11 +137,6 @@ void dlg_default_repaint (WDialog * h);
 void dlg_erase (WDialog * h);
 void dlg_stop (WDialog * h);
 
-/* Widget selection */
-Widget *find_widget_type (const WDialog * h, widget_cb_fn callback);
-GList *dlg_find (const WDialog * h, const Widget * w);
-Widget *dlg_find_by_id (const WDialog * h, unsigned long id);
-
 /* Redraw all dialogs */
 void do_refresh (void);
 

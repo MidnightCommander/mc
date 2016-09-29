@@ -146,6 +146,10 @@ struct Widget
         mouse_msg_t last_msg;   /* The previous event type processed. */
         int last_buttons_down;
     } mouse;
+
+    GList *(*find) (const Widget * w, const Widget * what);
+    Widget *(*find_by_type) (const Widget * w, widget_cb_fn cb);
+    Widget *(*find_by_id) (const Widget * w, unsigned long id);
 };
 
 /* structure for label (caption) with hotkey, if original text does not contain
@@ -197,6 +201,10 @@ void widget_replace (Widget * old, Widget * new);
 void widget_select (Widget * w);
 void widget_set_bottom (Widget * w);
 
+GList *widget_default_find (const Widget * w, const Widget * what);
+Widget *widget_default_find_by_type (const Widget * w, widget_cb_fn cb);
+Widget *widget_default_find_by_id (const Widget * w, unsigned long id);
+
 /* get mouse pointer location within widget */
 Gpm_Event mouse_get_local (const Gpm_Event * global, const Widget * w);
 gboolean mouse_global_in_widget (const Gpm_Event * event, const Widget * w);
@@ -247,6 +255,56 @@ static inline gboolean
 widget_get_state (const Widget * w, widget_state_t state)
 {
     return ((w->state & state) == state);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Find widget.
+ *
+ * @param w widget
+ * @param what widget to find
+ *
+ * @return result of @w->find()
+ */
+
+static inline GList *
+widget_find (const Widget * w, const Widget * what)
+{
+    return w->find (w, what);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Find widget by widget type using widget callback.
+ *
+ * @param w widget
+ * @param cb widget callback
+ *
+ * @return result of @w->find_by_type()
+ */
+
+static inline Widget *
+widget_find_by_type (const Widget * w, widget_cb_fn cb)
+{
+    return w->find_by_type (w, cb);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Find widget by widget ID.
+ *
+ * @param w widget
+ * @param id widget ID
+ *
+ * @return result of @w->find_by_id()
+ */
+
+static inline Widget *
+widget_find_by_id (const Widget * w, unsigned long id)
+{
+    return w->find_by_id (w, id);
 }
 
 /* --------------------------------------------------------------------------------------------- */

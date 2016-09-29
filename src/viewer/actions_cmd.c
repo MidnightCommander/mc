@@ -784,9 +784,9 @@ mcview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
         return mcview_execute_cmd (NULL, parm);
 
     case MSG_VALIDATE:
-        view = (WView *) find_widget_type (h, mcview_callback);
+        view = (WView *) widget_find_by_type (w, mcview_callback);
         /* don't stop the dialog before final decision */
-        widget_set_state (WIDGET (h), WST_ACTIVE, TRUE);
+        widget_set_state (w, WST_ACTIVE, TRUE);
         if (mcview_ok_to_quit (view))
             dlg_stop (h);
         else

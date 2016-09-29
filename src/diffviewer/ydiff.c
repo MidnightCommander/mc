@@ -3394,7 +3394,7 @@ dview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, 
         return dview_execute_cmd (NULL, parm);
 
     case MSG_VALIDATE:
-        dview = (WDiff *) find_widget_type (h, dview_callback);
+        dview = (WDiff *) widget_find_by_type (CONST_WIDGET (h), dview_callback);
         /* don't stop the dialog before final decision */
         widget_set_state (w, WST_ACTIVE, TRUE);
         if (dview_ok_to_exit (dview))
@@ -3417,7 +3417,7 @@ dview_get_title (const WDialog * h, size_t len)
     size_t len1;
     GString *title;
 
-    dview = (const WDiff *) find_widget_type (h, dview_callback);
+    dview = (const WDiff *) widget_find_by_type (CONST_WIDGET (h), dview_callback);
     len1 = (len - str_term_width1 (_("Diff:")) - strlen (modified) - 3) / 2;
 
     title = g_string_sized_new (len);

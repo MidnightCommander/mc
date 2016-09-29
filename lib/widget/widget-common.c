@@ -108,7 +108,7 @@ widget_focus (Widget * w)
         if (g->current == NULL || !widget_get_state (WIDGET (g->current->data), WST_FOCUSED))
         {
             widget_do_focus (w, TRUE);
-            g->current = dlg_find (DIALOG (g), w);
+            g->current = widget_find (WIDGET (g), w);
         }
     }
     else if (!widget_get_state (w, WST_FOCUSED))
@@ -290,6 +290,10 @@ widget_init (Widget * w, int y, int x, int lines, int cols,
 
     w->options = WOP_DEFAULT;
     w->state = WST_DEFAULT;
+
+    w->find = widget_default_find;
+    w->find_by_type = widget_default_find_by_type;
+    w->find_by_id = widget_default_find_by_id;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -599,19 +603,19 @@ widget_replace (Widget * old_w, Widget * new_w)
 void
 widget_select (Widget * w)
 {
-    WDialog *h;
+    WGroup *g;
 
     if (!widget_get_options (w, WOP_SELECTABLE))
         return;
 
-    h = DIALOG (w->owner);
-    if (h != NULL)
+    g = GROUP (w->owner);
+    if (g != NULL)
     {
         if (widget_get_options (w, WOP_TOP_SELECT))
         {
             GList *l;
 
-            l = dlg_find (h, w);
+            l = widget_find (WIDGET (g), w);
             widget_reorder (l, TRUE);
         }
 
@@ -627,7 +631,7 @@ widget_select (Widget * w)
 void
 widget_set_bottom (Widget * w)
 {
-    widget_reorder (dlg_find (DIALOG (w->owner), w), FALSE);
+    widget_reorder (widget_find (WIDGET (w->owner), w), FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -644,6 +648,56 @@ widget_overlapped (const Widget * a, const Widget * b)
 {
     return !((b->x >= a->x + a->cols)
              || (a->x >= b->x + b->cols) || (b->y >= a->y + a->lines) || (a->y >= b->y + b->lines));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Default callback function to find widget.
+ *
+ * @param w widget
+ * @param what widget to find
+ *
+ * @return holder of @what if widget is @what, NULL otherwise
+ */
+
+GList *
+widget_default_find (const Widget * w, const Widget * what)
+{
+    return (w != what
+            || w->owner == NULL) ? NULL : g_list_find (CONST_GROUP (w->owner)->widgets, what);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Default callback function to find widget by widget type using widget callback.
+ *
+ * @param w widget
+ * @param cb widget callback
+ *
+ * @return @w if widget callback is @cb, NULL otherwise
+ */
+
+Widget *
+widget_default_find_by_type (const Widget * w, widget_cb_fn cb)
+{
+    return (w->callback == cb ? WIDGET (w) : NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Default callback function to find widget by widget ID.
+ *
+ * @param w widget
+ * @param id widget ID
+ *
+ * @return @w if widget id is equal to @id, NULL otherwise
+ */
+
+Widget *
+widget_default_find_by_id (const Widget * w, unsigned long id)
+{
+    return (w->id == id ? WIDGET (w) : NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

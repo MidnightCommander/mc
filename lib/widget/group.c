@@ -149,6 +149,102 @@ group_send_broadcast_msg_custom (WGroup * g, widget_msg_t msg, gboolean reverse,
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Default group callback function to find widget in the group.
+ *
+ * @param w WGroup object
+ * @param what widget to find
+ *
+ * @return holder of @what if found, NULL otherwise
+ */
+
+static GList *
+group_default_find (const Widget * w, const Widget * what)
+{
+    GList *w0;
+
+    w0 = widget_default_find (w, what);
+    if (w0 == NULL)
+    {
+        GList *iter;
+
+        for (iter = GROUP (w)->widgets; iter != NULL; iter = g_list_next (iter))
+        {
+            w0 = widget_find (WIDGET (iter->data), what);
+            if (w0 != NULL)
+                break;
+        }
+    }
+
+    return w0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Default group callback function to find widget in the group using widget callback.
+ *
+ * @param w WGroup object
+ * @param cb widget callback
+ *
+ * @return widget object if found, NULL otherwise
+ */
+
+static Widget *
+group_default_find_by_type (const Widget * w, widget_cb_fn cb)
+{
+    Widget *w0;
+
+    w0 = widget_default_find_by_type (w, cb);
+    if (w0 == NULL)
+    {
+        GList *iter;
+
+        for (iter = GROUP (w)->widgets; iter != NULL; iter = g_list_next (iter))
+        {
+            w0 = widget_find_by_type (WIDGET (iter->data), cb);
+            if (w0 != NULL)
+                break;
+        }
+    }
+
+    return w0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Default group callback function to find widget by widget ID in the group.
+ *
+ * @param w WGroup object
+ * @param id widget ID
+ *
+ * @return widget object if widget with specified id is found in group, NULL otherwise
+ */
+
+static Widget *
+group_default_find_by_id (const Widget * w, unsigned long id)
+{
+    Widget *w0;
+
+    w0 = widget_default_find_by_id (w, id);
+    if (w0 == NULL)
+    {
+        GList *iter;
+
+        for (iter = GROUP (w)->widgets; iter != NULL; iter = g_list_next (iter))
+        {
+            w0 = widget_find_by_id (WIDGET (iter->data), id);
+            if (w0 != NULL)
+                break;
+        }
+    }
+
+    return w0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -172,6 +268,10 @@ group_init (WGroup * g, int y1, int x1, int lines, int cols, widget_cb_fn callba
 
     widget_init (w, y1, x1, lines, cols, callback != NULL ? callback : group_default_callback,
                  mouse_callback);
+
+    w->find = group_default_find;
+    w->find_by_type = group_default_find_by_type;
+    w->find_by_id = group_default_find_by_id;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -398,7 +498,7 @@ group_select_widget_by_id (const WGroup * g, unsigned long id)
 {
     Widget *w;
 
-    w = dlg_find_by_id (DIALOG (g), id);
+    w = widget_find_by_id (CONST_WIDGET (g), id);
     if (w != NULL)
         widget_select (w);
 }

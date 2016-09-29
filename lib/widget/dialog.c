@@ -115,17 +115,6 @@ dlg_read_history (WDialog * h)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-dlg_find_widget_callback (const void *a, const void *b)
-{
-    const Widget *w = CONST_WIDGET (a);
-    const widget_cb_fn f = b;
-
-    return (w->callback == f) ? 0 : 1;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static void
 refresh_cmd (void)
 {
@@ -468,16 +457,6 @@ frontend_dlg_run (WDialog * h)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-dlg_find_widget_by_id (gconstpointer a, gconstpointer b)
-{
-    const Widget *w = CONST_WIDGET (a);
-    unsigned long id = GPOINTER_TO_UINT (b);
-
-    return w->id == id ? 0 : 1;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 static void
 dlg_widget_set_position (gpointer data, gpointer user_data)
 {
@@ -740,42 +719,6 @@ do_refresh (void)
         for (; d != NULL; d = g_list_previous (d))
             dlg_draw (DIALOG (d->data));
     }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** Find the widget with the given callback in the dialog h */
-
-Widget *
-find_widget_type (const WDialog * h, widget_cb_fn callback)
-{
-    GList *w;
-
-    w = g_list_find_custom (CONST_GROUP (h)->widgets, (gconstpointer) callback,
-                            dlg_find_widget_callback);
-
-    return (w == NULL) ? NULL : WIDGET (w->data);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-GList *
-dlg_find (const WDialog * h, const Widget * w)
-{
-    const WGroup *g = CONST_GROUP (h);
-
-    return (w->owner == NULL || w->owner != g) ? NULL : g_list_find (g->widgets, w);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** Find the widget with the given id */
-
-Widget *
-dlg_find_by_id (const WDialog * h, unsigned long id)
-{
-    GList *w;
-
-    w = g_list_find_custom (CONST_GROUP (h)->widgets, GUINT_TO_POINTER (id), dlg_find_widget_by_id);
-    return w != NULL ? WIDGET (w->data) : NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */

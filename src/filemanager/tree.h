@@ -29,7 +29,7 @@ const vfs_path_t *tree_selected_name (const WTree * tree);
 
 void sync_tree (const vfs_path_t * vpath);
 
-WTree *find_tree (WDialog * h);
+WTree *find_tree (const WDialog * h);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__TREE_H */

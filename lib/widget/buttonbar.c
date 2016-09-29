@@ -284,5 +284,5 @@ buttonbar_set_label (WButtonBar * bb, int idx, const char *text, const global_ke
 WButtonBar *
 find_buttonbar (const WDialog * h)
 {
-    return BUTTONBAR (find_widget_type (h, buttonbar_callback));
+    return BUTTONBAR (widget_find_by_type (CONST_WIDGET (h), buttonbar_callback));
 }
