@@ -503,6 +503,8 @@ widget_erase (Widget * w)
 /* --------------------------------------------------------------------------------------------- */
 /**
   * Check whether widget is active or not.
+  * Widget is active if it's current in the its owner and each owner in the chain is current too.
+  *
   * @param w the widget
   *
   * @return TRUE if the widget is active, FALSE otherwise
@@ -511,7 +513,22 @@ widget_erase (Widget * w)
 gboolean
 widget_is_active (const void *w)
 {
-    return (w == CONST_WIDGET (w)->owner->current->data);
+    const WGroup *owner;
+
+    /* Is group top? */
+    if (w == top_dlg->data)
+        return TRUE;
+
+    owner = CONST_WIDGET (w)->owner;
+
+    /* Is widget in any group? */
+    if (owner == NULL)
+        return FALSE;
+
+    if (w != owner->current->data)
+        return FALSE;
+
+    return widget_is_active (owner);
 }
 
 /* --------------------------------------------------------------------------------------------- */
