@@ -442,7 +442,7 @@ frontend_dlg_run (WDialog * h)
                 break;
         }
 
-        update_cursor (h);
+        widget_update_cursor (wh);
 
         /* Clear interrupt flag */
         tty_got_interrupt ();
@@ -722,37 +722,6 @@ do_refresh (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-void
-update_cursor (WDialog * h)
-{
-    WGroup *g = GROUP (h);
-    GList *p = g->current;
-
-    if (p != NULL && widget_get_state (WIDGET (h), WST_ACTIVE))
-    {
-        Widget *w = WIDGET (p->data);
-
-        if (!widget_get_state (w, WST_DISABLED) && widget_get_options (w, WOP_WANT_CURSOR))
-            send_message (w, NULL, MSG_CURSOR, 0, NULL);
-        else
-            do
-            {
-                p = group_get_widget_next_of (p);
-                if (p == g->current)
-                    break;
-
-                w = WIDGET (p->data);
-
-                if (!widget_get_state (w, WST_DISABLED) && widget_get_options (w, WOP_WANT_CURSOR)
-                    && send_message (w, NULL, MSG_CURSOR, 0, NULL) == MSG_HANDLED)
-                    break;
-            }
-            while (TRUE);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /**
  * Redraw the widgets in reverse order, leaving the current widget
  * as the last one
@@ -774,7 +743,7 @@ dlg_draw (WDialog * h)
 
     send_message (h, NULL, MSG_DRAW, 0, NULL);
     group_send_broadcast_msg (g, MSG_DRAW);
-    update_cursor (h);
+    widget_update_cursor (WIDGET (h));
 }
 
 /* --------------------------------------------------------------------------------------------- */

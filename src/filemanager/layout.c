@@ -1469,7 +1469,7 @@ do_load_prompt (void)
          * tty_get_event channels, the prompt updating does not take place
          * automatically: force a cursor update and a screen refresh
          */
-        update_cursor (midnight_dlg);
+        widget_update_cursor (WIDGET (midnight_dlg));
         mc_refresh ();
         ret = TRUE;
     }

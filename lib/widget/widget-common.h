@@ -308,5 +308,20 @@ widget_find_by_id (const Widget * w, unsigned long id)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Update cursor position in the specified widget.
+ *
+ * @param w widget
+ *
+ * @return TRUE if cursor was updated successfully, FALSE otherwise
+ */
+
+static inline gboolean
+widget_update_cursor (Widget * w)
+{
+    return (send_message (w, NULL, MSG_CURSOR, 0, NULL) == MSG_HANDLED);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 #endif /* MC__WIDGET_INTERNAL_H */

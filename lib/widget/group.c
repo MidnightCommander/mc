@@ -245,6 +245,36 @@ group_default_find_by_id (const Widget * w, unsigned long id)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Update cursor position in the active widget of the group.
+ *
+ * @param g WGroup object
+ *
+ * @return MSG_HANDLED if cursor was updated in the specified group, MSG_NOT_HANDLED otherwise
+ */
+
+static cb_ret_t
+group_update_cursor (WGroup * g)
+{
+    GList *p = g->current;
+
+    if (p != NULL && widget_get_state (WIDGET (g), WST_ACTIVE))
+        do
+        {
+            Widget *w = WIDGET (p->data);
+
+            if (widget_get_options (w, WOP_WANT_CURSOR) && !widget_get_state (w, WST_DISABLED)
+                && widget_update_cursor (WIDGET (p->data)))
+                return MSG_HANDLED;
+
+            p = group_get_widget_next_of (p);
+        }
+        while (p != g->current);
+
+    return MSG_NOT_HANDLED;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -286,6 +316,9 @@ group_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
     case MSG_INIT:
         g_list_foreach (g->widgets, group_widget_init, NULL);
         return MSG_HANDLED;
+
+    case MSG_CURSOR:
+        return group_update_cursor (g);
 
     case MSG_DESTROY:
         g_list_foreach (g->widgets, (GFunc) widget_destroy, NULL);
