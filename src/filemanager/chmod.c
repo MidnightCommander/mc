@@ -215,6 +215,7 @@ chmod_refresh (WDialog * h)
 static cb_ret_t
 chmod_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
+    WGroup *g = GROUP (w);
     WDialog *h = DIALOG (w);
 
     switch (msg)
@@ -254,7 +255,7 @@ chmod_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             int i;
             unsigned long id;
 
-            id = dlg_get_current_widget_id (h);
+            id = group_get_current_widget_id (g);
             for (i = 0; i < BUTTONS_PERM; i++)
                 if (id == WIDGET (check_perm[i].check)->id)
                     break;
@@ -263,7 +264,7 @@ chmod_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             {
                 chmod_toggle_select (h, i);
                 if (parm == KEY_IC)
-                    group_select_next_widget (GROUP (h));
+                    group_select_next_widget (g);
                 return MSG_HANDLED;
             }
         }

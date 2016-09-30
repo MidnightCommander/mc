@@ -1065,7 +1065,7 @@ menubar_activate (WMenuBar * menubar, gboolean dropped, int which)
         if (which >= 0)
             menubar->selected = (guint) which;
 
-        menubar->previous_widget = dlg_get_current_widget_id (DIALOG (w->owner));
+        menubar->previous_widget = group_get_current_widget_id (w->owner);
 
         /* Bring it to the top so it receives all mouse events before any other widget.
          * See also comment in menubar_finish(). */
