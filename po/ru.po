@@ -17,14 +17,16 @@
 # Mr.GreyWolf, 2016
 # NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
 # Sergey Panov <sipan@mit.edu>, 1999
+# Simple88, 2016
+# Simple88, 2016
 # Slava Zanko <slavazanko@gmail.com>, 2009,2011
 # Valek Filippov <frob@df.ru>, 2000
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-03-04 09:25+0300\n"
-"PO-Revision-Date: 2016-05-07 15:50+0000\n"
+"POT-Creation-Date: 2016-05-07 18:23+0300\n"
+"PO-Revision-Date: 2016-06-28 07:48+0000\n"
 "Last-Translator: aborodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -1837,6 +1839,9 @@ msgstr "Навигация в стиле l&ynx"
 
 msgid "Pa&ge scrolling"
 msgstr "Страничное &листание"
+
+msgid "Center &scrolling"
+msgstr "&Центрированное листание"
 
 msgid "&Mouse page scrolling"
 msgstr "Страничное листание мышь&ю"

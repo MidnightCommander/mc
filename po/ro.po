@@ -5,6 +5,7 @@
 # Translators:
 # Arthur Titeica <arthur@psw.ro>, 2013
 # Arthur Țițeică <arthur.titeica@gmail.com>, 2013-2014
+# Mihai Draghicioiu <mihai.draghicioiu@gmail.com>, 2016
 # Nicolae Crefelean, 2014
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Sorin Sfirlogea, 2016
@@ -13,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-03-04 09:25+0300\n"
-"PO-Revision-Date: 2016-03-06 21:29+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2016-05-07 18:23+0300\n"
+"PO-Revision-Date: 2016-06-16 08:26+0000\n"
+"Last-Translator: Mihai Draghicioiu <mihai.draghicioiu@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -979,7 +980,7 @@ msgid "Block is large, you may not be able to undo this action"
 msgstr "Blocul este mare, este posibil sa nu poți anula această acțiune"
 
 msgid "Collect completions"
-msgstr ""
+msgstr "Colecționează completări"
 
 msgid "&Quick save"
 msgstr "Salvare &rapidă"
@@ -1827,6 +1828,9 @@ msgstr "Navigare în stil L&ynx"
 
 msgid "Pa&ge scrolling"
 msgstr "Derulare pa&gină"
+
+msgid "Center &scrolling"
+msgstr ""
 
 msgid "&Mouse page scrolling"
 msgstr "Derulare pagină cu ajutorul &mausului"

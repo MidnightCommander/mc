@@ -4,8 +4,10 @@
 # 
 # Translators:
 # Atha Translate, 2016
+# cheese <cheese@nosuchhost.net>, 2016
 # Ettore Atalan <atalanttore@googlemail.com>, 2015
 # Fabian Affolter <fab@fedoraproject.org>, 2012-2013
+# Karsten <waldstadt@web.de>, 2016
 # Larson März <larson@protonmail.ch>, 2016
 # Ronny Hößrich, 2015
 # Slava Zanko <slavazanko@gmail.com>, 2011
@@ -15,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-03-04 09:25+0300\n"
-"PO-Revision-Date: 2016-03-06 21:29+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2016-05-07 18:23+0300\n"
+"PO-Revision-Date: 2016-06-24 06:14+0000\n"
+"Last-Translator: Karsten <waldstadt@web.de>\n"
 "Language-Team: German (http://www.transifex.com/mc/mc/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -563,7 +565,7 @@ msgstr "Fehler"
 
 #, c-format
 msgid "%s (%d)"
-msgstr ""
+msgstr "%s (%d)"
 
 msgid "&Abort"
 msgstr "&Abbrechen"
@@ -1830,6 +1832,9 @@ msgstr "L&ynx-artige Bewegungen"
 msgid "Pa&ge scrolling"
 msgstr "Seitenweise scro&llen"
 
+msgid "Center &scrolling"
+msgstr "&Seitenweise blättern"
+
 msgid "&Mouse page scrolling"
 msgstr "Seitenweise mit der Maus scrolle&n"
 
@@ -2482,7 +2487,7 @@ msgstr "Kann keinen Speicher für Zieldatei \"%s\" reservieren\n%s"
 msgid ""
 "Cannot read source file \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Kann Quelldatei \"%s\" nicht lesen\n%s"
 
 #, c-format
 msgid ""
@@ -3927,7 +3932,7 @@ msgid "sftp: Password is empty."
 msgstr "sftp: Passwort ist leer."
 
 msgid "sftp: Failure establishing SSH session"
-msgstr ""
+msgstr "sftp: Fehler beim Herstellen der SSH Sitzung"
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Kein Dateihandler vorhanden zum Lesen der Datei"

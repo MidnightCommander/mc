@@ -3,17 +3,18 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Hüsamettin Ertürk <hsmertk@gmail.com>, 2016
 # Muhammet Kara <muhammetk@gmail.com>, 2014
 # Muhammet Kara <muhammetk@gmail.com>, 2014
 # Slava Zanko <slavazanko@gmail.com>, 2011
-# yusuf aydemir <yusuf.aydemir@pisilinux.org>, 2015-2016
+# yusuf <yusuf.aydemir@pisilinux.org>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-03-04 09:25+0300\n"
-"PO-Revision-Date: 2016-03-06 21:29+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2016-05-07 18:23+0300\n"
+"PO-Revision-Date: 2016-06-06 16:42+0000\n"
+"Last-Translator: yusuf <yusuf.aydemir@pisilinux.org>\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -559,7 +560,7 @@ msgstr "Hata"
 
 #, c-format
 msgid "%s (%d)"
-msgstr ""
+msgstr "%s (%d)"
 
 msgid "&Abort"
 msgstr "İ&ptal"
@@ -1826,6 +1827,9 @@ msgstr "L&ynx benzeri hareket"
 msgid "Pa&ge scrolling"
 msgstr "Say&fa kaydırma"
 
+msgid "Center &scrolling"
+msgstr ""
+
 msgid "&Mouse page scrolling"
 msgstr "&Fare dosya kaydırma"
 
@@ -2478,7 +2482,7 @@ msgstr "\"%s\"  hedef dosyası için alan önceden ayrılamadı\n%s"
 msgid ""
 "Cannot read source file \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "\"%s\" kaynak dosya okunamadı\n%s"
 
 #, c-format
 msgid ""
@@ -3923,7 +3927,7 @@ msgid "sftp: Password is empty."
 msgstr "sftp: Parola boş."
 
 msgid "sftp: Failure establishing SSH session"
-msgstr ""
+msgstr "stp: SSH oturumu kurarken hata oluştu"
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Dosya okumak için hiç dosya işleyici verisi mevcut değil "

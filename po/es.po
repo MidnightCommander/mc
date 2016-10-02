@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-03-04 09:25+0300\n"
-"PO-Revision-Date: 2016-03-16 21:48+0000\n"
+"POT-Creation-Date: 2016-05-07 18:23+0300\n"
+"PO-Revision-Date: 2016-05-08 10:38+0000\n"
 "Last-Translator: David Martin <dhmartina@yahoo.es>\n"
 "Language-Team: Spanish (http://www.transifex.com/mc/mc/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -1176,7 +1176,7 @@ msgid ""
 msgstr "El texto actual ha sido modificado y no ha sido guardado\nContinuar descartará estos cambios."
 
 msgid "In se&lection"
-msgstr "sólo en se&Lección"
+msgstr "solo en se&Lección"
 
 msgid "&Find all"
 msgstr "buscar &Todos"
@@ -1706,7 +1706,7 @@ msgid "&Never"
 msgstr "&Nunca"
 
 msgid "On dum&b terminals"
-msgstr "sólo en terminales &Tontas"
+msgstr "solo en terminales &Tontas"
 
 msgid "Alwa&ys"
 msgstr "&Siempre"
@@ -1811,7 +1811,7 @@ msgid "Ma&rk moves down"
 msgstr "marcar y a&Vanzar"
 
 msgid "Re&verse files only"
-msgstr "&Invertir sólo archivos"
+msgstr "&Invertir solo archivos"
 
 msgid "Simple s&wap"
 msgstr "intercambio de paneles &Simple"
@@ -1827,6 +1827,9 @@ msgstr "navegación al estilo Lyn&X"
 
 msgid "Pa&ge scrolling"
 msgstr "avance de pá&Gina"
+
+msgid "Center &scrolling"
+msgstr "avance en línea c&Entral"
 
 msgid "&Mouse page scrolling"
 msgstr "avance de página con &Ratón"
@@ -2173,7 +2176,7 @@ msgid "&Quick"
 msgstr "&Rápido"
 
 msgid "&Size only"
-msgstr "sólo &Tamaño"
+msgstr "solo &Tamaño"
 
 msgid "&Thorough"
 msgstr "&Completo"
@@ -3327,7 +3330,7 @@ msgid "Unknown tag on display format:"
 msgstr "Campo desconocido en el formato de pantalla:"
 
 msgid "&Files only"
-msgstr "sólo &Archivos"
+msgstr "solo &Archivos"
 
 msgid "&Case sensitive"
 msgstr "distinguir &May/min"

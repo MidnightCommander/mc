@@ -4,16 +4,16 @@
 # 
 # Translators:
 # Mátyás Demeter <mathias.demeter@gmail.com>, 2014
-# Rezső Páder <rezso@rezso.net>, 2012-2015
+# Rezső Páder <rezso@rezso.net>, 2012-2016
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Szabo Attila <atekka@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-03-04 09:25+0300\n"
-"PO-Revision-Date: 2016-03-06 21:29+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2016-05-07 18:23+0300\n"
+"PO-Revision-Date: 2016-05-08 17:56+0000\n"
+"Last-Translator: Rezső Páder <rezso@rezso.net>\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -559,7 +559,7 @@ msgstr "Hiba"
 
 #, c-format
 msgid "%s (%d)"
-msgstr ""
+msgstr "%s (%d)"
 
 msgid "&Abort"
 msgstr "&Megszakítás"
@@ -1499,7 +1499,7 @@ msgid ""
 msgstr "Felhasználóbarát szövegszerkesztő\na Midnight Commander-hez készítve"
 
 msgid "Copyright (C) 1996-2016 the Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1996-2016 the Free Software Foundation"
 
 msgid "About"
 msgstr "Névjegy"
@@ -1826,6 +1826,9 @@ msgstr "Lyn&x-szerű navigálás"
 msgid "Pa&ge scrolling"
 msgstr "Oldal&görgetés"
 
+msgid "Center &scrolling"
+msgstr ""
+
 msgid "&Mouse page scrolling"
 msgstr "Oldalgörgetés &egérrel"
 
@@ -1858,7 +1861,7 @@ msgid "&Full file list"
 msgstr "&Teljes"
 
 msgid "&Brief file list:"
-msgstr ""
+msgstr "Tömö&r fájllista:"
 
 msgid "&Long file list"
 msgstr "&Duplaszéles"
@@ -2478,7 +2481,7 @@ msgstr "%s célfájl számára nem foglalható le hely:\n%s"
 msgid ""
 "Cannot read source file \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "\"%s\" forrásfájl olvasása sikertelen \n%s"
 
 #, c-format
 msgid ""
@@ -3923,7 +3926,7 @@ msgid "sftp: Password is empty."
 msgstr "sftp: a jelszó üres."
 
 msgid "sftp: Failure establishing SSH session"
-msgstr ""
+msgstr "stp: Hiba lépett fel az ssh kapcsolat létrehozása közben"
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Nincs jelenleg elérhető fájlkezelő adat a fájl olvasásához"

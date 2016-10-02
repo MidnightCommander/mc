@@ -6,13 +6,14 @@
 # Nerijus Baliūnas <nerijus@users.sourceforge.net>, 2011
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Zygi Mantus <zygimantus@gmail.com>, 2016
+# Zygi Mantus <zygimantus@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-03-04 09:25+0300\n"
-"PO-Revision-Date: 2016-03-06 21:29+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2016-05-07 18:23+0300\n"
+"PO-Revision-Date: 2016-07-08 19:56+0000\n"
+"Last-Translator: Zygi Mantus <zygimantus@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/mc/mc/language/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +26,7 @@ msgid "Warning: cannot load codepages list"
 msgstr ""
 
 msgid "7-bit ASCII"
-msgstr ""
+msgstr "7 bitų ASCII"
 
 #, c-format
 msgid "Cannot translate from %s to %s"
@@ -35,10 +36,10 @@ msgid "Event system already initialized"
 msgstr ""
 
 msgid "Failed to initialize event system"
-msgstr ""
+msgstr "Nepavyko inicializuoti įvykių sistemą"
 
 msgid "Event system not initialized"
-msgstr ""
+msgstr "Įvykio sistema neinicializuota"
 
 msgid "Check input data! Some of parameters are NULL!"
 msgstr ""
@@ -72,7 +73,7 @@ msgid "Cannot create %s directory"
 msgstr ""
 
 msgid "FATAL: not a directory:"
-msgstr ""
+msgstr "KLAIDA: ne aplankas:"
 
 #, c-format
 msgid "An error occurred while migrating user settings: %s"
@@ -96,7 +97,7 @@ msgid "Search string not found"
 msgstr ""
 
 msgid "Not implemented yet"
-msgstr ""
+msgstr "Dar neįgyvendinta"
 
 msgid "Num of replace tokens not equal to num of found tokens"
 msgstr ""
@@ -112,10 +113,10 @@ msgid "No&rmal"
 msgstr "No&rmalus"
 
 msgid "Re&gular expression"
-msgstr ""
+msgstr "Reguliarioji išraiška"
 
 msgid "He&xadecimal"
-msgstr ""
+msgstr "Šešioliktainis"
 
 msgid "Wil&dcard search"
 msgstr ""
@@ -1406,7 +1407,7 @@ msgid "&Save setup"
 msgstr "Įrašyti nu&statymus"
 
 msgid "&File"
-msgstr ""
+msgstr "Failas"
 
 msgid "&Edit"
 msgstr ""
@@ -1415,7 +1416,7 @@ msgid "&Search"
 msgstr ""
 
 msgid "&Command"
-msgstr ""
+msgstr "Komanda"
 
 msgid "For&mat"
 msgstr ""
@@ -1424,7 +1425,7 @@ msgid "&Window"
 msgstr ""
 
 msgid "&Options"
-msgstr ""
+msgstr "Nustatymai"
 
 msgid "&None"
 msgstr ""
@@ -1454,7 +1455,7 @@ msgid "Tab spacing:"
 msgstr ""
 
 msgid "Other options"
-msgstr ""
+msgstr "Kiti nustatymai"
 
 msgid "&Return does autoindent"
 msgstr "„&Return“ autom. įtraukia"
@@ -1825,6 +1826,9 @@ msgstr "„L&ynx“ elgesys"
 msgid "Pa&ge scrolling"
 msgstr ""
 
+msgid "Center &scrolling"
+msgstr ""
+
 msgid "&Mouse page scrolling"
 msgstr ""
 
@@ -1841,7 +1845,7 @@ msgid "Quick search"
 msgstr ""
 
 msgid "Panel options"
-msgstr ""
+msgstr "Panelės nustatymai"
 
 msgid "Information"
 msgstr "Informacija"
@@ -3077,10 +3081,10 @@ msgid "&Invert selection"
 msgstr ""
 
 msgid "E&xit"
-msgstr ""
+msgstr "Išeiti"
 
 msgid "&User menu"
-msgstr ""
+msgstr "Naudotojo meniu"
 
 msgid "&Directory tree"
 msgstr "&Aplankų medis"
@@ -3177,13 +3181,13 @@ msgid "&Above"
 msgstr "&Viršuj"
 
 msgid "&Left"
-msgstr ""
+msgstr "Kairė"
 
 msgid "&Below"
 msgstr ""
 
 msgid "&Right"
-msgstr ""
+msgstr "Dešinė"
 
 msgid "ButtonBar|Menu"
 msgstr ""
@@ -3362,7 +3366,7 @@ msgid "Add to external panelize"
 msgstr ""
 
 msgid "Enter command label:"
-msgstr ""
+msgstr "Įvesti komandos etiketę:"
 
 msgid "Cannot invoke command."
 msgstr "Nepavyko iškviesti komandos."

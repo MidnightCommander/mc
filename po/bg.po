@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-03-04 09:25+0300\n"
-"PO-Revision-Date: 2016-03-06 21:29+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2016-05-07 18:23+0300\n"
+"PO-Revision-Date: 2016-08-02 08:14+0000\n"
+"Last-Translator: Myselus\n"
 "Language-Team: Bulgarian (http://www.transifex.com/mc/mc/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -558,7 +558,7 @@ msgstr "Грешка"
 
 #, c-format
 msgid "%s (%d)"
-msgstr ""
+msgstr "%s (%d)"
 
 msgid "&Abort"
 msgstr "Отказ"
@@ -1825,6 +1825,9 @@ msgstr "Движение като lynx"
 msgid "Pa&ge scrolling"
 msgstr "Прелистване на стра&ница"
 
+msgid "Center &scrolling"
+msgstr ""
+
 msgid "&Mouse page scrolling"
 msgstr "Прелистване на страница с &мишка"
 
@@ -2477,7 +2480,7 @@ msgstr "Не може да се запази предварително прос
 msgid ""
 "Cannot read source file \"%s\"\n"
 "%s"
-msgstr ""
+msgstr "Не може да се прочете изходния файл \"%s\"\n%s"
 
 #, c-format
 msgid ""
@@ -3922,7 +3925,7 @@ msgid "sftp: Password is empty."
 msgstr "sftp: Паролата е празна."
 
 msgid "sftp: Failure establishing SSH session"
-msgstr ""
+msgstr "sftp: Неуспешно установяване на SSH сесия"
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Няма съществуващ обработчик за четене на файл"
