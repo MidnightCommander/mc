@@ -1,3 +1,34 @@
+Version 4.8.18
+
+- Core
+  * Alt-Enter, Ctrl-Enter and Ctrl-Shift-Enter shortcuts are bindable in file manager (#3075)
+  * Internals:
+    * Refactoring of widget subsystem (#2919, #3632)
+
+- Editor
+  * Add syntax highlighting:
+    * GLSL (#3683)
+    * CUDA (#3686)
+
+- Misc
+  * Code cleanup (#3641, #3652)
+
+- Fixes
+  * Build failure on FreeBSD (#3643)
+  * Incompatibility with NetBSD curses (#3665)
+  * Memory leaks (#3637)
+  * Subshell output lost on window resize under tmux, GNU screen (#3639)
+  * --with-subshell=optional does not work (#3642)
+  * Backward search is not interruptible (#3648)
+  * "Output lines" has no effect (#3655)
+  * Wrong handling of mouse clicks in long listing mode (#3661)
+  * Panelize resets marks on marked files in many cases (#3663)
+  * Cannot change directory in the active panel in some cases (#3669)
+  * Filtered View doesn't work (#3646, #3660)
+  * mcedit: don't kill bookmarks when open file from "Find File" dialog (#3668)
+  * man pages use "the MC" instead of "MC" (#3644)
+
+
 Version 4.8.17
 
 - Core
