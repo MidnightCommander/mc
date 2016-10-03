@@ -61,6 +61,7 @@ dnl Sorted -W options:
     mc_CHECK_ONE_CFLAG([-Wfloat-equal])
     mc_CHECK_ONE_CFLAG([-Wformat])
     mc_CHECK_ONE_CFLAG([-Wformat-security])
+    mc_CHECK_ONE_CFLAG([-Wformat-signedness])
     mc_CHECK_ONE_CFLAG([-Wimplicit])
     mc_CHECK_ONE_CFLAG([-Wignored-qualifiers])
     mc_CHECK_ONE_CFLAG([-Wlogical-not-parentheses])
