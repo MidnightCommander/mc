@@ -1096,17 +1096,16 @@ vfs_path_serialize (const vfs_path_t * vpath, GError ** mcerror)
     {
         mc_propagate_error (mcerror, 0, "%s", "vpath object is empty");
         return NULL;
-
     }
 
     cpath = mc_config_init (NULL, FALSE);
 
     for (element_index = 0; element_index < vfs_path_elements_count (vpath); element_index++)
     {
-        char *groupname;
+        char groupname[BUF_TINY];
         const vfs_path_element_t *element;
 
-        groupname = g_strdup_printf ("path-element-%zd", element_index);
+        g_snprintf (groupname, sizeof (groupname), "path-element-%zd", element_index);
         element = vfs_path_get_by_index (vpath, element_index);
         /* convert one element to config group */
 
@@ -1122,8 +1121,6 @@ vfs_path_serialize (const vfs_path_t * vpath, GError ** mcerror)
         mc_config_set_string_raw (cpath, groupname, "host", element->host);
         if (element->port != 0)
             mc_config_set_int (cpath, groupname, "port", element->port);
-
-        g_free (groupname);
     }
 
     ret_value = mc_serialize_config (cpath, mcerror);
