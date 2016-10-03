@@ -1625,7 +1625,6 @@ edit_move_block_to_left (WEdit * edit)
 {
     off_t start_mark, end_mark;
     off_t cur_bol, start_bol;
-    int i;
 
     if (!eval_marks (edit, &start_mark, &end_mark))
         return;
@@ -1649,12 +1648,16 @@ edit_move_block_to_left (WEdit * edit)
         if (next_char == '\t')
             edit_delete (edit, TRUE);
         else if (next_char == ' ')
+        {
+            int i;
+
             for (i = 0; i < del_tab_width; i++)
             {
                 if (next_char == ' ')
                     edit_delete (edit, TRUE);
                 next_char = edit_buffer_get_current_byte (&edit->buffer);
             }
+        }
 
         if (cur_bol == 0)
             break;
