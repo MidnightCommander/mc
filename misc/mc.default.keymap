@@ -1,4 +1,5 @@
 [main]
+ChangePanel = tab
 Help = f1
 UserMenu = f2
 View = f3

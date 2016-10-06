@@ -932,6 +932,8 @@ create_panels_and_run_mc (void)
 {
     midnight_dlg->get_shortcut = midnight_get_shortcut;
     midnight_dlg->get_title = midnight_get_title;
+    /* allow rebind tab */
+    widget_want_tab (WIDGET (midnight_dlg), TRUE);
 
     create_panels ();
 
@@ -1104,6 +1106,9 @@ midnight_execute_cmd (Widget * sender, long command)
 
     switch (command)
     {
+    case CK_ChangePanel:
+        change_panel ();
+        break;
     case CK_HotListAdd:
         add2hotlist_cmd ();
         break;
@@ -1451,9 +1456,6 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         /* FIXME: should handle all menu shortcuts before this point */
         if (widget_get_state (WIDGET (the_menubar), WST_FOCUSED))
             return MSG_NOT_HANDLED;
-
-        if (parm == '\t')
-            input_free_completions (cmdline);
 
         if (parm == '\n')
         {
