@@ -52,6 +52,7 @@ context default
     keyword </SMALL> brightcyan/17
     keyword </SCRIPT> brightcyan/17
     keyword </META> brightcyan/17
+    keyword </OL> brightcyan/17
     keyword </P> brightcyan/17
     keyword </TABLE> brightcyan/17
     keyword </TD> brightcyan/17
@@ -59,6 +60,7 @@ context default
     keyword </TR> brightcyan/17
     keyword </TT> brightcyan/17
     keyword </U> brightcyan/17
+    keyword </UL> brightcyan/17
 
 
 context <A >                    brightcyan/17
