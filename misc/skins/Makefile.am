@@ -20,8 +20,8 @@ skin_DATA = \
 	modarin256root.ini \
 	nicedark.ini \
 	sand256.ini \
-	xoria256.ini
-
+	xoria256.ini \
+	yadt.ini
 
 EXTRA_DIST = \
     $(skin_DATA)
