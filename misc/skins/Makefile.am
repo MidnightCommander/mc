@@ -21,7 +21,8 @@ skin_DATA = \
 	nicedark.ini \
 	sand256.ini \
 	xoria256.ini \
-	yadt.ini
+	yadt256-defbg.ini \
+	yadt256.ini
 
 EXTRA_DIST = \
     $(skin_DATA)
