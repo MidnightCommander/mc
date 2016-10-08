@@ -214,7 +214,7 @@ etags_set_definition_hash (const char *tagfile, const char *start_path,
 
                 pos = strcspn (buf, ",");
                 g_free (filename);
-                filename = g_strndup (buf, pos + 1);
+                filename = g_strndup (buf, pos);
                 state = in_define;
                 break;
             }
