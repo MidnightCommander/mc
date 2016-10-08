@@ -754,10 +754,9 @@ setup_panels (void)
     else
     {
         widget_set_size (panels[0].widget, start_y, 0, height, panels[0].widget->cols);
-        widget_set_size (panels[1].widget, start_y, panels_layout.left_panel_size, height,
+        widget_set_size (panels[1].widget, start_y, panels[1].widget->x, height,
                          panels[1].widget->cols);
     }
-
 
     widget_set_size (WIDGET (the_menubar), 0, 0, 1, COLS);
 
