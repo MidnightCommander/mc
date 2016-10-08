@@ -311,7 +311,7 @@ main (int argc, char *argv[])
     }
 
     /* check terminal type
-     * $TEMR must be set and not empty
+     * $TERM must be set and not empty
      * mc_global.tty.xterm_flag is used in init_key() and tty_init()
      * Do this after mc_args_handle() where mc_args__force_xterm is set up.
      */
