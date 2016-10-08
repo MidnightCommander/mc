@@ -86,6 +86,7 @@ context default
     keyword whole eerror yellow
     keyword whole einfo yellow
     keyword whole einstall yellow
+    keyword whole einstalldocs yellow
     keyword whole elibtoolize yellow
     keyword whole elog yellow
     keyword whole emake yellow
@@ -112,10 +113,13 @@ context default
     keyword whole newconfd yellow
     keyword whole newdoc yellow
     keyword whole newexe yellow
+    keyword whole newicon yellow
     keyword whole newins yellow
     keyword whole newman yellow
+    keyword whole newmenu yellow
     keyword whole newsbin yellow
     keyword whole newinitd yellow
+    keyword whole pax-mark yellow
     keyword whole prepall yellow
     keyword whole prepalldocs yellow
     keyword whole prepallinfo yellow
