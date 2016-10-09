@@ -282,20 +282,6 @@ main (int argc, char *argv[])
     /* Must be done after load_setup because depends on mc_global.vfs.cd_symlinks */
     vfs_setup_work_dir ();
 
-    /* Resolve the other_dir panel option. Must be done after vfs_setup_work_dir */
-    {
-        char *buffer;
-        vfs_path_t *vpath;
-
-        buffer = mc_config_get_string (mc_global.panels_config, "Dirs", "other_dir", ".");
-        vpath = vfs_path_from_str (buffer);
-        if (vfs_file_is_local (vpath))
-            saved_other_dir = buffer;
-        else
-            g_free (buffer);
-        vfs_path_free (vpath);
-    }
-
     /* Set up temporary directory after VFS initialization */
     mc_tmpdir ();
 
@@ -308,6 +294,24 @@ main (int argc, char *argv[])
         g_free (saved_other_dir);
         mc_event_deinit (NULL);
         goto startup_exit_falure;
+    }
+
+    /* Resolve the other_dir panel option.
+     * 1. Must be done after vfs_setup_work_dir().
+     * 2. Must be done after mc_setup_by_args() because of mc_run_mode.
+     */
+    if (mc_global.mc_run_mode == MC_RUN_FULL)
+    {
+        char *buffer;
+        vfs_path_t *vpath;
+
+        buffer = mc_config_get_string (mc_global.panels_config, "Dirs", "other_dir", ".");
+        vpath = vfs_path_from_str (buffer);
+        if (vfs_file_is_local (vpath))
+            saved_other_dir = buffer;
+        else
+            g_free (buffer);
+        vfs_path_free (vpath);
     }
 
     /* check terminal type
