@@ -622,18 +622,8 @@ mcview_handle_key (WView * view, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-mcview_adjust_size (WDialog * h)
+mcview_resize (WView * view)
 {
-    WView *view;
-    WButtonBar *b;
-
-    /* Look up the viewer and the buttonbar, we assume only two widgets here */
-    view = (WView *) find_widget_type (h, mcview_callback);
-    b = find_buttonbar (h);
-
-    widget_set_size (WIDGET (view), 0, 0, LINES - 1, COLS);
-    widget_set_size (WIDGET (b), LINES - 1, 0, 1, COLS);
-
     view->dpy_wrap_dirty = TRUE;
     mcview_compute_areas (view);
     mcview_update_bytes_per_line (view);
@@ -725,6 +715,10 @@ mcview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
         mcview_update (view);
         return MSG_HANDLED;
 
+    case MSG_RESIZE:
+        mcview_resize (view);
+        return MSG_HANDLED;
+
     case MSG_DESTROY:
         if (mcview_is_in_panel (view))
         {
@@ -773,10 +767,6 @@ mcview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
 
     switch (msg)
     {
-    case MSG_RESIZE:
-        mcview_adjust_size (h);
-        return MSG_HANDLED;
-
     case MSG_ACTION:
         /* Handle shortcuts. */
 
