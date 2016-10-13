@@ -103,9 +103,8 @@ query_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
 
             /* set position */
             rect_init (&r, ypos, xpos, w->lines, w->cols);
-            dlg_set_position (h, &r);
 
-            return MSG_HANDLED;
+            return dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
         }
         MC_FALLTHROUGH;
 

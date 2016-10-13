@@ -79,6 +79,22 @@ widget_set_id (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static cb_ret_t
+widget_default_resize (Widget * w, const WRect * r)
+{
+    if (r == NULL)
+        return MSG_NOT_HANDLED;
+
+    w->y = r->y;
+    w->x = r->x;
+    w->lines = r->lines;
+    w->cols = r->cols;
+
+    return MSG_HANDLED;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 widget_do_focus (Widget * w, gboolean enable)
 {
@@ -311,10 +327,8 @@ widget_destroy (Widget * w)
 cb_ret_t
 widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    (void) w;
     (void) sender;
     (void) parm;
-    (void) data;
 
     switch (msg)
     {
@@ -328,6 +342,9 @@ widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
     case MSG_CURSOR:
     case MSG_IDLE:
         return MSG_HANDLED;
+
+    case MSG_RESIZE:
+        return widget_default_resize (w, CONST_RECT (data));
 
     default:
         return MSG_NOT_HANDLED;
@@ -450,17 +467,25 @@ widget_adjust_position (widget_pos_flags_t pos_flags, int *y, int *x, int *lines
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/**
+ * Change widget position and size.
+ *
+ * @param w widget
+ * @param y y coordinate of top-left corner
+ * @param x x coordinate of top-left corner
+ * @param lines width
+ * @param cols height
+ */
 
 void
-widget_set_size (Widget * widget, int y, int x, int lines, int cols)
+widget_set_size (Widget * w, int y, int x, int lines, int cols)
 {
-    widget->x = x;
-    widget->y = y;
-    widget->cols = cols;
-    widget->lines = lines;
-    send_message (widget, NULL, MSG_RESIZE, 0, NULL);
-    if (widget->owner != NULL && widget_get_state (WIDGET (widget->owner), WST_ACTIVE))
-        send_message (widget, NULL, MSG_DRAW, 0, NULL);
+    WRect r = { y, x, lines, cols };
+
+    send_message (w, NULL, MSG_RESIZE, 0, &r);
+
+    if (w->owner != NULL && widget_get_state (WIDGET (w->owner), WST_ACTIVE))
+        send_message (w, NULL, MSG_DRAW, 0, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -607,9 +607,13 @@ hotlist_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         return MSG_HANDLED;
 
     case MSG_RESIZE:
-        /* simply call dlg_set_size() with new size */
-        dlg_set_size (h, LINES - (h == hotlist_dlg ? 2 : 6), COLS - 6);
-        return MSG_HANDLED;
+        {
+            WRect r;
+
+            rect_init (&r, w->y, w->x, LINES - (h == hotlist_dlg ? 2 : 6), COLS - 6);
+
+            return dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
+        }
 
     default:
         return dlg_default_callback (w, sender, msg, parm, data);

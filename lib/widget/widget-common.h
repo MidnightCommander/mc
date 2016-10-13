@@ -190,7 +190,7 @@ cb_ret_t widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg,
 void widget_set_options (Widget * w, widget_options_t options, gboolean enable);
 cb_ret_t widget_set_state (Widget * w, widget_state_t state, gboolean enable);
 void widget_adjust_position (widget_pos_flags_t pos_flags, int *y, int *x, int *lines, int *cols);
-void widget_set_size (Widget * widget, int y, int x, int lines, int cols);
+void widget_set_size (Widget * w, int y, int x, int lines, int cols);
 /* select color for widget in dependance of state */
 void widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey);
 void widget_draw (Widget * w);

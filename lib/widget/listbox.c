@@ -492,9 +492,6 @@ listbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         listbox_destroy (l);
         return MSG_HANDLED;
 
-    case MSG_RESIZE:
-        return MSG_HANDLED;
-
     default:
         return widget_default_callback (w, sender, msg, parm, data);
     }

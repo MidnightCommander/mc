@@ -104,9 +104,8 @@ history_dlg_reposition (WDialog * dlg_head)
     }
 
     rect_init (&r, y, x, he, wi);
-    dlg_set_position (dlg_head, &r);
 
-    return MSG_HANDLED;
+    return dlg_default_callback (WIDGET (dlg_head), NULL, MSG_RESIZE, 0, &r);
 }
 
 /* --------------------------------------------------------------------------------------------- */

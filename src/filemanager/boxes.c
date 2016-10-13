@@ -197,9 +197,8 @@ skin_dlg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
             y = wd->y + (wd->lines - w->lines) / 2;
             x = wd->x + wd->cols / 2;
             rect_init (&r, y, x, w->lines, w->cols);
-            dlg_set_position (d, &r);
 
-            return MSG_HANDLED;
+            return dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
         }
 
     default:
@@ -373,10 +372,12 @@ tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
     {
     case MSG_RESIZE:
         {
+            WRect r;
             Widget *bar;
 
-            /* simply call dlg_set_size() with new size */
-            dlg_set_size (h, LINES - 9, COLS - 20);
+            rect_init (&r, w->y, w->x, LINES - 9, COLS - 20);
+            dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
+
             bar = WIDGET (find_buttonbar (h));
             bar->x = 0;
             bar->y = LINES - 1;

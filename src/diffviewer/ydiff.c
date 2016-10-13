@@ -3336,6 +3336,7 @@ dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         return i;
 
     case MSG_RESIZE:
+        widget_default_callback (w, NULL, MSG_RESIZE, 0, data);
         dview_compute_areas (dview);
         return MSG_HANDLED;
 

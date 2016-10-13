@@ -496,43 +496,13 @@ dlg_widget_set_position (gpointer data, gpointer user_data)
     else if ((c->pos_flags & WPOS_KEEP_BOTTOM) != 0)
         r.y += wss->shift_y + wss->scale_y;
 
-    widget_set_size_rect (c, &r);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-/** Clean the dialog area, draw the frame and the title */
-void
-dlg_default_repaint (WDialog * h)
-{
-    Widget *wh = WIDGET (h);
-
-    int space;
-
-    if (!widget_get_state (wh, WST_ACTIVE))
-        return;
-
-    space = h->compact ? 0 : 1;
-
-    tty_setcolor (h->color[DLG_COLOR_NORMAL]);
-    dlg_erase (h);
-    tty_draw_box (wh->y + space, wh->x + space, wh->lines - 2 * space, wh->cols - 2 * space, FALSE);
-
-    if (h->title != NULL)
-    {
-        /* TODO: truncate long title */
-        tty_setcolor (h->color[DLG_COLOR_TITLE]);
-        widget_gotoyx (h, space, (wh->cols - str_term_width1 (h->title)) / 2);
-        tty_print_string (h->title);
-    }
+    send_message (c, NULL, MSG_RESIZE, 0, &r);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 /** this function allows to set dialog position */
 
-void
+static void
 dlg_set_position (WDialog * h, const WRect * r)
 {
     WGroup *g = GROUP (h);
@@ -568,13 +538,55 @@ dlg_set_position (WDialog * h, const WRect * r)
 /* --------------------------------------------------------------------------------------------- */
 /** Set dialog size and position */
 
-void
-dlg_set_size (WDialog * h, int lines, int cols)
+static void
+dlg_default_resize (WDialog * h, WRect * r)
 {
-    WRect r = { 0, 0, lines, cols };
+    /* This is default resizing mechanism.
+     * The main idea of this code is to resize dialog according to flags
+     * (if any of flags require automatic resizing, like WPOS_CENTER,
+     * end after that reposition controls in dialog according to flags of widget)
+     */
 
-    widget_adjust_position (WIDGET (h)->pos_flags, &r.y, &r.x, &r.lines, &r.cols);
-    dlg_set_position (h, &r);
+    Widget *w = WIDGET (h);
+    WRect r0;
+
+    if (r == NULL)
+        rect_init (&r0, w->y, w->x, w->lines, w->cols);
+    else
+        r0 = *r;
+
+    widget_adjust_position (w->pos_flags, &r0.y, &r0.x, &r0.lines, &r0.cols);
+    dlg_set_position (h, &r0);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+/** Clean the dialog area, draw the frame and the title */
+void
+dlg_default_repaint (WDialog * h)
+{
+    Widget *wh = WIDGET (h);
+
+    int space;
+
+    if (!widget_get_state (wh, WST_ACTIVE))
+        return;
+
+    space = h->compact ? 0 : 1;
+
+    tty_setcolor (h->color[DLG_COLOR_NORMAL]);
+    dlg_erase (h);
+    tty_draw_box (wh->y + space, wh->x + space, wh->lines - 2 * space, wh->cols - 2 * space, FALSE);
+
+    if (h->title != NULL)
+    {
+        /* TODO: truncate long title */
+        tty_setcolor (h->color[DLG_COLOR_TITLE]);
+        widget_gotoyx (h, space, (wh->cols - str_term_width1 (h->title)) / 2);
+        tty_print_string (h->title);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -605,12 +617,7 @@ dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
         return MSG_HANDLED;
 
     case MSG_RESIZE:
-        /* this is default resizing mechanism */
-        /* the main idea of this code is to resize dialog
-           according to flags (if any of flags require automatic
-           resizing, like WPOS_CENTER, end after that reposition
-           controls in dialog according to flags of widget) */
-        dlg_set_size (h, w->lines, w->cols);
+        dlg_default_resize (h, RECT (data));
         return MSG_HANDLED;
 
     default:

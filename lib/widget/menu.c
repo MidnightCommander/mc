@@ -670,6 +670,7 @@ menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 
     case MSG_RESIZE:
         /* try show menu after screen resize */
+        widget_default_callback (w, NULL, MSG_RESIZE, 0, data);
         menubar_refresh (menubar);
         return MSG_HANDLED;
 

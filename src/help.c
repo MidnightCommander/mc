@@ -861,6 +861,24 @@ help_handle_key (WDialog * h, int c)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
+help_resize (WDialog * h)
+{
+    Widget *w = WIDGET (h);
+    WButtonBar *bb;
+    WRect r;
+
+    help_lines = MIN (LINES - 4, MAX (2 * LINES / 3, 18));
+    rect_init (&r, w->y, w->x, help_lines + 4, HELP_WINDOW_WIDTH + 4);
+    dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
+    bb = find_buttonbar (h);
+    widget_set_size (WIDGET (bb), LINES - 1, 0, 1, COLS);
+
+    return MSG_HANDLED;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
 help_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WDialog *h = DIALOG (w);
@@ -868,15 +886,7 @@ help_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
     switch (msg)
     {
     case MSG_RESIZE:
-        {
-            WButtonBar *bb;
-
-            help_lines = MIN (LINES - 4, MAX (2 * LINES / 3, 18));
-            dlg_set_size (h, help_lines + 4, HELP_WINDOW_WIDTH + 4);
-            bb = find_buttonbar (h);
-            widget_set_size (WIDGET (bb), LINES - 1, 0, 1, COLS);
-            return MSG_HANDLED;
-        }
+        return help_resize (h);
 
     case MSG_DRAW:
         dlg_default_repaint (h);
@@ -942,6 +952,7 @@ md_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data
     switch (msg)
     {
     case MSG_RESIZE:
+        widget_default_callback (w, NULL, MSG_RESIZE, 0, data);
         w->lines = help_lines;
         return MSG_HANDLED;
 

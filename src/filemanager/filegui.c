@@ -799,6 +799,7 @@ file_op_context_create_ui (file_op_context_t * ctx, gboolean with_eta,
                            filegui_dialog_type_t dialog_type)
 {
     file_op_context_ui_t *ui;
+    Widget *w;
     WGroup *g;
     int buttons_width;
     int dlg_width = 58, dlg_height = 17;
@@ -827,6 +828,7 @@ file_op_context_create_ui (file_op_context_t * ctx, gboolean with_eta,
     ui->op_dlg =
         dlg_create (TRUE, 0, 0, dlg_height, dlg_width, WPOS_CENTER, FALSE, dialog_colors, NULL,
                     NULL, NULL, op_names[ctx->operation]);
+    w = WIDGET (ui->op_dlg);
     g = GROUP (ui->op_dlg);
 
     if (dialog_type != FILEGUI_DIALOG_DELETE_ITEM)
@@ -926,7 +928,7 @@ file_op_context_create_ui (file_op_context_t * ctx, gboolean with_eta,
         progress_buttons[3].len;
 
     /* adjust dialog sizes  */
-    dlg_set_size (ui->op_dlg, y + 3, MAX (COLS * 2 / 3, buttons_width + 6));
+    widget_set_size (w, w->y, w->x, y + 3, MAX (COLS * 2 / 3, buttons_width + 6));
 
     place_progress_buttons (ui->op_dlg, FALSE);
 

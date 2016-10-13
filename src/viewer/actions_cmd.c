@@ -725,6 +725,7 @@ mcview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
         return MSG_HANDLED;
 
     case MSG_RESIZE:
+        widget_default_callback (w, NULL, MSG_RESIZE, 0, data);
         mcview_resize (view);
         return MSG_HANDLED;
 

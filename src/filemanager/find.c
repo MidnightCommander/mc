@@ -1545,6 +1545,22 @@ find_relocate_buttons (const WDialog * h, gboolean all_buttons)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
+find_resize (WDialog * h)
+{
+    Widget *w = WIDGET (h);
+    WRect r;
+
+    rect_init (&r, w->y, w->x, LINES - 4, COLS - 16);
+    dlg_default_callback (w, NULL, MSG_RESIZE, 0, &r);
+    find_adjust_header (h);
+    find_relocate_buttons (h, TRUE);
+
+    return MSG_HANDLED;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
 find_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WDialog *h = DIALOG (w);
@@ -1568,10 +1584,7 @@ find_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
         return MSG_NOT_HANDLED;
 
     case MSG_RESIZE:
-        dlg_set_size (h, LINES - 4, COLS - 16);
-        find_adjust_header (h);
-        find_relocate_buttons (h, TRUE);
-        return MSG_HANDLED;
+        return find_resize (h);
 
     case MSG_IDLE:
         do_search (h);

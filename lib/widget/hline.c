@@ -51,7 +51,32 @@
 
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+hline_adjust_cols (WHLine * l)
+{
+    if (l->auto_adjust_cols)
+    {
+        Widget *w = WIDGET (l);
+        Widget *wo = WIDGET (w->owner);
+
+        if (DIALOG (wo)->compact)
+        {
+            w->x = wo->x;
+            w->cols = wo->cols;
+        }
+        else
+        {
+            w->x = wo->x + 1;
+            w->cols = wo->cols - 2;
+        }
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
@@ -62,22 +87,12 @@ hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     switch (msg)
     {
     case MSG_INIT:
-    case MSG_RESIZE:
-        if (l->auto_adjust_cols)
-        {
-            Widget *wo = WIDGET (h);
+        hline_adjust_cols (l);
+        return MSG_HANDLED;
 
-            if (h->compact)
-            {
-                w->x = wo->x;
-                w->cols = wo->cols;
-            }
-            else
-            {
-                w->x = wo->x + 1;
-                w->cols = wo->cols - 2;
-            }
-        }
+    case MSG_RESIZE:
+        hline_adjust_cols (l);
+        w->y = RECT (data)->y;
         return MSG_HANDLED;
 
     case MSG_DRAW:

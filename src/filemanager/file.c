@@ -3153,9 +3153,10 @@ dirsize_status_update_cb (status_msg_t * sm)
     /* enlarge dialog if required */
     if (WIDGET (dsm->count_size)->cols + 6 > wd->cols)
     {
-        dlg_set_size (sm->dlg, wd->lines, WIDGET (dsm->count_size)->cols + 6);
+        widget_set_size (wd, wd->y, wd->x, wd->lines, WIDGET (dsm->count_size)->cols + 6);
         dirsize_status_locate_buttons (dsm);
         dlg_draw (sm->dlg);
+        /* TODO: ret rid of double redraw */
     }
 
     /* adjust first label */

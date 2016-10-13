@@ -109,11 +109,6 @@ WDialog *dlg_create (gboolean modal, int y1, int x1, int lines, int cols,
 
 void dlg_set_default_colors (void);
 
-/* sets size of dialog, leaving positioning to automatic mehtods
-   according to dialog flags */
-void dlg_set_size (WDialog * h, int lines, int cols);
-void dlg_set_position (WDialog * h, const WRect * r);
-
 void dlg_init (WDialog * h);
 int dlg_run (WDialog * d);
 void dlg_destroy (WDialog * h);
