@@ -70,6 +70,7 @@ history_dlg_reposition (WDialog * dlg_head)
 {
     history_dlg_data *data;
     int x = 0, y, he, wi;
+    WRect r;
 
     /* guard checks */
     if ((dlg_head == NULL) || (dlg_head->data == NULL))
@@ -102,7 +103,8 @@ history_dlg_reposition (WDialog * dlg_head)
         x = COLS - wi;
     }
 
-    dlg_set_position (dlg_head, y, x, he, wi);
+    rect_init (&r, y, x, he, wi);
+    dlg_set_position (dlg_head, &r);
 
     return MSG_HANDLED;
 }

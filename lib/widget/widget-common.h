@@ -324,4 +324,12 @@ widget_update_cursor (Widget * w)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static inline void
+widget_set_size_rect (Widget * w, const WRect * r)
+{
+    widget_set_size (w, r->y, r->x, r->lines, r->cols);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 #endif /* MC__WIDGET_INTERNAL_H */

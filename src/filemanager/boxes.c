@@ -192,10 +192,12 @@ skin_dlg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
             WDialog *d = DIALOG (w);
             Widget *wd = WIDGET (d->data);
             int y, x;
+            WRect r;
 
             y = wd->y + (wd->lines - w->lines) / 2;
             x = wd->x + wd->cols / 2;
-            dlg_set_position (d, y, x, w->lines, w->cols);
+            rect_init (&r, y, x, w->lines, w->cols);
+            dlg_set_position (d, &r);
 
             return MSG_HANDLED;
         }

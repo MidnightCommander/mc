@@ -74,6 +74,7 @@ query_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
         {
             WDialog *prev_dlg = NULL;
             int ypos, xpos;
+            WRect r;
 
             /* get dialog under h */
             if (top_dlg != NULL)
@@ -101,7 +102,8 @@ query_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
             xpos = COLS / 2 - w->cols / 2;
 
             /* set position */
-            dlg_set_position (h, ypos, xpos, w->lines, w->cols);
+            rect_init (&r, ypos, xpos, w->lines, w->cols);
+            dlg_set_position (h, &r);
 
             return MSG_HANDLED;
         }

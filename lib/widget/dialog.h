@@ -112,8 +112,7 @@ void dlg_set_default_colors (void);
 /* sets size of dialog, leaving positioning to automatic mehtods
    according to dialog flags */
 void dlg_set_size (WDialog * h, int lines, int cols);
-/* this function allows to set dialog position */
-void dlg_set_position (WDialog * h, int y, int x, int lines, int cols);
+void dlg_set_position (WDialog * h, const WRect * r);
 
 void dlg_init (WDialog * h);
 int dlg_run (WDialog * d);

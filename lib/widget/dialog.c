@@ -468,36 +468,35 @@ dlg_widget_set_position (gpointer data, gpointer user_data)
     Widget *c = WIDGET (data);
     Widget *wh = WIDGET (c->owner);
     const widget_shift_scale_t *wss = (const widget_shift_scale_t *) user_data;
-    int x = c->x;
-    int y = c->y;
-    int cols = c->cols;
-    int lines = c->lines;
+    WRect r;
+
+    rect_init (&r, c->y, c->x, c->lines, c->cols);
 
     if ((c->pos_flags & WPOS_CENTER_HORZ) != 0)
-        x = wh->x + (wh->cols - c->cols) / 2;
+        r.x = wh->x + (wh->cols - c->cols) / 2;
     else if ((c->pos_flags & WPOS_KEEP_LEFT) != 0 && (c->pos_flags & WPOS_KEEP_RIGHT) != 0)
     {
-        x += wss->shift_x;
-        cols += wss->scale_x;
+        r.x += wss->shift_x;
+        r.cols += wss->scale_x;
     }
     else if ((c->pos_flags & WPOS_KEEP_LEFT) != 0)
-        x += wss->shift_x;
+        r.x += wss->shift_x;
     else if ((c->pos_flags & WPOS_KEEP_RIGHT) != 0)
-        x += wss->shift_x + wss->scale_x;
+        r.x += wss->shift_x + wss->scale_x;
 
     if ((c->pos_flags & WPOS_CENTER_VERT) != 0)
-        y = wh->y + (wh->lines - c->lines) / 2;
+        r.y = wh->y + (wh->lines - c->lines) / 2;
     else if ((c->pos_flags & WPOS_KEEP_TOP) != 0 && (c->pos_flags & WPOS_KEEP_BOTTOM) != 0)
     {
-        y += wss->shift_y;
-        lines += wss->scale_y;
+        r.y += wss->shift_y;
+        r.lines += wss->scale_y;
     }
     else if ((c->pos_flags & WPOS_KEEP_TOP) != 0)
-        y += wss->shift_y;
+        r.y += wss->shift_y;
     else if ((c->pos_flags & WPOS_KEEP_BOTTOM) != 0)
-        y += wss->shift_y + wss->scale_y;
+        r.y += wss->shift_y + wss->scale_y;
 
-    widget_set_size (c, y, x, lines, cols);
+    widget_set_size_rect (c, &r);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -534,25 +533,20 @@ dlg_default_repaint (WDialog * h)
 /** this function allows to set dialog position */
 
 void
-dlg_set_position (WDialog * h, int y, int x, int lines, int cols)
+dlg_set_position (WDialog * h, const WRect * r)
 {
     WGroup *g = GROUP (h);
     Widget *wh = WIDGET (h);
+    WRect or;
     widget_shift_scale_t wss;
 
     /* save old positions, will be used to reposition childs */
-    int ox, oy, oc, ol;
+    rect_init (&or, wh->y, wh->x, wh->cols, wh->lines);
 
-    /* save old positions, will be used to reposition childs */
-    ox = wh->x;
-    oy = wh->y;
-    oc = wh->cols;
-    ol = wh->lines;
-
-    wh->x = x;
-    wh->y = y;
-    wh->lines = lines;
-    wh->cols = cols;
+    wh->x = r->x;
+    wh->y = r->y;
+    wh->lines = r->lines;
+    wh->cols = r->cols;
 
     /* dialog is empty */
     if (g->widgets == NULL)
@@ -562,10 +556,10 @@ dlg_set_position (WDialog * h, int y, int x, int lines, int cols)
         g->current = g->widgets;
 
     /* values by which controls should be moved */
-    wss.shift_x = wh->x - ox;
-    wss.scale_x = wh->cols - oc;
-    wss.shift_y = wh->y - oy;
-    wss.scale_y = wh->lines - ol;
+    wss.shift_x = wh->x - or.x;
+    wss.scale_x = wh->cols - or.cols;
+    wss.shift_y = wh->y - or.y;
+    wss.scale_y = wh->lines - or.lines;
 
     if (wss.shift_x != 0 || wss.shift_y != 0 || wss.scale_x != 0 || wss.scale_y != 0)
         g_list_foreach (g->widgets, dlg_widget_set_position, &wss);
@@ -577,10 +571,10 @@ dlg_set_position (WDialog * h, int y, int x, int lines, int cols)
 void
 dlg_set_size (WDialog * h, int lines, int cols)
 {
-    int x = 0, y = 0;
+    WRect r = { 0, 0, lines, cols };
 
-    widget_adjust_position (WIDGET (h)->pos_flags, &y, &x, &lines, &cols);
-    dlg_set_position (h, y, x, lines, cols);
+    widget_adjust_position (WIDGET (h)->pos_flags, &r.y, &r.x, &r.lines, &r.cols);
+    dlg_set_position (h, &r);
 }
 
 /* --------------------------------------------------------------------------------------------- */
