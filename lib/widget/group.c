@@ -43,6 +43,15 @@
 
 /*** file scope type declarations ****************************************************************/
 
+/* Control widget positions in a group */
+typedef struct
+{
+    int shift_x;
+    int scale_x;
+    int shift_y;
+    int scale_y;
+} widget_shift_scale_t;
+
 /*** file scope variables ************************************************************************/
 
 /* --------------------------------------------------------------------------------------------- */
@@ -275,6 +284,103 @@ group_update_cursor (WGroup * g)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+group_widget_set_position (gpointer data, gpointer user_data)
+{
+    /* there are, mainly, 2 generally possible situations:
+     * 1. control sticks to one side - it should be moved
+     * 2. control sticks to two sides of one direction - it should be sized
+     */
+
+    Widget *c = WIDGET (data);
+    Widget *g = WIDGET (c->owner);
+    const widget_shift_scale_t *wss = (const widget_shift_scale_t *) user_data;
+    WRect r = { c->y, c->x, c->lines, c->cols };
+
+    if ((c->pos_flags & WPOS_CENTER_HORZ) != 0)
+        r.x = g->x + (g->cols - c->cols) / 2;
+    else if ((c->pos_flags & WPOS_KEEP_LEFT) != 0 && (c->pos_flags & WPOS_KEEP_RIGHT) != 0)
+    {
+        r.x += wss->shift_x;
+        r.cols += wss->scale_x;
+    }
+    else if ((c->pos_flags & WPOS_KEEP_LEFT) != 0)
+        r.x += wss->shift_x;
+    else if ((c->pos_flags & WPOS_KEEP_RIGHT) != 0)
+        r.x += wss->shift_x + wss->scale_x;
+
+    if ((c->pos_flags & WPOS_CENTER_VERT) != 0)
+        r.y = g->y + (g->lines - c->lines) / 2;
+    else if ((c->pos_flags & WPOS_KEEP_TOP) != 0 && (c->pos_flags & WPOS_KEEP_BOTTOM) != 0)
+    {
+        r.y += wss->shift_y;
+        r.lines += wss->scale_y;
+    }
+    else if ((c->pos_flags & WPOS_KEEP_TOP) != 0)
+        r.y += wss->shift_y;
+    else if ((c->pos_flags & WPOS_KEEP_BOTTOM) != 0)
+        r.y += wss->shift_y + wss->scale_y;
+
+    send_message (c, NULL, MSG_RESIZE, 0, &r);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+group_set_position (WGroup * g, const WRect * r)
+{
+    Widget *w = WIDGET (g);
+    widget_shift_scale_t wss;
+    /* save old positions, will be used to reposition childs */
+    WRect or = { w->y, w->x, w->lines, w->cols };
+
+    w->x = r->x;
+    w->y = r->y;
+    w->lines = r->lines;
+    w->cols = r->cols;
+
+    /* dialog is empty */
+    if (g->widgets == NULL)
+        return;
+
+    if (g->current == NULL)
+        g->current = g->widgets;
+
+    /* values by which controls should be moved */
+    wss.shift_x = w->x - or.x;
+    wss.scale_x = w->cols - or.cols;
+    wss.shift_y = w->y - or.y;
+    wss.scale_y = w->lines - or.lines;
+
+    if (wss.shift_x != 0 || wss.shift_y != 0 || wss.scale_x != 0 || wss.scale_y != 0)
+        g_list_foreach (g->widgets, group_widget_set_position, &wss);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+group_default_resize (WGroup * g, WRect * r)
+{
+    /* This is default resizing mechanism.
+     * The main idea of this code is to resize dialog according to flags
+     * (if any of flags require automatic resizing, like WPOS_CENTER,
+     * end after that reposition controls in dialog according to flags of widget)
+     */
+
+    Widget *w = WIDGET (g);
+    WRect r0;
+
+    if (r == NULL)
+        rect_init (&r0, w->y, w->x, w->lines, w->cols);
+    else
+        r0 = *r;
+
+    widget_adjust_position (w->pos_flags, &r0.y, &r0.x, &r0.lines, &r0.cols);
+    group_set_position (g, &r0);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -319,6 +425,10 @@ group_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
 
     case MSG_CURSOR:
         return group_update_cursor (g);
+
+    case MSG_RESIZE:
+        group_default_resize (g, RECT (data));
+        return MSG_HANDLED;
 
     case MSG_DESTROY:
         g_list_foreach (g->widgets, (GFunc) widget_destroy, NULL);

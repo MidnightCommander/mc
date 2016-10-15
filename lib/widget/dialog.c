@@ -75,15 +75,6 @@ const global_keymap_t *dialog_map = NULL;
 
 /*** file scope type declarations ****************************************************************/
 
-/* Control widget positions in dialog */
-typedef struct
-{
-    int shift_x;
-    int scale_x;
-    int shift_y;
-    int scale_y;
-} widget_shift_scale_t;
-
 /*** file scope variables ************************************************************************/
 
 /* --------------------------------------------------------------------------------------------- */
@@ -456,110 +447,6 @@ frontend_dlg_run (WDialog * h)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
-static void
-dlg_widget_set_position (gpointer data, gpointer user_data)
-{
-    /* there are, mainly, 2 generally possible situations:
-     * 1. control sticks to one side - it should be moved
-     * 2. control sticks to two sides of one direction - it should be sized
-     */
-
-    Widget *c = WIDGET (data);
-    Widget *wh = WIDGET (c->owner);
-    const widget_shift_scale_t *wss = (const widget_shift_scale_t *) user_data;
-    WRect r;
-
-    rect_init (&r, c->y, c->x, c->lines, c->cols);
-
-    if ((c->pos_flags & WPOS_CENTER_HORZ) != 0)
-        r.x = wh->x + (wh->cols - c->cols) / 2;
-    else if ((c->pos_flags & WPOS_KEEP_LEFT) != 0 && (c->pos_flags & WPOS_KEEP_RIGHT) != 0)
-    {
-        r.x += wss->shift_x;
-        r.cols += wss->scale_x;
-    }
-    else if ((c->pos_flags & WPOS_KEEP_LEFT) != 0)
-        r.x += wss->shift_x;
-    else if ((c->pos_flags & WPOS_KEEP_RIGHT) != 0)
-        r.x += wss->shift_x + wss->scale_x;
-
-    if ((c->pos_flags & WPOS_CENTER_VERT) != 0)
-        r.y = wh->y + (wh->lines - c->lines) / 2;
-    else if ((c->pos_flags & WPOS_KEEP_TOP) != 0 && (c->pos_flags & WPOS_KEEP_BOTTOM) != 0)
-    {
-        r.y += wss->shift_y;
-        r.lines += wss->scale_y;
-    }
-    else if ((c->pos_flags & WPOS_KEEP_TOP) != 0)
-        r.y += wss->shift_y;
-    else if ((c->pos_flags & WPOS_KEEP_BOTTOM) != 0)
-        r.y += wss->shift_y + wss->scale_y;
-
-    send_message (c, NULL, MSG_RESIZE, 0, &r);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** this function allows to set dialog position */
-
-static void
-dlg_set_position (WDialog * h, const WRect * r)
-{
-    WGroup *g = GROUP (h);
-    Widget *wh = WIDGET (h);
-    WRect or;
-    widget_shift_scale_t wss;
-
-    /* save old positions, will be used to reposition childs */
-    rect_init (&or, wh->y, wh->x, wh->cols, wh->lines);
-
-    wh->x = r->x;
-    wh->y = r->y;
-    wh->lines = r->lines;
-    wh->cols = r->cols;
-
-    /* dialog is empty */
-    if (g->widgets == NULL)
-        return;
-
-    if (g->current == NULL)
-        g->current = g->widgets;
-
-    /* values by which controls should be moved */
-    wss.shift_x = wh->x - or.x;
-    wss.scale_x = wh->cols - or.cols;
-    wss.shift_y = wh->y - or.y;
-    wss.scale_y = wh->lines - or.lines;
-
-    if (wss.shift_x != 0 || wss.shift_y != 0 || wss.scale_x != 0 || wss.scale_y != 0)
-        g_list_foreach (g->widgets, dlg_widget_set_position, &wss);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** Set dialog size and position */
-
-static void
-dlg_default_resize (WDialog * h, WRect * r)
-{
-    /* This is default resizing mechanism.
-     * The main idea of this code is to resize dialog according to flags
-     * (if any of flags require automatic resizing, like WPOS_CENTER,
-     * end after that reposition controls in dialog according to flags of widget)
-     */
-
-    Widget *w = WIDGET (h);
-    WRect r0;
-
-    if (r == NULL)
-        rect_init (&r0, w->y, w->x, w->lines, w->cols);
-    else
-        r0 = *r;
-
-    widget_adjust_position (w->pos_flags, &r0.y, &r0.x, &r0.lines, &r0.cols);
-    dlg_set_position (h, &r0);
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -614,10 +501,6 @@ dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
     case MSG_IDLE:
         /* we don't want endless loop */
         widget_idle (w, FALSE);
-        return MSG_HANDLED;
-
-    case MSG_RESIZE:
-        dlg_default_resize (h, RECT (data));
         return MSG_HANDLED;
 
     default:
