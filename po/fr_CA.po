@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-05-07 18:23+0300\n"
+"POT-Creation-Date: 2016-10-15 09:40+0300\n"
 "PO-Revision-Date: 2015-02-26 09:48+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: French (Canada) (http://www.transifex.com/projects/p/mc/"
@@ -429,10 +429,58 @@ msgid ""
 "Check the TERM environment variable.\n"
 msgstr ""
 
-msgid "Cannot create pipe descriptor"
+msgid "B"
 msgstr ""
 
-msgid "Cannot parse command for pipe"
+msgid "kB"
+msgstr ""
+
+msgid "KiB"
+msgstr ""
+
+msgid "MB"
+msgstr ""
+
+msgid "MiB"
+msgstr ""
+
+msgid "GB"
+msgstr ""
+
+msgid "GiB"
+msgstr ""
+
+msgid "TiB"
+msgstr ""
+
+msgid "PiB"
+msgstr ""
+
+msgid "EiB"
+msgstr ""
+
+msgid "ZiB"
+msgstr ""
+
+msgid "YiB"
+msgstr ""
+
+msgid "TB"
+msgstr ""
+
+msgid "PB"
+msgstr ""
+
+msgid "EB"
+msgstr ""
+
+msgid "ZB"
+msgstr ""
+
+msgid "YB"
+msgstr ""
+
+msgid "Cannot create pipe descriptor"
 msgstr ""
 
 msgid "Cannot create pipe streams"
@@ -3304,12 +3352,6 @@ msgstr ""
 
 msgid "<readlink failed>"
 msgstr ""
-
-#, c-format
-msgid "%s byte"
-msgid_plural "%s bytes"
-msgstr[0] ""
-msgstr[1] ""
 
 #, c-format
 msgid "%s in %d file"

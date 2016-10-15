@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Free Software Foundation, Inc.
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Andika Triwidada <andika@gmail.com>, 2011-2012
 # Ferriandy Chianiago <gpl4all@gmail.com>, 2015
@@ -10,14 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-05-07 18:23+0300\n"
+"POT-Creation-Date: 2016-10-15 09:40+0300\n"
 "PO-Revision-Date: 2016-05-08 08:14+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/mc/mc/language/id/)\n"
+"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: id\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
@@ -56,7 +56,10 @@ msgid ""
 "File \"%s\" is already being edited.\n"
 "User: %s\n"
 "Process ID: %d"
-msgstr "Berkas \"%s\" sedang disunting.\nPengguna: %s\nID Proses: %d"
+msgstr ""
+"Berkas \"%s\" sedang disunting.\n"
+"Pengguna: %s\n"
+"ID Proses: %d"
 
 msgid "File locked"
 msgstr "Berkas dikunci"
@@ -84,13 +87,19 @@ msgid ""
 "to Freedesktop recommended dirs.\n"
 "To get more info, please visit\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
-msgstr "Setting lama anda sudah dimigrasikan dari %s\nke direktori yang direkomendasikan Freedesktop.\nUntuk penjelasan lebih lanjutm silahkan kunjungi\nhttp://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+msgstr ""
+"Setting lama anda sudah dimigrasikan dari %s\n"
+"ke direktori yang direkomendasikan Freedesktop.\n"
+"Untuk penjelasan lebih lanjutm silahkan kunjungi\n"
+"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 
 #, c-format
 msgid ""
 "Your old settings were migrated from %s\n"
 "to %s\n"
-msgstr "Setting lama anda telah dimigrasikan dari %s\nke %s\n"
+msgstr ""
+"Setting lama anda telah dimigrasikan dari %s\n"
+"ke %s\n"
 
 msgid "Search string not found"
 msgstr "String yang dicari tak ditemukan"
@@ -124,20 +133,27 @@ msgstr "Wil&dcard search"
 msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
-msgstr "Tak bisa memuat skin '%s'.\nSkin bawaan telah dimuat."
+msgstr ""
+"Tak bisa memuat skin '%s'.\n"
+"Skin bawaan telah dimuat."
 
 #, c-format
 msgid ""
 "Unable to parse '%s' skin.\n"
 "Default skin has been loaded"
-msgstr "Tak bisa mengurai skin '%s'.\nSkin bawaan telah dimuat."
+msgstr ""
+"Tak bisa mengurai skin '%s'.\n"
+"Skin bawaan telah dimuat."
 
 #, c-format
 msgid ""
 "Unable to use '%s' skin with 256 colors support\n"
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
-msgstr "Tidak bisa menggukan '%s' skin dengan support 256 warna\npada terminal non-256 warna.\nSkin default sudah dimuat."
+msgstr ""
+"Tidak bisa menggukan '%s' skin dengan support 256 warna\n"
+"pada terminal non-256 warna.\n"
+"Skin default sudah dimuat."
 
 msgid "Escape"
 msgstr "Escape"
@@ -429,13 +445,63 @@ msgstr "Environment variable TERM belum diset\n"
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-msgstr "Ukuran layar %dx%d tak didukung.\nPeriksalah variabel lingkungan TERM.\n"
+msgstr ""
+"Ukuran layar %dx%d tak didukung.\n"
+"Periksalah variabel lingkungan TERM.\n"
+
+msgid "B"
+msgstr ""
+
+msgid "kB"
+msgstr ""
+
+msgid "KiB"
+msgstr ""
+
+msgid "MB"
+msgstr ""
+
+msgid "MiB"
+msgstr ""
+
+msgid "GB"
+msgstr ""
+
+msgid "GiB"
+msgstr ""
+
+msgid "TiB"
+msgstr ""
+
+msgid "PiB"
+msgstr ""
+
+msgid "EiB"
+msgstr ""
+
+msgid "ZiB"
+msgstr ""
+
+msgid "YiB"
+msgstr ""
+
+msgid "TB"
+msgstr ""
+
+msgid "PB"
+msgstr ""
+
+msgid "EB"
+msgstr ""
+
+msgid "ZB"
+msgstr ""
+
+msgid "YB"
+msgstr ""
 
 msgid "Cannot create pipe descriptor"
 msgstr "Gagal membuat pipe descriptor"
-
-msgid "Cannot parse command for pipe"
-msgstr "Gagal mengurai perintah untuk pipe"
 
 msgid "Cannot create pipe streams"
 msgstr "Gagal membuat pipe streams"
@@ -444,13 +510,17 @@ msgstr "Gagal membuat pipe streams"
 msgid ""
 "Unexpected error in select() reading data from a child process:\n"
 "%s"
-msgstr "Kesalahan tak terduga dalam select() membaca data dari child process\n%s"
+msgstr ""
+"Kesalahan tak terduga dalam select() membaca data dari child process\n"
+"%s"
 
 #, c-format
 msgid ""
 "Unexpected error in waitpid():\n"
 "%s"
-msgstr "Kesalahan tak terduga dalam waitpid()\n%s"
+msgstr ""
+"Kesalahan tak terduga dalam waitpid()\n"
+"%s"
 
 msgid "Warning"
 msgstr "Peringatan"
@@ -576,7 +646,8 @@ msgid "Print configure options"
 msgstr "Cetak opsi konfigurasi"
 
 msgid "Print last working directory to specified file"
-msgstr "Cetak working directory yang terakhir digunakan ke file yang ditentukan"
+msgstr ""
+"Cetak working directory yang terakhir digunakan ke file yang ditentukan"
 
 msgid "Enables subshell support (default)"
 msgstr "Perbolehkan subshell (default)"
@@ -690,7 +761,10 @@ msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
-msgstr "\nHarap kirimkan laporan bug (sertakan output dari 'mc -V)\nsebagai tiket di www.midnight-commander.org\n"
+msgstr ""
+"\n"
+"Harap kirimkan laporan bug (sertakan output dari 'mc -V)\n"
+"sebagai tiket di www.midnight-commander.org\n"
 
 #, c-format
 msgid "GNU Midnight Commander %s\n"
@@ -729,7 +803,9 @@ msgstr "Terminasi child yang tidak terduga"
 msgid ""
 "Background process sent us a request for more arguments\n"
 "than we can handle."
-msgstr "Background process meminta argumen tambahan\nyang tidak bisa kita sediakan"
+msgstr ""
+"Background process meminta argumen tambahan\n"
+"yang tidak bisa kita sediakan"
 
 msgid "&Dismiss"
 msgstr "&Dismiss"
@@ -759,20 +835,27 @@ msgstr "Pencarian dinon aktifkan"
 msgid ""
 "Cannot create temporary diff file\n"
 "%s"
-msgstr "Gagal membuat temporary diff file\n%s"
+msgstr ""
+"Gagal membuat temporary diff file\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot create backup file\n"
 "%s%s\n"
 "%s"
-msgstr "Gagal membuat backup file\n%s%s\n%s"
+msgstr ""
+"Gagal membuat backup file\n"
+"%s%s\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot create temporary merge file\n"
 "%s"
-msgstr "Gagal membuat temporary merge file\n%s"
+msgstr ""
+"Gagal membuat temporary merge file\n"
+"%s"
 
 msgid "&Fastest (Assume large files)"
 msgstr "&Fastest (Asumsi file besar)"
@@ -849,7 +932,9 @@ msgstr "File(s) telah dirubah. Simpan saat keluar?"
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file(s)?"
-msgstr "Midnight Commander sedang dimatikan.\nSimpan file yang sudah dirubah?"
+msgstr ""
+"Midnight Commander sedang dimatikan.\n"
+"Simpan file yang sudah dirubah?"
 
 msgid "Diff:"
 msgstr "Diff:"
@@ -862,7 +947,9 @@ msgstr "\"%s\" adalah directory"
 msgid ""
 "Cannot stat \"%s\"\n"
 "%s"
-msgstr "Gagal stat \"%s\"\n%s"
+msgstr ""
+"Gagal stat \"%s\"\n"
+"%s"
 
 msgid "Diff viewer: invalid mode"
 msgstr "Diff viewer: moda tidak valid"
@@ -909,7 +996,9 @@ msgstr "\"%s\" bukan regular file"
 msgid ""
 "File \"%s\" is too large.\n"
 "Open it anyway?"
-msgstr "File \"%s\" terlalu besar.\nTetap dibuka?"
+msgstr ""
+"File \"%s\" terlalu besar.\n"
+"Tetap dibuka?"
 
 #, c-format
 msgid "Error reading from pipe: %s"
@@ -1886,8 +1975,7 @@ msgstr ""
 msgid "Sort order"
 msgstr ""
 
-#. TRANSLATORS: no need to translate 'Confirmation', it's just a context
-#. prefix
+#. TRANSLATORS: no need to translate 'Confirmation', it's just a context prefix
 msgid "Confirmation|&Delete"
 msgstr ""
 
@@ -3306,11 +3394,6 @@ msgid "<readlink failed>"
 msgstr ""
 
 #, c-format
-msgid "%s byte"
-msgid_plural "%s bytes"
-msgstr[0] ""
-
-#, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] ""
@@ -3659,13 +3742,17 @@ msgstr ""
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
-msgstr "Tak bisa membuka arsip cpio\n%s"
+msgstr ""
+"Tak bisa membuka arsip cpio\n"
+"%s"
 
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
-msgstr "Akhir dini dari arsip cpio\n%s"
+msgstr ""
+"Akhir dini dari arsip cpio\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4151,3 +4238,6 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Cannot parse command for pipe"
+#~ msgstr "Gagal mengurai perintah untuk pipe"
