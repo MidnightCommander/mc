@@ -381,6 +381,21 @@ group_default_resize (WGroup * g, WRect * r)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+group_draw (WGroup * g)
+{
+    /* draw all widgets in Z-order, from first to last */
+    if (widget_get_state (WIDGET (g), WST_ACTIVE))
+    {
+        GList *p;
+
+        for (p = g->widgets; p != NULL; p = g_list_next (p))
+            widget_draw (WIDGET (p->data));
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -421,6 +436,10 @@ group_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
     {
     case MSG_INIT:
         g_list_foreach (g->widgets, group_widget_init, NULL);
+        return MSG_HANDLED;
+
+    case MSG_DRAW:
+        group_draw (g);
         return MSG_HANDLED;
 
     case MSG_CURSOR:

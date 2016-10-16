@@ -614,20 +614,21 @@ do_refresh (void)
 void
 dlg_draw (WDialog * h)
 {
+    Widget *w = WIDGET (h);
     WGroup *g = GROUP (h);
 
-    if (!widget_get_state (WIDGET (h), WST_ACTIVE))
+    if (!widget_get_state (w, WST_ACTIVE))
         return;
 
     if (g->winch_pending)
     {
         g->winch_pending = FALSE;
-        send_message (h, NULL, MSG_RESIZE, 0, NULL);
+        send_message (w, NULL, MSG_RESIZE, 0, NULL);
     }
 
-    send_message (h, NULL, MSG_DRAW, 0, NULL);
-    group_send_broadcast_msg (g, MSG_DRAW);
-    widget_update_cursor (WIDGET (h));
+    send_message (w, NULL, MSG_DRAW, 0, NULL);
+    group_default_callback (w, NULL, MSG_DRAW, 0, NULL);
+    widget_update_cursor (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */
