@@ -148,12 +148,10 @@ chown_i18n (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chown_refresh (WDialog * h)
+chown_refresh (const Widget * h)
 {
     int y = 3;
     int x = 7 + GW * 2;
-
-    dlg_default_repaint (h);
 
     tty_setcolor (COLOR_NORMAL);
 
@@ -172,16 +170,17 @@ chown_refresh (WDialog * h)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+chown_bg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
     {
     case MSG_DRAW:
-        chown_refresh (DIALOG (w));
+        frame_callback (w, NULL, MSG_DRAW, 0, NULL);
+        chown_refresh (WIDGET (w->owner));
         return MSG_HANDLED;
 
     default:
-        return dlg_default_callback (w, sender, msg, parm, data);
+        return frame_callback (w, sender, msg, parm, data);
     }
 }
 
@@ -203,9 +202,12 @@ chown_init (void)
     cols = GW * 3 + 2 + 6;
 
     ch_dlg =
-        dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, chown_callback,
-                    NULL, "[Chown]", _("Chown command"));
+        dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, NULL, NULL,
+                    "[Chown]", _("Chown command"));
     g = GROUP (ch_dlg);
+
+    /* draw background */
+    WIDGET (ch_dlg->frame)->callback = chown_bg_callback;
 
     group_add_widget (g, groupbox_new (2, 3, GH, GW, _("User name")));
     l_user = listbox_new (3, 4, GH - 2, GW - 2, FALSE, NULL);

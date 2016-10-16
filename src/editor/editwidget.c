@@ -759,7 +759,6 @@ edit_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
         return MSG_HANDLED;
 
     case MSG_DRAW:
-        /* don't use dlg_default_repaint() -- we don't need a frame */
         tty_setcolor (EDITOR_BACKGROUND);
         dlg_erase (h);
         return MSG_HANDLED;

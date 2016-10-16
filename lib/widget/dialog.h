@@ -66,7 +66,6 @@ struct WDialog
     gboolean compact;           /* Suppress spaces around the frame */
     const char *help_ctx;       /* Name of the help entry */
     const int *color;           /* Color set. Unused in viewer and editor */
-    char *title;                /* Title of the dialog */
 
     /* Set and received by the user */
     int ret_value;              /* Result of dlg_run() */
@@ -77,6 +76,7 @@ struct WDialog
     /* Internal variables */
     void *data;                 /* Data can be passed to dialog */
     char *event_group;          /* Name of event group for this dialog */
+    WFrame *frame;              /* Frame. Frame is used as background */
 
     dlg_shortcut_str get_shortcut;      /* Shortcut string */
     dlg_title_str get_title;    /* useless for modal dialogs */
@@ -117,16 +117,12 @@ void dlg_run_done (WDialog * h);
 void dlg_save_history (WDialog * h);
 void dlg_process_event (WDialog * h, int key, Gpm_Event * event);
 
-void dlg_set_title (WDialog * h, const char *title);
 char *dlg_get_title (const WDialog * h, size_t len);
 
 void dlg_draw (WDialog * h);
 
 /* Default callback for dialogs */
 cb_ret_t dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data);
-
-/* Default paint routine for dialogs */
-void dlg_default_repaint (WDialog * h);
 
 void dlg_erase (WDialog * h);
 void dlg_stop (WDialog * h);

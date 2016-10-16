@@ -617,7 +617,7 @@ help_help (WDialog * h)
     {
         currentpoint = p + 1;   /* Skip the newline following the start of the node */
         selected_item = NULL;
-        send_message (h, NULL, MSG_DRAW, 0, NULL);
+        dlg_redraw (h);
     }
 }
 
@@ -640,7 +640,7 @@ help_index (WDialog * h)
 
         currentpoint = new_item + 1;    /* Skip the newline following the start of the node */
         selected_item = NULL;
-        send_message (h, NULL, MSG_DRAW, 0, NULL);
+        dlg_redraw (h);
     }
 }
 
@@ -655,7 +655,7 @@ help_back (WDialog * h)
     if (history_ptr < 0)
         history_ptr = HISTORY_SIZE - 1;
 
-    send_message (h, NULL, MSG_DRAW, 0, NULL);  /* FIXME: unneeded? */
+    dlg_redraw (h);       /* FIXME: unneeded? */
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -854,8 +854,25 @@ help_handle_key (WDialog * h, int c)
     if ((command == CK_IgnoreKey) || (help_execute_cmd (command) == MSG_NOT_HANDLED))
         return MSG_NOT_HANDLED;
 
-    send_message (h, NULL, MSG_DRAW, 0, NULL);
+    dlg_redraw (h);
     return MSG_HANDLED;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
+help_bg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+{
+    switch (msg)
+    {
+    case MSG_DRAW:
+        frame_callback (w, NULL, MSG_DRAW, 0, NULL);
+        help_show (DIALOG (w->owner), currentpoint);
+        return MSG_HANDLED;
+
+    default:
+        return frame_callback (w, sender, msg, parm, data);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -887,11 +904,6 @@ help_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
     {
     case MSG_RESIZE:
         return help_resize (h);
-
-    case MSG_DRAW:
-        dlg_default_repaint (h);
-        help_show (h, currentpoint);
-        return MSG_HANDLED;
 
     case MSG_KEY:
         return help_handle_key (h, parm);
@@ -1026,7 +1038,7 @@ help_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
         move_forward (1);
 
     /* Show the new node */
-    send_message (w->owner, NULL, MSG_DRAW, 0, NULL);
+    dlg_redraw (DIALOG (w->owner));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1117,6 +1129,8 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
                     FALSE, help_colors, help_callback, NULL, "[Help]", _("Help"));
     g = GROUP (whelp);
     widget_want_tab (WIDGET (whelp), TRUE);
+    /* draw background */
+    WIDGET (whelp->frame)->callback = help_bg_callback;
 
     selected_item = search_string_node (main_node, STRING_LINK_START) - 1;
     currentpoint = main_node + 1;       /* Skip the newline following the start of the node */

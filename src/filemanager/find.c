@@ -1526,7 +1526,7 @@ find_adjust_header (WDialog * h)
         memmove (title + title_len, "...", 4);
     }
 
-    dlg_set_title (h, title);
+    frame_set_title (h->frame, title);
 }
 
 /* --------------------------------------------------------------------------------------------- */

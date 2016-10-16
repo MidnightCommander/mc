@@ -191,12 +191,10 @@ chmod_toggle_select (WDialog * h, int Id)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chmod_refresh (WDialog * h)
+chmod_refresh (void)
 {
     int y = WIDGET (file_gb)->y + 1;
     int x = WIDGET (file_gb)->x + 2;
-
-    dlg_default_repaint (h);
 
     tty_setcolor (COLOR_NORMAL);
 
@@ -213,6 +211,23 @@ chmod_refresh (WDialog * h)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
+chmod_bg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+{
+    switch (msg)
+    {
+    case MSG_DRAW:
+        frame_callback (w, NULL, MSG_DRAW, 0, NULL);
+        chmod_refresh ();
+        return MSG_HANDLED;
+
+    default:
+        return frame_callback (w, sender, msg, parm, data);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
 chmod_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WGroup *g = GROUP (w);
@@ -220,10 +235,6 @@ chmod_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
     switch (msg)
     {
-    case MSG_DRAW:
-        chmod_refresh (h);
-        return MSG_HANDLED;
-
     case MSG_NOTIFY:
         {
             /* handle checkboxes */
@@ -312,6 +323,9 @@ chmod_init (const char *fname, const struct stat *sf_stat)
         dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors,
                     chmod_callback, NULL, "[Chmod]", _("Chmod command"));
     g = GROUP (ch_dlg);
+
+    /* draw background */
+    WIDGET (ch_dlg->frame)->callback = chmod_bg_callback;
 
     group_add_widget (g, groupbox_new (PY, PX, BUTTONS_PERM + 2, perm_gb_len, _("Permission")));
 

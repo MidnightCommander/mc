@@ -281,8 +281,6 @@ print_flags (const WDialog * h)
 static void
 advanced_chown_refresh (WDialog * h)
 {
-    dlg_default_repaint (h);
-
     tty_setcolor (COLOR_NORMAL);
 
     widget_gotoyx (h, BY - 1, advanced_chown_but[0].x + 5);
@@ -658,19 +656,31 @@ user_group_button_cb (WButton * button, int action)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
+advanced_chown_bg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+{
+    switch (msg)
+    {
+    case MSG_DRAW:
+        frame_callback (w, NULL, MSG_DRAW, 0, NULL);
+        advanced_chown_refresh (DIALOG (w->owner));
+        advanced_chown_info_update ();
+        return MSG_HANDLED;
+
+    default:
+        return frame_callback (w, sender, msg, parm, data);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
 advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WGroup *g = GROUP (w);
-    WDialog *h = DIALOG (w);
     int i = 0;
 
     switch (msg)
     {
-    case MSG_DRAW:
-        advanced_chown_refresh (h);
-        advanced_chown_info_update ();
-        return MSG_HANDLED;
-
     case MSG_KEY:
         switch (parm)
         {
@@ -743,6 +753,9 @@ advanced_chown_init (void)
         dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors,
                     advanced_chown_callback, NULL, "[Advanced Chown]", _("Chown advanced command"));
     ch_grp = GROUP (ch_dlg);
+
+    /* draw background */
+    WIDGET (ch_dlg->frame)->callback = advanced_chown_bg_callback;
 
     l_filename = label_new (2, 3, "");
     group_add_widget (ch_grp, l_filename);

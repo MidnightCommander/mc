@@ -449,55 +449,13 @@ frontend_dlg_run (WDialog * h)
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-
-/** Clean the dialog area, draw the frame and the title */
-void
-dlg_default_repaint (WDialog * h)
-{
-    Widget *wh = WIDGET (h);
-
-    int space;
-
-    if (!widget_get_state (wh, WST_ACTIVE))
-        return;
-
-    space = h->compact ? 0 : 1;
-
-    tty_setcolor (h->color[DLG_COLOR_NORMAL]);
-    dlg_erase (h);
-    tty_draw_box (wh->y + space, wh->x + space, wh->lines - 2 * space, wh->cols - 2 * space, FALSE);
-
-    if (h->title != NULL)
-    {
-        /* TODO: truncate long title */
-        tty_setcolor (h->color[DLG_COLOR_TITLE]);
-        widget_gotoyx (h, space, (wh->cols - str_term_width1 (h->title)) / 2);
-        tty_print_string (h->title);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /** Default dialog callback */
 
 cb_ret_t
 dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    WDialog *h = DIALOG (w);
-
-    (void) sender;
-    (void) parm;
-    (void) data;
-
     switch (msg)
     {
-    case MSG_DRAW:
-        if (h->color != NULL)
-        {
-            dlg_default_repaint (h);
-            return MSG_HANDLED;
-        }
-        return MSG_NOT_HANDLED;
-
     case MSG_IDLE:
         /* we don't want endless loop */
         widget_idle (w, FALSE);
@@ -517,19 +475,18 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
 {
     WDialog *new_d;
     Widget *w;
+    WGroup *g;
 
     new_d = g_new0 (WDialog, 1);
     w = WIDGET (new_d);
+    g = GROUP (new_d);
     widget_adjust_position (pos_flags, &y1, &x1, &lines, &cols);
-    group_init (GROUP (new_d), y1, x1, lines, cols,
-                callback != NULL ? callback : dlg_default_callback, mouse_callback);
+    group_init (g, y1, x1, lines, cols, callback != NULL ? callback : dlg_default_callback,
+                mouse_callback);
 
     w->pos_flags = pos_flags;
     w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
-
     w->state |= WST_CONSTRUCT | WST_FOCUSED;
-    if (modal)
-        w->state |= WST_MODAL;
 
     new_d->color = colors;
     new_d->help_ctx = help_ctx;
@@ -538,7 +495,24 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
 
     new_d->mouse_status = MOU_UNHANDLED;
 
-    dlg_set_title (new_d, title);
+    if (modal)
+    {
+        frame_colors_t frame_colors;
+
+        w->state |= WST_MODAL;
+
+        if (new_d->color != NULL)
+        {
+            frame_colors[FRAME_COLOR_NORMAL] = new_d->color[DLG_COLOR_NORMAL];
+            frame_colors[FRAME_COLOR_TITLE] = new_d->color[DLG_COLOR_TITLE];
+        }
+
+        new_d->frame =
+            frame_new (0, 0, w->lines, w->cols, title,
+                       new_d->color != NULL ? frame_colors : NULL, FALSE, new_d->compact);
+        group_add_widget (g, new_d->frame);
+        frame_set_title (new_d->frame, title);
+    }
 
     /* unique name of event group for this dialog */
     new_d->event_group = g_strdup_printf ("%s_%p", MCEVENT_GROUP_DIALOG, (void *) new_d);
@@ -745,7 +719,6 @@ dlg_destroy (WDialog * h)
     group_default_callback (WIDGET (h), NULL, MSG_DESTROY, 0, NULL);
     mc_event_group_del (h->event_group);
     g_free (h->event_group);
-    g_free (h->title);
     g_free (h);
 
     do_refresh ();
@@ -786,25 +759,6 @@ dlg_save_history (WDialog * h)
     }
 
     g_free (profile);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-dlg_set_title (WDialog * h, const char *title)
-{
-    MC_PTR_FREE (h->title);
-
-    /* Strip existing spaces, add one space before and after the title */
-    if (title != NULL && title[0] != '\0')
-    {
-        char *t;
-
-        t = g_strstrip (g_strdup (title));
-        if (t[0] != '\0')
-            h->title = g_strdup_printf (" %s ", t);
-        g_free (t);
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */

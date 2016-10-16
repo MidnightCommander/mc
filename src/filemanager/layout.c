@@ -314,32 +314,42 @@ bminus_cback (WButton * button, int action)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
+layout_bg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+{
+    switch (msg)
+    {
+    case MSG_DRAW:
+        frame_callback (w, NULL, MSG_DRAW, 0, NULL);
+
+        old_layout.output_lines = -1;
+
+        update_split (DIALOG (w->owner));
+
+        if (old_layout.output_lines != _output_lines)
+        {
+            old_layout.output_lines = _output_lines;
+            tty_setcolor (mc_global.tty.console_flag != '\0' ? COLOR_NORMAL : DISABLED_COLOR);
+            widget_gotoyx (w, 9, 5);
+            tty_print_string (output_lines_label);
+            widget_gotoyx (w, 9, 5 + 3 + output_lines_label_len);
+            tty_printf ("%02d", _output_lines);
+        }
+        return MSG_HANDLED;
+
+    default:
+        return frame_callback (w, sender, msg, parm, data);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
 layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WDialog *h = DIALOG (w);
 
     switch (msg)
     {
-    case MSG_DRAW:
-        /* When repainting the whole dialog (e.g. with C-l) we have to
-           update everything */
-        dlg_default_repaint (h);
-
-        old_layout.output_lines = -1;
-
-        update_split (h);
-
-        if (old_layout.output_lines != _output_lines)
-        {
-            old_layout.output_lines = _output_lines;
-            tty_setcolor (mc_global.tty.console_flag != '\0' ? COLOR_NORMAL : DISABLED_COLOR);
-            widget_gotoyx (h, 9, 5);
-            tty_print_string (output_lines_label);
-            widget_gotoyx (h, 9, 5 + 3 + output_lines_label_len);
-            tty_printf ("%02d", _output_lines);
-        }
-        return MSG_HANDLED;
-
     case MSG_POST_KEY:
         {
             const Widget *mw = CONST_WIDGET (midnight_dlg);
@@ -549,6 +559,9 @@ layout_dlg_create (void)
         dlg_create (TRUE, 0, 0, 15, width, WPOS_CENTER, FALSE, dialog_colors, layout_callback, NULL,
                     "[Layout]", _("Layout"));
     g = GROUP (layout_dlg);
+
+    /* draw background */
+    WIDGET (layout_dlg->frame)->callback = layout_bg_callback;
 
 #define XTRACT(i) (*check_options[i].variable != 0), check_options[i].text
 
