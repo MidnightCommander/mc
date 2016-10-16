@@ -507,11 +507,12 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
             frame_colors[FRAME_COLOR_TITLE] = new_d->color[DLG_COLOR_TITLE];
         }
 
-        new_d->frame =
-            frame_new (0, 0, w->lines, w->cols, title,
-                       new_d->color != NULL ? frame_colors : NULL, FALSE, new_d->compact);
-        group_add_widget (g, new_d->frame);
-        frame_set_title (new_d->frame, title);
+        new_d->bg =
+            WIDGET (frame_new
+                    (0, 0, w->lines, w->cols, title, new_d->color != NULL ? frame_colors : NULL,
+                     FALSE, new_d->compact));
+        group_add_widget (g, new_d->bg);
+        frame_set_title (FRAME (new_d->bg), title);
     }
 
     /* unique name of event group for this dialog */
@@ -542,17 +543,6 @@ dlg_set_default_colors (void)
     listbox_colors[DLG_COLOR_HOT_NORMAL] = PMENU_ENTRY_COLOR;
     listbox_colors[DLG_COLOR_HOT_FOCUS] = PMENU_SELECTED_COLOR;
     listbox_colors[DLG_COLOR_TITLE] = PMENU_TITLE_COLOR;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-dlg_erase (WDialog * h)
-{
-    Widget *wh = WIDGET (h);
-
-    if (wh != NULL && widget_get_state (wh, WST_ACTIVE))
-        tty_fill_region (wh->y, wh->x, wh->lines, wh->cols, ' ');
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -755,7 +755,7 @@ advanced_chown_init (void)
     ch_grp = GROUP (ch_dlg);
 
     /* draw background */
-    WIDGET (ch_dlg->frame)->callback = advanced_chown_bg_callback;
+    ch_dlg->bg->callback = advanced_chown_bg_callback;
 
     l_filename = label_new (2, 3, "");
     group_add_widget (ch_grp, l_filename);

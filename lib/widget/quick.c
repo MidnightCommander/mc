@@ -572,7 +572,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
     }
 
     /* skip frame widget */
-    if (dd->frame != NULL)
+    if (dd->bg != NULL)
         nskip++;
 
     while (nskip-- != 0)

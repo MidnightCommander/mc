@@ -1130,7 +1130,7 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
     g = GROUP (whelp);
     widget_want_tab (WIDGET (whelp), TRUE);
     /* draw background */
-    WIDGET (whelp->frame)->callback = help_bg_callback;
+    whelp->bg->callback = help_bg_callback;
 
     selected_item = search_string_node (main_node, STRING_LINK_START) - 1;
     currentpoint = main_node + 1;       /* Skip the newline following the start of the node */

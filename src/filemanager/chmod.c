@@ -325,7 +325,7 @@ chmod_init (const char *fname, const struct stat *sf_stat)
     g = GROUP (ch_dlg);
 
     /* draw background */
-    WIDGET (ch_dlg->frame)->callback = chmod_bg_callback;
+    ch_dlg->bg->callback = chmod_bg_callback;
 
     group_add_widget (g, groupbox_new (PY, PX, BUTTONS_PERM + 2, perm_gb_len, _("Permission")));
 

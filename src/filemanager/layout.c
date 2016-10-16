@@ -561,7 +561,7 @@ layout_dlg_create (void)
     g = GROUP (layout_dlg);
 
     /* draw background */
-    WIDGET (layout_dlg->frame)->callback = layout_bg_callback;
+    layout_dlg->bg->callback = layout_bg_callback;
 
 #define XTRACT(i) (*check_options[i].variable != 0), check_options[i].text
 

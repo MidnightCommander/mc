@@ -207,7 +207,7 @@ chown_init (void)
     g = GROUP (ch_dlg);
 
     /* draw background */
-    WIDGET (ch_dlg->frame)->callback = chown_bg_callback;
+    ch_dlg->bg->callback = chown_bg_callback;
 
     group_add_widget (g, groupbox_new (2, 3, GH, GW, _("User name")));
     l_user = listbox_new (3, 4, GH - 2, GW - 2, FALSE, NULL);

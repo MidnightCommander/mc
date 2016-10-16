@@ -76,7 +76,7 @@ struct WDialog
     /* Internal variables */
     void *data;                 /* Data can be passed to dialog */
     char *event_group;          /* Name of event group for this dialog */
-    WFrame *frame;              /* Frame. Frame is used as background */
+    Widget *bg;                 /* WFrame or WBackground */
 
     dlg_shortcut_str get_shortcut;      /* Shortcut string */
     dlg_title_str get_title;    /* useless for modal dialogs */
@@ -124,7 +124,6 @@ void dlg_draw (WDialog * h);
 /* Default callback for dialogs */
 cb_ret_t dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data);
 
-void dlg_erase (WDialog * h);
 void dlg_stop (WDialog * h);
 
 /* Redraw all dialogs */

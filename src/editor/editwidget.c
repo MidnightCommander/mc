@@ -758,11 +758,6 @@ edit_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
         edit_dlg_init ();
         return MSG_HANDLED;
 
-    case MSG_DRAW:
-        tty_setcolor (EDITOR_BACKGROUND);
-        dlg_erase (h);
-        return MSG_HANDLED;
-
     case MSG_RESIZE:
         dlg_default_callback (w, NULL, MSG_RESIZE, 0, NULL);
         menubar_arrange (find_menubar (h));
@@ -909,6 +904,31 @@ edit_dialog_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 
     /* Continue handling of unhandled event in window or menu */
     event->result.abort = unhandled;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
+edit_dialog_bg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+{
+    switch (msg)
+    {
+    case MSG_INIT:
+        {
+            Widget *wo = WIDGET (w->owner);
+
+            w->y = wo->y + 1;
+            w->x = wo->x;
+            w->lines = wo->lines - 2;
+            w->cols = wo->cols;
+            w->pos_flags |= WPOS_KEEP_ALL;
+
+            return MSG_HANDLED;
+        }
+
+    default:
+        return background_callback (w, sender, msg, parm, data);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1225,6 +1245,11 @@ edit_files (const GList * files)
     edit_dlg->get_title = edit_get_title;
 
     g = GROUP (edit_dlg);
+
+    edit_dlg->bg =
+        WIDGET (background_new
+                (1, 0, wd->lines - 2, wd->cols, EDITOR_BACKGROUND, ' ', edit_dialog_bg_callback));
+    group_add_widget (g, edit_dlg->bg);
 
     menubar = menubar_new (NULL, TRUE);
     w = WIDGET (menubar);
