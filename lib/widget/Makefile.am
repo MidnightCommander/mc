@@ -2,6 +2,7 @@
 noinst_LTLIBRARIES = libmcwidget.la
 
 libmcwidget_la_SOURCES = \
+	background.c background.h \
 	button.c button.h \
 	buttonbar.c buttonbar.h \
 	check.c check.h \

@@ -18,6 +18,7 @@ typedef struct WGroup WGroup;
 #include "lib/widget/rect.h"
 #include "lib/widget/widget-common.h"
 #include "lib/widget/group.h"
+#include "lib/widget/background.h"
 #include "lib/widget/frame.h"
 #include "lib/widget/dialog.h"
 #include "lib/widget/history.h"
