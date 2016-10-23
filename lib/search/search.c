@@ -346,11 +346,11 @@ mc_search_prepare_replace_str (mc_search_t * lc_mc_search, GString * replace_str
 {
     GString *ret;
 
+    if (replace_str == NULL || replace_str->len == 0)
+        return g_string_new ("");
+
     if (lc_mc_search == NULL)
         return g_string_new_len (replace_str->str, replace_str->len);
-
-    if (replace_str == NULL || replace_str->str == NULL || replace_str->len == 0)
-        return g_string_new ("");
 
     switch (lc_mc_search->search_type)
     {
