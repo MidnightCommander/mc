@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-05-07 18:23+0300\n"
+"POT-Creation-Date: 2016-10-15 09:40+0300\n"
 "PO-Revision-Date: 2016-05-08 19:38+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -450,11 +450,59 @@ msgstr ""
 "Schermo di dimensione %dx%d non supportato.\n"
 "Controllare la variabile ambiente TERM.\n"
 
+msgid "B"
+msgstr ""
+
+msgid "kB"
+msgstr ""
+
+msgid "KiB"
+msgstr ""
+
+msgid "MB"
+msgstr ""
+
+msgid "MiB"
+msgstr ""
+
+msgid "GB"
+msgstr ""
+
+msgid "GiB"
+msgstr ""
+
+msgid "TiB"
+msgstr ""
+
+msgid "PiB"
+msgstr ""
+
+msgid "EiB"
+msgstr ""
+
+msgid "ZiB"
+msgstr ""
+
+msgid "YiB"
+msgstr ""
+
+msgid "TB"
+msgstr ""
+
+msgid "PB"
+msgstr ""
+
+msgid "EB"
+msgstr ""
+
+msgid "ZB"
+msgstr ""
+
+msgid "YB"
+msgstr ""
+
 msgid "Cannot create pipe descriptor"
 msgstr "Impossibile creare il descrittore pipe"
-
-msgid "Cannot parse command for pipe"
-msgstr "Impossibile analizzare il comando per la pipe"
 
 msgid "Cannot create pipe streams"
 msgstr "Impossibile creare flussi pipe"
@@ -3497,12 +3545,6 @@ msgid "<readlink failed>"
 msgstr "<readlink fallito>"
 
 #, c-format
-msgid "%s byte"
-msgid_plural "%s bytes"
-msgstr[0] "%s byte"
-msgstr[1] "%s byte"
-
-#, c-format
 msgid "%s in %d file"
 msgid_plural "%s in %d files"
 msgstr[0] " %s byte in %d file"
@@ -4418,3 +4460,11 @@ msgstr "Continuare dall'inizio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Impossibile ricevere copia locale di /ftp://un.host/modificami.txt"
+
+#~ msgid "Cannot parse command for pipe"
+#~ msgstr "Impossibile analizzare il comando per la pipe"
+
+#~ msgid "%s byte"
+#~ msgid_plural "%s bytes"
+#~ msgstr[0] "%s byte"
+#~ msgstr[1] "%s byte"
