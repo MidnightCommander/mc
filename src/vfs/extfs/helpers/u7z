@@ -27,7 +27,14 @@ mcu7zip_list ()
 	date_re='^\(....\)-\(..\)-\(..\) \(..:..:..\)'
 	date_mc='\2-\3-\1 \4'
 	size_re='............'
-	$P7ZIP l "$1" | sed -n "s/$date_re D.... $size_re $size_re\(.*\)/drwxr-xr-x 1 $ugid 0 $date_mc \5/p;s/$date_re \..... \($size_re\) $size_re\(.*\)/-rw-r--r-- 1 $ugid \5 $date_mc \6/p"
+        # archive entries can have no datetime info, 7z will use archive file datetime
+        date_archive=`stat -c %y "$1" 2>/dev/null | sed -n "s/${date_re}.*/${date_mc}/p" 2>/dev/null`
+        [ "${date_archive}"x = x ] && date_archive=`ls -lan "$1" 2>/dev/null | awk '{print $6,"",$7,"",$8}' 2>/dev/null`
+        [ "${date_archive}"x = x ] && date_archive="01-01-1970 00:00:00"
+        $P7ZIP l "$1" | sed -n "s/$date_re D.... $size_re $size_re\(.*\)/drwxr-xr-x 1 $ugid 0 $date_mc \5/p;\
+                                s/$date_re \..... \($size_re\) $size_re\(.*\)/-rw-r--r-- 1 $ugid \5 $date_mc \6/p;\
+                                s/^\s*D.... $size_re $size_re\(.*\)/drwxr-xr-x 1 $ugid 0 $date_archive \1/p;\
+                                s/^\s*\..... \($size_re\) $size_re\(.*\)/-rw-r--r-- 1 $ugid \1 $date_archive \2/p"
 }
 
 mcu7zip_copyout ()
