@@ -1613,7 +1613,7 @@ start_stop (WButton * button, int action)
     button_set_text (button, fbuts[is_start ? 3 : 2].text);
 
     find_relocate_buttons (DIALOG (w->owner), FALSE);
-    dlg_draw (DIALOG (w->owner));
+    widget_draw (WIDGET (w->owner));
 
     return 0;
 }

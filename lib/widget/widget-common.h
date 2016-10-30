@@ -193,7 +193,7 @@ void widget_adjust_position (widget_pos_flags_t pos_flags, int *y, int *x, int *
 void widget_set_size (Widget * w, int y, int x, int lines, int cols);
 /* select color for widget in dependance of state */
 void widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey);
-void widget_draw (Widget * w);
+cb_ret_t widget_draw (Widget * w);
 void widget_erase (Widget * w);
 gboolean widget_is_active (const void *w);
 gboolean widget_overlapped (const Widget * a, const Widget * b);

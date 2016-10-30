@@ -385,13 +385,23 @@ group_default_resize (WGroup * g, WRect * r)
 static void
 group_draw (WGroup * g)
 {
+    Widget *wg = WIDGET (g);
+
     /* draw all widgets in Z-order, from first to last */
-    if (widget_get_state (WIDGET (g), WST_ACTIVE))
+    if (widget_get_state (wg, WST_ACTIVE))
     {
         GList *p;
 
+        if (g->winch_pending)
+        {
+            g->winch_pending = FALSE;
+            send_message (wg, NULL, MSG_RESIZE, 0, NULL);
+        }
+
         for (p = g->widgets; p != NULL; p = g_list_next (p))
             widget_draw (WIDGET (p->data));
+
+        widget_update_cursor (wg);
     }
 }
 
@@ -557,7 +567,7 @@ group_remove_widget (void *w)
     /* widget has been deleted at runtime */
     if (widget_get_state (WIDGET (g), WST_ACTIVE))
     {
-        dlg_draw (DIALOG (g));          /* FIXME */
+        group_draw (g);
         group_select_current_widget (g);
     }
 

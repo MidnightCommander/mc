@@ -487,6 +487,8 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
     w->pos_flags = pos_flags;
     w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
     w->state |= WST_CONSTRUCT | WST_FOCUSED;
+    /* Temporary hack: dialog doesn't have an owner, own itself. */
+    w->owner = g;
 
     new_d->color = colors;
     new_d->help_ctx = help_ctx;
@@ -555,7 +557,7 @@ do_refresh (void)
     if (fast_refresh)
     {
         if (d != NULL)
-            dlg_draw (DIALOG (d->data));
+            widget_draw (WIDGET (d->data));
     }
     else
     {
@@ -565,34 +567,8 @@ do_refresh (void)
                 break;
         /* back to top dialog */
         for (; d != NULL; d = g_list_previous (d))
-            dlg_draw (DIALOG (d->data));
+            widget_draw (WIDGET (d->data));
     }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Redraw the widgets in reverse order, leaving the current widget
- * as the last one
- */
-
-void
-dlg_draw (WDialog * h)
-{
-    Widget *w = WIDGET (h);
-    WGroup *g = GROUP (h);
-
-    if (!widget_get_state (w, WST_ACTIVE))
-        return;
-
-    if (g->winch_pending)
-    {
-        g->winch_pending = FALSE;
-        send_message (w, NULL, MSG_RESIZE, 0, NULL);
-    }
-
-    send_message (w, NULL, MSG_DRAW, 0, NULL);
-    group_default_callback (w, NULL, MSG_DRAW, 0, NULL);
-    widget_update_cursor (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -635,7 +611,7 @@ dlg_init (WDialog * h)
         group_set_current_widget_next (g);
 
     widget_set_state (wh, WST_ACTIVE, TRUE);
-    dlg_draw (h);
+    widget_draw (wh);
     /* focus found widget */
     if (g->current != NULL)
         widget_set_state (WIDGET (g->current->data), WST_FOCUSED, TRUE);

@@ -1502,6 +1502,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 
     case MSG_DRAW:
         load_hint (TRUE);
+        group_default_callback (w, NULL, MSG_DRAW, 0, NULL);
         /* We handle the special case of the output lines */
         if (mc_global.tty.console_flag != '\0' && output_lines != 0)
         {

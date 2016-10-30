@@ -119,8 +119,6 @@ void dlg_process_event (WDialog * h, int key, Gpm_Event * event);
 
 char *dlg_get_title (const WDialog * h, size_t len);
 
-void dlg_draw (WDialog * h);
-
 /* Default callback for dialogs */
 cb_ret_t dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data);
 

@@ -3155,7 +3155,7 @@ dirsize_status_update_cb (status_msg_t * sm)
     {
         widget_set_size (wd, wd->y, wd->x, wd->lines, WIDGET (dsm->count_size)->cols + 6);
         dirsize_status_locate_buttons (dsm);
-        dlg_draw (sm->dlg);
+        widget_draw (wd);
         /* TODO: ret rid of double redraw */
     }
 

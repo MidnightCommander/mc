@@ -411,7 +411,7 @@ widget_set_state (Widget * w, widget_state_t state, gboolean enable)
     case WST_DISABLED:
         ret = send_message (w, NULL, enable ? MSG_DISABLE : MSG_ENABLE, 0, NULL);
         if (ret == MSG_HANDLED && widget_get_state (WIDGET (w->owner), WST_ACTIVE))
-            ret = send_message (w, NULL, MSG_DRAW, 0, NULL);
+            ret = widget_draw (w);
         break;
 
     case WST_FOCUSED:
@@ -422,7 +422,7 @@ widget_set_state (Widget * w, widget_state_t state, gboolean enable)
             ret = send_message (w, NULL, msg, 0, NULL);
             if (ret == MSG_HANDLED && widget_get_state (WIDGET (w->owner), WST_ACTIVE))
             {
-                send_message (w, NULL, MSG_DRAW, 0, NULL);
+                widget_draw (w);
                 /* Notify owner that focus was moved from one widget to another */
                 send_message (w->owner, w, MSG_CHANGED_FOCUS, 0, NULL);
             }
@@ -485,7 +485,7 @@ widget_set_size (Widget * w, int y, int x, int lines, int cols)
     send_message (w, NULL, MSG_RESIZE, 0, &r);
 
     if (w->owner != NULL && widget_get_state (WIDGET (w->owner), WST_ACTIVE))
-        send_message (w, NULL, MSG_DRAW, 0, NULL);
+        widget_draw (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -558,16 +558,20 @@ widget_is_active (const void *w)
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
+cb_ret_t
 widget_draw (Widget * w)
 {
+    cb_ret_t ret = MSG_NOT_HANDLED;
+
     if (w != NULL)
     {
         WGroup *g = w->owner;
 
         if (g != NULL && widget_get_state (WIDGET (g), WST_ACTIVE))
-            w->callback (w, NULL, MSG_DRAW, 0, NULL);
+            ret = w->callback (w, NULL, MSG_DRAW, 0, NULL);
     }
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */

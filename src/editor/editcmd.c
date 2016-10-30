@@ -1494,24 +1494,6 @@ edit_syntax_onoff_cb (void *data, void *user_data)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Callback for the iteration of objects in the 'editors' array.
- * Redraw editor object.
- *
- * @param data      probably WEdit object
- * @param user_data unused
- */
-
-static void
-edit_redraw_page_cb (void *data, void *user_data)
-{
-    (void) user_data;
-
-    if (edit_widget_is_editor (CONST_WIDGET (data)))
-        ((WEdit *) data)->force |= REDRAW_PAGE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
  * Insert autocompleted word into editor.
  *
  * @param edit       editor object
@@ -1560,7 +1542,7 @@ edit_syntax_onoff_cmd (WDialog * h)
 {
     option_syntax_highlighting = !option_syntax_highlighting;
     g_list_foreach (GROUP (h)->widgets, edit_syntax_onoff_cb, NULL);
-    dlg_draw (h);
+    widget_draw (WIDGET (h));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1574,8 +1556,7 @@ void
 edit_show_tabs_tws_cmd (WDialog * h)
 {
     enable_show_tabs_tws = !enable_show_tabs_tws;
-    g_list_foreach (GROUP (h)->widgets, edit_redraw_page_cb, NULL);
-    dlg_draw (h);
+    widget_draw (WIDGET (h));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1589,8 +1570,7 @@ void
 edit_show_margin_cmd (WDialog * h)
 {
     show_right_margin = !show_right_margin;
-    g_list_foreach (GROUP (h)->widgets, edit_redraw_page_cb, NULL);
-    dlg_draw (h);
+    widget_draw (WIDGET (h));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1605,8 +1585,7 @@ edit_show_numbers_cmd (WDialog * h)
 {
     option_line_state = !option_line_state;
     option_line_state_width = option_line_state ? LINE_STATE_WIDTH : 0;
-    g_list_foreach (GROUP (h)->widgets, edit_redraw_page_cb, NULL);
-    dlg_draw (h);
+    widget_draw (WIDGET (h));
 }
 
 /* --------------------------------------------------------------------------------------------- */
