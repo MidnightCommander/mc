@@ -78,11 +78,6 @@ mc_search__hex_translate_to_regex (const GString * astr, mc_search_hex_parse_err
             while (g_ascii_isspace (str[loop]))
                 loop++;
         }
-        else if (str[loop] == '0' && (str[loop + 1] == 'x' || str[loop + 1] == 'X'))
-        {
-            /* Skip 0x prefixes. */
-            loop += 2;
-        }
         /* cppcheck-suppress invalidscanf */
         else if (sscanf (str + loop, "%x%n", &val, &ptr) == 1)
         {
