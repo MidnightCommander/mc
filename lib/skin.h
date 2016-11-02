@@ -120,6 +120,7 @@ typedef struct mc_skin_struct
     mc_config_t *config;
     GHashTable *colors;
     gboolean have_256_colors;
+    gboolean have_true_colors;
 } mc_skin_t;
 
 /*** global variables defined in .c file *********************************************************/

@@ -68,6 +68,7 @@ Dmitry Koterov <dmitry.koterov@gmail.com>
 
 Egmont Koblinger <egmont@gmail.com>
         Support of 256 colors
+        Support of True Color (16 millions colors)
         Support of italic text
         Support of extended mouse clicks beyond 223 column
         Support of bracketed paste mode of xterm

@@ -187,6 +187,7 @@ mc_skin_ini_file_parse (mc_skin_t * mc_skin)
 
     mc_skin_lines_parse_ini_file (mc_skin);
     mc_skin->have_256_colors = mc_config_get_bool (mc_skin->config, "skin", "256colors", FALSE);
+    mc_skin->have_true_colors = mc_config_get_bool (mc_skin->config, "skin", "truecolors", FALSE);
 
     return TRUE;
 }
