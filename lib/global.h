@@ -135,17 +135,6 @@
 /* one caused by typing 'exit' or 'logout' in the subshell */
 #define SUBSHELL_EXIT 128
 
-#if 0
-#ifdef MC_ENABLE_DEBUGGING_CODE
-#undef NDEBUG
-#else
-#define NDEBUG
-#endif
-#ifdef HAVE_ASSERT_H
-#include <assert.h>
-#endif
-#endif
-
 #define MC_ERROR g_quark_from_static_string (PACKAGE)
 
 #define DEFAULT_CHARSET "ASCII"

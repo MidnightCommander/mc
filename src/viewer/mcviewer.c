@@ -271,9 +271,7 @@ mcview_load (WView * view, const char *command, const char *file, int start_line
     gboolean retval = FALSE;
     vfs_path_t *vpath = NULL;
 
-#ifdef HAVE_ASSERT_H
-    assert (view->bytes_per_line != 0);
-#endif
+    g_assert (view->bytes_per_line != 0);
 
     view->filename_vpath = vfs_path_from_str (file);
 

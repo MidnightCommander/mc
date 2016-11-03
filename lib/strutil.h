@@ -6,9 +6,6 @@
 #include <sys/types.h>
 #include <inttypes.h>
 #include <string.h>
-#ifdef HAVE_ASSERT_H
-#include <assert.h>             /* assert() */
-#endif
 
 /* Header file for strutil.c, strutilascii.c, strutil8bit.c, strutilutf8.c.
  * There are two sort of functions:
@@ -599,9 +596,7 @@ str_move (char *dest, const char *src)
 {
     size_t n;
 
-#ifdef HAVE_ASSERT_H
-    assert (dest <= src);
-#endif
+    g_assert (dest <= src);
 
     n = strlen (src) + 1;       /* + '\0' */
 
