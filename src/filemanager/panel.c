@@ -3908,10 +3908,10 @@ panel_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
         {
             int y, lines;
 
-            y = event->y - 1;
+            y = event->y - 2;
             lines = panel_lines (panel);
 
-            if (y <= lines)
+            if (y >= 0 && y < lines)
                 do_enter (panel);
         }
         break;
