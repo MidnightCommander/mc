@@ -512,12 +512,13 @@ string_file_size (file_entry_t * fe, int len)
 
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
     if (S_ISBLK (fe->st.st_mode) || S_ISCHR (fe->st.st_mode))
+    {
         format_device_number (buffer, len + 1, fe->st.st_rdev);
-    else
+        return buffer;
+    }
 #endif
-        size_trunc_len (buffer, (unsigned int) len, fe->st.st_size, 0, panels_options.kilobyte_si);
 
-    return buffer;
+    return size_trunc_len ((unsigned int) len, fe->st.st_size, 0, panels_options.kilobyte_si);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1154,15 +1155,17 @@ show_free_space (const WPanel * panel)
     if (myfs_stats.avail != 0 || myfs_stats.total != 0)
     {
         const Widget *w = CONST_WIDGET (panel);
-        char buffer1[6], buffer2[6], tmp[BUF_SMALL];
+        char *buffer1;
+        const char *buffer2;
+        char tmp[BUF_SMALL];
 
-        size_trunc_len (buffer1, sizeof (buffer1) - 1, myfs_stats.avail, 1,
-                        panels_options.kilobyte_si);
-        size_trunc_len (buffer2, sizeof (buffer2) - 1, myfs_stats.total, 1,
-                        panels_options.kilobyte_si);
+        buffer1 = g_strdup (size_trunc_len (5, myfs_stats.avail, 1, panels_options.kilobyte_si));
+        buffer2 = size_trunc_len (5, myfs_stats.total, 1, panels_options.kilobyte_si);
         g_snprintf (tmp, sizeof (tmp), " %s/%s (%d%%) ", buffer1, buffer2,
                     myfs_stats.total == 0 ? 0 :
                     (int) (100 * (long double) myfs_stats.avail / myfs_stats.total));
+        g_free (buffer1);
+        /* FIX LEGACY: use str_term_width1() instead of strlen() here */
         widget_move (w, w->lines - 1, w->cols - 2 - (int) strlen (tmp));
         tty_setcolor (NORMAL_COLOR);
         tty_print_string (tmp);

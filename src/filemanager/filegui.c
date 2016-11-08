@@ -491,7 +491,7 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
 
     vfs_path_t *p;
     char *s1;
-    char s2[BUF_SMALL];
+    const char *s2;
     int w, bw1, bw2;
     unsigned short i;
 
@@ -524,7 +524,7 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
     vfs_path_free (p);
     g_free (s1);
     /* new file size */
-    size_trunc_len (s2, sizeof (s2), ui->src_stat->st_size, 0, panels_options.kilobyte_si);
+    s2 = size_trunc_len (BUF_SMALL - 1, ui->src_stat->st_size, 0, panels_options.kilobyte_si);
     NEW_LABEL (2, s2);
     /* new file modification date & time */
     s1 = (char *) file_date (ui->src_stat->st_mtime);
@@ -539,7 +539,7 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
     vfs_path_free (p);
     g_free (s1);
     /* existing file size */
-    size_trunc_len (s2, sizeof (s2), ui->dst_stat->st_size, 0, panels_options.kilobyte_si);
+    s2 = size_trunc_len (BUF_SMALL - 1, ui->dst_stat->st_size, 0, panels_options.kilobyte_si);
     NEW_LABEL (6, s2);
     /* existing file modification date & time */
     s1 = (char *) file_date (ui->dst_stat->st_mtime);
@@ -1030,8 +1030,6 @@ file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ct
                           uintmax_t copied_bytes, gboolean show_summary)
 {
     char buffer[BUF_TINY];
-    char buffer2[BUF_TINY];
-    char buffer3[BUF_TINY];
     file_op_context_ui_t *ui;
 
     if (ctx == NULL || ctx->ui == NULL)
@@ -1057,7 +1055,7 @@ file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ct
     if (ui->time_label != NULL)
     {
         struct timeval tv_current;
-        char buffer4[BUF_TINY];
+        char buffer2[BUF_TINY], buffer3[BUF_TINY];
 
         gettimeofday (&tv_current, NULL);
         file_frmt_time (buffer2, tv_current.tv_sec - tctx->transfer_start.tv_sec);
@@ -1069,6 +1067,8 @@ file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ct
                 g_snprintf (buffer, sizeof (buffer), _("Time: %s %s"), buffer2, buffer3);
             else
             {
+                char buffer4[BUF_TINY];
+
                 file_bps_prepare_for_show (buffer4, (long) tctx->bps);
                 g_snprintf (buffer, sizeof (buffer), _("Time: %s %s (%s)"), buffer2, buffer3,
                             buffer4);
@@ -1080,8 +1080,8 @@ file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ct
                 g_snprintf (buffer, sizeof (buffer), _("Time: %s"), buffer2);
             else
             {
-                file_bps_prepare_for_show (buffer4, (long) tctx->bps);
-                g_snprintf (buffer, sizeof (buffer), _("Time: %s (%s)"), buffer2, buffer4);
+                file_bps_prepare_for_show (buffer3, (long) tctx->bps);
+                g_snprintf (buffer, sizeof (buffer), _("Time: %s (%s)"), buffer2, buffer3);
             }
         }
 
@@ -1090,14 +1090,19 @@ file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ct
 
     if (ui->total_bytes_label != NULL)
     {
-        size_trunc_len (buffer2, 5, tctx->copied_bytes, 0, panels_options.kilobyte_si);
+        const char *buffer2, *buffer3;
 
+        buffer2 = size_trunc_len (5, tctx->copied_bytes, 0, panels_options.kilobyte_si);
         if (!ctx->progress_totals_computed)
             g_snprintf (buffer, sizeof (buffer), _(" Total: %s "), buffer2);
         else
         {
-            size_trunc_len (buffer3, 5, ctx->progress_bytes, 0, panels_options.kilobyte_si);
-            g_snprintf (buffer, sizeof (buffer), _(" Total: %s/%s "), buffer2, buffer3);
+            char *b2;
+
+            b2 = g_strdup (buffer2);
+            buffer3 = size_trunc_len (5, ctx->progress_bytes, 0, panels_options.kilobyte_si);
+            g_snprintf (buffer, sizeof (buffer), _(" Total: %s/%s "), b2, buffer3);
+            g_free (b2);
         }
 
         hline_set_text (ui->total_bytes_label, buffer);

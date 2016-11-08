@@ -169,12 +169,13 @@ mcview_display_status (WView * view)
             tty_printf ("0x%08" PRIxMAX, (uintmax_t) view->hex_cursor);
         else
         {
-            char buffer[BUF_TRUNC_LEN + 1];
+            const char *buffer;
 
-            size_trunc_len (buffer, BUF_TRUNC_LEN, mcview_get_filesize (view), 0,
-                            panels_options.kilobyte_si);
-            tty_printf ("%9" PRIuMAX "/%s%s %s", (uintmax_t) view->dpy_end,
-                        buffer, mcview_may_still_grow (view) ? "+" : " ",
+            buffer =
+                size_trunc_len (BUF_TRUNC_LEN, mcview_get_filesize (view), 0,
+                                panels_options.kilobyte_si);
+            tty_printf ("%9" PRIuMAX "/%s%s %s", (uintmax_t) view->dpy_end, buffer,
+                        mcview_may_still_grow (view) ? "+" : " ",
 #ifdef HAVE_CHARSET
                         mc_global.source_codepage >= 0 ?
                         get_codepage_id (mc_global.source_codepage) :

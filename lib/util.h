@@ -150,11 +150,11 @@ const char *size_trunc (uintmax_t size, gboolean use_si);
  * NOTE: uses the same static buffer as size_trunc. */
 const char *size_trunc_sep (uintmax_t size, gboolean use_si);
 
-/* Print file SIZE to BUFFER, but don't exceed LEN characters,
- * not including trailing 0. BUFFER should be at least LEN+1 long.
- *
+/* Return a static string representing size, appending "K" or "M" for
+ * big sizes. but don't exceed LEN characters,
  * Units: size units (0=bytes, 1=Kbytes, 2=Mbytes, etc.) */
-void size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gboolean use_si);
+const char *size_trunc_len (unsigned int len, uintmax_t size, int units, gboolean use_si);
+
 const char *string_perm (mode_t mode_bits);
 
 const char *extension (const char *);

@@ -405,18 +405,24 @@ size_trunc_sep (uintmax_t size, gboolean use_si)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Print file SIZE to BUFFER, but don't exceed LEN characters,
- * not including trailing 0. BUFFER should be at least LEN+1 long.
- * This function is called for every file on panels, so avoid
- * floating point by any means.
+ * Represent some numeric value as string of required length.
  *
- * Units: size units (filesystem sizes are 1K blocks)
- *    0=bytes, 1=Kbytes, 2=Mbytes, etc.
+ * @param len number of characters to represent @size
+ * @param size value to represent
+ * @param units @size units: 0=bytes, 1=Kbytes, 2=Mbytes, etc.
+ * @param use_si use SI or IEC units (10- or 2-based respectively)
+ *
+ * @return static buffer
  */
 
-void
-size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gboolean use_si)
+const char *
+size_trunc_len (unsigned int len, uintmax_t size, int units, gboolean use_si)
 {
+    /* This function is called for every file on panels, so avoid floating point by any means. */
+
+    /* Enough space to represent uintmax_t value with units */
+    static char buffer[BUF_TINY];
+
     /* Avoid taking power for every file.  */
     /* *INDENT-OFF* */
     static const uintmax_t power10[] = {
@@ -452,6 +458,7 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
 #endif
     };
     /* *INDENT-ON* */
+
     static const char *const suffix[] = { "", "K", "M", "G", "T", "P", "E", "Z", "Y", NULL };
     static const char *const suffix_lc[] = { "", "k", "m", "g", "t", "p", "e", "z", "y", NULL };
 
@@ -493,19 +500,20 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
             if (j == units)
             {
                 /* Empty files will print "0" even with minimal width.  */
-                g_snprintf (buffer, len + 1, "%s", "0");
+                g_snprintf (buffer, sizeof (buffer), "%s", "0");
             }
             else
             {
                 /* Use "~K" or just "K" if len is 1.  Use "B" for bytes.  */
-                g_snprintf (buffer, len + 1, (len > 1) ? "~%s" : "%s", (j > 1) ? sfx[j - 1] : "B");
+                g_snprintf (buffer, sizeof (buffer), (len > 1) ? "~%s" : "%s",
+                            (j > 1) ? sfx[j - 1] : "B");
             }
             break;
         }
 
         if (size < power10[len - (j > 0 ? 1 : 0)])
         {
-            g_snprintf (buffer, len + 1, "%" PRIuMAX "%s", size, sfx[j]);
+            g_snprintf (buffer, sizeof (buffer), "%" PRIuMAX "%s", size, sfx[j]);
             break;
         }
 
@@ -515,6 +523,8 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
         else
             size = (size + 512) >> 10;
     }
+
+    return buffer;
 }
 
 /* --------------------------------------------------------------------------------------------- */
