@@ -195,7 +195,7 @@ static panel_field_t panel_fields[] = {
     }
     ,
     {
-     "size", 7, FALSE, J_RIGHT,
+     "size", 8, FALSE, J_RIGHT,
      /* TRANSLATORS: one single character to represent 'size' sort mode  */
      /* TRANSLATORS: no need to translate 'sort', it's just a context prefix  */
      N_("sort|s"),
@@ -205,7 +205,7 @@ static panel_field_t panel_fields[] = {
     }
     ,
     {
-     "bsize", 7, FALSE, J_RIGHT,
+     "bsize", 8, FALSE, J_RIGHT,
      "",
      N_("Block Size"), FALSE, FALSE,
      string_file_size_brief,
@@ -1159,14 +1159,14 @@ show_free_space (const WPanel * panel)
         const char *buffer2;
         char tmp[BUF_SMALL];
 
-        buffer1 = g_strdup (size_trunc_len (5, myfs_stats.avail, 1, panels_options.kilobyte_si));
-        buffer2 = size_trunc_len (5, myfs_stats.total, 1, panels_options.kilobyte_si);
+        buffer1 = g_strdup (size_trunc_len (8, myfs_stats.avail, 1, panels_options.kilobyte_si));
+        buffer2 = size_trunc_len (8, myfs_stats.total, 1, panels_options.kilobyte_si);
         g_snprintf (tmp, sizeof (tmp), " %s/%s (%d%%) ", buffer1, buffer2,
                     myfs_stats.total == 0 ? 0 :
                     (int) (100 * (long double) myfs_stats.avail / myfs_stats.total));
         g_free (buffer1);
-        /* FIX LEGACY: use str_term_width1() instead of strlen() here */
-        widget_move (w, w->lines - 1, w->cols - 2 - (int) strlen (tmp));
+
+        widget_move (w, w->lines - 1, w->cols - 2 - str_term_width1 (tmp));
         tty_setcolor (NORMAL_COLOR);
         tty_print_string (tmp);
     }

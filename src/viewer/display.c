@@ -56,8 +56,6 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define BUF_TRUNC_LEN 5         /* The length of the line displays the file size */
-
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
@@ -171,9 +169,8 @@ mcview_display_status (WView * view)
         {
             const char *buffer;
 
-            buffer =
-                size_trunc_len (BUF_TRUNC_LEN, mcview_get_filesize (view), 0,
-                                panels_options.kilobyte_si);
+            buffer = size_trunc_len (8, mcview_get_filesize (view), 0, panels_options.kilobyte_si);
+
             tty_printf ("%9" PRIuMAX "/%s%s %s", (uintmax_t) view->dpy_end, buffer,
                         mcview_may_still_grow (view) ? "+" : " ",
 #ifdef HAVE_CHARSET

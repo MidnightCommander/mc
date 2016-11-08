@@ -1092,7 +1092,7 @@ file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ct
     {
         const char *buffer2, *buffer3;
 
-        buffer2 = size_trunc_len (5, tctx->copied_bytes, 0, panels_options.kilobyte_si);
+        buffer2 = size_trunc_len (8, tctx->copied_bytes, 0, panels_options.kilobyte_si);
         if (!ctx->progress_totals_computed)
             g_snprintf (buffer, sizeof (buffer), _(" Total: %s "), buffer2);
         else
@@ -1100,7 +1100,7 @@ file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ct
             char *b2;
 
             b2 = g_strdup (buffer2);
-            buffer3 = size_trunc_len (5, ctx->progress_bytes, 0, panels_options.kilobyte_si);
+            buffer3 = size_trunc_len (8, ctx->progress_bytes, 0, panels_options.kilobyte_si);
             g_snprintf (buffer, sizeof (buffer), _(" Total: %s/%s "), b2, buffer3);
             g_free (b2);
         }
