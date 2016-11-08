@@ -114,12 +114,8 @@ dialog_switch_goto (GList * dlg)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-dlg_resize_cb (void *data, void *user_data)
+dialog_switch_resize (WDialog * d)
 {
-    WDialog *d = data;
-
-    (void) user_data;
-
     if (widget_get_state (WIDGET (d), WST_ACTIVE))
         send_message (d, NULL, MSG_RESIZE, 0, NULL);
     else
@@ -366,6 +362,8 @@ mc_refresh (void)
 void
 dialog_change_screen_size (void)
 {
+    GList *d;
+
     mc_global.tty.winch_flag = 0;
 
     tty_change_screen_size ();
@@ -377,8 +375,10 @@ dialog_change_screen_size (void)
 
     /* Inform all suspending dialogs */
     dialog_switch_got_winch ();
-    /* Inform all running dialogs */
-    g_list_foreach (top_dlg, (GFunc) dlg_resize_cb, NULL);
+
+    /* Inform all running dialogs from first to last */
+    for (d = g_list_last (top_dlg); d != NULL; d = g_list_previous (d))
+        dialog_switch_resize (DIALOG (d->data));
 
     /* Now, force the redraw */
     repaint_screen ();
