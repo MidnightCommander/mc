@@ -147,8 +147,7 @@ const char *size_trunc (uintmax_t size, gboolean use_si);
 const char *size_trunc_sep (uintmax_t size, gboolean use_si);
 
 /* Print file SIZE to BUFFER, but don't exceed LEN characters,
- * not including trailing 0. LEN should be at least 7 long
- * and BUFFER at least LEN+1 long.
+ * not including trailing 0. BUFFER should be at least LEN+1 long.
  *
  * Units: size units (0=bytes, 1=Kbytes, 2=Mbytes, etc.) */
 void size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gboolean use_si);

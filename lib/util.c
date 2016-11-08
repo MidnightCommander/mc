@@ -402,10 +402,10 @@ size_trunc_sep (uintmax_t size, gboolean use_si)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Print file SIZE to BUFFER, but don't exceed LEN characters, not including trailing 0.
- * LEN should be at least 7 long and BUFFER at least LEN+1 long.
- *
- * This function is called for every file on panels, so avoid floating point by any means.
+ * Print file SIZE to BUFFER, but don't exceed LEN characters,
+ * not including trailing 0. BUFFER should be at least LEN+1 long.
+ * This function is called for every file on panels, so avoid
+ * floating point by any means.
  *
  * Units: size units (filesystem sizes are 1K blocks)
  *    0=bytes, 1=Kbytes, 2=Mbytes, etc.
@@ -457,8 +457,6 @@ size_trunc_len (char *buffer, unsigned int len, uintmax_t size, int units, gbool
 
     const char *const *sfx = use_si ? units_si : units_iec;
     int j = 0;
-
-    g_assert (len >= 7);
 
     if (len == 0)
         len = 9;
