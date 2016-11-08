@@ -416,7 +416,7 @@ size_trunc_sep (uintmax_t size, gboolean use_si)
  */
 
 const char *
-size_trunc_len (unsigned int len, uintmax_t size, int units, gboolean use_si)
+size_trunc_len (unsigned int len, uintmax_t size, unsigned int units, gboolean use_si)
 {
     /* This function is called for every file on panels, so avoid floating point by any means. */
 
@@ -457,13 +457,40 @@ size_trunc_len (unsigned int len, uintmax_t size, int units, gboolean use_si)
      */
 #endif
     };
+
+    static const char *units_iec[] = { N_("B"), N_("KiB"), N_("MiB"), N_("GiB"), N_("TiB"),
+                                       N_("PiB"), N_("EiB"), N_("ZiB"), N_("YiB"), NULL };
+    static unsigned int units_iec_len[] = { 1, 3, 3, 3, 3, 3, 3, 3, 3, 0 };
+
+    static const char *units_si[] = { N_("B"), N_("kB"), N_("MB"), N_("GB"), N_("TB"),
+                                      N_("PB"), N_("EB"), N_("ZB"), N_("YB"), NULL };
+    static unsigned int units_si_len[] = { 1, 2, 2, 2, 2, 2, 2, 2, 2, 0 };
     /* *INDENT-ON* */
 
-    static const char *const suffix[] = { "", "K", "M", "G", "T", "P", "E", "Z", "Y", NULL };
-    static const char *const suffix_lc[] = { "", "k", "m", "g", "t", "p", "e", "z", "y", NULL };
+    const char *const *sfx = use_si ? units_si : units_iec;
+    const unsigned int *sfx_len = use_si ? units_si_len : units_iec_len;
 
-    const char *const *sfx = use_si ? suffix_lc : suffix;
-    int j = 0;
+    unsigned int j;
+
+#ifdef ENABLE_NLS
+    static gboolean i18n_flag = FALSE;
+
+    /* initialize units and calulate it widths */
+    if (!i18n_flag)
+    {
+        for (j = 0; units_iec[j] != NULL; j++)
+        {
+            units_iec[j] = _(units_iec[j]);
+            units_iec_len[j] = (unsigned int) str_term_width1 (units_iec[j]);
+
+            units_si[j] = _(units_si[j]);
+            units_si_len[j] = (unsigned int) str_term_width1 (units_si[j]);
+        }
+
+        i18n_flag = TRUE;
+    }
+
+#endif /* ENABLE_NLS */
 
     if (len == 0)
         len = 9;
@@ -493,27 +520,45 @@ size_trunc_len (unsigned int len, uintmax_t size, int units, gboolean use_si)
             size += size_remain;        /* Re-add remainder lost by division/multiplication */
         }
 
+    buffer[0] = '\0';
+
     for (j = units; sfx[j] != NULL; j++)
     {
+        unsigned int n;
+
         if (size == 0)
         {
             if (j == units)
             {
-                /* Empty files will print "0" even with minimal width.  */
-                g_snprintf (buffer, sizeof (buffer), "%s", "0");
+                /* Empty file */
+                if (len >= 1 + 1 + sfx_len[0])  /* "0" + space + unit */
+                    g_snprintf (buffer, sizeof (buffer), "0 %s", sfx[0]);
+                else
+                {
+                    /* len is too small */
+                    buffer[0] = '0';
+                    buffer[1] = '\0';
+                }
             }
             else
             {
                 /* Use "~K" or just "K" if len is 1.  Use "B" for bytes.  */
-                g_snprintf (buffer, sizeof (buffer), (len > 1) ? "~%s" : "%s",
-                            (j > 1) ? sfx[j - 1] : "B");
+                n = j == 0 ? sfx_len[0] : sfx_len[j - 1];
+
+                if (len > n)
+                    g_snprintf (buffer, sizeof (buffer), "~%s", (j == 0) ? sfx[0] : sfx[j - 1]);
+                else if (len == n)
+                    g_snprintf (buffer, sizeof (buffer), "%s", (j == 0) ? sfx[0] : sfx[j - 1]);
+                /* else len is too small */
             }
             break;
         }
 
-        if (size < power10[len - (j > 0 ? 1 : 0)])
+        n = 1 + sfx_len[j];     /* space + unit */
+
+        if (len > n && size < power10[len - n])
         {
-            g_snprintf (buffer, sizeof (buffer), "%" PRIuMAX "%s", size, sfx[j]);
+            g_snprintf (buffer, sizeof (buffer), "%" PRIuMAX " %s", size, sfx[j]);
             break;
         }
 
@@ -522,6 +567,13 @@ size_trunc_len (unsigned int len, uintmax_t size, int units, gboolean use_si)
             size = (size + 500) / 1000;
         else
             size = (size + 512) >> 10;
+    }
+
+    if (buffer[0] == '\0')
+    {
+        /* len is too small -- fill buffer with some character */
+        memset (buffer, '.', len);
+        buffer[len] = '\0';
     }
 
     return buffer;
