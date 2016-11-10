@@ -263,6 +263,19 @@ mc_search_prepare (mc_search_t * lc_mc_search)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Carries out the search.
+ *
+ * Returns TRUE if found.
+ *
+ * Returns FALSE if not found. In this case, lc_mc_search->error reveals
+ * the reason:
+ *
+ *   - MC_SEARCH_E_NOTFOUND: the pattern isn't in the subject string.
+ *   - MC_SEARCH_E_ABORT: the user aborted the search.
+ *   - For any other reason (but not for the above two!): the description
+ *     is in lc_mc_search->error_str.
+ */
 gboolean
 mc_search_run (mc_search_t * lc_mc_search, const void *user_data,
                gsize start_search, gsize end_search, gsize * found_len)
