@@ -2084,21 +2084,18 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
 
     if (edit != NULL)
     {
+        gboolean fullscreen;
+        WRect loc_prev;
+
         /* save some widget parameters */
-        gboolean fullscreen = edit->fullscreen;
-        int y_prev = edit->y_prev;
-        int x_prev = edit->x_prev;
-        int lines_prev = edit->lines_prev;
-        int cols_prev = edit->cols_prev;
+        fullscreen = edit->fullscreen;
+        loc_prev = edit->loc_prev;
 
         edit_purge_widget (edit);
 
         /* restore saved parameters */
         edit->fullscreen = fullscreen;
-        edit->y_prev = y_prev;
-        edit->x_prev = x_prev;
-        edit->lines_prev = lines_prev;
-        edit->cols_prev = cols_prev;
+        edit->loc_prev = loc_prev;
     }
     else
     {
@@ -2237,10 +2234,7 @@ edit_reload_line (WEdit * edit, const vfs_path_t * filename_vpath, long line)
     *WIDGET (e) = *w;
     /* save some widget parameters */
     e->fullscreen = edit->fullscreen;
-    e->y_prev = edit->y_prev;
-    e->x_prev = edit->x_prev;
-    e->lines_prev = edit->lines_prev;
-    e->cols_prev = edit->cols_prev;
+    e->loc_prev = edit->loc_prev;
 
     if (edit_init (e, w->y, w->x, w->lines, w->cols, filename_vpath, line) == NULL)
     {

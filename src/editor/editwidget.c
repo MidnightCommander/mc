@@ -192,7 +192,7 @@ edit_restore_size (WEdit * edit)
 
     edit->drag_state = MCEDIT_DRAG_NONE;
     w->mouse.forced_capture = FALSE;
-    widget_set_size (w, edit->y_prev, edit->x_prev, edit->lines_prev, edit->cols_prev);
+    widget_set_size_rect (w, &edit->loc_prev);
     dlg_draw (DIALOG (w->owner));
 }
 
@@ -1323,10 +1323,7 @@ edit_save_size (WEdit * edit)
 {
     Widget *w = WIDGET (edit);
 
-    edit->y_prev = w->y;
-    edit->x_prev = w->x;
-    edit->lines_prev = w->lines;
-    edit->cols_prev = w->cols;
+    rect_init (&edit->loc_prev, w->y, w->x, w->lines, w->cols);
 }
 
 /* --------------------------------------------------------------------------------------------- */

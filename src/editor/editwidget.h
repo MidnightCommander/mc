@@ -68,8 +68,7 @@ struct WEdit
     int drag_state_start;       /* save cursor position before window moving */
 
     /* save location before move/resize or toggle to fullscreen */
-    int x_prev, y_prev;
-    int cols_prev, lines_prev;
+    WRect loc_prev;
 
     vfs_path_t *filename_vpath; /* Name of the file */
     vfs_path_t *dir_vpath;      /* NULL if filename is absolute */
