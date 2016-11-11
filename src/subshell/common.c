@@ -881,7 +881,7 @@ init_subshell_precmd (char *precmd, size_t buff_size)
          * Find out how to fix this.
          */
         g_snprintf (precmd, buff_size,
-                    "if not functions -q fish_prompt_mc;"
+                    " if not functions -q fish_prompt_mc;"
                     "functions -c fish_prompt fish_prompt_mc; end;"
                     "function fish_prompt;"
                     "echo (whoami)@(hostname -s):(set_color $fish_color_cwd)(pwd)(set_color normal)\\$\\ ; "
