@@ -31,6 +31,7 @@
 #include <errno.h>
 
 #include "lib/global.h"
+#include "lib/util.h"           /* MC_PTR_FREE */
 #include "lib/strutil.h"
 
 /*** global variables ****************************************************************************/
@@ -425,8 +426,9 @@ str_uninit_strings (void)
 {
     if (str_cnv_not_convert != INVALID_CONV)
         g_iconv_close (str_cnv_not_convert);
-    g_free (term_encoding);
-    g_free (codeset);
+    /* NULL-ize pointers to avoid double free in unit tests */
+    MC_PTR_FREE (term_encoding);
+    MC_PTR_FREE (codeset);
 }
 
 /* --------------------------------------------------------------------------------------------- */

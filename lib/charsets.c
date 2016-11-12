@@ -225,6 +225,8 @@ free_codepages_list (void)
 {
     g_ptr_array_foreach (codepages, free_codepage_desc, NULL);
     g_ptr_array_free (codepages, TRUE);
+    /* NULL-ize pointer to make unit tests happy */
+    codepages = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */

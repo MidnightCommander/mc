@@ -194,6 +194,7 @@ mc_stat__deinit (void)
 {
     g_ptr_array_foreach (mc_stat__vpath__captured, (GFunc) vfs_path_free, NULL);
     g_ptr_array_free (mc_stat__vpath__captured, TRUE);
+    mc_stat__vpath__captured = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
