@@ -182,6 +182,31 @@ skin_name_to_label (const gchar * name)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static cb_ret_t
+skin_dlg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+{
+    switch (msg)
+    {
+    case MSG_RESIZE:
+        {
+            WDialog *d = DIALOG (w);
+            Widget *wd = WIDGET (d->data);
+            int y, x;
+
+            y = wd->y + (wd->lines - w->lines) / 2;
+            x = wd->x + wd->cols / 2;
+            dlg_set_position (d, y, x, w->lines, w->cols);
+
+            return MSG_HANDLED;
+        }
+
+    default:
+        dlg_default_callback (w, sender, msg, parm, data);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static int
 sel_skin_button (WButton * button, int action)
 {
@@ -189,17 +214,19 @@ sel_skin_button (WButton * button, int action)
     WListbox *skin_list;
     WDialog *skin_dlg;
     const gchar *skin_name;
-    int lxx, lyy;
     unsigned int i;
     unsigned int pos = 1;
 
     (void) action;
 
-    lxx = COLS / 2;
-    lyy = (LINES - 13) / 2;
     skin_dlg =
-        dlg_create (TRUE, lyy, lxx, 13, 24, WPOS_KEEP_DEFAULT, TRUE, dialog_colors, NULL, NULL,
-                    "[Appearance]", _("Skins"));
+        dlg_create (TRUE, 0, 0, 13, 24, WPOS_KEEP_DEFAULT, TRUE, dialog_colors, skin_dlg_callback,
+                    NULL, "[Appearance]", _("Skins"));
+    /* use Appearance dialog for positioning */
+    skin_dlg->data = WIDGET (button)->owner;
+
+    /* set dialog location before all */
+    send_message (skin_dlg, NULL, MSG_RESIZE, 0, NULL);
 
     skin_list = listbox_new (1, 1, 11, 22, FALSE, NULL);
     skin_name = "default";
@@ -222,7 +249,8 @@ sel_skin_button (WButton * button, int action)
         }
     }
 
-    add_widget (skin_dlg, skin_list);
+    /* make list stick to all sides of dialog, effectively make it be resized with dialog */
+    add_widget_autopos (skin_dlg, skin_list, WPOS_KEEP_ALL, NULL);
 
     result = dlg_run (skin_dlg);
     if (result == B_ENTER)
