@@ -179,7 +179,6 @@ mc_tty_normalize_lines_char (const char *ch)
 void
 tty_init (gboolean mouse_enable, gboolean is_xterm)
 {
-    struct termios mode;
     initscr ();
 
 #ifdef HAVE_ESCDELAY
@@ -195,12 +194,11 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     ESCDELAY = 200;
 #endif /* HAVE_ESCDELAY */
 
-    tcgetattr (STDIN_FILENO, &mode);
     /* use Ctrl-g to generate SIGINT */
-    mode.c_cc[VINTR] = CTRL ('g');      /* ^g */
+    cur_term->Nttyb.c_cc[VINTR] = CTRL ('g');   /* ^g */
     /* disable SIGQUIT to allow use Ctrl-\ key */
-    mode.c_cc[VQUIT] = NULL_VALUE;
-    tcsetattr (STDIN_FILENO, TCSANOW, &mode);
+    cur_term->Nttyb.c_cc[VQUIT] = NULL_VALUE;
+    tcsetattr (cur_term->Filedes, TCSANOW, &cur_term->Nttyb);
 
     tty_start_interrupt_key ();
 
