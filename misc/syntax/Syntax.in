@@ -40,7 +40,7 @@ include lsm.syntax
 file .\*(bash_completion|profile|\\.(sh|bash_login|bash_profile|bash_logout|bash_aliases|bash_exports|bash_history|bashrc|profile|zlogin|zlogout|zprofile|zshenv|zshrc))$ Shell\sScript ^#!\s\*/(.\*/|usr/bin/env\s)([a-z]?|ba|pdk)sh
 include sh.syntax
 
-file ..\*\\.(pl|PL|pm|PM|psgi|PSGI)$ Perl\sProgram ^#!.\*([\s/]perl|@PERL@)
+file ..\*\\.(pl|PL|pm|PM|psgi|PSGI|t)$ Perl\sProgram ^#!.\*([\s/]perl|@PERL@)
 include perl.syntax
 
 file ..\*\\.(py|PY)$ Python\sProgram ^#!.\*([\s/]python|@PYTHON@)
