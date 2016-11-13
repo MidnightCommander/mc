@@ -84,7 +84,7 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         {
         case ' ':
             r->sel = r->pos;
-            widget_set_state (w, WST_FOCUSED, TRUE);
+            widget_set_state (w, WST_FOCUSED, TRUE);    /* Also draws the widget. */
             return MSG_HANDLED;
 
         case KEY_UP:
@@ -92,6 +92,7 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             if (r->pos > 0)
             {
                 r->pos--;
+                widget_redraw (w);
                 return MSG_HANDLED;
             }
             return MSG_NOT_HANDLED;
@@ -101,6 +102,7 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             if (r->count - 1 > r->pos)
             {
                 r->pos++;
+                widget_redraw (w);
                 return MSG_HANDLED;
             }
         default:
@@ -108,7 +110,6 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         }
 
     case MSG_CURSOR:
-        widget_set_state (w, WST_FOCUSED, TRUE);
         widget_move (r, r->pos, 1);
         return MSG_HANDLED;
 
