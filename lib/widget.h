@@ -15,6 +15,7 @@ typedef struct WGroup WGroup;
 /* Please note that the first element in all the widgets is a     */
 /* widget variable of type Widget.  We abuse this fact everywhere */
 
+#include "lib/widget/rect.h"
 #include "lib/widget/widget-common.h"
 #include "lib/widget/group.h"
 #include "lib/widget/dialog.h"

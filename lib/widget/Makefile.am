@@ -21,6 +21,7 @@ libmcwidget_la_SOURCES = \
 	mouse.c mouse.h \
 	quick.c quick.h \
 	radio.c radio.h \
+	rect.c rect.h \
 	widget-common.c widget-common.h \
 	wtools.c wtools.h
 
