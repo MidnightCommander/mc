@@ -114,10 +114,12 @@ gboolean
 mc_skin_init (const gchar * skin_override, GError ** mcerror)
 {
     gboolean is_good_init = TRUE;
+    GError *error = NULL;
 
     mc_return_val_if_error (mcerror, FALSE);
 
     mc_skin__default.have_256_colors = FALSE;
+    mc_skin__default.have_true_colors = FALSE;
 
     mc_skin__default.name =
         skin_override != NULL ? g_strdup (skin_override) : mc_skin_get_default_name ();
@@ -140,6 +142,18 @@ mc_skin_init (const gchar * skin_override, GError ** mcerror)
                             _("Unable to parse '%s' skin.\nDefault skin has been loaded"),
                             mc_skin__default.name);
 
+        mc_skin_try_to_load_default ();
+        mc_skin_colors_old_configure (&mc_skin__default);
+        (void) mc_skin_ini_file_parse (&mc_skin__default);
+        is_good_init = FALSE;
+    }
+    if (is_good_init && !tty_use_truecolors (&error) && mc_skin__default.have_true_colors)
+    {
+        mc_propagate_error (mcerror, 0,
+                            _
+                            ("Unable to use '%s' skin with true colors support:\n%s\nDefault skin has been loaded"),
+                            mc_skin__default.name, error->message);
+        g_error_free (error);
         mc_skin_try_to_load_default ();
         mc_skin_colors_old_configure (&mc_skin__default);
         (void) mc_skin_ini_file_parse (&mc_skin__default);

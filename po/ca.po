@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-10-15 09:40+0300\n"
+"POT-Creation-Date: 2016-11-13 15:59+0300\n"
 "PO-Revision-Date: 2016-08-26 15:21+0000\n"
 "Last-Translator: Marc Tormo i Bochaca <mtbochaca@gmail.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
@@ -149,6 +149,16 @@ msgstr ""
 "No es pot comprovar el tema '%s'.\n"
 "S'ha carregat el tema per defecte"
 
+#, fuzzy, c-format
+msgid ""
+"Unable to use '%s' skin with true colors support:\n"
+"%s\n"
+"Default skin has been loaded"
+msgstr ""
+"No es pot utilitzar el tema '%s' amb suport de 256 colors\n"
+"en un terminal de no-256 colors.\n"
+"S'ha carregat el tema per defecte"
+
 #, c-format
 msgid ""
 "Unable to use '%s' skin with 256 colors support\n"
@@ -158,6 +168,18 @@ msgstr ""
 "No es pot utilitzar el tema '%s' amb suport de 256 colors\n"
 "en un terminal de no-256 colors.\n"
 "S'ha carregat el tema per defecte"
+
+msgid "True color not supported with ncurses."
+msgstr ""
+
+msgid "True color not supported in this slang version."
+msgstr ""
+
+msgid "Your terminal doesn't even seem to support 256 colors."
+msgstr ""
+
+msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
+msgstr ""
 
 msgid "Escape"
 msgstr "Esc"
@@ -472,36 +494,6 @@ msgid "GB"
 msgstr ""
 
 msgid "GiB"
-msgstr ""
-
-msgid "TiB"
-msgstr ""
-
-msgid "PiB"
-msgstr ""
-
-msgid "EiB"
-msgstr ""
-
-msgid "ZiB"
-msgstr ""
-
-msgid "YiB"
-msgstr ""
-
-msgid "TB"
-msgstr ""
-
-msgid "PB"
-msgstr ""
-
-msgid "EB"
-msgstr ""
-
-msgid "ZB"
-msgstr ""
-
-msgid "YB"
 msgstr ""
 
 msgid "Cannot create pipe descriptor"

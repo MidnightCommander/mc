@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-10-15 09:40+0300\n"
+"POT-Creation-Date: 2016-11-13 15:59+0300\n"
 "PO-Revision-Date: 2016-05-08 08:14+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Silesian (http://www.transifex.com/mc/mc/language/szl/)\n"
@@ -132,9 +132,28 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Unable to use '%s' skin with true colors support:\n"
+"%s\n"
+"Default skin has been loaded"
+msgstr ""
+
+#, c-format
+msgid ""
 "Unable to use '%s' skin with 256 colors support\n"
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
+msgstr ""
+
+msgid "True color not supported with ncurses."
+msgstr ""
+
+msgid "True color not supported in this slang version."
+msgstr ""
+
+msgid "Your terminal doesn't even seem to support 256 colors."
+msgstr ""
+
+msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
 
 msgid "Escape"
@@ -448,36 +467,6 @@ msgid "GB"
 msgstr ""
 
 msgid "GiB"
-msgstr ""
-
-msgid "TiB"
-msgstr ""
-
-msgid "PiB"
-msgstr ""
-
-msgid "EiB"
-msgstr ""
-
-msgid "ZiB"
-msgstr ""
-
-msgid "YiB"
-msgstr ""
-
-msgid "TB"
-msgstr ""
-
-msgid "PB"
-msgstr ""
-
-msgid "EB"
-msgstr ""
-
-msgid "ZB"
-msgstr ""
-
-msgid "YB"
 msgstr ""
 
 msgid "Cannot create pipe descriptor"

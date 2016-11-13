@@ -3654,9 +3654,9 @@ with the assignment of colors, as described in Section
 Colors\&.
 .\"Colors"
 .PP
-If your skin contains any of 256\-color definitions, you should define
-the '256colors' key set to TRUE value in [skin] section.
-
+If your skin contains any true\-color definitions, you should define
+the 'truecolors' key set to TRUE value in [skin] section. If true\-color
+is not used but 256\-color is, you should define '256colors' instead.
 .PP
 A skin\-file is searched on the following algorithm (to the first one found):
 .IP
