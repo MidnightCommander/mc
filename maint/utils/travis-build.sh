@@ -29,7 +29,7 @@ set -x
 
 function do_build() {
     make
-    make check || true
+    make -k check || true
     make install
 }
 
