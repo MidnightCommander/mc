@@ -135,13 +135,15 @@ parse_256_or_true_color_name (const char *color_name)
     }
     if (color_name[0] == '#')
     {
+        int len;
         int h[6];
 
         color_name++;
-        if (strlen (color_name) != 3 && strlen (color_name) != 6)
+        len = (int) strlen (color_name);
+        if (len != 3 && len != 6)
             return -1;
 
-        for (i = 0; color_name[i] != '\0'; i++)
+        for (i = 0; i < len; i++)
         {
             h[i] = parse_hex_digit (color_name[i]);
             if (h[i] == -1)
