@@ -3,29 +3,24 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# aborodin <aborodin@vmail.ru>, 2011
-# AlexL <loginov.alex.valer@gmail.com>, 2015-2016
 # Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# and Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# aborodin <aborodin@vmail.ru>, 2009-2012
-# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999,2014
-# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
-# Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
 # Evgeny Bulgakov <bgav@netvision.net.il>, 1999
-# Ilia Maslakov <il.smind@gmail.com>, 2009
-# Mr GreyWolf, 2016
-# Mr.GreyWolf, 2016
-# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
 # Sergey Panov <sipan@mit.edu>, 1999
-# Simple88, 2016
-# Simple88, 2016
-# Slava Zanko <slavazanko@gmail.com>, 2009,2011
+# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999, 2014
 # Valek Filippov <frob@df.ru>, 2000
+# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
+# Andrew Borodin <aborodin@vmail.ru>, 2009-2016
+# Ilia Maslakov <il.smind@gmail.com>, 2009
+# Slava Zanko <slavazanko@gmail.com>, 2009, 2011
+# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
+# AlexL <loginov.alex.valer@gmail.com>, 2015-2016
+# Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
+# Simple88, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-10-15 09:40+0300\n"
+"POT-Creation-Date: 2016-11-13 15:59+0300\n"
 "PO-Revision-Date: 2016-06-28 07:48+0000\n"
 "Last-Translator: aborodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
@@ -165,6 +160,16 @@ msgstr ""
 
 #, c-format
 msgid ""
+"Unable to use '%s' skin with true colors support:\n"
+"%s\n"
+"Default skin has been loaded"
+msgstr ""
+"Невозможно использовать скин %s, требующий True Color:\n"
+"%s\n"
+"Будет использован скин по умолчанию"
+
+#, c-format
+msgid ""
 "Unable to use '%s' skin with 256 colors support\n"
 "on non-256 colors terminal.\n"
 "Default skin has been loaded"
@@ -172,6 +177,18 @@ msgstr ""
 "Невозможно использовать скин %s, требующий 256 цветов,\n"
 "на терминале, не поддерживающем 256 цветов.\n"
 "Будет использован скин по умолчанию"
+
+msgid "True color not supported with ncurses."
+msgstr ""
+
+msgid "True color not supported in this slang version."
+msgstr ""
+
+msgid "Your terminal doesn't even seem to support 256 colors."
+msgstr ""
+
+msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
+msgstr ""
 
 msgid "Escape"
 msgstr "Клавиша Esc      "
@@ -486,36 +503,6 @@ msgid "GB"
 msgstr ""
 
 msgid "GiB"
-msgstr ""
-
-msgid "TiB"
-msgstr ""
-
-msgid "PiB"
-msgstr ""
-
-msgid "EiB"
-msgstr ""
-
-msgid "ZiB"
-msgstr ""
-
-msgid "YiB"
-msgstr ""
-
-msgid "TB"
-msgstr ""
-
-msgid "PB"
-msgstr ""
-
-msgid "EB"
-msgstr ""
-
-msgid "ZB"
-msgstr ""
-
-msgid "YB"
 msgstr ""
 
 msgid "Cannot create pipe descriptor"
@@ -4488,13 +4475,3 @@ msgstr "Продолжить с начала?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Невозможно получить локальную копию /ftp://some.host/editme.txt"
-
-#~ msgid "Cannot parse command for pipe"
-#~ msgstr "Не удалось разобрать команду для канала"
-
-#~ msgid "%s byte"
-#~ msgid_plural "%s bytes"
-#~ msgstr[0] "%s байт"
-#~ msgstr[1] "%s байта"
-#~ msgstr[2] "%s байт"
-#~ msgstr[3] "%s байт"
