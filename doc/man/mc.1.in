@@ -3708,6 +3708,10 @@ Color pair definitions
 .\"Skins colors"
 .br
 .\"LINK2"
+Color and attribute aliases
+.\"Skins aliases"
+.br
+.\"LINK2"
 Draw lines
 .\"Skins lines"
 .br
@@ -3914,6 +3918,24 @@ Possible colors (names) and attributes are described in
 Colors\&.
 .\"Colors"
 section.
+
+.\"NODE "  Skins aliases"
+.SH "  Color and attribute aliases"
+This optional section might define aliases for single colors (not color pairs)
+as well as combination of attributes; in other words, for semicolon\-separated
+fragments of parameters. Aliases can refer to other aliases as long as they
+don't form a loop.
+.PP
+Example:
+.br
+.nf
+[aliases]
+    myfavfg=green
+    myfavbg=black
+    myfavattr=bold+italic
+[core]
+    _default_=myfavfg;myfavbg;myfavattr
+.fi
 
 .\"NODE "  Skins lines"
 .SH "  Draw lines"
