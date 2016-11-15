@@ -430,9 +430,13 @@ group_init (WGroup * g, int y1, int x1, int lines, int cols, widget_cb_fn callba
     widget_init (w, y1, x1, lines, cols, callback != NULL ? callback : group_default_callback,
                  mouse_callback);
 
+    w->mouse_handler = group_handle_mouse_event;
+
     w->find = group_default_find;
     w->find_by_type = group_default_find_by_type;
     w->find_by_id = group_default_find_by_id;
+
+    g->mouse_status = MOU_UNHANDLED;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -467,6 +471,49 @@ group_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
     default:
         return widget_default_callback (w, sender, msg, parm, data);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Handling mouse events.
+ *
+ * @param g WGroup object
+ * @param event GPM mouse event
+ *
+ * @return result of mouse event handling
+ */
+int
+group_handle_mouse_event (Widget * w, Gpm_Event * event)
+{
+    WGroup *g = GROUP (w);
+
+    if (g->widgets != NULL)
+    {
+        GList *p;
+
+        /* send the event to widgets in reverse Z-order */
+        p = g_list_last (g->widgets);
+        do
+        {
+            Widget *wp = WIDGET (p->data);
+
+            if (!widget_get_state (wp, WST_DISABLED))
+            {
+                /* put global cursor position to the widget */
+                int ret;
+
+                ret = wp->mouse_handler (wp, event);
+                if (ret != MOU_UNHANDLED)
+                    return ret;
+            }
+
+            p = g_list_previous (p);
+        }
+        while (p != NULL);
+    }
+
+    return MOU_UNHANDLED;
 }
 
 /* --------------------------------------------------------------------------------------------- */

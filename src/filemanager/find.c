@@ -958,7 +958,7 @@ check_find_events (WDialog * h)
     int c;
 
     event.x = -1;
-    c = tty_get_event (&event, h->mouse_status == MOU_REPEAT, FALSE);
+    c = tty_get_event (&event, GROUP (h)->mouse_status == MOU_REPEAT, FALSE);
     if (c != EV_NONE)
     {
         dlg_process_event (h, c, &event);

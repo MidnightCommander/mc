@@ -70,9 +70,6 @@ struct WDialog
     /* Set and received by the user */
     int ret_value;              /* Result of dlg_run() */
 
-    /* Internal flags */
-    int mouse_status;           /* For the autorepeat status of the mouse */
-
     /* Internal variables */
     void *data;                 /* Data can be passed to dialog */
     char *event_group;          /* Name of event group for this dialog */
@@ -119,8 +116,9 @@ void dlg_process_event (WDialog * h, int key, Gpm_Event * event);
 
 char *dlg_get_title (const WDialog * h, size_t len);
 
-/* Default callback for dialogs */
+/* Default callbacks for dialogs */
 cb_ret_t dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data);
+void dlg_default_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event);
 
 void dlg_stop (WDialog * h);
 

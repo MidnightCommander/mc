@@ -299,6 +299,7 @@ widget_init (Widget * w, int y, int x, int lines, int cols,
     w->callback = callback;
     w->mouse_callback = mouse_callback;
     w->owner = NULL;
+    w->mouse_handler = mouse_handle_event;
     w->mouse.forced_capture = FALSE;
     w->mouse.capture = FALSE;
     w->mouse.last_msg = MSG_MOUSE_NONE;

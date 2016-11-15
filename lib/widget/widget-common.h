@@ -122,6 +122,8 @@ typedef cb_ret_t (*widget_cb_fn) (Widget * widget, Widget * sender, widget_msg_t
                                   void *data);
 /* Widget mouse callback */
 typedef void (*widget_mouse_cb_fn) (Widget * w, mouse_msg_t msg, mouse_event_t * event);
+/* translate mouse event and process it */
+typedef int (*widget_mouse_handle_fn) (Widget * w, Gpm_Event * event);
 
 /* Every Widget must have this as its first element */
 struct Widget
@@ -135,7 +137,9 @@ struct Widget
     widget_cb_fn callback;
     widget_mouse_cb_fn mouse_callback;
     WGroup *owner;
+
     /* Mouse-related fields. */
+    widget_mouse_handle_fn mouse_handler;
     struct
     {
         /* Public members: */

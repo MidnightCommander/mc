@@ -206,75 +206,6 @@ dlg_handle_key (WDialog * h, int d_key)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/**
- * This is the low-level mouse handler.
- * It receives a Gpm_Event event and translates it into a higher level protocol.
- */
-static int
-dlg_mouse_translator (Gpm_Event * event, Widget * w)
-{
-    mouse_event_t me;
-
-    me = mouse_translate_event (w, event);
-
-    return mouse_process_event (w, &me);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static int
-dlg_mouse_event (WDialog * h, Gpm_Event * event)
-{
-    Widget *wh = WIDGET (h);
-
-    GList *p;
-
-    /* close the dialog by mouse left click out of dialog area */
-    if (mouse_close_dialog && (wh->pos_flags & WPOS_FULLSCREEN) == 0
-        && ((event->buttons & GPM_B_LEFT) != 0) && ((event->type & GPM_DOWN) != 0)
-        && !mouse_global_in_widget (event, wh))
-    {
-        h->ret_value = B_CANCEL;
-        dlg_stop (h);
-        return MOU_NORMAL;
-    }
-
-    if (wh->mouse_callback != NULL)
-    {
-        int mou;
-
-        mou = dlg_mouse_translator (event, wh);
-        if (mou != MOU_UNHANDLED)
-            return mou;
-    }
-
-    if (GROUP (h)->widgets == NULL)
-        return MOU_UNHANDLED;
-
-    /* send the event to widgets in reverse Z-order */
-    p = g_list_last (GROUP (h)->widgets);
-    do
-    {
-        Widget *w = WIDGET (p->data);
-
-        if (!widget_get_state (w, WST_DISABLED) && w->mouse_callback != NULL)
-        {
-            /* put global cursor position to the widget */
-            int ret;
-
-            ret = dlg_mouse_translator (event, w);
-            if (ret != MOU_UNHANDLED)
-                return ret;
-        }
-
-        p = g_list_previous (p);
-    }
-    while (p != NULL);
-
-    return MOU_UNHANDLED;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
 dlg_try_hotkey (WDialog * h, int d_key)
@@ -398,6 +329,23 @@ dlg_key_event (WDialog * h, int d_key)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static int
+dlg_handle_mouse_event (Widget * w, Gpm_Event * event)
+{
+    if (w->mouse_callback != NULL)
+    {
+        int mou;
+
+        mou = mouse_handle_event (w, event);
+        if (mou != MOU_UNHANDLED)
+            return mou;
+    }
+
+    return group_handle_mouse_event (w, event);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 frontend_dlg_run (WDialog * h)
 {
@@ -437,7 +385,7 @@ frontend_dlg_run (WDialog * h)
 
         /* Clear interrupt flag */
         tty_got_interrupt ();
-        d_key = tty_get_event (&event, h->mouse_status == MOU_REPEAT, TRUE);
+        d_key = tty_get_event (&event, GROUP (h)->mouse_status == MOU_REPEAT, TRUE);
 
         dlg_process_event (h, d_key, &event);
 
@@ -468,6 +416,28 @@ dlg_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
 
 /* --------------------------------------------------------------------------------------------- */
 
+void
+dlg_default_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+{
+    switch (msg)
+    {
+    case MSG_MOUSE_CLICK:
+        if (event->y < 0 || event->y >= w->lines || event->x < 0 || event->x >= w->cols)
+        {
+            DIALOG (w)->ret_value = B_CANCEL;
+            dlg_stop (DIALOG (w));
+        }
+        break;
+
+    default:
+        /* return MOU_UNHANDLED */
+        event->result.abort = TRUE;
+        break;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 WDialog *
 dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flags_t pos_flags,
             gboolean compact, const int *colors, widget_cb_fn callback,
@@ -482,7 +452,7 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
     g = GROUP (new_d);
     widget_adjust_position (pos_flags, &y1, &x1, &lines, &cols);
     group_init (g, y1, x1, lines, cols, callback != NULL ? callback : dlg_default_callback,
-                mouse_callback);
+                mouse_callback != NULL ? mouse_callback : dlg_default_mouse_callback);
 
     w->pos_flags = pos_flags;
     w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
@@ -490,12 +460,13 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
     /* Temporary hack: dialog doesn't have an owner, own itself. */
     w->owner = g;
 
+    w->mouse_handler = dlg_handle_mouse_event;
+    w->mouse.forced_capture = mouse_close_dialog && (w->pos_flags & WPOS_FULLSCREEN) == 0;
+
     new_d->color = colors;
     new_d->help_ctx = help_ctx;
     new_d->compact = compact;
     new_d->data = NULL;
-
-    new_d->mouse_status = MOU_UNHANDLED;
 
     if (modal)
     {
@@ -632,8 +603,12 @@ dlg_process_event (WDialog * h, int key, Gpm_Event * event)
         break;
 
     case EV_MOUSE:
-        h->mouse_status = dlg_mouse_event (h, event);
-        break;
+        {
+            Widget *w = WIDGET (h);
+
+            GROUP (h)->mouse_status = w->mouse_handler (w, event);
+            break;
+        }
 
     default:
         dlg_key_event (h, key);

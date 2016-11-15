@@ -31,6 +31,7 @@ struct WGroup
     GList *current;             /* Currently active widget */
 
     gboolean winch_pending;     /* SIGWINCH signal has been got. Resize group after rise */
+    int mouse_status;           /* For the autorepeat status of the mouse */
 };
 
 /*** global variables defined in .c file *********************************************************/
@@ -42,6 +43,7 @@ void group_init (WGroup * g, int y1, int x1, int lines, int cols, widget_cb_fn c
 /* Default callback for groups */
 cb_ret_t group_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
                                  void *data);
+int group_handle_mouse_event (Widget * w, Gpm_Event * event);
 
 unsigned long group_add_widget_autopos (WGroup * g, void *w, widget_pos_flags_t pos_flags,
                                         const void *before);
