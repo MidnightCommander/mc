@@ -503,8 +503,7 @@ execute_menu_command (const WEdit * edit_widget, const char *unparsed_cmd, gbool
      *  I suggest that this function be moved to its own source
      *  code file for clarity / readability.
      */
-    gboolean
-    prepare_output_parsed_cmd_file ( void )
+    gboolean prepare_output_parsed_cmd_file (void)
     {
         parsed_cmd_file_fd = mc_mkstemps (&file_name_vpath, "mcusr", SCRIPT_SUFFIX);
         if (parsed_cmd_file_fd == -1)
@@ -520,8 +519,7 @@ execute_menu_command (const WEdit * edit_widget, const char *unparsed_cmd, gbool
         return TRUE;
     }
 
-    gboolean
-    found_end_of_input ( void )
+    gboolean found_end_of_input (void)
     {
         /*
          *  return TRUE if we find any indication of an end to
@@ -539,22 +537,21 @@ execute_menu_command (const WEdit * edit_widget, const char *unparsed_cmd, gbool
             if (*unparsed_cmd == '\n')
                 return TRUE;
         }
-         if (*unparsed_cmd == END_OF_STRING)
-             return TRUE;
-         line_begin = FALSE;
-         return FALSE;
+        if (*unparsed_cmd == END_OF_STRING)
+            return TRUE;
+        line_begin = FALSE;
+        return FALSE;
     }
 
-    void
-    process_input_box( void )
+    void process_input_box (void)
     {
         input_box_prompt = lc_prompt;
         while TRUE
         {
             unparsed_cmd++;
-            if (found_end_of_input())
+            if (found_end_of_input ())
             {
-                /* unexpected EOF. rewind and let main function handle it*/
+                /* unexpected EOF. rewind and let main function handle it */
                 unparsed_cmd--;
                 break;
             }
@@ -598,15 +595,14 @@ execute_menu_command (const WEdit * edit_widget, const char *unparsed_cmd, gbool
         }
     }
 
-    void
-    macro_substitution_completion( void )
+    void macro_substitution_completion (void)
     {
         /* Quote expanded macro unless next char is zero */
         do_quote = TRUE;
         unparsed_cmd++;
-        if (found_end_of_input())
+        if (found_end_of_input ())
         {
-            /* unexpected EOF. rewind and let main function handle it*/
+            /* unexpected EOF. rewind and let main function handle it */
             unparsed_cmd--;
         }
         else
@@ -618,7 +614,7 @@ execute_menu_command (const WEdit * edit_widget, const char *unparsed_cmd, gbool
                     unparsed_cmd++;
             }
             if (*unparsed_cmd == '{')
-                process_input_box();
+                process_input_box ();
             else
             {
                 char *text;
@@ -629,24 +625,23 @@ execute_menu_command (const WEdit * edit_widget, const char *unparsed_cmd, gbool
         }
     }
 
-    gboolean
-    macro_substitution( void )
+    gboolean macro_substitution (void)
     {
         int len;
         if (*unparsed_cmd != '%')
-        return FALSE;
+            return FALSE;
         len = check_format_view (unparsed_cmd + 1);
         if (len != 0)
         {
             unparsed_cmd += len;
             run_view = TRUE;
         }
-        else macro_substitution_completion();
+        else
+            macro_substitution_completion ();
         return TRUE;
     }
 
-    void
-    execute_parsed_cmd_file( void )
+    void execute_parsed_cmd_file (void)
     {
         /* execute the command indirectly to allow execution even
          * on no-exec filesystems. */
@@ -657,23 +652,23 @@ execute_menu_command (const WEdit * edit_widget, const char *unparsed_cmd, gbool
             if (system (cmd) == -1)
                 message (D_ERROR, MSG_ERROR, "%s", _("Error calling program"));
         }
-        else shell_execute (cmd, EXECUTE_HIDE);
+        else
+            shell_execute (cmd, EXECUTE_HIDE);
         g_free (cmd);
     }
 
-    void
-    main_execute_menu_command( void )
+    void main_execute_menu_command (void)
     {
         /* Skip menu entry title line */
         unparsed_cmd = strchr (unparsed_cmd, '\n');
         if (unparsed_cmd == NULL)
             /* menu entry was a title with no executable code! */
             return;
-        if (!prepare_output_parsed_cmd_file())
+        if (!prepare_output_parsed_cmd_file ())
             return;
-        for ( ; !found_end_of_input(); unparsed_cmd++)
+        for (; !found_end_of_input (); unparsed_cmd++)
         {
-            if (!macro_substitution())
+            if (!macro_substitution ())
                 fputc (*unparsed_cmd, parsed_cmd_file);
             else if (user_abort)
                 /* user aborted at an input dialog box, eg. C-c, ESC */
@@ -686,13 +681,14 @@ execute_menu_command (const WEdit * edit_widget, const char *unparsed_cmd, gbool
             mcview_viewer (vfs_path_as_str (file_name_vpath), NULL, 0, 0, 0);
             dialog_switch_process_pending ();
         }
-        else execute_parsed_cmd_file();
+        else
+            execute_parsed_cmd_file ();
         mc_unlink (file_name_vpath);
         vfs_path_free (file_name_vpath);
-        }
+    }
     /* END SUB-FUNCTIONS */
 
-    main_execute_menu_command();
+    main_execute_menu_command ();
 
 }
 
