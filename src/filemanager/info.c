@@ -104,6 +104,8 @@ static void
 info_show_info (WInfo * info)
 {
     Widget *w = WIDGET (info);
+    char *fname;
+    size_t fname_len = 0;
     static int i18n_adjust = 0;
     static const char *file_label;
     GString *buff;
@@ -154,6 +156,42 @@ info_show_info (WInfo * info)
 
     default:
 
+    case 17: {
+        /* TODO:
+         *   error handling: malloc, popen, fgets*2
+         *   handle long lines exceeding panel width
+         */
+        FILE *command_stream;
+        char *command;
+        char *command_pos;
+        /* command_substr = "file -b -- '';file -bi -- ''" */
+        const size_t command_substr_len = 28;
+        /* size of command_outputs arbitrarily / staticly set */
+        #define CMD_OUT_LEN 1024
+        char command_output_1[CMD_OUT_LEN];
+        char command_output_2[CMD_OUT_LEN];
+
+        fname = current_panel->dir.list[current_panel->selected].fname;
+        fname_len = strlen(fname);
+        command = malloc((fname_len*2)+command_substr_len+1);
+        if (command==NULL) goto malloc_error_case_17;
+        command_pos = stpcpy( command, "file -b -- '");
+        command_pos = stpcpy( command_pos, fname);
+        command_pos = stpcpy( command_pos, "';file -bi -- '");
+        command_pos = stpcpy( command_pos, fname);
+        command_pos = stpcpy( command_pos, "'");
+        command_stream = popen(command,"r");
+        fgets(command_output_1, CMD_OUT_LEN, command_stream);
+        command_output_1[strlen(command_output_1)-1]='\0';
+        fgets(command_output_2, CMD_OUT_LEN, command_stream);
+        command_output_2[strlen(command_output_2)-1]='\0';
+        widget_move (w, 17, 3);
+        str_printf (buff, _("Mime Type:  %s (%s)"), command_output_1, command_output_2);
+        tty_print_string (buff->str);
+        g_string_set_size (buff, 0);
+        pclose(command_stream);
+        }
+        malloc_error_case_17: /* Yes, I also hate gotos, but this is a fall-through switch */
     case 16:
         widget_move (w, 16, 3);
         if ((myfs_stats.nfree == 0 && myfs_stats.nodes == 0) ||
@@ -259,14 +297,11 @@ info_show_info (WInfo * info)
         tty_printf (_("Location:   %Xh:%Xh"), (int) st.st_dev, (int) st.st_ino);
 
     case 3:
-        {
-            const char *fname;
-
-            widget_move (w, 3, 2);
-            fname = current_panel->dir.list[current_panel->selected].fname;
-            str_printf (buff, file_label, str_trunc (fname, w->cols - i18n_adjust));
-            tty_print_string (buff->str);
-        }
+        widget_move (w, 3, 2);
+        /* fname assignment possibly redundant now; see case 17, above */
+        fname = current_panel->dir.list[current_panel->selected].fname;
+        str_printf (buff, file_label, str_trunc (fname, w->cols - i18n_adjust));
+        tty_print_string (buff->str);
 
     case 2:
     case 1:
