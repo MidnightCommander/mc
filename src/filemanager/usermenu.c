@@ -65,7 +65,7 @@
 
 #define MAX_ENTRIES 16
 #define MAX_ENTRY_LEN 60
-
+#define END_OF_STRING '\0'
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
@@ -84,7 +84,7 @@ strip_ext (char *ss)
     char *s = ss;
     char *e = NULL;
 
-    while (*s != '\0')
+    while (*s != END_OF_STRING)
     {
         if (*s == '.')
             e = s;
@@ -93,7 +93,7 @@ strip_ext (char *ss)
         s++;
     }
     if (e != NULL)
-        *e = '\0';
+        *e = END_OF_STRING;
     return ss;
 }
 
@@ -135,11 +135,11 @@ check_patterns (char *p)
 static char *
 extract_arg (char *p, char *arg, int size)
 {
-    while (*p != '\0' && (*p == ' ' || *p == '\t' || *p == '\n'))
+    while (*p != END_OF_STRING && (*p == ' ' || *p == '\t' || *p == '\n'))
         p++;
 
     /* support quote space .mnu */
-    while (*p != '\0' && (*p != ' ' || *(p - 1) == '\\') && *p != '\t' && *p != '\n')
+    while (*p != END_OF_STRING && (*p != ' ' || *(p - 1) == '\\') && *p != '\t' && *p != '\n')
     {
         char *np;
 
@@ -151,8 +151,8 @@ extract_arg (char *p, char *arg, int size)
         size -= np - p;
         p = np;
     }
-    *arg = '\0';
-    if (*p == '\0' || *p == '\n')
+    *arg = END_OF_STRING;
+    if (*p == END_OF_STRING || *p == '\n')
         str_prev_char (&p);
     return p;
 }
@@ -167,7 +167,7 @@ test_type (WPanel * panel, char *arg)
     int result = 0;             /* False by default */
     mode_t st_mode = panel->dir.list[panel->selected].st.st_mode;
 
-    for (; *arg != '\0'; arg++)
+    for (; *arg != END_OF_STRING; arg++)
     {
         switch (*arg)
         {
@@ -316,7 +316,7 @@ debug_out (char *start, char *end, gboolean condition)
 
             len = strlen (msg);
             if (len != 0)
-                msg[len - 1] = '\0';
+                msg[len - 1] = END_OF_STRING;
             message (D_NORMAL, _("Debug"), "%s", msg);
 
         }
@@ -361,7 +361,7 @@ test_line (const WEdit * edit_widget, char *p, gboolean * result)
     char operator;
 
     /* Repeat till end of line */
-    while (*p != '\0' && *p != '\n')
+    while (*p != END_OF_STRING && *p != '\n')
     {
         char *debug_start, *debug_end;
         gboolean condition = TRUE;
@@ -369,7 +369,7 @@ test_line (const WEdit * edit_widget, char *p, gboolean * result)
         /* support quote space .mnu */
         while ((*p == ' ' && *(p - 1) != '\\') || *p == '\t')
             p++;
-        if (*p == '\0' || *p == '\n')
+        if (*p == END_OF_STRING || *p == '\n')
             break;
         operator = *p++;
         if (*p == '?')
@@ -380,7 +380,7 @@ test_line (const WEdit * edit_widget, char *p, gboolean * result)
         /* support quote space .mnu */
         while ((*p == ' ' && *(p - 1) != '\\') || *p == '\t')
             p++;
-        if (*p == '\0' || *p == '\n')
+        if (*p == END_OF_STRING || *p == '\n')
             break;
 
         debug_start = p;
@@ -413,162 +413,287 @@ test_line (const WEdit * edit_widget, char *p, gboolean * result)
     /* Report debug message */
     debug_out (NULL, NULL, TRUE);
 
-    if (*p == '\0' || *p == '\n')
+    if (*p == END_OF_STRING || *p == '\n')
         str_prev_char (&p);
     return p;
 }
 
-/* --------------------------------------------------------------------------------------------- */
-/** FIXME: recode this routine on version 3.0, it could be cleaner */
-
+/*
+ * execute_menu_command:
+ * 
+ *   DESCRIPTION:
+ *     Parses a menu command byte-by-byte, performs all macro
+ *     substitutions, and attempts to execute the result as a
+ *     shell script (/bin/sh, not /bin/bash).
+ *
+ *   PARAMETERS:
+ *     edit_widget:
+ *     unparsed_cmd: the text of the menu entry, from its title
+ *       line until its termination.
+ *     show_prompt:
+ *
+ *   This function begins with several (temporary) embedded
+ *   sub-functions:
+ *     prepare_output_parsed_cmd_file ()
+ *     found_end_of_input ()
+ *     macro_substitution()
+ *     macro_substition_completion()
+ *     process_input_box()
+ *     execute_parsed_cmd_file()
+ *     main_execute_menu_command()
+ *   The processing begins with the call to sub-function
+ *   main_execute_menu_command.
+ */
 static void
-execute_menu_command (const WEdit * edit_widget, const char *commands, gboolean show_prompt)
+execute_menu_command (const WEdit * edit_widget, const char *unparsed_cmd, gboolean show_prompt)
 {
-    FILE *cmd_file;
-    int cmd_file_fd;
-    gboolean expand_prefix_found = FALSE;
-    char *parameter = NULL;
+    /*
+     * These next three variables support the user menu macro
+     * %{some text}, which indicates to mc to create an ncurses-
+     * style input dialog, using "some text" as the prompt.
+     *
+     * input_box_prompt: an incrementing pointer within the static
+     *        array "lc_prompt" (defined below) to place there the
+     *        input prompt "some_text".
+     *
+     * input_box_reply: pointer to a dynamically allocated buffer
+     *        holding the user's ersponse to the input dialog. The
+     *        function will add the response to the parsed command
+     *        which will be executed at the successful conclusion of
+     *        this function.
+     *
+     * user_abort: respect a user's response to the input_box.
+     */
+    char *input_box_prompt = NULL;
+    char *input_box_reply = NULL;
+    gboolean user_abort = FALSE;
+    /*
+     * do_quote: "%0" indicate not to surround the following macro
+     *     substition in quotes. When the macro prefix character is
+     *     followed by any other digit, the indication is to quote
+     *     the substitution, ie. "%0f" will potentially substitute
+     *     unquoted a file name with embedded spaces.
+     */
     gboolean do_quote = FALSE;
+    /*
+     * lc_prompt: This static array will hold a prompt "some_text"
+     *     to be displayed to a user in an ncurses-style input
+     *     dialog box for any occurrence of the macro "%{some_text}"
+     *
+     * WISHLIST: convert it to a resizable and dynamically allocated
+     *     buffer. I want this because I would like to be able to
+     *     present the user with longer and multi-line prompt
+     *     strings. This would also separately require modifications
+     *     to the widget function wrapped by function "input_dialog".
+     */
     char lc_prompt[80];
-    int col;
+    /* line_begin: menu command lines must begin with whitespace
+     *     (ie. space or tab).
+     */
+    gboolean line_begin = TRUE;
+
     vfs_path_t *file_name_vpath;
     gboolean run_view = FALSE;
 
-    /* Skip menu entry title line */
-    commands = strchr (commands, '\n');
-    if (commands == NULL)
-        return;
+    FILE *parsed_cmd_file;
+    int parsed_cmd_file_fd;
 
-    cmd_file_fd = mc_mkstemps (&file_name_vpath, "mcusr", SCRIPT_SUFFIX);
-
-    if (cmd_file_fd == -1)
+    /* BEGIN SUB-FUNCTIONS */
+    /*
+     *  I suggest that this function be moved to its own source
+     *  code file for clarity / readability.
+     */
+    gboolean
+    prepare_output_parsed_cmd_file ( void )
     {
-        message (D_ERROR, MSG_ERROR, _("Cannot create temporary command file\n%s"),
-                 unix_error_string (errno));
-        vfs_path_free (file_name_vpath);
-        return;
-    }
-    cmd_file = fdopen (cmd_file_fd, "w");
-    fputs ("#! /bin/sh\n", cmd_file);
-    commands++;
-
-    for (col = 0; *commands != '\0'; commands++)
-    {
-        if (col == 0)
+        parsed_cmd_file_fd = mc_mkstemps (&file_name_vpath, "mcusr", SCRIPT_SUFFIX);
+        if (parsed_cmd_file_fd == -1)
         {
-            if (*commands != ' ' && *commands != '\t')
-                break;
-            while (*commands == ' ' || *commands == '\t')
-                commands++;
-            if (*commands == '\0')
-                break;
+            message (D_ERROR, MSG_ERROR, _("Cannot create temporary command file\n%s"),
+                     unix_error_string (errno));
+            vfs_path_free (file_name_vpath);
+            return FALSE;
         }
-        col++;
-        if (*commands == '\n')
-            col = 0;
-        if (parameter != NULL)
+        parsed_cmd_file = fdopen (parsed_cmd_file_fd, "w");
+        fputs ("#! /bin/sh\n", parsed_cmd_file);
+        unparsed_cmd++;
+        return TRUE;
+    }
+
+    gboolean
+    found_end_of_input ( void )
+    {
+        /*
+         *  return TRUE if we find any indication of an end to
+         *  parsing, ie. an empty line or a line not beginning
+         *  with whitespace. The other EOF condition, END_OF_STRING,
+         *  was checked in the 'for' loop statement wrapping this
+         *  function.
+         */
+        if (line_begin)
         {
-            if (*commands == '}')
+            if (*unparsed_cmd != ' ' && *unparsed_cmd != '\t')
+                return TRUE;
+            while (*unparsed_cmd == ' ' || *unparsed_cmd == '\t')
+                unparsed_cmd++;
+            if (*unparsed_cmd == '\n')
+                return TRUE;
+        }
+         if (*unparsed_cmd == END_OF_STRING)
+             return TRUE;
+         line_begin = FALSE;
+         return FALSE;
+    }
+
+    void
+    process_input_box( void )
+    {
+        input_box_prompt = lc_prompt;
+        while TRUE
+        {
+            unparsed_cmd++;
+            if (found_end_of_input())
             {
-                *parameter = '\0';
-                parameter =
+                /* unexpected EOF. rewind and let main function handle it*/
+                unparsed_cmd--;
+                break;
+            }
+            /* if reached end of input prompt string */
+            if (*unparsed_cmd == '}')
+            {
+                input_box_reply =
                     input_dialog (_("Parameter"), lc_prompt, MC_HISTORY_FM_MENU_EXEC_PARAM, "",
                                   INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD |
                                   INPUT_COMPLETE_HOSTNAMES | INPUT_COMPLETE_VARIABLES |
                                   INPUT_COMPLETE_USERNAMES);
-                if (parameter == NULL || *parameter == '\0')
+                if (input_box_reply == NULL || *input_box_reply == END_OF_STRING)
                 {
                     /* User canceled */
-                    fclose (cmd_file);
+                    fclose (parsed_cmd_file);
                     mc_unlink (file_name_vpath);
                     vfs_path_free (file_name_vpath);
-                    return;
+                    user_abort = TRUE;
                 }
-                if (do_quote)
+                else if (do_quote)
                 {
                     char *tmp;
-
-                    tmp = name_quote (parameter, FALSE);
-                    fputs (tmp, cmd_file);
+                    tmp = name_quote (input_box_reply, FALSE);
+                    fputs (tmp, parsed_cmd_file);
                     g_free (tmp);
                 }
                 else
-                    fputs (parameter, cmd_file);
-
-                MC_PTR_FREE (parameter);
+                    fputs (input_box_reply, parsed_cmd_file);
+                MC_PTR_FREE (input_box_reply);
+                break;
             }
-            else if (parameter < lc_prompt + sizeof (lc_prompt) - 1)
-                *parameter++ = *commands;
+            /*
+             * add another character of macro %{some_text} to the
+             * static 80 character buffer that began at location
+             * lc_prompt if there is space remaining there. Variable
+             * "unparsed_cmd" points to the next character to parse in
+             * the menu entry.
+             */
+            else if (input_box_prompt < lc_prompt + sizeof (lc_prompt) - 1)
+                *input_box_prompt++ = *unparsed_cmd;
         }
-        else if (expand_prefix_found)
-        {
-            expand_prefix_found = FALSE;
-            if (g_ascii_isdigit ((gchar) * commands))
-            {
-                do_quote = (atoi (commands) != 0);
-                while (g_ascii_isdigit ((gchar) * commands))
-                    commands++;
-            }
-            if (*commands == '{')
-                parameter = lc_prompt;
-            else
-            {
-                char *text;
+    }
 
-                text = expand_format (edit_widget, *commands, do_quote);
-                fputs (text, cmd_file);
-                g_free (text);
-            }
+    void
+    macro_substitution_completion( void )
+    {
+        /* Quote expanded macro unless next char is zero */
+        do_quote = TRUE;
+        unparsed_cmd++;
+        if (found_end_of_input())
+        {
+            /* unexpected EOF. rewind and let main function handle it*/
+            unparsed_cmd--;
         }
         else
         {
-            if (*commands == '%')
+            if (g_ascii_isdigit ((gchar) * unparsed_cmd))
             {
-                int i;
-
-                i = check_format_view (commands + 1);
-                if (i != 0)
-                {
-                    commands += i;
-                    run_view = TRUE;
-                }
-                else
-                {
-                    do_quote = TRUE;    /* Default: Quote expanded macro */
-                    expand_prefix_found = TRUE;
-                }
+                do_quote = (atoi (unparsed_cmd) != 0);
+                while (g_ascii_isdigit ((gchar) * unparsed_cmd))
+                    unparsed_cmd++;
             }
+            if (*unparsed_cmd == '{')
+                process_input_box();
             else
-                fputc (*commands, cmd_file);
+            {
+                char *text;
+                text = expand_format (edit_widget, *unparsed_cmd, do_quote);
+                fputs (text, parsed_cmd_file);
+                g_free (text);
+            }
         }
     }
-    fclose (cmd_file);
-    mc_chmod (file_name_vpath, S_IRWXU);
-    if (run_view)
+
+    gboolean
+    macro_substitution( void )
     {
-        mcview_viewer (vfs_path_as_str (file_name_vpath), NULL, 0, 0, 0);
-        dialog_switch_process_pending ();
+        int len;
+        if (*unparsed_cmd != '%')
+        return FALSE;
+        len = check_format_view (unparsed_cmd + 1);
+        if (len != 0)
+        {
+            unparsed_cmd += len;
+            run_view = TRUE;
+        }
+        else macro_substitution_completion();
+        return TRUE;
     }
-    else
+
+    void
+    execute_parsed_cmd_file( void )
     {
         /* execute the command indirectly to allow execution even
          * on no-exec filesystems. */
         char *cmd;
-
         cmd = g_strconcat ("/bin/sh ", vfs_path_as_str (file_name_vpath), (char *) NULL);
         if (!show_prompt)
         {
             if (system (cmd) == -1)
                 message (D_ERROR, MSG_ERROR, "%s", _("Error calling program"));
         }
-        else
-        {
-            shell_execute (cmd, EXECUTE_HIDE);
-        }
+        else shell_execute (cmd, EXECUTE_HIDE);
         g_free (cmd);
     }
-    mc_unlink (file_name_vpath);
-    vfs_path_free (file_name_vpath);
+
+    void
+    main_execute_menu_command( void )
+    {
+        /* Skip menu entry title line */
+        unparsed_cmd = strchr (unparsed_cmd, '\n');
+        if (unparsed_cmd == NULL)
+            /* menu entry was a title with no executable code! */
+            return;
+        if (!prepare_output_parsed_cmd_file())
+            return;
+        for ( ; !found_end_of_input(); unparsed_cmd++)
+        {
+            if (!macro_substitution())
+                fputc (*unparsed_cmd, parsed_cmd_file);
+            else if (user_abort)
+                /* user aborted at an input dialog box, eg. C-c, ESC */
+                return;
+        }
+        fclose (parsed_cmd_file);
+        mc_chmod (file_name_vpath, S_IRWXU);
+        if (run_view)
+        {
+            mcview_viewer (vfs_path_as_str (file_name_vpath), NULL, 0, 0, 0);
+            dialog_switch_process_pending ();
+        }
+        else execute_parsed_cmd_file();
+        mc_unlink (file_name_vpath);
+        vfs_path_free (file_name_vpath);
+        }
+    /* END SUB-FUNCTIONS */
+
+    main_execute_menu_command();
+
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -636,7 +761,7 @@ check_format_view (const char *p)
         q += 4;
         if (*q == '{')
         {
-            for (q++; *q != '\0' && *q != '}'; q++)
+            for (q++; *q != END_OF_STRING && *q != '}'; q++)
             {
                 if (strncmp (q, DEFAULT_CHARSET, 5) == 0)
                 {
@@ -692,12 +817,12 @@ check_format_var (const char *p, char **v)
         const char *dots = NULL;
         const char *value;
 
-        for (q += 4; *q != '\0' && *q != '}'; q++)
+        for (q += 4; *q != END_OF_STRING && *q != '}'; q++)
         {
             if (*q == ':')
                 dots = q + 1;
         }
-        if (*q == '\0')
+        if (*q == END_OF_STRING)
             return 0;
 
         if (dots == NULL || dots == q + 5)
@@ -993,7 +1118,7 @@ user_menu_cmd (const WEdit * edit_widget, const char *menu_file, int selected_en
     /* Parse the menu file */
     old_patterns = easy_patterns;
     p = check_patterns (data);
-    for (menu_lines = col = 0; *p != '\0'; str_next_char (&p))
+    for (menu_lines = col = 0; *p != END_OF_STRING; str_next_char (&p))
     {
         if (menu_lines >= menu_limit)
         {
