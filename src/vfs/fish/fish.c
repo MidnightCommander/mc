@@ -1360,11 +1360,12 @@ fish_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
     char utcatime[16], utcmtime[16];
     time_t atime, mtime;
     struct tm *gmt;
-    char buf[BUF_LARGE];
+    char *cmd;
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
     const vfs_path_element_t *path_element;
+    int ret;
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
@@ -1388,11 +1389,13 @@ fish_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
     shell_commands =
         g_strconcat (SUP->scr_env, "FISH_FILENAME=%s FISH_FILEATIME=%ld FISH_FILEMTIME=%ld ",
                      "FISH_TOUCHATIME=%s FISH_TOUCHMTIME=%s;\n", SUP->scr_utime, (char *) NULL);
-    g_snprintf (buf, sizeof (buf), shell_commands, rpath, (long) atime, (long) mtime,
-                utcatime, utcmtime);
+    cmd = g_strdup_printf (shell_commands, rpath, (long) atime, (long) mtime, utcatime, utcmtime);
     g_free (shell_commands);
     g_free (rpath);
-    return fish_send_command (path_element->class, super, buf, OPT_FLUSH);
+    ret = fish_send_command (path_element->class, super, cmd, OPT_FLUSH);
+    g_free (cmd);
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
