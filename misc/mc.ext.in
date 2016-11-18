@@ -568,7 +568,7 @@ type/^PDF
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view pdf
 
 # html
-regex/i/\.html?$
+regex/i/\.html{0,1}$
 	Open=@EXTHELPERSDIR@/web.sh open html
 	View=%view{ascii} @EXTHELPERSDIR@/web.sh view html
 
