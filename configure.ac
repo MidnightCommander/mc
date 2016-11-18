@@ -638,6 +638,7 @@ tests/src/Makefile
 tests/src/filemanager/Makefile
 tests/src/editor/Makefile
 tests/src/editor/test-data.txt
+tests/src/extfs-helpers-listcmd/Makefile
 ])
 fi
 
