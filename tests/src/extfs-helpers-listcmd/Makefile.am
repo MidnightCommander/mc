@@ -22,6 +22,9 @@ mc_parse_ls_l_SOURCES = \
 	mc_parse_ls_l.c
 
 data_files_to_distribute = \
+	data/uzoo.README \
+	data/uzoo.input \
+	data/uzoo.output \
 	data/dummy
 
 EXTRA_DIST = mc_xcat test_all $(data_files_to_distribute)
