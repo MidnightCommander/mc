@@ -22,6 +22,16 @@ mc_parse_ls_l_SOURCES = \
 	mc_parse_ls_l.c
 
 data_files_to_distribute = \
+	data/uzip.README \
+	data/uzip.with-zipinfo.env_vars \
+	data/uzip.with-zipinfo.input \
+	data/uzip.with-zipinfo.output \
+	data/uzip.without-zipinfo--mdy.env_vars \
+	data/uzip.without-zipinfo--mdy.input \
+	data/uzip.without-zipinfo--mdy.output \
+	data/uzip.without-zipinfo--ymd.env_vars \
+	data/uzip.without-zipinfo--ymd.input \
+	data/uzip.without-zipinfo--ymd.output \
 	data/uzoo.README \
 	data/uzoo.input \
 	data/uzoo.output \
