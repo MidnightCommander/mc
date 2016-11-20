@@ -1,0 +1,29 @@
+
+UNRAR 3.80 freeware      Copyright (c) 1993-2008 Alexander Roshal
+
+Archive ARCHIVE.RAR
+
+Pathname/Comment
+                  Size   Packed Ratio  Date   Time     Attr      CRC   Meth Ver
+-------------------------------------------------------------------------------
+ .viminfo
+                 11032     2468  22% 23-11-16 07:10 -rw------- 295ED9AB m3g 2.9
+ .wget-hsts
+                   205      181  88% 26-10-16 13:14 -rw-rw-r-- 58429CA4 m3g 2.9
+ .xboardrc
+                  7527     2964  39% 17-04-16 01:21 -rw-rw-r-- 1DA6AD04 m3g 2.9
+ .xchm
+                   559      382  68% 29-09-16 01:08 -rw-rw-r-- 73DBF2B9 m3g 2.9
+ .xinputrc
+                   130      123  94% 27-12-15 17:08 -rw-rw-r-- 70CD8EF3 m3g 2.9
+ .dosbox/dosbox-0.74.conf
+                 10730     4005  37% 07-06-16 20:43 -rw-rw-r-- 1D5A9AA6 m3g 2.9
+ log.txt
+               5869937    42114   0% 23-11-16 07:43 -rw-rw-r-- E63DE4A6 m3g 2.9
+ filename with spaces.txt
+                     6       16 266% 23-11-16 07:39 -rw-r--r-- 363A3020 m3g 2.9
+ .dosbox
+                     0        0   0% 07-06-16 20:43 drwx------ 00000000 m0  2.0
+-------------------------------------------------------------------------------
+    9          5900126    52253   0%
+

@@ -1,0 +1,17 @@
+
+The archive was created thus:
+
+    echo hello > 'filename with spaces.txt'
+    rar a archive.rar 'filename with spaces.txt' ...
+
+Our 'urar' supports two listing formats: that of version 5, and that of
+version 4.
+
+'urar.v5.input' was created with "unrar vt -c- -cfg- archive.rar" using
+unrar 5.30.
+
+'urar.v4,v3.input' was created with "unrar v -c- -cfg- archive.rar" using
+unrar 3.80 for DOS (google "unrar dos"), via DOSBox (and then the "\" was
+changed to "/" by hand). An inspection of our urar's source code should
+lead us to conclude that this format is compatible with that of version
+4.
