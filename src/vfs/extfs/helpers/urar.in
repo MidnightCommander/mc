@@ -24,6 +24,10 @@ UNRAR=`which unrar 2>/dev/null`
 # Define $UNRAR version
 UNRAR_VERSION=`$UNRAR -cfg- -? | grep "Copyright" | sed -e 's/.*\([0-9]\)\..*/\1/'`
 
+# Let the test framework hook in:
+UNRAR=${MC_TEST_EXTFS_LIST_CMD:-$UNRAR}
+UNRAR_VERSION=${MC_TEST_EXTFS_UNRAR_VERSION:-$UNRAR_VERSION}
+
 mcrar4fs_list ()
 {
      $UNRAR v -c- -cfg- "$1" | @AWK@ -v uid=`id -u` -v gid=`id -g` '
