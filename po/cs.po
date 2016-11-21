@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-11-13 15:59+0300\n"
+"POT-Creation-Date: 2016-11-21 13:19+0300\n"
 "PO-Revision-Date: 2016-06-21 07:03+0000\n"
 "Last-Translator: Robin Kriebel <kriebel.robin@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/mc/mc/language/cs/)\n"
@@ -2730,7 +2730,7 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid "Directories: %zd, total size: %s"
+msgid "Directories: %zu, total size: %s"
 msgstr ""
 
 msgid "Cannot operate on \"..\"!"
@@ -2881,8 +2881,8 @@ msgstr "&Vidět - F3"
 msgid "&Edit - F4"
 msgstr "&Uprav - F4"
 
-#, c-format
-msgid "Found: %ld"
+#, fuzzy, c-format
+msgid "Found: %lu"
 msgstr "Nalezeno: %ld"
 
 msgid "Malformed regular expression"
@@ -2932,8 +2932,8 @@ msgid "Finished"
 msgstr "Hotovo"
 
 #, c-format
-msgid "Finished (ignored %zd directory)"
-msgid_plural "Finished (ignored %zd directories)"
+msgid "Finished (ignored %zu directory)"
+msgid_plural "Finished (ignored %zu directories)"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
@@ -3091,9 +3091,9 @@ msgstr "Typ zařízení: větší %lu, menší %lu"
 msgid "Size:       %s"
 msgstr ""
 
-#, c-format
-msgid " (%ld block)"
-msgid_plural " (%ld blocks)"
+#, fuzzy, c-format
+msgid " (%lu block)"
+msgid_plural " (%lu blocks)"
 msgstr[0] " (%ld blok)"
 msgstr[1] " (%ld bloky)"
 msgstr[2] " (%ld bloků)"
@@ -3327,9 +3327,9 @@ msgstr "&Virtuální FS..."
 msgid "Panels:"
 msgstr "Panely:"
 
-#, c-format
-msgid "You have %zd opened screen. Quit anyway?"
-msgid_plural "You have %zd opened screens. Quit anyway?"
+#, fuzzy, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
 msgstr[0] "Máte otevřenou %zd obrazovku. Přesto ukončit?"
 msgstr[1] "Máte otevřené %zd obrazovky. Přesto ukončit?"
 msgstr[2] "Máte otevřených %zd obrazovek. Přesto ukončit?"

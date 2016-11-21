@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-11-13 15:59+0300\n"
+"POT-Creation-Date: 2016-11-21 13:19+0300\n"
 "PO-Revision-Date: 2016-09-25 02:28+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/mc/mc/language/pl/)\n"
@@ -2792,8 +2792,8 @@ msgstr ""
 "Nie można przenieść katalogu „%s” do „%s”\n"
 "%s"
 
-#, c-format
-msgid "Directories: %zd, total size: %s"
+#, fuzzy, c-format
+msgid "Directories: %zu, total size: %s"
 msgstr "Katalogi: %zd, całkowity rozmiar: %s"
 
 msgid "Cannot operate on \"..\"!"
@@ -2944,8 +2944,8 @@ msgstr "&Podgląd — F3"
 msgid "&Edit - F4"
 msgstr "&Edycja — F4"
 
-#, c-format
-msgid "Found: %ld"
+#, fuzzy, c-format
+msgid "Found: %lu"
 msgstr "Odnaleziono: %ld"
 
 msgid "Malformed regular expression"
@@ -2994,9 +2994,9 @@ msgstr "Wyszukiwanie w %s"
 msgid "Finished"
 msgstr "Ukończono"
 
-#, c-format
-msgid "Finished (ignored %zd directory)"
-msgid_plural "Finished (ignored %zd directories)"
+#, fuzzy, c-format
+msgid "Finished (ignored %zu directory)"
+msgid_plural "Finished (ignored %zu directories)"
 msgstr[0] "Ukończono (zignorowano %zd katalog)"
 msgstr[1] "Ukończono (zignorowano %zd katalogi)"
 msgstr[2] "Ukończono (zignorowano %zd katalogów)"
@@ -3159,9 +3159,9 @@ msgstr "Urządzenie: numer %lu, podnumer %lu"
 msgid "Size:       %s"
 msgstr "Rozmiar:       %s"
 
-#, c-format
-msgid " (%ld block)"
-msgid_plural " (%ld blocks)"
+#, fuzzy, c-format
+msgid " (%lu block)"
+msgid_plural " (%lu blocks)"
 msgstr[0] " (%ld blok)"
 msgstr[1] " (%ld bloki)"
 msgstr[2] " (%ld bloków)"
@@ -3395,9 +3395,9 @@ msgstr "Wirtualny &system plików…"
 msgid "Panels:"
 msgstr "Panele:"
 
-#, c-format
-msgid "You have %zd opened screen. Quit anyway?"
-msgid_plural "You have %zd opened screens. Quit anyway?"
+#, fuzzy, c-format
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
 msgstr[0] "Pozostał %zd otwarty ekran. Zakończyć mimo to?"
 msgstr[1] "Pozostały %zd otwarte ekrany. Zakończyć mimo to?"
 msgstr[2] "Pozostało %zd otwartych ekranów. Zakończyć mimo to?"
