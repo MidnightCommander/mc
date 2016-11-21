@@ -4083,6 +4083,10 @@ menuhotsel=yellow;black;bold+underline
 .\"Skins colors"
 .br
 .\"LINK2"
+Псевдонимы цветов и атрибутов
+.\"Skins aliases"
+.br
+.\"LINK2"
 Линии для отрисовки рамок
 .\"Skins lines"
 .br
@@ -4270,6 +4274,24 @@ menuhotsel=yellow;black;bold+underline
 .\"LINK2"
 Цвета\&.
 .\"Colors"
+
+.\"NODE "  Skins aliases"
+.SH "  Псевдонимы цветов и атрибутов"
+Эта необязательная секция содержит опреления псевдонимов цветов (не цветовых пар)
+и атрибутов. Псевдоним представляет собой части определения параметров скина.
+В определение псевдонима может использоваться другой псевдоним, но при этом
+не должны образовываться циклические ссылки.
+.PP
+Например:
+.br
+.nf
+[aliases]
+    myfavfg=green
+    myfavbg=black
+    myfavattr=bold+italic
+[core]
+    _default_=myfavfg;myfavbg;myfavattr
+.fi
 
 .\"NODE "  Skins lines"
 .SH "  Линии для отрисовки рамок"
