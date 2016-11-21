@@ -114,9 +114,7 @@ mcview_get_filesize (WView * view)
     case DS_STRING:
         return view->ds_string_len;
     default:
-#ifdef HAVE_ASSERT_H
-        assert (!"Unknown datasource type");
-#endif
+        g_assert (!"Unknown datasource type");
         return 0;
     }
 }
@@ -139,9 +137,7 @@ mcview_update_filesize (WView * view)
 char *
 mcview_get_ptr_file (WView * view, off_t byte_index)
 {
-#ifdef HAVE_ASSERT_H
-    assert (view->datasource == DS_FILE);
-#endif
+    g_assert (view->datasource == DS_FILE);
 
     mcview_file_load_data (view, byte_index);
     if (mcview_already_loaded (view->ds_file_offset, byte_index, view->ds_file_datalen))
@@ -225,9 +221,8 @@ mcview_get_utf (WView * view, off_t byte_index, int *ch, int *ch_len)
 char *
 mcview_get_ptr_string (WView * view, off_t byte_index)
 {
-#ifdef HAVE_ASSERT_H
-    assert (view->datasource == DS_STRING);
-#endif
+    g_assert (view->datasource == DS_STRING);
+
     if (byte_index >= 0 && byte_index < (off_t) view->ds_string_len)
         return (char *) (view->ds_string_data + byte_index);
     return NULL;
@@ -260,9 +255,7 @@ mcview_get_byte_none (WView * view, off_t byte_index, int *retval)
     (void) &view;
     (void) byte_index;
 
-#ifdef HAVE_ASSERT_H
-    assert (view->datasource == DS_NONE);
-#endif
+    g_assert (view->datasource == DS_NONE);
 
     if (retval != NULL)
         *retval = -1;
@@ -275,13 +268,10 @@ void
 mcview_set_byte (WView * view, off_t offset, byte b)
 {
     (void) &b;
-#ifndef HAVE_ASSERT_H
-    (void) offset;
-#else
-    assert (offset < mcview_get_filesize (view));
-    assert (view->datasource == DS_FILE);
 
-#endif
+    g_assert (offset < mcview_get_filesize (view));
+    g_assert (view->datasource == DS_FILE);
+
     view->ds_file_datalen = 0;  /* just force reloading */
 }
 
@@ -295,9 +285,7 @@ mcview_file_load_data (WView * view, off_t byte_index)
     ssize_t res;
     size_t bytes_read;
 
-#ifdef HAVE_ASSERT_H
-    assert (view->datasource == DS_FILE);
-#endif
+    g_assert (view->datasource == DS_FILE);
 
     if (mcview_already_loaded (view->ds_file_offset, byte_index, view->ds_file_datalen))
         return;
@@ -368,10 +356,7 @@ mcview_close_datasource (WView * view)
         MC_PTR_FREE (view->ds_string_data);
         break;
     default:
-#ifdef HAVE_ASSERT_H
-        assert (!"Unknown datasource type")
-#endif
-            ;
+        g_assert (!"Unknown datasource type");
     }
     view->datasource = DS_NONE;
 }
@@ -426,9 +411,8 @@ mcview_load_command_output (WView * view, const char *command)
 void
 mcview_set_datasource_vfs_pipe (WView * view, int fd)
 {
-#ifdef HAVE_ASSERT_H
-    assert (fd != -1);
-#endif
+    g_assert (fd != -1);
+
     view->datasource = DS_VFS_PIPE;
     view->ds_vfs_pipe = fd;
 

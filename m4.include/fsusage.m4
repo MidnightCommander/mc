@@ -1,7 +1,7 @@
-# serial 29
+# serial 31
 # Obtaining file system usage information.
 
-# Copyright (C) 1997-1998, 2000-2001, 2003-2011 Free Software Foundation, Inc.
+# Copyright (C) 1997-1998, 2000-2001, 2003-2016 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -36,7 +36,7 @@ dnl of field f_blocks in 'struct statfs' from 32 bit to 64 bit on
 dnl Mac OS X >= 10.5 (32-bit mode).
 AC_REQUIRE([AC_SYS_LARGEFILE])
 
-AC_MSG_NOTICE([checking how to get file system space usage])
+AC_MSG_CHECKING([how to get file system space usage])
 ac_fsusage_space=no
 
 # Perform only the link test since it seems there are no variants of the

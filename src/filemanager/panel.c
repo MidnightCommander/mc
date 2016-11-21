@@ -3679,7 +3679,6 @@ panel_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
         update_xterm_title_path ();
         select_item (panel);
-        paint_dir (panel);
 
         bb = find_buttonbar (w->owner);
         midnight_set_buttonbar (bb);

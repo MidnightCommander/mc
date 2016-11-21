@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-11-13 15:59+0300\n"
+"POT-Creation-Date: 2016-11-21 13:19+0300\n"
 "PO-Revision-Date: 2016-05-08 08:14+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/mc/mc/language/id/)\n"
@@ -2646,7 +2646,7 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid "Directories: %zd, total size: %s"
+msgid "Directories: %zu, total size: %s"
 msgstr ""
 
 msgid "Cannot operate on \"..\"!"
@@ -2798,7 +2798,7 @@ msgid "&Edit - F4"
 msgstr ""
 
 #, c-format
-msgid "Found: %ld"
+msgid "Found: %lu"
 msgstr ""
 
 msgid "Malformed regular expression"
@@ -2848,8 +2848,8 @@ msgid "Finished"
 msgstr ""
 
 #, c-format
-msgid "Finished (ignored %zd directory)"
-msgid_plural "Finished (ignored %zd directories)"
+msgid "Finished (ignored %zu directory)"
+msgid_plural "Finished (ignored %zu directories)"
 msgstr[0] ""
 
 msgid "Searching"
@@ -3006,8 +3006,8 @@ msgid "Size:       %s"
 msgstr ""
 
 #, c-format
-msgid " (%ld block)"
-msgid_plural " (%ld blocks)"
+msgid " (%lu block)"
+msgid_plural " (%lu blocks)"
 msgstr[0] ""
 
 #, c-format
@@ -3240,8 +3240,8 @@ msgid "Panels:"
 msgstr ""
 
 #, c-format
-msgid "You have %zd opened screen. Quit anyway?"
-msgid_plural "You have %zd opened screens. Quit anyway?"
+msgid "You have %zu opened screen. Quit anyway?"
+msgid_plural "You have %zu opened screens. Quit anyway?"
 msgstr[0] ""
 
 msgid "The Midnight Commander"

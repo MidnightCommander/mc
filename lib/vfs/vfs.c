@@ -93,7 +93,7 @@ struct vfs_openfile
 /** They keep track of the current directory */
 static vfs_path_t *current_path = NULL;
 
-static GPtrArray *vfs_openfiles;
+static GPtrArray *vfs_openfiles = NULL;
 static long vfs_free_handle_list = -1;
 
 /* --------------------------------------------------------------------------------------------- */
@@ -493,10 +493,16 @@ vfs_shut (void)
             vfs->done (vfs);
     }
 
+    /* NULL-ize pointers to make unit tests happy */
     g_ptr_array_free (vfs_openfiles, TRUE);
+    vfs_openfiles = NULL;
     g_ptr_array_free (vfs__classes_list, TRUE);
+    vfs__classes_list = NULL;
     g_string_free (vfs_str_buffer, TRUE);
-    g_free (mc_readdir_result);
+    vfs_str_buffer = NULL;
+    current_vfs = NULL;
+    vfs_free_handle_list = -1;
+    MC_PTR_FREE (mc_readdir_result);
 }
 
 /* --------------------------------------------------------------------------------------------- */

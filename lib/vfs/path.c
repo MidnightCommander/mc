@@ -1096,17 +1096,16 @@ vfs_path_serialize (const vfs_path_t * vpath, GError ** mcerror)
     {
         mc_propagate_error (mcerror, 0, "%s", "vpath object is empty");
         return NULL;
-
     }
 
     cpath = mc_config_init (NULL, FALSE);
 
     for (element_index = 0; element_index < vfs_path_elements_count (vpath); element_index++)
     {
-        char *groupname;
+        char groupname[BUF_TINY];
         const vfs_path_element_t *element;
 
-        groupname = g_strdup_printf ("path-element-%zd", element_index);
+        g_snprintf (groupname, sizeof (groupname), "path-element-%zd", element_index);
         element = vfs_path_get_by_index (vpath, element_index);
         /* convert one element to config group */
 
@@ -1122,8 +1121,6 @@ vfs_path_serialize (const vfs_path_t * vpath, GError ** mcerror)
         mc_config_set_string_raw (cpath, groupname, "host", element->host);
         if (element->port != 0)
             mc_config_set_int (cpath, groupname, "port", element->port);
-
-        g_free (groupname);
     }
 
     ret_value = mc_serialize_config (cpath, mcerror);
@@ -1145,7 +1142,7 @@ vfs_path_t *
 vfs_path_deserialize (const char *data, GError ** mcerror)
 {
     mc_config_t *cpath;
-    size_t element_index = 0;
+    size_t element_index;
     vfs_path_t *vpath;
 
     mc_return_val_if_error (mcerror, FALSE);
@@ -1156,26 +1153,21 @@ vfs_path_deserialize (const char *data, GError ** mcerror)
 
     vpath = vfs_path_new ();
 
-    while (TRUE)
+    for (element_index = 0;; element_index++)
     {
+        struct vfs_class *eclass;
         vfs_path_element_t *element;
         char *cfg_value;
-        char *groupname;
+        char groupname[BUF_TINY];
 
-        groupname = g_strdup_printf ("path-element-%zd", element_index);
+        g_snprintf (groupname, sizeof (groupname), "path-element-%zu", element_index);
         if (!mc_config_has_group (cpath, groupname))
-        {
-            g_free (groupname);
             break;
-        }
-
-        element = g_new0 (vfs_path_element_t, 1);
 
         cfg_value = mc_config_get_string_raw (cpath, groupname, "class-name", NULL);
-        element->class = vfs_get_class_by_name (cfg_value);
-        if (element->class == NULL)
+        eclass = vfs_get_class_by_name (cfg_value);
+        if (eclass == NULL)
         {
-            g_free (element);
             vfs_path_free (vpath);
             g_set_error (mcerror, MC_ERROR, 0, "Unable to find VFS class by name '%s'", cfg_value);
             g_free (cfg_value);
@@ -1184,6 +1176,8 @@ vfs_path_deserialize (const char *data, GError ** mcerror)
         }
         g_free (cfg_value);
 
+        element = g_new0 (vfs_path_element_t, 1);
+        element->class = eclass;
         element->path = mc_config_get_string_raw (cpath, groupname, "path", NULL);
 
 #ifdef HAVE_CHARSET
@@ -1200,9 +1194,6 @@ vfs_path_deserialize (const char *data, GError ** mcerror)
         element->port = mc_config_get_int (cpath, groupname, "port", 0);
 
         vpath->path = g_array_append_val (vpath->path, element);
-
-        g_free (groupname);
-        element_index++;
     }
 
     mc_config_deinit (cpath);

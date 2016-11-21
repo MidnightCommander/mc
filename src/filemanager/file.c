@@ -2523,7 +2523,7 @@ dirsize_status_update_cb (status_msg_t * sm)
     Widget *wd = WIDGET (sm->dlg);
 
     /* update second (longer label) */
-    label_set_textv (dsm->count_size, _("Directories: %zd, total size: %s"),
+    label_set_textv (dsm->count_size, _("Directories: %zu, total size: %s"),
                      dsm->dir_count, size_trunc_sep (dsm->total_size, panels_options.kilobyte_si));
 
     /* enlarge dialog if required */

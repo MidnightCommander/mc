@@ -1025,8 +1025,8 @@ quit_cmd_internal (int quiet)
         char msg[BUF_MEDIUM];
 
         g_snprintf (msg, sizeof (msg),
-                    ngettext ("You have %zd opened screen. Quit anyway?",
-                              "You have %zd opened screens. Quit anyway?", n), n);
+                    ngettext ("You have %zu opened screen. Quit anyway?",
+                              "You have %zu opened screens. Quit anyway?", n), n);
 
         if (query_dialog (_("The Midnight Commander"), msg, D_NORMAL, 2, _("&Yes"), _("&No")) != 0)
             return FALSE;

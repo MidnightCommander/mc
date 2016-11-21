@@ -326,9 +326,8 @@ mcview_update_bytes_per_line (WView * view)
         bytes = 4;
     else
         bytes = 4 * ((cols - 9) / ((cols <= 80) ? 17 : 18));
-#ifdef HAVE_ASSERT_H
-    assert (bytes != 0);
-#endif
+
+    g_assert (bytes != 0);
 
     view->bytes_per_line = bytes;
     view->dirty = mcview_max_dirt_limit + 1;    /* To force refresh */
@@ -346,9 +345,8 @@ mcview_display_toggle_ruler (WView * view)
         RULER_NONE
     };
 
-#ifdef HAVE_ASSERT_H
-    assert ((size_t) ruler < 3);
-#endif
+    g_assert ((size_t) ruler < 3);
+
     ruler = next[(size_t) ruler];
     mcview_compute_areas (view);
     view->dirty++;

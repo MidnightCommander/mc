@@ -2026,7 +2026,7 @@ ftpfs_chmod (const vfs_path_t * vpath, mode_t mode)
     char buf[BUF_SMALL];
     int ret;
 
-    g_snprintf (buf, sizeof (buf), "SITE CHMOD %4.4o /%%s", (int) (mode & 07777));
+    g_snprintf (buf, sizeof (buf), "SITE CHMOD %4.4o /%%s", (unsigned int) (mode & 07777));
 
     ret = ftpfs_send_command (vpath, buf, OPT_FLUSH);
 

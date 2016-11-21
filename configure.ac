@@ -161,7 +161,6 @@ AC_CHECK_HEADERS([string.h memory.h limits.h malloc.h \
 	sys/select.h sys/ioctl.h stropts.h arpa/inet.h \
 	sys/socket.h])
 AC_HEADER_MAJOR
-AC_HEADER_ASSERT
 
 
 dnl ############################################################################
@@ -385,6 +384,8 @@ fi
 dnl ############################################################################
 dnl MC options
 dnl ############################################################################
+
+mc_ASSERT
 
 mc_WITH_INTERNAL_EDIT
 
@@ -649,6 +650,7 @@ Configuration:
   Source code location:       ${srcdir}
   Compiler:                   ${CC}
   Compiler flags:             ${CFLAGS}
+  Assertions:                 ${enable_assert}
   File system:                ${vfs_type}
                               ${vfs_flags}
   Screen library:             ${screen_msg}

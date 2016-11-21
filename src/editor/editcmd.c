@@ -35,11 +35,7 @@
 
 #include <config.h>
 
-#ifdef HAVE_ASSERT_H
-#include <assert.h>
-#endif
 #include <ctype.h>
-
 #include <stdio.h>
 #include <stdarg.h>
 #include <sys/types.h>
@@ -384,9 +380,8 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
         vfs_path_t *tmp_vpath;
         gboolean ok;
 
-#ifdef HAVE_ASSERT_H
-        assert (option_backup_ext != NULL);
-#endif
+        g_assert (option_backup_ext != NULL);
+
         /* add backup extension to the path */
         tmp_vpath = vfs_path_clone (real_filename_vpath);
         last_vpath_element = (vfs_path_element_t *) vfs_path_get_by_index (tmp_vpath, -1);
@@ -1629,16 +1624,14 @@ edit_save_mode_cmd (void)
         N_("&Do backups with following extension:")
     };
 
-#ifdef HAVE_ASSERT_H
-    assert (option_backup_ext != NULL);
-#endif
-
 #ifdef ENABLE_NLS
     size_t i;
 
     for (i = 0; i < 3; i++)
         str[i] = _(str[i]);
 #endif
+
+    g_assert (option_backup_ext != NULL);
 
     {
         quick_widget_t quick_widgets[] = {

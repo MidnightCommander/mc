@@ -327,7 +327,7 @@ init_subshell_child (const char *pty_name)
         break;
 
     default:
-        fprintf (stderr, __FILE__ ": unimplemented subshell type %d\r\n", mc_global.shell->type);
+        fprintf (stderr, __FILE__ ": unimplemented subshell type %u\r\n", mc_global.shell->type);
         my_exit (FORK_FAILURE);
     }
 

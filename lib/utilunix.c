@@ -356,8 +356,7 @@ save_stop_handler (void)
  * @param status exit code
  */
 
-void
-my_exit (int status)
+void __attribute__ ((noreturn)) my_exit (int status)
 {
     _exit (status);
 }
@@ -453,7 +452,7 @@ my_systemv (const char *command, char *const argv[])
             execvp (command, argv);
             my_exit (127);      /* Exec error */
         }
-        break;
+        /* no break here, or unreachable-code warning by no returning my_exit() */
     default:
         status = 0;
         break;
