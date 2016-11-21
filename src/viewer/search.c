@@ -153,8 +153,9 @@ mcview_find (mcview_search_status_msg_t * ssm, off_t search_start, off_t search_
                 return TRUE;
             }
 
-            /* Abort search. */
-            if (!ok && view->search->error == MC_SEARCH_E_ABORT)
+            /* We abort the search in case of a pattern error, or if the user aborts
+               the search. In other words: in all cases except "string not found". */
+            if (!ok && view->search->error != MC_SEARCH_E_NOTFOUND)
                 return FALSE;
 
             search_start--;
@@ -374,7 +375,8 @@ mcview_do_search (WView * view, off_t want_search_start)
 
     status_msg_deinit (STATUS_MSG (&vsm));
 
-    if (orig_search_start != 0 && !found && !mcview_search_options.backwards)
+    if (orig_search_start != 0 && (!found && view->search->error == MC_SEARCH_E_NOTFOUND)
+        && !mcview_search_options.backwards)
     {
         view->search_start = orig_search_start;
         mcview_update (view);
@@ -406,9 +408,7 @@ mcview_do_search (WView * view, off_t want_search_start)
         }
     }
 
-    if (!found
-        && (view->search->error == MC_SEARCH_E_ABORT
-            || view->search->error == MC_SEARCH_E_NOTFOUND))
+    if (!found)
     {
         view->search_start = orig_search_start;
         mcview_update (view);
