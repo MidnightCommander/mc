@@ -1311,8 +1311,7 @@ read_file_system_list (void)
  ** QNX has no [gs]etmnt*(), [gs]etfs*(), or /etc/mnttab, but can do
  ** this via the following code.
  ** Note that, as this is based on CWD, it only fills one mount_entry
- ** structure. See my_statfs() in utilunix.c for the "other side" of
- ** this hack.
+ ** structure. See my_statfs() below for the "other side" of this hack.
  */
 
 static GSList *
@@ -1744,8 +1743,7 @@ my_statfs (struct my_statfs *myfs_stats, const char *path)
 
 #ifdef HAVE_INFOMOUNT_QNX
         /*
-         ** This is the "other side" of the hack to read_file_system_list() in
-         ** mountlist.c.
+         ** This is the "other side" of the hack to read_file_system_list() above.
          ** It's not the most efficient approach, but consumes less memory. It
          ** also accommodates QNX's ability to mount filesystems on the fly.
          */
