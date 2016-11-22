@@ -245,8 +245,9 @@ dlg_try_hotkey (WDialog * h, int d_key)
     if (d_key & ALT (0) && g_ascii_isalpha (c))
         d_key = g_ascii_tolower (c);
 
-    handled = MSG_NOT_HANDLED;
-    if (widget_get_options (current, WOP_WANT_HOTKEY))
+    if (!widget_get_options (current, WOP_WANT_HOTKEY))
+        handled = MSG_NOT_HANDLED;
+    else
         handled = send_message (current, NULL, MSG_HOTKEY, d_key, NULL);
 
     /* If not used, send hotkey to other widgets */
@@ -269,7 +270,11 @@ dlg_try_hotkey (WDialog * h, int d_key)
     }
 
     if (handled == MSG_HANDLED)
-        widget_select (WIDGET (hot_cur->data));
+    {
+        current = WIDGET (hot_cur->data);
+        widget_select (current);
+        send_message (h, current, MSG_HOTKEY_HANDLED, 0, NULL);
+    }
 
     return handled;
 }
@@ -303,22 +308,20 @@ dlg_key_event (WDialog * h, int d_key)
         }
     }
 
-    /* first can dlg_callback handle the key */
+    /* first can dlalog handle the key itself */
     handled = send_message (h, NULL, MSG_KEY, d_key, NULL);
 
     /* next try the hotkey */
     if (handled == MSG_NOT_HANDLED)
         handled = dlg_try_hotkey (h, d_key);
 
-    if (handled == MSG_HANDLED)
-        send_message (h, NULL, MSG_HOTKEY_HANDLED, 0, NULL);
-    else
-        /* not used - then try widget_callback */
+    /* not used - then try widget_callback */
+    if (handled == MSG_NOT_HANDLED)
         handled = send_message (g->current->data, NULL, MSG_KEY, d_key, NULL);
 
-    /* not used- try to use the unhandled case */
+    /* not used - try to use the unhandled case */
     if (handled == MSG_NOT_HANDLED)
-        handled = send_message (h, NULL, MSG_UNHANDLED_KEY, d_key, NULL);
+        handled = send_message (h, g->current->data, MSG_UNHANDLED_KEY, d_key, NULL);
 
     if (handled == MSG_NOT_HANDLED)
         handled = dlg_handle_key (h, d_key);
