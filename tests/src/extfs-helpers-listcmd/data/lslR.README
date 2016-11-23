@@ -1,0 +1,26 @@
+
+The inputs were taken from:
+
+    http://www.midnight-commander.org/ticket/1921
+
+These inputs are supposed to cover:
+
+- "spaces": spaces in dir/file names.
+
+- "iso": ISO date. The ticket claims this is enabled in en_US.UTF-8
+  locale, but that's untrue. Nevertheless, it's a useful format (the
+  default 'ls' dates are relative and therefore somewhat useless in lslR
+  files) so we don't mind covering it here.
+
+- "noshalsh": directories not starting with "./".
+
+Argument files:
+
+The output produced must be constant anytime. Therefore:
+
+- For the one input using non-ISO date we must use --drop-mtime.
+  Otherwise, because these are relative dates, next year the output
+  will show a different year.
+
+- For all inputs we use --drop-ids for the case we have user "serhiy" on
+  our system (and we aren't running as that user).

@@ -22,6 +22,16 @@ mc_parse_ls_l_SOURCES = \
 	mc_parse_ls_l.c
 
 data_files_to_distribute = \
+	data/lslR.1.spaces.args \
+	data/lslR.1.spaces.input \
+	data/lslR.1.spaces.output \
+	data/lslR.2.spaces-iso.args \
+	data/lslR.2.spaces-iso.input \
+	data/lslR.2.spaces-iso.output \
+	data/lslR.3.spaces-iso-noslash.args \
+	data/lslR.3.spaces-iso-noslash.input \
+	data/lslR.3.spaces-iso-noslash.output \
+	data/lslR.README \
 	data/urar.README \
 	data/urar.v4,v3.env_vars \
 	data/urar.v4,v3.input \
