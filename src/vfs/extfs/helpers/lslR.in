@@ -23,6 +23,8 @@ case "$1" in
   *)     MYCAT="cat";;
 esac
 
+MYCAT=${MC_TEST_EXTFS_LIST_CMD:-$MYCAT}  # Let the test framework hook in.
+
 $MYCAT "$1" | $AWK '
 BEGIN {
   dir="";
