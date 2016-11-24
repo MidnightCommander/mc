@@ -17,8 +17,8 @@
 typedef struct WRadio
 {
     Widget widget;
-    unsigned int state;         /* radio button state */
-    int pos, sel;
+    int pos;
+    int sel;
     int count;                  /* number of members */
     hotkey_t *texts;            /* texts of labels */
 } WRadio;
