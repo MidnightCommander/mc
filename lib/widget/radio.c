@@ -60,21 +60,20 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     switch (msg)
     {
     case MSG_HOTKEY:
+        for (i = 0; i < r->count; i++)
         {
-            for (i = 0; i < r->count; i++)
+            if (r->texts[i].hotkey != NULL)
             {
-                if (r->texts[i].hotkey != NULL)
-                {
-                    int c = g_ascii_tolower ((gchar) r->texts[i].hotkey[0]);
+                int c;
 
-                    if (c != parm)
-                        continue;
-                    r->pos = i;
+                c = g_ascii_tolower ((gchar) r->texts[i].hotkey[0]);
+                if (c != parm)
+                    continue;
+                r->pos = i;
 
-                    /* Take action */
-                    send_message (w, sender, MSG_KEY, ' ', data);
-                    return MSG_HANDLED;
-                }
+                /* Take action */
+                send_message (w, sender, MSG_KEY, ' ', data);
+                return MSG_HANDLED;
             }
         }
         return MSG_NOT_HANDLED;
@@ -106,6 +105,8 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                 widget_redraw (w);
                 return MSG_HANDLED;
             }
+            return MSG_NOT_HANDLED;
+
         default:
             return MSG_NOT_HANDLED;
         }
