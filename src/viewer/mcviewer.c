@@ -52,20 +52,20 @@
 
 int mcview_default_hex_mode = 0;
 int mcview_default_nroff_flag = 0;
-int mcview_global_wrap_mode = 1;
+gboolean mcview_global_wrap_mode = TRUE;
 int mcview_default_magic_flag = 1;
 
 int mcview_altered_hex_mode = 0;
 int mcview_altered_magic_flag = 0;
 int mcview_altered_nroff_flag = 0;
 
-int mcview_remember_file_position = FALSE;
+gboolean mcview_remember_file_position = FALSE;
 
 /* Maxlimit for skipping updates */
 int mcview_max_dirt_limit = 10;
 
 /* Scrolling is done in pages or line increments */
-int mcview_mouse_move_pages = 1;
+gboolean mcview_mouse_move_pages = TRUE;
 
 /* end of file will be showen from mcview_show_eof */
 char *mcview_show_eof = NULL;

@@ -61,7 +61,7 @@
 /*** global variables ****************************************************************************/
 
 /* Toggles statusbar draw style */
-int simple_statusbar = 0;
+gboolean simple_statusbar = FALSE;
 
 gboolean visible_tws = TRUE;
 gboolean visible_tabs = TRUE;

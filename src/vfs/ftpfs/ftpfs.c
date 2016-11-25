@@ -126,10 +126,10 @@ gboolean ftpfs_use_passive_connections_over_proxy = FALSE;
  *    fall back to CWD <path>; LIST
  * 0: always use CWD <path>; LIST
  */
-int ftpfs_use_unix_list_options = 1;
+gboolean ftpfs_use_unix_list_options = TRUE;
 
 /* First "CWD <path>", then "LIST -la ." */
-int ftpfs_first_cd_then_ls = 1;
+gboolean ftpfs_first_cd_then_ls = TRUE;
 
 /* Use the ~/.netrc */
 gboolean ftpfs_use_netrc = TRUE;
@@ -144,7 +144,7 @@ char *ftpfs_proxy_host = NULL;
 /* whether we have to use proxy by default? */
 gboolean ftpfs_always_use_proxy = FALSE;
 
-int ftpfs_ignore_chattr_errors = 1;
+gboolean ftpfs_ignore_chattr_errors = TRUE;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -1694,7 +1694,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
     struct vfs_s_entry *ent;
     struct vfs_s_super *super = dir->super;
     int sock, num_entries = 0;
-    int cd_first;
+    gboolean cd_first;
 
     cd_first = ftpfs_first_cd_then_ls || (SUP->strict == RFC_STRICT)
         || (strchr (remote_path, ' ') != NULL);
@@ -1790,7 +1790,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
     if ((ftpfs_get_reply (me, SUP->sock, NULL, 0) != COMPLETE))
         goto fallback;
 
-    if (num_entries == 0 && cd_first == 0)
+    if (num_entries == 0 && !cd_first)
     {
         /* The LIST command may produce an empty output. In such scenario
            it is not clear whether this is caused by  'remote_path' being
@@ -1802,7 +1802,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
            to determine the type of 'remote_path'. The only reliable way to
            achieve this is trough issuing a CWD command. */
 
-        cd_first = 1;
+        cd_first = TRUE;
         goto again;
     }
 
@@ -1822,7 +1822,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
         SUP->strict = RFC_STRICT;
         /* I hate goto, but recursive call needs another 8K on stack */
         /* return ftpfs_dir_load (me, dir, remote_path); */
-        cd_first = 1;
+        cd_first = TRUE;
         goto again;
     }
     vfs_print_message ("%s", _("ftpfs: failed; nowhere to fallback to"));

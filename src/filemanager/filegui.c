@@ -289,7 +289,7 @@ filegui__check_attrs_on_fs (const char *fs_path)
 {
     STRUCT_STATVFS stfs;
 
-    if (!setup_copymove_persistent_attr)
+    if (!copymove_persistent_attr)
         return FALSE;
 
 #if USE_STATVFS && defined(STAT_STATVFS)

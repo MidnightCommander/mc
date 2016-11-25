@@ -60,8 +60,8 @@ mc_global_t mc_global = {
     .source_codepage = -1,
     .display_codepage = -1,
 #else
-    .eight_bit_clean = 1,
-    .full_eight_bits = 0,
+    .eight_bit_clean = TRUE,
+    .full_eight_bits = FALSE,
 #endif /* !HAVE_CHARSET */
     .utf8_display = FALSE,
 

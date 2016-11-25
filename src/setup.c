@@ -89,7 +89,7 @@ gboolean boot_current_is_left = TRUE;
 gboolean safe_delete = FALSE;
 
 /* Controls screen clearing before an exec */
-int clear_before_exec = 1;
+gboolean clear_before_exec = TRUE;
 
 /* Asks for confirmation before deleting a file */
 gboolean confirm_delete = TRUE;
@@ -109,7 +109,7 @@ gboolean drop_menus = FALSE;
 
 /* Asks for confirmation when using F3 to view a directory and there
    are tagged files */
-int confirm_view_dir = 0;
+gboolean confirm_view_dir = FALSE;
 
 /* Ask file name before start the editor */
 gboolean editor_ask_filename_before_edit = FALSE;
@@ -117,7 +117,7 @@ gboolean editor_ask_filename_before_edit = FALSE;
 panel_view_mode_t startup_left_mode;
 panel_view_mode_t startup_right_mode;
 
-int setup_copymove_persistent_attr = 1;
+gboolean copymove_persistent_attr = TRUE;
 
 /* Tab size */
 int option_tab_spacing = DEFAULT_TAB_SPACING;
@@ -156,16 +156,16 @@ gboolean auto_save_setup = TRUE;
 /* If true, then the +, - and \ keys have their special meaning only if the
  * command line is emtpy, otherwise they behave like regular letters
  */
-int only_leading_plus_minus = 1;
+gboolean only_leading_plus_minus = TRUE;
 
 /* Automatically fills name with current selected item name on mkdir */
 gboolean auto_fill_mkdir_name = TRUE;
 
 /* If set and you don't have subshell support,then C-o will give you a shell */
-int output_starts_shell = 0;
+gboolean output_starts_shell = FALSE;
 
 /* If set, we execute the file command to check the file type */
-int use_file_to_check_type = 1;
+gboolean use_file_to_check_type = TRUE;
 
 gboolean verbose = TRUE;
 
@@ -275,10 +275,9 @@ static const struct
 static const struct
 {
     const char *opt_name;
-    int *opt_addr;
-} int_options [] = {
+    gboolean *opt_addr;
+} bool_options [] = {
     { "verbose", &verbose },
-    { "pause_after_run", &pause_after_run },
     { "shell_patterns", &easy_patterns },
     { "auto_save_setup", &auto_save_setup },
     { "preallocate_space", &mc_global.vfs.preallocate_space },
@@ -292,58 +291,43 @@ static const struct
     { "confirm_history_cleanup", &mc_global.widget.confirm_history_cleanup },
     { "confirm_exit", &confirm_exit },
     { "confirm_directory_hotlist_delete", &confirm_directory_hotlist_delete },
+    { "confirm_view_dir", &confirm_view_dir },
     { "safe_delete", &safe_delete },
-    { "mouse_repeat_rate", &mou_auto_repeat },
-    { "double_click_speed", &double_click_speed },
 #ifndef HAVE_CHARSET
     { "eight_bit_clean", &mc_global.eight_bit_clean },
     { "full_eight_bits", &mc_global.full_eight_bits },
 #endif /* !HAVE_CHARSET */
     { "use_8th_bit_as_meta", &use_8th_bit_as_meta },
-    { "confirm_view_dir", &confirm_view_dir },
     { "mouse_move_pages_viewer", &mcview_mouse_move_pages },
     { "mouse_close_dialog", &mouse_close_dialog},
     { "fast_refresh", &fast_refresh },
     { "drop_menus", &drop_menus },
-    { "wrap_mode",  &mcview_global_wrap_mode},
+    { "wrap_mode",  &mcview_global_wrap_mode },
     { "old_esc_mode", &old_esc_mode },
-    { "old_esc_mode_timeout", &old_esc_mode_timeout },
     { "cd_symlinks", &mc_global.vfs.cd_symlinks },
     { "show_all_if_ambiguous", &mc_global.widget.show_all_if_ambiguous },
-    { "max_dirt_limit", &mcview_max_dirt_limit },
     { "use_file_to_guess_type", &use_file_to_check_type },
     { "alternate_plus_minus", &mc_global.tty.alternate_plus_minus },
     { "only_leading_plus_minus", &only_leading_plus_minus },
     { "show_output_starts_shell", &output_starts_shell },
     { "xtree_mode", &xtree_mode },
-    { "num_history_items_recorded", &num_history_items_recorded },
     { "file_op_compute_totals", &file_op_compute_totals },
-    { "classic_progressbar", &classic_progressbar},
+    { "classic_progressbar", &classic_progressbar },
 #ifdef ENABLE_VFS
-    { "vfs_timeout", &vfs_timeout },
 #ifdef ENABLE_VFS_FTP
-    { "ftpfs_directory_timeout", &ftpfs_directory_timeout },
     { "use_netrc", &ftpfs_use_netrc },
-    { "ftpfs_retry_seconds", &ftpfs_retry_seconds },
     { "ftpfs_always_use_proxy", &ftpfs_always_use_proxy },
     { "ftpfs_use_passive_connections", &ftpfs_use_passive_connections },
     { "ftpfs_use_passive_connections_over_proxy", &ftpfs_use_passive_connections_over_proxy },
     { "ftpfs_use_unix_list_options", &ftpfs_use_unix_list_options },
     { "ftpfs_first_cd_then_ls", &ftpfs_first_cd_then_ls },
 #endif /* ENABLE_VFS_FTP */
-#ifdef ENABLE_VFS_FISH
-    { "fish_directory_timeout", &fish_directory_timeout },
-#endif /* ENABLE_VFS_FISH */
 #endif /* ENABLE_VFS */
-    /* option_tab_spacing is used in internal viewer */
-    { "editor_tab_spacing", &option_tab_spacing },
 #ifdef USE_INTERNAL_EDIT
-    { "editor_word_wrap_line_length", &option_word_wrap_line_length },
     { "editor_fill_tabs_with_spaces", &option_fill_tabs_with_spaces },
     { "editor_return_does_auto_indent", &option_return_does_auto_indent },
     { "editor_backspace_through_tabs", &option_backspace_through_tabs },
     { "editor_fake_half_tabs", &option_fake_half_tabs },
-    { "editor_option_save_mode", &option_save_mode },
     { "editor_option_save_position", &option_save_position },
     { "editor_option_auto_para_formatting", &option_auto_para_formatting },
     { "editor_option_typewriter_wrap", &option_typewriter_wrap },
@@ -366,7 +350,37 @@ static const struct
     { "nice_rotating_dash", &nice_rotating_dash },
     { "mcview_remember_file_position", &mcview_remember_file_position },
     { "auto_fill_mkdir_name", &auto_fill_mkdir_name },
-    { "copymove_persistent_attr", &setup_copymove_persistent_attr },
+    { "copymove_persistent_attr", &copymove_persistent_attr },
+    { NULL, NULL }
+};
+
+static const struct
+{
+    const char *opt_name;
+    int *opt_addr;
+} int_options [] = {
+    { "pause_after_run", &pause_after_run },
+    { "mouse_repeat_rate", &mou_auto_repeat },
+    { "double_click_speed", &double_click_speed },
+    { "old_esc_mode_timeout", &old_esc_mode_timeout },
+    { "max_dirt_limit", &mcview_max_dirt_limit },
+    { "num_history_items_recorded", &num_history_items_recorded },
+#ifdef ENABLE_VFS
+    { "vfs_timeout", &vfs_timeout },
+#ifdef ENABLE_VFS_FTP
+    { "ftpfs_directory_timeout", &ftpfs_directory_timeout },
+    { "ftpfs_retry_seconds", &ftpfs_retry_seconds },
+#endif /* ENABLE_VFS_FTP */
+#ifdef ENABLE_VFS_FISH
+    { "fish_directory_timeout", &fish_directory_timeout },
+#endif /* ENABLE_VFS_FISH */
+#endif /* ENABLE_VFS */
+    /* option_tab_spacing is used in internal viewer */
+    { "editor_tab_spacing", &option_tab_spacing },
+#ifdef USE_INTERNAL_EDIT
+    { "editor_word_wrap_line_length", &option_word_wrap_line_length },
+    { "editor_option_save_mode", &option_save_mode },
+#endif /* USE_INTERNAL_EDIT */
     { NULL, NULL }
 };
 
@@ -885,6 +899,11 @@ save_config (void)
 {
     size_t i;
 
+    /* Save boolean options */
+    for (i = 0; bool_options[i].opt_name != NULL; i++)
+        mc_config_set_bool (mc_global.main_config, CONFIG_APP_SECTION, bool_options[i].opt_name,
+                            *bool_options[i].opt_addr);
+
     /* Save integer options */
     for (i = 0; int_options[i].opt_name != NULL; i++)
         mc_config_set_int (mc_global.main_config, CONFIG_APP_SECTION, int_options[i].opt_name,
@@ -1030,11 +1049,18 @@ load_setup (void)
 
     mc_global.panels_config = mc_config_init (panels_profile_name, FALSE);
 
-    /* Load integer boolean options */
+    /* Load boolean options */
+    for (i = 0; bool_options[i].opt_name != NULL; i++)
+        *bool_options[i].opt_addr =
+            mc_config_get_bool (mc_global.main_config, CONFIG_APP_SECTION, bool_options[i].opt_name,
+                                *bool_options[i].opt_addr);
+
+    /* Load integer options */
     for (i = 0; int_options[i].opt_name != NULL; i++)
         *int_options[i].opt_addr =
             mc_config_get_int (mc_global.main_config, CONFIG_APP_SECTION, int_options[i].opt_name,
                                *int_options[i].opt_addr);
+
 #ifndef USE_INTERNAL_EDIT
     /* reset forced in case of build without internal editor */
     use_internal_edit = FALSE;

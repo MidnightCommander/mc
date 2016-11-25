@@ -20,17 +20,17 @@ typedef struct WView WView;
 
 extern int mcview_default_hex_mode;
 extern int mcview_default_nroff_flag;
-extern int mcview_global_wrap_mode;
+extern gboolean mcview_global_wrap_mode;
 extern int mcview_default_magic_flag;
 
 extern int mcview_altered_hex_mode;
 extern int mcview_altered_magic_flag;
 extern int mcview_altered_nroff_flag;
 
-extern int mcview_remember_file_position;
+extern gboolean mcview_remember_file_position;
 extern int mcview_max_dirt_limit;
 
-extern int mcview_mouse_move_pages;
+extern gboolean mcview_mouse_move_pages;
 extern char *mcview_show_eof;
 
 /*** declarations of public functions ************************************************************/

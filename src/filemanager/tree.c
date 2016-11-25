@@ -78,7 +78,7 @@ WTree *the_tree = NULL;
  * automatically reload it's directory with the contents of the currently
  * selected directory.
  */
-int xtree_mode = 0;
+gboolean xtree_mode = FALSE;
 
 /*** file scope macro definitions ****************************************************************/
 

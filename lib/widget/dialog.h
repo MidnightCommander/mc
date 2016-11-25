@@ -96,8 +96,8 @@ extern GList *top_dlg;
 /* A hook list for idle events */
 extern hook_t *idle_hook;
 
-extern int fast_refresh;
-extern int mouse_close_dialog;
+extern gboolean fast_refresh;
+extern gboolean mouse_close_dialog;
 
 extern const global_keymap_t *dialog_map;
 

@@ -862,7 +862,7 @@ setup_mc (void)
 #ifdef HAVE_CHARSET
     tty_display_8bit (TRUE);
 #else
-    tty_display_8bit (mc_global.full_eight_bits != 0);
+    tty_display_8bit (mc_global.full_eight_bits);
 #endif /* HAVE_CHARSET */
 
 #else /* HAVE_SLANG */
@@ -870,7 +870,7 @@ setup_mc (void)
 #ifdef HAVE_CHARSET
     tty_display_8bit (TRUE);
 #else
-    tty_display_8bit (mc_global.eight_bit_clean != 0);
+    tty_display_8bit (mc_global.eight_bit_clean);
 #endif /* HAVE_CHARSET */
 #endif /* HAVE_SLANG */
 

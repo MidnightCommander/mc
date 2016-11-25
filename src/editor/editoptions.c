@@ -217,18 +217,18 @@ edit_options_dialog (WDialog * h)
 
     if (wrap_mode == 1)
     {
-        option_auto_para_formatting = 1;
-        option_typewriter_wrap = 0;
+        option_auto_para_formatting = TRUE;
+        option_typewriter_wrap = FALSE;
     }
     else if (wrap_mode == 2)
     {
-        option_auto_para_formatting = 0;
-        option_typewriter_wrap = 1;
+        option_auto_para_formatting = FALSE;
+        option_typewriter_wrap = TRUE;
     }
     else
     {
-        option_auto_para_formatting = 0;
-        option_typewriter_wrap = 0;
+        option_auto_para_formatting = FALSE;
+        option_typewriter_wrap = FALSE;
     }
 
     /* Load or unload syntax rules if the option has changed */

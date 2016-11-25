@@ -76,8 +76,8 @@
 /*** global variables ****************************************************************************/
 
 int option_word_wrap_line_length = DEFAULT_WRAP_LINE_LENGTH;
-int option_typewriter_wrap = 0;
-int option_auto_para_formatting = 0;
+gboolean option_typewriter_wrap = FALSE;
+gboolean option_auto_para_formatting = FALSE;
 gboolean option_fill_tabs_with_spaces = FALSE;
 gboolean option_return_does_auto_indent = TRUE;
 gboolean option_backspace_through_tabs = FALSE;
@@ -87,15 +87,15 @@ gboolean option_save_position = TRUE;
 int option_max_undo = 32768;
 gboolean option_persistent_selections = TRUE;
 gboolean option_cursor_beyond_eol = FALSE;
-int option_line_state = 0;
+gboolean option_line_state = FALSE;
 int option_line_state_width = 0;
 gboolean option_cursor_after_inserted_block = FALSE;
-int option_state_full_filename = 0;
+gboolean option_state_full_filename = FALSE;
 
 gboolean enable_show_tabs_tws = TRUE;
 gboolean option_check_nl_at_eof = FALSE;
 gboolean option_group_undo = FALSE;
-int show_right_margin = 0;
+gboolean show_right_margin = FALSE;
 
 char *option_backup_ext = NULL;
 char *option_filesize_threshold = NULL;

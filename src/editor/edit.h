@@ -31,18 +31,18 @@ typedef struct WEdit WEdit;
 /*** global variables defined in .c file *********************************************************/
 
 extern int option_word_wrap_line_length;
-extern int option_typewriter_wrap;
-extern int option_auto_para_formatting;
+extern gboolean option_typewriter_wrap;
+extern gboolean option_auto_para_formatting;
 extern gboolean option_fill_tabs_with_spaces;
 extern gboolean option_return_does_auto_indent;
 extern gboolean option_backspace_through_tabs;
 extern gboolean option_fake_half_tabs;
 extern gboolean option_persistent_selections;
-extern int option_drop_selection_on_copy;
+extern gboolean option_drop_selection_on_copy;
 extern gboolean option_cursor_beyond_eol;
 extern gboolean option_cursor_after_inserted_block;
-extern int option_state_full_filename;
-extern int option_line_state;
+extern gboolean option_state_full_filename;
+extern gboolean option_line_state;
 extern int option_save_mode;
 extern gboolean option_save_position;
 extern gboolean option_syntax_highlighting;
@@ -56,9 +56,9 @@ extern gboolean edit_confirm_save;
 extern gboolean visible_tabs;
 extern gboolean visible_tws;
 
-extern int simple_statusbar;
+extern gboolean simple_statusbar;
 extern gboolean option_check_nl_at_eof;
-extern int show_right_margin;
+extern gboolean show_right_margin;
 
 /*** declarations of public functions ************************************************************/
 

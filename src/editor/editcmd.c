@@ -87,7 +87,7 @@ int search_create_bookmark = FALSE;
 gboolean edit_confirm_save = TRUE;
 
 /* whether we need to drop selection on copy to buffer */
-int option_drop_selection_on_copy = 1;
+gboolean option_drop_selection_on_copy = TRUE;
 
 /*** file scope macro definitions ****************************************************************/
 
