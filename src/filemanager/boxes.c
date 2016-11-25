@@ -629,7 +629,7 @@ appearance_box (void)
 void
 panel_options_box (void)
 {
-    int simple_swap;
+    gboolean simple_swap;
 
     simple_swap = mc_config_get_bool (mc_global.main_config, CONFIG_PANELS_SECTION,
                                       "simple_swap", FALSE) ? 1 : 0;
@@ -693,8 +693,7 @@ panel_options_box (void)
             return;
     }
 
-    mc_config_set_bool (mc_global.main_config, CONFIG_PANELS_SECTION, "simple_swap",
-                        (gboolean) simple_swap);
+    mc_config_set_bool (mc_global.main_config, CONFIG_PANELS_SECTION, "simple_swap", simple_swap);
 
     if (!panels_options.fast_reload_msg_shown && panels_options.fast_reload)
     {
@@ -712,7 +711,7 @@ panel_options_box (void)
 
 /* return list type */
 int
-panel_listing_box (WPanel * panel, int num, char **userp, char **minip, int *use_msformat,
+panel_listing_box (WPanel * panel, int num, char **userp, char **minip, gboolean * use_msformat,
                    int *brief_cols)
 {
     int result = -1;
@@ -727,7 +726,7 @@ panel_listing_box (WPanel * panel, int num, char **userp, char **minip, int *use
         panel = g_new (WPanel, 1);
         panel->list_type = list_full;
         panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
-        panel->user_mini_status = 0;
+        panel->user_mini_status = FALSE;
         for (i = 0; i < LIST_TYPES; i++)
             panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
         section = g_strconcat ("Temporal:", p, (char *) NULL);
@@ -741,7 +740,7 @@ panel_listing_box (WPanel * panel, int num, char **userp, char **minip, int *use
     }
 
     {
-        int mini_user_status;
+        gboolean mini_user_status;
         char panel_brief_cols_in[BUF_TINY];
         char *panel_brief_cols_out = NULL;
         char *panel_user_format = NULL;
@@ -920,7 +919,7 @@ confirm_box (void)
 void
 display_bits_box (void)
 {
-    int new_meta;
+    gboolean new_meta;
     int current_mode;
 
     const char *display_bits_str[] = {
@@ -982,7 +981,7 @@ display_bits_box (void)
         : ((codepage_desc *) g_ptr_array_index (codepages, new_display_codepage))->name;
 
     {
-        int new_meta;
+        gboolean new_meta;
 
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */

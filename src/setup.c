@@ -86,33 +86,33 @@ char *global_profile_name;      /* mc.lib */
 gboolean boot_current_is_left = TRUE;
 
 /* If on, default for "No" in delete operations */
-int safe_delete = 0;
+gboolean safe_delete = FALSE;
 
 /* Controls screen clearing before an exec */
 int clear_before_exec = 1;
 
 /* Asks for confirmation before deleting a file */
-int confirm_delete = 1;
+gboolean confirm_delete = TRUE;
 /* Asks for confirmation before deleting a hotlist entry */
-int confirm_directory_hotlist_delete = 1;
+gboolean confirm_directory_hotlist_delete = FALSE;
 /* Asks for confirmation before overwriting a file */
-int confirm_overwrite = 1;
+gboolean confirm_overwrite = TRUE;
 /* Asks for confirmation before executing a program by pressing enter */
-int confirm_execute = 0;
+gboolean confirm_execute = FALSE;
 /* Asks for confirmation before leaving the program */
-int confirm_exit = 0;
+gboolean confirm_exit = FALSE;
 
 /* If true, at startup the user-menu is invoked */
-int auto_menu = 0;
+gboolean auto_menu = FALSE;
 /* This flag indicates if the pull down menus by default drop down */
-int drop_menus = 0;
+gboolean drop_menus = FALSE;
 
 /* Asks for confirmation when using F3 to view a directory and there
    are tagged files */
 int confirm_view_dir = 0;
 
 /* Ask file name before start the editor */
-int editor_ask_filename_before_edit = 0;
+gboolean editor_ask_filename_before_edit = FALSE;
 
 panel_view_mode_t startup_left_mode;
 panel_view_mode_t startup_right_mode;
@@ -148,10 +148,10 @@ panels_options_t panels_options = {
     .select_flags = SELECT_MATCH_CASE | SELECT_SHELL_PATTERNS
 };
 
-int easy_patterns = 1;
+gboolean easy_patterns = TRUE;
 
 /* It true saves the setup when quitting */
-int auto_save_setup = 1;
+gboolean auto_save_setup = TRUE;
 
 /* If true, then the +, - and \ keys have their special meaning only if the
  * command line is emtpy, otherwise they behave like regular letters
@@ -159,7 +159,7 @@ int auto_save_setup = 1;
 int only_leading_plus_minus = 1;
 
 /* Automatically fills name with current selected item name on mkdir */
-int auto_fill_mkdir_name = 1;
+gboolean auto_fill_mkdir_name = TRUE;
 
 /* If set and you don't have subshell support,then C-o will give you a shell */
 int output_starts_shell = 0;
@@ -167,19 +167,19 @@ int output_starts_shell = 0;
 /* If set, we execute the file command to check the file type */
 int use_file_to_check_type = 1;
 
-int verbose = 1;
+gboolean verbose = TRUE;
 
 /*
  * Whether the Midnight Commander tries to provide more
  * information about copy/move sizes and bytes transferred
  * at the expense of some speed
  */
-int file_op_compute_totals = 1;
+gboolean file_op_compute_totals = TRUE;
 
 /* If true use the internal viewer */
-int use_internal_view = 1;
+gboolean use_internal_view = TRUE;
 /* If set, use the builtin editor */
-int use_internal_edit = 1;
+gboolean use_internal_edit = TRUE;
 
 #ifdef HAVE_CHARSET
 /* Numbers of (file I/O) and (input/display) codepages. -1 if not selected */
@@ -1037,7 +1037,7 @@ load_setup (void)
                                *int_options[i].opt_addr);
 #ifndef USE_INTERNAL_EDIT
     /* reset forced in case of build without internal editor */
-    use_internal_edit = 0;
+    use_internal_edit = FALSE;
 #endif /* USE_INTERNAL_EDIT */
 
     if (option_tab_spacing <= 0)
@@ -1468,7 +1468,7 @@ panel_load_setup (WPanel * panel, const char *section)
     }
 
     panel->user_mini_status =
-        mc_config_get_int (mc_global.panels_config, section, "user_mini_status", 0);
+        mc_config_get_bool (mc_global.panels_config, section, "user_mini_status", FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1504,8 +1504,8 @@ panel_save_setup (WPanel * panel, const char *section)
                               panel->user_status_format[i]);
     }
 
-    mc_config_set_int (mc_global.panels_config, section, "user_mini_status",
-                       panel->user_mini_status);
+    mc_config_set_bool (mc_global.panels_config, section, "user_mini_status",
+                        panel->user_mini_status);
 }
 
 

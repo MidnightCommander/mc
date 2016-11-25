@@ -117,7 +117,7 @@ typedef struct
 
     int dirty;                  /* Should we redisplay the panel? */
 
-    int user_mini_status;       /* Is user_status_format used */
+    gboolean user_mini_status;  /* Is user_status_format used */
     char *user_format;          /* User format */
     char *user_status_format[LIST_TYPES];       /* User format for status line */
 

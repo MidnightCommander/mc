@@ -87,10 +87,10 @@
 
 int mou_auto_repeat = 100;
 int double_click_speed = 250;
-int old_esc_mode = 0;
+gboolean old_esc_mode = TRUE;
 /* timeout for old_esc_mode in usec */
 int old_esc_mode_timeout = 1000000;     /* settable via env */
-int use_8th_bit_as_meta = 0;
+gboolean use_8th_bit_as_meta = FALSE;
 
 gboolean bracketed_pasting_in_progress = FALSE;
 
@@ -1352,7 +1352,7 @@ init_key (void)
          * is not used now (doesn't even depend on use_8th_bit_as_meta
          * as in mc-3.1.2)...GREAT!...no additional code is required!]
          */
-        use_8th_bit_as_meta = 0;
+        use_8th_bit_as_meta = FALSE;
     }
 #endif /* __QNX__ */
 

@@ -63,7 +63,8 @@
 /* Toggles statusbar draw style */
 int simple_statusbar = 0;
 
-int visible_tabs = 1, visible_tws = 1;
+gboolean visible_tws = TRUE;
+gboolean visible_tabs = TRUE;
 
 /*** file scope macro definitions ****************************************************************/
 

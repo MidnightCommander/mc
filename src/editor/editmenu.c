@@ -268,7 +268,7 @@ edit_drop_menu_cmd (WDialog * h, int which)
     WMenuBar *menubar;
 
     menubar = find_menubar (h);
-    menubar_activate (menubar, drop_menus != 0, which);
+    menubar_activate (menubar, drop_menus, which);
 }
 
 /* --------------------------------------------------------------------------------------------- */

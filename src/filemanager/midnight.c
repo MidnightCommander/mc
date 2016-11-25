@@ -368,7 +368,7 @@ init_menu (void)
 static void
 menu_last_selected_cmd (void)
 {
-    menubar_activate (the_menubar, drop_menus != 0, -1);
+    menubar_activate (the_menubar, drop_menus, -1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -383,7 +383,7 @@ menu_cmd (void)
     else
         selected = g_list_length (the_menubar->menu) - 1;
 
-    menubar_activate (the_menubar, drop_menus != 0, selected);
+    menubar_activate (the_menubar, drop_menus, selected);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -880,7 +880,7 @@ setup_mc (void)
 #endif /* !ENABLE_SUBSHELL */
 
     if ((tty_baudrate () < 9600) || mc_global.tty.slow_terminal)
-        verbose = 0;
+        verbose = FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

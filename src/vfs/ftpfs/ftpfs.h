@@ -20,16 +20,16 @@
 
 /*** global variables defined in .c file *********************************************************/
 
-extern int ftpfs_use_netrc;
+extern gboolean ftpfs_use_netrc;
 extern char *ftpfs_anonymous_passwd;
 extern char *ftpfs_proxy_host;
 extern int ftpfs_directory_timeout;
-extern int ftpfs_always_use_proxy;
+extern gboolean ftpfs_always_use_proxy;
 extern int ftpfs_ignore_chattr_errors;
 
 extern int ftpfs_retry_seconds;
-extern int ftpfs_use_passive_connections;
-extern int ftpfs_use_passive_connections_over_proxy;
+extern gboolean ftpfs_use_passive_connections;
+extern gboolean ftpfs_use_passive_connections_over_proxy;
 extern int ftpfs_use_unix_list_options;
 extern int ftpfs_first_cd_then_ls;
 

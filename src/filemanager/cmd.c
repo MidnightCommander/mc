@@ -153,7 +153,7 @@ do_view_cmd (gboolean normal)
 
         file_idx = current_panel->selected;
         filename_vpath = vfs_path_from_str (current_panel->dir.list[file_idx].fname);
-        view_file (filename_vpath, normal, use_internal_view != 0);
+        view_file (filename_vpath, normal, use_internal_view);
         vfs_path_free (filename_vpath);
     }
 
@@ -165,7 +165,7 @@ do_view_cmd (gboolean normal)
 static inline void
 do_edit (const vfs_path_t * what_vpath)
 {
-    edit_file_at_line (what_vpath, use_internal_edit != 0, 0);
+    edit_file_at_line (what_vpath, use_internal_edit, 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -472,8 +472,8 @@ nice_cd (const char *text, const char *xtext, const char *help,
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-configure_panel_listing (WPanel * p, int list_type, int brief_cols, int use_msformat, char **user,
-                         char **status)
+configure_panel_listing (WPanel * p, int list_type, int brief_cols, gboolean use_msformat,
+                         char **user, char **status)
 {
     p->user_mini_status = use_msformat;
     p->list_type = list_type;
@@ -658,7 +658,7 @@ view_file_cmd (void)
 
     vpath = vfs_path_from_str (filename);
     g_free (filename);
-    view_file (vpath, FALSE, use_internal_view != 0);
+    view_file (vpath, FALSE, use_internal_view);
     vfs_path_free (vpath);
 }
 
@@ -1592,7 +1592,8 @@ void
 change_listing_cmd (void)
 {
     int list_type;
-    int use_msformat, brief_cols;
+    gboolean use_msformat;
+    int brief_cols;
     char *user, *status;
     WPanel *p = NULL;
 

@@ -116,8 +116,8 @@ typedef struct edit_stack_type
 /*** global variables defined in .c file *********************************************************/
 
 extern const char VERTICAL_MAGIC[5];
-/* if enable_show_tabs_tws ==1 then use visible_tab visible_tws */
-extern int enable_show_tabs_tws;
+/* if enable_show_tabs_tws == TRUE then use visible_tab visible_tws */
+extern gboolean enable_show_tabs_tws;
 
 extern edit_search_options_t edit_search_options;
 

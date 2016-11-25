@@ -84,7 +84,7 @@
 int search_create_bookmark = FALSE;
 
 /* queries on a save */
-int edit_confirm_save = 1;
+gboolean edit_confirm_save = TRUE;
 
 /* whether we need to drop selection on copy to buffer */
 int option_drop_selection_on_copy = 1;

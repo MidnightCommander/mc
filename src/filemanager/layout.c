@@ -82,7 +82,7 @@ panels_layout_t panels_layout = {
 };
 
 /* Controls the display of the rotating dash on the verbose mode */
-int nice_rotating_dash = 1;
+gboolean nice_rotating_dash = TRUE;
 
 /* The number of output lines shown (if available) */
 int output_lines = 0;

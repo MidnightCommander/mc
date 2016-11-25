@@ -75,37 +75,37 @@ struct mc_fhl_struct;
 
 /* global paremeters */
 extern char *global_profile_name;
-extern int confirm_delete;
-extern int confirm_directory_hotlist_delete;
-extern int confirm_execute;
-extern int confirm_exit;
-extern int confirm_overwrite;
+extern gboolean confirm_delete;
+extern gboolean confirm_directory_hotlist_delete;
+extern gboolean confirm_execute;
+extern gboolean confirm_exit;
+extern gboolean confirm_overwrite;
 extern int confirm_view_dir;
-extern int safe_delete;
+extern gboolean safe_delete;
 extern int clear_before_exec;
-extern int auto_menu;
-extern int drop_menus;
-extern int verbose;
+extern gboolean auto_menu;
+extern gboolean drop_menus;
+extern gboolean verbose;
 extern int setup_copymove_persistent_attr;
-extern int classic_progressbar;
-extern int easy_patterns;
+extern gboolean classic_progressbar;
+extern gboolean easy_patterns;
 extern int option_tab_spacing;
-extern int auto_save_setup;
+extern gboolean auto_save_setup;
 extern int only_leading_plus_minus;
 extern int cd_symlinks;
-extern int auto_fill_mkdir_name;
+extern gboolean auto_fill_mkdir_name;
 extern int output_starts_shell;
 extern int use_file_to_check_type;
-extern int file_op_compute_totals;
-extern int editor_ask_filename_before_edit;
+extern gboolean file_op_compute_totals;
+extern gboolean editor_ask_filename_before_edit;
 
 extern panels_options_t panels_options;
 
 extern panel_view_mode_t startup_left_mode;
 extern panel_view_mode_t startup_right_mode;
 extern gboolean boot_current_is_left;
-extern int use_internal_view;
-extern int use_internal_edit;
+extern gboolean use_internal_view;
+extern gboolean use_internal_edit;
 
 #ifdef HAVE_CHARSET
 extern int default_source_codepage;

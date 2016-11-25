@@ -312,8 +312,7 @@ init_chmod (const char *fname, const struct stat *sf_stat)
 
     for (i = 0; i < check_perm_num; i++)
     {
-        check_perm[i].check = check_new (PY + i + 1, PX + 2,
-                                         (c_stat & check_perm[i].mode) != 0 ? 1 : 0,
+        check_perm[i].check = check_new (PY + i + 1, PX + 2, (c_stat & check_perm[i].mode) != 0,
                                          check_perm[i].text);
         add_widget (ch_dlg, check_perm[i].check);
     }

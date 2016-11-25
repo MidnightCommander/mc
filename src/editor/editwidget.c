@@ -917,7 +917,7 @@ edit_dialog_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
             }
 
             if (unhandled)
-                menubar_activate (b, drop_menus != 0, -1);
+                menubar_activate (b, drop_menus, -1);
         }
     }
 

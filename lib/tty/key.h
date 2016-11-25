@@ -61,8 +61,8 @@ extern const key_code_name_t key_name_conv_tab[];
 extern int old_esc_mode_timeout;
 
 extern int double_click_speed;
-extern int old_esc_mode;
-extern int use_8th_bit_as_meta;
+extern gboolean old_esc_mode;
+extern gboolean use_8th_bit_as_meta;
 extern int mou_auto_repeat;
 
 extern gboolean bracketed_pasting_in_progress;

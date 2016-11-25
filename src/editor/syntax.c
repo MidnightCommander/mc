@@ -66,7 +66,7 @@
 
 /*** global variables ****************************************************************************/
 
-int option_syntax_highlighting = 1;
+gboolean option_syntax_highlighting = TRUE;
 int option_auto_syntax = 1;
 
 /*** file scope macro definitions ****************************************************************/

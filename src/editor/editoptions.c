@@ -120,7 +120,7 @@ edit_options_dialog (WDialog * h)
     char wrap_length[16], tab_spacing[16];
     char *p, *q;
     int wrap_mode = 0;
-    int old_syntax_hl;
+    gboolean old_syntax_hl;
 
 #ifdef ENABLE_NLS
     static gboolean i18n_flag = FALSE;

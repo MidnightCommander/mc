@@ -118,8 +118,8 @@ What to do with this?
 int ftpfs_retry_seconds = 30;
 
 /* Method to use to connect to ftp sites */
-int ftpfs_use_passive_connections = 1;
-int ftpfs_use_passive_connections_over_proxy = 0;
+gboolean ftpfs_use_passive_connections = TRUE;
+gboolean ftpfs_use_passive_connections_over_proxy = FALSE;
 
 /* Method used to get directory listings:
  * 1: try 'LIST -la <path>', if it fails
@@ -132,7 +132,7 @@ int ftpfs_use_unix_list_options = 1;
 int ftpfs_first_cd_then_ls = 1;
 
 /* Use the ~/.netrc */
-int ftpfs_use_netrc = 1;
+gboolean ftpfs_use_netrc = TRUE;
 
 /* Anonymous setup */
 char *ftpfs_anonymous_passwd = NULL;
@@ -142,7 +142,7 @@ int ftpfs_directory_timeout = 900;
 char *ftpfs_proxy_host = NULL;
 
 /* whether we have to use proxy by default? */
-int ftpfs_always_use_proxy = 0;
+gboolean ftpfs_always_use_proxy = FALSE;
 
 int ftpfs_ignore_chattr_errors = 1;
 
@@ -206,7 +206,7 @@ typedef struct
 
     char *proxy;                /* proxy server, NULL if no proxy */
     int failed_on_login;        /* used to pass the failure reason to upper levels */
-    int use_passive_connection;
+    gboolean use_passive_connection;
     int remote_is_amiga;        /* No leading slash allowed for AmiTCP (Amiga) */
     int isbinary;
     int cwd_deferred;           /* current_directory was changed but CWD command hasn't
@@ -1345,7 +1345,7 @@ ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
             return data_sock;
 
         vfs_print_message ("%s", _("ftpfs: could not setup passive mode"));
-        SUP->use_passive_connection = 0;
+        SUP->use_passive_connection = FALSE;
 
         close (data_sock);
     }

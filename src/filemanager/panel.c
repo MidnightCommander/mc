@@ -2513,9 +2513,9 @@ static void
 panel_select_unselect_files (WPanel * panel, const char *title, const char *history_name,
                              gboolean do_select)
 {
-    int files_only = (panels_options.select_flags & SELECT_FILES_ONLY) != 0;
-    int case_sens = (panels_options.select_flags & SELECT_MATCH_CASE) != 0;
-    int shell_patterns = (panels_options.select_flags & SELECT_SHELL_PATTERNS) != 0;
+    gboolean files_only = (panels_options.select_flags & SELECT_FILES_ONLY) != 0;
+    gboolean case_sens = (panels_options.select_flags & SELECT_MATCH_CASE) != 0;
+    gboolean shell_patterns = (panels_options.select_flags & SELECT_SHELL_PATTERNS) != 0;
 
     char *reg_exp;
     mc_search_t *search;
@@ -2551,15 +2551,15 @@ panel_select_unselect_files (WPanel * panel, const char *title, const char *hist
     }
 
     search = mc_search_new (reg_exp, NULL);
-    search->search_type = (shell_patterns != 0) ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
+    search->search_type = shell_patterns ? MC_SEARCH_T_GLOB : MC_SEARCH_T_REGEX;
     search->is_entire_line = TRUE;
-    search->is_case_sensitive = case_sens != 0;
+    search->is_case_sensitive = case_sens;
 
     for (i = 0; i < panel->dir.len; i++)
     {
         if (DIR_IS_DOTDOT (panel->dir.list[i].fname))
             continue;
-        if (S_ISDIR (panel->dir.list[i].st.st_mode) && files_only != 0)
+        if (S_ISDIR (panel->dir.list[i].st.st_mode) && files_only)
             continue;
 
         if (mc_search_run (search, panel->dir.list[i].fname, 0, panel->dir.list[i].fnamelen, NULL))
@@ -2571,11 +2571,11 @@ panel_select_unselect_files (WPanel * panel, const char *title, const char *hist
 
     /* result flags */
     panels_options.select_flags = 0;
-    if (case_sens != 0)
+    if (case_sens)
         panels_options.select_flags |= SELECT_MATCH_CASE;
-    if (files_only != 0)
+    if (files_only)
         panels_options.select_flags |= SELECT_FILES_ONLY;
-    if (shell_patterns != 0)
+    if (shell_patterns)
         panels_options.select_flags |= SELECT_SHELL_PATTERNS;
 }
 

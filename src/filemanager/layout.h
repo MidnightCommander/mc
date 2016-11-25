@@ -46,7 +46,7 @@ extern int menubar_visible;
 extern int output_start_y;
 extern gboolean xterm_title;
 extern int free_space;
-extern int nice_rotating_dash;
+extern gboolean nice_rotating_dash;
 
 extern int ok_to_refresh;
 

@@ -115,9 +115,9 @@ check_patterns (char *p)
 
     p += sizeof (def_name) - 1;
     if (*p == '1')
-        easy_patterns = 1;
+        easy_patterns = TRUE;
     else if (*p == '0')
-        easy_patterns = 0;
+        easy_patterns = FALSE;
     else
         return p0;
 
@@ -922,7 +922,8 @@ user_menu_cmd (const WEdit * edit_widget, const char *menu_file, int selected_en
     int max_cols, menu_lines, menu_limit;
     int col, i;
     gboolean accept_entry = TRUE;
-    int selected, old_patterns;
+    int selected;
+    gboolean old_patterns;
     gboolean res = FALSE;
     gboolean interactive = TRUE;
 
