@@ -73,7 +73,7 @@ check_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     case MSG_KEY:
         if (parm != ' ')
             return MSG_NOT_HANDLED;
-        c->state ^= C_BOOL;
+        c->state = !c->state;
         widget_redraw (w);
         send_message (w->owner, w, MSG_NOTIFY, (int) MSG_KEY, NULL);
         return MSG_HANDLED;
@@ -89,7 +89,7 @@ check_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             focused = widget_get_state (w, WST_FOCUSED);
             widget_selectcolor (w, focused, FALSE);
             widget_move (w, 0, 0);
-            tty_print_string ((c->state & C_BOOL) ? "[x] " : "[ ] ");
+            tty_print_string (c->state ? "[x] " : "[ ] ");
             hotkey_draw (w, c->text, focused);
             return MSG_HANDLED;
         }
@@ -131,7 +131,7 @@ check_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 /* --------------------------------------------------------------------------------------------- */
 
 WCheck *
-check_new (int y, int x, int state, const char *text)
+check_new (int y, int x, gboolean state, const char *text)
 {
     WCheck *c;
     Widget *w;
@@ -142,7 +142,7 @@ check_new (int y, int x, int state, const char *text)
     /* 4 is width of "[X] " */
     widget_init (w, y, x, 1, 4 + hotkey_width (c->text), check_callback, check_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR | WOP_WANT_HOTKEY;
-    c->state = state ? C_BOOL : 0;
+    c->state = state;
 
     return c;
 }

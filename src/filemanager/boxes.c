@@ -132,7 +132,7 @@ configure_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         /* message from "Single press" checkbutton */
         if (sender != NULL && sender->id == configure_old_esc_mode_id && parm == (int) MSG_KEY)
         {
-            const gboolean not_single = !(CHECK (sender)->state & C_BOOL);
+            const gboolean not_single = !CHECK (sender)->state;
             Widget *ww;
 
             /* input line */
@@ -289,7 +289,7 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
             ch = CHECK (dlg_find_by_id (h, mini_user_status_id));
             in3 = INPUT (dlg_find_by_id (h, mini_user_format_id));
 
-            if (!(ch->state & C_BOOL))
+            if (!ch->state)
                 input_assign_text (in3, status_format[RADIO (sender)->sel]);
             input_update (in1, FALSE);
             input_update (in2, FALSE);
@@ -305,7 +305,7 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
 
             in = INPUT (dlg_find_by_id (h, mini_user_format_id));
 
-            if (CHECK (sender)->state & C_BOOL)
+            if (CHECK (sender)->state)
             {
                 widget_disable (WIDGET (in), FALSE);
                 input_assign_text (in, status_format[3]);
@@ -403,7 +403,7 @@ confvfs_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         /* message from "Always use ftp proxy" checkbutton */
         if (sender != NULL && sender->id == ftpfs_always_use_proxy_id && parm == (int) MSG_KEY)
         {
-            const gboolean not_use = !(CHECK (sender)->state & C_BOOL);
+            const gboolean not_use = !CHECK (sender)->state;
             Widget *wi;
 
             /* input */
@@ -693,8 +693,8 @@ panel_options_box (void)
             return;
     }
 
-    mc_config_set_bool (mc_global.main_config, CONFIG_PANELS_SECTION,
-                        "simple_swap", (gboolean) (simple_swap & C_BOOL));
+    mc_config_set_bool (mc_global.main_config, CONFIG_PANELS_SECTION, "simple_swap",
+                        (gboolean) simple_swap);
 
     if (!panels_options.fast_reload_msg_shown && panels_options.fast_reload)
     {

@@ -228,7 +228,7 @@ update_split (const WDialog * h)
         check_options[0].widget->state = panels_layout.vertical_equal ? 1 : 0;
     widget_redraw (WIDGET (check_options[0].widget));
 
-    tty_setcolor ((check_options[0].widget->state & C_BOOL) ? DISABLED_COLOR : COLOR_NORMAL);
+    tty_setcolor (check_options[0].widget->state ? DISABLED_COLOR : COLOR_NORMAL);
 
     widget_move (h, 6, 5);
     if (panels_layout.horizontal_split)
@@ -333,10 +333,10 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
         {
             int _menubar_visible, _command_prompt, _keybar_visible, _message_visible;
 
-            _menubar_visible = check_options[1].widget->state & C_BOOL;
-            _command_prompt = check_options[2].widget->state & C_BOOL;
-            _keybar_visible = check_options[3].widget->state & C_BOOL;
-            _message_visible = check_options[4].widget->state & C_BOOL;
+            _menubar_visible = check_options[1].widget->state;
+            _command_prompt = check_options[2].widget->state;
+            _keybar_visible = check_options[3].widget->state;
+            _message_visible = check_options[4].widget->state;
 
             if (mc_global.tty.console_flag != '\0')
             {
@@ -410,12 +410,12 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
 
             if (panels_layout.horizontal_split)
             {
-                panels_layout.horizontal_equal = check_options[0].widget->state & C_BOOL;
+                panels_layout.horizontal_equal = check_options[0].widget->state;
                 eq = panels_layout.horizontal_equal;
             }
             else
             {
-                panels_layout.vertical_equal = check_options[0].widget->state & C_BOOL;
+                panels_layout.vertical_equal = check_options[0].widget->state;
                 eq = panels_layout.vertical_equal;
             }
 
@@ -513,7 +513,7 @@ init_layout (void)
         dlg_create (TRUE, 0, 0, 15, width, WPOS_CENTER, FALSE, dialog_colors, layout_callback, NULL,
                     "[Layout]", _("Layout"));
 
-#define XTRACT(i) *check_options[i].variable, check_options[i].text
+#define XTRACT(i) (*check_options[i].variable != 0), check_options[i].text
 
     /* "Panel split" groupbox */
     add_widget (layout_dlg, groupbox_new (2, 3, 6, l1, title1));
@@ -650,7 +650,7 @@ layout_box (void)
 
         for (i = 0; i < (size_t) LAYOUT_OPTIONS_COUNT; i++)
             if (check_options[i].widget != NULL)
-                *check_options[i].variable = check_options[i].widget->state & C_BOOL;
+                *check_options[i].variable = check_options[i].widget->state;
 
         output_lines = _output_lines;
     }

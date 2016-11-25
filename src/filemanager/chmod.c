@@ -504,7 +504,7 @@ chmod_cmd (void)
             for (i = 0; i < check_perm_num; i++)
                 if (check_perm[i].selected || result == B_ALL)
                 {
-                    if (check_perm[i].check->state & C_BOOL)
+                    if (check_perm[i].check->state)
                         or_mask |= check_perm[i].mode;
                     else
                         and_mask &= ~check_perm[i].mode;

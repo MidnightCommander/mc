@@ -10,8 +10,6 @@
 
 #define CHECK(x) ((WCheck *)(x))
 
-#define C_BOOL   0x0001
-
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
@@ -19,7 +17,7 @@
 typedef struct WCheck
 {
     Widget widget;
-    unsigned int state;         /* check button state */
+    gboolean state;             /* check button state */
     hotkey_t text;              /* text of check button */
 } WCheck;
 
@@ -27,7 +25,7 @@ typedef struct WCheck
 
 /*** declarations of public functions ************************************************************/
 
-WCheck *check_new (int y, int x, int state, const char *text);
+WCheck *check_new (int y, int x, gboolean state, const char *text);
 
 /*** inline functions ****************************************************************************/
 
