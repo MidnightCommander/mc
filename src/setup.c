@@ -321,6 +321,7 @@ static const struct
     { "ftpfs_use_passive_connections_over_proxy", &ftpfs_use_passive_connections_over_proxy },
     { "ftpfs_use_unix_list_options", &ftpfs_use_unix_list_options },
     { "ftpfs_first_cd_then_ls", &ftpfs_first_cd_then_ls },
+    { "ignore_ftp_chattr_errors", & ftpfs_ignore_chattr_errors} ,
 #endif /* ENABLE_VFS_FTP */
 #endif /* ENABLE_VFS */
 #ifdef USE_INTERNAL_EDIT
@@ -596,6 +597,73 @@ load_setup_init_config_from_file (mc_config_t ** config, const char *fname, gboo
 /* --------------------------------------------------------------------------------------------- */
 
 static void
+load_config (void)
+{
+    size_t i;
+    const char *kt;
+
+    /* Load boolean options */
+    for (i = 0; bool_options[i].opt_name != NULL; i++)
+        *bool_options[i].opt_addr =
+            mc_config_get_bool (mc_global.main_config, CONFIG_APP_SECTION, bool_options[i].opt_name,
+                                *bool_options[i].opt_addr);
+
+    /* Load integer options */
+    for (i = 0; int_options[i].opt_name != NULL; i++)
+        *int_options[i].opt_addr =
+            mc_config_get_int (mc_global.main_config, CONFIG_APP_SECTION, int_options[i].opt_name,
+                               *int_options[i].opt_addr);
+
+    /* Load string options */
+    for (i = 0; str_options[i].opt_name != NULL; i++)
+        *str_options[i].opt_addr =
+            mc_config_get_string (mc_global.main_config, CONFIG_APP_SECTION,
+                                  str_options[i].opt_name, str_options[i].opt_defval);
+
+    /* Overwrite some options */
+#ifdef USE_INTERNAL_EDIT
+    if (option_word_wrap_line_length <= 0)
+        option_word_wrap_line_length = DEFAULT_WRAP_LINE_LENGTH;
+#else
+    /* Reset forced in case of build without internal editor */
+    use_internal_edit = FALSE;
+#endif /* USE_INTERNAL_EDIT */
+
+    if (option_tab_spacing <= 0)
+        option_tab_spacing = DEFAULT_TAB_SPACING;
+
+    kt = getenv ("KEYBOARD_KEY_TIMEOUT_US");
+    if (kt != NULL && kt[0] != '\0')
+        old_esc_mode_timeout = atoi (kt);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static panel_view_mode_t
+setup__load_panel_state (const char *section)
+{
+    char *buffer;
+    size_t i;
+    panel_view_mode_t mode = view_listing;
+
+    /* Load the display mode */
+    buffer = mc_config_get_string (mc_global.panels_config, section, "display", "listing");
+
+    for (i = 0; panel_types[i].opt_name != NULL; i++)
+        if (g_ascii_strcasecmp (panel_types[i].opt_name, buffer) == 0)
+        {
+            mode = panel_types[i].opt_type;
+            break;
+        }
+
+    g_free (buffer);
+
+    return mode;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
 load_layout (void)
 {
     size_t i;
@@ -627,6 +695,16 @@ load_layout (void)
     mc_config_del_key (mc_global.main_config, CONFIG_APP_SECTION, "horizontal_split");
     mc_config_del_key (mc_global.main_config, "Layout", "equal_split");
     mc_config_del_key (mc_global.main_config, "Layout", "first_panel_size");
+
+    startup_left_mode = setup__load_panel_state ("New Left Panel");
+    startup_right_mode = setup__load_panel_state ("New Right Panel");
+
+    /* At least one of the panels is a listing panel */
+    if (startup_left_mode != view_listing && startup_right_mode != view_listing)
+        startup_left_mode = view_listing;
+
+    boot_current_is_left =
+        mc_config_get_bool (mc_global.panels_config, "Dirs", "current_is_left", TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -796,30 +874,6 @@ load_setup_get_keymap_profile_config (gboolean load_from_file)
     g_free (share_keymap);
 
     return keymap_config;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static panel_view_mode_t
-setup__load_panel_state (const char *section)
-{
-    char *buffer;
-    size_t i;
-    panel_view_mode_t mode = view_listing;
-
-    /* Load the display mode */
-    buffer = mc_config_get_string (mc_global.panels_config, section, "display", "listing");
-
-    for (i = 0; panel_types[i].opt_name != NULL; i++)
-        if (g_ascii_strcasecmp (panel_types[i].opt_name, buffer) == 0)
-        {
-            mode = panel_types[i].opt_type;
-            break;
-        }
-
-    g_free (buffer);
-
-    return mode;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1017,8 +1071,6 @@ void
 load_setup (void)
 {
     const char *profile;
-    size_t i;
-    const char *kt;
 
 #ifdef HAVE_CHARSET
     char *buffer;
@@ -1049,55 +1101,10 @@ load_setup (void)
 
     mc_global.panels_config = mc_config_init (panels_profile_name, FALSE);
 
-    /* Load boolean options */
-    for (i = 0; bool_options[i].opt_name != NULL; i++)
-        *bool_options[i].opt_addr =
-            mc_config_get_bool (mc_global.main_config, CONFIG_APP_SECTION, bool_options[i].opt_name,
-                                *bool_options[i].opt_addr);
-
-    /* Load integer options */
-    for (i = 0; int_options[i].opt_name != NULL; i++)
-        *int_options[i].opt_addr =
-            mc_config_get_int (mc_global.main_config, CONFIG_APP_SECTION, int_options[i].opt_name,
-                               *int_options[i].opt_addr);
-
-#ifndef USE_INTERNAL_EDIT
-    /* reset forced in case of build without internal editor */
-    use_internal_edit = FALSE;
-#endif /* USE_INTERNAL_EDIT */
-
-    if (option_tab_spacing <= 0)
-        option_tab_spacing = DEFAULT_TAB_SPACING;
-
-#ifdef USE_INTERNAL_EDIT
-    if (option_word_wrap_line_length <= 0)
-        option_word_wrap_line_length = DEFAULT_WRAP_LINE_LENGTH;
-#endif /* USE_INTERNAL_EDIT */
-
-    /* overwrite old_esc_mode_timeout */
-    kt = getenv ("KEYBOARD_KEY_TIMEOUT_US");
-    if ((kt != NULL) && (kt[0] != '\0'))
-        old_esc_mode_timeout = atoi (kt);
-
-    /* Load string options */
-    for (i = 0; str_options[i].opt_name != NULL; i++)
-        *str_options[i].opt_addr =
-            mc_config_get_string (mc_global.main_config, CONFIG_APP_SECTION,
-                                  str_options[i].opt_name, str_options[i].opt_defval);
-
+    load_config ();
     load_layout ();
     panels_load_options ();
     load_panelize ();
-
-    startup_left_mode = setup__load_panel_state ("New Left Panel");
-    startup_right_mode = setup__load_panel_state ("New Right Panel");
-
-    /* At least one of the panels is a listing panel */
-    if (startup_left_mode != view_listing && startup_right_mode != view_listing)
-        startup_left_mode = view_listing;
-
-    boot_current_is_left =
-        mc_config_get_bool (mc_global.panels_config, "Dirs", "current_is_left", TRUE);
 
     /* Load time formats */
     user_recent_timeformat =
@@ -1110,9 +1117,6 @@ load_setup (void)
 #ifdef ENABLE_VFS_FTP
     ftpfs_proxy_host =
         mc_config_get_string (mc_global.main_config, CONFIG_MISC_SECTION, "ftp_proxy_host", "gate");
-    ftpfs_ignore_chattr_errors =
-        mc_config_get_bool (mc_global.main_config, CONFIG_APP_SECTION, "ignore_ftp_chattr_errors",
-                            TRUE);
     ftpfs_init_passwd ();
 #endif /* ENABLE_VFS_FTP */
 
@@ -1533,6 +1537,5 @@ panel_save_setup (WPanel * panel, const char *section)
     mc_config_set_bool (mc_global.panels_config, section, "user_mini_status",
                         panel->user_mini_status);
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
