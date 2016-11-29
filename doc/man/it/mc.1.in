@@ -3231,10 +3231,10 @@ Menu locale definito dall'utente. Se questo file è presente viene usato
 al posto del menu delle applicazioni utente o di sistema.
 .PP
 To change default home directory of MC, you can use 
-.BR MC_HOME
-environment variable. The value of MC_HOME must be an absolute path. If MC_HOME
-is unset or empty, HOME variable is used. If HOME is unset or empty, MC
-directories are get from GLib library.
+.BR MC_PROFILE_ROOT
+environment variable. The value of MC_PROFILE_ROOT must be an absolute path.
+If MC_PROFILE_ROOT is unset or empty, HOME variable is used. If HOME is unset
+or empty, MC directories are get from GLib library.
 .\"SKIP_SECTION"
 .SH "LICENZA"
 Questo programma è distribuito sotto i termini della Licenza Generale

@@ -2939,10 +2939,10 @@ Lokalny plik zdefiniowany przez użytkownika. Jeśli ten plik jest dostępny,
 jest używany zamiast pliku w katalogu domowym i ogólnosystemowego.
 .PP
 To change default home directory of MC, you can use 
-.BR MC_HOME
-environment variable. The value of MC_HOME must be an absolute path. If MC_HOME
-is unset or empty, HOME variable is used. If HOME is unset or empty, MC
-directories are get from GLib library.
+.BR MC_PROFILE_ROOT
+environment variable. The value of MC_PROFILE_ROOT must be an absolute path.
+If MC_PROFILE_ROOT is unset or empty, HOME variable is used. If HOME is unset
+or empty, MC directories are get from GLib library.
 .\"SKIP_SECTION"
 .SH LICENCJA
 Program jest dystrybuowany na zasadach licencji GNU General Public License
