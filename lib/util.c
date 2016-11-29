@@ -1419,6 +1419,30 @@ guess_message_value (void)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/**
+ * The "profile root" is the tree under which all of MC's user data &
+ * settings are stored.
+ *
+ * It defaults to the user's home dir. The user may override this default
+ * with the environment variable $MC_PROFILE_ROOT.
+ */
+const char *
+mc_get_profile_root (void)
+{
+    static const char *profile_root = NULL;
+
+    if (profile_root == NULL)
+    {
+        profile_root = g_getenv ("MC_PROFILE_ROOT");
+        if (profile_root == NULL || *profile_root == '\0')
+            profile_root = mc_config_get_home_dir ();
+    }
+
+    return profile_root;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /**
  * Propagate error in simple way.
  *

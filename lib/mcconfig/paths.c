@@ -279,30 +279,6 @@ mc_config_deprecated_dir_present (void)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/**
- * The "profile root" is the tree under which all of MC's user data &
- * settings are stored.
- *
- * It defaults to the user's home dir. The user may override this default
- * with the environment variable $MC_PROFILE_ROOT.
- */
-const char *
-mc_config_get_profile_root (void)
-{
-    static const char *profile_root = NULL;
-
-    if (profile_root == NULL)
-    {
-        profile_root = g_getenv ("MC_PROFILE_ROOT");
-        if (profile_root == NULL || *profile_root == '\0')
-           profile_root = mc_config_get_home_dir ();
-    }
-
-    return profile_root;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 void
 mc_config_init_config_paths (GError ** mcerror)
 {
@@ -317,7 +293,7 @@ mc_config_init_config_paths (GError ** mcerror)
         return;
 
 #if MC_HOMEDIR_XDG
-    if (strcmp (mc_config_get_profile_root (), mc_config_get_home_dir ()) != 0)
+    if (strcmp (mc_get_profile_root (), mc_config_get_home_dir ()) != 0)
     {
         /*
          * The user overrode the default profile root.
@@ -328,7 +304,7 @@ mc_config_init_config_paths (GError ** mcerror)
 
         const char *profile_root;
 
-        profile_root = mc_config_get_profile_root ();
+        profile_root = mc_get_profile_root ();
 
         dir = g_build_filename (profile_root, ".config", (char *) NULL);
         mc_config_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, mcerror);
@@ -360,7 +336,7 @@ mc_config_init_config_paths (GError ** mcerror)
     else
     {
         g_free (defined_userconf_dir);
-        dir = g_build_filename (mc_config_get_profile_root (), MC_USERCONF_DIR, (char *) NULL);
+        dir = g_build_filename (mc_get_profile_root (), MC_USERCONF_DIR, (char *) NULL);
     }
 
     mc_data_str = mc_cache_str = mc_config_str = mc_config_init_one_config_path (dir, "", mcerror);
