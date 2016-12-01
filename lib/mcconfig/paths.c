@@ -282,6 +282,7 @@ mc_config_deprecated_dir_present (void)
 void
 mc_config_init_config_paths (GError ** mcerror)
 {
+    const char *profile_root;
     char *dir;
 #if MC_HOMEDIR_XDG == 0
     char *defined_userconf_dir;
@@ -292,8 +293,10 @@ mc_config_init_config_paths (GError ** mcerror)
     if (xdg_vars_initialized)
         return;
 
+    profile_root = mc_get_profile_root ();
+
 #if MC_HOMEDIR_XDG
-    if (strcmp (mc_get_profile_root (), mc_config_get_home_dir ()) != 0)
+    if (strcmp (profile_root, mc_config_get_home_dir ()) != 0)
     {
         /*
          * The user overrode the default profile root.
@@ -301,10 +304,6 @@ mc_config_init_config_paths (GError ** mcerror)
          * In this case we can't use GLib's g_get_user_{config,cache,data}_dir()
          * as these functions use the user's home dir as the root.
          */
-
-        const char *profile_root;
-
-        profile_root = mc_get_profile_root ();
 
         dir = g_build_filename (profile_root, ".config", (char *) NULL);
         mc_config_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, mcerror);
@@ -336,7 +335,7 @@ mc_config_init_config_paths (GError ** mcerror)
     else
     {
         g_free (defined_userconf_dir);
-        dir = g_build_filename (mc_get_profile_root (), MC_USERCONF_DIR, (char *) NULL);
+        dir = g_build_filename (profile_root, MC_USERCONF_DIR, (char *) NULL);
     }
 
     mc_data_str = mc_cache_str = mc_config_str = mc_config_init_one_config_path (dir, "", mcerror);
