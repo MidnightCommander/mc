@@ -195,6 +195,19 @@ mc_search__cond_struct_new_regex_accum_append (const char *charset, GString * st
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Creates a case-insensitive version of a regex pattern.
+ *
+ * For example (assuming ASCII charset): given "\\bHello!\\xAB", returns
+ * "\\b[Hh][Ee][Ll][Ll][Oo]!\\xAB" (this example is for easier reading; in
+ * reality hex codes are used instead of letters).
+ *
+ * This function knows not to ruin special regex symbols.
+ *
+ * This function is used when working with non-UTF-8 charsets: GLib's
+ * regex engine doesn't understand such charsets and therefore can't do
+ * this job itself.
+ */
 static GString *
 mc_search__cond_struct_new_regex_ci_str (const char *charset, const GString * astr)
 {
