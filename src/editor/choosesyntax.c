@@ -113,7 +113,7 @@ edit_syntax_dialog (WEdit * edit)
     {
         gboolean force_reload = FALSE;
         char *current_syntax;
-        int old_auto_syntax;
+        gboolean old_auto_syntax;
 
         current_syntax = g_strdup (edit->syntax_type);
         old_auto_syntax = option_auto_syntax;
@@ -121,13 +121,13 @@ edit_syntax_dialog (WEdit * edit)
         switch (syntax)
         {
         case 0:                /* auto syntax */
-            option_auto_syntax = 1;
+            option_auto_syntax = TRUE;
             break;
         case 1:                /* reload current syntax */
             force_reload = TRUE;
             break;
         default:
-            option_auto_syntax = 0;
+            option_auto_syntax = FALSE;
             g_free (edit->syntax_type);
             edit->syntax_type = g_strdup (g_ptr_array_index (names, syntax - N_DFLT_ENTRIES));
         }

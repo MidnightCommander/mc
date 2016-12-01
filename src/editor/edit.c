@@ -2082,7 +2082,7 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
 {
     gboolean to_free = FALSE;
 
-    option_auto_syntax = 1;     /* Resetting to auto on every invokation */
+    option_auto_syntax = TRUE;  /* Resetting to auto on every invokation */
     option_line_state_width = option_line_state ? LINE_STATE_WIDTH : 0;
 
     if (edit != NULL)

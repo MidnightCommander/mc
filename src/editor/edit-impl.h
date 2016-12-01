@@ -127,7 +127,7 @@ extern edit_stack_type edit_history_moveto[MAX_HISTORY_MOVETO];
 extern int option_line_state_width;
 
 extern int option_max_undo;
-extern int option_auto_syntax;
+extern gboolean option_auto_syntax;
 
 extern gboolean search_create_bookmark;
 
