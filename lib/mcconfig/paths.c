@@ -65,7 +65,6 @@ static const struct
     /* config */
     { "ini",                                   &mc_config_str, MC_CONFIG_FILE},
     { "filehighlight.ini",                     &mc_config_str, MC_FHL_INI_FILE},
-    { "hotlist",                               &mc_config_str, MC_HOTLIST_FILE},
     { "mc.keymap",                             &mc_config_str, GLOBAL_KEYMAP_FILE},
     { "menu",                                  &mc_config_str, MC_USERMENU_FILE},
     { "cedit" PATH_SEP_STR "Syntax",           &mc_config_str, EDIT_SYNTAX_FILE},
@@ -86,6 +85,7 @@ static const struct
     { "extfs.d",                               &mc_data_str, MC_EXTFS_DIR},
     { "history",                               &mc_data_str, MC_HISTORY_FILE},
     { "filepos",                               &mc_data_str, MC_FILEPOS_FILE},
+    { "hotlist",                               &mc_data_str, MC_HOTLIST_FILE},
     { "cedit" PATH_SEP_STR "cooledit.clip",    &mc_data_str, EDIT_CLIP_FILE},
     { "",                                      &mc_data_str, MC_MACRO_FILE},
 
@@ -109,6 +109,8 @@ static const struct
 } mc_config_migrate_rules_fix[] =
 {
     /* *INDENT-OFF* */
+    { &mc_config_str, MC_HOTLIST_FILE,                      &mc_data_str},
+
     { &mc_data_str, MC_USERMENU_FILE,                       &mc_config_str},
     { &mc_data_str, EDIT_SYNTAX_FILE,                       &mc_config_str},
     { &mc_data_str, EDIT_HOME_MENU,                         &mc_config_str},
