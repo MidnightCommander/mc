@@ -1,17 +1,37 @@
 # YAML syntax highlighting
-#
-# Author: Roman Belda <romanbelda.cz@gmail.com>
-# http://romanbelda.cz
 
-caseinsensitive
+# Reference:
+#   https://en.wikipedia.org/wiki/YAML
+#   http://yaml.org/refcard.html
 
-context default brown
-    keyword #*\n green
+context default
+    spellcheck
+    keyword #*\n brown
     keyword {{*}} brightred
-    keyword *: yellow
+    keyword linestart --- brightcyan
+    keyword linestart \[\s\]-\s brightcyan
+    # "YAML requires that colons and commas used as list separators be followed by a space [...]"
+    keyword ,\{\s\n\} brightcyan
+    keyword , red
+    # Below, we can get by with just "*:\{\s\n\}", but we prefer to restrict the
+    # key names in order not to grab too much (e.g., "{one: 1, two: 2}", "one: 1  # possibilities: 1 or 2").
+    keyword \{0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[\s-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]:\{\s\n\} yellow
+    keyword [ brightcyan
+    keyword ] brightcyan
+    keyword { brightcyan
+    keyword } brightcyan
+    keyword whole true brightmagenta
+    keyword whole false brightmagenta
+    keyword whole null brightmagenta
 
-context " "\n brightgreen
+context " " green
+    spellcheck
     keyword {{*}} brightred
+    keyword \\" brightgreen
+    keyword \\\\ brightgreen
+    keyword \\\{xuU\}\[0123456789\] brightgreen
+    keyword \\\{0abfnrtve_NLP\} brightgreen
 
-context ' '\n brightgreen
+context ' ' green
+    spellcheck
     keyword {{*}} brightred
