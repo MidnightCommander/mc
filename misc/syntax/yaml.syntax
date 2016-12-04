@@ -1,0 +1,17 @@
+# YAML syntax highlighting
+#
+# Author: Roman Belda <romanbelda.cz@gmail.com>
+# http://romanbelda.cz
+
+caseinsensitive
+
+context default brown
+    keyword #*\n green
+    keyword {{*}} brightred
+    keyword *: yellow
+
+context " "\n brightgreen
+    keyword {{*}} brightred
+
+context ' '\n brightgreen
+    keyword {{*}} brightred

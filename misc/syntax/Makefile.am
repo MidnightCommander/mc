@@ -82,6 +82,7 @@ SYNTAXFILES =			\
 	vhdl.syntax		\
 	xml.syntax		\
 	yum-repo.syntax		\
+	yaml.syntax		\
 	yxx.syntax
 
 if USE_INTERNAL_EDIT

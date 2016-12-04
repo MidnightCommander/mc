@@ -271,5 +271,8 @@ include cuda.syntax
 file .\*\\.(cl)$ OpenCL\sProgram
 include opencl.syntax
 
+file ..\*\\.(yml|YML)$ YAML\sFile
+include yaml.syntax
+
 file .\* unknown
 include unknown.syntax
