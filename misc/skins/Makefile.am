@@ -20,6 +20,10 @@ skin_DATA = \
 	modarin256root.ini \
 	nicedark.ini \
 	sand256.ini \
+	seasons-autumn16M.ini \
+	seasons-spring16M.ini \
+	seasons-summer16M.ini \
+	seasons-winter16M.ini \
 	xoria256.ini
 
 
