@@ -868,8 +868,9 @@ editcmd_find (edit_search_status_msg_t * esm, gsize * len)
             if (ok && edit->search->normal_offset == search_start)
                 return TRUE;
 
-            /* Abort search. */
-            if (!ok && edit->search->error == MC_SEARCH_E_ABORT)
+            /* We abort the search in case of a pattern error, or if the user aborts
+               the search. In other words: in all cases except "string not found". */
+            if (!ok && edit->search->error != MC_SEARCH_E_NOTFOUND)
                 return FALSE;
 
             if ((edit->search_line_type & AT_START_LINE) != 0)
