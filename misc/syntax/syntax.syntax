@@ -52,3 +52,9 @@ context default
     keyword whole white white
 
 context linestart # \n brown
+    spellcheck
+
+# Ideally we would have defined comments with "context linestart \[\s\]# ...",
+# but contexts can't start with a character class. So we define comments twice.
+context linestart \s\[\s\]# \n brown
+    spellcheck
