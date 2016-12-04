@@ -4341,10 +4341,10 @@ Local user\-defined menu. If this file is present, it is used instead of
 the home or system\-wide applications menu.
 .PP
 To change default root directory of MC, you can use
-.BR MC_HOME
-environment variable. The value of MC_HOME must be an absolute path. If MC_HOME
-is unset or empty, HOME variable is used. If HOME is unset or empty, MC
-directories are get from GLib library.
+.BR MC_PROFILE_ROOT
+environment variable. The value of MC_PROFILE_ROOT must be an absolute path.
+If MC_PROFILE_ROOT is unset or empty, HOME variable is used. If HOME is unset
+or empty, MC directories are get from GLib library.
 .\"SKIP_SECTION"
 .SH "LICENSE"
 This program is distributed under the terms of the GNU General Public

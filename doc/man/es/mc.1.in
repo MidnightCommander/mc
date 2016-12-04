@@ -4258,10 +4258,10 @@ personal o de sistema.
 .PP
 Para cambiar el directorio de incio de MC se puede utilizar la variable de
 entorno
-.BR MC_HOME .
-El valor de MC_HOME tiene que ser una ruta absoluta. Si MC_HOME no existe o
-está vacía se usa la variable HOME. Si HOME no existe o está vacía se recurre
-a la biblioteca GLib para obtener los directorios de MC.
+.BR MC_PROFILE_ROOT .
+El valor de MC_PROFILE_ROOT tiene que ser una ruta absoluta. Si MC_PROFILE_ROOT
+no existe o está vacía se usa la variable HOME. Si HOME no existe o está vacía
+se recurre a la biblioteca GLib para obtener los directorios de MC.
 .\"SKIP_SECTION"
 .SH "LICENCIA"
 Este programa se distribuye en los términos que recoge la Licencia Pública

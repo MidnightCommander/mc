@@ -51,9 +51,6 @@ static char *mc_config_str = NULL;
 static char *mc_cache_str = NULL;
 static char *mc_data_str = NULL;
 
-/* value of $MC_HOME */
-static const char *mc_home = NULL;
-
 static gboolean config_dir_present = FALSE;
 
 static const struct
@@ -285,6 +282,7 @@ mc_config_deprecated_dir_present (void)
 void
 mc_config_init_config_paths (GError ** mcerror)
 {
+    const char *profile_root;
     char *dir;
 #if MC_HOMEDIR_XDG == 0
     char *defined_userconf_dir;
@@ -295,21 +293,27 @@ mc_config_init_config_paths (GError ** mcerror)
     if (xdg_vars_initialized)
         return;
 
-    /* init mc_home if not yet */
-    (void) mc_config_get_home_dir ();
+    profile_root = mc_get_profile_root ();
 
 #if MC_HOMEDIR_XDG
-    if (mc_home != NULL)
+    if (strcmp (profile_root, mc_config_get_home_dir ()) != 0)
     {
-        dir = g_build_filename (mc_home, ".config", (char *) NULL);
+        /*
+         * The user overrode the default profile root.
+         *
+         * In this case we can't use GLib's g_get_user_{config,cache,data}_dir()
+         * as these functions use the user's home dir as the root.
+         */
+
+        dir = g_build_filename (profile_root, ".config", (char *) NULL);
         mc_config_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, mcerror);
         g_free (dir);
 
-        dir = g_build_filename (mc_home, ".cache", (char *) NULL);
+        dir = g_build_filename (profile_root, ".cache", (char *) NULL);
         mc_cache_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, mcerror);
         g_free (dir);
 
-        dir = g_build_filename (mc_home, ".local", "share", (char *) NULL);
+        dir = g_build_filename (profile_root, ".local", "share", (char *) NULL);
         mc_data_str = mc_config_init_one_config_path (dir, MC_USERCONF_DIR, mcerror);
         g_free (dir);
     }
@@ -331,7 +335,7 @@ mc_config_init_config_paths (GError ** mcerror)
     else
     {
         g_free (defined_userconf_dir);
-        dir = g_build_filename (mc_config_get_home_dir (), MC_USERCONF_DIR, (char *) NULL);
+        dir = g_build_filename (profile_root, MC_USERCONF_DIR, (char *) NULL);
     }
 
     mc_data_str = mc_cache_str = mc_config_str = mc_config_init_one_config_path (dir, "", mcerror);
@@ -393,15 +397,11 @@ mc_config_get_home_dir (void)
 
     if (homedir == NULL)
     {
-        homedir = g_getenv ("MC_HOME");
         /* Prior to GLib 2.36, g_get_home_dir() ignores $HOME, which is why
          * we read it ourselves. As that function's documentation explains,
          * using $HOME is good for compatibility with other programs and
          * for running from test frameworks. */
-        if (homedir == NULL || *homedir == '\0')
-            homedir = g_getenv ("HOME");
-        else
-            mc_home = homedir;
+        homedir = g_getenv ("HOME");
         if (homedir == NULL || *homedir == '\0')
             homedir = g_get_home_dir ();
     }

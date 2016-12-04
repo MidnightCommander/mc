@@ -33,6 +33,7 @@
 #include "lib/global.h"
 #include "lib/fileloc.h"
 #include "lib/mcconfig.h"
+#include "lib/util.h"           /* mc_get_profile_root() */
 
 #include "src/textconf.h"
 
@@ -180,7 +181,8 @@ show_version (void)
 void
 show_datadirs_extended (void)
 {
-    (void) printf ("%s %s\n", _("Root directory:"), mc_config_get_home_dir ());
+    (void) printf ("%s %s\n", _("Home directory:"), mc_config_get_home_dir ());
+    (void) printf ("%s %s\n", _("Profile root directory:"), mc_get_profile_root ());
     (void) puts ("");
 
     PRINTF_GROUP (_("System data"));
