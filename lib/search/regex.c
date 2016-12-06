@@ -277,16 +277,14 @@ mc_search__g_regex_match_full_safe (const GRegex * regex,
     char *string_safe, *p, *end;
     gboolean ret;
 
+    if (string_len < 0)
+        string_len = strlen (string);
+
     if ((g_regex_get_compile_flags (regex) & G_REGEX_RAW)
         || g_utf8_validate (string, string_len, NULL))
     {
         return g_regex_match_full (regex, string, string_len, start_position, match_options,
                                    match_info, error);
-    }
-
-    if (string_len < 0)
-    {
-        string_len = strlen (string);
     }
 
     /* Correctly handle embedded NULs while copying */
