@@ -78,7 +78,7 @@ mcview_dialog_search (WView * view)
 {
     char *exp = NULL;
     int qd_result;
-    size_t num_of_types;
+    size_t num_of_types = 0;
     gchar **list_of_types;
 
     list_of_types = mc_search_get_types_strings_array (&num_of_types);

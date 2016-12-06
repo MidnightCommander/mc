@@ -622,7 +622,7 @@ execute_external_editor_or_viewer (const char *command, const vfs_path_t * filen
     vfs_path_t *localcopy_vpath = NULL;
     const vfs_path_t *do_execute_vpath;
     char *extern_cmd_options;
-    time_t mtime;
+    time_t mtime = 0;
 
     if (!execute_prepare_with_vfs_arg (filename_vpath, &localcopy_vpath, &mtime))
         return;

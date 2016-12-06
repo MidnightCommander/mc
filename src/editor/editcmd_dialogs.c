@@ -92,7 +92,7 @@ gboolean
 editcmd_dialog_search_show (WEdit * edit)
 {
     char *search_text;
-    size_t num_of_types;
+    size_t num_of_types = 0;
     gchar **list_of_types;
     int dialog_result;
 
@@ -188,7 +188,7 @@ void
 editcmd_dialog_replace_show (WEdit * edit, const char *search_default, const char *replace_default,
                              /*@out@ */ char **search_text, /*@out@ */ char **replace_text)
 {
-    size_t num_of_types;
+    size_t num_of_types = 0;
     gchar **list_of_types;
 
     if ((search_default == NULL) || (*search_default == '\0'))

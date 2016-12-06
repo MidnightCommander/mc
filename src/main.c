@@ -219,7 +219,7 @@ main (int argc, char *argv[])
 {
     GError *mcerror = NULL;
     gboolean config_migrated = FALSE;
-    char *config_migrate_msg;
+    char *config_migrate_msg = NULL;
     int exit_code = EXIT_FAILURE;
 
     mc_global.timer = mc_timer_new ();

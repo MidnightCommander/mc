@@ -156,7 +156,7 @@ sftpfs_open_file (vfs_file_handler_t * file_handler, int flags, mode_t mode, GEr
 
     if (do_append)
     {
-        struct stat file_info;
+        struct stat file_info = { 0 };
 
         if (sftpfs_fstat (file_handler, &file_info, mcerror) == 0)
             libssh2_sftp_seek64 (file_handler_data->handle, file_info.st_size);
