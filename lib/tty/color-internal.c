@@ -183,7 +183,7 @@ tty_color_get_name_by_index (int idx)
         if (idx < 256)
             sprintf (name, "color%d", idx);
         else
-            sprintf (name, "#%06X", idx & 0xFFFFFF);
+            sprintf (name, "#%06X", (unsigned int) idx & 0xFFFFFF);
         return g_intern_string (name);
     }
     return "default";
