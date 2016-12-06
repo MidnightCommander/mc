@@ -2554,8 +2554,10 @@ edit_replace_cmd (WEdit * edit, gboolean again)
         g_free (tmp_inp1);
         g_free (tmp_inp2);
 
-        g_free (saved1), saved1 = g_strdup (input1);
-        g_free (saved2), saved2 = g_strdup (input2);
+        g_free (saved1);
+        saved1 = g_strdup (input1);
+        g_free (saved2);
+        saved2 = g_strdup (input2);
 
         mc_search_free (edit->search);
         edit->search = NULL;

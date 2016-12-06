@@ -473,7 +473,8 @@ ilog10 (dev_t n)
 
     do
     {
-        digits++, n /= 10;
+        digits++;
+        n /= 10;
     }
     while (n != 0);
 
