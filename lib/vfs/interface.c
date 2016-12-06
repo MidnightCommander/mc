@@ -832,7 +832,7 @@ mc_mkstemps (vfs_path_t ** pname_vpath, const char *prefix, const char *suffix)
 const char *
 mc_tmpdir (void)
 {
-    static char buffer[64];
+    static char buffer[PATH_MAX];
     static const char *tmpdir = NULL;
     const char *sys_tmp;
     struct passwd *pwd;
