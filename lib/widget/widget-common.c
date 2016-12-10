@@ -315,7 +315,7 @@ widget_set_state (Widget * w, widget_state_t state, gboolean enable)
             {
                 send_message (w, NULL, MSG_DRAW, 0, NULL);
                 /* Notify owner that focus was moved from one widget to another */
-                send_message (w->owner, w, MSG_NOTIFY, (int) msg, NULL);
+                send_message (w->owner, w, MSG_CHANGED_FOCUS, 0, NULL);
             }
         }
         break;

@@ -423,6 +423,14 @@ find_check_regexp (const char *r)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
+find_toggle_enable_ignore_dirs (void)
+{
+    widget_disable (WIDGET (in_ignore), !(ignore_dirs_cbox->state & C_BOOL));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
 find_toggle_enable_params (void)
 {
     gboolean disable = in_name->buffer[0] == '\0';
@@ -480,12 +488,9 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         return MSG_HANDLED;
 
     case MSG_NOTIFY:
-        if (sender == WIDGET (ignore_dirs_cbox) && parm == (int) MSG_FOCUS)
+        if (sender == WIDGET (ignore_dirs_cbox))
         {
-            gboolean disable = !(ignore_dirs_cbox->state & C_BOOL);
-
-            widget_disable (WIDGET (in_ignore), disable);
-
+            find_toggle_enable_ignore_dirs ();
             return MSG_HANDLED;
         }
 
@@ -529,6 +534,7 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
     case MSG_DRAW:
         if (first_draw)
         {
+            find_toggle_enable_ignore_dirs ();
             find_toggle_enable_params ();
             find_toggle_enable_content ();
         }

@@ -150,8 +150,8 @@ edit_save_mode_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
 {
     switch (msg)
     {
-    case MSG_NOTIFY:
-        if (sender != NULL && sender->id == edit_save_mode_radio_id && parm == (int) MSG_FOCUS)
+    case MSG_CHANGED_FOCUS:
+        if (sender != NULL && sender->id == edit_save_mode_radio_id)
         {
             Widget *ww;
 

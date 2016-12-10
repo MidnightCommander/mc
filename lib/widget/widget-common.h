@@ -30,6 +30,7 @@ typedef enum
     MSG_INIT = 0,               /* Initialize widget */
     MSG_FOCUS,                  /* Draw widget in focused state or widget has got focus */
     MSG_UNFOCUS,                /* Draw widget in unfocused state or widget has been unfocused */
+    MSG_CHANGED_FOCUS,          /* Notification to owner about focus state change */
     MSG_ENABLE,                 /* Change state to enabled */
     MSG_DISABLE,                /* Change state to disabled */
     MSG_DRAW,                   /* Draw widget on screen */
