@@ -137,6 +137,42 @@ mc_search__cond_struct_new_init_hex (const char *charset, mc_search_t * lc_mc_se
     mc_search_hex_parse_error_t error = MC_SEARCH_HEX_E_OK;
     int error_pos = 0;
 
+    /*
+     * We may be searching in binary data, which is often invalid UTF-8.
+     *
+     * We have to create a non UTF-8 regex (that is, G_REGEX_RAW) or else, as
+     * the data is invalid UTF-8, both GLib's PCRE and our
+     * mc_search__g_regex_match_full_safe() are going to fail us. The former by
+     * not finding all bytes, the latter by overwriting the supposedly invalid
+     * UTF-8 with NULs.
+     *
+     * To do this, we specify "ASCII" as the charset.
+     *
+     * In fact, we can specify any charset other than "UTF-8": any such charset
+     * will trigger G_REGEX_RAW (see [1]). The output of [2] will be the same
+     * for all charsets because it skips the \xXX symbols
+     * mc_search__hex_translate_to_regex() outputs.
+     *
+     * But "ASCII" is the best choice because a hex pattern may contain a
+     * quoted string: this way we know [2] will ignore any characters outside
+     * ASCII letters range (these ignored chars will be copied verbatim to the
+     * output and will match as-is; in other words, in a case-sensitive manner;
+     * If the user is interested in case-insensitive searches of international
+     * text, he shouldn't be using hex search in the first place.)
+     *
+     * Switching out of UTF-8 has another advantage:
+     *
+     * When doing case-insensitive searches, GLib treats \xXX symbols as normal
+     * letters and therefore matches both "a" and "A" for the hex pattern
+     * "0x61". When we switch out of UTF-8, we're switching to using [2], which
+     * doesn't have this issue.
+     *
+     * [1] mc_search__cond_struct_new_init_regex
+     * [2] mc_search__cond_struct_new_regex_ci_str
+     */
+    if (str_isutf8 (charset))
+        charset = "ASCII";
+
     tmp = mc_search__hex_translate_to_regex (mc_search_cond->str, &error, &error_pos);
     if (tmp != NULL)
     {
