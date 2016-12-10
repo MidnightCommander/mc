@@ -230,7 +230,7 @@ chmod_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                 if (sender == WIDGET (check_perm[i].check))
                     break;
 
-            if (i < check_perm_num && parm == (int) MSG_KEY)
+            if (i < check_perm_num)
             {
                 char buffer[BUF_TINY];
 

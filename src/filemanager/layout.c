@@ -370,7 +370,7 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
         return MSG_HANDLED;
 
     case MSG_NOTIFY:
-        if (sender == WIDGET (radio_widget) && parm == (int) MSG_KEY)
+        if (sender == WIDGET (radio_widget))
         {
             if (panels_layout.horizontal_split != radio_widget->sel)
             {
@@ -404,7 +404,7 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
             return MSG_HANDLED;
         }
 
-        if (sender == WIDGET (check_options[0].widget) && parm == (int) MSG_KEY)
+        if (sender == WIDGET (check_options[0].widget))
         {
             int eq;
 

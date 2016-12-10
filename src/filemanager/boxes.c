@@ -130,7 +130,7 @@ configure_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
     {
     case MSG_NOTIFY:
         /* message from "Single press" checkbutton */
-        if (sender != NULL && sender->id == configure_old_esc_mode_id && parm == (int) MSG_KEY)
+        if (sender != NULL && sender->id == configure_old_esc_mode_id)
         {
             const gboolean not_single = !CHECK (sender)->state;
             Widget *ww;
@@ -279,7 +279,7 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
     switch (msg)
     {
     case MSG_NOTIFY:
-        if (sender != NULL && sender->id == panel_listing_types_id && parm == (int) MSG_KEY)
+        if (sender != NULL && sender->id == panel_listing_types_id)
         {
             WCheck *ch;
             WInput *in1, *in2, *in3;
@@ -299,7 +299,7 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
             return MSG_HANDLED;
         }
 
-        if (sender != NULL && sender->id == mini_user_status_id && parm == (int) MSG_KEY)
+        if (sender != NULL && sender->id == mini_user_status_id)
         {
             WInput *in;
 
@@ -401,7 +401,7 @@ confvfs_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
     {
     case MSG_NOTIFY:
         /* message from "Always use ftp proxy" checkbutton */
-        if (sender != NULL && sender->id == ftpfs_always_use_proxy_id && parm == (int) MSG_KEY)
+        if (sender != NULL && sender->id == ftpfs_always_use_proxy_id)
         {
             const gboolean not_use = !CHECK (sender)->state;
             Widget *wi;

@@ -84,7 +84,7 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         case ' ':
             r->sel = r->pos;
             widget_set_state (w, WST_FOCUSED, TRUE);    /* Also draws the widget. */
-            send_message (w->owner, w, MSG_NOTIFY, (int) MSG_KEY, NULL);
+            send_message (w->owner, w, MSG_NOTIFY, 0, NULL);
             return MSG_HANDLED;
 
         case KEY_UP:
