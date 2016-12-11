@@ -123,7 +123,7 @@ check_patterns (char *p)
 
     /* Skip spaces */
     p++;
-    while (*p == '\n' || *p == '\t' || *p == ' ')
+    while (whiteness (*p))
         p++;
     return p;
 }
@@ -135,7 +135,7 @@ check_patterns (char *p)
 static char *
 extract_arg (char *p, char *arg, int size)
 {
-    while (*p != '\0' && (*p == ' ' || *p == '\t' || *p == '\n'))
+    while (*p != '\0' && whiteness (*p))
         p++;
 
     /* support quote space .mnu */
@@ -456,9 +456,9 @@ execute_menu_command (const WEdit * edit_widget, const char *commands, gboolean 
     {
         if (col == 0)
         {
-            if (*commands != ' ' && *commands != '\t')
+            if (!whitespace (*commands))
                 break;
-            while (*commands == ' ' || *commands == '\t')
+            while (whitespace (*commands))
                 commands++;
             if (*commands == '\0')
                 break;
@@ -1054,7 +1054,7 @@ user_menu_cmd (const WEdit * edit_widget, const char *menu_file, int selected_en
                         selected = menu_lines;
                 }
             }
-            else if (*p != ' ' && *p != '\t' && str_isprint (p))
+            else if (!whitespace (*p) && str_isprint (p))
             {
                 /* A menu entry title line */
                 if (accept_entry)

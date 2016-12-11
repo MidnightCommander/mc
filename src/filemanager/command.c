@@ -254,10 +254,10 @@ enter (WInput * lc_cmdline)
         return MSG_HANDLED;
 
     /* Any initial whitespace should be removed at this point */
-    while (*cmd == ' ' || *cmd == '\t' || *cmd == '\n')
+    while (whiteness (*cmd))
         cmd++;
 
-    if (!*cmd)
+    if (*cmd == '\0')
         return MSG_HANDLED;
 
     if (strncmp (cmd, "cd ", 3) == 0 || strcmp (cmd, "cd") == 0)
@@ -381,18 +381,18 @@ do_cd_command (char *orig_cmd)
     /* FIXME: what about interpreting quoted strings like the shell.
        so one could type "cd <tab> M-a <enter>" and it would work. */
     len = strlen (orig_cmd) - 1;
-    while (len >= 0 && (orig_cmd[len] == ' ' || orig_cmd[len] == '\t' || orig_cmd[len] == '\n'))
+    while (len >= 0 && whiteness (orig_cmd[len]))
     {
-        orig_cmd[len] = 0;
+        orig_cmd[len] = '\0';
         len--;
     }
 
     cmd = orig_cmd;
-    if (cmd[CD_OPERAND_OFFSET - 1] == 0)
+    if (cmd[CD_OPERAND_OFFSET - 1] == '\0')
         cmd = "cd ";            /* 0..2 => given text, 3 => \0 */
 
     /* allow any amount of white space in front of the path operand */
-    while (cmd[operand_pos] == ' ' || cmd[operand_pos] == '\t')
+    while (whitespace (cmd[operand_pos]))
         operand_pos++;
 
     if (get_current_type () == view_tree)

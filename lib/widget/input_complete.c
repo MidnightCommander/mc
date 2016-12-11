@@ -70,8 +70,6 @@ extern char **environ;
 #define SHOW_C_CTX(func)
 #endif /* DO_CMPLETION_DEBUG */
 
-#define whitespace(c) ((c) == ' ' || (c) == '\t')
-
 #define DO_INSERTION 1
 #define DO_QUERY     2
 
@@ -847,7 +845,7 @@ try_complete_commands_prepare (try_complete_automation_state_t * state, char *te
     else
     {
         ti = str_get_prev_char (&text[*lc_start]);
-        while (ti > text && (ti[0] == ' ' || ti[0] == '\t'))
+        while (ti > text && whitespace (ti[0]))
             str_prev_char (&ti);
     }
 
@@ -933,14 +931,12 @@ try_complete_all_possible (try_complete_automation_state_t * state, char *text, 
         {
             state->q = text + *lc_start;
             for (state->p = text;
-                 *state->p != '\0' && state->p < state->q && (*state->p == ' '
-                                                              || *state->p == '\t');
+                 *state->p != '\0' && state->p < state->q && whitespace (*state->p);
                  str_next_char (&state->p))
                 ;
             if (strncmp (state->p, "cd", 2) == 0)
                 for (state->p += 2;
-                     *state->p != '\0' && state->p < state->q && (*state->p == ' '
-                                                                  || *state->p == '\t');
+                     *state->p != '\0' && state->p < state->q && whitespace (*state->p);
                      str_next_char (&state->p))
                     ;
             if (state->p == state->q)

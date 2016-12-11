@@ -575,14 +575,19 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
         if (row <= edit->buffer.lines - edit->start_line)
         {
             off_t tws = 0;
+
             if (tty_use_colors () && visible_tws)
             {
-                unsigned int c;
-
                 tws = edit_buffer_get_eol (&edit->buffer, b);
-                while (tws > b
-                       && ((c = edit_buffer_get_byte (&edit->buffer, tws - 1)) == ' ' || c == '\t'))
+                while (tws > b)
+                {
+                    unsigned int c;
+
+                    c = edit_buffer_get_byte (&edit->buffer, tws - 1);
+                    if (!whitespace (c))
+                        break;
                     tws--;
+                }
             }
 
             while (col <= end_col - edit->start_col)

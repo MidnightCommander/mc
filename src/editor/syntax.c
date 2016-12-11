@@ -82,8 +82,6 @@ gboolean option_auto_syntax = TRUE;
 #define SYNTAX_TOKEN_BRACKET    '\003'
 #define SYNTAX_TOKEN_BRACE      '\004'
 
-#define whiteness(x) ((x) == '\t' || (x) == '\n' || (x) == ' ')
-
 #define free_args(x)
 #define break_a {result=line;break;}
 #define check_a {if(!*a){result=line;break;}}
@@ -291,8 +289,7 @@ compare_word_to_right (const WEdit * edit, off_t i, const char *text,
                 }
                 if (j != 0 && strchr ((const char *) p + 1, c) != NULL) /* c exists further down, so it will get matched later */
                     break;
-                if (c == '\n' || c == '\t' || c == ' ' ||
-                    (whole_right != NULL && strchr (whole_right, c) == NULL))
+                if (whiteness (c) || (whole_right != NULL && strchr (whole_right, c) == NULL))
                 {
                     if (*p == '\0')
                     {

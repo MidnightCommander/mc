@@ -36,6 +36,7 @@
 #include <sys/types.h>          /* size_t */
 
 #include "lib/global.h"
+#include "lib/util.h"           /* whitespace() */
 
 #include "tty-slang.h"
 #include "color.h"              /* variables */
@@ -72,7 +73,7 @@ has_colors (gboolean disable, gboolean force)
             char *s;
             size_t i = 0;
 
-            while (*cts == ' ' || *cts == '\t')
+            while (whitespace (*cts))
                 cts++;
             s = cts;
 

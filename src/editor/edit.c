@@ -1399,7 +1399,7 @@ edit_auto_indent (WEdit * edit)
         char c;
 
         c = edit_buffer_get_byte (&edit->buffer, p++);
-        if (c != ' ' && c != '\t')
+        if (!whitespace (c))
             break;
         edit_insert (edit, c);
     }
@@ -1491,7 +1491,7 @@ check_and_wrap_line (WEdit * edit)
             edit_insert (edit, '\n');
             return;
         }
-        if (c == ' ' || c == '\t')
+        if (whitespace (c))
         {
             off_t current = edit->buffer.curs1;
             edit_cursor_move (edit, curs - edit->buffer.curs1 + 1);

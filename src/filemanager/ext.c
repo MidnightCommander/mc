@@ -337,7 +337,7 @@ exec_make_shell_string (const char *lc_data, const vfs_path_t * filename_vpath)
             expand_prefix_found = TRUE;
         else
         {
-            if (*lc_data != ' ' && *lc_data != '\t')
+            if (!whitespace (*lc_data))
                 written_nonspace = TRUE;
             if (is_cd)
                 *(pbuffer++) = *lc_data;
@@ -386,13 +386,10 @@ exec_extension_cd (void)
 
     *pbuffer = '\0';
     pbuffer = buffer;
-    /*      while (*p == ' ' && *p == '\t')
-     *          p++;
-     */
     /* Search last non-space character. Start search at the end in order
        not to short filenames containing spaces. */
     q = pbuffer + strlen (pbuffer) - 1;
-    while (q >= pbuffer && (*q == ' ' || *q == '\t'))
+    while (q >= pbuffer && whitespace (*q))
         q--;
     q[1] = 0;
 
@@ -698,9 +695,8 @@ regex_check_type (const vfs_path_t * filename_vpath, const char *ptr, gboolean c
                 if (content_string[content_shift] == ':')
                 {
                     /* Solaris' file prints tab(s) after ':' */
-                    for (content_shift++;
-                         content_string[content_shift] == ' '
-                         || content_string[content_shift] == '\t'; content_shift++)
+                    for (content_shift++; whitespace (content_string[content_shift]);
+                         content_shift++)
                         ;
                 }
             }
@@ -872,7 +868,7 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
 
     for (p = data; *p != '\0'; p++)
     {
-        for (q = p; *q == ' ' || *q == '\t'; q++)
+        for (q = p; whitespace (*q); q++)
             ;
         if (*q == '\n' || *q == '\0')
             p = q;              /* empty line */
@@ -1007,7 +1003,7 @@ regex_command_for (void *target, const vfs_path_t * filename_vpath, const char *
                     {
                         *r = c;
 
-                        for (p = r + 1; *p == ' ' || *p == '\t'; p++)
+                        for (p = r + 1; whitespace (*p); p++)
                             ;
 
                         /* Empty commands just stop searching

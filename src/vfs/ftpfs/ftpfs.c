@@ -2367,8 +2367,7 @@ ftpfs_netrc_next (void)
     }
     else
     {
-        for (; *netrcp != '\n' && *netrcp != '\t' && *netrcp != ' ' &&
-             *netrcp != ',' && *netrcp; netrcp++)
+        for (; *netrcp != '\0' && !whiteness (*netrcp) && *netrcp != ','; netrcp++)
         {
             if (*netrcp == '\\')
                 netrcp++;

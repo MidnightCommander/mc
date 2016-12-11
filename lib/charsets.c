@@ -36,6 +36,8 @@
 #include "lib/global.h"
 #include "lib/strutil.h"        /* utf-8 functions */
 #include "lib/fileloc.h"
+#include "lib/util.h"           /* whitespace() */
+
 #include "lib/charsets.h"
 
 /*** global variables ****************************************************************************/
@@ -111,7 +113,7 @@ load_codepages_list_from_file (GPtrArray ** list, const char *fname)
 
         if (buflen > 0 && buf[buflen - 1] == '\n')
             buf[buflen - 1] = '\0';
-        while (*p != '\t' && *p != ' ' && *p != '\0')
+        while (*p != '\0' && !whitespace (*p))
             ++p;
         if (*p == '\0')
             goto fail;

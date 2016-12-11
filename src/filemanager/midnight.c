@@ -1471,8 +1471,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
             if (current_panel->active == 0 && get_other_type () == view_quick)
                 return MSG_NOT_HANDLED;
 
-            for (i = 0; cmdline->buffer[i] != '\0' &&
-                 (cmdline->buffer[i] == ' ' || cmdline->buffer[i] == '\t'); i++)
+            for (i = 0; cmdline->buffer[i] != '\0' && whitespace (cmdline->buffer[i]); i++)
                 ;
 
             if (cmdline->buffer[i] != '\0')

@@ -695,8 +695,8 @@ skip_separators (const char *s)
 {
     const char *su = s;
 
-    for (; *su; str_cnext_char (&su))
-        if (*su != ' ' && *su != '\t' && *su != ',')
+    for (; *su != '\0'; str_cnext_char (&su))
+        if (!whitespace (*su) && *su != ',')
             break;
 
     return su;
@@ -709,7 +709,7 @@ skip_numbers (const char *s)
 {
     const char *su = s;
 
-    for (; *su; str_cnext_char (&su))
+    for (; *su != '\0'; str_cnext_char (&su))
         if (!str_isdigit (su))
             break;
 
