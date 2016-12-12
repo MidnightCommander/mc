@@ -1,0 +1,15 @@
+
+The input file was created by doing "unace l test.ace" on an archive
+created with WinAce (run under Wine; there's no native Linux ACE packer).
+One date was then changed by hand to "17.04.94" to test the 1900/2000
+boundary.
+
+Known issues with our uace:
+
+- It doesn't support filenames with spaces. (For the benefit of those
+  wishing to fix this, the input file intentionally contains such files.)
+
+- It reports '0' gid.
+
+- See note in the source about using Debian's 'unace-nonfree' package,
+  not 'unace'.

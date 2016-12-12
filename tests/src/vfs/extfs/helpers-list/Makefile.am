@@ -44,6 +44,9 @@ data_files_to_distribute = \
 	data/u7z.missing-size-and-date.output \
 	data/u7z.simple.input \
 	data/u7z.simple.output \
+	data/uace.README \
+	data/uace.input \
+	data/uace.output \
 	data/urar.README \
 	data/urar.v4,v3.env_vars \
 	data/urar.v4,v3.input \
