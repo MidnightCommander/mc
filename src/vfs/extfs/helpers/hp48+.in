@@ -22,7 +22,7 @@
 # Make sure you have kermit installed and that it's using the right serial
 # device by changing /dev/ttyXX on the next line
 AWK=@AWK@
-KERMIT="kermit -l /dev/ttyS1 -b 9600"
+KERMIT=${MC_TEST_EXTFS_LIST_CMD:-"kermit -l /dev/ttyS1 -b 9600"}
 
 NOW=`date +"%m-%d-%Y %H:%M"`
 
