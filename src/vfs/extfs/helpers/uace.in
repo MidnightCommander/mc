@@ -16,7 +16,7 @@
 #
 
 # Define which archiver you are using with appropriate options
-ACE_LIST="unace l"
+ACE_LIST=${MC_TEST_EXTFS_LIST_CMD:-"unace l"}
 ACE_GET="unace x"
 # ACE_PUT="unace ?"  not available
 
