@@ -77,9 +77,9 @@ read -r INPUT
 while [ "x$INPUT" != "xEOF" ]
 do
     case `echo "$INPUT" | $AWK '{if (int($2)) if ($3 == "Directory") print "dir";else print "file"}'` in
-    dir) HP48_DIRS="$HP48_DIRS `hp48_retdir \"$INPUT\"`"
-    printf "drwxr-xr-x   1 %-8d %-8d %8d %s %s\n" 0 0 `hp48_retsize "$INPUT"` "`date +\"%b %d %Y %k:%M\"`" "$HP48_CDIR/`hp48_retdir \"$INPUT\"`";;
-    file) printf "-rw-r--r--   1 %-8d %-8d %8d %s %s\n" 0 0 `hp48_retsize "$INPUT"` "`date +\"%b %d %Y %k:%M\"`" "$HP48_CDIR/`hp48_retdir \"$INPUT\"`";;
+    dir) HP48_DIRS="$HP48_DIRS `hp48_retdir $INPUT`"
+    printf "drwxr-xr-x   1 %-8d %-8d %8d %s %s\n" 0 0 `hp48_retsize $INPUT` "`date +\"%b %d %Y %k:%M\"`" "$HP48_CDIR/`hp48_retdir $INPUT`";;
+    file) printf "%crw-r--r--   1 %-8d %-8d %8d %s %s\n" '-' 0 0 `hp48_retsize $INPUT` "`date +\"%b %d %Y %k:%M\"`" "$HP48_CDIR/`hp48_retdir $INPUT`";;
     esac
     read -r INPUT
 done
