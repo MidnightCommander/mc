@@ -22,6 +22,10 @@ mc_parse_ls_l_SOURCES = \
 	mc_parse_ls_l.c
 
 data_files_to_distribute = \
+	data/hp48+.README \
+	data/hp48+.args \
+	data/hp48+.input \
+	data/hp48+.output \
 	data/lslR.1.spaces.args \
 	data/lslR.1.spaces.input \
 	data/lslR.1.spaces.output \

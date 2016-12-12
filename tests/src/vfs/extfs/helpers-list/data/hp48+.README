@@ -1,0 +1,8 @@
+
+The input file was taken from a comment in the helper (after removing
+the "Directory" line (which is tricky to test), and adding the
+not-really-necessary "EOF").
+
+The '--drop-mtime' argument is needed because the helper emits the
+current date, which is always changing, whereas our output files have to
+be constant.
