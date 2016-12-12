@@ -8,7 +8,7 @@
 #
 
 # Define which archiver you are using with appropriate options
-ARC_LIST="arc v"
+ARC_LIST=${MC_TEST_EXTFS_LIST_CMD:-"arc v"}
 ARC_GET="arc x"
 ARC_PUT="arc a"
 ARC_DEL="arc d"
