@@ -1,0 +1,7 @@
+Name          Length    Stowage    SF   Size now  Date       Time    CRC
+============  ========  ========  ====  ========  =========  ======  ====
+README.html       9799  Crunched   50%      4922  23 Nov 16  11:48a  40ba
+extfs.c          49679  Crunched   67%     16874  18 Apr 94   3:05p  38ff
+run.log           1051  Crunched   50%       536  23 Nov 16  10:36a  6184
+        ====  ========            ====  ========
+Total      3     60529             64%     22332

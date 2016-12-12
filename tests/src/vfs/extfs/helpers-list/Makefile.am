@@ -47,6 +47,9 @@ data_files_to_distribute = \
 	data/uace.README \
 	data/uace.input \
 	data/uace.output \
+	data/uarc.README \
+	data/uarc.input \
+	data/uarc.output \
 	data/urar.README \
 	data/urar.v4,v3.env_vars \
 	data/urar.v4,v3.input \
