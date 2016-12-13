@@ -4,6 +4,12 @@
 # ACE Virtual filesystem executive v0.1
 # Works with unace v2.5
 
+# Note: There are two packages for Debian: 'unace' (v1.2b) and
+# 'unace-nonfree' (v2.x). This script supports 'unace-nonfree' only.
+# 'unace', which supports only old versions of ACE archives (and is
+# therefore of little use), uses the pipe character to separate columns
+# in its listing format.
+
 # Copyright (C) 2008 Jacques Pelletier
 # May be distributed under the terms of the GNU Public License
 # <jpelletier@ieee.org>
