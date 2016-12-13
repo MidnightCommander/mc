@@ -16,7 +16,7 @@ ACE_GET="unace x"
 
 # The 'list' command executive
 
-# Unace:	DD.MM.YY HH.MM packed size ratio file 
+# Unace:	DD.MM.YY HH:MM packed size ratio file
 # ls:
 mc_ace_fs_list()
 {
@@ -27,7 +27,6 @@ mc_ace_fs_list()
         fi
     fi
     $ACE_LIST "$1" | @AWK@ -v uid=$UID '
-BEGIN { Month="JanFebMarAprMayJunJulAugSepOctNovDec" }
 /%/ { 
   split($1,date,".")
 
@@ -36,7 +35,7 @@ BEGIN { Month="JanFebMarAprMayJunJulAugSepOctNovDec" }
   else
     date[3]=date[3] + 2000
 
-  printf "-rw-r--r--   1 %-8d %-8d %8d %s %2d %4d %s %s\n", uid, 0, $3, substr(Month,3*(date[2]-1)+1,3),date[1],date[3], $2, $6
+  printf "-rw-r--r--   1 %-8d %-8d %8d %02d-%02d-%04d %s %s\n", uid, 0, $3, date[2], date[1], date[3], $2, $6
 }' 2>/dev/null
     exit 0
 }
