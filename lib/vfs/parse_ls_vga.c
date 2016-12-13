@@ -543,6 +543,32 @@ vfs_parse_filedate (int idx, time_t * t)
     if (is_week (p, &tim))
         p = columns[idx++];
 
+    /*
+       ALLOWED DATE FORMATS
+
+       We expect 3 fields max or we'll see oddities with certain file names.
+
+       Formats that contain either year or time (the default 'ls' formats):
+
+       * Mon DD hh:mm[:ss]
+       * Mon DD YYYY
+
+       Formats that contain both year and time, to make it easier to write
+       extfs scripts:
+
+       * MM-DD-YYYY hh:mm[:ss]
+       * MM-DD-YY hh:mm[:ss]
+
+       ('/' and '\' can be used instead of '-'.)
+
+       where Mon is Jan-Dec, DD, MM, YY two digit day, month, year,
+       YYYY four digit year, hh, mm, ss two digit hour, minute or second.
+
+       (As for the "3 fields max" restriction: this prevents, for example, a
+       file name "13:48" from being considered part of a "Sep 19 2016" date
+       string preceding it.)
+     */
+
     /* Month name */
     if (is_month (p, &tim))
     {
@@ -555,17 +581,7 @@ vfs_parse_filedate (int idx, time_t * t)
     }
     else
     {
-        /* We expect:
-           3 fields max or we'll see oddities with certain file names.
-           So both year and time is not allowed.
-           Mon DD hh:mm[:ss]
-           Mon DD YYYY
-           But in case of extfs we allow these date formats:
-           MM-DD-YY hh:mm[:ss]
-           where Mon is Jan-Dec, DD, MM, YY two digit day, month, year,
-           YYYY four digit year, hh, mm, ss two digit hour, minute or second. */
-
-        /* Special case with MM-DD-YY or MM-DD-YYYY */
+        /* Case with MM-DD-YY or MM-DD-YYYY */
         if (is_dos_date (p))
         {
             p[2] = p[5] = '-';
