@@ -1,6 +1,6 @@
 PACKAGE_STRING = "/src"
 
-SUBDIRS = . filemanager extfs-helpers-listcmd
+SUBDIRS = . filemanager vfs
 
 if USE_INTERNAL_EDIT
 SUBDIRS += editor

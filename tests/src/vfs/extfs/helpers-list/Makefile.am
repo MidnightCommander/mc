@@ -1,4 +1,4 @@
-PACKAGE_STRING = "/src/extfs-helpers-listcmd"
+PACKAGE_STRING = "/src/vfs/extfs/helpers-list"
 
 AM_CPPFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir)
 
