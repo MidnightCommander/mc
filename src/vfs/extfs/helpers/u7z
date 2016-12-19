@@ -28,6 +28,7 @@ mcu7zip_list ()
 
         date_re='^\(....\)-\(..\)-\(..\) \(..:..:..\)' # 19 chars.
         date_mc='\2-\3-\1 \4'
+        empty_date_re='^ \{19\}'
 
         size_re='............' # 12 chars.
         empty_size_re=' \{12\}'
@@ -52,11 +53,11 @@ mcu7zip_list ()
 
                   # Handle directories.
                   s/$date_re D.... $size_re $size_re\(.*\)/drwxr-xr-x 1 $ugid 0 $date_mc \5/p
-                       s/^\s*D.... $size_re $size_re\(.*\)/drwxr-xr-x 1 $ugid 0 $date_archive \1/p
+            s/$empty_date_re D.... $size_re $size_re\(.*\)/drwxr-xr-x 1 $ugid 0 $date_archive \1/p
 
                   # Handle normal files.
                   s/$date_re \..... \($size_re\) $size_re\(.*\)/-rw-r--r-- 1 $ugid \5 $date_mc \6/p
-                       s/^\s*\..... \($size_re\) $size_re\(.*\)/-rw-r--r-- 1 $ugid \1 $date_archive \2/p
+            s/$empty_date_re \..... \($size_re\) $size_re\(.*\)/-rw-r--r-- 1 $ugid \1 $date_archive \2/p
         "
 }
 
