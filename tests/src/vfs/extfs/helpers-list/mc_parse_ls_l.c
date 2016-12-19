@@ -190,7 +190,7 @@ chomp (char *s)
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
-string_date (time_t time)
+string_date (time_t t)
 {
     static char buf[BUF_SMALL];
 
@@ -200,7 +200,7 @@ string_date (time_t time)
      * YYYY-MM-DD because vfs_parse_ls_lga() doesn't currently recognize
      * the latter.
      */
-    FMT_LOCALTIME (buf, sizeof buf, "%Y-%m-%d %H:%M:%S", time);
+    FMT_LOCALTIME (buf, sizeof buf, "%Y-%m-%d %H:%M:%S", t);
     return buf;
 }
 
