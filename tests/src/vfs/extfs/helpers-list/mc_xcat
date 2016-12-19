@@ -1,0 +1,16 @@
+#!/bin/sh
+
+#
+# This program is intended to be identical to 'cat' with the exception that
+# it ignores any arguments past the 1st one.
+#
+# To understand why it's needed, first read the section about
+# MC_TEST_EXTFS_LIST_CMD in the README. As explained there, the command in
+# MC_TEST_EXTFS_LIST_CMD has to ignore any extra arguments passed to it.
+# The tester achieves this by invoking a helper thus (roughly):
+#
+#    export MC_TEST_EXTFS_LIST_CMD="mc_xcat /path/to/fake/input"
+#    sh /path/to/helper list /dev/null
+#
+
+exec cat "$1"

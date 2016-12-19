@@ -5,7 +5,7 @@
 # Source of zoo can be found at
 # ftp://ftp.ibiblio.org/pub/Linux/utils/compress/
 
-ZOO=zoo
+ZOO=${MC_TEST_EXTFS_LIST_CMD:-zoo}
 
 # Stupid zoo won't work if the archive name has no .zoo extension, so we
 # have to make a symlink with a "better" name.  Also, zoo can create

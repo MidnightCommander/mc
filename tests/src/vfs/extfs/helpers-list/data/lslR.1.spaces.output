@@ -1,0 +1,9 @@
+drwxr-xr-x   3       4096 ./ 1 2
+drwxr-xr-x   2       4096 ./1 2
+drwxr-xr-x   2       4096 ./1 2 
+-rw-r--r--   1          0 ./ 1 2/b
+drwxr-xr-x   2       4096 ./ 1 2/z
+-rw-r--r--   1          0 ./1 2/a
+-rw-r--r--   1          0 ./1 2 / d
+-rw-r--r--   1          0 ./1 2 /c
+-rw-r--r--   1          0 ./1 2 /x:

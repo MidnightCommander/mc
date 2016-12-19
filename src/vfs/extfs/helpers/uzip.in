@@ -17,9 +17,9 @@ use strict;
 # Location of the zip program
 my $app_zip = "@ZIP@";
 # Location of the unzip program
-my $app_unzip = "@UNZIP@";
+my $app_unzip = $ENV{MC_TEST_EXTFS_LIST_CMD} || "@UNZIP@";
 # Set this to 1 if zipinfo (unzip -Z) is to be used (recommended), otherwise 0.
-my $op_has_zipinfo = @HAVE_ZIPINFO@;
+my $op_has_zipinfo = exists($ENV{MC_TEST_EXTFS_HAVE_ZIPINFO}) ? $ENV{MC_TEST_EXTFS_HAVE_ZIPINFO} : @HAVE_ZIPINFO@;
 
 # Command used to list archives (zipinfo mode)
 my $cmd_list_zi = "$app_unzip -Z -l -T";

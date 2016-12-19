@@ -1,0 +1,102 @@
+
+UNRAR 5.30 beta 2 freeware      Copyright (c) 1993-2015 Alexander Roshal
+
+Archive: archive.rar
+Details: RAR 4
+
+        Name: .viminfo
+        Type: File
+        Size: 11032
+ Packed size: 2468
+       Ratio: 22%
+       mtime: 2016-11-23 07:10:39,000
+  Attributes: -rw-------
+       CRC32: 295ED9AB
+     Host OS: Unix
+ Compression: RAR 3.0(v29) -m3 -md=4M
+
+        Name: .wget-hsts
+        Type: File
+        Size: 205
+ Packed size: 181
+       Ratio: 88%
+       mtime: 2016-10-26 13:14:09,000
+  Attributes: -rw-rw-r--
+       CRC32: 58429CA4
+     Host OS: Unix
+ Compression: RAR 3.0(v29) -m3 -md=4M
+
+        Name: .xboardrc
+        Type: File
+        Size: 7527
+ Packed size: 2964
+       Ratio: 39%
+       mtime: 2016-04-17 01:21:46,000
+  Attributes: -rw-rw-r--
+       CRC32: 1DA6AD04
+     Host OS: Unix
+ Compression: RAR 3.0(v29) -m3 -md=4M
+
+        Name: .xchm
+        Type: File
+        Size: 559
+ Packed size: 382
+       Ratio: 68%
+       mtime: 2016-09-29 01:08:46,000
+  Attributes: -rw-rw-r--
+       CRC32: 73DBF2B9
+     Host OS: Unix
+ Compression: RAR 3.0(v29) -m3 -md=4M
+
+        Name: .xinputrc
+        Type: File
+        Size: 130
+ Packed size: 123
+       Ratio: 94%
+       mtime: 2015-12-27 17:08:35,000
+  Attributes: -rw-rw-r--
+       CRC32: 70CD8EF3
+     Host OS: Unix
+ Compression: RAR 3.0(v29) -m3 -md=4M
+
+        Name: .dosbox/dosbox-0.74.conf
+        Type: File
+        Size: 10730
+ Packed size: 4005
+       Ratio: 37%
+       mtime: 2016-06-07 20:43:58,000
+  Attributes: -rw-rw-r--
+       CRC32: 1D5A9AA6
+     Host OS: Unix
+ Compression: RAR 3.0(v29) -m3 -md=4M
+
+        Name: log.txt
+        Type: File
+        Size: 5869937
+ Packed size: 42114
+       Ratio: 0%
+       mtime: 2016-11-23 07:43:18,000
+  Attributes: -rw-rw-r--
+       CRC32: E63DE4A6
+     Host OS: Unix
+ Compression: RAR 3.0(v29) -m3 -md=4M
+
+        Name: filename with spaces.txt
+        Type: File
+        Size: 6
+ Packed size: 16
+       Ratio: 266%
+       mtime: 2016-11-23 07:39:15,000
+  Attributes: -rw-r--r--
+       CRC32: 363A3020
+     Host OS: Unix
+ Compression: RAR 3.0(v29) -m3 -md=4M
+
+        Name: .dosbox
+        Type: Directory
+       mtime: 2016-06-07 20:43:58,000
+  Attributes: drwx------
+       CRC32: 00000000
+     Host OS: Unix
+ Compression: RAR 3.0(v20) -m0 -md=0K
+
