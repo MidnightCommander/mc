@@ -26,9 +26,12 @@ mcu7zip_list ()
 
         ugid="`id -nu` `id -ng`"
 
-        date_re='^\(....\)-\(..\)-\(..\) \(..:..:..\)'
+        date_re='^\(....\)-\(..\)-\(..\) \(..:..:..\)' # 19 chars.
         date_mc='\2-\3-\1 \4'
-        size_re='............'
+
+        size_re='............' # 12 chars.
+        empty_size_re=' \{12\}'
+        zero_size='           0'
 
         # archive entries can have no datetime info, 7z will use archive file datetime
         date_archive=`stat -c %y "$1" 2>/dev/null | sed -n "s/${date_re}.*/${date_mc}/p" 2>/dev/null`
@@ -36,6 +39,16 @@ mcu7zip_list ()
         [ "${date_archive}"x = x ] && date_archive="01-01-1970 00:00:00"
 
         $P7ZIP l "$1" | sed -n "
+
+                  # If the uncompressed size is missing, we copy the compressed size onto it.
+                  #
+                  # But first, if the compressed size is missing too, set it to zero:
+                  s/^\(.\{19\} [D.]....\) $empty_size_re $empty_size_re/\1 $zero_size $zero_size/
+                  # Next, do the copy:
+                  s/^\(.\{19\} [D.]....\) $empty_size_re \($size_re\)/\1 \2 \2/
+                  #
+                  # (We use '.\{19\}' as the date may be missing. It may give false positives
+                  # but we don't mind: the printing commands that follow use strict patterns.).
 
                   # Handle directories.
                   s/$date_re D.... $size_re $size_re\(.*\)/drwxr-xr-x 1 $ugid 0 $date_mc \5/p
