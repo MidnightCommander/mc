@@ -1,0 +1,74 @@
+
+7-Zip 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
+p7zip Version 9.20 (locale=en_US.UTF-8,Utf16=on,HugeFiles=on,4 CPUs)
+
+Listing archive: Geekbench-2.2.3-WindowsSetup.exe
+
+--
+Path = Geekbench-2.2.3-WindowsSetup.exe
+Type = PE
+CPU = x86
+Characteristics = Executable 32-bit NoRelocs NoLineNums NoLocalSyms
+Created = 2009-12-06 03:50:52
+Physical Size = 5649208
+Headers Size = 1024
+Checksum = 5651922
+Image Size = 327680
+Section Alignment = 4096
+File Alignment = 512
+Code Size = 24064
+Initialized Data Size = 164864
+Uninitialized Data Size = 1024
+Linker Version = 6.0
+OS Version = 4.0
+Image Version = 6.0
+Subsystem Version = 4.0
+Subsystem = Windows GUI
+DLL Characteristics = TerminalServerAware
+Stack Reserve = 1048576
+Stack Commit = 4096
+Heap Reserve = 1048576
+Heap Commit = 4096
+Image Base = 4194304
+----
+Path = [0]
+Size = 5519272
+Packed Size = 5519272
+Offset = 123904
+--
+Path = [0]
+Type = Nsis
+Method = Deflate
+Solid = -
+
+   Date      Time    Attr         Size   Compressed  Name
+------------------- ----- ------------ ------------  ------------------------
+                    .....                      8005  $PLUGINSDIR/InstallOptions.dll
+                    .....                      3328  $PLUGINSDIR/StartMenu.dll
+2007-11-15 01:12:38 .....                       134  $PLUGINSDIR/ioSpecial.ini
+2003-09-24 00:34:00 .....                      1886  $PLUGINSDIR/modern-wizard.bmp
+2011-11-03 02:33:04 .....                   1178084  Geekbench22.exe
+2011-11-03 02:33:04 .....                    101652  geekbench.exe
+2011-11-03 02:33:06 .....                   1058731  geekbench_x86_32.exe
+2011-11-03 02:33:06 .....                   1192155  geekbench_x86_64.exe
+2011-11-03 02:33:04 .....                    445814  cpuidsdk.dll
+2011-11-03 02:33:04 .....                    469920  cpuidsdk64.dll
+2011-11-03 02:33:04 .....                    737580  geekbench.plar
+2011-11-03 02:23:16 .....                      4014  $_OUTDIR/html/ui/bg-repeat.gif
+2011-11-03 02:23:16 .....        12817        12817  $_OUTDIR/html/ui/callout-bg-bottom.gif
+2011-11-03 02:23:16 .....                     14648  $_OUTDIR/html/ui/callout-bg-top.gif
+2011-11-03 02:23:16 .....                       120  $_OUTDIR/html/ui/graph-background.png
+2011-11-03 02:23:16 .....          861          861  $_OUTDIR/html/ui/heading-bg-left.gif
+2011-11-03 02:23:16 .....                      9854  $_OUTDIR/html/ui/heading-bg.gif
+2011-11-03 02:23:16 .....                     30401  $_OUTDIR/html/ui/logo.gif
+2011-11-03 02:23:16 .....         1431         1431  $_OUTDIR/html/ui/nav-arrow-down.gif
+2011-11-03 02:23:16 .....         1446         1446  $_OUTDIR/html/ui/nav-arrow-up.gif
+2011-11-03 02:23:16 .....         1425         1425  $_OUTDIR/html/ui/nav-arrows-bg.gif
+2011-11-03 02:23:16 .....                      3841  $_OUTDIR/html/ui/table-wrapper-bg-repeat-x.gif
+2011-11-03 02:23:16 .....         2885         2885  $_OUTDIR/html/ui/table-wrapper-bg-repeat.gif
+2011-11-03 02:23:16 .....       142162       142162  $_OUTDIR/ux/splash-screen.png
+2006-08-11 23:49:28 .....        28016               $PLUGINSDIR/splash.bmp
+                    .....         6144               $PLUGINSDIR/AdvSplash.dll
+                    .....                            plugins/shared memory/uninstall.exe
+------------------- ----- ------------ ------------  ------------------------
+                                163027      5423194  27 files, 0 folders
