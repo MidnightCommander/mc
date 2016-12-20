@@ -1,2 +1,6 @@
 
-SUBDIRS = extfs
+SUBDIRS =
+
+if ENABLE_VFS_EXTFS
+SUBDIRS += extfs
+endif
