@@ -1,0 +1,26 @@
+
+We have 4 inputs:
+
+- u7z.simple.input
+
+    Simplest input: no abnormalities.
+    (One line has a filename with spaces in it.)
+
+- u7z.missing-date.input
+
+    Date field is missing (see #2707).
+
+- u7z.missing-size-and-date.input
+
+    Size field is missing, and in some rows the date is missing too (see #2707).
+
+- u7z.complex.input
+
+    Downloaded from #2707. It's 'list.txt' plus three bottom lines from
+    'listing2.txt'. It demonstrates all the above: missing date, missing
+    uncompressed and compressed size.
+
+
+Output files must be constant. Therefore in our '*.env_var' files we
+define a command that sets missing dates to some fixed date (instead of
+being the archive's date).

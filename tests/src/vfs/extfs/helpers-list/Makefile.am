@@ -32,6 +32,18 @@ data_files_to_distribute = \
 	data/lslR.3.spaces-iso-noslash.input \
 	data/lslR.3.spaces-iso-noslash.output \
 	data/lslR.README \
+	data/u7z.README \
+	data/u7z.complex.env_vars \
+	data/u7z.complex.input \
+	data/u7z.complex.output \
+	data/u7z.missing-date.env_vars \
+	data/u7z.missing-date.input \
+	data/u7z.missing-date.output \
+	data/u7z.missing-size-and-date.env_vars \
+	data/u7z.missing-size-and-date.input \
+	data/u7z.missing-size-and-date.output \
+	data/u7z.simple.input \
+	data/u7z.simple.output \
 	data/urar.README \
 	data/urar.v4,v3.env_vars \
 	data/urar.v4,v3.input \

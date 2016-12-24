@@ -1,0 +1,3 @@
+drwxr-xr-x   1  <<uid>>  <<gid>>          0 2007-07-07 07:07:07 $PLUGINSDIR
+-rw-r--r--   1  <<uid>>  <<gid>>      11024 2007-07-07 07:07:07 $PLUGINSDIR/InstallOptions.dll
+-rw-r--r--   1  <<uid>>  <<gid>>        235 2007-11-15 01:12:38 $PLUGINSDIR/ioSpecial.ini

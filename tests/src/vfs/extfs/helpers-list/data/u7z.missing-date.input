@@ -1,0 +1,5 @@
+   Date      Time    Attr         Size   Compressed  Name
+------------------- ----- ------------ ------------  ------------------------
+                    D....            0            0  $PLUGINSDIR
+                    .....        11024         8005  $PLUGINSDIR/InstallOptions.dll
+2007-11-15 01:12:38 .....          235          134  $PLUGINSDIR/ioSpecial.ini
