@@ -995,14 +995,18 @@ smbfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-smbfs_utime (const vfs_path_t * vpath, struct utimbuf *times)
+smbfs_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
 {
     const vfs_path_element_t *path_element;
 
     (void) times;
 
     path_element = vfs_path_get_by_index (vpath, -1);
+#ifdef HAVE_UTIMENSAT
+    DEBUG (3, ("smbfs_utimensat(path:%s)\n", path_element->path));
+#else
     DEBUG (3, ("smbfs_utime(path:%s)\n", path_element->path));
+#endif
     my_errno = EOPNOTSUPP;
     return -1;
 }

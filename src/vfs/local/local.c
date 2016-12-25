@@ -169,12 +169,18 @@ local_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-local_utime (const vfs_path_t * vpath, struct utimbuf *times)
+local_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
 {
+    int ret;
     const vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
-    return utime (path_element->path, times);
+#ifdef HAVE_UTIMENSAT
+    ret = utimensat (AT_FDCWD, path_element->path, *times, 0);
+#else
+    ret = utime (path_element->path, times);
+#endif
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */

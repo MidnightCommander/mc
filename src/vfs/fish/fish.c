@@ -1323,17 +1323,49 @@ fish_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+fish_get_atime (mc_timesbuf_t * times, time_t * sec, long *nsec)
+{
+#ifdef HAVE_UTIMENSAT
+    *sec = (*times)[0].tv_sec;
+    *nsec = (*times)[0].tv_nsec;
+#else
+    *sec = times->actime;
+    *nsec = 0;
+#endif
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+fish_get_mtime (mc_timesbuf_t * times, time_t * sec, long *nsec)
+{
+#ifdef HAVE_UTIMENSAT
+    *sec = (*times)[1].tv_sec;
+    *nsec = (*times)[1].tv_nsec;
+#else
+    *sec = times->modtime;
+    *nsec = 0;
+#endif
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static int
-fish_utime (const vfs_path_t * vpath, struct utimbuf *times)
+fish_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
 {
     gchar *shell_commands = NULL;
-    char utcmtime[16], utcatime[16];
+    char utcatime[16], utcmtime[16];
+    char utcatime_w_nsec[30], utcmtime_w_nsec[30];
+    time_t atime, mtime;
+    long atime_nsec, mtime_nsec;
     struct tm *gmt;
-    char buf[BUF_LARGE];
+    char *cmd;
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
     const vfs_path_element_t *path_element;
+    int ret;
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
@@ -1342,24 +1374,38 @@ fish_utime (const vfs_path_t * vpath, struct utimbuf *times)
         return -1;
     rpath = strutils_shell_escape (crpath);
 
-    gmt = gmtime (&times->modtime);
-    g_snprintf (utcmtime, sizeof (utcmtime), "%04d%02d%02d%02d%02d.%02d",
-                gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday,
-                gmt->tm_hour, gmt->tm_min, gmt->tm_sec);
-
-    gmt = gmtime (&times->actime);
+    fish_get_atime (times, &atime, &atime_nsec);
+    gmt = gmtime (&atime);
     g_snprintf (utcatime, sizeof (utcatime), "%04d%02d%02d%02d%02d.%02d",
                 gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday,
                 gmt->tm_hour, gmt->tm_min, gmt->tm_sec);
+    g_snprintf (utcatime_w_nsec, sizeof (utcatime_w_nsec), "%04d-%02d-%02d %02d:%02d:%02d.%09ld",
+                gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday,
+                gmt->tm_hour, gmt->tm_min, gmt->tm_sec, atime_nsec);
+
+    fish_get_mtime (times, &mtime, &mtime_nsec);
+    gmt = gmtime (&mtime);
+    g_snprintf (utcmtime, sizeof (utcmtime), "%04d%02d%02d%02d%02d.%02d",
+                gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday,
+                gmt->tm_hour, gmt->tm_min, gmt->tm_sec);
+    g_snprintf (utcmtime_w_nsec, sizeof (utcmtime_w_nsec), "%04d-%02d-%02d %02d:%02d:%02d.%09ld",
+                gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday,
+                gmt->tm_hour, gmt->tm_min, gmt->tm_sec, mtime_nsec);
 
     shell_commands =
         g_strconcat (SUP->scr_env, "FISH_FILENAME=%s FISH_FILEATIME=%ld FISH_FILEMTIME=%ld ",
-                     "FISH_TOUCHATIME=%s FISH_TOUCHMTIME=%s;\n", SUP->scr_utime, (char *) NULL);
-    g_snprintf (buf, sizeof (buf), shell_commands, rpath, (long) times->actime,
-                (long) times->modtime, utcatime, utcmtime);
+                     "FISH_TOUCHATIME=%s FISH_TOUCHMTIME=%s ",
+                     "FISH_TOUCHATIME_W_NSEC=\"%s\" FISH_TOUCHMTIME_W_NSEC=\"%s\";\n",
+                     SUP->scr_utime, (char *) NULL);
+    cmd =
+        g_strdup_printf (shell_commands, rpath, (long) atime, (long) mtime, utcatime, utcmtime,
+                         utcatime_w_nsec, utcmtime_w_nsec);
     g_free (shell_commands);
     g_free (rpath);
-    return fish_send_command (path_element->class, super, buf, OPT_FLUSH);
+    ret = fish_send_command (path_element->class, super, cmd, OPT_FLUSH);
+    g_free (cmd);
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */

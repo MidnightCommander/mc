@@ -330,7 +330,7 @@ sftpfs_cb_readlink (const vfs_path_t * vpath, char *buf, size_t size)
  */
 
 static int
-sftpfs_cb_utime (const vfs_path_t * vpath, struct utimbuf *times)
+sftpfs_cb_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
 {
     (void) vpath;
     (void) times;
