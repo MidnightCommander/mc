@@ -22,6 +22,10 @@ mc_parse_ls_l_SOURCES = \
 	mc_parse_ls_l.c
 
 data_files_to_distribute = \
+	data/hp48+.README \
+	data/hp48+.args \
+	data/hp48+.input \
+	data/hp48+.output \
 	data/lslR.1.spaces.args \
 	data/lslR.1.spaces.input \
 	data/lslR.1.spaces.output \
@@ -44,6 +48,12 @@ data_files_to_distribute = \
 	data/u7z.missing-size-and-date.output \
 	data/u7z.simple.input \
 	data/u7z.simple.output \
+	data/uace.README \
+	data/uace.input \
+	data/uace.output \
+	data/uarc.README \
+	data/uarc.input \
+	data/uarc.output \
 	data/urar.README \
 	data/urar.v4,v3.env_vars \
 	data/urar.v4,v3.input \

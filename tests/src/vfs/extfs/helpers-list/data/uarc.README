@@ -1,0 +1,19 @@
+
+The input file was created by doing "arc v test.arc" on archive created
+with "arc a test.arc ...". We then made sure to have:
+
+- One date prior to year 2000 (to test the 1900/2000 boundary).
+- Both AM and PM times.
+
+Our 'uarc' doesn't support spaces in filenames but that's no biggie:
+
+    Man page: "Full compatibility with PC ARC files is maintained, the
+    price for which is that arc doesn't like long filenames, and can only
+    archive files with names of up to 12 characters. [...] I suggest you
+    put long-winded filenames in a 'shar' before arcing them."
+
+    Wikipedia: "ARC is incapable of compressing entire directory trees"
+
+Known issues with our uarc:
+
+- It reports '0' gid.
