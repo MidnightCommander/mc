@@ -628,8 +628,7 @@ intl/Makefile
 po/Makefile.in
 ])
 
-if test x$enable_tests != xno; then
-    AC_CONFIG_FILES([
+AC_CONFIG_FILES([
 tests/Makefile
 tests/lib/Makefile
 tests/lib/mcconfig/Makefile
@@ -645,7 +644,6 @@ tests/src/vfs/Makefile
 tests/src/vfs/extfs/Makefile
 tests/src/vfs/extfs/helpers-list/Makefile
 ])
-fi
 
 AC_OUTPUT
 
@@ -657,6 +655,7 @@ Configuration:
   Compiler:                   ${CC}
   Compiler flags:             ${CFLAGS}
   Assertions:                 ${enable_assert}
+  Unit tests:                 ${tests_msg}
   File system:                ${vfs_type}
                               ${vfs_flags}
   Screen library:             ${screen_msg}

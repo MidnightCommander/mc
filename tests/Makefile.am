@@ -1,3 +1,3 @@
 SUBDIRS = lib src
 
-EXTRA_DIST = mctest.h
+EXTRA_DIST = mctest.h README

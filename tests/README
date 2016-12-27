@@ -1,0 +1,25 @@
+Overview
+--------
+
+This tree contains unit tests.
+
+To compile and run the tests, do 'make check' (either in the top folder,
+or just in the folder containing the tests you're interested in).
+
+IMPORTANT: To compile the tests, you need to have the "Check" unit
+testing framework[1] installed.[2] If you have it installed, you will see
+"Unit tests: yes" in configure's summary message; if you don't see this
+message, you won't be able to compile the tests.[3]
+
+Tips and tricks
+---------------
+
+* To be able to step with the debugger into test code, see [4]. E.g., do:
+
+    $ export CK_FORK=no
+
+[1]: http://libcheck.github.io/check/
+[2]: Your package manager likely has it.
+[3]: Actually, some tests (like src/vfs/extfs/helpers-list) don't use
+     this framework and will compile just fine. But that's the exception.
+[4]: http://stackoverflow.com/questions/1649814/debugging-unit-test-in-c-using-check
