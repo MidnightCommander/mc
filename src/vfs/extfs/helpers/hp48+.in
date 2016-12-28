@@ -65,6 +65,7 @@ echo QUIT)| $KERMIT -B >/dev/null
 hp48_parser()
 {
 HP48_DIRS=
+
 read -r INPUT
 while [ "x$INPUT" != "xEOF" ]
 do
@@ -77,15 +78,22 @@ do
     obj_size=`echo $obj_size | $AWK '{ print int($0) }'`  # Truncates floats to ints; anything else to "0".
 
     if [ "$obj_size" != "0" ]; then  # Skips the 1st reply line (purportedly there aren't zero-size files b/c, according to resource [4], the size is "including name").
-    case "$obj_type" in
-    Directory) HP48_DIRS="$HP48_DIRS $obj_name"
-    printf "drwxr-xr-x   1 %-8d %-8d %8d %s %s\n" 0 0 $obj_size "$NOW" "$HP48_CDIR/$obj_name";;
-    *) printf "%crw-r--r--   1 %-8d %-8d %8d %s %s\n" '-' 0 0 $obj_size "$NOW" "$HP48_CDIR/$obj_name";;
+      case "$obj_type" in
+        Directory)
+          HP48_DIRS="$HP48_DIRS $obj_name"
+          printf "%crwxr-xr-x   1 %-8d %-8d %8d %s %s\n" 'd' \
+            0 0 $obj_size "$NOW" "$HP48_CDIR/$obj_name"
+          ;;
+        *)
+          printf "%crw-r--r--   1 %-8d %-8d %8d %s %s\n" '-' \
+            0 0 $obj_size "$NOW" "$HP48_CDIR/$obj_name"
+          ;;
     esac
     fi
 
     read -r INPUT
 done
+
 for HP48_DIR in $HP48_DIRS;
 do 
     HP48_PDIR="$HP48_CDIR"
