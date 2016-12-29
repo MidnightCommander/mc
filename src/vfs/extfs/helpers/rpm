@@ -30,6 +30,8 @@
 #	      add support for PREINPROG/POSTINPROG/PREUNPROG/POSTUNPROG
 #	      add support for VERIFYSCRIPTPROG
 #	      add support for TRIGGERSCRIPTS/TRIGGERSCRIPTPROG
+#  Jiri Tyr <jiri.tyr@gmail.com>
+#	2016: add support for PRETRANS/PRETRANSPROG/POSTTRANS/POSTTRANSPROG
 #
 #  This file is part of the Midnight Commander.
 #
@@ -145,6 +147,8 @@ mcrpmfs_list_fastRPM ()
     echo "$FILEPREF 0 $DATE INFO/DESCRIPTION"
     echo "$FILEPREF 0 $DATE INFO/SUMMARY"
     echo "dr-xr-xr-x   1 root     root     0 $DATE INFO/SCRIPTS"
+    echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PRETRANS"
+    echo "$FILEPREF 0 $DATE INFO/SCRIPTS/POSTTRANS"
     echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PREIN"
     echo "$FILEPREF 0 $DATE INFO/SCRIPTS/POSTIN"
     echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PREUN"
@@ -170,7 +174,9 @@ mcrpmfs_list_fullRPM ()
     mcrpmfs_printOneMetaInfo "INFO/DESCRIPTION" "DESCRIPTION"
     mcrpmfs_printOneMetaInfo "INFO/SUMMARY" "SUMMARY"
 
-    if test "`mcrpmfs_getRawOneTag \"%{RPMTAG_PREIN}%{RPMTAG_POSTIN}%{RPMTAG_PREUN}%{RPMTAG_POSTUN}%{VERIFYSCRIPT}%{TRIGGERSCRIPTS}\"`" != "(none)(none)(none)(none)(none)(none)"; then
+    if test "`mcrpmfs_getRawOneTag \"%{RPMTAG_PRETRANS}%{RPMTAG_POSTTRANS}%{RPMTAG_PREIN}%{RPMTAG_POSTIN}%{RPMTAG_PREUN}%{RPMTAG_POSTUN}%{VERIFYSCRIPT}%{TRIGGERSCRIPTS}\"`" != "(none)(none)(none)(none)(none)(none)(none)(none)"; then
+	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/PRETRANS" "RPMTAG_PRETRANS" "raw"
+	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/POSTTRANS" "RPMTAG_POSTTRANS" "raw"
 	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/PREIN" "RPMTAG_PREIN" "raw"
 	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/POSTIN" "RPMTAG_POSTIN" "raw"
 	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/PREUN" "RPMTAG_PREUN" "raw"
@@ -180,7 +186,9 @@ mcrpmfs_list_fullRPM ()
 	echo "$FILEPREF 0 $DATE INFO/SCRIPTS/ALL"
     fi
 
-    if test "`mcrpmfs_getRawOneTag \"%{RPMTAG_PREINPROG}%{RPMTAG_POSTINPROG}%{RPMTAG_PREUNPROG}%{RPMTAG_POSTUNPROG}%{VERIFYSCRIPTPROG}%{TRIGGERSCRIPTPROG}\"`" != "(none)(none)(none)(none)(none)(none)"; then
+    if test "`mcrpmfs_getRawOneTag \"%{RPMTAG_PRETRANSPROG}%{RPMTAG_POSTTRANSPROG}%{RPMTAG_PREINPROG}%{RPMTAG_POSTINPROG}%{RPMTAG_PREUNPROG}%{RPMTAG_POSTUNPROG}%{VERIFYSCRIPTPROG}%{TRIGGERSCRIPTPROG}\"`" != "(none)(none)(none)(none)(none)(none)(none)(none)"; then
+	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/PRETRANSPROG" "RPMTAG_PRETRANSPROG" "raw"
+	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/POSTTRANSPROG" "RPMTAG_POSTTRANSPROG" "raw"
 	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/PREINPROG" "RPMTAG_PREINPROG" "raw"
 	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/POSTINPROG" "RPMTAG_POSTINPROG" "raw"
 	mcrpmfs_printOneMetaInfo "INFO/SCRIPTS/PREUNPROG" "RPMTAG_PREUNPROG" "raw"
@@ -295,6 +303,10 @@ mcrpmfs_copyout ()
 	INFO/RPMVERSION)	mcrpmfs_getRawOneTag "%{RPMVERSION}\n" >"$2"; exit 0;;
 	INFO/REQUIRES)		mcrpmfs_getRawOneTag "[%{REQUIRENAME} %{REQUIREFLAGS:depflags} %{REQUIREVERSION}\n]" >"$2"; exit 0;;
 	INFO/PROVIDES)		mcrpmfs_getRawOneTag "[%{PROVIDES} %{PROVIDEFLAGS:depflags} %{PROVIDEVERSION}\n]" >"$2"; exit 0;;
+	INFO/SCRIPTS/PRETRANS)	mcrpmfs_getRawOneTag "%{RPMTAG_PRETRANS}\n" >"$2"; exit 0;;
+	INFO/SCRIPTS/PRETRANSPROG)	mcrpmfs_getRawOneTag "%{RPMTAG_PRETRANSPROG}\n" >"$2"; exit 0;;
+	INFO/SCRIPTS/POSTTRANS)	mcrpmfs_getRawOneTag "%{RPMTAG_POSTTRANS}\n" >"$2"; exit 0;;
+	INFO/SCRIPTS/POSTTRANSPROG)	mcrpmfs_getRawOneTag "%{RPMTAG_POSTTRANSPROG}\n" >"$2"; exit 0;;
 	INFO/SCRIPTS/PREIN)	mcrpmfs_getRawOneTag "%{RPMTAG_PREIN}\n" >"$2"; exit 0;;
 	INFO/SCRIPTS/PREINPROG)	mcrpmfs_getRawOneTag "%{RPMTAG_PREINPROG}\n" >"$2"; exit 0;;
 	INFO/SCRIPTS/POSTIN)	mcrpmfs_getRawOneTag "%{RPMTAG_POSTIN}\n" >"$2"; exit 0;;
