@@ -124,7 +124,9 @@ fill_stat_struct (struct stat *etalon_stat, int iterator)
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
         etalon_stat->st_blksize = 512;
 #endif
+#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
         etalon_stat->st_blocks = 8;
+#endif
         etalon_stat->st_atime = 1308838140;
         etalon_stat->st_mtime = 1308838140;
         etalon_stat->st_ctime = 1308838140;
@@ -141,7 +143,9 @@ fill_stat_struct (struct stat *etalon_stat, int iterator)
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
         etalon_stat->st_blksize = 512;
 #endif
+#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
         etalon_stat->st_blocks = 1;
+#endif
         etalon_stat->st_atime = 1268431200;
         etalon_stat->st_mtime = 1268431200;
         etalon_stat->st_ctime = 1268431200;
@@ -158,7 +162,9 @@ fill_stat_struct (struct stat *etalon_stat, int iterator)
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
         etalon_stat->st_blksize = 512;
 #endif
+#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
         etalon_stat->st_blocks = 8;
+#endif
         etalon_stat->st_atime = 1308838140;
         etalon_stat->st_mtime = 1308838140;
         etalon_stat->st_ctime = 1308838140;
@@ -175,7 +181,9 @@ fill_stat_struct (struct stat *etalon_stat, int iterator)
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
         etalon_stat->st_blksize = 512;
 #endif
+#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
         etalon_stat->st_blocks = 8;
+#endif
         etalon_stat->st_atime = 1308838140;
         etalon_stat->st_mtime = 1308838140;
         etalon_stat->st_ctime = 1308838140;
@@ -245,7 +253,9 @@ START_PARAMETRIZED_TEST (test_vfs_parse_ls_lga, test_vfs_parse_ls_lga_ds)
 
     vfs_parse_ls_lga_init ();
 
+#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
     etalon_stat.st_blocks = 0;
+#endif
     etalon_stat.st_size = 0;
     etalon_stat.st_mode = 0;
     fill_stat_struct (&etalon_stat, _i);
@@ -270,7 +280,9 @@ START_PARAMETRIZED_TEST (test_vfs_parse_ls_lga, test_vfs_parse_ls_lga_ds)
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
     mctest_assert_int_eq (etalon_stat.st_blksize, test_stat.st_blksize);
 #endif
+#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
     mctest_assert_int_eq (etalon_stat.st_blocks, test_stat.st_blocks);
+#endif
 
     /* FIXME: these commented checks are related to time zone!
        mctest_assert_int_eq (etalon_stat.st_atime, test_stat.st_atime);
