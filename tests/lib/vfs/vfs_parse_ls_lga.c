@@ -121,7 +121,9 @@ fill_stat_struct (struct stat *etalon_stat, int iterator)
         etalon_stat->st_gid = 500;
         etalon_stat->st_rdev = 0;
         etalon_stat->st_size = 4096;
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
         etalon_stat->st_blksize = 512;
+#endif
         etalon_stat->st_blocks = 8;
         etalon_stat->st_atime = 1308838140;
         etalon_stat->st_mtime = 1308838140;
@@ -136,7 +138,9 @@ fill_stat_struct (struct stat *etalon_stat, int iterator)
         etalon_stat->st_gid = 500;
         etalon_stat->st_rdev = 0;
         etalon_stat->st_size = 11;
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
         etalon_stat->st_blksize = 512;
+#endif
         etalon_stat->st_blocks = 1;
         etalon_stat->st_atime = 1268431200;
         etalon_stat->st_mtime = 1268431200;
@@ -151,7 +155,9 @@ fill_stat_struct (struct stat *etalon_stat, int iterator)
         etalon_stat->st_gid = 500;
         etalon_stat->st_rdev = 0;
         etalon_stat->st_size = 4096;
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
         etalon_stat->st_blksize = 512;
+#endif
         etalon_stat->st_blocks = 8;
         etalon_stat->st_atime = 1308838140;
         etalon_stat->st_mtime = 1308838140;
@@ -166,7 +172,9 @@ fill_stat_struct (struct stat *etalon_stat, int iterator)
         etalon_stat->st_gid = 500;
         etalon_stat->st_rdev = 0;
         etalon_stat->st_size = 4096;
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
         etalon_stat->st_blksize = 512;
+#endif
         etalon_stat->st_blocks = 8;
         etalon_stat->st_atime = 1308838140;
         etalon_stat->st_mtime = 1308838140;
@@ -259,7 +267,9 @@ START_PARAMETRIZED_TEST (test_vfs_parse_ls_lga, test_vfs_parse_ls_lga_ds)
     mctest_assert_int_eq (etalon_stat.st_gid, test_stat.st_gid);
     mctest_assert_int_eq (etalon_stat.st_rdev, test_stat.st_rdev);
     mctest_assert_int_eq (etalon_stat.st_size, test_stat.st_size);
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
     mctest_assert_int_eq (etalon_stat.st_blksize, test_stat.st_blksize);
+#endif
     mctest_assert_int_eq (etalon_stat.st_blocks, test_stat.st_blocks);
 
     /* FIXME: these commented checks are related to time zone!
