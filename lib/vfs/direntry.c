@@ -995,6 +995,12 @@ vfs_s_default_stat (struct vfs_class *me, mode_t mode)
     st.st_rdev = 0;
     st.st_uid = getuid ();
     st.st_gid = getgid ();
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
+    st.st_blksize = 512;
+#endif
+#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
+    st.st_blocks = 0;
+#endif
     st.st_size = 0;
     st.st_mtime = st.st_atime = st.st_ctime = time (NULL);
 
