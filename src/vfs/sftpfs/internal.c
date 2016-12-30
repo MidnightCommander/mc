@@ -120,6 +120,22 @@ sftpfs_waitsocket (sftpfs_super_data_t * super_data, GError ** mcerror)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/* Adjust block size and number of blocks */
+
+void
+sftpfs_blksize (struct stat *s)
+{
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
+    s->st_blksize = LIBSSH2_CHANNEL_WINDOW_DEFAULT;     /* FIXME */
+#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
+    /* In according to stat(2), this is the size in 512-byte units */
+    s->st_blocks = 1 + ((s->st_size - 1) / 512);
+#endif /* HAVE_STRUCT_STAT_ST_BLOCKS */
+#endif /* HAVE_STRUCT_STAT_ST_BLKSIZE */
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /**
  * Getting information about a symbolic link.
  *
@@ -188,7 +204,10 @@ sftpfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
     }
 
     if ((attrs.flags & LIBSSH2_SFTP_ATTR_SIZE) != 0)
+    {
         buf->st_size = attrs.filesize;
+        sftpfs_blksize (buf);
+    }
 
     if ((attrs.flags & LIBSSH2_SFTP_ATTR_PERMISSIONS) != 0)
         buf->st_mode = attrs.permissions;
@@ -267,7 +286,10 @@ sftpfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
     }
 
     if ((attrs.flags & LIBSSH2_SFTP_ATTR_SIZE) != 0)
+    {
         buf->st_size = attrs.filesize;
+        sftpfs_blksize (buf);
+    }
 
     if ((attrs.flags & LIBSSH2_SFTP_ATTR_PERMISSIONS) != 0)
         buf->st_mode = attrs.permissions;

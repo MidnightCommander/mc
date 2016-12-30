@@ -217,7 +217,10 @@ sftpfs_fstat (void *data, struct stat *buf, GError ** mcerror)
     }
 
     if ((attrs.flags & LIBSSH2_SFTP_ATTR_SIZE) != 0)
+    {
         buf->st_size = attrs.filesize;
+        sftpfs_blksize (buf);
+    }
 
     if ((attrs.flags & LIBSSH2_SFTP_ATTR_PERMISSIONS) != 0)
         buf->st_mode = attrs.permissions;
