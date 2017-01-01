@@ -82,11 +82,14 @@ sftpfs_opendir (const vfs_path_t * vpath, GError ** mcerror)
 
     while (TRUE)
     {
+        const char *fixfname;
         int libssh_errno;
 
+        fixfname = sftpfs_fix_filename (path_element->path);
+
         handle =
-            libssh2_sftp_opendir (super_data->sftp_session,
-                                  sftpfs_fix_filename (path_element->path));
+            libssh2_sftp_open_ex (super_data->sftp_session, fixfname, sftpfs_filename_buffer->len,
+                                  0, 0, LIBSSH2_SFTP_OPENDIR);
         if (handle != NULL)
             break;
 
