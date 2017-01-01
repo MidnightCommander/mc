@@ -439,6 +439,10 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *heade
         st->st_atime = tar_from_oct (1 + 12, header->header.unused.oldgnu.atime);
         st->st_ctime = tar_from_oct (1 + 12, header->header.unused.oldgnu.ctime);
     }
+
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
+    st->st_blksize = 8 * 1024;  /* FIXME */
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
