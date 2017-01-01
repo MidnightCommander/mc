@@ -3,7 +3,7 @@
 
    Copyright (C) Andrew Tridgell 1992-1998 Modified by Jeremy Allison 1995.
 
-   Copyright (C) 2011-2016
+   Copyright (C) 2011-2017
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.

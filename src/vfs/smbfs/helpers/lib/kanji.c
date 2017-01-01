@@ -5,7 +5,7 @@
 
    Copyright (C) Andrew Tridgell 1992-1998
 
-   Copyright (C) 2011-2016
+   Copyright (C) 2011-2017
    Free Software Foundation, Inc.
 
    Adding for Japanese language by <fujita@ainix.isac.co.jp> 1994.9.5

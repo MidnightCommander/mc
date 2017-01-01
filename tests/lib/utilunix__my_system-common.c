@@ -1,7 +1,7 @@
 /*
    lib - common code for testing lib/utilinux:my_system() function
 
-   Copyright (C) 2013-2016
+   Copyright (C) 2013-2017
    Free Software Foundation, Inc.
 
    Written by:

@@ -1,7 +1,7 @@
 /*
    File operation contexts for the Midnight Commander
 
-   Copyright (C) 1999-2016
+   Copyright (C) 1999-2017
    Free Software Foundation, Inc.
 
    Written by:

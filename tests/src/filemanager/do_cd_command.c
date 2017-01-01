@@ -1,7 +1,7 @@
 /*
    src/filemanager - tests for do_cd_command() function
 
-   Copyright (C) 2011-2016
+   Copyright (C) 2011-2017
    Free Software Foundation, Inc.
 
    Written by:

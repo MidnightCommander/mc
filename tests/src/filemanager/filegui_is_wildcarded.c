@@ -1,7 +1,7 @@
 /*
    src/filemanager - tests for is_wildcarded() function
 
-   Copyright (C) 2011-2016
+   Copyright (C) 2011-2017
    Free Software Foundation, Inc.
 
    Written by:

@@ -1,7 +1,7 @@
 /*
    Editor high level editing commands
 
-   Copyright (C) 1996-2016
+   Copyright (C) 1996-2017
    Free Software Foundation, Inc.
 
    Written by:

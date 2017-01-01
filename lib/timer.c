@@ -1,7 +1,7 @@
 /*
    Simple timer for the Midnight Commander.
 
-   Copyright (C) 2013-2016
+   Copyright (C) 2013-2017
    Free Software Foundation, Inc.
 
    Written by:
