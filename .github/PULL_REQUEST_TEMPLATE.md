@@ -2,7 +2,7 @@ Thank you for thinking about contributing to Midnight Commander, but we **ARE NO
 
 Instead, please check out our Trac instance to see if the issue has already been reported, or submit a new ticket:
 
-http://midnight-commander.org/wiki/NewTicket
+https://midnight-commander.org/wiki/NewTicket
 
 If you chose to submit the pull request instead, keep in mind that we are not checking on them regularly, so it might take ages before we even get to it, if at all.
 
