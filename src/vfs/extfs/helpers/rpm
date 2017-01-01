@@ -122,8 +122,6 @@ mcrpmfs_getOneTag()
     echo $AllTAGS | $SED "s/.*|${1}=//" | cut -d '|' -f 1
 }
 
-AllTAGS=`mcrpmfs_getAllNeededTags "$1"`
-
 mcrpmfs_printOneMetaInfo()
 {
     if test "$3" = "raw"; then
@@ -329,6 +327,11 @@ mcrpmfs_run ()
 	REBUILD) echo "Rebuilding \"${rpm_filename}\""; $RPMBUILD --rebuild "${rpm_filename}"; exit 0;;
     esac
 }
+
+# Let the test framework override functions and variables.
+[ -n "$MC_TEST_RPM_REWRITE" ] && . "$MC_TEST_RPM_REWRITE"
+
+AllTAGS=`mcrpmfs_getAllNeededTags "$1"`
 
 umask 077
 case "${param}" in
