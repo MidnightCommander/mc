@@ -127,13 +127,14 @@ sftpfs_open_file (vfs_file_handler_t * file_handler, int flags, mode_t mode, GEr
     while (TRUE)
     {
         const char *fixfname;
+        unsigned int fixfname_len = 0;
         int libssh_errno;
 
-        fixfname = sftpfs_fix_filename (name);
+        fixfname = sftpfs_fix_filename (name, &fixfname_len);
 
         file_handler_data->handle =
-            libssh2_sftp_open_ex (super_data->sftp_session, fixfname, sftpfs_filename_buffer->len,
-                                  sftp_open_flags, sftp_open_mode, LIBSSH2_SFTP_OPENFILE);
+            libssh2_sftp_open_ex (super_data->sftp_session, fixfname, fixfname_len, sftp_open_flags,
+                                  sftp_open_mode, LIBSSH2_SFTP_OPENFILE);
         if (file_handler_data->handle != NULL)
             break;
 
