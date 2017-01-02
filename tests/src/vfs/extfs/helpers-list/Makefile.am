@@ -1,5 +1,7 @@
 PACKAGE_STRING = "/src/vfs/extfs/helpers-list"
 
+SUBDIRS = misc
+
 AM_CPPFLAGS = $(GLIB_CFLAGS) -I$(top_srcdir)
 
 # This lets mc_parse_ls_l.c override MC's message() without the linker
