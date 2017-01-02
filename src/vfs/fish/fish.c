@@ -157,7 +157,32 @@ static char reply_str[80];
 
 static struct vfs_class vfs_fish_ops;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+fish_set_blksize (struct stat *s)
+{
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
+    /* redefine block size */
+    s->st_blksize = 64 * 1024;  /* FIXME */
+#endif
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static struct stat *
+fish_default_stat (struct vfs_class *me)
+{
+    struct stat *s;
+
+    s = vfs_s_default_stat (me, S_IFDIR | 0755);
+    fish_set_blksize (s);
+
+    return s;
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
@@ -551,7 +576,8 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
     super->name = g_strdup (PATH_SEP_STR);
 #endif
 
-    super->root = vfs_s_new_inode (me, super, vfs_s_default_stat (me, S_IFDIR | 0755));
+    super->root = vfs_s_new_inode (me, super, fish_default_stat (me));
+
     return 0;
 }
 
@@ -1249,6 +1275,42 @@ fish_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
+fish_stat (const vfs_path_t * vpath, struct stat *buf)
+{
+    int ret;
+
+    ret = vfs_s_stat (vpath, buf);
+    fish_set_blksize (buf);
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+fish_lstat (const vfs_path_t * vpath, struct stat *buf)
+{
+    int ret;
+
+    ret = vfs_s_lstat (vpath, buf);
+    fish_set_blksize (buf);
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+fish_fstat (void *vfs_info, struct stat *buf)
+{
+    int ret;
+
+    ret = vfs_s_fstat (vfs_info, buf);
+    fish_set_blksize (buf);
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
 fish_chmod (const vfs_path_t * vpath, mode_t mode)
 {
     gchar *shell_commands = NULL;
@@ -1668,6 +1730,9 @@ init_fish (void)
     vfs_fish_ops.name = "fish";
     vfs_fish_ops.prefix = "sh";
     vfs_fish_ops.fill_names = fish_fill_names;
+    vfs_fish_ops.stat = fish_stat;
+    vfs_fish_ops.lstat = fish_lstat;
+    vfs_fish_ops.fstat = fish_fstat;
     vfs_fish_ops.chmod = fish_chmod;
     vfs_fish_ops.chown = fish_chown;
     vfs_fish_ops.utime = fish_utime;
