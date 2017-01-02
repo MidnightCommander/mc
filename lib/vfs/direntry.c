@@ -497,31 +497,6 @@ vfs_s_internal_stat (const vfs_path_t * vpath, struct stat *buf, int flag)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-vfs_s_stat (const vfs_path_t * vpath, struct stat *buf)
-{
-    return vfs_s_internal_stat (vpath, buf, FL_FOLLOW);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static int
-vfs_s_lstat (const vfs_path_t * vpath, struct stat *buf)
-{
-    return vfs_s_internal_stat (vpath, buf, FL_NONE);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static int
-vfs_s_fstat (void *fh, struct stat *buf)
-{
-    *buf = FH->ino->st;
-    return 0;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static int
 vfs_s_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 {
     struct vfs_s_inode *ino;
@@ -1323,6 +1298,31 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
     super->fd_usage++;
     fh->ino->st.st_nlink++;
     return fh;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+vfs_s_stat (const vfs_path_t * vpath, struct stat *buf)
+{
+    return vfs_s_internal_stat (vpath, buf, FL_FOLLOW);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+vfs_s_lstat (const vfs_path_t * vpath, struct stat *buf)
+{
+    return vfs_s_internal_stat (vpath, buf, FL_NONE);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+vfs_s_fstat (void *fh, struct stat *buf)
+{
+    *buf = FH->ino->st;
+    return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
