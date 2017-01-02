@@ -119,7 +119,9 @@ fill_stat_struct (struct stat *etalon_stat, int iterator)
         etalon_stat->st_nlink = 10;
         etalon_stat->st_uid = 500;
         etalon_stat->st_gid = 500;
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
         etalon_stat->st_rdev = 0;
+#endif
         etalon_stat->st_size = 4096;
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
         etalon_stat->st_blksize = 512;
@@ -138,7 +140,9 @@ fill_stat_struct (struct stat *etalon_stat, int iterator)
         etalon_stat->st_nlink = 10;
         etalon_stat->st_uid = 500;
         etalon_stat->st_gid = 500;
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
         etalon_stat->st_rdev = 0;
+#endif
         etalon_stat->st_size = 11;
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
         etalon_stat->st_blksize = 512;
@@ -157,7 +161,9 @@ fill_stat_struct (struct stat *etalon_stat, int iterator)
         etalon_stat->st_nlink = 10;
         etalon_stat->st_uid = 500;
         etalon_stat->st_gid = 500;
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
         etalon_stat->st_rdev = 0;
+#endif
         etalon_stat->st_size = 4096;
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
         etalon_stat->st_blksize = 512;
@@ -176,7 +182,9 @@ fill_stat_struct (struct stat *etalon_stat, int iterator)
         etalon_stat->st_nlink = 10;
         etalon_stat->st_uid = 500;
         etalon_stat->st_gid = 500;
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
         etalon_stat->st_rdev = 0;
+#endif
         etalon_stat->st_size = 4096;
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
         etalon_stat->st_blksize = 512;
@@ -275,7 +283,9 @@ START_PARAMETRIZED_TEST (test_vfs_parse_ls_lga, test_vfs_parse_ls_lga_ds)
     mctest_assert_int_eq (etalon_stat.st_mode, test_stat.st_mode);
     mctest_assert_int_eq (etalon_stat.st_uid, test_stat.st_uid);
     mctest_assert_int_eq (etalon_stat.st_gid, test_stat.st_gid);
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
     mctest_assert_int_eq (etalon_stat.st_rdev, test_stat.st_rdev);
+#endif
     mctest_assert_int_eq (etalon_stat.st_size, test_stat.st_size);
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
     mctest_assert_int_eq (etalon_stat.st_blksize, test_stat.st_blksize);

@@ -967,7 +967,9 @@ vfs_s_default_stat (struct vfs_class *me, mode_t mode)
     st.st_mode = mode;
     st.st_ino = 0;
     st.st_dev = 0;
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
     st.st_rdev = 0;
+#endif
     st.st_uid = getuid ();
     st.st_gid = getgid ();
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE

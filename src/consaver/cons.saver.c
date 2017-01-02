@@ -186,9 +186,13 @@ main (int argc, char **argv)
         die ();
     if (fstat (console_fd, &st) < 0 || !S_ISCHR (st.st_mode))
         die ();
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
     if ((st.st_rdev & 0xff00) != 0x0400)
         die ();
     console_minor = (int) (st.st_rdev & 0x00ff);
+#else
+    console_minor = 1;          /* FIXME */
+#endif
     if (console_minor < 1 || console_minor > 63)
         die ();
     if (st.st_uid != uid)
