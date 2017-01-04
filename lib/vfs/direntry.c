@@ -975,13 +975,46 @@ vfs_s_default_stat (struct vfs_class *me, mode_t mode)
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
     st.st_blksize = 512;
 #endif
-#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-    st.st_blocks = 0;
-#endif
     st.st_size = 0;
     st.st_mtime = st.st_atime = st.st_ctime = time (NULL);
 
+    vfs_adjust_stat (&st);
+
     return &st;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Calculate number of st_blocks using st_size and st_blksize.
+ * In according to stat(2), st_blocks is the size in 512-byte units.
+ *
+ * @param s stat info
+ */
+
+void
+vfs_adjust_stat (struct stat *s)
+{
+#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
+    if (s->st_size == 0)
+        s->st_blocks = 0;
+    else
+    {
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
+        blkcnt_t ioblocks;
+        blksize_t ioblock_size;
+
+        /* 1. Calculate how many IO blocks are occupied */
+        ioblocks = 1 + (s->st_size - 1) / s->st_blksize;
+        /* 2. Calculate size of st_blksize in 512-byte units */
+        ioblock_size = 1 + (s->st_blksize - 1) / 512;
+        /* 3. Calculate number of blocks */
+        s->st_blocks = ioblocks * ioblock_size;
+#else
+        /* Let IO block size is 512 bytes */
+        s->st_blocks = 1 + (s->st_size - 1) / 512;
+#endif /* HAVE_STRUCT_STAT_ST_BLKSIZE */
+    }
+#endif /* HAVE_STRUCT_STAT_ST_BLOCKS */
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -449,6 +449,7 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *heade
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
     st->st_blksize = 8 * 1024;  /* FIXME */
 #endif
+    vfs_adjust_stat (st);
 }
 
 /* --------------------------------------------------------------------------------------------- */

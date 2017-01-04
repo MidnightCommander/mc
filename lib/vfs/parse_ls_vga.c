@@ -813,9 +813,7 @@ vfs_parse_ls_lga (const char *p, struct stat * s, char **filename, char **linkna
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
     s->st_blksize = 512;
 #endif
-#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-    s->st_blocks = (s->st_size + 511) / 512;
-#endif
+    vfs_adjust_stat (s);
 
     if (num_spaces != NULL)
     {

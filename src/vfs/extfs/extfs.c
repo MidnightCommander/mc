@@ -1095,9 +1095,7 @@ extfs_stat_move (struct stat *buf, const struct inode *inode)
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
     buf->st_blksize = RECORDSIZE;
 #endif
-#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-    buf->st_blocks = (inode->size + RECORDSIZE - 1) / RECORDSIZE;
-#endif
+    vfs_adjust_stat (buf);
     buf->st_atime = inode->atime;
     buf->st_mtime = inode->mtime;
     buf->st_ctime = inode->ctime;

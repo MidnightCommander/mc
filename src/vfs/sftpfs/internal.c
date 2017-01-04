@@ -131,11 +131,8 @@ sftpfs_blksize (struct stat *s)
 {
 #ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
     s->st_blksize = LIBSSH2_CHANNEL_WINDOW_DEFAULT;     /* FIXME */
-#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
-    /* In according to stat(2), this is the size in 512-byte units */
-    s->st_blocks = 1 + ((s->st_size - 1) / 512);
-#endif /* HAVE_STRUCT_STAT_ST_BLOCKS */
 #endif /* HAVE_STRUCT_STAT_ST_BLKSIZE */
+    vfs_adjust_stat (s);
 }
 
 /* --------------------------------------------------------------------------------------------- */

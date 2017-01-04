@@ -179,6 +179,7 @@ fish_default_stat (struct vfs_class *me)
 
     s = vfs_s_default_stat (me, S_IFDIR | 0755);
     fish_set_blksize (s);
+    vfs_adjust_stat (s);
 
     return s;
 }
