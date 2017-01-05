@@ -39,9 +39,12 @@ data_files_to_distribute = \
 	data/lslR.3.spaces-iso-noslash.output \
 	data/lslR.README \
 	data/rpm.README \
-	data/rpm.env_vars \
-	data/rpm.input \
-	data/rpm.output \
+	data/rpm.custom.env_vars \
+	data/rpm.custom.input \
+	data/rpm.custom.output \
+	data/rpm.glib.env_vars \
+	data/rpm.glib.input \
+	data/rpm.glib.output \
 	data/rpm.rewrite.sh \
 	data/u7z.README \
 	data/u7z.complex.env_vars \

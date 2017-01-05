@@ -1,2 +1,2 @@
 
-EXTRA_DIST = rpm2tags.pl
+EXTRA_DIST = rpm2tags.pl test.spec
