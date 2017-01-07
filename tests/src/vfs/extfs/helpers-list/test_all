@@ -178,6 +178,25 @@ find_helper() {
 }
 
 #
+# Export variables to be used by tests.
+#
+# See README for their documentation.
+#
+export_useful_variables() {
+  local input="$1"
+
+  # Frequently used variables:
+  MC_TEST_EXTFS_LIST_CMD="mc_xcat $input"  # reason #2 we don't allow spaces in pathnames.
+  export MC_TEST_EXTFS_LIST_CMD
+
+  # Infrequently used variables:
+  MC_TEST_EXTFS_INPUT=$input
+  export MC_TEST_EXTFS_INPUT
+  MC_TEST_EXTFS_DATA_DIR=$data_dir
+  export MC_TEST_EXTFS_DATA_DIR
+}
+
+#
 # The crux of this program.
 #
 run() {
@@ -235,8 +254,7 @@ run() {
     #
 
     (
-    MC_TEST_EXTFS_LIST_CMD="mc_xcat $input"  # reason #2 we don't allow spaces in pathnames.
-    export MC_TEST_EXTFS_LIST_CMD
+    export_useful_variables "$input"
     if [ -f "$env_vars_file" ]; then
       set -a  # "allexport: Export all variables assigned to."
       . "$env_vars_file"
