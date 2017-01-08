@@ -107,7 +107,7 @@ doc: README.html
 
 # (Thanks to VPATH we don't need to write "$(srcdir)/README". doc/hlp/Makefile.am needlessly does this.)
 README.html: README
-	pandoc --include-in-header=$(srcdir)/README.css.inc -N --old-dashes --toc --standalone -o $@ $<
+	pandoc --include-in-header=$(srcdir)/README.css.inc -N --old-dashes --toc --toc-depth=4 --standalone -o $@ $<
 
 EXTRA_DIST += README.css.inc
 CLEANFILES += README.html
