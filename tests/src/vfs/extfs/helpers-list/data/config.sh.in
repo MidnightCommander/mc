@@ -1,0 +1,9 @@
+#
+# Configure-time parameters that may be useful in tests.
+#
+# See README for how to use this file.
+#
+PERL="@PERL@"
+AWK="@AWK@"
+PYTHON="@PYTHON@"
+RUBY="@RUBY@"

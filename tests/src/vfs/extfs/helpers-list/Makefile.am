@@ -92,12 +92,16 @@ run:
 # The 'abs_' isn't mandatory. It lets you move this script out of the build tree.
 	@echo '"$(abs_srcdir)"/test_all "$$@" \' >> $@
 	@echo '  --data-dir "$(abs_srcdir)/data" \' >> $@
+	@echo '  --data-build-dir "$(abs_builddir)/data" \' >> $@
 # Before installation, some helpers are in the build tree, some in the src tree.
 	@echo '  --helpers-dir "$(abs_top_builddir)/src/vfs/extfs/helpers" \' >> $@
 	@echo '  --helpers-dir "$(abs_top_srcdir)/src/vfs/extfs/helpers"' >> $@
 	@chmod +x $@
 # (We can alternatively create run from a run.in template
 # with 'AC_CONFIG_FILES[run, chmod +x run]'.)
+
+# Whenever we change the recipe above, we need to regenerate the 'run' script:
+run: Makefile
 
 #
 # Documentation
