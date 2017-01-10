@@ -189,6 +189,12 @@ sftpfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
             libssh2_sftp_last_error (super_data->sftp_session) == LIBSSH2_FX_PERMISSION_DENIED)
             return -EACCES;
 
+        /* perhaps the copy function tries to stat destination file
+           to make sure it's not overwriting anything */
+        if (res == LIBSSH2_ERROR_SFTP_PROTOCOL
+            && libssh2_sftp_last_error (super_data->sftp_session) == LIBSSH2_FX_NO_SUCH_FILE)
+            return -ENOENT;
+
         if (res != LIBSSH2_ERROR_EAGAIN)
         {
             sftpfs_ssherror_to_gliberror (super_data, res, mcerror);
@@ -277,6 +283,12 @@ sftpfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
         if (res == LIBSSH2_ERROR_SFTP_PROTOCOL &&
             libssh2_sftp_last_error (super_data->sftp_session) == LIBSSH2_FX_PERMISSION_DENIED)
             return -EACCES;
+
+        /* perhaps the copy function tries to stat destination file
+           to make sure it's not overwriting anything */
+        if (res == LIBSSH2_ERROR_SFTP_PROTOCOL
+            && libssh2_sftp_last_error (super_data->sftp_session) == LIBSSH2_FX_NO_SUCH_FILE)
+            return -ENOENT;
 
         if (res != LIBSSH2_ERROR_EAGAIN)
         {
@@ -501,6 +513,13 @@ sftpfs_chmod (const vfs_path_t * vpath, mode_t mode, GError ** mcerror)
             libssh2_sftp_last_error (super_data->sftp_session) == LIBSSH2_FX_PERMISSION_DENIED)
             return -EACCES;
 
+        if (res == LIBSSH2_ERROR_SFTP_PROTOCOL
+            && libssh2_sftp_last_error (super_data->sftp_session) == LIBSSH2_FX_FAILURE)
+        {
+            res = 0;            /* need something like ftpfs_ignore_chattr_errors */
+            break;
+        }
+
         if (res != LIBSSH2_ERROR_EAGAIN)
         {
             sftpfs_ssherror_to_gliberror (super_data, res, mcerror);
@@ -526,6 +545,17 @@ sftpfs_chmod (const vfs_path_t * vpath, mode_t mode, GError ** mcerror)
                                   LIBSSH2_SFTP_SETSTAT, &attrs);
         if (res >= 0)
             break;
+
+        if (res == LIBSSH2_ERROR_SFTP_PROTOCOL
+            && libssh2_sftp_last_error (super_data->sftp_session) == LIBSSH2_FX_NO_SUCH_FILE)
+            return -ENOENT;
+
+        if (res == LIBSSH2_ERROR_SFTP_PROTOCOL
+            && libssh2_sftp_last_error (super_data->sftp_session) == LIBSSH2_FX_FAILURE)
+        {
+            res = 0;            /* need something like ftpfs_ignore_chattr_errors */
+            break;
+        }
 
         if (res != LIBSSH2_ERROR_EAGAIN)
         {
