@@ -1602,7 +1602,13 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         if (S_ISCHR (src_stat.st_mode) || S_ISBLK (src_stat.st_mode) || S_ISFIFO (src_stat.st_mode)
             || S_ISNAM (src_stat.st_mode) || S_ISSOCK (src_stat.st_mode))
         {
-            while (mc_mknod (dst_vpath, src_stat.st_mode & ctx->umask_kill, src_stat.st_rdev) < 0
+            dev_t rdev = 0;
+
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
+            rdev = src_stat.st_rdev;
+#endif
+
+            while (mc_mknod (dst_vpath, src_stat.st_mode & ctx->umask_kill, rdev) < 0
                    && !ctx->skip_all)
             {
                 return_status = file_error (_("Cannot create special file \"%s\"\n%s"), dst_path);

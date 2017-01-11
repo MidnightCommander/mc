@@ -388,6 +388,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
         /* cppcheck-suppress syntaxError */
     case S_IFNAM:
 #endif
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
         if ((st->st_size != 0) && (st->st_rdev == 0x0001))
         {
             /* FIXME: representation of major/minor differs between */
@@ -395,6 +396,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
             st->st_rdev = (unsigned) st->st_size;
             st->st_size = 0;
         }
+#endif
         break;
     default:
         break;
@@ -583,7 +585,9 @@ cpio_read_bin_head (struct vfs_class *me, struct vfs_s_super *super)
     st.st_nlink = u.buf.c_nlink;
     st.st_uid = u.buf.c_uid;
     st.st_gid = u.buf.c_gid;
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
     st.st_rdev = u.buf.c_rdev;
+#endif
     st.st_size = (u.buf.c_filesizes[0] << 16) | u.buf.c_filesizes[1];
     st.st_atime = st.st_mtime = st.st_ctime = (u.buf.c_mtimes[0] << 16) | u.buf.c_mtimes[1];
 
@@ -650,7 +654,9 @@ cpio_read_oldc_head (struct vfs_class *me, struct vfs_s_super *super)
     u.st.st_nlink = hd.c_nlink;
     u.st.st_uid = hd.c_uid;
     u.st.st_gid = hd.c_gid;
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
     u.st.st_rdev = hd.c_rdev;
+#endif
     u.st.st_size = hd.c_filesize;
     u.st.st_atime = u.st.st_mtime = u.st.st_ctime = hd.c_mtime;
 
@@ -726,7 +732,9 @@ cpio_read_crc_head (struct vfs_class *me, struct vfs_s_super *super)
     u.st.st_nlink = hd.c_nlink;
     u.st.st_uid = hd.c_uid;
     u.st.st_gid = hd.c_gid;
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
     u.st.st_rdev = makedev (hd.c_rdev, hd.c_rdevmin);
+#endif
     u.st.st_size = hd.c_filesize;
     u.st.st_atime = u.st.st_mtime = u.st.st_ctime = hd.c_mtime;
 

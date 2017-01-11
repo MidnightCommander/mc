@@ -226,6 +226,11 @@ extern int use_netrc;
 
 /* lib/vfs/direntry.c: */
 void *vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode);
+int vfs_s_stat (const vfs_path_t * vpath, struct stat *buf);
+int vfs_s_lstat (const vfs_path_t * vpath, struct stat *buf);
+int vfs_s_fstat (void *fh, struct stat *buf);
+
+void vfs_adjust_stat (struct stat *s);
 
 vfsid vfs_getid (const vfs_path_t * vpath);
 

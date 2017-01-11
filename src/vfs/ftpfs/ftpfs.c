@@ -244,6 +244,7 @@ static char buffer[BUF_MEDIUM];
 static char *netrc;
 static const char *netrcp;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -267,6 +268,31 @@ static int ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super);
 static int ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super,
                                const char *netrcpass);
 static int ftpfs_netrc_lookup (const char *host, char **login, char **pass);
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+ftpfs_set_blksize (struct stat *s)
+{
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
+    /* redefine block size */
+    s->st_blksize = 64 * 1024;  /* FIXME */
+#endif
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static struct stat *
+ftpfs_default_stat (struct vfs_class *me)
+{
+    struct stat *s;
+
+    s = vfs_s_default_stat (me, S_IFDIR | 0755);
+    ftpfs_set_blksize (s);
+    vfs_adjust_stat (s);
+
+    return s;
+}
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -991,8 +1017,7 @@ ftpfs_open_archive (struct vfs_s_super *super,
     SUP->ctl_connection_busy = 0;
     super->name = g_strdup (PATH_SEP_STR);
     super->root =
-        vfs_s_new_inode (vpath_element->class, super,
-                         vfs_s_default_stat (vpath_element->class, S_IFDIR | 0755));
+        vfs_s_new_inode (vpath_element->class, super, ftpfs_default_stat (vpath_element->class));
 
     return ftpfs_open_archive_int (vpath_element->class, super);
 }
@@ -2021,6 +2046,42 @@ ftpfs_send_command (const vfs_path_t * vpath, const char *cmd, int flags)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
+ftpfs_stat (const vfs_path_t * vpath, struct stat *buf)
+{
+    int ret;
+
+    ret = vfs_s_stat (vpath, buf);
+    ftpfs_set_blksize (buf);
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+ftpfs_lstat (const vfs_path_t * vpath, struct stat *buf)
+{
+    int ret;
+
+    ret = vfs_s_lstat (vpath, buf);
+    ftpfs_set_blksize (buf);
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+ftpfs_fstat (void *vfs_info, struct stat *buf)
+{
+    int ret;
+
+    ret = vfs_s_fstat (vfs_info, buf);
+    ftpfs_set_blksize (buf);
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
 ftpfs_chmod (const vfs_path_t * vpath, mode_t mode)
 {
     char buf[BUF_SMALL];
@@ -2608,6 +2669,9 @@ init_ftpfs (void)
     vfs_ftpfs_ops.prefix = "ftp";
     vfs_ftpfs_ops.done = &ftpfs_done;
     vfs_ftpfs_ops.fill_names = ftpfs_fill_names;
+    vfs_ftpfs_ops.stat = ftpfs_stat;
+    vfs_ftpfs_ops.lstat = ftpfs_lstat;
+    vfs_ftpfs_ops.fstat = ftpfs_fstat;
     vfs_ftpfs_ops.chmod = ftpfs_chmod;
     vfs_ftpfs_ops.chown = ftpfs_chown;
     vfs_ftpfs_ops.unlink = ftpfs_unlink;

@@ -401,7 +401,10 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *heade
         st->st_mode |= S_IFREG;
 
     st->st_dev = 0;
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
     st->st_rdev = 0;
+#endif
+
     switch (arch->type)
     {
     case TAR_USTAR:
@@ -420,9 +423,12 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *heade
         {
         case LF_BLK:
         case LF_CHR:
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
             st->st_rdev =
-                (tar_from_oct (8, header->header.devmajor) << 8) |
-                tar_from_oct (8, header->header.devminor);
+                makedev (tar_from_oct (8, header->header.devmajor),
+                         tar_from_oct (8, header->header.devminor));
+#endif
+            break;
         default:
             break;
         }
@@ -439,6 +445,11 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *heade
         st->st_atime = tar_from_oct (1 + 12, header->header.unused.oldgnu.atime);
         st->st_ctime = tar_from_oct (1 + 12, header->header.unused.oldgnu.ctime);
     }
+
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
+    st->st_blksize = 8 * 1024;  /* FIXME */
+#endif
+    vfs_adjust_stat (st);
 }
 
 /* --------------------------------------------------------------------------------------------- */
