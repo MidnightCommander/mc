@@ -54,6 +54,37 @@ sftpfs_is_sftp_error (LIBSSH2_SFTP * sftp_session, int sftp_res, int sftp_error)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+sftpfs_attr_to_stat (const LIBSSH2_SFTP_ATTRIBUTES * attrs, struct stat *s)
+{
+    if ((attrs->flags & LIBSSH2_SFTP_ATTR_UIDGID) != 0)
+    {
+        s->st_uid = attrs->uid;
+        s->st_gid = attrs->gid;
+    }
+
+    if ((attrs->flags & LIBSSH2_SFTP_ATTR_ACMODTIME) != 0)
+    {
+        s->st_atime = attrs->atime;
+        s->st_mtime = attrs->mtime;
+        s->st_ctime = attrs->mtime;
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+        s->st_atim.tv_nsec = s->st_mtim.tv_nsec = s->st_ctim.tv_nsec = 0;
+#endif
+    }
+
+    if ((attrs->flags & LIBSSH2_SFTP_ATTR_SIZE) != 0)
+    {
+        s->st_size = attrs->filesize;
+        sftpfs_blksize (s);
+    }
+
+    if ((attrs->flags & LIBSSH2_SFTP_ATTR_PERMISSIONS) != 0)
+        s->st_mode = attrs->permissions;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -212,30 +243,7 @@ sftpfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
     }
     while (res == LIBSSH2_ERROR_EAGAIN);
 
-    if ((attrs.flags & LIBSSH2_SFTP_ATTR_UIDGID) != 0)
-    {
-        buf->st_uid = attrs.uid;
-        buf->st_gid = attrs.gid;
-    }
-
-    if ((attrs.flags & LIBSSH2_SFTP_ATTR_ACMODTIME) != 0)
-    {
-        buf->st_atime = attrs.atime;
-        buf->st_mtime = attrs.mtime;
-        buf->st_ctime = attrs.mtime;
-#ifdef HAVE_STRUCT_STAT_ST_MTIM
-        buf->st_atim.tv_nsec = buf->st_mtim.tv_nsec = buf->st_ctim.tv_nsec = 0;
-#endif
-    }
-
-    if ((attrs.flags & LIBSSH2_SFTP_ATTR_SIZE) != 0)
-    {
-        buf->st_size = attrs.filesize;
-        sftpfs_blksize (buf);
-    }
-
-    if ((attrs.flags & LIBSSH2_SFTP_ATTR_PERMISSIONS) != 0)
-        buf->st_mode = attrs.permissions;
+    sftpfs_attr_to_stat (&attrs, buf);
 
     return 0;
 }
@@ -306,30 +314,8 @@ sftpfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
     while (res == LIBSSH2_ERROR_EAGAIN);
 
     buf->st_nlink = 1;
-    if ((attrs.flags & LIBSSH2_SFTP_ATTR_UIDGID) != 0)
-    {
-        buf->st_uid = attrs.uid;
-        buf->st_gid = attrs.gid;
-    }
 
-    if ((attrs.flags & LIBSSH2_SFTP_ATTR_ACMODTIME) != 0)
-    {
-        buf->st_atime = attrs.atime;
-        buf->st_mtime = attrs.mtime;
-        buf->st_ctime = attrs.mtime;
-#ifdef HAVE_STRUCT_STAT_ST_MTIM
-        buf->st_atim.tv_nsec = buf->st_mtim.tv_nsec = buf->st_ctim.tv_nsec = 0;
-#endif
-    }
-
-    if ((attrs.flags & LIBSSH2_SFTP_ATTR_SIZE) != 0)
-    {
-        buf->st_size = attrs.filesize;
-        sftpfs_blksize (buf);
-    }
-
-    if ((attrs.flags & LIBSSH2_SFTP_ATTR_PERMISSIONS) != 0)
-        buf->st_mode = attrs.permissions;
+    sftpfs_attr_to_stat (&attrs, buf);
 
     return 0;
 }
