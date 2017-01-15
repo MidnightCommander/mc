@@ -56,9 +56,9 @@ EOS
 ############################ Global variables ##############################
 
 # The directories used.
-DATA_DIR=
-HELPERS_DIR1=
-HELPERS_DIR2=
+data_dir=
+helpers_dir1=
+helpers_dir2=
 
 opt_create_output=no        # "yes" if '--create-output' provided.
 opt_run_mcdiff_on_error=no  # "yes" if '--mcdiff' provided.
@@ -113,12 +113,12 @@ has_colors() {
 
 init_colors() {
   if has_colors; then
-    ESC=$(printf '\033')  # for portability
-    C_bold="$ESC[1m"
-    C_green="$ESC[1;32m"
-    C_red="$ESC[1;31m"
-    C_magenta="$ESC[1;35m"
-    C_norm="$ESC[0m"
+    local esc="$(printf '\033')"  # for portability
+    C_bold="$esc[1m"
+    C_green="$esc[1;32m"
+    C_red="$esc[1;31m"
+    C_magenta="$esc[1;35m"
+    C_norm="$esc[0m"
   fi
 }
 
@@ -178,6 +178,25 @@ find_helper() {
 }
 
 #
+# Export variables to be used by tests.
+#
+# See README for their documentation.
+#
+export_useful_variables() {
+  local input="$1"
+
+  # Frequently used variables:
+  MC_TEST_EXTFS_LIST_CMD="mc_xcat $input"  # reason #2 we don't allow spaces in pathnames.
+  export MC_TEST_EXTFS_LIST_CMD
+
+  # Infrequently used variables:
+  MC_TEST_EXTFS_INPUT=$input
+  export MC_TEST_EXTFS_INPUT
+  MC_TEST_EXTFS_DATA_DIR=$data_dir
+  export MC_TEST_EXTFS_DATA_DIR
+}
+
+#
 # The crux of this program.
 #
 run() {
@@ -185,22 +204,22 @@ run() {
   local error_count=0
   local pass_count=0
 
-  for INPUT in "$DATA_DIR"/*.input; do
+  for input in "$data_dir"/*.input; do
 
-    has_string "$INPUT" '\*' && break  # we can't use 'shopt -s nullglob' as it's bash-specific.
+    has_string "$input" '\*' && break  # we can't use 'shopt -s nullglob' as it's bash-specific.
 
-    header "Testing $INPUT"
+    header "Testing $input"
 
-    has_string "$INPUT" " " && die "Error: filename contains spaces."
+    has_string "$input" " " && die "Error: filename contains spaces."
 
     #
     # Set up variables:
     #
 
-    local helper_name="$(basename_sans_extensions "$INPUT")"
-    local expected_parsed_output="${INPUT%.input}.output"
-    local env_vars_file="${INPUT%.input}.env_vars"
-    local args_file="${INPUT%.input}.args"
+    local helper_name="$(basename_sans_extensions "$input")"
+    local expected_parsed_output="${input%.input}.output"
+    local env_vars_file="${input%.input}.env_vars"
+    local args_file="${input%.input}.args"
 
     local do_create_output=no
 
@@ -220,9 +239,9 @@ run() {
       fi
     fi
 
-    find_helper "$helper_name" "$HELPERS_DIR1" ||
-      find_helper "$helper_name" "$HELPERS_DIR2" ||
-        die "I can't find helper '$helper_name' in either $HELPERS_DIR1 or $HELPERS_DIR2"
+    find_helper "$helper_name" "$helpers_dir1" ||
+      find_helper "$helper_name" "$helpers_dir2" ||
+        die "I can't find helper '$helper_name' in either $helpers_dir1 or $helpers_dir2"
 
     local extra_parser_args=""
     [ -f "$args_file" ] && extra_parser_args="$(cat "$args_file")"
@@ -235,8 +254,7 @@ run() {
     #
 
     (
-    MC_TEST_EXTFS_LIST_CMD="mc_xcat $INPUT"  # reason #2 we don't allow spaces in pathnames.
-    export MC_TEST_EXTFS_LIST_CMD
+    export_useful_variables "$input"
     if [ -f "$env_vars_file" ]; then
       set -a  # "allexport: Export all variables assigned to."
       . "$env_vars_file"
@@ -255,7 +273,7 @@ run() {
        err
        err "You may try running the helper yourself with:"
        err
-       err "  \$ MC_TEST_EXTFS_LIST_CMD=\"mc_xcat $INPUT\" \\"
+       err "  \$ MC_TEST_EXTFS_LIST_CMD=\"mc_xcat $input\" \\"
        err "      $helper_CMD list /dev/null"
        err
        continue
@@ -296,7 +314,7 @@ run() {
        err
        if [ $opt_run_mcdiff_on_error = "yes" ]; then
          notice "Hit ENTER to launch mcdiff ..."
-         read DUMMY_VAR  # dash needs this.
+         read dummy_var  # dash needs this.
          ${MCDIFF:-mcdiff} "$expected_parsed_output" "$actual_parsed_output"
        else
          notice "Tip: invoke this program with '--mcdiff' to automatically launch"
@@ -325,14 +343,14 @@ parse_command_line_arguments() {
   while [ -n "$1" ]; do
     case "$1" in
       --data-dir)
-        DATA_DIR=$2
+        data_dir=$2
         shift 2
         ;;
       --helpers-dir)
-        if [ -z "$HELPERS_DIR1" ]; then
-          HELPERS_DIR1=$2
+        if [ -z "$helpers_dir1" ]; then
+          helpers_dir1=$2
         else
-          HELPERS_DIR2=$2
+          helpers_dir2=$2
         fi
         shift 2
         ;;
@@ -359,12 +377,12 @@ parse_command_line_arguments() {
 # Check that everything is set up correctly.
 #
 verify_setup() {
-  [ -n "$DATA_DIR" ] || die "You didn't specify the data dir (--data-dir). Run me with --help for info."
-  [ -n "$HELPERS_DIR1" ] || die "You didn't specify the helpers dir (--helpers-dir). Run me with --help for info."
-  [ -z "$HELPERS_DIR2" ] && HELPERS_DIR2=$HELPERS_DIR1  # we're being lazy.
+  [ -n "$data_dir" ] || die "You didn't specify the data dir (--data-dir). Run me with --help for info."
+  [ -n "$helpers_dir1" ] || die "You didn't specify the helpers dir (--helpers-dir). Run me with --help for info."
+  [ -z "$helpers_dir2" ] && helpers_dir2=$helpers_dir1  # we're being lazy.
 
   local dir
-  for dir in "$DATA_DIR" "$HELPERS_DIR1" "$HELPERS_DIR2"; do
+  for dir in "$data_dir" "$helpers_dir1" "$helpers_dir2"; do
     assert_dir_exists "$dir"
     has_string "$dir" " " && die "$dir: Sorry, spaces aren't allowed in pathnames."  # search "reason", twice, above.
   done

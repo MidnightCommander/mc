@@ -16,4 +16,8 @@ h1, h2, h3 {
   font-family: sans-serif;
 }
 
+:target {
+  background: linear-gradient(45deg, #FFF 0%, #7CC 100%);
+}
+
 </style>

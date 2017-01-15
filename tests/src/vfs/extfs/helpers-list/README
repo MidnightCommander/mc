@@ -142,8 +142,12 @@ This is the tester itself. You invoke it with `make check`, or with the
 `run` script. Invoking it directly is a bit involving because you need to
 provide it with 2 or 3 directory paths. `run` does this work for you.
 
-MC_TEST_EXTFS_LIST_CMD
-----------------------
+Environment variables
+---------------------
+
+### Frequently used variables ###
+
+#### MC_TEST_EXTFS_LIST_CMD ####
 
 When a helper runs under the tester, the environment variable
 `MC_TEST_EXTFS_LIST_CMD` holds the command that's to provide input. The
@@ -169,3 +173,15 @@ To make this helper testable, we need to change the first line to:
 The command in `MC_TEST_EXTFS_LIST_CMD` is a black-box for the helper,
 and it intentionally ignores any arguments passed to it (so that `lq
 "$ARCHIVE"`, above, won't cause problems).
+
+### Infrequently used variables ###
+
+#### MC_TEST_EXTFS_INPUT ####
+
+Contains the path of the [input file]. You'll more commonly use
+[MC_TEST_EXTFS_LIST_CMD], though.
+
+#### MC_TEST_EXTFS_DATA_DIR ####
+
+Contains the path of [the data folder]. Use it when you need to
+construct the paths of other files you store there.
