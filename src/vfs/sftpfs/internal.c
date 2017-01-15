@@ -42,8 +42,16 @@ GString *sftpfs_filename_buffer = NULL;
 
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+sftpfs_is_sftp_error (LIBSSH2_SFTP * sftp_session, int sftp_res, int sftp_error)
+{
+    return (sftp_res == LIBSSH2_ERROR_SFTP_PROTOCOL &&
+            libssh2_sftp_last_error (sftp_session) == (unsigned long) sftp_error);
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -185,14 +193,12 @@ sftpfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
         if (res >= 0)
             break;
 
-        if (res == LIBSSH2_ERROR_SFTP_PROTOCOL &&
-            libssh2_sftp_last_error (super_data->sftp_session) == LIBSSH2_FX_PERMISSION_DENIED)
+        if (sftpfs_is_sftp_error (super_data->sftp_session, res, LIBSSH2_FX_PERMISSION_DENIED))
             return -EACCES;
 
         /* perhaps the copy function tries to stat destination file
            to make sure it's not overwriting anything */
-        if (res == LIBSSH2_ERROR_SFTP_PROTOCOL
-            && libssh2_sftp_last_error (super_data->sftp_session) == LIBSSH2_FX_NO_SUCH_FILE)
+        if (sftpfs_is_sftp_error (super_data->sftp_session, res, LIBSSH2_FX_NO_SUCH_FILE))
             return -ENOENT;
 
         if (res != LIBSSH2_ERROR_EAGAIN)
@@ -280,14 +286,12 @@ sftpfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
         if (res >= 0)
             break;
 
-        if (res == LIBSSH2_ERROR_SFTP_PROTOCOL &&
-            libssh2_sftp_last_error (super_data->sftp_session) == LIBSSH2_FX_PERMISSION_DENIED)
+        if (sftpfs_is_sftp_error (super_data->sftp_session, res, LIBSSH2_FX_PERMISSION_DENIED))
             return -EACCES;
 
         /* perhaps the copy function tries to stat destination file
            to make sure it's not overwriting anything */
-        if (res == LIBSSH2_ERROR_SFTP_PROTOCOL
-            && libssh2_sftp_last_error (super_data->sftp_session) == LIBSSH2_FX_NO_SUCH_FILE)
+        if (sftpfs_is_sftp_error (super_data->sftp_session, res, LIBSSH2_FX_NO_SUCH_FILE))
             return -ENOENT;
 
         if (res != LIBSSH2_ERROR_EAGAIN)
@@ -509,12 +513,10 @@ sftpfs_chmod (const vfs_path_t * vpath, mode_t mode, GError ** mcerror)
         if (res >= 0)
             break;
 
-        if (res == LIBSSH2_ERROR_SFTP_PROTOCOL &&
-            libssh2_sftp_last_error (super_data->sftp_session) == LIBSSH2_FX_PERMISSION_DENIED)
+        if (sftpfs_is_sftp_error (super_data->sftp_session, res, LIBSSH2_FX_PERMISSION_DENIED))
             return -EACCES;
 
-        if (res == LIBSSH2_ERROR_SFTP_PROTOCOL
-            && libssh2_sftp_last_error (super_data->sftp_session) == LIBSSH2_FX_FAILURE)
+        if (sftpfs_is_sftp_error (super_data->sftp_session, res, LIBSSH2_FX_FAILURE))
         {
             res = 0;            /* need something like ftpfs_ignore_chattr_errors */
             break;
@@ -546,12 +548,10 @@ sftpfs_chmod (const vfs_path_t * vpath, mode_t mode, GError ** mcerror)
         if (res >= 0)
             break;
 
-        if (res == LIBSSH2_ERROR_SFTP_PROTOCOL
-            && libssh2_sftp_last_error (super_data->sftp_session) == LIBSSH2_FX_NO_SUCH_FILE)
+        if (sftpfs_is_sftp_error (super_data->sftp_session, res, LIBSSH2_FX_NO_SUCH_FILE))
             return -ENOENT;
 
-        if (res == LIBSSH2_ERROR_SFTP_PROTOCOL
-            && libssh2_sftp_last_error (super_data->sftp_session) == LIBSSH2_FX_FAILURE)
+        if (sftpfs_is_sftp_error (super_data->sftp_session, res, LIBSSH2_FX_FAILURE))
         {
             res = 0;            /* need something like ftpfs_ignore_chattr_errors */
             break;
@@ -567,6 +567,7 @@ sftpfs_chmod (const vfs_path_t * vpath, mode_t mode, GError ** mcerror)
         mc_return_val_if_error (mcerror, -1);
     }
     while (res == LIBSSH2_ERROR_EAGAIN);
+
     return res;
 }
 
