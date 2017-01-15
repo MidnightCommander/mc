@@ -185,3 +185,23 @@ Contains the path of the [input file]. You'll more commonly use
 
 Contains the path of [the data folder]. Use it when you need to
 construct the paths of other files you store there.
+
+#### MC_TEST_EXTFS_DATA_BUILD_DIR ####
+
+Contains the path of [the data folder], but in the *build* tree. This is
+where *.in files from the source tree end up. If you don't know what
+these are, you can safely ignore this variable.
+
+#### MC_TEST_EXTFS_CONFIG_SH ####
+
+Contains the path of *config.sh*, a file you can "source" into shell
+scripts (including the [environment file]) to gain access to values set
+when Midnight Commander was compiled. Example:
+
+    . "$MC_TEST_EXTFS_CONFIG_SH"
+    $PERL -e 'print "hello"'
+
+Currently, this variable is equal to
+"[$MC_TEST_EXTFS_DATA_BUILD_DIR][MC_TEST_EXTFS_DATA_BUILD_DIR]/config.sh",
+but you're advised to use only `$MC_TEST_EXTFS_CONFIG_SH` as we may
+change this file's location in the future.

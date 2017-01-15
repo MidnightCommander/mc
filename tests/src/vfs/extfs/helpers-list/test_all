@@ -31,7 +31,8 @@ SYNOPSIS
 
   $(basename "$0") \\
      --data-dir /path/to/where/data/files/are/stored \\
-     --helpers-dir /path/to/where/helpers/are/stored
+     --helpers-dir /path/to/where/helpers/are/stored \\
+     --data-build-dir /path/to/where/config.sh/is/stored
 
 (But you're more likely to invoke this program with the 'run' script
 created by 'make check'; or by 'make check' itself.)
@@ -43,10 +44,14 @@ their output to the expected output.
 
 See README for full details.
 
-You need to tell this program two things: where the helpers are stored,
-and where the "data files" are stored. The data files are *.input files
-that are fed to the helpers and *.output files that are the correct
+You need to tell this program primarily two things: where the helpers are
+stored, and where the "data files" are stored. The data files are *.input
+files that are fed to the helpers and *.output files that are the correct
 output expected from these helpers.
+
+You also need to tell this program where the build flavor of the "data
+files" is stored. Most notably this is where the 'config.sh' file is
+created during build time. You do this with '--data-build-dir'.
 
 EOS
 }
@@ -57,6 +62,7 @@ EOS
 
 # The directories used.
 data_dir=
+data_build_dir=
 helpers_dir1=
 helpers_dir2=
 
@@ -178,6 +184,13 @@ find_helper() {
 }
 
 #
+# Returns the path of 'config.sh'.
+#
+path_of_config_sh() {
+  echo "$data_build_dir/config.sh"
+}
+
+#
 # Export variables to be used by tests.
 #
 # See README for their documentation.
@@ -194,6 +207,10 @@ export_useful_variables() {
   export MC_TEST_EXTFS_INPUT
   MC_TEST_EXTFS_DATA_DIR=$data_dir
   export MC_TEST_EXTFS_DATA_DIR
+  MC_TEST_EXTFS_DATA_BUILD_DIR=$data_build_dir
+  export MC_TEST_EXTFS_DATA_BUILD_DIR
+  MC_TEST_EXTFS_CONFIG_SH=$(path_of_config_sh)
+  export MC_TEST_EXTFS_CONFIG_SH
 }
 
 #
@@ -346,6 +363,10 @@ parse_command_line_arguments() {
         data_dir=$2
         shift 2
         ;;
+      --data-build-dir)
+        data_build_dir=$2
+        shift 2
+        ;;
       --helpers-dir)
         if [ -z "$helpers_dir1" ]; then
           helpers_dir1=$2
@@ -378,14 +399,17 @@ parse_command_line_arguments() {
 #
 verify_setup() {
   [ -n "$data_dir" ] || die "You didn't specify the data dir (--data-dir). Run me with --help for info."
+  [ -n "$data_build_dir" ] || die "You didn't specify the data build dir (--data-build-dir). Run me with --help for info."
   [ -n "$helpers_dir1" ] || die "You didn't specify the helpers dir (--helpers-dir). Run me with --help for info."
   [ -z "$helpers_dir2" ] && helpers_dir2=$helpers_dir1  # we're being lazy.
 
   local dir
-  for dir in "$data_dir" "$helpers_dir1" "$helpers_dir2"; do
+  for dir in "$data_dir" "$data_build_dir" "$helpers_dir1" "$helpers_dir2"; do
     assert_dir_exists "$dir"
     has_string "$dir" " " && die "$dir: Sorry, spaces aren't allowed in pathnames."  # search "reason", twice, above.
   done
+
+  [ -e "$(path_of_config_sh)" ] || die "Missing file $(path_of_config_sh). You probably have a mistake in the '--data-build-dir' path."
 
   local missing_progs=""
   check_prog() {

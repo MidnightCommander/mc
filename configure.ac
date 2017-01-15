@@ -643,6 +643,7 @@ tests/src/editor/test-data.txt
 tests/src/vfs/Makefile
 tests/src/vfs/extfs/Makefile
 tests/src/vfs/extfs/helpers-list/Makefile
+tests/src/vfs/extfs/helpers-list/data/config.sh
 ])
 
 AC_OUTPUT
