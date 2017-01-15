@@ -117,6 +117,44 @@ sftpfs_op_init (sftpfs_super_data_t ** super_data, const vfs_path_element_t ** p
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static int
+sftpfs_stat_init (sftpfs_super_data_t ** super_data, const vfs_path_element_t ** path_element,
+                  const vfs_path_t * vpath, GError ** mcerror, int stat_type,
+                  LIBSSH2_SFTP_ATTRIBUTES * attrs)
+{
+    int res;
+
+    if (!sftpfs_op_init (super_data, path_element, vpath, mcerror))
+        return -1;
+
+    do
+    {
+        const char *fixfname;
+        unsigned int fixfname_len;
+
+        fixfname = sftpfs_fix_filename ((*path_element)->path, &fixfname_len);
+
+        res = libssh2_sftp_stat_ex ((*super_data)->sftp_session, fixfname, fixfname_len,
+                                    stat_type, attrs);
+        if (res >= 0)
+            break;
+
+        if (sftpfs_is_sftp_error ((*super_data)->sftp_session, res, LIBSSH2_FX_PERMISSION_DENIED))
+            return -EACCES;
+
+        if (sftpfs_is_sftp_error ((*super_data)->sftp_session, res, LIBSSH2_FX_NO_SUCH_FILE))
+            return -ENOENT;
+
+        if (!sftpfs_waitsocket_or_error (*super_data, res, mcerror, NULL))
+            return -1;
+    }
+    while (res == LIBSSH2_ERROR_EAGAIN);
+
+    return res;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -251,34 +289,9 @@ sftpfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
     LIBSSH2_SFTP_ATTRIBUTES attrs;
     int res;
 
-    if (!sftpfs_op_init (&super_data, &path_element, vpath, mcerror))
-        return -1;
-
-    do
-    {
-        const char *fixfname;
-        unsigned int fixfname_len = 0;
-
-        fixfname = sftpfs_fix_filename (path_element->path, &fixfname_len);
-
-        res =
-            libssh2_sftp_stat_ex (super_data->sftp_session, fixfname, fixfname_len,
-                                  LIBSSH2_SFTP_LSTAT, &attrs);
-        if (res >= 0)
-            break;
-
-        if (sftpfs_is_sftp_error (super_data->sftp_session, res, LIBSSH2_FX_PERMISSION_DENIED))
-            return -EACCES;
-
-        /* perhaps the copy function tries to stat destination file
-           to make sure it's not overwriting anything */
-        if (sftpfs_is_sftp_error (super_data->sftp_session, res, LIBSSH2_FX_NO_SUCH_FILE))
-            return -ENOENT;
-
-        if (!sftpfs_waitsocket_or_error (super_data, res, mcerror, NULL))
-            return -1;
-    }
-    while (res == LIBSSH2_ERROR_EAGAIN);
+    res = sftpfs_stat_init (&super_data, &path_element, vpath, mcerror, LIBSSH2_SFTP_LSTAT, &attrs);
+    if (res == -1 || res == -EACCES || res == -ENOENT)
+        return res;
 
     sftpfs_attr_to_stat (&attrs, buf);
 
@@ -303,34 +316,9 @@ sftpfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
     LIBSSH2_SFTP_ATTRIBUTES attrs;
     int res;
 
-    if (!sftpfs_op_init (&super_data, &path_element, vpath, mcerror))
-        return -1;
-
-    do
-    {
-        const char *fixfname;
-        unsigned int fixfname_len = 0;
-
-        fixfname = sftpfs_fix_filename (path_element->path, &fixfname_len);
-
-        res =
-            libssh2_sftp_stat_ex (super_data->sftp_session, fixfname, fixfname_len,
-                                  LIBSSH2_SFTP_STAT, &attrs);
-        if (res >= 0)
-            break;
-
-        if (sftpfs_is_sftp_error (super_data->sftp_session, res, LIBSSH2_FX_PERMISSION_DENIED))
-            return -EACCES;
-
-        /* perhaps the copy function tries to stat destination file
-           to make sure it's not overwriting anything */
-        if (sftpfs_is_sftp_error (super_data->sftp_session, res, LIBSSH2_FX_NO_SUCH_FILE))
-            return -ENOENT;
-
-        if (!sftpfs_waitsocket_or_error (super_data, res, mcerror, NULL))
-            return -1;
-    }
-    while (res == LIBSSH2_ERROR_EAGAIN);
+    res = sftpfs_stat_init (&super_data, &path_element, vpath, mcerror, LIBSSH2_SFTP_STAT, &attrs);
+    if (res == -1 || res == -EACCES || res == -ENOENT)
+        return res;
 
     buf->st_nlink = 1;
 
@@ -449,35 +437,9 @@ sftpfs_chmod (const vfs_path_t * vpath, mode_t mode, GError ** mcerror)
     LIBSSH2_SFTP_ATTRIBUTES attrs;
     int res;
 
-    if (!sftpfs_op_init (&super_data, &path_element, vpath, mcerror))
-        return -1;
-
-    do
-    {
-        const char *fixfname;
-        unsigned int fixfname_len = 0;
-
-        fixfname = sftpfs_fix_filename (path_element->path, &fixfname_len);
-
-        res =
-            libssh2_sftp_stat_ex (super_data->sftp_session, fixfname, fixfname_len,
-                                  LIBSSH2_SFTP_LSTAT, &attrs);
-        if (res >= 0)
-            break;
-
-        if (sftpfs_is_sftp_error (super_data->sftp_session, res, LIBSSH2_FX_PERMISSION_DENIED))
-            return -EACCES;
-
-        if (sftpfs_is_sftp_error (super_data->sftp_session, res, LIBSSH2_FX_FAILURE))
-        {
-            res = 0;            /* need something like ftpfs_ignore_chattr_errors */
-            break;
-        }
-
-        if (!sftpfs_waitsocket_or_error (super_data, res, mcerror, NULL))
-            return -1;
-    }
-    while (res == LIBSSH2_ERROR_EAGAIN);
+    res = sftpfs_stat_init (&super_data, &path_element, vpath, mcerror, LIBSSH2_SFTP_LSTAT, &attrs);
+    if (res == -1 || res == -EACCES || res == -ENOENT)
+        return res;
 
     attrs.permissions = mode;
 
