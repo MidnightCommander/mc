@@ -91,6 +91,32 @@ sftpfs_waitsocket_or_error (sftpfs_super_data_t * super_data, int res, GError **
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+sftpfs_op_init (sftpfs_super_data_t ** super_data, const vfs_path_element_t ** path_element,
+                const vfs_path_t * vpath, GError ** mcerror)
+{
+    struct vfs_s_super *super = NULL;
+
+    mc_return_val_if_error (mcerror, FALSE);
+
+    if (vfs_s_get_path (vpath, &super, 0) == NULL)
+        return FALSE;
+
+    if (super == NULL)
+        return FALSE;
+
+    *super_data = (sftpfs_super_data_t *) super->data;
+
+    if ((*super_data)->sftp_session == NULL)
+        return FALSE;
+
+    *path_element = vfs_path_get_by_index (vpath, -1);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -220,24 +246,12 @@ sftpfs_attr_to_stat (const LIBSSH2_SFTP_ATTRIBUTES * attrs, struct stat *s)
 int
 sftpfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
 {
-    struct vfs_s_super *super;
-    sftpfs_super_data_t *super_data;
+    sftpfs_super_data_t *super_data = NULL;
+    const vfs_path_element_t *path_element = NULL;
     LIBSSH2_SFTP_ATTRIBUTES attrs;
     int res;
-    const vfs_path_element_t *path_element;
 
-    mc_return_val_if_error (mcerror, -1);
-
-    path_element = vfs_path_get_by_index (vpath, -1);
-
-    if (vfs_s_get_path (vpath, &super, 0) == NULL)
-        return -1;
-
-    if (super == NULL)
-        return -1;
-
-    super_data = (sftpfs_super_data_t *) super->data;
-    if (super_data->sftp_session == NULL)
+    if (!sftpfs_op_init (&super_data, &path_element, vpath, mcerror))
         return -1;
 
     do
@@ -284,24 +298,12 @@ sftpfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
 int
 sftpfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
 {
-    struct vfs_s_super *super;
-    sftpfs_super_data_t *super_data;
+    sftpfs_super_data_t *super_data = NULL;
+    const vfs_path_element_t *path_element = NULL;
     LIBSSH2_SFTP_ATTRIBUTES attrs;
     int res;
-    const vfs_path_element_t *path_element;
 
-    mc_return_val_if_error (mcerror, -1);
-
-    path_element = vfs_path_get_by_index (vpath, -1);
-
-    if (vfs_s_get_path (vpath, &super, 0) == NULL)
-        return -1;
-
-    if (super == NULL)
-        return -1;
-
-    super_data = (sftpfs_super_data_t *) super->data;
-    if (super_data->sftp_session == NULL)
+    if (!sftpfs_op_init (&super_data, &path_element, vpath, mcerror))
         return -1;
 
     do
@@ -351,23 +353,11 @@ sftpfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
 int
 sftpfs_readlink (const vfs_path_t * vpath, char *buf, size_t size, GError ** mcerror)
 {
-    struct vfs_s_super *super;
-    sftpfs_super_data_t *super_data;
+    sftpfs_super_data_t *super_data = NULL;
+    const vfs_path_element_t *path_element = NULL;
     int res;
-    const vfs_path_element_t *path_element;
 
-    mc_return_val_if_error (mcerror, -1);
-
-    path_element = vfs_path_get_by_index (vpath, -1);
-
-    if (vfs_s_get_path (vpath, &super, 0) == NULL)
-        return -1;
-
-    if (super == NULL)
-        return -1;
-
-    super_data = (sftpfs_super_data_t *) super->data;
-    if (super_data->sftp_session == NULL)
+    if (!sftpfs_op_init (&super_data, &path_element, vpath, mcerror))
         return -1;
 
     do
@@ -404,26 +394,14 @@ sftpfs_readlink (const vfs_path_t * vpath, char *buf, size_t size, GError ** mce
 int
 sftpfs_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** mcerror)
 {
-    struct vfs_s_super *super;
-    sftpfs_super_data_t *super_data;
+    sftpfs_super_data_t *super_data = NULL;
     const vfs_path_element_t *path_element1;
-    const vfs_path_element_t *path_element2;
+    const vfs_path_element_t *path_element2 = NULL;
     char *tmp_path;
     unsigned int tmp_path_len;
     int res;
 
-    mc_return_val_if_error (mcerror, -1);
-
-    path_element2 = vfs_path_get_by_index (vpath2, -1);
-
-    if (vfs_s_get_path (vpath2, &super, 0) == NULL)
-        return -1;
-
-    if (super == NULL)
-        return -1;
-
-    super_data = (sftpfs_super_data_t *) super->data;
-    if (super_data->sftp_session == NULL)
+    if (!sftpfs_op_init (&super_data, &path_element2, vpath2, mcerror))
         return -1;
 
     tmp_path = (char *) sftpfs_fix_filename (path_element2->path, &tmp_path_len);
@@ -466,24 +444,12 @@ sftpfs_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** 
 int
 sftpfs_chmod (const vfs_path_t * vpath, mode_t mode, GError ** mcerror)
 {
-    struct vfs_s_super *super;
-    sftpfs_super_data_t *super_data;
+    sftpfs_super_data_t *super_data = NULL;
+    const vfs_path_element_t *path_element = NULL;
     LIBSSH2_SFTP_ATTRIBUTES attrs;
     int res;
-    const vfs_path_element_t *path_element;
 
-    mc_return_val_if_error (mcerror, -1);
-
-    path_element = vfs_path_get_by_index (vpath, -1);
-
-    if (vfs_s_get_path (vpath, &super, 0) == NULL)
-        return -1;
-
-    if (super == NULL)
-        return -1;
-
-    super_data = (sftpfs_super_data_t *) super->data;
-    if (super_data->sftp_session == NULL)
+    if (!sftpfs_op_init (&super_data, &path_element, vpath, mcerror))
         return -1;
 
     do
@@ -557,23 +523,11 @@ sftpfs_chmod (const vfs_path_t * vpath, mode_t mode, GError ** mcerror)
 int
 sftpfs_unlink (const vfs_path_t * vpath, GError ** mcerror)
 {
-    struct vfs_s_super *super;
-    sftpfs_super_data_t *super_data;
+    sftpfs_super_data_t *super_data = NULL;
+    const vfs_path_element_t *path_element = NULL;
     int res;
-    const vfs_path_element_t *path_element;
 
-    mc_return_val_if_error (mcerror, -1);
-
-    path_element = vfs_path_get_by_index (vpath, -1);
-
-    if (vfs_s_get_path (vpath, &super, 0) == NULL)
-        return -1;
-
-    if (super == NULL)
-        return -1;
-
-    super_data = (sftpfs_super_data_t *) super->data;
-    if (super_data->sftp_session == NULL)
+    if (!sftpfs_op_init (&super_data, &path_element, vpath, mcerror))
         return -1;
 
     do
@@ -608,25 +562,14 @@ sftpfs_unlink (const vfs_path_t * vpath, GError ** mcerror)
 int
 sftpfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** mcerror)
 {
-    struct vfs_s_super *super;
-    sftpfs_super_data_t *super_data;
+    sftpfs_super_data_t *super_data = NULL;
     const vfs_path_element_t *path_element1;
-    const vfs_path_element_t *path_element2;
+    const vfs_path_element_t *path_element2 = NULL;
     char *tmp_path;
     unsigned int tmp_path_len;
     int res;
 
-    mc_return_val_if_error (mcerror, -1);
-    path_element2 = vfs_path_get_by_index (vpath2, -1);
-
-    if (vfs_s_get_path (vpath2, &super, 0) == NULL)
-        return -1;
-
-    if (super == NULL)
-        return -1;
-
-    super_data = (sftpfs_super_data_t *) super->data;
-    if (super_data->sftp_session == NULL)
+    if (!sftpfs_op_init (&super_data, &path_element2, vpath2, mcerror))
         return -1;
 
     tmp_path = (char *) sftpfs_fix_filename (path_element2->path, &tmp_path_len);
