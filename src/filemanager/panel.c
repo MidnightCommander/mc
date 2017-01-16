@@ -1645,13 +1645,11 @@ parse_panel_size (WPanel * panel, const char *format, gboolean isstatus)
 
     if (g_ascii_isdigit (*format))
     {
-        if (!isstatus && panel->list_type == list_brief)
+        if (!isstatus)
         {
-            panel->brief_cols = g_ascii_digit_value (*format);
-            if (panel->brief_cols < 1)
-                panel->brief_cols = 1;
-
-            panel->list_cols = panel->brief_cols;
+            panel->list_cols = g_ascii_digit_value (*format);
+            if (panel->list_cols < 1)
+                panel->list_cols = 1;
         }
 
         format++;
@@ -3874,7 +3872,7 @@ panel_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
             {
                 my_index = panel->top_file + y;
 
-                if (panel->list_type == list_brief && panel->list_cols > 1)
+                if (panel->list_cols > 1)
                 {
                     int width, lines;
 
