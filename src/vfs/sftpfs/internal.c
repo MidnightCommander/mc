@@ -152,7 +152,7 @@ sftpfs_waitsocket (sftpfs_super_data_t * super_data, GError ** mcerror)
     fd_set fd;
     fd_set *writefd = NULL;
     fd_set *readfd = NULL;
-    int dir;
+    int dir, ret;
 
     mc_return_val_if_error (mcerror, -1);
 
@@ -168,7 +168,12 @@ sftpfs_waitsocket (sftpfs_super_data_t * super_data, GError ** mcerror)
     if ((dir & LIBSSH2_SESSION_BLOCK_OUTBOUND) != 0)
         writefd = &fd;
 
-    return select (super_data->socket_handle + 1, readfd, writefd, NULL, &timeout);
+    ret = select (super_data->socket_handle + 1, readfd, writefd, NULL, &timeout);
+
+    if (ret < 0)
+        mc_propagate_error (mcerror, 0, _("sftp: socket error: %s"), unix_error_string (errno));
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
