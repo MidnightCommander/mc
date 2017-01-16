@@ -840,9 +840,10 @@ The user display format must start with a panel size specifier.  This
 may be "half" or "full", and they specify a half screen panel and a
 full screen panel respectively.
 .PP
-After the panel size, you may specify the two columns mode on the
-panel, this is done by adding the number "2" to the user format
-string.
+After the panel size, you may specify how many listings to fit in the
+panel, side\-by\-side (in other words: how many times to repeat the
+fields horizontally). This defaults to 1. You may change this by adding a
+number from 1 to 9 to the format string.
 .PP
 After this you add the name of the fields with an optional size
 specifier.  This are the available fields you may display:
