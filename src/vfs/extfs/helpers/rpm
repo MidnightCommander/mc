@@ -64,6 +64,7 @@ if rpm --nosignature --version >/dev/null 2>&1; then
 else
   RPM="rpm"
 fi
+RPM_QUERY_FMT="$RPM -qp --qf"
 RPM2CPIO="rpm2cpio"
 
 SED="sed"
@@ -92,7 +93,7 @@ mcrpmfs_getAllNeededTags()
 	tag_CONFLICTS=""
     fi
 
-    $RPM -qp --qf \
+    $RPM_QUERY_FMT \
 "|NAME=%{NAME}"\
 "|VERSION=%{VERSION}"\
 "|RELEASE=%{RELEASE}"\
@@ -113,15 +114,13 @@ ${tag_CONFLICTS}\
 
 mcrpmfs_getRawOneTag()
 {
-    $RPM -qp --qf "$1" "${rpm_filename}"
+    $RPM_QUERY_FMT "$1" "${rpm_filename}"
 }
 
 mcrpmfs_getOneTag()
 {
     echo $AllTAGS | $SED "s/.*|${1}=//" | cut -d '|' -f 1
 }
-
-AllTAGS=`mcrpmfs_getAllNeededTags "$1"`
 
 mcrpmfs_printOneMetaInfo()
 {
@@ -328,6 +327,11 @@ mcrpmfs_run ()
 	REBUILD) echo "Rebuilding \"${rpm_filename}\""; $RPMBUILD --rebuild "${rpm_filename}"; exit 0;;
     esac
 }
+
+# Let the test framework override functions and variables.
+[ -n "$MC_TEST_RPM_REWRITE" ] && . "$MC_TEST_RPM_REWRITE"
+
+AllTAGS=`mcrpmfs_getAllNeededTags "$1"`
 
 umask 077
 case "${param}" in
