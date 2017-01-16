@@ -55,33 +55,15 @@ sftpfs_is_sftp_error (LIBSSH2_SFTP * sftp_session, int sftp_res, int sftp_error)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* Adjust block size and number of blocks */
+
 static void
-sftpfs_attr_to_stat (const LIBSSH2_SFTP_ATTRIBUTES * attrs, struct stat *s)
+sftpfs_blksize (struct stat *s)
 {
-    if ((attrs->flags & LIBSSH2_SFTP_ATTR_UIDGID) != 0)
-    {
-        s->st_uid = attrs->uid;
-        s->st_gid = attrs->gid;
-    }
-
-    if ((attrs->flags & LIBSSH2_SFTP_ATTR_ACMODTIME) != 0)
-    {
-        s->st_atime = attrs->atime;
-        s->st_mtime = attrs->mtime;
-        s->st_ctime = attrs->mtime;
-#ifdef HAVE_STRUCT_STAT_ST_MTIM
-        s->st_atim.tv_nsec = s->st_mtim.tv_nsec = s->st_ctim.tv_nsec = 0;
-#endif
-    }
-
-    if ((attrs->flags & LIBSSH2_SFTP_ATTR_SIZE) != 0)
-    {
-        s->st_size = attrs->filesize;
-        sftpfs_blksize (s);
-    }
-
-    if ((attrs->flags & LIBSSH2_SFTP_ATTR_PERMISSIONS) != 0)
-        s->st_mode = attrs->permissions;
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
+    s->st_blksize = LIBSSH2_CHANNEL_WINDOW_DEFAULT;     /* FIXME */
+#endif /* HAVE_STRUCT_STAT_ST_BLKSIZE */
+    vfs_adjust_stat (s);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -167,15 +149,33 @@ sftpfs_waitsocket (sftpfs_super_data_t * super_data, GError ** mcerror)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* Adjust block size and number of blocks */
-
 void
-sftpfs_blksize (struct stat *s)
+sftpfs_attr_to_stat (const LIBSSH2_SFTP_ATTRIBUTES * attrs, struct stat *s)
 {
-#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
-    s->st_blksize = LIBSSH2_CHANNEL_WINDOW_DEFAULT;     /* FIXME */
-#endif /* HAVE_STRUCT_STAT_ST_BLKSIZE */
-    vfs_adjust_stat (s);
+    if ((attrs->flags & LIBSSH2_SFTP_ATTR_UIDGID) != 0)
+    {
+        s->st_uid = attrs->uid;
+        s->st_gid = attrs->gid;
+    }
+
+    if ((attrs->flags & LIBSSH2_SFTP_ATTR_ACMODTIME) != 0)
+    {
+        s->st_atime = attrs->atime;
+        s->st_mtime = attrs->mtime;
+        s->st_ctime = attrs->mtime;
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+        s->st_atim.tv_nsec = s->st_mtim.tv_nsec = s->st_ctim.tv_nsec = 0;
+#endif
+    }
+
+    if ((attrs->flags & LIBSSH2_SFTP_ATTR_SIZE) != 0)
+    {
+        s->st_size = attrs->filesize;
+        sftpfs_blksize (s);
+    }
+
+    if ((attrs->flags & LIBSSH2_SFTP_ATTR_PERMISSIONS) != 0)
+        s->st_mode = attrs->permissions;
 }
 
 /* --------------------------------------------------------------------------------------------- */

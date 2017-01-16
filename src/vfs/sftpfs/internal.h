@@ -71,7 +71,7 @@ void sftpfs_ssherror_to_gliberror (sftpfs_super_data_t * super_data, int libssh_
 int sftpfs_waitsocket (sftpfs_super_data_t * super_data, GError ** mcerror);
 
 const char *sftpfs_fix_filename (const char *file_name, unsigned int *length);
-void sftpfs_blksize (struct stat *s);
+void sftpfs_attr_to_stat (const LIBSSH2_SFTP_ATTRIBUTES * attrs, struct stat *s);
 int sftpfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror);
 int sftpfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror);
 int sftpfs_readlink (const vfs_path_t * vpath, char *buf, size_t size, GError ** mcerror);
