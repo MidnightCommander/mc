@@ -322,17 +322,18 @@ int
 sftpfs_close_file (vfs_file_handler_t * file_handler, GError ** mcerror)
 {
     sftpfs_file_handler_data_t *file_handler_data;
+    int ret = -1;
 
     mc_return_val_if_error (mcerror, -1);
 
     file_handler_data = (sftpfs_file_handler_data_t *) file_handler->data;
-    if (file_handler_data == NULL)
-        return -1;
+    if (file_handler_data != NULL)
+    {
+        ret = libssh2_sftp_close (file_handler_data->handle);
+        g_free (file_handler_data);
+    }
 
-    libssh2_sftp_close (file_handler_data->handle);
-
-    g_free (file_handler_data);
-    return 0;
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
