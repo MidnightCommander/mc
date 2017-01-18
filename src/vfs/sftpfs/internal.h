@@ -68,7 +68,7 @@ void sftpfs_deinit_config_variables_patterns (void);
 
 void sftpfs_ssherror_to_gliberror (sftpfs_super_data_t * super_data, int libssh_errno,
                                    GError ** mcerror);
-int sftpfs_waitsocket (sftpfs_super_data_t * super_data, GError ** mcerror);
+gboolean sftpfs_waitsocket (sftpfs_super_data_t * super_data, int sftp_res, GError ** mcerror);
 
 const char *sftpfs_fix_filename (const char *file_name, unsigned int *length);
 void sftpfs_attr_to_stat (const LIBSSH2_SFTP_ATTRIBUTES * attrs, struct stat *s);
