@@ -1,7 +1,7 @@
 /*
    File difference viewer
 
-   Copyright (C) 2007-2016
+   Copyright (C) 2007-2017
    Free Software Foundation, Inc.
 
    Written by:
@@ -2901,7 +2901,7 @@ dview_edit (WDiff * dview, diff_place_t ord)
         vfs_path_t *tmp_vpath;
 
         tmp_vpath = vfs_path_from_str (dview->file[ord]);
-        edit_file_at_line (tmp_vpath, use_internal_edit != 0, linenum);
+        edit_file_at_line (tmp_vpath, use_internal_edit, linenum);
         vfs_path_free (tmp_vpath);
     }
 

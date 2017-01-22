@@ -1,7 +1,7 @@
 /* Virtual File System: SFTP file system.
    The internal functions: files
 
-   Copyright (C) 2011-2016
+   Copyright (C) 2011-2017
    Free Software Foundation, Inc.
 
    Written by:
@@ -156,7 +156,20 @@ sftpfs_open_file (vfs_file_handler_t * file_handler, int flags, mode_t mode, GEr
 
     if (do_append)
     {
-        struct stat file_info;
+        struct stat file_info = {
+            .st_dev = 0
+        };
+        /* In case of
+
+           struct stat file_info = { 0 };
+
+           gcc < 4.7 [1] generates the following:
+
+           error: missing initializer [-Werror=missing-field-initializers]
+           error: (near initialization for 'file_info.st_dev') [-Werror=missing-field-initializers]
+
+           [1] http://stackoverflow.com/questions/13373695/how-to-remove-the-warning-in-gcc-4-6-missing-initializer-wmissing-field-initi/27461062#27461062
+         */
 
         if (sftpfs_fstat (file_handler, &file_info, mcerror) == 0)
             libssh2_sftp_seek64 (file_handler_data->handle, file_info.st_size);

@@ -1,7 +1,7 @@
 /*
    UTF-8 strings utilities
 
-   Copyright (C) 2007-2016
+   Copyright (C) 2007-2017
    Free Software Foundation, Inc.
 
    Written by:

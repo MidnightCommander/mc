@@ -1,7 +1,7 @@
 /*
    Widgets for the Midnight Commander
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2017
    Free Software Foundation, Inc.
 
    Authors:
@@ -759,11 +759,10 @@ listbox_remove_list (WListbox * l)
     {
         if (l->list != NULL)
         {
-            g_queue_foreach (l->list, (GFunc) listbox_entry_free, NULL);
-            g_queue_free (l->list);
+            g_queue_free_full (l->list, (GDestroyNotify) listbox_entry_free);
+            l->list = NULL;
         }
 
-        l->list = NULL;
         l->pos = l->top = 0;
     }
 }

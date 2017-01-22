@@ -27,6 +27,9 @@
 #define mc_return_if_error(mcerror) do { if (mcerror != NULL && *mcerror != NULL) return; } while (0)
 #define mc_return_val_if_error(mcerror, mcvalue) do { if (mcerror != NULL && *mcerror != NULL) return mcvalue; } while (0)
 
+#define whitespace(c) ((c) == ' ' || (c) == '\t')
+#define whiteness(c) (whitespace (c) || (c) == '\n')
+
 #define MC_PIPE_BUFSIZE BUF_8K
 #define MC_PIPE_STREAM_EOF 0
 #define MC_PIPE_STREAM_UNREAD -1

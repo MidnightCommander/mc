@@ -1,7 +1,7 @@
 /*
    Editor low level data handling and cursor fundamentals.
 
-   Copyright (C) 1996-2016
+   Copyright (C) 1996-2017
    Free Software Foundation, Inc.
 
    Written by:
@@ -76,26 +76,26 @@
 /*** global variables ****************************************************************************/
 
 int option_word_wrap_line_length = DEFAULT_WRAP_LINE_LENGTH;
-int option_typewriter_wrap = 0;
-int option_auto_para_formatting = 0;
-int option_fill_tabs_with_spaces = 0;
-int option_return_does_auto_indent = 1;
-int option_backspace_through_tabs = 0;
-int option_fake_half_tabs = 1;
+gboolean option_typewriter_wrap = FALSE;
+gboolean option_auto_para_formatting = FALSE;
+gboolean option_fill_tabs_with_spaces = FALSE;
+gboolean option_return_does_auto_indent = TRUE;
+gboolean option_backspace_through_tabs = FALSE;
+gboolean option_fake_half_tabs = TRUE;
 int option_save_mode = EDIT_QUICK_SAVE;
-int option_save_position = 1;
+gboolean option_save_position = TRUE;
 int option_max_undo = 32768;
-int option_persistent_selections = 1;
-int option_cursor_beyond_eol = 0;
-int option_line_state = 0;
+gboolean option_persistent_selections = TRUE;
+gboolean option_cursor_beyond_eol = FALSE;
+gboolean option_line_state = FALSE;
 int option_line_state_width = 0;
 gboolean option_cursor_after_inserted_block = FALSE;
-int option_state_full_filename = 0;
+gboolean option_state_full_filename = FALSE;
 
-int enable_show_tabs_tws = 1;
-int option_check_nl_at_eof = 0;
-int option_group_undo = 0;
-int show_right_margin = 0;
+gboolean enable_show_tabs_tws = TRUE;
+gboolean option_check_nl_at_eof = FALSE;
+gboolean option_group_undo = FALSE;
+gboolean show_right_margin = FALSE;
 
 char *option_backup_ext = NULL;
 char *option_filesize_threshold = NULL;
@@ -1399,7 +1399,7 @@ edit_auto_indent (WEdit * edit)
         char c;
 
         c = edit_buffer_get_byte (&edit->buffer, p++);
-        if (c != ' ' && c != '\t')
+        if (!whitespace (c))
             break;
         edit_insert (edit, c);
     }
@@ -1491,7 +1491,7 @@ check_and_wrap_line (WEdit * edit)
             edit_insert (edit, '\n');
             return;
         }
-        if (c == ' ' || c == '\t')
+        if (whitespace (c))
         {
             off_t current = edit->buffer.curs1;
             edit_cursor_move (edit, curs - edit->buffer.curs1 + 1);
@@ -2082,7 +2082,7 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
 {
     gboolean to_free = FALSE;
 
-    option_auto_syntax = 1;     /* Resetting to auto on every invokation */
+    option_auto_syntax = TRUE;  /* Resetting to auto on every invokation */
     option_line_state_width = option_line_state ? LINE_STATE_WIDTH : 0;
 
     if (edit != NULL)

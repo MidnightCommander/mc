@@ -279,7 +279,7 @@ struct quick_widget_t
         struct
         {
             const char *text;
-            int *state;         /* in/out */
+            gboolean *state;    /* in/out */
         } checkbox;
 
         struct

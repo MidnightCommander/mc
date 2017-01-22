@@ -6,7 +6,7 @@
    created and destroyed.  This is required for the future vfs layer,
    it will be possible to have tree views over virtual file systems.
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2017
    Free Software Foundation, Inc.
 
    Written by:
@@ -78,7 +78,7 @@ WTree *the_tree = NULL;
  * automatically reload it's directory with the contents of the currently
  * selected directory.
  */
-int xtree_mode = 0;
+gboolean xtree_mode = FALSE;
 
 /*** file scope macro definitions ****************************************************************/
 

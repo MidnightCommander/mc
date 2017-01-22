@@ -1,7 +1,7 @@
 /*
    libmc - check mcconfig submodule. read and write config files
 
-   Copyright (C) 2011-2016
+   Copyright (C) 2011-2017
    Free Software Foundation, Inc.
 
    Written by:

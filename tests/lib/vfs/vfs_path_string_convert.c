@@ -1,7 +1,7 @@
 /*
    lib/vfs - get vfs_path_t from string
 
-   Copyright (C) 2011-2016
+   Copyright (C) 2011-2017
    Free Software Foundation, Inc.
 
    Written by:

@@ -1,7 +1,7 @@
 /*
    Virtual File System: GNU Tar file system.
 
-   Copyright (C) 1995-2016
+   Copyright (C) 1995-2017
    Free Software Foundation, Inc.
 
    Written by:
@@ -432,10 +432,14 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *heade
         default:
             break;
         }
+        break;
+
     default:
         st->st_uid = tar_from_oct (8, header->header.uid);
         st->st_gid = tar_from_oct (8, header->header.gid);
+        break;
     }
+
     st->st_size = h_size;
     st->st_mtime = tar_from_oct (1 + 12, header->header.mtime);
     st->st_atime = 0;

@@ -1,7 +1,7 @@
 /*
    Learn keys
 
-   Copyright (C) 1995-2016
+   Copyright (C) 1995-2017
    Free Software Foundation, Inc.
 
    Written by:
@@ -387,7 +387,7 @@ learn_save (void)
 void
 learn_keys (void)
 {
-    int save_old_esc_mode = old_esc_mode;
+    gboolean save_old_esc_mode = old_esc_mode;
     gboolean save_alternate_plus_minus = mc_global.tty.alternate_plus_minus;
     int result;
 

@@ -28,7 +28,7 @@ include syntax.syntax
 file filehighlight.ini$ File\sHighlighting\sdefinitions ^#\sfile\shighlight\srules\sversion\s
 include filehighlight.syntax
 
-file ..\*\\.(e)$ Eiffel\sSource\sFile
+file ..\*\\.e$ Eiffel\sSource\sFile
 include eiffel.syntax
 
 file ..\*\\.(diff|rej|patch)$ Diff\sOutput ^(diff|Index:)\s
@@ -154,7 +154,7 @@ include spec.syntax
 file ..\*\\.repo$ YUM\sRepo\sFile
 include yum-repo.syntax
 
-file ..\*\\.(awk)$ AWK\sFile
+file ..\*\\.awk$ AWK\sFile
 include awk.syntax
 
 file ..\*\\.(css|qss|CSS|QSS)$ CSS\sFile
@@ -211,7 +211,7 @@ include debian-changelog.syntax
 file changelog.Debian$ Debian\schangelog\sfile
 include debian-changelog.syntax
 
-file .\*\\.dsc$ Debian\sdescriptiom\sfile
+file ..\*\\.dsc$ Debian\sdescriptiom\sfile
 include debian-description.syntax
 
 file ..\*\\.([hH][sS][cC]?)$ Haskell\sprogram
@@ -220,10 +220,10 @@ include haskell.syntax
 file ..\*\\.([cC][aA][bB][aA][lL])$ Cabal\sconfig\sfile
 include cabal.syntax
 
-file ..\*\\.(n|N)$ Nemerle\sProgram
+file ..\*\\.[nN]$ Nemerle\sProgram
 include nemerle.syntax
 
-file ..\*\\.(v|V)$ Verilog\sDevice\sDescription
+file ..\*\\.[vV]$ Verilog\sDevice\sDescription
 include verilog.syntax
 
 file ..\*\\.(hdl|vhd|vdhl|HDL|VHD|VHDL)$ VHDL\sDevice\sDescription
@@ -238,7 +238,7 @@ include erlang.syntax
 file .\*named.conf$ Bind9\sconfiguration
 include named.syntax
 
-file .\*\\.strace$ Strace\sdebug\soutput
+file ..\*\\.strace$ Strace\sdebug\soutput
 include strace.syntax
 
 file PKGBUILD$ Arch\spackage\sbuild\sscript
@@ -259,16 +259,16 @@ include jal.syntax
 file ..\*\\.([lL][kK][rR])$ PIC\slinker\sscript\sfile
 include lkr.syntax
 
-file .\*\\.pp$ Puppet\smanifest\sfile
+file ..\*\\.pp$ Puppet\smanifest\sfile
 include puppet.syntax
 
-file .\*\\.(glsl|vert|frag|geom)$ GLSL\sProgram
+file ..\*\\.(glsl|vert|frag|geom)$ GLSL\sProgram
 include glsl.syntax
 
-file .\*\\.(cu|cuh)$ CUDA\sProgram
+file ..\*\\.(cu|cuh)$ CUDA\sProgram
 include cuda.syntax
 
-file .\*\\.(cl)$ OpenCL\sProgram
+file ..\*\\.cl$ OpenCL\sProgram
 include opencl.syntax
 
 file ..\*\\.(ya?ml|YML)$ YAML\sFile

@@ -1,7 +1,7 @@
 /*
    Widgets for the Midnight Commander
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2017
    Free Software Foundation, Inc.
 
    Authors:
@@ -60,21 +60,20 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
     switch (msg)
     {
     case MSG_HOTKEY:
+        for (i = 0; i < r->count; i++)
         {
-            for (i = 0; i < r->count; i++)
+            if (r->texts[i].hotkey != NULL)
             {
-                if (r->texts[i].hotkey != NULL)
-                {
-                    int c = g_ascii_tolower ((gchar) r->texts[i].hotkey[0]);
+                int c;
 
-                    if (c != parm)
-                        continue;
-                    r->pos = i;
+                c = g_ascii_tolower ((gchar) r->texts[i].hotkey[0]);
+                if (c != parm)
+                    continue;
+                r->pos = i;
 
-                    /* Take action */
-                    send_message (w, sender, MSG_KEY, ' ', data);
-                    return MSG_HANDLED;
-                }
+                /* Take action */
+                send_message (w, sender, MSG_KEY, ' ', data);
+                return MSG_HANDLED;
             }
         }
         return MSG_NOT_HANDLED;
@@ -85,7 +84,7 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         case ' ':
             r->sel = r->pos;
             widget_set_state (w, WST_FOCUSED, TRUE);    /* Also draws the widget. */
-            send_message (w->owner, w, MSG_NOTIFY, (int) MSG_KEY, NULL);
+            send_message (w->owner, w, MSG_NOTIFY, 0, NULL);
             return MSG_HANDLED;
 
         case KEY_UP:
@@ -106,6 +105,8 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                 widget_redraw (w);
                 return MSG_HANDLED;
             }
+            return MSG_NOT_HANDLED;
+
         default:
             return MSG_NOT_HANDLED;
         }
@@ -195,7 +196,6 @@ radio_new (int y, int x, int count, const char **texts)
     /* 4 is width of "(*) " */
     widget_init (w, y, x, count, 4 + wmax, radio_callback, radio_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR | WOP_WANT_HOTKEY;
-    r->state = 1;
     r->pos = 0;
     r->sel = 0;
     r->count = count;

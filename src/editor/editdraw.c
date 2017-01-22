@@ -1,7 +1,7 @@
 /*
    Editor text drawing.
 
-   Copyright (C) 1996-2016
+   Copyright (C) 1996-2017
    Free Software Foundation, Inc.
 
    Written by:
@@ -61,9 +61,10 @@
 /*** global variables ****************************************************************************/
 
 /* Toggles statusbar draw style */
-int simple_statusbar = 0;
+gboolean simple_statusbar = FALSE;
 
-int visible_tabs = 1, visible_tws = 1;
+gboolean visible_tws = TRUE;
+gboolean visible_tabs = TRUE;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -574,14 +575,19 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
         if (row <= edit->buffer.lines - edit->start_line)
         {
             off_t tws = 0;
+
             if (tty_use_colors () && visible_tws)
             {
-                unsigned int c;
-
                 tws = edit_buffer_get_eol (&edit->buffer, b);
-                while (tws > b
-                       && ((c = edit_buffer_get_byte (&edit->buffer, tws - 1)) == ' ' || c == '\t'))
+                while (tws > b)
+                {
+                    unsigned int c;
+
+                    c = edit_buffer_get_byte (&edit->buffer, tws - 1);
+                    if (!whitespace (c))
+                        break;
                     tws--;
+                }
             }
 
             while (col <= end_col - edit->start_col)

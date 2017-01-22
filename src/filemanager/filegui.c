@@ -10,7 +10,7 @@
    Janne Kukonlehto added much error recovery to them for being used
    in an interactive program.
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2017
    Free Software Foundation, Inc.
 
    Written by:
@@ -168,7 +168,7 @@ statfs (char const *filename, struct fs_info *buf)
 
 /*** global variables ****************************************************************************/
 
-int classic_progressbar = 1;
+gboolean classic_progressbar = TRUE;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -289,7 +289,7 @@ filegui__check_attrs_on_fs (const char *fs_path)
 {
     STRUCT_STATVFS stfs;
 
-    if (!setup_copymove_persistent_attr)
+    if (!copymove_persistent_attr)
         return FALSE;
 
 #if USE_STATVFS && defined(STAT_STATVFS)
@@ -1170,7 +1170,7 @@ file_mask_dialog (file_op_context_t * ctx, FileOperation operation,
 {
     size_t fmd_xlen;
     vfs_path_t *vpath;
-    int source_easy_patterns = easy_patterns;
+    gboolean source_easy_patterns = easy_patterns;
     char fmd_buf[BUF_MEDIUM];
     char *dest_dir, *tmp;
     char *def_text_secure;

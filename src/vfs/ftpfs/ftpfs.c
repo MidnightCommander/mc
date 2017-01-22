@@ -1,7 +1,7 @@
 /*
    Virtual File System: FTP file system.
 
-   Copyright (C) 1995-2016
+   Copyright (C) 1995-2017
    Free Software Foundation, Inc.
 
    Written by:
@@ -118,21 +118,21 @@ What to do with this?
 int ftpfs_retry_seconds = 30;
 
 /* Method to use to connect to ftp sites */
-int ftpfs_use_passive_connections = 1;
-int ftpfs_use_passive_connections_over_proxy = 0;
+gboolean ftpfs_use_passive_connections = TRUE;
+gboolean ftpfs_use_passive_connections_over_proxy = FALSE;
 
 /* Method used to get directory listings:
  * 1: try 'LIST -la <path>', if it fails
  *    fall back to CWD <path>; LIST
  * 0: always use CWD <path>; LIST
  */
-int ftpfs_use_unix_list_options = 1;
+gboolean ftpfs_use_unix_list_options = TRUE;
 
 /* First "CWD <path>", then "LIST -la ." */
-int ftpfs_first_cd_then_ls = 1;
+gboolean ftpfs_first_cd_then_ls = TRUE;
 
 /* Use the ~/.netrc */
-int ftpfs_use_netrc = 1;
+gboolean ftpfs_use_netrc = TRUE;
 
 /* Anonymous setup */
 char *ftpfs_anonymous_passwd = NULL;
@@ -142,9 +142,9 @@ int ftpfs_directory_timeout = 900;
 char *ftpfs_proxy_host = NULL;
 
 /* whether we have to use proxy by default? */
-int ftpfs_always_use_proxy = 0;
+gboolean ftpfs_always_use_proxy = FALSE;
 
-int ftpfs_ignore_chattr_errors = 1;
+gboolean ftpfs_ignore_chattr_errors = TRUE;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -206,7 +206,7 @@ typedef struct
 
     char *proxy;                /* proxy server, NULL if no proxy */
     int failed_on_login;        /* used to pass the failure reason to upper levels */
-    int use_passive_connection;
+    gboolean use_passive_connection;
     int remote_is_amiga;        /* No leading slash allowed for AmiTCP (Amiga) */
     int isbinary;
     int cwd_deferred;           /* current_directory was changed but CWD command hasn't
@@ -1345,7 +1345,7 @@ ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
             return data_sock;
 
         vfs_print_message ("%s", _("ftpfs: could not setup passive mode"));
-        SUP->use_passive_connection = 0;
+        SUP->use_passive_connection = FALSE;
 
         close (data_sock);
     }
@@ -1694,7 +1694,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
     struct vfs_s_entry *ent;
     struct vfs_s_super *super = dir->super;
     int sock, num_entries = 0;
-    int cd_first;
+    gboolean cd_first;
 
     cd_first = ftpfs_first_cd_then_ls || (SUP->strict == RFC_STRICT)
         || (strchr (remote_path, ' ') != NULL);
@@ -1790,7 +1790,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
     if ((ftpfs_get_reply (me, SUP->sock, NULL, 0) != COMPLETE))
         goto fallback;
 
-    if (num_entries == 0 && cd_first == 0)
+    if (num_entries == 0 && !cd_first)
     {
         /* The LIST command may produce an empty output. In such scenario
            it is not clear whether this is caused by  'remote_path' being
@@ -1802,7 +1802,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
            to determine the type of 'remote_path'. The only reliable way to
            achieve this is trough issuing a CWD command. */
 
-        cd_first = 1;
+        cd_first = TRUE;
         goto again;
     }
 
@@ -1822,7 +1822,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
         SUP->strict = RFC_STRICT;
         /* I hate goto, but recursive call needs another 8K on stack */
         /* return ftpfs_dir_load (me, dir, remote_path); */
-        cd_first = 1;
+        cd_first = TRUE;
         goto again;
     }
     vfs_print_message ("%s", _("ftpfs: failed; nowhere to fallback to"));
@@ -2367,8 +2367,7 @@ ftpfs_netrc_next (void)
     }
     else
     {
-        for (; *netrcp != '\n' && *netrcp != '\t' && *netrcp != ' ' &&
-             *netrcp != ',' && *netrcp; netrcp++)
+        for (; *netrcp != '\0' && !whiteness (*netrcp) && *netrcp != ','; netrcp++)
         {
             if (*netrcp == '\\')
                 netrcp++;

@@ -1,7 +1,7 @@
 /*
    Editor options dialog box
 
-   Copyright (C) 1996-2016
+   Copyright (C) 1996-2017
    Free Software Foundation, Inc.
 
    Written by:
@@ -120,7 +120,7 @@ edit_options_dialog (WDialog * h)
     char wrap_length[16], tab_spacing[16];
     char *p, *q;
     int wrap_mode = 0;
-    int old_syntax_hl;
+    gboolean old_syntax_hl;
 
 #ifdef ENABLE_NLS
     static gboolean i18n_flag = FALSE;
@@ -217,18 +217,18 @@ edit_options_dialog (WDialog * h)
 
     if (wrap_mode == 1)
     {
-        option_auto_para_formatting = 1;
-        option_typewriter_wrap = 0;
+        option_auto_para_formatting = TRUE;
+        option_typewriter_wrap = FALSE;
     }
     else if (wrap_mode == 2)
     {
-        option_auto_para_formatting = 0;
-        option_typewriter_wrap = 1;
+        option_auto_para_formatting = FALSE;
+        option_typewriter_wrap = TRUE;
     }
     else
     {
-        option_auto_para_formatting = 0;
-        option_typewriter_wrap = 0;
+        option_auto_para_formatting = FALSE;
+        option_typewriter_wrap = FALSE;
     }
 
     /* Load or unload syntax rules if the option has changed */

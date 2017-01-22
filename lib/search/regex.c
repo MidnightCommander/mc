@@ -2,7 +2,7 @@
    Search text engine.
    Regex search
 
-   Copyright (C) 2009-2016
+   Copyright (C) 2009-2017
    Free Software Foundation, Inc.
 
    Written by:
@@ -195,6 +195,19 @@ mc_search__cond_struct_new_regex_accum_append (const char *charset, GString * st
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Creates a case-insensitive version of a regex pattern.
+ *
+ * For example (assuming ASCII charset): given "\\bHello!\\xAB", returns
+ * "\\b[Hh][Ee][Ll][Ll][Oo]!\\xAB" (this example is for easier reading; in
+ * reality hex codes are used instead of letters).
+ *
+ * This function knows not to ruin special regex symbols.
+ *
+ * This function is used when working with non-UTF-8 charsets: GLib's
+ * regex engine doesn't understand such charsets and therefore can't do
+ * this job itself.
+ */
 static GString *
 mc_search__cond_struct_new_regex_ci_str (const char *charset, const GString * astr)
 {
@@ -264,16 +277,14 @@ mc_search__g_regex_match_full_safe (const GRegex * regex,
     char *string_safe, *p, *end;
     gboolean ret;
 
+    if (string_len < 0)
+        string_len = strlen (string);
+
     if ((g_regex_get_compile_flags (regex) & G_REGEX_RAW)
         || g_utf8_validate (string, string_len, NULL))
     {
         return g_regex_match_full (regex, string, string_len, start_position, match_options,
                                    match_info, error);
-    }
-
-    if (string_len < 0)
-    {
-        string_len = strlen (string);
     }
 
     /* Correctly handle embedded NULs while copying */

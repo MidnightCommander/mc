@@ -1,7 +1,7 @@
 /*
    Dynamic paragraph formatting.
 
-   Copyright (C) 2011-2016
+   Copyright (C) 2011-2017
    Free Software Foundation, Inc.
 
    Copyright (C) 1996 Paul Sheer
@@ -303,7 +303,7 @@ word_start (unsigned char *t, off_t q, off_t size)
 {
     off_t i;
 
-    if (t[q] == ' ' || t[q] == '\t')
+    if (whitespace (t[q]))
         return next_word_start (t, q, size);
 
     for (i = q;; i--)
@@ -315,7 +315,7 @@ word_start (unsigned char *t, off_t q, off_t size)
         c = t[i - 1];
         if (c == '\n')
             return (-1);
-        if (c == ' ' || c == '\t')
+        if (whitespace (c))
             return i;
     }
 }

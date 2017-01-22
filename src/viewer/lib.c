@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Common finctions (used from some other mcviewer functions)
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2017
    Free Software Foundation, Inc.
 
    Written by:
@@ -234,7 +234,8 @@ mcview_done (WView * view)
     mcview_close_datasource (view);
     /* the growing buffer is freed with the datasource */
 
-    coord_cache_free (view->coord_cache), view->coord_cache = NULL;
+    coord_cache_free (view->coord_cache);
+    view->coord_cache = NULL;
 
     if (view->converter == INVALID_CONV)
         view->converter = str_cnv_from_term;

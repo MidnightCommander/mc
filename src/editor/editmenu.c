@@ -1,7 +1,7 @@
 /*
    Editor menu definitions and initialisation
 
-   Copyright (C) 1996-2016
+   Copyright (C) 1996-2017
    Free Software Foundation, Inc.
 
    Written by:
@@ -268,7 +268,7 @@ edit_drop_menu_cmd (WDialog * h, int which)
     WMenuBar *menubar;
 
     menubar = find_menubar (h);
-    menubar_activate (menubar, drop_menus != 0, which);
+    menubar_activate (menubar, drop_menus, which);
 }
 
 /* --------------------------------------------------------------------------------------------- */

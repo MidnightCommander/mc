@@ -1,7 +1,7 @@
 /*
    Chmod command -- for the Midnight Commander
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2017
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -230,7 +230,7 @@ chmod_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                 if (sender == WIDGET (check_perm[i].check))
                     break;
 
-            if (i < check_perm_num && parm == (int) MSG_KEY)
+            if (i < check_perm_num)
             {
                 char buffer[BUF_TINY];
 
@@ -312,8 +312,7 @@ init_chmod (const char *fname, const struct stat *sf_stat)
 
     for (i = 0; i < check_perm_num; i++)
     {
-        check_perm[i].check = check_new (PY + i + 1, PX + 2,
-                                         (c_stat & check_perm[i].mode) != 0 ? 1 : 0,
+        check_perm[i].check = check_new (PY + i + 1, PX + 2, (c_stat & check_perm[i].mode) != 0,
                                          check_perm[i].text);
         add_widget (ch_dlg, check_perm[i].check);
     }
@@ -504,7 +503,7 @@ chmod_cmd (void)
             for (i = 0; i < check_perm_num; i++)
                 if (check_perm[i].selected || result == B_ALL)
                 {
-                    if (check_perm[i].check->state & C_BOOL)
+                    if (check_perm[i].check->state)
                         or_mask |= check_perm[i].mode;
                     else
                         and_mask &= ~check_perm[i].mode;

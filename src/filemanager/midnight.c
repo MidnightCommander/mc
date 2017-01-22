@@ -1,7 +1,7 @@
 /*
    Main dialog (file panels) of the Midnight Commander
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2017
    Free Software Foundation, Inc.
 
    Written by:
@@ -368,7 +368,7 @@ init_menu (void)
 static void
 menu_last_selected_cmd (void)
 {
-    menubar_activate (the_menubar, drop_menus != 0, -1);
+    menubar_activate (the_menubar, drop_menus, -1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -383,7 +383,7 @@ menu_cmd (void)
     else
         selected = g_list_length (the_menubar->menu) - 1;
 
-    menubar_activate (the_menubar, drop_menus != 0, selected);
+    menubar_activate (the_menubar, drop_menus, selected);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -862,7 +862,7 @@ setup_mc (void)
 #ifdef HAVE_CHARSET
     tty_display_8bit (TRUE);
 #else
-    tty_display_8bit (mc_global.full_eight_bits != 0);
+    tty_display_8bit (mc_global.full_eight_bits);
 #endif /* HAVE_CHARSET */
 
 #else /* HAVE_SLANG */
@@ -870,7 +870,7 @@ setup_mc (void)
 #ifdef HAVE_CHARSET
     tty_display_8bit (TRUE);
 #else
-    tty_display_8bit (mc_global.eight_bit_clean != 0);
+    tty_display_8bit (mc_global.eight_bit_clean);
 #endif /* HAVE_CHARSET */
 #endif /* HAVE_SLANG */
 
@@ -880,7 +880,7 @@ setup_mc (void)
 #endif /* !ENABLE_SUBSHELL */
 
     if ((tty_baudrate () < 9600) || mc_global.tty.slow_terminal)
-        verbose = 0;
+        verbose = FALSE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1471,8 +1471,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
             if (current_panel->active == 0 && get_other_type () == view_quick)
                 return MSG_NOT_HANDLED;
 
-            for (i = 0; cmdline->buffer[i] != '\0' &&
-                 (cmdline->buffer[i] == ' ' || cmdline->buffer[i] == '\t'); i++)
+            for (i = 0; cmdline->buffer[i] != '\0' && whitespace (cmdline->buffer[i]); i++)
                 ;
 
             if (cmdline->buffer[i] != '\0')

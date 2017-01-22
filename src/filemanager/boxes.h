@@ -21,7 +21,7 @@
 void configure_box (void);
 void appearance_box (void);
 void panel_options_box (void);
-int panel_listing_box (WPanel * p, int num, char **user, char **mini, int *use_msformat,
+int panel_listing_box (WPanel * p, int num, char **user, char **mini, gboolean * use_msformat,
                        int *brief_cols);
 const panel_field_t *sort_box (dir_sort_options_t * op, const panel_field_t * sort_field);
 void confirm_box (void);

@@ -1,7 +1,7 @@
 /*
    Widget based utility functions.
 
-   Copyright (C) 1994-2016
+   Copyright (C) 1994-2017
    Free Software Foundation, Inc.
 
    Authors:
@@ -586,7 +586,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
             switch (item->quick_widget->widget_type)
             {
             case quick_checkbox:
-                *item->quick_widget->u.checkbox.state = CHECK (item->widget)->state & C_BOOL;
+                *item->quick_widget->u.checkbox.state = CHECK (item->widget)->state;
                 break;
 
             case quick_input:

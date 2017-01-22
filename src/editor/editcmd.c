@@ -1,7 +1,7 @@
 /*
    Editor high level editing commands
 
-   Copyright (C) 1996-2016
+   Copyright (C) 1996-2017
    Free Software Foundation, Inc.
 
    Written by:
@@ -84,10 +84,10 @@
 int search_create_bookmark = FALSE;
 
 /* queries on a save */
-int edit_confirm_save = 1;
+gboolean edit_confirm_save = TRUE;
 
 /* whether we need to drop selection on copy to buffer */
-int option_drop_selection_on_copy = 1;
+gboolean option_drop_selection_on_copy = TRUE;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -2554,8 +2554,10 @@ edit_replace_cmd (WEdit * edit, gboolean again)
         g_free (tmp_inp1);
         g_free (tmp_inp2);
 
-        g_free (saved1), saved1 = g_strdup (input1);
-        g_free (saved2), saved2 = g_strdup (input2);
+        g_free (saved1);
+        saved1 = g_strdup (input1);
+        g_free (saved2);
+        saved2 = g_strdup (input2);
 
         mc_search_free (edit->search);
         edit->search = NULL;
