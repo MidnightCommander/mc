@@ -47,6 +47,7 @@
 
 #include "lib/global.h"
 #include "lib/util.h"
+#include "lib/unixcompat.h"     /* makedev() */
 #include "lib/widget.h"         /* message() */
 
 #include "lib/vfs/vfs.h"
