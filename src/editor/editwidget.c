@@ -319,13 +319,12 @@ get_hotkey (int n)
 static void
 edit_window_list (const WDialog * h)
 {
-    const size_t offset = 2;    /* skip menu and buttonbar */
-    const size_t dlg_num = g_list_length (h->widgets) - offset;
+    const size_t dlg_num = g_list_length (h->widgets) - 2;      /* 2 = skip menu and buttonbar */
     int lines, cols;
     Listbox *listbox;
     GList *w;
+    WEdit *selected;
     int i = 0;
-    int rv;
 
     lines = MIN ((size_t) (LINES * 2 / 3), dlg_num);
     cols = COLS * 2 / 3;
@@ -346,18 +345,13 @@ edit_window_list (const WDialog * h)
                                      vfs_path_as_str (e->filename_vpath));
 
             listbox_add_item (listbox->list, LISTBOX_APPEND_AT_END, get_hotkey (i++),
-                              str_term_trim (fname, WIDGET (listbox->list)->cols - 2), NULL, FALSE);
+                              str_term_trim (fname, WIDGET (listbox->list)->cols - 2), e, FALSE);
             g_free (fname);
         }
 
-    rv = g_list_position (h->widgets, h->current) - offset;
-    listbox_select_entry (listbox->list, rv);
-    rv = run_listbox (listbox);
-    if (rv >= 0)
-    {
-        w = g_list_nth (h->widgets, rv + offset);
-        widget_select (w->data);
-    }
+    selected = run_listbox_with_data (listbox, h->current->data);
+    if (selected != NULL)
+        widget_select (WIDGET (selected));
 }
 
 /* --------------------------------------------------------------------------------------------- */
