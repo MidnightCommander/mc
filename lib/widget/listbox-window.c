@@ -138,3 +138,38 @@ run_listbox (Listbox * l)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+/**
+ * A variant of run_listbox() which is more convenient to use when we
+ * need to select arbitrary 'data'.
+ *
+ * @param select  the item to select initially, by its 'data'. Optional.
+ * @return        the 'data' of the item selected, or NULL if none selected.
+ */
+void *
+run_listbox_with_data (Listbox * l, const void *select)
+{
+    void *val = NULL;
+
+    if (select != NULL)
+        listbox_select_entry (l->list, listbox_search_data (l->list, select));
+
+    if (dlg_run (l->dlg) != B_CANCEL)
+    {
+        WLEntry *e;
+        e = listbox_get_nth_item (l->list, l->list->pos);
+        if (e != NULL)
+        {
+            /* The assert guards against returning a soon-to-be deallocated
+             * pointer (as in listbox_add_item(..., TRUE)). */
+            g_assert (!e->free_data);
+            val = e->data;
+        }
+    }
+
+    dlg_destroy (l->dlg);
+    g_free (l);
+    return val;
+}
+
+/* --------------------------------------------------------------------------------------------- */
