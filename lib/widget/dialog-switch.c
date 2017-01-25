@@ -220,9 +220,8 @@ dialog_switch_list (void)
     const size_t dlg_num = g_list_length (mc_dialogs);
     int lines, cols;
     Listbox *listbox;
-    GList *h;
+    GList *h, *selected;
     int i = 0;
-    int rv;
 
     if (mc_global.midnight_shutdown || mc_current == NULL)
         return;
@@ -244,20 +243,14 @@ dialog_switch_list (void)
         else
             title = g_strdup ("");
 
-        listbox_add_item (listbox->list, LISTBOX_APPEND_BEFORE, get_hotkey (i++), title, NULL,
-                          FALSE);
+        listbox_add_item (listbox->list, LISTBOX_APPEND_BEFORE, get_hotkey (i++), title, h, FALSE);
 
         g_free (title);
     }
 
-    listbox_select_entry (listbox->list, dlg_num - 1 - g_list_position (mc_dialogs, mc_current));
-    rv = run_listbox (listbox);
-
-    if (rv >= 0)
-    {
-        h = g_list_nth (mc_dialogs, dlg_num - 1 - rv);
-        dialog_switch_goto (h);
-    }
+    selected = run_listbox_with_data (listbox, mc_current);
+    if (selected != NULL)
+        dialog_switch_goto (selected);
 }
 
 /* --------------------------------------------------------------------------------------------- */
