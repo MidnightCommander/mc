@@ -274,5 +274,8 @@ include opencl.syntax
 file ..\*\\.(ya?ml|YML)$ YAML\sFile
 include yaml.syntax
 
+file .\*\\.osl$ OSL\sProgram
+include osl.syntax
+
 file .\* unknown
 include unknown.syntax

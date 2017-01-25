@@ -55,6 +55,7 @@ SYNTAXFILES =			\
 	nroff.syntax		\
 	opencl.syntax		\
 	octave.syntax		\
+	osl.syntax		\
 	pascal.syntax		\
 	perl.syntax		\
 	php.syntax		\

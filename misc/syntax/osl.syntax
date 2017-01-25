@@ -1,0 +1,139 @@
+# Syntax rules for the C and the C++ programming languages
+#
+# List of keywords is based on opencl-mode.el from
+# Salmane Bah <salmane.bah@u-bordeaux.fr>
+
+context default
+# Keywords
+    keyword whole break yellow
+    keyword whole closure yellow
+    keyword whole color yellow
+    keyword whole continue yellow
+    keyword whole do yellow
+    keyword whole else yellow
+    keyword whole float yellow
+    keyword whole for yellow
+    keyword whole if yellow
+    keyword whole illuminance yellow
+    keyword whole illuminate yellow
+    keyword whole int yellow
+    keyword whole matrix yellow
+    keyword whole normal yellow
+    keyword whole output yellow
+    keyword whole point yellow
+    keyword whole public yellow
+    keyword whole return yellow
+    keyword whole string yellow
+    keyword whole struct yellow
+    keyword whole vector yellow
+    keyword whole void yellow
+    keyword whole while yellow
+    keyword whole or yellow
+    keyword whole and yellow
+    keyword whole not yellow
+    keyword whole linestart \{\s\t\}\[\s\t\]#*\n brightmagenta
+
+# Reserved words
+    keyword whole bool red
+    keyword whole case red
+    keyword whole char red
+    keyword whole class red
+    keyword whole const red
+    keyword whole default red
+    keyword whole double red
+    keyword whole enum red
+    keyword whole extern red
+    keyword whole false red
+    keyword whole friend red
+    keyword whole inline red
+    keyword whole long red
+    keyword whole private red
+    keyword whole protected red
+    keyword whole short red
+    keyword whole signed red
+    keyword whole sizeof red
+    keyword whole static red
+    keyword whole struct red
+    keyword whole switch red
+    keyword whole template red
+    keyword whole this red
+    keyword whole true red
+    keyword whole typedef red
+    keyword whole uniform red
+    keyword whole union red
+    keyword whole unsigned red
+    keyword whole varying red
+    keyword whole virtual red
+
+# Shader types
+    keyword whole shader white
+    keyword whole surface white
+    keyword whole displacement white
+    keyword whole volume white
+
+    keyword /\* brown
+    keyword \*/ brown
+    keyword // brown
+
+    keyword '\\\{"abtnvfr\}' brightgreen
+    keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen
+    keyword '\\'' brightgreen
+    keyword '\\\\' brightgreen
+    keyword '\\0' brightgreen
+    keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' brightgreen
+
+# punctuation characters, sorted by ASCII code
+    keyword ! yellow
+    keyword % yellow
+    keyword && yellow
+    keyword & brightmagenta
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword \* yellow
+    keyword \+ yellow
+    keyword , brightcyan
+    keyword - yellow
+    keyword / yellow
+    keyword : brightcyan
+    keyword ; brightmagenta
+    keyword < yellow
+    keyword = yellow
+    keyword > yellow
+    keyword ? brightcyan
+    keyword [ brightcyan
+    keyword ] brightcyan
+    keyword ^ brightmagenta
+    keyword { brightcyan
+    keyword || yellow
+    keyword | brightmagenta
+    keyword } brightcyan
+    keyword ~ brightmagenta
+
+context exclusive /\* \*/ brown
+    spellcheck
+
+context exclusive // \n brown
+    spellcheck
+
+context linestart # \n brightred
+    keyword \\\n yellow
+    keyword /\**\*/ brown
+    keyword //*\n brown
+    keyword "+" red
+    keyword <+> red
+
+context " " green
+    spellcheck
+    keyword \\" brightgreen
+    keyword %% brightgreen
+    keyword %\[#0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[L\]\{eEfgGoxX\} brightgreen
+    keyword %\[0\s-\+,\]\[0123456789\*\]\[.\]\[0123456789\*\]\[hl\]\{diuxX\} brightgreen
+    keyword %\[hl\]n brightgreen
+    keyword %\[-\]\[0123456789\*\]\[.\]\[0123456789\*\]s brightgreen
+    keyword %[*] brightgreen
+    keyword %c brightgreen
+    keyword %p brightgreen
+    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
+    keyword \\\\ brightgreen
+    keyword \\' brightgreen
+    keyword \\\{abtnvfr\} brightgreen
