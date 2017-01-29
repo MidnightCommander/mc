@@ -1,0 +1,164 @@
+# R language syntax highlighting file for mcedit
+# Based on Perl syntax + analysis of the 80 most frequent R commands
+# Alexey Shipunov (dactylorhiza@gmail.com), version 20170122
+#
+
+context default
+
+    keyword ->> brightred grey
+    keyword <<- brightred grey
+    keyword -> brightred grey
+
+    keyword <- brightred
+
+    keyword \\ gray white
+
+    keyword : yellow
+    keyword $ yellow
+    keyword > yellow
+    keyword < yellow
+    keyword \+ yellow
+    keyword - yellow
+    keyword ^ yellow
+    keyword \* yellow
+    keyword | yellow
+    keyword / yellow
+    keyword != yellow
+    keyword == yellow
+    keyword ! yellow
+    keyword ~ yellow
+    keyword % yellow
+    keyword & yellow
+
+    keyword = red
+
+    keyword { white
+    keyword } white
+
+    keyword ( brightcyan
+    keyword ) brightcyan
+
+    keyword [ brightblue
+    keyword ] brightblue
+
+    keyword ; black
+
+    keyword whole else brightmagenta
+    keyword whole for brightmagenta
+    keyword whole if brightmagenta
+    keyword whole while brightmagenta
+
+    keyword whole abbreviate yellow
+    keyword whole abline yellow
+    keyword whole abs yellow
+    keyword whole aggregate yellow
+    keyword whole apply yellow
+    keyword whole as.character yellow
+    keyword whole as.data.frame yellow
+    keyword whole as.factor yellow
+    keyword whole as.matrix yellow
+    keyword whole as.numeric yellow
+    keyword whole as.vector yellow
+    keyword whole attr yellow
+    keyword whole boxplot yellow
+    keyword whole c yellow
+    keyword whole cat yellow
+    keyword whole cbind yellow
+    keyword whole chisq.test yellow
+    keyword whole colnames yellow
+    keyword whole colSums yellow
+    keyword whole cor yellow
+    keyword whole cor.test yellow
+    keyword whole data.frame yellow
+    keyword whole dev.off yellow
+    keyword whole dimnames yellow
+    keyword whole dist yellow
+    keyword whole dotchart yellow
+    keyword whole eqscplot yellow
+    keyword whole factor yellow
+    keyword whole function yellow
+    keyword whole get yellow
+    keyword whole grep yellow
+    keyword whole gsub yellow
+    keyword whole hclust yellow
+    keyword whole hist yellow
+    keyword whole ifelse yellow
+    keyword whole is.factor yellow
+    keyword whole is.na yellow
+    keyword whole kruskal.test yellow
+    keyword whole lda yellow
+    keyword whole legend yellow
+    keyword whole length yellow
+    keyword whole levels yellow
+    keyword whole library yellow
+    keyword whole lines yellow
+    keyword whole list yellow
+    keyword whole lm yellow
+    keyword whole loadings yellow
+    keyword whole log yellow
+    keyword whole manova yellow
+    keyword whole matrix yellow
+    keyword whole max yellow
+    keyword whole mean yellow
+    keyword whole median yellow
+    keyword whole min yellow
+    keyword whole mtext yellow
+    keyword whole names yellow
+    keyword whole na.omit yellow
+    keyword whole ncol yellow
+    keyword whole nrow yellow
+    keyword whole order yellow
+    keyword whole palette yellow
+    keyword whole par yellow
+    keyword whole paste yellow
+    keyword whole pdf yellow
+    keyword whole plot yellow
+    keyword whole png yellow
+    keyword whole points yellow
+    keyword whole predict yellow
+    keyword whole princomp yellow
+    keyword whole print yellow
+    keyword whole range yellow
+    keyword whole rbind yellow
+    keyword whole read.table yellow
+    keyword whole recode yellow
+    keyword whole rep yellow
+    keyword whole replace yellow
+    keyword whole return yellow
+    keyword whole rev yellow
+    keyword whole rnorm yellow
+    keyword whole round yellow
+    keyword whole row.names yellow
+    keyword whole rowSums yellow
+    keyword whole sapply yellow
+    keyword whole scale yellow
+    keyword whole seq yellow
+    keyword whole sink yellow
+    keyword whole smooth.spline yellow
+    keyword whole sort yellow
+    keyword whole source yellow
+    keyword whole sqrt yellow
+    keyword whole str yellow
+    keyword whole sum yellow
+    keyword whole summary yellow
+    keyword whole t yellow
+    keyword whole table yellow
+    keyword whole tapply yellow
+    keyword whole text yellow
+    keyword whole t.test yellow
+    keyword whole unique yellow
+    keyword whole wilcox.test yellow
+    keyword whole with yellow
+    keyword whole write.table yellow
+    keyword whole x11 yellow
+
+context # \n brown
+    spellcheck
+
+context "http " white
+
+context " " brightgreen
+
+context 'http ' white
+
+context ' ' brightgreen

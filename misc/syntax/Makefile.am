@@ -66,6 +66,7 @@ SYNTAXFILES =			\
 	properties.syntax	\
 	puppet.syntax		\
 	python.syntax		\
+	r.syntax		\
 	ruby.syntax		\
 	sh.syntax		\
 	slang.syntax		\

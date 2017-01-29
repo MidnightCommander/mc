@@ -277,5 +277,8 @@ include yaml.syntax
 file .\*\\.osl$ OSL\sProgram
 include osl.syntax
 
+file .\*\\.([rR]|Rd|Rscript)$ R\sProgram
+include r.syntax
+
 file .\* unknown
 include unknown.syntax
