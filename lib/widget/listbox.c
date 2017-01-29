@@ -570,6 +570,9 @@ listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn 
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Finds item by its label.
+ */
 int
 listbox_search_text (WListbox * l, const char *text)
 {
@@ -583,6 +586,31 @@ listbox_search_text (WListbox * l, const char *text)
             WLEntry *e = LENTRY (le->data);
 
             if (strcmp (e->text, text) == 0)
+                return i;
+        }
+    }
+
+    return (-1);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Finds item by its 'data' slot.
+ */
+int
+listbox_search_data (WListbox * l, const void *data)
+{
+    if (!listbox_is_empty (l))
+    {
+        int i;
+        GList *le;
+
+        for (i = 0, le = g_queue_peek_head_link (l->list); le != NULL; i++, le = g_list_next (le))
+        {
+            WLEntry *e = LENTRY (le->data);
+
+            if (e->data == data)
                 return i;
         }
     }
