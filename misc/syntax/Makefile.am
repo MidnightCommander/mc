@@ -17,13 +17,14 @@ SYNTAXFILES =			\
 	css.syntax		\
 	cuda.syntax		\
 	cxx.syntax		\
+	cython.syntax		\
 	d.syntax		\
-	dlink.syntax		\
 	debian-changelog.syntax	\
 	debian-control.syntax	\
 	debian-description.syntax	\
 	debian-sources-list.syntax	\
 	diff.syntax		\
+	dlink.syntax		\
 	dos.syntax		\
 	ebuild.syntax		\
 	eiffel.syntax		\
@@ -53,8 +54,8 @@ SYNTAXFILES =			\
 	named.syntax		\
 	nemerle.syntax		\
 	nroff.syntax		\
-	opencl.syntax		\
 	octave.syntax		\
+	opencl.syntax		\
 	osl.syntax		\
 	pascal.syntax		\
 	perl.syntax		\
@@ -65,7 +66,6 @@ SYNTAXFILES =			\
 	properties.syntax	\
 	puppet.syntax		\
 	python.syntax		\
-	cython.syntax		\
 	ruby.syntax		\
 	sh.syntax		\
 	slang.syntax		\
@@ -82,8 +82,8 @@ SYNTAXFILES =			\
 	verilog.syntax		\
 	vhdl.syntax		\
 	xml.syntax		\
-	yum-repo.syntax		\
 	yaml.syntax		\
+	yum-repo.syntax		\
 	yxx.syntax
 
 if USE_INTERNAL_EDIT
