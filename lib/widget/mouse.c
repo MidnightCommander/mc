@@ -181,6 +181,11 @@ mouse_process_event (Widget * w, mouse_event_t * event)
     {
         w->mouse_callback (w, event->msg, event);
 
+        /* If a widget aborts a MSG_MOUSE_DOWN, we uncapture it so it
+         * doesn't steal events from other widgets. */
+        if (event->msg == MSG_MOUSE_DOWN && event->result.abort)
+            w->mouse.capture = FALSE;
+
         /* Upon releasing the mouse button: if the mouse hasn't been dragged
          * since the MSG_MOUSE_DOWN, we also trigger a click. */
         if (event->msg == MSG_MOUSE_UP && w->mouse.last_msg == MSG_MOUSE_DOWN)

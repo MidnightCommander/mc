@@ -1005,6 +1005,7 @@ edit_mouse_handle_move_resize (Widget * w, mouse_msg_t msg, mouse_event_t * even
     {
         /* Exit move/resize mode. */
         edit_execute_cmd (edit, CK_Enter, -1);
+        edit_update_screen (edit);      /* Paint the buttonbar over our possibly overlapping frame. */
         return;
     }
 
@@ -1071,6 +1072,16 @@ edit_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
         return;
     }
 
+    /* If it's the last line on the screen, we abort the event to make the
+     * system channel it to the overlapping buttonbar instead. We have to do
+     * this because a WEdit has the WOP_TOP_SELECT flag, which makes it above
+     * the buttonbar in Z-order. */
+    if (msg == MSG_MOUSE_DOWN && (event->y + w->y == LINES - 1))
+    {
+        event->result.abort = TRUE;
+        return;
+    }
+
     switch (msg)
     {
     case MSG_MOUSE_DOWN:
@@ -1090,6 +1101,7 @@ edit_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
                 {
                     /* start window move */
                     edit_execute_cmd (edit, CK_WindowMove, -1);
+                    edit_update_screen (edit);  /* Paint the buttonbar over our possibly overlapping frame. */
                     edit->drag_state_start = event->x;
                 }
                 break;
