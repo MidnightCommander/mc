@@ -889,7 +889,7 @@ edit_dialog_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
                     top = l;
 
             /* Handle fullscreen/close buttons in the top line */
-            x = w->cols - 5;
+            x = w->cols - 6;
 
             if (top != NULL && event->x >= x)
             {
@@ -1093,9 +1093,9 @@ edit_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
         {
             if (event->y == 0)
             {
-                if (event->x == close_x)
+                if (event->x >= close_x - 1 && event->x <= close_x + 1)
                     ;           /* do nothing (see MSG_MOUSE_CLICK) */
-                else if (event->x == toggle_fullscreen_x)
+                else if (event->x >= toggle_fullscreen_x - 1 && event->x <= toggle_fullscreen_x + 1)
                     ;           /* do nothing (see MSG_MOUSE_CLICK) */
                 else
                 {
@@ -1125,9 +1125,9 @@ edit_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     case MSG_MOUSE_CLICK:
         if (event->y == 0)
         {
-            if (event->x == close_x)
+            if (event->x >= close_x - 1 && event->x <= close_x + 1)
                 send_message (w->owner, NULL, MSG_ACTION, CK_Close, NULL);
-            else if (event->x == toggle_fullscreen_x)
+            else if (event->x >= toggle_fullscreen_x - 1 && event->x <= toggle_fullscreen_x + 1)
                 edit_toggle_fullscreen (edit);
             else if (!edit->fullscreen && event->count == GPM_DOUBLE)
                 /* double click on top line (toggle fullscreen) */
