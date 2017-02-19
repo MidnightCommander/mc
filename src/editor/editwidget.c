@@ -1057,7 +1057,7 @@ static void
 edit_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 {
     WEdit *edit = (WEdit *) w;
-    /* offset for top line */
+    /* buttons' distance from right edge */
     int dx = edit->fullscreen ? 0 : 2;
     /* location of 'Close' and 'Toggle fullscreen' pictograms */
     int close_x, toggle_fullscreen_x;
