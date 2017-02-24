@@ -2941,9 +2941,8 @@ msgstr "&Visualizza - F3"
 msgid "&Edit - F4"
 msgstr "&Modifica - F4"
 
-#, fuzzy, c-format
 msgid "Found: %lu"
-msgstr "Trovato: %ld"
+msgstr "Trovato: %lu"
 
 msgid "Malformed regular expression"
 msgstr "Espressione regolare malformata"

@@ -2756,7 +2756,7 @@ msgstr "Редактирай - F4"
 
 #, c-format
 msgid "Found: %lu"
-msgstr "Намерени: %ld"
+msgstr "Намерени: %lu"
 
 msgid "Malformed regular expression"
 msgstr "Неправилен регулярен израз"
