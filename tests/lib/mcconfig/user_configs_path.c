@@ -93,7 +93,7 @@ static const struct test_user_config_paths_ds
         MC_FHL_INI_FILE
     },
     { /* 2. */
-        CONF_DATA,
+        CONF_MAIN,
         MC_HOTLIST_FILE
     },
     { /* 3. */
