@@ -1,3 +1,66 @@
+Version 4.8.19
+
+- Core
+
+    * Replace $MC_HOME with $MC_PROFILE_ROOT (#3684)
+    * Allow rebind TAB key to change panel (#3672)
+    * Support for True Color (16 millions colors) (#3145)
+    * Color aliases in skin files (#3711)
+
+- VFS
+
+    * Support timestamps with nanosecond precision for copy/move operations (#3575)
+    * Introduce EXTFS helpers tester (#3730, #3744, #3752, #3753, #3751)
+    * Teach u7z to parse archive listings w/o sizes and/or dates (#2707)
+    * Teach rpm helper about transaction scripts (#3750)
+    * Fix hp48, uace & uarc extfs which used an obsolete date format (#3729, #3747)
+
+- Editor
+
+    * Syntax:
+        - updates of HTML and ebuild highlighting
+        - highlight *.t (Perl test) files as Perl scripts
+        - disassociate .cl file extension from LISP syntax (#3691)
+    * Add syntax highlighting:
+        - OpenCL (#3690)
+        - OpenShadingLanguage (#3762)
+        - R
+        - YAML (#3293)
+
+- Misc
+
+    * Code cleanup (#3693, #3703, #3721, #3763)
+    * Add true color skins: 'Four seasons' (#3724)
+    * Activate `--enable-tests` by default if `check` is found (#3708)
+    * Added new skin: YADT (MidnightCommander/mc#115)
+
+- Fixes
+
+    * Segfault on switching left panel to Info (#3700)
+    * Broken compatibility with ncurses (#3697)
+    * Setting MC_HOME makes mc ignore ~/.bashrc (#3684)
+    * mc_tmpdir() use a buffer of only 64 characters (#3736)
+    * Some bugs in the parsing of hexadecimal search patterns (#3694)
+    * Hexadecimal search fails on binary data (#3589)
+    * Broken file list resorting on double click on panel header line (#3715)
+    * Wrong dialog resizing and positioning (#3714, #3723)
+    * Widget's 'disabled' status is not toggled immediately (#3716)
+    * Last item of 'Options/Layout/Horizontal' radiobuttons remains highlighted (#3717)
+    * 'Options/Layout/Equal split' checkbox gets reverted (#3718)
+    * Panels: cannot show more than one "column" in user defined listing mode (#3757)
+    * Mix of MSG_NOTIFY and MSG_FOCUS messages (#3731)
+    * skins: 'window-state-char' and 'window-close-char' are parsed as colors (#3710)
+    * mcview: an error message about bad regexp isn't shown (#3720)
+    * mcedit: fix etags filenames parsing (#3698)
+    * mcedit: fix mouse active area for maximize / close buttons (#3774)
+    * mcedit: frames (MDI interface) don't reflect the focus state (#3766)
+    * mcedit: frames (MDI interface) sometimes obscure the buttonbar (#3760)
+    * mcedit doesn't show search error messages when searching backwards (#3735)
+    * help viewer: tab characters handled incorrectly (#3754)
+    * VFS: incorrect zoo archive listing (#3696)
+    * VFS: segfault in VFSs not setting block size in stat (#3749)
+
+
 Version 4.8.18
 
 - Core
