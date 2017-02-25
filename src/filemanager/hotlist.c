@@ -581,8 +581,34 @@ hotlist_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         return hotlist_handle_key (h, parm);
 
     case MSG_POST_KEY:
-        /* always stay on hotlist */
-        widget_select (h == hotlist_dlg ? WIDGET (l_hotlist) : WIDGET (l_movelist));
+        /*
+         * The code here has two purposes:
+         *
+         * (1) Always stay on the hotlist.
+         *
+         * Activating a button using its hotkey (and even pressing ENTER, as
+         * there's a "default button") moves the focus to the button. But we
+         * want to stay on the hotlist, to be able to use the usual keys (up,
+         * down, etc.). So we do `widget_select (lst)`.
+         *
+         * (2) Refresh the hotlist.
+         *
+         * We may have run a command that changed the contents of the list.
+         * We therefore need to refresh it. So we do `widget_redraw (lst)`.
+         */
+        {
+            Widget *lst;
+
+            lst = WIDGET (h == hotlist_dlg ? l_hotlist : l_movelist);
+
+            /* widget_select() already redraws the widget, but since it's a
+             * no-op if the widget is already selected ("focused"), we have
+             * to call widget_redraw() separately. */
+            if (!widget_get_state (lst, WST_FOCUSED))
+                widget_select (lst);
+            else
+                widget_redraw (lst);
+        }
         return MSG_HANDLED;
 
     case MSG_RESIZE:

@@ -471,6 +471,9 @@ widget_replace (Widget * old_w, Widget * new_w)
 /**
  * Select specified widget in it's owner.
  *
+ * Note: this function (and widget_focus(), which it calls) is a no-op
+ * if the widget is already selected.
+ *
  * @param w widget to be selected
  */
 
