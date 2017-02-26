@@ -422,7 +422,7 @@ make_symlink (file_op_context_t * ctx, const char *src_path, const char *dst_pat
     if (ctx->stable_symlinks && !(vfs_file_is_local (src_vpath) && vfs_file_is_local (dst_vpath)))
     {
         message (D_ERROR, MSG_ERROR,
-                 _("Cannot make stable symlinks across"
+                 _("Cannot make stable symlinks across "
                    "non-local filesystems:\n\nOption Stable Symlinks will be disabled"));
         ctx->stable_symlinks = FALSE;
     }
