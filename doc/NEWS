@@ -50,6 +50,7 @@ Version 4.8.19
     * Panels: cannot show more than one "column" in user defined listing mode (#3757)
     * Mix of MSG_NOTIFY and MSG_FOCUS messages (#3731)
     * skins: 'window-state-char' and 'window-close-char' are parsed as colors (#3710)
+    * Pressing <right> and <left> in the hotlist dialog doesn't refresh it (#3775)
     * mcview: an error message about bad regexp isn't shown (#3720)
     * mcedit: fix etags filenames parsing (#3698)
     * mcedit: fix mouse active area for maximize / close buttons (#3774)
