@@ -355,19 +355,7 @@ do_external_panelize (char *command)
     }
 
     current_panel->is_panelized = TRUE;
-
-    if (list->len > 1 && IS_PATH_SEP (list->list[1].fname[0]))
-    {
-        vfs_path_t *vpath_root;
-        int ret;
-
-        vpath_root = vfs_path_from_str (PATH_SEP_STR);
-        panel_set_cwd (current_panel, vpath_root);
-        ret = mc_chdir (vpath_root);
-        vfs_path_free (vpath_root);
-
-        (void) ret;
-    }
+    panelize_absolutize_if_needed (current_panel);
 
     if (pclose (external) < 0)
         message (D_NORMAL, _("External panelize"), _("Pipe close failed"));
@@ -479,6 +467,44 @@ panelize_save_panel (WPanel * panel)
         panelized_panel.list.list[i].st = list->list[i].st;
         panelized_panel.list.list[i].sort_key = list->list[i].sort_key;
         panelized_panel.list.list[i].second_sort_key = list->list[i].second_sort_key;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Conditionally switches a panel's directory to "/" (root).
+ *
+ * If a panelized panel's listing contain absolute paths, this function
+ * sets the panel's directory to "/". Otherwise it does nothing.
+ *
+ * Rationale:
+ *
+ * This makes tokenized strings like "%d/%p" work. This also makes other
+ * places work where such naive concatenation is done in code (e.g., when
+ * pressing ctrl+shift+enter, for CK_PutCurrentFullSelected).
+ *
+ * When to call:
+ *
+ * You should always call this function after you populate the listing
+ * of a panelized panel.
+ */
+void
+panelize_absolutize_if_needed (WPanel * panel)
+{
+    const dir_list *const list = &panel->dir;
+
+    /* Note: We don't support mixing of absolute and relative paths, which is
+     * why it's ok for us to check only the 1st entry. */
+    if (list->len > 1 && g_path_is_absolute (list->list[1].fname))
+    {
+        vfs_path_t *root;
+
+        root = vfs_path_from_str (PATH_SEP_STR);
+        panel_set_cwd (panel, root);
+        if (panel == current_panel)
+            mc_chdir (root);
+        vfs_path_free (root);
     }
 }
 

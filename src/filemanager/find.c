@@ -1820,16 +1820,7 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
         }
 
         current_panel->is_panelized = TRUE;
-
-        /* absolute path */
-        if (start_dir_len < 0)
-        {
-            int ret;
-            vfs_path_free (current_panel->cwd_vpath);
-            current_panel->cwd_vpath = vfs_path_from_str (PATH_SEP_STR);
-            ret = chdir (PATH_SEP_STR);
-            (void) ret;
-        }
+        panelize_absolutize_if_needed (current_panel);
         panelize_save_panel (current_panel);
     }
 
