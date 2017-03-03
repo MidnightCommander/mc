@@ -356,9 +356,7 @@ do_external_panelize (char *command)
 
     current_panel->is_panelized = TRUE;
 
-    if (list->len == 0)
-        dir_list_init (list);
-    else if (list->len > 1 && IS_PATH_SEP (list->list[1].fname[0]))
+    if (list->len > 1 && IS_PATH_SEP (list->list[1].fname[0]))
     {
         vfs_path_t *vpath_root;
         int ret;
