@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-11-21 13:19+0300\n"
-"PO-Revision-Date: 2016-11-22 08:19+0000\n"
+"POT-Creation-Date: 2017-02-24 22:45+0100\n"
+"PO-Revision-Date: 2017-02-25 09:22+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
 "MIME-Version: 1.0\n"
@@ -95,6 +95,23 @@ msgid ""
 "Your old settings were migrated from %s\n"
 "to %s\n"
 msgstr "Vechile tale setări au fost migrate din %s\nîn %s\n"
+
+msgid ""
+"Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
+"hex)"
+msgstr ""
+
+msgid "Invalid character"
+msgstr ""
+
+msgid "Unmatched quotes character"
+msgstr ""
+
+#, c-format
+msgid ""
+"Hex pattern error at position %d:\n"
+"%s."
+msgstr ""
 
 msgid "Search string not found"
 msgstr "Șirul căutat nu a fost găsit"
@@ -3675,8 +3692,11 @@ msgstr "Sistem virtual de fișiere:"
 msgid "Data types:"
 msgstr "Tipuri de date:"
 
-msgid "Root directory:"
-msgstr "Dosar rădăcină:"
+msgid "Home directory:"
+msgstr ""
+
+msgid "Profile root directory:"
+msgstr ""
 
 msgid "System data"
 msgstr "Date sistem"

@@ -5,7 +5,7 @@
 # Translators:
 # Atha Translate, 2016
 # cheese <cheese@nosuchhost.net>, 2016
-# Ettore Atalan <atalanttore@googlemail.com>, 2015-2016
+# Ettore Atalan <atalanttore@googlemail.com>, 2015-2017
 # Fabian Affolter <fab@fedoraproject.org>, 2012-2013
 # Karsten <waldstadt@web.de>, 2016
 # Larson März <larson@protonmail.ch>, 2016
@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-11-21 13:19+0300\n"
-"PO-Revision-Date: 2016-11-22 18:15+0000\n"
+"POT-Creation-Date: 2017-02-24 22:45+0100\n"
+"PO-Revision-Date: 2017-02-25 23:24+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German (http://www.transifex.com/mc/mc/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -99,6 +99,23 @@ msgid ""
 "Your old settings were migrated from %s\n"
 "to %s\n"
 msgstr "Ihre alten Einstellungen wurden von %s\nnach %s migriert\n"
+
+msgid ""
+"Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
+"hex)"
+msgstr "Zahl außerhalb des Bereichs (sollte im Byte-Bereich sein, 0 <= n <= 0xFF, ausgedrückt in Hex)"
+
+msgid "Invalid character"
+msgstr "Ungültiges Zeichen"
+
+msgid "Unmatched quotes character"
+msgstr ""
+
+#, c-format
+msgid ""
+"Hex pattern error at position %d:\n"
+"%s."
+msgstr "Hexmusterfehler bei Position %d:\n%s."
 
 msgid "Search string not found"
 msgstr "Suchstring nicht gefunden"
@@ -1778,7 +1795,7 @@ msgid "S&ingle press"
 msgstr "Einzelner Tastend&ruck"
 
 msgid "Timeout:"
-msgstr "Timeout:"
+msgstr "Zeitüberschreitung:"
 
 msgid "Pause after run"
 msgstr "Pause nach Aufruf"
@@ -1979,13 +1996,13 @@ msgid "Directory tree"
 msgstr "Verzeichnisbaum"
 
 msgid "Timeout for freeing VFSs (sec):"
-msgstr "Timeout bei der Freigabe in VFSen (sek):"
+msgstr "Zeitüberschreitung bei der Freigabe in VFSen (Sek):"
 
 msgid "FTP anonymous password:"
 msgstr "Anonymous FTP-Passwort:"
 
 msgid "FTP directory cache timeout (sec):"
-msgstr "Timeout im FTP Verzeichnis-Cache (sek):"
+msgstr "Zeitüberschreitung im FTP Verzeichnis-Cache (Sek):"
 
 msgid "&Always use ftp proxy:"
 msgstr "&Immer den FTP-Proxy benutzen:"
@@ -3675,8 +3692,11 @@ msgstr "Virtuelles Dateisystem:"
 msgid "Data types:"
 msgstr "Datentyp:"
 
-msgid "Root directory:"
-msgstr "Wurzel-Verzeichnis:"
+msgid "Home directory:"
+msgstr "Home-Verzeichnis:"
+
+msgid "Profile root directory:"
+msgstr ""
 
 msgid "System data"
 msgstr "System-Daten"
@@ -3697,7 +3717,7 @@ msgid "User data"
 msgstr "Benutzerdaten"
 
 msgid "Cache directory:"
-msgstr "Cache-verzeichnis:"
+msgstr "Cache-Zerzeichnis:"
 
 #, c-format
 msgid ""

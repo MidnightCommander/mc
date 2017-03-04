@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the mc package.
 # 
 # Translators:
-# Piotr Drąg <piotrdrag@gmail.com>, 2011-2016
+# Piotr Drąg <piotrdrag@gmail.com>, 2011-2017
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-11-21 13:19+0300\n"
-"PO-Revision-Date: 2016-11-22 09:25+0000\n"
+"POT-Creation-Date: 2017-02-24 22:45+0100\n"
+"PO-Revision-Date: 2017-02-25 19:32+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/mc/mc/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -90,6 +90,23 @@ msgid ""
 "Your old settings were migrated from %s\n"
 "to %s\n"
 msgstr "Poprzednie ustawienia zostały przeniesione z %s\ndo %s\n"
+
+msgid ""
+"Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
+"hex)"
+msgstr "Liczba jest poza zakresem (powinna być w zakresie bajtów, 0 <= n <= 0xFF, wyrażone szesnastkowo)"
+
+msgid "Invalid character"
+msgstr "Nieprawidłowy znak"
+
+msgid "Unmatched quotes character"
+msgstr "Niepasujący cudzysłów"
+
+#, c-format
+msgid ""
+"Hex pattern error at position %d:\n"
+"%s."
+msgstr "Błąd wzoru szesnastkowego w miejscu %d:\n%s."
 
 msgid "Search string not found"
 msgstr "Nie odnaleziono wyszukiwanego napisu"
@@ -3674,8 +3691,11 @@ msgstr "Wirtualne systemy plików:"
 msgid "Data types:"
 msgstr "Typy danych:"
 
-msgid "Root directory:"
-msgstr "Katalog główny:"
+msgid "Home directory:"
+msgstr "Katalog domowy:"
+
+msgid "Profile root directory:"
+msgstr "Główny katalog profilu:"
 
 msgid "System data"
 msgstr "Dane systemu"

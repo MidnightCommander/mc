@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-11-21 13:19+0300\n"
-"PO-Revision-Date: 2016-11-22 08:19+0000\n"
+"POT-Creation-Date: 2017-02-24 22:45+0100\n"
+"PO-Revision-Date: 2017-02-25 09:22+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -92,6 +92,23 @@ msgid ""
 "Your old settings were migrated from %s\n"
 "to %s\n"
 msgstr "A régi beállítások innen: %s migrálva lettek\nmigrálva lettek ide: %s\n"
+
+msgid ""
+"Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
+"hex)"
+msgstr ""
+
+msgid "Invalid character"
+msgstr ""
+
+msgid "Unmatched quotes character"
+msgstr ""
+
+#, c-format
+msgid ""
+"Hex pattern error at position %d:\n"
+"%s."
+msgstr ""
 
 msgid "Search string not found"
 msgstr "A keresett szöveg nem található"
@@ -3668,8 +3685,11 @@ msgstr "Virtuális fájlrendszerek:"
 msgid "Data types:"
 msgstr "Adattípusok:"
 
-msgid "Root directory:"
-msgstr "Gyökérkönyvtár: "
+msgid "Home directory:"
+msgstr ""
+
+msgid "Profile root directory:"
+msgstr ""
 
 msgid "System data"
 msgstr "Rendszer adatok"

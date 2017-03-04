@@ -6,13 +6,14 @@
 # Myselus, 2015-2017
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Yasen Pramatarov <yasen@lindeas.com>, 2011-2014,2016
+# Yury V. Zaytsev <yury@shurup.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-11-21 13:19+0300\n"
-"PO-Revision-Date: 2017-01-18 13:21+0000\n"
-"Last-Translator: Myselus\n"
+"POT-Creation-Date: 2017-02-24 22:45+0100\n"
+"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/mc/mc/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -91,6 +92,23 @@ msgid ""
 "Your old settings were migrated from %s\n"
 "to %s\n"
 msgstr "Старите ви настройки бяха преместени от %s\nв %s\n"
+
+msgid ""
+"Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
+"hex)"
+msgstr ""
+
+msgid "Invalid character"
+msgstr ""
+
+msgid "Unmatched quotes character"
+msgstr ""
+
+#, c-format
+msgid ""
+"Hex pattern error at position %d:\n"
+"%s."
+msgstr ""
 
 msgid "Search string not found"
 msgstr "Търсеният низ не намерен"
@@ -3667,8 +3685,11 @@ msgstr "Виртуални файлови системи:"
 msgid "Data types:"
 msgstr "Типове за данни:"
 
-msgid "Root directory:"
-msgstr "Root директория:"
+msgid "Home directory:"
+msgstr ""
+
+msgid "Profile root directory:"
+msgstr ""
 
 msgid "System data"
 msgstr "Системни данни"

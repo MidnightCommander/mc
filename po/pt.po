@@ -5,14 +5,14 @@
 # Translators:
 # Gilberto J <2101458@my.ipleiria.pt>, 2012
 # Gilberto Jorge <gmj125@gmail.com>, 2012-2013
-# Gilberto Jorge <gmj125@gmail.com>, 2013-2016
+# Gilberto Jorge <gmj125@gmail.com>, 2013-2017
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-11-21 13:19+0300\n"
-"PO-Revision-Date: 2016-11-23 23:53+0000\n"
+"POT-Creation-Date: 2017-02-24 22:45+0100\n"
+"PO-Revision-Date: 2017-02-26 16:49+0000\n"
 "Last-Translator: Gilberto Jorge <gmj125@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/mc/mc/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -92,6 +92,23 @@ msgid ""
 "Your old settings were migrated from %s\n"
 "to %s\n"
 msgstr "As suas antigas configurações foram migradas de %s\npara %s\n"
+
+msgid ""
+"Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
+"hex)"
+msgstr "Número excede o limite (deve situar-se no intervalo de um byte, 0 <= n <= 0xFF, em hex)"
+
+msgid "Invalid character"
+msgstr "Caracter inválido"
+
+msgid "Unmatched quotes character"
+msgstr "Caracter aspas sem o respetivo par"
+
+#, c-format
+msgid ""
+"Hex pattern error at position %d:\n"
+"%s."
+msgstr "Erro no padrão hex na posição %d:\n%s."
 
 msgid "Search string not found"
 msgstr "Cadeia de carateres de procura não encontrada"
@@ -2808,8 +2825,8 @@ msgstr "Terminado"
 #, c-format
 msgid "Finished (ignored %zu directory)"
 msgid_plural "Finished (ignored %zu directories)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Terminado (%zu directório ignorado)"
+msgstr[1] "Terminado (%zu directórios ignorados)"
 
 msgid "Searching"
 msgstr "A procurar"
@@ -2967,8 +2984,8 @@ msgstr "Tamanho:       %s"
 #, c-format
 msgid " (%lu block)"
 msgid_plural " (%lu blocks)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " (%lu bloco)"
+msgstr[1] " (%lu blocos)"
 
 #, c-format
 msgid "Owner:      %s/%s"
@@ -3202,8 +3219,8 @@ msgstr "Painéis:"
 #, c-format
 msgid "You have %zu opened screen. Quit anyway?"
 msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Tem %zu ecrã aberto. Terminar de qualquer modo?"
+msgstr[1] "Tem %zu ecrãs abertos. Terminar de qualquer modo?"
 
 msgid "The Midnight Commander"
 msgstr "O Midnight Commander"
@@ -3668,8 +3685,11 @@ msgstr "Sistemas de Ficheiros Virtuais:"
 msgid "Data types:"
 msgstr "Tipos de dados:"
 
-msgid "Root directory:"
-msgstr "Diretório de root:"
+msgid "Home directory:"
+msgstr "Directório Home:"
+
+msgid "Profile root directory:"
+msgstr "Directório do perfil root:"
 
 msgid "System data"
 msgstr "Dados de sistema"
