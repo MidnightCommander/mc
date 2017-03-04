@@ -356,7 +356,8 @@ save_stop_handler (void)
  * @param status exit code
  */
 
-void __attribute__ ((noreturn)) my_exit (int status)
+void
+my_exit (int status)
 {
     _exit (status);
 }
