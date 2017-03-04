@@ -357,6 +357,7 @@ save_stop_handler (void)
  */
 
 void
+/* __attribute__ ((noreturn)) */
 my_exit (int status)
 {
     _exit (status);
