@@ -385,7 +385,6 @@ do_panelize_cd (WPanel * panel)
 
     list = &panel->dir;
     list->len = panelized_panel.list.len;
-    panel->is_panelized = TRUE;
 
     panelized_same = vfs_path_equal (panelized_panel.root_vpath, panel->cwd_vpath);
 
@@ -418,6 +417,10 @@ do_panelize_cd (WPanel * panel)
         list->list[i].sort_key = panelized_panel.list.list[i].sort_key;
         list->list[i].second_sort_key = panelized_panel.list.list[i].second_sort_key;
     }
+
+    panel->is_panelized = TRUE;
+    panelize_absolutize_if_needed (panel);
+
     try_to_select (panel, NULL);
 }
 
