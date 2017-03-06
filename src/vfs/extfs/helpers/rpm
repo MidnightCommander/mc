@@ -111,7 +111,8 @@ mcrpmfs_getAllNeededTags()
 "|PROVIDES=%{PROVIDES} %{PROVIDEFLAGS:depflags} %{PROVIDEVERSION}"\
 ${tag_CONFLICTS}\
 "|PACKAGER=%{PACKAGER}" \
-    "${rpm_filename}"
+    "${rpm_filename}" \
+    | tr '\n' ' '  # The newlines in DESCRIPTION mess with the sed script in mcrpmfs_getOneTag().
 }
 
 mcrpmfs_getRawOneTag()
@@ -121,7 +122,7 @@ mcrpmfs_getRawOneTag()
 
 mcrpmfs_getOneTag()
 {
-    echo $AllTAGS | $SED "s/.*|${1}=//" | cut -d '|' -f 1
+    echo "$AllTAGS" | $SED "s/.*|${1}=//" | cut -d '|' -f 1
 }
 
 mcrpmfs_printOneMetaInfo()
