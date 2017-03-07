@@ -111,10 +111,17 @@ has_prog() {
 }
 
 #
+# Are we running interactively? Or is our output redirected to a file/pipe?
+#
+is_interactive() {
+  [ -t 1 ]
+}
+
+#
 # Can we use colors?
 #
 has_colors() {
-  [ -t 1 ] && has_string "$TERM" 'linux\|xterm\|screen\|tmux\|putty'
+  is_interactive && has_string "$TERM" 'linux\|xterm\|screen\|tmux\|putty'
 }
 
 init_colors() {
@@ -329,14 +336,23 @@ run() {
        err "If the actual output is the correct one, just copy the latter file"
        err "onto the former (and commit to the git repository)."
        err
-       if [ $opt_run_mcdiff_on_error = "yes" ]; then
-         notice "Hit ENTER to launch mcdiff ..."
-         read dummy_var  # dash needs this.
-         ${MCDIFF:-mcdiff} "$expected_parsed_output" "$actual_parsed_output"
+       if is_interactive; then
+         if [ $opt_run_mcdiff_on_error = "yes" ]; then
+           notice "Hit ENTER to launch mcdiff ..."
+           read dummy_var  # dash needs this.
+           ${MCDIFF:-mcdiff} "$expected_parsed_output" "$actual_parsed_output"
+         else
+           notice "Tip: invoke this program with '--mcdiff' to automatically launch"
+           notice "mcdiff to visually inspect the diff."
+           notice
+           notice "(Running this program non-interactively (i.e., redirecting the"
+           notice "output to a file or pipe) automatically adds diff to the output.)"
+           notice
+         fi
        else
-         notice "Tip: invoke this program with '--mcdiff' to automatically launch"
-         notice "mcdiff to visually inspect the diff."
-         notice
+         err "------------ diff of the expected output vs the actual output: -------------"
+         diff -U2 "$expected_parsed_output" "$actual_parsed_output"
+         err "------------------------------- end of diff --------------------------------"
        fi
        continue
     fi
