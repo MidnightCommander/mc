@@ -2106,6 +2106,8 @@ edit_init (WEdit * edit, int y, int x, int lines, int cols, const vfs_path_t * f
         w = WIDGET (edit);
         widget_init (w, y, x, lines, cols, NULL, NULL);
         w->options |= WOP_SELECTABLE | WOP_TOP_SELECT | WOP_WANT_CURSOR;
+        w->keymap = editor_map;
+        w->ext_keymap = editor_x_map;
         edit->fullscreen = TRUE;
         edit_save_size (edit);
     }
@@ -3926,7 +3928,7 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
         edit_begin_end_repeat_cmd (edit);
         break;
     case CK_ExtendedKeyMap:
-        edit->extmod = TRUE;
+        w->ext_mode = TRUE;
         break;
     default:
         break;

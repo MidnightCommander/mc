@@ -2970,13 +2970,13 @@ dview_labels (WDiff * dview)
 
     b = find_buttonbar (DIALOG (d->owner));
 
-    buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), diff_map, d);
-    buttonbar_set_label (b, 2, Q_ ("ButtonBar|Save"), diff_map, d);
-    buttonbar_set_label (b, 4, Q_ ("ButtonBar|Edit"), diff_map, d);
-    buttonbar_set_label (b, 5, Q_ ("ButtonBar|Merge"), diff_map, d);
-    buttonbar_set_label (b, 7, Q_ ("ButtonBar|Search"), diff_map, d);
-    buttonbar_set_label (b, 9, Q_ ("ButtonBar|Options"), diff_map, d);
-    buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), diff_map, d);
+    buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), d->keymap, d);
+    buttonbar_set_label (b, 2, Q_ ("ButtonBar|Save"), d->keymap, d);
+    buttonbar_set_label (b, 4, Q_ ("ButtonBar|Edit"), d->keymap, d);
+    buttonbar_set_label (b, 5, Q_ ("ButtonBar|Merge"), d->keymap, d);
+    buttonbar_set_label (b, 7, Q_ ("ButtonBar|Search"), d->keymap, d);
+    buttonbar_set_label (b, 9, Q_ ("ButtonBar|Options"), d->keymap, d);
+    buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), d->keymap, d);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -3289,7 +3289,7 @@ dview_handle_key (WDiff * dview, int key)
     key = convert_from_input_c (key);
 #endif
 
-    command = keybind_lookup_keymap_command (diff_map, key);
+    command = widget_lookup_key (WIDGET (dview), key);
     if ((command != CK_IgnoreKey) && (dview_execute_cmd (dview, command) == MSG_HANDLED))
         return MSG_HANDLED;
 
@@ -3457,6 +3457,7 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
     w = WIDGET (dview);
     widget_init (w, dw->y, dw->x, dw->lines - 1, dw->cols, dview_callback, dview_mouse_callback);
     w->options |= WOP_SELECTABLE;
+    w->keymap = diff_map;
     group_add_widget_autopos (g, w, WPOS_KEEP_ALL, NULL);
 
     w = WIDGET (buttonbar_new (TRUE));

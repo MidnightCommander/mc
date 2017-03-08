@@ -3593,7 +3593,7 @@ panel_execute_cmd (WPanel * panel, long command)
 static cb_ret_t
 panel_key (WPanel * panel, int key)
 {
-    size_t i;
+    long command;
 
     if (is_abort_char (key))
     {
@@ -3607,9 +3607,9 @@ panel_key (WPanel * panel, int key)
         return MSG_HANDLED;
     }
 
-    for (i = 0; panel_map[i].key != 0; i++)
-        if (key == panel_map[i].key)
-            return panel_execute_cmd (panel, panel_map[i].command);
+    command = widget_lookup_key (WIDGET (panel), key);
+    if (command != CK_IgnoreKey)
+        return panel_execute_cmd (panel, command);
 
     if (panels_options.torben_fj_mode && key == ALT ('h'))
     {
@@ -4301,6 +4301,7 @@ panel_sized_empty_new (const char *panel_name, int y, int x, int lines, int cols
     w = WIDGET (panel);
     widget_init (w, y, x, lines, cols, panel_callback, panel_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
+    w->keymap = panel_map;
 
     panel->dir.size = DIR_LIST_MIN_SIZE;
     panel->dir.list = g_new (file_entry_t, panel->dir.size);

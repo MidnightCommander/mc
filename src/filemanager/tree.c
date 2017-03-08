@@ -971,14 +971,15 @@ tree_start_search (WTree * tree)
 static void
 tree_toggle_navig (WTree * tree)
 {
+    Widget *w = WIDGET (tree);
     WButtonBar *b;
 
     tree_navigation_flag = !tree_navigation_flag;
 
-    b = find_buttonbar (DIALOG (WIDGET (tree)->owner));
+    b = find_buttonbar (DIALOG (w->owner));
     buttonbar_set_label (b, 4,
                          tree_navigation_flag ? Q_ ("ButtonBar|Static") : Q_ ("ButtonBar|Dynamc"),
-                         tree_map, WIDGET (tree));
+                         w->keymap, w);
     widget_draw (WIDGET (b));
 }
 
@@ -1060,7 +1061,7 @@ tree_execute_cmd (WTree * tree, long command)
 static cb_ret_t
 tree_key (WTree * tree, int key)
 {
-    size_t i;
+    long command;
 
     if (is_abort_char (key))
     {
@@ -1082,18 +1083,17 @@ tree_key (WTree * tree, int key)
         return MSG_HANDLED;
     }
 
-    for (i = 0; tree_map[i].key != 0; i++)
-        if (key == tree_map[i].key)
-            switch (tree_map[i].command)
-            {
-            case CK_Left:
-                return tree_move_left (tree) ? MSG_HANDLED : MSG_NOT_HANDLED;
-            case CK_Right:
-                return tree_move_right (tree) ? MSG_HANDLED : MSG_NOT_HANDLED;
-            default:
-                tree_execute_cmd (tree, tree_map[i].command);
-                return MSG_HANDLED;
-            }
+    command = widget_lookup_key (WIDGET (tree), key);
+    switch (command)
+    {
+    case CK_Left:
+        return tree_move_left (tree) ? MSG_HANDLED : MSG_NOT_HANDLED;
+    case CK_Right:
+        return tree_move_right (tree) ? MSG_HANDLED : MSG_NOT_HANDLED;
+    default:
+        tree_execute_cmd (tree, command);
+        return MSG_HANDLED;
+    }
 
     /* Do not eat characters not meant for the tree below ' ' (e.g. C-l). */
     if (!command_prompt && ((key >= ' ' && key <= 255) || key == KEY_BACKSPACE))
@@ -1164,20 +1164,20 @@ tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
 
     case MSG_FOCUS:
         b = find_buttonbar (h);
-        buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), tree_map, w);
-        buttonbar_set_label (b, 2, Q_ ("ButtonBar|Rescan"), tree_map, w);
-        buttonbar_set_label (b, 3, Q_ ("ButtonBar|Forget"), tree_map, w);
+        buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), w->keymap, w);
+        buttonbar_set_label (b, 2, Q_ ("ButtonBar|Rescan"), w->keymap, w);
+        buttonbar_set_label (b, 3, Q_ ("ButtonBar|Forget"), w->keymap, w);
         buttonbar_set_label (b, 4, tree_navigation_flag ? Q_ ("ButtonBar|Static")
-                             : Q_ ("ButtonBar|Dynamc"), tree_map, w);
-        buttonbar_set_label (b, 5, Q_ ("ButtonBar|Copy"), tree_map, w);
-        buttonbar_set_label (b, 6, Q_ ("ButtonBar|RenMov"), tree_map, w);
+                             : Q_ ("ButtonBar|Dynamc"), w->keymap, w);
+        buttonbar_set_label (b, 5, Q_ ("ButtonBar|Copy"), w->keymap, w);
+        buttonbar_set_label (b, 6, Q_ ("ButtonBar|RenMov"), w->keymap, w);
 #if 0
         /* FIXME: mkdir is currently defunct */
-        buttonbar_set_label (b, 7, Q_ ("ButtonBar|Mkdir"), tree_map, w);
+        buttonbar_set_label (b, 7, Q_ ("ButtonBar|Mkdir"), w->keymap, w);
 #else
         buttonbar_clear_label (b, 7, w);
 #endif
-        buttonbar_set_label (b, 8, Q_ ("ButtonBar|Rmdir"), tree_map, w);
+        buttonbar_set_label (b, 8, Q_ ("ButtonBar|Rmdir"), w->keymap, w);
 
         return MSG_HANDLED;
 
@@ -1279,10 +1279,12 @@ tree_new (int y, int x, int lines, int cols, gboolean is_panel)
     Widget *w;
 
     tree = g_new (WTree, 1);
-    w = WIDGET (tree);
 
+    w = WIDGET (tree);
     widget_init (w, y, x, lines, cols, tree_callback, tree_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
+    w->keymap = tree_map;
+
     tree->is_panel = is_panel;
     tree->selected_ptr = NULL;
 

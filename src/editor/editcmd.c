@@ -1839,7 +1839,7 @@ edit_store_macro_cmd (WEdit * edit)
     if (hotkey == ESC_CHAR)
         return FALSE;
 
-    tmp_act = keybind_lookup_keymap_command (editor_map, hotkey);
+    tmp_act = keybind_lookup_keymap_command (WIDGET (edit)->keymap, hotkey);
 
     /* return FALSE if try assign macro into restricted hotkeys */
     if (tmp_act == CK_MacroStartRecord

@@ -78,46 +78,47 @@ static enum ruler_type
 static void
 mcview_set_buttonbar (WView * view)
 {
-    WDialog *h = DIALOG (WIDGET (view)->owner);
+    Widget *w = WIDGET (view);
+    WDialog *h = DIALOG (w->owner);
     WButtonBar *b;
-    const global_keymap_t *keymap = view->mode_flags.hex ? viewer_hex_map : viewer_map;
+    const global_keymap_t *keymap = view->mode_flags.hex ? view->hex_keymap : w->keymap;
 
     b = find_buttonbar (h);
-    buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), keymap, WIDGET (view));
+    buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), keymap, w);
 
     if (view->mode_flags.hex)
     {
         if (view->hexedit_mode)
-            buttonbar_set_label (b, 2, Q_ ("ButtonBar|View"), keymap, WIDGET (view));
+            buttonbar_set_label (b, 2, Q_ ("ButtonBar|View"), keymap, w);
         else if (view->datasource == DS_FILE)
-            buttonbar_set_label (b, 2, Q_ ("ButtonBar|Edit"), keymap, WIDGET (view));
+            buttonbar_set_label (b, 2, Q_ ("ButtonBar|Edit"), keymap, w);
         else
             buttonbar_set_label (b, 2, "", keymap, WIDGET (view));
 
-        buttonbar_set_label (b, 4, Q_ ("ButtonBar|Ascii"), keymap, WIDGET (view));
-        buttonbar_set_label (b, 6, Q_ ("ButtonBar|Save"), keymap, WIDGET (view));
-        buttonbar_set_label (b, 7, Q_ ("ButtonBar|HxSrch"), keymap, WIDGET (view));
+        buttonbar_set_label (b, 4, Q_ ("ButtonBar|Ascii"), keymap, w);
+        buttonbar_set_label (b, 6, Q_ ("ButtonBar|Save"), keymap, w);
+        buttonbar_set_label (b, 7, Q_ ("ButtonBar|HxSrch"), keymap, w);
 
     }
     else
     {
         buttonbar_set_label (b, 2, view->mode_flags.wrap ? Q_ ("ButtonBar|UnWrap")
-                             : Q_ ("ButtonBar|Wrap"), keymap, WIDGET (view));
-        buttonbar_set_label (b, 4, Q_ ("ButtonBar|Hex"), keymap, WIDGET (view));
+                             : Q_ ("ButtonBar|Wrap"), keymap, w);
+        buttonbar_set_label (b, 4, Q_ ("ButtonBar|Hex"), keymap, w);
         buttonbar_set_label (b, 6, "", keymap, WIDGET (view));
-        buttonbar_set_label (b, 7, Q_ ("ButtonBar|Search"), keymap, WIDGET (view));
+        buttonbar_set_label (b, 7, Q_ ("ButtonBar|Search"), keymap, w);
     }
 
-    buttonbar_set_label (b, 5, Q_ ("ButtonBar|Goto"), keymap, WIDGET (view));
+    buttonbar_set_label (b, 5, Q_ ("ButtonBar|Goto"), keymap, w);
     buttonbar_set_label (b, 8, view->mode_flags.magic ? Q_ ("ButtonBar|Raw")
-                         : Q_ ("ButtonBar|Parse"), keymap, WIDGET (view));
+                         : Q_ ("ButtonBar|Parse"), keymap, w);
 
     if (!mcview_is_in_panel (view))     /* don't override some panel buttonbar keys  */
     {
-        buttonbar_set_label (b, 3, Q_ ("ButtonBar|Quit"), keymap, WIDGET (view));
+        buttonbar_set_label (b, 3, Q_ ("ButtonBar|Quit"), keymap, w);
         buttonbar_set_label (b, 9, view->mode_flags.nroff ? Q_ ("ButtonBar|Unform")
-                             : Q_ ("ButtonBar|Format"), keymap, WIDGET (view));
-        buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), keymap, WIDGET (view));
+                             : Q_ ("ButtonBar|Format"), keymap, w);
+        buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), keymap, w);
     }
 }
 

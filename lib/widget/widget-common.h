@@ -6,6 +6,7 @@
 #ifndef MC__WIDGET_INTERNAL_H
 #define MC__WIDGET_INTERNAL_H
 
+#include "lib/keybind.h"        /* global_keymap_t */
 #include "lib/tty/mouse.h"
 #include "lib/widget/mouse.h"   /* mouse_msg_t, mouse_event_t */
 
@@ -138,6 +139,11 @@ struct Widget
     widget_mouse_cb_fn mouse_callback;
     WGroup *owner;
 
+    /* Key-related fields */
+    const global_keymap_t *keymap;      /* main keymap */
+    const global_keymap_t *ext_keymap;  /* extended keymap */
+    gboolean ext_mode;          /* use keymap or ext_keymap */
+
     /* Mouse-related fields. */
     widget_mouse_handle_fn mouse_handler;
     struct
@@ -204,6 +210,8 @@ gboolean widget_overlapped (const Widget * a, const Widget * b);
 void widget_replace (Widget * old, Widget * new);
 void widget_select (Widget * w);
 void widget_set_bottom (Widget * w);
+
+long widget_lookup_key (Widget * w, int key);
 
 GList *widget_default_find (const Widget * w, const Widget * what);
 Widget *widget_default_find_by_type (const Widget * w, widget_cb_fn cb);

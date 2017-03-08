@@ -297,6 +297,11 @@ widget_init (Widget * w, int y, int x, int lines, int cols,
     w->lines = lines;
     w->pos_flags = WPOS_KEEP_DEFAULT;
     w->callback = callback;
+
+    w->keymap = NULL;
+    w->ext_keymap = NULL;
+    w->ext_mode = FALSE;
+
     w->mouse_callback = mouse_callback;
     w->owner = NULL;
     w->mouse_handler = mouse_handle_event;
@@ -695,6 +700,27 @@ widget_overlapped (const Widget * a, const Widget * b)
 {
     return !((b->x >= a->x + a->cols)
              || (a->x >= b->x + b->cols) || (b->y >= a->y + a->lines) || (a->y >= b->y + b->lines));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+  * Look up key event of widget and translate it to command ID.
+  * @param w   widget
+  * @param key key event
+  *
+  * @return command ID binded with @key.
+  */
+
+long
+widget_lookup_key (Widget * w, int key)
+{
+    if (w->ext_mode)
+    {
+        w->ext_mode = FALSE;
+        return keybind_lookup_keymap_command (w->ext_keymap, key);
+    }
+
+    return keybind_lookup_keymap_command (w->keymap, key);
 }
 
 /* --------------------------------------------------------------------------------------------- */

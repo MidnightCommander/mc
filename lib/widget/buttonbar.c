@@ -44,7 +44,6 @@
 #include "lib/skin.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/keybind.h"        /* global_keymap_t */
 #include "lib/widget.h"
 
 /*** global variables ****************************************************************************/

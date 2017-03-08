@@ -846,15 +846,16 @@ help_execute_cmd (long command)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-help_handle_key (WDialog * h, int c)
+help_handle_key (WDialog * h, int key)
 {
+    Widget *w = WIDGET (h);
     long command;
 
-    command = keybind_lookup_keymap_command (help_map, c);
+    command = widget_lookup_key (w, key);
     if ((command == CK_IgnoreKey) || (help_execute_cmd (command) == MSG_NOT_HANDLED))
         return MSG_NOT_HANDLED;
 
-    widget_draw (WIDGET (h));
+    widget_draw (w);
 
     return MSG_HANDLED;
 }
@@ -1073,6 +1074,7 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
         HELP_TITLE_COLOR        /* title color */
     };
 
+    Widget *wh;
     WGroup *g;
     WButtonBar *help_bar;
     Widget *md;
@@ -1128,8 +1130,10 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
     whelp =
         dlg_create (TRUE, 0, 0, help_lines + 4, HELP_WINDOW_WIDTH + 4, WPOS_CENTER | WPOS_TRYUP,
                     FALSE, help_colors, help_callback, NULL, "[Help]", _("Help"));
+    wh = WIDGET (whelp);
     g = GROUP (whelp);
-    widget_want_tab (WIDGET (whelp), TRUE);
+    wh->keymap = help_map;
+    widget_want_tab (wh, TRUE);
     /* draw background */
     whelp->bg->callback = help_bg_callback;
 
@@ -1144,24 +1148,24 @@ help_interactive_display (const gchar * event_group_name, const gchar * event_na
     }
 
     help_bar = buttonbar_new (TRUE);
-    WIDGET (help_bar)->y -= WIDGET (whelp)->y;
-    WIDGET (help_bar)->x -= WIDGET (whelp)->x;
+    WIDGET (help_bar)->y -= wh->y;
+    WIDGET (help_bar)->x -= wh->x;
 
     md = mousedispatch_new (1, 1, help_lines, HELP_WINDOW_WIDTH - 2);
 
     group_add_widget (g, md);
     group_add_widget (g, help_bar);
 
-    buttonbar_set_label (help_bar, 1, Q_ ("ButtonBar|Help"), help_map, NULL);
-    buttonbar_set_label (help_bar, 2, Q_ ("ButtonBar|Index"), help_map, NULL);
-    buttonbar_set_label (help_bar, 3, Q_ ("ButtonBar|Prev"), help_map, NULL);
-    buttonbar_set_label (help_bar, 4, "", help_map, NULL);
-    buttonbar_set_label (help_bar, 5, "", help_map, NULL);
-    buttonbar_set_label (help_bar, 6, "", help_map, NULL);
-    buttonbar_set_label (help_bar, 7, "", help_map, NULL);
-    buttonbar_set_label (help_bar, 8, "", help_map, NULL);
-    buttonbar_set_label (help_bar, 9, "", help_map, NULL);
-    buttonbar_set_label (help_bar, 10, Q_ ("ButtonBar|Quit"), help_map, NULL);
+    buttonbar_set_label (help_bar, 1, Q_ ("ButtonBar|Help"), wh->keymap, NULL);
+    buttonbar_set_label (help_bar, 2, Q_ ("ButtonBar|Index"), wh->keymap, NULL);
+    buttonbar_set_label (help_bar, 3, Q_ ("ButtonBar|Prev"), wh->keymap, NULL);
+    buttonbar_set_label (help_bar, 4, "", wh->keymap, NULL);
+    buttonbar_set_label (help_bar, 5, "", wh->keymap, NULL);
+    buttonbar_set_label (help_bar, 6, "", wh->keymap, NULL);
+    buttonbar_set_label (help_bar, 7, "", wh->keymap, NULL);
+    buttonbar_set_label (help_bar, 8, "", wh->keymap, NULL);
+    buttonbar_set_label (help_bar, 9, "", wh->keymap, NULL);
+    buttonbar_set_label (help_bar, 10, Q_ ("ButtonBar|Quit"), wh->keymap, NULL);
 
     dlg_run (whelp);
     interactive_display_finish ();

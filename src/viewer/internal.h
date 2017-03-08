@@ -138,6 +138,7 @@ struct WView
 
     /* Hex editor modes */
     gboolean hexedit_mode;      /* Hexview or Hexedit */
+    const global_keymap_t *hex_keymap;
     gboolean hexview_in_text;   /* Is the hexview cursor in the text area? */
     int bytes_per_line;         /* Number of bytes per line in hex mode */
     off_t hex_cursor;           /* Hexview cursor position in file */

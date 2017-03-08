@@ -46,7 +46,6 @@
 #include "lib/skin.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/keybind.h"        /* global_keymap_t */
 #include "lib/widget.h"
 #include "lib/event.h"          /* mc_event_raise() */
 #include "lib/mcconfig.h"       /* mc_config_history_*() */
@@ -998,6 +997,7 @@ input_new (int y, int x, const int *colors, int width, const char *def_text,
     w = WIDGET (in);
     widget_init (w, y, x, 1, width, input_callback, input_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_IS_INPUT | WOP_WANT_CURSOR;
+    w->keymap = input_map;
 
     in->color = colors;
     in->first = TRUE;
@@ -1139,8 +1139,7 @@ input_handle_char (WInput * in, int key)
         return v;
     }
 
-    command = keybind_lookup_keymap_command (input_map, key);
-
+    command = widget_lookup_key (WIDGET (in), key);
     if (command == CK_IgnoreKey)
     {
         if (key > 255)
@@ -1174,9 +1173,7 @@ input_key_is_in_map (WInput * in, int key)
 {
     long command;
 
-    (void) in;
-
-    command = keybind_lookup_keymap_command (input_map, key);
+    command = widget_lookup_key (WIDGET (in), key);
     if (command == CK_IgnoreKey)
         return 0;
 

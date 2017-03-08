@@ -589,6 +589,17 @@ mcview_execute_cmd (WView * view, long command)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static long
+mcview_lookup_key (WView * view, int key)
+{
+    if (view->mode_flags.hex)
+        return keybind_lookup_keymap_command (view->hex_keymap, key);
+
+    return widget_lookup_key (WIDGET (view), key);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /** Both views */
 static cb_ret_t
 mcview_handle_key (WView * view, int key)
@@ -599,18 +610,12 @@ mcview_handle_key (WView * view, int key)
     key = convert_from_input_c (key);
 #endif
 
-    if (view->mode_flags.hex)
-    {
-        if (view->hexedit_mode && (mcview_handle_editkey (view, key) == MSG_HANDLED))
-            return MSG_HANDLED;
+    if (view->hexedit_mode && view->mode_flags.hex
+        && mcview_handle_editkey (view, key) == MSG_HANDLED)
+        return MSG_HANDLED;
 
-        command = keybind_lookup_keymap_command (viewer_hex_map, key);
-        if ((command != CK_IgnoreKey) && (mcview_execute_cmd (view, command) == MSG_HANDLED))
-            return MSG_HANDLED;
-    }
-
-    command = keybind_lookup_keymap_command (viewer_map, key);
-    if ((command != CK_IgnoreKey) && (mcview_execute_cmd (view, command) == MSG_HANDLED))
+    command = mcview_lookup_key (view, key);
+    if (command != CK_IgnoreKey && mcview_execute_cmd (view, command) == MSG_HANDLED)
         return MSG_HANDLED;
 
 #ifdef MC_ENABLE_DEBUGGING_CODE

@@ -201,9 +201,11 @@ mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
     w = WIDGET (view);
     widget_init (w, y, x, lines, cols, mcview_callback, mcview_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
+    w->keymap = viewer_map;
 
     mcview_clear_mode_flags (&view->mode_flags);
     view->hexedit_mode = FALSE;
+    view->hex_keymap = viewer_hex_map;
     view->hexview_in_text = FALSE;
     view->locked = FALSE;
 

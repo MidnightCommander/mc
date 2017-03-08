@@ -491,11 +491,12 @@ edit_dialog_command_execute (WDialog * h, long command)
 static gboolean
 edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch)
 {
+    Widget *w = WIDGET (edit);
     long command = CK_InsertChar;
     int char_for_insertion = -1;
 
     /* an ordinary insertable character */
-    if (!edit->extmod && x_key < 256)
+    if (!w->ext_mode && x_key < 256)
     {
 #ifndef HAVE_CHARSET
         if (is_printable (x_key))
@@ -588,14 +589,7 @@ edit_translate_key (WEdit * edit, long x_key, int *cmd, int *ch)
     }
 
     /* Commands specific to the key emulation */
-    if (edit->extmod)
-    {
-        edit->extmod = FALSE;
-        command = keybind_lookup_keymap_command (editor_x_map, x_key);
-    }
-    else
-        command = keybind_lookup_keymap_command (editor_map, x_key);
-
+    command = widget_lookup_key (w, x_key);
     if (command == CK_IgnoreKey)
         command = CK_InsertChar;
 
@@ -661,16 +655,18 @@ edit_quit (WDialog * h)
 static inline void
 edit_set_buttonbar (WEdit * edit, WButtonBar * bb)
 {
-    buttonbar_set_label (bb, 1, Q_ ("ButtonBar|Help"), editor_map, NULL);
-    buttonbar_set_label (bb, 2, Q_ ("ButtonBar|Save"), editor_map, WIDGET (edit));
-    buttonbar_set_label (bb, 3, Q_ ("ButtonBar|Mark"), editor_map, WIDGET (edit));
-    buttonbar_set_label (bb, 4, Q_ ("ButtonBar|Replac"), editor_map, WIDGET (edit));
-    buttonbar_set_label (bb, 5, Q_ ("ButtonBar|Copy"), editor_map, WIDGET (edit));
-    buttonbar_set_label (bb, 6, Q_ ("ButtonBar|Move"), editor_map, WIDGET (edit));
-    buttonbar_set_label (bb, 7, Q_ ("ButtonBar|Search"), editor_map, WIDGET (edit));
-    buttonbar_set_label (bb, 8, Q_ ("ButtonBar|Delete"), editor_map, WIDGET (edit));
-    buttonbar_set_label (bb, 9, Q_ ("ButtonBar|PullDn"), editor_map, NULL);
-    buttonbar_set_label (bb, 10, Q_ ("ButtonBar|Quit"), editor_map, NULL);
+    Widget *w = WIDGET (edit);
+
+    buttonbar_set_label (bb, 1, Q_ ("ButtonBar|Help"), w->keymap, NULL);
+    buttonbar_set_label (bb, 2, Q_ ("ButtonBar|Save"), w->keymap, w);
+    buttonbar_set_label (bb, 3, Q_ ("ButtonBar|Mark"), w->keymap, w);
+    buttonbar_set_label (bb, 4, Q_ ("ButtonBar|Replac"), w->keymap, w);
+    buttonbar_set_label (bb, 5, Q_ ("ButtonBar|Copy"), w->keymap, w);
+    buttonbar_set_label (bb, 6, Q_ ("ButtonBar|Move"), w->keymap, w);
+    buttonbar_set_label (bb, 7, Q_ ("ButtonBar|Search"), w->keymap, w);
+    buttonbar_set_label (bb, 8, Q_ ("ButtonBar|Delete"), w->keymap, w);
+    buttonbar_set_label (bb, 9, Q_ ("ButtonBar|PullDn"), w->keymap, NULL);
+    buttonbar_set_label (bb, 10, Q_ ("ButtonBar|Quit"), w->keymap, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -786,23 +782,23 @@ edit_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
 
             if (edit_widget_is_editor (we))
             {
-                WEdit *e = (WEdit *) we;
+                gboolean ext_mode;
                 long command;
 
-                if (!e->extmod)
-                    command = keybind_lookup_keymap_command (editor_map, parm);
-                else
-                    command = keybind_lookup_keymap_command (editor_x_map, parm);
+                /* keep and then extmod flag */
+                ext_mode = we->ext_mode;
+                command = widget_lookup_key (we, parm);
+                we->ext_mode = ext_mode;
 
                 if (command == CK_IgnoreKey)
-                    e->extmod = FALSE;
+                    we->ext_mode = FALSE;
                 else
                 {
                     ret = edit_dialog_command_execute (h, command);
                     /* if command was not handled, keep the extended mode
                        for the further key processing */
                     if (ret == MSG_HANDLED)
-                        e->extmod = FALSE;
+                        we->ext_mode = FALSE;
                 }
             }
 
@@ -1240,6 +1236,8 @@ edit_files (const GList * files)
                     edit_dialog_mouse_callback, "[Internal File Editor]", NULL);
     wd = WIDGET (edit_dlg);
     widget_want_tab (wd, TRUE);
+    wd->keymap = editor_map;
+    wd->ext_keymap = editor_x_map;
 
     edit_dlg->get_shortcut = edit_get_shortcut;
     edit_dlg->get_title = edit_get_title;

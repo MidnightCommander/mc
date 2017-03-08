@@ -198,7 +198,7 @@ dlg_handle_key (WDialog * h, int d_key)
 {
     long command;
 
-    command = keybind_lookup_keymap_command (dialog_map, d_key);
+    command = widget_lookup_key (WIDGET (h), d_key);
     if (command != CK_IgnoreKey)
         return dlg_execute_cmd (h, command);
 
@@ -462,6 +462,8 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
     w->state |= WST_CONSTRUCT | WST_FOCUSED;
     /* Temporary hack: dialog doesn't have an owner, own itself. */
     w->owner = g;
+
+    w->keymap = dialog_map;
 
     w->mouse_handler = dlg_handle_mouse_event;
     w->mouse.forced_capture = mouse_close_dialog && (w->pos_flags & WPOS_FULLSCREEN) == 0;

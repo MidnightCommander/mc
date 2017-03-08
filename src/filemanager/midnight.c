@@ -132,8 +132,6 @@ const char *mc_prompt = NULL;
 
 static menu_t *left_menu, *right_menu;
 
-static gboolean ctl_x_map_enabled = FALSE;
-
 /*** file scope functions ************************************************************************/
 
 /** Stop MC main dialog and the current dialog if it exists.
@@ -843,14 +841,6 @@ put_other_tagged (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-ctl_x_cmd (void)
-{
-    ctl_x_map_enabled = TRUE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static void
 setup_mc (void)
 {
 #ifdef HAVE_SLANG
@@ -917,12 +907,16 @@ done_mc (void)
 static void
 create_file_manager (void)
 {
+    Widget *w = WIDGET (midnight_dlg);
     WGroup *g = GROUP (midnight_dlg);
+
+    w->keymap = main_map;
+    w->ext_keymap = main_x_map;
 
     midnight_dlg->get_shortcut = midnight_get_shortcut;
     midnight_dlg->get_title = midnight_get_title;
     /* allow rebind tab */
-    widget_want_tab (WIDGET (midnight_dlg), TRUE);
+    widget_want_tab (w, TRUE);
 
     the_menubar = menubar_new (NULL, menubar_visible);
     group_add_widget (g, the_menubar);
@@ -1379,7 +1373,7 @@ midnight_execute_cmd (Widget * sender, long command)
         sort_cmd ();
         break;
     case CK_ExtendedKeyMap:
-        ctl_x_cmd ();
+        WIDGET (midnight_dlg)->ext_mode = TRUE;
         break;
     case CK_Suspend:
         mc_event_raise (MCEVENT_GROUP_CORE, "suspend", NULL);
@@ -1533,10 +1527,9 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         return MSG_HANDLED;
 
     case MSG_KEY:
-        if (ctl_x_map_enabled)
+        if (w->ext_mode)
         {
-            ctl_x_map_enabled = FALSE;
-            command = keybind_lookup_keymap_command (main_x_map, parm);
+            command = widget_lookup_key (w, parm);
             if (command != CK_IgnoreKey)
                 return midnight_execute_cmd (NULL, command);
         }
@@ -1601,14 +1594,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         {
             cb_ret_t v = MSG_NOT_HANDLED;
 
-            if (ctl_x_map_enabled)
-            {
-                ctl_x_map_enabled = FALSE;
-                command = keybind_lookup_keymap_command (main_x_map, parm);
-            }
-            else
-                command = keybind_lookup_keymap_command (main_map, parm);
-
+            command = widget_lookup_key (w, parm);
             if (command != CK_IgnoreKey)
                 v = midnight_execute_cmd (NULL, command);
 
@@ -1654,16 +1640,18 @@ update_menu (void)
 void
 midnight_set_buttonbar (WButtonBar * b)
 {
-    buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), main_map, NULL);
-    buttonbar_set_label (b, 2, Q_ ("ButtonBar|Menu"), main_map, NULL);
-    buttonbar_set_label (b, 3, Q_ ("ButtonBar|View"), main_map, NULL);
-    buttonbar_set_label (b, 4, Q_ ("ButtonBar|Edit"), main_map, NULL);
-    buttonbar_set_label (b, 5, Q_ ("ButtonBar|Copy"), main_map, NULL);
-    buttonbar_set_label (b, 6, Q_ ("ButtonBar|RenMov"), main_map, NULL);
-    buttonbar_set_label (b, 7, Q_ ("ButtonBar|Mkdir"), main_map, NULL);
-    buttonbar_set_label (b, 8, Q_ ("ButtonBar|Delete"), main_map, NULL);
-    buttonbar_set_label (b, 9, Q_ ("ButtonBar|PullDn"), main_map, NULL);
-    buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), main_map, NULL);
+    Widget *w = WIDGET (midnight_dlg);
+
+    buttonbar_set_label (b, 1, Q_ ("ButtonBar|Help"), w->keymap, NULL);
+    buttonbar_set_label (b, 2, Q_ ("ButtonBar|Menu"), w->keymap, NULL);
+    buttonbar_set_label (b, 3, Q_ ("ButtonBar|View"), w->keymap, NULL);
+    buttonbar_set_label (b, 4, Q_ ("ButtonBar|Edit"), w->keymap, NULL);
+    buttonbar_set_label (b, 5, Q_ ("ButtonBar|Copy"), w->keymap, NULL);
+    buttonbar_set_label (b, 6, Q_ ("ButtonBar|RenMov"), w->keymap, NULL);
+    buttonbar_set_label (b, 7, Q_ ("ButtonBar|Mkdir"), w->keymap, NULL);
+    buttonbar_set_label (b, 8, Q_ ("ButtonBar|Delete"), w->keymap, NULL);
+    buttonbar_set_label (b, 9, Q_ ("ButtonBar|PullDn"), w->keymap, NULL);
+    buttonbar_set_label (b, 10, Q_ ("ButtonBar|Quit"), w->keymap, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */

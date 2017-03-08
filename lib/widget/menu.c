@@ -39,7 +39,6 @@
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
 #include "lib/tty/key.h"        /* key macros */
-#include "lib/keybind.h"        /* global_keymap_t */
 #include "lib/strutil.h"
 #include "lib/widget.h"
 #include "lib/event.h"          /* mc_event_raise() */
@@ -589,7 +588,7 @@ menubar_handle_key (WMenuBar * menubar, int key)
     unsigned long cmd;
     cb_ret_t ret = MSG_NOT_HANDLED;
 
-    cmd = keybind_lookup_keymap_command (menu_map, key);
+    cmd = widget_lookup_key (WIDGET (menubar), key);
 
     if (cmd != CK_IgnoreKey)
         ret = menubar_execute_cmd (menubar, cmd);
@@ -950,6 +949,7 @@ menubar_new (GList * menu, gboolean visible)
     /* initially, menubar is not selectable */
     widget_set_options (w, WOP_SELECTABLE, FALSE);
     w->options |= WOP_TOP_SELECT;
+    w->keymap = menu_map;
     menubar->is_visible = visible;
     menubar_set_menu (menubar, menu);
 

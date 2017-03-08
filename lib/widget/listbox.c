@@ -42,7 +42,6 @@
 #include "lib/skin.h"
 #include "lib/strutil.h"
 #include "lib/util.h"           /* Q_() */
-#include "lib/keybind.h"        /* global_keymap_t */
 #include "lib/widget.h"
 
 /*** global variables ****************************************************************************/
@@ -355,7 +354,7 @@ listbox_key (WListbox * l, int key)
         return MSG_HANDLED;
     }
 
-    command = keybind_lookup_keymap_command (listbox_map, key);
+    command = widget_lookup_key (WIDGET (l), key);
     if (command == CK_IgnoreKey)
         return MSG_NOT_HANDLED;
     return listbox_execute_cmd (l, command);
@@ -559,6 +558,7 @@ listbox_new (int y, int x, int height, int width, gboolean deletable, lcback_fn 
     w = WIDGET (l);
     widget_init (w, y, x, height, width, listbox_callback, listbox_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_HOTKEY;
+    w->keymap = listbox_map;
 
     l->list = NULL;
     l->top = l->pos = 0;

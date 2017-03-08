@@ -8,8 +8,6 @@
 
 #include <limits.h>             /* MB_LEN_MAX */
 
-#include "lib/keybind.h"        /* global_keymap_t */
-
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #define INPUT(x) ((WInput *)(x))
