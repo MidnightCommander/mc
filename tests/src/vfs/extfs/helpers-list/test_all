@@ -58,6 +58,17 @@ EOS
 
 #"'
 
+#
+# Some helpers use the 'sort' utility. The "expected output" files we
+# provide must be generated in the same locale these helpers are to be run
+# by the tester or else 'sort' will produce a different output than ours,
+# failing the tests.
+#
+# We settle on the C locale.
+#
+LC_ALL=C
+export LC_ALL
+
 ############################ Global variables ##############################
 
 # The directories used.
