@@ -122,7 +122,8 @@ mcrpmfs_getRawOneTag()
 
 mcrpmfs_getOneTag()
 {
-    echo "$AllTAGS" | $SED "s/.*|${1}=//" | cut -d '|' -f 1
+    # 'echo' can't be used for arbitrary data (see commit message).
+    printf "%s" "$AllTAGS" | $SED "s/.*|${1}=//" | cut -d '|' -f 1
 }
 
 mcrpmfs_printOneMetaInfo()
