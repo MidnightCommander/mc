@@ -111,10 +111,17 @@ has_prog() {
 }
 
 #
+# Are we running interactively? Or is our output redirected to a file/pipe?
+#
+is_interactive() {
+  [ -t 1 ]
+}
+
+#
 # Can we use colors?
 #
 has_colors() {
-  [ -t 1 ] && has_string "$TERM" 'linux\|xterm\|screen\|tmux\|putty'
+  is_interactive && has_string "$TERM" 'linux\|xterm\|screen\|tmux\|putty'
 }
 
 init_colors() {
@@ -283,29 +290,29 @@ run() {
     error_count=$((error_count + 1))  # we'll decrement it later.
 
     if [ ! -s "$actual_output" ]; then
-       err
-       err "The helper '$helper_name' produced no output for this input. Something is wrong."
-       err
-       err "Make sure this helper supports testability: that it uses \$MC_TEST_EXTFS_LIST_CMD."
-       err
-       err "You may try running the helper yourself with:"
-       err
-       err "  \$ MC_TEST_EXTFS_LIST_CMD=\"mc_xcat $input\" \\"
-       err "      $helper_CMD list /dev/null"
-       err
-       continue
+      err
+      err "The helper '$helper_name' produced no output for this input. Something is wrong."
+      err
+      err "Make sure this helper supports testability: that it uses \$MC_TEST_EXTFS_LIST_CMD."
+      err
+      err "You may try running the helper yourself with:"
+      err
+      err "  \$ MC_TEST_EXTFS_LIST_CMD=\"mc_xcat $input\" \\"
+      err "      $helper_CMD list /dev/null"
+      err
+      continue
     fi
 
     # '--symbolic-ids': uid/gid aren't portable between computers,
     # of course, so we always represent them symbolically when possible.
     if ! mc_parse_ls_l --symbolic-ids $extra_parser_args "$actual_output" > "$actual_parsed_output"; then
-       err
-       err "ERROR: Parsing of the output of the helper '$helper_name' has failed."
-       err "This means that $helper_name has produced output that MC won't be able to parse."
-       err "Run the parsing command yourself ('mc_parse_ls_l $extra_parser_args $actual_output')"
-       err "to figure out the problem."
-       err
-       continue
+      err
+      err "ERROR: Parsing of the output of the helper '$helper_name' has failed."
+      err "This means that $helper_name has produced output that MC won't be able to parse."
+      err "Run the parsing command yourself ('mc_parse_ls_l $extra_parser_args $actual_output')"
+      err "to figure out the problem."
+      err
+      continue
     fi
 
     if [ $do_create_output = "yes" ]; then
@@ -317,28 +324,37 @@ run() {
     fi
 
     if ! cmp "$expected_parsed_output" "$actual_parsed_output"; then
-       err
-       err "ERROR: $helper_name has produced output that's different than the expected output."
-       err
-       err "  Expected output (after parsing): $expected_parsed_output"
-       err "  Actual output (after parsing): $actual_parsed_output"
-       err
-       err "This might mean that a bug was introduced into $helper_name. Or that a bug was fixed."
-       err "Please compare the files."
-       err
-       err "If the actual output is the correct one, just copy the latter file"
-       err "onto the former (and commit to the git repository)."
-       err
-       if [ $opt_run_mcdiff_on_error = "yes" ]; then
-         notice "Hit ENTER to launch mcdiff ..."
-         read dummy_var  # dash needs this.
-         ${MCDIFF:-mcdiff} "$expected_parsed_output" "$actual_parsed_output"
-       else
-         notice "Tip: invoke this program with '--mcdiff' to automatically launch"
-         notice "mcdiff to visually inspect the diff."
-         notice
-       fi
-       continue
+      err
+      err "ERROR: $helper_name has produced output that's different than the expected output."
+      err
+      err "  Expected output (after parsing): $expected_parsed_output"
+      err "  Actual output (after parsing): $actual_parsed_output"
+      err
+      err "This might mean that a bug was introduced into $helper_name. Or that a bug was fixed."
+      err "Please compare the files."
+      err
+      err "If the actual output is the correct one, just copy the latter file"
+      err "onto the former (and commit to the git repository)."
+      err
+      if is_interactive; then
+        if [ $opt_run_mcdiff_on_error = "yes" ]; then
+          notice "Hit ENTER to launch mcdiff ..."
+          read dummy_var  # dash needs this.
+          ${MCDIFF:-mcdiff} "$expected_parsed_output" "$actual_parsed_output"
+        else
+          notice "Tip: invoke this program with '--mcdiff' to automatically launch"
+          notice "mcdiff to visually inspect the diff."
+          notice
+          notice "(Running this program non-interactively (i.e., redirecting the"
+          notice "output to a file or pipe) automatically adds diff to the output.)"
+          notice
+        fi
+      else
+        err "------------ diff of the expected output vs the actual output: -------------"
+        diff -U2 "$expected_parsed_output" "$actual_parsed_output"
+        err "------------------------------- end of diff --------------------------------"
+      fi
+      continue
     fi
 
     rm "$actual_output" "$actual_parsed_output"
