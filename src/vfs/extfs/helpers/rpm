@@ -111,7 +111,8 @@ mcrpmfs_getAllNeededTags()
 "|PROVIDES=%{PROVIDES} %{PROVIDEFLAGS:depflags} %{PROVIDEVERSION}"\
 ${tag_CONFLICTS}\
 "|PACKAGER=%{PACKAGER}" \
-    "${rpm_filename}"
+    "${rpm_filename}" \
+    | tr '\n' ' '  # The newlines in DESCRIPTION mess with the sed script in mcrpmfs_getOneTag().
 }
 
 mcrpmfs_getRawOneTag()
@@ -121,7 +122,8 @@ mcrpmfs_getRawOneTag()
 
 mcrpmfs_getOneTag()
 {
-    echo $AllTAGS | $SED "s/.*|${1}=//" | cut -d '|' -f 1
+    # 'echo' can't be used for arbitrary data (see commit message).
+    printf "%s" "$AllTAGS" | $SED "s/.*|${1}=//" | cut -d '|' -f 1
 }
 
 mcrpmfs_printOneMetaInfo()
@@ -224,7 +226,7 @@ mcrpmfs_list ()
     DATE=`mcrpmfs_getRawOneTag "%{BUILDTIME:date}\n" | cut -c 5-11,21-24`
     PAYLOAD=`mcrpmfs_getRawOneTag "%{PAYLOADFORMAT}\n" | sed s/ustar/tar/`
 
-    HEADERSIZE=`echo "$DESC" | wc -c`
+    HEADERSIZE=`printf '%s\n' "$DESC" | wc -c`  # 'echo' can't be used for arbitrary data (see commit message).
     printf '%s %s %s HEADER\n' "${FILEPREF}"  "${HEADERSIZE}" "${DATE}"
     echo "-r-xr-xr-x   1 root     root    39 $DATE INSTALL"
     case "${rpm_filename}" in
