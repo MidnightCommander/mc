@@ -127,6 +127,9 @@ include cs.syntax
 file ..\*\\.(js|JS)$ JavaScript\sProgram ^#!.\*[\s/](node|nodejs)\\b
 include js.syntax
 
+file ..\*\\.(ts|TS)$ TypeScript\sProgram
+include ts.syntax
+
 file ..\*\\.(as|AS)$ ActionScript\sProgram
 include as.syntax
 
