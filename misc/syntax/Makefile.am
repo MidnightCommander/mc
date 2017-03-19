@@ -78,6 +78,7 @@ SYNTAXFILES =			\
 	syntax.syntax		\
 	tcl.syntax		\
 	texinfo.syntax		\
+	ts.syntax		\
 	tt.syntax		\
 	unknown.syntax		\
 	verilog.syntax		\
