@@ -47,6 +47,7 @@
 #include "src/setup.h"          /* panels_options */
 
 #include "treestore.h"
+#include "file.h"               /* file_is_symlink_to_dir() */
 #include "dir.h"
 #include "layout.h"             /* rotate_dash() */
 
@@ -150,6 +151,7 @@ handle_dirent (struct dirent *dp, const char *fltr, struct stat *buf1, int *link
                int *stale_link)
 {
     vfs_path_t *vpath;
+    gboolean stale;
 
     if (DIR_IS_DOT (dp->d_name) || DIR_IS_DOTDOT (dp->d_name))
         return FALSE;
@@ -173,17 +175,8 @@ handle_dirent (struct dirent *dp, const char *fltr, struct stat *buf1, int *link
         tree_store_mark_checked (dp->d_name);
 
     /* A link to a file or a directory? */
-    *link_to_dir = 0;
-    *stale_link = 0;
-    if (S_ISLNK (buf1->st_mode))
-    {
-        struct stat buf2;
-
-        if (mc_stat (vpath, &buf2) == 0)
-            *link_to_dir = S_ISDIR (buf2.st_mode) != 0;
-        else
-            *stale_link = 1;
-    }
+    *link_to_dir = file_is_symlink_to_dir (vpath, buf1, &stale) ? 1 : 0;
+    *stale_link = stale ? 1 : 0;
 
     vfs_path_free (vpath);
 

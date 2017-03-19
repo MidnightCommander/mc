@@ -2046,6 +2046,48 @@ end_bg_process (file_op_context_t * ctx, enum OperationMode mode)
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+/* Is file symlink to directory or not.
+ *
+ * @param path file or directory
+ * @param st result of mc_lstat(vpath). If NULL, mc_lstat(vpath) is performed here
+ * @param stale_link TRUE if file is stale link to directory
+ *
+ * @return TRUE if file symlink to directory, ELSE otherwise.
+ */
+gboolean
+file_is_symlink_to_dir (const vfs_path_t * vpath, struct stat * st, gboolean * stale_link)
+{
+    struct stat st2;
+    gboolean stale = FALSE;
+    gboolean res = FALSE;
+
+    if (st == NULL)
+    {
+        st = &st2;
+
+        if (mc_lstat (vpath, st) != 0)
+            goto ret;
+    }
+
+    if (S_ISLNK (st->st_mode))
+    {
+        struct stat st3;
+
+        stale = (mc_stat (vpath, &st3) != 0);
+
+        if (!stale)
+            res = (S_ISDIR (st3.st_mode) != 0);
+    }
+
+  ret:
+    if (stale_link != NULL)
+        *stale_link = stale;
+
+    return res;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 FileProgressStatus
 copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
                 const char *src_path, const char *dst_path)
