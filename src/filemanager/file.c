@@ -1519,6 +1519,41 @@ panel_operate_generate_prompt (const WPanel * panel, FileOperation operation,
 
 /* --------------------------------------------------------------------------------------------- */
 
+static gboolean
+do_confirm_erase (const WPanel * panel, const char *source, struct stat *src_stat)
+{
+    int i;
+    char *format;
+    char fmd_buf[BUF_MEDIUM];
+
+    if (source == NULL)
+        src_stat = NULL;
+
+    /* Generate confirmation prompt */
+    format = panel_operate_generate_prompt (panel, OP_DELETE, src_stat);
+
+    if (source == NULL)
+        g_snprintf (fmd_buf, sizeof (fmd_buf), format, panel->marked);
+    else
+    {
+        const int fmd_xlen = 64;
+
+        i = fmd_xlen - str_term_width1 (format) - 4;
+        g_snprintf (fmd_buf, sizeof (fmd_buf), format, str_trunc (source, i));
+    }
+
+    g_free (format);
+
+    if (safe_delete)
+        query_set_sel (1);
+
+    i = query_dialog (op_names[OP_DELETE], fmd_buf, D_ERROR, 2, _("&Yes"), _("&No"));
+
+    return (i == 0);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 #ifdef ENABLE_BACKGROUND
 static int
 end_bg_process (file_op_context_t * ctx, enum OperationMode mode)
@@ -2761,36 +2796,10 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         }
         dest_vpath = vfs_path_from_str (dest);
     }
-    else if (confirm_delete)
+    else if (confirm_delete && !do_confirm_erase (panel, source, &src_stat))
     {
-        char *format;
-        char fmd_buf[BUF_MEDIUM];
-
-        /* Generate confirmation prompt */
-        format =
-            panel_operate_generate_prompt (panel, OP_DELETE, source != NULL ? &src_stat : NULL);
-
-        if (source == NULL)
-            g_snprintf (fmd_buf, sizeof (fmd_buf), format, panel->marked);
-        else
-        {
-            const int fmd_xlen = 64;
-            i = fmd_xlen - str_term_width1 (format) - 4;
-            g_snprintf (fmd_buf, sizeof (fmd_buf), format, str_trunc (source, i));
-        }
-
-        g_free (format);
-
-        if (safe_delete)
-            query_set_sel (1);
-
-        i = query_dialog (op_names[operation], fmd_buf, D_ERROR, 2, _("&Yes"), _("&No"));
-
-        if (i != 0)
-        {
-            ret_val = FALSE;
-            goto ret_fast;
-        }
+        ret_val = FALSE;
+        goto ret_fast;
     }
 
     tctx = file_op_total_context_new ();
