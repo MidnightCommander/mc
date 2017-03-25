@@ -1519,6 +1519,65 @@ panel_operate_generate_prompt (const WPanel * panel, FileOperation operation,
 
 /* --------------------------------------------------------------------------------------------- */
 
+static char *
+do_confirm_copy_move (const WPanel * panel, FileOperation operation, gboolean force_single,
+                      const char *source, struct stat *src_stat, file_op_context_t * ctx,
+                      gboolean * do_bg)
+{
+    const char *tmp_dest_dir;
+    char *dest_dir;
+    char *format;
+    char *ret;
+
+    /* Forced single operations default to the original name */
+    if (force_single)
+        tmp_dest_dir = source;
+    else if (get_other_type () == view_listing)
+        tmp_dest_dir = vfs_path_as_str (other_panel->cwd_vpath);
+    else
+        tmp_dest_dir = vfs_path_as_str (panel->cwd_vpath);
+
+    /*
+     * Add trailing backslash only when do non-local ops.
+     * It saves user from occasional file renames (when destination
+     * dir is deleted)
+     */
+    if (!force_single && tmp_dest_dir != NULL && tmp_dest_dir[0] != '\0'
+        && !IS_PATH_SEP (tmp_dest_dir[strlen (tmp_dest_dir) - 1]))
+    {
+        /* add trailing separator */
+        dest_dir = g_strconcat (tmp_dest_dir, PATH_SEP_STR, (char *) NULL);
+    }
+    else
+    {
+        /* just copy */
+        dest_dir = g_strdup (tmp_dest_dir);
+    }
+
+    if (dest_dir == NULL)
+        return NULL;
+
+    if (source == NULL)
+        src_stat = NULL;
+
+    /* Generate confirmation prompt */
+    format = panel_operate_generate_prompt (panel, operation, src_stat);
+
+    ret = file_mask_dialog (ctx, operation, source != NULL, format,
+                            source != NULL ? source : (const void *) &panel->marked, dest_dir,
+                            do_bg);
+
+    g_free (format);
+    g_free (dest_dir);
+
+    if (ret == NULL || ret[0] == '\0')
+        MC_PTR_FREE (ret);
+
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static gboolean
 do_confirm_erase (const WPanel * panel, const char *source, struct stat *src_stat)
 {
@@ -2743,57 +2802,15 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
     /* Show confirmation dialog */
     if (operation != OP_DELETE)
     {
-        const char *tmp_dest_dir;
-        char *dest_dir;
-        char *format;
-
-        /* Forced single operations default to the original name */
-        if (force_single)
-            tmp_dest_dir = source;
-        else if (get_other_type () == view_listing)
-            tmp_dest_dir = vfs_path_as_str (other_panel->cwd_vpath);
-        else
-            tmp_dest_dir = vfs_path_as_str (panel->cwd_vpath);
-        /*
-         * Add trailing backslash only when do non-local ops.
-         * It saves user from occasional file renames (when destination
-         * dir is deleted)
-         */
-        if (!force_single && tmp_dest_dir != NULL && tmp_dest_dir[0] != '\0'
-            && !IS_PATH_SEP (tmp_dest_dir[strlen (tmp_dest_dir) - 1]))
-        {
-            /* add trailing separator */
-            dest_dir = g_strconcat (tmp_dest_dir, PATH_SEP_STR, (char *) NULL);
-        }
-        else
-        {
-            /* just copy */
-            dest_dir = g_strdup (tmp_dest_dir);
-        }
-        if (dest_dir == NULL)
-        {
-            ret_val = FALSE;
-            goto ret_fast;
-        }
-
-        /* Generate confirmation prompt */
-        format =
-            panel_operate_generate_prompt (panel, operation, source != NULL ? &src_stat : NULL);
-
         dest =
-            file_mask_dialog (ctx, operation, source != NULL, format,
-                              source != NULL ? source : (const void *) &panel->marked, dest_dir,
-                              &do_bg);
+            do_confirm_copy_move (panel, operation, force_single, source, &src_stat, ctx, &do_bg);
 
-        g_free (format);
-        g_free (dest_dir);
-
-        if (dest == NULL || dest[0] == '\0')
+        if (dest == NULL)
         {
-            g_free (dest);
             ret_val = FALSE;
             goto ret_fast;
         }
+
         dest_vpath = vfs_path_from_str (dest);
     }
     else if (confirm_delete && !do_confirm_erase (panel, source, &src_stat))
