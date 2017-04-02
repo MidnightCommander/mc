@@ -99,9 +99,6 @@ const char *op_names[3] = {
 
 /*** file scope macro definitions ****************************************************************/
 
-/* Hack: the vfs code should not rely on this */
-#define WITH_FULL_PATHS 1
-
 #define FILEOP_UPDATE_INTERVAL 2
 #define FILEOP_STALLING_INTERVAL 4
 
@@ -2621,9 +2618,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         || (get_current_type () == view_tree);
 
     const char *source = NULL;
-#ifdef WITH_FULL_PATHS
     vfs_path_t *source_with_vpath = NULL;
-#endif /* WITH_FULL_PATHS */
     char *dest = NULL;
     vfs_path_t *dest_vpath = NULL;
     char *temp = NULL;
@@ -2862,12 +2857,11 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         }
 
         /* The source and src_stat variables have been initialized before */
-#ifdef WITH_FULL_PATHS
         if (g_path_is_absolute (source))
             source_with_vpath = vfs_path_from_str (source);
         else
             source_with_vpath = vfs_path_append_new (panel->cwd_vpath, source, (char *) NULL);
-#endif /* WITH_FULL_PATHS */
+
         if (panel_operate_init_totals (panel, source_with_vpath, &src_stat, ctx, dialog_type) ==
             FILE_CONT)
         {
@@ -2975,14 +2969,12 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 source2 = panel->dir.list[i].fname;
                 src_stat = panel->dir.list[i].st;
 
-#ifdef WITH_FULL_PATHS
                 vfs_path_free (source_with_vpath);
                 if (g_path_is_absolute (source2))
                     source_with_vpath = vfs_path_from_str (source2);
                 else
                     source_with_vpath =
                         vfs_path_append_new (panel->cwd_vpath, source2, (char *) NULL);
-#endif /* WITH_FULL_PATHS */
 
                 if (operation == OP_DELETE)
                 {
@@ -3097,9 +3089,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 
     linklist = free_linklist (linklist);
     dest_dirs = free_linklist (dest_dirs);
-#ifdef WITH_FULL_PATHS
     vfs_path_free (source_with_vpath);
-#endif /* WITH_FULL_PATHS */
     g_free (dest);
     vfs_path_free (dest_vpath);
     MC_PTR_FREE (ctx->dest_mask);
