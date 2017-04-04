@@ -3,15 +3,35 @@
 caseinsensitive
 
 context default
+    keyword whole abort yellow
     keyword whole abs yellow
+    keyword whole and yellow
+    keyword whole delay yellow
     keyword whole delta yellow
+    keyword whole digits yellow
+    keyword whole do yellow
+    keyword whole in yellow
     keyword whole is yellow
-    keyword whole loop yellow
+    keyword whole mod yellow
+    keyword whole not yellow
+    keyword whole null yellow
     keyword whole of yellow
+    keyword whole or yellow
+    keyword whole others yellow
+    keyword whole out yellow
+    keyword whole pragma yellow
+    keyword whole raise yellow
     keyword whole range yellow
+    keyword whole renames yellow
+    keyword whole requeue yellow
     keyword whole return yellow
+    keyword whole reverse yellow
+    keyword whole separate yellow
+    keyword whole task yellow
+    keyword whole terminate yellow
     keyword whole use yellow
     keyword whole with yellow
+    keyword whole xor yellow
 
 # prevents - keyword from interfering with comment
     keyword -- brown
@@ -29,38 +49,72 @@ context default
     keyword .. brightgreen
     keyword /= brightgreen
     keyword / brightgreen
+    keyword < brightgreen
+    keyword <= brightgreen
+    keyword >= brightgreen
+    keyword > brightgreen
     keyword := brightgreen
     keyword : brightgreen
     keyword ; brightgreen
     keyword => brightgreen
+    keyword <> brightgreen
+    keyword \\& brightgreen
     keyword = brightgreen
 
     keyword whole begin brightred
     keyword whole case brightred
+    keyword whole declare brightred
     keyword whole else brightred
     keyword whole elsif brightred
     keyword whole end brightred
+    keyword whole entry brightred
+    keyword whole exception brightred
     keyword whole exit brightred
     keyword whole for brightred
     keyword whole if brightred
+    keyword whole loop brightred
+    keyword whole private brightred
+    keyword whole protected brightred
+    keyword whole select brightred
     keyword whole then brightred
+    keyword whole until brightred
     keyword whole when brightred
     keyword whole while brightred
 
     keyword whole array cyan
     keyword whole boolean cyan
     keyword whole character cyan
+    keyword whole duration cyan
+    keyword whole false cyan
     keyword whole fixed cyan
     keyword whole float cyan
     keyword whole integer cyan
+    keyword whole natural cyan
+    keyword whole positive cyan
+    keyword whole record cyan
     keyword whole string cyan
+    keyword whole true cyan
+    keyword whole universal_integer cyan
+    keyword whole universal_float cyan
+    keyword whole wide_character cyan
 
+    keyword whole abstract brightcyan
+    keyword whole accept brightcyan
+    keyword whole access brightcyan
+    keyword whole aliased brightcyan
+    keyword whole all brightcyan
+    keyword whole at brightcyan
+    keyword whole constant brightcyan
     keyword whole goto brightcyan
+    keyword whole limited brightcyan
     keyword whole new_line brightcyan
     keyword whole subtype brightcyan
+    keyword whole tagged brightcyan
     keyword whole type brightcyan
 
+    keyword whole body magenta
     keyword whole function magenta
+    keyword whole generic magenta
     keyword whole new magenta
     keyword whole package magenta
     keyword whole procedure magenta
