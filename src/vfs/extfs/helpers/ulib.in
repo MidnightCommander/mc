@@ -1,8 +1,10 @@
-#! @PERL@ -w
+#! @PERL@
 #
 # VFS to manage the gputils archives.
 # Written by Molnár Károly (proton7@freemail.hu) 2012
 #
+
+use warnings;
 
 my %month = ('jan' => '01', 'feb' => '02', 'mar' => '03',
              'apr' => '04', 'may' => '05', 'jun' => '06',
