@@ -1,4 +1,4 @@
-#! @PERL@ -w
+#! @PERL@
 #
 # Written by Adam Byrtek <alpha@debian.org>, 2002
 # Rewritten by David Sterba <dave@jikos.cz>, 2009
@@ -9,6 +9,7 @@
 
 use bytes;
 use strict;
+use warnings;
 use POSIX;
 use File::Temp 'tempfile';
 
