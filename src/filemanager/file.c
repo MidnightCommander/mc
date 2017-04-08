@@ -1757,18 +1757,21 @@ operate_one_file (const WPanel * panel, FileOperation operation, file_op_total_c
 {
     FileProgressStatus value = FILE_CONT;
     vfs_path_t *src_vpath;
+    gboolean is_file;
 
     if (g_path_is_absolute (src))
         src_vpath = vfs_path_from_str (src);
     else
         src_vpath = vfs_path_append_new (panel->cwd_vpath, src, (char *) NULL);
 
+    is_file = !S_ISDIR (src_stat->st_mode);
+
     if (operation == OP_DELETE)
     {
-        if (S_ISDIR (src_stat->st_mode))
-            value = erase_dir (tctx, ctx, src_vpath);
-        else
+        if (is_file)
             value = erase_file (tctx, ctx, src_vpath);
+        else
+            value = erase_dir (tctx, ctx, src_vpath);
     }
     else
     {
@@ -1779,7 +1782,7 @@ operate_one_file (const WPanel * panel, FileOperation operation, file_op_total_c
             value = transform_error;
         else
         {
-            char *temp2, *repl_dest, *source_with_path_str;
+            char *repl_dest, *temp2, *src2;
 
             repl_dest = mc_search_prepare_replace_str2 (ctx->search_handle, dest);
             if (ctx->search_handle->error != MC_SEARCH_E_OK)
@@ -1796,34 +1799,34 @@ operate_one_file (const WPanel * panel, FileOperation operation, file_op_total_c
             g_free (temp);
             g_free (repl_dest);
 
-            source_with_path_str = strutils_shell_unescape (vfs_path_as_str (src_vpath));
+            src2 = strutils_shell_unescape (vfs_path_as_str (src_vpath));
             temp = strutils_shell_unescape (temp2);
             g_free (temp2);
+
+            src = src2;
+            dest = temp;
 
             switch (operation)
             {
             case OP_COPY:
                 /* we use file_mask_op_follow_links only with OP_COPY */
-                {
-                    vfs_path_t *vpath;
+                vfs_path_free (src_vpath);
+                src_vpath = vfs_path_from_str (src);
+                ctx->stat_func (src_vpath, src_stat);
+                is_file = !S_ISDIR (src_stat->st_mode);
 
-                    vpath = vfs_path_from_str (source_with_path_str);
-                    ctx->stat_func (vpath, src_stat);
-                    vfs_path_free (vpath);
-                }
-                if (S_ISDIR (src_stat->st_mode))
-                    value = copy_dir_dir (tctx, ctx, source_with_path_str, temp,
-                                          TRUE, FALSE, FALSE, NULL);
+                if (is_file)
+                    value = copy_file_file (tctx, ctx, src, dest);
                 else
-                    value = copy_file_file (tctx, ctx, source_with_path_str, temp);
+                    value = copy_dir_dir (tctx, ctx, src, dest, TRUE, FALSE, FALSE, NULL);
                 dest_dirs = free_linklist (dest_dirs);
                 break;
 
             case OP_MOVE:
-                if (S_ISDIR (src_stat->st_mode))
-                    value = move_dir_dir (tctx, ctx, source_with_path_str, temp);
+                if (is_file)
+                    value = move_file_file (tctx, ctx, src, dest);
                 else
-                    value = move_file_file (tctx, ctx, source_with_path_str, temp);
+                    value = move_dir_dir (tctx, ctx, src, dest);
                 break;
 
             default:
@@ -1831,7 +1834,7 @@ operate_one_file (const WPanel * panel, FileOperation operation, file_op_total_c
                 abort ();
             }
 
-            g_free (source_with_path_str);
+            g_free (src2);
             g_free (temp);
         }
     }
