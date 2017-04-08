@@ -246,6 +246,7 @@ transform_source (file_op_context_t * ctx, const vfs_path_t * source_vpath)
             if (ctx->search_handle->error_str != NULL)
                 message (D_ERROR, MSG_ERROR, "%s", ctx->search_handle->error_str);
 
+            g_free (q);
             q = NULL;
             transform_error = FILE_ABORT;
         }
