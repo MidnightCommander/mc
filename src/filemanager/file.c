@@ -1703,6 +1703,99 @@ operate_single_file (const WPanel * panel, FileOperation operation, file_op_tota
 
 /* --------------------------------------------------------------------------------------------- */
 
+static FileProgressStatus
+operate_one_file (const WPanel * panel, FileOperation operation, file_op_total_context_t * tctx,
+                  file_op_context_t * ctx, const char *src, struct stat *src_stat, const char *dest)
+{
+    FileProgressStatus value = FILE_CONT;
+    vfs_path_t *src_vpath;
+
+    if (g_path_is_absolute (src))
+        src_vpath = vfs_path_from_str (src);
+    else
+        src_vpath = vfs_path_append_new (panel->cwd_vpath, src, (char *) NULL);
+
+    if (operation == OP_DELETE)
+    {
+        if (S_ISDIR (src_stat->st_mode))
+            value = erase_dir (tctx, ctx, src_vpath);
+        else
+            value = erase_file (tctx, ctx, src_vpath);
+    }
+    else
+    {
+        char *temp;
+
+        temp = transform_source (ctx, src_vpath);
+        if (temp == NULL)
+            value = transform_error;
+        else
+        {
+            char *temp2, *repl_dest, *source_with_path_str;
+
+            repl_dest = mc_search_prepare_replace_str2 (ctx->search_handle, dest);
+            if (ctx->search_handle->error != MC_SEARCH_E_OK)
+            {
+                if (ctx->search_handle->error_str != NULL)
+                    message (D_ERROR, MSG_ERROR, "%s", ctx->search_handle->error_str);
+
+                g_free (repl_dest);
+                value = FILE_ABORT;
+                goto ret;
+            }
+
+            temp2 = mc_build_filename (repl_dest, temp, (char *) NULL);
+            g_free (temp);
+            g_free (repl_dest);
+
+            source_with_path_str = strutils_shell_unescape (vfs_path_as_str (src_vpath));
+            temp = strutils_shell_unescape (temp2);
+            g_free (temp2);
+
+            switch (operation)
+            {
+            case OP_COPY:
+                /* we use file_mask_op_follow_links only with OP_COPY */
+                {
+                    vfs_path_t *vpath;
+
+                    vpath = vfs_path_from_str (source_with_path_str);
+                    ctx->stat_func (vpath, src_stat);
+                    vfs_path_free (vpath);
+                }
+                if (S_ISDIR (src_stat->st_mode))
+                    value = copy_dir_dir (tctx, ctx, source_with_path_str, temp,
+                                          TRUE, FALSE, FALSE, NULL);
+                else
+                    value = copy_file_file (tctx, ctx, source_with_path_str, temp);
+                dest_dirs = free_linklist (dest_dirs);
+                break;
+
+            case OP_MOVE:
+                if (S_ISDIR (src_stat->st_mode))
+                    value = move_dir_dir (tctx, ctx, source_with_path_str, temp);
+                else
+                    value = move_file_file (tctx, ctx, source_with_path_str, temp);
+                break;
+
+            default:
+                /* Unknown file operation */
+                abort ();
+            }
+
+            g_free (source_with_path_str);
+            g_free (temp);
+        }
+    }
+
+  ret:
+    vfs_path_free (src_vpath);
+
+    return value;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 #ifdef ENABLE_BACKGROUND
 static int
 end_bg_process (file_op_context_t * ctx, enum OperationMode mode)
@@ -2852,10 +2945,8 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         || (get_current_type () == view_tree);
 
     const char *source = NULL;
-    vfs_path_t *source_with_vpath = NULL;
     char *dest = NULL;
     vfs_path_t *dest_vpath = NULL;
-    char *temp = NULL;
     char *save_cwd = NULL, *save_dest = NULL;
     struct stat src_stat;
     gboolean ret_val = TRUE;
@@ -3023,82 +3114,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 source2 = panel->dir.list[i].fname;
                 src_stat = panel->dir.list[i].st;
 
-                vfs_path_free (source_with_vpath);
-                if (g_path_is_absolute (source2))
-                    source_with_vpath = vfs_path_from_str (source2);
-                else
-                    source_with_vpath =
-                        vfs_path_append_new (panel->cwd_vpath, source2, (char *) NULL);
-
-                if (operation == OP_DELETE)
-                {
-                    if (S_ISDIR (src_stat.st_mode))
-                        value = erase_dir (tctx, ctx, source_with_vpath);
-                    else
-                        value = erase_file (tctx, ctx, source_with_vpath);
-                }
-                else
-                {
-                    temp = transform_source (ctx, source_with_vpath);
-                    if (temp == NULL)
-                        value = transform_error;
-                    else
-                    {
-                        char *temp2, *repl_dest, *source_with_path_str;
-
-                        repl_dest = mc_search_prepare_replace_str2 (ctx->search_handle, dest);
-                        if (ctx->search_handle->error != MC_SEARCH_E_OK)
-                        {
-                            if (ctx->search_handle->error_str != NULL)
-                                message (D_ERROR, MSG_ERROR, "%s", ctx->search_handle->error_str);
-
-                            g_free (repl_dest);
-                            goto clean_up;
-                        }
-
-                        temp2 = mc_build_filename (repl_dest, temp, (char *) NULL);
-                        g_free (temp);
-                        g_free (repl_dest);
-                        source_with_path_str =
-                            strutils_shell_unescape (vfs_path_as_str (source_with_vpath));
-                        temp = strutils_shell_unescape (temp2);
-                        g_free (temp2);
-
-                        switch (operation)
-                        {
-                        case OP_COPY:
-                            /* we use file_mask_op_follow_links only with OP_COPY */
-                            {
-                                vfs_path_t *vpath;
-
-                                vpath = vfs_path_from_str (source_with_path_str);
-                                ctx->stat_func (vpath, &src_stat);
-                                vfs_path_free (vpath);
-                            }
-                            if (S_ISDIR (src_stat.st_mode))
-                                value = copy_dir_dir (tctx, ctx, source_with_path_str, temp,
-                                                      TRUE, FALSE, FALSE, NULL);
-                            else
-                                value = copy_file_file (tctx, ctx, source_with_path_str, temp);
-                            dest_dirs = free_linklist (dest_dirs);
-                            break;
-
-                        case OP_MOVE:
-                            if (S_ISDIR (src_stat.st_mode))
-                                value = move_dir_dir (tctx, ctx, source_with_path_str, temp);
-                            else
-                                value = move_file_file (tctx, ctx, source_with_path_str, temp);
-                            break;
-
-                        default:
-                            /* Unknown file operation */
-                            abort ();
-                        }
-
-                        g_free (source_with_path_str);
-                        g_free (temp);
-                    }
-                }               /* Copy or move operation */
+                value = operate_one_file (panel, operation, tctx, ctx, source2, &src_stat, dest);
 
                 if (value == FILE_ABORT)
                     break;
@@ -3143,7 +3159,6 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 
     linklist = free_linklist (linklist);
     dest_dirs = free_linklist (dest_dirs);
-    vfs_path_free (source_with_vpath);
     g_free (dest);
     vfs_path_free (dest_vpath);
     MC_PTR_FREE (ctx->dest_mask);
