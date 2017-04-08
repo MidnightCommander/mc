@@ -1665,6 +1665,7 @@ operate_single_file (const WPanel * panel, FileOperation operation, file_op_tota
 {
     FileProgressStatus value;
     vfs_path_t *src_vpath;
+    gboolean is_file;
 
     if (g_path_is_absolute (src))
         src_vpath = vfs_path_from_str (src);
@@ -1675,12 +1676,14 @@ operate_single_file (const WPanel * panel, FileOperation operation, file_op_tota
     if (value != FILE_CONT)
         goto ret;
 
+    is_file = !S_ISDIR (src_stat->st_mode);
+
     if (operation == OP_DELETE)
     {
-        if (S_ISDIR (src_stat->st_mode))
-            value = erase_dir (tctx, ctx, src_vpath);
-        else
+        if (is_file)
             value = erase_file (tctx, ctx, src_vpath);
+        else
+            value = erase_dir (tctx, ctx, src_vpath);
     }
     else
     {
@@ -1708,6 +1711,7 @@ operate_single_file (const WPanel * panel, FileOperation operation, file_op_tota
             g_free (temp);
             g_free (repl_dest);
 
+            src = vfs_path_as_str (src_vpath);
             dest = temp2;
 
             switch (operation)
@@ -1715,20 +1719,19 @@ operate_single_file (const WPanel * panel, FileOperation operation, file_op_tota
             case OP_COPY:
                 /* we use file_mask_op_follow_links only with OP_COPY */
                 ctx->stat_func (src_vpath, src_stat);
+                is_file = !S_ISDIR (src_stat->st_mode);
 
-                if (S_ISDIR (src_stat->st_mode))
-                    value =
-                        copy_dir_dir (tctx, ctx, vfs_path_as_str (src_vpath), dest, TRUE, FALSE,
-                                      FALSE, NULL);
+                if (is_file)
+                    value = copy_file_file (tctx, ctx, src, dest);
                 else
-                    value = copy_file_file (tctx, ctx, vfs_path_as_str (src_vpath), dest);
+                    value = copy_dir_dir (tctx, ctx, src, dest, TRUE, FALSE, FALSE, NULL);
                 break;
 
             case OP_MOVE:
-                if (S_ISDIR (src_stat->st_mode))
-                    value = move_dir_dir (tctx, ctx, vfs_path_as_str (src_vpath), dest);
+                if (is_file)
+                    value = move_file_file (tctx, ctx, src, dest);
                 else
-                    value = move_file_file (tctx, ctx, vfs_path_as_str (src_vpath), dest);
+                    value = move_dir_dir (tctx, ctx, src, dest);
                 break;
 
             default:
