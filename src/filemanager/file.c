@@ -1695,18 +1695,18 @@ operate_single_file (const WPanel * panel, FileOperation operation, file_op_tota
     else
         src_vpath = vfs_path_append_new (panel->cwd_vpath, src, (char *) NULL);
 
-    value = panel_operate_init_totals (panel, src_vpath, src_stat, ctx, dialog_type);
-    if (value != FILE_CONT)
-        goto ret;
-
     is_file = !S_ISDIR (src_stat->st_mode);
 
     if (operation == OP_DELETE)
     {
-        if (is_file)
-            value = erase_file (tctx, ctx, src_vpath);
-        else
-            value = erase_dir (tctx, ctx, src_vpath);
+        value = panel_operate_init_totals (panel, src_vpath, src_stat, ctx, dialog_type);
+        if (value == FILE_CONT)
+        {
+            if (is_file)
+                value = erase_file (tctx, ctx, src_vpath);
+            else
+                value = erase_dir (tctx, ctx, src_vpath);
+        }
     }
     else
     {
@@ -1731,20 +1731,45 @@ operate_single_file (const WPanel * panel, FileOperation operation, file_op_tota
                 vfs_path_free (src_vpath);
                 src_vpath = vfs_path_from_str (src);
                 ctx->stat_func (src_vpath, src_stat);
-                is_file = !S_ISDIR (src_stat->st_mode);
+                value = panel_operate_init_totals (panel, src_vpath, src_stat, ctx, dialog_type);
+                if (value == FILE_CONT)
+                {
+                    is_file = !S_ISDIR (src_stat->st_mode);
 
-                if (is_file)
-                    value = copy_file_file (tctx, ctx, src, dest);
-                else
-                    value = copy_dir_dir (tctx, ctx, src, dest, TRUE, FALSE, FALSE, NULL);
+                    if (is_file)
+                        value = copy_file_file (tctx, ctx, src, dest);
+                    else
+                        value = copy_dir_dir (tctx, ctx, src, dest, TRUE, FALSE, FALSE, NULL);
+                }
                 break;
 
             case OP_MOVE:
-                if (is_file)
-                    value = move_file_file (tctx, ctx, src, dest);
-                else
-                    value = move_dir_dir (tctx, ctx, src, dest);
-                break;
+                {
+                    vfs_path_t *dest_vpath;
+
+                    dest_vpath = vfs_path_from_str (dest);
+
+                    /* try rename */
+                    if (mc_rename (src_vpath, dest_vpath) == 0)
+                        value = FILE_CONT;
+                    else
+                    {
+                        /* copy + delete */
+                        value =
+                            panel_operate_init_totals (panel, src_vpath, src_stat, ctx,
+                                                       dialog_type);
+                        if (value == FILE_CONT)
+                        {
+                            if (is_file)
+                                value = move_file_file (tctx, ctx, src, dest);
+                            else
+                                value = move_dir_dir (tctx, ctx, src, dest);
+                        }
+                    }
+
+                    vfs_path_free (dest_vpath);
+                    break;
+                }
 
             default:
                 /* Unknown file operation */
@@ -1756,7 +1781,6 @@ operate_single_file (const WPanel * panel, FileOperation operation, file_op_tota
         }
     }
 
-  ret:
     vfs_path_free (src_vpath);
 
     return value;
