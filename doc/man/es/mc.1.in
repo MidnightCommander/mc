@@ -4232,7 +4232,7 @@ Configuración personal del usuario. Si este archivo está presente entonces
 se cargará la configuración desde aquí en lugar de desde el archivo de
 configuración del sistema.
 .PP
-.I %prefix%/share/mc/mc.hint
+.I %prefix%/share/mc/hints/mc.hint
 .IP
 Este archivo contiene los mensajes cortos de ayuda mostrados por el
 programa.

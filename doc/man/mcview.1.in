@@ -61,7 +61,7 @@ selected=black,green"
 .fi
 .PP
 .SH FILES
-.I %prefix%/share/mc/mc.hlp
+.I %prefix%/share/mc/help/mc.hlp
 .IP
 The help file for the program.
 .PP

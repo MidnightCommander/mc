@@ -643,7 +643,7 @@ binary files, you should set
 to 7 bits in Midnight Commander's options menu to keep the spacing
 clean.
 .SH FILES
-.I %prefix%/share/mc/mc.hlp
+.I %prefix%/share/mc/help/mc.hlp
 .IP
 The help file for the program.
 .PP

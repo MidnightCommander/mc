@@ -3174,7 +3174,7 @@ dalla variabile ambiente
 .BR MC_DATADIR ,
 e se la variabile non è impostata, passerà alla directory %prefix%/share/mc .
 .PP
-.I %prefix%/share/mc/mc.hlp
+.I %prefix%/share/mc/help/mc.hlp
 .IP
 Il file di aiuto per il programma.
 .PP
@@ -3208,7 +3208,7 @@ da mc.lib.
 La configurazione dell'utente. Se questo file è presente, la configurazione
 viene caricata da qui invece che dal file di sistema.
 .PP
-.I %prefix%/share/mc/mc.hint
+.I %prefix%/share/mc/hints/mc.hint
 .IP
 Questo file contiene i suggerimenti (dritte) mostrate dal programma.
 .PP
