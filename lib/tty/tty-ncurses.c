@@ -198,7 +198,7 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
 
     tcgetattr (STDIN_FILENO, &mode);
     /* use Ctrl-g to generate SIGINT */
-    mode.c_cc[VINTR] = CTRL ('g');  /* ^g */
+    mode.c_cc[VINTR] = CTRL ('g');      /* ^g */
     /* disable SIGQUIT to allow use Ctrl-\ key */
     mode.c_cc[VQUIT] = NULL_VALUE;
     tcsetattr (STDIN_FILENO, TCSANOW, &mode);
