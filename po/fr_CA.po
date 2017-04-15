@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2016-11-21 13:19+0300\n"
+"POT-Creation-Date: 2017-04-15 09:50+0300\n"
 "PO-Revision-Date: 2015-02-26 09:48+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: French (Canada) (http://www.transifex.com/projects/p/mc/"
@@ -88,6 +88,23 @@ msgstr ""
 msgid ""
 "Your old settings were migrated from %s\n"
 "to %s\n"
+msgstr ""
+
+msgid ""
+"Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
+"hex)"
+msgstr ""
+
+msgid "Invalid character"
+msgstr ""
+
+msgid "Unmatched quotes character"
+msgstr ""
+
+#, c-format
+msgid ""
+"Hex pattern error at position %d:\n"
+"%s."
 msgstr ""
 
 msgid "Search string not found"
@@ -712,13 +729,16 @@ msgstr ""
 msgid "Color options"
 msgstr ""
 
-msgid "+number"
+msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
+msgstr ""
+
+msgid "file"
+msgstr ""
+
+msgid "file1 file2"
 msgstr ""
 
 msgid "[this_dir] [other_panel_dir]"
-msgstr ""
-
-msgid "Set initial line number for the internal editor"
 msgstr ""
 
 msgid ""
@@ -2343,9 +2363,6 @@ msgstr ""
 msgid "%o %d %f%m"
 msgstr ""
 
-msgid "file"
-msgstr ""
-
 msgid "files"
 msgstr ""
 
@@ -2372,7 +2389,7 @@ msgid ""
 msgstr ""
 
 msgid ""
-"Cannot make stable symlinks acrossnon-local filesystems:\n"
+"Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
@@ -3664,7 +3681,10 @@ msgstr ""
 msgid "Data types:"
 msgstr ""
 
-msgid "Root directory:"
+msgid "Home directory:"
+msgstr ""
+
+msgid "Profile root directory:"
 msgstr ""
 
 msgid "System data"

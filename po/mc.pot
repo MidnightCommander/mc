@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.8.18-250-g60faabd\n"
+"Project-Id-Version: mc 4.8.19-20-g2409b6f\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-02-24 22:45+0100\n"
+"POT-Creation-Date: 2017-04-15 09:50+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -626,48 +626,48 @@ msgstr ""
 msgid "GiB"
 msgstr ""
 
-#: lib/utilunix.c:518
+#: lib/utilunix.c:520
 msgid "Cannot create pipe descriptor"
 msgstr ""
 
-#: lib/utilunix.c:527
+#: lib/utilunix.c:529
 msgid "Cannot create pipe streams"
 msgstr ""
 
-#: lib/utilunix.c:606
+#: lib/utilunix.c:608
 #, c-format
 msgid ""
 "Unexpected error in select() reading data from a child process:\n"
 "%s"
 msgstr ""
 
-#: lib/utilunix.c:649
+#: lib/utilunix.c:651
 #, c-format
 msgid ""
 "Unexpected error in waitpid():\n"
 "%s"
 msgstr ""
 
-#: lib/utilunix.c:719 lib/utilunix.c:724 lib/utilunix.c:779
+#: lib/utilunix.c:721 lib/utilunix.c:726 lib/utilunix.c:781
 #: src/editor/edit.c:358 src/editor/editcmd.c:229 src/editor/editcmd.c:252
 #: src/editor/editcmd.c:422 src/editor/editcmd.c:584 src/editor/editcmd.c:1724
 #: src/editor/editcmd.c:3440 src/editor/editcmd.c:3469
 #: src/editor/editcmd_dialogs.c:481 src/execute.c:135
 #: src/filemanager/file.c:1677 src/filemanager/panel.c:4464 src/help.c:361
-#: src/main.c:399 src/subshell/common.c:418 src/subshell/common.c:1244
+#: src/main.c:401 src/subshell/common.c:418 src/subshell/common.c:1244
 #: src/viewer/actions_cmd.c:419
 msgid "Warning"
 msgstr ""
 
-#: lib/utilunix.c:719 src/filemanager/ext.c:714
+#: lib/utilunix.c:721 src/filemanager/ext.c:714
 msgid "Pipe failed"
 msgstr ""
 
-#: lib/utilunix.c:724
+#: lib/utilunix.c:726
 msgid "Dup failed"
 msgstr ""
 
-#: lib/utilunix.c:787
+#: lib/utilunix.c:789
 msgid "Error dup'ing old error pipe"
 msgstr ""
 
@@ -770,8 +770,8 @@ msgstr ""
 #: src/editor/editcmd.c:231 src/editor/editcmd.c:254 src/editor/editcmd.c:2855
 #: src/editor/editcmd.c:2861 src/filemanager/cmd.c:139
 #: src/filemanager/file.c:728 src/filemanager/file.c:2776
-#: src/filemanager/filegui.c:434 src/filemanager/hotlist.c:1132
-#: src/filemanager/hotlist.c:1149 src/filemanager/midnight.c:1031
+#: src/filemanager/filegui.c:434 src/filemanager/hotlist.c:1158
+#: src/filemanager/hotlist.c:1175 src/filemanager/midnight.c:1031
 #: src/filemanager/midnight.c:1039 src/filemanager/panel.c:2820
 #: src/filemanager/tree.c:828 src/subshell/common.c:1246
 #: src/viewer/actions_cmd.c:619 src/viewer/actions_cmd.c:625
@@ -783,7 +783,7 @@ msgstr ""
 #: src/editor/editcmd.c:231 src/editor/editcmd.c:2855 src/editor/editcmd.c:2861
 #: src/filemanager/cmd.c:139 src/filemanager/file.c:728
 #: src/filemanager/file.c:2776 src/filemanager/filegui.c:436
-#: src/filemanager/hotlist.c:1132 src/filemanager/hotlist.c:1149
+#: src/filemanager/hotlist.c:1158 src/filemanager/hotlist.c:1175
 #: src/filemanager/midnight.c:1031 src/filemanager/midnight.c:1039
 #: src/filemanager/panel.c:2820 src/filemanager/tree.c:828
 #: src/subshell/common.c:1246 src/viewer/actions_cmd.c:619
@@ -808,8 +808,8 @@ msgstr ""
 #: src/filemanager/achown.c:93 src/filemanager/chmod.c:125
 #: src/filemanager/chown.c:93 src/filemanager/cmd.c:1178
 #: src/filemanager/filegui.c:1256 src/filemanager/find.c:598
-#: src/filemanager/hotlist.c:187 src/filemanager/hotlist.c:988
-#: src/filemanager/hotlist.c:1050 src/filemanager/layout.c:459
+#: src/filemanager/hotlist.c:187 src/filemanager/hotlist.c:1014
+#: src/filemanager/hotlist.c:1076 src/filemanager/layout.c:459
 #: src/filemanager/panelize.c:140 src/learn.c:256 src/viewer/hex.c:430
 msgid "&Cancel"
 msgstr ""
@@ -982,47 +982,51 @@ msgstr ""
 msgid "Color options"
 msgstr ""
 
-#: src/args.c:392 src/args.c:394
-msgid "+number"
+#: src/args.c:396
+msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
 msgstr ""
 
-#: src/args.c:393
+#: src/args.c:399 src/filemanager/file.c:160
+msgid "file"
+msgstr ""
+
+#: src/args.c:403
+msgid "file1 file2"
+msgstr ""
+
+#: src/args.c:408
 msgid "[this_dir] [other_panel_dir]"
 msgstr ""
 
-#: src/args.c:396
-msgid "Set initial line number for the internal editor"
-msgstr ""
-
-#: src/args.c:407
+#: src/args.c:423
 msgid ""
 "\n"
 "Please send any bug reports (including the output of 'mc -V')\n"
 "as tickets at www.midnight-commander.org\n"
 msgstr ""
 
-#: src/args.c:410 src/filemanager/midnight.c:1702 src/textconf.c:141
+#: src/args.c:426 src/filemanager/midnight.c:1702 src/textconf.c:141
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr ""
 
-#: src/args.c:637 src/filemanager/boxes.c:646
+#: src/args.c:679 src/filemanager/boxes.c:646
 msgid "Main options"
 msgstr ""
 
-#: src/args.c:643 src/args.c:644
+#: src/args.c:685 src/args.c:686
 msgid "Terminal options"
 msgstr ""
 
-#: src/args.c:659
+#: src/args.c:701
 msgid "Arguments parse error!"
 msgstr ""
 
-#: src/args.c:797
+#: src/args.c:819
 msgid "No arguments given to the viewer."
 msgstr ""
 
-#: src/args.c:809
+#: src/args.c:831
 msgid "Two files are required to envoke the diffviewer."
 msgstr ""
 
@@ -3152,8 +3156,8 @@ msgstr ""
 msgid "DialogTitle|Move"
 msgstr ""
 
-#: src/filemanager/file.c:97 src/filemanager/hotlist.c:1131
-#: src/filemanager/hotlist.c:1148 src/filemanager/tree.c:828
+#: src/filemanager/file.c:97 src/filemanager/hotlist.c:1157
+#: src/filemanager/hotlist.c:1174 src/filemanager/tree.c:828
 msgid "DialogTitle|Delete"
 msgstr ""
 
@@ -3177,10 +3181,6 @@ msgstr ""
 #: src/filemanager/file.c:157
 #, no-c-format
 msgid "%o %d %f%m"
-msgstr ""
-
-#: src/filemanager/file.c:160
-msgid "file"
 msgstr ""
 
 #: src/filemanager/file.c:161
@@ -3217,7 +3217,7 @@ msgstr ""
 
 #: src/filemanager/file.c:425
 msgid ""
-"Cannot make stable symlinks acrossnon-local filesystems:\n"
+"Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
@@ -3789,8 +3789,8 @@ msgstr ""
 msgid "New &entry"
 msgstr ""
 
-#: src/filemanager/hotlist.c:193 src/filemanager/hotlist.c:987
-#: src/filemanager/hotlist.c:1049
+#: src/filemanager/hotlist.c:193 src/filemanager/hotlist.c:1013
+#: src/filemanager/hotlist.c:1075
 msgid "&Insert"
 msgstr ""
 
@@ -3802,84 +3802,84 @@ msgstr ""
 msgid "Subgroup - press ENTER to see list"
 msgstr ""
 
-#: src/filemanager/hotlist.c:746
+#: src/filemanager/hotlist.c:772
 msgid "Active VFS directories"
 msgstr ""
 
-#: src/filemanager/hotlist.c:753
+#: src/filemanager/hotlist.c:779
 msgid "Directory hotlist"
 msgstr ""
 
-#: src/filemanager/hotlist.c:762 src/filemanager/hotlist.c:1443
+#: src/filemanager/hotlist.c:788 src/filemanager/hotlist.c:1469
 msgid "Top level group"
 msgstr ""
 
-#: src/filemanager/hotlist.c:787
+#: src/filemanager/hotlist.c:813
 msgid "Directory path"
 msgstr ""
 
-#: src/filemanager/hotlist.c:823
+#: src/filemanager/hotlist.c:849
 #, c-format
 msgid "Moving %s"
 msgstr ""
 
-#: src/filemanager/hotlist.c:832
+#: src/filemanager/hotlist.c:858
 msgid "Directory label"
 msgstr ""
 
-#: src/filemanager/hotlist.c:986 src/filemanager/hotlist.c:1048
+#: src/filemanager/hotlist.c:1012 src/filemanager/hotlist.c:1074
 msgid "&Append"
 msgstr ""
 
-#: src/filemanager/hotlist.c:1017
+#: src/filemanager/hotlist.c:1043
 msgid "New hotlist entry"
 msgstr ""
 
-#: src/filemanager/hotlist.c:1017
+#: src/filemanager/hotlist.c:1043
 msgid "Directory label:"
 msgstr ""
 
-#: src/filemanager/hotlist.c:1018
+#: src/filemanager/hotlist.c:1044
 msgid "Directory path:"
 msgstr ""
 
-#: src/filemanager/hotlist.c:1076
+#: src/filemanager/hotlist.c:1102
 msgid "New hotlist group"
 msgstr ""
 
-#: src/filemanager/hotlist.c:1076
+#: src/filemanager/hotlist.c:1102
 msgid "Name of new group:"
 msgstr ""
 
-#: src/filemanager/hotlist.c:1129
+#: src/filemanager/hotlist.c:1155
 #, c-format
 msgid "Are you sure you want to remove entry \"%s\"?"
 msgstr ""
 
-#: src/filemanager/hotlist.c:1146
+#: src/filemanager/hotlist.c:1172
 #, c-format
 msgid ""
 "Group \"%s\" is not empty.\n"
 "Remove it?"
 msgstr ""
 
-#: src/filemanager/hotlist.c:1466
+#: src/filemanager/hotlist.c:1492
 msgid "Hotlist Load"
 msgstr ""
 
-#: src/filemanager/hotlist.c:1468
+#: src/filemanager/hotlist.c:1494
 #, c-format
 msgid ""
 "MC was unable to write %s file,\n"
 "your old hotlist entries were not deleted"
 msgstr ""
 
-#: src/filemanager/hotlist.c:1574
+#: src/filemanager/hotlist.c:1600
 #, c-format
 msgid "Label for \"%s\":"
 msgstr ""
 
-#: src/filemanager/hotlist.c:1586
+#: src/filemanager/hotlist.c:1612
 msgid "Add to hotlist"
 msgstr ""
 
@@ -4742,18 +4742,18 @@ msgid ""
 "key, or click with the mouse to define it. Move around with Tab."
 msgstr ""
 
-#: src/main.c:240
+#: src/main.c:242
 #, c-format
 msgid ""
 "Failed to run:\n"
 "%s\n"
 msgstr ""
 
-#: src/main.c:254
+#: src/main.c:256
 msgid "Home directory path is not absolute"
 msgstr ""
 
-#: src/main.c:495
+#: src/main.c:497
 #, c-format
 msgid ""
 "\n"

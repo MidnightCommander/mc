@@ -234,6 +234,8 @@ main (int argc, char *argv[])
     /* do this before args parsing */
     str_init_strings (NULL);
 
+    mc_setup_run_mode (argv);   /* are we mc? editor? viewer? etc... */
+
     if (!mc_args_parse (&argc, &argv, "mc", &mcerror))
     {
       startup_exit_falure:
