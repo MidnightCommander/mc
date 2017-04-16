@@ -50,6 +50,7 @@
 #include <config.h>
 
 #include <errno.h>
+#include <limits.h>             /* MB_LEN_MAX */
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>

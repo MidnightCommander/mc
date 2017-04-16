@@ -6,6 +6,8 @@
 #ifndef MC__WIDGET_INPUT_H
 #define MC__WIDGET_INPUT_H
 
+#include <limits.h>             /* MB_LEN_MAX */
+
 #include "lib/keybind.h"        /* global_keymap_t */
 
 /*** typedefs(not structures) and defined constants **********************************************/
