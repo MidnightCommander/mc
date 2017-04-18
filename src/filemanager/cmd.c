@@ -508,17 +508,6 @@ switch_to_listing (int panel_index)
 {
     if (get_display_type (panel_index) != view_listing)
         set_display_type (panel_index, view_listing);
-    else
-    {
-        WPanel *p;
-
-        p = PANEL (get_panel_widget (panel_index));
-        if (p->is_panelized)
-        {
-            p->is_panelized = FALSE;
-            panel_reload (p);
-        }
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1586,7 +1575,16 @@ quick_cmd_no_menu (void)
 void
 listing_cmd (void)
 {
+    WPanel *p;
+
     switch_to_listing (MENU_PANEL_IDX);
+
+    p = PANEL (get_panel_widget (MENU_PANEL_IDX));
+    if (p->is_panelized)
+    {
+        p->is_panelized = FALSE;
+        panel_reload (p);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
