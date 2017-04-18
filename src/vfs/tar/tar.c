@@ -442,6 +442,9 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *heade
     }
 
     st->st_size = h_size;
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+    st->st_atim.tv_nsec = st->st_mtim.tv_nsec = st->st_ctim.tv_nsec = 0;
+#endif
     st->st_mtime = tar_from_oct (1 + 12, header->header.mtime);
     st->st_atime = 0;
     st->st_ctime = 0;

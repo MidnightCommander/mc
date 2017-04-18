@@ -462,9 +462,15 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
             entry->ino->st.st_mode = st->st_mode;
             entry->ino->st.st_uid = st->st_uid;
             entry->ino->st.st_gid = st->st_gid;
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+            entry->ino->st.st_atim = st->st_atim;
+            entry->ino->st.st_mtim = st->st_mtim;
+            entry->ino->st.st_ctim = st->st_ctim;
+#else
             entry->ino->st.st_atime = st->st_atime;
             entry->ino->st.st_mtime = st->st_mtime;
             entry->ino->st.st_ctime = st->st_ctime;
+#endif
         }
 
         g_free (name);
@@ -589,6 +595,9 @@ cpio_read_bin_head (struct vfs_class *me, struct vfs_s_super *super)
     st.st_rdev = u.buf.c_rdev;
 #endif
     st.st_size = (u.buf.c_filesizes[0] << 16) | u.buf.c_filesizes[1];
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+    st.st_atim.tv_nsec = st.st_mtim.tv_nsec = st.st_ctim.tv_nsec = 0;
+#endif
     st.st_atime = st.st_mtime = st.st_ctime = (u.buf.c_mtimes[0] << 16) | u.buf.c_mtimes[1];
 
     return cpio_create_entry (me, super, &st, name);
@@ -658,6 +667,9 @@ cpio_read_oldc_head (struct vfs_class *me, struct vfs_s_super *super)
     u.st.st_rdev = hd.c_rdev;
 #endif
     u.st.st_size = hd.c_filesize;
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+    u.st.st_atim.tv_nsec = u.st.st_mtim.tv_nsec = u.st.st_ctim.tv_nsec = 0;
+#endif
     u.st.st_atime = u.st.st_mtime = u.st.st_ctime = hd.c_mtime;
 
     return cpio_create_entry (me, super, &u.st, name);
@@ -736,6 +748,9 @@ cpio_read_crc_head (struct vfs_class *me, struct vfs_s_super *super)
     u.st.st_rdev = makedev (hd.c_rdev, hd.c_rdevmin);
 #endif
     u.st.st_size = hd.c_filesize;
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+    u.st.st_atim.tv_nsec = u.st.st_mtim.tv_nsec = u.st.st_ctim.tv_nsec = 0;
+#endif
     u.st.st_atime = u.st.st_mtime = u.st.st_ctime = hd.c_mtime;
 
     return cpio_create_entry (me, super, &u.st, name);

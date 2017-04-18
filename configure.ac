@@ -181,7 +181,7 @@ AC_TYPE_PID_T
 AC_TYPE_UID_T
 
 AC_STRUCT_ST_BLOCKS
-AC_CHECK_MEMBERS([struct stat.st_blksize, struct stat.st_rdev])
+AC_CHECK_MEMBERS([struct stat.st_blksize, struct stat.st_rdev, struct stat.st_mtim])
 gl_STAT_SIZE
 
 AH_TEMPLATE([sig_atomic_t],
