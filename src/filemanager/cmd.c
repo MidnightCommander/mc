@@ -511,27 +511,6 @@ switch_to_listing (int panel_index)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** Handle the tree internal listing modes switching */
-
-static gboolean
-set_basic_panel_listing_to (int panel_index, int listing_mode)
-{
-    WPanel *p;
-    gboolean ok;
-
-    p = PANEL (get_panel_widget (panel_index));
-    switch_to_listing (panel_index);
-    p->list_type = listing_mode;
-
-    ok = set_panel_formats (p) == 0;
-
-    if (ok)
-        do_refresh ();
-
-    return ok;
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1647,7 +1626,10 @@ toggle_listing_cmd (void)
     current = get_current_index ();
     p = PANEL (get_panel_widget (current));
 
-    set_basic_panel_listing_to (current, (p->list_type + 1) % LIST_TYPES);
+    p->list_type = (p->list_type + 1) % LIST_TYPES;
+
+    if (set_panel_formats (p) == 0)
+        do_refresh ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
