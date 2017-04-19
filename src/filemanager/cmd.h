@@ -90,7 +90,6 @@ void change_listing_cmd (void);
 void quick_cmd_no_menu (void);
 void info_cmd_no_menu (void);
 void quick_view_cmd (void);
-void toggle_listing_cmd (void);
 #ifdef HAVE_CHARSET
 void encoding_cmd (void);
 #endif

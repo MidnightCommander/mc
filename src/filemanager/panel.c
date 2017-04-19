@@ -2858,6 +2858,18 @@ do_enter (WPanel * panel)
     return do_enter_on_file_entry (selection (panel));
 }
 
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+panel_cycle_listing_format (WPanel * panel)
+{
+    panel->list_type = (panel->list_type + 1) % LIST_TYPES;
+
+    if (set_panel_formats (panel) == 0)
+        do_refresh ();
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static void
@@ -3436,6 +3448,9 @@ panel_execute_cmd (WPanel * panel, long command)
 
     switch (command)
     {
+    case CK_CycleListingFormat:
+        panel_cycle_listing_format (panel);
+        break;
     case CK_PanelOtherCd:
         chdir_other_panel (panel);
         break;

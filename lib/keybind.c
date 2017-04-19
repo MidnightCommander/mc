@@ -147,7 +147,6 @@ static name_keymap_t command_names[] = {
     {"ViewFiltered", CK_ViewFiltered},
     {"Find", CK_Find},
     {"DirSize", CK_DirSize},
-    {"PanelListingSwitch", CK_PanelListingSwitch},
     {"CompareDirs", CK_CompareDirs},
 #ifdef USE_DIFF_VIEW
     {"CompareFiles", CK_CompareFiles},
@@ -234,6 +233,7 @@ static name_keymap_t command_names[] = {
     {"SortBySize", CK_SortBySize},
     {"SortByMTime", CK_SortByMTime},
     {"CdParentSmart", CK_CdParentSmart},
+    {"CycleListingFormat", CK_CycleListingFormat},
 
     /* dialog */
     {"Ok", CK_Ok},

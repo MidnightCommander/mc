@@ -1352,9 +1352,6 @@ midnight_execute_cmd (Widget * sender, long command)
     case CK_LinkSymbolic:
         link_cmd (LINK_SYMLINK_ABSOLUTE);
         break;
-    case CK_PanelListingSwitch:
-        toggle_listing_cmd ();
-        break;
     case CK_ShowHidden:
         toggle_show_hidden ();
         break;

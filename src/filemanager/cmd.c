@@ -1617,23 +1617,6 @@ quick_view_cmd (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
-toggle_listing_cmd (void)
-{
-    int current;
-    WPanel *p;
-
-    current = get_current_index ();
-    p = PANEL (get_panel_widget (current));
-
-    p->list_type = (p->list_type + 1) % LIST_TYPES;
-
-    if (set_panel_formats (p) == 0)
-        do_refresh ();
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 #ifdef HAVE_CHARSET
 void
 encoding_cmd (void)
