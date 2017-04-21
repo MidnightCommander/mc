@@ -1584,8 +1584,7 @@ panel_print_header (const WPanel * panel)
 
                 g_string_append (format_txt, format->title);
 
-                if (panel->filter != NULL && *panel->filter != '\0'
-                    && strcmp (format->id, "name") == 0)
+                if (panel->filter != NULL && strcmp (format->id, "name") == 0)
                 {
                     g_string_append (format_txt, " [");
                     g_string_append (format_txt, panel->filter);

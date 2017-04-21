@@ -174,12 +174,15 @@ static void
 set_panel_filter_to (WPanel * p, char *allocated_filter_string)
 {
     g_free (p->filter);
-    p->filter = 0;
+    p->filter = NULL;
 
-    if (!(allocated_filter_string[0] == '*' && allocated_filter_string[1] == 0))
-        p->filter = allocated_filter_string;
-    else
+    /* Three ways to clear filter: NULL, "", "*" */
+    if (allocated_filter_string == NULL ||
+        allocated_filter_string[0] == '\0' ||
+        (allocated_filter_string[0] == '*' && allocated_filter_string[1] == '\0'))
         g_free (allocated_filter_string);
+    else
+        p->filter = allocated_filter_string;
     reread_cmd ();
 }
 
