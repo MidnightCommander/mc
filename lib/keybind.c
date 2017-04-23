@@ -178,7 +178,7 @@ static name_keymap_t command_names[] = {
     {"OptionsLayout", CK_OptionsLayout},
     {"OptionsAppearance", CK_OptionsAppearance},
     {"Link", CK_Link},
-    {"PanelListingChange", CK_PanelListingChange},
+    {"SetupListingFormat", CK_SetupListingFormat},
     {"PanelListing", CK_PanelListing},
 #ifdef LISTMODE_EDITOR
     {"ListMode", CK_ListMode}.

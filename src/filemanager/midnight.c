@@ -179,7 +179,7 @@ listmode_cmd (void)
         return;
 
     g_free (current_panel->user_format);
-    current_panel->list_type = list_user;
+    current_panel->list_format = list_user;
     current_panel->user_format = newmode;
     set_panel_formats (current_panel);
 
@@ -200,7 +200,8 @@ create_panel_menu (void)
     entries = g_list_prepend (entries, menu_entry_create (_("&Tree"), CK_PanelTree));
     entries = g_list_prepend (entries, menu_separator_create ());
     entries =
-        g_list_prepend (entries, menu_entry_create (_("&Listing mode..."), CK_PanelListingChange));
+        g_list_prepend (entries,
+                        menu_entry_create (_("&Listing format..."), CK_SetupListingFormat));
     entries = g_list_prepend (entries, menu_entry_create (_("&Sort order..."), CK_Sort));
     entries = g_list_prepend (entries, menu_entry_create (_("&Filter..."), CK_Filter));
 #ifdef HAVE_CHARSET
@@ -1112,8 +1113,8 @@ midnight_execute_cmd (Widget * sender, long command)
     case CK_HotListAdd:
         add2hotlist_cmd ();
         break;
-    case CK_PanelListingChange:
-        change_listing_cmd ();
+    case CK_SetupListingFormat:
+        setup_listing_format_cmd ();
         break;
     case CK_ChangeMode:
         chmod_cmd ();

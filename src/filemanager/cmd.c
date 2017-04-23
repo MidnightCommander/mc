@@ -475,23 +475,23 @@ nice_cd (const char *text, const char *xtext, const char *help,
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-configure_panel_listing (WPanel * p, int list_type, int brief_cols, gboolean use_msformat,
+configure_panel_listing (WPanel * p, int list_format, int brief_cols, gboolean use_msformat,
                          char **user, char **status)
 {
     p->user_mini_status = use_msformat;
-    p->list_type = list_type;
+    p->list_format = list_format;
 
-    if (list_type == list_brief)
+    if (list_format == list_brief)
         p->brief_cols = brief_cols;
 
-    if (list_type == list_user || use_msformat)
+    if (list_format == list_user || use_msformat)
     {
         g_free (p->user_format);
         p->user_format = *user;
         *user = NULL;
 
-        g_free (p->user_status_format[list_type]);
-        p->user_status_format[list_type] = *status;
+        g_free (p->user_status_format[list_format]);
+        p->user_status_format[list_format] = *status;
         *status = NULL;
 
         set_panel_formats (p);
@@ -1567,9 +1567,9 @@ listing_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-change_listing_cmd (void)
+setup_listing_format_cmd (void)
 {
-    int list_type;
+    int list_format;
     gboolean use_msformat;
     int brief_cols;
     char *user, *status;
@@ -1578,12 +1578,12 @@ change_listing_cmd (void)
     if (SELECTED_IS_PANEL)
         p = MENU_PANEL_IDX == 0 ? left_panel : right_panel;
 
-    list_type = panel_listing_box (p, MENU_PANEL_IDX, &user, &status, &use_msformat, &brief_cols);
-    if (list_type != -1)
+    list_format = panel_listing_box (p, MENU_PANEL_IDX, &user, &status, &use_msformat, &brief_cols);
+    if (list_format != -1)
     {
         switch_to_listing (MENU_PANEL_IDX);
         p = MENU_PANEL_IDX == 0 ? left_panel : right_panel;
-        configure_panel_listing (p, list_type, brief_cols, use_msformat, &user, &status);
+        configure_panel_listing (p, list_format, brief_cols, use_msformat, &user, &status);
         g_free (user);
         g_free (status);
     }

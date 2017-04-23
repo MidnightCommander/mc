@@ -137,7 +137,7 @@ enum
     CK_Find,
     CK_DirSize,
     CK_HotListAdd,
-    CK_PanelListingChange,
+    CK_SetupListingFormat,
     CK_CompareDirs,
     CK_OptionsVfs,
     CK_OptionsConfirm,

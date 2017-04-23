@@ -513,9 +513,9 @@ respectively.
 .TP
 .B Alt\-t
 toggle the current display listing to show the next display listing
-mode.
+format.
 With this it is possible to quickly switch to brief listing, long
-listing, user defined listing mode, and back to the default.
+listing, user defined listing format, and back to the default.
 .TP
 .B C\-\\\\ (control\-backslash)
 show the
@@ -815,10 +815,10 @@ when the horizontal panel split is chosen from the
 Layout
 .\"Layout"
 options dialog).
-.\"NODE "    Listing Mode..."
-.SH "    Listing Mode..."
+.\"NODE "    Listing Format..."
+.SH "    Listing Format..."
 The listing mode view is used to display a listing of files, there are
-four different listing modes available:
+four different listing formats available:
 .BR Full ,
 .BR Brief ,
 .B Long
@@ -2118,7 +2118,7 @@ and
 .I mode
 .\"LINK2"
 display fields
-.\"Listing Mode..."
+.\"Listing Format..."
 which apply to the user running Midnight Commander are highlighted with
 the color defined by the
 .I selected

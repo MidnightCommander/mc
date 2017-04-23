@@ -564,7 +564,7 @@ Wygląd panelu katalogowego może zostać zmieniony poprzez menu
 i
 .BR right .
 .PP
-.\"NODE "    Listing Mode..."
+.\"NODE "    Listing Format..."
 .SH "    Tryby wyświetlania (Listing modes)"
 Tryby wyświetlania są używane do zmienia ustawień przy wyświetlaniu.
 Dostępne są cztery różne tryby:

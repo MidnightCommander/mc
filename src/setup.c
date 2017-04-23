@@ -231,8 +231,8 @@ static char *panels_profile_name = NULL;        /* ${XDG_CACHE_HOME}/mc/panels.i
 static const struct
 {
     const char *key;
-    int  list_type;
-} list_types [] = {
+    int  list_format;
+} list_formats [] = {
     { "full",  list_full  },
     { "brief", list_brief },
     { "long",  list_long  },
@@ -1471,13 +1471,18 @@ panel_load_setup (WPanel * panel, const char *section)
 
     g_free (buffer);
 
-    /* Load the listing mode */
-    buffer = mc_config_get_string (mc_global.panels_config, section, "list_mode", "full");
-    panel->list_type = list_full;
-    for (i = 0; list_types[i].key != NULL; i++)
-        if (g_ascii_strcasecmp (list_types[i].key, buffer) == 0)
+    /* Load the listing format */
+    buffer = mc_config_get_string (mc_global.panels_config, section, "list_format", NULL);
+    if (buffer == NULL)
+    {
+        /* fallback to old option */
+        buffer = mc_config_get_string (mc_global.panels_config, section, "list_mode", "full");
+    }
+    panel->list_format = list_full;
+    for (i = 0; list_formats[i].key != NULL; i++)
+        if (g_ascii_strcasecmp (list_formats[i].key, buffer) == 0)
         {
-            panel->list_type = list_types[i].list_type;
+            panel->list_format = list_formats[i].list_format;
             break;
         }
     g_free (buffer);
@@ -1489,7 +1494,7 @@ panel_load_setup (WPanel * panel, const char *section)
     panel->user_format =
         mc_config_get_string (mc_global.panels_config, section, "user_format", DEFAULT_USER_FORMAT);
 
-    for (i = 0; i < LIST_TYPES; i++)
+    for (i = 0; i < LIST_FORMATS; i++)
     {
         g_free (panel->user_status_format[i]);
         g_snprintf (buffer2, sizeof (buffer2), "user_status%lld", (long long) i);
@@ -1516,10 +1521,11 @@ panel_save_setup (WPanel * panel, const char *section)
 
     mc_config_set_string (mc_global.panels_config, section, "sort_order", panel->sort_field->id);
 
-    for (i = 0; list_types[i].key != NULL; i++)
-        if (list_types[i].list_type == (int) panel->list_type)
+    for (i = 0; list_formats[i].key != NULL; i++)
+        if (list_formats[i].list_format == (int) panel->list_format)
         {
-            mc_config_set_string (mc_global.panels_config, section, "list_mode", list_types[i].key);
+            mc_config_set_string (mc_global.panels_config, section, "list_format",
+                                  list_formats[i].key);
             break;
         }
 
@@ -1527,7 +1533,7 @@ panel_save_setup (WPanel * panel, const char *section)
 
     mc_config_set_string (mc_global.panels_config, section, "user_format", panel->user_format);
 
-    for (i = 0; i < LIST_TYPES; i++)
+    for (i = 0; i < LIST_FORMATS; i++)
     {
         g_snprintf (buffer, sizeof (buffer), "user_status%lld", (long long) i);
         mc_config_set_string (mc_global.panels_config, section, buffer,
