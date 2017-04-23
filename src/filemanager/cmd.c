@@ -1580,11 +1580,9 @@ listing_cmd (void)
     switch_to_listing (MENU_PANEL_IDX);
 
     p = PANEL (get_panel_widget (MENU_PANEL_IDX));
-    if (p->is_panelized)
-    {
-        p->is_panelized = FALSE;
-        panel_reload (p);
-    }
+
+    p->is_panelized = FALSE;
+    set_panel_filter_to (p, NULL);      /* including panel reload */
 }
 
 /* --------------------------------------------------------------------------------------------- */
