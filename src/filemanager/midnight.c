@@ -1400,6 +1400,54 @@ midnight_execute_cmd (Widget * sender, long command)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Whether the command-line should not respond to key events.
+ *
+ * This is TRUE if a QuickView or TreeView have the focus, as they're going
+ * to consume some keys and there's no sense in passing to the command-line
+ * just the leftovers.
+ */
+static gboolean
+is_cmdline_mute (void)
+{
+    /* When one of panels is other than view_listing,
+       current_panel points to view_listing panel all time independently of
+       it's activity. Thus, we can't use get_current_type() here.
+       current_panel should point to actualy current active panel
+       independently of it's type. */
+    return (current_panel->active == 0
+            && (get_other_type () == view_quick || get_other_type () == view_tree));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Handles the Enter key on the command-line.
+ *
+ * Returns TRUE if non-whitespace was indeed processed.
+ */
+static gboolean
+handle_cmdline_enter (void)
+{
+    size_t i;
+
+    for (i = 0; cmdline->buffer[i] != '\0' && whitespace (cmdline->buffer[i]); i++)
+        ;
+
+    if (cmdline->buffer[i] != '\0')
+    {
+        send_message (cmdline, NULL, MSG_KEY, '\n', NULL);
+        return TRUE;
+    }
+
+    input_insert (cmdline, "", FALSE);
+    cmdline->point = 0;
+
+    return FALSE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
@@ -1455,31 +1503,11 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         if (widget_get_state (WIDGET (the_menubar), WST_FOCUSED))
             return MSG_NOT_HANDLED;
 
-        if (parm == '\n')
+        if (parm == '\n' && !is_cmdline_mute ())
         {
-            size_t i;
-
-            /* HACK: don't execute command in the command line if Enter was pressed
-               in the quick viewer panel. */
-            /* TODO: currently, when one of panels is other than view_listing,
-               current_panel points to view_listing panel all time independently of
-               it's activity. Thus, we can't use get_current_type() here.
-               current_panel should point to actualy current active panel
-               independently of it's type. */
-            if (current_panel->active == 0 && get_other_type () == view_quick)
-                return MSG_NOT_HANDLED;
-
-            for (i = 0; cmdline->buffer[i] != '\0' && whitespace (cmdline->buffer[i]); i++)
-                ;
-
-            if (cmdline->buffer[i] != '\0')
-            {
-                send_message (cmdline, NULL, MSG_KEY, parm, NULL);
+            if (handle_cmdline_enter ())
                 return MSG_HANDLED;
-            }
-
-            input_insert (cmdline, "", FALSE);
-            cmdline->point = 0;
+            /* Else: the panel will handle it. */
         }
 
         if ((!mc_global.tty.alternate_plus_minus
@@ -1542,7 +1570,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
             if (command != CK_IgnoreKey)
                 v = midnight_execute_cmd (NULL, command);
 
-            if (v == MSG_NOT_HANDLED && command_prompt)
+            if (v == MSG_NOT_HANDLED && command_prompt && !is_cmdline_mute ())
                 v = send_message (cmdline, NULL, MSG_KEY, parm, NULL);
 
             return v;
