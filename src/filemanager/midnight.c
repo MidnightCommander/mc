@@ -1420,6 +1420,33 @@ is_cmdline_mute (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Handles the Enter key on the command-line.
+ *
+ * Returns TRUE if non-whitespace was indeed processed.
+ */
+static gboolean
+handle_cmdline_enter (void)
+{
+    size_t i;
+
+    for (i = 0; cmdline->buffer[i] != '\0' && whitespace (cmdline->buffer[i]); i++)
+        ;
+
+    if (cmdline->buffer[i] != '\0')
+    {
+        send_message (cmdline, NULL, MSG_KEY, '\n', NULL);
+        return TRUE;
+    }
+
+    input_insert (cmdline, "", FALSE);
+    cmdline->point = 0;
+
+    return FALSE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
@@ -1477,19 +1504,9 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
 
         if (parm == '\n' && !is_cmdline_mute ())
         {
-            size_t i;
-
-            for (i = 0; cmdline->buffer[i] != '\0' && whitespace (cmdline->buffer[i]); i++)
-                ;
-
-            if (cmdline->buffer[i] != '\0')
-            {
-                send_message (cmdline, NULL, MSG_KEY, parm, NULL);
+            if (handle_cmdline_enter ())
                 return MSG_HANDLED;
-            }
-
-            input_insert (cmdline, "", FALSE);
-            cmdline->point = 0;
+            /* Else: the panel will handle it. */
         }
 
         if ((!mc_global.tty.alternate_plus_minus
