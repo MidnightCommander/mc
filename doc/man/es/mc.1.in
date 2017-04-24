@@ -840,7 +840,7 @@ si hemos elegido la disposición horizontal de paneles en las opciones de
 .\"LINK2"
 presentación\&).
 .\"Layout"
-.\"NODE "    Listing Mode..."
+.\"NODE "    Listing Format..."
 .SH "    Listado..."
 La vista en modo
 .B "Listado"
@@ -1995,7 +1995,7 @@ campos de
 del
 .\"LINK2"
 Modo de Listado
-.\"Listing Mode..."
+.\"Listing Format..."
 aplicables al usuario actual de Midnight Commander serán resaltados
 usando el color indicado por medio de la palabra clave
 .I selected.
@@ -2107,7 +2107,7 @@ colores
 distintivos. Si se habilita el resaltado de permisos, los
 .\"LINK2"
 campos del listado
-.\"Listing Mode..."
+.\"Listing Format..."
 .I perm
 y
 .I mode

@@ -663,7 +663,7 @@ A könyvtárpanelek megjelenése változtatható a
 és
 .B "Jobb"
 menükben.
-.\"NODE "    Listing Mode..."
+.\"NODE "    Listing Format..."
 .SH "    Fájllista..."
 A fájllista módozatok a fájlok megjelenítésének beállítására szolgálnak,
 négy különböző listázási mód használható:
@@ -1764,7 +1764,7 @@ Ha pl. a jogosultságokat kérted, a
 láthatók a
 .\"LINK2"
 Fájllistában
-.\"Listing Mode..."
+.\"Listing Format..."
 a
 .I kiválasztás
 színével. Ez különösen előnyös, ha a könyvtárunkban más felhasználó

@@ -23,8 +23,7 @@ Suspend = ctrl-z
 Swap = ctrl-u
 History = alt-h
 # PanelListing =
-PanelListingSwitch = alt-t
-# PanelListingChange =
+# SetupListingFormat =
 ShowHidden = alt-dot
 SplitVertHoriz = alt-comma
 SplitEqual = alt-equal
@@ -80,6 +79,7 @@ PutCurrentLink = r
 PutOtherLink = ctrl-r
 
 [panel]
+CycleListingFormat = alt-t
 Search = ctrl-s; alt-s
 Mark = insert; ctrl-t
 MarkUp = shift-up

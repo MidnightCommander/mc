@@ -475,23 +475,23 @@ nice_cd (const char *text, const char *xtext, const char *help,
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-configure_panel_listing (WPanel * p, int list_type, int brief_cols, gboolean use_msformat,
+configure_panel_listing (WPanel * p, int list_format, int brief_cols, gboolean use_msformat,
                          char **user, char **status)
 {
     p->user_mini_status = use_msformat;
-    p->list_type = list_type;
+    p->list_format = list_format;
 
-    if (list_type == list_brief)
+    if (list_format == list_brief)
         p->brief_cols = brief_cols;
 
-    if (list_type == list_user || use_msformat)
+    if (list_format == list_user || use_msformat)
     {
         g_free (p->user_format);
         p->user_format = *user;
         *user = NULL;
 
-        g_free (p->user_status_format[list_type]);
-        p->user_status_format[list_type] = *status;
+        g_free (p->user_status_format[list_format]);
+        p->user_status_format[list_format] = *status;
         *status = NULL;
 
         set_panel_formats (p);
@@ -508,38 +508,6 @@ switch_to_listing (int panel_index)
 {
     if (get_display_type (panel_index) != view_listing)
         set_display_type (panel_index, view_listing);
-    else
-    {
-        WPanel *p;
-
-        p = PANEL (get_panel_widget (panel_index));
-        if (p->is_panelized)
-        {
-            p->is_panelized = FALSE;
-            panel_reload (p);
-        }
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/** Handle the tree internal listing modes switching */
-
-static gboolean
-set_basic_panel_listing_to (int panel_index, int listing_mode)
-{
-    WPanel *p;
-    gboolean ok;
-
-    p = PANEL (get_panel_widget (panel_index));
-    switch_to_listing (panel_index);
-    p->list_type = listing_mode;
-
-    ok = set_panel_formats (p) == 0;
-
-    if (ok)
-        do_refresh ();
-
-    return ok;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1586,15 +1554,22 @@ quick_cmd_no_menu (void)
 void
 listing_cmd (void)
 {
+    WPanel *p;
+
     switch_to_listing (MENU_PANEL_IDX);
+
+    p = PANEL (get_panel_widget (MENU_PANEL_IDX));
+
+    p->is_panelized = FALSE;
+    set_panel_filter_to (p, NULL);      /* including panel reload */
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 void
-change_listing_cmd (void)
+setup_listing_format_cmd (void)
 {
-    int list_type;
+    int list_format;
     gboolean use_msformat;
     int brief_cols;
     char *user, *status;
@@ -1603,12 +1578,12 @@ change_listing_cmd (void)
     if (SELECTED_IS_PANEL)
         p = MENU_PANEL_IDX == 0 ? left_panel : right_panel;
 
-    list_type = panel_listing_box (p, MENU_PANEL_IDX, &user, &status, &use_msformat, &brief_cols);
-    if (list_type != -1)
+    list_format = panel_listing_box (p, MENU_PANEL_IDX, &user, &status, &use_msformat, &brief_cols);
+    if (list_format != -1)
     {
         switch_to_listing (MENU_PANEL_IDX);
         p = MENU_PANEL_IDX == 0 ? left_panel : right_panel;
-        configure_panel_listing (p, list_type, brief_cols, use_msformat, &user, &status);
+        configure_panel_listing (p, list_format, brief_cols, use_msformat, &user, &status);
         g_free (user);
         g_free (status);
     }
@@ -1638,20 +1613,6 @@ quick_view_cmd (void)
     if (PANEL (get_panel_widget (MENU_PANEL_IDX)) == current_panel)
         change_panel ();
     set_display_type (MENU_PANEL_IDX, view_quick);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
-toggle_listing_cmd (void)
-{
-    int current;
-    WPanel *p;
-
-    current = get_current_index ();
-    p = PANEL (get_panel_widget (current));
-
-    set_basic_panel_listing_to (current, (p->list_type + 1) % LIST_TYPES);
 }
 
 /* --------------------------------------------------------------------------------------------- */

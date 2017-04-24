@@ -72,7 +72,7 @@
 
 #include "command.h"            /* For cmdline */
 #include "dir.h"
-#include "panel.h"              /* LIST_TYPES */
+#include "panel.h"              /* LIST_FORMATS */
 #include "tree.h"
 #include "layout.h"             /* for get_nth_panel_name proto */
 #include "midnight.h"           /* current_panel */
@@ -95,13 +95,13 @@
 
 static unsigned long configure_old_esc_mode_id, configure_time_out_id;
 
-/* Index in list_types[] for "brief" */
-static const int panel_listing_brief_idx = 1;
-/* Index in list_types[] for "user defined" */
-static const int panel_listing_user_idx = 3;
+/* Index in list_formats[] for "brief" */
+static const int panel_list_brief_idx = 1;
+/* Index in list_formats[] for "user defined" */
+static const int panel_list_user_idx = 3;
 
 static char **status_format;
-static unsigned long panel_listing_types_id, panel_user_format_id, panel_brief_cols_id;
+static unsigned long panel_list_formats_id, panel_user_format_id, panel_brief_cols_id;
 static unsigned long mini_user_status_id, mini_user_format_id;
 
 #ifdef HAVE_CHARSET
@@ -279,7 +279,7 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
     switch (msg)
     {
     case MSG_NOTIFY:
-        if (sender != NULL && sender->id == panel_listing_types_id)
+        if (sender != NULL && sender->id == panel_list_formats_id)
         {
             WCheck *ch;
             WInput *in1, *in2, *in3;
@@ -294,8 +294,8 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
             input_update (in1, FALSE);
             input_update (in2, FALSE);
             input_update (in3, FALSE);
-            widget_disable (WIDGET (in1), RADIO (sender)->sel != panel_listing_user_idx);
-            widget_disable (WIDGET (in2), RADIO (sender)->sel != panel_listing_brief_idx);
+            widget_disable (WIDGET (in1), RADIO (sender)->sel != panel_list_user_idx);
+            widget_disable (WIDGET (in2), RADIO (sender)->sel != panel_list_brief_idx);
             return MSG_HANDLED;
         }
 
@@ -314,7 +314,7 @@ panel_listing_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
             {
                 WRadio *r;
 
-                r = RADIO (dlg_find_by_id (h, panel_listing_types_id));
+                r = RADIO (dlg_find_by_id (h, panel_list_formats_id));
                 widget_disable (WIDGET (in), TRUE);
                 input_assign_text (in, status_format[r->sel]);
             }
@@ -724,10 +724,10 @@ panel_listing_box (WPanel * panel, int num, char **userp, char **minip, gboolean
 
         p = get_nth_panel_name (num);
         panel = g_new (WPanel, 1);
-        panel->list_type = list_full;
+        panel->list_format = list_full;
         panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
         panel->user_mini_status = FALSE;
-        for (i = 0; i < LIST_TYPES; i++)
+        for (i = 0; i < LIST_FORMATS; i++)
             panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
         section = g_strconcat ("Temporal:", p, (char *) NULL);
         if (!mc_config_has_group (mc_global.main_config, section))
@@ -747,7 +747,7 @@ panel_listing_box (WPanel * panel, int num, char **userp, char **minip, gboolean
         char *mini_user_format = NULL;
 
         /* Controls whether the array strings have been translated */
-        const char *list_types[LIST_TYPES] = {
+        const char *list_formats[LIST_FORMATS] = {
             N_("&Full file list"),
             N_("&Brief file list:"),
             N_("&Long file list"),
@@ -757,7 +757,7 @@ panel_listing_box (WPanel * panel, int num, char **userp, char **minip, gboolean
         quick_widget_t quick_widgets[] = {
             /* *INDENT-OFF* */
             QUICK_START_COLUMNS,
-                QUICK_RADIO (LIST_TYPES, list_types, &result, &panel_listing_types_id),
+                QUICK_RADIO (LIST_FORMATS, list_formats, &result, &panel_list_formats_id),
             QUICK_NEXT_COLUMN,
                 QUICK_SEPARATOR (FALSE),
                 QUICK_LABELED_INPUT (_ ("columns"), input_label_right, panel_brief_cols_in,
@@ -768,7 +768,7 @@ panel_listing_box (WPanel * panel, int num, char **userp, char **minip, gboolean
                          &panel_user_format_id, FALSE, FALSE, INPUT_COMPLETE_NONE),
             QUICK_SEPARATOR (TRUE),
             QUICK_CHECKBOX (N_("User &mini status"), &mini_user_status, &mini_user_status_id),
-            QUICK_INPUT (panel->user_status_format[panel->list_type], "mini_input",
+            QUICK_INPUT (panel->user_status_format[panel->list_format], "mini_input",
                          &mini_user_format, &mini_user_format_id, FALSE, FALSE, INPUT_COMPLETE_NONE),
             QUICK_BUTTONS_OK_CANCEL,
             QUICK_END
@@ -777,20 +777,20 @@ panel_listing_box (WPanel * panel, int num, char **userp, char **minip, gboolean
 
         quick_dialog_t qdlg = {
             -1, -1, 48,
-            N_("Listing mode"), "[Listing Mode...]",
+            N_("Listing format"), "[Listing Format...]",
             quick_widgets, panel_listing_callback, NULL
         };
 
         mini_user_status = panel->user_mini_status;
-        result = panel->list_type;
+        result = panel->list_format;
         status_format = panel->user_status_format;
 
         g_snprintf (panel_brief_cols_in, sizeof (panel_brief_cols_in), "%d", panel->brief_cols);
 
-        if ((int) panel->list_type != panel_listing_brief_idx)
+        if ((int) panel->list_format != panel_list_brief_idx)
             quick_widgets[4].state = WST_DISABLED;
 
-        if ((int) panel->list_type != panel_listing_user_idx)
+        if ((int) panel->list_format != panel_list_user_idx)
             quick_widgets[6].state = WST_DISABLED;
 
         if (!mini_user_status)
@@ -822,7 +822,7 @@ panel_listing_box (WPanel * panel, int num, char **userp, char **minip, gboolean
         int i;
 
         g_free (panel->user_format);
-        for (i = 0; i < LIST_TYPES; i++)
+        for (i = 0; i < LIST_FORMATS; i++)
             g_free (panel->user_status_format[i]);
         g_free (panel);
     }

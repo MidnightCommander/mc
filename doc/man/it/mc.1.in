@@ -680,7 +680,7 @@ se la divisione pannello nella finestra
 aspetto
 .\"Layout"
 del menu opzioni è orizzontale).
-.\"NODE "    Listing Mode..."
+.\"NODE "    Listing Format..."
 .SH "    Modalità lista..."
 La modalità lista serve a mostrare un elenco di file; ci sono quattro
 modalità elenco disponibili:
@@ -1765,7 +1765,7 @@ e
 .I modalità
 .\"LINK2"
 dello schermo
-.\"Listing Mode..."
+.\"Listing Format..."
 valide per l'utente che usa il Midnight Commander 
 sono evidenziati con il colore definito con la parolachiave
 .IR selezionata . 
