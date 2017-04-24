@@ -111,11 +111,8 @@ mcview_set_buttonbar (WView * view)
     buttonbar_set_label (b, 8, view->magic_mode ? Q_ ("ButtonBar|Raw")
                          : Q_ ("ButtonBar|Parse"), keymap, WIDGET (view));
 
-    if (mcview_is_in_panel (view))
-        buttonbar_set_label (b, 10, "", keymap, WIDGET (view));
-    else
+    if (!mcview_is_in_panel (view))     /* don't override some panel buttonbar keys  */
     {
-        /* don't override some panel buttonbar keys  */
         buttonbar_set_label (b, 3, Q_ ("ButtonBar|Quit"), keymap, WIDGET (view));
         buttonbar_set_label (b, 9, view->text_nroff_mode ? Q_ ("ButtonBar|Unform")
                              : Q_ ("ButtonBar|Format"), keymap, WIDGET (view));
