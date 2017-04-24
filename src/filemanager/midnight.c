@@ -1403,9 +1403,9 @@ midnight_execute_cmd (Widget * sender, long command)
 /**
  * Whether the command-line should not respond to key events.
  *
- * This is TRUE if a QuickView has the focus, as it's going to consume
- * some keys and there's no sense in passing to the command-line just
- * the leftovers.
+ * This is TRUE if a QuickView or TreeView have the focus, as they're going
+ * to consume some keys and there's no sense in passing to the command-line
+ * just the leftovers.
  */
 static gboolean
 is_cmdline_mute (void)
@@ -1415,7 +1415,8 @@ is_cmdline_mute (void)
        it's activity. Thus, we can't use get_current_type() here.
        current_panel should point to actualy current active panel
        independently of it's type. */
-    return (current_panel->active == 0 && get_other_type () == view_quick);
+    return (current_panel->active == 0
+            && (get_other_type () == view_quick || get_other_type () == view_tree));
 }
 
 /* --------------------------------------------------------------------------------------------- */
