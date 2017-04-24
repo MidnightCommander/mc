@@ -1569,7 +1569,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
             if (command != CK_IgnoreKey)
                 v = midnight_execute_cmd (NULL, command);
 
-            if (v == MSG_NOT_HANDLED && command_prompt)
+            if (v == MSG_NOT_HANDLED && command_prompt && !is_cmdline_mute ())
                 v = send_message (cmdline, NULL, MSG_KEY, parm, NULL);
 
             return v;
