@@ -388,7 +388,7 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *heade
      * know about the other modes but I think I cause no new
      * problem when I adjust them, too. -- Norbert.
      */
-    if (header->header.linkflag == LF_DIR)
+    if (header->header.linkflag == LF_DIR || header->header.linkflag == LF_DUMPDIR)
         st->st_mode |= S_IFDIR;
     else if (header->header.linkflag == LF_SYMLINK)
         st->st_mode |= S_IFLNK;
@@ -554,15 +554,10 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
     else
         *h_size = tar_from_oct (1 + 12, header->header.size);
 
-    /*
-     * Skip over directory snapshot info records that
-     * are stored in incremental tar archives.
-     */
     if (header->header.linkflag == LF_DUMPDIR)
     {
         if (arch->type == TAR_UNKNOWN)
             arch->type = TAR_GNU;
-        return STATUS_SUCCESS;
     }
 
     /*
