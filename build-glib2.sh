@@ -3,6 +3,7 @@
 # Download and build glib 2.x statically with all dependencies and then
 # compile GNU Midnight Commander against it.
 # Copyright (C) 2003 Pavel Roskin
+
 #
 #  This program is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
