@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 09:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/mc/mc/language/fr/)\n"
 "Language: fr\n"
@@ -112,9 +112,11 @@ msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
 "hex)"
 msgstr ""
+"Nombre hors de portée (devrait être dans la gamme d'octet : 0 <= n <= 0xFF, "
+"exprimé en hexa)"
 
 msgid "Invalid character"
-msgstr ""
+msgstr "Caractère invalide"
 
 msgid "Unmatched quotes character"
 msgstr ""
@@ -802,9 +804,8 @@ msgstr ""
 msgid "file"
 msgstr "fichier"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Voir le fichier"
+msgstr ""
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[ce_rép] [autre_rép_panneau]"
@@ -2043,8 +2044,9 @@ msgstr "colonnes"
 msgid "User &mini status"
 msgstr "&Mini-statut utilisateur"
 
-msgid "Listing mode"
-msgstr "Mode de listage"
+#, fuzzy
+msgid "Listing format"
+msgstr "Édition du format de &liste"
 
 msgid "Executable &first"
 msgstr "Exécutable en &premier"
@@ -2519,15 +2521,11 @@ msgstr ""
 "Impossible de lire le lien source « %s »\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Il est impossible de réaliser des liens symboliques stables entre systèmes "
-"de fichiers non-locaux : \n"
-"désactivation de l'option \"Liens symboliques stables\"."
 
 #, c-format
 msgid ""
@@ -3255,8 +3253,9 @@ msgstr "&Vue rapide"
 msgid "&Info"
 msgstr "&Informations"
 
-msgid "&Listing mode..."
-msgstr "&Mode de listage..."
+#, fuzzy
+msgid "&Listing format..."
+msgstr "Édition du format de &liste"
 
 msgid "&Sort order..."
 msgstr "&Ordre de tri..."
@@ -4494,8 +4493,8 @@ msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Impossible de récupérer localement le fichier /ftp://some.host/editme.txt"
 
-#~ msgid "+number"
-#~ msgstr "+nombre"
+#~ msgid "Listing mode"
+#~ msgstr "Mode de listage"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "Définit le numéro de ligne initial pour l'éditeur interne"
+#~ msgid "&Listing mode..."
+#~ msgstr "&Mode de listage..."

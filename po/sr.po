@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 09:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Serbian (http://www.transifex.com/mc/mc/language/sr/)\n"
 "Language: sr\n"
@@ -787,9 +787,8 @@ msgstr ""
 msgid "file"
 msgstr "датотеку"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Прегледајте датотеку"
+msgstr ""
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[овај_дир] [други_дир_панела]"
@@ -2024,8 +2023,9 @@ msgstr "колоне"
 msgid "User &mini status"
 msgstr "Корисниково &мини стање"
 
-msgid "Listing mode"
-msgstr "Режим списка"
+#, fuzzy
+msgid "Listing format"
+msgstr "&Испиши уређивање записа"
 
 msgid "Executable &first"
 msgstr "Прво &извршне"
@@ -2499,16 +2499,11 @@ msgstr ""
 "Не могу да прочитам изворну везу „%s“\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Не могу да направим постојане симболичке везе преко не-месних система "
-"датотека:\n"
-"\n"
-"Опција постојаних симболичких веза биће искључена"
 
 #, c-format
 msgid ""
@@ -3236,8 +3231,9 @@ msgstr "&Брзи преглед"
 msgid "&Info"
 msgstr "&Подаци"
 
-msgid "&Listing mode..."
-msgstr "Режим &списка..."
+#, fuzzy
+msgid "&Listing format..."
+msgstr "&Испиши уређивање записа"
 
 msgid "&Sort order..."
 msgstr "Редослед &ређања..."
@@ -4471,8 +4467,8 @@ msgstr "Да наставим са почетка?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не могу да довучем месни примерак „/ftp://some.host/editme.txt“"
 
-#~ msgid "+number"
-#~ msgstr "+број"
+#~ msgid "Listing mode"
+#~ msgstr "Режим списка"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "Поставите број почетног реда за уграђени уређивач"
+#~ msgid "&Listing mode..."
+#~ msgstr "Режим &списка..."

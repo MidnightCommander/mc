@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 09:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
 "Language: hu\n"
@@ -786,9 +786,8 @@ msgstr ""
 msgid "file"
 msgstr "fájl"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Fájl megjelenítése"
+msgstr ""
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[aktuális_könyvtár] [másik_könyvtár]"
@@ -2022,8 +2021,9 @@ msgstr "oszlopok"
 msgid "User &mini status"
 msgstr "Saját extra adat&sor"
 
-msgid "Listing mode"
-msgstr "Listázási mód"
+#, fuzzy
+msgid "Listing format"
+msgstr "Listá&zási formátum szerkesztése"
 
 msgid "Executable &first"
 msgstr "Futtatható fent"
@@ -2498,15 +2498,11 @@ msgstr ""
 "Nem sikerült olvasni a forráslinket (\"%s\")\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Távoli fájlrendszerek közt nem hozhatók létre stabil szimbolikus linkek:\n"
-"\n"
-"A \"Stabil szimbolikus linkek\" opció ki lesz kapcsolva."
 
 #, c-format
 msgid ""
@@ -3236,8 +3232,9 @@ msgstr "Gyors nézet"
 msgid "&Info"
 msgstr "&Info"
 
-msgid "&Listing mode..."
-msgstr "&Listázási mód..."
+#, fuzzy
+msgid "&Listing format..."
+msgstr "Listá&zási formátum szerkesztése"
 
 msgid "&Sort order..."
 msgstr "&Rendezési mód..."
@@ -4467,8 +4464,8 @@ msgstr "Folytatás az elejéről?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
 
-#~ msgid "+number"
-#~ msgstr "+szám"
+#~ msgid "Listing mode"
+#~ msgstr "Listázási mód"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "A kezdősor számának megadása a belső szerkesztő számára."
+#~ msgid "&Listing mode..."
+#~ msgstr "&Listázási mód..."

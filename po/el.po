@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 09:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/mc/mc/language/el/)\n"
 "Language: el\n"
@@ -754,9 +754,8 @@ msgstr ""
 msgid "file"
 msgstr "αρχείο"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Προβολή αρχείου"
+msgstr ""
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr ""
@@ -1966,7 +1965,8 @@ msgstr "στήλες"
 msgid "User &mini status"
 msgstr ""
 
-msgid "Listing mode"
+#, fuzzy
+msgid "Listing format"
 msgstr "Λειτουργία λίστας"
 
 msgid "Executable &first"
@@ -3144,8 +3144,9 @@ msgstr "&Γρήγορη προβολή"
 msgid "&Info"
 msgstr "&Πληροφορίες"
 
-msgid "&Listing mode..."
-msgstr ""
+#, fuzzy
+msgid "&Listing format..."
+msgstr "&Λίστα..."
 
 msgid "&Sort order..."
 msgstr "&Σειρά ταξινόμησης..."
@@ -4346,6 +4347,3 @@ msgstr "Συνέχεια από την αρχή;"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "+number"
-#~ msgstr "+αριθμός"

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 09:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/mc/mc/language/eu/)\n"
 "Language: eu\n"
@@ -792,9 +792,8 @@ msgstr ""
 msgid "file"
 msgstr "fitxategia"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Ikusi fitxategia"
+msgstr ""
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[dir_hau] [beste_panel_dir]"
@@ -2031,8 +2030,9 @@ msgstr "zutabeak"
 msgid "User &mini status"
 msgstr "Erabiltzailearen &mini egoera"
 
-msgid "Listing mode"
-msgstr "Zerrendatzeko modua"
+#, fuzzy
+msgid "Listing format"
+msgstr "Zerrendatzeko &formatua editatu"
 
 msgid "Executable &first"
 msgstr "Exekutagarria &lehenengo"
@@ -2510,16 +2510,11 @@ msgstr ""
 "\"%s\" iturburu esteka ezin irakurri\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Bertakoak ez diren fitxategi sistemen artean ezin da esteka sinboliko "
-"egonkorrik sortu:\n"
-"\n"
-"Esteka sinboliko egonkorrak aukera ezgaituko da"
 
 #, c-format
 msgid ""
@@ -3247,8 +3242,9 @@ msgstr "Ikuspegi &azkarra"
 msgid "&Info"
 msgstr "&Info"
 
-msgid "&Listing mode..."
-msgstr "&Zerrendatzeko modua..."
+#, fuzzy
+msgid "&Listing format..."
+msgstr "Zerrendatzeko &formatua editatu"
 
 msgid "&Sort order..."
 msgstr "&Sailkatzeko ordena..."
@@ -4483,8 +4479,8 @@ msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
 
-#~ msgid "+number"
-#~ msgstr "+zenbakia"
+#~ msgid "Listing mode"
+#~ msgstr "Zerrendatzeko modua"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "Ezarri barneko editorearentzako hasierako lerro zenbakia"
+#~ msgid "&Listing mode..."
+#~ msgstr "&Zerrendatzeko modua..."

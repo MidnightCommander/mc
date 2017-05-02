@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 09:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/mc/mc/language/"
 "zh_CN/)\n"
@@ -796,9 +796,8 @@ msgstr ""
 msgid "file"
 msgstr "文件"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "查看文件"
+msgstr ""
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[this_dir] [other_panel_dir]"
@@ -2031,8 +2030,9 @@ msgstr "列"
 msgid "User &mini status"
 msgstr "用户简要状态(&M)"
 
-msgid "Listing mode"
-msgstr "列表模式"
+#, fuzzy
+msgid "Listing format"
+msgstr "列表格式编辑(&L)"
 
 msgid "Executable &first"
 msgstr "可执行文件优先(&f)"
@@ -2506,15 +2506,11 @@ msgstr ""
 "无法读取源链接“%s”\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"无法在非本地文件系统上创建稳定的符号链接: \n"
-"\n"
-"稳定的符号链接选项将被取消"
 
 #, c-format
 msgid ""
@@ -3240,8 +3236,9 @@ msgstr "快速查看(&Q)"
 msgid "&Info"
 msgstr "信息(&I)"
 
-msgid "&Listing mode..."
-msgstr "列表模式(&L)..."
+#, fuzzy
+msgid "&Listing format..."
+msgstr "列表格式编辑(&L)"
 
 msgid "&Sort order..."
 msgstr "排序(&S)..."
@@ -4470,8 +4467,8 @@ msgstr "从头继续搜索?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "无法获取 /ftp://some.host/editme.txt 的本地副本"
 
-#~ msgid "+number"
-#~ msgstr "+数字"
+#~ msgid "Listing mode"
+#~ msgstr "列表模式"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "设置内部编辑器的初始行号"
+#~ msgid "&Listing mode..."
+#~ msgstr "列表模式(&L)..."

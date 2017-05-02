@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 09:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
 "Language: et\n"
@@ -791,9 +791,8 @@ msgstr ""
 msgid "file"
 msgstr "fail"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Vaata faili"
+msgstr ""
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[this_dir] [other_panel_dir]"
@@ -2026,8 +2025,9 @@ msgstr "veerud"
 msgid "User &mini status"
 msgstr "Kasutaja &mini info"
 
-msgid "Listing mode"
-msgstr "Loendi režiim"
+#, fuzzy
+msgid "Listing format"
+msgstr "&Loend vorminduse muutmine"
 
 msgid "Executable &first"
 msgstr "Käivitatavad &esimestena"
@@ -2501,15 +2501,11 @@ msgstr ""
 "Lähteviida \"%s\" lugemine nurjus\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Stabiilseid nimeviitu saab luua ainult kohalikel failisüsteemidel:\n"
-"\n"
-"Valik stabiilsed nimeviidad keelatakse"
 
 #, c-format
 msgid ""
@@ -3237,8 +3233,9 @@ msgstr "&Kiirvaade"
 msgid "&Info"
 msgstr "&Info"
 
-msgid "&Listing mode..."
-msgstr "L&oendi režiim..."
+#, fuzzy
+msgid "&Listing format..."
+msgstr "&Loend vorminduse muutmine"
 
 msgid "&Sort order..."
 msgstr "&Sortimine..."
@@ -4469,8 +4466,8 @@ msgstr "Kas jätkata algusest?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
 
-#~ msgid "+number"
-#~ msgstr "+number"
+#~ msgid "Listing mode"
+#~ msgstr "Loendi režiim"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "Määra sisseehitatud toimeti esialgne reanumber"
+#~ msgid "&Listing mode..."
+#~ msgstr "L&oendi režiim..."

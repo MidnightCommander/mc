@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 09:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/mc/mc/language/"
 "pt_BR/)\n"
@@ -766,9 +766,8 @@ msgstr ""
 msgid "file"
 msgstr "arquivo"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Ver arquivo"
+msgstr ""
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[esse_dir] [outro_painel_dir]"
@@ -1987,8 +1986,9 @@ msgstr "colunas"
 msgid "User &mini status"
 msgstr ""
 
-msgid "Listing mode"
-msgstr "Modo de Listagem"
+#, fuzzy
+msgid "Listing format"
+msgstr "Editar forma de &Listagem"
 
 msgid "Executable &first"
 msgstr "Executáveis primeiro"
@@ -2454,16 +2454,11 @@ msgstr ""
 "Não foi possível ler o link fonte \"%s\"\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Não foi possível criar symlink estável entre systema de arquivos não-"
-"locais:\n"
-"\n"
-"Opção Symlinks Estáveis será desabilitada"
 
 #, c-format
 msgid ""
@@ -3180,8 +3175,9 @@ msgstr ""
 msgid "&Info"
 msgstr ""
 
-msgid "&Listing mode..."
-msgstr "Modo de &Listagem"
+#, fuzzy
+msgid "&Listing format..."
+msgstr "Editar forma de &Listagem"
 
 msgid "&Sort order..."
 msgstr "&Ordem..."
@@ -4388,8 +4384,8 @@ msgstr ""
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 
-#~ msgid "+number"
-#~ msgstr "+número"
+#~ msgid "Listing mode"
+#~ msgstr "Modo de Listagem"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "Definir número da linha inicial para o editor interno"
+#~ msgid "&Listing mode..."
+#~ msgstr "Modo de &Listagem"

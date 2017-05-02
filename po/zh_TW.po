@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 09:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/mc/mc/language/"
 "zh_TW/)\n"
@@ -1932,8 +1932,9 @@ msgstr ""
 msgid "User &mini status"
 msgstr ""
 
-msgid "Listing mode"
-msgstr "列表模式"
+#, fuzzy
+msgid "Listing format"
+msgstr "編輯列表格式"
 
 msgid "Executable &first"
 msgstr ""
@@ -3048,8 +3049,9 @@ msgstr ""
 msgid "&Info"
 msgstr ""
 
-msgid "&Listing mode..."
-msgstr "列出模式中..."
+#, fuzzy
+msgid "&Listing format..."
+msgstr "編輯列表格式"
 
 msgid "&Sort order..."
 msgstr "排列順序..."
@@ -4241,3 +4243,9 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Listing mode"
+#~ msgstr "列表模式"
+
+#~ msgid "&Listing mode..."
+#~ msgstr "列出模式中..."

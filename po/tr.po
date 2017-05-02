@@ -8,13 +8,13 @@
 # Muhammet Kara <muhammetk@gmail.com>, 2014
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # yusuf <yusuf.aydemir@pisilinux.org>, 2015-2016
-# yusuf <yusuf.aydemir@pisilinux.org>, 2016
+# yusuf <yusuf.aydemir@pisilinux.org>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 09:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
 "Language: tr\n"
@@ -110,7 +110,7 @@ msgid ""
 msgstr ""
 
 msgid "Invalid character"
-msgstr ""
+msgstr "Geçersiz karakter"
 
 msgid "Unmatched quotes character"
 msgstr ""
@@ -791,12 +791,8 @@ msgstr ""
 msgid "file"
 msgstr "dosya:"
 
-#, fuzzy
 msgid "file1 file2"
 msgstr ""
-"GNU Midnight Commander zaten\n"
-"bu terminalde �al���yor.\n"
-"Altkabuk deste�i kapat�lacak."
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[seçenekler] [bu_dizin] [diğer_panel_dizini]"
@@ -2037,8 +2033,9 @@ msgstr "sütunlar"
 msgid "User &mini status"
 msgstr "&Mini durum satırı"
 
-msgid "Listing mode"
-msgstr "Listeleme kipi"
+#, fuzzy
+msgid "Listing format"
+msgstr "&Listeleme biçimini düzenle"
 
 msgid "Executable &first"
 msgstr "Önce çalıştırılabilir"
@@ -2515,15 +2512,11 @@ msgstr ""
 "Kaynak bağı \"%s\" okunamadı \n"
 " %s"
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Yerel dosya sistemleri dışındakilere sembolik bağlar kararlı olamaz:\n"
-"\n"
-" Sembolik Bağlarda Kararlılık seçeneği kapatılacak"
 
 #, c-format
 msgid ""
@@ -3251,8 +3244,9 @@ msgstr "Dosya içe&Riği"
 msgid "&Info"
 msgstr "&Bilgi kipi"
 
-msgid "&Listing mode..."
-msgstr "&Listeleme kipi..."
+#, fuzzy
+msgid "&Listing format..."
+msgstr "&Listeleme biçimini düzenle"
 
 msgid "&Sort order..."
 msgstr "&Sıralama türü..."
@@ -3920,7 +3914,7 @@ msgid "Data types:"
 msgstr "Veri tipleri:"
 
 msgid "Home directory:"
-msgstr ""
+msgstr "Ev dizini:"
 
 msgid "Profile root directory:"
 msgstr ""
@@ -4485,8 +4479,8 @@ msgstr "Başından devam edilsin mi?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr " /ftp://some.host/editme.txt 'in yerel kopyası alınamadı"
 
-#~ msgid "+number"
-#~ msgstr "+sayı"
+#~ msgid "Listing mode"
+#~ msgstr "Listeleme kipi"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "İç düzenleyici için başlangıç satır numarasını ayarla"
+#~ msgid "&Listing mode..."
+#~ msgstr "&Listeleme kipi..."

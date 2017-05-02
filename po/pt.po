@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-26 16:49+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-16 12:20+0000\n"
 "Last-Translator: Gilberto Jorge <gmj125@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/mc/mc/language/pt/)\n"
 "Language: pt\n"
@@ -795,14 +795,13 @@ msgid "Color options"
 msgstr "Opções de cor"
 
 msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
-msgstr ""
+msgstr "[+lineno] file1[:lineno] [file2[:lineno]...]"
 
 msgid "file"
 msgstr "ficheiro"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Ver ficheiro"
+msgstr "file1 file2"
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[este_dir] [outro_painel_dir]"
@@ -2038,8 +2037,9 @@ msgstr "colunas"
 msgid "User &mini status"
 msgstr "&Mini status do utilizador"
 
-msgid "Listing mode"
-msgstr "Modo de listagem"
+#, fuzzy
+msgid "Listing format"
+msgstr "Editar formato de &listagem"
 
 msgid "Executable &first"
 msgstr "Executável p&rimeiro"
@@ -2514,16 +2514,15 @@ msgstr ""
 "Não é possível ler a ligação fonte \"%s\"\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Não é possível efetuar symlinks estáveis sobre sistemas de ficheiros não "
+"Não é possível efetuar symlinks estáveis para sistemas de ficheiros não "
 "locais:\n"
 "\n"
-"Opção Symlinks Estáveis será desabilitada"
+"Opção Symlinks Estáveis será desativada"
 
 #, c-format
 msgid ""
@@ -3251,8 +3250,9 @@ msgstr "Visualização &rápida"
 msgid "&Info"
 msgstr "&Informação"
 
-msgid "&Listing mode..."
-msgstr "Modo de &listagem..."
+#, fuzzy
+msgid "&Listing format..."
+msgstr "Editar formato de &listagem"
 
 msgid "&Sort order..."
 msgstr "&Ordenação..."
@@ -4484,8 +4484,8 @@ msgstr "Continuar do início?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Não é possível obter uma cópia local de /ftp://some.host/editme.txt"
 
-#~ msgid "+number"
-#~ msgstr "+número"
+#~ msgid "Listing mode"
+#~ msgstr "Modo de listagem"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "Define número de linha inicial para o editor interno"
+#~ msgid "&Listing mode..."
+#~ msgstr "Modo de &listagem..."

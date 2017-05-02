@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 09:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
 "Language: ro\n"
@@ -762,9 +762,8 @@ msgstr ""
 msgid "file"
 msgstr "fișierul"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Vizualizare fișier"
+msgstr ""
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[acest_dir] [celălalt_panou_dir]"
@@ -2001,8 +2000,9 @@ msgstr "coloane"
 msgid "User &mini status"
 msgstr "&Mini-status utilizator"
 
-msgid "Listing mode"
-msgstr "Mod de listare"
+#, fuzzy
+msgid "Listing format"
+msgstr "Editare mod de &listare"
 
 msgid "Executable &first"
 msgstr "Mai întâ&i executabilele"
@@ -2476,16 +2476,11 @@ msgstr ""
 "Nu se poate citi legătura sursă \"%s\"\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Nu se pot face legături simbolice stabile care traversează sisteme de "
-"fișiere ne-locale:\n"
-"\n"
-"Opțiunea pentru legături simbolice stabile va fi dezactivată"
 
 #, c-format
 msgid ""
@@ -3213,8 +3208,9 @@ msgstr "Vizualizare &rapidă"
 msgid "&Info"
 msgstr "&Info"
 
-msgid "&Listing mode..."
-msgstr "Mod de &afișare..."
+#, fuzzy
+msgid "&Listing format..."
+msgstr "Editare mod de &listare"
 
 msgid "&Sort order..."
 msgstr "&Ordinea sortării..."
@@ -4448,8 +4444,8 @@ msgstr "Continuă de la început?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
 
-#~ msgid "+number"
-#~ msgstr "+număr"
+#~ msgid "Listing mode"
+#~ msgstr "Mod de listare"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "Numărul primei linii pentru editorul intern"
+#~ msgid "&Listing mode..."
+#~ msgstr "Mod de &afișare..."

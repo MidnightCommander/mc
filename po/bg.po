@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 09:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/mc/mc/language/bg/)\n"
 "Language: bg\n"
@@ -106,12 +106,14 @@ msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
 "hex)"
 msgstr ""
+"Числото е извън обхват (би трябвало да бъде обвхвата, 0 <= n <=0xFF, "
+"представено в шестнадесетичен формат) "
 
 msgid "Invalid character"
-msgstr ""
+msgstr "Невалиден символ"
 
 msgid "Unmatched quotes character"
-msgstr ""
+msgstr "Не съответстващи кавички"
 
 #, c-format
 msgid ""
@@ -779,9 +781,8 @@ msgstr ""
 msgid "file"
 msgstr "файл"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Преглед на файл"
+msgstr ""
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr ""
@@ -2019,8 +2020,9 @@ msgstr "колони"
 msgid "User &mini status"
 msgstr "Потребителски &мини статус"
 
-msgid "Listing mode"
-msgstr "Режим на списък"
+#, fuzzy
+msgid "Listing format"
+msgstr "Редактирай формата на списъка"
 
 msgid "Executable &first"
 msgstr "Изпълнимия файл &първо"
@@ -2496,16 +2498,11 @@ msgstr ""
 "Не може да се чете изходния линк \"%s\"\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Не могат да се създадат символични линкове между не-локални файлови "
-"системи:\n"
-"\n"
-"Опцията Стабилни Символични Линкове ще бъде деактивирана"
 
 #, c-format
 msgid ""
@@ -3233,8 +3230,9 @@ msgstr "&Бърз преглед"
 msgid "&Info"
 msgstr "&Информация"
 
-msgid "&Listing mode..."
-msgstr "Вид на списъка..."
+#, fuzzy
+msgid "&Listing format..."
+msgstr "Редактирай формата на списъка"
 
 msgid "&Sort order..."
 msgstr "Ред на сортиране..."
@@ -3903,10 +3901,10 @@ msgid "Data types:"
 msgstr "Типове за данни:"
 
 msgid "Home directory:"
-msgstr ""
+msgstr "Домашна папка:"
 
 msgid "Profile root directory:"
-msgstr ""
+msgstr "Коренна директория на профила:"
 
 msgid "System data"
 msgstr "Системни данни"
@@ -4467,8 +4465,8 @@ msgstr "Да се продължи ли от началото?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на /ftp://some.host/editme.txt"
 
-#~ msgid "+number"
-#~ msgstr "+число"
+#~ msgid "Listing mode"
+#~ msgstr "Режим на списък"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "Задаване на първоначалния номер на ред за външен редактор"
+#~ msgid "&Listing mode..."
+#~ msgstr "Вид на списъка..."

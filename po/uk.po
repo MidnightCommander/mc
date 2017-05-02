@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 09:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/mc/mc/language/uk/)\n"
 "Language: uk\n"
@@ -779,9 +779,8 @@ msgstr ""
 msgid "file"
 msgstr "файл"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Перегляд файлу"
+msgstr ""
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[цей_каталог] [каталог_іншої_панелі]"
@@ -2012,8 +2011,9 @@ msgstr "стовпці"
 msgid "User &mini status"
 msgstr "Рядок &міні-статусу у форматі користувача"
 
-msgid "Listing mode"
-msgstr "Формат списку файлів"
+#, fuzzy
+msgid "Listing format"
+msgstr "&Редагування формату списку"
 
 msgid "Executable &first"
 msgstr "Виконувані &першими"
@@ -2487,16 +2487,11 @@ msgstr ""
 "Не вдалося прочитати джерельне посилання «%s»\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Не вдалося створити стійкі символьні посилання між нелокальними файловими "
-"системами:\n"
-"\n"
-"Параметр «Стійкі символьні посилання» буде вимкнено"
 
 #, c-format
 msgid ""
@@ -3224,8 +3219,9 @@ msgstr "&Швидкий перегляд"
 msgid "&Info"
 msgstr "&Відомості"
 
-msgid "&Listing mode..."
-msgstr "Фор&мат списку…"
+#, fuzzy
+msgid "&Listing format..."
+msgstr "&Редагування формату списку"
 
 msgid "&Sort order..."
 msgstr "Порядок &сортування…"
@@ -4458,8 +4454,8 @@ msgstr "Почати спочатку?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не вдалося отримати локальну копію /ftp://some.host/editme.txt"
 
-#~ msgid "+number"
-#~ msgstr "+число"
+#~ msgid "Listing mode"
+#~ msgstr "Формат списку файлів"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "Задати номер початкового рядка для редактора"
+#~ msgid "&Listing mode..."
+#~ msgstr "Фор&мат списку…"

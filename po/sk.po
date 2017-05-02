@@ -7,15 +7,15 @@
 # helix84 <helix84@centrum.sk>, 2015
 # Jajo Pajo, 2016
 # Jose Riha <jose1711@gmail.com>, 2012
-# Jose Riha <jose1711@gmail.com>, 2012
+# Jose Riha <jose1711@gmail.com>, 2012,2017
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Yury V. Zaytsev <yury@shurup.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 09:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/mc/mc/language/sk/)\n"
 "Language: sk\n"
@@ -793,9 +793,8 @@ msgstr ""
 msgid "file"
 msgstr "súbor"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Zobraziť súbor"
+msgstr ""
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[tento_adresár] [adresár_v_druhom_paneli]"
@@ -1929,7 +1928,7 @@ msgid "Configure options"
 msgstr "Konfigurácia"
 
 msgid "Skin:"
-msgstr "Tíma vzhľadu:"
+msgstr "Téma vzhľadu:"
 
 msgid "Appearance"
 msgstr "Vzhľad"
@@ -2032,8 +2031,9 @@ msgstr "stĺpce"
 msgid "User &mini status"
 msgstr "Používateľ. &mini status"
 
-msgid "Listing mode"
-msgstr "Režim výpisu"
+#, fuzzy
+msgid "Listing format"
+msgstr "&Upraviť formát výpisu"
 
 msgid "Executable &first"
 msgstr "N&ajprv spustiteľné"
@@ -2508,16 +2508,11 @@ msgstr ""
 "Nemožno prečítať zdrojový odkaz „%s“\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Nemožno vytvárať stabilné sym. odkazy naprieč nelokálnymi súborovými "
-"systémami:\n"
-"\n"
-"Voľba Stabilné sym. odkazy bude vypnutá"
 
 #, c-format
 msgid ""
@@ -3245,8 +3240,9 @@ msgstr "&Rýchle zobrazenie"
 msgid "&Info"
 msgstr "&Info"
 
-msgid "&Listing mode..."
-msgstr "Režim &výpisu..."
+#, fuzzy
+msgid "&Listing format..."
+msgstr "&Upraviť formát výpisu"
 
 msgid "&Sort order..."
 msgstr "&Poradie výpisu..."
@@ -4481,8 +4477,8 @@ msgstr "Pokračovať od začiatku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nemožno stiahnuť lokálnu kópiu /ftp://some.host/editme.txt"
 
-#~ msgid "+number"
-#~ msgstr "+číslo"
+#~ msgid "Listing mode"
+#~ msgstr "Režim výpisu"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "Nastaviť počiatočné číslo riadka pre interný editor"
+#~ msgid "&Listing mode..."
+#~ msgstr "Režim &výpisu..."

@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 09:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Galician (http://www.transifex.com/mc/mc/language/gl/)\n"
 "Language: gl\n"
@@ -795,9 +795,8 @@ msgstr ""
 msgid "file"
 msgstr "ficheiro"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Ver ficheiro"
+msgstr ""
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[Este_directorio] [outro_directorio _de_panel]"
@@ -2032,8 +2031,9 @@ msgstr "columnas"
 msgid "User &mini status"
 msgstr "&Mini-estado de usuario"
 
-msgid "Listing mode"
-msgstr "Modo de listado"
+#, fuzzy
+msgid "Listing format"
+msgstr "Edición do formato de &Lista"
 
 msgid "Executable &first"
 msgstr "&Executábeis primeiro"
@@ -2509,16 +2509,11 @@ msgstr ""
 "Non é posíbel ler a ligazón orixe «%s»\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Non é posíbel crear ligazóns simbólicas estábeis se os ficheiros\n"
-"están en sistemas de ficheiros non-locais:\n"
-"\n"
-"A opción de ligazóns simbólicas estábeis será desactivada"
 
 #, c-format
 msgid ""
@@ -3244,8 +3239,9 @@ msgstr "Vista &Rápida"
 msgid "&Info"
 msgstr "&Información"
 
-msgid "&Listing mode..."
-msgstr "Modo de &Lista..."
+#, fuzzy
+msgid "&Listing format..."
+msgstr "Edición do formato de &Lista"
 
 msgid "&Sort order..."
 msgstr "&Ordenar..."
@@ -4478,8 +4474,8 @@ msgstr "Continuar desde o principio?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Non é posíbel obter unha copia local de /ftp://some.host/editme.txt"
 
-#~ msgid "+number"
-#~ msgstr "+número"
+#~ msgid "Listing mode"
+#~ msgstr "Modo de listado"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "Definir a liña de comezo ao abrir un ficheiro co editor interno"
+#~ msgid "&Listing mode..."
+#~ msgstr "Modo de &Lista..."

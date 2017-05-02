@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 09:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/mc/mc/language/nl/)\n"
 "Language: nl\n"
@@ -790,9 +790,8 @@ msgstr ""
 msgid "file"
 msgstr "bestand"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Bestand bekijken"
+msgstr ""
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[deze map] [ander paneel map]"
@@ -2024,8 +2023,9 @@ msgstr "kolommen"
 msgid "User &mini status"
 msgstr "&Ministatus gebruiker"
 
-msgid "Listing mode"
-msgstr "Lijstmodus"
+#, fuzzy
+msgid "Listing format"
+msgstr "&Lijstformaat bewerken"
 
 msgid "Executable &first"
 msgstr "&Uitvoerbare bestanden eerst"
@@ -2501,16 +2501,11 @@ msgstr ""
 "Bron-link \"%s\" lezen mislukt \n"
 "%s "
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Er kunnen geen stabiele symbolische links over non-lokale bestandssystemen "
-"worden gelegd:\n"
-"\n"
-" De optie 'stabiele symbolische links' wordt uitgeschakeld "
 
 #, c-format
 msgid ""
@@ -3236,8 +3231,9 @@ msgstr "&Korte lijst"
 msgid "&Info"
 msgstr "&Info"
 
-msgid "&Listing mode..."
-msgstr "&Lijstmodus...          "
+#, fuzzy
+msgid "&Listing format..."
+msgstr "&Lijstformaat bewerken"
 
 msgid "&Sort order..."
 msgstr "&Sorteervolgorde...     "
@@ -4462,8 +4458,8 @@ msgstr "Doorgaan vanaf het begin?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan geen lokale versie van /ftp://some.host/editme.txt ophalen"
 
-#~ msgid "+number"
-#~ msgstr "+nummer"
+#~ msgid "Listing mode"
+#~ msgstr "Lijstmodus"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "Stel het startnummer in voor de eerste regel in de interne editor"
+#~ msgid "&Listing mode..."
+#~ msgstr "&Lijstmodus...          "

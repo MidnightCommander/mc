@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 09:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
 "Language: eo\n"
@@ -103,18 +103,22 @@ msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
 "hex)"
 msgstr ""
+"Nombro ekster skalo (devas esti en la skalo: 0 <= n <= 0xFF, esprimita "
+"deksesume)"
 
 msgid "Invalid character"
-msgstr ""
+msgstr "Nevalida signo"
 
 msgid "Unmatched quotes character"
-msgstr ""
+msgstr "Neniu korelativa citilo"
 
 #, c-format
 msgid ""
 "Hex pattern error at position %d:\n"
 "%s."
 msgstr ""
+"Eraro pri deksesuma ŝablono ĉe pozicio: %d\n"
+"%s"
 
 msgid "Search string not found"
 msgstr "Serĉita ĉeno ne trovita"
@@ -166,6 +170,9 @@ msgid ""
 "%s\n"
 "Default skin has been loaded"
 msgstr ""
+"Ne eblas uzi etoson '%s' kun rego de verkoloj:\n"
+"%s\n"
+"Uzanta la aprioran etoson"
 
 #, c-format
 msgid ""
@@ -178,16 +185,17 @@ msgstr ""
 "Uzanta la aprioran etoson"
 
 msgid "True color not supported with ncurses."
-msgstr ""
+msgstr "Verkoloro ne estas regata per ncurses."
 
 msgid "True color not supported in this slang version."
-msgstr ""
+msgstr "Verkoloro ne estas regata de tiu eldono de S-Lang"
 
 msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr ""
+msgstr "Via terminalo ŝajnas ne regi 256 kolorojn"
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
+"Agordi je COLORTERM=truecolor se via terminalo efektive regas verkolorojn."
 
 msgid "Escape"
 msgstr "Eskapa klavo"
@@ -484,25 +492,25 @@ msgstr ""
 "Kontroli la medivariablon TERM.\n"
 
 msgid "B"
-msgstr ""
+msgstr "B"
 
 msgid "kB"
-msgstr ""
+msgstr "kB"
 
 msgid "KiB"
-msgstr ""
+msgstr "KiB"
 
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 msgid "MiB"
-msgstr ""
+msgstr "MiB"
 
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
 msgid "GiB"
-msgstr ""
+msgstr "GiB"
 
 msgid "Cannot create pipe descriptor"
 msgstr "Ne eblas krei duktan priskribilon"
@@ -787,9 +795,8 @@ msgstr ""
 msgid "file"
 msgstr "dosieron"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Vidi dosieron"
+msgstr ""
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[maldekstra_flanko] [dekstra_flanko]"
@@ -2027,8 +2034,9 @@ msgstr "kolumnojn"
 msgid "User &mini status"
 msgstr "Miniatura &stato de uzanto"
 
-msgid "Listing mode"
-msgstr "Lista reĝimo"
+#, fuzzy
+msgid "Listing format"
+msgstr "Redakti &listan aranĝon"
 
 msgid "Executable &first"
 msgstr "P&lenumebla unue"
@@ -2503,15 +2511,11 @@ msgstr ""
 "Ne eblas legi fontan ligilon \"%s\"\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Ne eblas fari stabilajn molajn ligilojn inter foraj dosiersistemoj:\n"
-"\n"
-"La agordaĵo \"Stabilaj molaj ligiloj\" estos malebligitaj"
 
 #, c-format
 msgid ""
@@ -2806,7 +2810,7 @@ msgstr ""
 
 #, c-format
 msgid "Directories: %zu, total size: %s"
-msgstr ""
+msgstr "Dosierujoj: %zu, ĉioma grando: %s"
 
 msgid "Cannot operate on \"..\"!"
 msgstr "Ne eblas operacii je \"..\"!"
@@ -2958,7 +2962,7 @@ msgstr "&Redakti - F4"
 
 #, c-format
 msgid "Found: %lu"
-msgstr ""
+msgstr "Trovita: %lu"
 
 msgid "Malformed regular expression"
 msgstr "Misformita regulesprimo"
@@ -3009,8 +3013,8 @@ msgstr "Finita"
 #, c-format
 msgid "Finished (ignored %zu directory)"
 msgid_plural "Finished (ignored %zu directories)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Finita (ignoris %zu dosierujon)"
+msgstr[1] "Finita (ignoris %zu dosierujojn)"
 
 msgid "Searching"
 msgstr "Serĉanta"
@@ -3172,8 +3176,8 @@ msgstr "Grando:         %s"
 #, c-format
 msgid " (%lu block)"
 msgid_plural " (%lu blocks)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " (%lu bloko)"
+msgstr[1] " (%lu blokoj)"
 
 #, c-format
 msgid "Owner:      %s/%s"
@@ -3239,8 +3243,9 @@ msgstr "Rapida &vido"
 msgid "&Info"
 msgstr "&Informoj"
 
-msgid "&Listing mode..."
-msgstr "&Lista reĝimo..."
+#, fuzzy
+msgid "&Listing format..."
+msgstr "Redakti &listan aranĝon"
 
 msgid "&Sort order..."
 msgstr "&Ordigi laŭ..."
@@ -3407,8 +3412,8 @@ msgstr "Flankoj:"
 #, c-format
 msgid "You have %zu opened screen. Quit anyway?"
 msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%zu paĝo estas malfermita. Ĉu senkonsidere eliri?"
+msgstr[1] "%zu paĝoj estas malfermitaj. Ĉu senkonsidere eliri?"
 
 msgid "The Midnight Commander"
 msgstr "Midnight Commander"
@@ -3423,7 +3428,7 @@ msgid "&Left"
 msgstr "&Maldekstra"
 
 msgid "&Below"
-msgstr "Muls&upra"
+msgstr "Mals&upra"
 
 msgid "&Right"
 msgstr "D&ekstra"
@@ -3908,10 +3913,10 @@ msgid "Data types:"
 msgstr "Datumtipoj:"
 
 msgid "Home directory:"
-msgstr ""
+msgstr "Hejma dosierujo:"
 
 msgid "Profile root directory:"
-msgstr ""
+msgstr "Hejma dosierujo profila:"
 
 msgid "System data"
 msgstr "Sistemaj datumoj"
@@ -4472,8 +4477,8 @@ msgstr "Ĉu deiri de la komenco?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
 
-#~ msgid "+number"
-#~ msgstr "+numero"
+#~ msgid "Listing mode"
+#~ msgstr "Lista reĝimo"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "Agordi komencan lininumeron por la interna tekstoredaktilo"
+#~ msgid "&Listing mode..."
+#~ msgstr "&Lista reĝimo..."

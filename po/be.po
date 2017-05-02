@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 09:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/mc/mc/language/be/)\n"
 "Language: be\n"
@@ -777,9 +777,8 @@ msgstr ""
 msgid "file"
 msgstr "файл"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Прагледзець файл"
+msgstr ""
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[гэты_каталёґ] [каталёґ_іншае_панэлі]"
@@ -2011,8 +2010,9 @@ msgstr ""
 msgid "User &mini status"
 msgstr "Адмысловы &радок стану панэлі:"
 
-msgid "Listing mode"
-msgstr "Выгляд сьпісу файлаў"
+#, fuzzy
+msgid "Listing format"
+msgstr "&Зьмяніць від сьпісу"
 
 msgid "Executable &first"
 msgstr "Спачатку &выканальныя"
@@ -2486,15 +2486,11 @@ msgstr ""
 "Немагчыма прачытаць зыходную спасылку «%s»\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Можнасьць «Устойлівыя сымбалічныя спасылкі» скасуецца:\n"
-"немагчыма стварыць устойлівыя сымбалічныя спасылкі\n"
-"на нелякальных файлавых сыстэмах."
 
 #, c-format
 msgid ""
@@ -3222,8 +3218,9 @@ msgstr "&Хуткі агляд"
 msgid "&Info"
 msgstr "&Зьвесткі"
 
-msgid "&Listing mode..."
-msgstr "&Выгляд сьпісу…"
+#, fuzzy
+msgid "&Listing format..."
+msgstr "&Зьмяніць від сьпісу"
 
 msgid "&Sort order..."
 msgstr "&Упарадкаваць…"
@@ -4451,8 +4448,8 @@ msgstr "Ці працягваць ад пачатку?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 
-#~ msgid "+number"
-#~ msgstr "+лічба"
+#~ msgid "Listing mode"
+#~ msgstr "Выгляд сьпісу файлаў"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "усталяваць нумар пачатковага радку ва ўбудаваным рэдактары"
+#~ msgid "&Listing mode..."
+#~ msgstr "&Выгляд сьпісу…"

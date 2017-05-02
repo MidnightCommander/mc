@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 15:19+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-16 18:54+0000\n"
 "Last-Translator: David Martin <dhmartina@yahoo.es>\n"
 "Language-Team: Spanish (http://www.transifex.com/mc/mc/language/es/)\n"
 "Language: es\n"
@@ -794,14 +794,13 @@ msgid "Color options"
 msgstr "Opciones de color"
 
 msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
-msgstr ""
+msgstr "[+númlínea] archivo1[:númlínea] [archivo2[:númlínea]...]"
 
 msgid "file"
 msgstr "archivo"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Ver archivo"
+msgstr "archivo1 archivo2"
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[DIRECTORIO] [SEGUNDO_DIRECTORIO]"
@@ -2038,8 +2037,9 @@ msgstr "columnas"
 msgid "User &mini status"
 msgstr "&Mini-estado"
 
-msgid "Listing mode"
-msgstr "Listado"
+#, fuzzy
+msgid "Listing format"
+msgstr "edición del formato de &Listado"
 
 msgid "Executable &first"
 msgstr "&Ejecutables primero"
@@ -2515,7 +2515,6 @@ msgstr ""
 "Imposible leer el enlace original «%s»\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
@@ -3251,8 +3250,9 @@ msgstr "&Vista rápida"
 msgid "&Info"
 msgstr "&Información"
 
-msgid "&Listing mode..."
-msgstr "&Modo de listado..."
+#, fuzzy
+msgid "&Listing format..."
+msgstr "edición del formato de &Listado"
 
 msgid "&Sort order..."
 msgstr "&Ordenar..."
@@ -4483,8 +4483,8 @@ msgstr "¿Continuar desde el principio?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Imposible obtener una copia local de /ftp://ese.equipo/editame.txt"
 
-#~ msgid "+number"
-#~ msgstr "+número"
+#~ msgid "Listing mode"
+#~ msgstr "Listado"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "Línea de comienzo al abrir archivo con editor interno"
+#~ msgid "&Listing mode..."
+#~ msgstr "&Modo de listado..."

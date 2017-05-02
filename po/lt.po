@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 09:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/mc/mc/language/lt/)\n"
 "Language: lt\n"
@@ -741,9 +741,8 @@ msgstr ""
 msgid "file"
 msgstr "failą"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Žiūrėti failą"
+msgstr ""
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr ""
@@ -1936,8 +1935,9 @@ msgstr "stulpeliai"
 msgid "User &mini status"
 msgstr ""
 
-msgid "Listing mode"
-msgstr "Režimas"
+#, fuzzy
+msgid "Listing format"
+msgstr "Keisti r&odymo formatą"
 
 msgid "Executable &first"
 msgstr ""
@@ -3066,8 +3066,9 @@ msgstr "Greitasis rodymas"
 msgid "&Info"
 msgstr "&Informacija"
 
-msgid "&Listing mode..."
-msgstr "Rod&ymo režimas..."
+#, fuzzy
+msgid "&Listing format..."
+msgstr "Keisti r&odymo formatą"
 
 msgid "&Sort order..."
 msgstr "Rik. t&varka..."
@@ -4267,8 +4268,8 @@ msgstr ""
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 
-#~ msgid "+number"
-#~ msgstr "+skaičius"
+#~ msgid "Listing mode"
+#~ msgstr "Režimas"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "Nustatykite pradinės eilutės numerį redaktoriuje"
+#~ msgid "&Listing mode..."
+#~ msgstr "Rod&ymo režimas..."

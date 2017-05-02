@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 19:32+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 16:37+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/mc/mc/language/pl/)\n"
 "Language: pl\n"
@@ -797,14 +797,13 @@ msgid "Color options"
 msgstr "Opcje kolorów"
 
 msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
-msgstr ""
+msgstr "[+nr-wiersza] plik1[:nr-wiersza] [plik2[:nr-wiersza]…]"
 
 msgid "file"
-msgstr "pliku"
+msgstr "plik"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Podgląd pliku"
+msgstr "plik1 plik2"
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[ten_katalog] [katalog_w_drugim_panelu]"
@@ -1528,10 +1527,10 @@ msgid "&Toggle fullscreen"
 msgstr "&Przełącz pełny ekran"
 
 msgid "&Next"
-msgstr "&Następny"
+msgstr "&Następne"
 
 msgid "&Previous"
-msgstr "&Poprzedni"
+msgstr "&Poprzednie"
 
 msgid "&List..."
 msgstr "&Lista…"
@@ -1649,7 +1648,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 "Łatwy w obsłudze edytor tekstu,\n"
-"napisany dla programu Midnight Commander"
+"napisany dla programu Midnight Commander."
 
 msgid "Copyright (C) 1996-2016 the Free Software Foundation"
 msgstr "Copyright © 1996-2016 Free Software Foundation"
@@ -2041,8 +2040,9 @@ msgstr "kolumny"
 msgid "User &mini status"
 msgstr "&Krótki stan użytkownika"
 
-msgid "Listing mode"
-msgstr "Tryb wyświetlania"
+#, fuzzy
+msgid "Listing format"
+msgstr "Modyfikacja &formatu wyświetlania"
 
 msgid "Executable &first"
 msgstr "Najpierw &pliki wykonywalne"
@@ -2491,7 +2491,7 @@ msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
 msgid "files"
-msgstr "plików"
+msgstr "pliki"
 
 msgid "directory"
 msgstr "katalogu"
@@ -2500,7 +2500,7 @@ msgid "directories"
 msgstr "katalogów"
 
 msgid "files/directories"
-msgstr "plików/katalogów"
+msgstr "pliki/katalogi"
 
 #. TRANSLATORS: keep leading space here to split words in Copy/Move dialog
 msgid " with source mask:"
@@ -2517,7 +2517,6 @@ msgstr ""
 "Nie można odczytać dowiązania źródłowego „%s”\n"
 "%s "
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
@@ -2891,11 +2890,11 @@ msgstr "Proces w tle: plik istnieje"
 
 #, c-format
 msgid "Files processed: %zu/%zu"
-msgstr "Przetworzono plików: %zu/%zu"
+msgstr "Przetworzono pliki: %zu/%zu"
 
 #, c-format
 msgid "Files processed: %zu"
-msgstr "Przetworzono plików: %zu"
+msgstr "Przetworzono pliki: %zu"
 
 #, c-format
 msgid "Time: %s %s"
@@ -3258,8 +3257,9 @@ msgstr "&Szybki widok"
 msgid "&Info"
 msgstr "&Informacje"
 
-msgid "&Listing mode..."
-msgstr "&Tryb wyświetlania…"
+#, fuzzy
+msgid "&Listing format..."
+msgstr "Modyfikacja &formatu wyświetlania"
 
 msgid "&Sort order..."
 msgstr "Porządek s&ortowania…"
@@ -3849,10 +3849,10 @@ msgid "-  < No translation >"
 msgstr "—  < Bez tłumaczenia >"
 
 msgid "%b %e  %Y"
-msgstr "%e.%m.%Y "
+msgstr "%-d %b %Y "
 
 msgid "%b %e %H:%M"
-msgstr "%e.%m %H∶%M"
+msgstr "%-d %b, %H∶%M"
 
 #, c-format
 msgid ""
@@ -4496,8 +4496,8 @@ msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Nie można pobrać lokalnej kopii /ftp://jakiś.komputer/modyfikuj_mnie.txt"
 
-#~ msgid "+number"
-#~ msgstr "+numer"
+#~ msgid "Listing mode"
+#~ msgstr "Tryb wyświetlania"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "Ustawia początkowy numer wiersza dla wewnętrznego edytora"
+#~ msgid "&Listing mode..."
+#~ msgstr "&Tryb wyświetlania…"

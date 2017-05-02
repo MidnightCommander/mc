@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 09:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/mc/mc/language/da/)\n"
 "Language: da\n"
@@ -754,9 +754,8 @@ msgstr ""
 msgid "file"
 msgstr "fil"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Vis fil"
+msgstr ""
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[denne_mappe] [anden_panel_mappe]"
@@ -1986,8 +1985,9 @@ msgstr "kolonner"
 msgid "User &mini status"
 msgstr "&Ministatus for bruger"
 
-msgid "Listing mode"
-msgstr "Listemåde"
+#, fuzzy
+msgid "Listing format"
+msgstr "Redigering af &Listeformat"
 
 msgid "Executable &first"
 msgstr "&Først kørbare"
@@ -2460,16 +2460,11 @@ msgstr ""
 "Kan ikke læse kildehenvisning »%s«\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Kan ikke lave stabile symbolske henvisninger over filsystemer, der ikke er "
-"lokale:\n"
-"\n"
-"Indstillingen stabile symbolske henvisninger vil blive deaktiveret"
 
 #, c-format
 msgid ""
@@ -3184,8 +3179,9 @@ msgstr "&Hurtig visning"
 msgid "&Info"
 msgstr "&Info"
 
-msgid "&Listing mode..."
-msgstr "&Visningstilstand..."
+#, fuzzy
+msgid "&Listing format..."
+msgstr "Redigering af &Listeformat"
 
 msgid "&Sort order..."
 msgstr "&Sorteringsrækkefølge..."
@@ -4404,8 +4400,8 @@ msgstr "Fortsæt fra begyndelsen?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 
-#~ msgid "+number"
-#~ msgstr "+tal"
+#~ msgid "Listing mode"
+#~ msgstr "Listemåde"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "Angiv opstartslinjenummer for det interne redigeringsprogram"
+#~ msgid "&Listing mode..."
+#~ msgstr "&Visningstilstand..."

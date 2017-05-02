@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
 "PO-Revision-Date: 2016-05-08 19:38+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -2034,8 +2034,9 @@ msgstr "colonne"
 msgid "User &mini status"
 msgstr "&Mini stato utente"
 
-msgid "Listing mode"
-msgstr "Modalità lista"
+#, fuzzy
+msgid "Listing format"
+msgstr "Modifica formato &lista"
 
 msgid "Executable &first"
 msgstr "Eseguibili &prima"
@@ -3246,8 +3247,9 @@ msgstr "&Vista veloce"
 msgid "&Info"
 msgstr "&Info"
 
-msgid "&Listing mode..."
-msgstr "&Modalità lista..."
+#, fuzzy
+msgid "&Listing format..."
+msgstr "Modifica formato &lista"
 
 msgid "&Sort order..."
 msgstr "&Ordina per..."
@@ -4479,6 +4481,12 @@ msgstr "Continuare dall'inizio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Impossibile ricevere copia locale di /ftp://un.host/modificami.txt"
+
+#~ msgid "Listing mode"
+#~ msgstr "Modalità lista"
+
+#~ msgid "&Listing mode..."
+#~ msgstr "&Modalità lista..."
 
 #~ msgid "+number"
 #~ msgstr "+numero"

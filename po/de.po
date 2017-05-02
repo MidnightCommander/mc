@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 23:24+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 18:43+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German (http://www.transifex.com/mc/mc/language/de/)\n"
 "Language: de\n"
@@ -33,7 +33,7 @@ msgid "Warning: cannot load codepages list"
 msgstr "Warnung: Kann Zeichensatztabelle nicht laden"
 
 msgid "7-bit ASCII"
-msgstr "7-bit ASCII"
+msgstr "7-Bit-ASCII"
 
 #, c-format
 msgid "Cannot translate from %s to %s"
@@ -122,7 +122,7 @@ msgid "Invalid character"
 msgstr "Ungültiges Zeichen"
 
 msgid "Unmatched quotes character"
-msgstr ""
+msgstr "Nicht übereinstimmende Anführungszeichen"
 
 #, c-format
 msgid ""
@@ -737,7 +737,7 @@ msgid "Specifies a color configuration"
 msgstr "Gibt eine Farbkonfiguration an"
 
 msgid "Show mc with specified skin"
-msgstr "Zeige mc mit dem angegebenen Skin"
+msgstr "mc mit dem angegebenen Skin anzeigen"
 
 #. TRANSLATORS: don't translate keywords
 msgid ""
@@ -808,14 +808,13 @@ msgid "Color options"
 msgstr "Farbeinstellungen"
 
 msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
-msgstr ""
+msgstr "[+Zeilennr.] Datei1[:lineno] [Datei2[:Zeilennr.]...]"
 
 msgid "file"
 msgstr "Datei"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Datei anzeigen"
+msgstr "Datei1 Datei2"
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[dieses_Verzeichnis] [anderes_Panel_Verzeichnis]"
@@ -1864,7 +1863,7 @@ msgid "Skins"
 msgstr "Skins"
 
 msgid "Other 8 bit"
-msgstr "Andere 8 bit"
+msgstr "Andere 8 Bit"
 
 msgid "Running"
 msgstr "Läuft"
@@ -1972,7 +1971,7 @@ msgid "Show &backup files"
 msgstr "Sicherheitsko&pien anzeigen"
 
 msgid "Show &hidden files"
-msgstr "&Verborgene Dateien anzeigen"
+msgstr "&Versteckte Dateien anzeigen"
 
 msgid "&Fast dir reload"
 msgstr "S&chnelles Neulesen"
@@ -2050,8 +2049,9 @@ msgstr "Spalten"
 msgid "User &mini status"
 msgstr "Benutzer-&Ministatus"
 
-msgid "Listing mode"
-msgstr "Listenmodus"
+#, fuzzy
+msgid "Listing format"
+msgstr "&Listenformat bearbeiten"
 
 msgid "Executable &first"
 msgstr "Aus&führbare Dateien zuerst"
@@ -2088,19 +2088,19 @@ msgid "&UTF-8 output"
 msgstr "&UTF-8-Ausgabe"
 
 msgid "&Full 8 bits output"
-msgstr "&Komplette 8 bits-Ausgabe"
+msgstr "&Komplette 8-Bit-Ausgabe"
 
 msgid "&ISO 8859-1"
 msgstr "&ISO 8859-1"
 
 msgid "7 &bits"
-msgstr "7 &bits"
+msgstr "7 &Bit"
 
 msgid "F&ull 8 bits input"
-msgstr "Komplette 8-Bit &Eingabe"
+msgstr "Komplette 8-Bit-&Eingabe"
 
 msgid "Display bits"
-msgstr "Zeige Bits"
+msgstr "Bit anzeigen"
 
 msgid "Input / display codepage:"
 msgstr "Codepage eingeben / anzeigen:"
@@ -2527,7 +2527,6 @@ msgstr ""
 "Kann Quell-Link \"%s\" nicht lesen\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
@@ -2536,7 +2535,7 @@ msgstr ""
 "Kann keine stabilen symbolischen Links auf nicht-lokalen Dateisystemen "
 "anlegen:\n"
 "\n"
-"Einstellung Stabile Symbolische Links wird deaktiviert"
+"Einstellung Stabile Symbolische Links werden deaktiviert"
 
 #, c-format
 msgid ""
@@ -3264,8 +3263,9 @@ msgstr "Schnell&ansicht"
 msgid "&Info"
 msgstr "&Info"
 
-msgid "&Listing mode..."
-msgstr "&Listenmodus..."
+#, fuzzy
+msgid "&Listing format..."
+msgstr "&Listenformat bearbeiten"
 
 msgid "&Sort order..."
 msgstr "&Sortierreihenfolge..."
@@ -3938,7 +3938,7 @@ msgid "Home directory:"
 msgstr "Home-Verzeichnis:"
 
 msgid "Profile root directory:"
-msgstr ""
+msgstr "Profil-Wurzel-Verzeichnis:"
 
 msgid "System data"
 msgstr "System-Daten"
@@ -4502,8 +4502,8 @@ msgstr "Am Anfang fortsetzen?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kann keine lokale Kopie von /ftp://some.host/editme.txt anlegen"
 
-#~ msgid "+number"
-#~ msgstr "+Zeilennummer"
+#~ msgid "Listing mode"
+#~ msgstr "Listenmodus"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "Erste Zeilennummer für den internen Editor setzen"
+#~ msgid "&Listing mode..."
+#~ msgstr "&Listenmodus..."

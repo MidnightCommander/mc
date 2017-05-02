@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 09:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/mc/mc/language/ja/)\n"
 "Language: ja\n"
@@ -747,9 +747,8 @@ msgstr ""
 msgid "file"
 msgstr "file"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "ファイルの保存"
+msgstr ""
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr ""
@@ -1946,8 +1945,9 @@ msgstr ""
 msgid "User &mini status"
 msgstr ""
 
-msgid "Listing mode"
-msgstr "一覧形式"
+#, fuzzy
+msgid "Listing format"
+msgstr "一覧形式編集(&L)"
 
 msgid "Executable &first"
 msgstr ""
@@ -3064,8 +3064,9 @@ msgstr ""
 msgid "&Info"
 msgstr "情報(&I)"
 
-msgid "&Listing mode..."
-msgstr "一覧方法(&L)..."
+#, fuzzy
+msgid "&Listing format..."
+msgstr "一覧形式編集(&L)"
 
 msgid "&Sort order..."
 msgstr "整列順(&S)..."
@@ -4258,3 +4259,9 @@ msgstr "初めから続けますか?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Listing mode"
+#~ msgstr "一覧形式"
+
+#~ msgid "&Listing mode..."
+#~ msgstr "一覧方法(&L)..."

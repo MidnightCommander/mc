@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-04-15 09:50+0300\n"
-"PO-Revision-Date: 2017-02-25 09:22+0000\n"
+"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"PO-Revision-Date: 2017-04-15 09:35+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/mc/mc/language/sv/)\n"
 "Language: sv\n"
@@ -740,9 +740,8 @@ msgstr ""
 msgid "file"
 msgstr "fil"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Visa fil"
+msgstr ""
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr ""
@@ -1937,8 +1936,9 @@ msgstr "kolumner"
 msgid "User &mini status"
 msgstr ""
 
-msgid "Listing mode"
-msgstr "Listningsläge"
+#, fuzzy
+msgid "Listing format"
+msgstr "Redigera &listningsformatet"
 
 msgid "Executable &first"
 msgstr ""
@@ -3055,8 +3055,9 @@ msgstr ""
 msgid "&Info"
 msgstr "&Info"
 
-msgid "&Listing mode..."
-msgstr "visnings&Läge..."
+#, fuzzy
+msgid "&Listing format..."
+msgstr "Redigera &listningsformatet"
 
 msgid "&Sort order..."
 msgstr "&Sorteringsordning"
@@ -4250,8 +4251,8 @@ msgstr ""
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 
-#~ msgid "+number"
-#~ msgstr "+nummer"
+#~ msgid "Listing mode"
+#~ msgstr "Listningsläge"
 
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "Ställ in initialt radnummer för den interna redigeraren"
+#~ msgid "&Listing mode..."
+#~ msgstr "visnings&Läge..."
