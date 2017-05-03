@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2016-05-08 19:38+0200\n"
+"PO-Revision-Date: 2017-05-03 09:33+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
 "it/)\n"
@@ -105,22 +105,21 @@ msgstr ""
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
 "hex)"
-msgstr ""
+msgstr "Numero fuori range (dovrebbe entrare in un byte, 0 <= n <= 0xFF, in esadecimale)"
 
-#, fuzzy
 msgid "Invalid character"
-msgstr "Valore non valido"
+msgstr "Carattere non valido"
 
 msgid "Unmatched quotes character"
-msgstr ""
+msgstr "Virgolette non corrispondenti"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Hex pattern error at position %d:\n"
 "%s."
 msgstr ""
-"Errore inatteso in waitpid():\n"
-"%s"
+"Errore esadecimale alla posizione %d:\n"
+"%s."
 
 msgid "Search string not found"
 msgstr " Stringa cercata non trovata "
@@ -166,14 +165,14 @@ msgstr ""
 "Impossibile analizzare il tema \"%s\".\n"
 "È stato caricato il tema predefinito"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unable to use '%s' skin with true colors support:\n"
 "%s\n"
 "Default skin has been loaded"
 msgstr ""
-"Impossibile usare il tema \"%s\" con supporto a 256\n"
-"colori su terminale non a 256 colori.\n"
+"Impossibile usare il tema \"%s\" con supporto true color:\n"
+"%s\n"
 "È stato caricato il tema predefinito"
 
 #, c-format
@@ -187,16 +186,16 @@ msgstr ""
 "È stato caricato il tema predefinito"
 
 msgid "True color not supported with ncurses."
-msgstr ""
+msgstr "True color non supportato con ncurses."
 
 msgid "True color not supported in this slang version."
-msgstr ""
+msgstr "True color non supportato in questa versione di slang."
 
 msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr ""
+msgstr "Il terminale non sembra supportare neanche 256 colori."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
-msgstr ""
+msgstr "Impostare COLORTERM=truecolor se il terminale supporta il true color."
 
 msgid "Escape"
 msgstr "Escape "
@@ -493,25 +492,25 @@ msgstr ""
 "Controllare la variabile ambiente TERM.\n"
 
 msgid "B"
-msgstr ""
+msgstr "B"
 
 msgid "kB"
-msgstr ""
+msgstr "kB"
 
 msgid "KiB"
-msgstr ""
+msgstr "KiB"
 
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 msgid "MiB"
-msgstr ""
+msgstr "MiB"
 
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
 msgid "GiB"
-msgstr ""
+msgstr "GiB"
 
 msgid "Cannot create pipe descriptor"
 msgstr "Impossibile creare il descrittore pipe"
@@ -791,14 +790,13 @@ msgid "Color options"
 msgstr "Opzioni colore"
 
 msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
-msgstr ""
+msgstr "[+numriga] file1[:numriga] [file2[:numriga]...]"
 
 msgid "file"
 msgstr "file"
 
-#, fuzzy
 msgid "file1 file2"
-msgstr "Mostra file"
+msgstr "file1 file2"
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[questa_dir] [dir_altro_pannello]"
@@ -2034,9 +2032,8 @@ msgstr "colonne"
 msgid "User &mini status"
 msgstr "&Mini stato utente"
 
-#, fuzzy
 msgid "Listing format"
-msgstr "Modifica formato &lista"
+msgstr "Formato lista"
 
 msgid "Executable &first"
 msgstr "Eseguibili &prima"
@@ -2511,13 +2508,12 @@ msgstr ""
 "Non posso leggere il collegamento sorgente \"%s\"\n"
 "%s"
 
-#, fuzzy
 msgid ""
 "Cannot make stable symlinks across non-local filesystems:\n"
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Non posso creare coll. simbolici stabili su un filesystem non locale \n"
+"Non posso creare coll. simbolici stabili con filesystem non locali:\n"
 "\n"
 "L'opzione coll. simbolici stabili sarà disabilitata"
 
@@ -2812,9 +2808,9 @@ msgstr ""
 "Impossibile spostare la directory \"%s\" in \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Directories: %zu, total size: %s"
-msgstr "Directory: %zd, dim totale: %s"
+msgstr "Directory: %zu, dim totale: %s"
 
 msgid "Cannot operate on \"..\"!"
 msgstr "Impossibile operare su \"..\"!"
@@ -3014,11 +3010,11 @@ msgstr "Cercando in %s"
 msgid "Finished"
 msgstr "Terminato"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Finished (ignored %zu directory)"
 msgid_plural "Finished (ignored %zu directories)"
-msgstr[0] "Finito (ignorata %zd directory)"
-msgstr[1] "Finito (ignorate %zd directory)"
+msgstr[0] "Finito (ignorata %zu directory)"
+msgstr[1] "Finito (ignorate %zu directory)"
 
 msgid "Searching"
 msgstr "Cercando"
@@ -3177,11 +3173,11 @@ msgstr "Tipo dis.: major %lu, minor %lu"
 msgid "Size:       %s"
 msgstr "Dimensione:    %s"
 
-#, fuzzy, c-format
+#, c-format
 msgid " (%lu block)"
 msgid_plural " (%lu blocks)"
-msgstr[0] " (%ld blocco)"
-msgstr[1] " (%ld blocchi)"
+msgstr[0] " (%lu blocco)"
+msgstr[1] " (%lu blocchi)"
 
 #, c-format
 msgid "Owner:      %s/%s"
@@ -3247,9 +3243,8 @@ msgstr "&Vista veloce"
 msgid "&Info"
 msgstr "&Info"
 
-#, fuzzy
 msgid "&Listing format..."
-msgstr "Modifica formato &lista"
+msgstr "Formato &lista..."
 
 msgid "&Sort order..."
 msgstr "&Ordina per..."
@@ -3413,11 +3408,11 @@ msgstr "FS &virtuale..."
 msgid "Panels:"
 msgstr "Pannelli:"
 
-#, fuzzy, c-format
+#, c-format
 msgid "You have %zu opened screen. Quit anyway?"
 msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] "È stato aperto %zd schermo. Uscire comunque?"
-msgstr[1] "Sono stati aperti %zd schermi. Uscire comunque?"
+msgstr[0] "È aperto %zu schermo. Uscire comunque?"
+msgstr[1] "Sono aperti %zu schermi. Uscire comunque?"
 
 msgid "The Midnight Commander"
 msgstr "Il Midnight Commander"
@@ -3915,13 +3910,11 @@ msgstr "File System Virtuali:"
 msgid "Data types:"
 msgstr "Tipo dati:"
 
-#, fuzzy
 msgid "Home directory:"
-msgstr "Directory radice:"
+msgstr "Directory home:"
 
-#, fuzzy
 msgid "Profile root directory:"
-msgstr "Directory radice:"
+msgstr "Profilo directory root:"
 
 msgid "System data"
 msgstr "Dati di sistema"
@@ -4481,23 +4474,3 @@ msgstr "Continuare dall'inizio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Impossibile ricevere copia locale di /ftp://un.host/modificami.txt"
-
-#~ msgid "Listing mode"
-#~ msgstr "Modalità lista"
-
-#~ msgid "&Listing mode..."
-#~ msgstr "&Modalità lista..."
-
-#~ msgid "+number"
-#~ msgstr "+numero"
-
-#~ msgid "Set initial line number for the internal editor"
-#~ msgstr "Imposta numero di riga iniziale per l'editor interno"
-
-#~ msgid "Cannot parse command for pipe"
-#~ msgstr "Impossibile analizzare il comando per la pipe"
-
-#~ msgid "%s byte"
-#~ msgid_plural "%s bytes"
-#~ msgstr[0] "%s byte"
-#~ msgstr[1] "%s byte"
