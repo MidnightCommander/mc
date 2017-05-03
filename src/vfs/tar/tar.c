@@ -792,7 +792,7 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
 
     while (TRUE)
     {
-        size_t h_size;
+        size_t h_size = 0;
         ReadStatus prev_status = status;
 
         status = tar_read_header (vpath_element->class, archive, tard, &h_size);
