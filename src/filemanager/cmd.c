@@ -172,18 +172,15 @@ do_edit (const vfs_path_t * what_vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-set_panel_filter_to (WPanel * p, char *allocated_filter_string)
+set_panel_filter_to (WPanel * p, char *filter)
 {
-    g_free (p->filter);
-    p->filter = NULL;
+    MC_PTR_FREE (p->filter);
 
     /* Three ways to clear filter: NULL, "", "*" */
-    if (allocated_filter_string == NULL ||
-        allocated_filter_string[0] == '\0' ||
-        (allocated_filter_string[0] == '*' && allocated_filter_string[1] == '\0'))
-        g_free (allocated_filter_string);
+    if (filter == NULL || filter[0] == '\0' || (filter[0] == '*' && filter[1] == '\0'))
+        g_free (filter);
     else
-        p->filter = allocated_filter_string;
+        p->filter = filter;
     reread_cmd ();
 }
 
