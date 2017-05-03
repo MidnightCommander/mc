@@ -196,15 +196,14 @@ set_panel_filter (WPanel * p)
     char *reg_exp;
     const char *x;
 
-    x = p->filter ? p->filter : easy_patterns ? "*" : ".";
+    x = p->filter != NULL ? p->filter : easy_patterns ? "*" : ".";
 
     reg_exp = input_dialog_help (_("Filter"),
                                  _("Set expression for filtering filenames"),
                                  "[Filter...]", MC_HISTORY_FM_PANEL_FILTER, x, FALSE,
                                  INPUT_COMPLETE_FILENAMES);
-    if (!reg_exp)
-        return;
-    set_panel_filter_to (p, reg_exp);
+    if (reg_exp != NULL)
+        set_panel_filter_to (p, reg_exp);
 }
 
 /* --------------------------------------------------------------------------------------------- */
