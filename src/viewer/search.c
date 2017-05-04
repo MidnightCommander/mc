@@ -366,12 +366,24 @@ mcview_do_search (WView * view, off_t want_search_start)
             break;
         }
 
-        if (view->search->error == MC_SEARCH_E_ABORT || view->search->error == MC_SEARCH_E_NOTFOUND)
+        /* Search error is here.
+         * MC_SEARCH_E_NOTFOUND: continue search
+         * others: stop
+         */
+        if (view->search->error != MC_SEARCH_E_NOTFOUND)
             break;
 
         search_start = growbufsize - view->search->original_len;
     }
     while (search_start > 0 && mcview_may_still_grow (view));
+
+    /* After mcview_may_still_grow (view) == FALSE we have remained last chunk. Search there. */
+    if (!found && view->search->error == MC_SEARCH_E_NOTFOUND && !mcview_search_options.backwards
+        && mcview_find (&vsm, search_start, mcview_get_filesize (view), &match_len))
+    {
+        mcview_search_show_result (view, match_len);
+        found = TRUE;
+    }
 
     status_msg_deinit (STATUS_MSG (&vsm));
 
