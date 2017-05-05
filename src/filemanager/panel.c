@@ -877,8 +877,10 @@ format_file (WPanel * panel, int file_index, int width, int attr, gboolean issta
         }
         else
         {
-            if (attr == SELECTED || attr == MARKED_SELECTED)
+            if (attr == SELECTED)
                 tty_setcolor (SELECTED_COLOR);
+            else if (attr == MARKED_SELECTED)
+                tty_setcolor (MARKED_SELECTED_COLOR);
             else
                 tty_setcolor (NORMAL_COLOR);
             tty_print_one_vline (TRUE);
