@@ -834,6 +834,9 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
                 if (vfs_parse_filedate (0, &ST.st_ctime) == 0)
                     break;
                 ST.st_atime = ST.st_mtime = ST.st_ctime;
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+                ST.st_atim.tv_nsec = ST.st_mtim.tv_nsec = ST.st_ctim.tv_nsec = 0;
+#endif
             }
             break;
         case 'D':
@@ -845,6 +848,9 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
                             &tim.tm_mday, &tim.tm_hour, &tim.tm_min, &tim.tm_sec) != 6)
                     break;
                 ST.st_atime = ST.st_mtime = ST.st_ctime = mktime (&tim);
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+                ST.st_atim.tv_nsec = ST.st_mtim.tv_nsec = ST.st_ctim.tv_nsec = 0;
+#endif
             }
             break;
         case 'E':

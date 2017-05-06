@@ -110,6 +110,11 @@ message (int flags, const char *title, const char *text, ...)
 static void
 fill_stat_struct (struct stat *etalon_stat, int iterator)
 {
+
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+    etalon_stat->st_atim.tv_nsec = etalon_stat->st_mtim.tv_nsec = etalon_stat->st_ctim.tv_nsec = 0;
+#endif
+
     switch (iterator)
     {
     case 0:
@@ -299,6 +304,13 @@ START_PARAMETRIZED_TEST (test_vfs_parse_ls_lga, test_vfs_parse_ls_lga_ds)
        mctest_assert_int_eq (etalon_stat.st_mtime, test_stat.st_mtime);
        mctest_assert_int_eq (etalon_stat.st_ctime, test_stat.st_ctime);
      */
+
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+    mctest_assert_int_eq (0, test_stat.st_atim.tv_nsec);
+    mctest_assert_int_eq (0, test_stat.st_mtim.tv_nsec);
+    mctest_assert_int_eq (0, test_stat.st_ctim.tv_nsec);
+#endif
+
 }
 /* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
