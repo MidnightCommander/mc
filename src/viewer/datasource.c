@@ -147,6 +147,8 @@ mcview_get_ptr_file (WView * view, off_t byte_index)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* Invalid UTF-8 is reported as negative integers (one for each byte),
+ * see ticket 3783. */
 gboolean
 mcview_get_utf (WView * view, off_t byte_index, int *ch, int *ch_len)
 {
@@ -200,7 +202,8 @@ mcview_get_utf (WView * view, off_t byte_index, int *ch, int *ch_len)
 
     if (res < 0)
     {
-        *ch = (unsigned char) (*str);
+        /* Implicit conversion from signed char to signed int keeps negative values. */
+        *ch = *str;
         *ch_len = 1;
     }
     else
