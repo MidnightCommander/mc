@@ -387,7 +387,7 @@ tar_checksum (const union record *header)
 
     recsum = tar_from_oct (8, header->header.chksum);
 
-    for (i = sizeof (*header); i-- >= 0;)
+    for (i = sizeof (*header); --i >= 0;)
     {
         /*
          * We can't use unsigned char here because of old compilers,
@@ -398,7 +398,7 @@ tar_checksum (const union record *header)
     }
 
     /* Adjust checksum to count the "chksum" field as blanks. */
-    for (i = sizeof (header->header.chksum); i-- >= 0;)
+    for (i = sizeof (header->header.chksum); --i >= 0;)
     {
         sum -= 0xFF & header->header.chksum[i];
         signed_sum -= (char) header->header.chksum[i];
