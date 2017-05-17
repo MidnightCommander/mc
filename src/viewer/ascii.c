@@ -341,6 +341,8 @@ mcview_char_display (const WView * view, int c, char *s)
  * Normally: stores c, updates state, returns TRUE.
  * At EOF: state is unchanged, c is undefined, returns FALSE.
  *
+ * Just as with mcview_get_utf(), invalid UTF-8 is reported using negative integers.
+ *
  * Also, temporary hack: handle force_max here.
  * TODO: move it to lower layers (datasource.c)?
  */
