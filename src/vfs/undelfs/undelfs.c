@@ -634,6 +634,9 @@ undelfs_stat_int (int inode_index, struct stat *buf)
     buf->st_atime = delarray[inode_index].dtime;
     buf->st_ctime = delarray[inode_index].dtime;
     buf->st_mtime = delarray[inode_index].dtime;
+#ifdef HAVE_STRUCT_STAT_ST_MTIM
+    buf->st_atim.tv_nsec = buf->st_mtim.tv_nsec = buf->st_ctim.tv_nsec = 0;
+#endif
     return 0;
 }
 
