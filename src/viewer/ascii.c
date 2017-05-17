@@ -599,7 +599,7 @@ mcview_display_line (WView * view, mcview_state_machine_t * state, int row,
         off_t eol;
         int retval;
 
-        eol = mcview_eol (view, state->offset, mcview_get_filesize (view));
+        eol = mcview_eol (view, state->offset);
         retval = (eol > state->offset) ? 1 : 0;
 
         mcview_state_machine_init (state, eol);
@@ -737,7 +737,7 @@ mcview_display_line (WView * view, mcview_state_machine_t * state, int row,
              * parsing and then not actually displaying it. */
             off_t eol;
 
-            eol = mcview_eol (view, state->offset, mcview_get_filesize (view));
+            eol = mcview_eol (view, state->offset);
             mcview_state_machine_init (state, eol);
             return 1;
         }
@@ -942,7 +942,7 @@ mcview_ascii_move_down (WView * view, off_t lines)
          * EOF, that can't happen. */
         if (!view->text_wrap_mode)
         {
-            view->dpy_start = mcview_eol (view, view->dpy_start, mcview_get_filesize (view));
+            view->dpy_start = mcview_eol (view, view->dpy_start);
             view->dpy_paragraph_skip_lines = 0;
             view->dpy_wrap_dirty = TRUE;
         }
