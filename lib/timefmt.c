@@ -37,6 +37,7 @@
 #include <config.h>
 
 #include <stdlib.h>
+#include <limits.h>             /* MB_LEN_MAX */
 
 #include "lib/global.h"
 #include "lib/strutil.h"

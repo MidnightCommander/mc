@@ -428,7 +428,7 @@ jobs_fill_listbox (WListbox * list)
     static const char *state_str[2] = { "", "" };
     TaskList *tl;
 
-    if (state_str[0] == '\0')
+    if (state_str[0][0] == '\0')
     {
         state_str[0] = _("Running");
         state_str[1] = _("Stopped");

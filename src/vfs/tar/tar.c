@@ -237,7 +237,7 @@ static union record rec_buf;
  * Result is -1 if the field is invalid (all blank, or nonoctal).
  */
 static long
-tar_from_oct (int digs, char *where)
+tar_from_oct (int digs, const char *where)
 {
     long value;
 
@@ -376,6 +376,52 @@ tar_skip_n_records (struct vfs_s_super *archive, int tard, size_t n)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static ReadStatus
+tar_checksum (const union record *header)
+{
+    long recsum;
+    long signed_sum = 0;
+    long sum = 0;
+    int i;
+    const char *p = header->charptr;
+
+    recsum = tar_from_oct (8, header->header.chksum);
+
+    for (i = sizeof (*header); --i >= 0;)
+    {
+        /*
+         * We can't use unsigned char here because of old compilers,
+         * e.g. V7.
+         */
+        signed_sum += *p;
+        sum += 0xFF & *p++;
+    }
+
+    /* Adjust checksum to count the "chksum" field as blanks. */
+    for (i = sizeof (header->header.chksum); --i >= 0;)
+    {
+        sum -= 0xFF & header->header.chksum[i];
+        signed_sum -= (char) header->header.chksum[i];
+    }
+
+    sum += ' ' * sizeof (header->header.chksum);
+    signed_sum += ' ' * sizeof (header->header.chksum);
+
+    /*
+     * This is a zeroed record...whole record is 0's except
+     * for the 8 blanks we faked for the checksum field.
+     */
+    if (sum == 8 * ' ')
+        return STATUS_EOFMARK;
+
+    if (sum != recsum && signed_sum != recsum)
+        return STATUS_BADCHECKSUM;
+
+    return STATUS_SUCCESS;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *header, size_t h_size)
 {
@@ -470,10 +516,7 @@ static ReadStatus
 tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, size_t * h_size)
 {
     tar_super_data_t *arch = (tar_super_data_t *) archive->data;
-
-    int i;
-    long sum, signed_sum, recsum;
-    char *p;
+    ReadStatus checksum_status;
     union record *header;
     static char *next_long_name = NULL, *next_long_link = NULL;
 
@@ -483,39 +526,9 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
     if (NULL == header)
         return STATUS_EOF;
 
-    recsum = tar_from_oct (8, header->header.chksum);
-
-    sum = 0;
-    signed_sum = 0;
-    p = header->charptr;
-    for (i = sizeof (*header); --i >= 0;)
-    {
-        /*
-         * We can't use unsigned char here because of old compilers,
-         * e.g. V7.
-         */
-        signed_sum += *p;
-        sum += 0xFF & *p++;
-    }
-
-    /* Adjust checksum to count the "chksum" field as blanks. */
-    for (i = sizeof (header->header.chksum); --i >= 0;)
-    {
-        sum -= 0xFF & header->header.chksum[i];
-        signed_sum -= (char) header->header.chksum[i];
-    }
-    sum += ' ' * sizeof header->header.chksum;
-    signed_sum += ' ' * sizeof header->header.chksum;
-
-    /*
-     * This is a zeroed record...whole record is 0's except
-     * for the 8 blanks we faked for the checksum field.
-     */
-    if (sum == 8 * ' ')
-        return STATUS_EOFMARK;
-
-    if (sum != recsum && signed_sum != recsum)
-        return STATUS_BADCHECKSUM;
+    checksum_status = tar_checksum (header);
+    if (checksum_status != STATUS_SUCCESS)
+        return checksum_status;
 
     /*
      * Try to determine the archive format.
@@ -627,7 +640,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
         struct vfs_s_entry *entry;
         struct vfs_s_inode *inode = NULL, *parent;
         off_t data_position;
-        char *q;
+        char *p, *q;
         size_t len;
         char *current_file_name, *current_link_name;
 
@@ -779,7 +792,7 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
 
     while (TRUE)
     {
-        size_t h_size;
+        size_t h_size = 0;
         ReadStatus prev_status = status;
 
         status = tar_read_header (vpath_element->class, archive, tard, &h_size);
