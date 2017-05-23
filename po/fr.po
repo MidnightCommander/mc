@@ -12,6 +12,7 @@
 # lkppo, 2012
 # Towinet, 2017
 # Yury V. Zaytsev <yury@shurup.com>, 2016
+# Manu Cart, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
@@ -1517,7 +1518,7 @@ msgstr "&Trier..."
 msgid "&Paste output of..."
 msgstr "Coller la sortie de..."
 
-msgid "&External formatter"
+msgid "&External formater"
 msgstr "Formateur &externe"
 
 msgid "&Move"
