@@ -132,7 +132,7 @@ static void
 do_possible_cd (const vfs_path_t * new_dir_vpath)
 {
     if (!do_cd (new_dir_vpath, cd_exact))
-        message (D_ERROR, _("Warning"),
+        message (D_ERROR, _("Warning"), "%s",
                  _("The Commander can't change to the directory that\n"
                    "the subshell claims you are in. Perhaps you have\n"
                    "deleted your working directory, or given yourself\n"
@@ -334,7 +334,7 @@ do_executev (const char *shell, int flags, char *const argv[])
 #endif /* ENABLE_SUBSHELL */
             )
         {
-            printf (_("Press any key to continue..."));
+            printf ("%s", _("Press any key to continue..."));
             fflush (stdout);
             tty_raw_mode ();
             get_key_code (0);
@@ -430,10 +430,12 @@ shell_execute (const char *command, int flags)
 
 #ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
+    {
         if (subshell_state == INACTIVE)
             do_execute (mc_global.shell->path, cmd ? cmd : command, flags | EXECUTE_AS_SHELL);
         else
-            message (D_ERROR, MSG_ERROR, _("The shell is already running a command"));
+            message (D_ERROR, MSG_ERROR, "%s", _("The shell is already running a command"));
+    }
     else
 #endif /* ENABLE_SUBSHELL */
         do_execute (mc_global.shell->path, cmd ? cmd : command, flags | EXECUTE_AS_SHELL);
@@ -486,8 +488,8 @@ toggle_panels (void)
     {
         if (output_starts_shell)
         {
-            fprintf (stderr, _("Type 'exit' to return to the Midnight Commander"));
-            fprintf (stderr, "\n\r\n\r");
+            fputs (_("Type 'exit' to return to the Midnight Commander"), stderr);
+            fputs ("\n\r\n\r", stderr);
 
             my_system (EXECUTE_INTERNAL, mc_global.shell->path, NULL);
         }
@@ -646,7 +648,6 @@ execute_external_editor_or_viewer (const char *command, const vfs_path_t * filen
             do_executev (command, EXECUTE_INTERNAL, NULL);
 
         g_free (extern_cmd_options);
-
     }
 
     execute_cleanup_with_vfs_arg (filename_vpath, &localcopy_vpath, &mtime);

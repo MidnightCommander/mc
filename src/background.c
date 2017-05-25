@@ -214,20 +214,19 @@ background_attention (int fd, void *closure)
     TaskList *p;
     int to_child_fd = -1;
     enum ReturnType type;
+    const char *background_process_error = _("Background process error");
 
     ctx = closure;
 
     bytes = read (fd, &routine.pointer, sizeof (routine));
     if (bytes == -1 || (size_t) bytes < (sizeof (routine)))
     {
-        const char *background_process_error = _("Background process error");
-
         unregister_task_running (ctx->pid, fd);
         if (!waitpid (ctx->pid, &status, WNOHANG))
         {
             /* the process is still running, but it misbehaves - kill it */
             kill (ctx->pid, SIGTERM);
-            message (D_ERROR, background_process_error, _("Unknown error in child"));
+            message (D_ERROR, background_process_error, "%s", _("Unknown error in child"));
             return 0;
         }
 
@@ -235,7 +234,7 @@ background_attention (int fd, void *closure)
         if (WIFEXITED (status) && (WEXITSTATUS (status) == 0))
             return 0;
 
-        message (D_ERROR, background_process_error, _("Child died unexpectedly"));
+        message (D_ERROR, background_process_error, "%s", _("Child died unexpectedly"));
 
         return 0;
     }
@@ -249,7 +248,7 @@ background_attention (int fd, void *closure)
 
     if (argc > MAXCALLARGS)
     {
-        message (D_ERROR, _("Background protocol error"),
+        message (D_ERROR, _("Background protocol error"), "%s",
                  _("Background process sent us a request for more arguments\n"
                    "than we can handle."));
     }
@@ -290,7 +289,7 @@ background_attention (int fd, void *closure)
         to_child_fd = p->to_child_fd;
 
     if (to_child_fd == -1)
-        message (D_ERROR, _("Background process error"), _("Unknown error in child"));
+        message (D_ERROR, background_process_error, "%s", _("Unknown error in child"));
 
     /* Handle the call */
     if (type == Return_Integer)

@@ -359,7 +359,7 @@ start_link_area (int x, int y, const char *link_name)
     Link_Area *la;
 
     if (inside_link_area)
-        message (D_NORMAL, _("Warning"), _("Internal bug: Double start of link area"));
+        message (D_NORMAL, _("Warning"), "%s", _("Internal bug: Double start of link area"));
 
     /* Allocate memory for a new link area */
     la = g_new (Link_Area, 1);
