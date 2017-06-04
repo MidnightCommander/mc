@@ -1,7 +1,12 @@
 #ifndef MC__VIEWER_INLINES_H
 #define MC__VIEWER_INLINES_H
 
+#include <limits.h>             /* CHAR_BIT */
+
 /*** typedefs(not structures) and defined constants **********************************************/
+
+#define OFF_T_BITWIDTH  ((unsigned int) (sizeof (off_t) * CHAR_BIT - 1))
+#define OFFSETTYPE_MAX (((off_t) 1 << (OFF_T_BITWIDTH - 1)) - 1)
 
 /*** enums ***************************************************************************************/
 
@@ -153,6 +158,14 @@ mcview_is_nroff_sequence (WView * view, off_t offset)
         return FALSE;
 
     return (c0 == c2 || c0 == '_' || (c0 == '+' && c2 == 'o'));
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static inline void
+mcview_growbuf_read_all_data (WView * view)
+{
+    mcview_growbuf_read_until (view, OFFSETTYPE_MAX);
 }
 
 /* --------------------------------------------------------------------------------------------- */

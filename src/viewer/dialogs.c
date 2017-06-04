@@ -249,7 +249,7 @@ mcview_dialog_goto (WView * view, off_t * offset)
                     addr = 100;
                 /* read all data from pipe to get real size */
                 if (view->growbuf_in_use)
-                    mcview_growbuf_read_until (view, OFFSETTYPE_MAX);
+                    mcview_growbuf_read_all_data (view);
                 *offset = addr * mcview_get_filesize (view) / 100;
                 if (!view->hex_mode)
                     *offset = mcview_bol (view, *offset, 0);
@@ -267,7 +267,7 @@ mcview_dialog_goto (WView * view, off_t * offset)
                 {
                     /* read all data from pipe to get real size */
                     if (view->growbuf_in_use)
-                        mcview_growbuf_read_until (view, OFFSETTYPE_MAX);
+                        mcview_growbuf_read_all_data (view);
 
                     *offset = addr;
                     addr = mcview_get_filesize (view);
@@ -285,3 +285,5 @@ mcview_dialog_goto (WView * view, off_t * offset)
     g_free (exp);
     return res;
 }
+
+/* --------------------------------------------------------------------------------------------- */

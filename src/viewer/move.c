@@ -243,7 +243,7 @@ mcview_moveto_bottom (WView * view)
     mcview_update_filesize (view);
 
     if (view->growbuf_in_use)
-        mcview_growbuf_read_until (view, OFFSETTYPE_MAX);
+        mcview_growbuf_read_all_data (view);
 
     filesize = mcview_get_filesize (view);
 

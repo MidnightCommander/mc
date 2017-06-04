@@ -23,8 +23,6 @@ typedef unsigned char byte;
 /* A width or height on the screen */
 typedef unsigned int screen_dimen;
 
-extern const off_t OFFSETTYPE_MAX;
-
 /*** enums ***************************************************************************************/
 
 /* data sources of the view */
