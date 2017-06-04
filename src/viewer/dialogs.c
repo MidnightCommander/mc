@@ -247,6 +247,9 @@ mcview_dialog_goto (WView * view, off_t * offset)
             case MC_VIEW_GOTO_PERCENT:
                 if (addr > 100)
                     addr = 100;
+                /* read all data from pipe to get real size */
+                if (view->growbuf_in_use)
+                    mcview_growbuf_read_until (view, OFFSETTYPE_MAX);
                 *offset = addr * mcview_get_filesize (view) / 100;
                 if (!view->hex_mode)
                     *offset = mcview_bol (view, *offset, 0);
