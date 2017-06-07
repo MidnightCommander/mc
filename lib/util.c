@@ -1028,6 +1028,7 @@ diff_two_paths (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
         while (TRUE)
         {
             char *r, *s;
+            ptrdiff_t len;
 
             r = strchr (p, PATH_SEP);
             if (r == NULL)
@@ -1036,17 +1037,9 @@ diff_two_paths (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
             if (s == NULL)
                 break;
 
-            *r = '\0';
-            *s = '\0';
-            if (strcmp (p, q) != 0)
-            {
-                *r = PATH_SEP;
-                *s = PATH_SEP;
+            len = r - p;
+            if (len != (s - q) || strncmp (p, q, (size_t) len) != 0)
                 break;
-            }
-
-            *r = PATH_SEP;
-            *s = PATH_SEP;
 
             p = r + 1;
             q = s + 1;
