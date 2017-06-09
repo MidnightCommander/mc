@@ -367,14 +367,13 @@ vfs_path_is_str_path_deprecated (const char *path_str)
 */
 
 static vfs_path_t *
-vfs_path_from_str_deprecated_parser (char *path, vfs_path_flag_t flags)
+vfs_path_from_str_deprecated_parser (char *path)
 {
     vfs_path_t *vpath;
     vfs_path_element_t *element;
     struct vfs_class *class;
     const char *local, *op;
 
-    (void) flags;
     vpath = vfs_path_new ();
 
     while ((class = _vfs_split_with_semi_skip_count (path, &local, &op, 0)) != NULL)
@@ -432,13 +431,11 @@ vfs_path_from_str_deprecated_parser (char *path, vfs_path_flag_t flags)
 */
 
 static vfs_path_t *
-vfs_path_from_str_uri_parser (char *path, vfs_path_flag_t flags)
+vfs_path_from_str_uri_parser (char *path)
 {
     vfs_path_t *vpath;
     vfs_path_element_t *element;
     char *url_delimiter;
-
-    (void) flags;
 
     vpath = vfs_path_new ();
     vpath->relative = path != NULL && !IS_PATH_SEP (*path);
@@ -740,9 +737,9 @@ vfs_path_from_str_flags (const char *path_str, vfs_path_flag_t flags)
         return NULL;
 
     if ((flags & VPF_USE_DEPRECATED_PARSER) != 0 && vfs_path_is_str_path_deprecated (path))
-        vpath = vfs_path_from_str_deprecated_parser (path, flags);
+        vpath = vfs_path_from_str_deprecated_parser (path);
     else
-        vpath = vfs_path_from_str_uri_parser (path, flags);
+        vpath = vfs_path_from_str_uri_parser (path);
 
     vpath->str = vfs_path_to_str_flags (vpath, 0, flags);
     g_free (path);
