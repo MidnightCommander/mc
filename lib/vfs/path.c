@@ -436,11 +436,12 @@ vfs_path_from_str_uri_parser (char *path, vfs_path_flag_t flags)
 {
     vfs_path_t *vpath;
     vfs_path_element_t *element;
-
     char *url_delimiter;
 
+    (void) flags;
+
     vpath = vfs_path_new ();
-    vpath->relative = (flags & VPF_NO_CANON) != 0;
+    vpath->relative = path != NULL && !IS_PATH_SEP (*path);
 
     while ((url_delimiter = g_strrstr (path, VFS_PATH_URL_DELIMITER)) != NULL)
     {
