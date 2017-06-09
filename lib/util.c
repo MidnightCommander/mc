@@ -1030,9 +1030,12 @@ diff_two_paths (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
             char *r, *s;
 
             r = strchr (p, PATH_SEP);
-            s = strchr (q, PATH_SEP);
-            if (r == NULL || s == NULL)
+            if (r == NULL)
                 break;
+            s = strchr (q, PATH_SEP);
+            if (s == NULL)
+                break;
+
             *r = '\0';
             *s = '\0';
             if (strcmp (p, q) != 0)
