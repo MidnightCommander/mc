@@ -256,11 +256,20 @@ mcview_dialog_goto (WView * view, off_t * offset)
                 break;
             case MC_VIEW_GOTO_OFFSET_DEC:
             case MC_VIEW_GOTO_OFFSET_HEX:
-                *offset = addr;
                 if (!view->hex_mode)
-                    *offset = mcview_bol (view, *offset, 0);
+                {
+                    if (view->growbuf_in_use)
+                        mcview_growbuf_read_until (view, addr);
+
+                    *offset = mcview_bol (view, addr, 0);
+                }
                 else
                 {
+                    /* read all data from pipe to get real size */
+                    if (view->growbuf_in_use)
+                        mcview_growbuf_read_until (view, OFFSETTYPE_MAX);
+
+                    *offset = addr;
                     addr = mcview_get_filesize (view);
                     if (*offset > addr)
                         *offset = addr;
