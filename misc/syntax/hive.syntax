@@ -362,45 +362,25 @@ context default
     keyword DIV                                            white
     keyword [                                              brightcyan
     keyword ]                                              brightcyan
-#    keyword {                                             brightcyan
-#    keyword }                                             brightcyan
 
-#    keyword whole <=> white
-
-# operators
-#keyword whole .          white
-#keyword whole :          white
-#keyword whole ,          white
-#keyword whole ;          white
-#keyword whole (          white
-#keyword whole )          white
-#keyword whole [          white
-#keyword whole ]          white
-#keyword whole {          white
-#keyword whole }          white
-#keyword whole =          white
-#keyword whole ==         white
-#keyword whole <=>        white
-#keyword whole <>         white
-#keyword whole !=         white
-#keyword whole <=         white
-#keyword whole <          white
-#keyword whole >=         white
-#keyword whole >          white
-#keyword whole /          white
-#keyword whole +          white
-#keyword whole -          white
-#keyword whole *          white
-#keyword whole %          white
-#keyword whole DIV        white
-#keyword whole &          white
-#keyword whole ~          white
-#keyword whole |          white
-#keyword whole ||         white
-#keyword whole ^          white
-#keyword whole ?          white
-#keyword whole $          white
-
+#   keyword {                                              brightcyan
+#   keyword }                                              brightcyan
+#   keyword whole <=>                                      white
+#   keyword whole :                                        white
+#   keyword whole {                                        white
+#   keyword whole }                                        white
+#   keyword whole ==                                       white
+#   keyword whole <=>                                      white
+#   keyword whole <>                                       white
+#   keyword whole !=                                       white
+#   keyword whole <=                                       white
+#   keyword whole <                                        white
+#   keyword whole >=                                       white
+#   keyword whole >                                        white
+#   keyword whole &                                        white
+#   keyword whole ||                                       white
+#   keyword whole ?                                        white
+#   keyword whole $                                        white
 
 # Mathematical Functions
     keyword whole round                                    yellow
