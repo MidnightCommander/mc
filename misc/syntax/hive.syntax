@@ -610,7 +610,9 @@ context default
 
 # Literals
     # float
-    keyword \[0123456789\]\{.\}\{0123456789\}\[0123456789\]     brightmagenta
+    keyword whole \[0123456789\]\{.\}\[0123456789\]                                            brightmagenta
+    # float e notation
+    keyword whole \[0123456789\]\[.\]\[0123456789\]\{e\}\[\+-\]\{0123456789\}\[0123456789\]    brightmagenta
     # tinyint
     keyword whole \[0123456789\]Y                               magenta
     # smallint
