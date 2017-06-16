@@ -13,7 +13,7 @@ context default
     keyword whole AND                                      white
     keyword whole OR                                       white
     keyword whole NOT                                      white
-    keyword whole !                                        white
+    keyword whole !                                        brightcyan
     keyword whole LIKE                                     white
     keyword whole ANY                                      white
     keyword whole IF                                       white
@@ -141,7 +141,7 @@ context default
     keyword whole OUT                                      white
     keyword whole OF                                       white
     keyword whole PERCENT                                  white
-    keyword whole CAST                                     white
+    keyword whole CAST                                     cyan
     keyword whole ADD                                      white
     keyword whole REPLACE                                  white
     keyword whole RLIKE                                    white
@@ -327,7 +327,6 @@ context default
     keyword whole DETAIL                                   white
     keyword whole WAIT                                     white
 
-
 # Storage Formats
     keyword whole TEXTFILE                                 brightblue
     keyword whole ORC                                      brightblue
@@ -359,28 +358,14 @@ context default
     keyword !=                                             white
     keyword \^                                             white
     keyword \~                                             white
-    keyword DIV                                            white
+    keyword whole DIV                                      white
     keyword [                                              brightcyan
     keyword ]                                              brightcyan
-
-#   keyword {                                              brightcyan
-#   keyword }                                              brightcyan
-#   keyword whole <=>                                      white
-#   keyword whole :                                        white
-#   keyword whole {                                        white
-#   keyword whole }                                        white
-#   keyword whole ==                                       white
-#   keyword whole <=>                                      white
-#   keyword whole <>                                       white
-#   keyword whole !=                                       white
-#   keyword whole <=                                       white
-#   keyword whole <                                        white
-#   keyword whole >=                                       white
-#   keyword whole >                                        white
-#   keyword whole &                                        white
-#   keyword whole ||                                       white
-#   keyword whole ?                                        white
-#   keyword whole $                                        white
+    keyword {                                              brightcyan
+    keyword }                                              brightcyan
+    keyword :                                              white
+    keyword &                                              white
+    keyword ?                                              white
 
 # Mathematical Functions
     keyword whole round                                    yellow
@@ -431,8 +416,8 @@ context default
     keyword whole sort_array                               yellow
 
 # Type Conversion
-#   binary 
-#   cast
+#   binary # keyword
+#   cast   # keyword
 
 # Date Functions
     keyword whole from_unixtime                            yellow
@@ -598,15 +583,15 @@ context default
 
 # Variables
     # oozie variables
-    keyword whole ${+}                                          brightgreen
+    keyword whole ${+}                                     brightgreen
     # hive variables
-    keyword whole ${hiveconf:\[a-z0-9_\]+}                      magenta
+    keyword whole ${hiveconf:+}                            magenta
 
 
 # Hive options
-    keyword wholeright hive.+.+.+                               red
-    keyword wholeright tez.+.+                                  red
-    keyword wholeright mapreduce.+.+                            red
+    keyword wholeright hive.+.+.+                          red
+    keyword wholeright tez.+.+                             red
+    keyword wholeright mapreduce.+.+                       red
 
 # Literals
     # float
@@ -634,9 +619,9 @@ context exclusive /\* \*/ brown
 context ' ' green
     keyword \\' brightgreen
     # oozie variables
-    keyword whole ${\[abcdefghijklmnopqrstuvwxyz0123456789_\]}            brightgreen
+    keyword whole ${+}                                         brightgreen
     # hive variables
-    keyword whole ${hiveconf:\[abcdefghijklmnopqrstuvwxyz0123456789_\]}   magenta
+    keyword whole ${hiveconf:+}                                magenta
 
 context " " red
     keyword \\" brightred
