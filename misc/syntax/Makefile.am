@@ -35,6 +35,7 @@ SYNTAXFILES =			\
 	glsl.syntax		\
 	go.syntax		\
 	haskell.syntax		\
+	hive.syntax		\
 	html.syntax		\
 	idl.syntax		\
 	ini.syntax		\
