@@ -151,6 +151,9 @@ include octave.syntax
 file ..\*\\.(sql|SQL)$ SQL\sProgram
 include sql.syntax
 
+file ..\*\\.(hql|HQL)$ SQL\sProgram
+include hive.syntax
+
 file ..\*\\.(spec|spec\\.in)$ RPM\sSpecfile
 include spec.syntax
 
