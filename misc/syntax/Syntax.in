@@ -25,7 +25,7 @@
 file [Ss]yntax$ Syntax\sHighlighting\sdefinitions ^#\ssyntax\srules\sversion\s
 include syntax.syntax
 
-file filehighlight.ini$ File\sHighlighting\sdefinitions ^#\sfile\shighlight\srules\sversion\s
+file filehighlight\\.ini$ File\sHighlighting\sdefinitions ^#\sfile\shighlight\srules\sversion\s
 include filehighlight.syntax
 
 file ..\*\\.e$ Eiffel\sSource\sFile
@@ -40,28 +40,28 @@ include lsm.syntax
 file .\*(bash_completion|profile|\\.(sh|bash_login|bash_profile|bash_logout|bash_aliases|bash_exports|bash_history|bashrc|profile|zlogin|zlogout|zprofile|zshenv|zshrc))$ Shell\sScript ^#!\s\*/(.\*/|usr/bin/env\s)([a-z]?|ba|pdk)sh
 include sh.syntax
 
-file ..\*\\.(pl|PL|pm|PM|psgi|PSGI|t)$ Perl\sProgram ^#!.\*([\s/]perl|@PERL@)
+file ..\*\\.((?i:pl|pm|psgi)|t)$ Perl\sProgram ^#!.\*([\s/]perl|@PERL@)
 include perl.syntax
 
-file ..\*\\.(py|PY)$ Python\sProgram ^#!.\*([\s/]python|@PYTHON@)
+file ..\*\\.(?i:py)$ Python\sProgram ^#!.\*([\s/]python|@PYTHON@)
 include python.syntax
 
 file ..\*\\.(pyx|pxd|pxi)$ Cython\sor\sPyrex\sProgram
 include cython.syntax
 
-file ..\*\\.(rb|RB)$ Ruby\sProgram ^#!.\*([\s/]ruby|@RUBY@)
+file ..\*\\.(?:rb)$ Ruby\sProgram ^#!.\*([\s/]ruby|@RUBY@)
 include ruby.syntax
 
 file ..\*\\.(man|[0-9n]|[0-9](x|ncurses|ssl|p|pm|menu|form|vga|t|td))$ NROFF\sSource
 include nroff.syntax
 
-file ..\*\\.(htm|html|HTM|HTML)$ HTML\sFile
+file ..\*\\.(?i:html?)$ HTML\sFile
 include html.syntax
 
-file ..\*\\.(xml|XML|xsd|XSD|xslt?|XSLT?|dtd|DTD|qpg|qpg.in)$ XML\sdocument (\\?xml\sversion|!DOCTYPE\s)
+file ..\*\\.((?i:xml|xsd|xslt?|dtd)|qpg|qpg\\.in)$ XML\sdocument (\\?xml\sversion|!DOCTYPE\s)
 include xml.syntax
 
-file ..\*\\.(tt|TT)$ Template::Toolkit\sFile
+file ..\*\\.(?i:tt)$ Template::Toolkit\sFile
 include tt.syntax
 
 file (.\*[Mm]akefile[\\\.A-Za-z0-9]\*|..\*\\.mk|..\*\\.mak|Kbuild)$ Makefile
@@ -70,67 +70,67 @@ include makefile.syntax
 file (CMakeLists.txt|.\*.cmake)$ CMake
 include cmake.syntax
 
-file ..\*\\.(pas|PAS|dpr|DPR|inc|INC)$ Pascal\sProgram
+file ..\*\\.(?i:pas|dpr|inc)$ Pascal\sProgram
 include pascal.syntax
 
-file ..\*\\.(ada|adb|ads|ADA|ADB|ADS)$ Ada\sProgram
+file ..\*\\.(?i:ada|adb|ads)$ Ada\sProgram
 include ada95.syntax
 
-file ..\*\\.(tcl|itcl|TCL|ITCL)$ Tcl\sProgram
+file ..\*\\.(?i:i?tcl)$ Tcl\sProgram
 include tcl.syntax
 
-file ..\*\\.(sl|SL)$ S-Lang\sProgram
+file ..\*\\.(?i:sl)$ S-Lang\sProgram
 include slang.syntax
 
 file ..\*\\.tex$ LaTeX\s2.09\sDocument
 include latex.syntax
 
-file ..\*\\.(texi|texinfo|TEXI|TEXINFO)$ Texinfo\sDocument
+file ..\*\\.(?i:texi|texinfo)$ Texinfo\sDocument
 include texinfo.syntax
 
 file ..\*\\.c$ C\sProgram
 include c.syntax
 
-file ..\*\\.([hC]|CC|cxx|cc|cpp|CPP|CXX|hxx|hh|hpp|HPP|h\\.in)$ C/C\+\+\sProgram
+file ..\*\\.([hC]|(?i:cxx|cc|cpp|hpp|hxx|hh)|[Hh]\\.in)$ C/C\+\+\sProgram
 include cxx.syntax
 
 file ..\*\\.d$ D\sProgram
 include d.syntax
 
-file ..\*\\.[fF]$ Fortran\sProgram
+file ..\*\\.(?i:f)$ Fortran\sProgram
 include fortran.syntax
 
 file ..\*\\.go$ GoLang\sProgram
 include go.syntax
 
-file ..\*\\.[fF]9[05]$ Freeform\sFortran\sProgram
+file ..\*\\.(?i:f)9[05]$ Freeform\sFortran\sProgram
 include f90.syntax
 
 file ..\*\\.i$ SWIG\sSource
 include swig.syntax
 
-file ..\*\\.(php|PHP)[0-9]?$ PHP\sProgram
+file ..\*\\.(?i:php)[0-9]?$ PHP\sProgram
 include php.syntax
 
 file ..\*\\.ij[xs]$ J\sFile
 include j.syntax
 
-file ..\*\\.(java|JAVA|Java|jav|groovy|GROOVY|Groovy)$ Java\sProgram
+file ..\*\\.(?i:java?|groovy)$ Java\sProgram
 include java.syntax
 
 file ..\*\\.(properties|config)$ Java\sFile
 include properties.syntax
 
-file ..\*\\.(cs|CS)$ C\#\sProgram
+file ..\*\\.(?i:cs)$ C\#\sProgram
 include cs.syntax
 
-file ..\*\\.(js|JS)$ JavaScript\sProgram ^#!.\*[\s/](node|nodejs)\\b
+file ..\*\\.(?i:js)$ JavaScript\sProgram ^#!.\*[\s/](node|nodejs)\\b
 include js.syntax
 
-file ..\*\\.(ts|TS)$ TypeScript\sProgram
+file ..\*\\.(?i:ts)$ TypeScript\sProgram
 include ts.syntax
 
-file ..\*\\.(as|AS)$ ActionScript\sProgram
+file ..\*\\.(?i:as)$ ActionScript\sProgram
 include as.syntax
 
 file ..\*\\.(asax|aspx|ascx|asmx|ashx)$ ASPX\sFile
@@ -148,7 +148,7 @@ include ml.syntax
 file ..\*\\.m$ Matlab\sor\sOctave\sFile
 include octave.syntax
 
-file ..\*\\.(sql|SQL)$ SQL\sProgram
+file ..\*\\.(?i:sql)$ SQL\sProgram
 include sql.syntax
 
 file ..\*\\.(hql|HQL)$ HiveQL\sProgram
@@ -163,7 +163,7 @@ include yum-repo.syntax
 file ..\*\\.awk$ AWK\sFile
 include awk.syntax
 
-file ..\*\\.(css|qss|CSS|QSS)$ CSS\sFile
+file ..\*\\.(?i:css|qss)$ CSS\sFile
 include css.syntax
 
 file .\*ChangeLog[\\\.A-Za-z0-9_]\*$ GNU\sChangeLog\sFile
@@ -178,22 +178,22 @@ include dos.syntax
 file ..\*\\.(po|pot|pox)$ PO\sFile
 include po.syntax
 
-file ..\*\\.([Aa][Ss][Mm]|s|S)$ ASM\sProgram
+file ..\*\\.(?i:asm|s)$ ASM\sProgram
 include assembler.syntax
 
-file ..\*\\.([Pp][Oo][Vv])$ POV\sScript
+file ..\*\\.(?i:pov)$ POV\sScript
 include povray.syntax
 
 file .\*\\.(ebuild|eclass)$ Gentoo\sEbuild
 include ebuild.syntax
 
-file ..\*\\.([lL][uU][aA])$ Lua\sProgram ^#!.\*[\s/]lua
+file ..\*\\.(?i:lua)$ Lua\sProgram ^#!.\*[\s/]lua
 include lua.syntax
 
-file ..\*\\.([iI][dD][lL])$ CORBA\sIDL
+file ..\*\\.(?i:idl)$ CORBA\sIDL
 include idl.syntax
 
-file ..\*\\.([iI][nN][iI])$ INI\sFile
+file ..\*\\.(?i:ini)$ INI\sFile
 include ini.syntax
 
 file Don_t_match_me Mail\sfolder ^(From|Return-(P|p)ath:|From:|Date:)\s
@@ -220,19 +220,19 @@ include debian-changelog.syntax
 file ..\*\\.dsc$ Debian\sdescriptiom\sfile
 include debian-description.syntax
 
-file ..\*\\.([hH][sS][cC]?)$ Haskell\sprogram
+file ..\*\\.(?i:hsc?)$ Haskell\sprogram
 include haskell.syntax
 
-file ..\*\\.([cC][aA][bB][aA][lL])$ Cabal\sconfig\sfile
+file ..\*\\.(?i:cabal)$ Cabal\sconfig\sfile
 include cabal.syntax
 
-file ..\*\\.[nN]$ Nemerle\sProgram
+file ..\*\\.(?i:n)$ Nemerle\sProgram
 include nemerle.syntax
 
-file ..\*\\.[vV]$ Verilog\sDevice\sDescription
+file ..\*\\.(?i:v)$ Verilog\sDevice\sDescription
 include verilog.syntax
 
-file ..\*\\.(hdl|vhd|vdhl|HDL|VHD|VHDL)$ VHDL\sDevice\sDescription
+file ..\*\\.(?i:hdl|vhdl?)$ VHDL\sDevice\sDescription
 include vhdl.syntax
 
 file ..\*\\.erl$ Erlang\sProgram ^(-module\\(|#!.*escript)
@@ -259,10 +259,10 @@ include yxx.syntax
 file ..\*\\.dlink\\.sw$ D-Link\sSwitch\sCommands
 include dlink.syntax
 
-file ..\*\\.([jJ][aA][lL][tT]?)$ Jal\ssource
+file ..\*\\.(?i:jalt?)$ Jal\ssource
 include jal.syntax
 
-file ..\*\\.([lL][kK][rR])$ PIC\slinker\sscript\sfile
+file ..\*\\.(?i:lkr)$ PIC\slinker\sscript\sfile
 include lkr.syntax
 
 file ..\*\\.pp$ Puppet\smanifest\sfile
@@ -277,7 +277,7 @@ include cuda.syntax
 file ..\*\\.cl$ OpenCL\sProgram
 include opencl.syntax
 
-file ..\*\\.(ya?ml|YML)$ YAML\sFile
+file ..\*\\.(?i:ya?ml)$ YAML\sFile
 include yaml.syntax
 
 file .\*\\.osl$ OSL\sProgram
