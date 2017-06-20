@@ -73,7 +73,7 @@ include cmake.syntax
 file ..\*\\.(?i:pas|dpr|inc)$ Pascal\sProgram
 include pascal.syntax
 
-file ..\*\\.(?i:ada|adb|ads)$ Ada\sProgram
+file ..\*\\.(?i:ad[abs])$ Ada\sProgram
 include ada95.syntax
 
 file ..\*\\.(?i:i?tcl)$ Tcl\sProgram
@@ -133,7 +133,7 @@ include ts.syntax
 file ..\*\\.(?i:as)$ ActionScript\sProgram
 include as.syntax
 
-file ..\*\\.(asax|aspx|ascx|asmx|ashx)$ ASPX\sFile
+file ..\*\\.(as[achmp]x)$ ASPX\sFile
 include aspx.syntax
 
 file ..\*\\.st$ SmallTalk\sProgram
@@ -142,7 +142,7 @@ include smalltalk.syntax
 file ..\*\\.(lisp|lsp|el)$ Lisp\sProgram
 include lisp.syntax
 
-file ..\*\\.(ml|mli|mly|mll|mlp)$ ML\sProgram
+file ..\*\\.(ml[ilpy]?)$ ML\sProgram
 include ml.syntax
 
 file ..\*\\.m$ Matlab\sor\sOctave\sFile
@@ -163,7 +163,7 @@ include yum-repo.syntax
 file ..\*\\.awk$ AWK\sFile
 include awk.syntax
 
-file ..\*\\.(?i:css|qss)$ CSS\sFile
+file ..\*\\.(?i:[cq]ss)$ CSS\sFile
 include css.syntax
 
 file .\*ChangeLog[\\\.A-Za-z0-9_]\*$ GNU\sChangeLog\sFile
