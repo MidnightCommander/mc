@@ -35,7 +35,6 @@
 
 #include <config.h>
 
-#include <limits.h>
 #include <sys/types.h>
 
 #include "lib/global.h"
@@ -54,9 +53,6 @@
 #include "internal.h"
 
 /*** global variables ****************************************************************************/
-
-#define OFF_T_BITWIDTH (unsigned int) (sizeof (off_t) * CHAR_BIT - 1)
-const off_t OFFSETTYPE_MAX = ((off_t) 1 << (OFF_T_BITWIDTH - 1)) - 1;
 
 /*** file scope macro definitions ****************************************************************/
 
