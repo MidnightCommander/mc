@@ -359,11 +359,11 @@ do_link (link_type_t link_type, const char *fname)
         src = g_strdup_printf (_("Link %s to:"), str_trunc (fname, 46));
         dest =
             input_expand_dialog (_("Link"), src, MC_HISTORY_FM_LINK, "", INPUT_COMPLETE_FILENAMES);
-        if (!dest || !*dest)
+        if (dest == NULL || *dest == '\0')
             goto cleanup;
         save_cwds_stat ();
         dest_vpath = vfs_path_from_str (dest);
-        if (-1 == mc_link (fname_vpath, dest_vpath))
+        if (mc_link (fname_vpath, dest_vpath) == -1)
             message (D_ERROR, MSG_ERROR, _("link: %s"), unix_error_string (errno));
     }
     else
@@ -393,7 +393,7 @@ do_link (link_type_t link_type, const char *fname)
         vfs_path_free (d);
         vfs_path_free (s);
 
-        if (!dest || !*dest || !src || !*src)
+        if (dest == NULL || *dest == '\0' || src == NULL || *src == '\0')
             goto cleanup;
         save_cwds_stat ();
 
