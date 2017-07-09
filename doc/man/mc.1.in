@@ -1440,7 +1440,7 @@ delete and so on). To return to the normal file listing, change directory
 to "..".
 .PP
 The 'Enable ignore directories' checkbox and input field below it
-allow to set up the list of directories that should be skip during the search
+allow one to set up the list of directories that should be skip during the search
 files (for example, you may want to avoid searches on a CD\-ROM or on a NFS
 directory that is mounted across a slow link). List components must be separated
 with a colon, here is an example:
@@ -2003,10 +2003,10 @@ If enabled, main menu of Midnight Commander is always visible on the top row
 of screen above panels. Enabled by default.
 .PP
 .I Command prompt.
-If enabled, command line is avalable. Enabled by default.
+If enabled, command line is available. Enabled by default.
 .PP
 .I Keybar visible.
-If enabled, 10 lables associated with F1\-F10 keys are located at the bottom
+If enabled, 10 labels associated with F1\-F10 keys are located at the bottom
 row of screen. Enabled by default.
 .PP
 .I Hintbar visible.
