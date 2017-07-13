@@ -241,7 +241,8 @@ y       Gzip or gunzip current file
         case %f in
             *.gz|*.[zZ]) DECOMP=-d;;
         esac
-        gzip "$DECOMP" -v %f
+        # Do *not* add quotes around $DECOMP!
+        gzip $DECOMP -v %f
 
 + t t
 Y       Gzip or gunzip tagged files
@@ -250,7 +251,7 @@ Y       Gzip or gunzip tagged files
             case "$i" in
                 *.gz|*.[zZ]) DECOMP=-d;;
             esac
-            gzip "$DECOMP" -v "$i"
+            gzip $DECOMP -v "$i"
         done
 
 + ! t t
@@ -259,7 +260,7 @@ b       Bzip2 or bunzip2 current file
         case %f in
             *.bz2) DECOMP=-d;;
         esac
-        bzip2 "$DECOMP" -v %f
+        bzip2 $DECOMP -v %f
 
 + t t
 B       Bzip2 or bunzip2 tagged files
@@ -268,7 +269,7 @@ B       Bzip2 or bunzip2 tagged files
             case "$i" in
                 *.bz2) DECOMP=-d;;
             esac
-            bzip2 "$DECOMP" -v "$i"
+            bzip2 $DECOMP -v "$i"
         done
 
 + f \.tar.gz$ | f \.tgz$ | f \.tpz$ | f \.tar.Z$ | f \.tar.z$ | f \.tar.bz2$ | f \.tar.F$ & t r & ! t t
