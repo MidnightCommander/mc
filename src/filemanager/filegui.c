@@ -890,12 +890,12 @@ file_progress_show (file_op_context_t * ctx, off_t done, off_t total,
 
     if (total == 0)
     {
-        gauge_show (ui->progress_file_gauge, 0);
+        gauge_show (ui->progress_file_gauge, FALSE);
         return;
     }
 
     gauge_set_value (ui->progress_file_gauge, 1024, (int) (1024 * done / total));
-    gauge_show (ui->progress_file_gauge, 1);
+    gauge_show (ui->progress_file_gauge, TRUE);
 
     if (!force_update)
         return;
@@ -964,12 +964,12 @@ file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ct
     if (ui->progress_total_gauge != NULL)
     {
         if (ctx->progress_bytes == 0)
-            gauge_show (ui->progress_total_gauge, 0);
+            gauge_show (ui->progress_total_gauge, FALSE);
         else
         {
             gauge_set_value (ui->progress_total_gauge, 1024,
                              (int) (1024 * copied_bytes / ctx->progress_bytes));
-            gauge_show (ui->progress_total_gauge, 1);
+            gauge_show (ui->progress_total_gauge, TRUE);
         }
     }
 
