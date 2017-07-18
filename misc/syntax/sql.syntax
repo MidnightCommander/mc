@@ -44,6 +44,7 @@ context default
     keyword whole collate yellow
     keyword whole collation yellow
     keyword whole column yellow
+    keyword whole comment yellow
     keyword whole commit yellow
     keyword whole compile yellow
     keyword whole connect yellow
@@ -56,6 +57,7 @@ context default
     keyword whole corresponding yellow
     keyword whole create yellow
     keyword whole cross yellow
+    keyword whole count yellow
     keyword whole current yellow
     keyword whole current_date yellow
     keyword whole current_time yellow
@@ -84,6 +86,7 @@ context default
     keyword whole double yellow
     keyword whole drop yellow
     keyword whole else yellow
+    keyword whole elsif yellow
     keyword whole encoding yellow
     keyword whole end yellow
     keyword whole end-exec yellow
@@ -106,6 +109,7 @@ context default
     keyword whole found yellow
     keyword whole from yellow
     keyword whole full yellow
+    keyword whole function yellow
     keyword whole get yellow
     keyword whole global yellow
     keyword whole go yellow
@@ -147,7 +151,9 @@ context default
     keyword whole longblob yellow
     keyword whole longtext yellow
     keyword whole loop yellow
+    keyword whole min yellow
     keyword whole match yellow
+    keyword whole max yellow
     keyword whole mediumblob yellow
     keyword whole mediumint yellow
     keyword whole mediumtext yellow
@@ -166,6 +172,7 @@ context default
     keyword whole not yellow
     keyword whole null yellow
     keyword whole nullif yellow
+    keyword whole number yellow
     keyword whole numeric yellow
     keyword whole octet_length yellow
     keyword whole of yellow
@@ -177,6 +184,7 @@ context default
     keyword whole option yellow
     keyword whole or yellow
     keyword whole order yellow
+    keyword whole out yellow
     keyword whole outer yellow
     keyword whole output yellow
     keyword whole overlaps yellow
@@ -193,16 +201,19 @@ context default
     keyword whole privileges yellow
     keyword whole procedure yellow
     keyword whole public yellow
+    keyword whole raise yellow
     keyword whole read yellow
     keyword whole real yellow
     keyword whole rebuild yellow
     keyword whole references yellow
     keyword whole relative yellow
+    keyword whole rename yellow
     keyword whole replace yellow
     keyword whole restrict yellow
     keyword whole revoke yellow
     keyword whole right yellow
     keyword whole rollback yellow
+    keyword whole round yellow
     keyword whole rows yellow
     keyword whole schema yellow
     keyword whole scroll yellow
@@ -222,6 +233,7 @@ context default
     keyword whole sqlstate yellow
     keyword whole sqlwarning yellow
     keyword whole substring yellow
+    keyword whole sum yellow
     keyword whole system_user yellow
     keyword whole table yellow
     keyword whole tablespace yellow
@@ -321,6 +333,17 @@ context default
     keyword maxvalue white
     keyword minvalue white
     keyword start white
+
+# Oracle specific
+    keyword dual white
+    keyword whole lag yellow
+    keyword whole lead yellow
+    keyword whole nvl yellow
+    keyword whole over yellow
+    keyword whole partition yellow
+    keyword whole pragma yellow
+    keyword whole varchar2 yellow
+    keyword whole sys_refcursor yellow
 
 # MySQL comment
 context linestart # \n brown
