@@ -35,6 +35,9 @@ context default
     keyword whole include brightmagenta
     keyword whole include_once brightmagenta
     keyword whole new brightmagenta
+    keyword whole private brightmagenta
+    keyword whole protected brightmagenta
+    keyword whole public brightmagenta
     keyword whole require brightmagenta
     keyword whole require_once brightmagenta
     keyword whole return brightmagenta
