@@ -1080,6 +1080,25 @@ str_utf8_normalize (const char *text)
     const char *start;
     const char *end;
 
+    /* g_utf8_normalize() is a heavyweight function, that converts UTF-8 into UCS-4,
+     * does the normalization and then converts UCS-4 back into UTF-8.
+     * Since file names are composed of ASCII characters in most cases, we can speed up
+     * utf8 normalization by checking if the heavyweight Unicode normalization is actually
+     * needed. Normalization of ASCII string is no-op.
+     */
+
+    /* find out whether text is ASCII only */
+    for (end = text; *end != '\0'; end++)
+        if ((*end & 0x80) != 0)
+        {
+            /* found 2nd byte of utf8-encoded symbol */
+            break;
+        }
+
+    /* if text is ASCII-only, return copy, normalize otherwise */
+    if (*end == '\0')
+        return g_strndup (text, end - text);
+
     fixed = g_string_sized_new (4);
 
     start = text;
