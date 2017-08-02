@@ -934,6 +934,24 @@ copy_file_file_display_progress (file_op_total_context_t * tctx, file_op_context
 
 /* --------------------------------------------------------------------------------------------- */
 
+static gboolean
+try_remove_file (file_op_context_t * ctx, const vfs_path_t * vpath, FileProgressStatus * status)
+{
+    while (mc_unlink (vpath) != 0 && !ctx->skip_all)
+    {
+        *status = file_error (_("Cannot remove file \"%s\"\n%s"), vfs_path_as_str (vpath));
+        if (*status == FILE_RETRY)
+            continue;
+        if (*status == FILE_SKIPALL)
+            ctx->skip_all = TRUE;
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /* {{{ Move routines */
 static FileProgressStatus
 move_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx, const char *s,
@@ -1057,15 +1075,8 @@ move_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx, const c
     mc_refresh ();
 
   retry_src_remove:
-    if (mc_unlink (src_vpath) != 0 && !ctx->skip_all)
-    {
-        return_status = file_error (_("Cannot remove file \"%s\"\n%s"), s);
-        if (return_status == FILE_RETRY)
-            goto retry_src_remove;
-        if (return_status == FILE_SKIPALL)
-            ctx->skip_all = TRUE;
+    if (!try_remove_file (ctx, src_vpath, &return_status))
         goto ret;
-    }
 
     if (!copy_done)
         return_status = progress_update_one (tctx, ctx, src_stats.st_size);
@@ -1087,6 +1098,7 @@ static FileProgressStatus
 erase_file (file_op_total_context_t * tctx, file_op_context_t * ctx, const vfs_path_t * vpath)
 {
     struct stat buf;
+    FileProgressStatus return_status;
 
     file_progress_show_deleting (ctx, vfs_path_as_str (vpath), &tctx->progress_count);
     file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
@@ -1101,19 +1113,8 @@ erase_file (file_op_total_context_t * tctx, file_op_context_t * ctx, const vfs_p
         buf.st_size = 0;
     }
 
-    while (mc_unlink (vpath) != 0 && !ctx->skip_all)
-    {
-        int return_status;
-
-        return_status = file_error (_("Cannot delete file \"%s\"\n%s"), vfs_path_as_str (vpath));
-        if (return_status == FILE_ABORT)
-            return return_status;
-        if (return_status == FILE_RETRY)
-            continue;
-        if (return_status == FILE_SKIPALL)
-            ctx->skip_all = TRUE;
-        break;
-    }
+    if (!try_remove_file (ctx, vpath, &return_status) && return_status == FILE_ABORT)
+        return FILE_ABORT;
 
     if (tctx->progress_count == 0)
         return FILE_CONT;
