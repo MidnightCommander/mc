@@ -1109,6 +1109,25 @@ erase_file (file_op_total_context_t * tctx, file_op_context_t * ctx, const vfs_p
 
 /* --------------------------------------------------------------------------------------------- */
 
+static FileProgressStatus
+try_erase_dir (file_op_context_t * ctx, const char *dir)
+{
+    FileProgressStatus return_status = FILE_CONT;
+
+    while (my_rmdir (dir) != 0 && !ctx->skip_all)
+    {
+        return_status = file_error (_("Cannot remove directory \"%s\"\n%s"), dir);
+        if (return_status == FILE_SKIPALL)
+            ctx->skip_all = TRUE;
+        if (return_status != FILE_RETRY)
+            break;
+    }
+
+    return return_status;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /**
   Recursive remove of files
   abort->cancel stack
@@ -1162,19 +1181,7 @@ recursive_erase (file_op_total_context_t * tctx, file_op_context_t * ctx, const 
 
     mc_refresh ();
 
-    while (my_rmdir (s) != 0 && !ctx->skip_all)
-    {
-        return_status = file_error (_("Cannot remove directory \"%s\"\n%s"), s);
-        if (return_status == FILE_RETRY)
-            continue;
-        if (return_status == FILE_ABORT)
-            break;
-        if (return_status == FILE_SKIPALL)
-            ctx->skip_all = TRUE;
-        break;
-    }
-
-    return return_status;
+    return try_erase_dir (ctx, s);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1208,7 +1215,6 @@ check_dir_is_empty (const vfs_path_t * vpath)
 static FileProgressStatus
 erase_dir_iff_empty (file_op_context_t * ctx, const vfs_path_t * vpath, size_t count)
 {
-    FileProgressStatus error = FILE_CONT;
     const char *s;
 
     s = vfs_path_as_str (vpath);
@@ -1220,19 +1226,11 @@ erase_dir_iff_empty (file_op_context_t * ctx, const vfs_path_t * vpath, size_t c
 
     mc_refresh ();
 
-    if (check_dir_is_empty (vpath) == 1)        /* not empty or error */
-    {
-        while (my_rmdir (s) != 0 && !ctx->skip_all)
-        {
-            error = file_error (_("Cannot remove directory \"%s\"\n%s"), s);
-            if (error == FILE_SKIPALL)
-                ctx->skip_all = TRUE;
-            if (error != FILE_RETRY)
-                break;
-        }
-    }
+    if (check_dir_is_empty (vpath) != 1)
+        return FILE_CONT;
 
-    return error;
+    /* not empty or error */
+    return try_erase_dir (ctx, s);
 }
 
 /* }}} */
@@ -2781,8 +2779,6 @@ move_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
 FileProgressStatus
 erase_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const vfs_path_t * s_vpath)
 {
-    FileProgressStatus error;
-
     file_progress_show_deleting (ctx, vfs_path_as_str (s_vpath), NULL);
     file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
     if (check_progress_buttons (ctx) == FILE_ABORT)
@@ -2797,23 +2793,17 @@ erase_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const vfs_pa
        we would have to check also for EIO. I hope the new way is
        fool proof. (Norbert)
      */
-    error = check_dir_is_empty (s_vpath);
-    if (error == 0)
+    if (check_dir_is_empty (s_vpath) == 0)
     {                           /* not empty */
+        FileProgressStatus error;
+
         error = query_recursive (ctx, vfs_path_as_str (s_vpath));
         if (error == FILE_CONT)
             error = recursive_erase (tctx, ctx, s_vpath);
         return error;
     }
 
-    while (my_rmdir (vfs_path_as_str (s_vpath)) == -1 && !ctx->skip_all)
-    {
-        error = file_error (_("Cannot remove directory \"%s\"\n%s"), vfs_path_as_str (s_vpath));
-        if (error != FILE_RETRY)
-            return error;
-    }
-
-    return FILE_CONT;
+    return try_erase_dir (ctx, vfs_path_as_str (s_vpath));
 }
 
 /* }}} */
