@@ -658,6 +658,23 @@ warn_same_file (const char *fmt, const char *a, const char *b)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static gboolean
+check_same_file (const char *a, const struct stat *ast, const char *b, const struct stat *bst,
+                 FileProgressStatus * status)
+{
+    if (ast->st_dev != bst->st_dev || ast->st_ino != bst->st_ino)
+        return FALSE;
+
+    if (S_ISDIR (ast->st_mode))
+        *status = warn_same_file (_("\"%s\"\nand\n\"%s\"\nare the same directory"), a, b);
+    else
+        *status = warn_same_file (_("\"%s\"\nand\n\"%s\"\nare the same file"), a, b);
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 get_times (const struct stat *sb, mc_timesbuf_t * times)
 {
@@ -960,11 +977,8 @@ move_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx, const c
 
     if (mc_lstat (dst_vpath, &dst_stats) == 0)
     {
-        if (src_stats.st_dev == dst_stats.st_dev && src_stats.st_ino == dst_stats.st_ino)
-        {
-            return_status = warn_same_file (_("\"%s\"\nand\n\"%s\"\nare the same file"), s, d);
+        if (check_same_file (s, &src_stats, d, &dst_stats, &return_status))
             goto ret;
-        }
 
         if (S_ISDIR (dst_stats.st_mode))
         {
@@ -1891,12 +1905,8 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     if (dst_exists)
     {
         /* Destination already exists */
-        if (src_stat.st_dev == dst_stat.st_dev && src_stat.st_ino == dst_stat.st_ino)
-        {
-            return_status = warn_same_file (_("\"%s\"\nand\n\"%s\"\nare the same file"),
-                                            src_path, dst_path);
+        if (check_same_file (src_path, &src_stat, dst_path, &dst_stat, &return_status))
             goto ret_fast;
-        }
 
         /* Should we replace destination? */
         if (tctx->ask_overwrite)
@@ -2656,11 +2666,9 @@ move_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
     mc_stat (src_vpath, &sbuf);
 
     dstat_ok = (mc_stat (dst_vpath, &dbuf) == 0);
-    if (dstat_ok && sbuf.st_dev == dbuf.st_dev && sbuf.st_ino == dbuf.st_ino)
-    {
-        return_status = warn_same_file (_("\"%s\"\nand\n\"%s\"\nare the same directory"), s, d);
+
+    if (dstat_ok && check_same_file (s, &sbuf, d, &dbuf, &return_status))
         goto ret_fast;
-    }
 
     if (!dstat_ok)
         ;                       /* destination doesn't exist */
