@@ -1248,6 +1248,38 @@ erase_dir_iff_empty (file_op_context_t * ctx, const vfs_path_t * vpath, size_t c
     return try_erase_dir (ctx, s);
 }
 
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+erase_dir_after_copy (file_op_total_context_t * tctx, file_op_context_t * ctx,
+                      const vfs_path_t * vpath, FileProgressStatus * status)
+{
+    if (ctx->erase_at_end)
+    {
+        /* Reset progress count before delete to avoid counting files twice */
+        tctx->progress_count = tctx->prev_progress_count;
+
+        while (erase_list != NULL && *status != FILE_ABORT)
+        {
+            struct link *lp = (struct link *) erase_list->data;
+
+            if (S_ISDIR (lp->st_mode))
+                *status = erase_dir_iff_empty (ctx, lp->src_vpath, tctx->progress_count);
+            else
+                *status = erase_file (tctx, ctx, lp->src_vpath);
+
+            erase_list = g_slist_remove (erase_list, lp);
+            free_link (lp);
+        }
+
+        /* Save progress counter before move next directory */
+        tctx->prev_progress_count = tctx->progress_count;
+    }
+
+    erase_dir_iff_empty (ctx, vpath, tctx->progress_count);
+}
+
 /* }}} */
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2749,28 +2781,8 @@ move_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
         goto ret;
 
     mc_refresh ();
-    if (ctx->erase_at_end)
-    {
-        /* Reset progress count before delete to avoid counting files twice */
-        tctx->progress_count = tctx->prev_progress_count;
 
-        while (erase_list != NULL && return_status != FILE_ABORT)
-        {
-            struct link *lp = (struct link *) erase_list->data;
-
-            if (S_ISDIR (lp->st_mode))
-                return_status = erase_dir_iff_empty (ctx, lp->src_vpath, tctx->progress_count);
-            else
-                return_status = erase_file (tctx, ctx, lp->src_vpath);
-
-            erase_list = g_slist_remove (erase_list, lp);
-            free_link (lp);
-        }
-
-        /* Save progress counter before move next directory */
-        tctx->prev_progress_count = tctx->progress_count;
-    }
-    erase_dir_iff_empty (ctx, src_vpath, tctx->progress_count);
+    erase_dir_after_copy (tctx, ctx, src_vpath, &return_status);
 
   ret:
     erase_list = free_linklist (erase_list);
