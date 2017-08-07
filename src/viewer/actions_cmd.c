@@ -692,6 +692,27 @@ mcview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
         {
             delete_hook (&select_file_hook, mcview_hook);
 
+            /*
+             * In some cases when mc startup is very slow and one panel is in quick vew mode,
+             * @view is registered in two hook lists at the same time:
+             *   mcview_callback (MSG_INIT) -> add_hook (&select_file_hook)
+             *   mcview_hook () -> add_hook (&idle_hook).
+             * If initialization of file manager is not completed yet, but user switches
+             * panel mode from qick view to another one (by pressing C-x q), the following
+             * occurs:
+             *   view hook is deleted from select_file_hook list via following call chain:
+             *      set_display_type (view_listing) -> widget_replace () ->
+             *      send_message (MSG_DESTROY) -> mcview_callback (MSG_DESTROY) ->
+             *      delete_hook (&select_file_hook);
+             *   @view object is free'd:
+             *      set_display_type (view_listing) -> g_free (old_widget);
+             *   but @view still is in idle_hook list and tried to be executed:
+             *      frontend_dlg_run () -> execute_hooks (idle_hook).
+             * Thus here we have access to free'd @view object. To prevent this, remove view hook
+             * from idle_hook list.
+             */
+            delete_hook (&idle_hook, mcview_hook);
+
             if (mc_global.midnight_shutdown)
                 mcview_ok_to_quit (view);
         }
