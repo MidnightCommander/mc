@@ -663,7 +663,7 @@ panel_compute_totals (const WPanel * panel, dirsize_status_msg_t * sm, size_t * 
 static FileProgressStatus
 panel_operate_init_totals (const WPanel * panel, const vfs_path_t * source,
                            const struct stat *source_stat, file_op_context_t * ctx,
-                           filegui_dialog_type_t dialog_type)
+                           gboolean compute_totals, filegui_dialog_type_t dialog_type)
 {
     FileProgressStatus status;
 
@@ -672,7 +672,7 @@ panel_operate_init_totals (const WPanel * panel, const vfs_path_t * source,
         return FILE_CONT;
 #endif
 
-    if (verbose && file_op_compute_totals)
+    if (verbose && compute_totals)
     {
         dirsize_status_msg_t dsm;
 
@@ -1211,7 +1211,8 @@ move_file_file (const WPanel * panel, file_op_total_context_t * tctx, file_op_co
         /* In case of single file, calculate totals. In case of many files,
            totals are calcuated already. */
         return_status =
-            panel_operate_init_totals (panel, src_vpath, &src_stats, ctx, FILEGUI_DIALOG_ONE_ITEM);
+            panel_operate_init_totals (panel, src_vpath, &src_stats, ctx, TRUE,
+                                       FILEGUI_DIALOG_ONE_ITEM);
         if (return_status != FILE_CONT)
             goto ret;
     }
@@ -1562,7 +1563,8 @@ do_move_dir_dir (const WPanel * panel, file_op_total_context_t * tctx, file_op_c
         /* In case of single directory, calculate totals. In case of many directories,
            totals are calcuated already. */
         return_status =
-            panel_operate_init_totals (panel, src_vpath, &sbuf, ctx, FILEGUI_DIALOG_ONE_ITEM);
+            panel_operate_init_totals (panel, src_vpath, &sbuf, ctx, FALSE,
+                                       FILEGUI_DIALOG_ONE_ITEM);
         if (return_status != FILE_CONT)
             goto ret;
     }
@@ -1877,10 +1879,19 @@ operate_single_file (const WPanel * panel, FileOperation operation, file_op_tota
         src_vpath = vfs_path_append_new (panel->cwd_vpath, src, (char *) NULL);
 
     is_file = !S_ISDIR (src_stat->st_mode);
+    /* Is link to directory? */
+    if (is_file)
+    {
+        gboolean is_link;
+
+        is_link = file_is_symlink_to_dir (src_vpath, src_stat, NULL);
+        is_file = !(is_link && ctx->follow_links);
+    }
+
 
     if (operation == OP_DELETE)
     {
-        value = panel_operate_init_totals (panel, src_vpath, src_stat, ctx, dialog_type);
+        value = panel_operate_init_totals (panel, src_vpath, src_stat, ctx, !is_file, dialog_type);
         if (value == FILE_CONT)
         {
             if (is_file)
@@ -1912,10 +1923,21 @@ operate_single_file (const WPanel * panel, FileOperation operation, file_op_tota
                 vfs_path_free (src_vpath);
                 src_vpath = vfs_path_from_str (src);
                 ctx->stat_func (src_vpath, src_stat);
-                value = panel_operate_init_totals (panel, src_vpath, src_stat, ctx, dialog_type);
+
+                value =
+                    panel_operate_init_totals (panel, src_vpath, src_stat, ctx, !is_file,
+                                               dialog_type);
                 if (value == FILE_CONT)
                 {
                     is_file = !S_ISDIR (src_stat->st_mode);
+                    /* Is link to directory? */
+                    if (is_file)
+                    {
+                        gboolean is_link;
+
+                        is_link = file_is_symlink_to_dir (src_vpath, src_stat, NULL);
+                        is_file = !(is_link && ctx->follow_links);
+                    }
 
                     if (is_file)
                         value = copy_file_file (tctx, ctx, src, dest);
@@ -3231,7 +3253,8 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
          * some directory movements can be a cross-filesystem and directory scanning is useful
          * for those directories only. */
 
-        if (panel_operate_init_totals (panel, NULL, NULL, ctx, dialog_type) == FILE_CONT)
+        if (panel_operate_init_totals (panel, NULL, NULL, ctx, file_op_compute_totals, dialog_type)
+            == FILE_CONT)
         {
             /* Loop for every file, perform the actual copy operation */
             for (i = 0; i < panel->dir.len; i++)
