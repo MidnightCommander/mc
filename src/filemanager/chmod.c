@@ -39,9 +39,9 @@
 #include "lib/strutil.h"
 #include "lib/util.h"
 #include "lib/widget.h"
-#include "lib/keybind.h"        /* CK_Cancel */
 
 #include "midnight.h"           /* current_panel */
+
 #include "chmod.h"
 
 /*** global variables ****************************************************************************/
@@ -52,23 +52,17 @@
 #define PY 2
 
 #define B_MARKED B_USER
-#define B_ALL    (B_USER + 1)
+#define B_SETALL (B_USER + 1)
 #define B_SETMRK (B_USER + 2)
 #define B_CLRMRK (B_USER + 3)
+
+#define BUTTONS      6
+#define BUTTONS_PERM 12
+#define LABELS       4
 
 /*** file scope type declarations ****************************************************************/
 
 /*** file scope variables ************************************************************************/
-
-static gboolean single_set;
-
-static gboolean mode_change, need_update, end_chmod;
-static int c_file;
-
-static mode_t and_mask, or_mask, c_stat;
-
-static WLabel *statl;
-static WGroupbox *file_gb;
 
 static struct
 {
@@ -76,35 +70,33 @@ static struct
     const char *text;
     gboolean selected;
     WCheck *check;
-} check_perm[] =
+} check_perm[BUTTONS_PERM] =
 {
     /* *INDENT-OFF* */
-    { S_ISUID, N_("set &user ID on execution"), FALSE, NULL },
+    { S_ISUID, N_("set &user ID on execution"),  FALSE, NULL },
     { S_ISGID, N_("set &group ID on execution"), FALSE, NULL },
-    { S_ISVTX, N_("stick&y bit"), FALSE, NULL },
-    { S_IRUSR, N_("&read by owner"), FALSE, NULL },
-    { S_IWUSR, N_("&write by owner"), FALSE, NULL },
-    { S_IXUSR, N_("e&xecute/search by owner"), FALSE, NULL },
-    { S_IRGRP, N_("rea&d by group"), FALSE, NULL },
-    { S_IWGRP, N_("write by grou&p"), FALSE, NULL },
-    { S_IXGRP, N_("execu&te/search by group"), FALSE, NULL },
-    { S_IROTH, N_("read &by others"), FALSE, NULL },
-    { S_IWOTH, N_("wr&ite by others"), FALSE, NULL },
-    { S_IXOTH, N_("execute/searc&h by others"), FALSE, NULL }
+    { S_ISVTX, N_("stick&y bit"),                FALSE, NULL },
+    { S_IRUSR, N_("&read by owner"),             FALSE, NULL },
+    { S_IWUSR, N_("&write by owner"),            FALSE, NULL },
+    { S_IXUSR, N_("e&xecute/search by owner"),   FALSE, NULL },
+    { S_IRGRP, N_("rea&d by group"),             FALSE, NULL },
+    { S_IWGRP, N_("write by grou&p"),            FALSE, NULL },
+    { S_IXGRP, N_("execu&te/search by group"),   FALSE, NULL },
+    { S_IROTH, N_("read &by others"),            FALSE, NULL },
+    { S_IWOTH, N_("wr&ite by others"),           FALSE, NULL },
+    { S_IXOTH, N_("execute/searc&h by others"),  FALSE, NULL }
     /* *INDENT-ON* */
 };
 
-static const int check_perm_num = G_N_ELEMENTS (check_perm);
 static int check_perm_len = 0;
 
-static const char *file_info_labels[] = {
+static const char *file_info_labels[LABELS] = {
     N_("Name:"),
     N_("Permissions (octal):"),
     N_("Owner name:"),
     N_("Group name:")
 };
 
-static const int file_info_labels_num = G_N_ELEMENTS (file_info_labels);
 static int file_info_labels_len = 0;
 
 static struct
@@ -114,19 +106,25 @@ static struct
     int y;                      /* vertical position relatively to dialog bottom boundary */
     int len;
     const char *text;
-} chmod_but[] =
+} chmod_but[BUTTONS] =
 {
     /* *INDENT-OFF* */
-    { B_ALL,    NORMAL_BUTTON, 6, 0, N_("Set &all") },
-    { B_MARKED, NORMAL_BUTTON, 6, 0, N_("&Marked all") },
-    { B_SETMRK, NORMAL_BUTTON, 5, 0, N_("S&et marked") },
+    { B_SETALL, NORMAL_BUTTON, 6, 0, N_("Set &all")      },
+    { B_MARKED, NORMAL_BUTTON, 6, 0, N_("&Marked all")   },
+    { B_SETMRK, NORMAL_BUTTON, 5, 0, N_("S&et marked")   },
     { B_CLRMRK, NORMAL_BUTTON, 5, 0, N_("C&lear marked") },
-    { B_ENTER, DEFPUSH_BUTTON, 3, 0, N_("&Set") },
-    { B_CANCEL, NORMAL_BUTTON, 3, 0, N_("&Cancel") }
+    { B_ENTER, DEFPUSH_BUTTON, 3, 0, N_("&Set")          },
+    { B_CANCEL, NORMAL_BUTTON, 3, 0, N_("&Cancel")       }
     /* *INDENT-ON* */
 };
 
-static const int chmod_but_num = G_N_ELEMENTS (chmod_but);
+static gboolean mode_change;
+static int current_file;
+
+static mode_t and_mask, or_mask, ch_mode;
+
+static WLabel *statl;
+static WGroupbox *file_gb;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -144,17 +142,17 @@ chmod_i18n (void)
     i18n = TRUE;
 
 #ifdef ENABLE_NLS
-    for (i = 0; i < check_perm_num; i++)
+    for (i = 0; i < BUTTONS_PERM; i++)
         check_perm[i].text = _(check_perm[i].text);
 
-    for (i = 0; i < file_info_labels_num; i++)
+    for (i = 0; i < LABELS; i++)
         file_info_labels[i] = _(file_info_labels[i]);
 
-    for (i = 0; i < chmod_but_num; i++)
+    for (i = 0; i < BUTTONS; i++)
         chmod_but[i].text = _(chmod_but[i].text);
 #endif /* ENABLE_NLS */
 
-    for (i = 0; i < check_perm_num; i++)
+    for (i = 0; i < BUTTONS_PERM; i++)
     {
         len = str_term_width1 (check_perm[i].text);
         check_perm_len = MAX (check_perm_len, len);
@@ -162,13 +160,13 @@ chmod_i18n (void)
 
     check_perm_len += 1 + 3 + 1;        /* mark, [x] and space */
 
-    for (i = 0; i < file_info_labels_num; i++)
+    for (i = 0; i < LABELS; i++)
     {
         len = str_term_width1 (file_info_labels[i]) + 2;        /* spaces around */
         file_info_labels_len = MAX (file_info_labels_len, len);
     }
 
-    for (i = 0; i < chmod_but_num; i++)
+    for (i = 0; i < BUTTONS; i++)
     {
         chmod_but[i].len = str_term_width1 (chmod_but[i].text) + 3;     /* [], spaces and w/o & */
         if (chmod_but[i].flags == DEFPUSH_BUTTON)
@@ -220,22 +218,26 @@ chmod_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
     switch (msg)
     {
+    case MSG_DRAW:
+        chmod_refresh (h);
+        return MSG_HANDLED;
+
     case MSG_NOTIFY:
         {
             /* handle checkboxes */
             int i;
 
             /* whether notification was sent by checkbox? */
-            for (i = 0; i < check_perm_num; i++)
+            for (i = 0; i < BUTTONS_PERM; i++)
                 if (sender == WIDGET (check_perm[i].check))
                     break;
 
-            if (i < check_perm_num)
+            if (i < BUTTONS_PERM)
             {
                 char buffer[BUF_TINY];
 
-                c_stat ^= check_perm[i].mode;
-                g_snprintf (buffer, sizeof (buffer), "%o", (unsigned int) c_stat);
+                ch_mode ^= check_perm[i].mode;
+                g_snprintf (buffer, sizeof (buffer), "%o", (unsigned int) ch_mode);
                 label_set_text (statl, buffer);
                 chmod_toggle_select (h, i);
                 mode_change = TRUE;
@@ -252,11 +254,11 @@ chmod_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             unsigned long id;
 
             id = dlg_get_current_widget_id (h);
-            for (i = 0; i < check_perm_num; i++)
+            for (i = 0; i < BUTTONS_PERM; i++)
                 if (id == WIDGET (check_perm[i].check)->id)
                     break;
 
-            if (i < check_perm_num)
+            if (i < BUTTONS_PERM)
             {
                 chmod_toggle_select (h, i);
                 if (parm == KEY_IC)
@@ -266,10 +268,6 @@ chmod_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         }
         return MSG_NOT_HANDLED;
 
-    case MSG_DRAW:
-        chmod_refresh (h);
-        return MSG_HANDLED;
-
     default:
         return dlg_default_callback (w, sender, msg, parm, data);
     }
@@ -278,8 +276,9 @@ chmod_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 /* --------------------------------------------------------------------------------------------- */
 
 static WDialog *
-init_chmod (const char *fname, const struct stat *sf_stat)
+chmod_init (const char *fname, const struct stat *sf_stat)
 {
+    gboolean single_set;
     WDialog *ch_dlg;
     int lines, cols;
     int i, y;
@@ -287,6 +286,8 @@ init_chmod (const char *fname, const struct stat *sf_stat)
     int file_gb_len;
     const char *c_fname, *c_fown, *c_fgrp;
     char buffer[BUF_TINY];
+
+    mode_change = FALSE;
 
     single_set = (current_panel->marked < 2);
     perm_gb_len = check_perm_len + 2;
@@ -308,16 +309,16 @@ init_chmod (const char *fname, const struct stat *sf_stat)
         dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors,
                     chmod_callback, NULL, "[Chmod]", _("Chmod command"));
 
-    add_widget (ch_dlg, groupbox_new (PY, PX, check_perm_num + 2, perm_gb_len, _("Permission")));
+    add_widget (ch_dlg, groupbox_new (PY, PX, BUTTONS_PERM + 2, perm_gb_len, _("Permission")));
 
-    for (i = 0; i < check_perm_num; i++)
+    for (i = 0; i < BUTTONS_PERM; i++)
     {
-        check_perm[i].check = check_new (PY + i + 1, PX + 2, (c_stat & check_perm[i].mode) != 0,
+        check_perm[i].check = check_new (PY + i + 1, PX + 2, (ch_mode & check_perm[i].mode) != 0,
                                          check_perm[i].text);
         add_widget (ch_dlg, check_perm[i].check);
     }
 
-    file_gb = groupbox_new (PY, PX + perm_gb_len + 1, check_perm_num + 2, file_gb_len, _("File"));
+    file_gb = groupbox_new (PY, PX + perm_gb_len + 1, BUTTONS_PERM + 2, file_gb_len, _("File"));
     add_widget (ch_dlg, file_gb);
 
     /* Set the labels */
@@ -325,7 +326,7 @@ init_chmod (const char *fname, const struct stat *sf_stat)
     cols = PX + perm_gb_len + 3;
     c_fname = str_trunc (fname, file_gb_len - 3);
     add_widget (ch_dlg, label_new (y, cols, c_fname));
-    g_snprintf (buffer, sizeof (buffer), "%o", (unsigned int) c_stat);
+    g_snprintf (buffer, sizeof (buffer), "%o", (unsigned int) ch_mode);
     statl = label_new (y + 2, cols, buffer);
     add_widget (ch_dlg, statl);
     c_fown = str_trunc (get_owner (sf_stat->st_uid), file_gb_len - 3);
@@ -337,7 +338,7 @@ init_chmod (const char *fname, const struct stat *sf_stat)
     {
         i = 0;
         add_widget (ch_dlg, hline_new (lines - chmod_but[i].y - 1, -1, -1));
-        for (; i < chmod_but_num - 2; i++)
+        for (; i < BUTTONS - 2; i++)
         {
             y = lines - chmod_but[i].y;
             add_widget (ch_dlg,
@@ -352,7 +353,7 @@ init_chmod (const char *fname, const struct stat *sf_stat)
         }
     }
 
-    i = chmod_but_num - 2;
+    i = BUTTONS - 2;
     y = lines - chmod_but[i].y;
     add_widget (ch_dlg, hline_new (y - 1, -1, -1));
     add_widget (ch_dlg,
@@ -372,7 +373,7 @@ init_chmod (const char *fname, const struct stat *sf_stat)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-chmod_done (void)
+chmod_done (gboolean need_update)
 {
     if (need_update)
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
@@ -381,13 +382,13 @@ chmod_done (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static char *
+static const char *
 next_file (void)
 {
-    while (!current_panel->dir.list[c_file].f.marked)
-        c_file++;
+    while (!current_panel->dir.list[current_file].f.marked)
+        current_file++;
 
-    return current_panel->dir.list[c_file].fname;
+    return current_panel->dir.list[current_file].fname;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -396,16 +397,17 @@ static void
 do_chmod (struct stat *sf)
 {
     vfs_path_t *vpath;
+
     sf->st_mode &= and_mask;
     sf->st_mode |= or_mask;
 
-    vpath = vfs_path_from_str (current_panel->dir.list[c_file].fname);
+    vpath = vfs_path_from_str (current_panel->dir.list[current_file].fname);
     if (mc_chmod (vpath, sf->st_mode) == -1)
         message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
-                 current_panel->dir.list[c_file].fname, unix_error_string (errno));
+                 current_panel->dir.list[current_file].fname, unix_error_string (errno));
 
     vfs_path_free (vpath);
-    do_file_mark (current_panel, c_file, 0);
+    do_file_mark (current_panel, current_file, 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -413,14 +415,11 @@ do_chmod (struct stat *sf)
 static void
 apply_mask (struct stat *sf)
 {
-    need_update = TRUE;
-    end_chmod = TRUE;
-
     do_chmod (sf);
 
     do
     {
-        char *fname;
+        const char *fname;
         vfs_path_t *vpath;
         gboolean ok;
 
@@ -431,7 +430,7 @@ apply_mask (struct stat *sf)
         if (!ok)
             return;
 
-        c_stat = sf->st_mode;
+        ch_mode = sf->st_mode;
 
         do_chmod (sf);
     }
@@ -445,22 +444,25 @@ apply_mask (struct stat *sf)
 void
 chmod_cmd (void)
 {
+    gboolean need_update;
+    gboolean end_chmod;
+
     chmod_i18n ();
+
+    current_file = 0;
 
     do
     {                           /* do while any files remaining */
         vfs_path_t *vpath;
         WDialog *ch_dlg;
         struct stat sf_stat;
-        char *fname;
+        const char *fname;
         int i, result;
 
         do_refresh ();
 
-        mode_change = FALSE;
         need_update = FALSE;
         end_chmod = FALSE;
-        c_file = 0;
 
         if (current_panel->marked != 0)
             fname = next_file ();       /* next marked file */
@@ -475,33 +477,32 @@ chmod_cmd (void)
             break;
         }
 
-        c_stat = sf_stat.st_mode;
+        ch_mode = sf_stat.st_mode;
 
-        ch_dlg = init_chmod (fname, &sf_stat);
+        ch_dlg = chmod_init (fname, &sf_stat);
 
-        /* do action */
         result = dlg_run (ch_dlg);
 
         switch (result)
         {
+        case B_CANCEL:
+            end_chmod = TRUE;
+            break;
+
         case B_ENTER:
-            if (mode_change && mc_chmod (vpath, c_stat) == -1)
+            if (mode_change && mc_chmod (vpath, ch_mode) == -1)
                 message (D_ERROR, MSG_ERROR, _("Cannot chmod \"%s\"\n%s"),
                          fname, unix_error_string (errno));
             need_update = TRUE;
             break;
 
-        case B_CANCEL:
-            end_chmod = TRUE;
-            break;
-
-        case B_ALL:
+        case B_SETALL:
         case B_MARKED:
             and_mask = or_mask = 0;
             and_mask = ~and_mask;
 
-            for (i = 0; i < check_perm_num; i++)
-                if (check_perm[i].selected || result == B_ALL)
+            for (i = 0; i < BUTTONS_PERM; i++)
+                if (check_perm[i].selected || result == B_SETALL)
                 {
                     if (check_perm[i].check->state)
                         or_mask |= check_perm[i].mode;
@@ -510,28 +511,34 @@ chmod_cmd (void)
                 }
 
             apply_mask (&sf_stat);
+            need_update = TRUE;
+            end_chmod = TRUE;
             break;
 
         case B_SETMRK:
             and_mask = or_mask = 0;
             and_mask = ~and_mask;
 
-            for (i = 0; i < check_perm_num; i++)
+            for (i = 0; i < BUTTONS_PERM; i++)
                 if (check_perm[i].selected)
                     or_mask |= check_perm[i].mode;
 
             apply_mask (&sf_stat);
+            need_update = TRUE;
+            end_chmod = TRUE;
             break;
 
         case B_CLRMRK:
             and_mask = or_mask = 0;
             and_mask = ~and_mask;
 
-            for (i = 0; i < check_perm_num; i++)
+            for (i = 0; i < BUTTONS_PERM; i++)
                 if (check_perm[i].selected)
                     and_mask &= ~check_perm[i].mode;
 
             apply_mask (&sf_stat);
+            need_update = TRUE;
+            end_chmod = TRUE;
             break;
 
         default:
@@ -540,7 +547,7 @@ chmod_cmd (void)
 
         if (current_panel->marked != 0 && result != B_CANCEL)
         {
-            do_file_mark (current_panel, c_file, 0);
+            do_file_mark (current_panel, current_file, 0);
             need_update = TRUE;
         }
 
@@ -550,7 +557,7 @@ chmod_cmd (void)
     }
     while (current_panel->marked != 0 && !end_chmod);
 
-    chmod_done ();
+    chmod_done (need_update);
 }
 
 /* --------------------------------------------------------------------------------------------- */

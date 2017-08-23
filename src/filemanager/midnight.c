@@ -1123,7 +1123,7 @@ midnight_execute_cmd (Widget * sender, long command)
         chown_cmd ();
         break;
     case CK_ChangeOwnAdvanced:
-        chown_advanced_cmd ();
+        advanced_chown_cmd ();
         break;
     case CK_CompareDirs:
         compare_dirs_cmd ();
