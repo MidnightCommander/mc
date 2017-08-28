@@ -439,17 +439,14 @@ try_chmod (const vfs_path_t * p, mode_t m)
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-do_chmod (struct stat *sf)
+do_chmod (const vfs_path_t * p, struct stat *sf)
 {
     gboolean ret;
-    vfs_path_t *vpath;
 
     sf->st_mode &= and_mask;
     sf->st_mode |= or_mask;
 
-    vpath = vfs_path_from_str (current_panel->dir.list[current_file].fname);
-    ret = try_chmod (vpath, sf->st_mode);
-    vfs_path_free (vpath);
+    ret = try_chmod (p, sf->st_mode);
 
     do_file_mark (current_panel, current_file, 0);
 
@@ -459,37 +456,40 @@ do_chmod (struct stat *sf)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-apply_mask (struct stat *sf)
+apply_mask (vfs_path_t * vpath, struct stat *sf)
 {
-    if (!do_chmod (sf))
+    gboolean ok;
+
+    if (!do_chmod (vpath, sf))
         return;
 
     do
     {
         const char *fname;
-        vfs_path_t *vpath;
-        gboolean ok;
 
         fname = next_file ();
         vpath = vfs_path_from_str (fname);
         ok = (mc_stat (vpath, sf) == 0);
-        vfs_path_free (vpath);
 
         if (!ok)
         {
             /* if current file was deleted outside mc -- try next file */
             /* decrease current_panel->marked */
             do_file_mark (current_panel, current_file, 0);
+
+            /* try next file */
+            ok = TRUE;
         }
         else
         {
             ch_mode = sf->st_mode;
 
-            if (!do_chmod (sf))
-                return;
+            ok = do_chmod (vpath, sf);
         }
+
+        vfs_path_free (vpath);
     }
-    while (current_panel->marked != 0);
+    while (ok && current_panel->marked != 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -581,7 +581,7 @@ chmod_cmd (void)
                         and_mask &= ~check_perm[i].mode;
                 }
 
-            apply_mask (&sf_stat);
+            apply_mask (vpath, &sf_stat);
             need_update = TRUE;
             end_chmod = TRUE;
             break;
@@ -594,7 +594,7 @@ chmod_cmd (void)
                 if (check_perm[i].selected)
                     or_mask |= check_perm[i].mode;
 
-            apply_mask (&sf_stat);
+            apply_mask (vpath, &sf_stat);
             need_update = TRUE;
             end_chmod = TRUE;
             break;
@@ -607,7 +607,7 @@ chmod_cmd (void)
                 if (check_perm[i].selected)
                     and_mask &= ~check_perm[i].mode;
 
-            apply_mask (&sf_stat);
+            apply_mask (vpath, &sf_stat);
             need_update = TRUE;
             end_chmod = TRUE;
             break;
