@@ -108,6 +108,7 @@ static struct
 };
 
 static int current_file;
+static gboolean ignore_all;
 
 static WListbox *l_user, *l_group;
 
@@ -292,33 +293,96 @@ next_file (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-do_chown (uid_t u, gid_t g)
+static gboolean
+try_chown (const vfs_path_t * p, uid_t u, gid_t g)
 {
-    vfs_path_t *vpath;
+    while (mc_chown (p, u, g) == -1 && !ignore_all)
+    {
+        int my_errno = errno;
+        int result;
+        char *msg;
 
-    vpath = vfs_path_from_str (current_panel->dir.list[current_file].fname);
-    if (mc_chown (vpath, u, g) == -1)
-        message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"),
-                 current_panel->dir.list[current_file].fname, unix_error_string (errno));
+        msg =
+            g_strdup_printf (_("Cannot chown \"%s\"\n%s"), x_basename (vfs_path_as_str (p)),
+                             unix_error_string (my_errno));
+        result =
+            query_dialog (MSG_ERROR, msg, D_ERROR, 4, _("&Ignore"), _("Ignore &all"), _("&Retry"),
+                          _("&Cancel"));
+        g_free (msg);
 
-    vfs_path_free (vpath);
+        switch (result)
+        {
+        case 0:
+            /* try next file */
+            return TRUE;
+
+        case 1:
+            ignore_all = TRUE;
+            /* try next file */
+            return TRUE;
+
+        case 2:
+            /* retry this file */
+            break;
+
+        case 3:
+        default:
+            /* stop remain files processing */
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+do_chown (const vfs_path_t * p, uid_t u, gid_t g)
+{
+    gboolean ret;
+
+    ret = try_chown (p, u, g);
+
     do_file_mark (current_panel, current_file, 0);
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-apply_chowns (uid_t u, gid_t g)
+apply_chowns (vfs_path_t * vpath, uid_t u, gid_t g)
 {
-    do_chown (u, g);
+    gboolean ok;
+
+    if (!do_chown (vpath, u, g))
+        return;
 
     do
     {
-        next_file ();
-        do_chown (u, g);
+        const char *fname;
+        struct stat sf;
+
+        fname = next_file ();
+        vpath = vfs_path_from_str (fname);
+        ok = (mc_stat (vpath, &sf) == 0);
+
+        if (!ok)
+        {
+            /* if current file was deleted outside mc -- try next file */
+            /* decrease current_panel->marked */
+            do_file_mark (current_panel, current_file, 0);
+
+            /* try next file */
+            ok = TRUE;
+        }
+        else
+            ok = do_chown (vpath, u, g);
+
+        vfs_path_free (vpath);
     }
-    while (current_panel->marked != 0);
+    while (ok && current_panel->marked != 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -334,6 +398,7 @@ chown_cmd (void)
     chown_i18n ();
 
     current_file = 0;
+    ignore_all = FALSE;
 
     do
     {                           /* do while any files remaining */
@@ -402,21 +467,28 @@ chown_cmd (void)
                     new_user = user->pw_uid;
                 if (result == B_ENTER)
                 {
-                    vfs_path_t *fname_vpath;
-
-                    fname_vpath = vfs_path_from_str (fname);
-                    if (mc_chown (fname_vpath, new_user, new_group) == -1)
-                        message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"),
-                                 fname, unix_error_string (errno));
-                    vfs_path_free (fname_vpath);
-                    need_update = TRUE;
+                    if (current_panel->marked <= 1)
+                    {
+                        /* single or last file */
+                        if (mc_chown (vpath, new_user, new_group) == -1)
+                            message (D_ERROR, MSG_ERROR, _("Cannot chown \"%s\"\n%s"),
+                                     fname, unix_error_string (errno));
+                        end_chown = TRUE;
+                    }
+                    else if (!try_chown (vpath, new_user, new_group))
+                    {
+                        /* stop multiple files processing */
+                        result = B_CANCEL;
+                        end_chown = TRUE;
+                    }
                 }
                 else
                 {
-                    apply_chowns (new_user, new_group);
-                    need_update = TRUE;
+                    apply_chowns (vpath, new_user, new_group);
                     end_chown = TRUE;
                 }
+
+                need_update = TRUE;
                 break;
             }
 
@@ -430,7 +502,7 @@ chown_cmd (void)
                 if (user != NULL)
                 {
                     new_user = user->pw_uid;
-                    apply_chowns (new_user, new_group);
+                    apply_chowns (vpath, new_user, new_group);
                     need_update = TRUE;
                     end_chown = TRUE;
                 }
@@ -447,7 +519,7 @@ chown_cmd (void)
                 if (grp != NULL)
                 {
                     new_group = grp->gr_gid;
-                    apply_chowns (new_user, new_group);
+                    apply_chowns (vpath, new_user, new_group);
                     need_update = TRUE;
                     end_chown = TRUE;
                 }
