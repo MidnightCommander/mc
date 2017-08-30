@@ -387,9 +387,11 @@ user_group_button_cb (WButton * button, int action)
     do
     {
         WDialog *h = w->owner;
+        Widget *wh = WIDGET (h);
+
         gboolean is_owner = (f_pos == BUTTONS_PERM - 2);
         const char *title;
-        int lxx, lyy, b_pos;
+        int lxx, b_pos;
         WDialog *chl_dlg;
         WListbox *chl_list;
         int result;
@@ -399,17 +401,25 @@ user_group_button_cb (WButton * button, int action)
 
         chl_end = FALSE;
 
-        title = is_owner ? _("owner") : _("group");
-
-        lxx = (COLS - 74) / 2 + (is_owner ? 35 : 53);
-        lyy = (LINES - 13) / 2;
+        if (is_owner)
+        {
+            title = _("owner");
+            lxx = WIDGET (b_user)->x + 1;
+        }
+        else
+        {
+            title = _("group");
+            lxx = WIDGET (b_group)->x + 1;
+        }
 
         chl_dlg =
-            dlg_create (TRUE, lyy, lxx, 13, 17, WPOS_KEEP_DEFAULT, TRUE, dialog_colors,
-                        chl_callback, NULL, "[Advanced Chown]", title);
+            dlg_create (TRUE, wh->y - 1, lxx, wh->lines + 2, 17, WPOS_KEEP_DEFAULT, TRUE,
+                        dialog_colors, chl_callback, NULL, "[Advanced Chown]", title);
 
         /* get new listboxes */
-        chl_list = listbox_new (1, 1, 11, 15, FALSE, NULL);
+        chl_list =
+            listbox_new (1, 1, WIDGET (chl_dlg)->lines - 2, WIDGET (chl_dlg)->cols - 2, FALSE,
+                         NULL);
         listbox_add_item (chl_list, LISTBOX_APPEND_AT_END, 0, "<Unknown>", NULL, FALSE);
         if (is_owner)
         {
