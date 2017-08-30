@@ -368,14 +368,26 @@ chl_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *dat
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-do_enter_key (WDialog * h, int f_pos)
+static int
+user_group_button_cb (WButton * button, int action)
 {
+    Widget *w = WIDGET (button);
+    int f_pos;
     gboolean chl_end;
+
+    (void) action;
+
+    if (button == b_user)
+        f_pos = BUTTONS_PERM - 2;
+    else if (button == b_group)
+        f_pos = BUTTONS_PERM - 1;
+    else
+        return 0;               /* do nothing */
 
     do
     {
-        gboolean is_owner = (f_pos == 3);
+        WDialog *h = w->owner;
+        gboolean is_owner = (f_pos == BUTTONS_PERM - 2);
         const char *title;
         int lxx, lyy, b_pos;
         WDialog *chl_dlg;
@@ -485,6 +497,8 @@ do_enter_key (WDialog * h, int f_pos)
         dlg_destroy (chl_dlg);
     }
     while (chl_end);
+
+    return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -531,15 +545,6 @@ advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
         case ' ':
             if (f_pos < 3)
                 return MSG_HANDLED;
-            break;
-
-        case '\n':
-        case KEY_ENTER:
-            if (f_pos > 2 && f_pos < BUTTONS_PERM)
-            {
-                do_enter_key (h, f_pos);
-                return MSG_HANDLED;
-            }
             break;
 
         case ALT ('x'):
@@ -692,18 +697,18 @@ advanced_chown_init (void)
 
     add_widget (ch_dlg, hline_new (3, -1, -1));
 
-#define XTRACT(i,y) y, BX+advanced_chown_but[i].x, \
+#define XTRACT(i,y,cb) y, BX+advanced_chown_but[i].x, \
         advanced_chown_but[i].ret_cmd, advanced_chown_but[i].flags, \
-        (advanced_chown_but[i].text), NULL
-    b_att[0] = button_new (XTRACT (0, BY));
+        (advanced_chown_but[i].text), cb
+    b_att[0] = button_new (XTRACT (0, BY, NULL));
     advanced_chown_but[0].id = add_widget (ch_dlg, b_att[0]);
-    b_att[1] = button_new (XTRACT (1, BY));
+    b_att[1] = button_new (XTRACT (1, BY, NULL));
     advanced_chown_but[1].id = add_widget (ch_dlg, b_att[1]);
-    b_att[2] = button_new (XTRACT (2, BY));
+    b_att[2] = button_new (XTRACT (2, BY, NULL));
     advanced_chown_but[2].id = add_widget (ch_dlg, b_att[2]);
-    b_user = button_new (XTRACT (3, BY));
+    b_user = button_new (XTRACT (3, BY, user_group_button_cb));
     advanced_chown_but[3].id = add_widget (ch_dlg, b_user);
-    b_group = button_new (XTRACT (4, BY));
+    b_group = button_new (XTRACT (4, BY, user_group_button_cb));
     advanced_chown_but[4].id = add_widget (ch_dlg, b_group);
 #undef XTRACT
 
