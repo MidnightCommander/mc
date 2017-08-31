@@ -50,10 +50,16 @@
 
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
 
-static cb_ret_t
-button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+/* --------------------------------------------------------------------------------------------- */
+/*** public functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+cb_ret_t
+button_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WButton *b = BUTTON (w);
     WDialog *h = w->owner;
@@ -173,8 +179,8 @@ button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-button_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+void
+button_mouse_default_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 {
     (void) event;
 
@@ -195,8 +201,6 @@ button_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
 
 WButton *
 button_new (int y, int x, int action, button_flags_t flags, const char *text, bcback_fn callback)
@@ -210,7 +214,8 @@ button_new (int y, int x, int action, button_flags_t flags, const char *text, bc
     b->action = action;
     b->flags = flags;
     b->text = parse_hotkey (text);
-    widget_init (w, y, x, 1, button_get_len (b), button_callback, button_mouse_callback);
+    widget_init (w, y, x, 1, button_get_len (b), button_default_callback,
+                 button_mouse_default_callback);
     w->options |= WOP_SELECTABLE | WOP_WANT_CURSOR | WOP_WANT_HOTKEY;
     b->callback = callback;
     b->hotpos = (b->text.hotkey != NULL) ? str_term_width1 (b->text.start) : -1;

@@ -341,6 +341,44 @@ b_setpos (int f_pos)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
+perm_button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
+{
+    return button_default_callback (w, sender, msg, parm, data);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+perm_button_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+{
+    button_mouse_default_callback (w, msg, event);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static WButton *
+perm_button_new (int y, int x, int action, button_flags_t flags, const char *text,
+                 bcback_fn callback)
+{
+    WButton *b;
+    Widget *w;
+
+    /* create base button using native API */
+    b = button_new (y, x, action, flags, text, callback);
+    w = WIDGET (b);
+
+    /* we don't want HOTKEY */
+    widget_want_hotkey (w, FALSE);
+
+    w->callback = perm_button_callback;
+    w->mouse_callback = perm_button_mouse_callback;
+
+    return b;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
 chl_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     switch (msg)
@@ -709,11 +747,11 @@ advanced_chown_init (void)
 #define XTRACT(i,y,cb) y, BX+advanced_chown_but[i].x, \
         advanced_chown_but[i].ret_cmd, advanced_chown_but[i].flags, \
         (advanced_chown_but[i].text), cb
-    b_att[0] = button_new (XTRACT (0, BY, NULL));
+    b_att[0] = perm_button_new (XTRACT (0, BY, NULL));
     advanced_chown_but[0].id = add_widget (ch_dlg, b_att[0]);
-    b_att[1] = button_new (XTRACT (1, BY, NULL));
+    b_att[1] = perm_button_new (XTRACT (1, BY, NULL));
     advanced_chown_but[1].id = add_widget (ch_dlg, b_att[1]);
-    b_att[2] = button_new (XTRACT (2, BY, NULL));
+    b_att[2] = perm_button_new (XTRACT (2, BY, NULL));
     advanced_chown_but[2].id = add_widget (ch_dlg, b_att[2]);
     b_user = button_new (XTRACT (3, BY, user_group_button_cb));
     advanced_chown_but[3].id = add_widget (ch_dlg, b_user);
