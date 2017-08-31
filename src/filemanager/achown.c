@@ -246,19 +246,19 @@ print_flags (const WDialog * h)
 
     for (i = 0; i < 3; i++)
     {
-        widget_move (h, BY + 1, 9 + i);
+        widget_move (h, BY + 1, advanced_chown_but[0].x + 6 + i);
         tty_print_char (ch_flags[i]);
     }
 
     for (i = 0; i < 3; i++)
     {
-        widget_move (h, BY + 1, 17 + i);
+        widget_move (h, BY + 1, advanced_chown_but[1].x + 6 + i);
         tty_print_char (ch_flags[i + 3]);
     }
 
     for (i = 0; i < 3; i++)
     {
-        widget_move (h, BY + 1, 25 + i);
+        widget_move (h, BY + 1, advanced_chown_but[2].x + 6 + i);
         tty_print_char (ch_flags[i + 6]);
     }
 
@@ -266,12 +266,12 @@ print_flags (const WDialog * h)
 
     for (i = 0; i < 15; i++)
     {
-        widget_move (h, BY + 1, 35 + i);
+        widget_move (h, BY + 1, advanced_chown_but[3].x + 6 + i);
         tty_print_char (ch_flags[9]);
     }
     for (i = 0; i < 15; i++)
     {
-        widget_move (h, BY + 1, 53 + i);
+        widget_move (h, BY + 1, advanced_chown_but[4].x + 6 + i);
         tty_print_char (ch_flags[10]);
     }
 }
@@ -285,21 +285,20 @@ advanced_chown_refresh (WDialog * h)
 
     tty_setcolor (COLOR_NORMAL);
 
-    widget_move (h, BY - 1, 8);
+    widget_move (h, BY - 1, advanced_chown_but[0].x + 5);
     tty_print_string (_("owner"));
-    widget_move (h, BY - 1, 16);
+    widget_move (h, BY - 1, advanced_chown_but[1].x + 5);
     tty_print_string (_("group"));
-    widget_move (h, BY - 1, 24);
+    widget_move (h, BY - 1, advanced_chown_but[2].x + 5);
     tty_print_string (_("other"));
 
-    widget_move (h, BY - 1, 35);
+    widget_move (h, BY - 1, advanced_chown_but[3].x + 5);
     tty_print_string (_("owner"));
-    widget_move (h, BY - 1, 53);
+    widget_move (h, BY - 1, advanced_chown_but[4].x + 5);
     tty_print_string (_("group"));
 
     widget_move (h, BY + 1, 3);
     tty_print_string (_("Flag"));
-
     print_flags (h);
 }
 
