@@ -401,6 +401,11 @@ perm_button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
 
         case 'r':
             b->hotpos = i;
+            /* fallthrough */
+
+        case ' ':
+            i = b->hotpos;
+
             flag_pos = f_pos * 3 + i;
             if (b->text.start[flag_pos % 3] == '-')
                 ch_flags[flag_pos] = '+';
