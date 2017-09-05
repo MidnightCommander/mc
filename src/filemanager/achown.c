@@ -670,7 +670,6 @@ advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
             x_toggle ^= (1 << parm);
             update_mode (h);
             dlg_broadcast_msg (h, MSG_DRAW);
-            widget_set_state (WIDGET (h->current->data), WST_FOCUSED, TRUE);
             break;
 
         case XCTRL ('x'):
@@ -688,7 +687,6 @@ advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
             x_toggle ^= (1 << parm);
             update_mode (h);
             dlg_broadcast_msg (h, MSG_DRAW);
-            widget_set_state (WIDGET (h->current->data), WST_FOCUSED, TRUE);
             break;
 
         default:
