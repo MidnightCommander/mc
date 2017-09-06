@@ -445,7 +445,17 @@ perm_button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
 static void
 perm_button_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 {
-    button_mouse_default_callback (w, msg, event);
+    switch (msg)
+    {
+    case MSG_MOUSE_DOWN:
+        /* place cursor on flag that is being modified */
+        BUTTON (w)->hotpos = CLAMP (event->x - 1, 0, 2);
+        /* fallthrough */
+
+    default:
+        button_mouse_default_callback (w, msg, event);
+        break;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
