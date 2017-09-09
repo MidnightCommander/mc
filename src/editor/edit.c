@@ -3356,7 +3356,12 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
         if (option_cursor_beyond_eol && edit->over_col > 0)
             edit_insert_over (edit);
 #ifdef HAVE_CHARSET
-        if (char_for_insertion > 255 && !mc_global.utf8_display)
+        /**
+           Encode 8-bit input as UTF-8, if display (locale) is *not* UTF-8,
+           *but* source encoding *is* set to UTF-8; see ticket #3843 for the details.
+        */
+        if (char_for_insertion > 127 && str_isutf8 (get_codepage_id (mc_global.source_codepage))
+            && !mc_global.utf8_display)
         {
             unsigned char str[UTF8_CHAR_LEN + 1];
             size_t i = 0;
