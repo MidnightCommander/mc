@@ -808,6 +808,15 @@ expand_format (const WEdit * edit_widget, char c, gboolean do_quote)
             result = qstr;
             goto ret;
         }
+    case 'c':
+#ifdef USE_INTERNAL_EDIT
+        if (edit_widget != NULL)
+        {
+            result = g_strdup_printf ("%u", (unsigned int) edit_get_cursor_offset (edit_widget));
+            goto ret;
+        }
+#endif
+        break;
     case 'i':                  /* indent equal number cursor position in line */
 #ifdef USE_INTERNAL_EDIT
         if (edit_widget != NULL)
