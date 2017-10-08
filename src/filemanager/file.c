@@ -664,7 +664,7 @@ warn_same_file (const char *fmt, const char *a, const char *b)
 static void
 get_times (const struct stat *sb, mc_timesbuf_t * times)
 {
-#ifdef HAVE_UTIMENSAT
+#if defined (HAVE_UTIMENSAT) && !defined(__APPLE__)
     (*times)[0] = sb->st_atim;
     (*times)[1] = sb->st_mtim;
 #else

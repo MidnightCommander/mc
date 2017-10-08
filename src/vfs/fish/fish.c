@@ -1395,7 +1395,7 @@ fish_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 static void
 fish_get_atime (mc_timesbuf_t * times, time_t * sec, long *nsec)
 {
-#ifdef HAVE_UTIMENSAT
+#if defined (HAVE_UTIMENSAT) && !defined(__APPLE__)
     *sec = (*times)[0].tv_sec;
     *nsec = (*times)[0].tv_nsec;
 #else
@@ -1409,7 +1409,7 @@ fish_get_atime (mc_timesbuf_t * times, time_t * sec, long *nsec)
 static void
 fish_get_mtime (mc_timesbuf_t * times, time_t * sec, long *nsec)
 {
-#ifdef HAVE_UTIMENSAT
+#if defined (HAVE_UTIMENSAT) && !defined(__APPLE__)
     *sec = (*times)[1].tv_sec;
     *nsec = (*times)[1].tv_nsec;
 #else

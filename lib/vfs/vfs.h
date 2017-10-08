@@ -10,7 +10,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <dirent.h>
-#ifdef HAVE_UTIMENSAT
+#if defined (HAVE_UTIMENSAT) && !defined(__APPLE__)
 #include <sys/time.h>
 #elif defined (HAVE_UTIME_H)
 #include <utime.h>
@@ -99,7 +99,7 @@ typedef void (*fill_names_f) (const char *);
 
 typedef void *vfsid;
 
-#ifdef HAVE_UTIMENSAT
+#if defined (HAVE_UTIMENSAT) && !defined(__APPLE__)
 typedef struct timespec mc_timesbuf_t[2];
 #else
 typedef struct utimbuf mc_timesbuf_t;
