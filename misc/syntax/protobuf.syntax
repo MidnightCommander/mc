@@ -1,0 +1,57 @@
+# Syntax rules for Protobuf files and gRPC extensions
+
+context default
+    keyword whole enum yellow
+    keyword whole extend yellow
+    keyword whole extensions yellow
+    keyword whole import yellow
+    keyword whole map yellow
+    keyword whole message yellow
+    keyword whole oneof yellow
+    keyword whole option yellow
+    keyword whole optional yellow
+    keyword whole package yellow
+    keyword whole public yellow
+    keyword whole repeated yellow
+    keyword whole required yellow
+    keyword whole reserved yellow
+    keyword whole returns yellow
+    keyword whole rpc yellow
+    keyword whole service yellow
+    keyword whole stream yellow
+
+    keyword whole double yellow
+    keyword whole float yellow
+    keyword whole int32 yellow
+    keyword whole int64 yellow
+    keyword whole uint32 yellow
+    keyword whole uint64 yellow
+    keyword whole sint32 yellow
+    keyword whole sint64 yellow
+    keyword whole fixed32 yellow
+    keyword whole fixed64 yellow
+    keyword whole sfixed32 yellow
+    keyword whole sfixed64 yellow
+    keyword whole bool yellow
+    keyword whole string yellow
+    keyword whole bytes yellow
+
+    keyword // brown
+
+# punctuation characters, sorted by ASCII code
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword , brightcyan
+    keyword : brightcyan
+    keyword ; brightmagenta
+    keyword = yellow
+    keyword [ brightcyan
+    keyword ] brightcyan
+    keyword { brightcyan
+    keyword } brightcyan
+
+context exclusive // \n brown
+    spellcheck
+
+context " " green
+    spellcheck

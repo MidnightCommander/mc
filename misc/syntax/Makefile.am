@@ -66,6 +66,7 @@ SYNTAXFILES =			\
 	povray.syntax		\
 	procmail.syntax		\
 	properties.syntax	\
+	protobuf.syntax		\
 	puppet.syntax		\
 	python.syntax		\
 	r.syntax		\
