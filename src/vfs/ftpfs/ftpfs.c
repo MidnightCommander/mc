@@ -368,7 +368,7 @@ ftpfs_correct_url_parameters (const vfs_path_element_t * velement)
         path_element->user = g_strdup ("anonymous");
 
     /* Look up password in netrc for known user */
-    if (ftpfs_use_netrc && path_element->user != NULL && path_element->password != NULL)
+    if (ftpfs_use_netrc && path_element->user != NULL && path_element->password == NULL)
     {
         char *new_user = NULL;
         char *new_passwd = NULL;
