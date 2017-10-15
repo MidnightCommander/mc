@@ -747,15 +747,23 @@ expand_format (const WEdit * edit_widget, char c, gboolean do_quote)
     switch (mc_global.mc_run_mode)
     {
     case MC_RUN_FULL:
-        if (g_ascii_islower ((gchar) c))
-            panel = current_panel;
+#ifdef USE_INTERNAL_EDIT
+        if (edit_widget != NULL)
+            fname = edit_get_file_name (edit_widget);
         else
+#endif
         {
-            if (get_other_type () != view_listing)
-                return g_strdup ("");
-            panel = other_panel;
+            if (g_ascii_islower ((gchar) c))
+                panel = current_panel;
+            else
+            {
+                if (get_other_type () != view_listing)
+                    return g_strdup ("");
+                panel = other_panel;
+            }
+
+            fname = panel->dir.list[panel->selected].fname;
         }
-        fname = panel->dir.list[panel->selected].fname;
         break;
 
 #ifdef USE_INTERNAL_EDIT
