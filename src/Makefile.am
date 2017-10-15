@@ -78,6 +78,7 @@ libinternal_la_SOURCES = \
 	learn.c learn.h \
 	setup.c setup.h \
 	textconf.c textconf.h \
+	usermenu.c usermenu.h \
 	util.c util.h
 
 if CHARSET

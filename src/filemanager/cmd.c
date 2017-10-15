@@ -63,11 +63,13 @@
 #include "lib/keybind.h"        /* CK_Down, CK_History */
 #include "lib/event.h"          /* mc_event_raise() */
 
-#include "src/viewer/mcviewer.h"
 #include "src/setup.h"
 #include "src/execute.h"        /* toggle_panels() */
 #include "src/history.h"
+#include "src/usermenu.h"       /* MC_GLOBAL_MENU */
 #include "src/util.h"           /* check_for_default() */
+
+#include "src/viewer/mcviewer.h"
 
 #ifdef USE_INTERNAL_EDIT
 #include "src/editor/edit.h"
@@ -85,7 +87,6 @@
 #include "panel.h"              /* WPanel */
 #include "tree.h"               /* tree_chdir() */
 #include "midnight.h"           /* change_panel() */
-#include "usermenu.h"           /* MC_GLOBAL_MENU */
 #include "command.h"            /* cmdline */
 #include "layout.h"             /* get_current_type() */
 #include "ext.h"                /* regex_command() */
