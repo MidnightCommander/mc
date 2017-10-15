@@ -603,9 +603,9 @@ menu_file_own (char *path)
 
 /* Formats defined:
    %%  The % character
-   %f  The current file (if non-local vfs, file will be copied locally and
-   %f will be full path to it).
-   %p  The current file
+   %f  The current file in the active panel (if non-local vfs, file will be copied locally
+   and %f will be full path to it) or the opened file in the internal editor.
+   %p  Likewise.
    %d  The current working directory
    %s  "Selected files"; the tagged files if any, otherwise the current file
    %t  Tagged files

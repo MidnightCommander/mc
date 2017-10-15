@@ -2395,7 +2395,8 @@ The error file name.
 The current menu name.
 .TP
 .IR %f " and " %p
-The current file name.
+In file manager user menu: the current file name in selected panel.
+In mcedit user menu: the name of opened file.
 .TP
 .I %x
 The extension of current file name.
