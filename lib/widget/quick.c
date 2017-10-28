@@ -590,7 +590,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
                 break;
 
             case quick_input:
-                if ((quick_widget->u.input.completion_flags & INPUT_COMPLETE_CD) != 0)
+                if ((item->quick_widget->u.input.completion_flags & INPUT_COMPLETE_CD) != 0)
                     *item->quick_widget->u.input.result =
                         tilde_expand (INPUT (item->widget)->buffer);
                 else
