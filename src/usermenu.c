@@ -53,9 +53,9 @@
 #include "src/setup.h"
 #include "src/history.h"
 
-#include "dir.h"
-#include "midnight.h"
-#include "layout.h"
+#include "src/filemanager/dir.h"
+#include "src/filemanager/midnight.h"
+#include "src/filemanager/layout.h"
 
 #include "usermenu.h"
 
@@ -603,9 +603,9 @@ menu_file_own (char *path)
 
 /* Formats defined:
    %%  The % character
-   %f  The current file (if non-local vfs, file will be copied locally and
-   %f will be full path to it).
-   %p  The current file
+   %f  The current file in the active panel (if non-local vfs, file will be copied locally
+   and %f will be full path to it) or the opened file in the internal editor.
+   %p  Likewise.
    %d  The current working directory
    %s  "Selected files"; the tagged files if any, otherwise the current file
    %t  Tagged files
@@ -747,15 +747,23 @@ expand_format (const WEdit * edit_widget, char c, gboolean do_quote)
     switch (mc_global.mc_run_mode)
     {
     case MC_RUN_FULL:
-        if (g_ascii_islower ((gchar) c))
-            panel = current_panel;
+#ifdef USE_INTERNAL_EDIT
+        if (edit_widget != NULL)
+            fname = edit_get_file_name (edit_widget);
         else
+#endif
         {
-            if (get_other_type () != view_listing)
-                return g_strdup ("");
-            panel = other_panel;
+            if (g_ascii_islower ((gchar) c))
+                panel = current_panel;
+            else
+            {
+                if (get_other_type () != view_listing)
+                    return g_strdup ("");
+                panel = other_panel;
+            }
+
+            fname = panel->dir.list[panel->selected].fname;
         }
-        fname = panel->dir.list[panel->selected].fname;
         break;
 
 #ifdef USE_INTERNAL_EDIT

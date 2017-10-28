@@ -53,6 +53,7 @@
 #include "src/setup.h"          /* use_file_to_check_type */
 #include "src/execute.h"
 #include "src/history.h"
+#include "src/usermenu.h"
 
 #include "src/consaver/cons.saver.h"
 #include "src/viewer/mcviewer.h"
@@ -62,7 +63,6 @@
 #endif
 
 #include "panel.h"              /* do_cd */
-#include "usermenu.h"
 
 #include "ext.h"
 

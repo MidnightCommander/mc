@@ -65,6 +65,8 @@
 #include "src/subshell/subshell.h"      /* do_subshell_chdir() */
 #endif
 
+#include "src/usermenu.h"
+
 #include "dir.h"
 #include "boxes.h"
 #include "tree.h"
@@ -72,7 +74,6 @@
 #include "layout.h"             /* Most layout variables are here */
 #include "cmd.h"
 #include "command.h"            /* cmdline */
-#include "usermenu.h"
 #include "midnight.h"
 #include "mountlist.h"          /* my_statfs */
 
