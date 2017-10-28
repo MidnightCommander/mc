@@ -2829,6 +2829,15 @@ edit_move_forward3 (const WEdit * edit, off_t current, long cols, off_t upto)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+/** returns the current offset of the cursor from the beginning of a file */
+
+off_t
+edit_get_cursor_offset (const WEdit * edit)
+{
+    return edit->buffer.curs1;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /** returns the current column position of the cursor */
 
 long

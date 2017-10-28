@@ -70,6 +70,7 @@ gboolean edit_file (const vfs_path_t * file_vpath, long line);
 gboolean edit_files (const GList * files);
 
 const char *edit_get_file_name (const WEdit * edit);
+off_t edit_get_cursor_offset (const WEdit * edit);
 long edit_get_curs_col (const WEdit * edit);
 const char *edit_get_syntax_type (const WEdit * edit);
 
