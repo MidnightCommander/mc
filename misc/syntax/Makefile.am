@@ -51,6 +51,7 @@ SYNTAXFILES =			\
 	m4.syntax		\
 	mail.syntax		\
 	makefile.syntax		\
+	markdown.syntax		\
 	ml.syntax		\
 	named.syntax		\
 	nemerle.syntax		\

@@ -1,0 +1,35 @@
+# Markdown syntax highlighting
+
+context default lightgray
+    spellcheck
+    # links
+    keyword whole [*](*) yellow
+
+context linestart #### \n red
+    spellcheck
+
+context linestart # \n brightred
+    spellcheck
+
+context linestart > \n green
+    spellcheck
+
+context linestart \s\s\s\s \n cyan
+
+context ``` ``` cyan
+
+context `` `` cyan
+
+context ` ` cyan
+
+context \*\* \*\* brightgreen
+    spellcheck
+
+context \* \* magenta
+    spellcheck
+
+context \_\_ \_\_ brightgreen
+    spellcheck
+
+context \_ \_ magenta
+    spellcheck

@@ -286,5 +286,8 @@ include osl.syntax
 file .\*\\.([rR]|Rd|Rscript)$ R\sProgram
 include r.syntax
 
+file ..\*\\.(?i:md)$ Markdown
+include markdown.syntax
+
 file .\* unknown
 include unknown.syntax
