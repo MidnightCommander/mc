@@ -240,13 +240,13 @@ undelfs_loaddel (void)
     delarray = g_try_malloc (sizeof (struct deleted_info) * max_delarray);
     if (!delarray)
     {
-        message (D_ERROR, undelfserr, _("not enough memory"));
+        message (D_ERROR, undelfserr, "%s", _("not enough memory"));
         return 0;
     }
     block_buf = g_try_malloc (fs->blocksize * 3);
     if (!block_buf)
     {
-        message (D_ERROR, undelfserr, _("while allocating block buffer"));
+        message (D_ERROR, undelfserr, "%s", _("while allocating block buffer"));
         goto free_delarray;
     }
     retval = ext2fs_open_inode_scan (fs, 0, &scan);
@@ -292,7 +292,8 @@ undelfs_loaddel (void)
                                                                    (max_delarray + 50));
                 if (!delarray_new)
                 {
-                    message (D_ERROR, undelfserr, _("no more memory while reallocating array"));
+                    message (D_ERROR, undelfserr, "%s",
+                             _("no more memory while reallocating array"));
                     goto error_out;
                 }
                 delarray = delarray_new;
@@ -402,7 +403,7 @@ undelfs_readdir (void *vfs_info)
 
     if (vfs_info != fs)
     {
-        message (D_ERROR, undelfserr, _("vfs_info is not fs!"));
+        message (D_ERROR, undelfserr, "%s", _("vfs_info is not fs!"));
         return NULL;
     }
     if (readdir_ptr == num_delarray)
@@ -448,7 +449,7 @@ undelfs_open (const vfs_path_t * vpath, int flags, mode_t mode)
 
     if (!ext2_fname || strcmp (ext2_fname, file))
     {
-        message (D_ERROR, undelfserr, _("You have to chdir to extract files first"));
+        message (D_ERROR, undelfserr, "%s", _("You have to chdir to extract files first"));
         g_free (file);
         g_free (f);
         return 0;
@@ -594,7 +595,7 @@ undelfs_read (void *vfs_info, char *buffer, size_t count)
     retval = ext2fs_block_iterate (fs, p->inode, 0, NULL, undelfs_dump_read, p);
     if (retval)
     {
-        message (D_ERROR, undelfserr, _("while iterating over blocks"));
+        message (D_ERROR, undelfserr, "%s", _("while iterating over blocks"));
         return -1;
     }
     if (p->error_code && !p->finished)
@@ -670,9 +671,9 @@ undelfs_lstat (const vfs_path_t * vpath, struct stat *buf)
 
     if (!ext2_fname || strcmp (ext2_fname, file))
     {
-        message (D_ERROR, undelfserr, _("You have to chdir to extract files first"));
         g_free (file);
         g_free (f);
+        message (D_ERROR, undelfserr, "%s", _("You have to chdir to extract files first"));
         return 0;
     }
     inode_index = undelfs_getindex (f);

@@ -1316,7 +1316,7 @@ smbfs_open_link (char *host, char *path, const char *user, int *port, char *this
 
         if (my_errno != EPERM)
             return 0;
-        message (D_ERROR, MSG_ERROR, _("Authentication failed"));
+        message (D_ERROR, MSG_ERROR, "%s", _("Authentication failed"));
 
         /* authentication failed, try again */
         smbfs_auth_remove (bucket->host, bucket->service);

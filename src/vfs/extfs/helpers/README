@@ -8,7 +8,7 @@ possible to create new virtual filesystems for the GNU MC very easily.
 
 To handle requests, create a shell/perl/python/etc script/program
 (with executable permissions) in $(libexecdir)/mc/extfs.d
-or in ~/.mc/extfs.d.
+or in ~/.local/share/mc/extfs.d/.
 
 (Note: $(libexecdir) should be substituted for actual libexecdir path
 stored when configured or compiled, like /usr/local/libexec or /usr/libexec).

@@ -416,7 +416,7 @@ mcview_execute_cmd (WView * view, long command)
                     mcview_moveto_offset (view, addr);
                 else
                 {
-                    message (D_ERROR, _("Warning"), _("Invalid value"));
+                    message (D_ERROR, _("Warning"), "%s", _("Invalid value"));
                     view->dirty++;
                 }
             }

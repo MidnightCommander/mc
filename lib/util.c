@@ -1006,9 +1006,9 @@ convert_controls (const char *p)
 char *
 diff_two_paths (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    char *p, *q, *r, *s, *buf = NULL;
-    int i, j, prevlen = -1, currlen;
+    int j, prevlen = -1, currlen;
     char *my_first = NULL, *my_second = NULL;
+    char *buf = NULL;
 
     my_first = resolve_symlinks (vpath1);
     if (my_first == NULL)
@@ -1020,25 +1020,26 @@ diff_two_paths (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 
     for (j = 0; j < 2; j++)
     {
+        char *p, *q;
+        int i;
+
         p = my_first;
         q = my_second;
         while (TRUE)
         {
-            r = strchr (p, PATH_SEP);
-            s = strchr (q, PATH_SEP);
-            if (r == NULL || s == NULL)
-                break;
-            *r = '\0';
-            *s = '\0';
-            if (strcmp (p, q) != 0)
-            {
-                *r = PATH_SEP;
-                *s = PATH_SEP;
-                break;
-            }
+            char *r, *s;
+            ptrdiff_t len;
 
-            *r = PATH_SEP;
-            *s = PATH_SEP;
+            r = strchr (p, PATH_SEP);
+            if (r == NULL)
+                break;
+            s = strchr (q, PATH_SEP);
+            if (s == NULL)
+                break;
+
+            len = r - p;
+            if (len != (s - q) || strncmp (p, q, (size_t) len) != 0)
+                break;
 
             p = r + 1;
             q = s + 1;

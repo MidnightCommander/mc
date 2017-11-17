@@ -6,6 +6,7 @@
 #define MC__PANEL_H
 
 #include <inttypes.h>           /* uintmax_t */
+#include <limits.h>             /* MB_LEN_MAX */
 
 #include "lib/global.h"         /* gboolean */
 #include "lib/fs.h"             /* MC_MAXPATHLEN */

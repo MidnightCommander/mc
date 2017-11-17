@@ -194,7 +194,7 @@ learn_check_key (int c)
             }
             else
             {
-                message (D_ERROR, learn_title,
+                message (D_ERROR, learn_title, "%s",
                          _
                          ("Great! You have a complete terminal database!\n"
                           "All your keys work well."));

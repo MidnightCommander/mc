@@ -172,18 +172,15 @@ do_edit (const vfs_path_t * what_vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-set_panel_filter_to (WPanel * p, char *allocated_filter_string)
+set_panel_filter_to (WPanel * p, char *filter)
 {
-    g_free (p->filter);
-    p->filter = NULL;
+    MC_PTR_FREE (p->filter);
 
     /* Three ways to clear filter: NULL, "", "*" */
-    if (allocated_filter_string == NULL ||
-        allocated_filter_string[0] == '\0' ||
-        (allocated_filter_string[0] == '*' && allocated_filter_string[1] == '\0'))
-        g_free (allocated_filter_string);
+    if (filter == NULL || filter[0] == '\0' || (filter[0] == '*' && filter[1] == '\0'))
+        g_free (filter);
     else
-        p->filter = allocated_filter_string;
+        p->filter = filter;
     reread_cmd ();
 }
 
@@ -196,15 +193,14 @@ set_panel_filter (WPanel * p)
     char *reg_exp;
     const char *x;
 
-    x = p->filter ? p->filter : easy_patterns ? "*" : ".";
+    x = p->filter != NULL ? p->filter : easy_patterns ? "*" : ".";
 
     reg_exp = input_dialog_help (_("Filter"),
                                  _("Set expression for filtering filenames"),
                                  "[Filter...]", MC_HISTORY_FM_PANEL_FILTER, x, FALSE,
                                  INPUT_COMPLETE_FILENAMES);
-    if (!reg_exp)
-        return;
-    set_panel_filter_to (p, reg_exp);
+    if (reg_exp != NULL)
+        set_panel_filter_to (p, reg_exp);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -355,20 +351,24 @@ static void
 do_link (link_type_t link_type, const char *fname)
 {
     char *dest = NULL, *src = NULL;
-    vfs_path_t *fname_vpath, *dest_vpath = NULL;
+    vfs_path_t *dest_vpath = NULL;
 
-    fname_vpath = vfs_path_from_str (fname);
     if (link_type == LINK_HARDLINK)
     {
+        vfs_path_t *fname_vpath;
+
         src = g_strdup_printf (_("Link %s to:"), str_trunc (fname, 46));
         dest =
             input_expand_dialog (_("Link"), src, MC_HISTORY_FM_LINK, "", INPUT_COMPLETE_FILENAMES);
-        if (!dest || !*dest)
+        if (dest == NULL || *dest == '\0')
             goto cleanup;
         save_cwds_stat ();
+
+        fname_vpath = vfs_path_from_str (fname);
         dest_vpath = vfs_path_from_str (dest);
-        if (-1 == mc_link (fname_vpath, dest_vpath))
+        if (mc_link (fname_vpath, dest_vpath) == -1)
             message (D_ERROR, MSG_ERROR, _("link: %s"), unix_error_string (errno));
+        vfs_path_free (fname_vpath);
     }
     else
     {
@@ -397,7 +397,7 @@ do_link (link_type_t link_type, const char *fname)
         vfs_path_free (d);
         vfs_path_free (s);
 
-        if (!dest || !*dest || !src || !*src)
+        if (dest == NULL || *dest == '\0' || src == NULL || *src == '\0')
             goto cleanup;
         save_cwds_stat ();
 
@@ -413,7 +413,6 @@ do_link (link_type_t link_type, const char *fname)
     repaint_screen ();
 
   cleanup:
-    vfs_path_free (fname_vpath);
     vfs_path_free (dest_vpath);
     g_free (src);
     g_free (dest);
