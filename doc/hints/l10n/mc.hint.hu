@@ -6,16 +6,13 @@ Tipp: Kiegészítés: M-Tab (vagy Esc Tab). Kétszer lenyomva listát ad.
 
 Tipp: Korábbi parancsok előhozása: M-p illetve M-n
 
-Tipp: Speciális karakter beírásához használja ezt: Control-q
-<karakter>
+Tipp: Speciális karakter beírásához használja ezt: Control-q <karakter>
 
-Tipp: Az itt megjelenő üzenetek kikapcsolhatók a
-"Beállítások/Megjelenés"-nél.
+Tipp: Az itt megjelenő üzenetek kikapcsolhatók a "Beállítások/Megjelenés"-nél.
 
 Tipp: Könyvtárak kijelölése a minta végére / jelet írva lehetséges.
 
-Tipp: Ha a terminálon nincsenek funkcióbillentyűk, használja ezt: Esc
-<szám>
+Tipp: Ha a terminálon nincsenek funkcióbillentyűk, használja ezt: Esc <szám>
 
 Tipp: A Midnight Commander honlapja: http://www.midnight-commander.org/
 
@@ -31,36 +28,29 @@ Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 Tipp: A % makrók még a parancssorban is használhatók.
 
-Tipp: Program végrehajtása a kimenetnek a fájlmegjelenítőbe való küldésével:
-M-!
+Tipp: Program végrehajtása a kimenetnek a fájlmegjelenítőbe való küldésével: M-!
 
 Tipp: A fájlok listázási módja beállítható; részletek a "man mc" paranccsal.
 
 Tipp: A %D/%T sztring a másik panel kijelölt fájljaival lesz helyettesítve.
 
-Tipp: A sima shell-t szeretné? Használja ezt: C-o (visszatérés MC-be:
-ugyanígy).
+Tipp: A sima shell-t szeretné? Használja ezt: C-o (visszatérés MC-be: ugyanígy).
 
-Tipp: A CDPATH változó beállításával egyszerűbbé tehető a "cd" parancsok
-kiadása.
+Tipp: A CDPATH változó beállításával egyszerűbbé tehető a "cd" parancsok kiadása.
 
-Tipp: Ha látni szeretné a .* rejtett fájlokat, állítsa be az
-Alapbeállításoknál.
+Tipp: Ha látni szeretné a .* rejtett fájlokat, állítsa be az Alapbeállításoknál.
 
-Tipp: Ha látni szeretné a *~ másolatfájlokat, állítsa be az
-Alapbeállításoknál.
+Tipp: Ha látni szeretné a *~ másolatfájlokat, állítsa be az Alapbeállításoknál.
 
 Tipp: A kiegészítés minden ablak összes beviteli mezőjében működik: M-Tab
 
 Tipp: Lassú terminálokon a -s opció hasznos lehet.
 
-Tipp: Fájlkeresés: műveletek végzése a megtalált fájlokkal: "Listát a
-panelra".
+Tipp: Fájlkeresés: műveletek végzése a megtalált fájlokkal: "Listát a panelra".
 
 Tipp: Komplex keresések végzéséhez a "Külső panel-parancs" funkció javasolt.
 
-Tipp: Könyvtárváltás egy parancs begépelése közben: M-c (gyors
-könyvtárváltás).
+Tipp: Könyvtárváltás egy parancs begépelése közben: M-c (gyors könyvtárváltás).
 
 Megjegyzés: A shell-parancsok távoli fájlrendszereken nem használhatók.
 
@@ -72,8 +62,7 @@ Tipp: Egy parancs kimenetének megjelenítése a fájlmegjelenítőben: M-!
 
 Tipp: Az F13 (vagy Shift-F3) a fájlmegjelenítőt "nyers" módban indítja el.
 
-Tipp: Az F4-re használandó szerkesztőt az EDITOR shell-változóval lehet
-megadni.
+Tipp: Az F4-re használandó szerkesztőt az EDITOR shell-változóval lehet megadni.
 
 Tipp: A külső fájlmegjelenítőt a PAGER shell-változóval lehet megadni.
 
@@ -81,24 +70,18 @@ Tipp: Az összes megerősítéskérés kikapcsolható: "Beállítások/Megerős�
 
 Hint: Leap to frequently used directories in a single bound with C-.
 
-Tipp: "Anonymous" FTP-zés végezhető ezzel a paranccsal: "cd
-ftp://gépnév.edu".
+Tipp: "Anonymous" FTP-zés végezhető ezzel a paranccsal: "cd ftp://gépnév.edu".
 
-Tipp: Az FTP be van építve a Midnight Commanderbe: "FTP-kapcsolat"
-menüpontok.
+Tipp: Az FTP be van építve a Midnight Commanderbe: "FTP-kapcsolat" menüpontok.
 
-Tipp: A listázási mód gyorsan váltható a következő billentyűkombinációval:
-M-t
+Tipp: A listázási mód gyorsan váltható a következő billentyűkombinációval: M-t
 
-Tipp: FTP-zésnél felhasználónév is megadható: "cd
-ftp://felhasználó@gépnév.edu".
+Tipp: FTP-zésnél felhasználónév is megadható: "cd ftp://felhasználó@gépnév.edu".
 
-Tipp: Az RPM-csomagfájlok böngészhetők, ehhez Entert kell nyomni az adott
-fájlon.
+Tipp: Az RPM-csomagfájlok böngészhetők, ehhez Entert kell nyomni az adott fájlon.
 
 Tipp: Könyvtárak kijelölése a "Kijelölés" ablakban: / jel hozzáfűzésével.
 
 Tipp: Az egérrel való szövegkimásoláshoz szükség lehet a Shift lenyomására.
 
 Hint: Key frequently visited ftp sites in the hotlist: type C-.
-

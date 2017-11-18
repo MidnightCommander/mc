@@ -14,8 +14,7 @@ Dritta: selezione directory: inserisci uno slash alla fine della selezione.
 
 Dritta: se al tuo terminale mancano i tasti funzione usa ESC+numero tasto.
 
-Dritta: la home page del Midnight Commander:
-http://www.midnight-commander.org/
+Dritta: la home page del Midnight Commander: http://www.midnight-commander.org/
 
 Dritta: prego spedire i bug report a mc-devel@gnome.org
 
@@ -37,20 +36,17 @@ Dritta: %D/%T espande i file selezionati nella directory opposta.
 
 Dritta: vuoi la tua shell? Premi C-o e torna nuovamente a MC con C-o.
 
-Dritta: impostare la variabile CDPATH può far risparmiare tasti nei comandi
-cd.
+Dritta: impostare la variabile CDPATH può far risparmiare tasti nei comandi cd.
 
 Dritta: se vuoi vedere i tuoi file .* impostalo nella Configurazione.
 
-Dritta: vuoi vedere i tuoi *~ file di backup? Impostalo nella
-Configurazione.
+Dritta: vuoi vedere i tuoi *~ file di backup? Impostalo nella Configurazione.
 
 Dritta: il completamento funziona su tutti gli input. Basta premere M-Tab.
 
 Dritta: con terminali lenti può aiutare la flag -s.
 
-Dritta: trova file: puoi elaborare i file trovati usando il bottone
-Pannellizza.
+Dritta: trova file: puoi elaborare i file trovati usando il bottone Pannellizza.
 
 Dritta: vuoi fare ricerche complesse? Usa il comando Pannellizza.
 
@@ -68,11 +64,9 @@ Dritta: F13 (o Shift-F3) invoca il visualizzatore in modo 'raw'.
 
 Dritta: puoi specificare l'editor per F4 con la variabile shell EDITOR.
 
-Dritta: puoi specificare il visualizzatore esterno con la variabile shell
-PAGER.
+Dritta: puoi specificare il visualizzatore esterno con la variabile shell PAGER.
 
-Dritta: puoi disabilitare tutte le richieste di conferma in
-Opzioni/Conferme.
+Dritta: puoi disabilitare tutte le richieste di conferma in Opzioni/Conferme.
 
 Hint: Leap to frequently used directories in a single bound with C-.
 
@@ -86,11 +80,8 @@ Dritta: puoi dare il nome utente facendo ftp: 'cd ftp://utente@macchina.edu'
 
 Dritta: puoi navigare attraverso i file RPM battendo invio su di essi.
 
-Dritta: per selezionare directory in Seleziona, aggiungere uno slash in
-fondo.
+Dritta: per selezionare directory in Seleziona, aggiungere uno slash in fondo.
 
-Dritta: per usare il taglia incolla del mouse devi tener premuto il tasto
-shift.
+Dritta: per usare il taglia incolla del mouse devi tener premuto il tasto shift.
 
 Hint: Key frequently visited ftp sites in the hotlist: type C-.
-

@@ -8,13 +8,11 @@ Vihje: Käskude ajaloo kasutamiseks kasuta M-p ja M-n.
 
 Vihje: Täht vajab tsiteeringut? Sisesta C-q ja täht.
 
-Vihje: Oled tüdinud neist teadetest? Lülita need välja menüüst
-Seaded/Paigutus.
+Vihje: Oled tüdinud neist teadetest? Lülita need välja menüüst Seaded/Paigutus.
 
 Vihje: Kataloogide valimiseks lisa sobiva mustri lõppu kaldkriips.
 
-Vihje: Kui terminalil puuduvad funktsiooniklahvid, siis kasuta ESC+number
-jadasid.
+Vihje: Kui terminalil puuduvad funktsiooniklahvid, siis kasuta ESC+number jadasid.
 
 Vihje: GNU Midnight Commanderi koduleht: http://www.midnight-commander.org/
 
@@ -36,25 +34,19 @@ Vihje: Faililistingu formaati saab muuta; lähemalt vaata manuaalist.
 
 Vihje: %D/%T laiendab märgitud failid vastaskataloogis.
 
-Vihje: Soovid harilikku kesta? Vajuta C-o; tagasipöördumiseks vajuta uuesti
-C-o.
+Vihje: Soovid harilikku kesta? Vajuta C-o; tagasipöördumiseks vajuta uuesti C-o.
 
-Vihje: Muutujale CDPATH väärtuse omistamine võib vähendada klahvivajutusi cd
-käskudes.
+Vihje: Muutujale CDPATH väärtuse omistamine võib vähendada klahvivajutusi cd käskudes.
 
-Vihje: Kui soovid näha peidetud faile, siis luba see konfiguratsiooni
-dialoogis.
+Vihje: Kui soovid näha peidetud faile, siis luba see konfiguratsiooni dialoogis.
 
-Vihje: Kui soovid näha varukoopia faile, siis luba see konfiguratsiooni
-dialoogis.
+Vihje: Kui soovid näha varukoopia faile, siis luba see konfiguratsiooni dialoogis.
 
-Vihje: Lõpetamine töötab iga dialoogi sisestusväljadel; lihtsalt vajuta
-M-Tab.
+Vihje: Lõpetamine töötab iga dialoogi sisestusväljadel; lihtsalt vajuta M-Tab.
 
 Vihje: Parameeter -s võib aidata aeglase terminali kasutamisel.
 
-Vihje: Failiotsing: sa saad töötada leitud failidega kasutades nuppu
-Paneelile.
+Vihje: Failiotsing: sa saad töötada leitud failidega kasutades nuppu Paneelile.
 
 Vihje: Soovid teha keerulisi otsinguid? Kasuta käsku Väline paneelile.
 
@@ -74,15 +66,13 @@ Vihje: Klahvile F4 saad redaktori määrata keskkonna muutujaga EDITOR.
 
 Vihje: Välise vaataja saad määrata keskkonna muutujaga VIEWER või PAGER.
 
-Vihje: Kinnituse küsimise kõigile päringutele saad keelata
-Seaded/Kinnitused.
+Vihje: Kinnituse küsimise kõigile päringutele saad keelata Seaded/Kinnitused.
 
 Hint: Leap to frequently used directories in a single bound with C-.
 
 Vihje: Anonüümse FTP kasutamiseks mc-ga sisesta 'cd ftp://masin.ee'
 
-Vihje: FTP on Midnight Commanderisse sisse ehitatud; vaata menüüst Fail/FTP
-link.
+Vihje: FTP on Midnight Commanderisse sisse ehitatud; vaata menüüst Fail/FTP link.
 
 Vihje: M-t võimaldab listingu režiimi kiiret muutmist.
 
@@ -92,8 +82,6 @@ Vihje: RPM faili sisuga tutvumiseks vajuta sellel Enter.
 
 Vihje: Kataloogide märkimiseks valiku dialoogis lisa kaldkriips.
 
-Vihje: Hiirega lõikamiseks ja asetamiseks võib olla vajalik vajutada klahvi
-Shift.
+Vihje: Hiirega lõikamiseks ja asetamiseks võib olla vajalik vajutada klahvi Shift.
 
 Hint: Key frequently visited ftp sites in the hotlist: type C-.
-

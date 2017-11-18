@@ -1,23 +1,18 @@
-İpucu: C-x t ile işaretlenmiş dosyaların isimlerini komut satırına
-kopyalayabilirsiniz.
+İpucu: C-x t ile işaretlenmiş dosyaların isimlerini komut satırına kopyalayabilirsiniz.
 
 İpucu: C-x p ile komut satırına aktif yolu kopyalayabilirsiniz.
 
-İpucu: Tamamlamak için M-Tab (veya Esc+Tab) kullanın. Liste için iki kere
-basın.
+İpucu: Tamamlamak için M-Tab (veya Esc+Tab) kullanın. Liste için iki kere basın.
 
 İpucu: M-p ve M-n ile komut geçmişine ulaşabilirsiniz.
 
-İpucu: Bir karakteri alıntılamanız mı gerekiyor? Control-q yapın ve
-karakteri kullanın.
+İpucu: Bir karakteri alıntılamanız mı gerekiyor? Control-q yapın ve karakteri kullanın.
 
-İpucu: Bu mesajlardan sıkıldınız mı? Seçenekler/Görünüm menüsünden
-kapatabilirsiniz.
+İpucu: Bu mesajlardan sıkıldınız mı? Seçenekler/Görünüm menüsünden kapatabilirsiniz.
 
 İpucu: Dizinleri seçmek için eşleştirme kalıbının sonuna bölü ekleyin.
 
-İpucu: Eğer klavyenizde fonksiyon tuşları yoksa, ESC+numara kombinasyonunu
-kullanabilirsiniz.
+İpucu: Eğer klavyenizde fonksiyon tuşları yoksa, ESC+numara kombinasyonunu kullanabilirsiniz.
 
 İpucu: GNU Midnight Commander web adresi: http://www.midnight-commander.org/
 
@@ -25,8 +20,7 @@ kullanabilirsiniz.
 
 İpucu: Tab aktif paneli değiştirir.
 
-İpucu: VFS rahatlığı: tar dosyalarının içeriğine bakmak için üzerindeyken
-Enter tuşuna basın.
+İpucu: VFS rahatlığı: tar dosyalarının içeriğine bakmak için üzerindeyken Enter tuşuna basın.
 
 İpucu: Aynı zamanda güzel bir kullanım kılavuzumuz da var.
 
@@ -34,78 +28,60 @@ Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 İpucu: % makroları komut satırında bile çalışır.
 
-İpucu: M-! uygulamaları çalıştırmanızı ve çıktılarını görüntüleyicide
-görmenizi sağlar.
+İpucu: M-! uygulamaları çalıştırmanızı ve çıktılarını görüntüleyicide görmenizi sağlar.
 
 İpucu: Dosya listeleme biçimi özelleştirilebilir. Detaylar için "man mc"
 
 İpucu: %D/%T işaretlenmiş dosyaları karşı klasöre çıkarır.
 
-İpucu: Düz kabuk mu gerekli? C-o kombinasyonuna basın, sonra MC'ye geri
-dönmek için tekrar C-o yapın.
+İpucu: Düz kabuk mu gerekli? C-o kombinasyonuna basın, sonra MC'ye geri dönmek için tekrar C-o yapın.
 
-İpucu: CDPATH değişkenini ayarlamak cd komutlarında sizi fazladan tuşa
-basmaktan kurtarabilir.
+İpucu: CDPATH değişkenini ayarlamak cd komutlarında sizi fazladan tuşa basmaktan kurtarabilir.
 
-İpucu: .* dosyalarını görmek isterseniz, yapılandırma diyaloğundan
-ayarlayabilirsiniz.
+İpucu: .* dosyalarını görmek isterseniz, yapılandırma diyaloğundan ayarlayabilirsiniz.
 
-İpucu: *~ yedek dosyalarını görmek ister misiniz? Yapılandırma diyaloğundan
-ayarlayabilirsiniz.
+İpucu: *~ yedek dosyalarını görmek ister misiniz? Yapılandırma diyaloğundan ayarlayabilirsiniz.
 
 İpucu: Tamamlama dialoglardaki tüm girişlerde çalışır. M-Tab yapın.
 
 İpucu: Yavaş uçbirimlerde -s bayrağı işe yarayabilir.
 
-İpucu: Dosya Arama: Panelleştir düğmesini kullanarak bulunan dosyalar
-üzerinde çalışabilirsiniz.
+İpucu: Dosya Arama: Panelleştir düğmesini kullanarak bulunan dosyalar üzerinde çalışabilirsiniz.
 
-İpucu: Karmaşık aramalar mı yapmak istiyorsunuz? Dış Panelleştir komutunu
-kullanın.
+İpucu: Karmaşık aramalar mı yapmak istiyorsunuz? Dış Panelleştir komutunu kullanın.
 
 İpucu: Komut yazarken arada klasör değiştirmek için M-c (çabuk cd) kullanın.
 
-Not: Yerel olmayan bir dosya sistemindeyseniz, kabuk komutları
-çalışmayacaktır.
+Not: Yerel olmayan bir dosya sistemindeyseniz, kabuk komutları çalışmayacaktır.
 
 İpucu: C-y ile metni kurtarabilirsiniz.
 
-İpucu: Bazı tuşlarınız çalışmıyor mu? Seçenekler/Tuşları öğren menüsüne
-bakın.
+İpucu: Bazı tuşlarınız çalışmıyor mu? Seçenekler/Tuşları öğren menüsüne bakın.
 
-İpucu: Görüntülüyecide bir komutun çıktısına bakmak için M-!
-kullanabilirsiniz.
+İpucu: Görüntülüyecide bir komutun çıktısına bakmak için M-! kullanabilirsiniz.
 
 İpucu: F13 (veya Shift-F3) görüntüleyicisi ham modda çalıştırır.
 
-İpucu: EDITOR kabuk değişkeni ile F4 tuşuna basınca kullanılacak
-düzenleyiciyi belirtebilirsiniz.
+İpucu: EDITOR kabuk değişkeni ile F4 tuşuna basınca kullanılacak düzenleyiciyi belirtebilirsiniz.
 
-İpucu: VIEWER veya PAGER kabuk değişkenleri ile dış görüntüleyicileri
-belirtebilirsiniz.
+İpucu: VIEWER veya PAGER kabuk değişkenleri ile dış görüntüleyicileri belirtebilirsiniz.
 
-İpucu: Seçenekler/Onaylar menüsünden tüm onay isteklerini devre dışı
-bırakabilirsiniz.
+İpucu: Seçenekler/Onaylar menüsünden tüm onay isteklerini devre dışı bırakabilirsiniz.
 
 Hint: Leap to frequently used directories in a single bound with C-.
 
-İpucu: mc ile anonim FTP bağlantısı kurabilirsiniz. Örn: 'cd
-ftp://sunucu.edu.tr'
+İpucu: mc ile anonim FTP bağlantısı kurabilirsiniz. Örn: 'cd ftp://sunucu.edu.tr'
 
-İpucu: Midnight Commander içinde FTP desteği mevcuttur, menüden Dosya/FTP
-bağlantısı seçin.
+İpucu: Midnight Commander içinde FTP desteği mevcuttur, menüden Dosya/FTP bağlantısı seçin.
 
 İpucu: M-t kombinasyonu ile hızlıca listeleme modunu değiştirebilirsiniz.
 
-İpucu: FTP bağlantısı kurarken kullancı adını belirtebilirsiniz. Örn: 'cd
-ftp://kullanıcı@sunucu.edu.tr'
+İpucu: FTP bağlantısı kurarken kullancı adını belirtebilirsiniz. Örn: 'cd ftp://kullanıcı@sunucu.edu.tr'
 
 İpucu: RPM dosyalarının üzerinde Enter tuşuna basarak içine girebilirsiniz.
 
 İpucu: Seçim dialoğunda dizinleri işaretlemek için bölü ekleyin.
 
-İpucu: Fare ile kopyalamak/yapıştırmak için Shift tuşunu basılı tutmanız
-gerekebilir.
+İpucu: Fare ile kopyalamak/yapıştırmak için Shift tuşunu basılı tutmanız gerekebilir.
 
 Hint: Key frequently visited ftp sites in the hotlist: type C-.
-

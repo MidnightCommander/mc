@@ -1,33 +1,26 @@
-Aholkua: Erabili Ktrl-x t hautatutako fitxategi izenak komando lerrora
-kopiatzeko.
+Aholkua: Erabili Ktrl-x t hautatutako fitxategi izenak komando lerrora kopiatzeko.
 
 Aholkua: Erabili Ktrl-x p uneko bide-izena komando lerrora kopiatzeko.
 
-Aholkua: Osatzea: erabili Alt-Tab (edo Ihes+Tab; X ingurunean
-Ktrl+Alt+Tab). Tekleatu bitan zerrenda bat jasotzeko.
+Aholkua: Osatzea: erabili Alt-Tab (edo Ihes+Tab; X ingurunean Ktrl+Alt+Tab). Tekleatu bitan zerrenda bat jasotzeko.
 
 Aholkua: Erabili Alt-p eta Alt-n komandoen historia atzitzeko.
 
-Aholkua: Karaktere bat txertatzeko? Erabili Kontrol-q eta karakterea
-(adibidez '+' txertatzeko Ktrl-q +).
+Aholkua: Karaktere bat txertatzeko? Erabili Kontrol-q eta karakterea (adibidez '+' txertatzeko Ktrl-q +).
 
 Aholkua: Mezu hauekin gogaituta? Itzali itzazu Aukerak/Diseinua menutik.
 
-Aholkua: Direktorioak hautatzea: erantsi «/» barra zeiharra bilaketa
-ereduaren amaieran.
+Aholkua: Direktorioak hautatzea: erantsi «/» barra zeiharra bilaketa ereduaren amaieran.
 
-Aholkua: Zure terminalari funtzio teklak falta bazaizkio, erabili
-Ihes+zenbakia sekuentzia.
+Aholkua: Zure terminalari funtzio teklak falta bazaizkio, erabili Ihes+zenbakia sekuentzia.
 
-Hint: GNU Midnight Commander-ren atariko orria:
-http://www.midnight-commander.org/
+Hint: GNU Midnight Commander-ren atariko orria: http://www.midnight-commander.org/
 
 Aholkua: Mesedez bidali akats txosten oro hona: mc-devel@gnome.org
 
 Aholkua: Tab teklak zure uneko panela aldatzen du.
 
-Aholkua: VFS-ren onurak: sakatu sartu tar fitxategi batean bere edukia
-aztertzeko.
+Aholkua: VFS-ren onurak: sakatu sartu tar fitxategi batean bere edukia aztertzeko.
 
 Aholkua: Eskuliburu orrialde ederra ere badaukagu.
 
@@ -37,74 +30,58 @@ Aholkua: % makroak komando lerroan ere erabili daitezke.
 
 Aholkua: Alt-! erabili programak exekutatu eta irteera erakuslean ikusteko.
 
-Aholkua: Fitxategiak zerrendatzeko formatua egokitu daiteke; egin "man mc"
-xehetasunak ikusteko.
+Aholkua: Fitxategiak zerrendatzeko formatua egokitu daiteke; egin "man mc" xehetasunak ikusteko.
 
 Hint: %D/%T expands to the tagged files in the opposite directory.
 
-Aholkua: Zure shell soila nahi duzu? Sakatu Ktrl-o, eta itzuli MC-ra Ktrl-o
-berriz erabiliz.
+Aholkua: Zure shell soila nahi duzu? Sakatu Ktrl-o, eta itzuli MC-ra Ktrl-o berriz erabiliz.
 
-Aholkua: CDPATH aldagaia ezarrita cd komandoetan teklak sakatzea aurreztu
-dezakezu.
+Aholkua: CDPATH aldagaia ezarrita cd komandoetan teklak sakatzea aurreztu dezakezu.
 
-Aholkua: Zure .* fitxategiak ikusi nahi badituzu, horrela adierazi
-Konfigurazio elkarrizketan.
+Aholkua: Zure .* fitxategiak ikusi nahi badituzu, horrela adierazi Konfigurazio elkarrizketan.
 
-Aholkua: Zure *~backup fitxategiak ikusi nahi dituzu? Ezarri ezazu
-Konfigurazio elkarrizketan.
+Aholkua: Zure *~backup fitxategiak ikusi nahi dituzu? Ezarri ezazu Konfigurazio elkarrizketan.
 
-Aholkua: Osatzea, elkarrizketa guztietako sarrera lerro guztietan
-dabil. Sakatu Alt-Tab (X ingurunean Ktrl+Alt+Tab).
+Aholkua: Osatzea elkarrizketa guztietako sarrera lerro guztietan dabil. Sakatu Alt-Tab (X ingurunean Ktrl+Alt+Tab).
 
 Aholkua: Terminal moteletan -s banderak lagundu dezake.
 
-Aholkua: Aurkitu fitxategia: Aurkitutako fitxategietan lan egin dezakezu
-Panelatu botoia erabiliz.
+Aholkua: Aurkitu fitxategia: Aurkitutako fitxategietan lan egin dezakezu Panelatu botoia erabiliz.
 
 Aholkua: Bilaketa konplexuak egin nahi? Erabili Kanpora Paneleratu komandoa.
 
-Hint: To change directory halfway through typing a command, use M-c (quick
-cd).
+Aholkua: Direktorioz aldatzeko komando bat tekleatzen erdibidean zaudela, erabili M-c (cd azkarra).
 
-Oharra: Shell komandoak ez dira ibiliko bertakoa ez den fitxategi-sisteman
-zaudenean.
+Oharra: Shell komandoak ez dira ibiliko bertakoa ez den fitxategi-sisteman zaudenean.
 
 Aholkua: Ekarri atzera testua heriotzatik Ktrl-y erabilita.
 
 Aholkua: Zure teklatako batzuk ez dabiltza? Begiratu Aukerak/Teklak ikasi.
 
-Aholkua: Komando baten irteera erakuslean ikusteko, erabili M-!
+Aholkua: Komando baten irteera erakuslean ikusteko, erabili Alt-!
 
-Hint: F13 (or Shift-F3) invokes the viewer in raw mode.
+Aholkua: F13 (edo Maius-F3), erakuslea deitzen du modu gordinean.
 
 Aholkua: F4-rentzako editorea zehaztu dezakezu EDITOR shell aldagaiarekin.
 
-Aholkua: Kanpoko erakuslea zehaztu dezakezu VIEWER edo PAGER shell
-aldagaiekin.
+Aholkua: Kanpoko erakuslea zehaztu dezakezu VIEWER edo PAGER shell aldagaiekin.
 
-Aholkua: Berresteko eskaera guztiak ezgaitu ditzakezu
-Aukerak/Berrespena-tik.
+Aholkua: Berresteko eskaera guztiak ezgaitu ditzakezu Aukerak/Berrespena-tik.
 
 Hint: Leap to frequently used directories in a single bound with C-.
 
-Aholkua: FTP anonimoa egin dezakezu mc-rekin 'cd ftp://machine.edu'
-tekleatuta.
+Aholkua: FTP anonimoa egin dezakezu mc-rekin 'cd ftp://machine.edu' tekleatuta.
 
 Hint: FTP is built in the Midnight Commander, check the File/FTP link menu.
 
 Aholkua: Alt-t zerrendatze modua azkar aldatzeko.
 
-Aholkua: Erabiltzaile izena zehaztu dezakezu ftp-ak egiterakoan: 'cd
-ftp://erabiltzailea@machine.edu'
+Aholkua: Erabiltzaile izena zehaztu dezakezu ftp-ak egiterakoan: 'cd ftp://erabiltzailea@machine.edu'
 
-Aholkua: RPM fitxategiak arakatu ditzakezu rpm fitxategi baten gainean sartu
-sakatuta.
+Aholkua: RPM fitxategiak arakatu ditzakezu rpm fitxategi baten gainean sartu sakatuta.
 
 Hint: To mark directories on the select dialog box, append a slash.
 
-Aholkua: Saguaren ebaki eta itsatsi erabiltzeko maius tekla sakatu behar
-izan dezakezu
+Aholkua: Saguaren ebaki eta itsatsi erabiltzeko maius tekla sakatu behar izan dezakezu
 
 Hint: Key frequently visited ftp sites in the hotlist: type C-.
-

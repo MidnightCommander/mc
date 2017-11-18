@@ -2,16 +2,13 @@ Tip: C-x t vloží na příkazovou řádku označené soubory.
 
 Tip: C-x p vloží na příkazovou řádku jméno aktuálního adresáře.
 
-Tip: Doplňování: použijte M-Tab (nebo Esc+Tab). Dvojitým zadáním získáte
-seznam.
+Tip: Doplňování: použijte M-Tab (nebo Esc+Tab). Dvojitým zadáním získáte seznam.
 
 Tip: Použitím M-p nebo M-n se pohybujete v historii příkazů.
 
-Tip: Chcete zadat speciální znak (např. tabulátor)? Použijte Ctrl-q a daný
-znak.
+Tip: Chcete zadat speciální znak (např. tabulátor)? Použijte Ctrl-q a daný znak.
 
-Tip: Nechcete již vidět tipy? Vypněte je v Nastavení/Zobrazení/Další
-nastavení.
+Tip: Nechcete již vidět tipy? Vypněte je v Nastavení/Zobrazení/Další nastavení.
 
 Tip: Adresáře vyberete přidáním lomítka na konec vzorku.
 
@@ -55,8 +52,7 @@ Tip: Pro opravdu složité operace zkuste příkaz Příkaz/Externí panelizace.
 
 Tip: Pokud chcete změnit adresář při práci na příkazové řádce, zkuste M-c.
 
-Pozn.: Příkazy shellu nefungují, pokud nepracujete na lokálním systému
-souborů.
+Pozn.: Příkazy shellu nefungují, pokud nepracujete na lokálním systému souborů.
 
 Tip: Smazaný text obnovíte C-y.
 
@@ -84,11 +80,8 @@ Tip: Při FTP spojení můžete zadat i jméno: „cd ftp://jmeno@stroj.domena.c
 
 Tip: RPM soubory si prohlédnete stiskem Enter.
 
-Tip: Pro označení adresářů v dialogovém okně výběru souborů, přidejte
-lomítko.
+Tip: Pro označení adresářů v dialogovém okně výběru souborů, přidejte lomítko.
 
-Tip: Chcete-li použít myš pro zkopírování nebo vložení textu, stiskněte
-Shift.
+Tip: Chcete-li použít myš pro zkopírování nebo vložení textu, stiskněte Shift.
 
 Hint: Key frequently visited ftp sites in the hotlist: type C-.
-

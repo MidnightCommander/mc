@@ -14,8 +14,7 @@ Hint: Selecting directories: add a slash to the end of the matching pattern.
 
 Hint: If your terminal lacks functions keys, use the ESC+number sequence.
 
-Hint: The homepage of GNU Midnight Commander:
-http://www.midnight-commander.org/
+Hint: The homepage of GNU Midnight Commander: http://www.midnight-commander.org/
 
 Hint: Please send any bug reports to mc-devel@gnome.org
 
@@ -29,8 +28,7 @@ Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 Hint: % macros work even on the command line.
 
-Hint: M-! will allow you to execute programs and see the output in the
-viewer.
+Hint: M-! will allow you to execute programs and see the output in the viewer.
 
 Hint: The file listing format can be customized; do "man mc" for details.
 
@@ -52,8 +50,7 @@ Hint: Find File: you can work on the files found using the Panelize button.
 
 Hint: Want to do complex searches? Use the External Panelize command.
 
-Hint: To change directory halfway through typing a command, use M-c (quick
-cd).
+Hint: To change directory halfway through typing a command, use M-c (quick cd).
 
 Note: Shell commands will not work when you are on a non-local file system.
 
@@ -67,8 +64,7 @@ Hint: F13 (or Shift-F3) invokes the viewer in raw mode.
 
 Hint: You may specify the editor for F4 with the shell variable EDITOR.
 
-Hint: You may specify the external viewer with the shell vars VIEWER or
-PAGER.
+Hint: You may specify the external viewer with the shell vars VIEWER or PAGER.
 
 Hint: You can disable all requests for confirmation in Options/Confirmation.
 
@@ -80,8 +76,7 @@ Hint: FTP is built in the Midnight Commander, check the File/FTP link menu.
 
 Hint: M-t changes quickly the listing mode.
 
-Hint: You can specify the username when doing ftps: 'cd
-ftp://user@machine.edu'
+Hint: You can specify the username when doing ftps: 'cd ftp://user@machine.edu'
 
 Hint: You can browse RPM files by tapping enter on top of an rpm file.
 
@@ -90,4 +85,3 @@ Hint: To mark directories on the select dialog box, append a slash.
 Hint: To use the mouse cut and paste may require holding the shift key
 
 Hint: Key frequently visited ftp sites in the hotlist: type C-.
-

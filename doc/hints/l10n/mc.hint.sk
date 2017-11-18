@@ -2,8 +2,7 @@ Tip: Pomocou C-x t skopírujete označené názvy súborov do príkazového riad
 
 Tip: Pomocou C-x p skopírujete aktuálnu cestu do príkazového riadka.
 
-Rada: Dopĺňanie pomocou M-Tab (alebo Esc+Tab). Ak ho napíšete dvakrát,
-zobrazí sa zoznam.
+Rada: Dopĺňanie pomocou M-Tab (alebo Esc+Tab). Ak ho napíšete dvakrát, zobrazí sa zoznam.
 
 Tip: Pomocou M-p a M-n zobrazíte históriu príkazov.
 
@@ -15,8 +14,7 @@ Tip: Výber adresárov: pridajte lomku na koniec vyhľadávacieho vzoru.
 
 Tip: Ak váš terminál nemá funkčné klávesy, použite ESC+číselnú postupnosť.
 
-Tip: Domovská stránka GNU Midnight Commander:
-http://www.midnight-commander.org/
+Tip: Domovská stránka GNU Midnight Commander: http://www.midnight-commander.org/
 
 Tip: Hlásenia chýb posielajte na mc-devel@gnome.org
 
@@ -32,41 +30,33 @@ Tip: Makrá % fungujú aj na príkazovom riadku.
 
 Tip: M-! vám umožní spúšťať programy a vidieť výstup v prehliadači.
 
-Tip: Formát výpisu súborov je možné prispôsobiť. Podrobnosti nájdete v „man
-mc“.
+Tip: Formát výpisu súborov je možné prispôsobiť. Podrobnosti nájdete v „man mc“.
 
 Tip: %D/%T expanduje označené súbory v náprotivnom adresári.
 
-Tip: Chcete čistý shell? Stlačte C-o a späť do MC sa prepnite oäť pomocou
-C-o.
+Tip: Chcete čistý shell? Stlačte C-o a späť do MC sa prepnite oäť pomocou C-o.
 
 Tip: Nastavenie premennej CDPATH vám ušetrí písanie pri príkazoch cd.
 
 Tip: Ak chcete vidieť súbory .*, zapnite si to v dialógu Konfigurácia.
 
-Tip: Ak chcete vidieť záložné súbory *~, zapnite si to v dialógu
-Konfigurácia.
+Tip: Ak chcete vidieť záložné súbory *~, zapnite si to v dialógu Konfigurácia.
 
-Tip: Dopĺňanie funguje vo vstupných poliach všetkých dialógov. Stačí stlačiť
-M-Tab.
+Tip: Dopĺňanie funguje vo vstupných poliach všetkých dialógov. Stačí stlačiť M-Tab.
 
 Tip: Na pomalých termináloch môže pomôcť prepínač -s.
 
-Tip: Nájdenie súboru: s nájdenými súbormi môžete pracovať pomocou tlačidla
-Panelizovať.
+Tip: Nájdenie súboru: s nájdenými súbormi môžete pracovať pomocou tlačidla Panelizovať.
 
 Tip: Chcete využiť komplexné hľadanie? Použite príkaz Externá panelizácia.
 
-Tip: Ak chcete zmeniť adresár uprostred písania príkazu, použite M-c (rýchle
-cd).
+Tip: Ak chcete zmeniť adresár uprostred písania príkazu, použite M-c (rýchle cd).
 
-Tip: príkazy shellu nebudú fungovať, keď sa nachádzate na nelokálnom
-súborovom systéme.
+Tip: príkazy shellu nebudú fungovať, keď sa nachádzate na nelokálnom súborovom systéme.
 
 Tip: Vráťte späť zmazaný text pomocou C-y.
 
-Tip: Nefungujú niektoré z vašich klávesov? Pozrite sa na Možnosti/Učenie
-klávesov.
+Tip: Nefungujú niektoré z vašich klávesov? Pozrite sa na Možnosti/Učenie klávesov.
 
 Tip: Pomocou M-! zobrazíte výstup príkazu v prehliadači.
 
@@ -74,30 +64,24 @@ Tip: F13 (alebo Shift-F3) vyvolá prehliadač v nespracovanom režime.
 
 Tip: Premennou prostredia EDITOR môžete určiť editor pre F4.
 
-Tip: Premennými prostredia VIEWER alebo PAGER môžete určiť externý
-prehliadač.
+Tip: Premennými prostredia VIEWER alebo PAGER môžete určiť externý prehliadač.
 
-Tip: Môžete zakázať všetky žiadosti o potvrdenie pomocou
-Možnosti/Konfigurácia.
+Tip: Môžete zakázať všetky žiadosti o potvrdenie pomocou Možnosti/Konfigurácia.
 
 Hint: Leap to frequently used directories in a single bound with C-.
 
 Tip: Prístup k anonymnému FTP z mc získate napísaním „cd ftp://machine.edu“
 
-Tip: FTP je súčasťou aplikácie Midnight Commander, pozrite si menu
-Súbor/Pripojenie FTP.
+Tip: FTP je súčasťou aplikácie Midnight Commander, pozrite si menu Súbor/Pripojenie FTP.
 
 Tip: M-t rýchlo zmení režim výpisu.
 
-Tip: Môžete uviesť meno používateľa v príkaze ftps: 'cd
-ftp://používateľ@počítač'
+Tip: Môžete uviesť meno používateľa v príkaze ftps: 'cd ftp://používateľ@počítač'
 
 Tip: Stlačením Enter na súbore .rpm môžete prechádzať súbory v RPM.
 
 Tip: Adresáre v dialógovom okne výberu môžete označiť pridaním lomky.
 
-Tip: Na kopírovanie a vkladanie pomocou myši môže byť potrebné podržať
-Shift.
+Tip: Na kopírovanie a vkladanie pomocou myši môže byť potrebné podržať Shift.
 
 Hint: Key frequently visited ftp sites in the hotlist: type C-.
-

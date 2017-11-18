@@ -1,10 +1,8 @@
-Consello: Use C-x t para copiar os nomes dos ficheiros marcados na liña de
-ordes.
+Consello: Use C-x t para copiar os nomes dos ficheiros marcados na liña de ordes.
 
 Consello: C-x p copia a ruta actual na liña de ordes.
 
-Consello: M-Tab (ou ESC+Tab) completa ordes/nomes  Dúas veces devolve unha
-lista.
+Consello: M-Tab (ou ESC+Tab) completa ordes/nomes  Dúas veces devolve unha lista.
 
 Consello: Use M-p e M-n para acceder ao historial de ordes.
 
@@ -12,20 +10,17 @@ Consello: para introducir un carácter especial: Ctrl-q e o carácter.
 
 Consello: canso desas mensaxes? Desactíveos desde o menú Opcións/Deseño.
 
-Consello: para seleccionar directorios: engada unha barra «/» na fin do
-patrón de busca.
+Consello: para seleccionar directorios: engada unha barra «/» na fin do patrón de busca.
 
 Consello: se o seu terminal non ten teclas de función, use ESC+número.
 
-Consello: a páxina principal de GNU Midnight Commander é:
-http://www.midnight-commander.org/
+Consello: a páxina principal de GNU Midnight Commander é: http://www.midnight-commander.org/
 
 Consello: informe de calquera erro a mc-devel@gnome.org
 
 Consello: a tecla Tab cambia o seu panel actual.
 
-Consello: o mellor VFS! Prema Intro nun arquivo «tar» para examinar o seu
-contido.
+Consello: o mellor VFS! Prema Intro nun arquivo «tar» para examinar o seu contido.
 
 Suxestión: temos tamén unha páxina de manual: «man mc»
 
@@ -35,22 +30,17 @@ Consello: as macros con % funcionan incluso na liña de ordes.
 
 Consello: con M-! poderá executar programas e ver a saída no visor.
 
-Consello: pode personalizar o formato de listado de ficheiros; vexa «man.mc»
-para obter máis detalles.
+Consello: pode personalizar o formato de listado de ficheiros; vexa «man.mc» para obter máis detalles.
 
 Consello: %D/%T expande os ficheiros marcados no panel oposto.
 
-Consello: quere o shell normal? prema C-o, e para volver a MC prema C-o de
-novo.
+Consello: quere o shell normal? prema C-o, e para volver a MC prema C-o de novo.
 
-Consello: configurar a variable CDPATH pode aforrarlle escritura nas ordes
-«cd».
+Consello: configurar a variable CDPATH pode aforrarlle escritura nas ordes «cd».
 
-Consello: para ver os ficheiros «.*» abonda indicalo no dialogo de
-configuración.
+Consello: para ver os ficheiros «.*» abonda indicalo no dialogo de configuración.
 
-Consello: para ver os ficheiros de copia de seguranza tipo *~ fagao no
-dialogo de configuración.
+Consello: para ver os ficheiros de copia de seguranza tipo *~ fagao no dialogo de configuración.
 
 Consello: Tamén se poden auto-completar nomes nos diálogos con lt-Tab.
 
@@ -72,8 +62,7 @@ Consello: para ver a saída dunha orde, use M-!
 
 Consello: F13 (ou Maiús-F3) invoca ao visor en modo «sen formato».
 
-Consello: F4 pode usar calquera editor que lle indiquemos na variábel
-EDITOR.
+Consello: F4 pode usar calquera editor que lle indiquemos na variábel EDITOR.
 
 Consello: pódese empregar un visor externo indicándoo na variábel PAGER.
 
@@ -87,15 +76,12 @@ Consello: FTP está integrado en Midnight Commander, en «Conexión por FTP».
 
 Consello: M-t cambia rapidamente entre varios modos de listaxe.
 
-Consello: para especificar o nome de usuario ao facer un FTP: «cd
-ftp://usuario@maquina.dominio»
+Consello: para especificar o nome de usuario ao facer un FTP: «cd ftp://usuario@maquina.dominio»
 
 Consello: pode examinar un ficheiro RPM premendo Intro sobre del.
 
-Consello: para marcar os directorios no cadro de diálogo de selección,
-engada unha barra «/».
+Consello: para marcar os directorios no cadro de diálogo de selección, engada unha barra «/».
 
 Consello: para cortar e pegar co rato manteña premida a tecla Maiús.
 
 Hint: Key frequently visited ftp sites in the hotlist: type C-.
-

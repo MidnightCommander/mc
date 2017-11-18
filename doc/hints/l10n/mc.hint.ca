@@ -1,93 +1,87 @@
-Hint: Use C-x t to copy tagged file names to the command line.
+Consell: Empreu «Ctrl-x» per a copiar els fitxers marcats a la línia d'ordres.
 
-Hint: Use C-x p to copy the current pathname to the command line.
+Consell: Empreu «Ctrl-x» per a copiar tot el camí a la línia d'ordres.
 
-Hint: Completion: use M-Tab (or Esc+Tab).  Type it twice to get a list.
+Consell: Compleció: empreu «M-Tab» (o «Esc+Tab»). Dues vegades per a mostrar una llista.
 
-Hint: Use M-p and M-n to access the command history.
+Consell: Empreu «M-p» i «M-n» per accedir a l'historial de les ordres.
 
-Hint: Need to quote a character? Use Control-q and the character.
+Consell: Us cal un caràcter especial? Empreu «Ctrl-q» i el caràcter.
 
-Hint: Tired of these messages? Turn them off from the Options/Layout menu.
+Consell: Cansat d'aquests missatges? Es treuen des del menú «Opcions/Format».
 
-Hint: Selecting directories: add a slash to the end of the matching pattern.
+Consell: Seleccionar directoris: afegiu «/» al final del patró de coincidència.
 
-Hint: If your terminal lacks functions keys, use the ESC+number sequence.
+Consell: Si no funcionen les tecles de funció, empreu la seqüència «ESC+número».
 
-Hint: The homepage of GNU Midnight Commander:
-http://www.midnight-commander.org/
+Consell: La pàgina inicial del Midnight Commander de GNU és http://www.midnight-commander.org/
 
-Hint: Please send any bug reports to mc-devel@gnome.org
+Consell: Si us plau, envieu qualsevol informe d'error a «mc-devel@gnome.org».
 
-Hint: Tab changes your current panel.
+Consell: El tabulador canvia de plafó.
 
-Hint: VFS coolness: tap enter on a tar file to examine its contents.
+Consell: El millor VFS: toqueu «Retorn» en un fitxer TAR per examinar el seu contingut.
 
-Hint: We also have a nice manual page.
+Consell: També tenim una bona pàgina de manual.
 
 Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
-Hint: % macros work even on the command line.
+Consell: Les macros amb % funcionen fins i tot a la línia d'ordres.
 
-Hint: M-! will allow you to execute programs and see the output in the
-viewer.
+Consell: Amb «M-!» podreu executar programes i veure la sortida en el visor.
 
-Hint: The file listing format can be customized; do "man mc" for details.
+Consell: El format del llistat es pot personalitzar, per a més detalls feu «man mc».
 
-Hint: %D/%T expands to the tagged files in the opposite directory.
+Consell: %D/%T representa els fitxers marcats al directori oposat.
 
-Hint: Want your plain shell? Press C-o, and get back to MC with C-o again.
+Consell: Voleu un intèrpret d'ordres pla? Premeu «Ctrl-o», el mateix per tornar al MC.
 
-Hint: Setting the CDPATH variable can save you keystrokes in cd commands.
+Consell: Establint la variable CDPATH podreu estalviar pulsacions de teclat en les ordres «cd».
 
-Hint: If you want to see your .* files, say so in the Configuration dialog.
+Consell: Si voleu veure els fitxers «.*», digueu-ho al diàleg de configuració.
 
-Hint: Want to see your *~ backup files? Set it in the Configuration dialog.
+Consell: Voleu veure els fitxers de còpia de seguretat «.~»? Establiu-ho al diàleg de configuració.
 
-Hint: Completion works on all input lines in all dialogs. Just press M-Tab.
+Consell: La compleció funciona en totes les línies d'entrada en tots els diàlegs. Simplement premeu «M-Tab».
 
-Hint: On slow terminals the -s flag may help.
+Consell: En terminals lents, el paràmetre «-s» pot ajudar.
 
-Hint: Find File: you can work on the files found using the Panelize button.
+Consell: Trobar fitxers: podeu treballar en trobar fitxers amb el botó «Quadre de cerca».
 
-Hint: Want to do complex searches? Use the External Panelize command.
+Consell: Voleu fer cerques complexes? Empreu l'ordre «Quadre de cerca externa».
 
-Hint: To change directory halfway through typing a command, use M-c (quick
-cd).
+Consell: Canvieu a meitat de camí del directori escrivint una ordre, empreu «M-c» («cd» ràpid).
 
-Note: Shell commands will not work when you are on a non-local file system.
+Nota: Les ordres de l'intèrpret d'ordres no funcionaran quan s'està en un sistema de fitxers no local.
 
-Hint: Bring text back from the dead with C-y.
+Consell: Recupereu el text esborrat amb «Ctrl-y».
 
-Hint: Are some of your keys not working? Look at Options/Learn keys.
+Consell: Alguna de les tecles no funciona? Mireu «Opcions/Aprendre les tecles».
 
-Hint: To look at the output of a command in the viewer, use M-!
+Consell: Mireu la sortida d'una ordre al visor, empreu «M-!».
 
-Hint: F13 (or Shift-F3) invokes the viewer in raw mode.
+Consell: «F13» (o «Maj-F3») invocareu el visor en el mode sense format.
 
-Hint: You may specify the editor for F4 with the shell variable EDITOR.
+Consell: Podeu especificar l'editor per a «F4» amb la variable d'entorn EDITOR.
 
-Hint: You may specify the external viewer with the shell vars VIEWER or
-PAGER.
+Consell: Podeu especificar el visor extern amb la variable d'entorn VIEWER o PAGER.
 
-Hint: You can disable all requests for confirmation in Options/Confirmation.
+Consell: Podeu inhabilitar tots els missatges de confirmació a «Opcions/Confirmació».
 
 Hint: Leap to frequently used directories in a single bound with C-.
 
-Hint: You can do anonymous FTP with mc by typing 'cd ftp://machine.edu'
+Consell: Podeu fer FTP anònim amb mc escrivint «cd ftp://màquina.edu».
 
-Hint: FTP is built in the Midnight Commander, check the File/FTP link menu.
+Consell: L'FTP està integrat al Midnight Commander, comproveu el menú «Fitxer/Enllaç FTP».
 
-Hint: M-t changes quickly the listing mode.
+Consell: «M-t» canvia ràpidament entre els modes de llistat.
 
-Hint: You can specify the username when doing ftps: 'cd
-ftp://user@machine.edu'
+Consell: Podeu especificar el nom d'usuari quan feu FTPS: «cd ftp://usuari@màquina.domini»
 
-Hint: You can browse RPM files by tapping enter on top of an rpm file.
+Consell: Podeu navegar pels fitxers RPM prement «Retorn» a sobre d'un fitxer RPM.
 
-Hint: To mark directories on the select dialog box, append a slash.
+Consell: Per a marcar directoris al diàleg de selecció, afegiu-l'hi un «/».
 
-Hint: To use the mouse cut and paste may require holding the shift key
+Consell: Per a tallar i enganxar amb el ratolí, podria requerir mantenir premuda la tecla «Maj».
 
 Hint: Key frequently visited ftp sites in the hotlist: type C-.
-

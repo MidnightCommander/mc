@@ -1,30 +1,26 @@
 Konsilo: Stir-x t por kopii markitajn dosiernomojn al la komandlinio.
 
-Konsilo: Stir-x p por kopii la aktualan vojnomon al la komandlinio.
+Konsilo: Stir-x p por kopii la nunan vojnomon al la komandlinio.
 
-Konsilo: Alt-Tabo (aŭ Esk-Tabo) por finigi tajpatan frazon. Dufoje por
-listo.
+Konsilo: Alt-Tabo (aŭ Esk-Tabo) por finigi tajpatan frazon. Dufoje por listo.
 
 Konsilo: Alt-p kaj Alt-n por atingi la komandan historion.
 
 Konsilo: Stir-q por citi signon.
 
-Konsilo: Ĉu vi ne plu volas vidi ĉi tiujn mesaĝojn? Malaktivigi ilin en
-Agordo/Aranĝo.
+Konsilo: Ĉu vi ne plu volas vidi ĉi tiujn mesaĝojn? Malaktivigi ilin en Agordo/Aranĝo.
 
 Konsilo: Aldoni oblikvon al la fino de ŝablono por elekti dosierujon.
 
-Konsilo: Se via terminalo malhavas funkciajn klavojn, uzu la kombinon
-Esk+numero.
+Konsilo: Se via terminalo malhavas funkciajn klavojn, uzu la kombinon Esk+numero.
 
-Konsilo: La ĉefpaĝo de
+Konsilo: La ĉefpaĝo de Midnight Commander: http://www.midnight-commander.org/
 
 Konsilo: Sendi raportojn pri eraroj (anglalingve) al mc-devel@gnome.org
 
-Konsilo: Tabo ŝanĝas la aktualan flankon.
+Konsilo: Tabo ŝanĝas la nunan flankon.
 
-Konsilo: Mirinde, klavi la Enen-klavon super tar-dosiero por esplori ĝian
-enhavon.
+Konsilo: Mirinde, klavi la Enen-klavon super tar-dosiero por esplori ĝian enhavon.
 
 Konsilo: Ankaŭ ekzistas manlibra paĝo.
 
@@ -32,31 +28,27 @@ Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 Konsilo: makrooj kun % funkcias eĉ ĉe la komandlinio.
 
-Konsilo: Alt-! por plenumigi programon kaj vidi la eligon en la
-dokumento-legilo.
+Konsilo: Alt-! por plenumigi programon kaj vidi la eligon en la dokumento-legilo.
 
-Konsilo: La aranĝon en la dosiera listo eblas agordi.
+Konsilo: La aranĝon en la dosiera listo agordeblas.
 
 Konsilo: %D/%T etendiĝas al la markitaj dosieroj en la kontraŭa dosierujo.
 
 Konsilo: Stir-o por inversigi inter la flankoj kaj ŝelo.
 
-Konsilo: Agordi la medivariablon CDPATH por malmulta klavado.
+Konsilo: Agordi la medivariablon CDPATH por malplia klavado.
 
-Konsilo: Deklari ke vi volas vidi kaŝitajn dosierojn en la agorda dialogujo.
+Konsilo: Deklari en la agorda dialogujo tian, se vi volas vidi kaŝitajn dosierojn.
 
-Konsilo: Deklari ke vi volas vidi provizorajn dosierojn en la agorda
-dialogujo.
+Konsilo: Deklari en la agorda dialogujo tian, se vi volas vidi provizorajn dosierojn.
 
-Konsilo: Finigo funkcias ĉe tekstaj kampoj en ĉiuj dialogujo. Premu:
-Alt-Tabo.
+Konsilo: Finigo funkcias ĉe tekstaj kampoj en ĉiuj dialogujoj. Premu: Alt-Tabo.
 
-Konsilo: La komandlinia parametro -s por pli malrapidaj terminaloj.
+Konsilo: La komandlinia parametro -s eble estus helpa por malrapidaj terminaloj.
 
 Konsilo: Eblas prilabori la trovitajn dosierojn per la butono "Flankigi".
 
-Konsilo: Ĉu vi volas fari malsimplajn serĉojn? "Eksterigi Flankojn" estas
-ebla esti uzata.
+Konsilo: Ĉu vi volas fari malsimplajn serĉojn? "Eksterigi Flankojn" uzeblas.
 
 Konsilo: Alt-c por ŝanĝi dosierujon dum tajpi komandon.
 
@@ -64,7 +56,7 @@ Noto: Ŝelaj komandoj ne funkcias ĉe foraj dosiersistemoj.
 
 Konsilo: Stir-y por revivigi tekston.
 
-Konsilo: Agordi/Lerni klavojn por certigi, ke ĉiuj klavoj funkcias.
+Konsilo: Agordu/Lernu klavojn por certigi, ke ĉiuj klavoj funkcias.
 
 Konsilo: Alt-! por rigardi la eligon de komando en la dokumento-legilo.
 
@@ -72,8 +64,7 @@ Konsilo: F13 (aŭ Reg-F3) por la dokumento-legilo en nuda reĝimo.
 
 Konsilo: Specifi la tekstoredaktilon por F4 per la medivariablo EDITOR.
 
-Konsilo: Specifi la eksteran dokumento-legilon per la medivariablon VIEWER
-aŭ PAGO.
+Konsilo: Specifi la eksteran dokumento-legilon per la medivariablon VIEWER aŭ PAGER.
 
 Konsilo: Ĉiuj konfirmo-petoj estas malaktivigeblaj en Agordo/Konfirmo.
 
@@ -81,19 +72,16 @@ Hint: Leap to frequently used directories in a single bound with C-.
 
 Konsilo: 'cd ftp://machine.edu' por sennoma FTP-konekto al machine.org
 
-Konsilo: Dosiero/FTP por ena FTP-kliento
+Konsilo: Dosiero/FTP por apriora FTP-kliento
 
 Konsilo: Alt-t por rapide ŝanĝi la listan reĝimon
 
-Konsilo: Specifi la salutnomon ĉe FTP-servilo per 'cd
-ftp://salutnomo@machine.edu'
+Konsilo: Specifi la salutnomon ĉe FTP-servilo per 'cd ftp://salutnomo@machine.edu'
 
 Konsilo: Klavi la enen-klavon super RPM-dosieron por rigardi ĝian enhavon.
 
 Konsilo: Por marki dosierujojn ĉe elektiloj almetu oblikvon.
 
-Konsilo: Eble vi devas premadi la registrumon por kopii kaj alglui per la
-muso.
+Konsilo: Eble vi devas premadi la registrumon por kopii kaj alglui per la muso.
 
 Hint: Key frequently visited ftp sites in the hotlist: type C-.
-

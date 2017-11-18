@@ -1,34 +1,26 @@
-Petunjuk: Gunakan C-x untuk menyalin nama berkas yang ditandai ke command
-line.
+Petunjuk: Gunakan C-x untuk menyalin nama berkas yang ditandai ke command line.
 
 Petunjuk: Gunakan C-x untuk menyalin nama path saat ini ke command line.
 
-Petunjuk: Pelengkapan: gunakan M-Tab (atau Esc+Tab). Ketikkan dua kali untuk
-memperoleh daftar.
+Petunjuk: Pelengkapan: gunakan M-Tab (atau Esc+Tab). Ketikkan dua kali untuk memperoleh daftar.
 
 Petunjuk: Gunakan M-p dan M-n untuk mengakses riwayat perintah.
 
-Petunjuk: Perlu mengutip suatu karakter? Gunakan Contrl-q dan karakter
-tersebut.
+Petunjuk: Perlu mengutip suatu karakter? Gunakan Contrl-q dan karakter tersebut.
 
-Petunjuk: Bosan dengan pesan-pesan ini? Matikan mereka dari menu Opsi/Tata
-Letak.
+Petunjuk: Bosan dengan pesan-pesan ini? Matikan mereka dari menu Opsi/Tata Letak.
 
-Petunjuk: Memilih direktori: tambahkan garis miring di akhir pola yang
-cocok.
+Petunjuk: Memilih direktori: tambahkan garis miring di akhir pola yang cocok.
 
-Petunjuk: Bila terminal Anda tak punya tombol fungsi, gunakan urutan
-ESC+angka.
+Petunjuk: Bila terminal Anda tak punya tombol fungsi, gunakan urutan ESC+angka.
 
-Petunjuk: Laman web GNU Midnight Commander:
-http://www.midnight-commander.org/
+Petunjuk: Laman web GNU Midnight Commander: http://www.midnight-commander.org/
 
 Petunjuk: Harap kirim laporan bug ke mc-devel@gnome.org
 
 Petunjuk: Tab mengubah panel Anda saat ini.
 
-Petunjuk: VFS itu keren: ketuk enter pada suatu file tar untuk memeriksa
-isinya.
+Petunjuk: VFS itu keren: ketuk enter pada suatu file tar untuk memeriksa isinya.
 
 Petunjuk: Kami juga memiliki halaman manual yang bagus.
 
@@ -36,83 +28,60 @@ Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 Petunjuk: makro bekerja bahkan pada command line.
 
-Petunjuk: M-! memungkinkan Anda mengeksekusi program dan melihat keluaran
-dalam penampil.
+Petunjuk: M-! memungkinkan Anda mengeksekusi program dan melihat keluaran dalam penampil.
 
-Petunjuk: Format daftar file dapat dikustomisasi; jalankan "man mc" untuk
-rincian.
+Petunjuk: Format daftar file dapat dikustomisasi; jalankan "man mc" untuk rincian.
 
-Petunjuk: %D/%T mengembang menjadi file yang di-tag di direktori yang
-berlawanan.
+Petunjuk: %D/%T mengembang menjadi file yang di-tag di direktori yang berlawanan.
 
-Petunjuk: Ingin shell polos? Tekan C-o, dan kembali lagi ke MC dengan C-o
-lagi.
+Petunjuk: Ingin shell polos? Tekan C-o, dan kembali lagi ke MC dengan C-o lagi.
 
-Petunjuk: Menata variabel CDPATH dapat menghemat ketukan tombol dalam
-perintah cd.
+Petunjuk: Menata variabel CDPATH dapat menghemat ketukan tombol dalam perintah cd.
 
-Petunjtuk: Bila Anda ingin melihat file .*, nyatakan saja dalam dialog
-Konfigurasi.
+Petunjtuk: Bila Anda ingin melihat file .*, nyatakan saja dalam dialog Konfigurasi.
 
 Petunjuk: Ingin melihat file cadangan *~? Atur itu dalam dialog Konfigurasi.
 
-Petunjuk: Pelengkapan bekerja pada semua baris masukan dalam semua
-dialog. Tekan M-Tab saja.
+Petunjuk: Pelengkapan bekerja pada semua baris masukan dalam semua dialog. Tekan M-Tab saja.
 
 Petunjuk: Pada terminal yang lambat flag -s mungkin membantu.
 
-Petunjuk: Cari File: Anda dapat bekerja pada file yang ditemukan memakai
-tombol Panelkan.
+Petunjuk: Cari File: Anda dapat bekerja pada file yang ditemukan memakai tombol Panelkan.
 
-Petunjuk: Ingin melakukan pencarian rumit? Pakai perintah Panelkan
-Eksternal.
+Petunjuk: Ingin melakukan pencarian rumit? Pakai perintah Panelkan Eksternal.
 
-Petunjul: Untuk pindah direktori saat tengah mengetikkan suatu perintah,
-gunakan M-c (cd cepat).
+Petunjul: Untuk pindah direktori saat tengah mengetikkan suatu perintah, gunakan M-c (cd cepat).
 
-Catatan: Perintah shell tak akan bekerja bila Anda berada pada sistem file
-bukan lokal.
+Catatan: Perintah shell tak akan bekerja bila Anda berada pada sistem file bukan lokal.
 
 Petunjuk: Panggil kembali teks dari kematian dengan C-y.
 
-Petunjuk: Apakah beberapa tombol Anda tak bekerja? Lihat pada tombol-tombol
-Opsi/Belajar.
+Petunjuk: Apakah beberapa tombol Anda tak bekerja? Lihat pada tombol-tombol Opsi/Belajar.
 
-Petunjuk: Untuk melihat keluaran dari suatu perintah dalam penampil, pakai
-M-!
+Petunjuk: Untuk melihat keluaran dari suatu perintah dalam penampil, pakai M-!
 
 Petunjuk: F13 (atau Shift-F3) memanggil penampil dalam mode mentah.
 
-Petunjuk: Anda boleh menyatakan penyunting bagi F4 dengan variabel shell
-EDITOR.
+Petunjuk: Anda boleh menyatakan penyunting bagi F4 dengan variabel shell EDITOR.
 
-Petunjuk: Anda boleh menyatakan penampil eksternal dengan variabel shell
-VIEWER atau PAGER.
+Petunjuk: Anda boleh menyatakan penampil eksternal dengan variabel shell VIEWER atau PAGER.
 
-Petunjuk: Anda dapat menonaktifkan semua permintaan konfirmasi dalam
-Opsi/Konfirmasi.
+Petunjuk: Anda dapat menonaktifkan semua permintaan konfirmasi dalam Opsi/Konfirmasi.
 
 Hint: Leap to frequently used directories in a single bound with C-.
 
-Petunjuk: Anda dapat melakukan FTP anonim memakai mc dengan mengetikkan 'cd
-ftp://server.ftp.yang.dituju'
+Petunjuk: Anda dapat melakukan FTP anonim memakai mc dengan mengetikkan 'cd ftp://server.ftp.yang.dituju'
 
-Petunjuk: FTP sudah ada dalam Midnight Commander, periksalah menu File/Taut
-FTP.
+Petunjuk: FTP sudah ada dalam Midnight Commander, periksalah menu File/Taut FTP.
 
 Petunjuk: M-t mengubah secara cepat mode penampilan daftar.
 
-Petunjuk: Anda dapat menyatakan nama pengguna ketika melakukan ftp: 'cd
-ftp://pengguna@server.ftp.yang.dituju'
+Petunjuk: Anda dapat menyatakan nama pengguna ketika melakukan ftp: 'cd ftp://pengguna@server.ftp.yang.dituju'
 
-Petunjuk: Anda dapat meramban file RPM dengan mengetuk enter pada suatu file
-rpm.
+Petunjuk: Anda dapat meramban file RPM dengan mengetuk enter pada suatu file rpm.
 
-Petunjuk: Untuk menandai direktori pada kotak dialog pilihan, tambahkan
-suatu garis miring.
+Petunjuk: Untuk menandai direktori pada kotak dialog pilihan, tambahkan suatu garis miring.
 
-Petunjuk: Untuk memakai potong dan tempel tetikus mungkin perlu menahan
-tombol shift.
+Petunjuk: Untuk memakai potong dan tempel tetikus mungkin perlu menahan tombol shift.
 
 Hint: Key frequently visited ftp sites in the hotlist: type C-.
-

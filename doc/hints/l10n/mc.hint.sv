@@ -1,93 +1,87 @@
-Hint: Use C-x t to copy tagged file names to the command line.
+Tips: Använd C-x t för att kopiera markerade filers namn till kommandoraden.
 
-Hint: Use C-x p to copy the current pathname to the command line.
+Tips: Använd C-x p för att kopiera nuvarande katalognamn till kommandoraden.
 
-Hint: Completion: use M-Tab (or Esc+Tab).  Type it twice to get a list.
+Tips: Komplettering: anv M-Tab (el Esc+Tab). Tryck två ggr för att få en lista.
 
-Hint: Use M-p and M-n to access the command history.
+Tips: Använd M-p och M-n för att komma åt kommandohistoriken.
 
-Hint: Need to quote a character? Use Control-q and the character.
+Tips: Behöver du skriva ett kontrolltecken? Använd Control-q och tecknet.
 
-Hint: Tired of these messages? Turn them off from the Options/Layout menu.
+Är du trött på dessa meddelanden? Stäng av dem från Alternativ/Layout-menyn.
 
-Hint: Selecting directories: add a slash to the end of the matching pattern.
+Tips: Välja kataloger: Lägg till snedstreck i slutet av det matchande mönstret.
 
-Hint: If your terminal lacks functions keys, use the ESC+number sequence.
+Tips: Om din terminal saknar funktionstangenter, använd ESC+siffersekvens.
 
-Hint: The homepage of GNU Midnight Commander:
-http://www.midnight-commander.org/
+Tips: Hemsidan för GNU Midnight Commander: http://www.midnight-commander.org/
 
-Hint: Please send any bug reports to mc-devel@gnome.org
+Tips: Skicka felrapporter till mc-devel@gnome.org
 
-Hint: Tab changes your current panel.
+Tips: Tab ändrar din nuvarande panel.
 
-Hint: VFS coolness: tap enter on a tar file to examine its contents.
+Tips: VFS användbarhet: tryck enter på en tar-fil för att se dess innehåll.
 
-Hint: We also have a nice manual page.
+Tips: Vi har också en trevlig manualsida.
 
 Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
-Hint: % macros work even on the command line.
+Tips: %-makron fungerar även på kommandoraden.
 
-Hint: M-! will allow you to execute programs and see the output in the
-viewer.
+Tips: M-! tillåter dig att exekvera program och se utskriften i filvisaren.
 
-Hint: The file listing format can be customized; do "man mc" for details.
+Fillistningsformatet kan anpassas; kör "man mc" för detaljer.
 
-Hint: %D/%T expands to the tagged files in the opposite directory.
+Tips: %D/%T expanderar till de markerade filerna i katalogen mitt emot.
 
-Hint: Want your plain shell? Press C-o, and get back to MC with C-o again.
+Tips: Vill du ha ditt vanliga skal? Tryck C-o och gå tillbaks med C-o igen.
 
-Hint: Setting the CDPATH variable can save you keystrokes in cd commands.
+Tips: Att sätta CDPATH-variabeln kan spara tangenttryckningar i cd-kommandon.
 
-Hint: If you want to see your .* files, say so in the Configuration dialog.
+Tips: Om du vill se dina .*-filer, ställ in det i konfigurations-dialogen.
 
-Hint: Want to see your *~ backup files? Set it in the Configuration dialog.
+Tips: Vill du se dina *~-backupfiler? Ställ in det i konfigurations-dialogen.
 
-Hint: Completion works on all input lines in all dialogs. Just press M-Tab.
+Tips: Komplettering funkar på alla inmatningsrutor i dialoger. Tryck på M-Tab.
 
-Hint: On slow terminals the -s flag may help.
+Tips: På långsamma terminaler kan -s-flaggan hjälpa.
 
-Hint: Find File: you can work on the files found using the Panelize button.
+Tips: Sök fil: du kan arbeta med funna filer med panelisera-knappen.
 
-Hint: Want to do complex searches? Use the External Panelize command.
+Tips: Vill du göra komplexa sökningar? Använd kommandot Extern panelisering.
 
-Hint: To change directory halfway through typing a command, use M-c (quick
-cd).
+Tips: För att ändra katalog under kommandoinmatning, använd M-c (snabb-cd).
 
-Note: Shell commands will not work when you are on a non-local file system.
+Notera: Skalkommandon funkar inte när du är på ett icke-lokalt filsystem.
 
-Hint: Bring text back from the dead with C-y.
+Tips: Ta tillbaks text från de döda med C-y.
 
-Hint: Are some of your keys not working? Look at Options/Learn keys.
+Tips: Fungerar vissa tangenter inte? Se Alternativ/Lär in tangenter.
 
-Hint: To look at the output of a command in the viewer, use M-!
+Tips: för att se utmatningen från ett kommando i filvisaren, använd M-!
 
-Hint: F13 (or Shift-F3) invokes the viewer in raw mode.
+Tips: F13 (eller Skift-F3) startar filvisaren i rått läge.
 
-Hint: You may specify the editor for F4 with the shell variable EDITOR.
+Tips: Du kan specificera editorn för F4 med skalvariabeln EDITOR.
 
-Hint: You may specify the external viewer with the shell vars VIEWER or
-PAGER.
+Tips: Du kan välja den externa filvisaren med skalvariabeln VIEWER eller PAGER.
 
-Hint: You can disable all requests for confirmation in Options/Confirmation.
+Tips: Du kan slå av alla är-du-säker-frågor i Alternativ/Konfirmation.
 
 Hint: Leap to frequently used directories in a single bound with C-.
 
-Hint: You can do anonymous FTP with mc by typing 'cd ftp://machine.edu'
+Tips: Du kan använda anonym FTP i mc genom att skriva 'cd ftp://dator.se'
 
-Hint: FTP is built in the Midnight Commander, check the File/FTP link menu.
+Tips: FTP är inbyggt i Midnight Commander, se Fil/FTP-länk-menyn.
 
-Hint: M-t changes quickly the listing mode.
+Tips: M-t ändrar snabbt listningsläget.
 
-Hint: You can specify the username when doing ftps: 'cd
-ftp://user@machine.edu'
+Tips: Du kan specificera användarnamnet med ftps: 'cd ftp://användare@dator.se'
 
-Hint: You can browse RPM files by tapping enter on top of an rpm file.
+Tips: Du kan bläddra i RPM-filer genom att trycka enter på en RPM-fil.
 
-Hint: To mark directories on the select dialog box, append a slash.
+Tips: För att markera kataloger i markera-dialogrutan, lägg till snedstreck.
 
-Hint: To use the mouse cut and paste may require holding the shift key
+Tips: Skift kan behöva hållas ned för att använda klipp och klistra med musen.
 
 Hint: Key frequently visited ftp sites in the hotlist: type C-.
-
