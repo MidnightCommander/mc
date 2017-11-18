@@ -5,18 +5,18 @@
 # Translators:
 # flipthegreat <flipthegreat@hotmail.com>, 2011
 # Heimen Stoffels <vistausss@outlook.com>, 2013
-# Richard E. van der Luit <nippur@fedoraproject.org>, 2012-2015
+# Richard E. van der Luit <nippur@fedoraproject.org>, 2012-2015,2017
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # toniotonba <TonioTonBa@gmail.com>, 2011
 # bucovaina78 <wannessmet@gmail.com>, 2012
-# Yury V. Zaytsev <yury@shurup.com>, 2016
+# Yury V. Zaytsev <yury@shurup.com>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2017-04-15 09:35+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
+"PO-Revision-Date: 2017-11-18 18:04+0000\n"
+"Last-Translator: Yury V. Zaytsev <yury@shurup.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/mc/mc/language/nl/)\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -107,18 +107,22 @@ msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
 "hex)"
 msgstr ""
+"Getal buiten bereik (zou in bytegebied moeten zijn, 0 <= n <= 0xFF, "
+"uitgedrukt in hex)"
 
 msgid "Invalid character"
-msgstr ""
+msgstr "Ongeldig teken"
 
 msgid "Unmatched quotes character"
-msgstr ""
+msgstr "Niet-overeenkomende quote-tekens"
 
 #, c-format
 msgid ""
 "Hex pattern error at position %d:\n"
 "%s."
 msgstr ""
+"Hexpatroonfout op positie %d:\n"
+"%s."
 
 msgid "Search string not found"
 msgstr "Gezochte tekst niet gevonden"
@@ -170,6 +174,9 @@ msgid ""
 "%s\n"
 "Default skin has been loaded"
 msgstr ""
+"Niet instaat '%s' skin te gebruiken met true-colors ondersteuning\n"
+"%s\n"
+"Standaard skin is geladen"
 
 #, c-format
 msgid ""
@@ -182,16 +189,18 @@ msgstr ""
 "Standaard skin is geladen"
 
 msgid "True color not supported with ncurses."
-msgstr ""
+msgstr "True color wordt in ncurses niet ondersteund."
 
 msgid "True color not supported in this slang version."
-msgstr ""
+msgstr "True color wordt in deze dialectversie niet ondersteund."
 
 msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr ""
+msgstr "Je terminal lijkt 256-kleuren niet eens te ondersteunen. "
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
+"Zet COLORTERM=truecolor indien de terminal daadwerkelijk true-colors "
+"ondersteund."
 
 msgid "Escape"
 msgstr "Escape"
@@ -488,25 +497,25 @@ msgstr ""
 "Controleer omgevingsvariabele TERM ( opdr: set).\n"
 
 msgid "B"
-msgstr ""
+msgstr "B"
 
 msgid "kB"
-msgstr ""
+msgstr "kB"
 
 msgid "KiB"
-msgstr ""
+msgstr "KiB"
 
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 msgid "MiB"
-msgstr ""
+msgstr "MiB"
 
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
 msgid "GiB"
-msgstr ""
+msgstr "GiB"
 
 msgid "Cannot create pipe descriptor"
 msgstr "Aanmaken van pipe discriptor mislukt"
@@ -548,11 +557,11 @@ msgstr "Map-cache verlopen voor %s"
 
 #, c-format
 msgid "%s: %s: %s %3d%% (%lld) bytes transferred"
-msgstr ""
+msgstr "%s: %s: %s %3d%% (%lld) bytes overgebracht"
 
 #, c-format
 msgid "%s: %s: %s %lld bytes transferred"
-msgstr ""
+msgstr "%s: %s: %s %lld bytes overgebracht"
 
 msgid "Starting linear transfer..."
 msgstr "Starten van lineaire overdracht"
@@ -587,7 +596,6 @@ msgstr "Tijdelijke bestanden zullen in %s gemaakt worden\n"
 msgid "Temporary files will not be created\n"
 msgstr "Tijdelijke bestanden zullen niet aangemaakt worden\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Druk op een toets om verder te gaan..."
 
@@ -636,7 +644,7 @@ msgstr "Fout"
 
 #, c-format
 msgid "%s (%d)"
-msgstr ""
+msgstr "%s (%d)"
 
 msgid "&Abort"
 msgstr "&Afbreken"
@@ -785,13 +793,13 @@ msgid "Color options"
 msgstr "Kleur instellingen"
 
 msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
-msgstr ""
+msgstr "[+lineno] file1[:lineno] [file2[:lineno]...]"
 
 msgid "file"
 msgstr "bestand"
 
 msgid "file1 file2"
-msgstr ""
+msgstr "bestand1 bestand2"
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[deze map] [ander paneel map]"
@@ -1632,7 +1640,7 @@ msgstr ""
 "geschreven voor de Midnight Commander"
 
 msgid "Copyright (C) 1996-2016 the Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1996-2016 the Free Software Foundation"
 
 msgid "About"
 msgstr "Over"
@@ -1784,7 +1792,6 @@ msgstr "Er kan geen lokale kopie van %s worden opgehaald"
 msgid "The shell is already running a command"
 msgstr "De shell voert al een opdracht uit"
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Typ 'exit' om naar de Midnight Commander terug te keren"
 
@@ -1970,7 +1977,7 @@ msgid "Pa&ge scrolling"
 msgstr "Pa&ginascrollen"
 
 msgid "Center &scrolling"
-msgstr ""
+msgstr "Centrum&scrolling"
 
 msgid "&Mouse page scrolling"
 msgstr "&Muis paginascrollen"
@@ -2023,9 +2030,8 @@ msgstr "kolommen"
 msgid "User &mini status"
 msgstr "&Ministatus gebruiker"
 
-#, fuzzy
 msgid "Listing format"
-msgstr "&Lijstformaat bewerken"
+msgstr "Lijstformaat"
 
 msgid "Executable &first"
 msgstr "&Uitvoerbare bestanden eerst"
@@ -2506,6 +2512,10 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
+"Er kunnen geen stabiele symbolische links over non-lokale bestandssystemen "
+"worden gelegd:\n"
+"\n"
+" De optie 'stabiele symbolische links' wordt uitgeschakeld "
 
 #, c-format
 msgid ""
@@ -2686,6 +2696,8 @@ msgid ""
 "Cannot read source file \"%s\"\n"
 "%s"
 msgstr ""
+"Bronbestand \"%s\" kan niet gelezen worden \n"
+"%s "
 
 #, c-format
 msgid ""
@@ -2798,7 +2810,7 @@ msgstr ""
 
 #, c-format
 msgid "Directories: %zu, total size: %s"
-msgstr ""
+msgstr "Directories: %zu, totale grootte: %s"
 
 msgid "Cannot operate on \"..\"!"
 msgstr "Opereren op \"..\" is niet mogelijk! "
@@ -2950,7 +2962,7 @@ msgstr "Bew&erken -F4"
 
 #, c-format
 msgid "Found: %lu"
-msgstr ""
+msgstr "Gevonden: %lu"
 
 msgid "Malformed regular expression"
 msgstr "Slecht geformuleerde reguliere expressie"
@@ -3001,8 +3013,8 @@ msgstr "Klaar"
 #, c-format
 msgid "Finished (ignored %zu directory)"
 msgid_plural "Finished (ignored %zu directories)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Klaar (%zu directorie genegeerd)"
+msgstr[1] "Klaar (%zu directories genegeerd)"
 
 msgid "Searching"
 msgstr "Aan het zoeken"
@@ -3164,8 +3176,8 @@ msgstr "Grootte: %s"
 #, c-format
 msgid " (%lu block)"
 msgid_plural " (%lu blocks)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] " (%lu blok)"
+msgstr[1] " (%lu blokken)"
 
 #, c-format
 msgid "Owner:      %s/%s"
@@ -3231,9 +3243,8 @@ msgstr "&Korte lijst"
 msgid "&Info"
 msgstr "&Info"
 
-#, fuzzy
 msgid "&Listing format..."
-msgstr "&Lijstformaat bewerken"
+msgstr "&Lijstformaat..."
 
 msgid "&Sort order..."
 msgstr "&Sorteervolgorde...     "
@@ -3400,8 +3411,8 @@ msgstr "Vensters:"
 #, c-format
 msgid "You have %zu opened screen. Quit anyway?"
 msgid_plural "You have %zu opened screens. Quit anyway?"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Je hebt %zu geopende scherm. Toch stoppen?"
+msgstr[1] "Je hebt %zu geopende schermen. Toch stoppen?"
 
 msgid "The Midnight Commander"
 msgstr "The Midnight Commander"
@@ -3665,51 +3676,6 @@ msgstr ""
 "Schrijven naar bestand %s mislukt:\n"
 "%s\n"
 
-msgid "Debug"
-msgstr "Debug"
-
-msgid "ERROR:"
-msgstr "FOUT:"
-
-msgid "True:"
-msgstr "Waar:"
-
-msgid "False:"
-msgstr "Onwaar:"
-
-msgid "Error calling program"
-msgstr "Fout bij het aanroepen van programma"
-
-msgid "Warning -- ignoring file"
-msgstr "Waarschuwing -- bestand wordt genegeerd"
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Bestand %s is niet van de 'root' of van u, of is door iedereen "
-"beschrijfbaar.\n"
-"Het gebruik kan veiligheidsrisico's betekenen"
-
-msgid "Format error on file Extensions File"
-msgstr "Formaatfout in bestandsextensies-bestand"
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr "De %%var-macro heeft geen standaard"
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr "De %%var macro heeft geen variabele "
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr "Geen passende items gevonden in %s "
-
-msgid "User menu"
-msgstr "Gebruikersmenu"
-
 msgid "Help file format error\n"
 msgstr "Formaatfout in help-bestand\n"
 
@@ -3903,10 +3869,10 @@ msgid "Data types:"
 msgstr "Datatypen:"
 
 msgid "Home directory:"
-msgstr ""
+msgstr "Thuismap:"
 
 msgid "Profile root directory:"
-msgstr ""
+msgstr "Thuismap profielen:"
 
 msgid "System data"
 msgstr "Systeemdata"
@@ -3928,6 +3894,51 @@ msgstr "Gebruikersgegevens"
 
 msgid "Cache directory:"
 msgstr "Cache directory:"
+
+msgid "Debug"
+msgstr "Debug"
+
+msgid "ERROR:"
+msgstr "FOUT:"
+
+msgid "True:"
+msgstr "Waar:"
+
+msgid "False:"
+msgstr "Onwaar:"
+
+msgid "Error calling program"
+msgstr "Fout bij het aanroepen van programma"
+
+msgid "Warning -- ignoring file"
+msgstr "Waarschuwing -- bestand wordt genegeerd"
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Bestand %s is niet van de 'root' of van u, of is door iedereen "
+"beschrijfbaar.\n"
+"Het gebruik kan veiligheidsrisico's betekenen"
+
+msgid "Format error on file Extensions File"
+msgstr "Formaatfout in bestandsextensies-bestand"
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr "De %%var-macro heeft geen standaard"
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr "De %%var macro heeft geen variabele "
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr "Geen passende items gevonden in %s "
+
+msgid "User menu"
+msgstr "Gebruikersmenu"
 
 #, c-format
 msgid ""
@@ -4215,7 +4226,7 @@ msgid "sftp: Password is empty."
 msgstr "sftp: Wachtwoord is leeg."
 
 msgid "sftp: Failure establishing SSH session"
-msgstr ""
+msgstr "sftp: SHH-sessie openen is niet gelukt"
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Geen gegevens over bestand aanwezig om bestand te kunnen lezen"
@@ -4457,9 +4468,3 @@ msgstr "Doorgaan vanaf het begin?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan geen lokale versie van /ftp://some.host/editme.txt ophalen"
-
-#~ msgid "Listing mode"
-#~ msgstr "Lijstmodus"
-
-#~ msgid "&Listing mode..."
-#~ msgstr "&Lijstmodus...          "

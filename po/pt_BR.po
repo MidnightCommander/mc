@@ -5,6 +5,7 @@
 # Translators:
 # Enrico Nicoletto <enrico.BR@gmx.co.uk>, 2013
 # Heitor Adão Júnior <heitoradao@gmail.com>, 2017
+# Mauro Hemerly Gazzani <mauro.hemerly@gmail.com>, 2017
 # Rafael Fontenelle <rffontenelle@gmail.com>, 2012
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Van Der Fran <transifex@vanderland.com>, 2011
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2017-04-15 09:35+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
+"PO-Revision-Date: 2017-09-19 09:10+0000\n"
+"Last-Translator: Mauro Hemerly Gazzani <mauro.hemerly@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/mc/mc/language/"
 "pt_BR/)\n"
 "Language: pt_BR\n"
@@ -107,19 +108,21 @@ msgstr ""
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
 "hex)"
-msgstr ""
+msgstr "Número fora da faixa (deveria ser de 0<= n <= 0xFF, em hexadecimal)"
 
 msgid "Invalid character"
-msgstr ""
+msgstr "Carácter inválido"
 
 msgid "Unmatched quotes character"
-msgstr ""
+msgstr "número de aspas não equivalentes"
 
 #, c-format
 msgid ""
 "Hex pattern error at position %d:\n"
 "%s."
 msgstr ""
+"Erro de padrão hexa na posição %d:\n"
+"%s"
 
 msgid "Search string not found"
 msgstr "Texto não encontrado"
@@ -592,7 +595,6 @@ msgstr "Arquivos temporários serão criados em %s\n"
 msgid "Temporary files will not be created\n"
 msgstr "Arquivos temporários não será criado\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Pressione uma tecla para continuar..."
 
@@ -656,7 +658,7 @@ msgid "Print extended info about used data directories"
 msgstr ""
 
 msgid "Print configure options"
-msgstr ""
+msgstr "Opções de configuração de impressão"
 
 msgid "Print last working directory to specified file"
 msgstr "Exibir último diretório de trabalho para o arquivo especificado"
@@ -1752,7 +1754,6 @@ msgstr "Não foi possível adquirir uma cópia local de %s"
 msgid "The shell is already running a command"
 msgstr "A shell já está executando um comando"
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr ""
 
@@ -1986,9 +1987,8 @@ msgstr "colunas"
 msgid "User &mini status"
 msgstr ""
 
-#, fuzzy
 msgid "Listing format"
-msgstr "Editar forma de &Listagem"
+msgstr ""
 
 msgid "Executable &first"
 msgstr "Executáveis primeiro"
@@ -3175,9 +3175,8 @@ msgstr ""
 msgid "&Info"
 msgstr ""
 
-#, fuzzy
 msgid "&Listing format..."
-msgstr "Editar forma de &Listagem"
+msgstr ""
 
 msgid "&Sort order..."
 msgstr "&Ordem..."
@@ -3607,51 +3606,6 @@ msgstr ""
 "Impossível escrever para o arquivo %s :\n"
 "%s\n"
 
-msgid "Debug"
-msgstr ""
-
-msgid "ERROR:"
-msgstr ""
-
-msgid "True:"
-msgstr ""
-
-msgid "False:"
-msgstr ""
-
-msgid "Error calling program"
-msgstr "Erro ao chamar programa"
-
-msgid "Warning -- ignoring file"
-msgstr ""
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Arquivo %s não pertence ao superusuário ou a você ou pode\n"
-"ser escrito por todos.\n"
-"O seu uso pode comprometer a segurança"
-
-msgid "Format error on file Extensions File"
-msgstr ""
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr ""
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr ""
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr ""
-
-msgid "User menu"
-msgstr ""
-
 msgid "Help file format error\n"
 msgstr ""
 
@@ -3855,6 +3809,51 @@ msgid "User data"
 msgstr ""
 
 msgid "Cache directory:"
+msgstr ""
+
+msgid "Debug"
+msgstr ""
+
+msgid "ERROR:"
+msgstr ""
+
+msgid "True:"
+msgstr ""
+
+msgid "False:"
+msgstr ""
+
+msgid "Error calling program"
+msgstr "Erro ao chamar programa"
+
+msgid "Warning -- ignoring file"
+msgstr ""
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Arquivo %s não pertence ao superusuário ou a você ou pode\n"
+"ser escrito por todos.\n"
+"O seu uso pode comprometer a segurança"
+
+msgid "Format error on file Extensions File"
+msgstr ""
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr ""
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr ""
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr ""
+
+msgid "User menu"
 msgstr ""
 
 #, c-format
@@ -4383,9 +4382,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Listing mode"
-#~ msgstr "Modo de Listagem"
-
-#~ msgid "&Listing mode..."
-#~ msgstr "Modo de &Listagem"

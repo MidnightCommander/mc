@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2011,2015-2016
+# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2011,2015-2017
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2017-04-15 09:35+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
+"PO-Revision-Date: 2017-09-19 09:10+0000\n"
+"Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque (http://www.transifex.com/mc/mc/language/eu/)\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
@@ -106,10 +106,10 @@ msgid ""
 msgstr ""
 
 msgid "Invalid character"
-msgstr ""
+msgstr "Karaktere baliogabea"
 
 msgid "Unmatched quotes character"
-msgstr ""
+msgstr "Itxi gabeko aipu karaktereak"
 
 #, c-format
 msgid ""
@@ -588,7 +588,6 @@ msgstr "Aldiuneko fitxategiak %s kokalekuan sortuko dira\n"
 msgid "Temporary files will not be created\n"
 msgstr "Aldiuneko fitxategiak ez dira sortuko\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Sakatu edozein tekla jarraitzeko..."
 
@@ -793,7 +792,7 @@ msgid "file"
 msgstr "fitxategia"
 
 msgid "file1 file2"
-msgstr ""
+msgstr "file1 file2"
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[dir_hau] [beste_panel_dir]"
@@ -1792,7 +1791,6 @@ msgstr "Ezin eskuratu ondokoaren bertako kopia bat: %s"
 msgid "The shell is already running a command"
 msgstr "Shell-a dagoeneko komando bat exekutate ari da"
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Tekleatu «exit» Midnight Commanderrera itzultzeko"
 
@@ -2030,9 +2028,8 @@ msgstr "zutabeak"
 msgid "User &mini status"
 msgstr "Erabiltzailearen &mini egoera"
 
-#, fuzzy
 msgid "Listing format"
-msgstr "Zerrendatzeko &formatua editatu"
+msgstr "Zerrenda formatua"
 
 msgid "Executable &first"
 msgstr "Exekutagarria &lehenengo"
@@ -3242,9 +3239,8 @@ msgstr "Ikuspegi &azkarra"
 msgid "&Info"
 msgstr "&Info"
 
-#, fuzzy
 msgid "&Listing format..."
-msgstr "Zerrendatzeko &formatua editatu"
+msgstr "&Zerrenda formatua"
 
 msgid "&Sort order..."
 msgstr "&Sailkatzeko ordena..."
@@ -3676,50 +3672,6 @@ msgstr ""
 "Ezin da %s fitxategian idatzi:\n"
 "%s\n"
 
-msgid "Debug"
-msgstr "Araztu"
-
-msgid "ERROR:"
-msgstr "AKATSA:"
-
-msgid "True:"
-msgstr "Egia:"
-
-msgid "False:"
-msgstr "Gezurra:"
-
-msgid "Error calling program"
-msgstr "Akatsa programari deitzerakoan"
-
-msgid "Warning -- ignoring file"
-msgstr "Abisua -- fitxategia ezikusten"
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"%s fitxategia ez da root-arena edo ez da zurea edo guztiek idatz\n"
-"dezake. Hori erabiltzeak zure segurtasuna arriskuan jarri dezake"
-
-msgid "Format error on file Extensions File"
-msgstr "Formatu akatsa fitxategien luzapen fitxategian"
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr "%%var makroak ez dauka lehenetsitakorik"
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr "%%var makroak ez dauka aldagairik"
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr "%s-(e)n ez dira sarrera egokiak aurkitu"
-
-msgid "User menu"
-msgstr "Erabiltzailearen menua"
-
 msgid "Help file format error\n"
 msgstr "Laguntza fitxategiaren formatu akatsa\n"
 
@@ -3912,10 +3864,10 @@ msgid "Data types:"
 msgstr "Datu motak:"
 
 msgid "Home directory:"
-msgstr ""
+msgstr "Etxeko direktorioa:"
 
 msgid "Profile root directory:"
-msgstr ""
+msgstr "Profilen erro direktorioa:"
 
 msgid "System data"
 msgstr "Sistemaren datuak"
@@ -3937,6 +3889,50 @@ msgstr "Erabiltzaile datuak"
 
 msgid "Cache directory:"
 msgstr "Cache direktorioa:"
+
+msgid "Debug"
+msgstr "Araztu"
+
+msgid "ERROR:"
+msgstr "AKATSA:"
+
+msgid "True:"
+msgstr "Egia:"
+
+msgid "False:"
+msgstr "Gezurra:"
+
+msgid "Error calling program"
+msgstr "Akatsa programari deitzerakoan"
+
+msgid "Warning -- ignoring file"
+msgstr "Abisua -- fitxategia ezikusten"
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"%s fitxategia ez da root-arena edo ez da zurea edo guztiek idatz\n"
+"dezake. Hori erabiltzeak zure segurtasuna arriskuan jarri dezake"
+
+msgid "Format error on file Extensions File"
+msgstr "Formatu akatsa fitxategien luzapen fitxategian"
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr "%%var makroak ez dauka lehenetsitakorik"
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr "%%var makroak ez dauka aldagairik"
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr "%s-(e)n ez dira sarrera egokiak aurkitu"
+
+msgid "User menu"
+msgstr "Erabiltzailearen menua"
 
 #, c-format
 msgid ""
@@ -4478,9 +4474,3 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
-
-#~ msgid "Listing mode"
-#~ msgstr "Zerrendatzeko modua"
-
-#~ msgid "&Listing mode..."
-#~ msgstr "&Zerrendatzeko modua..."

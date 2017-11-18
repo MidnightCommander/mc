@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2017-04-15 09:35+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
+"PO-Revision-Date: 2017-09-19 09:16+0000\n"
+"Last-Translator: Keith Bowes <zooplah@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -591,7 +591,6 @@ msgstr "Provizoraj dosieroj kreiĝos en %s\n"
 msgid "Temporary files will not be created\n"
 msgstr "Provizoraj dosieroj ne kreiĝos\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Premu iun klavon por daŭri..."
 
@@ -790,13 +789,13 @@ msgid "Color options"
 msgstr "Kolora agordo"
 
 msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
-msgstr ""
+msgstr "[+linia_numero] dosiero1[:linia_numero] [dosiero2[:linia_numero…]]"
 
 msgid "file"
 msgstr "dosieron"
 
 msgid "file1 file2"
-msgstr ""
+msgstr "dosiero1 dosiero2"
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[maldekstra_flanko] [dekstra_flanko]"
@@ -1796,7 +1795,6 @@ msgstr "Ne eblas atingi lokan kopion de %s"
 msgid "The shell is already running a command"
 msgstr "La ŝelo jam plenumas komandon"
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Tajpu \"exit\" por reiri al Midnight Commander"
 
@@ -2034,9 +2032,8 @@ msgstr "kolumnojn"
 msgid "User &mini status"
 msgstr "Miniatura &stato de uzanto"
 
-#, fuzzy
 msgid "Listing format"
-msgstr "Redakti &listan aranĝon"
+msgstr "Listo-aranĝo"
 
 msgid "Executable &first"
 msgstr "P&lenumebla unue"
@@ -2516,6 +2513,9 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
+"Ne eblas fari stabilajn molajn ligilojn inter foraj dosiersistemoj:\n"
+"\n"
+"La agordaĵo \"Stabilaj molaj ligiloj\" estos malaktivigita"
 
 #, c-format
 msgid ""
@@ -3029,7 +3029,7 @@ msgid "&Refresh"
 msgstr "&Refreŝigi"
 
 msgid "&Add current"
-msgstr "&Aldoni nunan"
+msgstr "Al&doni nunan"
 
 msgid "&Up"
 msgstr "&Supren"
@@ -3038,7 +3038,7 @@ msgid "New &group"
 msgstr "Nova &grupo"
 
 msgid "New &entry"
-msgstr "&Nova ero"
+msgstr "Nova &ero"
 
 msgid "&Insert"
 msgstr "&Enmeti"
@@ -3243,9 +3243,8 @@ msgstr "Rapida &vido"
 msgid "&Info"
 msgstr "&Informoj"
 
-#, fuzzy
 msgid "&Listing format..."
-msgstr "Redakti &listan aranĝon"
+msgstr "&Listo-aranĝo…"
 
 msgid "&Sort order..."
 msgstr "&Ordigi laŭ..."
@@ -3676,51 +3675,6 @@ msgstr ""
 "Ne eblas skribi al la dosiero %s:\n"
 "%s\n"
 
-msgid "Debug"
-msgstr "Senerarigi"
-
-msgid "ERROR:"
-msgstr "ERARO:"
-
-msgid "True:"
-msgstr "Vera:"
-
-msgid "False:"
-msgstr "Malvera:"
-
-msgid "Error calling program"
-msgstr "Eraro dum programa plenumo"
-
-msgid "Warning -- ignoring file"
-msgstr "Averto -- ignoranta dosieron"
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Dosiero %s estas posedata de nek la ĉefuzanto nek vi aŭ estas universale "
-"skribebla.\n"
-"Uzi ĝin eble kompromitos vian sekurecon"
-
-msgid "Format error on file Extensions File"
-msgstr "Formata eraro en sufikso-dosiero"
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr "La makroo %%var havas neniun aprioraĵon"
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr "La makroo %%var havas neniun variablon"
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr "Neniuj taŭgaj eroj trovitaj en %s"
-
-msgid "User menu"
-msgstr "Uzanto-menuo"
-
 msgid "Help file format error\n"
 msgstr "Eraro ĉe la helpdosiera formato\n"
 
@@ -3938,6 +3892,51 @@ msgstr "Uzanto-datumoj"
 
 msgid "Cache directory:"
 msgstr "Teneja dosierujo:"
+
+msgid "Debug"
+msgstr "Senerarigi"
+
+msgid "ERROR:"
+msgstr "ERARO:"
+
+msgid "True:"
+msgstr "Vera:"
+
+msgid "False:"
+msgstr "Malvera:"
+
+msgid "Error calling program"
+msgstr "Eraro dum programa plenumo"
+
+msgid "Warning -- ignoring file"
+msgstr "Averto -- ignoranta dosieron"
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Dosiero %s estas posedata de nek la ĉefuzanto nek vi aŭ estas universale "
+"skribebla.\n"
+"Uzi ĝin eble kompromitos vian sekurecon"
+
+msgid "Format error on file Extensions File"
+msgstr "Formata eraro en sufikso-dosiero"
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr "La makroo %%var havas neniun aprioraĵon"
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr "La makroo %%var havas neniun variablon"
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr "Neniuj taŭgaj eroj trovitaj en %s"
+
+msgid "User menu"
+msgstr "Uzanto-menuo"
 
 #, c-format
 msgid ""
@@ -4409,7 +4408,7 @@ msgid "ButtonBar|Goto"
 msgstr "ButtonBar|Iri"
 
 msgid "ButtonBar|Raw"
-msgstr "ButtonBar|Nuda"
+msgstr "ButtonBar|Kruda"
 
 msgid "ButtonBar|Parse"
 msgstr "ButtonBar|Analizi"
@@ -4476,9 +4475,3 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
-
-#~ msgid "Listing mode"
-#~ msgstr "Lista reĝimo"
-
-#~ msgid "&Listing mode..."
-#~ msgstr "&Lista reĝimo..."

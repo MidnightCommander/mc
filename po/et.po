@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2017-04-15 09:35+0000\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
+"PO-Revision-Date: 2017-09-19 18:39+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
 "Language: et\n"
@@ -588,7 +588,6 @@ msgstr "Ajutised failid luuakse kataloogis %s\n"
 msgid "Temporary files will not be created\n"
 msgstr "Ajutisi faile ei looda\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Jätkamiseks vajuta suvalist klahvi..."
 
@@ -1788,7 +1787,6 @@ msgstr "Kohaliku koopia hankimine %s'st nurjus"
 msgid "The shell is already running a command"
 msgstr "Kest on hõivatud käsu täitmisega"
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Midnight Commanderisse tagasipöördumiseks sisesta 'exit'"
 
@@ -2025,9 +2023,8 @@ msgstr "veerud"
 msgid "User &mini status"
 msgstr "Kasutaja &mini info"
 
-#, fuzzy
 msgid "Listing format"
-msgstr "&Loend vorminduse muutmine"
+msgstr ""
 
 msgid "Executable &first"
 msgstr "Käivitatavad &esimestena"
@@ -3233,9 +3230,8 @@ msgstr "&Kiirvaade"
 msgid "&Info"
 msgstr "&Info"
 
-#, fuzzy
 msgid "&Listing format..."
-msgstr "&Loend vorminduse muutmine"
+msgstr ""
 
 msgid "&Sort order..."
 msgstr "&Sortimine..."
@@ -3666,50 +3662,6 @@ msgstr ""
 "Faili %s kirjutamine nurjus:\n"
 "%s\n"
 
-msgid "Debug"
-msgstr "Silumine"
-
-msgid "ERROR:"
-msgstr "Viga:"
-
-msgid "True:"
-msgstr "Tõene:"
-
-msgid "False:"
-msgstr "Väär:"
-
-msgid "Error calling program"
-msgstr "Viga programmi kutsel"
-
-msgid "Warning -- ignoring file"
-msgstr "Hoiatus -- eiratakse faili"
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Faili %s omanik ei ole root või sina, või see on kõigile kirjutatav.\n"
-"Selle kasutamine võib ohustada su turvalisust"
-
-msgid "Format error on file Extensions File"
-msgstr "Laiendite failis on vorminduse viga"
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr "Makrol %%var puudub vaikeväärtus"
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr "Makrol %%var puudub muutuja"
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr "Failist %s ei leitud sobivaid kirjeid"
-
-msgid "User menu"
-msgstr "Kasutaja menüü"
-
 msgid "Help file format error\n"
 msgstr "Abi failivorminduse viga\n"
 
@@ -3927,6 +3879,50 @@ msgstr "Kasutaja andmed"
 
 msgid "Cache directory:"
 msgstr "Vahemälu kataloog:"
+
+msgid "Debug"
+msgstr "Silumine"
+
+msgid "ERROR:"
+msgstr "Viga:"
+
+msgid "True:"
+msgstr "Tõene:"
+
+msgid "False:"
+msgstr "Väär:"
+
+msgid "Error calling program"
+msgstr "Viga programmi kutsel"
+
+msgid "Warning -- ignoring file"
+msgstr "Hoiatus -- eiratakse faili"
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Faili %s omanik ei ole root või sina, või see on kõigile kirjutatav.\n"
+"Selle kasutamine võib ohustada su turvalisust"
+
+msgid "Format error on file Extensions File"
+msgstr "Laiendite failis on vorminduse viga"
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr "Makrol %%var puudub vaikeväärtus"
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr "Makrol %%var puudub muutuja"
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr "Failist %s ei leitud sobivaid kirjeid"
+
+msgid "User menu"
+msgstr "Kasutaja menüü"
 
 #, c-format
 msgid ""
@@ -4465,9 +4461,3 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
-
-#~ msgid "Listing mode"
-#~ msgstr "Loendi režiim"
-
-#~ msgid "&Listing mode..."
-#~ msgstr "L&oendi režiim..."

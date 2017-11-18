@@ -3,15 +3,16 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
+# Nikolay Korotkiy <sikmir@gmail.com>, 2017
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Kasvain <kasvain@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2017-04-15 09:35+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
+"PO-Revision-Date: 2017-10-29 09:42+0000\n"
+"Last-Translator: Nikolay Korotkiy <sikmir@gmail.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/mc/mc/language/fi/)\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -571,7 +572,6 @@ msgstr "Väliaikaistiedostoja ei ole luotu kohteeseen %s\n"
 msgid "Temporary files will not be created\n"
 msgstr "Väliaikais tiedosta ei ole luotu\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Paina mitä tahansa näppäintä jatkaaksesi"
 
@@ -1035,7 +1035,7 @@ msgid "Change line breaks to:"
 msgstr ""
 
 msgid "Save As"
-msgstr ""
+msgstr "Tallenna nimellä"
 
 msgid "Block is large, you may not be able to undo this action"
 msgstr ""
@@ -1059,7 +1059,7 @@ msgid "Edit Save Mode"
 msgstr ""
 
 msgid "Save as"
-msgstr ""
+msgstr "Tallenna nimellä"
 
 msgid "Cannot save: destination is not a regular file"
 msgstr ""
@@ -1099,10 +1099,10 @@ msgid "Confirm save file: \"%s\""
 msgstr ""
 
 msgid "Save file"
-msgstr ""
+msgstr "Tallenna tiedosto"
 
 msgid "&Save"
-msgstr ""
+msgstr "&Tallenna"
 
 msgid "Load"
 msgstr ""
@@ -1129,7 +1129,7 @@ msgid "&Local"
 msgstr "&Paikallinen"
 
 msgid "Replace"
-msgstr ""
+msgstr "Korvaa"
 
 #, c-format
 msgid "%ld replacements made"
@@ -1241,7 +1241,7 @@ msgid "In se&lection"
 msgstr ""
 
 msgid "&Find all"
-msgstr ""
+msgstr "&Etsi kaikki"
 
 msgid "Enter replacement string:"
 msgstr ""
@@ -1273,16 +1273,16 @@ msgid "NoName"
 msgstr ""
 
 msgid "&Open file..."
-msgstr ""
+msgstr "&Avaa tiedosto..."
 
 msgid "&New"
-msgstr ""
+msgstr "&Uusi"
 
 msgid "&Close"
-msgstr ""
+msgstr "&Sulje"
 
 msgid "Save &as..."
-msgstr ""
+msgstr "Tallenna &nimellä..."
 
 msgid "&Insert file..."
 msgstr ""
@@ -1441,10 +1441,10 @@ msgid "&Toggle fullscreen"
 msgstr ""
 
 msgid "&Next"
-msgstr ""
+msgstr "&Seuraava"
 
 msgid "&Previous"
-msgstr ""
+msgstr "&Edellinen"
 
 msgid "&List..."
 msgstr ""
@@ -1471,10 +1471,10 @@ msgid "&Save setup"
 msgstr ""
 
 msgid "&File"
-msgstr ""
+msgstr "&Tiedosto"
 
 msgid "&Edit"
-msgstr ""
+msgstr "&Muokkaa"
 
 msgid "&Search"
 msgstr ""
@@ -1486,7 +1486,7 @@ msgid "For&mat"
 msgstr ""
 
 msgid "&Window"
-msgstr ""
+msgstr "&Ikkuna"
 
 msgid "&Options"
 msgstr ""
@@ -1593,82 +1593,82 @@ msgid "ButtonBar|PullDn"
 msgstr ""
 
 msgid "Breton"
-msgstr ""
+msgstr "bretoni"
 
 msgid "Czech"
-msgstr ""
+msgstr "tšekki"
 
 msgid "Welsh"
-msgstr ""
+msgstr "wales"
 
 msgid "Danish"
-msgstr ""
+msgstr "tanska"
 
 msgid "German"
-msgstr ""
+msgstr "saksa"
 
 msgid "Greek"
-msgstr ""
+msgstr "kreikka"
 
 msgid "English"
-msgstr ""
+msgstr "englanti"
 
 msgid "British English"
-msgstr ""
+msgstr "britannianenglanti"
 
 msgid "Canadian English"
-msgstr ""
+msgstr "kanadanenglanti"
 
 msgid "American English"
-msgstr ""
+msgstr "amerikanenglanti"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "esperanto"
 
 msgid "Spanish"
-msgstr ""
+msgstr "espanja"
 
 msgid "Faroese"
-msgstr ""
+msgstr "fääri"
 
 msgid "French"
-msgstr ""
+msgstr "ranska"
 
 msgid "Italian"
-msgstr ""
+msgstr "italia"
 
 msgid "Dutch"
-msgstr ""
+msgstr "hollanti"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "norja"
 
 msgid "Polish"
-msgstr ""
+msgstr "puola"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "portugali"
 
 msgid "Romanian"
-msgstr ""
+msgstr "romania"
 
 msgid "Russian"
-msgstr ""
+msgstr "venäjä"
 
 msgid "Slovak"
-msgstr ""
+msgstr "slovakki"
 
 msgid "Swedish"
-msgstr ""
+msgstr "ruotsi"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "ukraina"
 
 msgid "&Add word"
 msgstr ""
 
 msgid "Language"
-msgstr ""
+msgstr "Kieli"
 
 msgid "Misspelled"
 msgstr ""
@@ -1680,7 +1680,7 @@ msgid "Suggest"
 msgstr ""
 
 msgid "Select language"
-msgstr ""
+msgstr "Valitse kieli"
 
 msgid "Load syntax file"
 msgstr ""
@@ -1709,7 +1709,6 @@ msgstr ""
 msgid "The shell is already running a command"
 msgstr ""
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr ""
 
@@ -1939,9 +1938,8 @@ msgstr ""
 msgid "User &mini status"
 msgstr ""
 
-#, fuzzy
 msgid "Listing format"
-msgstr "Listausmoodi"
+msgstr ""
 
 msgid "Executable &first"
 msgstr ""
@@ -1981,7 +1979,7 @@ msgid "&Full 8 bits output"
 msgstr ""
 
 msgid "&ISO 8859-1"
-msgstr ""
+msgstr "&ISO 8859-1"
 
 msgid "7 &bits"
 msgstr ""
@@ -2099,7 +2097,7 @@ msgid "execute/searc&h by others"
 msgstr ""
 
 msgid "Name:"
-msgstr ""
+msgstr "Nimi:"
 
 msgid "Permissions (octal):"
 msgstr ""
@@ -2126,7 +2124,7 @@ msgid "Permission"
 msgstr "Oikeudet"
 
 msgid "File"
-msgstr ""
+msgstr "Tiedosto"
 
 msgid "Set &groups"
 msgstr "Aseta &ryhmät"
@@ -2205,7 +2203,7 @@ msgid "Filter command and arguments:"
 msgstr ""
 
 msgid "Edit file"
-msgstr ""
+msgstr "Muokkaa tiedostoa"
 
 msgid "Create a new Directory"
 msgstr "Luo uusi hakemisto"
@@ -2787,7 +2785,7 @@ msgid "Malformed regular expression"
 msgstr ""
 
 msgid "File name:"
-msgstr ""
+msgstr "Tiedostonimi:"
 
 msgid "&Find recursively"
 msgstr ""
@@ -2937,7 +2935,7 @@ msgstr ""
 
 #, c-format
 msgid "File: %s"
-msgstr ""
+msgstr "Tiedosto: %s"
 
 msgid "No node information"
 msgstr ""
@@ -2954,7 +2952,7 @@ msgstr ""
 
 #, c-format
 msgid "Type:       %s"
-msgstr ""
+msgstr "Tyyppi:     %s"
 
 msgid "non-local vfs"
 msgstr ""
@@ -3058,9 +3056,8 @@ msgstr ""
 msgid "&Info"
 msgstr ""
 
-#, fuzzy
 msgid "&Listing format..."
-msgstr "Listausmoodi"
+msgstr ""
 
 msgid "&Sort order..."
 msgstr ""
@@ -3285,7 +3282,7 @@ msgid "sort|v"
 msgstr ""
 
 msgid "&Version"
-msgstr ""
+msgstr "&Versio"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -3345,10 +3342,10 @@ msgid "&Inode"
 msgstr "&Inode"
 
 msgid "UID"
-msgstr ""
+msgstr "UID"
 
 msgid "GID"
-msgstr ""
+msgstr "GID"
 
 msgid "Owner"
 msgstr "Omistaja"
@@ -3390,7 +3387,7 @@ msgid "&Case sensitive"
 msgstr ""
 
 msgid "Select"
-msgstr ""
+msgstr "Valitse"
 
 msgid "Unselect"
 msgstr ""
@@ -3485,48 +3482,6 @@ msgid ""
 "%s\n"
 msgstr ""
 
-msgid "Debug"
-msgstr ""
-
-msgid "ERROR:"
-msgstr ""
-
-msgid "True:"
-msgstr ""
-
-msgid "False:"
-msgstr ""
-
-msgid "Error calling program"
-msgstr ""
-
-msgid "Warning -- ignoring file"
-msgstr ""
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-
-msgid "Format error on file Extensions File"
-msgstr ""
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr ""
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr ""
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr ""
-
-msgid "User menu"
-msgstr ""
-
 msgid "Help file format error\n"
 msgstr ""
 
@@ -3617,10 +3572,10 @@ msgid "-  < No translation >"
 msgstr ""
 
 msgid "%b %e  %Y"
-msgstr ""
+msgstr "%b %e  %Y"
 
 msgid "%b %e %H:%M"
-msgstr ""
+msgstr "%b %e %H:%M"
 
 #, c-format
 msgid ""
@@ -3718,6 +3673,48 @@ msgid "User data"
 msgstr ""
 
 msgid "Cache directory:"
+msgstr ""
+
+msgid "Debug"
+msgstr ""
+
+msgid "ERROR:"
+msgstr "VIRHE:"
+
+msgid "True:"
+msgstr ""
+
+msgid "False:"
+msgstr ""
+
+msgid "Error calling program"
+msgstr ""
+
+msgid "Warning -- ignoring file"
+msgstr ""
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+
+msgid "Format error on file Extensions File"
+msgstr ""
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr ""
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr ""
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr ""
+
+msgid "User menu"
 msgstr ""
 
 #, c-format
@@ -3962,7 +3959,7 @@ msgstr ""
 
 #, c-format
 msgid "sftp: %s"
-msgstr ""
+msgstr "sftp: %s"
 
 #, c-format
 msgid "sftp: making connection to %s"

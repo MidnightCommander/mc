@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2017-04-15 09:35+0000\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
+"PO-Revision-Date: 2017-09-23 18:02+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/mc/mc/language/el/)\n"
 "Language: el\n"
@@ -578,7 +578,6 @@ msgstr "Τα προσωρινά αρχεία θα δημιουργηθούν σ�
 msgid "Temporary files will not be created\n"
 msgstr "Δε θα δημιουργηθούν προσωρινά αρχεία\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Πατήστε οποιοδήποτε κουμπί για να συνεχίσετε..."
 
@@ -1731,7 +1730,6 @@ msgstr ""
 msgid "The shell is already running a command"
 msgstr "Το κέλυφος τρέχει ήδη μια εντολή"
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr ""
 
@@ -1965,9 +1963,8 @@ msgstr "στήλες"
 msgid "User &mini status"
 msgstr ""
 
-#, fuzzy
 msgid "Listing format"
-msgstr "Λειτουργία λίστας"
+msgstr ""
 
 msgid "Executable &first"
 msgstr "&Εκτελέσιμα πρώτα"
@@ -3144,9 +3141,8 @@ msgstr "&Γρήγορη προβολή"
 msgid "&Info"
 msgstr "&Πληροφορίες"
 
-#, fuzzy
 msgid "&Listing format..."
-msgstr "&Λίστα..."
+msgstr ""
 
 msgid "&Sort order..."
 msgstr "&Σειρά ταξινόμησης..."
@@ -3575,48 +3571,6 @@ msgstr ""
 "Αδυναμία εγγραφής στο αρχείο %s:\n"
 "%s\n"
 
-msgid "Debug"
-msgstr "Αποσφαλμάτωση"
-
-msgid "ERROR:"
-msgstr "ΣΦΑΛΜΑ:"
-
-msgid "True:"
-msgstr "Αληθές:"
-
-msgid "False:"
-msgstr "Ψευδές:"
-
-msgid "Error calling program"
-msgstr "Σφάλμα κατά την κλήση προγράμματος"
-
-msgid "Warning -- ignoring file"
-msgstr "Προειδοποίηση -- παράβλεψη αρχείου"
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-
-msgid "Format error on file Extensions File"
-msgstr "Σφάλμα μορφής αρχείου επεκτάσεων"
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr ""
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr ""
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr "Δε βρέθηκαν καταχωρήσεις στο %s"
-
-msgid "User menu"
-msgstr "Μενού χρήστη"
-
 msgid "Help file format error\n"
 msgstr "Σφάλμα μορφής αρχείου βοήθειας\n"
 
@@ -3828,6 +3782,48 @@ msgstr "Δεδομένα χρήστη"
 
 msgid "Cache directory:"
 msgstr "Κατάλογος κρυφής μνήμης:"
+
+msgid "Debug"
+msgstr "Αποσφαλμάτωση"
+
+msgid "ERROR:"
+msgstr "ΣΦΑΛΜΑ:"
+
+msgid "True:"
+msgstr "Αληθές:"
+
+msgid "False:"
+msgstr "Ψευδές:"
+
+msgid "Error calling program"
+msgstr "Σφάλμα κατά την κλήση προγράμματος"
+
+msgid "Warning -- ignoring file"
+msgstr "Προειδοποίηση -- παράβλεψη αρχείου"
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+
+msgid "Format error on file Extensions File"
+msgstr "Σφάλμα μορφής αρχείου επεκτάσεων"
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr ""
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr ""
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr "Δε βρέθηκαν καταχωρήσεις στο %s"
+
+msgid "User menu"
+msgstr "Μενού χρήστη"
 
 #, c-format
 msgid ""

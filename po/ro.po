@@ -4,8 +4,8 @@
 #
 # Translators:
 # Arthur Titeica <arthur@psw.ro>, 2013
-# Arthur Țițeică <arthur.titeica@gmail.com>, 2013-2014
-# Mihai Draghicioiu <mihai.draghicioiu@gmail.com>, 2016
+# Arthur Țițeică <arthur.titeica@gmail.com>, 2013-2014,2017
+# Mihai Draghicioiu <inactive+vampirefrog@transifex.com>, 2016
 # Nicolae Crefelean, 2014
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Sorin Sfirlogea, 2016
@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2017-04-15 09:35+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
+"PO-Revision-Date: 2017-09-19 09:10+0000\n"
+"Last-Translator: Arthur Țițeică <arthur.titeica@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -112,7 +112,7 @@ msgid ""
 msgstr ""
 
 msgid "Invalid character"
-msgstr ""
+msgstr "Caracter nevalid"
 
 msgid "Unmatched quotes character"
 msgstr ""
@@ -586,7 +586,6 @@ msgstr "Fișierele temporare vor fi create în %s\n"
 msgid "Temporary files will not be created\n"
 msgstr "Nu vor fi create fișiere temporare\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Apăsați o tastă pentru a continua..."
 
@@ -1762,7 +1761,6 @@ msgstr "Nu se poate prelua o copie locală a %s"
 msgid "The shell is already running a command"
 msgstr "Terminalul deja rulează o comandă"
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Tastați `exit' pentru a reveni în Midnight Commander"
 
@@ -2000,9 +1998,8 @@ msgstr "coloane"
 msgid "User &mini status"
 msgstr "&Mini-status utilizator"
 
-#, fuzzy
 msgid "Listing format"
-msgstr "Editare mod de &listare"
+msgstr ""
 
 msgid "Executable &first"
 msgstr "Mai întâ&i executabilele"
@@ -2773,7 +2770,7 @@ msgstr ""
 
 #, c-format
 msgid "Directories: %zu, total size: %s"
-msgstr ""
+msgstr "Directoare: %zu, mărime totală: %s"
 
 msgid "Cannot operate on \"..\"!"
 msgstr "Nu se poate acționa asupra \"..\"!"
@@ -3208,9 +3205,8 @@ msgstr "Vizualizare &rapidă"
 msgid "&Info"
 msgstr "&Info"
 
-#, fuzzy
 msgid "&Listing format..."
-msgstr "Editare mod de &listare"
+msgstr ""
 
 msgid "&Sort order..."
 msgstr "&Ordinea sortării..."
@@ -3644,51 +3640,6 @@ msgstr ""
 "Nu se poate scrie în fișierul %s:\n"
 "%s\n"
 
-msgid "Debug"
-msgstr "Debug"
-
-msgid "ERROR:"
-msgstr "EROARE:"
-
-msgid "True:"
-msgstr "Adevărat:"
-
-msgid "False:"
-msgstr "Fals:"
-
-msgid "Error calling program"
-msgstr "Eroare la executarea programului"
-
-msgid "Warning -- ignoring file"
-msgstr "Atenție -- se ignoră fișierul"
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Fișierul %s nu este deținut de root ori dvs. sau poate fi modificat de "
-"oricine.\n"
-"Utilizându-l vă puteți compromite securitatea"
-
-msgid "Format error on file Extensions File"
-msgstr "Format eronat în fișierul de extensii"
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr "Macro-ul %%var nu are o stare inițială"
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr "Macro-ul %%var nu are o variabilă"
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr "Nu au fost găsite înregistrări potrivite in %s"
-
-msgid "User menu"
-msgstr "Meniu utilizator"
-
 msgid "Help file format error\n"
 msgstr "Format eronat al fișierului de ajutor\n"
 
@@ -3881,7 +3832,7 @@ msgid "Data types:"
 msgstr "Tipuri de date:"
 
 msgid "Home directory:"
-msgstr ""
+msgstr "Director acasă:"
 
 msgid "Profile root directory:"
 msgstr ""
@@ -3906,6 +3857,51 @@ msgstr "Date utilizator"
 
 msgid "Cache directory:"
 msgstr "Dosarul pentru cache:"
+
+msgid "Debug"
+msgstr "Debug"
+
+msgid "ERROR:"
+msgstr "EROARE:"
+
+msgid "True:"
+msgstr "Adevărat:"
+
+msgid "False:"
+msgstr "Fals:"
+
+msgid "Error calling program"
+msgstr "Eroare la executarea programului"
+
+msgid "Warning -- ignoring file"
+msgstr "Atenție -- se ignoră fișierul"
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Fișierul %s nu este deținut de root ori dvs. sau poate fi modificat de "
+"oricine.\n"
+"Utilizându-l vă puteți compromite securitatea"
+
+msgid "Format error on file Extensions File"
+msgstr "Format eronat în fișierul de extensii"
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr "Macro-ul %%var nu are o stare inițială"
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr "Macro-ul %%var nu are o variabilă"
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr "Nu au fost găsite înregistrări potrivite in %s"
+
+msgid "User menu"
+msgstr "Meniu utilizator"
 
 #, c-format
 msgid ""
@@ -4443,9 +4439,3 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
-
-#~ msgid "Listing mode"
-#~ msgstr "Mod de listare"
-
-#~ msgid "&Listing mode..."
-#~ msgstr "Mod de &afișare..."

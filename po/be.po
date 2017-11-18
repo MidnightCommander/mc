@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2017-04-15 09:35+0000\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
+"PO-Revision-Date: 2017-09-19 09:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/mc/mc/language/be/)\n"
 "Language: be\n"
@@ -583,7 +583,6 @@ msgstr "Часовыя файлы будуць стварацца ў «%s»\n"
 msgid "Temporary files will not be created\n"
 msgstr "Часовыя файлы ня будуць стварацца\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Каб працягваць, націсьніце хоць-якую клявішу…"
 
@@ -1772,7 +1771,6 @@ msgstr "Немагчыма атрымаць лякальны асобнік «%s
 msgid "The shell is already running a command"
 msgstr "Абалонка ўжо выконвае загад"
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Надрукуйце «exit», каб вярнуцца ў Midnight Commander"
 
@@ -2010,9 +2008,8 @@ msgstr ""
 msgid "User &mini status"
 msgstr "Адмысловы &радок стану панэлі:"
 
-#, fuzzy
 msgid "Listing format"
-msgstr "&Зьмяніць від сьпісу"
+msgstr ""
 
 msgid "Executable &first"
 msgstr "Спачатку &выканальныя"
@@ -3218,9 +3215,8 @@ msgstr "&Хуткі агляд"
 msgid "&Info"
 msgstr "&Зьвесткі"
 
-#, fuzzy
 msgid "&Listing format..."
-msgstr "&Зьмяніць від сьпісу"
+msgstr ""
 
 msgid "&Sort order..."
 msgstr "&Упарадкаваць…"
@@ -3656,51 +3652,6 @@ msgstr ""
 "Немагчыма запісаць у файл «%s»:\n"
 "%s\n"
 
-msgid "Debug"
-msgstr "Адсочваць хібы"
-
-msgid "ERROR:"
-msgstr "ПАМЫЛКА:"
-
-msgid "True:"
-msgstr "Сапраўдна:"
-
-msgid "False:"
-msgstr "Несапраўдна:"
-
-msgid "Error calling program"
-msgstr "Не ўдалося выклікаць праґраму"
-
-msgid "Warning -- ignoring file"
-msgstr "Перасьцярога: файл прапускаецца"
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Спраўнік (root) або вы не валодаеце файлам «%s», або яго могуць запісваць "
-"усе.\n"
-"З гледзішча бясьпекі ўжываць гэты файл рызыкоўна"
-
-msgid "Format error on file Extensions File"
-msgstr "Памылка ў разьметцы файла пашырэньняў"
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr "Макрас «%%var» ня мае прадвызначана значэньня"
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr "Макрас «%%var» ня мае зьменнае"
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr "«%s» ня мае адпаведных запісаў"
-
-msgid "User menu"
-msgstr "Мэню карыстальніка"
-
 msgid "Help file format error\n"
 msgstr "Памылка ў разьметцы файла даведкі\n"
 
@@ -3913,6 +3864,51 @@ msgstr "Зьвесткі карыстальніка"
 
 msgid "Cache directory:"
 msgstr "Каталёґ запасьніку:"
+
+msgid "Debug"
+msgstr "Адсочваць хібы"
+
+msgid "ERROR:"
+msgstr "ПАМЫЛКА:"
+
+msgid "True:"
+msgstr "Сапраўдна:"
+
+msgid "False:"
+msgstr "Несапраўдна:"
+
+msgid "Error calling program"
+msgstr "Не ўдалося выклікаць праґраму"
+
+msgid "Warning -- ignoring file"
+msgstr "Перасьцярога: файл прапускаецца"
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Спраўнік (root) або вы не валодаеце файлам «%s», або яго могуць запісваць "
+"усе.\n"
+"З гледзішча бясьпекі ўжываць гэты файл рызыкоўна"
+
+msgid "Format error on file Extensions File"
+msgstr "Памылка ў разьметцы файла пашырэньняў"
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr "Макрас «%%var» ня мае прадвызначана значэньня"
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr "Макрас «%%var» ня мае зьменнае"
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr "«%s» ня мае адпаведных запісаў"
+
+msgid "User menu"
+msgstr "Мэню карыстальніка"
 
 #, c-format
 msgid ""
@@ -4447,9 +4443,3 @@ msgstr "Ці працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Listing mode"
-#~ msgstr "Выгляд сьпісу файлаў"
-
-#~ msgid "&Listing mode..."
-#~ msgstr "&Выгляд сьпісу…"

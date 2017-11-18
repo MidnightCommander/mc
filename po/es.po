@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2017-04-16 18:54+0000\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
+"PO-Revision-Date: 2017-09-19 09:10+0000\n"
 "Last-Translator: David Martin <dhmartina@yahoo.es>\n"
 "Language-Team: Spanish (http://www.transifex.com/mc/mc/language/es/)\n"
 "Language: es\n"
@@ -594,7 +594,6 @@ msgstr "Los archivos temporales se ubicarán en %s\n"
 msgid "Temporary files will not be created\n"
 msgstr "No se crearán archivos temporales\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Presione cualquier tecla para continuar..."
 
@@ -1799,7 +1798,6 @@ msgstr "Imposible obtener una copia local de «%s»"
 msgid "The shell is already running a command"
 msgstr "El shell ya está ejecutando un comando"
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Teclee «exit» para regresar a Midnight Commander"
 
@@ -2037,9 +2035,8 @@ msgstr "columnas"
 msgid "User &mini status"
 msgstr "&Mini-estado"
 
-#, fuzzy
 msgid "Listing format"
-msgstr "edición del formato de &Listado"
+msgstr "Formato de listado"
 
 msgid "Executable &first"
 msgstr "&Ejecutables primero"
@@ -3250,9 +3247,8 @@ msgstr "&Vista rápida"
 msgid "&Info"
 msgstr "&Información"
 
-#, fuzzy
 msgid "&Listing format..."
-msgstr "edición del formato de &Listado"
+msgstr "for&Mato de listado..."
 
 msgid "&Sort order..."
 msgstr "&Ordenar..."
@@ -3683,50 +3679,6 @@ msgstr ""
 "Imposible escribir al archivo %s:\n"
 "%s\n"
 
-msgid "Debug"
-msgstr "Depurar"
-
-msgid "ERROR:"
-msgstr "ERROR:"
-
-msgid "True:"
-msgstr "Verdadero:"
-
-msgid "False:"
-msgstr "Falso:"
-
-msgid "Error calling program"
-msgstr "Error al ejecutar el programa"
-
-msgid "Warning -- ignoring file"
-msgstr "Cuidado -- ignorando el archivo"
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"El archivo «%s» no pertenece a Ud. ni a root, ni tiene permiso\n"
-"global de escritura. Usarlo podría comprometer su seguridad."
-
-msgid "Format error on file Extensions File"
-msgstr "Error de formato en el Archivo de Extensiones"
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr "La macro %%var no tiene valor predeterminado"
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr "La macro %%var no contiene variables"
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr "No se encuentran entradas apropiadas en %s"
-
-msgid "User menu"
-msgstr "Menú de usuario"
-
 msgid "Help file format error\n"
 msgstr "Error en el formato del archivo de ayuda\n"
 
@@ -3944,6 +3896,50 @@ msgstr "Datos de usuario"
 
 msgid "Cache directory:"
 msgstr "Directorio de caché:"
+
+msgid "Debug"
+msgstr "Depurar"
+
+msgid "ERROR:"
+msgstr "ERROR:"
+
+msgid "True:"
+msgstr "Verdadero:"
+
+msgid "False:"
+msgstr "Falso:"
+
+msgid "Error calling program"
+msgstr "Error al ejecutar el programa"
+
+msgid "Warning -- ignoring file"
+msgstr "Cuidado -- ignorando el archivo"
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"El archivo «%s» no pertenece a Ud. ni a root, ni tiene permiso\n"
+"global de escritura. Usarlo podría comprometer su seguridad."
+
+msgid "Format error on file Extensions File"
+msgstr "Error de formato en el Archivo de Extensiones"
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr "La macro %%var no tiene valor predeterminado"
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr "La macro %%var no contiene variables"
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr "No se encuentran entradas apropiadas en %s"
+
+msgid "User menu"
+msgstr "Menú de usuario"
 
 #, c-format
 msgid ""
@@ -4482,9 +4478,3 @@ msgstr "¿Continuar desde el principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Imposible obtener una copia local de /ftp://ese.equipo/editame.txt"
-
-#~ msgid "Listing mode"
-#~ msgstr "Listado"
-
-#~ msgid "&Listing mode..."
-#~ msgstr "&Modo de listado..."

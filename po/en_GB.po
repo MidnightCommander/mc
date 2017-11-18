@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Andi Chandler <andi@gowling.com>, 2016
+# Andi Chandler <andi@gowling.com>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2017-04-15 09:35+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
+"PO-Revision-Date: 2017-10-12 21:56+0000\n"
+"Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/mc/mc/"
 "language/en_GB/)\n"
 "Language: en_GB\n"
@@ -40,15 +40,15 @@ msgid "Event system not initialized"
 msgstr "Event system not initialised"
 
 msgid "Check input data! Some of parameters are NULL!"
-msgstr ""
+msgstr "Check input data! Some of parameters are NULL!"
 
 #, c-format
 msgid "Unable to create group '%s' for events!"
-msgstr ""
+msgstr "Unable to create group '%s' for events!"
 
 #, c-format
 msgid "Unable to create event '%s'!"
-msgstr ""
+msgstr "Unable to create event '%s'!"
 
 #, c-format
 msgid ""
@@ -56,26 +56,29 @@ msgid ""
 "User: %s\n"
 "Process ID: %d"
 msgstr ""
+"File \"%s\" is already being edited.\n"
+"User: %s\n"
+"Process ID: %d"
 
 msgid "File locked"
-msgstr ""
+msgstr "File locked"
 
 msgid "&Grab lock"
-msgstr ""
+msgstr "&Grab lock"
 
 msgid "&Ignore lock"
-msgstr ""
+msgstr "&Ignore lock"
 
 #, c-format
 msgid "Cannot create %s directory"
-msgstr ""
+msgstr "Cannot create %s directory"
 
 msgid "FATAL: not a directory:"
-msgstr ""
+msgstr "FATAL: not a directory:"
 
 #, c-format
 msgid "An error occurred while migrating user settings: %s"
-msgstr ""
+msgstr "An error occurred while migrating user settings: %s"
 
 #, c-format
 msgid ""
@@ -84,12 +87,18 @@ msgid ""
 "To get more info, please visit\n"
 "http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 msgstr ""
+"Your old settings were migrated from %s\n"
+"to Freedesktop recommended dirs.\n"
+"To get more info, please visit\n"
+"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 
 #, c-format
 msgid ""
 "Your old settings were migrated from %s\n"
 "to %s\n"
 msgstr ""
+"Your old settings were migrated from %s\n"
+"to %s\n"
 
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
@@ -562,7 +571,6 @@ msgstr ""
 msgid "Temporary files will not be created\n"
 msgstr ""
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr ""
 
@@ -1700,7 +1708,6 @@ msgstr ""
 msgid "The shell is already running a command"
 msgstr ""
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr ""
 
@@ -3474,48 +3481,6 @@ msgid ""
 "%s\n"
 msgstr ""
 
-msgid "Debug"
-msgstr ""
-
-msgid "ERROR:"
-msgstr ""
-
-msgid "True:"
-msgstr ""
-
-msgid "False:"
-msgstr ""
-
-msgid "Error calling program"
-msgstr ""
-
-msgid "Warning -- ignoring file"
-msgstr ""
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-
-msgid "Format error on file Extensions File"
-msgstr ""
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr ""
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr ""
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr ""
-
-msgid "User menu"
-msgstr ""
-
 msgid "Help file format error\n"
 msgstr ""
 
@@ -3707,6 +3672,48 @@ msgid "User data"
 msgstr ""
 
 msgid "Cache directory:"
+msgstr ""
+
+msgid "Debug"
+msgstr ""
+
+msgid "ERROR:"
+msgstr ""
+
+msgid "True:"
+msgstr ""
+
+msgid "False:"
+msgstr ""
+
+msgid "Error calling program"
+msgstr ""
+
+msgid "Warning -- ignoring file"
+msgstr ""
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+
+msgid "Format error on file Extensions File"
+msgstr ""
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr ""
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr ""
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr ""
+
+msgid "User menu"
 msgstr ""
 
 #, c-format

@@ -25,8 +25,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2017-04-27 08:49+0000\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
+"PO-Revision-Date: 2017-09-19 09:10+0000\n"
 "Last-Translator: aborodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
 "Language: ru\n"
@@ -606,7 +606,6 @@ msgstr "Временные файлы будут создаваться в ка�
 msgid "Temporary files will not be created\n"
 msgstr "Временные файлы не будут создаваться\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Для продолжения нажмите любую клавишу..."
 
@@ -1812,7 +1811,6 @@ msgstr "Невозможно получить локальную копию %s"
 msgid "The shell is already running a command"
 msgstr "Интерпретатор занят выполнением команды"
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Введите exit для возврата в Midnight Commander"
 
@@ -2050,9 +2048,8 @@ msgstr "столбцы"
 msgid "User &mini status"
 msgstr "Строка &мини-статуса в формате пользователя"
 
-#, fuzzy
 msgid "Listing format"
-msgstr "&Редактирование формата"
+msgstr "Формат списка файлов"
 
 msgid "Executable &first"
 msgstr "Исполняемые &вначале"
@@ -3266,9 +3263,8 @@ msgstr "&Быстрый просмотр"
 msgid "&Info"
 msgstr "&Информация"
 
-#, fuzzy
 msgid "&Listing format..."
-msgstr "&Редактирование формата"
+msgstr "Фор&мат списка..."
 
 msgid "&Sort order..."
 msgstr "Порядок &сортировки..."
@@ -3703,51 +3699,6 @@ msgstr ""
 "Невозможно писать в файл %s:\n"
 "%s\n"
 
-msgid "Debug"
-msgstr "Отладка"
-
-msgid "ERROR:"
-msgstr "ОШИБКА:"
-
-msgid "True:"
-msgstr "Истина:"
-
-msgid "False:"
-msgstr "Ложь:"
-
-msgid "Error calling program"
-msgstr "Ошибка выполнения программы"
-
-msgid "Warning -- ignoring file"
-msgstr "Предупреждение - файл игнорируется"
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Файл %s в текущем каталоге не принадлежит ни root'у, ни Вам,\n"
-"или доступен другим на запись. Использование такого файла неприемлемо\n"
-"c точки зрения безопасности."
-
-msgid "Format error on file Extensions File"
-msgstr "Ошибка в формате файла Расширений файлов"
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr "Макрос %%var не имеет значения по умолчанию"
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr "Макрос %%var не имеет переменной"
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr "Не найдено подходящих элементов в %s"
-
-msgid "User menu"
-msgstr "Меню пользователя"
-
 msgid "Help file format error\n"
 msgstr "Ошибка в формате файла помощи\n"
 
@@ -3964,6 +3915,51 @@ msgstr "Пользовательские данные"
 
 msgid "Cache directory:"
 msgstr "Каталог с кэшируемыми данными:"
+
+msgid "Debug"
+msgstr "Отладка"
+
+msgid "ERROR:"
+msgstr "ОШИБКА:"
+
+msgid "True:"
+msgstr "Истина:"
+
+msgid "False:"
+msgstr "Ложь:"
+
+msgid "Error calling program"
+msgstr "Ошибка выполнения программы"
+
+msgid "Warning -- ignoring file"
+msgstr "Предупреждение - файл игнорируется"
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Файл %s в текущем каталоге не принадлежит ни root'у, ни Вам,\n"
+"или доступен другим на запись. Использование такого файла неприемлемо\n"
+"c точки зрения безопасности."
+
+msgid "Format error on file Extensions File"
+msgstr "Ошибка в формате файла Расширений файлов"
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr "Макрос %%var не имеет значения по умолчанию"
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr "Макрос %%var не имеет переменной"
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr "Не найдено подходящих элементов в %s"
+
+msgid "User menu"
+msgstr "Меню пользователя"
 
 #, c-format
 msgid ""
@@ -4502,9 +4498,3 @@ msgstr "Продолжить с начала?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Невозможно получить локальную копию /ftp://some.host/editme.txt"
-
-#~ msgid "Listing mode"
-#~ msgstr "Формат списка файлов"
-
-#~ msgid "&Listing mode..."
-#~ msgstr "Фор&мат списка..."

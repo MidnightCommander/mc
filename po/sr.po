@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2017-04-15 09:35+0000\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
+"PO-Revision-Date: 2017-09-19 09:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Serbian (http://www.transifex.com/mc/mc/language/sr/)\n"
 "Language: sr\n"
@@ -585,7 +585,6 @@ msgstr "Привремене датотеке ће бити направљене
 msgid "Temporary files will not be created\n"
 msgstr "Привремене датотеке неће бити направљене\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Притиснитенеки тастер да наставите..."
 
@@ -1785,7 +1784,6 @@ msgstr "Не могу да довучем месни умножак „%s“"
 msgid "The shell is already running a command"
 msgstr "Шкољка већ извршава наредбу"
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Укуцајте „exit“ да се вратите Поноћном нареднику"
 
@@ -2023,9 +2021,8 @@ msgstr "колоне"
 msgid "User &mini status"
 msgstr "Корисниково &мини стање"
 
-#, fuzzy
 msgid "Listing format"
-msgstr "&Испиши уређивање записа"
+msgstr ""
 
 msgid "Executable &first"
 msgstr "Прво &извршне"
@@ -3231,9 +3228,8 @@ msgstr "&Брзи преглед"
 msgid "&Info"
 msgstr "&Подаци"
 
-#, fuzzy
 msgid "&Listing format..."
-msgstr "&Испиши уређивање записа"
+msgstr ""
 
 msgid "&Sort order..."
 msgstr "Редослед &ређања..."
@@ -3667,50 +3663,6 @@ msgstr ""
 "Не могу да пишем у датотеку „%s“:\n"
 "%s\n"
 
-msgid "Debug"
-msgstr "Прочисти"
-
-msgid "ERROR:"
-msgstr "ГРЕШКА:"
-
-msgid "True:"
-msgstr "Тачно:"
-
-msgid "False:"
-msgstr "Нетачно:"
-
-msgid "Error calling program"
-msgstr "Грешка позивања програма"
-
-msgid "Warning -- ignoring file"
-msgstr "Упозорење — занемарујем датотеку"
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Ни администратор ни ви нисте власници датотеке „%s“\n"
-"или није уопште читљива. Њена употреба може да угрози вашу безбедност"
-
-msgid "Format error on file Extensions File"
-msgstr "Грешка записа на датотеци „Датотека проширења“"
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr "Макро „%%var“ нема основности"
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr "Макро „%%var“ нема променљиве"
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr "Нисам нашао одговарајуће уносе у „%s“"
-
-msgid "User menu"
-msgstr "Кориснички изборник"
-
 msgid "Help file format error\n"
 msgstr "Грешка записа датотеке помоћи\n"
 
@@ -3928,6 +3880,50 @@ msgstr "Кориснички подаци"
 
 msgid "Cache directory:"
 msgstr "Директоријум оставе:"
+
+msgid "Debug"
+msgstr "Прочисти"
+
+msgid "ERROR:"
+msgstr "ГРЕШКА:"
+
+msgid "True:"
+msgstr "Тачно:"
+
+msgid "False:"
+msgstr "Нетачно:"
+
+msgid "Error calling program"
+msgstr "Грешка позивања програма"
+
+msgid "Warning -- ignoring file"
+msgstr "Упозорење — занемарујем датотеку"
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Ни администратор ни ви нисте власници датотеке „%s“\n"
+"или није уопште читљива. Њена употреба може да угрози вашу безбедност"
+
+msgid "Format error on file Extensions File"
+msgstr "Грешка записа на датотеци „Датотека проширења“"
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr "Макро „%%var“ нема основности"
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr "Макро „%%var“ нема променљиве"
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr "Нисам нашао одговарајуће уносе у „%s“"
+
+msgid "User menu"
+msgstr "Кориснички изборник"
 
 #, c-format
 msgid ""
@@ -4466,9 +4462,3 @@ msgstr "Да наставим са почетка?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не могу да довучем месни примерак „/ftp://some.host/editme.txt“"
-
-#~ msgid "Listing mode"
-#~ msgstr "Режим списка"
-
-#~ msgid "&Listing mode..."
-#~ msgstr "Режим &списка..."

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2017-04-15 09:35+0000\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
+"PO-Revision-Date: 2017-09-19 09:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/mc/mc/language/vi/)\n"
 "Language: vi\n"
@@ -563,7 +563,6 @@ msgstr "Tập tin tạm thời sẽ được tạo trong thư mục %s\n"
 msgid "Temporary files will not be created\n"
 msgstr "Tập tin tạm thời sẽ không được tạo ra\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Để tiếp tục nhấn phím bất kỳ..."
 
@@ -1701,7 +1700,6 @@ msgstr ""
 msgid "The shell is already running a command"
 msgstr ""
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr ""
 
@@ -1931,9 +1929,8 @@ msgstr ""
 msgid "User &mini status"
 msgstr ""
 
-#, fuzzy
 msgid "Listing format"
-msgstr "&Soạn thảo định dạng danh sách"
+msgstr ""
 
 msgid "Executable &first"
 msgstr ""
@@ -3048,9 +3045,8 @@ msgstr ""
 msgid "&Info"
 msgstr ""
 
-#, fuzzy
 msgid "&Listing format..."
-msgstr "&Soạn thảo định dạng danh sách"
+msgstr ""
 
 msgid "&Sort order..."
 msgstr "t&Hứ tự sắp xếp..."
@@ -3478,50 +3474,6 @@ msgstr ""
 "Không ghi nhớ được vào tập tin %s:\n"
 "%s\n"
 
-msgid "Debug"
-msgstr ""
-
-msgid "ERROR:"
-msgstr ""
-
-msgid "True:"
-msgstr ""
-
-msgid "False:"
-msgstr ""
-
-msgid "Error calling program"
-msgstr ""
-
-msgid "Warning -- ignoring file"
-msgstr ""
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Tập tin %s không thuộc quyền sở hữu của root, hay của bạn,\n"
-"hoặc ai cũng có thể ghi. Sử dụng tập tin này có thể không an toàn"
-
-msgid "Format error on file Extensions File"
-msgstr ""
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr ""
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr ""
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr ""
-
-msgid "User menu"
-msgstr ""
-
 msgid "Help file format error\n"
 msgstr ""
 
@@ -3728,6 +3680,50 @@ msgid "User data"
 msgstr ""
 
 msgid "Cache directory:"
+msgstr ""
+
+msgid "Debug"
+msgstr ""
+
+msgid "ERROR:"
+msgstr ""
+
+msgid "True:"
+msgstr ""
+
+msgid "False:"
+msgstr ""
+
+msgid "Error calling program"
+msgstr ""
+
+msgid "Warning -- ignoring file"
+msgstr ""
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Tập tin %s không thuộc quyền sở hữu của root, hay của bạn,\n"
+"hoặc ai cũng có thể ghi. Sử dụng tập tin này có thể không an toàn"
+
+msgid "Format error on file Extensions File"
+msgstr ""
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr ""
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr ""
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr ""
+
+msgid "User menu"
 msgstr ""
 
 #, c-format
@@ -4246,9 +4242,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Listing mode"
-#~ msgstr "Dạng danh sách"
-
-#~ msgid "&Listing mode..."
-#~ msgstr "&Dạng danh sách..."

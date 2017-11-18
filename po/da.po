@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2017-04-15 09:35+0000\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
+"PO-Revision-Date: 2017-09-19 09:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/mc/mc/language/da/)\n"
 "Language: da\n"
@@ -580,7 +580,6 @@ msgstr "Midlertidige filer vil blive oprettet i %s\n"
 msgid "Temporary files will not be created\n"
 msgstr "Midlertidige filer vil ikke blive oprettet\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Tryk på en tast for at fortsætte..."
 
@@ -1747,7 +1746,6 @@ msgstr "Kan ikke hente en lokal kopi af %s"
 msgid "The shell is already running a command"
 msgstr "Skallen kører allerede en kommando"
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Skriv 'exit' for at vende tilbage til Midnight Commander"
 
@@ -1985,9 +1983,8 @@ msgstr "kolonner"
 msgid "User &mini status"
 msgstr "&Ministatus for bruger"
 
-#, fuzzy
 msgid "Listing format"
-msgstr "Redigering af &Listeformat"
+msgstr ""
 
 msgid "Executable &first"
 msgstr "&Først kørbare"
@@ -3179,9 +3176,8 @@ msgstr "&Hurtig visning"
 msgid "&Info"
 msgstr "&Info"
 
-#, fuzzy
 msgid "&Listing format..."
-msgstr "Redigering af &Listeformat"
+msgstr ""
 
 msgid "&Sort order..."
 msgstr "&Sorteringsrækkefølge..."
@@ -3612,50 +3608,6 @@ msgstr ""
 "Kan ikke skrive til filen %s:\n"
 "%s\n"
 
-msgid "Debug"
-msgstr "Fejlsøg"
-
-msgid "ERROR:"
-msgstr "FEJL:"
-
-msgid "True:"
-msgstr "Sand:"
-
-msgid "False:"
-msgstr "Falsk:"
-
-msgid "Error calling program"
-msgstr "Fejl ved kald af program"
-
-msgid "Warning -- ignoring file"
-msgstr "Advarsel - ignorerer fil"
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Filen %s er hverken ejet af administrator, dig eller er global\n"
-"skrivbar. Brug af den kan muligvis kompromittere din sikkerhed"
-
-msgid "Format error on file Extensions File"
-msgstr "Formatfejl på fil for filendelser"
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr "Makroen %%var har ingen standard"
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr "Makroen %%var har ingen variabel"
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr "Ingen egnede punkter fundet i %s"
-
-msgid "User menu"
-msgstr "Brugermenu"
-
 msgid "Help file format error\n"
 msgstr "Formatfejl i hjælpefil\n"
 
@@ -3865,6 +3817,50 @@ msgstr ""
 
 msgid "Cache directory:"
 msgstr ""
+
+msgid "Debug"
+msgstr "Fejlsøg"
+
+msgid "ERROR:"
+msgstr "FEJL:"
+
+msgid "True:"
+msgstr "Sand:"
+
+msgid "False:"
+msgstr "Falsk:"
+
+msgid "Error calling program"
+msgstr "Fejl ved kald af program"
+
+msgid "Warning -- ignoring file"
+msgstr "Advarsel - ignorerer fil"
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Filen %s er hverken ejet af administrator, dig eller er global\n"
+"skrivbar. Brug af den kan muligvis kompromittere din sikkerhed"
+
+msgid "Format error on file Extensions File"
+msgstr "Formatfejl på fil for filendelser"
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr "Makroen %%var har ingen standard"
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr "Makroen %%var har ingen variabel"
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr "Ingen egnede punkter fundet i %s"
+
+msgid "User menu"
+msgstr "Brugermenu"
 
 #, c-format
 msgid ""
@@ -4399,9 +4395,3 @@ msgstr "Fortsæt fra begyndelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Listing mode"
-#~ msgstr "Listemåde"
-
-#~ msgid "&Listing mode..."
-#~ msgstr "&Visningstilstand..."

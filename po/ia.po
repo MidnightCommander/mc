@@ -4,15 +4,15 @@
 #
 # Translators:
 # lusitanus <interlusitana@gmail.com>, 2011
-# Martijn Dekker <mcdutchie@hotmail.com>, 2012
+# Martijn Dekker <mcdutchie@hotmail.com>, 2012,2017
 # SoftInterlingua <>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2017-04-15 09:35+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
+"PO-Revision-Date: 2017-09-19 10:23+0000\n"
+"Last-Translator: Martijn Dekker <mcdutchie@hotmail.com>\n"
 "Language-Team: Interlingua (http://www.transifex.com/mc/mc/language/ia/)\n"
 "Language: ia\n"
 "MIME-Version: 1.0\n"
@@ -183,7 +183,7 @@ msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
 
 msgid "Escape"
-msgstr ""
+msgstr "Escappar"
 
 msgid "Function key 1"
 msgstr "Clave de function 1"
@@ -378,7 +378,7 @@ msgid "Colon"
 msgstr "Duo punctos"
 
 msgid "Semicolon"
-msgstr ""
+msgstr "Puncto e virgula"
 
 msgid "Exclamation mark"
 msgstr "Signo de exclamation"
@@ -396,7 +396,7 @@ msgid "Quotation mark"
 msgstr "Virguletta"
 
 msgid "Percent sign"
-msgstr ""
+msgstr "Signo de per cento"
 
 msgid "Caret"
 msgstr "Circumflexo"
@@ -466,7 +466,7 @@ msgid "Shift"
 msgstr "Clave \"Shift\""
 
 msgid "The TERM environment variable is unset!\n"
-msgstr ""
+msgstr "Le variabile de ambiente TERM non es definite!\n"
 
 #, c-format
 msgid ""
@@ -572,7 +572,6 @@ msgstr "Le files temporari essera create in %s\n"
 msgid "Temporary files will not be created\n"
 msgstr "Files temporari non essera create\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Preme qualcunque clave pro continuar..."
 
@@ -624,7 +623,7 @@ msgid "%s (%d)"
 msgstr ""
 
 msgid "&Abort"
-msgstr ""
+msgstr "&Abortar"
 
 msgid "Displays the current version"
 msgstr "Monstra le version actual"
@@ -633,10 +632,10 @@ msgid "Print data directory"
 msgstr "Monstrar directorio de datos"
 
 msgid "Print extended info about used data directories"
-msgstr ""
+msgstr "Imprimer information extense sur le directorios de datos usate"
 
 msgid "Print configure options"
-msgstr ""
+msgstr "Imprimer le optiones de configuration"
 
 msgid "Print last working directory to specified file"
 msgstr "Scriber le ultime directorio de labor in un file"
@@ -657,13 +656,13 @@ msgid "Launches the file viewer on a file"
 msgstr "Aperir un file con le visualisator"
 
 msgid "Edit files"
-msgstr ""
+msgstr "Modificar files"
 
 msgid "Forces xterm features"
 msgstr "Fortiar"
 
 msgid "Disable X11 support"
-msgstr ""
+msgstr "Disactivar supporto X11"
 
 msgid "Tries to use an old highlight mouse tracking"
 msgstr ""
@@ -684,10 +683,10 @@ msgid "Resets soft keys on HP terminals"
 msgstr "Reinitialisar le \"soft keys\" sur terminales HP"
 
 msgid "Load definitions of key bindings from specified file"
-msgstr "Cargar associationes de claves ex un file"
+msgstr "Cargar le associationes de claves ab le file specificate"
 
 msgid "Don't load definitions of key bindings from file, use defaults"
-msgstr ""
+msgstr "Non cargar le associationes de claves ab un file, usar le predefinites"
 
 msgid "Requests to run in black and white"
 msgstr "Demandar de functionar in nigro e blanco"
@@ -1719,7 +1718,6 @@ msgstr ""
 msgid "The shell is already running a command"
 msgstr ""
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr ""
 
@@ -3493,48 +3491,6 @@ msgid ""
 "%s\n"
 msgstr ""
 
-msgid "Debug"
-msgstr ""
-
-msgid "ERROR:"
-msgstr "ERROR:"
-
-msgid "True:"
-msgstr "Ver:"
-
-msgid "False:"
-msgstr "False:"
-
-msgid "Error calling program"
-msgstr ""
-
-msgid "Warning -- ignoring file"
-msgstr ""
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-
-msgid "Format error on file Extensions File"
-msgstr ""
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr ""
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr ""
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr ""
-
-msgid "User menu"
-msgstr "Menu del usator"
-
 msgid "Help file format error\n"
 msgstr ""
 
@@ -3727,6 +3683,48 @@ msgstr "Datos del usator"
 
 msgid "Cache directory:"
 msgstr ""
+
+msgid "Debug"
+msgstr ""
+
+msgid "ERROR:"
+msgstr "ERROR:"
+
+msgid "True:"
+msgstr "Ver:"
+
+msgid "False:"
+msgstr "False:"
+
+msgid "Error calling program"
+msgstr ""
+
+msgid "Warning -- ignoring file"
+msgstr ""
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+
+msgid "Format error on file Extensions File"
+msgstr ""
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr ""
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr ""
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr ""
+
+msgid "User menu"
+msgstr "Menu del usator"
 
 #, c-format
 msgid ""

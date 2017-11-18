@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2017-04-16 13:53+0000\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
+"PO-Revision-Date: 2017-09-19 09:10+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
 "Language: ca\n"
@@ -141,10 +141,10 @@ msgstr ""
 
 #, c-format
 msgid "Invalid token number %d"
-msgstr "Testimoni no vàlid nº %d"
+msgstr "Testimoni no vàlid núm. %d"
 
 msgid "Regular expression error"
-msgstr "Error en l'expressió normal"
+msgstr "Error en l'expressió regular"
 
 msgid "No&rmal"
 msgstr "No&rmal"
@@ -163,7 +163,7 @@ msgid ""
 "Unable to load '%s' skin.\n"
 "Default skin has been loaded"
 msgstr ""
-"No és pot carregar el tema «%s».\n"
+"No es pot carregar el tema «%s».\n"
 "S'ha carregat el tema per defecte"
 
 #, c-format
@@ -304,10 +304,10 @@ msgid "End key"
 msgstr "Posició final"
 
 msgid "Page Up"
-msgstr "Re Pàg"
+msgstr "Re. Pàg."
 
 msgid "Page Down"
-msgstr "Av Pàg"
+msgstr "Av. Pàg."
 
 msgid "/ on keypad"
 msgstr "/ en el teclat numèric"
@@ -340,10 +340,10 @@ msgid "End on keypad"
 msgstr "Final en el teclat numèric"
 
 msgid "Page Down keypad"
-msgstr "Av Pàg en el teclat numèric"
+msgstr "Av. Pàg. en el teclat numèric"
 
 msgid "Page Up keypad"
-msgstr "Re Pàg en el teclat numèric"
+msgstr "Re. Pàg. en el teclat numèric"
 
 msgid "Insert on keypad"
 msgstr "Insereix en el teclat numèric"
@@ -469,10 +469,10 @@ msgid "Space key"
 msgstr "Tecla de barra espaiadora"
 
 msgid "Slash key"
-msgstr "Tecla de barra obliqua"
+msgstr "Tecla de barra inclinada"
 
 msgid "Backslash key"
-msgstr "Tecla de barra obliqua inversa"
+msgstr "Tecla de barra inversa"
 
 msgid "Number sign #"
 msgstr "Coixinet"
@@ -602,7 +602,6 @@ msgstr "Es crearan fitxers temporals a %s\n"
 msgid "Temporary files will not be created\n"
 msgstr "No es crearan fitxers temporals\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Premeu qualsevol tecla per continuar..."
 
@@ -702,7 +701,7 @@ msgid "Disable mouse support in text version"
 msgstr "Inhabilita el suport de ratolí a la versió text"
 
 msgid "Tries to use termcap instead of terminfo"
-msgstr "Prova a emprar termcap en comptes de terminfo"
+msgstr "Prova a emprar el «termcap» en comptes del «terminfo»"
 
 msgid "To run on slow terminals"
 msgstr "Per a funcionar amb terminals lents"
@@ -1121,7 +1120,7 @@ msgid "Block is large, you may not be able to undo this action"
 msgstr "El bloc és gran, potser no pudreu desfer aquesta acció."
 
 msgid "Collect completions"
-msgstr "Recull completats"
+msgstr "Recull completat"
 
 msgid "&Quick save"
 msgstr "Desat &ràpid"
@@ -1272,7 +1271,7 @@ msgstr "Executa l'ordenació"
 
 msgid "Enter sort options (see manpage) separated by whitespace:"
 msgstr ""
-"Introduïu les opcions d'ordrenació (veure la pàgina man), separades per "
+"Introduïu les opcions d'ordrenació (vegeu la pàgina man), separades per "
 "espais en blanc:"
 
 msgid "Sort"
@@ -1807,7 +1806,6 @@ msgstr "No s'ha pogut obtenir una còpia local de %s"
 msgid "The shell is already running a command"
 msgstr "La shell ja està executant una ordre"
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Escriviu «exit» per tornar al Midnight Commander"
 
@@ -2045,9 +2043,8 @@ msgstr "columnes"
 msgid "User &mini status"
 msgstr "&Mini estat de l'usuari"
 
-#, fuzzy
 msgid "Listing format"
-msgstr "Edita el format del &llistat"
+msgstr "Format del llistat"
 
 msgid "Executable &first"
 msgstr "E&xecutables primer"
@@ -2467,7 +2464,7 @@ msgid ""
 "to copy it from %smc.ext or use that file as an example of how to write it."
 msgstr ""
 "El format del fitxer %s ha canviat amb la versió 3.0. Podeu o bé copiar-lo "
-"des %smc.ext o usar aquest fitxer com a exemple de com escriure'l."
+"des de %smc.ext o usar aquest fitxer com a exemple de com escriure'l."
 
 msgid "DialogTitle|Copy"
 msgstr "DialogTitle|Copia"
@@ -2672,7 +2669,7 @@ msgstr ""
 "%s"
 
 msgid "Reget failed, about to overwrite file"
-msgstr "El reprendre ha fallat, se sobreescriurà el fitxer"
+msgstr "Reprendre ha fallat, se sobreescriurà el fitxer"
 
 #, c-format
 msgid ""
@@ -3062,7 +3059,7 @@ msgid "&Remove"
 msgstr "&Elimina"
 
 msgid "Subgroup - press ENTER to see list"
-msgstr "Subgrup - premeu RETORN per veure la llista"
+msgstr "Subgrup - premeu RETORN per a veure la llista"
 
 msgid "Active VFS directories"
 msgstr "Directoris VFS actius"
@@ -3258,9 +3255,8 @@ msgstr "Vista &ràpida"
 msgid "&Info"
 msgstr "&Informació"
 
-#, fuzzy
 msgid "&Listing format..."
-msgstr "Edita el format del &llistat"
+msgstr "Format del &llistat..."
 
 msgid "&Sort order..."
 msgstr "&Ordenació..."
@@ -3610,7 +3606,7 @@ msgid "External panelize"
 msgstr "Quadre de cerca extern"
 
 msgid "Other command"
-msgstr "Una altre ordre"
+msgstr "Una altra ordre"
 
 msgid "Command"
 msgstr "Ordre"
@@ -3694,50 +3690,6 @@ msgid ""
 msgstr ""
 "No s'ha pogut escriure al fitxer %s:\n"
 "%s\n"
-
-msgid "Debug"
-msgstr "Depura"
-
-msgid "ERROR:"
-msgstr "ERROR:"
-
-msgid "True:"
-msgstr "Cert:"
-
-msgid "False:"
-msgstr "Fals:"
-
-msgid "Error calling program"
-msgstr "Error en la crida al programa"
-
-msgid "Warning -- ignoring file"
-msgstr "Avís - es fa cas omís del fitxer"
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"El fitxer %s no pertany ni a l'arrel ni a vostè, o bé és modificable per\n"
-"qualsevol. Usar-lo podria comprometre la seguretat"
-
-msgid "Format error on file Extensions File"
-msgstr "Error de format en el fitxer de les extensions"
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr "La macro %%var no és la per defecte"
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr "La macro %%var no conté variables"
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr "No es troben entrades adients a %s"
-
-msgid "User menu"
-msgstr "Menú d'usuari"
 
 msgid "Help file format error\n"
 msgstr "Error de format en el fitxer d'ajuda\n"
@@ -3860,7 +3812,7 @@ msgid ""
 "Cannot save file %s:\n"
 "%s"
 msgstr ""
-"No s'ha pogutt desar el fitxer %s:\n"
+"No s'ha pogut desar el fitxer %s:\n"
 "%s"
 
 msgid ""
@@ -3958,6 +3910,50 @@ msgstr "Dades d'usuari"
 
 msgid "Cache directory:"
 msgstr "Directori de memòria cau:"
+
+msgid "Debug"
+msgstr "Depura"
+
+msgid "ERROR:"
+msgstr "ERROR:"
+
+msgid "True:"
+msgstr "Cert:"
+
+msgid "False:"
+msgstr "Fals:"
+
+msgid "Error calling program"
+msgstr "Error en la crida al programa"
+
+msgid "Warning -- ignoring file"
+msgstr "Avís - es fa cas omís del fitxer"
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"El fitxer %s no pertany ni a l'arrel ni a vostè, o bé és modificable per\n"
+"qualsevol. Usar-lo podria comprometre la seguretat"
+
+msgid "Format error on file Extensions File"
+msgstr "Error de format en el fitxer de les extensions"
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr "La macro %%var no és la per defecte"
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr "La macro %%var no conté variables"
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr "No es troben entrades adients a %s"
+
+msgid "User menu"
+msgstr "Menú d'usuari"
 
 #, c-format
 msgid ""
@@ -4210,7 +4206,7 @@ msgid "sftp: an error occurred while reading %s: %s"
 msgstr "sftp: hi ha hagut un error mentre es llegia %s: %s"
 
 msgid "sftp: Unable to get current user name."
-msgstr "sftp: no s'ha pogut obtenir el nom de l'usuari actual"
+msgstr "sftp: no s'ha pogut obtenir el nom de l'usuari actual."
 
 msgid "sftp: Invalid host name."
 msgstr "sftp: el nom de l'amfitrió no és vàlid."
@@ -4294,10 +4290,10 @@ msgstr ""
 "%s"
 
 msgid "Inconsistent tar archive"
-msgstr "L'arxiu tar no és consistent"
+msgstr "L'arxiu TAR no és consistent"
 
 msgid "Unexpected EOF on archive file"
-msgstr "Fí de fitxer inesperat a l'arxiu"
+msgstr "Fí de fitxer inesperat al fitxer d'arxiu"
 
 #, c-format
 msgid ""
@@ -4334,7 +4330,7 @@ msgid "while calling ext2_block_iterate %d"
 msgstr "mentre es crida a ext2_block_iterate %d"
 
 msgid "no more memory while reallocating array"
-msgstr "s'ha esgotat la memòria mentre es reassignaba la taula"
+msgstr "s'ha esgotat la memòria mentre és reassignaba la taula"
 
 #, c-format
 msgid "while doing inode scan %d"
@@ -4395,7 +4391,7 @@ msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file?"
 msgstr ""
-"S'stà sortint del Midnight Commander.\n"
+"S'està sortint del Midnight Commander.\n"
 "Deso el fitxer modificat?"
 
 msgid "&Line number"
@@ -4500,9 +4496,3 @@ msgstr "Continuo des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
-
-#~ msgid "Listing mode"
-#~ msgstr "&Mode del llistat"
-
-#~ msgid "&Listing mode..."
-#~ msgstr "Mode de &llistat..."

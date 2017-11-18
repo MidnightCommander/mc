@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
+# Arya Hadi <arya.hadi97@gmail.com>, 2017
 # Aryaz Eghbali <aryaz.egh@gmail.com>, 2012
 # Mohammadreza MontazeriShatoori <monta2009@gmail.com>, 2012
 # Sina Saharkhiz <sinas1991@gmail.com>, 2012-2013,2015
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2017-04-15 09:35+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
+"PO-Revision-Date: 2017-09-23 18:38+0000\n"
+"Last-Translator: Arya Hadi <arya.hadi97@gmail.com>\n"
 "Language-Team: Persian (http://www.transifex.com/mc/mc/language/fa/)\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
@@ -46,11 +47,11 @@ msgstr "داده ورودی را بررسی کنید! بعضی از پارامت
 
 #, c-format
 msgid "Unable to create group '%s' for events!"
-msgstr ""
+msgstr "ایجاد گروه '%s' برای رویدادها ممکن نیست!"
 
 #, c-format
 msgid "Unable to create event '%s'!"
-msgstr ""
+msgstr "ایجاد رویداد '%s' ممکن نیست!"
 
 #, c-format
 msgid ""
@@ -77,7 +78,7 @@ msgstr ""
 
 #, c-format
 msgid "An error occurred while migrating user settings: %s"
-msgstr ""
+msgstr "هنگام انتقال اطلاعات کاربر خطایی رخ داد: %s"
 
 #, c-format
 msgid ""
@@ -99,7 +100,7 @@ msgid ""
 msgstr ""
 
 msgid "Invalid character"
-msgstr ""
+msgstr "نشان نامعتبر"
 
 msgid "Unmatched quotes character"
 msgstr ""
@@ -177,7 +178,7 @@ msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
 
 msgid "Escape"
-msgstr ""
+msgstr "خروج"
 
 msgid "Function key 1"
 msgstr "کلید تابع ۱"
@@ -264,7 +265,7 @@ msgid "Insert"
 msgstr ""
 
 msgid "Delete"
-msgstr ""
+msgstr "حذف"
 
 msgid "Home"
 msgstr ""
@@ -564,7 +565,6 @@ msgstr ""
 msgid "Temporary files will not be created\n"
 msgstr "فایل‌های موقتی ساخته نخواهند شد\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "برای ادامه کلیدی را فشار دهید..."
 
@@ -1702,7 +1702,6 @@ msgstr ""
 msgid "The shell is already running a command"
 msgstr "شل در حال اجرای فرمانی دیگر است"
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr ""
 
@@ -1932,9 +1931,8 @@ msgstr ""
 msgid "User &mini status"
 msgstr ""
 
-#, fuzzy
 msgid "Listing format"
-msgstr "روش فهرست کردن"
+msgstr ""
 
 msgid "Executable &first"
 msgstr ""
@@ -3049,9 +3047,8 @@ msgstr ""
 msgid "&Info"
 msgstr ""
 
-#, fuzzy
 msgid "&Listing format..."
-msgstr "روش فهرست کردن"
+msgstr ""
 
 msgid "&Sort order..."
 msgstr ""
@@ -3474,48 +3471,6 @@ msgid ""
 "%s\n"
 msgstr ""
 
-msgid "Debug"
-msgstr "خطایابی"
-
-msgid "ERROR:"
-msgstr "خطا:"
-
-msgid "True:"
-msgstr "درست:"
-
-msgid "False:"
-msgstr "نادرست:"
-
-msgid "Error calling program"
-msgstr ""
-
-msgid "Warning -- ignoring file"
-msgstr ""
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-
-msgid "Format error on file Extensions File"
-msgstr ""
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr ""
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr ""
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr ""
-
-msgid "User menu"
-msgstr ""
-
 msgid "Help file format error\n"
 msgstr ""
 
@@ -3707,6 +3662,48 @@ msgid "User data"
 msgstr ""
 
 msgid "Cache directory:"
+msgstr ""
+
+msgid "Debug"
+msgstr "خطایابی"
+
+msgid "ERROR:"
+msgstr "خطا:"
+
+msgid "True:"
+msgstr "درست:"
+
+msgid "False:"
+msgstr "نادرست:"
+
+msgid "Error calling program"
+msgstr ""
+
+msgid "Warning -- ignoring file"
+msgstr ""
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+
+msgid "Format error on file Extensions File"
+msgstr ""
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr ""
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr ""
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr ""
+
+msgid "User menu"
 msgstr ""
 
 #, c-format

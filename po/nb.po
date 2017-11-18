@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2017-04-15 09:35+0000\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
+"PO-Revision-Date: 2017-09-19 09:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/mc/mc/language/"
 "nb/)\n"
@@ -564,7 +564,6 @@ msgstr ""
 msgid "Temporary files will not be created\n"
 msgstr ""
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Trykk en tast for å fortsette..."
 
@@ -1702,7 +1701,6 @@ msgstr ""
 msgid "The shell is already running a command"
 msgstr ""
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr ""
 
@@ -1932,9 +1930,8 @@ msgstr ""
 msgid "User &mini status"
 msgstr ""
 
-#, fuzzy
 msgid "Listing format"
-msgstr "Redigering av listeformat"
+msgstr ""
 
 msgid "Executable &first"
 msgstr ""
@@ -3051,9 +3048,8 @@ msgstr ""
 msgid "&Info"
 msgstr ""
 
-#, fuzzy
 msgid "&Listing format..."
-msgstr "Redigering av listeformat"
+msgstr ""
 
 msgid "&Sort order..."
 msgstr "&Sorteringsrekkefølge..."
@@ -3482,50 +3478,6 @@ msgstr ""
 "Kan ikke skrive til %s filen:\n"
 "%s\n"
 
-msgid "Debug"
-msgstr ""
-
-msgid "ERROR:"
-msgstr ""
-
-msgid "True:"
-msgstr ""
-
-msgid "False:"
-msgstr ""
-
-msgid "Error calling program"
-msgstr ""
-
-msgid "Warning -- ignoring file"
-msgstr ""
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Filen %s er ikke eid av root eller er skrivbar for alle.\n"
-"Bruk av den kan kompromittere sikkerheten"
-
-msgid "Format error on file Extensions File"
-msgstr ""
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr ""
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr ""
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr ""
-
-msgid "User menu"
-msgstr ""
-
 msgid "Help file format error\n"
 msgstr ""
 
@@ -3729,6 +3681,50 @@ msgid "User data"
 msgstr ""
 
 msgid "Cache directory:"
+msgstr ""
+
+msgid "Debug"
+msgstr ""
+
+msgid "ERROR:"
+msgstr ""
+
+msgid "True:"
+msgstr ""
+
+msgid "False:"
+msgstr ""
+
+msgid "Error calling program"
+msgstr ""
+
+msgid "Warning -- ignoring file"
+msgstr ""
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Filen %s er ikke eid av root eller er skrivbar for alle.\n"
+"Bruk av den kan kompromittere sikkerheten"
+
+msgid "Format error on file Extensions File"
+msgstr ""
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr ""
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr ""
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr ""
+
+msgid "User menu"
 msgstr ""
 
 #, c-format
@@ -4247,9 +4243,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Listing mode"
-#~ msgstr "Listemodus"
-
-#~ msgid "&Listing mode..."
-#~ msgstr "&Listemodus..."

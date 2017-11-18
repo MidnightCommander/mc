@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
 "PO-Revision-Date: 2017-05-03 09:33+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -105,7 +105,9 @@ msgstr ""
 msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
 "hex)"
-msgstr "Numero fuori range (dovrebbe entrare in un byte, 0 <= n <= 0xFF, in esadecimale)"
+msgstr ""
+"Numero fuori range (dovrebbe entrare in un byte, 0 <= n <= 0xFF, in "
+"esadecimale)"
 
 msgid "Invalid character"
 msgstr "Carattere non valido"
@@ -591,7 +593,6 @@ msgstr "I file temporanei verranno creati in %s\n"
 msgid "Temporary files will not be created\n"
 msgstr "I file temporanei non verranno creati\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Premi un tasto per continuare..."
 
@@ -1793,7 +1794,6 @@ msgstr "Impossibile ricevere una copia locale di %s"
 msgid "The shell is already running a command"
 msgstr "La shell sta già eseguendo un comando"
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Battere 'exit' per tornare al Midnight Commander"
 
@@ -3675,50 +3675,6 @@ msgstr ""
 "Non posso scrivere sul file `%s':\n"
 "%s\n"
 
-msgid "Debug"
-msgstr "Debug"
-
-msgid "ERROR:"
-msgstr "ERRORE:"
-
-msgid "True:"
-msgstr "Vero:"
-
-msgid "False:"
-msgstr "Falso:"
-
-msgid "Error calling program"
-msgstr "Errore durante la chiamata del programma:"
-
-msgid "Warning -- ignoring file"
-msgstr "Attenzione -- file ignorato"
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-" Il file `%s' non appartiene a root o a Voi o è scrivibile da tutti\n"
-" Il suo uso potrebbe compromettere la Vostra sicurezza."
-
-msgid "Format error on file Extensions File"
-msgstr "Errore formato nel file estensioni"
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr "La macro %%var non ha valore predefinito"
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr "Le macro %%var non ha variabile"
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr "Non trovo voci appropriate in %s"
-
-msgid "User menu"
-msgstr "Menu utente"
-
 msgid "Help file format error\n"
 msgstr "Errore nel formato file della guida\n"
 
@@ -3936,6 +3892,50 @@ msgstr "Dati utente"
 
 msgid "Cache directory:"
 msgstr "Directory della cache:"
+
+msgid "Debug"
+msgstr "Debug"
+
+msgid "ERROR:"
+msgstr "ERRORE:"
+
+msgid "True:"
+msgstr "Vero:"
+
+msgid "False:"
+msgstr "Falso:"
+
+msgid "Error calling program"
+msgstr "Errore durante la chiamata del programma:"
+
+msgid "Warning -- ignoring file"
+msgstr "Attenzione -- file ignorato"
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+" Il file `%s' non appartiene a root o a Voi o è scrivibile da tutti\n"
+" Il suo uso potrebbe compromettere la Vostra sicurezza."
+
+msgid "Format error on file Extensions File"
+msgstr "Errore formato nel file estensioni"
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr "La macro %%var non ha valore predefinito"
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr "Le macro %%var non ha variabile"
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr "Non trovo voci appropriate in %s"
+
+msgid "User menu"
+msgstr "Menu utente"
 
 #, c-format
 msgid ""

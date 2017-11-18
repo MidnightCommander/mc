@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2017-04-15 09:35+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
+"PO-Revision-Date: 2017-09-23 18:02+0000\n"
+"Last-Translator: Myselus\n"
 "Language-Team: Bulgarian (http://www.transifex.com/mc/mc/language/bg/)\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -595,7 +595,6 @@ msgstr "Временни файлове ще бъдат създадени в %s
 msgid "Temporary files will not be created\n"
 msgstr "Временни файлове няма да бъдат създадени\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Натиснете клавиш, за да продължите..."
 
@@ -782,7 +781,7 @@ msgid "file"
 msgstr "файл"
 
 msgid "file1 file2"
-msgstr ""
+msgstr "файл1 файл2"
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr ""
@@ -1782,7 +1781,6 @@ msgstr "Не може да се добие локално копие от %s"
 msgid "The shell is already running a command"
 msgstr "Обвивката вече изпълнява команда"
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Напишете 'exit', за да се върнете в Midnight Commander-а"
 
@@ -2020,9 +2018,8 @@ msgstr "колони"
 msgid "User &mini status"
 msgstr "Потребителски &мини статус"
 
-#, fuzzy
 msgid "Listing format"
-msgstr "Редактирай формата на списъка"
+msgstr "Формат на списък"
 
 msgid "Executable &first"
 msgstr "Изпълнимия файл &първо"
@@ -2503,6 +2500,10 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
+"Не могат да се създадат стабилни символични линкове между не-локални файлови "
+"системи:\n"
+"\n"
+"Опцията Стабилни Символични Линкове ще бъде деактивирана"
 
 #, c-format
 msgid ""
@@ -2797,7 +2798,7 @@ msgstr ""
 
 #, c-format
 msgid "Directories: %zu, total size: %s"
-msgstr ""
+msgstr "Директории: %zu, общ размер %s"
 
 msgid "Cannot operate on \"..\"!"
 msgstr "Не може да работи върху \"..\"!"
@@ -3230,9 +3231,8 @@ msgstr "&Бърз преглед"
 msgid "&Info"
 msgstr "&Информация"
 
-#, fuzzy
 msgid "&Listing format..."
-msgstr "Редактирай формата на списъка"
+msgstr "&Формат на списък"
 
 msgid "&Sort order..."
 msgstr "Ред на сортиране..."
@@ -3663,50 +3663,6 @@ msgstr ""
 "Не може да се пише във файла %s:\n"
 "%s\n"
 
-msgid "Debug"
-msgstr "Дебъгване"
-
-msgid "ERROR:"
-msgstr "ГРЕШКА:"
-
-msgid "True:"
-msgstr "Вярно:"
-
-msgid "False:"
-msgstr "Невярно:"
-
-msgid "Error calling program"
-msgstr "Грешка при извикване на програма"
-
-msgid "Warning -- ignoring file"
-msgstr "Предупреждение -- игнориране на файл"
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Файла %s не е на root или Ваш, или е достъпен за запис от всички.\n"
-"Използването му може да застраши сигурността Ви"
-
-msgid "Format error on file Extensions File"
-msgstr "Грешка във формата на файла за Разширения"
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr "Макросът %%var няма стойност по подразбиране"
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr "Макросът %%var няма променлива"
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr "Няма намерени подходящи елементи в %s"
-
-msgid "User menu"
-msgstr "Потребителско меню"
-
 msgid "Help file format error\n"
 msgstr "Грешка във формата на помощния файл\n"
 
@@ -3926,6 +3882,50 @@ msgstr "Потребителски данни"
 
 msgid "Cache directory:"
 msgstr "Кеш директория:"
+
+msgid "Debug"
+msgstr "Дебъгване"
+
+msgid "ERROR:"
+msgstr "ГРЕШКА:"
+
+msgid "True:"
+msgstr "Вярно:"
+
+msgid "False:"
+msgstr "Невярно:"
+
+msgid "Error calling program"
+msgstr "Грешка при извикване на програма"
+
+msgid "Warning -- ignoring file"
+msgstr "Предупреждение -- игнориране на файл"
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Файла %s не е на root или Ваш, или е достъпен за запис от всички.\n"
+"Използването му може да застраши сигурността Ви"
+
+msgid "Format error on file Extensions File"
+msgstr "Грешка във формата на файла за Разширения"
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr "Макросът %%var няма стойност по подразбиране"
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr "Макросът %%var няма променлива"
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr "Няма намерени подходящи елементи в %s"
+
+msgid "User menu"
+msgstr "Потребителско меню"
 
 #, c-format
 msgid ""
@@ -4464,9 +4464,3 @@ msgstr "Да се продължи ли от началото?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на /ftp://some.host/editme.txt"
-
-#~ msgid "Listing mode"
-#~ msgstr "Режим на списък"
-
-#~ msgid "&Listing mode..."
-#~ msgstr "Вид на списъка..."

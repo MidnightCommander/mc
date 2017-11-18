@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2017-04-15 09:35+0000\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
+"PO-Revision-Date: 2017-09-19 09:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/mc/mc/language/"
 "zh_CN/)\n"
@@ -595,7 +595,6 @@ msgstr "在 %s 中创建临时文件\n"
 msgid "Temporary files will not be created\n"
 msgstr "无法创建临时文件\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "按任意键继续..."
 
@@ -1793,7 +1792,6 @@ msgstr "无法获取 %s 的本地副本"
 msgid "The shell is already running a command"
 msgstr "Shell 正在运行一个命令"
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "输入 'exit' 返回 Midnight Commander"
 
@@ -2030,9 +2028,8 @@ msgstr "列"
 msgid "User &mini status"
 msgstr "用户简要状态(&M)"
 
-#, fuzzy
 msgid "Listing format"
-msgstr "列表格式编辑(&L)"
+msgstr ""
 
 msgid "Executable &first"
 msgstr "可执行文件优先(&f)"
@@ -3236,9 +3233,8 @@ msgstr "快速查看(&Q)"
 msgid "&Info"
 msgstr "信息(&I)"
 
-#, fuzzy
 msgid "&Listing format..."
-msgstr "列表格式编辑(&L)"
+msgstr ""
 
 msgid "&Sort order..."
 msgstr "排序(&S)..."
@@ -3667,50 +3663,6 @@ msgstr ""
 "无法写入 %s 文件: \n"
 "%s\n"
 
-msgid "Debug"
-msgstr "调试"
-
-msgid "ERROR:"
-msgstr "错误: "
-
-msgid "True:"
-msgstr "正确: "
-
-msgid "False:"
-msgstr "错误: "
-
-msgid "Error calling program"
-msgstr "调用程序错误"
-
-msgid "Warning -- ignoring file"
-msgstr "警告 － 忽略文件"
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"文件 %s 的拥有者不是 root 或者您，或者是全局可写。\n"
-"使用它可能会妨碍您的安全"
-
-msgid "Format error on file Extensions File"
-msgstr "扩展文件格式错误"
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr "%%var 宏没有默认值"
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr "%%var 宏没有变量"
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr "在 %s 没有找到相应的项"
-
-msgid "User menu"
-msgstr "用户菜单"
-
 msgid "Help file format error\n"
 msgstr "帮助文件格式错误\n"
 
@@ -3928,6 +3880,50 @@ msgstr "用户数据"
 
 msgid "Cache directory:"
 msgstr "缓存目录: "
+
+msgid "Debug"
+msgstr "调试"
+
+msgid "ERROR:"
+msgstr "错误: "
+
+msgid "True:"
+msgstr "正确: "
+
+msgid "False:"
+msgstr "错误: "
+
+msgid "Error calling program"
+msgstr "调用程序错误"
+
+msgid "Warning -- ignoring file"
+msgstr "警告 － 忽略文件"
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"文件 %s 的拥有者不是 root 或者您，或者是全局可写。\n"
+"使用它可能会妨碍您的安全"
+
+msgid "Format error on file Extensions File"
+msgstr "扩展文件格式错误"
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr "%%var 宏没有默认值"
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr "%%var 宏没有变量"
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr "在 %s 没有找到相应的项"
+
+msgid "User menu"
+msgstr "用户菜单"
 
 #, c-format
 msgid ""
@@ -4466,9 +4462,3 @@ msgstr "从头继续搜索?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "无法获取 /ftp://some.host/editme.txt 的本地副本"
-
-#~ msgid "Listing mode"
-#~ msgstr "列表模式"
-
-#~ msgid "&Listing mode..."
-#~ msgstr "列表模式(&L)..."

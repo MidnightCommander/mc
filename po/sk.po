@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-05-02 21:10+0200\n"
-"PO-Revision-Date: 2017-04-15 09:35+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2017-11-18 19:05+0100\n"
+"PO-Revision-Date: 2017-09-23 18:02+0000\n"
+"Last-Translator: Jose Riha <jose1711@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/mc/mc/language/sk/)\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
@@ -590,7 +590,6 @@ msgstr "Dočasné súbory budú vytvorené v %s\n"
 msgid "Temporary files will not be created\n"
 msgstr "Dočasné súbory nebudú vytvorené\n"
 
-#, c-format
 msgid "Press any key to continue..."
 msgstr "Pokračujte stlačením ľubovoľného klávesu..."
 
@@ -1791,9 +1790,8 @@ msgid "Cannot fetch a local copy of %s"
 msgstr "Nemožno stiahnuť lokálnu kópiu %s"
 
 msgid "The shell is already running a command"
-msgstr "Shelli už vykonáva príkaz"
+msgstr "Shell už vykonáva príkaz"
 
-#, c-format
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Napísaním „exit“ sa vrátite do aplikácie Midnight Commander"
 
@@ -2031,9 +2029,8 @@ msgstr "stĺpce"
 msgid "User &mini status"
 msgstr "Používateľ. &mini status"
 
-#, fuzzy
 msgid "Listing format"
-msgstr "&Upraviť formát výpisu"
+msgstr ""
 
 msgid "Executable &first"
 msgstr "N&ajprv spustiteľné"
@@ -3240,9 +3237,8 @@ msgstr "&Rýchle zobrazenie"
 msgid "&Info"
 msgstr "&Info"
 
-#, fuzzy
 msgid "&Listing format..."
-msgstr "&Upraviť formát výpisu"
+msgstr ""
 
 msgid "&Sort order..."
 msgstr "&Poradie výpisu..."
@@ -3676,50 +3672,6 @@ msgstr ""
 "Nepodarilo sa zapísať do súboru %s:\n"
 "%s\n"
 
-msgid "Debug"
-msgstr "Ladenie"
-
-msgid "ERROR:"
-msgstr "CHYBA:"
-
-msgid "True:"
-msgstr "Pravda:"
-
-msgid "False:"
-msgstr "Nepravda:"
-
-msgid "Error calling program"
-msgstr "Chyba pri volaní programu"
-
-msgid "Warning -- ignoring file"
-msgstr "Upozornenie -- ignoruje sa súbor"
-
-#, c-format
-msgid ""
-"File %s is not owned by root or you or is world writable.\n"
-"Using it may compromise your security"
-msgstr ""
-"Súbor %s nevlastní root ani vy alebo nie je zapisovateľný pre ostatných.\n"
-"Ak ho použijete, môže to kompromitovať vašu bezpečnosť"
-
-msgid "Format error on file Extensions File"
-msgstr "Chyba formátu súboru prípon"
-
-#, c-format
-msgid "The %%var macro has no default"
-msgstr "Makro %%var nemá predvoľbu"
-
-#, c-format
-msgid "The %%var macro has no variable"
-msgstr "Makro %%var nemá premennú"
-
-#, c-format
-msgid "No suitable entries found in %s"
-msgstr "V %s neboli nájdené žiadne vhodné položky"
-
-msgid "User menu"
-msgstr "Používateľské menu"
-
 msgid "Help file format error\n"
 msgstr "Chyba formátu súboru Pomocníka\n"
 
@@ -3938,6 +3890,50 @@ msgstr "Používateľské údaje"
 
 msgid "Cache directory:"
 msgstr "Adresár vyrovnávacej pamäte:"
+
+msgid "Debug"
+msgstr "Ladenie"
+
+msgid "ERROR:"
+msgstr "CHYBA:"
+
+msgid "True:"
+msgstr "Pravda:"
+
+msgid "False:"
+msgstr "Nepravda:"
+
+msgid "Error calling program"
+msgstr "Chyba pri volaní programu"
+
+msgid "Warning -- ignoring file"
+msgstr "Upozornenie -- ignoruje sa súbor"
+
+#, c-format
+msgid ""
+"File %s is not owned by root or you or is world writable.\n"
+"Using it may compromise your security"
+msgstr ""
+"Súbor %s nevlastní root ani vy alebo nie je zapisovateľný pre ostatných.\n"
+"Ak ho použijete, môže to kompromitovať vašu bezpečnosť"
+
+msgid "Format error on file Extensions File"
+msgstr "Chyba formátu súboru prípon"
+
+#, c-format
+msgid "The %%var macro has no default"
+msgstr "Makro %%var nemá predvoľbu"
+
+#, c-format
+msgid "The %%var macro has no variable"
+msgstr "Makro %%var nemá premennú"
+
+#, c-format
+msgid "No suitable entries found in %s"
+msgstr "V %s neboli nájdené žiadne vhodné položky"
+
+msgid "User menu"
+msgstr "Používateľské menu"
 
 #, c-format
 msgid ""
@@ -4476,9 +4472,3 @@ msgstr "Pokračovať od začiatku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nemožno stiahnuť lokálnu kópiu /ftp://some.host/editme.txt"
-
-#~ msgid "Listing mode"
-#~ msgstr "Režim výpisu"
-
-#~ msgid "&Listing mode..."
-#~ msgstr "Režim &výpisu..."
