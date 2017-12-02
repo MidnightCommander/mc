@@ -101,6 +101,9 @@ AC_DEFUN([mc_WITH_NCURSES], [
         LIBS=
         AC_SEARCH_LIBS([has_colors], [ncurses], [MCLIBS="$MCLIBS $LIBS"], 
                        [AC_MSG_ERROR([Cannot find ncurses library])])
+        AC_SEARCH_LIBS([stdscr], [tinfo ncurses], [MCLIBS="$MCLIBS $LIBS"],
+                       [AC_MSG_ERROR([Cannot find a library providing stdscr])])
+
 
         screen_type=ncurses
         screen_msg="NCurses"
@@ -111,10 +114,15 @@ AC_DEFUN([mc_WITH_NCURSES], [
         AC_SEARCH_LIBS([addwstr], [ncursesw ncurses curses], [MCLIBS="$MCLIBS $LIBS";ncursesw_found=yes],
                        [AC_MSG_WARN([Cannot find ncurses library, that support wide characters])])
 
+        AC_SEARCH_LIBS([stdscr], [tinfow tinfo ncursesw ncurses curses], [MCLIBS="$MCLIBS $LIBS"],
+                       [AC_MSG_ERROR([Cannot find a library providing stdscr])])
+
         if test x"$ncursesw_found" = "x"; then
             LIBS=
             AC_SEARCH_LIBS([has_colors], [ncurses curses], [MCLIBS="$MCLIBS $LIBS"], 
                            [AC_MSG_ERROR([Cannot find ncurses library])])
+            AC_SEARCH_LIBS([stdscr], [tinfo ncurses curses], [MCLIBS="$MCLIBS $LIBS"],
+                           [AC_MSG_ERROR([Cannot find a library providing stdscr])])
         fi
 
         dnl Check the header
@@ -166,6 +174,9 @@ AC_DEFUN([mc_WITH_NCURSESW], [
     LIBS=
     AC_SEARCH_LIBS([has_colors], [ncursesw], [MCLIBS="$MCLIBS $LIBS"],
 		   [AC_MSG_ERROR([Cannot find ncursesw library])])
+    AC_SEARCH_LIBS([stdscr], [tinfow ncursesw], [MCLIBS="$MCLIBS $LIBS"],
+           [AC_MSG_ERROR([Cannot find a library providing stdscr])])
+
 
     dnl Check the header
     ncurses_h_found=
