@@ -36,9 +36,9 @@ mkdir .global && pushd .global # ignored by GLOBAL's indexer
     tar zxvf global-${GLOBAL_VERSION}.tar.gz > /dev/null 2>&1
 
     pushd global-${GLOBAL_VERSION}
-        ./configure --prefix=$(pwd)/install
-        make
-        make install
+        ./configure --prefix=$(pwd)/install > /dev/null 2>&1
+        make > /dev/null 2>&1
+        make install > /dev/null 2>&1
     popd
 
     export PATH="$(pwd)/global-${GLOBAL_VERSION}/install/bin:$PATH"
