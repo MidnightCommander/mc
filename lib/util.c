@@ -383,7 +383,9 @@ size_trunc_sep (uintmax_t size, gboolean use_si)
     p += strlen (p) - 1;
     d = x + sizeof (x) - 1;
     *d-- = '\0';
-    while (p >= y && (isalpha ((unsigned char) *p) || (unsigned char) *p == ' '))
+    /* @size format is "size unit", i.e. "[digits][space][letters]".
+       Copy all charactes after digits. */
+    while (p >= y && !g_ascii_isdigit (*p))
         *d-- = *p--;
     for (count = 0; p >= y; count++)
     {
