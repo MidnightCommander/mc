@@ -177,13 +177,13 @@ int
 vfs_mkstemps (vfs_path_t ** pname_vpath, const char *prefix, const char *param_basename)
 {
     const char *p;
-    char *suffix, *q;
+    GString *suffix;
     int shift;
     int fd;
 
     /* Strip directories */
     p = strrchr (param_basename, PATH_SEP);
-    if (!p)
+    if (p == NULL)
         p = param_basename;
     else
         p++;
@@ -193,20 +193,16 @@ vfs_mkstemps (vfs_path_t ** pname_vpath, const char *prefix, const char *param_b
     if (shift > 0)
         p += shift;
 
-    suffix = g_malloc (MC_MAXPATHLEN);
+    suffix = g_string_sized_new (32);
 
     /* Protection against unusual characters */
-    q = suffix;
-    while (*p && (*p != '#'))
-    {
-        if (strchr (".-_@", *p) || isalnum ((unsigned char) *p))
-            *q++ = *p;
-        p++;
-    }
-    *q = 0;
+    for (; *p != '\0' && *p != '#'; p++)
+        if (strchr (".-_@", *p) != NULL || g_ascii_isalnum (*p))
+            g_string_append_c (suffix, *p);
 
-    fd = mc_mkstemps (pname_vpath, prefix, suffix);
-    g_free (suffix);
+    fd = mc_mkstemps (pname_vpath, prefix, suffix->str);
+    g_string_free (suffix, TRUE);
+
     return fd;
 }
 
