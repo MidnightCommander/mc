@@ -26,7 +26,7 @@
 set -e
 set -x
 
-GLOBAL_VERSION="6.5.2"
+GLOBAL_VERSION="6.5.7"
 GLOBAL_URL="http://ftp.gnu.org/pub/gnu/global/global-${GLOBAL_VERSION}.tar.gz"
 HTAGSFIX_URL="https://github.com/mooffie/htagsfix/raw/master/htagsfix"
 
