@@ -1325,7 +1325,7 @@ panel_compute_totals (const WPanel * panel, dirsize_status_msg_t * sm, size_t * 
 
 /** Initialize variables for progress bars */
 static FileProgressStatus
-panel_operate_init_totals (const WPanel * panel, const char *source, file_op_context_t * ctx,
+panel_operate_init_totals (const WPanel * panel, const vfs_path_t *source, file_op_context_t * ctx,
                            filegui_dialog_type_t dialog_type)
 {
     FileProgressStatus status;
@@ -1352,13 +1352,10 @@ panel_operate_init_totals (const WPanel * panel, const char *source, file_op_con
                                            ctx->follow_links);
         else
         {
-            vfs_path_t *p;
             size_t dir_count = 0;
 
-            p = vfs_path_from_str (source);
-            status = compute_dir_size (p, &dsm, &dir_count, &ctx->progress_count,
+            status = compute_dir_size (source, &dsm, &dir_count, &ctx->progress_count,
                                        &ctx->progress_bytes, ctx->follow_links);
-            vfs_path_free (p);
         }
 
         status_msg_deinit (STATUS_MSG (&dsm));
@@ -2864,8 +2861,7 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
         else
             source_with_vpath = vfs_path_append_new (panel->cwd_vpath, source, (char *) NULL);
 #endif /* WITH_FULL_PATHS */
-        if (panel_operate_init_totals (panel, vfs_path_as_str (source_with_vpath), ctx, dialog_type)
-            == FILE_CONT)
+        if (panel_operate_init_totals (panel, source_with_vpath, ctx, dialog_type) == FILE_CONT)
         {
             if (operation == OP_DELETE)
             {
