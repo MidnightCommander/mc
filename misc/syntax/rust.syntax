@@ -1,0 +1,153 @@
+context default
+
+# keywords
+    keyword whole as yellow
+    keyword whole break yellow
+    keyword whole const yellow
+    keyword whole continue yellow
+    keyword whole crate yellow
+    keyword whole else yellow
+    keyword whole enum yellow
+    keyword whole extern yellow
+    keyword whole fn yellow
+    keyword whole for yellow
+    keyword whole if yellow
+    keyword whole impl yellow
+    keyword whole in yellow
+    keyword whole let yellow
+    keyword whole loop yellow
+    keyword whole match yellow
+    keyword whole mod yellow
+    keyword whole move yellow
+    keyword whole mut yellow
+    keyword whole pub yellow
+    keyword whole ref yellow
+    keyword whole return yellow
+    keyword whole Self yellow
+    keyword whole self brightgreen
+    keyword whole static yellow
+    keyword whole struct yellow
+    keyword whole super yellow
+    keyword whole trait yellow
+    keyword whole type yellow
+    keyword whole unsafe yellow
+    keyword whole use yellow
+    keyword whole where yellow
+    keyword whole while yellow
+
+# keywords reserved for future use
+    keyword whole abstract red
+    keyword whole alignof red
+    keyword whole become red
+    keyword whole box red
+    keyword whole do red
+    keyword whole final red
+    keyword whole macro red
+    keyword whole offsetof red
+    keyword whole override red
+    keyword whole priv red
+    keyword whole proc red
+    keyword whole pure red
+    keyword whole sizeof red
+    keyword whole typeof red
+    keyword whole unsized red
+    keyword whole virtual red
+    keyword whole yield red
+
+# common types
+    keyword whole bool brightcyan
+    keyword whole char brightcyan
+    keyword whole isize brightcyan
+    keyword whole usize brightcyan
+
+    keyword whole i8 brightcyan
+    keyword whole i16 brightcyan
+    keyword whole i32 brightcyan
+    keyword whole i64 brightcyan
+    keyword whole u8 brightcyan
+    keyword whole u16 brightcyan
+    keyword whole u32 brightcyan
+    keyword whole u64 brightcyan
+    keyword whole isize brightcyan
+    keyword whole usize brightcyan
+    keyword whole f32 brightcyan
+    keyword whole f64 brightcyan
+
+    keyword whole str brightcyan
+    keyword whole String brightcyan
+    keyword whole Vec brightcyan
+    keyword whole Option brightcyan
+    keyword whole Result brightcyan
+
+# constants
+    keyword whole false brightgreen
+    keyword whole true brightgreen
+    keyword whole Some brightgreen
+    keyword whole None brightgreen
+    keyword whole Ok brightgreen
+    keyword whole Err brightgreen
+
+# macros
+    keyword whole +! brightmagenta
+    keyword whole $+ brightblue
+
+# numbers
+    wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.
+
+    keyword whole 0x\{0123456789abcdefABCDEF_\}\[0123456789abcdefABCDEF_\] brightgreen
+    keyword whole 0o\{01234567_\}\[01234567_\] brightgreen
+    keyword whole 0b\{01_\}\[01_\] brightgreen
+    keyword whole \{0123456789_\}\[0123456789_\] brightgreen
+    keyword whole \[0123456789_\]\.\{0123456789_\}\[0123456789_\] brightgreen
+    keyword whole \{0123456789_\}\[0123456789_\]\.\[0123456789_\] brightgreen
+    keyword whole \{0123456789_\}\[0123456789_\]\{eE\}\{0123456789_\}\[0123456789_\] brightgreen
+    keyword whole \{0123456789_\}\[0123456789_\]\{eE\}\{\-\+\}\{0123456789_\}\[0123456789_\] brightgreen
+    keyword whole \{0123456789_\}\[0123456789_\]\.\{0123456789_\}\[0123456789_\]\{eE\}\{0123456789_\}\[0123456789_\] brightgreen
+    keyword whole \{0123456789_\}\[0123456789_\]\.\{0123456789_\}\[0123456789_\]\{eE\}\{\-\+\}\{0123456789_\}\[0123456789_\] brightgreen
+
+# char
+    keyword '\\'' brightgreen
+    keyword '*' brightgreen
+
+# comments
+
+context /\* \*/ brown
+    spellcheck
+    keyword whole BUG brightred
+    keyword whole FixMe brightred
+    keyword whole FIXME brightred
+    keyword whole Note brightred
+    keyword whole NOTE brightred
+    keyword whole ToDo brightred
+    keyword whole TODO brightred
+    keyword !!\[!\] brightred
+    keyword ??\[?\] brightred
+
+
+context // \n brown
+    spellcheck
+    keyword whole BUG brightred
+    keyword whole FixMe brightred
+    keyword whole FIXME brightred
+    keyword whole Note brightred
+    keyword whole NOTE brightred
+    keyword whole ToDo brightred
+    keyword whole TODO brightred
+    keyword !!\[!\] brightred
+    keyword ??\[?\] brightred
+
+# strings
+context " " green
+    spellcheck
+    keyword \\" brightgreen
+    keyword \\' brightgreen
+    keyword \\\\ brightgreen
+    keyword \\\{abtnvfr0\} brightgreen
+
+
+context r#" "# green
+    spellcheck
+
+
+context #[ ] white
+context #![ ] white

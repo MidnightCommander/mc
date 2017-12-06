@@ -71,6 +71,7 @@ SYNTAXFILES =			\
 	python.syntax		\
 	r.syntax		\
 	ruby.syntax		\
+	rust.syntax		\
 	sh.syntax		\
 	slang.syntax		\
 	smalltalk.syntax	\
