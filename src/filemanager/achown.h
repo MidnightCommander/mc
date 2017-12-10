@@ -15,7 +15,7 @@
 
 /*** declarations of public functions ************************************************************/
 
-void chown_advanced_cmd (void);
+void advanced_chown_cmd (void);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__ACHOWN_H */
