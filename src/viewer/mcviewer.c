@@ -106,7 +106,7 @@ mcview_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
                 change_panel ();
             }
         }
-        /* fall through */
+        MC_FALLTHROUGH;
 
     case MSG_MOUSE_CLICK:
         if (!view->text_wrap_mode)

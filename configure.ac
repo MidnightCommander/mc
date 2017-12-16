@@ -45,6 +45,8 @@ if test "x$enable_werror" = xyes; then
     mc_CHECK_ONE_CFLAG([-Werror])
 fi
 
+AX_GCC_FUNC_ATTRIBUTE([fallthrough])
+
 AC_PROG_LIBTOOL
 
 

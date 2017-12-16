@@ -1115,7 +1115,7 @@ edit_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
             }
         }
 
-        /* fall through to start/stop text selection */
+        MC_FALLTHROUGH;         /* to start/stop text selection */
 
     case MSG_MOUSE_UP:
         edit_update_cursor (edit, event);

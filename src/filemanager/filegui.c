@@ -702,7 +702,7 @@ check_progress_buttons (file_op_context_t * ctx)
         ctx->suspended = !ctx->suspended;
         place_progress_buttons (ui->op_dlg, ctx->suspended);
         dlg_redraw (ui->op_dlg);
-        /* fallthrough */
+        MC_FALLTHROUGH;
     default:
         if (ctx->suspended)
             goto get_event;
@@ -1143,9 +1143,11 @@ file_progress_real_query_replace (file_op_context_t * ctx,
     case REPLACE_REGET:
         /* Careful: we fall through and set do_append */
         ctx->do_reget = _d_stat->st_size;
+        MC_FALLTHROUGH;
 
     case REPLACE_APPEND:
         ctx->do_append = TRUE;
+        MC_FALLTHROUGH;
 
     case REPLACE_YES:
     case REPLACE_ALWAYS:

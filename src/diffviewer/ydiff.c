@@ -3106,7 +3106,7 @@ dview_ok_to_exit (WDiff * dview)
             res = mc_util_unlink_backup_if_possible (dview->file[DIFF_LEFT], "~~~");
         if (mc_util_restore_from_backup_if_possible (dview->file[DIFF_RIGHT], "~~~"))
             res = mc_util_unlink_backup_if_possible (dview->file[DIFF_RIGHT], "~~~");
-        /* fall through */
+        MC_FALLTHROUGH;
     default:
         res = TRUE;
         break;

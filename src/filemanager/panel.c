@@ -3873,7 +3873,7 @@ panel_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 
         if (!is_active)
             change_panel ();
-        /* fall through */
+        MC_FALLTHROUGH;
 
     case MSG_MOUSE_DRAG:
         {

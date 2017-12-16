@@ -27,6 +27,12 @@
 /* for sig_atomic_t */
 #include <signal.h>
 
+#ifdef HAVE_FUNC_ATTRIBUTE_FALLTHROUGH
+#define MC_FALLTHROUGH __attribute__((fallthrough))
+#else
+#define MC_FALLTHROUGH
+#endif
+
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /* The O_BINARY definition was taken from gettext */

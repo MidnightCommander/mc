@@ -71,7 +71,7 @@ mc_search__normal_translate_to_regex (const GString * astr)
         case '-':
         case '|':
             g_string_append_c (buff, '\\');
-            /* fall through */
+            MC_FALLTHROUGH;
         default:
             g_string_append_c (buff, str[loop]);
             break;

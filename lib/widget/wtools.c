@@ -105,7 +105,7 @@ query_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
 
             return MSG_HANDLED;
         }
-        /* fallthrough */
+        MC_FALLTHROUGH;
 
     default:
         return dlg_default_callback (w, sender, msg, parm, data);

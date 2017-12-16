@@ -358,7 +358,7 @@ perm_button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
         {
         case '*':
             parm = '=';
-            /* fallthrough */
+            MC_FALLTHROUGH;
 
         case '-':
         case '=':
@@ -393,15 +393,15 @@ perm_button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
 
         case 'x':
             i++;
-            /* fallthrough */
+            MC_FALLTHROUGH;
 
         case 'w':
             i++;
-            /* fallthrough */
+            MC_FALLTHROUGH;
 
         case 'r':
             b->hotpos = i;
-            /* fallthrough */
+            MC_FALLTHROUGH;
 
         case ' ':
             i = b->hotpos;
@@ -416,11 +416,11 @@ perm_button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
 
         case '4':
             i++;
-            /* fallthrough */
+            MC_FALLTHROUGH;
 
         case '2':
             i++;
-            /* fallthrough */
+            MC_FALLTHROUGH;
 
         case '1':
             b->hotpos = i;
@@ -450,7 +450,7 @@ perm_button_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     case MSG_MOUSE_DOWN:
         /* place cursor on flag that is being modified */
         BUTTON (w)->hotpos = CLAMP (event->x - 1, 0, 2);
-        /* fallthrough */
+        MC_FALLTHROUGH;
 
     default:
         button_mouse_default_callback (w, msg, event);
@@ -672,11 +672,11 @@ advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
         {
         case ALT ('x'):
             i++;
-            /* fallthrough */
+            MC_FALLTHROUGH;
 
         case ALT ('w'):
             i++;
-            /* fallthrough */
+            MC_FALLTHROUGH;
 
         case ALT ('r'):
             parm = i + 3;
@@ -689,11 +689,11 @@ advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
 
         case XCTRL ('x'):
             i++;
-            /* fallthrough */
+            MC_FALLTHROUGH;
 
         case XCTRL ('w'):
             i++;
-            /* fallthrough */
+            MC_FALLTHROUGH;
 
         case XCTRL ('r'):
             parm = i;

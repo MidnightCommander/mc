@@ -883,7 +883,7 @@ expand_format (const WEdit * edit_widget, char c, gboolean do_quote)
             goto ret;
         }
 
-        /* Fall through */
+        MC_FALLTHROUGH;
 
     case 't':
     case 'u':

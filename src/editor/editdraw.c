@@ -731,7 +731,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
                         col++;
                         break;
                     }
-                    /* fallthrough */
+                    MC_FALLTHROUGH;
                 default:
 #ifdef HAVE_CHARSET
                     if (mc_global.utf8_display)

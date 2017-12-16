@@ -233,7 +233,7 @@ edit_save_file (WEdit * edit, const vfs_path_t * filename_vpath)
             {
             case 0:
                 this_save_mode = EDIT_SAFE_SAVE;
-                /* fallthrough */
+                MC_FALLTHROUGH;
             case 1:
                 edit->skip_detach_prompt = 1;
                 break;
@@ -1777,7 +1777,7 @@ edit_save_as_cmd (WEdit * edit)
                 return TRUE;
             default:
                 edit_error_dialog (_("Save as"), get_sys_error (_("Cannot save file")));
-                /* fallthrough */
+                MC_FALLTHROUGH;
             case -1:
                 /* Failed, so maintain modify (not save) lock */
                 if (save_lock)

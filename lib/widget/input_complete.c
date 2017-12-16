@@ -641,7 +641,7 @@ command_completion_function (const char *text, int state, input_complete_t flags
             }
         phase++;
         words = bash_builtins;
-        /* fallthrough */
+        MC_FALLTHROUGH;
     case 1:                    /* Builtin commands */
         for (; *words != NULL; words++)
             if (strncmp (*words, u_text, text_len) == 0)
@@ -654,7 +654,7 @@ command_completion_function (const char *text, int state, input_complete_t flags
             break;
         cur_path = path;
         cur_word = NULL;
-        /* fallthrough */
+        MC_FALLTHROUGH;
     case 2:                    /* And looking through the $PATH */
         while (found == NULL)
         {
@@ -675,7 +675,7 @@ command_completion_function (const char *text, int state, input_complete_t flags
             if (found == NULL)
                 MC_PTR_FREE (cur_word);
         }
-        /* fallthrough */
+        MC_FALLTHROUGH;
     default:
         break;
     }
@@ -1107,7 +1107,7 @@ query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                 {
                 case -1:
                     bl = 0;
-                    /* fallthrough */
+                    MC_FALLTHROUGH;
                 case -2:
                     return MSG_HANDLED;
                 default:

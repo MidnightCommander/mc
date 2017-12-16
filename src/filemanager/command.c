@@ -351,7 +351,7 @@ command_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         /* Special case: we handle the enter key */
         if (parm == '\n')
             return enter (INPUT (w));
-        /* fall through */
+        MC_FALLTHROUGH;
 
     default:
         return input_callback (w, sender, msg, parm, data);

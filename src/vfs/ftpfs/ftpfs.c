@@ -687,7 +687,7 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
             }
             if (code != COMPLETE)
                 break;
-            /* fall through */
+            MC_FALLTHROUGH;
 
         case COMPLETE:
             vfs_print_message ("%s", _("ftpfs: logged in"));
