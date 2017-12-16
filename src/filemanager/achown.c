@@ -136,7 +136,7 @@ advanced_chown_i18n (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-inc_flag_pos (int f_pos)
+inc_flag_pos (void)
 {
     if (flag_pos == 10)
     {
@@ -146,13 +146,13 @@ inc_flag_pos (int f_pos)
 
     flag_pos++;
 
-    return ((flag_pos % 3) == 0 || f_pos > 2) ? MSG_NOT_HANDLED : MSG_HANDLED;
+    return flag_pos % 3 == 0 ? MSG_NOT_HANDLED : MSG_HANDLED;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-dec_flag_pos (int f_pos)
+dec_flag_pos (void)
 {
     if (flag_pos == 0)
     {
@@ -162,7 +162,7 @@ dec_flag_pos (int f_pos)
 
     flag_pos--;
 
-    return (((flag_pos + 1) % 3) == 0 || f_pos > 2) ? MSG_NOT_HANDLED : MSG_HANDLED;
+    return (flag_pos + 1) % 3 == 0 ? MSG_NOT_HANDLED : MSG_HANDLED;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -246,19 +246,19 @@ print_flags (const WDialog * h)
 
     for (i = 0; i < 3; i++)
     {
-        widget_move (h, BY + 1, 9 + i);
+        widget_move (h, BY + 1, advanced_chown_but[0].x + 6 + i);
         tty_print_char (ch_flags[i]);
     }
 
     for (i = 0; i < 3; i++)
     {
-        widget_move (h, BY + 1, 17 + i);
+        widget_move (h, BY + 1, advanced_chown_but[1].x + 6 + i);
         tty_print_char (ch_flags[i + 3]);
     }
 
     for (i = 0; i < 3; i++)
     {
-        widget_move (h, BY + 1, 25 + i);
+        widget_move (h, BY + 1, advanced_chown_but[2].x + 6 + i);
         tty_print_char (ch_flags[i + 6]);
     }
 
@@ -266,12 +266,12 @@ print_flags (const WDialog * h)
 
     for (i = 0; i < 15; i++)
     {
-        widget_move (h, BY + 1, 35 + i);
+        widget_move (h, BY + 1, advanced_chown_but[3].x + 6 + i);
         tty_print_char (ch_flags[9]);
     }
     for (i = 0; i < 15; i++)
     {
-        widget_move (h, BY + 1, 53 + i);
+        widget_move (h, BY + 1, advanced_chown_but[4].x + 6 + i);
         tty_print_char (ch_flags[10]);
     }
 }
@@ -285,21 +285,20 @@ advanced_chown_refresh (WDialog * h)
 
     tty_setcolor (COLOR_NORMAL);
 
-    widget_move (h, BY - 1, 8);
+    widget_move (h, BY - 1, advanced_chown_but[0].x + 5);
     tty_print_string (_("owner"));
-    widget_move (h, BY - 1, 16);
+    widget_move (h, BY - 1, advanced_chown_but[1].x + 5);
     tty_print_string (_("group"));
-    widget_move (h, BY - 1, 24);
+    widget_move (h, BY - 1, advanced_chown_but[2].x + 5);
     tty_print_string (_("other"));
 
-    widget_move (h, BY - 1, 35);
+    widget_move (h, BY - 1, advanced_chown_but[3].x + 5);
     tty_print_string (_("owner"));
-    widget_move (h, BY - 1, 53);
+    widget_move (h, BY - 1, advanced_chown_but[4].x + 5);
     tty_print_string (_("group"));
 
     widget_move (h, BY + 1, 3);
     tty_print_string (_("Flag"));
-
     print_flags (h);
 }
 
@@ -330,13 +329,155 @@ update_mode (WDialog * h)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-b_setpos (int f_pos)
+static cb_ret_t
+perm_button_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
-    b_att[0]->hotpos = -1;
-    b_att[1]->hotpos = -1;
-    b_att[2]->hotpos = -1;
-    b_att[f_pos]->hotpos = flag_pos % 3;
+    WButton *b = BUTTON (w);
+    int i = 0;
+    int f_pos;
+
+    /* one of permission buttons */
+    if (b == b_att[0])
+        f_pos = 0;
+    else if (b == b_att[1])
+        f_pos = 1;
+    else                        /* if (w == b_att [1] */
+        f_pos = 2;
+
+    switch (msg)
+    {
+    case MSG_FOCUS:
+        if (b->hotpos == -1)
+            b->hotpos = 0;
+
+        flag_pos = f_pos * 3 + b->hotpos;
+        return MSG_HANDLED;
+
+    case MSG_KEY:
+        switch (parm)
+        {
+        case '*':
+            parm = '=';
+            /* fallthrough */
+
+        case '-':
+        case '=':
+        case '+':
+            flag_pos = f_pos * 3 + b->hotpos;
+            ch_flags[flag_pos] = parm;
+            update_mode (w->owner);
+            send_message (w, NULL, MSG_KEY, KEY_RIGHT, NULL);
+            if (b->hotpos == 2)
+                dlg_select_next_widget (w->owner);
+            break;
+
+        case XCTRL ('f'):
+        case KEY_RIGHT:
+            {
+                cb_ret_t ret;
+
+                ret = inc_flag_pos ();
+                b->hotpos = flag_pos % 3;
+                return ret;
+            }
+
+        case XCTRL ('b'):
+        case KEY_LEFT:
+            {
+                cb_ret_t ret;
+
+                ret = dec_flag_pos ();
+                b->hotpos = flag_pos % 3;
+                return ret;
+            }
+
+        case 'x':
+            i++;
+            /* fallthrough */
+
+        case 'w':
+            i++;
+            /* fallthrough */
+
+        case 'r':
+            b->hotpos = i;
+            /* fallthrough */
+
+        case ' ':
+            i = b->hotpos;
+
+            flag_pos = f_pos * 3 + i;
+            if (b->text.start[flag_pos % 3] == '-')
+                ch_flags[flag_pos] = '+';
+            else
+                ch_flags[flag_pos] = '-';
+            update_mode (w->owner);
+            break;
+
+        case '4':
+            i++;
+            /* fallthrough */
+
+        case '2':
+            i++;
+            /* fallthrough */
+
+        case '1':
+            b->hotpos = i;
+            flag_pos = f_pos * 3 + i;
+            ch_flags[flag_pos] = '=';
+            update_mode (w->owner);
+            break;
+
+        default:
+            break;
+        }
+        /* continue key handling in the dialog level */
+        return MSG_NOT_HANDLED;
+
+    default:
+        return button_default_callback (w, sender, msg, parm, data);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+perm_button_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
+{
+    switch (msg)
+    {
+    case MSG_MOUSE_DOWN:
+        /* place cursor on flag that is being modified */
+        BUTTON (w)->hotpos = CLAMP (event->x - 1, 0, 2);
+        /* fallthrough */
+
+    default:
+        button_mouse_default_callback (w, msg, event);
+        break;
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static WButton *
+perm_button_new (int y, int x, int action, button_flags_t flags, const char *text,
+                 bcback_fn callback)
+{
+    WButton *b;
+    Widget *w;
+
+    /* create base button using native API */
+    b = button_new (y, x, action, flags, text, callback);
+    w = WIDGET (b);
+
+    /* we don't want HOTKEY */
+    widget_want_hotkey (w, FALSE);
+
+    w->callback = perm_button_callback;
+    w->mouse_callback = perm_button_mouse_callback;
+
+    return b;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -368,16 +509,30 @@ chl_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *dat
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-do_enter_key (WDialog * h, int f_pos)
+static int
+user_group_button_cb (WButton * button, int action)
 {
+    Widget *w = WIDGET (button);
+    int f_pos;
     gboolean chl_end;
+
+    (void) action;
+
+    if (button == b_user)
+        f_pos = BUTTONS_PERM - 2;
+    else if (button == b_group)
+        f_pos = BUTTONS_PERM - 1;
+    else
+        return 0;               /* do nothing */
 
     do
     {
-        gboolean is_owner = (f_pos == 3);
+        WDialog *h = w->owner;
+        Widget *wh = WIDGET (h);
+
+        gboolean is_owner = (f_pos == BUTTONS_PERM - 2);
         const char *title;
-        int lxx, lyy, b_pos;
+        int lxx, b_pos;
         WDialog *chl_dlg;
         WListbox *chl_list;
         int result;
@@ -387,17 +542,25 @@ do_enter_key (WDialog * h, int f_pos)
 
         chl_end = FALSE;
 
-        title = is_owner ? _("owner") : _("group");
-
-        lxx = (COLS - 74) / 2 + (is_owner ? 35 : 53);
-        lyy = (LINES - 13) / 2;
+        if (is_owner)
+        {
+            title = _("owner");
+            lxx = WIDGET (b_user)->x + 1;
+        }
+        else
+        {
+            title = _("group");
+            lxx = WIDGET (b_group)->x + 1;
+        }
 
         chl_dlg =
-            dlg_create (TRUE, lyy, lxx, 13, 17, WPOS_KEEP_DEFAULT, TRUE, dialog_colors,
-                        chl_callback, NULL, "[Advanced Chown]", title);
+            dlg_create (TRUE, wh->y - 1, lxx, wh->lines + 2, 17, WPOS_KEEP_DEFAULT, TRUE,
+                        dialog_colors, chl_callback, NULL, "[Advanced Chown]", title);
 
         /* get new listboxes */
-        chl_list = listbox_new (1, 1, 11, 15, FALSE, NULL);
+        chl_list =
+            listbox_new (1, 1, WIDGET (chl_dlg)->lines - 2, WIDGET (chl_dlg)->cols - 2, FALSE,
+                         NULL);
         listbox_add_item (chl_list, LISTBOX_APPEND_AT_END, 0, "<Unknown>", NULL, FALSE);
         if (is_owner)
         {
@@ -485,6 +648,8 @@ do_enter_key (WDialog * h, int f_pos)
         dlg_destroy (chl_dlg);
     }
     while (chl_end);
+
+    return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -493,18 +658,7 @@ static cb_ret_t
 advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WDialog *h = DIALOG (w);
-    int i;
-    int f_pos;
-    unsigned long id;
-
-    id = dlg_get_current_widget_id (h);
-
-    for (i = 0; i < BUTTONS_PERM; i++)
-        if (advanced_chown_but[i].id == id)
-            break;
-
-    f_pos = i;
-    i = 0;
+    int i = 0;
 
     switch (msg)
     {
@@ -516,32 +670,6 @@ advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
     case MSG_KEY:
         switch (parm)
         {
-        case XCTRL ('b'):
-        case KEY_LEFT:
-            if (f_pos < BUTTONS_PERM)
-                return (dec_flag_pos (f_pos));
-            break;
-
-        case XCTRL ('f'):
-        case KEY_RIGHT:
-            if (f_pos < BUTTONS_PERM)
-                return (inc_flag_pos (f_pos));
-            break;
-
-        case ' ':
-            if (f_pos < 3)
-                return MSG_HANDLED;
-            break;
-
-        case '\n':
-        case KEY_ENTER:
-            if (f_pos > 2 && f_pos < BUTTONS_PERM)
-            {
-                do_enter_key (h, f_pos);
-                return MSG_HANDLED;
-            }
-            break;
-
         case ALT ('x'):
             i++;
             /* fallthrough */
@@ -557,7 +685,6 @@ advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
             x_toggle ^= (1 << parm);
             update_mode (h);
             dlg_broadcast_msg (h, MSG_DRAW);
-            widget_set_state (WIDGET (h->current->data), WST_FOCUSED, TRUE);
             break;
 
         case XCTRL ('x'):
@@ -575,87 +702,12 @@ advanced_chown_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
             x_toggle ^= (1 << parm);
             update_mode (h);
             dlg_broadcast_msg (h, MSG_DRAW);
-            widget_set_state (WIDGET (h->current->data), WST_FOCUSED, TRUE);
-            break;
-
-        case 'x':
-            i++;
-            /* fallthrough */
-
-        case 'w':
-            i++;
-            /* fallthrough */
-
-        case 'r':
-            if (f_pos > 2)
-                break;
-            flag_pos = f_pos * 3 + i;   /* (strchr(ch_perm,parm)-ch_perm); */
-            if (BUTTON (h->current->data)->text.start[(flag_pos % 3)] == '-')
-                ch_flags[flag_pos] = '+';
-            else
-                ch_flags[flag_pos] = '-';
-            update_mode (h);
-            break;
-
-        case '4':
-            i++;
-            /* fallthrough */
-
-        case '2':
-            i++;
-            /* fallthrough */
-
-        case '1':
-            if (f_pos <= 2)
-            {
-                flag_pos = i + f_pos * 3;
-                ch_flags[flag_pos] = '=';
-                update_mode (h);
-            }
-            break;
-
-        case '-':
-            if (f_pos > 2)
-                break;
-            /* fallthrough */
-
-        case '*':
-            if (parm == '*')
-                parm = '=';
-            /* fallthrough */
-
-        case '=':
-        case '+':
-            if (f_pos <= 4)
-            {
-                ch_flags[flag_pos] = parm;
-                update_mode (h);
-                send_message (h, sender, MSG_KEY, KEY_RIGHT, NULL);
-                if (flag_pos > 8 || (flag_pos % 3) == 0)
-                    dlg_select_next_widget (h);
-            }
             break;
 
         default:
             break;
         }
         return MSG_NOT_HANDLED;
-
-    case MSG_POST_KEY:
-        if (f_pos < 3)
-            b_setpos (f_pos);
-        return MSG_HANDLED;
-
-    case MSG_FOCUS:
-        if (f_pos < 3)
-        {
-            if ((flag_pos / 3) != f_pos)
-                flag_pos = f_pos * 3;
-            b_setpos (f_pos);
-        }
-        else if (f_pos < BUTTONS_PERM)
-            flag_pos = f_pos + 6;
-        return MSG_HANDLED;
 
     default:
         return dlg_default_callback (w, sender, msg, parm, data);
@@ -692,18 +744,18 @@ advanced_chown_init (void)
 
     add_widget (ch_dlg, hline_new (3, -1, -1));
 
-#define XTRACT(i,y) y, BX+advanced_chown_but[i].x, \
+#define XTRACT(i,y,cb) y, BX+advanced_chown_but[i].x, \
         advanced_chown_but[i].ret_cmd, advanced_chown_but[i].flags, \
-        (advanced_chown_but[i].text), NULL
-    b_att[0] = button_new (XTRACT (0, BY));
+        (advanced_chown_but[i].text), cb
+    b_att[0] = perm_button_new (XTRACT (0, BY, NULL));
     advanced_chown_but[0].id = add_widget (ch_dlg, b_att[0]);
-    b_att[1] = button_new (XTRACT (1, BY));
+    b_att[1] = perm_button_new (XTRACT (1, BY, NULL));
     advanced_chown_but[1].id = add_widget (ch_dlg, b_att[1]);
-    b_att[2] = button_new (XTRACT (2, BY));
+    b_att[2] = perm_button_new (XTRACT (2, BY, NULL));
     advanced_chown_but[2].id = add_widget (ch_dlg, b_att[2]);
-    b_user = button_new (XTRACT (3, BY));
+    b_user = button_new (XTRACT (3, BY, user_group_button_cb));
     advanced_chown_but[3].id = add_widget (ch_dlg, b_user);
-    b_group = button_new (XTRACT (4, BY));
+    b_group = button_new (XTRACT (4, BY, user_group_button_cb));
     advanced_chown_but[4].id = add_widget (ch_dlg, b_group);
 #undef XTRACT
 
