@@ -236,13 +236,11 @@ static void
 vfs_path_url_split (vfs_path_element_t * path_element, const char *path)
 {
     char *pcopy;
-    const char *pend;
     char *colon, *at, *rest;
 
     path_element->port = 0;
 
     pcopy = g_strdup (path);
-    pend = pcopy + strlen (pcopy);
 
     /* search for any possible user */
     at = strrchr (pcopy, '@');
@@ -252,9 +250,12 @@ vfs_path_url_split (vfs_path_element_t * path_element, const char *path)
         rest = pcopy;
     else
     {
+        const char *pend;
         char *inner_colon;
 
+        pend = strchr (at, '\0');
         *at = '\0';
+
         inner_colon = strchr (pcopy, ':');
         if (inner_colon != NULL)
         {
@@ -280,9 +281,9 @@ vfs_path_url_split (vfs_path_element_t * path_element, const char *path)
         colon = strchr (++rest, ']');
         if (colon != NULL)
         {
-            colon[0] = '\0';
-            colon[1] = '\0';
+            *colon = '\0';
             colon++;
+            *colon = '\0';
             path_element->ipv6 = TRUE;
         }
     }
