@@ -97,7 +97,7 @@ mcview__get_nroff_real_len (WView * view, off_t start, off_t length)
     int ret = 0;
     off_t i = 0;
 
-    if (!view->text_nroff_mode)
+    if (!view->mode_flags.nroff)
         return 0;
 
     nroff = mcview_nroff_seq_new_num (view, start);

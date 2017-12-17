@@ -50,14 +50,19 @@
 
 /*** global variables ****************************************************************************/
 
-int mcview_default_hex_mode = 0;
-int mcview_default_nroff_flag = 0;
-gboolean mcview_global_wrap_mode = TRUE;
-int mcview_default_magic_flag = 1;
+mcview_mode_flags_t mcview_global_flags = {
+    .wrap = TRUE,
+    .hex = FALSE,
+    .magic = TRUE,
+    .nroff = FALSE
+};
 
-int mcview_altered_hex_mode = 0;
-int mcview_altered_magic_flag = 0;
-int mcview_altered_nroff_flag = 0;
+mcview_mode_flags_t mcview_altered_flags = {
+    .wrap = FALSE,
+    .hex = FALSE,
+    .magic = FALSE,
+    .nroff = FALSE
+};
 
 gboolean mcview_remember_file_position = FALSE;
 
@@ -109,7 +114,7 @@ mcview_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
         MC_FALLTHROUGH;
 
     case MSG_MOUSE_CLICK:
-        if (!view->text_wrap_mode)
+        if (!view->mode_flags.wrap)
         {
             /* Scrolling left and right */
             screen_dimen x;
@@ -197,26 +202,23 @@ mcview_new (int y, int x, int lines, int cols, gboolean is_panel)
     widget_init (w, y, x, lines, cols, mcview_callback, mcview_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
 
-    view->hex_mode = FALSE;
+    mcview_clear_mode_flags (&view->mode_flags);
     view->hexedit_mode = FALSE;
-    view->locked = FALSE;
     view->hexview_in_text = FALSE;
-    view->text_nroff_mode = FALSE;
-    view->text_wrap_mode = FALSE;
-    view->magic_mode = FALSE;
+    view->locked = FALSE;
 
     view->dpy_frame_size = is_panel ? 1 : 0;
     view->converter = str_cnv_from_term;
 
     mcview_init (view);
 
-    if (mcview_default_hex_mode)
+    if (mcview_global_flags.hex)
         mcview_toggle_hex_mode (view);
-    if (mcview_default_nroff_flag)
+    if (mcview_global_flags.nroff)
         mcview_toggle_nroff_mode (view);
-    if (mcview_global_wrap_mode)
+    if (mcview_global_flags.wrap)
         mcview_toggle_wrap_mode (view);
-    if (mcview_default_magic_flag)
+    if (mcview_global_flags.magic)
         mcview_toggle_magic_mode (view);
 
     return view;
@@ -306,7 +308,7 @@ mcview_load (WView * view, const char *command, const char *file, int start_line
 
     mcview_set_codeset (view);
 
-    if (command != NULL && (view->magic_mode || file == NULL || file[0] == '\0'))
+    if (command != NULL && (view->mode_flags.magic || file == NULL || file[0] == '\0'))
         retval = mcview_load_command_output (view, command);
     else if (file != NULL && file[0] != '\0')
     {
@@ -364,7 +366,7 @@ mcview_load (WView * view, const char *command, const char *file, int start_line
         }
         else
         {
-            if (view->magic_mode)
+            if (view->mode_flags.magic)
             {
                 int type;
 
@@ -426,7 +428,7 @@ mcview_load (WView * view, const char *command, const char *file, int start_line
             new_offset = 0;
         else
             new_offset = MIN (new_offset, max_offset);
-        if (!view->hex_mode)
+        if (!view->mode_flags.hex)
         {
             view->dpy_start = mcview_bol (view, new_offset, 0);
             view->dpy_wrap_dirty = TRUE;

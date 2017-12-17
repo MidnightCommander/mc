@@ -640,22 +640,22 @@ check_format_view (const char *p)
             {
                 if (strncmp (q, DEFAULT_CHARSET, 5) == 0)
                 {
-                    mcview_default_hex_mode = 0;
+                    mcview_global_flags.hex = FALSE;
                     q += 4;
                 }
                 else if (strncmp (q, "hex", 3) == 0)
                 {
-                    mcview_default_hex_mode = 1;
+                    mcview_global_flags.hex = TRUE;
                     q += 2;
                 }
                 else if (strncmp (q, "nroff", 5) == 0)
                 {
-                    mcview_default_nroff_flag = 1;
+                    mcview_global_flags.nroff = TRUE;
                     q += 4;
                 }
                 else if (strncmp (q, "unform", 6) == 0)
                 {
-                    mcview_default_nroff_flag = 0;
+                    mcview_global_flags.nroff = FALSE;
                     q += 5;
                 }
             }

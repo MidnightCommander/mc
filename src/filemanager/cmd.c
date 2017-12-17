@@ -522,31 +522,30 @@ view_file_at_line (const vfs_path_t * filename_vpath, gboolean plain_view, gbool
 
     if (plain_view)
     {
-        int changed_hex_mode = 0;
-        int changed_nroff_flag = 0;
-        int changed_magic_flag = 0;
+        mcview_mode_flags_t changed_flags;
 
-        mcview_altered_hex_mode = 0;
-        mcview_altered_nroff_flag = 0;
-        mcview_altered_magic_flag = 0;
-        if (mcview_default_hex_mode)
-            changed_hex_mode = 1;
-        if (mcview_default_nroff_flag)
-            changed_nroff_flag = 1;
-        if (mcview_default_magic_flag)
-            changed_magic_flag = 1;
-        mcview_default_hex_mode = 0;
-        mcview_default_nroff_flag = 0;
-        mcview_default_magic_flag = 0;
+        mcview_clear_mode_flags (&changed_flags);
+        mcview_altered_flags.hex = FALSE;
+        mcview_altered_flags.magic = FALSE;
+        mcview_altered_flags.nroff = FALSE;
+        if (mcview_global_flags.hex)
+            changed_flags.hex = TRUE;
+        if (mcview_global_flags.magic)
+            changed_flags.magic = TRUE;
+        if (mcview_global_flags.nroff)
+            changed_flags.nroff = TRUE;
+        mcview_global_flags.hex = FALSE;
+        mcview_global_flags.magic = FALSE;
+        mcview_global_flags.nroff = FALSE;
 
         ret = mcview_viewer (NULL, filename_vpath, start_line, search_start, search_end);
 
-        if (changed_hex_mode && !mcview_altered_hex_mode)
-            mcview_default_hex_mode = 1;
-        if (changed_nroff_flag && !mcview_altered_nroff_flag)
-            mcview_default_nroff_flag = 1;
-        if (changed_magic_flag && !mcview_altered_magic_flag)
-            mcview_default_magic_flag = 1;
+        if (changed_flags.hex && !mcview_altered_flags.hex)
+            mcview_global_flags.hex = TRUE;
+        if (changed_flags.magic && !mcview_altered_flags.magic)
+            mcview_global_flags.magic = TRUE;
+        if (changed_flags.nroff && !mcview_altered_flags.nroff)
+            mcview_global_flags.nroff = TRUE;
 
         dialog_switch_process_pending ();
     }

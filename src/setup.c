@@ -302,7 +302,7 @@ static const struct
     { "mouse_close_dialog", &mouse_close_dialog},
     { "fast_refresh", &fast_refresh },
     { "drop_menus", &drop_menus },
-    { "wrap_mode",  &mcview_global_wrap_mode },
+    { "wrap_mode",  &mcview_global_flags.wrap },
     { "old_esc_mode", &old_esc_mode },
     { "cd_symlinks", &mc_global.vfs.cd_symlinks },
     { "show_all_if_ambiguous", &mc_global.widget.show_all_if_ambiguous },
