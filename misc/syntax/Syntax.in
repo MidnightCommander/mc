@@ -49,7 +49,7 @@ include python.syntax
 file ..\*\\.(pyx|pxd|pxi)$ Cython\sor\sPyrex\sProgram
 include cython.syntax
 
-file ..\*\\.(?:rb)$ Ruby\sProgram ^#!.\*([\s/]ruby|@RUBY@)
+file ..\*\\.(?i:rb)$ Ruby\sProgram ^#!.\*([\s/]ruby|@RUBY@)
 include ruby.syntax
 
 file ..\*\\.(man|[0-9n]|[0-9](x|ncurses|ssl|p|pm|menu|form|vga|t|td))$ NROFF\sSource
