@@ -228,13 +228,13 @@ mcrpmfs_list ()
 
     HEADERSIZE=`printf '%s\n' "$DESC" | wc -c`  # 'echo' can't be used for arbitrary data (see commit message).
     printf '%s %s %s HEADER\n' "${FILEPREF}"  "${HEADERSIZE}" "${DATE}"
-    echo "-r-xr-xr-x   1 root     root    39 $DATE INSTALL"
+    echo "-r-xr-xr-x   1 root     root    0 $DATE INSTALL"
     case "${rpm_filename}" in
 	*.src.rpm)
-	    echo "-r-xr-xr-x   1 root     root    39 $DATE REBUILD"
+	    echo "-r-xr-xr-x   1 root     root    0 $DATE REBUILD"
 	;;
 	*)
-	    echo "-r-xr-xr-x   1 root     root    39 $DATE UPGRADE"
+	    echo "-r-xr-xr-x   1 root     root    0 $DATE UPGRADE"
 	;;
     esac
 
