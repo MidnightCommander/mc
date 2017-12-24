@@ -127,7 +127,7 @@ include properties.syntax
 file ..\*\\.(?i:cs)$ C\#\sProgram
 include cs.syntax
 
-file ..\*\\.(?i:js)$ JavaScript\sProgram ^#!.\*[\s/](node|nodejs)\\b
+file ..\*\\.(?i:m?js)$ JavaScript\sProgram ^#!.\*[\s/](node|nodejs)\\b
 include js.syntax
 
 file ..\*\\.(?i:ts)$ TypeScript\sProgram
