@@ -228,13 +228,13 @@ mcrpmfs_list ()
 
     HEADERSIZE=`printf '%s\n' "$DESC" | wc -c`  # 'echo' can't be used for arbitrary data (see commit message).
     printf '%s %s %s HEADER\n' "${FILEPREF}"  "${HEADERSIZE}" "${DATE}"
-    echo "-r-xr-xr-x   1 root     root    39 $DATE INSTALL"
+    echo "-r-xr-xr-x   1 root     root    0 $DATE INSTALL"
     case "${rpm_filename}" in
 	*.src.rpm)
-	    echo "-r-xr-xr-x   1 root     root    39 $DATE REBUILD"
+	    echo "-r-xr-xr-x   1 root     root    0 $DATE REBUILD"
 	;;
 	*)
-	    echo "-r-xr-xr-x   1 root     root    39 $DATE UPGRADE"
+	    echo "-r-xr-xr-x   1 root     root    0 $DATE UPGRADE"
 	;;
     esac
 
@@ -266,18 +266,15 @@ mcrpmfs_copyout ()
     case "$1" in
 	HEADER) mcrpmfs_getDesription > "$2"; exit 0;;
 	INSTALL)
-	    echo "# Run this script to install this RPM package" > "$2"
-	    echo $RPM -ivh "${rpm_filename}" >> "$2"
+	    echo "# Run this to install this RPM package" > "$2"
 	    exit 0
 	;;
 	UPGRADE)
 	    echo "# Run this to upgrade this RPM package" > "$2"
-	    echo $RPM -Uvh "${rpm_filename}" >> "$2"
 	    exit 0
 	;;
 	REBUILD)
 	    echo "# Run this to rebuild this RPM package" > "$2"
-	    echo $RPMBUILD --rebuild "${rpm_filename}" >> "$2"
 	    exit 0
 	;;
 	ERROR) mcrpmfs_getDesription > /dev/null 2> "$2"; exit 0;;
