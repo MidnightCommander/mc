@@ -95,14 +95,8 @@ sftpfs_opendir (const vfs_path_t * vpath, GError ** mcerror)
             break;
 
         libssh_errno = libssh2_session_last_errno (super_data->session);
-        if (libssh_errno != LIBSSH2_ERROR_EAGAIN)
-        {
-            sftpfs_ssherror_to_gliberror (super_data, libssh_errno, mcerror);
+        if (!sftpfs_waitsocket (super_data, libssh_errno, mcerror))
             return NULL;
-        }
-        sftpfs_waitsocket (super_data, mcerror);
-
-        mc_return_val_if_error (mcerror, NULL);
     }
 
     sftpfs_dir = g_new0 (sftpfs_dir_data_t, 1);
@@ -138,14 +132,8 @@ sftpfs_readdir (void *data, GError ** mcerror)
         if (rc >= 0)
             break;
 
-        if (rc != LIBSSH2_ERROR_EAGAIN)
-        {
-            sftpfs_ssherror_to_gliberror (sftpfs_dir->super_data, rc, mcerror);
+        if (!sftpfs_waitsocket (sftpfs_dir->super_data, rc, mcerror))
             return NULL;
-        }
-
-        sftpfs_waitsocket (sftpfs_dir->super_data, mcerror);
-        mc_return_val_if_error (mcerror, NULL);
     }
     while (rc == LIBSSH2_ERROR_EAGAIN);
 
@@ -221,14 +209,8 @@ sftpfs_mkdir (const vfs_path_t * vpath, mode_t mode, GError ** mcerror)
         if (res >= 0)
             break;
 
-        if (res != LIBSSH2_ERROR_EAGAIN)
-        {
-            sftpfs_ssherror_to_gliberror (super_data, res, mcerror);
+        if (!sftpfs_waitsocket (super_data, res, mcerror))
             return -1;
-        }
-
-        sftpfs_waitsocket (super_data, mcerror);
-        mc_return_val_if_error (mcerror, -1);
     }
     while (res == LIBSSH2_ERROR_EAGAIN);
 
@@ -277,14 +259,8 @@ sftpfs_rmdir (const vfs_path_t * vpath, GError ** mcerror)
         if (res >= 0)
             break;
 
-        if (res != LIBSSH2_ERROR_EAGAIN)
-        {
-            sftpfs_ssherror_to_gliberror (super_data, res, mcerror);
+        if (!sftpfs_waitsocket (super_data, res, mcerror))
             return -1;
-        }
-
-        sftpfs_waitsocket (super_data, mcerror);
-        mc_return_val_if_error (mcerror, -1);
     }
     while (res == LIBSSH2_ERROR_EAGAIN);
 
