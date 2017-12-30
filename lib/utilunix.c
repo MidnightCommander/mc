@@ -1093,150 +1093,179 @@ gettimeofday (struct timeval *tp, void *tzp)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifndef HAVE_REALPATH
 char *
 mc_realpath (const char *path, char *resolved_path)
 {
-    char copy_path[PATH_MAX];
-    char got_path[PATH_MAX];
-    char *new_path = got_path;
-    char *max_path;
+#ifdef HAVE_CHARSET
+    const char *p = path;
+    gboolean absolute_path = FALSE;
+
+    if (IS_PATH_SEP (*p))
+    {
+        absolute_path = TRUE;
+        p++;
+    }
+
+    /* ignore encoding: skip "#enc:" */
+    if (g_str_has_prefix (p, VFS_ENCODING_PREFIX))
+    {
+        p += strlen (VFS_ENCODING_PREFIX);
+        p = strchr (p, PATH_SEP);
+        if (p != NULL)
+        {
+            if (!absolute_path && p[1] != '\0')
+                p++;
+
+            path = p;
+        }
+    }
+#endif /* HAVE_CHARSET */
+
+#ifdef HAVE_REALPATH
+    return realpath (path, resolved_path);
+#else
+    {
+        char copy_path[PATH_MAX];
+        char got_path[PATH_MAX];
+        char *new_path = got_path;
+        char *max_path;
 #ifdef S_IFLNK
-    char link_path[PATH_MAX];
-    int readlinks = 0;
-    int n;
+        char link_path[PATH_MAX];
+        int readlinks = 0;
+        int n;
 #endif /* S_IFLNK */
 
-    /* Make a copy of the source path since we may need to modify it. */
-    if (strlen (path) >= PATH_MAX - 2)
-    {
-        errno = ENAMETOOLONG;
-        return NULL;
-    }
-    strcpy (copy_path, path);
-    path = copy_path;
-    max_path = copy_path + PATH_MAX - 2;
-    /* If it's a relative pathname use getwd for starters. */
-    if (!IS_PATH_SEP (*path))
-    {
-        new_path = g_get_current_dir ();
-        if (new_path == NULL)
+        /* Make a copy of the source path since we may need to modify it. */
+        if (strlen (path) >= PATH_MAX - 2)
         {
-            strcpy (got_path, "");
+            errno = ENAMETOOLONG;
+            return NULL;
+        }
+        strcpy (copy_path, path);
+        path = copy_path;
+        max_path = copy_path + PATH_MAX - 2;
+        /* If it's a relative pathname use getwd for starters. */
+        if (!IS_PATH_SEP (*path))
+        {
+            new_path = g_get_current_dir ();
+            if (new_path == NULL)
+            {
+                strcpy (got_path, "");
+            }
+            else
+            {
+                g_snprintf (got_path, sizeof (got_path), "%s", new_path);
+                g_free (new_path);
+                new_path = got_path;
+            }
+
+            new_path += strlen (got_path);
+            if (!IS_PATH_SEP (new_path[-1]))
+                *new_path++ = PATH_SEP;
         }
         else
         {
-            g_snprintf (got_path, sizeof (got_path), "%s", new_path);
-            g_free (new_path);
-            new_path = got_path;
-        }
-
-        new_path += strlen (got_path);
-        if (!IS_PATH_SEP (new_path[-1]))
             *new_path++ = PATH_SEP;
-    }
-    else
-    {
-        *new_path++ = PATH_SEP;
-        path++;
-    }
-    /* Expand each slash-separated pathname component. */
-    while (*path != '\0')
-    {
-        /* Ignore stray "/". */
-        if (IS_PATH_SEP (*path))
-        {
             path++;
-            continue;
         }
-        if (*path == '.')
+        /* Expand each slash-separated pathname component. */
+        while (*path != '\0')
         {
-            /* Ignore ".". */
-            if (path[1] == '\0' || IS_PATH_SEP (path[1]))
+            /* Ignore stray "/". */
+            if (IS_PATH_SEP (*path))
             {
                 path++;
                 continue;
             }
-            if (path[1] == '.')
+            if (*path == '.')
             {
-                if (path[2] == '\0' || IS_PATH_SEP (path[2]))
+                /* Ignore ".". */
+                if (path[1] == '\0' || IS_PATH_SEP (path[1]))
                 {
-                    path += 2;
-                    /* Ignore ".." at root. */
-                    if (new_path == got_path + 1)
-                        continue;
-                    /* Handle ".." by backing up. */
-                    while (!IS_PATH_SEP ((--new_path)[-1]))
-                        ;
+                    path++;
                     continue;
                 }
+                if (path[1] == '.')
+                {
+                    if (path[2] == '\0' || IS_PATH_SEP (path[2]))
+                    {
+                        path += 2;
+                        /* Ignore ".." at root. */
+                        if (new_path == got_path + 1)
+                            continue;
+                        /* Handle ".." by backing up. */
+                        while (!IS_PATH_SEP ((--new_path)[-1]))
+                            ;
+                        continue;
+                    }
+                }
             }
-        }
-        /* Safely copy the next pathname component. */
-        while (*path != '\0' && !IS_PATH_SEP (*path))
-        {
-            if (path > max_path)
+            /* Safely copy the next pathname component. */
+            while (*path != '\0' && !IS_PATH_SEP (*path))
             {
-                errno = ENAMETOOLONG;
-                return NULL;
+                if (path > max_path)
+                {
+                    errno = ENAMETOOLONG;
+                    return NULL;
+                }
+                *new_path++ = *path++;
             }
-            *new_path++ = *path++;
-        }
 #ifdef S_IFLNK
-        /* Protect against infinite loops. */
-        if (readlinks++ > MAXSYMLINKS)
-        {
-            errno = ELOOP;
-            return NULL;
-        }
-        /* See if latest pathname component is a symlink. */
-        *new_path = '\0';
-        n = readlink (got_path, link_path, PATH_MAX - 1);
-        if (n < 0)
-        {
-            /* EINVAL means the file exists but isn't a symlink. */
-            if (errno != EINVAL)
+            /* Protect against infinite loops. */
+            if (readlinks++ > MAXSYMLINKS)
             {
-                /* Make sure it's null terminated. */
-                *new_path = '\0';
-                strcpy (resolved_path, got_path);
+                errno = ELOOP;
                 return NULL;
             }
-        }
-        else
-        {
-            /* Note: readlink doesn't add the null byte. */
-            link_path[n] = '\0';
-            if (IS_PATH_SEP (*link_path))
-                /* Start over for an absolute symlink. */
-                new_path = got_path;
+            /* See if latest pathname component is a symlink. */
+            *new_path = '\0';
+            n = readlink (got_path, link_path, PATH_MAX - 1);
+            if (n < 0)
+            {
+                /* EINVAL means the file exists but isn't a symlink. */
+                if (errno != EINVAL)
+                {
+                    /* Make sure it's null terminated. */
+                    *new_path = '\0';
+                    strcpy (resolved_path, got_path);
+                    return NULL;
+                }
+            }
             else
-                /* Otherwise back up over this component. */
-                while (!IS_PATH_SEP (*(--new_path)))
-                    ;
-            /* Safe sex check. */
-            if (strlen (path) + n >= PATH_MAX - 2)
             {
-                errno = ENAMETOOLONG;
-                return NULL;
+                /* Note: readlink doesn't add the null byte. */
+                link_path[n] = '\0';
+                if (IS_PATH_SEP (*link_path))
+                    /* Start over for an absolute symlink. */
+                    new_path = got_path;
+                else
+                    /* Otherwise back up over this component. */
+                    while (!IS_PATH_SEP (*(--new_path)))
+                        ;
+                /* Safe sex check. */
+                if (strlen (path) + n >= PATH_MAX - 2)
+                {
+                    errno = ENAMETOOLONG;
+                    return NULL;
+                }
+                /* Insert symlink contents into path. */
+                strcat (link_path, path);
+                strcpy (copy_path, link_path);
+                path = copy_path;
             }
-            /* Insert symlink contents into path. */
-            strcat (link_path, path);
-            strcpy (copy_path, link_path);
-            path = copy_path;
-        }
 #endif /* S_IFLNK */
-        *new_path++ = PATH_SEP;
+            *new_path++ = PATH_SEP;
+        }
+        /* Delete trailing slash but don't whomp a lone slash. */
+        if (new_path != got_path + 1 && IS_PATH_SEP (new_path[-1]))
+            new_path--;
+        /* Make sure it's null terminated. */
+        *new_path = '\0';
+        strcpy (resolved_path, got_path);
+        return resolved_path;
     }
-    /* Delete trailing slash but don't whomp a lone slash. */
-    if (new_path != got_path + 1 && IS_PATH_SEP (new_path[-1]))
-        new_path--;
-    /* Make sure it's null terminated. */
-    *new_path = '\0';
-    strcpy (resolved_path, got_path);
-    return resolved_path;
-}
 #endif /* HAVE_REALPATH */
+}
 
 /* --------------------------------------------------------------------------------------------- */
 /**

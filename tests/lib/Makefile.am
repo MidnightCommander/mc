@@ -25,6 +25,10 @@ TESTS = \
 	utilunix__my_system_fork_child \
 	x_basename
 
+if CHARSET
+TESTS += mc_realpath
+endif
+
 check_PROGRAMS = $(TESTS)
 
 library_independ_SOURCES = \
@@ -32,6 +36,9 @@ library_independ_SOURCES = \
 
 mc_build_filename_SOURCES = \
 	mc_build_filename.c
+
+mc_realpath_SOURCES = \
+	mc_realpath.c
 
 name_quote_SOURCES = \
 	name_quote.c
