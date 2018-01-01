@@ -1,7 +1,7 @@
 /*
    Editor text drawing.
 
-   Copyright (C) 1996-2017
+   Copyright (C) 1996-2018
    Free Software Foundation, Inc.
 
    Written by:

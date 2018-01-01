@@ -2,7 +2,7 @@
    Virtual File System: FISH implementation for transfering files over
    shell connections.
 
-   Copyright (C) 1998-2017
+   Copyright (C) 1998-2018
    Free Software Foundation, Inc.
 
    Written by:

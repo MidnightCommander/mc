@@ -1,7 +1,7 @@
 /*
    lib - realpath
 
-   Copyright (C) 2011-2017
+   Copyright (C) 2017-2018
    Free Software Foundation, Inc.
 
    Written by:

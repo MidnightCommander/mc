@@ -1,7 +1,7 @@
 /*
    Text conversion from one charset to another.
 
-   Copyright (C) 2001-2017
+   Copyright (C) 2001-2018
    Free Software Foundation, Inc.
 
    Written by:

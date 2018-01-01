@@ -2,7 +2,7 @@
    Search text engine.
    Regex search
 
-   Copyright (C) 2009-2017
+   Copyright (C) 2009-2018
    Free Software Foundation, Inc.
 
    Written by:
