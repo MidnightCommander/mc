@@ -454,6 +454,7 @@ my_systemv (const char *command, char *const argv[])
             execvp (command, argv);
             my_exit (127);      /* Exec error */
         }
+        MC_FALLTHROUGH;
         /* no break here, or unreachable-code warning by no returning my_exit() */
     default:
         status = 0;
