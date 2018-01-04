@@ -890,11 +890,8 @@ my_type_of (int c)
     if (c == 0)
         return 0;
     if (c == '!')
-    {
-        if (*option_chars_move_whole_word == '!')
-            return 2;
-        return 0x80000000UL;
-    }
+        return 2;
+
     if (g_ascii_isupper ((gchar) c))
         c = 'A';
     else if (g_ascii_islower ((gchar) c))
