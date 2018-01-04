@@ -1,7 +1,7 @@
-# serial 31
+# serial 32
 # Obtaining file system usage information.
 
-# Copyright (C) 1997-1998, 2000-2001, 2003-2016 Free Software Foundation, Inc.
+# Copyright (C) 1997-1998, 2000-2001, 2003-2017 Free Software Foundation, Inc.
 #
 # This file is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
@@ -295,17 +295,6 @@ if test $ac_fsusage_space = no; then
   fi
 fi
 
-if test $ac_fsusage_space = no; then
-  # SVR2
-  # (AIX, HP-UX, OSF/1 already handled above.)
-  AC_PREPROC_IFELSE([AC_LANG_SOURCE([[#include <sys/filsys.h>
-        ]])],
-    [AC_DEFINE([STAT_READ_FILSYS], [1],
-      [Define if there is no specific function for reading file systems usage
-       information and you have the <sys/filsys.h> header file.  (SVR2)])
-     ac_fsusage_space=yes])
-fi
-
 AS_IF([test $ac_fsusage_space = yes], [$1], [$2])
 
 ])
@@ -342,6 +331,6 @@ choke -- this is a workaround for a Sun-specific problem
 # Prerequisites of lib/fsusage.c not done by gl_FILE_SYSTEM_USAGE.
 AC_DEFUN([gl_PREREQ_FSUSAGE_EXTRA],
 [
-  AC_CHECK_HEADERS([dustat.h sys/fs/s5param.h sys/filsys.h sys/statfs.h])
+  AC_CHECK_HEADERS([dustat.h sys/fs/s5param.h sys/statfs.h])
   gl_STATFS_TRUNCATES
 ])
