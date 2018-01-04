@@ -1435,6 +1435,7 @@ edit_handle_move_resize (WEdit * edit, long command)
         case CK_WindowMove:
             edit->drag_state = MCEDIT_DRAG_NONE;
             edit_status (edit, TRUE);   /* redraw frame and status */
+            MC_FALLTHROUGH;
         default:
             ret = TRUE;
             break;
@@ -1459,6 +1460,7 @@ edit_handle_move_resize (WEdit * edit, long command)
         case CK_WindowResize:
             edit->drag_state = MCEDIT_DRAG_NONE;
             edit_status (edit, TRUE);   /* redraw frame and status */
+            MC_FALLTHROUGH;
         default:
             ret = TRUE;
             break;

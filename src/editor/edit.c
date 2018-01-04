@@ -3456,6 +3456,7 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
     case CK_MarkColumnDown:
         if (edit->mark2 == -1)
             break;              /*marking is following the cursor: may need to highlight a whole line */
+        MC_FALLTHROUGH;
     case CK_Left:
     case CK_Right:
     case CK_MarkLeft:
@@ -3551,18 +3552,21 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
 
     case CK_MarkColumnPageUp:
         edit->column_highlight = 1;
+        MC_FALLTHROUGH;
     case CK_PageUp:
     case CK_MarkPageUp:
         edit_move_up (edit, w->lines - 1, TRUE);
         break;
     case CK_MarkColumnPageDown:
         edit->column_highlight = 1;
+        MC_FALLTHROUGH;
     case CK_PageDown:
     case CK_MarkPageDown:
         edit_move_down (edit, w->lines - 1, TRUE);
         break;
     case CK_MarkColumnLeft:
         edit->column_highlight = 1;
+        MC_FALLTHROUGH;
     case CK_Left:
     case CK_MarkLeft:
         if (option_fake_half_tabs && is_in_indent (&edit->buffer) && right_of_four_spaces (edit))
@@ -3578,6 +3582,7 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
         break;
     case CK_MarkColumnRight:
         edit->column_highlight = 1;
+        MC_FALLTHROUGH;
     case CK_Right:
     case CK_MarkRight:
         if (option_fake_half_tabs && is_in_indent (&edit->buffer) && left_of_four_spaces (edit))
@@ -3608,36 +3613,42 @@ edit_execute_cmd (WEdit * edit, long command, int char_for_insertion)
         break;
     case CK_MarkColumnUp:
         edit->column_highlight = 1;
+        MC_FALLTHROUGH;
     case CK_Up:
     case CK_MarkUp:
         edit_move_up (edit, 1, FALSE);
         break;
     case CK_MarkColumnDown:
         edit->column_highlight = 1;
+        MC_FALLTHROUGH;
     case CK_Down:
     case CK_MarkDown:
         edit_move_down (edit, 1, FALSE);
         break;
     case CK_MarkColumnParagraphUp:
         edit->column_highlight = 1;
+        MC_FALLTHROUGH;
     case CK_ParagraphUp:
     case CK_MarkParagraphUp:
         edit_move_up_paragraph (edit, FALSE);
         break;
     case CK_MarkColumnParagraphDown:
         edit->column_highlight = 1;
+        MC_FALLTHROUGH;
     case CK_ParagraphDown:
     case CK_MarkParagraphDown:
         edit_move_down_paragraph (edit, FALSE);
         break;
     case CK_MarkColumnScrollUp:
         edit->column_highlight = 1;
+        MC_FALLTHROUGH;
     case CK_ScrollUp:
     case CK_MarkScrollUp:
         edit_move_up (edit, 1, TRUE);
         break;
     case CK_MarkColumnScrollDown:
         edit->column_highlight = 1;
+        MC_FALLTHROUGH;
     case CK_ScrollDown:
     case CK_MarkScrollDown:
         edit_move_down (edit, 1, TRUE);
