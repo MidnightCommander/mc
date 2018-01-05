@@ -448,6 +448,7 @@ execute_menu_command (const WEdit * edit_widget, const char *commands, gboolean 
         vfs_path_free (file_name_vpath);
         return;
     }
+
     cmd_file = fdopen (cmd_file_fd, "w");
     fputs ("#! /bin/sh\n", cmd_file);
     commands++;
@@ -520,30 +521,29 @@ execute_menu_command (const WEdit * edit_widget, const char *commands, gboolean 
                 g_free (text);
             }
         }
-        else
+        else if (*commands == '%')
         {
-            if (*commands == '%')
-            {
-                int i;
+            int i;
 
-                i = check_format_view (commands + 1);
-                if (i != 0)
-                {
-                    commands += i;
-                    run_view = TRUE;
-                }
-                else
-                {
-                    do_quote = TRUE;    /* Default: Quote expanded macro */
-                    expand_prefix_found = TRUE;
-                }
+            i = check_format_view (commands + 1);
+            if (i != 0)
+            {
+                commands += i;
+                run_view = TRUE;
             }
             else
-                fputc (*commands, cmd_file);
+            {
+                do_quote = TRUE;        /* Default: Quote expanded macro */
+                expand_prefix_found = TRUE;
+            }
         }
+        else
+            fputc (*commands, cmd_file);
     }
+
     fclose (cmd_file);
     mc_chmod (file_name_vpath, S_IRWXU);
+
     if (run_view)
     {
         mcview_viewer (NULL, file_name_vpath, 0, 0, 0);
@@ -556,15 +556,12 @@ execute_menu_command (const WEdit * edit_widget, const char *commands, gboolean 
         char *cmd;
 
         cmd = g_strconcat ("/bin/sh ", vfs_path_as_str (file_name_vpath), (char *) NULL);
-        if (!show_prompt)
-        {
-            if (system (cmd) == -1)
-                message (D_ERROR, MSG_ERROR, "%s", _("Error calling program"));
-        }
-        else
-        {
+
+        if (show_prompt)
             shell_execute (cmd, EXECUTE_HIDE);
-        }
+        else if (system (cmd) == -1)
+            message (D_ERROR, MSG_ERROR, "%s", _("Error calling program"));
+
         g_free (cmd);
     }
     mc_unlink (file_name_vpath);
@@ -683,14 +680,14 @@ check_format_cd (const char *p)
 int
 check_format_var (const char *p, char **v)
 {
-    const char *q = p;
-    char *var_name;
-
     *v = NULL;
+
     if (strncmp (p, "var{", 4) == 0)
     {
+        const char *q = p;
         const char *dots = NULL;
         const char *value;
+        char *var_name;
 
         for (q += 4; *q != '\0' && *q != '}'; q++)
         {
@@ -711,16 +708,14 @@ check_format_var (const char *p, char **v)
 
         /* Copy the variable name */
         var_name = g_strndup (p + 4, dots - 2 - (p + 3));
-
         value = getenv (var_name);
         g_free (var_name);
+
         if (value != NULL)
-        {
             *v = g_strdup (value);
-            return q - p;
-        }
-        var_name = g_strndup (dots, q - dots);
-        *v = var_name;
+        else
+            *v = g_strndup (dots, q - dots);
+
         return q - p;
     }
     return 0;
@@ -969,7 +964,6 @@ user_menu_cmd (const WEdit * edit_widget, const char *menu_file, int selected_en
         else
             menu = mc_config_get_full_path (MC_USERMENU_FILE);
 
-
         if (!exist_file (menu))
         {
             g_free (menu);
@@ -1019,7 +1013,6 @@ user_menu_cmd (const WEdit * edit_widget, const char *menu_file, int selected_en
 
             menu_limit += MAX_ENTRIES;
             new_entries = g_try_realloc (entries, sizeof (new_entries[0]) * menu_limit);
-
             if (new_entries == NULL)
                 break;
 
@@ -1028,18 +1021,19 @@ user_menu_cmd (const WEdit * edit_widget, const char *menu_file, int selected_en
             while (--new_entries >= &entries[menu_lines])
                 *new_entries = NULL;
         }
+
         if (col == 0 && entries[menu_lines] == NULL)
-        {
-            if (*p == '#')
+            switch (*p)
             {
+            case '#':
                 /* show prompt if first line of external script is #interactive */
                 if (selected_entry >= 0 && strncmp (p, "#silent", 7) == 0)
                     interactive = FALSE;
                 /* A commented menu entry */
                 accept_entry = TRUE;
-            }
-            else if (*p == '+')
-            {
+                break;
+
+            case '+':
                 if (*(p + 1) == '=')
                 {
                     /* Combined adding and default */
@@ -1052,9 +1046,9 @@ user_menu_cmd (const WEdit * edit_widget, const char *menu_file, int selected_en
                     /* A condition for adding the entry */
                     p = test_line (edit_widget, p, &accept_entry);
                 }
-            }
-            else if (*p == '=')
-            {
+                break;
+
+            case '=':
                 if (*(p + 1) == '+')
                 {
                     /* Combined adding and default */
@@ -1070,16 +1064,20 @@ user_menu_cmd (const WEdit * edit_widget, const char *menu_file, int selected_en
                     if (selected == 0 && i != 0)
                         selected = menu_lines;
                 }
+                break;
+
+            default:
+                if (!whitespace (*p) && str_isprint (p))
+                {
+                    /* A menu entry title line */
+                    if (accept_entry)
+                        entries[menu_lines] = p;
+                    else
+                        accept_entry = TRUE;
+                }
+                break;
             }
-            else if (!whitespace (*p) && str_isprint (p))
-            {
-                /* A menu entry title line */
-                if (accept_entry)
-                    entries[menu_lines] = p;
-                else
-                    accept_entry = TRUE;
-            }
-        }
+
         if (*p == '\n')
         {
             if (entries[menu_lines] != NULL)
