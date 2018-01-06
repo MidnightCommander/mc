@@ -628,7 +628,7 @@ vfs_path_to_str_flags (const vfs_path_t * vpath, int elements_count, vfs_path_fl
     GString *buffer;
     GString *recode_buffer;
 
-    if (vpath == NULL)
+    if (vpath == NULL || vfs_path_is_stdio (vpath))
         return NULL;
 
     if (elements_count == 0 || elements_count > vfs_path_elements_count (vpath))
@@ -792,7 +792,8 @@ vfs_path_new (void)
 int
 vfs_path_elements_count (const vfs_path_t * vpath)
 {
-    return (vpath != NULL && vpath->path != NULL) ? vpath->path->len : 0;
+    return (vpath != NULL && !vfs_path_is_stdio (vpath)
+            && vpath->path != NULL) ? vpath->path->len : 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -805,9 +806,12 @@ vfs_path_elements_count (const vfs_path_t * vpath)
 void
 vfs_path_add_element (vfs_path_t * vpath, const vfs_path_element_t * path_element)
 {
-    g_array_append_val (vpath->path, path_element);
-    g_free (vpath->str);
-    vpath->str = vfs_path_to_str_flags (vpath, 0, VPF_NONE);
+    if (vpath != NULL && !vfs_path_is_stdio (vpath) && path_element != NULL)
+    {
+        g_array_append_val (vpath->path, path_element);
+        g_free (vpath->str);
+        vpath->str = vfs_path_to_str_flags (vpath, 0, VPF_NONE);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -815,7 +819,8 @@ vfs_path_add_element (vfs_path_t * vpath, const vfs_path_element_t * path_elemen
  * Get one path element by index.
  *
  * @param vpath pointer to vfs_path_t object
- * @param element_index element index. May have negative value (in this case count was started at the end of list).
+ * @param element_index element index. May have negative value (in this case count was started
+ *   at the end of list).
  *
  * @return path element.
  */
@@ -823,7 +828,7 @@ vfs_path_add_element (vfs_path_t * vpath, const vfs_path_element_t * path_elemen
 const vfs_path_element_t *
 vfs_path_get_by_index (const vfs_path_t * vpath, int element_index)
 {
-    if (vpath == NULL)
+    if (vpath == NULL || vfs_path_is_stdio (vpath))
         return NULL;
 
     if (element_index < 0)
@@ -914,8 +919,8 @@ vfs_path_clone (const vfs_path_t * vpath)
     vfs_path_t *new_vpath;
     int vpath_element_index;
 
-    if (vpath == NULL)
-        return NULL;
+    if (vpath == NULL || vfs_path_is_stdio (vpath))
+        return VFS_PATH (vpath);
 
     new_vpath = vfs_path_new ();
     new_vpath->relative = vpath->relative;
@@ -946,7 +951,7 @@ vfs_path_free (vfs_path_t * vpath)
 {
     int vpath_element_index;
 
-    if (vpath == NULL)
+    if (vpath == NULL || vfs_path_is_stdio (vpath))
         return;
 
     for (vpath_element_index = 0; vpath_element_index < vfs_path_elements_count (vpath);
@@ -977,7 +982,7 @@ vfs_path_remove_element_by_index (vfs_path_t * vpath, int element_index)
 {
     vfs_path_element_t *element;
 
-    if ((vpath == NULL) || (vfs_path_elements_count (vpath) == 1))
+    if (vpath == NULL || vfs_path_is_stdio (vpath) || vfs_path_elements_count (vpath) == 1)
         return;
 
     if (element_index < 0)
@@ -1050,6 +1055,9 @@ vfs_path_change_encoding (vfs_path_t * vpath, const char *encoding)
 {
     vfs_path_element_t *path_element;
 
+    if (vpath == NULL || vfs_path_is_stdio (vpath))
+        return VFS_PATH (vpath);
+
     path_element = (vfs_path_element_t *) vfs_path_get_by_index (vpath, -1);
     /* don't add current encoding */
     if ((path_element->encoding != NULL) && (strcmp (encoding, path_element->encoding) == 0))
@@ -1089,6 +1097,9 @@ vfs_path_serialize (const vfs_path_t * vpath, GError ** mcerror)
     char *ret_value;
 
     mc_return_val_if_error (mcerror, FALSE);
+
+    if (vfs_path_is_stdio (vpath))
+        return NULL;
 
     if ((vpath == NULL) || (vfs_path_elements_count (vpath) == 0))
     {
@@ -1253,7 +1264,7 @@ vfs_path_append_new (const vfs_path_t * vpath, const char *first_element, ...)
     const char *result_str;
     vfs_path_t *ret_vpath;
 
-    if (vpath == NULL || first_element == NULL)
+    if (vpath == NULL || vfs_path_is_stdio (vpath) || first_element == NULL)
         return NULL;
 
     va_start (args, first_element);
@@ -1265,7 +1276,6 @@ vfs_path_append_new (const vfs_path_t * vpath, const char *first_element, ...)
     g_free (str_path);
 
     return ret_vpath;
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1286,7 +1296,7 @@ vfs_path_append_vpath_new (const vfs_path_t * first_vpath, ...)
     vfs_path_t *ret_vpath;
     const vfs_path_t *current_vpath = first_vpath;
 
-    if (first_vpath == NULL)
+    if (first_vpath == NULL || vfs_path_is_stdio (first_vpath))
         return NULL;
 
     ret_vpath = vfs_path_new ();
@@ -1329,7 +1339,7 @@ vfs_path_tokens_count (const vfs_path_t * vpath)
     size_t count_tokens = 0;
     int element_index;
 
-    if (vpath == NULL)
+    if (vpath == NULL || vfs_path_is_stdio (vpath))
         return 0;
 
     for (element_index = 0; element_index < vfs_path_elements_count (vpath); element_index++)
@@ -1372,10 +1382,12 @@ vfs_path_tokens_get (const vfs_path_t * vpath, ssize_t start_position, ssize_t l
 {
     GString *ret_tokens, *element_tokens;
     int element_index;
-    size_t tokens_count = vfs_path_tokens_count (vpath);
+    size_t tokens_count;
 
-    if (vpath == NULL)
+    if (vpath == NULL || vfs_path_is_stdio (vpath))
         return NULL;
+
+    tokens_count = vfs_path_tokens_count (vpath);
 
     if (length == 0)
         length = tokens_count;
@@ -1442,7 +1454,7 @@ vfs_path_tokens_get (const vfs_path_t * vpath, ssize_t start_position, ssize_t l
  * Get subpath by tokens
  *
  * @param vpath path object
- * @param start_position first token for got/ Started from 0.
+ * @param start_position first token for got. Started from 0.
  *        If negative, then position will be relative to end of path
  * @param length count of tokens
  *
@@ -1452,15 +1464,20 @@ vfs_path_tokens_get (const vfs_path_t * vpath, ssize_t start_position, ssize_t l
 vfs_path_t *
 vfs_path_vtokens_get (const vfs_path_t * vpath, ssize_t start_position, ssize_t length)
 {
-    char *str_tokens;
     vfs_path_t *ret_vpath = NULL;
 
-    str_tokens = vfs_path_tokens_get (vpath, start_position, length);
-    if (str_tokens != NULL)
+    if (vpath != NULL && !vfs_path_is_stdio (vpath))
     {
-        ret_vpath = vfs_path_from_str_flags (str_tokens, VPF_NO_CANON);
-        g_free (str_tokens);
+        char *str_tokens;
+
+        str_tokens = vfs_path_tokens_get (vpath, start_position, length);
+        if (str_tokens != NULL)
+        {
+            ret_vpath = vfs_path_from_str_flags (str_tokens, VPF_NO_CANON);
+            g_free (str_tokens);
+        }
     }
+
     return ret_vpath;
 }
 
@@ -1557,17 +1574,25 @@ gboolean
 vfs_path_equal (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
     const char *path1, *path2;
-    gboolean ret_val;
+    gboolean stdio1, stdio2;
 
-    if (vpath1 == NULL || vpath2 == NULL)
+    if (vpath1 == NULL)
         return FALSE;
+
+    stdio1 = vfs_path_is_stdio (vpath1);
+
+    if (vpath2 == NULL)
+        return FALSE;
+
+    stdio2 = vfs_path_is_stdio (vpath2);
+
+    if (stdio1 && stdio2)
+        return (vpath1 == vpath2);
 
     path1 = vfs_path_as_str (vpath1);
     path2 = vfs_path_as_str (vpath2);
 
-    ret_val = strcmp (path1, path2) == 0;
-
-    return ret_val;
+    return (path1 != NULL && path2 != NULL && strcmp (path1, path2) == 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1585,17 +1610,25 @@ gboolean
 vfs_path_equal_len (const vfs_path_t * vpath1, const vfs_path_t * vpath2, size_t len)
 {
     const char *path1, *path2;
-    gboolean ret_val;
+    gboolean stdio1, stdio2;
 
-    if (vpath1 == NULL || vpath2 == NULL)
+    if (vpath1 == NULL)
         return FALSE;
+
+    stdio1 = vfs_path_is_stdio (vpath1);
+
+    if (vpath2 == NULL)
+        return FALSE;
+
+    stdio2 = vfs_path_is_stdio (vpath2);
+
+    if (stdio1 && stdio2)
+        return (vpath1 == vpath2);
 
     path1 = vfs_path_as_str (vpath1);
     path2 = vfs_path_as_str (vpath2);
 
-    ret_val = strncmp (path1, path2, len) == 0;
-
-    return ret_val;
+    return (path1 != NULL && path2 != NULL && strncmp (path1, path2, len) == 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1610,10 +1643,7 @@ vfs_path_equal_len (const vfs_path_t * vpath1, const vfs_path_t * vpath2, size_t
 size_t
 vfs_path_len (const vfs_path_t * vpath)
 {
-    if (vpath == NULL)
-        return 0;
-
-    return strlen (vpath->str);
+    return (vpath == NULL || vfs_path_is_stdio (vpath) ? 0 : strlen (vpath->str));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1630,6 +1660,9 @@ vfs_path_to_absolute (const vfs_path_t * vpath)
 {
     vfs_path_t *absolute_vpath;
     const char *path_str;
+
+    if (vpath == NULL || vfs_path_is_stdio (vpath))
+        return VFS_PATH (vpath);
 
     if (!vpath->relative)
         return vfs_path_clone (vpath);

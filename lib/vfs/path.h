@@ -5,6 +5,12 @@
 
 #define VFS_PATH_URL_DELIMITER "://"
 
+#define VFS_PATH(x) ((vfs_path_t *)(x))
+
+#define VFS_PATH_STDIN  VFS_PATH (GINT_TO_POINTER (-1))
+#define VFS_PATH_STDOUT VFS_PATH (GINT_TO_POINTER (-2))
+#define VFS_PATH_STDERR VFS_PATH (GINT_TO_POINTER (-3))
+
 /*** enums ***************************************************************************************/
 
 typedef enum
@@ -97,7 +103,24 @@ gboolean vfs_path_equal (const vfs_path_t * vpath1, const vfs_path_t * vpath2);
 gboolean vfs_path_equal_len (const vfs_path_t * vpath1, const vfs_path_t * vpath2, size_t len);
 vfs_path_t *vfs_path_to_absolute (const vfs_path_t * vpath);
 
+/* --------------------------------------------------------------------------------------------- */
 /*** inline functions ****************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Is vfs_path a standard I/O stream (stdin, stdout, stderr)?.
+ *
+ * @param vpath pointer to vfs_path_t object
+ *
+ * @return TRUE if @vpath points to stdin, stdout, or stderr, FALSE otherwise.
+ */
+
+static inline gboolean
+vfs_path_is_stdio (const vfs_path_t * vpath)
+{
+    return (vpath == VFS_PATH_STDIN || vpath == VFS_PATH_STDOUT || vpath == VFS_PATH_STDERR);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 static inline gboolean
 vfs_path_element_valid (const vfs_path_element_t * element)
@@ -111,8 +134,10 @@ static inline const char *
 vfs_path_get_last_path_str (const vfs_path_t * vpath)
 {
     const vfs_path_element_t *element;
-    if (vpath == NULL)
+
+    if (vpath == NULL || vfs_path_is_stdio (vpath))
         return NULL;
+
     element = vfs_path_get_by_index (vpath, -1);
     return (element != NULL) ? element->path : NULL;
 }
@@ -123,8 +148,10 @@ static inline const struct vfs_class *
 vfs_path_get_last_path_vfs (const vfs_path_t * vpath)
 {
     const vfs_path_element_t *element;
-    if (vpath == NULL)
+
+    if (vpath == NULL || vfs_path_is_stdio (vpath))
         return NULL;
+
     element = vfs_path_get_by_index (vpath, -1);
     return (element != NULL) ? element->class : NULL;
 }
@@ -141,7 +168,7 @@ vfs_path_get_last_path_vfs (const vfs_path_t * vpath)
 static inline const char *
 vfs_path_as_str (const vfs_path_t * vpath)
 {
-    return (vpath == NULL ? NULL : vpath->str);
+    return (vpath == NULL || vfs_path_is_stdio (vpath) ? NULL : vpath->str);
 }
 
 /* --------------------------------------------------------------------------------------------- */

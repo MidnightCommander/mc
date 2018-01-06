@@ -1,10 +1,11 @@
 /* lib/vfs - vfs_path_t compare functions
 
-   Copyright (C) 2011-2017
+   Copyright (C) 2011-2018
    Free Software Foundation, Inc.
 
    Written by:
    Slava Zanko <slavazanko@gmail.com>, 2011, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2018
 
    This file is part of the Midnight Commander.
 
@@ -38,6 +39,11 @@
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void test_vfs_path_equal_ds_create (void);
+static void test_vfs_path_equal_ds_free (void);
+
+/* --------------------------------------------------------------------------------------------- */
+
 /* @Before */
 static void
 setup (void)
@@ -52,6 +58,8 @@ setup (void)
 #ifdef HAVE_CHARSET
     load_codepages_list ();
 #endif
+
+    test_vfs_path_equal_ds_create ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -60,6 +68,8 @@ setup (void)
 static void
 teardown (void)
 {
+    test_vfs_path_equal_ds_free ();
+
 #ifdef HAVE_CHARSET
     free_codepages_list ();
 #endif
@@ -234,6 +244,91 @@ END_PARAMETRIZED_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* @DataSource("test_vfs_path_equal_ds") */
+/* *INDENT-OFF* */
+static struct test_vfs_path_equal_ds
+{
+    vfs_path_t * vpath1;
+    vfs_path_t * vpath2;
+    gboolean expected_result;
+} test_vfs_path_equal_ds[] =
+{
+    /* 0. */ {  NULL, NULL, FALSE }, /* set up later */
+    /* 1. */ {  NULL, NULL, FALSE }, /* set up later */
+    /* 2. */ {  NULL, NULL, FALSE }, /* set up later */
+    /* 3. */ {  NULL, NULL, FALSE }, /* set up later */
+    /* 4. */ {  NULL, NULL, FALSE }, /* set up later */
+    /* 5. */ {  NULL, NULL, FALSE }, /* set up later */
+    /* 6. */ {  NULL, NULL, FALSE }, /* set up later */
+};
+/* *INDENT-ON* */
+
+static void
+test_vfs_path_equal_ds_create (void)
+{
+    test_vfs_path_equal_ds[0].vpath1 = vfs_path_from_str ("/home");
+    test_vfs_path_equal_ds[0].vpath2 = vfs_path_from_str ("/home");
+    test_vfs_path_equal_ds[0].expected_result = TRUE;
+
+    test_vfs_path_equal_ds[1].vpath1 = vfs_path_from_str ("/home");
+    test_vfs_path_equal_ds[1].vpath2 = vfs_path_from_str ("/usr/bin");
+    test_vfs_path_equal_ds[1].expected_result = FALSE;
+
+    test_vfs_path_equal_ds[2].vpath1 = vfs_path_from_str ("/home");
+    test_vfs_path_equal_ds[2].vpath2 = NULL;
+    test_vfs_path_equal_ds[2].expected_result = FALSE;
+
+    test_vfs_path_equal_ds[3].vpath1 = VFS_PATH_STDIN;
+    test_vfs_path_equal_ds[3].vpath2 = VFS_PATH_STDIN;
+    test_vfs_path_equal_ds[3].expected_result = TRUE;
+
+    test_vfs_path_equal_ds[4].vpath1 = VFS_PATH_STDIN;
+    test_vfs_path_equal_ds[4].vpath2 = VFS_PATH_STDOUT;
+    test_vfs_path_equal_ds[4].expected_result = FALSE;
+
+    test_vfs_path_equal_ds[5].vpath1 = VFS_PATH_STDIN;
+    test_vfs_path_equal_ds[5].vpath2 = vfs_path_from_str ("/usr/share");
+    test_vfs_path_equal_ds[5].expected_result = FALSE;
+
+    test_vfs_path_equal_ds[6].vpath1 = VFS_PATH_STDIN;
+    test_vfs_path_equal_ds[6].vpath2 = NULL;
+    test_vfs_path_equal_ds[6].expected_result = FALSE;
+}
+
+static void
+test_vfs_path_equal_ds_free (void)
+{
+    vfs_path_free (test_vfs_path_equal_ds[0].vpath1);
+    vfs_path_free (test_vfs_path_equal_ds[0].vpath2);
+
+    vfs_path_free (test_vfs_path_equal_ds[1].vpath1);
+    vfs_path_free (test_vfs_path_equal_ds[1].vpath2);
+
+    vfs_path_free (test_vfs_path_equal_ds[2].vpath1);
+
+    vfs_path_free (test_vfs_path_equal_ds[5].vpath2);
+}
+
+/* @Test(dataSource = "test_vfs_path_equal_ds") */
+/* *INDENT-OFF* */
+START_PARAMETRIZED_TEST (test_vfs_path_equal, test_vfs_path_equal_ds)
+/* *INDENT-ON* */
+{
+    /* given */
+    gboolean actual_result;
+
+    /* when */
+    actual_result = vfs_path_equal (data->vpath1, data->vpath2);
+
+    /* then */
+    mctest_assert_int_eq (actual_result, data->expected_result);
+}
+/* *INDENT-OFF* */
+END_PARAMETRIZED_TEST
+/* *INDENT-ON* */
+
+/* --------------------------------------------------------------------------------------------- */
+
 int
 main (void)
 {
@@ -248,6 +343,7 @@ main (void)
     /* Add new tests here: *************** */
     mctest_add_parameterized_test (tc_core, test_path_equal, test_path_equal_ds);
     mctest_add_parameterized_test (tc_core, test_path_equal_len, test_path_equal_len_ds);
+    mctest_add_parameterized_test (tc_core, test_vfs_path_equal, test_vfs_path_equal_ds);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);
