@@ -14,7 +14,7 @@
    Pavel Machek, 1998
    Roland Illig <roland.illig@gmx.de>, 2004, 2005
    Slava Zanko <slavazanko@google.com>, 2009, 2013
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009, 2013, 2018
    Ilia Maslakov <il.smind@gmail.com>, 2009
 
    This file is part of the Midnight Commander.
@@ -232,6 +232,7 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
     gboolean succeeded;
     WView *lc_mcview;
     WDialog *view_dlg;
+    const char *filename;
 
     /* Create dialog and widgets, put them on the dialog */
     view_dlg = dlg_create (FALSE, 0, 0, 1, 1, WPOS_FULLSCREEN, FALSE, NULL, mcview_dialog_callback,
@@ -245,9 +246,8 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
 
     view_dlg->get_title = mcview_get_title;
 
-    succeeded =
-        mcview_load (lc_mcview, command, vfs_path_as_str (file_vpath), start_line, search_start,
-                     search_end);
+    filename = (file_vpath == VFS_PATH_STDIN ? "-" : vfs_path_as_str (file_vpath));
+    succeeded = mcview_load (lc_mcview, command, filename, start_line, search_start, search_end);
 
     if (succeeded)
         dlg_run (view_dlg);
@@ -270,17 +270,20 @@ mcview_load (WView * view, const char *command, const char *file, int start_line
 {
     gboolean retval = FALSE;
     vfs_path_t *vpath = NULL;
+    gboolean from_stdin = (file != NULL && file[0] == '-' && file[1] == '\0');
 
     g_assert (view->bytes_per_line != 0);
 
-    view->filename_vpath = vfs_path_from_str (file);
+    view->filename_vpath = from_stdin ? VFS_PATH_STDIN : vfs_path_from_str (file);
 
     /* get working dir */
     if (file != NULL && file[0] != '\0')
     {
         vfs_path_free (view->workdir_vpath);
 
-        if (!g_path_is_absolute (file))
+        if (from_stdin)
+            view->workdir_vpath = vfs_path_clone (vfs_get_raw_current_dir ());
+        else if (!g_path_is_absolute (file))
         {
             vfs_path_t *p;
 
@@ -313,6 +316,13 @@ mcview_load (WView * view, const char *command, const char *file, int start_line
         int fd;
         char tmp[BUF_MEDIUM];
         struct stat st;
+
+        if (from_stdin)
+        {
+            mcview_set_datasource_vfs_pipe (view, fileno (stdin));
+            retval = TRUE;
+            goto finish;
+        }
 
         /* Open the file */
         vpath = vfs_path_from_str (file);

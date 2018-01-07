@@ -81,6 +81,8 @@
 #include "src/editor/edit.h"
 #endif
 
+#include "src/viewer/mcviewer.h"        /* mcview_viewer() */
+
 #ifdef USE_DIFF_VIEW
 #include "src/diffviewer/ydiff.h"
 #endif
@@ -993,11 +995,21 @@ mc_maybe_editor_or_viewer (void)
         {
             vfs_path_t *vpath = NULL;
 
-            if (mc_run_param0 != NULL && *(char *) mc_run_param0 != '\0')
-                vpath = prepend_cwd_on_local ((char *) mc_run_param0);
+            if (mc_run_param0 != NULL)
+            {
+                char *filename = (char *) mc_run_param0;
 
-            ret = view_file (vpath, FALSE, TRUE);
-            vfs_path_free (vpath);
+                if (filename[0] == '-' && filename[1] == '\0')
+                    ret = mcview_viewer (NULL, VFS_PATH_STDIN, 0, 0, 0);
+                else
+                {
+                    if (filename[0] != '\0')
+                        vpath = prepend_cwd_on_local (filename);
+
+                    ret = view_file (vpath, FALSE, TRUE);
+                    vfs_path_free (vpath);
+                }
+            }
             break;
         }
 #ifdef USE_DIFF_VIEW

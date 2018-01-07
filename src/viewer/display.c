@@ -108,8 +108,12 @@ mcview_set_buttonbar (WView * view)
     }
 
     buttonbar_set_label (b, 5, Q_ ("ButtonBar|Goto"), keymap, WIDGET (view));
-    buttonbar_set_label (b, 8, view->magic_mode ? Q_ ("ButtonBar|Raw")
-                         : Q_ ("ButtonBar|Parse"), keymap, WIDGET (view));
+
+    if (view->filename_vpath == VFS_PATH_STDIN)
+        buttonbar_set_label (b, 8, NULL, NULL, NULL);
+    else
+        buttonbar_set_label (b, 8, view->magic_mode ? Q_ ("ButtonBar|Raw")
+                             : Q_ ("ButtonBar|Parse"), keymap, WIDGET (view));
 
     if (!mcview_is_in_panel (view))     /* don't override some panel buttonbar keys  */
     {
@@ -158,7 +162,7 @@ mcview_display_status (WView * view)
     tty_draw_hline (WIDGET (view)->y + top, WIDGET (view)->x + left, ' ', width);
 
     file_label =
-        view->filename_vpath != NULL ?
+        view->filename_vpath == VFS_PATH_STDIN ? _("<STDIN>") : view->filename_vpath != NULL ?
         vfs_path_get_last_path_str (view->filename_vpath) : view->command != NULL ?
         view->command : "";
 

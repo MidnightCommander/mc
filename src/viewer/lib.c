@@ -74,6 +74,10 @@ mcview_toggle_magic_mode (WView * view)
     dir_list *dir;
     int *dir_idx;
 
+    /* stdin can't be "re-opened" and we can't do magic toggle without reopen, yet */
+    if (view->filename_vpath == VFS_PATH_STDIN)
+        return;
+
     mcview_altered_magic_flag = 1;
     view->magic_mode = !view->magic_mode;
 

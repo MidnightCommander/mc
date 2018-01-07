@@ -814,6 +814,10 @@ mc_setup_by_args (int argc, char **argv, GError ** mcerror)
         break;
 
     case MC_RUN_VIEWER:
+        /* If fd0 is non-interactive, a file is being piped */
+        if (isatty (fileno (stdin)) == 0)
+            tmp = "-";
+
         if (tmp == NULL)
         {
             mc_propagate_error (mcerror, 0, "%s\n", _("No arguments given to the viewer."));
