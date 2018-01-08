@@ -776,10 +776,10 @@ vfs_s_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
             if (ino == NULL)
                 return 0;
             if (arg != NULL)
-                ino->super->want_stale = 1;
+                ino->super->want_stale = TRUE;
             else
             {
-                ino->super->want_stale = 0;
+                ino->super->want_stale = FALSE;
                 vfs_s_invalidate (path_element->class, ino->super);
             }
             return 1;
