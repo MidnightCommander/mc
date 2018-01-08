@@ -568,7 +568,7 @@ vfs_s_write (void *fh, const char *buffer, size_t count)
 {
     struct vfs_class *me = FH_SUPER->me;
 
-    if (FH->linear)
+    if (FH->linear != LS_NOT_LINEAR)
         vfs_die ("no writing to linear files, please");
 
     FH->changed = TRUE;
@@ -1306,7 +1306,7 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
     fh->ino = ino;
     fh->handle = -1;
     fh->changed = was_changed;
-    fh->linear = 0;
+    fh->linear = LS_NOT_LINEAR;
     fh->data = NULL;
 
     if (IS_LINEAR (flags))

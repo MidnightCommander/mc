@@ -1150,7 +1150,7 @@ fish_ctl (void *fh, int ctlop, void *arg)
         {
             int v;
 
-            if (FH->linear == 0)
+            if (FH->linear == LS_NOT_LINEAR)
                 vfs_die ("You may not do this");
             if (FH->linear == LS_LINEAR_CLOSED || FH->linear == LS_LINEAR_PREOPEN)
                 return 0;
