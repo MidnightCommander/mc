@@ -571,7 +571,7 @@ vfs_s_write (void *fh, const char *buffer, size_t count)
     if (FH->linear)
         vfs_die ("no writing to linear files, please");
 
-    FH->changed = 1;
+    FH->changed = TRUE;
     if (FH->handle != -1)
     {
         ssize_t n;
@@ -1231,7 +1231,7 @@ vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino)
 void *
 vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
 {
-    int was_changed = 0;
+    gboolean was_changed = FALSE;
     vfs_file_handler_t *fh;
     struct vfs_s_super *super;
     const char *q;
@@ -1292,7 +1292,7 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
         }
         g_free (dirname);
         g_free (name);
-        was_changed = 1;
+        was_changed = TRUE;
     }
 
     if (S_ISDIR (ino->st.st_mode))

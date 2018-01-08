@@ -106,7 +106,7 @@ typedef struct
     struct vfs_s_inode *ino;
     off_t pos;                  /* This is for module's use */
     int handle;                 /* This is for module's use, but if != -1, will be mc_close()d */
-    int changed;                /* Did this file change? */
+    gboolean changed;           /* Did this file change? */
     int linear;                 /* Is that file open with O_LINEAR? */
     void *data;                 /* This is for filesystem-specific use */
 } vfs_file_handler_t;
