@@ -42,7 +42,7 @@
 
 #include "lib/unixcompat.h"
 #include "lib/tty/tty.h"
-#include "lib/skin.h"           /* tty_set_normal_attrs */
+#include "lib/tty/color.h"      /* tty_set_normal_attrs */
 #include "lib/tty/win.h"
 #include "lib/util.h"           /* mc_build_filename() */
 
