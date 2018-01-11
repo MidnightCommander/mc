@@ -41,7 +41,7 @@ Version 4.8.20
   * Panelization is not kept while switching panel listing mode (#3810)
   * Cannot tab out of a QuickView panel (#3815)
   * Cannot use the F10 key in a QuickView panel (#3816)
-  * Wromg INPUT_COMPLETE_CD flag handling in the QuickDialog engine (#3870)
+  * Wrong INPUT_COMPLETE_CD flag handling in the QuickDialog engine (#3870)
   * mcview: file interpreted as latin1 instead of utf8 (#3783)
   * mcview: incomplete read of filtering data (#3817)
   * mcview: search doesn't grow file as much as needed (#3819, #3855)
