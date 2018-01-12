@@ -59,8 +59,6 @@
 #ifdef WITH_SSL
 #include <ssl.h>
 #undef Realloc                  /* SSLeay defines this and samba has a function of this name */
-extern SSL *ssl;
-extern int sslFd;
 #endif /* WITH_SSL */
 
 extern int DEBUGLEVEL;
@@ -105,7 +103,7 @@ static const char *remote_proto = "UNKNOWN";
 pstring myhostname = "";
 pstring user_socket_options = "";
 
-pstring sesssetup_user = "";
+static const char sesssetup_userp[] = "";
 static const char *const samlogon_user = "";
 
 const BOOL sam_logon_in_ssb = False;
