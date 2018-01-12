@@ -92,7 +92,7 @@ mc_event_deinit (GError ** mcerror)
 /* --------------------------------------------------------------------------------------------- */
 
 gboolean
-mc_event_mass_add (event_init_t * events, GError ** mcerror)
+mc_event_mass_add (const event_init_t * events, GError ** mcerror)
 {
     size_t array_index;
 
