@@ -236,7 +236,7 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
     char *pcopy;
     size_t pcopy_len;
     const char *pend;
-    char *dir, *colon, *at, *rest;
+    char *colon, *at, *rest;
 
     path_element = g_new0 (vfs_path_element_t, 1);
     path_element->port = default_port;
@@ -244,10 +244,11 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
     pcopy_len = strlen (path);
     pcopy = g_strndup (path, pcopy_len);
     pend = pcopy + pcopy_len;
-    dir = pcopy;
 
     if ((flags & URL_NOSLASH) == 0)
     {
+        char *dir = pcopy;
+
         /* locate path component */
         while (!IS_PATH_SEP (*dir) && *dir != '\0')
             dir++;
@@ -289,8 +290,10 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
     }
 
     if ((flags & URL_USE_ANONYMOUS) == 0)
+    {
+        g_free (path_element->user);
         path_element->user = vfs_get_local_username ();
-
+    }
     /* Check if the host comes with a port spec, if so, chop it */
     if (*rest != '[')
         colon = strchr (rest, ':');
@@ -306,6 +309,7 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
         else
         {
             vfs_path_element_free (path_element);
+            g_free (pcopy);
             return NULL;
         }
     }
@@ -337,6 +341,7 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
     }
 
     path_element->host = g_strdup (rest);
+    g_free (pcopy);
 #ifdef HAVE_CHARSET
     path_element->dir.converter = INVALID_CONV;
 #endif
