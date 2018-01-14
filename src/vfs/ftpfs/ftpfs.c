@@ -477,30 +477,26 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
                ...)
 {
     va_list ap;
-    char *cmdstr;
-    int status, cmdlen;
+    GString *cmdstr;
+    int status;
     static int retry = 0;
     static int level = 0;       /* ftpfs_login_server() use ftpfs_command() */
 
+    cmdstr = g_string_sized_new (32);
     va_start (ap, fmt);
-    cmdstr = g_strdup_vprintf (fmt, ap);
+    g_string_vprintf (cmdstr, fmt, ap);
     va_end (ap);
+    g_string_append (cmdstr, "\r\n");
 
-    cmdlen = strlen (cmdstr);
-    cmdstr = g_realloc (cmdstr, cmdlen + 3);
-    strcpy (cmdstr + cmdlen, "\r\n");
-    cmdlen += 2;
-
-    if (MEDATA->logfile)
+    if (MEDATA->logfile != NULL)
     {
-        if (strncmp (cmdstr, "PASS ", 5) == 0)
-        {
+        if (strncmp (cmdstr->str, "PASS ", 5) == 0)
             fputs ("PASS <Password not logged>\r\n", MEDATA->logfile);
-        }
         else
         {
             size_t ret;
-            ret = fwrite (cmdstr, cmdlen, 1, MEDATA->logfile);
+
+            ret = fwrite (cmdstr->str, cmdstr->len, 1, MEDATA->logfile);
             (void) ret;
         }
 
@@ -509,7 +505,7 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
 
     got_sigpipe = 0;
     tty_enable_interrupt_key ();
-    status = write (SUP->sock, cmdstr, cmdlen);
+    status = write (SUP->sock, cmdstr->str, cmdstr->len);
 
     if (status < 0)
     {
@@ -522,15 +518,13 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
                 level = 1;
                 status = ftpfs_reconnect (me, super);
                 level = 0;
-                if (status && (write (SUP->sock, cmdstr, cmdlen) > 0))
-                {
+                if (status && (write (SUP->sock, cmdstr->str, cmdstr->len) > 0))
                     goto ok;
-                }
 
             }
             got_sigpipe = 1;
         }
-        g_free (cmdstr);
+        g_string_free (cmdstr, TRUE);
         tty_disable_interrupt_key ();
         return TRANSIENT;
     }
@@ -549,16 +543,15 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
             level = 1;
             status = ftpfs_reconnect (me, super);
             level = 0;
-            if (status && (write (SUP->sock, cmdstr, cmdlen) > 0))
-            {
+            if (status && (write (SUP->sock, cmdstr->str, cmdstr->len) > 0))
                 goto ok;
-            }
         }
         retry = 0;
-        g_free (cmdstr);
+        g_string_free (cmdstr, TRUE);
         return status;
     }
-    g_free (cmdstr);
+
+    g_string_free (cmdstr, TRUE);
     return COMPLETE;
 }
 
