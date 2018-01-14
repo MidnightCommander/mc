@@ -570,7 +570,7 @@ ftpfs_free_archive (struct vfs_class *me, struct vfs_s_super *super)
     if (SUP->sock != -1)
     {
         vfs_print_message (_("ftpfs: Disconnecting from %s"), super->path_element->host);
-        ftpfs_command (me, super, NONE, "QUIT");
+        ftpfs_command (me, super, NONE, "%s", "QUIT");
         close (SUP->sock);
     }
     g_free (SUP->current_dir);
@@ -1052,7 +1052,7 @@ ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super)
 {
     char buf[MC_MAXPATHLEN + 1];
 
-    if (ftpfs_command (me, super, NONE, "PWD") == COMPLETE &&
+    if (ftpfs_command (me, super, NONE, "%s", "PWD") == COMPLETE &&
         ftpfs_get_reply (me, SUP->sock, buf, sizeof (buf)) == COMPLETE)
     {
         char *bufp = NULL;
@@ -1104,7 +1104,7 @@ ftpfs_setup_passive_pasv (struct vfs_class *me, struct vfs_s_super *super,
     char n[6];
     int xa, xb, xc, xd, xe, xf;
 
-    if (ftpfs_command (me, super, WAIT_REPLY | WANT_STRING, "PASV") != COMPLETE)
+    if (ftpfs_command (me, super, WAIT_REPLY | WANT_STRING, "%s", "PASV") != COMPLETE)
         return 0;
 
     /* Parse remote parameters */
@@ -1144,7 +1144,7 @@ ftpfs_setup_passive_epsv (struct vfs_class *me, struct vfs_s_super *super,
     char *c;
     int port;
 
-    if (ftpfs_command (me, super, WAIT_REPLY | WANT_STRING, "EPSV") != COMPLETE)
+    if (ftpfs_command (me, super, WAIT_REPLY | WANT_STRING, "%s", "EPSV") != COMPLETE)
         return 0;
 
     /* (|||<port>|) */
