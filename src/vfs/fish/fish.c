@@ -262,30 +262,26 @@ fish_get_reply (struct vfs_class *me, int sock, char *string_buf, int string_len
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-G_GNUC_PRINTF (4, 5)
-fish_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const char *fmt, ...)
+fish_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const char *cmd,
+              size_t cmd_len)
 {
-    va_list ap;
-    char *str;
     ssize_t status;
     FILE *logfile = MEDATA->logfile;
 
-    va_start (ap, fmt);
-    str = g_strdup_vprintf (fmt, ap);
-    va_end (ap);
+    if (cmd_len == (size_t) (-1))
+        cmd_len = strlen (cmd);
 
     if (logfile != NULL)
     {
         size_t ret;
 
-        ret = fwrite (str, strlen (str), 1, logfile);
+        ret = fwrite (cmd, cmd_len, 1, logfile);
         ret = fflush (logfile);
         (void) ret;
     }
 
     tty_enable_interrupt_key ();
-    status = write (SUP->sockw, str, strlen (str));
-    g_free (str);
+    status = write (SUP->sockw, cmd, cmd_len);
     tty_disable_interrupt_key ();
 
     if (status < 0)
@@ -293,9 +289,68 @@ fish_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, c
 
     if (wait_reply)
         return fish_get_reply (me, SUP->sockr,
-                               (wait_reply & WANT_STRING) ? reply_str :
+                               (wait_reply & WANT_STRING) != 0 ? reply_str :
                                NULL, sizeof (reply_str) - 1);
     return COMPLETE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+G_GNUC_PRINTF (5, 0)
+fish_command_va (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const char *scr,
+                 const char *vars, va_list ap)
+{
+    int r;
+    GString *command;
+
+    command = g_string_new (SUP->scr_env);
+    g_string_append_vprintf (command, vars, ap);
+    g_string_append (command, scr);
+    r = fish_command (me, super, wait_reply, command->str, command->len);
+    g_string_free (command, TRUE);
+
+    return r;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+G_GNUC_PRINTF (5, 6)
+fish_command_v (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const char *scr,
+                const char *vars, ...)
+{
+    int r;
+    va_list ap;
+
+    va_start (ap, vars);
+    r = fish_command_va (me, super, wait_reply, scr, vars, ap);
+    va_end (ap);
+
+    return r;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+G_GNUC_PRINTF (5, 6)
+fish_send_command (struct vfs_class *me, struct vfs_s_super *super, int flags, const char *scr,
+                   const char *vars, ...)
+{
+    int r;
+    va_list ap;
+
+    va_start (ap, vars);
+    r = fish_command_va (me, super, WAIT_REPLY, scr, vars, ap);
+    va_end (ap);
+    vfs_stamp_create (&vfs_fish_ops, super);
+
+    if (r != COMPLETE)
+        ERRNOR (E_REMOTE, -1);
+    if ((flags & OPT_FLUSH) != 0)
+        vfs_s_invalidate (me, super);
+
+    return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -306,7 +361,7 @@ fish_free_archive (struct vfs_class *me, struct vfs_s_super *super)
     if ((SUP->sockw != -1) || (SUP->sockr != -1))
     {
         vfs_print_message (_("fish: Disconnecting from %s"), super->name ? super->name : "???");
-        fish_command (me, super, NONE, "%s", "#BYE\nexit\n");
+        fish_command (me, super, NONE, "#BYE\nexit\n", -1);
         close (SUP->sockw);
         close (SUP->sockr);
         SUP->sockw = SUP->sockr = -1;
@@ -409,7 +464,7 @@ fish_set_env (int flags)
 static gboolean
 fish_info (struct vfs_class *me, struct vfs_s_super *super)
 {
-    if (fish_command (me, super, NONE, "%s", SUP->scr_info) == COMPLETE)
+    if (fish_command (me, super, NONE, SUP->scr_info, -1) == COMPLETE)
     {
         while (TRUE)
         {
@@ -551,18 +606,19 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
      */
 
     if (fish_command
-        (me, super, WAIT_REPLY, "%s",
-         "#FISH\necho; start_fish_server 2>&1; echo '### 200'\n") != COMPLETE)
+        (me, super, WAIT_REPLY, "#FISH\necho; start_fish_server 2>&1; echo '### 200'\n",
+         -1) != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
     vfs_print_message ("%s", _("fish: Handshaking version..."));
-    if (fish_command (me, super, WAIT_REPLY, "%s", "#VER 0.0.3\necho '### 000'\n") != COMPLETE)
+    if (fish_command (me, super, WAIT_REPLY, "#VER 0.0.3\necho '### 000'\n", -1) != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
     /* Set up remote locale to C, otherwise dates cannot be recognized */
     if (fish_command
-        (me, super, WAIT_REPLY, "%s",
-         "LANG=C LC_ALL=C LC_TIME=C; export LANG LC_ALL LC_TIME;\n" "echo '### 200'\n") != COMPLETE)
+        (me, super, WAIT_REPLY,
+         "LANG=C LC_ALL=C LC_TIME=C; export LANG LC_ALL LC_TIME;\n" "echo '### 200'\n",
+         -1) != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
     vfs_print_message ("%s", _("fish: Getting host info..."));
@@ -678,7 +734,6 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     FILE *logfile;
     char *quoted_path;
     int reply_code;
-    gchar *shell_commands;
 
     /*
      * Simple FISH debug interface :]
@@ -693,11 +748,11 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 
     gettimeofday (&dir->timestamp, NULL);
     dir->timestamp.tv_sec += fish_directory_timeout;
+
     quoted_path = strutils_shell_escape (remote_path);
-    shell_commands = g_strconcat (SUP->scr_env, "FISH_FILENAME=%s;\n", SUP->scr_ls, (char *) NULL);
-    fish_command (me, super, NONE, shell_commands, quoted_path);
-    g_free (shell_commands);
+    (void) fish_command_v (me, super, NONE, SUP->scr_ls, "FISH_FILENAME=%s;\n", quoted_path);
     g_free (quoted_path);
+
     ent = vfs_s_generate_entry (me, NULL, dir, 0);
 
     while (TRUE)
@@ -890,7 +945,6 @@ static int
 fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char *localname)
 {
     fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
-    gchar *shell_commands = NULL;
     struct vfs_s_super *super = FH_SUPER;
     int code;
     off_t total = 0;
@@ -941,26 +995,9 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
     vfs_print_message (_("fish: store %s: sending command..."), quoted_name);
 
     /* FIXME: File size is limited to ULONG_MAX */
-    if (fish->append)
-    {
-        shell_commands =
-            g_strconcat (SUP->scr_env, "FISH_FILENAME=%s FISH_FILESIZE=%" PRIuMAX ";\n",
-                         SUP->scr_append, (char *) NULL);
-
-        code = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name,
-                             (uintmax_t) s.st_size);
-        g_free (shell_commands);
-    }
-    else
-    {
-        shell_commands =
-            g_strconcat (SUP->scr_env, "FISH_FILENAME=%s FISH_FILESIZE=%" PRIuMAX ";\n",
-                         SUP->scr_send, (char *) NULL);
-        code = fish_command (me, super, WAIT_REPLY, shell_commands, quoted_name,
-                             (uintmax_t) s.st_size);
-        g_free (shell_commands);
-    }
-
+    code = fish_command_v (me, super, WAIT_REPLY, fish->append ? SUP->scr_append : SUP->scr_send,
+                           "FISH_FILENAME=%s FISH_FILESIZE=%" PRIuMAX ";\n", quoted_name,
+                           (uintmax_t) s.st_size);
     g_free (quoted_name);
 
     if (code != PRELIM)
@@ -1017,7 +1054,6 @@ static int
 fish_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
 {
     fish_fh_data_t *fish;
-    gchar *shell_commands = NULL;
     struct vfs_s_super *super = FH_SUPER;
     char *name;
     char *quoted_name;
@@ -1041,12 +1077,12 @@ fish_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
      * standard output (i.e. over the network).
      */
 
-    shell_commands =
-        g_strconcat (SUP->scr_env, "FISH_FILENAME=%s FISH_START_OFFSET=%" PRIuMAX ";\n",
-                     SUP->scr_get, (char *) NULL);
-    offset = fish_command (me, super, WANT_STRING, shell_commands, quoted_name, (uintmax_t) offset);
-    g_free (shell_commands);
+    offset =
+        fish_command_v (me, super, WANT_STRING, SUP->scr_get,
+                        "FISH_FILENAME=%s FISH_START_OFFSET=%" PRIuMAX ";\n", quoted_name,
+                        (uintmax_t) offset);
     g_free (quoted_name);
+
     if (offset != PRELIM)
         ERRNOR (E_REMOTE, 0);
     fh->linear = LS_LINEAR_OPEN;
@@ -1163,34 +1199,6 @@ fish_ctl (void *fh, int ctlop, void *arg)
         return 0;
     }
 #endif
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-static int
-G_GNUC_PRINTF (5, 6)
-fish_send_command (struct vfs_class *me, struct vfs_s_super *super, int flags, const char *scr,
-                   const char *vars, ...)
-{
-    int r;
-    GString *command;
-    va_list ap;
-
-    command = g_string_new (SUP->scr_env);
-    va_start (ap, vars);
-    g_string_append_vprintf (command, vars, ap);
-    va_end (ap);
-    g_string_append (command, scr);
-    r = fish_command (me, super, WAIT_REPLY, "%s", command->str);
-    vfs_stamp_create (&vfs_fish_ops, super);
-    g_string_free (command, TRUE);
-
-    if (r != COMPLETE)
-        ERRNOR (E_REMOTE, -1);
-    if ((flags & OPT_FLUSH) != 0)
-        vfs_s_invalidate (me, super);
-
-    return 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */

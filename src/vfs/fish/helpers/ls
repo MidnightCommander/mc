@@ -130,20 +130,20 @@ my $dirname = $ARGV[0];
 if (opendir (DIR, $dirname)) {
 while((my $filename = readdir (DIR))){
     my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = lstat("$dirname/$filename");
-    my $mloctime= strftime("%%m-%%d-%%Y %%H:%%M", localtime $mtime);
+    my $mloctime= strftime("%m-%d-%Y %H:%M", localtime $mtime);
     my $strutils_shell_escape_regex = s/([;<>\*\|`&\$!#\(\)\[\]\{\}:'\''"\ \\])/\\$1/g;
     my $e_filename = $filename;
     $e_filename =~ $strutils_shell_escape_regex;
     if (S_ISLNK ($mode)) {
         my $linkname = readlink ("$dirname/$filename");
         $linkname =~ $strutils_shell_escape_regex;
-        printf("R%%o %%o $uid.$gid\nS$size\nd$mloctime\n:\"%%s\" -> \"%%s\"\n\n", S_IMODE($mode), S_IFMT($mode), $e_filename, $linkname);
+        printf("R%o %o $uid.$gid\nS$size\nd$mloctime\n:\"%s\" -> \"%s\"\n\n", S_IMODE($mode), S_IFMT($mode), $e_filename, $linkname);
     } elsif (S_ISCHR ($mode) || S_ISBLK ($mode)) {
-        my $minor = $rdev %% 256;
+        my $minor = $rdev % 256;
         my $major = int( $rdev / 256 );
-        printf("R%%o %%o $uid.$gid\nE$major,$minor\nd$mloctime\n:\"%%s\"\n\n", S_IMODE($mode), S_IFMT($mode), $e_filename);
+        printf("R%o %o $uid.$gid\nE$major,$minor\nd$mloctime\n:\"%s\"\n\n", S_IMODE($mode), S_IFMT($mode), $e_filename);
     } else {
-        printf("R%%o %%o $uid.$gid\nS$size\nd$mloctime\n:\"%%s\"\n\n", S_IMODE($mode), S_IFMT($mode), $e_filename);
+        printf("R%o %o $uid.$gid\nS$size\nd$mloctime\n:\"%s\"\n\n", S_IMODE($mode), S_IFMT($mode), $e_filename);
     }
 }
     printf("### 200\n");
