@@ -1168,16 +1168,28 @@ fish_ctl (void *fh, int ctlop, void *arg)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-fish_send_command (struct vfs_class *me, struct vfs_s_super *super, const char *cmd, int flags)
+G_GNUC_PRINTF (5, 6)
+fish_send_command (struct vfs_class *me, struct vfs_s_super *super, int flags, const char *scr,
+                   const char *vars, ...)
 {
     int r;
+    GString *command;
+    va_list ap;
 
-    r = fish_command (me, super, WAIT_REPLY, "%s", cmd);
+    command = g_string_new (SUP->scr_env);
+    va_start (ap, vars);
+    g_string_append_vprintf (command, vars, ap);
+    va_end (ap);
+    g_string_append (command, scr);
+    r = fish_command (me, super, WAIT_REPLY, "%s", command->str);
     vfs_stamp_create (&vfs_fish_ops, super);
+    g_string_free (command, TRUE);
+
     if (r != COMPLETE)
         ERRNOR (E_REMOTE, -1);
     if ((flags & OPT_FLUSH) != 0)
         vfs_s_invalidate (me, super);
+
     return 0;
 }
 
@@ -1186,12 +1198,11 @@ fish_send_command (struct vfs_class *me, struct vfs_s_super *super, const char *
 static int
 fish_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    gchar *shell_commands = NULL;
-    char buf[BUF_LARGE];
     const char *crpath1, *crpath2;
     char *rpath1, *rpath2;
     struct vfs_s_super *super, *super2;
     const vfs_path_element_t *path_element;
+    int ret;
 
     path_element = vfs_path_get_by_index (vpath1, -1);
 
@@ -1205,13 +1216,15 @@ fish_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 
     rpath1 = strutils_shell_escape (crpath1);
     rpath2 = strutils_shell_escape (crpath2);
-    shell_commands = g_strconcat (SUP->scr_env, "FISH_FILEFROM=%s FISH_FILETO=%s;\n",
-                                  SUP->scr_mv, (char *) NULL);
-    g_snprintf (buf, sizeof (buf), shell_commands, rpath1, rpath2);
-    g_free (shell_commands);
+
+    ret =
+        fish_send_command (path_element->class, super2, OPT_FLUSH, SUP->scr_mv,
+                           "FISH_FILEFROM=%s FISH_FILETO=%s;\n", rpath1, rpath2);
+
     g_free (rpath1);
     g_free (rpath2);
-    return fish_send_command (path_element->class, super2, buf, OPT_FLUSH);
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1219,12 +1232,11 @@ fish_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 static int
 fish_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    gchar *shell_commands = NULL;
-    char buf[BUF_LARGE];
     const char *crpath1, *crpath2;
     char *rpath1, *rpath2;
     struct vfs_s_super *super, *super2;
     const vfs_path_element_t *path_element;
+    int ret;
 
     path_element = vfs_path_get_by_index (vpath1, -1);
 
@@ -1238,15 +1250,16 @@ fish_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 
     rpath1 = strutils_shell_escape (crpath1);
     rpath2 = strutils_shell_escape (crpath2);
-    shell_commands = g_strconcat (SUP->scr_env, "FISH_FILEFROM=%s FISH_FILETO=%s;\n",
-                                  SUP->scr_hardlink, (char *) NULL);
-    g_snprintf (buf, sizeof (buf), shell_commands, rpath1, rpath2);
-    g_free (shell_commands);
+
+    ret =
+        fish_send_command (path_element->class, super2, OPT_FLUSH, SUP->scr_hardlink,
+                           "FISH_FILEFROM=%s FISH_FILETO=%s;\n", rpath1, rpath2);
+
     g_free (rpath1);
     g_free (rpath2);
-    return fish_send_command (path_element->class, super2, buf, OPT_FLUSH);
-}
 
+    return ret;
+}
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1254,12 +1267,11 @@ static int
 fish_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
     char *qsetto;
-    gchar *shell_commands = NULL;
-    char buf[BUF_LARGE];
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
     const vfs_path_element_t *path_element;
+    int ret;
 
     path_element = vfs_path_get_by_index (vpath2, -1);
 
@@ -1270,13 +1282,14 @@ fish_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
     rpath = strutils_shell_escape (crpath);
     qsetto = strutils_shell_escape (vfs_path_get_by_index (vpath1, -1)->path);
 
-    shell_commands = g_strconcat (SUP->scr_env, "FISH_FILEFROM=%s FISH_FILETO=%s;\n",
-                                  SUP->scr_ln, (char *) NULL);
-    g_snprintf (buf, sizeof (buf), shell_commands, qsetto, rpath);
-    g_free (shell_commands);
+    ret =
+        fish_send_command (path_element->class, super, OPT_FLUSH, SUP->scr_ln,
+                           "FISH_FILEFROM=%s FISH_FILETO=%s;\n", qsetto, rpath);
+
     g_free (qsetto);
     g_free (rpath);
-    return fish_send_command (path_element->class, super, buf, OPT_FLUSH);
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1320,26 +1333,27 @@ fish_fstat (void *vfs_info, struct stat *buf)
 static int
 fish_chmod (const vfs_path_t * vpath, mode_t mode)
 {
-    gchar *shell_commands = NULL;
-    char buf[BUF_LARGE];
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
     const vfs_path_element_t *path_element;
+    int ret;
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
     crpath = vfs_s_get_path (vpath, &super, 0);
     if (crpath == NULL)
         return -1;
+
     rpath = strutils_shell_escape (crpath);
 
-    shell_commands = g_strconcat (SUP->scr_env, "FISH_FILENAME=%s FISH_FILEMODE=%4.4o;\n",
-                                  SUP->scr_chmod, (char *) NULL);
-    g_snprintf (buf, sizeof (buf), shell_commands, rpath, (int) (mode & 07777));
-    g_free (shell_commands);
+    ret =
+        fish_send_command (path_element->class, super, OPT_FLUSH, SUP->scr_chmod,
+                           "FISH_FILENAME=%s FISH_FILEMODE=%4.4o;\n", rpath, (int) (mode & 07777));
+
     g_free (rpath);
-    return fish_send_command (path_element->class, super, buf, OPT_FLUSH);
+
+    return ret;;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1350,6 +1364,11 @@ fish_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
     char *sowner, *sgroup;
     struct passwd *pw;
     struct group *gr;
+    const char *crpath;
+    char *rpath;
+    struct vfs_s_super *super;
+    const vfs_path_element_t *path_element;
+    int ret;
 
     pw = getpwuid (owner);
     if (pw == NULL)
@@ -1362,32 +1381,23 @@ fish_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
     sowner = pw->pw_name;
     sgroup = gr->gr_name;
 
-    {
-        gchar *shell_commands = NULL;
-        char buf[BUF_LARGE];
-        const char *crpath;
-        char *rpath;
-        struct vfs_s_super *super;
-        const vfs_path_element_t *path_element;
+    path_element = vfs_path_get_by_index (vpath, -1);
 
-        path_element = vfs_path_get_by_index (vpath, -1);
+    crpath = vfs_s_get_path (vpath, &super, 0);
+    if (crpath == NULL)
+        return -1;
 
-        crpath = vfs_s_get_path (vpath, &super, 0);
-        if (crpath == NULL)
-            return -1;
-        rpath = strutils_shell_escape (crpath);
+    rpath = strutils_shell_escape (crpath);
 
-        shell_commands = g_strconcat (SUP->scr_env,
-                                      "FISH_FILENAME=%s FISH_FILEOWNER=%s FISH_FILEGROUP=%s;\n",
-                                      SUP->scr_chown, (char *) NULL);
-        g_snprintf (buf, sizeof (buf), shell_commands, rpath, sowner, sgroup);
-        g_free (shell_commands);
-        fish_send_command (path_element->class, super, buf, OPT_FLUSH);
-        /* FIXME: what should we report if chgrp succeeds but chown fails? */
-        /* fish_send_command(me, super, buf, OPT_FLUSH); */
-        g_free (rpath);
-        return fish_send_command (path_element->class, super, buf, OPT_FLUSH);
-    }
+    /* FIXME: what should we report if chgrp succeeds but chown fails? */
+    ret =
+        fish_send_command (path_element->class, super, OPT_FLUSH, SUP->scr_chown,
+                           "FISH_FILENAME=%s FISH_FILEOWNER=%s FISH_FILEGROUP=%s;\n", rpath, sowner,
+                           sgroup);
+
+    g_free (rpath);
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1423,13 +1433,11 @@ fish_get_mtime (mc_timesbuf_t * times, time_t * sec, long *nsec)
 static int
 fish_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
 {
-    gchar *shell_commands = NULL;
     char utcatime[16], utcmtime[16];
     char utcatime_w_nsec[30], utcmtime_w_nsec[30];
     time_t atime, mtime;
     long atime_nsec, mtime_nsec;
     struct tm *gmt;
-    char *cmd;
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
@@ -1441,6 +1449,7 @@ fish_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
     crpath = vfs_s_get_path (vpath, &super, 0);
     if (crpath == NULL)
         return -1;
+
     rpath = strutils_shell_escape (crpath);
 
     fish_get_atime (times, &atime, &atime_nsec);
@@ -1461,18 +1470,13 @@ fish_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
                 gmt->tm_year + 1900, gmt->tm_mon + 1, gmt->tm_mday,
                 gmt->tm_hour, gmt->tm_min, gmt->tm_sec, mtime_nsec);
 
-    shell_commands =
-        g_strconcat (SUP->scr_env, "FISH_FILENAME=%s FISH_FILEATIME=%ld FISH_FILEMTIME=%ld ",
-                     "FISH_TOUCHATIME=%s FISH_TOUCHMTIME=%s ",
-                     "FISH_TOUCHATIME_W_NSEC=\"%s\" FISH_TOUCHMTIME_W_NSEC=\"%s\";\n",
-                     SUP->scr_utime, (char *) NULL);
-    cmd =
-        g_strdup_printf (shell_commands, rpath, (long) atime, (long) mtime, utcatime, utcmtime,
-                         utcatime_w_nsec, utcmtime_w_nsec);
-    g_free (shell_commands);
+    ret = fish_send_command (path_element->class, super, OPT_FLUSH, SUP->scr_utime,
+                             "FISH_FILENAME=%s FISH_FILEATIME=%ld FISH_FILEMTIME=%ld "
+                             "FISH_TOUCHATIME=%s FISH_TOUCHMTIME=%s FISH_TOUCHATIME_W_NSEC=\"%s\" "
+                             "FISH_TOUCHMTIME_W_NSEC=\"%s\";\n", rpath, (long) atime, (long) mtime,
+                             utcatime, utcmtime, utcatime_w_nsec, utcmtime_w_nsec);
+
     g_free (rpath);
-    ret = fish_send_command (path_element->class, super, cmd, OPT_FLUSH);
-    g_free (cmd);
 
     return ret;
 }
@@ -1482,26 +1486,27 @@ fish_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
 static int
 fish_unlink (const vfs_path_t * vpath)
 {
-    gchar *shell_commands = NULL;
-    char buf[BUF_LARGE];
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
     const vfs_path_element_t *path_element;
+    int ret;
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
     crpath = vfs_s_get_path (vpath, &super, 0);
     if (crpath == NULL)
         return -1;
+
     rpath = strutils_shell_escape (crpath);
 
-    shell_commands =
-        g_strconcat (SUP->scr_env, "FISH_FILENAME=%s;\n", SUP->scr_unlink, (char *) NULL);
-    g_snprintf (buf, sizeof (buf), shell_commands, rpath);
-    g_free (shell_commands);
+    ret =
+        fish_send_command (path_element->class, super, OPT_FLUSH, SUP->scr_unlink,
+                           "FISH_FILENAME=%s;\n", rpath);
+
     g_free (rpath);
-    return fish_send_command (path_element->class, super, buf, OPT_FLUSH);
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1509,27 +1514,27 @@ fish_unlink (const vfs_path_t * vpath)
 static int
 fish_exists (const vfs_path_t * vpath)
 {
-    gchar *shell_commands = NULL;
-    char buf[BUF_LARGE];
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
     const vfs_path_element_t *path_element;
+    int ret;
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
     crpath = vfs_s_get_path (vpath, &super, 0);
     if (crpath == NULL)
         return -1;
+
     rpath = strutils_shell_escape (crpath);
 
-    shell_commands =
-        g_strconcat (SUP->scr_env, "FISH_FILENAME=%s;\n", SUP->scr_exists, (char *) NULL);
-    g_snprintf (buf, sizeof (buf), shell_commands, rpath);
-    g_free (shell_commands);
+    ret =
+        fish_send_command (path_element->class, super, OPT_FLUSH, SUP->scr_exists,
+                           "FISH_FILENAME=%s;\n", rpath);
+
     g_free (rpath);
 
-    return (fish_send_command (path_element->class, super, buf, OPT_FLUSH) == 0) ? 1 : 0;
+    return (ret == 0 ? 1 : 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1537,13 +1542,11 @@ fish_exists (const vfs_path_t * vpath)
 static int
 fish_mkdir (const vfs_path_t * vpath, mode_t mode)
 {
-    gchar *shell_commands = NULL;
-    int ret_code;
-    char buf[BUF_LARGE];
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
     const vfs_path_element_t *path_element;
+    int ret;
 
     (void) mode;
 
@@ -1552,18 +1555,16 @@ fish_mkdir (const vfs_path_t * vpath, mode_t mode)
     crpath = vfs_s_get_path (vpath, &super, 0);
     if (crpath == NULL)
         return -1;
+
     rpath = strutils_shell_escape (crpath);
 
-    shell_commands =
-        g_strconcat (SUP->scr_env, "FISH_FILENAME=%s;\n", SUP->scr_mkdir, (char *) NULL);
-    g_snprintf (buf, sizeof (buf), shell_commands, rpath);
-    g_free (shell_commands);
-
+    ret =
+        fish_send_command (path_element->class, super, OPT_FLUSH, SUP->scr_mkdir,
+                           "FISH_FILENAME=%s;\n", rpath);
     g_free (rpath);
-    ret_code = fish_send_command (path_element->class, super, buf, OPT_FLUSH);
 
-    if (ret_code != 0)
-        return ret_code;
+    if (ret != 0)
+        return ret;
 
     if (fish_exists (vpath) == 0)
     {
@@ -1578,26 +1579,27 @@ fish_mkdir (const vfs_path_t * vpath, mode_t mode)
 static int
 fish_rmdir (const vfs_path_t * vpath)
 {
-    gchar *shell_commands = NULL;
-    char buf[BUF_LARGE];
     const char *crpath;
     char *rpath;
     struct vfs_s_super *super;
     const vfs_path_element_t *path_element;
+    int ret;
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
     crpath = vfs_s_get_path (vpath, &super, 0);
     if (crpath == NULL)
         return -1;
+
     rpath = strutils_shell_escape (crpath);
 
-    shell_commands =
-        g_strconcat (SUP->scr_env, "FISH_FILENAME=%s;\n", SUP->scr_rmdir, (char *) NULL);
-    g_snprintf (buf, sizeof (buf), shell_commands, rpath);
-    g_free (shell_commands);
+    ret =
+        fish_send_command (path_element->class, super, OPT_FLUSH, SUP->scr_rmdir,
+                           "FISH_FILENAME=%s;\n", rpath);
+
     g_free (rpath);
-    return fish_send_command (path_element->class, super, buf, OPT_FLUSH);
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
