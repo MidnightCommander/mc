@@ -424,6 +424,7 @@ put_dos_date (char *buf, int offset, time_t unixdate)
     SIVAL (buf, offset, x);
 }
 
+#if 0
 /*******************************************************************
 put a dos date into a buffer (date/time format)
 This takes GMT time and puts local time in the buffer
@@ -435,6 +436,7 @@ put_dos_date2 (char *buf, int offset, time_t unixdate)
     x = ((x & 0xFFFF) << 16) | ((x & 0xFFFF0000) >> 16);
     SIVAL (buf, offset, x);
 }
+#endif /* 0 */
 
 /*******************************************************************
 put a dos 32 bit "unix like" date into a buffer. This routine takes

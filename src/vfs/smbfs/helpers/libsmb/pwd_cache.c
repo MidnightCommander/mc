@@ -102,7 +102,7 @@ pwd_read (struct pwd_info *pwd, char *passwd_report, BOOL do_encrypt)
         pwd_set_cleartext (pwd, user_pass);
     }
 }
-#endif
+
 
 /****************************************************************************
  stores a cleartext password
@@ -116,6 +116,7 @@ pwd_set_nullpwd (struct pwd_info *pwd)
     pwd->null_pwd = True;
     pwd->crypted = False;
 }
+#endif /* 0 */
 
 /****************************************************************************
  stores a cleartext password

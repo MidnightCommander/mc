@@ -303,8 +303,7 @@ resolve_bcast (const char *name, struct in_addr *return_ip, int name_type)
         struct in_addr *iplist = NULL;
         int count;
         int num_interfaces = iface_count ();
-        static char so_broadcast[] = "SO_BROADCAST";
-        set_socket_options (sock, so_broadcast);
+        set_socket_options (sock, "SO_BROADCAST");
         /*
          * Lookup the name on all the interfaces, return on
          * the first successful match.
