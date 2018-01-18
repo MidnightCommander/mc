@@ -245,9 +245,10 @@ int
 get_codepage_index (const char *id)
 {
     size_t i;
-    if (strcmp (id, OTHER_8BIT) == 0)
-        return -1;
+
     if (codepages == NULL)
+        return -1;
+    if (strcmp (id, OTHER_8BIT) == 0)
         return -1;
     for (i = 0; i < codepages->len; i++)
         if (strcmp (id, ((codepage_desc *) g_ptr_array_index (codepages, i))->id) == 0)
@@ -292,8 +293,8 @@ init_translation_table (int cpsource, int cpdisplay)
         {
             conv_displ[i] = i;
             conv_input[i] = i;
-            cp_source = cp_display;
         }
+        cp_source = cp_display;
         return NULL;
     }
 
