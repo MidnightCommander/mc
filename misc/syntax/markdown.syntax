@@ -4,6 +4,13 @@ context default lightgray
     spellcheck
     # links
     keyword whole [*](*) yellow
+    keyword \*\* white
+    keyword \*   yellow
+    keyword \\_  lightgray
+    keyword wholeleft  __ white
+    keyword wholeright __ white
+    keyword wholeleft  _  yellow
+    keyword wholeright _  yellow
 
 context linestart #### \n red
     spellcheck
@@ -21,15 +28,3 @@ context ``` ``` cyan
 context `` `` cyan
 
 context ` ` cyan
-
-context \*\* \*\* brightgreen
-    spellcheck
-
-context \* \* magenta
-    spellcheck
-
-context \_\_ \_\_ brightgreen
-    spellcheck
-
-context \_ \_ magenta
-    spellcheck
