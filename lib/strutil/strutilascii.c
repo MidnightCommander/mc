@@ -551,7 +551,7 @@ str_ascii_column_to_pos (const char *text, size_t pos)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-str_ascii_create_search_needle (const char *needle, int case_sen)
+str_ascii_create_search_needle (const char *needle, gboolean case_sen)
 {
     (void) case_sen;
     return (char *) needle;
@@ -560,7 +560,7 @@ str_ascii_create_search_needle (const char *needle, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-str_ascii_release_search_needle (char *needle, int case_sen)
+str_ascii_release_search_needle (char *needle, gboolean case_sen)
 {
     (void) case_sen;
     (void) needle;
@@ -570,14 +570,14 @@ str_ascii_release_search_needle (char *needle, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
-str_ascii_search_first (const char *text, const char *search, int case_sen)
+str_ascii_search_first (const char *text, const char *search, gboolean case_sen)
 {
     char *fold_text;
     char *fold_search;
     const char *match;
 
-    fold_text = (case_sen) ? (char *) text : g_ascii_strdown (text, -1);
-    fold_search = (case_sen) ? (char *) search : g_ascii_strdown (search, -1);
+    fold_text = case_sen ? (char *) text : g_ascii_strdown (text, -1);
+    fold_search = case_sen ? (char *) search : g_ascii_strdown (search, -1);
 
     match = g_strstr_len (fold_text, -1, fold_search);
     if (match != NULL)
@@ -600,14 +600,14 @@ str_ascii_search_first (const char *text, const char *search, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
-str_ascii_search_last (const char *text, const char *search, int case_sen)
+str_ascii_search_last (const char *text, const char *search, gboolean case_sen)
 {
     char *fold_text;
     char *fold_search;
     const char *match;
 
-    fold_text = (case_sen) ? (char *) text : g_ascii_strdown (text, -1);
-    fold_search = (case_sen) ? (char *) search : g_ascii_strdown (search, -1);
+    fold_text = case_sen ? (char *) text : g_ascii_strdown (text, -1);
+    fold_search = case_sen ? (char *) search : g_ascii_strdown (search, -1);
 
     match = g_strrstr_len (fold_text, -1, fold_search);
     if (match != NULL)
@@ -671,7 +671,7 @@ str_ascii_fix_string (char *text)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-str_ascii_create_key (const char *text, int case_sen)
+str_ascii_create_key (const char *text, gboolean case_sen)
 {
     (void) case_sen;
     return (char *) text;
@@ -680,15 +680,15 @@ str_ascii_create_key (const char *text, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-str_ascii_key_collate (const char *t1, const char *t2, int case_sen)
+str_ascii_key_collate (const char *t1, const char *t2, gboolean case_sen)
 {
-    return (case_sen) ? strcmp (t1, t2) : g_ascii_strcasecmp (t1, t2);
+    return case_sen ? strcmp (t1, t2) : g_ascii_strcasecmp (t1, t2);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-str_ascii_release_key (char *key, int case_sen)
+str_ascii_release_key (char *key, gboolean case_sen)
 {
     (void) key;
     (void) case_sen;

@@ -787,7 +787,7 @@ str_trunc (const char *text, int width)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-str_create_search_needle (const char *needle, int case_sen)
+str_create_search_needle (const char *needle, gboolean case_sen)
 {
     return used_class.create_search_needle (needle, case_sen);
 }
@@ -795,7 +795,7 @@ str_create_search_needle (const char *needle, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-str_release_search_needle (char *needle, int case_sen)
+str_release_search_needle (char *needle, gboolean case_sen)
 {
     used_class.release_search_needle (needle, case_sen);
 }
@@ -803,7 +803,7 @@ str_release_search_needle (char *needle, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 const char *
-str_search_first (const char *text, const char *search, int case_sen)
+str_search_first (const char *text, const char *search, gboolean case_sen)
 {
     return used_class.search_first (text, search, case_sen);
 }
@@ -811,7 +811,7 @@ str_search_first (const char *text, const char *search, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 const char *
-str_search_last (const char *text, const char *search, int case_sen)
+str_search_last (const char *text, const char *search, gboolean case_sen)
 {
     return used_class.search_last (text, search, case_sen);
 }
@@ -883,7 +883,7 @@ str_fix_string (char *text)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-str_create_key (const char *text, int case_sen)
+str_create_key (const char *text, gboolean case_sen)
 {
     return used_class.create_key (text, case_sen);
 }
@@ -891,7 +891,7 @@ str_create_key (const char *text, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-str_create_key_for_filename (const char *text, int case_sen)
+str_create_key_for_filename (const char *text, gboolean case_sen)
 {
     return used_class.create_key_for_filename (text, case_sen);
 }
@@ -899,7 +899,7 @@ str_create_key_for_filename (const char *text, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-str_key_collate (const char *t1, const char *t2, int case_sen)
+str_key_collate (const char *t1, const char *t2, gboolean case_sen)
 {
     return used_class.key_collate (t1, t2, case_sen);
 }
@@ -907,7 +907,7 @@ str_key_collate (const char *t1, const char *t2, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-str_release_key (char *key, int case_sen)
+str_release_key (char *key, gboolean case_sen)
 {
     used_class.release_key (key, case_sen);
 }

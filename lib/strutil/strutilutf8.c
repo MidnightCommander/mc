@@ -956,7 +956,7 @@ str_utf8_column_to_pos (const char *text, size_t pos)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-str_utf8_create_search_needle (const char *needle, int case_sen)
+str_utf8_create_search_needle (const char *needle, gboolean case_sen)
 {
     char *fold, *result;
 
@@ -965,7 +965,6 @@ str_utf8_create_search_needle (const char *needle, int case_sen)
 
     if (case_sen)
         return g_utf8_normalize (needle, -1, G_NORMALIZE_ALL);
-
 
     fold = g_utf8_casefold (needle, -1);
     result = g_utf8_normalize (fold, -1, G_NORMALIZE_ALL);
@@ -976,7 +975,7 @@ str_utf8_create_search_needle (const char *needle, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-str_utf8_release_search_needle (char *needle, int case_sen)
+str_utf8_release_search_needle (char *needle, gboolean case_sen)
 {
     (void) case_sen;
     g_free (needle);
@@ -985,7 +984,7 @@ str_utf8_release_search_needle (char *needle, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
-str_utf8_search_first (const char *text, const char *search, int case_sen)
+str_utf8_search_first (const char *text, const char *search, gboolean case_sen)
 {
     char *fold_text;
     char *deco_text;
@@ -993,7 +992,7 @@ str_utf8_search_first (const char *text, const char *search, int case_sen)
     const char *result = NULL;
     const char *m;
 
-    fold_text = (case_sen) ? (char *) text : g_utf8_casefold (text, -1);
+    fold_text = case_sen ? (char *) text : g_utf8_casefold (text, -1);
     deco_text = g_utf8_normalize (fold_text, -1, G_NORMALIZE_ALL);
 
     match = deco_text;
@@ -1029,7 +1028,7 @@ str_utf8_search_first (const char *text, const char *search, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
-str_utf8_search_last (const char *text, const char *search, int case_sen)
+str_utf8_search_last (const char *text, const char *search, gboolean case_sen)
 {
     char *fold_text;
     char *deco_text;
@@ -1037,7 +1036,7 @@ str_utf8_search_last (const char *text, const char *search, int case_sen)
     const char *result = NULL;
     const char *m;
 
-    fold_text = (case_sen) ? (char *) text : g_utf8_casefold (text, -1);
+    fold_text = case_sen ? (char *) text : g_utf8_casefold (text, -1);
     deco_text = g_utf8_normalize (fold_text, -1, G_NORMALIZE_ALL);
 
     do
@@ -1343,7 +1342,7 @@ str_utf8_caseprefix (const char *text, const char *prefix)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-str_utf8_create_key_gen (const char *text, int case_sen,
+str_utf8_create_key_gen (const char *text, gboolean case_sen,
                          gchar * (*keygen) (const gchar * text, gssize size))
 {
     char *result;
@@ -1417,7 +1416,7 @@ str_utf8_create_key_gen (const char *text, int case_sen,
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-str_utf8_create_key (const char *text, int case_sen)
+str_utf8_create_key (const char *text, gboolean case_sen)
 {
     return str_utf8_create_key_gen (text, case_sen, g_utf8_collate_key);
 }
@@ -1426,7 +1425,7 @@ str_utf8_create_key (const char *text, int case_sen)
 
 #ifdef MC__USE_STR_UTF8_CREATE_KEY_FOR_FILENAME
 static char *
-str_utf8_create_key_for_filename (const char *text, int case_sen)
+str_utf8_create_key_for_filename (const char *text, gboolean case_sen)
 {
     return str_utf8_create_key_gen (text, case_sen, g_utf8_collate_key_for_filename);
 }
@@ -1435,7 +1434,7 @@ str_utf8_create_key_for_filename (const char *text, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-str_utf8_key_collate (const char *t1, const char *t2, int case_sen)
+str_utf8_key_collate (const char *t1, const char *t2, gboolean case_sen)
 {
     (void) case_sen;
     return strcmp (t1, t2);
@@ -1444,7 +1443,7 @@ str_utf8_key_collate (const char *t1, const char *t2, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-str_utf8_release_key (char *key, int case_sen)
+str_utf8_release_key (char *key, gboolean case_sen)
 {
     (void) case_sen;
     g_free (key);

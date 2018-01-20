@@ -136,20 +136,20 @@ struct str_class
       /*I*/ const char *(*trunc) (const char *, int);
       /*I*/ int (*offset_to_pos) (const char *, size_t);
       /*I*/ int (*column_to_pos) (const char *, size_t);
-      /*I*/ char *(*create_search_needle) (const char *, int);
-    void (*release_search_needle) (char *, int);
-    const char *(*search_first) (const char *, const char *, int);
-    const char *(*search_last) (const char *, const char *, int);
+      /*I*/ char *(*create_search_needle) (const char *, gboolean);
+    void (*release_search_needle) (char *, gboolean);
+    const char *(*search_first) (const char *, const char *, gboolean);
+    const char *(*search_last) (const char *, const char *, gboolean);
     int (*compare) (const char *, const char *);
       /*I*/ int (*ncompare) (const char *, const char *);
       /*I*/ int (*casecmp) (const char *, const char *);
       /*I*/ int (*ncasecmp) (const char *, const char *);
       /*I*/ int (*prefix) (const char *, const char *);
       /*I*/ int (*caseprefix) (const char *, const char *);
-      /*I*/ char *(*create_key) (const char *text, int case_sen);
-      /*I*/ char *(*create_key_for_filename) (const char *text, int case_sen);
-      /*I*/ int (*key_collate) (const char *t1, const char *t2, int case_sen);
-      /*I*/ void (*release_key) (char *key, int case_sen);
+      /*I*/ char *(*create_key) (const char *text, gboolean case_sen);
+      /*I*/ char *(*create_key_for_filename) (const char *text, gboolean case_sen);
+      /*I*/ int (*key_collate) (const char *t1, const char *t2, gboolean case_sen);
+      /*I*/ void (*release_key) (char *key, gboolean case_sen);
   /*I*/};
 
 /*** global variables defined in .c file *********************************************************/
@@ -455,19 +455,19 @@ const char *str_trunc (const char *text, int width);
  * so needle can be reused
  * in UTF-8 return normalized form of needle
  */
-char *str_create_search_needle (const char *needle, int case_sen);
+char *str_create_search_needle (const char *needle, gboolean case_sen);
 
 /* free needle returned by str_create_search_needle
  */
-void str_release_search_needle (char *needle, int case_sen);
+void str_release_search_needle (char *needle, gboolean case_sen);
 
 /* search for first occurrence of search in text
  */
-const char *str_search_first (const char *text, const char *needle, int case_sen);
+const char *str_search_first (const char *text, const char *needle, gboolean case_sen);
 
 /* search for last occurrence of search in text
  */
-const char *str_search_last (const char *text, const char *needle, int case_sen);
+const char *str_search_last (const char *text, const char *needle, gboolean case_sen);
 
 /* case sensitive compare two strings
  * I
@@ -507,25 +507,25 @@ int str_caseprefix (const char *text, const char *prefix);
 /* create a key that is used by str_key_collate
  * I
  */
-char *str_create_key (const char *text, int case_sen);
+char *str_create_key (const char *text, gboolean case_sen);
 
 /* create a key that is used by str_key_collate
  * should aware dot '.' in text
  * I
  */
-char *str_create_key_for_filename (const char *text, int case_sen);
+char *str_create_key_for_filename (const char *text, gboolean case_sen);
 
 /* compare two string using LC_COLLATE, if is possible
  * if case_sen is set, comparing is case sensitive,
  * case_sen must be same for str_create_key, str_key_collate and str_release_key
  * I
  */
-int str_key_collate (const char *t1, const char *t2, int case_sen);
+int str_key_collate (const char *t1, const char *t2, gboolean case_sen);
 
 /* release_key created by str_create_key, only rigth way to release key
  * I
  */
-void str_release_key (char *key, int case_sen);
+void str_release_key (char *key, gboolean case_sen);
 
 /* return TRUE if codeset_name is utf8 or utf-8
  * I

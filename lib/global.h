@@ -134,7 +134,7 @@
 #define TMPDIR_DEFAULT "/tmp"
 #define SCRIPT_SUFFIX ""
 #define get_default_editor() "vi"
-#define OS_SORT_CASE_SENSITIVE_DEFAULT 1
+#define OS_SORT_CASE_SENSITIVE_DEFAULT TRUE
 #define UTF8_CHAR_LEN 6
 
 /* Used to distinguish between a normal MC termination and */

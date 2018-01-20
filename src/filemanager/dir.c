@@ -68,7 +68,7 @@
 static int reverse = 1;
 
 /* Are the files sorted case sensitively? */
-static int case_sensitive = OS_SORT_CASE_SENSITIVE_DEFAULT;
+static gboolean case_sensitive = OS_SORT_CASE_SENSITIVE_DEFAULT;
 
 /* Are the exec_bit files top in list */
 static gboolean exec_first = TRUE;
@@ -391,7 +391,7 @@ sort_ext (file_entry_t * a, file_entry_t * b)
             b->second_sort_key = str_create_key (extension (b->fname), case_sensitive);
 
         r = str_key_collate (a->second_sort_key, b->second_sort_key, case_sensitive);
-        if (r)
+        if (r != 0)
             return r * reverse;
         else
             return sort_name (a, b);
