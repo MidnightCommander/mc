@@ -523,37 +523,16 @@ convert_from_8bit_to_utf_c (char input_char, GIConv conv)
 int
 convert_from_8bit_to_utf_c2 (char input_char)
 {
-    unsigned char str[2];
     int ch = '.';
     GIConv conv;
     const char *cp_from;
 
-    str[0] = (unsigned char) input_char;
-    str[1] = '\0';
-
     cp_from = get_codepage_id (mc_global.source_codepage);
-    conv = str_crt_conv_to (cp_from);
 
+    conv = str_crt_conv_to (cp_from);
     if (conv != INVALID_CONV)
     {
-        unsigned char buf_ch[UTF8_CHAR_LEN + 1];
-
-        switch (str_translate_char (conv, (char *) str, -1, (char *) buf_ch, sizeof (buf_ch)))
-        {
-        case ESTR_SUCCESS:
-            {
-                int res;
-
-                res = g_utf8_get_char_validated ((char *) buf_ch, -1);
-                ch = res >= 0 ? res : buf_ch[0];
-                break;
-            }
-        case ESTR_PROBLEM:
-        case ESTR_FAILURE:
-        default:
-            ch = '.';
-            break;
-        }
+        ch = convert_from_8bit_to_utf_c (input_char, conv);
         str_close_conv (conv);
     }
 
