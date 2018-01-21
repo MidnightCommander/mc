@@ -84,7 +84,7 @@ str_utf8_insert_replace_char (GString * buffer)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_utf8_is_valid_string (const char *text)
 {
     return g_utf8_validate (text, -1, NULL);
@@ -171,7 +171,7 @@ str_utf8_fix_string (char *text)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_utf8_isspace (const char *text)
 {
     gunichar uni;
@@ -182,7 +182,7 @@ str_utf8_isspace (const char *text)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_utf8_ispunct (const char *text)
 {
     gunichar uni;
@@ -193,7 +193,7 @@ str_utf8_ispunct (const char *text)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_utf8_isalnum (const char *text)
 {
     gunichar uni;
@@ -204,7 +204,7 @@ str_utf8_isalnum (const char *text)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_utf8_isdigit (const char *text)
 {
     gunichar uni;
@@ -215,7 +215,7 @@ str_utf8_isdigit (const char *text)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_utf8_isprint (const char *ch)
 {
     gunichar uni;
@@ -273,7 +273,7 @@ str_utf8_cprev_noncomb_char (const char **text, const char *begin)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_utf8_toupper (const char *text, char **out, size_t * remain)
 {
     gunichar uni;
@@ -281,22 +281,22 @@ str_utf8_toupper (const char *text, char **out, size_t * remain)
 
     uni = g_utf8_get_char_validated (text, -1);
     if (uni == (gunichar) (-1) || uni == (gunichar) (-2))
-        return 0;
+        return FALSE;
 
     uni = g_unichar_toupper (uni);
     left = g_unichar_to_utf8 (uni, NULL);
     if (left >= *remain)
-        return 0;
+        return FALSE;
 
     left = g_unichar_to_utf8 (uni, *out);
     (*out) += left;
     (*remain) -= left;
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_utf8_tolower (const char *text, char **out, size_t * remain)
 {
     gunichar uni;
@@ -304,17 +304,17 @@ str_utf8_tolower (const char *text, char **out, size_t * remain)
 
     uni = g_utf8_get_char_validated (text, -1);
     if (uni == (gunichar) (-1) || uni == (gunichar) (-2))
-        return 0;
+        return FALSE;
 
     uni = g_unichar_tolower (uni);
     left = g_unichar_to_utf8 (uni, NULL);
     if (left >= *remain)
-        return 0;
+        return FALSE;
 
     left = g_unichar_to_utf8 (uni, *out);
     (*out) += left;
     (*remain) -= left;
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

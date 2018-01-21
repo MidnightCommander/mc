@@ -84,11 +84,11 @@ str_8bit_insert_replace_char (GString * buffer)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_8bit_is_valid_string (const char *text)
 {
     (void) text;
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -143,42 +143,42 @@ str_8bit_cprev_noncomb_char (const char **text, const char *begin)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_8bit_isspace (const char *text)
 {
-    return char_isspace (text[0]);
+    return char_isspace (text[0]) != 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_8bit_ispunct (const char *text)
 {
-    return char_ispunct (text[0]);
+    return char_ispunct (text[0]) != 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_8bit_isalnum (const char *text)
 {
-    return char_isalnum (text[0]);
+    return char_isalnum (text[0]) != 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_8bit_isdigit (const char *text)
 {
-    return char_isdigit (text[0]);
+    return char_isdigit (text[0]) != 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_8bit_isprint (const char *text)
 {
-    return char_isprint (text[0]);
+    return char_isprint (text[0]) != 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -196,26 +196,26 @@ static int
 str_8bit_toupper (const char *text, char **out, size_t * remain)
 {
     if (*remain <= 1)
-        return 0;
+        return FALSE;
 
     (*out)[0] = char_toupper (text[0]);
     (*out)++;
     (*remain)--;
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_8bit_tolower (const char *text, char **out, size_t * remain)
 {
     if (*remain <= 1)
-        return 0;
+        return FALSE;
 
     (*out)[0] = char_tolower (text[0]);
     (*out)++;
     (*remain)--;
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -714,7 +714,7 @@ str_column_to_pos (const char *text, size_t pos)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 str_isspace (const char *ch)
 {
     return used_class.char_isspace (ch);
@@ -722,7 +722,7 @@ str_isspace (const char *ch)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 str_ispunct (const char *ch)
 {
     return used_class.char_ispunct (ch);
@@ -730,7 +730,7 @@ str_ispunct (const char *ch)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 str_isalnum (const char *ch)
 {
     return used_class.char_isalnum (ch);
@@ -738,7 +738,7 @@ str_isalnum (const char *ch)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 str_isdigit (const char *ch)
 {
     return used_class.char_isdigit (ch);
@@ -746,7 +746,7 @@ str_isdigit (const char *ch)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 str_toupper (const char *ch, char **out, size_t * remain)
 {
     return used_class.char_toupper (ch, out, remain);
@@ -754,7 +754,7 @@ str_toupper (const char *ch, char **out, size_t * remain)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 str_tolower (const char *ch, char **out, size_t * remain)
 {
     return used_class.char_tolower (ch, out, remain);
@@ -762,7 +762,7 @@ str_tolower (const char *ch, char **out, size_t * remain)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 str_isprint (const char *ch)
 {
     return used_class.char_isprint (ch);
@@ -818,7 +818,7 @@ str_search_last (const char *text, const char *search, gboolean case_sen)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 str_is_valid_string (const char *text)
 {
     return used_class.is_valid_string (text);

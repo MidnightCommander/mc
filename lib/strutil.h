@@ -103,10 +103,11 @@ typedef enum
 /* all functions in str_class must be defined for every encoding */
 struct str_class
 {
+    /* *INDENT-OFF* */
     gchar *(*conv_gerror_message) (GError * error, const char *def_msg);
       /*I*/ estr_t (*vfs_convert_to) (GIConv coder, const char *string, int size, GString * buffer);
       /*I*/ void (*insert_replace_char) (GString * buffer);
-    int (*is_valid_string) (const char *);
+    gboolean (*is_valid_string) (const char *);
       /*I*/ int (*is_valid_char) (const char *, size_t);
       /*I*/ void (*cnext_char) (const char **);
     void (*cprev_char) (const char **);
@@ -114,17 +115,17 @@ struct str_class
       /*I*/ void (*cprev_char_safe) (const char **);
       /*I*/ int (*cnext_noncomb_char) (const char **text);
       /*I*/ int (*cprev_noncomb_char) (const char **text, const char *begin);
-      /*I*/ int (*char_isspace) (const char *);
-      /*I*/ int (*char_ispunct) (const char *);
-      /*I*/ int (*char_isalnum) (const char *);
-      /*I*/ int (*char_isdigit) (const char *);
-      /*I*/ int (*char_isprint) (const char *);
+      /*I*/ gboolean (*char_isspace) (const char *);
+      /*I*/ gboolean (*char_ispunct) (const char *);
+      /*I*/ gboolean (*char_isalnum) (const char *);
+      /*I*/ gboolean (*char_isdigit) (const char *);
+      /*I*/ gboolean (*char_isprint) (const char *);
       /*I*/ gboolean (*char_iscombiningmark) (const char *);
       /*I*/ int (*length) (const char *);
       /*I*/ int (*length2) (const char *, int);
       /*I*/ int (*length_noncomb) (const char *);
-      /*I*/ int (*char_toupper) (const char *, char **, size_t *);
-    int (*char_tolower) (const char *, char **, size_t *);
+      /*I*/ gboolean (*char_toupper) (const char *, char **, size_t *);
+    gboolean (*char_tolower) (const char *, char **, size_t *);
     void (*fix_string) (char *);
       /*I*/ const char *(*term_form) (const char *);
       /*I*/ const char *(*fit_to_term) (const char *, int, align_crt_t);
@@ -150,7 +151,8 @@ struct str_class
       /*I*/ char *(*create_key_for_filename) (const char *text, gboolean case_sen);
       /*I*/ int (*key_collate) (const char *t1, const char *t2, gboolean case_sen);
       /*I*/ void (*release_key) (char *key, gboolean case_sen);
-  /*I*/};
+    /* *INDENT-ON* */
+};
 
 /*** global variables defined in .c file *********************************************************/
 
@@ -245,7 +247,7 @@ estr_t str_translate_char (GIConv conv, const char *ch, size_t ch_size,
 /* test, if text is valid in terminal encoding
  * I
  */
-int str_is_valid_string (const char *text);
+gboolean str_is_valid_string (const char *text);
 
 /* test, if first char of ch is valid
  * size, how many bytes characters occupied, could be (size_t)(-1)
@@ -322,27 +324,27 @@ int str_cprev_noncomb_char (const char **text, const char *begin);
 /* if first characters in ch is space, tabulator  or new lines
  * I
  */
-int str_isspace (const char *ch);
+gboolean str_isspace (const char *ch);
 
 /* if first characters in ch is punctuation or symbol
  * I
  */
-int str_ispunct (const char *ch);
+gboolean str_ispunct (const char *ch);
 
 /* if first characters in ch is alphanum
  * I
  */
-int str_isalnum (const char *ch);
+gboolean str_isalnum (const char *ch);
 
 /* if first characters in ch is digit
  * I
  */
-int str_isdigit (const char *ch);
+gboolean str_isdigit (const char *ch);
 
 /* if first characters in ch is printable
  * I
  */
-int str_isprint (const char *ch);
+gboolean str_isprint (const char *ch);
 
 /* if first characters in ch is a combining mark (only in utf-8)
  * combining makrs are assumed to be zero width 
@@ -354,13 +356,13 @@ gboolean str_iscombiningmark (const char *ch);
  * decrase remain by size of returned characters
  * if out is not big enough, do nothing
  */
-int str_toupper (const char *ch, char **out, size_t * remain);
+gboolean str_toupper (const char *ch, char **out, size_t * remain);
 
 /* write upper from of fisrt characters in ch into out
  * decrase remain by size of returned characters
  * if out is not big enough, do nothing
  */
-int str_tolower (const char *ch, char **out, size_t * remain);
+gboolean str_tolower (const char *ch, char **out, size_t * remain);
 
 /* return length of text in characters
  * I

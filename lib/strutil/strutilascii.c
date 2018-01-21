@@ -57,11 +57,11 @@ str_ascii_insert_replace_char (GString * buffer)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_ascii_is_valid_string (const char *text)
 {
     (void) text;
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -116,7 +116,7 @@ str_ascii_cprev_noncomb_char (const char **text, const char *begin)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_ascii_isspace (const char *text)
 {
     return g_ascii_isspace ((gchar) text[0]);
@@ -124,7 +124,7 @@ str_ascii_isspace (const char *text)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_ascii_ispunct (const char *text)
 {
     return g_ascii_ispunct ((gchar) text[0]);
@@ -132,7 +132,7 @@ str_ascii_ispunct (const char *text)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_ascii_isalnum (const char *text)
 {
     return g_ascii_isalnum ((gchar) text[0]);
@@ -140,7 +140,7 @@ str_ascii_isalnum (const char *text)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_ascii_isdigit (const char *text)
 {
     return g_ascii_isdigit ((gchar) text[0]);
@@ -148,7 +148,7 @@ str_ascii_isdigit (const char *text)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_ascii_isprint (const char *text)
 {
     return g_ascii_isprint ((gchar) text[0]);
@@ -169,26 +169,26 @@ static int
 str_ascii_toupper (const char *text, char **out, size_t * remain)
 {
     if (*remain <= 1)
-        return 0;
+        return FALSE;
 
     (*out)[0] = (char) g_ascii_toupper ((gchar) text[0]);
     (*out)++;
     (*remain)--;
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_ascii_tolower (const char *text, char **out, size_t * remain)
 {
     if (*remain <= 1)
-        return 0;
+        return FALSE;
 
     (*out)[0] = (char) g_ascii_tolower ((gchar) text[0]);
     (*out)++;
     (*remain)--;
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
