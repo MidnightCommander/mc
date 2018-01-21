@@ -922,12 +922,9 @@ edit_replace_cmd__conv_to_input (char *str)
     GString *tmp;
 
     tmp = str_convert_to_input (str);
-    if (tmp != NULL)
-    {
-        if (tmp->len != 0)
-            return g_string_free (tmp, FALSE);
-        g_string_free (tmp, TRUE);
-    }
+    if (tmp->len != 0)
+        return g_string_free (tmp, FALSE);
+    g_string_free (tmp, TRUE);
 #endif
     return g_strdup (str);
 }

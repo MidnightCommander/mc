@@ -150,11 +150,8 @@ editcmd_dialog_search_show (WEdit * edit)
         GString *tmp;
 
         tmp = str_convert_to_input (search_text);
-        if (tmp != NULL)
-        {
-            g_free (search_text);
-            search_text = g_string_free (tmp, FALSE);
-        }
+        g_free (search_text);
+        search_text = g_string_free (tmp, FALSE);
     }
 #endif
 
