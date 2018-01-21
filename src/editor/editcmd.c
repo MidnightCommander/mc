@@ -1308,9 +1308,9 @@ edit_collect_completions (WEdit * edit, off_t word_start, gsize word_len,
 #ifdef HAVE_CHARSET
         {
             GString *recoded;
-            recoded = str_convert_to_display (temp->str);
 
-            if (recoded && recoded->len)
+            recoded = str_convert_to_display (temp->str);
+            if (recoded->len != 0)
                 g_string_assign (temp, recoded->str);
 
             g_string_free (recoded, TRUE);
