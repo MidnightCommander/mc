@@ -61,31 +61,27 @@ gchar *
 mc_search__recode_str (const char *str, gsize str_len,
                        const char *charset_from, const char *charset_to, gsize * bytes_written)
 {
-    gchar *ret;
-    gsize bytes_read;
-    GIConv conv;
+    gchar *ret = NULL;
 
-    if (charset_from == NULL || charset_to == NULL
-        || g_ascii_strcasecmp (charset_to, charset_from) == 0)
+    if (charset_from != NULL && charset_to != NULL
+        && g_ascii_strcasecmp (charset_to, charset_from) != 0)
     {
-        *bytes_written = str_len;
-        return g_strndup (str, str_len);
-    }
+        GIConv conv;
 
-    conv = g_iconv_open (charset_to, charset_from);
-    if (conv == INVALID_CONV)
-    {
-        *bytes_written = str_len;
-        return g_strndup (str, str_len);
-    }
+        conv = g_iconv_open (charset_to, charset_from);
+        if (conv != INVALID_CONV)
+        {
+            gsize bytes_read;
 
-    ret = g_convert_with_iconv (str, str_len, conv, &bytes_read, bytes_written, NULL);
-    g_iconv_close (conv);
+            ret = g_convert_with_iconv (str, str_len, conv, &bytes_read, bytes_written, NULL);
+            g_iconv_close (conv);
+        }
+    }
 
     if (ret == NULL)
     {
         *bytes_written = str_len;
-        return g_strndup (str, str_len);
+        ret = g_strndup (str, str_len);
     }
 
     return ret;
