@@ -96,6 +96,7 @@ What to do with this?
 
 #include "lib/global.h"
 #include "lib/util.h"
+#include "lib/strutil.h"        /* str_move() */
 #include "lib/mcconfig.h"
 
 #include "lib/tty/tty.h"        /* enable/disable interrupt key */
@@ -327,7 +328,7 @@ ftpfs_translate_path (struct vfs_class *me, struct vfs_s_super *super, const cha
         /* replace first occurrence of ":/" with ":" */
         p = strchr (ret, ':');
         if (p != NULL && IS_PATH_SEP (p[1]))
-            memmove (p + 1, p + 2, strlen (p + 2) + 1);
+            str_move (p + 1, p + 2);
 
         /* strip trailing "/." */
         p = strrchr (ret, PATH_SEP);

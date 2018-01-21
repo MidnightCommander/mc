@@ -887,11 +887,8 @@ try_complete_find_start_sign (try_complete_automation_state_t * state)
         /* don't substitute variable in \$ case */
         if (strutils_is_char_escaped (state->word, state->q))
         {
-            size_t qlen;
-
-            qlen = strlen (state->q);
             /* drop '\\' */
-            memmove (state->q - 1, state->q, qlen + 1);
+            str_move (state->q - 1, state->q);
             /* adjust flags */
             state->flags &= ~INPUT_COMPLETE_VARIABLES;
             state->q = NULL;
