@@ -106,12 +106,14 @@ load_codepages_list_from_file (GPtrArray ** list, const char *fname)
     {
         /* split string into id and cpname */
         char *p = buf;
-        size_t buflen = strlen (buf);
+        size_t buflen;
 
         if (*p == '\n' || *p == '\0' || *p == '#')
             continue;
 
-        if (buflen > 0 && buf[buflen - 1] == '\n')
+        buflen = strlen (buf);
+
+        if (buflen != 0 && buf[buflen - 1] == '\n')
             buf[buflen - 1] = '\0';
         while (*p != '\0' && !whitespace (*p))
             ++p;
@@ -181,11 +183,10 @@ translate_character (GIConv cd, char c)
     gsize bytes_read, bytes_written = 0;
     const char *ibuf = &c;
     char ch = UNKNCHAR;
-
     int ibuflen = 1;
 
     tmp_buff = g_convert_with_iconv (ibuf, ibuflen, cd, &bytes_read, &bytes_written, NULL);
-    if (tmp_buff)
+    if (tmp_buff != NULL)
         ch = tmp_buff[0];
     g_free (tmp_buff);
     return ch;
@@ -270,7 +271,9 @@ is_supported_encoding (const char *encoding)
 
     for (t = 0; t < codepages->len; t++)
     {
-        const char *id = ((codepage_desc *) g_ptr_array_index (codepages, t))->id;
+        const char *id;
+
+        id = ((codepage_desc *) g_ptr_array_index (codepages, t))->id;
         result |= (g_ascii_strncasecmp (encoding, id, strlen (id)) == 0);
     }
 
@@ -340,14 +343,9 @@ init_translation_table (int cpsource, int cpdisplay)
 void
 convert_to_display (char *str)
 {
-    if (!str)
-        return;
-
-    while (*str)
-    {
-        *str = conv_displ[(unsigned char) *str];
-        str++;
-    }
+    if (str != NULL)
+        for (; *str != '\0'; str++)
+            *str = conv_displ[(unsigned char) *str];
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -356,7 +354,6 @@ GString *
 str_convert_to_display (const char *str)
 {
     return str_nconvert_to_display (str, -1);
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -367,7 +364,7 @@ str_nconvert_to_display (const char *str, int len)
     GString *buff;
     GIConv conv;
 
-    if (!str)
+    if (str == NULL)
         return g_string_new ("");
 
     if (cp_display == cp_source)
@@ -386,14 +383,9 @@ str_nconvert_to_display (const char *str, int len)
 void
 convert_from_input (char *str)
 {
-    if (!str)
-        return;
-
-    while (*str)
-    {
-        *str = conv_input[(unsigned char) *str];
-        str++;
-    }
+    if (str != NULL)
+        for (; *str != '\0'; str++)
+            *str = conv_input[(unsigned char) *str];
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -412,7 +404,7 @@ str_nconvert_to_input (const char *str, int len)
     GString *buff;
     GIConv conv;
 
-    if (!str)
+    if (str == NULL)
         return g_string_new ("");
 
     if (cp_display == cp_source)
