@@ -962,7 +962,7 @@ edit_do_search (WEdit * edit)
 
     if (search_create_bookmark)
     {
-        int found = 0, books = 0;
+        gboolean found = FALSE;
         long l = 0, l_last = -1;
         long q = 0;
 
@@ -971,20 +971,19 @@ edit_do_search (WEdit * edit)
 
         while (mc_search_run (edit->search, (void *) &esm, q, edit->buffer.size, &len))
         {
-            if (found == 0)
+            if (!found)
                 edit->search_start = edit->search->normal_offset;
-            found++;
+            found = TRUE;
             l += edit_buffer_count_lines (&edit->buffer, q, edit->search->normal_offset);
             if (l != l_last)
             {
                 book_mark_insert (edit, l, BOOK_MARK_FOUND_COLOR);
-                books++;
             }
             l_last = l;
             q = edit->search->normal_offset + 1;
         }
 
-        if (found == 0)
+        if (!found)
             edit_error_dialog (_("Search"), _(STR_E_NOTFOUND));
         else
             edit_cursor_move (edit, edit->search_start - edit->buffer.curs1);
