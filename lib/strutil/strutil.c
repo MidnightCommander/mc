@@ -47,14 +47,14 @@ GIConv str_cnv_not_convert = INVALID_CONV;
 /*** file scope variables ************************************************************************/
 
 /* names, that are used for utf-8 */
-static const char *str_utf8_encodings[] = {
+static const char *const str_utf8_encodings[] = {
     "utf-8",
     "utf8",
     NULL
 };
 
 /* standard 8bit encodings, no wide or multibytes characters */
-static const char *str_8bit_encodings[] = {
+static const char *const str_8bit_encodings[] = {
     "cp-1251",
     "cp1251",
     "cp-1250",
@@ -219,7 +219,7 @@ _str_convert (GIConv coder, const char *string, int size, GString * buffer)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-str_test_encoding_class (const char *encoding, const char **table)
+str_test_encoding_class (const char *encoding, const char *const *table)
 {
     int result = 0;
 
