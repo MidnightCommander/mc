@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-11-25 19:18+0100\n"
+"POT-Creation-Date: 2018-02-03 18:28+0300\n"
 "PO-Revision-Date: 2017-09-19 18:39+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
@@ -656,6 +656,10 @@ msgstr "Trüki häälestuse suvandid"
 msgid "Print last working directory to specified file"
 msgstr "Väljasta viimane töökataloog määratud faili"
 
+#, fuzzy
+msgid "<file>"
+msgstr "fail"
+
 msgid "Enables subshell support (default)"
 msgstr "Lubab alamkesta toe (vaikimisi)"
 
@@ -668,11 +672,18 @@ msgstr "Logi FTP dialoog määratud faili"
 msgid "Set debug level"
 msgstr "Määra silumistase"
 
+msgid "<integer>"
+msgstr ""
+
 msgid "Launches the file viewer on a file"
 msgstr "Käivitab failivaaturi failile"
 
 msgid "Edit files"
 msgstr "Muuda faile"
+
+#, fuzzy
+msgid "<file> ..."
+msgstr "&Ava fail..."
 
 msgid "Forces xterm features"
 msgstr "Sunnib xterm'i tunnused"
@@ -712,6 +723,9 @@ msgstr "Nõuab värvide kasutamist"
 
 msgid "Specifies a color configuration"
 msgstr "Määrab värvide seadistuse"
+
+msgid "<string>"
+msgstr ""
 
 msgid "Show mc with specified skin"
 msgstr "Kuva mc määratud nahaga"
@@ -1822,6 +1836,17 @@ msgstr ""
 "\"%s\" õiguste muutmine nurjus\n"
 "%s"
 
+#, fuzzy
+msgid "&Ignore"
+msgstr "&Eira lukku"
+
+#, fuzzy
+msgid "Ignore &all"
+msgstr "&Eira lukku"
+
+msgid "&Retry"
+msgstr "&Proovi uuesti"
+
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
@@ -2512,11 +2537,32 @@ msgstr ""
 "Nimeviida \"%s\" loomine nurjus sihtkohas\n"
 "%s"
 
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
+msgstr ""
+"\"%s\"\n"
+"ja\n"
+"\"%s\"\n"
+"on üks ja see sama kataloog"
+
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr ""
+"\"%s\"\n"
+"ja\n"
+"\"%s\"\n"
+"on üks ja see sama fail"
+
 msgid "Ski&p all"
 msgstr "Jäta &kõik vahele"
-
-msgid "&Retry"
-msgstr "&Proovi uuesti"
 
 #, c-format
 msgid ""
@@ -2541,23 +2587,19 @@ msgstr "&Mitte ükski"
 
 #, c-format
 msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr ""
+"Faili \"%s\" eemaldamine nurjus\n"
+"%s"
+
+#, c-format
+msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
 "Faili \"%s\" info päring nurjus\n"
 "%s"
-
-#, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
-msgstr ""
-"\"%s\"\n"
-"ja\n"
-"\"%s\"\n"
-"on üks ja see sama fail"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2569,22 +2611,6 @@ msgid ""
 "%s"
 msgstr ""
 "Faili \"%s\" teisaldamine kataloogi \"%s\" nurjus\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-"Faili \"%s\" eemaldamine nurjus\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-"Faili \"%s\" kustutamine nurjus\n"
 "%s"
 
 #, c-format
@@ -2602,6 +2628,25 @@ msgid ""
 msgstr ""
 "Kataloogi \"%s\" ülekirjutamine nurjus\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
+msgstr ""
+"Faili \"%s\" ülekirjutamine nurjus\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"Kataloogi \"%s\" teisaldamine kataloogi \"%s\" nurjus\n"
+"%s"
+
+msgid "Cannot operate on \"..\"!"
+msgstr "Kataloogi \"..\" kasutamine on keelatud!"
 
 #, c-format
 msgid ""
@@ -2768,39 +2813,8 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same directory"
-msgstr ""
-"\"%s\"\n"
-"ja\n"
-"\"%s\"\n"
-"on üks ja see sama kataloog"
-
-#, c-format
-msgid ""
-"Cannot overwrite file \"%s\"\n"
-"%s"
-msgstr ""
-"Faili \"%s\" ülekirjutamine nurjus\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"Kataloogi \"%s\" teisaldamine kataloogi \"%s\" nurjus\n"
-"%s"
-
-#, c-format
 msgid "Directories: %zu, total size: %s"
 msgstr "Katalooge: %zu, kogumaht: %s"
-
-msgid "Cannot operate on \"..\"!"
-msgstr "Kataloogi \"..\" kasutamine on keelatud!"
 
 msgid "Sorry, I could not put the job in background"
 msgstr "Vabandust, töö saatmine taustale nurjus"
@@ -4214,6 +4228,10 @@ msgstr "sftp: nurjus SSH ühenduse loomine"
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: faili lugemiseks puuduvad faili käsitleja andmed"
 
+#, fuzzy, c-format
+msgid "sftp: socket error: %s"
+msgstr "ftpfs: katkestamise viga: %s"
+
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
 msgstr "sftp: (Ctrl+G katkestab) Loendamine... %s"
@@ -4461,3 +4479,10 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
+
+#~ msgid ""
+#~ "Cannot delete file \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Faili \"%s\" kustutamine nurjus\n"
+#~ "%s"

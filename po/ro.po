@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-11-25 19:18+0100\n"
+"POT-Creation-Date: 2018-02-03 18:28+0300\n"
 "PO-Revision-Date: 2017-09-19 09:10+0000\n"
 "Last-Translator: Arthur Țițeică <arthur.titeica@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
@@ -654,6 +654,10 @@ msgstr "Afișează opțiunile de configurare"
 msgid "Print last working directory to specified file"
 msgstr "Arată ultimul dosar curent în fișierul specificat"
 
+#, fuzzy
+msgid "<file>"
+msgstr "fișierul"
+
 msgid "Enables subshell support (default)"
 msgstr "Activează suportul pentru subshell (implicit)"
 
@@ -666,11 +670,18 @@ msgstr "Înregistrează dialogul ftp în fișierul specificat"
 msgid "Set debug level"
 msgstr "Nivelul de depanare"
 
+msgid "<integer>"
+msgstr ""
+
 msgid "Launches the file viewer on a file"
 msgstr "Lansează vizualizatorul pe un fișier"
 
 msgid "Edit files"
 msgstr "Editează fișiere"
+
+#, fuzzy
+msgid "<file> ..."
+msgstr "D&eschide fișier..."
 
 msgid "Forces xterm features"
 msgstr "Forțează facilitățile xterm"
@@ -712,6 +723,9 @@ msgstr "Cerere de rulare în culori"
 
 msgid "Specifies a color configuration"
 msgstr "Specifică o configurație de culori"
+
+msgid "<string>"
+msgstr ""
 
 msgid "Show mc with specified skin"
 msgstr "Arată mc cu tematica specificată"
@@ -1796,6 +1810,17 @@ msgstr ""
 "Nu se poate aplica chmod \"%s\"\n"
 "%s"
 
+#, fuzzy
+msgid "&Ignore"
+msgstr "&Ignoră blocarea"
+
+#, fuzzy
+msgid "Ignore &all"
+msgstr "&Ignoră blocarea"
+
+msgid "&Retry"
+msgstr "&Reîncearcă"
+
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
@@ -2487,11 +2512,32 @@ msgstr ""
 "Nu se poate crea legătura destinație \"%s\"\n"
 "%s"
 
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
+msgstr ""
+"\"%s\"\n"
+"și\n"
+"\"%s\"\n"
+"sunt în același dosar"
+
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr ""
+"\"%s\"\n"
+"și\n"
+"\"%s\"\n"
+"sunt același fișier"
+
 msgid "Ski&p all"
 msgstr "Sări t&ot"
-
-msgid "&Retry"
-msgstr "&Reîncearcă"
 
 #, c-format
 msgid ""
@@ -2516,23 +2562,19 @@ msgstr "&Nimic"
 
 #, c-format
 msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr ""
+"Nu se poate șterge fișierul \"%s\"\n"
+"%s"
+
+#, c-format
+msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
 "Nu se poate găsi fișierul \"%s\"\n"
 "%s"
-
-#, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
-msgstr ""
-"\"%s\"\n"
-"și\n"
-"\"%s\"\n"
-"sunt același fișier"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2544,22 +2586,6 @@ msgid ""
 "%s"
 msgstr ""
 "Nu se poate muta fișierul \"%s\" în \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-"Nu se poate șterge fișierul \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-"Nu se poate șterge fișierul \"%s\"\n"
 "%s"
 
 #, c-format
@@ -2577,6 +2603,25 @@ msgid ""
 msgstr ""
 "Nu se poate suprascrie dosarul \"%s\"\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
+msgstr ""
+"Nu se poate suprascrie fișierul \"%s\"\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"Nu se poate muta dosarul \"%s\" în \"%s\"\n"
+"%s"
+
+msgid "Cannot operate on \"..\"!"
+msgstr "Nu se poate acționa asupra \"..\"!"
 
 #, c-format
 msgid ""
@@ -2741,39 +2786,8 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same directory"
-msgstr ""
-"\"%s\"\n"
-"și\n"
-"\"%s\"\n"
-"sunt în același dosar"
-
-#, c-format
-msgid ""
-"Cannot overwrite file \"%s\"\n"
-"%s"
-msgstr ""
-"Nu se poate suprascrie fișierul \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"Nu se poate muta dosarul \"%s\" în \"%s\"\n"
-"%s"
-
-#, c-format
 msgid "Directories: %zu, total size: %s"
 msgstr "Directoare: %zu, mărime totală: %s"
-
-msgid "Cannot operate on \"..\"!"
-msgstr "Nu se poate acționa asupra \"..\"!"
 
 msgid "Sorry, I could not put the job in background"
 msgstr "Scuze, nu am putut pune sarcina în fundal"
@@ -4194,6 +4208,10 @@ msgstr ""
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Nu există date de manipulare a citirii fișierului"
 
+#, fuzzy, c-format
+msgid "sftp: socket error: %s"
+msgstr "ftpfs: eroare la abandon: %s"
+
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
 msgstr "sftp: (Ctrl-G întrerupe) Afișare... %s"
@@ -4439,3 +4457,10 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
+
+#~ msgid ""
+#~ "Cannot delete file \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nu se poate șterge fișierul \"%s\"\n"
+#~ "%s"

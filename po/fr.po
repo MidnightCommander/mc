@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-11-25 19:18+0100\n"
+"POT-Creation-Date: 2018-02-03 18:28+0300\n"
 "PO-Revision-Date: 2017-09-23 18:02+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/mc/mc/language/fr/)\n"
@@ -670,6 +670,10 @@ msgstr "Imprimer les options de configuration"
 msgid "Print last working directory to specified file"
 msgstr "Écrit le dernier répertoire courant dans le fichier donné"
 
+#, fuzzy
+msgid "<file>"
+msgstr "fichier"
+
 msgid "Enables subshell support (default)"
 msgstr "Active le support des sous-shells (par défaut)"
 
@@ -682,11 +686,18 @@ msgstr "Consigne les échanges FTP dans le fichier spécifié"
 msgid "Set debug level"
 msgstr "Définit le niveau de débogage"
 
+msgid "<integer>"
+msgstr ""
+
 msgid "Launches the file viewer on a file"
 msgstr "Lance la visionneuse sur un fichier"
 
 msgid "Edit files"
 msgstr "Éditer les fichiers"
+
+#, fuzzy
+msgid "<file> ..."
+msgstr "&Ouvrir un fichier..."
 
 msgid "Forces xterm features"
 msgstr "Force un attribut xterm"
@@ -728,6 +739,9 @@ msgstr "Demande à fonctionner en mode couleur"
 
 msgid "Specifies a color configuration"
 msgstr "Spécifie une configuration de couleurs"
+
+msgid "<string>"
+msgstr ""
 
 msgid "Show mc with specified skin"
 msgstr "Afficher mc avec le thème donné"
@@ -1840,6 +1854,17 @@ msgstr ""
 "Ne peut changer les permissions de « %s »\n"
 "%s"
 
+#, fuzzy
+msgid "&Ignore"
+msgstr "&Ignorer le verrou"
+
+#, fuzzy
+msgid "Ignore &all"
+msgstr "&Ignorer le verrou"
+
+msgid "&Retry"
+msgstr "&Réessayer"
+
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
@@ -2532,11 +2557,32 @@ msgstr ""
 "Impossible de créer le lien symbolique cible « %s »\n"
 "%s"
 
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
+msgstr ""
+"« %s »\n"
+"et\n"
+"« %s »\n"
+"sont les mêmes répertoires"
+
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr ""
+"« %s »\n"
+"et\n"
+"« %s »\n"
+"sont identiques"
+
 msgid "Ski&p all"
 msgstr "Sauter &tout"
-
-msgid "&Retry"
-msgstr "&Réessayer"
 
 #, c-format
 msgid ""
@@ -2561,23 +2607,19 @@ msgstr "&Aucun"
 
 #, c-format
 msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr ""
+"Impossible d'effacer le fichier « %s »\n"
+"%s"
+
+#, c-format
+msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
 "Impossible d'obtenir les caractéristiques du fichier « %s »\n"
 "%s"
-
-#, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
-msgstr ""
-"« %s »\n"
-"et\n"
-"« %s »\n"
-"sont identiques"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2589,22 +2631,6 @@ msgid ""
 "%s"
 msgstr ""
 "Impossible de déplacer le fichier « %s » vers « %s »\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-"Impossible d'effacer le fichier « %s »\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-"Impossible d'effacer le fichier « %s »\n"
 "%s"
 
 #, c-format
@@ -2622,6 +2648,25 @@ msgid ""
 msgstr ""
 "Impossible d'écraser le répertoire « %s »\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
+msgstr ""
+"Impossible d'écraser le fichier « %s »\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"Impossible de déplacer le répertoire de « %s » vers « %s »\n"
+"%s"
+
+msgid "Cannot operate on \"..\"!"
+msgstr "Impossible de travailler avec « .. » !"
 
 #, c-format
 msgid ""
@@ -2788,39 +2833,8 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same directory"
-msgstr ""
-"« %s »\n"
-"et\n"
-"« %s »\n"
-"sont les mêmes répertoires"
-
-#, c-format
-msgid ""
-"Cannot overwrite file \"%s\"\n"
-"%s"
-msgstr ""
-"Impossible d'écraser le fichier « %s »\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"Impossible de déplacer le répertoire de « %s » vers « %s »\n"
-"%s"
-
-#, c-format
 msgid "Directories: %zu, total size: %s"
 msgstr "Répertoires : %zu, taille totale : %s"
-
-msgid "Cannot operate on \"..\"!"
-msgstr "Impossible de travailler avec « .. » !"
 
 msgid "Sorry, I could not put the job in background"
 msgstr "Impossible de mettre le processus en arrière-plan"
@@ -4241,6 +4255,10 @@ msgid "sftp: No file handler data present for reading file"
 msgstr ""
 "sftp : ne peut lire le fichier, aucune association de fichiers disponible"
 
+#, fuzzy, c-format
+msgid "sftp: socket error: %s"
+msgstr "ftpfs : erreur d'abandon : %s"
+
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
 msgstr "sftp : (Ctrl-G break) Listing... %s"
@@ -4488,3 +4506,10 @@ msgstr "Continuer à partir du début ?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Impossible de récupérer localement le fichier /ftp://some.host/editme.txt"
+
+#~ msgid ""
+#~ "Cannot delete file \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Impossible d'effacer le fichier « %s »\n"
+#~ "%s"

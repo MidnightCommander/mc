@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-11-25 19:18+0100\n"
+"POT-Creation-Date: 2018-02-03 18:28+0300\n"
 "PO-Revision-Date: 2017-09-19 09:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/mc/mc/language/be/)\n"
@@ -651,6 +651,10 @@ msgstr "Надрукаваць можнасьці настаўленьняў"
 msgid "Print last working directory to specified file"
 msgstr "Запісаць назву апошняга працоўнага каталёґу ў вызначаны файл"
 
+#, fuzzy
+msgid "<file>"
+msgstr "файл"
+
 msgid "Enables subshell support (default)"
 msgstr "Падтрымваць убудаваную абалонку (перадвызначана)"
 
@@ -663,11 +667,18 @@ msgstr "Запісваць дыялёґ па FTP у вызначаны файл"
 msgid "Set debug level"
 msgstr "Вызначыць узровень высочваньня хібаў"
 
+msgid "<integer>"
+msgstr ""
+
 msgid "Launches the file viewer on a file"
 msgstr "Прагледзець файл"
 
 msgid "Edit files"
 msgstr "Рэдаґаваць файлы"
+
+#, fuzzy
+msgid "<file> ..."
+msgstr "&Адчыніць файл…"
 
 msgid "Forces xterm features"
 msgstr "Ужываць магчымасьці «xterm»"
@@ -708,6 +719,9 @@ msgstr "Запусьціць у каляровым аздабленьні"
 
 msgid "Specifies a color configuration"
 msgstr "Вызначае настаўленьні колераў"
+
+msgid "<string>"
+msgstr ""
 
 msgid "Show mc with specified skin"
 msgstr "Паказвае праґраму ў вызначаным аздабленьні"
@@ -1806,6 +1820,17 @@ msgstr ""
 "Немагчыма зьмяніць дазволы «%s»\n"
 "%s"
 
+#, fuzzy
+msgid "&Ignore"
+msgstr "&Не зважаць"
+
+#, fuzzy
+msgid "Ignore &all"
+msgstr "&Не зважаць"
+
+msgid "&Retry"
+msgstr "П&аўтарыць"
+
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
@@ -2497,11 +2522,32 @@ msgstr ""
 "Немагчыма стварыць прызначаную спасылку «%s»\n"
 "%s"
 
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
+msgstr ""
+"«%s»\n"
+"і\n"
+"«%s»\n"
+"ёсьць адным каталёґам"
+
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr ""
+"«%s»\n"
+"і\n"
+"«%s»\n"
+"ёсьць адным файлам"
+
 msgid "Ski&p all"
 msgstr "Прапусьціць &усё"
-
-msgid "&Retry"
-msgstr "П&аўтарыць"
 
 #, c-format
 msgid ""
@@ -2526,23 +2572,19 @@ msgstr "Ні&чога"
 
 #, c-format
 msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr ""
+"Немагчыма выдаліць файл «%s»\n"
+"%s"
+
+#, c-format
+msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
 "Немагчыма атрымаць уласьцівасьці файла «%s»\n"
 "%s"
-
-#, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
-msgstr ""
-"«%s»\n"
-"і\n"
-"«%s»\n"
-"ёсьць адным файлам"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2554,22 +2596,6 @@ msgid ""
 "%s"
 msgstr ""
 "Немагчыма перамясьціць файл «%s» у «%s»\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-"Немагчыма выдаліць файл «%s»\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-"Немагчыма выдаліць файл «%s»\n"
 "%s"
 
 #, c-format
@@ -2587,6 +2613,25 @@ msgid ""
 msgstr ""
 "Немагчыма перазапісаць каталёґ «%s»\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
+msgstr ""
+"Немагчыма перазапісаць файл «%s»\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"Немагчыма перамясьціць каталёґ «%s» у «%s»\n"
+"%s"
+
+msgid "Cannot operate on \"..\"!"
+msgstr "Немагчыма выканаць на «..»!"
 
 #, c-format
 msgid ""
@@ -2749,39 +2794,8 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same directory"
-msgstr ""
-"«%s»\n"
-"і\n"
-"«%s»\n"
-"ёсьць адным каталёґам"
-
-#, c-format
-msgid ""
-"Cannot overwrite file \"%s\"\n"
-"%s"
-msgstr ""
-"Немагчыма перазапісаць файл «%s»\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"Немагчыма перамясьціць каталёґ «%s» у «%s»\n"
-"%s"
-
-#, c-format
 msgid "Directories: %zu, total size: %s"
 msgstr ""
-
-msgid "Cannot operate on \"..\"!"
-msgstr "Немагчыма выканаць на «..»!"
 
 msgid "Sorry, I could not put the job in background"
 msgstr "Гэта нельга рабіць на тле"
@@ -4200,6 +4214,10 @@ msgstr ""
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: няма апрацоўніка, каб прачытаць файл"
 
+#, fuzzy, c-format
+msgid "sftp: socket error: %s"
+msgstr "ftpfs: не ўдалося перапыніць: %s"
+
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
 msgstr "sftp: чытаецца сьпіс (спыніць — «Ctrl-G»)… %s"
@@ -4443,3 +4461,10 @@ msgstr "Ці працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid ""
+#~ "Cannot delete file \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Немагчыма выдаліць файл «%s»\n"
+#~ "%s"

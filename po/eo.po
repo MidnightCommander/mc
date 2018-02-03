@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-11-25 19:18+0100\n"
+"POT-Creation-Date: 2018-02-03 18:28+0300\n"
 "PO-Revision-Date: 2017-09-19 09:16+0000\n"
 "Last-Translator: Keith Bowes <zooplah@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
@@ -659,6 +659,10 @@ msgstr "Eligi muntajn agordaĵojn"
 msgid "Print last working directory to specified file"
 msgstr "Eligi lastan labordosierujon al specifan dosieron"
 
+#, fuzzy
+msgid "<file>"
+msgstr "dosieron"
+
 msgid "Enables subshell support (default)"
 msgstr "Aktivigi subŝelon (apriore)"
 
@@ -671,11 +675,18 @@ msgstr "Protokoli FTP-dialogon al specifa dosiero"
 msgid "Set debug level"
 msgstr "Specifi senerarigan nivelon"
 
+msgid "<integer>"
+msgstr ""
+
 msgid "Launches the file viewer on a file"
 msgstr "Plenumigi la dosiero-legilon je la dosiero"
 
 msgid "Edit files"
 msgstr "Redakti dosierojn"
+
+#, fuzzy
+msgid "<file> ..."
+msgstr "&Malfermi dosieron..."
 
 msgid "Forces xterm features"
 msgstr "Devigi xterm-trajtojn"
@@ -715,6 +726,9 @@ msgstr "Peti plenumiĝi bunte"
 
 msgid "Specifies a color configuration"
 msgstr "Specifi koloran agordon"
+
+msgid "<string>"
+msgstr ""
 
 msgid "Show mc with specified skin"
 msgstr "Montri kun specifa etoso"
@@ -1830,6 +1844,17 @@ msgstr ""
 "Ne eblas ŝanĝi permesojn de \"%s\"\n"
 "%s"
 
+#, fuzzy
+msgid "&Ignore"
+msgstr "&Ignori fiksilon"
+
+#, fuzzy
+msgid "Ignore &all"
+msgstr "&Ignori fiksilon"
+
+msgid "&Retry"
+msgstr "&Reprovi"
+
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
@@ -2525,11 +2550,32 @@ msgstr ""
 "Ne eblas krei celan molan ligilon \"%s\"\n"
 "%s"
 
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
+msgstr ""
+"\"%s\"\n"
+"kaj\n"
+"\"%s\"\n"
+"estas la sama dosierujo"
+
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr ""
+"\"%s\"\n"
+"kaj\n"
+"\"%s\"\n"
+"estas la sama dosiero"
+
 msgid "Ski&p all"
 msgstr "Preter&lasi ĉion"
-
-msgid "&Retry"
-msgstr "&Reprovi"
 
 #, c-format
 msgid ""
@@ -2554,23 +2600,19 @@ msgstr "Neni&o"
 
 #, c-format
 msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr ""
+"Ne eblas forigi dosieron \"%s\"\n"
+"%s"
+
+#, c-format
+msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
 "Ne eblas trovi dosieron \"%s\n"
 "%s"
-
-#, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
-msgstr ""
-"\"%s\"\n"
-"kaj\n"
-"\"%s\"\n"
-"estas la sama dosiero"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2582,22 +2624,6 @@ msgid ""
 "%s"
 msgstr ""
 "Ne eblas movi dosieron \"%s\" al \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-"Ne eblas forigi dosieron \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-"Ne eblas forigi dosieron \"%s\"\n"
 "%s"
 
 #, c-format
@@ -2615,6 +2641,25 @@ msgid ""
 msgstr ""
 "Ne eblas anstataŭigi dosierujon \"%s\"\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
+msgstr ""
+"Ne eblas anstataŭigi dosieron \"%s\"\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"Ne eblas movi dosierujon \"%s\" al \"%s\"\n"
+"%s"
+
+msgid "Cannot operate on \"..\"!"
+msgstr "Ne eblas operacii je \"..\"!"
 
 #, c-format
 msgid ""
@@ -2781,39 +2826,8 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same directory"
-msgstr ""
-"\"%s\"\n"
-"kaj\n"
-"\"%s\"\n"
-"estas la sama dosierujo"
-
-#, c-format
-msgid ""
-"Cannot overwrite file \"%s\"\n"
-"%s"
-msgstr ""
-"Ne eblas anstataŭigi dosieron \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"Ne eblas movi dosierujon \"%s\" al \"%s\"\n"
-"%s"
-
-#, c-format
 msgid "Directories: %zu, total size: %s"
 msgstr "Dosierujoj: %zu, ĉioma grando: %s"
-
-msgid "Cannot operate on \"..\"!"
-msgstr "Ne eblas operacii je \"..\"!"
 
 msgid "Sorry, I could not put the job in background"
 msgstr "Bedaŭrinde mi ne povis meti la taskon en la fonon"
@@ -4228,6 +4242,10 @@ msgstr "sftp: Malsukcesis starigi SSH-seancon"
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Neniu dosiertraktila datumo ĉeestas por legi dosieron"
 
+#, fuzzy, c-format
+msgid "sftp: socket error: %s"
+msgstr "ftpfs: ĉesiga eraro: %s"
+
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
 msgstr "sftp: (Stir-G rompi) Listo... %s"
@@ -4475,3 +4493,10 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
+
+#~ msgid ""
+#~ "Cannot delete file \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Ne eblas forigi dosieron \"%s\"\n"
+#~ "%s"

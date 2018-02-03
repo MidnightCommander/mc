@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-11-25 19:18+0100\n"
+"POT-Creation-Date: 2018-02-03 18:28+0300\n"
 "PO-Revision-Date: 2017-09-19 09:10+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
@@ -670,6 +670,10 @@ msgstr "Imprimeix les opcions de configuració"
 msgid "Print last working directory to specified file"
 msgstr "Imprimeix l'últim directori de treball cap al fitxer especificat"
 
+#, fuzzy
+msgid "<file>"
+msgstr "fitxer"
+
 msgid "Enables subshell support (default)"
 msgstr "Habilita el suport de subintèrprets (per defecte)"
 
@@ -682,11 +686,18 @@ msgstr "Enregistra el diàleg FTP al fitxer especificat"
 msgid "Set debug level"
 msgstr "Determina el nivell de depuració"
 
+msgid "<integer>"
+msgstr ""
+
 msgid "Launches the file viewer on a file"
 msgstr "Llança el visor de fitxers amb un fitxer"
 
 msgid "Edit files"
 msgstr "Edita els fitxers"
+
+#, fuzzy
+msgid "<file> ..."
+msgstr "&Obre el fitxer..."
 
 msgid "Forces xterm features"
 msgstr "Força l'ús de les característiques de l'xterm"
@@ -728,6 +739,9 @@ msgstr "Demana que s'empri el mode en color"
 
 msgid "Specifies a color configuration"
 msgstr "Especifica una configuració de color"
+
+msgid "<string>"
+msgstr ""
 
 msgid "Show mc with specified skin"
 msgstr "Mostra l'«mc» amb el tema especificat"
@@ -1841,6 +1855,17 @@ msgstr ""
 "No s'ha pogut fer chmod a «%s»\n"
 "%s"
 
+#, fuzzy
+msgid "&Ignore"
+msgstr "&Ignora el bloqueig"
+
+#, fuzzy
+msgid "Ignore &all"
+msgstr "&Ignora el bloqueig"
+
+msgid "&Retry"
+msgstr "&Reintenta"
+
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
@@ -2537,11 +2562,32 @@ msgstr ""
 "No s'ha pogut crear l'enllaç simbòlic de destinació «%s»\n"
 "%s"
 
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
+msgstr ""
+"«%s»\n"
+"i\n"
+"«%s»\n"
+"són el mateix directori"
+
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr ""
+"«%s»\n"
+"i\n"
+"«%s»\n"
+"són el mateix fitxer"
+
 msgid "Ski&p all"
 msgstr "Saltar &tot"
-
-msgid "&Retry"
-msgstr "&Reintenta"
 
 #, c-format
 msgid ""
@@ -2566,23 +2612,19 @@ msgstr "Ca&p"
 
 #, c-format
 msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr ""
+"No s'ha pogut eliminar el fitxer «%s»\n"
+"%s"
+
+#, c-format
+msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
 "No s'ha pogut fer estat al fitxer «%s»\n"
 "%s"
-
-#, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
-msgstr ""
-"«%s»\n"
-"i\n"
-"«%s»\n"
-"són el mateix fitxer"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2594,22 +2636,6 @@ msgid ""
 "%s"
 msgstr ""
 "No s'ha pogut moure el fitxer «%s» cap a «%s»\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-"No s'ha pogut eliminar el fitxer «%s»\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-"No s'ha pogut suprimir el fitxer «%s»\n"
 "%s"
 
 #, c-format
@@ -2627,6 +2653,25 @@ msgid ""
 msgstr ""
 "No s'ha pogut sobreescriure el directori «%s»\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
+msgstr ""
+"No s'ha pogut sobreescriure el fitxer «%s»\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"No s'ha pogut moure el directori «%s» a «%s»\n"
+"%s"
+
+msgid "Cannot operate on \"..\"!"
+msgstr "No es pot operar a «..»!"
 
 #, c-format
 msgid ""
@@ -2793,39 +2838,8 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same directory"
-msgstr ""
-"«%s»\n"
-"i\n"
-"«%s»\n"
-"són el mateix directori"
-
-#, c-format
-msgid ""
-"Cannot overwrite file \"%s\"\n"
-"%s"
-msgstr ""
-"No s'ha pogut sobreescriure el fitxer «%s»\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"No s'ha pogut moure el directori «%s» a «%s»\n"
-"%s"
-
-#, c-format
 msgid "Directories: %zu, total size: %s"
 msgstr "Directoris: %zu, mida total: %s"
-
-msgid "Cannot operate on \"..\"!"
-msgstr "No es pot operar a «..»!"
 
 msgid "Sorry, I could not put the job in background"
 msgstr "Ho sentim, no hem pogut posar la tasca en segon pla"
@@ -4247,6 +4261,10 @@ msgid "sftp: No file handler data present for reading file"
 msgstr ""
 "sftp: no hi ha dades presents del gestor del fitxer per a llegir el fitxer"
 
+#, fuzzy, c-format
+msgid "sftp: socket error: %s"
+msgstr "ftpfs: s'ha produït un error en interrompre: %s"
+
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
 msgstr "sftp: (Ctrl-G per a cancel·lar) s'està llistant... %s"
@@ -4496,3 +4514,10 @@ msgstr "Continuo des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
+
+#~ msgid ""
+#~ "Cannot delete file \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "No s'ha pogut suprimir el fitxer «%s»\n"
+#~ "%s"

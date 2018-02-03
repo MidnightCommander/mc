@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-11-25 19:18+0100\n"
+"POT-Creation-Date: 2018-02-03 18:28+0300\n"
 "PO-Revision-Date: 2017-09-19 09:10+0000\n"
 "Last-Translator: Andrius Burokas\n"
 "Language-Team: Lithuanian (http://www.transifex.com/mc/mc/language/lt/)\n"
@@ -649,6 +649,10 @@ msgstr "Rodyti 'configure' parinktis"
 msgid "Print last working directory to specified file"
 msgstr "Įrašo paskutinį esamą aplanką į nurodytą failą"
 
+#, fuzzy
+msgid "<file>"
+msgstr "failą"
+
 msgid "Enables subshell support (default)"
 msgstr "Įjungia „subshell“ palaikymą (nenurodžius kitaip)"
 
@@ -661,11 +665,18 @@ msgstr "Veda FTP dialogo žurnalą į nurodytą failą"
 msgid "Set debug level"
 msgstr "Nurodo „debug“ lygį"
 
+msgid "<integer>"
+msgstr ""
+
 msgid "Launches the file viewer on a file"
 msgstr "Parodo failo turinį"
 
 msgid "Edit files"
 msgstr "Redaguoti failus"
+
+#, fuzzy
+msgid "<file> ..."
+msgstr "At&verti failą..."
 
 msgid "Forces xterm features"
 msgstr "Priverčia naudoti „xterm“ galimybes"
@@ -705,6 +716,9 @@ msgstr "Paleidžia spalvotu režimu"
 
 msgid "Specifies a color configuration"
 msgstr "Nurodo spalvų konfigūraciją"
+
+msgid "<string>"
+msgstr ""
 
 msgid "Show mc with specified skin"
 msgstr ""
@@ -1759,6 +1773,17 @@ msgid ""
 "%s"
 msgstr ""
 
+#, fuzzy
+msgid "&Ignore"
+msgstr "&Ignoruoti užraktą"
+
+#, fuzzy
+msgid "Ignore &all"
+msgstr "&Ignoruoti užraktą"
+
+msgid "&Retry"
+msgstr "&Iš naujo"
+
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
@@ -2433,11 +2458,28 @@ msgid ""
 "%s"
 msgstr ""
 
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
+msgstr ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"yra tie patys aplankai"
+
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr ""
+
 msgid "Ski&p all"
 msgstr "Praleisti viską"
-
-msgid "&Retry"
-msgstr "&Iš naujo"
 
 #, c-format
 msgid ""
@@ -2462,16 +2504,16 @@ msgstr "&Joks"
 
 #, c-format
 msgid ""
-"Cannot stat file \"%s\"\n"
+"Cannot remove file \"%s\"\n"
 "%s"
 msgstr ""
+"Nepavyko pašalinti failo \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
+"Cannot stat file \"%s\"\n"
+"%s"
 msgstr ""
 
 #, c-format
@@ -2484,22 +2526,6 @@ msgid ""
 "%s"
 msgstr ""
 "Nepavyko perkelti failo \"%s\" į \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-"Nepavyko pašalinti failo \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-"Nepavyko pašalinti failo \"%s\"\n"
 "%s"
 
 #, c-format
@@ -2517,6 +2543,25 @@ msgid ""
 msgstr ""
 "Nepavyko perrašyti aplanko \"%s\"\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
+msgstr ""
+"Nepavyko perrašyti failo \"%s\"\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"Nepavyko perkelti aplanko \"%s\" į \"%s\"\n"
+"%s"
+
+msgid "Cannot operate on \"..\"!"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2647,38 +2692,7 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same directory"
-msgstr ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"yra tie patys aplankai"
-
-#, c-format
-msgid ""
-"Cannot overwrite file \"%s\"\n"
-"%s"
-msgstr ""
-"Nepavyko perrašyti failo \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"Nepavyko perkelti aplanko \"%s\" į \"%s\"\n"
-"%s"
-
-#, c-format
 msgid "Directories: %zu, total size: %s"
-msgstr ""
-
-msgid "Cannot operate on \"..\"!"
 msgstr ""
 
 msgid "Sorry, I could not put the job in background"
@@ -4081,6 +4095,10 @@ msgstr ""
 msgid "sftp: No file handler data present for reading file"
 msgstr ""
 
+#, fuzzy, c-format
+msgid "sftp: socket error: %s"
+msgstr "ftpfs: nutraukti nepavyko: %s"
+
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
 msgstr ""
@@ -4314,3 +4332,10 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid ""
+#~ "Cannot delete file \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nepavyko pašalinti failo \"%s\"\n"
+#~ "%s"

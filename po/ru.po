@@ -3,29 +3,24 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# aborodin <aborodin@vmail.ru>, 2011
-# AlexL <loginov.alex.valer@gmail.com>, 2015-2017
 # Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# and Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# aborodin <aborodin@vmail.ru>, 2009-2012
-# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999,2014
-# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
-# Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
 # Evgeny Bulgakov <bgav@netvision.net.il>, 1999
-# Ilia Maslakov <il.smind@gmail.com>, 2009
-# Mr GreyWolf, 2016
-# Mr.GreyWolf, 2016
-# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
 # Sergey Panov <sipan@mit.edu>, 1999
-# Simple88, 2016
-# Simple88, 2016
-# Slava Zanko <slavazanko@gmail.com>, 2009,2011
+# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999, 2014
 # Valek Filippov <frob@df.ru>, 2000
+# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
+# Andrew Borodin <aborodin@vmail.ru>, 2009-2018
+# Slava Zanko <slavazanko@gmail.com>, 2009,2011
+# Ilia Maslakov <il.smind@gmail.com>, 2009
+# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
+# Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
+# AlexL <loginov.alex.valer@gmail.com>, 2015-2017
+# Simple88, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-11-25 19:18+0100\n"
+"POT-Creation-Date: 2018-02-03 18:28+0300\n"
 "PO-Revision-Date: 2017-09-19 09:10+0000\n"
 "Last-Translator: aborodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
@@ -674,6 +669,9 @@ msgstr "Распечатать параметры конфигурации"
 msgid "Print last working directory to specified file"
 msgstr "Записать последний рабочий каталог в указанный файл"
 
+msgid "<file>"
+msgstr "<файл>"
+
 msgid "Enables subshell support (default)"
 msgstr "Включить поддержку встроенной командной оболочки (по умолчанию)"
 
@@ -686,11 +684,17 @@ msgstr "Записывать диалог с FTP в заданный файл"
 msgid "Set debug level"
 msgstr "Установить уровень отладки"
 
+msgid "<integer>"
+msgstr "<целое число>"
+
 msgid "Launches the file viewer on a file"
 msgstr "Просматривать файл"
 
 msgid "Edit files"
 msgstr "Редактировать файлы"
+
+msgid "<file> ..."
+msgstr "<файл> ..."
 
 msgid "Forces xterm features"
 msgstr "Подразумевать свойства xterm"
@@ -731,6 +735,9 @@ msgstr "Принудительно установить цветной режи�
 
 msgid "Specifies a color configuration"
 msgstr "Определить настройки цветов"
+
+msgid "<string>"
+msgstr "<строка>"
 
 msgid "Show mc with specified skin"
 msgstr "Отобразить mc с указанным скином"
@@ -1846,6 +1853,15 @@ msgstr ""
 "Невозможно изменить режим доступа к \"%s\"\n"
 "%s"
 
+msgid "&Ignore"
+msgstr "&Игнорировать"
+
+msgid "Ignore &all"
+msgstr "Игнорировать в&сё"
+
+msgid "&Retry"
+msgstr "По&вторить"
+
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
@@ -2541,11 +2557,32 @@ msgstr ""
 "Невозможно создать целевую симв. ссылку \"%s\"\n"
 "%s"
 
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
+msgstr ""
+"\"%s\"\n"
+"и\n"
+"\"%s\"\n"
+"один и тот же каталог"
+
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr ""
+"\"%s\"\n"
+"и\n"
+"\"%s\"\n"
+"один и тот же файл"
+
 msgid "Ski&p all"
 msgstr "Пропустить вс&ё"
-
-msgid "&Retry"
-msgstr "По&вторить"
 
 #, c-format
 msgid ""
@@ -2570,23 +2607,19 @@ msgstr "Ни &одного"
 
 #, c-format
 msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr ""
+"Невозможно удалить файл \"%s\"\n"
+"%s"
+
+#, c-format
+msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
 "Невозможно получить свойства файла \"%s\"\n"
 "%s"
-
-#, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
-msgstr ""
-"\"%s\"\n"
-"и\n"
-"\"%s\"\n"
-"один и тот же файл"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2598,22 +2631,6 @@ msgid ""
 "%s"
 msgstr ""
 "Невозможно переместить файл \"%s\" в \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-"Невозможно удалить файл \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-"Невозможно удалить файл \"%s\"\n"
 "%s"
 
 #, c-format
@@ -2631,6 +2648,25 @@ msgid ""
 msgstr ""
 "Невозможно переписать каталог \"%s\"\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
+msgstr ""
+"Невозможно переписать файл \"%s\"\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"Невозможно переместить каталог \"%s\" в \"%s\"\n"
+"%s"
+
+msgid "Cannot operate on \"..\"!"
+msgstr "Эту операцию невозможно выполнить на \"..\"!"
 
 #, c-format
 msgid ""
@@ -2797,39 +2833,8 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same directory"
-msgstr ""
-"\"%s\"\n"
-"и\n"
-"\"%s\"\n"
-"один и тот же каталог"
-
-#, c-format
-msgid ""
-"Cannot overwrite file \"%s\"\n"
-"%s"
-msgstr ""
-"Невозможно переписать файл \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"Невозможно переместить каталог \"%s\" в \"%s\"\n"
-"%s"
-
-#, c-format
 msgid "Directories: %zu, total size: %s"
 msgstr "Каталоги: %zu, общий объём: %s"
-
-msgid "Cannot operate on \"..\"!"
-msgstr "Эту операцию невозможно выполнить на \"..\"!"
 
 msgid "Sorry, I could not put the job in background"
 msgstr "Извините, сделать это в фоновом режиме невозможно"
@@ -4250,6 +4255,10 @@ msgstr "sftp: сбой установки SSH-сессии"
 
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: нет обработчика считываемого файла"
+
+#, c-format
+msgid "sftp: socket error: %s"
+msgstr "sftp: ошибка сокета: %s"
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
