@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-11-25 19:18+0100\n"
+"POT-Creation-Date: 2018-02-03 18:28+0300\n"
 "PO-Revision-Date: 2017-09-23 18:02+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/mc/mc/language/el/)\n"
@@ -648,6 +648,10 @@ msgstr "Εκτύπωση επιλογών ρυθμίσεων"
 msgid "Print last working directory to specified file"
 msgstr "Εκτύπωση του τελευταίου καταλόγου εργασίας στο καθορισμένο αρχείο"
 
+#, fuzzy
+msgid "<file>"
+msgstr "αρχείο"
+
 msgid "Enables subshell support (default)"
 msgstr ""
 
@@ -660,11 +664,18 @@ msgstr ""
 msgid "Set debug level"
 msgstr "Ρύθμιση επιπέδου αποσφαλμάτωσης"
 
+msgid "<integer>"
+msgstr ""
+
 msgid "Launches the file viewer on a file"
 msgstr "Εκτελεί τον προβολέα αρχείων σε ένα αρχείο"
 
 msgid "Edit files"
 msgstr "&Επεξεργασία αρχείων"
+
+#, fuzzy
+msgid "<file> ..."
+msgstr "&Άνοιγμα αρχείου"
 
 msgid "Forces xterm features"
 msgstr "Εξαναγκάζει λειτουργίες xterm"
@@ -704,6 +715,9 @@ msgstr "Αίτημα να τρέχει σε λειτουργία χρωμάτω�
 
 msgid "Specifies a color configuration"
 msgstr "Καθορίζει τις ρυθμίσεις χρωμάτων"
+
+msgid "<string>"
+msgstr ""
 
 msgid "Show mc with specified skin"
 msgstr ""
@@ -1765,6 +1779,17 @@ msgstr ""
 "Αδυναμία chmod \"%s\"\n"
 "%s"
 
+#, fuzzy
+msgid "&Ignore"
+msgstr "&Παράβλεψη κλειδώματος"
+
+#, fuzzy
+msgid "Ignore &all"
+msgstr "&Παράβλεψη κλειδώματος"
+
+msgid "&Retry"
+msgstr "&Επαναπροσπάθεια"
+
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
@@ -2446,11 +2471,32 @@ msgid ""
 "%s"
 msgstr ""
 
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
+msgstr ""
+"\"%s\"\n"
+"και\n"
+"\"%s\"\n"
+"είναι ο ίδιος κατάλογος"
+
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr ""
+"\"%s\"\n"
+"και\n"
+"\"%s\"\n"
+"είναι το ίδιο αρχείο"
+
 msgid "Ski&p all"
 msgstr "&Παράβλεψη όλων"
-
-msgid "&Retry"
-msgstr "&Επαναπροσπάθεια"
 
 #, c-format
 msgid ""
@@ -2470,21 +2516,17 @@ msgstr "&Κανένα"
 
 #, c-format
 msgid ""
-"Cannot stat file \"%s\"\n"
+"Cannot remove file \"%s\"\n"
 "%s"
 msgstr ""
+"Αδυναμία αφαίρεσης αρχείου \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
+"Cannot stat file \"%s\"\n"
+"%s"
 msgstr ""
-"\"%s\"\n"
-"και\n"
-"\"%s\"\n"
-"είναι το ίδιο αρχείο"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2496,22 +2538,6 @@ msgid ""
 "%s"
 msgstr ""
 "Αδυναμία μετακίνησης αρχείου \"%s\" στο \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-"Αδυναμία αφαίρεσης αρχείου \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-"Αδυναμία διαγραφής αρχείου \"%s\"\n"
 "%s"
 
 #, c-format
@@ -2529,6 +2555,25 @@ msgid ""
 msgstr ""
 "Αδυναμία αντικατάστασης καταλόγου \"%s\"\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
+msgstr ""
+"Αδυναμία αντικατάστασης αρχείου \"%s\"\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"Αδυναμία μετακίνησης καταλόγου \"%s\" to \"%s\"\n"
+"%s"
+
+msgid "Cannot operate on \"..\"!"
+msgstr "Αδυναμία λειτουργίας σε \"..\"!"
 
 #, c-format
 msgid ""
@@ -2681,39 +2726,8 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same directory"
-msgstr ""
-"\"%s\"\n"
-"και\n"
-"\"%s\"\n"
-"είναι ο ίδιος κατάλογος"
-
-#, c-format
-msgid ""
-"Cannot overwrite file \"%s\"\n"
-"%s"
-msgstr ""
-"Αδυναμία αντικατάστασης αρχείου \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"Αδυναμία μετακίνησης καταλόγου \"%s\" to \"%s\"\n"
-"%s"
-
-#, c-format
 msgid "Directories: %zu, total size: %s"
 msgstr ""
-
-msgid "Cannot operate on \"..\"!"
-msgstr "Αδυναμία λειτουργίας σε \"..\"!"
 
 msgid "Sorry, I could not put the job in background"
 msgstr "Λυπούμαστε, η εργασία δεν μπορεί να μπει στο παρασκήνιο"
@@ -4104,6 +4118,10 @@ msgstr ""
 msgid "sftp: No file handler data present for reading file"
 msgstr ""
 
+#, fuzzy, c-format
+msgid "sftp: socket error: %s"
+msgstr "ftpfs: σφάλμα ακύρωσης: %s"
+
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
 msgstr ""
@@ -4343,3 +4361,10 @@ msgstr "Συνέχεια από την αρχή;"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid ""
+#~ "Cannot delete file \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Αδυναμία διαγραφής αρχείου \"%s\"\n"
+#~ "%s"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-11-25 19:18+0100\n"
+"POT-Creation-Date: 2018-02-03 18:28+0300\n"
 "PO-Revision-Date: 2017-09-19 09:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/mc/mc/language/da/)\n"
@@ -648,6 +648,10 @@ msgstr "Udskriv konfigurationsindstillinger"
 msgid "Print last working directory to specified file"
 msgstr "Udskriv sidste arbejdsmappe til angivet fil"
 
+#, fuzzy
+msgid "<file>"
+msgstr "fil"
+
 msgid "Enables subshell support (default)"
 msgstr "Aktiverer underskalunderstøttelse (standard)"
 
@@ -660,11 +664,18 @@ msgstr "Gem ftp-meddelelser i angivet fil"
 msgid "Set debug level"
 msgstr "Angiv fejlsøgningsniveau"
 
+msgid "<integer>"
+msgstr ""
+
 msgid "Launches the file viewer on a file"
 msgstr "Bruger filfremviseren på en fil"
 
 msgid "Edit files"
 msgstr "Rediger filer"
+
+#, fuzzy
+msgid "<file> ..."
+msgstr "&Åbn fil..."
 
 msgid "Forces xterm features"
 msgstr "Fremtvinger xterm-funktioner"
@@ -704,6 +715,9 @@ msgstr "Forsøg at køre med farver"
 
 msgid "Specifies a color configuration"
 msgstr "Specificerer en farveindstilling"
+
+msgid "<string>"
+msgstr ""
 
 msgid "Show mc with specified skin"
 msgstr "Vis mc med angivet tema"
@@ -1781,6 +1795,17 @@ msgstr ""
 "Kan ikke chmod »%s«\n"
 "%s"
 
+#, fuzzy
+msgid "&Ignore"
+msgstr "&Ignorer lås"
+
+#, fuzzy
+msgid "Ignore &all"
+msgstr "&Ignorer lås"
+
+msgid "&Retry"
+msgstr "&Prøv igen"
+
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
@@ -2471,11 +2496,32 @@ msgstr ""
 "Kan ikke oprette symbolsk målhenvisning »%s«\n"
 "%s"
 
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
+msgstr ""
+"»%s«\n"
+"og\n"
+"»%s«\n"
+"er den samme mappe"
+
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr ""
+"»%s«\n"
+"og\n"
+"»%s«\n"
+"er den samme fil"
+
 msgid "Ski&p all"
 msgstr ""
-
-msgid "&Retry"
-msgstr "&Prøv igen"
 
 #, c-format
 msgid ""
@@ -2495,23 +2541,19 @@ msgstr "Ing&en"
 
 #, c-format
 msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr ""
+"Kan ikke flytte fil »%s«\n"
+"%s"
+
+#, c-format
+msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
 "Kan ikke stat fil »%s«\n"
 "%s"
-
-#, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
-msgstr ""
-"»%s«\n"
-"og\n"
-"»%s«\n"
-"er den samme fil"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2523,22 +2565,6 @@ msgid ""
 "%s"
 msgstr ""
 "Kan ikke flytte fil »%s« til »%s«\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-"Kan ikke flytte fil »%s«\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-"Kan ikke slette fil »%s«\n"
 "%s"
 
 #, c-format
@@ -2556,6 +2582,25 @@ msgid ""
 msgstr ""
 "Kan ikke overskrive mappe »%s«\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
+msgstr ""
+"Kan ikke overskrive fil »%s«\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"Kan ikke flytte mappe »%s« til »%s«\n"
+"%s"
+
+msgid "Cannot operate on \"..\"!"
+msgstr "Kan ikke fungere med »..«!"
 
 #, c-format
 msgid ""
@@ -2718,39 +2763,8 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same directory"
-msgstr ""
-"»%s«\n"
-"og\n"
-"»%s«\n"
-"er den samme mappe"
-
-#, c-format
-msgid ""
-"Cannot overwrite file \"%s\"\n"
-"%s"
-msgstr ""
-"Kan ikke overskrive fil »%s«\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"Kan ikke flytte mappe »%s« til »%s«\n"
-"%s"
-
-#, c-format
 msgid "Directories: %zu, total size: %s"
 msgstr ""
-
-msgid "Cannot operate on \"..\"!"
-msgstr "Kan ikke fungere med »..«!"
 
 msgid "Sorry, I could not put the job in background"
 msgstr "Beklager. Jeg kunne ikke placere jobbet i baggrunden"
@@ -4152,6 +4166,10 @@ msgstr ""
 msgid "sftp: No file handler data present for reading file"
 msgstr ""
 
+#, fuzzy, c-format
+msgid "sftp: socket error: %s"
+msgstr "ftpfs: Afbrydelsesfejl: %s"
+
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
 msgstr ""
@@ -4395,3 +4413,10 @@ msgstr "Fortsæt fra begyndelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid ""
+#~ "Cannot delete file \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Kan ikke slette fil »%s«\n"
+#~ "%s"

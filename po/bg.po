@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-11-25 19:18+0100\n"
+"POT-Creation-Date: 2018-02-03 18:28+0300\n"
 "PO-Revision-Date: 2017-09-23 18:02+0000\n"
 "Last-Translator: Myselus\n"
 "Language-Team: Bulgarian (http://www.transifex.com/mc/mc/language/bg/)\n"
@@ -664,6 +664,10 @@ msgstr "Принтиране на конфигурационните опции"
 msgid "Print last working directory to specified file"
 msgstr "Принтиране на последната работна директория в определен файл"
 
+#, fuzzy
+msgid "<file>"
+msgstr "файл"
+
 msgid "Enables subshell support (default)"
 msgstr "Поддръжка на подобвивка (по подразбиране)"
 
@@ -676,11 +680,18 @@ msgstr "Записване на ftp-сесиите в указан файл"
 msgid "Set debug level"
 msgstr "Задаване на ниво на дебъгване"
 
+msgid "<integer>"
+msgstr ""
+
 msgid "Launches the file viewer on a file"
 msgstr "Показване съдържанието на файл"
 
 msgid "Edit files"
 msgstr "Редактиране на файлове"
+
+#, fuzzy
+msgid "<file> ..."
+msgstr "Отвори файл..."
 
 msgid "Forces xterm features"
 msgstr "Използване възможности на xterm"
@@ -721,6 +732,9 @@ msgstr "Поиск за стартиране е цветен режим"
 
 msgid "Specifies a color configuration"
 msgstr "Указва цветова конфигурация"
+
+msgid "<string>"
+msgstr ""
 
 msgid "Show mc with specified skin"
 msgstr "Показване на mc с определена тема"
@@ -1816,6 +1830,17 @@ msgstr ""
 "Не може да се chmod-не \"%s\"\n"
 "%s"
 
+#, fuzzy
+msgid "&Ignore"
+msgstr "Прене&брегване на заключването"
+
+#, fuzzy
+msgid "Ignore &all"
+msgstr "Прене&брегване на заключването"
+
+msgid "&Retry"
+msgstr "Отново"
+
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
@@ -2513,11 +2538,32 @@ msgstr ""
 "Не може да се създаде целевия символичен линк \"%s\"\n"
 "%s"
 
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
+msgstr ""
+"\"%s\"\n"
+"и\n"
+"\"%s\"\n"
+"са една и съща папка"
+
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr ""
+"\"%s\"\n"
+"и\n"
+"\"%s\"\n"
+"са един и същи файл"
+
 msgid "Ski&p all"
 msgstr "Проп&ускане всички"
-
-msgid "&Retry"
-msgstr "Отново"
 
 #, c-format
 msgid ""
@@ -2542,23 +2588,19 @@ msgstr "никой"
 
 #, c-format
 msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr ""
+"Не може да изтрие файл \"%s\"\n"
+"%s"
+
+#, c-format
+msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
 "Не може да се stat-не файл \"%s\"\n"
 "%s"
-
-#, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
-msgstr ""
-"\"%s\"\n"
-"и\n"
-"\"%s\"\n"
-"са един и същи файл"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2570,22 +2612,6 @@ msgid ""
 "%s"
 msgstr ""
 "Не може да се премести файл \"%s\" в \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-"Не може да изтрие файл \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-"Не може да се изтрие файл \"%s\"\n"
 "%s"
 
 #, c-format
@@ -2603,6 +2629,25 @@ msgid ""
 msgstr ""
 "Не може да се презапише директория \"%s\"\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
+msgstr ""
+"Не може да се презапише файл \"%s\"\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"Не може да се премести директория \"%s\" в \"%s\"\n"
+"%s"
+
+msgid "Cannot operate on \"..\"!"
+msgstr "Не може да работи върху \"..\"!"
 
 #, c-format
 msgid ""
@@ -2769,39 +2814,8 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same directory"
-msgstr ""
-"\"%s\"\n"
-"и\n"
-"\"%s\"\n"
-"са една и съща папка"
-
-#, c-format
-msgid ""
-"Cannot overwrite file \"%s\"\n"
-"%s"
-msgstr ""
-"Не може да се презапише файл \"%s\"\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"Не може да се премести директория \"%s\" в \"%s\"\n"
-"%s"
-
-#, c-format
 msgid "Directories: %zu, total size: %s"
 msgstr "Директории: %zu, общ размер %s"
-
-msgid "Cannot operate on \"..\"!"
-msgstr "Не може да работи върху \"..\"!"
 
 msgid "Sorry, I could not put the job in background"
 msgstr "Съжалявам, не мога да поставя задачата във фона"
@@ -4217,6 +4231,10 @@ msgstr "sftp: Неуспешно установяване на SSH сесия"
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Няма съществуващ обработчик за четене на файл"
 
+#, fuzzy, c-format
+msgid "sftp: socket error: %s"
+msgstr "ftpfs: грешка при отмяната: %s"
+
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
 msgstr "sftp: (Ctrl-G прекъсване) Изреждане... %s"
@@ -4464,3 +4482,10 @@ msgstr "Да се продължи ли от началото?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на /ftp://some.host/editme.txt"
+
+#~ msgid ""
+#~ "Cannot delete file \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не може да се изтрие файл \"%s\"\n"
+#~ "%s"

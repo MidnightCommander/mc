@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-11-25 19:18+0100\n"
+"POT-Creation-Date: 2018-02-03 18:28+0300\n"
 "PO-Revision-Date: 2017-09-19 09:10+0000\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque (http://www.transifex.com/mc/mc/language/eu/)\n"
@@ -656,6 +656,10 @@ msgstr "Inprimatu konfiguratzeko aukerak"
 msgid "Print last working directory to specified file"
 msgstr "Inprimatu laneko azken direktorioa zehaztutako fitxategira"
 
+#, fuzzy
+msgid "<file>"
+msgstr "fitxategia"
+
 msgid "Enables subshell support (default)"
 msgstr "Subshell euskarria (lehenetsia) gaitzen du"
 
@@ -668,11 +672,18 @@ msgstr "Gorde ftp elkarrizketa zehaztutako fitxategian"
 msgid "Set debug level"
 msgstr "Ezarri arazketa maila"
 
+msgid "<integer>"
+msgstr ""
+
 msgid "Launches the file viewer on a file"
 msgstr "Fitxategi-ikustailea fitxategian abiarazten du"
 
 msgid "Edit files"
 msgstr "Editatu fitxategiak"
+
+#, fuzzy
+msgid "<file> ..."
+msgstr "&Ireki fitxategia..."
 
 msgid "Forces xterm features"
 msgstr "xterm eginbideak behartzen ditu"
@@ -712,6 +723,9 @@ msgstr "Kolore moduan exekutatzeko eskatzen du"
 
 msgid "Specifies a color configuration"
 msgstr "Kolore-konfigurazioa zehazten du"
+
+msgid "<string>"
+msgstr ""
 
 msgid "Show mc with specified skin"
 msgstr "Erakutsi mc zehaztutako azalarekin"
@@ -1826,6 +1840,17 @@ msgstr ""
 "\"%s\"-ren baimenak ezin aldatu (\"chmod\")\n"
 "%s"
 
+#, fuzzy
+msgid "&Ignore"
+msgstr "J&aramonik ez giltzapeari"
+
+#, fuzzy
+msgid "Ignore &all"
+msgstr "J&aramonik ez giltzapeari"
+
+msgid "&Retry"
+msgstr "&Saiatu berriz"
+
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
@@ -2521,11 +2546,32 @@ msgstr ""
 "\"%s\" helburu esteka sinbolikoa ezin sortu\n"
 "%s"
 
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
+msgstr ""
+"\"%s\"\n"
+"eta\n"
+"\"%s\"\n"
+"direktorio bera dira"
+
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr ""
+"\"%s\"\n"
+"eta\n"
+"\"%s\"\n"
+"fitxategi bera dira"
+
 msgid "Ski&p all"
 msgstr "Sa&hiestu guztia"
-
-msgid "&Retry"
-msgstr "&Saiatu berriz"
 
 #, c-format
 msgid ""
@@ -2550,23 +2596,19 @@ msgstr "&Bat ere ez"
 
 #, c-format
 msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr ""
+"\"%s\" fitxategia ezin ezabatu\n"
+"%s"
+
+#, c-format
+msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
 "\"%s\" fitxategiaren egoera (\"stat\") ezin lortu\n"
 "%s"
-
-#, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
-msgstr ""
-"\"%s\"\n"
-"eta\n"
-"\"%s\"\n"
-"fitxategi bera dira"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2578,22 +2620,6 @@ msgid ""
 "%s"
 msgstr ""
 "\"%s\" fitxategia \"%s\"-ra ezin mugitu\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-"\"%s\" fitxategia ezin ezabatu\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-"\"%s\" fitxategia ezin ezabatu\n"
 "%s"
 
 #, c-format
@@ -2611,6 +2637,25 @@ msgid ""
 msgstr ""
 "\"%s\" direktorioa ezin gainidatzi\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
+msgstr ""
+"\"%s\" fitxategia ezin gainidatzi\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"\"%s\" direktorioa \"%s\"-ra ezin mugitu\n"
+"%s"
+
+msgid "Cannot operate on \"..\"!"
+msgstr "Ezin da \"..\" erabili!"
 
 #, c-format
 msgid ""
@@ -2777,39 +2822,8 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same directory"
-msgstr ""
-"\"%s\"\n"
-"eta\n"
-"\"%s\"\n"
-"direktorio bera dira"
-
-#, c-format
-msgid ""
-"Cannot overwrite file \"%s\"\n"
-"%s"
-msgstr ""
-"\"%s\" fitxategia ezin gainidatzi\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"\"%s\" direktorioa \"%s\"-ra ezin mugitu\n"
-"%s"
-
-#, c-format
 msgid "Directories: %zu, total size: %s"
 msgstr "Direktorioak: %zu, guztizko neurria: %s"
-
-msgid "Cannot operate on \"..\"!"
-msgstr "Ezin da \"..\" erabili!"
 
 msgid "Sorry, I could not put the job in background"
 msgstr "Barkatu, ezin izan dut lana hondoan ipini"
@@ -4225,6 +4239,10 @@ msgstr "sftp: Hutsegitea SSH saioa ezartzean"
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Ez dago fitxategi maneiatzaile daturik fitxategia irakurtzeko"
 
+#, fuzzy, c-format
+msgid "sftp: socket error: %s"
+msgstr "ftpfs: galarazte akatsa: %s"
+
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
 msgstr "sftp: (Ktrl-G eteteko) Zerrendatzen... %s"
@@ -4474,3 +4492,10 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
+
+#~ msgid ""
+#~ "Cannot delete file \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "\"%s\" fitxategia ezin ezabatu\n"
+#~ "%s"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-11-25 19:18+0100\n"
+"POT-Creation-Date: 2018-02-03 18:28+0300\n"
 "PO-Revision-Date: 2017-11-20 17:59+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/mc/mc/language/cs/)\n"
@@ -665,6 +665,10 @@ msgstr "Zobrazit konfigurační možnosti"
 msgid "Print last working directory to specified file"
 msgstr "Zapíše poslední pracovní adresář do zadaného souboru"
 
+#, fuzzy
+msgid "<file>"
+msgstr "soubor"
+
 msgid "Enables subshell support (default)"
 msgstr "Povolí podporu podshellu (standardní volba)"
 
@@ -677,11 +681,18 @@ msgstr "Zapíše dialog ftp do zadaného souboru"
 msgid "Set debug level"
 msgstr "Nastavit stupeň podrobnosti ladících informací"
 
+msgid "<integer>"
+msgstr ""
+
 msgid "Launches the file viewer on a file"
 msgstr "Odstartuje jako prohlížeč souboru"
 
 msgid "Edit files"
 msgstr "Upravit soubory"
+
+#, fuzzy
+msgid "<file> ..."
+msgstr "&Otevřít soubor..."
 
 msgid "Forces xterm features"
 msgstr "Vnutí použití možností Xtermu"
@@ -721,6 +732,9 @@ msgstr "Spustí se v barevném režimu"
 
 msgid "Specifies a color configuration"
 msgstr "Určí nastavení barev"
+
+msgid "<string>"
+msgstr ""
 
 msgid "Show mc with specified skin"
 msgstr "Zobrazit mc se zadaným tématem vzhledu"
@@ -1831,6 +1845,17 @@ msgstr ""
 "Nelze změnit práva souboru „%s“\n"
 "%s"
 
+#, fuzzy
+msgid "&Ignore"
+msgstr "&Ignorovat zámek"
+
+#, fuzzy
+msgid "Ignore &all"
+msgstr "&Ignorovat zámek"
+
+msgid "&Retry"
+msgstr "&Zkusit znovu"
+
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
@@ -2524,11 +2549,32 @@ msgstr ""
 "Nelze vytvořit cílový symlink „%s“\n"
 "%s"
 
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
+msgstr ""
+"„%s“\n"
+"a\n"
+"„%s“\n"
+"jsou stejné adresáře"
+
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr ""
+"„%s“\n"
+"a\n"
+"„%s“\n"
+"jsou stejný soubor"
+
 msgid "Ski&p all"
 msgstr "&Přeskočit vše"
-
-msgid "&Retry"
-msgstr "&Zkusit znovu"
 
 #, c-format
 msgid ""
@@ -2551,23 +2597,19 @@ msgstr "Žá&dné"
 
 #, c-format
 msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr ""
+"Nelze smazat soubor „%s“\n"
+"%s"
+
+#, c-format
+msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
 "Na souboru „%s“ nelze provést stat\n"
 "%s"
-
-#, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
-msgstr ""
-"„%s“\n"
-"a\n"
-"„%s“\n"
-"jsou stejný soubor"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2579,22 +2621,6 @@ msgid ""
 "%s"
 msgstr ""
 "Nelze přesunout soubor „%s“ na „%s“\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-"Nelze smazat soubor „%s“\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-"Nelze smazat soubor „%s“\n"
 "%s"
 
 #, c-format
@@ -2612,6 +2638,25 @@ msgid ""
 msgstr ""
 "Nelze přepsat adresář „%s“\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
+msgstr ""
+"Nelze přepsat soubor „%s“\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"Nelze přesunout adresář „%s“ na „%s“\n"
+"%s"
+
+msgid "Cannot operate on \"..\"!"
+msgstr "Nelze pracovat s „..“!"
 
 #, c-format
 msgid ""
@@ -2778,39 +2823,8 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same directory"
-msgstr ""
-"„%s“\n"
-"a\n"
-"„%s“\n"
-"jsou stejné adresáře"
-
-#, c-format
-msgid ""
-"Cannot overwrite file \"%s\"\n"
-"%s"
-msgstr ""
-"Nelze přepsat soubor „%s“\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"Nelze přesunout adresář „%s“ na „%s“\n"
-"%s"
-
-#, c-format
 msgid "Directories: %zu, total size: %s"
 msgstr "Adresáře: %zu, celková velikost: %s"
-
-msgid "Cannot operate on \"..\"!"
-msgstr "Nelze pracovat s „..“!"
 
 msgid "Sorry, I could not put the job in background"
 msgstr "Bohužel, úlohu nelze přesunout na pozadí"
@@ -4223,6 +4237,10 @@ msgstr "sftp: Selhání SSH relace"
 msgid "sftp: No file handler data present for reading file"
 msgstr ""
 
+#, fuzzy, c-format
+msgid "sftp: socket error: %s"
+msgstr "ftpfs: chyba při přerušení: %s"
+
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
 msgstr ""
@@ -4466,3 +4484,10 @@ msgstr "Pokračovat od začátku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nelze načíst lokální kopii /ftp://some.host/editme.txt"
+
+#~ msgid ""
+#~ "Cannot delete file \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nelze smazat soubor „%s“\n"
+#~ "%s"

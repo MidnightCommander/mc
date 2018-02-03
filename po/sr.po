@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-11-25 19:18+0100\n"
+"POT-Creation-Date: 2018-02-03 18:28+0300\n"
 "PO-Revision-Date: 2017-09-19 09:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Serbian (http://www.transifex.com/mc/mc/language/sr/)\n"
@@ -653,6 +653,10 @@ msgstr "Исписује могућности подешавања"
 msgid "Print last working directory to specified file"
 msgstr "Исписује последњи радни директоријум у наведеној датотеци"
 
+#, fuzzy
+msgid "<file>"
+msgstr "датотеку"
+
 msgid "Enables subshell support (default)"
 msgstr "Укључује подршку за подљуске (основно)"
 
@@ -665,11 +669,18 @@ msgstr "Бележи садржај фтп прозорчета у задану 
 msgid "Set debug level"
 msgstr "Подешава ниво прочишћавања"
 
+msgid "<integer>"
+msgstr ""
+
 msgid "Launches the file viewer on a file"
 msgstr "Покреће прегледач датотека над датотеком"
 
 msgid "Edit files"
 msgstr "Уређује датотеке"
+
+#, fuzzy
+msgid "<file> ..."
+msgstr "&Отвори датотеку..."
 
 msgid "Forces xterm features"
 msgstr "Захтева функције Х терминала"
@@ -709,6 +720,9 @@ msgstr "Захтева покретање у режиму боја"
 
 msgid "Specifies a color configuration"
 msgstr "Наводи подешавања боја"
+
+msgid "<string>"
+msgstr ""
 
 msgid "Show mc with specified skin"
 msgstr "Приказује поноћног наредника са наведеном маском"
@@ -1819,6 +1833,17 @@ msgstr ""
 "Не могу да променим режим „%s“\n"
 "%s"
 
+#, fuzzy
+msgid "&Ignore"
+msgstr "&Занемари катанац"
+
+#, fuzzy
+msgid "Ignore &all"
+msgstr "&Занемари катанац"
+
+msgid "&Retry"
+msgstr "Пробај &поново"
+
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
@@ -2510,11 +2535,32 @@ msgstr ""
 "Не могу да направим циљну симболичку везу „%s“\n"
 "%s"
 
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
+msgstr ""
+"„%s“\n"
+"и\n"
+"„%s“\n"
+"су један исти директоријум"
+
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr ""
+"„%s“\n"
+"и\n"
+"„%s“\n"
+"су једна иста датотека"
+
 msgid "Ski&p all"
 msgstr "Прескочи &све"
-
-msgid "&Retry"
-msgstr "Пробај &поново"
 
 #, c-format
 msgid ""
@@ -2539,23 +2585,19 @@ msgstr "&Ништа"
 
 #, c-format
 msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr ""
+"Не могу да уклоним датотеку „%s“\n"
+"%s"
+
+#, c-format
+msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
 "Не могу да добијем податке о датотеци „%s“\n"
 "%s"
-
-#, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
-msgstr ""
-"„%s“\n"
-"и\n"
-"„%s“\n"
-"су једна иста датотека"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2567,22 +2609,6 @@ msgid ""
 "%s"
 msgstr ""
 "Не могу да преместим датотеку „%s“ у „%s“\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-"Не могу да уклоним датотеку „%s“\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-"Не могу да обришем датотеку „%s“\n"
 "%s"
 
 #, c-format
@@ -2600,6 +2626,25 @@ msgid ""
 msgstr ""
 "Не могу да препишем директоријум „%s“\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
+msgstr ""
+"Не могу да препишем датотеку „%s“\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"Не могу да преместим директоријум „%s“ у „%s“\n"
+"%s"
+
+msgid "Cannot operate on \"..\"!"
+msgstr "Не могу да радим над \"..\"!"
 
 #, c-format
 msgid ""
@@ -2764,39 +2809,8 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same directory"
-msgstr ""
-"„%s“\n"
-"и\n"
-"„%s“\n"
-"су један исти директоријум"
-
-#, c-format
-msgid ""
-"Cannot overwrite file \"%s\"\n"
-"%s"
-msgstr ""
-"Не могу да препишем датотеку „%s“\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"Не могу да преместим директоријум „%s“ у „%s“\n"
-"%s"
-
-#, c-format
 msgid "Directories: %zu, total size: %s"
 msgstr ""
-
-msgid "Cannot operate on \"..\"!"
-msgstr "Не могу да радим над \"..\"!"
 
 msgid "Sorry, I could not put the job in background"
 msgstr "Извините, не могу да поставим посао у позадину"
@@ -4215,6 +4229,10 @@ msgstr ""
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Нема података руковаоца датотеком за читање датотеке"
 
+#, fuzzy, c-format
+msgid "sftp: socket error: %s"
+msgstr "ftpfs: грешка при прекидању: %s"
+
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
 msgstr "sftp: (Ктрл-Г прекида) Исписујем... %s"
@@ -4462,3 +4480,10 @@ msgstr "Да наставим са почетка?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не могу да довучем месни примерак „/ftp://some.host/editme.txt“"
+
+#~ msgid ""
+#~ "Cannot delete file \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Не могу да обришем датотеку „%s“\n"
+#~ "%s"

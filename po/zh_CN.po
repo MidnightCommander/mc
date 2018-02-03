@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-11-25 19:18+0100\n"
+"POT-Creation-Date: 2018-02-03 18:28+0300\n"
 "PO-Revision-Date: 2017-09-19 09:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/mc/mc/language/"
@@ -663,6 +663,10 @@ msgstr "打印配置选项"
 msgid "Print last working directory to specified file"
 msgstr "将工作目录打印到指定文件"
 
+#, fuzzy
+msgid "<file>"
+msgstr "文件"
+
 msgid "Enables subshell support (default)"
 msgstr "启用子 shell 支持(默认)"
 
@@ -675,11 +679,18 @@ msgstr "记录 ftp 对话到指定的文件"
 msgid "Set debug level"
 msgstr "设置调试级别"
 
+msgid "<integer>"
+msgstr ""
+
 msgid "Launches the file viewer on a file"
 msgstr "在文件上启动文件查看器"
 
 msgid "Edit files"
 msgstr "编辑文件"
+
+#, fuzzy
+msgid "<file> ..."
+msgstr "打开文件(&O)..."
 
 msgid "Forces xterm features"
 msgstr "强制使用 xterm 特性"
@@ -719,6 +730,9 @@ msgstr "请求运行在彩色模式"
 
 msgid "Specifies a color configuration"
 msgstr "指定颜色配置"
+
+msgid "<string>"
+msgstr ""
 
 msgid "Show mc with specified skin"
 msgstr "用指定的皮肤显示 MC"
@@ -1827,6 +1841,17 @@ msgstr ""
 "无法 chmod“%s”\n"
 "%s"
 
+#, fuzzy
+msgid "&Ignore"
+msgstr "忽略锁(&I)"
+
+#, fuzzy
+msgid "Ignore &all"
+msgstr "忽略锁(&I)"
+
+msgid "&Retry"
+msgstr "重试(&R)"
+
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
@@ -2517,11 +2542,32 @@ msgstr ""
 "无法创建目标符号链接“%s”\n"
 "%s"
 
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
+msgstr ""
+"“%s”\n"
+"和\n"
+"“%s”\n"
+"是同一个目录"
+
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr ""
+"“%s”\n"
+"和\n"
+"“%s”\n"
+"是同一个文件"
+
 msgid "Ski&p all"
 msgstr "路过全部(&I)"
-
-msgid "&Retry"
-msgstr "重试(&R)"
 
 #, c-format
 msgid ""
@@ -2546,23 +2592,19 @@ msgstr "无(&E)"
 
 #, c-format
 msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr ""
+"无法删除文件“%s”\n"
+"%s"
+
+#, c-format
+msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
 "无法 stat 文件“%s”\n"
 "%s"
-
-#, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
-msgstr ""
-"“%s”\n"
-"和\n"
-"“%s”\n"
-"是同一个文件"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2574,22 +2616,6 @@ msgid ""
 "%s"
 msgstr ""
 "无法移动文件“%s”到“%s”\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-"无法删除文件“%s”\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-"无法删除文件“%s”\n"
 "%s"
 
 #, c-format
@@ -2607,6 +2633,25 @@ msgid ""
 msgstr ""
 "无法覆盖目录“%s”\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
+msgstr ""
+"无法覆盖文件“%s”\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"无法移动目录“%s”到“%s”\n"
+"%s"
+
+msgid "Cannot operate on \"..\"!"
+msgstr "无法操作\"..\"!"
 
 #, c-format
 msgid ""
@@ -2773,39 +2818,8 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same directory"
-msgstr ""
-"“%s”\n"
-"和\n"
-"“%s”\n"
-"是同一个目录"
-
-#, c-format
-msgid ""
-"Cannot overwrite file \"%s\"\n"
-"%s"
-msgstr ""
-"无法覆盖文件“%s”\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"无法移动目录“%s”到“%s”\n"
-"%s"
-
-#, c-format
 msgid "Directories: %zu, total size: %s"
 msgstr "目录: %zu, 总体积: %s"
-
-msgid "Cannot operate on \"..\"!"
-msgstr "无法操作\"..\"!"
 
 msgid "Sorry, I could not put the job in background"
 msgstr "抱歉，无法将任务放到后台"
@@ -4215,6 +4229,10 @@ msgstr "sftp: SSH 会话建立失败"
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: 读取的文件没有指定处理程序"
 
+#, fuzzy, c-format
+msgid "sftp: socket error: %s"
+msgstr "ftpfs: 中止错误: %s"
+
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
 msgstr "sftp: (Ctrl-G 终止) 正在列出... %s"
@@ -4462,3 +4480,10 @@ msgstr "从头继续搜索?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "无法获取 /ftp://some.host/editme.txt 的本地副本"
+
+#~ msgid ""
+#~ "Cannot delete file \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "无法删除文件“%s”\n"
+#~ "%s"

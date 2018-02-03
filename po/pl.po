@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-11-25 19:18+0100\n"
+"POT-Creation-Date: 2018-02-03 18:28+0300\n"
 "PO-Revision-Date: 2017-09-23 18:02+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/mc/mc/language/pl/)\n"
@@ -665,6 +665,10 @@ msgstr "Wyświetla opcje konfiguracji"
 msgid "Print last working directory to specified file"
 msgstr "Wyświetla ostatni katalog roboczy do podanego pliku"
 
+#, fuzzy
+msgid "<file>"
+msgstr "plik"
+
 msgid "Enables subshell support (default)"
 msgstr "Włącza obsługę podpowłoki (domyślne)"
 
@@ -677,11 +681,18 @@ msgstr "Zapisuje dziennik FTP do podanego pliku"
 msgid "Set debug level"
 msgstr "Ustawia poziom debugowania"
 
+msgid "<integer>"
+msgstr ""
+
 msgid "Launches the file viewer on a file"
 msgstr "Uruchamia podgląd pliku"
 
 msgid "Edit files"
 msgstr "Modyfikuje pliki"
+
+#, fuzzy
+msgid "<file> ..."
+msgstr "&Otwórz plik…"
 
 msgid "Forces xterm features"
 msgstr "Wymusza funkcje programu xterm"
@@ -723,6 +734,9 @@ msgstr "Żąda uruchomienia w trybie kolorowym"
 
 msgid "Specifies a color configuration"
 msgstr "Podaje konfigurację kolorów"
+
+msgid "<string>"
+msgstr ""
 
 msgid "Show mc with specified skin"
 msgstr "Wyświetla program mc za pomocą podanej skórki"
@@ -1836,6 +1850,17 @@ msgstr ""
 "Nie można wykonać chmod na „%s”\n"
 "%s"
 
+#, fuzzy
+msgid "&Ignore"
+msgstr "Z&ignoruj blokadę"
+
+#, fuzzy
+msgid "Ignore &all"
+msgstr "Z&ignoruj blokadę"
+
+msgid "&Retry"
+msgstr "P&onów"
+
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
@@ -2531,11 +2556,32 @@ msgstr ""
 "Nie można utworzyć docelowego dowiązania symbolicznego „%s”\n"
 "%s"
 
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
+msgstr ""
+"„%s”\n"
+"i\n"
+"„%s”\n"
+"to ten sam katalog"
+
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr ""
+"„%s”\n"
+"i\n"
+"„%s”\n"
+"to ten sam plik"
+
 msgid "Ski&p all"
 msgstr "&Pomiń wszystko"
-
-msgid "&Retry"
-msgstr "P&onów"
 
 #, c-format
 msgid ""
@@ -2560,23 +2606,19 @@ msgstr "Br&ak"
 
 #, c-format
 msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr ""
+"Nie można usunąć pliku „%s”\n"
+"%s"
+
+#, c-format
+msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
 "Nie można wykonać polecenia stat na pliku „%s”\n"
 "%s"
-
-#, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
-msgstr ""
-"„%s”\n"
-"i\n"
-"„%s”\n"
-"to ten sam plik"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2588,22 +2630,6 @@ msgid ""
 "%s"
 msgstr ""
 "Nie można przenieść pliku „%s” do „%s”\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-"Nie można usunąć pliku „%s”\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-"Nie można usunąć pliku „%s”\n"
 "%s"
 
 #, c-format
@@ -2621,6 +2647,25 @@ msgid ""
 msgstr ""
 "Nie można zastąpić katalogu „%s”\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
+msgstr ""
+"Nie można zastąpić pliku „%s”\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"Nie można przenieść katalogu „%s” do „%s”\n"
+"%s"
+
+msgid "Cannot operate on \"..\"!"
+msgstr "Nie można wykonać działania na „..”."
 
 #, c-format
 msgid ""
@@ -2787,39 +2832,8 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same directory"
-msgstr ""
-"„%s”\n"
-"i\n"
-"„%s”\n"
-"to ten sam katalog"
-
-#, c-format
-msgid ""
-"Cannot overwrite file \"%s\"\n"
-"%s"
-msgstr ""
-"Nie można zastąpić pliku „%s”\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"Nie można przenieść katalogu „%s” do „%s”\n"
-"%s"
-
-#, c-format
 msgid "Directories: %zu, total size: %s"
 msgstr "Katalogi: %zu, całkowity rozmiar: %s"
-
-msgid "Cannot operate on \"..\"!"
-msgstr "Nie można wykonać działania na „..”."
 
 msgid "Sorry, I could not put the job in background"
 msgstr "Nie można umieścić zadania w tle"
@@ -4243,6 +4257,10 @@ msgstr "sftp: niepowodzenie podczas nawiązywania sesji SSH"
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: brak danych obsługi pliku do odczytania pliku"
 
+#, fuzzy, c-format
+msgid "sftp: socket error: %s"
+msgstr "ftpfs: błąd przerywania: %s"
+
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
 msgstr "sftp: (Ctrl-G przerywa) wyświetlanie listy… %s"
@@ -4491,3 +4509,10 @@ msgstr "Kontynuować od początku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Nie można pobrać lokalnej kopii /ftp://jakiś.komputer/modyfikuj_mnie.txt"
+
+#~ msgid ""
+#~ "Cannot delete file \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nie można usunąć pliku „%s”\n"
+#~ "%s"

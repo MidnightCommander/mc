@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-11-25 19:18+0100\n"
+"POT-Creation-Date: 2018-02-03 18:28+0300\n"
 "PO-Revision-Date: 2017-09-23 18:02+0000\n"
 "Last-Translator: Jose Riha <jose1711@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/mc/mc/language/sk/)\n"
@@ -658,6 +658,10 @@ msgstr "Vypísať konfiguráciu"
 msgid "Print last working directory to specified file"
 msgstr "Tlačiť posledný pracovný adresár do zadaného súboru"
 
+#, fuzzy
+msgid "<file>"
+msgstr "súbor"
+
 msgid "Enables subshell support (default)"
 msgstr "Zapína podporu pre subshell (štandardne)"
 
@@ -670,11 +674,18 @@ msgstr "Zapisovať protokol dialógu ftp do súboru"
 msgid "Set debug level"
 msgstr "Nastaviť ladiacu úroveň"
 
+msgid "<integer>"
+msgstr ""
+
 msgid "Launches the file viewer on a file"
 msgstr "Spustí prehliadač súborov na súbore"
 
 msgid "Edit files"
 msgstr "Upraviť súbory"
+
+#, fuzzy
+msgid "<file> ..."
+msgstr "Otvoriť sú&bor..."
 
 msgid "Forces xterm features"
 msgstr "Vynúti funkcie xterm"
@@ -715,6 +726,9 @@ msgstr "Požiadavky spúšťať vo farebnom režime"
 
 msgid "Specifies a color configuration"
 msgstr "Určuje farebnú konfiguráciu"
+
+msgid "<string>"
+msgstr ""
 
 msgid "Show mc with specified skin"
 msgstr "Zobraziť mc s uvedenou témou vzhľadu"
@@ -1827,6 +1841,17 @@ msgstr ""
 "Nemožno vykonať chmod „%s“\n"
 "%s"
 
+#, fuzzy
+msgid "&Ignore"
+msgstr "&Ignorovať zámok"
+
+#, fuzzy
+msgid "Ignore &all"
+msgstr "&Ignorovať zámok"
+
+msgid "&Retry"
+msgstr "&Zopakovať"
+
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
@@ -2519,11 +2544,32 @@ msgstr ""
 "Nemožno vytvoriť cieľový sym. odkaz „%s“\n"
 "%s"
 
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
+msgstr ""
+"„%s“\n"
+"a\n"
+"„%s“\n"
+"sú rovnaký adresár"
+
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr ""
+"„%s“\n"
+"a\n"
+"„%s“\n"
+"sú rovnaký súbor"
+
 msgid "Ski&p all"
 msgstr "&Preskočiť všetky"
-
-msgid "&Retry"
-msgstr "&Zopakovať"
 
 #, c-format
 msgid ""
@@ -2548,23 +2594,19 @@ msgstr "Žiadn&e"
 
 #, c-format
 msgid ""
+"Cannot remove file \"%s\"\n"
+"%s"
+msgstr ""
+"Nemožno odstrániť súbor „%s“\n"
+"%s"
+
+#, c-format
+msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
 "Nemožno vykonať stat() súboru „%s“\n"
 "%s"
-
-#, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
-msgstr ""
-"„%s“\n"
-"a\n"
-"„%s“\n"
-"sú rovnaký súbor"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
@@ -2576,22 +2618,6 @@ msgid ""
 "%s"
 msgstr ""
 "Nemožno presunúť „%s“ do „%s“\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-"Nemožno odstrániť súbor „%s“\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-"Nemožno zmazať súbor „%s“\n"
 "%s"
 
 #, c-format
@@ -2609,6 +2635,25 @@ msgid ""
 msgstr ""
 "Nemožno prepísať adresár „%s“\n"
 "%s"
+
+#, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
+msgstr ""
+"Nemožno prepísať súbor „%s“\n"
+"%s"
+
+#, c-format
+msgid ""
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+"Nemožno presunúť adresár „%s“ do „%s“\n"
+"%s"
+
+msgid "Cannot operate on \"..\"!"
+msgstr "Nemožno vykonať operáciu na „..“!"
 
 #, c-format
 msgid ""
@@ -2773,39 +2818,8 @@ msgstr ""
 "%s"
 
 #, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same directory"
-msgstr ""
-"„%s“\n"
-"a\n"
-"„%s“\n"
-"sú rovnaký adresár"
-
-#, c-format
-msgid ""
-"Cannot overwrite file \"%s\"\n"
-"%s"
-msgstr ""
-"Nemožno prepísať súbor „%s“\n"
-"%s"
-
-#, c-format
-msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-"Nemožno presunúť adresár „%s“ do „%s“\n"
-"%s"
-
-#, c-format
 msgid "Directories: %zu, total size: %s"
 msgstr ""
-
-msgid "Cannot operate on \"..\"!"
-msgstr "Nemožno vykonať operáciu na „..“!"
 
 msgid "Sorry, I could not put the job in background"
 msgstr "Ľutujeme, nepodarilo sa presunúť úlohu do pozadia"
@@ -4225,6 +4239,10 @@ msgstr ""
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Na čítanie súboru nie sú prítomné dáta obsluhy súboru"
 
+#, fuzzy, c-format
+msgid "sftp: socket error: %s"
+msgstr "ftpfs: chyba zrušenia: %s"
+
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
 msgstr "sftp: (Ctrl-G preruší) Výpis... %s"
@@ -4472,3 +4490,10 @@ msgstr "Pokračovať od začiatku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nemožno stiahnuť lokálnu kópiu /ftp://some.host/editme.txt"
+
+#~ msgid ""
+#~ "Cannot delete file \"%s\"\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Nemožno zmazať súbor „%s“\n"
+#~ "%s"

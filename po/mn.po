@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2017-11-25 19:18+0100\n"
+"POT-Creation-Date: 2018-02-03 18:28+0300\n"
 "PO-Revision-Date: 2017-09-19 09:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Mongolian (http://www.transifex.com/mc/mc/language/mn/)\n"
@@ -631,6 +631,10 @@ msgstr ""
 msgid "Print last working directory to specified file"
 msgstr "Заагдсан файл руу хамгийн сүүлд ажилласан лавлахыг хэвлэх"
 
+#, fuzzy
+msgid "<file>"
+msgstr "файл"
+
 msgid "Enables subshell support (default)"
 msgstr "Subshell боломжыг нээх (анхны утга)"
 
@@ -643,11 +647,18 @@ msgstr "Тусгайлсан файл руу тэмдэглэх FTP диалог
 msgid "Set debug level"
 msgstr "Дебаг түвшинг тодорхойлох"
 
+msgid "<integer>"
+msgstr ""
+
 msgid "Launches the file viewer on a file"
 msgstr "Файл харагчыг ажиллуулах"
 
 msgid "Edit files"
 msgstr ""
+
+#, fuzzy
+msgid "<file> ..."
+msgstr "Файл &нээх..."
 
 msgid "Forces xterm features"
 msgstr "xterm хүчингүүд"
@@ -687,6 +698,9 @@ msgstr "өнгөт горимд ажиллахад хариулна"
 
 msgid "Specifies a color configuration"
 msgstr "өнгөний тусгай тохиргоо"
+
+msgid "<string>"
+msgstr ""
 
 msgid "Show mc with specified skin"
 msgstr ""
@@ -1733,6 +1747,16 @@ msgid ""
 "%s"
 msgstr ""
 
+msgid "&Ignore"
+msgstr ""
+
+#, fuzzy
+msgid "Ignore &all"
+msgstr "Бүгдэд о&ноох"
+
+msgid "&Retry"
+msgstr "&Дахих"
+
 #, c-format
 msgid ""
 "Cannot chown \"%s\"\n"
@@ -2400,11 +2424,24 @@ msgid ""
 "%s"
 msgstr ""
 
-msgid "Ski&p all"
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same directory"
 msgstr ""
 
-msgid "&Retry"
-msgstr "&Дахих"
+#, c-format
+msgid ""
+"\"%s\"\n"
+"and\n"
+"\"%s\"\n"
+"are the same file"
+msgstr ""
+
+msgid "Ski&p all"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2424,16 +2461,14 @@ msgstr "&үгүй"
 
 #, c-format
 msgid ""
-"Cannot stat file \"%s\"\n"
+"Cannot remove file \"%s\"\n"
 "%s"
 msgstr ""
 
 #, c-format
 msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same file"
+"Cannot stat file \"%s\"\n"
+"%s"
 msgstr ""
 
 #, c-format
@@ -2448,18 +2483,6 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Cannot remove file \"%s\"\n"
-"%s"
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot delete file \"%s\"\n"
-"%s"
-msgstr ""
-
-#, c-format
-msgid ""
 "Cannot remove directory \"%s\"\n"
 "%s"
 msgstr ""
@@ -2468,6 +2491,21 @@ msgstr ""
 msgid ""
 "Cannot overwrite directory \"%s\"\n"
 "%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot overwrite file \"%s\"\n"
+"%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot move directory \"%s\" to \"%s\"\n"
+"%s"
+msgstr ""
+
+msgid "Cannot operate on \"..\"!"
 msgstr ""
 
 #, c-format
@@ -2597,30 +2635,7 @@ msgid ""
 msgstr ""
 
 #, c-format
-msgid ""
-"\"%s\"\n"
-"and\n"
-"\"%s\"\n"
-"are the same directory"
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot overwrite file \"%s\"\n"
-"%s"
-msgstr ""
-
-#, c-format
-msgid ""
-"Cannot move directory \"%s\" to \"%s\"\n"
-"%s"
-msgstr ""
-
-#, c-format
 msgid "Directories: %zu, total size: %s"
-msgstr ""
-
-msgid "Cannot operate on \"..\"!"
 msgstr ""
 
 msgid "Sorry, I could not put the job in background"
@@ -4013,6 +4028,10 @@ msgstr ""
 
 msgid "sftp: No file handler data present for reading file"
 msgstr ""
+
+#, fuzzy, c-format
+msgid "sftp: socket error: %s"
+msgstr "ftpfs: таслалт алдаа: %s"
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
