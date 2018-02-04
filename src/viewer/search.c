@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Function for search data
 
-   Copyright (C) 1994-2017
+   Copyright (C) 1994-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -148,7 +148,7 @@ mcview_find (mcview_search_status_msg_t * ssm, off_t search_start, off_t search_
             ok = mc_search_run (view->search, (void *) ssm, search_start, search_end, len);
             if (ok && view->search->normal_offset == search_start)
             {
-                if (view->text_nroff_mode)
+                if (view->mode_flags.nroff)
                     view->search->normal_offset++;
                 return TRUE;
             }
@@ -178,17 +178,17 @@ mcview_search_show_result (WView * view, size_t match_len)
     int nroff_len;
 
     nroff_len =
-        view->text_nroff_mode
+        view->mode_flags.nroff
         ? mcview__get_nroff_real_len (view, view->search->start_buffer,
                                       view->search->normal_offset - view->search->start_buffer) : 0;
     view->search_start = view->search->normal_offset + nroff_len;
 
-    if (!view->hex_mode)
+    if (!view->mode_flags.hex)
         view->search_start++;
 
     nroff_len =
-        view->text_nroff_mode ? mcview__get_nroff_real_len (view, view->search_start - 1,
-                                                            match_len) : 0;
+        view->mode_flags.nroff ? mcview__get_nroff_real_len (view, view->search_start - 1,
+                                                             match_len) : 0;
     view->search_end = view->search_start + match_len + nroff_len;
 
     mcview_moveto_match (view);
@@ -204,7 +204,7 @@ mcview_search_cmd_callback (const void *user_data, gsize char_offset, int *curre
     WView *view = ((const mcview_search_status_msg_t *) user_data)->view;
 
     /*    view_read_continue (view, &view->search_onechar_info); *//* AB:FIXME */
-    if (!view->text_nroff_mode)
+    if (!view->mode_flags.nroff)
     {
         mcview_get_byte (view, char_offset, current_char);
         return MC_SEARCH_CB_OK;
@@ -309,7 +309,7 @@ mcview_do_search (WView * view, off_t want_search_start)
 
     if (view->search_start != 0)
     {
-        if (!view->text_nroff_mode)
+        if (!view->mode_flags.nroff)
             search_start = view->search_start + (mcview_search_options.backwards ? -2 : 0);
         else
         {

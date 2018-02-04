@@ -1,7 +1,7 @@
 /*
    Virtual File System: GNU Tar file system.
 
-   Copyright (C) 1995-2017
+   Copyright (C) 1995-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -817,7 +817,7 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
                 {
                     message (D_ERROR, MSG_ERROR, _("%s\ndoesn't look like a tar archive."),
                              vfs_path_as_str (vpath));
-                    /* FALL THRU */
+                    MC_FALLTHROUGH;
 
                     /* Error after header rec */
                 }
@@ -836,7 +836,7 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
 
             /* Record of zeroes */
         case STATUS_EOFMARK:   /* If error after 0's */
-            /* FALL THRU */
+            MC_FALLTHROUGH;
             /* exit from loop */
         case STATUS_EOF:       /* End of archive */
             break;

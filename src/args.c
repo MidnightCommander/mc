@@ -1,7 +1,7 @@
 /*
    Handle command line arguments.
 
-   Copyright (C) 2009-2017
+   Copyright (C) 2009-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -831,7 +831,7 @@ mc_setup_by_args (int argc, char **argv, GError ** mcerror)
                                 _("Two files are required to envoke the diffviewer."));
             return FALSE;
         }
-        /* fallthrough */
+        MC_FALLTHROUGH;
 #endif /* USE_DIFF_VIEW */
 
     case MC_RUN_FULL:

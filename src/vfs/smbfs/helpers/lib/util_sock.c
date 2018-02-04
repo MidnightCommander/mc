@@ -5,7 +5,7 @@
 
    Copyright (C) Andrew Tridgell 1992-1998
 
-   Copyright (C) 2011-2017
+   Copyright (C) 2011-2018
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -51,7 +51,7 @@ int lastport = 0;
 
 int smb_read_error = 0;
 
-
+#if 0
 /****************************************************************************
 determine if a file descriptor is in fact a socket
 ****************************************************************************/
@@ -63,7 +63,7 @@ is_a_socket (int fd)
     l = sizeof (int);
     return (getsockopt (fd, SOL_SOCKET, SO_TYPE, (char *) &v, &l) == 0);
 }
-
+#endif /* 0 */
 
 enum SOCK_OPT_TYPES
 { OPT_BOOL, OPT_INT, OPT_ON };
@@ -385,7 +385,7 @@ read_with_timeout (int fd, char *buf, size_t mincnt, size_t maxcnt, unsigned int
     return ((ssize_t) nread);
 }
 
-
+#if 0
 /****************************************************************************
 send a keepalive packet (rfc1002)
 ****************************************************************************/
@@ -399,7 +399,7 @@ send_keepalive (int client)
 
     return (write_data (client, (char *) buf, 4) == 4);
 }
-
+#endif /* 0 */
 
 
 /****************************************************************************

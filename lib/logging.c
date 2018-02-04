@@ -1,7 +1,7 @@
 /*
    Provides a log file to ease tracing the program.
 
-   Copyright (C) 2006-2017
+   Copyright (C) 2006-2018
    Free Software Foundation, Inc.
 
    Written by:

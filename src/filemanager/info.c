@@ -1,7 +1,7 @@
 /*
    Panel managing.
 
-   Copyright (C) 1994-2017
+   Copyright (C) 1994-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -153,7 +153,7 @@ info_show_info (WInfo * info)
         /* Note: all cases are fall-throughs */
 
     default:
-
+        MC_FALLTHROUGH;
     case 16:
         widget_move (w, 16, 3);
         if ((myfs_stats.nfree == 0 && myfs_stats.nodes == 0) ||
@@ -169,7 +169,7 @@ info_show_info (WInfo * info)
                         myfs_stats.nfree, myfs_stats.nodes,
                         myfs_stats.nodes == 0 ? 0 :
                         (int) (100 * (long double) myfs_stats.nfree / myfs_stats.nodes));
-
+        MC_FALLTHROUGH;
     case 15:
         widget_move (w, 15, 3);
         if (myfs_stats.avail == 0 && myfs_stats.total == 0)
@@ -184,36 +184,40 @@ info_show_info (WInfo * info)
                         myfs_stats.total == 0 ? 0 :
                         (int) (100 * (long double) myfs_stats.avail / myfs_stats.total));
         }
-
+        MC_FALLTHROUGH;
     case 14:
         widget_move (w, 14, 3);
         tty_printf (_("Type:       %s"),
                     myfs_stats.typename ? myfs_stats.typename : _("non-local vfs"));
         if (myfs_stats.type != 0xffff && myfs_stats.type != -1)
             tty_printf (" (%Xh)", (unsigned int) myfs_stats.type);
-
+        MC_FALLTHROUGH;
     case 13:
         widget_move (w, 13, 3);
         str_printf (buff, _("Device:     %s"),
                     str_trunc (myfs_stats.device, w->cols - i18n_adjust));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
+        MC_FALLTHROUGH;
     case 12:
         widget_move (w, 12, 3);
         str_printf (buff, _("Filesystem: %s"),
                     str_trunc (myfs_stats.mpoint, w->cols - i18n_adjust));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
+        MC_FALLTHROUGH;
     case 11:
         widget_move (w, 11, 3);
         str_printf (buff, _("Accessed:   %s"), file_date (st.st_atime));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
+        MC_FALLTHROUGH;
     case 10:
         widget_move (w, 10, 3);
         str_printf (buff, _("Modified:   %s"), file_date (st.st_mtime));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
+        MC_FALLTHROUGH;
     case 9:
         widget_move (w, 9, 3);
         /* The field st_ctime is changed by writing or by setting inode
@@ -222,7 +226,7 @@ info_show_info (WInfo * info)
         str_printf (buff, _("Changed:    %s"), file_date (st.st_ctime));
         tty_print_string (buff->str);
         g_string_set_size (buff, 0);
-
+        MC_FALLTHROUGH;
     case 8:
         widget_move (w, 8, 3);
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
@@ -240,24 +244,24 @@ info_show_info (WInfo * info)
                                   (unsigned long) st.st_blocks), (unsigned long) st.st_blocks);
 #endif
         }
-
+        MC_FALLTHROUGH;
     case 7:
         widget_move (w, 7, 3);
         tty_printf (_("Owner:      %s/%s"), get_owner (st.st_uid), get_group (st.st_gid));
-
+        MC_FALLTHROUGH;
     case 6:
         widget_move (w, 6, 3);
         tty_printf (_("Links:      %d"), (int) st.st_nlink);
-
+        MC_FALLTHROUGH;
     case 5:
         widget_move (w, 5, 3);
         tty_printf (_("Mode:       %s (%04o)"),
                     string_perm (st.st_mode), (unsigned) st.st_mode & 07777);
-
+        MC_FALLTHROUGH;
     case 4:
         widget_move (w, 4, 3);
         tty_printf (_("Location:   %Xh:%Xh"), (unsigned int) st.st_dev, (unsigned int) st.st_ino);
-
+        MC_FALLTHROUGH;
     case 3:
         {
             const char *fname;
@@ -267,9 +271,11 @@ info_show_info (WInfo * info)
             str_printf (buff, file_label, str_trunc (fname, w->cols - i18n_adjust));
             tty_print_string (buff->str);
         }
-
+        MC_FALLTHROUGH;
     case 2:
+        MC_FALLTHROUGH;
     case 1:
+        MC_FALLTHROUGH;
     case 0:
         ;
     }                           /* switch */

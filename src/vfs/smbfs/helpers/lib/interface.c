@@ -5,7 +5,7 @@
 
    Copyright (C) Andrew Tridgell 1992-1998
 
-   Copyright (C) 2011-2017
+   Copyright (C) 2011-2018
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -258,7 +258,7 @@ load_interfaces (void)
     interpret_interfaces (lp_interfaces (), &local_interfaces, "interface");
 }
 
-
+#if 0
 /****************************************************************************
   override the defaults
   **************************************************************************/
@@ -283,7 +283,7 @@ iface_set_default (char *ip, char *bcast, char *nmask)
         default_nmask = *interpret_addr2 (nmask);
     }
 }
-
+#endif /* 0 */
 
 /****************************************************************************
   check if an IP is one of mine
@@ -298,6 +298,7 @@ ismyip (struct in_addr ip)
     return False;
 }
 
+#if 0
 /****************************************************************************
   check if a packet is from a local (known) net
   **************************************************************************/
@@ -310,6 +311,7 @@ is_local_net (struct in_addr from)
             return True;
     return False;
 }
+#endif /* 0 */
 
 /****************************************************************************
   how many interfaces do we have
@@ -325,6 +327,7 @@ iface_count (void)
     return ret;
 }
 
+#if 0
 /****************************************************************************
  True if we have two or more interfaces.
   **************************************************************************/
@@ -354,7 +357,7 @@ get_interface (int n)
         return i;
     return NULL;
 }
-
+#endif /* 0 */
 /****************************************************************************
   return IP of the Nth interface
   **************************************************************************/
@@ -388,7 +391,7 @@ iface_find (struct in_addr ip)
     return NULL;
 }
 
-
+#if 0
 /****************************************************************************
 this function provides a simple hash of the configured interfaces. It is
 used to detect a change in interfaces to tell us whether to discard
@@ -410,7 +413,7 @@ iface_hash (void)
 
     return ret;
 }
-
+#endif /* 0 */
 
 /* these 3 functions return the ip/bcast/nmask for the interface
    most appropriate for the given ip address. If they can't find

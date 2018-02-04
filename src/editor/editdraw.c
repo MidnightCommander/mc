@@ -1,7 +1,7 @@
 /*
    Editor text drawing.
 
-   Copyright (C) 1996-2017
+   Copyright (C) 1996-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -731,7 +731,7 @@ edit_draw_this_line (WEdit * edit, off_t b, long row, long start_col, long end_c
                         col++;
                         break;
                     }
-                    /* fallthrough */
+                    MC_FALLTHROUGH;
                 default:
 #ifdef HAVE_CHARSET
                     if (mc_global.utf8_display)

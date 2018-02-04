@@ -1,7 +1,7 @@
 /* Virtual File System: SFTP file system.
    The VFS class functions
 
-   Copyright (C) 2011-2017
+   Copyright (C) 2011-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -150,7 +150,7 @@ sftpfs_cb_open (const vfs_path_t * vpath, int flags, mode_t mode)
     file_handler->ino = path_inode;
     file_handler->handle = -1;
     file_handler->changed = is_changed;
-    file_handler->linear = 0;
+    file_handler->linear = LS_NOT_LINEAR;
     file_handler->data = NULL;
 
     if (!sftpfs_open_file (file_handler, flags, mode, &mcerror))

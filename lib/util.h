@@ -214,11 +214,7 @@ char *tilde_expand (const char *);
 void custom_canonicalize_pathname (char *, CANON_PATH_FLAGS);
 void canonicalize_pathname (char *);
 
-#ifdef HAVE_REALPATH
-#define mc_realpath realpath
-#else
 char *mc_realpath (const char *path, char *resolved_path);
-#endif
 
 /* Looks for "magic" bytes at the start of the VFS file to guess the
  * compression type. Side effect: modifies the file position. */

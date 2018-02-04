@@ -503,9 +503,7 @@ To untag files, just retag a tagged file.
 .B M\-e
 to change charset of panel you may use M\-e (Alt\-e).
 Recoding is made from selected codepage into system codepage. To
-cancel the recoding you may select "directory up" (..) in active panel.
-To cancel the charsets in all directories, select "No translation " in
-the dialog of encodings.
+cancel the recoding, select "No translation" in the dialog of encodings.
 .TP
 .B Alt\-g, Alt\-r, Alt\-j
 used to select the top file in a panel, the middle file and the bottom one,

@@ -1,7 +1,7 @@
 /*
    Find file command for the Midnight Commander
 
-   Copyright (C) 1995-2017
+   Copyright (C) 1995-2018
    Free Software Foundation, Inc.
 
    Written  by:
@@ -540,7 +540,7 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         }
 
         first_draw = FALSE;
-        /* fall through to call MSG_DRAW default handler */
+        MC_FALLTHROUGH;         /* to call MSG_DRAW default handler */
 
     default:
         return dlg_default_callback (w, sender, msg, parm, data);

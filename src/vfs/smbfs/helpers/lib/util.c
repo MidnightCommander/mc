@@ -5,7 +5,7 @@
 
    Copyright (C) Andrew Tridgell 1992-1998
 
-   Copyright (C) 2011-2017
+   Copyright (C) 2011-2018
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -59,8 +59,6 @@
 #ifdef WITH_SSL
 #include <ssl.h>
 #undef Realloc                  /* SSLeay defines this and samba has a function of this name */
-extern SSL *ssl;
-extern int sslFd;
 #endif /* WITH_SSL */
 
 extern int DEBUGLEVEL;
@@ -76,9 +74,6 @@ extern int Client;
 
 /* this is used by the chaining code */
 const int chain_size = 0;
-#if 0
-int trans_num = 0;
-#endif /*0 */
 
 /*
    case handling on filenames 
@@ -105,7 +100,7 @@ static const char *remote_proto = "UNKNOWN";
 pstring myhostname = "";
 pstring user_socket_options = "";
 
-pstring sesssetup_user = "";
+static const char sesssetup_user[] = "";
 static const char *const samlogon_user = "";
 
 const BOOL sam_logon_in_ssb = False;
@@ -342,7 +337,7 @@ name_mangle (char *In, char *Out, char name_type)
     p[0] = '\0';
 
     /* Add the scope string. */
-    for (i = 0, len = 0; NULL != global_scope; i++, len++)
+    for (i = 0, len = 0;; i++, len++)
     {
         switch (global_scope[i])
         {
@@ -437,22 +432,25 @@ return a string representing an attribute for a file
 char *
 attrib_string (uint16 mode)
 {
-    static fstring attrstr;
+    static char attrstr[7];
+    int i = 0;
 
     attrstr[0] = 0;
 
     if (mode & aVOLID)
-        fstrcat (attrstr, "V");
+        attrstr[i++] = 'V';
     if (mode & aDIR)
-        fstrcat (attrstr, "D");
+        attrstr[i++] = 'D';
     if (mode & aARCH)
-        fstrcat (attrstr, "A");
+        attrstr[i++] = 'A';
     if (mode & aHIDDEN)
-        fstrcat (attrstr, "H");
+        attrstr[i++] = 'H';
     if (mode & aSYSTEM)
-        fstrcat (attrstr, "S");
+        attrstr[i++] = 'S';
     if (mode & aRONLY)
-        fstrcat (attrstr, "R");
+        attrstr[i++] = 'R';
+
+    attrstr[i] = 0;
 
     return (attrstr);
 }
@@ -2498,7 +2496,7 @@ Get_Hostbyname (const char *name)
     return (NULL);
 }
 
-
+#if 0
 /*******************************************************************
 turn a uid into a user name
 ********************************************************************/
@@ -2512,7 +2510,7 @@ uidtoname (uid_t uid)
     slprintf (name, sizeof (name) - 1, "%d", (int) uid);
     return (name);
 }
-
+#endif /* 0 */
 
 /*******************************************************************
 turn a gid into a group name
@@ -2529,6 +2527,7 @@ gidtoname (gid_t gid)
     return (name);
 }
 
+#if 0
 /*******************************************************************
 turn a user name into a uid
 ********************************************************************/
@@ -2540,7 +2539,7 @@ nametouid (const char *name)
         return (pass->pw_uid);
     return (uid_t) - 1;
 }
-
+#endif /* 0 */
 /*******************************************************************
 something really nasty happened - panic!
 ********************************************************************/
@@ -2769,121 +2768,6 @@ free_namearray (name_compare_entry * name_array)
     free ((char *) name_array);
 }
 
-/****************************************************************************
-routine to do file locking
-****************************************************************************/
-BOOL
-fcntl_lock (int fd, int op, SMB_OFF_T offset, SMB_OFF_T count, int type)
-{
-#ifdef HAVE_FCNTL_LOCK
-    SMB_STRUCT_FLOCK lock;
-    int ret;
-
-    if (lp_ole_locking_compat ())
-    {
-        SMB_OFF_T mask2 = ((SMB_OFF_T) 0x3) << (SMB_OFF_T_BITS - 4);
-        SMB_OFF_T mask = (mask2 << 2);
-
-        /* make sure the count is reasonable, we might kill the lockd otherwise */
-        count &= ~mask;
-
-        /* the offset is often strange - remove 2 of its bits if either of
-           the top two bits are set. Shift the top ones by two bits. This
-           still allows OLE2 apps to operate, but should stop lockd from
-           dieing */
-        if ((offset & mask) != 0)
-            offset = (offset & ~mask) | (((offset & mask) >> 2) & mask2);
-    }
-    else
-    {
-        SMB_OFF_T mask2 = ((SMB_OFF_T) 0x4) << (SMB_OFF_T_BITS - 4);
-        SMB_OFF_T mask = (mask2 << 1);
-        SMB_OFF_T neg_mask = ~mask;
-
-        /* interpret negative counts as large numbers */
-        if (count < 0)
-            count &= ~mask;
-
-        /* no negative offsets */
-        if (offset < 0)
-            offset &= ~mask;
-
-        /* count + offset must be in range */
-        while ((offset < 0 || (offset + count < 0)) && mask)
-        {
-            offset &= ~mask;
-            mask = ((mask >> 1) & neg_mask);
-        }
-    }
-
-    DEBUG (8, ("fcntl_lock %d %d %.0f %.0f %d\n", fd, op, (double) offset, (double) count, type));
-
-    lock.l_type = type;
-    lock.l_whence = SEEK_SET;
-    lock.l_start = offset;
-    lock.l_len = count;
-    lock.l_pid = 0;
-
-    errno = 0;
-
-    ret = fcntl (fd, op, &lock);
-    if (errno == EFBIG)
-    {
-        if (DEBUGLVL (0))
-        {
-            dbgtext ("fcntl_lock: WARNING: lock request at offset %.0f, length %.0f returned\n",
-                     (double) offset, (double) count);
-            dbgtext ("a 'file too large' error. This can happen when using 64 bit lock offsets\n");
-            dbgtext
-                ("on 32 bit NFS mounted file systems. Retrying with 32 bit truncated length.\n");
-        }
-        /* 32 bit NFS file system, retry with smaller offset */
-        errno = 0;
-        lock.l_len = count & 0xffffffff;
-        ret = fcntl (fd, op, &lock);
-    }
-
-    if (errno != 0)
-        DEBUG (3, ("fcntl lock gave errno %d (%s)\n", errno, unix_error_string (errno)));
-
-    /* a lock query */
-    if (op == SMB_F_GETLK)
-    {
-        if ((ret != -1) &&
-            (lock.l_type != F_UNLCK) && (lock.l_pid != 0) && (lock.l_pid != getpid ()))
-        {
-            DEBUG (3, ("fd %d is locked by pid %d\n", fd, (int) lock.l_pid));
-            return (True);
-        }
-
-        /* it must be not locked or locked by me */
-        return (False);
-    }
-
-    /* a lock set or unset */
-    if (ret == -1)
-    {
-        DEBUG (3, ("lock failed at offset %.0f count %.0f op %d type %d (%s)\n",
-                   (double) offset, (double) count, op, type, unix_error_string (errno)));
-
-        /* perhaps it doesn't support this sort of locking?? */
-        if (errno == EINVAL)
-        {
-            DEBUG (3, ("locking not supported? returning True\n"));
-            return (True);
-        }
-
-        return (False);
-    }
-
-    /* everything went OK */
-    DEBUG (8, ("Lock call successful\n"));
-
-    return (True);
-#else
-    return (False);
-#endif
-}
 
 /*******************************************************************
 is the name specified one of my netbios names
@@ -3073,6 +2957,7 @@ dump_data (int level, char *buf1, int len)
     }
 }
 
+#if 0
 /*****************************************************************************
  * Provide a checksum on a string
  *
@@ -3101,8 +2986,6 @@ str_checksum (const char *s)
 }                               /* str_checksum */
 
 
-
-#if 0
 /*****************************************************************
 zero a memory area then free it. Used to catch bugs faster
 *****************************************************************/
@@ -3111,68 +2994,5 @@ zero_free (void *p, size_t size)
 {
     memset (p, 0, size);
     free (p);
-}
-
-
-/*****************************************************************
-set our open file limit to a requested max and return the limit
-*****************************************************************/
-int
-set_maxfiles (int requested_max)
-{
-#if (defined(HAVE_GETRLIMIT) && defined(RLIMIT_NOFILE))
-    struct rlimit rlp;
-    int saved_current_limit;
-
-    if (getrlimit (RLIMIT_NOFILE, &rlp))
-    {
-        DEBUG (0, ("set_maxfiles: getrlimit (1) for RLIMIT_NOFILE failed with error %s\n",
-                   unix_error_string (errno)));
-        /* just guess... */
-        return requested_max;
-    }
-
-    /* 
-     * Set the fd limit to be real_max_open_files + MAX_OPEN_FUDGEFACTOR to
-     * account for the extra fd we need 
-     * as well as the log files and standard
-     * handles etc. Save the limit we want to set in case
-     * we are running on an OS that doesn't support this limit (AIX)
-     * which always returns RLIM_INFINITY for rlp.rlim_max.
-     */
-
-    saved_current_limit = rlp.rlim_cur = MIN (requested_max, rlp.rlim_max);
-
-    if (setrlimit (RLIMIT_NOFILE, &rlp))
-    {
-        DEBUG (0, ("set_maxfiles: setrlimit for RLIMIT_NOFILE for %d files failed with error %s\n",
-                   (int) rlp.rlim_cur, unix_error_string (errno)));
-        /* just guess... */
-        return saved_current_limit;
-    }
-
-    if (getrlimit (RLIMIT_NOFILE, &rlp))
-    {
-        DEBUG (0, ("set_maxfiles: getrlimit (2) for RLIMIT_NOFILE failed with error %s\n",
-                   unix_error_string (errno)));
-        /* just guess... */
-        return saved_current_limit;
-    }
-
-#if defined(RLIM_INFINITY)
-    if (rlp.rlim_cur == RLIM_INFINITY)
-        return saved_current_limit;
-#endif
-
-    if ((int) rlp.rlim_cur > saved_current_limit)
-        return saved_current_limit;
-
-    return rlp.rlim_cur;
-#else /* !defined(HAVE_GETRLIMIT) || !defined(RLIMIT_NOFILE) */
-    /*
-     * No way to know - just guess...
-     */
-    return requested_max;
-#endif
 }
 #endif /* 0 */

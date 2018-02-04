@@ -2,7 +2,7 @@
    Search text engine.
    Common share code for module.
 
-   Copyright (C) 2009-2017
+   Copyright (C) 2009-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -61,31 +61,27 @@ gchar *
 mc_search__recode_str (const char *str, gsize str_len,
                        const char *charset_from, const char *charset_to, gsize * bytes_written)
 {
-    gchar *ret;
-    gsize bytes_read;
-    GIConv conv;
+    gchar *ret = NULL;
 
-    if (charset_from == NULL || charset_to == NULL
-        || g_ascii_strcasecmp (charset_to, charset_from) == 0)
+    if (charset_from != NULL && charset_to != NULL
+        && g_ascii_strcasecmp (charset_to, charset_from) != 0)
     {
-        *bytes_written = str_len;
-        return g_strndup (str, str_len);
-    }
+        GIConv conv;
 
-    conv = g_iconv_open (charset_to, charset_from);
-    if (conv == INVALID_CONV)
-    {
-        *bytes_written = str_len;
-        return g_strndup (str, str_len);
-    }
+        conv = g_iconv_open (charset_to, charset_from);
+        if (conv != INVALID_CONV)
+        {
+            gsize bytes_read;
 
-    ret = g_convert_with_iconv (str, str_len, conv, &bytes_read, bytes_written, NULL);
-    g_iconv_close (conv);
+            ret = g_convert_with_iconv (str, str_len, conv, &bytes_read, bytes_written, NULL);
+            g_iconv_close (conv);
+        }
+    }
 
     if (ret == NULL)
     {
         *bytes_written = str_len;
-        return g_strndup (str, str_len);
+        ret = g_strndup (str, str_len);
     }
 
     return ret;
@@ -125,13 +121,8 @@ mc_search__get_one_symbol (const char *charset, const char *str, gsize str_len,
     converted_str2 =
         mc_search__recode_str (converted_str, tmp_len, cp_display, charset, &converted_str_len);
 #endif
-    if (just_letters)
-    {
-        if (str_isalnum (converted_str) && !str_isdigit (converted_str))
-            *just_letters = TRUE;
-        else
-            *just_letters = FALSE;
-    }
+    if (just_letters != NULL)
+        *just_letters = str_isalnum (converted_str) && !str_isdigit (converted_str);
 #ifdef HAVE_CHARSET
     g_free (converted_str);
     return converted_str2;

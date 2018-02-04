@@ -1,7 +1,7 @@
 /*
    Main dialog (file panels) of the Midnight Commander
 
-   Copyright (C) 1994-2017
+   Copyright (C) 1994-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -694,19 +694,6 @@ create_panels (void)
 #endif /* ENABLE_VFS */
 
     mc_event_add (MCEVENT_GROUP_CORE, "vfs_print_message", print_vfs_message, NULL, NULL);
-
-    /* Create the nice widgets */
-    cmdline = command_new (0, 0, 0);
-    the_prompt = label_new (0, 0, mc_prompt);
-    the_prompt->transparent = 1;
-    the_bar = buttonbar_new (mc_global.keybar_visible);
-
-    the_hint = label_new (0, 0, 0);
-    the_hint->transparent = 1;
-    the_hint->auto_adjust_cols = 0;
-    WIDGET (the_hint)->cols = COLS;
-
-    the_menubar = menubar_new (0, 0, COLS, NULL, menubar_visible);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -929,30 +916,37 @@ done_mc (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-create_panels_and_run_mc (void)
+create_file_manager (void)
 {
     midnight_dlg->get_shortcut = midnight_get_shortcut;
     midnight_dlg->get_title = midnight_get_title;
     /* allow rebind tab */
     widget_want_tab (WIDGET (midnight_dlg), TRUE);
 
-    create_panels ();
-
+    the_menubar = menubar_new (0, 0, COLS, NULL, menubar_visible);
     add_widget (midnight_dlg, the_menubar);
     init_menu ();
 
+    create_panels ();
     add_widget (midnight_dlg, get_panel_widget (0));
     add_widget (midnight_dlg, get_panel_widget (1));
 
+    the_hint = label_new (0, 0, 0);
+    the_hint->transparent = 1;
+    the_hint->auto_adjust_cols = 0;
+    WIDGET (the_hint)->cols = COLS;
     add_widget (midnight_dlg, the_hint);
+
+    cmdline = command_new (0, 0, 0);
     add_widget (midnight_dlg, cmdline);
+
+    the_prompt = label_new (0, 0, mc_prompt);
+    the_prompt->transparent = TRUE;
     add_widget (midnight_dlg, the_prompt);
 
+    the_bar = buttonbar_new (mc_global.keybar_visible);
     add_widget (midnight_dlg, the_bar);
     midnight_set_buttonbar (the_bar);
-
-    /* Run the Midnight Commander if no file was specified in the command line */
-    dlg_run (midnight_dlg);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1792,7 +1786,10 @@ do_nc (void)
 
         setup_mc ();
         mc_filehighlight = mc_fhl_new (TRUE);
-        create_panels_and_run_mc ();
+
+        create_file_manager ();
+        (void) dlg_run (midnight_dlg);
+
         mc_fhl_free (&mc_filehighlight);
 
         ret = TRUE;

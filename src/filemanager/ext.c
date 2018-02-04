@@ -1,7 +1,7 @@
 /*
    Extension dependent execution.
 
-   Copyright (C) 1994-2017
+   Copyright (C) 1994-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -353,25 +353,34 @@ exec_make_shell_string (const char *lc_data, const vfs_path_t * filename_vpath)
 static void
 exec_extension_view (void *target, char *cmd, const vfs_path_t * filename_vpath, int start_line)
 {
-    int def_hex_mode = mcview_default_hex_mode, changed_hex_mode = 0;
-    int def_nroff_flag = mcview_default_nroff_flag, changed_nroff_flag = 0;
+    mcview_mode_flags_t def_flags = {
+        /* *INDENT-OFF* */
+        .wrap = FALSE,
+        .hex = mcview_global_flags.hex,
+        .magic = FALSE,
+        .nroff = mcview_global_flags.nroff
+        /* *INDENT-ON* */
+    };
 
-    mcview_altered_hex_mode = 0;
-    mcview_altered_nroff_flag = 0;
-    if (def_hex_mode != mcview_default_hex_mode)
-        changed_hex_mode = 1;
-    if (def_nroff_flag != mcview_default_nroff_flag)
-        changed_nroff_flag = 1;
+    mcview_mode_flags_t changed_flags;
+
+    mcview_clear_mode_flags (&changed_flags);
+    mcview_altered_flags.hex = FALSE;
+    mcview_altered_flags.nroff = FALSE;
+    if (def_flags.hex != mcview_global_flags.hex)
+        changed_flags.hex = TRUE;
+    if (def_flags.nroff != mcview_global_flags.nroff)
+        changed_flags.nroff = TRUE;
 
     if (target == NULL)
         mcview_viewer (cmd, filename_vpath, start_line, 0, 0);
     else
         mcview_load ((WView *) target, cmd, vfs_path_as_str (filename_vpath), start_line, 0, 0);
 
-    if (changed_hex_mode && !mcview_altered_hex_mode)
-        mcview_default_hex_mode = def_hex_mode;
-    if (changed_nroff_flag && !mcview_altered_nroff_flag)
-        mcview_default_nroff_flag = def_nroff_flag;
+    if (changed_flags.hex && !mcview_altered_flags.hex)
+        mcview_global_flags.hex = def_flags.hex;
+    if (changed_flags.nroff && !mcview_altered_flags.nroff)
+        mcview_global_flags.nroff = def_flags.nroff;
 
     dialog_switch_process_pending ();
 }

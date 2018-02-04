@@ -2,7 +2,7 @@
    Color setup.
    Interface functions.
 
-   Copyright (C) 1994-2017
+   Copyright (C) 1994-2018
    Free Software Foundation, Inc.
 
    Written by:

@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Function for paint dialogs
 
-   Copyright (C) 1994-2017
+   Copyright (C) 1994-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -128,11 +128,8 @@ mcview_dialog_search (WView * view)
         GString *tmp;
 
         tmp = str_convert_to_input (exp);
-        if (tmp != NULL)
-        {
-            g_free (exp);
-            exp = g_string_free (tmp, FALSE);
-        }
+        g_free (exp);
+        exp = g_string_free (tmp, FALSE);
     }
 #endif
 
@@ -251,12 +248,12 @@ mcview_dialog_goto (WView * view, off_t * offset)
                 if (view->growbuf_in_use)
                     mcview_growbuf_read_all_data (view);
                 *offset = addr * mcview_get_filesize (view) / 100;
-                if (!view->hex_mode)
+                if (!view->mode_flags.hex)
                     *offset = mcview_bol (view, *offset, 0);
                 break;
             case MC_VIEW_GOTO_OFFSET_DEC:
             case MC_VIEW_GOTO_OFFSET_HEX:
-                if (!view->hex_mode)
+                if (!view->mode_flags.hex)
                 {
                     if (view->growbuf_in_use)
                         mcview_growbuf_read_until (view, addr);

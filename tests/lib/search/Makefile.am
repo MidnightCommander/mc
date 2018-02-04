@@ -7,7 +7,12 @@ AM_CPPFLAGS = \
 	@CHECK_CFLAGS@ \
 	@PCRE_CPPFLAGS@
 
-LIBS = @CHECK_LIBS@ $(top_builddir)/lib/libmc.la @PCRE_LIBS@
+LIBS = @CHECK_LIBS@ \
+	$(top_builddir)/lib/libmc.la @PCRE_LIBS@
+
+if ENABLE_MCLIB
+LIBS += $(GLIB_LIBS)
+endif
 
 TESTS = \
 	glob_prepare_replace_str \

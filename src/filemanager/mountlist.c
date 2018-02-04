@@ -1,7 +1,7 @@
 /*
    Return a list of mounted file systems
 
-   Copyright (C) 1991-2017
+   Copyright (C) 1991-2018
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -75,9 +75,6 @@
 #ifdef HAVE_SYS_FS_S5PARAM_H    /* Fujitsu UXP/V */
 #include <sys/fs/s5param.h>
 #endif
-#if defined HAVE_SYS_FILSYS_H && !defined _CRAY
-#include <sys/filsys.h>         /* SVR2 */
-#endif
 #ifdef HAVE_SYS_STATFS_H
 #include <sys/statfs.h>
 #endif
@@ -117,10 +114,6 @@
 #ifdef MOUNTED_FS_STAT_DEV      /* BeOS.  */
 #include <fs_info.h>
 #include <dirent.h>
-#endif
-
-#ifdef MOUNTED_FREAD            /* SVR2.  */
-#include <mnttab.h>
 #endif
 
 #ifdef MOUNTED_FREAD_FSTYP      /* SVR3.  */
@@ -308,17 +301,6 @@ me_remote (char const *fs_name, char const *fs_type)
 #define STAT_STATFS2_BSIZE 1
 #endif
 #endif
-
-#ifdef STAT_READ_FILSYS         /* SVR2 */
-/* Set errno to zero upon EOF.  */
-#define ZERO_BYTE_TRANSFER_ERRNO 0
-
-#ifdef EINTR
-#define IS_EINTR(x) ((x) == EINTR)
-#else
-#define IS_EINTR(x) 0
-#endif
-#endif /* STAT_READ_FILSYS */
 
 /*** file scope type declarations ****************************************************************/
 
@@ -1406,76 +1388,6 @@ read_file_system_list (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef STAT_READ_FILSYS         /* SVR2 */
-
-/* Read(write) up to COUNT bytes at BUF from(to) descriptor FD, retrying if
-   interrupted.  Return the actual number of bytes read(written), zero for EOF,
-   or SAFE_READ_ERROR(SAFE_WRITE_ERROR) upon error.  */
-static size_t
-safe_read (int fd, void *buf, size_t count)
-{
-    /* Work around a bug in Tru64 5.1.  Attempting to read more than
-       INT_MAX bytes fails with errno == EINVAL.  See
-       <http://lists.gnu.org/archive/html/bug-gnu-utils/2002-04/msg00010.html>.
-       When decreasing COUNT, keep it block-aligned.  */
-    /* *INDENT-OFF* */
-    enum { BUGGY_READ_MAXIMUM = INT_MAX & ~8191 };
-    /* *INDENT-ON* */
-
-    while (TRUE)
-    {
-        ssize_t result;
-
-        result = read (fd, buf, count);
-
-        if (0 <= result)
-            return result;
-        else if (IS_EINTR (errno))
-            continue;
-        else if (errno == EINVAL && BUGGY_READ_MAXIMUM < count)
-            count = BUGGY_READ_MAXIMUM;
-        else
-            return result;
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/* Read COUNT bytes at BUF to(from) descriptor FD, retrying if
-   interrupted or if a partial write(read) occurs.  Return the number
-   of bytes transferred.
-   When writing, set errno if fewer than COUNT bytes are written.
-   When reading, if fewer than COUNT bytes are read, you must examine
-   errno to distinguish failure from EOF (errno == 0).  */
-
-static size_t
-full_read (int fd, void *buf, size_t count)
-{
-    size_t total = 0;
-    char *ptr = (char *) buf;
-
-    while (count > 0)
-    {
-        size_t n_rw = safe_read (fd, ptr, count);
-        if (n_rw == (size_t) (-1))
-            break;
-        if (n_rw == 0)
-        {
-            errno = ZERO_BYTE_TRANSFER_ERRNO;
-            break;
-        }
-        total += n_rw;
-        ptr += n_rw;
-        count -= n_rw;
-    }
-
-    return total;
-}
-
-#endif /* STAT_READ_FILSYS */
-
-/* --------------------------------------------------------------------------------------------- */
-
 #ifdef HAVE_INFOMOUNT
 /* Fill in the fields of FSP with information about space usage for
    the file system on which FILE resides.
@@ -1540,40 +1452,6 @@ get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
         fsp->fsu_bavail_top_bit_set = EXTRACT_TOP_BIT (fsd.fd_req.bfreen) != 0;
         fsp->fsu_files = PROPAGATE_ALL_ONES (fsd.fd_req.gtot);
         fsp->fsu_ffree = PROPAGATE_ALL_ONES (fsd.fd_req.gfree);
-
-#elif defined STAT_READ_FILSYS  /* SVR2 */
-#ifndef SUPERBOFF
-#define SUPERBOFF (SUPERB * 512)
-#endif
-
-        struct filsys fsd;
-        int fd;
-
-        if (!disk)
-        {
-            errno = 0;
-            return -1;
-        }
-
-        fd = open (disk, O_RDONLY);
-        if (fd < 0)
-            return -1;
-        lseek (fd, (off_t) SUPERBOFF, 0);
-        if (full_read (fd, (char *) &fsd, sizeof (fsd)) != sizeof (fsd))
-        {
-            close (fd);
-            return -1;
-        }
-        close (fd);
-
-        fsp->fsu_blocksize = (fsd.s_type == Fs2b ? 1024 : 512);
-        fsp->fsu_blocks = PROPAGATE_ALL_ONES (fsd.s_fsize);
-        fsp->fsu_bfree = PROPAGATE_ALL_ONES (fsd.s_tfree);
-        fsp->fsu_bavail = PROPAGATE_TOP_BIT (fsd.s_tfree);
-        fsp->fsu_bavail_top_bit_set = EXTRACT_TOP_BIT (fsd.s_tfree) != 0;
-        fsp->fsu_files = (fsd.s_isize == -1
-                          ? UINTMAX_MAX : (fsd.s_isize - 2) * INOPB * (fsd.s_type == Fs2b ? 2 : 1));
-        fsp->fsu_ffree = PROPAGATE_ALL_ONES (fsd.s_tinode);
 
 #elif defined STAT_STATFS3_OSF1 /* OSF/1 */
 

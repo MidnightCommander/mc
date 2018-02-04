@@ -5,7 +5,7 @@
 
    Copyright (C) Andrew Tridgell 1992-1998
 
-   Copyright (C) 2011-2017
+   Copyright (C) 2011-2018
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -103,7 +103,6 @@ sys_select (int maxfd, fd_set * fds, struct timeval *tval)
 #else /* !NO_SELECT */
 int
 sys_select (int maxfd, fd_set * fds, struct timeval *tval)
-/* cppcheck-suppress syntaxError */
 {
 #ifdef USE_POLL
     struct pollfd pfd[256];
@@ -154,8 +153,8 @@ sys_select (int maxfd, fd_set * fds, struct timeval *tval)
     while (selrtn < 0 && errno == EINTR);
 
     return (selrtn);
-}
 #endif /* USE_POLL */
+}
 #endif /* NO_SELECT */
 
 /*******************************************************************
@@ -197,7 +196,7 @@ sys_ftell (FILE * fp)
 {
     return (SMB_OFF_T) ftell (fp);
 }
-#endif /* 0 */
+
 /*******************************************************************
  An open() wrapper that will deal with 64 bit filesizes.
 ********************************************************************/
@@ -211,6 +210,7 @@ sys_open (const char *path, int oflag, mode_t mode)
 /*******************************************************************
  An fopen() wrapper that will deal with 64 bit filesizes.
 ********************************************************************/
+#endif /* 0 */
 
 FILE *
 sys_fopen (const char *path, const char *type)
@@ -304,38 +304,3 @@ sys_gethostbyname (const char *name)
     return (gethostbyname (name));
 #endif /* REDUCE_ROOT_DNS_LOOKUPS */
 }
-
-/**************************************************************************
- Wrapper for random().
-****************************************************************************/
-#if 0
-long
-sys_random (void)
-{
-#if defined(HAVE_RANDOM)
-    return (long) random ();
-#elif defined(HAVE_RAND)
-    return (long) rand ();
-#else
-    DEBUG (0, ("Error - no random function available !\n"));
-    exit (1);
-#endif
-}
-
-/**************************************************************************
- Wrapper for srandom().
-****************************************************************************/
-
-void
-sys_srandom (unsigned int seed)
-{
-#if defined(HAVE_SRANDOM)
-    srandom (seed);
-#elif defined(HAVE_SRAND)
-    srand (seed);
-#else
-    DEBUG (0, ("Error - no srandom function available !\n"));
-    exit (1);
-#endif
-}
-#endif /* 0 */

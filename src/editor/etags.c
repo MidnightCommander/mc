@@ -6,7 +6,7 @@
    or, if etags utility not installed:
    $ find . -type f -name "*.[ch]" | ctags --c-kinds=+p --fields=+iaS --extra=+q -e -L-
 
-   Copyright (C) 2009-2017
+   Copyright (C) 2009-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -54,7 +54,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 static gboolean
-parse_define (char *buf, char **long_name, char **short_name, long *line)
+parse_define (const char *buf, char **long_name, char **short_name, long *line)
 {
     /* *INDENT-OFF* */
     enum
@@ -183,7 +183,7 @@ etags_set_definition_hash (const char *tagfile, const char *start_path,
     /* *INDENT-ON* */
 
     FILE *f;
-    static char buf[BUF_LARGE];
+    char buf[BUF_LARGE];
 
     char *chekedstr = NULL;
 
@@ -241,14 +241,7 @@ etags_set_definition_hash (const char *tagfile, const char *start_path,
 
                     canonicalize_pathname (def_hash[num].fullpath);
                     def_hash[num].filename = g_strdup (filename);
-                    if (shortname)
-                    {
-                        def_hash[num].short_define = g_strdup (shortname);
-                    }
-                    else
-                    {
-                        def_hash[num].short_define = g_strdup (longname);
-                    }
+                    def_hash[num].short_define = g_strdup (shortname ? shortname : longname);
                     def_hash[num].line = line;
                     num++;
                 }

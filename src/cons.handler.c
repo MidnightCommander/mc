@@ -1,7 +1,7 @@
 /*
    Client interface for General purpose Linux console save/restore server
 
-   Copyright (C) 1994-2017
+   Copyright (C) 1994-2018
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -42,7 +42,7 @@
 
 #include "lib/unixcompat.h"
 #include "lib/tty/tty.h"
-#include "lib/skin.h"           /* tty_set_normal_attrs */
+#include "lib/tty/color.h"      /* tty_set_normal_attrs */
 #include "lib/tty/win.h"
 #include "lib/util.h"           /* mc_build_filename() */
 

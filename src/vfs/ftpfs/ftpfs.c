@@ -1,7 +1,7 @@
 /*
    Virtual File System: FTP file system.
 
-   Copyright (C) 1995-2017
+   Copyright (C) 1995-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -96,6 +96,7 @@ What to do with this?
 
 #include "lib/global.h"
 #include "lib/util.h"
+#include "lib/strutil.h"        /* str_move() */
 #include "lib/mcconfig.h"
 
 #include "lib/tty/tty.h"        /* enable/disable interrupt key */
@@ -327,7 +328,7 @@ ftpfs_translate_path (struct vfs_class *me, struct vfs_s_super *super, const cha
         /* replace first occurrence of ":/" with ":" */
         p = strchr (ret, ':');
         if (p != NULL && IS_PATH_SEP (p[1]))
-            memmove (p + 1, p + 2, strlen (p + 2) + 1);
+            str_move (p + 1, p + 2);
 
         /* strip trailing "/." */
         p = strrchr (ret, PATH_SEP);
@@ -477,30 +478,26 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
                ...)
 {
     va_list ap;
-    char *cmdstr;
-    int status, cmdlen;
+    GString *cmdstr;
+    int status;
     static int retry = 0;
     static int level = 0;       /* ftpfs_login_server() use ftpfs_command() */
 
+    cmdstr = g_string_sized_new (32);
     va_start (ap, fmt);
-    cmdstr = g_strdup_vprintf (fmt, ap);
+    g_string_vprintf (cmdstr, fmt, ap);
     va_end (ap);
+    g_string_append (cmdstr, "\r\n");
 
-    cmdlen = strlen (cmdstr);
-    cmdstr = g_realloc (cmdstr, cmdlen + 3);
-    strcpy (cmdstr + cmdlen, "\r\n");
-    cmdlen += 2;
-
-    if (MEDATA->logfile)
+    if (MEDATA->logfile != NULL)
     {
-        if (strncmp (cmdstr, "PASS ", 5) == 0)
-        {
+        if (strncmp (cmdstr->str, "PASS ", 5) == 0)
             fputs ("PASS <Password not logged>\r\n", MEDATA->logfile);
-        }
         else
         {
             size_t ret;
-            ret = fwrite (cmdstr, cmdlen, 1, MEDATA->logfile);
+
+            ret = fwrite (cmdstr->str, cmdstr->len, 1, MEDATA->logfile);
             (void) ret;
         }
 
@@ -509,7 +506,7 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
 
     got_sigpipe = 0;
     tty_enable_interrupt_key ();
-    status = write (SUP->sock, cmdstr, cmdlen);
+    status = write (SUP->sock, cmdstr->str, cmdstr->len);
 
     if (status < 0)
     {
@@ -522,15 +519,13 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
                 level = 1;
                 status = ftpfs_reconnect (me, super);
                 level = 0;
-                if (status && (write (SUP->sock, cmdstr, cmdlen) > 0))
-                {
+                if (status && (write (SUP->sock, cmdstr->str, cmdstr->len) > 0))
                     goto ok;
-                }
 
             }
             got_sigpipe = 1;
         }
-        g_free (cmdstr);
+        g_string_free (cmdstr, TRUE);
         tty_disable_interrupt_key ();
         return TRANSIENT;
     }
@@ -549,16 +544,15 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
             level = 1;
             status = ftpfs_reconnect (me, super);
             level = 0;
-            if (status && (write (SUP->sock, cmdstr, cmdlen) > 0))
-            {
+            if (status && (write (SUP->sock, cmdstr->str, cmdstr->len) > 0))
                 goto ok;
-            }
         }
         retry = 0;
-        g_free (cmdstr);
+        g_string_free (cmdstr, TRUE);
         return status;
     }
-    g_free (cmdstr);
+
+    g_string_free (cmdstr, TRUE);
     return COMPLETE;
 }
 
@@ -570,7 +564,7 @@ ftpfs_free_archive (struct vfs_class *me, struct vfs_s_super *super)
     if (SUP->sock != -1)
     {
         vfs_print_message (_("ftpfs: Disconnecting from %s"), super->path_element->host);
-        ftpfs_command (me, super, NONE, "QUIT");
+        ftpfs_command (me, super, NONE, "%s", "QUIT");
         close (SUP->sock);
     }
     g_free (SUP->current_dir);
@@ -687,7 +681,7 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
             }
             if (code != COMPLETE)
                 break;
-            /* fall through */
+            MC_FALLTHROUGH;
 
         case COMPLETE:
             vfs_print_message ("%s", _("ftpfs: logged in"));
@@ -1052,7 +1046,7 @@ ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super)
 {
     char buf[MC_MAXPATHLEN + 1];
 
-    if (ftpfs_command (me, super, NONE, "PWD") == COMPLETE &&
+    if (ftpfs_command (me, super, NONE, "%s", "PWD") == COMPLETE &&
         ftpfs_get_reply (me, SUP->sock, buf, sizeof (buf)) == COMPLETE)
     {
         char *bufp = NULL;
@@ -1104,7 +1098,7 @@ ftpfs_setup_passive_pasv (struct vfs_class *me, struct vfs_s_super *super,
     char n[6];
     int xa, xb, xc, xd, xe, xf;
 
-    if (ftpfs_command (me, super, WAIT_REPLY | WANT_STRING, "PASV") != COMPLETE)
+    if (ftpfs_command (me, super, WAIT_REPLY | WANT_STRING, "%s", "PASV") != COMPLETE)
         return 0;
 
     /* Parse remote parameters */
@@ -1144,7 +1138,7 @@ ftpfs_setup_passive_epsv (struct vfs_class *me, struct vfs_s_super *super,
     char *c;
     int port;
 
-    if (ftpfs_command (me, super, WAIT_REPLY | WANT_STRING, "EPSV") != COMPLETE)
+    if (ftpfs_command (me, super, WAIT_REPLY | WANT_STRING, "%s", "EPSV") != COMPLETE)
         return 0;
 
     /* (|||<port>|) */
@@ -1996,7 +1990,7 @@ ftpfs_ctl (void *fh, int ctlop, void *arg)
         {
             int v;
 
-            if (!FH->linear)
+            if (FH->linear == LS_NOT_LINEAR)
                 vfs_die ("You may not do this");
             if (FH->linear == LS_LINEAR_CLOSED || FH->linear == LS_LINEAR_PREOPEN)
                 return 0;

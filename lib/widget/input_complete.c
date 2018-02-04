@@ -2,7 +2,7 @@
    Input line filename/username/hostname/variable/command completion.
    (Let mc type for you...)
 
-   Copyright (C) 1995-2017
+   Copyright (C) 1995-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -641,7 +641,7 @@ command_completion_function (const char *text, int state, input_complete_t flags
             }
         phase++;
         words = bash_builtins;
-        /* fallthrough */
+        MC_FALLTHROUGH;
     case 1:                    /* Builtin commands */
         for (; *words != NULL; words++)
             if (strncmp (*words, u_text, text_len) == 0)
@@ -654,7 +654,7 @@ command_completion_function (const char *text, int state, input_complete_t flags
             break;
         cur_path = path;
         cur_word = NULL;
-        /* fallthrough */
+        MC_FALLTHROUGH;
     case 2:                    /* And looking through the $PATH */
         while (found == NULL)
         {
@@ -675,7 +675,7 @@ command_completion_function (const char *text, int state, input_complete_t flags
             if (found == NULL)
                 MC_PTR_FREE (cur_word);
         }
-        /* fallthrough */
+        MC_FALLTHROUGH;
     default:
         break;
     }
@@ -887,11 +887,8 @@ try_complete_find_start_sign (try_complete_automation_state_t * state)
         /* don't substitute variable in \$ case */
         if (strutils_is_char_escaped (state->word, state->q))
         {
-            size_t qlen;
-
-            qlen = strlen (state->q);
             /* drop '\\' */
-            memmove (state->q - 1, state->q, qlen + 1);
+            str_move (state->q - 1, state->q);
             /* adjust flags */
             state->flags &= ~INPUT_COMPLETE_VARIABLES;
             state->q = NULL;
@@ -1107,7 +1104,7 @@ query_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
                 {
                 case -1:
                     bl = 0;
-                    /* fallthrough */
+                    MC_FALLTHROUGH;
                 case -2:
                     return MSG_HANDLED;
                 default:

@@ -1,7 +1,7 @@
 /*
    Editor initialisation and callback handler.
 
-   Copyright (C) 1996-2017
+   Copyright (C) 1996-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -145,7 +145,7 @@ edit_about (void)
         QUICK_LABEL (N_("A user friendly text editor\n"
                         "written for the Midnight Commander."), NULL),
         QUICK_SEPARATOR (FALSE),
-        QUICK_LABEL (N_("Copyright (C) 1996-2016 the Free Software Foundation"), NULL),
+        QUICK_LABEL (N_("Copyright (C) 1996-2018 the Free Software Foundation"), NULL),
         QUICK_START_BUTTONS (TRUE, TRUE),
             QUICK_BUTTON (N_("&OK"), B_ENTER, NULL, NULL),
         QUICK_END
@@ -1115,7 +1115,7 @@ edit_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
             }
         }
 
-        /* fall through to start/stop text selection */
+        MC_FALLTHROUGH;         /* to start/stop text selection */
 
     case MSG_MOUSE_UP:
         edit_update_cursor (edit, event);
@@ -1435,6 +1435,7 @@ edit_handle_move_resize (WEdit * edit, long command)
         case CK_WindowMove:
             edit->drag_state = MCEDIT_DRAG_NONE;
             edit_status (edit, TRUE);   /* redraw frame and status */
+            MC_FALLTHROUGH;
         default:
             ret = TRUE;
             break;
@@ -1459,6 +1460,7 @@ edit_handle_move_resize (WEdit * edit, long command)
         case CK_WindowResize:
             edit->drag_state = MCEDIT_DRAG_NONE;
             edit_status (edit, TRUE);   /* redraw frame and status */
+            MC_FALLTHROUGH;
         default:
             ret = TRUE;
             break;

@@ -1,7 +1,7 @@
 /*
    Provides a serialize/unserialize functionality for INI-like formats.
 
-   Copyright (C) 2011-2017
+   Copyright (C) 2011-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -133,7 +133,7 @@ mc_deserialize_str (const char prefix, const char *data, GError ** error)
 {
     size_t data_len;
 
-    if ((data == NULL) || (strlen (data) == 0))
+    if ((data == NULL) || (*data == '\0'))
     {
         g_set_error (error, MC_ERROR, 0, FUNC_NAME ": Input data is NULL or empty.");
         return NULL;

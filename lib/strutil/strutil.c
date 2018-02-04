@@ -1,7 +1,7 @@
 /*
    Common strings utilities
 
-   Copyright (C) 2007-2017
+   Copyright (C) 2007-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -47,14 +47,14 @@ GIConv str_cnv_not_convert = INVALID_CONV;
 /*** file scope variables ************************************************************************/
 
 /* names, that are used for utf-8 */
-static const char *str_utf8_encodings[] = {
+static const char *const str_utf8_encodings[] = {
     "utf-8",
     "utf8",
     NULL
 };
 
 /* standard 8bit encodings, no wide or multibytes characters */
-static const char *str_8bit_encodings[] = {
+static const char *const str_8bit_encodings[] = {
     "cp-1251",
     "cp1251",
     "cp-1250",
@@ -219,7 +219,7 @@ _str_convert (GIConv coder, const char *string, int size, GString * buffer)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-str_test_encoding_class (const char *encoding, const char **table)
+str_test_encoding_class (const char *encoding, const char *const *table)
 {
     int result = 0;
 
@@ -714,7 +714,7 @@ str_column_to_pos (const char *text, size_t pos)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 str_isspace (const char *ch)
 {
     return used_class.char_isspace (ch);
@@ -722,7 +722,7 @@ str_isspace (const char *ch)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 str_ispunct (const char *ch)
 {
     return used_class.char_ispunct (ch);
@@ -730,7 +730,7 @@ str_ispunct (const char *ch)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 str_isalnum (const char *ch)
 {
     return used_class.char_isalnum (ch);
@@ -738,7 +738,7 @@ str_isalnum (const char *ch)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 str_isdigit (const char *ch)
 {
     return used_class.char_isdigit (ch);
@@ -746,7 +746,7 @@ str_isdigit (const char *ch)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 str_toupper (const char *ch, char **out, size_t * remain)
 {
     return used_class.char_toupper (ch, out, remain);
@@ -754,7 +754,7 @@ str_toupper (const char *ch, char **out, size_t * remain)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 str_tolower (const char *ch, char **out, size_t * remain)
 {
     return used_class.char_tolower (ch, out, remain);
@@ -762,7 +762,7 @@ str_tolower (const char *ch, char **out, size_t * remain)
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 str_isprint (const char *ch)
 {
     return used_class.char_isprint (ch);
@@ -787,7 +787,7 @@ str_trunc (const char *text, int width)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-str_create_search_needle (const char *needle, int case_sen)
+str_create_search_needle (const char *needle, gboolean case_sen)
 {
     return used_class.create_search_needle (needle, case_sen);
 }
@@ -795,7 +795,7 @@ str_create_search_needle (const char *needle, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-str_release_search_needle (char *needle, int case_sen)
+str_release_search_needle (char *needle, gboolean case_sen)
 {
     used_class.release_search_needle (needle, case_sen);
 }
@@ -803,7 +803,7 @@ str_release_search_needle (char *needle, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 const char *
-str_search_first (const char *text, const char *search, int case_sen)
+str_search_first (const char *text, const char *search, gboolean case_sen)
 {
     return used_class.search_first (text, search, case_sen);
 }
@@ -811,14 +811,14 @@ str_search_first (const char *text, const char *search, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 const char *
-str_search_last (const char *text, const char *search, int case_sen)
+str_search_last (const char *text, const char *search, gboolean case_sen)
 {
     return used_class.search_last (text, search, case_sen);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-int
+gboolean
 str_is_valid_string (const char *text)
 {
     return used_class.is_valid_string (text);
@@ -883,7 +883,7 @@ str_fix_string (char *text)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-str_create_key (const char *text, int case_sen)
+str_create_key (const char *text, gboolean case_sen)
 {
     return used_class.create_key (text, case_sen);
 }
@@ -891,7 +891,7 @@ str_create_key (const char *text, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-str_create_key_for_filename (const char *text, int case_sen)
+str_create_key_for_filename (const char *text, gboolean case_sen)
 {
     return used_class.create_key_for_filename (text, case_sen);
 }
@@ -899,7 +899,7 @@ str_create_key_for_filename (const char *text, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-str_key_collate (const char *t1, const char *t2, int case_sen)
+str_key_collate (const char *t1, const char *t2, gboolean case_sen)
 {
     return used_class.key_collate (t1, t2, case_sen);
 }
@@ -907,7 +907,7 @@ str_key_collate (const char *t1, const char *t2, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-str_release_key (char *key, int case_sen)
+str_release_key (char *key, gboolean case_sen)
 {
     used_class.release_key (key, case_sen);
 }

@@ -1,7 +1,7 @@
 /*
    Event callbacks initialization
 
-   Copyright (C) 2011-2017
+   Copyright (C) 2011-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -58,7 +58,7 @@ gboolean
 events_init (GError ** mcerror)
 {
     /* *INDENT-OFF* */
-    event_init_t standard_events[] =
+    static const event_init_t standard_events[] =
     {
         {MCEVENT_GROUP_CORE, "clipboard_file_to_ext_clip", clipboard_file_to_ext_clip, NULL},
         {MCEVENT_GROUP_CORE, "clipboard_file_from_ext_clip", clipboard_file_from_ext_clip, NULL},

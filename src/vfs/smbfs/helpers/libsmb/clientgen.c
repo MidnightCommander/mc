@@ -5,7 +5,7 @@
 
    Copyright (C) Andrew Tridgell 1994-1998
 
-   Copyright (C) 2011-2017
+   Copyright (C) 2011-2018
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -1690,7 +1690,7 @@ cli_getattrE (struct cli_state * cli, int fd,
     return True;
 }
 
-
+#if 0
 /****************************************************************************
 do a SMBgetatr call
 ****************************************************************************/
@@ -1741,7 +1741,7 @@ cli_getatr (struct cli_state * cli, char *fname, uint16 * attr, size_t * size, t
 
     return True;
 }
-
+#endif /* 0 */
 
 /****************************************************************************
 do a SMBsetatr call
@@ -2720,6 +2720,7 @@ cli_error (struct cli_state *cli, uint8 * eclass, uint32 * num, uint32 * nt_rpc_
     return EINVAL;
 }
 
+#if 0
 /****************************************************************************
 set socket options on a open connection
 ****************************************************************************/
@@ -2739,6 +2740,7 @@ cli_setpid (struct cli_state *cli, uint16 pid)
     cli->pid = pid;
     return ret;
 }
+#endif /* 0 */
 
 /****************************************************************************
 re-establishes a connection

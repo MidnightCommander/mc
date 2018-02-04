@@ -7,7 +7,7 @@
 
    Copyright (C) Andrew Tridgell 1998
 
-   Copyright (C) 2011-2017
+   Copyright (C) 2011-2018
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -347,6 +347,7 @@ E_P24 (unsigned char *p21, unsigned char *c8, unsigned char *p24)
     smbhash (p24 + 16, c8, p21 + 14, 1);
 }
 
+#if 0
 void
 D_P16 (unsigned char *p14, unsigned char *in, unsigned char *out)
 {
@@ -431,3 +432,4 @@ SamOEMhash (unsigned char *data, unsigned char *key, int val)
         data[ind] = data[ind] ^ s_box[t];
     }
 }
+#endif /* 0 */

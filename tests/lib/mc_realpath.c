@@ -1,11 +1,11 @@
 /*
-   lib/vfs - test vfs_setup_cwd() functionality
+   lib - realpath
 
-   Copyright (C) 2013-2018
+   Copyright (C) 2017-2018
    Free Software Foundation, Inc.
 
    Written by:
-   Slava Zanko <slavazanko@gmail.com>, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2017
 
    This file is part of the Midnight Commander.
 
@@ -23,52 +23,19 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#define TEST_SUITE_NAME "/lib/vfs"
+#define TEST_SUITE_NAME "/lib/util"
 
 #include "tests/mctest.h"
 
-#include <stdlib.h>
-
 #include "lib/strutil.h"
-#include "lib/vfs/xdirentry.h"
+#include "lib/vfs/vfs.h"        /* VFS_ENCODING_PREFIX, vfs_init(), vfs_shut() */
 #include "src/vfs/local/local.c"
 
-/* --------------------------------------------------------------------------------------------- */
-
-/* @Mock */
-char *
-g_get_current_dir (void)
-{
-    return g_strdup ("/some/path");
-}
+#include "lib/util.h"           /* mc_realpath() */
 
 /* --------------------------------------------------------------------------------------------- */
 
-static gboolean mc_stat__is_2nd_call_different = FALSE;
-static gboolean mc_stat__call_count = 0;
-
-/* @Mock */
-int
-mc_stat (const vfs_path_t * vpath, struct stat *my_stat)
-{
-    (void) vpath;
-
-    if (mc_stat__call_count++ > 1 && mc_stat__is_2nd_call_different)
-    {
-        my_stat->st_ino = 2;
-        my_stat->st_dev = 22;
-    }
-    else
-    {
-        my_stat->st_ino = 1;
-        my_stat->st_dev = 11;
-    }
-    if (mc_stat__call_count > 2)
-    {
-        mc_stat__call_count = 0;
-    }
-    return 0;
-}
+static char resolved_path[PATH_MAX];
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -77,13 +44,10 @@ static void
 setup (void)
 {
     str_init_strings (NULL);
-
     vfs_init ();
     init_localfs ();
     vfs_setup_work_dir ();
 }
-
-/* --------------------------------------------------------------------------------------------- */
 
 /* @After */
 static void
@@ -95,41 +59,46 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* @DataSource("test_vfs_setup_cwd_symlink_ds") */
+/* @DataSource("data_source") */
 /* *INDENT-OFF* */
-static const struct test_vfs_setup_cwd_symlink_ds
+static const struct data_source
 {
-    gboolean is_2nd_call_different;
-    const char *expected_result;
-} test_vfs_setup_cwd_symlink_ds[] =
+    const char *input_string;
+    const char *expected_string;
+} data_source[] =
 {
-    { /* 0. */
-        TRUE,
-        "/some/path"
-    },
-    { /* 1. */
-        FALSE,
-        "/some/path2"
-    },
+    /* absolute paths */
+    { "/", "/"},
+    { "/" VFS_ENCODING_PREFIX "UTF-8/", "/" },
+    { "/usr/bin", "/usr/bin" },
+    { "/" VFS_ENCODING_PREFIX "UTF-8/usr/bin", "/usr/bin" },
+
+    /* relative paths are relative to / */
+    { VFS_ENCODING_PREFIX "UTF-8/", "/" },
+    { "usr/bin", "/usr/bin" },
+    { VFS_ENCODING_PREFIX "UTF-8/usr/bin", "/usr/bin" }
 };
 /* *INDENT-ON* */
 
-/* @Test */
+/* @Test(dataSource = "data_source") */
 /* *INDENT-OFF* */
-START_PARAMETRIZED_TEST (test_vfs_setup_cwd_symlink, test_vfs_setup_cwd_symlink_ds)
+START_PARAMETRIZED_TEST (realpath_test, data_source)
 /* *INDENT-ON* */
 {
-    /* given */
-    vfs_set_raw_current_dir (NULL);
-    mc_stat__is_2nd_call_different = data->is_2nd_call_different;
-    mc_stat__call_count = 0;
-    setenv ("PWD", "/some/path2", 1);
+    int ret;
+
+    /* realpath(3) produces a canonicalized absolute pathname using curent directory.
+     * Change the current directory to produce correct pathname. */
+    ret = chdir ("/");
 
     /* when */
-    vfs_setup_cwd ();
+    if (mc_realpath (data->input_string, resolved_path) == NULL)
+        resolved_path[0] = '\0';
 
     /* then */
-    mctest_assert_str_eq (vfs_path_as_str (vfs_get_raw_current_dir ()), data->expected_result);
+    mctest_assert_str_eq (resolved_path, data->expected_string);
+
+    (void) ret;
 }
 /* *INDENT-OFF* */
 END_PARAMETRIZED_TEST
@@ -141,24 +110,29 @@ int
 main (void)
 {
     int number_failed;
+    char *cwd, *logname;
 
     Suite *s = suite_create (TEST_SUITE_NAME);
     TCase *tc_core = tcase_create ("Core");
     SRunner *sr;
 
+    cwd = g_get_current_dir ();
+    logname = g_strconcat (cwd, "realpath.log", (char *) NULL);
+    g_free (cwd);
+
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    mctest_add_parameterized_test (tc_core, test_vfs_setup_cwd_symlink,
-                                   test_vfs_setup_cwd_symlink_ds);
+    mctest_add_parameterized_test (tc_core, realpath_test, data_source);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);
     sr = srunner_create (s);
-    srunner_set_log (sr, "vfs_setup_cwd.log");
+    srunner_set_log (sr, logname);
     srunner_run_all (sr, CK_ENV);
     number_failed = srunner_ntests_failed (sr);
     srunner_free (sr);
+    g_free (logname);
     return (number_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
 

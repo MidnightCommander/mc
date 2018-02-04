@@ -1,7 +1,7 @@
 /*
    Panel managing.
 
-   Copyright (C) 1994-2017
+   Copyright (C) 1994-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -3873,7 +3873,7 @@ panel_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 
         if (!is_active)
             change_panel ();
-        /* fall through */
+        MC_FALLTHROUGH;
 
     case MSG_MOUSE_DRAG:
         {
@@ -4185,7 +4185,7 @@ panel_recursive_cd_to_parent (const vfs_path_t * vpath)
 
         /* check if path contains only '/' */
         panel_cwd_path = vfs_path_as_str (cwd_vpath);
-        if (IS_PATH_SEP (panel_cwd_path[0]) && panel_cwd_path[1] == '\0')
+        if (panel_cwd_path != NULL && IS_PATH_SEP (panel_cwd_path[0]) && panel_cwd_path[1] == '\0')
             return NULL;
 
         tmp_vpath = vfs_path_vtokens_get (cwd_vpath, 0, -1);

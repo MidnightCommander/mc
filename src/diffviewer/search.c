@@ -1,7 +1,7 @@
 /*
    Search functions for diffviewer.
 
-   Copyright (C) 2010-2017
+   Copyright (C) 2010-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -123,11 +123,8 @@ mcdiffview_dialog_search (WDiff * dview)
         GString *tmp;
 
         tmp = str_convert_to_input (exp);
-        if (tmp != NULL)
-        {
-            g_free (exp);
-            exp = g_string_free (tmp, FALSE);
-        }
+        g_free (exp);
+        exp = g_string_free (tmp, FALSE);
     }
 #endif
 

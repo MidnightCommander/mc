@@ -1,7 +1,7 @@
 /*
    Editor dialogs for high level editing commands
 
-   Copyright (C) 2009-2017
+   Copyright (C) 2009-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -150,11 +150,8 @@ editcmd_dialog_search_show (WEdit * edit)
         GString *tmp;
 
         tmp = str_convert_to_input (search_text);
-        if (tmp != NULL)
-        {
-            g_free (search_text);
-            search_text = g_string_free (tmp, FALSE);
-        }
+        g_free (search_text);
+        search_text = g_string_free (tmp, FALSE);
     }
 #endif
 

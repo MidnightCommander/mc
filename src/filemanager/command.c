@@ -4,7 +4,7 @@
    with all the magic of the command input line, we depend on some
    help from the program's callback.
 
-   Copyright (C) 1995-2017
+   Copyright (C) 1995-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -351,7 +351,7 @@ command_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         /* Special case: we handle the enter key */
         if (parm == '\n')
             return enter (INPUT (w));
-        /* fall through */
+        MC_FALLTHROUGH;
 
     default:
         return input_callback (w, sender, msg, parm, data);

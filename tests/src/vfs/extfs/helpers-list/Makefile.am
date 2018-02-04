@@ -10,6 +10,10 @@ AM_LDFLAGS = @TESTS_LDFLAGS@
 
 LIBS = $(top_builddir)/lib/libmc.la
 
+if ENABLE_MCLIB
+LIBS += $(GLIB_LIBS)
+endif
+
 # Programs/scripts to build on 'make check'.
 check_PROGRAMS = mc_parse_ls_l
 check_SCRIPTS = run

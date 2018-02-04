@@ -41,11 +41,6 @@
 #define FH ((vfs_file_handler_t *) fh)
 #define FH_SUPER FH->ino->super
 
-#define LS_NOT_LINEAR 0
-#define LS_LINEAR_CLOSED 1
-#define LS_LINEAR_OPEN 2
-#define LS_LINEAR_PREOPEN 3
-
 /*** enums ***************************************************************************************/
 
 /* For vfs_s_subclass->flags */
@@ -55,6 +50,14 @@ typedef enum
     VFS_S_READONLY = 1L << 1,
     VFS_S_USETMP = 1L << 2,
 } vfs_subclass_flags_t;
+
+typedef enum
+{
+    LS_NOT_LINEAR = 0,
+    LS_LINEAR_CLOSED = 1,
+    LS_LINEAR_OPEN = 2,
+    LS_LINEAR_PREOPEN = 3
+} vfs_linear_state_t;
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
@@ -66,7 +69,7 @@ struct vfs_s_super
     char *name;                 /* My name, whatever it means */
     int fd_usage;               /* Number of open files */
     int ino_usage;              /* Usage count of this superblock */
-    int want_stale;             /* If set, we do not flush cache properly */
+    gboolean want_stale;        /* If set, we do not flush cache properly */
 #ifdef ENABLE_VFS_NET
     vfs_path_element_t *path_element;
 #endif                          /* ENABLE_VFS_NET */
@@ -106,8 +109,8 @@ typedef struct
     struct vfs_s_inode *ino;
     off_t pos;                  /* This is for module's use */
     int handle;                 /* This is for module's use, but if != -1, will be mc_close()d */
-    int changed;                /* Did this file change? */
-    int linear;                 /* Is that file open with O_LINEAR? */
+    gboolean changed;           /* Did this file change? */
+    vfs_linear_state_t linear;  /* Is that file open with O_LINEAR? */
     void *data;                 /* This is for filesystem-specific use */
 } vfs_file_handler_t;
 

@@ -1,7 +1,7 @@
 /*
    Init VFS plugins.
 
-   Copyright (C) 2011-2017
+   Copyright (C) 2011-2018
    Free Software Foundation, Inc.
 
    Written by:

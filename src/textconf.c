@@ -1,7 +1,7 @@
 /*
    Print features specific for this build
 
-   Copyright (C) 2000-2017
+   Copyright (C) 2000-2018
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.

@@ -11,7 +11,7 @@
 
    Partly rewritten by Jakub Jelinek <jakub@redhat.com>.
 
-   Copyright (C) 1994-2017
+   Copyright (C) 1994-2018
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.

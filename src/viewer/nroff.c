@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Functions for searching in nroff-like view
 
-   Copyright (C) 1994-2017
+   Copyright (C) 1994-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -97,7 +97,7 @@ mcview__get_nroff_real_len (WView * view, off_t start, off_t length)
     int ret = 0;
     off_t i = 0;
 
-    if (!view->text_nroff_mode)
+    if (!view->mode_flags.nroff)
         return 0;
 
     nroff = mcview_nroff_seq_new_num (view, start);

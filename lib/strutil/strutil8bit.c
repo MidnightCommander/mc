@@ -1,7 +1,7 @@
 /*
    8bit strings utilities
 
-   Copyright (C) 2007-2017
+   Copyright (C) 2007-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -84,11 +84,11 @@ str_8bit_insert_replace_char (GString * buffer)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_8bit_is_valid_string (const char *text)
 {
     (void) text;
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -143,42 +143,42 @@ str_8bit_cprev_noncomb_char (const char **text, const char *begin)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_8bit_isspace (const char *text)
 {
-    return char_isspace (text[0]);
+    return char_isspace (text[0]) != 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_8bit_ispunct (const char *text)
 {
-    return char_ispunct (text[0]);
+    return char_ispunct (text[0]) != 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_8bit_isalnum (const char *text)
 {
-    return char_isalnum (text[0]);
+    return char_isalnum (text[0]) != 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_8bit_isdigit (const char *text)
 {
-    return char_isdigit (text[0]);
+    return char_isdigit (text[0]) != 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_8bit_isprint (const char *text)
 {
-    return char_isprint (text[0]);
+    return char_isprint (text[0]) != 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -196,26 +196,26 @@ static int
 str_8bit_toupper (const char *text, char **out, size_t * remain)
 {
     if (*remain <= 1)
-        return 0;
+        return FALSE;
 
     (*out)[0] = char_toupper (text[0]);
     (*out)++;
     (*remain)--;
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 str_8bit_tolower (const char *text, char **out, size_t * remain)
 {
     if (*remain <= 1)
-        return 0;
+        return FALSE;
 
     (*out)[0] = char_tolower (text[0]);
     (*out)++;
     (*remain)--;
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -553,7 +553,7 @@ str_8bit_column_to_pos (const char *text, size_t pos)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-str_8bit_create_search_needle (const char *needle, int case_sen)
+str_8bit_create_search_needle (const char *needle, gboolean case_sen)
 {
     (void) case_sen;
     return (char *) needle;
@@ -562,7 +562,7 @@ str_8bit_create_search_needle (const char *needle, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-str_8bit_release_search_needle (char *needle, int case_sen)
+str_8bit_release_search_needle (char *needle, gboolean case_sen)
 {
     (void) case_sen;
     (void) needle;
@@ -589,14 +589,14 @@ str_8bit_strdown (const char *str)
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
-str_8bit_search_first (const char *text, const char *search, int case_sen)
+str_8bit_search_first (const char *text, const char *search, gboolean case_sen)
 {
     char *fold_text;
     char *fold_search;
     const char *match;
 
-    fold_text = (case_sen) ? (char *) text : str_8bit_strdown (text);
-    fold_search = (case_sen) ? (char *) search : str_8bit_strdown (search);
+    fold_text = case_sen ? (char *) text : str_8bit_strdown (text);
+    fold_search = case_sen ? (char *) search : str_8bit_strdown (search);
 
     match = g_strstr_len (fold_text, -1, fold_search);
     if (match != NULL)
@@ -619,14 +619,14 @@ str_8bit_search_first (const char *text, const char *search, int case_sen)
 /* --------------------------------------------------------------------------------------------- */
 
 static const char *
-str_8bit_search_last (const char *text, const char *search, int case_sen)
+str_8bit_search_last (const char *text, const char *search, gboolean case_sen)
 {
     char *fold_text;
     char *fold_search;
     const char *match;
 
-    fold_text = (case_sen) ? (char *) text : str_8bit_strdown (text);
-    fold_search = (case_sen) ? (char *) search : str_8bit_strdown (search);
+    fold_text = case_sen ? (char *) text : str_8bit_strdown (text);
+    fold_search = case_sen ? (char *) search : str_8bit_strdown (search);
 
     match = g_strrstr_len (fold_text, -1, fold_search);
     if (match != NULL)
@@ -775,26 +775,23 @@ str_8bit_fix_string (char *text)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-str_8bit_create_key (const char *text, int case_sen)
+str_8bit_create_key (const char *text, gboolean case_sen)
 {
-    return (case_sen) ? (char *) text : str_8bit_strdown (text);
+    return case_sen ? (char *) text : str_8bit_strdown (text);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-str_8bit_key_collate (const char *t1, const char *t2, int case_sen)
+str_8bit_key_collate (const char *t1, const char *t2, gboolean case_sen)
 {
-    if (case_sen)
-        return strcmp (t1, t2);
-    else
-        return strcoll (t1, t2);
+    return case_sen ? strcmp (t1, t2) : strcoll (t1, t2);
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-str_8bit_release_key (char *key, int case_sen)
+str_8bit_release_key (char *key, gboolean case_sen)
 {
     if (!case_sen)
         g_free (key);

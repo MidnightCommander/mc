@@ -5,7 +5,7 @@
 
    Copyright (C) Andrew Tridgell 1992-1998
 
-   Copyright (C) 2011-2017
+   Copyright (C) 2011-2018
    Free Software Foundation, Inc.
 
    Modified by Jeremy Allison 1995.
@@ -165,6 +165,7 @@ SMBOWFencrypt (uchar passwd[16], uchar * c8, uchar p24[24])
     E_P24 (p21, c8, p24);
 }
 
+#if 0
 /* Does the des encryption from the FIRST 8 BYTES of the NT or LM MD4 hash. */
 void
 NTLMSSPOWFencrypt (uchar passwd[8], uchar * ntlmchalresp, uchar p24[24])
@@ -183,7 +184,7 @@ NTLMSSPOWFencrypt (uchar passwd[8], uchar * ntlmchalresp, uchar p24[24])
     dump_data (100, (char *) p24, 24);
 #endif
 }
-
+#endif /* 0 */
 
 /* Does the NT MD4 hash then des encryption. */
 

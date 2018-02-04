@@ -16,16 +16,18 @@
 struct WView;
 typedef struct WView WView;
 
+typedef struct
+{
+    gboolean wrap;              /* Wrap text lines to fit them on the screen */
+    gboolean hex;               /* Plainview or hexview */
+    gboolean magic;             /* Preprocess the file using external programs */
+    gboolean nroff;             /* Nroff-style highlighting */
+} mcview_mode_flags_t;
+
 /*** global variables defined in .c file *********************************************************/
 
-extern int mcview_default_hex_mode;
-extern int mcview_default_nroff_flag;
-extern gboolean mcview_global_wrap_mode;
-extern int mcview_default_magic_flag;
-
-extern int mcview_altered_hex_mode;
-extern int mcview_altered_magic_flag;
-extern int mcview_altered_nroff_flag;
+extern mcview_mode_flags_t mcview_global_flags;
+extern mcview_mode_flags_t mcview_altered_flags;
 
 extern gboolean mcview_remember_file_position;
 extern int mcview_max_dirt_limit;
@@ -48,6 +50,8 @@ extern gboolean mcview_viewer (const char *command, const vfs_path_t * file_vpat
 
 extern gboolean mcview_load (WView * view, const char *command, const char *file, int start_line,
                              off_t search_start, off_t search_end);
+
+extern void mcview_clear_mode_flags (mcview_mode_flags_t * flags);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__VIEWER_H */

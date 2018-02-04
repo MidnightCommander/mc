@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Common finctions (used from some other mcviewer functions)
 
-   Copyright (C) 1994-2017
+   Copyright (C) 1994-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -35,6 +35,7 @@
 
 #include <config.h>
 
+#include <string.h>             /* memset() */
 #include <sys/types.h>
 
 #include "lib/global.h"
@@ -74,8 +75,8 @@ mcview_toggle_magic_mode (WView * view)
     dir_list *dir;
     int *dir_idx;
 
-    mcview_altered_magic_flag = 1;
-    view->magic_mode = !view->magic_mode;
+    mcview_altered_flags.magic = TRUE;
+    view->mode_flags.magic = !view->mode_flags.magic;
 
     /* reinit view */
     filename = g_strdup (vfs_path_as_str (view->filename_vpath));
@@ -101,7 +102,7 @@ mcview_toggle_magic_mode (WView * view)
 void
 mcview_toggle_wrap_mode (WView * view)
 {
-    view->text_wrap_mode = !view->text_wrap_mode;
+    view->mode_flags.wrap = !view->mode_flags.wrap;
     view->dpy_wrap_dirty = TRUE;
     view->dpy_bbar_dirty = TRUE;
     view->dirty++;
@@ -112,8 +113,8 @@ mcview_toggle_wrap_mode (WView * view)
 void
 mcview_toggle_nroff_mode (WView * view)
 {
-    view->text_nroff_mode = !view->text_nroff_mode;
-    mcview_altered_nroff_flag = 1;
+    view->mode_flags.nroff = !view->mode_flags.nroff;
+    mcview_altered_flags.nroff = TRUE;
     view->dpy_wrap_dirty = TRUE;
     view->dpy_bbar_dirty = TRUE;
     view->dirty++;
@@ -124,9 +125,9 @@ mcview_toggle_nroff_mode (WView * view)
 void
 mcview_toggle_hex_mode (WView * view)
 {
-    view->hex_mode = !view->hex_mode;
+    view->mode_flags.hex = !view->mode_flags.hex;
 
-    if (view->hex_mode)
+    if (view->mode_flags.hex)
     {
         view->hex_cursor = view->dpy_start;
         view->dpy_start = mcview_offset_rounddown (view->dpy_start, view->bytes_per_line);
@@ -138,7 +139,7 @@ mcview_toggle_hex_mode (WView * view)
         view->hex_cursor = view->dpy_start;
         widget_want_cursor (WIDGET (view), FALSE);
     }
-    mcview_altered_hex_mode = 1;
+    mcview_altered_flags.hex = TRUE;
     view->dpy_paragraph_skip_lines = 0;
     view->dpy_wrap_dirty = TRUE;
     view->dpy_bbar_dirty = TRUE;
@@ -206,21 +207,16 @@ mcview_done (WView * view)
     if (mcview_remember_file_position && view->filename_vpath != NULL)
     {
         save_file_position (view->filename_vpath, -1, 0,
-                            view->hex_mode ? view->hex_cursor : view->dpy_start,
+                            view->mode_flags.hex ? view->hex_cursor : view->dpy_start,
                             view->saved_bookmarks);
         view->saved_bookmarks = NULL;
     }
 
     /* Write back the global viewer mode */
-    mcview_default_hex_mode = view->hex_mode;
-    mcview_default_nroff_flag = view->text_nroff_mode;
-    mcview_default_magic_flag = view->magic_mode;
-    mcview_global_wrap_mode = view->text_wrap_mode;
+    mcview_global_flags = view->mode_flags;
 
     /* Free memory used by the viewer */
-
     /* view->widget needs no destructor */
-
     vfs_path_free (view->filename_vpath);
     view->filename_vpath = NULL;
     vfs_path_free (view->workdir_vpath);
@@ -417,7 +413,7 @@ mcview_calc_percent (WView * view, off_t p)
         return (-1);
 
     filesize = mcview_get_filesize (view);
-    if (view->hex_mode && filesize > 0)
+    if (view->mode_flags.hex && filesize > 0)
     {
         /* p can't be beyond the last char, only over that. Compensate for this. */
         filesize--;
@@ -431,6 +427,14 @@ mcview_calc_percent (WView * view, off_t p)
         percent = p * 100 / filesize;
 
     return percent;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+mcview_clear_mode_flags (mcview_mode_flags_t * flags)
+{
+    memset (flags, 0, sizeof (*flags));
 }
 
 /* --------------------------------------------------------------------------------------------- */

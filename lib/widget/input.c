@@ -1,7 +1,7 @@
 /*
    Widgets for the Midnight Commander
 
-   Copyright (C) 1994-2017
+   Copyright (C) 1994-2018
    Free Software Foundation, Inc.
 
    Authors:
@@ -155,14 +155,12 @@ delete_region (WInput * in, int x_first, int x_last)
 {
     int first = MIN (x_first, x_last);
     int last = MAX (x_first, x_last);
-    size_t len;
 
     input_mark_cmd (in, FALSE);
     in->point = first;
     last = str_offset_to_pos (in->buffer, last);
     first = str_offset_to_pos (in->buffer, first);
-    len = strlen (&in->buffer[last]) + 1;
-    memmove (&in->buffer[first], &in->buffer[last], len);
+    str_move (in->buffer + first, in->buffer + last);
     in->charpoint = 0;
     in->need_push = TRUE;
 }

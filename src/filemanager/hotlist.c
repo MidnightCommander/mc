@@ -1,7 +1,7 @@
 /*
    Directory hotlist -- for the Midnight Commander
 
-   Copyright (C) 1994-2017
+   Copyright (C) 1994-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -449,9 +449,9 @@ hotlist_run_cmd (int action)
                 fill_listbox (list);
                 return 0;
             }
-            /* Fall through - go up */
+            MC_FALLTHROUGH;     /* go up */
         }
-        /* Fall through if list empty - just go up */
+        MC_FALLTHROUGH;         /* if list empty - just go up */
 
     case B_UP_GROUP:
         {
@@ -466,7 +466,7 @@ hotlist_run_cmd (int action)
 #ifdef ENABLE_VFS
     case B_FREE_ALL_VFS:
         vfs_expire (TRUE);
-        /* fall through */
+        MC_FALLTHROUGH;
 
     case B_REFRESH_VFS:
         listbox_remove_list (l_hotlist);
@@ -1289,7 +1289,7 @@ hot_next_token (void)
         if (c == '\n')
             goto again;
 
-        /* fall through; it is taken as normal character */
+        MC_FALLTHROUGH;         /* it is taken as normal character */
 
     default:
         do

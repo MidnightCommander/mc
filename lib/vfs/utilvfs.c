@@ -1,7 +1,7 @@
 /*
    Utilities for VFS modules.
 
-   Copyright (C) 1988-2017
+   Copyright (C) 1988-2018
    Free Software Foundation, Inc.
 
    Copyright (C) 1995, 1996 Miguel de Icaza
@@ -177,13 +177,13 @@ int
 vfs_mkstemps (vfs_path_t ** pname_vpath, const char *prefix, const char *param_basename)
 {
     const char *p;
-    char *suffix, *q;
+    GString *suffix;
     int shift;
     int fd;
 
     /* Strip directories */
     p = strrchr (param_basename, PATH_SEP);
-    if (!p)
+    if (p == NULL)
         p = param_basename;
     else
         p++;
@@ -193,20 +193,16 @@ vfs_mkstemps (vfs_path_t ** pname_vpath, const char *prefix, const char *param_b
     if (shift > 0)
         p += shift;
 
-    suffix = g_malloc (MC_MAXPATHLEN);
+    suffix = g_string_sized_new (32);
 
     /* Protection against unusual characters */
-    q = suffix;
-    while (*p && (*p != '#'))
-    {
-        if (strchr (".-_@", *p) || isalnum ((unsigned char) *p))
-            *q++ = *p;
-        p++;
-    }
-    *q = 0;
+    for (; *p != '\0' && *p != '#'; p++)
+        if (strchr (".-_@", *p) != NULL || g_ascii_isalnum (*p))
+            g_string_append_c (suffix, *p);
 
-    fd = mc_mkstemps (pname_vpath, prefix, suffix);
-    g_free (suffix);
+    fd = mc_mkstemps (pname_vpath, prefix, suffix->str);
+    g_string_free (suffix, TRUE);
+
     return fd;
 }
 
@@ -240,7 +236,7 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
     char *pcopy;
     size_t pcopy_len;
     const char *pend;
-    char *dir, *colon, *at, *rest;
+    char *colon, *at, *rest;
 
     path_element = g_new0 (vfs_path_element_t, 1);
     path_element->port = default_port;
@@ -248,10 +244,11 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
     pcopy_len = strlen (path);
     pcopy = g_strndup (path, pcopy_len);
     pend = pcopy + pcopy_len;
-    dir = pcopy;
 
     if ((flags & URL_NOSLASH) == 0)
     {
+        char *dir = pcopy;
+
         /* locate path component */
         while (!IS_PATH_SEP (*dir) && *dir != '\0')
             dir++;
@@ -293,8 +290,10 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
     }
 
     if ((flags & URL_USE_ANONYMOUS) == 0)
+    {
+        g_free (path_element->user);
         path_element->user = vfs_get_local_username ();
-
+    }
     /* Check if the host comes with a port spec, if so, chop it */
     if (*rest != '[')
         colon = strchr (rest, ':');
@@ -310,6 +309,7 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
         else
         {
             vfs_path_element_free (path_element);
+            g_free (pcopy);
             return NULL;
         }
     }
@@ -341,6 +341,7 @@ vfs_url_split (const char *path, int default_port, vfs_url_flags_t flags)
     }
 
     path_element->host = g_strdup (rest);
+    g_free (pcopy);
 #ifdef HAVE_CHARSET
     path_element->dir.converter = INVALID_CONV;
 #endif

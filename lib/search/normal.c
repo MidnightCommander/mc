@@ -2,7 +2,7 @@
    Search text engine.
    Plain search
 
-   Copyright (C) 2009-2017
+   Copyright (C) 2009-2018
    Free Software Foundation, Inc.
 
    Written by:
@@ -71,7 +71,7 @@ mc_search__normal_translate_to_regex (const GString * astr)
         case '-':
         case '|':
             g_string_append_c (buff, '\\');
-            /* fall through */
+            MC_FALLTHROUGH;
         default:
             g_string_append_c (buff, str[loop]);
             break;

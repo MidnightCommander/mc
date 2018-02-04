@@ -5,7 +5,7 @@
 
    Copyright (C) Karl Auer 1993-1998
 
-   Copyright (C) 2011-2017
+   Copyright (C) 2011-2018
    Free Software Foundation, Inc.
 
    Largely re-written by Andrew Tridgell, September 1994
@@ -1953,7 +1953,7 @@ init_copymap (service * pservice)
             pservice->copymap[i] = True;
 }
 
-
+#if 0
 /***************************************************************************
  return the local pointer to a parameter given the service number and the 
  pointer into the default structure
@@ -1963,6 +1963,7 @@ lp_local_ptr (int snum, void *ptr)
 {
     return (void *) (((char *) pSERVICE (snum)) + PTR_DIFF (ptr, &sDefault));
 }
+#endif /* 0 */
 
 /***************************************************************************
 Process a parameter for a particular service number. If snum < 0
@@ -2449,7 +2450,7 @@ lp_load (const char *pszFname, BOOL global_only, BOOL save_defaults, BOOL add_ip
     return (bRetval);
 }
 
-
+#if 0
 /***************************************************************************
 reset the max number of services
 ***************************************************************************/
@@ -2468,7 +2469,7 @@ lp_numservices (void)
 {
     return (iNumServices);
 }
-
+#endif /* 0 */
 
 /***************************************************************************
 Return the number of the service with the given name, or -1 if it doesn't
@@ -2503,7 +2504,6 @@ volume_label (int snum)
         return (lp_servicename (snum));
     return (ret);
 }
-#endif /* 0 */
 
 /***********************************************************
  Set the global name resolution order (used in smbclient).
@@ -2514,3 +2514,4 @@ lp_set_name_resolve_order (char *new_order)
 {
     Globals.szNameResolveOrder = new_order;
 }
+#endif /* 0 */

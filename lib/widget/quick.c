@@ -1,7 +1,7 @@
 /*
    Widget based utility functions.
 
-   Copyright (C) 1994-2017
+   Copyright (C) 1994-2018
    Free Software Foundation, Inc.
 
    Authors:
@@ -441,7 +441,7 @@ quick_dialog_skip (quick_dialog_t * quick_dlg, int nskip)
                     break;
                 }
             }
-            /* fall through */
+            MC_FALLTHROUGH;
         case quick_checkbox:
         case quick_radio:
             if (item->widget->x != x1)

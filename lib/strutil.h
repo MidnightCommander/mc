@@ -103,10 +103,11 @@ typedef enum
 /* all functions in str_class must be defined for every encoding */
 struct str_class
 {
+    /* *INDENT-OFF* */
     gchar *(*conv_gerror_message) (GError * error, const char *def_msg);
       /*I*/ estr_t (*vfs_convert_to) (GIConv coder, const char *string, int size, GString * buffer);
       /*I*/ void (*insert_replace_char) (GString * buffer);
-    int (*is_valid_string) (const char *);
+    gboolean (*is_valid_string) (const char *);
       /*I*/ int (*is_valid_char) (const char *, size_t);
       /*I*/ void (*cnext_char) (const char **);
     void (*cprev_char) (const char **);
@@ -114,17 +115,17 @@ struct str_class
       /*I*/ void (*cprev_char_safe) (const char **);
       /*I*/ int (*cnext_noncomb_char) (const char **text);
       /*I*/ int (*cprev_noncomb_char) (const char **text, const char *begin);
-      /*I*/ int (*char_isspace) (const char *);
-      /*I*/ int (*char_ispunct) (const char *);
-      /*I*/ int (*char_isalnum) (const char *);
-      /*I*/ int (*char_isdigit) (const char *);
-      /*I*/ int (*char_isprint) (const char *);
+      /*I*/ gboolean (*char_isspace) (const char *);
+      /*I*/ gboolean (*char_ispunct) (const char *);
+      /*I*/ gboolean (*char_isalnum) (const char *);
+      /*I*/ gboolean (*char_isdigit) (const char *);
+      /*I*/ gboolean (*char_isprint) (const char *);
       /*I*/ gboolean (*char_iscombiningmark) (const char *);
       /*I*/ int (*length) (const char *);
       /*I*/ int (*length2) (const char *, int);
       /*I*/ int (*length_noncomb) (const char *);
-      /*I*/ int (*char_toupper) (const char *, char **, size_t *);
-    int (*char_tolower) (const char *, char **, size_t *);
+      /*I*/ gboolean (*char_toupper) (const char *, char **, size_t *);
+    gboolean (*char_tolower) (const char *, char **, size_t *);
     void (*fix_string) (char *);
       /*I*/ const char *(*term_form) (const char *);
       /*I*/ const char *(*fit_to_term) (const char *, int, align_crt_t);
@@ -136,21 +137,22 @@ struct str_class
       /*I*/ const char *(*trunc) (const char *, int);
       /*I*/ int (*offset_to_pos) (const char *, size_t);
       /*I*/ int (*column_to_pos) (const char *, size_t);
-      /*I*/ char *(*create_search_needle) (const char *, int);
-    void (*release_search_needle) (char *, int);
-    const char *(*search_first) (const char *, const char *, int);
-    const char *(*search_last) (const char *, const char *, int);
+      /*I*/ char *(*create_search_needle) (const char *, gboolean);
+    void (*release_search_needle) (char *, gboolean);
+    const char *(*search_first) (const char *, const char *, gboolean);
+    const char *(*search_last) (const char *, const char *, gboolean);
     int (*compare) (const char *, const char *);
       /*I*/ int (*ncompare) (const char *, const char *);
       /*I*/ int (*casecmp) (const char *, const char *);
       /*I*/ int (*ncasecmp) (const char *, const char *);
       /*I*/ int (*prefix) (const char *, const char *);
       /*I*/ int (*caseprefix) (const char *, const char *);
-      /*I*/ char *(*create_key) (const char *text, int case_sen);
-      /*I*/ char *(*create_key_for_filename) (const char *text, int case_sen);
-      /*I*/ int (*key_collate) (const char *t1, const char *t2, int case_sen);
-      /*I*/ void (*release_key) (char *key, int case_sen);
-  /*I*/};
+      /*I*/ char *(*create_key) (const char *text, gboolean case_sen);
+      /*I*/ char *(*create_key_for_filename) (const char *text, gboolean case_sen);
+      /*I*/ int (*key_collate) (const char *t1, const char *t2, gboolean case_sen);
+      /*I*/ void (*release_key) (char *key, gboolean case_sen);
+    /* *INDENT-ON* */
+};
 
 /*** global variables defined in .c file *********************************************************/
 
@@ -245,7 +247,7 @@ estr_t str_translate_char (GIConv conv, const char *ch, size_t ch_size,
 /* test, if text is valid in terminal encoding
  * I
  */
-int str_is_valid_string (const char *text);
+gboolean str_is_valid_string (const char *text);
 
 /* test, if first char of ch is valid
  * size, how many bytes characters occupied, could be (size_t)(-1)
@@ -322,27 +324,27 @@ int str_cprev_noncomb_char (const char **text, const char *begin);
 /* if first characters in ch is space, tabulator  or new lines
  * I
  */
-int str_isspace (const char *ch);
+gboolean str_isspace (const char *ch);
 
 /* if first characters in ch is punctuation or symbol
  * I
  */
-int str_ispunct (const char *ch);
+gboolean str_ispunct (const char *ch);
 
 /* if first characters in ch is alphanum
  * I
  */
-int str_isalnum (const char *ch);
+gboolean str_isalnum (const char *ch);
 
 /* if first characters in ch is digit
  * I
  */
-int str_isdigit (const char *ch);
+gboolean str_isdigit (const char *ch);
 
 /* if first characters in ch is printable
  * I
  */
-int str_isprint (const char *ch);
+gboolean str_isprint (const char *ch);
 
 /* if first characters in ch is a combining mark (only in utf-8)
  * combining makrs are assumed to be zero width 
@@ -354,13 +356,13 @@ gboolean str_iscombiningmark (const char *ch);
  * decrase remain by size of returned characters
  * if out is not big enough, do nothing
  */
-int str_toupper (const char *ch, char **out, size_t * remain);
+gboolean str_toupper (const char *ch, char **out, size_t * remain);
 
 /* write upper from of fisrt characters in ch into out
  * decrase remain by size of returned characters
  * if out is not big enough, do nothing
  */
-int str_tolower (const char *ch, char **out, size_t * remain);
+gboolean str_tolower (const char *ch, char **out, size_t * remain);
 
 /* return length of text in characters
  * I
@@ -455,19 +457,19 @@ const char *str_trunc (const char *text, int width);
  * so needle can be reused
  * in UTF-8 return normalized form of needle
  */
-char *str_create_search_needle (const char *needle, int case_sen);
+char *str_create_search_needle (const char *needle, gboolean case_sen);
 
 /* free needle returned by str_create_search_needle
  */
-void str_release_search_needle (char *needle, int case_sen);
+void str_release_search_needle (char *needle, gboolean case_sen);
 
 /* search for first occurrence of search in text
  */
-const char *str_search_first (const char *text, const char *needle, int case_sen);
+const char *str_search_first (const char *text, const char *needle, gboolean case_sen);
 
 /* search for last occurrence of search in text
  */
-const char *str_search_last (const char *text, const char *needle, int case_sen);
+const char *str_search_last (const char *text, const char *needle, gboolean case_sen);
 
 /* case sensitive compare two strings
  * I
@@ -507,25 +509,25 @@ int str_caseprefix (const char *text, const char *prefix);
 /* create a key that is used by str_key_collate
  * I
  */
-char *str_create_key (const char *text, int case_sen);
+char *str_create_key (const char *text, gboolean case_sen);
 
 /* create a key that is used by str_key_collate
  * should aware dot '.' in text
  * I
  */
-char *str_create_key_for_filename (const char *text, int case_sen);
+char *str_create_key_for_filename (const char *text, gboolean case_sen);
 
 /* compare two string using LC_COLLATE, if is possible
  * if case_sen is set, comparing is case sensitive,
  * case_sen must be same for str_create_key, str_key_collate and str_release_key
  * I
  */
-int str_key_collate (const char *t1, const char *t2, int case_sen);
+int str_key_collate (const char *t1, const char *t2, gboolean case_sen);
 
 /* release_key created by str_create_key, only rigth way to release key
  * I
  */
-void str_release_key (char *key, int case_sen);
+void str_release_key (char *key, gboolean case_sen);
 
 /* return TRUE if codeset_name is utf8 or utf-8
  * I
