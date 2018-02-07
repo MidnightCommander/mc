@@ -361,6 +361,10 @@ main (int argc, char *argv[])
     macros_list = g_array_new (TRUE, FALSE, sizeof (macros_t));
 #endif /* USE_INTERNAL_EDIT */
 
+    /* Disable colors if NO_COLOR environment variable has been set. */
+    if (getenv("NO_COLOR"))
+        mc_global.tty.disable_colors = TRUE;
+
     tty_init_colors (mc_global.tty.disable_colors, mc_args__force_colors);
 
     mc_skin_init (NULL, &mcerror);
