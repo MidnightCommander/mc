@@ -811,13 +811,18 @@ edit_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
                 if (!e->extmod)
                     command = keybind_lookup_keymap_command (editor_map, parm);
                 else
-                {
-                    e->extmod = FALSE;
                     command = keybind_lookup_keymap_command (editor_x_map, parm);
-                }
 
-                if (command != CK_IgnoreKey)
+                if (command == CK_IgnoreKey)
+                    e->extmod = FALSE;
+                else
+                {
                     ret = edit_dialog_command_execute (h, command);
+                    /* if command was not handled, keep the extended mode
+                       for the further key processing */
+                    if (ret == MSG_HANDLED)
+                        e->extmod = FALSE;
+                }
             }
 
             /*
