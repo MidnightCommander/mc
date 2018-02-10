@@ -632,10 +632,13 @@ edit_quit (WDialog * h)
 {
     GList *l;
     WEdit *e = NULL;
+    GSList *m = NULL;
+    GSList *me;
 
     /* don't stop the dialog before final decision */
     widget_set_state (WIDGET (h), WST_ACTIVE, TRUE);
 
+    /* check window state and get modified files */
     for (l = h->widgets; l != NULL; l = g_list_next (l))
         if (edit_widget_is_editor (CONST_WIDGET (l->data)))
         {
@@ -644,21 +647,31 @@ edit_quit (WDialog * h)
             if (e->drag_state != MCEDIT_DRAG_NONE)
             {
                 edit_restore_size (e);
+                g_slist_free (m);
                 return;
             }
 
+            /* create separate list because widget_select()
+               changes the window position in Z order */
             if (e->modified)
-            {
-                widget_select (WIDGET (e));
-
-                if (!edit_ok_to_exit (e))
-                    return;
-            }
+                m = g_slist_prepend (m, l->data);
         }
 
-    /* no editors in dialog at all or no any file required to be saved */
-    if (e == NULL || l == NULL)
+    for (me = m; me != NULL; me = g_slist_next (me))
+    {
+        e = (WEdit *) me->data;
+
+        widget_select (WIDGET (e));
+
+        if (!edit_ok_to_exit (e))
+            break;
+    }
+
+    /* if all files were checked, quit editor */
+    if (me == NULL)
         dlg_stop (h);
+
+    g_slist_free (m);
 }
 
 /* --------------------------------------------------------------------------------------------- */
