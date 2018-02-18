@@ -160,7 +160,7 @@ mc_fhl_parse_get_extensions (mc_fhl_t * fhl, const gchar * group_name)
     mc_filter->type = MC_FLHGH_T_FREGEXP;
     mc_filter->search_condition = mc_search_new_len (buf->str, buf->len, DEFAULT_CHARSET);
     mc_filter->search_condition->is_case_sensitive =
-        mc_config_get_bool (fhl->config, group_name, "extensions_case", TRUE);
+        mc_config_get_bool (fhl->config, group_name, "extensions_case", FALSE);
     mc_filter->search_condition->search_type = MC_SEARCH_T_REGEX;
 
     mc_fhl_parse_fill_color_info (mc_filter, fhl, group_name);
