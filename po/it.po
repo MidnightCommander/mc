@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
 "POT-Creation-Date: 2018-02-03 18:28+0300\n"
-"PO-Revision-Date: 2017-05-03 09:33+0200\n"
+"PO-Revision-Date: 2018-02-24 12:37+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
 "it/)\n"
@@ -661,9 +661,8 @@ msgstr "Stampa le opzioni di configurazione"
 msgid "Print last working directory to specified file"
 msgstr "Stampa l'ultima directory corrente nel file specificato"
 
-#, fuzzy
 msgid "<file>"
-msgstr "file"
+msgstr "<file>"
 
 msgid "Enables subshell support (default)"
 msgstr "Abilita il supporto subshell (predefinito)"
@@ -678,7 +677,7 @@ msgid "Set debug level"
 msgstr "Imposta livello di debug"
 
 msgid "<integer>"
-msgstr ""
+msgstr "<integer>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Esegue il visualizzatore per un file"
@@ -686,9 +685,8 @@ msgstr "Esegue il visualizzatore per un file"
 msgid "Edit files"
 msgstr "Modifica i file"
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "&Apri file..."
+msgstr "<file> ..."
 
 msgid "Forces xterm features"
 msgstr "Forza il comportamento xterm"
@@ -731,7 +729,7 @@ msgid "Specifies a color configuration"
 msgstr "Specifica la configurazione dei colori"
 
 msgid "<string>"
-msgstr ""
+msgstr "<stringa>"
 
 msgid "Show mc with specified skin"
 msgstr "Mostra mc con il tema specificato"
@@ -1843,13 +1841,11 @@ msgstr ""
 "Impossibile eseguire chmod su \"%s\"\n"
 "%s"
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "&Ignora lock"
+msgstr "&Ignora"
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "&Ignora lock"
+msgstr "Ignor&a tutto"
 
 msgid "&Retry"
 msgstr "&Riprova"
@@ -4241,9 +4237,9 @@ msgstr "sftp: fallita avvio sessione SSH"
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: nessun file handler dati per la lettura del file"
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: errore di interruzione: %s"
+msgstr "sftp: errore socket: %s"
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
@@ -4492,10 +4488,3 @@ msgstr "Continuare dall'inizio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Impossibile ricevere copia locale di /ftp://un.host/modificami.txt"
-
-#~ msgid ""
-#~ "Cannot delete file \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Impossibile eliminare il file \"%s\"\n"
-#~ "%s"
