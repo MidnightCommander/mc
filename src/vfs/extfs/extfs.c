@@ -122,7 +122,6 @@ struct archive
     int fd_usage;
     ino_t inode_counter;
     struct entry *root_entry;
-    struct archive *next;
 };
 
 typedef struct
@@ -142,9 +141,10 @@ static gboolean notadir;
 static struct vfs_s_subclass extfs_subclass;
 static struct vfs_class *vfs_extfs_ops = (struct vfs_class *) &extfs_subclass;
 
-static struct archive *first_archive = NULL;
+static GSList *first_archive = NULL;
 static int my_errno = 0;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -152,6 +152,35 @@ static void extfs_remove_entry (struct entry *e);
 static void extfs_free (vfsid id);
 static void extfs_free_entry (struct entry *e);
 static struct entry *extfs_resolve_symlinks_int (struct entry *entry, GSList * list);
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+extfs_fill_name (void *data, void *user_data)
+{
+    struct archive *a = (struct archive *) data;
+    fill_names_f func = (fill_names_f) user_data;
+    extfs_plugin_info_t *info;
+    char *name;
+
+    info = &g_array_index (extfs_plugins, extfs_plugin_info_t, a->fstype);
+    name =
+        g_strconcat (a->name != NULL ? a->name : "", PATH_SEP_STR, info->prefix,
+                     VFS_PATH_URL_DELIMITER, (char *) NULL);
+    func (name);
+    g_free (name);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static gint
+extfs_cmp_archive (const void *a, const void *b)
+{
+    const struct archive *ar = (const struct archive *) a;
+    const char *archive_name = (const char *) b;
+
+    return (ar->name != NULL && strcmp (ar->name, archive_name) == 0) ? 0 : 1;
+}
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -349,23 +378,9 @@ extfs_find_entry (struct entry *dir, const char *name, gboolean make_dirs, gbool
 static void
 extfs_fill_names (struct vfs_class *me, fill_names_f func)
 {
-    struct archive *a = first_archive;
-
     (void) me;
 
-    while (a != NULL)
-    {
-        extfs_plugin_info_t *info;
-        char *name;
-
-        info = &g_array_index (extfs_plugins, extfs_plugin_info_t, a->fstype);
-        name =
-            g_strconcat (a->name ? a->name : "", PATH_SEP_STR, info->prefix, VFS_PATH_URL_DELIMITER,
-                         (char *) NULL);
-        func (name);
-        g_free (name);
-        a = a->next;
-    }
+    g_slist_foreach (first_archive, extfs_fill_name, func);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -374,6 +389,7 @@ static void
 extfs_free_archive (struct archive *archive)
 {
     extfs_free_entry (archive->root_entry);
+
     if (archive->local_name != NULL)
     {
         struct stat my;
@@ -463,8 +479,7 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
     current_archive->inode_counter = 0;
     current_archive->fd_usage = 0;
     current_archive->rdev = archive_counter++;
-    current_archive->next = first_archive;
-    first_archive = current_archive;
+    first_archive = g_slist_prepend (first_archive, current_archive);
     mode = mystat.st_mode & 07777;
     if (mode & 0400)
         mode |= 0100;
@@ -671,9 +686,10 @@ extfs_get_path_int (const vfs_path_t * vpath, struct archive **archive, gboolean
 {
     char *archive_name;
     int result = -1;
-    struct archive *parc;
+    GSList *parc;
     int fstype;
     const vfs_path_element_t *path_element;
+    struct archive *a = NULL;
 
     path_element = vfs_path_get_by_index (vpath, -1);
 
@@ -687,18 +703,16 @@ extfs_get_path_int (const vfs_path_t * vpath, struct archive **archive, gboolean
      * All filesystems should have some local archive, at least
      * it can be PATH_SEP ('/').
      */
-    for (parc = first_archive; parc != NULL; parc = parc->next)
-        if (parc->name != NULL)
-        {
-            if (strcmp (parc->name, archive_name) == 0)
-            {
-                vfs_stamp (vfs_extfs_ops, (vfsid) parc);
-                g_free (archive_name);
-                goto return_success;
-            }
-        }
+    parc = g_slist_find_custom (first_archive, archive_name, extfs_cmp_archive);
+    if (parc != NULL)
+    {
+        a = (struct archive *) parc->data;
+        vfs_stamp (vfs_extfs_ops, (vfsid) a);
+        g_free (archive_name);
+        goto return_success;
+    }
 
-    result = do_not_open ? -1 : extfs_read_archive (fstype, archive_name, &parc);
+    result = do_not_open ? -1 : extfs_read_archive (fstype, archive_name, &a);
     g_free (archive_name);
     if (result == -1)
     {
@@ -707,7 +721,7 @@ extfs_get_path_int (const vfs_path_t * vpath, struct archive **archive, gboolean
     }
 
   return_success:
-    *archive = parc;
+    *archive = a;
     return path_element->path;
 }
 
@@ -1491,20 +1505,7 @@ extfs_free (vfsid id)
 {
     struct archive *archive = (struct archive *) id;
 
-    if (archive == first_archive)
-    {
-        first_archive = archive->next;
-    }
-    else
-    {
-        struct archive *parc;
-        for (parc = first_archive; parc != NULL; parc = parc->next)
-            if (parc->next == archive)
-            {
-                parc->next = archive->next;
-                break;
-            }
-    }
+    first_archive = g_slist_remove (first_archive, archive);
     extfs_free_archive (archive);
 }
 
@@ -1680,15 +1681,10 @@ static void
 extfs_done (struct vfs_class *me)
 {
     size_t i;
-    struct archive *ar;
 
     (void) me;
 
-    for (ar = first_archive; ar != NULL;)
-    {
-        extfs_free ((vfsid) ar);
-        ar = first_archive;
-    }
+    g_slist_free_full (first_archive, (GDestroyNotify) extfs_free_archive);
 
     if (extfs_plugins == NULL)
         return;
