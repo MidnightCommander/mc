@@ -37,6 +37,8 @@
 #define VFS_SUBCLASS(a) ((struct vfs_s_subclass *) (a))
 
 #define VFS_SUPER(a) ((struct vfs_s_super *) (a))
+#define VFS_ENTRY(a) ((struct vfs_s_entry *) (a))
+#define VFS_INODE(a) ((struct vfs_s_inode *) (a))
 
 #define VFS_FILE_HANDLER(a) ((vfs_file_handler_t *) a)
 #define VFS_FILE_HANDLER_SUPER(a) VFS_FILE_HANDLER (a)->ino->super
@@ -161,6 +163,7 @@ struct vfs_s_entry *vfs_s_new_entry (struct vfs_class *me, const char *name,
                                      struct vfs_s_inode *inode);
 void vfs_s_free_entry (struct vfs_class *me, struct vfs_s_entry *ent);
 void vfs_s_insert_entry (struct vfs_class *me, struct vfs_s_inode *dir, struct vfs_s_entry *ent);
+int vfs_s_entry_compare (const void *a, const void *b);
 struct stat *vfs_s_default_stat (struct vfs_class *me, mode_t mode);
 
 struct vfs_s_entry *vfs_s_generate_entry (struct vfs_class *me, const char *name,

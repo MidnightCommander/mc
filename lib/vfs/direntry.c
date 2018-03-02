@@ -94,18 +94,8 @@ struct dirhandle
 
 /*** file scope variables ************************************************************************/
 
-/*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
-
-static int
-vfs_s_entry_compare (const void *a, const void *b)
-{
-    const struct vfs_s_entry *e = (const struct vfs_s_entry *) a;
-    const char *name = (const char *) b;
-
-    return strcmp (e->name, name);
-}
-
+/*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
 /* We were asked to create entries automagically */
@@ -208,13 +198,13 @@ vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
 
         for (iter = root->subdir; iter != NULL; iter = g_list_next (iter))
         {
-            ent = (struct vfs_s_entry *) iter->data;
+            ent = VFS_ENTRY (iter->data);
             if (strlen (ent->name) == pseg && strncmp (ent->name, path, pseg) == 0)
                 /* FOUND! */
                 break;
         }
 
-        ent = iter != NULL ? (struct vfs_s_entry *) iter->data : NULL;
+        ent = iter != NULL ? VFS_ENTRY (iter->data) : NULL;
 
         if (ent == NULL && (flags & (FL_MKFILE | FL_MKDIR)) != 0)
             ent = vfs_s_automake (me, root, path, flags);
@@ -270,7 +260,7 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
     }
 
     iter = g_list_find_custom (root->subdir, path, (GCompareFunc) vfs_s_entry_compare);
-    ent = iter != NULL ? (struct vfs_s_entry *) iter->data : NULL;
+    ent = iter != NULL ? VFS_ENTRY (iter->data) : NULL;
 
     if (ent != NULL && !VFS_SUBCLASS (me)->dir_uptodate (me, ent->ino))
     {
@@ -297,7 +287,7 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
         vfs_s_insert_entry (me, root, ent);
 
         iter = g_list_find_custom (root->subdir, path, (GCompareFunc) vfs_s_entry_compare);
-        ent = iter != NULL ? (struct vfs_s_entry *) iter->data : NULL;
+        ent = iter != NULL ? VFS_ENTRY (iter->data) : NULL;
     }
     if (ent == NULL)
         vfs_die ("find_linear: success but directory is not there\n");
@@ -468,7 +458,7 @@ vfs_s_readdir (void *data)
     if (info->cur == NULL || info->cur->data == NULL)
         return NULL;
 
-    name = ((struct vfs_s_entry *) info->cur->data)->name;
+    name = VFS_ENTRY (info->cur->data)->name;
     if (name != NULL)
         g_strlcpy (dir.dent.d_name, name, MC_MAXPATHLEN);
     else
@@ -923,7 +913,7 @@ vfs_s_free_inode (struct vfs_class *me, struct vfs_s_inode *ino)
     }
 
     while (ino->subdir != NULL)
-        vfs_s_free_entry (me, (struct vfs_s_entry *) ino->subdir->data);
+        vfs_s_free_entry (me, VFS_ENTRY (ino->subdir->data));
 
     CALL (free_inode) (me, ino);
     g_free (ino->linkname);
@@ -983,6 +973,17 @@ vfs_s_insert_entry (struct vfs_class *me, struct vfs_s_inode *dir, struct vfs_s_
 
     ent->ino->st.st_nlink++;
     dir->subdir = g_list_append (dir->subdir, ent);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+vfs_s_entry_compare (const void *a, const void *b)
+{
+    const struct vfs_s_entry *e = (const struct vfs_s_entry *) a;
+    const char *name = (const char *) b;
+
+    return strcmp (e->name, name);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1706,7 +1707,7 @@ vfs_s_normalize_filename_leading_spaces (struct vfs_s_inode *root_inode, size_t 
 
     for (iter = root_inode->subdir; iter != NULL; iter = g_list_next (iter))
     {
-        struct vfs_s_entry *entry = (struct vfs_s_entry *) iter->data;
+        struct vfs_s_entry *entry = VFS_ENTRY (iter->data);
 
         if ((size_t) entry->ino->data_offset > final_num_spaces)
         {
