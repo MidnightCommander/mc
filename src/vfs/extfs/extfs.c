@@ -744,7 +744,7 @@ extfs_get_path (const vfs_path_t * vpath, extfs_super_t ** archive, gboolean do_
 /* Return allocated path (without leading slash) inside the archive  */
 
 static char *
-extfs_get_path_from_entry (extfs_entry_t * entry)
+extfs_get_path_from_entry (const extfs_entry_t * entry)
 {
     GString *localpath;
 
@@ -814,7 +814,7 @@ extfs_resolve_symlinks (extfs_entry_t * entry)
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-extfs_get_archive_name (extfs_super_t * archive)
+extfs_get_archive_name (const extfs_super_t * archive)
 {
     const char *archive_name;
 
@@ -843,8 +843,8 @@ extfs_get_archive_name (extfs_super_t * archive)
 /** Don't pass localname as NULL */
 
 static int
-extfs_cmd (const char *str_extfs_cmd, extfs_super_t * archive,
-           extfs_entry_t * entry, const char *localname)
+extfs_cmd (const char *str_extfs_cmd, const extfs_super_t * archive,
+           const extfs_entry_t * entry, const char *localname)
 {
     char *file;
     char *quoted_file;
