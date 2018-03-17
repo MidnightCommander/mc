@@ -1687,6 +1687,9 @@ extfs_done (struct vfs_class *me)
         ar = first_archive;
     }
 
+    if (extfs_plugins == NULL)
+        return;
+
     for (i = 0; i < extfs_plugins->len; i++)
     {
         extfs_plugin_info_t *info;
@@ -1696,8 +1699,7 @@ extfs_done (struct vfs_class *me)
         g_free (info->prefix);
     }
 
-    if (extfs_plugins != NULL)
-        g_array_free (extfs_plugins, TRUE);
+    g_array_free (extfs_plugins, TRUE);
 }
 
 /* --------------------------------------------------------------------------------------------- */
