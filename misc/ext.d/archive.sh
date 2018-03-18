@@ -35,6 +35,9 @@ do_view_action() {
     xz)
         xz -dc "${MC_EXT_FILENAME}" 2>/dev/null
         ;;
+    zst)
+        zstd -dc "${MC_EXT_FILENAME}" 2>/dev/null
+        ;;
     tar)
         tar tvvf - < "${MC_EXT_FILENAME}"
         ;;
@@ -64,6 +67,10 @@ do_view_action() {
         ;;
     tar.xz)
         xz -dc "${MC_EXT_FILENAME}" 2>/dev/null | \
+            tar tvvf -
+        ;;
+    tar.zst|tzst)
+        zstd -dc "${MC_EXT_FILENAME}" 2>/dev/null | \
             tar tvvf -
         ;;
     tar.F)
@@ -105,6 +112,10 @@ do_view_action() {
         ;;
     cpio.xz)
         xz -dc "${MC_EXT_FILENAME}" | \
+            cpio -itv 2>/dev/null
+        ;;
+    cpio.zst)
+        zstd -dc "${MC_EXT_FILENAME}" | \
             cpio -itv 2>/dev/null
         ;;
     cpio)
@@ -157,6 +168,9 @@ do_open_action() {
         ;;
     xz)
         xz -dc "${MC_EXT_FILENAME}" | ${pager}
+        ;;
+    zst)
+        zstd -dc "${MC_EXT_FILENAME}" | ${pager}
         ;;
     par2)
         par2 r "${MC_EXT_FILENAME}"

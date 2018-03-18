@@ -60,7 +60,8 @@ enum compression_type
     COMPRESSION_LZIP,
     COMPRESSION_LZ4,
     COMPRESSION_LZMA,
-    COMPRESSION_XZ
+    COMPRESSION_XZ,
+    COMPRESSION_ZSTD,
 };
 
 /* stdout or stderr stream of child process */

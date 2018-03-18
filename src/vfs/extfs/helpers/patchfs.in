@@ -17,6 +17,7 @@ my $lzip = 'lzip';
 my $lz4  = 'lz4';
 my $lzma = 'lzma';
 my $xz   = 'xz';
+my $zstd = 'zstd';
 my $bzip = 'bzip2';
 my $gzip = 'gzip';
 my $fileutil = 'file -b';
@@ -88,6 +89,8 @@ sub myin
 	return "$lzma -dc $qfname";
     } elsif (/^'*xz/) {
 	return "$xz -dc $qfname";
+    } elsif (/^'*zst/) {
+	return "$zstd -dc $qfname";
     } elsif (/^'*bzip/) {
 	return "$bzip -dc $qfname";
     } elsif (/^'*gzip/) {
@@ -112,6 +115,8 @@ sub myout
 	return "$lzma -c $sep $qfname";
     } elsif (/^'*xz/) {
 	return "$xz -c $sep $qfname";
+    } elsif (/^'*zst/) {
+	return "$zstd -c $sep $qfname";
     } elsif (/^'*bzip/) {
 	return "$bzip -c $sep $qfname";
     } elsif (/^'*gzip/) {

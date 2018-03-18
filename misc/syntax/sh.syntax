@@ -1995,6 +1995,7 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole zoo cyan
     keyword whole zsh cyan
     keyword whole zsoelim cyan
+    keyword whole zstd cyan
     keyword whole zxpdf cyan
 
     keyword whole pamcut cyan
