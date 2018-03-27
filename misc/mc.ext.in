@@ -150,6 +150,11 @@ regex/\.t(ar\.xz|xz)$
 	Open=%cd %p/utar://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.xz
 
+# .tar.zst, .tzst
+regex/\.t(ar\.zst|zst)$
+	Open=%cd %p/utar://
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view tar.zst
+
 # .tar.F - used in QNX
 shell/.tar.F
 	# Open=%cd %p/utar://
@@ -212,6 +217,10 @@ shell/.cpio.xz
 	Open=%cd %p/ucpio://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cpio.xz
 
+shell/.cpio.zst
+	Open=%cd %p/ucpio://
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cpio.zst
+
 shell/.cpio.gz
 	Open=%cd %p/ucpio://
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view cpio.gz
@@ -242,6 +251,10 @@ regex/\.(diff|patch)(\.(gz|Z))$
 regex/\.(diff|patch)(\.xz)$
     Open=%cd %p/patchfs://
     View=%view{ascii} @EXTHELPERSDIR@/archive.sh view xz
+
+regex/\.(diff|patch)(\.zst)$
+    Open=%cd %p/patchfs://
+    View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zst
 
 # ls-lR
 regex/(^|\.)ls-?lR(\.gz|Z|bz2)$
@@ -402,6 +415,10 @@ regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.lzma$
 regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.xz$
 	Open=@EXTHELPERSDIR@/text.sh open man.xz %var{PAGER:more}
 	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.xz %var{PAGER:more}
+
+regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.zst$
+	Open=@EXTHELPERSDIR@/text.sh open man.zst %var{PAGER:more}
+	View=%view{ascii,nroff} @EXTHELPERSDIR@/text.sh view man.zst %var{PAGER:more}
 
 # CHM
 shell/i/.chm
@@ -789,6 +806,11 @@ regex/\.lzma$
 regex/\.xz$
 	Open=@EXTHELPERSDIR@/archive.sh view xz %var{PAGER:more}
 	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view xz
+
+# zstd
+regex/\.zst$
+	Open=@EXTHELPERSDIR@/archive.sh view zst %var{PAGER:more}
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view zst
 
 # Parity Archive
 type/^Parity\ Archive\ Volume\ Set

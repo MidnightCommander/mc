@@ -893,6 +893,9 @@ get_compression_type (int fd, const char *name)
         && magic[2] == 0x7A && magic[3] == 0x58 && magic[4] == 0x5A && magic[5] == 0x00)
         return COMPRESSION_XZ;
 
+    if (magic[0] == 0x28 && magic[1] == 0xB5 && magic[2] == 0x2F && magic[3] == 0xFD)
+        return COMPRESSION_ZSTD;
+
     str_len = strlen (name);
     /* HACK: we must belive to extension of LZMA file :) ... */
     if ((str_len > 5 && strcmp (&name[str_len - 5], ".lzma") == 0) ||
@@ -923,6 +926,8 @@ decompress_extension (int type)
         return "/ulzma" VFS_PATH_URL_DELIMITER;
     case COMPRESSION_XZ:
         return "/uxz" VFS_PATH_URL_DELIMITER;
+    case COMPRESSION_ZSTD:
+        return "/uzst" VFS_PATH_URL_DELIMITER;
     default:
         break;
     }
