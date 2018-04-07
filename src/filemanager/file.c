@@ -716,6 +716,9 @@ panel_operate_init_totals (const WPanel * panel, const vfs_path_t * source,
         ctx->progress_totals_computed = FALSE;
     }
 
+    /* destroy already created UI for single file rename operation */
+    file_op_context_destroy_ui (ctx);
+
     file_op_context_create_ui (ctx, TRUE, dialog_type);
 
     return status;
@@ -1948,7 +1951,14 @@ operate_single_file (const WPanel * panel, FileOperation operation, file_op_tota
 
             case OP_MOVE:
                 if (is_file)
+                {
+#ifdef ENABLE_BACKGROUND
+                    /* create UI to show confirmation dialog */
+                    if (!mc_global.we_are_background)
+                        file_op_context_create_ui (ctx, TRUE, FILEGUI_DIALOG_ONE_ITEM);
+#endif
                     value = move_file_file (panel, tctx, ctx, src, dest);
+                }
                 else
                     value = do_move_dir_dir (panel, tctx, ctx, src, dest);
                 break;
