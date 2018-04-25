@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-02-03 18:28+0300\n"
+"POT-Creation-Date: 2018-04-25 11:40+0300\n"
 "PO-Revision-Date: 2017-11-18 18:04+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/mc/mc/language/nl/)\n"
@@ -1653,7 +1653,8 @@ msgstr ""
 "Eeen gebruikersvriendelijke tekstbewerker\n"
 "geschreven voor de Midnight Commander"
 
-msgid "Copyright (C) 1996-2016 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2018 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2016 the Free Software Foundation"
 
 msgid "About"
@@ -1943,6 +1944,10 @@ msgstr "cd volgt lin&ks"
 
 msgid "Sa&fe delete"
 msgstr "Veili&g verwijderen"
+
+#, fuzzy
+msgid "Safe overwrite"
+msgstr "&Overschrijven"
 
 msgid "A&uto save setup"
 msgstr "A&utomatisch instellingen opslaan"

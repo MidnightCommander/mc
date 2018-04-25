@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-02-03 18:28+0300\n"
+"POT-Creation-Date: 2018-04-25 11:40+0300\n"
 "PO-Revision-Date: 2017-09-23 18:02+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Galician (http://www.transifex.com/mc/mc/language/gl/)\n"
@@ -1653,7 +1653,7 @@ msgstr ""
 "Un editor de texto de uso amigábel\n"
 "escrito para o Midnight Commander."
 
-msgid "Copyright (C) 1996-2016 the Free Software Foundation"
+msgid "Copyright (C) 1996-2018 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1943,6 +1943,10 @@ msgstr "Cd segue li&Gazóns"
 
 msgid "Sa&fe delete"
 msgstr "&Borrado seguro"
+
+#, fuzzy
+msgid "Safe overwrite"
+msgstr "s&Obrescribir"
 
 msgid "A&uto save setup"
 msgstr "Configuración do &Auto-gardado"

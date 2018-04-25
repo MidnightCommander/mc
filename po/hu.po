@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-02-03 18:28+0300\n"
+"POT-Creation-Date: 2018-04-25 11:40+0300\n"
 "PO-Revision-Date: 2017-11-20 23:51+0000\n"
 "Last-Translator: Rezső Páder <rezso@rezso.net>\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
@@ -1644,7 +1644,8 @@ msgstr ""
 "Felhasználóbarát szövegszerkesztő\n"
 "a Midnight Commander-hez készítve"
 
-msgid "Copyright (C) 1996-2016 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2018 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2016 the Free Software Foundation"
 
 msgid "About"
@@ -1934,6 +1935,10 @@ msgstr "Li&nkkövető könyvtárváltás"
 
 msgid "Sa&fe delete"
 msgstr "\"Ó&vatos\" törlés"
+
+#, fuzzy
+msgid "Safe overwrite"
+msgstr "&Felülírás"
 
 msgid "A&uto save setup"
 msgstr "Auto &Beállításmentés"

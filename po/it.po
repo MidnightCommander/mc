@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-02-03 18:28+0300\n"
+"POT-Creation-Date: 2018-04-25 11:40+0300\n"
 "PO-Revision-Date: 2018-02-24 12:37+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -1653,7 +1653,8 @@ msgstr ""
 "Un semplice editor di testi\n"
 "scritto per il Midnight Commander."
 
-msgid "Copyright (C) 1996-2016 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2018 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2016 the Free Software Foundation"
 
 msgid "About"
@@ -1941,6 +1942,10 @@ msgstr "Cd seg&ue i collegamenti"
 
 msgid "Sa&fe delete"
 msgstr "Cance&llazione sicura"
+
+#, fuzzy
+msgid "Safe overwrite"
+msgstr "S&ovrascrivi"
 
 msgid "A&uto save setup"
 msgstr "Autosalva &configurazione"
