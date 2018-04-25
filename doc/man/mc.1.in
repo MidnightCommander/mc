@@ -1962,7 +1962,19 @@ and not to the directory where the link was present.
 .I Safe delete.
 If this option is enabled, deleting files and directory hotlist entries
 unintentionally becomes more difficult.  The default selection in the
-confirmation dialogs for deletion changes from "Yes" to "No".
+confirmation dialogs for deletion changes from
+.B Yes
+to
+.BR No .
+This option is disabled by default.
+.PP
+.I Safe overwrite.
+If this option is enabled, overwriting files unintentionally becomes
+more difficult.  The default selection in the overwrite confirmation dialog
+changes from
+.B Yes
+to
+.BR No .
 This option is disabled by default.
 .PP
 .I Auto save setup.

@@ -157,7 +157,7 @@ statfs (char const *filename, struct fs_info *buf)
 #include "lib/util.h"
 #include "lib/widget.h"
 
-#include "src/setup.h"          /* verbose */
+#include "src/setup.h"          /* verbose, safe_overwrite */
 
 #include "midnight.h"
 #include "fileopctx.h"          /* FILE_CONT */
@@ -409,7 +409,7 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
     const int rd_ylen = 1;
     int rd_xlen = 60;
     int y = 2;
-    unsigned long yes_id;
+    unsigned long yes_id, no_id;
 
     struct
     {
@@ -565,7 +565,7 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
 
     ADD_RD_LABEL (4, 0, 0, y);  /* Overwrite this target? */
     yes_id = ADD_RD_BUTTON (5, y);      /* Yes */
-    ADD_RD_BUTTON (6, y);       /* No */
+    no_id = ADD_RD_BUTTON (6, y);       /* No */
 
     /* "this target..." widgets */
     if (!S_ISDIR (ui->d_stat->st_mode))
@@ -591,7 +591,7 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
 
     label_set_text (LABEL (label1), str_trunc (stripped_name, rd_xlen - 8));
     dlg_set_size (ui->replace_dlg, y + 3, rd_xlen);
-    dlg_select_by_id (ui->replace_dlg, yes_id);
+    dlg_select_by_id (ui->replace_dlg, safe_overwrite ? no_id : yes_id);
     result = dlg_run (ui->replace_dlg);
     dlg_destroy (ui->replace_dlg);
 
