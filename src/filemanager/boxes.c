@@ -546,8 +546,8 @@ configure_box (void)
                     QUICK_CHECKBOX (N_("Rotating d&ash"), &nice_rotating_dash, NULL),
                     QUICK_CHECKBOX (N_("Cd follows lin&ks"), &mc_global.vfs.cd_symlinks, NULL),
                     QUICK_CHECKBOX (N_("Sa&fe delete"), &safe_delete, NULL),
+                    QUICK_CHECKBOX (N_("Safe overwrite"), &safe_overwrite, NULL),       /* w/o hotkey */
                     QUICK_CHECKBOX (N_("A&uto save setup"), &auto_save_setup, NULL),
-                    QUICK_SEPARATOR (FALSE),
                     QUICK_SEPARATOR (FALSE),
                     QUICK_SEPARATOR (FALSE),
                 QUICK_STOP_GROUPBOX,

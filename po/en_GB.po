@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-02-03 18:28+0300\n"
+"POT-Creation-Date: 2018-04-25 11:40+0300\n"
 "PO-Revision-Date: 2017-10-12 21:56+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/mc/mc/"
@@ -1573,7 +1573,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2016 the Free Software Foundation"
+msgid "Copyright (C) 1996-2018 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -1852,6 +1852,9 @@ msgid "Cd follows lin&ks"
 msgstr ""
 
 msgid "Sa&fe delete"
+msgstr ""
+
+msgid "Safe overwrite"
 msgstr ""
 
 msgid "A&uto save setup"

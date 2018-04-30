@@ -87,6 +87,8 @@ gboolean boot_current_is_left = TRUE;
 
 /* If on, default for "No" in delete operations */
 gboolean safe_delete = FALSE;
+/* If on, default for "No" in overwrite files */
+gboolean safe_overwrite = FALSE;
 
 /* Controls screen clearing before an exec */
 gboolean clear_before_exec = TRUE;
@@ -293,6 +295,7 @@ static const struct
     { "confirm_directory_hotlist_delete", &confirm_directory_hotlist_delete },
     { "confirm_view_dir", &confirm_view_dir },
     { "safe_delete", &safe_delete },
+    { "safe_overwrite", &safe_overwrite },
 #ifndef HAVE_CHARSET
     { "eight_bit_clean", &mc_global.eight_bit_clean },
     { "full_eight_bits", &mc_global.full_eight_bits },

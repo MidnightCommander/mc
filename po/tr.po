@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-02-03 18:28+0300\n"
+"POT-Creation-Date: 2018-04-25 11:40+0300\n"
 "PO-Revision-Date: 2017-11-05 02:24+0000\n"
 "Last-Translator: yusuf <yusuf.aydemir@pisilinux.org>\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
@@ -1652,7 +1652,8 @@ msgstr ""
 "Kullanıcı dostu bir metin düzenleyici\n"
 "Midnight Commander için yazıldı"
 
-msgid "Copyright (C) 1996-2016 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2018 the Free Software Foundation"
 msgstr "Telif hakkı (C) 1996-2016 Özgür Yazılım Vakfı"
 
 msgid "About"
@@ -1944,6 +1945,10 @@ msgstr "cd &Bağları izler"
 
 msgid "Sa&fe delete"
 msgstr "güvenilir si&lme"
+
+#, fuzzy
+msgid "Safe overwrite"
+msgstr "&Üzerine Yaz"
 
 msgid "A&uto save setup"
 msgstr "&Ayarları otomatik kaydet"

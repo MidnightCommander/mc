@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-02-03 18:28+0300\n"
+"POT-Creation-Date: 2018-04-25 11:40+0300\n"
 "PO-Revision-Date: 2017-09-19 09:10+0000\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque (http://www.transifex.com/mc/mc/language/eu/)\n"
@@ -1652,7 +1652,8 @@ msgstr ""
 "Testu editore lagunkoi bat\n"
 "Midnight Commander-rarentzako idatzia."
 
-msgid "Copyright (C) 1996-2016 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2018 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2016 the Free Software Foundation"
 
 msgid "About"
@@ -1942,6 +1943,10 @@ msgstr "Cd-k este&kei jarraitzen die"
 
 msgid "Sa&fe delete"
 msgstr "E&zabatze segurua"
+
+#, fuzzy
+msgid "Safe overwrite"
+msgstr "&Gainidatzi"
 
 msgid "A&uto save setup"
 msgstr "A&uto gorde ezarpena"
