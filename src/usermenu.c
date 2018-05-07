@@ -546,7 +546,7 @@ execute_menu_command (const WEdit * edit_widget, const char *commands, gboolean 
 
     if (run_view)
     {
-        mcview_viewer (NULL, file_name_vpath, 0, 0, 0);
+        mcview_viewer (vfs_path_as_str (file_name_vpath), NULL, 0, 0, 0);
         dialog_switch_process_pending ();
     }
     else
