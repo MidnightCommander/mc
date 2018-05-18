@@ -48,7 +48,8 @@ do_view_action() {
         ctorrent -x "${MC_EXT_FILENAME}" 2>/dev/null
         ;;
     javaclass)
-        jad -p "${MC_EXT_FILENAME}" 2>/dev/null
+        jad -p "${MC_EXT_FILENAME}" 2>/dev/null || \
+            (file -b "${MC_EXT_FILENAME}"; javap -private "${MC_EXT_FILENAME}" 2>/dev/null)
         ;;
     *)
         ;;
