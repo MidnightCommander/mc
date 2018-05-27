@@ -1,3 +1,43 @@
+Version 4.8.21
+
+- Core
+
+  * Cancel Chmod/Chown/Advanced chown operation for large group of files when operation is not permitted (#3850)
+  * Mouse support in the "Advanced chown" dialog window (#3148)
+  * File highlighting by extension is case insensitive by default (#1620)
+  * Safe file overwrite (#3913)
+
+- VFS
+
+  * Support zstd compression format (#3906)
+
+- Editor
+
+  * Syntax:
+    * Rust support (#3884)
+    * JavaScript modules support (#3890)
+    * Improve Markdown support (#3893)
+
+- Misc
+
+  * Add JavaScript module support to `filehighlight.ini` (MidnightCommander/mc#132)
+  * Add Excel xlsx file format support to `mc.ext.in` (MidnightCommander/mc#135)
+  * i18n of argument type names in --help blocks (#3879)
+  * Code cleanup: (#3857, #3914)
+
+- Fixes
+
+  * Fail to link to ncurses built as two libraries: ncurses+tinfo (#3880)
+  * Garbage in displaying of summary of file sizes for selected files (#3883)
+  * "Compute totals" unnecessarily done for moves (#3149, #3908)
+  * mc.ext: allow Java class files to be viewed even if JAD isn't on PATH (MidnightCommander/mc#134)
+  * mcedit: broken extended key mode (#3897)
+  * mcedit doesn't save all opened files (#3898)
+  * extfs: sftps: -31 SFTP Protocol Error when transferring file (#3406)
+  * extfs: rpm: truncated script content in the viewer (#3865)
+  * extfs: rpm helper misses CONFLICTS field (#3789)
+
+
 Version 4.8.20
 
 - Core
