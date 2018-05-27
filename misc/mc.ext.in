@@ -619,7 +619,7 @@ shell/i/.rtf
 	Open=@EXTHELPERSDIR@/doc.sh open msdoc
 
 # Microsoft Excel Worksheet
-regex/i/\.xl[sw]$
+regex/i/\.(xl[sw]|xlsx)$
 	Open=@EXTHELPERSDIR@/doc.sh open msxls
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view msxls
 type/^Microsoft\ Excel
