@@ -4,7 +4,8 @@
 #
 # Translators:
 # baua gonzo <baua.gonzo@gmail.com>, 2016
-# David D, 2017
+# David D, 2017-2018
+# David Prudhomme <david7.prudhomme@gmail.com>, 2018
 # Scoubidou <david.vantyghem@free.fr>, 2015
 # Effede Effede <g2sainfroc@gmail.com>, 2016
 # Matthieu Crapet <mcrapet@gmail.com>, 2013-2016
@@ -16,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-09-23 18:02+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-05-03 09:01+0000\n"
+"Last-Translator: David Prudhomme <david7.prudhomme@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/mc/mc/language/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -119,13 +120,15 @@ msgid "Invalid character"
 msgstr "Caractère invalide"
 
 msgid "Unmatched quotes character"
-msgstr ""
+msgstr "Caractères de citation non appairés"
 
 #, c-format
 msgid ""
 "Hex pattern error at position %d:\n"
 "%s."
 msgstr ""
+"Erreur de motif Hexa à la position %d :\n"
+"%s."
 
 msgid "Search string not found"
 msgstr " Chaîne non trouvée "
@@ -198,7 +201,7 @@ msgid "True color not supported in this slang version."
 msgstr "Truecolor n'est pas permis cette version d'argot (\"slang version\")."
 
 msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr "Votre terminal semble ne pas permettre 256 couleurs."
+msgstr "Votre terminal ne semble même pas permettre 256 couleurs."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
@@ -532,7 +535,7 @@ msgid ""
 "%s"
 msgstr ""
 "Erreur inattendue dans select() pendant la lecture de données d'un processus "
-"fils:\n"
+"fils :\n"
 "%s"
 
 #, c-format
@@ -540,7 +543,7 @@ msgid ""
 "Unexpected error in waitpid():\n"
 "%s"
 msgstr ""
-"Erreur inattendue dans waitpid():\n"
+"Erreur inattendue dans waitpid() :\n"
 "%s"
 
 msgid "Warning"
@@ -670,9 +673,8 @@ msgstr "Imprimer les options de configuration"
 msgid "Print last working directory to specified file"
 msgstr "Écrit le dernier répertoire courant dans le fichier donné"
 
-#, fuzzy
 msgid "<file>"
-msgstr "fichier"
+msgstr "<file>"
 
 msgid "Enables subshell support (default)"
 msgstr "Active le support des sous-shells (par défaut)"
@@ -687,7 +689,7 @@ msgid "Set debug level"
 msgstr "Définit le niveau de débogage"
 
 msgid "<integer>"
-msgstr ""
+msgstr "<integer>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Lance la visionneuse sur un fichier"
@@ -695,9 +697,8 @@ msgstr "Lance la visionneuse sur un fichier"
 msgid "Edit files"
 msgstr "Éditer les fichiers"
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "&Ouvrir un fichier..."
+msgstr "<file> ..."
 
 msgid "Forces xterm features"
 msgstr "Force un attribut xterm"
@@ -741,7 +742,7 @@ msgid "Specifies a color configuration"
 msgstr "Spécifie une configuration de couleurs"
 
 msgid "<string>"
-msgstr ""
+msgstr "<string>"
 
 msgid "Show mc with specified skin"
 msgstr "Afficher mc avec le thème donné"
@@ -812,13 +813,13 @@ msgid "Color options"
 msgstr "Options de couleur"
 
 msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
-msgstr ""
+msgstr "[+ligne] fichier1[:ligne] [fichier2[:ligne]...]"
 
 msgid "file"
 msgstr "fichier"
 
 msgid "file1 file2"
-msgstr ""
+msgstr "fichier1 fichier2"
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[ce_rép] [autre_rép_panneau]"
@@ -1237,7 +1238,7 @@ msgid ""
 "Save before close?"
 msgstr ""
 "Le fichier %s a été modifié. \n"
-"Sauvegarder avant de quitter?"
+"Sauvegarder avant de quitter ?"
 
 msgid "Close file"
 msgstr "Fermer le fichier"
@@ -1642,7 +1643,7 @@ msgid "Synta&x highlighting"
 msgstr "Coloration synta&xique"
 
 msgid "C&ursor after inserted block"
-msgstr "C&urseur après le bloc insére"
+msgstr "C&urseur après le bloc inséré"
 
 msgid "Pers&istent selection"
 msgstr "Sélection pers&istante"
@@ -1654,7 +1655,7 @@ msgid "&Group undo"
 msgstr "&Annuler un groupe"
 
 msgid "Word wrap line length:"
-msgstr "Longueur avant cesure à la ligne :"
+msgstr "Longueur avant césure à la ligne :"
 
 msgid "Editor options"
 msgstr "Options de l'éditeur"
@@ -1666,9 +1667,8 @@ msgstr ""
 "Un éditeur de text facile d'utilisation.\n"
 "écrit pour Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2018 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2016 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2018 the Free Software Foundation"
 
 msgid "About"
 msgstr "À propos"
@@ -1855,13 +1855,11 @@ msgstr ""
 "Ne peut changer les permissions de « %s »\n"
 "%s"
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "&Ignorer le verrou"
+msgstr "&Ignorer"
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "&Ignorer le verrou"
+msgstr "Ignorer &tout"
 
 msgid "&Retry"
 msgstr "&Réessayer"
@@ -1958,9 +1956,8 @@ msgstr "cd suit les &liens"
 msgid "Sa&fe delete"
 msgstr "E&ffacement sûr"
 
-#, fuzzy
 msgid "Safe overwrite"
-msgstr "É&craser"
+msgstr "Écrasement sécurisé"
 
 msgid "A&uto save setup"
 msgstr "Enregistrement a&utomatique de la configuration"
@@ -2073,7 +2070,7 @@ msgid "User &mini status"
 msgstr "&Mini-statut utilisateur"
 
 msgid "Listing format"
-msgstr ""
+msgstr "Format de listing"
 
 msgid "Executable &first"
 msgstr "Exécutable en &premier"
@@ -2553,6 +2550,9 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
+"Impossible de réaliser des liens symboliques stables entre systèmes de "
+"fichiers non-locaux : désactivation de l'option \"Liens symboliques stables"
+"\"."
 
 #, c-format
 msgid ""
@@ -3270,7 +3270,7 @@ msgid "&Info"
 msgstr "&Informations"
 
 msgid "&Listing format..."
-msgstr ""
+msgstr "Format de &Listing ..."
 
 msgid "&Sort order..."
 msgstr "&Ordre de tri..."
@@ -3895,10 +3895,10 @@ msgid "Data types:"
 msgstr "Types de données :"
 
 msgid "Home directory:"
-msgstr ""
+msgstr "Répertoire de l'utilisateur :"
 
 msgid "Profile root directory:"
-msgstr ""
+msgstr "Répertoire racine de profil :"
 
 msgid "System data"
 msgstr "Données système"
@@ -4260,9 +4260,9 @@ msgid "sftp: No file handler data present for reading file"
 msgstr ""
 "sftp : ne peut lire le fichier, aucune association de fichiers disponible"
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs : erreur d'abandon : %s"
+msgstr "sftp : erreur de socket : %s"
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
@@ -4511,10 +4511,3 @@ msgstr "Continuer à partir du début ?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Impossible de récupérer localement le fichier /ftp://some.host/editme.txt"
-
-#~ msgid ""
-#~ "Cannot delete file \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Impossible d'effacer le fichier « %s »\n"
-#~ "%s"

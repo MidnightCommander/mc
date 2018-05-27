@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-09-19 09:10+0000\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 20:11+0000\n"
 "Last-Translator: David Martin <dhmartina@yahoo.es>\n"
 "Language-Team: Spanish (http://www.transifex.com/mc/mc/language/es/)\n"
 "Language: es\n"
@@ -662,9 +662,8 @@ msgstr "Mostrar opciones de configuración"
 msgid "Print last working directory to specified file"
 msgstr "Guardar el nombre del directorio en un archivo"
 
-#, fuzzy
 msgid "<file>"
-msgstr "archivo"
+msgstr "<archivo>"
 
 msgid "Enables subshell support (default)"
 msgstr "Activar uso de subshell (por defecto)"
@@ -679,7 +678,7 @@ msgid "Set debug level"
 msgstr "Fijar el nivel de depuración"
 
 msgid "<integer>"
-msgstr ""
+msgstr "<número>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Abrir un archivo con el visor"
@@ -687,9 +686,8 @@ msgstr "Abrir un archivo con el visor"
 msgid "Edit files"
 msgstr "Editar archivos"
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "abrir archiv&O..."
+msgstr "<archivo> ..."
 
 msgid "Forces xterm features"
 msgstr "Utilizar las posibilidades de xterm"
@@ -731,7 +729,7 @@ msgid "Specifies a color configuration"
 msgstr "Indicar una configuración de colores"
 
 msgid "<string>"
-msgstr ""
+msgstr "<texto>"
 
 msgid "Show mc with specified skin"
 msgstr "Mostrar mc con la careta (skin) indicada"
@@ -795,7 +793,7 @@ msgstr ""
 "Colores estándar:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-"   brightcyan, lightgray and white\n"
+"   brightcyan, lightgray y white\n"
 "\n"
 "Colores extendidos, cuando estén disponibles 256 colores:\n"
 "   color16 a color255, o rgb000 a rgb555 y gray0 a gray23\n"
@@ -1410,7 +1408,7 @@ msgid "&Mark columns"
 msgstr "marcar c&Olumnas"
 
 msgid "Mark &all"
-msgstr "marcar &Todo"
+msgstr "marcar &Todos"
 
 msgid "Unmar&k"
 msgstr "desma&Rcar"
@@ -1659,9 +1657,8 @@ msgstr ""
 "Un editor de texto amigable\n"
 "para Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2018 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2016 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2018 the Free Software Foundation"
 
 msgid "About"
 msgstr "Acerca de..."
@@ -1848,13 +1845,11 @@ msgstr ""
 "Imposible cambiar los permisos de «%s»\n"
 "%s"
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "&Ignorar bloqueo"
+msgstr "&Ignorar"
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "&Ignorar bloqueo"
+msgstr "ignorar &Todos"
 
 msgid "&Retry"
 msgstr "&Reintentar"
@@ -1951,9 +1946,8 @@ msgstr "cd sigue en&Laces"
 msgid "Sa&fe delete"
 msgstr "precauciones de &Borrado"
 
-#, fuzzy
 msgid "Safe overwrite"
-msgstr "s&Obrescribir"
+msgstr "precauciones de sobrescritura"
 
 msgid "A&uto save setup"
 msgstr "auto-guarda con&Figuración"
@@ -4250,9 +4244,9 @@ msgstr "sftp: Error al establecer sesión SSH"
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Sin datos del descriptor de archivo al leer"
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: Error al abortar: %s"
+msgstr "sftp: Error de socket: %s"
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
@@ -4274,7 +4268,7 @@ msgstr "Error %s creando el directorio %s"
 
 #, c-format
 msgid "Error %s removing directory %s"
-msgstr "Eror %s eliminando el directorio %s"
+msgstr "Error %s eliminando el directorio %s"
 
 #, c-format
 msgid "%s opening remote file %s"
@@ -4501,10 +4495,3 @@ msgstr "¿Continuar desde el principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Imposible obtener una copia local de /ftp://ese.equipo/editame.txt"
-
-#~ msgid ""
-#~ "Cannot delete file \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Imposible borrar el archivo «%s»\n"
-#~ "%s"

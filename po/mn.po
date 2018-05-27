@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-09-19 09:10+0000\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 12:37+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Mongolian (http://www.transifex.com/mc/mc/language/mn/)\n"
 "Language: mn\n"
@@ -631,9 +631,8 @@ msgstr ""
 msgid "Print last working directory to specified file"
 msgstr "Заагдсан файл руу хамгийн сүүлд ажилласан лавлахыг хэвлэх"
 
-#, fuzzy
 msgid "<file>"
-msgstr "файл"
+msgstr ""
 
 msgid "Enables subshell support (default)"
 msgstr "Subshell боломжыг нээх (анхны утга)"
@@ -656,9 +655,8 @@ msgstr "Файл харагчыг ажиллуулах"
 msgid "Edit files"
 msgstr ""
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "Файл &нээх..."
+msgstr ""
 
 msgid "Forces xterm features"
 msgstr "xterm хүчингүүд"
@@ -1750,9 +1748,8 @@ msgstr ""
 msgid "&Ignore"
 msgstr ""
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "Бүгдэд о&ноох"
+msgstr ""
 
 msgid "&Retry"
 msgstr "&Дахих"
@@ -4032,9 +4029,9 @@ msgstr ""
 msgid "sftp: No file handler data present for reading file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: таслалт алдаа: %s"
+msgstr ""
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"

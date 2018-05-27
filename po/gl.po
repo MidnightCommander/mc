@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-09-23 18:02+0000\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 12:37+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Galician (http://www.transifex.com/mc/mc/language/gl/)\n"
 "Language: gl\n"
@@ -657,9 +657,8 @@ msgstr "Mostrar as opcións de configuración"
 msgid "Print last working directory to specified file"
 msgstr "Mostrar o último directorio de traballo para o ficheiro especificado"
 
-#, fuzzy
 msgid "<file>"
-msgstr "ficheiro"
+msgstr ""
 
 msgid "Enables subshell support (default)"
 msgstr "Activar uso de subterminal (predeterminado)"
@@ -682,9 +681,8 @@ msgstr "Abrir un ficheiro co visor"
 msgid "Edit files"
 msgstr "Editar ficheiros"
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "&Abrir ficheiro..."
+msgstr ""
 
 msgid "Forces xterm features"
 msgstr "Forzar as funcionalidades de xterm"
@@ -1841,13 +1839,11 @@ msgstr ""
 "Non é posíbel cambiar permisos de «%s»\n"
 "%s"
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "&Ignorar bloqueo"
+msgstr ""
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "&Ignorar bloqueo"
+msgstr ""
 
 msgid "&Retry"
 msgstr "&Reintentar"
@@ -1944,9 +1940,8 @@ msgstr "Cd segue li&Gazóns"
 msgid "Sa&fe delete"
 msgstr "&Borrado seguro"
 
-#, fuzzy
 msgid "Safe overwrite"
-msgstr "s&Obrescribir"
+msgstr ""
 
 msgid "A&uto save setup"
 msgstr "Configuración do &Auto-gardado"
@@ -4240,9 +4235,9 @@ msgstr ""
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Sen datos del descritor do ficheiro para lelo."
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: produciuse un erro ao interromper: %s"
+msgstr ""
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
@@ -4491,10 +4486,3 @@ msgstr "Continuar desde o principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Non é posíbel obter unha copia local de /ftp://some.host/editme.txt"
-
-#~ msgid ""
-#~ "Cannot delete file \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Non é posíbel eliminar o ficheiro «%s»\n"
-#~ "%s"

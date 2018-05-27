@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Piotr Drąg <piotrdrag@gmail.com>, 2011-2017
+# Piotr Drąg <piotrdrag@gmail.com>, 2011-2018
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-09-23 18:02+0000\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-05-01 15:44+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/mc/mc/language/pl/)\n"
 "Language: pl\n"
@@ -665,9 +665,8 @@ msgstr "Wyświetla opcje konfiguracji"
 msgid "Print last working directory to specified file"
 msgstr "Wyświetla ostatni katalog roboczy do podanego pliku"
 
-#, fuzzy
 msgid "<file>"
-msgstr "plik"
+msgstr "<plik>"
 
 msgid "Enables subshell support (default)"
 msgstr "Włącza obsługę podpowłoki (domyślne)"
@@ -682,7 +681,7 @@ msgid "Set debug level"
 msgstr "Ustawia poziom debugowania"
 
 msgid "<integer>"
-msgstr ""
+msgstr "<liczba-całkowita>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Uruchamia podgląd pliku"
@@ -690,9 +689,8 @@ msgstr "Uruchamia podgląd pliku"
 msgid "Edit files"
 msgstr "Modyfikuje pliki"
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "&Otwórz plik…"
+msgstr "<plik> …"
 
 msgid "Forces xterm features"
 msgstr "Wymusza funkcje programu xterm"
@@ -736,7 +734,7 @@ msgid "Specifies a color configuration"
 msgstr "Podaje konfigurację kolorów"
 
 msgid "<string>"
-msgstr ""
+msgstr "<ciąg>"
 
 msgid "Show mc with specified skin"
 msgstr "Wyświetla program mc za pomocą podanej skórki"
@@ -1663,9 +1661,8 @@ msgstr ""
 "Łatwy w obsłudze edytor tekstu,\n"
 "napisany dla programu Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2018 the Free Software Foundation"
-msgstr "Copyright © 1996-2016 Free Software Foundation"
+msgstr "Copyright © 1996-2018 Free Software Foundation"
 
 msgid "About"
 msgstr "O programie"
@@ -1851,13 +1848,11 @@ msgstr ""
 "Nie można wykonać chmod na „%s”\n"
 "%s"
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "Z&ignoruj blokadę"
+msgstr "Z&ignoruj"
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "Z&ignoruj blokadę"
+msgstr "Zignoruj &wszystko"
 
 msgid "&Retry"
 msgstr "P&onów"
@@ -1954,9 +1949,8 @@ msgstr "„cd” podąża za &dowiązaniami"
 msgid "Sa&fe delete"
 msgstr "Bezpieczne &usuwanie"
 
-#, fuzzy
 msgid "Safe overwrite"
-msgstr "&Zastąp"
+msgstr "Bezpieczne zastępowanie"
 
 msgid "A&uto save setup"
 msgstr "Auto&m. zapis ustawień"
@@ -4262,9 +4256,9 @@ msgstr "sftp: niepowodzenie podczas nawiązywania sesji SSH"
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: brak danych obsługi pliku do odczytania pliku"
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: błąd przerywania: %s"
+msgstr "sftp: błąd gniazda: %s"
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
@@ -4514,10 +4508,3 @@ msgstr "Kontynuować od początku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Nie można pobrać lokalnej kopii /ftp://jakiś.komputer/modyfikuj_mnie.txt"
-
-#~ msgid ""
-#~ "Cannot delete file \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Nie można usunąć pliku „%s”\n"
-#~ "%s"

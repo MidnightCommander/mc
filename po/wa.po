@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-09-19 09:10+0000\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 12:37+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Walloon (http://www.transifex.com/mc/mc/language/wa/)\n"
 "Language: wa\n"
@@ -629,9 +629,8 @@ msgstr ""
 msgid "Print last working directory to specified file"
 msgstr ""
 
-#, fuzzy
 msgid "<file>"
-msgstr "fitchî"
+msgstr ""
 
 msgid "Enables subshell support (default)"
 msgstr ""
@@ -654,9 +653,8 @@ msgstr "Enonder li håyneu di fitchî so on fitchî"
 msgid "Edit files"
 msgstr ""
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "&Drovî fitchî..."
+msgstr ""
 
 msgid "Forces xterm features"
 msgstr ""
@@ -1748,9 +1746,8 @@ msgstr ""
 msgid "&Ignore"
 msgstr ""
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "Mete &Totafwait"
+msgstr ""
 
 msgid "&Retry"
 msgstr "&Rissayî"

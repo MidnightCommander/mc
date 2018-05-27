@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-09-19 09:10+0000\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 12:37+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/mc/mc/language/vi/)\n"
 "Language: vi\n"
@@ -631,9 +631,8 @@ msgstr ""
 msgid "Print last working directory to specified file"
 msgstr "Ghi thư mục làm việc cuối cùng vào tập tin chỉ ra"
 
-#, fuzzy
 msgid "<file>"
-msgstr "tập tin"
+msgstr ""
 
 msgid "Enables subshell support (default)"
 msgstr "Bật hỗ trợ shell con (mặc định)"
@@ -656,9 +655,8 @@ msgstr "Xem tập tin"
 msgid "Edit files"
 msgstr ""
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "&Mở tập tin..."
+msgstr ""
 
 msgid "Forces xterm features"
 msgstr "Bắt buộc dùng tính năng của xterm"
@@ -1747,13 +1745,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "&Lời đi khóa"
+msgstr ""
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "&Lời đi khóa"
+msgstr ""
 
 msgid "&Retry"
 msgstr "&Thử lại"
@@ -1848,9 +1844,8 @@ msgstr ""
 msgid "Sa&fe delete"
 msgstr ""
 
-#, fuzzy
 msgid "Safe overwrite"
-msgstr "&Ghi chèn"
+msgstr ""
 
 msgid "A&uto save setup"
 msgstr ""
@@ -4034,9 +4029,9 @@ msgstr ""
 msgid "sftp: No file handler data present for reading file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: lỗi thoát: %s"
+msgstr ""
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"

@@ -12,16 +12,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-09-19 09:10+0000\n"
-"Last-Translator: Andrius Burokas\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 12:37+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/mc/mc/language/lt/)\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < "
+"11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? "
+"1 : n % 1 != 0 ? 2: 3);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -649,9 +650,8 @@ msgstr "Rodyti 'configure' parinktis"
 msgid "Print last working directory to specified file"
 msgstr "Įrašo paskutinį esamą aplanką į nurodytą failą"
 
-#, fuzzy
 msgid "<file>"
-msgstr "failą"
+msgstr ""
 
 msgid "Enables subshell support (default)"
 msgstr "Įjungia „subshell“ palaikymą (nenurodžius kitaip)"
@@ -674,9 +674,8 @@ msgstr "Parodo failo turinį"
 msgid "Edit files"
 msgstr "Redaguoti failus"
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "At&verti failą..."
+msgstr ""
 
 msgid "Forces xterm features"
 msgstr "Priverčia naudoti „xterm“ galimybes"
@@ -1773,13 +1772,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "&Ignoruoti užraktą"
+msgstr ""
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "&Ignoruoti užraktą"
+msgstr ""
 
 msgid "&Retry"
 msgstr "&Iš naujo"
@@ -1874,9 +1871,8 @@ msgstr ""
 msgid "Sa&fe delete"
 msgstr "Saugus šalinimas"
 
-#, fuzzy
 msgid "Safe overwrite"
-msgstr "Perraš&yti"
+msgstr ""
 
 msgid "A&uto save setup"
 msgstr ""
@@ -2900,6 +2896,7 @@ msgid_plural "Finished (ignored %zu directories)"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+msgstr[3] ""
 
 msgid "Searching"
 msgstr "Ieškoma"
@@ -3062,6 +3059,7 @@ msgid_plural " (%lu blocks)"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+msgstr[3] ""
 
 #, c-format
 msgid "Owner:      %s/%s"
@@ -3298,6 +3296,7 @@ msgid_plural "You have %zu opened screens. Quit anyway?"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+msgstr[3] ""
 
 msgid "The Midnight Commander"
 msgstr ""
@@ -3446,6 +3445,7 @@ msgid_plural "%s in %d files"
 msgstr[0] "%s %d faile"
 msgstr[1] "%s %d failuose"
 msgstr[2] "%s %d failų"
+msgstr[3] "%s %d failų"
 
 msgid "Panelize"
 msgstr ""
@@ -4099,9 +4099,9 @@ msgstr ""
 msgid "sftp: No file handler data present for reading file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: nutraukti nepavyko: %s"
+msgstr ""
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
@@ -4336,10 +4336,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid ""
-#~ "Cannot delete file \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Nepavyko pašalinti failo \"%s\"\n"
-#~ "%s"

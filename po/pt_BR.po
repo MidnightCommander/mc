@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-09-19 09:10+0000\n"
-"Last-Translator: Mauro Hemerly Gazzani <mauro.hemerly@gmail.com>\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 12:37+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/mc/mc/language/"
 "pt_BR/)\n"
 "Language: pt_BR\n"
@@ -663,9 +663,8 @@ msgstr "Opções de configuração de impressão"
 msgid "Print last working directory to specified file"
 msgstr "Exibir último diretório de trabalho para o arquivo especificado"
 
-#, fuzzy
 msgid "<file>"
-msgstr "arquivo"
+msgstr ""
 
 msgid "Enables subshell support (default)"
 msgstr "Habilita suporte à sub interpretadores de comandos (padrão)"
@@ -688,9 +687,8 @@ msgstr "Lança o visualizador de arquivos"
 msgid "Edit files"
 msgstr "Editar arquivos"
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "Abrir arquivo..."
+msgstr ""
 
 msgid "Forces xterm features"
 msgstr "Força recursos do xterm"
@@ -1615,9 +1613,8 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-#, fuzzy
 msgid "Copyright (C) 1996-2018 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2016 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Sobre"
@@ -1804,13 +1801,11 @@ msgstr ""
 "Não foi possível executar chmod \"%s\"\n"
 "%s"
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "&Ignorar bloqueio"
+msgstr ""
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "&Ignorar bloqueio"
+msgstr ""
 
 msgid "&Retry"
 msgstr "&Tentar Novamente"
@@ -1907,9 +1902,8 @@ msgstr "Cd segue lin&ks"
 msgid "Sa&fe delete"
 msgstr ""
 
-#, fuzzy
 msgid "Safe overwrite"
-msgstr "&Sobrescrever"
+msgstr ""
 
 msgid "A&uto save setup"
 msgstr ""
@@ -4165,9 +4159,9 @@ msgstr ""
 msgid "sftp: No file handler data present for reading file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: erro: %s"
+msgstr ""
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
@@ -4405,10 +4399,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid ""
-#~ "Cannot delete file \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Não foi possível deletar \"%s\"\n"
-#~ "%s"

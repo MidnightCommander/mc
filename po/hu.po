@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-11-20 23:51+0000\n"
-"Last-Translator: Rezső Páder <rezso@rezso.net>\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 12:37+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
@@ -650,9 +650,8 @@ msgstr "Beállítások kiíratása"
 msgid "Print last working directory to specified file"
 msgstr "A legutóbbi aktuális könyvtár írása az adott fájlba"
 
-#, fuzzy
 msgid "<file>"
-msgstr "fájl"
+msgstr ""
 
 msgid "Enables subshell support (default)"
 msgstr "Háttér-shell bekapcsolása (alapértelmezett)"
@@ -675,9 +674,8 @@ msgstr "Fájlmegjelenítés indítása a megadott fájlon"
 msgid "Edit files"
 msgstr "Fájlok szerkesztése"
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "&Megnyitás..."
+msgstr ""
 
 msgid "Forces xterm features"
 msgstr "Xterm-funkciók kikényszerítése"
@@ -1644,9 +1642,8 @@ msgstr ""
 "Felhasználóbarát szövegszerkesztő\n"
 "a Midnight Commander-hez készítve"
 
-#, fuzzy
 msgid "Copyright (C) 1996-2018 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2016 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Névjegy"
@@ -1833,13 +1830,11 @@ msgstr ""
 "\"%s\" jogai nem állíthatók\n"
 "%s"
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "&Nem érdekes, tovább"
+msgstr ""
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "&Nem érdekes, tovább"
+msgstr ""
 
 msgid "&Retry"
 msgstr "Új&ra"
@@ -1936,9 +1931,8 @@ msgstr "Li&nkkövető könyvtárváltás"
 msgid "Sa&fe delete"
 msgstr "\"Ó&vatos\" törlés"
 
-#, fuzzy
 msgid "Safe overwrite"
-msgstr "&Felülírás"
+msgstr ""
 
 msgid "A&uto save setup"
 msgstr "Auto &Beállításmentés"
@@ -4235,9 +4229,9 @@ msgstr "stp: Hiba lépett fel az ssh kapcsolat létrehozása közben"
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Nincs jelenleg elérhető fájlkezelő adat a fájl olvasásához"
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "Ftpfs: hiba az átvitel megszakításakor: %s"
+msgstr ""
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
@@ -4482,10 +4476,3 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
-
-#~ msgid ""
-#~ "Cannot delete file \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "A(z) \"%s\" fájl nem törölhető \n"
-#~ "%s"

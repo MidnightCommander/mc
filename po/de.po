@@ -9,7 +9,7 @@
 # Fabian Affolter <fab@fedoraproject.org>, 2012-2013
 # Karsten <waldstadt@web.de>, 2016
 # Larson März <larson@protonmail.ch>, 2016
-# Ronny Hößrich, 2015
+# Ronny Hößrich, 2015,2018
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # username <my.somewhat.lengthy.loginname@gmail.com>, 2011
 # valsu <valsu@hylia.de>, 2016
@@ -18,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-09-19 09:10+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 12:37+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/mc/mc/language/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -676,9 +676,8 @@ msgstr "Konfigurationsoptionen anzeigen"
 msgid "Print last working directory to specified file"
 msgstr "Letztes Verzeichnis zur angegebenen Datei anzeigen"
 
-#, fuzzy
 msgid "<file>"
-msgstr "Datei"
+msgstr "<file>"
 
 msgid "Enables subshell support (default)"
 msgstr "Schaltet Subshell-Unterstützung ein (normal)"
@@ -693,7 +692,7 @@ msgid "Set debug level"
 msgstr "Debugging-Level setzen"
 
 msgid "<integer>"
-msgstr ""
+msgstr "<integer>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Startet den Ansichtsmodus für eine Datei"
@@ -701,9 +700,8 @@ msgstr "Startet den Ansichtsmodus für eine Datei"
 msgid "Edit files"
 msgstr "Datei bearbeiten"
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "Datei ö&ffnen..."
+msgstr "<file> ..."
 
 msgid "Forces xterm features"
 msgstr "Erzwingt xterm-Funktionen"
@@ -747,7 +745,7 @@ msgid "Specifies a color configuration"
 msgstr "Gibt eine Farbkonfiguration an"
 
 msgid "<string>"
-msgstr ""
+msgstr "<string>"
 
 msgid "Show mc with specified skin"
 msgstr "mc mit dem angegebenen Skin anzeigen"
@@ -1672,9 +1670,8 @@ msgstr ""
 "Ein benutzerfreundlicher Texteditor\n"
 "geschrieben für Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2018 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2016 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Über"
@@ -1861,13 +1858,11 @@ msgstr ""
 "Kann chmod für \"%s\" nicht durchführen\n"
 "%s"
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "Sperre &ignorieren"
+msgstr "&Ignorieren"
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "Sperre &ignorieren"
+msgstr "&Alles ignorieren"
 
 msgid "&Retry"
 msgstr "Wiede&rholen"
@@ -1964,9 +1959,8 @@ msgstr "cd folgt Lin&ks"
 msgid "Sa&fe delete"
 msgstr "Sicheres &löschen"
 
-#, fuzzy
 msgid "Safe overwrite"
-msgstr "Überschreiben"
+msgstr ""
 
 msgid "A&uto save setup"
 msgstr "Einstellungen auto&m. speichern"
@@ -4269,9 +4263,9 @@ msgstr "sftp: Fehler beim Herstellen der SSH Sitzung"
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Kein Dateihandler vorhanden zum Lesen der Datei"
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: Abbruch; Fehler: %s"
+msgstr "sftp: Socket Fehler: %s"
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
@@ -4520,10 +4514,3 @@ msgstr "Am Anfang fortsetzen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kann keine lokale Kopie von /ftp://some.host/editme.txt anlegen"
-
-#~ msgid ""
-#~ "Cannot delete file \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Kann Datei \"%s\" nicht löschen\n"
-#~ "%s"

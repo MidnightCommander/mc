@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Keith Bowes <zooplah@gmail.com>, 2011,2016
+# Keith Bowes <zooplah@gmail.com>, 2011,2016,2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-09-19 09:16+0000\n"
-"Last-Translator: Keith Bowes <zooplah@gmail.com>\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 12:37+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -659,9 +659,8 @@ msgstr "Eligi muntajn agordaĵojn"
 msgid "Print last working directory to specified file"
 msgstr "Eligi lastan labordosierujon al specifan dosieron"
 
-#, fuzzy
 msgid "<file>"
-msgstr "dosieron"
+msgstr "<dosieron>"
 
 msgid "Enables subshell support (default)"
 msgstr "Aktivigi subŝelon (apriore)"
@@ -676,7 +675,7 @@ msgid "Set debug level"
 msgstr "Specifi senerarigan nivelon"
 
 msgid "<integer>"
-msgstr ""
+msgstr "<entjero>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Plenumigi la dosiero-legilon je la dosiero"
@@ -684,9 +683,8 @@ msgstr "Plenumigi la dosiero-legilon je la dosiero"
 msgid "Edit files"
 msgstr "Redakti dosierojn"
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "&Malfermi dosieron..."
+msgstr "<dosiero> …"
 
 msgid "Forces xterm features"
 msgstr "Devigi xterm-trajtojn"
@@ -728,7 +726,7 @@ msgid "Specifies a color configuration"
 msgstr "Specifi koloran agordon"
 
 msgid "<string>"
-msgstr ""
+msgstr "<ĉeno>"
 
 msgid "Show mc with specified skin"
 msgstr "Montri kun specifa etoso"
@@ -1654,11 +1652,8 @@ msgstr ""
 "Afabla tekstoredaktilo\n"
 "verkita por Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2018 the Free Software Foundation"
 msgstr ""
-"Kopirajto © 1996–2016 Free Software Foundation (Fondaĵo pri liberaj "
-"programoj)"
 
 msgid "About"
 msgstr "Pri"
@@ -1845,13 +1840,11 @@ msgstr ""
 "Ne eblas ŝanĝi permesojn de \"%s\"\n"
 "%s"
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "&Ignori fiksilon"
+msgstr "&Ignori"
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "&Ignori fiksilon"
+msgstr "Ignori ĉio&n"
 
 msgid "&Retry"
 msgstr "&Reprovi"
@@ -1948,9 +1941,8 @@ msgstr "Dosieruja ŝanĝo sek&vas ligilojn"
 msgid "Sa&fe delete"
 msgstr "Sendanĝera &forigo"
 
-#, fuzzy
 msgid "Safe overwrite"
-msgstr "&Anstataŭigi"
+msgstr ""
 
 msgid "A&uto save setup"
 msgstr "Aŭtomate konservi agor&don"
@@ -4247,9 +4239,9 @@ msgstr "sftp: Malsukcesis starigi SSH-seancon"
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Neniu dosiertraktila datumo ĉeestas por legi dosieron"
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: ĉesiga eraro: %s"
+msgstr "sftp: kontaktoskatola eraro: %s"
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
@@ -4498,10 +4490,3 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
-
-#~ msgid ""
-#~ "Cannot delete file \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Ne eblas forigi dosieron \"%s\"\n"
-#~ "%s"

@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2011,2015-2017
+# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2011,2015-2018
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-09-19 09:10+0000\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-05-12 11:25+0000\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque (http://www.transifex.com/mc/mc/language/eu/)\n"
 "Language: eu\n"
@@ -104,6 +104,8 @@ msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
 "hex)"
 msgstr ""
+"Barruti kanpoko zenbakia (byte barrutian egon behar luke, 0 <= n <= 0xFF, "
+"hamaseitarrean adierazita)"
 
 msgid "Invalid character"
 msgstr "Karaktere baliogabea"
@@ -656,9 +658,8 @@ msgstr "Inprimatu konfiguratzeko aukerak"
 msgid "Print last working directory to specified file"
 msgstr "Inprimatu laneko azken direktorioa zehaztutako fitxategira"
 
-#, fuzzy
 msgid "<file>"
-msgstr "fitxategia"
+msgstr "<file>"
 
 msgid "Enables subshell support (default)"
 msgstr "Subshell euskarria (lehenetsia) gaitzen du"
@@ -673,7 +674,7 @@ msgid "Set debug level"
 msgstr "Ezarri arazketa maila"
 
 msgid "<integer>"
-msgstr ""
+msgstr "<integer>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Fitxategi-ikustailea fitxategian abiarazten du"
@@ -681,9 +682,8 @@ msgstr "Fitxategi-ikustailea fitxategian abiarazten du"
 msgid "Edit files"
 msgstr "Editatu fitxategiak"
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "&Ireki fitxategia..."
+msgstr "<file> ..."
 
 msgid "Forces xterm features"
 msgstr "xterm eginbideak behartzen ditu"
@@ -725,7 +725,7 @@ msgid "Specifies a color configuration"
 msgstr "Kolore-konfigurazioa zehazten du"
 
 msgid "<string>"
-msgstr ""
+msgstr "<string>"
 
 msgid "Show mc with specified skin"
 msgstr "Erakutsi mc zehaztutako azalarekin"
@@ -1652,9 +1652,8 @@ msgstr ""
 "Testu editore lagunkoi bat\n"
 "Midnight Commander-rarentzako idatzia."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2018 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2016 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2018 the Free Software Foundation"
 
 msgid "About"
 msgstr "Honi buruz"
@@ -1841,13 +1840,11 @@ msgstr ""
 "\"%s\"-ren baimenak ezin aldatu (\"chmod\")\n"
 "%s"
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "J&aramonik ez giltzapeari"
+msgstr "&Jaromonik ez"
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "J&aramonik ez giltzapeari"
+msgstr "Jaramonik ez &guztiari"
 
 msgid "&Retry"
 msgstr "&Saiatu berriz"
@@ -1944,9 +1941,8 @@ msgstr "Cd-k este&kei jarraitzen die"
 msgid "Sa&fe delete"
 msgstr "E&zabatze segurua"
 
-#, fuzzy
 msgid "Safe overwrite"
-msgstr "&Gainidatzi"
+msgstr ""
 
 msgid "A&uto save setup"
 msgstr "A&uto gorde ezarpena"
@@ -4244,9 +4240,9 @@ msgstr "sftp: Hutsegitea SSH saioa ezartzean"
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Ez dago fitxategi maneiatzaile daturik fitxategia irakurtzeko"
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: galarazte akatsa: %s"
+msgstr ""
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
@@ -4497,10 +4493,3 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
-
-#~ msgid ""
-#~ "Cannot delete file \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "\"%s\" fitxategia ezin ezabatu\n"
-#~ "%s"

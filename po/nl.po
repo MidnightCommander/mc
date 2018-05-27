@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-11-18 18:04+0000\n"
-"Last-Translator: Yury V. Zaytsev <yury@shurup.com>\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 12:37+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/mc/mc/language/nl/)\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -664,9 +664,8 @@ msgstr "Toon instellingsopties"
 msgid "Print last working directory to specified file"
 msgstr "Werkmap wegschrijven in bestand bij afsluiten programma"
 
-#, fuzzy
 msgid "<file>"
-msgstr "bestand"
+msgstr ""
 
 msgid "Enables subshell support (default)"
 msgstr "Zet subshell-ondersteuning aan (standaard)"
@@ -689,9 +688,8 @@ msgstr "Start de bestandviewer voor een bestand"
 msgid "Edit files"
 msgstr "Bewerk bestanden"
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "&Open bestand..."
+msgstr ""
 
 msgid "Forces xterm features"
 msgstr "Dwingt xterm features"
@@ -1653,9 +1651,8 @@ msgstr ""
 "Eeen gebruikersvriendelijke tekstbewerker\n"
 "geschreven voor de Midnight Commander"
 
-#, fuzzy
 msgid "Copyright (C) 1996-2018 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2016 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Over"
@@ -1842,13 +1839,11 @@ msgstr ""
 "chmod \"%s\" mislukt \n"
 "%s"
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "Negeer vergrendel&ing"
+msgstr ""
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "Negeer vergrendel&ing"
+msgstr ""
 
 msgid "&Retry"
 msgstr "&Nogmaals"
@@ -1945,9 +1940,8 @@ msgstr "cd volgt lin&ks"
 msgid "Sa&fe delete"
 msgstr "Veili&g verwijderen"
 
-#, fuzzy
 msgid "Safe overwrite"
-msgstr "&Overschrijven"
+msgstr ""
 
 msgid "A&uto save setup"
 msgstr "A&utomatisch instellingen opslaan"
@@ -4250,9 +4244,9 @@ msgstr "sftp: SHH-sessie openen is niet gelukt"
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Geen gegevens over bestand aanwezig om bestand te kunnen lezen"
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: afbreekfout: %s"
+msgstr ""
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
@@ -4491,10 +4485,3 @@ msgstr "Doorgaan vanaf het begin?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan geen lokale versie van /ftp://some.host/editme.txt ophalen"
-
-#~ msgid ""
-#~ "Cannot delete file \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Verwijderen van bestand \"%s\" mislukt \n"
-#~ "%s"

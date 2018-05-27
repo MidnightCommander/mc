@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-09-23 18:02+0000\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 12:37+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/mc/mc/language/el/)\n"
 "Language: el\n"
@@ -648,9 +648,8 @@ msgstr "Εκτύπωση επιλογών ρυθμίσεων"
 msgid "Print last working directory to specified file"
 msgstr "Εκτύπωση του τελευταίου καταλόγου εργασίας στο καθορισμένο αρχείο"
 
-#, fuzzy
 msgid "<file>"
-msgstr "αρχείο"
+msgstr ""
 
 msgid "Enables subshell support (default)"
 msgstr ""
@@ -673,9 +672,8 @@ msgstr "Εκτελεί τον προβολέα αρχείων σε ένα αρχ
 msgid "Edit files"
 msgstr "&Επεξεργασία αρχείων"
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "&Άνοιγμα αρχείου"
+msgstr ""
 
 msgid "Forces xterm features"
 msgstr "Εξαναγκάζει λειτουργίες xterm"
@@ -1779,13 +1777,11 @@ msgstr ""
 "Αδυναμία chmod \"%s\"\n"
 "%s"
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "&Παράβλεψη κλειδώματος"
+msgstr ""
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "&Παράβλεψη κλειδώματος"
+msgstr ""
 
 msgid "&Retry"
 msgstr "&Επαναπροσπάθεια"
@@ -1882,9 +1878,8 @@ msgstr "Το cd ακολουθεί τους δεσμούς"
 msgid "Sa&fe delete"
 msgstr "Ασ&φαλής διαγραφή"
 
-#, fuzzy
 msgid "Safe overwrite"
-msgstr "&Αντικατάσταση"
+msgstr ""
 
 msgid "A&uto save setup"
 msgstr ""
@@ -4122,9 +4117,9 @@ msgstr ""
 msgid "sftp: No file handler data present for reading file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: σφάλμα ακύρωσης: %s"
+msgstr ""
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
@@ -4365,10 +4360,3 @@ msgstr "Συνέχεια από την αρχή;"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid ""
-#~ "Cannot delete file \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Αδυναμία διαγραφής αρχείου \"%s\"\n"
-#~ "%s"

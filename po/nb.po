@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-09-19 09:10+0000\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 12:37+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/mc/mc/language/"
 "nb/)\n"
@@ -632,9 +632,8 @@ msgstr ""
 msgid "Print last working directory to specified file"
 msgstr ""
 
-#, fuzzy
 msgid "<file>"
-msgstr "fil"
+msgstr ""
 
 msgid "Enables subshell support (default)"
 msgstr "Slår på støtte for underskall (standard)"
@@ -657,9 +656,8 @@ msgstr "Starter filvisning for en fil"
 msgid "Edit files"
 msgstr ""
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "&Åpne fil..."
+msgstr ""
 
 msgid "Forces xterm features"
 msgstr "Tvungen bruk av xterm funksjoner"
@@ -1751,9 +1749,8 @@ msgstr ""
 msgid "&Ignore"
 msgstr ""
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "Sett &alle"
+msgstr ""
 
 msgid "&Retry"
 msgstr "&Prøv igjen"
@@ -4033,9 +4030,9 @@ msgstr ""
 msgid "sftp: No file handler data present for reading file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: avbrytlsesfeil: %s"
+msgstr ""
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"

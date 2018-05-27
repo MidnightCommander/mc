@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-09-23 18:02+0000\n"
-"Last-Translator: Myselus\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 12:37+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/mc/mc/language/bg/)\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -664,9 +664,8 @@ msgstr "Принтиране на конфигурационните опции"
 msgid "Print last working directory to specified file"
 msgstr "Принтиране на последната работна директория в определен файл"
 
-#, fuzzy
 msgid "<file>"
-msgstr "файл"
+msgstr ""
 
 msgid "Enables subshell support (default)"
 msgstr "Поддръжка на подобвивка (по подразбиране)"
@@ -689,9 +688,8 @@ msgstr "Показване съдържанието на файл"
 msgid "Edit files"
 msgstr "Редактиране на файлове"
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "Отвори файл..."
+msgstr ""
 
 msgid "Forces xterm features"
 msgstr "Използване възможности на xterm"
@@ -1642,9 +1640,8 @@ msgstr ""
 "Удобен за потребителя текстови редактор\n"
 "написан за Midnight Commander-а."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2018 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2016 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Относно"
@@ -1831,13 +1828,11 @@ msgstr ""
 "Не може да се chmod-не \"%s\"\n"
 "%s"
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "Прене&брегване на заключването"
+msgstr ""
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "Прене&брегване на заключването"
+msgstr ""
 
 msgid "&Retry"
 msgstr "Отново"
@@ -1934,9 +1929,8 @@ msgstr "Cd следва линков&ете"
 msgid "Sa&fe delete"
 msgstr "Бе&зопасно изтриване"
 
-#, fuzzy
 msgid "Safe overwrite"
-msgstr "&Презаписване"
+msgstr ""
 
 msgid "A&uto save setup"
 msgstr "А&втоматично записване настройка"
@@ -4236,9 +4230,9 @@ msgstr "sftp: Неуспешно установяване на SSH сесия"
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Няма съществуващ обработчик за четене на файл"
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: грешка при отмяната: %s"
+msgstr ""
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
@@ -4487,10 +4481,3 @@ msgstr "Да се продължи ли от началото?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на /ftp://some.host/editme.txt"
-
-#~ msgid ""
-#~ "Cannot delete file \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Не може да се изтрие файл \"%s\"\n"
-#~ "%s"

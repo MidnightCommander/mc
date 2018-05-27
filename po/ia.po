@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-09-19 10:23+0000\n"
-"Last-Translator: Martijn Dekker <mcdutchie@hotmail.com>\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 12:37+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Interlingua (http://www.transifex.com/mc/mc/language/ia/)\n"
 "Language: ia\n"
 "MIME-Version: 1.0\n"
@@ -640,9 +640,8 @@ msgstr "Imprimer le optiones de configuration"
 msgid "Print last working directory to specified file"
 msgstr "Scriber le ultime directorio de labor in un file"
 
-#, fuzzy
 msgid "<file>"
-msgstr "file"
+msgstr ""
 
 msgid "Enables subshell support (default)"
 msgstr "Activar le supporto de sub-shells (predefinite)"
@@ -665,9 +664,8 @@ msgstr "Aperir un file con le visualisator"
 msgid "Edit files"
 msgstr "Modificar files"
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "&Aperir file..."
+msgstr ""
 
 msgid "Forces xterm features"
 msgstr "Fortiar"
@@ -1765,13 +1763,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "Ignorar serratura"
+msgstr ""
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "Ignorar serratura"
+msgstr ""
 
 msgid "&Retry"
 msgstr ""
@@ -4037,9 +4033,9 @@ msgstr ""
 msgid "sftp: No file handler data present for reading file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: error de abortamento: %s"
+msgstr ""
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"

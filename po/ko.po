@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-09-19 09:10+0000\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 12:37+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
 "Language: ko\n"
@@ -639,9 +639,8 @@ msgstr ""
 msgid "Print last working directory to specified file"
 msgstr "프로그램 종료 시 마지막 작업 디렉터리를 주어진 파일로 출력"
 
-#, fuzzy
 msgid "<file>"
-msgstr "파일"
+msgstr ""
 
 msgid "Enables subshell support (default)"
 msgstr "subshell 지원함 (기본 값)"
@@ -664,9 +663,8 @@ msgstr "파일에 대해 파일 보기 실행"
 msgid "Edit files"
 msgstr ""
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "파일 열기(&O)..."
+msgstr ""
 
 msgid "Forces xterm features"
 msgstr "xterm 기능을 무조건 사용"
@@ -1755,13 +1753,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "잠금 무시(&I)"
+msgstr ""
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "잠금 무시(&I)"
+msgstr ""
 
 msgid "&Retry"
 msgstr "재시도(&R)"
@@ -1856,9 +1852,8 @@ msgstr ""
 msgid "Sa&fe delete"
 msgstr ""
 
-#, fuzzy
 msgid "Safe overwrite"
-msgstr "겹쳐 쓰기(&O)"
+msgstr ""
 
 msgid "A&uto save setup"
 msgstr ""
@@ -4042,9 +4037,9 @@ msgstr ""
 msgid "sftp: No file handler data present for reading file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: 오류 중지: %s"
+msgstr ""
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"

@@ -3,16 +3,16 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Nikolay Korotkiy <sikmir@gmail.com>, 2017
+# Nikolay Korotkiy <sikmir@gmail.com>, 2017-2018
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Kasvain <kasvain@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-10-29 09:42+0000\n"
-"Last-Translator: Nikolay Korotkiy <sikmir@gmail.com>\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 12:37+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/mc/mc/language/fi/)\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -378,7 +378,7 @@ msgid "Colon"
 msgstr ""
 
 msgid "Semicolon"
-msgstr ""
+msgstr "Puolipiste"
 
 msgid "Exclamation mark"
 msgstr "Varoitus-merkki"
@@ -640,9 +640,8 @@ msgstr ""
 msgid "Print last working directory to specified file"
 msgstr ""
 
-#, fuzzy
 msgid "<file>"
-msgstr "tiedosto"
+msgstr ""
 
 msgid "Enables subshell support (default)"
 msgstr ""
@@ -665,9 +664,8 @@ msgstr ""
 msgid "Edit files"
 msgstr "Muokkaa tiedostoja"
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "&Avaa tiedosto..."
+msgstr ""
 
 msgid "Forces xterm features"
 msgstr "Pakottaa xterm-ominaisuudet"
@@ -826,7 +824,7 @@ msgid "&Whole words"
 msgstr "&Kokonaiset sanat"
 
 msgid "&All charsets"
-msgstr ""
+msgstr "&Kaikki merkistöt"
 
 msgid "Search"
 msgstr "Etsi"
@@ -1159,7 +1157,7 @@ msgid ""
 msgstr ""
 
 msgid "Close file"
-msgstr ""
+msgstr "Sulje tiedosto"
 
 #, c-format
 msgid ""
@@ -1311,7 +1309,7 @@ msgid "A&bout..."
 msgstr ""
 
 msgid "&Quit"
-msgstr ""
+msgstr "&Lopeta"
 
 msgid "&Undo"
 msgstr ""
@@ -1503,7 +1501,7 @@ msgid "&Window"
 msgstr "&Ikkuna"
 
 msgid "&Options"
-msgstr ""
+msgstr "&Valinnat"
 
 msgid "&None"
 msgstr ""
@@ -1580,7 +1578,7 @@ msgid "Copyright (C) 1996-2018 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
-msgstr ""
+msgstr "Tietoja"
 
 msgid "Open files"
 msgstr ""
@@ -1756,13 +1754,11 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "&Vapauta"
+msgstr ""
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "&Vapauta"
+msgstr ""
 
 msgid "&Retry"
 msgstr ""
@@ -1777,7 +1773,7 @@ msgid "< Default >"
 msgstr ""
 
 msgid "Skins"
-msgstr ""
+msgstr "Ulkoasuteemat"
 
 msgid "Other 8 bit"
 msgstr ""
@@ -1867,7 +1863,7 @@ msgid "Configure options"
 msgstr ""
 
 msgid "Skin:"
-msgstr ""
+msgstr "Ulkoasuteema:"
 
 msgid "Appearance"
 msgstr ""
@@ -1939,7 +1935,7 @@ msgid "Panel options"
 msgstr ""
 
 msgid "Information"
-msgstr ""
+msgstr "Informaatio"
 
 msgid ""
 "Using the fast reload option may not reflect the exact\n"
@@ -2401,7 +2397,7 @@ msgid "%o %d %f%m"
 msgstr ""
 
 msgid "files"
-msgstr ""
+msgstr "tiedostot"
 
 msgid "directory"
 msgstr ""
@@ -2794,7 +2790,7 @@ msgid "&View - F3"
 msgstr ""
 
 msgid "&Edit - F4"
-msgstr ""
+msgstr "&Muokkaa - F4"
 
 #, c-format
 msgid "Found: %lu"
@@ -2822,7 +2818,7 @@ msgid "Case sens&itive"
 msgstr ""
 
 msgid "A&ll charsets"
-msgstr ""
+msgstr "Kai&kki merkistöt"
 
 msgid "Fir&st hit"
 msgstr ""
@@ -3256,13 +3252,13 @@ msgid "&Above"
 msgstr ""
 
 msgid "&Left"
-msgstr ""
+msgstr "&Vasen"
 
 msgid "&Below"
 msgstr ""
 
 msgid "&Right"
-msgstr ""
+msgstr "&Oikea"
 
 msgid "ButtonBar|Menu"
 msgstr ""
@@ -4011,9 +4007,9 @@ msgstr ""
 msgid "sftp: No file handler data present for reading file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: keskeyttämisvirhe: %ss"
+msgstr ""
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"

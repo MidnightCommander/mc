@@ -14,15 +14,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-09-23 18:02+0000\n"
-"Last-Translator: Jose Riha <jose1711@gmail.com>\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 12:37+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/mc/mc/language/sk/)\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n "
+">= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
 
 # "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 msgid "Warning: cannot load codepages list"
@@ -658,9 +659,8 @@ msgstr "Vypísať konfiguráciu"
 msgid "Print last working directory to specified file"
 msgstr "Tlačiť posledný pracovný adresár do zadaného súboru"
 
-#, fuzzy
 msgid "<file>"
-msgstr "súbor"
+msgstr ""
 
 msgid "Enables subshell support (default)"
 msgstr "Zapína podporu pre subshell (štandardne)"
@@ -683,9 +683,8 @@ msgstr "Spustí prehliadač súborov na súbore"
 msgid "Edit files"
 msgstr "Upraviť súbory"
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "Otvoriť sú&bor..."
+msgstr ""
 
 msgid "Forces xterm features"
 msgstr "Vynúti funkcie xterm"
@@ -1653,9 +1652,8 @@ msgstr ""
 "Používateľsky prívetivý textový editor\n"
 "napísaný pre Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2018 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2016 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "O aplikácii"
@@ -1842,13 +1840,11 @@ msgstr ""
 "Nemožno vykonať chmod „%s“\n"
 "%s"
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "&Ignorovať zámok"
+msgstr ""
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "&Ignorovať zámok"
+msgstr ""
 
 msgid "&Retry"
 msgstr "&Zopakovať"
@@ -1945,9 +1941,8 @@ msgstr "Cd nasleduje od&kazy"
 msgid "Sa&fe delete"
 msgstr "&Bezpečné zmazanie"
 
-#, fuzzy
 msgid "Safe overwrite"
-msgstr "&Prepísať"
+msgstr ""
 
 msgid "A&uto save setup"
 msgstr "A&utomaticky ukladať konfiguráciu"
@@ -3027,6 +3022,7 @@ msgid_plural "Finished (ignored %zu directories)"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+msgstr[3] ""
 
 msgid "Searching"
 msgstr "Hľadá sa"
@@ -3191,6 +3187,7 @@ msgid_plural " (%lu blocks)"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+msgstr[3] ""
 
 #, c-format
 msgid "Owner:      %s/%s"
@@ -3427,6 +3424,7 @@ msgid_plural "You have %zu opened screens. Quit anyway?"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+msgstr[3] ""
 
 msgid "The Midnight Commander"
 msgstr "Midnight Commander"
@@ -3575,6 +3573,7 @@ msgid_plural "%s in %d files"
 msgstr[0] "%s v %d súboroch"
 msgstr[1] "%s v %d súboroch"
 msgstr[2] "%s v %d súboroch"
+msgstr[3] "%s v %d súboroch"
 
 msgid "Panelize"
 msgstr "Panelizovať"
@@ -4244,9 +4243,9 @@ msgstr ""
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Na čítanie súboru nie sú prítomné dáta obsluhy súboru"
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: chyba zrušenia: %s"
+msgstr ""
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
@@ -4495,10 +4494,3 @@ msgstr "Pokračovať od začiatku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nemožno stiahnuť lokálnu kópiu /ftp://some.host/editme.txt"
-
-#~ msgid ""
-#~ "Cannot delete file \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Nemožno zmazať súbor „%s“\n"
-#~ "%s"

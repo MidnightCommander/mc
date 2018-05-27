@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Kristjan Räts <kristjanrats@gmail.com>, 2013-2016
+# Kristjan Räts <kristjanrats@gmail.com>, 2013-2016,2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-09-19 18:39+0000\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 12:37+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
 "Language: et\n"
@@ -103,18 +103,22 @@ msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
 "hex)"
 msgstr ""
+"Väärtus ei ole oodatud vahemikus (peab olema baidi vahemikus 0x00 <= x <= "
+"0xFF, kirjutatud 16-süsteemis)"
 
 msgid "Invalid character"
-msgstr ""
+msgstr "Vigane märk"
 
 msgid "Unmatched quotes character"
-msgstr ""
+msgstr "Paariliseta jutumärk"
 
 #, c-format
 msgid ""
 "Hex pattern error at position %d:\n"
 "%s."
 msgstr ""
+"16-numbri mustri viga kohal %d:\n"
+"%s."
 
 msgid "Search string not found"
 msgstr "Otsitavat stringi ei leitud"
@@ -656,9 +660,8 @@ msgstr "Trüki häälestuse suvandid"
 msgid "Print last working directory to specified file"
 msgstr "Väljasta viimane töökataloog määratud faili"
 
-#, fuzzy
 msgid "<file>"
-msgstr "fail"
+msgstr "<file>"
 
 msgid "Enables subshell support (default)"
 msgstr "Lubab alamkesta toe (vaikimisi)"
@@ -673,7 +676,7 @@ msgid "Set debug level"
 msgstr "Määra silumistase"
 
 msgid "<integer>"
-msgstr ""
+msgstr "<integer>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Käivitab failivaaturi failile"
@@ -681,9 +684,8 @@ msgstr "Käivitab failivaaturi failile"
 msgid "Edit files"
 msgstr "Muuda faile"
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "&Ava fail..."
+msgstr "<file> ..."
 
 msgid "Forces xterm features"
 msgstr "Sunnib xterm'i tunnused"
@@ -725,7 +727,7 @@ msgid "Specifies a color configuration"
 msgstr "Määrab värvide seadistuse"
 
 msgid "<string>"
-msgstr ""
+msgstr "<string>"
 
 msgid "Show mc with specified skin"
 msgstr "Kuva mc määratud nahaga"
@@ -799,13 +801,13 @@ msgid "Color options"
 msgstr "Värvi suvandid"
 
 msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
-msgstr ""
+msgstr "[+reanr] fail1[:reanr] [fail2[:reanr]...]"
 
 msgid "file"
 msgstr "fail"
 
 msgid "file1 file2"
-msgstr ""
+msgstr "fail1 fail2"
 
 msgid "[this_dir] [other_panel_dir]"
 msgstr "[this_dir] [other_panel_dir]"
@@ -1649,9 +1651,8 @@ msgstr ""
 "Kasutajasõbralik tekstitoimeti, mis\n"
 "on loodud Midnight Commanderile."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2018 the Free Software Foundation"
-msgstr "Autoriõigus (C) 1996-2016 Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Programmist"
@@ -1837,13 +1838,11 @@ msgstr ""
 "\"%s\" õiguste muutmine nurjus\n"
 "%s"
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "&Eira lukku"
+msgstr "E&ira"
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "&Eira lukku"
+msgstr "Eira &kõiki"
 
 msgid "&Retry"
 msgstr "&Proovi uuesti"
@@ -1940,9 +1939,8 @@ msgstr "&Järgi kataloogide nimeviitu"
 msgid "Sa&fe delete"
 msgstr "&Kindel kustutamine"
 
-#, fuzzy
 msgid "Safe overwrite"
-msgstr "K&irjuta üle"
+msgstr ""
 
 msgid "A&uto save setup"
 msgstr "Seadete a&utomaatsalvestus"
@@ -2054,7 +2052,7 @@ msgid "User &mini status"
 msgstr "Kasutaja &mini info"
 
 msgid "Listing format"
-msgstr ""
+msgstr "Loendi vormindus"
 
 msgid "Executable &first"
 msgstr "Käivitatavad &esimestena"
@@ -2533,6 +2531,9 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
+"Stabiilseid nimeviitu saab luua ainult kohalikes failisüsteemides:\n"
+"\n"
+"Valik stabiilsed nimeviidad keelatakse"
 
 #, c-format
 msgid ""
@@ -3250,7 +3251,7 @@ msgid "&Info"
 msgstr "&Info"
 
 msgid "&Listing format..."
-msgstr ""
+msgstr "&Loendi vormindus"
 
 msgid "&Sort order..."
 msgstr "&Sortimine..."
@@ -3873,10 +3874,10 @@ msgid "Data types:"
 msgstr "Andmetüübid:"
 
 msgid "Home directory:"
-msgstr ""
+msgstr "Kodukataloog:"
 
 msgid "Profile root directory:"
-msgstr ""
+msgstr "Profiili juurkataloog:"
 
 msgid "System data"
 msgstr "Süsteemi andmed"
@@ -4233,9 +4234,9 @@ msgstr "sftp: nurjus SSH ühenduse loomine"
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: faili lugemiseks puuduvad faili käsitleja andmed"
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: katkestamise viga: %s"
+msgstr "sftp: sokli viga: %s"
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
@@ -4484,10 +4485,3 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
-
-#~ msgid ""
-#~ "Cannot delete file \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Faili \"%s\" kustutamine nurjus\n"
-#~ "%s"

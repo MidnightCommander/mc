@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-09-19 09:10+0000\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 12:37+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/mc/mc/language/"
 "zh_TW/)\n"
@@ -632,9 +632,8 @@ msgstr ""
 msgid "Print last working directory to specified file"
 msgstr ""
 
-#, fuzzy
 msgid "<file>"
-msgstr "檔案"
+msgstr ""
 
 msgid "Enables subshell support (default)"
 msgstr "支援使用次殼層 (預設值)"
@@ -1750,9 +1749,8 @@ msgstr ""
 msgid "&Ignore"
 msgstr ""
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "設定全部"
+msgstr ""
 
 msgid "&Retry"
 msgstr "重試"
@@ -4028,9 +4026,9 @@ msgstr ""
 msgid "sftp: No file handler data present for reading file"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: 造成中斷的錯誤: %s"
+msgstr ""
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"

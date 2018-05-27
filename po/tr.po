@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-11-05 02:24+0000\n"
-"Last-Translator: yusuf <yusuf.aydemir@pisilinux.org>\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 12:37+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -656,9 +656,8 @@ msgstr "Yazdırma yapılandırma seçenekleri"
 msgid "Print last working directory to specified file"
 msgstr "Belirlenen dosyaya son çalışılan dizini yaz"
 
-#, fuzzy
 msgid "<file>"
-msgstr "dosya:"
+msgstr ""
 
 msgid "Enables subshell support (default)"
 msgstr "Altkabuk desteğini etkinleştirir (öntanımlı)"
@@ -681,9 +680,8 @@ msgstr "Bir dosyayı dosya göstericide açar"
 msgid "Edit files"
 msgstr "Dosyasyaları düzenle"
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "D&osyayı aç..."
+msgstr ""
 
 msgid "Forces xterm features"
 msgstr "xterm özelliklerini etkinleştirir"
@@ -1652,9 +1650,8 @@ msgstr ""
 "Kullanıcı dostu bir metin düzenleyici\n"
 "Midnight Commander için yazıldı"
 
-#, fuzzy
 msgid "Copyright (C) 1996-2018 the Free Software Foundation"
-msgstr "Telif hakkı (C) 1996-2016 Özgür Yazılım Vakfı"
+msgstr ""
 
 msgid "About"
 msgstr "Hakkında"
@@ -1843,13 +1840,11 @@ msgstr ""
 "chmod \"%s\" yapılamadı \n"
 " %s"
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "& Kilit yoksay"
+msgstr ""
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "& Kilit yoksay"
+msgstr ""
 
 msgid "&Retry"
 msgstr "&Tekrar"
@@ -1946,9 +1941,8 @@ msgstr "cd &Bağları izler"
 msgid "Sa&fe delete"
 msgstr "güvenilir si&lme"
 
-#, fuzzy
 msgid "Safe overwrite"
-msgstr "&Üzerine Yaz"
+msgstr ""
 
 msgid "A&uto save setup"
 msgstr "&Ayarları otomatik kaydet"
@@ -4246,9 +4240,9 @@ msgstr "stp: SSH oturumu kurarken hata oluştu"
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Dosya okumak için hiç dosya işleyici verisi mevcut değil "
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: çıkış hatası: %s"
+msgstr ""
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
@@ -4497,10 +4491,3 @@ msgstr "Başından devam edilsin mi?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr " /ftp://some.host/editme.txt 'in yerel kopyası alınamadı"
-
-#~ msgid ""
-#~ "Cannot delete file \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "\"%s\" dosyası silinemiyor \n"
-#~ " %s"

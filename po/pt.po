@@ -5,14 +5,14 @@
 # Translators:
 # Gilberto J <2101458@my.ipleiria.pt>, 2012
 # Gilberto Jorge <gmj125@gmail.com>, 2012-2013
-# Gilberto Jorge <gmj125@gmail.com>, 2013-2017
+# Gilberto Jorge <gmj125@gmail.com>, 2013-2018
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-09-23 18:02+0000\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 22:38+0000\n"
 "Last-Translator: Gilberto Jorge <gmj125@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/mc/mc/language/pt/)\n"
 "Language: pt\n"
@@ -662,9 +662,8 @@ msgstr "Opções de configuração de impressão"
 msgid "Print last working directory to specified file"
 msgstr "Imprime último diretório de trabalho para o ficheiro especificado"
 
-#, fuzzy
 msgid "<file>"
-msgstr "ficheiro"
+msgstr "<file>"
 
 msgid "Enables subshell support (default)"
 msgstr "Ativar suporte de subshell (defeito)"
@@ -679,7 +678,7 @@ msgid "Set debug level"
 msgstr "Definir nível de depuração"
 
 msgid "<integer>"
-msgstr ""
+msgstr "<integer>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Executa o visualizador de ficheiros sobre um ficheiro"
@@ -687,9 +686,8 @@ msgstr "Executa o visualizador de ficheiros sobre um ficheiro"
 msgid "Edit files"
 msgstr "Editar ficheiros"
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "&Abrir ficheiro..."
+msgstr "<file> ..."
 
 msgid "Forces xterm features"
 msgstr "Força funcionalidades xterm"
@@ -734,7 +732,7 @@ msgid "Specifies a color configuration"
 msgstr "Especificar uma configuração de cor"
 
 msgid "<string>"
-msgstr ""
+msgstr "<string>"
 
 msgid "Show mc with specified skin"
 msgstr "Mostra mc com a skin especificada"
@@ -1659,9 +1657,8 @@ msgstr ""
 "Um editor de texto amigo do utilizador\n"
 "escrito para o Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2018 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2016 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2018 the Free Software Foundation"
 
 msgid "About"
 msgstr "Acerca"
@@ -1848,13 +1845,11 @@ msgstr ""
 "Não é possível efetuar chmod \"%s\"\n"
 "%s"
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "&Ignora lock"
+msgstr "&Ignorar"
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "&Ignora lock"
+msgstr "Ignor&ar tudo"
 
 msgid "&Retry"
 msgstr "&Repetir"
@@ -1951,9 +1946,8 @@ msgstr "Cd segue ligações"
 msgid "Sa&fe delete"
 msgstr "Apa&gar com segurança"
 
-#, fuzzy
 msgid "Safe overwrite"
-msgstr "Escrever p&or cima"
+msgstr "Sobregravação segura"
 
 msgid "A&uto save setup"
 msgstr "Guardar setup a&uto"
@@ -4251,9 +4245,9 @@ msgstr "sftp: Falha ao estabelecer sessão SSH"
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Sem dados de uso de ficheiro presentes para ler ficheiro"
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: erro ao abortar: %s"
+msgstr "sftp: erro de socket: %s"
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
@@ -4502,10 +4496,3 @@ msgstr "Continuar do início?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Não é possível obter uma cópia local de /ftp://some.host/editme.txt"
-
-#~ msgid ""
-#~ "Cannot delete file \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Não é possível apagar o ficheiro \"%s\"\n"
-#~ "%s"

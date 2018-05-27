@@ -14,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2017-09-19 09:10+0000\n"
-"Last-Translator: Jonas Hultén <jonas@kollektivet.nu>\n"
+"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"PO-Revision-Date: 2018-04-30 12:37+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/mc/mc/language/sv/)\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
@@ -664,9 +664,8 @@ msgstr "Skriv ut configure-alternativ"
 msgid "Print last working directory to specified file"
 msgstr "Skriv ut senaste arbetskatalog till angiven fil"
 
-#, fuzzy
 msgid "<file>"
-msgstr "fil"
+msgstr "<fil>"
 
 msgid "Enables subshell support (default)"
 msgstr "Aktiverar stöd för underskal (standardval)"
@@ -681,7 +680,7 @@ msgid "Set debug level"
 msgstr "Ställ in felsökningsnivå"
 
 msgid "<integer>"
-msgstr ""
+msgstr "<heltal>"
 
 msgid "Launches the file viewer on a file"
 msgstr "Startar filvisaren"
@@ -689,9 +688,8 @@ msgstr "Startar filvisaren"
 msgid "Edit files"
 msgstr "Redigera filer"
 
-#, fuzzy
 msgid "<file> ..."
-msgstr "&Öppna fil..."
+msgstr "<fil> ..."
 
 msgid "Forces xterm features"
 msgstr "Tvinga fram xtermfinesser"
@@ -736,7 +734,7 @@ msgid "Specifies a color configuration"
 msgstr "Specificera en färgkonfiguration"
 
 msgid "<string>"
-msgstr ""
+msgstr "<sträng>"
 
 msgid "Show mc with specified skin"
 msgstr "Visa mc med specificerat tema"
@@ -1659,9 +1657,8 @@ msgstr ""
 "En användarvänlig texteditor\n"
 "skriven för Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2018 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2016 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Om"
@@ -1848,13 +1845,11 @@ msgstr ""
 "Chmod \"%s\" misslyckades\n"
 "%s"
 
-#, fuzzy
 msgid "&Ignore"
-msgstr "&Ignorera lås"
+msgstr "I&gnorera"
 
-#, fuzzy
 msgid "Ignore &all"
-msgstr "&Ignorera lås"
+msgstr "Ignorera a&lla"
 
 msgid "&Retry"
 msgstr "Försök &igen"
@@ -1951,9 +1946,8 @@ msgstr "&Cd följer länkar"
 msgid "Sa&fe delete"
 msgstr "S&äker borttagning"
 
-#, fuzzy
 msgid "Safe overwrite"
-msgstr "&O Skriv över"
+msgstr ""
 
 msgid "A&uto save setup"
 msgstr "A&utospara inställningar"
@@ -4249,9 +4243,9 @@ msgstr "sftp: Upprättandet av en SSH-session misslyckades"
 msgid "sftp: No file handler data present for reading file"
 msgstr "sftp: Ingen filhanterardata existerar för läsning av filen"
 
-#, fuzzy, c-format
+#, c-format
 msgid "sftp: socket error: %s"
-msgstr "ftpfs: abort-fel: %s"
+msgstr "sftp: socket-fel: %s"
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
@@ -4500,10 +4494,3 @@ msgstr "Fortsätt från början?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan inte hämta en lokal kopia av /ftp://some.host/editme.txt"
-
-#~ msgid ""
-#~ "Cannot delete file \"%s\"\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Borttagning av filen \"%s\" misslyckades\n"
-#~ "%s"
