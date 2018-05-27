@@ -1,64 +1,64 @@
-Tip: C-x t vloží na příkazovou řádku označené soubory.
+Tip: Ctrl-x t vloží názvy označených souborů na příkazový řádek.
 
-Tip: C-x p vloží na příkazovou řádku jméno aktuálního adresáře.
+Tip: Ctrl-x p vloží na příkazový řádek název složky, ve které se nacházíte.
 
-Tip: Doplňování: použijte M-Tab (nebo Esc+Tab). Dvojitým zadáním získáte seznam.
+Tip: Doplňování: použijte Meta-Tab (nebo Esc+Tab). Dalším stiskem se vypíše seznam možností.
 
-Tip: Použitím M-p nebo M-n se pohybujete v historii příkazů.
+Tip: V historii příkazů se pohybuje pomocí Meta-p a Meta-n.
 
-Tip: Chcete zadat speciální znak (např. tabulátor)? Použijte Ctrl-q a daný znak.
+Tip: Chcete zadat speciální znak (např. tabulátor)? Použijte Ctrl-q a pak daný znak.
 
-Tip: Nechcete již vidět tipy? Vypněte je v Nastavení/Zobrazení/Další nastavení.
+Tip: Nechcete už vidět tipy? Vypněte je v nabídce Nastavení/Rozvržení.
 
-Tip: Adresáře vyberete přidáním lomítka na konec vzorku.
+Tip: Složky vyberete přidáním lomítka na konec vzoru pro hledání shody v názvu.
 
-Tip: Pokud Váš terminál nezná nebo nemá funkční klávesy, použijte Esc+číslo.
+Tip: Pokud váš terminál nezná nebo nemá funkční (F1-12) klávesy, použijte Esc+číslo.
 
-Tip: Stránka GNU Midnight Commanderu je http://www.midnight-commander.org/
+Tip: Domovská stránka GNU Midnight Commander je: http://www.midnight-commander.org/
 
-Tip: Zprávy o chybách posílejte na mc-devel@gnome.org (anglicky).
+Tip: Chyby hlaste na mc-devel@gnome.org (v angličtině).
 
-Tip: Pomocí klávesy Tab změníte aktuální panel.
+Tip: Pomocí klávesy Tab přejdete na další panel.
 
-Tip: Stiskem Enter na souboru .tar nebo .tar.gz si prohlédnete obsah.
+Tip: Stiskem Enter na souboru .tar nebo .tar.gz si prohlédnete jeho obsah.
 
 Tip: Existuje také manuálová stránka [mc(1)].
 
 Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
-Tip: Makra uvozená % pracují na příkazové řádce.
+Tip: Makra uvozená % fungují i na příkazovém řádku.
 
-Tip: Pomocí M-! můžete spustit příkaz a prohlédnout si výstup v okně.
+Tip: Pomocí Meta-! můžete spustit příkaz a prohlédnout si výstup v prohlížeči.
 
 Tip: Zobrazení v panelech může být upraveno. Z „man mc“ se dozvíte více.
 
 Tip: %D/%T se rozvine na soubory označené v druhém panelu.
 
-Tip: Chcete opět váš shell? Stiskněte C-o. Do MC se vrátíte opět přes C-o.
+Tip: Chcete opět váš shell? Stiskněte Ctrl-o. Do MC se vrátíte opět přes Ctrl-o.
 
-Tip: Nastavením proměnné CDPATH můžete šetřit klávesnici.
+Tip: Nastavením proměnné CDPATH si můžete ušetřit psaní na klávesnici.
 
-Tip: Pokud chcete vidět soubory začínající tečkou, řekněte to v Nastavení.
+Tip: Pokud chcete vidět soubory začínající tečkou, vyjádřete to v Nastavení.
 
-Tip: Chcete vidět zálohy svých souborů (končí ~). Použijte Nastavení.
+Tip: Chcete vidět zálohy svých souborů (končí ~)? Použijte Nastavení.
 
-Tip: Doplňování funguje ve vstupních řádkách všech dialogů. Použijte M-Tab.
+Tip: Doplňování funguje ve vstupních řádcích všech dialogů. Použijte Meta-Tab.
 
 Tip: Na terminálech s pomalou odezvou zkuste parametr -s (mc -s).
 
-Tip: S nalezenými soubory můžete pracovat. Stiskněte tlačítko Panelizace.
+Tip: S nalezenými soubory je možné dále pracovat. Stiskněte tlačítko Panelizace.
 
-Tip: Pro opravdu složité operace zkuste příkaz Příkaz/Externí panelizace.
+Tip: Pro opravdu složité vyhledávání zkuste příkaz příkaz Externí panelizace.
 
-Tip: Pokud chcete změnit adresář při práci na příkazové řádce, zkuste M-c.
+Tip: Pokud chcete změnit složku při práci na příkazovém řádku, zkuste Meta-c.
 
 Pozn.: Příkazy shellu nefungují, pokud nepracujete na lokálním systému souborů.
 
-Tip: Smazaný text obnovíte C-y.
+Tip: Smazaný text obnovíte Ctrl-y.
 
 Tip: Pokud některé klávesy nefungují, použijte menu Nastavení/Učení kláves.
 
-Tip: K zobrazení výstupu příkazu v okně použijte M-!
+Tip: K zobrazení výstupu příkazu v okně použijte Meta-!
 
 Tip: F13 (nebo Shift-F3) vyvolá prohlížení bez zpracování obsahu souboru.
 
@@ -66,21 +66,21 @@ Tip: Editor pro klávesu F4 určíte pomocí proměnné prostředí EDITOR.
 
 Tip: Externí prohlížeč určíte proměnnými VIEWER nebo PAGER
 
-Tip: Všechny žádosti o potvrzení můžete zakázat v Nastavení/Potvrzování.
+Tip: Všechny žádosti o potvrzení je možné vypnout v Nastavení/Potvrzování.
 
 Hint: Leap to frequently used directories in a single bound with C-.
 
 Tip: Na anonymní FTP se připojíte pomocí „cd ftp://stroj.domena.cz“.
 
-Tip: MC má vestavěný FTP. Podívejte se do menu Levý/FTP spojení na počítač.
+Tip: MC má vestavěný FTP. Podívejte se do nabídka Levý/FTP spojení na počítač.
 
-Tip: M-t rychle mění formát zobrazení panelů.
+Tip: Meta-t rychle mění formát zobrazení panelů.
 
 Tip: Při FTP spojení můžete zadat i jméno: „cd ftp://jmeno@stroj.domena.cz“.
 
 Tip: RPM soubory si prohlédnete stiskem Enter.
 
-Tip: Pro označení adresářů v dialogovém okně výběru souborů, přidejte lomítko.
+Tip: Pro označení složek v dialogovém okně výběru souborů, přidejte lomítko.
 
 Tip: Chcete-li použít myš pro zkopírování nebo vložení textu, stiskněte Shift.
 

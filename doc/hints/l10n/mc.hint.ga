@@ -1,0 +1,87 @@
+Leid: Bain úsáid as C-x t chun ainmneacha comhaid clibáilte a chóipeáil chuig an líne ordaithe.
+
+Leid: Bain úsáid as C-x p chun an luíainm reatha a chóipeáil chuig an líne ordaithe.
+
+Leid: Críochnú: bain úsáid as M-Tab (nó Esc + Tab). Déan é a thaifeadadh faoi dhó chun liosta a fháil.
+
+Leid: Bain úsáid as M-p agus M-n chun rochtain a fháil ar stair na gceannasaí.
+
+Leid: An gá duit carachtar a lua? Bain úsáid as Rialú-q agus an carachtar.
+
+Leid: Tuirseach de na teachtaireachtaí seo? Cas iad as an roghchlár Roghanna / Leagan amach.
+
+Leid: Eolairí a roghnú: cuir slais isteach go dtí deireadh an patrún meaitseála.
+
+Leid: Má níl do críochfort eochracha feidhmeanna, bain úsáid as an ESC + seicheamh uimhir
+
+Leid: Leathanach baile GNU Midnight Commander: http://www.midnight-commander.org/
+
+Leid: Seol tuairiscí ar bith chuig mc-devel@gnome.org
+
+Leid: Athraíonn an tábla do phainéal reatha.
+
+Leid: VFS coolness: tap a chur isteach ar chomhad tarra chun scrúdú a dhéanamh ar a n-ábhar.
+
+Leid: Tá leathanach láimhe deas againn freisin.
+
+Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
+
+Leid:% Macraí ag obair fiú ar na n-orduithe.
+
+Leid: M-! beidh deis agat cláir a fhorghníomhú agus an t-aschur a fheiceáil sa lucht féachana.
+
+Leid: Is féidir an fhormáid liostaithe comhad a shaincheapadh; dhéanamh "man mc" le haghaidh sonraí.
+
+Leid: leathnaíonn% D /% T na comhaid clib sa chomhadlann eile.
+
+Leid: Want do bhlaosc plain? Brúigh C-o, agus téigh ar ais chuig MC le C-o arís.
+
+Leid: Is féidir le hathraithe an athróg CDPATH keystrokes tú a shábháil in orduithe cd.
+
+Leid: Más mian leat do chuid comhad. * A fheiceáil, mar sin sa dialóg Cumraíochta.
+
+Leid: Ar mhaith leat do * chomhaid cúltaca a fheiceáil? Socraigh é sa dialóg Cumraíochta.
+
+Leid: Oibríonn an chríochnú ar gach línte ionchuir i ngach dialóg. Just brúigh M-Tab.
+
+Leid: Ar críochfoirt mall an bhratach -s cabhrú.
+
+Leid: Faigh Comhad: is féidir leat oibriú ar na comhaid a fuarthas ag baint úsáide as an gcnaipe Painéal.
+
+Leid: An bhfuil tú ag iarraidh cuardach casta a dhéanamh? Bain úsáid as an ordú Painéal Seachtrach.
+
+Leid: A athrú leathbhealach eolaire trí clóscríobh a dtoil, a úsáid M-c (cd tapaidh).
+
+Nóta: Ní oibreoidh orduithe Shell nuair a bhíonn tú ar chóras comhaid neamh-áitiúil.
+
+Leid: Cuir téacs ar ais ó na marbh le C-y.
+
+Leid: An bhfuil cuid de do chuid eochracha nach bhfuil ag obair? Féach ar eochracha Roghanna / Foghlaim.
+
+Leid: Chun féachaint ar aschur ordú sa lucht féachana, bain úsáid as M-!
+
+Leid: Tugann F13 (nó Shift-F3) an breathnóir i mód amh.
+
+Leid: Is féidir leat a shonrú ar an eagarthóir don F4 leis an EDITOR bhlaosc athróg.
+
+Leid: Féadfaidh tú an breathnóir seachtrach a shonrú leis an vars bhlaosc VIEWER nó PAGER.
+
+Leid: Is féidir leat gach iarratas a dhíchumasú ar dheimhniú i Roghanna / Dearbhaithe.
+
+Hint: Leap to frequently used directories in a single bound with C-.
+
+Leid: Is féidir leat FTP gan ainm a dhéanamh le mc trí chlóscríobh 'cd ftp://machine.edu'
+
+Leid: tógtar FTP sa Cheannasaí Meán Oíche, seiceáil an roghchlár nasc File / FTP.
+
+Leid: Athraíonn M-t go tapa ar an mód liostaithe.
+
+Leid: Is féidir leat an t-ainm úsáideora a shonrú nuair a dhéanann tú ftps: \&'cd ftp: //user@machine.edu'
+
+Leid: Is féidir leat brabhsáil comhaid RPM trí scanadh a chur isteach ar bharr comhad rpm.
+
+Leid: Chun comharthaí a mharcáil ar an mbosca dialóige roghnaigh, cuir slash ar.
+
+Leid: Úsáid a bhaint as an gearrtha luch agus greamaigh theastóidh a bhfuil an eochair-athrú
+
+Hint: Key frequently visited ftp sites in the hotlist: type C-.

@@ -72,7 +72,7 @@ Hint: Leap to frequently used directories in a single bound with C-.
 
 Hinweis: Du kannst eine anonyme FTP Verbindung im mc starten mit der Eingabe von 'cd ftp://machine.edu'
 
-Hinweis: FTP ist im Midnight Commander eingebaut, prüfe das Datei/FTP-Verbindung Menü.
+Hinweis: FTP ist im Midnight Commander eingebaut, Menüeintrag: Datei/FTP-Verbindung.
 
 Hinweis: M-t wechselt schnell den Listenmodus.
 
@@ -82,6 +82,6 @@ Hinweis: Du kannst eine RPM Datei mit Enter auf die Datei durchsuchen.
 
 Hinweis: Um Verzeichnisse in der Auswahlbox zu markieren, füge einen Schrägstrich hinzu.
 
-Hinweis: Um mit der Maus Ausschneiden und Einfügen zu nutzen, muss evtl die Shifttaste gedrückt werden.
+Hinweis: Um mit der Maus Ausschneiden und Einfügen nutzen zu könnenj, muß evtl die Shifttaste gedrückt werden.
 
 Hint: Key frequently visited ftp sites in the hotlist: type C-.

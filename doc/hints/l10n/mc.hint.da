@@ -1,87 +1,87 @@
-Hint: Use C-x t to copy tagged file names to the command line.
+Fif: Brug C-x t til at kopiere filnavne til kommandolinjen.
 
-Hint: Use C-x p to copy the current pathname to the command line.
+Fif: Brug C-x p for at kopiere det nuværende stinavn til kommandolinjen.
 
-Hint: Completion: use M-Tab (or Esc+Tab).  Type it twice to get a list.
+Fif: Fuldførelse: brug M-Tab (eller Esc+Tab). Skriv det to gange for at få en liste.
 
-Fif: Brug M-p og M-n for at tilgå kommando-historikken.
+Fif: Brug M-p og M-n for at tilgå kommandohistorikken.
 
-Hint: Need to quote a character? Use Control-q and the character.
+Fif: Har du brug for at sætte citationstegn om et tegn? Brug Control-q og tegnet.
 
-Fif: Træt af disse meddelelser? Slå dem fra i Indstillinger/Udseende menuen.
+Fif: Træt af disse meddelelser? Slå dem fra i Indstillinger/Layout-menuen.
 
-Hint: Selecting directories: add a slash to the end of the matching pattern.
+Fif: Valg af mapper: tilføj en skråstreg til slutningen af det matchende mønster.
 
-Hint: If your terminal lacks functions keys, use the ESC+number sequence.
+Fif: Hvis din terminal mangler funktionstaster, så rug ESC+talsekvensen.
 
-Hint: The homepage of GNU Midnight Commander: http://www.midnight-commander.org/
+Fif: Hjemmesiden for GNU Midnight Commander: http://www.midnight-commander.org/
 
-Hint: Please send any bug reports to mc-devel@gnome.org
+Fif: Send venligst eventuelle fejlrappporter til mc-devel@gnome.org
 
-Hint: Tab changes your current panel.
+Fif: Tabulator skifter dit nuværende panel.
 
-Hint: VFS coolness: tap enter on a tar file to examine its contents.
+Fif: Cool VFS: tryk på enter på en tar-fil for at undersøge dens indhold.
 
-Hint: We also have a nice manual page.
+Fif: Vi har også en fin manualside.
 
 Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
-Hint: % macros work even on the command line.
+Fif: %-makroer virker også på kommandolinjen.
 
-Hint: M-! will allow you to execute programs and see the output in the viewer.
+Fif: M-! giver dig mulighed for at udføre programmer og se outputtet i fremviseren.
 
-Hint: The file listing format can be customized; do "man mc" for details.
+Fif: Fillistningsformatet kan tilpasses; brug "man mc" for detaljer.
 
-Hint: %D/%T expands to the tagged files in the opposite directory.
+Fif: %D/%T udvidder til de mærkede filer i den modsatte mappe.
 
-Hint: Want your plain shell? Press C-o, and get back to MC with C-o again.
+Fif: Vil du have en almindelig skal? Tryk på C-o, og vend tilbage til MC med C-o.
 
-Hint: Setting the CDPATH variable can save you keystrokes in cd commands.
+Fif: Hvis CDPATH-variablen sættes kan du spare tastetryk i cd-kommandoer.
 
-Hint: If you want to see your .* files, say so in the Configuration dialog.
+Fif: Hvis du vil se dine .*-filer, så sig det i konfigurationsdialogen.
 
-Hint: Want to see your *~ backup files? Set it in the Configuration dialog.
+Fif: Vil du se dine *~-backupfiler? Sæt det i konfigurationsdialogen.
 
-Hint: Completion works on all input lines in all dialogs. Just press M-Tab.
+Fif: Fuldførelse virker på alle inputlinjer i alle dialoger. Tryk blot på M-Tab.
 
-Hint: On slow terminals the -s flag may help.
+Hint: På langsomme maskiner kan flaget -s hjælpe.
 
-Hint: Find File: you can work on the files found using the Panelize button.
+Fif: Find fil: du kan arbejde på de fundne filer med Panelisér-knappen.
 
-Hint: Want to do complex searches? Use the External Panelize command.
+Fif: Vil du foretage komplekse søgninger? Brug Ekstern panelisering-kommandoen.
 
-Hint: To change directory halfway through typing a command, use M-c (quick cd).
+Fif: Brug M-c (hurtig cd), til at skifte mappe halvvejs gennem indtastningen af en kommando.
 
-Note: Shell commands will not work when you are on a non-local file system.
+Bemærk: Skalkommandoer virker ikke når du er på et ikke-lokalt filsystem.
 
-Hint: Bring text back from the dead with C-y.
+Fif: Bring tekst tilbage fra de døde med C-y.
 
-Hint: Are some of your keys not working? Look at Options/Learn keys.
+Fif: Er der nogen af dine taster som ikke virker? Kig i Indstillinger/Lær taster.
 
-Hint: To look at the output of a command in the viewer, use M-!
+Fif: Brug M-!, til at se på outputtet af en kommando i fremviseren.
 
-Hint: F13 (or Shift-F3) invokes the viewer in raw mode.
+Fif: F13 (eller Skift-F3) viser fremviseren i rå tilstand.
 
-Hint: You may specify the editor for F4 with the shell variable EDITOR.
+Fif: Du kan angive editoren til F4 med skalvariablen EDITOR.
 
-Hint: You may specify the external viewer with the shell vars VIEWER or PAGER.
+Fif: Du kan angive den eksterne fremviser med skalvariablerne VIEWER eller PAGER.
 
-Hint: You can disable all requests for confirmation in Options/Confirmation.
+Fif: Du kan deaktivere alle anmodninger om bekræftelse i Indstillinger/Bekræftelse.
 
 Hint: Leap to frequently used directories in a single bound with C-.
 
-Hint: You can do anonymous FTP with mc by typing 'cd ftp://machine.edu'
+Fif: Du kan brug anonym FTP i mc ved at skrive 'cd ftp://maskine.edu'
 
-Hint: FTP is built in the Midnight Commander, check the File/FTP link menu.
+Fif: FTP er indbygget i Midnight Commander, tjek Fil/FTP-link-menuen.
 
-Hint: M-t changes quickly the listing mode.
+Fif: M-t ændre hurtigt listningstilstanden.
 
-Hint: You can specify the username when doing ftps: 'cd ftp://user@machine.edu'
+Fif: Du kan angive brugernavnet når ftps bruges: 'cd ftp://bruger@maskine.edu'
 
-Hint: You can browse RPM files by tapping enter on top of an rpm file.
+Fif: Du kan gennemse RPM-filer ved at trykke på enter, på en rpm-fil.
 
-Hint: To mark directories on the select dialog box, append a slash.
+Fif: Tilføj en skråstreg, til at markere mapper i den valgte dialogboks.
 
-Hint: To use the mouse cut and paste may require holding the shift key
+Fif: Brug at klip og indsæt med musen kan kræve at skift-tasten holdes nede
 
 Hint: Key frequently visited ftp sites in the hotlist: type C-.
