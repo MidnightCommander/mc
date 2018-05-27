@@ -12,26 +12,6 @@ TAGSF="$MC_TEST_EXTFS_INPUT"
 # ----------------------------------------------------------------------------
 
 #
-# Overrides helper's.
-#
-# Imitates 'rpm --querytags'.
-#
-# @Mock
-#
-mcrpmfs_getSupportedTags()
-{
-  $PERL -e '
-    $tagsf = $ARGV[0];
-
-    do $tagsf or die("$tagsf: $!");
-    print join("\n", keys %$tags);
-  ' \
-  "$TAGSF"
-}
-
-# ----------------------------------------------------------------------------
-
-#
 # Imitates 'rpm -qp --qf <TEMPLATE> <PACKAGE_FILE>'.
 #
 # (It ignores <PACKAGE_FILE>, using our input instead.)

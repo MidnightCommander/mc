@@ -76,11 +76,6 @@ rpm_filename=$1; shift
 
 FILEPREF="-r--r--r--   1 root     root    "
 
-mcrpmfs_getSupportedTags()
-{
-    rpm --querytags
-}
-
 mcrpmfs_getDesription()
 {
     $RPM -qip "${rpm_filename}"
@@ -88,13 +83,6 @@ mcrpmfs_getDesription()
 
 mcrpmfs_getAllNeededTags()
 {
-    supportedTags=`mcrpmfs_getSupportedTags`
-    if test "`echo supportedTags | grep -c CONFLICTS`" -eq 1; then
-	tag_CONFLICTS="|CONFLICTS=%{CONFLICTS}"
-    else
-	tag_CONFLICTS=""
-    fi
-
     $RPM_QUERY_FMT \
 "|NAME=%{NAME}"\
 "|VERSION=%{VERSION}"\
@@ -109,7 +97,7 @@ mcrpmfs_getAllNeededTags()
 "|REQUIRES=%{REQUIRENAME} %{REQUIREFLAGS:depflags} %{REQUIREVERSION}"\
 "|OBSOLETES=%{OBSOLETES}"\
 "|PROVIDES=%{PROVIDES} %{PROVIDEFLAGS:depflags} %{PROVIDEVERSION}"\
-${tag_CONFLICTS}\
+"|CONFLICTS=%{CONFLICTS}"\
 "|PACKAGER=%{PACKAGER}" \
     "${rpm_filename}" \
     | tr '\n' ' '  # The newlines in DESCRIPTION mess with the sed script in mcrpmfs_getOneTag().

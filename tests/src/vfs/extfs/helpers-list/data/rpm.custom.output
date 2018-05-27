@@ -36,5 +36,6 @@ dr-xr-xr-x   3        0        0          0 2017-01-05 00:00:00 INFO
 -r--r--r--   1        0        0          0 2017-01-05 00:00:00 INFO/REQUIRES
 -r--r--r--   1        0        0          0 2017-01-05 00:00:00 INFO/OBSOLETES
 -r--r--r--   1        0        0          0 2017-01-05 00:00:00 INFO/PROVIDES
+-r--r--r--   1        0        0          0 2017-01-05 00:00:00 INFO/CONFLICTS
 -r--r--r--   1        0        0          0 2017-01-05 00:00:00 INFO/CHANGELOG
 -r--r--r--   1        0        0          0 2017-01-05 00:00:00 CONTENTS.cpio
