@@ -1,6 +1,6 @@
 -r--r--r--   1        0        0        868 2016-11-11 00:00:00 HEADER
--r-xr-xr-x   1        0        0         39 2016-11-11 00:00:00 INSTALL
--r-xr-xr-x   1        0        0         39 2016-11-11 00:00:00 UPGRADE
+-r-xr-xr-x   1        0        0          0 2016-11-11 00:00:00 INSTALL
+-r-xr-xr-x   1        0        0          0 2016-11-11 00:00:00 UPGRADE
 dr-xr-xr-x   3        0        0          0 2016-11-11 00:00:00 INFO
 -r--r--r--   1        0        0          0 2016-11-11 00:00:00 INFO/NAME-VERSION-RELEASE
 -r--r--r--   1        0        0          0 2016-11-11 00:00:00 INFO/GROUP
