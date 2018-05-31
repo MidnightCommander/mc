@@ -77,6 +77,7 @@ int sftpfs_lstat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror)
 int sftpfs_stat (const vfs_path_t * vpath, struct stat *buf, GError ** mcerror);
 int sftpfs_readlink (const vfs_path_t * vpath, char *buf, size_t size, GError ** mcerror);
 int sftpfs_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** mcerror);
+int sftpfs_utime (const vfs_path_t * vpath, time_t atime, time_t mtime, GError ** mcerror);
 int sftpfs_chmod (const vfs_path_t * vpath, mode_t mode, GError ** mcerror);
 int sftpfs_unlink (const vfs_path_t * vpath, GError ** mcerror);
 int sftpfs_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** mcerror);
