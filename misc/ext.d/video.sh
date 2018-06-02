@@ -13,8 +13,14 @@ do_view_action() {
 
     case "${filetype}" in
     *)
-        mplayer -identify -vo null -ao null -frames 0 "${MC_EXT_FILENAME}" 2>&1 | \
-            sed -n 's/^ID_//p'
+        if mplayer >/dev/null 2>&1; then
+            mplayer -identify -vo null -ao null -frames 0 "${MC_EXT_FILENAME}" 2>&1 | \
+                sed -n 's/^ID_//p'
+        elif which mpv_identify.sh >/dev/null 2>&1; then
+            mpv_identify.sh "${MC_EXT_FILENAME}"
+        else
+            echo "Please install either mplayer or mpv to get information for this file"
+        fi
         ;;
     esac
 }
