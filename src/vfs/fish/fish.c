@@ -1357,7 +1357,8 @@ fish_chmod (const vfs_path_t * vpath, mode_t mode)
 
     ret =
         fish_send_command (path_element->class, super, OPT_FLUSH, SUP->scr_chmod,
-                           "FISH_FILENAME=%s FISH_FILEMODE=%4.4o;\n", rpath, (int) (mode & 07777));
+                           "FISH_FILENAME=%s FISH_FILEMODE=%4.4o;\n", rpath,
+                           (unsigned int) (mode & 07777));
 
     g_free (rpath);
 
