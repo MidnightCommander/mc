@@ -421,6 +421,62 @@ sftpfs_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2, GError ** 
 
 /* --------------------------------------------------------------------------------------------- */
 /**
+ * Changes the times of the file.
+ *
+ * @param vpath   path to file or directory
+ * @param atime   access time
+ * @param mtime   modification time
+ * @param mcerror pointer to error object
+ * @return 0 if success, negative value otherwise
+ */
+
+int
+sftpfs_utime (const vfs_path_t * vpath, time_t atime, time_t mtime, GError ** mcerror)
+{
+    sftpfs_super_data_t *super_data = NULL;
+    const vfs_path_element_t *path_element = NULL;
+    LIBSSH2_SFTP_ATTRIBUTES attrs;
+    int res;
+
+    res = sftpfs_stat_init (&super_data, &path_element, vpath, mcerror, LIBSSH2_SFTP_LSTAT, &attrs);
+    if (res < 0)
+        return res;
+
+    attrs.atime = atime;
+    attrs.mtime = mtime;
+
+    do
+    {
+        const char *fixfname;
+        unsigned int fixfname_len = 0;
+
+        fixfname = sftpfs_fix_filename (path_element->path, &fixfname_len);
+
+        res =
+            libssh2_sftp_stat_ex (super_data->sftp_session, fixfname, fixfname_len,
+                                  LIBSSH2_SFTP_SETSTAT, &attrs);
+        if (res >= 0)
+            break;
+
+        if (sftpfs_is_sftp_error (super_data->sftp_session, res, LIBSSH2_FX_NO_SUCH_FILE))
+            return -ENOENT;
+
+        if (sftpfs_is_sftp_error (super_data->sftp_session, res, LIBSSH2_FX_FAILURE))
+        {
+            res = 0;            /* need something like ftpfs_ignore_chattr_errors */
+            break;
+        }
+
+        if (!sftpfs_waitsocket (super_data, res, mcerror))
+            return -1;
+    }
+    while (res == LIBSSH2_ERROR_EAGAIN);
+
+    return res;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Changes the permissions of the file.
  *
  * @param vpath   path to file or directory

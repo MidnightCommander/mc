@@ -324,18 +324,27 @@ sftpfs_cb_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 /**
  * Callback for utime VFS-function.
  *
- * @param vpath unused
- * @param times unused
- * @return always 0
+ * @param vpath path to file or directory
+ * @param times access and modification time to set
+ * @return 0 if success, negative value otherwise
  */
 
 static int
 sftpfs_cb_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
 {
-    (void) vpath;
-    (void) times;
+    int rc;
+    GError *mcerror = NULL;
+#ifdef HAVE_UTIMENSAT
+    time_t atime = (*times)[0].tv_sec;
+    time_t mtime = (*times)[1].tv_sec;
+#else
+    time_t atime = times->actime;
+    time_t mtime = times->modtime;
+#endif
 
-    return 0;
+    rc = sftpfs_utime (vpath, atime, mtime, &mcerror);
+    mc_error_message (&mcerror, NULL);
+    return rc;
 }
 
 /* --------------------------------------------------------------------------------------------- */
