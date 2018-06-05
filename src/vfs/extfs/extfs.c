@@ -270,8 +270,7 @@ extfs_generate_entry (extfs_super_t * archive,
 /* --------------------------------------------------------------------------------------------- */
 
 static extfs_entry_t *
-extfs_find_entry_int (extfs_entry_t * dir, const char *name, GSList * list,
-                      gboolean make_dirs, gboolean make_file)
+extfs_find_entry_int (extfs_entry_t * dir, const char *name, GSList * list, int flags)
 {
     extfs_entry_t *pent, *pdir;
     const char *p, *name_end;
@@ -335,9 +334,9 @@ extfs_find_entry_int (extfs_entry_t * dir, const char *name, GSList * list,
                 /* When we load archive, we create automagically
                  * non-existent directories
                  */
-                if (pent == NULL && make_dirs)
+                if (pent == NULL && (flags & FL_MKDIR) != 0)
                     pent = extfs_generate_entry (dir->ino->archive, p, pdir, S_IFDIR | 0777);
-                if (pent == NULL && make_file)
+                if (pent == NULL && (flags & FL_MKFILE) != 0)
                     pent = extfs_generate_entry (dir->ino->archive, p, pdir, S_IFREG | 0666);
             }
         }
@@ -358,14 +357,14 @@ extfs_find_entry_int (extfs_entry_t * dir, const char *name, GSList * list,
 /* --------------------------------------------------------------------------------------------- */
 
 static extfs_entry_t *
-extfs_find_entry (extfs_entry_t * dir, const char *name, gboolean make_dirs, gboolean make_file)
+extfs_find_entry (extfs_entry_t * dir, const char *name, int flags)
 {
     extfs_entry_t *res;
 
     errloop = FALSE;
     notadir = FALSE;
 
-    res = extfs_find_entry_int (dir, name, NULL, make_dirs, make_file);
+    res = extfs_find_entry_int (dir, name, NULL, flags);
     if (res == NULL)
     {
         if (errloop)
@@ -563,7 +562,7 @@ extfs_read_archive (int fstype, const char *name, extfs_super_t ** pparc)
                 }
                 if (S_ISDIR (hstat.st_mode) && (DIR_IS_DOT (p) || DIR_IS_DOTDOT (p)))
                     goto read_extfs_continue;
-                pent = extfs_find_entry (current_archive->root_entry, q, TRUE, FALSE);
+                pent = extfs_find_entry (current_archive->root_entry, q, FL_MKDIR);
                 if (pent == NULL)
                 {
                     /* FIXME: Should clean everything one day */
@@ -583,8 +582,8 @@ extfs_read_archive (int fstype, const char *name, extfs_super_t ** pparc)
                 }
                 if (!S_ISLNK (hstat.st_mode) && (current_link_name != NULL))
                 {
-                    pent = extfs_find_entry (current_archive->root_entry,
-                                             current_link_name, FALSE, FALSE);
+                    pent =
+                        extfs_find_entry (current_archive->root_entry, current_link_name, FL_NONE);
                     if (pent == NULL)
                     {
                         /* FIXME: Should clean everything one day */
@@ -781,7 +780,7 @@ extfs_resolve_symlinks_int (extfs_entry_t * entry, GSList * list)
         GSList *looping;
 
         looping = g_slist_prepend (list, entry);
-        pent = extfs_find_entry_int (entry->dir, entry->ino->linkname, looping, FALSE, FALSE);
+        pent = extfs_find_entry_int (entry->dir, entry->ino->linkname, looping, FL_NONE);
         looping = g_slist_delete_link (looping, looping);
 
         if (pent == NULL)
@@ -919,11 +918,11 @@ extfs_open (const vfs_path_t * vpath, int flags, mode_t mode)
     q = extfs_get_path (vpath, &archive, FALSE);
     if (q == NULL)
         return NULL;
-    entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
+    entry = extfs_find_entry (archive->root_entry, q, FL_NONE);
     if ((entry == NULL) && ((flags & O_CREAT) != 0))
     {
         /* Create new entry */
-        entry = extfs_find_entry (archive->root_entry, q, FALSE, TRUE);
+        entry = extfs_find_entry (archive->root_entry, q, FL_MKFILE);
         created = (entry != NULL);
     }
 
@@ -1053,7 +1052,7 @@ extfs_opendir (const vfs_path_t * vpath)
     q = extfs_get_path (vpath, &archive, FALSE);
     if (q == NULL)
         return NULL;
-    entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
+    entry = extfs_find_entry (archive->root_entry, q, FL_NONE);
     g_free (q);
     if (entry == NULL)
         return NULL;
@@ -1126,7 +1125,7 @@ extfs_internal_stat (const vfs_path_t * vpath, struct stat *buf, gboolean resolv
     q = extfs_get_path_int (vpath, &archive, FALSE);
     if (q == NULL)
         goto cleanup;
-    entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
+    entry = extfs_find_entry (archive->root_entry, q, FL_NONE);
     if (entry == NULL)
         goto cleanup;
     if (resolve)
@@ -1182,7 +1181,7 @@ extfs_readlink (const vfs_path_t * vpath, char *buf, size_t size)
     q = extfs_get_path_int (vpath, &archive, FALSE);
     if (q == NULL)
         goto cleanup;
-    entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
+    entry = extfs_find_entry (archive->root_entry, q, FL_NONE);
     if (entry == NULL)
         goto cleanup;
     if (!S_ISLNK (entry->ino->st.st_mode))
@@ -1248,7 +1247,7 @@ extfs_unlink (const vfs_path_t * vpath)
     q = extfs_get_path_int (vpath, &archive, FALSE);
     if (q == NULL)
         goto cleanup;
-    entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
+    entry = extfs_find_entry (archive->root_entry, q, FL_NONE);
     if (entry == NULL)
         goto cleanup;
     entry = extfs_resolve_symlinks (entry);
@@ -1290,13 +1289,13 @@ extfs_mkdir (const vfs_path_t * vpath, mode_t mode)
     q = extfs_get_path_int (vpath, &archive, FALSE);
     if (q == NULL)
         goto cleanup;
-    entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
+    entry = extfs_find_entry (archive->root_entry, q, FL_NONE);
     if (entry != NULL)
     {
         path_element->class->verrno = EEXIST;
         goto cleanup;
     }
-    entry = extfs_find_entry (archive->root_entry, q, TRUE, FALSE);
+    entry = extfs_find_entry (archive->root_entry, q, FL_MKDIR);
     if (entry == NULL)
         goto cleanup;
     entry = extfs_resolve_symlinks (entry);
@@ -1332,7 +1331,7 @@ extfs_rmdir (const vfs_path_t * vpath)
     q = extfs_get_path_int (vpath, &archive, FALSE);
     if (q == NULL)
         goto cleanup;
-    entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
+    entry = extfs_find_entry (archive->root_entry, q, FL_NONE);
     if (entry == NULL)
         goto cleanup;
     entry = extfs_resolve_symlinks (entry);
@@ -1371,7 +1370,7 @@ extfs_chdir (const vfs_path_t * vpath)
     q = extfs_get_path (vpath, &archive, FALSE);
     if (q == NULL)
         return -1;
-    entry = extfs_find_entry (archive->root_entry, q, FALSE, FALSE);
+    entry = extfs_find_entry (archive->root_entry, q, FL_NONE);
     g_free (q);
     if (entry == NULL)
         return -1;
