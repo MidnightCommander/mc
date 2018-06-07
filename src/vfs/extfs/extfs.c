@@ -507,30 +507,18 @@ extfs_open_archive (int fstype, const char *name, extfs_super_t ** pparc)
  */
 
 static int
-extfs_read_archive (int fstype, const char *name, extfs_super_t ** pparc)
+extfs_read_archive (FILE * extfsd, extfs_super_t * current_archive)
 {
-    FILE *extfsd;
-    const extfs_plugin_info_t *info;
+    int ret = 0;
     char *buffer;
-    extfs_super_t *current_archive;
-    char *current_file_name, *current_link_name;
-
-    info = &g_array_index (extfs_plugins, extfs_plugin_info_t, fstype);
-
-    extfsd = extfs_open_archive (fstype, name, &current_archive);
-
-    if (extfsd == NULL)
-    {
-        message (D_ERROR, MSG_ERROR, _("Cannot open %s archive\n%s"), info->prefix, name);
-        return -1;
-    }
 
     buffer = g_malloc (BUF_4K);
+
     while (fgets (buffer, BUF_4K, extfsd) != NULL)
     {
         struct stat hstat;
+        char *current_file_name = NULL, *current_link_name = NULL;
 
-        current_link_name = NULL;
         if (vfs_parse_ls_lga (buffer, &hstat, &current_file_name, &current_link_name, NULL))
         {
             extfs_entry_t *entry, *pent;
@@ -555,98 +543,87 @@ extfs_read_archive (int fstype, const char *name, extfs_super_t ** pparc)
                     *(p++) = '\0';
                     q = cfn;
                 }
-                if (S_ISDIR (hstat.st_mode) && (DIR_IS_DOT (p) || DIR_IS_DOTDOT (p)))
-                    goto read_extfs_continue;
-                pent = extfs_find_entry (current_archive->root_entry, q, FL_MKDIR);
-                if (pent == NULL)
+
+                if (!S_ISDIR (hstat.st_mode) || !(DIR_IS_DOT (p) || DIR_IS_DOTDOT (p)))
                 {
-                    /* FIXME: Should clean everything one day */
-                    g_free (buffer);
-                    pclose (extfsd);
-                    close_error_pipe (D_ERROR, _("Inconsistent extfs archive"));
-                    return -1;
-                }
-                entry = g_new (extfs_entry_t, 1);
-                entry->name = g_strdup (p);
-                entry->next_in_dir = NULL;
-                entry->dir = pent;
-                if (pent->ino->last_in_subdir)
-                {
-                    pent->ino->last_in_subdir->next_in_dir = entry;
-                    pent->ino->last_in_subdir = entry;
-                }
-                if (!S_ISLNK (hstat.st_mode) && (current_link_name != NULL))
-                {
-                    pent =
-                        extfs_find_entry (current_archive->root_entry, current_link_name, FL_NONE);
+                    pent = extfs_find_entry (current_archive->root_entry, q, FL_MKDIR);
                     if (pent == NULL)
                     {
-                        /* FIXME: Should clean everything one day */
-                        g_free (buffer);
-                        pclose (extfsd);
-                        close_error_pipe (D_ERROR, _("Inconsistent extfs archive"));
-                        return -1;
+                        ret = -1;
+                        break;
                     }
 
-                    entry->ino = pent->ino;
-                    pent->ino->st.st_nlink++;
-                }
-                else
-                {
-                    inode = g_new (extfs_inode_t, 1);
-                    entry->ino = inode;
-                    inode->localname = NULL;
-                    inode->st.st_ino = current_archive->ino_usage++;
-                    inode->st.st_nlink = 1;
-                    inode->st.st_dev = current_archive->rdev;
-                    inode->archive = current_archive;
-                    inode->st.st_mode = hstat.st_mode;
-#ifdef HAVE_STRUCT_STAT_ST_RDEV
-                    inode->st.st_rdev = hstat.st_rdev;
-#else
-                    inode->st.st_rdev = 0;
-#endif
-                    inode->st.st_uid = hstat.st_uid;
-                    inode->st.st_gid = hstat.st_gid;
-                    inode->st.st_size = hstat.st_size;
-                    inode->st.st_mtime = hstat.st_mtime;
-                    inode->st.st_atime = hstat.st_atime;
-                    inode->st.st_ctime = hstat.st_ctime;
-                    inode->first_in_subdir = NULL;
-                    inode->last_in_subdir = NULL;
-                    if (current_link_name != NULL && S_ISLNK (hstat.st_mode))
+                    entry = g_new (extfs_entry_t, 1);
+                    entry->name = g_strdup (p);
+                    entry->next_in_dir = NULL;
+                    entry->dir = pent;
+                    if (pent->ino->last_in_subdir)
                     {
-                        inode->linkname = current_link_name;
-                        current_link_name = NULL;
+                        pent->ino->last_in_subdir->next_in_dir = entry;
+                        pent->ino->last_in_subdir = entry;
+                    }
+                    if (!S_ISLNK (hstat.st_mode) && (current_link_name != NULL))
+                    {
+                        pent =
+                            extfs_find_entry (current_archive->root_entry, current_link_name,
+                                              FL_NONE);
+                        if (pent == NULL)
+                        {
+                            ret = -1;
+                            break;
+                        }
+
+                        entry->ino = pent->ino;
+                        pent->ino->st.st_nlink++;
                     }
                     else
                     {
-                        if (S_ISLNK (hstat.st_mode))
-                            inode->st.st_mode &= ~S_IFLNK;      /* You *DON'T* want to do this always */
-                        inode->linkname = NULL;
+                        inode = g_new (extfs_inode_t, 1);
+                        entry->ino = inode;
+                        inode->localname = NULL;
+                        inode->st.st_ino = current_archive->ino_usage++;
+                        inode->st.st_nlink = 1;
+                        inode->st.st_dev = current_archive->rdev;
+                        inode->archive = current_archive;
+                        inode->st.st_mode = hstat.st_mode;
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
+                        inode->st.st_rdev = hstat.st_rdev;
+#else
+                        inode->st.st_rdev = 0;
+#endif
+                        inode->st.st_uid = hstat.st_uid;
+                        inode->st.st_gid = hstat.st_gid;
+                        inode->st.st_size = hstat.st_size;
+                        inode->st.st_mtime = hstat.st_mtime;
+                        inode->st.st_atime = hstat.st_atime;
+                        inode->st.st_ctime = hstat.st_ctime;
+                        inode->first_in_subdir = NULL;
+                        inode->last_in_subdir = NULL;
+                        if (current_link_name != NULL && S_ISLNK (hstat.st_mode))
+                        {
+                            inode->linkname = current_link_name;
+                            current_link_name = NULL;
+                        }
+                        else
+                        {
+                            if (S_ISLNK (hstat.st_mode))
+                                inode->st.st_mode &= ~S_IFLNK;  /* You *DON'T* want to do this always */
+                            inode->linkname = NULL;
+                        }
+                        if (S_ISDIR (hstat.st_mode))
+                            extfs_make_dots (entry);
                     }
-                    if (S_ISDIR (hstat.st_mode))
-                        extfs_make_dots (entry);
                 }
             }
-          read_extfs_continue:
+
             g_free (current_file_name);
             g_free (current_link_name);
         }
     }
+
     g_free (buffer);
 
-    /* Check if extfs 'list' returned 0 */
-    if (pclose (extfsd) != 0)
-    {
-        extfs_free (current_archive);
-        close_error_pipe (D_ERROR, _("Inconsistent extfs archive"));
-        return -1;
-    }
-
-    close_error_pipe (D_ERROR, NULL);
-    *pparc = current_archive;
-    return 0;
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -675,6 +652,44 @@ extfs_which (struct vfs_class *me, const char *path)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static int
+extfs_open_and_read_archive (int fstype, const char *name, extfs_super_t ** archive)
+{
+    int result = -1;
+    FILE *extfsd;
+    extfs_super_t *a;
+
+    extfsd = extfs_open_archive (fstype, name, archive);
+    a = *archive;
+
+    if (extfsd == NULL)
+    {
+        const extfs_plugin_info_t *info;
+
+        info = &g_array_index (extfs_plugins, extfs_plugin_info_t, fstype);
+        message (D_ERROR, MSG_ERROR, _("Cannot open %s archive\n%s"), info->prefix, name);
+    }
+    else if (extfs_read_archive (extfsd, a) != 0)
+    {
+        pclose (extfsd);
+        close_error_pipe (D_ERROR, _("Inconsistent extfs archive"));
+    }
+    else if (pclose (extfsd) != 0)
+    {
+        extfs_free (a);
+        close_error_pipe (D_ERROR, _("Inconsistent extfs archive"));
+    }
+    else
+    {
+        close_error_pipe (D_ERROR, NULL);
+        result = 0;
+    }
+
+    return result;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /**
  * Dissect the path and create corresponding superblock.
  */
@@ -696,28 +711,28 @@ extfs_get_path (const vfs_path_t * vpath, extfs_super_t ** archive, int flags)
 
     archive_name = vfs_path_to_str_elements_count (vpath, -1);
 
-    /*
-     * All filesystems should have some local archive, at least
-     * it can be PATH_SEP ('/').
-     */
+    /* All filesystems should have some local archive, at least it can be PATH_SEP ('/'). */
     parc = g_slist_find_custom (first_archive, archive_name, extfs_cmp_archive);
     if (parc != NULL)
     {
         a = EXTFS_SUPER (parc->data);
         vfs_stamp (&vfs_extfs_ops, (vfsid) a);
         g_free (archive_name);
-        goto return_success;
     }
-
-    result = (flags & FL_NO_OPEN) != 0 ? -1 : extfs_read_archive (fstype, archive_name, &a);
-    g_free (archive_name);
-    if (result == -1)
+    else
     {
-        path_element->class->verrno = EIO;
-        return NULL;
+        if ((flags & FL_NO_OPEN) == 0)
+            result = extfs_open_and_read_archive (fstype, archive_name, &a);
+
+        g_free (archive_name);
+
+        if (result == -1)
+        {
+            path_element->class->verrno = EIO;
+            return NULL;
+        }
     }
 
-  return_success:
     *archive = a;
     return path_element->path;
 }
