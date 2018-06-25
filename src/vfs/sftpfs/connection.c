@@ -292,6 +292,53 @@ sftpfs_open_connection_ssh_key (struct vfs_s_super *super, GError ** mcerror)
     return ret_value;
 }
 
+
+/**
+ * Keyboard-interactive password helper for opening connection to host by
+ * sftpfs_open_connection_ssh_password
+ *
+ * Uses global kbi_super (data with existing connection) and kbi_passwd (password)
+ *
+ * @param name             username
+ * @param name_len         length of @name
+ * @param instruction      unused
+ * @param instruction_len  unused
+ * @param num_prompts      number of possible problems to process
+ * @param prompts          array of prompts to process
+ * @param responses        array of responses, one per prompt
+ * @param abstract         unused
+ */
+
+static const char *kbi_passwd;
+static const struct vfs_s_super *kbi_super;
+static
+LIBSSH2_USERAUTH_KBDINT_RESPONSE_FUNC (keyboard_interactive_helper)
+{
+    int i;
+    int len;
+
+    (void) instruction;
+    (void) instruction_len;
+    (void) abstract;
+
+    if (!kbi_super || !kbi_passwd)
+        return;
+
+    if (strncmp (name, kbi_super->path_element->user, name_len) != 0)
+        return;
+
+    // assume these are password prompts
+    len = strlen (kbi_passwd);
+    for (i = 0; i < num_prompts; ++i)
+    {
+        if (strncmp (prompts[i].text, "Password: ", prompts[i].length) == 0)
+        {
+            responses[i].text = strdup (kbi_passwd);
+            responses[i].length = len;
+        }
+    }
+}
+
 /* --------------------------------------------------------------------------------------------- */
 /**
  * Open connection to host using password.
@@ -323,6 +370,18 @@ sftpfs_open_connection_ssh_password (struct vfs_s_super *super, GError ** mcerro
                LIBSSH2_ERROR_EAGAIN);
         if (rc == 0)
             return TRUE;
+
+        kbi_super = super;
+        kbi_passwd = super->path_element->password;
+        while ((rc =
+                libssh2_userauth_keyboard_interactive (super_data->session,
+                                                       super->path_element->user,
+                                                       keyboard_interactive_helper)) ==
+               LIBSSH2_ERROR_EAGAIN);
+        kbi_super = NULL;
+        kbi_passwd = NULL;
+        if (rc == 0)
+            return TRUE;
     }
 
     p = g_strdup_printf (_("sftp: Enter password for %s "), super->path_element->user);
@@ -336,6 +395,19 @@ sftpfs_open_connection_ssh_password (struct vfs_s_super *super, GError ** mcerro
         while ((rc = libssh2_userauth_password (super_data->session, super->path_element->user,
                                                 passwd)) == LIBSSH2_ERROR_EAGAIN)
             ;
+
+        if (rc != 0)
+        {
+            kbi_super = super;
+            kbi_passwd = passwd;
+            while ((rc =
+                    libssh2_userauth_keyboard_interactive (super_data->session,
+                                                           super->path_element->user,
+                                                           keyboard_interactive_helper)) ==
+                   LIBSSH2_ERROR_EAGAIN);
+            kbi_super = NULL;
+            kbi_passwd = NULL;
+        }
 
         if (rc == 0)
         {
