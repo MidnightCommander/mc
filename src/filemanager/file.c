@@ -277,10 +277,7 @@ build_dest (file_op_context_t * ctx, const char *src, const char *dest, FileProg
 
     g_free (q);
 
-    q = strutils_shell_unescape (s);
-    g_free (s);
-
-    return q;
+    return s;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1912,19 +1909,12 @@ operate_single_file (const WPanel * panel, FileOperation operation, file_op_tota
         temp = build_dest (ctx, src, dest, &value);
         if (temp != NULL)
         {
-            char *src2;
-
-            src2 = strutils_shell_unescape (src);
-
-            src = src2;
             dest = temp;
 
             switch (operation)
             {
             case OP_COPY:
                 /* we use file_mask_op_follow_links only with OP_COPY */
-                vfs_path_free (src_vpath);
-                src_vpath = vfs_path_from_str (src);
                 ctx->stat_func (src_vpath, src_stat);
 
                 value =
@@ -1968,7 +1958,6 @@ operate_single_file (const WPanel * panel, FileOperation operation, file_op_tota
                 abort ();
             }
 
-            g_free (src2);
             g_free (temp);
         }
     }
@@ -2011,12 +2000,14 @@ operate_one_file (const WPanel * panel, FileOperation operation, file_op_total_c
         temp = build_dest (ctx, src, dest, &value);
         if (temp != NULL)
         {
-            char *src2;
+            char *src2, *temp2;
 
             src2 = strutils_shell_unescape (src);
+            temp2 = strutils_shell_unescape (temp);
+            g_free (temp);
 
             src = src2;
-            dest = temp;
+            dest = temp2;
 
             switch (operation)
             {
@@ -2047,7 +2038,7 @@ operate_one_file (const WPanel * panel, FileOperation operation, file_op_total_c
             }
 
             g_free (src2);
-            g_free (temp);
+            g_free (temp2);
         }
     }
 
