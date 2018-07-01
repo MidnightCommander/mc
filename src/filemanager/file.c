@@ -2000,21 +2000,12 @@ operate_one_file (const WPanel * panel, FileOperation operation, file_op_total_c
         temp = build_dest (ctx, src, dest, &value);
         if (temp != NULL)
         {
-            char *src2, *temp2;
-
-            src2 = strutils_shell_unescape (src);
-            temp2 = strutils_shell_unescape (temp);
-            g_free (temp);
-
-            src = src2;
-            dest = temp2;
+            dest = temp;
 
             switch (operation)
             {
             case OP_COPY:
                 /* we use file_mask_op_follow_links only with OP_COPY */
-                vfs_path_free (src_vpath);
-                src_vpath = vfs_path_from_str (src);
                 ctx->stat_func (src_vpath, src_stat);
                 is_file = !S_ISDIR (src_stat->st_mode);
 
@@ -2037,8 +2028,7 @@ operate_one_file (const WPanel * panel, FileOperation operation, file_op_total_c
                 abort ();
             }
 
-            g_free (src2);
-            g_free (temp2);
+            g_free (temp);
         }
     }
 
