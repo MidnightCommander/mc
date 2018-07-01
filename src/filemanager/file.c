@@ -1821,9 +1821,6 @@ do_confirm_copy_move (const WPanel * panel, FileOperation operation, gboolean fo
     g_free (format);
     g_free (dest_dir);
 
-    if (ret == NULL || ret[0] == '\0')
-        MC_PTR_FREE (ret);
-
     return ret;
 }
 

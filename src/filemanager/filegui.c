@@ -1300,7 +1300,8 @@ file_mask_dialog (file_op_context_t * ctx, FileOperation operation,
         {
             g_free (def_text_secure);
             g_free (source_mask);
-            return dest_dir;
+            g_free (dest_dir);
+            return NULL;
         }
 
         ctx->search_handle = mc_search_new (source_mask, NULL);
