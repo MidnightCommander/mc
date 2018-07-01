@@ -1180,7 +1180,7 @@ file_mask_dialog (file_op_context_t * ctx, FileOperation operation,
     if (ctx == NULL)
         return NULL;
 
-    /* unselect checkbox if target filesystem don't support attributes */
+    /* unselect checkbox if target filesystem doesn't support attributes */
     ctx->op_preserve = filegui__check_attrs_on_fs (def_text);
     ctx->stable_symlinks = FALSE;
     *do_bg = FALSE;
