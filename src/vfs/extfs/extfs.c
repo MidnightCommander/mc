@@ -684,7 +684,7 @@ extfs_which (struct vfs_class *me, const char *path)
  * Dissect the path and create corresponding superblock.
  */
 static const char *
-extfs_get_path_int (const vfs_path_t * vpath, extfs_super_t ** archive, int flags)
+extfs_get_path (const vfs_path_t * vpath, extfs_super_t ** archive, int flags)
 {
     char *archive_name;
     int result = -1;
@@ -725,18 +725,6 @@ extfs_get_path_int (const vfs_path_t * vpath, extfs_super_t ** archive, int flag
   return_success:
     *archive = a;
     return path_element->path;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Dissect the path and create corresponding superblock.
- * The result should be freed.
- */
-
-static char *
-extfs_get_path (const vfs_path_t * vpath, extfs_super_t ** archive, int flags)
-{
-    return g_strdup (extfs_get_path_int (vpath, archive, flags));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -881,7 +869,8 @@ static void
 extfs_run (const vfs_path_t * vpath)
 {
     extfs_super_t *archive = NULL;
-    char *p, *q, *archive_name, *quoted_archive_name;
+    const char *p;
+    char *q, *archive_name, *quoted_archive_name;
     char *cmd;
     const extfs_plugin_info_t *info;
 
@@ -889,7 +878,6 @@ extfs_run (const vfs_path_t * vpath)
     if (p == NULL)
         return;
     q = name_quote (p, FALSE);
-    g_free (p);
 
     archive_name = extfs_get_archive_name (archive);
     quoted_archive_name = name_quote (archive_name, FALSE);
@@ -910,7 +898,7 @@ extfs_open (const vfs_path_t * vpath, int flags, mode_t mode)
 {
     struct pseudofile *extfs_info;
     extfs_super_t *archive = NULL;
-    char *q;
+    const char *q;
     extfs_entry_t *entry;
     int local_handle;
     gboolean created = FALSE;
@@ -926,7 +914,6 @@ extfs_open (const vfs_path_t * vpath, int flags, mode_t mode)
         created = (entry != NULL);
     }
 
-    g_free (q);
     if (entry == NULL)
         return NULL;
     entry = extfs_resolve_symlinks (entry);
@@ -1045,7 +1032,7 @@ static void *
 extfs_opendir (const vfs_path_t * vpath)
 {
     extfs_super_t *archive = NULL;
-    char *q;
+    const char *q;
     extfs_entry_t *entry;
     extfs_entry_t **info;
 
@@ -1053,7 +1040,6 @@ extfs_opendir (const vfs_path_t * vpath)
     if (q == NULL)
         return NULL;
     entry = extfs_find_entry (archive->root_entry, q, FL_NONE);
-    g_free (q);
     if (entry == NULL)
         return NULL;
     entry = extfs_resolve_symlinks (entry);
@@ -1122,7 +1108,7 @@ extfs_internal_stat (const vfs_path_t * vpath, struct stat *buf, gboolean resolv
     extfs_entry_t *entry;
     int result = -1;
 
-    q = extfs_get_path_int (vpath, &archive, FL_NONE);
+    q = extfs_get_path (vpath, &archive, FL_NONE);
     if (q == NULL)
         goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, FL_NONE);
@@ -1178,7 +1164,7 @@ extfs_readlink (const vfs_path_t * vpath, char *buf, size_t size)
     extfs_entry_t *entry;
     int result = -1;
 
-    q = extfs_get_path_int (vpath, &archive, FL_NONE);
+    q = extfs_get_path (vpath, &archive, FL_NONE);
     if (q == NULL)
         goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, FL_NONE);
@@ -1244,7 +1230,7 @@ extfs_unlink (const vfs_path_t * vpath)
     extfs_entry_t *entry;
     int result = -1;
 
-    q = extfs_get_path_int (vpath, &archive, FL_NONE);
+    q = extfs_get_path (vpath, &archive, FL_NONE);
     if (q == NULL)
         goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, FL_NONE);
@@ -1286,7 +1272,7 @@ extfs_mkdir (const vfs_path_t * vpath, mode_t mode)
     (void) mode;
 
     path_element = vfs_path_get_by_index (vpath, -1);
-    q = extfs_get_path_int (vpath, &archive, FL_NONE);
+    q = extfs_get_path (vpath, &archive, FL_NONE);
     if (q == NULL)
         goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, FL_NONE);
@@ -1328,7 +1314,7 @@ extfs_rmdir (const vfs_path_t * vpath)
     extfs_entry_t *entry;
     int result = -1;
 
-    q = extfs_get_path_int (vpath, &archive, FL_NONE);
+    q = extfs_get_path (vpath, &archive, FL_NONE);
     if (q == NULL)
         goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, FL_NONE);
@@ -1363,7 +1349,7 @@ static int
 extfs_chdir (const vfs_path_t * vpath)
 {
     extfs_super_t *archive = NULL;
-    char *q;
+    const char *q;
     extfs_entry_t *entry;
 
     my_errno = ENOTDIR;
@@ -1371,7 +1357,6 @@ extfs_chdir (const vfs_path_t * vpath)
     if (q == NULL)
         return -1;
     entry = extfs_find_entry (archive->root_entry, q, FL_NONE);
-    g_free (q);
     if (entry == NULL)
         return -1;
     entry = extfs_resolve_symlinks (entry);
@@ -1397,13 +1382,10 @@ static vfsid
 extfs_getid (const vfs_path_t * vpath)
 {
     extfs_super_t *archive = NULL;
-    char *p;
+    const char *p;
 
     p = extfs_get_path (vpath, &archive, FL_NO_OPEN);
-    if (p == NULL)
-        return NULL;
-    g_free (p);
-    return (vfsid) archive;
+    return (p == NULL ? NULL : (vfsid) archive);
 }
 
 /* --------------------------------------------------------------------------------------------- */
