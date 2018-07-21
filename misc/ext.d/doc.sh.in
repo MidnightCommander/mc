@@ -48,27 +48,32 @@ do_view_action() {
         fi
         ;;
     msdoc)
-        which wvHtml >/dev/null 2>&1 &&
-        {
+        if wvHtml >/dev/null 2>&1; then
             tmp=`mktemp -d ${TMPDIR:-/tmp}/%p.XXXXXX`
             wvHtml "${MC_EXT_FILENAME}" --targetdir="$tmp" page.html
             elinks -dump "$tmp/page.html"
             rm -rf "$tmp"
-        } || \
-            antiword -t "${MC_EXT_FILENAME}" || \
-            catdoc -w "${MC_EXT_FILENAME}" || \
-            word2x -f text "${MC_EXT_FILENAME}" - || \
+        elif antiword >/dev/null 2>&1; then
+            antiword -t "${MC_EXT_FILENAME}"
+        elif catdoc >/dev/null 2>&1; then
+            catdoc -w "${MC_EXT_FILENAME}"
+        elif word2x >/dev/null 2>&1; then
+            word2x -f text "${MC_EXT_FILENAME}" -
+        else
             strings "${MC_EXT_FILENAME}"
+        fi
         ;;
     msxls)
-        which xlHtml >/dev/null 2>&1 && {
+        if xlHtml >/dev/null 2>&1; then
             tmp=`mktemp -d ${TMPDIR:-/tmp}/%p.XXXXXX`
             xlhtml -a "${MC_EXT_FILENAME}" > "$tmp/page.html"
             elinks -dump "$tmp/page.html"
             rm -rf "$tmp"
-        } || \
-            xls2csv "${MC_EXT_FILENAME}" || \
+        elif xls2csv >/dev/null 2>&1; then
+            xls2csv "${MC_EXT_FILENAME}"
+        else
             strings "${MC_EXT_FILENAME}"
+        fi
         ;;
     dvi)
         which dvi2tty >/dev/null 2>&1 && \
