@@ -164,7 +164,7 @@ vfs_s_resolve_symlink (struct vfs_class *me, struct vfs_s_entry *entry, int foll
         }
     }
 
-    target = MEDATA->find_entry (me, entry->dir->super->root, linkname, follow - 1, 0);
+    target = MEDATA->find_entry (me, entry->dir->super->root, linkname, follow - 1, FL_NONE);
     g_free (fullname);
     return target;
 }

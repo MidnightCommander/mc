@@ -733,7 +733,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
 
         if (header->header.linkflag == LF_LINK)
         {
-            inode = vfs_s_find_inode (me, archive, current_link_name, LINK_NO_FOLLOW, 0);
+            inode = vfs_s_find_inode (me, archive, current_link_name, LINK_NO_FOLLOW, FL_NONE);
             if (inode == NULL)
             {
                 message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));

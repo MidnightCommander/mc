@@ -19,7 +19,7 @@
 #define LINK_FOLLOW 15
 #define LINK_NO_FOLLOW -1
 
-/* For vfs_s_find_entry */
+/* For vfs_s_find_entry and vfs_s_find_inode */
 #define FL_NONE 0
 #define FL_MKDIR 1
 #define FL_MKFILE 2
