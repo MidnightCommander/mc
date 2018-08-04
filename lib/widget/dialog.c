@@ -1172,7 +1172,7 @@ dlg_run_done (WDialog * h)
 
     if (widget_get_state (WIDGET (h), WST_CLOSED))
     {
-        send_message (h, h->current->data, MSG_END, 0, NULL);
+        send_message (h, h->current == NULL ? NULL : WIDGET (h->current->data), MSG_END, 0, NULL);
         if (!widget_get_state (WIDGET (h), WST_MODAL))
             dialog_switch_remove (h);
     }
