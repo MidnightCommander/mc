@@ -1139,7 +1139,8 @@ dlg_init (WDialog * h)
     widget_set_state (wh, WST_ACTIVE, TRUE);
     dlg_redraw (h);
     /* focus found widget */
-    widget_set_state (WIDGET (h->current->data), WST_FOCUSED, TRUE);
+    if (h->current != NULL)
+        widget_set_state (WIDGET (h->current->data), WST_FOCUSED, TRUE);
 
     h->ret_value = 0;
 }
