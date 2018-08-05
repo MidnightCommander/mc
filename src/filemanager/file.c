@@ -1940,15 +1940,13 @@ operate_single_file (const WPanel * panel, FileOperation operation, file_op_tota
                 break;
 
             case OP_MOVE:
-                if (is_file)
-                {
 #ifdef ENABLE_BACKGROUND
-                    /* create UI to show confirmation dialog */
-                    if (!mc_global.we_are_background)
-                        file_op_context_create_ui (ctx, TRUE, FILEGUI_DIALOG_ONE_ITEM);
+                /* create UI to show confirmation dialog */
+                if (!mc_global.we_are_background)
+                    file_op_context_create_ui (ctx, TRUE, FILEGUI_DIALOG_ONE_ITEM);
 #endif
+                if (is_file)
                     value = move_file_file (panel, tctx, ctx, src, dest);
-                }
                 else
                     value = do_move_dir_dir (panel, tctx, ctx, src, dest);
                 break;
