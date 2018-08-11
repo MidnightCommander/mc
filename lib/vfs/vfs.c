@@ -45,6 +45,13 @@
 #include <errno.h>
 #include <stdlib.h>
 
+#ifdef __linux__
+#include <linux/fs.h>
+#ifdef HAVE_SYS_IOCTL_H
+#include <sys/ioctl.h>
+#endif /* HAVE_SYS_IOCTL_H */
+#endif /* __linux__ */
+
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
@@ -654,6 +661,40 @@ vfs_preallocate (int dest_vfs_fd, off_t src_fsize, off_t dest_fsize)
     return posix_fallocate (*(int *) dest_fd, dest_fsize, src_fsize - dest_fsize);
 
 #endif /* HAVE_POSIX_FALLOCATE */
+}
+
+ /* --------------------------------------------------------------------------------------------- */
+
+int
+vfs_clone_file (int dest_vfs_fd, int src_vfs_fd)
+{
+#ifdef FICLONE
+    void *dest_fd = NULL;
+    void *src_fd = NULL;
+    struct vfs_class *dest_class;
+    struct vfs_class *src_class;
+
+    dest_class = vfs_class_find_by_handle (dest_vfs_fd, &dest_fd);
+    if (dest_fd == NULL || (dest_class->flags & VFSF_LOCAL) == 0)
+    {
+        errno = EOPNOTSUPP;
+        return (-1);
+    }
+
+    src_class = vfs_class_find_by_handle (src_vfs_fd, &src_fd);
+    if (src_fd == NULL || (src_class->flags & VFSF_LOCAL) == 0)
+    {
+        errno = EOPNOTSUPP;
+        return (-1);
+    }
+
+    return ioctl (*(int *) dest_fd, FICLONE, *(int *) src_fd);
+#else
+    (void) dest_vfs_fd;
+    (void) src_vfs_fd;
+    errno = EOPNOTSUPP;
+    return (-1);
+#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
