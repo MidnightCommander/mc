@@ -675,16 +675,26 @@ vfs_clone_file (int dest_vfs_fd, int src_vfs_fd)
     struct vfs_class *src_class;
 
     dest_class = vfs_class_find_by_handle (dest_vfs_fd, &dest_fd);
-    if (dest_fd == NULL || (dest_class->flags & VFSF_LOCAL) == 0)
+    if ((dest_class->flags & VFSF_LOCAL) == 0)
     {
         errno = EOPNOTSUPP;
         return (-1);
     }
+    if (dest_fd == NULL)
+    {
+        errno = EBADF;
+        return (-1);
+    }
 
     src_class = vfs_class_find_by_handle (src_vfs_fd, &src_fd);
-    if (src_fd == NULL || (src_class->flags & VFSF_LOCAL) == 0)
+    if ((src_class->flags & VFSF_LOCAL) == 0)
     {
         errno = EOPNOTSUPP;
+        return (-1);
+    }
+    if (src_fd == NULL)
+    {
+        errno = EBADF;
         return (-1);
     }
 
