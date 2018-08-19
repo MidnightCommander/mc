@@ -25,9 +25,13 @@ staroffice_console() {
 }
 
 get_ooffice_executable() {
-    which loffice >/dev/null 2>&1 && \
-        echo "loffice" || \
+    if loffice >/dev/null 2>&1; then
+        echo "loffice"
+    elif ooffice >/dev/null 2>&1; then
         echo "ooffice"
+    else
+        echo -n
+    fi
 }
 
 do_view_action() {
@@ -116,7 +120,9 @@ do_open_action() {
     ooffice)
         if [ -n "$DISPLAY" ]; then
             OOFFICE=`get_ooffice_executable`
-            (${OOFFICE} "${MC_EXT_FILENAME}" &)
+            if [ -n "${OOFFICE}" ]; then
+                (${OOFFICE} "${MC_EXT_FILENAME}" &)
+            fi
         else
             if [ `echo "${MC_EXT_FILENAME}" | grep -c "${STAROFFICE_REGEXP}"` -ne 0 ]; then
                 staroffice_console "${MC_EXT_FILENAME}"
@@ -133,7 +139,12 @@ do_open_action() {
         ;;
     msdoc)
         if [ -n "$DISPLAY" ]; then
-            (abiword "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+            OOFFICE=`get_ooffice_executable`
+            if [ -n "${OOFFICE}" ]; then
+                (${OOFFICE} "${MC_EXT_FILENAME}" &)
+            else
+                (abiword "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+            fi
         else
             tmp=`mktemp -d ${TMPDIR:-/tmp}/%p.XXXXXX`
             wvHtml "${MC_EXT_FILENAME}" --targetdir="$tmp" page.html -1
@@ -143,7 +154,12 @@ do_open_action() {
         ;;
     msxls)
         if [ -n "$DISPLAY" ]; then
-            (gnumeric "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+            OOFFICE=`get_ooffice_executable`
+            if [ -n "${OOFFICE}" ]; then
+                (${OOFFICE} "${MC_EXT_FILENAME}" &)
+            else
+                (gnumeric "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+            fi
         else
             tmp=`mktemp -d ${TMPDIR:-/tmp}/%p.XXXXXX`
             xlhtml -a "${MC_EXT_FILENAME}" > "$tmp/page.html"
@@ -154,7 +170,9 @@ do_open_action() {
     msppt)
         if [ -n "$DISPLAY" ]; then
             OOFFICE=`get_ooffice_executable`
-            (${OOFFICE} "${MC_EXT_FILENAME}" >/dev/null 2>&1 &)
+            if [ -n "${OOFFICE}" ]; then
+                (${OOFFICE} "${MC_EXT_FILENAME}" &)
+            fi
         else
             tmp=`mktemp -d ${TMPDIR:-/tmp}/%p.XXXXXX`
             ppthtml "${MC_EXT_FILENAME}" > "$tmp/page.html"
