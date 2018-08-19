@@ -284,13 +284,11 @@ statvfs_works (void)
 #endif
 
 /* --------------------------------------------------------------------------------------------- */
+
 static gboolean
 filegui__check_attrs_on_fs (const char *fs_path)
 {
     STRUCT_STATVFS stfs;
-
-    if (!copymove_persistent_attr)
-        return FALSE;
 
 #if USE_STATVFS && defined(STAT_STATVFS)
     if (statvfs_works () && statvfs (fs_path, &stfs) != 0)
@@ -1181,7 +1179,7 @@ file_mask_dialog (file_op_context_t * ctx, FileOperation operation,
         return NULL;
 
     /* unselect checkbox if target filesystem doesn't support attributes */
-    ctx->op_preserve = filegui__check_attrs_on_fs (def_text);
+    ctx->op_preserve = copymove_persistent_attr && filegui__check_attrs_on_fs (def_text);
     ctx->stable_symlinks = FALSE;
     *do_bg = FALSE;
 
