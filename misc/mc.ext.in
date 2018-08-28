@@ -607,7 +607,7 @@ shell/i/.gnumeric
 	Open=@EXTHELPERSDIR@/doc.sh open gnumeric
 
 # Microsoft Word Document
-regex/i/\.(do[ct]|wri)$
+regex/i/\.(do[ct]|wri|docx)$
 	Open=@EXTHELPERSDIR@/doc.sh open msdoc
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view msdoc
 type/^Microsoft\ Word
@@ -626,12 +626,15 @@ type/^Microsoft\ Excel
 	Open=@EXTHELPERSDIR@/doc.sh open msxls
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view msxls
 
-regex/i/\.(ppt|pps)$
+# Microsoft PowerPoint Presentation
+regex/i/\.(pp[ts]|pptx)$
 	Open=@EXTHELPERSDIR@/doc.sh open msppt
 	View=%view{ascii} @EXTHELPERSDIR@/doc.sh view msppt
 
-# Use OpenOffice.org to open any MS Office documents
+# Use OpenOffice.org/LibreOffice to open any MS Office documents
 type/^Microsoft\ Office\ Document
+	Open=@EXTHELPERSDIR@/doc.sh open ooffice
+type/^Microsoft\ OOXML
 	Open=@EXTHELPERSDIR@/doc.sh open ooffice
 
 # Framemaker
