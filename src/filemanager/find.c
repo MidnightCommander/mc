@@ -1501,6 +1501,35 @@ find_calc_button_locations (const WDialog * h, gboolean all_buttons)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
+find_adjust_header (WDialog * h)
+{
+    char title[BUF_MEDIUM];
+    int title_len;
+
+    if (content_pattern != NULL)
+        g_snprintf (title, sizeof (title), _("Find File: \"%s\". Content: \"%s\""), find_pattern,
+                    content_pattern);
+    else
+        g_snprintf (title, sizeof (title), _("Find File: \"%s\""), find_pattern);
+
+    title_len = str_term_width1 (title);
+    if (title_len > WIDGET (h)->cols - 6)
+    {
+        /* title is too wide, truncate it */
+        title_len = WIDGET (h)->cols - 6;
+        title_len = str_column_to_pos (title, title_len);
+        title_len -= 3;         /* reserve space for three dots */
+        title_len = str_offset_to_pos (title, title_len);
+        /* mark that title is truncated */
+        memmove (title + title_len, "...", 4);
+    }
+
+    dlg_set_title (h, title);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
 find_relocate_buttons (const WDialog * h, gboolean all_buttons)
 {
     size_t i;
@@ -1520,6 +1549,10 @@ find_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
 
     switch (msg)
     {
+    case MSG_INIT:
+        find_adjust_header (h);
+        return MSG_HANDLED;
+
     case MSG_KEY:
         if (parm == KEY_F (3) || parm == KEY_F (13))
         {
@@ -1533,6 +1566,7 @@ find_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
 
     case MSG_RESIZE:
         dlg_set_size (h, LINES - 4, COLS - 16);
+        find_adjust_header (h);
         find_relocate_buttons (h, TRUE);
         return MSG_HANDLED;
 
@@ -1625,7 +1659,7 @@ setup_gui (void)
 
     find_dlg =
         dlg_create (TRUE, 0, 0, lines, cols, WPOS_CENTER, FALSE, dialog_colors, find_callback, NULL,
-                    "[Find File]", _("Find File"));
+                    "[Find File]", NULL);
 
     find_calc_button_locations (find_dlg, TRUE);
 
