@@ -815,8 +815,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
             g_free (options.ignore_dirs);
             options.ignore_dirs = g_strdup (in_ignore->buffer);
 
-            content_is_empty = in_with->buffer[0] == '\0';
-            *content = content_is_empty ? NULL : g_strdup (in_with->buffer);
+            *content = in_with->buffer[0] != '\0' ? g_strdup (in_with->buffer) : NULL;
             if (in_name->buffer[0] != '\0')
                 *pattern = g_strdup (in_name->buffer);
             else
@@ -1717,19 +1716,12 @@ kill_gui (void)
 
 static int
 do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
-         const char *pattern, const char *content, char **dirname, char **filename)
+         char **dirname, char **filename)
 {
     int return_value = 0;
     char *dir_tmp = NULL, *file_tmp = NULL;
 
     setup_gui ();
-
-    /* FIXME: Need to cleanup this, this ought to be passed non-globaly */
-    find_pattern = (char *) pattern;
-
-    content_pattern = NULL;
-    if (content != NULL && str_is_valid_string (content))
-        content_pattern = g_strdup (content);
 
     init_find_vars ();
     parse_ignore_dirs (ignore_dirs);
@@ -1770,7 +1762,7 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
             if ((le->text == NULL) || (location == NULL) || (location->dir == NULL))
                 continue;
 
-            if (content_pattern != NULL)
+            if (!content_is_empty)
                 lc_filename = strchr (le->text + 4, ':') + 1;
             else
                 lc_filename = le->text + 4;
@@ -1799,7 +1791,7 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
             }
 
             /* don't add files more than once to the panel */
-            if (content_pattern != NULL && list->len != 0
+            if (!content_is_empty && list->len != 0
                 && strcmp (list->list[list->len - 1].fname, p) == 0)
             {
                 g_free (name);
@@ -1826,7 +1818,6 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
         panelize_save_panel (current_panel);
     }
 
-    g_free (content_pattern);
     kill_gui ();
     do_search (NULL);           /* force do_search to release resources */
     MC_PTR_FREE (old_dir);
@@ -1842,27 +1833,36 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
 void
 find_file (void)
 {
-    char *start_dir = NULL, *pattern = NULL, *content = NULL, *ignore_dirs = NULL;
+    char *start_dir = NULL, *ignore_dirs = NULL;
     ssize_t start_dir_len;
 
-    while (find_parameters (&start_dir, &start_dir_len, &ignore_dirs, &pattern, &content))
+    find_pattern = NULL;
+    content_pattern = NULL;
+
+    while (find_parameters (&start_dir, &start_dir_len,
+                            &ignore_dirs, &find_pattern, &content_pattern))
     {
         char *filename = NULL, *dirname = NULL;
         int v = B_CANCEL;
 
-        if (pattern[0] != '\0')
+        content_is_empty = content_pattern == NULL;
+
+        if (find_pattern[0] != '\0')
         {
             last_refresh.tv_sec = 0;
             last_refresh.tv_usec = 0;
 
             is_start = FALSE;
-            v = do_find (start_dir, start_dir_len, ignore_dirs, pattern, content, &dirname,
-                         &filename);
+
+            if (!content_is_empty && !str_is_valid_string (content_pattern))
+                MC_PTR_FREE (content_pattern);
+
+            v = do_find (start_dir, start_dir_len, ignore_dirs, &dirname, &filename);
         }
 
         g_free (start_dir);
         g_free (ignore_dirs);
-        g_free (pattern);
+        MC_PTR_FREE (find_pattern);
 
         if (v == B_ENTER)
         {
@@ -1875,7 +1875,7 @@ find_file (void)
                 vfs_path_free (dirname_vpath);
                 if (filename != NULL)
                     try_to_select (current_panel,
-                                   filename + (content != NULL
+                                   filename + (content_pattern != NULL
                                                ? strchr (filename + 4, ':') - filename + 1 : 4));
             }
             else if (filename != NULL)
@@ -1888,7 +1888,7 @@ find_file (void)
             }
         }
 
-        g_free (content);
+        MC_PTR_FREE (content_pattern);
         g_free (dirname);
         g_free (filename);
 
