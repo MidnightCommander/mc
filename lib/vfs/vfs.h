@@ -287,6 +287,8 @@ char *_vfs_get_cwd (void);
 
 int vfs_preallocate (int dest_desc, off_t src_fsize, off_t dest_fsize);
 
+int vfs_clone_file (int dest_vfs_fd, int src_vfs_fd);
+
 /**
  * Interface functions described in interface.c
  */

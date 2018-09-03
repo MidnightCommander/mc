@@ -304,6 +304,12 @@ AC_EGREP_CPP([yes],
         AC_MSG_RESULT(no)
     ])
 
+dnl Check linux/fs.h for FICLONE to support BTRFS's file clone operation
+case $host_os in
+linux*)
+    AC_CHECK_HEADERS([linux/fs.h])
+esac
+
 dnl Check if the OS is supported by the console saver.
 cons_saver=""
 case $host_os in
