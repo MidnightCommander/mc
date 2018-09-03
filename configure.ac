@@ -233,9 +233,6 @@ AC_CHECK_FUNCS([\
 	realpath
 ])
 
-dnl utimensat is supported since glibc 2.6 and specified in POSIX.1-2008
-AC_CHECK_FUNCS([utimensat])
-
 dnl getpt is a GNU Extension (glibc 2.1.x)
 AC_CHECK_FUNCS(posix_openpt, , [AC_CHECK_FUNCS(getpt)])
 AC_CHECK_FUNCS(grantpt, , [AC_CHECK_LIB(pt, grantpt)])
@@ -303,6 +300,16 @@ AC_EGREP_CPP([yes],
     [
         AC_MSG_RESULT(no)
     ])
+
+dnl utimensat is supported since glibc 2.6 and specified in POSIX.1-2008
+dnl utimensat() causes different timespec structures to cause failures on IBM i
+case $host_os in
+*os400)
+    ;;
+*)
+    AC_CHECK_FUNCS([utimensat])
+    ;;
+esac
 
 dnl Check linux/fs.h for FICLONE to support BTRFS's file clone operation
 case $host_os in
