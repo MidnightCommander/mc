@@ -152,6 +152,7 @@ static char *find_pattern = NULL;       /* Pattern to search */
 static char *content_pattern = NULL;    /* pattern to search inside files; if
                                            content_regexp_flag is true, it contains the
                                            regex pattern, else the search string. */
+static gboolean content_is_empty = TRUE;        /* remember content field state; initially is empty */
 static unsigned long matches;   /* Number of matches */
 static gboolean is_start = FALSE;       /* Status of the start/stop toggle button */
 static char *old_dir = NULL;
@@ -447,15 +448,13 @@ find_toggle_enable_params (void)
 static void
 find_toggle_enable_content (void)
 {
-    gboolean disable = in_with->buffer[0] == '\0';
-
-    widget_disable (WIDGET (content_regexp_cbox), disable);
-    widget_disable (WIDGET (content_case_sens_cbox), disable);
+    widget_disable (WIDGET (content_regexp_cbox), content_is_empty);
+    widget_disable (WIDGET (content_case_sens_cbox), content_is_empty);
 #ifdef HAVE_CHARSET
-    widget_disable (WIDGET (content_all_charsets_cbox), disable);
+    widget_disable (WIDGET (content_all_charsets_cbox), content_is_empty);
 #endif
-    widget_disable (WIDGET (content_whole_words_cbox), disable);
-    widget_disable (WIDGET (content_first_hit_cbox), disable);
+    widget_disable (WIDGET (content_whole_words_cbox), content_is_empty);
+    widget_disable (WIDGET (content_first_hit_cbox), content_is_empty);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -512,8 +511,7 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         }
 
         /* check content regexp */
-        if (content_regexp_cbox->state && (in_with->buffer[0] != '\0')
-            && !find_check_regexp (in_with->buffer))
+        if (content_regexp_cbox->state && !content_is_empty && !find_check_regexp (in_with->buffer))
         {
             /* Don't stop the dialog */
             widget_set_state (WIDGET (h), WST_ACTIVE, TRUE);
@@ -528,7 +526,10 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         if (h->current->data == in_name)
             find_toggle_enable_params ();
         else if (h->current->data == in_with)
+        {
+            content_is_empty = in_with->buffer[0] == '\0';
             find_toggle_enable_content ();
+        }
         return MSG_HANDLED;
 
     case MSG_DRAW:
@@ -709,7 +710,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
     content_label = label_new (y2++, x2, content_content_label);
     add_widget (find_dlg, content_label);
     in_with =
-        input_new (y2++, x2, input_colors, cw, INPUT_LAST_TEXT,
+        input_new (y2++, x2, input_colors, cw, content_is_empty ? "" : INPUT_LAST_TEXT,
                    MC_HISTORY_SHARED_SEARCH, INPUT_COMPLETE_NONE);
     in_with->label = content_label;
     add_widget (find_dlg, in_with);
@@ -814,7 +815,8 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
             g_free (options.ignore_dirs);
             options.ignore_dirs = g_strdup (in_ignore->buffer);
 
-            *content = in_with->buffer[0] != '\0' ? g_strdup (in_with->buffer) : NULL;
+            content_is_empty = in_with->buffer[0] == '\0';
+            *content = content_is_empty ? NULL : g_strdup (in_with->buffer);
             if (in_name->buffer[0] != '\0')
                 *pattern = g_strdup (in_name->buffer);
             else
