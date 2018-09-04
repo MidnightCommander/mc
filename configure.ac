@@ -57,9 +57,7 @@ dnl ############################################################################
 PKG_PROG_PKG_CONFIG
 AC_PROG_INSTALL
 AC_PROG_LN_S
-AC_PATH_PROG([PERL], [perl], [/usr/bin/perl])
-AC_PATH_PROG([PYTHON], [python], [/usr/bin/python])
-AC_PATH_PROG([RUBY], [ruby], [/usr/bin/ruby])
+dnl See also the "OS specific stuff" section below.
 
 dnl Check nroff and the options it supports
 AC_CHECK_PROG(HAVE_nroff, nroff, true, false)
@@ -274,8 +272,20 @@ AM_GNU_GETTEXT_VERSION([0.18.1])
 mc_I18N
 
 dnl ############################################################################
-dnl OS specific flags
+dnl OS specific stuff
 dnl ############################################################################
+
+case $host_os in
+*os400)
+    AC_PATH_PROG([PERL], [perl], [/QOpenSys/pkgs/bin/perl])
+    AC_PATH_PROG([PYTHON], [python], [/QOpenSys/pkgs/bin/python2])
+    AC_PATH_PROG([RUBY], [ruby], [/QOpenSys/pkgs/bin/ruby])
+    ;;
+*)
+    AC_PATH_PROG([PERL], [perl], [/usr/bin/perl])
+    AC_PATH_PROG([PYTHON], [python], [/usr/bin/python])
+    AC_PATH_PROG([RUBY], [ruby], [/usr/bin/ruby])
+esac
 
 case $host_os in
 aux*)
