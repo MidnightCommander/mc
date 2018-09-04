@@ -558,9 +558,14 @@ feed_subshell (int how, gboolean fail_on_error)
 
             if (bytes <= 0)
             {
+#ifdef PTY_ZEROREAD
+                /* On IBM i, read(1) can return 0 for a non-closed fd */
+                continue;
+#else
                 tcsetattr (STDOUT_FILENO, TCSANOW, &shell_mode);
                 fprintf (stderr, "read (subshell_pty...): %s\r\n", unix_error_string (errno));
                 exit (EXIT_FAILURE);
+#endif
             }
 
             if (how == VISIBLY)

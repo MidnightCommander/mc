@@ -321,6 +321,11 @@ case $host_os in
     ;;
 esac
 
+case $host_os in
+*os400)
+    AC_DEFINE([PTY_ZEROREAD], [1], [read(1) can return 0 for a non-closed fd])
+esac
+
 dnl Check linux/fs.h for FICLONE to support BTRFS's file clone operation
 case $host_os in
 linux*)
