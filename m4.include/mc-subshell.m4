@@ -24,6 +24,15 @@ AC_DEFUN([mc_SUBSHELL], [
 
     if test "x$result" != xno; then
         AC_DEFINE(ENABLE_SUBSHELL, 1, [Define to enable subshell support])
+
+        dnl openpty() can simplify opening of master/slave devices for subshell
+        AC_CHECK_HEADERS([pty.h libutil.h util.h])
+        AC_CHECK_FUNCS(openpty,,
+            AC_CHECK_LIB(util,openpty,
+                [AC_DEFINE(HAVE_OPENPTY)
+                    LIBS="$LIBS -lutil"]
+            )
+        )
     fi
 
     AC_MSG_RESULT([$result])

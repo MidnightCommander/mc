@@ -74,6 +74,20 @@
 #include <stropts.h>            /* For I_PUSH */
 #endif /* HAVE_STROPTS_H */
 
+#ifdef HAVE_OPENPTY
+/* includes for openpty() */
+#if HAVE_PTY_H
+#include <pty.h>
+#endif
+#if HAVE_UTIL_H
+#include <util.h>
+#endif
+/* <sys/types.h> is a prerequisite of <libutil.h> on FreeBSD 8.0.  */
+#if HAVE_LIBUTIL_H
+#include <libutil.h>
+#endif
+#endif /* HAVE_OPENPTY */
+
 #include "lib/global.h"
 
 #include "lib/unixcompat.h"
@@ -1026,6 +1040,15 @@ init_subshell (void)
 
         /* FIXME: We may need to open a fresh pty each time on SVR4 */
 
+#ifdef HAVE_OPENPTY
+        if (openpty (&mc_global.tty.subshell_pty, &subshell_pty_slave, NULL, NULL, NULL))
+        {
+            fprintf (stderr, "Cannot open master and slave sides of pty: %s\n",
+                     unix_error_string (errno));
+            mc_global.tty.use_subshell = FALSE;
+            return;
+        }
+#else
         mc_global.tty.subshell_pty = pty_open_master (pty_name);
         if (mc_global.tty.subshell_pty == -1)
         {
@@ -1041,6 +1064,7 @@ init_subshell (void)
             mc_global.tty.use_subshell = FALSE;
             return;
         }
+#endif /* HAVE_OPENPTY */
 
         /* Create a pipe for receiving the subshell's CWD */
 
