@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"POT-Creation-Date: 2018-09-09 19:12+0300\n"
 "PO-Revision-Date: 2018-04-30 12:37+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/mc/mc/language/sk/)\n"
@@ -3023,6 +3023,14 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
+
+#, c-format
+msgid "Find File: \"%s\". Content: \"%s\""
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Find File: \"%s\""
+msgstr "Nájsť súbor"
 
 msgid "Searching"
 msgstr "Hľadá sa"

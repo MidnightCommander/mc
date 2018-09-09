@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"POT-Creation-Date: 2018-09-09 19:12+0300\n"
 "PO-Revision-Date: 2018-05-21 16:57+0000\n"
 "Last-Translator: Zmicer Turok <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/mc/mc/language/be/)\n"
@@ -3030,6 +3030,14 @@ msgstr[0] "Завершана (мінуты %zu каталог)"
 msgstr[1] "Завершана (мінута %zu каталогі)"
 msgstr[2] "Завершана (мінута %zu каталогаў)"
 msgstr[3] "Завершана (мінута %zu каталогаў)"
+
+#, c-format
+msgid "Find File: \"%s\". Content: \"%s\""
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Find File: \"%s\""
+msgstr "Шукаць файл"
 
 msgid "Searching"
 msgstr "Пошук"

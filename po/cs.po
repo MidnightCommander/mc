@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"POT-Creation-Date: 2018-09-09 19:12+0300\n"
 "PO-Revision-Date: 2018-05-22 14:53+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/mc/mc/language/cs/)\n"
@@ -3035,6 +3035,14 @@ msgstr[0] "Dokončeno (ignorován %zu adresář)"
 msgstr[1] "Dokončeno (ignorovány %zu adresáře)"
 msgstr[2] "Dokončeno (ignorováno %zu složek)"
 msgstr[3] "Dokončeno (ignorováno %zu složek)"
+
+#, c-format
+msgid "Find File: \"%s\". Content: \"%s\""
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Find File: \"%s\""
+msgstr "Najít soubor"
 
 msgid "Searching"
 msgstr "Hledá se"

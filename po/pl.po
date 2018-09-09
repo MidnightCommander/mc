@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"POT-Creation-Date: 2018-09-09 19:12+0300\n"
 "PO-Revision-Date: 2018-05-01 15:44+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/mc/mc/language/pl/)\n"
@@ -3036,6 +3036,14 @@ msgstr[0] "Ukończono (zignorowano %zu katalog)"
 msgstr[1] "Ukończono (zignorowano %zu katalogi)"
 msgstr[2] "Ukończono (zignorowano %zu katalogów)"
 msgstr[3] "Ukończono (zignorowano %zu katalogów)"
+
+#, c-format
+msgid "Find File: \"%s\". Content: \"%s\""
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Find File: \"%s\""
+msgstr "Znajdź plik"
 
 msgid "Searching"
 msgstr "Wyszukiwanie"
