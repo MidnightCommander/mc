@@ -57,9 +57,7 @@ dnl ############################################################################
 PKG_PROG_PKG_CONFIG
 AC_PROG_INSTALL
 AC_PROG_LN_S
-AC_PATH_PROG([PERL], [perl], [/usr/bin/perl])
-AC_PATH_PROG([PYTHON], [python], [/usr/bin/python])
-AC_PATH_PROG([RUBY], [ruby], [/usr/bin/ruby])
+dnl See also the "OS specific stuff" section below.
 
 dnl Check nroff and the options it supports
 AC_CHECK_PROG(HAVE_nroff, nroff, true, false)
@@ -233,9 +231,6 @@ AC_CHECK_FUNCS([\
 	realpath
 ])
 
-dnl utimensat is supported since glibc 2.6 and specified in POSIX.1-2008
-AC_CHECK_FUNCS([utimensat])
-
 dnl getpt is a GNU Extension (glibc 2.1.x)
 AC_CHECK_FUNCS(posix_openpt, , [AC_CHECK_FUNCS(getpt)])
 AC_CHECK_FUNCS(grantpt, , [AC_CHECK_LIB(pt, grantpt)])
@@ -277,8 +272,20 @@ AM_GNU_GETTEXT_VERSION([0.18.1])
 mc_I18N
 
 dnl ############################################################################
-dnl OS specific flags
+dnl OS specific stuff
 dnl ############################################################################
+
+case $host_os in
+*os400)
+    AC_PATH_PROG([PERL], [perl], [/QOpenSys/pkgs/bin/perl])
+    AC_PATH_PROG([PYTHON], [python], [/QOpenSys/pkgs/bin/python2])
+    AC_PATH_PROG([RUBY], [ruby], [/QOpenSys/pkgs/bin/ruby])
+    ;;
+*)
+    AC_PATH_PROG([PERL], [perl], [/usr/bin/perl])
+    AC_PATH_PROG([PYTHON], [python], [/usr/bin/python])
+    AC_PATH_PROG([RUBY], [ruby], [/usr/bin/ruby])
+esac
 
 case $host_os in
 aux*)
@@ -303,6 +310,21 @@ AC_EGREP_CPP([yes],
     [
         AC_MSG_RESULT(no)
     ])
+
+dnl utimensat is supported since glibc 2.6 and specified in POSIX.1-2008
+dnl utimensat() causes different timespec structures to cause failures on IBM i
+case $host_os in
+*os400)
+    ;;
+*)
+    AC_CHECK_FUNCS([utimensat])
+    ;;
+esac
+
+case $host_os in
+*os400)
+    AC_DEFINE([PTY_ZEROREAD], [1], [read(1) can return 0 for a non-closed fd])
+esac
 
 dnl Check linux/fs.h for FICLONE to support BTRFS's file clone operation
 case $host_os in
