@@ -117,7 +117,7 @@ sftpfs_op_init (sftpfs_super_data_t ** super_data, const vfs_path_element_t ** p
     if (super == NULL)
         return FALSE;
 
-    *super_data = (sftpfs_super_data_t *) super->data;
+    *super_data = SUP;
 
     if ((*super_data)->sftp_session == NULL)
         return FALSE;

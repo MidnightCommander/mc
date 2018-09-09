@@ -117,12 +117,15 @@ int fish_directory_timeout = 900;
 #define FISH_HAVE_DATE_MDYT   32
 #define FISH_HAVE_TAIL        64
 
-#define SUP ((fish_super_data_t *) super->data)
+#define SUP ((fish_super_data_t *) super)
+#define FISH_FH ((fish_fh_data_t *) fh)
 
 /*** file scope type declarations ****************************************************************/
 
 typedef struct
 {
+    struct vfs_s_super base;    /* base class */
+
     int sockr;
     int sockw;
     char *scr_ls;
@@ -146,6 +149,8 @@ typedef struct
 
 typedef struct
 {
+    vfs_file_handler_t base;    /* base class */
+
     off_t got;
     off_t total;
     gboolean append;
@@ -155,7 +160,8 @@ typedef struct
 
 static char reply_str[80];
 
-static struct vfs_class vfs_fish_ops;
+static struct vfs_s_subclass fish_subclass;
+static struct vfs_class *vfs_fish_ops = (struct vfs_class *) &fish_subclass;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -343,7 +349,7 @@ fish_send_command (struct vfs_class *me, struct vfs_s_super *super, int flags, c
     va_start (ap, vars);
     r = fish_command_va (me, super, WAIT_REPLY, scr, vars, ap);
     va_end (ap);
-    vfs_stamp_create (&vfs_fish_ops, super);
+    vfs_stamp_create (vfs_fish_ops, super);
 
     if (r != COMPLETE)
         ERRNOR (E_REMOTE, -1);
@@ -351,6 +357,19 @@ fish_send_command (struct vfs_class *me, struct vfs_s_super *super, int flags, c
         vfs_s_invalidate (me, super);
 
     return 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static struct vfs_s_super *
+fish_new_archive (struct vfs_class *me)
+{
+    fish_super_data_t *arch;
+
+    arch = g_new0 (fish_super_data_t, 1);
+    arch->base.me = me;
+
+    return VFS_SUPER (arch);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -382,8 +401,6 @@ fish_free_archive (struct vfs_class *me, struct vfs_s_super *super)
     g_free (SUP->scr_append);
     g_free (SUP->scr_info);
     g_free (SUP->scr_env);
-    g_free (SUP);
-    super->data = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -646,7 +663,6 @@ fish_open_archive (struct vfs_s_super *super,
 {
     (void) vpath;
 
-    super->data = g_new0 (fish_super_data_t, 1);
     super->path_element = vfs_path_element_clone (vpath_element);
 
     if (strncmp (vpath_element->vfs_prefix, "rsh", 3) == 0)
@@ -944,7 +960,7 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 static int
 fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char *localname)
 {
-    fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
+    fish_fh_data_t *fish = FISH_FH;
     struct vfs_s_super *super = FH_SUPER;
     int code;
     off_t total = 0;
@@ -1053,15 +1069,10 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
 static int
 fish_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
 {
-    fish_fh_data_t *fish;
+    fish_fh_data_t *fish = FISH_FH;
     struct vfs_s_super *super = FH_SUPER;
     char *name;
     char *quoted_name;
-
-    if (fh->data == NULL)
-        fh->data = g_new0 (fish_fh_data_t, 1);
-
-    fish = (fish_fh_data_t *) fh->data;
 
     name = vfs_s_fullpath (me, fh->ino);
     if (name == NULL)
@@ -1103,7 +1114,7 @@ fish_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
 static void
 fish_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
 {
-    fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
+    fish_fh_data_t *fish = FISH_FH;
     struct vfs_s_super *super = FH_SUPER;
     char buffer[BUF_8K];
     ssize_t n;
@@ -1134,7 +1145,7 @@ fish_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
 static ssize_t
 fish_linear_read (struct vfs_class *me, vfs_file_handler_t * fh, void *buf, size_t len)
 {
-    fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
+    fish_fh_data_t *fish = FISH_FH;
     struct vfs_s_super *super = FH_SUPER;
     ssize_t n = 0;
 
@@ -1162,7 +1173,7 @@ fish_linear_read (struct vfs_class *me, vfs_file_handler_t * fh, void *buf, size
 static void
 fish_linear_close (struct vfs_class *me, vfs_file_handler_t * fh)
 {
-    fish_fh_data_t *fish = (fish_fh_data_t *) fh->data;
+    fish_fh_data_t *fish = FISH_FH;
 
     if (fish->total != fish->got)
         fish_linear_abort (me, fh);
@@ -1357,7 +1368,8 @@ fish_chmod (const vfs_path_t * vpath, mode_t mode)
 
     ret =
         fish_send_command (path_element->class, super, OPT_FLUSH, SUP->scr_chmod,
-                           "FISH_FILENAME=%s FISH_FILEMODE=%4.4o;\n", rpath, (int) (mode & 07777));
+                           "FISH_FILENAME=%s FISH_FILEMODE=%4.4o;\n", rpath,
+                           (unsigned int) (mode & 07777));
 
     g_free (rpath);
 
@@ -1612,11 +1624,15 @@ fish_rmdir (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-fish_fh_free_data (vfs_file_handler_t * fh)
+static vfs_file_handler_t *
+fish_fh_new (struct vfs_s_inode *ino, gboolean changed)
 {
-    if (fh != NULL)
-        MC_PTR_FREE (fh->data);
+    fish_fh_data_t *fh;
+
+    fh = g_new0 (fish_fh_data_t, 1);
+    vfs_s_init_fh ((vfs_file_handler_t *) fh, ino, changed);
+
+    return FH;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1624,12 +1640,9 @@ fish_fh_free_data (vfs_file_handler_t * fh)
 static int
 fish_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mode)
 {
-    fish_fh_data_t *fish;
+    fish_fh_data_t *fish = FISH_FH;
 
     (void) mode;
-
-    fh->data = g_new0 (fish_fh_data_t, 1);
-    fish = (fish_fh_data_t *) fh->data;
 
     /* File will be written only, so no need to retrieve it */
     if (((flags & O_WRONLY) == O_WRONLY) && ((flags & (O_RDONLY | O_RDWR)) == 0))
@@ -1662,7 +1675,6 @@ fish_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t m
     return 0;
 
   fail:
-    fish_fh_free_data (fh);
     return -1;
 }
 
@@ -1699,7 +1711,7 @@ fish_fill_names (struct vfs_class *me, fill_names_f func)
         }
 
         name =
-            g_strconcat (vfs_fish_ops.prefix, VFS_PATH_URL_DELIMITER,
+            g_strconcat (vfs_fish_ops->prefix, VFS_PATH_URL_DELIMITER,
                          super->path_element->user, "@", super->path_element->host, flags,
                          PATH_SEP_STR, super->path_element->path, (char *) NULL);
         func (name);
@@ -1727,41 +1739,40 @@ fish_open (const vfs_path_t * vpath, int flags, mode_t mode)
 void
 init_fish (void)
 {
-    static struct vfs_s_subclass fish_subclass;
-
     tcp_init ();
 
     fish_subclass.flags = VFS_S_REMOTE | VFS_S_USETMP;
     fish_subclass.archive_same = fish_archive_same;
+    fish_subclass.new_archive = fish_new_archive;
     fish_subclass.open_archive = fish_open_archive;
     fish_subclass.free_archive = fish_free_archive;
+    fish_subclass.fh_new = fish_fh_new;
     fish_subclass.fh_open = fish_fh_open;
-    fish_subclass.fh_free_data = fish_fh_free_data;
     fish_subclass.dir_load = fish_dir_load;
     fish_subclass.file_store = fish_file_store;
     fish_subclass.linear_start = fish_linear_start;
     fish_subclass.linear_read = fish_linear_read;
     fish_subclass.linear_close = fish_linear_close;
 
-    vfs_s_init_class (&vfs_fish_ops, &fish_subclass);
-    vfs_fish_ops.name = "fish";
-    vfs_fish_ops.prefix = "sh";
-    vfs_fish_ops.fill_names = fish_fill_names;
-    vfs_fish_ops.stat = fish_stat;
-    vfs_fish_ops.lstat = fish_lstat;
-    vfs_fish_ops.fstat = fish_fstat;
-    vfs_fish_ops.chmod = fish_chmod;
-    vfs_fish_ops.chown = fish_chown;
-    vfs_fish_ops.utime = fish_utime;
-    vfs_fish_ops.open = fish_open;
-    vfs_fish_ops.symlink = fish_symlink;
-    vfs_fish_ops.link = fish_link;
-    vfs_fish_ops.unlink = fish_unlink;
-    vfs_fish_ops.rename = fish_rename;
-    vfs_fish_ops.mkdir = fish_mkdir;
-    vfs_fish_ops.rmdir = fish_rmdir;
-    vfs_fish_ops.ctl = fish_ctl;
-    vfs_register_class (&vfs_fish_ops);
+    vfs_s_init_class (&fish_subclass);
+    vfs_fish_ops->name = "fish";
+    vfs_fish_ops->prefix = "sh";
+    vfs_fish_ops->fill_names = fish_fill_names;
+    vfs_fish_ops->stat = fish_stat;
+    vfs_fish_ops->lstat = fish_lstat;
+    vfs_fish_ops->fstat = fish_fstat;
+    vfs_fish_ops->chmod = fish_chmod;
+    vfs_fish_ops->chown = fish_chown;
+    vfs_fish_ops->utime = fish_utime;
+    vfs_fish_ops->open = fish_open;
+    vfs_fish_ops->symlink = fish_symlink;
+    vfs_fish_ops->link = fish_link;
+    vfs_fish_ops->unlink = fish_unlink;
+    vfs_fish_ops->rename = fish_rename;
+    vfs_fish_ops->mkdir = fish_mkdir;
+    vfs_fish_ops->rmdir = fish_rmdir;
+    vfs_fish_ops->ctl = fish_ctl;
+    vfs_register_class (vfs_fish_ops);
 }
 
 /* --------------------------------------------------------------------------------------------- */

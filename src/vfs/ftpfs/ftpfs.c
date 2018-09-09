@@ -153,8 +153,9 @@ gboolean ftpfs_ignore_chattr_errors = TRUE;
 #define MAXHOSTNAMELEN 64
 #endif
 
-#define SUP ((ftp_super_data_t *) super->data)
-#define FH_SOCK ((ftp_fh_data_t *) fh->data)->sock
+#define SUP ((ftp_super_data_t *) super)
+#define FTP_FH ((ftp_fh_data_t *) fh)
+#define FH_SOCK FTP_FH->sock
 
 #ifndef INADDR_NONE
 #define INADDR_NONE 0xffffffff
@@ -203,6 +204,8 @@ typedef enum
 
 typedef struct
 {
+    struct vfs_s_super base;    /* base class */
+
     int sock;
 
     char *proxy;                /* proxy server, NULL if no proxy */
@@ -222,6 +225,8 @@ typedef struct
 
 typedef struct
 {
+    vfs_file_handler_t base;    /* base class */
+
     int sock;
     int append;
 } ftp_fh_data_t;
@@ -237,7 +242,8 @@ static struct linklist *connections_list;
 
 static char reply_str[80];
 
-static struct vfs_class vfs_ftpfs_ops;
+static struct vfs_s_subclass ftpfs_subclass;
+static struct vfs_class *vfs_ftpfs_ops = (struct vfs_class *) &ftpfs_subclass;
 
 static GSList *no_proxy;
 
@@ -558,6 +564,24 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
 
 /* --------------------------------------------------------------------------------------------- */
 
+static struct vfs_s_super *
+ftpfs_new_archive (struct vfs_class *me)
+{
+    ftp_super_data_t *arch;
+
+    arch = g_new0 (ftp_super_data_t, 1);
+    arch->base.me = me;
+    arch->base.name = g_strdup (PATH_SEP_STR);
+    arch->sock = -1;
+    arch->use_passive_connection = ftpfs_use_passive_connections;
+    arch->strict = ftpfs_use_unix_list_options ? RFC_AUTODETECT : RFC_STRICT;
+    arch->isbinary = TYPE_UNKNOWN;
+
+    return VFS_SUPER (arch);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 ftpfs_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 {
@@ -568,7 +592,6 @@ ftpfs_free_archive (struct vfs_class *me, struct vfs_s_super *super)
         close (SUP->sock);
     }
     g_free (SUP->current_dir);
-    MC_PTR_FREE (super->data);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -998,18 +1021,9 @@ ftpfs_open_archive (struct vfs_s_super *super,
 {
     (void) vpath;
 
-    super->data = g_new0 (ftp_super_data_t, 1);
-
     super->path_element = ftpfs_correct_url_parameters (vpath_element);
-    SUP->proxy = NULL;
     if (ftpfs_check_proxy (super->path_element->host))
         SUP->proxy = ftpfs_proxy_host;
-    SUP->use_passive_connection = ftpfs_use_passive_connections;
-    SUP->strict = ftpfs_use_unix_list_options ? RFC_AUTODETECT : RFC_STRICT;
-    SUP->isbinary = TYPE_UNKNOWN;
-    SUP->remote_is_amiga = 0;
-    SUP->ctl_connection_busy = 0;
-    super->name = g_strdup (PATH_SEP_STR);
     super->root =
         vfs_s_new_inode (vpath_element->class, super, ftpfs_default_stat (vpath_element->class));
 
@@ -1839,7 +1853,7 @@ ftpfs_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, cha
     struct stat s;
     char *w_buf;
     struct vfs_s_super *super = FH_SUPER;
-    ftp_fh_data_t *ftp = (ftp_fh_data_t *) fh->data;
+    ftp_fh_data_t *ftp = FTP_FH;
 
     h = open (localname, O_RDONLY);
     if (h == -1)
@@ -1923,9 +1937,6 @@ ftpfs_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
 {
     char *name;
 
-    if (fh->data == NULL)
-        fh->data = g_new0 (ftp_fh_data_t, 1);
-
     name = vfs_s_fullpath (me, fh->ino);
     if (name == NULL)
         return 0;
@@ -1934,7 +1945,7 @@ ftpfs_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
     if (FH_SOCK == -1)
         ERRNOR (EACCES, 0);
     fh->linear = LS_LINEAR_OPEN;
-    ((ftp_fh_data_t *) fh->data)->append = 0;
+    FTP_FH->append = 0;
     return 1;
 }
 
@@ -1995,7 +2006,7 @@ ftpfs_ctl (void *fh, int ctlop, void *arg)
             if (FH->linear == LS_LINEAR_CLOSED || FH->linear == LS_LINEAR_PREOPEN)
                 return 0;
 
-            v = vfs_s_select_on_two (((ftp_fh_data_t *) (FH->data))->sock, 0);
+            v = vfs_s_select_on_two (FH_SOCK, 0);
             return (((v < 0) && (errno == EINTR)) || v == 0) ? 1 : 0;
         }
     default:
@@ -2024,7 +2035,7 @@ ftpfs_send_command (const vfs_path_t * vpath, const char *cmd, int flags)
     p = ftpfs_translate_path (path_element->class, super, rpath);
     r = ftpfs_command (path_element->class, super, WAIT_REPLY, cmd, p);
     g_free (p);
-    vfs_stamp_create (&vfs_ftpfs_ops, super);
+    vfs_stamp_create (vfs_ftpfs_ops, super);
     if (flags & OPT_IGNORE_ERROR)
         r = COMPLETE;
     if (r != COMPLETE)
@@ -2186,11 +2197,16 @@ ftpfs_rmdir (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-ftpfs_fh_free_data (vfs_file_handler_t * fh)
+static vfs_file_handler_t *
+ftpfs_fh_new (struct vfs_s_inode *ino, gboolean changed)
 {
-    if (fh != NULL)
-        MC_PTR_FREE (fh->data);
+    ftp_fh_data_t *fh;
+
+    fh = g_new0 (ftp_fh_data_t, 1);
+    vfs_s_init_fh ((vfs_file_handler_t *) fh, ino, changed);
+    fh->sock = -1;
+
+    return FH;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2198,12 +2214,10 @@ ftpfs_fh_free_data (vfs_file_handler_t * fh)
 static int
 ftpfs_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mode)
 {
-    ftp_fh_data_t *ftp;
+    ftp_fh_data_t *ftp = FTP_FH;
 
     (void) mode;
 
-    fh->data = g_new0 (ftp_fh_data_t, 1);
-    ftp = (ftp_fh_data_t *) fh->data;
     /* File will be written only, so no need to retrieve it from ftp server */
     if (((flags & O_WRONLY) == O_WRONLY) && ((flags & (O_RDONLY | O_RDWR)) == 0))
     {
@@ -2218,7 +2232,7 @@ ftpfs_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t 
          * to local temporary file and stored to ftp server
          * by vfs_s_close later
          */
-        if (((ftp_super_data_t *) (FH_SUPER->data))->ctl_connection_busy)
+        if (((ftp_super_data_t *) FH_SUPER)->ctl_connection_busy)
         {
             if (!fh->ino->localname)
             {
@@ -2269,7 +2283,6 @@ ftpfs_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t 
     return 0;
 
   fail:
-    ftpfs_fh_free_data (fh);
     return -1;
 }
 
@@ -2280,7 +2293,7 @@ ftpfs_fh_close (struct vfs_class *me, vfs_file_handler_t * fh)
 {
     if (fh->handle != -1 && !fh->ino->localname)
     {
-        ftp_super_data_t *ftp = (ftp_super_data_t *) fh->ino->super->data;
+        ftp_super_data_t *ftp = (ftp_super_data_t *) fh->ino->super;
 
         close (fh->handle);
         fh->handle = -1;
@@ -2639,40 +2652,39 @@ ftpfs_init_passwd (void)
 void
 init_ftpfs (void)
 {
-    static struct vfs_s_subclass ftpfs_subclass;
-
     tcp_init ();
 
     ftpfs_subclass.flags = VFS_S_REMOTE | VFS_S_USETMP;
     ftpfs_subclass.archive_same = ftpfs_archive_same;
+    ftpfs_subclass.new_archive = ftpfs_new_archive;
     ftpfs_subclass.open_archive = ftpfs_open_archive;
     ftpfs_subclass.free_archive = ftpfs_free_archive;
+    ftpfs_subclass.fh_new = ftpfs_fh_new;
     ftpfs_subclass.fh_open = ftpfs_fh_open;
     ftpfs_subclass.fh_close = ftpfs_fh_close;
-    ftpfs_subclass.fh_free_data = ftpfs_fh_free_data;
     ftpfs_subclass.dir_load = ftpfs_dir_load;
     ftpfs_subclass.file_store = ftpfs_file_store;
     ftpfs_subclass.linear_start = ftpfs_linear_start;
     ftpfs_subclass.linear_read = ftpfs_linear_read;
     ftpfs_subclass.linear_close = ftpfs_linear_close;
 
-    vfs_s_init_class (&vfs_ftpfs_ops, &ftpfs_subclass);
-    vfs_ftpfs_ops.name = "ftpfs";
-    vfs_ftpfs_ops.flags = VFSF_NOLINKS;
-    vfs_ftpfs_ops.prefix = "ftp";
-    vfs_ftpfs_ops.done = &ftpfs_done;
-    vfs_ftpfs_ops.fill_names = ftpfs_fill_names;
-    vfs_ftpfs_ops.stat = ftpfs_stat;
-    vfs_ftpfs_ops.lstat = ftpfs_lstat;
-    vfs_ftpfs_ops.fstat = ftpfs_fstat;
-    vfs_ftpfs_ops.chmod = ftpfs_chmod;
-    vfs_ftpfs_ops.chown = ftpfs_chown;
-    vfs_ftpfs_ops.unlink = ftpfs_unlink;
-    vfs_ftpfs_ops.rename = ftpfs_rename;
-    vfs_ftpfs_ops.mkdir = ftpfs_mkdir;
-    vfs_ftpfs_ops.rmdir = ftpfs_rmdir;
-    vfs_ftpfs_ops.ctl = ftpfs_ctl;
-    vfs_register_class (&vfs_ftpfs_ops);
+    vfs_s_init_class (&ftpfs_subclass);
+    vfs_ftpfs_ops->name = "ftpfs";
+    vfs_ftpfs_ops->flags = VFSF_NOLINKS;
+    vfs_ftpfs_ops->prefix = "ftp";
+    vfs_ftpfs_ops->done = &ftpfs_done;
+    vfs_ftpfs_ops->fill_names = ftpfs_fill_names;
+    vfs_ftpfs_ops->stat = ftpfs_stat;
+    vfs_ftpfs_ops->lstat = ftpfs_lstat;
+    vfs_ftpfs_ops->fstat = ftpfs_fstat;
+    vfs_ftpfs_ops->chmod = ftpfs_chmod;
+    vfs_ftpfs_ops->chown = ftpfs_chown;
+    vfs_ftpfs_ops->unlink = ftpfs_unlink;
+    vfs_ftpfs_ops->rename = ftpfs_rename;
+    vfs_ftpfs_ops->mkdir = ftpfs_mkdir;
+    vfs_ftpfs_ops->rmdir = ftpfs_rmdir;
+    vfs_ftpfs_ops->ctl = ftpfs_ctl;
+    vfs_register_class (vfs_ftpfs_ops);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -19,7 +19,7 @@
 #define LINK_FOLLOW 15
 #define LINK_NO_FOLLOW -1
 
-/* For vfs_s_find_entry */
+/* For vfs_s_find_entry and vfs_s_find_inode */
 #define FL_NONE 0
 #define FL_MKDIR 1
 #define FL_MKFILE 2
@@ -34,9 +34,11 @@
 
 #define ERRNOR(a, b) do { me->verrno = a; return b; } while (0)
 
-#define MEDATA ((struct vfs_s_subclass *) me->data)
+#define VFS_SUPER(a) ((struct vfs_s_super *) (a))
 
-#define VFSDATA(a) ((a->class != NULL) ? (struct vfs_s_subclass *) a->class->data : NULL)
+#define MEDATA ((struct vfs_s_subclass *) me)
+
+#define VFS_SUBCLASS(a) ((struct vfs_s_subclass *) a->class)
 
 #define FH ((vfs_file_handler_t *) fh)
 #define FH_SUPER FH->ino->super
@@ -73,8 +75,6 @@ struct vfs_s_super
 #ifdef ENABLE_VFS_NET
     vfs_path_element_t *path_element;
 #endif                          /* ENABLE_VFS_NET */
-
-    void *data;                 /* This is for filesystem-specific use */
 };
 
 /*
@@ -111,15 +111,16 @@ typedef struct
     int handle;                 /* This is for module's use, but if != -1, will be mc_close()d */
     gboolean changed;           /* Did this file change? */
     vfs_linear_state_t linear;  /* Is that file open with O_LINEAR? */
-    void *data;                 /* This is for filesystem-specific use */
 } vfs_file_handler_t;
 
 /*
  * One of our subclasses (tar, cpio, fish, ftpfs) with data and methods.
- * Extends vfs_class.  Stored in the "data" field of vfs_class.
+ * Extends vfs_class.
  */
 struct vfs_s_subclass
 {
+    struct vfs_class base;      /* base class */
+
     GList *supers;
     int inode_counter;
     vfs_subclass_flags_t flags; /* whether the subclass is remove, read-only etc */
@@ -135,13 +136,15 @@ struct vfs_s_subclass
     void *(*archive_check) (const vfs_path_t * vpath);  /* optional */
     int (*archive_same) (const vfs_path_element_t * vpath_element, struct vfs_s_super * psup,
                          const vfs_path_t * vpath, void *cookie);
+    struct vfs_s_super *(*new_archive) (struct vfs_class * me);
     int (*open_archive) (struct vfs_s_super * psup,
                          const vfs_path_t * vpath, const vfs_path_element_t * vpath_element);
     void (*free_archive) (struct vfs_class * me, struct vfs_s_super * psup);
 
+    vfs_file_handler_t *(*fh_new) (struct vfs_s_inode * ino, gboolean changed);
     int (*fh_open) (struct vfs_class * me, vfs_file_handler_t * fh, int flags, mode_t mode);
     int (*fh_close) (struct vfs_class * me, vfs_file_handler_t * fh);
-    void (*fh_free_data) (vfs_file_handler_t * fh);
+    void (*fh_free) (vfs_file_handler_t * fh);
 
     struct vfs_s_entry *(*find_entry) (struct vfs_class * me,
                                        struct vfs_s_inode * root,
@@ -179,12 +182,14 @@ struct vfs_s_inode *vfs_s_find_inode (struct vfs_class *me,
 struct vfs_s_inode *vfs_s_find_root (struct vfs_class *me, struct vfs_s_entry *entry);
 
 /* outside interface */
-void vfs_s_init_class (struct vfs_class *vclass, struct vfs_s_subclass *sub);
+void vfs_s_init_class (struct vfs_s_subclass *sub);
 const char *vfs_s_get_path (const vfs_path_t * vpath, struct vfs_s_super **archive, int flags);
 struct vfs_s_super *vfs_get_super_by_vpath (const vfs_path_t * vpath);
 
 void vfs_s_invalidate (struct vfs_class *me, struct vfs_s_super *super);
 char *vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino);
+
+void vfs_s_init_fh (vfs_file_handler_t * fh, struct vfs_s_inode *ino, gboolean changed);
 
 /* network filesystems support */
 int vfs_s_select_on_two (int fd1, int fd2);

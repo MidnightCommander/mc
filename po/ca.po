@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"POT-Creation-Date: 2018-09-09 19:12+0300\n"
 "PO-Revision-Date: 2018-05-21 16:46+0000\n"
 "Last-Translator: Marc Tormo i Bochaca <mtbochaca@gmail.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
@@ -3040,6 +3040,14 @@ msgid "Finished (ignored %zu directory)"
 msgid_plural "Finished (ignored %zu directories)"
 msgstr[0] "Finalitzada (s'ha ignorat %zu directori)"
 msgstr[1] "Finalitzada (s'han ignorat %zu directoris)"
+
+#, c-format
+msgid "Find File: \"%s\". Content: \"%s\""
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Find File: \"%s\""
+msgstr "Cerca el fitxer"
 
 msgid "Searching"
 msgstr "Cercant"

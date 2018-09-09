@@ -2288,11 +2288,13 @@ connection is initiated by the server.  This may not work with some
 firewalls.
 .\"NODE "    Save Setup"
 .SH "    Save Setup"
-At startup, Midnight Commander will try to load initialization
-information from the ~/.config/mc/ini file. If this file
-doesn't exist, it will load the information from the system\-wide
-configuration file, located in %prefix%/share/mc/mc.ini. If the 
-system\-wide configuration file doesn't exist, MC uses the default settings.
+At startup, Midnight Commander tries to load initialization information
+from the ~/.config/mc/ini file.
+If this file doesn't exist, the system\-wide file
+.B %sysconfdir%/mc/mc.ini
+is used. If this file doesn't exist, the system\-wide file
+.B %prefix%/share/mc/mc.ini
+is used. If this file doesn't exist, MC uses the default settings.
 .PP
 The
 .I Save Setup
@@ -4311,10 +4313,14 @@ The default system\-wide extensions file.
 User's own extension, view configuration and edit configuration
 file.  They override the contents of the system wide files if present.
 .PP
+.I %sysconfdir%/mc/mc.ini
+.RE
 .I %prefix%/share/mc/mc.ini
 .IP
-The default system\-wide setup for Midnight Commander, used only if
-the user doesn't have his own ~/.config/mc/ini file.
+System\-wide setup files for Midnight Commander, used only if the user
+doesn't have his own
+.B ~/.config/mc/ini
+file. If %sysconfdir%/mc/mc.ini exists, %prefix%/share/mc/mc.ini isn't used.
 .PP
 .I %prefix%/share/mc/mc.lib
 .IP

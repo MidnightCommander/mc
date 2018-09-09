@@ -3,30 +3,25 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# aborodin <aborodin@vmail.ru>, 2011
-# AlexL <loginov.alex.valer@gmail.com>, 2015-2017
 # Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# and Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# aborodin <aborodin@vmail.ru>, 2009-2012
-# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999,2014
-# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
-# Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
 # Evgeny Bulgakov <bgav@netvision.net.il>, 1999
-# Ilia Maslakov <il.smind@gmail.com>, 2009
-# Mr GreyWolf, 2016
-# Mr.GreyWolf, 2016
-# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
-# Piotr Drąg <piotrdrag@gmail.com>, 2018
 # Sergey Panov <sipan@mit.edu>, 1999
-# Simple88, 2016
-# Simple88, 2016
-# Slava Zanko <slavazanko@gmail.com>, 2009,2011
+# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999, 2014
 # Valek Filippov <frob@df.ru>, 2000
+# Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
+# Andrew Borodin <aborodin@vmail.ru>, 2011-2018
+# Ilia Maslakov <il.smind@gmail.com>, 2009
+# Slava Zanko <slavazanko@gmail.com>, 2009, 2011
+# AlexL <loginov.alex.valer@gmail.com>, 2015-2017
+# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
+# Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
+# Simple88, 2016
+# Piotr Drąg <piotrdrag@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"POT-Creation-Date: 2018-09-09 19:12+0300\n"
 "PO-Revision-Date: 2018-04-30 12:37+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
@@ -3047,6 +3042,14 @@ msgstr[0] "Завершено (пропущен %zu каталог)"
 msgstr[1] "Завершено (пропущено %zu каталога)"
 msgstr[2] "Завершено (пропущено %zu каталогов)"
 msgstr[3] "Завершено (пропущено %zu каталогов)"
+
+#, c-format
+msgid "Find File: \"%s\". Content: \"%s\""
+msgstr "Поиск файла:  \"%s\". Содержимое: \"%s\""
+
+#, c-format
+msgid "Find File: \"%s\""
+msgstr "Поиск файла:  \"%s\""
 
 msgid "Searching"
 msgstr "Ищем"

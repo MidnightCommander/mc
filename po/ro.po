@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-05-27 21:58+0200\n"
+"POT-Creation-Date: 2018-09-09 19:12+0300\n"
 "PO-Revision-Date: 2018-04-30 12:37+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
@@ -3034,6 +3034,14 @@ msgid_plural "Finished (ignored %zu directories)"
 msgstr[0] "Finalizat (au fost ignorate %zu dosar)"
 msgstr[1] "Finalizat (au fost ignorate %zu dosare)"
 msgstr[2] "Finalizat (au fost ignorate %zu dosare)"
+
+#, c-format
+msgid "Find File: \"%s\". Content: \"%s\""
+msgstr ""
+
+#, fuzzy, c-format
+msgid "Find File: \"%s\""
+msgstr "Caută fișier"
 
 msgid "Searching"
 msgstr "Caut"

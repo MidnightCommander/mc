@@ -42,7 +42,7 @@
 /* --------------------------------------------------------------------------------------------- */
 
 static char *
-str_ptr_array_join (GPtrArray * str_splints)
+str_ptr_array_join (const GPtrArray * str_splints)
 {
     GString *return_str;
     guint i;

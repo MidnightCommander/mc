@@ -52,6 +52,7 @@
 
 #include "lib/vfs/vfs.h"
 #include "lib/vfs/utilvfs.h"
+#include "lib/vfs/xdirentry.h"
 #include "src/vfs/local/local.h"
 #include "lib/vfs/gc.h"         /* vfs_stamp_create */
 
@@ -100,7 +101,9 @@ typedef struct cachedfile
 /*** file scope variables ************************************************************************/
 
 static GSList *head;
-static struct vfs_class vfs_sfs_ops;
+
+static struct vfs_s_subclass sfs_subclass;
+static struct vfs_class *vfs_sfs_ops = (struct vfs_class *) &sfs_subclass;
 
 static int sfs_no = 0;
 static char *sfs_prefix[MAXFS];
@@ -233,7 +236,7 @@ sfs_redirect (const vfs_path_t * vpath)
     if (cur != NULL)
     {
         cf = (cachedfile *) cur->data;
-        vfs_stamp (&vfs_sfs_ops, cf);
+        vfs_stamp (vfs_sfs_ops, cf);
         return cf->cache;
     }
 
@@ -252,7 +255,7 @@ sfs_redirect (const vfs_path_t * vpath)
         head = g_slist_prepend (head, cf);
         vfs_path_free (cache_vpath);
 
-        vfs_stamp_create (&vfs_sfs_ops, (cachedfile *) head->data);
+        vfs_stamp_create (vfs_sfs_ops, (cachedfile *) head->data);
         return cf->cache;
     }
 
@@ -547,29 +550,32 @@ sfs_which (struct vfs_class *me, const char *path)
 void
 init_sfs (void)
 {
-    vfs_sfs_ops.name = "sfs";
-    vfs_sfs_ops.init = sfs_init;
-    vfs_sfs_ops.done = sfs_done;
-    vfs_sfs_ops.fill_names = sfs_fill_names;
-    vfs_sfs_ops.which = sfs_which;
-    vfs_sfs_ops.open = sfs_open;
-    vfs_sfs_ops.close = local_close;
-    vfs_sfs_ops.read = local_read;
-    vfs_sfs_ops.stat = sfs_stat;
-    vfs_sfs_ops.lstat = sfs_lstat;
-    vfs_sfs_ops.fstat = local_fstat;
-    vfs_sfs_ops.chmod = sfs_chmod;
-    vfs_sfs_ops.chown = sfs_chown;
-    vfs_sfs_ops.utime = sfs_utime;
-    vfs_sfs_ops.readlink = sfs_readlink;
-    vfs_sfs_ops.ferrno = local_errno;
-    vfs_sfs_ops.lseek = local_lseek;
-    vfs_sfs_ops.getid = sfs_getid;
-    vfs_sfs_ops.nothingisopen = sfs_nothingisopen;
-    vfs_sfs_ops.free = sfs_free;
-    vfs_sfs_ops.getlocalcopy = sfs_getlocalcopy;
-    vfs_sfs_ops.ungetlocalcopy = sfs_ungetlocalcopy;
-    vfs_register_class (&vfs_sfs_ops);
+    memset (&sfs_subclass, 0, sizeof (sfs_subclass));
+    vfs_s_init_class (&sfs_subclass);
+
+    vfs_sfs_ops->name = "sfs";
+    vfs_sfs_ops->init = sfs_init;
+    vfs_sfs_ops->done = sfs_done;
+    vfs_sfs_ops->fill_names = sfs_fill_names;
+    vfs_sfs_ops->which = sfs_which;
+    vfs_sfs_ops->open = sfs_open;
+    vfs_sfs_ops->close = local_close;
+    vfs_sfs_ops->read = local_read;
+    vfs_sfs_ops->stat = sfs_stat;
+    vfs_sfs_ops->lstat = sfs_lstat;
+    vfs_sfs_ops->fstat = local_fstat;
+    vfs_sfs_ops->chmod = sfs_chmod;
+    vfs_sfs_ops->chown = sfs_chown;
+    vfs_sfs_ops->utime = sfs_utime;
+    vfs_sfs_ops->readlink = sfs_readlink;
+    vfs_sfs_ops->ferrno = local_errno;
+    vfs_sfs_ops->lseek = local_lseek;
+    vfs_sfs_ops->getid = sfs_getid;
+    vfs_sfs_ops->nothingisopen = sfs_nothingisopen;
+    vfs_sfs_ops->free = sfs_free;
+    vfs_sfs_ops->getlocalcopy = sfs_getlocalcopy;
+    vfs_sfs_ops->ungetlocalcopy = sfs_ungetlocalcopy;
+    vfs_register_class (vfs_sfs_ops);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -21,6 +21,8 @@
 #define LIBSSH2_INVALID_SOCKET -1
 #endif
 
+#define SUP ((sftpfs_super_data_t *) super)
+
 /*** enums ***************************************************************************************/
 
 typedef enum
@@ -35,6 +37,8 @@ typedef enum
 
 typedef struct
 {
+    struct vfs_s_super base;
+
     sftpfs_auth_type_t auth_type;
     sftpfs_auth_type_t config_auth_type;
 
@@ -54,15 +58,13 @@ typedef struct
 /*** global variables defined in .c file *********************************************************/
 
 extern GString *sftpfs_filename_buffer;
-extern struct vfs_class sftpfs_class;
 extern struct vfs_s_subclass sftpfs_subclass;
+extern struct vfs_class *sftpfs_class;
 
 /*** declarations of public functions ************************************************************/
 
 void sftpfs_init_class (void);
 void sftpfs_init_subclass (void);
-void sftpfs_init_class_callbacks (void);
-void sftpfs_init_subclass_callbacks (void);
 void sftpfs_init_config_variables_patterns (void);
 void sftpfs_deinit_config_variables_patterns (void);
 
@@ -86,6 +88,8 @@ void sftpfs_fill_connection_data_from_config (struct vfs_s_super *super, GError 
 int sftpfs_open_connection (struct vfs_s_super *super, GError ** mcerror);
 void sftpfs_close_connection (struct vfs_s_super *super, const char *shutdown_message,
                               GError ** mcerror);
+
+vfs_file_handler_t *sftpfs_fh_new (struct vfs_s_inode *ino, gboolean changed);
 
 void *sftpfs_opendir (const vfs_path_t * vpath, GError ** mcerror);
 void *sftpfs_readdir (void *data, GError ** mcerror);
