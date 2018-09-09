@@ -76,14 +76,14 @@
 
 #ifdef HAVE_OPENPTY
 /* includes for openpty() */
-#if HAVE_PTY_H
+#ifdef HAVE_PTY_H
 #include <pty.h>
 #endif
-#if HAVE_UTIL_H
+#ifdef HAVE_UTIL_H
 #include <util.h>
 #endif
 /* <sys/types.h> is a prerequisite of <libutil.h> on FreeBSD 8.0.  */
-#if HAVE_LIBUTIL_H
+#ifdef HAVE_LIBUTIL_H
 #include <libutil.h>
 #endif
 #endif /* HAVE_OPENPTY */
@@ -644,6 +644,8 @@ feed_subshell (int how, gboolean fail_on_error)
 /* --------------------------------------------------------------------------------------------- */
 /* pty opening functions */
 
+#ifndef HAVE_OPENPTY
+
 #ifdef HAVE_GRANTPT
 
 /* System V version of pty_open_master */
@@ -797,6 +799,7 @@ pty_open_slave (const char *pty_name)
 }
 #endif /* !HAVE_GRANTPT */
 
+#endif /* !HAVE_OPENPTY */
 
 /* --------------------------------------------------------------------------------------------- */
 /**
