@@ -131,6 +131,7 @@ void dlg_run_done (WDialog * h);
 void dlg_save_history (WDialog * h);
 void dlg_process_event (WDialog * h, int key, Gpm_Event * event);
 
+void dlg_set_title (WDialog * h, const char *title);
 char *dlg_get_title (const WDialog * h, size_t len);
 
 void dlg_redraw (WDialog * h);

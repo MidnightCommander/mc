@@ -42,6 +42,7 @@
 #include "lib/strutil.h"
 #include "lib/fileloc.h"        /* MC_HISTORY_FILE */
 #include "lib/event.h"          /* mc_event_raise() */
+#include "lib/util.h"           /* MC_PTR_FREE */
 
 #include "lib/widget.h"
 #include "lib/widget/mouse.h"
@@ -653,6 +654,7 @@ dlg_default_repaint (WDialog * h)
 
     if (h->title != NULL)
     {
+        /* TODO: truncate long title */
         tty_setcolor (h->color[DLG_COLOR_TITLE]);
         widget_move (h, space, (wh->cols - str_term_width1 (h->title)) / 2);
         tty_print_string (h->title);
@@ -783,16 +785,7 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
 
     new_d->mouse_status = MOU_UNHANDLED;
 
-    /* Strip existing spaces, add one space before and after the title */
-    if (title != NULL && *title != '\0')
-    {
-        char *t;
-
-        t = g_strstrip (g_strdup (title));
-        if (*t != '\0')
-            new_d->title = g_strdup_printf (" %s ", t);
-        g_free (t);
-    }
+    dlg_set_title (new_d, title);
 
     /* unique name of event group for this dialog */
     new_d->event_group = g_strdup_printf ("%s_%p", MCEVENT_GROUP_DIALOG, (void *) new_d);
@@ -1253,6 +1246,25 @@ dlg_save_history (WDialog * h)
     }
 
     g_free (profile);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+dlg_set_title (WDialog * h, const char *title)
+{
+    MC_PTR_FREE (h->title);
+
+    /* Strip existing spaces, add one space before and after the title */
+    if (title != NULL && title[0] != '\0')
+    {
+        char *t;
+
+        t = g_strstrip (g_strdup (title));
+        if (t[0] != '\0')
+            h->title = g_strdup_printf (" %s ", t);
+        g_free (t);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
