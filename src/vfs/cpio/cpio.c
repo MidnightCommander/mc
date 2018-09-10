@@ -871,8 +871,9 @@ cpio_read (void *fh, char *buffer, size_t count)
 static int
 cpio_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mode)
 {
-    (void) fh;
     (void) mode;
+
+    fh->data = NULL;
 
     if ((flags & O_ACCMODE) != O_RDONLY)
         ERRNOR (EROFS, -1);

@@ -197,7 +197,6 @@ sftpfs_init_subclass (void)
     sftpfs_subclass.new_archive = sftpfs_cb_init_connection;
     sftpfs_subclass.open_archive = sftpfs_cb_open_connection;
     sftpfs_subclass.free_archive = sftpfs_cb_close_connection;
-    sftpfs_subclass.fh_new = sftpfs_fh_new;
     sftpfs_subclass.dir_load = sftpfs_cb_dir_load;
 }
 
