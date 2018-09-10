@@ -61,8 +61,6 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define SUP(super) ((tar_super_data_t *) (super))
-
 /*
  * Header block on tape.
  *
@@ -217,8 +215,6 @@ typedef enum
 
 typedef struct
 {
-    struct vfs_s_super base;    /* base class */
-
     int fd;
     struct stat st;
     int type;                   /* Type of the archive */
@@ -234,7 +230,6 @@ static off_t current_tar_position = 0;
 
 static union record rec_buf;
 
-/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
@@ -268,30 +263,19 @@ tar_from_oct (int digs, const char *where)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static struct vfs_s_super *
-tar_new_archive (struct vfs_class *me)
-{
-    tar_super_data_t *arch;
-
-    arch = g_new0 (tar_super_data_t, 1);
-    arch->base.me = me;
-    arch->fd = -1;
-    arch->type = TAR_UNKNOWN;
-
-    return VFS_SUPER (arch);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static void
 tar_free_archive (struct vfs_class *me, struct vfs_s_super *archive)
 {
-    tar_super_data_t *arch = SUP (archive);
-
     (void) me;
 
-    if (arch->fd != -1)
-        mc_close (arch->fd);
+    if (archive->data != NULL)
+    {
+        tar_super_data_t *arch = (tar_super_data_t *) archive->data;
+
+        if (arch->fd != -1)
+            mc_close (arch->fd);
+        g_free (archive->data);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -313,8 +297,11 @@ tar_open_archive_int (struct vfs_class *me, const vfs_path_t * vpath, struct vfs
     }
 
     archive->name = g_strdup (vfs_path_as_str (vpath));
-    arch = SUP (archive);
+    archive->data = g_new (tar_super_data_t, 1);
+    arch = (tar_super_data_t *) archive->data;
     mc_stat (vpath, &arch->st);
+    arch->fd = -1;
+    arch->type = TAR_UNKNOWN;
 
     /* Find out the method to handle this tar file */
     type = get_compression_type (result, archive->name);
@@ -439,7 +426,7 @@ tar_checksum (const union record *header)
 static void
 tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *header, size_t h_size)
 {
-    tar_super_data_t *arch = SUP (archive);
+    tar_super_data_t *arch = (tar_super_data_t *) archive->data;
 
     st->st_mode = tar_from_oct (8, header->header.mode);
 
@@ -529,7 +516,7 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *heade
 static ReadStatus
 tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, size_t * h_size)
 {
-    tar_super_data_t *arch = SUP (archive);
+    tar_super_data_t *arch = (tar_super_data_t *) archive->data;
     ReadStatus checksum_status;
     union record *header;
     static char *next_long_name = NULL, *next_long_link = NULL;
@@ -889,7 +876,7 @@ tar_super_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *pa
         return 0;
 
     /* Has the cached archive been changed on the disk? */
-    if (parc != NULL && SUP (parc)->st.st_mtime < archive_stat->st_mtime)
+    if (((tar_super_data_t *) parc->data)->st.st_mtime < archive_stat->st_mtime)
     {
         /* Yes, reload! */
         vfs_tarfs_ops->free ((vfsid) parc);
@@ -907,7 +894,7 @@ static ssize_t
 tar_read (void *fh, char *buffer, size_t count)
 {
     off_t begin = FH->ino->data_offset;
-    int fd = SUP (FH_SUPER)->fd;
+    int fd = ((tar_super_data_t *) FH_SUPER->data)->fd;
     struct vfs_class *me = FH_SUPER->me;
     ssize_t res;
 
@@ -947,7 +934,6 @@ init_tarfs (void)
     tarfs_subclass.flags = VFS_S_READONLY;      /* FIXME: tarfs used own temp files */
     tarfs_subclass.archive_check = tar_super_check;
     tarfs_subclass.archive_same = tar_super_same;
-    tarfs_subclass.new_archive = tar_new_archive;
     tarfs_subclass.open_archive = tar_open_archive;
     tarfs_subclass.free_archive = tar_free_archive;
     tarfs_subclass.fh_open = tar_fh_open;

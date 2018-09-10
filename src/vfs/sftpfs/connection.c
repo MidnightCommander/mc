@@ -167,7 +167,11 @@ static void
 sftpfs_recognize_auth_types (struct vfs_s_super *super)
 {
     char *userauthlist;
-    sftpfs_super_data_t *super_data = SUP;
+    sftpfs_super_data_t *super_data;
+
+    super_data = (sftpfs_super_data_t *) super->data;
+
+    super_data->auth_type = NONE;
 
     /* check what authentication methods are available */
     /* userauthlist is internally managed by libssh2 and freed by libssh2_session_free() */
@@ -198,12 +202,13 @@ sftpfs_recognize_auth_types (struct vfs_s_super *super)
 static gboolean
 sftpfs_open_connection_ssh_agent (struct vfs_s_super *super, GError ** mcerror)
 {
-    sftpfs_super_data_t *super_data = SUP;
+    sftpfs_super_data_t *super_data;
     struct libssh2_agent_publickey *identity, *prev_identity = NULL;
     int rc;
 
     mc_return_val_if_error (mcerror, FALSE);
 
+    super_data = (sftpfs_super_data_t *) super->data;
     super_data->agent = NULL;
 
     if ((super_data->auth_type & AGENT) == 0)
@@ -250,11 +255,13 @@ sftpfs_open_connection_ssh_agent (struct vfs_s_super *super, GError ** mcerror)
 static gboolean
 sftpfs_open_connection_ssh_key (struct vfs_s_super *super, GError ** mcerror)
 {
-    sftpfs_super_data_t *super_data = SUP;
+    sftpfs_super_data_t *super_data;
     char *p, *passwd;
     gboolean ret_value = FALSE;
 
     mc_return_val_if_error (mcerror, FALSE);
+
+    super_data = (sftpfs_super_data_t *) super->data;
 
     if ((super_data->auth_type & PUBKEY) == 0)
         return FALSE;
@@ -297,12 +304,14 @@ sftpfs_open_connection_ssh_key (struct vfs_s_super *super, GError ** mcerror)
 static gboolean
 sftpfs_open_connection_ssh_password (struct vfs_s_super *super, GError ** mcerror)
 {
-    sftpfs_super_data_t *super_data = SUP;
+    sftpfs_super_data_t *super_data;
     char *p, *passwd;
     gboolean ret_value = FALSE;
     int rc;
 
     mc_return_val_if_error (mcerror, FALSE);
+
+    super_data = (sftpfs_super_data_t *) super->data;
 
     if ((super_data->auth_type & PASSWORD) == 0)
         return FALSE;
@@ -356,9 +365,11 @@ int
 sftpfs_open_connection (struct vfs_s_super *super, GError ** mcerror)
 {
     int rc;
-    sftpfs_super_data_t *super_data = SUP;
+    sftpfs_super_data_t *super_data;
 
     mc_return_val_if_error (mcerror, -1);
+
+    super_data = (sftpfs_super_data_t *) super->data;
 
     /*
      * The application code is responsible for creating the socket
@@ -425,10 +436,14 @@ sftpfs_open_connection (struct vfs_s_super *super, GError ** mcerror)
 void
 sftpfs_close_connection (struct vfs_s_super *super, const char *shutdown_message, GError ** mcerror)
 {
-    sftpfs_super_data_t *super_data = SUP;
+    sftpfs_super_data_t *super_data;
 
     /* no mc_return_*_if_error() here because of abort open_connection handling too */
     (void) mcerror;
+
+    super_data = (sftpfs_super_data_t *) super->data;
+    if (super_data == NULL)
+        return;
 
     if (super_data->sftp_session != NULL)
     {

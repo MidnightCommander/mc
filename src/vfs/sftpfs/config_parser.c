@@ -354,16 +354,19 @@ sftpfs_get_config_entity (const vfs_path_element_t * vpath_element, GError ** mc
 void
 sftpfs_fill_connection_data_from_config (struct vfs_s_super *super, GError ** mcerror)
 {
-    sftpfs_super_data_t *super_data = SUP;
+    sftpfs_super_data_t *super_data;
     sftpfs_ssh_config_entity_t *config_entity;
 
     mc_return_if_error (mcerror);
+
+    super_data = (sftpfs_super_data_t *) super->data;
 
     config_entity = sftpfs_get_config_entity (super->path_element, mcerror);
     if (config_entity == NULL)
         return;
 
-    super_data->config_auth_type = (config_entity->pubkey_auth) ? PUBKEY : 0;
+    super_data->config_auth_type = NONE;
+    super_data->config_auth_type |= (config_entity->pubkey_auth) ? PUBKEY : 0;
     super_data->config_auth_type |= (config_entity->identities_only) ? 0 : AGENT;
     super_data->config_auth_type |= (config_entity->password_auth) ? PASSWORD : 0;
 

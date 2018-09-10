@@ -117,14 +117,12 @@ int fish_directory_timeout = 900;
 #define FISH_HAVE_DATE_MDYT   32
 #define FISH_HAVE_TAIL        64
 
-#define SUP ((fish_super_data_t *) super)
+#define SUP ((fish_super_data_t *) super->data)
 
 /*** file scope type declarations ****************************************************************/
 
 typedef struct
 {
-    struct vfs_s_super base;    /* base class */
-
     int sockr;
     int sockw;
     char *scr_ls;
@@ -358,19 +356,6 @@ fish_send_command (struct vfs_class *me, struct vfs_s_super *super, int flags, c
 
 /* --------------------------------------------------------------------------------------------- */
 
-static struct vfs_s_super *
-fish_new_archive (struct vfs_class *me)
-{
-    fish_super_data_t *arch;
-
-    arch = g_new0 (fish_super_data_t, 1);
-    arch->base.me = me;
-
-    return VFS_SUPER (arch);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static void
 fish_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 {
@@ -398,6 +383,8 @@ fish_free_archive (struct vfs_class *me, struct vfs_s_super *super)
     g_free (SUP->scr_append);
     g_free (SUP->scr_info);
     g_free (SUP->scr_env);
+    g_free (SUP);
+    super->data = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -660,6 +647,7 @@ fish_open_archive (struct vfs_s_super *super,
 {
     (void) vpath;
 
+    super->data = g_new0 (fish_super_data_t, 1);
     super->path_element = vfs_path_element_clone (vpath_element);
 
     if (strncmp (vpath_element->vfs_prefix, "rsh", 3) == 0)
@@ -1745,7 +1733,6 @@ init_fish (void)
 
     fish_subclass.flags = VFS_S_REMOTE | VFS_S_USETMP;
     fish_subclass.archive_same = fish_archive_same;
-    fish_subclass.new_archive = fish_new_archive;
     fish_subclass.open_archive = fish_open_archive;
     fish_subclass.free_archive = fish_free_archive;
     fish_subclass.fh_open = fish_fh_open;
