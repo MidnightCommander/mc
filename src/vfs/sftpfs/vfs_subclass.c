@@ -37,6 +37,8 @@
 
 /*** global variables ****************************************************************************/
 
+struct vfs_s_subclass sftpfs_subclass;
+
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
@@ -184,7 +186,16 @@ sftpfs_init_subclass (void)
 {
     memset (&sftpfs_subclass, 0, sizeof (sftpfs_subclass));
     sftpfs_subclass.flags = VFS_S_REMOTE;
+}
 
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Initialization of VFS subclass callbacks.
+ */
+
+void
+sftpfs_init_subclass_callbacks (void)
+{
     sftpfs_subclass.archive_same = sftpfs_cb_is_equal_connection;
     sftpfs_subclass.open_archive = sftpfs_cb_open_connection;
     sftpfs_subclass.free_archive = sftpfs_cb_close_connection;

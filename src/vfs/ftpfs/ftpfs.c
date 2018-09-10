@@ -237,8 +237,7 @@ static struct linklist *connections_list;
 
 static char reply_str[80];
 
-static struct vfs_s_subclass ftpfs_subclass;
-static struct vfs_class *vfs_ftpfs_ops = (struct vfs_class *) &ftpfs_subclass;
+static struct vfs_class vfs_ftpfs_ops;
 
 static GSList *no_proxy;
 
@@ -2025,7 +2024,7 @@ ftpfs_send_command (const vfs_path_t * vpath, const char *cmd, int flags)
     p = ftpfs_translate_path (path_element->class, super, rpath);
     r = ftpfs_command (path_element->class, super, WAIT_REPLY, cmd, p);
     g_free (p);
-    vfs_stamp_create (vfs_ftpfs_ops, super);
+    vfs_stamp_create (&vfs_ftpfs_ops, super);
     if (flags & OPT_IGNORE_ERROR)
         r = COMPLETE;
     if (r != COMPLETE)
@@ -2640,6 +2639,8 @@ ftpfs_init_passwd (void)
 void
 init_ftpfs (void)
 {
+    static struct vfs_s_subclass ftpfs_subclass;
+
     tcp_init ();
 
     ftpfs_subclass.flags = VFS_S_REMOTE | VFS_S_USETMP;
@@ -2655,23 +2656,23 @@ init_ftpfs (void)
     ftpfs_subclass.linear_read = ftpfs_linear_read;
     ftpfs_subclass.linear_close = ftpfs_linear_close;
 
-    vfs_s_init_class (&ftpfs_subclass);
-    vfs_ftpfs_ops->name = "ftpfs";
-    vfs_ftpfs_ops->flags = VFSF_NOLINKS;
-    vfs_ftpfs_ops->prefix = "ftp";
-    vfs_ftpfs_ops->done = &ftpfs_done;
-    vfs_ftpfs_ops->fill_names = ftpfs_fill_names;
-    vfs_ftpfs_ops->stat = ftpfs_stat;
-    vfs_ftpfs_ops->lstat = ftpfs_lstat;
-    vfs_ftpfs_ops->fstat = ftpfs_fstat;
-    vfs_ftpfs_ops->chmod = ftpfs_chmod;
-    vfs_ftpfs_ops->chown = ftpfs_chown;
-    vfs_ftpfs_ops->unlink = ftpfs_unlink;
-    vfs_ftpfs_ops->rename = ftpfs_rename;
-    vfs_ftpfs_ops->mkdir = ftpfs_mkdir;
-    vfs_ftpfs_ops->rmdir = ftpfs_rmdir;
-    vfs_ftpfs_ops->ctl = ftpfs_ctl;
-    vfs_register_class (vfs_ftpfs_ops);
+    vfs_s_init_class (&vfs_ftpfs_ops, &ftpfs_subclass);
+    vfs_ftpfs_ops.name = "ftpfs";
+    vfs_ftpfs_ops.flags = VFSF_NOLINKS;
+    vfs_ftpfs_ops.prefix = "ftp";
+    vfs_ftpfs_ops.done = &ftpfs_done;
+    vfs_ftpfs_ops.fill_names = ftpfs_fill_names;
+    vfs_ftpfs_ops.stat = ftpfs_stat;
+    vfs_ftpfs_ops.lstat = ftpfs_lstat;
+    vfs_ftpfs_ops.fstat = ftpfs_fstat;
+    vfs_ftpfs_ops.chmod = ftpfs_chmod;
+    vfs_ftpfs_ops.chown = ftpfs_chown;
+    vfs_ftpfs_ops.unlink = ftpfs_unlink;
+    vfs_ftpfs_ops.rename = ftpfs_rename;
+    vfs_ftpfs_ops.mkdir = ftpfs_mkdir;
+    vfs_ftpfs_ops.rmdir = ftpfs_rmdir;
+    vfs_ftpfs_ops.ctl = ftpfs_ctl;
+    vfs_register_class (&vfs_ftpfs_ops);
 }
 
 /* --------------------------------------------------------------------------------------------- */

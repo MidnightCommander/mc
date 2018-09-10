@@ -36,6 +36,8 @@
 
 /*** global variables ****************************************************************************/
 
+struct vfs_class sftpfs_class;
+
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
@@ -493,7 +495,7 @@ sftpfs_cb_close (void *data)
 
     super->fd_usage--;
     if (super->fd_usage == 0)
-        vfs_stamp_create (sftpfs_class, super);
+        vfs_stamp_create (&sftpfs_class, super);
 
     rc = sftpfs_close_file (file_handler, &mcerror);
     mc_error_message (&mcerror, NULL);
@@ -501,7 +503,7 @@ sftpfs_cb_close (void *data)
     if (file_handler->handle != -1)
         close (file_handler->handle);
 
-    vfs_s_free_inode (sftpfs_class, file_handler->ino);
+    vfs_s_free_inode (&sftpfs_class, file_handler->ino);
     g_free (file_handler);
 
     return rc;
@@ -682,40 +684,50 @@ sftpfs_cb_fill_names (struct vfs_class *me, fill_names_f func)
 void
 sftpfs_init_class (void)
 {
-    sftpfs_class->name = "sftpfs";
-    sftpfs_class->prefix = "sftp";
-    sftpfs_class->flags = VFSF_NOLINKS;
+    memset (&sftpfs_class, 0, sizeof (sftpfs_class));
+    sftpfs_class.name = "sftpfs";
+    sftpfs_class.prefix = "sftp";
+    sftpfs_class.flags = VFSF_NOLINKS;
+}
 
-    sftpfs_class->init = sftpfs_cb_init;
-    sftpfs_class->done = sftpfs_cb_done;
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Initialization of VFS class callbacks.
+ */
 
-    sftpfs_class->fill_names = sftpfs_cb_fill_names;
+void
+sftpfs_init_class_callbacks (void)
+{
+    sftpfs_class.init = sftpfs_cb_init;
+    sftpfs_class.done = sftpfs_cb_done;
 
-    sftpfs_class->opendir = sftpfs_cb_opendir;
-    sftpfs_class->readdir = sftpfs_cb_readdir;
-    sftpfs_class->closedir = sftpfs_cb_closedir;
-    sftpfs_class->mkdir = sftpfs_cb_mkdir;
-    sftpfs_class->rmdir = sftpfs_cb_rmdir;
+    sftpfs_class.fill_names = sftpfs_cb_fill_names;
 
-    sftpfs_class->stat = sftpfs_cb_stat;
-    sftpfs_class->lstat = sftpfs_cb_lstat;
-    sftpfs_class->fstat = sftpfs_cb_fstat;
-    sftpfs_class->readlink = sftpfs_cb_readlink;
-    sftpfs_class->symlink = sftpfs_cb_symlink;
-    sftpfs_class->link = sftpfs_cb_link;
-    sftpfs_class->utime = sftpfs_cb_utime;
-    sftpfs_class->mknod = sftpfs_cb_mknod;
-    sftpfs_class->chown = sftpfs_cb_chown;
-    sftpfs_class->chmod = sftpfs_cb_chmod;
+    sftpfs_class.opendir = sftpfs_cb_opendir;
+    sftpfs_class.readdir = sftpfs_cb_readdir;
+    sftpfs_class.closedir = sftpfs_cb_closedir;
+    sftpfs_class.mkdir = sftpfs_cb_mkdir;
+    sftpfs_class.rmdir = sftpfs_cb_rmdir;
 
-    sftpfs_class->open = sftpfs_cb_open;
-    sftpfs_class->read = sftpfs_cb_read;
-    sftpfs_class->write = sftpfs_cb_write;
-    sftpfs_class->close = sftpfs_cb_close;
-    sftpfs_class->lseek = sftpfs_cb_lseek;
-    sftpfs_class->unlink = sftpfs_cb_unlink;
-    sftpfs_class->rename = sftpfs_cb_rename;
-    sftpfs_class->ferrno = sftpfs_cb_errno;
+    sftpfs_class.stat = sftpfs_cb_stat;
+    sftpfs_class.lstat = sftpfs_cb_lstat;
+    sftpfs_class.fstat = sftpfs_cb_fstat;
+    sftpfs_class.readlink = sftpfs_cb_readlink;
+    sftpfs_class.symlink = sftpfs_cb_symlink;
+    sftpfs_class.link = sftpfs_cb_link;
+    sftpfs_class.utime = sftpfs_cb_utime;
+    sftpfs_class.mknod = sftpfs_cb_mknod;
+    sftpfs_class.chown = sftpfs_cb_chown;
+    sftpfs_class.chmod = sftpfs_cb_chmod;
+
+    sftpfs_class.open = sftpfs_cb_open;
+    sftpfs_class.read = sftpfs_cb_read;
+    sftpfs_class.write = sftpfs_cb_write;
+    sftpfs_class.close = sftpfs_cb_close;
+    sftpfs_class.lseek = sftpfs_cb_lseek;
+    sftpfs_class.unlink = sftpfs_cb_unlink;
+    sftpfs_class.rename = sftpfs_cb_rename;
+    sftpfs_class.ferrno = sftpfs_cb_errno;
 }
 
 /* --------------------------------------------------------------------------------------------- */

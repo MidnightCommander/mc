@@ -461,7 +461,7 @@ vfs_path_from_str_uri_parser (char *path)
         element->vfs_prefix = g_strdup (vfs_prefix_start);
 
         url_delimiter += strlen (VFS_PATH_URL_DELIMITER);
-        sub = VFS_SUBCLASS (element);
+        sub = VFSDATA (element);
         if (sub != NULL && (sub->flags & VFS_S_REMOTE) != 0)
         {
             char *slash_pointer;

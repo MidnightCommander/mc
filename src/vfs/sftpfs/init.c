@@ -34,9 +34,6 @@
 
 /*** global variables ****************************************************************************/
 
-struct vfs_s_subclass sftpfs_subclass;
-struct vfs_class *sftpfs_class = (struct vfs_class *) &sftpfs_subclass;
-
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
@@ -58,10 +55,15 @@ init_sftpfs (void)
 {
     tcp_init ();
 
-    sftpfs_init_subclass ();
-    vfs_s_init_class (&sftpfs_subclass);
     sftpfs_init_class ();
-    vfs_register_class (sftpfs_class);
+    sftpfs_init_subclass ();
+
+    vfs_s_init_class (&sftpfs_class, &sftpfs_subclass);
+
+    sftpfs_init_class_callbacks ();
+    sftpfs_init_subclass_callbacks ();
+
+    vfs_register_class (&sftpfs_class);
 }
 
 /* --------------------------------------------------------------------------------------------- */

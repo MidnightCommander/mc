@@ -980,9 +980,8 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
 
                     if (vclass != NULL)
                     {
-                        struct vfs_s_subclass *sub = (struct vfs_s_subclass *) vclass;
-
-                        if ((sub->flags & VFS_S_REMOTE) != 0)
+                        struct vfs_s_subclass *sub = (struct vfs_s_subclass *) vclass->data;
+                        if (sub != NULL && sub->flags & VFS_S_REMOTE)
                         {
                             s = vfs_prefix;
                             continue;

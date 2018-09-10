@@ -141,6 +141,7 @@ typedef struct vfs_class
     const char *name;           /* "FIles over SHell" */
     vfs_class_flags_t flags;
     const char *prefix;         /* "fish:" */
+    void *data;                 /* this is for filesystem's own use */
     int verrno;                 /* can't use errno because glibc2 might define errno as function */
 
     /* *INDENT-OFF* */
