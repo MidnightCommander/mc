@@ -60,12 +60,12 @@ setup (void)
     memset (&test_subclass1, 0, sizeof (test_subclass1));
     vfs_s_init_class (&test_subclass1);
     vfs_test_ops1->name = "testfs1";
-    vfs_test_ops1->flags = VFSF_NOLINKS;
+    vfs_test_ops1->flags = VFS_NOLINKS;
     vfs_test_ops1->prefix = "test1";
     vfs_register_class (vfs_test_ops1);
 
     memset (&test_subclass2, 0, sizeof (test_subclass2));
-    test_subclass2.flags = VFS_S_REMOTE;
+    vfs_test_ops2->flags = VFS_REMOTE;
     vfs_s_init_class (&test_subclass2);
     vfs_test_ops2->name = "testfs2";
     vfs_test_ops2->prefix = "test2";

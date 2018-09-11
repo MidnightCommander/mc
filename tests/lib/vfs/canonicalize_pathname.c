@@ -58,10 +58,9 @@ setup (void)
 #endif
 
     memset (&test_subclass, 0, sizeof (test_subclass));
-    test_subclass.flags = VFS_S_REMOTE;
+    vfs_test_ops->flags = VFS_NOLINKS | VFS_REMOTE;
     vfs_s_init_class (&test_subclass);
     vfs_test_ops->name = "testfs";
-    vfs_test_ops->flags = VFSF_NOLINKS;
     vfs_test_ops->prefix = "ftp";
     vfs_register_class (vfs_test_ops);
 }

@@ -43,14 +43,6 @@
 
 /*** enums ***************************************************************************************/
 
-/* For vfs_s_subclass->flags */
-typedef enum
-{
-    VFS_S_REMOTE = 1L << 0,
-    VFS_S_READONLY = 1L << 1,
-    VFS_S_USETMP = 1L << 2,
-} vfs_subclass_flags_t;
-
 typedef enum
 {
     LS_NOT_LINEAR = 0,
@@ -124,7 +116,6 @@ struct vfs_s_subclass
 
     GList *supers;
     int inode_counter;
-    vfs_subclass_flags_t flags; /* whether the subclass is remove, read-only etc */
     dev_t rdev;
     FILE *logfile;
     int flush;                  /* if set to 1, invalidate directory cache */

@@ -884,14 +884,14 @@ init_cpiofs (void)
 {
     memset (&cpio_subclass, 0, sizeof (cpio_subclass));
 
-    cpio_subclass.flags = VFS_S_READONLY;       /* FIXME: cpiofs used own temp files */
+    vfs_cpiofs_ops->flags = VFS_READONLY;       /* FIXME: cpiofs used own temp files */
     cpio_subclass.archive_check = cpio_super_check;
     cpio_subclass.archive_same = cpio_super_same;
     cpio_subclass.open_archive = cpio_open_archive;
     cpio_subclass.free_archive = cpio_free_archive;
     cpio_subclass.fh_open = cpio_fh_open;
-
     vfs_s_init_class (&cpio_subclass);
+
     vfs_cpiofs_ops->name = "cpiofs";
     vfs_cpiofs_ops->prefix = "ucpio";
     vfs_cpiofs_ops->read = cpio_read;

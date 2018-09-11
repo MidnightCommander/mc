@@ -107,13 +107,16 @@ typedef struct utimbuf mc_timesbuf_t;
 
 /*** enums ***************************************************************************************/
 
-/* Flags of VFS classes */
 typedef enum
 {
-    VFSF_UNKNOWN = 0,
-    VFSF_LOCAL = 1 << 0,        /* Class is local (not virtual) filesystem */
-    VFSF_NOLINKS = 1 << 1       /* Hard links not supported */
-} vfs_class_flags_t;
+    VFS_UNKNOWN = 0,
+    VFS_LOCAL = 1 << 0,         /* Class is local (not virtual) filesystem */
+    VFS_NOLINKS = 1 << 1,       /* Hard links not supported */
+
+    VFS_REMOTE = 1 << 2,
+    VFS_READONLY = 1 << 3,
+    VFS_USETMP = 1 << 4
+} vfs_flags_t;
 
 /* Operations for mc_ctl - on open file */
 enum
@@ -139,7 +142,7 @@ enum
 typedef struct vfs_class
 {
     const char *name;           /* "FIles over SHell" */
-    vfs_class_flags_t flags;
+    vfs_flags_t flags;
     const char *prefix;         /* "fish:" */
     int verrno;                 /* can't use errno because glibc2 might define errno as function */
 
@@ -255,7 +258,7 @@ gboolean vfs_file_is_local (const vfs_path_t * vpath);
 
 char *vfs_strip_suffix_from_filename (const char *filename);
 
-vfs_class_flags_t vfs_file_class_flags (const vfs_path_t * vpath);
+vfs_flags_t vfs_file_class_flags (const vfs_path_t * vpath);
 
 /* translate path back to terminal encoding, remove all #enc:
  * every invalid character is replaced with question mark

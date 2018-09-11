@@ -426,7 +426,7 @@ init_localfs (void)
     memset (&local_subclass, 0, sizeof (local_subclass));
 
     vfs_local_ops->name = "localfs";
-    vfs_local_ops->flags = VFSF_LOCAL;
+    vfs_local_ops->flags = VFS_LOCAL;
     vfs_local_ops->which = local_which;
     vfs_local_ops->open = local_open;
     vfs_local_ops->close = local_close;

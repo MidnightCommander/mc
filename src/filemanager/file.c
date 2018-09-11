@@ -353,7 +353,7 @@ check_hardlinks (const vfs_path_t * src_vpath, const struct stat *src_stat,
 
     if (src_stat->st_nlink < 2)
         return HARDLINK_NOTLINK;
-    if ((vfs_file_class_flags (src_vpath) & VFSF_NOLINKS) != 0)
+    if ((vfs_file_class_flags (src_vpath) & VFS_NOLINKS) != 0)
         return HARDLINK_UNSUPPORTED;
 
     lnk = (struct link *) is_in_linklist (linklist, src_vpath, src_stat);

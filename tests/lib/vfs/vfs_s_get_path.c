@@ -90,14 +90,12 @@ setup (void)
     vfs_setup_work_dir ();
 
     memset (&test_subclass1, 0, sizeof (test_subclass1));
-    test_subclass1.flags = VFS_S_REMOTE;
+    vfs_test_ops1->flags = VFS_NOLINKS | VFS_REMOTE;
     test_subclass1.open_archive = test1_mock_open_archive;
     test_subclass1.archive_same = test1_mock_archive_same;
     test_subclass1.archive_check = NULL;
     vfs_s_init_class (&test_subclass1);
-
     vfs_test_ops1->name = "testfs1";
-    vfs_test_ops1->flags = VFSF_NOLINKS;
     vfs_test_ops1->prefix = "test1:";
     vfs_register_class (vfs_test_ops1);
 

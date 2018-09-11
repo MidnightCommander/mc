@@ -85,8 +85,7 @@ static const struct test_cd_ds
 {
     const char *input_initial_path;
     const char *input_cd_path;
-    const vfs_class_flags_t input_class_flags;
-    const vfs_subclass_flags_t input_subclass_flags;
+    const vfs_flags_t input_class_flags;
 
     const char *expected_cd_path;
 } test_cd_ds[] =
@@ -94,64 +93,55 @@ static const struct test_cd_ds
     { /* 0. */
         "/",
         "/dev/some.file/test://",
-        VFSF_NOLINKS,
-        0,
+        VFS_NOLINKS,
         "/dev/some.file/test://"
     },
     { /* 1. */
         "/",
         "/dev/some.file/test://bla-bla",
-        VFSF_NOLINKS,
-        0,
+        VFS_NOLINKS,
         "/dev/some.file/test://bla-bla"
     },
     { /* 2. */
         "/dev/some.file/test://bla-bla",
         "..",
-        VFSF_NOLINKS,
-        0,
+        VFS_NOLINKS,
         "/dev/some.file/test://"
     },
     { /* 3. */
         "/dev/some.file/test://",
         "..",
-        VFSF_NOLINKS,
-        0,
+        VFS_NOLINKS,
         "/dev"
     },
     { /* 4. */
         "/dev",
         "..",
-        VFSF_NOLINKS,
-        0,
+        VFS_NOLINKS,
         "/"
     },
     { /* 5. */
         "/",
         "..",
-        VFSF_NOLINKS,
-        0,
+        VFS_NOLINKS,
         "/"
     },
     { /* 6. */
         "/",
         "/test://user:pass@host.net/path",
-        VFSF_NOLINKS,
-        VFS_S_REMOTE,
+        VFS_NOLINKS | VFS_REMOTE,
         "/test://user:pass@host.net/path"
     },
     { /* 7. */
         "/test://user:pass@host.net/path",
         "..",
-        VFSF_NOLINKS,
-        VFS_S_REMOTE,
+        VFS_NOLINKS | VFS_REMOTE,
         "/test://user:pass@host.net/"
     },
     { /* 8. */
         "/test://user:pass@host.net/",
         "..",
-        VFSF_NOLINKS,
-        VFS_S_REMOTE,
+        VFS_NOLINKS | VFS_REMOTE,
         "/"
     },
 };
@@ -166,9 +156,8 @@ START_PARAMETRIZED_TEST (test_cd, test_cd_ds)
     vfs_path_t *vpath;
 
     vfs_test_ops->flags = data->input_class_flags;
-    test_subclass.flags = data->input_subclass_flags;
-
     vfs_register_class (vfs_test_ops);
+
     vfs_set_raw_current_dir (vfs_path_from_str (data->input_initial_path));
 
     vpath = vfs_path_from_str (data->input_cd_path);

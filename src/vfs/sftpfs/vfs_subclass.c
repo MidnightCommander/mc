@@ -183,12 +183,11 @@ void
 sftpfs_init_subclass (void)
 {
     memset (&sftpfs_subclass, 0, sizeof (sftpfs_subclass));
-    sftpfs_subclass.flags = VFS_S_REMOTE;
-
     sftpfs_subclass.archive_same = sftpfs_cb_is_equal_connection;
     sftpfs_subclass.open_archive = sftpfs_cb_open_connection;
     sftpfs_subclass.free_archive = sftpfs_cb_close_connection;
     sftpfs_subclass.dir_load = sftpfs_cb_dir_load;
+    vfs_s_init_class (&sftpfs_subclass);
 }
 
 /* --------------------------------------------------------------------------------------------- */

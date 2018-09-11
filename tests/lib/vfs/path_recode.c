@@ -246,10 +246,9 @@ START_PARAMETRIZED_TEST (test_path_to_str_flags, test_path_to_str_flags_ds)
     test_init_vfs ("UTF-8");
 
     memset (&test_subclass1, 0, sizeof (test_subclass1));
-    test_subclass1.flags = VFS_S_REMOTE;
+    vfs_test_ops1->flags = VFS_NOLINKS | VFS_REMOTE;
     vfs_s_init_class (&test_subclass1);
     vfs_test_ops1->name = "testfs1";
-    vfs_test_ops1->flags = VFSF_NOLINKS;
     vfs_test_ops1->prefix = "test1";
     vfs_register_class (vfs_test_ops1);
 

@@ -2644,7 +2644,7 @@ init_ftpfs (void)
 
     memset (&ftpfs_subclass, 0, sizeof (ftpfs_subclass));
 
-    ftpfs_subclass.flags = VFS_S_REMOTE | VFS_S_USETMP;
+    vfs_ftpfs_ops->flags = VFS_NOLINKS | VFS_REMOTE | VFS_USETMP;
     ftpfs_subclass.archive_same = ftpfs_archive_same;
     ftpfs_subclass.open_archive = ftpfs_open_archive;
     ftpfs_subclass.free_archive = ftpfs_free_archive;
@@ -2659,7 +2659,6 @@ init_ftpfs (void)
 
     vfs_s_init_class (&ftpfs_subclass);
     vfs_ftpfs_ops->name = "ftpfs";
-    vfs_ftpfs_ops->flags = VFSF_NOLINKS;
     vfs_ftpfs_ops->prefix = "ftp";
     vfs_ftpfs_ops->done = &ftpfs_done;
     vfs_ftpfs_ops->fill_names = ftpfs_fill_names;

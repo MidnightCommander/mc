@@ -2245,7 +2245,7 @@ init_smbfs (void)
 
     vfs_smbfs_ops->name = "smbfs";
     vfs_smbfs_ops->prefix = "smb";
-    vfs_smbfs_ops->flags = VFSF_NOLINKS;
+    vfs_smbfs_ops->flags = VFS_NOLINKS;
     vfs_smbfs_ops->init = smbfs_init;
     vfs_smbfs_ops->fill_names = smbfs_fill_names;
     vfs_smbfs_ops->open = smbfs_open;

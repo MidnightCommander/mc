@@ -684,7 +684,6 @@ sftpfs_init_class (void)
 {
     sftpfs_class->name = "sftpfs";
     sftpfs_class->prefix = "sftp";
-    sftpfs_class->flags = VFSF_NOLINKS;
 
     sftpfs_class->init = sftpfs_cb_init;
     sftpfs_class->done = sftpfs_cb_done;
