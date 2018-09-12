@@ -139,7 +139,7 @@ static pstring password;
 static pstring username;
 
 static struct vfs_s_subclass smbfs_subclass;
-static struct vfs_class *vfs_smbfs_ops = (struct vfs_class *) &smbfs_subclass;
+static struct vfs_class *vfs_smbfs_ops = VFS_CLASS (&smbfs_subclass);
 
 static struct _smbfs_connection
 {

@@ -103,7 +103,7 @@ typedef struct cachedfile
 static GSList *head;
 
 static struct vfs_s_subclass sfs_subclass;
-static struct vfs_class *vfs_sfs_ops = (struct vfs_class *) &sfs_subclass;
+static struct vfs_class *vfs_sfs_ops = VFS_CLASS (&sfs_subclass);
 
 static int sfs_no = 0;
 static char *sfs_prefix[MAXFS];

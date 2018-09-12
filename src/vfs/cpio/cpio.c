@@ -144,7 +144,7 @@ typedef struct
 /*** file scope variables ************************************************************************/
 
 static struct vfs_s_subclass cpio_subclass;
-static struct vfs_class *vfs_cpiofs_ops = (struct vfs_class *) &cpio_subclass;
+static struct vfs_class *vfs_cpiofs_ops = VFS_CLASS (&cpio_subclass);
 
 static off_t cpio_position;
 
@@ -266,7 +266,7 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const vfs_
     root->st.st_mode = mode;
     root->data_offset = -1;
     root->st.st_nlink++;
-    root->st.st_dev = MEDATA->rdev++;
+    root->st.st_dev = VFS_SUBCLASS (me)->rdev++;
 
     super->root = root;
 
@@ -444,7 +444,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat 
         tn++;
     }
 
-    entry = MEDATA->find_entry (me, root, tn, LINK_FOLLOW, FL_NONE);    /* In case entry is already there */
+    entry = VFS_SUBCLASS (me)->find_entry (me, root, tn, LINK_FOLLOW, FL_NONE); /* In case entry is already there */
 
     if (entry != NULL)
     {

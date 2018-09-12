@@ -156,7 +156,7 @@ typedef struct
 static char reply_str[80];
 
 static struct vfs_s_subclass fish_subclass;
-static struct vfs_class *vfs_fish_ops = (struct vfs_class *) &fish_subclass;
+static struct vfs_class *vfs_fish_ops = VFS_CLASS (&fish_subclass);
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
@@ -267,7 +267,7 @@ fish_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, c
               size_t cmd_len)
 {
     ssize_t status;
-    FILE *logfile = MEDATA->logfile;
+    FILE *logfile = VFS_SUBCLASS (me)->logfile;
 
     if (cmd_len == (size_t) (-1))
         cmd_len = strlen (cmd);
@@ -740,10 +740,10 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
      * Simple FISH debug interface :]
      */
 #if 0
-    if (MEDATA->logfile == NULL)
-        MEDATA->logfile = fopen ("/tmp/mc-FISH.sh", "w");
+    if (VFS_SUBCLASS (me)->logfile == NULL)
+        VFS_SUBCLASS (me)->logfile = fopen ("/tmp/mc-FISH.sh", "w");
 #endif
-    logfile = MEDATA->logfile;
+    logfile = VFS_SUBCLASS (me)->logfile;
 
     vfs_print_message (_("fish: Reading directory %s..."), remote_path);
 
@@ -1675,7 +1675,7 @@ fish_fill_names (struct vfs_class *me, fill_names_f func)
 {
     GList *iter;
 
-    for (iter = MEDATA->supers; iter != NULL; iter = g_list_next (iter))
+    for (iter = VFS_SUBCLASS (me)->supers; iter != NULL; iter = g_list_next (iter))
     {
         const struct vfs_s_super *super = (const struct vfs_s_super *) iter->data;
 

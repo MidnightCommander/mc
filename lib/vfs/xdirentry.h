@@ -34,9 +34,7 @@
 
 #define ERRNOR(a, b) do { me->verrno = a; return b; } while (0)
 
-#define MEDATA ((struct vfs_s_subclass *) me)
-
-#define VFS_SUBCLASS(a) ((struct vfs_s_subclass *) a->class)
+#define VFS_SUBCLASS(a) ((struct vfs_s_subclass *) (a))
 
 #define FH ((vfs_file_handler_t *) fh)
 #define FH_SUPER FH->ino->super

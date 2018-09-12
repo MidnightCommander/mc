@@ -34,9 +34,9 @@
 #include "src/vfs/local/local.c"
 
 struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
-static struct vfs_class *vfs_test_ops1 = (struct vfs_class *) &test_subclass1;
-static struct vfs_class *vfs_test_ops2 = (struct vfs_class *) &test_subclass2;
-static struct vfs_class *vfs_test_ops3 = (struct vfs_class *) &test_subclass3;
+static struct vfs_class *vfs_test_ops1 = VFS_CLASS (&test_subclass1);
+static struct vfs_class *vfs_test_ops2 = VFS_CLASS (&test_subclass2);
+static struct vfs_class *vfs_test_ops3 = VFS_CLASS (&test_subclass3);
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -107,27 +107,27 @@ static const struct test_vfs_prefix_to_class_ds
 {
     { /* 0 */
         "test_1:",
-        (struct vfs_class *) &test_subclass1
+        VFS_CLASS (&test_subclass1)
     },
     { /* 1 */
         "test_2:",
-        (struct vfs_class *) &test_subclass1
+        VFS_CLASS (&test_subclass1)
     },
     { /* 2 */
         "test_3:",
-        (struct vfs_class *) &test_subclass1
+        VFS_CLASS (&test_subclass1)
     },
     { /* 3 */
         "test_4:",
-        (struct vfs_class *) &test_subclass1
+        VFS_CLASS (&test_subclass1)
     },
     { /* 4 */
         "test2:",
-        (struct vfs_class *) &test_subclass2
+        VFS_CLASS (&test_subclass2)
     },
     { /* 5 */
         "test3:",
-        (struct vfs_class *) &test_subclass3
+        VFS_CLASS (&test_subclass3)
     },
     {
         "test1:",

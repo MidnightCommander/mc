@@ -238,7 +238,7 @@ static struct linklist *connections_list;
 static char reply_str[80];
 
 static struct vfs_s_subclass ftpfs_subclass;
-static struct vfs_class *vfs_ftpfs_ops = (struct vfs_class *) &ftpfs_subclass;
+static struct vfs_class *vfs_ftpfs_ops = VFS_CLASS (&ftpfs_subclass);
 
 static GSList *no_proxy;
 
@@ -307,10 +307,10 @@ ftpfs_translate_path (struct vfs_class *me, struct vfs_s_super *super, const cha
     {
         char *ret, *p;
 
-        if (MEDATA->logfile)
+        if (VFS_SUBCLASS (me)->logfile != NULL)
         {
-            fprintf (MEDATA->logfile, "MC -- ftpfs_translate_path: %s\n", remote_path);
-            fflush (MEDATA->logfile);
+            fprintf (VFS_SUBCLASS (me)->logfile, "MC -- ftpfs_translate_path: %s\n", remote_path);
+            fflush (VFS_SUBCLASS (me)->logfile);
         }
 
         /* strip leading slash(es) */
@@ -490,19 +490,19 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
     va_end (ap);
     g_string_append (cmdstr, "\r\n");
 
-    if (MEDATA->logfile != NULL)
+    if (VFS_SUBCLASS (me)->logfile != NULL)
     {
         if (strncmp (cmdstr->str, "PASS ", 5) == 0)
-            fputs ("PASS <Password not logged>\r\n", MEDATA->logfile);
+            fputs ("PASS <Password not logged>\r\n", VFS_SUBCLASS (me)->logfile);
         else
         {
             size_t ret;
 
-            ret = fwrite (cmdstr->str, cmdstr->len, 1, MEDATA->logfile);
+            ret = fwrite (cmdstr->str, cmdstr->len, 1, VFS_SUBCLASS (me)->logfile);
             (void) ret;
         }
 
-        fflush (MEDATA->logfile);
+        fflush (VFS_SUBCLASS (me)->logfile);
     }
 
     got_sigpipe = 0;
@@ -624,7 +624,7 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
         super->path_element->password = g_strdup (op);
     }
 
-    if (!anon || MEDATA->logfile)
+    if (!anon || VFS_SUBCLASS (me)->logfile != NULL)
         pass = op;
     else
     {
@@ -652,10 +652,10 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
             SUP->strict = RFC_STRICT;
         g_free (reply_up);
 
-        if (MEDATA->logfile)
+        if (VFS_SUBCLASS (me)->logfile != NULL)
         {
-            fprintf (MEDATA->logfile, "MC -- remote_is_amiga =  %d\n", SUP->remote_is_amiga);
-            fflush (MEDATA->logfile);
+            fprintf (VFS_SUBCLASS (me)->logfile, "MC -- remote_is_amiga =  %d\n", SUP->remote_is_amiga);
+            fflush (VFS_SUBCLASS (me)->logfile);
         }
 
         vfs_print_message ("%s", _("ftpfs: sending login name"));
@@ -1630,10 +1630,10 @@ resolve_symlink_with_ls_options (struct vfs_class *me, struct vfs_s_super *super
         {
             if (fgets (buffer, sizeof (buffer), fp) == NULL)
                 goto done;
-            if (MEDATA->logfile)
+            if (VFS_SUBCLASS (me)->logfile != NULL)
             {
-                fputs (buffer, MEDATA->logfile);
-                fflush (MEDATA->logfile);
+                fputs (buffer, VFS_SUBCLASS (me)->logfile);
+                fflush (VFS_SUBCLASS (me)->logfile);
             }
             vfs_die ("This code should be commented out\n");
             if (vfs_parse_ls_lga (buffer, &s, &filename, NULL))
@@ -1758,11 +1758,11 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
             return -1;
         }
 
-        if (MEDATA->logfile)
+        if (VFS_SUBCLASS (me)->logfile != NULL)
         {
-            fputs (lc_buffer, MEDATA->logfile);
-            fputs ("\n", MEDATA->logfile);
-            fflush (MEDATA->logfile);
+            fputs (lc_buffer, VFS_SUBCLASS (me)->logfile);
+            fputs ("\n", VFS_SUBCLASS (me)->logfile);
+            fflush (VFS_SUBCLASS (me)->logfile);
         }
 
         ent = vfs_s_generate_entry (me, NULL, dir, 0);
@@ -2318,7 +2318,7 @@ ftpfs_fill_names (struct vfs_class *me, fill_names_f func)
 {
     GList *iter;
 
-    for (iter = MEDATA->supers; iter != NULL; iter = g_list_next (iter))
+    for (iter = VFS_SUBCLASS (me)->supers; iter != NULL; iter = g_list_next (iter))
     {
         const struct vfs_s_super *super = (const struct vfs_s_super *) iter->data;
         char *name;

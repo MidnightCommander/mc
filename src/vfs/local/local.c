@@ -48,7 +48,7 @@
 /*** file scope variables ************************************************************************/
 
 static struct vfs_s_subclass local_subclass;
-static struct vfs_class *vfs_local_ops = (struct vfs_class *) &local_subclass;
+static struct vfs_class *vfs_local_ops = VFS_CLASS (&local_subclass);
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */

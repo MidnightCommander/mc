@@ -38,9 +38,9 @@
 #include "src/vfs/local/local.c"
 
 struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
-static struct vfs_class *vfs_test_ops1 = (struct vfs_class *) &test_subclass1;
-static struct vfs_class *vfs_test_ops2 = (struct vfs_class *) &test_subclass2;
-static struct vfs_class *vfs_test_ops3 = (struct vfs_class *) &test_subclass3;
+static struct vfs_class *vfs_test_ops1 = VFS_CLASS (&test_subclass1);
+static struct vfs_class *vfs_test_ops2 = VFS_CLASS (&test_subclass2);
+static struct vfs_class *vfs_test_ops3 = VFS_CLASS (&test_subclass3);
 
 #define ETALON_PATH_STR "/#test1/bla-bla/some/path/#test2/bla-bla/some/path#test3/111/22/33"
 #define ETALON_PATH_URL_STR "/test1://bla-bla/some/path/test2://bla-bla/some/path/test3://111/22/33"
@@ -114,21 +114,21 @@ static const struct test_from_to_string_ds
         ETALON_PATH_URL_STR,
         "111/22/33",
         4,
-        (struct vfs_class *) &test_subclass3
+        VFS_CLASS (&test_subclass3)
     },
     { /* 1. */
         "/",
         "/",
         "/",
         1,
-        (struct vfs_class *) &local_subclass
+        VFS_CLASS (&local_subclass)
     },
     { /* 2. */
         "/test1://bla-bla/some/path/test2://user:passwd@some.host:1234/bla-bla/some/path/test3://111/22/33",
         "/test1://bla-bla/some/path/test2://user:passwd@some.host:1234/bla-bla/some/path/test3://111/22/33",
         "111/22/33",
         4,
-        (struct vfs_class *) &test_subclass3
+        VFS_CLASS (&test_subclass3)
     },
 #ifdef HAVE_CHARSET
     { /* 3. */
@@ -136,42 +136,42 @@ static const struct test_from_to_string_ds
         "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
         "111/22/33",
         4,
-        (struct vfs_class *) &test_subclass3
+        VFS_CLASS (&test_subclass3)
     },
     { /* 4. */
         "/#test1/bla-bla1/#enc:IBM866/some/path/#test2/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
         "/test1://#enc:IBM866/bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
         "111/22/33",
         4,
-        (struct vfs_class *) &test_subclass3
+        VFS_CLASS (&test_subclass3)
     },
     {  /* 5. */
         "/#test1/bla-bla1/some/path/#test2/bla-bla2/#enc:IBM866/#enc:KOI8-R/some/path#test3/111/22/33",
         "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
         "111/22/33",
         4,
-        (struct vfs_class *) &test_subclass3
+        VFS_CLASS (&test_subclass3)
     },
     { /* 6. */
         "/#test1/bla-bla1/some/path/#test2/bla-bla2/#enc:IBM866/some/#enc:KOI8-R/path#test3/111/22/33",
         "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
         "111/22/33",
         4,
-        (struct vfs_class *) &test_subclass3
+        VFS_CLASS (&test_subclass3)
     },
     { /* 7. */
         "/#test1/bla-bla1/some/path/#test2/#enc:IBM866/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
         "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
         "111/22/33",
         4,
-        (struct vfs_class *) &test_subclass3
+        VFS_CLASS (&test_subclass3)
     },
     { /* 8. */
         "/#test1/bla-bla1/some/path/#enc:IBM866/#test2/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
         "/test1://#enc:IBM866/bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
         "111/22/33",
         4,
-        (struct vfs_class *) &test_subclass3
+        VFS_CLASS (&test_subclass3)
     },
 #endif /* HAVE_CHARSET */
 };

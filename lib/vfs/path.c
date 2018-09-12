@@ -336,7 +336,7 @@ vfs_get_class_by_name (const char *class_name)
 
     for (i = 0; i < vfs__classes_list->len; i++)
     {
-        struct vfs_class *vfs = (struct vfs_class *) g_ptr_array_index (vfs__classes_list, i);
+        struct vfs_class *vfs = VFS_CLASS (g_ptr_array_index (vfs__classes_list, i));
         if ((vfs->name != NULL) && (strcmp (vfs->name, class_name) == 0))
             return vfs;
     }
@@ -461,8 +461,8 @@ vfs_path_from_str_uri_parser (char *path)
         element->vfs_prefix = g_strdup (vfs_prefix_start);
 
         url_delimiter += strlen (VFS_PATH_URL_DELIMITER);
-        sub = VFS_SUBCLASS (element);
-        if (sub != NULL && (((struct vfs_class *) sub)->flags & VFS_REMOTE) != 0)
+        sub = VFS_SUBCLASS (element->class);
+        if (sub != NULL && (VFS_CLASS (sub)->flags & VFS_REMOTE) != 0)
         {
             char *slash_pointer;
 
@@ -1004,7 +1004,7 @@ vfs_prefix_to_class (const char *prefix)
     {
         struct vfs_class *vfs;
 
-        vfs = (struct vfs_class *) g_ptr_array_index (vfs__classes_list, i);
+        vfs = VFS_CLASS (g_ptr_array_index (vfs__classes_list, i));
         if (vfs->which != NULL)
         {
             if (vfs->which (vfs, prefix) == -1)

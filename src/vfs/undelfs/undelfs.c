@@ -132,7 +132,7 @@ static int readdir_ptr;
 static int undelfs_usage;
 
 static struct vfs_s_subclass undelfs_subclass;
-static struct vfs_class *vfs_undelfs_ops = (struct vfs_class *) &undelfs_subclass;
+static struct vfs_class *vfs_undelfs_ops = VFS_CLASS (&undelfs_subclass);
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/

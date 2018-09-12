@@ -38,9 +38,9 @@
 #define ETALON_VFS_URL_NAME "test2://user:pass@host.net"
 
 struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
-static struct vfs_class *vfs_test_ops1 = (struct vfs_class *) &test_subclass1;
-static struct vfs_class *vfs_test_ops2 = (struct vfs_class *) &test_subclass2;
-static struct vfs_class *vfs_test_ops3 = (struct vfs_class *) &test_subclass3;
+static struct vfs_class *vfs_test_ops1 = VFS_CLASS (&test_subclass1);
+static struct vfs_class *vfs_test_ops2 = VFS_CLASS (&test_subclass2);
+static struct vfs_class *vfs_test_ops3 = VFS_CLASS (&test_subclass3);
 
 /* --------------------------------------------------------------------------------------------- */
 

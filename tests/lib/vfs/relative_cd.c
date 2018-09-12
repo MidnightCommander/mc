@@ -34,7 +34,7 @@
 
 
 struct vfs_s_subclass test_subclass1;
-static struct vfs_class *vfs_test_ops1 = (struct vfs_class *) &test_subclass1;
+static struct vfs_class *vfs_test_ops1 = VFS_CLASS (&test_subclass1);
 
 static int test_chdir (const vfs_path_t * vpath);
 

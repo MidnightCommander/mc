@@ -26,6 +26,8 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+#define VFS_CLASS(a) ((struct vfs_class *) (a))
+
 #if defined (ENABLE_VFS_FTP) || defined (ENABLE_VFS_FISH) || defined (ENABLE_VFS_SMB)
 #define ENABLE_VFS_NET 1
 #endif

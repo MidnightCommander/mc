@@ -35,7 +35,7 @@
 /*** global variables ****************************************************************************/
 
 struct vfs_s_subclass sftpfs_subclass;
-struct vfs_class *sftpfs_class = (struct vfs_class *) &sftpfs_subclass;
+struct vfs_class *sftpfs_class = VFS_CLASS (&sftpfs_subclass);
 
 /*** file scope macro definitions ****************************************************************/
 

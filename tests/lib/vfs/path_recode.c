@@ -165,7 +165,7 @@ END_PARAMETRIZED_TEST
 /* --------------------------------------------------------------------------------------------- */
 
 static struct vfs_s_subclass test_subclass1;
-static struct vfs_class *vfs_test_ops1 = (struct vfs_class *) &test_subclass1;
+static struct vfs_class *vfs_test_ops1 = VFS_CLASS (&test_subclass1);
 
 /* @DataSource("test_path_to_str_flags_ds") */
 /* *INDENT-OFF* */

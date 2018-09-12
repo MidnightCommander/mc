@@ -196,7 +196,7 @@ typedef struct
 /*** file scope variables ************************************************************************/
 
 static struct vfs_s_subclass tarfs_subclass;
-static struct vfs_class *vfs_tarfs_ops = (struct vfs_class *) &tarfs_subclass;
+static struct vfs_class *vfs_tarfs_ops = VFS_CLASS (&tarfs_subclass);
 
 /* As we open one archive at a time, it is safe to have this static */
 static off_t current_tar_position = 0;
@@ -314,7 +314,7 @@ tar_open_archive_int (struct vfs_class *me, const vfs_path_t * vpath, struct vfs
     root->st.st_mode = mode;
     root->data_offset = -1;
     root->st.st_nlink++;
-    root->st.st_dev = MEDATA->rdev++;
+    root->st.st_dev = VFS_SUBCLASS (me)->rdev++;
 
     archive->root = root;
 
@@ -710,7 +710,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
         tar_fill_stat (archive, &st, header, *h_size);
         if (S_ISDIR (st.st_mode))
         {
-            entry = MEDATA->find_entry (me, parent, p, LINK_NO_FOLLOW, FL_NONE);
+            entry = VFS_SUBCLASS (me)->find_entry (me, parent, p, LINK_NO_FOLLOW, FL_NONE);
             if (entry)
                 goto done;
         }

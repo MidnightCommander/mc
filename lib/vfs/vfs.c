@@ -503,7 +503,7 @@ vfs_shut (void)
 
     for (i = 0; i < vfs__classes_list->len; i++)
     {
-        struct vfs_class *vfs = (struct vfs_class *) g_ptr_array_index (vfs__classes_list, i);
+        struct vfs_class *vfs = VFS_CLASS (g_ptr_array_index (vfs__classes_list, i));
 
         if (vfs->done != NULL)
             vfs->done (vfs);
@@ -534,7 +534,7 @@ vfs_fill_names (fill_names_f func)
 
     for (i = 0; i < vfs__classes_list->len; i++)
     {
-        struct vfs_class *vfs = (struct vfs_class *) g_ptr_array_index (vfs__classes_list, i);
+        struct vfs_class *vfs = VFS_CLASS (g_ptr_array_index (vfs__classes_list, i));
 
         if (vfs->fill_names != NULL)
             vfs->fill_names (vfs, func);

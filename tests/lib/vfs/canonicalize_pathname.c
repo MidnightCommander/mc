@@ -38,7 +38,7 @@
 #include "src/vfs/local/local.c"
 
 static struct vfs_s_subclass test_subclass;
-static struct vfs_class *vfs_test_ops = (struct vfs_class *) &test_subclass;
+static struct vfs_class *vfs_test_ops = VFS_CLASS (&test_subclass);
 
 /* --------------------------------------------------------------------------------------------- */
 

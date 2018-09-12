@@ -142,7 +142,7 @@ static gboolean errloop;
 static gboolean notadir;
 
 static struct vfs_s_subclass extfs_subclass;
-static struct vfs_class *vfs_extfs_ops = (struct vfs_class *) &extfs_subclass;
+static struct vfs_class *vfs_extfs_ops = VFS_CLASS (&extfs_subclass);
 
 static GSList *first_archive = NULL;
 static int my_errno = 0;
