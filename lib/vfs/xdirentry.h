@@ -38,8 +38,8 @@
 
 #define VFS_SUPER(a) ((struct vfs_s_super *) (a))
 
-#define FH ((vfs_file_handler_t *) fh)
-#define FH_SUPER FH->ino->super
+#define VFS_FILE_HANDLER(a) ((vfs_file_handler_t *) a)
+#define VFS_FILE_HANDLER_SUPER(a) VFS_FILE_HANDLER (a)->ino->super
 
 /*** enums ***************************************************************************************/
 

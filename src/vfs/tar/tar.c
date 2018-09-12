@@ -880,21 +880,22 @@ tar_super_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *pa
 static ssize_t
 tar_read (void *fh, char *buffer, size_t count)
 {
-    off_t begin = FH->ino->data_offset;
-    int fd = TAR_SUPER (FH_SUPER)->fd;
-    struct vfs_class *me = FH_SUPER->me;
+    struct vfs_class *me = VFS_FILE_HANDLER_SUPER (fh)->me;
+    vfs_file_handler_t *file = VFS_FILE_HANDLER (fh);
+    off_t begin = file->ino->data_offset;
+    int fd = TAR_SUPER (VFS_FILE_HANDLER_SUPER (fh))->fd;
     ssize_t res;
 
-    if (mc_lseek (fd, begin + FH->pos, SEEK_SET) != begin + FH->pos)
+    if (mc_lseek (fd, begin + file->pos, SEEK_SET) != begin + file->pos)
         ERRNOR (EIO, -1);
 
-    count = MIN (count, (size_t) (FH->ino->st.st_size - FH->pos));
+    count = MIN (count, (size_t) (file->ino->st.st_size - file->pos));
 
     res = mc_read (fd, buffer, count);
     if (res == -1)
         ERRNOR (errno, -1);
 
-    FH->pos += res;
+    file->pos += res;
     return res;
 }
 

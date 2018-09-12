@@ -154,8 +154,8 @@ gboolean ftpfs_ignore_chattr_errors = TRUE;
 #endif
 
 #define FTP_SUPER(super) ((ftp_super_t *) (super))
-#define FTP_FH ((ftp_file_handler_t *) fh)
-#define FH_SOCK FTP_FH->sock
+#define FTP_FILE_HANDLER(fh) ((ftp_file_handler_t *) (fh))
+#define FH_SOCK FTP_FILE_HANDLER(fh)->sock
 
 #ifndef INADDR_NONE
 #define INADDR_NONE 0xffffffff
@@ -1468,7 +1468,7 @@ ftpfs_open_data_connection (struct vfs_class *me, struct vfs_s_super *super, con
 static void
 ftpfs_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
 {
-    struct vfs_s_super *super = FH_SUPER;
+    struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
     ftp_super_t *ftp_super = FTP_SUPER (super);
     static unsigned char const ipbuf[3] = { IAC, IP, IAC };
     fd_set mask;
@@ -1856,6 +1856,10 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
 static int
 ftpfs_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char *localname)
 {
+    struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
+    ftp_super_t *ftp_super = FTP_SUPER (super);
+    ftp_file_handler_t *ftp = FTP_FILE_HANDLER (fh);
+
     int h, sock;
     off_t n_stored;
 #ifdef HAVE_STRUCT_LINGER_L_LINGER
@@ -1866,9 +1870,6 @@ ftpfs_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, cha
     char lc_buffer[BUF_8K];
     struct stat s;
     char *w_buf;
-    struct vfs_s_super *super = FH_SUPER;
-    ftp_super_t *ftp_super = FTP_SUPER (super);
-    ftp_file_handler_t *ftp = FTP_FH;
 
     h = open (localname, O_RDONLY);
     if (h == -1)
@@ -1955,12 +1956,14 @@ ftpfs_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
     name = vfs_s_fullpath (me, fh->ino);
     if (name == NULL)
         return 0;
-    FH_SOCK = ftpfs_open_data_connection (me, FH_SUPER, "RETR", name, TYPE_BINARY, offset);
+    FH_SOCK =
+        ftpfs_open_data_connection (me, VFS_FILE_HANDLER_SUPER (fh), "RETR", name, TYPE_BINARY,
+                                    offset);
     g_free (name);
     if (FH_SOCK == -1)
         ERRNOR (EACCES, 0);
     fh->linear = LS_LINEAR_OPEN;
-    FTP_FH->append = 0;
+    FTP_FILE_HANDLER (fh)->append = 0;
     return 1;
 }
 
@@ -1970,7 +1973,7 @@ static ssize_t
 ftpfs_linear_read (struct vfs_class *me, vfs_file_handler_t * fh, void *buf, size_t len)
 {
     ssize_t n;
-    struct vfs_s_super *super = FH_SUPER;
+    struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
 
     while ((n = read (FH_SOCK, buf, len)) < 0)
     {
@@ -2014,11 +2017,12 @@ ftpfs_ctl (void *fh, int ctlop, void *arg)
     {
     case VFS_CTL_IS_NOTREADY:
         {
+            vfs_file_handler_t *file = VFS_FILE_HANDLER (fh);
             int v;
 
-            if (FH->linear == LS_NOT_LINEAR)
+            if (file->linear == LS_NOT_LINEAR)
                 vfs_die ("You may not do this");
-            if (FH->linear == LS_LINEAR_CLOSED || FH->linear == LS_LINEAR_PREOPEN)
+            if (file->linear == LS_LINEAR_CLOSED || file->linear == LS_LINEAR_PREOPEN)
                 return 0;
 
             v = vfs_s_select_on_two (FH_SOCK, 0);
@@ -2219,10 +2223,10 @@ ftpfs_fh_new (struct vfs_s_inode *ino, gboolean changed)
     ftp_file_handler_t *fh;
 
     fh = g_new0 (ftp_file_handler_t, 1);
-    vfs_s_init_fh ((vfs_file_handler_t *) fh, ino, changed);
+    vfs_s_init_fh (VFS_FILE_HANDLER (fh), ino, changed);
     fh->sock = -1;
 
-    return FH;
+    return VFS_FILE_HANDLER (fh);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2230,7 +2234,7 @@ ftpfs_fh_new (struct vfs_s_inode *ino, gboolean changed)
 static int
 ftpfs_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mode)
 {
-    ftp_file_handler_t *ftp = FTP_FH;
+    ftp_file_handler_t *ftp = FTP_FILE_HANDLER (fh);
 
     (void) mode;
 
@@ -2248,7 +2252,7 @@ ftpfs_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t 
          * to local temporary file and stored to ftp server
          * by vfs_s_close later
          */
-        if (FTP_SUPER (FH_SUPER)->ctl_connection_busy)
+        if (FTP_SUPER (VFS_FILE_HANDLER_SUPER (fh))->ctl_connection_busy)
         {
             if (!fh->ino->localname)
             {
@@ -2272,7 +2276,7 @@ ftpfs_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t 
         if (name == NULL)
             goto fail;
         fh->handle =
-            ftpfs_open_data_connection (me, fh->ino->super,
+            ftpfs_open_data_connection (me, VFS_FILE_HANDLER_SUPER (fh),
                                         (flags & O_APPEND) ? "APPE" : "STOR", name, TYPE_BINARY, 0);
         g_free (name);
 
@@ -2309,18 +2313,18 @@ ftpfs_fh_close (struct vfs_class *me, vfs_file_handler_t * fh)
 {
     if (fh->handle != -1 && !fh->ino->localname)
     {
-        ftp_super_t *ftp = FTP_SUPER (fh->ino->super);
+        ftp_super_t *ftp = FTP_SUPER (VFS_FILE_HANDLER_SUPER (fh));
 
         close (fh->handle);
         fh->handle = -1;
         ftp->ctl_connection_busy = 0;
         /* File is stored to destination already, so
-         * we prevent MEDATA->ftpfs_file_store() call from vfs_s_close ()
+         * we prevent VFS_SUBCLASS (me)->ftpfs_file_store() call from vfs_s_close ()
          */
         fh->changed = 0;
         if (ftpfs_get_reply (me, ftp->sock, NULL, 0) != COMPLETE)
             ERRNOR (EIO, -1);
-        vfs_s_invalidate (me, FH_SUPER);
+        vfs_s_invalidate (me, VFS_FILE_HANDLER_SUPER (fh));
     }
 
     return 0;

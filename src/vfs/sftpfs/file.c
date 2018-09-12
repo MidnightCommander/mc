@@ -39,7 +39,7 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define SFTP_FH ((sftpfs_file_handler_t *) fh)
+#define SFTP_FILE_HANDLER(a) ((sftpfs_file_handler_t *) a)
 
 /*** file scope type declarations ****************************************************************/
 
@@ -66,7 +66,7 @@ typedef struct
 static void
 sftpfs_reopen (vfs_file_handler_t * fh, GError ** mcerror)
 {
-    sftpfs_file_handler_t *file = SFTP_FH;
+    sftpfs_file_handler_t *file = SFTP_FILE_HANDLER (fh);
     int flags;
     mode_t mode;
 
@@ -106,9 +106,9 @@ sftpfs_fh_new (struct vfs_s_inode * ino, gboolean changed)
     sftpfs_file_handler_t *fh;
 
     fh = g_new0 (sftpfs_file_handler_t, 1);
-    vfs_s_init_fh ((vfs_file_handler_t *) fh, ino, changed);
+    vfs_s_init_fh (VFS_FILE_HANDLER (fh), ino, changed);
 
-    return FH;
+    return VFS_FILE_HANDLER (fh);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -128,7 +128,7 @@ sftpfs_open_file (vfs_file_handler_t * fh, int flags, mode_t mode, GError ** mce
     unsigned long sftp_open_flags = 0;
     int sftp_open_mode = 0;
     gboolean do_append = FALSE;
-    sftpfs_file_handler_t *file = SFTP_FH;
+    sftpfs_file_handler_t *file = SFTP_FILE_HANDLER (fh);
     sftpfs_super_t *super = SFTP_SUPER (fh->ino->super);
     char *name;
 
@@ -223,9 +223,9 @@ sftpfs_fstat (void *data, struct stat *buf, GError ** mcerror)
 {
     int res;
     LIBSSH2_SFTP_ATTRIBUTES attrs;
-    vfs_file_handler_t *fh = (vfs_file_handler_t *) data;
+    vfs_file_handler_t *fh = VFS_FILE_HANDLER (data);
     sftpfs_file_handler_t *sftpfs_fh = (sftpfs_file_handler_t *) data;
-    struct vfs_s_super *super = fh->ino->super;
+    struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
     sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
 
     mc_return_val_if_error (mcerror, -1);
@@ -268,7 +268,7 @@ ssize_t
 sftpfs_read_file (vfs_file_handler_t * fh, char *buffer, size_t count, GError ** mcerror)
 {
     ssize_t rc;
-    sftpfs_file_handler_t *file = SFTP_FH;
+    sftpfs_file_handler_t *file = SFTP_FILE_HANDLER (fh);
     sftpfs_super_t *super;
 
     mc_return_val_if_error (mcerror, -1);
@@ -280,7 +280,7 @@ sftpfs_read_file (vfs_file_handler_t * fh, char *buffer, size_t count, GError **
         return -1;
     }
 
-    super = SFTP_SUPER (fh->ino->super);
+    super = SFTP_SUPER (VFS_FILE_HANDLER_SUPER (fh));
 
     do
     {
@@ -318,8 +318,8 @@ ssize_t
 sftpfs_write_file (vfs_file_handler_t * fh, const char *buffer, size_t count, GError ** mcerror)
 {
     ssize_t rc;
-    sftpfs_file_handler_t *file = SFTP_FH;
-    sftpfs_super_t *super = SFTP_SUPER (fh->ino->super);
+    sftpfs_file_handler_t *file = SFTP_FILE_HANDLER (fh);
+    sftpfs_super_t *super = SFTP_SUPER (VFS_FILE_HANDLER_SUPER (fh));
 
     mc_return_val_if_error (mcerror, -1);
 
@@ -360,7 +360,7 @@ sftpfs_close_file (vfs_file_handler_t * fh, GError ** mcerror)
 
     mc_return_val_if_error (mcerror, -1);
 
-    ret = libssh2_sftp_close (SFTP_FH->handle);
+    ret = libssh2_sftp_close (SFTP_FILE_HANDLER (fh)->handle);
 
     return ret == 0 ? 0 : -1;
 }
@@ -381,7 +381,7 @@ sftpfs_close_file (vfs_file_handler_t * fh, GError ** mcerror)
 off_t
 sftpfs_lseek (vfs_file_handler_t * fh, off_t offset, int whence, GError ** mcerror)
 {
-    sftpfs_file_handler_t *file = SFTP_FH;
+    sftpfs_file_handler_t *file = SFTP_FILE_HANDLER (fh);
 
     mc_return_val_if_error (mcerror, 0);
 

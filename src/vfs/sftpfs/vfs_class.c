@@ -432,7 +432,7 @@ sftpfs_cb_read (void *data, char *buffer, size_t count)
 {
     int rc;
     GError *mcerror = NULL;
-    vfs_file_handler_t *fh = (vfs_file_handler_t *) data;
+    vfs_file_handler_t *fh = VFS_FILE_HANDLER (data);
 
     if (tty_got_interrupt ())
     {
@@ -460,7 +460,7 @@ sftpfs_cb_write (void *data, const char *buf, size_t nbyte)
 {
     int rc;
     GError *mcerror = NULL;
-    vfs_file_handler_t *fh = (vfs_file_handler_t *) data;
+    vfs_file_handler_t *fh = VFS_FILE_HANDLER (data);
 
     rc = sftpfs_write_file (fh, buf, nbyte, &mcerror);
     mc_error_message (&mcerror, NULL);
@@ -480,10 +480,8 @@ sftpfs_cb_close (void *data)
 {
     int rc;
     GError *mcerror = NULL;
-    struct vfs_s_super *super;
-    vfs_file_handler_t *fh = (vfs_file_handler_t *) data;
-
-    super = fh->ino->super;
+    struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (data);
+    vfs_file_handler_t *fh = VFS_FILE_HANDLER (data);
 
     super->fd_usage--;
     if (super->fd_usage == 0)
@@ -573,7 +571,7 @@ static off_t
 sftpfs_cb_lseek (void *data, off_t offset, int whence)
 {
     off_t ret_offset;
-    vfs_file_handler_t *fh = (vfs_file_handler_t *) data;
+    vfs_file_handler_t *fh = VFS_FILE_HANDLER (data);
     GError *mcerror = NULL;
 
     ret_offset = sftpfs_lseek (fh, offset, whence, &mcerror);

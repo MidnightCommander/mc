@@ -118,7 +118,7 @@ int fish_directory_timeout = 900;
 #define FISH_HAVE_TAIL        64
 
 #define FISH_SUPER(super) ((fish_super_t *) (super))
-#define FISH_FH ((fish_file_handler_t *) fh)
+#define FISH_FILE_HANDLER(fh) ((fish_file_handler_t *) fh)
 
 /*** file scope type declarations ****************************************************************/
 
@@ -968,8 +968,8 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 static int
 fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char *localname)
 {
-    fish_file_handler_t *fish = FISH_FH;
-    struct vfs_s_super *super = FH_SUPER;
+    fish_file_handler_t *fish = FISH_FILE_HANDLER (fh);
+    struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
     fish_super_t *fish_super = FISH_SUPER (super);
     int code;
     off_t total = 0;
@@ -1080,8 +1080,8 @@ fish_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, char
 static int
 fish_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
 {
-    fish_file_handler_t *fish = FISH_FH;
-    struct vfs_s_super *super = FH_SUPER;
+    fish_file_handler_t *fish = FISH_FILE_HANDLER (fh);
+    struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
     char *name;
     char *quoted_name;
 
@@ -1125,8 +1125,8 @@ fish_linear_start (struct vfs_class *me, vfs_file_handler_t * fh, off_t offset)
 static void
 fish_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
 {
-    fish_file_handler_t *fish = FISH_FH;
-    struct vfs_s_super *super = FH_SUPER;
+    fish_file_handler_t *fish = FISH_FILE_HANDLER (fh);
+    struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
     char buffer[BUF_8K];
     ssize_t n;
 
@@ -1156,8 +1156,8 @@ fish_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
 static ssize_t
 fish_linear_read (struct vfs_class *me, vfs_file_handler_t * fh, void *buf, size_t len)
 {
-    fish_file_handler_t *fish = FISH_FH;
-    struct vfs_s_super *super = FH_SUPER;
+    fish_file_handler_t *fish = FISH_FILE_HANDLER (fh);
+    struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
     ssize_t n = 0;
 
     len = MIN ((size_t) (fish->total - fish->got), len);
@@ -1184,7 +1184,7 @@ fish_linear_read (struct vfs_class *me, vfs_file_handler_t * fh, void *buf, size
 static void
 fish_linear_close (struct vfs_class *me, vfs_file_handler_t * fh)
 {
-    fish_file_handler_t *fish = FISH_FH;
+    fish_file_handler_t *fish = FISH_FILE_HANDLER (fh);
 
     if (fish->total != fish->got)
         fish_linear_abort (me, fh);
@@ -1206,14 +1206,15 @@ fish_ctl (void *fh, int ctlop, void *arg)
     {
     case VFS_CTL_IS_NOTREADY:
         {
+            vfs_file_handler_t *file = VFS_FILE_HANDLER (fh);
             int v;
 
-            if (FH->linear == LS_NOT_LINEAR)
+            if (file->linear == LS_NOT_LINEAR)
                 vfs_die ("You may not do this");
-            if (FH->linear == LS_LINEAR_CLOSED || FH->linear == LS_LINEAR_PREOPEN)
+            if (file->linear == LS_LINEAR_CLOSED || file->linear == LS_LINEAR_PREOPEN)
                 return 0;
 
-            v = vfs_s_select_on_two (FH_SUPER->u.fish.sockr, 0);
+            v = vfs_s_select_on_two (VFS_FILE_HANDLER_SUPER (fh)->u.fish.sockr, 0);
 
             return (((v < 0) && (errno == EINTR)) || v == 0) ? 1 : 0;
         }
@@ -1641,9 +1642,9 @@ fish_fh_new (struct vfs_s_inode *ino, gboolean changed)
     fish_file_handler_t *fh;
 
     fh = g_new0 (fish_file_handler_t, 1);
-    vfs_s_init_fh ((vfs_file_handler_t *) fh, ino, changed);
+    vfs_s_init_fh (VFS_FILE_HANDLER (fh), ino, changed);
 
-    return FH;
+    return VFS_FILE_HANDLER (fh);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1651,7 +1652,7 @@ fish_fh_new (struct vfs_s_inode *ino, gboolean changed)
 static int
 fish_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mode)
 {
-    fish_file_handler_t *fish = FISH_FH;
+    fish_file_handler_t *fish = FISH_FILE_HANDLER (fh);
 
     (void) mode;
 

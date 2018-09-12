@@ -561,25 +561,26 @@ vfs_s_readlink (const vfs_path_t * vpath, char *buf, size_t size)
 static ssize_t
 vfs_s_read (void *fh, char *buffer, size_t count)
 {
-    struct vfs_class *me = FH_SUPER->me;
+    vfs_file_handler_t *file = VFS_FILE_HANDLER (fh);
+    struct vfs_class *me = VFS_FILE_HANDLER_SUPER (fh)->me;
 
-    if (FH->linear == LS_LINEAR_PREOPEN)
+    if (file->linear == LS_LINEAR_PREOPEN)
     {
-        if (VFS_SUBCLASS (me)->linear_start (me, FH, FH->pos) == 0)
+        if (VFS_SUBCLASS (me)->linear_start (me, file, file->pos) == 0)
             return (-1);
     }
 
-    if (FH->linear == LS_LINEAR_CLOSED)
+    if (file->linear == LS_LINEAR_CLOSED)
         vfs_die ("linear_start() did not set linear_state!");
 
-    if (FH->linear == LS_LINEAR_OPEN)
-        return VFS_SUBCLASS (me)->linear_read (me, FH, buffer, count);
+    if (file->linear == LS_LINEAR_OPEN)
+        return VFS_SUBCLASS (me)->linear_read (me, file, buffer, count);
 
-    if (FH->handle != -1)
+    if (file->handle != -1)
     {
         ssize_t n;
 
-        n = read (FH->handle, buffer, count);
+        n = read (file->handle, buffer, count);
         if (n < 0)
             me->verrno = errno;
         return n;
@@ -593,17 +594,18 @@ vfs_s_read (void *fh, char *buffer, size_t count)
 static ssize_t
 vfs_s_write (void *fh, const char *buffer, size_t count)
 {
-    struct vfs_class *me = FH_SUPER->me;
+    vfs_file_handler_t *file = VFS_FILE_HANDLER (fh);
+    struct vfs_class *me = VFS_FILE_HANDLER_SUPER (fh)->me;
 
-    if (FH->linear != LS_NOT_LINEAR)
+    if (file->linear != LS_NOT_LINEAR)
         vfs_die ("no writing to linear files, please");
 
-    FH->changed = TRUE;
-    if (FH->handle != -1)
+    file->changed = TRUE;
+    if (file->handle != -1)
     {
         ssize_t n;
 
-        n = write (FH->handle, buffer, count);
+        n = write (file->handle, buffer, count);
         if (n < 0)
             me->verrno = errno;
         return n;
@@ -617,25 +619,26 @@ vfs_s_write (void *fh, const char *buffer, size_t count)
 static off_t
 vfs_s_lseek (void *fh, off_t offset, int whence)
 {
-    off_t size = FH->ino->st.st_size;
+    vfs_file_handler_t *file = VFS_FILE_HANDLER (fh);
+    off_t size = file->ino->st.st_size;
 
-    if (FH->linear == LS_LINEAR_OPEN)
+    if (file->linear == LS_LINEAR_OPEN)
         vfs_die ("cannot lseek() after linear_read!");
 
-    if (FH->handle != -1)
+    if (file->handle != -1)
     {                           /* If we have local file opened, we want to work with it */
         off_t retval;
 
-        retval = lseek (FH->handle, offset, whence);
+        retval = lseek (file->handle, offset, whence);
         if (retval == -1)
-            FH->ino->super->me->verrno = errno;
+            VFS_FILE_HANDLER_SUPER (fh)->me->verrno = errno;
         return retval;
     }
 
     switch (whence)
     {
     case SEEK_CUR:
-        offset += FH->pos;
+        offset += file->pos;
         break;
     case SEEK_END:
         offset += size;
@@ -644,12 +647,12 @@ vfs_s_lseek (void *fh, off_t offset, int whence)
         break;
     }
     if (offset < 0)
-        FH->pos = 0;
+        file->pos = 0;
     else if (offset < size)
-        FH->pos = offset;
+        file->pos = offset;
     else
-        FH->pos = size;
-    return FH->pos;
+        file->pos = size;
+    return file->pos;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -657,40 +660,42 @@ vfs_s_lseek (void *fh, off_t offset, int whence)
 static int
 vfs_s_close (void *fh)
 {
-    int res = 0;
-    struct vfs_class *me = FH_SUPER->me;
+    vfs_file_handler_t *file = VFS_FILE_HANDLER (fh);
+    struct vfs_s_super *super = VFS_FILE_HANDLER_SUPER (fh);
+    struct vfs_class *me = super->me;
     struct vfs_s_subclass *sub = VFS_SUBCLASS (me);
+    int res = 0;
 
     if (me == NULL)
         return (-1);
 
-    FH_SUPER->fd_usage--;
-    if (FH_SUPER->fd_usage == 0)
-        vfs_stamp_create (me, FH_SUPER);
+    super->fd_usage--;
+    if (super->fd_usage == 0)
+        vfs_stamp_create (me, VFS_FILE_HANDLER_SUPER (fh));
 
-    if (FH->linear == LS_LINEAR_OPEN)
+    if (file->linear == LS_LINEAR_OPEN)
         sub->linear_close (me, fh);
     if (sub->fh_close != NULL)
         res = sub->fh_close (me, fh);
-    if ((me->flags & VFS_USETMP) != 0 && FH->changed && sub->file_store != NULL)
+    if ((me->flags & VFS_USETMP) != 0 && file->changed && sub->file_store != NULL)
     {
         char *s;
 
-        s = vfs_s_fullpath (me, FH->ino);
+        s = vfs_s_fullpath (me, file->ino);
 
         if (s == NULL)
             res = -1;
         else
         {
-            res = sub->file_store (me, fh, s, FH->ino->localname);
+            res = sub->file_store (me, fh, s, file->ino->localname);
             g_free (s);
         }
-        vfs_s_invalidate (me, FH_SUPER);
+        vfs_s_invalidate (me, super);
     }
-    if (FH->handle != -1)
-        close (FH->handle);
+    if (file->handle != -1)
+        close (file->handle);
 
-    vfs_s_free_inode (me, FH->ino);
+    vfs_s_free_inode (me, file->ino);
     vfs_s_free_fh (sub, fh);
 
     return res;
@@ -1403,7 +1408,7 @@ vfs_s_lstat (const vfs_path_t * vpath, struct stat *buf)
 int
 vfs_s_fstat (void *fh, struct stat *buf)
 {
-    *buf = FH->ino->st;
+    *buf = VFS_FILE_HANDLER (fh)->ino->st;
     return 0;
 }
 
