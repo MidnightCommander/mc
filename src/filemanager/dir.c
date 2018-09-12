@@ -218,18 +218,7 @@ alloc_dir_copy (int size)
     if (dir_copy.size < size)
     {
         if (dir_copy.list != NULL)
-        {
-            int i;
-
-            for (i = 0; i < dir_copy.len; i++)
-            {
-                file_entry_t *fentry;
-
-                fentry = &(dir_copy.list)[i];
-                g_free (fentry->fname);
-            }
-            g_free (dir_copy.list);
-        }
+            dir_list_free_list (&dir_copy);
 
         dir_copy.list = g_new0 (file_entry_t, size);
         dir_copy.size = size;
@@ -539,6 +528,26 @@ dir_list_clean (dir_list * list)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+void
+dir_list_free_list (dir_list * list)
+{
+    int i;
+
+    for (i = 0; i < list->len; i++)
+    {
+        file_entry_t *fentry;
+
+        fentry = &list->list[i];
+        g_free (fentry->fname);
+    }
+
+    MC_PTR_FREE (list->list);
+    list->len = 0;
+    list->size = 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /** Used to set up a directory list when there is no access to a directory */
 
 gboolean
@@ -744,7 +753,7 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
         dir_list_clean (list);
         if (!dir_list_init (list))
         {
-            dir_list_clean (&dir_copy);
+            dir_list_free_list (&dir_copy);
             return;
         }
 
@@ -805,7 +814,7 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
 
     dir_list_sort (list, sort, sort_op);
 
-    dir_list_clean (&dir_copy);
+    dir_list_free_list (&dir_copy);
     rotate_dash (FALSE);
 }
 

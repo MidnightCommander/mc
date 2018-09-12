@@ -247,10 +247,9 @@ mcview_done (WView * view)
     if (mc_global.mc_run_mode == MC_RUN_VIEWER && view->dir != NULL)
     {
         /* mcviewer is the owner of file list */
-        dir_list_clean (view->dir);
-        g_free (view->dir->list);
-        g_free (view->dir_idx);
+        dir_list_free_list (view->dir);
         g_free (view->dir);
+        g_free (view->dir_idx);
     }
 
     view->dir = NULL;
