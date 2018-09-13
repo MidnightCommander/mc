@@ -61,7 +61,7 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define SUP(super) ((tar_super_t *) (super))
+#define TAR_SUPER(super) ((tar_super_t *) (super))
 
 /*
  * Header block on tape.
@@ -259,7 +259,7 @@ tar_new_archive (struct vfs_class *me)
 static void
 tar_free_archive (struct vfs_class *me, struct vfs_s_super *archive)
 {
-    tar_super_t *arch = SUP (archive);
+    tar_super_t *arch = TAR_SUPER (archive);
 
     (void) me;
 
@@ -286,7 +286,7 @@ tar_open_archive_int (struct vfs_class *me, const vfs_path_t * vpath, struct vfs
     }
 
     archive->name = g_strdup (vfs_path_as_str (vpath));
-    arch = SUP (archive);
+    arch = TAR_SUPER (archive);
     mc_stat (vpath, &arch->st);
 
     /* Find out the method to handle this tar file */
@@ -412,7 +412,7 @@ tar_checksum (const union record *header)
 static void
 tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *header, size_t h_size)
 {
-    tar_super_t *arch = SUP (archive);
+    tar_super_t *arch = TAR_SUPER (archive);
 
     st->st_mode = tar_from_oct (8, header->header.mode);
 
@@ -502,7 +502,7 @@ tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union record *heade
 static ReadStatus
 tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, size_t * h_size)
 {
-    tar_super_t *arch = SUP (archive);
+    tar_super_t *arch = TAR_SUPER (archive);
     ReadStatus checksum_status;
     union record *header;
     static char *next_long_name = NULL, *next_long_link = NULL;
@@ -863,7 +863,7 @@ tar_super_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *pa
         return 0;
 
     /* Has the cached archive been changed on the disk? */
-    if (parc != NULL && SUP (parc)->st.st_mtime < archive_stat->st_mtime)
+    if (parc != NULL && TAR_SUPER (parc)->st.st_mtime < archive_stat->st_mtime)
     {
         /* Yes, reload! */
         vfs_tarfs_ops->free ((vfsid) parc);
@@ -881,7 +881,7 @@ static ssize_t
 tar_read (void *fh, char *buffer, size_t count)
 {
     off_t begin = FH->ino->data_offset;
-    int fd = SUP (FH_SUPER)->fd;
+    int fd = TAR_SUPER (FH_SUPER)->fd;
     struct vfs_class *me = FH_SUPER->me;
     ssize_t res;
 

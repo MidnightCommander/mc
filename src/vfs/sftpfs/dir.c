@@ -78,7 +78,7 @@ sftpfs_opendir (const vfs_path_t * vpath, GError ** mcerror)
     if (vfs_s_get_path (vpath, &super, 0) == NULL)
         return NULL;
 
-    sftpfs_super = SUP;
+    sftpfs_super = SFTP_SUPER (super);
 
     while (TRUE)
     {
@@ -194,7 +194,7 @@ sftpfs_mkdir (const vfs_path_t * vpath, mode_t mode, GError ** mcerror)
     if (super == NULL)
         return -1;
 
-    sftpfs_super = SUP;
+    sftpfs_super = SFTP_SUPER (super);
     if (sftpfs_super->sftp_session == NULL)
         return -1;
 
@@ -244,7 +244,7 @@ sftpfs_rmdir (const vfs_path_t * vpath, GError ** mcerror)
     if (super == NULL)
         return -1;
 
-    sftpfs_super = SUP;
+    sftpfs_super = SFTP_SUPER (super);
     if (sftpfs_super->sftp_session == NULL)
         return -1;
 

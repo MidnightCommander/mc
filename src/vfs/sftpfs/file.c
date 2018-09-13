@@ -123,7 +123,7 @@ sftpfs_open_file (vfs_file_handler_t * file_handler, int flags, mode_t mode, GEr
     if (name == NULL)
         return FALSE;
 
-    super = (sftpfs_super_t *) file_handler->ino->super;
+    super = SFTP_SUPER (file_handler->ino->super);
     file_handler_data = g_new0 (sftpfs_file_handler_data_t, 1);
 
     if ((flags & O_CREAT) != 0 || (flags & O_WRONLY) != 0)
@@ -214,7 +214,7 @@ sftpfs_fstat (void *data, struct stat *buf, GError ** mcerror)
     vfs_file_handler_t *fh = (vfs_file_handler_t *) data;
     sftpfs_file_handler_data_t *sftpfs_fh = fh->data;
     struct vfs_s_super *super = fh->ino->super;
-    sftpfs_super_t *sftpfs_super = SUP;
+    sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
 
     mc_return_val_if_error (mcerror, -1);
 
@@ -269,7 +269,7 @@ sftpfs_read_file (vfs_file_handler_t * file_handler, char *buffer, size_t count,
     }
 
     file_handler_data = file_handler->data;
-    super = (sftpfs_super_t *) file_handler->ino->super;
+    super = SFTP_SUPER (file_handler->ino->super);
 
     do
     {
@@ -314,7 +314,7 @@ sftpfs_write_file (vfs_file_handler_t * file_handler, const char *buffer, size_t
     mc_return_val_if_error (mcerror, -1);
 
     file_handler_data = (sftpfs_file_handler_data_t *) file_handler->data;
-    super = (sftpfs_super_t *) file_handler->ino->super;
+    super = SFTP_SUPER (file_handler->ino->super);
 
     file_handler->pos = (off_t) libssh2_sftp_tell64 (file_handler_data->handle);
 

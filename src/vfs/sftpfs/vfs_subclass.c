@@ -65,7 +65,7 @@ sftpfs_cb_is_equal_connection (const vfs_path_element_t * vpath_element, struct 
     (void) vpath;
     (void) cookie;
 
-    orig_connect_info = ((sftpfs_super_t *) super)->original_connection_info;
+    orig_connect_info = SFTP_SUPER (super)->original_connection_info;
 
     result = ((g_strcmp0 (vpath_element->host, orig_connect_info->host) == 0)
               && (g_strcmp0 (vpath_element->user, orig_connect_info->user) == 0)
@@ -106,7 +106,7 @@ sftpfs_cb_open_connection (struct vfs_s_super *super,
                            const vfs_path_t * vpath, const vfs_path_element_t * vpath_element)
 {
     GError *mcerror = NULL;
-    sftpfs_super_t *sftpfs_super = SUP;
+    sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
     int ret_value;
 
     (void) vpath;
@@ -153,7 +153,7 @@ sftpfs_cb_close_connection (struct vfs_class *me, struct vfs_s_super *super)
     (void) me;
     sftpfs_close_connection (super, "Normal Shutdown", &mcerror);
 
-    vfs_path_element_free (SUP->original_connection_info);
+    vfs_path_element_free (SFTP_SUPER (super)->original_connection_info);
 
     mc_error_message (&mcerror, NULL);
 }

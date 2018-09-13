@@ -354,7 +354,7 @@ sftpfs_get_config_entity (const vfs_path_element_t * vpath_element, GError ** mc
 void
 sftpfs_fill_connection_data_from_config (struct vfs_s_super *super, GError ** mcerror)
 {
-    sftpfs_super_t *sftpfs_super = SUP;
+    sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
     sftpfs_ssh_config_entity_t *config_entity;
 
     mc_return_if_error (mcerror);

@@ -52,19 +52,19 @@
 
 /*** file scope macro definitions ****************************************************************/
 
-#define SUP(super) ((cpio_super_t *) (super))
+#define CPIO_SUPER(super) ((cpio_super_t *) (super))
 
 #define CPIO_POS(super) cpio_position
 /* If some time reentrancy should be needed change it to */
 /* #define CPIO_POS(super) (super)->u.arch.fd */
 
-#define CPIO_SEEK_SET(super, where) mc_lseek (SUP(super)->fd, CPIO_POS(super) = (where), SEEK_SET)
-#define CPIO_SEEK_CUR(super, where) mc_lseek (SUP(super)->fd, CPIO_POS(super) += (where), SEEK_SET)
+#define CPIO_SEEK_SET(super, where) mc_lseek (CPIO_SUPER(super)->fd, CPIO_POS(super) = (where), SEEK_SET)
+#define CPIO_SEEK_CUR(super, where) mc_lseek (CPIO_SUPER(super)->fd, CPIO_POS(super) += (where), SEEK_SET)
 
 #define MAGIC_LENGTH (6)        /* How many bytes we have to read ahead */
 #define SEEKBACK CPIO_SEEK_CUR(super, ptr - top)
-#define RETURN(x) return (SUP(super)->type = (x))
-#define TYPEIS(x) ((SUP(super)->type == CPIO_UNKNOWN) || (SUP(super)->type == (x)))
+#define RETURN(x) return (CPIO_SUPER(super)->type = (x))
+#define TYPEIS(x) ((CPIO_SUPER(super)->type == CPIO_UNKNOWN) || (CPIO_SUPER(super)->type == (x)))
 
 #define HEAD_LENGTH (26)
 
@@ -172,7 +172,7 @@ cpio_defer_find (const void *a, const void *b)
 static ssize_t
 cpio_skip_padding (struct vfs_s_super *super)
 {
-    switch (SUP (super)->type)
+    switch (CPIO_SUPER (super)->type)
     {
     case CPIO_BIN:
     case CPIO_BINRE:
@@ -208,7 +208,7 @@ cpio_new_archive (struct vfs_class *me)
 static void
 cpio_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 {
-    cpio_super_t *arch = SUP (super);
+    cpio_super_t *arch = CPIO_SUPER (super);
 
     (void) me;
 
@@ -237,7 +237,7 @@ cpio_open_cpio_file (struct vfs_class *me, struct vfs_s_super *super, const vfs_
     }
 
     super->name = g_strdup (vfs_path_as_str (vpath));
-    arch = SUP (super);
+    arch = CPIO_SUPER (super);
     mc_stat (vpath, &arch->st);
 
     type = get_compression_type (fd, super->name);
@@ -309,7 +309,7 @@ cpio_read_head (struct vfs_class *me, struct vfs_s_super *super)
 static ssize_t
 cpio_find_head (struct vfs_class *me, struct vfs_s_super *super)
 {
-    cpio_super_t *arch = SUP (super);
+    cpio_super_t *arch = CPIO_SUPER (super);
     char buf[BUF_SMALL * 2];
     ssize_t ptr = 0;
     ssize_t top;
@@ -373,7 +373,7 @@ cpio_find_head (struct vfs_class *me, struct vfs_s_super *super)
 static int
 cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super, struct stat *st, char *name)
 {
-    cpio_super_t *arch = SUP (super);
+    cpio_super_t *arch = CPIO_SUPER (super);
     struct vfs_s_inode *inode = NULL;
     struct vfs_s_inode *root = super->root;
     struct vfs_s_entry *entry = NULL;
@@ -554,7 +554,7 @@ cpio_read_bin_head (struct vfs_class *me, struct vfs_s_super *super)
         short shorts[HEAD_LENGTH >> 1];
     } u;
 
-    cpio_super_t *arch = SUP (super);
+    cpio_super_t *arch = CPIO_SUPER (super);
     ssize_t len;
     char *name;
     struct stat st;
@@ -618,7 +618,7 @@ cpio_read_bin_head (struct vfs_class *me, struct vfs_s_super *super)
 static ssize_t
 cpio_read_oldc_head (struct vfs_class *me, struct vfs_s_super *super)
 {
-    cpio_super_t *arch = SUP (super);
+    cpio_super_t *arch = CPIO_SUPER (super);
     struct new_cpio_header hd;
     union
     {
@@ -690,7 +690,7 @@ cpio_read_oldc_head (struct vfs_class *me, struct vfs_s_super *super)
 static ssize_t
 cpio_read_crc_head (struct vfs_class *me, struct vfs_s_super *super)
 {
-    cpio_super_t *arch = SUP (super);
+    cpio_super_t *arch = CPIO_SUPER (super);
     struct new_cpio_header hd;
     union
     {
@@ -831,7 +831,7 @@ cpio_super_same (const vfs_path_element_t * vpath_element, struct vfs_s_super *p
         return 0;
 
     /* Has the cached archive been changed on the disk? */
-    if (parc != NULL && SUP (parc)->st.st_mtime < archive_stat->st_mtime)
+    if (parc != NULL && CPIO_SUPER (parc)->st.st_mtime < archive_stat->st_mtime)
     {
         /* Yes, reload! */
         vfs_cpiofs_ops->free ((vfsid) parc);
@@ -849,7 +849,7 @@ static ssize_t
 cpio_read (void *fh, char *buffer, size_t count)
 {
     off_t begin = FH->ino->data_offset;
-    int fd = SUP (FH_SUPER)->fd;
+    int fd = CPIO_SUPER (FH_SUPER)->fd;
     struct vfs_class *me = FH_SUPER->me;
     ssize_t res;
 

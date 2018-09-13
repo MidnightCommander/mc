@@ -107,17 +107,17 @@ static gboolean
 sftpfs_op_init (sftpfs_super_t ** super, const vfs_path_element_t ** path_element,
                 const vfs_path_t * vpath, GError ** mcerror)
 {
-    struct vfs_s_super *sftpfs_super = NULL;
+    struct vfs_s_super *lc_super = NULL;
 
     mc_return_val_if_error (mcerror, FALSE);
 
-    if (vfs_s_get_path (vpath, &sftpfs_super, 0) == NULL)
+    if (vfs_s_get_path (vpath, &lc_super, 0) == NULL)
         return FALSE;
 
-    if (sftpfs_super == NULL)
+    if (lc_super == NULL)
         return FALSE;
 
-    *super = SUP;
+    *super = SFTP_SUPER (lc_super);
 
     if ((*super)->sftp_session == NULL)
         return FALSE;

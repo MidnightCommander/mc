@@ -21,7 +21,7 @@
 #define LIBSSH2_INVALID_SOCKET -1
 #endif
 
-#define SUP ((sftpfs_super_t *) super)
+#define SFTP_SUPER(super) ((sftpfs_super_t *) (super))
 
 /*** enums ***************************************************************************************/
 

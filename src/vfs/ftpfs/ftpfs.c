@@ -153,7 +153,7 @@ gboolean ftpfs_ignore_chattr_errors = TRUE;
 #define MAXHOSTNAMELEN 64
 #endif
 
-#define SUP ((ftp_super_t *) super)
+#define FTP_SUPER(super) ((ftp_super_t *) (super))
 #define FH_SOCK ((ftp_fh_data_t *) fh)->sock
 
 #ifndef INADDR_NONE
@@ -303,7 +303,7 @@ ftpfs_default_stat (struct vfs_class *me)
 static char *
 ftpfs_translate_path (struct vfs_class *me, struct vfs_s_super *super, const char *remote_path)
 {
-    if (!SUP->remote_is_amiga)
+    if (!FTP_SUPER (super)->remote_is_amiga)
         return g_strdup (remote_path);
     else
     {
@@ -447,16 +447,17 @@ ftpfs_get_reply (struct vfs_class *me, int sock, char *string_buf, int string_le
 static int
 ftpfs_reconnect (struct vfs_class *me, struct vfs_s_super *super)
 {
+    ftp_super_t *ftp_super = FTP_SUPER (super);
     int sock;
 
     sock = ftpfs_open_socket (me, super);
     if (sock != -1)
     {
-        char *cwdir = SUP->current_dir;
+        char *cwdir = ftp_super->current_dir;
 
-        close (SUP->sock);
-        SUP->sock = sock;
-        SUP->current_dir = NULL;
+        close (ftp_super->sock);
+        ftp_super->sock = sock;
+        ftp_super->current_dir = NULL;
 
         if (ftpfs_login_server (me, super, super->path_element->password) != 0)
         {
@@ -467,7 +468,7 @@ ftpfs_reconnect (struct vfs_class *me, struct vfs_s_super *super)
             return sock == COMPLETE ? 1 : 0;
         }
 
-        SUP->current_dir = cwdir;
+        ftp_super->current_dir = cwdir;
     }
 
     return 0;
@@ -480,6 +481,7 @@ G_GNUC_PRINTF (4, 5)
 ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const char *fmt,
                ...)
 {
+    ftp_super_t *ftp_super = FTP_SUPER (super);
     va_list ap;
     GString *cmdstr;
     int status;
@@ -509,7 +511,7 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
 
     got_sigpipe = 0;
     tty_enable_interrupt_key ();
-    status = write (SUP->sock, cmdstr->str, cmdstr->len);
+    status = write (ftp_super->sock, cmdstr->str, cmdstr->len);
 
     if (status < 0)
     {
@@ -522,7 +524,7 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
                 level = 1;
                 status = ftpfs_reconnect (me, super);
                 level = 0;
-                if (status && (write (SUP->sock, cmdstr->str, cmdstr->len) > 0))
+                if (status && (write (ftp_super->sock, cmdstr->str, cmdstr->len) > 0))
                     goto ok;
 
             }
@@ -538,7 +540,7 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
 
     if (wait_reply)
     {
-        status = ftpfs_get_reply (me, SUP->sock,
+        status = ftpfs_get_reply (me, ftp_super->sock,
                                   (wait_reply & WANT_STRING) ? reply_str : NULL,
                                   sizeof (reply_str) - 1);
         if ((wait_reply & WANT_STRING) && !retry && !level && code == 421)
@@ -547,7 +549,7 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
             level = 1;
             status = ftpfs_reconnect (me, super);
             level = 0;
-            if (status && (write (SUP->sock, cmdstr->str, cmdstr->len) > 0))
+            if (status && (write (ftp_super->sock, cmdstr->str, cmdstr->len) > 0))
                 goto ok;
         }
         retry = 0;
@@ -582,13 +584,15 @@ ftpfs_new_archive (struct vfs_class *me)
 static void
 ftpfs_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 {
-    if (SUP->sock != -1)
+    ftp_super_t *ftp_super = FTP_SUPER (super);
+
+    if (ftp_super->sock != -1)
     {
         vfs_print_message (_("ftpfs: Disconnecting from %s"), super->path_element->host);
         ftpfs_command (me, super, NONE, "%s", "QUIT");
-        close (SUP->sock);
+        close (ftp_super->sock);
     }
-    g_free (SUP->current_dir);
+    g_free (ftp_super->current_dir);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -596,11 +600,11 @@ ftpfs_free_archive (struct vfs_class *me, struct vfs_s_super *super)
 static int
 ftpfs_changetype (struct vfs_class *me, struct vfs_s_super *super, int binary)
 {
-    if (binary != SUP->isbinary)
+    if (binary != FTP_SUPER (super)->isbinary)
     {
         if (ftpfs_command (me, super, WAIT_REPLY, "TYPE %c", binary ? 'I' : 'A') != COMPLETE)
             ERRNOR (EIO, -1);
-        SUP->isbinary = binary;
+        FTP_SUPER (super)->isbinary = binary;
     }
     return binary;
 }
@@ -611,13 +615,14 @@ ftpfs_changetype (struct vfs_class *me, struct vfs_s_super *super, int binary)
 static int
 ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char *netrcpass)
 {
+    ftp_super_t *ftp_super = FTP_SUPER (super);
     char *pass;
     char *op;
     char *name;                 /* login user name */
     int anon = 0;
     char reply_string[BUF_MEDIUM];
 
-    SUP->isbinary = TYPE_UNKNOWN;
+    ftp_super->isbinary = TYPE_UNKNOWN;
 
     if (super->path_element->password != NULL)  /* explicit password */
         op = g_strdup (super->path_element->password);
@@ -652,7 +657,7 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
     }
 
     /* Proxy server accepts: username@host-we-want-to-connect */
-    if (SUP->proxy)
+    if (ftp_super->proxy != NULL)
         name =
             g_strconcat (super->path_element->user, "@",
                          super->path_element->host[0] ==
@@ -661,19 +666,20 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
     else
         name = g_strdup (super->path_element->user);
 
-    if (ftpfs_get_reply (me, SUP->sock, reply_string, sizeof (reply_string) - 1) == COMPLETE)
+    if (ftpfs_get_reply (me, ftp_super->sock, reply_string, sizeof (reply_string) - 1) == COMPLETE)
     {
         char *reply_up;
 
         reply_up = g_ascii_strup (reply_string, -1);
-        SUP->remote_is_amiga = strstr (reply_up, "AMIGA") != 0;
+        ftp_super->remote_is_amiga = strstr (reply_up, "AMIGA") != 0;
         if (strstr (reply_up, " SPFTP/1.0.0000 SERVER "))       /* handles `LIST -la` in a weird way */
-            SUP->strict = RFC_STRICT;
+            ftp_super->strict = RFC_STRICT;
         g_free (reply_up);
 
         if (VFS_SUBCLASS (me)->logfile != NULL)
         {
-            fprintf (VFS_SUBCLASS (me)->logfile, "MC -- remote_is_amiga =  %d\n", SUP->remote_is_amiga);
+            fprintf (VFS_SUBCLASS (me)->logfile, "MC -- remote_is_amiga =  %d\n",
+                     ftp_super->remote_is_amiga);
             fflush (VFS_SUBCLASS (me)->logfile);
         }
 
@@ -710,7 +716,7 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
             return 1;
 
         default:
-            SUP->failed_on_login = 1;
+            ftp_super->failed_on_login = 1;
             wipe_password (super->path_element->password);
             super->path_element->password = NULL;
 
@@ -858,7 +864,7 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
     /* Hosts to connect to that start with a ! should use proxy */
     tmp_port = super->path_element->port;
 
-    if (SUP->proxy != NULL)
+    if (FTP_SUPER (super)->proxy != NULL)
         ftpfs_get_proxy_host_and_port (ftpfs_proxy_host, &host, &tmp_port);
 
     g_snprintf (port, sizeof (port), "%hu", (unsigned short) tmp_port);
@@ -953,19 +959,20 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
 static int
 ftpfs_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 {
+    ftp_super_t *ftp_super = FTP_SUPER (super);
     int retry_seconds = 0;
     int count_down;
 
     /* We do not want to use the passive if we are using proxies */
-    if (SUP->proxy)
-        SUP->use_passive_connection = ftpfs_use_passive_connections_over_proxy;
+    if (ftp_super->proxy != NULL)
+        ftp_super->use_passive_connection = ftpfs_use_passive_connections_over_proxy;
 
     do
     {
-        SUP->failed_on_login = 0;
+        ftp_super->failed_on_login = 0;
 
-        SUP->sock = ftpfs_open_socket (me, super);
-        if (SUP->sock == -1)
+        ftp_super->sock = ftpfs_open_socket (me, super);
+        if (ftp_super->sock == -1)
             return -1;
 
         if (ftpfs_login_server (me, super, NULL) != 0)
@@ -975,11 +982,11 @@ ftpfs_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
         }
         else
         {
-            if (!SUP->failed_on_login)
+            if (!ftp_super->failed_on_login)
                 return -1;
 
             /* Close only the socket descriptor */
-            close (SUP->sock);
+            close (ftp_super->sock);
 
             if (ftpfs_retry_seconds != 0)
             {
@@ -1003,9 +1010,9 @@ ftpfs_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
     }
     while (retry_seconds != 0);
 
-    SUP->current_dir = ftpfs_get_current_directory (me, super);
-    if (SUP->current_dir == NULL)
-        SUP->current_dir = g_strdup (PATH_SEP_STR);
+    ftp_super->current_dir = ftpfs_get_current_directory (me, super);
+    if (ftp_super->current_dir == NULL)
+        ftp_super->current_dir = g_strdup (PATH_SEP_STR);
 
     return 0;
 }
@@ -1020,7 +1027,7 @@ ftpfs_open_archive (struct vfs_s_super *super,
 
     super->path_element = ftpfs_correct_url_parameters (vpath_element);
     if (ftpfs_check_proxy (super->path_element->host))
-        SUP->proxy = ftpfs_proxy_host;
+        FTP_SUPER (super)->proxy = ftpfs_proxy_host;
     super->root =
         vfs_s_new_inode (vpath_element->class, super, ftpfs_default_stat (vpath_element->class));
 
@@ -1058,7 +1065,7 @@ ftpfs_get_current_directory (struct vfs_class *me, struct vfs_s_super *super)
     char buf[MC_MAXPATHLEN + 1];
 
     if (ftpfs_command (me, super, NONE, "%s", "PWD") == COMPLETE &&
-        ftpfs_get_reply (me, SUP->sock, buf, sizeof (buf)) == COMPLETE)
+        ftpfs_get_reply (me, FTP_SUPER (super)->sock, buf, sizeof (buf)) == COMPLETE)
     {
         char *bufp = NULL;
         char *bufq;
@@ -1285,15 +1292,16 @@ static int
 ftpfs_init_data_socket (struct vfs_class *me, struct vfs_s_super *super,
                         struct sockaddr_storage *data_addr, socklen_t * data_addrlen)
 {
+    ftp_super_t *ftp_super = FTP_SUPER (super);
     int result;
 
     memset (data_addr, 0, sizeof (*data_addr));
     *data_addrlen = sizeof (*data_addr);
 
-    if (SUP->use_passive_connection)
-        result = getpeername (SUP->sock, (struct sockaddr *) data_addr, data_addrlen);
+    if (ftp_super->use_passive_connection)
+        result = getpeername (ftp_super->sock, (struct sockaddr *) data_addr, data_addrlen);
     else
-        result = getsockname (SUP->sock, (struct sockaddr *) data_addr, data_addrlen);
+        result = getsockname (ftp_super->sock, (struct sockaddr *) data_addr, data_addrlen);
 
     if (result == -1)
         return -1;
@@ -1328,6 +1336,7 @@ ftpfs_init_data_socket (struct vfs_class *me, struct vfs_s_super *super,
 static int
 ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
 {
+    ftp_super_t *ftp_super = FTP_SUPER (super);
     struct sockaddr_storage data_addr;
     socklen_t data_addrlen;
 
@@ -1338,7 +1347,7 @@ ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
      */
 
     /* Try to establish a passive connection first (if requested) */
-    if (SUP->use_passive_connection)
+    if (ftp_super->use_passive_connection)
     {
         int data_sock;
 
@@ -1350,13 +1359,13 @@ ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
             return data_sock;
 
         vfs_print_message ("%s", _("ftpfs: could not setup passive mode"));
-        SUP->use_passive_connection = FALSE;
+        ftp_super->use_passive_connection = FALSE;
 
         close (data_sock);
     }
 
     /* If passive setup is diabled or failed, fallback to active connections */
-    if (!SUP->use_passive_connection)
+    if (!ftp_super->use_passive_connection)
     {
         int data_sock;
 
@@ -1374,8 +1383,9 @@ ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
     }
 
     /* Restore the initial value of use_passive_connection (for subsequent retries) */
-    SUP->use_passive_connection = SUP->proxy != NULL ? ftpfs_use_passive_connections_over_proxy :
-        ftpfs_use_passive_connections;
+    ftp_super->use_passive_connection =
+        ftp_super->proxy !=
+        NULL ? ftpfs_use_passive_connections_over_proxy : ftpfs_use_passive_connections;
 
     ftpfs_errno = EIO;
     return -1;
@@ -1387,12 +1397,13 @@ static int
 ftpfs_open_data_connection (struct vfs_class *me, struct vfs_s_super *super, const char *cmd,
                             const char *remote, int isbinary, int reget)
 {
+    ftp_super_t *ftp_super = FTP_SUPER (super);
     struct sockaddr_storage from;
     int s, j, data;
     socklen_t fromlen = sizeof (from);
 
     /* FTP doesn't allow to open more than one file at a time */
-    if (SUP->ctl_connection_busy)
+    if (ftp_super->ctl_connection_busy)
         return -1;
 
     s = ftpfs_initconn (me, super);
@@ -1432,7 +1443,7 @@ ftpfs_open_data_connection (struct vfs_class *me, struct vfs_s_super *super, con
         ERRNOR (EPERM, -1);
     }
 
-    if (SUP->use_passive_connection)
+    if (ftp_super->use_passive_connection)
         data = s;
     else
     {
@@ -1445,7 +1456,7 @@ ftpfs_open_data_connection (struct vfs_class *me, struct vfs_s_super *super, con
         if (data < 0)
             return -1;
     }
-    SUP->ctl_connection_busy = 1;
+    ftp_super->ctl_connection_busy = 1;
     return data;
 }
 
@@ -1455,14 +1466,16 @@ static void
 ftpfs_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
 {
     struct vfs_s_super *super = FH_SUPER;
+    ftp_super_t *ftp_super = FTP_SUPER (super);
     static unsigned char const ipbuf[3] = { IAC, IP, IAC };
     fd_set mask;
     int dsock = FH_SOCK;
+
     FH_SOCK = -1;
-    SUP->ctl_connection_busy = 0;
+    ftp_super->ctl_connection_busy = 0;
 
     vfs_print_message ("%s", _("ftpfs: aborting transfer."));
-    if (send (SUP->sock, ipbuf, sizeof (ipbuf), MSG_OOB) != sizeof (ipbuf))
+    if (send (ftp_super->sock, ipbuf, sizeof (ipbuf), MSG_OOB) != sizeof (ipbuf))
     {
         vfs_print_message (_("ftpfs: abort error: %s"), unix_error_string (errno));
         if (dsock != -1)
@@ -1502,8 +1515,8 @@ ftpfs_linear_abort (struct vfs_class *me, vfs_file_handler_t * fh)
         }
         close (dsock);
     }
-    if ((ftpfs_get_reply (me, SUP->sock, NULL, 0) == TRANSIENT) && (code == 426))
-        ftpfs_get_reply (me, SUP->sock, NULL, 0);
+    if ((ftpfs_get_reply (me, ftp_super->sock, NULL, 0) == TRANSIENT) && (code == 426))
+        ftpfs_get_reply (me, ftp_super->sock, NULL, 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1674,7 +1687,7 @@ resolve_symlink_with_ls_options (struct vfs_class *me, struct vfs_s_super *super
     while (fgets (buffer, sizeof (buffer), fp) != NULL);
     tty_disable_interrupt_key ();
     fclose (fp);
-    ftpfs_get_reply (me, SUP->sock, NULL, 0);
+    ftpfs_get_reply (me, FTP_SUPER (super)->sock, NULL, 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1684,7 +1697,7 @@ resolve_symlink (struct vfs_class *me, struct vfs_s_super *super, struct vfs_s_i
 {
     vfs_print_message ("%s", _("Resolving symlink..."));
 
-    if (SUP->strict_rfc959_list_cmd)
+    if (FTP_SUPER (super)->strict_rfc959_list_cmd)
         resolve_symlink_without_ls_options (me, super, dir);
     else
         resolve_symlink_with_ls_options (me, super, dir);
@@ -1698,16 +1711,17 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
 {
     struct vfs_s_entry *ent;
     struct vfs_s_super *super = dir->super;
+    ftp_super_t *ftp_super = FTP_SUPER (super);
     int sock, num_entries = 0;
     gboolean cd_first;
 
-    cd_first = ftpfs_first_cd_then_ls || (SUP->strict == RFC_STRICT)
+    cd_first = ftpfs_first_cd_then_ls || (ftp_super->strict == RFC_STRICT)
         || (strchr (remote_path, ' ') != NULL);
 
   again:
     vfs_print_message (_("ftpfs: Reading FTP directory %s... %s%s"),
                        remote_path,
-                       SUP->strict ==
+                       ftp_super->strict ==
                        RFC_STRICT ? _("(strict rfc959)") : "", cd_first ? _("(chdir first)") : "");
 
     if (cd_first)
@@ -1723,7 +1737,7 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
     gettimeofday (&dir->timestamp, NULL);
     dir->timestamp.tv_sec += ftpfs_directory_timeout;
 
-    if (SUP->strict == RFC_STRICT)
+    if (ftp_super->strict == RFC_STRICT)
         sock = ftpfs_open_data_connection (me, super, "LIST", 0, TYPE_ASCII, 0);
     else if (cd_first)
         /* Dirty hack to avoid autoprepending / to . */
@@ -1761,9 +1775,9 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
         {
             me->verrno = ECONNRESET;
             close (sock);
-            SUP->ctl_connection_busy = 0;
+            ftp_super->ctl_connection_busy = 0;
             tty_disable_interrupt_key ();
-            ftpfs_get_reply (me, SUP->sock, NULL, 0);
+            ftpfs_get_reply (me, ftp_super->sock, NULL, 0);
             vfs_print_message (_("%s: failure"), me->name);
             return -1;
         }
@@ -1790,9 +1804,9 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
     }
 
     close (sock);
-    SUP->ctl_connection_busy = 0;
+    ftp_super->ctl_connection_busy = 0;
     me->verrno = E_REMOTE;
-    if ((ftpfs_get_reply (me, SUP->sock, NULL, 0) != COMPLETE))
+    if ((ftpfs_get_reply (me, ftp_super->sock, NULL, 0) != COMPLETE))
         goto fallback;
 
     if (num_entries == 0 && !cd_first)
@@ -1813,18 +1827,18 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
 
     vfs_s_normalize_filename_leading_spaces (dir, vfs_parse_ls_lga_get_final_spaces ());
 
-    if (SUP->strict == RFC_AUTODETECT)
-        SUP->strict = RFC_DARING;
+    if (ftp_super->strict == RFC_AUTODETECT)
+        ftp_super->strict = RFC_DARING;
 
     vfs_print_message (_("%s: done."), me->name);
     return 0;
 
   fallback:
-    if (SUP->strict == RFC_AUTODETECT)
+    if (ftp_super->strict == RFC_AUTODETECT)
     {
         /* It's our first attempt to get a directory listing from this
            server (UNIX style LIST command) */
-        SUP->strict = RFC_STRICT;
+        ftp_super->strict = RFC_STRICT;
         /* I hate goto, but recursive call needs another 8K on stack */
         /* return ftpfs_dir_load (me, dir, remote_path); */
         cd_first = TRUE;
@@ -1850,6 +1864,7 @@ ftpfs_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, cha
     struct stat s;
     char *w_buf;
     struct vfs_s_super *super = FH_SUPER;
+    ftp_super_t *ftp_super = FTP_SUPER (super);
     ftp_fh_data_t *ftp = (ftp_fh_data_t *) fh->data;
 
     h = open (localname, O_RDONLY);
@@ -1913,17 +1928,17 @@ ftpfs_file_store (struct vfs_class *me, vfs_file_handler_t * fh, char *name, cha
     }
     tty_disable_interrupt_key ();
     close (sock);
-    SUP->ctl_connection_busy = 0;
+    ftp_super->ctl_connection_busy = 0;
     close (h);
-    if (ftpfs_get_reply (me, SUP->sock, NULL, 0) != COMPLETE)
+    if (ftpfs_get_reply (me, ftp_super->sock, NULL, 0) != COMPLETE)
         ERRNOR (EIO, -1);
     return 0;
   error_return:
     tty_disable_interrupt_key ();
     close (sock);
-    SUP->ctl_connection_busy = 0;
+    ftp_super->ctl_connection_busy = 0;
     close (h);
-    ftpfs_get_reply (me, SUP->sock, NULL, 0);
+    ftpfs_get_reply (me, ftp_super->sock, NULL, 0);
     return -1;
 }
 
@@ -1969,10 +1984,10 @@ ftpfs_linear_read (struct vfs_class *me, vfs_file_handler_t * fh, void *buf, siz
 
     if (n == 0)
     {
-        SUP->ctl_connection_busy = 0;
+        FTP_SUPER (super)->ctl_connection_busy = 0;
         close (FH_SOCK);
         FH_SOCK = -1;
-        if ((ftpfs_get_reply (me, SUP->sock, NULL, 0) != COMPLETE))
+        if ((ftpfs_get_reply (me, FTP_SUPER (super)->sock, NULL, 0) != COMPLETE))
             ERRNOR (E_REMOTE, -1);
         return 0;
     }
@@ -2137,9 +2152,9 @@ ftpfs_is_same_dir (struct vfs_class *me, struct vfs_s_super *super, const char *
 {
     (void) me;
 
-    if (SUP->current_dir == NULL)
+    if (FTP_SUPER (super)->current_dir == NULL)
         return FALSE;
-    return (strcmp (path, SUP->current_dir) == 0);
+    return (strcmp (path, FTP_SUPER (super)->current_dir) == 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2147,10 +2162,11 @@ ftpfs_is_same_dir (struct vfs_class *me, struct vfs_s_super *super, const char *
 static int
 ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super, const char *remote_path)
 {
+    ftp_super_t *ftp_super = FTP_SUPER (super);
     int r;
     char *p;
 
-    if (!SUP->cwd_deferred && ftpfs_is_same_dir (me, super, remote_path))
+    if (!ftp_super->cwd_deferred && ftpfs_is_same_dir (me, super, remote_path))
         return COMPLETE;
 
     p = ftpfs_translate_path (me, super, remote_path);
@@ -2161,9 +2177,9 @@ ftpfs_chdir_internal (struct vfs_class *me, struct vfs_s_super *super, const cha
         ftpfs_errno = EIO;
     else
     {
-        g_free (SUP->current_dir);
-        SUP->current_dir = g_strdup (remote_path);
-        SUP->cwd_deferred = 0;
+        g_free (ftp_super->current_dir);
+        ftp_super->current_dir = g_strdup (remote_path);
+        ftp_super->cwd_deferred = 0;
     }
     return r;
 }
@@ -2229,7 +2245,7 @@ ftpfs_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t 
          * to local temporary file and stored to ftp server
          * by vfs_s_close later
          */
-        if (((ftp_super_t *) FH_SUPER)->ctl_connection_busy)
+        if (FTP_SUPER (FH_SUPER)->ctl_connection_busy)
         {
             if (!fh->ino->localname)
             {
@@ -2291,7 +2307,7 @@ ftpfs_fh_close (struct vfs_class *me, vfs_file_handler_t * fh)
 {
     if (fh->handle != -1 && !fh->ino->localname)
     {
-        ftp_super_t *ftp = (ftp_super_t *) fh->ino->super;
+        ftp_super_t *ftp = FTP_SUPER (fh->ino->super);
 
         close (fh->handle);
         fh->handle = -1;

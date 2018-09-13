@@ -168,7 +168,7 @@ static gboolean
 sftpfs_recognize_auth_types (struct vfs_s_super *super)
 {
     char *userauthlist;
-    sftpfs_super_t *sftpfs_super = SUP;
+    sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
 
     /* check what authentication methods are available */
     /* userauthlist is internally managed by libssh2 and freed by libssh2_session_free() */
@@ -205,7 +205,7 @@ sftpfs_recognize_auth_types (struct vfs_s_super *super)
 static gboolean
 sftpfs_open_connection_ssh_agent (struct vfs_s_super *super, GError ** mcerror)
 {
-    sftpfs_super_t *sftpfs_super = SUP;
+    sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
     struct libssh2_agent_publickey *identity, *prev_identity = NULL;
     int rc;
 
@@ -257,7 +257,7 @@ sftpfs_open_connection_ssh_agent (struct vfs_s_super *super, GError ** mcerror)
 static gboolean
 sftpfs_open_connection_ssh_key (struct vfs_s_super *super, GError ** mcerror)
 {
-    sftpfs_super_t *sftpfs_super = SUP;
+    sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
     char *p, *passwd;
     gboolean ret_value = FALSE;
 
@@ -304,7 +304,7 @@ sftpfs_open_connection_ssh_key (struct vfs_s_super *super, GError ** mcerror)
 static gboolean
 sftpfs_open_connection_ssh_password (struct vfs_s_super *super, GError ** mcerror)
 {
-    sftpfs_super_t *sftpfs_super = SUP;
+    sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
     char *p, *passwd;
     gboolean ret_value = FALSE;
     int rc;
@@ -363,7 +363,7 @@ int
 sftpfs_open_connection (struct vfs_s_super *super, GError ** mcerror)
 {
     int rc;
-    sftpfs_super_t *sftpfs_super = SUP;
+    sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
 
     mc_return_val_if_error (mcerror, -1);
 
@@ -440,7 +440,7 @@ sftpfs_open_connection (struct vfs_s_super *super, GError ** mcerror)
 void
 sftpfs_close_connection (struct vfs_s_super *super, const char *shutdown_message, GError ** mcerror)
 {
-    sftpfs_super_t *sftpfs_super = SUP;
+    sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
 
     /* no mc_return_*_if_error() here because of abort open_connection handling too */
     (void) mcerror;
