@@ -682,9 +682,6 @@ sftpfs_cb_fill_names (struct vfs_class *me, fill_names_f func)
 void
 sftpfs_init_class (void)
 {
-    sftpfs_class->name = "sftpfs";
-    sftpfs_class->prefix = "sftp";
-
     sftpfs_class->init = sftpfs_cb_init;
     sftpfs_class->done = sftpfs_cb_done;
 

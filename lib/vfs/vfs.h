@@ -229,6 +229,9 @@ extern int use_netrc;
 /*** declarations of public functions ************************************************************/
 
 /* lib/vfs/direntry.c: */
+void vfs_init_class (struct vfs_class *vclass, const char *name, vfs_flags_t flags,
+                     const char *prefix);
+
 void *vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode);
 int vfs_s_stat (const vfs_path_t * vpath, struct stat *buf);
 int vfs_s_lstat (const vfs_path_t * vpath, struct stat *buf);

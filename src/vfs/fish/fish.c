@@ -1731,23 +1731,7 @@ init_fish (void)
 {
     tcp_init ();
 
-    memset (&fish_subclass, 0, sizeof (fish_subclass));
-
-    vfs_fish_ops->flags = VFS_REMOTE | VFS_USETMP;
-    fish_subclass.archive_same = fish_archive_same;
-    fish_subclass.open_archive = fish_open_archive;
-    fish_subclass.free_archive = fish_free_archive;
-    fish_subclass.fh_open = fish_fh_open;
-    fish_subclass.fh_free_data = fish_fh_free_data;
-    fish_subclass.dir_load = fish_dir_load;
-    fish_subclass.file_store = fish_file_store;
-    fish_subclass.linear_start = fish_linear_start;
-    fish_subclass.linear_read = fish_linear_read;
-    fish_subclass.linear_close = fish_linear_close;
-
-    vfs_s_init_class (&fish_subclass);
-    vfs_fish_ops->name = "fish";
-    vfs_fish_ops->prefix = "sh";
+    vfs_init_subclass (&fish_subclass, "fish", VFS_REMOTE | VFS_USETMP, "sh");
     vfs_fish_ops->fill_names = fish_fill_names;
     vfs_fish_ops->stat = fish_stat;
     vfs_fish_ops->lstat = fish_lstat;
@@ -1763,6 +1747,16 @@ init_fish (void)
     vfs_fish_ops->mkdir = fish_mkdir;
     vfs_fish_ops->rmdir = fish_rmdir;
     vfs_fish_ops->ctl = fish_ctl;
+    fish_subclass.archive_same = fish_archive_same;
+    fish_subclass.open_archive = fish_open_archive;
+    fish_subclass.free_archive = fish_free_archive;
+    fish_subclass.fh_open = fish_fh_open;
+    fish_subclass.fh_free_data = fish_fh_free_data;
+    fish_subclass.dir_load = fish_dir_load;
+    fish_subclass.file_store = fish_file_store;
+    fish_subclass.linear_start = fish_linear_start;
+    fish_subclass.linear_read = fish_linear_read;
+    fish_subclass.linear_close = fish_linear_close;
     vfs_register_class (vfs_fish_ops);
 }
 

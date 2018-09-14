@@ -905,20 +905,15 @@ tar_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mo
 void
 init_tarfs (void)
 {
-    memset (&tarfs_subclass, 0, sizeof (tarfs_subclass));
-
-    vfs_tarfs_ops->flags = VFS_READONLY;        /* FIXME: tarfs used own temp files */
+    /* FIXME: tarfs used own temp files */
+    vfs_init_subclass (&tarfs_subclass, "tarfs", VFS_READONLY, "utar");
+    vfs_tarfs_ops->read = tar_read;
+    vfs_tarfs_ops->setctl = NULL;
     tarfs_subclass.archive_check = tar_super_check;
     tarfs_subclass.archive_same = tar_super_same;
     tarfs_subclass.open_archive = tar_open_archive;
     tarfs_subclass.free_archive = tar_free_archive;
     tarfs_subclass.fh_open = tar_fh_open;
-    vfs_s_init_class (&tarfs_subclass);
-
-    vfs_tarfs_ops->name = "tarfs";
-    vfs_tarfs_ops->prefix = "utar";
-    vfs_tarfs_ops->read = tar_read;
-    vfs_tarfs_ops->setctl = NULL;
     vfs_register_class (vfs_tarfs_ops);
 }
 

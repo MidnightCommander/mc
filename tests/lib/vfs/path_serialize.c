@@ -37,10 +37,7 @@
 
 #include "src/vfs/local/local.c"
 
-struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
-static struct vfs_class *vfs_test_ops1 = VFS_CLASS (&test_subclass1);
-static struct vfs_class *vfs_test_ops2 = VFS_CLASS (&test_subclass2);
-static struct vfs_class *vfs_test_ops3 = VFS_CLASS (&test_subclass3);
+static struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -54,24 +51,14 @@ setup (void)
     init_localfs ();
     vfs_setup_work_dir ();
 
-    memset (&test_subclass1, 0, sizeof (test_subclass1));
-    vfs_test_ops1->flags = VFS_NOLINKS | VFS_REMOTE;
-    vfs_s_init_class (&test_subclass1);
-    vfs_test_ops1->name = "testfs1";
-    vfs_test_ops1->prefix = "test1";
-    vfs_register_class (vfs_test_ops1);
+    vfs_init_class (&vfs_test_ops1, "testfs1", VFS_NOLINKS | VFS_REMOTE, "test1");
+    vfs_register_class (&vfs_test_ops1);
 
-    memset (&test_subclass2, 0, sizeof (test_subclass2));
-    vfs_s_init_class (&test_subclass2);
-    vfs_test_ops2->name = "testfs2";
-    vfs_test_ops2->prefix = "test2";
-    vfs_register_class (vfs_test_ops2);
+    vfs_init_class (&vfs_test_ops2, "testfs2", VFS_UNKNOWN, "test2");
+    vfs_register_class (&vfs_test_ops2);
 
-    memset (&test_subclass3, 0, sizeof (test_subclass3));
-    vfs_s_init_class (&test_subclass3);
-    vfs_test_ops3->name = "testfs3";
-    vfs_test_ops3->prefix = "test3";
-    vfs_register_class (vfs_test_ops3);
+    vfs_init_class (&vfs_test_ops3, "testfs3", VFS_UNKNOWN, "test3");
+    vfs_register_class (&vfs_test_ops3);
 
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
 #ifdef HAVE_CHARSET

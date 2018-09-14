@@ -170,7 +170,8 @@ struct vfs_s_inode *vfs_s_find_inode (struct vfs_class *me,
 struct vfs_s_inode *vfs_s_find_root (struct vfs_class *me, struct vfs_s_entry *entry);
 
 /* outside interface */
-void vfs_s_init_class (struct vfs_s_subclass *sub);
+void vfs_init_subclass (struct vfs_s_subclass *sub, const char *name, vfs_flags_t flags,
+                        const char *prefix);
 const char *vfs_s_get_path (const vfs_path_t * vpath, struct vfs_s_super **archive, int flags);
 struct vfs_s_super *vfs_get_super_by_vpath (const vfs_path_t * vpath);
 

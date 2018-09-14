@@ -1463,9 +1463,13 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
 
 /* Initialize one of our subclasses - fill common functions */
 void
-vfs_s_init_class (struct vfs_s_subclass *sub)
+vfs_init_class (struct vfs_class *vclass, const char *name, vfs_flags_t flags, const char *prefix)
 {
-    struct vfs_class *vclass = VFS_CLASS (sub);
+    memset (vclass, 0, sizeof (struct vfs_class));
+
+    vclass->name = name;
+    vclass->flags = flags;
+    vclass->prefix = prefix;
 
     vclass->fill_names = vfs_s_fill_names;
     vclass->open = vfs_s_open;
@@ -1486,17 +1490,36 @@ vfs_s_init_class (struct vfs_s_subclass *sub)
     vclass->getid = vfs_s_getid;
     vclass->nothingisopen = vfs_s_nothingisopen;
     vclass->free = vfs_s_free;
+    vclass->setctl = vfs_s_setctl;
     if ((vclass->flags & VFS_USETMP) != 0)
     {
         vclass->getlocalcopy = vfs_s_getlocalcopy;
         vclass->ungetlocalcopy = vfs_s_ungetlocalcopy;
-        sub->find_entry = vfs_s_find_entry_linear;
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+vfs_init_subclass (struct vfs_s_subclass *sub, const char *name, vfs_flags_t flags,
+                   const char *prefix)
+{
+    struct vfs_class *vclass = VFS_CLASS (sub);
+    size_t len;
+    char *start;
+
+    vfs_init_class (vclass, name, flags, prefix);
+
+    len = sizeof (struct vfs_s_subclass) - sizeof (struct vfs_class);
+    start = (char *) sub + sizeof (struct vfs_class);
+    memset (start, 0, len);
+
+    if ((vclass->flags & VFS_USETMP) != 0)
+        sub->find_entry = vfs_s_find_entry_linear;
     else if ((vclass->flags & VFS_REMOTE) != 0)
         sub->find_entry = vfs_s_find_entry_linear;
     else
         sub->find_entry = vfs_s_find_entry_tree;
-    vclass->setctl = vfs_s_setctl;
     sub->dir_uptodate = vfs_s_dir_uptodate;
 }
 

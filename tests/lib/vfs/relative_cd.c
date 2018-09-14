@@ -33,8 +33,7 @@
 #include "src/vfs/local/local.c"
 
 
-struct vfs_s_subclass test_subclass1;
-static struct vfs_class *vfs_test_ops1 = VFS_CLASS (&test_subclass1);
+static struct vfs_class vfs_test_ops1;
 
 static int test_chdir (const vfs_path_t * vpath);
 
@@ -77,17 +76,13 @@ setup (void)
     init_localfs ();
     vfs_setup_work_dir ();
 
-    memset (&test_subclass1, 0, sizeof (test_subclass1));
-    vfs_test_ops1->flags = VFS_NOLINKS | VFS_REMOTE;
-    vfs_s_init_class (&test_subclass1);
-    vfs_test_ops1->name = "testfs1";
-    vfs_test_ops1->prefix = "test1";
-    vfs_test_ops1->chdir = test_chdir;
-    vfs_register_class (vfs_test_ops1);
+    vfs_init_class (&vfs_test_ops1, "testfs1", VFS_NOLINKS | VFS_REMOTE, "test1");
+    vfs_test_ops1.chdir = test_chdir;
+    vfs_register_class (&vfs_test_ops1);
 
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
 
-    vfs_local_ops->chdir = test_chdir;
+    vfs_local_ops.chdir = test_chdir;
 
     test_chdir__init ();
 }

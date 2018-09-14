@@ -2642,25 +2642,8 @@ init_ftpfs (void)
 {
     tcp_init ();
 
-    memset (&ftpfs_subclass, 0, sizeof (ftpfs_subclass));
-
-    vfs_ftpfs_ops->flags = VFS_NOLINKS | VFS_REMOTE | VFS_USETMP;
-    ftpfs_subclass.archive_same = ftpfs_archive_same;
-    ftpfs_subclass.open_archive = ftpfs_open_archive;
-    ftpfs_subclass.free_archive = ftpfs_free_archive;
-    ftpfs_subclass.fh_open = ftpfs_fh_open;
-    ftpfs_subclass.fh_close = ftpfs_fh_close;
-    ftpfs_subclass.fh_free_data = ftpfs_fh_free_data;
-    ftpfs_subclass.dir_load = ftpfs_dir_load;
-    ftpfs_subclass.file_store = ftpfs_file_store;
-    ftpfs_subclass.linear_start = ftpfs_linear_start;
-    ftpfs_subclass.linear_read = ftpfs_linear_read;
-    ftpfs_subclass.linear_close = ftpfs_linear_close;
-
-    vfs_s_init_class (&ftpfs_subclass);
-    vfs_ftpfs_ops->name = "ftpfs";
-    vfs_ftpfs_ops->prefix = "ftp";
-    vfs_ftpfs_ops->done = &ftpfs_done;
+    vfs_init_subclass (&ftpfs_subclass, "ftpfs", VFS_NOLINKS | VFS_REMOTE | VFS_USETMP, "ftp");
+    vfs_ftpfs_ops->done = ftpfs_done;
     vfs_ftpfs_ops->fill_names = ftpfs_fill_names;
     vfs_ftpfs_ops->stat = ftpfs_stat;
     vfs_ftpfs_ops->lstat = ftpfs_lstat;
@@ -2672,6 +2655,17 @@ init_ftpfs (void)
     vfs_ftpfs_ops->mkdir = ftpfs_mkdir;
     vfs_ftpfs_ops->rmdir = ftpfs_rmdir;
     vfs_ftpfs_ops->ctl = ftpfs_ctl;
+    ftpfs_subclass.archive_same = ftpfs_archive_same;
+    ftpfs_subclass.open_archive = ftpfs_open_archive;
+    ftpfs_subclass.free_archive = ftpfs_free_archive;
+    ftpfs_subclass.fh_open = ftpfs_fh_open;
+    ftpfs_subclass.fh_close = ftpfs_fh_close;
+    ftpfs_subclass.fh_free_data = ftpfs_fh_free_data;
+    ftpfs_subclass.dir_load = ftpfs_dir_load;
+    ftpfs_subclass.file_store = ftpfs_file_store;
+    ftpfs_subclass.linear_start = ftpfs_linear_start;
+    ftpfs_subclass.linear_read = ftpfs_linear_read;
+    ftpfs_subclass.linear_close = ftpfs_linear_close;
     vfs_register_class (vfs_ftpfs_ops);
 }
 

@@ -882,20 +882,15 @@ cpio_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t m
 void
 init_cpiofs (void)
 {
-    memset (&cpio_subclass, 0, sizeof (cpio_subclass));
-
-    vfs_cpiofs_ops->flags = VFS_READONLY;       /* FIXME: cpiofs used own temp files */
+    /* FIXME: cpiofs used own temp files */
+    vfs_init_subclass (&cpio_subclass, "cpiofs", VFS_READONLY, "ucpio");
+    vfs_cpiofs_ops->read = cpio_read;
+    vfs_cpiofs_ops->setctl = NULL;
     cpio_subclass.archive_check = cpio_super_check;
     cpio_subclass.archive_same = cpio_super_same;
     cpio_subclass.open_archive = cpio_open_archive;
     cpio_subclass.free_archive = cpio_free_archive;
     cpio_subclass.fh_open = cpio_fh_open;
-    vfs_s_init_class (&cpio_subclass);
-
-    vfs_cpiofs_ops->name = "cpiofs";
-    vfs_cpiofs_ops->prefix = "ucpio";
-    vfs_cpiofs_ops->read = cpio_read;
-    vfs_cpiofs_ops->setctl = NULL;
     vfs_register_class (vfs_cpiofs_ops);
 }
 

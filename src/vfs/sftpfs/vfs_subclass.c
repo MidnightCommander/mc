@@ -182,12 +182,10 @@ sftpfs_cb_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_
 void
 sftpfs_init_subclass (void)
 {
-    memset (&sftpfs_subclass, 0, sizeof (sftpfs_subclass));
     sftpfs_subclass.archive_same = sftpfs_cb_is_equal_connection;
     sftpfs_subclass.open_archive = sftpfs_cb_open_connection;
     sftpfs_subclass.free_archive = sftpfs_cb_close_connection;
     sftpfs_subclass.dir_load = sftpfs_cb_dir_load;
-    vfs_s_init_class (&sftpfs_subclass);
 }
 
 /* --------------------------------------------------------------------------------------------- */

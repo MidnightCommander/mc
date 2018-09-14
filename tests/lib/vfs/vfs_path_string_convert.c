@@ -37,10 +37,7 @@
 
 #include "src/vfs/local/local.c"
 
-struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
-static struct vfs_class *vfs_test_ops1 = VFS_CLASS (&test_subclass1);
-static struct vfs_class *vfs_test_ops2 = VFS_CLASS (&test_subclass2);
-static struct vfs_class *vfs_test_ops3 = VFS_CLASS (&test_subclass3);
+static struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
 
 #define ETALON_PATH_STR "/#test1/bla-bla/some/path/#test2/bla-bla/some/path#test3/111/22/33"
 #define ETALON_PATH_URL_STR "/test1://bla-bla/some/path/test2://bla-bla/some/path/test3://111/22/33"
@@ -57,25 +54,14 @@ setup (void)
     init_localfs ();
     vfs_setup_work_dir ();
 
-    memset (&test_subclass1, 0, sizeof (test_subclass1));
-    vfs_s_init_class (&test_subclass1);
-    vfs_test_ops1->name = "testfs1";
-    vfs_test_ops1->flags = VFS_NOLINKS;
-    vfs_test_ops1->prefix = "test1";
-    vfs_register_class (vfs_test_ops1);
+    vfs_init_class (&vfs_test_ops1, "testfs1", VFS_NOLINKS, "test1");
+    vfs_register_class (&vfs_test_ops1);
 
-    memset (&test_subclass2, 0, sizeof (test_subclass2));
-    vfs_test_ops2->flags = VFS_REMOTE;
-    vfs_s_init_class (&test_subclass2);
-    vfs_test_ops2->name = "testfs2";
-    vfs_test_ops2->prefix = "test2";
-    vfs_register_class (vfs_test_ops2);
+    vfs_init_class (&vfs_test_ops2, "testfs2", VFS_REMOTE, "test2");
+    vfs_register_class (&vfs_test_ops2);
 
-    memset (&test_subclass3, 0, sizeof (test_subclass3));
-    vfs_s_init_class (&test_subclass3);
-    vfs_test_ops3->name = "testfs3";
-    vfs_test_ops3->prefix = "test3";
-    vfs_register_class (vfs_test_ops3);
+    vfs_init_class (&vfs_test_ops3, "testfs3", VFS_UNKNOWN, "test3");
+    vfs_register_class (&vfs_test_ops3);
 
 #ifdef HAVE_CHARSET
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
@@ -114,21 +100,21 @@ static const struct test_from_to_string_ds
         ETALON_PATH_URL_STR,
         "111/22/33",
         4,
-        VFS_CLASS (&test_subclass3)
+        &vfs_test_ops3
     },
     { /* 1. */
         "/",
         "/",
         "/",
         1,
-        VFS_CLASS (&local_subclass)
+        &vfs_local_ops
     },
     { /* 2. */
         "/test1://bla-bla/some/path/test2://user:passwd@some.host:1234/bla-bla/some/path/test3://111/22/33",
         "/test1://bla-bla/some/path/test2://user:passwd@some.host:1234/bla-bla/some/path/test3://111/22/33",
         "111/22/33",
         4,
-        VFS_CLASS (&test_subclass3)
+        &vfs_test_ops3
     },
 #ifdef HAVE_CHARSET
     { /* 3. */
@@ -136,42 +122,42 @@ static const struct test_from_to_string_ds
         "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
         "111/22/33",
         4,
-        VFS_CLASS (&test_subclass3)
+        &vfs_test_ops3
     },
     { /* 4. */
         "/#test1/bla-bla1/#enc:IBM866/some/path/#test2/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
         "/test1://#enc:IBM866/bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
         "111/22/33",
         4,
-        VFS_CLASS (&test_subclass3)
+        &vfs_test_ops3
     },
     {  /* 5. */
         "/#test1/bla-bla1/some/path/#test2/bla-bla2/#enc:IBM866/#enc:KOI8-R/some/path#test3/111/22/33",
         "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
         "111/22/33",
         4,
-        VFS_CLASS (&test_subclass3)
+        &vfs_test_ops3
     },
     { /* 6. */
         "/#test1/bla-bla1/some/path/#test2/bla-bla2/#enc:IBM866/some/#enc:KOI8-R/path#test3/111/22/33",
         "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
         "111/22/33",
         4,
-        VFS_CLASS (&test_subclass3)
+        &vfs_test_ops3
     },
     { /* 7. */
         "/#test1/bla-bla1/some/path/#test2/#enc:IBM866/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
         "/test1://bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
         "111/22/33",
         4,
-        VFS_CLASS (&test_subclass3)
+        &vfs_test_ops3
     },
     { /* 8. */
         "/#test1/bla-bla1/some/path/#enc:IBM866/#test2/bla-bla2/#enc:KOI8-R/some/path#test3/111/22/33",
         "/test1://#enc:IBM866/bla-bla1/some/path/test2://#enc:KOI8-R/bla-bla2/some/path/test3://111/22/33",
         "111/22/33",
         4,
-        VFS_CLASS (&test_subclass3)
+        &vfs_test_ops3
     },
 #endif /* HAVE_CHARSET */
 };
