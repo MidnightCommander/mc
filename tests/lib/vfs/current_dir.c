@@ -185,6 +185,8 @@ START_PARAMETRIZED_TEST (test_cd, test_cd_ds)
         g_free (actual_cd_path);
     }
     vfs_path_free (vpath);
+
+    vfs_unregister_class (&vfs_test_ops);
 }
 /* *INDENT-OFF* */
 END_PARAMETRIZED_TEST

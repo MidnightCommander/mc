@@ -238,6 +238,7 @@ void vfs_init (void);
 void vfs_shut (void);
 /* Register a file system class */
 gboolean vfs_register_class (struct vfs_class *vfs);
+void vfs_unregister_class (struct vfs_class *vfs);
 
 void vfs_setup_work_dir (void);
 

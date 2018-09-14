@@ -316,6 +316,17 @@ vfs_register_class (struct vfs_class * vfs)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+void
+vfs_unregister_class (struct vfs_class *vfs)
+{
+    if (vfs->done != NULL)
+        vfs->done (vfs);
+
+    g_ptr_array_remove (vfs__classes_list, vfs);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /** Strip known vfs suffixes from a filename (possible improvement: strip
  *  suffix from last path component).
  *  \return a malloced string which has to be freed.
