@@ -374,7 +374,9 @@ check_hardlinks (const vfs_path_t * src_vpath, const struct stat *src_stat,
                     return TRUE;
             }
 
-            message (D_ERROR, MSG_ERROR, _("Cannot make the hardlink"));
+            message (D_ERROR, MSG_ERROR,
+                     _("Cannot make the hardlink\n%s\nto\n%s"), vfs_path_as_str (dst_vpath),
+                     vfs_path_as_str (lnk->dst_vpath));
             return FALSE;
         }
     }
