@@ -304,7 +304,7 @@ free_linklist (GSList * lp)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static gboolean
+static const struct link *
 is_in_linklist (const GSList * lp, const vfs_path_t * vpath, const struct stat *sb)
 {
     const struct vfs_class *class;
@@ -318,9 +318,10 @@ is_in_linklist (const GSList * lp, const vfs_path_t * vpath, const struct stat *
         const struct link *lnk = (const struct link *) lp->data;
 
         if (lnk->vfs == class && lnk->ino == ino && lnk->dev == dev)
-            return TRUE;
+            return lnk;
     }
-    return FALSE;
+
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2686,7 +2687,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
         goto ret_fast;
     }
 
-    if (is_in_linklist (dest_dirs, src_vpath, &cbuf))
+    if (is_in_linklist (dest_dirs, src_vpath, &cbuf) != NULL)
     {
         /* Don't copy a directory we created before (we don't want to copy 
            infinitely if a directory is copied into itself) */
@@ -2719,7 +2720,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
         goto ret_fast;
     }
 
-    if (is_in_linklist (parent_dirs, src_vpath, &cbuf))
+    if (is_in_linklist (parent_dirs, src_vpath, &cbuf) != NULL)
     {
         /* we found a cyclic symbolic link */
         message (D_ERROR, MSG_ERROR, _("Cannot copy cyclic symbolic link\n\"%s\""), s);
