@@ -332,17 +332,18 @@ is_in_linklist (const GSList * lp, const vfs_path_t * vpath, const struct stat *
  */
 
 static gboolean
-check_hardlinks (const vfs_path_t * src_vpath, const vfs_path_t * dst_vpath, struct stat *pstat)
+check_hardlinks (const vfs_path_t * src_vpath, const struct stat *src_stat,
+                 const vfs_path_t * dst_vpath)
 {
     GSList *lp;
     struct link *lnk;
 
     const struct vfs_class *my_vfs;
-    ino_t ino = pstat->st_ino;
-    dev_t dev = pstat->st_dev;
+    ino_t ino = src_stat->st_ino;
+    dev_t dev = src_stat->st_dev;
     struct stat link_stat;
 
-    if ((vfs_file_class_flags (src_vpath) & VFSF_NOLINKS) != 0)
+    if (src_stat->st_nlink < 2 || (vfs_file_class_flags (src_vpath) & VFSF_NOLINKS) != 0)
         return FALSE;
 
     my_vfs = vfs_path_get_by_index (src_vpath, -1)->class;
@@ -378,14 +379,17 @@ check_hardlinks (const vfs_path_t * src_vpath, const vfs_path_t * dst_vpath, str
         }
     }
 
-    lnk = g_try_new0 (struct link, 1);
+    lnk = g_try_new (struct link, 1);
     if (lnk != NULL)
     {
         lnk->vfs = my_vfs;
         lnk->ino = ino;
         lnk->dev = dev;
+        lnk->linkcount = 0;
+        lnk->st_mode = 0;
         lnk->src_vpath = vfs_path_clone (src_vpath);
         lnk->dst_vpath = vfs_path_clone (dst_vpath);
+
         linklist = g_slist_prepend (linklist, lnk);
     }
 
@@ -2189,8 +2193,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     if (!ctx->do_append)
     {
         /* Check the hardlinks */
-        if (!ctx->follow_links && src_stat.st_nlink > 1
-            && check_hardlinks (src_vpath, dst_vpath, &src_stat))
+        if (!ctx->follow_links && check_hardlinks (src_vpath, &src_stat, dst_vpath))
         {
             /* We have made a hardlink - no more processing is necessary */
             return_status = FILE_CONT;
@@ -2691,10 +2694,9 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
     }
 
     /* Hmm, hardlink to directory??? - Norbert */
-    /* FIXME: In this step we should do something
-       in case the destination already exist */
+    /* FIXME: In this step we should do something in case the destination already exist */
     /* Check the hardlinks */
-    if (ctx->preserve && cbuf.st_nlink > 1 && check_hardlinks (src_vpath, dst_vpath, &cbuf))
+    if (ctx->preserve && check_hardlinks (src_vpath, &cbuf, dst_vpath))
     {
         /* We have made a hardlink - no more processing is necessary */
         goto ret_fast;
