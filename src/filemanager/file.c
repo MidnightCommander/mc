@@ -336,56 +336,51 @@ static gboolean
 check_hardlinks (const vfs_path_t * src_vpath, const struct stat *src_stat,
                  const vfs_path_t * dst_vpath)
 {
-    GSList *lp;
     struct link *lnk;
-
-    const struct vfs_class *my_vfs;
     ino_t ino = src_stat->st_ino;
     dev_t dev = src_stat->st_dev;
-    struct stat link_stat;
 
     if (src_stat->st_nlink < 2 || (vfs_file_class_flags (src_vpath) & VFSF_NOLINKS) != 0)
         return FALSE;
 
-    my_vfs = vfs_path_get_by_index (src_vpath, -1)->class;
-
-    for (lp = linklist; lp != NULL; lp = g_slist_next (lp))
+    lnk = (struct link *) is_in_linklist (linklist, src_vpath, src_stat);
+    if (lnk != NULL)
     {
-        lnk = (struct link *) lp->data;
+        int stat_result;
+        struct stat link_stat;
 
-        if (lnk->vfs == my_vfs && lnk->ino == ino && lnk->dev == dev)
+        stat_result = mc_stat (lnk->src_vpath, &link_stat);
+
+        if (stat_result == 0 && link_stat.st_ino == ino && link_stat.st_dev == dev)
         {
             const struct vfs_class *lp_name_class;
-            int stat_result;
+            const struct vfs_class *my_vfs;
 
             lp_name_class = vfs_path_get_last_path_vfs (lnk->src_vpath);
-            stat_result = mc_stat (lnk->src_vpath, &link_stat);
+            my_vfs = vfs_path_get_last_path_vfs (src_vpath);
 
-            if (stat_result == 0 && link_stat.st_ino == ino
-                && link_stat.st_dev == dev && lp_name_class == my_vfs)
+            if (lp_name_class == my_vfs)
             {
                 const struct vfs_class *p_class, *dst_name_class;
 
                 dst_name_class = vfs_path_get_last_path_vfs (dst_vpath);
                 p_class = vfs_path_get_last_path_vfs (lnk->dst_vpath);
 
-                if (dst_name_class == p_class &&
-                    mc_stat (lnk->dst_vpath, &link_stat) == 0 &&
+                if (dst_name_class == p_class && mc_stat (lnk->dst_vpath, &link_stat) == 0 &&
                     mc_link (lnk->dst_vpath, dst_vpath) == 0)
                     return TRUE;
             }
-
-            message (D_ERROR, MSG_ERROR,
-                     _("Cannot make the hardlink\n%s\nto\n%s"), vfs_path_as_str (dst_vpath),
-                     vfs_path_as_str (lnk->dst_vpath));
-            return FALSE;
         }
+
+        message (D_ERROR, MSG_ERROR, _("Cannot make the hardlink\n%s\nto\n%s"),
+                 vfs_path_as_str (dst_vpath), vfs_path_as_str (lnk->dst_vpath));
+        return FALSE;
     }
 
     lnk = g_try_new (struct link, 1);
     if (lnk != NULL)
     {
-        lnk->vfs = my_vfs;
+        lnk->vfs = vfs_path_get_last_path_vfs (src_vpath);
         lnk->ino = ino;
         lnk->dev = dev;
         lnk->linkcount = 0;
