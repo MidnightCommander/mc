@@ -55,6 +55,7 @@ SYNTAXFILES =			\
 	ml.syntax		\
 	named.syntax		\
 	nemerle.syntax		\
+	rtorrent.syntax		\
 	nroff.syntax		\
 	octave.syntax		\
 	opencl.syntax		\
