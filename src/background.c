@@ -103,7 +103,7 @@ register_task_running (file_op_context_t * ctx, pid_t pid, int fd, int to_child,
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-destroy_task_and_return_fd (pid_t pid)
+destroy_task (pid_t pid)
 {
     TaskList *p = task_list;
     TaskList *prev = 0;
@@ -499,7 +499,7 @@ parent_va_call_string (void *routine, int argc, va_list ap)
 void
 unregister_task_running (pid_t pid, int fd)
 {
-    destroy_task_and_return_fd (pid);
+    destroy_task (pid);
     delete_select_channel (fd);
 }
 
@@ -508,7 +508,7 @@ unregister_task_running (pid_t pid, int fd)
 void
 unregister_task_with_pid (pid_t pid)
 {
-    int fd = destroy_task_and_return_fd (pid);
+    int fd = destroy_task (pid);
     if (fd != -1)
         delete_select_channel (fd);
 }
