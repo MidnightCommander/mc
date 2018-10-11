@@ -112,13 +112,15 @@ destroy_task_and_return_fd (pid_t pid)
     {
         if (p->pid == pid)
         {
+            int fd = p->fd;
+
             if (prev)
                 prev->next = p->next;
             else
                 task_list = p->next;
             g_free (p->info);
             g_free (p);
-            return p->fd;
+            return fd;
         }
         prev = p;
         p = p->next;
