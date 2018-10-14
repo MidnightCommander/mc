@@ -158,7 +158,23 @@ yes
     fi
 
     if test -z "$ac_list_mounted_fs"; then
-      # Solaris, also (obsolete) SVR4.
+      # Solaris >= 8.
+      AC_CACHE_CHECK([for getextmntent function],
+        [fu_cv_sys_mounted_getextmntent],
+        [AC_EGREP_HEADER([getextmntent], [sys/mnttab.h],
+           [fu_cv_sys_mounted_getextmntent=yes],
+           [fu_cv_sys_mounted_getextmntent=no])])
+      if test $fu_cv_sys_mounted_getextmntent = yes; then
+        ac_list_mounted_fs=found
+        AC_DEFINE([MOUNTED_GETEXTMNTENT], [1],
+          [Define if there is a function named getextmntent for reading the list
+           of mounted file systems.  (Solaris)])
+      fi
+    fi
+
+    if test -z "$ac_list_mounted_fs"; then
+      # Solaris < 8, also (obsolete) SVR4.
+      # Solaris >= 8 has the two-argument getmntent but is already handled above.
       AC_CACHE_CHECK([for two-argument getmntent function],
         [fu_cv_sys_mounted_getmntent2],
         [AC_EGREP_HEADER([getmntent], [sys/mnttab.h],
