@@ -28,7 +28,7 @@ AC_DEFUN([AC_FUNC_GETMNTENT],
 AC_DEFUN([gl_LIST_MOUNTED_FILE_SYSTEMS],
 [
   AC_REQUIRE([AC_CANONICAL_HOST])
-  AC_CHECK_FUNCS([listmntent getmntinfo])
+  AC_CHECK_FUNCS([listmntent])
   AC_CHECK_HEADERS_ONCE([sys/param.h sys/statvfs.h])
 
   # We must include grp.h before ucred.h on OSF V4.0, since ucred.h uses
@@ -229,14 +229,31 @@ $getfsstat_includes
   fi
 
   if test -z "$ac_list_mounted_fs"; then
-    # Mac OS X, FreeBSD, NetBSD, OpenBSD, also (obsolete) 4.4BSD.
+    # Mac OS X, FreeBSD, NetBSD, OpenBSD, Minix, also (obsolete) 4.4BSD.
     # OSF/1 also has getmntinfo but is already handled above.
+    # We cannot use AC_CHECK_FUNCS([getmntinfo]) here, because at the linker
+    # level the function is sometimes called getmntinfo64 or getmntinfo$INODE64
+    # on Mac OS X, __getmntinfo13 on NetBSD and Minix, _F64_getmntinfo on OSF/1.
     AC_CACHE_CHECK([for getmntinfo function],
       [fu_cv_sys_mounted_getmntinfo],
-      [
-        test "$ac_cv_func_getmntinfo" = yes \
-          && fu_cv_sys_mounted_getmntinfo=yes \
-          || fu_cv_sys_mounted_getmntinfo=no
+      [AC_LINK_IFELSE(
+         [AC_LANG_PROGRAM([[
+#if HAVE_SYS_PARAM_H
+# include <sys/param.h>
+#endif
+#include <sys/types.h>
+#if HAVE_SYS_MOUNT_H
+# include <sys/mount.h>
+#endif
+#if HAVE_SYS_STATVFS_H
+# include <sys/statvfs.h>
+#endif
+#include <stdlib.h>
+            ]],
+            [[int count = getmntinfo (NULL, MNT_WAIT);
+            ]])],
+         [fu_cv_sys_mounted_getmntinfo=yes],
+         [fu_cv_sys_mounted_getmntinfo=no])
       ])
     if test $fu_cv_sys_mounted_getmntinfo = yes; then
       AC_CACHE_CHECK([whether getmntinfo returns statvfs structures],
@@ -270,7 +287,7 @@ int getmntinfo (struct statfs **, int);
            list of mounted file systems and it returns an array of
            'struct statfs'.  (4.4BSD, Darwin)])
       else
-        # NetBSD.
+        # NetBSD, Minix.
         ac_list_mounted_fs=found
         AC_DEFINE([MOUNTED_GETMNTINFO2], [1],
           [Define if there is a function named getmntinfo for reading the
