@@ -84,7 +84,7 @@
 #include <nfs/nfs_clnt.h>
 #include <nfs/vfs.h>
 #endif
-#elif defined HAVE_OS_H         /* BeOS */
+#elif defined HAVE_OS_H         /* Haiku, also (obsolete) BeOS */
 #include <fs_info.h>
 #endif
 
@@ -106,7 +106,7 @@
 #else
 #define STATFS statfs
 #define STRUCT_STATVFS struct statfs
-#ifdef HAVE_OS_H                /* BeOS */
+#ifdef HAVE_OS_H                /* Haiku, also (obsolete) BeOS */
 /* BeOS has a statvfs function, but it does not return sensible values
    for f_files, f_ffree and f_favail, and lacks f_type, f_basetype and
    f_fstypename.  Use 'struct fs_info' instead.  */
@@ -138,7 +138,7 @@ statfs (char const *filename, struct fs_info *buf)
 #else
 #if defined HAVE_STRUCT_STATVFS_F_FSTYPENAME || defined HAVE_STRUCT_STATFS_F_FSTYPENAME
 #define STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME f_fstypename
-#elif defined HAVE_OS_H         /* BeOS */
+#elif defined HAVE_OS_H         /* Haiku, also (obsolete) BeOS */
 #define STATXFS_FILE_SYSTEM_TYPE_MEMBER_NAME fsh_name
 #endif
 #endif

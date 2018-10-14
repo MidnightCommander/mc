@@ -76,7 +76,7 @@ AC_FUNC_GETMNTENT
 # function named listmntent to risk the false positive.
 
 if test -z "$ac_list_mounted_fs"; then
-  # Cray UNICOS 9
+  # (obsolete) Cray UNICOS 9
   AC_MSG_CHECKING([for listmntent of Cray/Unicos-9])
   AC_CACHE_VAL([fu_cv_sys_mounted_cray_listmntent],
     [fu_cv_sys_mounted_cray_listmntent=no
@@ -121,7 +121,7 @@ if test $ac_cv_func_getmntent = yes; then
   # Determine whether it's the one-argument variant or the two-argument one.
 
   if test -z "$ac_list_mounted_fs"; then
-    # GNU/Linux, 4.3BSD, SunOS, HP-UX, Dynix, Irix
+    # glibc, HP-UX, IRIX, Cygwin, Android, also (obsolete) 4.3BSD, SunOS, Dynix.
     AC_MSG_CHECKING([for one-argument getmntent function])
     AC_CACHE_VAL([fu_cv_sys_mounted_getmntent1],
                  [AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
@@ -157,7 +157,7 @@ if test $ac_cv_func_getmntent = yes; then
   fi
 
   if test -z "$ac_list_mounted_fs"; then
-    # SVR4
+    # Solaris, also (obsolete) SVR4.
     AC_MSG_CHECKING([for two-argument getmntent function])
     AC_CACHE_VAL([fu_cv_sys_mounted_getmntent2],
     [AC_EGREP_HEADER([getmntent], [sys/mnttab.h],
@@ -176,7 +176,7 @@ if test $ac_cv_func_getmntent = yes; then
 fi
 
 if test -z "$ac_list_mounted_fs"; then
-  # DEC Alpha running OSF/1, and Apple Darwin 1.3.
+  # OSF/1, also (obsolete) Apple Darwin 1.3.
   # powerpc-apple-darwin1.3.7 needs sys/param.h sys/ucred.h sys/fs_types.h
 
   AC_MSG_CHECKING([for getfsstat function])
@@ -205,7 +205,7 @@ $getfsstat_includes]]
 fi
 
 if test -z "$ac_list_mounted_fs"; then
-  # SVR3
+  # (obsolete) SVR3
   AC_MSG_CHECKING([for FIXME existence of three headers])
   AC_CACHE_VAL([fu_cv_sys_mounted_fread_fstyp],
     [AC_PREPROC_IFELSE([AC_LANG_SOURCE([[
@@ -225,7 +225,8 @@ if test -z "$ac_list_mounted_fs"; then
 fi
 
 if test -z "$ac_list_mounted_fs"; then
-  # 4.4BSD and DEC OSF/1.
+  # Mac OS X, FreeBSD, NetBSD, OpenBSD, also (obsolete) 4.4BSD.
+  # OSF/1 also has getmntinfo but is already handled above.
   AC_MSG_CHECKING([for getmntinfo function])
   AC_CACHE_VAL([fu_cv_sys_mounted_getmntinfo],
     [
@@ -260,12 +261,14 @@ int getmntinfo (struct statfs **, int);
       ])
     AC_MSG_RESULT([$fu_cv_sys_mounted_getmntinfo2])
     if test $fu_cv_sys_mounted_getmntinfo2 = no; then
+      # Mac OS X, FreeBSD, OpenBSD, also (obsolete) 4.4BSD.
       ac_list_mounted_fs=found
       AC_DEFINE([MOUNTED_GETMNTINFO], [1],
                 [Define if there is a function named getmntinfo for reading the
                  list of mounted file systems and it returns an array of
                  'struct statfs'.  (4.4BSD, Darwin)])
     else
+      # NetBSD.
       ac_list_mounted_fs=found
       AC_DEFINE([MOUNTED_GETMNTINFO2], [1],
                 [Define if there is a function named getmntinfo for reading the
@@ -276,7 +279,7 @@ int getmntinfo (struct statfs **, int);
 fi
 
 if test -z "$ac_list_mounted_fs"; then
-  # Ultrix
+  # (obsolete) Ultrix.
   AC_MSG_CHECKING([for getmnt function])
   AC_CACHE_VAL([fu_cv_sys_mounted_getmnt],
     [AC_PREPROC_IFELSE([AC_LANG_SOURCE([[
@@ -294,7 +297,7 @@ if test -z "$ac_list_mounted_fs"; then
 fi
 
 if test -z "$ac_list_mounted_fs"; then
-  # BeOS
+  # Haiku, also (obsolete) BeOS.
   AC_CHECK_FUNCS([next_dev fs_stat_dev])
   AC_CHECK_HEADERS([fs_info.h])
   AC_MSG_CHECKING([for BEOS mounted file system support functions])
@@ -315,7 +318,7 @@ if test -z "$ac_list_mounted_fs"; then
 fi
 
 if test -z "$ac_list_mounted_fs"; then
-  # SVR2
+  # (obsolete) SVR2.
   AC_MSG_CHECKING([whether it is possible to resort to fread on /etc/mnttab])
   AC_CACHE_VAL([fu_cv_sys_mounted_fread],
     [AC_PREPROC_IFELSE([AC_LANG_SOURCE([[#include <mnttab.h>]])],
