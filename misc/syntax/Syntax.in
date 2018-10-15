@@ -70,6 +70,9 @@ include makefile.syntax
 file (CMakeLists.txt|.\*.cmake)$ CMake
 include cmake.syntax
 
+file meson.build$ Meson\sBuild\sFile
+include meson.syntax
+
 file ..\*\\.(?i:pas|dpr|inc)$ Pascal\sProgram
 include pascal.syntax
 

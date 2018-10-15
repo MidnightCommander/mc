@@ -53,6 +53,7 @@ SYNTAXFILES =			\
 	makefile.syntax		\
 	markdown.syntax		\
 	ml.syntax		\
+	meson.syntax		\
 	named.syntax		\
 	nemerle.syntax		\
 	nroff.syntax		\
