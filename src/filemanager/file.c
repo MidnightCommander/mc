@@ -2759,7 +2759,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
               gboolean toplevel, gboolean move_over, gboolean do_delete, GSList * parent_dirs)
 {
     struct dirent *next;
-    struct stat buf, cbuf;
+    struct stat dst_stat, src_stat;
     DIR *reading;
     FileProgressStatus return_status = FILE_CONT;
     struct link *lp;
@@ -2772,7 +2772,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
     /* First get the mode of the source dir */
 
   retry_src_stat:
-    if ((*ctx->stat_func) (src_vpath, &cbuf) != 0)
+    if ((*ctx->stat_func) (src_vpath, &src_stat) != 0)
     {
         if (ctx->skip_all)
             return_status = FILE_SKIPALL;
@@ -2787,7 +2787,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
         goto ret_fast;
     }
 
-    if (is_in_linklist (dest_dirs, src_vpath, &cbuf) != NULL)
+    if (is_in_linklist (dest_dirs, src_vpath, &src_stat) != NULL)
     {
         /* Don't copy a directory we created before (we don't want to copy 
            infinitely if a directory is copied into itself) */
@@ -2801,7 +2801,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
     /* Check the hardlinks */
     if (ctx->preserve)
     {
-        switch (check_hardlinks (src_vpath, &cbuf, dst_vpath, &ctx->skip_all))
+        switch (check_hardlinks (src_vpath, &src_stat, dst_vpath, &ctx->skip_all))
         {
         case HARDLINK_OK:
             /* We have made a hardlink - no more processing is necessary */
@@ -2816,7 +2816,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
         }
     }
 
-    if (!S_ISDIR (cbuf.st_mode))
+    if (!S_ISDIR (src_stat.st_mode))
     {
         if (ctx->skip_all)
             return_status = FILE_SKIPALL;
@@ -2831,7 +2831,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
         goto ret_fast;
     }
 
-    if (is_in_linklist (parent_dirs, src_vpath, &cbuf) != NULL)
+    if (is_in_linklist (parent_dirs, src_vpath, &src_stat) != NULL)
     {
         /* we found a cyclic symbolic link */
         message (D_ERROR, MSG_ERROR, _("Cannot copy cyclic symbolic link\n\"%s\""), s);
@@ -2841,13 +2841,13 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
 
     lp = g_new0 (struct link, 1);
     lp->vfs = vfs_path_get_by_index (src_vpath, -1)->class;
-    lp->ino = cbuf.st_ino;
-    lp->dev = cbuf.st_dev;
+    lp->ino = src_stat.st_ino;
+    lp->dev = src_stat.st_dev;
     parent_dirs = g_slist_prepend (parent_dirs, lp);
 
   retry_dst_stat:
     /* Now, check if the dest dir exists, if not, create it. */
-    if (mc_stat (dst_vpath, &buf) != 0)
+    if (mc_stat (dst_vpath, &dst_stat) != 0)
     {
         /* Here the dir doesn't exist : make it ! */
         if (move_over && mc_rename (src_vpath, dst_vpath) == 0)
@@ -2866,7 +2866,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
          * so, say /bla exists, if we copy /tmp/\* to /bla, we get /bla/tmp/\*
          * or ( /bla doesn't exist )       /tmp/\* to /bla     ->  /bla/\*
          */
-        if (!S_ISDIR (buf.st_mode))
+        if (!S_ISDIR (dst_stat.st_mode))
         {
             if (ctx->skip_all)
                 return_status = FILE_SKIPALL;
@@ -2899,7 +2899,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
 
     if (do_mkdir)
     {
-        while (my_mkdir (dst_vpath, (cbuf.st_mode & ctx->umask_kill) | S_IRWXU) != 0)
+        while (my_mkdir (dst_vpath, (src_stat.st_mode & ctx->umask_kill) | S_IRWXU) != 0)
         {
             if (ctx->skip_all)
                 return_status = FILE_SKIPALL;
@@ -2915,16 +2915,16 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
         }
 
         lp = g_new0 (struct link, 1);
-        mc_stat (dst_vpath, &buf);
+        mc_stat (dst_vpath, &dst_stat);
         lp->vfs = vfs_path_get_by_index (dst_vpath, -1)->class;
-        lp->ino = buf.st_ino;
-        lp->dev = buf.st_dev;
+        lp->ino = dst_stat.st_ino;
+        lp->dev = dst_stat.st_dev;
         dest_dirs = g_slist_prepend (dest_dirs, lp);
     }
 
     if (ctx->preserve_uidgid)
     {
-        while (mc_chown (dst_vpath, cbuf.st_uid, cbuf.st_gid) != 0)
+        while (mc_chown (dst_vpath, src_stat.st_uid, src_stat.st_gid) != 0)
         {
             if (ctx->skip_all)
                 return_status = FILE_SKIPALL;
@@ -2959,8 +2959,8 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
         path = mc_build_filename (s, next->d_name, (char *) NULL);
         tmp_vpath = vfs_path_from_str (path);
 
-        (*ctx->stat_func) (tmp_vpath, &buf);
-        if (S_ISDIR (buf.st_mode))
+        (*ctx->stat_func) (tmp_vpath, &dst_stat);
+        if (S_ISDIR (dst_stat.st_mode))
         {
             char *mdpath;
 
@@ -2992,11 +2992,11 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
             {
                 lp = g_new0 (struct link, 1);
                 lp->src_vpath = tmp_vpath;
-                lp->st_mode = buf.st_mode;
+                lp->st_mode = dst_stat.st_mode;
                 erase_list = g_slist_append (erase_list, lp);
                 tmp_vpath = NULL;
             }
-            else if (S_ISDIR (buf.st_mode))
+            else if (S_ISDIR (dst_stat.st_mode))
                 return_status = erase_dir_iff_empty (ctx, tmp_vpath, tctx->progress_count);
             else
                 return_status = erase_file (tctx, ctx, tmp_vpath);
@@ -3009,16 +3009,16 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
     {
         mc_timesbuf_t times;
 
-        mc_chmod (dst_vpath, cbuf.st_mode & ctx->umask_kill);
-        get_times (&cbuf, &times);
+        mc_chmod (dst_vpath, src_stat.st_mode & ctx->umask_kill);
+        get_times (&src_stat, &times);
         mc_utime (dst_vpath, &times);
     }
     else
     {
-        cbuf.st_mode = umask (-1);
-        umask (cbuf.st_mode);
-        cbuf.st_mode = 0100777 & ~cbuf.st_mode;
-        mc_chmod (dst_vpath, cbuf.st_mode & ctx->umask_kill);
+        src_stat.st_mode = umask (-1);
+        umask (src_stat.st_mode);
+        src_stat.st_mode = 0100777 & ~src_stat.st_mode;
+        mc_chmod (dst_vpath, src_stat.st_mode & ctx->umask_kill);
     }
 
   ret:
