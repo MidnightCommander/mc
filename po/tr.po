@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-09-09 19:12+0300\n"
+"POT-Creation-Date: 2018-10-20 18:37+0300\n"
 "PO-Revision-Date: 2018-04-30 12:37+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
@@ -2519,8 +2519,27 @@ msgstr "dosya/dizin"
 msgid " with source mask:"
 msgstr " bu maskla:"
 
-msgid "Cannot make the hardlink"
-msgstr "Sabit bağ oluşturulamadı"
+#, fuzzy, c-format
+msgid ""
+"Cannot stat hardlink source file \"%s\"\n"
+"%s"
+msgstr ""
+"\"%s\" kaynak dosyası durumlanamıyor \n"
+" %s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create target hardlink \"%s\"\n"
+"%s"
+msgstr ""
+"Hedef sembolik bağ \"%s\" oluşturulamıyor \n"
+" %s"
+
+#, fuzzy, c-format
+msgid "Cannot create target hardlink \"%s\""
+msgstr ""
+"Hedef sembolik bağ \"%s\" oluşturulamıyor \n"
+" %s"
 
 #, c-format
 msgid ""
@@ -4499,3 +4518,6 @@ msgstr "Başından devam edilsin mi?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr " /ftp://some.host/editme.txt 'in yerel kopyası alınamadı"
+
+#~ msgid "Cannot make the hardlink"
+#~ msgstr "Sabit bağ oluşturulamadı"

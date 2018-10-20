@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-09-09 19:12+0300\n"
+"POT-Creation-Date: 2018-10-20 18:37+0300\n"
 "PO-Revision-Date: 2018-04-30 12:37+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/mc/mc/language/nl/)\n"
@@ -2520,8 +2520,27 @@ msgstr "bestanden/mappen"
 msgid " with source mask:"
 msgstr " met bronmasker:"
 
-msgid "Cannot make the hardlink"
-msgstr "Harde link maken mislukt"
+#, fuzzy, c-format
+msgid ""
+"Cannot stat hardlink source file \"%s\"\n"
+"%s"
+msgstr ""
+"Bronbestand \"%s\" kan niet geïnspecteerd worden \n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create target hardlink \"%s\"\n"
+"%s"
+msgstr ""
+"Maken van doel van symbolische link \"%s\" mislukt \n"
+"%s "
+
+#, fuzzy, c-format
+msgid "Cannot create target hardlink \"%s\""
+msgstr ""
+"Maken van doel van symbolische link \"%s\" mislukt \n"
+"%s "
 
 #, c-format
 msgid ""
@@ -4493,3 +4512,6 @@ msgstr "Doorgaan vanaf het begin?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan geen lokale versie van /ftp://some.host/editme.txt ophalen"
+
+#~ msgid "Cannot make the hardlink"
+#~ msgstr "Harde link maken mislukt"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-09-09 19:12+0300\n"
+"POT-Creation-Date: 2018-10-20 18:37+0300\n"
 "PO-Revision-Date: 2018-04-30 12:37+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Norwegian Bokmål (http://www.transifex.com/mc/mc/language/"
@@ -2404,8 +2404,21 @@ msgstr "filer/kataloger"
 msgid " with source mask:"
 msgstr " med kildemaske:"
 
-msgid "Cannot make the hardlink"
+#, c-format
+msgid ""
+"Cannot stat hardlink source file \"%s\"\n"
+"%s"
 msgstr ""
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create target hardlink \"%s\"\n"
+"%s"
+msgstr "Kan ikke opprette midlertidig katalog %s: %s\n"
+
+#, fuzzy, c-format
+msgid "Cannot create target hardlink \"%s\""
+msgstr "Kan ikke opprette midlertidig katalog %s: %s\n"
 
 #, c-format
 msgid ""

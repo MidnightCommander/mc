@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-09-09 19:12+0300\n"
+"POT-Creation-Date: 2018-10-20 18:37+0300\n"
 "PO-Revision-Date: 2018-04-30 12:37+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
@@ -2515,8 +2515,27 @@ msgstr "failid/kataloogid"
 msgid " with source mask:"
 msgstr "lähtemaskiga:"
 
-msgid "Cannot make the hardlink"
-msgstr "Jäikviida loomine nurjus"
+#, fuzzy, c-format
+msgid ""
+"Cannot stat hardlink source file \"%s\"\n"
+"%s"
+msgstr ""
+"Lähtefaili \"%s\" info päring nurjus\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create target hardlink \"%s\"\n"
+"%s"
+msgstr ""
+"Nimeviida \"%s\" loomine nurjus sihtkohas\n"
+"%s"
+
+#, fuzzy, c-format
+msgid "Cannot create target hardlink \"%s\""
+msgstr ""
+"Nimeviida \"%s\" loomine nurjus sihtkohas\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4493,3 +4512,6 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
+
+#~ msgid "Cannot make the hardlink"
+#~ msgstr "Jäikviida loomine nurjus"

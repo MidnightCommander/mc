@@ -770,7 +770,7 @@ tree_move (WTree * tree, const char *default_dest)
 
     if (!S_ISDIR (buf.st_mode))
     {
-        file_error (_("Destination \"%s\" must be a directory\n%s"), dest);
+        file_error (TRUE, _("Destination \"%s\" must be a directory\n%s"), dest);
         goto ret;
     }
 

@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-09-09 19:12+0300\n"
+"POT-Creation-Date: 2018-10-20 18:37+0300\n"
 "PO-Revision-Date: 2018-05-03 09:01+0000\n"
 "Last-Translator: David Prudhomme <david7.prudhomme@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/mc/mc/language/fr/)\n"
@@ -2534,8 +2534,27 @@ msgstr "fichiers/répertoires"
 msgid " with source mask:"
 msgstr "avec masque source :"
 
-msgid "Cannot make the hardlink"
-msgstr "Impossible de créer le lien physique"
+#, fuzzy, c-format
+msgid ""
+"Cannot stat hardlink source file \"%s\"\n"
+"%s"
+msgstr ""
+"Impossible d'obtenir les caractéristiques du fichier source « %s »\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create target hardlink \"%s\"\n"
+"%s"
+msgstr ""
+"Impossible de créer le lien symbolique cible « %s »\n"
+"%s"
+
+#, fuzzy, c-format
+msgid "Cannot create target hardlink \"%s\""
+msgstr ""
+"Impossible de créer le lien symbolique cible « %s »\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4519,3 +4538,6 @@ msgstr "Continuer à partir du début ?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Impossible de récupérer localement le fichier /ftp://some.host/editme.txt"
+
+#~ msgid "Cannot make the hardlink"
+#~ msgstr "Impossible de créer le lien physique"

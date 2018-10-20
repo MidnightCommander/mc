@@ -57,7 +57,7 @@ gboolean panel_operate (void *source_panel, FileOperation op, gboolean force_sin
 /* Error reporting routines */
 
 /* Report error with one file */
-FileProgressStatus file_error (const char *format, const char *file);
+FileProgressStatus file_error (gboolean allow_retry, const char *format, const char *file);
 
 /* return value is FILE_CONT or FILE_ABORT */
 FileProgressStatus compute_dir_size (const vfs_path_t * dirname_vpath, dirsize_status_msg_t * sm,

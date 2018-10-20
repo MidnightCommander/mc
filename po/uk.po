@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-09-09 19:12+0300\n"
+"POT-Creation-Date: 2018-10-20 18:37+0300\n"
 "PO-Revision-Date: 2018-04-30 12:37+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/mc/mc/language/uk/)\n"
@@ -2499,8 +2499,27 @@ msgstr "файли/каталоги"
 msgid " with source mask:"
 msgstr " із шаблоном джерела:"
 
-msgid "Cannot make the hardlink"
-msgstr "Не вдалося створити жорстке посилання"
+#, fuzzy, c-format
+msgid ""
+"Cannot stat hardlink source file \"%s\"\n"
+"%s"
+msgstr ""
+"Не вдалося отримати властивості вихідного файлу «%s»\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create target hardlink \"%s\"\n"
+"%s"
+msgstr ""
+"Не вдалося створити цільове символьне посилання «%s»\n"
+"%s"
+
+#, fuzzy, c-format
+msgid "Cannot create target hardlink \"%s\""
+msgstr ""
+"Не вдалося створити цільове символьне посилання «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4480,3 +4499,6 @@ msgstr "Почати спочатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не вдалося отримати локальну копію /ftp://some.host/editme.txt"
+
+#~ msgid "Cannot make the hardlink"
+#~ msgstr "Не вдалося створити жорстке посилання"

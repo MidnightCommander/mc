@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-09-09 19:12+0300\n"
+"POT-Creation-Date: 2018-10-20 18:37+0300\n"
 "PO-Revision-Date: 2018-04-30 12:37+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/mc/mc/language/ja/)\n"
@@ -2419,7 +2419,22 @@ msgstr "files/directories"
 msgid " with source mask:"
 msgstr " with source mask:"
 
-msgid "Cannot make the hardlink"
+#, fuzzy, c-format
+msgid ""
+"Cannot stat hardlink source file \"%s\"\n"
+"%s"
+msgstr ""
+"ファイル %s が開けません\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create target hardlink \"%s\"\n"
+"%s"
+msgstr "ハードリンクが作成できません"
+
+#, fuzzy, c-format
+msgid "Cannot create target hardlink \"%s\""
 msgstr "ハードリンクが作成できません"
 
 #, c-format

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-09-09 19:12+0300\n"
+"POT-Creation-Date: 2018-10-20 18:37+0300\n"
 "PO-Revision-Date: 2018-05-21 16:57+0000\n"
 "Last-Translator: Zmicer Turok <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/mc/mc/language/be/)\n"
@@ -2522,8 +2522,27 @@ msgstr "файлы альбо каталогі"
 msgid " with source mask:"
 msgstr " з зыходным шаблонам:"
 
-msgid "Cannot make the hardlink"
-msgstr "Немагчыма стварыць жорсткую спасылку"
+#, fuzzy, c-format
+msgid ""
+"Cannot stat hardlink source file \"%s\"\n"
+"%s"
+msgstr ""
+"Немагчыма атрымаць уласцівасці зыходнага файла «%s»\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create target hardlink \"%s\"\n"
+"%s"
+msgstr ""
+"Немагчыма стварыць мэтавую спасылку «%s»\n"
+"%s"
+
+#, fuzzy, c-format
+msgid "Cannot create target hardlink \"%s\""
+msgstr ""
+"Немагчыма стварыць мэтавую спасылку «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4508,3 +4527,6 @@ msgstr "Працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
+
+#~ msgid "Cannot make the hardlink"
+#~ msgstr "Немагчыма стварыць жорсткую спасылку"

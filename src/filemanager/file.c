@@ -124,6 +124,17 @@ typedef enum
     DEST_FULL = 2               /* Created, fully copied */
 } dest_status_t;
 
+/* Status of hard link creation */
+typedef enum
+{
+    HARDLINK_OK = 0,            /**< Hardlink was created successfully */
+    HARDLINK_CACHED,            /**< Hardlink was added to the cache */
+    HARDLINK_NOTLINK,           /**< This is not a hard link */
+    HARDLINK_UNSUPPORTED,       /**< VFS doesn't support hard links */
+    HARDLINK_ERROR,             /**< Hard link creation error */
+    HARDLINK_ABORT              /**< Stop file operation after hardlink creation error */
+} hardlink_status_t;
+
 /*
  * This array introduced to avoid translation problems. The former (op_names)
  * is assumed to be nouns, suitable in dialog box titles; this one should
@@ -304,7 +315,7 @@ free_linklist (GSList * lp)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static gboolean
+static const struct link *
 is_in_linklist (const GSList * lp, const vfs_path_t * vpath, const struct stat *sb)
 {
     const struct vfs_class *class;
@@ -318,9 +329,10 @@ is_in_linklist (const GSList * lp, const vfs_path_t * vpath, const struct stat *
         const struct link *lnk = (const struct link *) lp->data;
 
         if (lnk->vfs == class && lnk->ino == ino && lnk->dev == dev)
-            return TRUE;
+            return lnk;
     }
-    return FALSE;
+
+    return NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -331,65 +343,135 @@ is_in_linklist (const GSList * lp, const vfs_path_t * vpath, const struct stat *
  * and a hardlink was successfully made
  */
 
-static gboolean
-check_hardlinks (const vfs_path_t * src_vpath, const vfs_path_t * dst_vpath, struct stat *pstat)
+static hardlink_status_t
+check_hardlinks (const vfs_path_t * src_vpath, const struct stat *src_stat,
+                 const vfs_path_t * dst_vpath, gboolean * skip_all)
 {
-    GSList *lp;
     struct link *lnk;
+    ino_t ino = src_stat->st_ino;
+    dev_t dev = src_stat->st_dev;
 
-    const struct vfs_class *my_vfs;
-    ino_t ino = pstat->st_ino;
-    dev_t dev = pstat->st_dev;
-    struct stat link_stat;
-
+    if (src_stat->st_nlink < 2)
+        return HARDLINK_NOTLINK;
     if ((vfs_file_class_flags (src_vpath) & VFSF_NOLINKS) != 0)
-        return FALSE;
+        return HARDLINK_UNSUPPORTED;
 
-    my_vfs = vfs_path_get_by_index (src_vpath, -1)->class;
-
-    for (lp = linklist; lp != NULL; lp = g_slist_next (lp))
+    lnk = (struct link *) is_in_linklist (linklist, src_vpath, src_stat);
+    if (lnk != NULL)
     {
-        lnk = (struct link *) lp->data;
+        int stat_result;
+        struct stat link_stat;
 
-        if (lnk->vfs == my_vfs && lnk->ino == ino && lnk->dev == dev)
+        stat_result = mc_stat (lnk->src_vpath, &link_stat);
+
+        if (stat_result == 0 && link_stat.st_ino == ino && link_stat.st_dev == dev)
         {
             const struct vfs_class *lp_name_class;
-            int stat_result;
+            const struct vfs_class *my_vfs;
 
             lp_name_class = vfs_path_get_last_path_vfs (lnk->src_vpath);
-            stat_result = mc_stat (lnk->src_vpath, &link_stat);
+            my_vfs = vfs_path_get_last_path_vfs (src_vpath);
 
-            if (stat_result == 0 && link_stat.st_ino == ino
-                && link_stat.st_dev == dev && lp_name_class == my_vfs)
+            if (lp_name_class == my_vfs)
             {
                 const struct vfs_class *p_class, *dst_name_class;
 
                 dst_name_class = vfs_path_get_last_path_vfs (dst_vpath);
                 p_class = vfs_path_get_last_path_vfs (lnk->dst_vpath);
 
-                if (dst_name_class == p_class &&
-                    mc_stat (lnk->dst_vpath, &link_stat) == 0 &&
-                    mc_link (lnk->dst_vpath, dst_vpath) == 0)
-                    return TRUE;
-            }
+                if (dst_name_class == p_class)
+                {
+                    gboolean ok;
 
-            message (D_ERROR, MSG_ERROR, _("Cannot make the hardlink"));
-            return FALSE;
+                    while (!(ok = mc_stat (lnk->dst_vpath, &link_stat) == 0) && !*skip_all)
+                    {
+                        FileProgressStatus status;
+
+                        status =
+                            file_error (TRUE, _("Cannot stat hardlink source file \"%s\"\n%s"),
+                                        vfs_path_as_str (lnk->dst_vpath));
+                        if (status == FILE_ABORT)
+                            return HARDLINK_ABORT;
+                        if (status == FILE_RETRY)
+                            continue;
+                        if (status == FILE_SKIPALL)
+                            *skip_all = TRUE;
+                        break;
+                    }
+
+                    /* if stat() finished unsuccessfully, don't try to create link */
+                    if (!ok)
+                        return HARDLINK_ERROR;
+
+                    while (!(ok = mc_link (lnk->dst_vpath, dst_vpath) == 0) && !*skip_all)
+                    {
+                        FileProgressStatus status;
+
+                        status =
+                            file_error (TRUE, _("Cannot create target hardlink \"%s\"\n%s"),
+                                        vfs_path_as_str (dst_vpath));
+                        if (status == FILE_ABORT)
+                            return HARDLINK_ABORT;
+                        if (status == FILE_RETRY)
+                            continue;
+                        if (status == FILE_SKIPALL)
+                            *skip_all = TRUE;
+                        break;
+                    }
+
+                    /* Success? */
+                    return (ok ? HARDLINK_OK : HARDLINK_ERROR);
+                }
+            }
         }
+
+        if (!*skip_all)
+        {
+            FileProgressStatus status;
+
+            /* Message w/o "Retry" action.
+             *
+             * FIXME: Can't say what errno is here. Define it and don't display.
+             *
+             * file_error() displays a message with text representation of errno
+             * and the string passed to file_error() should provide the format "%s"
+             * for that at end (see previous file_error() call for the reference).
+             * But if format for errno isn't provided, it is safe, because C standard says:
+             * "If the format is exhausted while arguments remain, the excess arguments
+             * are evaluated (as always) but are otherwise ignored" (ISO/IEC 9899:1999,
+             * section 7.19.6.1, paragraph 2).
+             *
+             */
+            errno = 0;
+            status =
+                file_error (FALSE, _("Cannot create target hardlink \"%s\""),
+                            vfs_path_as_str (dst_vpath));
+
+            if (status == FILE_ABORT)
+                return HARDLINK_ABORT;
+
+            if (status == FILE_SKIPALL)
+                *skip_all = TRUE;
+        }
+
+        return HARDLINK_ERROR;
     }
 
-    lnk = g_try_new0 (struct link, 1);
+    lnk = g_try_new (struct link, 1);
     if (lnk != NULL)
     {
-        lnk->vfs = my_vfs;
+        lnk->vfs = vfs_path_get_last_path_vfs (src_vpath);
         lnk->ino = ino;
         lnk->dev = dev;
+        lnk->linkcount = 0;
+        lnk->st_mode = 0;
         lnk->src_vpath = vfs_path_clone (src_vpath);
         lnk->dst_vpath = vfs_path_clone (dst_vpath);
+
         linklist = g_slist_prepend (linklist, lnk);
     }
 
-    return FALSE;
+    return HARDLINK_CACHED;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -425,7 +507,7 @@ make_symlink (file_op_context_t * ctx, const char *src_path, const char *dst_pat
             return_status = FILE_SKIPALL;
         else
         {
-            return_status = file_error (_("Cannot read source link \"%s\"\n%s"), src_path);
+            return_status = file_error (TRUE, _("Cannot read source link \"%s\"\n%s"), src_path);
             if (return_status == FILE_SKIPALL)
                 ctx->skip_all = TRUE;
             if (return_status == FILE_RETRY)
@@ -508,7 +590,7 @@ make_symlink (file_op_context_t * ctx, const char *src_path, const char *dst_pat
         return_status = FILE_SKIPALL;
     else
     {
-        return_status = file_error (_("Cannot create target symlink \"%s\"\n%s"), dst_path);
+        return_status = file_error (TRUE, _("Cannot create target symlink \"%s\"\n%s"), dst_path);
         if (return_status == FILE_SKIPALL)
             ctx->skip_all = TRUE;
         if (return_status == FILE_RETRY)
@@ -826,14 +908,19 @@ get_times (const struct stat *sb, mc_timesbuf_t * times)
 /* {{{ Query/status report routines */
 
 static FileProgressStatus
-real_do_file_error (enum OperationMode mode, const char *error)
+real_do_file_error (enum OperationMode mode, gboolean allow_retry, const char *error)
 {
     int result;
     const char *msg;
 
     msg = mode == Foreground ? MSG_ERROR : _("Background process error");
-    result =
-        query_dialog (msg, error, D_ERROR, 4, _("&Skip"), _("Ski&p all"), _("&Retry"), _("&Abort"));
+
+    if (allow_retry)
+        result =
+            query_dialog (msg, error, D_ERROR, 4, _("&Skip"), _("Ski&p all"), _("&Retry"),
+                          _("&Abort"));
+    else
+        result = query_dialog (msg, error, D_ERROR, 4, _("&Skip"), _("Ski&p all"), _("&Abort"));
 
     switch (result)
     {
@@ -846,8 +933,12 @@ real_do_file_error (enum OperationMode mode, const char *error)
         return FILE_SKIPALL;
 
     case 2:
-        do_refresh ();
-        return FILE_RETRY;
+        if (allow_retry)
+        {
+            do_refresh ();
+            return FILE_RETRY;
+        }
+        MC_FALLTHROUGH;
 
     case 3:
     default:
@@ -902,22 +993,22 @@ real_query_recursive (file_op_context_t * ctx, enum OperationMode mode, const ch
 
 #ifdef ENABLE_BACKGROUND
 static FileProgressStatus
-do_file_error (const char *str)
+do_file_error (gboolean allow_retry, const char *str)
 {
 /* *INDENT-OFF* */
     union
     {
         void *p;
-        FileProgressStatus (*f) (enum OperationMode, const char *);
+        FileProgressStatus (*f) (enum OperationMode, gboolean, const char *);
     } pntr;
 /* *INDENT-ON* */
 
     pntr.f = real_do_file_error;
 
     if (mc_global.we_are_background)
-        return parent_call (pntr.p, NULL, 1, strlen (str), str);
+        return parent_call (pntr.p, NULL, 2, sizeof (allow_retry), allow_retry, strlen (str), str);
     else
-        return real_do_file_error (Foreground, str);
+        return real_do_file_error (Foreground, allow_retry, str);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -969,9 +1060,9 @@ query_replace (file_op_context_t * ctx, const char *destname, struct stat *_s_st
 /* --------------------------------------------------------------------------------------------- */
 
 static FileProgressStatus
-do_file_error (const char *str)
+do_file_error (gboolean allow_retry, const char *str)
 {
-    return real_do_file_error (Foreground, str);
+    return real_do_file_error (Foreground, allow_retry, str);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1008,7 +1099,7 @@ files_error (const char *format, const char *file1, const char *file2)
     g_free (nfile1);
     g_free (nfile2);
 
-    return do_file_error (buf);
+    return do_file_error (TRUE, buf);
 }
 
 /* }}} */
@@ -1074,7 +1165,7 @@ try_remove_file (file_op_context_t * ctx, const vfs_path_t * vpath, FileProgress
 {
     while (mc_unlink (vpath) != 0 && !ctx->skip_all)
     {
-        *status = file_error (_("Cannot remove file \"%s\"\n%s"), vfs_path_as_str (vpath));
+        *status = file_error (TRUE, _("Cannot remove file \"%s\"\n%s"), vfs_path_as_str (vpath));
         if (*status == FILE_RETRY)
             continue;
         if (*status == FILE_SKIPALL)
@@ -1132,7 +1223,7 @@ move_file_file (const WPanel * panel, file_op_total_context_t * tctx, file_op_co
             return_status = FILE_SKIPALL;
         else
         {
-            return_status = file_error (_("Cannot stat file \"%s\"\n%s"), s);
+            return_status = file_error (TRUE, _("Cannot stat file \"%s\"\n%s"), s);
             if (return_status == FILE_SKIPALL)
                 ctx->skip_all = TRUE;
         }
@@ -1297,7 +1388,7 @@ try_erase_dir (file_op_context_t * ctx, const char *dir)
 
     while (my_rmdir (dir) != 0 && !ctx->skip_all)
     {
-        return_status = file_error (_("Cannot remove directory \"%s\"\n%s"), dir);
+        return_status = file_error (TRUE, _("Cannot remove directory \"%s\"\n%s"), dir);
         if (return_status == FILE_SKIPALL)
             ctx->skip_all = TRUE;
         if (return_status != FILE_RETRY)
@@ -1525,9 +1616,9 @@ do_move_dir_dir (const WPanel * panel, file_op_total_context_t * tctx, file_op_c
         else
         {
             if (S_ISDIR (dbuf.st_mode))
-                return_status = file_error (_("Cannot overwrite directory \"%s\"\n%s"), d);
+                return_status = file_error (TRUE, _("Cannot overwrite directory \"%s\"\n%s"), d);
             else
-                return_status = file_error (_("Cannot overwrite file \"%s\"\n%s"), d);
+                return_status = file_error (TRUE, _("Cannot overwrite file \"%s\"\n%s"), d);
             if (return_status == FILE_SKIPALL)
                 ctx->skip_all = TRUE;
             if (return_status == FILE_RETRY)
@@ -2142,7 +2233,8 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
                 return_status = FILE_SKIPALL;
             else
             {
-                return_status = file_error (_("Cannot overwrite directory \"%s\"\n%s"), dst_path);
+                return_status =
+                    file_error (TRUE, _("Cannot overwrite directory \"%s\"\n%s"), dst_path);
                 if (return_status == FILE_SKIPALL)
                     ctx->skip_all = TRUE;
                 if (return_status == FILE_RETRY)
@@ -2161,7 +2253,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             return_status = FILE_SKIPALL;
         else
         {
-            return_status = file_error (_("Cannot stat source file \"%s\"\n%s"), src_path);
+            return_status = file_error (TRUE, _("Cannot stat source file \"%s\"\n%s"), src_path);
             if (return_status == FILE_SKIPALL)
                 ctx->skip_all = TRUE;
         }
@@ -2189,12 +2281,22 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     if (!ctx->do_append)
     {
         /* Check the hardlinks */
-        if (!ctx->follow_links && src_stat.st_nlink > 1
-            && check_hardlinks (src_vpath, dst_vpath, &src_stat))
+        if (!ctx->follow_links)
         {
-            /* We have made a hardlink - no more processing is necessary */
-            return_status = FILE_CONT;
-            goto ret_fast;
+            switch (check_hardlinks (src_vpath, &src_stat, dst_vpath, &ctx->skip_all))
+            {
+            case HARDLINK_OK:
+                /* We have made a hardlink - no more processing is necessary */
+                return_status = FILE_CONT;
+                goto ret_fast;
+
+            case HARDLINK_ABORT:
+                return_status = FILE_ABORT;
+                goto ret_fast;
+
+            default:
+                break;
+            }
         }
 
         if (S_ISLNK (src_stat.st_mode))
@@ -2215,7 +2317,8 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             while (mc_mknod (dst_vpath, src_stat.st_mode & ctx->umask_kill, rdev) < 0
                    && !ctx->skip_all)
             {
-                return_status = file_error (_("Cannot create special file \"%s\"\n%s"), dst_path);
+                return_status =
+                    file_error (TRUE, _("Cannot create special file \"%s\"\n%s"), dst_path);
                 if (return_status == FILE_RETRY)
                     continue;
                 if (return_status == FILE_SKIPALL)
@@ -2227,7 +2330,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             while (ctx->preserve_uidgid
                    && mc_chown (dst_vpath, src_stat.st_uid, src_stat.st_gid) != 0 && !ctx->skip_all)
             {
-                temp_status = file_error (_("Cannot chown target file \"%s\"\n%s"), dst_path);
+                temp_status = file_error (TRUE, _("Cannot chown target file \"%s\"\n%s"), dst_path);
                 if (temp_status == FILE_SKIP)
                     break;
                 if (temp_status == FILE_SKIPALL)
@@ -2242,7 +2345,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             while (ctx->preserve && mc_chmod (dst_vpath, src_stat.st_mode & ctx->umask_kill) != 0
                    && !ctx->skip_all)
             {
-                temp_status = file_error (_("Cannot chmod target file \"%s\"\n%s"), dst_path);
+                temp_status = file_error (TRUE, _("Cannot chmod target file \"%s\"\n%s"), dst_path);
                 if (temp_status == FILE_SKIP)
                     break;
                 if (temp_status == FILE_SKIPALL)
@@ -2263,7 +2366,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
 
     while ((src_desc = mc_open (src_vpath, O_RDONLY | O_LINEAR)) < 0 && !ctx->skip_all)
     {
-        return_status = file_error (_("Cannot open source file \"%s\"\n%s"), src_path);
+        return_status = file_error (TRUE, _("Cannot open source file \"%s\"\n%s"), src_path);
         if (return_status == FILE_RETRY)
             continue;
         if (return_status == FILE_SKIPALL)
@@ -2290,7 +2393,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             return_status = FILE_SKIPALL;
         else
         {
-            return_status = file_error (_("Cannot fstat source file \"%s\"\n%s"), src_path);
+            return_status = file_error (TRUE, _("Cannot fstat source file \"%s\"\n%s"), src_path);
             if (return_status == FILE_RETRY)
                 continue;
             if (return_status == FILE_SKIPALL)
@@ -2327,7 +2430,8 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
                 return_status = FILE_SKIPALL;
             else
             {
-                return_status = file_error (_("Cannot create target file \"%s\"\n%s"), dst_path);
+                return_status =
+                    file_error (TRUE, _("Cannot create target file \"%s\"\n%s"), dst_path);
                 if (return_status == FILE_RETRY)
                     continue;
                 if (return_status == FILE_SKIPALL)
@@ -2357,7 +2461,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             return_status = FILE_SKIPALL;
         else
         {
-            return_status = file_error (_("Cannot fstat target file \"%s\"\n%s"), dst_path);
+            return_status = file_error (TRUE, _("Cannot fstat target file \"%s\"\n%s"), dst_path);
             if (return_status == FILE_RETRY)
                 continue;
             if (return_status == FILE_SKIPALL)
@@ -2378,7 +2482,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         }
 
         return_status =
-            file_error (_("Cannot preallocate space for target file \"%s\"\n%s"), dst_path);
+            file_error (TRUE, _("Cannot preallocate space for target file \"%s\"\n%s"), dst_path);
 
         if (return_status == FILE_SKIPALL)
             ctx->skip_all = TRUE;
@@ -2434,7 +2538,8 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             if (mc_ctl (src_desc, VFS_CTL_IS_NOTREADY, 0) == 0)
                 while ((n_read = mc_read (src_desc, buf, bufsize)) < 0 && !ctx->skip_all)
                 {
-                    return_status = file_error (_("Cannot read source file \"%s\"\n%s"), src_path);
+                    return_status =
+                        file_error (TRUE, _("Cannot read source file \"%s\"\n%s"), src_path);
                     if (return_status == FILE_RETRY)
                         continue;
                     if (return_status == FILE_SKIPALL)
@@ -2479,7 +2584,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
                         return_status = FILE_SKIPALL;
                     else
                         return_status =
-                            file_error (_("Cannot write target file \"%s\"\n%s"), dst_path);
+                            file_error (TRUE, _("Cannot write target file \"%s\"\n%s"), dst_path);
 
                     if (return_status == FILE_SKIP)
                     {
@@ -2552,7 +2657,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
     rotate_dash (FALSE);
     while (src_desc != -1 && mc_close (src_desc) < 0 && !ctx->skip_all)
     {
-        temp_status = file_error (_("Cannot close source file \"%s\"\n%s"), src_path);
+        temp_status = file_error (TRUE, _("Cannot close source file \"%s\"\n%s"), src_path);
         if (temp_status == FILE_RETRY)
             continue;
         if (temp_status == FILE_ABORT)
@@ -2564,7 +2669,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
 
     while (dest_desc != -1 && mc_close (dest_desc) < 0 && !ctx->skip_all)
     {
-        temp_status = file_error (_("Cannot close target file \"%s\"\n%s"), dst_path);
+        temp_status = file_error (TRUE, _("Cannot close target file \"%s\"\n%s"), dst_path);
         if (temp_status == FILE_RETRY)
             continue;
         if (temp_status == FILE_SKIPALL)
@@ -2587,7 +2692,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         {
             while (mc_chown (dst_vpath, src_uid, src_gid) != 0 && !ctx->skip_all)
             {
-                temp_status = file_error (_("Cannot chown target file \"%s\"\n%s"), dst_path);
+                temp_status = file_error (TRUE, _("Cannot chown target file \"%s\"\n%s"), dst_path);
                 if (temp_status == FILE_RETRY)
                     continue;
                 if (temp_status == FILE_SKIPALL)
@@ -2607,7 +2712,8 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
             {
                 while (mc_chmod (dst_vpath, (src_mode & ctx->umask_kill)) != 0 && !ctx->skip_all)
                 {
-                    temp_status = file_error (_("Cannot chmod target file \"%s\"\n%s"), dst_path);
+                    temp_status =
+                        file_error (TRUE, _("Cannot chmod target file \"%s\"\n%s"), dst_path);
                     if (temp_status == FILE_RETRY)
                         continue;
                     if (temp_status == FILE_SKIPALL)
@@ -2672,7 +2778,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
             return_status = FILE_SKIPALL;
         else
         {
-            return_status = file_error (_("Cannot stat source directory \"%s\"\n%s"), s);
+            return_status = file_error (TRUE, _("Cannot stat source directory \"%s\"\n%s"), s);
             if (return_status == FILE_RETRY)
                 goto retry_src_stat;
             if (return_status == FILE_SKIPALL)
@@ -2681,7 +2787,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
         goto ret_fast;
     }
 
-    if (is_in_linklist (dest_dirs, src_vpath, &cbuf))
+    if (is_in_linklist (dest_dirs, src_vpath, &cbuf) != NULL)
     {
         /* Don't copy a directory we created before (we don't want to copy 
            infinitely if a directory is copied into itself) */
@@ -2691,13 +2797,23 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
     }
 
     /* Hmm, hardlink to directory??? - Norbert */
-    /* FIXME: In this step we should do something
-       in case the destination already exist */
+    /* FIXME: In this step we should do something in case the destination already exist */
     /* Check the hardlinks */
-    if (ctx->preserve && cbuf.st_nlink > 1 && check_hardlinks (src_vpath, dst_vpath, &cbuf))
+    if (ctx->preserve)
     {
-        /* We have made a hardlink - no more processing is necessary */
-        goto ret_fast;
+        switch (check_hardlinks (src_vpath, &cbuf, dst_vpath, &ctx->skip_all))
+        {
+        case HARDLINK_OK:
+            /* We have made a hardlink - no more processing is necessary */
+            goto ret_fast;
+
+        case HARDLINK_ABORT:
+            return_status = FILE_ABORT;
+            goto ret_fast;
+
+        default:
+            break;
+        }
     }
 
     if (!S_ISDIR (cbuf.st_mode))
@@ -2706,7 +2822,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
             return_status = FILE_SKIPALL;
         else
         {
-            return_status = file_error (_("Source \"%s\" is not a directory\n%s"), s);
+            return_status = file_error (TRUE, _("Source \"%s\" is not a directory\n%s"), s);
             if (return_status == FILE_RETRY)
                 goto retry_src_stat;
             if (return_status == FILE_SKIPALL)
@@ -2715,7 +2831,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
         goto ret_fast;
     }
 
-    if (is_in_linklist (parent_dirs, src_vpath, &cbuf))
+    if (is_in_linklist (parent_dirs, src_vpath, &cbuf) != NULL)
     {
         /* we found a cyclic symbolic link */
         message (D_ERROR, MSG_ERROR, _("Cannot copy cyclic symbolic link\n\"%s\""), s);
@@ -2756,7 +2872,8 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
                 return_status = FILE_SKIPALL;
             else
             {
-                return_status = file_error (_("Destination \"%s\" must be a directory\n%s"), d);
+                return_status =
+                    file_error (TRUE, _("Destination \"%s\" must be a directory\n%s"), d);
                 if (return_status == FILE_SKIPALL)
                     ctx->skip_all = TRUE;
                 if (return_status == FILE_RETRY)
@@ -2788,7 +2905,8 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
                 return_status = FILE_SKIPALL;
             else
             {
-                return_status = file_error (_("Cannot create target directory \"%s\"\n%s"), d);
+                return_status =
+                    file_error (TRUE, _("Cannot create target directory \"%s\"\n%s"), d);
                 if (return_status == FILE_SKIPALL)
                     ctx->skip_all = TRUE;
             }
@@ -2812,7 +2930,7 @@ copy_dir_dir (file_op_total_context_t * tctx, file_op_context_t * ctx, const cha
                 return_status = FILE_SKIPALL;
             else
             {
-                return_status = file_error (_("Cannot chown target directory \"%s\"\n%s"), d);
+                return_status = file_error (TRUE, _("Cannot chown target directory \"%s\"\n%s"), d);
                 if (return_status == FILE_SKIPALL)
                     ctx->skip_all = TRUE;
             }
@@ -3239,7 +3357,8 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
                 break;
 
             if (ctx->skip_all
-                || file_error (_("Destination \"%s\" must be a directory\n%s"), dest) != FILE_RETRY)
+                || file_error (TRUE, _("Destination \"%s\" must be a directory\n%s"),
+                               dest) != FILE_RETRY)
                 goto clean_up;
         }
 
@@ -3339,13 +3458,13 @@ panel_operate (void *source_panel, FileOperation operation, gboolean force_singl
 /* {{{ Query/status report routines */
 /** Report error with one file */
 FileProgressStatus
-file_error (const char *format, const char *file)
+file_error (gboolean allow_retry, const char *format, const char *file)
 {
     char buf[BUF_MEDIUM];
 
     g_snprintf (buf, sizeof (buf), format, path_trunc (file, 30), unix_error_string (errno));
 
-    return do_file_error (buf);
+    return do_file_error (allow_retry, buf);
 }
 
 /* --------------------------------------------------------------------------------------------- */
