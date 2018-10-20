@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-09-09 19:12+0300\n"
+"POT-Creation-Date: 2018-10-20 18:37+0300\n"
 "PO-Revision-Date: 2018-05-15 17:16+0000\n"
 "Last-Translator: Morten Bo Johansen <mortenbo@hotmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/mc/mc/language/da/)\n"
@@ -2521,8 +2521,27 @@ msgstr "filer/mapper"
 msgid " with source mask:"
 msgstr " med kildemaske:"
 
-msgid "Cannot make the hardlink"
-msgstr "Kan ikke lave den hårde henvisning"
+#, fuzzy, c-format
+msgid ""
+"Cannot stat hardlink source file \"%s\"\n"
+"%s"
+msgstr ""
+"Kan ikke stat kildefil »%s«\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create target hardlink \"%s\"\n"
+"%s"
+msgstr ""
+"Kan ikke oprette symbolsk målhenvisning »%s«\n"
+"%s"
+
+#, fuzzy, c-format
+msgid "Cannot create target hardlink \"%s\""
+msgstr ""
+"Kan ikke oprette symbolsk målhenvisning »%s«\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4501,3 +4520,6 @@ msgstr "Fortsæt fra begyndelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan ikke hente en lokal kopi af /ftp://en.vært/editme.txt"
+
+#~ msgid "Cannot make the hardlink"
+#~ msgstr "Kan ikke lave den hårde henvisning"

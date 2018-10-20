@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-09-09 19:12+0300\n"
+"POT-Creation-Date: 2018-10-20 18:37+0300\n"
 "PO-Revision-Date: 2018-05-12 11:25+0000\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque (http://www.transifex.com/mc/mc/language/eu/)\n"
@@ -2522,8 +2522,27 @@ msgstr "fitxategiak/direktorioak"
 msgid " with source mask:"
 msgstr " iturburu maskararekin:"
 
-msgid "Cannot make the hardlink"
-msgstr "Esteka trinkoa ezin egin"
+#, fuzzy, c-format
+msgid ""
+"Cannot stat hardlink source file \"%s\"\n"
+"%s"
+msgstr ""
+"\"%s\" iturburu fitxategiaren egoera (\"stat\") ezin lortu\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create target hardlink \"%s\"\n"
+"%s"
+msgstr ""
+"\"%s\" helburu esteka sinbolikoa ezin sortu\n"
+"%s"
+
+#, fuzzy, c-format
+msgid "Cannot create target hardlink \"%s\""
+msgstr ""
+"\"%s\" helburu esteka sinbolikoa ezin sortu\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4501,3 +4520,6 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
+
+#~ msgid "Cannot make the hardlink"
+#~ msgstr "Esteka trinkoa ezin egin"

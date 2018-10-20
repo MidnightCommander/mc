@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-09-09 19:12+0300\n"
+"POT-Creation-Date: 2018-10-20 18:37+0300\n"
 "PO-Revision-Date: 2018-05-22 14:53+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/mc/mc/language/cs/)\n"
@@ -2525,8 +2525,27 @@ msgstr "souborů/složek"
 msgid " with source mask:"
 msgstr " vyhovující masce:"
 
-msgid "Cannot make the hardlink"
-msgstr "Nelze vytvořit přímý odkaz"
+#, fuzzy, c-format
+msgid ""
+"Cannot stat hardlink source file \"%s\"\n"
+"%s"
+msgstr ""
+"Na zdrojovém souboru „%s“ nelze provést stat\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create target hardlink \"%s\"\n"
+"%s"
+msgstr ""
+"Nelze vytvořit cílový symbolický odkaz „%s“\n"
+"%s"
+
+#, fuzzy, c-format
+msgid "Cannot create target hardlink \"%s\""
+msgstr ""
+"Nelze vytvořit cílový symbolický odkaz „%s“\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4515,3 +4534,6 @@ msgstr "Pokračovat od začátku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
+
+#~ msgid "Cannot make the hardlink"
+#~ msgstr "Nelze vytvořit přímý odkaz"

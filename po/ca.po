@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-09-09 19:12+0300\n"
+"POT-Creation-Date: 2018-10-20 18:37+0300\n"
 "PO-Revision-Date: 2018-05-21 16:46+0000\n"
 "Last-Translator: Marc Tormo i Bochaca <mtbochaca@gmail.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
@@ -2532,8 +2532,27 @@ msgstr "fitxers/directoris"
 msgid " with source mask:"
 msgstr " amb màscara d'origen:"
 
-msgid "Cannot make the hardlink"
-msgstr "No s'ha pogut crear l'enllaç dur"
+#, fuzzy, c-format
+msgid ""
+"Cannot stat hardlink source file \"%s\"\n"
+"%s"
+msgstr ""
+"No s'ha pogut fer estat al fitxer d'origen «%s»\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create target hardlink \"%s\"\n"
+"%s"
+msgstr ""
+"No s'ha pogut crear l'enllaç simbòlic de destinació «%s»\n"
+"%s"
+
+#, fuzzy, c-format
+msgid "Cannot create target hardlink \"%s\""
+msgstr ""
+"No s'ha pogut crear l'enllaç simbòlic de destinació «%s»\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4521,3 +4540,6 @@ msgstr "Continuo des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
+
+#~ msgid "Cannot make the hardlink"
+#~ msgstr "No s'ha pogut crear l'enllaç dur"

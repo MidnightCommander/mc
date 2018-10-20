@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-09-09 19:12+0300\n"
+"POT-Creation-Date: 2018-10-20 18:37+0300\n"
 "PO-Revision-Date: 2018-09-10 08:38+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/mc/language/"
@@ -2521,8 +2521,27 @@ msgstr "file/directory"
 msgid " with source mask:"
 msgstr " con maschera sorgente:"
 
-msgid "Cannot make the hardlink"
-msgstr "Impossibile creare il coll. fisico"
+#, fuzzy, c-format
+msgid ""
+"Cannot stat hardlink source file \"%s\"\n"
+"%s"
+msgstr ""
+"Impossibile ottenere info sul file sorgente \"%s\"\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create target hardlink \"%s\"\n"
+"%s"
+msgstr ""
+"Impossibile creare collegamento simb. destinazione \"%s\"\n"
+"%s"
+
+#, fuzzy, c-format
+msgid "Cannot create target hardlink \"%s\""
+msgstr ""
+"Impossibile creare collegamento simb. destinazione \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4499,3 +4518,6 @@ msgstr "Continuare dall'inizio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Impossibile ricevere copia locale di /ftp://un.host/modificami.txt"
+
+#~ msgid "Cannot make the hardlink"
+#~ msgstr "Impossibile creare il coll. fisico"

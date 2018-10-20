@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-09-09 19:12+0300\n"
+"POT-Creation-Date: 2018-10-20 18:37+0300\n"
 "PO-Revision-Date: 2018-04-30 12:37+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/mc/mc/language/"
@@ -2467,8 +2467,27 @@ msgstr "arquivos/diretórios"
 msgid " with source mask:"
 msgstr " com máscara de origem:"
 
-msgid "Cannot make the hardlink"
-msgstr "Não foi possível fazer o hardlink"
+#, fuzzy, c-format
+msgid ""
+"Cannot stat hardlink source file \"%s\"\n"
+"%s"
+msgstr ""
+"Não foi possível pegar estado de arquivo fonte \"%s\"\n"
+"%s"
+
+#, fuzzy, c-format
+msgid ""
+"Cannot create target hardlink \"%s\"\n"
+"%s"
+msgstr ""
+"Não foi possível criar alvo symlink \"%s\"\n"
+"%s"
+
+#, fuzzy, c-format
+msgid "Cannot create target hardlink \"%s\""
+msgstr ""
+"Não foi possível criar alvo symlink \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
@@ -4407,3 +4426,6 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
+
+#~ msgid "Cannot make the hardlink"
+#~ msgstr "Não foi possível fazer o hardlink"
