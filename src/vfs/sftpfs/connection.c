@@ -162,8 +162,9 @@ sftpfs_open_socket (struct vfs_s_super *super, GError ** mcerror)
  * proper enum's values.
  *
  * @param super connection data
+ * @return TRUE if some of authentication methods is available, FALSE otherwise
  */
-static void
+static gboolean
 sftpfs_recognize_auth_types (struct vfs_s_super *super)
 {
     char *userauthlist;
@@ -178,6 +179,9 @@ sftpfs_recognize_auth_types (struct vfs_s_super *super)
     userauthlist = libssh2_userauth_list (super_data->session, super->path_element->user,
                                           strlen (super->path_element->user));
 
+    if (userauthlist == NULL)
+        return FALSE;
+
     if ((strstr (userauthlist, "password") != NULL
          || strstr (userauthlist, "keyboard-interactive") != NULL)
         && (super_data->config_auth_type & PASSWORD) != 0)
@@ -188,6 +192,8 @@ sftpfs_recognize_auth_types (struct vfs_s_super *super)
 
     if ((super_data->config_auth_type & AGENT) != 0)
         super_data->auth_type |= AGENT;
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -406,7 +412,14 @@ sftpfs_open_connection (struct vfs_s_super *super, GError ** mcerror)
      */
     super_data->fingerprint = libssh2_hostkey_hash (super_data->session, LIBSSH2_HOSTKEY_HASH_SHA1);
 
-    sftpfs_recognize_auth_types (super);
+    if (!sftpfs_recognize_auth_types (super))
+    {
+        int sftp_errno;
+
+        sftp_errno = libssh2_session_last_errno (super_data->session);
+        sftpfs_ssherror_to_gliberror (super_data, sftp_errno, mcerror);
+        return (-1);
+    }
 
     if (!sftpfs_open_connection_ssh_agent (super, mcerror)
         && !sftpfs_open_connection_ssh_key (super, mcerror)
