@@ -1556,7 +1556,7 @@ static FileProgressStatus
 do_move_dir_dir (const WPanel * panel, file_op_total_context_t * tctx, file_op_context_t * ctx,
                  const char *s, const char *d)
 {
-    struct stat sbuf, dbuf;
+    struct stat src_stat, dst_stat;
     FileProgressStatus return_status = FILE_CONT;
     gboolean move_over = FALSE;
     gboolean dstat_ok;
@@ -1577,11 +1577,11 @@ do_move_dir_dir (const WPanel * panel, file_op_total_context_t * tctx, file_op_c
 
     mc_refresh ();
 
-    mc_stat (src_vpath, &sbuf);
+    mc_stat (src_vpath, &src_stat);
 
-    dstat_ok = (mc_stat (dst_vpath, &dbuf) == 0);
+    dstat_ok = (mc_stat (dst_vpath, &dst_stat) == 0);
 
-    if (dstat_ok && check_same_file (s, &sbuf, d, &dbuf, &return_status))
+    if (dstat_ok && check_same_file (s, &src_stat, d, &dst_stat, &return_status))
         goto ret_fast;
 
     if (!dstat_ok)
@@ -1601,7 +1601,7 @@ do_move_dir_dir (const WPanel * panel, file_op_total_context_t * tctx, file_op_c
 
     /* Check if the user inputted an existing dir */
   retry_dst_stat:
-    if (mc_stat (dst_vpath, &dbuf) == 0)
+    if (mc_stat (dst_vpath, &dst_stat) == 0)
     {
         if (move_over)
         {
@@ -1615,7 +1615,7 @@ do_move_dir_dir (const WPanel * panel, file_op_total_context_t * tctx, file_op_c
             return_status = FILE_SKIPALL;
         else
         {
-            if (S_ISDIR (dbuf.st_mode))
+            if (S_ISDIR (dst_stat.st_mode))
                 return_status = file_error (TRUE, _("Cannot overwrite directory \"%s\"\n%s"), d);
             else
                 return_status = file_error (TRUE, _("Cannot overwrite file \"%s\"\n%s"), d);
@@ -1654,7 +1654,7 @@ do_move_dir_dir (const WPanel * panel, file_op_total_context_t * tctx, file_op_c
         /* In case of single directory, calculate totals. In case of many directories,
            totals are calcuated already. */
         return_status =
-            panel_operate_init_totals (panel, src_vpath, &sbuf, ctx, FALSE,
+            panel_operate_init_totals (panel, src_vpath, &src_stat, ctx, FALSE,
                                        FILEGUI_DIALOG_ONE_ITEM);
         if (return_status != FILE_CONT)
             goto ret;
