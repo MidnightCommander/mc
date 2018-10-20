@@ -489,7 +489,7 @@ make_symlink (file_op_context_t * ctx, const char *src_path, const char *dst_pat
     char link_target[MC_MAXPATHLEN];
     int len;
     FileProgressStatus return_status;
-    struct stat sb;
+    struct stat dst_stat;
     vfs_path_t *src_vpath;
     vfs_path_t *dst_vpath;
     gboolean dst_is_symlink;
@@ -497,7 +497,7 @@ make_symlink (file_op_context_t * ctx, const char *src_path, const char *dst_pat
 
     src_vpath = vfs_path_from_str (src_path);
     dst_vpath = vfs_path_from_str (dst_path);
-    dst_is_symlink = (mc_lstat (dst_vpath, &sb) == 0) && S_ISLNK (sb.st_mode);
+    dst_is_symlink = (mc_lstat (dst_vpath, &dst_stat) == 0) && S_ISLNK (dst_stat.st_mode);
 
   retry_src_readlink:
     len = mc_readlink (src_vpath, link_target, sizeof (link_target) - 1);
