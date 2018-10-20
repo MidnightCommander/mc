@@ -181,7 +181,7 @@ include m4.syntax
 file ..\*\\.(bat|cmd)$ DOS\sBatch
 include dos.syntax
 
-file ..\*\\.(po|pot|pox)$ PO\sFile
+file ..\*\\.po[tx]?$ PO\sFile
 include po.syntax
 
 file ..\*\\.(?i:asm|s)$ ASM\sProgram
@@ -277,7 +277,7 @@ include puppet.syntax
 file ..\*\\.(glsl|vert|frag|geom)$ GLSL\sProgram
 include glsl.syntax
 
-file ..\*\\.(cu|cuh)$ CUDA\sProgram
+file ..\*\\.cuh?$ CUDA\sProgram
 include cuda.syntax
 
 file ..\*\\.cl$ OpenCL\sProgram
