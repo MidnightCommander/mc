@@ -1022,7 +1022,7 @@ read_file_system_list (void)
     }
 #endif /* MOUNTED_GETFSSTAT */
 
-#if defined MOUNTED_FREAD || defined MOUNTED_FREAD_FSTYP        /* (obsolete) SVR3 */
+#if defined MOUNTED_FREAD_FSTYP /* (obsolete) SVR3 */
     {
         struct mnttab mnt;
         char *table = "/etc/mnttab";
@@ -1035,17 +1035,12 @@ read_file_system_list (void)
         while (fread (&mnt, sizeof (mnt), 1, fp) > 0)
         {
             me = g_malloc (sizeof (*me));
-#ifdef GETFSTYP                 /* SVR3.  */
             me->me_devname = g_strdup (mnt.mt_dev);
-#else
-            me->me_devname = g_strconcat ("/dev/", mnt.mt_dev, (char *) NULL);
-#endif
             me->me_mountdir = g_strdup (mnt.mt_filsys);
             me->me_mntroot = NULL;
             me->me_dev = (dev_t) (-1);  /* Magic; means not known yet. */
             me->me_type = "";
             me->me_type_malloced = 0;
-#ifdef GETFSTYP                 /* SVR3.  */
             {
                 struct statfs fsd;
                 char typebuf[FSTYPSZ];
@@ -1057,7 +1052,6 @@ read_file_system_list (void)
                     me->me_type_malloced = 1;
                 }
             }
-#endif
             me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
             me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
 
@@ -1077,7 +1071,7 @@ read_file_system_list (void)
         if (fclose (fp) == EOF)
             goto free_then_fail;
     }
-#endif /* MOUNTED_FREAD || MOUNTED_FREAD_FSTYP.  */
+#endif /* MOUNTED_FREAD_FSTYP */
 
 #ifdef MOUNTED_GETMNTTBL        /* (obsolete) DolphinOS */
     {

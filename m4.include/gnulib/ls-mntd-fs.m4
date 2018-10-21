@@ -1,4 +1,4 @@
-# serial 34
+# serial 35
 # How to list mounted file systems.
 
 # Copyright (C) 1998-2004, 2006, 2009-2017 Free Software Foundation, Inc.
@@ -350,23 +350,6 @@ int getmntinfo (struct statfs **, int);
       AC_DEFINE([MOUNTED_FS_STAT_DEV], [1],
         [Define if there are functions named next_dev and fs_stat_dev for
          reading the list of mounted file systems.  (BeOS)])
-    fi
-  fi
-
-  if test -z "$ac_list_mounted_fs"; then
-    # (obsolete) SVR2.
-    AC_CACHE_CHECK([whether it is possible to resort to fread on /etc/mnttab],
-      [fu_cv_sys_mounted_fread],
-      [AC_PREPROC_IFELSE([AC_LANG_SOURCE([[#include <mnttab.h>]])],
-         [fu_cv_sys_mounted_fread=yes],
-         [fu_cv_sys_mounted_fread=no])
-      ])
-    if test $fu_cv_sys_mounted_fread = yes; then
-      ac_list_mounted_fs=found
-      AC_DEFINE([MOUNTED_FREAD], [1],
-        [Define if there is no specific function for reading the list of
-         mounted file systems.  fread will be used to read /etc/mnttab.
-         (SVR2) ])
     fi
   fi
 
