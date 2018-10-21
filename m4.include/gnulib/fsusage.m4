@@ -224,7 +224,7 @@ int check_f_blocks_size[sizeof fsd.f_blocks * CHAR_BIT <= 32 ? -1 : 1];
     if test $fu_cv_sys_stat_statfs4 = yes; then
       ac_fsusage_space=yes
       AC_DEFINE([STAT_STATFS4], [1],
-        [Define if statfs takes 4 args.  (SVR3, Dynix, old Irix)])
+        [Define if statfs takes 4 args.  (SVR3, old Irix)])
     fi
   fi
 

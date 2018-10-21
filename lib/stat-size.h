@@ -66,8 +66,7 @@
    st_blocks ((statbuf).st_size) : 0)
 #endif
 #else
-/* Some systems, like Sequents, return st_blksize of 0 on pipes.
-   Also, when running 'rsh hpux11-system cat any-file', cat would
+/* When running 'rsh hpux11-system cat any-file', cat would
    determine that the output stream had an st_blksize of 2147421096.
    Conversely st_blksize can be 2 GiB (or maybe even larger) with XFS
    on 64-bit hosts.  Somewhat arbitrarily, limit the "optimal" block

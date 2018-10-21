@@ -19,8 +19,8 @@ dnl
 AC_DEFUN([AC_FUNC_GETMNTENT],
 [
   # getmntent is in the standard C library on UNICOS, in -lsun on Irix 4,
-  # -lseq on Dynix/PTX, -lgen on Unixware.
-  AC_SEARCH_LIBS([getmntent], [sun seq gen])
+  # -lseq on Unixware.
+  AC_SEARCH_LIBS([getmntent], [sun gen])
   AC_CHECK_FUNCS([getmntent])
 ])
 
@@ -120,7 +120,7 @@ yes
     # Determine whether it's the one-argument variant or the two-argument one.
 
     if test -z "$ac_list_mounted_fs"; then
-      # glibc, HP-UX, IRIX, Cygwin, Android, also (obsolete) 4.3BSD, SunOS, Dynix.
+      # glibc, HP-UX, IRIX, Cygwin, Android, also (obsolete) 4.3BSD, SunOS.
       AC_CACHE_CHECK([for one-argument getmntent function],
         [fu_cv_sys_mounted_getmntent1],
         [AC_COMPILE_IFELSE(
@@ -136,9 +136,6 @@ yes
 # if defined MNT_MNTTAB /* HP-UX.  */
 #  define MOUNTED MNT_MNTTAB
 # endif
-# if defined MNTTABNAME /* Dynix.  */
-#  define MOUNTED MNTTABNAME
-# endif
 #endif
 ]],
               [[struct mntent *mnt = 0; char *table = MOUNTED;
@@ -152,7 +149,7 @@ yes
         AC_DEFINE([MOUNTED_GETMNTENT1], [1],
           [Define if there is a function named getmntent for reading the list
            of mounted file systems, and that function takes a single argument.
-           (4.3BSD, SunOS, HP-UX, Dynix, Irix)])
+           (4.3BSD, SunOS, HP-UX, Irix)])
         AC_CHECK_FUNCS([hasmntopt])
       fi
     fi
