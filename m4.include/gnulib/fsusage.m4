@@ -206,7 +206,7 @@ int check_f_blocks_size[sizeof fsd.f_blocks * CHAR_BIT <= 32 ? -1 : 1];
   if test $ac_fsusage_space = no; then
     # SVR3
     # (Solaris already handled above.)
-    AC_CACHE_CHECK([for four-argument statfs (AIX-3.2.5, SVR3)],
+    AC_CACHE_CHECK([for four-argument statfs (SVR3)],
       [fu_cv_sys_stat_statfs4],
       [AC_RUN_IFELSE([AC_LANG_SOURCE([[
 #include <sys/types.h>
@@ -224,7 +224,7 @@ int check_f_blocks_size[sizeof fsd.f_blocks * CHAR_BIT <= 32 ? -1 : 1];
     if test $fu_cv_sys_stat_statfs4 = yes; then
       ac_fsusage_space=yes
       AC_DEFINE([STAT_STATFS4], [1],
-        [Define if statfs takes 4 args.  (SVR3, Dynix, old Irix, old AIX)])
+        [Define if statfs takes 4 args.  (SVR3, Dynix, old Irix)])
     fi
   fi
 
