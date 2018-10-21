@@ -145,12 +145,6 @@
 #include <dirent.h>
 #endif
 
-#ifdef DOLPHIN
-/* So special that it's not worth putting this in autoconf.  */
-#undef MOUNTED_FREAD_FSTYP
-#define MOUNTED_GETMNTTBL
-#endif
-
 #ifdef HAVE_SYS_MNTENT_H
 /* This is to get MNTOPT_IGNORE on e.g. SVR4.  */
 #include <sys/mntent.h>
@@ -1073,28 +1067,6 @@ read_file_system_list (void)
     }
 #endif /* MOUNTED_FREAD_FSTYP */
 
-#ifdef MOUNTED_GETMNTTBL        /* (obsolete) DolphinOS */
-    {
-        struct mntent **mnttbl = getmnttbl (), **ent;
-
-        for (ent = mnttbl; *ent; ent++)
-        {
-            me = g_malloc (sizeof (*me));
-            me->me_devname = g_strdup ((*ent)->mt_resource);
-            me->me_mountdir = g_strdup ((*ent)->mt_directory);
-            me->me_mntroot = NULL;
-            me->me_type = g_strdup ((*ent)->mt_fstype);
-            me->me_type_malloced = 1;
-            me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
-            me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
-            me->me_dev = (dev_t) (-1);  /* Magic; means not known yet. */
-
-            mount_list = g_slist_prepend (mount_list, me);
-        }
-        endmnttbl ();
-    }
-#endif /* MOUNTED_GETMNTTBL */
-
 #ifdef MOUNTED_GETEXTMNTENT     /* Solaris >= 8 */
     {
         struct extmnttab mnt;
@@ -1549,10 +1521,9 @@ get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
 
         fsp->fsu_blocksize = PROPAGATE_ALL_ONES (fsd.f_fsize);
 
-#elif defined STAT_STATFS4      /* SVR3, Dynix, old Irix, old AIX, \
-                                   Dolphin */
+#elif defined STAT_STATFS4      /* SVR3, Dynix, old Irix, old AIX */
 
-#if !defined _AIX && !defined _SEQUENT_ && !defined DOLPHIN
+#if !defined _AIX && !defined _SEQUENT_
 #define f_bavail f_bfree
 #endif
 

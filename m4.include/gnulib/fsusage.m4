@@ -1,4 +1,4 @@
-# serial 33
+# serial 34
 # Obtaining file system usage information.
 
 # Copyright (C) 1997-1998, 2000-2001, 2003-2017 Free Software Foundation, Inc.
@@ -224,7 +224,7 @@ int check_f_blocks_size[sizeof fsd.f_blocks * CHAR_BIT <= 32 ? -1 : 1];
     if test $fu_cv_sys_stat_statfs4 = yes; then
       ac_fsusage_space=yes
       AC_DEFINE([STAT_STATFS4], [1],
-        [Define if statfs takes 4 args.  (SVR3, Dynix, old Irix, old AIX, Dolphin)])
+        [Define if statfs takes 4 args.  (SVR3, Dynix, old Irix, old AIX)])
     fi
   fi
 
