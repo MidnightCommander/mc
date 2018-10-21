@@ -112,10 +112,6 @@
 #include <sys/statfs.h>
 #endif
 
-#ifdef MOUNTED_LISTMNTENT       /* (obsolete) Cray UNICOS 9 */
-#include <mntent.h>
-#endif
-
 #ifdef MOUNTED_GETEXTMNTENT     /* Solaris >= 8 */
 #include <sys/mnttab.h>
 #endif
@@ -591,37 +587,6 @@ read_file_system_list (void)
 {
     GSList *mount_list = NULL;
     struct mount_entry *me;
-
-#ifdef MOUNTED_LISTMNTENT       /* (obsolete) Cray UNICOS 9 */
-    {
-        struct tabmntent *mntlist, *p;
-
-        /* the third and fourth arguments could be used to filter mounts,
-           but Crays doesn't seem to have any mounts that we want to
-           remove. Specifically, automount create normal NFS mounts.
-         */
-
-        if (listmntent (&mntlist, KMTAB, NULL, NULL) < 0)
-            return NULL;
-        for (p = mntlist; p; p = p->next)
-        {
-            struct mntent *mnt = p->ment;
-
-            me = g_malloc (sizeof (*me));
-            me->me_devname = g_strdup (mnt->mnt_fsname);
-            me->me_mountdir = g_strdup (mnt->mnt_dir);
-            me->me_mntroot = NULL;
-            me->me_type = g_strdup (mnt->mnt_type);
-            me->me_type_malloced = 1;
-            me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
-            me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
-            me->me_dev = -1;
-
-            mount_list = g_slist_prepend (mount_list, me);
-        }
-        freemntlist (mntlist);
-    }
-#endif
 
 #ifdef MOUNTED_GETMNTENT1       /* glibc, HP-UX, IRIX, Cygwin, Android,
                                    also (obsolete) 4.3BSD, SunOS */

@@ -68,36 +68,6 @@ $ac_includes_default
   # make sure LIBS contains the appropriate -l option.
   AC_FUNC_GETMNTENT
 
-  # This test must precede the ones for getmntent because Unicos-9 is
-  # reported to have the getmntent function, but its support is incompatible
-  # with other getmntent implementations.
-
-  # NOTE: Normally, I wouldn't use a check for system type as I've done for
-  # 'CRAY' below since that goes against the whole autoconf philosophy.  But
-  # I think there is too great a chance that some non-Cray system has a
-  # function named listmntent to risk the false positive.
-
-  if test -z "$ac_list_mounted_fs"; then
-    # (obsolete) Cray UNICOS 9
-    AC_CACHE_CHECK([for listmntent of Cray/Unicos-9],
-      [fu_cv_sys_mounted_cray_listmntent],
-      [fu_cv_sys_mounted_cray_listmntent=no
-        AC_EGREP_CPP([yes],
-          [#ifdef _CRAY
-yes
-#endif
-          ], [test $ac_cv_func_listmntent = yes \
-              && fu_cv_sys_mounted_cray_listmntent=yes]
-        )
-      ])
-    if test $fu_cv_sys_mounted_cray_listmntent = yes; then
-      ac_list_mounted_fs=found
-      AC_DEFINE([MOUNTED_LISTMNTENT], [1],
-        [Define if there is a function named listmntent that can be used to
-         list all mounted file systems.  (UNICOS)])
-    fi
-  fi
-
   if test -z "$ac_list_mounted_fs"; then
     # AIX.
     AC_CACHE_CHECK([for mntctl function and struct vmount],
