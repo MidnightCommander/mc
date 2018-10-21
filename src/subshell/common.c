@@ -904,9 +904,9 @@ init_subshell_precmd (char *precmd, size_t buff_size)
          */
         g_snprintf (precmd, buff_size,
                     " if not functions -q fish_prompt_mc;"
+                    "functions -e fish_right_prompt;"
                     "functions -c fish_prompt fish_prompt_mc; end;"
                     "function fish_prompt;"
-                    "echo (whoami)@(hostname -s):(set_color $fish_color_cwd)(pwd)(set_color normal)\\$\\ ; "
                     "echo \"$PWD\">&%d; fish_prompt_mc; kill -STOP %%self; end\n",
                     subshell_pipe[WRITE]);
         break;
