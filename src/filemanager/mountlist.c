@@ -101,11 +101,6 @@
 #include <sys/statvfs.h>
 #endif
 
-#ifdef MOUNTED_GETMNT           /* (obsolete) Ultrix */
-#include <sys/mount.h>
-#include <sys/fs_types.h>
-#endif
-
 #ifdef MOUNTED_FS_STAT_DEV      /* Haiku, also (obsolete) BeOS */
 #include <fs_info.h>
 #include <dirent.h>
@@ -807,36 +802,6 @@ read_file_system_list (void)
     }
 #endif /* MOUNTED_GETMNTINFO2 */
 
-#ifdef MOUNTED_GETMNT           /* (obsolete) Ultrix */
-    {
-        int offset = 0;
-        int val;
-        struct fs_data fsd;
-
-        while (TRUE)
-        {
-            errno = 0;
-            val = getmnt (&offset, &fsd, sizeof (fsd), NOSTAT_MANY, (char *) NULL);
-            if (val < 0)
-                goto free_then_fail;
-            if (val == 0)
-                break;
-
-            me = g_malloc (sizeof (*me));
-            me->me_devname = g_strdup (fsd.fd_req.devname);
-            me->me_mountdir = g_strdup (fsd.fd_req.path);
-            me->me_mntroot = NULL;
-            me->me_type = gt_names[fsd.fd_req.fstype];
-            me->me_type_malloced = 0;
-            me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
-            me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
-            me->me_dev = fsd.fd_req.dev;
-
-            mount_list = g_slist_prepend (mount_list, me);
-        }
-    }
-#endif /* MOUNTED_GETMNT. */
-
 #if defined MOUNTED_FS_STAT_DEV /* Haiku, also (obsolete) BeOS */
     {
         /* The next_dev() and fs_stat_dev() system calls give the list of
@@ -1417,21 +1382,6 @@ get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
             ? PROPAGATE_ALL_ONES (fsd.f_frsize)
             : PROPAGATE_ALL_ONES (fsd.f_bsize);
         /* *INDENT-ON* */
-
-#elif defined STAT_STATFS2_FS_DATA      /* Ultrix */
-
-        struct fs_data fsd;
-
-        if (statfs (file, &fsd) != 1)
-            return -1;
-
-        fsp->fsu_blocksize = 1024;
-        fsp->fsu_blocks = PROPAGATE_ALL_ONES (fsd.fd_req.btot);
-        fsp->fsu_bfree = PROPAGATE_ALL_ONES (fsd.fd_req.bfree);
-        fsp->fsu_bavail = PROPAGATE_TOP_BIT (fsd.fd_req.bfreen);
-        fsp->fsu_bavail_top_bit_set = EXTRACT_TOP_BIT (fsd.fd_req.bfreen) != 0;
-        fsp->fsu_files = PROPAGATE_ALL_ONES (fsd.fd_req.gtot);
-        fsp->fsu_ffree = PROPAGATE_ALL_ONES (fsd.fd_req.gfree);
 
 #elif defined STAT_STATFS3_OSF1 /* OSF/1 */
 

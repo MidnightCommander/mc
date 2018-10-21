@@ -11,14 +11,10 @@
 /*** typedefs(not structures) and defined constants **********************************************/
 
 /* Taken from S-Lang's slutty.c */
-#ifdef ultrix                   /* Ultrix gets _POSIX_VDISABLE wrong! */
-#define NULL_VALUE -1
-#else
 #ifdef _POSIX_VDISABLE
 #define NULL_VALUE _POSIX_VDISABLE
 #else
 #define NULL_VALUE 255
-#endif
 #endif
 
 /*** enums ***************************************************************************************/

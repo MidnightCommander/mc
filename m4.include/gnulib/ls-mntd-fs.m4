@@ -311,24 +311,6 @@ int getmntinfo (struct statfs **, int);
   fi
 
   if test -z "$ac_list_mounted_fs"; then
-    # (obsolete) Ultrix.
-    AC_CACHE_CHECK([for getmnt function],
-      [fu_cv_sys_mounted_getmnt],
-      [AC_PREPROC_IFELSE([AC_LANG_SOURCE([[
-#include <sys/fs_types.h>
-#include <sys/mount.h>]])],
-         [fu_cv_sys_mounted_getmnt=yes],
-         [fu_cv_sys_mounted_getmnt=no])
-      ])
-    if test $fu_cv_sys_mounted_getmnt = yes; then
-      ac_list_mounted_fs=found
-      AC_DEFINE([MOUNTED_GETMNT], [1],
-        [Define if there is a function named getmnt for reading the list of
-         mounted file systems.  (Ultrix)])
-    fi
-  fi
-
-  if test -z "$ac_list_mounted_fs"; then
     # Haiku, also (obsolete) BeOS.
     AC_CHECK_FUNCS([next_dev fs_stat_dev])
     AC_CHECK_HEADERS([fs_info.h])

@@ -263,41 +263,6 @@ int check_f_blocks_size[sizeof fsd.f_blocks * CHAR_BIT <= 32 ? -1 : 1];
     fi
   fi
 
-  if test $ac_fsusage_space = no; then
-    # Ultrix
-    AC_CACHE_CHECK([for two-argument statfs with struct fs_data (Ultrix)],
-      [fu_cv_sys_stat_fs_data],
-      [AC_RUN_IFELSE([AC_LANG_SOURCE([[
-#include <sys/types.h>
-#ifdef HAVE_SYS_PARAM_H
-#include <sys/param.h>
-#endif
-#ifdef HAVE_SYS_MOUNT_H
-#include <sys/mount.h>
-#endif
-#ifdef HAVE_SYS_FS_TYPES_H
-#include <sys/fs_types.h>
-#endif
-  int
-  main ()
-  {
-    struct fs_data fsd;
-    /* Ultrix's statfs returns 1 for success,
-       0 for not mounted, -1 for failure.  */
-    return statfs (".", &fsd) != 1;
-  }]])],
-         [fu_cv_sys_stat_fs_data=yes],
-         [fu_cv_sys_stat_fs_data=no],
-         [fu_cv_sys_stat_fs_data=no])
-      ])
-    if test $fu_cv_sys_stat_fs_data = yes; then
-      ac_fsusage_space=yes
-      AC_DEFINE([STAT_STATFS2_FS_DATA], [1],
-        [Define if statfs takes 2 args and the second argument has
-         type struct fs_data.  (Ultrix)])
-    fi
-  fi
-
   AS_IF([test $ac_fsusage_space = yes], [$1], [$2])
 
 ])

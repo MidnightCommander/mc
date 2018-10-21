@@ -78,12 +78,6 @@
 /* NetBSD 1.5.2 needs these, for the declaration of struct statfs. */
 #include <sys/param.h>
 #include <sys/mount.h>
-#if defined HAVE_NFS_NFS_CLNT_H && defined HAVE_NFS_VFS_H
-/* Ultrix 4.4 needs these for the declaration of struct statfs.  */
-#include <netinet/in.h>
-#include <nfs/nfs_clnt.h>
-#include <nfs/vfs.h>
-#endif
 #elif defined HAVE_OS_H         /* Haiku, also (obsolete) BeOS */
 #include <fs_info.h>
 #endif

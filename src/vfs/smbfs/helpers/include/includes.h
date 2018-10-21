@@ -540,10 +540,6 @@
 #define O_ACCMODE (O_RDONLY | O_WRONLY | O_RDWR)
 #endif
 
-#if defined(HAVE_CRYPT16) && defined(HAVE_GETAUTHUID)
-#define ULTRIX_AUTH 1
-#endif
-
 #ifndef HAVE_INITGROUPS
 int initgroups (char *name, gid_t id);
 #endif
