@@ -82,10 +82,6 @@ vfs_class *current_vfs = NULL;
 
 /*** file scope macro definitions ****************************************************************/
 
-#if defined(_AIX) && !defined(NAME_MAX)
-#define NAME_MAX FILENAME_MAX
-#endif
-
 #define VFS_FIRST_HANDLE 100
 
 /*** file scope type declarations ****************************************************************/

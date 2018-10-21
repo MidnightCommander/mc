@@ -78,9 +78,6 @@
 #ifdef HAVE_SYS_STATFS_H
 #include <sys/statfs.h>
 #endif
-#ifdef HAVE_DUSTAT_H            /* AIX PS/2 */
-#include <sys/dustat.h>
-#endif
 
 #ifdef MOUNTED_GETMNTENT1       /* glibc, HP-UX, IRIX, Cygwin, Android,
                                    also (obsolete) 4.3BSD, SunOS, Dynix */
@@ -562,35 +559,6 @@ dev_from_mount_options (char const *mount_options)
 }
 
 #endif
-
-/* --------------------------------------------------------------------------------------------- */
-
-#if defined _AIX && defined _I386
-/* AIX PS/2 does not supply statfs.  */
-
-static int
-statfs (char *file, struct statfs *fsb)
-{
-    struct stat stats;
-    struct dustat fsd;
-
-    if (stat (file, &stats) != 0)
-        return -1;
-    if (dustat (stats.st_dev, 0, &fsd, sizeof (fsd)))
-        return -1;
-    fsb->f_type = 0;
-    fsb->f_bsize = fsd.du_bsize;
-    fsb->f_blocks = fsd.du_fsize - fsd.du_isize;
-    fsb->f_bfree = fsd.du_tfree;
-    fsb->f_bavail = fsd.du_tfree;
-    fsb->f_files = (fsd.du_isize - 2) * fsd.du_inopb;
-    fsb->f_ffree = fsd.du_tinode;
-    fsb->f_fsid.val[0] = fsd.du_site;
-    fsb->f_fsid.val[1] = fsd.du_pckno;
-    return 0;
-}
-
-#endif /* _AIX && _I386 */
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -1523,7 +1491,7 @@ get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
 
 #elif defined STAT_STATFS4      /* SVR3, Dynix, old Irix, old AIX */
 
-#if !defined _AIX && !defined _SEQUENT_
+#if !defined _SEQUENT_
 #define f_bavail f_bfree
 #endif
 
@@ -1535,7 +1503,7 @@ get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
         /* Empirically, the block counts on most SVR3 and SVR3-derived
            systems seem to always be in terms of 512-byte blocks,
            no matter what value f_bsize has.  */
-#if defined _AIX || defined _CRAY
+#if defined _CRAY
         fsp->fsu_blocksize = PROPAGATE_ALL_ONES (fsd.f_bsize);
 #else
         fsp->fsu_blocksize = 512;

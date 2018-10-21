@@ -83,15 +83,10 @@
      This loses when mixing HP-UX and BSD file systems with NFS.  */
 #define ST_NBLOCKSIZE 1024
 #else /* !hpux */
-#if defined _AIX && defined _I386
-    /* AIX PS/2 counts st_blocks in 4K units.  */
-#define ST_NBLOCKSIZE (4 * 1024)
-#else
 #if defined _CRAY
 #define ST_NBLOCKS(statbuf) \
   (S_ISREG ((statbuf).st_mode) || S_ISDIR ((statbuf).st_mode) \
    ? (statbuf).st_blocks * ST_BLKSIZE (statbuf) / ST_NBLOCKSIZE : 0)
-#endif
 #endif
 #endif
 #endif

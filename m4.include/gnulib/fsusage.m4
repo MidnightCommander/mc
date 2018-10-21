@@ -199,7 +199,7 @@ int check_f_blocks_size[sizeof fsd.f_blocks * CHAR_BIT <= 32 ? -1 : 1];
       ac_fsusage_space=yes
       AC_DEFINE([STAT_STATFS2_BSIZE], [1],
         [Define if statfs takes 2 args and struct statfs has a field named f_bsize.
-         (4.3BSD, SunOS 4, HP-UX, AIX PS/2)])
+         (4.3BSD, SunOS 4, HP-UX)])
     fi
   fi
 
@@ -337,6 +337,6 @@ choke -- this is a workaround for a Sun-specific problem
 # Prerequisites of lib/fsusage.c not done by gl_FILE_SYSTEM_USAGE.
 AC_DEFUN([gl_PREREQ_FSUSAGE_EXTRA],
 [
-  AC_CHECK_HEADERS([dustat.h sys/fs/s5param.h sys/statfs.h])
+  AC_CHECK_HEADERS([sys/fs/s5param.h sys/statfs.h])
   gl_STATFS_TRUNCATES
 ])
