@@ -84,4 +84,4 @@ Hint: Leap to frequently used directories in a single bound with C-.
 
 Намінка. Каб выразаць і ўстаўляць мышкаю, можа спатрэбіцца трымаць «Shift».
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-\.
+Hint: Key frequently visited ftp sites in the hotlist: type C-.
