@@ -68,7 +68,7 @@ Vihje: Välise vaataja saad määrata keskkonna muutujaga VIEWER või PAGER.
 
 Vihje: Kinnituse küsimise kõigile päringutele saad keelata Seaded/Kinnitused.
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Vihje: Anonüümse FTP kasutamiseks mc-ga sisesta 'cd ftp://masin.ee'
 
@@ -84,4 +84,4 @@ Vihje: Kataloogide märkimiseks valiku dialoogis lisa kaldkriips.
 
 Vihje: Hiirega lõikamiseks ja asetamiseks võib olla vajalik vajutada klahvi Shift.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

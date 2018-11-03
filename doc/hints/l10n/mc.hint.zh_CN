@@ -68,7 +68,7 @@ Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 提示：你可以在「选项/确认」里关闭所有确认的要求。
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 提示：你可以在 mc 使用匿名模式的 FTP，方法是输入 'cd ftp://machine.edu'
 
@@ -84,4 +84,4 @@ Hint: Leap to frequently used directories in a single bound with C-.
 
 提示：要使用鼠标剪贴功能需要你按下 shift 键
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

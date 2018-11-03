@@ -68,7 +68,7 @@ Hint: You may specify the external viewer with the shell vars VIEWER or PAGER.
 
 راهنمایی: شما می‌توانید تمام درخواست‌های تایید را در منوی تنظیمات/تایید غیرفعال کنید.
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Hint: You can do anonymous FTP with mc by typing 'cd ftp://machine.edu'
 
@@ -84,4 +84,4 @@ Hint: To mark directories on the select dialog box, append a slash.
 
 راهنمایی: برای بریدن و چسباندن با استفاده از موشواره باید دکمه‌ی shift را نگه‌دارید
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

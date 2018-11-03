@@ -68,7 +68,7 @@ Fif: Du kan angive den eksterne fremviser med skalvariablerne VIEWER eller PAGER
 
 Fif: Du kan deaktivere alle anmodninger om bekræftelse i Indstillinger/Bekræftelse.
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Fif: Du kan brug anonym FTP i mc ved at skrive 'cd ftp://maskine.edu'
 
@@ -84,4 +84,4 @@ Fif: Tilføj en skråstreg, til at markere mapper i den valgte dialogboks.
 
 Fif: Brug at klip og indsæt med musen kan kræve at skift-tasten holdes nede
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

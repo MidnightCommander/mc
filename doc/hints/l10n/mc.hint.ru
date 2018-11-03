@@ -68,7 +68,7 @@ Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 Совет: Вы можете отменить запросы на подтверждение в Настройки/Подтверждение.
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Совет: Вы можете использовать анонимный FTP с mc, набрав 'cd ftp://machine.edu'
 
@@ -84,4 +84,4 @@ Hint: Leap to frequently used directories in a single bound with C-.
 
 Совет: Вырезание и вставка с помощью мыши может требовать удержания клавиши Shift.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

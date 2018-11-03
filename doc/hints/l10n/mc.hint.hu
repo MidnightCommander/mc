@@ -68,7 +68,7 @@ Tipp: A külső fájlmegjelenítőt a PAGER shell-változóval lehet megadni.
 
 Tipp: Az összes megerősítéskérés kikapcsolható: "Beállítások/Megerősítések".
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Tipp: "Anonymous" FTP-zés végezhető ezzel a paranccsal: "cd ftp://gépnév.edu".
 
@@ -84,4 +84,4 @@ Tipp: Könyvtárak kijelölése a "Kijelölés" ablakban: / jel hozzáfűzésév
 
 Tipp: Az egérrel való szövegkimásoláshoz szükség lehet a Shift lenyomására.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

@@ -68,7 +68,7 @@ Hint: You may specify the external viewer with the shell vars VIEWER or PAGER.
 
 Hint: You can disable all requests for confirmation in Options/Confirmation.
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Hint: You can do anonymous FTP with mc by typing 'cd ftp://machine.example.com'
 
@@ -84,4 +84,4 @@ Hint: To mark directories on the select dialogue box, append a slash.
 
 Hint: To use the mouse cut and paste may require holding the shift key
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

@@ -68,7 +68,7 @@ Hint: Je kunt een externe viewer specificeren met de shell variabele PAGER.
 
 Hint: Je kunt alle aanvragen voor bevestiging instellen in Opties/Bevestiging.
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Hint: Je kunt anonieme FTP draaien met mc door middel van 'cd ftp://machine.edu'
 
@@ -84,4 +84,4 @@ Hint: Om directories toe te voegen aan de selectie, moet je een slash toevoegen.
 
 Hint: Voor de normale cut and paste muisfuncties moet je de shift key inhouden.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

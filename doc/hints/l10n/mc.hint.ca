@@ -68,7 +68,7 @@ Consell: Podeu especificar el visor extern amb la variable d'entorn VIEWER o PAG
 
 Consell: Podeu inhabilitar tots els missatges de confirmació a «Opcions/Confirmació».
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Consell: Podeu fer FTP anònim amb mc escrivint «cd ftp://màquina.edu».
 
@@ -84,4 +84,4 @@ Consell: Per a marcar directoris al diàleg de selecció, afegiu-l'hi un «/».
 
 Consell: Per a tallar i enganxar amb el ratolí, podria requerir mantenir premuda la tecla «Maj».
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

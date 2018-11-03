@@ -68,7 +68,7 @@ Porada: można określić zewnętrzny podgląd za pomocą zmiennych VIEWER lub P
 
 Porada: można wyłączyć wszystkie żądania potwierdzenia w Opcje/Potwierdzenia.
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Porada: można połączyć się z anonimowym FTP wpisując „cd ftp://komputer.edu”.
 
@@ -84,4 +84,4 @@ Porada: aby zaznaczyć katalogi w oknie zaznaczania, należy dodać ukośnik.
 
 Porada: użycie wycinania i wklejania za pomocą myszy wymaga klawisza Shift.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

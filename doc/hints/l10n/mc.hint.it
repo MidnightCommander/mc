@@ -68,7 +68,7 @@ Aiuto: Si può specificare il visualizzatore esterno tramite le variabili d'ambi
 
 Aiuto: È possibile disabilitare tutte le richieste di conferma
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Aiuto: È possibile creare una connessione FTP anonima con mc digitando 'cd ftp://host.edu'.
 
@@ -84,4 +84,4 @@ Aiuto: Per segnare delle cartelle nel riquadro di selezione, appendere una barra
 
 Aiuto: per utilizzare il mouse per il taglia e incolla premere il tasto Shift.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

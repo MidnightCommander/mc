@@ -68,7 +68,7 @@ Tips: Du kan välja den externa filvisaren med skalvariabeln VIEWER eller PAGER.
 
 Tips: Du kan slå av alla är-du-säker-frågor i Alternativ/Konfirmation.
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Tips: Du kan använda anonym FTP i mc genom att skriva 'cd ftp://dator.se'
 
@@ -84,4 +84,4 @@ Tips: För att markera kataloger i markera-dialogrutan, lägg till snedstreck.
 
 Tips: Skift kan behöva hållas ned för att använda klipp och klistra med musen.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

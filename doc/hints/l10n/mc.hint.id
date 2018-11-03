@@ -68,7 +68,7 @@ Petunjuk: Anda boleh menyatakan penampil eksternal dengan variabel shell VIEWER 
 
 Petunjuk: Anda dapat menonaktifkan semua permintaan konfirmasi dalam Opsi/Konfirmasi.
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Petunjuk: Anda dapat melakukan FTP anonim memakai mc dengan mengetikkan 'cd ftp://server.ftp.yang.dituju'
 
@@ -84,4 +84,4 @@ Petunjuk: Untuk menandai direktori pada kotak dialog pilihan, tambahkan suatu ga
 
 Petunjuk: Untuk memakai potong dan tempel tetikus mungkin perlu menahan tombol shift.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

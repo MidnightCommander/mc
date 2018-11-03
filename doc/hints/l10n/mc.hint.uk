@@ -68,7 +68,7 @@ Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 Підказка. Можна вимкнути запити на підтвердження дій у вікні Параметри|Підтвердження.
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Підказка. Щоб відкрити анонімний FTP, введіть команду «cd ftp://machine.edu».
 
@@ -84,4 +84,4 @@ Hint: Leap to frequently used directories in a single bound with C-.
 
 Підказка. Щоб вирізати або вставити за допомогою мишки, утримуйте клавішу Shift.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

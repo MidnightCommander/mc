@@ -68,7 +68,7 @@ Not: Yerel olmayan bir dosya sistemindeyseniz, kabuk komutları çalışmayacakt
 
 İpucu: Seçenekler/Onaylar menüsünden tüm onay isteklerini devre dışı bırakabilirsiniz.
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 İpucu: mc ile anonim FTP bağlantısı kurabilirsiniz. Örn: 'cd ftp://sunucu.edu.tr'
 
@@ -84,4 +84,4 @@ Hint: Leap to frequently used directories in a single bound with C-.
 
 İpucu: Fare ile kopyalamak/yapıştırmak için Shift tuşunu basılı tutmanız gerekebilir.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

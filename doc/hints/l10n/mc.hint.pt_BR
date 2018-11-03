@@ -68,7 +68,7 @@ Dica: Você pode especificar o visualizador externo com as variáveis shell VIEW
 
 Dica: você pode disabilitar todas requisições por confirmação em Opções/Confirmação.
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Dica: Você pode usar FTP anonimamente com mc digitando 'cd ftp://maquina.edu'
 
@@ -84,4 +84,4 @@ Dica: Para marcar diretórios na caixa de diálogo selecionada,  adicione ao fin
 
 Dica: Para usar o recortar e colar com mouse, pode ser necessário estar segurando a tecla shift
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

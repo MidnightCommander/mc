@@ -68,7 +68,7 @@ Hint: You may specify the editor for F4 with the shell variable EDITOR.
 
 Συμβουλή: Μπορείτε να απενεργοποιήσετε όλα τα ερωτήματα επιβεβαίωσης στο Επιλογές/Επιβεβαίωση
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Συμβουλή: Μπορείτε να κάνετε ανώνυμο FTP με το mc πληκτρολογώντας 'cd ftp://machine.edu'
 
@@ -84,4 +84,4 @@ Hint: To mark directories on the select dialog box, append a slash.
 
 Συμβουλή: Η χρήση αντιγραφής και επικόλλησης με το ποντίκι μπορεί να απαιτεί να πατάτε το πλήκτρο shift
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

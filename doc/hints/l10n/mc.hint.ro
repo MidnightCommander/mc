@@ -68,7 +68,7 @@ Sfat: Puteți specifica vizualizatorul extern cu ajutorul variabilelor de shell 
 
 Sfat: Puteți dezactiva toate cererile de confirmare în meniul Opțiuni/Confirmări.
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Sfat: Puteți să vă conectați la FTP în mod anonim din MC tastând 'cd ftp://machine.edu'
 
@@ -84,4 +84,4 @@ Sfat: Pentru a marca dosarele în dialogul de selecție, adăugați slash.
 
 Sfat: Pentru a folosi mouse-ul pentru a decupa și insera, trebuie să țineți tasta Shift apăsată.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

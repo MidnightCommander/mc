@@ -68,7 +68,7 @@ Tip: Externí prohlížeč určíte proměnnými VIEWER nebo PAGER
 
 Tip: Všechny žádosti o potvrzení je možné vypnout v Nastavení/Potvrzování.
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Tip: Na anonymní FTP se připojíte pomocí „cd ftp://stroj.domena.cz“.
 
@@ -84,4 +84,4 @@ Tip: Pro označení složek v dialogovém okně výběru souborů, přidejte lom
 
 Tip: Chcete-li použít myš pro zkopírování nebo vložení textu, stiskněte Shift.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

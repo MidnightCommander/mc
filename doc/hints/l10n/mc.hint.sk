@@ -68,7 +68,7 @@ Tip: Premennými prostredia VIEWER alebo PAGER môžete určiť externý prehlia
 
 Tip: Môžete zakázať všetky žiadosti o potvrdenie pomocou Možnosti/Konfigurácia.
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Tip: Prístup k anonymnému FTP z mc získate napísaním „cd ftp://machine.edu“
 
@@ -84,4 +84,4 @@ Tip: Adresáre v dialógovom okne výberu môžete označiť pridaním lomky.
 
 Tip: Na kopírovanie a vkladanie pomocou myši môže byť potrebné podržať Shift.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

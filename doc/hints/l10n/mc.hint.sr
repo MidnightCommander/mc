@@ -68,7 +68,7 @@ Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 Савет: Можете да искључите све захтеве за потврђивањем у изборнику „Опције/Потврђивање“.
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Савет: Можете да одрадите безимени протокол преноса датотека са „cd ftp://machine.edu“
 
@@ -84,4 +84,4 @@ Hint: Leap to frequently used directories in a single bound with C-.
 
 Савет: Исецање и убацивање мишем може да захтева држање тастера помака
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

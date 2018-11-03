@@ -68,7 +68,7 @@ Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
 Намінка. Забараніць пытацца пацьвярджаць можна ў «Наладах» → «Пацьвярджаць».
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Намінка. Можна ўвайсьці FTP безыменным, набраўшы «cd ftp://machine.edu»
 

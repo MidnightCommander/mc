@@ -68,7 +68,7 @@ Leid: Féadfaidh tú an breathnóir seachtrach a shonrú leis an vars bhlaosc VI
 
 Leid: Is féidir leat gach iarratas a dhíchumasú ar dheimhniú i Roghanna / Dearbhaithe.
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Leid: Is féidir leat FTP gan ainm a dhéanamh le mc trí chlóscríobh 'cd ftp://machine.edu'
 
@@ -84,4 +84,4 @@ Leid: Chun comharthaí a mharcáil ar an mbosca dialóige roghnaigh, cuir slash 
 
 Leid: Úsáid a bhaint as an gearrtha luch agus greamaigh theastóidh a bhfuil an eochair-athrú
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

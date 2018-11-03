@@ -68,7 +68,7 @@ Konsilo: Specifi la eksteran dokumento-legilon per la medivariablon VIEWER aŭ P
 
 Konsilo: Ĉiuj konfirmo-petoj estas malaktivigeblaj en Agordo/Konfirmo.
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Konsilo: 'cd ftp://machine.edu' por sennoma FTP-konekto al machine.org
 
@@ -84,4 +84,4 @@ Konsilo: Por marki dosierujojn ĉe elektiloj almetu oblikvon.
 
 Konsilo: Eble vi devas premadi la registrumon por kopii kaj alglui per la muso.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.

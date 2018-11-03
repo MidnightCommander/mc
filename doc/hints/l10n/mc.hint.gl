@@ -68,7 +68,7 @@ Consello: pódese empregar un visor externo indicándoo na variábel PAGER.
 
 Consello: Para desactivar as mensaxes de confirmación fagao no menú Opcións.
 
-Hint: Leap to frequently used directories in a single bound with C-.
+Hint: Leap to frequently used directories in a single bound with C-\.
 
 Consello: para facer un FTP anónimo con mc: «cd ftp://maquina.dominio»
 
@@ -84,4 +84,4 @@ Consello: para marcar os directorios no cadro de diálogo de selección, engada 
 
 Consello: para cortar e pegar co rato manteña premida a tecla Maiús.
 
-Hint: Key frequently visited ftp sites in the hotlist: type C-.
+Hint: Key frequently visited ftp sites in the hotlist: type C-\.
