@@ -1349,6 +1349,14 @@ adjust_top_file (WPanel * panel)
 {
     int items;
 
+    /* Update panel->selected to avoid out of range in panel->dir.list[panel->selected]
+     * when panel is redrawing when directory is reloading, for example in path:
+     * dir_list_reload() -> mc_refresh() -> dialog_change_screen_size() ->
+     * midnight_callback (MSG_RESIZE) -> setup_panels() -> panel_callback(MSG_DRAW) ->
+     * display_mini_info()
+     */
+    panel->selected = CLAMP (panel->selected, 0, panel->dir.len - 1);
+
     items = panel_items (panel);
 
     if (panel->dir.len <= items)
@@ -4498,16 +4506,6 @@ set_panel_formats (WPanel * p)
 void
 select_item (WPanel * panel)
 {
-    /* Although currently all over the code we set the selection and
-       top file to decent values before calling select_item, I could
-       forget it someday, so it's better to do the actual fitting here */
-
-    if (panel->selected < 0)
-        panel->selected = 0;
-
-    if (panel->selected > panel->dir.len - 1)
-        panel->selected = panel->dir.len - 1;
-
     adjust_top_file (panel);
 
     panel->dirty = 1;
