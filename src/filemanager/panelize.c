@@ -189,8 +189,6 @@ init_panelize (void)
                    INPUT_COMPLETE_SHELL_ESC);
     add_widget (panelize_dlg, pname);
 
-
-
     add_widget (panelize_dlg, hline_new (y++, -1, -1));
 
     x = (panelize_cols - blen) / 2;
@@ -222,11 +220,11 @@ panelize_done (void)
 static void
 add2panelize (char *label, char *command)
 {
-    struct panelize *current, *old;
+    struct panelize *current;
+    struct panelize *old = NULL;
 
-    old = NULL;
     current = panelize;
-    while (current && strcmp (current->label, label) <= 0)
+    while (current != NULL && strcmp (current->label, label) <= 0)
     {
         old = current;
         current = current->next;
@@ -242,6 +240,7 @@ add2panelize (char *label, char *command)
     else
     {
         struct panelize *new;
+
         new = g_new (struct panelize, 1);
         new->label = label;
         new->command = command;
@@ -277,18 +276,16 @@ remove_from_panelize (struct panelize *entry)
     if (strcmp (entry->label, _("Other command")) != 0)
     {
         if (entry == panelize)
-        {
             panelize = panelize->next;
-        }
         else
         {
             struct panelize *current = panelize;
-            while (current && current->next != entry)
+
+            while (current != NULL && current->next != entry)
                 current = current->next;
-            if (current)
-            {
+
+            if (current != NULL)
                 current->next = entry->next;
-            }
         }
 
         g_free (entry->label);
@@ -302,16 +299,12 @@ remove_from_panelize (struct panelize *entry)
 static void
 do_external_panelize (char *command)
 {
-    int link_to_dir, stale_link;
-    struct stat st;
     dir_list *list = &current_panel->dir;
-    char line[MC_MAXPATHLEN];
-    char *name;
     FILE *external;
 
     open_error_pipe ();
     external = popen (command, "r");
-    if (!external)
+    if (external == NULL)
     {
         close_error_pipe (D_ERROR, _("Cannot invoke command."));
         return;
@@ -325,22 +318,29 @@ do_external_panelize (char *command)
 
     while (TRUE)
     {
+        char line[MC_MAXPATHLEN];
+        size_t len;
+        char *name;
+        int link_to_dir, stale_link;
+        struct stat st;
+
         clearerr (external);
         if (fgets (line, sizeof (line), external) == NULL)
         {
-            if (ferror (external) && errno == EINTR)
+            if (ferror (external) != 0 && errno == EINTR)
                 continue;
-            else
-                break;
+            break;
         }
-        if (line[strlen (line) - 1] == '\n')
-            line[strlen (line) - 1] = 0;
-        if (strlen (line) < 1)
+
+        len = strlen (line);
+        if (line[len - 1] == '\n')
+            line[len - 1] = '\0';
+        if (line[0] == '\0')
             continue;
+
+        name = line;
         if (line[0] == '.' && IS_PATH_SEP (line[1]))
-            name = line + 2;
-        else
-            name = line;
+            name += 2;
 
         if (!handle_path (name, &st, &link_to_dir, &stale_link))
             continue;
@@ -635,15 +635,14 @@ load_panelize (void)
 void
 save_panelize (void)
 {
-    struct panelize *current = panelize;
+    struct panelize *current;
 
     mc_config_del_group (mc_global.main_config, panelize_section);
-    for (; current; current = current->next)
-    {
-        if (strcmp (current->label, _("Other command")))
+
+    for (current = panelize; current != NULL; current = current->next)
+        if (strcmp (current->label, _("Other command")) != 0)
             mc_config_set_string (mc_global.main_config,
                                   panelize_section, current->label, current->command);
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -651,10 +650,9 @@ save_panelize (void)
 void
 done_panelize (void)
 {
-    struct panelize *current = panelize;
-    struct panelize *next;
+    struct panelize *current, *next;
 
-    for (; current; current = next)
+    for (current = panelize; current != NULL; current = next)
     {
         next = current->next;
         g_free (current->label);
