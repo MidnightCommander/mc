@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.8.21-69-g2c2e41c\n"
+"Project-Id-Version: mc 4.8.21-103-g177c64c\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-10-20 18:37+0300\n"
+"POT-Creation-Date: 2018-11-24 15:01+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -653,7 +653,7 @@ msgstr ""
 #: src/editor/editcmd.c:422 src/editor/editcmd.c:584 src/editor/editcmd.c:1720
 #: src/editor/editcmd.c:3436 src/editor/editcmd.c:3465
 #: src/editor/editcmd_dialogs.c:478 src/execute.c:135
-#: src/filemanager/file.c:2384 src/filemanager/panel.c:4479 src/help.c:362
+#: src/filemanager/file.c:2384 src/filemanager/panel.c:4487 src/help.c:362
 #: src/main.c:401 src/subshell/common.c:432 src/subshell/common.c:1278
 #: src/viewer/actions_cmd.c:419
 msgid "Warning"
@@ -769,9 +769,9 @@ msgstr ""
 #: src/editor/editcmd.c:231 src/editor/editcmd.c:254 src/editor/editcmd.c:2851
 #: src/editor/editcmd.c:2857 src/filemanager/cmd.c:140
 #: src/filemanager/file.c:968 src/filemanager/file.c:1948
-#: src/filemanager/filegui.c:432 src/filemanager/hotlist.c:1158
+#: src/filemanager/filegui.c:426 src/filemanager/hotlist.c:1158
 #: src/filemanager/hotlist.c:1175 src/filemanager/midnight.c:1026
-#: src/filemanager/midnight.c:1034 src/filemanager/panel.c:2820
+#: src/filemanager/midnight.c:1034 src/filemanager/panel.c:2828
 #: src/filemanager/tree.c:828 src/subshell/common.c:1280
 #: src/viewer/actions_cmd.c:619 src/viewer/actions_cmd.c:625
 #: src/viewer/search.c:398
@@ -781,10 +781,10 @@ msgstr ""
 #: lib/widget/listbox.c:325 src/diffviewer/ydiff.c:3089 src/editor/edit.c:359
 #: src/editor/editcmd.c:231 src/editor/editcmd.c:2851 src/editor/editcmd.c:2857
 #: src/filemanager/cmd.c:140 src/filemanager/file.c:968
-#: src/filemanager/file.c:1948 src/filemanager/filegui.c:434
+#: src/filemanager/file.c:1948 src/filemanager/filegui.c:428
 #: src/filemanager/hotlist.c:1158 src/filemanager/hotlist.c:1175
 #: src/filemanager/midnight.c:1026 src/filemanager/midnight.c:1034
-#: src/filemanager/panel.c:2820 src/filemanager/tree.c:828
+#: src/filemanager/panel.c:2828 src/filemanager/tree.c:828
 #: src/subshell/common.c:1280 src/viewer/actions_cmd.c:619
 #: src/viewer/actions_cmd.c:625 src/viewer/search.c:399
 msgid "&No"
@@ -792,7 +792,7 @@ msgstr ""
 
 #: lib/widget/quick.h:215 src/editor/editcmd.c:2717
 #: src/editor/editcmd_dialogs.c:121 src/editor/editwidget.c:150
-#: src/filemanager/boxes.c:1243 src/filemanager/filegui.c:1252
+#: src/filemanager/boxes.c:1243 src/filemanager/filegui.c:1246
 #: src/filemanager/find.c:599 src/filemanager/layout.c:458
 #: src/subshell/common.c:435
 msgid "&OK"
@@ -808,7 +808,7 @@ msgstr ""
 #: src/filemanager/achown.c:882 src/filemanager/chmod.c:117
 #: src/filemanager/chmod.c:411 src/filemanager/chown.c:88
 #: src/filemanager/chown.c:310 src/filemanager/cmd.c:1148
-#: src/filemanager/filegui.c:1256 src/filemanager/find.c:599
+#: src/filemanager/filegui.c:1250 src/filemanager/find.c:599
 #: src/filemanager/hotlist.c:187 src/filemanager/hotlist.c:1014
 #: src/filemanager/hotlist.c:1076 src/filemanager/layout.c:459
 #: src/filemanager/panelize.c:140 src/learn.c:256 src/viewer/hex.c:430
@@ -837,7 +837,7 @@ msgstr ""
 #: lib/widget/wtools.c:691 src/filemanager/file.c:847
 #: src/filemanager/file.c:921 src/filemanager/file.c:923
 #: src/filemanager/file.c:969 src/filemanager/file.c:3090
-#: src/filemanager/filegui.c:256 src/filemanager/filegui.c:450
+#: src/filemanager/filegui.c:250 src/filemanager/filegui.c:444
 msgid "&Abort"
 msgstr ""
 
@@ -1047,23 +1047,23 @@ msgstr ""
 msgid "Two files are required to envoke the diffviewer."
 msgstr ""
 
-#: src/background.c:177 src/background.c:251
+#: src/background.c:179 src/background.c:251
 msgid "Background protocol error"
 msgstr ""
 
-#: src/background.c:177
+#: src/background.c:179
 msgid "Reading failed"
 msgstr ""
 
-#: src/background.c:217 src/filemanager/file.c:844 src/filemanager/file.c:916
+#: src/background.c:219 src/filemanager/file.c:844 src/filemanager/file.c:916
 msgid "Background process error"
 msgstr ""
 
-#: src/background.c:229 src/background.c:292
+#: src/background.c:232 src/background.c:283
 msgid "Unknown error in child"
 msgstr ""
 
-#: src/background.c:237
+#: src/background.c:240
 msgid "Child died unexpectedly"
 msgstr ""
 
@@ -1701,14 +1701,14 @@ msgid "&Replace"
 msgstr ""
 
 #: src/editor/editcmd_dialogs.c:280 src/filemanager/file.c:968
-#: src/filemanager/filegui.c:442
+#: src/filemanager/filegui.c:436
 msgid "A&ll"
 msgstr ""
 
 #: src/editor/editcmd_dialogs.c:281 src/editor/spell_dialogs.c:97
 #: src/filemanager/file.c:847 src/filemanager/file.c:920
 #: src/filemanager/file.c:923 src/filemanager/file.c:3091
-#: src/filemanager/filegui.c:253
+#: src/filemanager/filegui.c:247
 msgid "&Skip"
 msgstr ""
 
@@ -2943,7 +2943,7 @@ msgid "Files tagged, want to cd?"
 msgstr ""
 
 #: src/filemanager/cmd.c:147 src/filemanager/cmd.c:1131
-#: src/filemanager/panel.c:2796 src/filemanager/panel.c:3396
+#: src/filemanager/panel.c:2804 src/filemanager/panel.c:3404
 msgid "Cannot change directory"
 msgstr ""
 
@@ -2974,7 +2974,7 @@ msgstr ""
 msgid "symlink: %s"
 msgstr ""
 
-#: src/filemanager/cmd.c:464 src/filemanager/panel.c:4734
+#: src/filemanager/cmd.c:464 src/filemanager/panel.c:4732
 #, c-format
 msgid "Cannot chdir to \"%s\""
 msgstr ""
@@ -3133,7 +3133,7 @@ msgstr ""
 msgid "Cannot execute commands on non-local filesystems"
 msgstr ""
 
-#: src/filemanager/command.c:456 src/filemanager/panel.c:3687
+#: src/filemanager/command.c:456 src/filemanager/panel.c:3695
 #: src/filemanager/tree.c:588
 #, c-format
 msgid ""
@@ -3141,7 +3141,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: src/filemanager/dir.c:638 src/filemanager/dir.c:699
+#: src/filemanager/dir.c:647 src/filemanager/dir.c:708
 msgid "Cannot read directory contents"
 msgstr ""
 
@@ -3315,7 +3315,7 @@ msgid ""
 "Delete it recursively?"
 msgstr ""
 
-#: src/filemanager/file.c:969 src/filemanager/filegui.c:446
+#: src/filemanager/file.c:969 src/filemanager/filegui.c:440
 msgid "Non&e"
 msgstr ""
 
@@ -3536,167 +3536,167 @@ msgstr ""
 msgid "Sorry, I could not put the job in background"
 msgstr ""
 
-#: src/filemanager/filegui.c:254 src/filemanager/find.c:192
+#: src/filemanager/filegui.c:248 src/filemanager/find.c:192
 msgid "S&uspend"
 msgstr ""
 
-#: src/filemanager/filegui.c:255 src/filemanager/find.c:193
+#: src/filemanager/filegui.c:249 src/filemanager/find.c:193
 msgid "Con&tinue"
 msgstr ""
 
-#: src/filemanager/filegui.c:344
+#: src/filemanager/filegui.c:338
 #, c-format
 msgid "%d:%02d.%02d"
 msgstr ""
 
-#: src/filemanager/filegui.c:361
+#: src/filemanager/filegui.c:355
 #, c-format
 msgid "ETA %s"
 msgstr ""
 
-#: src/filemanager/filegui.c:371
+#: src/filemanager/filegui.c:365
 #, c-format
 msgid "%.2f MB/s"
 msgstr ""
 
-#: src/filemanager/filegui.c:375
+#: src/filemanager/filegui.c:369
 #, c-format
 msgid "%.2f KB/s"
 msgstr ""
 
-#: src/filemanager/filegui.c:379
+#: src/filemanager/filegui.c:373
 #, c-format
 msgid "%ld B/s"
 msgstr ""
 
-#: src/filemanager/filegui.c:422
+#: src/filemanager/filegui.c:416
 msgid "Target file already exists!"
 msgstr ""
 
-#: src/filemanager/filegui.c:426
+#: src/filemanager/filegui.c:420
 #, c-format
 msgid "New     : %s, size %s"
 msgstr ""
 
-#: src/filemanager/filegui.c:428
+#: src/filemanager/filegui.c:422
 #, c-format
 msgid "Existing: %s, size %s"
 msgstr ""
 
-#: src/filemanager/filegui.c:430
+#: src/filemanager/filegui.c:424
 msgid "Overwrite this target?"
 msgstr ""
 
-#: src/filemanager/filegui.c:436 src/filemanager/hotlist.c:195
+#: src/filemanager/filegui.c:430 src/filemanager/hotlist.c:195
 msgid "A&ppend"
 msgstr ""
 
-#: src/filemanager/filegui.c:438
+#: src/filemanager/filegui.c:432
 msgid "&Reget"
 msgstr ""
 
-#: src/filemanager/filegui.c:440
+#: src/filemanager/filegui.c:434
 msgid "Overwrite all targets?"
 msgstr ""
 
-#: src/filemanager/filegui.c:444
+#: src/filemanager/filegui.c:438
 msgid "&Update"
 msgstr ""
 
-#: src/filemanager/filegui.c:448
+#: src/filemanager/filegui.c:442
 msgid "If &size differs"
 msgstr ""
 
-#: src/filemanager/filegui.c:471
+#: src/filemanager/filegui.c:465
 msgid "File exists"
 msgstr ""
 
-#: src/filemanager/filegui.c:473
+#: src/filemanager/filegui.c:467
 msgid "Background process: File exists"
 msgstr ""
 
-#: src/filemanager/filegui.c:940
+#: src/filemanager/filegui.c:934
 #, c-format
 msgid "Files processed: %zu/%zu"
 msgstr ""
 
-#: src/filemanager/filegui.c:942
+#: src/filemanager/filegui.c:936
 #, c-format
 msgid "Files processed: %zu"
 msgstr ""
 
-#: src/filemanager/filegui.c:989
+#: src/filemanager/filegui.c:983
 #, c-format
 msgid "Time: %s %s"
 msgstr ""
 
-#: src/filemanager/filegui.c:994
+#: src/filemanager/filegui.c:988
 #, c-format
 msgid "Time: %s %s (%s)"
 msgstr ""
 
-#: src/filemanager/filegui.c:1001
+#: src/filemanager/filegui.c:995
 #, c-format
 msgid "Time: %s"
 msgstr ""
 
-#: src/filemanager/filegui.c:1005
+#: src/filemanager/filegui.c:999
 #, c-format
 msgid "Time: %s (%s)"
 msgstr ""
 
-#: src/filemanager/filegui.c:1016
+#: src/filemanager/filegui.c:1010
 #, c-format
 msgid " Total: %s "
 msgstr ""
 
-#: src/filemanager/filegui.c:1020
+#: src/filemanager/filegui.c:1014
 #, c-format
 msgid " Total: %s/%s "
 msgstr ""
 
-#: src/filemanager/filegui.c:1046
+#: src/filemanager/filegui.c:1040
 msgid "Source"
 msgstr ""
 
-#: src/filemanager/filegui.c:1071
+#: src/filemanager/filegui.c:1065
 msgid "Target"
 msgstr ""
 
-#: src/filemanager/filegui.c:1095
+#: src/filemanager/filegui.c:1089
 msgid "Deleting"
 msgstr ""
 
-#: src/filemanager/filegui.c:1239 src/filemanager/find.c:581
-#: src/filemanager/panel.c:2531
+#: src/filemanager/filegui.c:1233 src/filemanager/find.c:581
+#: src/filemanager/panel.c:2539
 msgid "&Using shell patterns"
 msgstr ""
 
-#: src/filemanager/filegui.c:1241
+#: src/filemanager/filegui.c:1235
 msgid "to:"
 msgstr ""
 
-#: src/filemanager/filegui.c:1245
+#: src/filemanager/filegui.c:1239
 msgid "Follow &links"
 msgstr ""
 
-#: src/filemanager/filegui.c:1246
+#: src/filemanager/filegui.c:1240
 msgid "Preserve &attributes"
 msgstr ""
 
-#: src/filemanager/filegui.c:1248
+#: src/filemanager/filegui.c:1242
 msgid "Di&ve into subdir if exists"
 msgstr ""
 
-#: src/filemanager/filegui.c:1249
+#: src/filemanager/filegui.c:1243
 msgid "&Stable symlinks"
 msgstr ""
 
-#: src/filemanager/filegui.c:1254
+#: src/filemanager/filegui.c:1248
 msgid "&Background"
 msgstr ""
 
-#: src/filemanager/filegui.c:1309
+#: src/filemanager/filegui.c:1303
 #, c-format
 msgid "Invalid source pattern '%s'"
 msgstr ""
@@ -4322,7 +4322,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/filemanager/midnight.c:1026 src/filemanager/midnight.c:1032
-#: src/filemanager/panel.c:2819
+#: src/filemanager/panel.c:2827
 msgid "The Midnight Commander"
 msgstr ""
 
@@ -4362,7 +4362,7 @@ msgstr ""
 msgid "ButtonBar|Mkdir"
 msgstr ""
 
-#: src/filemanager/mountlist.c:986
+#: src/filemanager/mountlist.c:881
 msgid "Memory exhausted!"
 msgstr ""
 
@@ -4515,31 +4515,31 @@ msgstr[1] ""
 msgid "Panelize"
 msgstr ""
 
-#: src/filemanager/panel.c:1816
+#: src/filemanager/panel.c:1824
 msgid "Unknown tag on display format:"
 msgstr ""
 
-#: src/filemanager/panel.c:2530
+#: src/filemanager/panel.c:2538
 msgid "&Files only"
 msgstr ""
 
-#: src/filemanager/panel.c:2533
+#: src/filemanager/panel.c:2541
 msgid "&Case sensitive"
 msgstr ""
 
-#: src/filemanager/panel.c:2588
+#: src/filemanager/panel.c:2596
 msgid "Select"
 msgstr ""
 
-#: src/filemanager/panel.c:2596
+#: src/filemanager/panel.c:2604
 msgid "Unselect"
 msgstr ""
 
-#: src/filemanager/panel.c:2820
+#: src/filemanager/panel.c:2828
 msgid "Do you really want to execute?"
 msgstr ""
 
-#: src/filemanager/panel.c:4480
+#: src/filemanager/panel.c:4488
 msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
 
@@ -4551,7 +4551,7 @@ msgstr ""
 msgid "External panelize"
 msgstr ""
 
-#: src/filemanager/panelize.c:180 src/filemanager/panelize.c:277
+#: src/filemanager/panelize.c:180 src/filemanager/panelize.c:276
 #: src/filemanager/panelize.c:589 src/filemanager/panelize.c:643
 msgid "Other command"
 msgstr ""
@@ -4560,15 +4560,15 @@ msgstr ""
 msgid "Command"
 msgstr ""
 
-#: src/filemanager/panelize.c:262
+#: src/filemanager/panelize.c:261
 msgid "Add to external panelize"
 msgstr ""
 
-#: src/filemanager/panelize.c:263
+#: src/filemanager/panelize.c:262
 msgid "Enter command label:"
 msgstr ""
 
-#: src/filemanager/panelize.c:316
+#: src/filemanager/panelize.c:309
 msgid "Cannot invoke command."
 msgstr ""
 
@@ -5271,25 +5271,25 @@ msgstr ""
 msgid "sftp: connection to server failed: %s"
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:277
+#: src/vfs/sftpfs/connection.c:283
 #, c-format
 msgid "sftp: Enter passphrase for %s "
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:282
+#: src/vfs/sftpfs/connection.c:288
 msgid "sftp: Passphrase is empty."
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:328
+#: src/vfs/sftpfs/connection.c:334
 #, c-format
 msgid "sftp: Enter password for %s "
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:333
+#: src/vfs/sftpfs/connection.c:339
 msgid "sftp: Password is empty."
 msgstr ""
 
-#: src/vfs/sftpfs/connection.c:398
+#: src/vfs/sftpfs/connection.c:404
 msgid "sftp: Failure establishing SSH session"
 msgstr ""
 
@@ -5557,7 +5557,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: src/viewer/lib.c:394 src/viewer/lib.c:396
+#: src/viewer/lib.c:393 src/viewer/lib.c:395
 msgid "View: "
 msgstr ""
 
