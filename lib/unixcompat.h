@@ -19,10 +19,6 @@
 #include <sys/sysmacros.h>
 #endif
 
-#if defined(_AIX)
-#include <time.h>               /* AIX for tm */
-#endif
-
 #include <unistd.h>
 
 /*** typedefs(not structures) and defined constants **********************************************/

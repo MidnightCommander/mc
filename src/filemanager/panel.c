@@ -4233,7 +4233,7 @@ panel_clean_dir (WPanel * panel)
     panel->content_shift = -1;
     panel->max_shift = -1;
 
-    dir_list_clean (&panel->dir);
+    dir_list_free_list (&panel->dir);
 }
 
 /* --------------------------------------------------------------------------------------------- */

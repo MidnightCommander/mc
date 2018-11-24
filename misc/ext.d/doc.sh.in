@@ -68,7 +68,7 @@ do_view_action() {
         fi
         ;;
     msxls)
-        if xlHtml >/dev/null 2>&1; then
+        if xlhtml >/dev/null 2>&1; then
             tmp=`mktemp -d ${TMPDIR:-/tmp}/%p.XXXXXX`
             xlhtml -a "${MC_EXT_FILENAME}" > "$tmp/page.html"
             elinks -dump "$tmp/page.html"

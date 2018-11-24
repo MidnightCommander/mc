@@ -49,7 +49,7 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
-#ifdef MOUNTED_GETFSSTAT        /* OSF_1 and Darwin1.3.x */
+#ifdef MOUNTED_GETFSSTAT        /* OSF_1, also (obsolete) Apple Darwin 1.3 */
 #ifdef HAVE_SYS_UCRED_H
 #include <grp.h>                /* needed on OSF V4.0 for definition of NGROUPS,
                                    NGROUPS is used as an array dimension in ucred.h */
@@ -78,11 +78,9 @@
 #ifdef HAVE_SYS_STATFS_H
 #include <sys/statfs.h>
 #endif
-#ifdef HAVE_DUSTAT_H            /* AIX PS/2 */
-#include <sys/dustat.h>
-#endif
 
-#ifdef MOUNTED_GETMNTENT1       /* 4.3BSD, SunOS, HP-UX, Dynix, Irix.  */
+#ifdef MOUNTED_GETMNTENT1       /* glibc, HP-UX, IRIX, Cygwin, Android,
+                                   also (obsolete) 4.3BSD, SunOS */
 #include <mntent.h>
 #include <sys/types.h>
 #ifndef MOUNTED
@@ -92,58 +90,44 @@
 #ifdef MNT_MNTTAB               /* HP-UX.  */
 #define MOUNTED MNT_MNTTAB
 #endif
-#ifdef MNTTABNAME               /* Dynix.  */
-#define MOUNTED MNTTABNAME
-#endif
 #endif
 #endif
 
-#ifdef MOUNTED_GETMNTINFO       /* 4.4BSD.  */
+#ifdef MOUNTED_GETMNTINFO       /* Mac OS X, FreeBSD, OpenBSD, also (obsolete) 4.4BSD  */
 #include <sys/mount.h>
 #endif
 
-#ifdef MOUNTED_GETMNTINFO2      /* NetBSD 3.0.  */
+#ifdef MOUNTED_GETMNTINFO2      /* NetBSD, Minix */
 #include <sys/statvfs.h>
 #endif
 
-#ifdef MOUNTED_GETMNT           /* Ultrix.  */
-#include <sys/mount.h>
-#include <sys/fs_types.h>
-#endif
-
-#ifdef MOUNTED_FS_STAT_DEV      /* BeOS.  */
+#ifdef MOUNTED_FS_STAT_DEV      /* Haiku, also (obsolete) BeOS */
 #include <fs_info.h>
 #include <dirent.h>
 #endif
 
-#ifdef MOUNTED_FREAD_FSTYP      /* SVR3.  */
+#ifdef MOUNTED_FREAD_FSTYP      /* (obsolete) SVR3 */
 #include <mnttab.h>
 #include <sys/fstyp.h>
 #include <sys/statfs.h>
 #endif
 
-#ifdef MOUNTED_LISTMNTENT
-#include <mntent.h>
-#endif
-
-#ifdef MOUNTED_GETMNTENT2       /* SVR4.  */
+#ifdef MOUNTED_GETEXTMNTENT     /* Solaris >= 8 */
 #include <sys/mnttab.h>
 #endif
 
-#ifdef MOUNTED_VMOUNT           /* AIX.  */
+#ifdef MOUNTED_GETMNTENT2       /* Solaris < 8, also (obsolete) SVR4 */
+#include <sys/mnttab.h>
+#endif
+
+#ifdef MOUNTED_VMOUNT           /* AIX */
 #include <fshelp.h>
 #include <sys/vfs.h>
 #endif
 
-#ifdef MOUNTED_INTERIX_STATVFS  /* Interix. */
+#ifdef MOUNTED_INTERIX_STATVFS  /* Interix */
 #include <sys/statvfs.h>
 #include <dirent.h>
-#endif
-
-#ifdef DOLPHIN
-/* So special that it's not worth putting this in autoconf.  */
-#undef MOUNTED_FREAD_FSTYP
-#define MOUNTED_GETMNTTBL
 #endif
 
 #ifdef HAVE_SYS_MNTENT_H
@@ -377,7 +361,7 @@ free_mount_entry (struct mount_entry *me)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef MOUNTED_GETMNTINFO
+#ifdef MOUNTED_GETMNTINFO       /* Mac OS X, FreeBSD, OpenBSD, also (obsolete) 4.4BSD */
 
 #ifndef HAVE_STRUCT_STATFS_F_FSTYPENAME
 static char *
@@ -511,7 +495,7 @@ fsp_to_string (const struct statfs *fsp)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef MOUNTED_VMOUNT           /* AIX.  */
+#ifdef MOUNTED_VMOUNT           /* AIX */
 static char *
 fstype_to_string (int t)
 {
@@ -566,36 +550,7 @@ dev_from_mount_options (char const *mount_options)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#if defined _AIX && defined _I386
-/* AIX PS/2 does not supply statfs.  */
-
-static int
-statfs (char *file, struct statfs *fsb)
-{
-    struct stat stats;
-    struct dustat fsd;
-
-    if (stat (file, &stats) != 0)
-        return -1;
-    if (dustat (stats.st_dev, 0, &fsd, sizeof (fsd)))
-        return -1;
-    fsb->f_type = 0;
-    fsb->f_bsize = fsd.du_bsize;
-    fsb->f_blocks = fsd.du_fsize - fsd.du_isize;
-    fsb->f_bfree = fsd.du_tfree;
-    fsb->f_bavail = fsd.du_tfree;
-    fsb->f_files = (fsd.du_isize - 2) * fsd.du_inopb;
-    fsb->f_ffree = fsd.du_tinode;
-    fsb->f_fsid.val[0] = fsd.du_site;
-    fsb->f_fsid.val[1] = fsd.du_pckno;
-    return 0;
-}
-
-#endif /* _AIX && _I386 */
-
-/* --------------------------------------------------------------------------------------------- */
-
-#if defined MOUNTED_GETMNTENT1 && defined __linux__
+#if defined MOUNTED_GETMNTENT1 && defined __linux__     /* GNU/Linux, Android */
 
 /* Unescape the paths in mount tables.
    STR is updated in place.  */
@@ -633,38 +588,8 @@ read_file_system_list (void)
     GSList *mount_list = NULL;
     struct mount_entry *me;
 
-#ifdef MOUNTED_LISTMNTENT
-    {
-        struct tabmntent *mntlist, *p;
-
-        /* the third and fourth arguments could be used to filter mounts,
-           but Crays doesn't seem to have any mounts that we want to
-           remove. Specifically, automount create normal NFS mounts.
-         */
-
-        if (listmntent (&mntlist, KMTAB, NULL, NULL) < 0)
-            return NULL;
-        for (p = mntlist; p; p = p->next)
-        {
-            struct mntent *mnt = p->ment;
-
-            me = g_malloc (sizeof (*me));
-            me->me_devname = g_strdup (mnt->mnt_fsname);
-            me->me_mountdir = g_strdup (mnt->mnt_dir);
-            me->me_mntroot = NULL;
-            me->me_type = g_strdup (mnt->mnt_type);
-            me->me_type_malloced = 1;
-            me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
-            me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
-            me->me_dev = -1;
-
-            mount_list = g_slist_prepend (mount_list, me);
-        }
-        freemntlist (mntlist);
-    }
-#endif
-
-#ifdef MOUNTED_GETMNTENT1       /* GNU/Linux, 4.3BSD, SunOS, HP-UX, Dynix, Irix.  */
+#ifdef MOUNTED_GETMNTENT1       /* glibc, HP-UX, IRIX, Cygwin, Android,
+                                   also (obsolete) 4.3BSD, SunOS */
     {
         FILE *fp;
 
@@ -790,7 +715,7 @@ read_file_system_list (void)
     }
 #endif /* MOUNTED_GETMNTENT1. */
 
-#ifdef MOUNTED_GETMNTINFO       /* 4.4BSD.  */
+#ifdef MOUNTED_GETMNTINFO       /* Mac OS X, FreeBSD, OpenBSD, also (obsolete) 4.4BSD */
     {
         struct statfs *fsp;
         int entries;
@@ -817,7 +742,7 @@ read_file_system_list (void)
     }
 #endif /* MOUNTED_GETMNTINFO */
 
-#ifdef MOUNTED_GETMNTINFO2      /* NetBSD 3.0.  */
+#ifdef MOUNTED_GETMNTINFO2      /* NetBSD, Minix */
     {
         struct statvfs *fsp;
         int entries;
@@ -842,37 +767,7 @@ read_file_system_list (void)
     }
 #endif /* MOUNTED_GETMNTINFO2 */
 
-#ifdef MOUNTED_GETMNT           /* Ultrix.  */
-    {
-        int offset = 0;
-        int val;
-        struct fs_data fsd;
-
-        while (TRUE)
-        {
-            errno = 0;
-            val = getmnt (&offset, &fsd, sizeof (fsd), NOSTAT_MANY, (char *) NULL);
-            if (val < 0)
-                goto free_then_fail;
-            if (val == 0)
-                break;
-
-            me = g_malloc (sizeof (*me));
-            me->me_devname = g_strdup (fsd.fd_req.devname);
-            me->me_mountdir = g_strdup (fsd.fd_req.path);
-            me->me_mntroot = NULL;
-            me->me_type = gt_names[fsd.fd_req.fstype];
-            me->me_type_malloced = 0;
-            me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
-            me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
-            me->me_dev = fsd.fd_req.dev;
-
-            mount_list = g_slist_prepend (mount_list, me);
-        }
-    }
-#endif /* MOUNTED_GETMNT. */
-
-#if defined MOUNTED_FS_STAT_DEV /* BeOS */
+#if defined MOUNTED_FS_STAT_DEV /* Haiku, also (obsolete) BeOS */
     {
         /* The next_dev() and fs_stat_dev() system calls give the list of
            all file systems, including the information returned by statvfs()
@@ -972,7 +867,7 @@ read_file_system_list (void)
     }
 #endif /* MOUNTED_FS_STAT_DEV */
 
-#ifdef MOUNTED_GETFSSTAT        /* __alpha running OSF_1 */
+#ifdef MOUNTED_GETFSSTAT        /*  OSF/1, also (obsolete) Apple Darwin 1.3 */
     {
         int numsys, counter;
         size_t bufsize;
@@ -1016,7 +911,7 @@ read_file_system_list (void)
     }
 #endif /* MOUNTED_GETFSSTAT */
 
-#if defined MOUNTED_FREAD || defined MOUNTED_FREAD_FSTYP        /* SVR[23].  */
+#if defined MOUNTED_FREAD_FSTYP /* (obsolete) SVR3 */
     {
         struct mnttab mnt;
         char *table = "/etc/mnttab";
@@ -1029,17 +924,12 @@ read_file_system_list (void)
         while (fread (&mnt, sizeof (mnt), 1, fp) > 0)
         {
             me = g_malloc (sizeof (*me));
-#ifdef GETFSTYP                 /* SVR3.  */
             me->me_devname = g_strdup (mnt.mt_dev);
-#else
-            me->me_devname = g_strconcat ("/dev/", mnt.mt_dev, (char *) NULL);
-#endif
             me->me_mountdir = g_strdup (mnt.mt_filsys);
             me->me_mntroot = NULL;
             me->me_dev = (dev_t) (-1);  /* Magic; means not known yet. */
             me->me_type = "";
             me->me_type_malloced = 0;
-#ifdef GETFSTYP                 /* SVR3.  */
             {
                 struct statfs fsd;
                 char typebuf[FSTYPSZ];
@@ -1051,7 +941,6 @@ read_file_system_list (void)
                     me->me_type_malloced = 1;
                 }
             }
-#endif
             me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
             me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
 
@@ -1071,34 +960,54 @@ read_file_system_list (void)
         if (fclose (fp) == EOF)
             goto free_then_fail;
     }
-#endif /* MOUNTED_FREAD || MOUNTED_FREAD_FSTYP.  */
+#endif /* MOUNTED_FREAD_FSTYP */
 
-#ifdef MOUNTED_GETMNTTBL        /* DolphinOS goes its own way.  */
+#ifdef MOUNTED_GETEXTMNTENT     /* Solaris >= 8 */
     {
-        struct mntent **mnttbl = getmnttbl (), **ent;
+        struct extmnttab mnt;
+        const char *table = MNTTAB;
+        FILE *fp;
+        int ret;
 
-        for (ent = mnttbl; *ent; ent++)
+        /* No locking is needed, because the contents of /etc/mnttab is generated by the kernel. */
+
+        errno = 0;
+        fp = fopen (table, "r");
+        if (fp == NULL)
+            ret = errno;
+        else
         {
-            me = g_malloc (sizeof (*me));
-            me->me_devname = g_strdup ((*ent)->mt_resource);
-            me->me_mountdir = g_strdup ((*ent)->mt_directory);
-            me->me_mntroot = NULL;
-            me->me_type = g_strdup ((*ent)->mt_fstype);
-            me->me_type_malloced = 1;
-            me->me_dummy = ME_DUMMY (me->me_devname, me->me_type);
-            me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
-            me->me_dev = (dev_t) (-1);  /* Magic; means not known yet. */
+            while ((ret = getextmntent (fp, &mnt, 1)) == 0)
+            {
+                me = g_malloc (sizeof *me);
+                me->me_devname = g_strdup (mnt.mnt_special);
+                me->me_mountdir = g_strdup (mnt.mnt_mountp);
+                me->me_mntroot = NULL;
+                me->me_type = g_strdup (mnt.mnt_fstype);
+                me->me_type_malloced = 1;
+                me->me_dummy = MNT_IGNORE (&mnt) != 0;
+                me->me_remote = ME_REMOTE (me->me_devname, me->me_type);
+                me->me_dev = makedev (mnt.mnt_major, mnt.mnt_minor);
 
-            mount_list = g_slist_prepend (mount_list, me);
+                mount_list = g_slist_prepend (mount_list, me);
+            }
+
+            ret = fclose (fp) == EOF ? errno : 0 < ret ? 0 : -1;
+            /* Here ret = -1 means success, ret >= 0 means failure. */
         }
-        endmnttbl ();
-    }
-#endif
 
-#ifdef MOUNTED_GETMNTENT2       /* SVR4.  */
+        if (ret >= 0)
+        {
+            errno = ret;
+            goto free_then_fail;
+        }
+    }
+#endif /* MOUNTED_GETEXTMNTENT */
+
+#ifdef MOUNTED_GETMNTENT2       /* Solaris < 8, also (obsolete) SVR4 */
     {
         struct mnttab mnt;
-        char *table = MNTTAB;
+        const char *table = MNTTAB;
         FILE *fp;
         int ret;
         int lockfd = -1;
@@ -1155,6 +1064,7 @@ read_file_system_list (void)
             }
 
             ret = fclose (fp) == EOF ? errno : 0 < ret ? 0 : -1;
+            /* Here ret = -1 means success, ret >= 0 means failure. */
         }
 
         if (lockfd >= 0 && close (lockfd) != 0)
@@ -1168,7 +1078,7 @@ read_file_system_list (void)
     }
 #endif /* MOUNTED_GETMNTENT2.  */
 
-#ifdef MOUNTED_VMOUNT           /* AIX.  */
+#ifdef MOUNTED_VMOUNT           /* AIX */
     {
         int bufsize;
         void *entries;
@@ -1233,7 +1143,7 @@ read_file_system_list (void)
     }
 #endif /* MOUNTED_VMOUNT. */
 
-#ifdef MOUNTED_INTERIX_STATVFS
+#ifdef MOUNTED_INTERIX_STATVFS  /* Interix */
     {
         DIR *dirp = opendir ("/dev/fs");
         char node[9 + NAME_MAX];
@@ -1438,21 +1348,6 @@ get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
             : PROPAGATE_ALL_ONES (fsd.f_bsize);
         /* *INDENT-ON* */
 
-#elif defined STAT_STATFS2_FS_DATA      /* Ultrix */
-
-        struct fs_data fsd;
-
-        if (statfs (file, &fsd) != 1)
-            return -1;
-
-        fsp->fsu_blocksize = 1024;
-        fsp->fsu_blocks = PROPAGATE_ALL_ONES (fsd.fd_req.btot);
-        fsp->fsu_bfree = PROPAGATE_ALL_ONES (fsd.fd_req.bfree);
-        fsp->fsu_bavail = PROPAGATE_TOP_BIT (fsd.fd_req.bfreen);
-        fsp->fsu_bavail_top_bit_set = EXTRACT_TOP_BIT (fsd.fd_req.bfreen) != 0;
-        fsp->fsu_files = PROPAGATE_ALL_ONES (fsd.fd_req.gtot);
-        fsp->fsu_ffree = PROPAGATE_ALL_ONES (fsd.fd_req.gfree);
-
 #elif defined STAT_STATFS3_OSF1 /* OSF/1 */
 
         struct statfs fsd;
@@ -1506,12 +1401,7 @@ get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
 
         fsp->fsu_blocksize = PROPAGATE_ALL_ONES (fsd.f_fsize);
 
-#elif defined STAT_STATFS4      /* SVR3, Dynix, old Irix, old AIX, \
-                                   Dolphin */
-
-#if !defined _AIX && !defined _SEQUENT_ && !defined DOLPHIN
-#define f_bavail f_bfree
-#endif
+#elif defined STAT_STATFS4      /* SVR3, old Irix */
 
         struct statfs fsd;
 
@@ -1521,7 +1411,7 @@ get_fs_usage (char const *file, char const *disk, struct fs_usage *fsp)
         /* Empirically, the block counts on most SVR3 and SVR3-derived
            systems seem to always be in terms of 512-byte blocks,
            no matter what value f_bsize has.  */
-#if defined _AIX || defined _CRAY
+#if defined _CRAY
         fsp->fsu_blocksize = PROPAGATE_ALL_ONES (fsd.f_bsize);
 #else
         fsp->fsu_blocksize = 512;

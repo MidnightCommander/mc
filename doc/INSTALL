@@ -324,7 +324,6 @@ i386-*-linux
 sparc-*-linux
 alpha-*-linux
 powerpc-*-linux
-mips-dec-ultrix4.3
 mips-dec-{open,net}bsd1.0
 mips-sgi-irix5.2
 mips-sgi-irix5.3

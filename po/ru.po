@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-10-20 18:37+0300\n"
+"POT-Creation-Date: 2018-11-24 15:01+0300\n"
 "PO-Revision-Date: 2018-04-30 12:37+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
@@ -2550,8 +2550,7 @@ msgstr ""
 
 #, c-format
 msgid "Cannot create target hardlink \"%s\""
-msgstr ""
-"Невозможно создать целевую ссылку \"%s\""
+msgstr "Невозможно создать целевую ссылку \"%s\""
 
 #, c-format
 msgid ""

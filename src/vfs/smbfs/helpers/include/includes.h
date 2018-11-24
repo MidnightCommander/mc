@@ -197,10 +197,6 @@
 #include <sys/statfs.h>
 #endif
 
-#ifdef HAVE_DUSTAT_H
-#include <sys/dustat.h>
-#endif
-
 #ifdef HAVE_SYS_STATVFS_H
 #include <sys/statvfs.h>
 #endif
@@ -542,10 +538,6 @@
 
 #ifndef O_ACCMODE
 #define O_ACCMODE (O_RDONLY | O_WRONLY | O_RDWR)
-#endif
-
-#if defined(HAVE_CRYPT16) && defined(HAVE_GETAUTHUID)
-#define ULTRIX_AUTH 1
 #endif
 
 #ifndef HAVE_INITGROUPS

@@ -55,6 +55,7 @@ void dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc so
 void dir_list_sort (dir_list * list, GCompareFunc sort, const dir_sort_options_t * sort_op);
 gboolean dir_list_init (dir_list * list);
 void dir_list_clean (dir_list * list);
+void dir_list_free_list (dir_list * list);
 gboolean handle_path (const char *path, struct stat *buf1, int *link_to_dir, int *stale_link);
 
 /* Sorting functions */
