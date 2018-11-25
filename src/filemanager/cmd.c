@@ -428,9 +428,6 @@ nice_cd (const char *text, const char *xtext, const char *help,
     char *machine;
     char *cd_path;
 
-    if (!SELECTED_IS_PANEL)
-        return;
-
     machine =
         input_dialog_help (text, xtext, help, history_name, INPUT_LAST_TEXT, strip_password,
                            INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD | INPUT_COMPLETE_HOSTNAMES |
@@ -457,11 +454,22 @@ nice_cd (const char *text, const char *xtext, const char *help,
     }
 
     {
+        panel_view_mode_t save_type;
         vfs_path_t *cd_vpath;
+
+        save_type = get_display_type (MENU_PANEL_IDX);
+
+        if (save_type != view_listing)
+            set_display_type (MENU_PANEL_IDX, view_listing);
 
         cd_vpath = vfs_path_from_str_flags (cd_path, VPF_NO_CANON);
         if (!do_panel_cd (MENU_PANEL, cd_vpath, cd_parse_command))
+        {
             message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\""), cd_path);
+
+            if (save_type != view_listing)
+                set_display_type (MENU_PANEL_IDX, save_type);
+        }
         vfs_path_free (cd_vpath);
     }
     g_free (cd_path);
