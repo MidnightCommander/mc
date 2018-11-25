@@ -715,28 +715,12 @@ panel_listing_box (WPanel * panel, int num, char **userp, char **minip, gboolean
                    int *brief_cols)
 {
     int result = -1;
-    char *section = NULL;
+    const char *p = NULL;
 
     if (panel == NULL)
     {
-        const char *p;
-        size_t i;
-
         p = get_nth_panel_name (num);
-        panel = g_new (WPanel, 1);
-        panel->list_format = list_full;
-        panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
-        panel->user_mini_status = FALSE;
-        for (i = 0; i < LIST_FORMATS; i++)
-            panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
-        section = g_strconcat ("Temporal:", p, (char *) NULL);
-        if (!mc_config_has_group (mc_global.main_config, section))
-        {
-            g_free (section);
-            section = g_strdup (p);
-        }
-        panel_load_setup (panel, section);
-        g_free (section);
+        panel = panel_empty_new (p);
     }
 
     {
@@ -817,7 +801,7 @@ panel_listing_box (WPanel * panel, int num, char **userp, char **minip, gboolean
         }
     }
 
-    if (section != NULL)
+    if (p != NULL)
     {
         int i;
 

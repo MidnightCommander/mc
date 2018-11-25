@@ -597,23 +597,23 @@ panel_do_cols (int idx)
 /** Save current list_view widget directory into panel */
 
 static Widget *
-restore_into_right_dir_panel (int idx, Widget * from_widget)
+restore_into_right_dir_panel (int idx, gboolean last_was_panel, int y, int x, int lines, int cols)
 {
     WPanel *new_widget;
-    const char *saved_dir = panels[idx].last_saved_dir;
-    gboolean last_was_panel = (from_widget && get_display_type (idx) != view_listing);
-    const char *p_name = get_nth_panel_name (idx);
+    const char *p_name;
+
+    p_name = get_nth_panel_name (idx);
 
     if (last_was_panel)
     {
         vfs_path_t *saved_dir_vpath;
 
-        saved_dir_vpath = vfs_path_from_str (saved_dir);
-        new_widget = panel_new_with_dir (p_name, saved_dir_vpath);
+        saved_dir_vpath = vfs_path_from_str (panels[idx].last_saved_dir);
+        new_widget = panel_sized_with_dir_new (p_name, y, x, lines, cols, saved_dir_vpath);
         vfs_path_free (saved_dir_vpath);
     }
     else
-        new_widget = panel_new (p_name);
+        new_widget = panel_sized_new (p_name, y, x, lines, cols);
 
     return WIDGET (new_widget);
 }
@@ -1032,9 +1032,13 @@ set_display_type (int num, panel_view_mode_t type)
     {
     case view_nothing:
     case view_listing:
-        new_widget = restore_into_right_dir_panel (num, old_widget);
-        widget_set_size (new_widget, y, x, lines, cols);
-        break;
+        {
+            gboolean last_was_panel;
+
+            last_was_panel = old_widget != NULL && get_display_type (num) != view_listing;
+            new_widget = restore_into_right_dir_panel (num, last_was_panel, y, x, lines, cols);
+            break;
+        }
 
     case view_info:
         new_widget = WIDGET (info_new (y, x, lines, cols));

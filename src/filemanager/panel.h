@@ -153,7 +153,10 @@ extern mc_fhl_t *mc_filehighlight;
 
 /*** declarations of public functions ************************************************************/
 
-WPanel *panel_new_with_dir (const char *panel_name, const vfs_path_t * vpath);
+WPanel *panel_sized_empty_new (const char *panel_name, int y, int x, int lines, int cols);
+WPanel *panel_sized_with_dir_new (const char *panel_name, int y, int x, int lines, int cols,
+                                  const vfs_path_t * vpath);
+
 void panel_clean_dir (WPanel * panel);
 
 void panel_reload (WPanel * panel);
@@ -197,9 +200,43 @@ gboolean do_cd (const vfs_path_t * new_dir_vpath, enum cd_enum cd_type);
 /*** inline functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 /**
+ * Empty panel creation.
+ *
+ * @param panel_name name of panel for setup retieving
+ *
+ * @return new instance of WPanel
+ */
+
+static inline WPanel *
+panel_empty_new (const char *panel_name)
+{
+    /* Unknown sizes of the panel at startup */
+    return panel_sized_empty_new (panel_name, 0, 0, 1, 1);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Panel creation for specified directory.
+ *
+ * @param panel_name name of panel for setup retieving
+ * @param vpath working panel directory. If NULL then current directory is used
+ *
+ * @return new instance of WPanel
+ */
+
+static inline WPanel *
+panel_with_dir_new (const char *panel_name, const vfs_path_t * vpath)
+{
+    /* Unknown sizes of the panel at startup */
+    return panel_sized_with_dir_new (panel_name, 0, 0, 1, 1, vpath);
+}
+
+
+/* --------------------------------------------------------------------------------------------- */
+/**
  * Panel creation.
  *
- * @param panel_name the name of the panel for setup retieving
+ * @param panel_name name of panel for setup retieving
  *
  * @return new instance of WPanel
  */
@@ -207,7 +244,26 @@ gboolean do_cd (const vfs_path_t * new_dir_vpath, enum cd_enum cd_type);
 static inline WPanel *
 panel_new (const char *panel_name)
 {
-    return panel_new_with_dir (panel_name, NULL);
+    return panel_with_dir_new (panel_name, NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Panel creation with specified size.
+ *
+ * @param panel_name name of panel for setup retieving
+ * @param y y coordinate of top-left corner
+ * @param x x coordinate of top-left corner
+ * @param lines vertical size
+ * @param cols horizontal size
+ *
+ * @return new instance of WPanel
+ */
+
+static inline WPanel *
+panel_sized_new (const char *panel_name, int y, int x, int lines, int cols)
+{
+    return panel_sized_with_dir_new (panel_name, y, x, lines, cols, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
