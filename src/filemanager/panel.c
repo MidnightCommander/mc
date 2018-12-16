@@ -3721,6 +3721,7 @@ panel_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         return panel_execute_cmd (panel, parm);
 
     case MSG_DESTROY:
+        vfs_stamp_path (panel->cwd_vpath);
         /* unsubscribe from "history_load" event */
         mc_event_del (w->owner->event_group, MCEVENT_HISTORY_LOAD, panel_load_history, w);
         /* unsubscribe from "history_save" event */

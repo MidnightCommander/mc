@@ -903,12 +903,6 @@ done_mc (void)
     save_setup (auto_save_setup, panels_options.auto_save_setup);
 
     vfs_stamp_path (vfs_get_raw_current_dir ());
-
-    if ((current_panel != NULL) && (get_current_type () == view_listing))
-        vfs_stamp_path (current_panel->cwd_vpath);
-
-    if ((other_panel != NULL) && (get_other_type () == view_listing))
-        vfs_stamp_path (other_panel->cwd_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
