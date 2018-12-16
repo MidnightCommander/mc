@@ -264,7 +264,7 @@ const char *vfs_translate_path (const char *path);
 /* return new string */
 char *vfs_translate_path_n (const char *path);
 
-void vfs_stamp_path (const char *path);
+void vfs_stamp_path (const vfs_path_t * path);
 
 void vfs_release_path (const vfs_path_t * vpath);
 

@@ -899,18 +899,16 @@ done_mc (void)
      * We sync the profiles since the hotlist may have changed, while
      * we only change the setup data if we have the auto save feature set
      */
-    const char *curr_dir;
 
     save_setup (auto_save_setup, panels_options.auto_save_setup);
 
-    curr_dir = vfs_get_current_dir ();
-    vfs_stamp_path (curr_dir);
+    vfs_stamp_path (vfs_get_raw_current_dir ());
 
     if ((current_panel != NULL) && (get_current_type () == view_listing))
-        vfs_stamp_path (vfs_path_as_str (current_panel->cwd_vpath));
+        vfs_stamp_path (current_panel->cwd_vpath);
 
     if ((other_panel != NULL) && (get_other_type () == view_listing))
-        vfs_stamp_path (vfs_path_as_str (other_panel->cwd_vpath));
+        vfs_stamp_path (other_panel->cwd_vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */

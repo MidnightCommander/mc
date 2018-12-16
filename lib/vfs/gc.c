@@ -190,18 +190,15 @@ vfs_rmstamp (struct vfs_class *v, vfsid id)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-vfs_stamp_path (const char *path)
+vfs_stamp_path (const vfs_path_t * vpath)
 {
     vfsid id;
-    vfs_path_t *vpath;
     const vfs_path_element_t *path_element;
 
-    vpath = vfs_path_from_str (path);
     path_element = vfs_path_get_by_index (vpath, -1);
 
     id = vfs_getid (vpath);
     vfs_addstamp (path_element->class, id);
-    vfs_path_free (vpath);
 }
 
 /* --------------------------------------------------------------------------------------------- */
