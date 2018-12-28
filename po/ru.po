@@ -3,27 +3,32 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
+# aborodin <aborodin@vmail.ru>, 2011
+# AlexL <loginov.alex.valer@gmail.com>, 2015-2018
 # Alex Tkachenko <alex@bcs.zp.ua>, 1998
-# Evgeny Bulgakov <bgav@netvision.net.il>, 1999
-# Sergey Panov <sipan@mit.edu>, 1999
-# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999, 2014
-# Valek Filippov <frob@df.ru>, 2000
+# and Alex Tkachenko <alex@bcs.zp.ua>, 1998
+# aborodin <aborodin@vmail.ru>, 2009-2012
+# Andrew V. Samoilov <sav@bcs.zp.ua>, 1999,2014
 # Anton Sergeevich Chumak <nightfast@yahoo.co.uk>, 2005
-# Andrew Borodin <aborodin@vmail.ru>, 2011-2018
-# Ilia Maslakov <il.smind@gmail.com>, 2009
-# Slava Zanko <slavazanko@gmail.com>, 2009, 2011
-# AlexL <loginov.alex.valer@gmail.com>, 2015-2017
-# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
 # Dimitriy Ryazantcev <DJm00n@mail.ru>, 2015
-# Simple88, 2016
+# Evgeny Bulgakov <bgav@netvision.net.il>, 1999
+# Ilia Maslakov <il.smind@gmail.com>, 2009
+# Mr GreyWolf, 2016
+# Mr.GreyWolf, 2016
+# NaiLi (aka jamesjames) Rootaerc <theism@mail.ru>, 2012
 # Piotr Drąg <piotrdrag@gmail.com>, 2018
+# Sergey Panov <sipan@mit.edu>, 1999
+# Simple88, 2016
+# Simple88, 2016
+# Slava Zanko <slavazanko@gmail.com>, 2009,2011
+# Valek Filippov <frob@df.ru>, 2000
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-11-24 15:01+0300\n"
-"PO-Revision-Date: 2018-04-30 12:37+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"PO-Revision-Date: 2018-11-24 15:03+0000\n"
+"Last-Translator: aborodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -118,18 +123,22 @@ msgid ""
 "Number out of range (should be in byte range, 0 <= n <= 0xFF, expressed in "
 "hex)"
 msgstr ""
+"Число вне диапазона (должно быть в диапазоне байтов, 0 <= n <= 0xFF, "
+"шестнадцатеричное)"
 
 msgid "Invalid character"
-msgstr ""
+msgstr "Ошибочный символ"
 
 msgid "Unmatched quotes character"
-msgstr ""
+msgstr "Несогласованный символ кавычек"
 
 #, c-format
 msgid ""
 "Hex pattern error at position %d:\n"
 "%s."
 msgstr ""
+"Ошибка шестнадцатеричного шаблона на позиции %d:\n"
+"%s."
 
 msgid "Search string not found"
 msgstr "Искомая строка не найдена"
@@ -197,16 +206,18 @@ msgstr ""
 "Будет использован скин по умолчанию"
 
 msgid "True color not supported with ncurses."
-msgstr ""
+msgstr "True Color не поддерживается ncurses."
 
 msgid "True color not supported in this slang version."
-msgstr ""
+msgstr "True Color не поддерживается в этой версии slang."
 
 msgid "Your terminal doesn't even seem to support 256 colors."
-msgstr ""
+msgstr "Кажется, ваш терминал не поддерживает даже 256 цветов."
 
 msgid "Set COLORTERM=truecolor if your terminal really supports true colors."
 msgstr ""
+"Установите COLORTERM=truecolor, если ваш терминал действительно поддерживает "
+"True Color."
 
 msgid "Escape"
 msgstr "Клавиша Esc      "
@@ -1087,10 +1098,10 @@ msgid "Searching %s"
 msgstr "Ищем %s"
 
 msgid "File has hard-links. Detach before saving?"
-msgstr "Файл имеет жесткие ссылки. Отсоединить перед сохранением?"
+msgstr "Файл имеет жёсткие ссылки. Отсоединить перед сохранением?"
 
 msgid "The file has been modified in the meantime. Save anyway?"
-msgstr "Файл был изменен внешней программой. Сохранить поверх?"
+msgstr "Файл был изменён внешней программой. Сохранить поверх?"
 
 #, c-format
 msgid "Error writing to pipe: %s"
@@ -1667,7 +1678,7 @@ msgstr ""
 "Создан для Midnight Commander."
 
 msgid "Copyright (C) 1996-2018 the Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1996-2018 the Free Software Foundation"
 
 msgid "About"
 msgstr "О программе"
@@ -1956,7 +1967,7 @@ msgid "Sa&fe delete"
 msgstr "Безопасное &удаление"
 
 msgid "Safe overwrite"
-msgstr ""
+msgstr "Безопасная перезапись"
 
 msgid "A&uto save setup"
 msgstr "&Автосохранение настроек"
@@ -2306,7 +2317,7 @@ msgid "Link %s to:"
 msgstr "Создать ссылку с %s на:"
 
 msgid "Link"
-msgstr "Жесткая ссылка"
+msgstr "Жёсткая ссылка"
 
 #, c-format
 msgid "link: %s"
@@ -2405,16 +2416,16 @@ msgid "edit symlink: %s"
 msgstr "правка символической ссылки: %s"
 
 msgid "FTP to machine"
-msgstr "FTP-соединение с удаленной машиной"
+msgstr "FTP-соединение с удалённой машиной"
 
 msgid "SFTP to machine"
-msgstr "SFTP-соединение с удаленной машиной"
+msgstr "SFTP-соединение с удалённой машиной"
 
 msgid "Shell link to machine"
-msgstr "Shell-соединение с удаленной машиной"
+msgstr "Shell-соединение с удалённой машиной"
 
 msgid "SMB link to machine"
-msgstr "SMB-соединение с удаленной с машиной"
+msgstr "SMB-соединение с удалённой с машиной"
 
 msgid "Undelete files on an ext2 file system"
 msgstr "Восстановление файлов на файловой системе ext2"
@@ -2532,12 +2543,12 @@ msgstr "файлы/каталоги"
 msgid " with source mask:"
 msgstr " с исходным шаблоном:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
-"Невозможно получить свойства исходного файла \"%s\"\n"
+"Невозможно получить свойства исходного файла жёст. ссылки\"%s\"\n"
 "%s"
 
 #, c-format
@@ -2545,12 +2556,12 @@ msgid ""
 "Cannot create target hardlink \"%s\"\n"
 "%s"
 msgstr ""
-"Невозможно создать целевую ссылку \"%s\"\n"
+"Невозможно создать целевую жёст. ссылку \"%s\"\n"
 "%s"
 
 #, c-format
 msgid "Cannot create target hardlink \"%s\""
-msgstr "Невозможно создать целевую ссылку \"%s\""
+msgstr "Невозможно создать целевую жёст. ссылку \"%s\""
 
 #, c-format
 msgid ""
@@ -3062,11 +3073,11 @@ msgstr[3] "Завершено (пропущено %zu каталогов)"
 
 #, c-format
 msgid "Find File: \"%s\". Content: \"%s\""
-msgstr "Поиск файла:  \"%s\". Содержимое: \"%s\""
+msgstr "Поиск файла: \"%s\". Содержимое: \"%s\""
 
 #, c-format
 msgid "Find File: \"%s\""
-msgstr "Поиск файла:  \"%s\""
+msgstr "Поиск файла: \"%s\""
 
 msgid "Searching"
 msgstr "Ищем"
@@ -3343,7 +3354,7 @@ msgid "C&hmod"
 msgstr "Права &доступа"
 
 msgid "&Link"
-msgstr "&Жесткая ссылка"
+msgstr "&Жёсткая ссылка"
 
 msgid "&Symlink"
 msgstr "&Символическая ссылка"
@@ -4018,7 +4029,7 @@ msgid ""
 "in cpio archive\n"
 "%s"
 msgstr ""
-"Несогласованная жесткая ссылка\n"
+"Несогласованная жёсткая ссылка\n"
 "%s\n"
 "в архиве cpio\n"
 "%s"
@@ -4313,11 +4324,11 @@ msgstr "Ошибка %s при удалении каталога %s"
 
 #, c-format
 msgid "%s opening remote file %s"
-msgstr "%s при открытии файла %s с удаленной машины"
+msgstr "%s при открытии файла %s с удалённой машины"
 
 #, c-format
 msgid "%s removing remote file %s"
-msgstr "%s при удалении файла %s с удаленной машины"
+msgstr "%s при удалении файла %s с удалённой машины"
 
 #, c-format
 msgid "%s renaming files\n"
@@ -4364,7 +4375,7 @@ msgstr "при начале сканирования узла %d"
 
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: загрузка информации об удаленных файлах %d inodes"
+msgstr "undelfs: загрузка информации об удалённых файлах %d inodes"
 
 #, c-format
 msgid "while calling ext2_block_iterate %d"
@@ -4423,7 +4434,7 @@ msgid "Invalid value"
 msgstr "Неверный адрес"
 
 msgid "File was modified. Save with exit?"
-msgstr "Файл был изменен. Сохранить при выходе?"
+msgstr "Файл был изменён. Сохранить при выходе?"
 
 msgid "&Cancel quit"
 msgstr "&Прервать выход"

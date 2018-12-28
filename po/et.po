@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-11-24 15:01+0300\n"
-"PO-Revision-Date: 2018-04-30 12:37+0000\n"
+"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"PO-Revision-Date: 2018-10-21 01:34+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
 "Language: et\n"
@@ -2515,27 +2515,21 @@ msgstr "failid/kataloogid"
 msgid " with source mask:"
 msgstr "lähtemaskiga:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
-"Lähtefaili \"%s\" info päring nurjus\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target hardlink \"%s\"\n"
 "%s"
 msgstr ""
-"Nimeviida \"%s\" loomine nurjus sihtkohas\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create target hardlink \"%s\""
 msgstr ""
-"Nimeviida \"%s\" loomine nurjus sihtkohas\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3046,9 +3040,9 @@ msgstr[1] "Lõpetatud (%zu kataloogi eirati)"
 msgid "Find File: \"%s\". Content: \"%s\""
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Find File: \"%s\""
-msgstr "Failide otsimine"
+msgstr ""
 
 msgid "Searching"
 msgstr "Otsimine"
@@ -4512,6 +4506,3 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
-
-#~ msgid "Cannot make the hardlink"
-#~ msgstr "Jäikviida loomine nurjus"

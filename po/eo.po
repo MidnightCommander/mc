@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-11-24 15:01+0300\n"
-"PO-Revision-Date: 2018-04-30 12:37+0000\n"
+"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"PO-Revision-Date: 2018-10-21 01:34+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
 "Language: eo\n"
@@ -1342,7 +1342,7 @@ msgid "A&ll"
 msgstr "Ĉ&io"
 
 msgid "&Skip"
-msgstr "Preter&lasi"
+msgstr "&Preterlasi"
 
 msgid "Confirm replace"
 msgstr "Konfirmi anstataŭigon"
@@ -1653,7 +1653,7 @@ msgstr ""
 "verkita por Midnight Commander."
 
 msgid "Copyright (C) 1996-2018 the Free Software Foundation"
-msgstr ""
+msgstr "Kopirajto (C) 1996–2018 la Fondaĵo pri liberaj programoj"
 
 msgid "About"
 msgstr "Pri"
@@ -1942,7 +1942,7 @@ msgid "Sa&fe delete"
 msgstr "Sendanĝera &forigo"
 
 msgid "Safe overwrite"
-msgstr ""
+msgstr "Sekura anstataŭigo"
 
 msgid "A&uto save setup"
 msgstr "Aŭtomate konservi agor&don"
@@ -1996,7 +1996,7 @@ msgid "Navigation"
 msgstr "Navigo"
 
 msgid "L&ynx-like motion"
-msgstr "&Linko-simila movo"
+msgstr "&Lynx-simila movo"
 
 msgid "Pa&ge scrolling"
 msgstr "Paĝa &rulumado"
@@ -2046,7 +2046,7 @@ msgid "&Long file list"
 msgstr "&Longa dosierlisto"
 
 msgid "&User defined:"
-msgstr "&Uzanto difinata:"
+msgstr "U&zanto difinata:"
 
 msgid "columns"
 msgstr "kolumnojn"
@@ -2519,27 +2519,21 @@ msgstr "dosier(uj)ojn"
 msgid " with source mask:"
 msgstr " kun fonta masko:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
-"Ne eblas trovi fontan dosieron \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target hardlink \"%s\"\n"
 "%s"
 msgstr ""
-"Ne eblas krei celan molan ligilon \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create target hardlink \"%s\""
 msgstr ""
-"Ne eblas krei celan molan ligilon \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3048,11 +3042,11 @@ msgstr[1] "Finita (ignoris %zu dosierujojn)"
 
 #, c-format
 msgid "Find File: \"%s\". Content: \"%s\""
-msgstr ""
+msgstr "Trovi dosieron: \"%s\". Enhavo: \"%s\""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Find File: \"%s\""
-msgstr "Trovi dosieron"
+msgstr "Trovi dosieron: \"%s\""
 
 msgid "Searching"
 msgstr "Serĉanta"
@@ -3465,7 +3459,7 @@ msgid "&Left"
 msgstr "&Maldekstra"
 
 msgid "&Below"
-msgstr "Mals&upra"
+msgstr "&Malsupra"
 
 msgid "&Right"
 msgstr "D&ekstra"
@@ -3507,7 +3501,7 @@ msgid "sort|v"
 msgstr "sort|e"
 
 msgid "&Version"
-msgstr "&Eldono"
+msgstr "El&dono"
 
 #. TRANSLATORS: one single character to represent 'extension' sort mode
 #. TRANSLATORS: no need to translate 'sort', it's just a context prefix
@@ -4517,6 +4511,3 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
-
-#~ msgid "Cannot make the hardlink"
-#~ msgstr "Ne eblas fari la malmolan ligilon"

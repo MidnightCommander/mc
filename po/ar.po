@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-04-25 11:40+0300\n"
-"PO-Revision-Date: 2018-04-30 12:37+0000\n"
+"POT-Creation-Date: 2018-11-24 15:01+0300\n"
+"PO-Revision-Date: 2018-10-21 01:34+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/mc/mc/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -2401,7 +2401,20 @@ msgstr ""
 msgid " with source mask:"
 msgstr ""
 
-msgid "Cannot make the hardlink"
+#, c-format
+msgid ""
+"Cannot stat hardlink source file \"%s\"\n"
+"%s"
+msgstr ""
+
+#, c-format
+msgid ""
+"Cannot create target hardlink \"%s\"\n"
+"%s"
+msgstr ""
+
+#, c-format
+msgid "Cannot create target hardlink \"%s\""
 msgstr ""
 
 #, c-format
@@ -2840,6 +2853,14 @@ msgstr[2] ""
 msgstr[3] ""
 msgstr[4] ""
 msgstr[5] ""
+
+#, c-format
+msgid "Find File: \"%s\". Content: \"%s\""
+msgstr ""
+
+#, c-format
+msgid "Find File: \"%s\""
+msgstr ""
 
 msgid "Searching"
 msgstr ""

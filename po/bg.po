@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-11-24 15:01+0300\n"
-"PO-Revision-Date: 2018-04-30 12:37+0000\n"
+"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"PO-Revision-Date: 2018-10-21 01:34+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/mc/mc/language/bg/)\n"
 "Language: bg\n"
@@ -2508,27 +2508,21 @@ msgstr "файла/директории"
 msgid " with source mask:"
 msgstr " с маска:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
-"Не може да се stat-не изходния файл \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target hardlink \"%s\"\n"
 "%s"
 msgstr ""
-"Не може да се създаде целевия символичен линк \"%s\"\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create target hardlink \"%s\""
 msgstr ""
-"Не може да се създаде целевия символичен линк \"%s\"\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3040,9 +3034,9 @@ msgstr[1] "Завършено (игнорирани %zu директории)"
 msgid "Find File: \"%s\". Content: \"%s\""
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Find File: \"%s\""
-msgstr "Търси файл"
+msgstr ""
 
 msgid "Searching"
 msgstr "Търся"
@@ -4508,6 +4502,3 @@ msgstr "Да се продължи ли от началото?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на /ftp://some.host/editme.txt"
-
-#~ msgid "Cannot make the hardlink"
-#~ msgstr "Не може да направи hard-линка"

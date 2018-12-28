@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-11-24 15:01+0300\n"
-"PO-Revision-Date: 2018-05-03 09:01+0000\n"
-"Last-Translator: David Prudhomme <david7.prudhomme@gmail.com>\n"
+"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"PO-Revision-Date: 2018-10-21 01:34+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/mc/mc/language/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -2534,27 +2534,21 @@ msgstr "fichiers/répertoires"
 msgid " with source mask:"
 msgstr "avec masque source :"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible d'obtenir les caractéristiques du fichier source « %s »\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target hardlink \"%s\"\n"
 "%s"
 msgstr ""
-"Impossible de créer le lien symbolique cible « %s »\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create target hardlink \"%s\""
 msgstr ""
-"Impossible de créer le lien symbolique cible « %s »\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3065,9 +3059,9 @@ msgstr[1] "Terminé (%zu répertoires ignorés)"
 msgid "Find File: \"%s\". Content: \"%s\""
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Find File: \"%s\""
-msgstr "Recherche de fichier"
+msgstr ""
 
 msgid "Searching"
 msgstr "Recherche en cours"
@@ -4538,6 +4532,3 @@ msgstr "Continuer à partir du début ?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Impossible de récupérer localement le fichier /ftp://some.host/editme.txt"
-
-#~ msgid "Cannot make the hardlink"
-#~ msgstr "Impossible de créer le lien physique"

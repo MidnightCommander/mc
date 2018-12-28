@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-11-24 15:01+0300\n"
-"PO-Revision-Date: 2018-04-30 12:37+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"PO-Revision-Date: 2018-12-07 20:42+0000\n"
+"Last-Translator: Nikolay Korotkiy <sikmir@gmail.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/mc/mc/language/fi/)\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -116,7 +116,7 @@ msgid "Search string not found"
 msgstr "Etsittyä merkkijonoa ei löydy"
 
 msgid "Not implemented yet"
-msgstr ""
+msgstr "Ei ole vielä toteutettu"
 
 msgid "Num of replace tokens not equal to num of found tokens"
 msgstr ""
@@ -576,7 +576,7 @@ msgid "Press any key to continue..."
 msgstr "Paina mitä tahansa näppäintä jatkaaksesi"
 
 msgid "Cannot parse:"
-msgstr ""
+msgstr "Ei voi jäsentää:"
 
 msgid "More parsing errors will be ignored."
 msgstr ""
@@ -858,7 +858,7 @@ msgid "&Minimal (Find a smaller set of change)"
 msgstr ""
 
 msgid "Diff algorithm"
-msgstr ""
+msgstr "Diff-algoritmi"
 
 msgid "Diff extra options"
 msgstr ""
@@ -1041,7 +1041,7 @@ msgid "&Macintosh format (CR)"
 msgstr ""
 
 msgid "Enter file name:"
-msgstr ""
+msgstr "Anna tiedostonimi:"
 
 msgid "Change line breaks to:"
 msgstr ""
@@ -2218,7 +2218,7 @@ msgid "View file"
 msgstr ""
 
 msgid "Filename:"
-msgstr ""
+msgstr "Tiedostonimi:"
 
 msgid "Filtered view"
 msgstr ""
@@ -2418,15 +2418,15 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target hardlink \"%s\"\n"
 "%s"
-msgstr "Väliaikaishakemiston luonti epäonnistui %s: %s\n"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create target hardlink \"%s\""
-msgstr "Väliaikaishakemiston luonti epäonnistui %s: %s\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2865,9 +2865,9 @@ msgstr[1] ""
 msgid "Find File: \"%s\". Content: \"%s\""
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Find File: \"%s\""
-msgstr "Tiedosto: %s"
+msgstr ""
 
 msgid "Searching"
 msgstr ""

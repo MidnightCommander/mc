@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-11-24 15:01+0300\n"
-"PO-Revision-Date: 2018-04-30 12:37+0000\n"
+"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"PO-Revision-Date: 2018-10-21 01:34+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
 "Language: ko\n"
@@ -2411,23 +2411,21 @@ msgstr "파일/디렉터리"
 msgid " with source mask:"
 msgstr "소스 마스크:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
-" 파일을 저장할 수 없습니다.%s:\n"
-"%s "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target hardlink \"%s\"\n"
 "%s"
-msgstr "임시 디렉터리 \"%s\"을(를) 만들 수 없습니다 : %s\n"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create target hardlink \"%s\""
-msgstr "임시 디렉터리 \"%s\"을(를) 만들 수 없습니다 : %s\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2865,9 +2863,9 @@ msgstr[0] ""
 msgid "Find File: \"%s\". Content: \"%s\""
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Find File: \"%s\""
-msgstr "파일 찾기"
+msgstr ""
 
 msgid "Searching"
 msgstr "찾는 중"

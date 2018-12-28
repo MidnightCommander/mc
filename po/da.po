@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-11-24 15:01+0300\n"
-"PO-Revision-Date: 2018-05-15 17:16+0000\n"
+"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"PO-Revision-Date: 2018-10-26 11:43+0000\n"
 "Last-Translator: Morten Bo Johansen <mortenbo@hotmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/mc/mc/language/da/)\n"
 "Language: da\n"
@@ -78,7 +78,7 @@ msgid "Cannot create %s directory"
 msgstr "Kan ikke oprette mappen %s"
 
 msgid "FATAL: not a directory:"
-msgstr "KRITISK: Ikke en folder:"
+msgstr "KRITISK: Ikke en mappe:"
 
 #, c-format
 msgid "An error occurred while migrating user settings: %s"
@@ -193,7 +193,7 @@ msgid "True color not supported with ncurses."
 msgstr "Ægte farver understøttes ikke med ncurses."
 
 msgid "True color not supported in this slang version."
-msgstr "Ægter farver understøttes ikke i denne version af slang."
+msgstr "Ægte farver understøttes ikke i denne version af slang."
 
 msgid "Your terminal doesn't even seem to support 256 colors."
 msgstr "Din terminal ser ikke ud til at understøtte 256 farver."
@@ -586,7 +586,7 @@ msgstr "Kan ikke angive korrekte tilladelser for mappen %s\n"
 
 #, c-format
 msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Kan ikke oprette midlertidigt katalog %s: %s\n"
+msgstr "Kan ikke oprette midlertidig mappe %s: %s\n"
 
 #, c-format
 msgid "Temporary files will be created in %s\n"
@@ -653,7 +653,7 @@ msgid "Displays the current version"
 msgstr "Viser den nuværende version"
 
 msgid "Print data directory"
-msgstr "Udskriv datakatalog"
+msgstr "Udskriv datamappe"
 
 msgid "Print extended info about used data directories"
 msgstr "Udskriv udvidet information om brugte datamapper"
@@ -674,7 +674,7 @@ msgid "Disables subshell support"
 msgstr "Deaktiverer understøttelse af underskal"
 
 msgid "Log ftp dialog to specified file"
-msgstr "Gem ftp-meddelelser i angivet fil"
+msgstr "Gem ftp-dialog i angivet fil"
 
 msgid "Set debug level"
 msgstr "Angiv fejlsøgningsniveau"
@@ -1135,7 +1135,7 @@ msgid "&Do backups with following extension:"
 msgstr "&Udfør sikkerhedskopiering med følgende filendelse:"
 
 msgid "Check &POSIX new line"
-msgstr "Tjke &POSIX-linjeskift"
+msgstr "Tjek &POSIX-linjeskift"
 
 msgid "Edit Save Mode"
 msgstr "Rediger gemtilstand"
@@ -1307,13 +1307,13 @@ msgid "Subject"
 msgstr "Emne"
 
 msgid "Copies to"
-msgstr "Kopiér til"
+msgstr "Kopi til"
 
 msgid "Mail"
 msgstr "Post"
 
 msgid "Insert literal"
-msgstr "Indsæt litteral"
+msgstr "Indsæt konstantværdi"
 
 msgid "Press any key:"
 msgstr "Tryk på en tast:"
@@ -1390,7 +1390,7 @@ msgid "&Quit"
 msgstr "A&fslut"
 
 msgid "&Undo"
-msgstr "&Fortryd"
+msgstr "Fortr&yd"
 
 msgid "&Redo"
 msgstr "&Omgør"
@@ -1399,10 +1399,10 @@ msgid "&Toggle ins/overw"
 msgstr "&Skift ins/overw"
 
 msgid "To&ggle mark"
-msgstr "Ski&ft mærke"
+msgstr "Skift &mærke"
 
 msgid "&Mark columns"
-msgstr "&Marker kolonner"
+msgstr "Marker kolo&nner"
 
 msgid "Mark &all"
 msgstr "Marker &alle"
@@ -1423,7 +1423,7 @@ msgid "Co&py to clipfile"
 msgstr "Ko&pier til udklipsfil"
 
 msgid "&Cut to clipfile"
-msgstr "&Klip til udklipsfil"
+msgstr "K&lip til udklipsfil"
 
 msgid "Pa&ste from clipfile"
 msgstr "&Indsæt fra udklipsfil"
@@ -1432,7 +1432,7 @@ msgid "&Beginning"
 msgstr "&Begyndelse"
 
 msgid "&End"
-msgstr "&Slutning"
+msgstr "Sl&utning"
 
 msgid "&Search..."
 msgstr "&Søg..."
@@ -1444,13 +1444,13 @@ msgid "&Replace..."
 msgstr "&Erstat..."
 
 msgid "&Toggle bookmark"
-msgstr "&Skift bogmærke"
+msgstr "Sk&ift bogmærke"
 
 msgid "&Next bookmark"
 msgstr "&Næste bogmærke"
 
 msgid "&Prev bookmark"
-msgstr "&Forr. bogmærke"
+msgstr "F&orr. bogmærke"
 
 msgid "&Flush bookmarks"
 msgstr "&Fjern bogmærker"
@@ -1462,7 +1462,7 @@ msgid "&Toggle line state"
 msgstr "&Skift linjetilstand"
 
 msgid "Go to matching &bracket"
-msgstr "Gå til matchende &parentes"
+msgstr "Gå til mat&chende parentes"
 
 msgid "Toggle s&yntax highlighting"
 msgstr "Skift s&yntaksfremhævelse"
@@ -1480,10 +1480,10 @@ msgid "Encod&ing..."
 msgstr "Kodn&ing..."
 
 msgid "&Refresh screen"
-msgstr "&Opdater skærm"
+msgstr "Op&dater skærm"
 
 msgid "&Start/Stop record macro"
-msgstr "&Start/stop optagelse af makro"
+msgstr "Start/stop op&tagelse af makro"
 
 msgid "Delete macr&o..."
 msgstr "Slet makr&o..."
@@ -1492,13 +1492,13 @@ msgid "Record/Repeat &actions"
 msgstr "Optag/gentag &handlinger"
 
 msgid "S&pell check"
-msgstr "&Stavekontrol"
+msgstr "Sta&vekontrol"
 
 msgid "C&heck word"
 msgstr "&Kontrollér ord"
 
 msgid "Change spelling &language..."
-msgstr "Skift sprog for &stavekontrollen..."
+msgstr "Skift sp&rog for stavekontrollen..."
 
 msgid "&Mail..."
 msgstr "&Post..."
@@ -1522,7 +1522,7 @@ msgid "&External formatter"
 msgstr "&Eksternt formateringsværktøj"
 
 msgid "&Move"
-msgstr "&Flyt"
+msgstr "Fl&yt"
 
 msgid "&Resize"
 msgstr "&Ændr størrelse"
@@ -1546,7 +1546,7 @@ msgid "Save &mode..."
 msgstr "Gem&tilstand..."
 
 msgid "Learn &keys..."
-msgstr "Lær &taster..."
+msgstr "L&ær taster..."
 
 msgid "Syntax &highlighting..."
 msgstr "Syntaks&fremhævelse..."
@@ -1558,7 +1558,7 @@ msgid "&Menu file"
 msgstr "&Menufil"
 
 msgid "&Save setup"
-msgstr "&Gem opsætning"
+msgstr "Gem ops&ætning"
 
 msgid "&File"
 msgstr "&Fil"
@@ -1588,7 +1588,7 @@ msgid "&Dynamic paragraphing"
 msgstr "&Dynamiske paragraffer"
 
 msgid "Type &writer wrap"
-msgstr "&Skrivemaskine ombrydning"
+msgstr "&Skrivemaskine-ombrydning"
 
 msgid "Wrap mode"
 msgstr "Ombrydningstilstand"
@@ -1651,7 +1651,7 @@ msgid ""
 "A user friendly text editor\n"
 "written for the Midnight Commander."
 msgstr ""
-"En brugervenligst teksteditor\n"
+"En brugervenlig teksteditor\n"
 "skrevet til Midnight Commander."
 
 msgid "Copyright (C) 1996-2018 the Free Software Foundation"
@@ -1980,7 +1980,7 @@ msgid "Show &hidden files"
 msgstr "Vis &skjulte filer"
 
 msgid "&Fast dir reload"
-msgstr "Hurtig genindlæsning af &kataloger"
+msgstr "Hurtig genindlæsning af &mapper"
 
 msgid "Ma&rk moves down"
 msgstr "&Marker bevægelser ned"
@@ -2465,7 +2465,7 @@ msgid ""
 "Commander package."
 msgstr ""
 "Formatet på filen %smc.ext er ændret med version 3.0. Installationen ser ud "
-"til at have fejlet. Hent venligst en ny kopi fra Midnight Commandoer-pakken."
+"til at have fejlet. Hent venligst en ny kopi fra Midnight Commander-pakken."
 
 #, c-format
 msgid "%s file error"
@@ -2521,27 +2521,25 @@ msgstr "filer/mapper"
 msgid " with source mask:"
 msgstr " med kildemaske:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
-"Kan ikke stat kildefil »%s«\n"
+"Kan ikke stat hårde henvisninger for kildefil \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target hardlink \"%s\"\n"
 "%s"
 msgstr ""
-"Kan ikke oprette symbolsk målhenvisning »%s«\n"
+"Kan ikke oprette målets hårde henvisninger for \"%s\"\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create target hardlink \"%s\""
-msgstr ""
-"Kan ikke oprette symbolsk målhenvisning »%s«\n"
-"%s"
+msgstr "Kan ikke oprette målets hårde henvisninger for \"%s\""
 
 #, c-format
 msgid ""
@@ -2904,7 +2902,7 @@ msgid "&Update"
 msgstr "&Opdater"
 
 msgid "If &size differs"
-msgstr "hvis &størrelsen er forskellig"
+msgstr "Hvis &størrelsen er forskellig"
 
 msgid "File exists"
 msgstr "Fil findes"
@@ -3051,17 +3049,17 @@ msgstr[1] "Færdig (ignorerede %zu mapper)"
 
 #, c-format
 msgid "Find File: \"%s\". Content: \"%s\""
-msgstr ""
+msgstr "Find fil: \"%s\". Indhold: \"%s\""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Find File: \"%s\""
-msgstr "Find fil"
+msgstr "Find fil: \"%s\""
 
 msgid "Searching"
 msgstr "Søger"
 
 msgid "Change &to"
-msgstr "Ændr &til"
+msgstr "Skift &til"
 
 msgid "&Free VFSs now"
 msgstr "&Frigør VFS'er nu"
@@ -3079,7 +3077,7 @@ msgid "New &group"
 msgstr "Ny &gruppe"
 
 msgid "New &entry"
-msgstr "Ny &punkt"
+msgstr "Nyt &menupunkt"
 
 msgid "&Insert"
 msgstr "&Indsæt"
@@ -3113,7 +3111,7 @@ msgid "&Append"
 msgstr "&Tilføj"
 
 msgid "New hotlist entry"
-msgstr "Nyt punkt i hotlisten"
+msgstr "Nyt menupunkt i hotlisten"
 
 msgid "Directory label:"
 msgstr "Mappeetiket:"
@@ -3129,7 +3127,7 @@ msgstr "Navn på ny gruppe:"
 
 #, c-format
 msgid "Are you sure you want to remove entry \"%s\"?"
-msgstr "Er du sikker på, at du vil fjerne punktet \"%s\"?"
+msgstr "Er du sikker på, at du vil fjerne menupunktet \"%s\"?"
 
 #, c-format
 msgid ""
@@ -3861,16 +3859,16 @@ msgid "Warning: Cannot change to %s.\n"
 msgstr "Advarsel: Kunne ikke skifte til %s.\n"
 
 msgid "Using the S-Lang library with terminfo database\n"
-msgstr "Bruger S-Lang-biblioteket med terminfodatabasen\n"
+msgstr "Bruger S-Lang-biblioteket med terminfo-databasen\n"
 
 msgid "Using the ncurses library\n"
-msgstr "Bruger ncursesbiblioteket\n"
+msgstr "Bruger ncurses-biblioteket\n"
 
 msgid "Using the ncursesw library\n"
-msgstr "Bruger ncurseswbiblioteket\n"
+msgstr "Bruger ncursesw-biblioteket\n"
 
 msgid "With builtin Editor\n"
-msgstr "Med indbygget redigeringsprogram\n"
+msgstr "Med indbygget teksteditor\n"
 
 msgid "With optional subshell support\n"
 msgstr "Med valgfri underskalsunderstøttelse\n"
@@ -3888,13 +3886,13 @@ msgid "With mouse support on xterm\n"
 msgstr "Med museunderstøttelse i xterm\n"
 
 msgid "With support for X11 events\n"
-msgstr "Med understøttelse for X11-hændelser\n"
+msgstr "Med understøttelse af X11-hændelser\n"
 
 msgid "With internationalization support\n"
-msgstr "Med understøttelse for internationalisering\n"
+msgstr "Med understøttelse af internationalisering\n"
 
 msgid "With multiple codepages support\n"
-msgstr "Med understøttelse for flere tegnsæt\n"
+msgstr "Med understøttelse af flere tegnsæt\n"
 
 #, c-format
 msgid "Built with GLib %d.%d.%d\n"
@@ -4267,7 +4265,7 @@ msgid "sftp: Failure establishing SSH session"
 msgstr "sftp: Kunne ikke etablere SSH-session"
 
 msgid "sftp: No file handler data present for reading file"
-msgstr "sftp: Ingen filbehandlerdata tilstedet til at læse fil"
+msgstr "sftp: Ingen tilgængelig filbehandlerdata til læsning af fil"
 
 #, c-format
 msgid "sftp: socket error: %s"
@@ -4520,6 +4518,3 @@ msgstr "Fortsæt fra begyndelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan ikke hente en lokal kopi af /ftp://en.vært/editme.txt"
-
-#~ msgid "Cannot make the hardlink"
-#~ msgstr "Kan ikke lave den hårde henvisning"

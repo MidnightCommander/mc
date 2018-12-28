@@ -4,7 +4,7 @@
 #
 # Translators:
 # Dušan Lago <inactive+dudko@transifex.com>, 2011
-# helix84 <helix84@centrum.sk>, 2015
+# Ivan Masár <helix84@centrum.sk>, 2015
 # Jajo Pajo, 2016
 # Jose Riha <jose1711@gmail.com>, 2012
 # Jose Riha <jose1711@gmail.com>, 2012,2017
@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-11-24 15:01+0300\n"
-"PO-Revision-Date: 2018-04-30 12:37+0000\n"
+"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"PO-Revision-Date: 2018-10-21 01:34+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/mc/mc/language/sk/)\n"
 "Language: sk\n"
@@ -2519,27 +2519,21 @@ msgstr "súbory/adresáre"
 msgid " with source mask:"
 msgstr " so zdrojovou maskou:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
-"Nemožno vykonať stat() zdrojového súboru „%s“\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target hardlink \"%s\"\n"
 "%s"
 msgstr ""
-"Nemožno vytvoriť cieľový sym. odkaz „%s“\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create target hardlink \"%s\""
 msgstr ""
-"Nemožno vytvoriť cieľový sym. odkaz „%s“\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3047,9 +3041,9 @@ msgstr[3] ""
 msgid "Find File: \"%s\". Content: \"%s\""
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Find File: \"%s\""
-msgstr "Nájsť súbor"
+msgstr ""
 
 msgid "Searching"
 msgstr "Hľadá sa"
@@ -4521,6 +4515,3 @@ msgstr "Pokračovať od začiatku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nemožno stiahnuť lokálnu kópiu /ftp://some.host/editme.txt"
-
-#~ msgid "Cannot make the hardlink"
-#~ msgstr "Nemožno vytvoriť pevný odkaz"

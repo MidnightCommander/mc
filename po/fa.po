@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-11-24 15:01+0300\n"
-"PO-Revision-Date: 2018-04-30 12:37+0000\n"
+"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"PO-Revision-Date: 2018-10-21 01:34+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Persian (http://www.transifex.com/mc/mc/language/fa/)\n"
 "Language: fa\n"
@@ -2411,15 +2411,15 @@ msgid ""
 "%s"
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target hardlink \"%s\"\n"
 "%s"
-msgstr "امکان ساخت پوشه‌ی موقت %s وجود ندارد: %s\n"
+msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create target hardlink \"%s\""
-msgstr "امکان ساخت پوشه‌ی موقت %s وجود ندارد: %s\n"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -2858,9 +2858,9 @@ msgstr[1] ""
 msgid "Find File: \"%s\". Content: \"%s\""
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Find File: \"%s\""
-msgstr "جستجوی فایل"
+msgstr ""
 
 msgid "Searching"
 msgstr "در حال جستجو"

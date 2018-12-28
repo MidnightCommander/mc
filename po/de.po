@@ -5,7 +5,7 @@
 # Translators:
 # Atha Translate, 2016
 # cheese <cheese@nosuchhost.net>, 2016
-# Ettore Atalan <atalanttore@googlemail.com>, 2015-2017
+# Ettore Atalan <atalanttore@googlemail.com>, 2015-2018
 # Fabian Affolter <fab@fedoraproject.org>, 2012-2013
 # Karsten <waldstadt@web.de>, 2016
 # Larson März <larson@protonmail.ch>, 2016
@@ -18,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-11-24 15:01+0300\n"
-"PO-Revision-Date: 2018-04-30 12:37+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"PO-Revision-Date: 2018-10-21 17:54+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German (http://www.transifex.com/mc/mc/language/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -597,7 +597,7 @@ msgstr "Kann Berechtigungen für das Verzeichnis \"%s\" nicht setzen\n"
 
 #, c-format
 msgid "Cannot create temporary directory %s: %s\n"
-msgstr "Kann temporäres Verzeichnis \"%s\" nicht anlegen: %s\n"
+msgstr "Kann temporäres Verzeichnis \"%s\" nicht erstellen: %s\n"
 
 #, c-format
 msgid "Temporary files will be created in %s\n"
@@ -909,7 +909,7 @@ msgid ""
 "Cannot create temporary diff file\n"
 "%s"
 msgstr ""
-"Kann temporäre Diffdatei nicht anlegen\n"
+"Kann temporäre Diffdatei nicht erstellen\n"
 "%s"
 
 #, c-format
@@ -918,7 +918,7 @@ msgid ""
 "%s%s\n"
 "%s"
 msgstr ""
-"Kann Backupdatei nicht anlegen\n"
+"Kann Sicherungsdatei nicht erstellen\n"
 "%s%s\n"
 "%s"
 
@@ -927,7 +927,7 @@ msgid ""
 "Cannot create temporary merge file\n"
 "%s"
 msgstr ""
-"Kann temporäre Mergedatei nicht anlegen\n"
+"Kann temporäre Mergedatei nicht erstellen\n"
 "%s"
 
 msgid "&Fastest (Assume large files)"
@@ -1671,7 +1671,7 @@ msgstr ""
 "geschrieben für Midnight Commander."
 
 msgid "Copyright (C) 1996-2018 the Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1996-2018 the Free Software Foundation"
 
 msgid "About"
 msgstr "Über"
@@ -1818,7 +1818,7 @@ msgstr ""
 
 #, c-format
 msgid "Cannot fetch a local copy of %s"
-msgstr "Kann keine lokale Kopie von %s anlegen"
+msgstr "Kann lokale Kopie von %s nicht erstellen"
 
 msgid "The shell is already running a command"
 msgstr "Die Shell führt bereits einen Befehl aus"
@@ -1960,7 +1960,7 @@ msgid "Sa&fe delete"
 msgstr "Sicheres &löschen"
 
 msgid "Safe overwrite"
-msgstr ""
+msgstr "Sicheres überschreiben"
 
 msgid "A&uto save setup"
 msgstr "Einstellungen auto&m. speichern"
@@ -2465,7 +2465,7 @@ msgid ""
 "Cannot create temporary command file\n"
 "%s"
 msgstr ""
-"Kann temporäre Befehlsdatei nicht anlegen\n"
+"Kann temporäre Befehlsdatei nicht erstellen\n"
 "%s"
 
 #, c-format
@@ -2537,27 +2537,25 @@ msgstr "Dateien/Verzeichnisse"
 msgid " with source mask:"
 msgstr " mit Quellmaske:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
-"Kann Quelldatei \"%s\" nicht untersuchen\n"
+"Kann Quelldatei des harten Links \"%s\" nicht untersuchen\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target hardlink \"%s\"\n"
 "%s"
 msgstr ""
-"Kann das Ziel des symbolischen Links \"%s\" nicht anlegen\n"
+"Kann das Ziel des harten Links \"%s\" nicht erstellen\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create target hardlink \"%s\""
-msgstr ""
-"Kann das Ziel des symbolischen Links \"%s\" nicht anlegen\n"
-"%s"
+msgstr "Kann das Ziel des harten Links \"%s\" nicht erstellen"
 
 #, c-format
 msgid ""
@@ -2573,7 +2571,7 @@ msgid ""
 "Option Stable Symlinks will be disabled"
 msgstr ""
 "Kann keine stabilen symbolischen Links auf nicht-lokalen Dateisystemen "
-"anlegen:\n"
+"erstellen:\n"
 "\n"
 "Einstellung Stabile Symbolische Links werden deaktiviert"
 
@@ -2582,7 +2580,7 @@ msgid ""
 "Cannot create target symlink \"%s\"\n"
 "%s"
 msgstr ""
-"Kann das Ziel des symbolischen Links \"%s\" nicht anlegen\n"
+"Kann das Ziel des symbolischen Links \"%s\" nicht erstellen\n"
 "%s"
 
 #, c-format
@@ -2709,7 +2707,7 @@ msgid ""
 "Cannot create special file \"%s\"\n"
 "%s"
 msgstr ""
-"Kann Spezialdatei \"%s\" nicht anlegen\n"
+"Kann Spezialdatei \"%s\" nicht erstellen\n"
 "%s"
 
 #, c-format
@@ -2752,7 +2750,7 @@ msgid ""
 "Cannot create target file \"%s\"\n"
 "%s"
 msgstr ""
-"Kann Zieldatei \"%s\" nicht anlegen\n"
+"Kann Zieldatei \"%s\" nicht erstellen\n"
 "%s"
 
 #, c-format
@@ -2849,7 +2847,7 @@ msgid ""
 "Cannot create target directory \"%s\"\n"
 "%s"
 msgstr ""
-"Kann Zielverzeichnis \"%s\" nicht anlegen\n"
+"Kann Zielverzeichnis \"%s\" nicht erstellen\n"
 "%s"
 
 #, c-format
@@ -3067,11 +3065,11 @@ msgstr[1] "Abgeschlossen (ignorierte %zu Verzeichnisse)"
 
 #, c-format
 msgid "Find File: \"%s\". Content: \"%s\""
-msgstr ""
+msgstr "Datei suchen: \"%s\". Inhalt: \"%s\""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Find File: \"%s\""
-msgstr "Datei suchen"
+msgstr "Datei suchen: \"%s\""
 
 msgid "Searching"
 msgstr "Suche "
@@ -4178,7 +4176,7 @@ msgstr "ftpfs: Ungültige Rechneradresse."
 
 #, c-format
 msgid "ftpfs: could not create socket: %s"
-msgstr "ftpfs: konnte Socket %s nicht anlegen "
+msgstr "ftpfs: konnte Socket %s nicht erstellen "
 
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: konnte passiven Modus nicht einstellen"
@@ -4540,7 +4538,4 @@ msgid "Continue from beginning?"
 msgstr "Am Anfang fortsetzen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
-msgstr "Kann keine lokale Kopie von /ftp://some.host/editme.txt anlegen"
-
-#~ msgid "Cannot make the hardlink"
-#~ msgstr "Kann Hardlink nicht erzeugen"
+msgstr "Kann lokale Kopie von /ftp://some.host/editme.txt nicht erstellen"

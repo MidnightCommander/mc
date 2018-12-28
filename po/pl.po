@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-11-24 15:01+0300\n"
-"PO-Revision-Date: 2018-05-01 15:44+0000\n"
+"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"PO-Revision-Date: 2018-10-21 15:33+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/mc/mc/language/pl/)\n"
 "Language: pl\n"
@@ -2527,27 +2527,26 @@ msgstr "pliki/katalogi"
 msgid " with source mask:"
 msgstr " z maską źródłową:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
-"Nie można wykonać polecenia stat na pliku źródłowym „%s”\n"
+"Nie można wykonać polecenia stat na twardym dowiązaniu pliku źródłowego "
+"„%s”\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target hardlink \"%s\"\n"
 "%s"
 msgstr ""
-"Nie można utworzyć docelowego dowiązania symbolicznego „%s”\n"
+"Nie można utworzyć docelowego twardego dowiązania „%s”\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create target hardlink \"%s\""
-msgstr ""
-"Nie można utworzyć docelowego dowiązania symbolicznego „%s”\n"
-"%s"
+msgstr "Nie można utworzyć docelowego twardego dowiązania „%s”"
 
 #, c-format
 msgid ""
@@ -3018,28 +3017,28 @@ msgid "Content:"
 msgstr "Zawartość:"
 
 msgid "Sea&rch for content"
-msgstr "Wyszukiwanie &treści"
+msgstr "Wyszukiwanie zawar&tości"
 
 msgid "Case sens&itive"
 msgstr "Rozróżn&ianie wielkości"
 
 msgid "A&ll charsets"
-msgstr "Wszystkie &zest. znaków"
+msgstr "Wsz&ystkie zest. znaków"
 
 msgid "Fir&st hit"
-msgstr "Pier&wsze trafienie"
+msgstr "&Pierwsze trafienie"
 
 msgid "&Tree"
 msgstr "&Drzewo"
 
 msgid "Find File"
-msgstr "Znajdź plik"
+msgstr "Wyszukiwanie pliku"
 
 msgid "Start at:"
 msgstr "Rozpoczęcie w:"
 
 msgid "Ena&ble ignore directories:"
-msgstr "Włączenie i&gnorowania katalogów:"
+msgstr "Włączenie ig&norowania katalogów:"
 
 #, c-format
 msgid "Grepping in %s"
@@ -3058,11 +3057,11 @@ msgstr[3] "Ukończono (zignorowano %zu katalogów)"
 
 #, c-format
 msgid "Find File: \"%s\". Content: \"%s\""
-msgstr ""
+msgstr "Wyszukiwanie pliku: „%s”. Zawartość: „%s”"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Find File: \"%s\""
-msgstr "Znajdź plik"
+msgstr "Wyszukiwanie pliku: „%s”"
 
 msgid "Searching"
 msgstr "Wyszukiwanie"
@@ -4016,9 +4015,9 @@ msgid ""
 "in cpio archive\n"
 "%s"
 msgstr ""
-"Niespójne dowiązania pliku\n"
+"Niespójne twarde dowiązania pliku\n"
 "%s\n"
-"w archiwum cpio\n"
+"w archiwum cpio\n"
 "%s"
 
 #, c-format
@@ -4535,6 +4534,3 @@ msgstr "Kontynuować od początku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Nie można pobrać lokalnej kopii /ftp://jakiś.komputer/modyfikuj_mnie.txt"
-
-#~ msgid "Cannot make the hardlink"
-#~ msgstr "Nie można utworzyć dowiązania"

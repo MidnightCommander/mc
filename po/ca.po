@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-11-24 15:01+0300\n"
-"PO-Revision-Date: 2018-05-21 16:46+0000\n"
-"Last-Translator: Marc Tormo i Bochaca <mtbochaca@gmail.com>\n"
+"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"PO-Revision-Date: 2018-10-22 11:52+0000\n"
+"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -304,10 +304,10 @@ msgid "End key"
 msgstr "Posició final"
 
 msgid "Page Up"
-msgstr "Re. Pàg."
+msgstr "Re Pàg"
 
 msgid "Page Down"
-msgstr "Av. Pàg."
+msgstr "Av Pàg"
 
 msgid "/ on keypad"
 msgstr "/ en el teclat numèric"
@@ -340,10 +340,10 @@ msgid "End on keypad"
 msgstr "Final en el teclat numèric"
 
 msgid "Page Down keypad"
-msgstr "Av. Pàg. en el teclat numèric"
+msgstr "Av Pàg en el teclat numèric"
 
 msgid "Page Up keypad"
-msgstr "Re. Pàg. en el teclat numèric"
+msgstr "Re Pàg en el teclat numèric"
 
 msgid "Insert on keypad"
 msgstr "Insereix en el teclat numèric"
@@ -1955,7 +1955,7 @@ msgid "Sa&fe delete"
 msgstr "Suprimeix de &forma segura"
 
 msgid "Safe overwrite"
-msgstr "Sobre-escriptura segura"
+msgstr "Sobreescriptura segura"
 
 msgid "A&uto save setup"
 msgstr "Desa &automàticament la configuració"
@@ -2532,27 +2532,25 @@ msgstr "fitxers/directoris"
 msgid " with source mask:"
 msgstr " amb màscara d'origen:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
-"No s'ha pogut fer estat al fitxer d'origen «%s»\n"
+"No s'ha pogut visualitzar el fitxer d'origen de l'enllaç dur «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target hardlink \"%s\"\n"
 "%s"
 msgstr ""
-"No s'ha pogut crear l'enllaç simbòlic de destinació «%s»\n"
+"No s'ha pogut crear l'enllaç dur de destinació «%s»\n"
 "%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create target hardlink \"%s\""
-msgstr ""
-"No s'ha pogut crear l'enllaç simbòlic de destinació «%s»\n"
-"%s"
+msgstr "No s'ha pogut crear l'enllaç dur de destinació «%s»"
 
 #, c-format
 msgid ""
@@ -3062,11 +3060,11 @@ msgstr[1] "Finalitzada (s'han ignorat %zu directoris)"
 
 #, c-format
 msgid "Find File: \"%s\". Content: \"%s\""
-msgstr ""
+msgstr "Troba el fitxer: «%s». Contingut: «%s»"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Find File: \"%s\""
-msgstr "Cerca el fitxer"
+msgstr "Troba el fitxer: «%s»"
 
 msgid "Searching"
 msgstr "Cercant"
@@ -4540,6 +4538,3 @@ msgstr "Continuo des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
-
-#~ msgid "Cannot make the hardlink"
-#~ msgstr "No s'ha pogut crear l'enllaç dur"

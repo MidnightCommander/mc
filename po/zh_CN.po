@@ -6,7 +6,7 @@
 # Jacques Yip <cong-ye@163.com>, 2017
 # Jake Li <gnozil@gmail.com>, 2012
 # Kenneth Cheung <zjhken01@163.com>, 2018
-# shuyu liu <liushuyu011@gmail.com>, 2016
+# liushuyu011 <liushuyu011@gmail.com>, 2016
 # Mingcong Bai <jeffbai@aosc.xyz>, 2016,2018
 # qingxianhao <qinghao1@foxmail.com>, 2012
 # qingxianhao <qinghao1@foxmail.com>, 2012
@@ -17,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-11-24 15:01+0300\n"
-"PO-Revision-Date: 2018-05-10 15:41+0000\n"
-"Last-Translator: Mingcong Bai <jeffbai@aosc.xyz>\n"
+"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"PO-Revision-Date: 2018-10-21 01:34+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/mc/mc/language/"
 "zh_CN/)\n"
 "Language: zh_CN\n"
@@ -2519,27 +2519,21 @@ msgstr "文件/目录"
 msgid " with source mask:"
 msgstr " 源掩码: "
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
-"无法 stat 源文件“%s”\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target hardlink \"%s\"\n"
 "%s"
 msgstr ""
-"无法创建目标符号链接“%s”\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create target hardlink \"%s\""
 msgstr ""
-"无法创建目标符号链接“%s”\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3049,9 +3043,9 @@ msgstr[0] "完成 (忽略 %zu 个目录)"
 msgid "Find File: \"%s\". Content: \"%s\""
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Find File: \"%s\""
-msgstr "搜索文件"
+msgstr ""
 
 msgid "Searching"
 msgstr "正在搜索"
@@ -4512,6 +4506,3 @@ msgstr "从头继续搜索?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "无法获取 /ftp://some.host/editme.txt 的本地副本"
-
-#~ msgid "Cannot make the hardlink"
-#~ msgstr "无法创建硬链接"

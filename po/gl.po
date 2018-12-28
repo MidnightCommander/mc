@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-11-24 15:01+0300\n"
-"PO-Revision-Date: 2018-04-30 12:37+0000\n"
+"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"PO-Revision-Date: 2018-10-21 01:34+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Galician (http://www.transifex.com/mc/mc/language/gl/)\n"
 "Language: gl\n"
@@ -2519,27 +2519,21 @@ msgstr "ficheiros/directorios"
 msgid " with source mask:"
 msgstr " con máscara de orixe:"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
-"Non é posíbel identificar o ficheiro orixe «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Cannot create target hardlink \"%s\"\n"
 "%s"
 msgstr ""
-"Non é posíbel crear a ligazón simbólica «%s»\n"
-"%s"
 
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create target hardlink \"%s\""
 msgstr ""
-"Non é posíbel crear a ligazón simbólica «%s»\n"
-"%s"
 
 #, c-format
 msgid ""
@@ -3045,9 +3039,9 @@ msgstr[1] ""
 msgid "Find File: \"%s\". Content: \"%s\""
 msgstr ""
 
-#, fuzzy, c-format
+#, c-format
 msgid "Find File: \"%s\""
-msgstr "Buscar ficheiro"
+msgstr ""
 
 msgid "Searching"
 msgstr "Buscando"
@@ -4513,6 +4507,3 @@ msgstr "Continuar desde o principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Non é posíbel obter unha copia local de /ftp://some.host/editme.txt"
-
-#~ msgid "Cannot make the hardlink"
-#~ msgstr "Non é posíbel crear a ligazón permanente"
