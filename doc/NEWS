@@ -1,3 +1,42 @@
+Version 4.8.22
+
+- Core
+
+  * Support BTRFS's file clone operation (#1983)
+  * Find file: show pattern and content in the results window title (#3453)
+  * Find file: remember state (empty or not) of Content field (#3924)
+  * Improve support IBM i (#3927)
+  * Improve handling of hard link creation errors (#3678)
+  * Support user-defined prompt in the Fish subshell (#3944)
+
+- VFS
+
+  * sftp: preserve atime and mtime (#3917)
+
+- Editor
+
+  * man page cleanup (#3918)
+  * syntax:
+    * PHP - highlight keyword 'null' (#3920)
+    * Meson - initial implementation (#3940)
+
+- Misc
+
+  * ext.d: use MPV as a fallback for mplayer -identify (#3919)
+  * ext.d: improve recognition of MS Office formats (#3929)
+  * Code cleanup (#3915)
+  * Cleanup hint files
+
+- Fixes
+
+  * Won't compile for Apple (#3930)
+  * "Cannot create target file" when target has backslash space in the name (#3923)
+  * Quiet single file overwrite (#3908)
+  * Show error message for each not-installed program when view documents in MS Word and Excel formats (#3926)
+  * Crash when trying some sftp connections (#3937)
+  * Crash when return to filemanager from subshell (#3943)
+
+
 Version 4.8.21
 
 - Core
