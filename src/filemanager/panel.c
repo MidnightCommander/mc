@@ -487,10 +487,14 @@ ilog10 (dev_t n)
 static void
 format_device_number (char *buf, size_t bufsize, dev_t dev)
 {
-    dev_t major_dev = major (dev);
-    dev_t minor_dev = minor (dev);
-    unsigned int major_digits = ilog10 (major_dev);
-    unsigned int minor_digits = ilog10 (minor_dev);
+    dev_t major_dev, minor_dev;
+    unsigned int major_digits, minor_digits;
+
+    major_dev = major (dev);
+    major_digits = ilog10 (major_dev);
+
+    minor_dev = minor (dev);
+    minor_digits = ilog10 (minor_dev);
 
     g_assert (bufsize >= 1);
 
@@ -1891,7 +1895,9 @@ use_display_format (WPanel * panel, const char *format, char **error, gboolean i
     if (usable_columns > total_cols && expand_top != 0)
     {
         int i;
-        int spaces = (usable_columns - total_cols) / expand_top;
+        int spaces;
+
+        spaces = (usable_columns - total_cols) / expand_top;
 
         for (i = 0, darr = home; darr && (i < expand_top); darr = darr->next)
             if (darr->expand)
@@ -1911,7 +1917,6 @@ use_display_format (WPanel * panel, const char *format, char **error, gboolean i
 static const char *
 panel_format (WPanel * panel)
 {
-
     switch (panel->list_format)
     {
     case list_long:
@@ -2011,7 +2016,9 @@ force_maybe_cd (void)
 {
     if (cmdline->buffer[0] == '\0')
     {
-        vfs_path_t *up_dir = vfs_path_from_str ("..");
+        vfs_path_t *up_dir;
+
+        up_dir = vfs_path_from_str ("..");
         do_cd (up_dir, cd_exact);
         vfs_path_free (up_dir);
         return MSG_HANDLED;
@@ -2071,7 +2078,6 @@ panel_select_ext_cmd (void)
 
     mc_search_free (search);
     g_free (reg_exp);
-
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -2813,13 +2819,10 @@ do_enter_on_file_entry (file_entry_t * fe)
     if (!ok)
         return FALSE;
 
-    if (confirm_execute)
-    {
-        if (query_dialog
-            (_("The Midnight Commander"),
-             _("Do you really want to execute?"), D_NORMAL, 2, _("&Yes"), _("&No")) != 0)
-            return TRUE;
-    }
+    if (confirm_execute
+        && query_dialog (_("The Midnight Commander"), _("Do you really want to execute?"), D_NORMAL,
+                         2, _("&Yes"), _("&No")) != 0)
+        return TRUE;
 
     if (!vfs_current_is_local ())
     {
@@ -2829,8 +2832,7 @@ do_enter_on_file_entry (file_entry_t * fe)
         tmp_vpath = vfs_path_append_new (vfs_get_raw_current_dir (), fe->fname, (char *) NULL);
         ret = mc_setctl (tmp_vpath, VFS_SETCTL_RUN, NULL);
         vfs_path_free (tmp_vpath);
-        /* We took action only if the dialog was shown or the execution
-         * was successful */
+        /* We took action only if the dialog was shown or the execution was successful */
         return confirm_execute || (ret == 0);
     }
 
@@ -2877,7 +2879,6 @@ static void
 chdir_other_panel (WPanel * panel)
 {
     const file_entry_t *entry = &panel->dir.list[panel->selected];
-
     vfs_path_t *new_dir_vpath;
     char *sel_entry = NULL;
 
@@ -2952,20 +2953,21 @@ chdir_to_readlink (WPanel * panel)
     if (!ok)
         return;
 
-    buffer[i] = 0;
+    buffer[i] = '\0';
     if (!S_ISDIR (st.st_mode))
     {
         char *p;
 
         p = strrchr (buffer, PATH_SEP);
-        if (p && !p[1])
+        if (p != NULL && p[1] == '\0')
         {
-            *p = 0;
+            *p = '\0';
             p = strrchr (buffer, PATH_SEP);
         }
-        if (!p)
+        if (p == NULL)
             return;
-        p[1] = 0;
+
+        p[1] = '\0';
     }
     if (IS_PATH_SEP (*buffer))
         new_dir_vpath = vfs_path_from_str (buffer);
@@ -3162,7 +3164,6 @@ panel_content_scroll_left (WPanel * panel)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-
 /**
  * panel_content_scroll_right:
  * @param panel the pointer to the panel on which we operate
@@ -3215,7 +3216,7 @@ static const char *
 get_parent_dir_name (const vfs_path_t * cwd_vpath, const vfs_path_t * lwd_vpath)
 {
     size_t llen, clen;
-    const char *p, *cwd, *lwd;
+    const char *p, *lwd;
 
     llen = vfs_path_len (lwd_vpath);
     clen = vfs_path_len (cwd_vpath);
@@ -3223,13 +3224,16 @@ get_parent_dir_name (const vfs_path_t * cwd_vpath, const vfs_path_t * lwd_vpath)
     if (llen <= clen)
         return NULL;
 
-    cwd = vfs_path_as_str (cwd_vpath);
     lwd = vfs_path_as_str (lwd_vpath);
 
     p = g_strrstr (lwd, VFS_PATH_URL_DELIMITER);
 
     if (p == NULL)
     {
+        const char *cwd;
+
+        cwd = vfs_path_as_str (cwd_vpath);
+
         p = strrchr (lwd, PATH_SEP);
 
         if ((p != NULL)
@@ -4074,7 +4078,7 @@ do_try_to_select (WPanel * panel, const char *name)
     int i;
     char *subdir;
 
-    if (!name)
+    if (name == NULL)
     {
         do_select (panel, 0);
         return;
@@ -4523,7 +4527,7 @@ unmark_files (WPanel * panel)
 {
     int i;
 
-    if (!panel->marked)
+    if (panel->marked == 0)
         return;
 
     for (i = 0; i < panel->dir.len; i++)
