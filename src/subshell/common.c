@@ -891,17 +891,6 @@ init_subshell_precmd (char *precmd, size_t buff_size)
         break;
 
     case SHELL_FISH:
-        /* We also want a fancy user@host:cwd prompt here, but fish makes it very easy to also
-         * use colours, which is what we will do. But first here is a simpler, uncoloured version:
-         * "function fish_prompt; "
-         *     "echo (whoami)@(hostname -s):(pwd)\\$\\ ; "
-         *     "echo \"$PWD\">&%d; "
-         *     "kill -STOP %%self; "
-         * "end\n",
-         *
-         * TODO: fish prompt is shown when panel is hidden (Ctrl-O), but not when it is visible.
-         * Find out how to fix this.
-         */
         g_snprintf (precmd, buff_size,
                     " if not functions -q fish_prompt_mc;"
                     "functions -e fish_right_prompt;"
