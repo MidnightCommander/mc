@@ -1972,6 +1972,18 @@ mini_status_format (WPanel * panel)
 /*                          */
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+cd_up_dir (void)
+{
+    vfs_path_t *up_dir;
+
+    up_dir = vfs_path_from_str ("..");
+    do_cd (up_dir, cd_exact);
+    vfs_path_free (up_dir);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /** Used to emulate Lynx's entering leaving a directory with the arrow keys */
 
 static cb_ret_t
@@ -1981,11 +1993,7 @@ maybe_cd (gboolean move_up_dir)
     {
         if (move_up_dir)
         {
-            vfs_path_t *up_dir;
-
-            up_dir = vfs_path_from_str ("..");
-            do_cd (up_dir, cd_exact);
-            vfs_path_free (up_dir);
+            cd_up_dir ();
             return MSG_HANDLED;
         }
 
@@ -2012,11 +2020,7 @@ force_maybe_cd (void)
 {
     if (input_is_empty (cmdline))
     {
-        vfs_path_t *up_dir;
-
-        up_dir = vfs_path_from_str ("..");
-        do_cd (up_dir, cd_exact);
-        vfs_path_free (up_dir);
+        cd_up_dir ();
         return MSG_HANDLED;
     }
 
@@ -2255,13 +2259,7 @@ static void
 goto_parent_dir (WPanel * panel)
 {
     if (!panel->is_panelized)
-    {
-        vfs_path_t *up_dir;
-
-        up_dir = vfs_path_from_str ("..");
-        do_cd (up_dir, cd_exact);
-        vfs_path_free (up_dir);
-    }
+        cd_up_dir ();
     else
     {
         char *fname = panel->dir.list[panel->selected].fname;
