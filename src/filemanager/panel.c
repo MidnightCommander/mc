@@ -1981,7 +1981,7 @@ mini_status_format (WPanel * panel)
 static cb_ret_t
 maybe_cd (gboolean move_up_dir)
 {
-    if (panels_options.navigate_with_arrows && (cmdline->buffer[0] == '\0'))
+    if (panels_options.navigate_with_arrows && input_is_empty (cmdline))
     {
         if (move_up_dir)
         {
@@ -2014,7 +2014,7 @@ maybe_cd (gboolean move_up_dir)
 static cb_ret_t
 force_maybe_cd (void)
 {
-    if (cmdline->buffer[0] == '\0')
+    if (input_is_empty (cmdline))
     {
         vfs_path_t *up_dir;
 

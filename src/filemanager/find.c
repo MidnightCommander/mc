@@ -434,7 +434,7 @@ find_toggle_enable_ignore_dirs (void)
 static void
 find_toggle_enable_params (void)
 {
-    gboolean disable = in_name->buffer[0] == '\0';
+    gboolean disable = input_is_empty (in_name);
 
     widget_disable (WIDGET (file_pattern_cbox), disable);
     widget_disable (WIDGET (file_case_sens_cbox), disable);
@@ -500,7 +500,7 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
             return MSG_HANDLED;
 
         /* check filename regexp */
-        if (!file_pattern_cbox->state && (in_name->buffer[0] != '\0')
+        if (!file_pattern_cbox->state && !input_is_empty (in_name)
             && !find_check_regexp (in_name->buffer))
         {
             /* Don't stop the dialog */
@@ -527,7 +527,7 @@ find_parm_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
             find_toggle_enable_params ();
         else if (h->current->data == in_with)
         {
-            content_is_empty = in_with->buffer[0] == '\0';
+            content_is_empty = input_is_empty (in_with);
             find_toggle_enable_content ();
         }
         return MSG_HANDLED;
@@ -815,8 +815,8 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
             g_free (options.ignore_dirs);
             options.ignore_dirs = g_strdup (in_ignore->buffer);
 
-            *content = in_with->buffer[0] != '\0' ? g_strdup (in_with->buffer) : NULL;
-            if (in_name->buffer[0] != '\0')
+            *content = !input_is_empty (in_with) ? g_strdup (in_with->buffer) : NULL;
+            if (!input_is_empty (in_name))
                 *pattern = g_strdup (in_name->buffer);
             else
                 *pattern = g_strdup (options.file_pattern ? "*" : ".*");
@@ -851,7 +851,7 @@ find_parameters (char **start_dir, ssize_t * start_dir_len,
                 g_free (s);
             }
 
-            if (!options.ignore_dirs_enable || in_ignore->buffer[0] == '\0'
+            if (!options.ignore_dirs_enable || input_is_empty (in_ignore)
                 || DIR_IS_DOT (in_ignore->buffer))
                 *ignore_dirs = NULL;
             else

@@ -1514,7 +1514,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
                     return send_message (current_panel, midnight_dlg, MSG_ACTION, CK_SelectInvert,
                                          NULL);
             }
-            else if (!command_prompt || cmdline->buffer[0] == '\0')
+            else if (!command_prompt || input_is_empty (cmdline))
             {
                 /* Special treatement '+', '-', '\', '*' only when this is
                  * first char on input line
