@@ -90,8 +90,12 @@ static const char *const features[] = {
 #endif /* !HAVE_SLANG && !USE_NCURSES */
 
 #ifdef USE_INTERNAL_EDIT
+#ifdef HAVE_ASPELL
+    N_("With builtin Editor and Aspell support\n"),
+#else
     N_("With builtin Editor\n"),
-#endif
+#endif /* HAVE_ASPELL */
+#endif /* USE_INTERNAL_EDIT */
 
 #ifdef ENABLE_SUBSHELL
 #ifdef SUBSHELL_OPTIONAL
