@@ -67,8 +67,6 @@ enum cd_enum
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-struct format_e;
-
 typedef struct panel_field_struct
 {
     const char *id;
@@ -122,8 +120,8 @@ typedef struct
     char *user_format;          /* User format */
     char *user_status_format[LIST_FORMATS];     /* User format for status line */
 
-    struct format_e *format;    /* Display format */
-    struct format_e *status_format;     /* Mini status format */
+    GSList *format;             /* Display format */
+    GSList *status_format;      /* Mini status format */
 
     char *panel_name;           /* The panel name */
     struct stat dir_stat;       /* Stat of current dir: used by execute () */
