@@ -1712,6 +1712,7 @@ parse_display_format (WPanel * panel, const char *format, char **error, gboolean
         align_crt_t justify;    /* Which mode. */
         gboolean set_justify = TRUE;    /* flag: set justification mode? */
         gboolean found = FALSE;
+        size_t klen = 0;
 
         darr = g_new0 (format_item_t, 1);
         home = g_slist_append (home, darr);
@@ -1738,21 +1739,20 @@ parse_display_format (WPanel * panel, const char *format, char **error, gboolean
             break;
         }
 
-        for (i = 0; panel_fields[i].id != NULL; i++)
+        for (i = 0; !found && panel_fields[i].id != NULL; i++)
         {
-            size_t klen;
-
             klen = strlen (panel_fields[i].id);
+            found = strncmp (format, panel_fields[i].id, klen) == 0;
+        }
 
-            if (strncmp (format, panel_fields[i].id, klen) != 0)
-                continue;
-
+        if (found)
+        {
+            i--;
             format += klen;
 
             darr->requested_field_len = panel_fields[i].min_size;
             darr->string_fn = panel_fields[i].string_fn;
             darr->title = g_strdup (panel_get_title_without_hotkey (panel_fields[i].title_hotkey));
-
             darr->id = panel_fields[i].id;
             darr->expand = panel_fields[i].expands;
             darr->just_mode = panel_fields[i].default_just;
@@ -1764,7 +1764,6 @@ parse_display_format (WPanel * panel, const char *format, char **error, gboolean
                 else
                     darr->just_mode = justify;
             }
-            found = TRUE;
 
             format = skip_separators (format);
 
@@ -1789,13 +1788,9 @@ parse_display_format (WPanel * panel, const char *format, char **error, gboolean
                     darr->expand = TRUE;
                     format++;
                 }
-
             }
-
-            break;
         }
-
-        if (!found)
+        else
         {
             size_t pos;
             char *tmp_format;
