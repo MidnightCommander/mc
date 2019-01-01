@@ -1,7 +1,7 @@
 /*
    Dynamic paragraph formatting.
 
-   Copyright (C) 2011-2018
+   Copyright (C) 2011-2019
    Free Software Foundation, Inc.
 
    Copyright (C) 1996 Paul Sheer

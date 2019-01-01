@@ -1,7 +1,7 @@
 /*
    Hypertext file browser.
 
-   Copyright (C) 1994-2018
+   Copyright (C) 1994-2019
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.

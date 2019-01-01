@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Common finctions (used from some other mcviewer functions)
 
-   Copyright (C) 1994-2018
+   Copyright (C) 1994-2019
    Free Software Foundation, Inc.
 
    Written by:

@@ -1,7 +1,7 @@
 /*
    GLIB - Library of useful routines for C programming
 
-   Copyright (C) 2009-2018
+   Copyright (C) 2009-2019
    Free Software Foundation, Inc.
 
    Written by:

@@ -3,7 +3,7 @@
    tree about the changes made to the directory
    structure.
 
-   Copyright (C) 2011-2018
+   Copyright (C) 2011-2019
    Free Software Foundation, Inc.
 
    Author:

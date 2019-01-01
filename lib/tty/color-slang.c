@@ -1,7 +1,7 @@
 /*
    Color setup for S_Lang screen library
 
-   Copyright (C) 1994-2018
+   Copyright (C) 1994-2019
    Free Software Foundation, Inc.
 
    Written by:

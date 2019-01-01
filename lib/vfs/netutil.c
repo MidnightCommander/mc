@@ -1,7 +1,7 @@
 /*
    Network utilities for the Midnight Commander Virtual File System.
 
-   Copyright (C) 1995-2018
+   Copyright (C) 1995-2019
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.

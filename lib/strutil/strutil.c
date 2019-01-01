@@ -1,7 +1,7 @@
 /*
    Common strings utilities
 
-   Copyright (C) 2007-2018
+   Copyright (C) 2007-2019
    Free Software Foundation, Inc.
 
    Written by:
