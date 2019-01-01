@@ -125,8 +125,6 @@ typedef struct
     struct format_e *format;    /* Display format */
     struct format_e *status_format;     /* Mini status format */
 
-    int format_modified;        /* If the format was changed this is set */
-
     char *panel_name;           /* The panel name */
     struct stat dir_stat;       /* Stat of current dir: used by execute () */
 
