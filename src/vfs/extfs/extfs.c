@@ -287,12 +287,12 @@ extfs_find_entry_int (extfs_entry_t * dir, const char *name, GSList * list, int 
     p = name;
     name_end = name + strlen (name);
 
-    q = strchr (p, PATH_SEP);
-    if (q == NULL)
-        q = strchr (p, '\0');
-
     while ((pent != NULL) && (c != '\0') && (*p != '\0'))
     {
+        q = strchr (p, PATH_SEP);
+        if (q == NULL)
+            q = (char *) name_end;
+
         c = *q;
         *q = '\0';
 
@@ -341,12 +341,8 @@ extfs_find_entry_int (extfs_entry_t * dir, const char *name, GSList * list, int 
         }
         /* Next iteration */
         *q = c;
-        if (c == '\0')
-            break;
-        p = q + 1;
-        q = strchr (p, PATH_SEP);
-        if (q == NULL)
-            q = strchr (p, '\0');
+        if (c != '\0')
+            p = q + 1;
     }
     if (pent == NULL)
         my_errno = ENOENT;
