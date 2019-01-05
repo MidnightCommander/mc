@@ -414,7 +414,6 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
 
     int start_x, start_y, offset, i;
     char *curr = NULL;
-    etags_hash_t *curr_def = NULL;
     WDialog *def_dlg;
     WListbox *def_list;
     int def_dlg_h;              /* dialog height */
@@ -467,11 +466,10 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
     /* pop up the dialog and apply the chosen completion */
     if (dlg_run (def_dlg) == B_ENTER)
     {
-        char *tmp_curr_def = (char *) curr_def;
+        etags_hash_t *curr_def = NULL;
         int do_moveto = 0;
 
-        listbox_get_current (def_list, &curr, (void **) &tmp_curr_def);
-        curr_def = (etags_hash_t *) tmp_curr_def;
+        listbox_get_current (def_list, &curr, (void **) &curr_def);
         if (edit->modified)
         {
             if (!edit_query_dialog2
