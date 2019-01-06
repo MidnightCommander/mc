@@ -69,33 +69,26 @@
  * A "record" is a piece of info that we care about.
  * Typically many "record"s fit into a "block".
  */
-#define	RECORDSIZE      512
-#define	NAMSIZ          100
-#define	PREFIX_SIZE     155
-#define	TUNMLEN         32
-#define	TGNMLEN         32
-#define SPARSE_EXT_HDR  21
+#define RECORDSIZE      512
+#define NAMSIZ          100
+#define PREFIX_SIZE     155
+#define TUNMLEN         32
+#define TGNMLEN         32
 #define SPARSE_IN_HDR   4
 
-/* The checksum field is filled with this while the checksum is computed. */
-#define	CHKBLANKS       "        "      /* 8 blanks, no null */
-
 /* The magic field is filled with this if uname and gname are valid. */
-#define	TMAGIC          "ustar" /* ustar and a null */
-#define	OLDGNU_MAGIC    "ustar  "       /* 7 chars and a null */
+#define TMAGIC          "ustar" /* ustar and a null */
+#define OLDGNU_MAGIC    "ustar  "       /* 7 chars and a null */
 
 /* The linkflag defines the type of file */
-#define	LF_OLDNORMAL    '\0'    /* Normal disk file, Unix compat */
-#define	LF_NORMAL       '0'     /* Normal disk file */
-#define	LF_LINK         '1'     /* Link to previously dumped file */
-#define	LF_SYMLINK      '2'     /* Symbolic link */
-#define	LF_CHR          '3'     /* Character special file */
-#define	LF_BLK          '4'     /* Block special file */
-#define	LF_DIR          '5'     /* Directory */
-#define	LF_FIFO         '6'     /* FIFO special file */
-#define	LF_CONTIG       '7'     /* Contiguous file */
-#define	LF_EXTHDR       'x'     /* pax Extended Header */
-#define	LF_GLOBAL_EXTHDR 'g'    /* pax Global Extended Header */
+#define LF_LINK         '1'     /* Link to previously dumped file */
+#define LF_SYMLINK      '2'     /* Symbolic link */
+#define LF_CHR          '3'     /* Character special file */
+#define LF_BLK          '4'     /* Block special file */
+#define LF_DIR          '5'     /* Directory */
+#define LF_FIFO         '6'     /* FIFO special file */
+#define LF_EXTHDR       'x'     /* pax Extended Header */
+#define LF_GLOBAL_EXTHDR 'g'    /* pax Global Extended Header */
 /* Further link types may be defined later. */
 
 /* Note that the standards committee allows only capital A through
@@ -109,28 +102,8 @@
                                    as having a long linkname */
 #define LF_LONGNAME     'L'     /* Identifies the NEXT file on the tape
                                    as having a long name. */
-#define LF_MULTIVOL     'M'     /* This is the continuation
-                                   of a file that began on another
-                                   volume */
-#define LF_NAMES        'N'     /* For storing filenames that didn't
-                                   fit in 100 characters */
-#define LF_SPARSE       'S'     /* This is for sparse files */
-#define LF_VOLHDR       'V'     /* This file is a tape/volume header */
-/* Ignore it on extraction */
 
-/*
- * Exit codes from the "tar" program
- */
-#define	EX_SUCCESS      0       /* success! */
-#define	EX_ARGSBAD      1       /* invalid args */
-#define	EX_BADFILE      2       /* invalid filename */
-#define	EX_BADARCH      3       /* bad archive */
-#define	EX_SYSTEM       4       /* system gave unexpected error */
-#define EX_BADVOL       5       /* Special error code means
-                                   Tape volume doesn't match the one
-                                   specified on the command line */
-
-#define	isodigit(c)     ( ((c) >= '0') && ((c) <= '7') )
+#define isodigit(c)     ( ((c) >= '0') && ((c) <= '7') )
 
 /*** file scope type declarations ****************************************************************/
 
