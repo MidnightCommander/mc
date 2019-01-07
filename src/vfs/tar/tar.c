@@ -624,77 +624,78 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
     union block *header;
     static char *next_long_name = NULL, *next_long_link = NULL;
 
-  recurse:
-
-    header = tar_get_next_block (archive, tard);
-    if (NULL == header)
-        return STATUS_EOF;
-
-    checksum_status = tar_checksum (header);
-    if (checksum_status != STATUS_SUCCESS)
-        return checksum_status;
-
-    *h_size = tar_decode_header (header, arch);
-
-    /*
-     * Skip over pax extended header and global extended
-     * header records.
-     */
-    if (header->header.typeflag == XHDTYPE || header->header.typeflag == XGLTYPE)
+    while (TRUE)
     {
-        if (arch->type == TAR_UNKNOWN)
-            arch->type = TAR_POSIX;
-        return STATUS_SUCCESS;
-    }
+        header = tar_get_next_block (archive, tard);
+        if (header == NULL)
+            return STATUS_EOF;
 
-    if (header->header.typeflag == GNUTYPE_LONGNAME || header->header.typeflag == GNUTYPE_LONGLINK)
-    {
-        char **longp;
-        char *bp, *data;
-        off_t size;
-        size_t written;
+        checksum_status = tar_checksum (header);
+        if (checksum_status != STATUS_SUCCESS)
+            return checksum_status;
 
-        if (arch->type == TAR_UNKNOWN)
-            arch->type = TAR_GNU;
+        *h_size = tar_decode_header (header, arch);
 
-        if (*h_size > MC_MAXPATHLEN)
+        /* Skip over pax extended header and global extended header records. */
+        if (header->header.typeflag == XHDTYPE || header->header.typeflag == XGLTYPE)
         {
-            message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
-            return STATUS_BADCHECKSUM;
+            if (arch->type == TAR_UNKNOWN)
+                arch->type = TAR_POSIX;
+            return STATUS_SUCCESS;
         }
 
-        longp = header->header.typeflag == GNUTYPE_LONGNAME ? &next_long_name : &next_long_link;
-
-        g_free (*longp);
-        bp = *longp = g_malloc (*h_size + 1);
-
-        for (size = *h_size; size > 0; size -= written)
+        if (header->header.typeflag == GNUTYPE_LONGNAME
+            || header->header.typeflag == GNUTYPE_LONGLINK)
         {
-            data = tar_get_next_block (archive, tard)->buffer;
-            if (data == NULL)
+            char **longp;
+            char *bp, *data;
+            off_t size;
+            size_t written;
+
+            if (arch->type == TAR_UNKNOWN)
+                arch->type = TAR_GNU;
+
+            if (*h_size > MC_MAXPATHLEN)
             {
-                MC_PTR_FREE (*longp);
-                message (D_ERROR, MSG_ERROR, _("Unexpected EOF on archive file"));
+                message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
                 return STATUS_BADCHECKSUM;
             }
-            written = BLOCKSIZE;
-            if ((off_t) written > size)
-                written = (size_t) size;
 
-            memcpy (bp, data, written);
-            bp += written;
-        }
+            longp = header->header.typeflag == GNUTYPE_LONGNAME ? &next_long_name : &next_long_link;
 
-        if (bp - *longp == MC_MAXPATHLEN && bp[-1] != '\0')
-        {
-            MC_PTR_FREE (*longp);
-            message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
-            return STATUS_BADCHECKSUM;
+            g_free (*longp);
+            bp = *longp = g_malloc (*h_size + 1);
+
+            for (size = *h_size; size > 0; size -= written)
+            {
+                data = tar_get_next_block (archive, tard)->buffer;
+                if (data == NULL)
+                {
+                    MC_PTR_FREE (*longp);
+                    message (D_ERROR, MSG_ERROR, _("Unexpected EOF on archive file"));
+                    return STATUS_BADCHECKSUM;
+                }
+                written = BLOCKSIZE;
+                if ((off_t) written > size)
+                    written = (size_t) size;
+
+                memcpy (bp, data, written);
+                bp += written;
+            }
+
+            if (bp - *longp == MC_MAXPATHLEN && bp[-1] != '\0')
+            {
+                MC_PTR_FREE (*longp);
+                message (D_ERROR, MSG_ERROR, _("Inconsistent tar archive"));
+                return STATUS_BADCHECKSUM;
+            }
+
+            *bp = '\0';
         }
-        *bp = '\0';
-        goto recurse;
+        else
+            break;
     }
-    else
+
     {
         struct stat st;
         struct vfs_s_entry *entry;
