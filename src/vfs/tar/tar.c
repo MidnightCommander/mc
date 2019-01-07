@@ -472,6 +472,60 @@ tar_checksum (const union block *header)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static size_t
+tar_decode_header (union block *header, tar_super_t * arch)
+{
+    size_t size;
+
+    /*
+     * Try to determine the archive format.
+     */
+    if (arch->type == TAR_UNKNOWN)
+    {
+        if (strcmp (header->header.magic, TMAGIC) == 0)
+        {
+            if (header->header.typeflag == XGLTYPE)
+                arch->type = TAR_POSIX;
+            else
+                arch->type = TAR_USTAR;
+        }
+        else if (strcmp (header->header.magic, OLDGNU_MAGIC) == 0)
+            arch->type = TAR_GNU;
+    }
+
+    /*
+     * typeflag on BSDI tar (pax) always '\000'
+     */
+    if (header->header.typeflag == '\000')
+    {
+        size_t len;
+
+        if (header->header.name[sizeof (header->header.name) - 1] != '\0')
+            len = sizeof (header->header.name);
+        else
+            len = strlen (header->header.name);
+
+        if (len != 0 && IS_PATH_SEP (header->header.name[len - 1]))
+            header->header.typeflag = DIRTYPE;
+    }
+
+    /*
+     * Good block.  Decode file size and return.
+     */
+    if (header->header.typeflag == LNKTYPE || header->header.typeflag == DIRTYPE)
+        size = 0;               /* Links 0 size on tape */
+    else
+        size = tar_from_oct (1 + 12, header->header.size);
+
+    if (header->header.typeflag == GNUTYPE_DUMPDIR)
+        if (arch->type == TAR_UNKNOWN)
+            arch->type = TAR_GNU;
+
+    return size;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 tar_fill_stat (struct vfs_s_super *archive, struct stat *st, union block *header, size_t h_size)
 {
@@ -580,51 +634,7 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard, si
     if (checksum_status != STATUS_SUCCESS)
         return checksum_status;
 
-    /*
-     * Try to determine the archive format.
-     */
-    if (arch->type == TAR_UNKNOWN)
-    {
-        if (strcmp (header->header.magic, TMAGIC) == 0)
-        {
-            if (header->header.typeflag == XGLTYPE)
-                arch->type = TAR_POSIX;
-            else
-                arch->type = TAR_USTAR;
-        }
-        else if (strcmp (header->header.magic, OLDGNU_MAGIC) == 0)
-            arch->type = TAR_GNU;
-    }
-
-    /*
-     * typeflag on BSDI tar (pax) always '\000'
-     */
-    if (header->header.typeflag == '\000')
-    {
-        size_t len;
-
-        if (header->header.name[sizeof (header->header.name) - 1] != '\0')
-            len = sizeof (header->header.name);
-        else
-            len = strlen (header->header.name);
-
-        if (len != 0 && IS_PATH_SEP (header->header.name[len - 1]))
-            header->header.typeflag = DIRTYPE;
-    }
-
-    /*
-     * Good block.  Decode file size and return.
-     */
-    if (header->header.typeflag == LNKTYPE || header->header.typeflag == DIRTYPE)
-        *h_size = 0;            /* Links 0 size on tape */
-    else
-        *h_size = tar_from_oct (1 + 12, header->header.size);
-
-    if (header->header.typeflag == GNUTYPE_DUMPDIR)
-    {
-        if (arch->type == TAR_UNKNOWN)
-            arch->type = TAR_GNU;
-    }
+    *h_size = tar_decode_header (header, arch);
 
     /*
      * Skip over pax extended header and global extended
