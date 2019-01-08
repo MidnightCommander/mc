@@ -143,10 +143,10 @@ AC_DEFUN([mc_WITH_NCURSES], [
     dnl check for ESCDELAY
     AC_CACHE_CHECK([for ESCDELAY variable],
                    [mc_cv_ncurses_escdelay],
-                   [AC_TRY_LINK([], [
+                   [AC_LINK_IFELSE([AC_LANG_PROGRAM([], [[
                         extern int ESCDELAY;
                         ESCDELAY = 0;
-                        ],
+                        ]])],
                         [mc_cv_ncurses_escdelay=yes],
                         [mc_cv_ncurses_escdelay=no])
     ])
@@ -194,10 +194,10 @@ AC_DEFUN([mc_WITH_NCURSESW], [
 
     AC_CACHE_CHECK([for ESCDELAY variable],
 		   [mc_cv_ncursesw_escdelay],
-		   [AC_TRY_LINK([], [
+		   [AC_LINK_IFELSE([AC_LANG_PROGRAM([], [[
 			extern int ESCDELAY;
 			ESCDELAY = 0;
-			],
+			]])],
 			[mc_cv_ncursesw_escdelay=yes],
 			[mc_cv_ncursesw_escdelay=no])
     ])

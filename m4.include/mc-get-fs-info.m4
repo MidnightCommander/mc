@@ -5,14 +5,14 @@ dnl
 
 AC_DEFUN([gl_POSIX_FALLOCATE], [
     dnl * Old glibcs have broken posix_fallocate(). Make sure not to use it.
-    AC_TRY_LINK([
+    AC_LINK_IFELSE([AC_LANG_PROGRAM([[
         #define _XOPEN_SOURCE 600
         #include <stdlib.h>
         #if defined(__GLIBC__) && (__GLIBC__ < 2 || __GLIBC_MINOR__ < 7)
             possibly broken posix_fallocate
         #endif
-    ],
-    [posix_fallocate(0, 0, 0);],
+    ]],
+    [[posix_fallocate(0, 0, 0);]])],
     [AC_DEFINE(
         [HAVE_POSIX_FALLOCATE],
         [1],
