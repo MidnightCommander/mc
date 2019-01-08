@@ -47,7 +47,7 @@ fi
 
 AX_GCC_FUNC_ATTRIBUTE([fallthrough])
 
-AC_PROG_LIBTOOL
+LT_INIT
 
 
 dnl ############################################################################
