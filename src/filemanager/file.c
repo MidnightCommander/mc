@@ -383,7 +383,7 @@ check_hardlinks (const vfs_path_t * src_vpath, const struct stat *src_stat,
                 {
                     gboolean ok;
 
-                    while (!(ok = mc_stat (lnk->dst_vpath, &link_stat) == 0) && !*skip_all)
+                    while (!(ok = (mc_stat (lnk->dst_vpath, &link_stat) == 0)) && !*skip_all)
                     {
                         FileProgressStatus status;
 
@@ -403,7 +403,7 @@ check_hardlinks (const vfs_path_t * src_vpath, const struct stat *src_stat,
                     if (!ok)
                         return HARDLINK_ERROR;
 
-                    while (!(ok = mc_link (lnk->dst_vpath, dst_vpath) == 0) && !*skip_all)
+                    while (!(ok = (mc_link (lnk->dst_vpath, dst_vpath) == 0)) && !*skip_all)
                     {
                         FileProgressStatus status;
 
