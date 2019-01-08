@@ -13,7 +13,7 @@ AC_DEFUN([mc_VFS_SFTP],
         else
             if test x"$enable_vfs_sftp" = x"yes"; then
                 dnl user explicitly requested feature
-                AC_ERROR([libssh2 >= 1.2.5 library not found])
+                AC_MSG_ERROR([libssh2 >= 1.2.5 library not found])
             fi
             enable_vfs_sftp="no"
         fi
