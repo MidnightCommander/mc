@@ -1077,7 +1077,6 @@ load_setup (void)
     const char *profile;
 
 #ifdef HAVE_CHARSET
-    char *buffer;
     const char *cbuffer;
 
     load_codepages_list ();
@@ -1139,6 +1138,8 @@ load_setup (void)
 #ifdef HAVE_CHARSET
     if (codepages->len > 1)
     {
+        char *buffer;
+
         buffer =
             mc_config_get_string (mc_global.main_config, CONFIG_MISC_SECTION, "display_codepage",
                                   "");
