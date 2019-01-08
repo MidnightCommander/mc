@@ -4370,7 +4370,7 @@ panel_sized_with_dir_new (const char *panel_name, int y, int x, int lines, int c
         int err;
 
         tmp_vpath = vfs_path_from_str (curdir);
-        err = mc_chdir (tmp_vpath);
+        mc_chdir (tmp_vpath);
         vfs_path_free (tmp_vpath);
         (void) err;
     }
