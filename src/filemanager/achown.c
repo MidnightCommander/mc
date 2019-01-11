@@ -501,6 +501,7 @@ chl_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *dat
         default:
             break;
         }
+        MC_FALLTHROUGH;
 
     default:
         return dlg_default_callback (w, sender, msg, parm, data);

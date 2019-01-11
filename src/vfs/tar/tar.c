@@ -806,6 +806,7 @@ tar_open_archive (struct vfs_s_super *archive, const vfs_path_t * vpath,
             default:
                 break;
             }
+            MC_FALLTHROUGH;
 
             /* Record of zeroes */
         case STATUS_EOFMARK:   /* If error after 0's */
