@@ -94,55 +94,56 @@ static input_colors_t command_colors;
 static char *
 examine_cd (const char *_path)
 {
+    /* *INDENT-OFF* */
     typedef enum
-    { copy_sym, subst_var } state_t;
+    {
+        copy_sym,
+        subst_var
+    } state_t;
+    /* *INDENT-ON* */
 
     state_t state = copy_sym;
-    char *q;
-    size_t qlen;
+    GString *q;
     char *path_tilde, *path;
-    char *p, *r;
+    char *p;
 
     /* Tilde expansion */
     path = strutils_shell_unescape (_path);
     path_tilde = tilde_expand (path);
     g_free (path);
 
-    /* Leave space for further expansion */
-    qlen = strlen (path_tilde) + MC_MAXPATHLEN;
-    q = g_malloc (qlen);
+    q = g_string_sized_new (32);
 
     /* Variable expansion */
-    for (p = path_tilde, r = q; *p != '\0' && r < q + MC_MAXPATHLEN;)
+    for (p = path_tilde; *p != '\0';)
     {
         switch (state)
         {
         case copy_sym:
             if (p[0] == '\\' && p[1] == '$')
             {
-                /* skip backslash */
-                p++;
-                /* copy dollar */
-                *(r++) = *(p++);
+                g_string_append_c (q, '$');
+                p += 2;
             }
             else if (p[0] != '$' || p[1] == '[' || p[1] == '(')
-                *(r++) = *(p++);
+            {
+                g_string_append_c (q, *p);
+                p++;
+            }
             else
                 state = subst_var;
             break;
 
         case subst_var:
             {
-                char *s;
+                char *s = NULL;
                 char c;
-                const char *t;
+                const char *t = NULL;
 
                 /* skip dollar */
                 p++;
 
-                if (p[0] != '{')
-                    s = NULL;
-                else
+                if (p[0] == '{')
                 {
                     p++;
                     s = strchr (p, '}');
@@ -157,21 +158,13 @@ examine_cd (const char *_path)
                 *s = c;
                 if (t == NULL)
                 {
-                    *(r++) = '$';
+                    g_string_append_c (q, '$');
                     if (p[-1] != '$')
-                        *(r++) = '{';
+                        g_string_append_c (q, '{');
                 }
                 else
                 {
-                    size_t tlen;
-
-                    tlen = strlen (t);
-
-                    if (r + tlen < q + MC_MAXPATHLEN)
-                    {
-                        strncpy (r, t, tlen + 1);
-                        r += tlen;
-                    }
+                    g_string_append (q, t);
                     p = s;
                     if (*s == '}')
                         p++;
@@ -188,9 +181,7 @@ examine_cd (const char *_path)
 
     g_free (path_tilde);
 
-    *r = '\0';
-
-    return q;
+    return g_string_free (q, FALSE);
 }
 
 /* --------------------------------------------------------------------------------------------- */

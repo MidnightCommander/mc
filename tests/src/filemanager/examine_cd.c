@@ -137,6 +137,16 @@ START_TEST (test_examine_cd)
 
     check_examine_cd ("/test/path", "/test/path");
 
+    check_examine_cd ("$AAA", "aaa");
+    check_examine_cd ("${AAA}", "aaa");
+    check_examine_cd ("$AAA/test", "aaa/test");
+    check_examine_cd ("${AAA}/test", "aaa/test");
+
+    check_examine_cd ("/$AAA", "/aaa");
+    check_examine_cd ("/${AAA}", "/aaa");
+    check_examine_cd ("/$AAA/test", "/aaa/test");
+    check_examine_cd ("/${AAA}/test", "/aaa/test");
+
     check_examine_cd ("/test/path/$AAA", "/test/path/aaa");
     check_examine_cd ("/test/path/$AAA/test2", "/test/path/aaa/test2");
     check_examine_cd ("/test/path/test1$AAA/test2", "/test/path/test1aaa/test2");
