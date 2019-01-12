@@ -104,8 +104,6 @@ mcview_get_filesize (WView * view)
 {
     switch (view->datasource)
     {
-    case DS_NONE:
-        return 0;
     case DS_STDIO_PIPE:
     case DS_VFS_PIPE:
         return mcview_growbuf_filesize (view);
@@ -114,7 +112,6 @@ mcview_get_filesize (WView * view)
     case DS_STRING:
         return view->ds_string_len;
     default:
-        g_assert (!"Unknown datasource type");
         return 0;
     }
 }
@@ -357,9 +354,8 @@ mcview_close_datasource (WView * view)
         break;
     case DS_STRING:
         MC_PTR_FREE (view->ds_string_data);
-        break;
     default:
-        g_assert (!"Unknown datasource type");
+        break;
     }
     view->datasource = DS_NONE;
 }
