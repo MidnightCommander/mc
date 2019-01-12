@@ -75,6 +75,7 @@
 
 /*** file scope variables ************************************************************************/
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -122,19 +123,19 @@ resolve_symlinks (const vfs_path_t * vpath)
     r = buf = g_malloc (MC_MAXPATHLEN);
     buf2 = g_malloc (MC_MAXPATHLEN);
     *r++ = PATH_SEP;
-    *r = 0;
+    *r = '\0';
 
     do
     {
         q = strchr (p + 1, PATH_SEP);
-        if (!q)
+        if (q == NULL)
         {
-            q = strchr (p + 1, 0);
+            q = strchr (p + 1, '\0');
             if (q == p + 1)
                 break;
         }
         c = *q;
-        *q = 0;
+        *q = '\0';
         if (mc_lstat (vpath, &mybuf) < 0)
         {
             MC_PTR_FREE (buf);
@@ -152,14 +153,14 @@ resolve_symlinks (const vfs_path_t * vpath)
                 MC_PTR_FREE (buf);
                 goto ret;
             }
-            buf2[len] = 0;
+            buf2[len] = '\0';
             if (IS_PATH_SEP (*buf2))
                 strcpy (buf, buf2);
             else
                 strcpy (r, buf2);
         }
         canonicalize_pathname (buf);
-        r = strchr (buf, 0);
+        r = strchr (buf, '\0');
         if (*r == '\0' || !IS_PATH_SEP (r[-1]))
             /* FIXME: this condition is always true because r points to the EOL */
         {
@@ -204,6 +205,7 @@ mc_util_write_backup_content (const char *from_file_name, const char *to_file_na
 
     if (fwrite ((const void *) contents, 1, length, backup_fd) != length)
         ret1 = FALSE;
+
     {
         int ret2;
 
@@ -213,6 +215,7 @@ mc_util_write_backup_content (const char *from_file_name, const char *to_file_na
         ret2 = fclose (backup_fd);
         (void) ret2;
     }
+
     g_free (contents);
     return ret1;
 }
@@ -235,11 +238,9 @@ is_printable (int c)
         return is_7bit_printable (c);
 
     if (mc_global.full_eight_bits)
-    {
         return is_8bit_printable (c);
-    }
-    else
-        return is_iso_printable (c);
+
+    return is_iso_printable (c);
 #endif /* !HAVE_CHARSET */
 }
 
@@ -578,8 +579,11 @@ string_perm (mode_t mode_bits)
 const char *
 extension (const char *filename)
 {
-    const char *d = strrchr (filename, '.');
-    return (d != NULL) ? d + 1 : "";
+    const char *d;
+
+    d = strrchr (filename, '.');
+
+    return d != NULL ? d + 1 : "";
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -632,9 +636,9 @@ extract_line (const char *s, const char *top)
     static char tmp_line[BUF_MEDIUM];
     char *t = tmp_line;
 
-    while (*s && *s != '\n' && (size_t) (t - tmp_line) < sizeof (tmp_line) - 1 && s < top)
+    while (*s != '\0' && *s != '\n' && (size_t) (t - tmp_line) < sizeof (tmp_line) - 1 && s < top)
         *t++ = *s++;
-    *t = 0;
+    *t = '\0';
     return tmp_line;
 }
 
@@ -672,7 +676,7 @@ x_basename (const char *s)
     while (--url_delim > s && !IS_PATH_SEP (*url_delim))
         ;
 
-    return (url_delim == s) ? s : url_delim + 1;
+    return url_delim == s ? s : url_delim + 1;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -762,9 +766,9 @@ strip_ctrl_codes (char *s)
                  * OSC P s ; P t ST
                  * OSC P s ; P t BEL
                  */
-                char *new_r = r;
+                char *new_r;
 
-                for (; *new_r != '\0'; ++new_r)
+                for (new_r = r; *new_r != '\0'; new_r++)
                 {
                     switch (*new_r)
                     {
@@ -774,7 +778,7 @@ strip_ctrl_codes (char *s)
                         goto osc_out;
                     case ESC_CHAR:
                         /* ST */
-                        if (*(new_r + 1) == '\\')
+                        if (new_r[1] == '\\')
                         {
                             r = new_r + 1;
                             goto osc_out;
@@ -826,9 +830,7 @@ get_compression_type (int fd, const char *name)
 
     /* GZIP_MAGIC and OLD_GZIP_MAGIC */
     if (magic[0] == 037 && (magic[1] == 0213 || magic[1] == 0236))
-    {
         return COMPRESSION_GZIP;
-    }
 
     /* PKZIP_MAGIC */
     if (magic[0] == 0120 && magic[1] == 0113 && magic[2] == 003 && magic[3] == 004)
@@ -848,14 +850,11 @@ get_compression_type (int fd, const char *name)
 
     /* PACK_MAGIC and LZH_MAGIC and compress magic */
     if (magic[0] == 037 && (magic[1] == 036 || magic[1] == 0240 || magic[1] == 0235))
-    {
         /* Compatible with gzip */
         return COMPRESSION_GZIP;
-    }
 
     /* BZIP and BZIP2 files */
     if ((magic[0] == 'B') && (magic[1] == 'Z') && (magic[3] >= '1') && (magic[3] <= '9'))
-    {
         switch (magic[2])
         {
         case '0':
@@ -865,7 +864,6 @@ get_compression_type (int fd, const char *name)
         default:
             break;
         }
-    }
 
     /* LZ4 format - v1.5.0 - 0x184D2204 (little endian) */
     if (magic[0] == 0x04 && magic[1] == 0x22 && magic[2] == 0x4d && magic[3] == 0x18)
@@ -941,13 +939,14 @@ decompress_extension (int type)
 void
 wipe_password (char *passwd)
 {
-    char *p = passwd;
+    if (passwd != NULL)
+    {
+        char *p;
 
-    if (!p)
-        return;
-    for (; *p; p++)
-        *p = 0;
-    g_free (passwd);
+        for (p = passwd; *p != '\0'; p++)
+            *p = '\0';
+        g_free (passwd);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -962,45 +961,49 @@ wipe_password (char *passwd)
 char *
 convert_controls (const char *p)
 {
-    char *valcopy = g_strdup (p);
+    char *valcopy;
     char *q;
 
+    valcopy = g_strdup (p);
+
     /* Parse the escape special character */
-    for (q = valcopy; *p;)
-    {
-        if (*p == '\\')
+    for (q = valcopy; *p != '\0';)
+        switch (*p)
         {
+        case '\\':
             p++;
-            if ((*p == 'e') || (*p == 'E'))
+
+            if (*p == 'e' || *p == 'E')
             {
                 p++;
                 *q++ = ESC_CHAR;
             }
-        }
-        else
-        {
+            break;
+
+        case '^':
+            p++;
             if (*p == '^')
-            {
-                p++;
-                if (*p == '^')
-                    *q++ = *p++;
-                else
-                {
-                    char c = (*p | 0x20);
-                    if (c >= 'a' && c <= 'z')
-                    {
-                        *q++ = c - 'a' + 1;
-                        p++;
-                    }
-                    else if (*p)
-                        p++;
-                }
-            }
-            else
                 *q++ = *p++;
+            else
+            {
+                char c;
+
+                c = *p | 0x20;
+                if (c >= 'a' && c <= 'z')
+                {
+                    *q++ = c - 'a' + 1;
+                    p++;
+                }
+                else if (*p != '\0')
+                    p++;
+            }
+            break;
+
+        default:
+            *q++ = *p++;
         }
-    }
-    *q = 0;
+
+    *q = '\0';
     return valcopy;
 }
 
@@ -1032,6 +1035,7 @@ diff_two_paths (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 
         p = my_first;
         q = my_second;
+
         while (TRUE)
         {
             char *r, *s;
@@ -1296,9 +1300,8 @@ extern int
 ascii_alpha_to_cntrl (int ch)
 {
     if ((ch >= ASCII_A && ch <= ASCII_Z) || (ch >= ASCII_a && ch <= ASCII_z))
-    {
         ch &= 0x1f;
-    }
+
     return ch;
 }
 
@@ -1311,7 +1314,8 @@ Q_ (const char *s)
 
     result = _(s);
     sep = strchr (result, '|');
-    return (sep != NULL) ? sep + 1 : result;
+
+    return sep != NULL ? sep + 1 : result;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1322,16 +1326,15 @@ mc_util_make_backup_if_possible (const char *file_name, const char *backup_suffi
     struct stat stat_buf;
     char *backup_path;
     gboolean ret;
+
     if (!exist_file (file_name))
         return FALSE;
 
     backup_path = g_strdup_printf ("%s%s", file_name, backup_suffix);
-
     if (backup_path == NULL)
         return FALSE;
 
     ret = mc_util_write_backup_content (file_name, backup_path);
-
     if (ret)
     {
         /* Backup file will have same ownership with main file. */
@@ -1409,15 +1412,14 @@ guess_message_value (void)
         NULL
     };
 
-    unsigned i = 0;
+    size_t i;
     const char *locale = NULL;
 
-    while (var[i] != NULL)
+    for (i = 0; var[i] != NULL; i++)
     {
         locale = getenv (var[i]);
         if (locale != NULL && locale[0] != '\0')
             break;
-        i++;
     }
 
     if (locale == NULL)
