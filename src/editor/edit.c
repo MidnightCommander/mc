@@ -2185,13 +2185,13 @@ edit_clean (WEdit * edit)
 
     /* a stale lock, remove it */
     if (edit->locked)
-        edit->locked = unlock_file (edit->filename_vpath);
+        (void) unlock_file (edit->filename_vpath);
 
     /* save cursor position */
     if (option_save_position)
         edit_save_position (edit);
     else if (edit->serialized_bookmarks != NULL)
-        edit->serialized_bookmarks = (GArray *) g_array_free (edit->serialized_bookmarks, TRUE);
+        g_array_free (edit->serialized_bookmarks, TRUE);
 
     /* File specified on the mcedit command line and never saved */
     if (edit->delete_file)
@@ -2207,8 +2207,7 @@ edit_clean (WEdit * edit)
     vfs_path_free (edit->filename_vpath);
     vfs_path_free (edit->dir_vpath);
     mc_search_free (edit->search);
-    edit->search = NULL;
-    MC_PTR_FREE (edit->last_search_string);
+    g_free (edit->last_search_string);
 
 #ifdef HAVE_CHARSET
     if (edit->converter != str_cnv_from_term)
