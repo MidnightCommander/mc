@@ -890,8 +890,7 @@ pop_directory (void)
 static void
 clear_stack (void)
 {
-    g_queue_foreach (&dir_queue, (GFunc) vfs_path_free, NULL);
-    g_queue_clear (&dir_queue);
+    g_queue_clear_full (&dir_queue, (GDestroyNotify) vfs_path_free);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -20,6 +20,10 @@ void g_list_free_full (GList * list, GDestroyNotify free_func);
 void g_queue_free_full (GQueue * queue, GDestroyNotify free_func);
 #endif /* ! GLIB_CHECK_VERSION (2, 32, 0) */
 
+#if ! GLIB_CHECK_VERSION (2, 60, 0)
+void g_queue_clear_full (GQueue * queue, GDestroyNotify free_func);
+#endif /* ! GLIB_CHECK_VERSION (2, 60, 0) */
+
 /*** inline functions ****************************************************************************/
 
 #endif /* MC_GLIBCOMPAT_H */
