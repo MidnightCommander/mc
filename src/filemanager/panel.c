@@ -3721,6 +3721,7 @@ panel_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         return panel_execute_cmd (panel, parm);
 
     case MSG_DESTROY:
+        vfs_stamp_path (panel->cwd_vpath);
         /* unsubscribe from "history_load" event */
         mc_event_del (w->owner->event_group, MCEVENT_HISTORY_LOAD, panel_load_history, w);
         /* unsubscribe from "history_save" event */
@@ -4274,80 +4275,52 @@ panel_set_lwd (WPanel * panel, const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 /**
- * Panel creation for specified directory.
+ * Creatie an empty panel with specified size.
  *
- * @param panel_name specifies the name of the panel for setup retieving
- * @param wpath the path of working panel directory. If path is NULL then panel will be created
- * for current directory
+ * @param panel_name name of panel for setup retieving
  *
  * @return new instance of WPanel
  */
 
 WPanel *
-panel_new_with_dir (const char *panel_name, const vfs_path_t * vpath)
+panel_sized_empty_new (const char *panel_name, int y, int x, int lines, int cols)
 {
     WPanel *panel;
     Widget *w;
     char *section;
     int i, err;
-    char *curdir = NULL;
 
     panel = g_new0 (WPanel, 1);
     w = WIDGET (panel);
-    /* No know sizes of the panel at startup */
-    widget_init (w, 0, 0, 0, 0, panel_callback, panel_mouse_callback);
+    widget_init (w, y, x, lines, cols, panel_callback, panel_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
-
-    if (vpath != NULL)
-    {
-        curdir = _vfs_get_cwd ();
-        panel_set_cwd (panel, vpath);
-    }
-    else
-    {
-        vfs_setup_cwd ();
-        panel->cwd_vpath = vfs_path_clone (vfs_get_raw_current_dir ());
-    }
-
-    panel_set_lwd (panel, vfs_get_raw_current_dir ());
-
-    panel->hist_name = g_strconcat ("Dir Hist ", panel_name, (char *) NULL);
-    /* directories history will be get later */
 
     panel->dir.size = DIR_LIST_MIN_SIZE;
     panel->dir.list = g_new (file_entry_t, panel->dir.size);
     panel->dir.len = 0;
-    panel->active = 0;
-    panel->filter = NULL;
+
     panel->list_cols = 1;
     panel->brief_cols = 2;
-    panel->top_file = 0;
-    panel->selected = 0;
-    panel->marked = 0;
-    panel->total = 0;
     panel->dirty = 1;
-    panel->searching = FALSE;
-    panel->dirs_marked = 0;
-    panel->is_panelized = FALSE;
-    panel->format = NULL;
-    panel->status_format = NULL;
     panel->format_modified = 1;
     panel->content_shift = -1;
     panel->max_shift = -1;
 
-    panel->panel_name = g_strdup (panel_name);
+    panel->list_format = list_full;
     panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
+
+    for (i = 0; i < LIST_FORMATS; i++)
+        panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
 
 #ifdef HAVE_CHARSET
     panel->codepage = SELECT_CHARSET_NO_TRANSLATE;
 #endif
 
-    for (i = 0; i < LIST_FORMATS; i++)
-        panel->user_status_format[i] = g_strdup (DEFAULT_USER_FORMAT);
-
-    panel->search_buffer[0] = '\0';
-    panel->prev_search_buffer[0] = '\0';
     panel->frame_size = frame_half;
+
+    panel->panel_name = g_strdup (panel_name);
+    panel->hist_name = g_strconcat ("Dir Hist ", panel->panel_name, (char *) NULL);
+    /* directories history will be get later */
 
     section = g_strconcat ("Temporal:", panel->panel_name, (char *) NULL);
     if (!mc_config_has_group (mc_global.main_config, section))
@@ -4363,14 +4336,52 @@ panel_new_with_dir (const char *panel_name, const vfs_path_t * vpath)
     if (err != 0)
         set_panel_formats (panel);
 
-#ifdef HAVE_CHARSET
-    {
-        const vfs_path_element_t *path_element;
+    return panel;
+}
 
-        path_element = vfs_path_get_by_index (panel->cwd_vpath, -1);
-        if (path_element->encoding != NULL)
-            panel->codepage = get_codepage_index (path_element->encoding);
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Panel creation for specified size and directory.
+ *
+ * @param panel_name name of panel for setup retieving
+ * @param y y coordinate of top-left corner
+ * @param x x coordinate of top-left corner
+ * @param lines vertical size
+ * @param cols horizontal size
+ * @param vpath working panel directory. If NULL then current directory is used
+ *
+ * @return new instance of WPanel
+ */
+
+WPanel *
+panel_sized_with_dir_new (const char *panel_name, int y, int x, int lines, int cols,
+                          const vfs_path_t * vpath)
+{
+    WPanel *panel;
+    char *curdir = NULL;
+#ifdef HAVE_CHARSET
+    const vfs_path_element_t *path_element;
+#endif
+
+    panel = panel_sized_empty_new (panel_name, y, x, lines, cols);
+
+    if (vpath != NULL)
+    {
+        curdir = _vfs_get_cwd ();
+        panel_set_cwd (panel, vpath);
     }
+    else
+    {
+        vfs_setup_cwd ();
+        panel->cwd_vpath = vfs_path_clone (vfs_get_raw_current_dir ());
+    }
+
+    panel_set_lwd (panel, vfs_get_raw_current_dir ());
+
+#ifdef HAVE_CHARSET
+    path_element = vfs_path_get_by_index (panel->cwd_vpath, -1);
+    if (path_element->encoding != NULL)
+        panel->codepage = get_codepage_index (path_element->encoding);
 #endif
 
     if (mc_chdir (panel->cwd_vpath) != 0)
@@ -4391,10 +4402,12 @@ panel_new_with_dir (const char *panel_name, const vfs_path_t * vpath)
     if (curdir != NULL)
     {
         vfs_path_t *tmp_vpath;
+        int err;
 
         tmp_vpath = vfs_path_from_str (curdir);
         err = mc_chdir (tmp_vpath);
         vfs_path_free (tmp_vpath);
+        (void) err;
     }
     g_free (curdir);
 
