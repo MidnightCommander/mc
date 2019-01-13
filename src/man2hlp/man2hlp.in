@@ -578,6 +578,10 @@ sub handle_command($)
     {
         return;
     }
+    elsif ($buffer eq ".RE")
+    {
+        newline;
+    }
     else
     {
         # Other commands are ignored
