@@ -441,7 +441,11 @@ midnight_get_title (const WDialog * h, size_t len)
 
     title_path_prepare (&path, &login);
 
-    p = g_strdup_printf ("%s [%s]:%s", _("Panels:"), login, path);
+    if (path != NULL)
+        p = g_strdup_printf ("%s: [%s]: %s", _("Panels"), login, path);
+    else
+        p = g_strdup_printf ("%s: [%s]", _("Panels"), login);
+
     g_free (path);
     g_free (login);
     path = g_strdup (str_trunc (p, len - 4));
@@ -568,7 +572,7 @@ print_vfs_message (const gchar * event_group_name, const gchar * event_name,
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-create_panels (void)
+load_panels (void)
 {
     int current_index, other_index;
     panel_view_mode_t current_mode, other_mode;
@@ -679,7 +683,7 @@ create_panels (void)
     }
     set_display_type (current_index, current_mode);
 
-    if (startup_left_mode == view_listing)
+    if (startup_left_mode == view_listing && boot_current_is_left)
         current_panel = left_panel;
     else if (right_panel != NULL)
         current_panel = right_panel;
@@ -687,13 +691,6 @@ create_panels (void)
         current_panel = left_panel;
 
     vfs_path_free (original_dir);
-
-#ifdef ENABLE_VFS
-    mc_event_add (MCEVENT_GROUP_CORE, "vfs_timestamp", check_other_panel_timestamp, NULL, NULL);
-    mc_event_add (MCEVENT_GROUP_CORE, "vfs_timestamp", check_current_panel_timestamp, NULL, NULL);
-#endif /* ENABLE_VFS */
-
-    mc_event_add (MCEVENT_GROUP_CORE, "vfs_print_message", print_vfs_message, NULL, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -919,8 +916,10 @@ create_file_manager (void)
     add_widget (midnight_dlg, the_menubar);
     init_menu ();
 
-    create_panels ();
+    /* create empty panels to construct file manager entirely before load panel contents */
+    set_display_type (0, view_listing);
     add_widget (midnight_dlg, get_panel_widget (0));
+    set_display_type (1, view_listing);
     add_widget (midnight_dlg, get_panel_widget (1));
 
     the_hint = label_new (0, 0, 0);
@@ -939,6 +938,12 @@ create_file_manager (void)
     the_bar = buttonbar_new (mc_global.keybar_visible);
     add_widget (midnight_dlg, the_bar);
     midnight_set_buttonbar (the_bar);
+
+#ifdef ENABLE_VFS
+    mc_event_add (MCEVENT_GROUP_CORE, "vfs_timestamp", check_other_panel_timestamp, NULL, NULL);
+    mc_event_add (MCEVENT_GROUP_CORE, "vfs_timestamp", check_current_panel_timestamp, NULL, NULL);
+#endif /* ENABLE_VFS */
+    mc_event_add (MCEVENT_GROUP_CORE, "vfs_print_message", print_vfs_message, NULL, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1464,13 +1469,11 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         return MSG_HANDLED;
 
     case MSG_IDLE:
-        /* We only need the first idle event to show user menu after start */
+        /* We only need the first idle event to load panels and show user menu after start */
         widget_idle (w, FALSE);
 
-        if (boot_current_is_left)
-            widget_select (get_panel_widget (0));
-        else
-            widget_select (get_panel_widget (1));
+        load_panels ();
+        widget_select (WIDGET (current_panel));
 
         if (auto_menu)
             midnight_execute_cmd (NULL, CK_UserMenu);

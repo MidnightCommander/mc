@@ -1397,8 +1397,12 @@ title_path_prepare (char **path, char **login)
     struct passwd *pw = NULL;
     int res = 0;
 
-    *path =
-        vfs_path_to_str_flags (current_panel->cwd_vpath, 0, VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
+    if (current_panel == NULL || current_panel->cwd_vpath == NULL)
+        *path = NULL;
+    else
+        *path =
+            vfs_path_to_str_flags (current_panel->cwd_vpath, 0,
+                                   VPF_STRIP_HOME | VPF_STRIP_PASSWORD);
 
     res = gethostname (host, sizeof (host));
     if (res != 0)
@@ -1427,7 +1431,11 @@ update_xterm_title_path (void)
 
         title_path_prepare (&path, &login);
 
-        p = g_strdup_printf ("mc [%s]:%s", login, path);
+        if (path != NULL)
+            p = g_strdup_printf ("mc [%s]: %s", login, path);
+        else
+            p = g_strdup_printf ("mc [%s]", login);
+
         g_free (login);
         g_free (path);
 
