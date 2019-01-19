@@ -411,7 +411,6 @@ void
 editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_len, int word_len,
                                        etags_hash_t * def_hash, int num_lines)
 {
-
     int start_x, start_y, offset, i;
     char *curr = NULL;
     WDialog *def_dlg;
@@ -441,14 +440,9 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
     if (offset > 0)
         start_y -= (offset + 1);
 
-    /* create the dialog */
     def_dlg = dlg_create (TRUE, start_y, start_x, def_dlg_h, def_dlg_w, WPOS_KEEP_DEFAULT, TRUE,
                           dialog_colors, NULL, NULL, "[Definitions]", match_expr);
-
-    /* create the listbox */
     def_list = listbox_new (1, 1, def_dlg_h - 2, def_dlg_w - 2, FALSE, NULL);
-
-    /* add the dialog */
     add_widget (def_dlg, def_list);
 
     /* fill the listbox with the completions */
@@ -467,58 +461,46 @@ editcmd_dialog_select_definition_show (WEdit * edit, char *match_expr, int max_l
     if (dlg_run (def_dlg) == B_ENTER)
     {
         etags_hash_t *curr_def = NULL;
-        int do_moveto = 0;
+        gboolean do_moveto = FALSE;
 
         listbox_get_current (def_list, &curr, (void **) &curr_def);
-        if (edit->modified)
+
+        if (!edit->modified)
+            do_moveto = TRUE;
+        else if (!edit_query_dialog2
+                 (_("Warning"),
+                  _("Current text was modified without a file save.\n"
+                    "Continue discards these changes."), _("C&ontinue"), _("&Cancel")))
         {
-            if (!edit_query_dialog2
-                (_("Warning"),
-                 _("Current text was modified without a file save.\n"
-                   "Continue discards these changes."), _("C&ontinue"), _("&Cancel")))
-            {
-                edit->force |= REDRAW_COMPLETELY;
-                do_moveto = 1;
-            }
-        }
-        else
-        {
-            do_moveto = 1;
+            edit->force |= REDRAW_COMPLETELY;
+            do_moveto = TRUE;
         }
 
-        if (curr && do_moveto)
+        if (curr != NULL && do_moveto && edit_stack_iterator + 1 < MAX_HISTORY_MOVETO)
         {
-            if (edit_stack_iterator + 1 < MAX_HISTORY_MOVETO)
-            {
-                vfs_path_free (edit_history_moveto[edit_stack_iterator].filename_vpath);
-                if (edit->dir_vpath != NULL)
-                {
-                    edit_history_moveto[edit_stack_iterator].filename_vpath =
-                        vfs_path_append_vpath_new (edit->dir_vpath, edit->filename_vpath, NULL);
-                }
-                else
-                {
-                    edit_history_moveto[edit_stack_iterator].filename_vpath =
-                        vfs_path_clone (edit->filename_vpath);
-                }
-                edit_history_moveto[edit_stack_iterator].line = edit->start_line +
-                    edit->curs_row + 1;
-                edit_stack_iterator++;
-                vfs_path_free (edit_history_moveto[edit_stack_iterator].filename_vpath);
+            vfs_path_free (edit_history_moveto[edit_stack_iterator].filename_vpath);
+
+            if (edit->dir_vpath != NULL)
                 edit_history_moveto[edit_stack_iterator].filename_vpath =
-                    vfs_path_from_str ((char *) curr_def->fullpath);
-                edit_history_moveto[edit_stack_iterator].line = curr_def->line;
-                edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename_vpath,
-                                  edit_history_moveto[edit_stack_iterator].line);
-            }
+                    vfs_path_append_vpath_new (edit->dir_vpath, edit->filename_vpath, NULL);
+            else
+                edit_history_moveto[edit_stack_iterator].filename_vpath =
+                    vfs_path_clone (edit->filename_vpath);
+
+            edit_history_moveto[edit_stack_iterator].line = edit->start_line + edit->curs_row + 1;
+            edit_stack_iterator++;
+            vfs_path_free (edit_history_moveto[edit_stack_iterator].filename_vpath);
+            edit_history_moveto[edit_stack_iterator].filename_vpath =
+                vfs_path_from_str ((char *) curr_def->fullpath);
+            edit_history_moveto[edit_stack_iterator].line = curr_def->line;
+            edit_reload_line (edit, edit_history_moveto[edit_stack_iterator].filename_vpath,
+                              edit_history_moveto[edit_stack_iterator].line);
         }
     }
 
     /* clear definition hash */
     for (i = 0; i < MAX_DEFINITIONS; i++)
-    {
         g_free (def_hash[i].filename);
-    }
 
     /* destroy dialog before return */
     dlg_destroy (def_dlg);
