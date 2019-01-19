@@ -312,9 +312,9 @@ AC_EGREP_CPP([yes],
     ])
 
 dnl utimensat is supported since glibc 2.6 and specified in POSIX.1-2008
-dnl utimensat() causes different timespec structures to cause failures on IBM i
+dnl utimensat() causes different timespec structures to cause failures on IBM i and AIX
 case $host_os in
-*os400)
+*os400 | aix*)
     ;;
 *)
     AC_CHECK_FUNCS([utimensat])
