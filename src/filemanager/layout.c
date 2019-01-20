@@ -439,7 +439,7 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
 /* --------------------------------------------------------------------------------------------- */
 
 static WDialog *
-init_layout (void)
+layout_dlg_create (void)
 {
     WDialog *layout_dlg;
     int l1 = 0, width;
@@ -642,7 +642,7 @@ layout_box (void)
 
     old_layout = panels_layout;
     old_output_lines = output_lines;
-    layout_dlg = init_layout ();
+    layout_dlg = layout_dlg_create ();
 
     if (dlg_run (layout_dlg) == B_ENTER)
     {
