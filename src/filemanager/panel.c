@@ -4014,7 +4014,7 @@ update_one_panel_widget (WPanel * panel, panel_update_flags_t flags, const char 
 static void
 update_one_panel (int which, panel_update_flags_t flags, const char *current_file)
 {
-    if (get_display_type (which) == view_listing)
+    if (get_panel_type (which) == view_listing)
     {
         WPanel *panel;
 

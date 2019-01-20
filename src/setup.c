@@ -996,11 +996,11 @@ save_panel_types (void)
     if (mc_global.mc_run_mode != MC_RUN_FULL)
         return;
 
-    type = get_display_type (0);
+    type = get_panel_type (0);
     panel_save_type ("New Left Panel", type);
     if (type == view_listing)
         panel_save_setup (left_panel, left_panel->panel_name);
-    type = get_display_type (1);
+    type = get_panel_type (1);
     panel_save_type ("New Right Panel", type);
     if (type == view_listing)
         panel_save_setup (right_panel, right_panel->panel_name);
