@@ -106,7 +106,7 @@ int ok_to_refresh = 1;
 
 /*** file scope macro definitions ****************************************************************/
 
-/* The maximum number of views managed by the set_display_type routine */
+/* The maximum number of views managed by the create_panel routine */
 /* Must be at least two (for current and other).  Please note that until */
 /* Janne gets around this, we will only manage two of them :-) */
 #define MAX_VIEWS 2
@@ -971,7 +971,7 @@ get_nth_panel_name (int num)
 /* since a lot of routines depend on the current_panel variable */
 
 void
-set_display_type (int num, panel_view_mode_t type)
+create_panel (int num, panel_view_mode_t type)
 {
     int x = 0, y = 0, cols = 0, lines = 0;
     unsigned int the_other = 0; /* Index to the other panel */

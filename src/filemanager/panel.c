@@ -2877,7 +2877,7 @@ chdir_other_panel (WPanel * panel)
     char *sel_entry = NULL;
 
     if (get_other_type () != view_listing)
-        set_display_type (get_other_index (), view_listing);
+        create_panel (get_other_index (), view_listing);
 
     if (S_ISDIR (entry->st.st_mode) || link_isdir (entry))
         new_dir_vpath = vfs_path_append_new (panel->cwd_vpath, entry->fname, (char *) NULL);
@@ -2910,7 +2910,7 @@ static void
 panel_sync_other (const WPanel * panel)
 {
     if (get_other_type () != view_listing)
-        set_display_type (get_other_index (), view_listing);
+        create_panel (get_other_index (), view_listing);
 
     do_panel_cd (other_panel, current_panel->cwd_vpath, cd_exact);
 

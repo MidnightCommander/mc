@@ -661,7 +661,7 @@ create_panels (void)
         mc_chdir (vpath);
         vfs_path_free (vpath);
     }
-    set_display_type (other_index, other_mode);
+    create_panel (other_index, other_mode);
 
     /* 3. Create active panel */
     if (current_dir == NULL)
@@ -677,7 +677,7 @@ create_panels (void)
         mc_chdir (vpath);
         vfs_path_free (vpath);
     }
-    set_display_type (current_index, current_mode);
+    create_panel (current_index, current_mode);
 
     if (startup_left_mode == view_listing)
         current_panel = left_panel;

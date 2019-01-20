@@ -701,11 +701,11 @@ mcview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
              * panel mode from qick view to another one (by pressing C-x q), the following
              * occurs:
              *   view hook is deleted from select_file_hook list via following call chain:
-             *      set_display_type (view_listing) -> widget_replace () ->
+             *      create_panel (view_listing) -> widget_replace () ->
              *      send_message (MSG_DESTROY) -> mcview_callback (MSG_DESTROY) ->
              *      delete_hook (&select_file_hook);
              *   @view object is free'd:
-             *      set_display_type (view_listing) -> g_free (old_widget);
+             *      create_panel (view_listing) -> g_free (old_widget);
              *   but @view still is in idle_hook list and tried to be executed:
              *      frontend_dlg_run () -> execute_hooks (idle_hook).
              * Thus here we have access to free'd @view object. To prevent this, remove view hook
