@@ -1494,7 +1494,6 @@ smbfs_fake_share_stat (const char *server_url, const char *path, struct stat *bu
             g_free (p);
             return 0;
         }
-        g_free (p);
         return -1;
     }
 
