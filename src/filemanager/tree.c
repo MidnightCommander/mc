@@ -654,7 +654,7 @@ tree_do_search (WTree * tree, int key)
     l = strlen (tree->search_buffer);
     if ((l != 0) && (key == KEY_BACKSPACE))
         tree->search_buffer[--l] = '\0';
-    else if (key && l < sizeof (tree->search_buffer))
+    else if (key && l < sizeof (tree->search_buffer) - 1)
     {
         tree->search_buffer[l] = key;
         tree->search_buffer[++l] = '\0';
