@@ -156,14 +156,14 @@ gboolean easy_patterns = TRUE;
 gboolean auto_save_setup = TRUE;
 
 /* If true, then the +, - and \ keys have their special meaning only if the
- * command line is emtpy, otherwise they behave like regular letters
+ * command line is empty, otherwise they behave like regular letters
  */
 gboolean only_leading_plus_minus = TRUE;
 
 /* Automatically fills name with current selected item name on mkdir */
 gboolean auto_fill_mkdir_name = TRUE;
 
-/* If set and you don't have subshell support,then C-o will give you a shell */
+/* If set and you don't have subshell support, then C-o will give you a shell */
 gboolean output_starts_shell = FALSE;
 
 /* If set, we execute the file command to check the file type */
@@ -854,6 +854,7 @@ load_setup_get_keymap_profile_config (gboolean load_from_file)
         goto done;
     }
     g_free (fname);
+    fname = NULL;
 
     /* 5) main config; [Midnight Commander] -> keymap */
     fname2 = mc_config_get_string (mc_global.main_config, CONFIG_APP_SECTION, "keymap", NULL);
