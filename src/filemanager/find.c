@@ -1428,7 +1428,6 @@ static void
 find_do_view_edit (gboolean unparsed_view, gboolean edit, char *dir, char *file, off_t search_start,
                    off_t search_end)
 {
-    char *fullname = NULL;
     const char *filename = NULL;
     int line;
     vfs_path_t *fullname_vpath;
@@ -1451,7 +1450,6 @@ find_do_view_edit (gboolean unparsed_view, gboolean edit, char *dir, char *file,
         view_file_at_line (fullname_vpath, unparsed_view, use_internal_view, line, search_start,
                            search_end);
     vfs_path_free (fullname_vpath);
-    g_free (fullname);
 }
 
 /* --------------------------------------------------------------------------------------------- */
