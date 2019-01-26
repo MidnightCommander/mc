@@ -76,6 +76,7 @@ static struct TreeStore ts;
 
 static hook_t *remove_entry_hooks;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -165,14 +166,15 @@ pathcmp (const vfs_path_t * p1_vpath, const vfs_path_t * p2_vpath)
 static char *
 decode (char *buffer)
 {
-    char *res = g_strdup (buffer);
-    char *p, *q;
+    char *res, *p, *q;
 
-    for (p = q = res; *p; p++, q++)
+    res = g_strdup (buffer);
+
+    for (p = q = res; *p != '\0'; p++, q++)
     {
         if (*p == '\n')
         {
-            *q = 0;
+            *q = '\0';
             return res;
         }
 
@@ -196,6 +198,7 @@ decode (char *buffer)
             break;
         }
     }
+
     *q = *p;
 
     return res;
@@ -205,9 +208,9 @@ decode (char *buffer)
 /** Loads the tree store from the specified filename */
 
 static int
-tree_store_load_from (char *name)
+tree_store_load_from (const char *name)
 {
-    FILE *file = NULL;
+    FILE *file;
     char buffer[MC_MAXPATHLEN + 20];
 
     g_return_val_if_fail (name != NULL, 0);
@@ -251,8 +254,9 @@ tree_store_load_from (char *name)
             if (!IS_PATH_SEP (lc_name[0]))
             {
                 /* Clear-text decompression */
-                char *s = strtok (lc_name, " ");
+                char *s;
 
+                s = strtok (lc_name, " ");
                 if (s != NULL)
                 {
                     char *different;
@@ -260,7 +264,7 @@ tree_store_load_from (char *name)
 
                     common = atoi (s);
                     different = strtok (NULL, "");
-                    if (different)
+                    if (different != NULL)
                     {
                         vfs_path_t *vpath;
 
@@ -301,7 +305,9 @@ tree_store_load_from (char *name)
     /* Nothing loaded, we add some standard directories */
     if (!ts.tree_first)
     {
-        vfs_path_t *tmp_vpath = vfs_path_from_str (PATH_SEP_STR);
+        vfs_path_t *tmp_vpath;
+
+        tmp_vpath = vfs_path_from_str (PATH_SEP_STR);
         tree_store_add_entry (tmp_vpath);
         tree_store_rescan (tmp_vpath);
         vfs_path_free (tmp_vpath);
@@ -329,30 +335,31 @@ tree_store_save_to (char *name)
     FILE *file;
 
     file = fopen (name, "w");
-    if (!file)
+    if (file == NULL)
         return errno;
 
     fprintf (file, "%s\n", TREE_SIGNATURE);
 
-    current = ts.tree_first;
-    while (current)
-    {
+    for (current = ts.tree_first; current != NULL; current = current->next)
         if (vfs_file_is_local (current->name))
         {
             int i, common;
 
             /* Clear-text compression */
-            if (current->prev && (common = str_common (current->prev->name, current->name)) > 2)
+            if (current->prev != NULL
+                && (common = str_common (current->prev->name, current->name)) > 2)
             {
-                char *encoded = encode (current->name, common);
+                char *encoded;
 
+                encoded = encode (current->name, common);
                 i = fprintf (file, "%d:%d %s\n", current->scanned ? 1 : 0, common, encoded);
                 g_free (encoded);
             }
             else
             {
-                char *encoded = encode (current->name, 0);
+                char *encoded;
 
+                encoded = encode (current->name, 0);
                 i = fprintf (file, "%d:%s\n", current->scanned ? 1 : 0, encoded);
                 g_free (encoded);
             }
@@ -364,8 +371,7 @@ tree_store_save_to (char *name)
                 break;
             }
         }
-        current = current->next;
-    }
+
     tree_store_dirty (FALSE);
     fclose (file);
 
@@ -378,30 +384,28 @@ static tree_entry *
 tree_store_add_entry (const vfs_path_t * name)
 {
     int flag = -1;
-    tree_entry *current = ts.tree_first;
+    tree_entry *current;
     tree_entry *old = NULL;
     tree_entry *new;
     int submask = 0;
 
-    if (ts.tree_last && ts.tree_last->next)
+    if (ts.tree_last != NULL && ts.tree_last->next != NULL)
         abort ();
 
     /* Search for the correct place */
-    while (current != NULL && (flag = pathcmp (current->name, name)) < 0)
-    {
+    for (current = ts.tree_first;
+         current != NULL && (flag = pathcmp (current->name, name)) < 0; current = current->next)
         old = current;
-        current = current->next;
-    }
 
     if (flag == 0)
         return current;         /* Already in the list */
 
     /* Not in the list -> add it */
     new = g_new0 (tree_entry, 1);
-    if (!current)
+    if (current == NULL)
     {
         /* Append to the end of the list */
-        if (!ts.tree_first)
+        if (ts.tree_first == NULL)
         {
             /* Empty list */
             ts.tree_first = new;
@@ -438,6 +442,7 @@ tree_store_add_entry (const vfs_path_t * name)
     /* Calculate attributes */
     new->name = vfs_path_clone (name);
     new->sublevel = vfs_path_tokens_count (new->name);
+
     {
         const char *new_name;
 
@@ -448,22 +453,19 @@ tree_store_add_entry (const vfs_path_t * name)
         else
             new->subname++;
     }
-    if (new->next)
+
+    if (new->next != NULL)
         submask = new->next->submask;
-    else
-        submask = 0;
+
     submask |= 1 << new->sublevel;
     submask &= (2 << new->sublevel) - 1;
     new->submask = submask;
     new->mark = FALSE;
 
     /* Correct the submasks of the previous entries */
-    current = new->prev;
-    while (current && current->sublevel > new->sublevel)
-    {
+    for (current = new->prev;
+         current != NULL && current->sublevel > new->sublevel; current = current->prev)
         current->submask |= 1 << new->sublevel;
-        current = current->prev;
-    }
 
     tree_store_dirty (TRUE);
     return new;
@@ -474,14 +476,13 @@ tree_store_add_entry (const vfs_path_t * name)
 static void
 tree_store_notify_remove (tree_entry * entry)
 {
-    hook_t *p = remove_entry_hooks;
+    hook_t *p;
 
-    while (p != NULL)
+    for (p = remove_entry_hooks; p != NULL; p = p->next)
     {
         tree_store_remove_fn r = (tree_store_remove_fn) p->hook_fn;
 
         r (entry, p->hook_data);
-        p = p->next;
     }
 }
 
@@ -497,23 +498,23 @@ remove_entry (tree_entry * entry)
     tree_store_notify_remove (entry);
 
     /* Correct the submasks of the previous entries */
-    if (entry->next)
+    if (entry->next != NULL)
         submask = entry->next->submask;
-    while (current && current->sublevel > entry->sublevel)
+
+    for (; current != NULL && current->sublevel > entry->sublevel; current = current->prev)
     {
         submask |= 1 << current->sublevel;
         submask &= (2 << current->sublevel) - 1;
         current->submask = submask;
-        current = current->prev;
     }
 
     /* Unlink the entry from the list */
-    if (entry->prev)
+    if (entry->prev != NULL)
         entry->prev->next = entry->next;
     else
         ts.tree_first = entry->next;
 
-    if (entry->next)
+    if (entry->next != NULL)
         entry->next->prev = entry->prev;
     else
         ts.tree_last = entry->prev;
@@ -592,16 +593,14 @@ should_skip_directory (const vfs_path_t * vpath)
 tree_entry *
 tree_store_whereis (const vfs_path_t * name)
 {
-    tree_entry *current = ts.tree_first;
+    tree_entry *current;
     int flag = -1;
 
-    while (current && (flag = pathcmp (current->name, name)) < 0)
-        current = current->next;
+    for (current = ts.tree_first;
+         current != NULL && (flag = pathcmp (current->name, name)) < 0; current = current->next)
+        ;
 
-    if (flag == 0)
-        return current;
-    else
-        return NULL;
+    return flag == 0 ? current : NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -674,7 +673,6 @@ tree_store_remove_entry_remove_hook (tree_store_remove_fn callback)
     delete_hook (&remove_entry_hooks, (void (*)(void *)) callback);
 }
 
-
 /* --------------------------------------------------------------------------------------------- */
 
 void
@@ -698,7 +696,7 @@ tree_store_remove_entry (const vfs_path_t * name_vpath)
     /* Miguel Ugly hack end */
 
     base = tree_store_whereis (name_vpath);
-    if (!base)
+    if (base == NULL)
         return;                 /* Doesn't exist */
 
     len = vfs_path_len (base->name);
@@ -750,9 +748,9 @@ tree_store_mark_checked (const char *subname)
         name = vfs_path_append_new (ts.check_name, subname, (char *) NULL);
 
     /* Search for the subdirectory */
-    current = ts.check_start;
-    while (current && (flag = pathcmp (current->name, name)) < 0)
-        current = current->next;
+    for (current = ts.check_start;
+         current != NULL && (flag = pathcmp (current->name, name)) < 0; current = current->next)
+        ;
 
     if (flag != 0)
     {
@@ -765,14 +763,15 @@ tree_store_mark_checked (const char *subname)
 
     /* Clear the deletion mark from the subdirectory and its children */
     base = current;
-    if (base)
+    if (base != NULL)
     {
         size_t len;
 
         len = vfs_path_len (base->name);
         base->mark = FALSE;
-        current = base->next;
-        while (current != NULL && vfs_path_equal_len (current->name, base->name, len))
+        for (current = base->next;
+             current != NULL && vfs_path_equal_len (current->name, base->name, len);
+             current = current->next)
         {
             gboolean ok;
 
@@ -782,7 +781,6 @@ tree_store_mark_checked (const char *subname)
                 break;
 
             current->mark = FALSE;
-            current = current->next;
         }
     }
 }
@@ -804,14 +802,11 @@ tree_store_start_check (const vfs_path_t * vpath)
 
     /* Search for the start of subdirectories */
     current = tree_store_whereis (vpath);
-    if (!current)
+    if (current == NULL)
     {
         struct stat s;
 
-        if (mc_stat (vpath, &s) == -1)
-            return NULL;
-
-        if (!S_ISDIR (s.st_mode))
+        if (mc_stat (vpath, &s) == -1 || !S_ISDIR (s.st_mode))
             return NULL;
 
         current = tree_store_add_entry (vpath);
@@ -828,8 +823,9 @@ tree_store_start_check (const vfs_path_t * vpath)
     ts.check_start = current->next;
     len = vfs_path_len (ts.check_name);
 
-    current = ts.check_start;
-    while (current != NULL && vfs_path_equal_len (current->name, ts.check_name, len))
+    for (current = ts.check_start;
+         current != NULL && vfs_path_equal_len (current->name, ts.check_name, len);
+         current = current->next)
     {
         gboolean ok;
         const char *cname;
@@ -840,7 +836,6 @@ tree_store_start_check (const vfs_path_t * vpath)
             break;
 
         current->mark = TRUE;
-        current = current->next;
     }
 
     return retval;
@@ -912,22 +907,21 @@ tree_store_rescan (const vfs_path_t * vpath)
         return NULL;
 
     dirp = mc_opendir (vpath);
-    if (dirp)
+    if (dirp != NULL)
     {
         struct dirent *dp;
 
-        for (dp = mc_readdir (dirp); dp; dp = mc_readdir (dirp))
-        {
-            vfs_path_t *tmp_vpath;
+        for (dp = mc_readdir (dirp); dp != NULL; dp = mc_readdir (dirp))
+            if (!DIR_IS_DOT (dp->d_name) && !DIR_IS_DOTDOT (dp->d_name))
+            {
+                vfs_path_t *tmp_vpath;
 
-            if (DIR_IS_DOT (dp->d_name) || DIR_IS_DOTDOT (dp->d_name))
-                continue;
+                tmp_vpath = vfs_path_append_new (vpath, dp->d_name, (char *) NULL);
+                if (mc_lstat (tmp_vpath, &buf) != -1 && S_ISDIR (buf.st_mode))
+                    tree_store_mark_checked (dp->d_name);
+                vfs_path_free (tmp_vpath);
+            }
 
-            tmp_vpath = vfs_path_append_new (vpath, dp->d_name, (char *) NULL);
-            if (mc_lstat (tmp_vpath, &buf) != -1 && S_ISDIR (buf.st_mode))
-                tree_store_mark_checked (dp->d_name);
-            vfs_path_free (tmp_vpath);
-        }
         mc_closedir (dirp);
     }
     tree_store_end_check ();
