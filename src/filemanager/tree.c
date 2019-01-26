@@ -98,8 +98,8 @@ struct WTree
     tree_entry *selected_ptr;   /* The selected directory */
     char search_buffer[MC_MAXFILENAMELEN];      /* Current search string */
     tree_entry **tree_shown;    /* Entries currently on screen */
-    int is_panel;               /* panel or plain widget flag */
-    int searching;              /* Are we on searching mode? */
+    gboolean is_panel;          /* panel or plain widget flag */
+    gboolean searching;         /* Are we on searching mode? */
     int topdiff;                /* The difference between the topmost
                                    shown and the selected */
 };
@@ -955,7 +955,7 @@ tree_start_search (WTree * tree)
              * start with the directory followed the last found directory)
              */
             i = tree_navigation_flag;
-            tree_navigation_flag = 0;
+            tree_navigation_flag = FALSE;
             tree_move_forward (tree, 1);
             tree_navigation_flag = i;
         }
@@ -963,7 +963,7 @@ tree_start_search (WTree * tree)
     }
     else
     {
-        tree->searching = 1;
+        tree->searching = TRUE;
         tree->search_buffer[0] = 0;
     }
 }
@@ -992,7 +992,7 @@ tree_execute_cmd (WTree * tree, long command)
     cb_ret_t res = MSG_HANDLED;
 
     if (command != CK_Search)
-        tree->searching = 0;
+        tree->searching = FALSE;
 
     switch (command)
     {
@@ -1068,7 +1068,7 @@ tree_key (WTree * tree, int key)
     {
         if (tree->is_panel)
         {
-            tree->searching = 0;
+            tree->searching = FALSE;
             show_tree (tree);
             return MSG_HANDLED; /* eat abort char */
         }
@@ -1184,7 +1184,7 @@ tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
         return MSG_HANDLED;
 
     case MSG_UNFOCUS:
-        tree->searching = 0;
+        tree->searching = FALSE;
         return MSG_HANDLED;
 
     case MSG_KEY:
@@ -1293,7 +1293,7 @@ tree_new (int y, int x, int lines, int cols, gboolean is_panel)
     tree->tree_shown = 0;
     tree->search_buffer[0] = 0;
     tree->topdiff = w->lines / 2;
-    tree->searching = 0;
+    tree->searching = FALSE;
 
     load_tree (tree);
     return tree;
