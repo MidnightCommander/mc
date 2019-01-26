@@ -39,12 +39,11 @@
 
 #include <config.h>
 
-#include <stdlib.h>             /* For atol() */
-#include <sys/types.h>
-#include <sys/time.h>           /* gettimeofday() */
+#include <stdlib.h>
 
 #include "lib/global.h"
 #include "lib/event.h"
+#include "lib/timer.h"
 
 #include "vfs.h"
 #include "utilvfs.h"
@@ -98,7 +97,7 @@ struct vfs_stamping
 {
     struct vfs_class *v;
     vfsid id;
-    struct timeval time;
+    guint64 time;
 };
 
 /*** file scope variables ************************************************************************/
@@ -107,16 +106,6 @@ static GSList *stamps = NULL;
 
 /* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-/** Compare two timeval structures.  Return 0 is t1 is less than t2. */
-static inline int
-timeoutcmp (const struct timeval *t1, const struct timeval *t2)
-{
-    return ((t1->tv_sec < t2->tv_sec)
-            || ((t1->tv_sec == t2->tv_sec) && (t1->tv_usec <= t2->tv_usec)));
-}
-
 /* --------------------------------------------------------------------------------------------- */
 
 static gint
@@ -148,7 +137,7 @@ vfs_stamp_expire (gpointer data, gpointer user_data)
 {
     struct vfs_stamping *stamp = VFS_STAMPING (data);
 
-    if (user_data == NULL || timeoutcmp (&(stamp->time), (struct timeval *) user_data) != 0)
+    if (user_data == NULL || stamp->time <= *(guint64 *) user_data)
     {
         vfs_stamp_free (data, NULL);
         vfs_rmstamp (stamp->v, stamp->id);
@@ -167,7 +156,7 @@ vfs_addstamp (struct vfs_class *v, vfsid id)
         stamp = g_new (struct vfs_stamping, 1);
         stamp->v = v;
         stamp->id = id;
-        gettimeofday (&(stamp->time), NULL);
+        stamp->time = mc_timer_elapsed (mc_global.timer);
 
         stamps = g_slist_append (stamps, stamp);
     }
@@ -190,7 +179,7 @@ vfs_stamp (struct vfs_class *v, vfsid id)
     stamp = g_slist_find_custom (stamps, &what, vfs_stamp_compare);
     if (stamp != NULL)
     {
-        gettimeofday (&(VFS_STAMPING (stamp->data)->time), NULL);
+        VFS_STAMPING (stamp->data)->time = mc_timer_elapsed (mc_global.timer);
         ret = TRUE;
     }
 
@@ -288,11 +277,9 @@ vfs_expire (gboolean now)
         g_slist_foreach (stamps, vfs_stamp_expire, NULL);
     else
     {
-        struct timeval lc_time;
+        guint64 lc_time;
 
-        gettimeofday (&lc_time, NULL);
-        lc_time.tv_sec -= vfs_timeout;
-
+        lc_time = mc_timer_elapsed (mc_global.timer) - vfs_timeout * G_USEC_PER_SEC;
         g_slist_foreach (stamps, vfs_stamp_expire, &lc_time);
     }
 
