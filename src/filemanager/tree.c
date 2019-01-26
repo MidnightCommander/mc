@@ -109,6 +109,7 @@ struct WTree
 /* Specifies the display mode: 1d or 2d */
 static gboolean tree_navigation_flag = FALSE;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -119,13 +120,11 @@ static void tree_rescan (void *data);
 static tree_entry *
 back_ptr (tree_entry * ptr, int *count)
 {
-    int i = 0;
+    int i;
 
-    while (ptr && ptr->prev && i < *count)
-    {
-        ptr = ptr->prev;
-        i++;
-    }
+    for (i = 0; ptr != NULL && ptr->prev != NULL && i < *count; ptr = ptr->prev, i++)
+        ;
+
     *count = i;
     return ptr;
 }
@@ -135,13 +134,11 @@ back_ptr (tree_entry * ptr, int *count)
 static tree_entry *
 forw_ptr (tree_entry * ptr, int *count)
 {
-    int i = 0;
+    int i;
 
-    while (ptr && ptr->next && i < *count)
-    {
-        ptr = ptr->next;
-        i++;
-    }
+    for (i = 0; ptr != NULL && ptr->next != NULL && i < *count; ptr = ptr->next, i++)
+        ;
+
     *count = i;
     return ptr;
 }
@@ -155,7 +152,7 @@ remove_callback (tree_entry * entry, void *data)
 
     if (tree->selected_ptr == entry)
     {
-        if (tree->selected_ptr->next)
+        if (tree->selected_ptr->next != NULL)
             tree->selected_ptr = tree->selected_ptr->next;
         else
             tree->selected_ptr = tree->selected_ptr->prev;
@@ -171,9 +168,9 @@ save_tree (WTree * tree)
     int error;
 
     (void) tree;
-    error = tree_store_save ();
 
-    if (error)
+    error = tree_store_save ();
+    if (error != 0)
     {
         char *tree_name;
 
@@ -201,8 +198,7 @@ tree_destroy (WTree * tree)
     tree_store_remove_entry_remove_hook (remove_callback);
     save_tree (tree);
 
-    g_free (tree->tree_shown);
-    tree->tree_shown = 0;
+    MC_PTR_FREE (tree->tree_shown);
     tree->selected_ptr = NULL;
 }
 
@@ -271,7 +267,8 @@ show_tree (WTree * tree)
     Widget *w = WIDGET (tree);
     WDialog *h = w->owner;
     tree_entry *current;
-    int i, j, topsublevel;
+    int i, j;
+    int topsublevel = 0;
     int x = 0, y = 0;
     int tree_lines, tree_cols;
 
@@ -289,11 +286,10 @@ show_tree (WTree * tree)
     g_free (tree->tree_shown);
     tree->tree_shown = g_new0 (tree_entry *, tree_lines);
 
-    if (tree->store->tree_first)
+    if (tree->store->tree_first != NULL)
         topsublevel = tree->store->tree_first->sublevel;
-    else
-        topsublevel = 0;
-    if (!tree->selected_ptr)
+
+    if (tree->selected_ptr == NULL)
     {
         tree->selected_ptr = tree->store->tree_first;
         tree->topdiff = 0;
@@ -306,7 +302,8 @@ show_tree (WTree * tree)
     else
     {
         i = 0;
-        while (current->prev && i < tree->topdiff)
+
+        while (current->prev != NULL && i < tree->topdiff)
         {
             current = current->prev;
 
@@ -369,7 +366,7 @@ show_tree (WTree * tree)
                 if (tree_cols - 8 - 3 * j < 9)
                     break;
                 tty_print_char (' ');
-                if (current->submask & (1 << (j + topsublevel + 1)))
+                if ((current->submask & (1 << (j + topsublevel + 1))) != 0)
                     tty_print_char (ACS_VLINE);
                 else
                     tty_print_char (' ');
@@ -377,7 +374,7 @@ show_tree (WTree * tree)
             }
             tty_print_char (' ');
             j++;
-            if (!current->next || !(current->next->submask & (1 << current->sublevel)))
+            if (current->next == NULL || (current->next->submask & (1 << current->sublevel)) == 0)
                 tty_print_char (ACS_LLCORNER);
             else
                 tty_print_char (ACS_LTEE);
@@ -393,8 +390,7 @@ show_tree (WTree * tree)
         /* Calculate the next value for current */
         current = current->next;
         if (tree_navigation_flag)
-        {
-            while (current != NULL)
+            for (; current != NULL; current = current->next)
             {
                 if (current->sublevel < tree->selected_ptr->sublevel)
                 {
@@ -419,9 +415,7 @@ show_tree (WTree * tree)
                                             vfs_path_len (tree->selected_ptr->name)))
                         break;
                 }
-                current = current->next;
             }
-        }
     }
 
     tree_show_mini_info (tree, tree_lines, tree_cols);
@@ -451,7 +445,8 @@ tree_move_backward (WTree * tree, int i)
         int j = 0;
 
         current = tree->selected_ptr;
-        while (j < i && current->prev && current->prev->sublevel >= tree->selected_ptr->sublevel)
+        while (j < i && current->prev != NULL
+               && current->prev->sublevel >= tree->selected_ptr->sublevel)
         {
             current = current->prev;
             if (current->sublevel == tree->selected_ptr->sublevel)
@@ -480,7 +475,8 @@ tree_move_forward (WTree * tree, int i)
         int j = 0;
 
         current = tree->selected_ptr;
-        while (j < i && current->next && current->next->sublevel >= tree->selected_ptr->sublevel)
+        while (j < i && current->next != NULL
+               && current->next->sublevel >= tree->selected_ptr->sublevel)
         {
             current = current->next;
             if (current->sublevel == tree->selected_ptr->sublevel)
@@ -504,12 +500,13 @@ tree_move_to_child (WTree * tree)
     tree_entry *current;
 
     /* Do we have a starting point? */
-    if (!tree->selected_ptr)
+    if (tree->selected_ptr == NULL)
         return;
+
     /* Take the next entry */
     current = tree->selected_ptr->next;
     /* Is it the child of the selected entry */
-    if (current && current->sublevel > tree->selected_ptr->sublevel)
+    if (current != NULL && current->sublevel > tree->selected_ptr->sublevel)
     {
         /* Yes -> select this entry */
         tree->selected_ptr = current;
@@ -521,7 +518,7 @@ tree_move_to_child (WTree * tree)
         /* No -> rescan and try again */
         tree_rescan (tree);
         current = tree->selected_ptr->next;
-        if (current && current->sublevel > tree->selected_ptr->sublevel)
+        if (current != NULL && current->sublevel > tree->selected_ptr->sublevel)
         {
             tree->selected_ptr = current;
             tree->topdiff++;
@@ -538,17 +535,17 @@ tree_move_to_parent (WTree * tree)
     tree_entry *current;
     tree_entry *old;
 
-    if (!tree->selected_ptr)
+    if (tree->selected_ptr == NULL)
         return FALSE;
 
     old = tree->selected_ptr;
-    current = tree->selected_ptr->prev;
-    while (current && current->sublevel >= tree->selected_ptr->sublevel)
-    {
-        current = current->prev;
+
+    for (current = tree->selected_ptr->prev;
+         current != NULL && current->sublevel >= tree->selected_ptr->sublevel;
+         current = current->prev)
         tree->topdiff--;
-    }
-    if (!current)
+
+    if (current == NULL)
         current = tree->store->tree_first;
     tree->selected_ptr = current;
     tree_check_focus (tree);
@@ -617,29 +614,31 @@ static int
 search_tree (WTree * tree, char *text)
 {
     tree_entry *current;
-    int len;
-    int wrapped = 0;
-    int found = 0;
+    size_t len;
+    gboolean wrapped = FALSE;
+    gboolean found = FALSE;
 
     len = strlen (text);
     current = tree->selected_ptr;
-    found = 0;
-    while (!wrapped || current != tree->selected_ptr)
-    {
+
+    while (!found && (!wrapped || current != tree->selected_ptr))
         if (strncmp (current->subname, text, len) == 0)
         {
             tree->selected_ptr = current;
-            found = 1;
-            break;
+            found = TRUE;
         }
-        current = current->next;
-        if (!current)
+        else
         {
-            current = tree->store->tree_first;
-            wrapped = 1;
+            current = current->next;
+            if (current == NULL)
+            {
+                current = tree->store->tree_first;
+                wrapped = TRUE;
+            }
+
+            tree->topdiff++;
         }
-        tree->topdiff++;
-    }
+
     tree_check_focus (tree);
     return found;
 }
@@ -661,7 +660,7 @@ tree_do_search (WTree * tree, int key)
     }
 
     if (!search_tree (tree, tree->search_buffer))
-        tree->search_buffer[--l] = 0;
+        tree->search_buffer[--l] = '\0';
 
     show_tree (tree);
     maybe_chdir (tree);
@@ -696,7 +695,8 @@ static void
 tree_forget (void *data)
 {
     WTree *tree = data;
-    if (tree->selected_ptr)
+
+    if (tree->selected_ptr != NULL)
         tree_remove_entry (tree, tree->selected_ptr->name);
 }
 
@@ -794,9 +794,7 @@ tree_mkdir (WTree * tree)
 {
     char old_dir[MC_MAXPATHLEN];
 
-    if (!tree->selected_ptr)
-        return;
-    if (chdir (tree->selected_ptr->name))
+    if (tree->selected_ptr == NULL || chdir (tree->selected_ptr->name) != 0)
         return;
     /* FIXME
        mkdir_cmd (tree);
@@ -815,7 +813,7 @@ tree_rmdir (void *data)
     file_op_context_t *ctx;
     file_op_total_context_t *tctx;
 
-    if (!tree->selected_ptr)
+    if (tree->selected_ptr == NULL)
         return;
 
     if (confirm_delete)
@@ -941,14 +939,14 @@ tree_move_right (WTree * tree)
 static void
 tree_start_search (WTree * tree)
 {
-    gboolean i;
-
     if (tree->searching)
     {
         if (tree->selected_ptr == tree->store->tree_last)
             tree_move_to_top (tree);
         else
         {
+            gboolean i;
+
             /* set navigation mode temporarily to 'Static' because in
              * dynamic navigation mode tree_move_forward will not move
              * to a lower sublevel if necessary (sequent searches must
@@ -964,7 +962,7 @@ tree_start_search (WTree * tree)
     else
     {
         tree->searching = TRUE;
-        tree->search_buffer[0] = 0;
+        tree->search_buffer[0] = '\0';
     }
 }
 
@@ -1286,12 +1284,12 @@ tree_new (int y, int x, int lines, int cols, gboolean is_panel)
     widget_init (w, y, x, lines, cols, tree_callback, tree_mouse_callback);
     w->options |= WOP_SELECTABLE | WOP_TOP_SELECT;
     tree->is_panel = is_panel;
-    tree->selected_ptr = 0;
+    tree->selected_ptr = NULL;
 
     tree->store = tree_store_get ();
     tree_store_add_entry_remove_hook (remove_callback, tree);
-    tree->tree_shown = 0;
-    tree->search_buffer[0] = 0;
+    tree->tree_shown = NULL;
+    tree->search_buffer[0] = '\0';
     tree->topdiff = w->lines / 2;
     tree->searching = FALSE;
 
