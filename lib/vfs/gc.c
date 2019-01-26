@@ -90,85 +90,111 @@ int vfs_timeout = 60;           /* VFS timeout in seconds */
 
 /*** file scope macro definitions ****************************************************************/
 
+#define VFS_STAMPING(a) ((struct vfs_stamping *)(a))
+
 /*** file scope type declarations ****************************************************************/
 
 struct vfs_stamping
 {
     struct vfs_class *v;
     vfsid id;
-    struct vfs_stamping *next;
     struct timeval time;
 };
 
 /*** file scope variables ************************************************************************/
 
-static struct vfs_stamping *stamps;
+static GSList *stamps = NULL;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-vfs_addstamp (struct vfs_class *v, vfsid id)
-{
-    if (!(v->flags & VFSF_LOCAL) && id != NULL)
-    {
-        struct vfs_stamping *stamp;
-        struct vfs_stamping *last_stamp = NULL;
-
-        for (stamp = stamps; stamp != NULL; stamp = stamp->next)
-        {
-            if (stamp->v == v && stamp->id == id)
-            {
-                gettimeofday (&(stamp->time), NULL);
-                return;
-            }
-            last_stamp = stamp;
-        }
-        stamp = g_new (struct vfs_stamping, 1);
-        stamp->v = v;
-        stamp->id = id;
-
-        gettimeofday (&(stamp->time), NULL);
-        stamp->next = 0;
-
-        if (stamps)
-        {
-            /* Add to the end */
-            last_stamp->next = stamp;
-        }
-        else
-        {
-            /* Add first element */
-            stamps = stamp;
-        }
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
 /** Compare two timeval structures.  Return 0 is t1 is less than t2. */
-
 static inline int
-timeoutcmp (struct timeval *t1, struct timeval *t2)
+timeoutcmp (const struct timeval *t1, const struct timeval *t2)
 {
     return ((t1->tv_sec < t2->tv_sec)
             || ((t1->tv_sec == t2->tv_sec) && (t1->tv_usec <= t2->tv_usec)));
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static gint
+vfs_stamp_compare (gconstpointer a, gconstpointer b)
+{
+    const struct vfs_stamping *vsa = (const struct vfs_stamping *) a;
+    const struct vfs_stamping *vsb = (const struct vfs_stamping *) b;
+
+    return (vsa->v == vsb->v && vsa->id == vsb->id) ? 0 : 1;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+vfs_stamp_free (gpointer data, gpointer user_data)
+{
+    struct vfs_stamping *stamp = VFS_STAMPING (data);
+
+    (void) user_data;
+
+    if (stamp->v->free != NULL)
+        stamp->v->free (stamp->id);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+vfs_stamp_expire (gpointer data, gpointer user_data)
+{
+    struct vfs_stamping *stamp = VFS_STAMPING (data);
+
+    if (user_data == NULL || timeoutcmp (&(stamp->time), (struct timeval *) user_data) != 0)
+    {
+        vfs_stamp_free (data, NULL);
+        vfs_rmstamp (stamp->v, stamp->id);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+vfs_addstamp (struct vfs_class *v, vfsid id)
+{
+    if ((v->flags & VFSF_LOCAL) == 0 && id != NULL && !vfs_stamp (v, id))
+    {
+        struct vfs_stamping *stamp;
+
+        stamp = g_new (struct vfs_stamping, 1);
+        stamp->v = v;
+        stamp->id = id;
+        gettimeofday (&(stamp->time), NULL);
+
+        stamps = g_slist_append (stamps, stamp);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-void
+gboolean
 vfs_stamp (struct vfs_class *v, vfsid id)
 {
-    struct vfs_stamping *stamp;
+    struct vfs_stamping what = {
+        .v = v,
+        .id = id
+    };
+    GSList *stamp;
+    gboolean ret = FALSE;
 
-    for (stamp = stamps; stamp != NULL; stamp = stamp->next)
-        if (stamp->v == v && stamp->id == id)
-        {
-            gettimeofday (&(stamp->time), NULL);
-            return;
-        }
+    stamp = g_slist_find_custom (stamps, &what, vfs_stamp_compare);
+    if (stamp != NULL)
+    {
+        gettimeofday (&(VFS_STAMPING (stamp->data)->time), NULL);
+        ret = TRUE;
+    }
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -176,23 +202,18 @@ vfs_stamp (struct vfs_class *v, vfsid id)
 void
 vfs_rmstamp (struct vfs_class *v, vfsid id)
 {
-    struct vfs_stamping *stamp, *st1;
+    struct vfs_stamping what = {
+        .v = v,
+        .id = id
+    };
+    GSList *stamp;
 
-    for (stamp = stamps, st1 = NULL; stamp != NULL; st1 = stamp, stamp = stamp->next)
-        if (stamp->v == v && stamp->id == id)
-        {
-            if (st1 == NULL)
-            {
-                stamps = stamp->next;
-            }
-            else
-            {
-                st1->next = stamp->next;
-            }
-            g_free (stamp);
-
-            return;
-        }
+    stamp = g_slist_find_custom (stamps, &what, vfs_stamp_compare);
+    if (stamp != NULL)
+    {
+        g_free (stamp->data);
+        stamps = g_slist_delete_link (stamps, stamp);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -255,30 +276,24 @@ void
 vfs_expire (gboolean now)
 {
     static gboolean locked = FALSE;
-    struct timeval lc_time;
-    struct vfs_stamping *stamp, *st;
 
     /* Avoid recursive invocation, e.g. when one of the free functions
        calls message */
     if (locked)
         return;
+
     locked = TRUE;
 
-    gettimeofday (&lc_time, NULL);
-    lc_time.tv_sec -= vfs_timeout;
-
-    for (stamp = stamps; stamp != NULL;)
+    if (now)
+        g_slist_foreach (stamps, vfs_stamp_expire, NULL);
+    else
     {
-        if (now || (timeoutcmp (&stamp->time, &lc_time)))
-        {
-            st = stamp->next;
-            if (stamp->v->free)
-                (*stamp->v->free) (stamp->id);
-            vfs_rmstamp (stamp->v, stamp->id);
-            stamp = st;
-        }
-        else
-            stamp = stamp->next;
+        struct timeval lc_time;
+
+        gettimeofday (&lc_time, NULL);
+        lc_time.tv_sec -= vfs_timeout;
+
+        g_slist_foreach (stamps, vfs_stamp_expire, &lc_time);
     }
 
     locked = FALSE;
@@ -294,7 +309,7 @@ vfs_expire (gboolean now)
 int
 vfs_timeouts (void)
 {
-    return stamps ? 10 : 0;
+    return stamps != NULL ? 10 : 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -322,19 +337,9 @@ vfs_release_path (const vfs_path_t * vpath)
 void
 vfs_gc_done (void)
 {
-    struct vfs_stamping *stamp, *st;
-
-    for (stamp = stamps, stamps = 0; stamp != NULL;)
-    {
-        if (stamp->v->free)
-            (*stamp->v->free) (stamp->id);
-        st = stamp->next;
-        g_free (stamp);
-        stamp = st;
-    }
-
-    if (stamps)
-        vfs_rmstamp (stamps->v, stamps->id);
+    g_slist_foreach (stamps, vfs_stamp_free, NULL);
+    g_slist_free_full (stamps, g_free);
+    stamps = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */

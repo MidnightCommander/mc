@@ -18,7 +18,7 @@
 
 /*** declarations of public functions ************************************************************/
 
-void vfs_stamp (struct vfs_class *vclass, vfsid id);
+gboolean vfs_stamp (struct vfs_class *vclass, vfsid id);
 void vfs_rmstamp (struct vfs_class *vclass, vfsid id);
 void vfs_stamp_create (struct vfs_class *vclass, vfsid id);
 void vfs_gc_done (void);
