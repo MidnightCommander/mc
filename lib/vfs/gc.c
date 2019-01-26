@@ -92,6 +92,14 @@ int vfs_timeout = 60;           /* VFS timeout in seconds */
 
 /*** file scope type declarations ****************************************************************/
 
+struct vfs_stamping
+{
+    struct vfs_class *v;
+    vfsid id;
+    struct vfs_stamping *next;
+    struct timeval time;
+};
+
 /*** file scope variables ************************************************************************/
 
 static struct vfs_stamping *stamps;

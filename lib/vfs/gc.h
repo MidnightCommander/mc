@@ -14,14 +14,6 @@
 
 /*** structures declarations (and typedefs of structures)*****************************************/
 
-struct vfs_stamping
-{
-    struct vfs_class *v;
-    vfsid id;
-    struct vfs_stamping *next;
-    struct timeval time;
-};
-
 /*** global variables defined in .c file *********************************************************/
 
 /*** declarations of public functions ************************************************************/
