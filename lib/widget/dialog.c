@@ -94,7 +94,7 @@ dlg_get_next_or_prev_of (const GList * list, gboolean next)
 {
     GList *l = NULL;
 
-    if (list != NULL && list->data != NULL)
+    if (list != NULL)
     {
         const WDialog *owner = CONST_WIDGET (list->data)->owner;
 
@@ -352,6 +352,9 @@ dlg_mouse_event (WDialog * h, Gpm_Event * event)
         if (mou != MOU_UNHANDLED)
             return mou;
     }
+
+    if (h->widgets == NULL)
+        return MOU_UNHANDLED;
 
     /* send the event to widgets in reverse Z-order */
     p = g_list_last (h->widgets);
@@ -954,19 +957,18 @@ do_refresh (void)
 
     if (fast_refresh)
     {
-        if ((d != NULL) && (d->data != NULL))
+        if (d != NULL)
             dlg_redraw (DIALOG (d->data));
     }
     else
     {
         /* Search first fullscreen dialog */
         for (; d != NULL; d = g_list_next (d))
-            if (d->data != NULL && (WIDGET (d->data)->pos_flags & WPOS_FULLSCREEN) != 0)
+            if ((WIDGET (d->data)->pos_flags & WPOS_FULLSCREEN) != 0)
                 break;
         /* back to top dialog */
         for (; d != NULL; d = g_list_previous (d))
-            if (d->data != NULL)
-                dlg_redraw (DIALOG (d->data));
+            dlg_redraw (DIALOG (d->data));
     }
 }
 
@@ -1052,9 +1054,7 @@ update_cursor (WDialog * h)
 
     if (p != NULL && widget_get_state (WIDGET (h), WST_ACTIVE))
     {
-        Widget *w;
-
-        w = WIDGET (p->data);
+        Widget *w = WIDGET (p->data);
 
         if (!widget_get_state (w, WST_DISABLED) && widget_get_options (w, WOP_WANT_CURSOR))
             send_message (w, NULL, MSG_CURSOR, 0, NULL);
