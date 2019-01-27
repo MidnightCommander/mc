@@ -1,4 +1,4 @@
-# serial 37
+# serial 38
 # How to list mounted file systems.
 
 # Copyright (C) 1998-2004, 2006, 2009-2018 Free Software Foundation, Inc.
@@ -123,7 +123,7 @@ $ac_includes_default
           [Define if there is a function named getmntent for reading the list
            of mounted file systems, and that function takes a single argument.
            (4.3BSD, SunOS, HP-UX, Irix)])
-        AC_CHECK_FUNCS([hasmntopt])
+        AC_CHECK_FUNCS([setmntent endmntent hasmntopt])
       fi
     fi
 
