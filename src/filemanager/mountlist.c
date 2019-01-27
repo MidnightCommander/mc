@@ -83,7 +83,12 @@
                                    also (obsolete) 4.3BSD, SunOS */
 #include <mntent.h>
 #include <sys/types.h>
-#ifndef MOUNTED
+#if defined __ANDROID__         /* Android */
+   /* Bionic versions from between 2014-01-09 and 2015-01-08 define MOUNTED to
+      an incorrect value; older Bionic versions don't define it at all.  */
+#undef MOUNTED
+#define MOUNTED "/proc/mounts"
+#elif !defined  MOUNTED
 #ifdef _PATH_MOUNTED            /* GNU libc  */
 #define MOUNTED _PATH_MOUNTED
 #endif

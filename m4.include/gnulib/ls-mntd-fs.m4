@@ -1,4 +1,4 @@
-# serial 36
+# serial 37
 # How to list mounted file systems.
 
 # Copyright (C) 1998-2004, 2006, 2009-2018 Free Software Foundation, Inc.
@@ -99,11 +99,14 @@ $ac_includes_default
 #include <stdio.h>
 
 #include <mntent.h>
-#if !defined MOUNTED
-# if defined _PATH_MOUNTED      /* GNU libc  */
+#if defined __ANDROID__        /* Android */
+# undef MOUNTED
+# define MOUNTED "/proc/mounts"
+#elif !defined MOUNTED
+# if defined _PATH_MOUNTED     /* GNU libc  */
 #  define MOUNTED _PATH_MOUNTED
 # endif
-# if defined MNT_MNTTAB /* HP-UX.  */
+# if defined MNT_MNTTAB        /* HP-UX.  */
 #  define MOUNTED MNT_MNTTAB
 # endif
 #endif
