@@ -115,6 +115,7 @@ regex/^\[git\]
 	Open=%cd %p/changesetfs://
 	View=%cd %p/patchsetfs://
 
+
 ### Archives ###
 
 # .tgz, .tpz, .tar.gz, .tar.z, .tar.Z, .ipk, .gem
@@ -334,9 +335,6 @@ shell/i/.f
 regex/i/\.(s|asm)$
 	Include=editor
 
-include/editor
-	Open=%var{EDITOR:vi} %f
-
 # .so libraries
 regex/\.(so|so\.[0-9\.]*)$
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view so
@@ -345,6 +343,7 @@ regex/\.(so|so\.[0-9\.]*)$
 type/^ELF
 	#Open=%var{PAGER:more} %f
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view elf
+
 
 ### Documentation ###
 
@@ -424,6 +423,7 @@ regex/([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|[ln])\.zst$
 shell/i/.chm
 	Open=@EXTHELPERSDIR@/text.sh open chm
 
+
 ### Images ###
 
 type/^GIF
@@ -476,10 +476,6 @@ shell/.ico
 shell/i/.svg
 	View=%view{ascii} @EXTHELPERSDIR@/image.sh view svg
 	Open=@EXTHELPERSDIR@/image.sh open svg
-
-include/image
-	Open=@EXTHELPERSDIR@/image.sh open ALL_FORMATS
-	View=%view{ascii} @EXTHELPERSDIR@/image.sh view ALL_FORMATS
 
 
 ### Sound files ###
@@ -567,10 +563,6 @@ shell/i/.webm
 type/WebM
     Include=video
 
-include/video
-	Open=@EXTHELPERSDIR@/video.sh open ALL_FORMATS
-	View=%view{ascii} @EXTHELPERSDIR@/video.sh view ALL_FORMATS
-
 
 ### Documents ###
 
@@ -650,6 +642,10 @@ shell/i/.dvi
 shell/i/.tex
 	Include=editor
 
+# Markdown
+shell/i/.md
+	Include=editor
+
 # DjVu
 regex/i/\.djvu?$
 	Open=@EXTHELPERSDIR@/doc.sh open djvu
@@ -723,6 +719,7 @@ shell/i/.lyx
 # torrent
 shell/i/.torrent
 	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view torrent
+
 
 ### Plain compressed files ###
 
@@ -818,6 +815,22 @@ regex/\.zst$
 # Parity Archive
 type/^Parity\ Archive\ Volume\ Set
 	Open=@EXTHELPERSDIR@/archive.sh open par2
+
+
+### Includes
+# includes should be at end of bindings
+
+include/editor
+	Open=%var{EDITOR:vi} %f
+
+include/image
+	Open=@EXTHELPERSDIR@/image.sh open ALL_FORMATS
+	View=%view{ascii} @EXTHELPERSDIR@/image.sh view ALL_FORMATS
+
+include/video
+	Open=@EXTHELPERSDIR@/video.sh open ALL_FORMATS
+	View=%view{ascii} @EXTHELPERSDIR@/video.sh view ALL_FORMATS
+
 
 ### Default ###
 
