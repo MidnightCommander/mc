@@ -642,6 +642,10 @@ shell/i/.dvi
 shell/i/.tex
 	Include=editor
 
+# Markdown
+shell/i/.md
+	Include=editor
+
 # DjVu
 regex/i/\.djvu?$
 	Open=@EXTHELPERSDIR@/doc.sh open djvu
