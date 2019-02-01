@@ -235,6 +235,9 @@ include cabal.syntax
 file ..\*\\.(?i:n)$ Nemerle\sProgram
 include nemerle.syntax
 
+file ..\*\\.(?i:rc)$ rTorrent\sConfig\sFile #.\*r[tT]orrent.\*
+include rtorrent.syntax
+
 file ..\*\\.(?i:v)$ Verilog\sDevice\sDescription
 include verilog.syntax
 
