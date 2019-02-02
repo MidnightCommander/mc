@@ -18,8 +18,8 @@
 /*** declarations of public functions ************************************************************/
 
 /* Misc Unix functions */
-int my_mkdir (const vfs_path_t * s, mode_t mode);
-int my_rmdir (const char *s);
+int my_mkdir (const vfs_path_t * vpath, mode_t mode);
+int my_rmdir (const char *path);
 
 /*** inline functions ****************************************************************************/
 

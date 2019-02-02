@@ -191,9 +191,8 @@ void file_op_total_context_destroy (file_op_total_context_t * tctx);
 
 /* The following functions are implemented separately by each port */
 FileProgressStatus file_progress_real_query_replace (file_op_context_t * ctx,
-                                                     enum OperationMode mode,
-                                                     const char *destname,
-                                                     struct stat *_s_stat, struct stat *_d_stat);
+                                                     enum OperationMode mode, const char *dst,
+                                                     struct stat *src_stat, struct stat *dst_stat);
 
 /*** inline functions ****************************************************************************/
 #endif /* MC__FILEOPCTX_H */

@@ -229,7 +229,7 @@ typedef struct
     const char *replace_filename;
     replace_action_t replace_result;
 
-    struct stat *s_stat, *d_stat;
+    struct stat *src_stat, *dst_stat;
 } file_op_context_ui_t;
 
 /*** file scope variables ************************************************************************/
@@ -543,14 +543,14 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
     add_widget (ui->replace_dlg, hline_new (y++, -1, -1));
 
     /* source date and size */
-    size_trunc_len (fsize_buffer, sizeof (fsize_buffer), ui->s_stat->st_size, 0,
+    size_trunc_len (fsize_buffer, sizeof (fsize_buffer), ui->src_stat->st_size, 0,
                     panels_options.kilobyte_si);
-    ADD_RD_LABEL (2, file_date (ui->s_stat->st_mtime), fsize_buffer, y++);
+    ADD_RD_LABEL (2, file_date (ui->src_stat->st_mtime), fsize_buffer, y++);
     rd_xlen = MAX (rd_xlen, label2->cols + 8);
     /* destination date and size */
-    size_trunc_len (fsize_buffer, sizeof (fsize_buffer), ui->d_stat->st_size, 0,
+    size_trunc_len (fsize_buffer, sizeof (fsize_buffer), ui->dst_stat->st_size, 0,
                     panels_options.kilobyte_si);
-    ADD_RD_LABEL (3, file_date (ui->d_stat->st_mtime), fsize_buffer, y++);
+    ADD_RD_LABEL (3, file_date (ui->dst_stat->st_mtime), fsize_buffer, y++);
     rd_xlen = MAX (rd_xlen, label2->cols + 8);
 
     add_widget (ui->replace_dlg, hline_new (y++, -1, -1));
@@ -560,12 +560,12 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
     no_id = ADD_RD_BUTTON (6, y);       /* No */
 
     /* "this target..." widgets */
-    if (!S_ISDIR (ui->d_stat->st_mode))
+    if (!S_ISDIR (ui->dst_stat->st_mode))
     {
         ADD_RD_BUTTON (7, y++); /* Append */
 
-        if ((ctx->operation == OP_COPY) && (ui->d_stat->st_size != 0)
-            && (ui->s_stat->st_size > ui->d_stat->st_size))
+        if ((ctx->operation == OP_COPY) && (ui->dst_stat->st_size != 0)
+            && (ui->src_stat->st_size > ui->dst_stat->st_size))
             ADD_RD_BUTTON (8, y++);     /* Reget */
     }
 
@@ -1023,7 +1023,7 @@ file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ct
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_source (file_op_context_t * ctx, const vfs_path_t * s_vpath)
+file_progress_show_source (file_op_context_t * ctx, const vfs_path_t * vpath)
 {
     file_op_context_ui_t *ui;
 
@@ -1032,11 +1032,11 @@ file_progress_show_source (file_op_context_t * ctx, const vfs_path_t * s_vpath)
 
     ui = ctx->ui;
 
-    if (s_vpath != NULL)
+    if (vpath != NULL)
     {
         char *s;
 
-        s = vfs_path_tokens_get (s_vpath, -1, 1);
+        s = vfs_path_tokens_get (vpath, -1, 1);
         label_set_text (ui->src_file_label, _("Source"));
         label_set_text (ui->src_file, truncFileString (ui->op_dlg, s));
         g_free (s);
@@ -1051,7 +1051,7 @@ file_progress_show_source (file_op_context_t * ctx, const vfs_path_t * s_vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_target (file_op_context_t * ctx, const vfs_path_t * s_vpath)
+file_progress_show_target (file_op_context_t * ctx, const vfs_path_t * vpath)
 {
     file_op_context_ui_t *ui;
 
@@ -1060,11 +1060,10 @@ file_progress_show_target (file_op_context_t * ctx, const vfs_path_t * s_vpath)
 
     ui = ctx->ui;
 
-    if (s_vpath != NULL)
+    if (vpath != NULL)
     {
         label_set_text (ui->tgt_file_label, _("Target"));
-        label_set_text (ui->tgt_file,
-                        truncFileStringSecure (ui->op_dlg, vfs_path_as_str (s_vpath)));
+        label_set_text (ui->tgt_file, truncFileStringSecure (ui->op_dlg, vfs_path_as_str (vpath)));
     }
     else
     {
@@ -1098,8 +1097,8 @@ file_progress_show_deleting (file_op_context_t * ctx, const char *s, size_t * co
 
 FileProgressStatus
 file_progress_real_query_replace (file_op_context_t * ctx,
-                                  enum OperationMode mode, const char *destname,
-                                  struct stat *_s_stat, struct stat *_d_stat)
+                                  enum OperationMode mode, const char *dst,
+                                  struct stat *src_stat, struct stat *dst_stat)
 {
     file_op_context_ui_t *ui;
 
@@ -1110,9 +1109,9 @@ file_progress_real_query_replace (file_op_context_t * ctx,
 
     if (ui->replace_result < REPLACE_ALWAYS)
     {
-        ui->replace_filename = destname;
-        ui->s_stat = _s_stat;
-        ui->d_stat = _d_stat;
+        ui->replace_filename = dst;
+        ui->src_stat = src_stat;
+        ui->dst_stat = dst_stat;
         ui->replace_result = overwrite_query_dialog (ctx, mode);
     }
 
@@ -1120,21 +1119,21 @@ file_progress_real_query_replace (file_op_context_t * ctx,
     {
     case REPLACE_UPDATE:
         do_refresh ();
-        if (_s_stat->st_mtime > _d_stat->st_mtime)
+        if (src_stat->st_mtime > dst_stat->st_mtime)
             return FILE_CONT;
         else
             return FILE_SKIP;
 
     case REPLACE_SIZE:
         do_refresh ();
-        if (_s_stat->st_size == _d_stat->st_size)
+        if (src_stat->st_size == dst_stat->st_size)
             return FILE_SKIP;
         else
             return FILE_CONT;
 
     case REPLACE_REGET:
         /* Careful: we fall through and set do_append */
-        ctx->do_reget = _d_stat->st_size;
+        ctx->do_reget = dst_stat->st_size;
         MC_FALLTHROUGH;
 
     case REPLACE_APPEND:
