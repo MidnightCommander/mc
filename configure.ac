@@ -265,7 +265,7 @@ AC_CHECK_LIB(seq, get_process_stats, [
 		  [Define if you have function `get_process_stats' and
 have to use that instead of gettimeofday])])
 
-mc_AC_GET_FS_INFO
+mc_GET_FS_INFO
 
 
 dnl ############################################################################

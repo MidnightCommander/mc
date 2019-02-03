@@ -97,7 +97,7 @@ dnl
 dnl To get information about the disk, mount points, etc.
 dnl
 
-AC_DEFUN([mc_AC_GET_FS_INFO], [
+AC_DEFUN([mc_GET_FS_INFO], [
     AC_CHECK_HEADERS([fcntl.h utime.h])
 
     gl_MOUNTLIST
