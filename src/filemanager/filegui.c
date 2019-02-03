@@ -192,7 +192,7 @@ typedef enum
     REPLACE_NO,
     REPLACE_APPEND,
     REPLACE_ALWAYS,
-    REPLACE_UPDATE,
+    REPLACE_OLDER,
     REPLACE_NEVER,
     REPLACE_ABORT,
     REPLACE_SIZE,
@@ -434,7 +434,7 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
         /* 10 */
         { N_("A&ll"), 11, 28, WPOS_KEEP_DEFAULT, REPLACE_ALWAYS },
         /* 11 */
-        { N_("&Update"), 11, 36, WPOS_KEEP_DEFAULT, REPLACE_UPDATE },
+        { N_("If &older"), 11, 36, WPOS_KEEP_DEFAULT, REPLACE_OLDER },
         /* 12 */
         { N_("Non&e"), 11, 47, WPOS_KEEP_DEFAULT, REPLACE_NEVER },
         /* 13 */
@@ -572,7 +572,7 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
 
     ADD_RD_LABEL (9, 0, 0, y);  /* Overwrite all targets? */
     ADD_RD_BUTTON (10, y);      /* All" */
-    ADD_RD_BUTTON (11, y);      /* Update */
+    ADD_RD_BUTTON (11, y);      /* If older */
     ADD_RD_BUTTON (12, y++);    /* None */
     ADD_RD_BUTTON (13, y++);    /* If size differs */
 
@@ -1116,7 +1116,7 @@ file_progress_real_query_replace (file_op_context_t * ctx,
 
     switch (ui->replace_result)
     {
-    case REPLACE_UPDATE:
+    case REPLACE_OLDER:
         do_refresh ();
         if (src_stat->st_mtime > dst_stat->st_mtime)
             return FILE_CONT;
