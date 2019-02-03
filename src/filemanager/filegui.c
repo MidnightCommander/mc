@@ -196,6 +196,7 @@ typedef enum
     REPLACE_NEVER,
     REPLACE_ABORT,
     REPLACE_SIZE,
+    REPLACE_SMALLER,
     REPLACE_REGET
 } replace_action_t;
 
@@ -440,6 +441,8 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
         /* 13 */
         { N_("If &size differs"), 12, 28, WPOS_KEEP_DEFAULT, REPLACE_SIZE },
         /* 14 */
+        { N_("If s&maller"), 12, 48, WPOS_KEEP_DEFAULT, REPLACE_SMALLER },
+        /* 15 */
         { N_("&Abort"), 14, 25, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, REPLACE_ABORT }
         /* *INDENT-ON* */
     };
@@ -574,11 +577,12 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
     ADD_RD_BUTTON (10, y);      /* All" */
     ADD_RD_BUTTON (11, y);      /* If older */
     ADD_RD_BUTTON (12, y++);    /* None */
-    ADD_RD_BUTTON (13, y++);    /* If size differs */
+    ADD_RD_BUTTON (13, y);      /* If size differs */
+    ADD_RD_BUTTON (14, y++);    /* If smaller */
 
     add_widget (ui->replace_dlg, hline_new (y++, -1, -1));
 
-    ADD_RD_BUTTON (14, y);      /* Abort */
+    ADD_RD_BUTTON (15, y);      /* Abort */
 
     label_set_text (LABEL (label1), str_trunc (stripped_name, rd_xlen - 8));
     dlg_set_size (ui->replace_dlg, y + 3, rd_xlen);
@@ -1129,6 +1133,13 @@ file_progress_real_query_replace (file_op_context_t * ctx,
             return FILE_SKIP;
         else
             return FILE_CONT;
+
+    case REPLACE_SMALLER:
+        do_refresh ();
+        if (src_stat->st_size > dst_stat->st_size)
+            return FILE_CONT;
+        else
+            return FILE_SKIP;
 
     case REPLACE_REGET:
         /* Careful: we fall through and set do_append */
