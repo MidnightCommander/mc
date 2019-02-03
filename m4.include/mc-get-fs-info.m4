@@ -98,17 +98,16 @@ dnl To get information about the disk, mount points, etc.
 dnl
 
 AC_DEFUN([mc_AC_GET_FS_INFO], [
-    gl_MOUNTLIST
-    if test $gl_cv_list_mounted_fs = yes; then
-      gl_PREREQ_MOUNTLIST_EXTRA
-    fi
-
     AC_CHECK_HEADERS([fcntl.h utime.h])
 
-    gl_LIST_MOUNTED_FILE_SYSTEMS([
-	AC_DEFINE(HAVE_INFOMOUNT_LIST, 1,
-	    [Define if the list of mounted filesystems can be determined])],
-	[AC_MSG_WARN([could not determine how to read list of mounted fs])])
+    gl_MOUNTLIST
+    if test $gl_cv_list_mounted_fs = yes; then
+        gl_PREREQ_MOUNTLIST_EXTRA
+        AC_DEFINE(HAVE_INFOMOUNT_LIST, 1,
+                    [Define if the list of mounted filesystems can be determined])
+    else
+        AC_MSG_WARN([could not determine how to read list of mounted fs]);
+    fi
 
     gl_FSUSAGE
     if test $gl_cv_fs_space = yes; then
