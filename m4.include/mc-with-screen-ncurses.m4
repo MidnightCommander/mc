@@ -133,6 +133,7 @@ AC_DEFUN([mc_WITH_NCURSES], [
         if test x"$ncurses_h_found" = "x"; then
             AC_MSG_ERROR([Cannot find ncurses header file])
         fi
+        AC_CHECK_HEADERS([ncurses/term.h])
 
         screen_type=ncurses
         screen_msg="NCurses"
