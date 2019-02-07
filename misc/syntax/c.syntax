@@ -36,7 +36,7 @@ context default
     keyword whole inline yellow
     keyword whole wchar_t yellow
     keyword whole ... yellow
-    keyword whole linestart \{\s\t\}\[\s\t\]#*\n brightmagenta
+    keyword linestart \{\s\t\}\[\s\t\]#*\n brightmagenta
     keyword whole \[\s\t\]default yellow
     keyword whole linestart \[\s\t\]\{ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\}\[0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz\]: cyan
 
