@@ -1,7 +1,7 @@
 /*
    Various utilities - Unix variants
 
-   Copyright (C) 1994-2018
+   Copyright (C) 1994-2019
    Free Software Foundation, Inc.
 
    Written by:
@@ -120,6 +120,7 @@ static int_cache gid_cache[GID_CACHE_SIZE];
 static int error_pipe[2];       /* File descriptors of error pipe */
 static int old_error;           /* File descriptor of old standard error */
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -394,7 +395,6 @@ my_system (int flags, const char *shell, const char *command)
  *                  Should be NULL terminated.
  * @return 0 if successfull, -1 otherwise
  */
-
 
 int
 my_systeml (int flags, const char *shell, ...)
@@ -685,10 +685,8 @@ tilde_expand (const char *directory)
     else
     {
         q = strchr (p, PATH_SEP);
-        if (!q)
-        {
+        if (q == NULL)
             passwd = getpwnam (p);
-        }
         else
         {
             char *name;
@@ -701,7 +699,7 @@ tilde_expand (const char *directory)
     }
 
     /* If we can't figure the user name, leave tilde unexpanded */
-    if (!passwd)
+    if (passwd == NULL)
         return g_strdup (directory);
 
     return g_strconcat (passwd->pw_dir, PATH_SEP_STR, q, (char *) NULL);
@@ -718,9 +716,8 @@ void
 open_error_pipe (void)
 {
     if (pipe (error_pipe) < 0)
-    {
         message (D_NORMAL, _("Warning"), _("Pipe failed"));
-    }
+
     old_error = dup (STDERR_FILENO);
     if (old_error < 0 || close (STDERR_FILENO) != 0 || dup (error_pipe[1]) != STDERR_FILENO)
     {
@@ -740,10 +737,12 @@ open_error_pipe (void)
          * of following hack.
          */
         int fd_flags;
+
         fd_flags = fcntl (error_pipe[0], F_GETFL, NULL);
         if (fd_flags != -1)
         {
             fd_flags |= O_NONBLOCK;
+
             if (fcntl (error_pipe[0], F_SETFL, fd_flags) == -1)
             {
                 /* TODO: handle it somehow */
@@ -838,22 +837,19 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
     /* Detect and preserve UNC paths: //server/... */
     if ((flags & CANON_PATH_GUARDUNC) != 0 && IS_PATH_SEP (path[0]) && IS_PATH_SEP (path[1]))
     {
-        p = path + 2;
-        while (p[0] != '\0' && !IS_PATH_SEP (p[0]))
-            p++;
+        for (p = path + 2; p[0] != '\0' && !IS_PATH_SEP (p[0]); p++)
+            ;
         if (IS_PATH_SEP (p[0]) && p > path + 2)
             lpath = p;
     }
 
-    if (!lpath[0] || !lpath[1])
+    if (lpath[0] == '\0' || lpath[1] == '\0')
         return;
 
-    if (flags & CANON_PATH_JOINSLASHES)
+    if ((flags & CANON_PATH_JOINSLASHES) != 0)
     {
         /* Collapse multiple slashes */
-        p = lpath;
-        while (*p)
-        {
+        for (p = lpath; *p != '\0'; p++)
             if (IS_PATH_SEP (p[0]) && IS_PATH_SEP (p[1]) && (p == lpath || *(p - 1) != ':'))
             {
                 s = p + 1;
@@ -861,88 +857,70 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                     ;
                 str_move (p + 1, s);
             }
-            p++;
-        }
-    }
 
-    if (flags & CANON_PATH_JOINSLASHES)
-    {
         /* Collapse "/./" -> "/" */
-        p = lpath;
-        while (*p)
-        {
+        for (p = lpath; *p != '\0';)
             if (IS_PATH_SEP (p[0]) && p[1] == '.' && IS_PATH_SEP (p[2]))
                 str_move (p, p + 2);
             else
                 p++;
-        }
     }
 
-    if (flags & CANON_PATH_REMSLASHDOTS)
+    if ((flags & CANON_PATH_REMSLASHDOTS) != 0)
     {
         size_t len;
 
         /* Remove trailing slashes */
-        p = lpath + strlen (lpath) - 1;
-        while (p > lpath && IS_PATH_SEP (*p))
+        for (p = lpath + strlen (lpath) - 1; p > lpath && IS_PATH_SEP (*p); p--)
         {
             if (p >= lpath + url_delim_len - 1
                 && strncmp (p - url_delim_len + 1, VFS_PATH_URL_DELIMITER, url_delim_len) == 0)
                 break;
-            *p-- = 0;
+            *p = '\0';
         }
 
         /* Remove leading "./" */
         if (lpath[0] == '.' && IS_PATH_SEP (lpath[1]))
         {
-            if (lpath[2] == 0)
+            if (lpath[2] == '\0')
             {
-                lpath[1] = 0;
+                lpath[1] = '\0';
                 return;
             }
-            else
-            {
-                str_move (lpath, lpath + 2);
-            }
+
+            str_move (lpath, lpath + 2);
         }
 
         /* Remove trailing "/" or "/." */
         len = strlen (lpath);
         if (len < 2)
             return;
+
         if (IS_PATH_SEP (lpath[len - 1])
             && (len < url_delim_len
                 || strncmp (lpath + len - url_delim_len, VFS_PATH_URL_DELIMITER,
                             url_delim_len) != 0))
-        {
             lpath[len - 1] = '\0';
-        }
-        else
+        else if (lpath[len - 1] == '.' && IS_PATH_SEP (lpath[len - 2]))
         {
-            if (lpath[len - 1] == '.' && IS_PATH_SEP (lpath[len - 2]))
+            if (len == 2)
             {
-                if (len == 2)
-                {
-                    lpath[1] = '\0';
-                    return;
-                }
-                else
-                {
-                    lpath[len - 2] = '\0';
-                }
+                lpath[1] = '\0';
+                return;
             }
+
+            lpath[len - 2] = '\0';
         }
     }
 
-    if (flags & CANON_PATH_REMDOUBLEDOTS)
+    /* Collapse "/.." with the previous part of path */
+    if ((flags & CANON_PATH_REMDOUBLEDOTS) != 0)
     {
 #ifdef HAVE_CHARSET
         const size_t enc_prefix_len = strlen (VFS_ENCODING_PREFIX);
 #endif /* HAVE_CHARSET */
 
-        /* Collapse "/.." with the previous part of path */
-        p = lpath;
-        while (p[0] && p[1] && p[2])
+        for (p = lpath; p[0] != '\0' && p[1] != '\0' && p[2] != '\0';)
         {
             if (!IS_PATH_SEP (p[0]) || p[1] != '.' || p[2] != '.'
                 || (!IS_PATH_SEP (p[3]) && p[3] != '\0'))
@@ -981,6 +959,7 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                     if (vclass != NULL)
                     {
                         struct vfs_s_subclass *sub = (struct vfs_s_subclass *) vclass->data;
+
                         if (sub != NULL && sub->flags & VFS_S_REMOTE)
                         {
                             s = vfs_prefix;
@@ -1004,7 +983,7 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                 continue;
             }
 
-            if (p[3] != 0)
+            if (p[3] != '\0')
             {
                 if (s == lpath && IS_PATH_SEP (*s))
                 {
@@ -1023,7 +1002,8 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
 #endif /* HAVE_CHARSET */
                         str_move (s, p + 4);
                 }
-                p = (s > lpath) ? s - 1 : s;
+
+                p = s > lpath ? s - 1 : s;
                 continue;
             }
 
@@ -1051,9 +1031,8 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
 
                     /* search for the previous token */
                     /* IS_PATH_SEP (s[-1]) */
-                    p = s - 1;
-                    while (p >= lpath && !IS_PATH_SEP (*p))
-                        p--;
+                    for (p = s - 1; p >= lpath && !IS_PATH_SEP (*p); p--)
+                        ;
 
                     if (p >= lpath)
                         continue;
@@ -1088,6 +1067,8 @@ canonicalize_pathname (char *path)
 int
 gettimeofday (struct timeval *tp, void *tzp)
 {
+    (void) tzp;
+
     return get_process_stats (tp, PS_SELF, 0, 0);
 }
 #endif /* HAVE_GET_PROCESS_STATS */
@@ -1142,6 +1123,7 @@ mc_realpath (const char *path, char *resolved_path)
             errno = ENAMETOOLONG;
             return NULL;
         }
+
         strcpy (copy_path, path);
         path = copy_path;
         max_path = copy_path + PATH_MAX - 2;
@@ -1150,9 +1132,7 @@ mc_realpath (const char *path, char *resolved_path)
         {
             new_path = g_get_current_dir ();
             if (new_path == NULL)
-            {
                 strcpy (got_path, "");
-            }
             else
             {
                 g_snprintf (got_path, sizeof (got_path), "%s", new_path);
@@ -1313,10 +1293,8 @@ get_user_permissions (struct stat *st)
         return 0;
 
     for (i = 0; i < ngroups; i++)
-    {
         if (st->st_gid == groups[i])
             return 1;
-    }
 
     return 2;
 }

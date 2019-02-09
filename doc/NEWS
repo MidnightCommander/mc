@@ -2,141 +2,141 @@ Version 4.8.22
 
 - Core
 
-  * Support BTRFS's file clone operation (#1983)
-  * Find file: show pattern and content in the results window title (#3453)
-  * Find file: remember state (empty or not) of Content field (#3924)
-  * Improve support IBM i (#3927)
-  * Improve handling of hard link creation errors (#3678)
-  * Support user-defined prompt in the Fish subshell (#3944)
+    * Support BTRFS's file clone operation (#1983)
+    * Find file: show pattern and content in the results window title (#3453)
+    * Find file: remember state (empty or not) of Content field (#3924)
+    * Improve support IBM i (#3927)
+    * Improve handling of hard link creation errors (#3678)
+    * Support user-defined prompt in the Fish subshell (#3944)
 
 - VFS
 
-  * sftp: preserve atime and mtime (#3917)
+    * sftp: preserve atime and mtime (#3917)
 
 - Editor
 
-  * man page cleanup (#3918)
-  * syntax:
-    * PHP - highlight keyword 'null' (#3920)
-    * Meson - initial implementation (#3940)
+    * man page cleanup (#3918)
+    * syntax:
+        - PHP - highlight keyword 'null' (#3920)
+        - Meson - initial implementation (#3940)
 
 - Misc
 
-  * ext.d: use MPV as a fallback for mplayer -identify (#3919)
-  * ext.d: improve recognition of MS Office formats (#3929)
-  * Code cleanup (#3915)
-  * Cleanup hint files
+    * ext.d: use MPV as a fallback for mplayer -identify (#3919)
+    * ext.d: improve recognition of MS Office formats (#3929)
+    * Code cleanup (#3915)
+    * Cleanup hint files
 
 - Fixes
 
-  * Won't compile for Apple (#3930)
-  * "Cannot create target file" when target has backslash space in the name (#3923)
-  * Quiet single file overwrite (#3908)
-  * Show error message for each not-installed program when view documents in MS Word and Excel formats (#3926)
-  * Crash when trying some sftp connections (#3937)
-  * Crash when return to filemanager from subshell (#3943)
+    * Won't compile for Apple (#3930)
+    * "Cannot create target file" when target has backslash space in the name (#3923)
+    * Quiet single file overwrite (#3908)
+    * Show error message for each not-installed program when view documents in MS Word and Excel formats (#3926)
+    * Crash when trying some sftp connections (#3937)
+    * Crash when return to filemanager from subshell (#3943)
 
 
 Version 4.8.21
 
 - Core
 
-  * Cancel Chmod/Chown/Advanced chown operation for large group of files when operation is not permitted (#3850)
-  * Mouse support in the "Advanced chown" dialog window (#3148)
-  * File highlighting by extension is case insensitive by default (#1620)
-  * Safe file overwrite (#3913)
+    * Cancel Chmod/Chown/Advanced chown operation for large group of files when operation is not permitted (#3850)
+    * Mouse support in the "Advanced chown" dialog window (#3148)
+    * File highlighting by extension is case insensitive by default (#1620)
+    * Safe file overwrite (#3913)
 
 - VFS
 
-  * Support zstd compression format (#3906)
+    * Support zstd compression format (#3906)
 
 - Editor
 
-  * Syntax:
-    * Rust support (#3884)
-    * JavaScript modules support (#3890)
-    * Improve Markdown support (#3893)
+    * Syntax:
+        - Rust support (#3884)
+        - JavaScript modules support (#3890)
+        - Improve Markdown support (#3893)
 
 - Misc
 
-  * Add JavaScript module support to `filehighlight.ini` (MidnightCommander/mc#132)
-  * Add Excel xlsx file format support to `mc.ext.in` (MidnightCommander/mc#135)
-  * i18n of argument type names in --help blocks (#3879)
-  * Code cleanup: (#3857, #3914)
+    * Add JavaScript module support to `filehighlight.ini` (MidnightCommander/mc#132)
+    * Add Excel xlsx file format support to `mc.ext.in` (MidnightCommander/mc#135)
+    * i18n of argument type names in --help blocks (#3879)
+    * Code cleanup: (#3857, #3914)
 
 - Fixes
 
-  * Fail to link to ncurses built as two libraries: ncurses+tinfo (#3880)
-  * Garbage in displaying of summary of file sizes for selected files (#3883)
-  * "Compute totals" unnecessarily done for moves (#3149, #3908)
-  * mc.ext: allow Java class files to be viewed even if JAD isn't on PATH (MidnightCommander/mc#134)
-  * mcedit: broken extended key mode (#3897)
-  * mcedit doesn't save all opened files (#3898)
-  * extfs: sftps: -31 SFTP Protocol Error when transferring file (#3406)
-  * extfs: rpm: truncated script content in the viewer (#3865)
-  * extfs: rpm helper misses CONFLICTS field (#3789)
+    * Fail to link to ncurses built as two libraries: ncurses+tinfo (#3880)
+    * Garbage in displaying of summary of file sizes for selected files (#3883)
+    * "Compute totals" unnecessarily done for moves (#3149, #3908)
+    * mc.ext: allow Java class files to be viewed even if JAD isn't on PATH (MidnightCommander/mc#134)
+    * mcedit: broken extended key mode (#3897)
+    * mcedit doesn't save all opened files (#3898)
+    * extfs: sftps: -31 SFTP Protocol Error when transferring file (#3406)
+    * extfs: rpm: truncated script content in the viewer (#3865)
+    * extfs: rpm helper misses CONFLICTS field (#3789)
 
 
 Version 4.8.20
 
 - Core
 
-  * Rename key bindings:
-    * [main].PanelListingSwitch -> [panel].CycleListingFormat
-    * [main].PanelListingChange -> [main].SetupListingFormat
-  * Speed up of UTF-8 normalization for frequent cases (#3616)
+    * Rename key bindings:
+        - [main].PanelListingSwitch -> [panel].CycleListingFormat
+        - [main].PanelListingChange -> [main].SetupListingFormat
+    * Speed up of UTF-8 normalization for frequent cases (#3616)
 
 - VFS
 
-  * extfs helpers tester:
-    * diff of failed tests is now included in output to ease bug reporting (#3784)
+    * extfs helpers tester:
+        - diff of failed tests is now included in output to ease bug reporting (#3784)
 
 - Editor
 
-  * Syntax:
-    * ES2015 support (#3793)
-    * TypeScript support (#3794)
-    * Ada 95 updates (#3804)
-    * Apache Hive QL support (#3828)
-    * SQL & PHP keyword updates (MidnightCommander/mc#129)
-    * Simplification of case insensitive file name patterns in /usr/share/mc/syntax/Syntax file (#3829)
-    * Markdown (initial support) (#3864)
-    * Protocol Buffers and gRPC support (#3868)
-  * Add %c (cursor offset from BOF) support for user menu macros (#3867)
+    * Syntax:
+        - ES2015 support (#3793)
+        - TypeScript support (#3794)
+        - Ada 95 updates (#3804)
+        - Apache Hive QL support (#3828)
+        - SQL & PHP keyword updates (MidnightCommander/mc#129)
+        - Simplification of case insensitive file name patterns in /usr/share/mc/syntax/Syntax file (#3829)
+        - Markdown (initial support) (#3864)
+        - Protocol Buffers and gRPC support (#3868)
+    * Add %c (cursor offset from BOF) support for user menu macros (#3867)
 
 - Misc
 
-  * Unify curses initialization for various curses implementations (#3697)
-  * Highlight txz extension as archive like tgz, etc. (#3782)
-  * Add new media extensions to `filehighlight.ini` (#3834)
+    * Unify curses initialization for various curses implementations (#3697)
+    * Highlight txz extension as archive like tgz, etc. (#3782)
+    * Add new media extensions to `filehighlight.ini` (#3834)
 
 - Fixes
 
-  * Wrong --help message for mcview, mcedit and mcdiff (#3805)
-  * Compression from menu broken due to bad quoting (#3840)
-  * `--with-homedir` gives "yes" as config directory (#3836)
-  * External panelize: opening a file with an absolute path fails (#2942)
-  * Filter isn't cleared when entering empty string (#3813)
-  * Panelization is not kept while switching panel listing mode (#3810)
-  * Cannot tab out of a QuickView panel (#3815)
-  * Cannot use the F10 key in a QuickView panel (#3816)
-  * Wrong INPUT_COMPLETE_CD flag handling in the QuickDialog engine (#3870)
-  * mcview: file interpreted as latin1 instead of utf8 (#3783)
-  * mcview: incomplete read of filtering data (#3817)
-  * mcview: search doesn't grow file as much as needed (#3819, #3855)
-  * mcview: goto doesn't grow file as much as needed (#3826)
-  * mcview: quick view panel: crash on slow startup while switching panel mode (#3846)
-  * mcedit: fix broken encoding into UTF-8 for 8-bit displays (#3843)
-  * mcedit: incorrect %f macro substitution in the user menu (#3861)
-  * man pages: wrong paths of mc.hint and mc.hlp (#3806)
-  * subshell: fix broken tcsh 6.20+ cd escaping (#3852)
-  * VFS: incremental tar doesn't contain empty directories (#2297)
-  * VFS: incremental tar: wrong directories owner for tar --numeric-owner -g (#3709)
-  * VFS: timestamps not being preserved due to uninitialized struct stat st_[acm]tim.tv_nsec (#3821)
-  * VFS: ftp: can't retrieve password from .netrc when user is in URL (#3869)
-  * VFS: tests: locale issue causing helpers using 'sort' to fail (#3787)
-  * VFS: tests: unportable 'echo' use causing one rpm helper test to fail (#3786)
-  * Spelling errors in the manual page (#3839)
+    * Wrong --help message for mcview, mcedit and mcdiff (#3805)
+    * Compression from menu broken due to bad quoting (#3840)
+    * `--with-homedir` gives "yes" as config directory (#3836)
+    * External panelize: opening a file with an absolute path fails (#2942)
+    * Filter isn't cleared when entering empty string (#3813)
+    * Panelization is not kept while switching panel listing mode (#3810)
+    * Cannot tab out of a QuickView panel (#3815)
+    * Cannot use the F10 key in a QuickView panel (#3816)
+    * Wrong INPUT_COMPLETE_CD flag handling in the QuickDialog engine (#3870)
+    * mcview: file interpreted as latin1 instead of utf8 (#3783)
+    * mcview: incomplete read of filtering data (#3817)
+    * mcview: search doesn't grow file as much as needed (#3819, #3855)
+    * mcview: goto doesn't grow file as much as needed (#3826)
+    * mcview: quick view panel: crash on slow startup while switching panel mode (#3846)
+    * mcedit: fix broken encoding into UTF-8 for 8-bit displays (#3843)
+    * mcedit: incorrect %f macro substitution in the user menu (#3861)
+    * man pages: wrong paths of mc.hint and mc.hlp (#3806)
+    * subshell: fix broken tcsh 6.20+ cd escaping (#3852)
+    * VFS: incremental tar doesn't contain empty directories (#2297)
+    * VFS: incremental tar: wrong directories owner for tar --numeric-owner -g (#3709)
+    * VFS: timestamps not being preserved due to uninitialized struct stat st_[acm]tim.tv_nsec (#3821)
+    * VFS: ftp: can't retrieve password from .netrc when user is in URL (#3869)
+    * VFS: tests: locale issue causing helpers using 'sort' to fail (#3787)
+    * VFS: tests: unportable 'echo' use causing one rpm helper test to fail (#3786)
+    * Spelling errors in the manual page (#3839)
 
 
 Version 4.8.19

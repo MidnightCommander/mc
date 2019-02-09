@@ -1,7 +1,7 @@
 /*
    libmc - checks for hex pattern parsing
 
-   Copyright (C) 2017-2018
+   Copyright (C) 2017-2019
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.

@@ -1,7 +1,7 @@
 /*
    External panelize
 
-   Copyright (C) 1995-2018
+   Copyright (C) 1995-2019
    Free Software Foundation, Inc.
 
    Written by:
@@ -517,7 +517,7 @@ void
 cd_panelize_cmd (void)
 {
     if (!SELECTED_IS_PANEL)
-        set_display_type (MENU_PANEL_IDX, view_listing);
+        create_panel (MENU_PANEL_IDX, view_listing);
 
     do_panelize_cd (PANEL (get_panel_widget (MENU_PANEL_IDX)));
 }

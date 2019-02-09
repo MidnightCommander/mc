@@ -2,7 +2,7 @@
 
 /* Background support.
 
-   Copyright (C) 1996-2018
+   Copyright (C) 1996-2019
    Free Software Foundation, Inc.
 
    Written by:

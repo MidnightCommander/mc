@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Function for hex view
 
-   Copyright (C) 1994-2018
+   Copyright (C) 1994-2019
    Free Software Foundation, Inc.
 
    Written by:
@@ -152,12 +152,13 @@ mcview_display_hex (WView * view)
     for (; mcview_get_byte (view, from, NULL) && row < (int) height; row++)
     {
         screen_dimen col = 0;
-        size_t i;
         int bytes;              /* Number of bytes already printed on the line */
 
         /* Print the hex offset */
         if (row >= 0)
         {
+            size_t i;
+
             g_snprintf (hex_buff, sizeof (hex_buff), "%08" PRIXMAX " ", (uintmax_t) from);
             widget_move (view, top + row, left);
             tty_setcolor (VIEW_BOLD_COLOR);

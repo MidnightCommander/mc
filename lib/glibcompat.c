@@ -1,7 +1,7 @@
 /*
    GLIB - Library of useful routines for C programming
 
-   Copyright (C) 2009-2018
+   Copyright (C) 2009-2019
    Free Software Foundation, Inc.
 
    Written by:
@@ -109,5 +109,30 @@ g_queue_free_full (GQueue * queue, GDestroyNotify free_func)
     g_queue_free (queue);
 }
 #endif /* ! GLIB_CHECK_VERSION (2, 32, 0) */
+
+/* --------------------------------------------------------------------------------------------- */
+
+#if ! GLIB_CHECK_VERSION (2, 60, 0)
+/**
+ * g_queue_clear_full:
+ * @queue: a pointer to a #GQueue
+ * @free_func: (nullable): the function to be called to free memory allocated
+ *
+ * Convenience method, which frees all the memory used by a #GQueue,
+ * and calls the provided @free_func on each item in the #GQueue.
+ *
+ * Since: 2.60
+ */
+void
+g_queue_clear_full (GQueue * queue, GDestroyNotify free_func)
+{
+    g_return_if_fail (queue != NULL);
+
+    if (free_func != NULL)
+        g_queue_foreach (queue, (GFunc) free_func, NULL);
+
+    g_queue_clear (queue);
+}
+#endif /* ! GLIB_CHECK_VERSION (2, 60, 0) */
 
 /* --------------------------------------------------------------------------------------------- */

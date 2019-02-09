@@ -107,7 +107,6 @@ mcview_get_byte (WView * view, off_t offset, int *retval)
     case DS_NONE:
         return mcview_get_byte_none (view, offset, retval);
     default:
-        g_assert (!"Unknown datasource type");
         return FALSE;
     }
 }

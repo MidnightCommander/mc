@@ -1,7 +1,7 @@
 /*
    Return a list of mounted file systems
 
-   Copyright (C) 1991-2018
+   Copyright (C) 1991-2019
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -83,7 +83,12 @@
                                    also (obsolete) 4.3BSD, SunOS */
 #include <mntent.h>
 #include <sys/types.h>
-#ifndef MOUNTED
+#if defined __ANDROID__         /* Android */
+   /* Bionic versions from between 2014-01-09 and 2015-01-08 define MOUNTED to
+      an incorrect value; older Bionic versions don't define it at all.  */
+#undef MOUNTED
+#define MOUNTED "/proc/mounts"
+#elif !defined  MOUNTED
 #ifdef _PATH_MOUNTED            /* GNU libc  */
 #define MOUNTED _PATH_MOUNTED
 #endif
@@ -133,6 +138,15 @@
 #ifdef HAVE_SYS_MNTENT_H
 /* This is to get MNTOPT_IGNORE on e.g. SVR4.  */
 #include <sys/mntent.h>
+#endif
+
+#ifdef MOUNTED_GETMNTENT1
+#if !HAVE_SETMNTENT             /* Android <= 4.4 */
+#define setmntent(fp,mode) fopen (fp, mode)
+#endif
+#if !HAVE_ENDMNTENT             /* Android <= 4.4 */
+#define endmntent(fp) fclose (fp)
+#endif
 #endif
 
 #ifndef HAVE_HASMNTOPT
@@ -550,7 +564,7 @@ dev_from_mount_options (char const *mount_options)
 
 /* --------------------------------------------------------------------------------------------- */
 
-#if defined MOUNTED_GETMNTENT1 && defined __linux__     /* GNU/Linux, Android */
+#if defined MOUNTED_GETMNTENT1 && (defined __linux__ || defined __ANDROID__)    /* GNU/Linux, Android */
 
 /* Unescape the paths in mount tables.
    STR is updated in place.  */
@@ -593,7 +607,7 @@ read_file_system_list (void)
     {
         FILE *fp;
 
-#ifdef __linux__
+#if defined __linux__ || defined __ANDROID__
         /* Try parsing mountinfo first, as that make device IDs available.
            Note we could use libmount routines to simplify this parsing a little
            (and that code is in previous versions of this function), however
@@ -681,7 +695,7 @@ read_file_system_list (void)
                 goto free_then_fail;
         }
         else                    /* fallback to /proc/self/mounts (/etc/mtab).  */
-#endif /* __linux __ */
+#endif /* __linux __ || __ANDROID__ */
         {
             struct mntent *mnt;
             const char *table = MOUNTED;

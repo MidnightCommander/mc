@@ -1,7 +1,7 @@
 /*
    Virtual File System: Midnight Commander file system.
 
-   Copyright (C) 1999-2018
+   Copyright (C) 1999-2019
    Free Software Foundation, Inc.
 
    Written by:
@@ -1494,7 +1494,6 @@ smbfs_fake_share_stat (const char *server_url, const char *path, struct stat *bu
             g_free (p);
             return 0;
         }
-        g_free (p);
         return -1;
     }
 

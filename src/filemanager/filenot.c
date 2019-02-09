@@ -3,7 +3,7 @@
    tree about the changes made to the directory
    structure.
 
-   Copyright (C) 2011-2018
+   Copyright (C) 2011-2019
    Free Software Foundation, Inc.
 
    Author:
@@ -72,32 +72,32 @@ get_absolute_name (const vfs_path_t * vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 static int
-my_mkdir_rec (const vfs_path_t * s_vpath, mode_t mode)
+my_mkdir_rec (const vfs_path_t * vpath, mode_t mode)
 {
     vfs_path_t *q;
     int result;
 
-    if (mc_mkdir (s_vpath, mode) == 0)
+    if (mc_mkdir (vpath, mode) == 0)
         return 0;
     if (errno != ENOENT)
         return (-1);
 
-    /* FIXME: should check instead if s_vpath is at the root of that filesystem */
-    if (!vfs_file_is_local (s_vpath))
+    /* FIXME: should check instead if vpath is at the root of that filesystem */
+    if (!vfs_file_is_local (vpath))
         return (-1);
 
-    if (strcmp (vfs_path_as_str (s_vpath), PATH_SEP_STR) == 0)
+    if (strcmp (vfs_path_as_str (vpath), PATH_SEP_STR) == 0)
     {
         errno = ENOTDIR;
         return (-1);
     }
 
-    q = vfs_path_append_new (s_vpath, "..", (char *) NULL);
+    q = vfs_path_append_new (vpath, "..", (char *) NULL);
     result = my_mkdir_rec (q, mode);
     vfs_path_free (q);
 
     if (result == 0)
-        result = mc_mkdir (s_vpath, mode);
+        result = mc_mkdir (vpath, mode);
 
     return result;
 }
@@ -107,16 +107,16 @@ my_mkdir_rec (const vfs_path_t * s_vpath, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-my_mkdir (const vfs_path_t * s_vpath, mode_t mode)
+my_mkdir (const vfs_path_t * vpath, mode_t mode)
 {
     int result;
 
-    result = my_mkdir_rec (s_vpath, mode);
+    result = my_mkdir_rec (vpath, mode);
     if (result == 0)
     {
         vfs_path_t *my_s;
 
-        my_s = get_absolute_name (s_vpath);
+        my_s = get_absolute_name (vpath);
         vfs_path_free (my_s);
     }
     return result;
@@ -125,12 +125,12 @@ my_mkdir (const vfs_path_t * s_vpath, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 int
-my_rmdir (const char *s)
+my_rmdir (const char *path)
 {
     int result;
     vfs_path_t *vpath;
 
-    vpath = vfs_path_from_str_flags (s, VPF_NO_CANON);
+    vpath = vfs_path_from_str_flags (path, VPF_NO_CANON);
     /* FIXME: Should receive a Wtree! */
     result = mc_rmdir (vpath);
     if (result == 0)

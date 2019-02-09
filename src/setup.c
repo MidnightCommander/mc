@@ -1,7 +1,7 @@
 /*
    Setup loading/saving.
 
-   Copyright (C) 1994-2018
+   Copyright (C) 1994-2019
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -156,14 +156,14 @@ gboolean easy_patterns = TRUE;
 gboolean auto_save_setup = TRUE;
 
 /* If true, then the +, - and \ keys have their special meaning only if the
- * command line is emtpy, otherwise they behave like regular letters
+ * command line is empty, otherwise they behave like regular letters
  */
 gboolean only_leading_plus_minus = TRUE;
 
 /* Automatically fills name with current selected item name on mkdir */
 gboolean auto_fill_mkdir_name = TRUE;
 
-/* If set and you don't have subshell support,then C-o will give you a shell */
+/* If set and you don't have subshell support, then C-o will give you a shell */
 gboolean output_starts_shell = FALSE;
 
 /* If set, we execute the file command to check the file type */
@@ -854,6 +854,7 @@ load_setup_get_keymap_profile_config (gboolean load_from_file)
         goto done;
     }
     g_free (fname);
+    fname = NULL;
 
     /* 5) main config; [Midnight Commander] -> keymap */
     fname2 = mc_config_get_string (mc_global.main_config, CONFIG_APP_SECTION, "keymap", NULL);
@@ -996,11 +997,11 @@ save_panel_types (void)
     if (mc_global.mc_run_mode != MC_RUN_FULL)
         return;
 
-    type = get_display_type (0);
+    type = get_panel_type (0);
     panel_save_type ("New Left Panel", type);
     if (type == view_listing)
         panel_save_setup (left_panel, left_panel->panel_name);
-    type = get_display_type (1);
+    type = get_panel_type (1);
     panel_save_type ("New Right Panel", type);
     if (type == view_listing)
         panel_save_setup (right_panel, right_panel->panel_name);
@@ -1076,7 +1077,6 @@ load_setup (void)
     const char *profile;
 
 #ifdef HAVE_CHARSET
-    char *buffer;
     const char *cbuffer;
 
     load_codepages_list ();
@@ -1138,6 +1138,8 @@ load_setup (void)
 #ifdef HAVE_CHARSET
     if (codepages->len > 1)
     {
+        char *buffer;
+
         buffer =
             mc_config_get_string (mc_global.main_config, CONFIG_MISC_SECTION, "display_codepage",
                                   "");

@@ -1,7 +1,5 @@
-m4_include([m4.include/ac_onceonly.m4])
 m4_include([m4.include/gnulib/mode_t.m4])
 m4_include([m4.include/gnulib/stat-size.m4])
-m4_include([m4.include/gnulib/ls-mntd-fs.m4])
 m4_include([m4.include/gnulib/fstypename.m4])
 m4_include([m4.include/gnulib/fsusage.m4])
 m4_include([m4.include/gnulib/mountlist.m4])

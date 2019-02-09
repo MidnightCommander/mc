@@ -1,7 +1,7 @@
 /*
    Chown-advanced command -- for the Midnight Commander
 
-   Copyright (C) 1994-2018
+   Copyright (C) 1994-2019
    Free Software Foundation, Inc.
 
    This file is part of the Midnight Commander.
@@ -501,6 +501,7 @@ chl_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *dat
         default:
             break;
         }
+        MC_FALLTHROUGH;
 
     default:
         return dlg_default_callback (w, sender, msg, parm, data);

@@ -1,7 +1,7 @@
 /*
    lib - tests lib/utilinux:my_system() function
 
-   Copyright (C) 2013-2018
+   Copyright (C) 2013-2019
    Free Software Foundation, Inc.
 
    Written by:

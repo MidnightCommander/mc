@@ -3,7 +3,7 @@
 
    Original idea and code: Oleg "Olegarch" Konovalov <olegarch@linuxinside.com>
 
-   Copyright (C) 2009-2018
+   Copyright (C) 2009-2019
    Free Software Foundation, Inc.
 
    Written by:
@@ -233,12 +233,10 @@ dialog_switch_list (void)
 
     for (h = mc_dialogs; h != NULL; h = g_list_next (h))
     {
-        WDialog *dlg;
+        WDialog *dlg = DIALOG (h->data);
         char *title;
 
-        dlg = DIALOG (h->data);
-
-        if ((dlg != NULL) && (dlg->get_title != NULL))
+        if (dlg->get_title != NULL)
             title = dlg->get_title (dlg, WIDGET (listbox->list)->cols - 2);
         else
             title = g_strdup ("");

@@ -1,7 +1,7 @@
 /*
    libmc - check mcconfig submodule. Get full paths to user's config files.
 
-   Copyright (C) 2011-2018
+   Copyright (C) 2011-2019
    Free Software Foundation, Inc.
 
    Written by:

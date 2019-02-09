@@ -10,7 +10,7 @@
    Janne Kukonlehto added much error recovery to them for being used
    in an interactive program.
 
-   Copyright (C) 1994-2018
+   Copyright (C) 1994-2019
    Free Software Foundation, Inc.
 
    Written by:
@@ -107,7 +107,9 @@
 static int
 statfs (char const *filename, struct fs_info *buf)
 {
-    dev_t device = dev_for_path (filename);
+    dev_t device;
+
+    device = dev_for_path (filename);
 
     if (device < 0)
     {
@@ -229,7 +231,7 @@ typedef struct
     const char *replace_filename;
     replace_action_t replace_result;
 
-    struct stat *s_stat, *d_stat;
+    struct stat *src_stat, *dst_stat;
 } file_op_context_ui_t;
 
 /*** file scope variables ************************************************************************/
@@ -332,6 +334,7 @@ static void
 file_frmt_time (char *buffer, double eta_secs)
 {
     int eta_hours, eta_mins, eta_s;
+
     eta_hours = (int) (eta_secs / (60 * 60));
     eta_mins = (int) ((eta_secs - (eta_hours * 60 * 60)) / 60);
     eta_s = (int) (eta_secs - (eta_hours * 60 * 60 + eta_mins * 60));
@@ -344,11 +347,13 @@ static void
 file_eta_prepare_for_show (char *buffer, double eta_secs, gboolean always_show)
 {
     char _fmt_buff[BUF_TINY];
+
     if (eta_secs <= 0.5 && !always_show)
     {
         *buffer = '\0';
         return;
     }
+
     if (eta_secs <= 0.5)
         eta_secs = 1;
     file_frmt_time (_fmt_buff, eta_secs);
@@ -361,17 +366,11 @@ static void
 file_bps_prepare_for_show (char *buffer, long bps)
 {
     if (bps > 1024 * 1024)
-    {
         g_snprintf (buffer, BUF_TINY, _("%.2f MB/s"), bps / (1024 * 1024.0));
-    }
     else if (bps > 1024)
-    {
         g_snprintf (buffer, BUF_TINY, _("%.2f KB/s"), bps / 1024.0);
-    }
     else if (bps > 1)
-    {
         g_snprintf (buffer, BUF_TINY, _("%ld B/s"), bps);
-    }
     else
         *buffer = '\0';
 }
@@ -411,7 +410,7 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
         int value;              /* 0 for labels */
     } rd_widgets[] =
     {
-    /* *INDENT-OFF* */
+        /* *INDENT-OFF* */
         /*  0 */
         { N_("Target file already exists!"), 3, 4, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, 0 },
         /*  1 */
@@ -442,7 +441,7 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
         { N_("If &size differs"), 12, 28, WPOS_KEEP_DEFAULT, REPLACE_SIZE },
         /* 14 */
         { N_("&Abort"), 14, 25, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, REPLACE_ABORT }
-    /* *INDENT-ON* */
+        /* *INDENT-ON* */
     };
 
     const size_t num = G_N_ELEMENTS (rd_widgets);
@@ -543,14 +542,14 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
     add_widget (ui->replace_dlg, hline_new (y++, -1, -1));
 
     /* source date and size */
-    size_trunc_len (fsize_buffer, sizeof (fsize_buffer), ui->s_stat->st_size, 0,
+    size_trunc_len (fsize_buffer, sizeof (fsize_buffer), ui->src_stat->st_size, 0,
                     panels_options.kilobyte_si);
-    ADD_RD_LABEL (2, file_date (ui->s_stat->st_mtime), fsize_buffer, y++);
+    ADD_RD_LABEL (2, file_date (ui->src_stat->st_mtime), fsize_buffer, y++);
     rd_xlen = MAX (rd_xlen, label2->cols + 8);
     /* destination date and size */
-    size_trunc_len (fsize_buffer, sizeof (fsize_buffer), ui->d_stat->st_size, 0,
+    size_trunc_len (fsize_buffer, sizeof (fsize_buffer), ui->dst_stat->st_size, 0,
                     panels_options.kilobyte_si);
-    ADD_RD_LABEL (3, file_date (ui->d_stat->st_mtime), fsize_buffer, y++);
+    ADD_RD_LABEL (3, file_date (ui->dst_stat->st_mtime), fsize_buffer, y++);
     rd_xlen = MAX (rd_xlen, label2->cols + 8);
 
     add_widget (ui->replace_dlg, hline_new (y++, -1, -1));
@@ -560,12 +559,12 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
     no_id = ADD_RD_BUTTON (6, y);       /* No */
 
     /* "this target..." widgets */
-    if (!S_ISDIR (ui->d_stat->st_mode))
+    if (!S_ISDIR (ui->dst_stat->st_mode))
     {
         ADD_RD_BUTTON (7, y++); /* Append */
 
-        if ((ctx->operation == OP_COPY) && (ui->d_stat->st_size != 0)
-            && (ui->s_stat->st_size > ui->d_stat->st_size))
+        if ((ctx->operation == OP_COPY) && (ui->dst_stat->st_size != 0)
+            && (ui->src_stat->st_size > ui->dst_stat->st_size))
             ADD_RD_BUTTON (8, y++);     /* Reget */
     }
 
@@ -601,7 +600,8 @@ static gboolean
 is_wildcarded (const char *p)
 {
     gboolean escaped = FALSE;
-    for (; *p; p++)
+
+    for (; *p != '\0'; p++)
     {
         if (*p == '\\')
         {
@@ -908,9 +908,7 @@ file_progress_show (file_op_context_t * ctx, off_t done, off_t total,
         }
     }
     else
-    {
         g_snprintf (buffer, sizeof (buffer), "%s", stalled_msg);
-    }
 
     label_set_text (ui->progress_file_label, buffer);
 }
@@ -927,6 +925,7 @@ file_progress_show_count (file_op_context_t * ctx, size_t done, size_t total)
         return;
 
     ui = ctx->ui;
+
     if (ui->total_files_processed_label == NULL)
         return;
 
@@ -983,7 +982,6 @@ file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ct
                 g_snprintf (buffer, sizeof (buffer), _("Time: %s %s"), buffer2, buffer3);
             else
             {
-
                 file_bps_prepare_for_show (buffer4, (long) tctx->bps);
                 g_snprintf (buffer, sizeof (buffer), _("Time: %s %s (%s)"), buffer2, buffer3,
                             buffer4);
@@ -1006,6 +1004,7 @@ file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ct
     if (ui->total_bytes_label != NULL)
     {
         size_trunc_len (buffer2, 5, tctx->copied_bytes, 0, panels_options.kilobyte_si);
+
         if (!ctx->progress_totals_computed)
             g_snprintf (buffer, sizeof (buffer), _(" Total: %s "), buffer2);
         else
@@ -1023,7 +1022,7 @@ file_progress_show_total (file_op_total_context_t * tctx, file_op_context_t * ct
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_source (file_op_context_t * ctx, const vfs_path_t * s_vpath)
+file_progress_show_source (file_op_context_t * ctx, const vfs_path_t * vpath)
 {
     file_op_context_ui_t *ui;
 
@@ -1032,11 +1031,11 @@ file_progress_show_source (file_op_context_t * ctx, const vfs_path_t * s_vpath)
 
     ui = ctx->ui;
 
-    if (s_vpath != NULL)
+    if (vpath != NULL)
     {
         char *s;
 
-        s = vfs_path_tokens_get (s_vpath, -1, 1);
+        s = vfs_path_tokens_get (vpath, -1, 1);
         label_set_text (ui->src_file_label, _("Source"));
         label_set_text (ui->src_file, truncFileString (ui->op_dlg, s));
         g_free (s);
@@ -1051,7 +1050,7 @@ file_progress_show_source (file_op_context_t * ctx, const vfs_path_t * s_vpath)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-file_progress_show_target (file_op_context_t * ctx, const vfs_path_t * s_vpath)
+file_progress_show_target (file_op_context_t * ctx, const vfs_path_t * vpath)
 {
     file_op_context_ui_t *ui;
 
@@ -1060,11 +1059,10 @@ file_progress_show_target (file_op_context_t * ctx, const vfs_path_t * s_vpath)
 
     ui = ctx->ui;
 
-    if (s_vpath != NULL)
+    if (vpath != NULL)
     {
         label_set_text (ui->tgt_file_label, _("Target"));
-        label_set_text (ui->tgt_file,
-                        truncFileStringSecure (ui->op_dlg, vfs_path_as_str (s_vpath)));
+        label_set_text (ui->tgt_file, truncFileStringSecure (ui->op_dlg, vfs_path_as_str (vpath)));
     }
     else
     {
@@ -1098,8 +1096,8 @@ file_progress_show_deleting (file_op_context_t * ctx, const char *s, size_t * co
 
 FileProgressStatus
 file_progress_real_query_replace (file_op_context_t * ctx,
-                                  enum OperationMode mode, const char *destname,
-                                  struct stat *_s_stat, struct stat *_d_stat)
+                                  enum OperationMode mode, const char *dst,
+                                  struct stat *src_stat, struct stat *dst_stat)
 {
     file_op_context_ui_t *ui;
 
@@ -1110,9 +1108,9 @@ file_progress_real_query_replace (file_op_context_t * ctx,
 
     if (ui->replace_result < REPLACE_ALWAYS)
     {
-        ui->replace_filename = destname;
-        ui->s_stat = _s_stat;
-        ui->d_stat = _d_stat;
+        ui->replace_filename = dst;
+        ui->src_stat = src_stat;
+        ui->dst_stat = dst_stat;
         ui->replace_result = overwrite_query_dialog (ctx, mode);
     }
 
@@ -1120,21 +1118,21 @@ file_progress_real_query_replace (file_op_context_t * ctx,
     {
     case REPLACE_UPDATE:
         do_refresh ();
-        if (_s_stat->st_mtime > _d_stat->st_mtime)
+        if (src_stat->st_mtime > dst_stat->st_mtime)
             return FILE_CONT;
         else
             return FILE_SKIP;
 
     case REPLACE_SIZE:
         do_refresh ();
-        if (_s_stat->st_size == _d_stat->st_size)
+        if (src_stat->st_size == dst_stat->st_size)
             return FILE_SKIP;
         else
             return FILE_CONT;
 
     case REPLACE_REGET:
         /* Careful: we fall through and set do_append */
-        ctx->do_reget = _d_stat->st_size;
+        ctx->do_reget = dst_stat->st_size;
         MC_FALLTHROUGH;
 
     case REPLACE_APPEND:
@@ -1267,10 +1265,7 @@ file_mask_dialog (file_op_context_t * ctx, FileOperation operation,
             return NULL;
         }
 
-        if (ctx->follow_links)
-            ctx->stat_func = mc_stat;
-        else
-            ctx->stat_func = mc_lstat;
+        ctx->stat_func = ctx->follow_links ? mc_stat : mc_lstat;
 
         if (ctx->op_preserve)
         {
@@ -1325,7 +1320,9 @@ file_mask_dialog (file_op_context_t * ctx, FileOperation operation,
             ctx->dest_mask = dest_dir;
         else
             ctx->dest_mask++;
+
         orig_mask = ctx->dest_mask;
+
         if (*ctx->dest_mask == '\0'
             || (!ctx->dive_into_subdirs && !is_wildcarded (ctx->dest_mask)
                 && (!only_one
@@ -1339,12 +1336,15 @@ file_mask_dialog (file_op_context_t * ctx, FileOperation operation,
             ctx->dest_mask = g_strdup (ctx->dest_mask);
             *orig_mask = '\0';
         }
+
         if (*dest_dir == '\0')
         {
             g_free (dest_dir);
             dest_dir = g_strdup ("./");
         }
+
         vfs_path_free (vpath);
+
         if (val == B_USER)
             *do_bg = TRUE;
     }

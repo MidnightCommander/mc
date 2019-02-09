@@ -1,6 +1,6 @@
 /* lib/vfs - test vfs_path_t manipulation functions
 
-   Copyright (C) 2011-2018
+   Copyright (C) 2011-2019
    Free Software Foundation, Inc.
 
    Written by:

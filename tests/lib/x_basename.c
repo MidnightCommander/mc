@@ -1,7 +1,7 @@
 /*
    lib - x_basename() function testing
 
-   Copyright (C) 2011-2018
+   Copyright (C) 2011-2019
    Free Software Foundation, Inc.
 
    Written by:

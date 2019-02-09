@@ -31,7 +31,7 @@ AC_DEFUN([mc_WITH_INTERNAL_EDIT], [
 
     if test x$with_internal_edit != xno -a x$enable_aspell != xno; then
             AC_CHECK_HEADERS([aspell.h], [], [
-                AC_ERROR([Could not find aspell development headers])
+                AC_MSG_ERROR([Could not find aspell development headers])
             ], [])
 
             if test x"$g_module_supported" != x; then

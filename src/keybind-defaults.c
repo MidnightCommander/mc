@@ -1,7 +1,7 @@
 /*
    Default values for keybinding engine
 
-   Copyright (C) 2009-2018
+   Copyright (C) 2009-2019
    Free Software Foundation, Inc.
 
    Written by:

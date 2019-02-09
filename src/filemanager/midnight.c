@@ -1,7 +1,7 @@
 /*
    Main dialog (file panels) of the Midnight Commander
 
-   Copyright (C) 1994-2018
+   Copyright (C) 1994-2019
    Free Software Foundation, Inc.
 
    Written by:
@@ -661,7 +661,7 @@ create_panels (void)
         mc_chdir (vpath);
         vfs_path_free (vpath);
     }
-    set_display_type (other_index, other_mode);
+    create_panel (other_index, other_mode);
 
     /* 3. Create active panel */
     if (current_dir == NULL)
@@ -677,7 +677,7 @@ create_panels (void)
         mc_chdir (vpath);
         vfs_path_free (vpath);
     }
-    set_display_type (current_index, current_mode);
+    create_panel (current_index, current_mode);
 
     if (startup_left_mode == view_listing)
         current_panel = left_panel;
@@ -1514,7 +1514,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
                     return send_message (current_panel, midnight_dlg, MSG_ACTION, CK_SelectInvert,
                                          NULL);
             }
-            else if (!command_prompt || cmdline->buffer[0] == '\0')
+            else if (!command_prompt || input_is_empty (cmdline))
             {
                 /* Special treatement '+', '-', '\', '*' only when this is
                  * first char on input line

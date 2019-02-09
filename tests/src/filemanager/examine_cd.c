@@ -1,7 +1,7 @@
 /*
    src/filemanager - examine_cd() function testing
 
-   Copyright (C) 2012-2018
+   Copyright (C) 2012-2019
    Free Software Foundation, Inc.
 
    Written by:
@@ -136,6 +136,16 @@ START_TEST (test_examine_cd)
     g_setenv ("AAA", "aaa", TRUE);
 
     check_examine_cd ("/test/path", "/test/path");
+
+    check_examine_cd ("$AAA", "aaa");
+    check_examine_cd ("${AAA}", "aaa");
+    check_examine_cd ("$AAA/test", "aaa/test");
+    check_examine_cd ("${AAA}/test", "aaa/test");
+
+    check_examine_cd ("/$AAA", "/aaa");
+    check_examine_cd ("/${AAA}", "/aaa");
+    check_examine_cd ("/$AAA/test", "/aaa/test");
+    check_examine_cd ("/${AAA}/test", "/aaa/test");
 
     check_examine_cd ("/test/path/$AAA", "/test/path/aaa");
     check_examine_cd ("/test/path/$AAA/test2", "/test/path/aaa/test2");

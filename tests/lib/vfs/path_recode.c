@@ -1,7 +1,7 @@
 /*
    lib/vfs - vfs_path_t charset recode functions
 
-   Copyright (C) 2011-2018
+   Copyright (C) 2011-2019
    Free Software Foundation, Inc.
 
    Written by:

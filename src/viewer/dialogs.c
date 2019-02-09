@@ -2,7 +2,7 @@
    Internal file viewer for the Midnight Commander
    Function for paint dialogs
 
-   Copyright (C) 1994-2018
+   Copyright (C) 1994-2019
    Free Software Foundation, Inc.
 
    Written by:

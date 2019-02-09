@@ -1,7 +1,7 @@
 /*
    Panel layout module for the Midnight Commander
 
-   Copyright (C) 1995-2018
+   Copyright (C) 1995-2019
    Free Software Foundation, Inc.
 
    Written by:
@@ -106,7 +106,7 @@ int ok_to_refresh = 1;
 
 /*** file scope macro definitions ****************************************************************/
 
-/* The maximum number of views managed by the set_display_type routine */
+/* The maximum number of views managed by the create_panel routine */
 /* Must be at least two (for current and other).  Please note that until */
 /* Janne gets around this, we will only manage two of them :-) */
 #define MAX_VIEWS 2
@@ -439,7 +439,7 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
 /* --------------------------------------------------------------------------------------------- */
 
 static WDialog *
-init_layout (void)
+layout_dlg_create (void)
 {
     WDialog *layout_dlg;
     int l1 = 0, width;
@@ -587,7 +587,7 @@ init_layout (void)
 static void
 panel_do_cols (int idx)
 {
-    if (get_display_type (idx) == view_listing)
+    if (get_panel_type (idx) == view_listing)
         set_panel_formats (PANEL (panels[idx].widget));
     else
         panel_update_cols (panels[idx].widget, frame_half);
@@ -642,7 +642,7 @@ layout_box (void)
 
     old_layout = panels_layout;
     old_output_lines = output_lines;
-    layout_dlg = init_layout ();
+    layout_dlg = layout_dlg_create ();
 
     if (dlg_run (layout_dlg) == B_ENTER)
     {
@@ -971,7 +971,7 @@ get_nth_panel_name (int num)
 /* since a lot of routines depend on the current_panel variable */
 
 void
-set_display_type (int num, panel_view_mode_t type)
+create_panel (int num, panel_view_mode_t type)
 {
     int x = 0, y = 0, cols = 0, lines = 0;
     unsigned int the_other = 0; /* Index to the other panel */
@@ -1035,7 +1035,7 @@ set_display_type (int num, panel_view_mode_t type)
         {
             gboolean last_was_panel;
 
-            last_was_panel = old_widget != NULL && get_display_type (num) != view_listing;
+            last_was_panel = old_widget != NULL && get_panel_type (num) != view_listing;
             new_widget = restore_into_right_dir_panel (num, last_was_panel, y, x, lines, cols);
             break;
         }
@@ -1237,7 +1237,7 @@ swap_panels (void)
 /* --------------------------------------------------------------------------------------------- */
 
 panel_view_mode_t
-get_display_type (int idx)
+get_panel_type (int idx)
 {
     return panels[idx].type;
 }
@@ -1307,7 +1307,7 @@ get_other_type (void)
 void
 save_panel_dir (int idx)
 {
-    panel_view_mode_t type = get_display_type (idx);
+    panel_view_mode_t type = get_panel_type (idx);
     Widget *widget = get_panel_widget (idx);
 
     if ((type == view_listing) && (widget != NULL))
@@ -1336,7 +1336,7 @@ get_panel_dir_for (const WPanel * widget)
     if (i >= MAX_VIEWS)
         return g_strdup (".");
 
-    if (get_display_type (i) == view_listing)
+    if (get_panel_type (i) == view_listing)
     {
         vfs_path_t *cwd_vpath;
 

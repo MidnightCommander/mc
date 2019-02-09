@@ -1,7 +1,7 @@
 /*
    Editor book mark handling
 
-   Copyright (C) 2001-2018
+   Copyright (C) 2001-2019
    Free Software Foundation, Inc.
 
    Written by:

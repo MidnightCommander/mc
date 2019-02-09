@@ -1,7 +1,7 @@
 /* Virtual File System: SFTP file system.
    The interface function
 
-   Copyright (C) 2011-2018
+   Copyright (C) 2011-2019
    Free Software Foundation, Inc.
 
    Written by:
