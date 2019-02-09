@@ -446,6 +446,16 @@ apply_rules_going_right (WEdit * edit, off_t i)
                                            k->whole_word_chars_right, k->line_start);
                 if (e > 0)
                 {
+                    /* when both context and keyword terminate with a newline,
+                       the context overflows to the next line and colorizes it incorrectly */
+                    if (_rule._context != 0 && k->keyword[strlen (k->keyword) - 1] == '\n')
+                    {
+                        r = CONTEXT_RULE (g_ptr_array_index (edit->rules, _rule._context));
+                        if (r->right != NULL && r->right[0] != '\0'
+                            && r->right[strlen (r->right) - 1] == '\n' && e > i + 1)
+                            e--;
+                    }
+
                     end = e;
                     _rule.end = e;
                     _rule.keyword = count;
