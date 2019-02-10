@@ -1035,7 +1035,7 @@ query_recursive (file_op_context_t * ctx, const char *s)
 /* --------------------------------------------------------------------------------------------- */
 
 static FileProgressStatus
-query_replace (file_op_context_t * ctx, const char *dst, struct stat *src_stat,
+query_replace (file_op_context_t * ctx, const char *src, struct stat *src_stat, const char *dst,
                struct stat *dst_stat)
 {
 /* *INDENT-OFF* */
@@ -1043,17 +1043,17 @@ query_replace (file_op_context_t * ctx, const char *dst, struct stat *src_stat,
     {
         void *p;
         FileProgressStatus (*f) (file_op_context_t *, enum OperationMode, const char *,
-                                 struct stat *, struct stat *);
+                                 struct stat *, const char *, struct stat *);
     } pntr;
 /* *INDENT-ON* */
 
     pntr.f = file_progress_real_query_replace;
 
     if (mc_global.we_are_background)
-        return parent_call (pntr.p, ctx, 3, strlen (dst), dst,
-                            sizeof (struct stat), src_stat, sizeof (struct stat), dst_stat);
+        return parent_call (pntr.p, ctx, 4, strlen (src), src, sizeof (struct stat), src_stat,
+                            strlen (dst), dst, sizeof (struct stat), dst_stat);
     else
-        return file_progress_real_query_replace (ctx, Foreground, dst, src_stat, dst_stat);
+        return file_progress_real_query_replace (ctx, Foreground, src, src_stat, dst, dst_stat);
 }
 
 #else
@@ -1076,10 +1076,10 @@ query_recursive (file_op_context_t * ctx, const char *s)
 /* --------------------------------------------------------------------------------------------- */
 
 static FileProgressStatus
-query_replace (file_op_context_t * ctx, const char *dst, struct stat *src_stat,
+query_replace (file_op_context_t * ctx, const char *src, struct stat *src_stat, const char *dst,
                struct stat *dst_stat)
 {
-    return file_progress_real_query_replace (ctx, Foreground, dst, src_stat, dst_stat);
+    return file_progress_real_query_replace (ctx, Foreground, src, src_stat, dst, dst_stat);
 }
 
 #endif /* !ENABLE_BACKGROUND */
@@ -1247,7 +1247,7 @@ move_file_file (const WPanel * panel, file_op_total_context_t * tctx, file_op_co
 
         if (confirm_overwrite)
         {
-            return_status = query_replace (ctx, d, &src_stat, &dst_stat);
+            return_status = query_replace (ctx, s, &src_stat, d, &dst_stat);
             if (return_status != FILE_CONT)
                 goto ret;
         }
@@ -2272,7 +2272,7 @@ copy_file_file (file_op_total_context_t * tctx, file_op_context_t * ctx,
         if (tctx->ask_overwrite)
         {
             ctx->do_reget = 0;
-            return_status = query_replace (ctx, dst_path, &src_stat, &dst_stat);
+            return_status = query_replace (ctx, src_path, &src_stat, dst_path, &dst_stat);
             if (return_status != FILE_CONT)
                 goto ret_fast;
         }
