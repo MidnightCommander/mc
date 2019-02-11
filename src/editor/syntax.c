@@ -83,9 +83,9 @@ gboolean option_auto_syntax = TRUE;
 #define SYNTAX_TOKEN_BRACE      '\004'
 
 #define free_args(x)
-#define break_a {result=line;break;}
-#define check_a {if(!*a){result=line;break;}}
-#define check_not_a {if(*a){result=line;break;}}
+#define break_a { result = line; break; }
+#define check_a { if (*a == NULL) { result = line; break; } }
+#define check_not_a { if (*a != NULL) { result = line ;break; } }
 
 #define SYNTAX_KEYWORD(x) ((syntax_keyword_t *) (x))
 #define CONTEXT_RULE(x) ((context_rule_t *) (x))
@@ -284,7 +284,7 @@ compare_word_to_right (const WEdit * edit, off_t i, const char *text,
                 if (c == *p)
                 {
                     j = i;
-                    if (*p == *text && p[1] == '\0')    /* handle eg '+' and @+@ keywords properly */
+                    if (p[0] == text[0] && p[1] == '\0')        /* handle eg '+' and @+@ keywords properly */
                         break;
                 }
                 if (j != 0 && strchr ((const char *) p + 1, c) != NULL) /* c exists further down, so it will get matched later */
@@ -312,7 +312,7 @@ compare_word_to_right (const WEdit * edit, off_t i, const char *text,
             {
                 d = c;
                 c = xx_tolower (edit, edit_buffer_get_byte (&edit->buffer, i));
-                for (j = 0; p[j] != SYNTAX_TOKEN_BRACKET && p[j]; j++)
+                for (j = 0; p[j] != SYNTAX_TOKEN_BRACKET && p[j] != '\0'; j++)
                     if (c == p[j])
                         goto found_char2;
                 break;
@@ -331,7 +331,7 @@ compare_word_to_right (const WEdit * edit, off_t i, const char *text,
             if (++p > q)
                 return -1;
             c = xx_tolower (edit, edit_buffer_get_byte (&edit->buffer, i));
-            for (; *p != SYNTAX_TOKEN_BRACE && *p; p++)
+            for (; *p != SYNTAX_TOKEN_BRACE && *p != '\0'; p++)
                 if (c == *p)
                     goto found_char3;
             return -1;
@@ -778,6 +778,7 @@ get_args (char *l, char **args, int args_size)
     while (argc < args_size)
     {
         char *p = l;
+
         while (*p != '\0' && whiteness (*p))
             p++;
         if (*p == '\0')
@@ -877,7 +878,7 @@ open_include_file (const char *filename)
 {
     FILE *f;
 
-    MC_PTR_FREE (error_file_name);
+    g_free (error_file_name);
     error_file_name = g_strdup (filename);
     if (g_path_is_absolute (filename))
         return fopen (filename, "r");
@@ -910,6 +911,7 @@ xx_lowerize_line (WEdit * edit, char *line, size_t len)
     if (edit->is_case_insensitive)
     {
         size_t i;
+
         for (i = 0; i < len; ++i)
             line[i] = tolower (line[i]);
     }
@@ -926,7 +928,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
     char last_fg[32] = "", last_bg[32] = "", last_attrs[64] = "";
     char whole_right[512];
     char whole_left[512];
-    char *l = 0;
+    char *l = NULL;
     int save_line = 0, line = 0;
     context_rule_t *c = NULL;
     gboolean no_words = TRUE;
@@ -940,7 +942,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
 
     edit->rules = g_ptr_array_new ();
 
-    if (!edit->defines)
+    if (edit->defines == NULL)
         edit->defines = g_tree_new ((GCompareFunc) strcmp);
 
     while (TRUE)
@@ -950,7 +952,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
         int argc;
 
         line++;
-        l = 0;
+        l = NULL;
 
         len = read_one_line (&l, f);
         if (len != 0)
@@ -1149,9 +1151,8 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
             }
             check_a;
             if (strcmp (*a, "whole") == 0)
-            {
                 break_a;
-            }
+
             k->keyword = g_strdup (*a++);
             subst_defines (edit->defines, a, &args[1024]);
             fg = *a;
@@ -1200,7 +1201,8 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
             *argv = NULL;
         }
         else
-        {                       /* anything else is an error */
+        {
+            /* anything else is an error */
             break_a;
         }
         free_args (args);
@@ -1292,7 +1294,7 @@ edit_read_syntax_file (WEdit * edit, GPtrArray * pnames, const char *syntax_file
             if (g != NULL)
                 continue;
 
-            if (!args[1] || !(g = open_include_file (args[1])))
+            if (args[1] == NULL || (g = open_include_file (args[1])) == NULL)
             {
                 result = line;
                 break;
@@ -1307,7 +1309,7 @@ edit_read_syntax_file (WEdit * edit, GPtrArray * pnames, const char *syntax_file
         found = TRUE;
 
         /* must have two args or report error */
-        if (!args[1] || !args[2])
+        if (args[1] == NULL || args[2] == NULL)
         {
             result = line;
             break;
@@ -1318,20 +1320,20 @@ edit_read_syntax_file (WEdit * edit, GPtrArray * pnames, const char *syntax_file
             /* 1: just collecting a list of names of rule sets */
             g_ptr_array_add (pnames, g_strdup (args[2]));
         }
-        else if (type)
+        else if (type != NULL)
         {
             /* 2: rule set was explicitly specified by the caller */
             if (strcmp (type, args[2]) == 0)
                 goto found_type;
         }
-        else if (editor_file && edit)
+        else if (editor_file != NULL && edit != NULL)
         {
             /* 3: auto-detect rule set from regular expressions */
-            int q;
+            gboolean q;
 
             q = mc_search (args[1], DEFAULT_CHARSET, editor_file, MC_SEARCH_T_REGEX);
             /* does filename match arg 1 ? */
-            if (!q && args[3])
+            if (!q && args[3] != NULL)
             {
                 /* does first line match arg 3 ? */
                 q = mc_search (args[3], DEFAULT_CHARSET, first_line, MC_SEARCH_T_REGEX);
@@ -1340,12 +1342,13 @@ edit_read_syntax_file (WEdit * edit, GPtrArray * pnames, const char *syntax_file
             {
                 int line_error;
                 char *syntax_type;
+
               found_type:
                 syntax_type = args[2];
                 line_error = edit_read_syntax_rules (edit, g ? g : f, args, 1023);
-                if (line_error)
+                if (line_error != 0)
                 {
-                    if (!error_file_name)       /* an included file */
+                    if (error_file_name == NULL)        /* an included file */
                         result = line + line_error;
                     else
                         result = line_error;
@@ -1505,7 +1508,8 @@ edit_load_syntax (WEdit * edit, GPtrArray * pnames, const char *type)
     {
         edit_free_syntax_rules (edit);
         message (D_ERROR, _("Load syntax file"),
-                 _("Error in file %s on line %d"), error_file_name ? error_file_name : f, r);
+                 _("Error in file %s on line %d"), error_file_name != NULL ? error_file_name : f,
+                 r);
         MC_PTR_FREE (error_file_name);
     }
 
