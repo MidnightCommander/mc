@@ -82,7 +82,6 @@ gboolean option_auto_syntax = TRUE;
 #define SYNTAX_TOKEN_BRACKET    '\003'
 #define SYNTAX_TOKEN_BRACE      '\004'
 
-#define free_args(x)
 #define break_a { result = line; break; }
 #define check_a { if (*a == NULL) { result = line; break; } }
 #define check_not_a { if (*a != NULL) { result = line ;break; } }
@@ -1205,10 +1204,8 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
             /* anything else is an error */
             break_a;
         }
-        free_args (args);
         MC_PTR_FREE (l);
     }
-    free_args (args);
     MC_PTR_FREE (l);
 
     if (edit->rules->len == 0)
