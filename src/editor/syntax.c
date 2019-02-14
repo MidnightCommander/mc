@@ -89,6 +89,8 @@ gboolean option_auto_syntax = TRUE;
 #define SYNTAX_KEYWORD(x) ((syntax_keyword_t *) (x))
 #define CONTEXT_RULE(x) ((context_rule_t *) (x))
 
+#define ARGS_LEN 1024
+
 /*** file scope type declarations ****************************************************************/
 
 typedef struct
@@ -1089,7 +1091,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
             k = g_new0 (syntax_keyword_t, 1);
             g_ptr_array_add (c->keyword, k);
             no_words = FALSE;
-            subst_defines (edit->defines, a, &args[1024]);
+            subst_defines (edit->defines, a, &args[ARGS_LEN]);
             fg = *a;
             if (*a != NULL)
                 a++;
@@ -1153,7 +1155,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
                 break_a;
 
             k->keyword = g_strdup (*a++);
-            subst_defines (edit->defines, a, &args[1024]);
+            subst_defines (edit->defines, a, &args[ARGS_LEN]);
             fg = *a;
             if (*a != NULL)
                 a++;
@@ -1258,7 +1260,7 @@ edit_read_syntax_file (WEdit * edit, GPtrArray * pnames, const char *syntax_file
                        const char *editor_file, const char *first_line, const char *type)
 {
     FILE *f, *g = NULL;
-    char *args[1024], *l = NULL;
+    char *args[ARGS_LEN], *l = NULL;
     long line = 0;
     int result = 0;
     char *lib_file;
@@ -1281,7 +1283,7 @@ edit_read_syntax_file (WEdit * edit, GPtrArray * pnames, const char *syntax_file
         MC_PTR_FREE (l);
         if (read_one_line (&l, f) == 0)
             break;
-        (void) get_args (l, args, 1023);        /* Final NULL */
+        (void) get_args (l, args, ARGS_LEN - 1);        /* Final NULL */
         if (args[0] == NULL)
             continue;
 
@@ -1342,7 +1344,7 @@ edit_read_syntax_file (WEdit * edit, GPtrArray * pnames, const char *syntax_file
 
               found_type:
                 syntax_type = args[2];
-                line_error = edit_read_syntax_rules (edit, g ? g : f, args, 1023);
+                line_error = edit_read_syntax_rules (edit, g ? g : f, args, ARGS_LEN - 1);
                 if (line_error != 0)
                 {
                     if (error_file_name == NULL)        /* an included file */
