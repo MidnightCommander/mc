@@ -97,7 +97,7 @@ typedef struct
     char *keyword;
     char *whole_word_chars_left;
     char *whole_word_chars_right;
-    long line_start;
+    gboolean line_start;
     int color;
 } syntax_keyword_t;
 
@@ -107,9 +107,9 @@ typedef struct
     unsigned char first_left;
     char *right;
     unsigned char first_right;
-    char line_start_left;
-    char line_start_right;
-    int between_delimiters;
+    gboolean line_start_left;
+    gboolean line_start_right;
+    gboolean between_delimiters;
     char *whole_word_chars_left;
     char *whole_word_chars_right;
     char *keyword_first_chars;
@@ -243,7 +243,7 @@ subst_defines (GTree * defines, char **argv, char **argv_end)
 
 static off_t
 compare_word_to_right (const WEdit * edit, off_t i, const char *text,
-                       const char *whole_left, const char *whole_right, long line_start)
+                       const char *whole_left, const char *whole_right, gboolean line_start)
 {
     const unsigned char *p, *q;
     int c, d, j;
@@ -252,7 +252,7 @@ compare_word_to_right (const WEdit * edit, off_t i, const char *text,
         return -1;
 
     c = xx_tolower (edit, edit_buffer_get_byte (&edit->buffer, i - 1));
-    if ((line_start != 0 && c != '\n') || (whole_left != NULL && strchr (whole_left, c) != NULL))
+    if ((line_start && c != '\n') || (whole_left != NULL && strchr (whole_left, c) != NULL))
         return -1;
 
     for (p = (const unsigned char *) text, q = p + strlen ((const char *) p); p < q; p++, i++)
@@ -1048,7 +1048,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
                 if (strcmp (*a, "exclusive") == 0)
                 {
                     a++;
-                    c->between_delimiters = 1;
+                    c->between_delimiters = TRUE;
                 }
                 check_a;
                 if (strcmp (*a, "whole") == 0)
@@ -1071,7 +1071,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
                 if (strcmp (*a, "linestart") == 0)
                 {
                     a++;
-                    c->line_start_left = 1;
+                    c->line_start_left = TRUE;
                 }
                 check_a;
                 c->left = g_strdup (*a++);
@@ -1079,7 +1079,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
                 if (strcmp (*a, "linestart") == 0)
                 {
                     a++;
-                    c->line_start_right = 1;
+                    c->line_start_right = TRUE;
                 }
                 check_a;
                 c->right = g_strdup (*a++);
@@ -1147,7 +1147,7 @@ edit_read_syntax_rules (WEdit * edit, FILE * f, char **args, int args_size)
             if (strcmp (*a, "linestart") == 0)
             {
                 a++;
-                k->line_start = 1;
+                k->line_start = TRUE;
             }
             check_a;
             if (strcmp (*a, "whole") == 0)
