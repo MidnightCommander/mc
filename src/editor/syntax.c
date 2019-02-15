@@ -204,26 +204,23 @@ xx_tolower (const WEdit * edit, int c)
 static void
 subst_defines (GTree * defines, char **argv, char **argv_end)
 {
-    char **t, **p;
-    int argc;
-
-    while (*argv != NULL && argv < argv_end)
+    for (; *argv != NULL && argv < argv_end; argv++)
     {
+        char **t;
+
         t = g_tree_lookup (defines, *argv);
         if (t != NULL)
         {
-            int count = 0;
+            int argc, count;
+            char **p;
 
             /* Count argv array members */
-            argc = 0;
-            for (p = &argv[1]; *p != NULL; p++)
-                argc++;
+            argc = g_strv_length (argv + 1);
 
             /* Count members of definition array */
-            for (p = t; *p != NULL; p++)
-                count++;
-            p = &argv[count + argc];
+            count = g_strv_length (t);
 
+            p = argv + count + argc;
             /* Buffer overflow or infinitive loop in define */
             if (p >= argv_end)
                 break;
@@ -236,7 +233,6 @@ subst_defines (GTree * defines, char **argv, char **argv_end)
             for (p = argv; *t != NULL; *p++ = *t++)
                 ;
         }
-        argv++;
     }
 }
 
