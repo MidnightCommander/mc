@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"POT-Creation-Date: 2019-03-02 12:28+0300\n"
 "PO-Revision-Date: 2018-10-21 01:34+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Basque (http://www.transifex.com/mc/mc/language/eu/)\n"
@@ -1652,7 +1652,8 @@ msgstr ""
 "Testu editore lagunkoi bat\n"
 "Midnight Commander-rarentzako idatzia."
 
-msgid "Copyright (C) 1996-2018 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2019 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2018 the Free Software Foundation"
 
 msgid "About"
@@ -2868,18 +2869,16 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-msgid "Target file already exists!"
-msgstr "Helburu fitxategia dagoeneko existitzen da!"
-
-#, c-format
-msgid "New     : %s, size %s"
+#, fuzzy
+msgid "New     :"
 msgstr "Berria : %s, neurria %s"
 
-#, c-format
-msgid "Existing: %s, size %s"
+#, fuzzy
+msgid "Existing:"
 msgstr "Dagoena: %s, size %s"
 
-msgid "Overwrite this target?"
+#, fuzzy
+msgid "Overwrite this file?"
 msgstr "Helburu guztiak gainidatzi?"
 
 msgid "A&ppend"
@@ -2888,13 +2887,21 @@ msgstr "era&nskina"
 msgid "&Reget"
 msgstr "&Beste saiakera bat"
 
-msgid "Overwrite all targets?"
+#, fuzzy
+msgid "Overwrite all files?"
 msgstr "Helburu guztiak gainidatzi?"
 
-msgid "&Update"
-msgstr "Eg&uneratu"
+msgid "Don't overwrite with &zero length file"
+msgstr ""
 
-msgid "If &size differs"
+msgid "&Older"
+msgstr ""
+
+msgid "S&maller"
+msgstr ""
+
+#, fuzzy
+msgid "&Size differs"
 msgstr "&Neurria desberdina bada"
 
 msgid "File exists"
@@ -3860,6 +3867,10 @@ msgstr "ncurses liburutegia erabiltzen\n"
 msgid "Using the ncursesw library\n"
 msgstr "ncursesw liburutegia erabiltzen\n"
 
+#, fuzzy
+msgid "With builtin Editor and Aspell support\n"
+msgstr "builtin editorearekin\n"
+
 msgid "With builtin Editor\n"
 msgstr "builtin editorearekin\n"
 
@@ -4514,3 +4525,9 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
+
+#~ msgid "Target file already exists!"
+#~ msgstr "Helburu fitxategia dagoeneko existitzen da!"
+
+#~ msgid "&Update"
+#~ msgstr "Eg&uneratu"

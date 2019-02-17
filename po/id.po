@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"POT-Creation-Date: 2019-03-02 12:28+0300\n"
 "PO-Revision-Date: 2018-10-21 01:34+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/mc/mc/language/id/)\n"
@@ -1606,7 +1606,7 @@ msgid ""
 "written for the Midnight Commander."
 msgstr ""
 
-msgid "Copyright (C) 1996-2018 the Free Software Foundation"
+msgid "Copyright (C) 1996-2019 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2721,18 +2721,13 @@ msgstr ""
 msgid "%ld B/s"
 msgstr ""
 
-msgid "Target file already exists!"
+msgid "New     :"
 msgstr ""
 
-#, c-format
-msgid "New     : %s, size %s"
+msgid "Existing:"
 msgstr ""
 
-#, c-format
-msgid "Existing: %s, size %s"
-msgstr ""
-
-msgid "Overwrite this target?"
+msgid "Overwrite this file?"
 msgstr ""
 
 msgid "A&ppend"
@@ -2741,13 +2736,19 @@ msgstr ""
 msgid "&Reget"
 msgstr ""
 
-msgid "Overwrite all targets?"
+msgid "Overwrite all files?"
 msgstr ""
 
-msgid "&Update"
+msgid "Don't overwrite with &zero length file"
 msgstr ""
 
-msgid "If &size differs"
+msgid "&Older"
+msgstr ""
+
+msgid "S&maller"
+msgstr ""
+
+msgid "&Size differs"
 msgstr ""
 
 msgid "File exists"
@@ -3671,6 +3672,9 @@ msgid "Using the ncurses library\n"
 msgstr ""
 
 msgid "Using the ncursesw library\n"
+msgstr ""
+
+msgid "With builtin Editor and Aspell support\n"
 msgstr ""
 
 msgid "With builtin Editor\n"

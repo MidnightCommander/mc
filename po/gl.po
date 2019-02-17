@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"POT-Creation-Date: 2019-03-02 12:28+0300\n"
 "PO-Revision-Date: 2018-10-21 01:34+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Galician (http://www.transifex.com/mc/mc/language/gl/)\n"
@@ -1651,7 +1651,7 @@ msgstr ""
 "Un editor de texto de uso amigábel\n"
 "escrito para o Midnight Commander."
 
-msgid "Copyright (C) 1996-2018 the Free Software Foundation"
+msgid "Copyright (C) 1996-2019 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2863,18 +2863,16 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-msgid "Target file already exists!"
-msgstr "O ficheiro destino xa existe!"
-
-#, c-format
-msgid "New     : %s, size %s"
+#, fuzzy
+msgid "New     :"
 msgstr "Novo     : %s, tamaño %s"
 
-#, c-format
-msgid "Existing: %s, size %s"
+#, fuzzy
+msgid "Existing:"
 msgstr "Existente: %s, tamaño %s"
 
-msgid "Overwrite this target?"
+#, fuzzy
+msgid "Overwrite this file?"
 msgstr "Sobrescribir este ficheiro?"
 
 msgid "A&ppend"
@@ -2883,13 +2881,21 @@ msgstr "&Engadir"
 msgid "&Reget"
 msgstr "&Reintentar"
 
-msgid "Overwrite all targets?"
+#, fuzzy
+msgid "Overwrite all files?"
 msgstr "Sobrescribir todos os ficheiros?"
 
-msgid "&Update"
-msgstr "&Actualizar"
+msgid "Don't overwrite with &zero length file"
+msgstr ""
 
-msgid "If &size differs"
+msgid "&Older"
+msgstr ""
+
+msgid "S&maller"
+msgstr ""
+
+#, fuzzy
+msgid "&Size differs"
 msgstr "Se o &Tamaño difire"
 
 msgid "File exists"
@@ -3856,6 +3862,10 @@ msgstr ""
 "Empregando a biblioteca ncursesw\n"
 "\n"
 
+#, fuzzy
+msgid "With builtin Editor and Aspell support\n"
+msgstr "Editor de texto propio incluído\n"
+
 msgid "With builtin Editor\n"
 msgstr "Editor de texto propio incluído\n"
 
@@ -4507,3 +4517,9 @@ msgstr "Continuar desde o principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Non é posíbel obter unha copia local de /ftp://some.host/editme.txt"
+
+#~ msgid "Target file already exists!"
+#~ msgstr "O ficheiro destino xa existe!"
+
+#~ msgid "&Update"
+#~ msgstr "&Actualizar"

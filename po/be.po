@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"POT-Creation-Date: 2019-03-02 12:28+0300\n"
 "PO-Revision-Date: 2018-10-21 01:34+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/mc/mc/language/be/)\n"
@@ -1656,7 +1656,8 @@ msgstr ""
 "Зручны тэкставы рэдактар,\n"
 "напісаны для Midnight Commander."
 
-msgid "Copyright (C) 1996-2018 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2019 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2018 the Free Software Foundation"
 
 msgid "About"
@@ -2870,18 +2871,16 @@ msgstr "%.2f кБ/с"
 msgid "%ld B/s"
 msgstr "%ld Б/с"
 
-msgid "Target file already exists!"
-msgstr "Файл ужо сінуе!"
-
-#, c-format
-msgid "New     : %s, size %s"
+#, fuzzy
+msgid "New     :"
 msgstr "Новы : %s, памер %s"
 
-#, c-format
-msgid "Existing: %s, size %s"
+#, fuzzy
+msgid "Existing:"
 msgstr "Існуючы: %s, памер %s"
 
-msgid "Overwrite this target?"
+#, fuzzy
+msgid "Overwrite this file?"
 msgstr "Перазапісаць файл?"
 
 msgid "A&ppend"
@@ -2890,13 +2889,21 @@ msgstr "Дапісаць у канец(&P)"
 msgid "&Reget"
 msgstr "Дапампаваць(&R)"
 
-msgid "Overwrite all targets?"
+#, fuzzy
+msgid "Overwrite all files?"
 msgstr "Перазапісаць усё?"
 
-msgid "&Update"
-msgstr "Састарэлыя(&U)"
+msgid "Don't overwrite with &zero length file"
+msgstr ""
 
-msgid "If &size differs"
+msgid "&Older"
+msgstr ""
+
+msgid "S&maller"
+msgstr ""
+
+#, fuzzy
+msgid "&Size differs"
 msgstr "Розныя памерам(&S)"
 
 msgid "File exists"
@@ -3869,6 +3876,10 @@ msgstr "З бібліятэкай «ncurses»\n"
 msgid "Using the ncursesw library\n"
 msgstr "З бібліятэкай «ncursesw»\n"
 
+#, fuzzy
+msgid "With builtin Editor and Aspell support\n"
+msgstr "З убудаваным рэдактарам\n"
+
 msgid "With builtin Editor\n"
 msgstr "З убудаваным рэдактарам\n"
 
@@ -4521,3 +4532,9 @@ msgstr "Працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
+
+#~ msgid "Target file already exists!"
+#~ msgstr "Файл ужо сінуе!"
+
+#~ msgid "&Update"
+#~ msgstr "Састарэлыя(&U)"
