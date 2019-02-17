@@ -232,6 +232,7 @@ typedef struct
     const char *src_filename;
     const char *tgt_filename;
     replace_action_t replace_result;
+    gboolean dont_overwrite_with_zero;
 
     struct stat *src_stat, *dst_stat;
 } file_op_context_ui_t;
@@ -420,7 +421,7 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
                         ui->replace_dlg->current->data)
 
     /* dialog sizes */
-    const int dlg_height = 16;
+    const int dlg_height = 17;
     int dlg_width = 60;
 
     struct
@@ -464,19 +465,21 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
         /* --------------------------------------------------- */
         /* 13 - label */
         { NULL, N_("Overwrite all files?"), 10, 21, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, 0 },
-        /* 14 - button */
-        { NULL, N_("A&ll"), 11, 12, WPOS_KEEP_DEFAULT, REPLACE_ALL },
+        /* 14 - checkbox */
+        { NULL, N_("Don't overwrite with &zero length file"), 11, 3, WPOS_KEEP_DEFAULT, 0 },
         /* 15 - button */
-        { NULL, N_("&Older"), 11, 12, WPOS_KEEP_DEFAULT, REPLACE_OLDER },
+        { NULL, N_("A&ll"), 12, 12, WPOS_KEEP_DEFAULT, REPLACE_ALL },
         /* 16 - button */
-        { NULL, N_("Non&e"), 11, 12, WPOS_KEEP_DEFAULT, REPLACE_NONE },
+        { NULL, N_("&Older"), 12, 12, WPOS_KEEP_DEFAULT, REPLACE_OLDER },
         /* 17 - button */
-        { NULL, N_("S&maller"), 11, 25, WPOS_KEEP_DEFAULT, REPLACE_SMALLER },
+        { NULL, N_("Non&e"), 12, 12, WPOS_KEEP_DEFAULT, REPLACE_NONE },
         /* 18 - button */
-        { NULL, N_("&Size differs"), 11, 40, WPOS_KEEP_DEFAULT, REPLACE_SIZE },
-        /* --------------------------------------------------- */
+        { NULL, N_("S&maller"), 12, 25, WPOS_KEEP_DEFAULT, REPLACE_SMALLER },
         /* 19 - button */
-        { NULL, N_("&Abort"), 13, 27, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, REPLACE_ABORT }
+        { NULL, N_("&Size differs"), 12, 40, WPOS_KEEP_DEFAULT, REPLACE_SIZE },
+        /* --------------------------------------------------- */
+        /* 20 - button */
+        { NULL, N_("&Abort"), 14, 27, WPOS_KEEP_TOP | WPOS_CENTER_HORZ, REPLACE_ABORT }
         /* *INDENT-ON* */
     };
 
@@ -556,7 +559,9 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
         NEW_BUTTON (12);
 
     NEW_LABEL (13, dlg_widgets[13].text);
-    for (i = 14; i <= 19; i++)
+    dlg_widgets[14].widget =
+        WIDGET (check_new (dlg_widgets[14].y, dlg_widgets[14].x, FALSE, dlg_widgets[14].text));
+    for (i = 15; i <= 20; i++)
         NEW_BUTTON (i);
 
     /* place widgets */
@@ -570,13 +575,14 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
         bw1 += gap + WCOLS (12);
     dlg_width = MAX (dlg_width, bw1);
 
-    bw2 = WCOLS (14);
-    for (i = 15; i <= 18; i++)
+    bw2 = WCOLS (15);
+    for (i = 16; i <= 19; i++)
         bw2 += gap + WCOLS (i);
     dlg_width = MAX (dlg_width, bw2);
 
     dlg_width = MAX (dlg_width, WCOLS (8));
     dlg_width = MAX (dlg_width, WCOLS (13));
+    dlg_width = MAX (dlg_width, WCOLS (14));
 
     /* truncate file names */
     w = WCOLS (0) + gap + WCOLS (1);
@@ -621,8 +627,8 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
     if (do_reget)
         WX (12) = WX (11) + WCOLS (11) + gap;
 
-    WX (14) = dlg_width / 2 - bw2 / 2;
-    for (i = 15; i <= 18; i++)
+    WX (15) = dlg_width / 2 - bw2 / 2;
+    for (i = 16; i <= 19; i++)
         WX (i) = WX (i - 1) + WCOLS (i - 1) + gap;
 
     /* TODO: write help (ticket #3970) */
@@ -648,15 +654,19 @@ overwrite_query_dialog (file_op_context_t * ctx, enum OperationMode mode)
 
     /* label & buttons */
     ADD_LABEL (13);             /* Overwrite all files? */
-    for (i = 14; i <= 18; i++)
+    add_widget (ui->replace_dlg, dlg_widgets[14].widget);
+    for (i = 15; i <= 19; i++)
         ADD_BUTTON (i);
-    add_widget (ui->replace_dlg, hline_new (W (18)->y - wd->y + 1, -1, -1));
+    add_widget (ui->replace_dlg, hline_new (W (19)->y - wd->y + 1, -1, -1));
 
-    ADD_BUTTON (19);            /* Abort */
+    ADD_BUTTON (20);            /* Abort */
 
     dlg_select_by_id (ui->replace_dlg, safe_overwrite ? no_id : yes_id);
 
     result = dlg_run (ui->replace_dlg);
+
+    if (result != B_CANCEL)
+        ui->dont_overwrite_with_zero = CHECK (dlg_widgets[14].widget)->state;
 
     dlg_destroy (ui->replace_dlg);
 
@@ -1177,6 +1187,7 @@ file_progress_real_query_replace (file_op_context_t * ctx, enum OperationMode mo
                                   const char *dst, struct stat *dst_stat)
 {
     file_op_context_ui_t *ui;
+    FileProgressStatus replace_with_zero;
 
     if (ctx == NULL || ctx->ui == NULL)
         return FILE_CONT;
@@ -1193,12 +1204,15 @@ file_progress_real_query_replace (file_op_context_t * ctx, enum OperationMode mo
         ui->replace_result = overwrite_query_dialog (ctx, mode);
     }
 
+    replace_with_zero = (src_stat->st_size == 0
+                         && ui->dont_overwrite_with_zero) ? FILE_SKIP : FILE_CONT;
+
     switch (ui->replace_result)
     {
     case REPLACE_OLDER:
         do_refresh ();
         if (src_stat->st_mtime > dst_stat->st_mtime)
-            return FILE_CONT;
+            return replace_with_zero;
         else
             return FILE_SKIP;
 
@@ -1207,7 +1221,7 @@ file_progress_real_query_replace (file_op_context_t * ctx, enum OperationMode mo
         if (src_stat->st_size == dst_stat->st_size)
             return FILE_SKIP;
         else
-            return FILE_CONT;
+            return replace_with_zero;
 
     case REPLACE_SMALLER:
         do_refresh ();
@@ -1215,6 +1229,10 @@ file_progress_real_query_replace (file_op_context_t * ctx, enum OperationMode mo
             return FILE_CONT;
         else
             return FILE_SKIP;
+
+    case REPLACE_ALL:
+        do_refresh ();
+        return replace_with_zero;
 
     case REPLACE_REGET:
         /* Careful: we fall through and set do_append */
@@ -1226,7 +1244,6 @@ file_progress_real_query_replace (file_op_context_t * ctx, enum OperationMode mo
         MC_FALLTHROUGH;
 
     case REPLACE_YES:
-    case REPLACE_ALL:
         do_refresh ();
         return FILE_CONT;
 
