@@ -140,7 +140,7 @@ stop_dialogs (void)
 {
     dlg_stop (midnight_dlg);
 
-    if ((top_dlg != NULL) && (top_dlg->data != NULL))
+    if (top_dlg != NULL)
         dlg_stop (DIALOG (top_dlg->data));
 }
 
