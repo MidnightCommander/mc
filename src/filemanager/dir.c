@@ -354,7 +354,7 @@ sort_vers (file_entry_t * a, file_entry_t * b)
 
     if (ad == bd || panels_options.mix_all_files)
     {
-        return str_verscmp (a->fname, b->fname) * reverse;
+        return filevercmp (a->fname, b->fname) * reverse;
     }
     else
     {

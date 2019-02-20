@@ -16,7 +16,8 @@ endif
 TESTS = \
 	replace__str_replace_all \
 	parse_integer \
-	str_verscmp
+	str_verscmp \
+	filevercmp
 
 check_PROGRAMS = $(TESTS)
 
@@ -28,3 +29,6 @@ parse_integer_SOURCES = \
 
 str_verscmp_SOURCES = \
 	str_verscmp.c
+
+filevercmp_SOURCES = \
+	filevercmp.c
