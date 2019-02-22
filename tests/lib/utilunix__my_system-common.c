@@ -28,6 +28,11 @@
 
 #include "lib/vfs/vfs.h"
 
+/* sighandler_t is GNU extension */
+#ifndef HAVE_SIGHANDLER_T
+typedef void (*sighandler_t) (int);
+#endif
+
 /* --------------------------------------------------------------------------------------------- */
 
 /* @CapturedValue */
