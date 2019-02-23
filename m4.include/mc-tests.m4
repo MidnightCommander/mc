@@ -16,7 +16,7 @@ AC_DEFUN([mc_UNIT_TESTS],[
 
     dnl 'tests_msg' holds the human-readable message to show in configure's summary text.
 
-    if test x$enable_tests == xno; then
+    if test x"$enable_tests" = "xno"; then
         dnl The user explicitly specified '--disable-tests'.
         tests_msg="no"
     else
@@ -33,7 +33,7 @@ AC_DEFUN([mc_UNIT_TESTS],[
 
                 dnl The following behavior, of "exit if feature requested but not found", is just a
                 dnl preference and can be safely removed.
-                if test x$enable_tests == xyes; then
+                if test x"$enable_tests" = "xyes"; then
                     AC_MSG_ERROR([You explicitly specified '--enable-tests', but this requirement cannot be met.])
                 fi
             ])
