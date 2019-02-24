@@ -49,7 +49,7 @@ teardown (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
-/* @DataSource("str_replace_all_test_ds") */
+/* @DataSource("parse_integer_test_ds") */
 /* *INDENT-OFF* */
 static const struct parse_integer_test_ds
 {
@@ -117,15 +117,14 @@ static const struct parse_integer_test_ds
 };
 /* *INDENT-ON* */
 
-/* @Test(dataSource = "str_replace_all_test_ds") */
+/* @Test(dataSource = "parse_integer_test_ds") */
 /* *INDENT-OFF* */
-START_TEST (parse_integer_test)
+START_PARAMETRIZED_TEST (parse_integer_test, parse_integer_test_ds)
 /* *INDENT-ON* */
 {
     /* given */
     uintmax_t actual_result;
     gboolean invalid = FALSE;
-    const struct parse_integer_test_ds *data = &parse_integer_test_ds[_i];
 
     /* when */
     actual_result = parse_integer (data->haystack, &invalid);
@@ -136,7 +135,7 @@ START_TEST (parse_integer_test)
                  actual_result, data->expected_result);
 }
 /* *INDENT-OFF* */
-END_TEST
+END_PARAMETRIZED_TEST
 /* *INDENT-ON* */
 
 /* --------------------------------------------------------------------------------------------- */
@@ -153,7 +152,7 @@ main (void)
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
     /* Add new tests here: *************** */
-    tcase_add_loop_test (tc_core, parse_integer_test, 0, G_N_ELEMENTS (parse_integer_test_ds));
+    mctest_add_parameterized_test (tc_core, parse_integer_test, parse_integer_test_ds);
     /* *********************************** */
 
     suite_add_tcase (s, tc_core);
