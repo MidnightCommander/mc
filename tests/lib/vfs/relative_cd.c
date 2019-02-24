@@ -202,10 +202,16 @@ int
 main (void)
 {
     int number_failed;
+    char *cwd;
 
     Suite *s = suite_create (TEST_SUITE_NAME);
     TCase *tc_core = tcase_create ("Core");
     SRunner *sr;
+
+    /* writable directory where check creates temporary files */
+    cwd = g_get_current_dir ();
+    g_setenv ("TEMP", cwd, TRUE);
+    g_free (cwd);
 
     tcase_add_checked_fixture (tc_core, setup, teardown);
 
