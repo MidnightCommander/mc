@@ -155,7 +155,11 @@ START_TEST (test_path_serialize)
     /* when */
     vpath = vfs_path_from_str_flags (ETALON_PATH_STR, VPF_USE_DEPRECATED_PARSER);
     serialized_vpath = vfs_path_serialize (vpath, &error);
+
     vfs_path_free (vpath);
+
+    if (error != NULL)
+        g_error_free (error);
 
     /* then */
     mctest_assert_ptr_ne (serialized_vpath, NULL);
