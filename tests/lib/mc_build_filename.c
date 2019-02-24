@@ -1,5 +1,5 @@
 /*
-   lib/vfs - mc_build_filename() function testing
+   lib - mc_build_filename() function testing
 
    Copyright (C) 2011-2019
    Free Software Foundation, Inc.
@@ -23,7 +23,7 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#define TEST_SUITE_NAME "/lib"
+#define TEST_SUITE_NAME "/lib/util"
 
 #include "tests/mctest.h"
 

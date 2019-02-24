@@ -1,5 +1,5 @@
 /*
-   lib/vfs - common serialize/deserialize functions
+   lib - common serialize/deserialize functions
 
    Copyright (C) 2011-2019
    Free Software Foundation, Inc.
