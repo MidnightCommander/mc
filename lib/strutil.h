@@ -538,6 +538,28 @@ const char *str_detect_termencoding (void);
 
 int str_verscmp (const char *s1, const char *s2);
 
+/* Compare version strings:
+
+   This function compares strings s1 and s2:
+   1) By PREFIX in the same way as strcmp.
+   2) Then by VERSION (most similarly to version compare of Debian's dpkg).
+   Leading zeros in version numbers are ignored.
+   3) If both (PREFIX and  VERSION) are equal, strcmp function is used for
+   comparison. So this function can return 0 if (and only if) strings s1
+   and s2 are identical.
+
+   It returns number > 0 for s1 > s2, 0 for s1 == s2 and number < 0 for s1 < s2.
+
+   This function compares strings, in a way that if VER1 and VER2 are version
+   numbers and PREFIX and SUFFIX (SUFFIX defined as (\.[A-Za-z~][A-Za-z0-9~]*)*)
+   are strings then VER1 < VER2 implies filevercmp (PREFIX VER1 SUFFIX,
+   PREFIX VER2 SUFFIX) < 0.
+
+   This function is intended to be a replacement for strverscmp.
+ */
+int filevercmp (const char *s1, const char *s2);
+
+
 /* return how many lines and columns will text occupy on terminal
  */
 void str_msg_term_size (const char *text, int *lines, int *columns);
