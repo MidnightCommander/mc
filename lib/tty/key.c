@@ -2091,14 +2091,13 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
                         *event = ev;
                         return EV_MOUSE;
                     }
-                    else if (status == 0)       /* connection closed; -1 == error */
+                    else if (status <= 0)       /* connection closed; -1 == error */
                     {
                         if (mouse_fd >= 0 && FD_ISSET (mouse_fd, &select_set))
                             FD_CLR (mouse_fd, &select_set);
 
-                        /* Try to reopen gpm_mouse connection */
                         disable_mouse ();
-                        enable_mouse ();
+                        return EV_NONE;
                     }
                 }
             }
