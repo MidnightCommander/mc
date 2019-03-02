@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"POT-Creation-Date: 2019-03-02 12:28+0300\n"
 "PO-Revision-Date: 2018-10-21 20:17+0000\n"
 "Last-Translator: David Martin <dhmartina@yahoo.es>\n"
 "Language-Team: Spanish (http://www.transifex.com/mc/mc/language/es/)\n"
@@ -1657,7 +1657,8 @@ msgstr ""
 "Un editor de texto amigable\n"
 "para Midnight Commander."
 
-msgid "Copyright (C) 1996-2018 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2019 the Free Software Foundation"
 msgstr "Copyright (C) 1996-2018 the Free Software Foundation"
 
 msgid "About"
@@ -2878,18 +2879,16 @@ msgstr "%.2f kB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-msgid "Target file already exists!"
-msgstr "¡El archivo destino ya existe!"
-
-#, c-format
-msgid "New     : %s, size %s"
+#, fuzzy
+msgid "New     :"
 msgstr "Nuevo : %s, tamaño %s"
 
-#, c-format
-msgid "Existing: %s, size %s"
+#, fuzzy
+msgid "Existing:"
 msgstr "Actual: %s, tamaño %s"
 
-msgid "Overwrite this target?"
+#, fuzzy
+msgid "Overwrite this file?"
 msgstr "¿Sobrescribir este archivo?"
 
 msgid "A&ppend"
@@ -2898,13 +2897,21 @@ msgstr "aña&Dir"
 msgid "&Reget"
 msgstr "&Reintentar"
 
-msgid "Overwrite all targets?"
+#, fuzzy
+msgid "Overwrite all files?"
 msgstr "¿Sobrescribir todos los archivos?"
 
-msgid "&Update"
-msgstr "actuali&Zar"
+msgid "Don't overwrite with &zero length file"
+msgstr ""
 
-msgid "If &size differs"
+msgid "&Older"
+msgstr ""
+
+msgid "S&maller"
+msgstr ""
+
+#, fuzzy
+msgid "&Size differs"
 msgstr "si el ta&Maño difiere"
 
 msgid "File exists"
@@ -3869,6 +3876,10 @@ msgstr "Utilizando la biblioteca ncurses\n"
 msgid "Using the ncursesw library\n"
 msgstr "Utilizando la biblioteca ncursesw\n"
 
+#, fuzzy
+msgid "With builtin Editor and Aspell support\n"
+msgstr "Editor de texto propio incluido\n"
+
 msgid "With builtin Editor\n"
 msgstr "Editor de texto propio incluido\n"
 
@@ -4520,3 +4531,9 @@ msgstr "¿Continuar desde el principio?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Imposible obtener una copia local de /ftp://ese.equipo/editame.txt"
+
+#~ msgid "Target file already exists!"
+#~ msgstr "¡El archivo destino ya existe!"
+
+#~ msgid "&Update"
+#~ msgstr "actuali&Zar"

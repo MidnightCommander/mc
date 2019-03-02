@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"POT-Creation-Date: 2019-03-02 12:28+0300\n"
 "PO-Revision-Date: 2018-10-26 11:43+0000\n"
 "Last-Translator: Morten Bo Johansen <mortenbo@hotmail.com>\n"
 "Language-Team: Danish (http://www.transifex.com/mc/mc/language/da/)\n"
@@ -1654,7 +1654,8 @@ msgstr ""
 "En brugervenlig teksteditor\n"
 "skrevet til Midnight Commander."
 
-msgid "Copyright (C) 1996-2018 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2019 the Free Software Foundation"
 msgstr "Ophavsret (C) 1996-2018 Free Software Foundation"
 
 msgid "About"
@@ -2875,18 +2876,16 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-msgid "Target file already exists!"
-msgstr "Målfil findes allerede!"
-
-#, c-format
-msgid "New     : %s, size %s"
+#, fuzzy
+msgid "New     :"
 msgstr "Ny      : %s, størrelse %s"
 
-#, c-format
-msgid "Existing: %s, size %s"
+#, fuzzy
+msgid "Existing:"
 msgstr "Eksisterende: %s, størrelse %s"
 
-msgid "Overwrite this target?"
+#, fuzzy
+msgid "Overwrite this file?"
 msgstr "Overskriv dette mål?"
 
 msgid "A&ppend"
@@ -2895,13 +2894,21 @@ msgstr "&Tilføj"
 msgid "&Reget"
 msgstr "Fo&rtryd"
 
-msgid "Overwrite all targets?"
+#, fuzzy
+msgid "Overwrite all files?"
 msgstr "Overskriv alle mål?"
 
-msgid "&Update"
-msgstr "&Opdater"
+msgid "Don't overwrite with &zero length file"
+msgstr ""
 
-msgid "If &size differs"
+msgid "&Older"
+msgstr ""
+
+msgid "S&maller"
+msgstr ""
+
+#, fuzzy
+msgid "&Size differs"
 msgstr "Hvis &størrelsen er forskellig"
 
 msgid "File exists"
@@ -3867,6 +3874,10 @@ msgstr "Bruger ncurses-biblioteket\n"
 msgid "Using the ncursesw library\n"
 msgstr "Bruger ncursesw-biblioteket\n"
 
+#, fuzzy
+msgid "With builtin Editor and Aspell support\n"
+msgstr "Med indbygget teksteditor\n"
+
 msgid "With builtin Editor\n"
 msgstr "Med indbygget teksteditor\n"
 
@@ -4518,3 +4529,9 @@ msgstr "Fortsæt fra begyndelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan ikke hente en lokal kopi af /ftp://en.vært/editme.txt"
+
+#~ msgid "Target file already exists!"
+#~ msgstr "Målfil findes allerede!"
+
+#~ msgid "&Update"
+#~ msgstr "&Opdater"

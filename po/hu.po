@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"POT-Creation-Date: 2019-03-02 12:28+0300\n"
 "PO-Revision-Date: 2018-10-21 01:34+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
@@ -1642,7 +1642,7 @@ msgstr ""
 "Felhasználóbarát szövegszerkesztő\n"
 "a Midnight Commander-hez készítve"
 
-msgid "Copyright (C) 1996-2018 the Free Software Foundation"
+msgid "Copyright (C) 1996-2019 the Free Software Foundation"
 msgstr ""
 
 msgid "About"
@@ -2856,18 +2856,16 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-msgid "Target file already exists!"
-msgstr "A célfájl már létezik!"
-
-#, c-format
-msgid "New     : %s, size %s"
+#, fuzzy
+msgid "New     :"
 msgstr "Új: %s, mérete: %s"
 
-#, c-format
-msgid "Existing: %s, size %s"
+#, fuzzy
+msgid "Existing:"
 msgstr "Jelenlegi: %s, mérete: %s"
 
-msgid "Overwrite this target?"
+#, fuzzy
+msgid "Overwrite this file?"
 msgstr "Felülírja ezt a fájlt?"
 
 msgid "A&ppend"
@@ -2876,13 +2874,21 @@ msgstr "&Hozzáírás"
 msgid "&Reget"
 msgstr "&Kiegészítés"
 
-msgid "Overwrite all targets?"
+#, fuzzy
+msgid "Overwrite all files?"
 msgstr "Minden célfájlt felülír?"
 
-msgid "&Update"
-msgstr "Ha &régebbi"
+msgid "Don't overwrite with &zero length file"
+msgstr ""
 
-msgid "If &size differs"
+msgid "&Older"
+msgstr ""
+
+msgid "S&maller"
+msgstr ""
+
+#, fuzzy
+msgid "&Size differs"
 msgstr "Ha más a mére&te"
 
 msgid "File exists"
@@ -3850,6 +3856,10 @@ msgstr "Az ncurses könyvtár használata\n"
 msgid "Using the ncursesw library\n"
 msgstr "Az ncursesw könyvtár használata\n"
 
+#, fuzzy
+msgid "With builtin Editor and Aspell support\n"
+msgstr "Beépített szövegszerkesztővel\n"
+
 msgid "With builtin Editor\n"
 msgstr "Beépített szövegszerkesztővel\n"
 
@@ -4497,3 +4507,9 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
+
+#~ msgid "Target file already exists!"
+#~ msgstr "A célfájl már létezik!"
+
+#~ msgid "&Update"
+#~ msgstr "Ha &régebbi"

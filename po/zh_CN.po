@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"POT-Creation-Date: 2019-03-02 12:28+0300\n"
 "PO-Revision-Date: 2018-10-21 01:34+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/mc/mc/language/"
@@ -1655,7 +1655,8 @@ msgstr ""
 "为 Midnight Commander 编写的\n"
 "一个界面友好的文本编辑器。"
 
-msgid "Copyright (C) 1996-2018 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2019 the Free Software Foundation"
 msgstr "版权所有 (C) 1996-2018 自由软件基金会"
 
 msgid "About"
@@ -2868,18 +2869,16 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-msgid "Target file already exists!"
-msgstr "目标文件已存在!"
-
-#, c-format
-msgid "New     : %s, size %s"
+#, fuzzy
+msgid "New     :"
 msgstr "新文件: %s，体积 %s"
 
-#, c-format
-msgid "Existing: %s, size %s"
+#, fuzzy
+msgid "Existing:"
 msgstr "原文件: %s，体积%s"
 
-msgid "Overwrite this target?"
+#, fuzzy
+msgid "Overwrite this file?"
 msgstr "覆盖该目标?"
 
 msgid "A&ppend"
@@ -2888,13 +2887,21 @@ msgstr "追加(&P)"
 msgid "&Reget"
 msgstr "重新获取(&R)"
 
-msgid "Overwrite all targets?"
+#, fuzzy
+msgid "Overwrite all files?"
 msgstr "覆盖所有目标?"
 
-msgid "&Update"
-msgstr "更新(&U)"
+msgid "Don't overwrite with &zero length file"
+msgstr ""
 
-msgid "If &size differs"
+msgid "&Older"
+msgstr ""
+
+msgid "S&maller"
+msgstr ""
+
+#, fuzzy
+msgid "&Size differs"
 msgstr "如果大小有差别(&S)"
 
 msgid "File exists"
@@ -3855,6 +3862,10 @@ msgstr "使用 ncurses 库\n"
 msgid "Using the ncursesw library\n"
 msgstr "使用 ncursesw 库\n"
 
+#, fuzzy
+msgid "With builtin Editor and Aspell support\n"
+msgstr "使用内建编辑器\n"
+
 msgid "With builtin Editor\n"
 msgstr "使用内建编辑器\n"
 
@@ -4506,3 +4517,9 @@ msgstr "从头继续搜索?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "无法获取 /ftp://some.host/editme.txt 的本地副本"
+
+#~ msgid "Target file already exists!"
+#~ msgstr "目标文件已存在!"
+
+#~ msgid "&Update"
+#~ msgstr "更新(&U)"

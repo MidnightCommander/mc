@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2018-12-28 22:54+0300\n"
+"POT-Creation-Date: 2019-03-02 12:28+0300\n"
 "PO-Revision-Date: 2018-10-21 01:34+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
@@ -1652,7 +1652,8 @@ msgstr ""
 "Afabla tekstoredaktilo\n"
 "verkita por Midnight Commander."
 
-msgid "Copyright (C) 1996-2018 the Free Software Foundation"
+#, fuzzy
+msgid "Copyright (C) 1996-2019 the Free Software Foundation"
 msgstr "Kopirajto (C) 1996–2018 la Fondaĵo pri liberaj programoj"
 
 msgid "About"
@@ -2868,18 +2869,16 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-msgid "Target file already exists!"
-msgstr "Cela dosiero jam ekzistas!"
-
-#, c-format
-msgid "New     : %s, size %s"
+#, fuzzy
+msgid "New     :"
 msgstr "Nova: %s, grando %s"
 
-#, c-format
-msgid "Existing: %s, size %s"
+#, fuzzy
+msgid "Existing:"
 msgstr "Jama: %s, grando %s"
 
-msgid "Overwrite this target?"
+#, fuzzy
+msgid "Overwrite this file?"
 msgstr "Ĉu anstataŭigi ĉi tiun celon?"
 
 msgid "A&ppend"
@@ -2888,13 +2887,21 @@ msgstr "Al&meti"
 msgid "&Reget"
 msgstr "&Reakiri"
 
-msgid "Overwrite all targets?"
+#, fuzzy
+msgid "Overwrite all files?"
 msgstr "Ĉu anstataŭigi ĉiujn celojn?"
 
-msgid "&Update"
-msgstr "&Aktualigi"
+msgid "Don't overwrite with &zero length file"
+msgstr ""
 
-msgid "If &size differs"
+msgid "&Older"
+msgstr ""
+
+msgid "S&maller"
+msgstr ""
+
+#, fuzzy
+msgid "&Size differs"
 msgstr "Se &grando malsamas"
 
 msgid "File exists"
@@ -3859,6 +3866,10 @@ msgstr "Uzanta la bibliotekon ncurses\n"
 msgid "Using the ncursesw library\n"
 msgstr "Uzanta la bibliotekon ncursesw\n"
 
+#, fuzzy
+msgid "With builtin Editor and Aspell support\n"
+msgstr "Kun interna tekstoredaktilo\n"
+
 msgid "With builtin Editor\n"
 msgstr "Kun interna tekstoredaktilo\n"
 
@@ -4511,3 +4522,9 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
+
+#~ msgid "Target file already exists!"
+#~ msgstr "Cela dosiero jam ekzistas!"
+
+#~ msgid "&Update"
+#~ msgstr "&Aktualigi"
