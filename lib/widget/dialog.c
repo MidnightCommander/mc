@@ -230,6 +230,10 @@ static cb_ret_t
 dlg_execute_cmd (WDialog * h, long command)
 {
     cb_ret_t ret = MSG_HANDLED;
+
+    if (send_message (h, NULL, MSG_ACTION, command, NULL) == MSG_HANDLED)
+        return MSG_HANDLED;
+
     switch (command)
     {
     case CK_Ok:
@@ -299,13 +303,8 @@ dlg_handle_key (WDialog * h, int d_key)
     long command;
 
     command = keybind_lookup_keymap_command (dialog_map, d_key);
-
-    if (command == CK_IgnoreKey)
-        return MSG_NOT_HANDLED;
-
-    if (send_message (h, NULL, MSG_ACTION, command, NULL) == MSG_HANDLED
-        || dlg_execute_cmd (h, command) == MSG_HANDLED)
-        return MSG_HANDLED;
+    if (command != CK_IgnoreKey)
+        return dlg_execute_cmd (h, command);
 
     return MSG_NOT_HANDLED;
 }
@@ -1150,16 +1149,21 @@ dlg_init (WDialog * h)
 void
 dlg_process_event (WDialog * h, int key, Gpm_Event * event)
 {
-    if (key == EV_NONE)
+    switch (key)
     {
+    case EV_NONE:
         if (tty_got_interrupt ())
-            if (send_message (h, NULL, MSG_ACTION, CK_Cancel, NULL) != MSG_HANDLED)
-                dlg_execute_cmd (h, CK_Cancel);
-    }
-    else if (key == EV_MOUSE)
+            dlg_execute_cmd (h, CK_Cancel);
+        break;
+
+    case EV_MOUSE:
         h->mouse_status = dlg_mouse_event (h, event);
-    else
+        break;
+
+    default:
         dlg_key_event (h, key);
+        break;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
