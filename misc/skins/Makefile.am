@@ -5,6 +5,7 @@ skin_DATA = \
 	darkfar.ini \
 	default.ini \
 	double-lines.ini \
+	featured-plus.ini \
 	featured.ini \
 	gotar.ini \
 	gray-green-purple256.ini \
