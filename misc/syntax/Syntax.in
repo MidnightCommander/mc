@@ -37,8 +37,11 @@ include diff.syntax
 file ..\*\\.lsm$ LSM\sFile
 include lsm.syntax
 
-file .\*(bash_completion|profile|\\.(sh|bash_login|bash_profile|bash_logout|bash_aliases|bash_exports|bash_history|bashrc|profile|zlogin|zlogout|zprofile|zshenv|zshrc))$ Shell\sScript ^#!\s\*/(.\*/|usr/bin/env\s)([a-z]?|ba|pdk)sh
+file .\*(bash(_completion|rc)|profile|\\.(sh|bash(rc|_(completion|profile|log(in|out)|aliases|exports|history))|profile|zlog(in|out)|zprofile|zsh(env|rc)))$ Shell\sScript ^#!\s\*/(.\*/|usr/bin/env\s)([a-z]?|ba|pdk)sh
 include sh.syntax
+
+file ..\*\\.(busname|(auto)?mount|net(dev|work)|link|path|service|slice|socket|swap|target|timer)$ SystemD\sConfig
+include ini.syntax
 
 file ..\*\\.((?i:pl|pm|psgi)|t)$ Perl\sProgram ^#!.\*([\s/]perl|@PERL@)
 include perl.syntax
