@@ -1357,12 +1357,15 @@ erase_file (file_op_total_context_t * tctx, file_op_context_t * ctx, const vfs_p
     struct stat buf;
     FileProgressStatus return_status;
 
-    file_progress_show_deleting (ctx, vfs_path_as_str (vpath), &tctx->progress_count);
-    file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
-    if (check_progress_buttons (ctx) == FILE_ABORT)
-        return FILE_ABORT;
+    /* check buttons if deleting info was changed */
+    if (file_progress_show_deleting (ctx, vfs_path_as_str (vpath), &tctx->progress_count))
+    {
+        file_progress_show_count (ctx, tctx->progress_count, ctx->progress_count);
+        if (check_progress_buttons (ctx) == FILE_ABORT)
+            return FILE_ABORT;
 
-    mc_refresh ();
+        mc_refresh ();
+    }
 
     if (tctx->progress_count != 0 && mc_lstat (vpath, &buf) != 0)
     {
