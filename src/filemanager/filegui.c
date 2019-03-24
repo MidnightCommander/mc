@@ -1160,31 +1160,44 @@ file_progress_show_target (file_op_context_t * ctx, const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
+gboolean
 file_progress_show_deleting (file_op_context_t * ctx, const char *s, size_t * count)
 {
-    file_op_context_ui_t *ui;
+    static guint64 timestamp = 0;
+    /* update with 25 FPS rate */
+    static const guint64 delay = G_USEC_PER_SEC / 25;
+
+    gboolean ret;
 
     if (ctx == NULL || ctx->ui == NULL)
-        return;
+        return FALSE;
 
-    ui = ctx->ui;
+    ret = mc_time_elapsed (&timestamp, delay);
 
-    if (ui->src_file_label != NULL)
-        label_set_text (ui->src_file_label, _("Deleting"));
+    if (ret)
+    {
+        file_op_context_ui_t *ui;
 
-    label_set_text (ui->src_file, truncFileStringSecure (ui->op_dlg, s));
+        ui = ctx->ui;
+
+        if (ui->src_file_label != NULL)
+            label_set_text (ui->src_file_label, _("Deleting"));
+
+        label_set_text (ui->src_file, truncFileStringSecure (ui->op_dlg, s));
+    }
 
     if (count != NULL)
         (*count)++;
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 FileProgressStatus
 file_progress_real_query_replace (file_op_context_t * ctx, enum OperationMode mode,
-                                  const char *src, struct stat *src_stat,
-                                  const char *dst, struct stat *dst_stat)
+                                  const char *src, struct stat * src_stat,
+                                  const char *dst, struct stat * dst_stat)
 {
     file_op_context_ui_t *ui;
     FileProgressStatus replace_with_zero;
