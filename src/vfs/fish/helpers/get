@@ -1,30 +1,35 @@
-#RETR $FISH_FILENAME $FISH_START_OFFSET
+#RETR $FISH_FILENAME $FISH_START_OFFSET $FISH_CHUNK_SIZE
 LC_TIME=C
 export LC_TIME
 fish_get_perl ()
 {
 FILENAME=$1
-OFFSET=$2
+STARTOFFSET=$2
+CHUNKSIZE=$3
 perl -e '
 use strict;
 use POSIX;
 use Fcntl;
 my $filename = $ARGV[0];
 my $pos = $ARGV[1];
+my $chunk = $ARGV[2];
 my $content;
+my $next_pos;
 my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = lstat("$filename");
 my $n;
 if (open IFILE,$filename) {
-    if ($size<$pos) {
-        printf("0\n");
-    } else {
-        $size-=$pos;
-        printf("$size\n");
-    }
+    printf("$size\n");
     printf("### 100\n");
-    seek (IFILE, $pos, 0);
-    while ($n = read(IFILE,$content,$blksize)!= 0) {
-        print $content;
+    $next_pos = $pos + $chunk;
+    if ($next_pos > $size) {
+        $chunk = $size - $pos;
+    }
+    if ($chunk != 0) {
+        seek (IFILE, $pos, 0);
+        $n = read(IFILE,$content,$chunksize);
+        if ($n != 0) {
+            print $content;
+        }
     }
     close IFILE;
     printf("### 200\n");
@@ -32,13 +37,14 @@ if (open IFILE,$filename) {
     printf("### 500\n");
 }
 exit 0
-' "${FILENAME}" $OFFSET
+' "${FILENAME}" $STARTOFFSET $CHUNKSIZE
 }
 
-fish_get_tail ()
+fish_get_head_tail ()
 {
 FILENAME=$1
-OFFSET=$2
+STARTOFFSET=$2
+CHUNKSIZE=$3
 LC_TIME=C
 export LC_TIME
 if dd if="${FILENAME}" of=/dev/null bs=1 count=1 2>/dev/null ; then
@@ -46,20 +52,19 @@ if dd if="${FILENAME}" of=/dev/null bs=1 count=1 2>/dev/null ; then
        read p l u g s r
        echo $s
     )`
-    if [ $OFFSET -gt 0 ]; then
-        file_size=`expr $file_size - $OFFSET`
-        OFFSET=`expr $OFFSET + 1`
-    fi
-    if [ $file_size -gt 0 ]; then
-        echo $file_size
-    else
-        echo 0
-    fi
+    echo ${file_size}
     echo "### 100"
-    if [ $OFFSET -gt 0 ]; then
-        tail -c +${OFFSET} "${FILENAME}"
+    next_offset=`expr ${STARTOFFSET} + ${CHUNKSIZE}`
+    if [ ${next_offset} -gt ${file_size} ]; then
+        CHUNKSIZE=`expr ${file_size} - ${STARTOFFSET}`
+        next_offset=${file_size}
+    fi
+    if [ ${CHUNKSIZE} -eq 0 ]; then
+        echo -n
+    elif [ ${STARTOFFSET} -eq 0 ]; then
+        head -q -c ${CHUNKSIZE} "${FILENAME}"
     else
-        cat "${FILENAME}"
+        head -q -c $next_offset "${FILENAME}" | tail -q -c +${CHUNKSIZE} -
     fi
     echo "### 200"
 else
@@ -70,7 +75,8 @@ fi
 fish_get_dd ()
 {
 FILENAME=$1
-OFFSET=$2
+STARTOFFSET=$2
+CHUNKSIZE=$3
 LC_TIME=C
 export LC_TIME
 if dd if="${FILENAME}" of=/dev/null bs=1 count=1 2>/dev/null ; then
@@ -78,17 +84,18 @@ if dd if="${FILENAME}" of=/dev/null bs=1 count=1 2>/dev/null ; then
        read p l u g s r
        echo $s
     )`
-    file_size=`expr $file_size - $OFFSET`
-    if [ $file_size -gt 0 ]; then
-        echo $file_size
-    else
-        echo 0
-    fi
+    echo ${file_size}
     echo "### 100"
-    if [ $OFFSET -gt 0 ]; then
-        dd skip=$OFFSET ibs=1 if="${FILENAME}" 2>/dev/null
+    next_offset=`expr ${STARTOFFSET} + ${CHUNKSIZE}`
+    if [ ${next_offset} -gt ${file_size} ]; then
+        CHUNKSIZE=`expr ${file_size} - ${STARTOFFSET}`
+    fi
+    if [ ${CHUNKSIZE} -eq 0 ]; then
+        echo -n
+    elif [ ${STARTOFFSET} -eq 0 ]; then
+        dd if="${FILENAME}" bs=${CHUNKSIZE} 2>/dev/null
     else
-        cat "${FILENAME}"
+        dd if="${FILENAME}" ibs=${STARTOFFSET} skip=1 obs=${CHUNKSIZE} count=1 2>/dev/null
     fi
     echo "### 200"
 else
@@ -97,9 +104,9 @@ fi
 }
 
 if [ -n "${FISH_HAVE_PERL}" ]; then
-    fish_get_perl "/${FISH_FILENAME}" ${FISH_START_OFFSET}
-elif [ -n "${FISH_HAVE_TAIL}" ]; then
-    fish_get_tail "/${FISH_FILENAME}" ${FISH_START_OFFSET}
+    fish_get_perl "/${FISH_FILENAME}" ${FISH_STARTOFFSET} ${FISH_CHUNKSIZE}
+elif [ -n "${FISH_HAVE_HEAD}" -a -n "${FISH_HAVE_TAIL}" ]; then
+    fish_get_head_tail "/${FISH_FILENAME}" ${FISH_STARTOFFSET} ${FISH_CHUNKSIZE}
 else
-    fish_get_dd "/${FISH_FILENAME}" ${FISH_START_OFFSET}
+    fish_get_dd "/${FISH_FILENAME}" ${FISH_STARTOFFSET} ${FISH_CHUNKSIZE}
 fi

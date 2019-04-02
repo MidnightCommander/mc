@@ -129,15 +129,29 @@
 
 /* default 'retr'  script */
 #define FISH_GET_DEF_CONTENT ""                                                 \
+"FILENAME=\"/${FISH_FILENAME}\"\n"                                              \
+"STARTOFFSET=${FISH_STARTOFFSET}\n"                                             \
+"CHUNKSIZE=${FISH_CHUNKSIZE}\n"                                                 \
 "export LC_TIME=C\n"                                                            \
-"#RETR $FISH_FILENAME\n"                                                        \
-"if dd if=\"/${FISH_FILENAME}\" of=/dev/null bs=1 count=1 2>/dev/null ; then\n" \
-"    ls -ln \"/${FISH_FILENAME}\" 2>/dev/null | (\n"                            \
+"#RETR $FILENAME $STARTOFFSET $CHUNKSIZE\n"                                     \
+"if dd if=\"${FILENAME}\" of=/dev/null bs=1 count=1 2>/dev/null ; then\n"       \
+"    file_size=`ls -ln \"${FILENAME}\" 2>/dev/null | (\n"                       \
 "       read p l u g s r\n"                                                     \
 "       echo $s\n"                                                              \
-"    )\n"                                                                       \
+"    )`\n"                                                                      \
+"    echo ${file_size}"                                                         \
 "    echo \"### 100\"\n"                                                        \
-"    cat \"/${FISH_FILENAME}\"\n"                                               \
+"    next_offset=`expr ${STARTOFFSET} + ${CHUNKSIZE}`\n"                        \
+"    if [ ${next_offset} -gt ${file_size} ]; then\n"                            \
+"        CHUNKSIZE=`expr ${file_size} - ${STARTOFFSET}`\n"                      \
+"    fi\n"                                                                      \
+"    if [ ${CHUNKSIZE} -eq 0 ]; then\n"                                         \
+"        echo -n\n"                                                             \
+"    elsif [ ${STARTOFFSET} -eq 0 ]; then\n"                                    \
+"        dd if=\"${FILENAME}\" bs=${CHUNKSIZE} 2>/dev/null\n"                   \
+"    else\n"                                                                    \
+"        dd if=\"${FILENAME}\" ibs=${STARTOFFSET} skip=1"                       \
+"             obs=${CHUNKSIZE} count=1\n"                                       \
 "    echo \"### 200\"\n"                                                        \
 "else\n"                                                                        \
 "    echo \"### 500\"\n"                                                        \
