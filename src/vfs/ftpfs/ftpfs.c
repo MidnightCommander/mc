@@ -846,34 +846,29 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
     int my_socket = 0;
     char *host = NULL;
     char port[8];
-    int tmp_port;
+    int tmp_port = 0;
     int e;
 
     (void) me;
 
-    /* Use a proxy host? */
-    host = g_strdup (super->path_element->host);
-    if (host == NULL || *host == '\0')
+    if (super->path_element->host == NULL || *super->path_element->host == '\0')
     {
         vfs_print_message ("%s", _("ftpfs: Invalid host name."));
         ftpfs_errno = EINVAL;
-        g_free (host);
         return (-1);
     }
 
+    /* Use a proxy host? */
     /* Hosts to connect to that start with a ! should use proxy */
-    tmp_port = super->path_element->port;
-
     if (FTP_SUPER (super)->proxy != NULL)
         ftpfs_get_proxy_host_and_port (ftpfs_proxy_host, &host, &tmp_port);
+    else
+    {
+        host = g_strdup (super->path_element->host);
+        tmp_port = super->path_element->port;
+    }
 
     g_snprintf (port, sizeof (port), "%hu", (unsigned short) tmp_port);
-    if (*port == '\0')
-    {
-        g_free (host);
-        ftpfs_errno = errno;
-        return (-1);
-    }
 
     tty_enable_interrupt_key ();        /* clear the interrupt flag */
 
