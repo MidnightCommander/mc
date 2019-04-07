@@ -832,7 +832,8 @@ ftpfs_get_proxy_host_and_port (const char *proxy, char **host, int *port)
     vfs_path_element_t *path_element;
 
     path_element = vfs_url_split (proxy, FTP_COMMAND_PORT, URL_USE_ANONYMOUS);
-    *host = g_strdup (path_element->host);
+    *host = path_element->host;
+    path_element->host = NULL;
     *port = path_element->port;
     vfs_path_element_free (path_element);
 }
