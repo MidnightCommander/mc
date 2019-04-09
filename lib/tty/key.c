@@ -252,13 +252,12 @@ typedef struct
 } key_define_t;
 
 /* File descriptor monitoring add/remove routines */
-typedef struct SelectList
+typedef struct
 {
     int fd;
     select_fn callback;
     void *info;
-    struct SelectList *next;
-} SelectList;
+} select_t;
 
 typedef enum KeySortType
 {
@@ -522,7 +521,7 @@ static key_def *keys = NULL;
 static int input_fd;
 static int disabled_channels = 0;       /* Disable channels checking */
 
-static SelectList *select_list = NULL;
+static GSList *select_list = NULL;
 
 static int seq_buffer[SEQ_BUFFER_LEN];
 static int *seq_append = NULL;
@@ -548,7 +547,30 @@ static const size_t key_conv_tab_size = G_N_ELEMENTS (key_name_conv_tab) - 1;
 
 static const key_code_name_t *key_conv_tab_sorted[G_N_ELEMENTS (key_name_conv_tab) - 1];
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+select_cmp_by_fd_set (gconstpointer a, gconstpointer b)
+{
+    const select_t *s = (const select_t *) a;
+    const fd_set *f = (const fd_set *) b;
+
+    return (FD_ISSET (s->fd, f) ? 0 : 1);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static int
+select_cmp_by_fd (gconstpointer a, gconstpointer b)
+{
+    const select_t *s = (const select_t *) a;
+    const int fd = GPOINTER_TO_INT (b);
+
+    return (s->fd == fd ? 0 : 1);
+}
+
 /* --------------------------------------------------------------------------------------------- */
 
 static int
@@ -558,10 +580,12 @@ add_selects (fd_set * select_set)
 
     if (disabled_channels == 0)
     {
-        SelectList *p;
+        GSList *s;
 
-        for (p = select_list; p != NULL; p = p->next)
+        for (s = select_list; s != NULL; s = g_slist_next (s))
         {
+            select_t *p = (select_t *) s->data;
+
             FD_SET (p->fd, select_set);
             if (p->fd > top_fd)
                 top_fd = p->fd;
@@ -576,25 +600,18 @@ add_selects (fd_set * select_set)
 static void
 check_selects (fd_set * select_set)
 {
-    if (disabled_channels == 0)
+    while (disabled_channels == 0)
     {
-        gboolean retry;
+        GSList *s;
+        select_t *p;
 
-        do
-        {
-            SelectList *p;
+        s = g_slist_find_custom (select_list, select_set, select_cmp_by_fd_set);
+        if (s == NULL)
+            break;
 
-            retry = FALSE;
-            for (p = select_list; p; p = p->next)
-                if (FD_ISSET (p->fd, select_set))
-                {
-                    FD_CLR (p->fd, select_set);
-                    (*p->callback) (p->fd, p->info);
-                    retry = TRUE;
-                    break;
-                }
-        }
-        while (retry);
+        p = (select_t *) s->data;
+        FD_CLR (p->fd, select_set);
+        p->callback (p->fd, p->info);
     }
 }
 
@@ -1193,18 +1210,6 @@ k_dispose (key_def * k)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-s_dispose (SelectList * sel)
-{
-    if (sel != NULL)
-    {
-        s_dispose (sel->next);
-        g_free (sel);
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static int
 key_code_comparator_by_name (const void *p1, const void *p2)
 {
@@ -1385,7 +1390,7 @@ void
 done_key (void)
 {
     k_dispose (keys);
-    s_dispose (select_list);
+    g_slist_free_full (select_list, g_free);
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
     if (x11_display)
@@ -1398,14 +1403,14 @@ done_key (void)
 void
 add_select_channel (int fd, select_fn callback, void *info)
 {
-    SelectList *new;
+    select_t *new;
 
-    new = g_new (SelectList, 1);
+    new = g_new (select_t, 1);
     new->fd = fd;
     new->callback = callback;
     new->info = info;
-    new->next = select_list;
-    select_list = new;
+
+    select_list = g_slist_prepend (select_list, new);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1413,28 +1418,11 @@ add_select_channel (int fd, select_fn callback, void *info)
 void
 delete_select_channel (int fd)
 {
-    SelectList *p = select_list;
-    SelectList *p_prev = NULL;
-    SelectList *p_next;
+    GSList *p;
 
-    while (p != NULL)
-        if (p->fd == fd)
-        {
-            p_next = p->next;
-
-            if (p_prev != NULL)
-                p_prev->next = p_next;
-            else
-                select_list = p_next;
-
-            g_free (p);
-            p = p_next;
-        }
-        else
-        {
-            p_prev = p;
-            p = p->next;
-        }
+    p = g_slist_find_custom (select_list, GINT_TO_POINTER (fd), select_cmp_by_fd);
+    if (p != NULL)
+        select_list = g_slist_delete_link (select_list, p);
 }
 
 /* --------------------------------------------------------------------------------------------- */
