@@ -619,12 +619,12 @@ check_selects (fd_set * select_set)
 /* If set timeout is set, then we wait 0.1 seconds, else, we block */
 
 static void
-try_channels (int set_timeout)
+try_channels (gboolean set_timeout)
 {
     struct timeval time_out;
     static fd_set select_set;
 
-    while (1)
+    while (TRUE)
     {
         struct timeval *timeptr = NULL;
         int maxfdp, v;
@@ -657,7 +657,7 @@ create_sequence (const char *seq, int code, int action)
 {
     key_def *base, *p, *attach;
 
-    for (base = attach = NULL; *seq; seq++)
+    for (base = attach = NULL; *seq != '\0'; seq++)
     {
         p = g_new (key_def, 1);
         if (base == NULL)
@@ -714,18 +714,20 @@ getch_with_delay (void)
 
     /* This routine could be used on systems without mouse support,
        so we need to do the select check :-( */
-    while (1)
+    while (TRUE)
     {
         if (pending_keys == NULL)
-            try_channels (0);
+            try_channels (FALSE);
 
         /* Try to get a character */
         c = get_key_code (0);
         if (c != -1)
             break;
+
         /* Failed -> wait 0.1 secs and try again */
-        try_channels (1);
+        try_channels (TRUE);
     }
+
     /* Success -> return the character */
     return c;
 }
@@ -762,8 +764,10 @@ xmouse_get_event (Gpm_Event * ev, gboolean extended)
            so that the released button can be reported.
            - Numbers are no longer offset by 32. */
         char c;
+
         btn = ev->x = ev->y = 0;
         ev->type = 0;           /* In case we return on an invalid sequence */
+
         while ((c = tty_lowlevel_getch ()) != ';')
         {
             if (c < '0' || c > '9')
@@ -832,7 +836,7 @@ xmouse_get_event (Gpm_Event * ev, gboolean extended)
             ev->type = GPM_DOWN;
 
         GET_TIME (tv2);
-        if (tv1.tv_sec && (DIF_TIME (tv1, tv2) < double_click_speed))
+        if (tv1.tv_sec != 0 && DIF_TIME (tv1, tv2) < double_click_speed)
         {
             clicks++;
             clicks %= 3;
@@ -883,10 +887,8 @@ get_modifier (void)
 {
     int result = 0;
 #ifdef __QNXNTO__
-    int mod_status;
     static int in_photon = 0;
     static int ph_ig = 0;
-    PhCursorInfo_t cursor_info;
 #endif /* __QNXNTO__ */
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
@@ -900,44 +902,45 @@ get_modifier (void)
         mc_XQueryPointer (x11_display, x11_window, &root, &child, &root_x,
                           &root_y, &win_x, &win_y, &mask);
 
-        if (mask & ShiftMask)
+        if ((mask & ShiftMask) != 0)
             result |= KEY_M_SHIFT;
-        if (mask & ControlMask)
+        if ((mask & ControlMask) != 0)
             result |= KEY_M_CTRL;
         return result;
     }
 #endif /* HAVE_TEXTMODE_X11_SUPPORT */
-#ifdef __QNXNTO__
 
+#ifdef __QNXNTO__
     if (in_photon == 0)
     {
-        /* First time here, let's load Photon library and attach
-           to Photon */
+        /* First time here, let's load Photon library and attach to Photon */
         in_photon = -1;
+
         if (getenv ("PHOTON2_PATH") != NULL)
         {
             /* QNX 6.x has no support for RTLD_LAZY */
-            void *ph_handle = dlopen ("/usr/lib/libph.so", RTLD_NOW);
+            void *ph_handle;
+
+            ph_handle = dlopen ("/usr/lib/libph.so", RTLD_NOW);
             if (ph_handle != NULL)
             {
                 ph_attach = (ph_dv_f) dlsym (ph_handle, "PhAttach");
                 ph_input_group = (ph_ov_f) dlsym (ph_handle, "PhInputGroup");
                 ph_query_cursor = (ph_pqc_f) dlsym (ph_handle, "PhQueryCursor");
-                if ((ph_attach != NULL) && (ph_input_group != NULL) && (ph_query_cursor != NULL))
+                if ((ph_attach != NULL) && (ph_input_group != NULL) && (ph_query_cursor != NULL)
+                    && (*ph_attach) (0, 0) != NULL)
                 {
-                    if ((*ph_attach) (0, 0))
-                    {           /* Attached */
-                        ph_ig = (*ph_input_group) (0);
-                        in_photon = 1;
-                    }
+                    /* Attached */
+                    ph_ig = (*ph_input_group) (0);
+                    in_photon = 1;
                 }
             }
         }
     }
-    /* We do not have Photon running. Assume we are in text
-       console or xterm */
+    /* We do not have Photon running. Assume we are in text console or xterm */
     if (in_photon == -1)
     {
+        int mod_status;
         int shift_ext_status;
 
         if (devctl (fileno (stdin), DCMD_CHR_LINESTATUS, &mod_status, sizeof (mod_status), NULL) ==
@@ -946,21 +949,23 @@ get_modifier (void)
 
         shift_ext_status = mod_status & 0xffffff00UL;
         mod_status &= 0x7f;
-        if (mod_status & _LINESTATUS_CON_ALT)
+        if ((mod_status & _LINESTATUS_CON_ALT) != 0)
             result |= KEY_M_ALT;
-        if (mod_status & _LINESTATUS_CON_CTRL)
+        if ((mod_status & _LINESTATUS_CON_CTRL) != 0)
             result |= KEY_M_CTRL;
-        if ((mod_status & _LINESTATUS_CON_SHIFT) || (shift_ext_status & 0x00000800UL))
+        if ((mod_status & _LINESTATUS_CON_SHIFT) != 0 || (shift_ext_status & 0x00000800UL) != 0)
             result |= KEY_M_SHIFT;
     }
     else
     {
+        PhCursorInfo_t cursor_info;
+
         (*ph_query_cursor) (ph_ig, &cursor_info);
-        if (cursor_info.key_mods & 0x04)
+        if ((cursor_info.key_mods & 0x04) != 0)
             result |= KEY_M_ALT;
-        if (cursor_info.key_mods & 0x02)
+        if ((cursor_info.key_mods & 0x02) != 0)
             result |= KEY_M_CTRL;
-        if (cursor_info.key_mods & 0x01)
+        if ((cursor_info.key_mods & 0x01) != 0)
             result |= KEY_M_SHIFT;
     }
 #endif /* __QNXNTO__ */
@@ -973,14 +978,15 @@ get_modifier (void)
             return 0;
 
         /* Translate Linux modifiers into mc modifiers */
-        if (modifiers & SHIFT_PRESSED)
+        if ((modifiers & SHIFT_PRESSED) != 0)
             result |= KEY_M_SHIFT;
-        if (modifiers & (ALTL_PRESSED | ALTR_PRESSED))
+        if ((modifiers & (ALTL_PRESSED | ALTR_PRESSED)) != 0)
             result |= KEY_M_ALT;
-        if (modifiers & CONTROL_PRESSED)
+        if ((modifiers & CONTROL_PRESSED) != 0)
             result |= KEY_M_CTRL;
     }
 #endif /* !__linux__ */
+
     return result;
 }
 
@@ -997,7 +1003,7 @@ push_char (int c)
     if (seq_append != &(seq_buffer[SEQ_BUFFER_LEN - 2]))
     {
         *(seq_append++) = c;
-        *seq_append = 0;
+        *seq_append = '\0';
         ret = TRUE;
     }
 
@@ -1022,9 +1028,7 @@ correct_key_code (int code)
      * Ordinary characters only get modifiers from sequences.
      */
     if (c < 32 || c >= 256)
-    {
         mod |= get_modifier ();
-    }
 
     /* This is needed if the newline is reported as carriage return */
     if (c == '\r')
@@ -1058,54 +1062,47 @@ correct_key_code (int code)
         mod &= ~KEY_M_CTRL;
     }
     else if (c < 32 && c != ESC_CHAR && c != '\t' && c != '\n')
-    {
         mod |= KEY_M_CTRL;
-    }
 
 #ifdef __QNXNTO__
     qmod = get_modifier ();
 
-    if ((c == 127) && (mod == 0))
-    {                           /* Add Ctrl/Alt/Shift-BackSpace */
+    if (c == 127 && mod == 0)
+    {
+        /* Add Ctrl/Alt/Shift-BackSpace */
         mod |= get_modifier ();
         c = KEY_BACKSPACE;
     }
 
-    if ((c == '0') && (mod == 0))
-    {                           /* Add Shift-Insert on key pad */
-        if ((qmod & KEY_M_SHIFT) == KEY_M_SHIFT)
-        {
-            mod = KEY_M_SHIFT;
-            c = KEY_IC;
-        }
+    if (c == '0' && mod == 0 && (qmod & KEY_M_SHIFT) == KEY_M_SHIFT)
+    {
+        /* Add Shift-Insert on key pad */
+        mod = KEY_M_SHIFT;
+        c = KEY_IC;
     }
 
-    if ((c == '.') && (mod == 0))
-    {                           /* Add Shift-Del on key pad */
-        if ((qmod & KEY_M_SHIFT) == KEY_M_SHIFT)
-        {
-            mod = KEY_M_SHIFT;
-            c = KEY_DC;
-        }
+    if (c == '.' && mod == 0 && (qmod & KEY_M_SHIFT) == KEY_M_SHIFT)
+    {
+        /* Add Shift-Del on key pad */
+        mod = KEY_M_SHIFT;
+        c = KEY_DC;
     }
 #endif /* __QNXNTO__ */
 
     /* Unrecognized 0177 is delete (preserve Ctrl) */
     if (c == 0177)
-    {
         c = KEY_BACKSPACE;
-    }
 
 #if 0
     /* Unrecognized Ctrl-d is delete */
-    if (c == (31 & 'd'))
+    if (c == 'd' & 31)
     {
         c = KEY_DC;
         mod &= ~KEY_M_CTRL;
     }
 
     /* Unrecognized Ctrl-h is backspace */
-    if (c == (31 & 'h'))
+    if (c == 'h' & 31)
     {
         c = KEY_BACKSPACE;
         mod &= ~KEY_M_CTRL;
@@ -1113,22 +1110,16 @@ correct_key_code (int code)
 #endif
 
     /* Shift+BackSpace is backspace */
-    if (c == KEY_BACKSPACE && (mod & KEY_M_SHIFT))
-    {
+    if (c == KEY_BACKSPACE && (mod & KEY_M_SHIFT) != 0)
         mod &= ~KEY_M_SHIFT;
-    }
 
     /* Convert Shift+Fn to F(n+10) */
-    if (c >= KEY_F (1) && c <= KEY_F (10) && (mod & KEY_M_SHIFT))
-    {
+    if (c >= KEY_F (1) && c <= KEY_F (10) && (mod & KEY_M_SHIFT) != 0)
         c += 10;
-    }
 
     /* Remove Shift information from function keys */
     if (c >= KEY_F (1) && c <= KEY_F (20))
-    {
         mod &= ~KEY_M_SHIFT;
-    }
 
     if (!mc_global.tty.alternate_plus_minus)
         switch (c)
@@ -1176,6 +1167,7 @@ learn_store_key (char *buffer, char **p, int c)
 {
     if (*p - buffer > 253)
         return;
+
     if (c == ESC_CHAR)
     {
         *(*p)++ = '\\';
@@ -1238,19 +1230,17 @@ sort_key_conv_tab (enum KeySortType type_sort)
     if (has_been_sorted != type_sort)
     {
         size_t i;
+
         for (i = 0; i < key_conv_tab_size; i++)
             key_conv_tab_sorted[i] = &key_name_conv_tab[i];
 
         if (type_sort == KEY_SORTBYNAME)
-        {
             qsort (key_conv_tab_sorted, key_conv_tab_size, sizeof (key_conv_tab_sorted[0]),
                    &key_code_comparator_by_name);
-        }
         else if (type_sort == KEY_SORTBYCODE)
-        {
             qsort (key_conv_tab_sorted, key_conv_tab_size, sizeof (key_conv_tab_sorted[0]),
                    &key_code_comparator_by_code);
-        }
+
         has_been_sorted = type_sort;
     }
 }
@@ -1324,7 +1314,9 @@ lookup_keycode (const long code, int *idx)
 void
 init_key (void)
 {
-    const char *term = getenv ("TERM");
+    const char *term;
+
+    term = getenv ("TERM");
 
     /* This has to be the first define_sequence */
     /* So, we can assume that the first keys member has ESC */
@@ -1580,15 +1572,13 @@ lookup_key_by_code (const int keycode)
 
     if (lookup_keycode (k, &key_idx) || (k > 0 && k < 256))
     {
-        if (mod & KEY_M_ALT)
+        if ((mod & KEY_M_ALT) != 0 && lookup_keycode (KEY_M_ALT, &idx))
         {
-            if (lookup_keycode (KEY_M_ALT, &idx))
-            {
-                g_string_append (s, key_conv_tab_sorted[idx]->name);
-                g_string_append_c (s, '-');
-            }
+            g_string_append (s, key_conv_tab_sorted[idx]->name);
+            g_string_append_c (s, '-');
         }
-        if (mod & KEY_M_CTRL)
+
+        if ((mod & KEY_M_CTRL) != 0)
         {
             /* non printeble chars like a CTRL-[A..Z] */
             if (k < 32)
@@ -1600,7 +1590,8 @@ lookup_key_by_code (const int keycode)
                 g_string_append_c (s, '-');
             }
         }
-        if (mod & KEY_M_SHIFT)
+
+        if ((mod & KEY_M_SHIFT) != 0)
         {
             if (lookup_keycode (KEY_M_ALT, &idx))
             {
@@ -1647,7 +1638,7 @@ define_sequence (int code, const char *seq, int action)
     for (base = keys; (base != NULL) && (*seq != '\0');)
         if (*seq == base->ch)
         {
-            if (base->child == 0)
+            if (base->child == NULL)
             {
                 if (*(seq + 1) != '\0')
                     base->child = create_sequence (seq + 1, code, action);
@@ -1665,7 +1656,7 @@ define_sequence (int code, const char *seq, int action)
         }
         else
         {
-            if (base->next)
+            if (base->next != NULL)
                 base = base->next;
             else
             {
@@ -1782,7 +1773,7 @@ get_key_code (int no_delay)
     }
 
   nodelay_try_again:
-    if (no_delay)
+    if (no_delay != 0)
         tty_nodelay (TRUE);
 
     c = tty_lowlevel_getch ();
@@ -1790,7 +1781,8 @@ get_key_code (int no_delay)
     if (c == KEY_RESIZE)
         goto nodelay_try_again;
 #endif
-    if (no_delay)
+
+    if (no_delay != 0)
     {
         tty_nodelay (FALSE);
         if (c == -1)
@@ -1801,6 +1793,7 @@ get_key_code (int no_delay)
 
                 if (esctime.tv_sec == -1)
                     return -1;
+
                 GET_TIME (current);
                 time_out.tv_sec = old_esc_mode_timeout / 1000000 + esctime.tv_sec;
                 time_out.tv_usec = old_esc_mode_timeout % 1000000 + esctime.tv_usec;
@@ -1809,14 +1802,14 @@ get_key_code (int no_delay)
                     time_out.tv_usec -= 1000000;
                     time_out.tv_sec++;
                 }
-                if (current.tv_sec < time_out.tv_sec)
-                    return -1;
-                if (current.tv_sec == time_out.tv_sec && current.tv_usec < time_out.tv_usec)
+                if (current.tv_sec < time_out.tv_sec ||
+                    (current.tv_sec == time_out.tv_sec && current.tv_usec < time_out.tv_usec))
                     return -1;
                 this = NULL;
                 pending_keys = seq_append = NULL;
                 return ESC_CHAR;
             }
+
             return -1;
         }
     }
@@ -1835,12 +1828,12 @@ get_key_code (int no_delay)
     }
 
     /* Search the key on the root */
-    if (!no_delay || this == NULL)
+    if (no_delay == 0 || this == NULL)
     {
         this = keys;
         parent = NULL;
 
-        if ((c > 127 && c < 256) && use_8th_bit_as_meta)
+        if (c > 127 && c < 256 && use_8th_bit_as_meta)
         {
             c &= 0x7f;
 
@@ -1864,21 +1857,24 @@ get_key_code (int no_delay)
                 this = NULL;
                 return correct_key_code (code);
             }
+
             /* No match yet, but it may be a prefix for a valid seq */
             if (!push_char (c))
             {
                 pending_keys = seq_buffer;
                 goto pend_send;
             }
+
             parent = this;
             this = this->child;
             if (parent->action == MCKEY_ESCAPE && old_esc_mode)
             {
-                if (no_delay)
+                if (no_delay != 0)
                 {
                     GET_TIME (esctime);
                     goto nodelay_try_again;
                 }
+
                 esctime.tv_sec = -1;
                 c = getch_with_timeout (old_esc_mode_timeout);
                 if (c == -1)
@@ -1889,7 +1885,8 @@ get_key_code (int no_delay)
                 }
                 continue;
             }
-            if (no_delay)
+
+            if (no_delay != 0)
                 goto nodelay_try_again;
             c = tty_lowlevel_getch ();
             continue;
@@ -1922,7 +1919,6 @@ get_key_code (int no_delay)
         push_char (c);
         pending_keys = seq_buffer;
         goto pend_send;
-
     }                           /* while (this != NULL) */
 
     this = NULL;
@@ -2063,6 +2059,7 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
 
         if (FD_ISSET (input_fd, &select_set))
             break;
+
 #ifdef HAVE_LIBGPM
         if (mouse_enabled && use_mouse_p == MOUSE_GPM)
         {
@@ -2079,7 +2076,7 @@ tty_get_event (struct Gpm_Event *event, gboolean redo_event, gboolean block)
                         *event = ev;
                         return EV_MOUSE;
                     }
-                    else if (status <= 0)       /* connection closed; -1 == error */
+                    if (status <= 0)    /* connection closed; -1 == error */
                     {
                         if (mouse_fd >= 0 && FD_ISSET (mouse_fd, &select_set))
                             FD_CLR (mouse_fd, &select_set);
@@ -2154,7 +2151,8 @@ tty_getch (void)
     int key;
 
     ev.x = -1;
-    while ((key = tty_get_event (&ev, FALSE, TRUE)) == EV_NONE);
+    while ((key = tty_get_event (&ev, FALSE, TRUE)) == EV_NONE)
+        ;
     return key;
 }
 
@@ -2178,6 +2176,7 @@ learn_key (void)
     while (c == -1)
         c = tty_lowlevel_getch ();      /* Sanity check, should be unnecessary */
     learn_store_key (buffer, &p, c);
+
     GET_TIME (endtime);
     endtime.tv_usec += LEARN_TIMEOUT;
     if (endtime.tv_usec > 1000000)
@@ -2185,6 +2184,7 @@ learn_key (void)
         endtime.tv_usec -= 1000000;
         endtime.tv_sec++;
     }
+
     tty_nodelay (TRUE);
     while (TRUE)
     {
