@@ -2928,25 +2928,25 @@ Toggle the wrap mode.
 Toggle the hex mode.
 .PP
 .B F5
-Goto line.  This will prompt you for a line number and will display
-that line.
+Goto. You can specify a line number, offset or percentage of file size
+of position that you want to view.
 .PP
-.B F6, /.
-Regular expression search.
+.B F7, /, ?
+Start search. These keys call the dialog window that allows you to set up
+the search options. If key is ? the "Backwards" option is on.
 .PP
-.B ?,
-Reverse regular expression search.
+.B C\-s
+Continue forward search.
 .PP
-.B F7
-Normal search / hex mode search.
+.B C\-r
+Continue reverse search.
 .PP
-.B C\-s, F17, n.
-Start normal search if there was no previous search expression else
-find next match.
+.B F17, n
+Continue search in the chosen direction.
 .PP
-.B C\-r.
-Start reverse search if there was no previous search expression else
-find next match.
+.B N
+Temporary change the search direction: backwards if forward search is chosen,
+and vice versa.
 .PP
 .B F8
 Toggle Raw/Parsed mode: This will show the file as found on disk or if

@@ -455,6 +455,16 @@ mcview_execute_cmd (WView * view, long command)
         mcview_search_options.backwards = TRUE;
         mcview_continue_search_cmd (view);
         break;
+    case CK_SearchOppositeContinue:
+        {
+            gboolean direction;
+
+            direction = mcview_search_options.backwards;
+            mcview_search_options.backwards = !direction;
+            mcview_continue_search_cmd (view);
+            mcview_search_options.backwards = direction;
+        }
+        break;
     case CK_WrapMode:
         /* Toggle between wrapped and unwrapped view */
         mcview_toggle_wrap_mode (view);
