@@ -956,15 +956,10 @@ custom_canonicalize_pathname (char *path, CANON_PATH_FLAGS flags)
                     vclass = vfs_prefix_to_class (vfs_prefix);
                     *(s - url_delim_len) = *VFS_PATH_URL_DELIMITER;
 
-                    if (vclass != NULL)
+                    if (vclass != NULL && (vclass->flags & VFS_REMOTE) != 0)
                     {
-                        struct vfs_s_subclass *sub = (struct vfs_s_subclass *) vclass->data;
-
-                        if (sub != NULL && sub->flags & VFS_S_REMOTE)
-                        {
-                            s = vfs_prefix;
-                            continue;
-                        }
+                        s = vfs_prefix;
+                        continue;
                     }
                 }
 

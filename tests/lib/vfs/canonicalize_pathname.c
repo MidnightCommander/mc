@@ -37,7 +37,6 @@
 
 #include "src/vfs/local/local.c"
 
-static struct vfs_s_subclass test_subclass;
 static struct vfs_class vfs_test_ops;
 
 /* --------------------------------------------------------------------------------------------- */
@@ -57,12 +56,7 @@ setup (void)
     load_codepages_list ();
 #endif
 
-    vfs_s_init_class (&vfs_test_ops, &test_subclass);
-
-    vfs_test_ops.name = "testfs";
-    vfs_test_ops.flags = VFSF_NOLINKS;
-    vfs_test_ops.prefix = "ftp";
-    test_subclass.flags = VFS_S_REMOTE;
+    vfs_init_class (&vfs_test_ops, "testfs", VFS_NOLINKS | VFS_REMOTE, "ftp");
     vfs_register_class (&vfs_test_ops);
 }
 

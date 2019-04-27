@@ -37,8 +37,7 @@
 
 #include "src/vfs/local/local.c"
 
-struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
-struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
+static struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -46,30 +45,19 @@ struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
 static void
 setup (void)
 {
-
     str_init_strings (NULL);
 
     vfs_init ();
     init_localfs ();
     vfs_setup_work_dir ();
 
-
-    test_subclass1.flags = VFS_S_REMOTE;
-    vfs_s_init_class (&vfs_test_ops1, &test_subclass1);
-
-    vfs_test_ops1.name = "testfs1";
-    vfs_test_ops1.flags = VFSF_NOLINKS;
-    vfs_test_ops1.prefix = "test1";
+    vfs_init_class (&vfs_test_ops1, "testfs1", VFS_NOLINKS | VFS_REMOTE, "test1");
     vfs_register_class (&vfs_test_ops1);
 
-    vfs_s_init_class (&vfs_test_ops2, &test_subclass2);
-    vfs_test_ops2.name = "testfs2";
-    vfs_test_ops2.prefix = "test2";
+    vfs_init_class (&vfs_test_ops2, "testfs2", VFS_UNKNOWN, "test2");
     vfs_register_class (&vfs_test_ops2);
 
-    vfs_s_init_class (&vfs_test_ops3, &test_subclass3);
-    vfs_test_ops3.name = "testfs3";
-    vfs_test_ops3.prefix = "test3";
+    vfs_init_class (&vfs_test_ops3, "testfs3", VFS_UNKNOWN, "test3");
     vfs_register_class (&vfs_test_ops3);
 
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
@@ -155,7 +143,11 @@ START_TEST (test_path_serialize)
     /* when */
     vpath = vfs_path_from_str_flags (ETALON_PATH_STR, VPF_USE_DEPRECATED_PARSER);
     serialized_vpath = vfs_path_serialize (vpath, &error);
+
     vfs_path_free (vpath);
+
+    if (error != NULL)
+        g_error_free (error);
 
     /* then */
     mctest_assert_ptr_ne (serialized_vpath, NULL);

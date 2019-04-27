@@ -316,6 +316,17 @@ vfs_register_class (struct vfs_class * vfs)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+void
+vfs_unregister_class (struct vfs_class *vfs)
+{
+    if (vfs->done != NULL)
+        vfs->done (vfs);
+
+    g_ptr_array_remove (vfs__classes_list, vfs);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /** Strip known vfs suffixes from a filename (possible improvement: strip
  *  suffix from last path component).
  *  \return a malloced string which has to be freed.
@@ -427,20 +438,20 @@ vfs_set_raw_current_dir (const vfs_path_t * vpath)
 gboolean
 vfs_current_is_local (void)
 {
-    return (current_vfs->flags & VFSF_LOCAL) != 0;
+    return (current_vfs->flags & VFS_LOCAL) != 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
 /* Return flags of the VFS class of the given filename */
 
-vfs_class_flags_t
+vfs_flags_t
 vfs_file_class_flags (const vfs_path_t * vpath)
 {
     const vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
     if (!vfs_path_element_valid (path_element))
-        return VFSF_UNKNOWN;
+        return VFS_UNKNOWN;
 
     return path_element->class->flags;
 }
@@ -492,7 +503,7 @@ vfs_shut (void)
 
     for (i = 0; i < vfs__classes_list->len; i++)
     {
-        struct vfs_class *vfs = (struct vfs_class *) g_ptr_array_index (vfs__classes_list, i);
+        struct vfs_class *vfs = VFS_CLASS (g_ptr_array_index (vfs__classes_list, i));
 
         if (vfs->done != NULL)
             vfs->done (vfs);
@@ -523,7 +534,7 @@ vfs_fill_names (fill_names_f func)
 
     for (i = 0; i < vfs__classes_list->len; i++)
     {
-        struct vfs_class *vfs = (struct vfs_class *) g_ptr_array_index (vfs__classes_list, i);
+        struct vfs_class *vfs = VFS_CLASS (g_ptr_array_index (vfs__classes_list, i));
 
         if (vfs->fill_names != NULL)
             vfs->fill_names (vfs, func);
@@ -531,10 +542,11 @@ vfs_fill_names (fill_names_f func)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
 gboolean
 vfs_file_is_local (const vfs_path_t * vpath)
 {
-    return (vfs_file_class_flags (vpath) & VFSF_LOCAL) != 0;
+    return (vfs_file_class_flags (vpath) & VFS_LOCAL) != 0;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -585,7 +597,7 @@ vfs_setup_cwd (void)
 
     path_element = vfs_path_get_by_index (vfs_get_raw_current_dir (), -1);
 
-    if ((path_element->class->flags & VFSF_LOCAL) != 0)
+    if ((path_element->class->flags & VFS_LOCAL) != 0)
     {
         current_dir = g_get_current_dir ();
         tmp_vpath = vfs_path_from_str (current_dir);
@@ -650,7 +662,7 @@ vfs_preallocate (int dest_vfs_fd, off_t src_fsize, off_t dest_fsize)
         return 0;
 
     dest_class = vfs_class_find_by_handle (dest_vfs_fd, &dest_fd);
-    if ((dest_class->flags & VFSF_LOCAL) == 0 || dest_fd == NULL)
+    if ((dest_class->flags & VFS_LOCAL) == 0 || dest_fd == NULL)
         return 0;
 
     return posix_fallocate (*(int *) dest_fd, dest_fsize, src_fsize - dest_fsize);
@@ -670,7 +682,7 @@ vfs_clone_file (int dest_vfs_fd, int src_vfs_fd)
     struct vfs_class *src_class;
 
     dest_class = vfs_class_find_by_handle (dest_vfs_fd, &dest_fd);
-    if ((dest_class->flags & VFSF_LOCAL) == 0)
+    if ((dest_class->flags & VFS_LOCAL) == 0)
     {
         errno = EOPNOTSUPP;
         return (-1);
@@ -682,7 +694,7 @@ vfs_clone_file (int dest_vfs_fd, int src_vfs_fd)
     }
 
     src_class = vfs_class_find_by_handle (src_vfs_fd, &src_fd);
-    if ((src_class->flags & VFSF_LOCAL) == 0)
+    if ((src_class->flags & VFS_LOCAL) == 0)
     {
         errno = EOPNOTSUPP;
         return (-1);

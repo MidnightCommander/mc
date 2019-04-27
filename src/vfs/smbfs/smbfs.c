@@ -65,6 +65,7 @@
 #include "helpers/include/includes.h"
 
 #include "lib/vfs/vfs.h"
+#include "lib/vfs/xdirentry.h"  /* vfs_s_subclass */
 #include "lib/vfs/netutil.h"
 #include "lib/vfs/utilvfs.h"
 
@@ -136,6 +137,7 @@ static gboolean got_user = FALSE;
 static gboolean got_pass = FALSE;
 static pstring password;
 static pstring username;
+
 static struct vfs_class vfs_smbfs_ops;
 
 static struct _smbfs_connection
@@ -2238,9 +2240,7 @@ init_smbfs (void)
 {
     tcp_init ();
 
-    vfs_smbfs_ops.name = "smbfs";
-    vfs_smbfs_ops.prefix = "smb";
-    vfs_smbfs_ops.flags = VFSF_NOLINKS;
+    vfs_init_class (&vfs_smbfs_ops, "smbfs", VFS_NOLINKS, "smb");
     vfs_smbfs_ops.init = smbfs_init;
     vfs_smbfs_ops.fill_names = smbfs_fill_names;
     vfs_smbfs_ops.open = smbfs_open;

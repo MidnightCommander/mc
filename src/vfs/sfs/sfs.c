@@ -52,6 +52,7 @@
 
 #include "lib/vfs/vfs.h"
 #include "lib/vfs/utilvfs.h"
+#include "lib/vfs/xdirentry.h"
 #include "src/vfs/local/local.h"
 #include "lib/vfs/gc.h"         /* vfs_stamp_create */
 
@@ -100,6 +101,7 @@ typedef struct cachedfile
 /*** file scope variables ************************************************************************/
 
 static GSList *head;
+
 static struct vfs_class vfs_sfs_ops;
 
 static int sfs_no = 0;
@@ -547,7 +549,7 @@ sfs_which (struct vfs_class *me, const char *path)
 void
 init_sfs (void)
 {
-    vfs_sfs_ops.name = "sfs";
+    vfs_init_class (&vfs_sfs_ops, "sfs", VFS_UNKNOWN, NULL);
     vfs_sfs_ops.init = sfs_init;
     vfs_sfs_ops.done = sfs_done;
     vfs_sfs_ops.fill_names = sfs_fill_names;

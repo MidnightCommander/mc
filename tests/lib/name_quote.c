@@ -1,5 +1,5 @@
 /*
-   lib/vfs - Quote file names
+   lib - Quote file names
 
    Copyright (C) 2011-2019
    Free Software Foundation, Inc.

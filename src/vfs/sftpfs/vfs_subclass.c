@@ -37,8 +37,6 @@
 
 /*** global variables ****************************************************************************/
 
-struct vfs_s_subclass sftpfs_subclass;
-
 /*** file scope macro definitions ****************************************************************/
 
 /*** file scope type declarations ****************************************************************/
@@ -67,13 +65,30 @@ sftpfs_cb_is_equal_connection (const vfs_path_element_t * vpath_element, struct 
     (void) vpath;
     (void) cookie;
 
-    orig_connect_info = ((sftpfs_super_data_t *) super->data)->original_connection_info;
+    orig_connect_info = SFTP_SUPER (super)->original_connection_info;
 
     result = ((g_strcmp0 (vpath_element->host, orig_connect_info->host) == 0)
               && (g_strcmp0 (vpath_element->user, orig_connect_info->user) == 0)
               && (vpath_element->port == orig_connect_info->port));
 
     return result;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static struct vfs_s_super *
+sftpfs_cb_init_connection (struct vfs_class *me)
+{
+    sftpfs_super_t *arch;
+
+    arch = g_new0 (sftpfs_super_t, 1);
+    arch->base.me = me;
+    arch->base.name = g_strdup (PATH_SEP_STR);
+    arch->auth_type = NONE;
+    arch->config_auth_type = NONE;
+    arch->socket_handle = LIBSSH2_INVALID_SOCKET;
+
+    return VFS_SUPER (arch);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -91,7 +106,7 @@ sftpfs_cb_open_connection (struct vfs_s_super *super,
                            const vfs_path_t * vpath, const vfs_path_element_t * vpath_element)
 {
     GError *mcerror = NULL;
-    sftpfs_super_data_t *sftpfs_super_data;
+    sftpfs_super_t *sftpfs_super = SFTP_SUPER (super);
     int ret_value;
 
     (void) vpath;
@@ -103,10 +118,7 @@ sftpfs_cb_open_connection (struct vfs_s_super *super,
         return -1;
     }
 
-    sftpfs_super_data = g_new0 (sftpfs_super_data_t, 1);
-    sftpfs_super_data->socket_handle = LIBSSH2_INVALID_SOCKET;
-    sftpfs_super_data->original_connection_info = vfs_path_element_clone (vpath_element);
-    super->data = sftpfs_super_data;
+    sftpfs_super->original_connection_info = vfs_path_element_clone (vpath_element);
     super->path_element = vfs_path_element_clone (vpath_element);
 
     sftpfs_fill_connection_data_from_config (super, &mcerror);
@@ -116,7 +128,6 @@ sftpfs_cb_open_connection (struct vfs_s_super *super,
         return -1;
     }
 
-    super->name = g_strdup (PATH_SEP_STR);
     super->root =
         vfs_s_new_inode (vpath_element->class, super,
                          vfs_s_default_stat (vpath_element->class, S_IFDIR | 0755));
@@ -138,18 +149,13 @@ static void
 sftpfs_cb_close_connection (struct vfs_class *me, struct vfs_s_super *super)
 {
     GError *mcerror = NULL;
-    sftpfs_super_data_t *sftpfs_super_data;
 
     (void) me;
     sftpfs_close_connection (super, "Normal Shutdown", &mcerror);
 
-    sftpfs_super_data = (sftpfs_super_data_t *) super->data;
-    if (sftpfs_super_data != NULL)
-        vfs_path_element_free (sftpfs_super_data->original_connection_info);
+    vfs_path_element_free (SFTP_SUPER (super)->original_connection_info);
 
     mc_error_message (&mcerror, NULL);
-
-    g_free (sftpfs_super_data);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -184,21 +190,11 @@ sftpfs_cb_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_
 void
 sftpfs_init_subclass (void)
 {
-    memset (&sftpfs_subclass, 0, sizeof (sftpfs_subclass));
-    sftpfs_subclass.flags = VFS_S_REMOTE;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-/**
- * Initialization of VFS subclass callbacks.
- */
-
-void
-sftpfs_init_subclass_callbacks (void)
-{
     sftpfs_subclass.archive_same = sftpfs_cb_is_equal_connection;
+    sftpfs_subclass.new_archive = sftpfs_cb_init_connection;
     sftpfs_subclass.open_archive = sftpfs_cb_open_connection;
     sftpfs_subclass.free_archive = sftpfs_cb_close_connection;
+    sftpfs_subclass.fh_new = sftpfs_fh_new;
     sftpfs_subclass.dir_load = sftpfs_cb_dir_load;
 }
 

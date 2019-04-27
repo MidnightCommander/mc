@@ -140,7 +140,7 @@ stop_dialogs (void)
 {
     dlg_stop (midnight_dlg);
 
-    if ((top_dlg != NULL) && (top_dlg->data != NULL))
+    if (top_dlg != NULL)
         dlg_stop (DIALOG (top_dlg->data));
 }
 
@@ -864,7 +864,7 @@ setup_mc (void)
 
 #ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
-        add_select_channel (mc_global.tty.subshell_pty, load_prompt, 0);
+        add_select_channel (mc_global.tty.subshell_pty, load_prompt, NULL);
 #endif /* !ENABLE_SUBSHELL */
 
     if ((tty_baudrate () < 9600) || mc_global.tty.slow_terminal)

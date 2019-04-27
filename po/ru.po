@@ -26,7 +26,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-03-02 12:28+0300\n"
+"POT-Creation-Date: 2019-04-27 19:55+0300\n"
 "PO-Revision-Date: 2018-11-24 15:03+0000\n"
 "Last-Translator: aborodin <aborodin@vmail.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
@@ -4558,9 +4558,3 @@ msgstr "Продолжить с начала?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Невозможно получить локальную копию /ftp://some.host/editme.txt"
-
-#~ msgid "Target file already exists!"
-#~ msgstr "Целевой файл уже существует!"
-
-#~ msgid "&Update"
-#~ msgstr "&Устаревшие"

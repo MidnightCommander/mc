@@ -37,7 +37,7 @@
 
 
 struct vfs_s_subclass test_subclass1;
-struct vfs_class vfs_test_ops1;
+static struct vfs_class *vfs_test_ops1 = VFS_CLASS (&test_subclass1);
 
 struct vfs_s_entry *vfs_root_entry;
 static struct vfs_s_inode *vfs_root_inode;
@@ -61,18 +61,14 @@ setup (void)
     init_localfs ();
     vfs_setup_work_dir ();
 
-    test_subclass1.flags = VFS_S_REMOTE;
-    vfs_s_init_class (&vfs_test_ops1, &test_subclass1);
-    vfs_test_ops1.name = "testfs1";
-    vfs_test_ops1.flags = VFSF_NOLINKS;
-    vfs_test_ops1.prefix = "test1:";
-    vfs_register_class (&vfs_test_ops1);
+    vfs_init_subclass (&test_subclass1, "testfs1", VFS_NOLINKS | VFS_REMOTE, "test1");
+    vfs_register_class (vfs_test_ops1);
 
     vfs_test_super = g_new0 (struct vfs_s_super, 1);
-    vfs_test_super->me = &vfs_test_ops1;
+    vfs_test_super->me = vfs_test_ops1;
 
-    vfs_root_inode = vfs_s_new_inode (&vfs_test_ops1, vfs_test_super, &initstat);
-    vfs_root_entry = vfs_s_new_entry (&vfs_test_ops1, "/", vfs_root_inode);
+    vfs_root_inode = vfs_s_new_inode (vfs_test_ops1, vfs_test_super, &initstat);
+    vfs_root_entry = vfs_s_new_entry (vfs_test_ops1, "/", vfs_root_inode);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -81,7 +77,7 @@ setup (void)
 static void
 teardown (void)
 {
-    vfs_s_free_entry (&vfs_test_ops1, vfs_root_entry);
+    vfs_s_free_entry (vfs_test_ops1, vfs_root_entry);
     vfs_shut ();
     str_uninit_strings ();
 }
@@ -330,27 +326,27 @@ START_TEST (test_vfs_parse_ls_lga_reorder)
     vfs_parse_ls_lga_init ();
 
     /* init ent1 */
-    ent1 = vfs_s_generate_entry (&vfs_test_ops1, NULL, vfs_root_inode, 0);
+    ent1 = vfs_s_generate_entry (vfs_test_ops1, NULL, vfs_root_inode, 0);
     vfs_parse_ls_lga
         ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09      build_root1", &ent1->ino->st,
          &ent1->name, &ent1->ino->linkname, &filepos);
     vfs_s_store_filename_leading_spaces (ent1, filepos);
-    vfs_s_insert_entry (&vfs_test_ops1, vfs_root_inode, ent1);
+    vfs_s_insert_entry (vfs_test_ops1, vfs_root_inode, ent1);
 
 
     /* init ent2 */
-    ent2 = vfs_s_generate_entry (&vfs_test_ops1, NULL, vfs_root_inode, 0);
+    ent2 = vfs_s_generate_entry (vfs_test_ops1, NULL, vfs_root_inode, 0);
     vfs_parse_ls_lga ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09    build_root2",
                       &ent2->ino->st, &ent2->name, &ent2->ino->linkname, &filepos);
     vfs_s_store_filename_leading_spaces (ent2, filepos);
-    vfs_s_insert_entry (&vfs_test_ops1, vfs_root_inode, ent2);
+    vfs_s_insert_entry (vfs_test_ops1, vfs_root_inode, ent2);
 
     /* init ent3 */
-    ent3 = vfs_s_generate_entry (&vfs_test_ops1, NULL, vfs_root_inode, 0);
+    ent3 = vfs_s_generate_entry (vfs_test_ops1, NULL, vfs_root_inode, 0);
     vfs_parse_ls_lga ("drwxrwxr-x   10 500      500          4096 Jun 23 17:09 ..",
                       &ent3->ino->st, &ent3->name, &ent3->ino->linkname, &filepos);
     vfs_s_store_filename_leading_spaces (ent3, filepos);
-    vfs_s_insert_entry (&vfs_test_ops1, vfs_root_inode, ent3);
+    vfs_s_insert_entry (vfs_test_ops1, vfs_root_inode, ent3);
 
     /* when */
     vfs_s_normalize_filename_leading_spaces (vfs_root_inode, vfs_parse_ls_lga_get_final_spaces ());
@@ -365,7 +361,7 @@ END_TEST
 
 /* --------------------------------------------------------------------------------------------- */
 #define parce_one_line(ent_index, ls_output) {\
-    ent[ent_index] = vfs_s_generate_entry (&vfs_test_ops1, NULL, vfs_root_inode, 0);\
+    ent[ent_index] = vfs_s_generate_entry (vfs_test_ops1, NULL, vfs_root_inode, 0);\
     if (! vfs_parse_ls_lga (ls_output,\
     &ent[ent_index]->ino->st, &ent[ent_index]->name, &ent[ent_index]->ino->linkname, &filepos))\
     {\
@@ -373,7 +369,7 @@ END_TEST
         return;\
     }\
     vfs_s_store_filename_leading_spaces (ent[ent_index], filepos);\
-    vfs_s_insert_entry (&vfs_test_ops1, vfs_root_inode, ent[ent_index]);\
+    vfs_s_insert_entry (vfs_test_ops1, vfs_root_inode, ent[ent_index]);\
     \
 }
 

@@ -34,6 +34,7 @@
 
 #include "lib/global.h"
 
+#include "lib/vfs/xdirentry.h"  /* vfs_s_subclass */
 #include "lib/vfs/utilvfs.h"
 
 #include "local.h"
@@ -421,8 +422,7 @@ local_lseek (void *data, off_t offset, int whence)
 void
 init_localfs (void)
 {
-    vfs_local_ops.name = "localfs";
-    vfs_local_ops.flags = VFSF_LOCAL;
+    vfs_init_class (&vfs_local_ops, "localfs", VFS_LOCAL, NULL);
     vfs_local_ops.which = local_which;
     vfs_local_ops.open = local_open;
     vfs_local_ops.close = local_close;

@@ -394,17 +394,25 @@ mcview_execute_cmd (WView * view, long command)
             mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
         }
         break;
-    case CK_WrapMode:
-        /* Toggle between wrapped and unwrapped view */
-        mcview_toggle_wrap_mode (view);
+    case CK_HexMode:
+        /* Toggle between hex view and text view */
+        mcview_toggle_hex_mode (view);
         break;
     case CK_HexEditMode:
         /* Toggle between hexview and hexedit mode */
         mcview_toggle_hexedit_mode (view);
         break;
-    case CK_HexMode:
-        /* Toggle between hex view and text view */
-        mcview_toggle_hex_mode (view);
+    case CK_ToggleNavigation:
+        view->hexview_in_text = !view->hexview_in_text;
+        view->dirty++;
+        break;
+    case CK_LeftQuick:
+        if (!view->mode_flags.hex)
+            mcview_move_left (view, 10);
+        break;
+    case CK_RightQuick:
+        if (!view->mode_flags.hex)
+            mcview_move_right (view, 10);
         break;
     case CK_Goto:
         {
@@ -428,23 +436,34 @@ mcview_execute_cmd (WView * view, long command)
     case CK_Search:
         mcview_search (view, TRUE);
         break;
+    case CK_SearchContinue:
+        mcview_continue_search_cmd (view);
+        break;
     case CK_SearchForward:
         mcview_search_options.backwards = FALSE;
         mcview_search (view, TRUE);
         break;
+    case CK_SearchForwardContinue:
+        mcview_search_options.backwards = FALSE;
+        mcview_continue_search_cmd (view);
+        break;
     case CK_SearchBackward:
         mcview_search_options.backwards = TRUE;
         mcview_search (view, TRUE);
+        break;
+    case CK_SearchBackwardContinue:
+        mcview_search_options.backwards = TRUE;
+        mcview_continue_search_cmd (view);
+        break;
+    case CK_WrapMode:
+        /* Toggle between wrapped and unwrapped view */
+        mcview_toggle_wrap_mode (view);
         break;
     case CK_MagicMode:
         mcview_toggle_magic_mode (view);
         break;
     case CK_NroffMode:
         mcview_toggle_nroff_mode (view);
-        break;
-    case CK_ToggleNavigation:
-        view->hexview_in_text = !view->hexview_in_text;
-        view->dirty++;
         break;
     case CK_Home:
         mcview_moveto_bol (view);
@@ -457,28 +476,6 @@ mcview_execute_cmd (WView * view, long command)
         break;
     case CK_Right:
         mcview_move_right (view, 1);
-        break;
-    case CK_LeftQuick:
-        if (!view->mode_flags.hex)
-            mcview_move_left (view, 10);
-        break;
-    case CK_RightQuick:
-        if (!view->mode_flags.hex)
-            mcview_move_right (view, 10);
-        break;
-    case CK_SearchContinue:
-        mcview_continue_search_cmd (view);
-        break;
-    case CK_SearchForwardContinue:
-        mcview_search_options.backwards = FALSE;
-        mcview_continue_search_cmd (view);
-        break;
-    case CK_SearchBackwardContinue:
-        mcview_search_options.backwards = TRUE;
-        mcview_continue_search_cmd (view);
-        break;
-    case CK_Ruler:
-        mcview_display_toggle_ruler (view);
         break;
     case CK_Up:
         mcview_move_up (view, 1);
@@ -507,14 +504,17 @@ mcview_execute_cmd (WView * view, long command)
     case CK_Shell:
         view_other_cmd ();
         break;
-    case CK_BookmarkGoto:
-        view->marks[view->marker] = view->dpy_start;
+    case CK_Ruler:
+        mcview_display_toggle_ruler (view);
         break;
     case CK_Bookmark:
         view->dpy_start = view->marks[view->marker];
         view->dpy_paragraph_skip_lines = 0;     /* TODO: remember this value in the marker? */
         view->dpy_wrap_dirty = TRUE;
         view->dirty++;
+        break;
+    case CK_BookmarkGoto:
+        view->marks[view->marker] = view->dpy_start;
         break;
 #ifdef HAVE_CHARSET
     case CK_SelectCodepage:

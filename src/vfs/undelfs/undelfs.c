@@ -64,6 +64,7 @@
 
 #include "lib/util.h"
 #include "lib/widget.h"         /* message() */
+#include "lib/vfs/xdirentry.h"
 #include "lib/vfs/utilvfs.h"
 #include "lib/vfs/vfs.h"
 
@@ -129,8 +130,10 @@ static char *block_buf;
 static const char *undelfserr = N_("undelfs: error");
 static int readdir_ptr;
 static int undelfs_usage;
+
 static struct vfs_class vfs_undelfs_ops;
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -820,8 +823,7 @@ com_err (const char *whoami, long err_code, const char *fmt, ...)
 void
 init_undelfs (void)
 {
-    vfs_undelfs_ops.name = "undelfs";
-    vfs_undelfs_ops.prefix = "undel";
+    vfs_init_class (&vfs_undelfs_ops, "undelfs", VFS_UNKNOWN, "undel");
     vfs_undelfs_ops.init = undelfs_init;
     vfs_undelfs_ops.open = undelfs_open;
     vfs_undelfs_ops.close = undelfs_close;

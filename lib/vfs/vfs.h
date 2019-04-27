@@ -26,6 +26,8 @@
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
+#define VFS_CLASS(a) ((struct vfs_class *) (a))
+
 #if defined (ENABLE_VFS_FTP) || defined (ENABLE_VFS_FISH) || defined (ENABLE_VFS_SMB)
 #define ENABLE_VFS_NET 1
 #endif
@@ -107,13 +109,16 @@ typedef struct utimbuf mc_timesbuf_t;
 
 /*** enums ***************************************************************************************/
 
-/* Flags of VFS classes */
 typedef enum
 {
-    VFSF_UNKNOWN = 0,
-    VFSF_LOCAL = 1 << 0,        /* Class is local (not virtual) filesystem */
-    VFSF_NOLINKS = 1 << 1       /* Hard links not supported */
-} vfs_class_flags_t;
+    VFS_UNKNOWN = 0,
+    VFS_LOCAL = 1 << 0,         /* Class is local (not virtual) filesystem */
+    VFS_NOLINKS = 1 << 1,       /* Hard links not supported */
+
+    VFS_REMOTE = 1 << 2,
+    VFS_READONLY = 1 << 3,
+    VFS_USETMP = 1 << 4
+} vfs_flags_t;
 
 /* Operations for mc_ctl - on open file */
 enum
@@ -139,9 +144,8 @@ enum
 typedef struct vfs_class
 {
     const char *name;           /* "FIles over SHell" */
-    vfs_class_flags_t flags;
+    vfs_flags_t flags;
     const char *prefix;         /* "fish:" */
-    void *data;                 /* this is for filesystem's own use */
     int verrno;                 /* can't use errno because glibc2 might define errno as function */
 
     /* *INDENT-OFF* */
@@ -225,6 +229,9 @@ extern int use_netrc;
 /*** declarations of public functions ************************************************************/
 
 /* lib/vfs/direntry.c: */
+void vfs_init_class (struct vfs_class *vclass, const char *name, vfs_flags_t flags,
+                     const char *prefix);
+
 void *vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode);
 int vfs_s_stat (const vfs_path_t * vpath, struct stat *buf);
 int vfs_s_lstat (const vfs_path_t * vpath, struct stat *buf);
@@ -238,6 +245,7 @@ void vfs_init (void);
 void vfs_shut (void);
 /* Register a file system class */
 gboolean vfs_register_class (struct vfs_class *vfs);
+void vfs_unregister_class (struct vfs_class *vfs);
 
 void vfs_setup_work_dir (void);
 
@@ -255,7 +263,7 @@ gboolean vfs_file_is_local (const vfs_path_t * vpath);
 
 char *vfs_strip_suffix_from_filename (const char *filename);
 
-vfs_class_flags_t vfs_file_class_flags (const vfs_path_t * vpath);
+vfs_flags_t vfs_file_class_flags (const vfs_path_t * vpath);
 
 /* translate path back to terminal encoding, remove all #enc:
  * every invalid character is replaced with question mark

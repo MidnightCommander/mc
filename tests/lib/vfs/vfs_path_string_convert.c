@@ -37,8 +37,7 @@
 
 #include "src/vfs/local/local.c"
 
-struct vfs_s_subclass test_subclass1, test_subclass2, test_subclass3;
-struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
+static struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
 
 #define ETALON_PATH_STR "/#test1/bla-bla/some/path/#test2/bla-bla/some/path#test3/111/22/33"
 #define ETALON_PATH_URL_STR "/test1://bla-bla/some/path/test2://bla-bla/some/path/test3://111/22/33"
@@ -55,22 +54,13 @@ setup (void)
     init_localfs ();
     vfs_setup_work_dir ();
 
-    vfs_s_init_class (&vfs_test_ops1, &test_subclass1);
-
-    vfs_test_ops1.name = "testfs1";
-    vfs_test_ops1.flags = VFSF_NOLINKS;
-    vfs_test_ops1.prefix = "test1";
+    vfs_init_class (&vfs_test_ops1, "testfs1", VFS_NOLINKS, "test1");
     vfs_register_class (&vfs_test_ops1);
 
-    test_subclass2.flags = VFS_S_REMOTE;
-    vfs_s_init_class (&vfs_test_ops2, &test_subclass2);
-    vfs_test_ops2.name = "testfs2";
-    vfs_test_ops2.prefix = "test2";
+    vfs_init_class (&vfs_test_ops2, "testfs2", VFS_REMOTE, "test2");
     vfs_register_class (&vfs_test_ops2);
 
-    vfs_s_init_class (&vfs_test_ops3, &test_subclass3);
-    vfs_test_ops3.name = "testfs3";
-    vfs_test_ops3.prefix = "test3";
+    vfs_init_class (&vfs_test_ops3, "testfs3", VFS_UNKNOWN, "test3");
     vfs_register_class (&vfs_test_ops3);
 
 #ifdef HAVE_CHARSET
