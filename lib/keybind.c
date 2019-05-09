@@ -345,6 +345,7 @@ static name_keymap_t command_names[] = {
     {"SearchBackward", CK_SearchBackward},
     {"SearchForwardContinue", CK_SearchForwardContinue},
     {"SearchBackwardContinue", CK_SearchBackwardContinue},
+    {"SearchOppositeContinue", CK_SearchOppositeContinue},
 
 #ifdef USE_DIFF_VIEW
     /* diff viewer */

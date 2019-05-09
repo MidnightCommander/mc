@@ -322,6 +322,7 @@ enum
     CK_SearchBackward,
     CK_SearchForwardContinue,
     CK_SearchBackwardContinue,
+    CK_SearchOppositeContinue,
 
     /* diff viewer */
     CK_ShowSymbols = 700L,
