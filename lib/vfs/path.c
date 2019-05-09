@@ -445,7 +445,6 @@ vfs_path_from_str_uri_parser (char *path)
     {
         char *vfs_prefix_start;
         char *real_vfs_prefix_start = url_delimiter;
-        struct vfs_s_subclass *sub = NULL;
 
         while (real_vfs_prefix_start > path && !IS_PATH_SEP (*real_vfs_prefix_start))
             real_vfs_prefix_start--;
@@ -461,8 +460,8 @@ vfs_path_from_str_uri_parser (char *path)
         element->vfs_prefix = g_strdup (vfs_prefix_start);
 
         url_delimiter += strlen (VFS_PATH_URL_DELIMITER);
-        sub = VFS_SUBCLASS (element->class);
-        if (sub != NULL && (VFS_CLASS (sub)->flags & VFS_REMOTE) != 0)
+
+        if (element->class != NULL && (element->class->flags & VFS_REMOTE) != 0)
         {
             char *slash_pointer;
 
