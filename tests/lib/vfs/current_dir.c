@@ -27,13 +27,16 @@
 
 #include "tests/mctest.h"
 
+#include <string.h>             /* memset() */
+
 #include "lib/global.h"
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
 
 #include "src/vfs/local/local.c"
 
-static struct vfs_class vfs_test_ops;
+static struct vfs_s_subclass vfs_test_subclass;
+static struct vfs_class *vfs_test_ops = VFS_CLASS (&vfs_test_subclass);
 
 /* --------------------------------------------------------------------------------------------- */
 
@@ -58,8 +61,9 @@ setup (void)
     init_localfs ();
     vfs_setup_work_dir ();
 
-    vfs_init_class (&vfs_test_ops, "testfs", VFS_UNKNOWN, "test");
-    vfs_test_ops.chdir = test_chdir;
+    memset (&vfs_test_subclass, 0, sizeof (vfs_test_subclass));
+    vfs_init_class (vfs_test_ops, "testfs", VFS_UNKNOWN, "test");
+    vfs_test_ops->chdir = test_chdir;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -150,8 +154,8 @@ START_PARAMETRIZED_TEST (test_cd, test_cd_ds)
     /* given */
     vfs_path_t *vpath;
 
-    vfs_test_ops.flags = data->input_class_flags;
-    vfs_register_class (&vfs_test_ops);
+    vfs_test_ops->flags = data->input_class_flags;
+    vfs_register_class (vfs_test_ops);
 
     vfs_set_raw_current_dir (vfs_path_from_str (data->input_initial_path));
 
@@ -170,7 +174,7 @@ START_PARAMETRIZED_TEST (test_cd, test_cd_ds)
     }
     vfs_path_free (vpath);
 
-    vfs_unregister_class (&vfs_test_ops);
+    vfs_unregister_class (vfs_test_ops);
 }
 /* *INDENT-OFF* */
 END_PARAMETRIZED_TEST

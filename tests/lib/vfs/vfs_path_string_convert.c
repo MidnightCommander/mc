@@ -107,7 +107,7 @@ static const struct test_from_to_string_ds
         "/",
         "/",
         1,
-        &vfs_local_ops
+        VFS_CLASS (&local_subclass)
     },
     { /* 2. */
         "/test1://bla-bla/some/path/test2://user:passwd@some.host:1234/bla-bla/some/path/test3://111/22/33",
