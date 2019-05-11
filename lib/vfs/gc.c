@@ -45,6 +45,7 @@
 
 #include "lib/global.h"
 #include "lib/event.h"
+#include "lib/util.h"           /* MC_PTR_FREE */
 
 #include "vfs.h"
 #include "utilvfs.h"
@@ -109,7 +110,8 @@ static GSList *stamps = NULL;
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
-/** Compare two timeval structures. Return TRUE is t1 is less than t2. */
+/** Compare two timeval structures. Return TRUE if t1 is less than t2. */
+
 static gboolean
 timeoutcmp (const struct timeval *t1, const struct timeval *t2)
 {
@@ -242,13 +244,15 @@ vfs_stamp_create (struct vfs_class *vclass, vfsid id)
 }
 
 /* --------------------------------------------------------------------------------------------- */
-/** This is called from timeout handler with now == FALSE,
-    or can be called with now == TRUE to force freeing all filesystems */
+/** This is called from timeout handler with now = FALSE,
+    or can be called with now = TRUE to force freeing all filesystems */
 
 void
 vfs_expire (gboolean now)
 {
     static gboolean locked = FALSE;
+    struct timeval curr_time, exp_time;
+    GSList *stamp;
 
     /* Avoid recursive invocation, e.g. when one of the free functions
        calls message */
@@ -256,47 +260,44 @@ vfs_expire (gboolean now)
         return;
     locked = TRUE;
 
+    gettimeofday (&curr_time, NULL);
+    exp_time.tv_sec = curr_time.tv_sec - vfs_timeout;
+    exp_time.tv_usec = curr_time.tv_usec;
+
     if (now)
     {
         /* reverse list to free nested VFSes at first */
         stamps = g_slist_reverse (stamps);
+    }
 
-        while (stamps != NULL)
+    /* NULLize stamps that point to expired VFS */
+    for (stamp = stamps; stamp != NULL; stamp = g_slist_next (stamp))
+    {
+        struct vfs_stamping *stamping = VFS_STAMPING (stamp->data);
+
+        if (now)
         {
-            struct vfs_stamping *stamping = VFS_STAMPING (stamps->data);
-
+            /* free VFS forced */
             if (stamping->v->free != NULL)
                 stamping->v->free (stamping->id);
-            g_free (stamping);
-            stamps = g_slist_delete_link (stamps, stamps);
+            MC_PTR_FREE (stamp->data);
         }
-    }
-    else
-    {
-        struct timeval lc_time;
-        GSList *stamp;
-
-        gettimeofday (&lc_time, NULL);
-        lc_time.tv_sec -= vfs_timeout;
-
-        for (stamp = stamps; stamp != NULL;)
+        else if (timeoutcmp (&stamping->time, &exp_time))
         {
-            struct vfs_stamping *stamping = VFS_STAMPING (stamp->data);
-
-            if (!timeoutcmp (&stamping->time, &lc_time))
-                stamp = g_slist_next (stamp);
+            /* update timestamp of VFS that is in use, or free unused VFS */
+            if (stamping->v->nothingisopen != NULL && !stamping->v->nothingisopen (stamping->id))
+                stamping->time = curr_time;
             else
             {
-                GSList *st;
-
-                st = g_slist_next (stamp);
                 if (stamping->v->free != NULL)
                     stamping->v->free (stamping->id);
-                vfs_rmstamp (stamping->v, stamping->id);
-                stamp = st;
+                MC_PTR_FREE (stamp->data);
             }
         }
     }
+
+    /* then remove NULLized stamps */
+    stamps = g_slist_remove_all (stamps, NULL);
 
     locked = FALSE;
 }
