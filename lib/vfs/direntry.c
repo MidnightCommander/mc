@@ -682,8 +682,12 @@ vfs_s_close (void *fh)
         }
         vfs_s_invalidate (me, super);
     }
+
     if (file->handle != -1)
+    {
         close (file->handle);
+        file->handle = -1;
+    }
 
     vfs_s_free_inode (me, file->ino);
     vfs_s_free_fh (sub, fh);

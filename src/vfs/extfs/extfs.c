@@ -978,6 +978,7 @@ extfs_close (void *fh)
     int errno_code = 0;
 
     close (file->handle);
+    file->handle = -1;
 
     /* Commit the file if it has changed */
     if (file->changed)

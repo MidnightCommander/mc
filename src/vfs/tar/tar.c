@@ -327,7 +327,10 @@ tar_free_archive (struct vfs_class *me, struct vfs_s_super *archive)
     (void) me;
 
     if (arch->fd != -1)
+    {
         mc_close (arch->fd);
+        arch->fd = -1;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
