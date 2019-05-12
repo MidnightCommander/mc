@@ -54,7 +54,7 @@ struct vfs_class *sftpfs_class = VFS_CLASS (&sftpfs_subclass);
  */
 
 void
-init_sftpfs (void)
+vfs_init_sftpfs (void)
 {
     tcp_init ();
 

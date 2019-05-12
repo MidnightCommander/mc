@@ -1589,7 +1589,7 @@ extfs_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-init_extfs (void)
+vfs_init_extfs (void)
 {
     vfs_init_subclass (&extfs_subclass, "extfs", VFS_UNKNOWN, NULL);
     vfs_extfs_ops->init = extfs_init;

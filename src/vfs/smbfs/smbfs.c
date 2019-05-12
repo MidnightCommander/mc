@@ -2238,7 +2238,7 @@ vfs_smb_authinfo_new (const char *host, const char *share, const char *domain,
 /* --------------------------------------------------------------------------------------------- */
 
 void
-init_smbfs (void)
+vfs_init_smbfs (void)
 {
     tcp_init ();
 

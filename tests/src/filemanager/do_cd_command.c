@@ -83,7 +83,7 @@ setup (void)
     str_init_strings (NULL);
 
     vfs_init ();
-    init_localfs ();
+    vfs_init_localfs ();
     vfs_setup_work_dir ();
     do_cd__new_dir_vpath__captured = NULL;
 }

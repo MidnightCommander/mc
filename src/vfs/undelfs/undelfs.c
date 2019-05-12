@@ -823,7 +823,7 @@ com_err (const char *whoami, long err_code, const char *fmt, ...)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-init_undelfs (void)
+vfs_init_undelfs (void)
 {
     /* NULLize vfs_s_subclass members */
     memset (&undelfs_subclass, 0, sizeof (undelfs_subclass));

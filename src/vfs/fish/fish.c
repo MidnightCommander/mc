@@ -1749,7 +1749,7 @@ fish_open (const vfs_path_t * vpath, int flags, mode_t mode)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-init_fish (void)
+vfs_init_fish (void)
 {
     tcp_init ();
 

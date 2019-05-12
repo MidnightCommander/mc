@@ -2697,7 +2697,7 @@ ftpfs_init_passwd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-init_ftpfs (void)
+vfs_init_ftpfs (void)
 {
     tcp_init ();
 

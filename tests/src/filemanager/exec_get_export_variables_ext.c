@@ -45,7 +45,7 @@ setup (void)
     str_init_strings (NULL);
 
     vfs_init ();
-    init_localfs ();
+    vfs_init_localfs ();
     vfs_setup_work_dir ();
 
     mc_global.mc_run_mode = MC_RUN_FULL;

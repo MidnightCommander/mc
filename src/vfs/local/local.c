@@ -422,7 +422,7 @@ local_lseek (void *data, off_t offset, int whence)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-init_localfs (void)
+vfs_init_localfs (void)
 {
     /* NULLize vfs_s_subclass members */
     memset (&local_subclass, 0, sizeof (local_subclass));

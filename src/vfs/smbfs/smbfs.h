@@ -27,7 +27,7 @@ typedef struct smb_authinfo
 
 /*** declarations of public functions ************************************************************/
 
-void init_smbfs (void);
+void vfs_init_smbfs (void);
 void smbfs_set_debug (int arg);
 
 smb_authinfo *vfs_smb_authinfo_new (const char *host,

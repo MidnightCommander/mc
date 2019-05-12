@@ -990,7 +990,7 @@ tar_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mo
 /* --------------------------------------------------------------------------------------------- */
 
 void
-init_tarfs (void)
+vfs_init_tarfs (void)
 {
     /* FIXME: tarfs used own temp files */
     vfs_init_subclass (&tarfs_subclass, "tarfs", VFS_READONLY, "utar");

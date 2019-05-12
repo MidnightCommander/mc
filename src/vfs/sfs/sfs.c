@@ -548,7 +548,7 @@ sfs_which (struct vfs_class *me, const char *path)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-init_sfs (void)
+vfs_init_sfs (void)
 {
     /* NULLize vfs_s_subclass members */
     memset (&sfs_subclass, 0, sizeof (sfs_subclass));

@@ -76,7 +76,7 @@ setup (void)
     str_init_strings (NULL);
 
     vfs_init ();
-    init_localfs ();
+    vfs_init_localfs ();
     vfs_setup_work_dir ();
 
     memset (&vfs_test_subclass1, 0, sizeof (vfs_test_subclass1));

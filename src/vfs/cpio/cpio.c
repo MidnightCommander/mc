@@ -887,7 +887,7 @@ cpio_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t m
 /* --------------------------------------------------------------------------------------------- */
 
 void
-init_cpiofs (void)
+vfs_init_cpiofs (void)
 {
     /* FIXME: cpiofs used own temp files */
     vfs_init_subclass (&cpio_subclass, "cpiofs", VFS_READONLY, "ucpio");
