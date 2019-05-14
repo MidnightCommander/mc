@@ -193,7 +193,7 @@ typedef struct vfs_class
 
     vfsid (*getid) (const vfs_path_t * vpath);
 
-    int (*nothingisopen) (vfsid id);
+    gboolean (*nothingisopen) (vfsid id);
     void (*free) (vfsid id);
 
     vfs_path_t *(*getlocalcopy) (const vfs_path_t * vpath);

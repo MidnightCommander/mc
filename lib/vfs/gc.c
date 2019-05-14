@@ -238,7 +238,7 @@ vfs_stamp_create (struct vfs_class *vclass, vfsid id)
         mc_event_raise (MCEVENT_GROUP_CORE, "vfs_timestamp", (gpointer) & event_data);
 
         if (!event_data.ret && vclass != NULL && vclass->nothingisopen != NULL
-            && vclass->nothingisopen (id) != 0)
+            && vclass->nothingisopen (id))
             vfs_addstamp (vclass, id);
     }
 }

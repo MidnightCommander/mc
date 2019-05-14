@@ -1373,7 +1373,7 @@ extfs_getid (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 extfs_nothingisopen (vfsid id)
 {
     return (VFS_SUPER (id)->fd_usage <= 0);

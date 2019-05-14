@@ -391,13 +391,13 @@ sfs_fill_names (struct vfs_class *me, fill_names_f func)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 sfs_nothingisopen (vfsid id)
 {
     /* FIXME: Investigate whether have to guard this like in
        the other VFSs (see fd_usage in extfs) -- Norbert */
     (void) id;
-    return 1;
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

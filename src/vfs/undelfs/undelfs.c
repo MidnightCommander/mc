@@ -765,12 +765,12 @@ undelfs_getid (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 undelfs_nothingisopen (vfsid id)
 {
     (void) id;
 
-    return !undelfs_usage;
+    return (undelfs_usage == 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
