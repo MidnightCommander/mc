@@ -421,6 +421,16 @@ local_lseek (void *data, off_t offset, int whence)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static gboolean
+local_nothingisopen (vfsid id)
+{
+    (void) id;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 void
 vfs_init_localfs (void)
 {
@@ -455,6 +465,7 @@ vfs_init_localfs (void)
     vfs_local_ops->ungetlocalcopy = local_ungetlocalcopy;
     vfs_local_ops->mkdir = local_mkdir;
     vfs_local_ops->rmdir = local_rmdir;
+    vfs_local_ops->nothingisopen = local_nothingisopen;
     vfs_register_class (vfs_local_ops);
 }
 

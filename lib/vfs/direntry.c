@@ -842,9 +842,7 @@ vfs_s_getid (const vfs_path_t * vpath)
 static gboolean
 vfs_s_nothingisopen (vfsid id)
 {
-    (void) id;
-    /* Our data structures should survive free of superblock at any time */
-    return TRUE;
+    return (VFS_SUPER (id)->fd_usage <= 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -2212,6 +2212,17 @@ smbfs_fstat (void *data, struct stat *buf)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+smbfs_nothingisopen (vfsid id)
+{
+    /* FIXME */
+    (void) id;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -2274,6 +2285,7 @@ vfs_init_smbfs (void)
     vfs_smbfs_ops->mkdir = smbfs_mkdir;
     vfs_smbfs_ops->rmdir = smbfs_rmdir;
     vfs_smbfs_ops->setctl = smbfs_setctl;
+    vfs_smbfs_ops->nothingisopen = smbfs_nothingisopen;
     vfs_register_class (vfs_smbfs_ops);
 }
 

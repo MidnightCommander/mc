@@ -1373,14 +1373,6 @@ extfs_getid (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static gboolean
-extfs_nothingisopen (vfsid id)
-{
-    return (VFS_SUPER (id)->fd_usage <= 0);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static vfs_path_t *
 extfs_getlocalcopy (const vfs_path_t * vpath)
 {
@@ -1614,7 +1606,6 @@ vfs_init_extfs (void)
     vfs_extfs_ops->ferrno = extfs_errno;
     vfs_extfs_ops->lseek = extfs_lseek;
     vfs_extfs_ops->getid = extfs_getid;
-    vfs_extfs_ops->nothingisopen = extfs_nothingisopen;
     vfs_extfs_ops->getlocalcopy = extfs_getlocalcopy;
     vfs_extfs_ops->ungetlocalcopy = extfs_ungetlocalcopy;
     vfs_extfs_ops->mkdir = extfs_mkdir;
