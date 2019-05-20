@@ -466,9 +466,7 @@ sfs_init (struct vfs_class *me)
             continue;
         }
 
-        c = semi + 1;
-        while (*c != '\0' && !whitespace (*c))
-        {
+        for (c = semi + 1; *c != '\0' && !whitespace (*c); c++)
             switch (*c)
             {
             case '1':
@@ -483,8 +481,7 @@ sfs_init (struct vfs_class *me)
             default:
                 fprintf (stderr, _("Warning: Invalid flag %c in %s:\n%s\n"), *c, "sfs.ini", key);
             }
-            c++;
-        }
+
         if (*c == '\0')
             goto invalid_line;
 
