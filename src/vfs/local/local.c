@@ -92,7 +92,7 @@ local_opendir (const vfs_path_t * vpath)
 
     path_element = vfs_path_get_by_index (vpath, -1);
     dir = opendir (path_element->path);
-    if (!dir)
+    if (dir == NULL)
         return 0;
 
     local_info = (DIR **) g_new (DIR *, 1);
@@ -213,8 +213,7 @@ local_unlink (const vfs_path_t * vpath)
 static int
 local_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    const vfs_path_element_t *path_element1;
-    const vfs_path_element_t *path_element2;
+    const vfs_path_element_t *path_element1, *path_element2;
 
     path_element1 = vfs_path_get_by_index (vpath1, -1);
     path_element2 = vfs_path_get_by_index (vpath2, -1);
@@ -229,10 +228,11 @@ local_write (void *data, const char *buf, size_t nbyte)
     int fd;
     int n;
 
-    if (!data)
-        return -1;
+    if (data == NULL)
+        return (-1);
 
     fd = *(int *) data;
+
     while ((n = write (fd, buf, nbyte)) == -1)
     {
 #ifdef EAGAIN
@@ -245,6 +245,7 @@ local_write (void *data, const char *buf, size_t nbyte)
 #endif
         break;
     }
+
     return n;
 }
 
@@ -253,8 +254,7 @@ local_write (void *data, const char *buf, size_t nbyte)
 static int
 local_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    const vfs_path_element_t *path_element1;
-    const vfs_path_element_t *path_element2;
+    const vfs_path_element_t *path_element1, *path_element2;
 
     path_element1 = vfs_path_get_by_index (vpath1, -1);
     path_element2 = vfs_path_get_by_index (vpath2, -1);
@@ -288,8 +288,7 @@ local_mknod (const vfs_path_t * vpath, mode_t mode, dev_t dev)
 static int
 local_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    const vfs_path_element_t *path_element1;
-    const vfs_path_element_t *path_element2;
+    const vfs_path_element_t *path_element1, *path_element2;
 
     path_element1 = vfs_path_get_by_index (vpath1, -1);
     path_element2 = vfs_path_get_by_index (vpath2, -1);
@@ -357,11 +356,14 @@ ssize_t
 local_read (void *data, char *buffer, size_t count)
 {
     int n;
+    int fd;
 
-    if (!data)
-        return -1;
+    if (data == NULL)
+        return (-1);
 
-    while ((n = read (*((int *) data), buffer, count)) == -1)
+    fd = *(int *) data;
+
+    while ((n = read (fd, buffer, count)) == -1)
     {
 #ifdef EAGAIN
         if (errno == EAGAIN)
@@ -371,8 +373,9 @@ local_read (void *data, char *buffer, size_t count)
         if (errno == EINTR)
             continue;
 #endif
-        return -1;
+        return (-1);
     }
+
     return n;
 }
 
@@ -383,8 +386,8 @@ local_close (void *data)
 {
     int fd;
 
-    if (!data)
-        return -1;
+    if (data == NULL)
+        return (-1);
 
     fd = *(int *) data;
     g_free (data);
@@ -405,8 +408,9 @@ local_errno (struct vfs_class *me)
 int
 local_fstat (void *data, struct stat *buf)
 {
-    /* FIXME: avoid type cast */
-    return fstat (*((int *) data), buf);
+    int fd = *(int *) data;
+
+    return fstat (fd, buf);
 }
 
 /* --------------------------------------------------------------------------------------------- */
