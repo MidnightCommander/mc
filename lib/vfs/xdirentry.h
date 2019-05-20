@@ -116,7 +116,6 @@ struct vfs_s_subclass
     GList *supers;
     int inode_counter;
     dev_t rdev;
-    FILE *logfile;
     int flush;                  /* if set to 1, invalidate directory cache */
 
     /* *INDENT-OFF* */

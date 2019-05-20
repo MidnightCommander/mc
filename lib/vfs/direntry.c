@@ -811,7 +811,7 @@ vfs_s_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
             return 1;
         }
     case VFS_SETCTL_LOGFILE:
-        VFS_SUBCLASS (path_element->class)->logfile = fopen ((char *) arg, "w");
+        path_element->class->logfile = fopen ((char *) arg, "w");
         return 1;
     case VFS_SETCTL_FLUSH:
         VFS_SUBCLASS (path_element->class)->flush = 1;
@@ -1605,7 +1605,7 @@ vfs_s_select_on_two (int fd1, int fd2)
 int
 vfs_s_get_line (struct vfs_class *me, int sock, char *buf, int buf_len, char term)
 {
-    FILE *logfile = VFS_SUBCLASS (me)->logfile;
+    FILE *logfile = me->logfile;
     int i;
     char c;
 

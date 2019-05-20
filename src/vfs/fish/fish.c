@@ -272,7 +272,7 @@ fish_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, c
               size_t cmd_len)
 {
     ssize_t status;
-    FILE *logfile = VFS_SUBCLASS (me)->logfile;
+    FILE *logfile = me->logfile;
 
     if (cmd_len == (size_t) (-1))
         cmd_len = strlen (cmd);
@@ -754,7 +754,6 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     struct vfs_s_super *super = dir->super;
     char buffer[BUF_8K] = "\0";
     struct vfs_s_entry *ent = NULL;
-    FILE *logfile;
     char *quoted_path;
     int reply_code;
 
@@ -762,10 +761,9 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
      * Simple FISH debug interface :]
      */
 #if 0
-    if (VFS_SUBCLASS (me)->logfile == NULL)
-        VFS_SUBCLASS (me)->logfile = fopen ("/tmp/mc-FISH.sh", "w");
+    if (me->logfile == NULL)
+        me->logfile = fopen ("/tmp/mc-FISH.sh", "w");
 #endif
-    logfile = VFS_SUBCLASS (me)->logfile;
 
     vfs_print_message (_("fish: Reading directory %s..."), remote_path);
 
@@ -791,11 +789,11 @@ fish_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
             me->verrno = ECONNRESET;
             goto error;
         }
-        if (logfile != NULL)
+        if (me->logfile != NULL)
         {
-            fputs (buffer, logfile);
-            fputs ("\n", logfile);
-            fflush (logfile);
+            fputs (buffer, me->logfile);
+            fputs ("\n", me->logfile);
+            fflush (me->logfile);
         }
         if (strncmp (buffer, "### ", 4) == 0)
             break;

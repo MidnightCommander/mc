@@ -307,10 +307,10 @@ ftpfs_translate_path (struct vfs_class *me, struct vfs_s_super *super, const cha
     if (!FTP_SUPER (super)->remote_is_amiga)
         return g_strdup (remote_path);
 
-    if (VFS_SUBCLASS (me)->logfile != NULL)
+    if (me->logfile != NULL)
     {
-        fprintf (VFS_SUBCLASS (me)->logfile, "MC -- ftpfs_translate_path: %s\n", remote_path);
-        fflush (VFS_SUBCLASS (me)->logfile);
+        fprintf (me->logfile, "MC -- ftpfs_translate_path: %s\n", remote_path);
+        fflush (me->logfile);
     }
 
     /* strip leading slash(es) */
@@ -491,19 +491,19 @@ ftpfs_command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, 
     va_end (ap);
     g_string_append (cmdstr, "\r\n");
 
-    if (VFS_SUBCLASS (me)->logfile != NULL)
+    if (me->logfile != NULL)
     {
         if (strncmp (cmdstr->str, "PASS ", 5) == 0)
-            fputs ("PASS <Password not logged>\r\n", VFS_SUBCLASS (me)->logfile);
+            fputs ("PASS <Password not logged>\r\n", me->logfile);
         else
         {
             size_t ret;
 
-            ret = fwrite (cmdstr->str, cmdstr->len, 1, VFS_SUBCLASS (me)->logfile);
+            ret = fwrite (cmdstr->str, cmdstr->len, 1, me->logfile);
             (void) ret;
         }
 
-        fflush (VFS_SUBCLASS (me)->logfile);
+        fflush (me->logfile);
     }
 
     got_sigpipe = 0;
@@ -647,7 +647,7 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
         super->path_element->password = g_strdup (op);
     }
 
-    if (!anon || VFS_SUBCLASS (me)->logfile != NULL)
+    if (!anon || me->logfile != NULL)
         pass = op;
     else
     {
@@ -675,11 +675,11 @@ ftpfs_login_server (struct vfs_class *me, struct vfs_s_super *super, const char 
             ftp_super->strict = RFC_STRICT;
         g_free (reply_up);
 
-        if (VFS_SUBCLASS (me)->logfile != NULL)
+        if (me->logfile != NULL)
         {
-            fprintf (VFS_SUBCLASS (me)->logfile, "MC -- remote_is_amiga = %s\n",
+            fprintf (me->logfile, "MC -- remote_is_amiga = %s\n",
                      ftp_super->remote_is_amiga ? "yes" : "no");
-            fflush (VFS_SUBCLASS (me)->logfile);
+            fflush (me->logfile);
         }
 
         vfs_print_message ("%s", _("ftpfs: sending login name"));
@@ -1658,10 +1658,10 @@ resolve_symlink_with_ls_options (struct vfs_class *me, struct vfs_s_super *super
             if (fgets (buffer, sizeof (buffer), fp) == NULL)
                 goto done;
 
-            if (VFS_SUBCLASS (me)->logfile != NULL)
+            if (me->logfile != NULL)
             {
-                fputs (buffer, VFS_SUBCLASS (me)->logfile);
-                fflush (VFS_SUBCLASS (me)->logfile);
+                fputs (buffer, me->logfile);
+                fflush (me->logfile);
             }
 
             vfs_die ("This code should be commented out\n");
@@ -1793,11 +1793,11 @@ ftpfs_dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path
             return (-1);
         }
 
-        if (VFS_SUBCLASS (me)->logfile != NULL)
+        if (me->logfile != NULL)
         {
-            fputs (lc_buffer, VFS_SUBCLASS (me)->logfile);
-            fputs ("\n", VFS_SUBCLASS (me)->logfile);
-            fflush (VFS_SUBCLASS (me)->logfile);
+            fputs (lc_buffer, me->logfile);
+            fputs ("\n", me->logfile);
+            fflush (me->logfile);
         }
 
         ent = vfs_s_generate_entry (me, NULL, dir, 0);
