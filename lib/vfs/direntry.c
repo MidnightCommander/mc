@@ -420,11 +420,12 @@ vfs_s_opendir (const vfs_path_t * vpath)
     struct dirhandle *info;
     const vfs_path_element_t *path_element;
 
-    path_element = vfs_path_get_by_index (vpath, -1);
-
     dir = vfs_s_inode_from_path (vpath, FL_DIR | FL_FOLLOW);
     if (dir == NULL)
         return NULL;
+
+    path_element = vfs_path_get_by_index (vpath, -1);
+
     if (!S_ISDIR (dir->st.st_mode))
     {
         path_element->class->verrno = ENOTDIR;
@@ -520,11 +521,11 @@ vfs_s_readlink (const vfs_path_t * vpath, char *buf, size_t size)
     size_t len;
     const vfs_path_element_t *path_element;
 
-    path_element = vfs_path_get_by_index (vpath, -1);
-
     ino = vfs_s_inode_from_path (vpath, 0);
     if (ino == NULL)
         return (-1);
+
+    path_element = vfs_path_get_by_index (vpath, -1);
 
     if (!S_ISLNK (ino->st.st_mode))
     {
@@ -1287,11 +1288,12 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
     const vfs_path_element_t *path_element;
     struct vfs_s_subclass *s;
 
-    path_element = vfs_path_get_by_index (vpath, -1);
-
     q = vfs_s_get_path (vpath, &super, 0);
     if (q == NULL)
         return NULL;
+
+    path_element = vfs_path_get_by_index (vpath, -1);
+
     ino = vfs_s_find_inode (path_element->class, super, q, LINK_FOLLOW, FL_NONE);
     if (ino != NULL && (flags & (O_CREAT | O_EXCL)) == (O_CREAT | O_EXCL))
     {
