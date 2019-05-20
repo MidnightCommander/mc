@@ -814,7 +814,7 @@ vfs_s_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
         path_element->class->logfile = fopen ((char *) arg, "w");
         return 1;
     case VFS_SETCTL_FLUSH:
-        VFS_SUBCLASS (path_element->class)->flush = 1;
+        path_element->class->flush = TRUE;
         return 1;
     default:
         return 0;
@@ -860,9 +860,9 @@ vfs_s_dir_uptodate (struct vfs_class *me, struct vfs_s_inode *ino)
 {
     struct timeval tim;
 
-    if (VFS_SUBCLASS (me)->flush != 0)
+    if (me->flush)
     {
-        VFS_SUBCLASS (me)->flush = 0;
+        me->flush = FALSE;
         return 0;
     }
 
@@ -870,7 +870,6 @@ vfs_s_dir_uptodate (struct vfs_class *me, struct vfs_s_inode *ino)
 
     return (tim.tv_sec < ino->timestamp.tv_sec ? 1 : 0);
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/

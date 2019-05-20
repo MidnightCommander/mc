@@ -147,6 +147,7 @@ typedef struct vfs_class
     vfs_flags_t flags;
     const char *prefix;         /* "fish:" */
     int verrno;                 /* can't use errno because glibc2 might define errno as function */
+    gboolean flush;             /* if set to TRUE, invalidate directory cache */
     FILE *logfile;
 
     /* *INDENT-OFF* */
