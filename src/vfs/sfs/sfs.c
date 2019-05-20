@@ -64,10 +64,14 @@
 
 #define MAXFS 32
 
-#define F_1 1
-#define F_2 2
-#define F_NOLOCALCOPY 4
-#define F_FULLMATCH 8
+typedef enum
+{
+    F_NONE = 0x0,
+    F_1 = 0x1,
+    F_2 = 0x2,
+    F_NOLOCALCOPY = 0x4,
+    F_FULLMATCH = 0x8
+} sfs_flags_t;
 
 #define COPY_CHAR \
     if ((size_t) (t - pad) > sizeof (pad)) \
@@ -106,9 +110,12 @@ static struct vfs_s_subclass sfs_subclass;
 static struct vfs_class *vfs_sfs_ops = VFS_CLASS (&sfs_subclass);
 
 static int sfs_no = 0;
-static char *sfs_prefix[MAXFS];
-static char *sfs_command[MAXFS];
-static int sfs_flags[MAXFS];
+static struct
+{
+    char *prefix;
+    char *command;
+    sfs_flags_t flags;
+} sfs_info[MAXFS];
 
 /*** file scope functions ************************************************************************/
 
@@ -142,14 +149,15 @@ sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
     if (w == -1)
         vfs_die ("This cannot happen... Hopefully.\n");
 
-    if ((sfs_flags[w] & F_1) == 0 && strcmp (vfs_path_get_last_path_str (pname), PATH_SEP_STR) != 0)
+    if ((sfs_info[w].flags & F_1) == 0
+        && strcmp (vfs_path_get_last_path_str (pname), PATH_SEP_STR) != 0)
     {
         vfs_path_free (pname);
         return (-1);
     }
 
-    /*    if ((sfs_flags[w] & F_2) || (!inpath) || (!*inpath)); else return -1; */
-    if ((sfs_flags[w] & F_NOLOCALCOPY) != 0)
+    /*    if ((sfs_info[w].flags & F_2) || (!inpath) || (!*inpath)); else return -1; */
+    if ((sfs_info[w].flags & F_NOLOCALCOPY) != 0)
         pqname = name_quote (vfs_path_as_str (pname), FALSE);
     else
     {
@@ -168,7 +176,7 @@ sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
 
     vfs_path_free (pname);
 
-    for (s_iter = sfs_command[w]; *s_iter != '\0'; s_iter++)
+    for (s_iter = sfs_info[w].command; *s_iter != '\0'; s_iter++)
     {
         if (was_percent)
         {
@@ -442,7 +450,7 @@ sfs_init (struct vfs_class *me)
     while (sfs_no < MAXFS && fgets (key, sizeof (key), cfg) != NULL)
     {
         char *c, *semi = NULL;
-        char flags = 0;
+        sfs_flags_t flags = F_NONE;
 
         if (*key == '#' || *key == '\n')
             continue;
@@ -491,9 +499,9 @@ sfs_init (struct vfs_class *me)
         if (semi != NULL)
             *semi = '\0';
 
-        sfs_prefix[sfs_no] = g_strdup (key);
-        sfs_command[sfs_no] = g_strdup (c);
-        sfs_flags[sfs_no] = flags;
+        sfs_info[sfs_no].prefix = g_strdup (key);
+        sfs_info[sfs_no].command = g_strdup (c);
+        sfs_info[sfs_no].flags = flags;
         sfs_no++;
     }
     fclose (cfg);
@@ -512,8 +520,8 @@ sfs_done (struct vfs_class *me)
 
     for (i = 0; i < sfs_no; i++)
     {
-        MC_PTR_FREE (sfs_prefix[i]);
-        MC_PTR_FREE (sfs_command[i]);
+        MC_PTR_FREE (sfs_info[i].prefix);
+        MC_PTR_FREE (sfs_info[i].command);
     }
     sfs_no = 0;
 }
@@ -528,12 +536,12 @@ sfs_which (struct vfs_class *me, const char *path)
     (void) me;
 
     for (i = 0; i < sfs_no; i++)
-        if ((sfs_flags[i] & F_FULLMATCH) != 0)
+        if ((sfs_info[i].flags & F_FULLMATCH) != 0)
         {
-            if (strcmp (path, sfs_prefix[i]) == 0)
+            if (strcmp (path, sfs_info[i].prefix) == 0)
                 return i;
         }
-        else if (strncmp (path, sfs_prefix[i], strlen (sfs_prefix[i])) == 0)
+        else if (strncmp (path, sfs_info[i].prefix, strlen (sfs_info[i].prefix)) == 0)
             return i;
 
     return (-1);
