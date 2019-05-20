@@ -129,7 +129,7 @@ sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
     int w;
     char pad[10240];
     char *s_iter, *t = pad;
-    int was_percent = 0;
+    gboolean was_percent = FALSE;
     vfs_path_t *pname;          /* name of parent archive */
     char *pqname;               /* name of parent archive, quoted */
     const vfs_path_element_t *path_element;
@@ -174,7 +174,7 @@ sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
         {
             const char *ptr = NULL;
 
-            was_percent = 0;
+            was_percent = FALSE;
 
             switch (*s_iter)
             {
@@ -200,7 +200,7 @@ sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
             }
         }
         else if (*s_iter == '%')
-            was_percent = 1;
+            was_percent = TRUE;
         else
         {
             COPY_CHAR;
