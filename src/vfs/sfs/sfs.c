@@ -70,19 +70,19 @@
 #define F_FULLMATCH 8
 
 #define COPY_CHAR \
-    if ((size_t) (t - pad) > sizeof(pad)) \
+    if ((size_t) (t - pad) > sizeof (pad)) \
     { \
         g_free (pqname); \
-        return -1; \
+        return (-1); \
     } \
     else \
         *t++ = *s_iter;
 
 #define COPY_STRING(a) \
-    if ((t - pad) + strlen(a) > sizeof(pad)) \
+    if ((t - pad) + strlen (a) > sizeof (pad)) \
     { \
         g_free (pqname); \
-        return -1; \
+        return (-1); \
     } \
     else \
     { \
@@ -100,7 +100,7 @@ typedef struct cachedfile
 
 /*** file scope variables ************************************************************************/
 
-static GSList *head;
+static GSList *head = NULL;
 
 static struct vfs_s_subclass sfs_subclass;
 static struct vfs_class *vfs_sfs_ops = VFS_CLASS (&sfs_subclass);
@@ -138,18 +138,20 @@ sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
     pname = vfs_path_clone (vpath);
     vfs_path_remove_element_by_index (pname, -1);
 
-    w = (*path_element->class->which) (path_element->class, path_element->vfs_prefix);
+    w = path_element->class->which (path_element->class, path_element->vfs_prefix);
     if (w == -1)
         vfs_die ("This cannot happen... Hopefully.\n");
 
     if ((sfs_flags[w] & F_1) == 0 && strcmp (vfs_path_get_last_path_str (pname), PATH_SEP_STR) != 0)
     {
         vfs_path_free (pname);
-        return -1;
+        return (-1);
     }
 
     /*    if ((sfs_flags[w] & F_2) || (!inpath) || (!*inpath)); else return -1; */
-    if ((sfs_flags[w] & F_NOLOCALCOPY) == 0)
+    if ((sfs_flags[w] & F_NOLOCALCOPY) != 0)
+        pqname = name_quote (vfs_path_as_str (pname), FALSE);
+    else
     {
         vfs_path_t *s;
 
@@ -157,16 +159,14 @@ sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
         if (s == NULL)
         {
             vfs_path_free (pname);
-            return -1;
+            return (-1);
         }
+
         pqname = name_quote (vfs_path_get_last_path_str (s), FALSE);
         vfs_path_free (s);
     }
-    else
-        pqname = name_quote (vfs_path_as_str (pname), FALSE);
 
     vfs_path_free (pname);
-
 
     for (s_iter = sfs_command[w]; *s_iter != '\0'; s_iter++)
     {
@@ -193,17 +193,17 @@ sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
             default:
                 break;
             }
+
             if (ptr != NULL)
             {
                 COPY_STRING (ptr);
             }
         }
+        else if (*s_iter == '%')
+            was_percent = 1;
         else
         {
-            if (*s_iter == '%')
-                was_percent = 1;
-            else
-                COPY_CHAR;
+            COPY_CHAR;
         }
     }
 
@@ -212,7 +212,7 @@ sfs_vfmake (const vfs_path_t * vpath, vfs_path_t * cache_vpath)
     if (my_system (EXECUTE_AS_SHELL, "/bin/sh", pad))
     {
         close_error_pipe (D_ERROR, NULL);
-        return -1;
+        return (-1);
     }
 
     close_error_pipe (D_NORMAL, NULL);
@@ -275,7 +275,7 @@ sfs_open (const vfs_path_t * vpath /*struct vfs_class *me, const char *path */ ,
 
     fd = open (sfs_redirect (vpath), NO_LINEAR (flags), mode);
     if (fd == -1)
-        return 0;
+        return NULL;
 
     sfs_info = g_new (int, 1);
     *sfs_info = fd;
@@ -324,14 +324,11 @@ sfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
 static int
 sfs_utime (const vfs_path_t * vpath, mc_timesbuf_t * times)
 {
-    int ret;
-
 #ifdef HAVE_UTIMENSAT
-    ret = utimensat (AT_FDCWD, sfs_redirect (vpath), *times, 0);
+    return utimensat (AT_FDCWD, sfs_redirect (vpath), *times, 0);
 #else
-    ret = utime (sfs_redirect (vpath), times);
+    return utime (sfs_redirect (vpath), times);
 #endif
-    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -442,14 +439,15 @@ sfs_init (struct vfs_class *me)
     g_free (mc_sfsini);
 
     sfs_no = 0;
-    while (sfs_no < MAXFS && fgets (key, sizeof (key), cfg))
+    while (sfs_no < MAXFS && fgets (key, sizeof (key), cfg) != NULL)
     {
-        char *c, *semi = NULL, flags = 0;
+        char *c, *semi = NULL;
+        char flags = 0;
 
         if (*key == '#' || *key == '\n')
             continue;
 
-        for (c = key; *c; c++)
+        for (c = key; *c != '\0'; c++)
             if (*c == ':' || IS_PATH_SEP (*c))
             {
                 semi = c;
@@ -461,7 +459,7 @@ sfs_init (struct vfs_class *me)
                 break;
             }
 
-        if (!semi)
+        if (semi == NULL)
         {
           invalid_line:
             fprintf (stderr, _("Warning: Invalid line in %s:\n%s\n"), "sfs.ini", key);
@@ -487,14 +485,14 @@ sfs_init (struct vfs_class *me)
             }
             c++;
         }
-        if (!*c)
+        if (*c == '\0')
             goto invalid_line;
 
         c++;
-        *(semi + 1) = 0;
+        *(semi + 1) = '\0';
         semi = strchr (c, '\n');
         if (semi != NULL)
-            *semi = 0;
+            *semi = '\0';
 
         sfs_prefix[sfs_no] = g_strdup (key);
         sfs_command[sfs_no] = g_strdup (c);
@@ -502,6 +500,7 @@ sfs_init (struct vfs_class *me)
         sfs_no++;
     }
     fclose (cfg);
+
     return 1;
 }
 
@@ -532,15 +531,15 @@ sfs_which (struct vfs_class *me, const char *path)
     (void) me;
 
     for (i = 0; i < sfs_no; i++)
-        if (sfs_flags[i] & F_FULLMATCH)
+        if ((sfs_flags[i] & F_FULLMATCH) != 0)
         {
-            if (!strcmp (path, sfs_prefix[i]))
+            if (strcmp (path, sfs_prefix[i]) == 0)
                 return i;
         }
-        else if (!strncmp (path, sfs_prefix[i], strlen (sfs_prefix[i])))
+        else if (strncmp (path, sfs_prefix[i], strlen (sfs_prefix[i])) == 0)
             return i;
 
-    return -1;
+    return (-1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
