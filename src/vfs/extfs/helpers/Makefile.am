@@ -1,7 +1,5 @@
 extfsdir = $(libexecdir)/@PACKAGE@/extfs.d
 
-EXTFSCONFFILES = sfs.ini
-
 # Files to install and distribute other than extfs scripts
 EXTFS_MISC  = README README.extfs
 
@@ -71,9 +69,6 @@ EXTFS_OUT = 			\
 if ENABLE_VFS
 extfs_DATA = $(EXTFS_MISC)
 extfs_SCRIPTS = $(EXTFS_CONST) $(EXTFS_OUT)
-
-extfsconfdir = $(sysconfdir)/@PACKAGE@
-extfsconf_DATA = $(EXTFSCONFFILES)
 endif
 
-EXTRA_DIST = $(EXTFS_MISC) $(EXTFS_CONST) $(EXTFSCONFFILES)
+EXTRA_DIST = $(EXTFS_MISC) $(EXTFS_CONST)
