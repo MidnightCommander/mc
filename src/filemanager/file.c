@@ -920,7 +920,7 @@ real_do_file_error (enum OperationMode mode, gboolean allow_retry, const char *e
             query_dialog (msg, error, D_ERROR, 4, _("&Skip"), _("Ski&p all"), _("&Retry"),
                           _("&Abort"));
     else
-        result = query_dialog (msg, error, D_ERROR, 4, _("&Skip"), _("Ski&p all"), _("&Abort"));
+        result = query_dialog (msg, error, D_ERROR, 3, _("&Skip"), _("Ski&p all"), _("&Abort"));
 
     switch (result)
     {
