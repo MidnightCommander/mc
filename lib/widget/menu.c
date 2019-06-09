@@ -39,11 +39,14 @@
 #include "lib/tty/tty.h"
 #include "lib/skin.h"
 #include "lib/tty/key.h"        /* key macros */
+#include "lib/keybind.h"        /* global_keymap_t */
 #include "lib/strutil.h"
 #include "lib/widget.h"
 #include "lib/event.h"          /* mc_event_raise() */
 
 /*** global variables ****************************************************************************/
+
+const global_keymap_t *menu_map;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -397,28 +400,36 @@ menubar_up (WMenuBar * menubar)
 static void
 menubar_first (WMenuBar * menubar)
 {
-    menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
-
-    if (menu->selected == 0)
-        return;
-
-    menubar_paint_idx (menubar, menu->selected, MENU_ENTRY_COLOR);
-
-    menu->selected = 0;
-
-    while (TRUE)
+    if (menubar->is_dropped)
     {
-        menu_entry_t *entry;
+        menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
 
-        entry = MENUENTRY (g_list_nth_data (menu->entries, menu->selected));
+        if (menu->selected == 0)
+            return;
 
-        if ((entry == NULL) || (entry->command == CK_IgnoreKey))
-            menu->selected++;
-        else
-            break;
+        menubar_paint_idx (menubar, menu->selected, MENU_ENTRY_COLOR);
+
+        menu->selected = 0;
+
+        while (TRUE)
+        {
+            menu_entry_t *entry;
+
+            entry = MENUENTRY (g_list_nth_data (menu->entries, menu->selected));
+
+            if ((entry == NULL) || (entry->command == CK_IgnoreKey))
+                menu->selected++;
+            else
+                break;
+        }
+
+        menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
     }
-
-    menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
+    else
+    {
+        menubar->selected = 0;
+        menubar_draw (menubar);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -426,46 +437,92 @@ menubar_first (WMenuBar * menubar)
 static void
 menubar_last (WMenuBar * menubar)
 {
-    menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
-    const unsigned int len = g_list_length (menu->entries);
-    menu_entry_t *entry;
-
-    if (menu->selected == len - 1)
-        return;
-
-    menubar_paint_idx (menubar, menu->selected, MENU_ENTRY_COLOR);
-
-    menu->selected = len;
-
-    do
+    if (menubar->is_dropped)
     {
-        menu->selected--;
-        entry = MENUENTRY (g_list_nth_data (menu->entries, menu->selected));
-    }
-    while ((entry == NULL) || (entry->command == CK_IgnoreKey));
+        menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
+        const unsigned int len = g_list_length (menu->entries);
+        menu_entry_t *entry;
 
-    menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
+        if (menu->selected == len - 1)
+            return;
+
+        menubar_paint_idx (menubar, menu->selected, MENU_ENTRY_COLOR);
+
+        menu->selected = len;
+
+        do
+        {
+            menu->selected--;
+            entry = MENUENTRY (g_list_nth_data (menu->entries, menu->selected));
+        }
+        while ((entry == NULL) || (entry->command == CK_IgnoreKey));
+
+        menubar_paint_idx (menubar, menu->selected, MENU_SELECTED_COLOR);
+    }
+    else
+    {
+        menubar->selected = g_list_length (menubar->menu) - 1;
+        menubar_draw (menubar);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-menubar_handle_key (WMenuBar * menubar, int key)
+static cb_ret_t
+menubar_try_drop_menu (WMenuBar * menubar, int hotkey)
 {
-    /* Lowercase */
-    if (isascii (key))
-        key = g_ascii_tolower (key);
+    GList *i;
 
-    if (is_abort_char (key))
+    for (i = menubar->menu; i != NULL; i = g_list_next (i))
     {
-        menubar_finish (menubar);
-        return 1;
+        menu_t *menu = MENU (i->data);
+
+        if (menu->text.hotkey != NULL && hotkey == g_ascii_tolower (menu->text.hotkey[0]))
+        {
+            menubar_drop (menubar, g_list_position (menubar->menu, i));
+            return MSG_HANDLED;
+        }
     }
 
-    /* menubar help or menubar navigation */
-    switch (key)
+    return MSG_NOT_HANDLED;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
+menubar_try_exec_menu (WMenuBar * menubar, int hotkey)
+{
+    menu_t *menu;
+    GList *i;
+
+    menu = g_list_nth_data (menubar->menu, menubar->selected);
+
+    for (i = menu->entries; i != NULL; i = g_list_next (i))
     {
-    case KEY_F (1):
+        const menu_entry_t *entry = MENUENTRY (i->data);
+
+        if (entry != NULL && entry->text.hotkey != NULL
+            && hotkey == g_ascii_tolower (entry->text.hotkey[0]))
+        {
+            menu->selected = g_list_position (menu->entries, i);
+            menubar_execute (menubar);
+            return MSG_HANDLED;
+        }
+    }
+
+    return MSG_NOT_HANDLED;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
+menubar_execute_cmd (WMenuBar * menubar, unsigned long command, int key)
+{
+    cb_ret_t ret = MSG_HANDLED;
+
+    switch (command)
+    {
+    case CK_Help:
         {
             ev_help_t event_data = { NULL, NULL };
 
@@ -477,98 +534,65 @@ menubar_handle_key (WMenuBar * menubar, int key)
 
             mc_event_raise (MCEVENT_GROUP_CORE, "help", &event_data);
             menubar_draw (menubar);
-            return 1;
         }
+        break;
 
-    case KEY_LEFT:
-    case XCTRL ('b'):
+    case CK_Left:
         menubar_left (menubar);
-        return 1;
-
-    case KEY_RIGHT:
-    case XCTRL ('f'):
+        break;
+    case CK_Right:
         menubar_right (menubar);
-        return 1;
+        break;
+    case CK_Up:
+        if (menubar->is_dropped)
+            menubar_up (menubar);
+        break;
+    case CK_Down:
+        if (menubar->is_dropped)
+            menubar_down (menubar);
+        else
+            menubar_drop (menubar, menubar->selected);
+        break;
+    case CK_Home:
+        menubar_first (menubar);
+        break;
+    case CK_End:
+        menubar_last (menubar);
+        break;
+
+    case CK_Enter:
+        if (menubar->is_dropped)
+            menubar_execute (menubar);
+        else
+            menubar_drop (menubar, menubar->selected);
+        break;
+    case CK_Quit:
+        menubar_finish (menubar);
+        break;
 
     default:
+        if (menubar->is_dropped)
+            ret = menubar_try_exec_menu (menubar, key);
+        else
+            ret = menubar_try_drop_menu (menubar, key);
         break;
     }
 
-    if (!menubar->is_dropped)
-    {
-        GList *i;
+    return ret;
+}
 
-        /* drop menu by hotkey */
-        for (i = menubar->menu; i != NULL; i = g_list_next (i))
-        {
-            menu_t *menu = MENU (i->data);
+/* --------------------------------------------------------------------------------------------- */
 
-            if ((menu->text.hotkey != NULL) && (key == g_ascii_tolower (menu->text.hotkey[0])))
-            {
-                menubar_drop (menubar, g_list_position (menubar->menu, i));
-                return 1;
-            }
-        }
+static int
+menubar_handle_key (WMenuBar * menubar, int key)
+{
+    unsigned long cmd;
 
-        /* drop menu by Enter or Dowwn key */
-        if (key == KEY_ENTER || key == XCTRL ('n') || key == KEY_DOWN || key == '\n')
-            menubar_drop (menubar, menubar->selected);
+    cmd = keybind_lookup_keymap_command (menu_map, key);
 
-        return 1;
-    }
-
-    {
-        menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
-        GList *i;
-
-        /* execute menu command by hotkey */
-        for (i = menu->entries; i != NULL; i = g_list_next (i))
-        {
-            const menu_entry_t *entry = MENUENTRY (i->data);
-
-            if ((entry != NULL) && (entry->command != CK_IgnoreKey)
-                && (entry->text.hotkey != NULL) && (key == g_ascii_tolower (entry->text.hotkey[0])))
-            {
-                menu->selected = g_list_position (menu->entries, i);
-                menubar_execute (menubar);
-                return 1;
-            }
-        }
-
-        /* menu execute by Enter or menu navigation */
-        switch (key)
-        {
-        case KEY_ENTER:
-        case '\n':
-            menubar_execute (menubar);
-            return 1;
-
-        case KEY_HOME:
-        case ALT ('<'):
-            menubar_first (menubar);
-            break;
-
-        case KEY_END:
-        case ALT ('>'):
-            menubar_last (menubar);
-            break;
-
-        case KEY_DOWN:
-        case XCTRL ('n'):
-            menubar_down (menubar);
-            break;
-
-        case KEY_UP:
-        case XCTRL ('p'):
-            menubar_up (menubar);
-            break;
-
-        default:
-            break;
-        }
-    }
-
-    return 0;
+    return (cmd == CK_IgnoreKey
+            || menubar_execute_cmd (menubar, cmd,
+                                    key) == MSG_NOT_HANDLED) ? MSG_NOT_HANDLED : MSG_HANDLED;
 }
 
 /* --------------------------------------------------------------------------------------------- */
