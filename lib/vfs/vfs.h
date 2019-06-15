@@ -147,6 +147,8 @@ typedef struct vfs_class
     vfs_flags_t flags;
     const char *prefix;         /* "fish:" */
     int verrno;                 /* can't use errno because glibc2 might define errno as function */
+    gboolean flush;             /* if set to TRUE, invalidate directory cache */
+    FILE *logfile;
 
     /* *INDENT-OFF* */
     int (*init) (struct vfs_class * me);
@@ -193,7 +195,7 @@ typedef struct vfs_class
 
     vfsid (*getid) (const vfs_path_t * vpath);
 
-    int (*nothingisopen) (vfsid id);
+    gboolean (*nothingisopen) (vfsid id);
     void (*free) (vfsid id);
 
     vfs_path_t *(*getlocalcopy) (const vfs_path_t * vpath);

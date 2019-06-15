@@ -327,7 +327,10 @@ tar_free_archive (struct vfs_class *me, struct vfs_s_super *archive)
     (void) me;
 
     if (arch->fd != -1)
+    {
         mc_close (arch->fd);
+        arch->fd = -1;
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -987,7 +990,7 @@ tar_fh_open (struct vfs_class *me, vfs_file_handler_t * fh, int flags, mode_t mo
 /* --------------------------------------------------------------------------------------------- */
 
 void
-init_tarfs (void)
+vfs_init_tarfs (void)
 {
     /* FIXME: tarfs used own temp files */
     vfs_init_subclass (&tarfs_subclass, "tarfs", VFS_READONLY, "utar");

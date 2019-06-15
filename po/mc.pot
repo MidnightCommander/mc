@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.8.22-128-g2c44ec2\n"
+"Project-Id-Version: mc 4.8.22-161-gcc9b87e9c\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-04-27 19:55+0300\n"
+"POT-Creation-Date: 2019-06-15 17:47+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -676,21 +676,21 @@ msgstr ""
 msgid "Directory cache expired for %s"
 msgstr ""
 
-#: lib/vfs/direntry.c:701
+#: lib/vfs/direntry.c:706
 #, c-format
 msgid "%s: %s: %s %3d%% (%lld) bytes transferred"
 msgstr ""
 
-#: lib/vfs/direntry.c:704
+#: lib/vfs/direntry.c:709
 #, c-format
 msgid "%s: %s: %s %lld bytes transferred"
 msgstr ""
 
-#: lib/vfs/direntry.c:1360
+#: lib/vfs/direntry.c:1363
 msgid "Starting linear transfer..."
 msgstr ""
 
-#: lib/vfs/direntry.c:1460
+#: lib/vfs/direntry.c:1463
 msgid "Getting file"
 msgstr ""
 
@@ -773,7 +773,7 @@ msgstr ""
 #: src/filemanager/hotlist.c:1175 src/filemanager/midnight.c:1018
 #: src/filemanager/midnight.c:1026 src/filemanager/panel.c:2818
 #: src/filemanager/tree.c:826 src/subshell/common.c:1269
-#: src/viewer/actions_cmd.c:619 src/viewer/actions_cmd.c:625
+#: src/viewer/actions_cmd.c:629 src/viewer/actions_cmd.c:635
 #: src/viewer/search.c:398
 msgid "&Yes"
 msgstr ""
@@ -785,8 +785,8 @@ msgstr ""
 #: src/filemanager/hotlist.c:1158 src/filemanager/hotlist.c:1175
 #: src/filemanager/midnight.c:1018 src/filemanager/midnight.c:1026
 #: src/filemanager/panel.c:2818 src/filemanager/tree.c:826
-#: src/subshell/common.c:1269 src/viewer/actions_cmd.c:619
-#: src/viewer/actions_cmd.c:625 src/viewer/search.c:399
+#: src/subshell/common.c:1269 src/viewer/actions_cmd.c:629
+#: src/viewer/actions_cmd.c:635 src/viewer/search.c:399
 msgid "&No"
 msgstr ""
 
@@ -1240,7 +1240,7 @@ msgid "ButtonBar|Quit"
 msgstr ""
 
 #: src/diffviewer/ydiff.c:3086 src/editor/editcmd.c:2857
-#: src/viewer/actions_cmd.c:617 src/viewer/actions_cmd.c:623
+#: src/viewer/actions_cmd.c:627 src/viewer/actions_cmd.c:633
 msgid "Quit"
 msgstr ""
 
@@ -4957,21 +4957,21 @@ msgstr ""
 msgid "User menu"
 msgstr ""
 
-#: src/vfs/cpio/cpio.c:235 src/vfs/cpio/cpio.c:258
+#: src/vfs/cpio/cpio.c:237 src/vfs/cpio/cpio.c:260
 #, c-format
 msgid ""
 "Cannot open cpio archive\n"
 "%s"
 msgstr ""
 
-#: src/vfs/cpio/cpio.c:335
+#: src/vfs/cpio/cpio.c:337
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
 "%s"
 msgstr ""
 
-#: src/vfs/cpio/cpio.c:424
+#: src/vfs/cpio/cpio.c:426
 #, c-format
 msgid ""
 "Inconsistent hardlinks of\n"
@@ -4980,20 +4980,20 @@ msgid ""
 "%s"
 msgstr ""
 
-#: src/vfs/cpio/cpio.c:465
+#: src/vfs/cpio/cpio.c:467
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr ""
 
-#: src/vfs/cpio/cpio.c:575 src/vfs/cpio/cpio.c:641 src/vfs/cpio/cpio.c:647
-#: src/vfs/cpio/cpio.c:716 src/vfs/cpio/cpio.c:726
+#: src/vfs/cpio/cpio.c:577 src/vfs/cpio/cpio.c:643 src/vfs/cpio/cpio.c:649
+#: src/vfs/cpio/cpio.c:718 src/vfs/cpio/cpio.c:728
 #, c-format
 msgid ""
 "Corrupted cpio header encountered in\n"
 "%s"
 msgstr ""
 
-#: src/vfs/cpio/cpio.c:790
+#: src/vfs/cpio/cpio.c:792
 #, c-format
 msgid ""
 "Unexpected end of file\n"
@@ -5011,7 +5011,7 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr ""
 
-#: src/vfs/extfs/extfs.c:1448
+#: src/vfs/extfs/extfs.c:1441
 #, c-format
 msgid "Warning: cannot open %s directory\n"
 msgstr ""
@@ -5050,45 +5050,45 @@ msgstr ""
 msgid "fish: Getting host info..."
 msgstr ""
 
-#: src/vfs/fish/fish.c:770
+#: src/vfs/fish/fish.c:768
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr ""
 
-#: src/vfs/fish/fish.c:955 src/vfs/ftpfs/ftpfs.c:1845
-#: src/vfs/undelfs/undelfs.c:390
+#: src/vfs/fish/fish.c:953 src/vfs/ftpfs/ftpfs.c:1845
+#: src/vfs/undelfs/undelfs.c:392
 #, c-format
 msgid "%s: done."
 msgstr ""
 
-#: src/vfs/fish/fish.c:962 src/vfs/ftpfs/ftpfs.c:1792
-#: src/vfs/undelfs/undelfs.c:393
+#: src/vfs/fish/fish.c:960 src/vfs/ftpfs/ftpfs.c:1792
+#: src/vfs/undelfs/undelfs.c:395
 #, c-format
 msgid "%s: failure"
 msgstr ""
 
-#: src/vfs/fish/fish.c:1020
+#: src/vfs/fish/fish.c:1018
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr ""
 
-#: src/vfs/fish/fish.c:1044
+#: src/vfs/fish/fish.c:1042
 msgid "fish: Local read failed, sending zeros"
 msgstr ""
 
-#: src/vfs/fish/fish.c:1063
+#: src/vfs/fish/fish.c:1061
 msgid "fish: storing file"
 msgstr ""
 
-#: src/vfs/fish/fish.c:1133
+#: src/vfs/fish/fish.c:1131
 msgid "Aborting transfer..."
 msgstr ""
 
-#: src/vfs/fish/fish.c:1149
+#: src/vfs/fish/fish.c:1147
 msgid "Error reported after abort."
 msgstr ""
 
-#: src/vfs/fish/fish.c:1151
+#: src/vfs/fish/fish.c:1149
 msgid "Aborted transfer would be successful."
 msgstr ""
 
@@ -5225,19 +5225,19 @@ msgid ""
 "Remove password or correct mode"
 msgstr ""
 
-#: src/vfs/sfs/sfs.c:437
+#: src/vfs/sfs/sfs.c:443
 #, c-format
 msgid "%s: Warning: file %s not found\n"
 msgstr ""
 
-#: src/vfs/sfs/sfs.c:466
+#: src/vfs/sfs/sfs.c:473
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
 "%s\n"
 msgstr ""
 
-#: src/vfs/sfs/sfs.c:485
+#: src/vfs/sfs/sfs.c:490
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
@@ -5316,149 +5316,149 @@ msgstr ""
 msgid "sftp: Listing done."
 msgstr ""
 
-#: src/vfs/smbfs/smbfs.c:695
+#: src/vfs/smbfs/smbfs.c:697
 #, c-format
 msgid "reconnect to %s failed"
 msgstr ""
 
-#: src/vfs/smbfs/smbfs.c:1321
+#: src/vfs/smbfs/smbfs.c:1323
 msgid "Authentication failed"
 msgstr ""
 
-#: src/vfs/smbfs/smbfs.c:1910
+#: src/vfs/smbfs/smbfs.c:1912
 #, c-format
 msgid "Error %s creating directory %s"
 msgstr ""
 
-#: src/vfs/smbfs/smbfs.c:1939
+#: src/vfs/smbfs/smbfs.c:1941
 #, c-format
 msgid "Error %s removing directory %s"
 msgstr ""
 
-#: src/vfs/smbfs/smbfs.c:2069
+#: src/vfs/smbfs/smbfs.c:2071
 #, c-format
 msgid "%s opening remote file %s"
 msgstr ""
 
-#: src/vfs/smbfs/smbfs.c:2149
+#: src/vfs/smbfs/smbfs.c:2151
 #, c-format
 msgid "%s removing remote file %s"
 msgstr ""
 
-#: src/vfs/smbfs/smbfs.c:2186
+#: src/vfs/smbfs/smbfs.c:2188
 #, c-format
 msgid "%s renaming files\n"
 msgstr ""
 
-#: src/vfs/tar/tar.c:347 src/vfs/tar/tar.c:370
+#: src/vfs/tar/tar.c:350 src/vfs/tar/tar.c:373
 #, c-format
 msgid ""
 "Cannot open tar archive\n"
 "%s"
 msgstr ""
 
-#: src/vfs/tar/tar.c:660 src/vfs/tar/tar.c:689 src/vfs/tar/tar.c:778
-#: src/vfs/tar/tar.c:786
+#: src/vfs/tar/tar.c:663 src/vfs/tar/tar.c:692 src/vfs/tar/tar.c:781
+#: src/vfs/tar/tar.c:789
 msgid "Inconsistent tar archive"
 msgstr ""
 
-#: src/vfs/tar/tar.c:675
+#: src/vfs/tar/tar.c:678
 msgid "Unexpected EOF on archive file"
 msgstr ""
 
-#: src/vfs/tar/tar.c:875
+#: src/vfs/tar/tar.c:878
 #, c-format
 msgid ""
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:130
+#: src/vfs/undelfs/undelfs.c:131
 msgid "undelfs: error"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:246
+#: src/vfs/undelfs/undelfs.c:248
 msgid "not enough memory"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:252
+#: src/vfs/undelfs/undelfs.c:254
 msgid "while allocating block buffer"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:258
+#: src/vfs/undelfs/undelfs.c:260
 #, c-format
 msgid "open_inode_scan: %d"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:264
+#: src/vfs/undelfs/undelfs.c:266
 #, c-format
 msgid "while starting inode scan %d"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:271
+#: src/vfs/undelfs/undelfs.c:273
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:286
+#: src/vfs/undelfs/undelfs.c:288
 #, c-format
 msgid "while calling ext2_block_iterate %d"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:299
+#: src/vfs/undelfs/undelfs.c:301
 msgid "no more memory while reallocating array"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:321
+#: src/vfs/undelfs/undelfs.c:323
 #, c-format
 msgid "while doing inode scan %d"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:372
+#: src/vfs/undelfs/undelfs.c:374
 #, c-format
 msgid "Cannot open file %s"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:375
+#: src/vfs/undelfs/undelfs.c:377
 msgid "undelfs: reading inode bitmap..."
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:378
+#: src/vfs/undelfs/undelfs.c:380
 #, c-format
 msgid ""
 "Cannot load inode bitmap from:\n"
 "%s"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:381
+#: src/vfs/undelfs/undelfs.c:383
 msgid "undelfs: reading block bitmap..."
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:384
+#: src/vfs/undelfs/undelfs.c:386
 #, c-format
 msgid ""
 "Cannot load block bitmap from:\n"
 "%s"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:409
+#: src/vfs/undelfs/undelfs.c:411
 msgid "vfs_info is not fs!"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:455 src/vfs/undelfs/undelfs.c:679
+#: src/vfs/undelfs/undelfs.c:457 src/vfs/undelfs/undelfs.c:681
 msgid "You have to chdir to extract files first"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:601
+#: src/vfs/undelfs/undelfs.c:603
 msgid "while iterating over blocks"
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:723
+#: src/vfs/undelfs/undelfs.c:725
 #, c-format
 msgid "Cannot open file \"%s\""
 msgstr ""
 
-#: src/vfs/undelfs/undelfs.c:817
+#: src/vfs/undelfs/undelfs.c:819
 msgid "Ext2lib error"
 msgstr ""
 
@@ -5466,15 +5466,15 @@ msgstr ""
 msgid "Invalid value"
 msgstr ""
 
-#: src/viewer/actions_cmd.c:618
+#: src/viewer/actions_cmd.c:628
 msgid "File was modified. Save with exit?"
 msgstr ""
 
-#: src/viewer/actions_cmd.c:619
+#: src/viewer/actions_cmd.c:629
 msgid "&Cancel quit"
 msgstr ""
 
-#: src/viewer/actions_cmd.c:624
+#: src/viewer/actions_cmd.c:634
 msgid ""
 "Midnight Commander is being shut down.\n"
 "Save modified file?"

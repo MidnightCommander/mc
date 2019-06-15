@@ -18,7 +18,7 @@
 
 /*** declarations of public functions ************************************************************/
 
-extern void init_localfs (void);
+extern void vfs_init_localfs (void);
 
 /* these functions are used by other filesystems, so they are
  * published here. */

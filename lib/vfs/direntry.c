@@ -420,11 +420,12 @@ vfs_s_opendir (const vfs_path_t * vpath)
     struct dirhandle *info;
     const vfs_path_element_t *path_element;
 
-    path_element = vfs_path_get_by_index (vpath, -1);
-
     dir = vfs_s_inode_from_path (vpath, FL_DIR | FL_FOLLOW);
     if (dir == NULL)
         return NULL;
+
+    path_element = vfs_path_get_by_index (vpath, -1);
+
     if (!S_ISDIR (dir->st.st_mode))
     {
         path_element->class->verrno = ENOTDIR;
@@ -520,11 +521,11 @@ vfs_s_readlink (const vfs_path_t * vpath, char *buf, size_t size)
     size_t len;
     const vfs_path_element_t *path_element;
 
-    path_element = vfs_path_get_by_index (vpath, -1);
-
     ino = vfs_s_inode_from_path (vpath, 0);
     if (ino == NULL)
         return (-1);
+
+    path_element = vfs_path_get_by_index (vpath, -1);
 
     if (!S_ISLNK (ino->st.st_mode))
     {
@@ -682,8 +683,12 @@ vfs_s_close (void *fh)
         }
         vfs_s_invalidate (me, super);
     }
+
     if (file->handle != -1)
+    {
         close (file->handle);
+        file->handle = -1;
+    }
 
     vfs_s_free_inode (me, file->ino);
     vfs_s_free_fh (sub, fh);
@@ -807,10 +812,10 @@ vfs_s_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
             return 1;
         }
     case VFS_SETCTL_LOGFILE:
-        VFS_SUBCLASS (path_element->class)->logfile = fopen ((char *) arg, "w");
+        path_element->class->logfile = fopen ((char *) arg, "w");
         return 1;
     case VFS_SETCTL_FLUSH:
-        VFS_SUBCLASS (path_element->class)->flush = 1;
+        path_element->class->flush = TRUE;
         return 1;
     default:
         return 0;
@@ -835,12 +840,10 @@ vfs_s_getid (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
+static gboolean
 vfs_s_nothingisopen (vfsid id)
 {
-    (void) id;
-    /* Our data structures should survive free of superblock at any time */
-    return 1;
+    return (VFS_SUPER (id)->fd_usage <= 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -858,9 +861,9 @@ vfs_s_dir_uptodate (struct vfs_class *me, struct vfs_s_inode *ino)
 {
     struct timeval tim;
 
-    if (VFS_SUBCLASS (me)->flush != 0)
+    if (me->flush)
     {
-        VFS_SUBCLASS (me)->flush = 0;
+        me->flush = FALSE;
         return 0;
     }
 
@@ -868,7 +871,6 @@ vfs_s_dir_uptodate (struct vfs_class *me, struct vfs_s_inode *ino)
 
     return (tim.tv_sec < ino->timestamp.tv_sec ? 1 : 0);
 }
-
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
@@ -1286,11 +1288,12 @@ vfs_s_open (const vfs_path_t * vpath, int flags, mode_t mode)
     const vfs_path_element_t *path_element;
     struct vfs_s_subclass *s;
 
-    path_element = vfs_path_get_by_index (vpath, -1);
-
     q = vfs_s_get_path (vpath, &super, 0);
     if (q == NULL)
         return NULL;
+
+    path_element = vfs_path_get_by_index (vpath, -1);
+
     ino = vfs_s_find_inode (path_element->class, super, q, LINK_FOLLOW, FL_NONE);
     if (ino != NULL && (flags & (O_CREAT | O_EXCL)) == (O_CREAT | O_EXCL))
     {
@@ -1603,7 +1606,7 @@ vfs_s_select_on_two (int fd1, int fd2)
 int
 vfs_s_get_line (struct vfs_class *me, int sock, char *buf, int buf_len, char term)
 {
-    FILE *logfile = VFS_SUBCLASS (me)->logfile;
+    FILE *logfile = me->logfile;
     int i;
     char c;
 

@@ -47,8 +47,10 @@
 
 /*** file scope variables ************************************************************************/
 
-static struct vfs_class vfs_local_ops;
+static struct vfs_s_subclass local_subclass;
+static struct vfs_class *vfs_local_ops = VFS_CLASS (&local_subclass);
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -90,7 +92,7 @@ local_opendir (const vfs_path_t * vpath)
 
     path_element = vfs_path_get_by_index (vpath, -1);
     dir = opendir (path_element->path);
-    if (!dir)
+    if (dir == NULL)
         return 0;
 
     local_info = (DIR **) g_new (DIR *, 1);
@@ -211,8 +213,7 @@ local_unlink (const vfs_path_t * vpath)
 static int
 local_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    const vfs_path_element_t *path_element1;
-    const vfs_path_element_t *path_element2;
+    const vfs_path_element_t *path_element1, *path_element2;
 
     path_element1 = vfs_path_get_by_index (vpath1, -1);
     path_element2 = vfs_path_get_by_index (vpath2, -1);
@@ -227,10 +228,11 @@ local_write (void *data, const char *buf, size_t nbyte)
     int fd;
     int n;
 
-    if (!data)
-        return -1;
+    if (data == NULL)
+        return (-1);
 
     fd = *(int *) data;
+
     while ((n = write (fd, buf, nbyte)) == -1)
     {
 #ifdef EAGAIN
@@ -243,6 +245,7 @@ local_write (void *data, const char *buf, size_t nbyte)
 #endif
         break;
     }
+
     return n;
 }
 
@@ -251,8 +254,7 @@ local_write (void *data, const char *buf, size_t nbyte)
 static int
 local_rename (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    const vfs_path_element_t *path_element1;
-    const vfs_path_element_t *path_element2;
+    const vfs_path_element_t *path_element1, *path_element2;
 
     path_element1 = vfs_path_get_by_index (vpath1, -1);
     path_element2 = vfs_path_get_by_index (vpath2, -1);
@@ -286,8 +288,7 @@ local_mknod (const vfs_path_t * vpath, mode_t mode, dev_t dev)
 static int
 local_link (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
-    const vfs_path_element_t *path_element1;
-    const vfs_path_element_t *path_element2;
+    const vfs_path_element_t *path_element1, *path_element2;
 
     path_element1 = vfs_path_get_by_index (vpath1, -1);
     path_element2 = vfs_path_get_by_index (vpath2, -1);
@@ -355,11 +356,14 @@ ssize_t
 local_read (void *data, char *buffer, size_t count)
 {
     int n;
+    int fd;
 
-    if (!data)
-        return -1;
+    if (data == NULL)
+        return (-1);
 
-    while ((n = read (*((int *) data), buffer, count)) == -1)
+    fd = *(int *) data;
+
+    while ((n = read (fd, buffer, count)) == -1)
     {
 #ifdef EAGAIN
         if (errno == EAGAIN)
@@ -369,8 +373,9 @@ local_read (void *data, char *buffer, size_t count)
         if (errno == EINTR)
             continue;
 #endif
-        return -1;
+        return (-1);
     }
+
     return n;
 }
 
@@ -381,8 +386,8 @@ local_close (void *data)
 {
     int fd;
 
-    if (!data)
-        return -1;
+    if (data == NULL)
+        return (-1);
 
     fd = *(int *) data;
     g_free (data);
@@ -403,8 +408,9 @@ local_errno (struct vfs_class *me)
 int
 local_fstat (void *data, struct stat *buf)
 {
-    /* FIXME: avoid type cast */
-    return fstat (*((int *) data), buf);
+    int fd = *(int *) data;
+
+    return fstat (fd, buf);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -419,38 +425,52 @@ local_lseek (void *data, off_t offset, int whence)
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
-init_localfs (void)
+static gboolean
+local_nothingisopen (vfsid id)
 {
-    vfs_init_class (&vfs_local_ops, "localfs", VFS_LOCAL, NULL);
-    vfs_local_ops.which = local_which;
-    vfs_local_ops.open = local_open;
-    vfs_local_ops.close = local_close;
-    vfs_local_ops.read = local_read;
-    vfs_local_ops.write = local_write;
-    vfs_local_ops.opendir = local_opendir;
-    vfs_local_ops.readdir = local_readdir;
-    vfs_local_ops.closedir = local_closedir;
-    vfs_local_ops.stat = local_stat;
-    vfs_local_ops.lstat = local_lstat;
-    vfs_local_ops.fstat = local_fstat;
-    vfs_local_ops.chmod = local_chmod;
-    vfs_local_ops.chown = local_chown;
-    vfs_local_ops.utime = local_utime;
-    vfs_local_ops.readlink = local_readlink;
-    vfs_local_ops.symlink = local_symlink;
-    vfs_local_ops.link = local_link;
-    vfs_local_ops.unlink = local_unlink;
-    vfs_local_ops.rename = local_rename;
-    vfs_local_ops.chdir = local_chdir;
-    vfs_local_ops.ferrno = local_errno;
-    vfs_local_ops.lseek = local_lseek;
-    vfs_local_ops.mknod = local_mknod;
-    vfs_local_ops.getlocalcopy = local_getlocalcopy;
-    vfs_local_ops.ungetlocalcopy = local_ungetlocalcopy;
-    vfs_local_ops.mkdir = local_mkdir;
-    vfs_local_ops.rmdir = local_rmdir;
-    vfs_register_class (&vfs_local_ops);
+    (void) id;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
+vfs_init_localfs (void)
+{
+    /* NULLize vfs_s_subclass members */
+    memset (&local_subclass, 0, sizeof (local_subclass));
+
+    vfs_init_class (vfs_local_ops, "localfs", VFS_LOCAL, NULL);
+    vfs_local_ops->which = local_which;
+    vfs_local_ops->open = local_open;
+    vfs_local_ops->close = local_close;
+    vfs_local_ops->read = local_read;
+    vfs_local_ops->write = local_write;
+    vfs_local_ops->opendir = local_opendir;
+    vfs_local_ops->readdir = local_readdir;
+    vfs_local_ops->closedir = local_closedir;
+    vfs_local_ops->stat = local_stat;
+    vfs_local_ops->lstat = local_lstat;
+    vfs_local_ops->fstat = local_fstat;
+    vfs_local_ops->chmod = local_chmod;
+    vfs_local_ops->chown = local_chown;
+    vfs_local_ops->utime = local_utime;
+    vfs_local_ops->readlink = local_readlink;
+    vfs_local_ops->symlink = local_symlink;
+    vfs_local_ops->link = local_link;
+    vfs_local_ops->unlink = local_unlink;
+    vfs_local_ops->rename = local_rename;
+    vfs_local_ops->chdir = local_chdir;
+    vfs_local_ops->ferrno = local_errno;
+    vfs_local_ops->lseek = local_lseek;
+    vfs_local_ops->mknod = local_mknod;
+    vfs_local_ops->getlocalcopy = local_getlocalcopy;
+    vfs_local_ops->ungetlocalcopy = local_ungetlocalcopy;
+    vfs_local_ops->mkdir = local_mkdir;
+    vfs_local_ops->rmdir = local_rmdir;
+    vfs_local_ops->nothingisopen = local_nothingisopen;
+    vfs_register_class (vfs_local_ops);
 }
 
 /* --------------------------------------------------------------------------------------------- */

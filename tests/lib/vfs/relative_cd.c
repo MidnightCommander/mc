@@ -26,6 +26,8 @@
 
 #include "tests/mctest.h"
 
+#include <string.h>             /* memset() */
+
 #include "lib/strutil.h"
 #include "lib/vfs/xdirentry.h"
 #include "lib/vfs/path.h"
@@ -33,7 +35,8 @@
 #include "src/vfs/local/local.c"
 
 
-static struct vfs_class vfs_test_ops1;
+static struct vfs_s_subclass vfs_test_subclass1;
+static struct vfs_class *vfs_test_ops1 = VFS_CLASS (&vfs_test_subclass1);
 
 static int test_chdir (const vfs_path_t * vpath);
 
@@ -73,16 +76,17 @@ setup (void)
     str_init_strings (NULL);
 
     vfs_init ();
-    init_localfs ();
+    vfs_init_localfs ();
     vfs_setup_work_dir ();
 
-    vfs_init_class (&vfs_test_ops1, "testfs1", VFS_NOLINKS | VFS_REMOTE, "test1");
-    vfs_test_ops1.chdir = test_chdir;
-    vfs_register_class (&vfs_test_ops1);
+    memset (&vfs_test_subclass1, 0, sizeof (vfs_test_subclass1));
+    vfs_init_class (vfs_test_ops1, "testfs1", VFS_NOLINKS | VFS_REMOTE, "test1");
+    vfs_test_ops1->chdir = test_chdir;
+    vfs_register_class (vfs_test_ops1);
 
     mc_global.sysconfig_dir = (char *) TEST_SHARE_DIR;
 
-    vfs_local_ops.chdir = test_chdir;
+    vfs_local_ops->chdir = test_chdir;
 
     test_chdir__init ();
 }

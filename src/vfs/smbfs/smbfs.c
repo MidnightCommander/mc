@@ -38,6 +38,7 @@
 
 #include <stdio.h>
 #include <sys/types.h>
+#include <string.h>             /* memset() */
 
 #undef USE_NCURSES              /* Don't include *curses.h */
 #undef USE_NCURSESW
@@ -138,7 +139,8 @@ static gboolean got_pass = FALSE;
 static pstring password;
 static pstring username;
 
-static struct vfs_class vfs_smbfs_ops;
+static struct vfs_s_subclass smbfs_subclass;
+static struct vfs_class *vfs_smbfs_ops = VFS_CLASS (&smbfs_subclass);
 
 static struct _smbfs_connection
 {
@@ -2210,6 +2212,17 @@ smbfs_fstat (void *data, struct stat *buf)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static gboolean
+smbfs_nothingisopen (vfsid id)
+{
+    /* FIXME */
+    (void) id;
+
+    return TRUE;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -2236,40 +2249,44 @@ vfs_smb_authinfo_new (const char *host, const char *share, const char *domain,
 /* --------------------------------------------------------------------------------------------- */
 
 void
-init_smbfs (void)
+vfs_init_smbfs (void)
 {
     tcp_init ();
 
-    vfs_init_class (&vfs_smbfs_ops, "smbfs", VFS_NOLINKS, "smb");
-    vfs_smbfs_ops.init = smbfs_init;
-    vfs_smbfs_ops.fill_names = smbfs_fill_names;
-    vfs_smbfs_ops.open = smbfs_open;
-    vfs_smbfs_ops.close = smbfs_close;
-    vfs_smbfs_ops.read = smbfs_read;
-    vfs_smbfs_ops.write = smbfs_write;
-    vfs_smbfs_ops.opendir = smbfs_opendir;
-    vfs_smbfs_ops.readdir = smbfs_readdir;
-    vfs_smbfs_ops.closedir = smbfs_closedir;
-    vfs_smbfs_ops.stat = smbfs_stat;
-    vfs_smbfs_ops.lstat = smbfs_lstat;
-    vfs_smbfs_ops.fstat = smbfs_fstat;
-    vfs_smbfs_ops.chmod = smbfs_chmod;
-    vfs_smbfs_ops.chown = smbfs_chown;
-    vfs_smbfs_ops.utime = smbfs_utime;
-    vfs_smbfs_ops.readlink = smbfs_readlink;
-    vfs_smbfs_ops.symlink = smbfs_symlink;
-    vfs_smbfs_ops.link = smbfs_link;
-    vfs_smbfs_ops.unlink = smbfs_unlink;
-    vfs_smbfs_ops.rename = smbfs_rename;
-    vfs_smbfs_ops.chdir = smbfs_chdir;
-    vfs_smbfs_ops.ferrno = smbfs_errno;
-    vfs_smbfs_ops.lseek = smbfs_lseek;
-    vfs_smbfs_ops.mknod = smbfs_mknod;
-    vfs_smbfs_ops.free = smbfs_free;
-    vfs_smbfs_ops.mkdir = smbfs_mkdir;
-    vfs_smbfs_ops.rmdir = smbfs_rmdir;
-    vfs_smbfs_ops.setctl = smbfs_setctl;
-    vfs_register_class (&vfs_smbfs_ops);
+    /* NULLize vfs_s_subclass members */
+    memset (&smbfs_subclass, 0, sizeof (smbfs_subclass));
+
+    vfs_init_class (vfs_smbfs_ops, "smbfs", VFS_NOLINKS, "smb");
+    vfs_smbfs_ops->init = smbfs_init;
+    vfs_smbfs_ops->fill_names = smbfs_fill_names;
+    vfs_smbfs_ops->open = smbfs_open;
+    vfs_smbfs_ops->close = smbfs_close;
+    vfs_smbfs_ops->read = smbfs_read;
+    vfs_smbfs_ops->write = smbfs_write;
+    vfs_smbfs_ops->opendir = smbfs_opendir;
+    vfs_smbfs_ops->readdir = smbfs_readdir;
+    vfs_smbfs_ops->closedir = smbfs_closedir;
+    vfs_smbfs_ops->stat = smbfs_stat;
+    vfs_smbfs_ops->lstat = smbfs_lstat;
+    vfs_smbfs_ops->fstat = smbfs_fstat;
+    vfs_smbfs_ops->chmod = smbfs_chmod;
+    vfs_smbfs_ops->chown = smbfs_chown;
+    vfs_smbfs_ops->utime = smbfs_utime;
+    vfs_smbfs_ops->readlink = smbfs_readlink;
+    vfs_smbfs_ops->symlink = smbfs_symlink;
+    vfs_smbfs_ops->link = smbfs_link;
+    vfs_smbfs_ops->unlink = smbfs_unlink;
+    vfs_smbfs_ops->rename = smbfs_rename;
+    vfs_smbfs_ops->chdir = smbfs_chdir;
+    vfs_smbfs_ops->ferrno = smbfs_errno;
+    vfs_smbfs_ops->lseek = smbfs_lseek;
+    vfs_smbfs_ops->mknod = smbfs_mknod;
+    vfs_smbfs_ops->free = smbfs_free;
+    vfs_smbfs_ops->mkdir = smbfs_mkdir;
+    vfs_smbfs_ops->rmdir = smbfs_rmdir;
+    vfs_smbfs_ops->setctl = smbfs_setctl;
+    vfs_smbfs_ops->nothingisopen = smbfs_nothingisopen;
+    vfs_register_class (vfs_smbfs_ops);
 }
 
 /* --------------------------------------------------------------------------------------------- */

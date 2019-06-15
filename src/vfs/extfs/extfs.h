@@ -11,7 +11,7 @@
 
 /*** declarations of public functions ************************************************************/
 
-void init_extfs (void);
+void vfs_init_extfs (void);
 
 /*** inline functions ****************************************************************************/
 

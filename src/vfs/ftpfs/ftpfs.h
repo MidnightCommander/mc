@@ -36,7 +36,7 @@ extern gboolean ftpfs_first_cd_then_ls;
 /*** declarations of public functions ************************************************************/
 
 void ftpfs_init_passwd (void);
-void init_ftpfs (void);
+void vfs_init_ftpfs (void);
 
 /*** inline functions ****************************************************************************/
 #endif

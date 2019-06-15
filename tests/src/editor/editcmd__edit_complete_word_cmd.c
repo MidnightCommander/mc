@@ -149,7 +149,7 @@ my_setup (void)
     str_init_strings (NULL);
 
     vfs_init ();
-    init_localfs ();
+    vfs_init_localfs ();
     vfs_setup_work_dir ();
 
 #ifdef HAVE_CHARSET

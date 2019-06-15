@@ -3984,7 +3984,7 @@ update_one_panel_widget (WPanel * panel, panel_update_flags_t flags, const char 
     if ((flags & UP_RELOAD) != 0)
     {
         panel->is_panelized = FALSE;
-        mc_setctl (panel->cwd_vpath, VFS_SETCTL_FLUSH, 0);
+        mc_setctl (panel->cwd_vpath, VFS_SETCTL_FLUSH, NULL);
         memset (&(panel->dir_stat), 0, sizeof (panel->dir_stat));
     }
 

@@ -61,7 +61,7 @@ setup (void)
 #endif
     str_init_strings ("UTF-8");
     vfs_init ();
-    init_localfs ();
+    vfs_init_localfs ();
 }
 
 /* --------------------------------------------------------------------------------------------- */

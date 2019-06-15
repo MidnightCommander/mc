@@ -51,7 +51,7 @@ setup (void)
     str_init_strings (NULL);
 
     vfs_init ();
-    init_localfs ();
+    vfs_init_localfs ();
     vfs_setup_work_dir ();
 
     vfs_init_class (&vfs_test_ops1, "testfs1", VFS_NOLINKS, "test1");
@@ -107,7 +107,7 @@ static const struct test_from_to_string_ds
         "/",
         "/",
         1,
-        &vfs_local_ops
+        VFS_CLASS (&local_subclass)
     },
     { /* 2. */
         "/test1://bla-bla/some/path/test2://user:passwd@some.host:1234/bla-bla/some/path/test3://111/22/33",

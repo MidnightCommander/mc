@@ -978,6 +978,7 @@ extfs_close (void *fh)
     int errno_code = 0;
 
     close (file->handle);
+    file->handle = -1;
 
     /* Commit the file if it has changed */
     if (file->changed)
@@ -1372,14 +1373,6 @@ extfs_getid (const vfs_path_t * vpath)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static int
-extfs_nothingisopen (vfsid id)
-{
-    return (VFS_SUPER (id)->fd_usage <= 0);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static vfs_path_t *
 extfs_getlocalcopy (const vfs_path_t * vpath)
 {
@@ -1588,7 +1581,7 @@ extfs_setctl (const vfs_path_t * vpath, int ctlop, void *arg)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-init_extfs (void)
+vfs_init_extfs (void)
 {
     vfs_init_subclass (&extfs_subclass, "extfs", VFS_UNKNOWN, NULL);
     vfs_extfs_ops->init = extfs_init;
@@ -1613,7 +1606,6 @@ init_extfs (void)
     vfs_extfs_ops->ferrno = extfs_errno;
     vfs_extfs_ops->lseek = extfs_lseek;
     vfs_extfs_ops->getid = extfs_getid;
-    vfs_extfs_ops->nothingisopen = extfs_nothingisopen;
     vfs_extfs_ops->getlocalcopy = extfs_getlocalcopy;
     vfs_extfs_ops->ungetlocalcopy = extfs_ungetlocalcopy;
     vfs_extfs_ops->mkdir = extfs_mkdir;

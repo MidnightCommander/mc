@@ -48,7 +48,7 @@ setup (void)
     str_init_strings (NULL);
 
     vfs_init ();
-    init_localfs ();
+    vfs_init_localfs ();
     vfs_setup_work_dir ();
 
     vfs_init_class (&vfs_test_ops1, "testfs1", VFS_NOLINKS | VFS_REMOTE, "test1");
