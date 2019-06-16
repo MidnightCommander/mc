@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-21 01:34+0000\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/mc/mc/language/bg/)\n"
 "Language: bg\n"
@@ -2858,17 +2858,14 @@ msgstr "%.2f КБ/с"
 msgid "%ld B/s"
 msgstr "%ld Б/с"
 
-#, fuzzy
 msgid "New     :"
-msgstr "Нови: %s, размер %s"
+msgstr ""
 
-#, fuzzy
 msgid "Existing:"
-msgstr "Съществуващи: %s, размер %s"
+msgstr ""
 
-#, fuzzy
 msgid "Overwrite this file?"
-msgstr "Да презапиша ли този?"
+msgstr ""
 
 msgid "A&ppend"
 msgstr "добави"
@@ -2876,9 +2873,8 @@ msgstr "добави"
 msgid "&Reget"
 msgstr "Препрочитане"
 
-#, fuzzy
 msgid "Overwrite all files?"
-msgstr "Да презапиша ли всички?"
+msgstr ""
 
 msgid "Don't overwrite with &zero length file"
 msgstr ""
@@ -2889,9 +2885,8 @@ msgstr ""
 msgid "S&maller"
 msgstr ""
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "при различен размер"
+msgstr ""
 
 msgid "File exists"
 msgstr "Файлът съществува"
@@ -3857,9 +3852,8 @@ msgstr "Използване на библиотеката ncurses\n"
 msgid "Using the ncursesw library\n"
 msgstr "Използване на библиотеката ncursesw\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support\n"
-msgstr "С вграден редактор\n"
+msgstr ""
 
 msgid "With builtin Editor\n"
 msgstr "С вграден редактор\n"
@@ -4512,9 +4506,3 @@ msgstr "Да се продължи ли от началото?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Не може да се изтегли локално копие на /ftp://some.host/editme.txt"
-
-#~ msgid "Target file already exists!"
-#~ msgstr "Целевия файл вече съществува!"
-
-#~ msgid "&Update"
-#~ msgstr "Обнови"

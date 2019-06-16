@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2011,2015-2018
+# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2011,2015-2019
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-21 01:34+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-05-01 13:39+0000\n"
+"Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque (http://www.transifex.com/mc/mc/language/eu/)\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
@@ -118,6 +118,8 @@ msgid ""
 "Hex pattern error at position %d:\n"
 "%s."
 msgstr ""
+"Hex eredu errorea %dkokapenean :\n"
+"%s."
 
 msgid "Search string not found"
 msgstr "Bilatutako katea ez da aurkitu"
@@ -800,7 +802,7 @@ msgid "Color options"
 msgstr "Koloreen aukerak"
 
 msgid "[+lineno] file1[:lineno] [file2[:lineno]...]"
-msgstr ""
+msgstr "[+lerrozk] fitxtg1[:lerrozk] [fitxtg2[:lerrozk]...]"
 
 msgid "file"
 msgstr "fitxategia"
@@ -1652,9 +1654,8 @@ msgstr ""
 "Testu editore lagunkoi bat\n"
 "Midnight Commander-rarentzako idatzia."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2019 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2018 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2019 the Free Software Foundation"
 
 msgid "About"
 msgstr "Honi buruz"
@@ -1943,7 +1944,7 @@ msgid "Sa&fe delete"
 msgstr "E&zabatze segurua"
 
 msgid "Safe overwrite"
-msgstr ""
+msgstr "Gainidazte segurua"
 
 msgid "A&uto save setup"
 msgstr "A&uto gorde ezarpena"
@@ -2528,23 +2529,28 @@ msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
+"Ezin da lortu esteka trinkoaren \"%s\" iturburu fitxategiaren egoera "
+"(stat)\\n\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot create target hardlink \"%s\"\n"
 "%s"
 msgstr ""
+"Ezin da sortu iturburuaren \"%s\" esteka sinbolikoa\\n\n"
+"%s"
 
 #, c-format
 msgid "Cannot create target hardlink \"%s\""
-msgstr ""
+msgstr "Ezin da sortu iturburuaren \"%s\" esteka sinbolikoa"
 
 #, c-format
 msgid ""
 "Cannot read source link \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" iturburu esteka ezin irakurri\n"
+"Ezin da irakurri \"%s\" iturburu esteka\\n\n"
 "%s"
 
 msgid ""
@@ -2552,13 +2558,17 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
+"Ezin dira egin esteka-sinboliko egonkorrak lokalak ez diren fitxategi-"
+"sistemetara:\n"
+"\n"
+"Esteka-sinboliko egonkorrak aukera desgaituko da"
 
 #, c-format
 msgid ""
 "Cannot create target symlink \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" helburu esteka sinbolikoa ezin sortu\n"
+"Ezin da sortu \"%s\" helburu esteka sinbolikoa\n"
 "%s"
 
 #, c-format
@@ -2622,19 +2632,19 @@ msgid ""
 "Cannot stat file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" fitxategiaren egoera (\"stat\") ezin lortu\n"
+"Ezin da lortu \"%s\" fitxategiaren egoera (stat)\n"
 "%s"
 
 #, c-format
 msgid "Cannot overwrite directory \"%s\""
-msgstr "\"%s\" direktorioa ezin gainidatzi"
+msgstr "Ezin da gainidatzi \"%s\" direktorioa"
 
 #, c-format
 msgid ""
 "Cannot move file \"%s\" to \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" fitxategia \"%s\"-ra ezin mugitu\n"
+"Ezin da mugitu \"%s\" fitxategia \"%s\"-ra\n"
 "%s"
 
 #, c-format
@@ -2642,7 +2652,7 @@ msgid ""
 "Cannot remove directory \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" direktorioa ezin ezabatu\n"
+"Ezin da ezabatu \"%s\" direktorioa\n"
 "%s"
 
 #, c-format
@@ -2650,7 +2660,7 @@ msgid ""
 "Cannot overwrite directory \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" direktorioa ezin gainidatzi\n"
+"Ezin da gainidatzi \"%s\" direktorioa\n"
 "%s"
 
 #, c-format
@@ -2658,7 +2668,7 @@ msgid ""
 "Cannot overwrite file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" fitxategia ezin gainidatzi\n"
+"Ezin da gainidatzi \"%s\" fitxategia\n"
 "%s"
 
 #, c-format
@@ -2666,7 +2676,7 @@ msgid ""
 "Cannot move directory \"%s\" to \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" direktorioa \"%s\"-ra ezin mugitu\n"
+"Ezin da mugitu \"%s\" direktorioa \"%s\"-ra\n"
 "%s"
 
 msgid "Cannot operate on \"..\"!"
@@ -2677,7 +2687,7 @@ msgid ""
 "Cannot stat source file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" iturburu fitxategiaren egoera (\"stat\") ezin lortu\n"
+"Ezin da lortu \"%s\" iturburu fitxategiaren egoera\n"
 "%s"
 
 #, c-format
@@ -2685,7 +2695,7 @@ msgid ""
 "Cannot create special file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" fitxategi berezia ezin sortu\n"
+"Ezin da sortu \"%s\" fitxategi berezia\n"
 "%s"
 
 #, c-format
@@ -2693,7 +2703,7 @@ msgid ""
 "Cannot chown target file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" helburu fitxategiaren jabea ezin aldatu\n"
+"Ezin da aldatu \"%s\" helburu fitxategiaren jabea (chown)\n"
 "%s"
 
 #, c-format
@@ -2701,7 +2711,7 @@ msgid ""
 "Cannot chmod target file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" helburu fitxategiaren baimenak ezin aldatu\n"
+"Ezin dira aldatu \"%s\" helburu fitxategiaren baimenak\n"
 "%s"
 
 #, c-format
@@ -2709,7 +2719,7 @@ msgid ""
 "Cannot open source file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" iturburu fitxategia ezin ireki\n"
+"Ezin da ireki \"%s\" iturburu fitxategia\n"
 "%s"
 
 msgid "Reget failed, about to overwrite file"
@@ -2720,7 +2730,7 @@ msgid ""
 "Cannot fstat source file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" iturburu fitxategiaren egoera (\"fstat\") ezin lortu\n"
+"Ezin da lortu \"%s\" iturburu fitxategiaren egoera (fstat)\n"
 "%s"
 
 #, c-format
@@ -2728,7 +2738,7 @@ msgid ""
 "Cannot create target file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" helburu fitxategia ezin sortu\n"
+"Ezin da sortu \"%s\" helburu fitxategia\n"
 "%s"
 
 #, c-format
@@ -2736,7 +2746,7 @@ msgid ""
 "Cannot fstat target file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" helburu fitxategiaren egoera (\"fstat\") ezin lortu\n"
+"Ezin da loortu \"%s\" helburu fitxategiaren egoera (fstat)\n"
 "%s"
 
 #, c-format
@@ -2760,7 +2770,7 @@ msgid ""
 "Cannot write target file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" helburu fitxategia ezin idatzi\n"
+"Ezin da idatzi \"%s\" helburu fitxategia\n"
 "%s"
 
 msgid "(stalled)"
@@ -2771,7 +2781,7 @@ msgid ""
 "Cannot close source file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" iturburu fitxategia ezin itxi\n"
+"Ezin da itxi \"%s\" iturburu fitxategia\n"
 "%s"
 
 #, c-format
@@ -2779,7 +2789,7 @@ msgid ""
 "Cannot close target file \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" helburu fitxategia ezin itxi\n"
+"Ezin da itxi \"%s\" helburu fitxategia\n"
 "%s"
 
 msgid "Incomplete file was retrieved. Keep it?"
@@ -2793,7 +2803,7 @@ msgid ""
 "Cannot stat source directory \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" iturburu direktorioaren egoera (\"stat\") ezin lortu\n"
+"Ezin da lortu \"%s\" iturburu direktorioaren egoera (stat)\n"
 "%s"
 
 #, c-format
@@ -2833,7 +2843,7 @@ msgid ""
 "Cannot chown target directory \"%s\"\n"
 "%s"
 msgstr ""
-"\"%s\" helburu direktorioaren jabea ezin aldatu (\"chown\")\n"
+"Ezin da aldatu \"%s\" helburu direktorioaren jabea (chown)\n"
 "%s"
 
 #, c-format
@@ -2869,17 +2879,14 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-#, fuzzy
 msgid "New     :"
-msgstr "Berria : %s, neurria %s"
+msgstr "Berria  :"
 
-#, fuzzy
 msgid "Existing:"
-msgstr "Dagoena: %s, size %s"
+msgstr "Dagoena:"
 
-#, fuzzy
 msgid "Overwrite this file?"
-msgstr "Helburu guztiak gainidatzi?"
+msgstr "Gainidatzi fitxategi hau?"
 
 msgid "A&ppend"
 msgstr "era&nskina"
@@ -2887,22 +2894,20 @@ msgstr "era&nskina"
 msgid "&Reget"
 msgstr "&Beste saiakera bat"
 
-#, fuzzy
 msgid "Overwrite all files?"
-msgstr "Helburu guztiak gainidatzi?"
+msgstr "Gainidatzi fitxategi guztiak?"
 
 msgid "Don't overwrite with &zero length file"
-msgstr ""
+msgstr "Ez gainidatzi &zero luzerako fitxategiekin"
 
 msgid "&Older"
-msgstr ""
+msgstr "&Zaharragoa"
 
 msgid "S&maller"
-msgstr ""
+msgstr "T&xikiagoa"
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "&Neurria desberdina bada"
+msgstr "&Neurri ezberdinak"
 
 msgid "File exists"
 msgstr "Fitxategia existitzen da"
@@ -3049,11 +3054,11 @@ msgstr[1] "Amaituta (%zu direktorioak baztertuta)"
 
 #, c-format
 msgid "Find File: \"%s\". Content: \"%s\""
-msgstr ""
+msgstr "Aurkitu fitxategia: \"%s\". Edukia: \"%s\""
 
 #, c-format
 msgid "Find File: \"%s\""
-msgstr ""
+msgstr "Bilatu fitxategia: \"%s\""
 
 msgid "Searching"
 msgstr "Bilatzen"
@@ -3867,9 +3872,8 @@ msgstr "ncurses liburutegia erabiltzen\n"
 msgid "Using the ncursesw library\n"
 msgstr "ncursesw liburutegia erabiltzen\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support\n"
-msgstr "builtin editorearekin\n"
+msgstr "Barneratutako editorearekin eta Aspell euskarriarekin\n"
 
 msgid "With builtin Editor\n"
 msgstr "builtin editorearekin\n"
@@ -4274,7 +4278,7 @@ msgstr "sftp: Ez dago fitxategi maneiatzaile daturik fitxategia irakurtzeko"
 
 #, c-format
 msgid "sftp: socket error: %s"
-msgstr ""
+msgstr "sftp: socket-errorea: %s"
 
 #, c-format
 msgid "sftp: (Ctrl-G break) Listing... %s"
@@ -4525,9 +4529,3 @@ msgstr "Hasieratik jarraitu?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Ezin eskuratu ondokoaren bertako kopia bat: /ftp://some.host/editme.txt"
-
-#~ msgid "Target file already exists!"
-#~ msgstr "Helburu fitxategia dagoeneko existitzen da!"
-
-#~ msgid "&Update"
-#~ msgstr "Eg&uneratu"

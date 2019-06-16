@@ -4,7 +4,7 @@
 #
 # Translators:
 # aborodin <aborodin@vmail.ru>, 2011
-# AlexL <loginov.alex.valer@gmail.com>, 2015-2018
+# AlexL <loginov.alex.valer@gmail.com>, 2015-2019
 # Alex Tkachenko <alex@bcs.zp.ua>, 1998
 # and Alex Tkachenko <alex@bcs.zp.ua>, 1998
 # aborodin <aborodin@vmail.ru>, 2009-2012
@@ -26,9 +26,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-11-24 15:03+0000\n"
-"Last-Translator: aborodin <aborodin@vmail.ru>\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-03-03 23:22+0000\n"
+"Last-Translator: AlexL <loginov.alex.valer@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/mc/mc/language/ru/)\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -1677,9 +1677,8 @@ msgstr ""
 "Текстовый редактор с дружественным интерфейсом пользователя.\n"
 "Создан для Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2019 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2018 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2019 the Free Software Foundation"
 
 msgid "About"
 msgstr "О программе"
@@ -2898,15 +2897,12 @@ msgstr "%.2f кб/с"
 msgid "%ld B/s"
 msgstr "%ld б/с"
 
-#, fuzzy
 msgid "New     :"
-msgstr "Новый:        %s, размер: %s"
+msgstr "Новый     :"
 
-#, fuzzy
 msgid "Existing:"
-msgstr "Существующий: %s, размер: %s"
+msgstr "Существующий:"
 
-#, fuzzy
 msgid "Overwrite this file?"
 msgstr "Переписать этот файл?"
 
@@ -2916,12 +2912,11 @@ msgstr "Дописать в &конец"
 msgid "&Reget"
 msgstr "Дока&чать"
 
-#, fuzzy
 msgid "Overwrite all files?"
 msgstr "Переписать все файлы?"
 
 msgid "Don't overwrite with &zero length file"
-msgstr ""
+msgstr "Не перезаписывать файл &нулевой длины"
 
 msgid "&Older"
 msgstr ""
@@ -2929,7 +2924,6 @@ msgstr ""
 msgid "S&maller"
 msgstr ""
 
-#, fuzzy
 msgid "&Size differs"
 msgstr "&Различающиеся по длине"
 
@@ -3902,9 +3896,8 @@ msgstr "С библиотекой ncurses\n"
 msgid "Using the ncursesw library\n"
 msgstr "С библиотекой ncursesw\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support\n"
-msgstr "Со встроенным редактором\n"
+msgstr "Со встроенным редактором и поддержкой Aspell\n"
 
 msgid "With builtin Editor\n"
 msgstr "Со встроенным редактором\n"

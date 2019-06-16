@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-21 01:34+0000\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Walloon (http://www.transifex.com/mc/mc/language/wa/)\n"
 "Language: wa\n"
@@ -2684,9 +2684,8 @@ msgstr ""
 msgid "Existing:"
 msgstr ""
 
-#, fuzzy
 msgid "Overwrite this file?"
-msgstr "Sipotchî cisse såme chal?"
+msgstr ""
 
 msgid "A&ppend"
 msgstr "ra&djouter å coron"
@@ -2694,9 +2693,8 @@ msgstr "ra&djouter å coron"
 msgid "&Reget"
 msgstr "&Rapexhî"
 
-#, fuzzy
 msgid "Overwrite all files?"
-msgstr "Sipotchî totes les såmes"
+msgstr ""
 
 msgid "Don't overwrite with &zero length file"
 msgstr ""
@@ -2707,9 +2705,8 @@ msgstr ""
 msgid "S&maller"
 msgstr ""
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "si li &grandeu n' est nén li minme"
+msgstr ""
 
 msgid "File exists"
 msgstr ""
@@ -4271,6 +4268,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "&Update"
-#~ msgstr "&Mete a djoû"

@@ -6,14 +6,14 @@
 # Andrius Burokas, 2017-2018
 # Nerijus Baliūnas <nerijus@users.sourceforge.net>, 2011
 # Slava Zanko <slavazanko@gmail.com>, 2011
-# Zygi Mantus <zygimantus@gmail.com>, 2016
-# Zygi Mantus <zygimantus@gmail.com>, 2016-2017
+# Zygimantus <zygimantus@gmail.com>, 2016
+# Zygimantus <zygimantus@gmail.com>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-21 01:34+0000\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/mc/mc/language/lt/)\n"
 "Language: lt\n"
@@ -2769,17 +2769,14 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-#, fuzzy
 msgid "New     :"
-msgstr "Naujas  : %s, dydis %s"
+msgstr ""
 
-#, fuzzy
 msgid "Existing:"
-msgstr "Egzistuoja: %s, dydis %s"
+msgstr ""
 
-#, fuzzy
 msgid "Overwrite this file?"
-msgstr "Perrašyti šią paskirtį?"
+msgstr ""
 
 msgid "A&ppend"
 msgstr "&Papildyti"
@@ -2787,9 +2784,8 @@ msgstr "&Papildyti"
 msgid "&Reget"
 msgstr "P&ratęsti"
 
-#, fuzzy
 msgid "Overwrite all files?"
-msgstr "Perrašyti visas paskirtis?"
+msgstr ""
 
 msgid "Don't overwrite with &zero length file"
 msgstr ""
@@ -2800,9 +2796,8 @@ msgstr ""
 msgid "S&maller"
 msgstr ""
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "Jei &skiriasi dydis"
+msgstr ""
 
 msgid "File exists"
 msgstr "Failas egzistuoja"
@@ -3764,9 +3759,8 @@ msgstr ""
 msgid "Using the ncursesw library\n"
 msgstr ""
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support\n"
-msgstr "Su vidiniu redaktoriumi\n"
+msgstr ""
 
 msgid "With builtin Editor\n"
 msgstr "Su vidiniu redaktoriumi\n"
@@ -4405,9 +4399,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "Target file already exists!"
-#~ msgstr "Toks failas jau egzistuoja!"
-
-#~ msgid "&Update"
-#~ msgstr "Atna&ujinti"

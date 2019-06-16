@@ -5,7 +5,7 @@
 # Translators:
 # Jiří Vírava <appukonrad@gmail.com>, 2015,2017
 # Karel Kopecky <kdkopx@protonmail.com>, 2017
-# Pavel Borecki <pavel.borecki@gmail.com>, 2017-2018
+# Pavel Borecki <pavel.borecki@gmail.com>, 2017-2019
 # Radek Valášek <valin@buchlovice.org>, 2014
 # Robin Kriebel <kriebel.robin@gmail.com>, 2016
 # Slava Zanko <slavazanko@gmail.com>, 2011
@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-21 09:38+0000\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-03-03 09:55+0000\n"
 "Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/mc/mc/language/cs/)\n"
 "Language: cs\n"
@@ -1656,9 +1656,8 @@ msgstr ""
 "Uživatelsky přívětivý textový editor\n"
 "napsaný pro Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2019 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2018 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2019 the Free Software Foundation"
 
 msgid "About"
 msgstr "O programu"
@@ -2880,15 +2879,12 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-#, fuzzy
 msgid "New     :"
-msgstr "Nový: %s, velikost %s"
+msgstr "Nové:"
 
-#, fuzzy
 msgid "Existing:"
-msgstr "Stávající: %s, velikost %s"
+msgstr "Existující:"
 
-#, fuzzy
 msgid "Overwrite this file?"
 msgstr "Přepsat tento soubor?"
 
@@ -2898,22 +2894,20 @@ msgstr "&Připojit"
 msgid "&Reget"
 msgstr "Naváza&t"
 
-#, fuzzy
 msgid "Overwrite all files?"
 msgstr "Přepsat všechny soubory?"
 
 msgid "Don't overwrite with &zero length file"
-msgstr ""
+msgstr "Nepřepisovat souborem nulové délky"
 
 msgid "&Older"
-msgstr ""
+msgstr "Starší"
 
 msgid "S&maller"
-msgstr ""
+msgstr "&Menší"
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "Pokud se liší veliko&st"
+msgstr "Veliko&st se liší"
 
 msgid "File exists"
 msgstr "Soubor existuje"
@@ -3887,9 +3881,8 @@ msgstr "Používá se knihovna ncurses\n"
 msgid "Using the ncursesw library\n"
 msgstr "Používá se knihovna ncursesw\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support\n"
-msgstr "Vestavěným editorem\n"
+msgstr "S vestavěným editorem a podporou Aspell\n"
 
 msgid "With builtin Editor\n"
 msgstr "Vestavěným editorem\n"
@@ -4543,9 +4536,3 @@ msgstr "Pokračovat od začátku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nedaří získat místní kopii souboru /ftp://some.host/editme.txt"
-
-#~ msgid "Target file already exists!"
-#~ msgstr "Cílový soubor už existuje!"
-
-#~ msgid "&Update"
-#~ msgstr "Akt&ualizace"

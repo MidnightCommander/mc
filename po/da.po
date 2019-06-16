@@ -7,15 +7,15 @@
 # Henry Madsen Jensen <henry@madsen-jensen.dk>, 2016
 # Joe Hansen <joedalton2@yahoo.dk>, 2014
 # Morten Bo Johansen <mortenbo@hotmail.com>, 2018
-# scootergrisen, 2018
+# scootergrisen, 2018-2019
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-26 11:43+0000\n"
-"Last-Translator: Morten Bo Johansen <mortenbo@hotmail.com>\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-03-04 17:03+0000\n"
+"Last-Translator: scootergrisen\n"
 "Language-Team: Danish (http://www.transifex.com/mc/mc/language/da/)\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
@@ -1645,7 +1645,7 @@ msgid "Word wrap line length:"
 msgstr "Linjelængde for ordombrydning:"
 
 msgid "Editor options"
-msgstr "Indstillinger for redigeringsprogram"
+msgstr "Indstillinger for editor"
 
 msgid ""
 "A user friendly text editor\n"
@@ -1654,9 +1654,8 @@ msgstr ""
 "En brugervenlig teksteditor\n"
 "skrevet til Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2019 the Free Software Foundation"
-msgstr "Ophavsret (C) 1996-2018 Free Software Foundation"
+msgstr "Ophavsret (C) 1996-2019 the Free Software Foundation"
 
 msgid "About"
 msgstr "Om"
@@ -2876,17 +2875,14 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-#, fuzzy
 msgid "New     :"
-msgstr "Ny      : %s, størrelse %s"
+msgstr "Ny      :"
 
-#, fuzzy
 msgid "Existing:"
-msgstr "Eksisterende: %s, størrelse %s"
+msgstr "Eksisterende:"
 
-#, fuzzy
 msgid "Overwrite this file?"
-msgstr "Overskriv dette mål?"
+msgstr "Overskriv filen?"
 
 msgid "A&ppend"
 msgstr "&Tilføj"
@@ -2894,22 +2890,20 @@ msgstr "&Tilføj"
 msgid "&Reget"
 msgstr "Fo&rtryd"
 
-#, fuzzy
 msgid "Overwrite all files?"
-msgstr "Overskriv alle mål?"
+msgstr "Overskriv alle filerne?"
 
 msgid "Don't overwrite with &zero length file"
-msgstr ""
+msgstr "Overskriv ikke med fil på &nul længde"
 
 msgid "&Older"
-msgstr ""
+msgstr "&Ældre"
 
 msgid "S&maller"
-msgstr ""
+msgstr "&Mindre"
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "Hvis &størrelsen er forskellig"
+msgstr "Forskellig &størrelse"
 
 msgid "File exists"
 msgstr "Fil findes"
@@ -3874,9 +3868,8 @@ msgstr "Bruger ncurses-biblioteket\n"
 msgid "Using the ncursesw library\n"
 msgstr "Bruger ncursesw-biblioteket\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support\n"
-msgstr "Med indbygget teksteditor\n"
+msgstr "Med indbygget editor og understøttelse af Aspell\n"
 
 msgid "With builtin Editor\n"
 msgstr "Med indbygget teksteditor\n"
@@ -4529,9 +4522,3 @@ msgstr "Fortsæt fra begyndelsen?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan ikke hente en lokal kopi af /ftp://en.vært/editme.txt"
-
-#~ msgid "Target file already exists!"
-#~ msgstr "Målfil findes allerede!"
-
-#~ msgid "&Update"
-#~ msgstr "&Opdater"

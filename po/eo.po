@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Keith Bowes <zooplah@gmail.com>, 2011,2016,2018
+# Keith Bowes <zooplah@gmail.com>, 2011,2016,2018-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-21 01:34+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-06-01 18:41+0000\n"
+"Last-Translator: Keith Bowes <zooplah@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -642,7 +642,7 @@ msgid "%s (%d)"
 msgstr "%s (%d)"
 
 msgid "&Abort"
-msgstr "Ĉ&esigi"
+msgstr "&Nuligi"
 
 msgid "Displays the current version"
 msgstr "Eligi la uzatan eldonon"
@@ -1072,7 +1072,7 @@ msgid "Searching %s"
 msgstr "Serĉanta en %s"
 
 msgid "File has hard-links. Detach before saving?"
-msgstr "Dosiero havas malmolajn ligilojn. Ĉu elmeti antaŭ ol konservi?"
+msgstr "Dosiero havas rektajn ligilojn. Ĉu elmeti antaŭ ol konservi?"
 
 msgid "The file has been modified in the meantime. Save anyway?"
 msgstr "La dosiero estis ekstere modifita. Ĉu senkonsidere konservi?"
@@ -1321,7 +1321,7 @@ msgid ""
 "Continue discards these changes"
 msgstr ""
 "Aktuala teksto estis modifita sen dosiera konservado.\n"
-"Daŭrigi forviŝas tiujn ŝanĝojn"
+"Daŭrigi forviŝos tiujn ŝanĝojn"
 
 msgid "In se&lection"
 msgstr "En e&lekto"
@@ -1652,9 +1652,8 @@ msgstr ""
 "Afabla tekstoredaktilo\n"
 "verkita por Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2019 the Free Software Foundation"
-msgstr "Kopirajto (C) 1996–2018 la Fondaĵo pri liberaj programoj"
+msgstr "Kopirajto (C) 1996–2019 la Fondaĵo pri liberaj programoj"
 
 msgid "About"
 msgstr "Pri"
@@ -2162,7 +2161,7 @@ msgid "&Kill"
 msgstr "&Mortigi"
 
 msgid "Background jobs"
-msgstr "F&onaj taskoj"
+msgstr "Fonaj taskoj"
 
 #, c-format
 msgid "Password for \\\\%s\\%s"
@@ -2301,7 +2300,7 @@ msgstr "ligilo: %s"
 
 #, c-format
 msgid "symlink: %s"
-msgstr "mola ligilo: %s"
+msgstr "simbola ligilo: %s"
 
 #, c-format
 msgid "Cannot chdir to \"%s\""
@@ -2374,22 +2373,22 @@ msgstr ""
 
 #, c-format
 msgid "'%s' is not a symbolic link"
-msgstr "'%s' ne estas mola ligilo"
+msgstr "'%s' ne estas simbola ligilo"
 
 #, c-format
 msgid "Symlink '%s' points to:"
 msgstr "Mola ligilo '%s' alidirektas al:"
 
 msgid "Edit symlink"
-msgstr "Redakti molan ligilon"
+msgstr "Redakti simbolan ligilon"
 
 #, c-format
 msgid "edit symlink, unable to remove %s: %s"
-msgstr "redakti molan ligilon, ne eblas forigi %s: %s"
+msgstr "redakti simbolan ligilon, ne eblas forigi %s: %s"
 
 #, c-format
 msgid "edit symlink: %s"
-msgstr "redakti molan ligilon: %s"
+msgstr "redakti simbolan ligilon: %s"
 
 msgid "FTP to machine"
 msgstr "FTP al servilo"
@@ -2525,16 +2524,20 @@ msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
+"Ne eblas trovi rektligilan fontan dosieron \"%s\"\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot create target hardlink \"%s\"\n"
 "%s"
 msgstr ""
+"Ne eblas krei celan rektan ligilon \"%s\"\n"
+"%s"
 
 #, c-format
 msgid "Cannot create target hardlink \"%s\""
-msgstr ""
+msgstr "Ne eblas krei celan rektan ligilon \"%s\""
 
 #, c-format
 msgid ""
@@ -2549,16 +2552,16 @@ msgid ""
 "\n"
 "Option Stable Symlinks will be disabled"
 msgstr ""
-"Ne eblas fari stabilajn molajn ligilojn inter foraj dosiersistemoj:\n"
+"Ne eblas fari stabilajn simbolajn ligilojn inter foraj dosiersistemoj:\n"
 "\n"
-"La agordaĵo \"Stabilaj molaj ligiloj\" estos malaktivigita"
+"La agordaĵo \"Stabilaj simbolaj ligiloj\" estos malaktivigita"
 
 #, c-format
 msgid ""
 "Cannot create target symlink \"%s\"\n"
 "%s"
 msgstr ""
-"Ne eblas krei celan molan ligilon \"%s\"\n"
+"Ne eblas krei celan simbolan ligilon \"%s\"\n"
 "%s"
 
 #, c-format
@@ -2809,7 +2812,7 @@ msgid ""
 "Cannot copy cyclic symbolic link\n"
 "\"%s\""
 msgstr ""
-"Ne eblas kopii ciklan molan ligilon\n"
+"Ne eblas kopii ciklan simbolan ligilon\n"
 "\"%s\""
 
 #, c-format
@@ -2855,7 +2858,7 @@ msgstr "%d:%02d.%02d"
 
 #, c-format
 msgid "ETA %s"
-msgstr "Taskita resto: %s"
+msgstr "Proksimuma restanta tempo: %s"
 
 #, c-format
 msgid "%.2f MB/s"
@@ -2869,17 +2872,14 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-#, fuzzy
 msgid "New     :"
-msgstr "Nova: %s, grando %s"
+msgstr "Nova:"
 
-#, fuzzy
 msgid "Existing:"
-msgstr "Jama: %s, grando %s"
+msgstr "Jama:"
 
-#, fuzzy
 msgid "Overwrite this file?"
-msgstr "Ĉu anstataŭigi ĉi tiun celon?"
+msgstr "Ĉu anstataŭigi ĉi tiun dosieron?"
 
 msgid "A&ppend"
 msgstr "Al&meti"
@@ -2887,22 +2887,20 @@ msgstr "Al&meti"
 msgid "&Reget"
 msgstr "&Reakiri"
 
-#, fuzzy
 msgid "Overwrite all files?"
-msgstr "Ĉu anstataŭigi ĉiujn celojn?"
+msgstr "Ĉu anstataŭigi ĉiujn dosierojn?"
 
 msgid "Don't overwrite with &zero length file"
-msgstr ""
+msgstr "Ne anstataŭigi per &dosiero de nula longo"
 
 msgid "&Older"
-msgstr ""
+msgstr "Pli m&alnova"
 
 msgid "S&maller"
-msgstr ""
+msgstr "&Pli malgranda"
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "Se &grando malsamas"
+msgstr "&Grando malsamas"
 
 msgid "File exists"
 msgstr "Dosiero ekzistas"
@@ -2967,7 +2965,7 @@ msgid "Di&ve into subdir if exists"
 msgstr "Plo&nĝi en subdosierujon se ĝi ekzistas"
 
 msgid "&Stable symlinks"
-msgstr "&Stabilaj molaj ligiloj"
+msgstr "&Stabilaj simbolaj ligiloj"
 
 msgid "&Background"
 msgstr "&Fone"
@@ -3334,10 +3332,10 @@ msgid "&Symlink"
 msgstr "&Mola ligilo"
 
 msgid "Relative symlin&k"
-msgstr "&Relativa mola ligilo"
+msgstr "&Relativa simbola ligilo"
 
 msgid "Edit s&ymlink"
-msgstr "Re&dakti molan ligilon"
+msgstr "Re&dakti simbolan ligilon"
 
 msgid "Ch&own"
 msgstr "Ŝanĝi estre&con"
@@ -3866,9 +3864,8 @@ msgstr "Uzanta la bibliotekon ncurses\n"
 msgid "Using the ncursesw library\n"
 msgstr "Uzanta la bibliotekon ncursesw\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support\n"
-msgstr "Kun interna tekstoredaktilo\n"
+msgstr "Kun interna tekstoredaktilo kaj literumilo\n"
 
 msgid "With builtin Editor\n"
 msgstr "Kun interna tekstoredaktilo\n"
@@ -4004,7 +4001,7 @@ msgid ""
 "in cpio archive\n"
 "%s"
 msgstr ""
-"Malkonsekvencaj malmolaj ligiloj de\n"
+"Malkonsekvencaj rektaj ligiloj de\n"
 "%s\n"
 "en cpio-dosiero\n"
 "%s"
@@ -4178,10 +4175,10 @@ msgid "ftpfs: CWD failed."
 msgstr "ftpfs: CWD malsukcesis."
 
 msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: ne eblas solvi molan ligilon"
+msgstr "ftpfs: ne eblas solvi simbolan ligilon"
 
 msgid "Resolving symlink..."
-msgstr "Solvanta molan ligilon..."
+msgstr "Solvanta simbolan ligilon..."
 
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
@@ -4231,7 +4228,7 @@ msgid "sftp: an error occurred while reading %s: %s"
 msgstr "sftp: Eraro okazis dum lego de %s: %s"
 
 msgid "sftp: Unable to get current user name."
-msgstr "sftp: Ne eblas atingi la aktualan salutnomon."
+msgstr "sftp: Ne eblas atingi la uzatan salutnomon."
 
 msgid "sftp: Invalid host name."
 msgstr "sftp: Nevalida retnodnomo."
@@ -4522,9 +4519,3 @@ msgstr "Ĉu deiri de la komenco?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Ne eblas atingi lokan kopion de /ftp://some.host/editme.txt"
-
-#~ msgid "Target file already exists!"
-#~ msgstr "Cela dosiero jam ekzistas!"
-
-#~ msgid "&Update"
-#~ msgstr "&Aktualigi"

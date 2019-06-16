@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Kristjan Räts <kristjanrats@gmail.com>, 2013-2016,2018
+# Kristjan Räts <kristjanrats@gmail.com>, 2013-2016,2018-2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-21 01:34+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-03-05 18:33+0000\n"
+"Last-Translator: Kristjan Räts <kristjanrats@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
@@ -1652,7 +1652,7 @@ msgstr ""
 "on loodud Midnight Commanderile."
 
 msgid "Copyright (C) 1996-2019 the Free Software Foundation"
-msgstr ""
+msgstr "Autoriõigus (c) 1996-2019 Free Software Foundation"
 
 msgid "About"
 msgstr "Programmist"
@@ -1940,7 +1940,7 @@ msgid "Sa&fe delete"
 msgstr "&Kindel kustutamine"
 
 msgid "Safe overwrite"
-msgstr ""
+msgstr "Turvaline ülekirjutamine"
 
 msgid "A&uto save setup"
 msgstr "Seadete a&utomaatsalvestus"
@@ -2520,16 +2520,20 @@ msgid ""
 "Cannot stat hardlink source file \"%s\"\n"
 "%s"
 msgstr ""
+"Jäikviida lähtefaili \"%s\" info päring nurjus\n"
+"%s"
 
 #, c-format
 msgid ""
 "Cannot create target hardlink \"%s\"\n"
 "%s"
 msgstr ""
+"Jäikviida sihtfaili \"%s\" loomine nurjus\n"
+"%s"
 
 #, c-format
 msgid "Cannot create target hardlink \"%s\""
-msgstr ""
+msgstr "Jäikviida sihtfaili \"%s\" loomine nurjus"
 
 #, c-format
 msgid ""
@@ -2774,7 +2778,7 @@ msgid ""
 "Cannot close target file \"%s\"\n"
 "%s"
 msgstr ""
-"Sihtfaili \"%s\" silgemine nurjus\n"
+"Sihtfaili \"%s\" sulgemine nurjus\n"
 "%s"
 
 msgid "Incomplete file was retrieved. Keep it?"
@@ -2864,17 +2868,14 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-#, fuzzy
 msgid "New     :"
-msgstr "Uus %s, suurus %s"
+msgstr "Uus:"
 
-#, fuzzy
 msgid "Existing:"
-msgstr "Olemasolev: %s, suurus %s"
+msgstr "Olemasolev:"
 
-#, fuzzy
 msgid "Overwrite this file?"
-msgstr "Kas kirjutada see sihtkoht üle?"
+msgstr "Kas kirjutada see fail üle?"
 
 msgid "A&ppend"
 msgstr "&Lisa"
@@ -2882,22 +2883,20 @@ msgstr "&Lisa"
 msgid "&Reget"
 msgstr "&Uuesti"
 
-#, fuzzy
 msgid "Overwrite all files?"
-msgstr "Kas kirjutada kõik sihtkohad üle?"
+msgstr "Kas kirjutada kõik failid üle?"
 
 msgid "Don't overwrite with &zero length file"
-msgstr ""
+msgstr "Ära kirjuta üle &tühje faile"
 
 msgid "&Older"
-msgstr ""
+msgstr "&Vanemad"
 
 msgid "S&maller"
-msgstr ""
+msgstr "Vä&iksemad"
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "Kui &suurus erineb"
+msgstr "&Suurus erineb"
 
 msgid "File exists"
 msgstr "Fail on olemas"
@@ -3044,11 +3043,11 @@ msgstr[1] "Lõpetatud (%zu kataloogi eirati)"
 
 #, c-format
 msgid "Find File: \"%s\". Content: \"%s\""
-msgstr ""
+msgstr "Otsi faile: \"%s\". Sisu: \"%s\""
 
 #, c-format
 msgid "Find File: \"%s\""
-msgstr ""
+msgstr "Otsi faile: \"%s\""
 
 msgid "Searching"
 msgstr "Otsimine"
@@ -3861,9 +3860,8 @@ msgstr "Kasutatakse teeki ncurses\n"
 msgid "Using the ncursesw library\n"
 msgstr "Kasutatakse teeki ncursesw\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support\n"
-msgstr "Sisseehitatud toimetiga\n"
+msgstr "Sisseehitatud toimeti ja Aspelli toega\n"
 
 msgid "With builtin Editor\n"
 msgstr "Sisseehitatud toimetiga\n"
@@ -4516,9 +4514,3 @@ msgstr "Kas jätkata algusest?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kohaliku koopia hankimine failist /ftp://some.host/editme.txt nurjus"
-
-#~ msgid "Target file already exists!"
-#~ msgstr "Sihtfail on juba olemas!"
-
-#~ msgid "&Update"
-#~ msgstr "&Uuenda"

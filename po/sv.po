@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-21 01:34+0000\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/mc/mc/language/sv/)\n"
 "Language: sv\n"
@@ -2873,17 +2873,14 @@ msgstr "%.2f kB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-#, fuzzy
 msgid "New     :"
-msgstr "Ny       : %s, size %s"
+msgstr ""
 
-#, fuzzy
 msgid "Existing:"
-msgstr "Nuvarande: %s, size %s"
+msgstr ""
 
-#, fuzzy
 msgid "Overwrite this file?"
-msgstr "Skriv över målfilen?"
+msgstr ""
 
 msgid "A&ppend"
 msgstr "&Lägg till"
@@ -2891,9 +2888,8 @@ msgstr "&Lägg till"
 msgid "&Reget"
 msgstr "&Hämta om"
 
-#, fuzzy
 msgid "Overwrite all files?"
-msgstr "Skriv över alla målfiler?"
+msgstr ""
 
 msgid "Don't overwrite with &zero length file"
 msgstr ""
@@ -2904,9 +2900,8 @@ msgstr ""
 msgid "S&maller"
 msgstr ""
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "Om s&torleken skiljer"
+msgstr ""
 
 msgid "File exists"
 msgstr "Filen finns"
@@ -3870,9 +3865,8 @@ msgstr "Använder ncurses-biblioteket\n"
 msgid "Using the ncursesw library\n"
 msgstr "Använder ncursesw-biblioteket\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support\n"
-msgstr "Med inbyggd editor\n"
+msgstr ""
 
 msgid "With builtin Editor\n"
 msgstr "Med inbyggd editor\n"
@@ -4525,9 +4519,3 @@ msgstr "Fortsätt från början?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan inte hämta en lokal kopia av /ftp://some.host/editme.txt"
-
-#~ msgid "Target file already exists!"
-#~ msgstr "Målfilen finns redan!"
-
-#~ msgid "&Update"
-#~ msgstr "&Uppdatera"

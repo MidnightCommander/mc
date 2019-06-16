@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-21 01:34+0000\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/mc/mc/language/vi/)\n"
 "Language: vi\n"
@@ -2686,9 +2686,8 @@ msgstr ""
 msgid "Existing:"
 msgstr ""
 
-#, fuzzy
 msgid "Overwrite this file?"
-msgstr "Khi đè lên tập tin này?"
+msgstr ""
 
 msgid "A&ppend"
 msgstr "&Thêm vào cuối"
@@ -2696,9 +2695,8 @@ msgstr "&Thêm vào cuối"
 msgid "&Reget"
 msgstr "&Lấy lại"
 
-#, fuzzy
 msgid "Overwrite all files?"
-msgstr "Khi đè lên mọi tập tin đích?"
+msgstr ""
 
 msgid "Don't overwrite with &zero length file"
 msgstr ""
@@ -2709,9 +2707,8 @@ msgstr ""
 msgid "S&maller"
 msgstr ""
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "&Nếu kích thước khác nhau"
+msgstr ""
 
 msgid "File exists"
 msgstr ""
@@ -3656,9 +3653,8 @@ msgstr ""
 msgid "Using the ncursesw library\n"
 msgstr ""
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support\n"
-msgstr "Với Trình soạn thảo nội trú\n"
+msgstr ""
 
 msgid "With builtin Editor\n"
 msgstr "Với Trình soạn thảo nội trú\n"
@@ -4290,6 +4286,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "&Update"
-#~ msgstr "&Cập nhật"

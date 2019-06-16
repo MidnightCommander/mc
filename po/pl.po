@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Piotr Drąg <piotrdrag@gmail.com>, 2011-2018
+# Piotr Drąg <piotrdrag@gmail.com>, 2011-2019
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-21 15:33+0000\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-03-02 15:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/mc/mc/language/pl/)\n"
 "Language: pl\n"
@@ -1661,9 +1661,8 @@ msgstr ""
 "Łatwy w obsłudze edytor tekstu,\n"
 "napisany dla programu Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2019 the Free Software Foundation"
-msgstr "Copyright © 1996-2018 Free Software Foundation"
+msgstr "Copyright © 1996-2019 Free Software Foundation"
 
 msgid "About"
 msgstr "O programie"
@@ -2882,17 +2881,14 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-#, fuzzy
 msgid "New     :"
-msgstr "Nowy      : %s, rozmiar %s"
+msgstr "Nowy      :"
 
-#, fuzzy
 msgid "Existing:"
-msgstr "Istniejący: %s, rozmiar %s"
+msgstr "Istniejący:"
 
-#, fuzzy
 msgid "Overwrite this file?"
-msgstr "Zastąpić ten plik docelowy?"
+msgstr "Zastąpić ten plik?"
 
 msgid "A&ppend"
 msgstr "&Dołącz"
@@ -2900,22 +2896,20 @@ msgstr "&Dołącz"
 msgid "&Reget"
 msgstr "&Wznów"
 
-#, fuzzy
 msgid "Overwrite all files?"
-msgstr "Zastąpić wszystkie pliki docelowe?"
+msgstr "Zastąpić wszystkie pliki?"
 
 msgid "Don't overwrite with &zero length file"
-msgstr ""
+msgstr "&Bez zastępowania plikiem o zerowej długości"
 
 msgid "&Older"
-msgstr ""
+msgstr "&Starszy"
 
 msgid "S&maller"
-msgstr ""
+msgstr "&Mniejszy"
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "Jeśli różni się &rozmiar"
+msgstr "&Rozmiary się różnią"
 
 msgid "File exists"
 msgstr "Plik istnieje"
@@ -3889,9 +3883,8 @@ msgstr "Używanie biblioteki ncurses\n"
 msgid "Using the ncursesw library\n"
 msgstr "Używanie biblioteki ncursesw\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support\n"
-msgstr "Z wbudowanym edytorem\n"
+msgstr "Z wbudowanym edytorem i obsługą Aspell\n"
 
 msgid "With builtin Editor\n"
 msgstr "Z wbudowanym edytorem\n"
@@ -4545,9 +4538,3 @@ msgstr "Kontynuować od początku?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Nie można pobrać lokalnej kopii /ftp://jakiś.komputer/modyfikuj_mnie.txt"
-
-#~ msgid "Target file already exists!"
-#~ msgstr "Plik docelowy już istnieje."
-
-#~ msgid "&Update"
-#~ msgstr "Zakt&ualizuj"

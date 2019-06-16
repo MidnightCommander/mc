@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-21 01:34+0000\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Azerbaijani (http://www.transifex.com/mc/mc/language/az/)\n"
 "Language: az\n"
@@ -2686,9 +2686,8 @@ msgstr ""
 msgid "Existing:"
 msgstr ""
 
-#, fuzzy
 msgid "Overwrite this file?"
-msgstr "Bu hədəfin üstünə yazım mı?"
+msgstr ""
 
 msgid "A&ppend"
 msgstr "A&ppend"
@@ -2696,9 +2695,8 @@ msgstr "A&ppend"
 msgid "&Reget"
 msgstr "&Reget"
 
-#, fuzzy
 msgid "Overwrite all files?"
-msgstr "Bütün hədəflərin üstünə yazılsın mı?"
+msgstr ""
 
 msgid "Don't overwrite with &zero length file"
 msgstr ""
@@ -2709,9 +2707,8 @@ msgstr ""
 msgid "S&maller"
 msgstr ""
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "Başqa &Böyüklükdə isə"
+msgstr ""
 
 msgid "File exists"
 msgstr ""
@@ -3657,9 +3654,8 @@ msgstr ""
 msgid "Using the ncursesw library\n"
 msgstr ""
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support\n"
-msgstr "Daxili düzəldici ilə birlikdə\n"
+msgstr ""
 
 msgid "With builtin Editor\n"
 msgstr "Daxili düzəldici ilə birlikdə\n"
@@ -4290,6 +4286,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "&Update"
-#~ msgstr "&Güncəllə"

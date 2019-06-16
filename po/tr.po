@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-21 01:34+0000\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
 "Language: tr\n"
@@ -2868,17 +2868,14 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-#, fuzzy
 msgid "New     :"
-msgstr "Yeni     :%s, boyut %s"
+msgstr ""
 
-#, fuzzy
 msgid "Existing:"
-msgstr "Mevcut: %s, boyut %s"
+msgstr ""
 
-#, fuzzy
 msgid "Overwrite this file?"
-msgstr "Üzerine yazılsın mı?"
+msgstr ""
 
 msgid "A&ppend"
 msgstr "Sonuna &Ekle"
@@ -2886,9 +2883,8 @@ msgstr "Sonuna &Ekle"
 msgid "&Reget"
 msgstr "&Reget"
 
-#, fuzzy
 msgid "Overwrite all files?"
-msgstr "Tüm hedeflerin üstüne yazılsın mı?"
+msgstr ""
 
 msgid "Don't overwrite with &zero length file"
 msgstr ""
@@ -2899,9 +2895,8 @@ msgstr ""
 msgid "S&maller"
 msgstr ""
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "Boyut &Farklıysa"
+msgstr ""
 
 msgid "File exists"
 msgstr "Dosya var"
@@ -3866,9 +3861,8 @@ msgstr "Ncurses kütüphanesini kullanılarak\n"
 msgid "Using the ncursesw library\n"
 msgstr "ncursesw kitaplığı kullanılarak\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support\n"
-msgstr "Yerleşik Düzenleyiciyle\n"
+msgstr ""
 
 msgid "With builtin Editor\n"
 msgstr "Yerleşik Düzenleyiciyle\n"
@@ -4522,9 +4516,3 @@ msgstr "Başından devam edilsin mi?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr " /ftp://some.host/editme.txt 'in yerel kopyası alınamadı"
-
-#~ msgid "Target file already exists!"
-#~ msgstr "Hedef dosya \"s\" zaten var!"
-
-#~ msgid "&Update"
-#~ msgstr "&Güncelle"

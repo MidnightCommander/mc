@@ -5,14 +5,14 @@
 # Translators:
 # Gilberto J <2101458@my.ipleiria.pt>, 2012
 # Gilberto Jorge <gmj125@gmail.com>, 2012-2013
-# Gilberto Jorge <gmj125@gmail.com>, 2013-2018
+# Gilberto Jorge <gmj125@gmail.com>, 2013-2019
 # Slava Zanko <slavazanko@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-21 14:51+0000\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-03-05 11:24+0000\n"
 "Last-Translator: Gilberto Jorge <gmj125@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/mc/mc/language/pt/)\n"
 "Language: pt\n"
@@ -1657,9 +1657,8 @@ msgstr ""
 "Um editor de texto amigo do utilizador\n"
 "escrito para o Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2019 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2018 the Free Software Foundation"
+msgstr "Copyright (C) 1996-2019 the Free Software Foundation"
 
 msgid "About"
 msgstr "Acerca"
@@ -2879,17 +2878,14 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-#, fuzzy
 msgid "New     :"
-msgstr "Novo : %s, tamanho %s"
+msgstr "Novo     :"
 
-#, fuzzy
 msgid "Existing:"
-msgstr "Existente: %s, tamanho %s"
+msgstr "Existente:"
 
-#, fuzzy
 msgid "Overwrite this file?"
-msgstr "Escrever por cima deste alvo?"
+msgstr "Escrever por cima deste ficheiro?"
 
 msgid "A&ppend"
 msgstr "&Acrescentar"
@@ -2897,22 +2893,20 @@ msgstr "&Acrescentar"
 msgid "&Reget"
 msgstr "&Re-obter"
 
-#, fuzzy
 msgid "Overwrite all files?"
-msgstr "Escrever por cima de todos os alvos?"
+msgstr "Escrever por cima de todos os ficheiros?"
 
 msgid "Don't overwrite with &zero length file"
-msgstr ""
+msgstr "Não escrever por cima com um ficheiro de tamanho &zero"
 
 msgid "&Older"
-msgstr ""
+msgstr "Antig&o"
 
 msgid "S&maller"
-msgstr ""
+msgstr "Peq&ueno"
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "&Se tamanho diferir"
+msgstr "Tamanho é &diferente"
 
 msgid "File exists"
 msgstr "Ficheiro existe"
@@ -3877,9 +3871,8 @@ msgstr "A usar a biblioteca ncurses\n"
 msgid "Using the ncursesw library\n"
 msgstr "A usar a biblioteca ncurses\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support\n"
-msgstr "Com Editor incorporado\n"
+msgstr "Com Editor interno e auxílio do Aspell\n"
 
 msgid "With builtin Editor\n"
 msgstr "Com Editor incorporado\n"
@@ -4532,9 +4525,3 @@ msgstr "Continuar do início?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Não é possível obter uma cópia local de /ftp://some.host/editme.txt"
-
-#~ msgid "Target file already exists!"
-#~ msgstr "Ficheiro alvo já existe!"
-
-#~ msgid "&Update"
-#~ msgstr "At&ualizar"

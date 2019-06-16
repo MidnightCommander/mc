@@ -5,15 +5,16 @@
 # Translators:
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Viktar Palstsiuk <vipals@gmail.com>, 2015
-# Zmicer Turok <zmicerturok@gmail.com>, 2018
+# Yury V. Zaytsev <yury@shurup.com>, 2019
+# Zmicer Turok <nashtlumach@gmail.com>, 2018
 # Zmicer Turok <zmicerturok@gmail.com >, 2017-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-21 01:34+0000\n"
-"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-06-16 17:59+0000\n"
+"Last-Translator: Yury V. Zaytsev <yury@shurup.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/mc/mc/language/be/)\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
@@ -94,7 +95,7 @@ msgstr ""
 "Старыя налады перанеслі з «%s»\n"
 " у каталогі, якія раіць «Freedesktop».\n"
 "Па падрабязнасці завітайце сюды:\n"
-"http: //standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
+"http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html"
 
 #, c-format
 msgid ""
@@ -1656,9 +1657,8 @@ msgstr ""
 "Зручны тэкставы рэдактар,\n"
 "напісаны для Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2019 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2018 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "Пра праграму"
@@ -2871,17 +2871,14 @@ msgstr "%.2f кБ/с"
 msgid "%ld B/s"
 msgstr "%ld Б/с"
 
-#, fuzzy
 msgid "New     :"
-msgstr "Новы : %s, памер %s"
+msgstr ""
 
-#, fuzzy
 msgid "Existing:"
-msgstr "Існуючы: %s, памер %s"
+msgstr ""
 
-#, fuzzy
 msgid "Overwrite this file?"
-msgstr "Перазапісаць файл?"
+msgstr ""
 
 msgid "A&ppend"
 msgstr "Дапісаць у канец(&P)"
@@ -2889,9 +2886,8 @@ msgstr "Дапісаць у канец(&P)"
 msgid "&Reget"
 msgstr "Дапампаваць(&R)"
 
-#, fuzzy
 msgid "Overwrite all files?"
-msgstr "Перазапісаць усё?"
+msgstr ""
 
 msgid "Don't overwrite with &zero length file"
 msgstr ""
@@ -2902,9 +2898,8 @@ msgstr ""
 msgid "S&maller"
 msgstr ""
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "Розныя памерам(&S)"
+msgstr ""
 
 msgid "File exists"
 msgstr "Файл існуе"
@@ -3876,9 +3871,8 @@ msgstr "З бібліятэкай «ncurses»\n"
 msgid "Using the ncursesw library\n"
 msgstr "З бібліятэкай «ncursesw»\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support\n"
-msgstr "З убудаваным рэдактарам\n"
+msgstr ""
 
 msgid "With builtin Editor\n"
 msgstr "З убудаваным рэдактарам\n"
@@ -4532,9 +4526,3 @@ msgstr "Працягваць ад пачатку?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Немагчыма атрымаць лакальную копію /ftp://some.host/editme.txt"
-
-#~ msgid "Target file already exists!"
-#~ msgstr "Файл ужо сінуе!"
-
-#~ msgid "&Update"
-#~ msgstr "Састарэлыя(&U)"

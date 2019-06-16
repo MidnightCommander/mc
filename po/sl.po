@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-21 01:34+0000\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Slovenian (http://www.transifex.com/mc/mc/language/sl/)\n"
 "Language: sl\n"
@@ -2696,9 +2696,8 @@ msgstr ""
 msgid "Existing:"
 msgstr ""
 
-#, fuzzy
 msgid "Overwrite this file?"
-msgstr "Prepiši ta cilj"
+msgstr ""
 
 msgid "A&ppend"
 msgstr "&Pripni"
@@ -2706,9 +2705,8 @@ msgstr "&Pripni"
 msgid "&Reget"
 msgstr "&Znova dobi"
 
-#, fuzzy
 msgid "Overwrite all files?"
-msgstr "Prepiši vse cilje?"
+msgstr ""
 
 msgid "Don't overwrite with &zero length file"
 msgstr ""
@@ -2719,9 +2717,8 @@ msgstr ""
 msgid "S&maller"
 msgstr ""
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "Če se &velikost razlikuje"
+msgstr ""
 
 msgid "File exists"
 msgstr ""
@@ -3675,9 +3672,8 @@ msgstr ""
 msgid "Using the ncursesw library\n"
 msgstr ""
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support\n"
-msgstr "Z vgrajenim urejevalnikom\n"
+msgstr ""
 
 msgid "With builtin Editor\n"
 msgstr "Z vgrajenim urejevalnikom\n"
@@ -4310,6 +4306,3 @@ msgstr ""
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
-
-#~ msgid "&Update"
-#~ msgstr "&Osveži"

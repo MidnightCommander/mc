@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-21 01:34+0000\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
 "Language: hu\n"
@@ -2856,17 +2856,14 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-#, fuzzy
 msgid "New     :"
-msgstr "Új: %s, mérete: %s"
+msgstr ""
 
-#, fuzzy
 msgid "Existing:"
-msgstr "Jelenlegi: %s, mérete: %s"
+msgstr ""
 
-#, fuzzy
 msgid "Overwrite this file?"
-msgstr "Felülírja ezt a fájlt?"
+msgstr ""
 
 msgid "A&ppend"
 msgstr "&Hozzáírás"
@@ -2874,9 +2871,8 @@ msgstr "&Hozzáírás"
 msgid "&Reget"
 msgstr "&Kiegészítés"
 
-#, fuzzy
 msgid "Overwrite all files?"
-msgstr "Minden célfájlt felülír?"
+msgstr ""
 
 msgid "Don't overwrite with &zero length file"
 msgstr ""
@@ -2887,9 +2883,8 @@ msgstr ""
 msgid "S&maller"
 msgstr ""
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "Ha más a mére&te"
+msgstr ""
 
 msgid "File exists"
 msgstr "A fájl már létezik"
@@ -3856,9 +3851,8 @@ msgstr "Az ncurses könyvtár használata\n"
 msgid "Using the ncursesw library\n"
 msgstr "Az ncursesw könyvtár használata\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support\n"
-msgstr "Beépített szövegszerkesztővel\n"
+msgstr ""
 
 msgid "With builtin Editor\n"
 msgstr "Beépített szövegszerkesztővel\n"
@@ -4507,9 +4501,3 @@ msgstr "Folytatás az elejéről?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nem sikerült behozni /ftp://some.host/editme.txt helyi másolatát"
-
-#~ msgid "Target file already exists!"
-#~ msgstr "A célfájl már létezik!"
-
-#~ msgid "&Update"
-#~ msgstr "Ha &régebbi"

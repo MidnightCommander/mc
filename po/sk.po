@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-21 01:34+0000\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/mc/mc/language/sk/)\n"
 "Language: sk\n"
@@ -2863,17 +2863,14 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-#, fuzzy
 msgid "New     :"
-msgstr "Nový      : %s, veľkosť %s"
+msgstr ""
 
-#, fuzzy
 msgid "Existing:"
-msgstr "Existujúci: %s, veľkosť %s"
+msgstr ""
 
-#, fuzzy
 msgid "Overwrite this file?"
-msgstr "Prepísať tento cieľ?"
+msgstr ""
 
 msgid "A&ppend"
 msgstr "&Pridať"
@@ -2881,9 +2878,8 @@ msgstr "&Pridať"
 msgid "&Reget"
 msgstr "&Znovu získať"
 
-#, fuzzy
 msgid "Overwrite all files?"
-msgstr "Prepísať všetky ciele?"
+msgstr ""
 
 msgid "Don't overwrite with &zero length file"
 msgstr ""
@@ -2894,9 +2890,8 @@ msgstr ""
 msgid "S&maller"
 msgstr ""
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "Ak &sa líši veľkosť"
+msgstr ""
 
 msgid "File exists"
 msgstr "Súbor existuje"
@@ -3870,9 +3865,8 @@ msgstr "Používa sa knižnica ncurses\n"
 msgid "Using the ncursesw library\n"
 msgstr "Používa sa knižnica ncursesw\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support\n"
-msgstr "So zabudovaným editorom\n"
+msgstr ""
 
 msgid "With builtin Editor\n"
 msgstr "So zabudovaným editorom\n"
@@ -4525,9 +4519,3 @@ msgstr "Pokračovať od začiatku?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nemožno stiahnuť lokálnu kópiu /ftp://some.host/editme.txt"
-
-#~ msgid "Target file already exists!"
-#~ msgstr "Cieľový súbor už existuje!"
-
-#~ msgid "&Update"
-#~ msgstr "Akt&ualizovať"

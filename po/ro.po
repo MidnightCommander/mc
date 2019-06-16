@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-21 01:34+0000\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
 "Language: ro\n"
@@ -2875,17 +2875,14 @@ msgstr "%.2f KO/s"
 msgid "%ld B/s"
 msgstr "%ld O/s"
 
-#, fuzzy
 msgid "New     :"
-msgstr "Nou     : %s, mărime %s"
+msgstr ""
 
-#, fuzzy
 msgid "Existing:"
-msgstr "Existent: %s, mărime %s"
+msgstr ""
 
-#, fuzzy
 msgid "Overwrite this file?"
-msgstr "Suprascrie destinația?"
+msgstr ""
 
 msgid "A&ppend"
 msgstr "Adau&gă"
@@ -2893,9 +2890,8 @@ msgstr "Adau&gă"
 msgid "&Reget"
 msgstr "&Readuc"
 
-#, fuzzy
 msgid "Overwrite all files?"
-msgstr "Suprascrie toate destinațiile?"
+msgstr ""
 
 msgid "Don't overwrite with &zero length file"
 msgstr ""
@@ -2906,9 +2902,8 @@ msgstr ""
 msgid "S&maller"
 msgstr ""
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "Dacă mă&rimea diferă"
+msgstr ""
 
 msgid "File exists"
 msgstr "Fișierul există"
@@ -3877,9 +3872,8 @@ msgstr "Folosind librăria ncurses\n"
 msgid "Using the ncursesw library\n"
 msgstr "Folosind librăria ncursesw\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support\n"
-msgstr "Cu editor integrat\n"
+msgstr ""
 
 msgid "With builtin Editor\n"
 msgstr "Cu editor integrat\n"
@@ -4534,9 +4528,3 @@ msgstr "Continuă de la început?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Nu se poate aduce o copie locală a /ftp://some.host/editme.txt"
-
-#~ msgid "Target file already exists!"
-#~ msgstr "Fișierul destinație deja există!"
-
-#~ msgid "&Update"
-#~ msgstr "Act&ualizează"

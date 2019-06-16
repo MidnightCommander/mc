@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-21 01:34+0000\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/mc/mc/language/nl/)\n"
 "Language: nl\n"
@@ -2870,17 +2870,14 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-#, fuzzy
 msgid "New     :"
-msgstr "Nieuw : %s, grootte %s"
+msgstr ""
 
-#, fuzzy
 msgid "Existing:"
-msgstr "Bestaand: %s, grootte %s"
+msgstr ""
 
-#, fuzzy
 msgid "Overwrite this file?"
-msgstr "Dit doel overschrijven?"
+msgstr ""
 
 msgid "A&ppend"
 msgstr "&Toevoegen"
@@ -2888,9 +2885,8 @@ msgstr "&Toevoegen"
 msgid "&Reget"
 msgstr "&Reget"
 
-#, fuzzy
 msgid "Overwrite all files?"
-msgstr "Alle doelen overschrijven?"
+msgstr ""
 
 msgid "Don't overwrite with &zero length file"
 msgstr ""
@@ -2901,9 +2897,8 @@ msgstr ""
 msgid "S&maller"
 msgstr ""
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "Indien grootte ver&schilt"
+msgstr ""
 
 msgid "File exists"
 msgstr "Bestand bestaat"
@@ -3869,9 +3864,8 @@ msgstr "Gebruiken van ncurses bibliotheek\n"
 msgid "Using the ncursesw library\n"
 msgstr "Gebruiken van ncursesw bibliotheek\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support\n"
-msgstr "Met ingebouwde editor\n"
+msgstr ""
 
 msgid "With builtin Editor\n"
 msgstr "Met ingebouwde editor\n"
@@ -4516,9 +4510,3 @@ msgstr "Doorgaan vanaf het begin?"
 
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr "Kan geen lokale versie van /ftp://some.host/editme.txt ophalen"
-
-#~ msgid "Target file already exists!"
-#~ msgstr "Doelbestand  bestaat reeds!"
-
-#~ msgid "&Update"
-#~ msgstr "Verversen"

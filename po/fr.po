@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-21 01:34+0000\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/mc/mc/language/fr/)\n"
 "Language: fr\n"
@@ -1667,9 +1667,8 @@ msgstr ""
 "Un éditeur de text facile d'utilisation.\n"
 "écrit pour Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2019 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2018 the Free Software Foundation"
+msgstr ""
 
 msgid "About"
 msgstr "À propos"
@@ -2884,17 +2883,14 @@ msgstr "%.2f Ko/s"
 msgid "%ld B/s"
 msgstr "%ld o/s"
 
-#, fuzzy
 msgid "New     :"
-msgstr "Nouveau : %s, de taille %s"
+msgstr ""
 
-#, fuzzy
 msgid "Existing:"
-msgstr "Existant : %s, taille %s"
+msgstr ""
 
-#, fuzzy
 msgid "Overwrite this file?"
-msgstr "Écraser cette cible ?"
+msgstr ""
 
 msgid "A&ppend"
 msgstr "a&joute"
@@ -2902,9 +2898,8 @@ msgstr "a&joute"
 msgid "&Reget"
 msgstr "&Réobtenir"
 
-#, fuzzy
 msgid "Overwrite all files?"
-msgstr "Écraser toutes les cibles?"
+msgstr ""
 
 msgid "Don't overwrite with &zero length file"
 msgstr ""
@@ -2915,9 +2910,8 @@ msgstr ""
 msgid "S&maller"
 msgstr ""
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "&Si la taille diffère"
+msgstr ""
 
 msgid "File exists"
 msgstr "Le fichier existe"
@@ -3883,9 +3877,8 @@ msgstr "Utilisation de la bibliothèque ncurses\n"
 msgid "Using the ncursesw library\n"
 msgstr "Utilisation de la bibliothèque ncursesw\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support\n"
-msgstr "Avec l'éditeur intégré\n"
+msgstr ""
 
 msgid "With builtin Editor\n"
 msgstr "Avec l'éditeur intégré\n"
@@ -4543,9 +4536,3 @@ msgstr "Continuer à partir du début ?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "Impossible de récupérer localement le fichier /ftp://some.host/editme.txt"
-
-#~ msgid "Target file already exists!"
-#~ msgstr "Le fichier cible existe déjà!"
-
-#~ msgid "&Update"
-#~ msgstr "Mise à jo&ur"

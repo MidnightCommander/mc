@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-21 01:34+0000\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Georgian (http://www.transifex.com/mc/mc/language/ka/)\n"
 "Language: ka\n"
@@ -2681,13 +2681,11 @@ msgstr ""
 msgid "%ld B/s"
 msgstr ""
 
-#, fuzzy
 msgid "New     :"
-msgstr "ახალი   : %s, ზომა %s"
+msgstr ""
 
-#, fuzzy
 msgid "Existing:"
-msgstr "არსებული: %s, ზომა %s"
+msgstr ""
 
 msgid "Overwrite this file?"
 msgstr ""
@@ -2710,9 +2708,8 @@ msgstr ""
 msgid "S&maller"
 msgstr ""
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "თუ &ზომა განსხვავებულია"
+msgstr ""
 
 msgid "File exists"
 msgstr ""

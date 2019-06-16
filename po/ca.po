@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2018
+# Antoni Bella Pérez <antonibella5@yahoo.com>, 2017-2019
 # Daniel <danicases@gmail.com>, 2011
 # Daniel <danicases@gmail.com>, 2011-2012
 # Daniel <danicases@gmail.com>, 2012
@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-10-22 11:52+0000\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-03-24 14:13+0000\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/mc/mc/language/ca/)\n"
 "Language: ca\n"
@@ -1665,9 +1665,8 @@ msgstr ""
 "Un editor de text fàcil d'emprar\n"
 "escrit per al Midnight Commander."
 
-#, fuzzy
 msgid "Copyright (C) 1996-2019 the Free Software Foundation"
-msgstr "Copyright (C) 1996-2018 la Free Software Foundation"
+msgstr "Copyright (C) 1996-2019 la Free Software Foundation"
 
 msgid "About"
 msgstr "Quant a"
@@ -2887,17 +2886,14 @@ msgstr "%.2f KB/s"
 msgid "%ld B/s"
 msgstr "%ld B/s"
 
-#, fuzzy
 msgid "New     :"
-msgstr "Nou: %s, mida %s"
+msgstr "Nou     :"
 
-#, fuzzy
 msgid "Existing:"
-msgstr "Existent: %s, mida %s"
+msgstr "Existent:"
 
-#, fuzzy
 msgid "Overwrite this file?"
-msgstr "Voleu sobreescriure aquesta destinació?"
+msgstr "Sobreescric aquest fitxer?"
 
 msgid "A&ppend"
 msgstr "A&nnexa"
@@ -2905,22 +2901,20 @@ msgstr "A&nnexa"
 msgid "&Reget"
 msgstr "Reprè&n"
 
-#, fuzzy
 msgid "Overwrite all files?"
-msgstr "Voleu sobreescriure'ls tots?"
+msgstr "Sobreescric tots els fitxers?"
 
 msgid "Don't overwrite with &zero length file"
-msgstr ""
+msgstr "No sobreescriure amb un fitxer de longitud &zero"
 
 msgid "&Older"
-msgstr ""
+msgstr "Més a&ntic"
 
 msgid "S&maller"
-msgstr ""
+msgstr "&Més petit"
 
-#, fuzzy
 msgid "&Size differs"
-msgstr "Si difereix la &mida"
+msgstr "La mida é&s diferent"
 
 msgid "File exists"
 msgstr "El fitxer ja existeix"
@@ -3889,9 +3883,8 @@ msgstr "Emprant la biblioteca «ncurses»\n"
 msgid "Using the ncursesw library\n"
 msgstr "Emprant la biblioteca «ncursesw»\n"
 
-#, fuzzy
 msgid "With builtin Editor and Aspell support\n"
-msgstr "Amb editor incorporat\n"
+msgstr "Amb editor incorporat i implementació per a Aspell\n"
 
 msgid "With builtin Editor\n"
 msgstr "Amb editor incorporat\n"
@@ -4549,9 +4542,3 @@ msgstr "Continuo des del començament?"
 msgid "Cannot fetch a local copy of /ftp://some.host/editme.txt"
 msgstr ""
 "No s'ha pogut obtenir una còpia local de /ftp://algun.amfitrió/editam.txt"
-
-#~ msgid "Target file already exists!"
-#~ msgstr "Ja existeix el fitxer de destinació"
-
-#~ msgid "&Update"
-#~ msgstr "Actualit&za"

@@ -3,16 +3,16 @@
 # This file is distributed under the same license as the mc package.
 #
 # Translators:
-# Nikolay Korotkiy <sikmir@gmail.com>, 2017-2018
+# Nikolay Korotkiy <sikmir@gmail.com>, 2017-2019
 # Slava Zanko <slavazanko@gmail.com>, 2011
 # Kasvain <kasvain@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
-"PO-Revision-Date: 2018-12-07 20:42+0000\n"
-"Last-Translator: Nikolay Korotkiy <sikmir@gmail.com>\n"
+"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"PO-Revision-Date: 2019-03-02 12:55+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/mc/mc/language/fi/)\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -387,7 +387,7 @@ msgid "Question mark"
 msgstr "Kysymysmerkki"
 
 msgid "Ampersand"
-msgstr ""
+msgstr "Et-merkki"
 
 msgid "Dollar sign"
 msgstr "Dollarin merkki"
@@ -1866,7 +1866,7 @@ msgid "Skin:"
 msgstr "Ulkoasuteema:"
 
 msgid "Appearance"
-msgstr ""
+msgstr "Ulkoasu"
 
 msgid "Case &insensitive"
 msgstr ""
@@ -2190,7 +2190,7 @@ msgid "Cannot change directory"
 msgstr "Ei voitu vaihtaa hakemistoa"
 
 msgid "Filter"
-msgstr ""
+msgstr "Suodata"
 
 msgid "Set expression for filtering filenames"
 msgstr ""
@@ -3100,7 +3100,7 @@ msgid "&Sort order..."
 msgstr ""
 
 msgid "&Filter..."
-msgstr ""
+msgstr "&Suodata..."
 
 msgid "&Encoding..."
 msgstr ""
@@ -3133,7 +3133,7 @@ msgid "&Filtered view"
 msgstr ""
 
 msgid "&Copy"
-msgstr ""
+msgstr "&Kopioi"
 
 msgid "C&hmod"
 msgstr ""
@@ -3247,7 +3247,7 @@ msgid "C&onfirmation..."
 msgstr ""
 
 msgid "&Appearance..."
-msgstr ""
+msgstr "&Ulkoasu..."
 
 msgid "&Display bits..."
 msgstr ""
