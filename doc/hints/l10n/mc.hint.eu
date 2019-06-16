@@ -32,7 +32,7 @@ Aholkua: Alt-! erabili programak exekutatu eta irteera erakuslean ikusteko.
 
 Aholkua: Fitxategiak zerrendatzeko formatua egokitu daiteke; egin "man mc" xehetasunak ikusteko.
 
-Hint: %D/%T expands to the tagged files in the opposite directory.
+Aholkua: %D/%T pareko direktorioan hautatutako fitxategietara hedatzen da.
 
 Aholkua: Zure shell soila nahi duzu? Sakatu Ktrl-o, eta itzuli MC-ra Ktrl-o berriz erabiliz.
 
@@ -72,7 +72,7 @@ Hint: Leap to frequently used directories in a single bound with C-\.
 
 Aholkua: FTP anonimoa egin dezakezu mc-rekin 'cd ftp://machine.edu' tekleatuta.
 
-Hint: FTP is built in the Midnight Commander, check the File/FTP link menu.
+Aholkua: FTP barneratua dag Midnight Commanderren, frogatu «Fitxategia/FTP esteka» menua.
 
 Aholkua: Alt-t zerrendatze modua azkar aldatzeko.
 
@@ -80,7 +80,7 @@ Aholkua: Erabiltzaile izena zehaztu dezakezu ftp-ak egiterakoan: 'cd ftp://erabi
 
 Aholkua: RPM fitxategiak arakatu ditzakezu rpm fitxategi baten gainean sartu sakatuta.
 
-Hint: To mark directories on the select dialog box, append a slash.
+Aholkua: Hautatu elkarrizketa-koadroan direktorioak markatzeko, erantsi «/» bat.
 
 Aholkua: Saguaren ebaki eta itsatsi erabiltzeko maius tekla sakatu behar izan dezakezu
 

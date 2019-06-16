@@ -1,87 +1,87 @@
-Hint: Use C-x t to copy tagged file names to the command line.
+힌트: C-x t를 사용하여 태그가 지정된 파일 이름을 명령줄에 복사합니다.
 
-Hint: Use C-x p to copy the current pathname to the command line.
+힌트: C-x p를 사용하여 현재 경로 이름을 명령줄에 복사합니다.
 
-Hint: Completion: use M-Tab (or Esc+Tab).  Type it twice to get a list.
+힌트: 완료: M-Tab(또는 Esc+Tab)을 사용합니다. 목록을 가져오려면 이 항목을 두 번 입력합니다.
 
-Hint: Use M-p and M-n to access the command history.
+힌트: M-p 및 M-n을 사용하여 명령 기록에 액세스합니다.
 
-Hint: Need to quote a character? Use Control-q and the character.
+힌트:  문자를 인용해야 합니까? Control-q와 문자를 사용합니다.
 
-Hint: Tired of these messages? Turn them off from the Options/Layout menu.
+힌트: 이 메시지들에 지쳤나요? Options/Layout 메뉴에서 해당 기능을 끕니다.
 
-Hint: Selecting directories: add a slash to the end of the matching pattern.
+힌트: 디렉토리 선택: 일치하는 패턴의 끝에 슬래시를 추가합니다.
 
-Hint: If your terminal lacks functions keys, use the ESC+number sequence.
+힌트: 터미널에 기능 키가 없는 경우 ESC+숫자 시퀀스를 사용합니다.
 
-Hint: The homepage of GNU Midnight Commander: http://www.midnight-commander.org/
+힌트: GNU 미드나잇 커맨더 홈페이지: http://www.midnight-commander.org/
 
-Hint: Please send any bug reports to mc-devel@gnome.org
+힌트: mc-devel@gnome.org으로 버그 보고서를 보내십시오.
 
-Hint: Tab changes your current panel.
+힌트: 탭이 현재 패널을 변경합니다.
 
-Hint: VFS coolness: tap enter on a tar file to examine its contents.
+힌트: VFS cool: tar 파일을 입력하여 내용을 검토합니다.
 
-Hint: We also have a nice manual page.
+힌트 : 우리는 또한 멋진 매뉴얼 페이지를 가지고 있습니다.
 
 Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
-Hint: % macros work even on the command line.
+힌트: % 매크로는 명령줄에서도 작동합니다.
 
-Hint: M-! will allow you to execute programs and see the output in the viewer.
+힌트: M-!를 사용하면 프로그램을 실행하고 뷰어에서 출력을 볼 수 있습니다.
 
-Hint: The file listing format can be customized; do "man mc" for details.
+힌트: 파일 목록 형식을 사용자 지정할 수 있습니다. 자세한 내용은 "man mc"를 참조하십시오.
 
-Hint: %D/%T expands to the tagged files in the opposite directory.
+힌트: %D/%T는 반대편 디렉토리의 태그가 지정된 파일로 확장됩니다.
 
-Hint: Want your plain shell? Press C-o, and get back to MC with C-o again.
+힌트 : 평범한 쉘을 원하십니까? C-o를 누르고 C-o를 사용하여 MC로 다시 돌아갑니다.
 
-Hint: Setting the CDPATH variable can save you keystrokes in cd commands.
+힌트: CDPATH 변수를 설정하면 cd 명령에 키 입력을 저장할 수 있습니다.
 
-Hint: If you want to see your .* files, say so in the Configuration dialog.
+힌트 : .* 파일을 보려면 환경설정 대화 상자에서 설정합니다.
 
-Hint: Want to see your *~ backup files? Set it in the Configuration dialog.
+힌트: *~ 백업 파일을 보고 싶습니까? 환경설정 대화 상자에서 설정합니다.
 
-Hint: Completion works on all input lines in all dialogs. Just press M-Tab.
+힌트: 모든 대화상자의 모든 입력 라인에 대해 완료가 작동합니다. 그냥 M-Tab을 누르세요.
 
-Hint: On slow terminals the -s flag may help.
+힌트: 느린 터미널에서 -s 플래그가 도움이 될 수 있습니다.
 
-Hint: Find File: you can work on the files found using the Panelize button.
+힌트 : 파일 찾기 : 패널 크기조정 버튼을 사용하여 찾은 파일을 작업할 수 있습니다.
 
-Hint: Want to do complex searches? Use the External Panelize command.
+힌트 : 복잡한 검색을 원하십니까? 기타 패널 크기조정 명령을 사용하십시오.
 
-Hint: To change directory halfway through typing a command, use M-c (quick cd).
+힌트: 명령 입력을 중간에 수행하려면 M-c(빠른 cd)를 사용합니다.
 
-Note: Shell commands will not work when you are on a non-local file system.
+참고: 로컬이 아닌 파일 시스템에 있는 경우 셸 명령이 작동하지 않습니다.
 
-Hint: Bring text back from the dead with C-y.
+힌트: C-y와 함께 죽은 것들로부터 문자를 가져옵니다.
 
-Hint: Are some of your keys not working? Look at Options/Learn keys.
+힌트 : 당신의 열쇠 중 일부가 작동하지 않습니까? 옵션 / 학습 키를보십시오.
 
-Hint: To look at the output of a command in the viewer, use M-!
+힌트: 뷰어에서 명령의 출력을 보려면 M-를 사용합니다!
 
-Hint: F13 (or Shift-F3) invokes the viewer in raw mode.
+힌트: F13(또는 Shift-F3)은 원시 모드에서 뷰어를 호출합니다.
 
-Hint: You may specify the editor for F4 with the shell variable EDITOR.
+힌트: 셸 변수 편집기를 사용하여 F4의 편집기를 지정할 수 있습니다.
 
-Hint: You may specify the external viewer with the shell vars VIEWER or PAGER.
+힌트: 쉘 바 뷰어 또는 페이지도구를 사용하여 외부 뷰어를 지정할 수 있습니다.
 
-Hint: You can disable all requests for confirmation in Options/Confirmation.
+힌트: 옵션 / 확인에서 확인 요청을 모두 비활성화할 수 있습니다.
 
 Hint: Leap to frequently used directories in a single bound with C-\.
 
-Hint: You can do anonymous FTP with mc by typing 'cd ftp://machine.edu'
+힌트: 'cd ftp://machine.edu'를 입력하여 mc에서 익명 FTP를 할 수 있습니다.
 
-Hint: FTP is built in the Midnight Commander, check the File/FTP link menu.
+힌트: FTP는 Midnight Commander에 내장되어 있습니다. 파일 / FTP 링크 메뉴를 확인하십시오.
 
-Hint: M-t changes quickly the listing mode.
+힌트: M-t는 목록 모드를 빠르게 변경합니다.
 
-Hint: You can specify the username when doing ftps: 'cd ftp://user@machine.edu'
+힌트: 'cd ftp://user@machine.edu'를 수행할 때 사용자 이름을 지정할 수 있습니다.
 
-Hint: You can browse RPM files by tapping enter on top of an rpm file.
+힌트 : rpm 파일의 맨 위에서 Enter를 눌러 RPM 파일을 탐색 할 수 있습니다.
 
-Hint: To mark directories on the select dialog box, append a slash.
+힌트: 선택 대화 상자에 디렉토리를 표시하려면 슬래시를 추가합니다.
 
-Hint: To use the mouse cut and paste may require holding the shift key
+힌트: 마우스 커트 및 붙여넣기를 사용하려면 Shift 키를 누르고 있어야 할 수 있습니다.
 
 Hint: Key frequently visited ftp sites in the hotlist: type C-\.

@@ -1,18 +1,18 @@
-Hinweis: Benutze Control-x t, um markierte Dateinamen in die Kommandozeile zu kopieren.
+Hinweis: Benutze C-x t, um markierte Dateinamen in die Kommandozeile zu kopieren.
 
-Hinweis: Benutze Control-x p um den aktuellen Pfadnamen in die Kommandozeile zu kopieren.
+Hinweis: Benutze C-x p, um den aktuellen Pfadnamen in die Kommandozeile zu kopieren.
 
-Hinweis: Vervollständigung: benutze M-Tabulator (oder ESC+Tabulator). Drücke zweimal um eine Liste zu bekommen.
+Hinweis: Vervollständigung: Benutze M-Tabulator (oder Esc+Tabulator). Drücke zweimal, um eine Liste zu bekommen.
 
-Hinweis: Benutze M-p und M-n für die Befehls Historie.
+Hinweis: Benutze M-p und M-n für die Befehlshistorie.
 
-Hinweis: Möchtest du ein Zeichen zitieren? Benutze Steuerung-Q und das Zeichen.
+Hinweis: Möchtest du ein Zeichen zitieren? Benutze C-q und das Zeichen.
 
-Hinweis: Langweilen dich diese Nachrichten? Stelle sie im Options / Layoutmenü ab.
+Hinweis: Langweilen dich diese Nachrichten? Stelle sie in den Optionen im Layoutmenü ab.
 
-Hinweis: Verzeichnisse Auswählen: Füge am Ende des Mustervergleichs einen Schrägstrich hinzu.
+Hinweis: Verzeichnisse auswählen: Füge am Ende des Mustervergleichs einen Schrägstrich hinzu.
 
-Hinweis: Wenn dein Terminal keine Funktionstasten unterstützt, benutze die Kombination ESC+Nummer.
+Hinweis: Wenn dein Terminal keine Funktionstasten unterstützt, benutze die Kombination Esc+Nummer.
 
 Hinweis: Die Homepage von GNU Midnight Commander: http://www.midnight-commander.org/
 
@@ -20,68 +20,68 @@ Hinweis: Bitte sende jeden Fehlerreport an mc-devel@gnome.org
 
 Hinweis: Tabulator wechselt das aktuelle Panel.
 
-Hinweis: cooles VFS: drücke Enter auf einer tar Datei um den Inhalt zu sehen.
+Hinweis: Cooles VFS: Drücke Enter auf einer TAR-Datei, um den Inhalt zu sehen.
 
 Hinweis: Wir haben auch eine schöne Handbuchseite.
 
 Hint: Do you want Lynx-style navigation? Set it in the Configuration dialog.
 
-Hinweis: % Makros funktionieren auch auf der Kommandozeile.
+Hinweis: %-Makros funktionieren auch auf der Kommandozeile.
 
-Hinweis: M-! erlaubt die Programme zu starten und die Ausgabe im Viewer zu sehen.
+Hinweis: M-! erlaubt es, Programme zu starten und die Ausgabe im Viewer zu sehen.
 
 Hinweis: Das Format der Dateiliste kann angepasst werden; siehe "man mc" für Details.
 
 Hinweis: %D/%T wird auf die markierten Dateien im gegenüberliegenden Verzeichnis erweitert.
 
-Hinweis: Möchtest du eine einfache Shell? Drücke Control-o, und zum Wechseln zum MC nochmals Control-o.
+Hinweis: Möchtest du eine einfache Shell? Drücke C-o, zurück zum MC nochmals C-o.
 
 Hinweis: Das Setzen der Variablen CDPATH kann dir in cd-Kommandos Tastenschläge ersparen.
 
-Hinweis: Wenn du die .* Dateien sehen möchtest, setze dies im Konfigurationsdialog.
+Hinweis: Wenn du die .*-Dateien sehen möchtest, setze dies im Konfigurationsdialog.
 
-Hinweis: Möchtest du die *~ Sicherungsdateien sehen? Setze dies im Konfigurationsdialog.
+Hinweis: Möchtest du die *~-Sicherungsdateien sehen? Setze dies im Konfigurationsdialog.
 
 Hinweis: Vervollständigung funktioniert auf allen Eingabezeilen in allen Dialogen. Drücke M-Tabulator.
 
-Hinweis: bei langsamen Terminals hilft vielleicht der Parameter -s.
+Hinweis: Bei langsamen Terminals hilft vielleicht der Parameter -s.
 
-Hinweis: Datei suchen: Du kannst mit den Suchergebnissen über das Befehlmenü arbeiten.
+Hinweis: Datei suchen: Du kannst mit den Suchergebnissen über das Befehlsmenü arbeiten.
 
-Hinweis: Möchtest du eine erweiterte Suche? Benutze den Menü Befehl "Datei suchen".
+Hinweis: Möchtest du eine erweiterte Suche? Benutze den Menübefehl "Datei suchen".
 
 Hinweis: Um das Verzeichnis auf halbem Weg durch Eingabe eines Befehls zu ändern, verwende M-c (schnelles cd).
 
-Hinweis: Shell Befehle funktionieren nicht, wenn du auf einem nichtlokalen Dateisystem bist.
+Hinweis: Shell-Befehle funktionieren nicht, wenn du auf einem nichtlokalen Dateisystem bist.
 
-Hinweis: Bringe den Text von einem totem Display zurück mit Control-y.
+Hinweis: Bringe den Text von einem totem Display zurück mit C-y.
 
-Hinweis: Funktionieren einige Tasten nicht? Sie dir das Menü Optionen / Tasten lernen an.
+Hinweis: Funktionieren einige Tasten nicht? Sieh dir das Menü Optionen / Tasten lernen an.
 
-Hinweis: Um die Ausgabe eines Befehls im Anzeiger zu sehen, benutze M-!
+Hinweis: Benutze M-!, um die Ausgabe eines Befehls im Anzeiger zu sehen.
 
-Hinweis: F13 (oder Shift-F3) ruft den Betrachter im RAW Modus auf.
+Hinweis: F13 (oder Shift-F3) ruft den Betrachter im RAW-Modus auf.
 
-Hinweis: Du kannst den Editior für F4 mit der Shellvariable EDITOR setzen.
+Hinweis: Du kannst den Editor für F4 mit der Shellvariable EDITOR setzen.
 
-Hinweis: Du kannst den externen Viewer mit der Shellvariable VIEWER oder PAGER setzen.
+Hinweis: Du kannst den externen Viewer mit den Shellvariablen VIEWER oder PAGER setzen.
 
 Hinweis: Du kannst alle Bestätigungsanfragen unter Optionen / Nachfragen deaktivieren.
 
 Hint: Leap to frequently used directories in a single bound with C-\.
 
-Hinweis: Du kannst eine anonyme FTP Verbindung im mc starten mit der Eingabe von 'cd ftp://machine.edu'
+Hinweis: Du kannst eine anonyme FTP-Verbindung im MC mit der Eingabe von 'cd ftp://machine.edu' starten.
 
 Hinweis: FTP ist im Midnight Commander eingebaut, Menüeintrag: Datei/FTP-Verbindung.
 
 Hinweis: M-t wechselt schnell den Listenmodus.
 
-Hinweis: Du kannst den Benutzernamen nutzen, wenn du bei ftps eingibst: 'cd ftp://user@machine.edu'
+Hinweis: Du kannst den Benutzernamen verwenden, wenn du bei FTP 'cd ftp://user@machine.edu' eingibst.
 
-Hinweis: Du kannst eine RPM Datei mit Enter auf die Datei durchsuchen.
+Hinweis: Du kannst eine RPM-Datei mit Enter auf die Datei durchsuchen.
 
 Hinweis: Um Verzeichnisse in der Auswahlbox zu markieren, füge einen Schrägstrich hinzu.
 
-Hinweis: Um mit der Maus Ausschneiden und Einfügen nutzen zu könnenj, muß evtl die Shifttaste gedrückt werden.
+Hinweis: Um mit der Maus Ausschneiden und Einfügen nutzen zu können, muss evtl. die Umschalttaste gedrückt werden.
 
 Hint: Key frequently visited ftp sites in the hotlist: type C-\.
