@@ -1,3 +1,51 @@
+Version 4.8.23
+
+- Core
+
+  * Modify "File exists" query dialog (#3935):
+    * change layout
+    * rename "Update" button to "If older"
+    * add new "If smaller" button": overwrite file with smaller one
+    * add "Don't overwrite with zero length file" checkbox
+  * Speed up of large directory structures delete (#3958)
+  * Support key binding for menu (#212)
+
+- Editor
+
+  * Expanded syntax highlighting rules (#3975):
+    * expanded file name regexp for sh.syntax
+    * use ini.syntax for systemd cofiguration files
+  * Syntax updates:
+    * shell (#3981)
+    * ebuild (#3988)
+    * RPM spec (#3991)
+
+- Viewer
+
+  * Quick one-off backwards search with N. New action SearchOppositeContinue for key bind (default is shift-n) (#3452)
+
+- Misc
+
+  * Code cleanup (#3955)
+  * Use Geeqie (a fork of GQview) as main image viewer, fallback to GQview (#3962)
+  * File highlighting updates (#3966)
+    * .go, .s: highlight as source
+    * .m4v: highlighting as media
+  * New skins:
+    * featured-plus: featured skin with alternative directory and file select/mark colors (#3973)
+
+- Fixes
+
+  * Compilation fail on AIX (#3960)
+  * Incorrect file version sort (#3965, #3905)
+  * Garbage in the hardlink error creation message window (#3990)
+  * Cannot shell, or FTP, or SFTP link when the file panel is tree, or info, or quick view (#3948)
+  * Failed gpm connect attempt ... for vc /dev/tty0 (#3208, #3614)
+  * Incorrect include/editor order in mc.ext (#3965)
+  * mcedit: incorrect C/C++ syntax highlighting in some cases (#3487)
+  * Unknown type name 'sighandler_t' on Illumos (#3971)
+
+
 Version 4.8.22
 
 - Core
