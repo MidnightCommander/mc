@@ -991,7 +991,9 @@ smbfs_chown (const vfs_path_t * vpath, uid_t owner, gid_t group)
     const vfs_path_element_t *path_element;
 
     path_element = vfs_path_get_by_index (vpath, -1);
-    DEBUG (3, ("smbfs_chown(path:%s, owner:%d, group:%d)\n", path_element->path, owner, group));
+    DEBUG (3,
+           ("smbfs_chown(path:%s, owner:%d, group:%d)\n", path_element->path, (int) owner,
+            (int) group));
     my_errno = EOPNOTSUPP;      /* ready for your labotomy? */
     return -1;
 }
@@ -1458,7 +1460,7 @@ smbfs_fake_server_stat (const char *server_url, const char *path, struct stat *b
             if (strcmp (dentry->text, path) == 0)
             {
                 DEBUG (4, ("smbfs_fake_server_stat: %s:%4o\n",
-                           dentry->text, (int) dentry->my_stat.st_mode));
+                           dentry->text, (unsigned int) dentry->my_stat.st_mode));
                 memcpy (buf, &dentry->my_stat, sizeof (struct stat));
                 return 0;
             }
@@ -1519,7 +1521,7 @@ smbfs_fake_share_stat (const char *server_url, const char *path, struct stat *bu
         if (strcmp (dentry->text, path) == 0)
         {
             DEBUG (6, ("smbfs_fake_share_stat: %s:%4o\n",
-                       dentry->text, (int) dentry->my_stat.st_mode));
+                       dentry->text, (unsigned int) dentry->my_stat.st_mode));
             memcpy (buf, &dentry->my_stat, sizeof (struct stat));
             return 0;
         }
@@ -1883,7 +1885,7 @@ smbfs_mknod (const vfs_path_t * vpath, mode_t mode, dev_t dev)
 
     path_element = vfs_path_get_by_index (vpath, -1);
     DEBUG (3,
-           ("smbfs_mknod(path:%s, mode:%d, dev:%u)\n", path_element->path, mode,
+           ("smbfs_mknod(path:%s, mode:%d, dev:%u)\n", path_element->path, (int) mode,
             (unsigned int) dev));
     my_errno = EOPNOTSUPP;
     return -1;
