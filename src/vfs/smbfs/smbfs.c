@@ -1349,7 +1349,7 @@ smbfs_get_path (smbfs_connection ** sc, const vfs_path_t * vpath)
 
     DEBUG (3, ("smbfs_get_path(%s)\n", path));
 
-    if (path_element->class != &vfs_smbfs_ops)
+    if (path_element->class != vfs_smbfs_ops)
         return NULL;
 
     while (*path == '/')        /* '/' leading server name */
@@ -1749,7 +1749,7 @@ smbfs_stat (const vfs_path_t * vpath, struct stat *buf)
 
     /* check if stating server */
     p = path_element->path;
-    if (path_element->class != &vfs_smbfs_ops)
+    if (path_element->class != vfs_smbfs_ops)
         return -1;
 
     while (*p == '/')           /* '/' leading server name */
@@ -1985,7 +1985,7 @@ smbfs_forget (const vfs_path_t * vpath)
     const char *path;
 
     path_element = vfs_path_get_by_index (vpath, -1);
-    if (path_element->class != &vfs_smbfs_ops)
+    if (path_element->class != vfs_smbfs_ops)
         return;
 
     path = path_element->path;
