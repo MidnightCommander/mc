@@ -278,17 +278,17 @@ static void *
 sfs_open (const vfs_path_t * vpath /*struct vfs_class *me, const char *path */ , int flags,
           mode_t mode)
 {
-    int *sfs_info;
+    int *info;
     int fd;
 
     fd = open (sfs_redirect (vpath), NO_LINEAR (flags), mode);
     if (fd == -1)
         return NULL;
 
-    sfs_info = g_new (int, 1);
-    *sfs_info = fd;
+    info = g_new (int, 1);
+    *info = fd;
 
-    return sfs_info;
+    return info;
 }
 
 /* --------------------------------------------------------------------------------------------- */
