@@ -516,7 +516,7 @@ menubar_try_exec_menu (WMenuBar * menubar, int hotkey)
 /* --------------------------------------------------------------------------------------------- */
 
 static cb_ret_t
-menubar_execute_cmd (WMenuBar * menubar, unsigned long command, int key)
+menubar_execute_cmd (WMenuBar * menubar, unsigned long command)
 {
     cb_ret_t ret = MSG_HANDLED;
 
@@ -571,10 +571,7 @@ menubar_execute_cmd (WMenuBar * menubar, unsigned long command, int key)
         break;
 
     default:
-        if (menubar->is_dropped)
-            ret = menubar_try_exec_menu (menubar, key);
-        else
-            ret = menubar_try_drop_menu (menubar, key);
+        ret = MSG_NOT_HANDLED;
         break;
     }
 
@@ -587,12 +584,22 @@ static int
 menubar_handle_key (WMenuBar * menubar, int key)
 {
     unsigned long cmd;
+    cb_ret_t ret = MSG_NOT_HANDLED;
 
     cmd = keybind_lookup_keymap_command (menu_map, key);
 
-    return (cmd == CK_IgnoreKey
-            || menubar_execute_cmd (menubar, cmd,
-                                    key) == MSG_NOT_HANDLED) ? MSG_NOT_HANDLED : MSG_HANDLED;
+    if (cmd != CK_IgnoreKey)
+        ret = menubar_execute_cmd (menubar, cmd);
+
+    if (ret != MSG_HANDLED)
+    {
+        if (menubar->is_dropped)
+            ret = menubar_try_exec_menu (menubar, key);
+        else
+            ret = menubar_try_drop_menu (menubar, key);
+    }
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
