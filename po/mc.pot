@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.8.22-161-gcc9b87e9c\n"
+"Project-Id-Version: mc 4.8.22-170-g7eaa51c79\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-15 17:47+0300\n"
+"POT-Creation-Date: 2019-06-22 13:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5321,31 +5321,31 @@ msgstr ""
 msgid "reconnect to %s failed"
 msgstr ""
 
-#: src/vfs/smbfs/smbfs.c:1323
+#: src/vfs/smbfs/smbfs.c:1325
 msgid "Authentication failed"
 msgstr ""
 
-#: src/vfs/smbfs/smbfs.c:1912
+#: src/vfs/smbfs/smbfs.c:1914
 #, c-format
 msgid "Error %s creating directory %s"
 msgstr ""
 
-#: src/vfs/smbfs/smbfs.c:1941
+#: src/vfs/smbfs/smbfs.c:1943
 #, c-format
 msgid "Error %s removing directory %s"
 msgstr ""
 
-#: src/vfs/smbfs/smbfs.c:2071
+#: src/vfs/smbfs/smbfs.c:2073
 #, c-format
 msgid "%s opening remote file %s"
 msgstr ""
 
-#: src/vfs/smbfs/smbfs.c:2151
+#: src/vfs/smbfs/smbfs.c:2153
 #, c-format
 msgid "%s removing remote file %s"
 msgstr ""
 
-#: src/vfs/smbfs/smbfs.c:2188
+#: src/vfs/smbfs/smbfs.c:2190
 #, c-format
 msgid "%s renaming files\n"
 msgstr ""
