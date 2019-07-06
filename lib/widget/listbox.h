@@ -68,6 +68,7 @@ int listbox_search_data (WListbox * l, const void *data);
 void listbox_select_first (WListbox * l);
 void listbox_select_last (WListbox * l);
 void listbox_select_entry (WListbox * l, int dest);
+int listbox_get_length (const WListbox * l);
 void listbox_get_current (WListbox * l, char **string, void **extra);
 WLEntry *listbox_get_nth_item (const WListbox * l, int pos);
 GList *listbox_get_first_link (const WListbox * l);

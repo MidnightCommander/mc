@@ -639,10 +639,9 @@ void
 listbox_select_last (WListbox * l)
 {
     int lines = WIDGET (l)->lines;
-    int length = 0;
+    int length;
 
-    if (!listbox_is_empty (l))
-        length = g_queue_get_length (l->list);
+    length = listbox_get_length (l);
 
     l->pos = length > 0 ? length - 1 : 0;
     l->top = length > lines ? length - lines : 0;
@@ -684,6 +683,14 @@ listbox_select_entry (WListbox * l, int dest)
 
     /* If we are unable to find it, set decent values */
     l->pos = l->top = 0;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+int
+listbox_get_length (const WListbox * l)
+{
+    return listbox_is_empty (l) ? 0 : (int) g_queue_get_length (l->list);
 }
 
 /* --------------------------------------------------------------------------------------------- */
