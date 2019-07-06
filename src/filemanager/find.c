@@ -1249,9 +1249,6 @@ find_rotate_dash (const WDialog * h, gboolean show)
     static const char rotating_dash[4] = "|/-\\";
     const Widget *w = CONST_WIDGET (h);
 
-    if (!verbose)
-        return;
-
     tty_setcolor (h->color[DLG_COLOR_NORMAL]);
     widget_move (h, w->lines - 7, w->cols - 4);
     tty_print_char (show ? rotating_dash[pos] : ' ');
@@ -1317,7 +1314,8 @@ do_search (WDialog * h)
                                                   ignore_count), ignore_count);
                             status_update (msg);
                         }
-                        find_rotate_dash (h, FALSE);
+                        if (verbose)
+                            find_rotate_dash (h, FALSE);
                         stop_idle (h);
                         return 0;
                     }
@@ -1403,7 +1401,8 @@ do_search (WDialog * h)
             ;
     }                           /* for */
 
-    find_rotate_dash (h, TRUE);
+    if (verbose)
+        find_rotate_dash (h, TRUE);
 
     return 1;
 }
