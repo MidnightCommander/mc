@@ -905,9 +905,9 @@ insert_file (const char *dir, const char *file, gsize start, gsize end)
     while (IS_PATH_SEP (dir[0]) && IS_PATH_SEP (dir[1]))
         dir++;
 
-    if (old_dir)
+    if (old_dir != NULL)
     {
-        if (strcmp (old_dir, dir))
+        if (strcmp (old_dir, dir) != 0)
         {
             g_free (old_dir);
             old_dir = g_strdup (dir);
@@ -1065,6 +1065,7 @@ search_content (WDialog * h, const char *directory, const char *filename)
         while (!ret_val)
         {
             char ch = '\0';
+
             off += i + 1;       /* the previous line, plus a newline character */
             i = 0;
 
@@ -1148,6 +1149,7 @@ search_content (WDialog * h, const char *directory, const char *filename)
             if ((line & 0xff) == 0)
             {
                 FindProgressStatus res;
+
                 res = check_find_events (h);
                 switch (res)
                 {
