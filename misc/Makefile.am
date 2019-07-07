@@ -8,17 +8,20 @@ noinst_DATA = xterm.ad
 
 pkgdata_DATA = \
 	mc.lib
-if CHARSET
-pkgdata_DATA += mc.charsets
-endif
 
 SCRIPTS_IN = \
 	mc.menu.in \
 	mcedit.menu.in
+if CHARSET
+SCRIPTS_IN += mc.charsets.in
+endif
 
 SCRIPTS_OUT = \
 	mc.menu \
 	mcedit.menu
+if CHARSET
+SCRIPTS_OUT += mc.charsets
+endif
 
 LIBFILES_CONST = \
 	filehighlight.ini \
@@ -47,10 +50,6 @@ EXTRA_DIST = \
 	$(SCRIPTS_IN) \
 	$(noinst_DATA) \
 	$(pkgdata_DATA)
-#if CHARSET is defined, mc.charsets is already here
-if !CHARSET
-EXTRA_DIST += mc.charsets
-endif
 
 install-data-hook:
 	cd $(DESTDIR)$(cfgdir) && rm -f mc.keymap && $(LN_S) mc.default.keymap mc.keymap
