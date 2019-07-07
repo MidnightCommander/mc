@@ -222,8 +222,8 @@ case "$cmd" in
     ;;
   copyout)
     xorriso_copyout "$@" || {
-        test_iso "$@";
-        mcisofs_copyout "$@";
+        test_iso "$@" || exit 1
+        mcisofs_copyout "$@" || exit 1
     }
     exit 0
     ;;
