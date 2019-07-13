@@ -22,5 +22,17 @@ AC_DEFUN([mc_I18N],[
         AC_DEFINE(HAVE_CHARSET, 1, [Define to enable charset selection and conversion])
         have_charset=yes
         charset_msg="yes"
+
+        dnl Solaris has different name of Windows 1251 encoding
+        case $host_os in
+            solaris*)
+                CP1251="ANSI-1251"
+                ;;
+            *)
+                CP1251="CP1251"
+                ;;
+        esac
+
+        AC_SUBST(CP1251)
     fi
 ])

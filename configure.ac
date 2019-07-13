@@ -566,6 +566,7 @@ contrib/dist/pkginfo
 contrib/dist/prototype
 
 misc/Makefile
+misc/mc.charsets
 misc/mc.menu
 misc/mcedit.menu
 misc/skins/Makefile
