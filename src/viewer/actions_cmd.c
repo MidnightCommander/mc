@@ -65,6 +65,7 @@
 #include "src/filemanager/ext.h"        /* regex_command_for() */
 
 #include "src/history.h"
+#include "src/file_history.h"   /* show_file_history() */
 #include "src/execute.h"
 #include "src/keybind-defaults.h"
 
@@ -381,6 +382,30 @@ mcview_load_next_prev (WView * view, int direction)
 
 /* --------------------------------------------------------------------------------------------- */
 
+static void
+mcview_load_file_from_history (WView * view)
+{
+    char *filename;
+    int action;
+
+    filename = show_file_history (CONST_WIDGET (view), &action);
+
+    if (filename != NULL && (action == CK_View || action == CK_Enter))
+    {
+        mcview_done (view);
+        mcview_init (view);
+
+        mcview_load (view, NULL, filename, 0, 0, 0);
+
+        view->dpy_bbar_dirty = FALSE;   /* FIXME */
+        view->dirty++;
+    }
+
+    g_free (filename);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static cb_ret_t
 mcview_execute_cmd (WView * view, long command)
 {
@@ -537,6 +562,9 @@ mcview_execute_cmd (WView * view, long command)
         /* Does not work in panel mode */
         if (!mcview_is_in_panel (view))
             mcview_load_next_prev (view, command == CK_FileNext ? 1 : -1);
+        break;
+    case CK_History:
+        mcview_load_file_from_history (view);
         break;
     case CK_Quit:
         if (!mcview_is_in_panel (view))

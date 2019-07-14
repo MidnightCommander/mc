@@ -405,6 +405,7 @@ FilePrev = ctrl-b
 SelectCodepage = alt-e
 Shell = ctrl-o
 Ruler = alt-r
+History = alt-shift-e
 
 [viewer:hex]
 Help = f1
@@ -433,6 +434,7 @@ PageDown = pgdn; ctrl-v
 PageUp = pgup; alt-v
 Top = ctrl-home; ctrl-pgup; a1; alt-lt; g
 Bottom = ctrl-end; ctrl-pgdn; c1; alt-gt; shift-g
+History = alt-shift-e
 
 [diffviewer]
 ShowSymbols = alt-s; s
