@@ -26,11 +26,11 @@ int panel_listing_box (WPanel * p, int num, char **user, char **mini, gboolean *
 const panel_field_t *sort_box (dir_sort_options_t * op, const panel_field_t * sort_field);
 void confirm_box (void);
 void display_bits_box (void);
-void configure_vfs (void);
-void jobs_cmd (void);
-char *cd_dialog (void);
-void symlink_dialog (const vfs_path_t * existing_vpath, const vfs_path_t * new_vpath,
-                     char **ret_existing, char **ret_new);
+void configure_vfs_box (void);
+void jobs_box (void);
+char *cd_box (void);
+void symlink_box (const vfs_path_t * existing_vpath, const vfs_path_t * new_vpath,
+                  char **ret_existing, char **ret_new);
 char *tree_box (const char *current_dir);
 
 /*** inline functions ****************************************************************************/

@@ -1167,7 +1167,7 @@ midnight_execute_cmd (Widget * sender, long command)
         break;
 #ifdef ENABLE_VFS
     case CK_OptionsVfs:
-        configure_vfs ();
+        configure_vfs_box ();
         break;
 #endif
     case CK_OptionsConfirm:
@@ -1286,7 +1286,7 @@ midnight_execute_cmd (Widget * sender, long command)
         break;
 #ifdef ENABLE_BACKGROUND
     case CK_Jobs:
-        jobs_cmd ();
+        jobs_box ();
         break;
 #endif
     case CK_OptionsLayout:

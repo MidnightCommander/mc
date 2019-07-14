@@ -90,7 +90,7 @@
 #include "command.h"            /* cmdline */
 #include "layout.h"             /* get_current_type() */
 #include "ext.h"                /* regex_command() */
-#include "boxes.h"              /* cd_dialog() */
+#include "boxes.h"              /* cd_box() */
 #include "dir.h"
 
 #include "cmd.h"                /* Our definitions */
@@ -393,7 +393,7 @@ do_link (link_type_t link_type, const char *fname)
             g_free (s_str);
         }
 
-        symlink_dialog (s, d, &dest, &src);
+        symlink_box (s, d, &dest, &src);
         vfs_path_free (d);
         vfs_path_free (s);
 
@@ -1386,7 +1386,7 @@ undelete_cmd (void)
 void
 quick_cd_cmd (void)
 {
-    char *p = cd_dialog ();
+    char *p = cd_box ();
 
     if (p && *p)
     {
