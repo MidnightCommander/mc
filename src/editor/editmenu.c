@@ -73,6 +73,7 @@ create_file_menu (void)
     entries = g_list_prepend (entries, menu_entry_create (_("&Open file..."), CK_EditFile));
     entries = g_list_prepend (entries, menu_entry_create (_("&New"), CK_EditNew));
     entries = g_list_prepend (entries, menu_entry_create (_("&Close"), CK_Close));
+    entries = g_list_prepend (entries, menu_entry_create (_("&History..."), CK_History));
     entries = g_list_prepend (entries, menu_separator_create ());
     entries = g_list_prepend (entries, menu_entry_create (_("&Save"), CK_Save));
     entries = g_list_prepend (entries, menu_entry_create (_("Save &as..."), CK_SaveAs));

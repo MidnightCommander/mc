@@ -414,6 +414,9 @@ edit_dialog_command_execute (WDialog * h, long command)
     case CK_EditFile:
         edit_load_cmd (h);
         break;
+    case CK_History:
+        edit_load_file_from_history (h);
+        break;
     case CK_EditSyntaxFile:
         edit_load_syntax_file (h);
         break;
