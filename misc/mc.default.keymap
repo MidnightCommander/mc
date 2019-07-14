@@ -194,6 +194,9 @@ PageUp = pgup; alt-v
 PageDown = pgdn; ctrl-v
 Delete = delete; d
 Clear = shift-delete; shift-d
+View = f3
+Edit = f4
+Enter = enter
 
 [tree]
 Help = f1

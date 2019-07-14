@@ -287,6 +287,9 @@ static const global_keymap_ini_t default_listbox_keymap[] = {
     {"PageDown", "pgdn; ctrl-v"},
     {"Delete", "delete; d"},
     {"Clear", "shift-delete; shift-d"},
+    {"View", "f3"},
+    {"Edit", "f4"},
+    {"Enter", "enter"},
     {NULL, NULL}
 };
 

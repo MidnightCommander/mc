@@ -325,6 +325,11 @@ listbox_execute_cmd (WListbox * l, long command)
                               D_ERROR, 2, _("&Yes"), _("&No")) == 0))
             listbox_remove_list (l);
         break;
+    case CK_View:
+    case CK_Edit:
+    case CK_Enter:
+        ret = send_message (WIDGET (l)->owner, l, MSG_NOTIFY, command, NULL);
+        break;
     default:
         ret = MSG_NOT_HANDLED;
     }
@@ -398,7 +403,7 @@ static void
 listbox_on_change (WListbox * l)
 {
     listbox_draw (l, TRUE);
-    send_message (WIDGET (l)->owner, l, MSG_NOTIFY, l->pos, NULL);
+    send_message (WIDGET (l)->owner, l, MSG_NOTIFY, 0, NULL);
 }
 
 /* --------------------------------------------------------------------------------------------- */
