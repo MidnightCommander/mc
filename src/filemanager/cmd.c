@@ -109,7 +109,9 @@
 
 enum CompareMode
 {
-    compare_quick, compare_size_only, compare_thourough
+    compare_quick = 0,
+    compare_size_only,
+    compare_thourough
 };
 
 /*** file scope variables ************************************************************************/
@@ -133,15 +135,11 @@ do_view_cmd (gboolean normal)
     {
         vfs_path_t *fname_vpath;
 
-        if (confirm_view_dir && (current_panel->marked || current_panel->dirs_marked))
-        {
-            if (query_dialog
-                (_("Confirmation"), _("Files tagged, want to cd?"), D_NORMAL, 2,
-                 _("&Yes"), _("&No")) != 0)
-            {
-                return;
-            }
-        }
+        if (confirm_view_dir && (current_panel->marked != 0 || current_panel->dirs_marked != 0) &&
+            query_dialog (_("Confirmation"), _("Files tagged, want to cd?"), D_NORMAL, 2,
+                          _("&Yes"), _("&No")) != 0)
+            return;
+
         fname_vpath = vfs_path_from_str (selection (current_panel)->fname);
         if (!do_cd (fname_vpath, cd_exact))
             message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
@@ -244,6 +242,7 @@ compare_files (const vfs_path_t * vpath1, const vfs_path_t * vpath2, off_t size)
             /* Don't have mmap() :( Even more ugly :) */
             char buf1[BUFSIZ], buf2[BUFSIZ];
             int n1, n2;
+
             rotate_dash (TRUE);
             do
             {
@@ -290,10 +289,9 @@ compare_dir (WPanel * panel, WPanel * other, enum CompareMode mode)
 
         /* Search the corresponding entry from the other panel */
         for (j = 0; j < other->dir.len; j++)
-        {
             if (strcmp (source->fname, other->dir.list[j].fname) == 0)
                 break;
-        }
+
         if (j >= other->dir.len)
             /* Not found -> mark */
             do_file_mark (panel, i, 1);
@@ -303,19 +301,17 @@ compare_dir (WPanel * panel, WPanel * other, enum CompareMode mode)
             file_entry_t *target = &other->dir.list[j];
 
             if (mode != compare_size_only)
-            {
                 /* Older version is not marked */
                 if (source->st.st_mtime < target->st.st_mtime)
                     continue;
-            }
 
             /* Newer version with different size is marked */
             if (source->st.st_size != target->st.st_size)
             {
                 do_file_mark (panel, i, 1);
                 continue;
-
             }
+
             if (mode == compare_size_only)
                 continue;
 
@@ -324,9 +320,8 @@ compare_dir (WPanel * panel, WPanel * other, enum CompareMode mode)
                 /* Thorough compare off, compare only time stamps */
                 /* Mark newer version, don't mark version with the same date */
                 if (source->st.st_mtime > target->st.st_mtime)
-                {
                     do_file_mark (panel, i, 1);
-                }
+
                 continue;
             }
 
@@ -362,6 +357,7 @@ do_link (link_type_t link_type, const char *fname)
             input_expand_dialog (_("Link"), src, MC_HISTORY_FM_LINK, "", INPUT_COMPLETE_FILENAMES);
         if (dest == NULL || *dest == '\0')
             goto cleanup;
+
         save_cwds_stat ();
 
         fname_vpath = vfs_path_from_str (fname);
@@ -399,6 +395,7 @@ do_link (link_type_t link_type, const char *fname)
 
         if (dest == NULL || *dest == '\0' || src == NULL || *src == '\0')
             goto cleanup;
+
         save_cwds_stat ();
 
         dest_vpath = vfs_path_from_str_flags (dest, VPF_NO_CANON);
@@ -777,6 +774,7 @@ void
 copy_cmd (void)
 {
     save_cwds_stat ();
+
     if (panel_operate (current_panel, OP_COPY, FALSE))
     {
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
@@ -791,6 +789,7 @@ void
 rename_cmd (void)
 {
     save_cwds_stat ();
+
     if (panel_operate (current_panel, OP_MOVE, FALSE))
     {
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
@@ -805,6 +804,7 @@ void
 copy_cmd_local (void)
 {
     save_cwds_stat ();
+
     if (panel_operate (current_panel, OP_COPY, TRUE))
     {
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
@@ -819,6 +819,7 @@ void
 rename_cmd_local (void)
 {
     save_cwds_stat ();
+
     if (panel_operate (current_panel, OP_MOVE, TRUE))
     {
         update_panels (UP_OPTIMIZE, UP_KEEPSEL);
@@ -862,16 +863,16 @@ mkdir_cmd (void)
         }
 
         save_cwds_stat ();
-        if (my_mkdir (absdir, 0777) == 0)
+
+        if (my_mkdir (absdir, 0777) != 0)
+            message (D_ERROR, MSG_ERROR, "%s", unix_error_string (errno));
+        else
         {
             update_panels (UP_OPTIMIZE, dir);
             repaint_screen ();
             select_item (current_panel);
         }
-        else
-        {
-            message (D_ERROR, MSG_ERROR, "%s", unix_error_string (errno));
-        }
+
         vfs_path_free (absdir);
     }
     g_free (dir);
@@ -920,13 +921,13 @@ find_cmd (void)
 void
 filter_cmd (void)
 {
-    WPanel *p;
+    if (SELECTED_IS_PANEL)
+    {
+        WPanel *p;
 
-    if (!SELECTED_IS_PANEL)
-        return;
-
-    p = MENU_PANEL;
-    set_panel_filter (p);
+        p = MENU_PANEL;
+        set_panel_filter (p);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -950,15 +951,13 @@ void
 ext_cmd (void)
 {
     vfs_path_t *extdir_vpath;
-    int dir;
+    int dir = 0;
 
-    dir = 0;
     if (geteuid () == 0)
-    {
         dir = query_dialog (_("Extension file edit"),
                             _("Which extension file you want to edit?"), D_NORMAL, 2,
                             _("&User"), _("&System Wide"));
-    }
+
     extdir_vpath = vfs_path_build_filename (mc_global.sysconfig_dir, MC_LIB_EXT, (char *) NULL);
 
     if (dir == 0)
@@ -980,6 +979,7 @@ ext_cmd (void)
         }
         do_edit (extdir_vpath);
     }
+
     vfs_path_free (extdir_vpath);
     flush_extension_file ();
 }
@@ -1050,16 +1050,13 @@ void
 edit_fhl_cmd (void)
 {
     vfs_path_t *fhlfile_vpath = NULL;
+    int dir = 0;
 
-    int dir;
-
-    dir = 0;
     if (geteuid () == 0)
-    {
         dir = query_dialog (_("Highlighting groups file edit"),
                             _("Which highlighting file you want to edit?"), D_NORMAL, 2,
                             _("&User"), _("&System Wide"));
-    }
+
     fhlfile_vpath =
         vfs_path_build_filename (mc_global.sysconfig_dir, MC_FHL_INI_FILE, (char *) NULL);
 
@@ -1082,8 +1079,8 @@ edit_fhl_cmd (void)
         }
         do_edit (fhlfile_vpath);
     }
-    vfs_path_free (fhlfile_vpath);
 
+    vfs_path_free (fhlfile_vpath);
     /* refresh highlighting rules */
     mc_fhl_free (&mc_filehighlight);
     mc_filehighlight = mc_fhl_new (TRUE);
@@ -1120,8 +1117,11 @@ hotlist_cmd (void)
         do_cd_command (cmd);
         g_free (cmd);
     }
+
     g_free (target);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 #ifdef ENABLE_VFS
 void
@@ -1131,7 +1131,7 @@ vfs_list (void)
     vfs_path_t *target_vpath;
 
     target = hotlist_show (LIST_VFSLIST);
-    if (!target)
+    if (target == NULL)
         return;
 
     target_vpath = vfs_path_from_str (target);
@@ -1166,10 +1166,8 @@ compare_dirs_cmd (void)
         compare_dir (other_panel, current_panel, thorough_flag);
     }
     else
-    {
         message (D_ERROR, MSG_ERROR,
                  _("Both panels should be in the listing mode\nto use this command"));
-    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1179,18 +1177,18 @@ void
 diff_view_cmd (void)
 {
     /* both panels must be in the list mode */
-    if (get_current_type () != view_listing || get_other_type () != view_listing)
-        return;
+    if (get_current_type () == view_listing && get_other_type () == view_listing)
+    {
+        if (get_current_index () == 0)
+            dview_diff_cmd (current_panel, other_panel);
+        else
+            dview_diff_cmd (other_panel, current_panel);
 
-    if (get_current_index () == 0)
-        dview_diff_cmd (current_panel, other_panel);
-    else
-        dview_diff_cmd (other_panel, current_panel);
+        if (mc_global.mc_run_mode == MC_RUN_FULL)
+            update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 
-    if (mc_global.mc_run_mode == MC_RUN_FULL)
-        update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-
-    dialog_switch_process_pending ();
+        dialog_switch_process_pending ();
+    }
 }
 #endif
 
@@ -1209,19 +1207,17 @@ swap_cmd (void)
 void
 view_other_cmd (void)
 {
-    static int message_flag = TRUE;
+    static gboolean message_flag = TRUE;
 
-    if (!mc_global.tty.xterm_flag && mc_global.tty.console_flag == '\0'
-        && !mc_global.tty.use_subshell && !output_starts_shell)
+    if (mc_global.tty.xterm_flag || mc_global.tty.console_flag != '\0'
+        || mc_global.tty.use_subshell || output_starts_shell)
+        toggle_panels ();
+    else
     {
         if (message_flag)
             message (D_ERROR, MSG_ERROR,
                      _("Not an xterm or Linux console;\nthe panels cannot be toggled."));
         message_flag = FALSE;
-    }
-    else
-    {
-        toggle_panels ();
     }
 }
 
@@ -1386,12 +1382,14 @@ undelete_cmd (void)
 void
 quick_cd_cmd (void)
 {
-    char *p = cd_box ();
+    char *p;
 
-    if (p && *p)
+    p = cd_box ();
+    if (p != NULL && *p != '\0')
     {
-        char *q = g_strconcat ("cd ", p, (char *) NULL);
+        char *q;
 
+        q = g_strconcat ("cd ", p, (char *) NULL);
         do_cd_command (q);
         g_free (q);
     }
@@ -1482,8 +1480,8 @@ dirsizes_cmd (void)
 
     for (i = 0; i < panel->dir.len; i++)
         if (S_ISDIR (panel->dir.list[i].st.st_mode)
-            && ((panel->dirs_marked && panel->dir.list[i].f.marked)
-                || !panel->dirs_marked) && !DIR_IS_DOTDOT (panel->dir.list[i].fname))
+            && ((panel->dirs_marked != 0 && panel->dir.list[i].f.marked)
+                || panel->dirs_marked == 0) && !DIR_IS_DOTDOT (panel->dir.list[i].fname))
         {
             vfs_path_t *p;
             size_t dir_count = 0;
