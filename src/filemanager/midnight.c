@@ -87,6 +87,7 @@
 #endif
 
 #include "src/consaver/cons.saver.h"    /* show_console_contents */
+#include "src/file_history.h"   /* show_file_history() */
 
 #include "midnight.h"
 
@@ -1006,38 +1007,12 @@ mc_maybe_editor_or_viewer (void)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-show_editor_history_list (void)
+show_editor_viewer_history (void)
 {
-    char *fn;
-    FILE *f;
-    char buf[MC_MAXPATHLEN + 100];
-    GList *file_list = NULL;
     char *s;
-    WPanel *panel = current_panel;
     int act;
 
-    /* open file with positions */
-    fn = mc_config_get_full_path (MC_FILEPOS_FILE);
-    f = fopen (fn, "r");
-    g_free (fn);
-    if (f == NULL)
-        return;
-
-    while (fgets (buf, sizeof (buf), f) != NULL)
-    {
-        s = strrchr (buf, ' ');
-        if (s != NULL)
-            s = g_strndup (buf, s - buf);
-        else
-            s = g_strdup (buf);
-
-        file_list = g_list_prepend (file_list, s);
-    }
-    fclose (f);
-
-    file_list = g_list_last (file_list);
-    s = history_show (&file_list, WIDGET (panel), 0, &act);
-
+    s = show_file_history (WIDGET (midnight_dlg), &act);
     if (s != NULL)
     {
         vfs_path_t *s_vpath;
@@ -1069,9 +1044,6 @@ show_editor_history_list (void)
         g_free (s);
         vfs_path_free (s_vpath);
     }
-
-    file_list = g_list_first (file_list);
-    g_list_free_full (file_list, (GDestroyNotify) g_free);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1451,7 +1423,7 @@ midnight_execute_cmd (Widget * sender, long command)
         view_file_cmd ();
         break;
     case CK_EditorViewerHistory:
-        show_editor_history_list ();
+        show_editor_viewer_history ();
         break;
     case CK_Cancel:
         /* don't close panels due to SIGINT */
