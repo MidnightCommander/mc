@@ -64,7 +64,7 @@ int num_history_items_recorded = 60;
 
 typedef struct
 {
-    Widget *widget;
+    const Widget *widget;
     size_t count;
     size_t maxlen;
 } history_dlg_data;
@@ -313,7 +313,7 @@ history_save (mc_config_t * cfg, const char *name, GList * h)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-history_show (GList ** history, Widget * widget, int current, int *action)
+history_show (GList ** history, const Widget * widget, int current, int *action)
 {
     GList *z, *hi;
     GQueue *hlist;
