@@ -49,6 +49,7 @@
 #include "lib/strutil.h"
 #include "lib/util.h"           /* list_append_unique */
 #include "lib/widget.h"
+#include "lib/keybind.h"        /* CK_* */
 
 /*** global variables ****************************************************************************/
 
@@ -117,28 +118,6 @@ history_dlg_reposition (WDialog * dlg_head)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static inline cb_ret_t
-history_handle_key (WDialog * h, int key)
-{
-    switch (key)
-    {
-    case KEY_F (3):
-        h->ret_value = B_VIEW;
-        dlg_stop (h);
-        return MSG_HANDLED;
-
-    case KEY_F (4):
-        h->ret_value = B_EDIT;
-        dlg_stop (h);
-        return MSG_HANDLED;
-
-    default:
-        return MSG_NOT_HANDLED;
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static cb_ret_t
 history_dlg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
@@ -147,8 +126,29 @@ history_dlg_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, v
     case MSG_RESIZE:
         return history_dlg_reposition (DIALOG (w));
 
-    case MSG_UNHANDLED_KEY:
-        return history_handle_key (DIALOG (w), parm);
+    case MSG_NOTIFY:
+        {
+            /* message from listbox */
+            WDialog *d = DIALOG (w);
+
+            switch (parm)
+            {
+            case CK_View:
+                d->ret_value = B_VIEW;
+                break;
+            case CK_Edit:
+                d->ret_value = B_EDIT;
+                break;
+            case CK_Enter:
+                d->ret_value = B_ENTER;
+                break;
+            default:
+                return MSG_NOT_HANDLED;
+            }
+
+            dlg_stop (d);
+            return MSG_HANDLED;
+        }
 
     default:
         return dlg_default_callback (w, sender, msg, parm, data);
@@ -405,7 +405,7 @@ history_show (GList ** history, const Widget * widget, int current, int *action)
                 *action = CK_View;
                 break;
             default:
-                *action = CK_CdChild;
+                *action = CK_Enter;
             }
         }
 
