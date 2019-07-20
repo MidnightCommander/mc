@@ -315,8 +315,9 @@ history_save (mc_config_t * cfg, const char *name, GList * h)
 char *
 history_show (GList ** history, Widget * widget, int current, int *action)
 {
-    GList *z, *hlist = NULL, *hi;
-    size_t maxlen, count = 0;
+    GList *z, *hi;
+    GQueue *hlist;
+    size_t maxlen, count;
     char *r = NULL;
     WDialog *query_dlg;
     WListbox *query_list;
@@ -328,6 +329,8 @@ history_show (GList ** history, Widget * widget, int current, int *action)
 
     maxlen = str_term_width1 (_("History")) + 2;
 
+    hlist = g_queue_new ();
+
     for (z = *history; z != NULL; z = g_list_previous (z))
     {
         WLEntry *entry;
@@ -335,13 +338,14 @@ history_show (GList ** history, Widget * widget, int current, int *action)
 
         i = str_term_width1 ((char *) z->data);
         maxlen = MAX (maxlen, i);
-        count++;
 
         entry = g_new0 (WLEntry, 1);
         /* history is being reverted here */
         entry->text = g_strdup ((char *) z->data);
-        hlist = g_list_prepend (hlist, entry);
+        g_queue_push_head (hlist, entry);
     }
+
+    count = g_queue_get_length (hlist);
 
     hist_data.widget = widget;
     hist_data.count = count;
@@ -379,7 +383,7 @@ history_show (GList ** history, Widget * widget, int current, int *action)
     {
         /* draw list entries from top downto bottom */
         /* revert history direction */
-        hlist = g_list_reverse (hlist);
+        g_queue_reverse (hlist);
         listbox_set_list (query_list, hlist);
         if (current > 0)
             listbox_select_entry (query_list, current);

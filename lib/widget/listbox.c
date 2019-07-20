@@ -760,22 +760,19 @@ listbox_is_empty (const WListbox * l)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/**
+ * Set new listbox items list.
+ *
+ * @param l WListbox object
+ * @param list list of WLEntry objects
+ */
 void
-listbox_set_list (WListbox * l, GList * list)
+listbox_set_list (WListbox * l, GQueue * list)
 {
     listbox_remove_list (l);
 
     if (l != NULL)
-    {
-        GList *ll;
-
-        l->list = g_queue_new ();
-
-        for (ll = list; ll != NULL; ll = g_list_next (ll))
-            g_queue_push_tail (l->list, ll->data);
-
-        g_list_free (list);
-    }
+        l->list = list;
 }
 
 /* --------------------------------------------------------------------------------------------- */
