@@ -66,7 +66,7 @@ typedef struct
 {
     const Widget *widget;
     size_t count;
-    size_t maxlen;
+    size_t max_width;
 } history_dlg_data;
 
 /*** file scope variables ************************************************************************/
@@ -102,7 +102,7 @@ history_dlg_reposition (WDialog * dlg_head)
     if (data->widget->x > 2)
         x = data->widget->x - 2;
 
-    wi = data->maxlen + 4;
+    wi = data->max_width + 4;
 
     if ((wi + x) > COLS)
     {
@@ -317,7 +317,7 @@ history_show (GList ** history, const Widget * widget, int current, int *action)
 {
     GList *z, *hi;
     GQueue *hlist;
-    size_t maxlen, count;
+    size_t max_width, count;
     char *r = NULL;
     WDialog *query_dlg;
     WListbox *query_list;
@@ -327,7 +327,7 @@ history_show (GList ** history, const Widget * widget, int current, int *action)
     if (*history == NULL)
         return NULL;
 
-    maxlen = str_term_width1 (_("History")) + 2;
+    max_width = str_term_width1 (_("History")) + 2;
 
     hlist = g_queue_new ();
 
@@ -337,7 +337,7 @@ history_show (GList ** history, const Widget * widget, int current, int *action)
         size_t i;
 
         i = str_term_width1 ((char *) z->data);
-        maxlen = MAX (maxlen, i);
+        max_width = MAX (max_width, i);
 
         entry = g_new0 (WLEntry, 1);
         /* history is being reverted here */
@@ -349,7 +349,7 @@ history_show (GList ** history, const Widget * widget, int current, int *action)
 
     hist_data.widget = widget;
     hist_data.count = count;
-    hist_data.maxlen = maxlen;
+    hist_data.max_width = max_width;
 
     query_dlg =
         dlg_create (TRUE, 0, 0, 4, 4, WPOS_KEEP_DEFAULT, TRUE, dialog_colors, history_dlg_callback,
