@@ -93,6 +93,8 @@ xorriso_rm() {
 
 # tested to comply with isoinfo 2.0's output
 test_iso () {
+    which isoinfo 2>/dev/null || (echo "isoinfo not found" >&2;  return 1)
+
     CHARSET=$(locale charmap 2>/dev/null)
     if test -z "$CHARSET"; then
         CHARSET=$(locale 2>/dev/null | @GREP@ LC_CTYPE | sed -n -e 's/.*\.\(.*\)"$/\1/p')
@@ -119,6 +121,8 @@ test_iso () {
 }
 
 mcisofs_list () {
+    local lsl r
+
     # left as a reminder to implement compressed image support =)
     case "$1" in
       *.lz)  MYCAT="lzip -dc";;
@@ -133,7 +137,11 @@ mcisofs_list () {
       *)     MYCAT="cat";;
     esac
 
-    $ISOINFO -l -i "$1" 2>/dev/null | @AWK@ -v SEMICOLON=$SEMICOLON '
+    lsl=$($ISOINFO -l -i "$1"  2>/dev/null)
+    r=$?
+    test $r -gt 0 && return $r
+
+    echo "$lsl" | @AWK@ -v SEMICOLON=$SEMICOLON '
 BEGIN {
   dir="";
   # Pattern to match 8 first fields.
@@ -183,8 +191,8 @@ shift
 case "$cmd" in
   list)
     xorriso_list "$@" || {
-        test_iso "$@";
-        mcisofs_list "$@";
+        test_iso "$@" || exit 1
+        mcisofs_list "$@" || exit 1
     }
     exit 0
     ;;
@@ -214,8 +222,8 @@ case "$cmd" in
     ;;
   copyout)
     xorriso_copyout "$@" || {
-        test_iso "$@";
-        mcisofs_copyout "$@";
+        test_iso "$@" || exit 1
+        mcisofs_copyout "$@" || exit 1
     }
     exit 0
     ;;
