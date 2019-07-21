@@ -1100,7 +1100,10 @@ display_total_marked_size (const WPanel * panel, int y, int x, gboolean size_onl
      */
     widget_move (w, y, x);
     tty_setcolor (MARKED_COLOR);
-    tty_printf (" %s ", buf);
+    
+    if (panels_options.show_mini_info) {
+        tty_printf (" %s ", buf);
+    }
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1309,31 +1312,21 @@ show_dir (const WPanel * panel)
     tty_printf (" %s ", str_term_trim (tmp, MIN (MAX (w->cols - 12, 0), w->cols)));
     g_free (tmp);
 
-    if (!panels_options.show_mini_info)
+    if (panel->marked == 0)
     {
-        if (panel->marked == 0)
+        /* Show size of curret file in the bottom of panel */
+        if (S_ISREG (panel->dir.list[panel->selected].st.st_mode))
         {
-            /* Show size of curret file in the bottom of panel */
-            if (S_ISREG (panel->dir.list[panel->selected].st.st_mode))
-            {
-                char buffer[BUF_SMALL];
+            char buffer[BUF_SMALL];
 
-                g_snprintf (buffer, sizeof (buffer), " %s ",
-                            size_trunc_sep (panel->dir.list[panel->selected].st.st_size,
-                                            panels_options.kilobyte_si));
-                tty_setcolor (NORMAL_COLOR);
-                widget_move (w, w->lines - 1, 4);
-                tty_print_string (buffer);
-            }
-        }
-        else
-        {
-            /* Show total size of marked files
-             * In the bottom of panel, display size only. */
-            display_total_marked_size (panel, w->lines - 1, 2, TRUE);
+            g_snprintf (buffer, sizeof (buffer), " %s ",
+                        size_trunc_sep (panel->dir.list[panel->selected].st.st_size,
+                                        panels_options.kilobyte_si));
+            tty_setcolor (NORMAL_COLOR);
+            widget_move (w, w->lines - 1, 4);
         }
     }
-
+    
     show_free_space (panel);
 
     if (panel->active)
