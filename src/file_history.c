@@ -98,17 +98,21 @@ char *
 show_file_history (const Widget * w, int *action)
 {
     GList *file_list;
+    history_descriptor_t hd;
 
     file_list = file_history_list_read ();
     if (file_list == NULL)
         return NULL;
 
     file_list = g_list_last (file_list);
-    s = history_show (&file_list, w, 0, action);
-    file_list = g_list_first (file_list);
-    g_list_free_full (file_list, (GDestroyNotify) g_free);
+    history_descriptor_init (&hd, w->y, w->x, file_list, 0);
+    history_show (&hd);
+    hd.list = g_list_first (hd.list);
+    g_list_free_full (hd.list, (GDestroyNotify) g_free);
 
-    return s;
+    *action = hd.action;
+
+    return hd.text;
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -3349,25 +3349,29 @@ directory_history_prev (WPanel * panel)
 static void
 directory_history_list (WPanel * panel)
 {
-    char *s;
+    history_descriptor_t hd;
     gboolean ok = FALSE;
     size_t pos;
 
     pos = g_list_position (panel->dir_history_current, panel->dir_history);
 
-    s = history_show (&panel->dir_history, WIDGET (panel), pos, NULL);
-    if (s != NULL)
+    history_descriptor_init (&hd, WIDGET (panel)->y, WIDGET (panel)->x, panel->dir_history,
+                             (int) pos);
+    history_show (&hd);
+
+    panel->dir_history = hd.list;
+    if (hd.text != NULL)
     {
         vfs_path_t *s_vpath;
 
-        s_vpath = vfs_path_from_str (s);
+        s_vpath = vfs_path_from_str (hd.text);
         ok = _do_panel_cd (panel, s_vpath, cd_exact);
         if (ok)
             directory_history_add (panel, panel->cwd_vpath);
         else
             message (D_ERROR, MSG_ERROR, _("Cannot change directory"));
         vfs_path_free (s_vpath);
-        g_free (s);
+        g_free (hd.text);
     }
 
     if (!ok)
