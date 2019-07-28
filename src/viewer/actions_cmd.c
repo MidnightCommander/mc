@@ -58,6 +58,7 @@
 #include "lib/charsets.h"
 #endif
 #include "lib/event.h"          /* mc_event_raise() */
+#include "lib/mcconfig.h"       /* mc_config_history_get() */
 
 #include "src/filemanager/layout.h"
 #include "src/filemanager/cmd.h"
@@ -140,7 +141,7 @@ mcview_continue_search_cmd (WView * view)
         /* find last search string in history */
         GList *history;
 
-        history = history_get (MC_HISTORY_SHARED_SEARCH);
+        history = mc_config_history_get (MC_HISTORY_SHARED_SEARCH);
         if (history != NULL && history->data != NULL)
         {
             view->last_search_string = (gchar *) g_strdup (history->data);

@@ -1433,9 +1433,9 @@ panel_load_history (const gchar * event_group_name, const gchar * event_name,
     if (ev->receiver == NULL || ev->receiver == WIDGET (p))
     {
         if (ev->cfg != NULL)
-            p->dir_history = history_load (ev->cfg, p->hist_name);
+            p->dir_history = mc_config_history_load (ev->cfg, p->hist_name);
         else
-            p->dir_history = history_get (p->hist_name);
+            p->dir_history = mc_config_history_get (p->hist_name);
 
         directory_history_add (p, p->cwd_vpath);
     }
@@ -1459,7 +1459,7 @@ panel_save_history (const gchar * event_group_name, const gchar * event_name,
     {
         ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
 
-        history_save (ev->cfg, p->hist_name, p->dir_history);
+        mc_config_history_save (ev->cfg, p->hist_name, p->dir_history);
     }
 
     return TRUE;

@@ -36,7 +36,7 @@
 
 #include "lib/tty/tty.h"
 #include "lib/tty/key.h"
-#include "lib/mcconfig.h"
+#include "lib/mcconfig.h"       /* num_history_items_recorded */
 #include "lib/fileloc.h"
 #include "lib/timefmt.h"
 #include "lib/util.h"

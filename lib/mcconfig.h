@@ -23,6 +23,8 @@ typedef struct mc_config_t
 
 /*** global variables defined in .c file *********************************************************/
 
+extern int num_history_items_recorded;
+
 /*** declarations of public functions ************************************************************/
 
 /* mcconfig/common.c: */
@@ -100,6 +102,16 @@ char *mc_config_get_full_path (const char *config_name);
 vfs_path_t *mc_config_get_full_vpath (const char *config_name);
 
 gboolean mc_config_migrate_from_old_place (GError ** mcerror, char **msg);
+
+/* mcconfig/history.h */
+
+/* read history to the mc_config, but don't save config to file */
+GList *mc_config_history_get (const char *name);
+/* load history from the mc_config */
+GList *mc_config_history_load (mc_config_t * cfg, const char *name);
+/* save history to the mc_config, but don't save config to file */
+void mc_config_history_save (mc_config_t * cfg, const char *name, GList * h);
+
 
 /*** inline functions ****************************************************************************/
 

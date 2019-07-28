@@ -4,6 +4,7 @@ noinst_LTLIBRARIES = libmcconfig.la
 libmcconfig_la_SOURCES = \
 	common.c \
 	get.c \
+	history.c \
 	set.c \
 	paths.c
 
