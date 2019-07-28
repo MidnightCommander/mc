@@ -48,7 +48,7 @@ static GPtrArray *mc_config_get_string__return_value;
 
 /* @Mock */
 gchar *
-mc_config_get_string_raw (const mc_config_t * config_ignored, const gchar * group,
+mc_config_get_string_raw (mc_config_t * config_ignored, const gchar * group,
                           const gchar * param, const gchar * default_value)
 {
     char *return_value;

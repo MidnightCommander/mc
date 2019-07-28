@@ -127,6 +127,7 @@ static const struct
 };
 #endif /* MC_HOMEDIR_XDG */
 
+/* --------------------------------------------------------------------------------------------- */
 /*** file scope functions *********************************************************************** */
 /* --------------------------------------------------------------------------------------------- */
 
@@ -150,12 +151,11 @@ mc_config_init_one_config_path (const char *path_base, const char *subdir, GErro
     mc_return_val_if_error (mcerror, FALSE);
 
     full_path = g_build_filename (path_base, subdir, (char *) NULL);
+
     if (g_file_test (full_path, G_FILE_TEST_EXISTS))
     {
         if (g_file_test (full_path, G_FILE_TEST_IS_DIR))
-        {
             config_dir_present = TRUE;
-        }
         else
         {
             fprintf (stderr, "%s %s\n", _("FATAL: not a directory:"), full_path);
@@ -199,7 +199,6 @@ mc_config_copy (const char *old_name, const char *new_name, GError ** mcerror)
 
     if (g_file_test (old_name, G_FILE_TEST_IS_DIR))
     {
-
         GDir *dir;
         const char *dir_name;
 
@@ -255,6 +254,7 @@ mc_config_fix_migrated_rules (void)
             rename (old_name, new_name);
             g_free (new_name);
         }
+
         g_free (old_name);
     }
 }
@@ -405,6 +405,7 @@ mc_config_get_home_dir (void)
         if (homedir == NULL || *homedir == '\0')
             homedir = g_get_home_dir ();
     }
+
     return homedir;
 }
 
@@ -445,6 +446,7 @@ mc_config_migrate_from_old_place (GError ** mcerror, char **msg)
     for (rule_index = 0; mc_config_files_reference[rule_index].old_filename != NULL; rule_index++)
     {
         char *old_name;
+
         if (*mc_config_files_reference[rule_index].old_filename == '\0')
             continue;
 
@@ -462,6 +464,7 @@ mc_config_migrate_from_old_place (GError ** mcerror, char **msg)
             mc_config_copy (old_name, new_name, mcerror);
             g_free (new_name);
         }
+
         g_free (old_name);
     }
 
@@ -501,14 +504,11 @@ mc_config_get_full_path (const char *config_name)
         mc_config_init_config_paths (NULL);
 
     for (rule_index = 0; mc_config_files_reference[rule_index].old_filename != NULL; rule_index++)
-    {
         if (strcmp (config_name, mc_config_files_reference[rule_index].new_filename) == 0)
-        {
             return g_build_filename (*mc_config_files_reference[rule_index].new_basedir,
                                      mc_config_files_reference[rule_index].new_filename,
                                      (char *) NULL);
-        }
-    }
+
     return NULL;
 }
 
@@ -530,6 +530,7 @@ mc_config_get_full_vpath (const char *config_name)
 
     ret_vpath = vfs_path_from_str (str_path);
     g_free (str_path);
+
     return ret_vpath;
 }
 
