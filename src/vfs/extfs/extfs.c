@@ -190,31 +190,6 @@ extfs_cmp_archive (const void *a, const void *b)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-extfs_make_dots (struct vfs_class *me, struct vfs_s_entry *ent)
-{
-    struct vfs_s_entry *entry;
-    struct vfs_s_inode *parent, *inode;
-
-    parent = ent->dir;
-    inode = ent->ino;
-
-    /* Create "." */
-    entry = extfs_entry_new (me, ".", inode);
-    inode->localname = NULL;
-    vfs_s_insert_entry (me, inode, entry);
-
-    /* Create ".." */
-    if (parent != NULL)
-        vfs_s_insert_entry (me, parent, extfs_entry_new (me, "..", parent));
-    else
-        vfs_s_insert_entry (me, inode, extfs_entry_new (me, "..", inode));
-
-    inode->ent = ent;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static struct vfs_s_entry *
 extfs_generate_entry (struct extfs_super_t *archive, const char *name, struct vfs_s_inode *parent,
                       mode_t mode)
@@ -243,9 +218,6 @@ extfs_generate_entry (struct extfs_super_t *archive, const char *name, struct vf
     entry = vfs_s_new_entry (me, name, inode);
     if (parent != NULL)
         vfs_s_insert_entry (me, parent, entry);
-
-    if (S_ISDIR (st.st_mode))
-        extfs_make_dots (me, entry);
 
     return entry;
 }
@@ -589,9 +561,6 @@ extfs_read_archive (FILE * extfsd, struct extfs_super_t *current_archive)
                             VFS_INODE (inode)->linkname = current_link_name;
                             current_link_name = NULL;
                         }
-
-                        if (S_ISDIR (hstat.st_mode))
-                            extfs_make_dots (super->me, entry);
                     }
                 }
             }
