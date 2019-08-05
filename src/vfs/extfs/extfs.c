@@ -247,6 +247,8 @@ extfs_find_entry_int (struct vfs_s_inode *dir, const char *name, GSList * list, 
 
     while ((pent != NULL) && (c != '\0') && (*p != '\0'))
     {
+        GList *pl;
+
         q = strchr (p, PATH_SEP);
         if (q == NULL)
             q = (char *) name_end;
@@ -254,45 +256,37 @@ extfs_find_entry_int (struct vfs_s_inode *dir, const char *name, GSList * list, 
         c = *q;
         *q = '\0';
 
-        if (!DIR_IS_DOT (p))
+        pent = extfs_resolve_symlinks_int (pent, list);
+        if (pent == NULL)
         {
-            if (DIR_IS_DOTDOT (p))
-                pent = pent->dir->ent;
-            else
-            {
-                GList *pl;
-
-                pent = extfs_resolve_symlinks_int (pent, list);
-                if (pent == NULL)
-                {
-                    *q = c;
-                    return NULL;
-                }
-                if (!S_ISDIR (pent->ino->st.st_mode))
-                {
-                    *q = c;
-                    notadir = TRUE;
-                    return NULL;
-                }
-
-                pdir = pent;
-                pl = g_list_find_custom (pent->ino->subdir, p, vfs_s_entry_compare);
-                pent = pl != NULL ? VFS_ENTRY (pl->data) : NULL;
-                if (pent != NULL && q + 1 > name_end)
-                {
-                    /* Hack: I keep the original semanthic unless q+1 would break in the strchr */
-                    *q = c;
-                    notadir = !S_ISDIR (pent->ino->st.st_mode);
-                    return pent;
-                }
-
-                /* When we load archive, we create automagically non-existent directories */
-                if (pent == NULL && (flags & FL_MKDIR) != 0)
-                    pent = extfs_generate_entry (super, p, pdir->ino, S_IFDIR | 0777);
-                if (pent == NULL && (flags & FL_MKFILE) != 0)
-                    pent = extfs_generate_entry (super, p, pdir->ino, S_IFREG | 0666);
-            }
+            *q = c;
+            return NULL;
         }
+
+        if (!S_ISDIR (pent->ino->st.st_mode))
+        {
+            *q = c;
+            notadir = TRUE;
+            return NULL;
+        }
+
+        pdir = pent;
+        pl = g_list_find_custom (pent->ino->subdir, p, vfs_s_entry_compare);
+        pent = pl != NULL ? VFS_ENTRY (pl->data) : NULL;
+        if (pent != NULL && q + 1 > name_end)
+        {
+            /* Hack: I keep the original semanthic unless q+1 would break in the strchr */
+            *q = c;
+            notadir = !S_ISDIR (pent->ino->st.st_mode);
+            return pent;
+        }
+
+        /* When we load archive, we create automagically non-existent directories */
+        if (pent == NULL && (flags & FL_MKDIR) != 0)
+            pent = extfs_generate_entry (super, p, pdir->ino, S_IFDIR | 0777);
+        if (pent == NULL && (flags & FL_MKFILE) != 0)
+            pent = extfs_generate_entry (super, p, pdir->ino, S_IFREG | 0666);
+
         /* Next iteration */
         *q = c;
         if (c != '\0')
@@ -489,78 +483,75 @@ extfs_read_archive (FILE * extfsd, struct extfs_super_t *current_archive)
                     q = cfn;
                 }
 
-                if (!S_ISDIR (hstat.st_mode) || !(DIR_IS_DOT (p) || DIR_IS_DOTDOT (p)))
+                if (*q != '\0')
                 {
-                    if (*q != '\0')
+                    pent = extfs_find_entry (super->root, q, FL_MKDIR);
+                    if (pent == NULL)
                     {
-                        pent = extfs_find_entry (super->root, q, FL_MKDIR);
-                        if (pent == NULL)
-                        {
-                            ret = -1;
-                            break;
-                        }
+                        ret = -1;
+                        break;
+                    }
+                }
+
+                if (pent != NULL)
+                {
+                    entry = extfs_entry_new (super->me, p, pent->ino);
+                    entry->dir = pent->ino;
+                    pent->ino->subdir = g_list_append (pent->ino->subdir, entry);
+                }
+                else
+                {
+                    entry = extfs_entry_new (super->me, p, super->root);
+                    entry->dir = super->root;
+                    super->root->subdir = g_list_append (super->root->subdir, entry);
+                }
+
+                if (!S_ISLNK (hstat.st_mode) && (current_link_name != NULL))
+                {
+                    pent = extfs_find_entry (super->root, current_link_name, FL_NONE);
+                    if (pent == NULL)
+                    {
+                        ret = -1;
+                        break;
                     }
 
-                    if (pent != NULL)
-                    {
-                        entry = extfs_entry_new (super->me, p, pent->ino);
-                        entry->dir = pent->ino;
-                        pent->ino->subdir = g_list_append (pent->ino->subdir, entry);
-                    }
-                    else
-                    {
-                        entry = extfs_entry_new (super->me, p, super->root);
-                        entry->dir = super->root;
-                        super->root->subdir = g_list_append (super->root->subdir, entry);
-                    }
+                    pent->ino->st.st_nlink++;
+                    entry->ino = pent->ino;
+                }
+                else
+                {
+                    struct stat st;
 
-                    if (!S_ISLNK (hstat.st_mode) && (current_link_name != NULL))
-                    {
-                        pent = extfs_find_entry (super->root, current_link_name, FL_NONE);
-                        if (pent == NULL)
-                        {
-                            ret = -1;
-                            break;
-                        }
-
-                        pent->ino->st.st_nlink++;
-                        entry->ino = pent->ino;
-                    }
-                    else
-                    {
-                        struct stat st;
-
-                        st.st_ino = super->ino_usage++;
-                        st.st_nlink = 1;
-                        st.st_dev = current_archive->rdev;
-                        st.st_mode = hstat.st_mode;
+                    st.st_ino = super->ino_usage++;
+                    st.st_nlink = 1;
+                    st.st_dev = current_archive->rdev;
+                    st.st_mode = hstat.st_mode;
 #ifdef HAVE_STRUCT_STAT_ST_RDEV
-                        st.st_rdev = hstat.st_rdev;
+                    st.st_rdev = hstat.st_rdev;
 #else
-                        st.st_rdev = 0;
+                    st.st_rdev = 0;
 #endif
-                        st.st_uid = hstat.st_uid;
-                        st.st_gid = hstat.st_gid;
-                        st.st_size = hstat.st_size;
-                        st.st_mtime = hstat.st_mtime;
-                        st.st_atime = hstat.st_atime;
-                        st.st_ctime = hstat.st_ctime;
+                    st.st_uid = hstat.st_uid;
+                    st.st_gid = hstat.st_gid;
+                    st.st_size = hstat.st_size;
+                    st.st_mtime = hstat.st_mtime;
+                    st.st_atime = hstat.st_atime;
+                    st.st_ctime = hstat.st_ctime;
 
-                        if (current_link_name == NULL || !S_ISLNK (hstat.st_mode))
-                        {
-                            if (S_ISLNK (hstat.st_mode))
-                                st.st_mode &= ~S_IFLNK; /* You *DON'T* want to do this always */
-                        }
+                    if (current_link_name == NULL || !S_ISLNK (hstat.st_mode))
+                    {
+                        if (S_ISLNK (hstat.st_mode))
+                            st.st_mode &= ~S_IFLNK;     /* You *DON'T* want to do this always */
+                    }
 
-                        inode = vfs_s_new_inode (super->me, super, &st);
-                        inode->ent = entry;
-                        entry->ino = inode;
+                    inode = vfs_s_new_inode (super->me, super, &st);
+                    inode->ent = entry;
+                    entry->ino = inode;
 
-                        if (current_link_name != NULL && S_ISLNK (hstat.st_mode))
-                        {
-                            VFS_INODE (inode)->linkname = current_link_name;
-                            current_link_name = NULL;
-                        }
+                    if (current_link_name != NULL && S_ISLNK (hstat.st_mode))
+                    {
+                        VFS_INODE (inode)->linkname = current_link_name;
+                        current_link_name = NULL;
                     }
                 }
             }
