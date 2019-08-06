@@ -328,6 +328,21 @@ extfs_fill_names (struct vfs_class *me, fill_names_f func)
 
 /* --------------------------------------------------------------------------------------------- */
 
+/* Create this function because VFS_USETMP flag is not used in extfs */
+static void
+extfs_free_inode (struct vfs_class *me, struct vfs_s_inode *ino)
+{
+    (void) me;
+
+    if (ino->localname != NULL)
+    {
+        unlink (ino->localname);
+        MC_PTR_FREE (ino->localname);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 extfs_free_archive (struct vfs_class *me, struct vfs_s_super *psup)
 {
@@ -1504,7 +1519,8 @@ extfs_done (struct vfs_class *me)
 {
     size_t i;
 
-    (void) me;
+    while (VFS_SUBCLASS (me)->supers != NULL)
+        me->free ((vfsid) VFS_SUBCLASS (me)->supers->data);
 
     if (extfs_plugins == NULL)
         return;
@@ -1571,6 +1587,7 @@ vfs_init_extfs (void)
     vfs_extfs_ops->mkdir = extfs_mkdir;
     vfs_extfs_ops->rmdir = extfs_rmdir;
     vfs_extfs_ops->setctl = extfs_setctl;
+    extfs_subclass.free_inode = extfs_free_inode;
     extfs_subclass.free_archive = extfs_free_archive;
     vfs_register_class (vfs_extfs_ops);
 }
