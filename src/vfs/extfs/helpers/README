@@ -80,6 +80,8 @@ means from root of the archive listed).
 If permissions do not start with l, but number of links is greater than one,
 then it says that this file should be a hardlinked with the other file.
 
+The result of list command must not contain "." and ".." items.
+
 * Command: copyout archivename storedfilename extractto
 
 This should extract from archive archivename the file called
