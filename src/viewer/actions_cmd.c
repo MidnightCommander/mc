@@ -61,7 +61,6 @@
 #include "lib/mcconfig.h"       /* mc_config_history_get() */
 
 #include "src/filemanager/layout.h"
-#include "src/filemanager/cmd.h"
 #include "src/filemanager/midnight.h"   /* current_panel */
 #include "src/filemanager/ext.h"        /* regex_command_for() */
 
@@ -538,7 +537,7 @@ mcview_execute_cmd (WView * view, long command)
         mcview_moveto_bottom (view);
         break;
     case CK_Shell:
-        view_other_cmd ();
+        toggle_subshell ();
         break;
     case CK_Ruler:
         mcview_display_toggle_ruler (view);

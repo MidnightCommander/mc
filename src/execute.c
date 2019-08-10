@@ -446,13 +446,25 @@ shell_execute (const char *command, int flags)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-toggle_panels (void)
+toggle_subshell (void)
 {
+    static gboolean message_flag = TRUE;
+
 #ifdef ENABLE_SUBSHELL
     vfs_path_t *new_dir_vpath = NULL;
 #endif /* ENABLE_SUBSHELL */
 
     SIG_ATOMIC_VOLATILE_T was_sigwinch = 0;
+
+    if (!(mc_global.tty.xterm_flag || mc_global.tty.console_flag != '\0'
+          || mc_global.tty.use_subshell || output_starts_shell))
+    {
+        if (message_flag)
+            message (D_ERROR, MSG_ERROR,
+                     _("Not an xterm or Linux console;\nthe panels cannot be toggled."));
+        message_flag = FALSE;
+        return;
+    }
 
     channels_down ();
     disable_mouse ();

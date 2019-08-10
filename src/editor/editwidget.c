@@ -57,7 +57,8 @@
 
 #include "src/keybind-defaults.h"       /* keybind_lookup_keymap_command() */
 #include "src/setup.h"          /* home_dir */
-#include "src/filemanager/cmd.h"        /* view_other_cmd(), save_setup_cmd()  */
+#include "src/execute.h"        /* toggle_subshell()  */
+#include "src/filemanager/cmd.h"        /* save_setup_cmd()  */
 #include "src/learn.h"          /* learn_keys() */
 #include "src/args.h"           /* mcedit_arg_t */
 
@@ -467,7 +468,7 @@ edit_dialog_command_execute (WDialog * h, long command)
         edit_refresh_cmd ();
         break;
     case CK_Shell:
-        view_other_cmd ();
+        toggle_subshell ();
         break;
     case CK_LearnKeys:
         learn_keys ();

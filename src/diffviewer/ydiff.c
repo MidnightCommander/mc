@@ -50,10 +50,11 @@
 #endif
 #include "lib/event.h"          /* mc_event_raise() */
 
-#include "src/filemanager/cmd.h"        /* edit_file_at_line(), view_other_cmd() */
+#include "src/filemanager/cmd.h"        /* edit_file_at_line() */
 #include "src/filemanager/panel.h"
 #include "src/filemanager/layout.h"     /* Needed for get_current_index and get_other_panel */
 
+#include "src/execute.h"        /* toggle_subshell() */
 #include "src/keybind-defaults.h"
 #include "src/setup.h"
 #include "src/history.h"
@@ -3253,7 +3254,7 @@ dview_execute_cmd (WDiff * dview, long command)
         dview->skip_cols = 0;
         break;
     case CK_Shell:
-        view_other_cmd ();
+        toggle_subshell ();
         break;
     case CK_Quit:
         dview->view_quit = TRUE;

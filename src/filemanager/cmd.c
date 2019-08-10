@@ -1205,25 +1205,6 @@ swap_cmd (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-view_other_cmd (void)
-{
-    static gboolean message_flag = TRUE;
-
-    if (mc_global.tty.xterm_flag || mc_global.tty.console_flag != '\0'
-        || mc_global.tty.use_subshell || output_starts_shell)
-        toggle_panels ();
-    else
-    {
-        if (message_flag)
-            message (D_ERROR, MSG_ERROR,
-                     _("Not an xterm or Linux console;\nthe panels cannot be toggled."));
-        message_flag = FALSE;
-    }
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-void
 link_cmd (link_type_t link_type)
 {
     char *filename = selection (current_panel)->fname;

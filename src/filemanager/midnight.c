@@ -58,6 +58,7 @@
 #ifdef ENABLE_SUBSHELL
 #include "src/subshell/subshell.h"
 #endif
+#include "src/execute.h"        /* toggle_subshell */
 #include "src/setup.h"          /* variables */
 #include "src/learn.h"          /* learn_keys() */
 #include "src/keybind-defaults.h"
@@ -1367,7 +1368,7 @@ midnight_execute_cmd (Widget * sender, long command)
         res = send_message (current_panel, midnight_dlg, MSG_ACTION, command, NULL);
         break;
     case CK_Shell:
-        view_other_cmd ();
+        toggle_subshell ();
         break;
     case CK_DirSize:
         smart_dirsize_cmd ();

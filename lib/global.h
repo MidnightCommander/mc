@@ -253,7 +253,7 @@ typedef struct
 #endif                          /* !ENABLE_SUBSHELL */
 
         /* This flag is set by xterm detection routine in function main() */
-        /* It is used by function view_other_cmd() */
+        /* It is used by function toggle_subshell() */
         gboolean xterm_flag;
 
         /* disable x11 support */
