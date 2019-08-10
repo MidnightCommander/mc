@@ -186,6 +186,7 @@ WEdit *edit_init (WEdit * edit, int y, int x, int lines, int cols,
 gboolean edit_clean (WEdit * edit);
 gboolean edit_ok_to_exit (WEdit * edit);
 gboolean edit_load_cmd (WDialog * h);
+gboolean edit_load_file_from_history (WDialog * h);
 gboolean edit_load_syntax_file (WDialog * h);
 gboolean edit_load_menu_file (WDialog * h);
 gboolean edit_close_cmd (WEdit * edit);

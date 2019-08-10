@@ -171,16 +171,19 @@ static void
 do_show_hist (WInput * in)
 {
     size_t len;
-    char *r;
+    history_descriptor_t hd;
 
     len = get_history_length (in->history.list);
 
-    r = history_show (&in->history.list, WIDGET (in),
-                      g_list_position (in->history.list, in->history.list));
-    if (r != NULL)
+    history_descriptor_init (&hd, WIDGET (in)->y, WIDGET (in)->x, in->history.list,
+                             g_list_position (in->history.list, in->history.list));
+    history_show (&hd);
+
+    in->history.list = hd.list;
+    if (hd.text != NULL)
     {
-        input_assign_text (in, r);
-        g_free (r);
+        input_assign_text (in, hd.text);
+        g_free (hd.text);
     }
 
     /* Has history cleaned up or not? */

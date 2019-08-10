@@ -54,6 +54,7 @@ ScreenList = alt-prime
 # ConnectFtp =
 # ConnectSmb =
 # Undelete =
+EditorViewerHistory = alt-shift-e
 ExtendedKeyMap = ctrl-x
 
 [main:xmap]
@@ -193,6 +194,9 @@ PageUp = pgup; alt-v
 PageDown = pgdn; ctrl-v
 Delete = delete; d
 Clear = shift-delete; shift-d
+View = f3
+Edit = f4
+Enter = enter
 
 [tree]
 Help = f1
@@ -271,6 +275,7 @@ Save = f2
 EditNew = ctrl-n
 SaveAs = f12; ctrl-f2
 # Close =
+History = alt-shift-e
 Mark = f3
 Copy = f5
 Move = f6
@@ -401,6 +406,7 @@ FilePrev = ctrl-b
 SelectCodepage = alt-e
 Shell = ctrl-o
 Ruler = alt-r
+History = alt-shift-e
 
 [viewer:hex]
 Help = f1
@@ -429,6 +435,7 @@ PageDown = pgdn; ctrl-v
 PageUp = pgup; alt-v
 Top = ctrl-home; ctrl-pgup; a1; alt-lt; g
 Bottom = ctrl-end; ctrl-pgdn; c1; alt-gt; shift-g
+History = alt-shift-e
 
 [diffviewer]
 ShowSymbols = alt-s; s

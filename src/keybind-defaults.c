@@ -99,6 +99,7 @@ static const global_keymap_ini_t default_main_keymap[] = {
     {"MenuLastSelected", "f19"},
     {"QuitQuiet", "f20"},
     {"History", "alt-h"},
+    {"EditorViewerHistory", "alt-shift-e"},
     {"DirSize", "ctrl-space"},
     /* Copy useful information to the command line */
     {"PutCurrentPath", "alt-a"},
@@ -286,6 +287,9 @@ static const global_keymap_ini_t default_listbox_keymap[] = {
     {"PageDown", "pgdn; ctrl-v"},
     {"Delete", "delete; d"},
     {"Clear", "shift-delete; shift-d"},
+    {"View", "f3"},
+    {"Edit", "f4"},
+    {"Enter", "enter"},
     {NULL, NULL}
 };
 
@@ -486,6 +490,7 @@ static const global_keymap_ini_t default_viewer_keymap[] = {
     {"SearchForwardContinue", "ctrl-s"},
     {"SearchBackwardContinue", "ctrl-r"},
     {"SearchOppositeContinue", "shift-n"},
+    {"History", "alt-shift-e"},
     {NULL, NULL}
 };
 
@@ -521,6 +526,7 @@ static const global_keymap_ini_t default_viewer_hex_keymap[] = {
     {"SearchForwardContinue", "ctrl-s"},
     {"SearchBackwardContinue", "ctrl-r"},
     {"SearchOppositeContinue", "shift-n"},
+    {"History", "alt-shift-e"},
     {NULL, NULL}
 };
 

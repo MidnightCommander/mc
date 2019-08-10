@@ -62,6 +62,7 @@
 #endif
 
 #include "src/history.h"
+#include "src/file_history.h"   /* show_file_history() */
 #include "src/setup.h"          /* option_tab_spacing */
 #ifdef HAVE_CHARSET
 #include "src/selcodepage.h"
@@ -2092,6 +2093,35 @@ edit_load_cmd (WDialog * h)
                                INPUT_COMPLETE_FILENAMES | INPUT_COMPLETE_CD);
 
     if (exp != NULL && *exp != '\0')
+    {
+        vfs_path_t *exp_vpath;
+
+        exp_vpath = vfs_path_from_str (exp);
+        ret = edit_load_file_from_filename (h, exp_vpath);
+        vfs_path_free (exp_vpath);
+    }
+
+    g_free (exp);
+
+    return ret;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+  * Show history od edited or viewed files and open selected file.
+  *
+  * @return TRUE on success, FALSE otherwise.
+  */
+
+gboolean
+edit_load_file_from_history (WDialog * h)
+{
+    char *exp;
+    int action;
+    gboolean ret = TRUE;        /* possible cancel */
+
+    exp = show_file_history (CONST_WIDGET (h), &action);
+    if (exp != NULL && (action == CK_Edit || action == CK_Enter))
     {
         vfs_path_t *exp_vpath;
 
