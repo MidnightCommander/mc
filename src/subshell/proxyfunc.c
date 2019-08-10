@@ -24,10 +24,12 @@
  */
 
 #include <config.h>
-#include <sys/wait.h>
+
+#include <signal.h>             /* kill() */
+#include <sys/types.h>
+#include <sys/wait.h>           /* waitpid() */
 
 #include "lib/global.h"
-#include "lib/widget.h"
 
 #include "src/setup.h"          /* quit */
 #include "src/filemanager/midnight.h"   /* current_panel */
