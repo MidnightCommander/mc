@@ -865,11 +865,8 @@ setup_panels (void)
                          panels[1].widget->cols);
     }
 
-    if (mc_global.message_visible)
-        widget_set_size (WIDGET (the_hint), height + start_y, mw->x, 1, mw->cols);
-    else
-        /* make invisible */
-        widget_set_size (WIDGET (the_hint), 0, 0, 0, 0);
+    widget_set_size (WIDGET (the_hint), height + start_y, mw->x, 1, mw->cols);
+    widget_set_visibility (WIDGET (the_hint), mc_global.message_visible);
 
     /* Output window */
     if (mc_global.tty.console_flag != '\0' && output_lines != 0)
