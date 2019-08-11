@@ -931,7 +931,7 @@ create_file_manager (void)
     add_widget (midnight_dlg, get_panel_widget (1));
 
     the_hint = label_new (0, 0, 0);
-    the_hint->transparent = 1;
+    the_hint->transparent = TRUE;
     the_hint->auto_adjust_cols = 0;
     WIDGET (the_hint)->cols = COLS;
     add_widget (midnight_dlg, the_hint);
