@@ -213,6 +213,7 @@ void widget_erase (Widget * w);
 gboolean widget_is_active (const void *w);
 gboolean widget_overlapped (const Widget * a, const Widget * b);
 void widget_replace (Widget * old, Widget * new);
+gboolean widget_is_focusable (const Widget * w);
 void widget_select (Widget * w);
 void widget_set_bottom (Widget * w);
 

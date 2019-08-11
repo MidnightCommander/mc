@@ -113,15 +113,12 @@ group_select_next_or_prev (WGroup * g, gboolean next)
     if (g->widgets != NULL && g->current != NULL)
     {
         GList *l = g->current;
-        Widget *w;
 
         do
         {
             l = group_get_next_or_prev_of (l, next);
-            w = WIDGET (l->data);
         }
-        while ((widget_get_state (w, WST_DISABLED) || !widget_get_options (w, WOP_SELECTABLE))
-               && l != g->current);
+        while (!widget_is_focusable (l->data) && l != g->current);
 
         widget_select (l->data);
     }

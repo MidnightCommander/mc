@@ -567,8 +567,7 @@ widget_replace (Widget * old_w, Widget * new_w)
         GList *l;
 
         for (l = group_get_widget_next_of (holder);
-             !widget_get_options (WIDGET (l->data), WOP_SELECTABLE)
-             && !widget_get_state (WIDGET (l->data), WST_DISABLED);
+             widget_is_focusable (WIDGET (l->data);
              l = group_get_widget_next_of (l))
             ;
 
@@ -587,6 +586,14 @@ widget_replace (Widget * old_w, Widget * new_w)
         widget_select (new_w);
     else
         widget_draw (new_w);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+widget_is_focusable (const Widget * w)
+{
+    return (widget_get_options (w, WOP_SELECTABLE) && !widget_get_state (w, WST_DISABLED));
 }
 
 /* --------------------------------------------------------------------------------------------- */

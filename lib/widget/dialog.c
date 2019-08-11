@@ -514,8 +514,7 @@ dlg_init (WDialog * h)
     }
 
     /* Select the first widget that takes focus */
-    while (g->current != NULL && !widget_get_options (WIDGET (g->current->data), WOP_SELECTABLE)
-           && !widget_get_state (WIDGET (g->current->data), WST_DISABLED))
+    while (g->current != NULL && !widget_is_focusable (g->current->data))
         group_set_current_widget_next (g);
 
     widget_set_state (wh, WST_ACTIVE, TRUE);
