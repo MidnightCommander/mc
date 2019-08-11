@@ -841,7 +841,7 @@ setup_panels (void)
     }
 
     widget_set_size (WIDGET (the_menubar), mw->y, mw->x, 1, mw->cols);
-    menubar_set_visible (the_menubar, menubar_visible);
+    widget_set_visibility (WIDGET (the_menubar), menubar_visible);
 
     check_split (&panels_layout);
     start_y = mw->y + (menubar_visible ? 1 : 0);

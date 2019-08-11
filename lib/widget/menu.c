@@ -310,15 +310,20 @@ menubar_finish (WMenuBar * menubar)
 {
     Widget *w = WIDGET (menubar);
 
-    widget_set_state (w, WST_FOCUSED, FALSE);
     menubar->is_dropped = FALSE;
     w->lines = 1;
     widget_want_hotkey (w, FALSE);
     widget_set_options (w, WOP_SELECTABLE, FALSE);
 
-    /* Move the menubar to the bottom so that widgets displayed on top of
-     * an "invisible" menubar get the first chance to respond to mouse events. */
-    widget_set_bottom (w);
+    if (!mc_global.keybar_visible)
+        widget_hide (w);
+    else
+    {
+        /* Move the menubar to the bottom so that widgets displayed on top of
+         * an "invisible" menubar get the first chance to respond to mouse events. */
+        widget_set_bottom (w);
+    }
+
     /* background must be bottom */
     if (DIALOG (w->owner)->bg != NULL)
         widget_set_bottom (WIDGET (DIALOG (w->owner)->bg));
@@ -670,7 +675,7 @@ menubar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
         return MSG_NOT_HANDLED;
 
     case MSG_DRAW:
-        if (menubar->is_visible || menubar_refresh (menubar))
+        if (widget_get_state (w, WST_VISIBLE) || menubar_refresh (menubar))
             menubar_draw (menubar);
         return MSG_HANDLED;
 
@@ -941,7 +946,7 @@ destroy_menu (menu_t * menu)
 /* --------------------------------------------------------------------------------------------- */
 
 WMenuBar *
-menubar_new (GList * menu, gboolean visible)
+menubar_new (GList * menu)
 {
     WMenuBar *menubar;
     Widget *w;
@@ -954,7 +959,6 @@ menubar_new (GList * menu, gboolean visible)
     widget_set_options (w, WOP_SELECTABLE, FALSE);
     w->options |= WOP_TOP_SELECT;
     w->keymap = menu_map;
-    menubar->is_visible = visible;
     menubar_set_menu (menubar, menu);
 
     return menubar;
@@ -1063,6 +1067,8 @@ void
 menubar_activate (WMenuBar * menubar, gboolean dropped, int which)
 {
     Widget *w = WIDGET (menubar);
+
+    widget_show (w);
 
     if (!widget_get_state (w, WST_FOCUSED))
     {

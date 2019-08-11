@@ -1257,7 +1257,7 @@ edit_files (const GList * files)
                 (1, 0, wd->lines - 2, wd->cols, EDITOR_BACKGROUND, ' ', edit_dialog_bg_callback));
     group_add_widget (g, edit_dlg->bg);
 
-    menubar = menubar_new (NULL, TRUE);
+    menubar = menubar_new (NULL);
     w = WIDGET (menubar);
     group_add_widget_autopos (g, w, w->pos_flags, NULL);
     edit_init_menu (menubar);
