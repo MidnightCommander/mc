@@ -1262,7 +1262,7 @@ edit_files (const GList * files)
     group_add_widget_autopos (g, w, w->pos_flags, NULL);
     edit_init_menu (menubar);
 
-    w = WIDGET (buttonbar_new (TRUE));
+    w = WIDGET (buttonbar_new ());
     group_add_widget_autopos (g, w, w->pos_flags, NULL);
 
     for (file = files; file != NULL; file = g_list_next (file))

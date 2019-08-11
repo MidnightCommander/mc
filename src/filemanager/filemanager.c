@@ -939,7 +939,7 @@ create_file_manager (void)
     the_prompt->transparent = TRUE;
     group_add_widget (g, the_prompt);
 
-    the_bar = buttonbar_new (mc_global.keybar_visible);
+    the_bar = buttonbar_new ();
     group_add_widget (g, the_bar);
     midnight_set_buttonbar (the_bar);
 }
