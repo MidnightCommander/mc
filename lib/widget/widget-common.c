@@ -98,7 +98,7 @@ widget_default_resize (Widget * w, const WRect * r)
 static void
 widget_do_focus (Widget * w, gboolean enable)
 {
-    if (w != NULL && widget_get_state (WIDGET (w->owner), WST_FOCUSED))
+    if (w != NULL && widget_get_state (WIDGET (w->owner), WST_VISIBLE | WST_FOCUSED))
         widget_set_state (w, WST_FOCUSED, enable);
 }
 
@@ -332,7 +332,7 @@ widget_init (Widget * w, int y, int x, int lines, int cols,
     w->mouse.last_buttons_down = 0;
 
     w->options = WOP_DEFAULT;
-    w->state = WST_CONSTRUCT;
+    w->state = WST_CONSTRUCT | WST_VISIBLE;
 
     w->find = widget_default_find;
     w->find_by_type = widget_default_find_by_type;
@@ -479,6 +479,15 @@ widget_erase (Widget * w)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+void
+widget_set_visibility (Widget * w, gboolean make_visible)
+{
+    if (widget_get_state (w, WST_VISIBLE) != make_visible)
+        widget_set_state (w, WST_VISIBLE, make_visible);
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /**
   * Check whether widget is active or not.
   * Widget is active if it's current in the its owner and each owner in the chain is current too.
@@ -516,7 +525,7 @@ widget_draw (Widget * w)
 {
     cb_ret_t ret = MSG_NOT_HANDLED;
 
-    if (w != NULL)
+    if (w != NULL && widget_get_state (w, WST_VISIBLE))
     {
         WGroup *g = w->owner;
 
@@ -566,8 +575,7 @@ widget_replace (Widget * old_w, Widget * new_w)
     {
         GList *l;
 
-        for (l = group_get_widget_next_of (holder);
-             widget_is_focusable (WIDGET (l->data);
+        for (l = group_get_widget_next_of (holder); widget_is_focusable (WIDGET (l->data));
              l = group_get_widget_next_of (l))
             ;
 
@@ -593,7 +601,8 @@ widget_replace (Widget * old_w, Widget * new_w)
 gboolean
 widget_is_focusable (const Widget * w)
 {
-    return (widget_get_options (w, WOP_SELECTABLE) && !widget_get_state (w, WST_DISABLED));
+    return (widget_get_options (w, WOP_SELECTABLE) && widget_get_state (w, WST_VISIBLE) &&
+            !widget_get_state (w, WST_DISABLED));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -743,6 +752,7 @@ cb_ret_t
 widget_default_set_state (Widget * w, widget_state_t state, gboolean enable)
 {
     gboolean ret = MSG_HANDLED;
+    Widget *owner = WIDGET (GROUP (w->owner));
 
     if (enable)
         w->state |= state;
@@ -762,14 +772,32 @@ widget_default_set_state (Widget * w, widget_state_t state, gboolean enable)
             w->state &= ~(WST_CONSTRUCT | WST_ACTIVE | WST_SUSPENDED);
     }
 
-    if (w->owner == NULL)
+    if (owner == NULL)
         return MSG_NOT_HANDLED;
 
     switch (state)
     {
+    case WST_VISIBLE:
+        if (widget_get_state (owner, WST_ACTIVE))
+        {
+            /* redraw owner to show/hide widget */
+            widget_draw (owner);
+
+            if (!enable)
+            {
+                /* try select another widget if current one got hidden */
+                if (w == GROUP (owner)->current->data)
+                    group_select_next_widget (GROUP (owner));
+
+                widget_update_cursor (owner);   /* FIXME: unneeded? */
+            }
+        }
+        break;
+
+
     case WST_DISABLED:
         ret = send_message (w, NULL, enable ? MSG_DISABLE : MSG_ENABLE, 0, NULL);
-        if (ret == MSG_HANDLED && widget_get_state (WIDGET (w->owner), WST_ACTIVE))
+        if (ret == MSG_HANDLED && widget_get_state (owner, WST_ACTIVE))
             ret = widget_draw (w);
         break;
 
@@ -779,11 +807,11 @@ widget_default_set_state (Widget * w, widget_state_t state, gboolean enable)
 
             msg = enable ? MSG_FOCUS : MSG_UNFOCUS;
             ret = send_message (w, NULL, msg, 0, NULL);
-            if (ret == MSG_HANDLED && widget_get_state (WIDGET (w->owner), WST_ACTIVE))
+            if (ret == MSG_HANDLED && widget_get_state (owner, WST_ACTIVE))
             {
                 widget_draw (w);
                 /* Notify owner that focus was moved from one widget to another */
-                send_message (w->owner, w, MSG_CHANGED_FOCUS, 0, NULL);
+                send_message (owner, w, MSG_CHANGED_FOCUS, 0, NULL);
             }
         }
         break;

@@ -167,7 +167,9 @@ group_send_broadcast_msg_custom (WGroup * g, widget_msg_t msg, gboolean reverse,
         p = group_get_next_or_prev_of (p, !reverse);
 
         if (options == WOP_DEFAULT || (options & w->options) != 0)
-            send_message (w, NULL, msg, 0, NULL);
+            /* special case: don't draw invisible widgets */
+            if (msg != MSG_DRAW || widget_get_state (w, WST_VISIBLE))
+                send_message (w, NULL, msg, 0, NULL);
     }
     while (first != p);
 }
@@ -287,8 +289,11 @@ group_update_cursor (WGroup * g)
         {
             Widget *w = WIDGET (p->data);
 
-            if (widget_get_options (w, WOP_WANT_CURSOR) && !widget_get_state (w, WST_DISABLED)
-                && widget_update_cursor (WIDGET (p->data)))
+            /* Don't use widget_is_selectable() here.
+               If WOP_SELECTABLE option is not set, widget can handle mouse events.
+               For example, commandl line in file manager */
+            if (widget_get_options (w, WOP_WANT_CURSOR) && widget_get_state (w, WST_VISIBLE)
+                && !widget_get_state (w, WST_DISABLED) && widget_update_cursor (WIDGET (p->data)))
                 return MSG_HANDLED;
 
             p = group_get_widget_next_of (p);
@@ -459,7 +464,7 @@ group_handle_hotkey (WGroup * g, int key)
 
     w = WIDGET (g->current->data);
 
-    if (widget_get_state (w, WST_DISABLED))
+    if (!widget_get_state (w, WST_VISIBLE) || widget_get_state (w, WST_DISABLED))
         return MSG_NOT_HANDLED;
 
     /* Explanation: we don't send letter hotkeys to other widgets
@@ -652,7 +657,10 @@ group_handle_mouse_event (Widget * w, Gpm_Event * event)
         {
             Widget *wp = WIDGET (p->data);
 
-            if (!widget_get_state (wp, WST_DISABLED))
+            /* Don't use widget_is_selectable() here.
+               If WOP_SELECTABLE option is not set, widget can handle mouse events.
+               For example, commandl line in file manager */
+            if (widget_get_state (w, WST_VISIBLE) && !widget_get_state (wp, WST_DISABLED))
             {
                 /* put global cursor position to the widget */
                 int ret;
