@@ -4120,6 +4120,10 @@ don't need to quote those characters in the middle of the command line.
 On the other hand, you cannot use them to change selection when the
 command line is not empty.
 .TP
+.I alternate_plus_minus
+If true, use '+', '\-', '\\' and '*' keys normally. For select/unselect,
+use 'M\-+', 'M\--' and 'M\-*'.
+.TP
 .I show_output_starts_shell
 This variable only works if you are not using the subshell support.
 When you use the C\-o keystroke to go back to the user screen, if this
