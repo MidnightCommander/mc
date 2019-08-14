@@ -922,7 +922,7 @@ create_file_manager (void)
     /* allow rebind tab */
     widget_want_tab (WIDGET (midnight_dlg), TRUE);
 
-    the_menubar = menubar_new (0, 0, COLS, NULL, menubar_visible);
+    the_menubar = menubar_new (NULL, menubar_visible);
     add_widget (midnight_dlg, the_menubar);
     init_menu ();
 
