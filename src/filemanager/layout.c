@@ -711,7 +711,38 @@ panel_update_cols (Widget * widget, panel_display_t frame_size)
 void
 setup_panels (void)
 {
+    /* File manager screen layout:
+     *
+     * +---------------------------------------------------------------+
+     * | Menu bar                                                      |
+     * +-------------------------------+-------------------------------+
+     * |                               |                               |
+     * |                               |                               |
+     * |                               |                               |
+     * |                               |                               |
+     * |         Left panel            |         Right panel           |
+     * |                               |                               |
+     * |                               |                               |
+     * |                               |                               |
+     * |                               |                               |
+     * +-------------------------------+-------------------------------+
+     * | Hint (message) bar                                            |
+     * +---------------------------------------------------------------+
+     * |                                                               |
+     * |                        Console content                        |
+     * |                                                               |
+     * +--------+------------------------------------------------------+
+     * | Prompt | Command line                                         |
+     * | Key (button) bar                                              |
+     * +--------+------------------------------------------------------+
+     */
+
     int start_y;
+
+    /* iniitial height of panels */
+    height =
+        LINES - menubar_visible - mc_global.message_visible - (command_prompt ? 1 : 0) -
+        mc_global.keybar_visible;
 
     if (mc_global.tty.console_flag != '\0')
     {
@@ -719,9 +750,8 @@ setup_panels (void)
 
         if (output_lines < 0)
             output_lines = 0;
-        height =
-            LINES - mc_global.keybar_visible - (command_prompt ? 1 : 0) - menubar_visible -
-            output_lines - mc_global.message_visible;
+        else
+            height -= output_lines;
         minimum = MINHEIGHT * (1 + panels_layout.horizontal_split);
         if (height < minimum)
         {
@@ -729,12 +759,9 @@ setup_panels (void)
             height = minimum;
         }
     }
-    else
-    {
-        height =
-            LINES - menubar_visible - (command_prompt ? 1 : 0) - mc_global.keybar_visible -
-            mc_global.message_visible;
-    }
+
+    widget_set_size (WIDGET (the_menubar), 0, 0, 1, COLS);
+    menubar_set_visible (the_menubar, menubar_visible);
 
     check_split (&panels_layout);
     start_y = menubar_visible;
@@ -758,7 +785,19 @@ setup_panels (void)
                          panels[1].widget->cols);
     }
 
-    widget_set_size (WIDGET (the_menubar), 0, 0, 1, COLS);
+    if (mc_global.message_visible)
+        widget_set_size (WIDGET (the_hint), height + start_y, 0, 1, COLS);
+    else
+        widget_set_size (WIDGET (the_hint), 0, 0, 0, 0);
+
+    /* Output window */
+    if (mc_global.tty.console_flag != '\0' && output_lines)
+    {
+        output_start_y = LINES - (command_prompt ? 1 : 0) - mc_global.keybar_visible - output_lines;
+        show_console_contents (output_start_y,
+                               LINES - output_lines - mc_global.keybar_visible - 1,
+                               LINES - mc_global.keybar_visible - 1);
+    }
 
     if (command_prompt)
     {
@@ -775,20 +814,6 @@ setup_panels (void)
 
     widget_set_size (WIDGET (the_bar), LINES - 1, 0, mc_global.keybar_visible, COLS);
     buttonbar_set_visible (the_bar, mc_global.keybar_visible);
-
-    /* Output window */
-    if (mc_global.tty.console_flag != '\0' && output_lines)
-    {
-        output_start_y = LINES - (command_prompt ? 1 : 0) - mc_global.keybar_visible - output_lines;
-        show_console_contents (output_start_y,
-                               LINES - output_lines - mc_global.keybar_visible - 1,
-                               LINES - mc_global.keybar_visible - 1);
-    }
-
-    if (mc_global.message_visible)
-        widget_set_size (WIDGET (the_hint), height + start_y, 0, 1, COLS);
-    else
-        widget_set_size (WIDGET (the_hint), 0, 0, 0, 0);
 
     update_xterm_title_path ();
 }
