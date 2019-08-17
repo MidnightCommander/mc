@@ -1,0 +1,195 @@
+# Yabasic (BP7 IDE alike)
+# This file is part of yabasic and may be copied under the terms of
+# MIT License which can be found in the file LICENSE.
+
+caseinsensitive
+
+context default yellow
+    keyword whole abs white
+    keyword whole acos white
+    keyword whole and white
+    keyword whole arraydim white
+    keyword whole arraydimension white
+    keyword whole arraysize white
+    keyword whole as white
+    keyword whole asc white
+    keyword whole asin white
+    keyword whole at white
+    keyword whole atan white
+    keyword whole beep white
+    keyword whole bell white
+    keyword whole bin white
+    keyword whole bind white
+    keyword whole bitblit white
+    keyword whole bitblt white
+    keyword whole box white
+    keyword whole break white
+    keyword whole case white
+    keyword whole ceil white
+    keyword whole chomp white
+    keyword whole chr white
+    keyword whole circle white
+    keyword whole clear white
+    keyword whole close white
+    keyword whole color white
+    keyword whole colour white
+    keyword whole compile white
+    keyword whole continue white
+    keyword whole cos white
+    keyword whole curve white
+    keyword whole data white
+    keyword whole date white
+    keyword whole dec white
+    keyword whole default white
+    keyword whole dim white
+    keyword whole do white
+    keyword whole dot white
+    keyword whole else white
+    keyword whole elseif white
+    keyword whole elsif white
+    keyword whole end white
+    keyword whole endif white
+    keyword whole eof white
+    keyword whole eor white
+    keyword whole error white
+    keyword whole execute white
+    keyword whole exit white
+    keyword whole exp white
+    keyword whole export white
+    keyword whole fi white
+    keyword whole fill white
+    keyword whole filled white
+    keyword whole for white
+    keyword whole frac white
+    keyword whole getbit white
+    keyword whole getscreen white
+    keyword whole glob white
+    keyword whole gosub white
+    keyword whole goto white
+    keyword whole hex white
+    keyword whole if white
+    keyword whole inkey white
+    keyword whole input white
+    keyword whole instr white
+    keyword whole int white
+    keyword whole interrupt white
+    keyword whole label white
+    keyword whole left white
+    keyword whole len white
+    keyword whole let white
+    keyword whole line white
+    keyword whole local white
+    keyword whole lo gwhite
+    keyword whole loop white
+    keyword whole lower white
+    keyword whole ltrim white
+    keyword whole max white
+    keyword whole mid white
+    keyword whole min white
+    keyword whole mod cyan
+    keyword whole mouseb white
+    keyword whole mousebutton white
+    keyword whole mousemod white
+    keyword whole mousemodifier white
+    keyword whole mousex white
+    keyword whole mousey white
+    keyword whole new white
+    keyword whole next white
+    keyword whole not white
+    keyword whole numparam white
+    keyword whole on white
+    keyword whole open white
+    keyword whole or white
+    keyword whole origin white
+    keyword whole pause white
+    keyword whole peek white
+    keyword whole poke white
+    keyword whole print white
+    keyword whole printer white
+    keyword whole putbit white
+    keyword whole putscreen white
+    keyword whole ran white
+    keyword whole read white
+    keyword whole reading white
+    keyword whole rect white
+    keyword whole rectangle white
+    keyword whole redim white
+    keyword whole rem brightgreen
+    keyword whole repeat white
+    keyword whole restore white
+    keyword whole return white
+    keyword whole reverse white
+    keyword whole right white
+    keyword whole rinstr white
+    keyword whole rtrim white
+    keyword whole screen white
+    keyword whole seek white
+    keyword whole sig white
+    keyword whole sin white
+    keyword whole sleep white
+    keyword whole split white
+    keyword whole sqr white
+    keyword whole sqrt white
+    keyword whole static white
+    keyword whole step white
+    keyword whole str white
+    keyword whole sub white
+    keyword whole subroutine white
+    keyword whole switch white
+    keyword whole system white
+    keyword whole tan white
+    keyword whole tell white
+    keyword whole text white
+    keyword whole then white
+    keyword whole time white
+    keyword whole to white
+    keyword whole token white
+    keyword whole triangle white
+    keyword whole trim white
+    keyword whole until white
+    keyword whole upper white
+    keyword whole using white
+    keyword whole val white
+    keyword whole wait white
+    keyword whole wend white
+    keyword whole while white
+    keyword whole window white
+    keyword whole writing white
+    keyword whole xor white
+
+    keyword // brightgreen
+
+    keyword > cyan
+    keyword < cyan
+    keyword \+ cyan
+    keyword - cyan
+    keyword \* cyan
+    keyword / cyan
+    keyword ^ cyan
+    keyword $ brown
+    keyword = cyan
+    keyword [ lightgray
+    keyword ] lightgray
+    keyword ( lightgray
+    keyword ) lightgray
+    keyword , lightgray
+    keyword . lightgray
+    keyword : lightgray
+    keyword ; lightgray
+
+    keyword 0 brightred
+    keyword 1 brightred
+    keyword 2 brightred
+    keyword 3 brightred
+    keyword 4 brightred
+    keyword 5 brightred
+    keyword 6 brightred
+    keyword 7 brightred
+    keyword 8 brightred
+    keyword 9 brightred
+
+context " " brightcyan
+context exclusive // \n brightgreen
+context exclusive rem \n brightgreen
+
+spellcheck
