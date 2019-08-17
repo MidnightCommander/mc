@@ -519,7 +519,7 @@ frontend_dlg_run (WDialog * h)
     {
         int d_key;
 
-        if (mc_global.tty.winch_flag != 0)
+        if (tty_got_winch ())
             dialog_change_screen_size ();
 
         if (is_idle ())

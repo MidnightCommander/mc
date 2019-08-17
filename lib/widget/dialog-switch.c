@@ -338,7 +338,8 @@ mc_refresh (void)
     if (mc_global.we_are_background)
         return;
 #endif /* ENABLE_BACKGROUND */
-    if (mc_global.tty.winch_flag == 0)
+
+    if (!tty_got_winch ())
         tty_refresh ();
     else
     {
@@ -354,8 +355,6 @@ void
 dialog_change_screen_size (void)
 {
     GList *d;
-
-    mc_global.tty.winch_flag = 0;
 
     tty_change_screen_size ();
 

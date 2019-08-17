@@ -531,8 +531,7 @@ toggle_panels (void)
      * Save sigwinch flag that will be reset in mc_refresh() called via update_panels().
      * There is some problem with screen redraw in ncurses-based mc in this situation.
      */
-    was_sigwinch = mc_global.tty.winch_flag;
-    mc_global.tty.winch_flag = 0;
+    was_sigwinch = tty_got_winch ();
 
 #ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
@@ -555,7 +554,7 @@ toggle_panels (void)
         update_xterm_title_path ();
     }
 
-    if (was_sigwinch != 0 || mc_global.tty.winch_flag != 0)
+    if (was_sigwinch != 0 || tty_got_winch ())
         dialog_change_screen_size ();
     else
         repaint_screen ();
