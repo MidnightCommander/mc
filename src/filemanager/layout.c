@@ -1345,16 +1345,20 @@ get_other_type (void)
 void
 save_panel_dir (int idx)
 {
-    panel_view_mode_t type = get_panel_type (idx);
-    Widget *widget = get_panel_widget (idx);
+    panel_view_mode_t type;
 
-    if ((type == view_listing) && (widget != NULL))
+    type = get_panel_type (idx);
+    if (type == view_listing)
     {
-        WPanel *w = PANEL (widget);
+        WPanel *p;
 
-        g_free (panels[idx].last_saved_dir);    /* last path no needed */
-        /* Because path can be nonlocal */
-        panels[idx].last_saved_dir = g_strdup (vfs_path_as_str (w->cwd_vpath));
+        p = PANEL (get_panel_widget (idx));
+        if (p != NULL)
+        {
+            g_free (panels[idx].last_saved_dir);        /* last path no needed */
+            /* Because path can be nonlocal */
+            panels[idx].last_saved_dir = g_strdup (vfs_path_as_str (p->cwd_vpath));
+        }
     }
 }
 
