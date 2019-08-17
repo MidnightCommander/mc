@@ -341,7 +341,11 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
             _keybar_visible = check_options[3].widget->state;
             _message_visible = check_options[4].widget->state;
 
-            if (mc_global.tty.console_flag != '\0')
+            if (mc_global.tty.console_flag == '\0')
+                height =
+                    mw->lines - _keybar_visible - _command_prompt - _menubar_visible -
+                    _output_lines - _message_visible;
+            else
             {
                 int minimum;
 
@@ -357,10 +361,6 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
                     height = minimum;
                 }
             }
-            else
-                height =
-                    mw->lines - _keybar_visible - _command_prompt - _menubar_visible -
-                    _output_lines - _message_visible;
 
             if (old_output_lines != _output_lines)
             {
@@ -375,7 +375,9 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
     case MSG_NOTIFY:
         if (sender == WIDGET (radio_widget))
         {
-            if (panels_layout.horizontal_split != radio_widget->sel)
+            if (panels_layout.horizontal_split == radio_widget->sel)
+                update_split (h);
+            else
             {
                 int eq;
 
@@ -401,8 +403,6 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
                 layout_change ();
                 do_refresh ();
             }
-            else
-                update_split (h);
 
             return MSG_HANDLED;
         }
@@ -980,11 +980,12 @@ rotate_dash (gboolean show)
 const char *
 get_nth_panel_name (int num)
 {
-    if (!num)
+    if (num == 0)
         return "New Left Panel";
-    else if (num == 1)
+
+    if (num == 1)
         return "New Right Panel";
-    else
+
     {
         static char buffer[BUF_SMALL];
 
@@ -1293,10 +1294,7 @@ get_panel_widget (int idx)
 int
 get_current_index (void)
 {
-    if (panels[0].widget == WIDGET (current_panel))
-        return 0;
-    else
-        return 1;
+    return (panels[0].widget == WIDGET (current_panel) ? 0 : 1);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1304,7 +1302,7 @@ get_current_index (void)
 int
 get_other_index (void)
 {
-    return !get_current_index ();
+    return (get_current_index () == 0 ? 1 : 0);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1321,10 +1319,7 @@ get_other_panel (void)
 panel_view_mode_t
 get_current_type (void)
 {
-    if (panels[0].widget == WIDGET (current_panel))
-        return panels[0].type;
-    else
-        return panels[1].type;
+    return (panels[0].widget == WIDGET (current_panel) ? panels[0].type : panels[1].type);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1333,10 +1328,7 @@ get_current_type (void)
 panel_view_mode_t
 get_other_type (void)
 {
-    if (panels[0].widget == WIDGET (current_panel))
-        return panels[1].type;
-    else
-        return panels[0].type;
+    return (panels[0].widget == WIDGET (current_panel) ? panels[1].type : panels[0].type);
 }
 
 /* --------------------------------------------------------------------------------------------- */
