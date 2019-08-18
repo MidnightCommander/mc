@@ -282,10 +282,15 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
      * string such as "linux" or "xterm" S-Lang will go on, but the
      * terminal size and several other variables won't be initialized
      * (as of S-Lang 1.4.4). Detect it and abort. Also detect extremely
-     * small, large and negative screen dimensions.
+     * small screen dimensions.
      */
     if ((COLS < 10) || (LINES < 5)
-        || (COLS > SLTT_MAX_SCREEN_COLS) || (LINES > SLTT_MAX_SCREEN_ROWS))
+#if SLANG_VERSION < 20303
+        /* Beginning from pre2.3.3-8 (55f58798c267d76a1b93d0d916027b71a10ac1ee),
+           these limitations were eliminated. */
+        || (COLS > SLTT_MAX_SCREEN_COLS) || (LINES > SLTT_MAX_SCREEN_ROWS)
+#endif
+        )
     {
         fprintf (stderr,
                  _("Screen size %dx%d is not supported.\n"
