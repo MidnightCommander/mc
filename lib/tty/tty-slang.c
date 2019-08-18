@@ -305,23 +305,7 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     if (mc_global.tty.ugly_line_drawing)
         SLtt_Has_Alt_Charset = 0;
 
-    /* If SLang uses fileno(stderr) for terminal input MC will hang
-       if we call SLang_getkey between calls to open_error_pipe and
-       close_error_pipe, e.g. when we do a growing view of an gzipped
-       file. */
-    if (SLang_TT_Read_FD == fileno (stderr))
-        SLang_TT_Read_FD = fileno (stdin);
-
-    if (tcgetattr (SLang_TT_Read_FD, &new_mode) == 0)
-    {
-#ifdef VDSUSP
-        new_mode.c_cc[VDSUSP] = NULL_VALUE;     /* to ignore ^Y */
-#endif
-#ifdef VLNEXT
-        new_mode.c_cc[VLNEXT] = NULL_VALUE;     /* to ignore ^V */
-#endif
-        tcsetattr (SLang_TT_Read_FD, TCSADRAIN, &new_mode);
-    }
+    tcgetattr (SLang_TT_Read_FD, &new_mode);
 
     tty_reset_prog_mode ();
     load_terminfo_keys ();
