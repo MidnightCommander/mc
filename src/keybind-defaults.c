@@ -234,7 +234,7 @@ static const global_keymap_ini_t default_menu_keymap[] = {
     {"Left", "left; ctrl-b"},
     {"Right", "right; ctrl-f"},
     {"Up", "up; ctrl-p"},
-    {"Down", "down; enter; ctrl-n"},
+    {"Down", "down; ctrl-n"},
     {"Home", "home; alt-lt; ctrl-a"},
     {"End", "end; alt-gt; ctrl-e"},
     {"Enter", "enter"},
