@@ -147,11 +147,10 @@ clean_sort_keys (dir_list * list, int start, int count)
  */
 
 static gboolean
-handle_dirent (struct dirent *dp, const char *fltr, struct stat *buf1, int *link_to_dir,
-               int *stale_link)
+handle_dirent (struct dirent *dp, const char *fltr, struct stat *buf1, gboolean * link_to_dir,
+               gboolean * stale_link)
 {
     vfs_path_t *vpath;
-    gboolean stale;
 
     if (DIR_IS_DOT (dp->d_name) || DIR_IS_DOTDOT (dp->d_name))
         return FALSE;
@@ -175,12 +174,11 @@ handle_dirent (struct dirent *dp, const char *fltr, struct stat *buf1, int *link
         tree_store_mark_checked (dp->d_name);
 
     /* A link to a file or a directory? */
-    *link_to_dir = file_is_symlink_to_dir (vpath, buf1, &stale) ? 1 : 0;
-    *stale_link = stale ? 1 : 0;
+    *link_to_dir = file_is_symlink_to_dir (vpath, buf1, stale_link);
 
     vfs_path_free (vpath);
 
-    return (S_ISDIR (buf1->st_mode) || *link_to_dir != 0 || fltr == NULL
+    return (S_ISDIR (buf1->st_mode) || *link_to_dir || fltr == NULL
             || mc_search (fltr, NULL, dp->d_name, MC_SEARCH_T_GLOB));
 }
 
@@ -628,7 +626,6 @@ dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
 {
     DIR *dirp;
     struct dirent *dp;
-    int link_to_dir, stale_link;
     struct stat st;
     file_entry_t *fentry;
     const char *vpath_str;
@@ -657,10 +654,12 @@ dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
 
     while ((dp = mc_readdir (dirp)) != NULL)
     {
+        gboolean link_to_dir, stale_link;
+
         if (!handle_dirent (dp, fltr, &st, &link_to_dir, &stale_link))
             continue;
 
-        if (!dir_list_append (list, dp->d_name, &st, link_to_dir != 0, stale_link != 0))
+        if (!dir_list_append (list, dp->d_name, &st, link_to_dir, stale_link))
             goto ret;
 
         if ((list->len & 31) == 0)
@@ -696,7 +695,7 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
 {
     DIR *dirp;
     struct dirent *dp;
-    int i, link_to_dir, stale_link;
+    int i;
     struct stat st;
     int marked_cnt;
     GHashTable *marked_files;
@@ -769,11 +768,12 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
     while ((dp = mc_readdir (dirp)) != NULL)
     {
         file_entry_t *fentry;
+        gboolean link_to_dir, stale_link;
 
         if (!handle_dirent (dp, fltr, &st, &link_to_dir, &stale_link))
             continue;
 
-        if (!dir_list_append (list, dp->d_name, &st, link_to_dir != 0, stale_link != 0))
+        if (!dir_list_append (list, dp->d_name, &st, link_to_dir, stale_link))
         {
             mc_closedir (dirp);
             /* Norbert (Feb 12, 1997):
