@@ -701,6 +701,7 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
     int marked_cnt;
     GHashTable *marked_files;
     const char *tmp_path;
+    gboolean ret = TRUE;
 
     if (list->callback != NULL)
         list->callback (DIR_OPEN, (void *) vpath);
@@ -767,9 +768,8 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
         }
     }
 
-    while ((dp = mc_readdir (dirp)) != NULL)
+    while (ret && (dp = mc_readdir (dirp)) != NULL)
     {
-        file_entry_t *fentry;
         gboolean link_to_dir, stale_link;
 
         if (list->callback != NULL)
@@ -779,52 +779,37 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
             continue;
 
         if (!dir_list_append (list, dp->d_name, &st, link_to_dir, stale_link))
+            ret = FALSE;
+        else
         {
-            if (list->callback != NULL)
-                list->callback (DIR_CLOSE, NULL);
-            mc_closedir (dirp);
-            /* Norbert (Feb 12, 1997):
-               Just in case someone finds this memory leak:
-               -1 means big trouble (at the moment no memory left),
-               I don't bother with further cleanup because if one gets to
-               this point he will have more problems than a few memory
-               leaks and because one 'dir_list_clean' would not be enough (and
-               because I don't want to spent the time to make it working,
-               IMHO it's not worthwhile).
-               dir_list_clean (&dir_copy);
+            file_entry_t *fentry;
+
+            fentry = &list->list[list->len - 1];
+
+            /*
+             * If we have marked files in the copy, scan through the copy
+             * to find matching file.  Decrease number of remaining marks if
+             * we copied one.
              */
-            tree_store_end_check ();
-            g_hash_table_destroy (marked_files);
-            return FALSE;
-        }
-        fentry = &list->list[list->len - 1];
-
-        fentry->f.marked = 0;
-
-        /*
-         * If we have marked files in the copy, scan through the copy
-         * to find matching file.  Decrease number of remaining marks if
-         * we copied one.
-         */
-        if (marked_cnt > 0 && g_hash_table_lookup (marked_files, dp->d_name) != NULL)
-        {
-            fentry->f.marked = 1;
-            marked_cnt--;
+            fentry->f.marked = (marked_cnt > 0
+                                && g_hash_table_lookup (marked_files, dp->d_name) != NULL);
+            if (fentry->f.marked)
+                marked_cnt--;
         }
     }
+
+    if (ret)
+        dir_list_sort (list, sort, sort_op);
 
     if (list->callback != NULL)
         list->callback (DIR_CLOSE, NULL);
     mc_closedir (dirp);
-
     tree_store_end_check ();
+
     g_hash_table_destroy (marked_files);
-
-    dir_list_sort (list, sort, sort_op);
-
     dir_list_free_list (&dir_copy);
 
-    return TRUE;
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
