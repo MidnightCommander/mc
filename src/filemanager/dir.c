@@ -48,7 +48,6 @@
 #include "treestore.h"
 #include "file.h"               /* file_is_symlink_to_dir() */
 #include "dir.h"
-#include "layout.h"             /* rotate_dash() */
 
 /*** global variables ****************************************************************************/
 
@@ -666,9 +665,6 @@ dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
             ret = FALSE;
             goto ret;
         }
-
-        if ((list->len & 31) == 0)
-            rotate_dash (TRUE);
     }
 
     dir_list_sort (list, sort, sort_op);
@@ -678,7 +674,6 @@ dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
         list->callback (DIR_CLOSE, NULL);
     mc_closedir (dirp);
     tree_store_end_check ();
-    rotate_dash (FALSE);
 
     return ret;
 }
@@ -819,9 +814,6 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
             fentry->f.marked = 1;
             marked_cnt--;
         }
-
-        if ((list->len & 15) == 0)
-            rotate_dash (TRUE);
     }
 
     if (list->callback != NULL)
@@ -834,7 +826,6 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
     dir_list_sort (list, sort, sort_op);
 
     dir_list_free_list (&dir_copy);
-    rotate_dash (FALSE);
 
     return TRUE;
 }

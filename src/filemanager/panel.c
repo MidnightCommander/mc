@@ -4180,6 +4180,36 @@ panel_recursive_cd_to_parent (const vfs_path_t * vpath)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+panel_dir_list_callback (dir_list_cb_state_t state, void *data)
+{
+    static int count = 0;
+
+    (void) data;
+
+    switch (state)
+    {
+    case DIR_OPEN:
+        count = 0;
+        break;
+
+    case DIR_READ:
+        count++;
+        if ((count & 15) == 0)
+            rotate_dash (TRUE);
+        break;
+
+    case DIR_CLOSE:
+        rotate_dash (FALSE);
+        break;
+
+    default:
+        g_assert_not_reached ();
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -4270,6 +4300,7 @@ panel_sized_empty_new (const char *panel_name, int y, int x, int lines, int cols
     panel->dir.size = DIR_LIST_MIN_SIZE;
     panel->dir.list = g_new (file_entry_t, panel->dir.size);
     panel->dir.len = 0;
+    panel->dir.callback = panel_dir_list_callback;
 
     panel->list_cols = 1;
     panel->brief_cols = 2;
