@@ -56,7 +56,8 @@ void dir_list_sort (dir_list * list, GCompareFunc sort, const dir_sort_options_t
 gboolean dir_list_init (dir_list * list);
 void dir_list_clean (dir_list * list);
 void dir_list_free_list (dir_list * list);
-gboolean handle_path (const char *path, struct stat *buf1, int *link_to_dir, int *stale_link);
+gboolean handle_path (const char *path, struct stat *buf1, gboolean * link_to_dir,
+                      gboolean * stale_link);
 
 /* Sorting functions */
 int unsorted (file_entry_t * a, file_entry_t * b);

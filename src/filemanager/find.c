@@ -1773,7 +1773,6 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
 
     if (return_value == B_PANELIZE && *filename)
     {
-        int link_to_dir, stale_link;
         int i;
         struct stat st;
         GList *entry;
@@ -1790,6 +1789,7 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
             WLEntry *le = LENTRY (entry->data);
             find_match_location_t *location = le->data;
             char *p;
+            gboolean link_to_dir, stale_link;
 
             if ((le->text == NULL) || (location == NULL) || (location->dir == NULL))
                 continue;
@@ -1833,8 +1833,8 @@ do_find (const char *start_dir, ssize_t start_dir_len, const char *ignore_dirs,
             list->list[list->len].fnamelen = strlen (p);
             list->list[list->len].fname = g_strndup (p, list->list[list->len].fnamelen);
             list->list[list->len].f.marked = 0;
-            list->list[list->len].f.link_to_dir = link_to_dir;
-            list->list[list->len].f.stale_link = stale_link;
+            list->list[list->len].f.link_to_dir = link_to_dir ? 1 : 0;
+            list->list[list->len].f.stale_link = stale_link ? 1 : 0;
             list->list[list->len].f.dir_size_computed = 0;
             list->list[list->len].st = st;
             list->list[list->len].sort_key = NULL;

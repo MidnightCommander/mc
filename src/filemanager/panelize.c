@@ -321,7 +321,7 @@ do_external_panelize (char *command)
         char line[MC_MAXPATHLEN];
         size_t len;
         char *name;
-        int link_to_dir, stale_link;
+        gboolean link_to_dir, stale_link;
         struct stat st;
 
         clearerr (external);
@@ -345,7 +345,7 @@ do_external_panelize (char *command)
         if (!handle_path (name, &st, &link_to_dir, &stale_link))
             continue;
 
-        if (!dir_list_append (list, name, &st, link_to_dir != 0, stale_link != 0))
+        if (!dir_list_append (list, name, &st, link_to_dir, stale_link))
             break;
 
         file_mark (current_panel, list->len - 1, 0);

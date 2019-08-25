@@ -583,7 +583,7 @@ dir_list_init (dir_list * list)
 /* Return values: FALSE = don't add, TRUE = add to the list */
 
 gboolean
-handle_path (const char *path, struct stat * buf1, int *link_to_dir, int *stale_link)
+handle_path (const char *path, struct stat * buf1, gboolean * link_to_dir, gboolean * stale_link)
 {
     vfs_path_t *vpath;
 
@@ -601,8 +601,8 @@ handle_path (const char *path, struct stat * buf1, int *link_to_dir, int *stale_
         tree_store_mark_checked (path);
 
     /* A link to a file or a directory? */
-    *link_to_dir = 0;
-    *stale_link = 0;
+    *link_to_dir = FALSE;
+    *stale_link = FALSE;
     if (S_ISLNK (buf1->st_mode))
     {
         struct stat buf2;
@@ -610,7 +610,7 @@ handle_path (const char *path, struct stat * buf1, int *link_to_dir, int *stale_
         if (mc_stat (vpath, &buf2) == 0)
             *link_to_dir = S_ISDIR (buf2.st_mode) != 0;
         else
-            *stale_link = 1;
+            *stale_link = TRUE;
     }
 
     vfs_path_free (vpath);
