@@ -72,7 +72,7 @@ static gboolean case_sensitive = OS_SORT_CASE_SENSITIVE_DEFAULT;
 /* Are the exec_bit files top in list */
 static gboolean exec_first = TRUE;
 
-static dir_list dir_copy = { NULL, 0, 0 };
+static dir_list dir_copy = { NULL, 0, 0, NULL };
 
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
@@ -638,6 +638,8 @@ dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
     if (dir_get_dotdot_stat (vpath, &st))
         fentry->st = st;
 
+    if (list->callback != NULL)
+        list->callback (DIR_OPEN, (void *) vpath);
     dirp = mc_opendir (vpath);
     if (dirp == NULL)
         return FALSE;
@@ -652,6 +654,9 @@ dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
     while ((dp = mc_readdir (dirp)) != NULL)
     {
         gboolean link_to_dir, stale_link;
+
+        if (list->callback != NULL)
+            list->callback (DIR_READ, dp);
 
         if (!handle_dirent (dp, fltr, &st, &link_to_dir, &stale_link))
             continue;
@@ -669,6 +674,8 @@ dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
     dir_list_sort (list, sort, sort_op);
 
   ret:
+    if (list->callback != NULL)
+        list->callback (DIR_CLOSE, NULL);
     mc_closedir (dirp);
     tree_store_end_check ();
     rotate_dash (FALSE);
@@ -703,6 +710,8 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
     GHashTable *marked_files;
     const char *tmp_path;
 
+    if (list->callback != NULL)
+        list->callback (DIR_OPEN, (void *) vpath);
     dirp = mc_opendir (vpath);
     if (dirp == NULL)
     {
@@ -771,11 +780,16 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
         file_entry_t *fentry;
         gboolean link_to_dir, stale_link;
 
+        if (list->callback != NULL)
+            list->callback (DIR_READ, dp);
+
         if (!handle_dirent (dp, fltr, &st, &link_to_dir, &stale_link))
             continue;
 
         if (!dir_list_append (list, dp->d_name, &st, link_to_dir, stale_link))
         {
+            if (list->callback != NULL)
+                list->callback (DIR_CLOSE, NULL);
             mc_closedir (dirp);
             /* Norbert (Feb 12, 1997):
                Just in case someone finds this memory leak:
@@ -809,7 +823,11 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
         if ((list->len & 15) == 0)
             rotate_dash (TRUE);
     }
+
+    if (list->callback != NULL)
+        list->callback (DIR_CLOSE, NULL);
     mc_closedir (dirp);
+
     tree_store_end_check ();
     g_hash_table_destroy (marked_files);
 

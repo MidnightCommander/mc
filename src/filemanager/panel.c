@@ -85,7 +85,7 @@
 hook_t *select_file_hook = NULL;
 
 /* *INDENT-OFF* */
-panelized_panel_t panelized_panel = { {NULL, 0, -1}, NULL };
+panelized_panel_t panelized_panel = { {NULL, 0, -1, NULL}, NULL };
 /* *INDENT-ON* */
 
 static const char *string_file_name (file_entry_t *, int);

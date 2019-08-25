@@ -16,6 +16,16 @@
 #define DIR_LIST_MIN_SIZE 128
 #define DIR_LIST_RESIZE_STEP 128
 
+typedef enum
+{
+    DIR_OPEN = 0,
+    DIR_READ,
+    DIR_CLOSE
+} dir_list_cb_state_t;
+
+/* dir_list callback */
+typedef void (*dir_list_cb_fn) (dir_list_cb_state_t state, void *data);
+
 /*** enums ***************************************************************************************/
 
 /*** structures declarations (and typedefs of structures)*****************************************/
@@ -28,6 +38,7 @@ typedef struct
     file_entry_t *list; /**< list of file_entry_t objects */
     int size;           /**< number of allocated elements in list (capacity) */
     int len;            /**< number of used elements in list */
+    dir_list_cb_fn callback;    /**< callback to visualize of directory read */
 } dir_list;
 
 /**
