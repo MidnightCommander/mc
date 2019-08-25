@@ -42,7 +42,6 @@
 #include "lib/fs.h"
 #include "lib/strutil.h"
 #include "lib/util.h"
-#include "lib/widget.h"         /* message() */
 
 #include "src/setup.h"          /* panels_options */
 
@@ -620,7 +619,7 @@ handle_path (const char *path, struct stat * buf1, gboolean * link_to_dir, gbool
 
 /* --------------------------------------------------------------------------------------------- */
 
-void
+gboolean
 dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
                const dir_sort_options_t * sort_op, const char *fltr)
 {
@@ -629,10 +628,11 @@ dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
     struct stat st;
     file_entry_t *fentry;
     const char *vpath_str;
+    gboolean ret = TRUE;
 
     /* ".." (if any) must be the first entry in the list */
     if (!dir_list_init (list))
-        return;
+        return FALSE;
 
     fentry = &list->list[0];
     if (dir_get_dotdot_stat (vpath, &st))
@@ -640,10 +640,7 @@ dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
 
     dirp = mc_opendir (vpath);
     if (dirp == NULL)
-    {
-        message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
-        return;
-    }
+        return FALSE;
 
     tree_store_start_check (vpath);
 
@@ -660,7 +657,10 @@ dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
             continue;
 
         if (!dir_list_append (list, dp->d_name, &st, link_to_dir, stale_link))
+        {
+            ret = FALSE;
             goto ret;
+        }
 
         if ((list->len & 31) == 0)
             rotate_dash (TRUE);
@@ -672,6 +672,8 @@ dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
     mc_closedir (dirp);
     tree_store_end_check ();
     rotate_dash (FALSE);
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -689,7 +691,7 @@ if_link_is_exe (const vfs_path_t * full_name_vpath, const file_entry_t * file)
 /* --------------------------------------------------------------------------------------------- */
 /** If fltr is null, then it is a match */
 
-void
+gboolean
 dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
                  const dir_sort_options_t * sort_op, const char *fltr)
 {
@@ -704,10 +706,9 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
     dirp = mc_opendir (vpath);
     if (dirp == NULL)
     {
-        message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
         dir_list_clean (list);
         dir_list_init (list);
-        return;
+        return FALSE;
     }
 
     tree_store_start_check (vpath);
@@ -753,7 +754,7 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
         if (!dir_list_init (list))
         {
             dir_list_free_list (&dir_copy);
-            return;
+            return FALSE;
         }
 
         if (dir_get_dotdot_stat (vpath, &st))
@@ -788,7 +789,7 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
              */
             tree_store_end_check ();
             g_hash_table_destroy (marked_files);
-            return;
+            return FALSE;
         }
         fentry = &list->list[list->len - 1];
 
@@ -816,6 +817,8 @@ dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
 
     dir_list_free_list (&dir_copy);
     rotate_dash (FALSE);
+
+    return TRUE;
 }
 
 /* --------------------------------------------------------------------------------------------- */

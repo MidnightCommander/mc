@@ -300,30 +300,39 @@ mcview_load_next_prev_init (WView * view)
 
         /* TODO: check mtime of directory to reload it */
 
-        const char *fname;
-        size_t fname_len;
-        int i;
         dir_sort_options_t sort_op = { FALSE, TRUE, FALSE };
 
         /* load directory where requested file is */
         view->dir = g_new0 (dir_list, 1);
         view->dir_idx = g_new (int, 1);
 
-        dir_list_load (view->dir, view->workdir_vpath, (GCompareFunc) sort_name, &sort_op, NULL);
-
-        fname = x_basename (vfs_path_as_str (view->filename_vpath));
-        fname_len = strlen (fname);
-
-        /* search current file in the list */
-        for (i = 0; i != view->dir->len; i++)
+        if (dir_list_load
+            (view->dir, view->workdir_vpath, (GCompareFunc) sort_name, &sort_op, NULL))
         {
-            const file_entry_t *fe = &view->dir->list[i];
+            const char *fname;
+            size_t fname_len;
+            int i;
 
-            if (fname_len == fe->fnamelen && strncmp (fname, fe->fname, fname_len) == 0)
-                break;
+            fname = x_basename (vfs_path_as_str (view->filename_vpath));
+            fname_len = strlen (fname);
+
+            /* search current file in the list */
+            for (i = 0; i != view->dir->len; i++)
+            {
+                const file_entry_t *fe = &view->dir->list[i];
+
+                if (fname_len == fe->fnamelen && strncmp (fname, fe->fname, fname_len) == 0)
+                    break;
+            }
+
+            *view->dir_idx = i;
         }
-
-        *view->dir_idx = i;
+        else
+        {
+            message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
+            MC_PTR_FREE (view->dir);
+            MC_PTR_FREE (view->dir_idx);
+        }
     }
 }
 

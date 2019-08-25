@@ -48,10 +48,10 @@ gboolean dir_list_grow (dir_list * list, int delta);
 gboolean dir_list_append (dir_list * list, const char *fname, const struct stat *st,
                           gboolean link_to_dir, gboolean stale_link);
 
-void dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
-                    const dir_sort_options_t * sort_op, const char *fltr);
-void dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
-                      const dir_sort_options_t * sort_op, const char *fltr);
+gboolean dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
+                        const dir_sort_options_t * sort_op, const char *fltr);
+gboolean dir_list_reload (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
+                          const dir_sort_options_t * sort_op, const char *fltr);
 void dir_list_sort (dir_list * list, GCompareFunc sort, const dir_sort_options_t * sort_op);
 gboolean dir_list_init (dir_list * list);
 void dir_list_clean (dir_list * list);

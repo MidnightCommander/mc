@@ -3277,8 +3277,10 @@ _do_panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_
     /* Reload current panel */
     panel_clean_dir (panel);
 
-    dir_list_load (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine,
-                   &panel->sort_info, panel->filter);
+    if (!dir_list_load (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine,
+                        &panel->sort_info, panel->filter))
+        message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
+
     try_to_select (panel, get_parent_dir_name (panel->cwd_vpath, olddir_vpath));
 
     load_hint (FALSE);
@@ -4364,8 +4366,9 @@ panel_sized_with_dir_new (const char *panel_name, int y, int x, int lines, int c
     }
 
     /* Load the default format */
-    dir_list_load (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine,
-                   &panel->sort_info, panel->filter);
+    if (!dir_list_load (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine,
+                        &panel->sort_info, panel->filter))
+        message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
 
     /* Restore old right path */
     if (curdir != NULL)
@@ -4411,8 +4414,9 @@ panel_reload (WPanel * panel)
     memset (&(panel->dir_stat), 0, sizeof (panel->dir_stat));
     show_dir (panel);
 
-    dir_list_reload (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine,
-                     &panel->sort_info, panel->filter);
+    if (!dir_list_reload (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine,
+                          &panel->sort_info, panel->filter))
+        message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
 
     panel->dirty = 1;
     if (panel->selected >= panel->dir.len)
