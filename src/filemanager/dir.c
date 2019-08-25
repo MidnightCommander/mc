@@ -650,7 +650,7 @@ dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
     if (IS_PATH_SEP (vpath_str[0]) && vpath_str[1] == '\0')
         dir_list_clean (list);
 
-    while ((dp = mc_readdir (dirp)) != NULL)
+    while (ret && (dp = mc_readdir (dirp)) != NULL)
     {
         gboolean link_to_dir, stale_link;
 
@@ -661,15 +661,12 @@ dir_list_load (dir_list * list, const vfs_path_t * vpath, GCompareFunc sort,
             continue;
 
         if (!dir_list_append (list, dp->d_name, &st, link_to_dir, stale_link))
-        {
             ret = FALSE;
-            goto ret;
-        }
     }
 
-    dir_list_sort (list, sort, sort_op);
+    if (ret)
+        dir_list_sort (list, sort, sort_op);
 
-  ret:
     if (list->callback != NULL)
         list->callback (DIR_CLOSE, NULL);
     mc_closedir (dirp);
