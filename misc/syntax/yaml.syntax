@@ -35,3 +35,6 @@ context " " green
 context ' ' green
     spellcheck
     keyword {{*}} brightred
+
+context exclusive |\[123456789\+\-\s\t\]\n \n- brown
+context exclusive >\[123456789\+\-\s\t\]\n \n- brown
