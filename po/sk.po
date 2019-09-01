@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/mc/mc/language/sk/)\n"
@@ -482,6 +482,16 @@ msgstr "Shift"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "Premenná prostredia TERM nie je nastavená!\n"
+
+#, fuzzy
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "Nemožno vytvoriť toky rúry"
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1369,6 +1379,10 @@ msgstr "&Nové"
 msgid "&Close"
 msgstr "&Zatvoriť"
 
+#, fuzzy
+msgid "&History..."
+msgstr "História"
+
 msgid "Save &as..."
 msgstr "Uložiť &ako..."
 
@@ -1804,6 +1818,13 @@ msgstr "Nemožno stiahnuť lokálnu kópiu %s"
 
 msgid "The shell is already running a command"
 msgstr "Shell už vykonáva príkaz"
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+"Konzola nie je xterm alebo Linux;\n"
+"nemožno prepnúť panely."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Napísaním „exit“ sa vrátite do aplikácie Midnight Commander"
@@ -2364,13 +2385,6 @@ msgstr ""
 "Oba panely by mali byť v režime výpisu,\n"
 "aby ste mohli použiť tento príkaz"
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-"Konzola nie je xterm alebo Linux;\n"
-"nemožno prepnúť panely."
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr "„%s“ nie je symbolický odkaz"
@@ -2436,9 +2450,6 @@ msgid ""
 msgstr ""
 "Nemožno chdir do „%s“\n"
 "%s"
-
-msgid "Cannot read directory contents"
-msgstr "Nepodarilo sa načítať obsah adresára"
 
 msgid "Parameter"
 msgstr "Parameter"
@@ -3389,6 +3400,9 @@ msgstr "Zobraz&iť veľkosť adresárov"
 msgid "Command &history"
 msgstr "&História príkazov"
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr "Hotlist ad&resára"
 
@@ -3617,6 +3631,9 @@ msgstr "Zrušiť výber"
 
 msgid "Do you really want to execute?"
 msgstr "Skutočne chcete spustiť?"
+
+msgid "Cannot read directory contents"
+msgstr "Nepodarilo sa načítať obsah adresára"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr ""

@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/mc/mc/language/fr/)\n"
@@ -493,6 +493,16 @@ msgstr "Maj"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "La variable d'environnement TERM n'est pas définie !\n"
+
+#, fuzzy
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "Impossible de créer les flux des tubes"
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1384,6 +1394,10 @@ msgstr "&Nouveau"
 msgid "&Close"
 msgstr "&Fermer"
 
+#, fuzzy
+msgid "&History..."
+msgstr "Historique"
+
 msgid "Save &as..."
 msgstr "Enregi&strer sous..."
 
@@ -1819,6 +1833,13 @@ msgstr "Impossible de récupérer une copie locale de %s "
 
 msgid "The shell is already running a command"
 msgstr " Le shell est déjà en train d'exécuter une commande "
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+"N'est pas un xterm ou une console Linux;\n"
+"les panneaux ne peuvent pas être activé."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Tapez « exit » pour retourner à Midnight Commander"
@@ -2379,13 +2400,6 @@ msgstr ""
 "Les deux panneaux doivent être en mode liste\n"
 "pour utiliser cette commande"
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-"N'est pas un xterm ou une console Linux;\n"
-"les panneaux ne peuvent pas être activé."
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr "« %s » n'est pas un lien symbolique"
@@ -2451,9 +2465,6 @@ msgid ""
 msgstr ""
 "Ne peut aller dans le répertoire « %s »\n"
 "%s"
-
-msgid "Cannot read directory contents"
-msgstr " Ne peut lire le contenu du répertoire"
 
 msgid "Parameter"
 msgstr "Paramètre"
@@ -3405,6 +3416,9 @@ msgstr "Aff&icher la taille des rép."
 msgid "Command &history"
 msgstr "&Historique des commandes"
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr "Liste des répe&rtoires favoris"
 
@@ -3629,6 +3643,9 @@ msgstr "Désélectionner"
 
 msgid "Do you really want to execute?"
 msgstr "Voulez-vous vraiment l'exécuter ?"
+
+msgid "Cannot read directory contents"
+msgstr " Ne peut lire le contenu du répertoire"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr ""

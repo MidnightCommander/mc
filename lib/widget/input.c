@@ -49,6 +49,7 @@
 #include "lib/keybind.h"        /* global_keymap_t */
 #include "lib/widget.h"
 #include "lib/event.h"          /* mc_event_raise() */
+#include "lib/mcconfig.h"       /* mc_config_history_*() */
 
 #include "input_complete.h"
 
@@ -842,7 +843,7 @@ input_load_history (const gchar * event_group_name, const gchar * event_name,
     (void) event_group_name;
     (void) event_name;
 
-    in->history.list = history_load (ev->cfg, in->history.name);
+    in->history.list = mc_config_history_load (ev->cfg, in->history.name);
     in->history.current = in->history.list;
 
     if (in->init_from_history)
@@ -876,7 +877,7 @@ input_save_history (const gchar * event_group_name, const gchar * event_name,
 
         push_history (in, in->buffer);
         if (in->history.changed)
-            history_save (ev->cfg, in->history.name, in->history.list);
+            mc_config_history_save (ev->cfg, in->history.name, in->history.list);
         in->history.changed = FALSE;
     }
 

@@ -58,6 +58,7 @@
 #ifdef ENABLE_SUBSHELL
 #include "src/subshell/subshell.h"
 #endif
+#include "src/execute.h"        /* toggle_subshell */
 #include "src/setup.h"          /* variables */
 #include "src/learn.h"          /* learn_keys() */
 #include "src/keybind-defaults.h"
@@ -921,7 +922,7 @@ create_file_manager (void)
     /* allow rebind tab */
     widget_want_tab (WIDGET (midnight_dlg), TRUE);
 
-    the_menubar = menubar_new (0, 0, COLS, NULL, menubar_visible);
+    the_menubar = menubar_new (NULL, menubar_visible);
     add_widget (midnight_dlg, the_menubar);
     init_menu ();
 
@@ -930,7 +931,7 @@ create_file_manager (void)
     add_widget (midnight_dlg, get_panel_widget (1));
 
     the_hint = label_new (0, 0, 0);
-    the_hint->transparent = 1;
+    the_hint->transparent = TRUE;
     the_hint->auto_adjust_cols = 0;
     WIDGET (the_hint)->cols = COLS;
     add_widget (midnight_dlg, the_hint);
@@ -1167,7 +1168,7 @@ midnight_execute_cmd (Widget * sender, long command)
         break;
 #ifdef ENABLE_VFS
     case CK_OptionsVfs:
-        configure_vfs ();
+        configure_vfs_box ();
         break;
 #endif
     case CK_OptionsConfirm:
@@ -1286,7 +1287,7 @@ midnight_execute_cmd (Widget * sender, long command)
         break;
 #ifdef ENABLE_BACKGROUND
     case CK_Jobs:
-        jobs_cmd ();
+        jobs_box ();
         break;
 #endif
     case CK_OptionsLayout:
@@ -1367,7 +1368,7 @@ midnight_execute_cmd (Widget * sender, long command)
         res = send_message (current_panel, midnight_dlg, MSG_ACTION, command, NULL);
         break;
     case CK_Shell:
-        view_other_cmd ();
+        toggle_subshell ();
         break;
     case CK_DirSize:
         smart_dirsize_cmd ();
@@ -1507,9 +1508,7 @@ midnight_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
         return MSG_HANDLED;
 
     case MSG_RESIZE:
-        /* dlg_set_size() is surplus for this case */
-        w->lines = LINES;
-        w->cols = COLS;
+        widget_adjust_position (w->pos_flags, &w->y, &w->x, &w->lines, &w->cols);
         setup_panels ();
         menubar_arrange (the_menubar);
         return MSG_HANDLED;

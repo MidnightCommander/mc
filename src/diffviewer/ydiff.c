@@ -50,10 +50,11 @@
 #endif
 #include "lib/event.h"          /* mc_event_raise() */
 
-#include "src/filemanager/cmd.h"        /* edit_file_at_line(), view_other_cmd() */
+#include "src/filemanager/cmd.h"        /* edit_file_at_line() */
 #include "src/filemanager/panel.h"
 #include "src/filemanager/layout.h"     /* Needed for get_current_index and get_other_panel */
 
+#include "src/execute.h"        /* toggle_subshell() */
 #include "src/keybind-defaults.h"
 #include "src/setup.h"
 #include "src/history.h"
@@ -2271,9 +2272,11 @@ dview_compute_split (WDiff * dview, int i)
 static void
 dview_compute_areas (WDiff * dview)
 {
-    dview->height = LINES - 2;
-    dview->half1 = COLS / 2;
-    dview->half2 = COLS - dview->half1;
+    Widget *w = WIDGET (dview);
+
+    dview->height = w->lines - 1;
+    dview->half1 = w->cols / 2;
+    dview->half2 = w->cols - dview->half1;
 
     dview_compute_split (dview, 0);
 }
@@ -3253,7 +3256,7 @@ dview_execute_cmd (WDiff * dview, long command)
         dview->skip_cols = 0;
         break;
     case CK_Shell:
-        view_other_cmd ();
+        toggle_subshell ();
         break;
     case CK_Quit:
         dview->view_quit = TRUE;
@@ -3335,6 +3338,10 @@ dview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             dview_update (dview);
         return i;
 
+    case MSG_RESIZE:
+        dview_compute_areas (dview);
+        return MSG_HANDLED;
+
     case MSG_DESTROY:
         dview_save_options (dview);
         dview_fini (dview);
@@ -3374,23 +3381,6 @@ dview_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static void
-dview_adjust_size (WDialog * h)
-{
-    WDiff *dview;
-    WButtonBar *bar;
-
-    /* Look up the viewer and the buttonbar, we assume only two widgets here */
-    dview = (WDiff *) find_widget_type (h, dview_callback);
-    bar = find_buttonbar (h);
-    widget_set_size (WIDGET (dview), 0, 0, LINES - 1, COLS);
-    widget_set_size (WIDGET (bar), LINES - 1, 0, 1, COLS);
-
-    dview_compute_areas (dview);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static cb_ret_t
 dview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
@@ -3399,10 +3389,6 @@ dview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, 
 
     switch (msg)
     {
-    case MSG_RESIZE:
-        dview_adjust_size (h);
-        return MSG_HANDLED;
-
     case MSG_ACTION:
         /* Handle shortcuts. */
 
@@ -3457,33 +3443,32 @@ diff_view (const char *file1, const char *file2, const char *label1, const char 
     WDiff *dview;
     Widget *w;
     WDialog *dview_dlg;
+    Widget *dw;
 
     /* Create dialog and widgets, put them on the dialog */
     dview_dlg =
         dlg_create (FALSE, 0, 0, 1, 1, WPOS_FULLSCREEN, FALSE, NULL, dview_dialog_callback, NULL,
                     "[Diff Viewer]", NULL);
-    widget_want_tab (WIDGET (dview_dlg), TRUE);
+    dw = WIDGET (dview_dlg);
+    widget_want_tab (dw, TRUE);
 
     dview = g_new0 (WDiff, 1);
     w = WIDGET (dview);
-    widget_init (w, 0, 0, LINES - 1, COLS, dview_callback, dview_mouse_callback);
+    widget_init (w, dw->y, dw->x, dw->lines - 1, dw->cols, dview_callback, dview_mouse_callback);
     w->options |= WOP_SELECTABLE;
+    add_widget_autopos (dview_dlg, w, WPOS_KEEP_ALL, NULL);
 
-    add_widget (dview_dlg, dview);
-    add_widget (dview_dlg, buttonbar_new (TRUE));
+    w = WIDGET (buttonbar_new (TRUE));
+    add_widget_autopos (dview_dlg, w, w->pos_flags, NULL);
 
     dview_dlg->get_title = dview_get_title;
 
     error = dview_init (dview, "-a", file1, file2, label1, label2, DATA_SRC_MEM);       /* XXX binary diff? */
 
-    /* Please note that if you add another widget,
-     * you have to modify dview_adjust_size to
-     * be aware of it
-     */
     if (error == 0)
         dlg_run (dview_dlg);
 
-    if (error != 0 || widget_get_state (WIDGET (dview_dlg), WST_CLOSED))
+    if (error != 0 || widget_get_state (dw, WST_CLOSED))
         dlg_destroy (dview_dlg);
 
     return error == 0 ? 1 : 0;

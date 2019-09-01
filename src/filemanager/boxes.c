@@ -1060,7 +1060,7 @@ tree_box (const char *current_dir)
 
 #ifdef ENABLE_VFS
 void
-configure_vfs (void)
+configure_vfs_box (void)
 {
     char buffer2[BUF_TINY];
 #ifdef ENABLE_VFS_FTP
@@ -1151,7 +1151,7 @@ configure_vfs (void)
 /* --------------------------------------------------------------------------------------------- */
 
 char *
-cd_dialog (void)
+cd_box (void)
 {
     const Widget *w = CONST_WIDGET (current_panel);
     char *my_str;
@@ -1174,8 +1174,8 @@ cd_dialog (void)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-symlink_dialog (const vfs_path_t * existing_vpath, const vfs_path_t * new_vpath,
-                char **ret_existing, char **ret_new)
+symlink_box (const vfs_path_t * existing_vpath, const vfs_path_t * new_vpath,
+             char **ret_existing, char **ret_new)
 {
     quick_widget_t quick_widgets[] = {
         /* *INDENT-OFF* */
@@ -1208,7 +1208,7 @@ symlink_dialog (const vfs_path_t * existing_vpath, const vfs_path_t * new_vpath,
 
 #ifdef ENABLE_BACKGROUND
 void
-jobs_cmd (void)
+jobs_box (void)
 {
     struct
     {

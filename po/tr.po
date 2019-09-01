@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/mc/mc/language/tr/)\n"
@@ -479,6 +479,16 @@ msgstr "Shift"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM çevre değişkeni atanmamış!\n"
+
+#, fuzzy
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "Boru akışı oluşturulamadı"
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1367,6 +1377,10 @@ msgstr "&Yeni"
 msgid "&Close"
 msgstr "&Kapat"
 
+#, fuzzy
+msgid "&History..."
+msgstr "Geçmiş"
+
 msgid "Save &as..."
 msgstr "Farklı kaydet..."
 
@@ -1804,6 +1818,13 @@ msgstr "`%s'in yerel kopyası alınamadı"
 
 msgid "The shell is already running a command"
 msgstr "Kabukta halen bir komut etkin"
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+"Bir xterm ya da Linux konsolu değil;\n"
+" Paneller değiştirilemez."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Midnight Commander'a dönmek için 'exit' yazın"
@@ -2365,13 +2386,6 @@ msgstr ""
 "Bu komutu kullanabilmek için\n"
 "iki pano da listeleme kipinde olmalıdır"
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-"Bir xterm ya da Linux konsolu değil;\n"
-" Paneller değiştirilemez."
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr "'%s' sembolik bağlantı değil"
@@ -2437,9 +2451,6 @@ msgid ""
 msgstr ""
 " \"%s\" dizinine geçilemedi \n"
 " %s "
-
-msgid "Cannot read directory contents"
-msgstr "Dizin içeriği okunamadı"
 
 msgid "Parameter"
 msgstr "Parametre"
@@ -3390,6 +3401,9 @@ msgstr "diz&in boyutlarını göster"
 msgid "Command &history"
 msgstr "Komut Geçmişi"
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr "Dizin listesi"
 
@@ -3614,6 +3628,9 @@ msgstr "Seçme"
 
 msgid "Do you really want to execute?"
 msgstr "Gerçekten çalıştırmak istiyor musunuz?"
+
+msgid "Cannot read directory contents"
+msgstr "Dizin içeriği okunamadı"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Kullanıcı tanımlı biçim geçersiz: öntanımlısı kullanılacak."

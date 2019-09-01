@@ -282,10 +282,15 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
      * string such as "linux" or "xterm" S-Lang will go on, but the
      * terminal size and several other variables won't be initialized
      * (as of S-Lang 1.4.4). Detect it and abort. Also detect extremely
-     * small, large and negative screen dimensions.
+     * small screen dimensions.
      */
     if ((COLS < 10) || (LINES < 5)
-        || (COLS > SLTT_MAX_SCREEN_COLS) || (LINES > SLTT_MAX_SCREEN_ROWS))
+#if SLANG_VERSION < 20303
+        /* Beginning from pre2.3.3-8 (55f58798c267d76a1b93d0d916027b71a10ac1ee),
+           these limitations were eliminated. */
+        || (COLS > SLTT_MAX_SCREEN_COLS) || (LINES > SLTT_MAX_SCREEN_ROWS)
+#endif
+        )
     {
         fprintf (stderr,
                  _("Screen size %dx%d is not supported.\n"
@@ -300,23 +305,7 @@ tty_init (gboolean mouse_enable, gboolean is_xterm)
     if (mc_global.tty.ugly_line_drawing)
         SLtt_Has_Alt_Charset = 0;
 
-    /* If SLang uses fileno(stderr) for terminal input MC will hang
-       if we call SLang_getkey between calls to open_error_pipe and
-       close_error_pipe, e.g. when we do a growing view of an gzipped
-       file. */
-    if (SLang_TT_Read_FD == fileno (stderr))
-        SLang_TT_Read_FD = fileno (stdin);
-
-    if (tcgetattr (SLang_TT_Read_FD, &new_mode) == 0)
-    {
-#ifdef VDSUSP
-        new_mode.c_cc[VDSUSP] = NULL_VALUE;     /* to ignore ^Y */
-#endif
-#ifdef VLNEXT
-        new_mode.c_cc[VLNEXT] = NULL_VALUE;     /* to ignore ^V */
-#endif
-        tcsetattr (SLang_TT_Read_FD, TCSADRAIN, &new_mode);
-    }
+    tcgetattr (SLang_TT_Read_FD, &new_mode);
 
     tty_reset_prog_mode ();
     load_terminfo_keys ();

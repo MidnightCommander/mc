@@ -2806,7 +2806,7 @@ edit_search_cmd (WEdit * edit, gboolean again)
         /* find last search string in history */
         GList *history;
 
-        history = history_get (MC_HISTORY_SHARED_SEARCH);
+        history = mc_config_history_get (MC_HISTORY_SHARED_SEARCH);
         if (history != NULL && history->data != NULL)
         {
             edit->last_search_string = (char *) history->data;

@@ -330,6 +330,36 @@ widget_set_state (Widget * w, widget_state_t state, gboolean enable)
 /* --------------------------------------------------------------------------------------------- */
 
 void
+widget_adjust_position (widget_pos_flags_t pos_flags, int *y, int *x, int *lines, int *cols)
+{
+    if ((pos_flags & WPOS_FULLSCREEN) != 0)
+    {
+        *y = 0;
+        *x = 0;
+        *lines = LINES;
+        *cols = COLS;
+    }
+    else
+    {
+        if ((pos_flags & WPOS_CENTER_HORZ) != 0)
+            *x = (COLS - *cols) / 2;
+
+        if ((pos_flags & WPOS_CENTER_VERT) != 0)
+            *y = (LINES - *lines) / 2;
+
+        if ((pos_flags & WPOS_TRYUP) != 0)
+        {
+            if (*y > 3)
+                *y -= 2;
+            else if (*y == 3)
+                *y = 2;
+        }
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+void
 widget_set_size (Widget * widget, int y, int x, int lines, int cols)
 {
     widget->x = x;

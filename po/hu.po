@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/mc/mc/language/hu/)\n"
@@ -477,6 +477,16 @@ msgstr "Shift"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "Nincs beállítva a TERM környezeti változó.\n"
+
+#, fuzzy
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "A(z) %s könyvtár nem létrehozható"
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1359,6 +1369,10 @@ msgstr "&Új"
 msgid "&Close"
 msgstr "&Bezárás"
 
+#, fuzzy
+msgid "&History..."
+msgstr "Előzmények"
+
 msgid "Save &as..."
 msgstr "Mentés m&ásként"
 
@@ -1794,6 +1808,13 @@ msgstr "Nem sikerült behozni \"%s\" helyi másolatát"
 
 msgid "The shell is already running a command"
 msgstr "A parancsértelmező már futtat egy parancsot."
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+"Nem Xterm vagy Linux-konzol;\n"
+"a paneleket nem lehet kikapcsolni."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Írjon \"exit\"-et a Midnight Commanderbe való visszatéréshez."
@@ -2353,13 +2374,6 @@ msgstr ""
 "Mindkét panelnak fájllista-módban kell lennie\n"
 "ehhez a művelethez"
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-"Nem Xterm vagy Linux-konzol;\n"
-"a paneleket nem lehet kikapcsolni."
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr "\"%s\" nem szimbolikus link"
@@ -2425,9 +2439,6 @@ msgid ""
 msgstr ""
 "Nem sikerült belépni a(z) \"%s\" könyvtárba.\n"
 "%s"
-
-msgid "Cannot read directory contents"
-msgstr "Könyvtár tartalma nem olvasható"
 
 msgid "Parameter"
 msgstr "Paraméter"
@@ -3378,6 +3389,9 @@ msgstr "Könyvtár&méret"
 msgid "Command &history"
 msgstr "Ko&rábbi parancsok"
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr "Könyvtár-gyorslista"
 
@@ -3602,6 +3616,9 @@ msgstr "Kijelölések megszüntetése"
 
 msgid "Do you really want to execute?"
 msgstr "Biztosan futtatni kívánja a programot?"
+
+msgid "Cannot read directory contents"
+msgstr "Könyvtár tartalma nem olvasható"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "A beállított formátum hibás; az alapértelmezés lép életbe."

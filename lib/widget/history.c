@@ -10,7 +10,7 @@
    Jakub Jelinek, 1995
    Andrej Borsenkow, 1996
    Norbert Warmuth, 1997
-   Andrew Borodin <aborodin@vmail.ru>, 2009, 2010, 2011, 2012, 2013
+   Andrew Borodin <aborodin@vmail.ru>, 2009-2019
 
    This file is part of the Midnight Commander.
 
@@ -29,32 +29,22 @@
  */
 
 /** \file history.c
- *  \brief Source: save, load and show history
+ *  \brief Source: show history
  */
 
 #include <config.h>
 
-#include <errno.h>
 #include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 #include <sys/types.h>
-#include <sys/stat.h>
 
 #include "lib/global.h"
 
 #include "lib/tty/tty.h"        /* LINES, COLS */
-#include "lib/mcconfig.h"       /* for history loading and saving */
-#include "lib/fileloc.h"
 #include "lib/strutil.h"
-#include "lib/util.h"           /* list_append_unique */
 #include "lib/widget.h"
 #include "lib/keybind.h"        /* CK_* */
 
 /*** global variables ****************************************************************************/
-
-/* how much history items are used */
-int num_history_items_recorded = 60;
 
 /*** file scope macro definitions ****************************************************************/
 
@@ -187,159 +177,6 @@ history_release_item (history_descriptor_t * hd, WLEntry * le)
 
 /* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Load the history from the ${XDG_CACHE_HOME}/mc/history file.
- * It is called with the widgets history name and returns the GList list.
- */
-
-GList *
-history_get (const char *input_name)
-{
-    GList *hist = NULL;
-    char *profile;
-    mc_config_t *cfg;
-
-    if (num_history_items_recorded == 0)        /* this is how to disable */
-        return NULL;
-    if ((input_name == NULL) || (*input_name == '\0'))
-        return NULL;
-
-    profile = mc_config_get_full_path (MC_HISTORY_FILE);
-    cfg = mc_config_init (profile, TRUE);
-
-    hist = history_load (cfg, input_name);
-
-    mc_config_deinit (cfg);
-    g_free (profile);
-
-    return hist;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Load history from the mc_config
- */
-GList *
-history_load (mc_config_t * cfg, const char *name)
-{
-    size_t i;
-    GList *hist = NULL;
-    char **keys;
-    size_t keys_num = 0;
-    GIConv conv = INVALID_CONV;
-    GString *buffer;
-
-    if (name == NULL || *name == '\0')
-        return NULL;
-
-    /* get number of keys */
-    keys = mc_config_get_keys (cfg, name, &keys_num);
-    g_strfreev (keys);
-
-    /* create charset conversion handler to convert strings
-       from utf-8 to system codepage */
-    if (!mc_global.utf8_display)
-        conv = str_crt_conv_from ("UTF-8");
-
-    buffer = g_string_sized_new (64);
-
-    for (i = 0; i < keys_num; i++)
-    {
-        char key[BUF_TINY];
-        char *this_entry;
-
-        g_snprintf (key, sizeof (key), "%lu", (unsigned long) i);
-        this_entry = mc_config_get_string_raw (cfg, name, key, "");
-
-        if (this_entry == NULL)
-            continue;
-
-        if (conv == INVALID_CONV)
-            hist = list_append_unique (hist, this_entry);
-        else
-        {
-            g_string_set_size (buffer, 0);
-            if (str_convert (conv, this_entry, buffer) == ESTR_FAILURE)
-                hist = list_append_unique (hist, this_entry);
-            else
-            {
-                hist = list_append_unique (hist, g_strndup (buffer->str, buffer->len));
-                g_free (this_entry);
-            }
-        }
-    }
-
-    g_string_free (buffer, TRUE);
-    if (conv != INVALID_CONV)
-        str_close_conv (conv);
-
-    /* return pointer to the last entry in the list */
-    return g_list_last (hist);
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
-  * Save history to the mc_config, but don't save config to file
-  */
-void
-history_save (mc_config_t * cfg, const char *name, GList * h)
-{
-    GIConv conv = INVALID_CONV;
-    GString *buffer;
-    int i;
-
-    if (name == NULL || *name == '\0' || h == NULL)
-        return;
-
-    /* go to end of list */
-    h = g_list_last (h);
-
-    /* go back 60 places */
-    for (i = 0; (i < num_history_items_recorded - 1) && (h->prev != NULL); i++)
-        h = g_list_previous (h);
-
-    if (name != NULL)
-        mc_config_del_group (cfg, name);
-
-    /* create charset conversion handler to convert strings
-       from system codepage to UTF-8 */
-    if (!mc_global.utf8_display)
-        conv = str_crt_conv_to ("UTF-8");
-
-    buffer = g_string_sized_new (64);
-    /* dump history into profile */
-    for (i = 0; h != NULL; h = g_list_next (h))
-    {
-        char key[BUF_TINY];
-        char *text = (char *) h->data;
-
-        /* We shouldn't have null entries, but let's be sure */
-        if (text == NULL)
-            continue;
-
-        g_snprintf (key, sizeof (key), "%d", i++);
-
-        if (conv == INVALID_CONV)
-            mc_config_set_string_raw (cfg, name, key, text);
-        else
-        {
-            g_string_set_size (buffer, 0);
-            if (str_convert (conv, text, buffer) == ESTR_FAILURE)
-                mc_config_set_string_raw (cfg, name, key, text);
-            else
-                mc_config_set_string_raw (cfg, name, key, buffer->str);
-        }
-    }
-
-    g_string_free (buffer, TRUE);
-    if (conv != INVALID_CONV)
-        str_close_conv (conv);
-}
-
 /* --------------------------------------------------------------------------------------------- */
 
 void

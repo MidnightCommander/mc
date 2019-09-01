@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-05-01 13:39+0000\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque (http://www.transifex.com/mc/mc/language/eu/)\n"
@@ -483,6 +483,16 @@ msgstr "Maius"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM ingurune-aldagaia ezarri gabe dago!\n"
+
+#, fuzzy
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "Ezin dira sortu hodiko isuriak"
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1371,6 +1381,10 @@ msgstr "&Berria"
 msgid "&Close"
 msgstr "It&xi"
 
+#, fuzzy
+msgid "&History..."
+msgstr "Historia"
+
 msgid "Save &as..."
 msgstr "Gorde &honela..."
 
@@ -1806,6 +1820,13 @@ msgstr "Ezin eskuratu ondokoaren bertako kopia bat: %s"
 
 msgid "The shell is already running a command"
 msgstr "Shell-a dagoeneko komando bat exekutate ari da"
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+"Ez da xterm edo Linux kontsola;\n"
+"panelak ezin dira ezkutatu."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Tekleatu «exit» Midnight Commanderrera itzultzeko"
@@ -2368,13 +2389,6 @@ msgstr ""
 "Panel biak egon beharko lirateke zerrendatzeko\n"
 "moduan komando hau erabiltzeko"
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-"Ez da xterm edo Linux kontsola;\n"
-"panelak ezin dira ezkutatu."
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr "'%s' ez da esteka sinbolikoa"
@@ -2440,9 +2454,6 @@ msgid ""
 msgstr ""
 "Ezin da \"%s\" direktoriora aldatu\n"
 "%s"
-
-msgid "Cannot read directory contents"
-msgstr "Direktorioaren edukia ezin irakurri"
 
 msgid "Parameter"
 msgstr "Parametroa"
@@ -3401,6 +3412,9 @@ msgstr "E&rakutsi direktorioen neurriak"
 msgid "Command &history"
 msgstr "Ko&mandoen historia"
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr "&Gogoko direktorioak"
 
@@ -3625,6 +3639,9 @@ msgstr "Hautua kendu"
 
 msgid "Do you really want to execute?"
 msgstr "Beneta exekutatu nahi duzu?"
+
+msgid "Cannot read directory contents"
+msgstr "Direktorioaren edukia ezin irakurri"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Erabiltzaileak emandako formatua baliogabea da, lehenetsira itzultzen."

@@ -58,9 +58,9 @@
 #include "lib/charsets.h"
 #endif
 #include "lib/event.h"          /* mc_event_raise() */
+#include "lib/mcconfig.h"       /* mc_config_history_get() */
 
 #include "src/filemanager/layout.h"
-#include "src/filemanager/cmd.h"
 #include "src/filemanager/midnight.h"   /* current_panel */
 #include "src/filemanager/ext.h"        /* regex_command_for() */
 
@@ -140,7 +140,7 @@ mcview_continue_search_cmd (WView * view)
         /* find last search string in history */
         GList *history;
 
-        history = history_get (MC_HISTORY_SHARED_SEARCH);
+        history = mc_config_history_get (MC_HISTORY_SHARED_SEARCH);
         if (history != NULL && history->data != NULL)
         {
             view->last_search_string = (gchar *) g_strdup (history->data);
@@ -300,30 +300,39 @@ mcview_load_next_prev_init (WView * view)
 
         /* TODO: check mtime of directory to reload it */
 
-        const char *fname;
-        size_t fname_len;
-        int i;
         dir_sort_options_t sort_op = { FALSE, TRUE, FALSE };
 
         /* load directory where requested file is */
         view->dir = g_new0 (dir_list, 1);
         view->dir_idx = g_new (int, 1);
 
-        dir_list_load (view->dir, view->workdir_vpath, (GCompareFunc) sort_name, &sort_op, NULL);
-
-        fname = x_basename (vfs_path_as_str (view->filename_vpath));
-        fname_len = strlen (fname);
-
-        /* search current file in the list */
-        for (i = 0; i != view->dir->len; i++)
+        if (dir_list_load
+            (view->dir, view->workdir_vpath, (GCompareFunc) sort_name, &sort_op, NULL))
         {
-            const file_entry_t *fe = &view->dir->list[i];
+            const char *fname;
+            size_t fname_len;
+            int i;
 
-            if (fname_len == fe->fnamelen && strncmp (fname, fe->fname, fname_len) == 0)
-                break;
+            fname = x_basename (vfs_path_as_str (view->filename_vpath));
+            fname_len = strlen (fname);
+
+            /* search current file in the list */
+            for (i = 0; i != view->dir->len; i++)
+            {
+                const file_entry_t *fe = &view->dir->list[i];
+
+                if (fname_len == fe->fnamelen && strncmp (fname, fe->fname, fname_len) == 0)
+                    break;
+            }
+
+            *view->dir_idx = i;
         }
-
-        *view->dir_idx = i;
+        else
+        {
+            message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
+            MC_PTR_FREE (view->dir);
+            MC_PTR_FREE (view->dir_idx);
+        }
     }
 }
 
@@ -537,7 +546,7 @@ mcview_execute_cmd (WView * view, long command)
         mcview_moveto_bottom (view);
         break;
     case CK_Shell:
-        view_other_cmd ();
+        toggle_subshell ();
         break;
     case CK_Ruler:
         mcview_display_toggle_ruler (view);
@@ -622,18 +631,8 @@ mcview_handle_key (WView * view, int key)
 /* --------------------------------------------------------------------------------------------- */
 
 static inline void
-mcview_adjust_size (WDialog * h)
+mcview_resize (WView * view)
 {
-    WView *view;
-    WButtonBar *b;
-
-    /* Look up the viewer and the buttonbar, we assume only two widgets here */
-    view = (WView *) find_widget_type (h, mcview_callback);
-    b = find_buttonbar (h);
-
-    widget_set_size (WIDGET (view), 0, 0, LINES - 1, COLS);
-    widget_set_size (WIDGET (b), LINES - 1, 0, 1, COLS);
-
     view->dpy_wrap_dirty = TRUE;
     mcview_compute_areas (view);
     mcview_update_bytes_per_line (view);
@@ -725,6 +724,10 @@ mcview_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
         mcview_update (view);
         return MSG_HANDLED;
 
+    case MSG_RESIZE:
+        mcview_resize (view);
+        return MSG_HANDLED;
+
     case MSG_DESTROY:
         if (mcview_is_in_panel (view))
         {
@@ -773,10 +776,6 @@ mcview_dialog_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
 
     switch (msg)
     {
-    case MSG_RESIZE:
-        mcview_adjust_size (h);
-        return MSG_HANDLED;
-
     case MSG_ACTION:
         /* Handle shortcuts. */
 

@@ -1,6 +1,6 @@
 
 /** \file tty-internal.h
- *  \brief Header: internal suff of the terminal controlling library
+ *  \brief Header: internal stuff of the terminal controlling library
  */
 
 #ifndef MC__TTY_INTERNAL_H

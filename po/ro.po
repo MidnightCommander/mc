@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-22 13:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-06-20 16:47+0000\n"
 "Last-Translator: Nicolae Crefelean\n"
 "Language-Team: Romanian (http://www.transifex.com/mc/mc/language/ro/)\n"
@@ -489,6 +489,16 @@ msgstr "Shift"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "Variabila de mediu TERM nu este setată!\n"
+
+#, fuzzy
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "Nu pot crea fluxul filtrului"
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1377,6 +1387,10 @@ msgstr "&Nou"
 msgid "&Close"
 msgstr "În&chide"
 
+#, fuzzy
+msgid "&History..."
+msgstr "Istoric"
+
 msgid "Save &as..."
 msgstr "Salvează c&a..."
 
@@ -1812,6 +1826,13 @@ msgstr "Nu se poate prelua o copie locală a %s"
 
 msgid "The shell is already running a command"
 msgstr "Terminalul deja rulează o comandă"
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+"Nu este o consolă xterm sau Linux;\n"
+"panourile nu pot fi comutate."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Tastați `exit' pentru a reveni în Midnight Commander"
@@ -2372,13 +2393,6 @@ msgstr ""
 "Pentru a utiliza această comandă ambele\n"
 "trebuie să fie în modul listare"
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-"Nu este o consolă xterm sau Linux;\n"
-"panourile nu pot fi comutate."
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr "'%s' nu este o legătură simbolică"
@@ -2444,9 +2458,6 @@ msgid ""
 msgstr ""
 "Nu se poate chdir în \"%s\"\n"
 "%s"
-
-msgid "Cannot read directory contents"
-msgstr "Nu pot citi conținutul dosarului"
 
 msgid "Parameter"
 msgstr "Parametru"
@@ -3403,6 +3414,9 @@ msgstr "Arată mărimea dosarelor"
 msgid "Command &history"
 msgstr "&Istoric comenzi"
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr "Listă rapidă de dosa&re"
 
@@ -3629,6 +3643,9 @@ msgstr "Deselectează"
 
 msgid "Do you really want to execute?"
 msgstr "Chiar dorești să execuți?"
+
+msgid "Cannot read directory contents"
+msgstr "Nu pot citi conținutul dosarului"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr ""

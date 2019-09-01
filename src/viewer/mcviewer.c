@@ -234,16 +234,19 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
     gboolean succeeded;
     WView *lc_mcview;
     WDialog *view_dlg;
+    Widget *vw, *b;
 
     /* Create dialog and widgets, put them on the dialog */
     view_dlg = dlg_create (FALSE, 0, 0, 1, 1, WPOS_FULLSCREEN, FALSE, NULL, mcview_dialog_callback,
                            NULL, "[Internal File Viewer]", NULL);
-    widget_want_tab (WIDGET (view_dlg), TRUE);
+    vw = WIDGET (view_dlg);
+    widget_want_tab (vw, TRUE);
 
-    lc_mcview = mcview_new (0, 0, LINES - 1, COLS, FALSE);
-    add_widget (view_dlg, lc_mcview);
+    lc_mcview = mcview_new (vw->y, vw->x, vw->lines - 1, vw->cols, FALSE);
+    add_widget_autopos (view_dlg, lc_mcview, WPOS_KEEP_ALL, NULL);
 
-    add_widget (view_dlg, buttonbar_new (TRUE));
+    b = WIDGET (buttonbar_new (TRUE));
+    add_widget_autopos (view_dlg, b, b->pos_flags, NULL);
 
     view_dlg->get_title = mcview_get_title;
 
@@ -256,7 +259,7 @@ mcview_viewer (const char *command, const vfs_path_t * file_vpath, int start_lin
     else
         dlg_stop (view_dlg);
 
-    if (widget_get_state (WIDGET (view_dlg), WST_CLOSED))
+    if (widget_get_state (vw, WST_CLOSED))
         dlg_destroy (view_dlg);
 
     return succeeded;

@@ -85,7 +85,7 @@
 hook_t *select_file_hook = NULL;
 
 /* *INDENT-OFF* */
-panelized_panel_t panelized_panel = { {NULL, 0, -1}, NULL };
+panelized_panel_t panelized_panel = { {NULL, 0, -1, NULL}, NULL };
 /* *INDENT-ON* */
 
 static const char *string_file_name (file_entry_t *, int);
@@ -1433,9 +1433,9 @@ panel_load_history (const gchar * event_group_name, const gchar * event_name,
     if (ev->receiver == NULL || ev->receiver == WIDGET (p))
     {
         if (ev->cfg != NULL)
-            p->dir_history = history_load (ev->cfg, p->hist_name);
+            p->dir_history = mc_config_history_load (ev->cfg, p->hist_name);
         else
-            p->dir_history = history_get (p->hist_name);
+            p->dir_history = mc_config_history_get (p->hist_name);
 
         directory_history_add (p, p->cwd_vpath);
     }
@@ -1459,7 +1459,7 @@ panel_save_history (const gchar * event_group_name, const gchar * event_name,
     {
         ev_history_load_save_t *ev = (ev_history_load_save_t *) data;
 
-        history_save (ev->cfg, p->hist_name, p->dir_history);
+        mc_config_history_save (ev->cfg, p->hist_name, p->dir_history);
     }
 
     return TRUE;
@@ -3277,8 +3277,10 @@ _do_panel_cd (WPanel * panel, const vfs_path_t * new_dir_vpath, enum cd_enum cd_
     /* Reload current panel */
     panel_clean_dir (panel);
 
-    dir_list_load (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine,
-                   &panel->sort_info, panel->filter);
+    if (!dir_list_load (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine,
+                        &panel->sort_info, panel->filter))
+        message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
+
     try_to_select (panel, get_parent_dir_name (panel->cwd_vpath, olddir_vpath));
 
     load_hint (FALSE);
@@ -4178,6 +4180,36 @@ panel_recursive_cd_to_parent (const vfs_path_t * vpath)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static void
+panel_dir_list_callback (dir_list_cb_state_t state, void *data)
+{
+    static int count = 0;
+
+    (void) data;
+
+    switch (state)
+    {
+    case DIR_OPEN:
+        count = 0;
+        break;
+
+    case DIR_READ:
+        count++;
+        if ((count & 15) == 0)
+            rotate_dash (TRUE);
+        break;
+
+    case DIR_CLOSE:
+        rotate_dash (FALSE);
+        break;
+
+    default:
+        g_assert_not_reached ();
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -4268,6 +4300,7 @@ panel_sized_empty_new (const char *panel_name, int y, int x, int lines, int cols
     panel->dir.size = DIR_LIST_MIN_SIZE;
     panel->dir.list = g_new (file_entry_t, panel->dir.size);
     panel->dir.len = 0;
+    panel->dir.callback = panel_dir_list_callback;
 
     panel->list_cols = 1;
     panel->brief_cols = 2;
@@ -4364,8 +4397,9 @@ panel_sized_with_dir_new (const char *panel_name, int y, int x, int lines, int c
     }
 
     /* Load the default format */
-    dir_list_load (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine,
-                   &panel->sort_info, panel->filter);
+    if (!dir_list_load (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine,
+                        &panel->sort_info, panel->filter))
+        message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
 
     /* Restore old right path */
     if (curdir != NULL)
@@ -4411,8 +4445,9 @@ panel_reload (WPanel * panel)
     memset (&(panel->dir_stat), 0, sizeof (panel->dir_stat));
     show_dir (panel);
 
-    dir_list_reload (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine,
-                     &panel->sort_info, panel->filter);
+    if (!dir_list_reload (&panel->dir, panel->cwd_vpath, panel->sort_field->sort_routine,
+                          &panel->sort_info, panel->filter))
+        message (D_ERROR, MSG_ERROR, _("Cannot read directory contents"));
 
     panel->dirty = 1;
     if (panel->selected >= panel->dir.len)

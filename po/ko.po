@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-05-22 09:27+0000\n"
 "Last-Translator: 이정희 <daemul72@gmail.com>\n"
 "Language-Team: Korean (http://www.transifex.com/mc/mc/language/ko/)\n"
@@ -482,6 +482,16 @@ msgstr "쉬프트"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM 환경변수가 설정되어있지 않습니다!\n"
+
+#, fuzzy
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "파이프 데이터 스트림을 생성할 수 없음"
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1366,6 +1376,10 @@ msgstr "신규(&N)"
 msgid "&Close"
 msgstr "닫기(&C)"
 
+#, fuzzy
+msgid "&History..."
+msgstr "기록"
+
 msgid "Save &as..."
 msgstr "다른 이름으로 저장(&A)..."
 
@@ -1800,6 +1814,13 @@ msgstr "%s의 로컬 복사본을 가져올 수 없음"
 
 msgid "The shell is already running a command"
 msgstr "셸이 이미 명령을 실행하고 있음"
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+"XTerm 또는 Linux 콘솔이 아님;\n"
+"패널을 전환할 수 없습니다."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "미드나잇 커맨더로 돌아가려면 'exit'를 입력하십시오."
@@ -2360,13 +2381,6 @@ msgstr ""
 "두 패널이 모두 목록 모드에 있어야 함\n"
 "이 명령을 사용합니다."
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-"XTerm 또는 Linux 콘솔이 아님;\n"
-"패널을 전환할 수 없습니다."
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr "'%s'은(는) 심볼릭링크가 아님"
@@ -2432,9 +2446,6 @@ msgid ""
 msgstr ""
 "\"%s\"로 디렉토리 변경할 수 없음\n"
 "%s"
-
-msgid "Cannot read directory contents"
-msgstr "디렉터리 내용을 읽을 수 없습니다"
 
 msgid "Parameter"
 msgstr "매개변수"
@@ -3388,6 +3399,9 @@ msgstr "디렉터리 크기 보기(&I)"
 msgid "Command &history"
 msgstr "명령 기록(&H)"
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr "디렉터리 단축목록(&R)"
 
@@ -3610,6 +3624,9 @@ msgstr "선택 해제"
 
 msgid "Do you really want to execute?"
 msgstr "정말로 실행하시겠습니까?"
+
+msgid "Cannot read directory contents"
+msgstr "디렉터리 내용을 읽을 수 없습니다"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "사용자가 제공한 형식이 잘못되어 기본값으로 되돌립니다."

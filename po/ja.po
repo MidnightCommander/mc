@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/mc/mc/language/ja/)\n"
@@ -468,6 +468,16 @@ msgstr "Shift"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "環境変数 TERM がセットされていません\n"
+
+#, fuzzy
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "ディレクトリー %s が作成できません"
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1294,6 +1304,9 @@ msgstr "新規(&N)"
 msgid "&Close"
 msgstr ""
 
+msgid "&History..."
+msgstr ""
+
 msgid "Save &as..."
 msgstr "別名で保存(&A)..."
 
@@ -1722,6 +1735,11 @@ msgid "Cannot fetch a local copy of %s"
 msgstr ""
 
 msgid "The shell is already running a command"
+msgstr ""
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
 msgstr ""
 
 msgid "Type 'exit' to return to the Midnight Commander"
@@ -2275,11 +2293,6 @@ msgid ""
 "to use this command"
 msgstr ""
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr ""
@@ -2343,9 +2356,6 @@ msgid ""
 msgstr ""
 "「%s」に移動できません\n"
 "%s"
-
-msgid "Cannot read directory contents"
-msgstr ""
 
 msgid "Parameter"
 msgstr "パラメーター"
@@ -3212,6 +3222,9 @@ msgstr ""
 msgid "Command &history"
 msgstr "コマンド履歴(&H)"
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr ""
 
@@ -3434,6 +3447,9 @@ msgstr "選択解除"
 
 msgid "Do you really want to execute?"
 msgstr "本当に実行しますか?"
+
+msgid "Cannot read directory contents"
+msgstr ""
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "ユーザの指定した形式は不正なようです. デフォルトに戻します"

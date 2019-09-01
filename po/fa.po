@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Persian (http://www.transifex.com/mc/mc/language/fa/)\n"
@@ -461,6 +461,15 @@ msgid "Shift"
 msgstr ""
 
 msgid "The TERM environment variable is unset!\n"
+msgstr ""
+
+msgid "Cannot create pipe for SIGWINCH"
+msgstr ""
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
 msgstr ""
 
 #, c-format
@@ -1286,6 +1295,10 @@ msgstr "جدید"
 msgid "&Close"
 msgstr ""
 
+#, fuzzy
+msgid "&History..."
+msgstr "تاریخچه"
+
 msgid "Save &as..."
 msgstr ""
 
@@ -1713,6 +1726,11 @@ msgstr ""
 
 msgid "The shell is already running a command"
 msgstr "شل در حال اجرای فرمانی دیگر است"
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr ""
@@ -2263,11 +2281,6 @@ msgid ""
 "to use this command"
 msgstr ""
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr ""
@@ -2328,9 +2341,6 @@ msgstr "در فایل سیستم غیرمحلی نمی‌توان فرمانی �
 msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
-msgstr ""
-
-msgid "Cannot read directory contents"
 msgstr ""
 
 msgid "Parameter"
@@ -3200,6 +3210,9 @@ msgstr ""
 msgid "Command &history"
 msgstr ""
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr ""
 
@@ -3423,6 +3436,9 @@ msgid "Unselect"
 msgstr ""
 
 msgid "Do you really want to execute?"
+msgstr ""
+
+msgid "Cannot read directory contents"
 msgstr ""
 
 msgid "User supplied format looks invalid, reverting to default."

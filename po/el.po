@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Greek (http://www.transifex.com/mc/mc/language/el/)\n"
@@ -474,6 +474,16 @@ msgid "Shift"
 msgstr "Shift"
 
 msgid "The TERM environment variable is unset!\n"
+msgstr ""
+
+#, fuzzy
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "Αδυναμία δημιουργία καταλόγου %s"
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
 msgstr ""
 
 #, c-format
@@ -1312,6 +1322,10 @@ msgstr "&Νέο"
 msgid "&Close"
 msgstr "&Κλείσιμο"
 
+#, fuzzy
+msgid "&History..."
+msgstr "Ιστορικό"
+
 msgid "Save &as..."
 msgstr "Αποθήκευση &ως..."
 
@@ -1741,6 +1755,11 @@ msgstr ""
 
 msgid "The shell is already running a command"
 msgstr "Το κέλυφος τρέχει ήδη μια εντολή"
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr ""
@@ -2295,11 +2314,6 @@ msgid ""
 "to use this command"
 msgstr ""
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr ""
@@ -2365,9 +2379,6 @@ msgid ""
 msgstr ""
 "Αδυναμία chdir σε \"%s\"\n"
 "%s"
-
-msgid "Cannot read directory contents"
-msgstr "Αδυναμία ανάγνωσης περιεχομένων καταλόγου"
 
 msgid "Parameter"
 msgstr "Παράμετρος"
@@ -3290,6 +3301,9 @@ msgstr "Εμ&φάνιση μεγεθών καταλόγων"
 msgid "Command &history"
 msgstr "&Ιστορικό εντολών"
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr ""
 
@@ -3514,6 +3528,9 @@ msgstr "Αποεπιλογή"
 
 msgid "Do you really want to execute?"
 msgstr "Σίγουρα θέλετε να γίνει εκτέλεση;"
+
+msgid "Cannot read directory contents"
+msgstr "Αδυναμία ανάγνωσης περιεχομένων καταλόγου"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr ""

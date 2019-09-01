@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/mc/mc/language/sv/)\n"
@@ -487,6 +487,16 @@ msgstr "Skift"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "Omgivningsvariablen TERM är inte satt!\n"
+
+#, fuzzy
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "Tunnelströmmar kunde inte skapas"
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1374,6 +1384,10 @@ msgstr "&Ny"
 msgid "&Close"
 msgstr "S&täng"
 
+#, fuzzy
+msgid "&History..."
+msgstr "Historik"
+
 msgid "Save &as..."
 msgstr "Spa&ra som..."
 
@@ -1809,6 +1823,13 @@ msgstr "En lokal kopia av %s kunde inte hämtas"
 
 msgid "The shell is already running a command"
 msgstr "Skalet kör redan ett kommando"
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+"Inte en xterm- eller linuxterminal;\n"
+"panelerna kan inte slås av/på."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Skriv 'exit' för att återvända till Midnight Commander"
@@ -2369,13 +2390,6 @@ msgstr ""
 "Båda panelerna måste vara i fillistläge\n"
 "för att använda detta kommando"
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-"Inte en xterm- eller linuxterminal;\n"
-"panelerna kan inte slås av/på."
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr "'%s' är inte en symbolisk länk"
@@ -2441,9 +2455,6 @@ msgid ""
 msgstr ""
 "Chdir till \"%s\" misslyckades\n"
 "%s"
-
-msgid "Cannot read directory contents"
-msgstr "Kan inte läsa kataloginnehåll"
 
 msgid "Parameter"
 msgstr "Parameter"
@@ -3395,6 +3406,9 @@ msgstr "V&isa katalogstorlekar"
 msgid "Command &history"
 msgstr "Kommando-&historik"
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr "Katalog&favoriter"
 
@@ -3619,6 +3633,9 @@ msgstr "Avmarkera"
 
 msgid "Do you really want to execute?"
 msgstr "Vill du verkligen exekvera?"
+
+msgid "Cannot read directory contents"
+msgstr "Kan inte läsa kataloginnehåll"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Det angivna formatet ser ogiltigt ut, faller tillbaka till standard."

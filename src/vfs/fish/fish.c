@@ -452,7 +452,6 @@ fish_set_env (int flags)
     GString *tmp;
 
     tmp = g_string_sized_new (250);
-    g_string_assign (tmp, "");
 
     if ((flags & FISH_HAVE_HEAD) != 0)
         g_string_append (tmp, "FISH_HAVE_HEAD=1 export FISH_HAVE_HEAD; ");

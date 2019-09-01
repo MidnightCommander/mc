@@ -1,12 +1,10 @@
 
 /** \file lib/widget/history.h
- *  \brief Header: save, load and show history
+ *  \brief Header: show history
  */
 
 #ifndef MC__WIDGET_HISTORY_H
 #define MC__WIDGET_HISTORY_H
-
-#include "lib/mcconfig.h"       /* mc_config_t */
 
 /*** typedefs(not structures) and defined constants **********************************************/
 
@@ -41,22 +39,11 @@ typedef struct history_descriptor_t
 
 /*** global variables defined in .c file *********************************************************/
 
-extern int num_history_items_recorded;
-
 /*** declarations of public functions ************************************************************/
-
-/* read history to the mc_config, but don't save config to file */
-GList *history_get (const char *input_name);
-/* load history from the mc_config */
-GList *history_load (mc_config_t * cfg, const char *name);
-/* save history to the mc_config, but don't save config to file */
-void history_save (mc_config_t * cfg, const char *name, GList * h);
 
 void history_descriptor_init (history_descriptor_t * hd, int y, int x, GList * history,
                               int current);
 
-/* for repositioning of history dialog we should pass widget to this
- * function, as position of history dialog depends on widget's position */
 void history_show (history_descriptor_t * hd);
 
 /*** inline functions ****************************************************************************/

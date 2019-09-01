@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-05-01 18:12+0000\n"
 "Last-Translator: Andriy Smilyanets <smile.andriy@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/mc/mc/language/uk/)\n"
@@ -493,6 +493,16 @@ msgstr "Shift"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "Змінна середовища TERM не встановлена!\n"
+
+#, fuzzy
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "Не вдалося створити потоки каналу"
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1377,6 +1387,10 @@ msgstr "&Новий"
 msgid "&Close"
 msgstr "&Закрити"
 
+#, fuzzy
+msgid "&History..."
+msgstr "Історія"
+
 msgid "Save &as..."
 msgstr "Зберегти &як…"
 
@@ -1811,6 +1825,13 @@ msgstr "Не вдалося отримати локальну копію %s"
 
 msgid "The shell is already running a command"
 msgstr "Інтерпретатор вже виконує команду"
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+"Це не xterm і не консоль Linux.\n"
+"Панелі не можна перемкнути. "
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Введіть 'exit', щоб повернутися до Midnight Commander"
@@ -2370,13 +2391,6 @@ msgstr ""
 "Для виконання цієї команди обидві панелі\n"
 "повинні бути в режимі списку"
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-"Це не xterm і не консоль Linux.\n"
-"Панелі не можна перемкнути. "
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr "«%s» — не символьне посилання"
@@ -2442,9 +2456,6 @@ msgid ""
 msgstr ""
 "Не вдалося змінити каталог на «%s»\n"
 "%s "
-
-msgid "Cannot read directory contents"
-msgstr "Не вдалося отримати зміст каталога"
 
 msgid "Parameter"
 msgstr "Параметр"
@@ -3402,6 +3413,9 @@ msgstr "Показати &розміри каталогів"
 msgid "Command &history"
 msgstr "&Історія команд"
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr "&Гарячий список каталогів"
 
@@ -3630,6 +3644,9 @@ msgstr "Зняти відмітку"
 
 msgid "Do you really want to execute?"
 msgstr "Справді виконати?"
+
+msgid "Cannot read directory contents"
+msgstr "Не вдалося отримати зміст каталога"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr ""
