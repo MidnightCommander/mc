@@ -275,9 +275,6 @@ typedef struct
         /* If true, use + and \ keys normally and select/unselect do if M-+ / M-\.
            and M-- and keypad + / - */
         gboolean alternate_plus_minus;
-
-        /* Set if the window has changed it's size */
-        SIG_ATOMIC_VOLATILE_T winch_flag;
     } tty;
 
     struct

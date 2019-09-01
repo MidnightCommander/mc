@@ -30,6 +30,7 @@
 
 #include <config.h>
 
+#include <errno.h>
 #include <signal.h>
 #include <stdarg.h>
 #include <stdlib.h>
@@ -160,6 +161,29 @@ tty_got_interrupt (void)
     rv = (got_interrupt != 0);
     got_interrupt = 0;
     return rv;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+gboolean
+tty_got_winch (void)
+{
+    gboolean ret = FALSE;
+    ssize_t n;
+
+    /* merge all SIGWINCH events raised to this moment */
+    do
+    {
+        char x[16];
+
+        /* read multiple events at a time  */
+        n = read (sigwinch_pipe[0], &x, sizeof (x));
+        if (n > 0)
+            ret = TRUE;
+    }
+    while (n > 0 || (n == -1 && errno == EINTR));
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */

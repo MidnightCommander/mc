@@ -139,6 +139,7 @@ static void
 tty_setup_sigwinch (void (*handler) (int))
 {
     (void) SLsignal (SIGWINCH, handler);
+    tty_create_winch_pipe ();
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -146,9 +147,13 @@ tty_setup_sigwinch (void (*handler) (int))
 static void
 sigwinch_handler (int dummy)
 {
+    ssize_t n = 0;
+
     (void) dummy;
 
-    mc_global.tty.winch_flag = 1;
+    n = write (sigwinch_pipe[1], "", 1);
+    (void) n;
+
     (void) SLsignal (SIGWINCH, sigwinch_handler);
 }
 
