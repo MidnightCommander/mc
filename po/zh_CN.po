@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-03-09 03:13+0000\n"
 "Last-Translator: liushuyu011 <liushuyu011@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/mc/mc/language/"
@@ -489,6 +489,16 @@ msgstr "Shift 键"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "没有设置 TERM 环境变量!\n"
+
+#, fuzzy
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "无法创建管道数据流"
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1372,6 +1382,10 @@ msgstr "新建(&N)"
 msgid "&Close"
 msgstr "关闭(&C)"
 
+#, fuzzy
+msgid "&History..."
+msgstr "历史"
+
 msgid "Save &as..."
 msgstr "另存为(&A)..."
 
@@ -1806,6 +1820,13 @@ msgstr "无法获取 %s 的本地副本"
 
 msgid "The shell is already running a command"
 msgstr "Shell 正在运行一个命令"
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+"不是一个 xterm 或 Linux 控制台；\n"
+"无法切换面板。"
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "输入 'exit' 返回 Midnight Commander"
@@ -2365,13 +2386,6 @@ msgstr ""
 "若要使用该命令，\n"
 "两个面板必需都处于列表视图模式"
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-"不是一个 xterm 或 Linux 控制台；\n"
-"无法切换面板。"
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr "“%s”不是一个符号链接"
@@ -2437,9 +2451,6 @@ msgid ""
 msgstr ""
 "无法进入目录“%s”\n"
 "%s"
-
-msgid "Cannot read directory contents"
-msgstr "无法读取目录内容"
 
 msgid "Parameter"
 msgstr "参数"
@@ -3390,6 +3401,9 @@ msgstr "显示目录大小(&I)"
 msgid "Command &history"
 msgstr "命令历史(&H)"
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr "目录活动列表(&R)"
 
@@ -3612,6 +3626,9 @@ msgstr "取消选择"
 
 msgid "Do you really want to execute?"
 msgstr "您真的要执行吗?"
+
+msgid "Cannot read directory contents"
+msgstr "无法读取目录内容"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "用户提供的格式无效，回复到默认设置。"

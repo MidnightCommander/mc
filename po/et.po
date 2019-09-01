@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-03-05 18:33+0000\n"
 "Last-Translator: Kristjan Räts <kristjanrats@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/mc/mc/language/et/)\n"
@@ -483,6 +483,16 @@ msgstr "Klahv Shift"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "Keskkonnamuutujat TERM on määramata!\n"
+
+#, fuzzy
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "Nurjus toru voogude loomine"
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1368,6 +1378,10 @@ msgstr "&Uus"
 msgid "&Close"
 msgstr "&Sulge"
 
+#, fuzzy
+msgid "&History..."
+msgstr "Ajalugu"
+
 msgid "Save &as..."
 msgstr "Salvesta &kui..."
 
@@ -1802,6 +1816,13 @@ msgstr "Kohaliku koopia hankimine %s'st nurjus"
 
 msgid "The shell is already running a command"
 msgstr "Kest on hõivatud käsu täitmisega"
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+"Sa ei kasuta xtermi või Linuxi konsooli;\n"
+"paneele ei saa kuvada/peita."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Midnight Commanderisse tagasipöördumiseks sisesta 'exit'"
@@ -2361,13 +2382,6 @@ msgstr ""
 "Selle käsu kasutamiseks peaksid mõlemad\n"
 "paneelid kuvama failide loendit"
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-"Sa ei kasuta xtermi või Linuxi konsooli;\n"
-"paneele ei saa kuvada/peita."
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr "\"%s\" ei ole nimeviit"
@@ -2433,9 +2447,6 @@ msgid ""
 msgstr ""
 "Kataloogi \"%s\" sisenemine nurjus\n"
 "%s"
-
-msgid "Cannot read directory contents"
-msgstr "Kataloogi sisu lugemine nurjus"
 
 msgid "Parameter"
 msgstr "Parameeter"
@@ -3390,6 +3401,9 @@ msgstr "Kuva kataloogide &suurused"
 msgid "Command &history"
 msgstr "Käskude a&jalugu"
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr "Katal&oogide kiirvalik"
 
@@ -3614,6 +3628,9 @@ msgstr "Tühista valik"
 
 msgid "Do you really want to execute?"
 msgstr "Kas sa soovid tõesti käivitada?"
+
+msgid "Cannot read directory contents"
+msgstr "Kataloogi sisu lugemine nurjus"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Kasutaja antud vormindus tundub vigane; kasutatakse vaikeväärtust."

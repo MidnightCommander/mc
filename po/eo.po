@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-06-01 18:41+0000\n"
 "Last-Translator: Keith Bowes <zooplah@gmail.com>\n"
 "Language-Team: Esperanto (http://www.transifex.com/mc/mc/language/eo/)\n"
@@ -482,6 +482,16 @@ msgstr "Uskleca inversigilo"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "La medivariablo TERM ne estas valorizita!\n"
+
+#, fuzzy
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "Ne eblas krei duktajn fluojn"
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1369,6 +1379,10 @@ msgstr "&Nova"
 msgid "&Close"
 msgstr "&Fermi"
 
+#, fuzzy
+msgid "&History..."
+msgstr "Historio"
+
 msgid "Save &as..."
 msgstr "K&onservi kiel..."
 
@@ -1804,6 +1818,13 @@ msgstr "Ne eblas atingi lokan kopion de %s"
 
 msgid "The shell is already running a command"
 msgstr "La ŝelo jam plenumas komandon"
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+"Ne xterm-fenestron aŭ linuksan terminalon;\n"
+"la flankojn oni ne povis inversigi."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Tajpu \"exit\" por reiri al Midnight Commander"
@@ -2364,13 +2385,6 @@ msgstr ""
 "Ambaŭ flankoj estu en la lista reĝimo\n"
 "por uzi ĉi tiun komandon"
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-"Ne xterm-fenestron aŭ linuksan terminalon;\n"
-"la flankojn oni ne povis inversigi."
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr "'%s' ne estas simbola ligilo"
@@ -2436,9 +2450,6 @@ msgid ""
 msgstr ""
 "Ne eblas ŝanĝi dosierujon al \"%s\"\n"
 "%s"
-
-msgid "Cannot read directory contents"
-msgstr "Ne eblas legi dosierujan enhavon"
 
 msgid "Parameter"
 msgstr "Parametro"
@@ -3394,6 +3405,9 @@ msgstr "Montri dosierujajn g&randojn"
 msgid "Command &history"
 msgstr "Komanda &historio"
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr "Dosieru&ja rapidolisto"
 
@@ -3618,6 +3632,9 @@ msgstr "Malelekti"
 
 msgid "Do you really want to execute?"
 msgstr "Ĉu vi efekti volas plenumigi?"
+
+msgid "Cannot read directory contents"
+msgstr "Ne eblas legi dosierujan enhavon"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Uzanto havigita formato aspektas nevalide, restarigante la aprioran."

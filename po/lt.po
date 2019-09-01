@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/mc/mc/language/lt/)\n"
@@ -489,6 +489,16 @@ msgstr ""
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "Aplinkos kintamasis TERM nenustatytas!\n"
+
+#, fuzzy
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "Nepavyko sukurti %s aplanko"
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1335,6 +1345,10 @@ msgstr "&Naujas"
 msgid "&Close"
 msgstr "&Uždaryti"
 
+#, fuzzy
+msgid "&History..."
+msgstr "Istorija"
+
 msgid "Save &as..."
 msgstr "Įrašyti kaip..."
 
@@ -1765,6 +1779,11 @@ msgid "Cannot fetch a local copy of %s"
 msgstr ""
 
 msgid "The shell is already running a command"
+msgstr ""
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
 msgstr ""
 
 msgid "Type 'exit' to return to the Midnight Commander"
@@ -2320,11 +2339,6 @@ msgid ""
 "to use this command"
 msgstr ""
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr ""
@@ -2386,9 +2400,6 @@ msgid ""
 "Cannot chdir to \"%s\"\n"
 "%s"
 msgstr ""
-
-msgid "Cannot read directory contents"
-msgstr "Nepavyko perskaityti aplanko turinio"
 
 msgid "Parameter"
 msgstr "Parametras"
@@ -3293,6 +3304,9 @@ msgstr "Rodyti aplankų dydžius"
 msgid "Command &history"
 msgstr "Komandų istorija"
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr "Aplankų są&rašas"
 
@@ -3521,6 +3535,9 @@ msgstr "Nebesirinkti"
 
 msgid "Do you really want to execute?"
 msgstr ""
+
+msgid "Cannot read directory contents"
+msgstr "Nepavyko perskaityti aplanko turinio"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Vartotojo formatas atrodo netaisyklingai, grįžtu prie numatytojo."

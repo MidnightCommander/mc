@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-04-20 21:08+0000\n"
 "Last-Translator: Mr.Update\n"
 "Language-Team: German (http://www.transifex.com/mc/mc/language/de/)\n"
@@ -498,6 +498,16 @@ msgstr "Umschalt"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "Die TERM-Variable ist nicht gesetzt!\n"
+
+#, fuzzy
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "Kann Pipe-Stream nicht erstellen"
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1388,6 +1398,10 @@ msgstr "&Neu"
 msgid "&Close"
 msgstr "&Schließen"
 
+#, fuzzy
+msgid "&History..."
+msgstr "Chronik"
+
 msgid "Save &as..."
 msgstr "Speichern &unter..."
 
@@ -1823,6 +1837,13 @@ msgstr "Kann lokale Kopie von %s nicht erstellen"
 
 msgid "The shell is already running a command"
 msgstr "Die Shell führt bereits einen Befehl aus"
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+"Weder xterm noch Linux-Konsole;\n"
+"die Panels können nicht ausgetauscht werden."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Geben Sie 'exit' ein, um zum Midnight Commander zurückzukehren"
@@ -2382,13 +2403,6 @@ msgstr ""
 "Beide Panels sollten für diesen Befehl\n"
 "im Listenmodus sein"
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-"Weder xterm noch Linux-Konsole;\n"
-"die Panels können nicht ausgetauscht werden."
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr "'%s' ist kein symbolischer Link"
@@ -2454,9 +2468,6 @@ msgid ""
 msgstr ""
 "Kann nicht ins Verzeichnis \"%s\" wechseln\n"
 "%s"
-
-msgid "Cannot read directory contents"
-msgstr "Kann Verzeichnis nicht lesen"
 
 msgid "Parameter"
 msgstr "Parameter"
@@ -3414,6 +3425,9 @@ msgstr "Verze&ichnisgrößen anzeigen"
 msgid "Command &history"
 msgstr "Befehlsc&hronik"
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr "Ve&rzeichnis-Hotlist"
 
@@ -3638,6 +3652,9 @@ msgstr "Deselektieren"
 
 msgid "Do you really want to execute?"
 msgstr "Möchten Sie wirklich ausführen?"
+
+msgid "Cannot read directory contents"
+msgstr "Kann Verzeichnis nicht lesen"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Benutzerdefiniertes Format sieht ungültig aus, benutze Standard."

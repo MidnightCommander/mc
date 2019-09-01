@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-03-02 15:10+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/mc/mc/language/pl/)\n"
@@ -487,6 +487,16 @@ msgstr "Shift"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "Zmienna środowiskowa TERM nie jest ustawiona.\n"
+
+#, fuzzy
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "Nie można utworzyć strumieni potoku"
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1378,6 +1388,10 @@ msgstr "&Nowy"
 msgid "&Close"
 msgstr "&Zamknij"
 
+#, fuzzy
+msgid "&History..."
+msgstr "Historia"
+
 msgid "Save &as..."
 msgstr "Z&apisz jako…"
 
@@ -1812,6 +1826,13 @@ msgstr "Nie można pobrać lokalnej kopii %s"
 
 msgid "The shell is already running a command"
 msgstr "Powłoka wykonuje już polecenie"
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+"Panele mogą być przełączane tylko\n"
+"na konsoli xterm lub Linux."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Wpisanie „exit” powróci do programu Midnight Commander"
@@ -2372,13 +2393,6 @@ msgstr ""
 "Aby wykorzystać to polecenie, należy ustawić\n"
 "oba okna na wyświetlanie listy plików"
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-"Panele mogą być przełączane tylko\n"
-"na konsoli xterm lub Linux."
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr "„%s” nie jest dowiązaniem symbolicznym"
@@ -2444,9 +2458,6 @@ msgid ""
 msgstr ""
 "Nie można zmienić katalogu na „%s”\n"
 "%s"
-
-msgid "Cannot read directory contents"
-msgstr "Nie można odczytać zawartości katalogu"
 
 msgid "Parameter"
 msgstr "Parametr"
@@ -3408,6 +3419,9 @@ msgstr "Wyśw&ietl rozmiary katalogów"
 msgid "Command &history"
 msgstr "&Historia poleceń"
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr "Lista pod&ręcznych katalogów"
 
@@ -3636,6 +3650,9 @@ msgstr "Odznacz"
 
 msgid "Do you really want to execute?"
 msgstr "Na pewno wykonać?"
+
+msgid "Cannot read directory contents"
+msgstr "Nie można odczytać zawartości katalogu"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Format użytkownika jest nieprawidłowy, przywrócono domyślny."

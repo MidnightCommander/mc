@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-03-04 17:03+0000\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish (http://www.transifex.com/mc/mc/language/da/)\n"
@@ -487,6 +487,16 @@ msgstr "Skift"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM-miljøvariabelen er ikke sat!\n"
+
+#, fuzzy
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "Kan ikke oprette datakanalstrømme"
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1371,6 +1381,10 @@ msgstr "&Ny"
 msgid "&Close"
 msgstr "&Luk"
 
+#, fuzzy
+msgid "&History..."
+msgstr "Historik"
+
 msgid "Save &as..."
 msgstr "Gem &som..."
 
@@ -1806,6 +1820,13 @@ msgstr "Kan ikke hente en lokal kopi af %s"
 
 msgid "The shell is already running a command"
 msgstr "Skallen kører allerede en kommando"
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+"Ikke en xterm eller Linuxkonsol;\n"
+"panelerne kan ikke skiftes."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Skriv 'exit' for at vende tilbage til Midnight Commander"
@@ -2367,13 +2388,6 @@ msgstr ""
 "Begge paneler skal være i listeformat\n"
 "for at bruge denne kommando"
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-"Ikke en xterm eller Linuxkonsol;\n"
-"panelerne kan ikke skiftes."
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr "'%s' er ikke en symbolsk henvisning"
@@ -2439,9 +2453,6 @@ msgid ""
 msgstr ""
 "Kan ikke chdir til »%s«\n"
 "%s"
-
-msgid "Cannot read directory contents"
-msgstr "Kan ikke læse mappeindhold"
 
 msgid "Parameter"
 msgstr "Parameter"
@@ -3397,6 +3408,9 @@ msgstr "Vis &mappestørrelser"
 msgid "Command &history"
 msgstr "Kommando&historik"
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr "&Mappehotlist"
 
@@ -3621,6 +3635,9 @@ msgstr "Fravælg"
 
 msgid "Do you really want to execute?"
 msgstr "Ønsker du virkelig at køre?"
+
+msgid "Cannot read directory contents"
+msgstr "Kan ikke læse mappeindhold"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Brugerdefineret format ser ugyldigt ud, bruger standard."

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/mc/mc/language/nl/)\n"
@@ -487,6 +487,16 @@ msgstr "Shift"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "De TERM omgevingsvariabele is niet gezet!\n"
+
+#, fuzzy
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "Kan pipe streams niet aanmaken"
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1368,6 +1378,10 @@ msgstr "&Nieuw"
 msgid "&Close"
 msgstr "&Sluiten"
 
+#, fuzzy
+msgid "&History..."
+msgstr "Geschiedenis"
+
 msgid "Save &as..."
 msgstr "&Opslaan als..."
 
@@ -1803,6 +1817,13 @@ msgstr "Er kan geen lokale kopie van %s worden opgehaald"
 
 msgid "The shell is already running a command"
 msgstr "De shell voert al een opdracht uit"
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+"Geen xterm en geen Linux console; \n"
+"de vensters kunnen niet geschakeld worden."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Typ 'exit' om naar de Midnight Commander terug te keren"
@@ -2364,13 +2385,6 @@ msgstr ""
 "Beide panelen moeten in de listingsmodus\n"
 "staan om dit commando te gebruiken"
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-"Geen xterm en geen Linux console; \n"
-"de vensters kunnen niet geschakeld worden."
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr "'%s' is  geen symbolische link"
@@ -2436,9 +2450,6 @@ msgid ""
 msgstr ""
 "Veranderen naar map \"%s\" mislukt \n"
 "%s "
-
-msgid "Cannot read directory contents"
-msgstr "Kan mapinhoud niet lezen"
 
 msgid "Parameter"
 msgstr "Parameter"
@@ -3392,6 +3403,9 @@ msgstr "Toon mappen&grootte"
 msgid "Command &history"
 msgstr "&Opdrachtengeschiedenis"
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr "&Mappen hotslist"
 
@@ -3616,6 +3630,9 @@ msgstr "Selectie wissen"
 
 msgid "Do you really want to execute?"
 msgstr "Wilt u die opdracht echt uitvoeren? "
+
+msgid "Cannot read directory contents"
+msgstr "Kan mapinhoud niet lezen"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr ""

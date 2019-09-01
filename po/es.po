@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-03-05 09:31+0000\n"
 "Last-Translator: David Martin <dhmartina@yahoo.es>\n"
 "Language-Team: Spanish (http://www.transifex.com/mc/mc/language/es/)\n"
@@ -485,6 +485,16 @@ msgstr "Mayús"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "¡La variable de entorno TERM está sin definir!\n"
+
+#, fuzzy
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "Imposible crear flujo de tubería"
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1374,6 +1384,10 @@ msgstr "&Nuevo"
 msgid "&Close"
 msgstr "&Cerrar"
 
+#, fuzzy
+msgid "&History..."
+msgstr "Historia"
+
 msgid "Save &as..."
 msgstr "guar&Dar como..."
 
@@ -1809,6 +1823,13 @@ msgstr "Imposible obtener una copia local de «%s»"
 
 msgid "The shell is already running a command"
 msgstr "El shell ya está ejecutando un comando"
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+"No se está usando ni xterm ni la consola Linux.\n"
+"Los paneles no pueden ser ocultados."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Teclee «exit» para regresar a Midnight Commander"
@@ -2369,13 +2390,6 @@ msgstr ""
 "Ambos paneles deben estar en\n"
 "modo listado para usar esta función"
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-"No se está usando ni xterm ni la consola Linux.\n"
-"Los paneles no pueden ser ocultados."
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr "«%s» no es un enlace simbólico"
@@ -2441,9 +2455,6 @@ msgid ""
 msgstr ""
 "Imposible cambiar al directorio «%s»\n"
 "%s"
-
-msgid "Cannot read directory contents"
-msgstr "Imposible leer directorio"
 
 msgid "Parameter"
 msgstr "Parámetro"
@@ -3400,6 +3411,9 @@ msgstr "mostrar &Tamaños de los directorios"
 msgid "Command &history"
 msgstr "&Historia de órdenes"
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr "&Favoritos..."
 
@@ -3624,6 +3638,9 @@ msgstr "De-seleccionar grupo"
 
 msgid "Do you really want to execute?"
 msgstr "¿Realmente quiere ejecutar?"
+
+msgid "Cannot read directory contents"
+msgstr "Imposible leer directorio"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Formato no parece válido. Recuperando el predeterminado."

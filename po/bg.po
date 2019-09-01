@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-03-02 12:55+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/mc/mc/language/bg/)\n"
@@ -486,6 +486,16 @@ msgstr "Shift"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "Променливата TERM не е установена!\n"
+
+#, fuzzy
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "Не могат да се създадат потоци на канала"
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1357,6 +1367,10 @@ msgstr "&Нов"
 msgid "&Close"
 msgstr "&Затваряне"
 
+#, fuzzy
+msgid "&History..."
+msgstr "История"
+
 msgid "Save &as..."
 msgstr "Запис &като..."
 
@@ -1792,6 +1806,13 @@ msgstr "Не може да се добие локално копие от %s"
 
 msgid "The shell is already running a command"
 msgstr "Обвивката вече изпълнява команда"
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+" Не е xterm или Линукс конзола;\n"
+"панелите не могат да бъдат показвани/скривани."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Напишете 'exit', за да се върнете в Midnight Commander-а"
@@ -2352,13 +2373,6 @@ msgstr ""
 "Двата панела би трябвало да бъдат в\n"
 "списъчен режим, за да можете да използвате тази команда"
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-" Не е xterm или Линукс конзола;\n"
-"панелите не могат да бъдат показвани/скривани."
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr "'%s' не е символичен линк"
@@ -2424,9 +2438,6 @@ msgid ""
 msgstr ""
 "Не може да се chdir в \"%s\"\n"
 "%s"
-
-msgid "Cannot read directory contents"
-msgstr "Не може да се прочете съдържанието на директорията"
 
 msgid "Parameter"
 msgstr "Параметър"
@@ -3380,6 +3391,9 @@ msgstr "Показване на &размерите на директориит�
 msgid "Command &history"
 msgstr "Командна &история"
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr "Списък за бърз достъп до дире&ктории"
 
@@ -3604,6 +3618,9 @@ msgstr "Деселектиране"
 
 msgid "Do you really want to execute?"
 msgstr "Наистина ли искате на изпълните това?"
+
+msgid "Cannot read directory contents"
+msgstr "Не може да се прочете съдържанието на директорията"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Потребителският формат изглежда невалиден, връщам се към стандартния."

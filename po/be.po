@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Midnight Commander\n"
 "Report-Msgid-Bugs-To: http://www.midnight-commander.org/\n"
-"POT-Creation-Date: 2019-06-16 20:10+0200\n"
+"POT-Creation-Date: 2019-09-01 20:04+0300\n"
 "PO-Revision-Date: 2019-06-16 17:59+0000\n"
 "Last-Translator: Yury V. Zaytsev <yury@shurup.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/mc/mc/language/be/)\n"
@@ -490,6 +490,16 @@ msgstr "Shift"
 
 msgid "The TERM environment variable is unset!\n"
 msgstr "Зменную асяроддзя «TERM» не вызначылі!\n"
+
+#, fuzzy
+msgid "Cannot create pipe for SIGWINCH"
+msgstr "Немагчыма стварыць паток каналу"
+
+msgid "Cannot configure write end of SIGWINCH pipe"
+msgstr ""
+
+msgid "Cannot configure read end of SIGWINCH pipe"
+msgstr ""
 
 #, c-format
 msgid ""
@@ -1374,6 +1384,10 @@ msgstr "Новы(&N)"
 msgid "&Close"
 msgstr "Закрыць(&C)"
 
+#, fuzzy
+msgid "&History..."
+msgstr "Гісторыя"
+
 msgid "Save &as..."
 msgstr "Захаваць як(&A)…"
 
@@ -1809,6 +1823,13 @@ msgstr "Немагчыма атрымаць лакальную копію «%s»
 
 msgid "The shell is already running a command"
 msgstr "Абалонка ўжо выконвае загад"
+
+msgid ""
+"Not an xterm or Linux console;\n"
+"the panels cannot be toggled."
+msgstr ""
+"Гэта не xterm альбо кансоль Linux;\n"
+"панэлі немагчыма выключыць."
 
 msgid "Type 'exit' to return to the Midnight Commander"
 msgstr "Увядзіце «exit», каб вярнуцца ў Midnight Commander"
@@ -2369,13 +2390,6 @@ msgstr ""
 "Каб выканаць загад, патрэбна, каб абедзве панэлі\n"
 "адлюстроўваліся спісамі"
 
-msgid ""
-"Not an xterm or Linux console;\n"
-"the panels cannot be toggled."
-msgstr ""
-"Гэта не xterm альбо кансоль Linux;\n"
-"панэлі немагчыма выключыць."
-
 #, c-format
 msgid "'%s' is not a symbolic link"
 msgstr "«%s» не з’яўляецца сімвалічнай спасылкай"
@@ -2441,9 +2455,6 @@ msgid ""
 msgstr ""
 "Немагчыма перайсці ў «%s»\n"
 "%s"
-
-msgid "Cannot read directory contents"
-msgstr "Немагчыма прачытаць змесціва каталога"
 
 msgid "Parameter"
 msgstr "Параметр"
@@ -3397,6 +3408,9 @@ msgstr "Памеры каталогаў(&I)"
 msgid "Command &history"
 msgstr "Гісторыя загадаў(&H)"
 
+msgid "Viewed/edited files hi&story"
+msgstr ""
+
 msgid "Di&rectory hotlist"
 msgstr "Спіс каталогаў(&R)"
 
@@ -3625,6 +3639,9 @@ msgstr "Не абіраць"
 
 msgid "Do you really want to execute?"
 msgstr "Сапраўды выканаць?"
+
+msgid "Cannot read directory contents"
+msgstr "Немагчыма прачытаць змесціва каталога"
 
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Вяртаем да прадвызначанага: здаецца, карыстальнік падаў хібны фармат."
