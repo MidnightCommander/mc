@@ -17,7 +17,7 @@
 
 /*** declarations of public functions ************************************************************/
 
-const vfs_path_t *subshell_get_cwd_from_current_panel (void);
+const vfs_path_t *subshell_get_cwd (void);
 void subshell_handle_cons_saver (void);
 
 int subshell_get_mainloop_quit (void);

@@ -1143,16 +1143,16 @@ invoke_subshell (const char *command, int how, vfs_path_t ** new_dir_vpath)
 
     /* Make the subshell change to MC's working directory */
     if (new_dir_vpath != NULL)
-        do_subshell_chdir (subshell_get_cwd_from_current_panel (), TRUE);
+        do_subshell_chdir (subshell_get_cwd (), TRUE);
 
     if (command == NULL)        /* The user has done "C-o" from MC */
     {
         if (subshell_state == INACTIVE)
         {
             subshell_state = ACTIVE;
-            /* FIXME: possibly take out this hack; the user can
-               re-play it by hitting C-hyphen a few times! */
-            if (subshell_ready)
+
+            /* FIXME: possibly take out this hack; the user can re-play it by hitting C-hyphen a few times! */
+            if (subshell_ready && mc_global.mc_run_mode == MC_RUN_FULL)
                 write_all (mc_global.tty.subshell_pty, " \b", 2);       /* Hack to make prompt reappear */
         }
     }
@@ -1173,7 +1173,7 @@ invoke_subshell (const char *command, int how, vfs_path_t ** new_dir_vpath)
     {
         const char *pcwd;
 
-        pcwd = vfs_translate_path (vfs_path_as_str (subshell_get_cwd_from_current_panel ()));
+        pcwd = vfs_translate_path (vfs_path_as_str (subshell_get_cwd ()));
         if (strcmp (subshell_cwd, pcwd) != 0)
             *new_dir_vpath = vfs_path_from_str (subshell_cwd);  /* Make MC change to the subshell's CWD */
     }
@@ -1299,7 +1299,7 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt)
 {
     char *pcwd;
 
-    pcwd = vfs_path_to_str_flags (subshell_get_cwd_from_current_panel (), 0, VPF_RECODE);
+    pcwd = vfs_path_to_str_flags (subshell_get_cwd (), 0, VPF_RECODE);
 
     if (!(subshell_state == INACTIVE && strcmp (subshell_cwd, pcwd) != 0))
     {
@@ -1370,9 +1370,7 @@ do_subshell_chdir (const vfs_path_t * vpath, gboolean update_prompt)
         {
             char *cwd;
 
-            cwd =
-                vfs_path_to_str_flags (subshell_get_cwd_from_current_panel (), 0,
-                                       VPF_STRIP_PASSWORD);
+            cwd = vfs_path_to_str_flags (subshell_get_cwd (), 0, VPF_STRIP_PASSWORD);
             vfs_print_message (_("Warning: Cannot change to %s.\n"), cwd);
             g_free (cwd);
         }
