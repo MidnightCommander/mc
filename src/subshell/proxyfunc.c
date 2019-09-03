@@ -71,7 +71,6 @@ subshell_handle_cons_saver (void)
     pid_t pid;
 
     pid = waitpid (cons_saver_pid, &status, WUNTRACED | WNOHANG);
-    waitpid (cons_saver_pid, &status, WUNTRACED | WNOHANG);
 
     if (pid == cons_saver_pid)
     {
