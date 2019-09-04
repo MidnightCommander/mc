@@ -241,7 +241,7 @@ history_show (history_descriptor_t * hd)
 
     if (WIDGET (query_dlg)->y < hd->y)
     {
-        /* history is below base widget -- place recent item on top */
+        /* history is above base widget -- revert order to place recent item at bottom */
         /* revert history direction */
         g_queue_reverse (hd->listbox->list);
         if (hd->current < 0 || (size_t) hd->current >= count)
@@ -251,7 +251,7 @@ history_show (history_descriptor_t * hd)
     }
     else
     {
-        /* history is above base widget -- place recent item at bottom  */
+        /* history is below base widget -- keep order to place recent item on top  */
         if (hd->current > 0)
             listbox_select_entry (hd->listbox, hd->current);
     }
@@ -284,7 +284,7 @@ history_show (history_descriptor_t * hd)
         z = g_list_prepend (z, hd->release (hd, LENTRY (hi->data)));
 
     /* restore history direction */
-    if (WIDGET (query_dlg)->y >= hd->y)
+    if (WIDGET (query_dlg)->y < hd->y)
         z = g_list_reverse (z);
 
     dlg_destroy (query_dlg);
