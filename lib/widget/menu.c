@@ -692,7 +692,7 @@ menubar_get_menu_by_x_coord (const WMenuBar * menubar, int x)
     GList *menu;
 
     for (i = 0, menu = menubar->menu;
-         menu != NULL && x > MENU (menu->data)->start_x; i++, menu = g_list_next (menu))
+         menu != NULL && x >= MENU (menu->data)->start_x; i++, menu = g_list_next (menu))
         ;
 
     /* Don't set the invalid value -1 */
