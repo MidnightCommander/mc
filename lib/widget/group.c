@@ -35,6 +35,8 @@
 
 #include "lib/global.h"
 
+#include "lib/tty/key.h"        /* ALT() */
+
 #include "lib/widget.h"
 
 /*** global variables ****************************************************************************/
@@ -406,6 +408,93 @@ group_draw (WGroup * g)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
+group_handle_key (WGroup * g, int key)
+{
+    cb_ret_t handled;
+
+    /* first try the hotkey */
+    handled = send_message (g, NULL, MSG_HOTKEY, key, NULL);
+
+    /* not used - then try widget_callback */
+    if (handled == MSG_NOT_HANDLED)
+        handled = send_message (g->current->data, NULL, MSG_KEY, key, NULL);
+
+    /* not used - try to use the unhandled case */
+    if (handled == MSG_NOT_HANDLED)
+        handled = send_message (g, g->current->data, MSG_UNHANDLED_KEY, key, NULL);
+
+    return handled;
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static cb_ret_t
+group_handle_hotkey (WGroup * g, int key)
+{
+    GList *current;
+    Widget *w;
+    cb_ret_t handled = MSG_NOT_HANDLED;
+    int c;
+
+    if (g->widgets == NULL)
+        return MSG_NOT_HANDLED;
+
+    if (g->current == NULL)
+        g->current = g->widgets;
+
+    w = WIDGET (g->current->data);
+
+    if (widget_get_state (w, WST_DISABLED))
+        return MSG_NOT_HANDLED;
+
+    /* Explanation: we don't send letter hotkeys to other widgets
+     * if the currently selected widget is an input line */
+    if (widget_get_options (w, WOP_IS_INPUT))
+    {
+        /* skip ascii control characters, anything else can valid character in some encoding */
+        if (key >= 32 && key < 256)
+            return MSG_NOT_HANDLED;
+    }
+
+    /* If it's an alt key, send the message */
+    c = key & ~ALT (0);
+    if (key & ALT (0) && g_ascii_isalpha (c))
+        key = g_ascii_tolower (c);
+
+    if (widget_get_options (w, WOP_WANT_HOTKEY))
+        handled = send_message (w, NULL, MSG_HOTKEY, key, NULL);
+
+    /* If not used, send hotkey to other widgets */
+    if (handled == MSG_HANDLED)
+        return MSG_HANDLED;
+
+    current = group_get_widget_next_of (g->current);
+
+    /* send it to all widgets */
+    while (g->current != current && handled == MSG_NOT_HANDLED)
+    {
+        w = WIDGET (current->data);
+
+        if (widget_get_options (w, WOP_WANT_HOTKEY) && !widget_get_state (w, WST_DISABLED))
+            handled = send_message (w, NULL, MSG_HOTKEY, key, NULL);
+
+        if (handled == MSG_NOT_HANDLED)
+            current = group_get_widget_next_of (current);
+    }
+
+    if (handled == MSG_HANDLED)
+    {
+        w = WIDGET (current->data);
+        widget_select (w);
+        send_message (g, w, MSG_HOTKEY_HANDLED, 0, NULL);
+    }
+
+    return handled;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -455,6 +544,12 @@ group_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
     case MSG_DRAW:
         group_draw (g);
         return MSG_HANDLED;
+
+    case MSG_KEY:
+        return group_handle_key (g, parm);
+
+    case MSG_HOTKEY:
+        return group_handle_hotkey (g, parm);
 
     case MSG_CURSOR:
         return group_update_cursor (g);

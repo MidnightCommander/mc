@@ -207,83 +207,10 @@ dlg_handle_key (WDialog * h, int d_key)
 
 /* --------------------------------------------------------------------------------------------- */
 
-static cb_ret_t
-dlg_try_hotkey (WDialog * h, int d_key)
-{
-    WGroup *g = GROUP (h);
-    GList *hot_cur;
-    Widget *current;
-    cb_ret_t handled;
-    int c;
-
-    if (g->widgets == NULL)
-        return MSG_NOT_HANDLED;
-
-    if (g->current == NULL)
-        g->current = g->widgets;
-
-    /*
-     * Explanation: we don't send letter hotkeys to other widgets if
-     * the currently selected widget is an input line
-     */
-
-    current = WIDGET (g->current->data);
-
-    if (widget_get_state (current, WST_DISABLED))
-        return MSG_NOT_HANDLED;
-
-    if (widget_get_options (current, WOP_IS_INPUT))
-    {
-        /* skip ascii control characters, anything else can valid character in
-         * some encoding */
-        if (d_key >= 32 && d_key < 256)
-            return MSG_NOT_HANDLED;
-    }
-
-    /* If it's an alt key, send the message */
-    c = d_key & ~ALT (0);
-    if (d_key & ALT (0) && g_ascii_isalpha (c))
-        d_key = g_ascii_tolower (c);
-
-    if (!widget_get_options (current, WOP_WANT_HOTKEY))
-        handled = MSG_NOT_HANDLED;
-    else
-        handled = send_message (current, NULL, MSG_HOTKEY, d_key, NULL);
-
-    /* If not used, send hotkey to other widgets */
-    if (handled == MSG_HANDLED)
-        return MSG_HANDLED;
-
-    hot_cur = group_get_widget_next_of (g->current);
-
-    /* send it to all widgets */
-    while (g->current != hot_cur && handled == MSG_NOT_HANDLED)
-    {
-        current = WIDGET (hot_cur->data);
-
-        if (widget_get_options (current, WOP_WANT_HOTKEY)
-            && !widget_get_state (current, WST_DISABLED))
-            handled = send_message (current, NULL, MSG_HOTKEY, d_key, NULL);
-
-        if (handled == MSG_NOT_HANDLED)
-            hot_cur = group_get_widget_next_of (hot_cur);
-    }
-
-    if (handled == MSG_HANDLED)
-    {
-        current = WIDGET (hot_cur->data);
-        widget_select (current);
-        send_message (h, current, MSG_HOTKEY_HANDLED, 0, NULL);
-    }
-
-    return handled;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
 static void
 dlg_key_event (WDialog * h, int d_key)
 {
+    Widget *w = WIDGET (h);
     WGroup *g = GROUP (h);
     cb_ret_t handled;
 
@@ -294,7 +221,7 @@ dlg_key_event (WDialog * h, int d_key)
         g->current = g->widgets;
 
     /* TAB used to cycle */
-    if (!widget_get_options (WIDGET (g), WOP_WANT_TAB))
+    if (!widget_get_options (w, WOP_WANT_TAB))
     {
         if (d_key == '\t')
         {
@@ -311,17 +238,8 @@ dlg_key_event (WDialog * h, int d_key)
     /* first can dlalog handle the key itself */
     handled = send_message (h, NULL, MSG_KEY, d_key, NULL);
 
-    /* next try the hotkey */
     if (handled == MSG_NOT_HANDLED)
-        handled = dlg_try_hotkey (h, d_key);
-
-    /* not used - then try widget_callback */
-    if (handled == MSG_NOT_HANDLED)
-        handled = send_message (g->current->data, NULL, MSG_KEY, d_key, NULL);
-
-    /* not used - try to use the unhandled case */
-    if (handled == MSG_NOT_HANDLED)
-        handled = send_message (h, g->current->data, MSG_UNHANDLED_KEY, d_key, NULL);
+        handled = group_default_callback (w, NULL, MSG_KEY, d_key, NULL);
 
     if (handled == MSG_NOT_HANDLED)
         handled = dlg_handle_key (h, d_key);
