@@ -272,7 +272,9 @@ dnl ############################################################################
 dnl Internationalization
 dnl ############################################################################
 
-AM_GNU_GETTEXT([no-libtool], [need-ngettext])
+AC_CHECK_FUNCS([setlocale])
+
+AM_GNU_GETTEXT([external], [need-ngettext])
 AM_GNU_GETTEXT_VERSION([0.18.1])
 
 mc_I18N
@@ -674,7 +676,6 @@ doc/hlp/pl/Makefile
 doc/hlp/ru/Makefile
 doc/hlp/sr/Makefile
 
-intl/Makefile
 po/Makefile.in
 ])
 
