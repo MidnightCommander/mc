@@ -257,10 +257,10 @@ mcview_done (WView * view)
 
 /* --------------------------------------------------------------------------------------------- */
 
+#ifdef HAVE_CHARSET
 void
 mcview_set_codeset (WView * view)
 {
-#ifdef HAVE_CHARSET
     const char *cp_id = NULL;
 
     view->utf8 = TRUE;
@@ -280,21 +280,17 @@ mcview_set_codeset (WView * view)
         view->utf8 = (gboolean) str_isutf8 (cp_id);
         view->dpy_wrap_dirty = TRUE;
     }
-#else
-    (void) view;
-#endif
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
-#ifdef HAVE_CHARSET
 void
 mcview_select_encoding (WView * view)
 {
     if (do_select_codepage ())
         mcview_set_codeset (view);
 }
-#endif
+#endif /* HAVE_CHARSET */
 
 /* --------------------------------------------------------------------------------------------- */
 
