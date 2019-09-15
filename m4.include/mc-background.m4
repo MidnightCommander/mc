@@ -5,7 +5,7 @@ dnl
 AC_DEFUN([mc_BACKGROUND],
 [
     AC_ARG_ENABLE([background],
-    AS_HELP_STRING([--enable-background], [Support for background file operations [yes]]),
+    AS_HELP_STRING([--enable-background], [Support for background file operations @<:@yes@:>@]),
     [
         if test "x$enableval" = xno; then
             enable_background=no

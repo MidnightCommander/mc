@@ -5,7 +5,7 @@ dnl
 AC_DEFUN([mc_ASSERT],
 [
     AC_ARG_ENABLE([assert],
-    AS_HELP_STRING([--enable-assert], [turn on assertions [yes]]),
+    AS_HELP_STRING([--enable-assert], [turn on assertions @<:@yes@:>@]),
     [
         if test "x$enableval" = xno; then
             enable_assert=no
