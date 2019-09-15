@@ -1188,7 +1188,7 @@ edit_files (const GList * files)
     static gboolean made_directory = FALSE;
     WDialog *edit_dlg;
     WMenuBar *menubar;
-    Widget *w;
+    Widget *w, *wd;
     const GList *file;
     gboolean ok = FALSE;
 
@@ -1213,7 +1213,8 @@ edit_files (const GList * files)
     edit_dlg =
         dlg_create (FALSE, 0, 0, 1, 1, WPOS_FULLSCREEN, FALSE, NULL, edit_dialog_callback,
                     edit_dialog_mouse_callback, "[Internal File Editor]", NULL);
-    widget_want_tab (WIDGET (edit_dlg), TRUE);
+    wd = WIDGET (edit_dlg);
+    widget_want_tab (wd, TRUE);
 
     edit_dlg->get_shortcut = edit_get_shortcut;
     edit_dlg->get_title = edit_get_title;
@@ -1228,11 +1229,10 @@ edit_files (const GList * files)
 
     for (file = files; file != NULL; file = g_list_next (file))
     {
-        Widget *w = WIDGET (edit_dlg);
         mcedit_arg_t *f = (mcedit_arg_t *) file->data;
         gboolean f_ok;
 
-        f_ok = edit_add_window (edit_dlg, w->y + 1, w->x, w->lines - 2, w->cols, f->file_vpath,
+        f_ok = edit_add_window (edit_dlg, wd->y + 1, wd->x, wd->lines - 2, wd->cols, f->file_vpath,
                                 f->line_number);
         /* at least one file has been opened succefully */
         ok = ok || f_ok;
@@ -1241,7 +1241,7 @@ edit_files (const GList * files)
     if (ok)
         dlg_run (edit_dlg);
 
-    if (!ok || widget_get_state (WIDGET (edit_dlg), WST_CLOSED))
+    if (!ok || widget_get_state (wd, WST_CLOSED))
         dlg_destroy (edit_dlg);
 
     return ok;
