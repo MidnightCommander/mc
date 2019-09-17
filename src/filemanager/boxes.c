@@ -632,7 +632,7 @@ panel_options_box (void)
     gboolean simple_swap;
 
     simple_swap = mc_config_get_bool (mc_global.main_config, CONFIG_PANELS_SECTION,
-                                      "simple_swap", FALSE) ? 1 : 0;
+                                      "simple_swap", FALSE);
     {
         const char *qsearch_options[] = {
             N_("Case &insensitive"),
