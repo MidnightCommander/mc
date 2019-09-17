@@ -943,9 +943,9 @@ display_bits_box (void)
         mc_global.eight_bit_clean = current_mode < 3;
         mc_global.full_eight_bits = current_mode < 2;
 #ifndef HAVE_SLANG
-        meta (stdscr, mc_global.eight_bit_clean);
+        tty_display_8bit (mc_global.eight_bit_clean);
 #else
-        SLsmg_Display_Eight_Bit = mc_global.full_eight_bits ? 128 : 160;
+        tty_display_8bit (mc_global.full_eight_bits);
 #endif
         use_8th_bit_as_meta = !new_meta;
     }
