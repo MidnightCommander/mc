@@ -6,6 +6,7 @@ context default
 context # \n brown/22
 context ftp\:\/\/ \s green/6
 context http\:\/\/ \s green/6
+context https\:\/\/ \s green/6
 context cdrom\:\/ \s yellow/24
 context file\:\/ \s brightcyan/14
 
