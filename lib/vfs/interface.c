@@ -267,10 +267,7 @@ mc_symlink (const vfs_path_t * vpath1, const vfs_path_t * vpath2)
 {
     int result = -1;
 
-    if (vpath1 == NULL)
-        return (-1);
-
-    if (vpath1 != NULL)
+    if (vpath1 != NULL && vpath2 != NULL)
     {
         const vfs_path_element_t *path_element;
 
