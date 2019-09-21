@@ -1,10 +1,10 @@
-#! @PYTHON@
+#!/usr/bin/env python
 """
 UC1541 Virtual filesystem
 
 Author: Roman 'gryf' Dobosz <gryf73@gmail.com>
-Date: 2014-01-04
-Version: 2.8
+Date: 2019-09-20
+Version: 3.3
 Licence: BSD
 source: https://bitbucket.org/gryf/uc1541
 mirror: https://github.com/gryf/uc1541
@@ -52,9 +52,65 @@ else:
             pass
 
 
-class D64(object):
+SECLEN = 256
+
+
+def _ord(string_or_int):
     """
-    Implement d64 directory reader
+    Return an int value for the (possible) string passed in argument. This
+    function is for compatibility between python2 and python3, where single
+    element in byte string array is a string or an int respectively.
+    """
+    try:
+        return ord(string_or_int)
+    except TypeError:
+        return string_or_int
+
+
+def _get_raw(dimage):
+    """
+    Try to get contents of the D64 image either it's gzip compressed or not.
+    """
+    raw = None
+    with gzip.open(dimage, 'rb') as fobj:
+        # Although the common approach with gzipped files is to check the
+        # magic number, in this case there is no guarantee that first track
+        # does not contain exactly the same byte sequence as the magic number.
+        # So the only way left is to actually try to uncompress the file.
+        try:
+            raw = fobj.read()
+        except (IOError, OSError):
+            pass
+    if not raw:
+        with open(dimage, 'rb') as fobj:
+            raw = fobj.read()
+
+    return raw
+
+
+def _get_implementation(disk):
+    """
+    Check the file under fname and return right class for creating an object
+    corresponding for the file
+    """
+    len_map = {822400: D81,  # 80 tracks
+               819200: D81,  # 80 tracks, 3200 error bytes
+               349696: D71,  # 70 tracks
+               351062: D71,  # 70 tracks, 1366 error bytes
+               174848: D64,  # usual d64 disc image, 35 tracks, no errors
+               175531: D64,  # 35 track, 683 error bytes
+               196608: D64,  # 40 track, no errors
+               197376: D64}  # 40 track, 768 error bytes
+
+    if disk[:32].startswith(b'C64'):
+        return  # T64
+
+    return len_map.get(len(disk))(disk)
+
+
+class Disk(object):
+    """
+    Represent common disk interface
     """
     CHAR_MAP = {32: ' ', 33: '!', 34: '"', 35: '#', 37: '%', 38: '&', 39: "'",
                 40: '(', 41: ')', 42: '*', 43: '+', 44: ',', 45: '-', 46: '.',
@@ -81,35 +137,19 @@ class D64(object):
                   0b011: 'usr',
                   0b100: 'rel'}
 
-    def __init__(self, dimage):
+    DIR_TRACK = 18
+    DIR_SECTOR = 1
+
+    def __init__(self, raw):
         """
         Init
         """
-        LOG.debug('image: %s', dimage)
-        self.raw = None
+        self.raw = raw
         self.current_sector_data = None
         self.next_sector = 0
         self.next_track = None
         self._dir_contents = []
         self._already_done = []
-
-        self._get_raw(dimage)
-
-    def _get_raw(self, dimage):
-        """Try to get contents of the D64 image either it's gzip compressed or
-        not."""
-        fobj = gzip.open(dimage)
-        # Although the common approach with gzipped files is to check the
-        # magic number, in this case there is no guarantee that first track
-        # does not contain exactly the same byte sequence as the magic number.
-        # So the only way left is to actually try to uncompress the file.
-        try:
-            self.raw = fobj.read()
-        except IOError:
-            fobj.close()
-            fobj = open(dimage)
-            self.raw = fobj.read()
-            fobj.close()
 
     def _map_filename(self, string):
         """
@@ -120,10 +160,10 @@ class D64(object):
         filename = list()
 
         for chr_ in string:
-            if ord(chr_) == 160:  # shift+space character; $a0
+            if _ord(chr_) == 160:  # shift+space character; $a0
                 break
 
-            character = D64.CHAR_MAP.get(ord(chr_), '?')
+            character = D64.CHAR_MAP.get(_ord(chr_), '?')
             filename.append(character)
 
         # special cases
@@ -149,22 +189,23 @@ class D64(object):
             return False
 
         if self.next_track is None:
-            LOG.debug("Going to the track: 18,1")
-            offset = self._get_d64_offset(18, 1)
+            LOG.debug("Going to the track: %s, %s", self.DIR_TRACK,
+                      self.DIR_SECTOR)
+            offset = self._get_offset(self.DIR_TRACK, self.DIR_SECTOR)
         else:
-            offset = self._get_d64_offset(self.next_track, self.next_sector)
+            offset = self._get_offset(self.next_track, self.next_sector)
             LOG.debug("Going to the track: %s,%s", self.next_track,
                       self.next_sector)
 
-        self.current_sector_data = self.raw[offset:offset + 256]
+        self.current_sector_data = self.raw[offset:offset + SECLEN]
 
         # Guard for reading data out of bound - that happened for discs which
-        # store only raw data, even on 18 track
+        # store only raw data, even on directory track
         if not self.current_sector_data:
             return False
 
-        self.next_track = ord(self.current_sector_data[0])
-        self.next_sector = ord(self.current_sector_data[1])
+        self.next_track = _ord(self.current_sector_data[0])
+        self.next_sector = _ord(self.current_sector_data[1])
 
         if (self.next_track, self.next_sector) in self._already_done:
             # Just a failsafe. Endless loop is not what is expected.
@@ -185,30 +226,11 @@ class D64(object):
                                                   num & 2 and 1,
                                                   num & 1), 2), '???')
 
-    def _get_d64_offset(self, track, sector):
+    def _get_offset(self, track, sector):
         """
         Return offset (in bytes) for specified track and sector.
         """
-
-        offset = 0
-        truncate_track = 0
-
-        if track > 17:
-            offset = 17 * 21 * 256
-            truncate_track = 17
-
-        if track > 24:
-            offset += 6 * 19 * 256
-            truncate_track = 24
-
-        if track > 30:
-            offset += 5 * 18 * 256
-            truncate_track = 30
-
-        track = track - truncate_track
-        offset += track * sector * 256
-
-        return offset
+        return 0
 
     def _harvest_entries(self):
         """
@@ -217,7 +239,7 @@ class D64(object):
         sector = self.current_sector_data
         for dummy in range(8):
             entry = sector[:32]
-            ftype = ord(entry[2])
+            ftype = _ord(entry[2])
 
             if ftype == 0:  # deleted
                 sector = sector[32:]
@@ -225,12 +247,12 @@ class D64(object):
 
             type_verbose = self._get_ftype(ftype)
 
-            protect = ord(entry[2]) & 64 and "<" or " "
+            protect = _ord(entry[2]) & 64 and "<" or " "
             fname = entry[5:21]
             if ftype == 'rel':
-                size = ord(entry[23])
+                size = _ord(entry[23])
             else:
-                size = ord(entry[30]) + ord(entry[31]) * 226
+                size = _ord(entry[30]) + _ord(entry[31]) * 226
 
             self._dir_contents.append({'fname': self._map_filename(fname),
                                        'ftype': type_verbose,
@@ -249,6 +271,123 @@ class D64(object):
         return self._dir_contents
 
 
+class D64(Disk):
+    """
+    Implement d64 directory reader
+    """
+
+    def _get_offset(self, track, sector):
+        """
+        Return offset (in bytes) for specified track and sector.
+
+        Track   Sectors/track   # Tracks
+        -----   -------------   ---------
+         1-17        21            17
+        18-24        19             7
+        25-30        18             6
+        31-40        17            10
+        """
+        offset = 0
+        truncate_track = 0
+
+        if track > 17:
+            offset = 17 * 21 * SECLEN
+            truncate_track = 17
+
+        if track > 24:
+            offset += 7 * 19 * SECLEN
+            truncate_track = 24
+
+        if track > 30:
+            offset += 6 * 18 * SECLEN
+            truncate_track = 30
+
+        track = track - truncate_track
+        offset += track * sector * SECLEN
+
+        return offset
+
+
+class D71(Disk):
+    """
+    Implement d71 directory reader
+    """
+
+    def _get_offset(self, track, sector):
+        """
+        Return offset (in bytes) for specified track and sector.
+
+            Track       Sec/trk   # Tracks
+        --------------  -------   ---------
+         1-17 (side 0)    21         17
+        18-24 (side 0)    19          7
+        25-30 (side 0)    18          6
+        31-35 (side 0)    17          5
+        36-52 (side 1)    21         17
+        53-59 (side 1)    19          7
+        60-65 (side 1)    18          6
+        66-70 (side 1)    17          5
+        """
+        offset = 0
+        truncate_track = 0
+
+        if track > 17:
+            offset = 17 * 21 * SECLEN
+            truncate_track = 17
+
+        if track > 24:
+            offset += 7 * 19 * SECLEN
+            truncate_track = 24
+
+        if track > 30:
+            offset += 6 * 18 * SECLEN
+            truncate_track = 30
+
+        if track > 35:
+            offset += 5 * 17 * SECLEN
+            truncate_track = 35
+
+        if track > 52:
+            offset = 17 * 21 * SECLEN
+            truncate_track = 17
+
+        if track > 59:
+            offset += 7 * 19 * SECLEN
+            truncate_track = 24
+
+        if track > 65:
+            offset += 6 * 18 * SECLEN
+            truncate_track = 30
+
+        track = track - truncate_track
+        offset += track * sector * SECLEN
+
+        return offset
+
+
+class D81(Disk):
+    """
+    Implement d81 directory reader
+    """
+    DIR_TRACK = 40
+    DIR_SECTOR = 3
+    FILE_TYPES = {0b000: 'del',
+                  0b001: 'seq',
+                  0b010: 'prg',
+                  0b011: 'usr',
+                  0b100: 'rel',
+                  0b101: 'cbm'}
+
+    def _get_offset(self, track, sector):
+        """
+        Return offset (in bytes) for specified track and sector. In d81 is
+        easy, since we have 80 tracks with 40 sectors for 256 bytes each.
+        """
+        # we wan to go to the beginning (first sector) of the track, not it's
+        # max, so that we need to extract its amount.
+        return (track * 40 - 40) * SECLEN + sector * SECLEN
+
+
 class Uc1541(object):
     """
     Class for interact with c1541 program and MC
@@ -262,7 +401,7 @@ class Uc1541(object):
         self._verbose = os.getenv("UC1541_VERBOSE", False)
         self._hide_del = os.getenv("UC1541_HIDE_DEL", False)
 
-        self.pyd64 = D64(archname).list_dir()
+        self.dirlist = _get_implementation(_get_raw(archname)).list_dir()
         self.file_map = {}
         self.directory = []
 
@@ -293,14 +432,6 @@ class Uc1541(object):
         dst = self._get_masked_fname(dst)
 
         if not self._call_command('delete', dst=dst):
-            return self._show_error()
-
-        # During removing, a message containing ERRORCODE is sent to stdout
-        # instead of stderr. Everything other than 'ERRORCODE 1' (which means:
-        # 'everything fine') is actually a failure. In case of verbose error
-        # output it is needed to copy self.out to self.err.
-        if '\nERRORCODE 1\n' not in self.out:
-            self.err = self.out
             return self._show_error()
 
         return 0
@@ -404,7 +535,7 @@ class Uc1541(object):
                     continue
 
                 display_name = ".".join([fname, ext])
-                pattern_name = self.pyd64[idx]['fname']
+                pattern_name = self.dirlist[idx]['fname']
 
                 if '/' in display_name:
                     display_name = display_name.replace('/', '|')
@@ -426,7 +557,7 @@ class Uc1541(object):
                                   'display_name': display_name,
                                   'uid': uid,
                                   'gid': gid,
-                                  'size': int(blocks) * 256,
+                                  'size': int(blocks) * SECLEN,
                                   'perms': perms})
                 idx += 1
         return directory
@@ -454,8 +585,20 @@ class Uc1541(object):
         if dst:
             command.append(dst)
 
-        self.out, self.err = Popen(command, stdout=PIPE,
-                                   stderr=PIPE).communicate()
+        LOG.debug('executing command: %s', ' '.join(command))
+        # For some reason using write and delete commands and reading output
+        # confuses Python3 beneath MC and as a consequence MC report an
+        # error...therefore for those commands let's not use
+        # universal_newlines...
+        universal_newlines = True
+        if cmd in ['delete', 'write']:
+            universal_newlines = False
+        self.out, self.err = Popen(command,
+                                   universal_newlines=universal_newlines,
+                                   stdout=PIPE, stderr=PIPE).communicate()
+
+        if self.err:
+            LOG.debug('an err: %s', self.err)
         return not self.err
 
 
@@ -470,7 +613,9 @@ CALL_MAP = {'list': lambda a: Uc1541(a.arch).list(),
 def parse_args():
     """Use ArgumentParser to check for script arguments and execute."""
     parser = ArgumentParser()
-    subparsers = parser.add_subparsers(help='supported commands')
+    subparsers = parser.add_subparsers(help='supported commands',
+                                       dest='subcommand')
+    subparsers.required = True
     parser_list = subparsers.add_parser('list', help="List contents of D64 "
                                         "image")
     parser_copyin = subparsers.add_parser('copyin', help="Copy file into D64 "
@@ -544,6 +689,7 @@ def no_parse():
         sys.exit(2)
 
     return CALL_MAP[sys.argv[1]](arg)
+
 
 if __name__ == "__main__":
     LOG.debug("Script params: %s", str(sys.argv))
