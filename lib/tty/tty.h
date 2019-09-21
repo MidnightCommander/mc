@@ -81,6 +81,7 @@ extern void tty_disable_interrupt_key (void);
 extern gboolean tty_got_interrupt (void);
 
 extern gboolean tty_got_winch (void);
+extern void tty_flush_winch (void);
 
 extern void tty_reset_prog_mode (void);
 extern void tty_reset_shell_mode (void);
