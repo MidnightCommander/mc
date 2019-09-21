@@ -4,7 +4,7 @@ extfsdir = $(libexecdir)/@PACKAGE@/extfs.d
 EXTFS_MISC  = README README.extfs
 
 # Scripts hat don't need adaptation to the local system
-EXTFS_CONST = bpp changesetfs gitfs+ patchsetfs rpm trpm u7z
+EXTFS_CONST = bpp changesetfs gitfs+ patchsetfs rpm trpm u7z uc1541
 
 # Scripts that need adaptation to the local system - source files
 EXTFS_IN    = 			\
@@ -27,7 +27,6 @@ EXTFS_IN    = 			\
 	uar.in			\
 	uarc.in			\
 	uarj.in			\
-	uc1541.in		\
 	ucab.in			\
 	uha.in			\
 	ulha.in			\
@@ -57,7 +56,6 @@ EXTFS_OUT = 			\
 	uar			\
 	uarc			\
 	uarj			\
-	uc1541			\
 	ucab			\
 	uha			\
 	ulha			\
