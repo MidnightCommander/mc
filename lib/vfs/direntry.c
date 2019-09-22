@@ -58,10 +58,14 @@
 #include <config.h>
 
 #include <errno.h>
-#include <time.h>
-#include <sys/time.h>           /* gettimeofday() */
 #include <inttypes.h>           /* uintmax_t */
 #include <stdarg.h>
+#ifdef HAVE_SYS_SELECT_H
+#include <sys/select.h>
+#endif
+#include <sys/time.h>           /* gettimeofday() */
+#include <sys/types.h>
+#include <unistd.h>
 
 #include "lib/global.h"
 
