@@ -50,6 +50,7 @@
 #include "lib/strutil.h"
 #include "lib/widget.h"
 #include "lib/event.h"
+#include "lib/util.h"           /* mc_time_elapsed() */
 
 #include "src/consaver/cons.saver.h"
 #include "src/viewer/mcviewer.h"        /* The view widget */
@@ -953,9 +954,16 @@ set_hintbar (const char *str)
 void
 rotate_dash (gboolean show)
 {
+    static guint64 timestamp = 0;
+    /* update with 10 FPS rate */
+    static const guint64 delay = G_USEC_PER_SEC / 10;
+
     const Widget *w = CONST_WIDGET (midnight_dlg);
 
     if (!nice_rotating_dash || (ok_to_refresh <= 0))
+        return;
+
+    if (show && !mc_time_elapsed (&timestamp, delay))
         return;
 
     widget_move (w, (menubar_visible != 0) ? 1 : 0, w->cols - 1);
