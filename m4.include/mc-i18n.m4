@@ -8,11 +8,6 @@ dnl @license GPL
 dnl @copyright Free Software Foundation, Inc.
 
 AC_DEFUN([mc_I18N],[
-
-    if test "x$USE_INCLUDED_LIBINTL" = xyes; then
-        CPPFLAGS="$CPPFLAGS -I\$(top_builddir)/intl -I\$(top_srcdir)/intl"
-    fi
-
     dnl User visible support for charset conversion.
     AC_ARG_ENABLE([charset],
         AS_HELP_STRING([--enable-charset], [Support for charset selection and conversion @<:@yes@:>@]))

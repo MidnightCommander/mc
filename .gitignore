@@ -20,7 +20,6 @@ config.sub
 configure
 configure.mc
 gettext.m4
-intl
 install-sh
 m4
 mc.qpg
