@@ -58,10 +58,6 @@
 #endif /* !O_NDELAY */
 #endif /* !O_NONBLOCK */
 
-#ifdef HAVE_SYS_SELECT_H
-#include <sys/select.h>
-#endif
-
 #if defined(__QNX__) && !defined(__QNXNTO__)
 /* exec*() from <process.h> */
 #include <unix.h>

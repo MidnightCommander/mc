@@ -779,16 +779,14 @@ setup_panels (void)
     /* ...then rows and origin */
     if (panels_layout.horizontal_split)
     {
-        widget_set_size (panels[0].widget, start_y, panels[0].widget->x,
-                         panels_layout.top_panel_size, panels[0].widget->cols);
-        widget_set_size (panels[1].widget, start_y + panels_layout.top_panel_size,
-                         panels[1].widget->x, height - panels_layout.top_panel_size,
-                         panels[1].widget->cols);
+        widget_set_size (panels[0].widget, start_y, mw->x, panels_layout.top_panel_size,
+                         panels[0].widget->cols);
+        widget_set_size (panels[1].widget, start_y + panels_layout.top_panel_size, mw->x,
+                         height - panels_layout.top_panel_size, panels[1].widget->cols);
     }
     else
     {
-        widget_set_size (panels[0].widget, start_y, panels[0].widget->x, height,
-                         panels[0].widget->cols);
+        widget_set_size (panels[0].widget, start_y, mw->x, height, panels[0].widget->cols);
         widget_set_size (panels[1].widget, start_y, panels[1].widget->x, height,
                          panels[1].widget->cols);
     }

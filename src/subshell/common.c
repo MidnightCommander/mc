@@ -63,6 +63,12 @@
 #include <errno.h>
 #include <string.h>
 #include <signal.h>
+#ifdef HAVE_SYS_SELECT_H
+#include <sys/select.h>
+#else
+#include <sys/time.h>
+#include <unistd.h>
+#endif
 #include <sys/types.h>
 #include <sys/wait.h>
 #ifdef HAVE_SYS_IOCTL_H

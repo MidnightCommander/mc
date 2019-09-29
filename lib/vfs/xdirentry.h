@@ -87,7 +87,7 @@ struct vfs_s_inode
     struct vfs_s_entry *ent;    /* Our entry in the parent directory -
                                    use only for directories because they
                                    cannot be hardlinked */
-    GList *subdir;              /* If this is a directory, its entry. List of vfs_s_entry */
+    GQueue *subdir;             /* If this is a directory, its entry. List of vfs_s_entry */
     struct stat st;             /* Parameters of this inode */
     char *linkname;             /* Symlink's contents */
     char *localname;            /* Filename of local file, if we have one */

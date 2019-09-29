@@ -271,7 +271,7 @@ extfs_find_entry_int (struct vfs_s_inode *dir, const char *name, GSList * list, 
         }
 
         pdir = pent;
-        pl = g_list_find_custom (pent->ino->subdir, p, vfs_s_entry_compare);
+        pl = g_queue_find_custom (pent->ino->subdir, p, vfs_s_entry_compare);
         pent = pl != NULL ? VFS_ENTRY (pl->data) : NULL;
         if (pent != NULL && q + 1 > name_end)
         {
@@ -512,13 +512,13 @@ extfs_read_archive (FILE * extfsd, struct extfs_super_t *current_archive)
                 {
                     entry = extfs_entry_new (super->me, p, pent->ino);
                     entry->dir = pent->ino;
-                    pent->ino->subdir = g_list_append (pent->ino->subdir, entry);
+                    g_queue_push_tail (pent->ino->subdir, entry);
                 }
                 else
                 {
                     entry = extfs_entry_new (super->me, p, super->root);
                     entry->dir = super->root;
-                    super->root->subdir = g_list_append (super->root->subdir, entry);
+                    g_queue_push_tail (super->root->subdir, entry);
                 }
 
                 if (!S_ISLNK (hstat.st_mode) && (current_link_name != NULL))
@@ -1014,7 +1014,7 @@ extfs_opendir (const vfs_path_t * vpath)
         ERRNOR (ENOTDIR, NULL);
 
     info = g_new (GList *, 1);
-    *info = entry->ino->subdir;
+    *info = g_queue_peek_head_link (entry->ino->subdir);
 
     return info;
 }
