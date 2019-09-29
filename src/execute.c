@@ -544,6 +544,7 @@ toggle_subshell (void)
      * There is some problem with screen redraw in ncurses-based mc in this situation.
      */
     was_sigwinch = tty_got_winch ();
+    tty_flush_winch ();
 
 #ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)

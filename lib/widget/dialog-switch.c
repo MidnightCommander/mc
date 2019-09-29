@@ -356,6 +356,7 @@ dialog_change_screen_size (void)
 {
     GList *d;
 
+    tty_flush_winch ();
     tty_change_screen_size ();
 
 #ifdef HAVE_SLANG
