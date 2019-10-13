@@ -157,7 +157,7 @@ Skins\&.
 .\"Skins"
 .TP
 .I \-t, \-\-termcap
-Usado solo si el código fue compilado con Slang y terminfo: hace que
+Usado solo si el código fue compilado con S\-Lang y terminfo: hace que
 Midnight Commander use el valor de la variable de entorno
 .B TERMCAP
 para obtener la información del terminal, en vez de la base de datos de
@@ -3452,7 +3452,7 @@ el uso de color utilizando la base de datos de terminales y nuestro nombre de te
 estará confundido, por lo que deberemos forzar el modo en color o deshabilitar el modo de color
 usando el argumento \-c y \-b respectivamente.
 .PP
-Si el programa está compilado con el gestor pantallas Slang
+Si el programa está compilado con el gestor pantallas S\-Lang
 en lugar de ncurses, también chequeará la variable
 .BR COLORTERM ,
 si existe, lo que tiene el mismo efecto que la opción \-c.
@@ -3471,7 +3471,7 @@ color_terminals=linux,xterm
 color_terminals=nombre\-terminal1,nombre\-terminal2...
 .fi
 .PP
-El programa puede compilarse con ncurses y slang, ncurses no
+El programa puede compilarse con ncurses y S\-Lang, ncurses no
 ofrece la posibilidad de forzar el modo en color: ncurses utiliza la
 información de la base de datos de terminales.
 .PP
@@ -3855,9 +3855,9 @@ líneas dobles).
 .PP
 .I ¡¡¡ATENCIÓN!!!
 Si se compila Midnight Commander empleando la biblioteca de pantalla
-Ncurses, entonces el trazado de líneas está limitado. Es posible que
+ncurses, entonces el trazado de líneas está limitado. Es posible que
 solo se puedan utilizar líneas simples. Para consultas y comentarios
-contactar con los desarrolladores de Ncurses.
+contactar con los desarrolladores de ncurses.
 
 .PP
 Descripción de parámetros de la sección

@@ -93,7 +93,7 @@ Abilita il modo terminale lento, in questa modalità il programma
 non disegna le linee e disabilita la modalità prolissa.
 .TP
 .I "\-t"
-Usata solo se il codice è stato compilato con Slang e terminfo: fa
+Usata solo se il codice è stato compilato con S\-Lang e terminfo: fa
 in modo che il Midnight Commander usi il valore della variabile
 .B TERMCAP
 per le informazioni sul terminale invece delle informazioni di sistema
@@ -2904,7 +2904,7 @@ terminale corrente. Capita che possa sbagliarsi, perciò si può essere
 costretti a forzare la modalità a colori o a disabilitarla usando
 rispettivamente le opzioni \-c e \-b.
 .PP
-Se il programma è compilato con il manager dello schermo Slang invece
+Se il programma è compilato con il manager dello schermo S\-Lang invece
 che ncurses, controllerà se è impostata anche la variabile
 .B COLORTERM,
 con lo stesso effetto dell'opzione \-c.
@@ -2924,7 +2924,7 @@ color_terminals=nome_terminale\-1,nome\-terminale\-2...
 .fi
 .PP
 Il programma può essere compilato sia con il supporto di ncurses che
-di slang ma ncurses non fornisce alcun modo per forzare la modalità
+di S\-Lang ma ncurses non fornisce alcun modo per forzare la modalità
 colore: ncurses userà solo le informazioni nel database dei terminali.
 .PP
 Il Midnight Commander fornisce un modo per cambiare i colori predefiniti.

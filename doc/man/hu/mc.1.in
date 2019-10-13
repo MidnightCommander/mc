@@ -78,7 +78,7 @@ a sok energiát felemésztő vonal karaktereket és az un. bővített módot
 kikapcsolja.
 .TP
 .I "\-t"
-Ezt csak akkor használd, ha Slang\-gel és terminfo\-val fordítottad a
+Ezt csak akkor használd, ha S\-Lang\-gel és terminfo\-val fordítottad a
 programot: a
 .B TERMCAP
 váltózó értékét használja, és nem a rendszer szintű terminál adatbázist.
@@ -2898,7 +2898,7 @@ a terminál név segítségével. Néha ez összezavarodhat, ezért
 előfordulhat, hogy neked kell megmondanod azt, hogy színes, vagy
 színtelen módot használjon a \-c illetve a \-b kiegészítéssel.
 .PP
-Ha a programot a Slang képernyő kezelővel fordították az ncurses
+Ha a programot a S\-Lang képernyő kezelővel fordították az ncurses
 helyett, szintén le fogja ellenőrizni a
 .B COLORTERM
 változó értékét, ha be van állítva, ez olyan hatású, mintha a \-c flaggal
@@ -2916,7 +2916,7 @@ color_terminals=linux,xterm
 color_terminals=terminal\-name1,terminal\-name2...
 .fi
 .PP
-A program mindkét opcióval fordítható (ncurses és slang).  Az ncurses nem
+A program mindkét opcióval fordítható (ncurses és S\-Lang).  Az ncurses nem
 jelent feltétlenül színes üzemmódot; csak a terminál adatbázist használja.
 .PP
 A Midnight Commander lehetőséget nyújt az alapértelmezett színek

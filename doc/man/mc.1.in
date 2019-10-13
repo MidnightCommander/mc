@@ -143,7 +143,7 @@ Skins
 section.
 .TP
 .I \-t, \-\-termcap
-Used only if the code was compiled with Slang and terminfo: it makes
+Used only if the code was compiled with S\-Lang and terminfo: it makes
 Midnight Commander use the value of the
 .B TERMCAP
 variable for the terminal information instead of the information on
@@ -3534,7 +3534,7 @@ color using the terminal database and your terminal name.  Sometimes
 it gets confused, so you may force color mode or disable color mode
 using the \-c and \-b flag respectively.
 .PP
-If the program is compiled with the Slang screen manager instead of
+If the program is compiled with the S\-Lang screen manager instead of
 ncurses, it will also check the variable
 .B COLORTERM,
 if it is set, it has the same effect as the \-c flag.
@@ -3552,7 +3552,7 @@ color_terminals=linux,xterm
 color_terminals=terminal\-name1,terminal\-name2...
 .fi
 .PP
-The program can be compiled with both ncurses and slang, ncurses does
+The program can be compiled with both ncurses and S\-Lang, ncurses does
 not provide a way to force color mode: ncurses uses just the
 information in the terminal database.
 .PP
@@ -3962,10 +3962,10 @@ into skin\-file. By default single lines are used, but you may redefine
 to usage of any utf\-8 symbols (like to lines, for example).
 .PP
 .I WARNING!!!
-When you build Midnight Commander with the Ncurses screen library
+When you build Midnight Commander with the ncurses screen library
 usage of drawing lines is limited!
 Possible only drawing a single lines.
-For all questions and comments please contact the developers of Ncurses.
+For all questions and comments please contact the developers of ncurses.
 
 .PP
 Descriptions of parameters
