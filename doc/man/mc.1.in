@@ -88,51 +88,8 @@ the last directory Midnight Commander was in. Source the file
 as an alias to the appropriate shell script.
 .TP
 .I \-s, \-\-slow
-Set alternative mode drawing of frameworks.
-If the section [Lines] is not filled, the symbol for the pseudographics
-frame is a space, otherwise the frame characters are taken from following
-parameters.
-
-.B You can redefine the following variables:
-.TP
-.B lefttop
-left\-top corner
-.TP
-.B righttop
-right\-top corner
-.TP
-.B centertop
-center\-top cross
-.TP
-.B centerbottom
-center\-bottom cross
-.TP
-.B leftbottom
-left\-bottom corner
-.TP
-.B rightbottom
-right\-bottom corner
-.TP
-.B leftmiddle
-left\-middle cross
-.TP
-.B rightmiddle
-right\-middle cross
-.TP
-.B centermiddle
-center cross
-.TP
-.B horiz
-default horizontal line
-.TP
-.B vert
-default vertical line
-.TP
-.B thinhoriz
-thin horizontal line
-.TP
-.B thinvert
-thin vertical line
+Turn on the slow terminal mode, in this mode the program will not draw
+expensive line drawing characters and will toggle verbose mode off.
 .TP
 .I \-S arg, \-\-skin=arg
 Specify a name of skin in the command line. Technology of skins is
