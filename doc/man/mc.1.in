@@ -5,7 +5,7 @@
 .SH "NAME"
 mc \- Visual shell for Unix\-like systems.
 .\"SKIP_SECTION"
-.SH "USAGE"
+.SH "SYNOPSIS"
 .B mc
 [\-abcCdfhPstuUVx] [\-l log] [dir1 [dir2]] [\-e [file] ...] [\-v file]
 .\"NODE "DESCRIPTION"
