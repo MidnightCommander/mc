@@ -40,7 +40,7 @@ struct WGroup
 
 unsigned long group_add_widget_autopos (WGroup * g, void *w, widget_pos_flags_t pos_flags,
                                         const void *before);
-void group_del_widget (void *w);
+void group_remove_widget (void *w);
 
 void group_set_current_widget_next (WGroup * g);
 void group_set_current_widget_prev (WGroup * g);

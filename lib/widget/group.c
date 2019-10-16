@@ -175,12 +175,12 @@ group_add_widget_autopos (WGroup * g, void *w, widget_pos_flags_t pos_flags, con
 /* --------------------------------------------------------------------------------------------- */
 
 /**
- * Delete widget from group.
+ * Remove widget from group.
  *
  * @param w Widget object
  */
 void
-group_del_widget (void *w)
+group_remove_widget (void *w)
 {
     WGroup *g;
     GList *d;
@@ -194,7 +194,7 @@ group_del_widget (void *w)
     if (d == g->current)
         group_set_current_widget_next (g);
 
-    g->widgets = g_list_remove_link (g->widgets, d);
+    g->widgets = g_list_delete_link (g->widgets, d);
     if (g->widgets == NULL)
         g->current = NULL;
 
@@ -204,6 +204,8 @@ group_del_widget (void *w)
         dlg_draw (DIALOG (g));          /* FIXME */
         group_select_current_widget (g);
     }
+
+    WIDGET (w)->owner = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
