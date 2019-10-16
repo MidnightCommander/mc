@@ -215,6 +215,15 @@ widget_init (Widget * w, int y, int x, int lines, int cols,
 
 /* --------------------------------------------------------------------------------------------- */
 
+void
+widget_destroy (Widget * w)
+{
+    send_message (w, NULL, MSG_DESTROY, 0, NULL);
+    g_free (w);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 /* Default callback for widgets */
 cb_ret_t
 widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)

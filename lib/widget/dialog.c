@@ -903,12 +903,9 @@ del_widget (void *w)
     if (d == h->current)
         dlg_set_current_widget_next (h);
 
-    h->widgets = g_list_remove_link (h->widgets, d);
+    h->widgets = g_list_delete_link (h->widgets, d);
     if (h->widgets == NULL)
         h->current = NULL;
-    send_message (d->data, NULL, MSG_DESTROY, 0, NULL);
-    g_free (d->data);
-    g_list_free_1 (d);
 
     /* widget has been deleted in runtime */
     if (widget_get_state (WIDGET (h), WST_ACTIVE))
@@ -916,6 +913,8 @@ del_widget (void *w)
         dlg_redraw (h);
         dlg_select_current_widget (h);
     }
+
+    WIDGET (w)->owner = NULL;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1177,8 +1176,8 @@ dlg_destroy (WDialog * h)
 {
     /* if some widgets have history, save all history at one moment here */
     dlg_save_history (h);
-    dlg_broadcast_msg (h, MSG_DESTROY);
-    g_list_free_full (h->widgets, g_free);
+    g_list_foreach (h->widgets, (GFunc) widget_destroy, NULL);
+    g_list_free (h->widgets);
     mc_event_group_del (h->event_group);
     g_free (h->event_group);
     g_free (h->title);

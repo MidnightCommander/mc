@@ -175,6 +175,7 @@ void hotkey_draw (Widget * w, const hotkey_t hotkey, gboolean focused);
 /* widget initialization */
 void widget_init (Widget * w, int y, int x, int lines, int cols,
                   widget_cb_fn callback, widget_mouse_cb_fn mouse_callback);
+void widget_destroy (Widget * w);
 /* Default callback for widgets */
 cb_ret_t widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
                                   void *data);
