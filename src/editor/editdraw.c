@@ -77,7 +77,7 @@ gboolean visible_tabs = TRUE;
 #define MOD_CURSOR              (1 << 11)
 #define MOD_WHITESPACE          (1 << 12)
 
-#define edit_move(x,y) widget_move(edit, y, x);
+#define edit_move(x,y) widget_gotoyx(edit, y, x);
 
 #define key_pending(x) (!is_idle())
 
@@ -231,7 +231,7 @@ edit_status_fullscreen (WEdit * edit, int color)
         fname = str_trunc (fname, fname_len);
     }
 
-    widget_move (h, 0, 0);
+    widget_gotoyx (h, 0, 0);
     tty_setcolor (color);
     printwstr (fname, fname_len + gap);
     printwstr (status, w - (fname_len + gap));
@@ -241,7 +241,7 @@ edit_status_fullscreen (WEdit * edit, int color)
         int percent;
 
         percent = edit_buffer_calc_percent (&edit->buffer, edit->buffer.curs1);
-        widget_move (h, 0, w - 6 - 6);
+        widget_gotoyx (h, 0, w - 6 - 6);
         tty_printf (" %3d%%", percent);
     }
 
@@ -359,7 +359,7 @@ edit_draw_frame (const WEdit * edit, int color, gboolean active)
     if (edit->drag_state == MCEDIT_DRAG_NONE)
     {
         tty_setcolor (EDITOR_FRAME_DRAG);
-        widget_move (w, w->lines - 1, w->cols - 1);
+        widget_gotoyx (w, w->lines - 1, w->cols - 1);
         tty_print_alt_char (ACS_LRCORNER, TRUE);
     }
 }
@@ -380,9 +380,9 @@ edit_draw_window_icons (const WEdit * edit, int color)
 
     tty_setcolor (color);
     if (edit->fullscreen)
-        widget_move (w->owner, 0, WIDGET (w->owner)->cols - 6);
+        widget_gotoyx (w->owner, 0, WIDGET (w->owner)->cols - 6);
     else
-        widget_move (w, 0, w->cols - 8);
+        widget_gotoyx (w, 0, w->cols - 8);
     g_snprintf (tmp, sizeof (tmp), "[%s][%s]", edit_window_state_char, edit_window_close_char);
     tty_print_string (tmp);
 }

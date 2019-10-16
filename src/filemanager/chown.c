@@ -157,15 +157,15 @@ chown_refresh (WDialog * h)
 
     tty_setcolor (COLOR_NORMAL);
 
-    widget_move (h, y + 0, x);
+    widget_gotoyx (h, y + 0, x);
     tty_print_string (_("Name"));
-    widget_move (h, y + 2, x);
+    widget_gotoyx (h, y + 2, x);
     tty_print_string (_("Owner name"));
-    widget_move (h, y + 4, x);
+    widget_gotoyx (h, y + 4, x);
     tty_print_string (_("Group name"));
-    widget_move (h, y + 6, x);
+    widget_gotoyx (h, y + 6, x);
     tty_print_string (_("Size"));
-    widget_move (h, y + 8, x);
+    widget_gotoyx (h, y + 8, x);
     tty_print_string (_("Permission"));
 }
 

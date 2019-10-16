@@ -233,19 +233,19 @@ update_split (const WDialog * h)
 
     tty_setcolor (check_options[0].widget->state ? DISABLED_COLOR : COLOR_NORMAL);
 
-    widget_move (h, 6, 5);
+    widget_gotoyx (h, 6, 5);
     if (panels_layout.horizontal_split)
         tty_printf ("%03d", panels_layout.top_panel_size);
     else
         tty_printf ("%03d", panels_layout.left_panel_size);
 
-    widget_move (h, 6, 17);
+    widget_gotoyx (h, 6, 17);
     if (panels_layout.horizontal_split)
         tty_printf ("%03d", height - panels_layout.top_panel_size);
     else
         tty_printf ("%03d", CONST_WIDGET (midnight_dlg)->cols - panels_layout.left_panel_size);
 
-    widget_move (h, 6, 12);
+    widget_gotoyx (h, 6, 12);
     tty_print_char ('=');
 }
 
@@ -325,9 +325,9 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
         {
             old_output_lines = _output_lines;
             tty_setcolor (mc_global.tty.console_flag != '\0' ? COLOR_NORMAL : DISABLED_COLOR);
-            widget_move (h, 9, 5);
+            widget_gotoyx (h, 9, 5);
             tty_print_string (output_lines_label);
-            widget_move (h, 9, 5 + 3 + output_lines_label_len);
+            widget_gotoyx (h, 9, 5 + 3 + output_lines_label_len);
             tty_printf ("%02d", _output_lines);
         }
         return MSG_HANDLED;
@@ -367,7 +367,7 @@ layout_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *
             {
                 old_output_lines = _output_lines;
                 tty_setcolor (mc_global.tty.console_flag != '\0' ? COLOR_NORMAL : DISABLED_COLOR);
-                widget_move (h, 9, 5 + 3 + output_lines_label_len);
+                widget_gotoyx (h, 9, 5 + 3 + output_lines_label_len);
                 tty_printf ("%02d", _output_lines);
             }
         }
@@ -964,7 +964,7 @@ rotate_dash (gboolean show)
     if (show && !mc_time_elapsed (&timestamp, delay))
         return;
 
-    widget_move (w, (menubar_visible != 0) ? 1 : 0, w->cols - 1);
+    widget_gotoyx (w, (menubar_visible != 0) ? 1 : 0, w->cols - 1);
     tty_setcolor (NORMAL_COLOR);
 
     if (!show)

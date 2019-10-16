@@ -133,10 +133,10 @@ mcview_display_percent (WView * view, off_t p)
         const screen_dimen top = view->status_area.top;
         const screen_dimen right = view->status_area.left + view->status_area.width;
 
-        widget_move (view, top, right - 4);
+        widget_gotoyx (view, top, right - 4);
         tty_printf ("%3d%%", percent);
         /* avoid cursor wrapping in NCurses-base MC */
-        widget_move (view, top, right - 1);
+        widget_gotoyx (view, top, right - 1);
     }
 }
 
@@ -164,7 +164,7 @@ mcview_display_status (WView * view)
 
     if (width > 40)
     {
-        widget_move (view, top, width - 32);
+        widget_gotoyx (view, top, width - 32);
         if (view->mode_flags.hex)
             tty_printf ("0x%08" PRIxMAX, (uintmax_t) view->hex_cursor);
         else
@@ -182,7 +182,7 @@ mcview_display_status (WView * view)
                         "");
         }
     }
-    widget_move (view, top, left);
+    widget_gotoyx (view, top, left);
     if (width > 40)
         tty_print_string (str_fit_to_term (file_label, width - 34, J_LEFT_FIT));
     else
@@ -384,7 +384,7 @@ mcview_display_ruler (WView * view)
         cl = view->dpy_text_column + c;
         if (line_row < height)
         {
-            widget_move (view, top + line_row, left + c);
+            widget_gotoyx (view, top + line_row, left + c);
             tty_print_char (ruler_chars[cl % 10]);
         }
 
@@ -393,7 +393,7 @@ mcview_display_ruler (WView * view)
             g_snprintf (r_buff, sizeof (r_buff), "%" PRIuMAX, (uintmax_t) cl);
             if (nums_row < height)
             {
-                widget_move (view, top + nums_row, left + c - 1);
+                widget_gotoyx (view, top + nums_row, left + c - 1);
                 tty_print_string (r_buff);
             }
         }

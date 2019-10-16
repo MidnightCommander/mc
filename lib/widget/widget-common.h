@@ -14,7 +14,7 @@
 #define WIDGET(x) ((Widget *)(x))
 #define CONST_WIDGET(x) ((const Widget *)(x))
 
-#define widget_move(w, _y, _x) tty_gotoyx (CONST_WIDGET(w)->y + (_y), CONST_WIDGET(w)->x + (_x))
+#define widget_gotoyx(w, _y, _x) tty_gotoyx (CONST_WIDGET(w)->y + (_y), CONST_WIDGET(w)->x + (_x))
 /* Sets/clear the specified flag in the options field */
 #define widget_want_cursor(w,i) widget_set_options(w, WOP_WANT_CURSOR, i)
 #define widget_want_hotkey(w,i) widget_set_options(w, WOP_WANT_HOTKEY, i)

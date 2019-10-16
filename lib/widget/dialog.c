@@ -629,7 +629,7 @@ dlg_default_repaint (WDialog * h)
     {
         /* TODO: truncate long title */
         tty_setcolor (h->color[DLG_COLOR_TITLE]);
-        widget_move (h, space, (wh->cols - str_term_width1 (h->title)) / 2);
+        widget_gotoyx (h, space, (wh->cols - str_term_width1 (h->title)) / 2);
         tty_print_string (h->title);
     }
 }

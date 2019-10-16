@@ -382,7 +382,7 @@ mcview_place_cursor (WView * view)
     screen_dimen col = view->cursor_col;
     if (!view->hexview_in_text && view->hexedit_lownibble)
         col++;
-    widget_move (view, top + view->cursor_row, left + col);
+    widget_gotoyx (view, top + view->cursor_row, left + col);
 }
 
 /* --------------------------------------------------------------------------------------------- */

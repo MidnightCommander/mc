@@ -90,9 +90,9 @@ hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
         if (l->auto_adjust_cols)
         {
-            widget_move (w, 0, 0);
+            widget_gotoyx (w, 0, 0);
             tty_print_alt_char (ACS_LTEE, FALSE);
-            widget_move (w, 0, w->cols - 1);
+            widget_gotoyx (w, 0, w->cols - 1);
             tty_print_alt_char (ACS_RTEE, FALSE);
         }
 
@@ -101,7 +101,7 @@ hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             int text_width;
 
             text_width = str_term_width1 (l->text);
-            widget_move (w, 0, (w->cols - text_width) / 2);
+            widget_gotoyx (w, 0, (w->cols - text_width) / 2);
             tty_print_string (l->text);
         }
         return MSG_HANDLED;

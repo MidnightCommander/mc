@@ -183,9 +183,9 @@ chmod_toggle_select (WDialog * h, int Id)
     tty_setcolor (COLOR_NORMAL);
     check_perm[Id].selected = !check_perm[Id].selected;
 
-    widget_move (h, PY + Id + 1, PX + 1);
+    widget_gotoyx (h, PY + Id + 1, PX + 1);
     tty_print_char (check_perm[Id].selected ? '*' : ' ');
-    widget_move (h, PY + Id + 1, PX + 3);
+    widget_gotoyx (h, PY + Id + 1, PX + 3);
 }
 
 /* --------------------------------------------------------------------------------------------- */

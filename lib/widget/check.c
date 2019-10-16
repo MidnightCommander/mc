@@ -79,7 +79,7 @@ check_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         return MSG_HANDLED;
 
     case MSG_CURSOR:
-        widget_move (w, 0, 1);
+        widget_gotoyx (w, 0, 1);
         return MSG_HANDLED;
 
     case MSG_DRAW:
@@ -88,7 +88,7 @@ check_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
             focused = widget_get_state (w, WST_FOCUSED);
             widget_selectcolor (w, focused, FALSE);
-            widget_move (w, 0, 0);
+            widget_gotoyx (w, 0, 0);
             tty_print_string (c->state ? "[x] " : "[ ] ");
             hotkey_draw (w, c->text, focused);
             return MSG_HANDLED;

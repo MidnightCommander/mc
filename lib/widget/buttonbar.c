@@ -177,10 +177,10 @@ buttonbar_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, voi
         if (bb->visible)
         {
             buttonbar_init_button_positions (bb);
-            widget_move (w, 0, 0);
+            widget_gotoyx (w, 0, 0);
             tty_setcolor (DEFAULT_COLOR);
             tty_printf ("%-*s", w->cols, "");
-            widget_move (w, 0, 0);
+            widget_gotoyx (w, 0, 0);
 
             for (i = 0; i < BUTTONBAR_LABELS_NUM; i++)
             {

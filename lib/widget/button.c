@@ -120,7 +120,7 @@ button_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
             off = 0;
             break;
         }
-        widget_move (w, 0, b->hotpos + off);
+        widget_gotoyx (w, 0, b->hotpos + off);
         return MSG_HANDLED;
 
     case MSG_DRAW:
@@ -130,7 +130,7 @@ button_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm
             focused = widget_get_state (w, WST_FOCUSED);
 
             widget_selectcolor (w, focused, FALSE);
-            widget_move (w, 0, 0);
+            widget_gotoyx (w, 0, 0);
 
             switch (b->flags)
             {

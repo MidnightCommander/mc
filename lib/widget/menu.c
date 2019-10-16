@@ -135,10 +135,10 @@ menubar_paint_idx (WMenuBar * menubar, unsigned int idx, int color)
         /* menu separator */
         tty_setcolor (MENU_ENTRY_COLOR);
 
-        widget_move (w, y, x - 1);
+        widget_gotoyx (w, y, x - 1);
         tty_print_alt_char (ACS_LTEE, FALSE);
         tty_draw_hline (w->y + y, w->x + x, ACS_HLINE, menu->max_entry_len + 3);
-        widget_move (w, y, x + menu->max_entry_len + 3);
+        widget_gotoyx (w, y, x + menu->max_entry_len + 3);
         tty_print_alt_char (ACS_RTEE, FALSE);
     }
     else
@@ -147,7 +147,7 @@ menubar_paint_idx (WMenuBar * menubar, unsigned int idx, int color)
 
         /* menu text */
         tty_setcolor (color);
-        widget_move (w, y, x);
+        widget_gotoyx (w, y, x);
         tty_print_char ((unsigned char) entry->first_letter);
         tty_getyx (&yt, &xt);
         tty_draw_hline (yt, xt, ' ', menu->max_entry_len + 2);  /* clear line */
@@ -165,12 +165,12 @@ menubar_paint_idx (WMenuBar * menubar, unsigned int idx, int color)
 
         if (entry->shortcut != NULL)
         {
-            widget_move (w, y, x + menu->max_hotkey_len + 3);
+            widget_gotoyx (w, y, x + menu->max_hotkey_len + 3);
             tty_print_string (entry->shortcut);
         }
 
         /* move cursor to the start of entry text */
-        widget_move (w, y, x + 1);
+        widget_gotoyx (w, y, x + 1);
     }
 }
 
@@ -228,7 +228,7 @@ menubar_draw (WMenuBar * menubar)
         gboolean is_selected = (menubar->selected == (gsize) g_list_position (menubar->menu, i));
 
         menubar_set_color (menubar, is_selected, FALSE);
-        widget_move (w, 0, menu->start_x);
+        widget_gotoyx (w, 0, menu->start_x);
 
         tty_print_char (' ');
         tty_print_string (menu->text.start);
@@ -249,7 +249,7 @@ menubar_draw (WMenuBar * menubar)
     if (menubar->is_dropped)
         menubar_draw_drop (menubar);
     else
-        widget_move (w, 0, MENU (g_list_nth_data (menubar->menu, menubar->selected))->start_x);
+        widget_gotoyx (w, 0, MENU (g_list_nth_data (menubar->menu, menubar->selected))->start_x);
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -112,7 +112,7 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         }
 
     case MSG_CURSOR:
-        widget_move (r, r->pos, 1);
+        widget_gotoyx (r, r->pos, 1);
         return MSG_HANDLED;
 
     case MSG_DRAW:
@@ -124,7 +124,7 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             for (i = 0; i < r->count; i++)
             {
                 widget_selectcolor (w, i == r->pos && focused, FALSE);
-                widget_move (w, i, 0);
+                widget_gotoyx (w, i, 0);
                 tty_draw_hline (w->y + i, w->x, ' ', w->cols);
                 tty_print_string ((r->sel == i) ? "(*) " : "( ) ");
                 hotkey_draw (w, r->texts[i], i == r->pos && focused);

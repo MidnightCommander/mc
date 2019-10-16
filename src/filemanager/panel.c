@@ -937,7 +937,7 @@ repaint_file (WPanel * panel, int file_index, gboolean mv, int attr, gboolean is
             ypos %= panel_lines (panel);
 
         ypos += 2;              /* top frame and header */
-        widget_move (w, ypos, offset + 1);
+        widget_gotoyx (w, ypos, offset + 1);
     }
 
     ret_frm = format_file (panel, file_index, width, attr, isstatus, &fln);
@@ -961,7 +961,7 @@ repaint_file (WPanel * panel, int file_index, gboolean mv, int attr, gboolean is
             }
         }
 
-        widget_move (w, ypos, offset);
+        widget_gotoyx (w, ypos, offset);
         tty_setcolor (NORMAL_COLOR);
         tty_print_string (panel_filename_scroll_left_char);
 
@@ -971,7 +971,7 @@ repaint_file (WPanel * panel, int file_index, gboolean mv, int attr, gboolean is
             if (nth_column + 1 >= panel->list_cols)
                 offset++;
 
-            widget_move (w, ypos, offset);
+            widget_gotoyx (w, ypos, offset);
             tty_setcolor (NORMAL_COLOR);
             tty_print_string (panel_filename_scroll_right_char);
         }
@@ -988,7 +988,7 @@ display_mini_info (WPanel * panel)
     if (!panels_options.show_mini_info)
         return;
 
-    widget_move (w, panel_lines (panel) + 3, 1);
+    widget_gotoyx (w, panel_lines (panel) + 3, 1);
 
     if (panel->searching)
     {
@@ -1098,7 +1098,7 @@ display_total_marked_size (const WPanel * panel, int y, int x, gboolean size_onl
      * y == panel_lines (panel) + 2  for mini_info_separator
      * y == w->lines - 1             for panel bottom frame
      */
-    widget_move (w, y, x);
+    widget_gotoyx (w, y, x);
     tty_setcolor (MARKED_COLOR);
     tty_printf (" %s ", buf);
 }
@@ -1163,7 +1163,7 @@ show_free_space (const WPanel * panel)
         g_snprintf (tmp, sizeof (tmp), " %s/%s (%d%%) ", buffer1, buffer2,
                     myfs_stats.total == 0 ? 0 :
                     (int) (100 * (long double) myfs_stats.avail / myfs_stats.total));
-        widget_move (w, w->lines - 1, w->cols - 2 - (int) strlen (tmp));
+        widget_gotoyx (w, w->lines - 1, w->cols - 2 - (int) strlen (tmp));
         tty_setcolor (NORMAL_COLOR);
         tty_print_string (tmp);
     }
@@ -1267,25 +1267,25 @@ show_dir (const WPanel * panel)
 
         y = panel_lines (panel) + 2;
 
-        widget_move (w, y, 0);
+        widget_gotoyx (w, y, 0);
         tty_print_alt_char (ACS_LTEE, FALSE);
-        widget_move (w, y, w->cols - 1);
+        widget_gotoyx (w, y, w->cols - 1);
         tty_print_alt_char (ACS_RTEE, FALSE);
     }
 
-    widget_move (w, 0, 1);
+    widget_gotoyx (w, 0, 1);
     tty_print_string (panel_history_prev_item_sign);
 
     tmp = panels_options.show_dot_files ? panel_hiddenfiles_sign_show : panel_hiddenfiles_sign_hide;
     tmp = g_strdup_printf ("%s[%s]%s", tmp, panel_history_show_list_sign,
                            panel_history_next_item_sign);
 
-    widget_move (w, 0, w->cols - 6);
+    widget_gotoyx (w, 0, w->cols - 6);
     tty_print_string (tmp);
 
     g_free (tmp);
 
-    widget_move (w, 0, 3);
+    widget_gotoyx (w, 0, 3);
 
     if (panel->is_panelized)
         tty_printf (" %s ", _("Panelize"));
@@ -1296,7 +1296,7 @@ show_dir (const WPanel * panel)
         if (tmp != NULL)
         {
             tty_printf ("%s", tmp);
-            widget_move (w, 0, 3 + strlen (tmp));
+            widget_gotoyx (w, 0, 3 + strlen (tmp));
             g_free (tmp);
         }
     }
@@ -1322,7 +1322,7 @@ show_dir (const WPanel * panel)
                             size_trunc_sep (panel->dir.list[panel->selected].st.st_size,
                                             panels_options.kilobyte_si));
                 tty_setcolor (NORMAL_COLOR);
-                widget_move (w, w->lines - 1, 4);
+                widget_gotoyx (w, w->lines - 1, 4);
                 tty_print_string (buffer);
             }
         }
@@ -1518,7 +1518,7 @@ panel_paint_sort_info (const WPanel * panel)
         char *str;
 
         str = g_strdup_printf ("%s%s", sort_sign, Q_ (panel->sort_field->hotkey));
-        widget_move (panel, 1, 1);
+        widget_gotoyx (panel, 1, 1);
         tty_print_string (str);
         g_free (str);
     }
@@ -1558,7 +1558,7 @@ panel_print_header (const WPanel * panel)
     int i;
     GString *format_txt;
 
-    widget_move (w, 1, 1);
+    widget_gotoyx (w, 1, 1);
     tty_getyx (&y, &x);
     tty_setcolor (NORMAL_COLOR);
     tty_draw_hline (y, x, ' ', w->cols - 2);

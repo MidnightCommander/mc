@@ -960,7 +960,7 @@ edit_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
             x = (e->fullscreen ? 0 : 1) + EDIT_TEXT_HORIZONTAL_OFFSET + option_line_state_width +
                 e->curs_col + e->start_col + e->over_col;
 
-            widget_move (w, y, x);
+            widget_gotoyx (w, y, x);
             return MSG_HANDLED;
         }
 
