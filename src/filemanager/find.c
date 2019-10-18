@@ -1595,7 +1595,7 @@ start_stop (WButton * button, int action)
     button_set_text (button, fbuts[is_start ? 3 : 2].text);
 
     find_relocate_buttons (w->owner, FALSE);
-    dlg_redraw (w->owner);
+    dlg_draw (w->owner);
 
     return 0;
 }

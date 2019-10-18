@@ -910,7 +910,7 @@ del_widget (void *w)
     /* widget has been deleted in runtime */
     if (widget_get_state (WIDGET (h), WST_ACTIVE))
     {
-        dlg_redraw (h);
+        dlg_draw (h);
         dlg_select_current_widget (h);
     }
 
@@ -927,7 +927,7 @@ do_refresh (void)
     if (fast_refresh)
     {
         if (d != NULL)
-            dlg_redraw (DIALOG (d->data));
+            dlg_draw (DIALOG (d->data));
     }
     else
     {
@@ -937,7 +937,7 @@ do_refresh (void)
                 break;
         /* back to top dialog */
         for (; d != NULL; d = g_list_previous (d))
-            dlg_redraw (DIALOG (d->data));
+            dlg_draw (DIALOG (d->data));
     }
 }
 
@@ -1051,7 +1051,7 @@ update_cursor (WDialog * h)
  */
 
 void
-dlg_redraw (WDialog * h)
+dlg_draw (WDialog * h)
 {
     if (!widget_get_state (WIDGET (h), WST_ACTIVE))
         return;
@@ -1106,7 +1106,7 @@ dlg_init (WDialog * h)
         dlg_set_current_widget_next (h);
 
     widget_set_state (wh, WST_ACTIVE, TRUE);
-    dlg_redraw (h);
+    dlg_draw (h);
     /* focus found widget */
     if (h->current != NULL)
         widget_set_state (WIDGET (h->current->data), WST_FOCUSED, TRUE);

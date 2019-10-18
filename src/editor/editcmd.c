@@ -1560,7 +1560,7 @@ edit_syntax_onoff_cmd (WDialog * h)
 {
     option_syntax_highlighting = !option_syntax_highlighting;
     g_list_foreach (h->widgets, edit_syntax_onoff_cb, NULL);
-    dlg_redraw (h);
+    dlg_draw (h);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1575,7 +1575,7 @@ edit_show_tabs_tws_cmd (WDialog * h)
 {
     enable_show_tabs_tws = !enable_show_tabs_tws;
     g_list_foreach (h->widgets, edit_redraw_page_cb, NULL);
-    dlg_redraw (h);
+    dlg_draw (h);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1590,7 +1590,7 @@ edit_show_margin_cmd (WDialog * h)
 {
     show_right_margin = !show_right_margin;
     g_list_foreach (h->widgets, edit_redraw_page_cb, NULL);
-    dlg_redraw (h);
+    dlg_draw (h);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1606,7 +1606,7 @@ edit_show_numbers_cmd (WDialog * h)
     option_line_state = !option_line_state;
     option_line_state_width = option_line_state ? LINE_STATE_WIDTH : 0;
     g_list_foreach (h->widgets, edit_redraw_page_cb, NULL);
-    dlg_redraw (h);
+    dlg_draw (h);
 }
 
 /* --------------------------------------------------------------------------------------------- */

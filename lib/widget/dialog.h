@@ -134,7 +134,7 @@ void dlg_process_event (WDialog * h, int key, Gpm_Event * event);
 void dlg_set_title (WDialog * h, const char *title);
 char *dlg_get_title (const WDialog * h, size_t len);
 
-void dlg_redraw (WDialog * h);
+void dlg_draw (WDialog * h);
 
 void dlg_broadcast_msg (WDialog * h, widget_msg_t message);
 

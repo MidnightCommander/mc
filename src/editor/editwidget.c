@@ -193,7 +193,7 @@ edit_restore_size (WEdit * edit)
     edit->drag_state = MCEDIT_DRAG_NONE;
     w->mouse.forced_capture = FALSE;
     widget_set_size (w, edit->y_prev, edit->x_prev, edit->lines_prev, edit->cols_prev);
-    dlg_redraw (w->owner);
+    dlg_draw (w->owner);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -233,7 +233,7 @@ edit_window_move (WEdit * edit, long command)
     }
 
     edit->force |= REDRAW_PAGE;
-    dlg_redraw (w->owner);
+    dlg_draw (w->owner);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -273,7 +273,7 @@ edit_window_resize (WEdit * edit, long command)
     }
 
     edit->force |= REDRAW_COMPLETELY;
-    dlg_redraw (w->owner);
+    dlg_draw (w->owner);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1029,7 +1029,7 @@ edit_mouse_handle_move_resize (Widget * w, mouse_msg_t msg, mouse_event_t * even
     edit->force |= REDRAW_COMPLETELY;   /* Not really needed as WEdit's MSG_DRAW already does this. */
 
     /* We draw the whole dialog because dragging/resizing exposes area beneath. */
-    dlg_redraw (w->owner);
+    dlg_draw (w->owner);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1352,7 +1352,7 @@ edit_add_window (WDialog * h, int y, int x, int lines, int cols, const vfs_path_
 
     add_widget_autopos (h, w, WPOS_KEEP_ALL, NULL);
     edit_set_buttonbar (edit, find_buttonbar (h));
-    dlg_redraw (h);
+    dlg_draw (h);
 
     return TRUE;
 }
