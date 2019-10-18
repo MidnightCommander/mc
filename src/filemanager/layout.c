@@ -229,7 +229,7 @@ update_split (const WDialog * h)
         check_options[0].widget->state = panels_layout.horizontal_equal ? 1 : 0;
     else
         check_options[0].widget->state = panels_layout.vertical_equal ? 1 : 0;
-    widget_redraw (WIDGET (check_options[0].widget));
+    widget_draw (WIDGET (check_options[0].widget));
 
     tty_setcolor (check_options[0].widget->state ? DISABLED_COLOR : COLOR_NORMAL);
 

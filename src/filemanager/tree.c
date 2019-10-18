@@ -585,7 +585,7 @@ tree_chdir_sel (WTree * tree)
             message (D_ERROR, MSG_ERROR, _("Cannot chdir to \"%s\"\n%s"),
                      vfs_path_as_str (tree->selected_ptr->name), unix_error_string (errno));
 
-        widget_redraw (WIDGET (current_panel));
+        widget_draw (WIDGET (current_panel));
         change_panel ();
         show_tree (tree);
     }
@@ -979,7 +979,7 @@ tree_toggle_navig (WTree * tree)
     buttonbar_set_label (b, 4,
                          tree_navigation_flag ? Q_ ("ButtonBar|Static") : Q_ ("ButtonBar|Dynamc"),
                          tree_map, WIDGET (tree));
-    widget_redraw (WIDGET (b));
+    widget_draw (WIDGET (b));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -1158,7 +1158,7 @@ tree_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *da
         if (widget_get_state (w, WST_FOCUSED))
         {
             b = find_buttonbar (h);
-            widget_redraw (WIDGET (b));
+            widget_draw (WIDGET (b));
         }
         return MSG_HANDLED;
 

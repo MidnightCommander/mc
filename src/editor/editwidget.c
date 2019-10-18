@@ -1300,7 +1300,7 @@ edit_update_screen (WEdit * e)
         edit_render_keypress (e);
     }
 
-    widget_redraw (WIDGET (find_buttonbar (h)));
+    widget_draw (WIDGET (find_buttonbar (h)));
 }
 
 /* --------------------------------------------------------------------------------------------- */

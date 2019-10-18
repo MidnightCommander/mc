@@ -74,7 +74,7 @@ check_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         if (parm != ' ')
             return MSG_NOT_HANDLED;
         c->state = !c->state;
-        widget_redraw (w);
+        widget_draw (w);
         send_message (w->owner, w, MSG_NOTIFY, 0, NULL);
         return MSG_HANDLED;
 

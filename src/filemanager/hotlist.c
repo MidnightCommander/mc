@@ -594,7 +594,7 @@ hotlist_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
          * (2) Refresh the hotlist.
          *
          * We may have run a command that changed the contents of the list.
-         * We therefore need to refresh it. So we do `widget_redraw (lst)`.
+         * We therefore need to refresh it. So we do `widget_draw (lst)`.
          */
         {
             Widget *lst;
@@ -603,11 +603,11 @@ hotlist_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void 
 
             /* widget_select() already redraws the widget, but since it's a
              * no-op if the widget is already selected ("focused"), we have
-             * to call widget_redraw() separately. */
+             * to call widget_draw() separately. */
             if (!widget_get_state (lst, WST_FOCUSED))
                 widget_select (lst);
             else
-                widget_redraw (lst);
+                widget_draw (lst);
         }
         return MSG_HANDLED;
 

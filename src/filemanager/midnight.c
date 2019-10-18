@@ -1111,10 +1111,10 @@ static void
 update_dirty_panels (void)
 {
     if (get_current_type () == view_listing && current_panel->dirty)
-        widget_redraw (WIDGET (current_panel));
+        widget_draw (WIDGET (current_panel));
 
     if (get_other_type () == view_listing && other_panel->dirty)
-        widget_redraw (WIDGET (other_panel));
+        widget_draw (WIDGET (other_panel));
 }
 
 /* --------------------------------------------------------------------------------------------- */

@@ -92,7 +92,7 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             if (r->pos > 0)
             {
                 r->pos--;
-                widget_redraw (w);
+                widget_draw (w);
                 return MSG_HANDLED;
             }
             return MSG_NOT_HANDLED;
@@ -102,7 +102,7 @@ radio_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             if (r->count - 1 > r->pos)
             {
                 r->pos++;
-                widget_redraw (w);
+                widget_draw (w);
                 return MSG_HANDLED;
             }
             return MSG_NOT_HANDLED;

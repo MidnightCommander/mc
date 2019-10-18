@@ -939,7 +939,7 @@ find_add_match (const char *dir, const char *file, gsize start, gsize end)
     /* Don't scroll */
     if (matches == 0)
         listbox_select_first (find_list);
-    widget_redraw (WIDGET (find_list));
+    widget_draw (WIDGET (find_list));
 
     matches++;
     found_num_update ();

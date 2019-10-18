@@ -154,7 +154,7 @@ gauge_set_value (WGauge * g, int max, int current)
         max = 1;                /* I do not like division by zero :) */
     g->current = current;
     g->max = max;
-    widget_redraw (WIDGET (g));
+    widget_draw (WIDGET (g));
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -165,7 +165,7 @@ gauge_show (WGauge * g, gboolean shown)
     if (g->shown != shown)
     {
         g->shown = shown;
-        widget_redraw (WIDGET (g));
+        widget_draw (WIDGET (g));
     }
 }
 

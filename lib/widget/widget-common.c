@@ -434,7 +434,7 @@ widget_is_active (const void *w)
 /* --------------------------------------------------------------------------------------------- */
 
 void
-widget_redraw (Widget * w)
+widget_draw (Widget * w)
 {
     if (w != NULL)
     {
@@ -503,7 +503,7 @@ widget_replace (Widget * old_w, Widget * new_w)
     if (should_focus)
         widget_select (new_w);
     else
-        widget_redraw (new_w);
+        widget_draw (new_w);
 }
 
 /* --------------------------------------------------------------------------------------------- */

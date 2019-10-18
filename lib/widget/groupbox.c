@@ -124,7 +124,7 @@ groupbox_set_title (WGroupbox * g, const char *title)
         g_free (t);
     }
 
-    widget_redraw (WIDGET (g));
+    widget_draw (WIDGET (g));
 }
 
 /* --------------------------------------------------------------------------------------------- */

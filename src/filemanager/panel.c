@@ -2711,7 +2711,7 @@ do_search (WPanel * panel, int c_code)
         unselect_item (panel);
         panel->selected = sel;
         select_item (panel);
-        widget_redraw (WIDGET (panel));
+        widget_draw (WIDGET (panel));
     }
     else if (c_code != KEY_BACKSPACE)
     {
@@ -3674,7 +3674,7 @@ panel_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
 
         bb = find_buttonbar (w->owner);
         midnight_set_buttonbar (bb);
-        widget_redraw (WIDGET (bb));
+        widget_draw (WIDGET (bb));
         return MSG_HANDLED;
 
     case MSG_UNFOCUS:
@@ -3939,7 +3939,7 @@ panel_mouse_callback (Widget * w, mouse_msg_t msg, mouse_event_t * event)
     }
 
     if (panel->dirty)
-        widget_redraw (w);
+        widget_draw (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */

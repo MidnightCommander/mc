@@ -173,7 +173,7 @@ label_set_text (WLabel * label, const char *text)
         }
     }
 
-    widget_redraw (w);
+    widget_draw (w);
 
     if (newcols < w->cols)
         w->cols = newcols;

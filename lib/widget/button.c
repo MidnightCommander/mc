@@ -244,7 +244,7 @@ button_set_text (WButton * b, const char *text)
     b->text = parse_hotkey (text);
     b->hotpos = (b->text.hotkey != NULL) ? str_term_width1 (b->text.start) : -1;
     w->cols = button_get_len (b);
-    widget_redraw (w);
+    widget_draw (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */

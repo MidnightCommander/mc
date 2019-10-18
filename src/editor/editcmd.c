@@ -3416,7 +3416,7 @@ edit_select_codepage_cmd (WEdit * edit)
         edit_set_codeset (edit);
 
     edit->force = REDRAW_PAGE;
-    widget_redraw (WIDGET (edit));
+    widget_draw (WIDGET (edit));
 }
 #endif
 

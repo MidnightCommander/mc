@@ -148,7 +148,7 @@ hline_set_text (WHLine * l, const char *text)
     else
         l->text = g_strdup (text);
 
-    widget_redraw (WIDGET (l));
+    widget_draw (WIDGET (l));
 }
 
 /* --------------------------------------------------------------------------------------------- */
