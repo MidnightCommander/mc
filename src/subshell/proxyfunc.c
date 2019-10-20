@@ -31,6 +31,8 @@
 
 #include "lib/global.h"
 
+#include "lib/vfs/vfs.h"        /* vfs_get_raw_current_dir() */
+
 #include "src/setup.h"          /* quit */
 #include "src/filemanager/midnight.h"   /* current_panel */
 #include "src/consaver/cons.saver.h"    /* handle_console() */
@@ -56,9 +58,12 @@
 /* --------------------------------------------------------------------------------------------- */
 
 const vfs_path_t *
-subshell_get_cwd_from_current_panel (void)
+subshell_get_cwd (void)
 {
-    return current_panel->cwd_vpath;
+    if (mc_global.mc_run_mode == MC_RUN_FULL)
+        return current_panel->cwd_vpath;
+
+    return vfs_get_raw_current_dir ();
 }
 
 /* --------------------------------------------------------------------------------------------- */

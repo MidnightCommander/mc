@@ -549,13 +549,18 @@ toggle_subshell (void)
 #ifdef ENABLE_SUBSHELL
     if (mc_global.tty.use_subshell)
     {
-        do_load_prompt ();
-        if (new_dir_vpath != NULL)
-            do_possible_cd (new_dir_vpath);
-        if (mc_global.tty.console_flag != '\0' && output_lines)
-            show_console_contents (output_start_y,
-                                   LINES - mc_global.keybar_visible - output_lines -
-                                   1, LINES - mc_global.keybar_visible - 1);
+        if (mc_global.mc_run_mode == MC_RUN_FULL)
+        {
+            do_load_prompt ();
+            if (new_dir_vpath != NULL)
+                do_possible_cd (new_dir_vpath);
+            if (mc_global.tty.console_flag != '\0' && output_lines)
+                show_console_contents (output_start_y,
+                                       LINES - mc_global.keybar_visible - output_lines -
+                                       1, LINES - mc_global.keybar_visible - 1);
+        }
+        else if (new_dir_vpath != NULL && mc_chdir (new_dir_vpath) != -1)
+            vfs_setup_cwd ();
     }
 
     vfs_path_free (new_dir_vpath);
