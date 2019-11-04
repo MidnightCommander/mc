@@ -392,9 +392,10 @@ file_bps_prepare_for_show (char *buffer, long bps)
  * |            [ Yes ] [ No ] [ Append ] [ Reget ]           |   // 9, 10, 11, 12
  * +----------------------------------------------------------+
  * |                   Overwrite all files?                   |   // 13
- * |  [ All ] [ Older ] [None] [ Smaller ] [ Size differs ]   |   // 14, 15, 16, 17, 18
+ * |  [ ] Don't overwrite with zero length file               |   // 14
+ * |  [ All ] [ Older ] [None] [ Smaller ] [ Size differs ]   |   // 15, 16, 17, 18, 19
  * +----------------------------------------------------------|
- * |                         [ Abort ]                        |   // 19
+ * |                         [ Abort ]                        |   // 20
  * +----------------------------------------------------------+
  */
 
