@@ -292,8 +292,8 @@ shell/.deba
 
 # ISO9660
 shell/i/.iso
-	Open=%cd %p/iso9660://
-	View=%view{ascii} @EXTHELPERSDIR@/misc.sh view iso9660
+	Open=%cd %p/u7z://
+	View=%view{ascii} @EXTHELPERSDIR@/archive.sh view 7z
 
 
 regex/\.(diff|patch)$
