@@ -119,9 +119,9 @@ menu_arrange (menu_t * menu, dlg_shortcut_str get_shortcut)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_paint_idx (WMenuBar * menubar, unsigned int idx, int color)
+menubar_paint_idx (const WMenuBar * menubar, unsigned int idx, int color)
 {
-    Widget *w = WIDGET (menubar);
+    const Widget *w = CONST_WIDGET (menubar);
     const menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
     const menu_entry_t *entry = MENUENTRY (g_list_nth_data (menu->entries, idx));
     const int y = 2 + idx;
@@ -177,9 +177,9 @@ menubar_paint_idx (WMenuBar * menubar, unsigned int idx, int color)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_draw_drop (WMenuBar * menubar)
+menubar_draw_drop (const WMenuBar * menubar)
 {
-    Widget *w = WIDGET (menubar);
+    const Widget *w = CONST_WIDGET (menubar);
     const menu_t *menu = MENU (g_list_nth_data (menubar->menu, menubar->selected));
     const unsigned int count = g_list_length (menu->entries);
     int column = menu->start_x - 1;
@@ -199,9 +199,9 @@ menubar_draw_drop (WMenuBar * menubar)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_set_color (WMenuBar * menubar, gboolean current, gboolean hotkey)
+menubar_set_color (const WMenuBar * menubar, gboolean current, gboolean hotkey)
 {
-    if (!widget_get_state (WIDGET (menubar), WST_FOCUSED))
+    if (!widget_get_state (CONST_WIDGET (menubar), WST_FOCUSED))
         tty_setcolor (MENU_INACTIVE_COLOR);
     else if (current)
         tty_setcolor (hotkey ? MENU_HOTSEL_COLOR : MENU_SELECTED_COLOR);
@@ -212,9 +212,9 @@ menubar_set_color (WMenuBar * menubar, gboolean current, gboolean hotkey)
 /* --------------------------------------------------------------------------------------------- */
 
 static void
-menubar_draw (WMenuBar * menubar)
+menubar_draw (const WMenuBar * menubar)
 {
-    Widget *w = WIDGET (menubar);
+    const Widget *w = CONST_WIDGET (menubar);
     GList *i;
 
     /* First draw the complete menubar */
