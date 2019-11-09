@@ -15,7 +15,8 @@ do_view_action() {
     html)
         links -dump "${MC_EXT_FILENAME}" 2>/dev/null || \
             w3m -dump "${MC_EXT_FILENAME}" 2>/dev/null || \
-            lynx -dump -force_html "${MC_EXT_FILENAME}"
+            lynx -dump -force_html "${MC_EXT_FILENAME}" 2>/dev/null ||
+            cat "${MC_EXT_FILENAME}"
         ;;
     *)
         ;;
