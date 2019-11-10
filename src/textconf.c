@@ -232,10 +232,12 @@ show_datadirs_extended (void)
 
 /* --------------------------------------------------------------------------------------------- */
 
+#ifdef ENABLE_CONFIGURE_ARGS
 void
 show_configure_options (void)
 {
     (void) printf ("%s\n", MC_CONFIGURE_ARGS);
 }
+#endif
 
 /* --------------------------------------------------------------------------------------------- */

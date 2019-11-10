@@ -95,7 +95,9 @@ static gboolean mc_args__nouse_subshell = FALSE;
 #endif /* ENABLE_SUBSHELL */
 static gboolean mc_args__show_datadirs = FALSE;
 static gboolean mc_args__show_datadirs_extended = FALSE;
+#ifdef ENABLE_CONFIGURE_ARGS
 static gboolean mc_args__show_configure_opts = FALSE;
+#endif
 
 static GOptionGroup *main_group;
 
@@ -125,6 +127,7 @@ static const GOptionEntry argument_main_table[] = {
      NULL
     },
 
+#ifdef ENABLE_CONFIGURE_ARGS
     /* show configure options */
     {
      "configure-options", '\0', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_NONE,
@@ -132,6 +135,7 @@ static const GOptionEntry argument_main_table[] = {
      N_("Print configure options"),
      NULL
     },
+#endif
 
     {
      "printwd", 'P', G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_STRING,
@@ -758,11 +762,13 @@ mc_args_show_info (void)
         return FALSE;
     }
 
+#ifdef ENABLE_CONFIGURE_ARGS
     if (mc_args__show_configure_opts)
     {
         show_configure_options ();
         return FALSE;
     }
+#endif
 
     return TRUE;
 }
