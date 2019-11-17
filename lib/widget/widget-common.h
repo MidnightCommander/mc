@@ -160,6 +160,10 @@ struct Widget
     GList *(*find) (const Widget * w, const Widget * what);
     Widget *(*find_by_type) (const Widget * w, widget_cb_fn cb);
     Widget *(*find_by_id) (const Widget * w, unsigned long id);
+
+    /* *INDENT-OFF* */
+    cb_ret_t (*set_state) (Widget * w, widget_state_t state, gboolean enable);
+    /* *INDENT-ON* */
 };
 
 /* structure for label (caption) with hotkey, if original text does not contain
@@ -198,7 +202,6 @@ void widget_destroy (Widget * w);
 cb_ret_t widget_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
                                   void *data);
 void widget_set_options (Widget * w, widget_options_t options, gboolean enable);
-cb_ret_t widget_set_state (Widget * w, widget_state_t state, gboolean enable);
 void widget_adjust_position (widget_pos_flags_t pos_flags, int *y, int *x, int *lines, int *cols);
 void widget_set_size (Widget * w, int y, int x, int lines, int cols);
 /* select color for widget in dependance of state */
@@ -216,6 +219,8 @@ long widget_lookup_key (Widget * w, int key);
 GList *widget_default_find (const Widget * w, const Widget * what);
 Widget *widget_default_find_by_type (const Widget * w, widget_cb_fn cb);
 Widget *widget_default_find_by_id (const Widget * w, unsigned long id);
+
+cb_ret_t widget_default_set_state (Widget * w, widget_state_t state, gboolean enable);
 
 /* get mouse pointer location within widget */
 Gpm_Event mouse_get_local (const Gpm_Event * global, const Widget * w);
@@ -317,6 +322,23 @@ static inline Widget *
 widget_find_by_id (const Widget * w, unsigned long id)
 {
     return w->find_by_id (w, id);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+/**
+ * Modify state of widget.
+ *
+ * @param w      widget
+ * @param state  widget state flag to modify
+ * @param enable specifies whether to turn the flag on (TRUE) or off (FALSE).
+ *               Only one flag per call can be modified.
+ * @return       MSG_HANDLED if set was handled successfully, MSG_NOT_HANDLED otherwise.
+ */
+
+static inline cb_ret_t
+widget_set_state (Widget * w, widget_state_t state, gboolean enable)
+{
+    return w->set_state (w, state, enable);
 }
 
 /* --------------------------------------------------------------------------------------------- */

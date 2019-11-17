@@ -54,6 +54,12 @@ typedef struct
     int scale_y;
 } widget_shift_scale_t;
 
+typedef struct
+{
+    widget_state_t state;
+    gboolean enable;
+} widget_state_info_t;
+
 /*** file scope variables ************************************************************************/
 
 /* --------------------------------------------------------------------------------------------- */
@@ -119,6 +125,16 @@ group_select_next_or_prev (WGroup * g, gboolean next)
 
         widget_select (l->data);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+static void
+group_widget_set_state (gpointer data, gpointer user_data)
+{
+    widget_state_info_t *state = (widget_state_info_t *) user_data;
+
+    widget_set_state (WIDGET (data), state->state, state->enable);
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -525,6 +541,8 @@ group_init (WGroup * g, int y1, int x1, int lines, int cols, widget_cb_fn callba
     w->find_by_type = group_default_find_by_type;
     w->find_by_id = group_default_find_by_id;
 
+    w->set_state = group_default_set_state;
+
     g->mouse_status = MOU_UNHANDLED;
 }
 
@@ -566,6 +584,49 @@ group_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
     default:
         return widget_default_callback (w, sender, msg, parm, data);
     }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Change state of group.
+ *
+ * @param w      group
+ * @param state  widget state flag to modify
+ * @param enable specifies whether to turn the flag on (TRUE) or off (FALSE).
+ *               Only one flag per call can be modified.
+ * @return       MSG_HANDLED if set was handled successfully, MSG_NOT_HANDLED otherwise.
+ */
+cb_ret_t
+group_default_set_state (Widget * w, widget_state_t state, gboolean enable)
+{
+    gboolean ret = MSG_HANDLED;
+    WGroup *g = GROUP (w);
+    widget_state_info_t st = {
+        .state = state,
+        .enable = enable
+    };
+
+    ret = widget_default_set_state (w, state, enable);
+
+    if (state == WST_ACTIVE || state == WST_SUSPENDED || state == WST_CLOSED)
+        /* inform all child widgets */
+        g_list_foreach (g->widgets, group_widget_set_state, &st);
+
+    if ((w->state & WST_ACTIVE) != 0)
+    {
+        if ((w->state & WST_FOCUSED) != 0)
+        {
+            /* update current widget */
+            if (g->current != NULL)
+                widget_set_state (WIDGET (g->current->data), WST_FOCUSED, enable);
+        }
+        else
+            /* inform all child widgets */
+            g_list_foreach (g->widgets, group_widget_set_state, &st);
+    }
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */

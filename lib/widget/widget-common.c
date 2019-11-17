@@ -316,6 +316,8 @@ widget_init (Widget * w, int y, int x, int lines, int cols,
     w->find = widget_default_find;
     w->find_by_type = widget_default_find_by_type;
     w->find_by_id = widget_default_find_by_id;
+
+    w->set_state = widget_default_set_state;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -373,73 +375,6 @@ widget_set_options (Widget * w, widget_options_t options, gboolean enable)
         w->options |= options;
     else
         w->options &= ~options;
-}
-
-/* --------------------------------------------------------------------------------------------- */
-
-/**
- * Modify state of widget.
- *
- * @param w      widget
- * @param state  widget state flag to modify
- * @param enable specifies whether to turn the flag on (TRUE) or off (FALSE).
- *               Only one flag per call can be modified.
- * @return       MSG_HANDLED if set was handled successfully, MSG_NOT_HANDLED otherwise.
- */
-cb_ret_t
-widget_set_state (Widget * w, widget_state_t state, gboolean enable)
-{
-    gboolean ret = MSG_HANDLED;
-
-    if (enable)
-        w->state |= state;
-    else
-        w->state &= ~state;
-
-    if (enable)
-    {
-        /* exclusive bits */
-        if ((state & WST_CONSTRUCT) != 0)
-            w->state &= ~(WST_ACTIVE | WST_SUSPENDED | WST_CLOSED);
-        else if ((state & WST_ACTIVE) != 0)
-            w->state &= ~(WST_CONSTRUCT | WST_SUSPENDED | WST_CLOSED);
-        else if ((state & WST_SUSPENDED) != 0)
-            w->state &= ~(WST_CONSTRUCT | WST_ACTIVE | WST_CLOSED);
-        else if ((state & WST_CLOSED) != 0)
-            w->state &= ~(WST_CONSTRUCT | WST_ACTIVE | WST_SUSPENDED);
-    }
-
-    if (w->owner == NULL)
-        return MSG_NOT_HANDLED;
-
-    switch (state)
-    {
-    case WST_DISABLED:
-        ret = send_message (w, NULL, enable ? MSG_DISABLE : MSG_ENABLE, 0, NULL);
-        if (ret == MSG_HANDLED && widget_get_state (WIDGET (w->owner), WST_ACTIVE))
-            ret = widget_draw (w);
-        break;
-
-    case WST_FOCUSED:
-        {
-            widget_msg_t msg;
-
-            msg = enable ? MSG_FOCUS : MSG_UNFOCUS;
-            ret = send_message (w, NULL, msg, 0, NULL);
-            if (ret == MSG_HANDLED && widget_get_state (WIDGET (w->owner), WST_ACTIVE))
-            {
-                widget_draw (w);
-                /* Notify owner that focus was moved from one widget to another */
-                send_message (w->owner, w, MSG_CHANGED_FOCUS, 0, NULL);
-            }
-        }
-        break;
-
-    default:
-        break;
-    }
-
-    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -771,6 +706,74 @@ Widget *
 widget_default_find_by_id (const Widget * w, unsigned long id)
 {
     return (w->id == id ? WIDGET (w) : NULL);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Default callback function to modify state of widget.
+ *
+ * @param w      widget
+ * @param state  widget state flag to modify
+ * @param enable specifies whether to turn the flag on (TRUE) or off (FALSE).
+ *               Only one flag per call can be modified.
+ * @return       MSG_HANDLED if set was handled successfully, MSG_NOT_HANDLED otherwise.
+ */
+
+cb_ret_t
+widget_default_set_state (Widget * w, widget_state_t state, gboolean enable)
+{
+    gboolean ret = MSG_HANDLED;
+
+    if (enable)
+        w->state |= state;
+    else
+        w->state &= ~state;
+
+    if (enable)
+    {
+        /* exclusive bits */
+        if ((state & WST_CONSTRUCT) != 0)
+            w->state &= ~(WST_ACTIVE | WST_SUSPENDED | WST_CLOSED);
+        else if ((state & WST_ACTIVE) != 0)
+            w->state &= ~(WST_CONSTRUCT | WST_SUSPENDED | WST_CLOSED);
+        else if ((state & WST_SUSPENDED) != 0)
+            w->state &= ~(WST_CONSTRUCT | WST_ACTIVE | WST_CLOSED);
+        else if ((state & WST_CLOSED) != 0)
+            w->state &= ~(WST_CONSTRUCT | WST_ACTIVE | WST_SUSPENDED);
+    }
+
+    if (w->owner == NULL)
+        return MSG_NOT_HANDLED;
+
+    switch (state)
+    {
+    case WST_DISABLED:
+        ret = send_message (w, NULL, enable ? MSG_DISABLE : MSG_ENABLE, 0, NULL);
+        if (ret == MSG_HANDLED && widget_get_state (WIDGET (w->owner), WST_ACTIVE))
+            ret = widget_draw (w);
+        break;
+
+    case WST_FOCUSED:
+        {
+            widget_msg_t msg;
+
+            msg = enable ? MSG_FOCUS : MSG_UNFOCUS;
+            ret = send_message (w, NULL, msg, 0, NULL);
+            if (ret == MSG_HANDLED && widget_get_state (WIDGET (w->owner), WST_ACTIVE))
+            {
+                widget_draw (w);
+                /* Notify owner that focus was moved from one widget to another */
+                send_message (w->owner, w, MSG_CHANGED_FOCUS, 0, NULL);
+            }
+        }
+        break;
+
+    default:
+        break;
+    }
+
+    return ret;
 }
 
 /* --------------------------------------------------------------------------------------------- */

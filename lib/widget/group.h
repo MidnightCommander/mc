@@ -43,6 +43,7 @@ void group_init (WGroup * g, int y1, int x1, int lines, int cols, widget_cb_fn c
 /* Default callback for groups */
 cb_ret_t group_default_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm,
                                  void *data);
+cb_ret_t group_default_set_state (Widget * w, widget_state_t state, gboolean enable);
 int group_handle_mouse_event (Widget * w, Gpm_Event * event);
 
 unsigned long group_add_widget_autopos (WGroup * g, void *w, widget_pos_flags_t pos_flags,

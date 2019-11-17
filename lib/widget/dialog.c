@@ -505,10 +505,8 @@ dlg_init (WDialog * h)
         group_set_current_widget_next (g);
 
     widget_set_state (wh, WST_ACTIVE, TRUE);
-    widget_draw (wh);
-    /* focus found widget */
-    if (g->current != NULL)
-        widget_set_state (WIDGET (g->current->data), WST_FOCUSED, TRUE);
+    /* draw dialog and focus found widget */
+    widget_set_state (wh, WST_FOCUSED, TRUE);
 
     h->ret_value = 0;
 }
