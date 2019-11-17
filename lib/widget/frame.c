@@ -72,15 +72,18 @@ frame_draw (const WFrame * f)
 {
     const Widget *w = CONST_WIDGET (f);
     int d = f->compact ? 0 : 1;
+    const int *colors;
 
-    tty_setcolor (f->colors[FRAME_COLOR_NORMAL]);
+    colors = widget_get_colors (w);
+
+    tty_setcolor (colors[FRAME_COLOR_NORMAL]);
     tty_fill_region (w->y, w->x, w->lines, w->cols, ' ');
     tty_draw_box (w->y + d, w->x + d, w->lines - 2 * d, w->cols - 2 * d, f->single);
 
     if (f->title != NULL)
     {
         /* TODO: truncate long title */
-        tty_setcolor (f->colors[FRAME_COLOR_TITLE]);
+        tty_setcolor (colors[FRAME_COLOR_TITLE]);
         widget_gotoyx (w, d, (w->cols - str_term_width1 (f->title)) / 2);
         tty_print_string (f->title);
     }
@@ -91,8 +94,7 @@ frame_draw (const WFrame * f)
 /* --------------------------------------------------------------------------------------------- */
 
 WFrame *
-frame_new (int y, int x, int lines, int cols, const char *title, const int *colors, gboolean single,
-           gboolean compact)
+frame_new (int y, int x, int lines, int cols, const char *title, gboolean single, gboolean compact)
 {
     WFrame *f;
     Widget *w;
@@ -100,14 +102,6 @@ frame_new (int y, int x, int lines, int cols, const char *title, const int *colo
     f = g_new (WFrame, 1);
     w = WIDGET (f);
     widget_init (w, y, x, lines, cols, frame_callback, NULL);
-
-    if (colors != NULL)
-        memmove (f->colors, colors, sizeof (frame_colors_t));
-    else
-    {
-        f->colors[FRAME_COLOR_NORMAL] = COLOR_NORMAL;
-        f->colors[FRAME_COLOR_TITLE] = COLOR_TITLE;
-    }
 
     f->single = single;
     f->compact = compact;

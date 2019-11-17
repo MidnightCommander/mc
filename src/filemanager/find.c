@@ -1252,8 +1252,10 @@ find_rotate_dash (const WDialog * h, gboolean show)
     static size_t pos = 0;
     static const char rotating_dash[4] = "|/-\\";
     const Widget *w = CONST_WIDGET (h);
+    const int *colors;
 
-    tty_setcolor (h->color[DLG_COLOR_NORMAL]);
+    colors = widget_get_colors (w);
+    tty_setcolor (colors[DLG_COLOR_NORMAL]);
     widget_gotoyx (h, w->lines - 7, w->cols - 4);
     tty_print_char (show ? rotating_dash[pos] : ' ');
     pos = (pos + 1) % sizeof (rotating_dash);

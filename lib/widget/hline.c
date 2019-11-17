@@ -82,7 +82,6 @@ static cb_ret_t
 hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WHLine *l = HLINE (w);
-    WDialog *h = DIALOG (w->owner);
 
     switch (msg)
     {
@@ -99,7 +98,12 @@ hline_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
         if (l->transparent)
             tty_setcolor (DEFAULT_COLOR);
         else
-            tty_setcolor (h->color[DLG_COLOR_NORMAL]);
+        {
+            const int *colors;
+
+            colors = widget_get_colors (w);
+            tty_setcolor (colors[DLG_COLOR_NORMAL]);
+        }
 
         tty_draw_hline (w->y, w->x + 1, ACS_HLINE, w->cols - 2);
 

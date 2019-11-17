@@ -168,6 +168,16 @@ hotkey_cmp (const char *s1, const char *s2)
 }
 
 /* --------------------------------------------------------------------------------------------- */
+
+static const int *
+widget_default_get_colors (const Widget * w)
+{
+    const Widget *owner = CONST_WIDGET (w->owner);
+
+    return (owner == NULL ? NULL : widget_get_colors (owner));
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /*** public functions ****************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
@@ -318,6 +328,7 @@ widget_init (Widget * w, int y, int x, int lines, int cols,
     w->find_by_id = widget_default_find_by_id;
 
     w->set_state = widget_default_set_state;
+    w->get_colors = widget_default_get_colors;
 }
 
 /* --------------------------------------------------------------------------------------------- */
@@ -434,25 +445,17 @@ widget_set_size (Widget * w, int y, int x, int lines, int cols)
 void
 widget_selectcolor (Widget * w, gboolean focused, gboolean hotkey)
 {
-    WDialog *h = DIALOG (w->owner);
     int color;
+    const int *colors;
+
+    colors = widget_get_colors (w);
 
     if (widget_get_state (w, WST_DISABLED))
         color = DISABLED_COLOR;
     else if (hotkey)
-    {
-        if (focused)
-            color = h->color[DLG_COLOR_HOT_FOCUS];
-        else
-            color = h->color[DLG_COLOR_HOT_NORMAL];
-    }
+        color = colors[focused ? DLG_COLOR_HOT_FOCUS : DLG_COLOR_HOT_NORMAL];
     else
-    {
-        if (focused)
-            color = h->color[DLG_COLOR_FOCUS];
-        else
-            color = h->color[DLG_COLOR_NORMAL];
-    }
+        color = colors[focused ? DLG_COLOR_FOCUS : DLG_COLOR_NORMAL];
 
     tty_setcolor (color);
 }

@@ -81,6 +81,13 @@ const global_keymap_t *dialog_map = NULL;
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+static const int *
+dlg_default_get_colors (const Widget * w)
+{
+    return CONST_DIALOG (w)->colors;
+}
+
+/* --------------------------------------------------------------------------------------------- */
 /**
   * Read histories from the ${XDG_CACHE_HOME}/mc/history file
   */
@@ -386,27 +393,18 @@ dlg_create (gboolean modal, int y1, int x1, int lines, int cols, widget_pos_flag
     w->mouse_handler = dlg_handle_mouse_event;
     w->mouse.forced_capture = mouse_close_dialog && (w->pos_flags & WPOS_FULLSCREEN) == 0;
 
-    new_d->color = colors;
+    w->get_colors = dlg_default_get_colors;
+
+    new_d->colors = colors;
     new_d->help_ctx = help_ctx;
     new_d->compact = compact;
     new_d->data = NULL;
 
     if (modal)
     {
-        frame_colors_t frame_colors;
-
         w->state |= WST_MODAL;
 
-        if (new_d->color != NULL)
-        {
-            frame_colors[FRAME_COLOR_NORMAL] = new_d->color[DLG_COLOR_NORMAL];
-            frame_colors[FRAME_COLOR_TITLE] = new_d->color[DLG_COLOR_TITLE];
-        }
-
-        new_d->bg =
-            WIDGET (frame_new
-                    (0, 0, w->lines, w->cols, title, new_d->color != NULL ? frame_colors : NULL,
-                     FALSE, new_d->compact));
+        new_d->bg = WIDGET (frame_new (0, 0, w->lines, w->cols, title, FALSE, new_d->compact));
         group_add_widget (g, new_d->bg);
         frame_set_title (FRAME (new_d->bg), title);
     }

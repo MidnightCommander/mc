@@ -58,15 +58,16 @@ static cb_ret_t
 gauge_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WGauge *g = GAUGE (w);
-    WDialog *h = DIALOG (w->owner);
+    const int *colors;
 
     switch (msg)
     {
     case MSG_DRAW:
+        colors = widget_get_colors (w);
         widget_gotoyx (w, 0, 0);
         if (!g->shown)
         {
-            tty_setcolor (h->color[DLG_COLOR_NORMAL]);
+            tty_setcolor (colors[DLG_COLOR_NORMAL]);
             tty_printf ("%*s", w->cols, "");
         }
         else
@@ -98,16 +99,16 @@ gauge_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             {
                 tty_setcolor (GAUGE_COLOR);
                 tty_printf ("%*s", columns, "");
-                tty_setcolor (h->color[DLG_COLOR_NORMAL]);
+                tty_setcolor (colors[DLG_COLOR_NORMAL]);
                 tty_printf ("%*s] %3d%%", gauge_len - columns, "", percentage);
             }
             else
             {
-                tty_setcolor (h->color[DLG_COLOR_NORMAL]);
+                tty_setcolor (colors[DLG_COLOR_NORMAL]);
                 tty_printf ("%*s", gauge_len - columns, "");
                 tty_setcolor (GAUGE_COLOR);
                 tty_printf ("%*s", columns, "");
-                tty_setcolor (h->color[DLG_COLOR_NORMAL]);
+                tty_setcolor (colors[DLG_COLOR_NORMAL]);
                 tty_printf ("] %3d%%", percentage);
             }
         }

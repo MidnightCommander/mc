@@ -61,17 +61,18 @@ groupbox_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void
     {
     case MSG_DRAW:
         {
-            WDialog *h = DIALOG (w->owner);
-
             gboolean disabled;
+            const int *colors;
+
+            colors = widget_get_colors (w);
 
             disabled = widget_get_state (w, WST_DISABLED);
-            tty_setcolor (disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL]);
+            tty_setcolor (disabled ? DISABLED_COLOR : colors[DLG_COLOR_NORMAL]);
             tty_draw_box (w->y, w->x, w->lines, w->cols, TRUE);
 
             if (g->title != NULL)
             {
-                tty_setcolor (disabled ? DISABLED_COLOR : h->color[DLG_COLOR_TITLE]);
+                tty_setcolor (disabled ? DISABLED_COLOR : colors[DLG_COLOR_TITLE]);
                 widget_gotoyx (w, 0, 1);
                 tty_print_string (g->title);
             }

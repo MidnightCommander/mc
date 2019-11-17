@@ -164,6 +164,8 @@ struct Widget
     /* *INDENT-OFF* */
     cb_ret_t (*set_state) (Widget * w, widget_state_t state, gboolean enable);
     /* *INDENT-ON* */
+
+    const int *(*get_colors) (const Widget * w);
 };
 
 /* structure for label (caption) with hotkey, if original text does not contain
@@ -339,6 +341,20 @@ static inline cb_ret_t
 widget_set_state (Widget * w, widget_state_t state, gboolean enable)
 {
     return w->set_state (w, state, enable);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+/**
+ * Get color colors of widget.
+ *
+ * @param w widget
+ * @return  color colors
+ */
+static inline const int *
+widget_get_colors (const Widget * w)
+{
+    return w->get_colors (w);
 }
 
 /* --------------------------------------------------------------------------------------------- */

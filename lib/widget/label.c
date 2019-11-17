@@ -60,7 +60,6 @@ static cb_ret_t
 label_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *data)
 {
     WLabel *l = LABEL (w);
-    WDialog *h = DIALOG (w->owner);
 
     switch (msg)
     {
@@ -79,7 +78,12 @@ label_callback (Widget * w, Widget * sender, widget_msg_t msg, int parm, void *d
             if (l->transparent)
                 tty_setcolor (disabled ? DISABLED_COLOR : DEFAULT_COLOR);
             else
-                tty_setcolor (disabled ? DISABLED_COLOR : h->color[DLG_COLOR_NORMAL]);
+            {
+                const int *colors;
+
+                colors = widget_get_colors (w);
+                tty_setcolor (disabled ? DISABLED_COLOR : colors[DLG_COLOR_NORMAL]);
+            }
 
             align = (w->pos_flags & WPOS_CENTER_HORZ) != 0 ? J_CENTER_LEFT : J_LEFT;
 

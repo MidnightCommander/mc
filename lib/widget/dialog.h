@@ -17,6 +17,7 @@
 /*** typedefs(not structures) and defined constants **********************************************/
 
 #define DIALOG(x) ((WDialog *)(x))
+#define CONST_DIALOG(x) ((const WDialog *)(x))
 
 /* Common return values */
 /* ATTENTION: avoid overlapping with FileProgressStatus values */
@@ -64,7 +65,7 @@ struct WDialog
     /* Set by the user */
     gboolean compact;           /* Suppress spaces around the frame */
     const char *help_ctx;       /* Name of the help entry */
-    const int *color;           /* Color set. Unused in viewer and editor */
+    const int *colors;          /* Color set. Unused in viewer and editor */
 
     /* Set and received by the user */
     int ret_value;              /* Result of dlg_run() */

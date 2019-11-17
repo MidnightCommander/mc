@@ -48,6 +48,14 @@
 /*** file scope functions ************************************************************************/
 /* --------------------------------------------------------------------------------------------- */
 
+static const int *
+background_get_colors (const Widget * w)
+{
+    return &(CONST_BACKGROUND (w)->color);
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
 static void
 background_adjust (WBackground * b)
 {
@@ -109,6 +117,7 @@ background_new (int y, int x, int lines, int cols, int color, unsigned char patt
     b = g_new (WBackground, 1);
     w = WIDGET (b);
     widget_init (w, y, x, lines, cols, callback != NULL ? callback : background_callback, NULL);
+    w->get_colors = background_get_colors;
 
     b->color = color;
     b->pattern = pattern;
