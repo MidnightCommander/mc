@@ -44,13 +44,13 @@ static struct vfs_class vfs_test_ops1, vfs_test_ops2, vfs_test_ops3;
 static void
 init_test_classes (void)
 {
-    vfs_init_class (&vfs_test_ops1, "testfs1", VFS_NOLINKS | VFS_REMOTE, "test1");
+    vfs_init_class (&vfs_test_ops1, "testfs1", VFSF_NOLINKS | VFSF_REMOTE, "test1");
     vfs_register_class (&vfs_test_ops1);
 
-    vfs_init_class (&vfs_test_ops2, "testfs2", VFS_UNKNOWN, "test2");
+    vfs_init_class (&vfs_test_ops2, "testfs2", VFSF_UNKNOWN, "test2");
     vfs_register_class (&vfs_test_ops2);
 
-    vfs_init_class (&vfs_test_ops3, "testfs3", VFS_LOCAL, "test3");
+    vfs_init_class (&vfs_test_ops3, "testfs3", VFSF_LOCAL, "test3");
     vfs_register_class (&vfs_test_ops3);
 }
 

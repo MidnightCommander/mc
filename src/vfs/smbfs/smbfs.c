@@ -2258,7 +2258,7 @@ vfs_init_smbfs (void)
     /* NULLize vfs_s_subclass members */
     memset (&smbfs_subclass, 0, sizeof (smbfs_subclass));
 
-    vfs_init_class (vfs_smbfs_ops, "smbfs", VFS_NOLINKS, "smb");
+    vfs_init_class (vfs_smbfs_ops, "smbfs", VFSF_NOLINKS, "smb");
     vfs_smbfs_ops->init = smbfs_init;
     vfs_smbfs_ops->fill_names = smbfs_fill_names;
     vfs_smbfs_ops->open = smbfs_open;
